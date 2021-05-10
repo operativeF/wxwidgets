@@ -349,8 +349,7 @@ wxDCImpl::wxDCImpl( wxDC *owner )
 }
 
 wxDCImpl::~wxDCImpl()
-{
-}
+= default;
 
 // ----------------------------------------------------------------------------
 // clipping

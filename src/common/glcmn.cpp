@@ -431,8 +431,7 @@ wxGLAPI::wxGLAPI()
 }
 
 wxGLAPI::~wxGLAPI()
-{
-}
+= default;
 
 void wxGLAPI::glFrustum(GLfloat left, GLfloat right, GLfloat bottom,
                             GLfloat top, GLfloat zNear, GLfloat zFar)

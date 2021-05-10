@@ -545,7 +545,7 @@ public:
     // give it a virtual dtor: not really needed as the class is never used
     // polymorphically and not even allocated on heap at all, but this is safer
     // (in case it ever is) and silences the compiler warnings for now
-    virtual ~wxTreeTraversal() { }
+    virtual ~wxTreeTraversal() = default;
 
     // do traverse the tree: visit all items (recursively by default) under the
     // given one; return true if all items were traversed or false if the

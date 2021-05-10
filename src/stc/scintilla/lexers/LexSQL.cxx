@@ -218,7 +218,7 @@ public :
 		return sqlStatement.ValueAt(lineNumber);
 	}
 
-	SQLStates() {}
+	SQLStates() = default;
 
 private :
 	SparseState <sql_state_t> sqlStatement;
@@ -304,9 +304,9 @@ struct OptionSetSQL : public OptionSet<OptionsSQL> {
 
 class LexerSQL : public ILexer {
 public :
-	LexerSQL() {}
+	LexerSQL() = default;
 
-	virtual ~LexerSQL() {}
+	virtual ~LexerSQL() = default;
 
 	int SCI_METHOD Version () const {
 		return lvOriginal;

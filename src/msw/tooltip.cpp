@@ -137,8 +137,7 @@ class wxToolTipModule : public wxModule
 {
 public:
     wxToolTipModule()
-    {
-    }
+    = default;
 
     virtual bool OnInit() wxOVERRIDE
     {

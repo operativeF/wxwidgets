@@ -483,8 +483,7 @@ public:
 		setLogicalOp(CharacterSet::setNone, "|&"),
 		subStyles(styleSubable, 0x80, 0x40, activeFlag) {
 	}
-	virtual ~LexerCPP() {
-	}
+	virtual ~LexerCPP() = default;
 	void SCI_METHOD Release() {
 		delete this;
 	}

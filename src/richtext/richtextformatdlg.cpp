@@ -471,7 +471,7 @@ class wxRichTextFormattingDialogModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextFormattingDialogModule);
 public:
-    wxRichTextFormattingDialogModule() {}
+    wxRichTextFormattingDialogModule() = default;
     bool OnInit() wxOVERRIDE { wxRichTextFormattingDialog::SetFormattingDialogFactory(new wxRichTextFormattingDialogFactory); return true; }
     void OnExit() wxOVERRIDE { wxRichTextFormattingDialog::SetFormattingDialogFactory(nullptr); }
 };
@@ -740,8 +740,7 @@ wxRichTextColourSwatchCtrl::wxRichTextColourSwatchCtrl(wxWindow* parent, wxWindo
 }
 
 wxRichTextColourSwatchCtrl::~wxRichTextColourSwatchCtrl()
-{
-}
+= default;
 
 void wxRichTextColourSwatchCtrl::OnMouseEvent(wxMouseEvent& event)
 {
@@ -810,8 +809,7 @@ bool wxRichTextFontListBox::Create(wxWindow* parent, wxWindowID id, const wxPoin
 }
 
 wxRichTextFontListBox::~wxRichTextFontListBox()
-{
-}
+= default;
 
 /// Returns the HTML for this item
 wxString wxRichTextFontListBox::OnGetItem(size_t n) const

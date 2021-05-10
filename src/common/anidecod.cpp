@@ -50,12 +50,10 @@ WX_DEFINE_OBJARRAY(wxANIFrameInfoArray)
 //---------------------------------------------------------------------------
 
 wxANIDecoder::wxANIDecoder()
-{
-}
+= default;
 
 wxANIDecoder::~wxANIDecoder()
-{
-}
+= default;
 
 bool wxANIDecoder::ConvertToImage(unsigned int frame, wxImage *image) const
 {

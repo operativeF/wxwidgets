@@ -213,8 +213,7 @@ HBRUSH wxBrushRefData::GetHBRUSH()
 // ----------------------------------------------------------------------------
 
 wxBrush::wxBrush()
-{
-}
+= default;
 
 wxBrush::wxBrush(const wxColour& col, wxBrushStyle style)
 {
@@ -232,8 +231,7 @@ wxBrush::wxBrush(const wxBitmap& stipple)
 }
 
 wxBrush::~wxBrush()
-{
-}
+= default;
 
 // ----------------------------------------------------------------------------
 // wxBrush house keeping stuff

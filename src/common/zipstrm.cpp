@@ -1573,7 +1573,7 @@ public:
         { m_stream = nullptr; if (--m_ref == 0) delete this; }
 
 private:
-    ~wxZipStreamLink() { }
+    ~wxZipStreamLink() = default;
 
     int m_ref;
     wxZipOutputStream *m_stream;

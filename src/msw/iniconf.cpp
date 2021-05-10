@@ -86,8 +86,7 @@ wxIniConfig::wxIniConfig(const wxString& strAppName,
 }
 
 wxIniConfig::~wxIniConfig()
-{
-}
+= default;
 
 // ----------------------------------------------------------------------------
 // path management

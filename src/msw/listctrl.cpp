@@ -236,8 +236,7 @@ class wxMSWListHeaderCustomDraw : public wxMSWImpl::CustomDraw
 {
 public:
     wxMSWListHeaderCustomDraw()
-    {
-    }
+    = default;
 
     // Make this field public to let wxListCtrl update it directly when its
     // header attributes change.

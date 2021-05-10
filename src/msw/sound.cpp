@@ -35,7 +35,7 @@
 class wxSoundData
 {
 public:
-    wxSoundData() { }
+    wxSoundData() = default;
 
     // return true if we had been successfully initialized
     virtual bool IsOk() const = 0;
@@ -46,7 +46,7 @@ public:
     // get the data to be passed to PlaySound()
     virtual LPCTSTR GetSoundData() const = 0;
 
-    virtual ~wxSoundData() { }
+    virtual ~wxSoundData() = default;
 };
 
 // class for in-memory sound data

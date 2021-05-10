@@ -99,8 +99,7 @@ void wxStatusBarGeneric::Init()
 }
 
 wxStatusBarGeneric::~wxStatusBarGeneric()
-{
-}
+= default;
 
 bool wxStatusBarGeneric::Create(wxWindow *parent,
                                 wxWindowID id,

@@ -262,12 +262,10 @@ wxString wxHtmlHelpDataItem::GetIndentedName() const
 wxIMPLEMENT_DYNAMIC_CLASS(wxHtmlHelpData, wxObject);
 
 wxHtmlHelpData::wxHtmlHelpData()
-{
-}
+= default;
 
 wxHtmlHelpData::~wxHtmlHelpData()
-{
-}
+= default;
 
 bool wxHtmlHelpData::LoadMSProject(wxHtmlBookRecord *book, wxFileSystem& fsys,
                                    const wxString& indexfile,

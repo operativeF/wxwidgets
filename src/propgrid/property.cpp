@@ -2846,8 +2846,7 @@ wxPGRootProperty::wxPGRootProperty( const wxString& name )
 
 
 wxPGRootProperty::~wxPGRootProperty()
-{
-}
+= default;
 
 
 // -----------------------------------------------------------------------
@@ -2879,8 +2878,7 @@ wxPropertyCategory::wxPropertyCategory( const wxString &label, const wxString& n
 
 
 wxPropertyCategory::~wxPropertyCategory()
-{
-}
+= default;
 
 
 wxString wxPropertyCategory::ValueToString( wxVariant& WXUNUSED(value),
@@ -3219,8 +3217,7 @@ static inline void DecDataRef(wxPGHashMapS2P& map)
 }
 
 wxPGAttributeStorage::wxPGAttributeStorage()
-{
-}
+= default;
 
 wxPGAttributeStorage::wxPGAttributeStorage(const wxPGAttributeStorage& other)
 {

@@ -836,8 +836,7 @@ bool wxFont::DoCreate(const wxFontInfo& info)
 }
 
 wxFont::~wxFont()
-{
-}
+= default;
 
 // ----------------------------------------------------------------------------
 // real implementation
@@ -1108,7 +1107,7 @@ extern const wxArrayString& wxGetPrivateFontFileNames()
 class wxPrivateFontsListModule : public wxModule
 {
 public:
-    wxPrivateFontsListModule() { }
+    wxPrivateFontsListModule() = default;
 
     bool OnInit() wxOVERRIDE { return true; }
     void OnExit() wxOVERRIDE { gs_privateFontFileNames.clear(); }

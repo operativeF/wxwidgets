@@ -63,8 +63,7 @@ wxDEFINE_EVENT( wxEVT_MEDIA_STOP, wxMediaEvent );
 // needs the destructor implementation in the source
 //---------------------------------------------------------------------------
 wxMediaBackend::~wxMediaBackend()
-{
-}
+= default;
 
 //---------------------------------------------------------------------------
 // wxMediaCtrl::Create (file version)

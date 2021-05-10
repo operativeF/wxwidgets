@@ -727,8 +727,7 @@ wxBEGIN_EVENT_TABLE(wxAuiMDIClientWindow, wxAuiNotebook)
 wxEND_EVENT_TABLE()
 
 wxAuiMDIClientWindow::wxAuiMDIClientWindow()
-{
-}
+= default;
 
 wxAuiMDIClientWindow::wxAuiMDIClientWindow(wxAuiMDIParentFrame* parent, long style)
 {

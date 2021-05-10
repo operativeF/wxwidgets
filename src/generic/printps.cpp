@@ -62,8 +62,7 @@ wxPostScriptPrinter::wxPostScriptPrinter(wxPrintDialogData *data)
 }
 
 wxPostScriptPrinter::~wxPostScriptPrinter()
-{
-}
+= default;
 
 bool wxPostScriptPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt)
 {
@@ -278,8 +277,7 @@ wxPostScriptPrintPreview::wxPostScriptPrintPreview(wxPrintout *printout,
 }
 
 wxPostScriptPrintPreview::~wxPostScriptPrintPreview()
-{
-}
+= default;
 
 bool wxPostScriptPrintPreview::Print(bool interactive)
 {

@@ -207,7 +207,7 @@ class LexerJSON : public ILexer {
 		setKeywordJSONLD(CharacterSet::setAlpha, ":@"),
 		setKeywordJSON(CharacterSet::setAlpha, "$_") {
 	}
-	virtual ~LexerJSON() {}
+	virtual ~LexerJSON() = default;
 	virtual int SCI_METHOD Version() const {
 		return lvOriginal;
 	}

@@ -85,8 +85,7 @@ wxRibbonPageScrollButton::wxRibbonPageScrollButton(wxRibbonPage* sibling,
 }
 
 wxRibbonPageScrollButton::~wxRibbonPageScrollButton()
-{
-}
+= default;
 
 void wxRibbonPageScrollButton::OnEraseBackground(wxEraseEvent& WXUNUSED(evt))
 {

@@ -142,9 +142,7 @@ public:
 
 private:
     RTCore()
-    {
-
-    }
+    = default;
 
     wxDynamicLibrary m_dllCore;
     wxDynamicLibrary m_dllString;
@@ -232,8 +230,7 @@ class RTModule : public wxModule
 {
 public:
     RTModule()
-    {
-    }
+    = default;
 
     virtual bool OnInit() wxOVERRIDE
     {

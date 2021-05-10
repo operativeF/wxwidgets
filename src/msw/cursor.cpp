@@ -148,8 +148,7 @@ void wxCursorRefData::Free()
 // ----------------------------------------------------------------------------
 
 wxCursor::wxCursor()
-{
-}
+= default;
 
 #if wxUSE_IMAGE
 wxCursor::wxCursor(const wxImage& image)
@@ -403,8 +402,7 @@ void wxCursor::InitFromStock(wxStockCursor idCursor)
 }
 
 wxCursor::~wxCursor()
-{
-}
+= default;
 
 // ----------------------------------------------------------------------------
 // other wxCursor functions

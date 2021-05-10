@@ -32,8 +32,7 @@ wxSocketOutputStream::wxSocketOutputStream(wxSocketBase& s)
 }
 
 wxSocketOutputStream::~wxSocketOutputStream()
-{
-}
+= default;
 
 size_t wxSocketOutputStream::OnSysWrite(const void *buffer, size_t size)
 {
@@ -55,8 +54,7 @@ wxSocketInputStream::wxSocketInputStream(wxSocketBase& s)
 }
 
 wxSocketInputStream::~wxSocketInputStream()
-{
-}
+= default;
 
 size_t wxSocketInputStream::OnSysRead(void *buffer, size_t size)
 {
@@ -78,7 +76,6 @@ wxSocketStream::wxSocketStream(wxSocketBase& s)
 }
 
 wxSocketStream::~wxSocketStream()
-{
-}
+= default;
 
 #endif // wxUSE_STREAMS && wxUSE_SOCKETS

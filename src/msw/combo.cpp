@@ -130,8 +130,7 @@ bool wxComboCtrl::Create(wxWindow *parent,
 }
 
 wxComboCtrl::~wxComboCtrl()
-{
-}
+= default;
 
 void wxComboCtrl::OnResize()
 {

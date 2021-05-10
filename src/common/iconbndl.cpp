@@ -47,7 +47,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxIconBundle, wxGDIObject);
 class WXDLLEXPORT wxIconBundleRefData : public wxGDIRefData
 {
 public:
-    wxIconBundleRefData() { }
+    wxIconBundleRefData() = default;
 
     // We need the copy ctor for CloneGDIRefData() but notice that we use the
     // base class default ctor in it and not the copy one which it doesn't have.
@@ -69,8 +69,7 @@ public:
 // ============================================================================
 
 wxIconBundle::wxIconBundle()
-{
-}
+= default;
 
 #if wxUSE_STREAMS && wxUSE_IMAGE
 

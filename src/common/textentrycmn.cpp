@@ -462,8 +462,7 @@ bool wxTextEntryBase::SendTextUpdatedEvent(wxWindow *win)
 // ----------------------------------------------------------------------------
 
 wxTextCompleter::~wxTextCompleter()
-{
-}
+= default;
 
 bool wxTextCompleterSimple::Start(const wxString& prefix)
 {

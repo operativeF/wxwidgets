@@ -91,8 +91,7 @@ GIFImage::GIFImage()
 //---------------------------------------------------------------------------
 
 wxGIFDecoder::wxGIFDecoder()
-{
-}
+= default;
 
 wxGIFDecoder::~wxGIFDecoder()
 {

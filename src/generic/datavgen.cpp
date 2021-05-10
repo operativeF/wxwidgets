@@ -3024,8 +3024,8 @@ namespace
 class DoJob
 {
 public:
-    DoJob() { }
-    virtual ~DoJob() { }
+    DoJob() = default;
+    virtual ~DoJob() = default;
 
     // The return value control how the tree-walker tranverse the tree
     enum

@@ -27,7 +27,7 @@ class LexerEDIFACT : public ILexer
 {
 public:
 	LexerEDIFACT();
-	virtual ~LexerEDIFACT() {} // virtual destructor, as we inherit from ILexer
+	virtual ~LexerEDIFACT() = default; // virtual destructor, as we inherit from ILexer
 
 	static ILexer *Factory() {
 		return new LexerEDIFACT;

@@ -238,8 +238,7 @@ public:
 						 CheckFoldPoint(CheckFoldPoint_),
 						 osBasic(wordListDescriptions) {
 	}
-	virtual ~LexerBasic() {
-	}
+	virtual ~LexerBasic() = default;
 	void SCI_METHOD Release() {
 		delete this;
 	}

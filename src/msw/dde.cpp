@@ -116,7 +116,7 @@ static bool DDEInitialized = false;
 class wxDDEModule : public wxModule
 {
 public:
-    wxDDEModule() {}
+    wxDDEModule() = default;
     bool OnInit() wxOVERRIDE { return true; }
     void OnExit() wxOVERRIDE { wxDDECleanUp(); }
 

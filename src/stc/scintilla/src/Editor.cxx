@@ -3931,8 +3931,7 @@ public:
 	CaseFolderASCII() {
 		StandardASCII();
 	}
-	~CaseFolderASCII() {
-	}
+	~CaseFolderASCII() = default;
 };
 
 

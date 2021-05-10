@@ -393,8 +393,7 @@ class CaseConverter : public ICaseConverter {
 	std::vector<ConversionString> conversions;
 
 public:
-	CaseConverter() {
-	}
+	CaseConverter() = default;
 	bool Initialised() const {
 		return characters.size() > 0;
 	}

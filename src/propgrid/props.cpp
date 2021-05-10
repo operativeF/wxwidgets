@@ -64,7 +64,7 @@ void wxStringProperty::OnSetValue()
     }
 }
 
-wxStringProperty::~wxStringProperty() { }
+wxStringProperty::~wxStringProperty() = default;
 
 wxString wxStringProperty::ValueToString( wxVariant& value,
                                           int argFlags ) const
@@ -202,8 +202,7 @@ wxNumericProperty::wxNumericProperty(const wxString& label, const wxString& name
 }
 
 wxNumericProperty::~wxNumericProperty()
-{
-}
+= default;
 
 bool wxNumericProperty::DoSetAttribute(const wxString& name, wxVariant& value)
 {
@@ -372,7 +371,7 @@ wxIntProperty::wxIntProperty( const wxString& label, const wxString& name,
 }
 #endif
 
-wxIntProperty::~wxIntProperty() { }
+wxIntProperty::~wxIntProperty() = default;
 
 wxString wxIntProperty::ValueToString( wxVariant& value,
                                        int WXUNUSED(argFlags) ) const
@@ -610,7 +609,7 @@ wxUIntProperty::wxUIntProperty( const wxString& label, const wxString& name,
 }
 #endif
 
-wxUIntProperty::~wxUIntProperty() { }
+wxUIntProperty::~wxUIntProperty() = default;
 
 wxString wxUIntProperty::ValueToString(wxVariant& value, int argFlags) const
 {
@@ -882,7 +881,7 @@ wxFloatProperty::wxFloatProperty( const wxString& label,
     SetValue(value);
 }
 
-wxFloatProperty::~wxFloatProperty() { }
+wxFloatProperty::~wxFloatProperty() = default;
 
 #if WXWIN_COMPATIBILITY_3_0
 // This helper method provides standard way for floating point-using
@@ -1090,7 +1089,7 @@ wxBoolProperty::wxBoolProperty( const wxString& label, const wxString& name, boo
     m_flags |= wxPG_PROP_USE_DCC;
 }
 
-wxBoolProperty::~wxBoolProperty() { }
+wxBoolProperty::~wxBoolProperty() = default;
 
 wxString wxBoolProperty::ValueToString( wxVariant& value,
                                         int argFlags ) const
@@ -1266,8 +1265,7 @@ int wxEnumProperty::GetIndexForValue( int value ) const
 }
 
 wxEnumProperty::~wxEnumProperty ()
-{
-}
+= default;
 
 void wxEnumProperty::OnSetValue()
 {
@@ -1447,8 +1445,7 @@ wxEditEnumProperty::wxEditEnumProperty( const wxString& label, const wxString& n
 }
 
 wxEditEnumProperty::~wxEditEnumProperty()
-{
-}
+= default;
 
 void wxEditEnumProperty::OnSetValue()
 {
@@ -1649,8 +1646,7 @@ wxFlagsProperty::wxFlagsProperty( const wxString& label, const wxString& name,
 }
 
 wxFlagsProperty::~wxFlagsProperty()
-{
-}
+= default;
 
 void wxFlagsProperty::OnSetValue()
 {
@@ -1859,7 +1855,7 @@ wxDirProperty::wxDirProperty( const wxString& label, const wxString& name, const
     SetValue(value);
 }
 
-wxDirProperty::~wxDirProperty() { }
+wxDirProperty::~wxDirProperty() = default;
 
 wxString wxDirProperty::ValueToString(wxVariant& value, int WXUNUSED(argFlags)) const
 {
@@ -1935,8 +1931,7 @@ public:
     }
 
     virtual ~wxPGDialogAdapter()
-    {
-    }
+    = default;
 
     virtual bool DoShowDialog(wxPropertyGrid* pg, wxPGProperty* prop) wxOVERRIDE
     {
@@ -1967,8 +1962,7 @@ wxEditorDialogProperty::wxEditorDialogProperty(const wxString& label, const wxSt
 }
 
 wxEditorDialogProperty::~wxEditorDialogProperty()
-{
-}
+= default;
 
 wxPGEditorDialogAdapter* wxEditorDialogProperty::GetEditorDialog() const
 {
@@ -2003,7 +1997,7 @@ wxFileProperty::wxFileProperty( const wxString& label, const wxString& name,
     SetValue(value);
 }
 
-wxFileProperty::~wxFileProperty() {}
+wxFileProperty::~wxFileProperty() = default;
 
 wxValidator* wxFileProperty::GetClassValidator()
 {
@@ -2230,7 +2224,7 @@ wxLongStringProperty::wxLongStringProperty( const wxString& label, const wxStrin
     SetValue(value);
 }
 
-wxLongStringProperty::~wxLongStringProperty() {}
+wxLongStringProperty::~wxLongStringProperty() = default;
 
 wxString wxLongStringProperty::ValueToString( wxVariant& value,
                                               int WXUNUSED(argFlags) ) const
@@ -2678,7 +2672,7 @@ wxArrayStringProperty::wxArrayStringProperty( const wxString& label,
     SetValue( array );
 }
 
-wxArrayStringProperty::~wxArrayStringProperty() { }
+wxArrayStringProperty::~wxArrayStringProperty() = default;
 
 void wxArrayStringProperty::OnSetValue()
 {

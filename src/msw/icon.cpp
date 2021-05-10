@@ -88,8 +88,7 @@ wxIcon::wxIcon(const wxIconLocation& loc)
 }
 
 wxIcon::~wxIcon()
-{
-}
+= default;
 
 wxObjectRefData *wxIcon::CloneRefData(const wxObjectRefData *dataOrig) const
 {

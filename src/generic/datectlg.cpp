@@ -386,8 +386,7 @@ void wxDatePickerCtrlGeneric::Init()
 }
 
 wxDatePickerCtrlGeneric::~wxDatePickerCtrlGeneric()
-{
-}
+= default;
 
 bool wxDatePickerCtrlGeneric::Destroy()
 {

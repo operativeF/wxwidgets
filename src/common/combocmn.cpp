@@ -614,8 +614,7 @@ void wxComboPopupWindowEvtHandler::HideOnDeactivate()
 // ----------------------------------------------------------------------------
 
 wxComboPopup::~wxComboPopup()
-{
-}
+= default;
 
 void wxComboPopup::OnPopup()
 {
@@ -733,7 +732,7 @@ public:
     {
         m_combo = combo;
     }
-    virtual ~wxComboBoxExtraInputHandler() { }
+    virtual ~wxComboBoxExtraInputHandler() = default;
     void OnKey(wxKeyEvent& event);
     void OnFocus(wxFocusEvent& event);
 
@@ -815,7 +814,7 @@ public:
         // events until mouse left button has been up.
         m_blockEventsToPopup = true;
     }
-    virtual ~wxComboPopupEvtHandler() { }
+    virtual ~wxComboPopupEvtHandler() = default;
 
     void OnMouseEvent( wxMouseEvent& event );
 
@@ -954,7 +953,7 @@ class wxComboCtrlTextCtrl : public wxTextCtrl
 {
 public:
     wxComboCtrlTextCtrl() : wxTextCtrl() { }
-    virtual ~wxComboCtrlTextCtrl() { }
+    virtual ~wxComboCtrlTextCtrl() = default;
 
     virtual wxWindow *GetMainWindowOfCompositeControl() wxOVERRIDE
     {

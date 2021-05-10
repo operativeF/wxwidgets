@@ -73,8 +73,7 @@ wxBEGIN_EVENT_TABLE(wxRibbonToolBar, wxRibbonControl)
 wxEND_EVENT_TABLE()
 
 wxRibbonToolBar::wxRibbonToolBar()
-{
-}
+= default;
 
 wxRibbonToolBar::wxRibbonToolBar(wxWindow* parent,
                   wxWindowID id,

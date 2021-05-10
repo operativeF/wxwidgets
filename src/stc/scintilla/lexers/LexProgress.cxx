@@ -143,8 +143,7 @@ public:
       setRelOp(CharacterSet::setNone, "=!<>"),
       setLogicalOp(CharacterSet::setNone, "|&"){
    }
-   virtual ~LexerABL() {
-   }
+   virtual ~LexerABL() = default;
    void SCI_METHOD Release() {
       delete this;
    }

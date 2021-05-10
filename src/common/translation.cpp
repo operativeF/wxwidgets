@@ -634,7 +634,7 @@ public:
     // returns 0 if error
     static wxPluralFormsCalculator* make(const char* s = nullptr);
 
-    ~wxPluralFormsCalculator() {}
+    ~wxPluralFormsCalculator() = default;
 
     void  init(wxPluralFormsToken::Number nplurals, wxPluralFormsNode* plural);
 
@@ -1100,12 +1100,10 @@ private:
 // ----------------------------------------------------------------------------
 
 wxMsgCatalogFile::wxMsgCatalogFile()
-{
-}
+= default;
 
 wxMsgCatalogFile::~wxMsgCatalogFile()
-{
-}
+= default;
 
 // open disk file and read in it's contents
 bool wxMsgCatalogFile::LoadFile(const wxString& filename,
@@ -2087,7 +2085,7 @@ class wxTranslationsModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxTranslationsModule);
 public:
-        wxTranslationsModule() {}
+        wxTranslationsModule() = default;
 
         bool OnInit() wxOVERRIDE
         {

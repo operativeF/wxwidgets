@@ -36,7 +36,7 @@ wxArrayString gs_allFacenames;
 class wxFontEnumCacheCleanupModule : public wxModule
 {
 public:
-    wxFontEnumCacheCleanupModule() { }
+    wxFontEnumCacheCleanupModule() = default;
 
     bool OnInit() wxOVERRIDE { return true; }
     void OnExit() wxOVERRIDE { gs_allFacenames.clear(); }
@@ -58,7 +58,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFontEnumCacheCleanupModule, wxModule);
 class wxSimpleFontEnumerator : public wxFontEnumerator
 {
 public:
-    wxSimpleFontEnumerator() { }
+    wxSimpleFontEnumerator() = default;
 
     // called by EnumerateFacenames
     virtual bool OnFacename(const wxString& facename) wxOVERRIDE

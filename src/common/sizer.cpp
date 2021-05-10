@@ -1659,8 +1659,7 @@ wxFlexGridSizer::wxFlexGridSizer( int rows, int cols, const wxSize& gap )
 }
 
 wxFlexGridSizer::~wxFlexGridSizer()
-{
-}
+= default;
 
 void wxFlexGridSizer::RepositionChildren(const wxSize& minSize)
 {

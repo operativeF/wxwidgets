@@ -60,8 +60,7 @@ wxRibbonAUIArtProvider::wxRibbonAUIArtProvider()
 }
 
 wxRibbonAUIArtProvider::~wxRibbonAUIArtProvider()
-{
-}
+= default;
 
 wxRibbonArtProvider* wxRibbonAUIArtProvider::Clone() const
 {

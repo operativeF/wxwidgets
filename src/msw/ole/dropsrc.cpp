@@ -43,7 +43,7 @@ class wxIDropSource : public IDropSource
 {
 public:
   wxIDropSource(wxDropSource *pDropSource);
-  virtual ~wxIDropSource() { }
+  virtual ~wxIDropSource() = default;
 
   // IDropSource
   STDMETHODIMP QueryContinueDrag(BOOL fEscapePressed, DWORD grfKeyState) wxOVERRIDE;

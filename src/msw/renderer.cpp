@@ -69,7 +69,7 @@ typedef struct _WXDTTOPTS
 class wxRendererMSWBase : public wxDelegateRendererNative
 {
 public:
-    wxRendererMSWBase() { }
+    wxRendererMSWBase() = default;
     wxRendererMSWBase(wxRendererNative& rendererNative)
         : wxDelegateRendererNative(rendererNative) { }
 
@@ -116,7 +116,7 @@ protected:
 class wxRendererMSW : public wxRendererMSWBase
 {
 public:
-    wxRendererMSW() { }
+    wxRendererMSW() = default;
 
     static wxRendererNative& Get();
 

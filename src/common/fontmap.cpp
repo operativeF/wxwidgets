@@ -156,8 +156,7 @@ wxFontMapper::wxFontMapper()
 }
 
 wxFontMapper::~wxFontMapper()
-{
-}
+= default;
 
 /* static */
 wxFontMapper *wxFontMapper::Get()

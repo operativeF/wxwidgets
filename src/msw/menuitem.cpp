@@ -474,8 +474,7 @@ void wxMenuItem::Init()
 }
 
 wxMenuItem::~wxMenuItem()
-{
-}
+= default;
 
 // misc
 // ----

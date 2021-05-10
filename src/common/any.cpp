@@ -49,8 +49,7 @@ class wxAnyValueTypeGlobals
 {
 public:
     wxAnyValueTypeGlobals()
-    {
-    }
+    = default;
     ~wxAnyValueTypeGlobals()
     {
         m_anyToVariant.clear();
@@ -223,7 +222,7 @@ class wxAnyValueTypeGlobalsManager : public wxModule
     wxDECLARE_DYNAMIC_CLASS(wxAnyValueTypeGlobalsManager);
 public:
     wxAnyValueTypeGlobalsManager() : wxModule() { }
-    virtual ~wxAnyValueTypeGlobalsManager() { }
+    virtual ~wxAnyValueTypeGlobalsManager() = default;
 
     virtual bool OnInit() wxOVERRIDE
     {

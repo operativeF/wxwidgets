@@ -28,8 +28,7 @@ using namespace Scintilla;
 Decoration::Decoration(int indicator_) : next(nullptr), indicator(indicator_) {
 }
 
-Decoration::~Decoration() {
-}
+Decoration::~Decoration() = default;
 
 bool Decoration::Empty() const {
 	return (rs.Runs() == 1) && (rs.AllSameAs(0));

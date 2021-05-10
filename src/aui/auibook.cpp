@@ -1009,8 +1009,7 @@ wxAuiTabCtrl::wxAuiTabCtrl(wxWindow* parent,
 }
 
 wxAuiTabCtrl::~wxAuiTabCtrl()
-{
-}
+= default;
 
 void wxAuiTabCtrl::OnPaint(wxPaintEvent&)
 {

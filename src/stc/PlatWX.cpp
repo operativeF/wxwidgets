@@ -150,8 +150,7 @@ Font::Font() {
     fid = nullptr;
 }
 
-Font::~Font() {
-}
+Font::~Font() = default;
 
 void Font::Create(const FontParameters &fp) {
     Release();
@@ -1843,8 +1842,7 @@ Surface *Surface::Allocate(int technology) {
 //----------------------------------------------------------------------
 
 
-Window::~Window() {
-}
+Window::~Window() = default;
 
 void Window::Destroy() {
     if (wid) {
@@ -3390,11 +3388,9 @@ void ListBoxImpl::SetListInfo(int* listType, int* posStart, int* startLen)
 }
 
 
-ListBox::ListBox() {
-}
+ListBox::ListBox() = default;
 
-ListBox::~ListBox() {
-}
+ListBox::~ListBox() = default;
 
 ListBox *ListBox::Allocate() {
     return new ListBoxImpl();

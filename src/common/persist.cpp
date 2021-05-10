@@ -57,8 +57,7 @@ wxPersistenceManager& wxPersistenceManager::Get()
 }
 
 wxPersistenceManager::~wxPersistenceManager()
-{
-}
+= default;
 
 wxString
 wxPersistenceManager::GetKey(const wxPersistentObject& who,

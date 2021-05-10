@@ -216,7 +216,7 @@ public:
 		setWord(CharacterSet::setAlphaNum, "._", 0x80, true),
 		subStyles(styleSubable, 0x80, 0x40, activeFlag) {
 		}
-	virtual ~LexerVerilog() {}
+	virtual ~LexerVerilog() = default;
 	int SCI_METHOD Version() const {
 		return lvSubStyles;
 	}

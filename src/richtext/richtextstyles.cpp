@@ -573,8 +573,7 @@ bool wxRichTextStyleListBox::Create(wxWindow* parent, wxWindowID id, const wxPoi
 }
 
 wxRichTextStyleListBox::~wxRichTextStyleListBox()
-{
-}
+= default;
 
 /// Returns the HTML for this item
 wxString wxRichTextStyleListBox::OnGetItem(size_t n) const
@@ -1088,9 +1087,7 @@ bool wxRichTextStyleListCtrl::Create(wxWindow* parent, wxWindowID id, const wxPo
 }
 
 wxRichTextStyleListCtrl::~wxRichTextStyleListCtrl()
-{
-
-}
+= default;
 
 /// React to style type choice
 void wxRichTextStyleListCtrl::OnChooseType(wxCommandEvent& event)

@@ -464,12 +464,10 @@ wxStockGDI* wxStockGDI::ms_instance = &gs_wxStockGDI_instance;
 wxObject* wxStockGDI::ms_stockObject[ITEMCOUNT];
 
 wxStockGDI::wxStockGDI()
-{
-}
+= default;
 
 wxStockGDI::~wxStockGDI()
-{
-}
+= default;
 
 void wxStockGDI::DeleteAll()
 {
@@ -705,8 +703,7 @@ void wxDeleteStockLists()
 // ============================================================================
 
 wxGDIObjListBase::wxGDIObjListBase()
-{
-}
+= default;
 
 wxGDIObjListBase::~wxGDIObjListBase()
 {

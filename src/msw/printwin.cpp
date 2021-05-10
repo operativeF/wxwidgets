@@ -297,8 +297,7 @@ wxWindowsPrintPreview::wxWindowsPrintPreview(wxPrintout *printout,
 }
 
 wxWindowsPrintPreview::~wxWindowsPrintPreview()
-{
-}
+= default;
 
 bool wxWindowsPrintPreview::Print(bool interactive)
 {

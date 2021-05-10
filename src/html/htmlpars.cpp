@@ -39,7 +39,7 @@ const wxChar *wxTRACE_HTML_DEBUG = wxT("htmldebug");
 class wxHtmlTextPiece
 {
 public:
-    wxHtmlTextPiece() {}
+    wxHtmlTextPiece() = default;
     wxHtmlTextPiece(const wxString::const_iterator& start,
                     const wxString::const_iterator& end)
         : m_start(start), m_end(end) {}
@@ -434,8 +434,7 @@ wxHtmlEntitiesParser::wxHtmlEntitiesParser()
 #if !wxUSE_UNICODE
     : m_conv(NULL), m_encoding(wxFONTENCODING_SYSTEM)
 #endif
-{
-}
+= default;
 
 wxHtmlEntitiesParser::~wxHtmlEntitiesParser()
 {
@@ -875,7 +874,7 @@ wxFSFile *wxHtmlParser::OpenURL(wxHtmlURLType type,
 class wxMetaTagParser : public wxHtmlParser
 {
 public:
-    wxMetaTagParser() { }
+    wxMetaTagParser() = default;
 
     wxObject* GetProduct() wxOVERRIDE { return nullptr; }
 

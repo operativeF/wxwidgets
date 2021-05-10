@@ -131,8 +131,7 @@ bool wxDataViewModelNotifier::ItemsChanged( const wxDataViewItemArray &items )
 // ---------------------------------------------------------
 
 wxDataViewModel::wxDataViewModel()
-{
-}
+= default;
 
 wxDataViewModel::~wxDataViewModel()
 {
@@ -2220,8 +2219,7 @@ wxSize wxDataViewCheckIconTextRenderer::GetCheckSize() const
 //-----------------------------------------------------------------------------
 
 wxDataViewListStore::wxDataViewListStore()
-{
-}
+= default;
 
 wxDataViewListStore::~wxDataViewListStore()
 {
@@ -2363,8 +2361,7 @@ wxBEGIN_EVENT_TABLE(wxDataViewListCtrl,wxDataViewCtrl)
 wxEND_EVENT_TABLE()
 
 wxDataViewListCtrl::wxDataViewListCtrl()
-{
-}
+= default;
 
 wxDataViewListCtrl::wxDataViewListCtrl( wxWindow *parent, wxWindowID id,
            const wxPoint& pos, const wxSize& size, long style,
@@ -2374,8 +2371,7 @@ wxDataViewListCtrl::wxDataViewListCtrl( wxWindow *parent, wxWindowID id,
 }
 
 wxDataViewListCtrl::~wxDataViewListCtrl()
-{
-}
+= default;
 
 
 bool wxDataViewListCtrl::Create( wxWindow *parent, wxWindowID id,

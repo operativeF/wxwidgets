@@ -476,8 +476,7 @@ wxTarEntry::wxTarEntry(const wxString& name /*=wxEmptyString*/,
 }
 
 wxTarEntry::~wxTarEntry()
-{
-}
+= default;
 
 wxTarEntry::wxTarEntry(const wxTarEntry& e)
   : wxArchiveEntry(),

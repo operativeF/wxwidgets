@@ -264,7 +264,7 @@ size_t wxDir::GetAllFiles(const wxString& dirname,
 class wxDirTraverserFindFirst : public wxDirTraverser
 {
 public:
-    wxDirTraverserFindFirst() { }
+    wxDirTraverserFindFirst() = default;
 
     virtual wxDirTraverseResult OnFile(const wxString& filename) wxOVERRIDE
     {
@@ -315,7 +315,7 @@ wxString wxDir::FindFirst(const wxString& dirname,
 class wxDirTraverserSumSize : public wxDirTraverser
 {
 public:
-    wxDirTraverserSumSize() { }
+    wxDirTraverserSumSize() = default;
 
     virtual wxDirTraverseResult OnFile(const wxString& filename) wxOVERRIDE
     {

@@ -158,8 +158,8 @@ class LexerRegistry : public ILexer {
 	}
 
 public:
-	LexerRegistry() {}
-	virtual ~LexerRegistry() {}
+	LexerRegistry() = default;
+	virtual ~LexerRegistry() = default;
 	virtual int SCI_METHOD Version() const {
 		return lvOriginal;
 	}

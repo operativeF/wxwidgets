@@ -27,8 +27,7 @@ wxFontData::wxFontData()
 }
 
 wxFontData::~wxFontData()
-{
-}
+= default;
 
 wxFontData::wxFontData(const wxFontData& data)
     : wxObject(),

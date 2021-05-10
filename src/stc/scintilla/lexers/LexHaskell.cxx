@@ -394,7 +394,7 @@ public:
       , firstImportLine(-1)
       , firstImportIndent(0)
       {}
-   virtual ~LexerHaskell() {}
+   virtual ~LexerHaskell() = default;
 
    void SCI_METHOD Release() {
       delete this;

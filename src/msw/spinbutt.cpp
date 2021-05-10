@@ -136,8 +136,7 @@ bool wxSpinButton::Create(wxWindow *parent,
 }
 
 wxSpinButton::~wxSpinButton()
-{
-}
+= default;
 
 // ----------------------------------------------------------------------------
 // size calculation

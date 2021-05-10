@@ -1068,8 +1068,7 @@ wxGDIPlusBrushData::wxGDIPlusBrushData( wxGraphicsRenderer* renderer , const wxB
 }
 
 wxGDIPlusBrushData::~wxGDIPlusBrushData()
-{
-}
+= default;
 
 
 //-----------------------------------------------------------------------------

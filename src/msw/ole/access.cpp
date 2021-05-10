@@ -61,7 +61,7 @@ class wxIEnumVARIANT : public IEnumVARIANT
 {
 public:
     wxIEnumVARIANT(const wxVariant& variant);
-    virtual ~wxIEnumVARIANT() { }
+    virtual ~wxIEnumVARIANT() = default;
 
     DECLARE_IUNKNOWN_METHODS;
 
@@ -174,7 +174,7 @@ class wxIAccessible : public IAccessible
 {
 public:
     wxIAccessible(wxAccessible *pAccessible);
-    virtual ~wxIAccessible() {}
+    virtual ~wxIAccessible() = default;
 
     // Called to indicate object should prepare to be deleted.
     void Quiesce();

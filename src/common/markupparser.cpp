@@ -430,7 +430,7 @@ wxString wxMarkupParser::Strip(const wxString& text)
     class StripOutput : public wxMarkupParserOutput
     {
     public:
-        StripOutput() { }
+        StripOutput() = default;
 
         const wxString& GetText() const { return m_text; }
 

@@ -34,8 +34,7 @@ MarginStyle::MarginStyle() :
 }
 
 // A list of the fontnames - avoids wasting space in each style
-FontNames::FontNames() {
-}
+FontNames::FontNames() = default;
 
 FontNames::~FontNames() {
 	Clear();
@@ -64,8 +63,7 @@ const char *FontNames::Save(const char *name) {
 	return nameSave;
 }
 
-FontRealised::FontRealised() {
-}
+FontRealised::FontRealised() = default;
 
 FontRealised::~FontRealised() {
 	font.Release();

@@ -41,8 +41,7 @@ wxColourData::wxColourData(const wxColourData& data)
 }
 
 wxColourData::~wxColourData()
-{
-}
+= default;
 
 void wxColourData::SetCustomColour(int i, const wxColour& colour)
 {

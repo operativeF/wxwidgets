@@ -2080,7 +2080,7 @@ public:
     // Give it a virtual dtor just to suppress gcc warnings about a class with
     // virtual methods but non-virtual dtor -- even if this is completely safe
     // here as we never use the objects of this class polymorphically.
-    virtual ~ValidationTraverserBase() { }
+    virtual ~ValidationTraverserBase() = default;
 
 protected:
     // Called for each child, validator is guaranteed to be non-NULL.

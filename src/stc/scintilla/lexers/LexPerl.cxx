@@ -410,8 +410,7 @@ public:
 		setSpecialVar(CharacterSet::setNone, "\"$;<>&`'+,./\\%:=~!?@[]"),
 		setControlVar(CharacterSet::setNone, "ACDEFHILMNOPRSTVWX") {
 	}
-	virtual ~LexerPerl() {
-	}
+	virtual ~LexerPerl() = default;
 	void SCI_METHOD Release() {
 		delete this;
 	}
@@ -628,8 +627,7 @@ void SCI_METHOD LexerPerl::Lex(Sci_PositionU startPos, Sci_Position length, int 
 			Delimiter[DelimiterLength++] = static_cast<char>(ch);
 			Delimiter[DelimiterLength] = '\0';
 		}
-		~HereDocCls() {
-		}
+		~HereDocCls() = default;
 	};
 	HereDocCls HereDoc;		// TODO: FIFO for stacked here-docs
 

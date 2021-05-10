@@ -183,8 +183,7 @@ wxEND_EVENT_TABLE()
 
 // def ctor: use Create() to really create the control
 wxCheckListBox::wxCheckListBox()
-{
-}
+= default;
 
 // ctor which creates the associated control
 wxCheckListBox::wxCheckListBox(wxWindow *parent, wxWindowID id,

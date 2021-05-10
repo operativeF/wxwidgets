@@ -530,8 +530,7 @@ wxRichTextObject::wxRichTextObject(wxRichTextObject* parent)
 }
 
 wxRichTextObject::~wxRichTextObject()
-{
-}
+= default;
 
 void wxRichTextObject::Dereference()
 {
@@ -11594,7 +11593,7 @@ class wxRichTextModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextModule);
 public:
-    wxRichTextModule() {}
+    wxRichTextModule() = default;
     bool OnInit() wxOVERRIDE
     {
         wxRichTextBuffer::SetRenderer(new wxRichTextStdRenderer);
@@ -12459,8 +12458,7 @@ wxRichTextImage::wxRichTextImage(const wxRichTextImageBlock& imageBlock, wxRichT
 }
 
 wxRichTextImage::~wxRichTextImage()
-{
-}
+= default;
 
 void wxRichTextImage::Init()
 {
@@ -13497,7 +13495,7 @@ WX_DECLARE_STRING_HASH_MAP_WITH_DECL(wxFont, wxRichTextFontTableHashMap, class W
 class wxRichTextFontTableData: public wxObjectRefData
 {
 public:
-    wxRichTextFontTableData() {}
+    wxRichTextFontTableData() = default;
 
     wxFont FindFont(const wxRichTextAttr& fontSpec, double fontScale);
 

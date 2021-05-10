@@ -105,8 +105,7 @@ wxPostScriptPrintNativeData::wxPostScriptPrintNativeData()
 }
 
 wxPostScriptPrintNativeData::~wxPostScriptPrintNativeData()
-{
-}
+= default;
 
 bool wxPostScriptPrintNativeData::TransferTo( wxPrintData &WXUNUSED(data) )
 {
@@ -266,8 +265,7 @@ int wxGenericPrintDialog::ShowModal()
 }
 
 wxGenericPrintDialog::~wxGenericPrintDialog()
-{
-}
+= default;
 
 void wxGenericPrintDialog::OnOK(wxCommandEvent& WXUNUSED(event))
 {
@@ -673,8 +671,7 @@ void wxGenericPrintSetupDialog::Init(wxPrintData* data)
 }
 
 wxGenericPrintSetupDialog::~wxGenericPrintSetupDialog()
-{
-}
+= default;
 
 void wxGenericPrintSetupDialog::OnPrinter(wxListEvent& event)
 {
@@ -934,8 +931,7 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
 }
 
 wxGenericPageSetupDialog::~wxGenericPageSetupDialog()
-{
-}
+= default;
 
 wxPageSetupDialogData& wxGenericPageSetupDialog::GetPageSetupDialogData()
 {

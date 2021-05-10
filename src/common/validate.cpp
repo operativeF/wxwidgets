@@ -34,7 +34,6 @@ wxValidator::wxValidator()
 }
 
 wxValidator::~wxValidator()
-{
-}
+= default;
 
 #endif // wxUSE_VALIDATORS

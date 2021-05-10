@@ -153,8 +153,7 @@ public:
 	LexerAsm(int commentChar_) {
 		commentChar = commentChar_;
 	}
-	virtual ~LexerAsm() {
-	}
+	virtual ~LexerAsm() = default;
 	void SCI_METHOD Release() {
 		delete this;
 	}

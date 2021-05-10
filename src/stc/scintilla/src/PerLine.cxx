@@ -237,8 +237,7 @@ void LineMarkers::DeleteMarkFromHandle(int markerHandle) {
 	}
 }
 
-LineLevels::~LineLevels() {
-}
+LineLevels::~LineLevels() = default;
 
 void LineLevels::Init() {
 	levels.DeleteAll();
@@ -294,8 +293,7 @@ int LineLevels::GetLevel(int line) const {
 	}
 }
 
-LineState::~LineState() {
-}
+LineState::~LineState() = default;
 
 void LineState::Init() {
 	lineStates.DeleteAll();

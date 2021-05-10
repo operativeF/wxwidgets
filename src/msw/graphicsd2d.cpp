@@ -388,8 +388,7 @@ public:
     }
 
     virtual ~wxDirect2DFontFileEnumerator()
-    {
-    }
+    = default;
 
     // IDWriteFontFileEnumerator methods
     virtual wxSTDMETHODIMP MoveNext(BOOL* pHasCurrentFile) wxOVERRIDE
@@ -451,8 +450,7 @@ public:
     }
 
     virtual ~wxDirect2DFontCollectionLoader()
-    {
-    }
+    = default;
 
     // IDWriteFontCollectionLoader methods
     virtual wxSTDMETHODIMP CreateEnumeratorFromKey(IDWriteFactory* pFactory,
@@ -645,7 +643,7 @@ public:
     // was not previously acquired
     virtual void* GetResource() = 0;
 
-    virtual ~wxResourceHolder() {}
+    virtual ~wxResourceHolder() = default;
 };
 
 class wxD2DResourceManager;
@@ -658,13 +656,13 @@ public:
     virtual bool IsBound() = 0;
     virtual wxD2DResourceManager* GetManager() = 0;
 
-    virtual ~wxD2DManagedObject() {}
+    virtual ~wxD2DManagedObject() = default;
 };
 
 class wxManagedResourceHolder : public wxResourceHolder, public wxD2DManagedObject
 {
 public:
-    virtual ~wxManagedResourceHolder() {}
+    virtual ~wxManagedResourceHolder() = default;
 };
 
 // A Direct2D resource manager handles the device-dependent
@@ -838,7 +836,7 @@ public:
 
     virtual wxD2DManagedObject* GetManagedObject() = 0;
 
-    ~wxD2DManagedGraphicsData() {}
+    ~wxD2DManagedGraphicsData() = default;
 };
 
 D2D1_CAP_STYLE wxD2DConvertPenCap(wxPenCap cap)
@@ -2354,7 +2352,7 @@ public:
     {
     }
 
-    virtual ~wxHatchBitmapSource() {}
+    virtual ~wxHatchBitmapSource() = default;
 
     HRESULT STDMETHODCALLTYPE GetSize(__RPC__out UINT *width, __RPC__out UINT *height) wxOVERRIDE
     {
@@ -2734,7 +2732,7 @@ class wxD2DBrushResourceHolder : public wxD2DResourceHolder<B>
 {
 public:
     wxD2DBrushResourceHolder(const wxBrush& brush) : m_sourceBrush(brush) {}
-    virtual ~wxD2DBrushResourceHolder() {}
+    virtual ~wxD2DBrushResourceHolder() = default;
 protected:
     const wxBrush m_sourceBrush;
 };

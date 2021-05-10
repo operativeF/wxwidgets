@@ -50,7 +50,7 @@ public:
 
 private:
     // This class has no public ctors, use Get() instead.
-    wxUIActionSimulatorMSWImpl() { }
+    wxUIActionSimulatorMSWImpl() = default;
 
     wxDECLARE_NO_COPY_CLASS(wxUIActionSimulatorMSWImpl);
 };

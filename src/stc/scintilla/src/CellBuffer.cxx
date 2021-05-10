@@ -372,8 +372,7 @@ CellBuffer::CellBuffer() {
 	collectingUndo = true;
 }
 
-CellBuffer::~CellBuffer() {
-}
+CellBuffer::~CellBuffer() = default;
 
 char CellBuffer::CharAt(int position) const {
 	return substance.ValueAt(position);

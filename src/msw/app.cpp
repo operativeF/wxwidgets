@@ -150,8 +150,7 @@ class wxOleInitModule : public wxModule
 {
 public:
     wxOleInitModule()
-    {
-    }
+    = default;
 
     virtual bool OnInit() wxOVERRIDE
     {
@@ -784,8 +783,7 @@ wxApp::wxApp()
 }
 
 wxApp::~wxApp()
-{
-}
+= default;
 
 // ----------------------------------------------------------------------------
 // wxApp idle handling

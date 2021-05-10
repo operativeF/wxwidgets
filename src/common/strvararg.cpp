@@ -301,7 +301,7 @@ public:
         }
     }
 
-    virtual ~wxFormatConverterBase() {}
+    virtual ~wxFormatConverterBase() = default;
 
 protected:
     enum SizeModifier

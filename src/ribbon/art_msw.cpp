@@ -299,8 +299,7 @@ wxRibbonMSWArtProvider::wxRibbonMSWArtProvider(bool set_colour_scheme)
 }
 
 wxRibbonMSWArtProvider::~wxRibbonMSWArtProvider()
-{
-}
+= default;
 
 void wxRibbonMSWArtProvider::GetColourScheme(
                          wxColour* primary,

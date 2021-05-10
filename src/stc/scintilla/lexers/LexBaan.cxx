@@ -391,11 +391,9 @@ class LexerBaan : public ILexer {
 	OptionsBaan options;
 	OptionSetBaan osBaan;
 public:
-	LexerBaan() {
-	}
+	LexerBaan() = default;
 
-	virtual ~LexerBaan() {
-	}
+	virtual ~LexerBaan() = default;
 
 	int SCI_METHOD Version() const {
 		return lvOriginal;

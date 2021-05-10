@@ -92,8 +92,7 @@ bool wxGauge::Create(wxWindow *parent,
 }
 
 wxGauge::~wxGauge()
-{
-}
+= default;
 
 WXDWORD wxGauge::MSWGetStyle(long style, WXDWORD *exstyle) const
 {

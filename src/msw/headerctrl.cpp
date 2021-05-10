@@ -57,8 +57,7 @@ class wxMSWHeaderCtrlCustomDraw : public wxMSWImpl::CustomDraw
 {
 public:
     wxMSWHeaderCtrlCustomDraw()
-    {
-    }
+    = default;
 
     // Make this field public to let wxHeaderCtrl update it directly when its
     // attributes change.

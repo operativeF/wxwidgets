@@ -46,8 +46,7 @@ using namespace Scintilla;
 
 // Options used for LexerVisualProlog
 struct OptionsVisualProlog {
-    OptionsVisualProlog() {
-    }
+    OptionsVisualProlog() = default;
 };
 
 static const char *const visualPrologWordLists[] = {
@@ -72,10 +71,8 @@ class LexerVisualProlog : public ILexer {
     OptionsVisualProlog options;
     OptionSetVisualProlog osVisualProlog;
 public:
-    LexerVisualProlog() {
-    }
-    virtual ~LexerVisualProlog() {
-    }
+    LexerVisualProlog() = default;
+    virtual ~LexerVisualProlog() = default;
     void SCI_METHOD Release() {
         delete this;
     }

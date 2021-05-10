@@ -395,8 +395,7 @@ void wxWebRequestImpl::ProcessStateEvent(wxWebRequest::State state, const wxStri
 //
 
 wxWebRequest::wxWebRequest()
-{
-}
+= default;
 
 wxWebRequest::wxWebRequest(const wxWebRequestImplPtr& impl)
     : m_impl(impl)
@@ -404,19 +403,14 @@ wxWebRequest::wxWebRequest(const wxWebRequestImplPtr& impl)
 }
 
 wxWebRequest::wxWebRequest(const wxWebRequest& other)
-    : m_impl(other.m_impl)
-{
-}
+     
+= default;
 
 wxWebRequest& wxWebRequest::operator=(const wxWebRequest& other)
-{
-    m_impl = other.m_impl;
-    return *this;
-}
+= default;
 
 wxWebRequest::~wxWebRequest()
-{
-}
+= default;
 
 void wxWebRequest::SetHeader(const wxString& name, const wxString& value)
 {
@@ -572,8 +566,7 @@ bool wxWebRequest::IsPeerVerifyDisabled() const
 //
 
 wxWebAuthChallenge::wxWebAuthChallenge()
-{
-}
+= default;
 
 wxWebAuthChallenge::wxWebAuthChallenge(const wxWebAuthChallengeImplPtr& impl)
     : m_impl(impl)
@@ -581,19 +574,14 @@ wxWebAuthChallenge::wxWebAuthChallenge(const wxWebAuthChallengeImplPtr& impl)
 }
 
 wxWebAuthChallenge::wxWebAuthChallenge(const wxWebAuthChallenge& other)
-    : m_impl(other.m_impl)
-{
-}
+     
+= default;
 
 wxWebAuthChallenge& wxWebAuthChallenge::operator=(const wxWebAuthChallenge& other)
-{
-    m_impl = other.m_impl;
-    return *this;
-}
+= default;
 
 wxWebAuthChallenge::~wxWebAuthChallenge()
-{
-}
+= default;
 
 wxWebAuthChallenge::Source wxWebAuthChallenge::GetSource() const
 {
@@ -781,8 +769,7 @@ void wxWebResponseImpl::Finalize()
 //
 
 wxWebResponse::wxWebResponse()
-{
-}
+= default;
 
 wxWebResponse::wxWebResponse(const wxWebResponseImplPtr& impl)
     : m_impl(impl)
@@ -790,19 +777,14 @@ wxWebResponse::wxWebResponse(const wxWebResponseImplPtr& impl)
 }
 
 wxWebResponse::wxWebResponse(const wxWebResponse& other)
-    : m_impl(other.m_impl)
-{
-}
+     
+= default;
 
 wxWebResponse& wxWebResponse::operator=(const wxWebResponse& other)
-{
-    m_impl = other.m_impl;
-    return *this;
-}
+= default;
 
 wxWebResponse::~wxWebResponse()
-{
-}
+= default;
 
 wxFileOffset wxWebResponse::GetContentLength() const
 {
@@ -910,8 +892,7 @@ wxString wxWebSessionImpl::GetTempDir() const
 //
 
 wxWebSession::wxWebSession()
-{
-}
+= default;
 
 wxWebSession::wxWebSession(const wxWebSessionImplPtr& impl)
     : m_impl(impl)
@@ -919,19 +900,14 @@ wxWebSession::wxWebSession(const wxWebSessionImplPtr& impl)
 }
 
 wxWebSession::wxWebSession(const wxWebSession& other)
-    : m_impl(other.m_impl)
-{
-}
+     
+= default;
 
 wxWebSession& wxWebSession::operator=(const wxWebSession& other)
-{
-    m_impl = other.m_impl;
-    return *this;
-}
+= default;
 
 wxWebSession::~wxWebSession()
-{
-}
+= default;
 
 // static
 wxWebSession& wxWebSession::GetDefault()
@@ -1074,8 +1050,7 @@ class WebRequestModule : public wxModule
 {
 public:
     WebRequestModule()
-    {
-    }
+    = default;
 
     virtual bool OnInit() wxOVERRIDE
     {

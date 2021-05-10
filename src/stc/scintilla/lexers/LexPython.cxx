@@ -219,8 +219,7 @@ public:
 	explicit LexerPython() :
 		subStyles(styleSubable, 0x80, 0x40, 0) {
 	}
-	virtual ~LexerPython() {
-	}
+	virtual ~LexerPython() = default;
 	void SCI_METHOD Release() {
 		delete this;
 	}

@@ -70,8 +70,7 @@ ScintillaBase::ScintillaBase() {
 	multiAutoCMode = SC_MULTIAUTOC_ONCE;
 }
 
-ScintillaBase::~ScintillaBase() {
-}
+ScintillaBase::~ScintillaBase() = default;
 
 void ScintillaBase::Finalise() {
 	Editor::Finalise();

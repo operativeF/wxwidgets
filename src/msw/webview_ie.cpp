@@ -1862,8 +1862,7 @@ wxIEContainer::wxIEContainer(wxWindow *parent, REFIID iid, IUnknown *pUnk,
 }
 
 wxIEContainer::~wxIEContainer()
-{
-}
+= default;
 
 bool wxIEContainer::QueryClientSiteInterface(REFIID iid, void **_interface,
                                              const char *&desc)

@@ -183,8 +183,7 @@ wxTaskBarIcon *wxBalloonNotifMsgImpl::UseTaskBarIcon(wxTaskBarIcon *icon)
 }
 
 wxBalloonNotifMsgImpl::~wxBalloonNotifMsgImpl()
-{
-}
+= default;
 
 void wxBalloonNotifMsgImpl::OnIconHidden()
 {

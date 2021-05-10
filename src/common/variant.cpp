@@ -84,8 +84,7 @@ wxVariant::wxVariant(wxVariantData* data, const wxString& name) // User-defined 
 }
 
 wxVariant::~wxVariant()
-{
-}
+= default;
 
 wxObjectRefData *wxVariant::CreateRefData() const
 {
@@ -190,8 +189,7 @@ wxAnyToVariantRegistration::
 }
 
 wxAnyToVariantRegistration::~wxAnyToVariantRegistration()
-{
-}
+= default;
 
 wxVariant::wxVariant(const wxAny& any)
     : wxObject()
@@ -835,7 +833,7 @@ wxUniChar wxVariant::GetChar() const
 class WXDLLIMPEXP_BASE wxVariantDataString: public wxVariantData
 {
 public:
-    wxVariantDataString() { }
+    wxVariantDataString() = default;
     wxVariantDataString(const wxString& value) : m_value(value) { }
 
     inline wxString GetValue() const { return m_value; }
@@ -1030,7 +1028,7 @@ wxString wxVariant::GetString() const
 class wxVariantDataWxObjectPtr: public wxVariantData
 {
 public:
-    wxVariantDataWxObjectPtr() { }
+    wxVariantDataWxObjectPtr() = default;
     wxVariantDataWxObjectPtr(wxObject* value) { m_value = value; }
 
     inline wxObject* GetValue() const { return m_value; }
@@ -1154,7 +1152,7 @@ wxObject* wxVariant::GetWxObjectPtr() const
 class wxVariantDataVoidPtr: public wxVariantData
 {
 public:
-    wxVariantDataVoidPtr() { }
+    wxVariantDataVoidPtr() = default;
     wxVariantDataVoidPtr(void* value) { m_value = value; }
 
     inline void* GetValue() const { return m_value; }
@@ -1269,7 +1267,7 @@ void* wxVariant::GetVoidPtr() const
 class wxVariantDataDateTime: public wxVariantData
 {
 public:
-    wxVariantDataDateTime() { }
+    wxVariantDataDateTime() = default;
     wxVariantDataDateTime(const wxDateTime& value) : m_value(value) { }
 
     inline wxDateTime GetValue() const { return m_value; }
@@ -1402,7 +1400,7 @@ wxDateTime wxVariant::GetDateTime() const
 class wxVariantDataArrayString: public wxVariantData
 {
 public:
-    wxVariantDataArrayString() { }
+    wxVariantDataArrayString() = default;
     wxVariantDataArrayString(const wxArrayString& value) : m_value(value) { }
 
     wxArrayString GetValue() const { return m_value; }
@@ -1927,7 +1925,7 @@ wxULongLong wxVariant::GetULongLong() const
 class WXDLLIMPEXP_BASE wxVariantDataList: public wxVariantData
 {
 public:
-    wxVariantDataList() {}
+    wxVariantDataList() = default;
     wxVariantDataList(const wxVariantList& list);
     virtual ~wxVariantDataList();
 

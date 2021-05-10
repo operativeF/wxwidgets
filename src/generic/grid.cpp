@@ -259,8 +259,7 @@ void wxGridCellWorker::SetParameters(const wxString& WXUNUSED(params))
 }
 
 wxGridCellWorker::~wxGridCellWorker()
-{
-}
+= default;
 
 // ----------------------------------------------------------------------------
 // wxGridHeaderLabelsRenderer and related classes

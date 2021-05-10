@@ -40,7 +40,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxBufferedPaintDC, wxBufferedDC);
 class wxSharedDCBufferManager : public wxModule
 {
 public:
-    wxSharedDCBufferManager() { }
+    wxSharedDCBufferManager() = default;
 
     virtual bool OnInit() wxOVERRIDE { return true; }
     virtual void OnExit() wxOVERRIDE { wxDELETE(ms_buffer); }

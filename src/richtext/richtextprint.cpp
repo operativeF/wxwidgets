@@ -39,8 +39,7 @@ wxRichTextPrintout::wxRichTextPrintout(const wxString& title) : wxPrintout(title
 }
 
 wxRichTextPrintout::~wxRichTextPrintout()
-{
-}
+= default;
 
 void wxRichTextPrintout::OnPreparePrinting()
 {

@@ -120,8 +120,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxPGEditor, wxObject);
 
 
 wxPGEditor::~wxPGEditor()
-{
-}
+= default;
 
 wxString wxPGEditor::GetName() const
 {
@@ -1542,8 +1541,7 @@ wxBEGIN_EVENT_TABLE(wxSimpleCheckBox, wxControl)
 wxEND_EVENT_TABLE()
 
 wxSimpleCheckBox::~wxSimpleCheckBox()
-{
-}
+= default;
 
 void wxSimpleCheckBox::OnPaint( wxPaintEvent& WXUNUSED(event) )
 {

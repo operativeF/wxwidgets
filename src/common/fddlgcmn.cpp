@@ -57,8 +57,7 @@ void wxFindReplaceData::Init()
 // ----------------------------------------------------------------------------
 
 wxFindReplaceDialogBase::~wxFindReplaceDialogBase()
-{
-}
+= default;
 
 void wxFindReplaceDialogBase::Send(wxFindDialogEvent& event)
 {

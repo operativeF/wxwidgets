@@ -138,8 +138,7 @@ wxOverlayImpl::wxOverlayImpl()
 }
 
 wxOverlayImpl::~wxOverlayImpl()
-{
-}
+= default;
 
 bool wxOverlayImpl::IsOk()
 {

@@ -121,8 +121,7 @@ class LexerRust : public ILexer {
 	OptionsRust options;
 	OptionSetRust osRust;
 public:
-	virtual ~LexerRust() {
-	}
+	virtual ~LexerRust() = default;
 	void SCI_METHOD Release() {
 		delete this;
 	}

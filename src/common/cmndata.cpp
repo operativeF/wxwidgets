@@ -221,8 +221,7 @@ wxPrintDialogData::wxPrintDialogData(const wxPrintData& printData)
 }
 
 wxPrintDialogData::~wxPrintDialogData()
-{
-}
+= default;
 
 void wxPrintDialogData::operator=(const wxPrintDialogData& data)
 {
@@ -294,8 +293,7 @@ wxPageSetupDialogData::wxPageSetupDialogData(const wxPrintData& printData)
 }
 
 wxPageSetupDialogData::~wxPageSetupDialogData()
-{
-}
+= default;
 
 wxPageSetupDialogData& wxPageSetupDialogData::operator=(const wxPageSetupDialogData& data)
 {

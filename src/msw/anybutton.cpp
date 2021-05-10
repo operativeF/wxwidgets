@@ -101,8 +101,8 @@ extern wxWindowMSW *wxWindowBeingErased; // From src/msw/window.cpp
 class wxButtonImageData: public wxObject
 {
 public:
-    wxButtonImageData() { }
-    virtual ~wxButtonImageData() { }
+    wxButtonImageData() = default;
+    virtual ~wxButtonImageData() = default;
 
     virtual wxBitmap GetBitmap(wxAnyButton::State which) const = 0;
     virtual void SetBitmap(const wxBitmap& bitmap, wxAnyButton::State which) = 0;

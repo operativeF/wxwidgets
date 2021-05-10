@@ -2015,7 +2015,7 @@ class wxLocaleModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxLocaleModule);
     public:
-        wxLocaleModule() {}
+        wxLocaleModule() = default;
 
         bool OnInit() wxOVERRIDE
         {

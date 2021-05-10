@@ -221,7 +221,7 @@ public:
         m_hDCBuffer = nullptr;
         m_hWndParent = (HWND)win->GetHWND();
     }
-    virtual ~FrameSite(){}
+    virtual ~FrameSite()= default;
     //***************************IDispatch*****************************
     HRESULT STDMETHODCALLTYPE GetIDsOfNames(REFIID, OLECHAR ** ,
                                             unsigned int , LCID ,
@@ -683,8 +683,7 @@ public:
     wxActiveXEvents(wxActiveXContainer *ax) : m_activeX(ax), m_haveCustomId(false) {}
     wxActiveXEvents(wxActiveXContainer *ax, REFIID iid) : m_activeX(ax), m_customId(iid), m_haveCustomId(true) {}
     virtual ~wxActiveXEvents()
-    {
-    }
+    = default;
 
     // IDispatch
     STDMETHODIMP GetIDsOfNames(REFIID, OLECHAR**, unsigned int, LCID, DISPID*) wxOVERRIDE

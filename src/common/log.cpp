@@ -158,7 +158,7 @@ WX_DEFINE_GLOBAL_VAR(wxStringToNumHashMap, ComponentLevels);
 class wxLogOutputBest : public wxLog
 {
 public:
-    wxLogOutputBest() { }
+    wxLogOutputBest() = default;
 
 protected:
     virtual void DoLogText(const wxString& msg) wxOVERRIDE

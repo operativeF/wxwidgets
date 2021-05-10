@@ -2481,8 +2481,7 @@ class BuiltinRegex : public RegexSearchBase {
 public:
 	explicit BuiltinRegex(CharClassify *charClassTable) : search(charClassTable) {}
 
-	virtual ~BuiltinRegex() {
-	}
+	virtual ~BuiltinRegex() = default;
 
 	virtual long FindText(Document *doc, int minPos, int maxPos, const char *s,
                         bool caseSensitive, bool word, bool wordStart, int flags,
@@ -2559,8 +2558,7 @@ public:
 		pdoc(pdoc_), end(end_) {
 	}
 
-	virtual ~DocumentIndexer() {
-	}
+	virtual ~DocumentIndexer() = default;
 
 	virtual char CharAt(int index) {
 		if (index < 0 || index >= end)

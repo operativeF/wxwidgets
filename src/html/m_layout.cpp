@@ -60,7 +60,7 @@ FORCE_LINK_ME(m_layout)
 class wxHtmlPageBreakCell : public wxHtmlCell
 {
 public:
-    wxHtmlPageBreakCell() {}
+    wxHtmlPageBreakCell() = default;
 
     bool AdjustPagebreak(int* pagebreak, int pageHeight) const wxOVERRIDE;
 

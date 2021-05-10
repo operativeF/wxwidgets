@@ -424,8 +424,7 @@ bool wxGenericDirCtrl::Create(wxWindow *parent,
 }
 
 wxGenericDirCtrl::~wxGenericDirCtrl()
-{
-}
+= default;
 
 void wxGenericDirCtrl::Init()
 {
@@ -1385,7 +1384,7 @@ class wxFileIconsTableModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxFileIconsTableModule);
 public:
-    wxFileIconsTableModule() {}
+    wxFileIconsTableModule() = default;
     bool OnInit() wxOVERRIDE { wxTheFileIconsTable = new wxFileIconsTable; return true; }
     void OnExit() wxOVERRIDE
     {

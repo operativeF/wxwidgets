@@ -31,8 +31,7 @@ wxAuiMSWTabArt::wxAuiMSWTabArt()
 }
 
 wxAuiMSWTabArt::~wxAuiMSWTabArt()
-{
-}
+= default;
 
 wxAuiTabArt* wxAuiMSWTabArt::Clone()
 {

@@ -171,8 +171,7 @@ wxIDropTarget::wxIDropTarget(wxDropTarget *pTarget)
 }
 
 wxIDropTarget::~wxIDropTarget()
-{
-}
+= default;
 
 BEGIN_IID_TABLE(wxIDropTarget)
   ADD_IID(Unknown)

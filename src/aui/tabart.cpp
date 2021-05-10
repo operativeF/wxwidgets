@@ -185,8 +185,7 @@ wxAuiGenericTabArt::wxAuiGenericTabArt()
 }
 
 wxAuiGenericTabArt::~wxAuiGenericTabArt()
-{
-}
+= default;
 
 void wxAuiGenericTabArt::UpdateColoursFromSystem()
 {
@@ -934,8 +933,7 @@ wxAuiSimpleTabArt::wxAuiSimpleTabArt()
 }
 
 wxAuiSimpleTabArt::~wxAuiSimpleTabArt()
-{
-}
+= default;
 
 wxAuiTabArt* wxAuiSimpleTabArt::Clone()
 {

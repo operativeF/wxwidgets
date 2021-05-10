@@ -41,7 +41,7 @@ namespace
 class wxStandardPathsDefault : public wxStandardPaths
 {
 public:
-    wxStandardPathsDefault() { }
+    wxStandardPathsDefault() = default;
 };
 
 static wxStandardPathsDefault gs_stdPaths;

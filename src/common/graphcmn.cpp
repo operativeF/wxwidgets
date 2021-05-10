@@ -62,8 +62,7 @@ wxGraphicsObjectRefData* wxGraphicsObjectRefData::Clone() const
 }
 
 wxGraphicsObject::wxGraphicsObject()
-{
-}
+= default;
 
 wxGraphicsObject::wxGraphicsObject( wxGraphicsRenderer* renderer )
 {
@@ -71,8 +70,7 @@ wxGraphicsObject::wxGraphicsObject( wxGraphicsRenderer* renderer )
 }
 
 wxGraphicsObject::~wxGraphicsObject()
-{
-}
+= default;
 
 bool wxGraphicsObject::IsNull() const
 {
@@ -576,8 +574,7 @@ wxGraphicsContext::wxGraphicsContext(wxGraphicsRenderer* renderer,
 }
 
 wxGraphicsContext::~wxGraphicsContext()
-{
-}
+= default;
 
 bool wxGraphicsContext::StartDoc(const wxString& WXUNUSED(message))
 {

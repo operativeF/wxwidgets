@@ -35,8 +35,7 @@ wxFileProto::wxFileProto()
 }
 
 wxFileProto::~wxFileProto()
-{
-}
+= default;
 
 wxInputStream *wxFileProto::GetInputStream(const wxString& path)
 {

@@ -85,11 +85,7 @@ struct FileInfo
 
     FileInfo(const FileInfo& other) { *this = other; }
     FileInfo& operator=(const FileInfo& other)
-    {
-        m_flags = other.m_flags;
-        m_type = other.m_type;
-        return *this;
-    }
+    = default;
 
     unsigned m_flags;
     wxFSVolumeKind m_type;

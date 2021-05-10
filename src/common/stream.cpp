@@ -682,8 +682,7 @@ wxStreamBase::wxStreamBase()
 }
 
 wxStreamBase::~wxStreamBase()
-{
-}
+= default;
 
 size_t wxStreamBase::GetSize() const
 {
@@ -1037,12 +1036,10 @@ wxFileOffset wxInputStream::TellI() const
 wxIMPLEMENT_ABSTRACT_CLASS(wxOutputStream, wxStreamBase);
 
 wxOutputStream::wxOutputStream()
-{
-}
+= default;
 
 wxOutputStream::~wxOutputStream()
-{
-}
+= default;
 
 size_t wxOutputStream::OnSysWrite(const void * WXUNUSED(buffer),
                                   size_t WXUNUSED(bufsize))
