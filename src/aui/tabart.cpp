@@ -177,7 +177,7 @@ wxAuiGenericTabArt::wxAuiGenericTabArt()
     m_selectedFont.SetWeight(wxFONTWEIGHT_BOLD);
     m_measuringFont = m_selectedFont;
 
-    m_fixedTabWidth = wxWindow::FromDIP(100, NULL);
+    m_fixedTabWidth = wxWindow::FromDIP(100, nullptr);
     m_tabCtrlHeight = 0;
     m_flags = 0;
 
@@ -234,9 +234,9 @@ void wxAuiGenericTabArt::SetFlags(unsigned int flags)
 void wxAuiGenericTabArt::SetSizingInfo(const wxSize& tab_ctrl_size,
                                        size_t tab_count)
 {
-    m_fixedTabWidth = wxWindow::FromDIP(100, NULL);
+    m_fixedTabWidth = wxWindow::FromDIP(100, nullptr);
 
-    int tot_width = (int)tab_ctrl_size.x - GetIndentSize() - wxWindow::FromDIP(4, NULL);
+    int tot_width = (int)tab_ctrl_size.x - GetIndentSize() - wxWindow::FromDIP(4, nullptr);
 
     if (m_flags & wxAUI_NB_CLOSE_BUTTON)
         tot_width -= m_activeCloseBmp.GetScaledWidth();
@@ -249,12 +249,12 @@ void wxAuiGenericTabArt::SetSizingInfo(const wxSize& tab_ctrl_size,
     }
 
 
-    m_fixedTabWidth = wxMax(m_fixedTabWidth, wxWindow::FromDIP(100, NULL));
+    m_fixedTabWidth = wxMax(m_fixedTabWidth, wxWindow::FromDIP(100, nullptr));
 
     if (m_fixedTabWidth > tot_width/2)
         m_fixedTabWidth = tot_width/2;
 
-    m_fixedTabWidth = wxMin(m_fixedTabWidth, wxWindow::FromDIP(220, NULL));
+    m_fixedTabWidth = wxMin(m_fixedTabWidth, wxWindow::FromDIP(220, nullptr));
 
     m_tabCtrlHeight = tab_ctrl_size.y;
 }
@@ -639,7 +639,7 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
 
 int wxAuiGenericTabArt::GetIndentSize()
 {
-    return wxWindow::FromDIP(5, NULL);
+    return wxWindow::FromDIP(5, nullptr);
 }
 
 int wxAuiGenericTabArt::GetBorderWidth(wxWindow* wnd)
@@ -796,7 +796,7 @@ int wxAuiGenericTabArt::ShowDropDown(wxWindow* wnd,
         if (caption.IsEmpty())
             caption = wxT(" ");
 
-        wxMenuItem* item = new wxMenuItem(NULL, 1000+i, caption);
+        wxMenuItem* item = new wxMenuItem(nullptr, 1000+i, caption);
         if (page.bitmap.IsOk())
             item->SetBitmap(page.bitmap);
         menuPopup.Append(item);
@@ -917,7 +917,7 @@ wxAuiSimpleTabArt::wxAuiSimpleTabArt()
     m_measuringFont = m_selectedFont;
 
     m_flags = 0;
-    m_fixedTabWidth = wxWindow::FromDIP(100, NULL);
+    m_fixedTabWidth = wxWindow::FromDIP(100, nullptr);
 
     wxColour baseColour = wxSystemSettings::GetColour(wxSYS_COLOUR_3DFACE);
 
@@ -950,9 +950,9 @@ void wxAuiSimpleTabArt::SetFlags(unsigned int flags)
 void wxAuiSimpleTabArt::SetSizingInfo(const wxSize& tab_ctrl_size,
                                       size_t tab_count)
 {
-    m_fixedTabWidth = wxWindow::FromDIP(100, NULL);
+    m_fixedTabWidth = wxWindow::FromDIP(100, nullptr);
 
-    int tot_width = (int)tab_ctrl_size.x - GetIndentSize() - wxWindow::FromDIP(4, NULL);
+    int tot_width = (int)tab_ctrl_size.x - GetIndentSize() - wxWindow::FromDIP(4, nullptr);
 
     if (m_flags & wxAUI_NB_CLOSE_BUTTON)
         tot_width -= m_activeCloseBmp.GetScaledWidth();
@@ -965,12 +965,12 @@ void wxAuiSimpleTabArt::SetSizingInfo(const wxSize& tab_ctrl_size,
     }
 
 
-    m_fixedTabWidth = wxMax(m_fixedTabWidth, wxWindow::FromDIP(100, NULL));
+    m_fixedTabWidth = wxMax(m_fixedTabWidth, wxWindow::FromDIP(100, nullptr));
 
     if (m_fixedTabWidth > tot_width/2)
         m_fixedTabWidth = tot_width/2;
 
-    m_fixedTabWidth = wxMin(m_fixedTabWidth, wxWindow::FromDIP(220, NULL));
+    m_fixedTabWidth = wxMin(m_fixedTabWidth, wxWindow::FromDIP(220, nullptr));
 }
 
 void wxAuiSimpleTabArt::SetColour(const wxColour& colour)

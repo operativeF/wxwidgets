@@ -657,7 +657,7 @@ wxPathOnly (wxChar *path)
         int l = wxStrlen(path);
         int i = l - 1;
         if ( i >= _MAXPATHLEN )
-            return NULL;
+            return nullptr;
 
         // Local copy
         wxStrcpy (buf, path);
@@ -692,7 +692,7 @@ wxPathOnly (wxChar *path)
         }
 #endif
     }
-    return NULL;
+    return nullptr;
 }
 
 // Return just the directory, or NULL if no directory
@@ -1137,7 +1137,7 @@ static wxString gs_dirPath;
 
 wxString wxFindFirstFile(const wxString& spec, int flags)
 {
-    wxFileName::SplitPath(spec, &gs_dirPath, NULL, NULL);
+    wxFileName::SplitPath(spec, &gs_dirPath, nullptr, nullptr);
     if ( gs_dirPath.empty() )
         gs_dirPath = wxT(".");
     if ( !wxEndsWithPathSeparator(gs_dirPath ) )
@@ -1207,9 +1207,9 @@ wxChar *wxDoGetCwd(wxChar *buf, int sz)
     #endif
 
     #ifdef HAVE_WGETCWD
-            char *cbuf = NULL; // never really used because needsANSI will always be false
+            char *cbuf = nullptr; // never really used because needsANSI will always be false
             {
-                ok = _wgetcwd(buf, sz) != NULL;
+                ok = _wgetcwd(buf, sz) != nullptr;
                 needsANSI = false;
             }
     #endif
@@ -1218,7 +1218,7 @@ wxChar *wxDoGetCwd(wxChar *buf, int sz)
 #endif // wxUSE_UNICODE
     {
     #if defined(_MSC_VER) || defined(__MINGW32__)
-        ok = _getcwd(cbuf, sz) != NULL;
+        ok = _getcwd(cbuf, sz) != nullptr;
     #else // !Win32/VC++ !Mac
         ok = getcwd(cbuf, sz) != NULL;
     #endif // platform
@@ -1364,7 +1364,7 @@ void WXDLLIMPEXP_BASE wxSplitPath(const wxString& fileName,
 time_t WXDLLIMPEXP_BASE wxFileModificationTime(const wxString& filename)
 {
     wxDateTime mtime;
-    if ( !wxFileName(filename).GetTimes(NULL, &mtime, NULL) )
+    if ( !wxFileName(filename).GetTimes(nullptr, &mtime, nullptr) )
         return (time_t)-1;
 
     return mtime.GetTicks();
@@ -1501,12 +1501,12 @@ static bool wxCheckWin32Permission(const wxString& path, DWORD access)
                     path.t_str(),
                     access,
                     FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
-                    NULL,
+                    nullptr,
                     OPEN_EXISTING,
                     dwAttr & FILE_ATTRIBUTE_DIRECTORY
                         ? FILE_FLAG_BACKUP_SEMANTICS
                         : 0,
-                    NULL
+                    nullptr
                  );
     if ( h != INVALID_HANDLE_VALUE )
         CloseHandle(h);
@@ -1670,8 +1670,8 @@ bool wxMatchWild( const wxString& pat, const wxString& text, bool dot_special )
 
     const wxChar *m = pat.c_str(),
     *n = text.c_str(),
-    *ma = NULL,
-    *na = NULL;
+    *ma = nullptr,
+    *na = nullptr;
     int just = 0,
     acount = 0,
     count = 0;

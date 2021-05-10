@@ -182,8 +182,8 @@ static const char * const MMIXALWordListDesc[] = {
 	"Operation Codes",
 	"Special Register",
 	"Predefined Symbols",
-	0
+	nullptr
 };
 
-LexerModule lmMMIXAL(SCLEX_MMIXAL, ColouriseMMIXALDoc, "mmixal", 0, MMIXALWordListDesc);
+LexerModule lmMMIXAL(SCLEX_MMIXAL, ColouriseMMIXALDoc, "mmixal", nullptr, MMIXALWordListDesc);
 

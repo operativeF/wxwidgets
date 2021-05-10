@@ -78,7 +78,7 @@ wxWindowsPrinter::wxWindowsPrinter(wxPrintDialogData *data)
 bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt)
 {
     sm_abortIt = false;
-    sm_abortWindow = NULL;
+    sm_abortWindow = nullptr;
 
     if (!printout)
     {
@@ -92,7 +92,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
         m_printDialogData.SetMaxPage(9999);
 
     // Create a suitable device context
-    wxPrinterDC *dc wxDUMMY_INITIALIZE(NULL);
+    wxPrinterDC *dc wxDUMMY_INITIALIZE(nullptr);
     if (prompt)
     {
         dc = wxDynamicCast(PrintDialog(parent), wxPrinterDC);
@@ -236,7 +236,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
 
 wxDC *wxWindowsPrinter::PrintDialog(wxWindow *parent)
 {
-    wxDC *dc = NULL;
+    wxDC *dc = nullptr;
 
     wxWindowsPrintDialog dialog(parent, & m_printDialogData);
     int ret = dialog.ShowModal();
@@ -245,7 +245,7 @@ wxDC *wxWindowsPrinter::PrintDialog(wxWindow *parent)
     {
         dc = dialog.GetPrintDC();
         m_printDialogData = dialog.GetPrintDialogData();
-        if (dc == NULL)
+        if (dc == nullptr)
             sm_lastError = wxPRINTER_ERROR;
         else
             sm_lastError = wxPRINTER_NO_ERROR;
@@ -430,7 +430,7 @@ BOOL CALLBACK wxAbortProc(HDC WXUNUSED(hdc), int WXUNUSED(error))
 
     /* Process messages intended for the abort dialog box */
 
-    while (!wxPrinterBase::sm_abortIt && ::PeekMessage(&msg, 0, 0, 0, TRUE))
+    while (!wxPrinterBase::sm_abortIt && ::PeekMessage(&msg, nullptr, 0, 0, TRUE))
         if (!IsDialogMessage((HWND) wxPrinterBase::sm_abortWindow->GetHWND(), &msg)) {
             TranslateMessage(&msg);
             DispatchMessage(&msg);

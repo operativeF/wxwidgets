@@ -44,10 +44,10 @@ static const char * const spiceWordListDesc[] = {
     "Keywords",        // SPICE command
     "Keywords2",    // SPICE functions
     "Keywords3",    // SPICE params
-    0
+    nullptr
 };
 
-LexerModule lmSpice(SCLEX_SPICE, ColouriseDocument, "spice", NULL, spiceWordListDesc);
+LexerModule lmSpice(SCLEX_SPICE, ColouriseDocument, "spice", nullptr, spiceWordListDesc);
 
 /*
  * Implementation

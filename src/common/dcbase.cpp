@@ -87,7 +87,7 @@
 // wxDCFactory
 //----------------------------------------------------------------------------
 
-wxDCFactory *wxDCFactory::m_factory = NULL;
+wxDCFactory *wxDCFactory::m_factory = nullptr;
 
 void wxDCFactory::Set(wxDCFactory *factory)
 {
@@ -108,7 +108,7 @@ class wxDCFactoryCleanupModule : public wxModule
 {
 public:
     virtual bool OnInit() wxOVERRIDE { return true; }
-    virtual void OnExit() wxOVERRIDE { wxDCFactory::Set(NULL); }
+    virtual void OnExit() wxOVERRIDE { wxDCFactory::Set(nullptr); }
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxDCFactoryCleanupModule);
@@ -314,7 +314,7 @@ int wxPrinterDC::GetResolution() const
 wxIMPLEMENT_ABSTRACT_CLASS(wxDCImpl, wxObject);
 
 wxDCImpl::wxDCImpl( wxDC *owner )
-        : m_window(NULL)
+        : m_window(nullptr)
         , m_colour(true)
         , m_ok(true)
         , m_clipping(false)
@@ -1266,7 +1266,7 @@ void wxDC::DrawLabel(const wxString& text,
                 if ( alignment & (wxALIGN_RIGHT | wxALIGN_CENTRE_HORIZONTAL) )
                 {
                     wxCoord widthLine;
-                    GetTextExtent(curLine, &widthLine, NULL);
+                    GetTextExtent(curLine, &widthLine, nullptr);
 
                     if ( alignment & wxALIGN_RIGHT )
                     {
@@ -1303,9 +1303,9 @@ void wxDC::DrawLabel(const wxString& text,
             if ( pc - text.begin() == indexAccel )
             {
                 // remember to draw underscore here
-                GetTextExtent(curLine, &startUnderscore, NULL);
+                GetTextExtent(curLine, &startUnderscore, nullptr);
                 curLine += *pc;
-                GetTextExtent(curLine, &endUnderscore, NULL);
+                GetTextExtent(curLine, &endUnderscore, nullptr);
 
                 yUnderscore = y + heightLine;
             }

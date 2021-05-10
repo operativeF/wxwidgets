@@ -609,7 +609,7 @@ static void FoldPascalDoc(Sci_PositionU startPos, Sci_Position length, int initS
 
 static const char * const pascalWordListDesc[] = {
 	"Keywords",
-	0
+	nullptr
 };
 
 LexerModule lmPascal(SCLEX_PASCAL, ColourisePascalDoc, "pascal", FoldPascalDoc, pascalWordListDesc);

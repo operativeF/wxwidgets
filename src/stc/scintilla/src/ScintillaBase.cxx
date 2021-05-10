@@ -418,12 +418,12 @@ int ScintillaBase::AutoCompleteGetCurrentText(char *buffer) const {
 		int item = ac.GetSelection();
 		if (item != -1) {
 			const std::string selected = ac.GetValue(item);
-			if (buffer != NULL)
+			if (buffer != nullptr)
 				memcpy(buffer, selected.c_str(), selected.length()+1);
 			return static_cast<int>(selected.length());
 		}
 	}
-	if (buffer != NULL)
+	if (buffer != nullptr)
 		*buffer = '\0';
 	return 0;
 }
@@ -567,7 +567,7 @@ public:
 #endif
 
 LexState::LexState(Document *pdoc_) : LexInterface(pdoc_) {
-	lexCurrent = 0;
+	lexCurrent = nullptr;
 	performingStyle = false;
 	interfaceVersion = lvOriginal;
 	lexLanguage = SCLEX_CONTAINER;
@@ -576,7 +576,7 @@ LexState::LexState(Document *pdoc_) : LexInterface(pdoc_) {
 LexState::~LexState() {
 	if (instance) {
 		instance->Release();
-		instance = 0;
+		instance = nullptr;
 	}
 }
 
@@ -591,7 +591,7 @@ void LexState::SetLexerModule(const LexerModule *lex) {
 	if (lex != lexCurrent) {
 		if (instance) {
 			instance->Release();
-			instance = 0;
+			instance = nullptr;
 		}
 		interfaceVersion = lvOriginal;
 		lexCurrent = lex;
@@ -606,7 +606,7 @@ void LexState::SetLexerModule(const LexerModule *lex) {
 void LexState::SetLexer(uptr_t wParam) {
 	lexLanguage = static_cast<int>(wParam);
 	if (lexLanguage == SCLEX_CONTAINER) {
-		SetLexerModule(0);
+		SetLexerModule(nullptr);
 	} else {
 		const LexerModule *lex = Catalogue::Find(lexLanguage);
 		if (!lex)
@@ -628,7 +628,7 @@ const char *LexState::DescribeWordListSets() {
 	if (instance) {
 		return instance->DescribeWordListSets();
 	} else {
-		return 0;
+		return nullptr;
 	}
 }
 
@@ -649,7 +649,7 @@ void *LexState::PrivateCall(int operation, void *pointer) {
 	if (pdoc && instance) {
 		return instance->PrivateCall(operation, pointer);
 	} else {
-		return 0;
+		return nullptr;
 	}
 }
 
@@ -657,7 +657,7 @@ const char *LexState::PropertyNames() {
 	if (instance) {
 		return instance->PropertyNames();
 	} else {
-		return 0;
+		return nullptr;
 	}
 }
 
@@ -673,7 +673,7 @@ const char *LexState::DescribeProperty(const char *name) {
 	if (instance) {
 		return instance->DescribeProperty(name);
 	} else {
-		return 0;
+		return nullptr;
 	}
 }
 

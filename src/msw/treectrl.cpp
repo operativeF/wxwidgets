@@ -112,7 +112,7 @@ private:
     wxDECLARE_NO_COPY_CLASS(TreeItemUnlocker);
 };
 
-HTREEITEM TreeItemUnlocker::ms_unlockedItem = NULL;
+HTREEITEM TreeItemUnlocker::ms_unlockedItem = nullptr;
 
 // another helper class: set the variable to true during its lifetime and reset
 // it to false when it is destroyed
@@ -421,7 +421,7 @@ class wxTreeItemParam
 public:
     wxTreeItemParam()
     {
-        m_data = NULL;
+        m_data = nullptr;
 
         for ( size_t n = 0; n < WXSIZEOF(m_images); n++ )
         {
@@ -713,12 +713,12 @@ bool wxTreeTraversal::Traverse(const wxTreeItemId& root, bool recursively)
 
 void wxTreeCtrl::Init()
 {
-    m_textCtrl = NULL;
+    m_textCtrl = nullptr;
     m_hasAnyAttr = false;
 #if wxUSE_DRAGIMAGE
-    m_dragImage = NULL;
+    m_dragImage = nullptr;
 #endif
-    m_pVirtualRoot = NULL;
+    m_pVirtualRoot = nullptr;
     m_dragStarted = false;
     m_focusLost = true;
     m_changingSelection = false;
@@ -915,7 +915,7 @@ void wxTreeCtrl::SetAnyImageList(wxImageList *imageList, int which)
 {
     // no error return
     (void) TreeView_SetImageList(GetHwnd(),
-                                 imageList ? imageList->GetHIMAGELIST() : 0,
+                                 imageList ? imageList->GetHIMAGELIST() : nullptr,
                                  which);
 }
 
@@ -1063,7 +1063,7 @@ void wxTreeCtrl::SetItemImage(const wxTreeItemId& item, int image,
 
 wxTreeItemParam *wxTreeCtrl::GetItemParam(const wxTreeItemId& item) const
 {
-    wxCHECK_MSG( item.IsOk(), NULL, wxT("invalid tree item") );
+    wxCHECK_MSG( item.IsOk(), nullptr, wxT("invalid tree item") );
 
     wxTreeViewItem tvItem(item, TVIF_PARAM);
 
@@ -1076,7 +1076,7 @@ wxTreeItemParam *wxTreeCtrl::GetItemParam(const wxTreeItemId& item) const
     // visible node.
     if ( !DoGetItem(&tvItem) )
     {
-        return NULL;
+        return nullptr;
     }
 
     return (wxTreeItemParam *)tvItem.lParam;
@@ -1096,7 +1096,7 @@ wxTreeItemData *wxTreeCtrl::GetItemData(const wxTreeItemId& item) const
 {
     wxTreeItemParam *data = GetItemParam(item);
 
-    return data ? data->GetData() : NULL;
+    return data ? data->GetData() : nullptr;
 }
 
 void wxTreeCtrl::SetItemData(const wxTreeItemId& item, wxTreeItemData *data)
@@ -1373,7 +1373,7 @@ wxTreeItemId wxTreeCtrl::GetItemParent(const wxTreeItemId& item) const
     if ( IS_VIRTUAL_ROOT(item) )
     {
         // no parent for the virtual root
-        hItem = 0;
+        hItem = nullptr;
     }
     else // normal item
     {
@@ -1526,7 +1526,7 @@ wxTreeItemId wxTreeCtrl::DoInsertAfter(const wxTreeItemId& parent,
     }
     else
     {
-        tvIns.item.pszText = NULL;
+        tvIns.item.pszText = nullptr;
         tvIns.item.cchTextMax = 0;
     }
 
@@ -1559,7 +1559,7 @@ wxTreeItemId wxTreeCtrl::DoInsertAfter(const wxTreeItemId& parent,
                 !TreeView_GetChild(GetHwnd(), HITEM(parent));
 
     HTREEITEM id = TreeView_InsertItem(GetHwnd(), &tvIns);
-    if ( id == 0 )
+    if ( id == nullptr )
     {
         wxLogLastError(wxT("TreeView_InsertItem"));
     }
@@ -1576,7 +1576,7 @@ wxTreeItemId wxTreeCtrl::DoInsertAfter(const wxTreeItemId& parent,
     param->SetItem(id);
 
     // setup wxTreeItemData
-    if ( data != NULL )
+    if ( data != nullptr )
     {
         param->SetData(data);
         data->SetId(id);
@@ -1731,7 +1731,7 @@ void wxTreeCtrl::DeleteAllItems()
     if ( GET_VIRTUAL_ROOT() )
     {
         delete GET_VIRTUAL_ROOT();
-        m_pVirtualRoot = NULL;
+        m_pVirtualRoot = nullptr;
     }
 
     // and all the real items
@@ -2032,11 +2032,11 @@ void wxTreeCtrl::DeleteTextCtrl()
         // if the window still exists before calling UnsubclassWin()
         if ( !::IsWindow(GetHwndOf(m_textCtrl)) )
         {
-            m_textCtrl->SetHWND(0);
+            m_textCtrl->SetHWND(nullptr);
         }
 
         m_textCtrl->UnsubclassWin();
-        m_textCtrl->SetHWND(0);
+        m_textCtrl->SetHWND(nullptr);
         wxDELETE(m_textCtrl);
 
         m_idEdited.Unset();
@@ -2059,7 +2059,7 @@ wxTextCtrl *wxTreeCtrl::EditLabel(const wxTreeItemId& item,
     if ( !hWnd )
     {
         wxDELETE(m_textCtrl);
-        return NULL;
+        return nullptr;
     }
 
     // textctrl is subclassed in MSWOnNotify
@@ -3369,7 +3369,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 
                 event.m_item = info->item.hItem;
                 event.m_label = info->item.pszText;
-                event.m_editCancelled = info->item.pszText == NULL;
+                event.m_editCancelled = info->item.pszText == nullptr;
                 break;
             }
 
@@ -3567,7 +3567,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                             int width, height;
                             m_imageListState->GetSize(0, width, height);
 
-                            HBITMAP hbmpTemp = ::CreateBitmap(width, height, 1, 1, NULL);
+                            HBITMAP hbmpTemp = ::CreateBitmap(width, height, 1, 1, nullptr);
                             int index = ::ImageList_Add(hImageList, hbmpTemp, hbmpTemp);
                             ::DeleteObject(hbmpTemp);
 

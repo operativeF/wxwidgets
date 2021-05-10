@@ -28,7 +28,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxChoicebookXmlHandler, wxXmlResourceHandler);
 wxChoicebookXmlHandler::wxChoicebookXmlHandler()
                        :wxXmlResourceHandler(),
                         m_isInside(false),
-                        m_choicebook(NULL)
+                        m_choicebook(nullptr)
 {
     XRC_ADD_STYLE(wxBK_DEFAULT);
     XRC_ADD_STYLE(wxBK_LEFT);
@@ -58,7 +58,7 @@ wxObject *wxChoicebookXmlHandler::DoCreateResource()
         {
             bool old_ins = m_isInside;
             m_isInside = false;
-            wxObject *item = CreateResFromNode(n, m_choicebook, NULL);
+            wxObject *item = CreateResFromNode(n, m_choicebook, nullptr);
             m_isInside = old_ins;
             wxWindow *wnd = wxDynamicCast(item, wxWindow);
 
@@ -70,7 +70,7 @@ wxObject *wxChoicebookXmlHandler::DoCreateResource()
                 {
                     wxBitmap bmp = GetBitmap(wxT("bitmap"), wxART_OTHER);
                     wxImageList *imgList = m_choicebook->GetImageList();
-                    if ( imgList == NULL )
+                    if ( imgList == nullptr )
                     {
                         imgList = new wxImageList( bmp.GetWidth(), bmp.GetHeight() );
                         m_choicebook->AssignImageList( imgList );
@@ -101,7 +101,7 @@ wxObject *wxChoicebookXmlHandler::DoCreateResource()
         else
         {
             ReportError("choicebookpage must have a window child");
-            return NULL;
+            return nullptr;
         }
     }
 

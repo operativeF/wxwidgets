@@ -320,7 +320,7 @@ static void colorizeSmalltalkDoc(Sci_PositionU startPos, Sci_Position length, in
 
 static const char* const smalltalkWordListDesc[] = {
     "Special selectors",
-    0
+    nullptr
 };
 
-LexerModule lmSmalltalk(SCLEX_SMALLTALK, colorizeSmalltalkDoc, "smalltalk", NULL, smalltalkWordListDesc);
+LexerModule lmSmalltalk(SCLEX_SMALLTALK, colorizeSmalltalkDoc, "smalltalk", nullptr, smalltalkWordListDesc);

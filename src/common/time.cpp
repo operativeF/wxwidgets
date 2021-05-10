@@ -89,7 +89,7 @@ struct tm *wxLocaltime_r(const time_t* ticks, struct tm* temp)
 
   const tm * const t = localtime(ticks);
   if ( !t )
-      return NULL;
+      return nullptr;
 
   memcpy(temp, t, sizeof(struct tm));
   return temp;
@@ -107,7 +107,7 @@ struct tm *wxGmtime_r(const time_t* ticks, struct tm* temp)
 
   const tm * const t = gmtime(ticks);
   if ( !t )
-      return NULL;
+      return nullptr;
 
   memcpy(temp, gmtime(ticks), sizeof(struct tm));
   return temp;
@@ -220,7 +220,7 @@ long wxGetLocalTime()
 // Get UTC time as seconds since 00:00:00, Jan 1st 1970
 long wxGetUTCTime()
 {
-    return (long)time(NULL);
+    return (long)time(nullptr);
 }
 
 #if wxUSE_LONGLONG

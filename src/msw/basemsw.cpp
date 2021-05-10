@@ -82,7 +82,7 @@ WXDWORD wxAppTraits::DoSimpleWaitForThread(WXHANDLE hThread)
 void *wxConsoleAppTraits::BeforeChildWaitLoop()
 {
     // nothing to do here
-    return NULL;
+    return nullptr;
 }
 
 void wxConsoleAppTraits::AfterChildWaitLoop(void * WXUNUSED(data))

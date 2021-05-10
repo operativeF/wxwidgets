@@ -74,10 +74,10 @@ static const int DEFAULT_FIELD_WIDTH = 25;
 
 wxStatusBar::wxStatusBar()
 {
-    SetParent(NULL);
-    m_hWnd = 0;
+    SetParent(nullptr);
+    m_hWnd = nullptr;
     m_windowId = 0;
-    m_pDC = NULL;
+    m_pDC = nullptr;
 }
 
 WXDWORD wxStatusBar::MSWGetStyle(long style, WXDWORD *exstyle) const
@@ -459,7 +459,7 @@ bool wxStatusBar::GetFieldRect(int i, wxRect& rect) const
             r.left -= 2;
         }
 
-        ::GetThemeBackgroundContentRect(theme, NULL,
+        ::GetThemeBackgroundContentRect(theme, nullptr,
                                                               1 /* SP_PANE */, 0,
                                                               &r, &r);
     }
@@ -521,7 +521,7 @@ void wxStatusBar::DoMoveWindow(int x, int y, int width, int height)
         // WM_WINDOWPOSCHANGING since we don't want to change pos/size later
         // we must use SWP_NOCOPYBITS here otherwise it paints incorrectly
         // if other windows are size deferred
-        ::SetWindowPos(GetHwnd(), NULL, x, y, width, height,
+        ::SetWindowPos(GetHwnd(), nullptr, x, y, width, height,
                        SWP_NOZORDER | SWP_NOOWNERZORDER | SWP_NOACTIVATE
                        | SWP_NOCOPYBITS | SWP_NOSENDCHANGING
                        );

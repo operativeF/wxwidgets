@@ -348,7 +348,7 @@ static const char * const sqlWordListDesc[] = {
     "Functions",
     "System Stored Procedures",
     "Operators",
-	0,
+	nullptr,
 };
 
 LexerModule lmMSSQL(SCLEX_MSSQL, ColouriseMSSQLDoc, "mssql", FoldMSSQLDoc, sqlWordListDesc);

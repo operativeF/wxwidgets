@@ -53,7 +53,7 @@ public:
 	const char * SCI_METHOD DescribeProperty(const char *name)
 	{
 		if (strcmp(name, "fold"))
-			return NULL;
+			return nullptr;
 		return "Whether to apply folding to document or not";
 	}
 
@@ -66,7 +66,7 @@ public:
 	}
 	const char * SCI_METHOD DescribeWordListSets()
 	{
-		return NULL;
+		return nullptr;
 	}
 	virtual Sci_Position SCI_METHOD WordListSet(int, const char *)
 	{
@@ -76,7 +76,7 @@ public:
 	virtual void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position lengthDoc, int initStyle, IDocument *pAccess);
 	virtual void * SCI_METHOD PrivateCall(int, void *)
 	{
-		return NULL;
+		return nullptr;
 	}
 
 protected:

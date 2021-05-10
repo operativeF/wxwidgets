@@ -33,7 +33,7 @@ using namespace Scintilla;
 #endif
 
 static const char *const RegistryWordListDesc[] = {
-	0
+	nullptr
 };
 
 struct OptionsRegistry {
@@ -189,7 +189,7 @@ public:
 		return -1;
 	}
 	virtual void *SCI_METHOD PrivateCall(int, void *) {
-		return 0;
+		return nullptr;
 	}
 	static ILexer *LexerFactoryRegistry() {
 		return new LexerRegistry;

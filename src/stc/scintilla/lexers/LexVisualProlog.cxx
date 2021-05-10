@@ -55,7 +55,7 @@ static const char *const visualPrologWordLists[] = {
     "Minor keywords (if, then, try, ...)",
     "Directive keywords without the '#' (include, requires, ...)",
     "Documentation keywords without the '@' (short, detail, ...)",
-    0,
+    nullptr,
 };
 
 struct OptionSetVisualProlog : public OptionSet<OptionsVisualProlog> {
@@ -100,7 +100,7 @@ public:
     void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
 
     void * SCI_METHOD PrivateCall(int, void *) {
-        return 0;
+        return nullptr;
     }
 
     static ILexer *LexerFactoryVisualProlog() {
@@ -116,7 +116,7 @@ Sci_Position SCI_METHOD LexerVisualProlog::PropertySet(const char *key, const ch
 }
 
 Sci_Position SCI_METHOD LexerVisualProlog::WordListSet(int n, const char *wl) {
-    WordList *wordListN = 0;
+    WordList *wordListN = nullptr;
     switch (n) {
     case 0:
         wordListN = &majorKeywords;

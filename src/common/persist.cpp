@@ -29,7 +29,7 @@
 namespace
 {
 
-wxPersistenceManager* gs_manager = NULL;
+wxPersistenceManager* gs_manager = nullptr;
 
 } // anonymous namespace
 

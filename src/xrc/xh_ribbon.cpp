@@ -40,7 +40,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRibbonXmlHandler, wxXmlResourceHandler);
 
 wxRibbonXmlHandler::wxRibbonXmlHandler()
     : wxXmlResourceHandler(),
-      m_isInside(NULL)
+      m_isInside(nullptr)
 {
     XRC_ADD_STYLE(wxRIBBON_BAR_SHOW_PAGE_LABELS);
     XRC_ADD_STYLE(wxRIBBON_BAR_SHOW_PAGE_ICONS);
@@ -202,7 +202,7 @@ wxObject* wxRibbonXmlHandler::Handle_button()
     if ( GetBool(wxT("disabled")) )
             buttonBar->EnableButton(GetID(), false);
 
-    return NULL; // nothing to return
+    return nullptr; // nothing to return
 }
 
 wxObject* wxRibbonXmlHandler::Handle_control()
@@ -269,11 +269,11 @@ wxObject* wxRibbonXmlHandler::Handle_gallery()
 wxObject* wxRibbonXmlHandler::Handle_galleryitem()
 {
     wxRibbonGallery *gallery = wxStaticCast(m_parent, wxRibbonGallery);
-    wxCHECK (gallery, NULL);
+    wxCHECK (gallery, nullptr);
 
     gallery->Append (GetBitmap(), GetID());
 
-    return NULL; // nothing to return
+    return nullptr; // nothing to return
 }
 
 wxObject* wxRibbonXmlHandler::Handle_panel()

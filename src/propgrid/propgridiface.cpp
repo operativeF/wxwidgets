@@ -51,7 +51,7 @@ wxPGProperty* wxPGPropArgCls::GetPtr( wxPropertyGridInterface* iface ) const
     else if ( m_flags & IsWCharPtr )
         return iface->GetPropertyByNameA(m_ptr.wcharName);
 
-    return NULL;
+    return nullptr;
 }
 
 // -----------------------------------------------------------------------
@@ -205,9 +205,9 @@ bool wxPropertyGridInterface::DoClearSelection( bool validation,
     {
         wxPropertyGrid* pg = state->GetGrid();
         if ( pg->GetState() == state )
-            return pg->DoSelectProperty(NULL, selFlags);
+            return pg->DoSelectProperty(nullptr, selFlags);
         else
-            state->DoSetSelection(NULL);
+            state->DoSetSelection(nullptr);
     }
 
     return true;
@@ -381,7 +381,7 @@ void wxPGTypeOperationFailed( const wxPGProperty* p,
                               const wxString& typestr,
                               const wxString& op )
 {
-    wxASSERT( p != NULL );
+    wxASSERT( p != nullptr );
     wxLogError( _("Type operation \"%s\" failed: Property labeled \"%s\" is of type \"%s\", NOT \"%s\"."),
         op, p->GetLabel(), p->GetValue().GetType(), typestr );
 }
@@ -426,7 +426,7 @@ wxPGProperty* wxPropertyGridInterface::GetPropertyByNameA( const wxString& name 
 
 wxPGProperty* wxPropertyGridInterface::GetPropertyByLabel( const wxString& label ) const
 {
-    return m_pState->BaseGetPropertyByLabel(label, NULL);
+    return m_pState->BaseGetPropertyByLabel(label, nullptr);
 }
 
 // ----------------------------------------------------------------------------
@@ -533,7 +533,7 @@ wxPGProperty* wxPropertyGridInterface::GetPropertyByName( const wxString& name )
     // Check if it is "Property.SubProperty" format
     int pos = name.Find(wxS('.'));
     if ( pos <= 0 )
-        return NULL;
+        return nullptr;
 
     return GetPropertyByName(name.substr(0,pos),
                              name.substr(pos+1,name.length()-pos-1));
@@ -985,7 +985,7 @@ wxString wxPropertyGridInterface::SaveEditableState( int includedStates ) const
 bool wxPropertyGridInterface::RestoreEditableState( const wxString& src, int restoreStates )
 {
     wxPropertyGrid* pg = GetPropertyGrid();
-    wxPGProperty* newSelection = NULL;
+    wxPGProperty* newSelection = nullptr;
     size_t pageIndex;
     long vx = -1;
     long vy = -1;

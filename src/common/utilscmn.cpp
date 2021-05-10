@@ -166,7 +166,7 @@ wxString wxDecToHex(unsigned char dec)
 // Return the current date/time
 wxString wxNow()
 {
-    time_t now = time(NULL);
+    time_t now = time(nullptr);
     char *date = ctime(&now);
     date[24] = '\0';
     return wxString::FromAscii(date);
@@ -222,7 +222,7 @@ bool wxIsPlatformLittleEndian()
  * Class to make it easier to specify platform-dependent values
  */
 
-wxArrayInt*  wxPlatform::sm_customPlatforms = NULL;
+wxArrayInt*  wxPlatform::sm_customPlatforms = nullptr;
 
 void wxPlatform::Copy(const wxPlatform& platform)
 {
@@ -677,7 +677,7 @@ static long wxDoExecuteWithCapture(const wxString& command,
 long wxExecute(const wxString& command, wxArrayString& output, int flags,
                const wxExecuteEnv *env)
 {
-    return wxDoExecuteWithCapture(command, output, NULL, flags, env);
+    return wxDoExecuteWithCapture(command, output, nullptr, flags, env);
 }
 
 long wxExecute(const wxString& command,
@@ -1279,7 +1279,7 @@ wxFindMenuItemId(wxFrame *frame,
 wxWindow* wxFindWindowAtPoint(wxWindow* win, const wxPoint& pt)
 {
     if (!win->IsShown())
-        return NULL;
+        return nullptr;
 
     // Hack for wxNotebook case: at least in wxGTK, all pages
     // claim to be shown, so we must only deal with the selected one.
@@ -1319,7 +1319,7 @@ wxWindow* wxFindWindowAtPoint(wxWindow* win, const wxPoint& pt)
     if (rect.Contains(pt))
         return win;
 
-    return NULL;
+    return nullptr;
 }
 
 wxWindow* wxGenericFindWindowAtPoint(const wxPoint& pt)
@@ -1336,7 +1336,7 @@ wxWindow* wxGenericFindWindowAtPoint(const wxPoint& pt)
             return found;
         node = node->GetPrevious();
     }
-    return NULL;
+    return nullptr;
 }
 
 // ----------------------------------------------------------------------------

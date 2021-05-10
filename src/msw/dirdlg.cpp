@@ -153,7 +153,7 @@ int wxDirDialog::ShowModal()
     WX_HOOK_MODAL_DIALOG();
 
     wxWindow* const parent = GetParentForModalDialog();
-    WXHWND hWndParent = parent ? GetHwndOf(parent) : NULL;
+    WXHWND hWndParent = parent ? GetHwndOf(parent) : nullptr;
 
     m_paths.clear();
 
@@ -191,8 +191,8 @@ int wxDirDialog::ShowSHBrowseForFolder(WXHWND owner)
 {
     BROWSEINFO bi;
     bi.hwndOwner      = owner;
-    bi.pidlRoot       = NULL;
-    bi.pszDisplayName = NULL;
+    bi.pidlRoot       = nullptr;
+    bi.pszDisplayName = nullptr;
     bi.lpszTitle      = m_message.c_str();
     bi.ulFlags        = BIF_RETURNONLYFSDIRS | BIF_STATUSTEXT;
     bi.lpfn           = BrowseCallbackProc;
@@ -302,7 +302,7 @@ bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
     // allow to select only a file system folder, do not change the CWD
     long options = FOS_PICKFOLDERS | FOS_FORCEFILESYSTEM | FOS_NOCHANGEDIR;
 
-    hr = ::CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_INPROC_SERVER,
+    hr = ::CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_INPROC_SERVER,
                             wxIID_PPV_ARGS(IFileOpenDialog, &dlg));
     if ( FAILED(hr) )
     {
@@ -341,7 +341,7 @@ bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
                                                 REFIID,
                                                 void**);
 
-        SHCreateItemFromParsingName_t pfnSHCreateItemFromParsingName = NULL;
+        SHCreateItemFromParsingName_t pfnSHCreateItemFromParsingName = nullptr;
         wxDynamicLibrary dllShell32;
         if ( dllShell32.Load(wxS("shell32.dll"), wxDL_VERBATIM | wxDL_QUIET) )
         {
@@ -356,7 +356,7 @@ bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
 
         wxCOMPtr<IShellItem> folder;
         hr = pfnSHCreateItemFromParsingName(defaultPath.wc_str(),
-                                            NULL,
+                                            nullptr,
                                             wxIID_PPV_ARGS(IShellItem,
                                                            &folder));
 

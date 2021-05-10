@@ -50,7 +50,7 @@ void FontNames::Clear() {
 
 const char *FontNames::Save(const char *name) {
 	if (!name)
-		return 0;
+		return nullptr;
 
 	for (std::vector<char *>::const_iterator it=names.begin(); it != names.end(); ++it) {
 		if (strcmp(*it, name) == 0) {
@@ -610,7 +610,7 @@ FontRealised *ViewStyle::Find(const FontSpecification &fs) {
 		// Should always reach here since map was just set for all styles
 		return it->second;
 	}
-	return 0;
+	return nullptr;
 }
 
 void ViewStyle::FindMaxAscentDescent() {

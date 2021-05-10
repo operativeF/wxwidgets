@@ -287,7 +287,7 @@ static const char * const avsWordLists[] = {
 	"Functions",
 	"Clip properties",
 	"User defined functions",
-	0,
+	nullptr,
 };
 
 LexerModule lmAVS(SCLEX_AVS, ColouriseAvsDoc, "avs", FoldAvsDoc, avsWordLists);

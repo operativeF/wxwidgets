@@ -599,7 +599,7 @@ static const char * const abaqusWordListDesc[] = {
     "starcommands",
     "arguments",
     "functions",
-    0
+    nullptr
 };
 
 LexerModule lmAbaqus(SCLEX_ABAQUS, ColouriseABAQUSDoc, "abaqus", FoldABAQUSDoc, abaqusWordListDesc);

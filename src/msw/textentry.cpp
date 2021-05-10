@@ -286,7 +286,7 @@ private:
         ::InitializeCriticalSection(&m_csCompleter);
         ::InitializeCriticalSection(&m_csRestart);
 
-        m_completer = NULL;
+        m_completer = nullptr;
         m_restart = FALSE;
     }
 
@@ -369,12 +369,12 @@ public:
         : m_entry(entry),
           m_win(entry->GetEditableWindow())
     {
-        m_autoComplete = NULL;
-        m_autoCompleteDropDown = NULL;
-        m_enumStrings = NULL;
+        m_autoComplete = nullptr;
+        m_autoCompleteDropDown = nullptr;
+        m_enumStrings = nullptr;
 
-        m_fixedCompleter = NULL;
-        m_customCompleter = NULL;
+        m_fixedCompleter = nullptr;
+        m_customCompleter = nullptr;
 
         m_connectedCharEvent = false;
 
@@ -384,7 +384,7 @@ public:
         HRESULT hr = CoCreateInstance
                      (
                         wxCLSID_AutoComplete,
-                        NULL,
+                        nullptr,
                         CLSCTX_INPROC_SERVER,
                         IID_IAutoComplete,
                         reinterpret_cast<void **>(&m_autoComplete)
@@ -399,13 +399,13 @@ public:
         m_enumStrings = new wxIEnumString;
         m_enumStrings->AddRef();
         hr = m_autoComplete->Init(m_entry->GetEditHWND(), m_enumStrings,
-                                  NULL, NULL);
+                                  nullptr, nullptr);
         if ( FAILED(hr) )
         {
             wxLogApiError(wxT("IAutoComplete::Init"), hr);
 
             m_enumStrings->Release();
-            m_enumStrings = NULL;
+            m_enumStrings = nullptr;
 
             return;
         }
@@ -428,7 +428,7 @@ public:
         }
 
         // Finally set the completion options using IAutoComplete2.
-        IAutoComplete2 *pAutoComplete2 = NULL;
+        IAutoComplete2 *pAutoComplete2 = nullptr;
         hr = m_autoComplete->QueryInterface
                              (
                                IID_IAutoComplete2,
@@ -601,7 +601,7 @@ private:
             // Check if the drop down is currently open.
             DWORD dwFlags = 0;
             if ( SUCCEEDED(m_autoCompleteDropDown->GetDropDownStatus(&dwFlags,
-                                                                     NULL))
+                                                                     nullptr))
                     && dwFlags == ACDD_VISIBLE )
             {
                 if ( event.GetKeyCode() == WXK_ESCAPE )
@@ -676,7 +676,7 @@ static wxTextAutoCompleteData* const wxDUMMY_SHAUTOCOMPLETE_DATA =
 wxTextEntry::wxTextEntry()
 {
 #ifdef HAS_AUTOCOMPLETE
-    m_autoCompleteData = NULL;
+    m_autoCompleteData = nullptr;
 #endif // HAS_AUTOCOMPLETE
 }
 
@@ -773,7 +773,7 @@ void wxTextEntry::SetInsertionPoint(long pos)
 long wxTextEntry::GetInsertionPoint() const
 {
     long from;
-    GetSelection(&from, NULL);
+    GetSelection(&from, nullptr);
     return from;
 }
 
@@ -864,7 +864,7 @@ bool wxTextEntry::MSWHasAutoCompleteData() const
     // We use special wxDUMMY_SHAUTOCOMPLETE_DATA for the pointer to indicate
     // that we're using SHAutoComplete(), so we need to check for it too, and
     // not just whether the pointer is non-NULL.
-    return m_autoCompleteData != NULL
+    return m_autoCompleteData != nullptr
             && m_autoCompleteData != wxDUMMY_SHAUTOCOMPLETE_DATA;
 }
 

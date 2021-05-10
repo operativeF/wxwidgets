@@ -245,7 +245,7 @@ static const char * const innoWordListDesc[] = {
 	"Preprocessor directives",
 	"Pascal keywords",
 	"User defined keywords",
-	0
+	nullptr
 };
 
 static void FoldInnoDoc(Sci_PositionU startPos, Sci_Position length, int, WordList *[], Accessor &styler) {

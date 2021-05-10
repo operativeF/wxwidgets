@@ -75,11 +75,11 @@ public:
             ::DeleteObject(m_hPalette);
     }
 
-    virtual bool IsOk() const wxOVERRIDE { return m_hPalette != 0; }
+    virtual bool IsOk() const wxOVERRIDE { return m_hPalette != nullptr; }
 
     UINT GetEntries() const
     {
-        return ::GetPaletteEntries(m_hPalette, 0, 0, NULL);
+        return ::GetPaletteEntries(m_hPalette, 0, 0, nullptr);
     }
 
 private:
@@ -97,7 +97,7 @@ private:
         return pPal;
     }
 
-    void Init() { m_hPalette = 0; }
+    void Init() { m_hPalette = nullptr; }
 
     HPALETTE m_hPalette;
 
@@ -172,7 +172,7 @@ bool wxPalette::GetRGB(int index,
 
 WXHPALETTE wxPalette::GetHPALETTE() const
 {
-    return M_PALETTEDATA ? (WXHPALETTE)M_PALETTEDATA->m_hPalette : 0;
+    return M_PALETTEDATA ? (WXHPALETTE)M_PALETTEDATA->m_hPalette : nullptr;
 }
 
 void wxPalette::SetHPALETTE(WXHPALETTE pal)

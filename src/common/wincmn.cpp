@@ -85,7 +85,7 @@ WXDLLIMPEXP_DATA_CORE(wxWindowList) wxTopLevelWindows;
 
 // globals
 #if wxUSE_MENUS
-wxMenu *wxCurrentPopupMenu = NULL;
+wxMenu *wxCurrentPopupMenu = nullptr;
 #endif // wxUSE_MENUS
 
 extern WXDLLEXPORT_DATA(const char) wxPanelNameStr[] = "panel";
@@ -267,7 +267,7 @@ wxWindowBase::wxWindowBase()
     , m_bestSizeCache(wxDefaultSize)
 {
     // no window yet, no parent nor children
-    m_parent = NULL;
+    m_parent = nullptr;
     m_windowId = wxID_ANY;
 
     // no constraints on the minimal window size
@@ -285,7 +285,7 @@ wxWindowBase::wxWindowBase()
 
 #if wxUSE_VALIDATORS
     // no validator
-    m_windowValidator = NULL;
+    m_windowValidator = nullptr;
 #endif // wxUSE_VALIDATORS
 
     // the colours/fonts are default for now, so leave m_font,
@@ -305,26 +305,26 @@ wxWindowBase::wxWindowBase()
 
 #if wxUSE_CONSTRAINTS
     // no constraints whatsoever
-    m_constraints = NULL;
-    m_constraintsInvolvedIn = NULL;
+    m_constraints = nullptr;
+    m_constraintsInvolvedIn = nullptr;
 #endif // wxUSE_CONSTRAINTS
 
-    m_windowSizer = NULL;
-    m_containingSizer = NULL;
+    m_windowSizer = nullptr;
+    m_containingSizer = nullptr;
     m_autoLayout = false;
 
     m_disableFocusFromKbd = false;
 
 #if wxUSE_DRAG_AND_DROP
-    m_dropTarget = NULL;
+    m_dropTarget = nullptr;
 #endif // wxUSE_DRAG_AND_DROP
 
 #if wxUSE_TOOLTIPS
-    m_tooltip = NULL;
+    m_tooltip = nullptr;
 #endif // wxUSE_TOOLTIPS
 
 #if wxUSE_CARET
-    m_caret = NULL;
+    m_caret = nullptr;
 #endif // wxUSE_CARET
 
 #if wxUSE_PALETTE
@@ -332,10 +332,10 @@ wxWindowBase::wxWindowBase()
 #endif // wxUSE_PALETTE
 
 #if wxUSE_ACCESSIBILITY
-    m_accessible = NULL;
+    m_accessible = nullptr;
 #endif
 
-    m_scrollHelper = NULL;
+    m_scrollHelper = nullptr;
 
     m_windowVariant = wxWINDOW_VARIANT_NORMAL;
 #if wxUSE_SYSTEM_OPTIONS
@@ -473,7 +473,7 @@ wxWindowBase::~wxWindowBase()
     // The associated popup menu can still be alive, disassociate from it in
     // this case
     if ( wxCurrentPopupMenu && wxCurrentPopupMenu->GetInvokingWindow() == this )
-        wxCurrentPopupMenu->SetInvokingWindow(NULL);
+        wxCurrentPopupMenu->SetInvokingWindow(nullptr);
 #endif // wxUSE_MENUS
 
     wxASSERT_MSG( GetChildren().GetCount() == 0, wxT("children not destroyed") );
@@ -1246,7 +1246,7 @@ bool wxWindowBase::IsShownOnScreen() const
     // parents. But if a window is toplevel one, then its always visible on
     // screen if IsShown() returns true, even if it has a hidden parent.
     return IsShown() &&
-           (IsTopLevel() || GetParent() == NULL || GetParent()->IsShownOnScreen());
+           (IsTopLevel() || GetParent() == nullptr || GetParent()->IsShownOnScreen());
 }
 
 // ----------------------------------------------------------------------------
@@ -1357,7 +1357,7 @@ void wxWindowBase::RemoveChild(wxWindowBase *child)
         child->Thaw();
 
     GetChildren().DeleteObject((wxWindow *)child);
-    child->SetParent(NULL);
+    child->SetParent(nullptr);
 }
 
 void wxWindowBase::SetParent(wxWindowBase *parent)
@@ -1422,7 +1422,7 @@ bool wxWindowBase::Reparent(wxWindowBase *newParent)
 
 void wxWindowBase::SetEventHandler(wxEvtHandler *handler)
 {
-    wxCHECK_RET(handler != NULL, "SetEventHandler(NULL) called");
+    wxCHECK_RET(handler != nullptr, "SetEventHandler(NULL) called");
 
     m_eventHandler = handler;
 }
@@ -1445,7 +1445,7 @@ void wxWindowBase::SetPreviousHandler(wxEvtHandler *WXUNUSED(handler))
 
 void wxWindowBase::PushEventHandler(wxEvtHandler *handlerToPush)
 {
-    wxCHECK_RET( handlerToPush != NULL, "PushEventHandler(NULL) called" );
+    wxCHECK_RET( handlerToPush != nullptr, "PushEventHandler(NULL) called" );
 
     // the new handler is going to be part of the wxWindow stack of event handlers:
     // it can't be part also of an event handler double-linked chain:
@@ -1466,17 +1466,17 @@ void wxWindowBase::PushEventHandler(wxEvtHandler *handlerToPush)
 
 #if wxDEBUG_LEVEL
     // final checks of the operations done above:
-    wxASSERT_MSG( handlerToPush->GetPreviousHandler() == NULL,
+    wxASSERT_MSG( handlerToPush->GetPreviousHandler() == nullptr,
         "the first handler of the wxWindow stack should "
         "have no previous handlers set" );
-    wxASSERT_MSG( handlerToPush->GetNextHandler() != NULL,
+    wxASSERT_MSG( handlerToPush->GetNextHandler() != nullptr,
         "the first handler of the wxWindow stack should "
         "have non-NULL next handler" );
 
     wxEvtHandler* pLast = handlerToPush;
     while ( pLast && pLast != this )
         pLast = pLast->GetNextHandler();
-    wxASSERT_MSG( pLast->GetNextHandler() == NULL,
+    wxASSERT_MSG( pLast->GetNextHandler() == nullptr,
         "the last handler of the wxWindow stack should "
         "have this window as next handler" );
 #endif // wxDEBUG_LEVEL
@@ -1487,21 +1487,21 @@ wxEvtHandler *wxWindowBase::PopEventHandler(bool deleteHandler)
     // we need to pop the wxWindow stack, i.e. we need to remove the first handler
 
     wxEvtHandler *firstHandler = GetEventHandler();
-    wxCHECK_MSG( firstHandler != NULL, NULL, "wxWindow cannot have a NULL event handler" );
-    wxCHECK_MSG( firstHandler != this, NULL, "cannot pop the wxWindow itself" );
-    wxCHECK_MSG( firstHandler->GetPreviousHandler() == NULL, NULL,
+    wxCHECK_MSG( firstHandler != nullptr, nullptr, "wxWindow cannot have a NULL event handler" );
+    wxCHECK_MSG( firstHandler != this, nullptr, "cannot pop the wxWindow itself" );
+    wxCHECK_MSG( firstHandler->GetPreviousHandler() == nullptr, nullptr,
         "the first handler of the wxWindow stack should have no previous handlers set" );
 
     wxEvtHandler *secondHandler = firstHandler->GetNextHandler();
-    wxCHECK_MSG( secondHandler != NULL, NULL,
+    wxCHECK_MSG( secondHandler != nullptr, nullptr,
         "the first handler of the wxWindow stack should have non-NULL next handler" );
 
-    firstHandler->SetNextHandler(NULL);
+    firstHandler->SetNextHandler(nullptr);
 
     // It is harmless but useless to unset the previous handler of the window
     // itself as it's always NULL anyhow, so don't do this.
     if ( secondHandler != this )
-        secondHandler->SetPreviousHandler(NULL);
+        secondHandler->SetPreviousHandler(nullptr);
 
     // now firstHandler is completely unlinked; set secondHandler as the new window event handler
     SetEventHandler(secondHandler);
@@ -1516,7 +1516,7 @@ wxEvtHandler *wxWindowBase::PopEventHandler(bool deleteHandler)
 
 bool wxWindowBase::RemoveEventHandler(wxEvtHandler *handlerToRemove)
 {
-    wxCHECK_MSG( handlerToRemove != NULL, false, "RemoveEventHandler(NULL) called" );
+    wxCHECK_MSG( handlerToRemove != nullptr, false, "RemoveEventHandler(NULL) called" );
     wxCHECK_MSG( handlerToRemove != this, false, "Cannot remove the window itself" );
 
     if (handlerToRemove == GetEventHandler())
@@ -1855,7 +1855,7 @@ wxWindow *wxWindowBase::FindWindow(long id) const
     if ( id == m_windowId )
         return const_cast<wxWindow*>(static_cast<const wxWindow*>(this));
 
-    wxWindowBase *res = NULL;
+    wxWindowBase *res = nullptr;
     wxWindowList::compatibility_iterator node;
     for ( node = m_children.GetFirst(); node && !res; node = node->GetNext() )
     {
@@ -1877,7 +1877,7 @@ wxWindow *wxWindowBase::FindWindow(const wxString& name) const
     if ( name == m_windowName )
         return const_cast<wxWindow*>(static_cast<const wxWindow*>(this));
 
-    wxWindowBase *res = NULL;
+    wxWindowBase *res = nullptr;
     wxWindowList::compatibility_iterator node;
     for ( node = m_children.GetFirst(); node && !res; node = node->GetNext() )
     {
@@ -1949,7 +1949,7 @@ wxWindow *wxFindWindowRecursively(const wxWindow *parent,
     }
 
     // Not found
-    return NULL;
+    return nullptr;
 }
 
 // helper for FindWindowByXXX()
@@ -1977,7 +1977,7 @@ wxWindow *wxFindWindowHelper(const wxWindow *parent,
             return retwin;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 /* static */
@@ -2324,9 +2324,9 @@ void wxWindowBase::DoSetToolTip(wxToolTip *tooltip)
 
 bool wxWindowBase::CopyToolTip(wxToolTip *tip)
 {
-    SetToolTip(tip ? new wxToolTip(tip->GetTip()) : NULL);
+    SetToolTip(tip ? new wxToolTip(tip->GetTip()) : nullptr);
 
-    return tip != NULL;
+    return tip != nullptr;
 }
 
 #endif // wxUSE_TOOLTIPS
@@ -2451,7 +2451,7 @@ void wxWindowBase::SetSizer(wxSizer *sizer, bool deleteOld)
 
     if ( m_windowSizer )
     {
-        m_windowSizer->SetContainingWindow(NULL);
+        m_windowSizer->SetContainingWindow(nullptr);
 
         if ( deleteOld )
             delete m_windowSizer;
@@ -2463,7 +2463,7 @@ void wxWindowBase::SetSizer(wxSizer *sizer, bool deleteOld)
         m_windowSizer->SetContainingWindow((wxWindow *)this);
     }
 
-    SetAutoLayout(m_windowSizer != NULL);
+    SetAutoLayout(m_windowSizer != nullptr);
 }
 
 void wxWindowBase::SetSizerAndFit(wxSizer *sizer, bool deleteOld)
@@ -3038,7 +3038,7 @@ bool wxWindowBase::PopupMenu(wxMenu *menu, int x, int y)
 
     wxCurrentPopupMenu = menu;
     const bool rc = DoPopupMenu(menu, x, y);
-    wxCurrentPopupMenu = NULL;
+    wxCurrentPopupMenu = nullptr;
 
     return rc;
 }
@@ -3513,19 +3513,19 @@ bool wxWindowBase::TryAfter(wxEvent& event)
 
 wxWindow *wxWindowBase::DoGetSibling(WindowOrder order) const
 {
-    wxCHECK_MSG( GetParent(), NULL,
+    wxCHECK_MSG( GetParent(), nullptr,
                     wxT("GetPrev/NextSibling() don't work for TLWs!") );
 
     wxWindowList& siblings = GetParent()->GetChildren();
     wxWindowList::compatibility_iterator i = siblings.Find(static_cast<const wxWindow*>(this));
-    wxCHECK_MSG( i, NULL, wxT("window not a child of its parent?") );
+    wxCHECK_MSG( i, nullptr, wxT("window not a child of its parent?") );
 
     if ( order == OrderBefore )
         i = i->GetPrevious();
     else // OrderAfter
         i = i->GetNext();
 
-    return i ? i->GetData() : NULL;
+    return i ? i->GetData() : nullptr;
 }
 
 // ----------------------------------------------------------------------------
@@ -3610,7 +3610,7 @@ void wxWindowBase::DoMoveInTabOrder(wxWindow *win, WindowOrder move)
 /*static*/ wxWindow* wxWindowBase::FindFocus()
 {
     wxWindowBase *win = DoFindFocus();
-    return win ? win->GetMainWindowOfCompositeControl() : NULL;
+    return win ? win->GetMainWindowOfCompositeControl() : nullptr;
 }
 
 bool wxWindowBase::HasFocus() const
@@ -3697,7 +3697,7 @@ wxWindow* wxGetTopLevelParent(wxWindowBase *win_)
 // representing the child element, starting from 1.
 wxAccStatus wxWindowAccessible::HitTest(const wxPoint& WXUNUSED(pt), int* WXUNUSED(childId), wxAccessible** WXUNUSED(childObject))
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     return wxACC_NOT_IMPLEMENTED;
 }
@@ -3705,9 +3705,9 @@ wxAccStatus wxWindowAccessible::HitTest(const wxPoint& WXUNUSED(pt), int* WXUNUS
 // Returns the rectangle for this object (id = 0) or a child element (id > 0).
 wxAccStatus wxWindowAccessible::GetLocation(wxRect& rect, int elementId)
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
-    wxWindow* win = NULL;
+    wxWindow* win = nullptr;
     if (elementId == wxACC_SELF)
     {
         win = GetWindow();
@@ -3736,7 +3736,7 @@ wxAccStatus wxWindowAccessible::GetLocation(wxRect& rect, int elementId)
 wxAccStatus wxWindowAccessible::Navigate(wxNavDir navDir, int fromId,
                              int* WXUNUSED(toId), wxAccessible** toObject)
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     switch (navDir)
     {
@@ -3826,7 +3826,7 @@ wxAccStatus wxWindowAccessible::Navigate(wxNavDir navDir, int fromId,
 // Gets the name of the specified object.
 wxAccStatus wxWindowAccessible::GetName(int childId, wxString* name)
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     wxString title;
 
@@ -3857,7 +3857,7 @@ wxAccStatus wxWindowAccessible::GetName(int childId, wxString* name)
 // Gets the number of children.
 wxAccStatus wxWindowAccessible::GetChildCount(int* childId)
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     *childId = (int) GetWindow()->GetChildren().GetCount();
     return wxACC_OK;
@@ -3869,7 +3869,7 @@ wxAccStatus wxWindowAccessible::GetChildCount(int* childId)
 // not an accessible object.
 wxAccStatus wxWindowAccessible::GetChild(int childId, wxAccessible** child)
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     if (childId == wxACC_SELF)
     {
@@ -3891,12 +3891,12 @@ wxAccStatus wxWindowAccessible::GetChild(int childId, wxAccessible** child)
 // Gets the parent, or NULL.
 wxAccStatus wxWindowAccessible::GetParent(wxAccessible** parent)
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     wxWindow* parentWindow = GetWindow()->GetParent();
     if (!parentWindow)
     {
-        *parent = NULL;
+        *parent = nullptr;
         return wxACC_OK;
     }
     else
@@ -3915,7 +3915,7 @@ wxAccStatus wxWindowAccessible::GetParent(wxAccessible** parent)
 // window (e.g. an edit control).
 wxAccStatus wxWindowAccessible::DoDefaultAction(int WXUNUSED(childId))
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     return wxACC_NOT_IMPLEMENTED;
 }
@@ -3928,7 +3928,7 @@ wxAccStatus wxWindowAccessible::DoDefaultAction(int WXUNUSED(childId))
 // a document has a default action of "Press" rather than "Prints the current document."
 wxAccStatus wxWindowAccessible::GetDefaultAction(int WXUNUSED(childId), wxString* WXUNUSED(actionName))
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     return wxACC_NOT_IMPLEMENTED;
 }
@@ -3936,7 +3936,7 @@ wxAccStatus wxWindowAccessible::GetDefaultAction(int WXUNUSED(childId), wxString
 // Returns the description for this object or a child.
 wxAccStatus wxWindowAccessible::GetDescription(int WXUNUSED(childId), wxString* description)
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     (void)description;
 #if wxUSE_HELP
@@ -3954,7 +3954,7 @@ wxAccStatus wxWindowAccessible::GetDescription(int WXUNUSED(childId), wxString* 
 // Returns help text for this object or a child, similar to tooltip text.
 wxAccStatus wxWindowAccessible::GetHelpText(int WXUNUSED(childId), wxString* helpText)
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     (void)helpText;
 #if wxUSE_HELP
@@ -3973,7 +3973,7 @@ wxAccStatus wxWindowAccessible::GetHelpText(int WXUNUSED(childId), wxString* hel
 // Return e.g. ALT+K
 wxAccStatus wxWindowAccessible::GetKeyboardShortcut(int WXUNUSED(childId), wxString* WXUNUSED(shortcut))
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     return wxACC_NOT_IMPLEMENTED;
 }
@@ -3981,7 +3981,7 @@ wxAccStatus wxWindowAccessible::GetKeyboardShortcut(int WXUNUSED(childId), wxStr
 // Returns a role constant.
 wxAccStatus wxWindowAccessible::GetRole(int childId, wxAccRole* role)
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     // If a child, leave wxWidgets to call the function on the actual
     // child object.
@@ -4011,7 +4011,7 @@ wxAccStatus wxWindowAccessible::GetRole(int childId, wxAccRole* role)
 // Returns a state constant.
 wxAccStatus wxWindowAccessible::GetState(int childId, long* state)
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     // If a child, leave wxWidgets to call the function on the actual
     // child object.
@@ -4042,7 +4042,7 @@ wxAccStatus wxWindowAccessible::GetState(int childId, long* state)
 // or child.
 wxAccStatus wxWindowAccessible::GetValue(int WXUNUSED(childId), wxString* WXUNUSED(strValue))
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     return wxACC_NOT_IMPLEMENTED;
 }
@@ -4050,7 +4050,7 @@ wxAccStatus wxWindowAccessible::GetValue(int WXUNUSED(childId), wxString* WXUNUS
 // Selects the object or child.
 wxAccStatus wxWindowAccessible::Select(int WXUNUSED(childId), wxAccSelectionFlags WXUNUSED(selectFlags))
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     return wxACC_NOT_IMPLEMENTED;
 }
@@ -4061,7 +4061,7 @@ wxAccStatus wxWindowAccessible::Select(int WXUNUSED(childId), wxAccSelectionFlag
 // If this object has the focus, child should be 'this'.
 wxAccStatus wxWindowAccessible::GetFocus(int* WXUNUSED(childId), wxAccessible** WXUNUSED(child))
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     return wxACC_NOT_IMPLEMENTED;
 }
@@ -4077,7 +4077,7 @@ wxAccStatus wxWindowAccessible::GetFocus(int* WXUNUSED(childId), wxAccessible** 
 // - a "void*" pointer to a wxAccessible child object
 wxAccStatus wxWindowAccessible::GetSelections(wxVariant* WXUNUSED(selections))
 {
-    wxCHECK( GetWindow() != NULL, wxACC_FAIL );
+    wxCHECK( GetWindow() != nullptr, wxACC_FAIL );
 
     return wxACC_NOT_IMPLEMENTED;
 }

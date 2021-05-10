@@ -94,7 +94,7 @@ bool GetNumericToken(size_t len,
                      wxString::const_iterator& p,
                      const wxString::const_iterator& end,
                      unsigned long *number,
-                     size_t *numScannedDigits = NULL)
+                     size_t *numScannedDigits = nullptr)
 {
     size_t n = 1;
     wxString s;
@@ -963,7 +963,7 @@ const char* wxDateTime::ParseRfc822Date(const char* date)
     wxString::const_iterator end;
     wxString dateStr(date);
     if ( !ParseRfc822Date(dateStr, &end) )
-        return NULL;
+        return nullptr;
 
     return date + dateStr.IterOffsetInMBStr(end);
 }
@@ -973,7 +973,7 @@ const wchar_t* wxDateTime::ParseRfc822Date(const wchar_t* date)
     wxString::const_iterator end;
     wxString dateStr(date);
     if ( !ParseRfc822Date(dateStr, &end) )
-        return NULL;
+        return nullptr;
 
     return date + (end - dateStr.begin());
 }
@@ -1664,7 +1664,7 @@ wxDateTime::ParseFormat(const char* date,
     wxString::const_iterator end;
     wxString dateStr(date);
     if ( !ParseFormat(dateStr, format, dateDef, &end) )
-        return NULL;
+        return nullptr;
 
     return date + dateStr.IterOffsetInMBStr(end);
 }
@@ -1677,7 +1677,7 @@ wxDateTime::ParseFormat(const wchar_t* date,
     wxString::const_iterator end;
     wxString dateStr(date);
     if ( !ParseFormat(dateStr, format, dateDef, &end) )
-        return NULL;
+        return nullptr;
 
     return date + (end - dateStr.begin());
 }
@@ -1740,7 +1740,7 @@ const char* wxDateTime::ParseDateTime(const char* date)
     wxString::const_iterator end;
     wxString dateStr(date);
     if ( !ParseDateTime(dateStr, &end) )
-        return NULL;
+        return nullptr;
 
     return date + dateStr.IterOffsetInMBStr(end);
 }
@@ -1750,7 +1750,7 @@ const wchar_t* wxDateTime::ParseDateTime(const wchar_t* date)
     wxString::const_iterator end;
     wxString dateStr(date);
     if ( !ParseDateTime(dateStr, &end) )
-        return NULL;
+        return nullptr;
 
     return date + (end - dateStr.begin());
 }
@@ -2117,7 +2117,7 @@ const char* wxDateTime::ParseDate(const char* date)
     wxString::const_iterator end;
     wxString dateStr(date);
     if ( !ParseDate(dateStr, &end) )
-        return NULL;
+        return nullptr;
 
     return date + dateStr.IterOffsetInMBStr(end);
 }
@@ -2127,7 +2127,7 @@ const wchar_t* wxDateTime::ParseDate(const wchar_t* date)
     wxString::const_iterator end;
     wxString dateStr(date);
     if ( !ParseDate(dateStr, &end) )
-        return NULL;
+        return nullptr;
 
     return date + (end - dateStr.begin());
 }
@@ -2193,7 +2193,7 @@ const char* wxDateTime::ParseTime(const char* date)
     wxString::const_iterator end;
     wxString dateStr(date);
     if ( !ParseTime(dateStr, &end) )
-        return NULL;
+        return nullptr;
 
     return date + dateStr.IterOffsetInMBStr(end);
 }
@@ -2203,7 +2203,7 @@ const wchar_t* wxDateTime::ParseTime(const wchar_t* date)
     wxString::const_iterator end;
     wxString dateStr(date);
     if ( !ParseTime(dateStr, &end) )
-        return NULL;
+        return nullptr;
 
     return date + (end - dateStr.begin());
 }

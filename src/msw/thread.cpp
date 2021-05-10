@@ -104,10 +104,10 @@ static bool gs_bGuiOwnedByMainThread = true;
 // critical section which controls access to all GUI functions: any secondary
 // thread (i.e. except the main one) must enter this crit section before doing
 // any GUI calls
-static wxCriticalSection *gs_critsectGui = NULL;
+static wxCriticalSection *gs_critsectGui = nullptr;
 
 // critical section which protects gs_nWaitingForGui variable
-static wxCriticalSection *gs_critsectWaitingForGui = NULL;
+static wxCriticalSection *gs_critsectWaitingForGui = nullptr;
 
 // number of threads waiting for GUI in wxMutexGuiEnter()
 static size_t gs_nWaitingForGui = 0;
@@ -161,7 +161,7 @@ public:
     wxMutexInternal(wxMutexType mutexType);
     ~wxMutexInternal();
 
-    bool IsOk() const { return m_mutex != NULL; }
+    bool IsOk() const { return m_mutex != nullptr; }
 
     wxMutexError Lock() { return LockTimeout(INFINITE); }
     wxMutexError Lock(unsigned long ms) { return LockTimeout(ms); }
@@ -185,9 +185,9 @@ wxMutexInternal::wxMutexInternal(wxMutexType mutexType)
     // create a nameless (hence intra process and always private) mutex
     m_mutex = ::CreateMutex
                 (
-                    NULL,       // default secutiry attributes
+                    nullptr,       // default secutiry attributes
                     FALSE,      // not initially locked
-                    NULL        // no name
+                    nullptr        // no name
                 );
 
     m_type = mutexType;
@@ -291,7 +291,7 @@ public:
     wxSemaphoreInternal(int initialcount, int maxcount);
     ~wxSemaphoreInternal();
 
-    bool IsOk() const { return m_semaphore != NULL; }
+    bool IsOk() const { return m_semaphore != nullptr; }
 
     wxSemaError Wait() { return WaitTimeout(INFINITE); }
 
@@ -324,10 +324,10 @@ wxSemaphoreInternal::wxSemaphoreInternal(int initialcount, int maxcount)
 
     m_semaphore = ::CreateSemaphore
                     (
-                        NULL,           // default security attributes
+                        nullptr,           // default security attributes
                         initialcount,
                         maxcount,
-                        NULL            // no name
+                        nullptr            // no name
                     );
     if ( !m_semaphore )
     {
@@ -367,7 +367,7 @@ wxSemaError wxSemaphoreInternal::WaitTimeout(unsigned long milliseconds)
 
 wxSemaError wxSemaphoreInternal::Post()
 {
-    if ( !::ReleaseSemaphore(m_semaphore, 1, NULL /* ptr to previous count */) )
+    if ( !::ReleaseSemaphore(m_semaphore, 1, nullptr /* ptr to previous count */) )
     {
         if ( GetLastError() == ERROR_TOO_MANY_POSTS )
         {
@@ -396,7 +396,7 @@ public:
     wxThreadInternal(wxThread *thread)
     {
         m_thread = thread;
-        m_hThread = 0;
+        m_hThread = nullptr;
         m_state = STATE_NEW;
         m_priority = wxPRIORITY_DEFAULT;
         m_nRef = 1;
@@ -416,7 +416,7 @@ public:
                 wxLogLastError(wxT("CloseHandle(thread)"));
             }
 
-            m_hThread = 0;
+            m_hThread = nullptr;
         }
     }
 
@@ -428,7 +428,7 @@ public:
     wxThreadError WaitForTerminate(wxCriticalSection& cs,
                                    wxThread::ExitCode *pRc,
                                    wxThreadWait waitMode,
-                                   wxThread *threadToDelete = NULL);
+                                   wxThread *threadToDelete = nullptr);
 
     // kill the thread unconditionally
     wxThreadError Kill();
@@ -632,7 +632,7 @@ bool wxThreadInternal::Create(wxThread *thread, unsigned int stackSize)
 #ifdef wxUSE_BEGIN_THREAD
     m_hThread = (HANDLE)_beginthreadex
                         (
-                          NULL,                             // default security
+                          nullptr,                             // default security
                           stackSize,
                           wxThreadInternal::WinThreadStart, // entry point
                           thread,
@@ -651,7 +651,7 @@ bool wxThreadInternal::Create(wxThread *thread, unsigned int stackSize)
                   );
 #endif // _beginthreadex/CreateThread
 
-    if ( m_hThread == NULL )
+    if ( m_hThread == nullptr )
     {
         wxLogSysError(_("Can't create thread"));
 
@@ -695,7 +695,7 @@ wxThreadInternal::WaitForTerminate(wxCriticalSection& cs,
 
     // we may either wait passively for the thread to terminate (when called
     // from Wait()) or ask it to terminate (when called from Delete())
-    bool shouldDelete = threadToDelete != NULL;
+    bool shouldDelete = threadToDelete != nullptr;
 
     DWORD rc = 0;
 
@@ -1239,7 +1239,7 @@ bool wxThreadModule::OnInit()
 
     // main thread doesn't have associated wxThread object, so store 0 in the
     // TLS instead
-    if ( !::TlsSetValue(gs_tlsThisThread, (LPVOID)0) )
+    if ( !::TlsSetValue(gs_tlsThisThread, (LPVOID)nullptr) )
     {
         ::TlsFree(gs_tlsThisThread);
         gs_tlsThisThread = TLS_OUT_OF_INDEXES;

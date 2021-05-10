@@ -161,7 +161,7 @@ int wxToolbook::GetPageImage(size_t WXUNUSED(n)) const
 
 bool wxToolbook::SetPageImage(size_t n, int imageId)
 {
-    wxASSERT( GetImageList() != NULL );
+    wxASSERT( GetImageList() != nullptr );
     if (!GetImageList())
         return false;
 
@@ -283,7 +283,7 @@ bool wxToolbook::InsertPage(size_t n,
 
     m_needsRealizing = true;
 
-    wxASSERT(GetImageList() != NULL);
+    wxASSERT(GetImageList() != nullptr);
 
     if (!GetImageList())
         return false;

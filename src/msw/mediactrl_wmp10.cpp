@@ -720,15 +720,15 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxWMP10MediaBackend, wxMediaBackend);
 wxWMP10MediaBackend::wxWMP10MediaBackend()
                  :
 #ifndef WXTEST_ATL
-                m_pAX(NULL),
+                m_pAX(nullptr),
 #endif
-                m_pWMPPlayer(NULL),
-                m_pWMPSettings(NULL),
-                m_pWMPControls(NULL),
-                m_pWMPControls2(NULL)
+                m_pWMPPlayer(nullptr),
+                m_pWMPSettings(nullptr),
+                m_pWMPControls(nullptr),
+                m_pWMPControls2(nullptr)
 
 {
-    m_evthandler = NULL;
+    m_evthandler = nullptr;
 }
 
 //---------------------------------------------------------------------------
@@ -774,11 +774,11 @@ bool wxWMP10MediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
                                      const wxString& name)
 {
 #ifndef WXTEST_ATL
-    if( ::CoCreateInstance(CLSID_WMP10, NULL,
+    if( ::CoCreateInstance(CLSID_WMP10, nullptr,
                                   CLSCTX_INPROC_SERVER,
                                   IID_IWMPPlayer, (void**)&m_pWMPPlayer) != 0 )
     {
-        if( ::CoCreateInstance(CLSID_WMP10ALT, NULL,
+        if( ::CoCreateInstance(CLSID_WMP10ALT, nullptr,
                                   CLSCTX_INPROC_SERVER,
                                   IID_IWMPPlayer, (void**)&m_pWMPPlayer) != 0 )
             return false;

@@ -222,7 +222,7 @@ static const char * const haskellWordListDesc[] = {
    "Keywords",
    "FFI",
    "Reserved operators",
-   0
+   nullptr
 };
 
 struct OptionSetHaskell : public OptionSet<OptionsHaskell> {
@@ -429,7 +429,7 @@ public:
    void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
 
    void * SCI_METHOD PrivateCall(int, void *) {
-      return 0;
+      return nullptr;
    }
 
    static ILexer *LexerFactoryHaskell() {
@@ -449,7 +449,7 @@ Sci_Position SCI_METHOD LexerHaskell::PropertySet(const char *key, const char *v
 }
 
 Sci_Position SCI_METHOD LexerHaskell::WordListSet(int n, const char *wl) {
-   WordList *wordListN = 0;
+   WordList *wordListN = nullptr;
    switch (n) {
    case 0:
       wordListN = &keywords;
@@ -966,7 +966,7 @@ void SCI_METHOD LexerHaskell::Fold(Sci_PositionU startPos, Sci_Position length, 
    if (!options.fold)
       return;
 
-   Accessor styler(pAccess, NULL);
+   Accessor styler(pAccess, nullptr);
 
    Sci_Position lineCurrent = styler.GetLine(startPos);
 

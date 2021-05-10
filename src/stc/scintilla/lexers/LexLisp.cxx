@@ -279,7 +279,7 @@ static void FoldLispDoc(Sci_PositionU startPos, Sci_Position length, int /* init
 static const char * const lispWordListDesc[] = {
 	"Functions and special operators",
 	"Keywords",
-	0
+	nullptr
 };
 
 LexerModule lmLISP(SCLEX_LISP, ColouriseLispDoc, "lisp", FoldLispDoc, lispWordListDesc);

@@ -510,7 +510,7 @@ static void FoldEclDoc(Sci_PositionU startPos, Sci_Position length, int initStyl
 
 static const char * const EclWordListDesc[] = {
 	"Keywords",
-	0
+	nullptr
 };
 
 LexerModule lmECL(

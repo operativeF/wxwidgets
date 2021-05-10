@@ -488,7 +488,7 @@ static const char * const FortranWordLists[] = {
 	"Primary keywords and identifiers",
 	"Intrinsic functions",
 	"Extended and user defined functions",
-	0,
+	nullptr,
 };
 /***************************************/
 static void ColouriseFortranDocFreeFormat(Sci_PositionU startPos, Sci_Position length, int initStyle, WordList *keywordlists[],

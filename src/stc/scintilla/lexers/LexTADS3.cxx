@@ -897,7 +897,7 @@ static const char * const tads3WordList[] = {
         "User defined 1",
         "User defined 2",
         "User defined 3",
-        0
+        nullptr
 };
 
 LexerModule lmTADS3(SCLEX_TADS3, ColouriseTADS3Doc, "tads3", FoldTADS3Doc, tads3WordList);

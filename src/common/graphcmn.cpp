@@ -76,12 +76,12 @@ wxGraphicsObject::~wxGraphicsObject()
 
 bool wxGraphicsObject::IsNull() const
 {
-    return m_refData == NULL;
+    return m_refData == nullptr;
 }
 
 wxGraphicsRenderer* wxGraphicsObject::GetRenderer() const
 {
-    return ( IsNull() ? NULL : GetGraphicsData()->GetRenderer() );
+    return ( IsNull() ? nullptr : GetGraphicsData()->GetRenderer() );
 }
 
 wxGraphicsObjectRefData* wxGraphicsObject::GetGraphicsData() const
@@ -92,7 +92,7 @@ wxGraphicsObjectRefData* wxGraphicsObject::GetGraphicsData() const
 wxObjectRefData* wxGraphicsObject::CreateRefData() const
 {
     wxLogDebug(wxT("A Null Object cannot be changed"));
-    return NULL;
+    return nullptr;
 }
 
 wxObjectRefData* wxGraphicsObject::CloneRefData(const wxObjectRefData* data) const
@@ -1070,7 +1070,7 @@ wxGraphicsContext* wxGraphicsRenderer::CreateContextFromUnknownDC(const wxDC& dc
 #endif
 #endif
 
-    return NULL;
+    return nullptr;
 }
 
 #endif // wxUSE_GRAPHICS_CONTEXT

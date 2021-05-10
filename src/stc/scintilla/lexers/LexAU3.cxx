@@ -905,6 +905,6 @@ static const char * const AU3WordLists[] = {
     "#autoit Special",
     "#autoit Expand",
     "#autoit UDF",
-    0
+    nullptr
 };
 LexerModule lmAU3(SCLEX_AU3, ColouriseAU3Doc, "au3", FoldAU3Doc , AU3WordLists);

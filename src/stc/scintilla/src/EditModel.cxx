@@ -75,5 +75,5 @@ EditModel::EditModel() {
 
 EditModel::~EditModel() {
 	pdoc->Release();
-	pdoc = 0;
+	pdoc = nullptr;
 }

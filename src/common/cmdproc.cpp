@@ -58,7 +58,7 @@ wxCommandProcessor::wxCommandProcessor(int maxCommands)
 {
     m_maxNoCommands = maxCommands;
 #if wxUSE_MENUS
-    m_commandEditMenu = NULL;
+    m_commandEditMenu = nullptr;
 #endif // wxUSE_MENUS
 }
 
@@ -162,7 +162,7 @@ bool wxCommandProcessor::Undo()
 
 bool wxCommandProcessor::Redo()
 {
-    wxCommand *redoCommand = NULL;
+    wxCommand *redoCommand = nullptr;
     wxList::compatibility_iterator redoNode
 #if !wxUSE_STD_CONTAINERS
         = NULL          // just to avoid warnings

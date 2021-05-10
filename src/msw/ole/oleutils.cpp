@@ -77,7 +77,7 @@ BSTR wxBasicString::Detach()
 {
     BSTR bstr = m_bstrBuf;
 
-    m_bstrBuf = NULL;
+    m_bstrBuf = nullptr;
 
     return bstr;
 }
@@ -93,7 +93,7 @@ wxBasicString& wxBasicString::operator=(const wxBasicString& src)
 {
     if ( this != &src )
     {
-        wxCHECK_MSG(m_bstrBuf == NULL || m_bstrBuf != src.m_bstrBuf,
+        wxCHECK_MSG(m_bstrBuf == nullptr || m_bstrBuf != src.m_bstrBuf,
             *this, wxS("Attempting to assign already owned BSTR"));
         SysFreeString(m_bstrBuf);
         m_bstrBuf = src.Copy();
@@ -152,7 +152,7 @@ bool wxVariantDataCurrency::Write(wxSTD ostream& str) const
 
 bool wxVariantDataCurrency::Write(wxString& str) const
 {
-    BSTR bStr = NULL;
+    BSTR bStr = nullptr;
     if ( SUCCEEDED(VarBstrFromCy(m_value, LOCALE_USER_DEFAULT, 0, &bStr)) )
     {
         str = wxConvertStringFromOle(bStr);

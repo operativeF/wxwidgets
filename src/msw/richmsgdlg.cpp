@@ -82,7 +82,7 @@ int wxRichMessageDialog::ShowModal()
         // create the task dialog, process the answer and return it.
         BOOL checkBoxChecked;
         int msAns;
-        HRESULT hr = taskDialogIndirect( &tdc, &msAns, NULL, &checkBoxChecked );
+        HRESULT hr = taskDialogIndirect( &tdc, &msAns, nullptr, &checkBoxChecked );
         if ( FAILED(hr) )
         {
             wxLogApiError( "TaskDialogIndirect", hr );

@@ -359,7 +359,7 @@ static void FoldPBDoc(Sci_PositionU startPos, Sci_Position length, int, WordList
 
 static const char * const pbWordListDesc[] = {
     "Keywords",
-    0
+    nullptr
 };
 
 LexerModule lmPB(SCLEX_POWERBASIC, ColourisePBDoc, "powerbasic", FoldPBDoc, pbWordListDesc);

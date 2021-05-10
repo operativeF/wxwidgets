@@ -24,7 +24,7 @@
 using namespace Scintilla;
 #endif
 
-ContractionState::ContractionState() : visible(0), expanded(0), heights(0), foldDisplayTexts(0), displayLines(0), linesInDocument(1) {
+ContractionState::ContractionState() : visible(nullptr), expanded(nullptr), heights(nullptr), foldDisplayTexts(nullptr), displayLines(nullptr), linesInDocument(1) {
 	//InsertLine(0);
 }
 
@@ -45,15 +45,15 @@ void ContractionState::EnsureData() {
 
 void ContractionState::Clear() {
 	delete visible;
-	visible = 0;
+	visible = nullptr;
 	delete expanded;
-	expanded = 0;
+	expanded = nullptr;
 	delete heights;
-	heights = 0;
+	heights = nullptr;
 	delete foldDisplayTexts;
-	foldDisplayTexts = 0;
+	foldDisplayTexts = nullptr;
 	delete displayLines;
-	displayLines = 0;
+	displayLines = nullptr;
 	linesInDocument = 1;
 }
 
@@ -114,7 +114,7 @@ void ContractionState::InsertLine(int lineDoc) {
 		heights->InsertSpace(lineDoc, 1);
 		heights->SetValueAt(lineDoc, 1);
 		foldDisplayTexts->InsertSpace(lineDoc, 1);
-		foldDisplayTexts->SetValueAt(lineDoc, NULL);
+		foldDisplayTexts->SetValueAt(lineDoc, nullptr);
 		int lineDisplay = DisplayFromDoc(lineDoc);
 		displayLines->InsertPartition(lineDoc, lineDisplay);
 		displayLines->InsertText(lineDoc, 1);

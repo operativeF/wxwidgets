@@ -494,7 +494,7 @@ static void ColouriseBatchDoc(
 static const char *const batchWordListDesc[] = {
 	"Internal Commands",
 	"External Commands",
-	0
+	nullptr
 };
 
-LexerModule lmBatch(SCLEX_BATCH, ColouriseBatchDoc, "batch", 0, batchWordListDesc);
+LexerModule lmBatch(SCLEX_BATCH, ColouriseBatchDoc, "batch", nullptr, batchWordListDesc);

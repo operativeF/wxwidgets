@@ -189,7 +189,7 @@ void wx_jpeg_io_src( j_decompress_ptr cinfo, wxInputStream& infile )
 {
     wx_src_ptr src;
 
-    if (cinfo->src == NULL) {    /* first time for this JPEG object? */
+    if (cinfo->src == nullptr) {    /* first time for this JPEG object? */
         cinfo->src = (struct jpeg_source_mgr *)
             (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_PERMANENT,
             sizeof(wx_source_mgr));
@@ -197,7 +197,7 @@ void wx_jpeg_io_src( j_decompress_ptr cinfo, wxInputStream& infile )
     src = (wx_src_ptr) cinfo->src;
     src->pub.bytes_in_buffer = 0; /* forces fill_input_buffer on first read */
     src->buffer = new JOCTET[JPEG_IO_BUFFER_SIZE];
-    src->pub.next_input_byte = NULL; /* until buffer loaded */
+    src->pub.next_input_byte = nullptr; /* until buffer loaded */
     src->stream = &infile;
 
     src->pub.init_source = wx_init_source;
@@ -399,7 +399,7 @@ static void wx_jpeg_io_dest(j_compress_ptr cinfo, wxOutputStream& outfile)
 {
     wx_dest_ptr dest;
 
-    if (cinfo->dest == NULL) {    /* first time for this JPEG object? */
+    if (cinfo->dest == nullptr) {    /* first time for this JPEG object? */
         cinfo->dest = (struct jpeg_destination_mgr *)
             (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_PERMANENT,
             sizeof(wx_destination_mgr));

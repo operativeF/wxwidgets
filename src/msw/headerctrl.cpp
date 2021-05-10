@@ -217,11 +217,11 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxMSWHeaderCtrlNameStr[] = "wxMSWHeader
 void wxMSWHeaderCtrl::Init()
 {
     m_numColumns = 0;
-    m_imageList = NULL;
+    m_imageList = nullptr;
     m_scrollOffset = 0;
     m_colBeingDragged = -1;
     m_isColBeingResized = false;
-    m_customDraw = NULL;
+    m_customDraw = nullptr;
 }
 
 bool wxMSWHeaderCtrl::Create(wxWindow *parent,
@@ -668,10 +668,10 @@ wxMSWHeaderCtrlCustomDraw* wxMSWHeaderCtrl::GetCustomDraw()
         if ( m_customDraw )
         {
             delete m_customDraw;
-            m_customDraw = NULL;
+            m_customDraw = nullptr;
         }
 
-        return NULL;
+        return nullptr;
     }
 
     // We do have at least one custom colour, so enable custom drawing.
@@ -1026,7 +1026,7 @@ bool wxMSWHeaderCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 
 void wxHeaderCtrl::Init()
 {
-    m_nativeControl = NULL;
+    m_nativeControl = nullptr;
 }
 
 bool wxHeaderCtrl::Create(wxWindow *parent,
@@ -1062,7 +1062,7 @@ bool wxHeaderCtrl::Create(wxWindow *parent,
 
 void wxHeaderCtrl::OnSize(wxSizeEvent& WXUNUSED(event))
 {
-    if (m_nativeControl != NULL) // check whether initialisation has been done
+    if (m_nativeControl != nullptr) // check whether initialisation has been done
     {
         int cw, ch;
         GetClientSize(&cw, &ch);

@@ -144,7 +144,7 @@ wxTreeEvent::wxTreeEvent(wxEventType commandType,
 wxTreeEvent::wxTreeEvent(wxEventType commandType, int id)
            : wxNotifyEvent(commandType, id)
 {
-    m_itemOld = 0l;
+    m_itemOld = nullptr;
     m_editCancelled = false;
 }
 
@@ -166,7 +166,7 @@ wxTreeEvent::wxTreeEvent(const wxTreeEvent & event)
 wxTreeCtrlBase::wxTreeCtrlBase()
 {
     m_imageListNormal =
-    m_imageListState = NULL;
+    m_imageListState = nullptr;
     m_ownsImageListNormal =
     m_ownsImageListState = false;
 

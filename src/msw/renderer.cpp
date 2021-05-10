@@ -207,7 +207,7 @@ public:
                                   const wxRect& rect,
                                   int flags = 0,
                                   wxHeaderSortIconType sortArrow = wxHDR_SORT_ICON_NONE,
-                                  wxHeaderButtonParams* params = NULL) wxOVERRIDE;
+                                  wxHeaderButtonParams* params = nullptr) wxOVERRIDE;
 
     virtual void DrawTreeItemButton(wxWindow *win,
                                     wxDC& dc,
@@ -564,8 +564,8 @@ int wxRendererMSW::GetHeaderButtonHeight(wxWindow * win)
 
 
     // create a temporary header window just to get its geometry
-    HWND hwndHeader = ::CreateWindow(WC_HEADER, NULL, 0,
-                                     0, 0, 0, 0, NULL, NULL, NULL, NULL);
+    HWND hwndHeader = ::CreateWindow(WC_HEADER, nullptr, 0,
+                                     0, 0, 0, 0, nullptr, nullptr, nullptr, nullptr);
     if ( !hwndHeader )
         return DEFAULT_HEIGHT;
 
@@ -582,7 +582,7 @@ int wxRendererMSW::GetHeaderButtonHeight(wxWindow * win)
 
     // initialize the struct filled with the values by Header_Layout()
     RECT parentRect = { 0, 0, 100, 100 };
-    WINDOWPOS wp = { 0, 0, 0, 0, 0, 0, 0 };
+    WINDOWPOS wp = { nullptr, nullptr, 0, 0, 0, 0, 0 };
     HDLAYOUT hdl = { &parentRect, &wp };
 
     return Header_Layout(hwndHeader, &hdl) ? wp.cy : DEFAULT_HEIGHT;
@@ -666,7 +666,7 @@ wxRendererXP::DrawComboBoxDropButton(wxWindow * win,
                                 CP_DROPDOWNBUTTON,
                                 state,
                                 &r,
-                                NULL
+                                nullptr
                             );
 
 }
@@ -703,7 +703,7 @@ wxRendererXP::DrawHeaderButton(wxWindow *win,
                                 HP_HEADERITEM,
                                 state,
                                 &r,
-                                NULL
+                                nullptr
                             );
 
     // NOTE: Using the theme to draw HP_HEADERSORTARROW doesn't do anything.
@@ -740,7 +740,7 @@ wxRendererXP::DrawTreeItemButton(wxWindow *win,
                                 TVP_GLYPH,
                                 state,
                                 &r,
-                                NULL
+                                nullptr
                             );
 }
 
@@ -786,7 +786,7 @@ wxRendererXP::DoDrawCheckMark(int kind,
                                 kind,
                                 state,
                                 &r,
-                                NULL
+                                nullptr
                             );
 
     return true;
@@ -842,7 +842,7 @@ wxRendererXP::DoDrawButtonLike(HTHEME htheme,
                                 part,
                                 state,
                                 &r,
-                                NULL
+                                nullptr
                             );
 }
 
@@ -901,7 +901,7 @@ wxSize wxRendererXP::GetCheckBoxSize(wxWindow* win, int flags)
         if (::IsThemePartDefined(hTheme, BP_CHECKBOX, 0))
         {
             SIZE checkSize;
-            if (::GetThemePartSize(hTheme, NULL, BP_CHECKBOX, CBS_UNCHECKEDNORMAL, NULL, TS_DRAW, &checkSize) == S_OK)
+            if (::GetThemePartSize(hTheme, nullptr, BP_CHECKBOX, CBS_UNCHECKEDNORMAL, nullptr, TS_DRAW, &checkSize) == S_OK)
                 return wxSize(checkSize.cx, checkSize.cy);
         }
     }
@@ -918,7 +918,7 @@ wxSize wxRendererXP::GetCheckMarkSize(wxWindow* win)
         if (::IsThemePartDefined(hTheme, MENU_POPUPCHECK, 0))
         {
             SIZE checkSize;
-            if (::GetThemePartSize(hTheme, NULL, MENU_POPUPCHECK, MC_CHECKMARKNORMAL, NULL, TS_DRAW, &checkSize) == S_OK)
+            if (::GetThemePartSize(hTheme, nullptr, MENU_POPUPCHECK, MC_CHECKMARKNORMAL, nullptr, TS_DRAW, &checkSize) == S_OK)
                 return wxSize(checkSize.cx, checkSize.cy);
         }
     }
@@ -935,7 +935,7 @@ wxSize wxRendererXP::GetExpanderSize(wxWindow* win)
         if ( ::IsThemePartDefined(hTheme, TVP_GLYPH, 0) )
         {
             SIZE expSize;
-            if (::GetThemePartSize(hTheme, NULL, TVP_GLYPH, GLPS_CLOSED, NULL,
+            if (::GetThemePartSize(hTheme, nullptr, TVP_GLYPH, GLPS_CLOSED, nullptr,
                                    TS_DRAW, &expSize) == S_OK)
                 return wxSize(expSize.cx, expSize.cy);
 
@@ -975,7 +975,7 @@ wxRendererXP::DrawCollapseButton(wxWindow *win,
             TDLG_EXPANDOBUTTON,
             state,
             &r,
-            NULL
+            nullptr
             );
     }
     else
@@ -995,7 +995,7 @@ wxSize wxRendererXP::GetCollapseButtonSize(wxWindow *win, wxDC& dc)
             GetHdcOf(dc.GetTempHDC()),
             TDLG_EXPANDOBUTTON,
             TDLGEBS_NORMAL,
-            NULL,
+            nullptr,
             TS_TRUE,
             &s);
 
@@ -1022,7 +1022,7 @@ wxRendererXP::DrawItemSelectionRect(wxWindow *win,
         if ( ::IsThemeBackgroundPartiallyTransparent(hTheme, LVP_LISTITEM, itemState) )
             ::DrawThemeParentBackground(GetHwndOf(win), GetHdcOf(dc.GetTempHDC()), &rc);
 
-        ::DrawThemeBackground(hTheme, GetHdcOf(dc.GetTempHDC()), LVP_LISTITEM, itemState, &rc, 0);
+        ::DrawThemeBackground(hTheme, GetHdcOf(dc.GetTempHDC()), LVP_LISTITEM, itemState, &rc, nullptr);
     }
     else
     {
@@ -1043,7 +1043,7 @@ void wxRendererXP::DrawItemText(wxWindow* win,
     const int itemState = GetListItemState(flags);
 
     typedef HRESULT(__stdcall *DrawThemeTextEx_t)(HTHEME, HDC, int, int, const wchar_t *, int, DWORD, RECT *, const WXDTTOPTS *);
-    static DrawThemeTextEx_t s_DrawThemeTextEx = NULL;
+    static DrawThemeTextEx_t s_DrawThemeTextEx = nullptr;
     static bool s_initDone = false;
 
     if ( !s_initDone )
@@ -1192,7 +1192,7 @@ void wxRendererXP::DrawGauge(wxWindow* win,
         flags & wxCONTROL_SPECIAL ? PP_BARVERT : PP_BAR,
         0,
         &r,
-        NULL);
+        nullptr);
 
     RECT contentRect;
     ::GetThemeBackgroundContentRect(
@@ -1225,7 +1225,7 @@ void wxRendererXP::DrawGauge(wxWindow* win,
         flags & wxCONTROL_SPECIAL ? PP_CHUNKVERT : PP_CHUNK,
         0,
         &contentRect,
-        NULL);
+        nullptr);
 }
 
 // ----------------------------------------------------------------------------

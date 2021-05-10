@@ -153,7 +153,7 @@ wxPropertyGridPage::wxPropertyGridPage()
     : wxEvtHandler(), wxPropertyGridInterface(), wxPropertyGridPageState()
 {
     m_pState = this; // wxPropertyGridInterface to point to State
-    m_manager = NULL;
+    m_manager = nullptr;
     m_isDefault = false;
 }
 
@@ -351,7 +351,7 @@ private:
         OnColumWidthsChanged();
 
         wxPropertyGrid* pg = m_manager->GetGrid();
-        pg->SendEvent(wxEVT_PG_COL_DRAGGING, NULL, NULL, 0,
+        pg->SendEvent(wxEVT_PG_COL_DRAGGING, nullptr, nullptr, 0,
                       (unsigned int)col);
     }
 
@@ -369,7 +369,7 @@ private:
             evt.Veto();
         // Allow application to veto dragging
         else if ( pg->SendEvent(wxEVT_PG_COL_BEGIN_DRAG,
-                                NULL, NULL, 0,
+                                nullptr, nullptr, 0,
                                 (unsigned int)col) )
             evt.Veto();
     }
@@ -379,7 +379,7 @@ private:
         int col = evt.GetColumn();
         wxPropertyGrid* pg = m_manager->GetGrid();
         pg->SendEvent(wxEVT_PG_COL_END_DRAG,
-                      NULL, NULL, 0,
+                      nullptr, nullptr, 0,
                       (unsigned int)col);
     }
 
@@ -465,19 +465,19 @@ bool wxPropertyGridManager::Create( wxWindow *parent,
 void wxPropertyGridManager::Init1()
 {
 
-    m_pPropGrid = NULL;
+    m_pPropGrid = nullptr;
 
 #if wxUSE_TOOLBAR
-    m_pToolbar = NULL;
+    m_pToolbar = nullptr;
 #endif
 #if wxUSE_HEADERCTRL
-    m_pHeaderCtrl = NULL;
+    m_pHeaderCtrl = nullptr;
     m_showHeader = false;
 #endif
-    m_pTxtHelpCaption = NULL;
-    m_pTxtHelpContent = NULL;
+    m_pTxtHelpCaption = nullptr;
+    m_pTxtHelpContent = nullptr;
 
-    m_emptyPage = NULL;
+    m_emptyPage = nullptr;
 
     m_selPage = -1;
 
@@ -851,7 +851,7 @@ wxPropertyGridPageState* wxPropertyGridManager::GetPageState( int page ) const
     // Do not change this into wxCHECK because returning NULL is important
     // for wxPropertyGridInterface page enumeration mechanics.
     if ( page >= (int)GetPageCount() )
-        return NULL;
+        return nullptr;
 
     if ( page == -1 )
         return m_pState;
@@ -945,7 +945,7 @@ wxPropertyGridPage* wxPropertyGridManager::InsertPage( int index,
     if ( index < 0 )
         index = GetPageCount();
 
-    wxCHECK_MSG( (size_t)index == GetPageCount(), NULL,
+    wxCHECK_MSG( (size_t)index == GetPageCount(), nullptr,
         wxS("wxPropertyGridManager currently only supports appending pages (due to wxToolBar limitation)."));
 
     bool needInit = true;
@@ -1141,7 +1141,7 @@ bool wxPropertyGridManager::IsPropertySelected( wxPGPropArg id ) const
 wxPGProperty* wxPropertyGridManager::GetPageRoot( int index ) const
 {
     wxCHECK_MSG( (index >= 0) && (index < (int)m_arrPages.size()),
-                 NULL,
+                 nullptr,
                  wxS("invalid page index") );
 
     return m_arrPages[index]->GetRoot();
@@ -1345,7 +1345,7 @@ void wxPropertyGridManager::RecalculatePositions( int width, int height )
         m_pHeaderCtrl->SetSize(0, propgridY, width, wxDefaultCoord);
         // Sync horizontal scroll position with grid
         int x;
-        m_pPropGrid->CalcScrolledPosition(0, 0, &x, NULL);
+        m_pPropGrid->CalcScrolledPosition(0, 0, &x, nullptr);
         m_pHeaderCtrl->ScrollWindow(x, 0);
         propgridY += m_pHeaderCtrl->GetSize().y;
     }
@@ -1619,7 +1619,7 @@ void wxPropertyGridManager::RecreateControls()
         // No toolbar.
         if ( m_pToolbar )
             m_pToolbar->Destroy();
-        m_pToolbar = NULL;
+        m_pToolbar = nullptr;
     }
 #endif
 
@@ -1681,12 +1681,12 @@ void wxPropertyGridManager::RecreateControls()
         if ( m_pTxtHelpCaption )
             m_pTxtHelpCaption->Destroy();
 
-        m_pTxtHelpCaption = NULL;
+        m_pTxtHelpCaption = nullptr;
 
         if ( m_pTxtHelpContent )
             m_pTxtHelpContent->Destroy();
 
-        m_pTxtHelpContent = NULL;
+        m_pTxtHelpContent = nullptr;
     }
 
     int width, height;
@@ -1712,7 +1712,7 @@ wxPGProperty* wxPropertyGridManager::DoGetPropertyByName( const wxString& name )
             return p;
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 // -----------------------------------------------------------------------
@@ -1783,7 +1783,7 @@ void wxPropertyGridManager::OnToolbarClick( wxCommandEvent &event )
         if ( DoSelectPage(index) )
         {
             // Event dispatching must be last.
-            m_pPropGrid->SendEvent( wxEVT_PG_PAGE_CHANGED, (wxPGProperty*)NULL );
+            m_pPropGrid->SendEvent( wxEVT_PG_PAGE_CHANGED, (wxPGProperty*)nullptr );
         }
         else
         {

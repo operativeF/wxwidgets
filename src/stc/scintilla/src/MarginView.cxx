@@ -101,21 +101,21 @@ void DrawWrapMarker(Surface *surface, PRectangle rcPlace,
 }
 
 MarginView::MarginView() {
-	pixmapSelMargin = 0;
-	pixmapSelPattern = 0;
-	pixmapSelPatternOffset1 = 0;
+	pixmapSelMargin = nullptr;
+	pixmapSelPattern = nullptr;
+	pixmapSelPatternOffset1 = nullptr;
 	wrapMarkerPaddingRight = 3;
-	customDrawWrapMarker = NULL;
+	customDrawWrapMarker = nullptr;
 }
 
 void MarginView::DropGraphics(bool freeObjects) {
 	if (freeObjects) {
 		delete pixmapSelMargin;
-		pixmapSelMargin = 0;
+		pixmapSelMargin = nullptr;
 		delete pixmapSelPattern;
-		pixmapSelPattern = 0;
+		pixmapSelPattern = nullptr;
 		delete pixmapSelPatternOffset1;
-		pixmapSelPatternOffset1 = 0;
+		pixmapSelPatternOffset1 = nullptr;
 	} else {
 		if (pixmapSelMargin)
 			pixmapSelMargin->Release();
@@ -402,7 +402,7 @@ void MarginView::PaintMargin(Surface *surface, int topLine, PRectangle rc, PRect
 						PRectangle rcWrapMarker = rcMarker;
 						rcWrapMarker.right -= wrapMarkerPaddingRight;
 						rcWrapMarker.left = rcWrapMarker.right - vs.styles[STYLE_LINENUMBER].aveCharWidth;
-						if (customDrawWrapMarker == NULL) {
+						if (customDrawWrapMarker == nullptr) {
 							DrawWrapMarker(surface, rcWrapMarker, false, vs.styles[STYLE_LINENUMBER].fore);
 						} else {
 							customDrawWrapMarker(surface, rcWrapMarker, false, vs.styles[STYLE_LINENUMBER].fore);

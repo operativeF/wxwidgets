@@ -25,8 +25,8 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxWizardXmlHandler, wxXmlResourceHandler);
 
 wxWizardXmlHandler::wxWizardXmlHandler() : wxXmlResourceHandler()
 {
-    m_wizard = NULL;
-    m_lastSimplePage = NULL;
+    m_wizard = nullptr;
+    m_lastSimplePage = nullptr;
     XRC_ADD_STYLE(wxWIZARD_EX_HELPBUTTON);
     AddWindowStyles();
 }
@@ -49,7 +49,7 @@ wxObject *wxWizardXmlHandler::DoCreateResource()
 
         wxWizard *old = m_wizard;
         m_wizard = wiz;
-        m_lastSimplePage = NULL;
+        m_lastSimplePage = nullptr;
         CreateChildren(wiz, true /*this handler only*/);
         m_wizard = old;
         return wiz;
@@ -61,7 +61,7 @@ wxObject *wxWizardXmlHandler::DoCreateResource()
         if (m_class == wxT("wxWizardPageSimple"))
         {
             XRC_MAKE_INSTANCE(p, wxWizardPageSimple)
-            p->Create(m_wizard, NULL, NULL, GetBitmap());
+            p->Create(m_wizard, nullptr, nullptr, GetBitmap());
             if (m_lastSimplePage)
                 wxWizardPageSimple::Chain(m_lastSimplePage, p);
             page = p;
@@ -72,7 +72,7 @@ wxObject *wxWizardXmlHandler::DoCreateResource()
             if ( !m_instance )
             {
                 ReportError("wxWizardPage is abstract class and must be subclassed");
-                return NULL;
+                return nullptr;
             }
 
             page = wxStaticCast(m_instance, wxWizardPage);
@@ -91,7 +91,7 @@ wxObject *wxWizardXmlHandler::DoCreateResource()
 bool wxWizardXmlHandler::CanHandle(wxXmlNode *node)
 {
     return IsOfClass(node, wxT("wxWizard")) ||
-           (m_wizard != NULL &&
+           (m_wizard != nullptr &&
                 (IsOfClass(node, wxT("wxWizardPage")) ||
                  IsOfClass(node, wxT("wxWizardPageSimple")))
            );

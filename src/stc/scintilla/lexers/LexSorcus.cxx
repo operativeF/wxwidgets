@@ -173,9 +173,9 @@ static void ColouriseSorcusDoc(Sci_PositionU startPos, Sci_Position length, int 
 }
 
 
-static const char* const SorcusWordListDesc[] = {"Command","Parameter", "Constant", 0};
+static const char* const SorcusWordListDesc[] = {"Command","Parameter", "Constant", nullptr};
 
-LexerModule lmSorc(SCLEX_SORCUS, ColouriseSorcusDoc, "sorcins", 0, SorcusWordListDesc);
+LexerModule lmSorc(SCLEX_SORCUS, ColouriseSorcusDoc, "sorcins", nullptr, SorcusWordListDesc);
 
 
 

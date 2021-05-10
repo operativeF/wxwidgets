@@ -183,7 +183,7 @@ void wxGridCellEditorEvtHandler::OnChar(wxKeyEvent& event)
                 // get width of cell CONTENTS (text)
                 int y;
                 wxFont font = m_grid->GetCellFont(row, col);
-                m_grid->GetTextExtent(value, &textWidth, &y, NULL, NULL, &font);
+                m_grid->GetTextExtent(value, &textWidth, &y, nullptr, nullptr, &font);
 
                 // try to RIGHT align the text by scrolling
                 int client_right = m_grid->GetGridWindow()->GetClientSize().GetWidth();
@@ -228,8 +228,8 @@ void wxGridCellEditorEvtHandler::OnChar(wxKeyEvent& event)
 
 wxGridCellEditor::wxGridCellEditor()
 {
-    m_control = NULL;
-    m_attr = NULL;
+    m_control = nullptr;
+    m_attr = nullptr;
 }
 
 wxGridCellEditor::~wxGridCellEditor()
@@ -262,7 +262,7 @@ void wxGridCellEditor::Destroy()
         m_control->PopEventHandler( true /* delete it*/ );
 
         m_control->Destroy();
-        m_control = NULL;
+        m_control = nullptr;
     }
 }
 
@@ -1569,7 +1569,7 @@ void wxGridCellChoiceEditor::BeginEdit(int row, int col, wxGrid* grid)
     wxASSERT_MSG(m_control,
                  wxT("The wxGridCellEditor must be created first!"));
 
-    wxGridCellEditorEvtHandler* evtHandler = NULL;
+    wxGridCellEditorEvtHandler* evtHandler = nullptr;
     if (m_control)
     {
         // This event handler is needed to properly dismiss the editor when the popup is closed
@@ -1720,7 +1720,7 @@ void wxGridCellEnumEditor::BeginEdit(int row, int col, wxGrid* grid)
     wxASSERT_MSG(m_control,
                  wxT("The wxGridCellEnumEditor must be Created first!"));
 
-    wxGridCellEditorEvtHandler* evtHandler = NULL;
+    wxGridCellEditorEvtHandler* evtHandler = nullptr;
     if (m_control)
         evtHandler = wxDynamicCast(m_control->GetEventHandler(), wxGridCellEditorEvtHandler);
 

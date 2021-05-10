@@ -159,7 +159,7 @@ public:
         : wxToolBarToolBase(tbar, id, label, bmpNormal, bmpDisabled, kind,
                             clientData, shortHelp, longHelp)
     {
-        m_staticText = NULL;
+        m_staticText = nullptr;
         m_toBeDeleted  = false;
     }
 
@@ -173,7 +173,7 @@ public:
         }
         else // no label
         {
-            m_staticText = NULL;
+            m_staticText = nullptr;
         }
 
         m_toBeDeleted  = false;
@@ -205,7 +205,7 @@ public:
                 else
                 {
                     delete m_staticText;
-                    m_staticText = NULL;
+                    m_staticText = nullptr;
                 }
             }
             else
@@ -367,8 +367,8 @@ wxToolBar::CreateTool(wxControl *control, const wxString& label)
 
 void wxToolBar::Init()
 {
-    m_hBitmap = 0;
-    m_disabledImgList = NULL;
+    m_hBitmap = nullptr;
+    m_disabledImgList = nullptr;
 
     m_nButtons = 0;
     m_totalFixedSize = 0;
@@ -381,7 +381,7 @@ void wxToolBar::Init()
     m_defaultWidth = 16;
     m_defaultHeight = 15;
 
-    m_pInTool = NULL;
+    m_pInTool = nullptr;
 }
 
 bool wxToolBar::Create(wxWindow *parent,
@@ -528,7 +528,7 @@ void wxToolBar::Recreate()
     if ( m_hBitmap )
     {
         ::DeleteObject((HBITMAP) m_hBitmap);
-        m_hBitmap = 0;
+        m_hBitmap = nullptr;
     }
 
     wxDELETE(m_disabledImgList);
@@ -1043,8 +1043,8 @@ bool wxToolBar::Realize()
         {
 #ifdef TB_REPLACEBITMAP
             TBREPLACEBITMAP replaceBitmap;
-            replaceBitmap.hInstOld = NULL;
-            replaceBitmap.hInstNew = NULL;
+            replaceBitmap.hInstOld = nullptr;
+            replaceBitmap.hInstNew = nullptr;
             replaceBitmap.nIDOld = (UINT_PTR)oldToolBarBitmap;
             replaceBitmap.nIDNew = (UINT_PTR)hBitmap;
             replaceBitmap.nButtons = nButtons;
@@ -1071,7 +1071,7 @@ bool wxToolBar::Realize()
         if ( addBitmap ) // no old bitmap or we can't replace it
         {
             TBADDBITMAP tbAddBitmap;
-            tbAddBitmap.hInst = 0;
+            tbAddBitmap.hInst = nullptr;
             tbAddBitmap.nID = (UINT_PTR)hBitmap;
             if ( ::SendMessage(GetHwnd(), TB_ADDBITMAP,
                                (WPARAM) nButtons, (LPARAM)&tbAddBitmap) == -1 )
@@ -1082,7 +1082,7 @@ bool wxToolBar::Realize()
 
         HIMAGELIST hil = m_disabledImgList
                             ? GetHimagelistOf(m_disabledImgList)
-                            : 0;
+                            : nullptr;
 
         // notice that we set the image list even if don't have one right
         // now as we could have it before and need to reset it in this case
@@ -1744,7 +1744,7 @@ wxToolBarToolBase *wxToolBar::FindToolForPosition(wxCoord x, wxCoord y) const
     //      TB_HITTEST returns m_nButtons ( not -1 )
     if ( index < 0 || (size_t)index >= m_nButtons )
         // it's a separator or there is no tool at all there
-        return NULL;
+        return nullptr;
 
     return m_tools.Item((size_t)index)->GetData();
 }
@@ -1909,7 +1909,7 @@ void wxToolBar::OnMouseEvent(wxMouseEvent& event)
         if ( m_pInTool )
         {
             OnMouseEnter(wxID_ANY);
-            m_pInTool = NULL;
+            m_pInTool = nullptr;
         }
 
         event.Skip();
@@ -2086,7 +2086,7 @@ bool wxToolBar::HandlePaint(WXWPARAM wParam, WXLPARAM lParam)
     MSWDefWindowProc(WM_PAINT, wParam, lParam);
 
     if ( !hadHook )
-        GetParent()->MSWSetEraseBgHook(NULL);
+        GetParent()->MSWSetEraseBgHook(nullptr);
 
 
     if ( rgnDummySeps.IsOk() )
@@ -2120,7 +2120,7 @@ WXHBRUSH wxToolBar::MSWGetToolbarBgBrush()
     wxBrush * const
         brush = wxTheBrushList->FindOrCreateBrush(colBg);
 
-    return brush ? static_cast<WXHBRUSH>(brush->GetResourceHandle()) : 0;
+    return brush ? static_cast<WXHBRUSH>(brush->GetResourceHandle()) : nullptr;
 }
 
 WXHBRUSH wxToolBar::MSWGetBgBrushForChild(WXHDC hDC, wxWindowMSW *child)
@@ -2136,7 +2136,7 @@ WXHBRUSH wxToolBar::MSWGetBgBrushForChild(WXHDC hDC, wxWindowMSW *child)
     if ( child->GetParent() == this && child->HasTransparentBackground() )
         return MSWGetToolbarBgBrush();
 
-    return 0;
+    return nullptr;
 }
 
 void wxToolBar::MSWDoEraseBackground(WXHDC hDC)
@@ -2159,7 +2159,7 @@ bool wxToolBar::MSWEraseBgHook(WXHDC hDC)
 
     MSWDoEraseBackground(hDC);
 
-    ::SetWindowOrgEx(hdc, ptOldOrg.x, ptOldOrg.y, NULL);
+    ::SetWindowOrgEx(hdc, ptOldOrg.x, ptOldOrg.y, nullptr);
 
     return true;
 }

@@ -103,7 +103,7 @@ static const char * const asmWordListDesc[] = {
 	"Extended instructions",
 	"Directives4Foldstart",
 	"Directives4Foldend",
-	0
+	nullptr
 };
 
 struct OptionSetAsm : public OptionSet<OptionsAsm> {
@@ -181,7 +181,7 @@ public:
 	void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
 
 	void * SCI_METHOD PrivateCall(int, void *) {
-		return 0;
+		return nullptr;
 	}
 
 	static ILexer *LexerFactoryAsm() {
@@ -201,7 +201,7 @@ Sci_Position SCI_METHOD LexerAsm::PropertySet(const char *key, const char *val) 
 }
 
 Sci_Position SCI_METHOD LexerAsm::WordListSet(int n, const char *wl) {
-	WordList *wordListN = 0;
+	WordList *wordListN = nullptr;
 	switch (n) {
 	case 0:
 		wordListN = &cpuInstruction;

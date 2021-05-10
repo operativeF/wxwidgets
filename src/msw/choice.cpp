@@ -332,8 +332,8 @@ void wxChoice::SetString(unsigned int n, const wxString& s)
     // string in place
 
     // we need to preserve the client data manually
-    void *oldData = NULL;
-    wxClientData *oldObjData = NULL;
+    void *oldData = nullptr;
+    wxClientData *oldObjData = nullptr;
     if ( HasClientUntypedData() )
         oldData = GetClientData(n);
     else if ( HasClientObjectData() )

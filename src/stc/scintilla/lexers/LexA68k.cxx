@@ -341,7 +341,7 @@ static const char * const a68kWordListDesc[] =
     "Extended instructions",
     "Comment special words",
     "Doxygen keywords",
-    0
+    nullptr
 };
 
-LexerModule lmA68k(SCLEX_A68K, ColouriseA68kDoc, "a68k", 0, a68kWordListDesc);
+LexerModule lmA68k(SCLEX_A68K, ColouriseA68kDoc, "a68k", nullptr, a68kWordListDesc);

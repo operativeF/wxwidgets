@@ -186,8 +186,8 @@ wxBitmap wxStaticBitmap::GetBitmap() const
 void wxStaticBitmap::Init()
 {
     m_isIcon = true;
-    m_image = NULL;
-    m_currentHandle = 0;
+    m_image = nullptr;
+    m_currentHandle = nullptr;
     m_ownsCurrentHandle = false;
 }
 
@@ -269,7 +269,7 @@ void wxStaticBitmap::MSWReplaceImageHandle(WXLPARAM handle)
                   m_isIcon ? IMAGE_ICON : IMAGE_BITMAP, (LPARAM)handle);
     // detect if this is still the handle we passed before or
     // if the static-control made a copy of the bitmap!
-    if (oldHandle != 0 && oldHandle != (HGDIOBJ) m_currentHandle)
+    if (oldHandle != nullptr && oldHandle != (HGDIOBJ) m_currentHandle)
     {
         // the static control made a copy and we are responsible for deleting it
         ::DeleteObject((HGDIOBJ) oldHandle);

@@ -1040,6 +1040,6 @@ static void ColouriseTEHexDoc(Sci_PositionU startPos, Sci_Position length, int i
 	sc.Complete();
 }
 
-LexerModule lmSrec(SCLEX_SREC, ColouriseSrecDoc, "srec", 0, NULL);
-LexerModule lmIHex(SCLEX_IHEX, ColouriseIHexDoc, "ihex", FoldIHexDoc, NULL);
-LexerModule lmTEHex(SCLEX_TEHEX, ColouriseTEHexDoc, "tehex", 0, NULL);
+LexerModule lmSrec(SCLEX_SREC, ColouriseSrecDoc, "srec", nullptr, nullptr);
+LexerModule lmIHex(SCLEX_IHEX, ColouriseIHexDoc, "ihex", FoldIHexDoc, nullptr);
+LexerModule lmTEHex(SCLEX_TEHEX, ColouriseTEHexDoc, "tehex", nullptr, nullptr);

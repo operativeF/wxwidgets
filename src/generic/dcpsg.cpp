@@ -307,7 +307,7 @@ wxPostScriptDCImpl::wxPostScriptDCImpl( wxPrinterDC *owner, const wxPrintData& d
 
 void wxPostScriptDCImpl::Init()
 {
-    m_pstream = NULL;
+    m_pstream = nullptr;
 
     m_currentRed = 0;
     m_currentGreen = 0;
@@ -328,7 +328,7 @@ wxPostScriptDCImpl::~wxPostScriptDCImpl ()
     if (m_pstream)
     {
         fclose( m_pstream );
-        m_pstream = NULL;
+        m_pstream = nullptr;
     }
 }
 
@@ -1237,7 +1237,7 @@ void wxPostScriptDCImpl::SetPen( const wxPen& pen )
                 PsPrint( buffer );
             }
             PsPrint ("] 0 setdash\n");
-            psdash = 0;
+            psdash = nullptr;
         }
         break;
         case wxPENSTYLE_SOLID:
@@ -1377,7 +1377,7 @@ void wxPostScriptDCImpl::DoDrawText( const wxString& text, wxCoord x, wxCoord y 
     SetPSFont();
 
     wxCoord text_descent;
-    GetOwner()->GetTextExtent(text, NULL, NULL, &text_descent);
+    GetOwner()->GetTextExtent(text, nullptr, nullptr, &text_descent);
     int size = m_font.GetPointSize();
 
 //    wxCoord by = y + (wxCoord)floor( double(size) * 2.0 / 3.0 ); // approximate baseline
@@ -1416,7 +1416,7 @@ void wxPostScriptDCImpl::DoDrawRotatedText( const wxString& text, wxCoord x, wxC
 
     // Calculate bottom-left coordinates of the rotated text
     wxCoord text_descent;
-    GetOwner()->GetTextExtent(text, NULL, NULL, &text_descent);
+    GetOwner()->GetTextExtent(text, nullptr, nullptr, &text_descent);
     int size = m_font.GetPointSize();
     double rad = wxDegToRad(angle);
     wxCoord bx = wxRound(x + (size - text_descent) * sin(rad));
@@ -1748,7 +1748,7 @@ void wxPostScriptDCImpl::EndDoc ()
 
     if ( m_pstream ) {
         fclose( m_pstream );
-        m_pstream = NULL;
+        m_pstream = nullptr;
     }
 
     // Reset the list of fonts for which PS font registration code was generated.
@@ -2092,7 +2092,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
             }
         }
 
-        FILE *afmFile = NULL;
+        FILE *afmFile = nullptr;
 
         // Get the directory of the AFM files
         wxString afmName;
@@ -2146,7 +2146,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
            /
            /  when the font has changed, we read in the right AFM file and store the
            /  character widths in an array, which is processed below (see point 3.). */
-        if (afmFile==NULL)
+        if (afmFile==nullptr)
         {
             wxLogDebug( wxT("GetTextExtent: can't open AFM file '%s'"), afmName.c_str() );
             wxLogDebug( wxT("               using approximate values"));
@@ -2165,7 +2165,7 @@ void wxPostScriptDCImpl::DoGetTextExtent(const wxString& string,
             char line[256];
             int ascii,cWidth;
             /* read in the file and parse it */
-            while(fgets(line,sizeof(line),afmFile)!=NULL)
+            while(fgets(line,sizeof(line),afmFile)!=nullptr)
             {
                 /* A.) check for descender definition */
                 if (strncmp(line,"Descender",9)==0)

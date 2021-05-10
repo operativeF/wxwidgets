@@ -464,7 +464,7 @@ static void FoldKVIrcDoc(Sci_PositionU startPos, Sci_Position length, int /*init
 static const char *const kvircWordListDesc[] = {
 	"primary",
 	"function_keywords",
-	0
+	nullptr
 };
 
 

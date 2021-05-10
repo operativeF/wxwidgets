@@ -33,7 +33,7 @@
 //
 // Note that this global variable is used in src/msw/window.cpp and so must be
 // extern.
-wxPopupWindow* wxCurrentPopupWindow = NULL;
+wxPopupWindow* wxCurrentPopupWindow = nullptr;
 
 // ============================================================================
 // implementation
@@ -61,7 +61,7 @@ wxPopupWindow::~wxPopupWindow()
     // If the popup is destroyed without being hidden first, ensure that we are
     // not left with a dangling pointer.
     if ( wxCurrentPopupWindow == this )
-        wxCurrentPopupWindow = NULL;
+        wxCurrentPopupWindow = nullptr;
 }
 
 WXDWORD wxPopupWindow::MSWGetStyle(long flags, WXDWORD *exstyle) const
@@ -148,7 +148,7 @@ bool wxPopupWindow::Show(bool show)
         // Only reset the pointer if it points to this window, otherwise we
         // would lose the correct value in the situation described above.
         if ( wxCurrentPopupWindow == this )
-            wxCurrentPopupWindow = NULL;
+            wxCurrentPopupWindow = nullptr;
     }
 
     if ( HasFlag(wxPU_CONTAINS_CONTROLS) )

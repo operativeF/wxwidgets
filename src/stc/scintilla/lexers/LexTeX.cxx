@@ -491,7 +491,7 @@ static const char * const texWordListDesc[] = {
     "ConTeXt Czech",
     "ConTeXt Italian",
     "ConTeXt Romanian",
-	0,
+	nullptr,
 } ;
 
 LexerModule lmTeX(SCLEX_TEX,   ColouriseTeXDoc, "tex", FoldTexDoc, texWordListDesc);

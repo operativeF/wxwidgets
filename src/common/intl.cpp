@@ -175,7 +175,7 @@ const char* wxLanguageInfo::TrySetLocale() const
     if ( !::GetLocaleInfo(lcid, LOCALE_SENGLANGUAGE, buffer, WXSIZEOF(buffer)) )
     {
         wxLogLastError(wxT("GetLocaleInfo(LOCALE_SENGLANGUAGE)"));
-        return NULL;
+        return nullptr;
     }
 
     locale = buffer;
@@ -205,7 +205,7 @@ const char* wxLanguageInfo::TrySetLocale() const
 
 wxString wxLanguageInfo::GetLocaleName() const
 {
-    const char* const orig = wxSetlocale(LC_ALL, NULL);
+    const char* const orig = wxSetlocale(LC_ALL, nullptr);
 
     const char* const ret = TrySetLocale();
     wxString retval;
@@ -229,11 +229,11 @@ wxString wxLanguageInfo::GetLocaleName() const
 WX_DECLARE_USER_EXPORTED_OBJARRAY(wxLanguageInfo, wxLanguageInfoArray, WXDLLIMPEXP_BASE);
 WX_DEFINE_OBJARRAY(wxLanguageInfoArray)
 
-wxLanguageInfoArray *wxLocale::ms_languagesDB = NULL;
+wxLanguageInfoArray *wxLocale::ms_languagesDB = nullptr;
 
 /*static*/ void wxLocale::CreateLanguagesDB()
 {
-    if (ms_languagesDB == NULL)
+    if (ms_languagesDB == nullptr)
     {
         ms_languagesDB = new wxLanguageInfoArray;
         InitLanguagesDB();
@@ -250,8 +250,8 @@ void wxLocale::DoCommonInit()
 {
     m_language = wxLANGUAGE_UNKNOWN;
 
-    m_pszOldLocale = NULL;
-    m_pOldLocale = NULL;
+    m_pszOldLocale = nullptr;
+    m_pOldLocale = nullptr;
 
 #ifdef __WIN32__
     m_oldLCID = 0;
@@ -319,7 +319,7 @@ bool wxLocale::Init(const wxString& name,
 
     DoInit(name, strShort, wxLANGUAGE_UNKNOWN);
 
-    const bool ret = wxSetlocale(LC_ALL, szLocale) != NULL;
+    const bool ret = wxSetlocale(LC_ALL, szLocale) != nullptr;
 
     return DoCommonPostInit(ret, szLocale, shortName, bLoadDefault);
 }
@@ -337,7 +337,7 @@ void wxLocale::DoInit(const wxString& name,
     m_language = language;
 
     // Store the current locale in order to be able to restore it in the dtor.
-    m_pszOldLocale = wxSetlocale(LC_ALL, NULL);
+    m_pszOldLocale = wxSetlocale(LC_ALL, nullptr);
     if ( m_pszOldLocale )
         m_pszOldLocale = wxStrdup(m_pszOldLocale);
 
@@ -378,7 +378,7 @@ bool wxLocale::DoCommonPostInit(bool success,
         // As we failed to change locale, there is no need to restore the
         // previous one: it's still valid.
         free(const_cast<char *>(m_pszOldLocale));
-        m_pszOldLocale = NULL;
+        m_pszOldLocale = nullptr;
 
         // continue nevertheless and try to load at least the translations for
         // this language
@@ -470,7 +470,7 @@ static void wxMSWSetThreadUILanguage(LANGID langid)
     {
         wxLoadedDLL dllKernel32(wxS("kernel32.dll"));
         typedef LANGID(WINAPI *SetThreadUILanguage_t)(LANGID);
-        SetThreadUILanguage_t pfnSetThreadUILanguage = NULL;
+        SetThreadUILanguage_t pfnSetThreadUILanguage = nullptr;
         wxDL_INIT_FUNC(pfn, SetThreadUILanguage, dllKernel32);
         if (pfnSetThreadUILanguage)
             pfnSetThreadUILanguage(langid);
@@ -495,7 +495,7 @@ bool wxLocale::Init(int lang, int flags)
     const wxLanguageInfo *info = GetLanguageInfo(lang);
 
     // Unknown language:
-    if (info == NULL)
+    if (info == nullptr)
     {
         // This could have happened because some concrete language has been
         // requested and we just don't know anything about it. In this case, we
@@ -526,7 +526,7 @@ bool wxLocale::Init(int lang, int flags)
     // default locale, as it does a better job of it than we do. We also have
     // to do this when we didn't recognize the default language at all.
     const char *retloc = lang == wxLANGUAGE_DEFAULT ? wxSetlocale(LC_ALL, "")
-                                                    : NULL;
+                                                    : nullptr;
 
 #if defined(__UNIX__)
     if ( !retloc )
@@ -613,7 +613,7 @@ bool wxLocale::Init(int lang, int flags)
 
     return DoCommonPostInit
            (
-                retloc != NULL,
+                retloc != nullptr,
                 name,
                 shortName,
                 flags & wxLOCALE_LOAD_DEFAULT
@@ -1004,7 +1004,7 @@ const wxLanguageInfo *wxLocale::GetLanguageInfo(int lang)
         lang = GetSystemLanguage();
 
     if ( lang == wxLANGUAGE_UNKNOWN )
-        return NULL;
+        return nullptr;
 
     const size_t count = ms_languagesDB->GetCount();
     for ( size_t i = 0; i < count; i++ )
@@ -1013,7 +1013,7 @@ const wxLanguageInfo *wxLocale::GetLanguageInfo(int lang)
             return &ms_languagesDB->Item(i);
     }
 
-    return NULL;
+    return nullptr;
 }
 
 /* static */
@@ -1051,7 +1051,7 @@ const wxLanguageInfo *wxLocale::FindLanguageInfo(const wxString& locale)
 {
     CreateLanguagesDB();
 
-    const wxLanguageInfo *infoRet = NULL;
+    const wxLanguageInfo *infoRet = nullptr;
 
     const size_t count = ms_languagesDB->GetCount();
     for ( size_t i = 0; i < count; i++ )
@@ -1084,7 +1084,7 @@ const wxLanguageInfo *wxLocale::FindLanguageInfo(const wxString& locale)
 
 wxString wxLocale::GetSysName() const
 {
-    return wxSetlocale(LC_ALL, NULL);
+    return wxSetlocale(LC_ALL, nullptr);
 }
 
 // clean up
@@ -1103,7 +1103,7 @@ wxLocale::~wxLocale()
         if ( m_pOldLocale )
             wxTranslations::SetNonOwned(&m_pOldLocale->m_translations);
         else
-            wxTranslations::Set(NULL);
+            wxTranslations::Set(nullptr);
     }
 
     // restore old locale pointer
@@ -1714,7 +1714,7 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory cat)
         // wxSetLocale() hadn't been called yet of failed, hence CRT must be
         // using "C" locale -- but check it to detect bugs that would happen if
         // this were not the case.
-        wxASSERT_MSG( strcmp(setlocale(LC_ALL, NULL), "C") == 0,
+        wxASSERT_MSG( strcmp(setlocale(LC_ALL, nullptr), "C") == 0,
                       wxS("You probably called setlocale() directly instead ")
                       wxS("of using wxLocale and now there is a ")
                       wxS("mismatch between C/C++ and Windows locale.\n")
@@ -1991,7 +1991,7 @@ wxString wxLocale::GetOSInfo(wxLocaleInfo index, wxLocaleCategory cat)
 // ------------------------------
 
 // the current locale object
-static wxLocale *g_pLocale = NULL;
+static wxLocale *g_pLocale = nullptr;
 
 wxLocale *wxGetLocale()
 {

@@ -43,7 +43,7 @@ wxSizerXmlHandler::wxSizerXmlHandler()
                   :wxXmlResourceHandler(),
                    m_isInside(false),
                    m_isGBS(false),
-                   m_parentSizer(NULL)
+                   m_parentSizer(nullptr)
 {
     XRC_ADD_STYLE(wxHORIZONTAL);
     XRC_ADD_STYLE(wxVERTICAL);
@@ -123,7 +123,7 @@ wxSizer* wxSizerXmlHandler::DoCreateSizer(const wxString& name)
     else if (name == wxT("wxGridSizer"))
     {
         if ( !ValidateGridSizerChildren() )
-            return NULL;
+            return nullptr;
         return Handle_wxGridSizer();
     }
     else if (name == wxT("wxFlexGridSizer"))
@@ -140,7 +140,7 @@ wxSizer* wxSizerXmlHandler::DoCreateSizer(const wxString& name)
     }
 
     ReportError(wxString::Format("unknown sizer class \"%s\"", name));
-    return NULL;
+    return nullptr;
 }
 
 
@@ -174,8 +174,8 @@ wxObject* wxSizerXmlHandler::Handle_sizeritem()
         bool old_ins = m_isInside;
         wxSizer *old_par = m_parentSizer;
         m_isInside = false;
-        if (!IsSizerNode(n)) m_parentSizer = NULL;
-        wxObject *item = CreateResFromNode(n, m_parent, NULL);
+        if (!IsSizerNode(n)) m_parentSizer = nullptr;
+        wxObject *item = CreateResFromNode(n, m_parent, nullptr);
         m_isInside = old_ins;
         m_parentSizer = old_par;
         m_isGBS = old_gbs;
@@ -200,7 +200,7 @@ wxObject* wxSizerXmlHandler::Handle_sizeritem()
     else /*n == NULL*/
     {
         ReportError("no window/sizer/spacer within sizeritem object");
-        return NULL;
+        return nullptr;
     }
 }
 
@@ -210,14 +210,14 @@ wxObject* wxSizerXmlHandler::Handle_spacer()
     if ( !m_parentSizer )
     {
         ReportError("spacer only allowed inside a sizer");
-        return NULL;
+        return nullptr;
     }
 
     wxSizerItem* sitem = MakeSizerItem();
     SetSizerItemAttributes(sitem);
     sitem->AssignSpacer(GetSize());
     AddSizerItem(sitem);
-    return NULL;
+    return nullptr;
 }
 
 
@@ -230,7 +230,7 @@ wxObject* wxSizerXmlHandler::Handle_sizer()
              !m_parentAsWindow) )
     {
         ReportError("sizer must have a window parent");
-        return NULL;
+        return nullptr;
     }
 
     // Create the sizer of the appropriate class.
@@ -238,7 +238,7 @@ wxObject* wxSizerXmlHandler::Handle_sizer()
 
     // creation of sizer failed for some (already reported) reason, so exit:
     if ( !sizer )
-        return NULL;
+        return nullptr;
 
     wxSize minsize = GetSize(wxT("minsize"));
     if (!(minsize == wxDefaultSize))
@@ -280,7 +280,7 @@ wxObject* wxSizerXmlHandler::Handle_sizer()
     m_isInside = old_ins;
     m_parentSizer = old_par;
 
-    if (m_parentSizer == NULL) // setup window:
+    if (m_parentSizer == nullptr) // setup window:
     {
         m_parentAsWindow->SetSizer(sizer);
 
@@ -288,7 +288,7 @@ wxObject* wxSizerXmlHandler::Handle_sizer()
         m_node = parentNode;
         if (GetSize() == wxDefaultSize)
         {
-            if ( wxDynamicCast(m_parentAsWindow, wxScrolledWindow) != NULL )
+            if ( wxDynamicCast(m_parentAsWindow, wxScrolledWindow) != nullptr )
             {
                 sizer->FitInside(m_parentAsWindow);
             }
@@ -320,13 +320,13 @@ wxSizer*  wxSizerXmlHandler::Handle_wxStaticBoxSizer()
     wxXmlNode* nodeWindowLabel = GetParamNode(wxS("windowlabel"));
     wxString const& labelText = GetText(wxS("label"));
 
-    wxStaticBox* box = NULL;
+    wxStaticBox* box = nullptr;
     if ( nodeWindowLabel )
     {
         if ( !labelText.empty() )
         {
             ReportError("Either label or windowlabel can be used, but not both");
-            return NULL;
+            return nullptr;
         }
 
 #ifdef wxHAS_WINDOW_LABEL_IN_STATIC_BOX
@@ -334,21 +334,21 @@ wxSizer*  wxSizerXmlHandler::Handle_wxStaticBoxSizer()
         if ( !n )
         {
             ReportError("windowlabel must have a window child");
-            return NULL;
+            return nullptr;
         }
 
         if ( n->GetNext() )
         {
             ReportError("windowlabel can only have a single child");
-            return NULL;
+            return nullptr;
         }
 
-        wxObject* const item = CreateResFromNode(n, m_parent, NULL);
+        wxObject* const item = CreateResFromNode(n, m_parent, nullptr);
         wxWindow* const wndLabel = wxDynamicCast(item, wxWindow);
         if ( !wndLabel )
         {
             ReportError(n, "windowlabel child must be a window");
-            return NULL;
+            return nullptr;
         }
 
         box = new wxStaticBox(m_parentAsWindow,
@@ -387,7 +387,7 @@ wxSizer*  wxSizerXmlHandler::Handle_wxGridSizer()
 wxFlexGridSizer* wxSizerXmlHandler::Handle_wxFlexGridSizer()
 {
     if ( !ValidateGridSizerChildren() )
-        return NULL;
+        return nullptr;
     return new wxFlexGridSizer(GetLong(wxT("rows")), GetLong(wxT("cols")),
                                GetDimension(wxT("vgap")), GetDimension(wxT("hgap")));
 }
@@ -396,7 +396,7 @@ wxFlexGridSizer* wxSizerXmlHandler::Handle_wxFlexGridSizer()
 wxGridBagSizer* wxSizerXmlHandler::Handle_wxGridBagSizer()
 {
     if ( !ValidateGridSizerChildren() )
-        return NULL;
+        return nullptr;
     return new wxGridBagSizer(GetDimension(wxT("vgap")), GetDimension(wxT("hgap")));
 }
 
@@ -935,7 +935,7 @@ void wxSizerXmlHandler::AddSizerItem(wxSizerItem* sitem)
 wxIMPLEMENT_DYNAMIC_CLASS(wxStdDialogButtonSizerXmlHandler, wxXmlResourceHandler);
 
 wxStdDialogButtonSizerXmlHandler::wxStdDialogButtonSizerXmlHandler()
-    : m_isInside(false), m_parentSizer(NULL)
+    : m_isInside(false), m_parentSizer(nullptr)
 {
 }
 
@@ -953,7 +953,7 @@ wxObject *wxStdDialogButtonSizerXmlHandler::DoCreateResource()
         m_parentSizer->Realize();
 
         m_isInside = false;
-        m_parentSizer = NULL;
+        m_parentSizer = nullptr;
 
         return s;
     }
@@ -969,7 +969,7 @@ wxObject *wxStdDialogButtonSizerXmlHandler::DoCreateResource()
         // did we find one?
         if (n)
         {
-            wxObject *item = CreateResFromNode(n, m_parent, NULL);
+            wxObject *item = CreateResFromNode(n, m_parent, nullptr);
             wxButton *button = wxDynamicCast(item, wxButton);
 
             if (button)
@@ -982,7 +982,7 @@ wxObject *wxStdDialogButtonSizerXmlHandler::DoCreateResource()
         else /*n == NULL*/
         {
             ReportError("no button within wxStdDialogButtonSizer");
-            return NULL;
+            return nullptr;
         }
     }
 }

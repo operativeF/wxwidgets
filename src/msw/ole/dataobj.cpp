@@ -92,7 +92,7 @@ wxDataFormat NonStandardFormatsFixup(wxDataFormat format)
 // helper function for wxCopyStgMedium()
 HGLOBAL wxGlobalClone(HGLOBAL hglobIn)
 {
-    HGLOBAL hglobOut = NULL;
+    HGLOBAL hglobOut = nullptr;
 
     GlobalPtrLock ptrIn(hglobIn);
     if (ptrIn)
@@ -118,7 +118,7 @@ HRESULT wxCopyStgMedium(const STGMEDIUM *pmediumIn, STGMEDIUM *pmediumOut)
     HRESULT hres = S_OK;
     STGMEDIUM stgmOut = *pmediumIn;
 
-    if (pmediumIn->pUnkForRelease == NULL &&
+    if (pmediumIn->pUnkForRelease == nullptr &&
         !(pmediumIn->tymed & (TYMED_ISTREAM | TYMED_ISTORAGE)))
     {
         // Object needs to be cloned.
@@ -298,7 +298,7 @@ wxIDataObject::SaveSystemData(FORMATETC *pformatetc,
                                  STGMEDIUM *pmedium,
                                  BOOL fRelease)
 {
-    if ( pformatetc == NULL || pmedium == NULL )
+    if ( pformatetc == nullptr || pmedium == nullptr )
         return E_INVALIDARG;
 
     // remove entry if already available
@@ -443,7 +443,7 @@ STDMETHODIMP wxIEnumFORMATETC::Next(ULONG      celt,
     while (m_nCurrent < m_nCount && numFetched < celt) {
         FORMATETC format;
         format.cfFormat = m_formats[m_nCurrent++];
-        format.ptd      = NULL;
+        format.ptd      = nullptr;
         format.dwAspect = DVASPECT_CONTENT;
         format.lindex   = -1;
         format.tymed    = TYMED_HGLOBAL;
@@ -486,7 +486,7 @@ STDMETHODIMP wxIEnumFORMATETC::Clone(IEnumFORMATETC **ppenum)
     wxLogTrace(wxTRACE_OleCalls, wxT("wxIEnumFORMATETC::Clone"));
 
     // unfortunately, we can't reuse the code in ctor - types are different
-    wxIEnumFORMATETC *pNew = new wxIEnumFORMATETC(NULL, 0);
+    wxIEnumFORMATETC *pNew = new wxIEnumFORMATETC(nullptr, 0);
     pNew->m_nCount = m_nCount;
     pNew->m_formats = new CLIPFORMAT[m_nCount];
     for ( ULONG n = 0; n < m_nCount; n++ ) {
@@ -586,7 +586,7 @@ STDMETHODIMP wxIDataObject::GetData(FORMATETC *pformatetcIn, STGMEDIUM *pmedium)
             size += m_pDataObject->GetBufferOffset( format );
 
             HGLOBAL hGlobal = GlobalAlloc(GMEM_MOVEABLE | GMEM_SHARE, size);
-            if ( hGlobal == NULL ) {
+            if ( hGlobal == nullptr ) {
                 wxLogLastError(wxT("GlobalAlloc"));
                 return E_OUTOFMEMORY;
             }
@@ -596,7 +596,7 @@ STDMETHODIMP wxIDataObject::GetData(FORMATETC *pformatetcIn, STGMEDIUM *pmedium)
             pmedium->hGlobal = hGlobal;
     }
 
-    pmedium->pUnkForRelease = NULL;
+    pmedium->pUnkForRelease = nullptr;
 
     // do copy the data
     hr = GetDataHere(pformatetcIn, pmedium);
@@ -774,15 +774,15 @@ STDMETHODIMP wxIDataObject::SetData(FORMATETC *pformatetc,
         switch ( pmedium->tymed )
         {
             case TYMED_GDI:
-                pmedium->hBitmap = 0;
+                pmedium->hBitmap = nullptr;
                 break;
 
             case TYMED_MFPICT:
-                pmedium->hMetaFilePict = 0;
+                pmedium->hMetaFilePict = nullptr;
                 break;
 
             case TYMED_ENHMF:
-                pmedium->hEnhMetaFile = 0;
+                pmedium->hEnhMetaFile = nullptr;
                 break;
         }
 
@@ -796,7 +796,7 @@ STDMETHODIMP wxIDataObject::SetData(FORMATETC *pformatetc,
 STDMETHODIMP wxIDataObject::QueryGetData(FORMATETC *pformatetc)
 {
     // do we accept data in this format?
-    if ( pformatetc == NULL ) {
+    if ( pformatetc == nullptr ) {
         wxLogTrace(wxTRACE_OleCalls,
                    wxT("wxIDataObject::QueryGetData: invalid ptr."));
 
@@ -867,8 +867,8 @@ STDMETHODIMP wxIDataObject::GetCanonicalFormatEtc(FORMATETC *WXUNUSED(pFormatetc
     wxLogTrace(wxTRACE_OleCalls, wxT("wxIDataObject::GetCanonicalFormatEtc"));
 
     // TODO we might want something better than this trivial implementation here
-    if ( pFormatetcOut != NULL )
-        pFormatetcOut->ptd = NULL;
+    if ( pFormatetcOut != nullptr )
+        pFormatetcOut->ptd = nullptr;
 
     return DATA_S_SAMEFORMATETC;
 }
@@ -952,7 +952,7 @@ void wxDataObject::SetAutoDelete()
     m_pIDataObject->Release();
 
     // so that the dtor doesn't crash
-    m_pIDataObject = NULL;
+    m_pIDataObject = nullptr;
 }
 
 size_t wxDataObject::GetBufferOffset(const wxDataFormat& format )
@@ -969,7 +969,7 @@ const void *wxDataObject::GetSizeFromBuffer(const void *buffer,
     if ( !realsz )
     {
         wxLogLastError(wxT("GlobalSize"));
-        return NULL;
+        return nullptr;
     }
 
     *size = realsz;
@@ -1044,7 +1044,7 @@ const wxChar *wxDataObject::GetFormatName(wxDataFormat format)
 size_t wxBitmapDataObject::GetDataSize() const
 {
 #if wxUSE_WXDIB
-    return wxDIB::ConvertFromBitmap(NULL, GetHbitmapOf(GetBitmap()));
+    return wxDIB::ConvertFromBitmap(nullptr, GetHbitmapOf(GetBitmap()));
 #else
     return 0;
 #endif
@@ -1272,7 +1272,7 @@ bool wxFileDataObject::SetData(size_t WXUNUSED(size),
     HDROP hdrop = static_cast<HDROP>(const_cast<void*>(pData));   // NB: it works, but I'm not sure about it
 
     // get number of files (magic value -1)
-    UINT nFiles = ::DragQueryFile(hdrop, (unsigned)-1, NULL, 0u);
+    UINT nFiles = ::DragQueryFile(hdrop, (unsigned)-1, nullptr, 0u);
 
     wxCHECK_MSG ( nFiles != (UINT)-1, FALSE, wxT("wrong HDROP handle") );
 
@@ -1281,7 +1281,7 @@ bool wxFileDataObject::SetData(size_t WXUNUSED(size),
     UINT len, n;
     for ( n = 0; n < nFiles; n++ ) {
         // +1 for terminating NUL
-        len = ::DragQueryFile(hdrop, n, NULL, 0) + 1;
+        len = ::DragQueryFile(hdrop, n, nullptr, 0) + 1;
 
         UINT len2 = ::DragQueryFile(hdrop, n, wxStringBuffer(str, len), len);
         m_filenames.Add(str);
@@ -1419,7 +1419,7 @@ wxURLDataObject::wxURLDataObject(const wxString& url)
     Add(new CFSTR_SHELLURLDataObject());
 
     // we don't have any data yet
-    m_dataObjectLast = NULL;
+    m_dataObjectLast = nullptr;
 
     if ( !url.empty() )
         SetURL(url);

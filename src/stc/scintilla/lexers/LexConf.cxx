@@ -186,7 +186,7 @@ static void ColouriseConfDoc(Sci_PositionU startPos, Sci_Position length, int, W
 static const char * const confWordListDesc[] = {
 	"Directives",
 	"Parameters",
-	0
+	nullptr
 };
 
-LexerModule lmConf(SCLEX_CONF, ColouriseConfDoc, "conf", 0, confWordListDesc);
+LexerModule lmConf(SCLEX_CONF, ColouriseConfDoc, "conf", nullptr, confWordListDesc);

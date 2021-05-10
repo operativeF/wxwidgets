@@ -65,7 +65,7 @@ static HBITMAP GetMaskForImage(const wxBitmap& bitmap, const wxBitmap& mask);
 // ----------------------------------------------------------------------------
 
 wxImageList::wxImageList()
-    : m_hImageList(NULL)
+    : m_hImageList(nullptr)
     , m_useMask(false)
 {
 }
@@ -97,7 +97,7 @@ bool wxImageList::Create(int width, int height, bool mask, int initial)
     }
 
     m_useMask = (flags & ILC_MASK) != 0;
-    return m_hImageList != 0;
+    return m_hImageList != nullptr;
 }
 
 wxImageList::~wxImageList()
@@ -105,7 +105,7 @@ wxImageList::~wxImageList()
     if ( m_hImageList )
     {
         ImageList_Destroy(GetHImageList());
-        m_hImageList = 0;
+        m_hImageList = nullptr;
     }
 }
 
@@ -213,7 +213,7 @@ void GetImageListBitmaps(const wxBitmap& bitmap, const wxBitmap& mask, bool useM
 // 'bitmap' and 'mask'.
 int wxImageList::Add(const wxBitmap& bitmap, const wxBitmap& mask)
 {
-    HBITMAP hbmp = NULL;
+    HBITMAP hbmp = nullptr;
     AutoHBITMAP hbmpRelease;
     AutoHBITMAP hbmpMask;
     GetImageListBitmaps(bitmap, mask, m_useMask, hbmpRelease, hbmpMask, hbmp);
@@ -232,7 +232,7 @@ int wxImageList::Add(const wxBitmap& bitmap, const wxBitmap& mask)
 // 'bitmap'.
 int wxImageList::Add(const wxBitmap& bitmap, const wxColour& maskColour)
 {
-    HBITMAP hbmp = NULL;
+    HBITMAP hbmp = nullptr;
     AutoHBITMAP hbmpRelease;
     AutoHBITMAP hbmpMask;
     wxMask mask(bitmap, maskColour);
@@ -281,7 +281,7 @@ bool wxImageList::Replace(int index,
                           const wxBitmap& bitmap,
                           const wxBitmap& mask)
 {
-    HBITMAP hbmp = NULL;
+    HBITMAP hbmp = nullptr;
     AutoHBITMAP hbmpRelease;
     AutoHBITMAP hbmpMask;
     GetImageListBitmaps(bitmap, mask, m_useMask, hbmpRelease, hbmpMask, hbmp);
@@ -492,7 +492,7 @@ static HBITMAP GetMaskForImage(const wxBitmap& bitmap, const wxBitmap& mask)
     if ( mask.IsOk() )
     {
         hbmpMask = GetHbitmapOf(mask);
-        pMask = NULL;
+        pMask = nullptr;
     }
     else
     {

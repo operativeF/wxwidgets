@@ -234,7 +234,7 @@ static void FoldEiffelDocKeyWords(Sci_PositionU startPos, Sci_Position length, i
 
 static const char * const eiffelWordListDesc[] = {
 	"Keywords",
-	0
+	nullptr
 };
 
 LexerModule lmEiffel(SCLEX_EIFFEL, ColouriseEiffelDoc, "eiffel", FoldEiffelDocIndent, eiffelWordListDesc);

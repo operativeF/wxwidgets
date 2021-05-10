@@ -393,7 +393,7 @@ static void FoldTALDoc(Sci_PositionU startPos, Sci_Position length, int initStyl
 static const char * const TALWordListDesc[] = {
 	"Keywords",
 	"Builtins",
-	0
+	nullptr
 };
 
 LexerModule lmTAL(SCLEX_TAL, ColouriseTALDoc, "TAL", FoldTALDoc, TALWordListDesc);

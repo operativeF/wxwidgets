@@ -3515,7 +3515,7 @@ wxGraphicsRenderer* wxGraphicsRenderer::GetCairoRenderer()
 
 wxGraphicsRenderer* wxGraphicsRenderer::GetCairoRenderer()
 {
-    return NULL;
+    return nullptr;
 }
 
 #endif  // wxUSE_CAIRO/!wxUSE_CAIRO

@@ -255,7 +255,7 @@ static const char * const GAPWordListDesc[] = {
 	"Keywords 2",
 	"Keywords 3 (unused)",
 	"Keywords 4 (unused)",
-	0
+	nullptr
 };
 
 LexerModule lmGAP(

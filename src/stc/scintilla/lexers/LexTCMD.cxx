@@ -299,7 +299,7 @@ static void ColouriseTCMDLine( char *lineBuffer, Sci_PositionU lengthLine, Sci_P
 
 			// Check for Argument (%n) or (%*)
 			if (((isdigit(wordBuffer[1])) || (wordBuffer[1] == '*')) && (wordBuffer[wbo] != '%')) {
-				while (( wordBuffer[n] ) && ( strchr( "%0123456789*#$", wordBuffer[n] ) != NULL ))
+				while (( wordBuffer[n] ) && ( strchr( "%0123456789*#$", wordBuffer[n] ) != nullptr ))
 					n++;
 ColorizeArg:
 				// Colorize Argument
@@ -500,7 +500,7 @@ static void FoldTCMDDoc(Sci_PositionU startPos, Sci_Position length, int, WordLi
 static const char *const tcmdWordListDesc[] = {
 	"Internal Commands",
 	"Aliases",
-	0
+	nullptr
 };
 
 LexerModule lmTCMD(SCLEX_TCMD, ColouriseTCMDDoc, "tcmd", FoldTCMDDoc, tcmdWordListDesc);

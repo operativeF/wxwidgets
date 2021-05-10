@@ -81,8 +81,8 @@ wxDEFINE_TIED_SCOPED_PTR_TYPE(wxDialogModalData)
 void wxDialog::Init()
 {
     m_isShown = false;
-    m_modalData = NULL;
-    m_hGripper = 0;
+    m_modalData = nullptr;
+    m_hGripper = nullptr;
 }
 
 bool wxDialog::Create(wxWindow *parent,
@@ -231,9 +231,9 @@ void wxDialog::CreateGripper()
                                     SBS_SIZEBOXBOTTOMRIGHTALIGN,
                                     0, 0, 0, 0,
                                     GetHwnd(),
-                                    0,
+                                    nullptr,
                                     wxGetInstance(),
-                                    NULL
+                                    nullptr
                                );
     }
 }
@@ -248,10 +248,10 @@ void wxDialog::DestroyGripper()
         // we're not shown at all as in this case ResizeGripper() might not
         // have been called yet)
         wxASSERT_MSG( !IsShown() ||
-                      ::GetWindow((HWND)m_hGripper, GW_HWNDNEXT) == 0,
+                      ::GetWindow((HWND)m_hGripper, GW_HWNDNEXT) == nullptr,
             wxT("Bug in wxWidgets: gripper should be at the bottom of Z-order") );
         ::DestroyWindow((HWND) m_hGripper);
-        m_hGripper = 0;
+        m_hGripper = nullptr;
     }
 }
 
@@ -345,7 +345,7 @@ WXLRESULT wxDialog::MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lPar
             processed = true;
             if ( HasFlag(wxFULL_REPAINT_ON_RESIZE) )
             {
-                ::InvalidateRect(GetHwnd(), NULL, false /* erase bg */);
+                ::InvalidateRect(GetHwnd(), nullptr, false /* erase bg */);
             }
             break;
     }

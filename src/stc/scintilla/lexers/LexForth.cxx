@@ -162,7 +162,7 @@ static const char * const forthWordLists[] = {
 			"prewords with one argument",
 			"prewords with two arguments",
 			"string definition keywords",
-			0,
+			nullptr,
 		};
 
 LexerModule lmForth(SCLEX_FORTH, ColouriseForthDoc, "forth", FoldForthDoc, forthWordLists);

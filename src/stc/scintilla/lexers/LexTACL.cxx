@@ -394,7 +394,7 @@ static const char * const TACLWordListDesc[] = {
 	"Builtins",
 	"Labels",
 	"Commands",
-	0
+	nullptr
 };
 
 LexerModule lmTACL(SCLEX_TACL, ColouriseTACLDoc, "TACL", FoldTACLDoc, TACLWordListDesc);

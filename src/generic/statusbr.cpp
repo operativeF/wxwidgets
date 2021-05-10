@@ -143,7 +143,7 @@ wxSize wxStatusBarGeneric::DoGetBestSize() const
 
     // best width is the width of the parent
     if (GetParent())
-        GetParent()->GetClientSize(&width, NULL);
+        GetParent()->GetClientSize(&width, nullptr);
     else
         width = 80;     // a dummy value
 

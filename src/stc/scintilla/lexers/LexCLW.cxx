@@ -77,13 +77,13 @@ inline bool IsAHexCharacter(const int iChar, bool bCaseSensitive) {
 
 	// Case insensitive.
 	if (!bCaseSensitive) {
-		if (strchr("ABCDEFabcdef", iChar) != NULL) {
+		if (strchr("ABCDEFabcdef", iChar) != nullptr) {
 			return(true);
 		}
 	}
 	// Case sensitive
 	else {
-		if (strchr("ABCDEF", iChar) != NULL) {
+		if (strchr("ABCDEF", iChar) != nullptr) {
 			return(true);
 		}
 	}
@@ -96,14 +96,14 @@ inline bool IsANumericBaseCharacter(const int iChar, bool bCaseSensitive) {
 	// Case insensitive.
 	if (!bCaseSensitive) {
 		// If character is a numeric base character
-		if (strchr("BOHboh", iChar) != NULL) {
+		if (strchr("BOHboh", iChar) != nullptr) {
 			return(true);
 		}
 	}
 	// Case sensitive
 	else {
 		// If character is a numeric base character
-		if (strchr("BOH", iChar) != NULL) {
+		if (strchr("BOH", iChar) != nullptr) {
 			return(true);
 		}
 	}
@@ -499,7 +499,7 @@ static void ColouriseClarionDoc(Sci_PositionU uiStartPos, Sci_Position iLength, 
 					// Case insensitive.
 					if (!bCaseSensitive) {
 						// If character is a valid picture token character
-						if (strchr("DEKNPSTdeknpst", scDoc.chNext) != NULL) {
+						if (strchr("DEKNPSTdeknpst", scDoc.chNext) != nullptr) {
 							// Set to the picture string state
 							scDoc.SetState(SCE_CLW_PICTURE_STRING);
 						}
@@ -507,7 +507,7 @@ static void ColouriseClarionDoc(Sci_PositionU uiStartPos, Sci_Position iLength, 
 					// Case sensitive
 					else {
 						// If character is a valid picture token character
-						if (strchr("DEKNPST", scDoc.chNext) != NULL) {
+						if (strchr("DEKNPST", scDoc.chNext) != nullptr) {
 							// Set the picture string state
 							scDoc.SetState(SCE_CLW_PICTURE_STRING);
 						}
@@ -672,7 +672,7 @@ static const char * const rgWordListDescriptions[] = {
 	"Standard Equates",
 	"Reserved Words (Labels)",
 	"Reserved Words (Procedure Labels)",
-	0,
+	nullptr,
 };
 
 // Case Sensitive Clarion Language Lexer

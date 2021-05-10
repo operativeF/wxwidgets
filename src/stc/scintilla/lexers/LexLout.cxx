@@ -209,7 +209,7 @@ static const char * const loutWordLists[] = {
             "Predefined identifiers",
             "Predefined delimiters",
             "Predefined keywords",
-            0,
+            nullptr,
         };
 
 LexerModule lmLout(SCLEX_LOUT, ColouriseLoutDoc, "lout", FoldLoutDoc, loutWordLists);

@@ -128,11 +128,11 @@ bool wxDIB::Create(int width, int height, int depth)
 
     m_handle = ::CreateDIBSection
                  (
-                    0,              // hdc (unused with DIB_RGB_COLORS)
+                    nullptr,              // hdc (unused with DIB_RGB_COLORS)
                     &info,          // bitmap description
                     DIB_RGB_COLORS, // use RGB, not palette
                     &m_data,        // [out] DIB bits
-                    NULL,           // don't use file mapping
+                    nullptr,           // don't use file mapping
                     0               // file mapping offset (not used here)
                  );
 
@@ -353,14 +353,14 @@ void wxDIB::DoGetObject() const
 
 HBITMAP wxDIB::CreateDDB(HDC hdc) const
 {
-    wxCHECK_MSG( m_handle, 0, wxT("wxDIB::CreateDDB(): invalid object") );
+    wxCHECK_MSG( m_handle, nullptr, wxT("wxDIB::CreateDDB(): invalid object") );
 
     DIBSECTION ds;
     if ( !GetDIBSection(m_handle, &ds) )
     {
         wxLogLastError(wxT("GetObject(hDIB)"));
 
-        return 0;
+        return nullptr;
     }
 
     // how many colours are we going to have in the palette?
@@ -393,7 +393,7 @@ HBITMAP wxDIB::CreateDDB(HDC hdc) const
 /* static */
 HBITMAP wxDIB::ConvertToBitmap(const BITMAPINFO *pbmi, HDC hdc, const void *bits)
 {
-    wxCHECK_MSG( pbmi, 0, wxT("invalid DIB in ConvertToBitmap") );
+    wxCHECK_MSG( pbmi, nullptr, wxT("invalid DIB in ConvertToBitmap") );
 
     // here we get BITMAPINFO struct followed by the actual bitmap bits and
     // BITMAPINFO starts with BITMAPINFOHEADER followed by colour info
@@ -475,7 +475,7 @@ size_t wxDIB::ConvertFromBitmap(BITMAPINFO *pbi, HBITMAP hbmp)
     // use this one
     BITMAPINFO bi2;
 
-    const bool wantSizeOnly = pbi == NULL;
+    const bool wantSizeOnly = pbi == nullptr;
     if ( wantSizeOnly )
         pbi = &bi2;
 
@@ -501,7 +501,7 @@ size_t wxDIB::ConvertFromBitmap(BITMAPINFO *pbi, HBITMAP hbmp)
                 hbmp,                               // the source DDB
                 0,                                  // first scan line
                 h,                                  // number of lines to copy
-                wantSizeOnly ? NULL                 // pointer to the buffer or
+                wantSizeOnly ? nullptr                 // pointer to the buffer or
                              : (char *)pbi + dwLen, // NULL if we don't have it
                 pbi,                                // bitmap header
                 DIB_RGB_COLORS                      // or DIB_PAL_COLORS
@@ -520,11 +520,11 @@ size_t wxDIB::ConvertFromBitmap(BITMAPINFO *pbi, HBITMAP hbmp)
 HGLOBAL wxDIB::ConvertFromBitmap(HBITMAP hbmp)
 {
     // first calculate the size needed
-    const size_t size = ConvertFromBitmap(NULL, hbmp);
+    const size_t size = ConvertFromBitmap(nullptr, hbmp);
     if ( !size )
     {
         // conversion to DDB failed?
-        return NULL;
+        return nullptr;
     }
 
     HGLOBAL hDIB = ::GlobalAlloc(GMEM_MOVEABLE, size);
@@ -535,7 +535,7 @@ HGLOBAL wxDIB::ConvertFromBitmap(HBITMAP hbmp)
         wxLogError(_("Failed to allocate %luKb of memory for bitmap data."),
                    (unsigned long)(size / 1024));
 
-        return NULL;
+        return nullptr;
     }
 
     if ( !ConvertFromBitmap((BITMAPINFO *)(void *)GlobalPtrLock(hDIB), hbmp) )
@@ -544,7 +544,7 @@ HGLOBAL wxDIB::ConvertFromBitmap(HBITMAP hbmp)
         // now?
         wxFAIL_MSG( wxT("wxDIB::ConvertFromBitmap() unexpectedly failed") );
 
-        return NULL;
+        return nullptr;
     }
 
     return hDIB;
@@ -558,14 +558,14 @@ HGLOBAL wxDIB::ConvertFromBitmap(HBITMAP hbmp)
 
 wxPalette *wxDIB::CreatePalette() const
 {
-    wxCHECK_MSG( m_handle, NULL, wxT("wxDIB::CreatePalette(): invalid object") );
+    wxCHECK_MSG( m_handle, nullptr, wxT("wxDIB::CreatePalette(): invalid object") );
 
     DIBSECTION ds;
     if ( !GetDIBSection(m_handle, &ds) )
     {
         wxLogLastError(wxT("GetObject(hDIB)"));
 
-        return 0;
+        return nullptr;
     }
 
     // how many colours are we going to have in the palette?
@@ -582,7 +582,7 @@ wxPalette *wxDIB::CreatePalette() const
         //
         // NB: another possibility would be to return
         //     GetStockObject(DEFAULT_PALETTE) or even CreateHalftonePalette()?
-        return NULL;
+        return nullptr;
     }
 
     MemoryHDC hDC;
@@ -591,7 +591,7 @@ wxPalette *wxDIB::CreatePalette() const
     // going to have biClrUsed of them so add necessary space
     LOGPALETTE *pPalette = (LOGPALETTE *)
         malloc(sizeof(LOGPALETTE) + (biClrUsed - 1)*sizeof(PALETTEENTRY));
-    wxCHECK_MSG( pPalette, NULL, wxT("out of memory") );
+    wxCHECK_MSG( pPalette, nullptr, wxT("out of memory") );
 
     // initialize the palette header
     pPalette->palVersion = 0x300;  // magic number, not in docs but works
@@ -618,7 +618,7 @@ wxPalette *wxDIB::CreatePalette() const
     {
         wxLogLastError(wxT("CreatePalette"));
 
-        return NULL;
+        return nullptr;
     }
 
     wxPalette *palette = new wxPalette;
@@ -709,7 +709,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
     const int dstBytesPerLine = GetLineSize(w, dstDepth);
     const unsigned char *src = (dstDepth != 1 ? image.GetData() : eightBitData.get()) + ((h - 1) * srcBytesPerLine);
     const unsigned char *alpha = hasAlpha ? image.GetAlpha() + (h - 1)*w
-                                          : NULL;
+                                          : nullptr;
     unsigned char *dstLineStart = (unsigned char *)m_data;
     for ( int y = 0; y < h; y++ )
     {
@@ -823,7 +823,7 @@ wxImage wxDIB::ConvertToImage(ConversionFlags flags) const
     const int srcBytesPerLine = GetLineSize(w, bpp);
     unsigned char *dst = image.GetData() + ((h - 1) * dstBytesPerLine);
     unsigned char *alpha = image.HasAlpha() ? image.GetAlpha() + (h - 1)*w
-                                            : NULL;
+                                            : nullptr;
     const unsigned char *srcLineStart = (unsigned char *)GetData();
     for ( int y = 0; y < h; y++ )
     {

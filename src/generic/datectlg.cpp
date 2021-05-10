@@ -384,8 +384,8 @@ bool wxDatePickerCtrlGeneric::Create(wxWindow *parent,
 
 void wxDatePickerCtrlGeneric::Init()
 {
-    m_combo = NULL;
-    m_popup = NULL;
+    m_combo = nullptr;
+    m_popup = nullptr;
 }
 
 wxDatePickerCtrlGeneric::~wxDatePickerCtrlGeneric()
@@ -397,8 +397,8 @@ bool wxDatePickerCtrlGeneric::Destroy()
     if ( m_combo )
         m_combo->Destroy();
 
-    m_combo = NULL;
-    m_popup = NULL;
+    m_combo = nullptr;
+    m_popup = nullptr;
 
     return wxControl::Destroy();
 }
@@ -413,7 +413,7 @@ wxSize wxDatePickerCtrlGeneric::DoGetBestSize() const
 
     wxTextCtrl* const text = m_combo->GetTextCtrl();
     int w;
-    text->GetTextExtent(text->GetValue(), &w, NULL);
+    text->GetTextExtent(text->GetValue(), &w, nullptr);
     size.x += text->GetSizeFromTextSize(w + 1).x;
 
     return size;

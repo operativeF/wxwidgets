@@ -131,7 +131,7 @@ wxFSFile* wxInternetFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
         }
     }
 
-    return NULL; // incorrect URL
+    return nullptr; // incorrect URL
 #endif
 }
 
@@ -143,7 +143,7 @@ class wxFileSystemInternetModule : public wxModule
     public:
         wxFileSystemInternetModule() :
            wxModule(),
-           m_handler(NULL)
+           m_handler(nullptr)
         {
         }
 

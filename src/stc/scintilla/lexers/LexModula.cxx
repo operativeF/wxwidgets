@@ -736,7 +736,7 @@ static const char *const modulaWordListDesc[] =
 	"PragmaKeyswords",
 	"EscapeCodes",
 	"DoxygeneKeywords",
-	0
+	nullptr
 };
 
 LexerModule lmModula( SCLEX_MODULA, ColouriseModulaDoc, "modula", FoldModulaDoc,

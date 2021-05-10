@@ -207,7 +207,7 @@ static void FoldPODoc(Sci_PositionU startPos, Sci_Position length, int, WordList
 }
 
 static const char *const poWordListDesc[] = {
-	0
+	nullptr
 };
 
 LexerModule lmPO(SCLEX_PO, ColourisePODoc, "po", FoldPODoc, poWordListDesc);

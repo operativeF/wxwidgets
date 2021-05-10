@@ -72,7 +72,7 @@ public:
                           int desiredWidth, int desiredHeight) wxOVERRIDE;
     virtual bool SaveFile(const wxBitmap *bitmap,
                           const wxString& name, wxBitmapType type,
-                          const wxPalette *palette = NULL) const wxOVERRIDE;
+                          const wxPalette *palette = nullptr) const wxOVERRIDE;
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxBMPFileHandler);
@@ -227,7 +227,7 @@ bool wxGDIImage::FreeResource(bool WXUNUSED(force))
     if ( !IsNull() )
     {
         GetGDIImageData()->Free();
-        GetGDIImageData()->m_handle = 0;
+        GetGDIImageData()->m_handle = nullptr;
     }
 
     return true;
@@ -275,7 +275,7 @@ wxGDIImageHandler *wxGDIImage::FindHandler(const wxString& name)
         node = node->GetNext();
     }
 
-    return NULL;
+    return nullptr;
 }
 
 wxGDIImageHandler *wxGDIImage::FindHandler(const wxString& extension,
@@ -293,7 +293,7 @@ wxGDIImageHandler *wxGDIImage::FindHandler(const wxString& extension,
 
         node = node->GetNext();
     }
-    return NULL;
+    return nullptr;
 }
 
 wxGDIImageHandler *wxGDIImage::FindHandler(long type)
@@ -308,7 +308,7 @@ wxGDIImageHandler *wxGDIImage::FindHandler(long type)
         node = node->GetNext();
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void wxGDIImage::CleanUpHandlers()
@@ -346,7 +346,7 @@ bool wxBMPResourceHandler::LoadFile(wxBitmap *bitmap,
 {
     // TODO: load colourmap.
     HBITMAP hbmp = ::LoadBitmap(wxGetInstance(), name.t_str());
-    if ( hbmp == NULL )
+    if ( hbmp == nullptr )
     {
         // it's probably not found
         wxLogError(wxT("Can't load bitmap '%s' from resources! Check .rc file."),
@@ -433,7 +433,7 @@ bool wxICOFileHandler::LoadIcon(wxIcon *icon,
 {
     icon->UnRef();
 
-    HICON hicon = NULL;
+    HICON hicon = nullptr;
 
     // Parse the filename: it may be of the form "filename;n" in order to
     // specify the nth icon in the file.
@@ -476,7 +476,7 @@ bool wxICOFileHandler::LoadIcon(wxIcon *icon,
          desiredHeight == wxGetSystemMetrics(SM_CYICON, win) )
     {
         // get the specified large icon from file
-        if ( !::ExtractIconEx(nameReal.t_str(), iconIndex, &hicon, NULL, 1) )
+        if ( !::ExtractIconEx(nameReal.t_str(), iconIndex, &hicon, nullptr, 1) )
         {
             // it is not an error, but it might still be useful to be informed
             // about it optionally
@@ -489,7 +489,7 @@ bool wxICOFileHandler::LoadIcon(wxIcon *icon,
               desiredHeight == wxGetSystemMetrics(SM_CYSMICON, win) )
     {
         // get the specified small icon from file
-        if ( !::ExtractIconEx(nameReal.t_str(), iconIndex, NULL, &hicon, 1) )
+        if ( !::ExtractIconEx(nameReal.t_str(), iconIndex, nullptr, &hicon, 1) )
         {
             wxLogTrace(wxT("iconload"),
                        wxT("No small icons found in the file '%s'."),
@@ -580,7 +580,7 @@ bool wxICOResourceHandler::LoadIcon(wxIcon *icon,
         {
             if ( name == stdIcons[nIcon].name )
             {
-                hicon = ::LoadIcon((HINSTANCE)NULL, stdIcons[nIcon].id);
+                hicon = ::LoadIcon((HINSTANCE)nullptr, stdIcons[nIcon].id);
                 break;
             }
         }
@@ -601,7 +601,7 @@ bool wxPNGResourceHandler::LoadFile(wxBitmap *bitmap,
                                     int WXUNUSED(desiredWidth),
                                     int WXUNUSED(desiredHeight))
 {
-    const void* pngData = NULL;
+    const void* pngData = nullptr;
     size_t pngSize = 0;
 
     // Currently we hardcode RCDATA resource type as this is what is usually
@@ -662,7 +662,7 @@ wxSize wxGetHiconSize(HICON hicon)
             }
             // For monochrome icon reported height is doubled
             // because it contains both AND and XOR masks.
-            if ( info.hbmColor == NULL )
+            if ( info.hbmColor == nullptr )
             {
                 size.y /= 2;
             }

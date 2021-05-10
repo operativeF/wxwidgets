@@ -86,10 +86,10 @@ static bool IsLastStep(const DocModification &mh) {
 }
 
 Timer::Timer() :
-		ticking(false), ticksToWait(0), tickerID(0) {}
+		ticking(false), ticksToWait(0), tickerID(nullptr) {}
 
 Idler::Idler() :
-		state(false), idlerID(0) {}
+		state(false), idlerID(nullptr) {}
 
 static inline bool IsAllSpacesOrTabs(const char *s, unsigned int len) {
 	for (unsigned int i = 0; i < len; i++) {
@@ -179,7 +179,7 @@ Editor::Editor() {
 
 	modEventMask = SC_MODEVENTMASKALL;
 
-	pdoc->AddWatcher(this, 0);
+	pdoc->AddWatcher(this, nullptr);
 
 	recordingMacro = false;
 	foldAutomatic = 0;
@@ -190,7 +190,7 @@ Editor::Editor() {
 }
 
 Editor::~Editor() {
-	pdoc->RemoveWatcher(this, 0);
+	pdoc->RemoveWatcher(this, nullptr);
 	DropGraphics(true);
 }
 
@@ -4393,7 +4393,7 @@ void Editor::DwellEnd(bool mouseMoved) {
 }
 
 void Editor::MouseLeave() {
-	SetHotSpotRange(NULL);
+	SetHotSpotRange(nullptr);
 	if (!HaveMouseCapture()) {
 		ptMouseLast = Point(-1,-1);
 		DwellEnd(true);
@@ -4763,7 +4763,7 @@ void Editor::ButtonMoveWithModifiers(Point pt, int modifiers) {
 		EnsureCaretVisible(false, false, true);
 
 		if (hotspot.Valid() && !PointIsHotspot(pt))
-			SetHotSpotRange(NULL);
+			SetHotSpotRange(nullptr);
 
 		if (hotSpotClickPos != INVALID_POSITION && PositionFromLocation(pt,true,true) != hotSpotClickPos) {
 			if (inDragDrop == ddNone) {
@@ -4776,7 +4776,7 @@ void Editor::ButtonMoveWithModifiers(Point pt, int modifiers) {
 		if (vs.fixedColumnWidth > 0) {	// There is a margin
 			if (PointInSelMargin(pt)) {
 				DisplayCursor(GetMarginCursor(pt));
-				SetHotSpotRange(NULL);
+				SetHotSpotRange(nullptr);
 				return; 	// No need to test for selection
 			}
 		}
@@ -4793,7 +4793,7 @@ void Editor::ButtonMoveWithModifiers(Point pt, int modifiers) {
 					DisplayCursor(Window::cursorHand);
 				else
 					DisplayCursor(Window::cursorText);
-				SetHotSpotRange(NULL);
+				SetHotSpotRange(nullptr);
 			}
 		}
 	}
@@ -4827,7 +4827,7 @@ void Editor::ButtonUp(Point pt, unsigned int curTime, bool ctrl) {
 			DisplayCursor(GetMarginCursor(pt));
 		} else {
 			DisplayCursor(Window::cursorText);
-			SetHotSpotRange(NULL);
+			SetHotSpotRange(nullptr);
 		}
 		ptMouseLast = pt;
 		SetMouseCapture(false);
@@ -5204,9 +5204,9 @@ void Editor::SetAnnotationHeights(int start, int end) {
 
 void Editor::SetDocPointer(Document *document) {
 	//Platform::DebugPrintf("** %x setdoc to %x\n", pdoc, document);
-	pdoc->RemoveWatcher(this, 0);
+	pdoc->RemoveWatcher(this, nullptr);
 	pdoc->Release();
-	if (document == NULL) {
+	if (document == nullptr) {
 		pdoc = new Document();
 	} else {
 		pdoc = document;
@@ -5237,7 +5237,7 @@ void Editor::SetDocPointer(Document *document) {
 
 	view.ClearAllTabstops();
 
-	pdoc->AddWatcher(this, 0);
+	pdoc->AddWatcher(this, nullptr);
 	SetScrollBars();
 	Redraw();
 }
@@ -5519,7 +5519,7 @@ void Editor::NeedShown(int pos, int len) {
 }
 
 int Editor::GetTag(char *tagValue, int tagNumber) {
-	const char *text = 0;
+	const char *text = nullptr;
 	int length = 0;
 	if ((tagNumber >= 1) && (tagNumber <= 9)) {
 		char name[3] = "\\?";
@@ -5642,7 +5642,7 @@ void Editor::StyleSetMessage(unsigned int iMessage, uptr_t wParam, sptr_t lParam
 		break;
 	case SCI_STYLESETCHARACTERSET:
 		vs.styles[wParam].characterSet = static_cast<int>(lParam);
-		pdoc->SetCaseFolder(NULL);
+		pdoc->SetCaseFolder(nullptr);
 		break;
 	case SCI_STYLESETVISIBLE:
 		vs.styles[wParam].visible = lParam != 0;
@@ -6488,15 +6488,15 @@ sptr_t Editor::WndProc(unsigned int iMessage, uptr_t wParam, sptr_t lParam) {
 
 	case SCI_CLEARTABSTOPS:
 		if (view.ClearTabstops(static_cast<int>(wParam))) {
-			DocModification mh(SC_MOD_CHANGETABSTOPS, 0, 0, 0, 0, static_cast<int>(wParam));
-			NotifyModified(pdoc, mh, NULL);
+			DocModification mh(SC_MOD_CHANGETABSTOPS, 0, 0, 0, nullptr, static_cast<int>(wParam));
+			NotifyModified(pdoc, mh, nullptr);
 		}
 		break;
 
 	case SCI_ADDTABSTOP:
 		if (view.AddTabstop(static_cast<int>(wParam), static_cast<int>(lParam))) {
-			DocModification mh(SC_MOD_CHANGETABSTOPS, 0, 0, 0, 0, static_cast<int>(wParam));
-			NotifyModified(pdoc, mh, NULL);
+			DocModification mh(SC_MOD_CHANGETABSTOPS, 0, 0, 0, nullptr, static_cast<int>(wParam));
+			NotifyModified(pdoc, mh, nullptr);
 		}
 		break;
 

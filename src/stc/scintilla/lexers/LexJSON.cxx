@@ -35,7 +35,7 @@ using namespace Scintilla;
 static const char *const JSONWordListDesc[] = {
 	"JSON Keywords",
 	"JSON-LD Keywords",
-	0
+	nullptr
 };
 
 /**
@@ -230,7 +230,7 @@ class LexerJSON : public ILexer {
 		return -1;
 	}
 	virtual Sci_Position SCI_METHOD WordListSet(int n, const char *wl) {
-		WordList *wordListN = 0;
+		WordList *wordListN = nullptr;
 		switch (n) {
 			case 0:
 				wordListN = &keywordsJSON;
@@ -251,7 +251,7 @@ class LexerJSON : public ILexer {
 		return firstModification;
 	}
 	virtual void *SCI_METHOD PrivateCall(int, void *) {
-		return 0;
+		return nullptr;
 	}
 	static ILexer *LexerFactoryJSON() {
 		return new LexerJSON;

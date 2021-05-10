@@ -44,7 +44,7 @@
 // global and class static variables
 // ----------------------------------------------------------------------------
 
-wxConfigBase *wxConfigBase::ms_pConfig     = NULL;
+wxConfigBase *wxConfigBase::ms_pConfig     = nullptr;
 bool          wxConfigBase::ms_bAutoCreate = true;
 
 // ============================================================================
@@ -97,9 +97,9 @@ wxConfigBase *wxConfigBase::Set(wxConfigBase *pConfig)
 
 wxConfigBase *wxConfigBase::Create()
 {
-  if ( ms_bAutoCreate && ms_pConfig == NULL ) {
+  if ( ms_bAutoCreate && ms_pConfig == nullptr ) {
     wxAppTraits * const traits = wxApp::GetTraitsIfExists();
-    wxCHECK_MSG( traits, NULL, wxT("create wxApp before calling this") );
+    wxCHECK_MSG( traits, nullptr, wxT("create wxApp before calling this") );
 
     ms_pConfig = traits->CreateConfig();
   }

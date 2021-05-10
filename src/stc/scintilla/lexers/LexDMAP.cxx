@@ -222,7 +222,7 @@ static const char * const DMAPWordLists[] = {
     "Primary keywords and identifiers",
     "Intrinsic functions",
     "Extended and user defined functions",
-    0,
+    nullptr,
 };
 /***************************************/
 LexerModule lmDMAP(SCLEX_DMAP, ColouriseDMAPDoc, "DMAP", FoldDMAPDoc, DMAPWordLists);

@@ -174,7 +174,7 @@ void DrawStyledText(Surface *surface, const ViewStyle &vs, int styleOffset, PRec
 const XYPOSITION epsilon = 0.0001f;	// A small nudge to avoid floating point precision issues
 
 EditView::EditView() {
-	ldTabstops = NULL;
+	ldTabstops = nullptr;
 	tabWidthMinimumPixels = 2; // needed for calculating tab stops for fractional proportional fonts
 	hideSelection = false;
 	drawOverstrikeCaret = true;
@@ -184,19 +184,19 @@ EditView::EditView() {
 	additionalCaretsBlink = true;
 	additionalCaretsVisible = true;
 	imeCaretBlockOverride = false;
-	pixmapLine = 0;
-	pixmapIndentGuide = 0;
-	pixmapIndentGuideHighlight = 0;
+	pixmapLine = nullptr;
+	pixmapIndentGuide = nullptr;
+	pixmapIndentGuideHighlight = nullptr;
 	llc.SetLevel(LineLayoutCache::llcCaret);
 	posCache.SetSize(0x400);
 	tabArrowHeight = 4;
-	customDrawTabArrow = NULL;
-	customDrawWrapMarker = NULL;
+	customDrawTabArrow = nullptr;
+	customDrawWrapMarker = nullptr;
 }
 
 EditView::~EditView() {
 	delete ldTabstops;
-	ldTabstops = NULL;
+	ldTabstops = nullptr;
 }
 
 bool EditView::SetTwoPhaseDraw(bool twoPhaseDraw) {
@@ -219,7 +219,7 @@ bool EditView::LinesOverlap() const {
 
 void EditView::ClearAllTabstops() {
 	delete ldTabstops;
-	ldTabstops = 0;
+	ldTabstops = nullptr;
 }
 
 XYPOSITION EditView::NextTabstopPos(int line, XYPOSITION x, XYPOSITION tabWidth) const {
@@ -268,11 +268,11 @@ void EditView::LinesAddedOrRemoved(int lineOfPos, int linesAdded) {
 void EditView::DropGraphics(bool freeObjects) {
 	if (freeObjects) {
 		delete pixmapLine;
-		pixmapLine = 0;
+		pixmapLine = nullptr;
 		delete pixmapIndentGuide;
-		pixmapIndentGuide = 0;
+		pixmapIndentGuide = nullptr;
 		delete pixmapIndentGuideHighlight;
-		pixmapIndentGuideHighlight = 0;
+		pixmapIndentGuideHighlight = nullptr;
 	} else {
 		if (pixmapLine)
 			pixmapLine->Release();
@@ -468,7 +468,7 @@ void EditView::LayoutLine(const EditModel &model, int line, Surface *surface, co
 		ll->positions[0] = 0;
 		bool lastSegItalics = false;
 
-		BreakFinder bfLayout(ll, NULL, Range(0, numCharsInLine), posLineStart, 0, false, model.pdoc, &model.reprs, NULL);
+		BreakFinder bfLayout(ll, nullptr, Range(0, numCharsInLine), posLineStart, 0, false, model.pdoc, &model.reprs, nullptr);
 		while (bfLayout.More()) {
 
 			const TextSegment ts = bfLayout.Next();
@@ -979,7 +979,7 @@ void EditView::DrawEOL(Surface *surface, const EditModel &model, const ViewStyle
 			rcPlace.right = rcLine.right;
 			rcPlace.left = rcPlace.right - vsDraw.aveCharWidth;
 		}
-		if (customDrawWrapMarker == NULL) {
+		if (customDrawWrapMarker == nullptr) {
 			DrawWrapMarker(surface, rcPlace, true, vsDraw.WrapColour());
 		} else {
 			customDrawWrapMarker(surface, rcPlace, true, vsDraw.WrapColour());
@@ -1381,7 +1381,7 @@ static void DrawWrapIndentAndMarker(Surface *surface, const ViewStyle &vsDraw, c
 		else
 			rcPlace.right = rcPlace.left + vsDraw.aveCharWidth;
 
-		if (customDrawWrapMarker == NULL) {
+		if (customDrawWrapMarker == nullptr) {
 			DrawWrapMarker(surface, rcPlace, false, vsDraw.WrapColour());
 		} else {
 			customDrawWrapMarker(surface, rcPlace, false, vsDraw.WrapColour());
@@ -1399,7 +1399,7 @@ void EditView::DrawBackground(Surface *surface, const EditModel &model, const Vi
 	// Does not take margin into account but not significant
 	const int xStartVisible = static_cast<int>(subLineStart)-xStart;
 
-	BreakFinder bfBack(ll, &model.sel, lineRange, posLineStart, xStartVisible, selBackDrawn, model.pdoc, &model.reprs, NULL);
+	BreakFinder bfBack(ll, &model.sel, lineRange, posLineStart, xStartVisible, selBackDrawn, model.pdoc, &model.reprs, nullptr);
 
 	const bool drawWhitespaceBackground = vsDraw.WhitespaceBackgroundDrawn() && !background.isSet;
 
@@ -1662,7 +1662,7 @@ void EditView::DrawForeground(Surface *surface, const EditModel &model, const Vi
 							surface->PenColour(textFore);
 							PRectangle rcTab(rcSegment.left + 1, rcSegment.top + tabArrowHeight,
 								rcSegment.right - 1, rcSegment.bottom - vsDraw.maxDescent);
-							if (customDrawTabArrow == NULL)
+							if (customDrawTabArrow == nullptr)
 								DrawTabArrow(surface, rcTab, static_cast<int>(rcSegment.top + vsDraw.lineHeight / 2), vsDraw);
 							else
 								customDrawTabArrow(surface, rcTab, static_cast<int>(rcSegment.top + vsDraw.lineHeight / 2));
@@ -1958,7 +1958,7 @@ void EditView::PaintText(Surface *surfaceWindow, const EditModel &model, PRectan
 			(vsDraw.braceBadLightIndicatorSet && (model.bracesMatchStyle == STYLE_BRACEBAD)));
 
 		int lineDocPrevious = -1;	// Used to avoid laying out one document line multiple times
-		AutoLineLayout ll(llc, 0);
+		AutoLineLayout ll(llc, nullptr);
 		std::vector<DrawPhase> phases;
 		if ((phasesDraw == phasesMultiple) && !bufferedDraw) {
 			for (DrawPhase phase = drawBack; phase <= drawCarets; phase = static_cast<DrawPhase>(phase * 2)) {
@@ -1985,7 +1985,7 @@ void EditView::PaintText(Surface *surfaceWindow, const EditModel &model, PRectan
 				// and determine the x position at which each character starts.
 				//ElapsedTime et;
 				if (lineDoc != lineDocPrevious) {
-					ll.Set(0);
+					ll.Set(nullptr);
 					ll.Set(RetrieveLineLayout(lineDoc, model));
 					LayoutLine(model, lineDoc, surface, vsDraw, ll, model.wrapWidth);
 					lineDocPrevious = lineDoc;
@@ -2049,7 +2049,7 @@ void EditView::PaintText(Surface *surfaceWindow, const EditModel &model, PRectan
 				visibleLine++;
 			}
 		}
-		ll.Set(0);
+		ll.Set(nullptr);
 		//if (durPaint < 0.00000001)
 		//	durPaint = 0.00000001;
 

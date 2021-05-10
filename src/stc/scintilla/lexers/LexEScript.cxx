@@ -270,7 +270,7 @@ static const char * const ESCRIPTWordLists[] = {
 	"Primary keywords and identifiers",
 	"Intrinsic functions",
 	"Extended and user defined functions",
-	0,
+	nullptr,
 };
 
 LexerModule lmESCRIPT(SCLEX_ESCRIPT, ColouriseESCRIPTDoc, "escript", FoldESCRIPTDoc, ESCRIPTWordLists);

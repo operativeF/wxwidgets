@@ -110,7 +110,7 @@ public:
         }
 
         // Nothing found
-        return NULL;
+        return nullptr;
     }
 
 private:
@@ -185,7 +185,7 @@ bool wxConvertAnyToVariant(const wxAny& any, wxVariant* variant)
     wxVariantDataFactory f =
         GetAnyValueTypeGlobals()->FindVariantDataFactory(any.GetType());
 
-    wxVariantData* data = NULL;
+    wxVariantData* data = nullptr;
 
     if ( f )
     {

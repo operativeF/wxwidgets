@@ -463,7 +463,7 @@ wxBrushAttrsSetter::wxBrushAttrsSetter(wxMSWDCImpl& dc)
 WXHDC wxDC::GetHDC() const
 {
     wxMSWDCImpl * const impl = wxDynamicCast(GetImpl(), wxMSWDCImpl);
-    return impl ? impl->GetHDC() : 0;
+    return impl ? impl->GetHDC() : nullptr;
 }
 
 // ---------------------------------------------------------------------------
@@ -479,7 +479,7 @@ wxMSWDCImpl::wxMSWDCImpl( wxDC *owner, WXHDC hDC ) :
 
 wxMSWDCImpl::~wxMSWDCImpl()
 {
-    if ( m_hDC != 0 )
+    if ( m_hDC != nullptr )
     {
         SelectOldObjects(m_hDC);
 
@@ -498,7 +498,7 @@ wxMSWDCImpl::~wxMSWDCImpl()
             else
             {
                 // Must have been a wxScreenDC
-                ::ReleaseDC((HWND) NULL, GetHdc());
+                ::ReleaseDC((HWND) nullptr, GetHdc());
             }
         }
     }
@@ -516,32 +516,32 @@ void wxMSWDCImpl::SelectOldObjects(WXHDC dc)
             ::SelectObject((HDC) dc, (HBITMAP) m_oldBitmap);
             if (m_selectedBitmap.IsOk())
             {
-                m_selectedBitmap.SetSelectedInto(NULL);
+                m_selectedBitmap.SetSelectedInto(nullptr);
             }
         }
-        m_oldBitmap = 0;
+        m_oldBitmap = nullptr;
         if (m_oldPen)
         {
             ::SelectObject((HDC) dc, (HPEN) m_oldPen);
         }
-        m_oldPen = 0;
+        m_oldPen = nullptr;
         if (m_oldBrush)
         {
             ::SelectObject((HDC) dc, (HBRUSH) m_oldBrush);
         }
-        m_oldBrush = 0;
+        m_oldBrush = nullptr;
         if (m_oldFont)
         {
             ::SelectObject((HDC) dc, (HFONT) m_oldFont);
         }
-        m_oldFont = 0;
+        m_oldFont = nullptr;
 
 #if wxUSE_PALETTE
         if (m_oldPalette)
         {
             ::SelectPalette((HDC) dc, (HPALETTE) m_oldPalette, FALSE);
         }
-        m_oldPalette = 0;
+        m_oldPalette = nullptr;
 #endif // wxUSE_PALETTE
     }
 
@@ -673,7 +673,7 @@ void wxMSWDCImpl::DestroyClippingRegion()
         // problems. In fact setting a null region is probably OK
         // on desktop WIN32 also, since the WIN32 docs imply that the user
         // clipping region is independent from the paint clipping region.
-        ::SelectClipRgn(GetHdc(), 0);
+        ::SelectClipRgn(GetHdc(), nullptr);
 #else
         // TODO: this should restore the previous clipping region,
         //       so that OnPaint processing works correctly, and the update
@@ -1300,7 +1300,7 @@ void wxMSWDCImpl::DoDrawIcon(const wxIcon& icon, wxCoord x, wxCoord y)
     }
     else
     {
-        ::DrawIconEx(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), GetHiconOf(icon), icon.GetWidth(), icon.GetHeight(), 0, NULL, DI_NORMAL);
+        ::DrawIconEx(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), GetHiconOf(icon), icon.GetWidth(), icon.GetHeight(), 0, nullptr, DI_NORMAL);
     }
 
     CalcBoundingBox(x, y);
@@ -1314,10 +1314,10 @@ void wxMSWDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y, bool 
     int width = bmp.GetWidth(),
         height = bmp.GetHeight();
 
-    HBITMAP hbmpMask = 0;
+    HBITMAP hbmpMask = nullptr;
 
 #if wxUSE_PALETTE
-    HPALETTE oldPal = 0;
+    HPALETTE oldPal = nullptr;
 #endif // wxUSE_PALETTE
 
     if ( bmp.HasAlpha() )
@@ -1339,7 +1339,7 @@ void wxMSWDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y, bool 
             }
             else
             {
-                curBmp.SetMask(NULL);
+                curBmp.SetMask(nullptr);
             }
         }
 
@@ -1492,8 +1492,8 @@ void wxMSWDCImpl::DoDrawText(const wxString& text, wxCoord x, wxCoord y)
 
 void wxMSWDCImpl::DrawAnyText(const wxString& text, wxCoord x, wxCoord y)
 {
-    if ( ::ExtTextOut(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), 0, NULL,
-                   text.c_str(), text.length(), NULL) == 0 )
+    if ( ::ExtTextOut(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), 0, nullptr,
+                   text.c_str(), text.length(), nullptr) == 0 )
     {
         wxLogLastError(wxT("TextOut"));
     }
@@ -1603,7 +1603,7 @@ void wxMSWDCImpl::DoSelectPalette(bool realize)
     if (m_oldPalette)
     {
         ::SelectPalette(GetHdc(), (HPALETTE) m_oldPalette, FALSE);
-        m_oldPalette = 0;
+        m_oldPalette = nullptr;
     }
 
     if ( m_palette.IsOk() )
@@ -1682,7 +1682,7 @@ void wxMSWDCImpl::SetFont(const wxFont& font)
                 wxLogLastError(wxT("SelectObject(old font)"));
             }
 
-            m_oldFont = 0;
+            m_oldFont = nullptr;
         }
 
         m_font = wxNullFont;
@@ -1718,7 +1718,7 @@ void wxMSWDCImpl::SetPen(const wxPen& pen)
                 wxLogLastError(wxT("SelectObject(old pen)"));
             }
 
-            m_oldPen = 0;
+            m_oldPen = nullptr;
         }
 
         m_pen = wxNullPen;
@@ -1749,7 +1749,7 @@ void wxMSWDCImpl::SetBrush(const wxBrush& brush)
                         GetHdc(),
                         m_deviceOriginX % sizeBrushBitmap.x,
                         m_deviceOriginY % sizeBrushBitmap.y,
-                        NULL                    // [out] previous brush origin
+                        nullptr                    // [out] previous brush origin
                     ) )
             {
                 wxLogLastError(wxT("SetBrushOrgEx()"));
@@ -1778,7 +1778,7 @@ void wxMSWDCImpl::SetBrush(const wxBrush& brush)
                 wxLogLastError(wxT("SelectObject(old brush)"));
             }
 
-            m_oldBrush = 0;
+            m_oldBrush = nullptr;
         }
 
         m_brush = wxNullBrush;
@@ -1921,7 +1921,7 @@ void wxMSWDCImpl::DoGetTextExtent(const wxString& string, wxCoord *x, wxCoord *y
 
 bool wxMSWDCImpl::DoGetPartialTextExtents(const wxString& text, wxArrayInt& widths) const
 {
-    wxTextMeasure txm(GetOwner(), NULL); // don't change the font
+    wxTextMeasure txm(GetOwner(), nullptr); // don't change the font
     return txm.GetPartialTextExtents(text, widths, 1.0);
 }
 
@@ -1977,11 +1977,11 @@ void wxMSWDCImpl::RealizeScaleAndOrigin()
     devExtY /= gcd;
     logExtY /= gcd;
 
-    ::SetViewportExtEx(GetHdc(), devExtX, devExtY, NULL);
-    ::SetWindowExtEx(GetHdc(), logExtX, logExtY, NULL);
+    ::SetViewportExtEx(GetHdc(), devExtX, devExtY, nullptr);
+    ::SetWindowExtEx(GetHdc(), logExtX, logExtY, nullptr);
 
-    ::SetViewportOrgEx(GetHdc(), m_deviceOriginX, m_deviceOriginY, NULL);
-    ::SetWindowOrgEx(GetHdc(), m_logicalOriginX, m_logicalOriginY, NULL);
+    ::SetViewportOrgEx(GetHdc(), m_deviceOriginX, m_deviceOriginY, nullptr);
+    ::SetWindowOrgEx(GetHdc(), m_logicalOriginX, m_logicalOriginY, nullptr);
 
     m_isClipBoxValid = false;
 }
@@ -2092,7 +2092,7 @@ void wxMSWDCImpl::SetDeviceOrigin(wxCoord x, wxCoord y)
 
     wxDCImpl::SetDeviceOrigin( x, y );
 
-    ::SetViewportOrgEx(GetHdc(), (int)m_deviceOriginX, (int)m_deviceOriginY, NULL);
+    ::SetViewportOrgEx(GetHdc(), (int)m_deviceOriginX, (int)m_deviceOriginY, nullptr);
 
     m_isClipBoxValid = false;
 }
@@ -2204,7 +2204,7 @@ wxAffineMatrix2D wxMSWDCImpl::GetTransformMatrix() const
 
 void wxMSWDCImpl::ResetTransformMatrix()
 {
-    ::ModifyWorldTransform(GetHdc(), NULL, MWT_IDENTITY);
+    ::ModifyWorldTransform(GetHdc(), nullptr, MWT_IDENTITY);
     ::SetGraphicsMode(GetHdc(), GM_COMPATIBLE);
     m_isClipBoxValid = false;
 }
@@ -2259,7 +2259,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
         }
     }
 
-    wxMask *mask = NULL;
+    wxMask *mask = nullptr;
     if ( useMask )
     {
         mask = bmpSrc.GetMask();
@@ -2310,7 +2310,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
     if ( dwRop == BLACKNESS || dwRop == WHITENESS ||
             dwRop == DSTINVERT || dwRop == DSTCOPY )
     {
-        hdcSrc = NULL;
+        hdcSrc = nullptr;
     }
 
     bool success = false;
@@ -2354,7 +2354,7 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
 
 #if wxUSE_DC_CACHEING
             // create a temp buffer bitmap and DCs to access it and the mask
-            wxDCCacheEntry* dcCacheEntry1 = FindDCInCache(NULL, hdcSrc);
+            wxDCCacheEntry* dcCacheEntry1 = FindDCInCache(nullptr, hdcSrc);
             dc_mask = (HDC) dcCacheEntry1->m_dc;
 
             wxDCCacheEntry* dcCacheEntry2 = FindDCInCache(dcCacheEntry1, GetHDC());
@@ -2610,7 +2610,7 @@ wxObjectList wxMSWDCImpl::sm_dcCache;
 wxDCCacheEntry::wxDCCacheEntry(WXHBITMAP hBitmap, int w, int h, int depth)
 {
     m_bitmap = hBitmap;
-    m_dc = 0;
+    m_dc = nullptr;
     m_width = w;
     m_height = h;
     m_depth = depth;
@@ -2618,7 +2618,7 @@ wxDCCacheEntry::wxDCCacheEntry(WXHBITMAP hBitmap, int w, int h, int depth)
 
 wxDCCacheEntry::wxDCCacheEntry(WXHDC hDC, int depth)
 {
-    m_bitmap = 0;
+    m_bitmap = nullptr;
     m_dc = hDC;
     m_width = 0;
     m_height = 0;

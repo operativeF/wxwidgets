@@ -128,7 +128,7 @@ wxObject *wxMenuXmlHandler::DoCreateResource()
             if (kind == wxITEM_CHECK)
                 mitem->Check(GetBool(wxT("checked")));
         }
-        return NULL;
+        return nullptr;
     }
 }
 
@@ -155,7 +155,7 @@ wxMenuBarXmlHandler::wxMenuBarXmlHandler() : wxXmlResourceHandler()
 
 wxObject *wxMenuBarXmlHandler::DoCreateResource()
 {
-    wxMenuBar *menubar = NULL;
+    wxMenuBar *menubar = nullptr;
 
     const int style = GetStyle();
     wxASSERT_MSG(!style || !m_instance,

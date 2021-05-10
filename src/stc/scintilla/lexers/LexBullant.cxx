@@ -227,7 +227,7 @@ static void ColouriseBullantDoc(Sci_PositionU startPos, Sci_Position length, int
 
 static const char * const bullantWordListDesc[] = {
 	"Keywords",
-	0
+	nullptr
 };
 
-LexerModule lmBullant(SCLEX_BULLANT, ColouriseBullantDoc, "bullant", 0, bullantWordListDesc);
+LexerModule lmBullant(SCLEX_BULLANT, ColouriseBullantDoc, "bullant", nullptr, bullantWordListDesc);

@@ -303,7 +303,7 @@ static void FoldGui4Cli(Sci_PositionU startPos, Sci_Position length, int,
 // I have no idea what these are for.. probably accessible by some message.
 static const char * const gui4cliWordListDesc[] = {
 	"Globals", "Events", "Attributes", "Control", "Commands",
-	0
+	nullptr
 };
 
 // Declare language & pass our function pointers to Scintilla

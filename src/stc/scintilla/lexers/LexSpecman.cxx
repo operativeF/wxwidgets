@@ -280,7 +280,7 @@ static const char * const specmanWordLists[] = {
             "Sequence keywords and identifiers",
             "User defined keywords and identifiers",
             "Unused",
-            0,
+            nullptr,
         };
 
 static void ColouriseSpecmanDocSensitive(Sci_PositionU startPos, Sci_Position length, int initStyle, WordList *keywordlists[],

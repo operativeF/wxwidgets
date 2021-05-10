@@ -289,7 +289,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
             // fill the destination too, it gives much nicer 4bpp images
 #if wxUSE_PALETTE
             wxPalette* paletteTmp;
-            wxQuantize::Quantize( *image, *q_image, &paletteTmp, quantize, 0,
+            wxQuantize::Quantize( *image, *q_image, &paletteTmp, quantize, nullptr,
                                   wxQUANTIZE_FILL_DESTINATION_IMAGE );
             palette.reset(paletteTmp);
 #else // !wxUSE_PALETTE
@@ -361,7 +361,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
     const unsigned char* const data = q_image && q_image->IsOk()
                                         ? q_image->GetData()
                                         : image->GetData();
-    const unsigned char* const alpha = saveAlpha ? image->GetAlpha() : NULL;
+    const unsigned char* const alpha = saveAlpha ? image->GetAlpha() : nullptr;
 
     wxScopedArray<wxUint8> buffer(row_width);
     memset(buffer.get(), 0, row_width);
@@ -532,7 +532,7 @@ bool wxBMPHandler::DoLoadDib(wxImage * image, int width, int height,
     }
     else // no palette
     {
-        cmap = NULL;
+        cmap = nullptr;
     }
 
     wxON_BLOCK_EXIT1(&BMPPalette::Free, cmap);
@@ -577,7 +577,7 @@ bool wxBMPHandler::DoLoadDib(wxImage * image, int width, int height,
     }
     else // no alpha
     {
-        alpha = NULL;
+        alpha = nullptr;
     }
 
     // Reading the palette, if it exists:

@@ -348,7 +348,7 @@ static const char * const FSWordListDesc[] = {
 	"Procedure, return, exit",
 	"Class (oop)",
 	"Doxygen keywords",
-	0
+	nullptr
 };
 
 LexerModule lmFlagShip(SCLEX_FLAGSHIP, ColouriseFlagShipDoc, "flagship", FoldFlagShipDoc, FSWordListDesc);

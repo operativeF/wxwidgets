@@ -124,7 +124,7 @@ void wxDateTimePickerCtrl::MSWUpdateFormat(bool valid)
     // Note: due to a bug in MinGW headers, with missing parentheses around the
     // macro argument (corrected in or before 8.2, but still existing in 5.3),
     // we have to use a temporary variable here.
-    const TCHAR* const format = valid ? NULL : m_nullText.t_str();
+    const TCHAR* const format = valid ? nullptr : m_nullText.t_str();
     DateTime_SetFormat(GetHwnd(), format);
 }
 
@@ -193,9 +193,9 @@ wxSize wxDateTimePickerCtrl::DoGetBestSize() const
                         ::GetWindowLong(GetHwnd(), GWL_STYLE) & ~DTS_SHOWNONE,
                         0, 0, 1, 1,
                         GetHwndOf(m_parent),
-                        0,
+                        nullptr,
                         wxGetInstance(),
-                        NULL
+                        nullptr
                      );
             wxCHECK_MSG( hwnd, wxSize(),
                          wxS("SysDateTimePick32 creation unexpected failed") );

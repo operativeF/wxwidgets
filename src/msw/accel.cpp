@@ -65,7 +65,7 @@ protected:
 wxAcceleratorRefData::wxAcceleratorRefData()
 {
     m_ok = false;
-    m_hAccel = 0;
+    m_hAccel = nullptr;
 }
 
 wxAcceleratorRefData::~wxAcceleratorRefData()
@@ -87,7 +87,7 @@ wxAcceleratorTable::wxAcceleratorTable(const wxString& resource)
 
     HACCEL hAccel = ::LoadAccelerators(wxGetInstance(), resource.t_str());
     M_ACCELDATA->m_hAccel = hAccel;
-    M_ACCELDATA->m_ok = hAccel != 0;
+    M_ACCELDATA->m_ok = hAccel != nullptr;
 }
 
 // Create from an array
@@ -118,7 +118,7 @@ wxAcceleratorTable::wxAcceleratorTable(int n, const wxAcceleratorEntry entries[]
     M_ACCELDATA->m_hAccel = ::CreateAcceleratorTable(arr, n);
     delete[] arr;
 
-    M_ACCELDATA->m_ok = (M_ACCELDATA->m_hAccel != 0);
+    M_ACCELDATA->m_ok = (M_ACCELDATA->m_hAccel != nullptr);
 }
 
 bool wxAcceleratorTable::IsOk() const
@@ -137,7 +137,7 @@ void wxAcceleratorTable::SetHACCEL(WXHACCEL hAccel)
 WXHACCEL wxAcceleratorTable::GetHACCEL() const
 {
     if (!M_ACCELDATA)
-        return 0;
+        return nullptr;
     return (WXHACCEL) M_ACCELDATA->m_hAccel;
 }
 

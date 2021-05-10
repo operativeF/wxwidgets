@@ -30,7 +30,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPropertySheetDialogXmlHandler, wxXmlResourceHandler)
 wxPropertySheetDialogXmlHandler::wxPropertySheetDialogXmlHandler()
                      :wxXmlResourceHandler(),
                       m_isInside(false),
-                      m_dialog(NULL)
+                      m_dialog(nullptr)
 {
     XRC_ADD_STYLE(wxSTAY_ON_TOP);
     XRC_ADD_STYLE(wxCAPTION);
@@ -64,7 +64,7 @@ wxObject *wxPropertySheetDialogXmlHandler::DoCreateResource()
             wxBookCtrlBase *bookctrl = m_dialog->GetBookCtrl();
             bool old_ins = m_isInside;
             m_isInside = false;
-            wxObject *item = CreateResFromNode(n, bookctrl, NULL);
+            wxObject *item = CreateResFromNode(n, bookctrl, nullptr);
             m_isInside = old_ins;
             wxWindow *wnd = wxDynamicCast(item, wxWindow);
 
@@ -75,7 +75,7 @@ wxObject *wxPropertySheetDialogXmlHandler::DoCreateResource()
                 {
                     wxBitmap bmp = GetBitmap(wxT("bitmap"), wxART_OTHER);
                     wxImageList *imgList = bookctrl->GetImageList();
-                    if (imgList == NULL)
+                    if (imgList == nullptr)
                     {
                         imgList = new wxImageList(bmp.GetWidth(), bmp.GetHeight());
                         bookctrl->AssignImageList(imgList);
@@ -93,7 +93,7 @@ wxObject *wxPropertySheetDialogXmlHandler::DoCreateResource()
         else
         {
             ReportError("propertysheetpage must have a window child");
-            return NULL;
+            return nullptr;
         }
     }
 

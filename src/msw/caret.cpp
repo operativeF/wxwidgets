@@ -78,7 +78,7 @@ bool wxCaret::MSWCreateCaret()
 
     if ( !m_hasCaret )
     {
-        CALL_CARET_API(CreateCaret, (GetWinHwnd(GetWindow()), 0,
+        CALL_CARET_API(CreateCaret, (GetWinHwnd(GetWindow()), nullptr,
                                      m_width, m_height));
 
         m_hasCaret = true;

@@ -64,7 +64,7 @@ wxIMPLEMENT_CLASS(wxExtHelpController, wxHelpControllerBase);
 wxExtHelpController::wxExtHelpController(wxWindow* parentWindow)
                    : wxHelpControllerBase(parentWindow)
 {
-    m_MapList = NULL;
+    m_MapList = nullptr;
     m_NumOfEntries = 0;
     m_BrowserIsNetscape = false;
 

@@ -180,7 +180,7 @@ static const char * const blitzbasicWordListDesc[] = {
 	"user1",
 	"user2",
 	"user3",
-	0
+	nullptr
 };
 
 static const char * const purebasicWordListDesc[] = {
@@ -188,7 +188,7 @@ static const char * const purebasicWordListDesc[] = {
 	"PureBasic PreProcessor Keywords",
 	"user defined 1",
 	"user defined 2",
-	0
+	nullptr
 };
 
 static const char * const freebasicWordListDesc[] = {
@@ -196,7 +196,7 @@ static const char * const freebasicWordListDesc[] = {
 	"FreeBasic PreProcessor Keywords",
 	"user defined 1",
 	"user defined 2",
-	0
+	nullptr
 };
 
 struct OptionSetBasic : public OptionSet<OptionsBasic> {
@@ -264,7 +264,7 @@ public:
 	void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
 
 	void * SCI_METHOD PrivateCall(int, void *) {
-		return 0;
+		return nullptr;
 	}
 	static ILexer *LexerFactoryBlitzBasic() {
 		return new LexerBasic(';', CheckBlitzFoldPoint, blitzbasicWordListDesc);
@@ -285,7 +285,7 @@ Sci_Position SCI_METHOD LexerBasic::PropertySet(const char *key, const char *val
 }
 
 Sci_Position SCI_METHOD LexerBasic::WordListSet(int n, const char *wl) {
-	WordList *wordListN = 0;
+	WordList *wordListN = nullptr;
 	switch (n) {
 	case 0:
 		wordListN = &keywordlists[0];

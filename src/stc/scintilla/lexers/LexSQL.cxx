@@ -270,7 +270,7 @@ static const char * const sqlWordListDesc[] = {
 	"User Keywords 2",
 	"User Keywords 3",
 	"User Keywords 4",
-	0
+	nullptr
 };
 
 struct OptionSetSQL : public OptionSet<OptionsSQL> {
@@ -344,7 +344,7 @@ public :
 	void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position lengthDoc, int initStyle, IDocument *pAccess);
 
 	void * SCI_METHOD PrivateCall(int, void *) {
-		return 0;
+		return nullptr;
 	}
 
 	static ILexer *LexerFactorySQL() {
@@ -401,7 +401,7 @@ private:
 };
 
 Sci_Position SCI_METHOD LexerSQL::WordListSet(int n, const char *wl) {
-	WordList *wordListN = 0;
+	WordList *wordListN = nullptr;
 	switch (n) {
 	case 0:
 		wordListN = &keywords1;

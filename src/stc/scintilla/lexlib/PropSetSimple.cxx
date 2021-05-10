@@ -30,7 +30,7 @@ PropSetSimple::PropSetSimple() {
 PropSetSimple::~PropSetSimple() {
 	mapss *props = static_cast<mapss *>(impl);
 	delete props;
-	impl = 0;
+	impl = nullptr;
 }
 
 void PropSetSimple::Set(const char *key, const char *val, int lenKey, int lenVal) {
@@ -89,7 +89,7 @@ const char *PropSetSimple::Get(const char *key) const {
 // for that, through a recursive function and a simple chain of pointers.
 
 struct VarChain {
-	VarChain(const char *var_=NULL, const VarChain *link_=NULL): var(var_), link(link_) {}
+	VarChain(const char *var_=nullptr, const VarChain *link_=nullptr): var(var_), link(link_) {}
 
 	bool contains(const char *testVar) const {
 		return (var && (0 == strcmp(var, testVar)))

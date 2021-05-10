@@ -253,7 +253,7 @@ static const char * const apdlWordListDesc[] = {
     "starcommands",
     "arguments",
     "functions",
-    0
+    nullptr
 };
 
 LexerModule lmAPDL(SCLEX_APDL, ColouriseAPDLDoc, "apdl", FoldAPDLDoc, apdlWordListDesc);

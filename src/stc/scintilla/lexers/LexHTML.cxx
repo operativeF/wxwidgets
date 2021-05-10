@@ -281,7 +281,7 @@ static int classifyTagHTML(Sci_PositionU start, Sci_PositionU end,
 	// if the current language is XML, I can fold any tag
 	// if the current language is HTML, I don't want to fold certain tags (input, meta, etc.)
 	//...to find it in the list of no-container-tags
-	tagDontFold = (!isXml) && (NULL != strstr(" area base basefont br col command embed frame hr img input isindex keygen link meta param source track wbr ", withSpace));
+	tagDontFold = (!isXml) && (nullptr != strstr(" area base basefont br col command embed frame hr img input isindex keygen link meta param source track wbr ", withSpace));
 
 	//now we can remove the trailing space
 	withSpace[i] = '\0';
@@ -885,7 +885,7 @@ static void ColouriseHyperTextDoc(Sci_PositionU startPos, Sci_Position length, i
 				// check if the closing tag is a script tag
 				if (const char *tag =
 						state == SCE_HJ_COMMENTLINE || isXml ? "script" :
-						state == SCE_H_COMMENT ? "comment" : 0) {
+						state == SCE_H_COMMENT ? "comment" : nullptr) {
 					Sci_Position j = i + 2;
 					int chr;
 					do {
@@ -1959,7 +1959,7 @@ static void ColouriseHyperTextDoc(Sci_PositionU startPos, Sci_Position length, i
 		case SCE_HPHP_NUMBER:
 			// recognize bases 8,10 or 16 integers OR floating-point numbers
 			if (!IsADigit(ch)
-				&& strchr(".xXabcdefABCDEF", ch) == NULL
+				&& strchr(".xXabcdefABCDEF", ch) == nullptr
 				&& ((ch != '-' && ch != '+') || (chPrev != 'e' && chPrev != 'E'))) {
 				styler.ColourTo(i - 1, SCE_HPHP_NUMBER);
 				if (IsOperator(ch))
@@ -2185,7 +2185,7 @@ static const char * const htmlWordListDesc[] = {
 	"Python keywords",
 	"PHP keywords",
 	"SGML and DTD keywords",
-	0,
+	nullptr,
 };
 
 static const char * const phpscriptWordListDesc[] = {
@@ -2195,9 +2195,9 @@ static const char * const phpscriptWordListDesc[] = {
 	"", //Unused
 	"PHP keywords",
 	"", //Unused
-	0,
+	nullptr,
 };
 
-LexerModule lmHTML(SCLEX_HTML, ColouriseHTMLDoc, "hypertext", 0, htmlWordListDesc);
-LexerModule lmXML(SCLEX_XML, ColouriseXMLDoc, "xml", 0, htmlWordListDesc);
-LexerModule lmPHPSCRIPT(SCLEX_PHPSCRIPT, ColourisePHPScriptDoc, "phpscript", 0, phpscriptWordListDesc);
+LexerModule lmHTML(SCLEX_HTML, ColouriseHTMLDoc, "hypertext", nullptr, htmlWordListDesc);
+LexerModule lmXML(SCLEX_XML, ColouriseXMLDoc, "xml", nullptr, htmlWordListDesc);
+LexerModule lmPHPSCRIPT(SCLEX_PHPSCRIPT, ColourisePHPScriptDoc, "phpscript", nullptr, phpscriptWordListDesc);

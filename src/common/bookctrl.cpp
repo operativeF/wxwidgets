@@ -50,13 +50,13 @@ wxEND_EVENT_TABLE()
 void wxBookCtrlBase::Init()
 {
     m_selection = wxNOT_FOUND;
-    m_bookctrl = NULL;
+    m_bookctrl = nullptr;
     m_fitToCurrentPage = false;
 
     m_internalBorder = 5;
 
     m_controlMargin = 0;
-    m_controlSizer = NULL;
+    m_controlSizer = nullptr;
 }
 
 bool
@@ -311,7 +311,7 @@ void wxBookCtrlBase::OnHelp(wxHelpEvent& event)
     {
         // this event is for the book control itself, redirect it to the
         // corresponding page
-        wxWindow *page = NULL;
+        wxWindow *page = nullptr;
 
         if ( event.GetOrigin() == wxHelpEvent::Origin_HelpButton )
         {
@@ -388,7 +388,7 @@ bool wxBookCtrlBase::DeletePage(size_t nPage)
 
 wxWindow *wxBookCtrlBase::DoRemovePage(size_t nPage)
 {
-    wxCHECK_MSG( nPage < m_pages.size(), NULL,
+    wxCHECK_MSG( nPage < m_pages.size(), nullptr,
                  wxT("invalid page index in wxBookCtrlBase::DoRemovePage()") );
 
     wxWindow *pageRemoved = m_pages[nPage];

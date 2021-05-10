@@ -25,7 +25,7 @@
 using namespace Scintilla;
 #endif
 
-Decoration::Decoration(int indicator_) : next(0), indicator(indicator_) {
+Decoration::Decoration(int indicator_) : next(nullptr), indicator(indicator_) {
 }
 
 Decoration::~Decoration() {
@@ -35,8 +35,8 @@ bool Decoration::Empty() const {
 	return (rs.Runs() == 1) && (rs.AllSameAs(0));
 }
 
-DecorationList::DecorationList() : currentIndicator(0), currentValue(1), current(0),
-	lengthDocument(0), root(0), clickNotified(false) {
+DecorationList::DecorationList() : currentIndicator(0), currentValue(1), current(nullptr),
+	lengthDocument(0), root(nullptr), clickNotified(false) {
 }
 
 DecorationList::~DecorationList() {
@@ -46,8 +46,8 @@ DecorationList::~DecorationList() {
 		delete deco;
 		deco = decoNext;
 	}
-	root = 0;
-	current = 0;
+	root = nullptr;
+	current = nullptr;
 }
 
 Decoration *DecorationList::DecorationFromIndicator(int indicator) {
@@ -56,7 +56,7 @@ Decoration *DecorationList::DecorationFromIndicator(int indicator) {
 			return deco;
 		}
 	}
-	return 0;
+	return nullptr;
 }
 
 Decoration *DecorationList::Create(int indicator, int length) {
@@ -64,14 +64,14 @@ Decoration *DecorationList::Create(int indicator, int length) {
 	Decoration *decoNew = new Decoration(indicator);
 	decoNew->rs.InsertSpace(0, length);
 
-	Decoration *decoPrev = 0;
+	Decoration *decoPrev = nullptr;
 	Decoration *deco = root;
 
 	while (deco && (deco->indicator < indicator)) {
 		decoPrev = deco;
 		deco = deco->next;
 	}
-	if (decoPrev == 0) {
+	if (decoPrev == nullptr) {
 		decoNew->next = root;
 		root = decoNew;
 	} else {
@@ -82,7 +82,7 @@ Decoration *DecorationList::Create(int indicator, int length) {
 }
 
 void DecorationList::Delete(int indicator) {
-	Decoration *decoToDelete = 0;
+	Decoration *decoToDelete = nullptr;
 	if (root) {
 		if (root->indicator == indicator) {
 			decoToDelete = root;
@@ -101,7 +101,7 @@ void DecorationList::Delete(int indicator) {
 	}
 	if (decoToDelete) {
 		delete decoToDelete;
-		current = 0;
+		current = nullptr;
 	}
 }
 

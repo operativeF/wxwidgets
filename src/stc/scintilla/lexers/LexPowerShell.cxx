@@ -243,7 +243,7 @@ static const char * const powershellWordLists[] = {
 	"Functions",
 	"User1",
 	"DocComment",
-	0
+	nullptr
 };
 
 LexerModule lmPowerShell(SCLEX_POWERSHELL, ColourisePowerShellDoc, "powershell", FoldPowerShellDoc, powershellWordLists);

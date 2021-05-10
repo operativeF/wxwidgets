@@ -327,7 +327,7 @@ static const char * const psWordListDesc[] = {
     "PS Level 3 operators",
     "RIP-specific operators",
     "User-defined operators",
-    0
+    nullptr
 };
 
 LexerModule lmPS(SCLEX_PS, ColourisePSDoc, "ps", FoldPSDoc, psWordListDesc);

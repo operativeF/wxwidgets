@@ -34,7 +34,7 @@ static const char *const DMISWordListDesc[] = {
 	"Unsupported DMIS Minor Words",
 	"Keywords for code folding start",
 	"Corresponding keywords for code folding end",
-	0
+	nullptr
 };
 
 
@@ -65,7 +65,7 @@ class LexerDMIS : public ILexer
 		}
 
 		const char * SCI_METHOD PropertyNames() {
-			return NULL;
+			return nullptr;
 		}
 
 		int SCI_METHOD PropertyType(const char *) {
@@ -73,7 +73,7 @@ class LexerDMIS : public ILexer
 		}
 
 		const char * SCI_METHOD DescribeProperty(const char *) {
-			return NULL;
+			return nullptr;
 		}
 
 		Sci_Position SCI_METHOD PropertySet(const char *, const char *) {
@@ -83,7 +83,7 @@ class LexerDMIS : public ILexer
 		Sci_Position SCI_METHOD WordListSet(int n, const char *wl);
 
 		void * SCI_METHOD PrivateCall(int, void *) {
-			return NULL;
+			return nullptr;
 		}
 
 		static ILexer *LexerFactoryDMIS() {

@@ -182,7 +182,7 @@ static const char * const asn1WordLists[] = {
 	"Attributes",
 	"Descriptors",
 	"Types",
-	0, };
+	nullptr, };
 
 
 LexerModule lmAsn1(SCLEX_ASN1, ColouriseAsn1Doc, "asn1", FoldAsn1Doc, asn1WordLists);

@@ -467,7 +467,7 @@ void wxDataViewIndexListModel::RowPrepended()
 
     wxDataViewItem item( wxUIntToPtr(id) );
     m_hash.Insert( item, 0 );
-    ItemAdded( wxDataViewItem(0), item );
+    ItemAdded( wxDataViewItem(nullptr), item );
 
 }
 
@@ -480,7 +480,7 @@ void wxDataViewIndexListModel::RowInserted( unsigned int before )
 
     wxDataViewItem item( wxUIntToPtr(id) );
     m_hash.Insert( item, before );
-    ItemAdded( wxDataViewItem(0), item );
+    ItemAdded( wxDataViewItem(nullptr), item );
 }
 
 void wxDataViewIndexListModel::RowAppended()
@@ -490,7 +490,7 @@ void wxDataViewIndexListModel::RowAppended()
 
     wxDataViewItem item( wxUIntToPtr(id) );
     m_hash.Add( item );
-    ItemAdded( wxDataViewItem(0), item );
+    ItemAdded( wxDataViewItem(nullptr), item );
 }
 
 void wxDataViewIndexListModel::RowDeleted( unsigned int row )
@@ -499,7 +499,7 @@ void wxDataViewIndexListModel::RowDeleted( unsigned int row )
 
     wxDataViewItem item( m_hash[row] );
     m_hash.RemoveAt( row );
-    /* wxDataViewModel:: */ ItemDeleted( wxDataViewItem(0), item );
+    /* wxDataViewModel:: */ ItemDeleted( wxDataViewItem(nullptr), item );
 }
 
 void wxDataViewIndexListModel::RowsDeleted( const wxArrayInt &rows )
@@ -519,7 +519,7 @@ void wxDataViewIndexListModel::RowsDeleted( const wxArrayInt &rows )
     for (i = 0; i < sorted.GetCount(); i++)
            m_hash.RemoveAt( sorted[i] );
 
-    /* wxDataViewModel:: */ ItemsDeleted( wxDataViewItem(0), array );
+    /* wxDataViewModel:: */ ItemsDeleted( wxDataViewItem(nullptr), array );
 }
 
 void wxDataViewIndexListModel::RowChanged( unsigned int row )
@@ -581,28 +581,28 @@ void wxDataViewVirtualListModel::RowPrepended()
 {
     m_size++;
     wxDataViewItem item( wxUIntToPtr(1) );
-    ItemAdded( wxDataViewItem(0), item );
+    ItemAdded( wxDataViewItem(nullptr), item );
 }
 
 void wxDataViewVirtualListModel::RowInserted( unsigned int before )
 {
     m_size++;
     wxDataViewItem item( wxUIntToPtr(before+1) );
-    ItemAdded( wxDataViewItem(0), item );
+    ItemAdded( wxDataViewItem(nullptr), item );
 }
 
 void wxDataViewVirtualListModel::RowAppended()
 {
     m_size++;
     wxDataViewItem item( wxUIntToPtr(m_size) );
-    ItemAdded( wxDataViewItem(0), item );
+    ItemAdded( wxDataViewItem(nullptr), item );
 }
 
 void wxDataViewVirtualListModel::RowDeleted( unsigned int row )
 {
     m_size--;
     wxDataViewItem item( wxUIntToPtr(row+1) );
-    /* wxDataViewModel:: */ ItemDeleted( wxDataViewItem(0), item );
+    /* wxDataViewModel:: */ ItemDeleted( wxDataViewItem(nullptr), item );
 }
 
 void wxDataViewVirtualListModel::RowsDeleted( const wxArrayInt &rows )
@@ -619,7 +619,7 @@ void wxDataViewVirtualListModel::RowsDeleted( const wxArrayInt &rows )
         wxDataViewItem item( wxUIntToPtr(sorted[i]+1) );
         array.Add( item );
     }
-    /* wxDataViewModel:: */ ItemsDeleted( wxDataViewItem(0), array );
+    /* wxDataViewModel:: */ ItemsDeleted( wxDataViewItem(nullptr), array );
 }
 
 void wxDataViewVirtualListModel::RowChanged( unsigned int row )
@@ -687,8 +687,8 @@ wxDataViewRendererBase::wxDataViewRendererBase( const wxString &varianttype,
                                                 int WXUNUSED(align) )
     : m_variantType(varianttype)
 {
-    m_owner = NULL;
-    m_valueAdjuster = NULL;
+    m_owner = nullptr;
+    m_valueAdjuster = nullptr;
 }
 
 wxDataViewRendererBase::~wxDataViewRendererBase()
@@ -775,7 +775,7 @@ void wxDataViewRendererBase::CancelEditing()
     if ( m_editorCtrl )
         DestroyEditControl();
 
-    DoHandleEditingDone(NULL);
+    DoHandleEditingDone(nullptr);
 }
 
 bool wxDataViewRendererBase::FinishEditing()
@@ -799,7 +799,7 @@ bool wxDataViewRendererBase::FinishEditing()
 
     GetView()->GetMainWindow()->SetFocus();
 
-    return DoHandleEditingDone(gotValue ? &value : NULL);
+    return DoHandleEditingDone(gotValue ? &value : nullptr);
 }
 
 bool
@@ -811,7 +811,7 @@ wxDataViewRendererBase::DoHandleEditingDone(wxVariant* value)
         {
             // Invalid value can't be used, so if it's the same as if we hadn't
             // got it in the first place.
-            value = NULL;
+            value = nullptr;
         }
     }
 
@@ -936,7 +936,7 @@ int wxDataViewRendererBase::GetEffectiveAlignmentIfKnown() const
 
     if ( alignment == wxDVR_DEFAULT_ALIGNMENT )
     {
-        if ( GetOwner() != NULL )
+        if ( GetOwner() != nullptr )
         {
             // if we don't have an explicit alignment ourselves, use that of the
             // column in horizontal direction and default vertical alignment
@@ -1048,7 +1048,7 @@ wxSize wxDataViewCustomRendererBase::GetTextExtent(const wxString& str) const
     {
         wxFont font(m_attr.GetEffectiveFont(view->GetFont()));
         wxSize size;
-        view->GetTextExtent(str, &size.x, &size.y, NULL, NULL, &font);
+        view->GetTextExtent(str, &size.x, &size.y, nullptr, nullptr, &font);
         return size;
     }
     else
@@ -1203,7 +1203,7 @@ void wxDataViewColumnBase::Init(wxDataViewRenderer *renderer,
 {
     m_renderer = renderer;
     m_model_column = model_column;
-    m_owner = NULL;
+    m_owner = nullptr;
     m_renderer->SetOwner( (wxDataViewColumn*) this );
 }
 
@@ -1220,8 +1220,8 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxDataViewCtrlBase, wxControl);
 
 wxDataViewCtrlBase::wxDataViewCtrlBase()
 {
-    m_model = NULL;
-    m_expander_column = 0;
+    m_model = nullptr;
+    m_expander_column = nullptr;
     m_indent = 8;
 }
 
@@ -1230,7 +1230,7 @@ wxDataViewCtrlBase::~wxDataViewCtrlBase()
     if (m_model)
     {
         m_model->DecRef();
-        m_model = NULL;
+        m_model = nullptr;
     }
 }
 
@@ -1714,15 +1714,15 @@ void wxDataViewEvent::Init(wxDataViewCtrlBase* dvc,
 {
     m_item = item;
     m_col = column ? column->GetModelColumn() : -1;
-    m_model = dvc ? dvc->GetModel() : NULL;
+    m_model = dvc ? dvc->GetModel() : nullptr;
     m_column = column;
     m_pos = wxDefaultPosition;
     m_cacheFrom = 0;
     m_cacheTo = 0;
     m_editCancelled = false;
 #if wxUSE_DRAG_AND_DROP
-    m_dataObject = NULL;
-    m_dataBuffer = NULL;
+    m_dataObject = nullptr;
+    m_dataBuffer = nullptr;
     m_dataSize = 0;
     m_dragFlags = 0;
     m_dropEffect = wxDragNone;
@@ -2454,7 +2454,7 @@ wxDataViewColumn *wxDataViewListCtrl::AppendToggleColumn( const wxString &label,
         new wxDataViewToggleRenderer( wxT("bool"), mode ),
         GetStore()->GetColumnCount()-1, width, align, flags );
 
-    return wxDataViewCtrl::AppendColumn( ret ) ? ret : NULL;
+    return wxDataViewCtrl::AppendColumn( ret ) ? ret : nullptr;
 }
 
 wxDataViewColumn *wxDataViewListCtrl::AppendProgressColumn( const wxString &label,
@@ -2466,7 +2466,7 @@ wxDataViewColumn *wxDataViewListCtrl::AppendProgressColumn( const wxString &labe
         new wxDataViewProgressRenderer( wxEmptyString, wxT("long"), mode ),
         GetStore()->GetColumnCount()-1, width, align, flags );
 
-    return wxDataViewCtrl::AppendColumn( ret ) ? ret : NULL;
+    return wxDataViewCtrl::AppendColumn( ret ) ? ret : nullptr;
 }
 
 wxDataViewColumn *wxDataViewListCtrl::AppendIconTextColumn( const wxString &label,
@@ -2478,7 +2478,7 @@ wxDataViewColumn *wxDataViewListCtrl::AppendIconTextColumn( const wxString &labe
         new wxDataViewIconTextRenderer( wxT("wxDataViewIconText"), mode ),
         GetStore()->GetColumnCount()-1, width, align, flags );
 
-    return wxDataViewCtrl::AppendColumn( ret ) ? ret : NULL;
+    return wxDataViewCtrl::AppendColumn( ret ) ? ret : nullptr;
 }
 
 void wxDataViewListCtrl::OnSize( wxSizeEvent &event )
@@ -2547,7 +2547,7 @@ void wxDataViewTreeStoreContainerNode::DestroyChildren()
 
 wxDataViewTreeStore::wxDataViewTreeStore()
 {
-    m_root = new wxDataViewTreeStoreContainerNode( NULL, wxEmptyString );
+    m_root = new wxDataViewTreeStoreContainerNode( nullptr, wxEmptyString );
 }
 
 wxDataViewTreeStore::~wxDataViewTreeStore()
@@ -2559,7 +2559,7 @@ wxDataViewItem wxDataViewTreeStore::AppendItem( const wxDataViewItem& parent,
         const wxString &text, const wxIcon &icon, wxClientData *data )
 {
     wxDataViewTreeStoreContainerNode *parent_node = FindContainerNode( parent );
-    if (!parent_node) return wxDataViewItem(0);
+    if (!parent_node) return wxDataViewItem(nullptr);
 
     wxDataViewTreeStoreNode *node =
         new wxDataViewTreeStoreNode( parent_node, text, icon, data );
@@ -2572,7 +2572,7 @@ wxDataViewItem wxDataViewTreeStore::PrependItem( const wxDataViewItem& parent,
         const wxString &text, const wxIcon &icon, wxClientData *data )
 {
     wxDataViewTreeStoreContainerNode *parent_node = FindContainerNode( parent );
-    if (!parent_node) return wxDataViewItem(0);
+    if (!parent_node) return wxDataViewItem(nullptr);
 
     wxDataViewTreeStoreNode *node =
         new wxDataViewTreeStoreNode( parent_node, text, icon, data );
@@ -2590,12 +2590,12 @@ wxDataViewTreeStore::InsertItem(const wxDataViewItem& parent,
                                 wxClientData *data)
 {
     wxDataViewTreeStoreContainerNode *parent_node = FindContainerNode( parent );
-    if (!parent_node) return wxDataViewItem(0);
+    if (!parent_node) return wxDataViewItem(nullptr);
 
     wxDataViewTreeStoreNode *previous_node = FindNode( previous );
     wxDataViewTreeStoreNodes& children = parent_node->GetChildren();
     const wxDataViewTreeStoreNodes::iterator iter = parent_node->FindChild( previous_node );
-    if (iter == children.end()) return wxDataViewItem(0);
+    if (iter == children.end()) return wxDataViewItem(nullptr);
 
     wxDataViewTreeStoreNode *node =
         new wxDataViewTreeStoreNode( parent_node, text, icon, data );
@@ -2609,7 +2609,7 @@ wxDataViewItem wxDataViewTreeStore::PrependContainer( const wxDataViewItem& pare
         wxClientData *data )
 {
     wxDataViewTreeStoreContainerNode *parent_node = FindContainerNode( parent );
-    if (!parent_node) return wxDataViewItem(0);
+    if (!parent_node) return wxDataViewItem(nullptr);
 
     wxDataViewTreeStoreContainerNode *node =
         new wxDataViewTreeStoreContainerNode( parent_node, text, icon, expanded, data );
@@ -2627,7 +2627,7 @@ wxDataViewTreeStore::AppendContainer(const wxDataViewItem& parent,
                                      wxClientData * data)
 {
     wxDataViewTreeStoreContainerNode *parent_node = FindContainerNode( parent );
-    if (!parent_node) return wxDataViewItem(0);
+    if (!parent_node) return wxDataViewItem(nullptr);
 
     wxDataViewTreeStoreContainerNode *node =
         new wxDataViewTreeStoreContainerNode( parent_node, text, icon, expanded, data );
@@ -2645,12 +2645,12 @@ wxDataViewTreeStore::InsertContainer(const wxDataViewItem& parent,
                                      wxClientData * data)
 {
     wxDataViewTreeStoreContainerNode *parent_node = FindContainerNode( parent );
-    if (!parent_node) return wxDataViewItem(0);
+    if (!parent_node) return wxDataViewItem(nullptr);
 
     wxDataViewTreeStoreNode *previous_node = FindNode( previous );
     wxDataViewTreeStoreNodes& children = parent_node->GetChildren();
     const wxDataViewTreeStoreNodes::iterator iter = parent_node->FindChild( previous_node );
-    if (iter == children.end()) return wxDataViewItem(0);
+    if (iter == children.end()) return wxDataViewItem(nullptr);
 
     wxDataViewTreeStoreContainerNode *node =
         new wxDataViewTreeStoreContainerNode( parent_node, text, icon, expanded, data );
@@ -2670,13 +2670,13 @@ bool wxDataViewTreeStore::IsContainer( const wxDataViewItem& item ) const
 wxDataViewItem wxDataViewTreeStore::GetNthChild( const wxDataViewItem& parent, unsigned int pos ) const
 {
     wxDataViewTreeStoreContainerNode *parent_node = FindContainerNode( parent );
-    if (!parent_node) return wxDataViewItem(0);
+    if (!parent_node) return wxDataViewItem(nullptr);
 
     wxDataViewTreeStoreNode* const node = parent_node->GetChildren()[pos];
     if (node)
         return node->GetItem();
 
-    return wxDataViewItem(0);
+    return wxDataViewItem(nullptr);
 }
 
 int wxDataViewTreeStore::GetChildCount( const wxDataViewItem& parent ) const
@@ -2750,7 +2750,7 @@ void wxDataViewTreeStore::SetItemData( const wxDataViewItem& item, wxClientData 
 wxClientData *wxDataViewTreeStore::GetItemData( const wxDataViewItem& item ) const
 {
     wxDataViewTreeStoreNode *node = FindNode( item );
-    if (!node) return NULL;
+    if (!node) return nullptr;
 
     return node->GetData();
 }
@@ -2832,13 +2832,13 @@ wxDataViewTreeStore::SetValue(const wxVariant& variant,
 wxDataViewItem wxDataViewTreeStore::GetParent( const wxDataViewItem &item ) const
 {
     wxDataViewTreeStoreNode *node = FindNode( item );
-    if (!node) return wxDataViewItem(0);
+    if (!node) return wxDataViewItem(nullptr);
 
     wxDataViewTreeStoreNode *parent = node->GetParent();
-    if (!parent) return wxDataViewItem(0);
+    if (!parent) return wxDataViewItem(nullptr);
 
     if (parent == m_root)
-        return wxDataViewItem(0);
+        return wxDataViewItem(nullptr);
 
     return parent->GetItem();
 }
@@ -2909,7 +2909,7 @@ wxDataViewTreeStoreContainerNode *wxDataViewTreeStore::FindContainerNode( const 
     wxDataViewTreeStoreNode* node = (wxDataViewTreeStoreNode*) item.GetID();
 
     if (!node->IsContainer())
-        return NULL;
+        return nullptr;
 
     return (wxDataViewTreeStoreContainerNode*) node;
 }

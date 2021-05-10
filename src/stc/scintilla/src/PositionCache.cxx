@@ -46,7 +46,7 @@ using namespace Scintilla;
 #endif
 
 LineLayout::LineLayout(int maxLineLength_) :
-	lineStarts(0),
+	lineStarts(nullptr),
 	lenLineStarts(0),
 	lineNumber(-1),
 	inCache(false),
@@ -58,9 +58,9 @@ LineLayout::LineLayout(int maxLineLength_) :
 	highlightColumn(0),
 	containsCaret(false),
 	edgeColumn(0),
-	chars(0),
-	styles(0),
-	positions(0),
+	chars(nullptr),
+	styles(nullptr),
+	positions(nullptr),
 	hotspot(0,0),
 	widthLine(wrapWidthInfinite),
 	lines(1),
@@ -88,13 +88,13 @@ void LineLayout::Resize(int maxLineLength_) {
 
 void LineLayout::Free() {
 	delete []chars;
-	chars = 0;
+	chars = nullptr;
 	delete []styles;
-	styles = 0;
+	styles = nullptr;
 	delete []positions;
-	positions = 0;
+	positions = nullptr;
 	delete []lineStarts;
-	lineStarts = 0;
+	lineStarts = nullptr;
 }
 
 void LineLayout::Invalidate(validLevel validity_) {
@@ -328,7 +328,7 @@ LineLayout *LineLayoutCache::Retrieve(int lineNumber, int lineCaret, int maxChar
 	}
 	allInvalidated = false;
 	int pos = -1;
-	LineLayout *ret = 0;
+	LineLayout *ret = nullptr;
 	if (level == llcCaret) {
 		pos = 0;
 	} else if (level == llcPage) {
@@ -414,12 +414,12 @@ void SpecialRepresentations::ClearRepresentation(const char *charBytes) {
 const Representation *SpecialRepresentations::RepresentationFromCharacter(const char *charBytes, size_t len) const {
 	PLATFORM_ASSERT(len <= 4);
 	if (!startByteHasReprs[static_cast<unsigned char>(charBytes[0])])
-		return 0;
+		return nullptr;
 	MapRepresentation::const_iterator it = mapReprs.find(KeyFromString(charBytes, len));
 	if (it != mapReprs.end()) {
 		return &(it->second);
 	}
-	return 0;
+	return nullptr;
 }
 
 bool SpecialRepresentations::Contains(const char *charBytes, size_t len) const {
@@ -523,7 +523,7 @@ TextSegment BreakFinder::Next() {
 					if (nextBreak == prev) {
 						nextBreak += charWidth;
 					} else {
-						repr = 0;	// Optimize -> should remember repr
+						repr = nullptr;	// Optimize -> should remember repr
 					}
 					if ((nextBreak - prev) < lengthStartSubdivision) {
 						return TextSegment(prev, nextBreak - prev, repr);
@@ -561,7 +561,7 @@ bool BreakFinder::More() const {
 }
 
 PositionCacheEntry::PositionCacheEntry() :
-	styleNumber(0), len(0), clock(0), positions(0) {
+	styleNumber(0), len(0), clock(0), positions(nullptr) {
 }
 
 void PositionCacheEntry::Set(unsigned int styleNumber_, const char *s_,
@@ -585,7 +585,7 @@ PositionCacheEntry::~PositionCacheEntry() {
 
 void PositionCacheEntry::Clear() {
 	delete []positions;
-	positions = 0;
+	positions = nullptr;
 	styleNumber = 0;
 	len = 0;
 	clock = 0;

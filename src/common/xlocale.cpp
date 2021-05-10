@@ -35,7 +35,7 @@
 // ----------------------------------------------------------------------------
 
 // This is the C locale object, it is created on demand
-static wxXLocale *gs_cLocale = NULL;
+static wxXLocale *gs_cLocale = nullptr;
 
 wxXLocale wxNullXLocale;
 
@@ -75,7 +75,7 @@ wxXLocale& wxXLocale::GetCLocale()
     {
         // Notice that we need a separate variable because clang 3.1 refuses to
         // cast nullptr (which is how NULL is defined in it) to anything.
-        static wxXLocaleCTag* const tag = NULL;
+        static wxXLocaleCTag* const tag = nullptr;
         gs_cLocale = new wxXLocale(tag);
     }
 
@@ -87,7 +87,7 @@ wxXLocale& wxXLocale::GetCLocale()
 #if wxUSE_INTL
 wxXLocale::wxXLocale(wxLanguage lang)
 {
-    m_locale = NULL;
+    m_locale = nullptr;
 
     const wxLanguageInfo * const info = wxLocale::GetLanguageInfo(lang);
     if ( info )

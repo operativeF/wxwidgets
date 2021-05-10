@@ -449,7 +449,7 @@ const char *RESearch::Compile(const char *pattern, int length, bool caseSensitiv
 
 	if (!pattern || !length) {
 		if (sta)
-			return 0;
+			return nullptr;
 		else
 			return badpat("No previous regular expression");
 	}
@@ -731,7 +731,7 @@ const char *RESearch::Compile(const char *pattern, int length, bool caseSensitiv
 		return badpat((posix ? "Unmatched (" : "Unmatched \\("));
 	*mp = END;
 	sta = OKP;
-	return 0;
+	return nullptr;
 }
 
 /*

@@ -78,7 +78,7 @@ static const char * const rustWordLists[NUM_RUST_KEYWORD_LISTS + 1] = {
 			"Keywords 5",
 			"Keywords 6",
 			"Keywords 7",
-			0,
+			nullptr,
 		};
 
 struct OptionSetRust : public OptionSet<OptionsRust> {
@@ -146,7 +146,7 @@ public:
 	void SCI_METHOD Lex(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
 	void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
 	void * SCI_METHOD PrivateCall(int, void *) {
-		return 0;
+		return nullptr;
 	}
 	static ILexer *LexerFactoryRust() {
 		return new LexerRust();

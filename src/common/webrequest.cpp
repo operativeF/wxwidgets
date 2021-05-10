@@ -551,7 +551,7 @@ wxFileOffset wxWebRequest::GetBytesExpectedToReceive() const
 
 wxWebRequestHandle wxWebRequest::GetNativeHandle() const
 {
-    return m_impl ? m_impl->GetNativeHandle() : NULL;
+    return m_impl ? m_impl->GetNativeHandle() : nullptr;
 }
 
 void wxWebRequest::DisablePeerVerify(bool disable)
@@ -636,7 +636,7 @@ void wxWebResponseImpl::Init()
         {
             // Check available disk space
             wxLongLong freeSpace;
-            if ( wxGetDiskSpace(tmpPrefix.GetFullPath(), NULL, &freeSpace) &&
+            if ( wxGetDiskSpace(tmpPrefix.GetFullPath(), nullptr, &freeSpace) &&
                 GetContentLength() > freeSpace )
             {
                 m_request.SetState(wxWebRequest::State_Failed, _("Not enough free disk space for download."));
@@ -980,7 +980,7 @@ wxWebSession::RegisterFactory(const wxString& backend,
     if ( !factory->Initialize() )
     {
         delete factory;
-        factory = NULL;
+        factory = nullptr;
         return;
     }
 
@@ -1053,17 +1053,17 @@ wxString wxWebSession::GetTempDir() const
 
 bool wxWebSession::IsOpened() const
 {
-    return m_impl.get() != NULL;
+    return m_impl.get() != nullptr;
 }
 
 void wxWebSession::Close()
 {
-    m_impl.reset(NULL);
+    m_impl.reset(nullptr);
 }
 
 wxWebSessionHandle wxWebSession::GetNativeHandle() const
 {
-    return m_impl ? m_impl->GetNativeHandle() : NULL;
+    return m_impl ? m_impl->GetNativeHandle() : nullptr;
 }
 
 // ----------------------------------------------------------------------------

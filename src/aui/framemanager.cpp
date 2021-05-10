@@ -85,7 +85,7 @@ const int auiToolBarLayer = 10;
 class wxPseudoTransparentFrame : public wxFrame
 {
 public:
-    wxPseudoTransparentFrame(wxWindow* parent = NULL,
+    wxPseudoTransparentFrame(wxWindow* parent = nullptr,
                 wxWindowID id = wxID_ANY,
                 const wxString& title = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,
@@ -496,14 +496,14 @@ static wxAuiPaneInfo* FindPaneInDock(const wxAuiDockInfo& dock, wxWindow* window
         if (p->window == window)
             return p;
     }
-    return NULL;
+    return nullptr;
 }
 
 // RemovePaneFromDocks() removes a pane window from all docks
 // with a possible exception specified by parameter "ex_cept"
 static void RemovePaneFromDocks(wxAuiDockInfoArray& docks,
                                 wxAuiPaneInfo& pane,
-                                wxAuiDockInfo* ex_cept  = NULL  )
+                                wxAuiDockInfo* ex_cept  = nullptr  )
 {
     int i, dock_count;
     for (i = 0, dock_count = docks.GetCount(); i < dock_count; ++i)
@@ -545,7 +545,7 @@ static void RenumberDockRows(wxAuiDockInfoPtrArray& docks)
 void wxAuiManager::SetActivePane(wxWindow* active_pane)
 {
     int i, pane_count;
-    wxAuiPaneInfo* active_paneinfo = NULL;
+    wxAuiPaneInfo* active_paneinfo = nullptr;
     for (i = 0, pane_count = m_panes.GetCount(); i < pane_count; ++i)
     {
         wxAuiPaneInfo& pane = m_panes.Item(i);
@@ -609,17 +609,17 @@ wxEND_EVENT_TABLE()
 wxAuiManager::wxAuiManager(wxWindow* managed_wnd, unsigned int flags)
 {
     m_action = actionNone;
-    m_actionWindow = NULL;
-    m_hoverButton = NULL;
+    m_actionWindow = nullptr;
+    m_hoverButton = nullptr;
     m_art = new wxAuiDefaultDockArt;
-    m_hintWnd = NULL;
+    m_hintWnd = nullptr;
     m_flags = flags;
     m_skipping = false;
     m_hasMaximized = false;
-    m_frame = NULL;
+    m_frame = nullptr;
     m_dockConstraintX = 0.3;
     m_dockConstraintY = 0.3;
-    m_reserved = NULL;
+    m_reserved = nullptr;
     m_currentDragItem = -1;
 
     if (managed_wnd)
@@ -715,7 +715,7 @@ wxAuiPaneInfoArray& wxAuiManager::GetAllPanes()
 // (x,y) specify a position in client coordinates
 wxAuiDockUIPart* wxAuiManager::HitTest(int x, int y)
 {
-    wxAuiDockUIPart* result = NULL;
+    wxAuiDockUIPart* result = nullptr;
 
     int i, part_count;
     for (i = 0, part_count = m_uiParts.GetCount(); i < part_count; ++i)
@@ -815,10 +815,10 @@ wxFrame* wxAuiManager::GetFrame() const
 wxAuiManager* wxAuiManager::GetManager(wxWindow* window)
 {
     wxAuiManagerEvent evt(wxEVT_AUI_FIND_MANAGER);
-    evt.SetManager(NULL);
+    evt.SetManager(nullptr);
     evt.ResumePropagation(wxEVENT_PROPAGATE_MAX);
     if (!window->GetEventHandler()->ProcessEvent(evt))
-        return NULL;
+        return nullptr;
 
     return evt.GetManager();
 }
@@ -847,11 +847,11 @@ void wxAuiManager::UpdateHintWindowConfig()
     if (m_hintWnd)
     {
         m_hintWnd->Destroy();
-        m_hintWnd = NULL;
+        m_hintWnd = nullptr;
     }
 
     m_hintFadeMax = 50;
-    m_hintWnd = NULL;
+    m_hintWnd = nullptr;
 
     if ((m_flags & wxAUI_MGR_TRANSPARENT_HINT) && can_do_transparent)
     {
@@ -961,7 +961,7 @@ void wxAuiManager::UnInit()
     if (m_frame)
     {
         m_frame->RemoveEventHandler(this);
-        m_frame = NULL;
+        m_frame = nullptr;
     }
 }
 
@@ -1074,7 +1074,7 @@ bool wxAuiManager::AddPane(wxWindow* window, const wxAuiPaneInfo& paneInfo)
     {
         pinfo.name.Printf(wxT("%08lx%08x%08x%08lx"),
              (unsigned long)(wxPtrToUInt(pinfo.window) & 0xffffffff),
-             (unsigned int)time(NULL),
+             (unsigned int)time(nullptr),
              (unsigned int)clock(),
              (unsigned long)m_panes.GetCount());
     }
@@ -1246,13 +1246,13 @@ bool wxAuiManager::DetachPane(wxWindow* window)
                 // reparent to m_frame and destroy the pane
                 if (m_actionWindow == p.frame)
                 {
-                    m_actionWindow = NULL;
+                    m_actionWindow = nullptr;
                 }
 
                 p.window->Reparent(m_frame);
-                p.frame->SetSizer(NULL);
+                p.frame->SetSizer(nullptr);
                 p.frame->Destroy();
-                p.frame = NULL;
+                p.frame = nullptr;
             }
 
             // make sure there are no references to this pane in our uiparts,
@@ -1304,7 +1304,7 @@ void wxAuiManager::ClosePane(wxAuiPaneInfo& paneInfo)
     if (paneInfo.frame)
     {
         paneInfo.frame->Destroy();
-        paneInfo.frame = NULL;
+        paneInfo.frame = nullptr;
     }
 
     // now we need to either destroy or hide the pane
@@ -1945,7 +1945,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
         part.type = wxAuiDockUIPart::typeDockSizer;
         part.orientation = orientation;
         part.dock = &dock;
-        part.pane = NULL;
+        part.pane = nullptr;
         part.button = 0;
         part.cont_sizer = cont;
         part.sizer_item = sizer_item;
@@ -1987,7 +1987,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
 
                 part.type = wxAuiDockUIPart::typeBackground;
                 part.dock = &dock;
-                part.pane = NULL;
+                part.pane = nullptr;
                 part.button = 0;
                 part.orientation = (orientation==wxHORIZONTAL) ? wxVERTICAL:wxHORIZONTAL;
                 part.cont_sizer = dock_sizer;
@@ -2007,7 +2007,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
 
         part.type = wxAuiDockUIPart::typeBackground;
         part.dock = &dock;
-        part.pane = NULL;
+        part.pane = nullptr;
         part.button = 0;
         part.orientation = orientation;
         part.cont_sizer = dock_sizer;
@@ -2050,7 +2050,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
 
     part.type = wxAuiDockUIPart::typeDock;
     part.dock = &dock;
-    part.pane = NULL;
+    part.pane = nullptr;
     part.button = 0;
     part.orientation = orientation;
     part.cont_sizer = cont;
@@ -2072,7 +2072,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
 
         part.type = wxAuiDockUIPart::typeDockSizer;
         part.dock = &dock;
-        part.pane = NULL;
+        part.pane = nullptr;
         part.button = 0;
         part.orientation = orientation;
         part.cont_sizer = cont;
@@ -2348,8 +2348,8 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
 
     // create a bunch of box sizers,
     // from the innermost level outwards.
-    wxSizer* cont = NULL;
-    wxSizer* middle = NULL;
+    wxSizer* cont = nullptr;
+    wxSizer* middle = nullptr;
     int layer = 0;
     int row, row_count;
 
@@ -2410,8 +2410,8 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
                 wxSizerItem* sizer_item = middle->Add(1,1, 1, wxEXPAND);
                 wxAuiDockUIPart part;
                 part.type = wxAuiDockUIPart::typeBackground;
-                part.pane = NULL;
-                part.dock = NULL;
+                part.pane = nullptr;
+                part.dock = nullptr;
                 part.button = 0;
                 part.cont_sizer = middle;
                 part.sizer_item = sizer_item;
@@ -2456,8 +2456,8 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
         wxSizerItem* sizer_item = cont->Add(1,1, 1, wxEXPAND);
         wxAuiDockUIPart part;
         part.type = wxAuiDockUIPart::typeBackground;
-        part.pane = NULL;
-        part.dock = NULL;
+        part.pane = nullptr;
+        part.dock = nullptr;
         part.button = 0;
         part.cont_sizer = middle;
         part.sizer_item = sizer_item;
@@ -2496,8 +2496,8 @@ void wxAuiManager::GetDockSizeConstraint(double* width_pct, double* height_pct) 
 
 void wxAuiManager::Update()
 {
-    m_hoverButton = NULL;
-    m_actionPart = NULL;
+    m_hoverButton = nullptr;
+    m_actionPart = nullptr;
 
     wxSizer* sizer;
     int i, pane_count = m_panes.GetCount();
@@ -2529,7 +2529,7 @@ void wxAuiManager::Update()
                 if (wxWindow::GetCapture() == m_frame)
                     m_frame->ReleaseMouse();
                 m_action = actionNone;
-                m_actionWindow = NULL;
+                m_actionWindow = nullptr;
             }
 
             // hide the frame
@@ -2538,9 +2538,9 @@ void wxAuiManager::Update()
 
             // reparent to m_frame and destroy the pane
             p.window->Reparent(m_frame);
-            p.frame->SetSizer(NULL);
+            p.frame->SetSizer(nullptr);
             p.frame->Destroy();
-            p.frame = NULL;
+            p.frame = nullptr;
         }
     }
 
@@ -2560,7 +2560,7 @@ void wxAuiManager::Update()
 #endif // __WXMSW__
 
     // delete old sizer first
-    m_frame->SetSizer(NULL);
+    m_frame->SetSizer(nullptr);
 
     // create a layout for all of the panes
     sizer = LayoutAll(m_panes, m_docks, m_uiParts, false);
@@ -2573,7 +2573,7 @@ void wxAuiManager::Update()
 
         if (p.IsFloating())
         {
-            if (p.frame == NULL)
+            if (p.frame == nullptr)
             {
                 // we need to create a frame for this
                 // pane, which has recently been floated
@@ -2780,7 +2780,7 @@ wxAuiDockUIPart* wxAuiManager::GetPanePart(wxWindow* wnd)
             part.pane && part.pane->window == wnd)
                 return &part;
     }
-    return NULL;
+    return nullptr;
 }
 
 
@@ -3929,7 +3929,7 @@ void wxAuiManager::Repaint(wxDC* dc)
     // figure out which dc to use; if one
     // has been specified, use it, otherwise
     // make a client dc
-    wxClientDC* client_dc = NULL;
+    wxClientDC* client_dc = nullptr;
     if (!dc)
     {
         client_dc = new wxClientDC(m_frame);
@@ -4018,7 +4018,7 @@ void wxAuiManager::OnFindManager(wxAuiManagerEvent& evt)
     wxWindow* window = GetManagedWindow();
     if (!window)
     {
-        evt.SetManager(NULL);
+        evt.SetManager(nullptr);
         return;
     }
 
@@ -4489,7 +4489,7 @@ void wxAuiManager::OnLeftUp(wxMouseEvent& event)
     }
     else if (m_action == actionClickButton)
     {
-        m_hoverButton = NULL;
+        m_hoverButton = nullptr;
         m_frame->ReleaseMouse();
 
         if (m_actionPart)
@@ -4741,7 +4741,7 @@ void wxAuiManager::OnMotion(wxMouseEvent& event)
         {
             if (m_hoverButton)
             {
-                m_hoverButton = NULL;
+                m_hoverButton = nullptr;
                 Repaint();
             }
             else
@@ -4756,7 +4756,7 @@ void wxAuiManager::OnLeaveWindow(wxMouseEvent& WXUNUSED(event))
 {
     if (m_hoverButton)
     {
-        m_hoverButton = NULL;
+        m_hoverButton = nullptr;
         Repaint();
     }
 }

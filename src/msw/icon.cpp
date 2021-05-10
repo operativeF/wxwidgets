@@ -51,7 +51,7 @@ void wxIconRefData::Free()
     {
         ::DestroyIcon((HICON) m_hIcon);
 
-        m_hIcon = 0;
+        m_hIcon = nullptr;
     }
 }
 
@@ -96,7 +96,7 @@ wxObjectRefData *wxIcon::CloneRefData(const wxObjectRefData *dataOrig) const
     const wxIconRefData *
         data = static_cast<const wxIconRefData *>(dataOrig);
     if ( !data )
-        return NULL;
+        return nullptr;
 
     // we don't have to copy m_hIcon because we're only called from SetHICON()
     // which overwrites m_hIcon anyhow currently

@@ -32,7 +32,7 @@ static int gs_eventLoopCount = 0;
 // wxEventLoopBase
 // ----------------------------------------------------------------------------
 
-wxEventLoopBase *wxEventLoopBase::ms_activeLoop = NULL;
+wxEventLoopBase *wxEventLoopBase::ms_activeLoop = nullptr;
 
 wxEventLoopBase::wxEventLoopBase()
 {

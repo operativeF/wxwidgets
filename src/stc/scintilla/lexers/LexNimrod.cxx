@@ -298,10 +298,10 @@ static void FoldNimrodDoc(Sci_PositionU startPos, Sci_Position length,
 	// at least one line in all cases)
 	int spaceFlags = 0;
 	Sci_Position lineCurrent = styler.GetLine(startPos);
-	int indentCurrent = styler.IndentAmount(lineCurrent, &spaceFlags, NULL);
+	int indentCurrent = styler.IndentAmount(lineCurrent, &spaceFlags, nullptr);
 	while (lineCurrent > 0) {
 		lineCurrent--;
-		indentCurrent = styler.IndentAmount(lineCurrent, &spaceFlags, NULL);
+		indentCurrent = styler.IndentAmount(lineCurrent, &spaceFlags, nullptr);
 		if (!(indentCurrent & SC_FOLDLEVELWHITEFLAG) &&
 		        (!IsCommentLine(lineCurrent, styler)) &&
 		        (!IsQuoteLine(lineCurrent, styler)))
@@ -333,7 +333,7 @@ static void FoldNimrodDoc(Sci_PositionU startPos, Sci_Position length,
 		int quote = false;
 		if (lineNext <= docLines) {
 			// Information about next line is only available if not at end of document
-			indentNext = styler.IndentAmount(lineNext, &spaceFlags, NULL);
+			indentNext = styler.IndentAmount(lineNext, &spaceFlags, nullptr);
 			int style = styler.StyleAt(styler.LineStart(lineNext)) & 31;
 			quote = foldQuotes && ((style == SCE_P_TRIPLE) || (style == SCE_P_TRIPLEDOUBLE));
 		}
@@ -376,7 +376,7 @@ static void FoldNimrodDoc(Sci_PositionU startPos, Sci_Position length,
 		         (lineNext <= docLines && IsCommentLine(lineNext, styler)))) {
 
 			lineNext++;
-			indentNext = styler.IndentAmount(lineNext, &spaceFlags, NULL);
+			indentNext = styler.IndentAmount(lineNext, &spaceFlags, nullptr);
 		}
 
 		const int levelAfterComments = indentNext & SC_FOLDLEVELNUMBERMASK;
@@ -392,7 +392,7 @@ static void FoldNimrodDoc(Sci_PositionU startPos, Sci_Position length,
 		int skipLevel = levelAfterComments;
 
 		while (--skipLine > lineCurrent) {
-			int skipLineIndent = styler.IndentAmount(skipLine, &spaceFlags, NULL);
+			int skipLineIndent = styler.IndentAmount(skipLine, &spaceFlags, nullptr);
 
 			if ((skipLineIndent & SC_FOLDLEVELNUMBERMASK) > levelAfterComments)
 				skipLevel = levelBeforeComments;
@@ -426,7 +426,7 @@ static void FoldNimrodDoc(Sci_PositionU startPos, Sci_Position length,
 
 static const char * const nimrodWordListDesc[] = {
 	"Keywords",
-	0
+	nullptr
 };
 
 LexerModule lmNimrod(SCLEX_NIMROD, ColouriseNimrodDoc, "nimrod", FoldNimrodDoc,

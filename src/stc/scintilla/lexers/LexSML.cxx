@@ -118,7 +118,7 @@ static void ColouriseSMLDoc(
 			break;
 
 		case SCE_SML_OPERATOR: {
-			const char* o = 0;
+			const char* o = nullptr;
 			if (issml(sc.ch) || isspace(sc.ch)
 				|| (o = strchr(")]};,\'\"`#", sc.ch),o)
 				|| !strchr("!$%&*+-./:<=>?@^|~", sc.ch)) {
@@ -217,7 +217,7 @@ static const char * const SMLWordListDesc[] = {
 	"Keywords",
 	"Keywords2",
 	"Keywords3",
-	0
+	nullptr
 };
 
 LexerModule lmSML(SCLEX_SML, ColouriseSMLDoc, "SML", FoldSMLDoc, SMLWordListDesc);

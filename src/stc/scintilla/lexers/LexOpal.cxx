@@ -519,7 +519,7 @@ static void ColouriseOpalDoc( Sci_PositionU startPos, Sci_Position length, int i
 static const char * const opalWordListDesc[] = {
 	"Keywords",
 	"Sorts",
-	0
+	nullptr
 };
 
-LexerModule lmOpal(SCLEX_OPAL, ColouriseOpalDoc, "opal", NULL, opalWordListDesc);
+LexerModule lmOpal(SCLEX_OPAL, ColouriseOpalDoc, "opal", nullptr, opalWordListDesc);

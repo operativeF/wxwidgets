@@ -73,7 +73,7 @@ static void DrawMinus(Surface *surface, int centreX, int centreY, int armSize, C
 }
 
 void LineMarker::Draw(Surface *surface, PRectangle &rcWhole, Font &fontForCharacter, typeOfFold tFold, int marginStyle) const {
-	if (customDraw != NULL) {
+	if (customDraw != nullptr) {
 		customDraw(surface, rcWhole, fontForCharacter, tFold, marginStyle, this);
 		return;
 	}

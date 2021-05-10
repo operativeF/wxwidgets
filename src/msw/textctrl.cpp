@@ -194,7 +194,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxRichEditModule);
 };
 
-HINSTANCE wxRichEditModule::ms_hRichEdit[Version_Max] = { NULL, NULL, NULL };
+HINSTANCE wxRichEditModule::ms_hRichEdit[Version_Max] = { nullptr, nullptr, nullptr };
 
 #if wxUSE_INKEDIT
 wxDynamicLibrary wxRichEditModule::ms_inkEditLib;
@@ -210,7 +210,7 @@ extern wxMenu *wxCurrentPopupMenu;
 class wxTextCtrlOleCallback : public IRichEditOleCallback
 {
 public:
-    wxTextCtrlOleCallback(wxTextCtrl *text) : m_textCtrl(text), m_menu(NULL) {}
+    wxTextCtrlOleCallback(wxTextCtrl *text) : m_textCtrl(text), m_menu(nullptr) {}
     virtual ~wxTextCtrlOleCallback() { DeleteContextMenuObject(); }
 
     wxSTDMETHODIMP ContextSensitiveHelp(BOOL WXUNUSED(enterMode)) wxOVERRIDE { return E_NOTIMPL; }
@@ -250,7 +250,7 @@ private:
         {
             m_menu->MSWDetachHMENU();
             if ( wxCurrentPopupMenu == m_menu )
-                wxCurrentPopupMenu = NULL;
+                wxCurrentPopupMenu = nullptr;
             wxDELETE(m_menu);
         }
     }
@@ -368,7 +368,7 @@ void wxTextCtrl::Init()
     m_isInkEdit = 0;
 #endif
 
-    m_privateContextMenu = NULL;
+    m_privateContextMenu = nullptr;
     m_updatesCount = -1;
     m_isNativeCaretShown = true;
 }
@@ -379,7 +379,7 @@ wxTextCtrl::~wxTextCtrl()
     if ( m_dropTarget == wxRICHTEXT_DEFAULT_DROPTARGET )
     {
         // don't try to destroy this dummy pointer in the base class dtor
-        m_dropTarget = NULL;
+        m_dropTarget = nullptr;
     }
 #endif // wxUSE_DRAG_AND_DROP && wxUSE_RICHEDIT
 
@@ -656,7 +656,7 @@ bool wxTextCtrl::MSWCreateText(const wxString& value,
 
     // Without this, if we pass the size in the constructor and then don't change it,
     // the themed borders will be drawn incorrectly.
-    SetWindowPos(GetHwnd(), NULL, 0, 0, 0, 0,
+    SetWindowPos(GetHwnd(), nullptr, 0, 0, 0, 0,
                 SWP_NOZORDER|SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE|
                 SWP_FRAMECHANGED);
 
@@ -710,9 +710,9 @@ bool wxTextCtrl::MSWCreateText(const wxString& value,
                                        );
             if ( SUCCEEDED(hr) )
             {
-                hr = pDoc->Undo(tomFalse, NULL);
+                hr = pDoc->Undo(tomFalse, nullptr);
                 if ( SUCCEEDED(hr) )
-                    pDoc->Undo(tomTrue, NULL);
+                    pDoc->Undo(tomTrue, nullptr);
             }
         }
     }
@@ -2702,7 +2702,7 @@ wxSize wxTextCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
     int cy;
     wxFont font = GetFont();
     font.WXAdjustToPPI(GetDPI());
-    wxGetCharSize(GetHWND(), NULL, &cy, font);
+    wxGetCharSize(GetHWND(), nullptr, &cy, font);
 
     DWORD wText = FromDIP(1);
     ::SystemParametersInfo(SPI_GETCARETWIDTH, 0, &wText, 0);
@@ -3058,7 +3058,7 @@ void wxTextCtrl::SetDropTarget(wxDropTarget *dropTarget)
     {
         // get rid of the built-in drop target
         ::RevokeDragDrop(GetHwnd());
-        m_dropTarget = NULL;
+        m_dropTarget = nullptr;
     }
 
     wxTextCtrlBase::SetDropTarget(dropTarget);
@@ -3674,7 +3674,7 @@ void wxRichEditModule::OnExit()
         if ( ms_hRichEdit[i] && ms_hRichEdit[i] != INVALID_HINSTANCE )
         {
             ::FreeLibrary(ms_hRichEdit[i]);
-            ms_hRichEdit[i] = NULL;
+            ms_hRichEdit[i] = nullptr;
         }
     }
 #if wxUSE_INKEDIT

@@ -875,7 +875,7 @@ static void FoldBashDoc(Sci_PositionU startPos, Sci_Position length, int, WordLi
 
 static const char * const bashWordListDesc[] = {
 	"Keywords",
-	0
+	nullptr
 };
 
 LexerModule lmBash(SCLEX_BASH, ColouriseBashDoc, "bash", FoldBashDoc, bashWordListDesc);

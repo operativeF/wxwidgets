@@ -26,7 +26,7 @@
 using namespace Scintilla;
 #endif
 
-LineVector::LineVector() : starts(256), perLine(0) {
+LineVector::LineVector() : starts(256), perLine(nullptr) {
 	Init();
 }
 
@@ -76,7 +76,7 @@ int LineVector::LineFromPosition(int pos) const {
 Action::Action() {
 	at = startAction;
 	position = 0;
-	data = 0;
+	data = nullptr;
 	lenData = 0;
 	mayCoalesce = false;
 }
@@ -87,7 +87,7 @@ Action::~Action() {
 
 void Action::Create(actionType at_, int position_, const char *data_, int lenData_, bool mayCoalesce_) {
 	delete []data;
-	data = NULL;
+	data = nullptr;
 	position = position_;
 	at = at_;
 	if (lenData_) {
@@ -100,7 +100,7 @@ void Action::Create(actionType at_, int position_, const char *data_, int lenDat
 
 void Action::Destroy() {
 	delete []data;
-	data = 0;
+	data = nullptr;
 }
 
 void Action::Grab(Action *source) {
@@ -115,7 +115,7 @@ void Action::Grab(Action *source) {
 	// Ownership of source data transferred to this
 	source->position = 0;
 	source->at = startAction;
-	source->data = 0;
+	source->data = nullptr;
 	source->lenData = 0;
 	source->mayCoalesce = true;
 }
@@ -153,7 +153,7 @@ UndoHistory::UndoHistory() {
 
 UndoHistory::~UndoHistory() {
 	delete []actions;
-	actions = 0;
+	actions = nullptr;
 }
 
 void UndoHistory::EnsureUndoRoom() {
@@ -466,7 +466,7 @@ bool CellBuffer::SetStyleFor(int position, int lengthStyle, char styleValue) {
 const char *CellBuffer::DeleteChars(int position, int deleteLength, bool &startSequence) {
 	// InsertString and DeleteChars are the bottleneck though which all changes occur
 	PLATFORM_ASSERT(deleteLength > 0);
-	const char *data = 0;
+	const char *data = nullptr;
 	if (!readOnly) {
 		if (collectingUndo) {
 			// Save into the undo/redo stack, but only the characters - not the formatting
@@ -785,7 +785,7 @@ void CellBuffer::EndUndoAction() {
 
 void CellBuffer::AddUndoAction(int token, bool mayCoalesce) {
 	bool startSequence;
-	uh.AppendAction(containerAction, token, 0, 0, startSequence, mayCoalesce);
+	uh.AppendAction(containerAction, token, nullptr, 0, startSequence, mayCoalesce);
 }
 
 void CellBuffer::DeleteUndoHistory() {

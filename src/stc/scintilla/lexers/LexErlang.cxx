@@ -612,7 +612,7 @@ static const char * const erlangWordListDesc[] = {
 	"Erlang Module Attributes",
 	"Erlang Documentation",
 	"Erlang Documentation Macro",
-	0
+	nullptr
 };
 
 LexerModule lmErlang(

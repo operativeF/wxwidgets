@@ -439,7 +439,7 @@ STDMETHODIMP wxIDropTarget::Drop(IDataObject *pIDataSource,
 
 wxDropTarget::wxDropTarget(wxDataObject *dataObj)
             : wxDropTargetBase(dataObj),
-              m_dropTargetHelper(NULL)
+              m_dropTargetHelper(nullptr)
 {
     // create an IDropTarget implementation which will notify us about d&d
     // operations.
@@ -494,7 +494,7 @@ void wxDropTarget::Revoke(WXHWND hwnd)
     MSWEndDragImageSupport();
 
     // remove window reference
-    m_pIDropTarget->SetHwnd(0);
+    m_pIDropTarget->SetHwnd(nullptr);
 }
 
 // ----------------------------------------------------------------------------
@@ -519,7 +519,7 @@ bool wxDropTarget::GetData()
     STGMEDIUM stm;
     FORMATETC fmtMemory;
     fmtMemory.cfFormat  = format;
-    fmtMemory.ptd       = NULL;
+    fmtMemory.ptd       = nullptr;
     fmtMemory.dwAspect  = DVASPECT_CONTENT;
     fmtMemory.lindex    = -1;
     fmtMemory.tymed     = TYMED_HGLOBAL;  // TODO to add other media
@@ -576,7 +576,7 @@ wxDataFormat wxDropTarget::MSWGetSupportedFormat(IDataObject *pIDataSource) cons
     // changing) being passed through global memory block.
     static FORMATETC s_fmtMemory = {
         0,
-        NULL,
+        nullptr,
         DVASPECT_CONTENT,
         -1,
         TYMED_HGLOBAL       // TODO is it worth supporting other tymeds here?
@@ -620,10 +620,10 @@ void
 wxDropTarget::MSWEndDragImageSupport()
 {
     // release drop target helper
-    if ( m_dropTargetHelper != NULL )
+    if ( m_dropTargetHelper != nullptr )
     {
         m_dropTargetHelper->Release();
-        m_dropTargetHelper = NULL;
+        m_dropTargetHelper = nullptr;
     }
 }
 
@@ -631,7 +631,7 @@ void
 wxDropTarget::MSWInitDragImageSupport()
 {
     // Use the default drop target helper to show shell drag images
-    CoCreateInstance(wxCLSID_DragDropHelper, NULL, CLSCTX_INPROC_SERVER,
+    CoCreateInstance(wxCLSID_DragDropHelper, nullptr, CLSCTX_INPROC_SERVER,
                      wxIID_IDropTargetHelper, (LPVOID*)&m_dropTargetHelper);
 }
 
@@ -641,7 +641,7 @@ wxDropTarget::MSWUpdateDragImageOnData(wxCoord x,
                                        wxDragResult dragResult)
 {
     // call corresponding event on drop target helper
-    if ( m_dropTargetHelper != NULL )
+    if ( m_dropTargetHelper != nullptr )
     {
         POINT pt = {x, y};
         DWORD dwEffect = ConvertDragResultToEffect(dragResult);
@@ -655,7 +655,7 @@ wxDropTarget::MSWUpdateDragImageOnDragOver(wxCoord x,
                                            wxDragResult dragResult)
 {
     // call corresponding event on drop target helper
-    if ( m_dropTargetHelper != NULL )
+    if ( m_dropTargetHelper != nullptr )
     {
         POINT pt = {x, y};
         DWORD dwEffect = ConvertDragResultToEffect(dragResult);
@@ -669,7 +669,7 @@ wxDropTarget::MSWUpdateDragImageOnEnter(wxCoord x,
                                         wxDragResult dragResult)
 {
     // call corresponding event on drop target helper
-    if ( m_dropTargetHelper != NULL )
+    if ( m_dropTargetHelper != nullptr )
     {
         POINT pt = {x, y};
         DWORD dwEffect = ConvertDragResultToEffect(dragResult);
@@ -681,7 +681,7 @@ void
 wxDropTarget::MSWUpdateDragImageOnLeave()
 {
     // call corresponding event on drop target helper
-    if ( m_dropTargetHelper != NULL )
+    if ( m_dropTargetHelper != nullptr )
     {
         m_dropTargetHelper->DragLeave();
     }

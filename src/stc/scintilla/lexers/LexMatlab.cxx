@@ -342,12 +342,12 @@ static void FoldOctaveDoc(Sci_PositionU startPos, Sci_Position length, int initS
 
 static const char * const matlabWordListDesc[] = {
 	"Keywords",
-	0
+	nullptr
 };
 
 static const char * const octaveWordListDesc[] = {
 	"Keywords",
-	0
+	nullptr
 };
 
 LexerModule lmMatlab(SCLEX_MATLAB, ColouriseMatlabDoc, "matlab", FoldMatlabDoc, matlabWordListDesc);

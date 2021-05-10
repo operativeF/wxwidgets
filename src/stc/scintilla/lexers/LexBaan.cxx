@@ -74,7 +74,7 @@ const char *const baanWordLists[] = {
 	"PreDefined Variables",
 	"PreDefined Attributes",
 	"Enumerates",
-	0,
+	nullptr,
 };
 
 struct OptionSetBaan : public OptionSet<OptionsBaan> {
@@ -432,7 +432,7 @@ public:
 	void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
 
 	void * SCI_METHOD PrivateCall(int, void *) {
-		return NULL;
+		return nullptr;
 	}
 
 	static ILexer * LexerFactoryBaan() {
@@ -448,7 +448,7 @@ Sci_Position SCI_METHOD LexerBaan::PropertySet(const char *key, const char *val)
 }
 
 Sci_Position SCI_METHOD LexerBaan::WordListSet(int n, const char *wl) {
-	WordListAbridged *WordListAbridgedN = 0;
+	WordListAbridged *WordListAbridgedN = nullptr;
 	switch (n) {
 	case 0:
 		WordListAbridgedN = &keywords;
@@ -484,8 +484,8 @@ Sci_Position SCI_METHOD LexerBaan::WordListSet(int n, const char *wl) {
 		wlNew.Set(wl);
 		if (*WordListAbridgedN != wlNew) {
 			WordListAbridgedN->Set(wl);
-			WordListAbridgedN->kwAbridged = strchr(wl, '~') != NULL;
-			WordListAbridgedN->kwHasSection = strchr(wl, ':') != NULL;
+			WordListAbridgedN->kwAbridged = strchr(wl, '~') != nullptr;
+			WordListAbridgedN->kwHasSection = strchr(wl, ':') != nullptr;
 
 			firstModification = 0;
 		}

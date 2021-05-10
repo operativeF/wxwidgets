@@ -39,14 +39,14 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxMemoryDCImpl, wxMSWDCImpl);
 wxMemoryDCImpl::wxMemoryDCImpl( wxMemoryDC *owner )
         : wxMSWDCImpl( owner )
 {
-    CreateCompatible(NULL);
+    CreateCompatible(nullptr);
     Init();
 }
 
 wxMemoryDCImpl::wxMemoryDCImpl( wxMemoryDC *owner, wxBitmap& bitmap )
         : wxMSWDCImpl( owner )
 {
-    CreateCompatible(NULL);
+    CreateCompatible(nullptr);
     Init();
     DoSelect(bitmap);
 }
@@ -77,7 +77,7 @@ void wxMemoryDCImpl::Init()
 
 bool wxMemoryDCImpl::CreateCompatible(wxDC *dc)
 {
-    wxDCImpl *impl = dc ? dc->GetImpl() : NULL ;
+    wxDCImpl *impl = dc ? dc->GetImpl() : nullptr ;
     wxMSWDCImpl *msw_impl = wxDynamicCast( impl, wxMSWDCImpl );
     if ( dc && !msw_impl)
     {
@@ -85,12 +85,12 @@ bool wxMemoryDCImpl::CreateCompatible(wxDC *dc)
         return false;
     }
 
-    m_hDC = (WXHDC)::CreateCompatibleDC(dc ? GetHdcOf(*msw_impl) : NULL);
+    m_hDC = (WXHDC)::CreateCompatibleDC(dc ? GetHdcOf(*msw_impl) : nullptr);
 
     // as we created the DC, we must delete it in the dtor
     m_bOwnsDC = true;
 
-    m_ok = m_hDC != 0;
+    m_ok = m_hDC != nullptr;
 
     return m_ok;
 }
@@ -103,7 +103,7 @@ void wxMemoryDCImpl::DoSelect( const wxBitmap& bitmap )
         ::SelectObject(GetHdc(), (HBITMAP) m_oldBitmap);
         if ( m_selectedBitmap.IsOk() )
         {
-            m_selectedBitmap.SetSelectedInto(NULL);
+            m_selectedBitmap.SetSelectedInto(nullptr);
             m_selectedBitmap = wxNullBitmap;
         }
     }

@@ -267,7 +267,7 @@ static wxTopLevelWindow *GetTLWParentIfNotBeingDeleted(wxWindow *win)
         if ( !parent || win->IsTopLevel() )
         {
             if ( win->IsBeingDeleted() )
-                return NULL;
+                return nullptr;
 
             break;
         }
@@ -311,7 +311,7 @@ void wxButton::UnsetTmpDefault()
     if ( !tlw )
         return;
 
-    tlw->SetTmpDefaultItem(NULL);
+    tlw->SetTmpDefaultItem(nullptr);
 
     wxWindow *winOldDefault = tlw->GetDefaultItem();
 

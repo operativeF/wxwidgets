@@ -655,7 +655,7 @@ static const char * const nsisWordLists[] = {
 	"Variables",
 	"Lables",
 	"UserDefined",
-	0, };
+	nullptr, };
 
 
 LexerModule lmNsis(SCLEX_NSIS, ColouriseNsisDoc, "nsis", FoldNsisDoc, nsisWordLists);

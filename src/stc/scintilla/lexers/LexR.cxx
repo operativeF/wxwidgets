@@ -208,7 +208,7 @@ static const char * const RWordLists[] = {
             "Other Package Functions",
             "Unused",
             "Unused",
-            0,
+            nullptr,
         };
 
 

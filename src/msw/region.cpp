@@ -40,22 +40,22 @@ class WXDLLEXPORT wxRegionRefData : public wxGDIRefData
 public:
     wxRegionRefData()
     {
-        m_region = 0;
+        m_region = nullptr;
     }
 
     wxRegionRefData(const wxRegionRefData& data) : wxGDIRefData()
     {
-        DWORD noBytes = ::GetRegionData(data.m_region, 0, NULL);
+        DWORD noBytes = ::GetRegionData(data.m_region, 0, nullptr);
         RGNDATA *rgnData = (RGNDATA*) new char[noBytes];
         ::GetRegionData(data.m_region, noBytes, rgnData);
-        m_region = ::ExtCreateRegion(NULL, noBytes, rgnData);
+        m_region = ::ExtCreateRegion(nullptr, noBytes, rgnData);
         delete[] (char*) rgnData;
     }
 
     virtual ~wxRegionRefData()
     {
         ::DeleteObject(m_region);
-        m_region = 0;
+        m_region = nullptr;
     }
 
     HRGN m_region;
@@ -82,7 +82,7 @@ private:
 
 wxRegion::wxRegion()
 {
-    m_refData = NULL;
+    m_refData = nullptr;
 }
 
 wxRegion::wxRegion(WXHRGN hRegion)
@@ -322,7 +322,7 @@ wxRegionContain wxRegion::DoContainsRect(const wxRect& rect) const
 // Get internal region handle
 WXHRGN wxRegion::GetHRGN() const
 {
-    return (WXHRGN)(m_refData ? M_REGION : 0);
+    return (WXHRGN)(m_refData ? M_REGION : nullptr);
 }
 
 // ============================================================================
@@ -338,7 +338,7 @@ void wxRegionIterator::Init()
     m_current =
     m_numRects = 0;
 
-    m_rects = NULL;
+    m_rects = nullptr;
 }
 
 wxRegionIterator::~wxRegionIterator()
@@ -349,7 +349,7 @@ wxRegionIterator::~wxRegionIterator()
 // Initialize iterator for region
 wxRegionIterator::wxRegionIterator(const wxRegion& region)
 {
-    m_rects = NULL;
+    m_rects = nullptr;
 
     Reset(region);
 }
@@ -371,7 +371,7 @@ wxRegionIterator& wxRegionIterator::operator=(const wxRegionIterator& ri)
     }
     else
     {
-        m_rects = NULL;
+        m_rects = nullptr;
     }
 
     return *this;
@@ -393,7 +393,7 @@ void wxRegionIterator::Reset(const wxRegion& region)
         m_numRects = 0;
     else
     {
-        DWORD noBytes = ::GetRegionData(((wxRegionRefData*)region.m_refData)->m_region, 0, NULL);
+        DWORD noBytes = ::GetRegionData(((wxRegionRefData*)region.m_refData)->m_region, 0, nullptr);
         RGNDATA *rgnData = (RGNDATA*) new char[noBytes];
         ::GetRegionData(((wxRegionRefData*)region.m_refData)->m_region, noBytes, rgnData);
 

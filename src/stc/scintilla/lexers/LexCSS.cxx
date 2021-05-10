@@ -561,7 +561,7 @@ static const char * const cssWordListDesc[] = {
 	"Browser-Specific CSS Properties",
 	"Browser-Specific Pseudo-classes",
 	"Browser-Specific Pseudo-elements",
-	0
+	nullptr
 };
 
 LexerModule lmCss(SCLEX_CSS, ColouriseCssDoc, "css", FoldCSSDoc, cssWordListDesc);

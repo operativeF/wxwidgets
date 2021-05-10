@@ -220,7 +220,7 @@ static const char * const cronWordListDesc[] = {
 	"Section keywords and Forth words",
 	"nnCrontab keywords",
 	"Modifiers",
-	0
+	nullptr
 };
 
-LexerModule lmNncrontab(SCLEX_NNCRONTAB, ColouriseNncrontabDoc, "nncrontab", 0, cronWordListDesc);
+LexerModule lmNncrontab(SCLEX_NNCRONTAB, ColouriseNncrontabDoc, "nncrontab", nullptr, cronWordListDesc);

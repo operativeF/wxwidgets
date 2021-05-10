@@ -265,7 +265,7 @@ static void FoldAsyDoc(Sci_PositionU startPos, Sci_Position length, int initStyl
 static const char * const asyWordLists[] = {
             "Primary keywords and identifiers",
             "Secondary keywords and identifiers",
-            0,
+            nullptr,
         };
 
 LexerModule lmASY(SCLEX_ASYMPTOTE, ColouriseAsyDoc, "asy", FoldAsyDoc, asyWordLists);

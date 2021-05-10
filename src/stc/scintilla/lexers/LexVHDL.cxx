@@ -525,7 +525,7 @@ static const char * const VHDLWordLists[] = {
             "Standard Packages",
             "Standard Types",
             "User Words",
-            0,
+            nullptr,
         };
 
 

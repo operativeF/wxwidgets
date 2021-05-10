@@ -29,7 +29,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxAuiToolBarXmlHandler, wxXmlResourceHandler);
 wxAuiToolBarXmlHandler::wxAuiToolBarXmlHandler()
     : wxXmlResourceHandler()
     , m_isInside(false)
-    , m_toolbar(NULL)
+    , m_toolbar(nullptr)
 {
     XRC_ADD_STYLE(wxAUI_TB_TEXT);
     XRC_ADD_STYLE(wxAUI_TB_NO_TOOLTIPS);
@@ -52,7 +52,7 @@ wxObject *wxAuiToolBarXmlHandler::DoCreateResource()
         if ( !m_toolbar )
         {
             ReportError("tool only allowed inside a wxAuiToolBar");
-            return NULL;
+            return nullptr;
         }
 
         wxItemKind kind = wxITEM_NORMAL;
@@ -74,7 +74,7 @@ wxObject *wxAuiToolBarXmlHandler::DoCreateResource()
         }
 #if wxUSE_MENUS
         // check whether we have dropdown tag inside
-        wxMenu *menu = NULL; // menu for drop down items
+        wxMenu *menu = nullptr; // menu for drop down items
         wxXmlNode * const nodeDropdown = GetParamNode("dropdown");
         if ( nodeDropdown )
         {
@@ -84,7 +84,7 @@ wxObject *wxAuiToolBarXmlHandler::DoCreateResource()
             wxXmlNode * const nodeMenu = GetNodeChildren(nodeDropdown);
             if ( nodeMenu )
             {
-                wxObject *res = CreateResFromNode(nodeMenu, NULL);
+                wxObject *res = CreateResFromNode(nodeMenu, nullptr);
                 menu = wxDynamicCast(res, wxMenu);
                 if ( !menu )
                 {
@@ -116,7 +116,7 @@ wxObject *wxAuiToolBarXmlHandler::DoCreateResource()
                           kind,
                           GetText(wxS("tooltip")),
                           GetText(wxS("longhelp")),
-                          NULL
+                          nullptr
                        );
 
         if ( GetBool(wxS("disabled")) )
@@ -138,7 +138,7 @@ wxObject *wxAuiToolBarXmlHandler::DoCreateResource()
         if ( !m_toolbar )
         {
             ReportError("separators only allowed inside wxAuiToolBar");
-            return NULL;
+            return nullptr;
         }
 
         if ( m_class == wxS("separator") )
@@ -152,7 +152,7 @@ wxObject *wxAuiToolBarXmlHandler::DoCreateResource()
             if (hasProportion && hasWidth)
             {
                 ReportError("A space can't both stretch and have width");
-                return NULL;
+                return nullptr;
             }
 
             if (hasWidth)
@@ -218,7 +218,7 @@ wxObject *wxAuiToolBarXmlHandler::DoCreateResource()
         if (!children_node)
            children_node = GetParamNode(wxS("object_ref"));
 
-        if (children_node == NULL) return toolbar;
+        if (children_node == nullptr) return toolbar;
 
         m_isInside = true;
         m_toolbar = toolbar;
@@ -229,20 +229,20 @@ wxObject *wxAuiToolBarXmlHandler::DoCreateResource()
         {
             if (IsObjectNode(n))
             {
-                wxObject *created = CreateResFromNode(n, toolbar, NULL);
+                wxObject *created = CreateResFromNode(n, toolbar, nullptr);
                 wxControl *control = wxDynamicCast(created, wxControl);
                 if (!IsOfClass(n, wxS("tool")) &&
                     !IsOfClass(n, wxS("separator")) &&
                     !IsOfClass(n, wxS("label")) &&
                     !IsOfClass(n, wxS("space")) &&
-                    control != NULL)
+                    control != nullptr)
                     toolbar->AddControl(control);
             }
             n = GetNodeNext(n);
         }
 
         m_isInside = false;
-        m_toolbar = NULL;
+        m_toolbar = nullptr;
 
         toolbar->Realize();
 
@@ -264,13 +264,13 @@ void wxAuiToolBarXmlHandler::MenuHandler::OnDropDown(wxAuiToolBarEvent& event)
     if (event.IsDropDownClicked())
     {
         wxAuiToolBar *toobar = wxDynamicCast(event.GetEventObject(), wxAuiToolBar);
-        if (toobar != NULL)
+        if (toobar != nullptr)
         {
             wxAuiToolBarItem *item = toobar->FindTool(event.GetId());
-            if (item != NULL)
+            if (item != nullptr)
             {
                 wxMenu * const menu = m_menus[item->GetUserData()];
-                if (menu != NULL)
+                if (menu != nullptr)
                 {
                     wxRect rect = item->GetSizerItem()->GetRect();
                     toobar->PopupMenu(menu, rect.GetRight() - toobar->FromDIP(10), rect.GetBottom());

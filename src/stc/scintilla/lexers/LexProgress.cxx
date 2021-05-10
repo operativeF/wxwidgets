@@ -99,7 +99,7 @@ namespace {
                "Keywords that opens a block, only when used to begin a syntactic line",
                "Keywords that opens a block anywhere in a syntactic line",
                "Task Marker", /* "END MODIFY START TODO" */
-               0,
+               nullptr,
    };
 
    struct OptionSetABL : public OptionSet<OptionsABL> {
@@ -170,7 +170,7 @@ public:
    void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
 
    void * SCI_METHOD PrivateCall(int, void *) {
-      return 0;
+      return nullptr;
    }
    int SCI_METHOD LineEndTypesSupported() {
       return SC_LINE_END_TYPE_DEFAULT;
@@ -188,7 +188,7 @@ Sci_Position SCI_METHOD LexerABL::PropertySet(const char *key, const char *val) 
 }
 
 Sci_Position SCI_METHOD LexerABL::WordListSet(int n, const char *wl) {
-   WordList *wordListN = 0;
+   WordList *wordListN = nullptr;
    switch (n) {
    case 0:
       wordListN = &keywords1;

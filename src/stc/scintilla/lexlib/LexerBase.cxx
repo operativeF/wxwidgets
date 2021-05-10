@@ -30,15 +30,15 @@ using namespace Scintilla;
 LexerBase::LexerBase() {
 	for (int wl = 0; wl < numWordLists; wl++)
 		keyWordLists[wl] = new WordList;
-	keyWordLists[numWordLists] = 0;
+	keyWordLists[numWordLists] = nullptr;
 }
 
 LexerBase::~LexerBase() {
 	for (int wl = 0; wl < numWordLists; wl++) {
 		delete keyWordLists[wl];
-		keyWordLists[wl] = 0;
+		keyWordLists[wl] = nullptr;
 	}
-	keyWordLists[numWordLists] = 0;
+	keyWordLists[numWordLists] = nullptr;
 }
 
 void SCI_METHOD LexerBase::Release() {
@@ -88,5 +88,5 @@ Sci_Position SCI_METHOD LexerBase::WordListSet(int n, const char *wl) {
 }
 
 void * SCI_METHOD LexerBase::PrivateCall(int, void *) {
-	return 0;
+	return nullptr;
 }

@@ -173,7 +173,7 @@ struct EscapeSequence {
 	CharacterSet *escapeSetValid;
 	EscapeSequence() {
 		digitsLeft = 0;
-		escapeSetValid = 0;
+		escapeSetValid = nullptr;
 		setHexDigits = CharacterSet(CharacterSet::setDigits, "ABCDEFabcdef");
 		setOctDigits = CharacterSet(CharacterSet::setNone, "01234567");
 	}
@@ -355,7 +355,7 @@ const char *const cppWordLists[] = {
             "Global classes and typedefs",
             "Preprocessor definitions",
             "Task marker and error marker keywords",
-            0,
+            nullptr,
 };
 
 struct OptionSetCPP : public OptionSet<OptionsCPP> {
@@ -509,7 +509,7 @@ public:
 	void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
 
 	void * SCI_METHOD PrivateCall(int, void *) {
-		return 0;
+		return nullptr;
 	}
 
 	int SCI_METHOD LineEndTypesSupported() {
@@ -574,7 +574,7 @@ Sci_Position SCI_METHOD LexerCPP::PropertySet(const char *key, const char *val) 
 }
 
 Sci_Position SCI_METHOD LexerCPP::WordListSet(int n, const char *wl) {
-	WordList *wordListN = 0;
+	WordList *wordListN = nullptr;
 	switch (n) {
 	case 0:
 		wordListN = &keywords;

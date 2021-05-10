@@ -116,7 +116,7 @@ const wxEventTable *wxEvtHandler::GetEventTable() const
     { return &wxEvtHandler::sm_eventTable; }
 
 const wxEventTable wxEvtHandler::sm_eventTable =
-    { (const wxEventTable *)NULL, &wxEvtHandler::sm_eventTableEntries[0] };
+    { (const wxEventTable *)nullptr, &wxEvtHandler::sm_eventTableEntries[0] };
 
 wxEventHashTable &wxEvtHandler::GetEventHashTable() const
     { return wxEvtHandler::sm_eventHashTable; }
@@ -375,15 +375,15 @@ wxEventFunctor::~wxEventFunctor()
 wxEvent::wxEvent(int theId, wxEventType commandType)
     : m_eventType(commandType)
 {
-    m_eventObject = NULL;
+    m_eventObject = nullptr;
     m_timeStamp = 0;
     m_id = theId;
     m_skipped = false;
-    m_callbackUserData = NULL;
-    m_handlerToProcessOnlyIn = NULL;
+    m_callbackUserData = nullptr;
+    m_handlerToProcessOnlyIn = nullptr;
     m_isCommandEvent = false;
     m_propagationLevel = wxEVENT_PROPAGATE_NONE;
-    m_propagatedFrom = NULL;
+    m_propagatedFrom = nullptr;
     m_wasProcessed = false;
     m_willBeProcessedAgain = false;
 }
@@ -395,9 +395,9 @@ wxEvent::wxEvent(const wxEvent& src)
     , m_timeStamp(src.m_timeStamp)
     , m_id(src.m_id)
     , m_callbackUserData(src.m_callbackUserData)
-    , m_handlerToProcessOnlyIn(NULL)
+    , m_handlerToProcessOnlyIn(nullptr)
     , m_propagationLevel(src.m_propagationLevel)
-    , m_propagatedFrom(NULL)
+    , m_propagatedFrom(nullptr)
     , m_skipped(src.m_skipped)
     , m_isCommandEvent(src.m_isCommandEvent)
     , m_wasProcessed(false)
@@ -414,9 +414,9 @@ wxEvent& wxEvent::operator=(const wxEvent& src)
     m_timeStamp = src.m_timeStamp;
     m_id = src.m_id;
     m_callbackUserData = src.m_callbackUserData;
-    m_handlerToProcessOnlyIn = NULL;
+    m_handlerToProcessOnlyIn = nullptr;
     m_propagationLevel = src.m_propagationLevel;
-    m_propagatedFrom = NULL;
+    m_propagatedFrom = nullptr;
     m_skipped = src.m_skipped;
     m_isCommandEvent = src.m_isCommandEvent;
 
@@ -944,7 +944,7 @@ wxHelpEvent::Origin wxHelpEvent::GuessOrigin(Origin origin)
 
 static const int EVENT_TYPE_TABLE_INIT_SIZE = 31; // Not too big not too small...
 
-wxEventHashTable* wxEventHashTable::sm_first = NULL;
+wxEventHashTable* wxEventHashTable::sm_first = nullptr;
 
 wxEventHashTable::wxEventHashTable(const wxEventTable &table)
                 : m_table(table),
@@ -1039,7 +1039,7 @@ void wxEventHashTable::InitHashTable()
     {
         // Retrieve all valid event handler entries
         const wxEventTableEntry *entry = table->entries;
-        while (entry->m_fn != 0)
+        while (entry->m_fn != nullptr)
         {
             // Add the event entry in the Hash.
             AddEntry(*entry);
@@ -1142,14 +1142,14 @@ void wxEventHashTable::GrowEventTypeTable()
 
 wxEvtHandler::wxEvtHandler()
 {
-    m_nextHandler = NULL;
-    m_previousHandler = NULL;
+    m_nextHandler = nullptr;
+    m_previousHandler = nullptr;
     m_enabled = true;
-    m_dynamicEvents = NULL;
-    m_pendingEvents = NULL;
+    m_dynamicEvents = nullptr;
+    m_pendingEvents = nullptr;
 
     // no client data (yet)
-    m_clientData = NULL;
+    m_clientData = nullptr;
     m_clientDataType = wxClientData_None;
 }
 
@@ -1205,17 +1205,17 @@ void wxEvtHandler::Unlink()
     if (m_nextHandler)
         m_nextHandler->SetPreviousHandler(m_previousHandler);
 
-    m_nextHandler = NULL;
-    m_previousHandler = NULL;
+    m_nextHandler = nullptr;
+    m_previousHandler = nullptr;
 }
 
 bool wxEvtHandler::IsUnlinked() const
 {
-    return m_previousHandler == NULL &&
-           m_nextHandler == NULL;
+    return m_previousHandler == nullptr &&
+           m_nextHandler == nullptr;
 }
 
-wxEventFilter* wxEvtHandler::ms_filterList = NULL;
+wxEventFilter* wxEvtHandler::ms_filterList = nullptr;
 
 /* static */ void wxEvtHandler::AddFilter(wxEventFilter* filter)
 {
@@ -1227,7 +1227,7 @@ wxEventFilter* wxEvtHandler::ms_filterList = NULL;
 
 /* static */ void wxEvtHandler::RemoveFilter(wxEventFilter* filter)
 {
-    wxEventFilter* prev = NULL;
+    wxEventFilter* prev = nullptr;
     for ( wxEventFilter* f = ms_filterList; f; f = f->m_next )
     {
         if ( f == filter )
@@ -1242,7 +1242,7 @@ wxEventFilter* wxEvtHandler::ms_filterList = NULL;
             // Also reset the next pointer in the filter itself just to avoid
             // having possibly dangling pointers, even though it's not strictly
             // necessary.
-            f->m_next = NULL;
+            f->m_next = nullptr;
 
             // Skip the assert below.
             return;
@@ -1349,7 +1349,7 @@ void wxEvtHandler::ProcessPendingEvents()
         while (node && pEvent && !evtLoop->IsEventAllowedInsideYield(pEvent->GetEventCategory()))
         {
             node = node->GetNext();
-            pEvent = node ? static_cast<wxEvent *>(node->GetData()) : NULL;
+            pEvent = node ? static_cast<wxEvent *>(node->GetData()) : nullptr;
         }
 
         if (!node)
@@ -1728,7 +1728,7 @@ void wxEvtHandler::WXConsumeException()
 bool wxEvtHandler::SearchEventTable(wxEventTable& table, wxEvent& event)
 {
     const wxEventType eventType = event.GetEventType();
-    for ( int i = 0; table.entries[i].m_fn != 0; i++ )
+    for ( int i = 0; table.entries[i].m_fn != nullptr; i++ )
     {
         const wxEventTableEntry& entry = table.entries[i];
         if ( eventType == entry.m_eventType )
@@ -1830,7 +1830,7 @@ wxDynamicEventTableEntry*
 wxEvtHandler::GetFirstDynamicEntry(size_t& cookie) const
 {
     if ( !m_dynamicEvents )
-        return NULL;
+        return nullptr;
 
     // The handlers are in LIFO order, so we must start at the end.
     cookie = m_dynamicEvents->size();
@@ -1851,7 +1851,7 @@ wxEvtHandler::GetNextDynamicEntry(size_t& cookie) const
             return entry;
     }
 
-    return NULL;
+    return nullptr;
 }
 
 bool wxEvtHandler::SearchDynamicEventTable( wxEvent& event )
@@ -1976,7 +1976,7 @@ wxEvtHandler::FindRefInTrackerList(wxEvtHandler *eventSink)
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 void wxEvtHandler::OnSinkDestroyed( wxEvtHandler *sink )
@@ -2022,8 +2022,8 @@ wxWindow* wxFindFocusDescendant(wxWindow* ancestor)
         else
             win = win->GetParent();
     }
-    if (win == NULL)
-        focusWin = NULL;
+    if (win == nullptr)
+        focusWin = nullptr;
 
     return focusWin;
 }

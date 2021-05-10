@@ -297,7 +297,7 @@ wxEND_EVENT_TABLE()
 // ----------------------------------------------------------------------------
 
 wxDebugReportDialog::wxDebugReportDialog(wxDebugReport& dbgrpt)
-                   : wxDialog(NULL, wxID_ANY,
+                   : wxDialog(nullptr, wxID_ANY,
                               wxString::Format(_("Debug report \"%s\""),
                               dbgrpt.GetReportName().c_str()),
                               wxDefaultPosition,
@@ -536,7 +536,7 @@ bool wxDebugReportPreviewStd::Show(wxDebugReport& dbgrpt) const
     wxEventLoop::SetCriticalWindow(&dlg);
 
     wxON_BLOCK_EXIT1( wxEventLoop::SetCriticalWindow,
-                        static_cast<wxWindow *>(NULL) );
+                        static_cast<wxWindow *>(nullptr) );
 #endif // __WXMSW__
 
     return dlg.ShowModal() == wxID_OK && dbgrpt.GetFilesCount() != 0;

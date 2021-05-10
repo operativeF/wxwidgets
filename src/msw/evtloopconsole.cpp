@@ -41,7 +41,7 @@ wxMSWEventLoopBase::wxMSWEventLoopBase()
     m_exitcode = 0;
 
     // Create initially not signalled auto-reset event object.
-    m_heventWake = ::CreateEvent(NULL, FALSE, FALSE, NULL);
+    m_heventWake = ::CreateEvent(nullptr, FALSE, FALSE, nullptr);
     if ( !m_heventWake )
         wxLogLastError(wxS("CreateEvent(wake)"));
 }
@@ -59,7 +59,7 @@ wxMSWEventLoopBase::~wxMSWEventLoopBase()
 bool wxMSWEventLoopBase::Pending() const
 {
     MSG msg;
-    return ::PeekMessage(&msg, 0, 0, 0, PM_NOREMOVE) != 0;
+    return ::PeekMessage(&msg, nullptr, 0, 0, PM_NOREMOVE) != 0;
 }
 
 void wxMSWEventLoopBase::WakeUp()
@@ -104,7 +104,7 @@ int wxMSWEventLoopBase::GetNextMessageTimeout(WXMSG *msg, unsigned long timeout)
     // MsgWaitForMultipleObjects() won't notice any input which was already
     // examined (e.g. using PeekMessage()) but not yet removed from the queue
     // so we need to remove any immediately messages manually
-    while ( !::PeekMessage(msg, 0, 0, 0, PM_REMOVE) )
+    while ( !::PeekMessage(msg, nullptr, 0, 0, PM_REMOVE) )
     {
         DWORD rc = ::MsgWaitForMultipleObjects
                      (

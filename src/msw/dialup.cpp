@@ -53,7 +53,7 @@ wxDEFINE_EVENT( wxEVT_DIALUP_DISCONNECTED, wxDialUpEvent );
 
 static const wxChar *
     wxMSWDIALUP_WNDCLASSNAME = wxT("_wxDialUpManager_Internal_Class");
-static const wxChar *gs_classForDialUpWindow = NULL;
+static const wxChar *gs_classForDialUpWindow = nullptr;
 
 // ----------------------------------------------------------------------------
 // constants
@@ -123,8 +123,8 @@ struct WXDLLEXPORT wxRasThreadData
 {
     wxRasThreadData()
     {
-        hWnd = 0;
-        dialUpManager = NULL;
+        hWnd = nullptr;
+        dialUpManager = nullptr;
     }
 
     ~wxRasThreadData()
@@ -179,7 +179,7 @@ public:
 
     // for wxRasDialFunc
     static HWND GetRasWindow() { return ms_hwndRas; }
-    static void ResetRasWindow() { ms_hwndRas = NULL; }
+    static void ResetRasWindow() { ms_hwndRas = nullptr; }
     static wxDialUpManagerMSW *GetDialer() { return ms_dialer; }
 
 private:
@@ -280,7 +280,7 @@ public:
         if ( gs_classForDialUpWindow )
         {
             ::UnregisterClass(wxMSWDIALUP_WNDCLASSNAME, wxGetInstance());
-            gs_classForDialUpWindow = NULL;
+            gs_classForDialUpWindow = nullptr;
         }
     }
 
@@ -311,33 +311,33 @@ static void WINAPI wxRasDialFunc(UINT unMsg,
 // init the static variables
 // ----------------------------------------------------------------------------
 
-HRASCONN wxDialUpManagerMSW::ms_hRasConnection = 0;
+HRASCONN wxDialUpManagerMSW::ms_hRasConnection = nullptr;
 
-HWND wxDialUpManagerMSW::ms_hwndRas = 0;
+HWND wxDialUpManagerMSW::ms_hwndRas = nullptr;
 
-RASDIAL wxDialUpManagerMSW::ms_pfnRasDial = 0;
-RASENUMCONNECTIONS wxDialUpManagerMSW::ms_pfnRasEnumConnections = 0;
-RASENUMENTRIES wxDialUpManagerMSW::ms_pfnRasEnumEntries = 0;
-RASGETCONNECTSTATUS wxDialUpManagerMSW::ms_pfnRasGetConnectStatus = 0;
-RASGETERRORSTRING wxDialUpManagerMSW::ms_pfnRasGetErrorString = 0;
-RASHANGUP wxDialUpManagerMSW::ms_pfnRasHangUp = 0;
-RASGETPROJECTIONINFO wxDialUpManagerMSW::ms_pfnRasGetProjectionInfo = 0;
-RASCREATEPHONEBOOKENTRY wxDialUpManagerMSW::ms_pfnRasCreatePhonebookEntry = 0;
-RASEDITPHONEBOOKENTRY wxDialUpManagerMSW::ms_pfnRasEditPhonebookEntry = 0;
-RASSETENTRYDIALPARAMS wxDialUpManagerMSW::ms_pfnRasSetEntryDialParams = 0;
-RASGETENTRYDIALPARAMS wxDialUpManagerMSW::ms_pfnRasGetEntryDialParams = 0;
-RASENUMDEVICES wxDialUpManagerMSW::ms_pfnRasEnumDevices = 0;
-RASGETCOUNTRYINFO wxDialUpManagerMSW::ms_pfnRasGetCountryInfo = 0;
-RASGETENTRYPROPERTIES wxDialUpManagerMSW::ms_pfnRasGetEntryProperties = 0;
-RASSETENTRYPROPERTIES wxDialUpManagerMSW::ms_pfnRasSetEntryProperties = 0;
-RASRENAMEENTRY wxDialUpManagerMSW::ms_pfnRasRenameEntry = 0;
-RASDELETEENTRY wxDialUpManagerMSW::ms_pfnRasDeleteEntry = 0;
-RASVALIDATEENTRYNAME wxDialUpManagerMSW::ms_pfnRasValidateEntryName = 0;
-RASCONNECTIONNOTIFICATION wxDialUpManagerMSW::ms_pfnRasConnectionNotification = 0;
+RASDIAL wxDialUpManagerMSW::ms_pfnRasDial = nullptr;
+RASENUMCONNECTIONS wxDialUpManagerMSW::ms_pfnRasEnumConnections = nullptr;
+RASENUMENTRIES wxDialUpManagerMSW::ms_pfnRasEnumEntries = nullptr;
+RASGETCONNECTSTATUS wxDialUpManagerMSW::ms_pfnRasGetConnectStatus = nullptr;
+RASGETERRORSTRING wxDialUpManagerMSW::ms_pfnRasGetErrorString = nullptr;
+RASHANGUP wxDialUpManagerMSW::ms_pfnRasHangUp = nullptr;
+RASGETPROJECTIONINFO wxDialUpManagerMSW::ms_pfnRasGetProjectionInfo = nullptr;
+RASCREATEPHONEBOOKENTRY wxDialUpManagerMSW::ms_pfnRasCreatePhonebookEntry = nullptr;
+RASEDITPHONEBOOKENTRY wxDialUpManagerMSW::ms_pfnRasEditPhonebookEntry = nullptr;
+RASSETENTRYDIALPARAMS wxDialUpManagerMSW::ms_pfnRasSetEntryDialParams = nullptr;
+RASGETENTRYDIALPARAMS wxDialUpManagerMSW::ms_pfnRasGetEntryDialParams = nullptr;
+RASENUMDEVICES wxDialUpManagerMSW::ms_pfnRasEnumDevices = nullptr;
+RASGETCOUNTRYINFO wxDialUpManagerMSW::ms_pfnRasGetCountryInfo = nullptr;
+RASGETENTRYPROPERTIES wxDialUpManagerMSW::ms_pfnRasGetEntryProperties = nullptr;
+RASSETENTRYPROPERTIES wxDialUpManagerMSW::ms_pfnRasSetEntryProperties = nullptr;
+RASRENAMEENTRY wxDialUpManagerMSW::ms_pfnRasRenameEntry = nullptr;
+RASDELETEENTRY wxDialUpManagerMSW::ms_pfnRasDeleteEntry = nullptr;
+RASVALIDATEENTRYNAME wxDialUpManagerMSW::ms_pfnRasValidateEntryName = nullptr;
+RASCONNECTIONNOTIFICATION wxDialUpManagerMSW::ms_pfnRasConnectionNotification = nullptr;
 
 int wxDialUpManagerMSW::ms_userSpecifiedOnlineStatus = -1;
 int wxDialUpManagerMSW::ms_isConnected = -1;
-wxDialUpManagerMSW *wxDialUpManagerMSW::ms_dialer = NULL;
+wxDialUpManagerMSW *wxDialUpManagerMSW::ms_dialer = nullptr;
 
 // ----------------------------------------------------------------------------
 // ctor and dtor: the dynamic linking happens here
@@ -360,7 +360,7 @@ wxDialUpManagerMSW::wxDialUpManagerMSW()
 {
     // initialize our data
     m_autoCheckLevel = 0;
-    m_hThread = 0;
+    m_hThread = nullptr;
     m_data = new wxRasThreadData;
 
     if ( !m_dllRas.IsLoaded() )
@@ -373,7 +373,7 @@ wxDialUpManagerMSW::wxDialUpManagerMSW()
 
         // this will contain the name of the function we failed to resolve
         // if any at the end
-        const char *funcName = NULL;
+        const char *funcName = nullptr;
 
         // get the function from rasapi32.dll and abort if it's not found
         #define RESOLVE_RAS_FUNCTION(type, name)                          \
@@ -482,7 +482,7 @@ HRASCONN wxDialUpManagerMSW::FindActiveConnection()
     if ( !lpRasConn )
     {
         // out of memory
-        return 0;
+        return nullptr;
     }
 
     lpRasConn->dwSize = sizeof(RASCONN);
@@ -503,7 +503,7 @@ HRASCONN wxDialUpManagerMSW::FindActiveConnection()
                 // out of memory
                 free(lpRasConnOld);
 
-                return 0;
+                return nullptr;
             }
         }
         else if ( dwRet == 0 )
@@ -516,7 +516,7 @@ HRASCONN wxDialUpManagerMSW::FindActiveConnection()
             // an error occurred
             wxLogError(_("Cannot find active dialup connection: %s"),
                        GetErrorString(dwRet).c_str());
-            return 0;
+            return nullptr;
         }
     }
 
@@ -526,7 +526,7 @@ HRASCONN wxDialUpManagerMSW::FindActiveConnection()
     {
         case 0:
             // no connections
-            hrasconn = 0;
+            hrasconn = nullptr;
             break;
 
         default:
@@ -558,12 +558,12 @@ void wxDialUpManagerMSW::CleanUpThreadData()
 
             // the thread still needs m_data so we can't free it here, rather
             // let the thread do it itself
-            m_data = NULL;
+            m_data = nullptr;
         }
 
         CloseHandle(m_hThread);
 
-        m_hThread = 0;
+        m_hThread = nullptr;
     }
 
     wxDELETE(m_data);
@@ -576,7 +576,7 @@ void wxDialUpManagerMSW::CleanUpThreadData()
 void wxDialUpManagerMSW::CheckRasStatus()
 {
     // use int, not bool to compare with -1
-    int isConnected = FindActiveConnection() != 0;
+    int isConnected = FindActiveConnection() != nullptr;
     if ( isConnected != ms_isConnected )
     {
         if ( ms_isConnected != -1 )
@@ -627,17 +627,17 @@ void wxDialUpManagerMSW::OnDialProgress(RASCONNSTATE rasconnstate,
         if ( ms_hRasConnection )
         {
             ms_pfnRasHangUp(ms_hRasConnection);
-            ms_hRasConnection = 0;
+            ms_hRasConnection = nullptr;
         }
 
-        ms_dialer = NULL;
+        ms_dialer = nullptr;
 
         NotifyApp(false /* !connected */, true /* we dialed ourselves */);
     }
     else if ( rasconnstate == RASCS_Connected )
     {
         ms_isConnected = true;
-        ms_dialer = NULL;
+        ms_dialer = nullptr;
 
         NotifyApp(true /* connected */, true /* we dialed ourselves */);
     }
@@ -666,7 +666,7 @@ size_t wxDialUpManagerMSW::GetISPNames(wxArrayString& names) const
         dwRet = ms_pfnRasEnumEntries
                   (
                    wxRESERVED_PARAM,
-                   NULL,                // default phone book (or all)
+                   nullptr,                // default phone book (or all)
                    rasEntries,          // [out] buffer for the entries
                    &size,               // [in/out] size of the buffer
                    &nEntries            // [out] number of entries fetched
@@ -676,7 +676,7 @@ size_t wxDialUpManagerMSW::GetISPNames(wxArrayString& names) const
         {
             // reallocate the buffer
             void *n  = realloc(rasEntries, size);
-            if (n == NULL)
+            if (n == nullptr)
             {
                 free(rasEntries);
                 return 0;
@@ -781,7 +781,7 @@ bool wxDialUpManagerMSW::Dial(const wxString& nameOfISP,
         BOOL gotPassword;
         DWORD dwRet = ms_pfnRasGetEntryDialParams
                       (
-                       NULL,            // default phonebook
+                       nullptr,            // default phonebook
                        &rasDialParams,  // [in/out] the params of this entry
                        &gotPassword     // [out] did we get password?
                       );
@@ -835,12 +835,12 @@ bool wxDialUpManagerMSW::Dial(const wxString& nameOfISP,
 
     DWORD dwRet = ms_pfnRasDial
                   (
-                   NULL,                    // no extended features
-                   NULL,                    // default phone book file (NT only)
+                   nullptr,                    // no extended features
+                   nullptr,                    // default phone book file (NT only)
                    &rasDialParams,
                    0,                       // use callback for notifications
                    async ? (void *)wxRasDialFunc  // cast needed for gcc 3.1
-                         : 0,               // no notifications, sync operation
+                         : nullptr,               // no notifications, sync operation
                    &ms_hRasConnection
                   );
 
@@ -862,10 +862,10 @@ bool wxDialUpManagerMSW::Dial(const wxString& nameOfISP,
         if ( ms_hRasConnection )
         {
             ms_pfnRasHangUp(ms_hRasConnection);
-            ms_hRasConnection = 0;
+            ms_hRasConnection = nullptr;
         }
 
-        ms_dialer = NULL;
+        ms_dialer = nullptr;
 
         return false;
     }
@@ -881,7 +881,7 @@ bool wxDialUpManagerMSW::Dial(const wxString& nameOfISP,
 
 bool wxDialUpManagerMSW::IsDialing() const
 {
-    return GetDialer() != NULL;
+    return GetDialer() != nullptr;
 }
 
 bool wxDialUpManagerMSW::CancelDialing()
@@ -894,7 +894,7 @@ bool wxDialUpManagerMSW::CancelDialing()
 
     wxASSERT_MSG( ms_hRasConnection, wxT("dialing but no connection?") );
 
-    ms_dialer = NULL;
+    ms_dialer = nullptr;
 
     return HangUp();
 }
@@ -910,7 +910,7 @@ bool wxDialUpManagerMSW::HangUp()
     {
         hRasConn = ms_hRasConnection;
 
-        ms_hRasConnection = 0;
+        ms_hRasConnection = nullptr;
     }
     else
     {
@@ -994,7 +994,7 @@ bool wxDialUpManagerMSW::IsOnline() const
     else
     {
         // return true if there is at least one active connection
-        return FindActiveConnection() != 0;
+        return FindActiveConnection() != nullptr;
     }
 }
 
@@ -1015,12 +1015,12 @@ bool wxDialUpManagerMSW::EnableAutoCheckOnlineStatus(size_t nSeconds)
         return true;
     }
 
-    bool ok = ms_pfnRasConnectionNotification != 0;
+    bool ok = ms_pfnRasConnectionNotification != nullptr;
 
     if ( ok )
     {
         // first, see if we don't have this thread already running
-        if ( m_hThread != 0 )
+        if ( m_hThread != nullptr )
         {
             if ( ::ResumeThread(m_hThread) != (DWORD)-1 )
                 return true;
@@ -1100,7 +1100,7 @@ bool wxDialUpManagerMSW::EnableAutoCheckOnlineStatus(size_t nSeconds)
         DWORD tid;
         m_hThread = CreateThread
                     (
-                     NULL,
+                     nullptr,
                      0,
                      (LPTHREAD_START_ROUTINE)wxRasMonitorThread,
                      (void *)m_data,

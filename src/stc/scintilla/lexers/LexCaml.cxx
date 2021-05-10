@@ -296,7 +296,7 @@ void ColouriseCamlDoc(
 
 		case SCE_CAML_OPERATOR: {
 			// [try to] interpret as [additional] operator char
-			const char* o = 0;
+			const char* o = nullptr;
 			if (iscaml(sc.ch) || isspace(sc.ch)			// ident or whitespace
 				|| (o = strchr(")]};,\'\"#", sc.ch),o)	// "termination" chars
 				|| (!isSML && sc.Match('`'))			// Caml extra term char
@@ -449,7 +449,7 @@ static const char * const camlWordListDesc[] = {
 	"Keywords",		// primary Objective Caml keywords
 	"Keywords2",	// "optional" keywords (typically from Pervasives)
 	"Keywords3",	// "optional" keywords (typically typenames)
-	0
+	nullptr
 };
 
 #ifndef BUILD_AS_EXTERNAL_LEXER

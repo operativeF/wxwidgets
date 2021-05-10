@@ -451,7 +451,7 @@ static const char * const cmakeWordLists[] = {
     "Commands",
     "Parameters",
     "UserDefined",
-    0,
-    0,};
+    nullptr,
+    nullptr,};
 
 LexerModule lmCmake(SCLEX_CMAKE, ColouriseCmakeDoc, "cmake", FoldCmakeDoc, cmakeWordLists);

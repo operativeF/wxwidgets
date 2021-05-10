@@ -388,7 +388,7 @@ static void ColouriseErrorListDoc(Sci_PositionU startPos, Sci_Position length, i
 }
 
 static const char *const emptyWordListDesc[] = {
-	0
+	nullptr
 };
 
-LexerModule lmErrorList(SCLEX_ERRORLIST, ColouriseErrorListDoc, "errorlist", 0, emptyWordListDesc);
+LexerModule lmErrorList(SCLEX_ERRORLIST, ColouriseErrorListDoc, "errorlist", nullptr, emptyWordListDesc);

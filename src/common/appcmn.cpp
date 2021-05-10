@@ -58,7 +58,7 @@ WX_CHECK_BUILD_OPTIONS("wxCore")
 
 wxAppBase::wxAppBase()
 {
-    m_topWindow = NULL;
+    m_topWindow = nullptr;
 
     m_useBestVisual = false;
     m_forceTrueColour = false;
@@ -173,7 +173,7 @@ wxWindow* wxAppBase::GetTopWindow() const
     // we need to search for the first TLW which is not pending delete
     if ( !window || wxPendingDelete.Member(window) )
     {
-        window = NULL;
+        window = nullptr;
         wxWindowList::compatibility_iterator node = wxTopLevelWindows.GetFirst();
         while ( node )
         {
@@ -195,7 +195,7 @@ wxWindow* wxAppBase::GetMainTopWindow()
 {
     const wxAppBase* const app = static_cast<wxAppBase*>(GetInstance());
 
-    return app ? app->GetTopWindow() : NULL;
+    return app ? app->GetTopWindow() : nullptr;
 }
 
 wxVideoMode wxAppBase::GetDisplayMode() const
@@ -475,7 +475,7 @@ wxFontMapper *wxGUIAppTraitsBase::CreateFontMapper()
 wxRendererNative *wxGUIAppTraitsBase::CreateRenderer()
 {
     // use the default native renderer by default
-    return NULL;
+    return nullptr;
 }
 
 bool wxGUIAppTraitsBase::ShowAssertDialog(const wxString& msg)
@@ -515,7 +515,7 @@ bool wxGUIAppTraitsBase::ShowAssertDialog(const wxString& msg)
 #endif // wxUSE_STACKWALKER
 
 #if wxUSE_RICHMSGDLG
-        wxRichMessageDialog dlg(NULL, msgDlg, caption, flags);
+        wxRichMessageDialog dlg(nullptr, msgDlg, caption, flags);
 
         dlg.SetYesNoLabels("Stop", "Continue");
 

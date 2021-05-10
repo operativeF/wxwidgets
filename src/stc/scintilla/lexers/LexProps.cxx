@@ -183,7 +183,7 @@ static void FoldPropsDoc(Sci_PositionU startPos, Sci_Position length, int, WordL
 }
 
 static const char *const emptyWordListDesc[] = {
-	0
+	nullptr
 };
 
 LexerModule lmProps(SCLEX_PROPERTIES, ColourisePropsDoc, "props", FoldPropsDoc, emptyWordListDesc);

@@ -38,7 +38,7 @@ LexerModule::LexerModule(int language_,
 	language(language_),
 	fnLexer(fnLexer_),
 	fnFolder(fnFolder_),
-	fnFactory(0),
+	fnFactory(nullptr),
 	wordListDescriptions(wordListDescriptions_),
 	languageName(languageName_) {
 }
@@ -48,15 +48,15 @@ LexerModule::LexerModule(int language_,
 	const char *languageName_,
 	const char * const wordListDescriptions_[]) :
 	language(language_),
-	fnLexer(0),
-	fnFolder(0),
+	fnLexer(nullptr),
+	fnFolder(nullptr),
 	fnFactory(fnFactory_),
 	wordListDescriptions(wordListDescriptions_),
 	languageName(languageName_) {
 }
 
 int LexerModule::GetNumWordLists() const {
-	if (wordListDescriptions == NULL) {
+	if (wordListDescriptions == nullptr) {
 		return -1;
 	} else {
 		int numWordLists = 0;

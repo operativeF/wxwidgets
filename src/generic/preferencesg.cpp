@@ -197,7 +197,7 @@ class wxModalPreferencesEditorImpl : public wxGenericPreferencesEditorImplBase
 public:
     wxModalPreferencesEditorImpl()
     {
-        m_dlg = NULL;
+        m_dlg = nullptr;
         m_currentPage = -1;
     }
 
@@ -224,7 +224,7 @@ public:
         if ( m_dlg )
         {
             m_dlg->EndModal(wxID_CANCEL);
-            m_dlg = NULL;
+            m_dlg = nullptr;
         }
     }
 

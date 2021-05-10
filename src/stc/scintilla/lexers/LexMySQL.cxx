@@ -570,7 +570,7 @@ static const char * const mysqlWordListDesc[] = {
 	"User Keywords 1",
 	"User Keywords 2",
 	"User Keywords 3",
-	0
+	nullptr
 };
 
 LexerModule lmMySQL(SCLEX_MYSQL, ColouriseMySQLDoc, "mysql", FoldMySQLDoc, mysqlWordListDesc);

@@ -177,7 +177,7 @@ bool wxGetFullHostName(wxChar *buf, int maxSize)
 
                         struct hostent *pHostEnt = pfngethostbyname
                                                     ? pfngethostbyname(bufA)
-                                                    : NULL;
+                                                    : nullptr;
 
                         if ( pHostEnt )
                         {
@@ -187,7 +187,7 @@ bool wxGetFullHostName(wxChar *buf, int maxSize)
                             pHostEnt = pfngethostbyaddr
                                         ? pfngethostbyaddr(pHostEnt->h_addr,
                                                            4, AF_INET)
-                                        : NULL;
+                                        : nullptr;
                         }
 
                         if ( pHostEnt )
@@ -360,18 +360,18 @@ const wxChar* wxGetHomeDir(wxString *pstr)
     // have unix utilities on them, we should use that.
     const wxChar *szHome = wxGetenv(wxT("HOME"));
 
-    if ( szHome != NULL )
+    if ( szHome != nullptr )
     {
         strDir = szHome;
     }
     else // no HOME, try HOMEDRIVE/PATH
     {
         szHome = wxGetenv(wxT("HOMEDRIVE"));
-        if ( szHome != NULL )
+        if ( szHome != nullptr )
             strDir << szHome;
         szHome = wxGetenv(wxT("HOMEPATH"));
 
-        if ( szHome != NULL )
+        if ( szHome != nullptr )
         {
             strDir << szHome;
 
@@ -392,7 +392,7 @@ const wxChar* wxGetHomeDir(wxString *pstr)
         // Windows NT, 2000 and XP, we should use that as our home directory.
         szHome = wxGetenv(wxT("USERPROFILE"));
 
-        if ( szHome != NULL )
+        if ( szHome != nullptr )
             strDir = szHome;
     }
 
@@ -405,7 +405,7 @@ const wxChar* wxGetHomeDir(wxString *pstr)
     else // fall back to the program directory
     {
         // extract the directory component of the program file name
-        wxFileName::SplitPath(wxGetFullModuleName(), &strDir, NULL, NULL);
+        wxFileName::SplitPath(wxGetFullModuleName(), &strDir, nullptr, nullptr);
     }
 #endif  // UNIX/Win
 
@@ -435,7 +435,7 @@ bool wxGetDiskSpace(const wxString& path,
     if ( !::GetDiskFreeSpaceEx(path.t_str(),
                                &bytesFree,
                                &bytesTotal,
-                               NULL) )
+                               nullptr) )
     {
         wxLogLastError(wxT("GetDiskFreeSpaceEx"));
 
@@ -474,7 +474,7 @@ bool wxGetEnv(const wxString& var,
               wxString *value)
 {
     // first get the size of the buffer
-    DWORD dwRet = ::GetEnvironmentVariable(var.t_str(), NULL, 0);
+    DWORD dwRet = ::GetEnvironmentVariable(var.t_str(), nullptr, 0);
     if ( !dwRet )
     {
         // this means that there is no such variable
@@ -531,7 +531,7 @@ bool wxSetEnv(const wxString& variable, const wxString& value)
 
 bool wxUnsetEnv(const wxString& variable)
 {
-    return wxDoSetEnv(variable, NULL);
+    return wxDoSetEnv(variable, nullptr);
 }
 
 // ----------------------------------------------------------------------------
@@ -541,7 +541,7 @@ bool wxUnsetEnv(const wxString& variable)
 // structure used to pass parameters from wxKill() to wxEnumFindByPidProc()
 struct wxFindByPidParams
 {
-    wxFindByPidParams() { hwnd = 0; pid = 0; }
+    wxFindByPidParams() { hwnd = nullptr; pid = 0; }
 
     // the HWND used to return the result
     HWND hwnd;
@@ -586,7 +586,7 @@ int wxKill(long pid, wxSignal sig, wxKillError *krc, int flags)
         dwAccess |= PROCESS_TERMINATE;
 
     HANDLE hProcess = ::OpenProcess(dwAccess, FALSE, (DWORD)pid);
-    if ( hProcess == NULL )
+    if ( hProcess == nullptr )
     {
         if ( krc )
         {
@@ -835,7 +835,7 @@ bool wxShutdown(int flags)
         TOKEN_PRIVILEGES tkp;
 
         // Get the LUID for the shutdown privilege.
-        bOK = ::LookupPrivilegeValue(NULL, SE_SHUTDOWN_NAME,
+        bOK = ::LookupPrivilegeValue(nullptr, SE_SHUTDOWN_NAME,
                                         &tkp.Privileges[0].Luid) != 0;
 
         if ( bOK )
@@ -845,7 +845,7 @@ bool wxShutdown(int flags)
 
             // Get the shutdown privilege for this process.
             ::AdjustTokenPrivileges(hToken, FALSE, &tkp, 0,
-                                    (PTOKEN_PRIVILEGES)NULL, 0);
+                                    (PTOKEN_PRIVILEGES)nullptr, nullptr);
 
             // Cannot test the return value of AdjustTokenPrivileges.
             bOK = ::GetLastError() == ERROR_SUCCESS;
@@ -969,7 +969,7 @@ wxLoadUserResource(const wxString& resourceName,
     const void *data;
     size_t len;
     if ( !wxLoadUserResource(&data, &len, resourceName, resourceType, instance) )
-        return NULL;
+        return nullptr;
 
     char *s = new char[len + 1];
     memcpy(s, data, len);
@@ -1540,11 +1540,11 @@ extern long wxCharsetToCodepage(const char *name)
 extern "C" WXDLLIMPEXP_BASE HWND
 wxCreateHiddenWindow(LPCTSTR *pclassname, LPCTSTR classname, WNDPROC wndproc)
 {
-    wxCHECK_MSG( classname && pclassname && wndproc, NULL,
+    wxCHECK_MSG( classname && pclassname && wndproc, nullptr,
                     wxT("NULL parameter in wxCreateHiddenWindow") );
 
     // register the class fi we need to first
-    if ( *pclassname == NULL )
+    if ( *pclassname == nullptr )
     {
         WNDCLASS wndclass;
         wxZeroMemory(wndclass);
@@ -1557,7 +1557,7 @@ wxCreateHiddenWindow(LPCTSTR *pclassname, LPCTSTR classname, WNDPROC wndproc)
         {
             wxLogLastError(wxT("RegisterClass() in wxCreateHiddenWindow"));
 
-            return NULL;
+            return nullptr;
         }
 
         *pclassname = classname;
@@ -1567,13 +1567,13 @@ wxCreateHiddenWindow(LPCTSTR *pclassname, LPCTSTR classname, WNDPROC wndproc)
     HWND hwnd = ::CreateWindow
                   (
                     *pclassname,
-                    NULL,
+                    nullptr,
                     0, 0, 0, 0,
                     0,
-                    (HWND) NULL,
-                    (HMENU)NULL,
+                    (HWND) nullptr,
+                    (HMENU)nullptr,
                     wxGetInstance(),
-                    (LPVOID) NULL
+                    (LPVOID) nullptr
                   );
 
     if ( !hwnd )

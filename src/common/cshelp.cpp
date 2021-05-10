@@ -290,7 +290,7 @@ void wxContextHelpButton::OnContextHelp(wxCommandEvent& WXUNUSED(event))
 // wxHelpProvider
 // ----------------------------------------------------------------------------
 
-wxHelpProvider *wxHelpProvider::ms_helpProvider = NULL;
+wxHelpProvider *wxHelpProvider::ms_helpProvider = nullptr;
 
 // trivial implementation of some methods which we don't want to make pure
 // virtual for convenience
@@ -395,13 +395,13 @@ bool wxSimpleHelpProvider::ShowHelp(wxWindowBase *window)
 #endif // wxUSE_MS_HTML_HELP
         {
 #if wxUSE_TIPWINDOW
-            static wxTipWindow* s_tipWindow = NULL;
+            static wxTipWindow* s_tipWindow = nullptr;
 
             if ( s_tipWindow )
             {
                 // Prevent s_tipWindow being nulled in OnIdle, thereby removing
                 // the chance for the window to be closed by ShowHelp
-                s_tipWindow->SetTipWindowPtr(NULL);
+                s_tipWindow->SetTipWindowPtr(nullptr);
                 s_tipWindow->Close();
             }
 
@@ -492,7 +492,7 @@ void wxHelpProviderModule::OnExit()
     if (wxHelpProvider::Get())
     {
         delete wxHelpProvider::Get();
-        wxHelpProvider::Set(NULL);
+        wxHelpProvider::Set(nullptr);
     }
 }
 

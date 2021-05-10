@@ -362,8 +362,8 @@ static const char *const tclWordListDesc[] = {
 	"user2",
 	"user3",
 	"user4",
-	0
+	nullptr
 };
 
 // this code supports folding in the colourizer
-LexerModule lmTCL(SCLEX_TCL, ColouriseTCLDoc, "tcl", 0, tclWordListDesc);
+LexerModule lmTCL(SCLEX_TCL, ColouriseTCLDoc, "tcl", nullptr, tclWordListDesc);

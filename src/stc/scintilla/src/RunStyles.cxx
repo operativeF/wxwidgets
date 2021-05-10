@@ -76,9 +76,9 @@ RunStyles::RunStyles() {
 
 RunStyles::~RunStyles() {
 	delete starts;
-	starts = NULL;
+	starts = nullptr;
 	delete styles;
-	styles = NULL;
+	styles = nullptr;
 }
 
 int RunStyles::Length() const {
@@ -200,9 +200,9 @@ void RunStyles::InsertSpace(int position, int insertLength) {
 
 void RunStyles::DeleteAll() {
 	delete starts;
-	starts = NULL;
+	starts = nullptr;
 	delete styles;
-	styles = NULL;
+	styles = nullptr;
 	starts = new Partitioning(8);
 	styles = new SplitVector<int>();
 	styles->InsertValue(0, 2, 0);

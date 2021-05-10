@@ -371,7 +371,7 @@ struct OptionsPerl {
 
 static const char *const perlWordListDesc[] = {
 	"Keywords",
-	0
+	nullptr
 };
 
 struct OptionSetPerl : public OptionSet<OptionsPerl> {
@@ -439,7 +439,7 @@ public:
 	void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
 
 	void *SCI_METHOD PrivateCall(int, void *) {
-		return 0;
+		return nullptr;
 	}
 
 	static ILexer *LexerFactoryPerl() {
@@ -457,7 +457,7 @@ Sci_Position SCI_METHOD LexerPerl::PropertySet(const char *key, const char *val)
 }
 
 Sci_Position SCI_METHOD LexerPerl::WordListSet(int n, const char *wl) {
-	WordList *wordListN = 0;
+	WordList *wordListN = nullptr;
 	switch (n) {
 	case 0:
 		wordListN = &keywords;

@@ -296,11 +296,11 @@ namespace {
 }
 static const char * const BibTeXWordLists[] = {
             "Entry Names",
-            0,
+            nullptr,
 };
 
 
-LexerModule lmBibTeX(SCLEX_BIBTEX, ColorizeBibTeX, "bib", 0, BibTeXWordLists);
+LexerModule lmBibTeX(SCLEX_BIBTEX, ColorizeBibTeX, "bib", nullptr, BibTeXWordLists);
 
 // Entry Names
 //    article, book, booklet, conference, inbook,

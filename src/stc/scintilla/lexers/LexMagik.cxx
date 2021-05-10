@@ -320,7 +320,7 @@ static const char * const magikWordListDesc[] = {
     "Flow (if, then, elif, else)",
     "Characters (space, tab, newline, return)",
     "Fold Containers (method, proc, block, if, loop)",
-    0};
+    nullptr};
 
 /**
  * This function detects keywords which are able to have a body. Note that it

@@ -758,14 +758,14 @@ wxDbgHelpDLL::CallSymInitialize(HANDLE hProcess, BOOL fInvadeProcess)
 #ifdef UNICODE
     if ( SymInitializeW )
     {
-        if ( SymInitializeW(hProcess, NULL, fInvadeProcess) )
+        if ( SymInitializeW(hProcess, nullptr, fInvadeProcess) )
             return TRUE;
     }
 #endif // UNICODE
 
     if ( SymInitialize )
     {
-        if ( SymInitialize(hProcess, NULL, fInvadeProcess) )
+        if ( SymInitialize(hProcess, nullptr, fInvadeProcess) )
             return TRUE;
     }
 
@@ -914,7 +914,7 @@ wxDbgHelpDLL::CallSymEnumSymbols(HANDLE hProcess,
 #ifdef UNICODE
     if ( SymEnumSymbolsW )
     {
-        if ( SymEnumSymbolsW(hProcess, baseOfDll, NULL, callback, callbackParam) )
+        if ( SymEnumSymbolsW(hProcess, baseOfDll, nullptr, callback, callbackParam) )
             return TRUE;
     }
 
@@ -922,7 +922,7 @@ wxDbgHelpDLL::CallSymEnumSymbols(HANDLE hProcess,
     {
         wxEnumSymbolsCallbackBridge br(callback, callbackParam);
 
-        if ( SymEnumSymbols(hProcess, baseOfDll, NULL, wxEnumSymbolsCallback, &br) )
+        if ( SymEnumSymbols(hProcess, baseOfDll, nullptr, wxEnumSymbolsCallback, &br) )
             return TRUE;
     }
 #else // !UNICODE

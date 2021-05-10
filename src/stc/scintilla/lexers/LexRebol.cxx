@@ -318,7 +318,7 @@ static void FoldRebolDoc(Sci_PositionU startPos, Sci_Position length, int /* ini
 
 static const char * const rebolWordListDesc[] = {
 	"Keywords",
-	0
+	nullptr
 };
 
 LexerModule lmREBOL(SCLEX_REBOL, ColouriseRebolDoc, "rebol", FoldRebolDoc, rebolWordListDesc);

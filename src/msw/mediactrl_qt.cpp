@@ -215,7 +215,7 @@ public:
     wxDL_VOIDMETHOD_DEFINE( MoviesTask, (Movie m, long maxms), (m, maxms) )
     wxDL_VOIDMETHOD_DEFINE( BlockMove,
         (const char* p1, const char* p2, long s), (p1,p2,s) )
-    wxDL_METHOD_DEFINE( Handle, NewHandleClear, (long s), (s), NULL )
+    wxDL_METHOD_DEFINE( Handle, NewHandleClear, (long s), (s), nullptr )
 
     wxDL_METHOD_DEFINE( OSErr, NewMovieFromDataRef,
                            (Movie * m, short flags, short * id,
@@ -226,24 +226,24 @@ public:
     wxDL_VOIDMETHOD_DEFINE( GetMovieNaturalBoundsRect, (Movie m, Rect* r), (m,r) )
     wxDL_METHOD_DEFINE( void*, GetMovieIndTrackType,
                         (Movie m, long index, OSType type, long flags),
-                        (m,index,type,flags), NULL )
+                        (m,index,type,flags), nullptr )
     wxDL_VOIDMETHOD_DEFINE( CreatePortAssociation,
             (void* hWnd, void* junk, long morejunk), (hWnd, junk, morejunk) )
-    wxDL_METHOD_DEFINE(void*, GetNativeWindowPort, (void* hWnd), (hWnd), NULL)
+    wxDL_METHOD_DEFINE(void*, GetNativeWindowPort, (void* hWnd), (hWnd), nullptr)
     wxDL_VOIDMETHOD_DEFINE(SetMovieGWorld, (Movie m, CGrafPtr port, void* whatever),
                             (m, port, whatever) )
     wxDL_VOIDMETHOD_DEFINE(DisposeMovie, (Movie m), (m) )
     wxDL_VOIDMETHOD_DEFINE(SetMovieBox, (Movie m, Rect* r), (m,r))
     wxDL_VOIDMETHOD_DEFINE(SetMovieTimeScale, (Movie m, long s), (m,s))
     wxDL_METHOD_DEFINE(long, GetMovieDuration, (Movie m), (m), 0)
-    wxDL_METHOD_DEFINE(TimeBase, GetMovieTimeBase, (Movie m), (m), 0)
+    wxDL_METHOD_DEFINE(TimeBase, GetMovieTimeBase, (Movie m), (m), nullptr)
     wxDL_METHOD_DEFINE(TimeScale, GetMovieTimeScale, (Movie m), (m), 0)
     wxDL_METHOD_DEFINE(long, GetMovieTime, (Movie m, void* cruft), (m,cruft), 0)
     wxDL_VOIDMETHOD_DEFINE(SetMovieTime, (Movie m, TimeRecord* tr), (m,tr) )
     wxDL_METHOD_DEFINE(short, GetMovieVolume, (Movie m), (m), 0)
     wxDL_VOIDMETHOD_DEFINE(SetMovieVolume, (Movie m, short sVolume), (m,sVolume) )
     wxDL_VOIDMETHOD_DEFINE(SetMovieTimeValue, (Movie m, long s), (m,s))
-    wxDL_METHOD_DEFINE(ComponentInstance, NewMovieController, (Movie m, const Rect* mr, long fl), (m,mr,fl), 0)
+    wxDL_METHOD_DEFINE(ComponentInstance, NewMovieController, (Movie m, const Rect* mr, long fl), (m,mr,fl), nullptr)
     wxDL_VOIDMETHOD_DEFINE(DisposeMovieController, (ComponentInstance ci), (ci))
     wxDL_METHOD_DEFINE(int, MCSetVisible, (ComponentInstance m, int b), (m, b), 0)
 
@@ -251,9 +251,9 @@ public:
     wxDL_VOIDMETHOD_DEFINE(PrerollMovie, (Movie m, long t, Fixed r), (m,t,r) )
     wxDL_METHOD_DEFINE(Fixed, GetMoviePreferredRate, (Movie m), (m), 0)
     wxDL_METHOD_DEFINE(long, GetMovieLoadState, (Movie m), (m), 0)
-    wxDL_METHOD_DEFINE(void*, NewRoutineDescriptor, (WXFARPROC f, int l, void* junk), (f, l, junk), 0)
+    wxDL_METHOD_DEFINE(void*, NewRoutineDescriptor, (WXFARPROC f, int l, void* junk), (f, l, junk), nullptr)
     wxDL_VOIDMETHOD_DEFINE(DisposeRoutineDescriptor, (void* f), (f))
-    wxDL_METHOD_DEFINE(void*, GetCurrentArchitecture, (), (), 0)
+    wxDL_METHOD_DEFINE(void*, GetCurrentArchitecture, (), (), nullptr)
     wxDL_METHOD_DEFINE(int, MCDoAction, (ComponentInstance ci, long f, void* p), (ci,f,p), 0)
     wxDL_VOIDMETHOD_DEFINE(MCSetControllerBoundsRect, (ComponentInstance ci, Rect* r), (ci,r))
     wxDL_VOIDMETHOD_DEFINE(DestroyPortAssociation, (CGrafPtr g), (g))
@@ -575,9 +575,9 @@ LRESULT CALLBACK wxQTMediaBackend::QTWndProc(HWND hWnd, UINT nMsg,
 // Sets m_timer to NULL signifying we havn't loaded anything yet
 //---------------------------------------------------------------------------
 wxQTMediaBackend::wxQTMediaBackend()
-: m_movie(NULL), m_bPlaying(false), m_timer(NULL), m_pMC(NULL)
+: m_movie(nullptr), m_bPlaying(false), m_timer(nullptr), m_pMC(nullptr)
 {
-    m_evthandler = NULL;
+    m_evthandler = nullptr;
 }
 
 //---------------------------------------------------------------------------
@@ -662,7 +662,7 @@ bool wxQTMediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
 
     // Create a port association for our window so we
     // can use it as a WindowRef
-    m_lib.CreatePortAssociation(m_ctrl->GetHWND(), NULL, 0L);
+    m_lib.CreatePortAssociation(m_ctrl->GetHWND(), nullptr, 0L);
 
     // Part of a suggestion from Greg Hazel
     // to repaint movie when idle
@@ -712,7 +712,7 @@ bool wxQTMediaBackend::Load(const wxString& fileName)
                    &movieResID,
                    movieName,
                    newMovieActive,
-                   NULL ); // wasChanged
+                   nullptr ); // wasChanged
         result = (err == noErr /*&& m_lib.GetMoviesStickyError() == noErr*/);
 
         // check m_lib.GetMoviesStickyError() because it may not find the
@@ -746,7 +746,7 @@ void wxQTMediaBackend::PPRMProc (Movie theMovie,
 
     wxQTMediaBackend* pBE = (wxQTMediaBackend*) theRefCon;
 
-    long lTime = pBE->m_lib.GetMovieTime(theMovie,NULL);
+    long lTime = pBE->m_lib.GetMovieTime(theMovie,nullptr);
     Fixed rate = pBE->m_lib.GetMoviePreferredRate(theMovie);
     pBE->m_lib.PrerollMovie(theMovie, lTime, rate);
     pBE->m_timer = new wxQTLoadTimer(pBE->m_movie, pBE, &pBE->m_lib);
@@ -780,7 +780,7 @@ bool wxQTMediaBackend::Load(const wxURI& location)
     OSErr err = m_lib.NewMovieFromDataRef(&m_movie, newMovieActive |
                                                     newMovieAsyncOK
                                                     /* | newMovieIdleImportOK */,
-                                NULL, theHandle,
+                                nullptr, theHandle,
                                 URLDataHandlerSubType);
 
     m_lib.DisposeHandle(theHandle);
@@ -790,7 +790,7 @@ bool wxQTMediaBackend::Load(const wxURI& location)
         long timeNow;
         Fixed playRate;
 
-        timeNow = m_lib.GetMovieTime(m_movie, NULL);
+        timeNow = m_lib.GetMovieTime(m_movie, nullptr);
         wxASSERT(m_lib.GetMoviesError() == noErr);
 
         playRate = m_lib.GetMoviePreferredRate(m_movie);
@@ -857,7 +857,7 @@ void wxQTMediaBackend::FinishLoad()
     {
         m_lib.SetMovieGWorld(m_movie,
                        (CGrafPtr) m_lib.GetNativeWindowPort(m_ctrl->GetHWND()),
-                       NULL);
+                       nullptr);
     }
 
     // Set the movie to millisecond precision
@@ -977,7 +977,7 @@ bool wxQTMediaBackend::SetPosition(wxLongLong where)
 //---------------------------------------------------------------------------
 wxLongLong wxQTMediaBackend::GetPosition()
 {
-    return m_lib.GetMovieTime(m_movie, NULL);
+    return m_lib.GetMovieTime(m_movie, nullptr);
 }
 
 //---------------------------------------------------------------------------
@@ -1073,11 +1073,11 @@ void wxQTMediaBackend::Cleanup()
         Point thePoint;
         thePoint.h = thePoint.v = 0;
         m_lib.MCSetVisible(m_pMC, false);
-        m_lib.MCSetMovie(m_pMC, NULL, NULL, thePoint);
+        m_lib.MCSetMovie(m_pMC, nullptr, nullptr, thePoint);
     }
 
     m_lib.DisposeMovie(m_movie);
-    m_movie = NULL;
+    m_movie = nullptr;
 }
 
 //---------------------------------------------------------------------------
@@ -1092,7 +1092,7 @@ bool wxQTMediaBackend::ShowPlayerControls(wxMediaCtrlPlayerControls flags)
         // restore old wndproc
         wxSetWindowProc((HWND)m_ctrl->GetHWND(), wxWndProc);
         m_lib.DisposeMovieController(m_pMC);
-        m_pMC = NULL;
+        m_pMC = nullptr;
 
         // movie controller height
         m_bestSize.y -= 16;

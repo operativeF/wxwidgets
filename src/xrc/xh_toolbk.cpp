@@ -30,7 +30,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxToolbookXmlHandler, wxXmlResourceHandler);
 wxToolbookXmlHandler::wxToolbookXmlHandler()
                      :wxXmlResourceHandler(),
                       m_isInside(false),
-                      m_toolbook(NULL)
+                      m_toolbook(nullptr)
 {
     XRC_ADD_STYLE(wxBK_DEFAULT);
     XRC_ADD_STYLE(wxBK_TOP);
@@ -57,7 +57,7 @@ wxObject *wxToolbookXmlHandler::DoCreateResource()
         {
             bool old_ins = m_isInside;
             m_isInside = false;
-            wxObject *item = CreateResFromNode(n, m_toolbook, NULL);
+            wxObject *item = CreateResFromNode(n, m_toolbook, nullptr);
             m_isInside = old_ins;
             wxWindow *wnd = wxDynamicCast(item, wxWindow);
 
@@ -69,7 +69,7 @@ wxObject *wxToolbookXmlHandler::DoCreateResource()
                 {
                     wxBitmap bmp = GetBitmap(wxT("bitmap"), wxART_OTHER);
                     wxImageList *imgList = m_toolbook->GetImageList();
-                    if ( imgList == NULL )
+                    if ( imgList == nullptr )
                     {
                         imgList = new wxImageList( bmp.GetWidth(), bmp.GetHeight() );
                         m_toolbook->AssignImageList( imgList );
@@ -101,7 +101,7 @@ wxObject *wxToolbookXmlHandler::DoCreateResource()
         else
         {
             ReportError("toolbookpage must have a window child");
-            return NULL;
+            return nullptr;
         }
     }
 

@@ -195,7 +195,7 @@ static void FoldPlmDoc(Sci_PositionU startPos,
 
 static const char *const plmWordListDesc[] = {
 	"Keywords",
-	0
+	nullptr
 };
 
 LexerModule lmPLM(SCLEX_PLM, ColourisePlmDoc, "PL/M", FoldPlmDoc, plmWordListDesc);

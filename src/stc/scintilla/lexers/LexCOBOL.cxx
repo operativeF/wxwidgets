@@ -375,7 +375,7 @@ static const char * const COBOLWordListDesc[] = {
     "A Keywords",
     "B Keywords",
     "Extended Keywords",
-    0
+    nullptr
 };
 
 LexerModule lmCOBOL(SCLEX_COBOL, ColouriseCOBOLDoc, "COBOL", FoldCOBOLDoc, COBOLWordListDesc);

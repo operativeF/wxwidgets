@@ -196,7 +196,7 @@ static const char * const STTXTWordListDesc[] = {
 	"FB",
 	"Local_Var",
 	"Local_Pragma",
-	0
+	nullptr
 };
 
 static bool IsCommentLine(Sci_Position line, Accessor &styler, bool type)

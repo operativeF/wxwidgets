@@ -152,7 +152,7 @@ private:
 
 wxFontMapper::wxFontMapper()
 {
-    m_windowParent = NULL;
+    m_windowParent = nullptr;
 }
 
 wxFontMapper::~wxFontMapper()

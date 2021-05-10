@@ -80,7 +80,7 @@ static inline bool IsPrefixedNumberStart(int ch, int chNext) {
 }
 
 static inline bool IsOperator(int ch) {
-	return strchr("%^&*()-+={}[]:;<>,/?!.~|\\", ch) != NULL;
+	return strchr("%^&*()-+={}[]:;<>,/?!.~|\\", ch) != nullptr;
 }
 
 // ---------------------------------------------------------------
@@ -542,7 +542,7 @@ static const char * const oscriptWordListDesc[] = {
 	"Built-in value and reference types",
 	"Built-in global functions",
 	"Built-in static objects",
-	0
+	nullptr
 };
 
 LexerModule lmOScript(SCLEX_OSCRIPT, ColouriseOScriptDoc, "oscript", FoldOScriptDoc, oscriptWordListDesc);

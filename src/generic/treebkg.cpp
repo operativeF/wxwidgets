@@ -268,7 +268,7 @@ bool wxTreebook::DeletePage(size_t pagePos)
 wxTreebookPage *wxTreebook::DoRemovePage(size_t pagePos)
 {
     wxTreeItemId pageId = DoInternalGetPage(pagePos);
-    wxCHECK_MSG( pageId.IsOk(), NULL, wxT("Invalid tree index") );
+    wxCHECK_MSG( pageId.IsOk(), nullptr, wxT("Invalid tree index") );
 
     wxTreebookPage * oldPage = GetPage(pagePos);
     wxTreeCtrl *tree = GetTreeCtrl();

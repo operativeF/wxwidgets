@@ -147,7 +147,7 @@ static void FoldDiffDoc(Sci_PositionU startPos, Sci_Position length, int, WordLi
 }
 
 static const char *const emptyWordListDesc[] = {
-	0
+	nullptr
 };
 
 LexerModule lmDiff(SCLEX_DIFF, ColouriseDiffDoc, "diff", FoldDiffDoc, emptyWordListDesc);

@@ -228,7 +228,7 @@ wxSizerItem::wxSizerItem(wxSizer *sizer,
                          int border,
                          wxObject* userData)
            : m_kind(Item_None),
-             m_sizer(NULL),
+             m_sizer(nullptr),
              m_proportion(proportion),
              m_border(border),
              m_flag(flag),
@@ -286,7 +286,7 @@ wxSizerItem::wxSizerItem(int width,
                          int border,
                          wxObject* userData)
            : m_kind(Item_None),
-             m_sizer(NULL),
+             m_sizer(nullptr),
              m_minSize(width, height), // minimal size is the initial size
              m_proportion(proportion),
              m_border(border),
@@ -313,7 +313,7 @@ void wxSizerItem::Free()
             break;
 
         case Item_Window:
-            m_window->SetContainingSizer(NULL);
+            m_window->SetContainingSizer(nullptr);
             break;
 
         case Item_Sizer:
@@ -587,7 +587,7 @@ void wxSizerItem::DeleteWindows()
             //We are deleting the window from this sizer - normally
             //the window destroys the sizer associated with it,
             //which might destroy this, which we don't want
-            m_window->SetContainingSizer(NULL);
+            m_window->SetContainingSizer(nullptr);
             m_window->Destroy();
             //Putting this after the switch will result in a spacer
             //not being deleted properly on destruction
@@ -907,7 +907,7 @@ bool wxSizer::Replace( size_t old, wxSizerItem *newitem )
     node->SetData(newitem);
 
     if (wxWindow* const w = item->GetWindow())
-        w->SetContainingSizer(NULL);
+        w->SetContainingSizer(nullptr);
 
     delete item;
 
@@ -926,7 +926,7 @@ void wxSizer::Clear( bool delete_windows )
         wxSizerItem     *item = node->GetData();
 
         if (item->IsWindow())
-            item->GetWindow()->SetContainingSizer( NULL );
+            item->GetWindow()->SetContainingSizer( nullptr );
         node = node->GetNext();
     }
 
@@ -1217,7 +1217,7 @@ wxSizerItem* wxSizer::GetItem( wxWindow *window, bool recursive )
         node = node->GetNext();
     }
 
-    return NULL;
+    return nullptr;
 }
 
 wxSizerItem* wxSizer::GetItem( wxSizer *sizer, bool recursive )
@@ -1243,13 +1243,13 @@ wxSizerItem* wxSizer::GetItem( wxSizer *sizer, bool recursive )
         node = node->GetNext();
     }
 
-    return NULL;
+    return nullptr;
 }
 
 wxSizerItem* wxSizer::GetItem( size_t index )
 {
     wxCHECK_MSG( index < m_children.GetCount(),
-                 NULL,
+                 nullptr,
                  wxT("GetItem index is out of range") );
 
     return m_children.Item( index )->GetData();
@@ -1279,7 +1279,7 @@ wxSizerItem* wxSizer::GetItemById( int id, bool recursive )
         node = node->GetNext();
     }
 
-    return NULL;
+    return nullptr;
 }
 
 bool wxSizer::Show( wxWindow *window, bool show, bool recursive )
@@ -1960,7 +1960,7 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
             m_growableCols,
             m_colWidths,
             m_growMode == wxFLEX_GROWMODE_SPECIFIED ? &m_growableColsProportions
-                                                    : NULL
+                                                    : nullptr
         );
 
         // This gives nested objects that benefit from knowing one size
@@ -1988,7 +1988,7 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
                 m_growableCols,
                 m_colWidths,
                 m_growMode == wxFLEX_GROWMODE_SPECIFIED ? &m_growableColsProportions
-                                                        : NULL
+                                                        : nullptr
             );
         }
     }
@@ -2003,7 +2003,7 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
             m_growableRows,
             m_rowHeights,
             m_growMode == wxFLEX_GROWMODE_SPECIFIED ? &m_growableRowsProportions
-                                                    : NULL
+                                                    : nullptr
         );
     }
 }
@@ -2722,7 +2722,7 @@ bool wxStaticBoxSizer::Detach( wxWindow *window )
     // example)
     if ( window == m_staticBox )
     {
-        m_staticBox = NULL;
+        m_staticBox = nullptr;
         return true;
     }
 
@@ -2746,11 +2746,11 @@ wxStdDialogButtonSizer::wxStdDialogButtonSizer()
     if (is_pda)
         m_orient = wxVERTICAL;
 
-    m_buttonAffirmative = NULL;
-    m_buttonApply = NULL;
-    m_buttonNegative = NULL;
-    m_buttonCancel = NULL;
-    m_buttonHelp = NULL;
+    m_buttonAffirmative = nullptr;
+    m_buttonApply = nullptr;
+    m_buttonNegative = nullptr;
+    m_buttonCancel = nullptr;
+    m_buttonHelp = nullptr;
 }
 
 void wxStdDialogButtonSizer::AddButton(wxButton *mybutton)
@@ -2804,7 +2804,7 @@ void wxStdDialogButtonSizer::Realize()
     {
     public:
         TabOrderUpdater()
-            : m_lastAdded(NULL)
+            : m_lastAdded(nullptr)
         {
         }
 

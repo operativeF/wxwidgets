@@ -323,7 +323,7 @@ static void ColouriseMETAPOSTDoc(
 static const char * const metapostWordListDesc[] = {
 	"MetaPost",
 	"MetaFun",
-	0
+	nullptr
 } ;
 
 static int classifyFoldPointMetapost(const char* s,WordList *keywordlists[]) {

@@ -80,11 +80,11 @@ wxDragImage::~wxDragImage()
 
 void wxDragImage::Init()
 {
-    m_hImageList = 0;
+    m_hImageList = nullptr;
 #if !wxUSE_SIMPLER_DRAGIMAGE
-    m_hCursorImageList = 0;
+    m_hCursorImageList = nullptr;
 #endif
-    m_window = NULL;
+    m_window = nullptr;
     m_fullScreen = false;
 }
 
@@ -138,7 +138,7 @@ bool wxDragImage::Create(const wxBitmap& image, const wxCursor& cursor)
 {
     if ( m_hImageList )
         ImageList_Destroy(GetHimageList());
-    m_hImageList = 0;
+    m_hImageList = nullptr;
 
     UINT flags wxDUMMY_INITIALIZE(0) ;
     if (image.GetDepth() <= 4)
@@ -152,7 +152,7 @@ bool wxDragImage::Create(const wxBitmap& image, const wxCursor& cursor)
     else
         flags = ILC_COLOR32;
 
-    bool mask = (image.GetMask() != 0);
+    bool mask = (image.GetMask() != nullptr);
 
     // Curiously, even if the image doesn't have a mask,
     // we still have to use ILC_MASK or the image won't show
@@ -166,7 +166,7 @@ bool wxDragImage::Create(const wxBitmap& image, const wxCursor& cursor)
     if (!mask)
     {
         HBITMAP hBitmap1 = (HBITMAP) image.GetHBITMAP();
-        index = ImageList_Add(GetHimageList(), hBitmap1, 0);
+        index = ImageList_Add(GetHimageList(), hBitmap1, nullptr);
     }
     else
     {
@@ -191,7 +191,7 @@ bool wxDragImage::Create(const wxIcon& image, const wxCursor& cursor)
 {
     if ( m_hImageList )
         ImageList_Destroy(GetHimageList());
-    m_hImageList = 0;
+    m_hImageList = nullptr;
 
     UINT flags wxDUMMY_INITIALIZE(0) ;
     if (image.GetDepth() <= 4)
@@ -307,8 +307,8 @@ bool wxDragImage::Create(const wxListCtrl& listCtrl, long id)
 // Begin drag
 bool wxDragImage::BeginDrag(const wxPoint& hotspot, wxWindow* window, bool fullScreen, wxRect* rect)
 {
-    wxASSERT_MSG( (m_hImageList != 0), wxT("Image list must not be null in BeginDrag."));
-    wxASSERT_MSG( (window != 0), wxT("Window must not be null in BeginDrag."));
+    wxASSERT_MSG( (m_hImageList != nullptr), wxT("Image list must not be null in BeginDrag."));
+    wxASSERT_MSG( (window != nullptr), wxT("Window must not be null in BeginDrag."));
 
     m_fullScreen = fullScreen;
     if (rect)
@@ -403,7 +403,7 @@ bool wxDragImage::BeginDrag(const wxPoint& hotspot, wxWindow* window, wxWindow* 
 // End drag
 bool wxDragImage::EndDrag()
 {
-    wxASSERT_MSG( (m_hImageList != 0), wxT("Image list must not be null in EndDrag."));
+    wxASSERT_MSG( (m_hImageList != nullptr), wxT("Image list must not be null in EndDrag."));
 
     ImageList_EndDrag();
 
@@ -419,7 +419,7 @@ bool wxDragImage::EndDrag()
     ::ShowCursor(TRUE);
 #endif
 
-    m_window = NULL;
+    m_window = nullptr;
 
     return true;
 }
@@ -428,7 +428,7 @@ bool wxDragImage::EndDrag()
 // is non-NULL, or in screen coordinates if NULL.
 bool wxDragImage::Move(const wxPoint& pt)
 {
-    wxASSERT_MSG( (m_hImageList != 0), wxT("Image list must not be null in Move."));
+    wxASSERT_MSG( (m_hImageList != nullptr), wxT("Image list must not be null in Move."));
 
     // These are in window, not client coordinates.
     // So need to convert to client coordinates.
@@ -458,9 +458,9 @@ bool wxDragImage::Move(const wxPoint& pt)
 
 bool wxDragImage::Show()
 {
-    wxASSERT_MSG( (m_hImageList != 0), wxT("Image list must not be null in Show."));
+    wxASSERT_MSG( (m_hImageList != nullptr), wxT("Image list must not be null in Show."));
 
-    HWND hWnd = 0;
+    HWND hWnd = nullptr;
     if (m_window && !m_fullScreen)
         hWnd = (HWND) m_window->GetHWND();
 
@@ -471,9 +471,9 @@ bool wxDragImage::Show()
 
 bool wxDragImage::Hide()
 {
-    wxASSERT_MSG( (m_hImageList != 0), wxT("Image list must not be null in Hide."));
+    wxASSERT_MSG( (m_hImageList != nullptr), wxT("Image list must not be null in Hide."));
 
-    HWND hWnd = 0;
+    HWND hWnd = nullptr;
     if (m_window && !m_fullScreen)
         hWnd = (HWND) m_window->GetHWND();
 

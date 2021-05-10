@@ -311,7 +311,7 @@ static const char * const vbWordListDesc[] = {
 	"user1",
 	"user2",
 	"user3",
-	0
+	nullptr
 };
 
 LexerModule lmVB(SCLEX_VB, ColouriseVBNetDoc, "vb", FoldVBDoc, vbWordListDesc);

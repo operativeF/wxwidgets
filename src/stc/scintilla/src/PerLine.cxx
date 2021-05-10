@@ -25,7 +25,7 @@ using namespace Scintilla;
 #endif
 
 MarkerHandleSet::MarkerHandleSet() {
-	root = 0;
+	root = nullptr;
 }
 
 MarkerHandleSet::~MarkerHandleSet() {
@@ -35,7 +35,7 @@ MarkerHandleSet::~MarkerHandleSet() {
 		mhn = mhn->next;
 		delete mhnToFree;
 	}
-	root = 0;
+	root = nullptr;
 }
 
 int MarkerHandleSet::Length() const {
@@ -116,7 +116,7 @@ void MarkerHandleSet::CombineWith(MarkerHandleSet *other) {
 	}
 	*pmhn = root;
 	root = other->root;
-	other->root = 0;
+	other->root = nullptr;
 }
 
 LineMarkers::~LineMarkers() {
@@ -398,14 +398,14 @@ const char *LineAnnotation::Text(int line) const {
 	if (annotations.Length() && (line >= 0) && (line < annotations.Length()) && annotations[line])
 		return annotations[line]+sizeof(AnnotationHeader);
 	else
-		return 0;
+		return nullptr;
 }
 
 const unsigned char *LineAnnotation::Styles(int line) const {
 	if (annotations.Length() && (line >= 0) && (line < annotations.Length()) && annotations[line] && MultipleStyles(line))
 		return reinterpret_cast<unsigned char *>(annotations[line] + sizeof(AnnotationHeader) + Length(line));
 	else
-		return 0;
+		return nullptr;
 }
 
 static char *AllocateAnnotation(int length, int style) {

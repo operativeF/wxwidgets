@@ -276,7 +276,7 @@ RGBAImage *RGBAImageSet::Get(int ident) {
 	if (it != images.end()) {
 		return it->second;
 	}
-	return NULL;
+	return nullptr;
 }
 
 /// Give the largest height of the set.

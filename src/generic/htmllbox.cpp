@@ -71,7 +71,7 @@ public:
         for ( size_t n = 0; n < SIZE; n++ )
         {
             m_items[n] = (size_t)-1;
-            m_cells[n] = NULL;
+            m_cells[n] = nullptr;
         }
 
         m_next = 0;
@@ -103,11 +103,11 @@ public:
                 return m_cells[n];
         }
 
-        return NULL;
+        return nullptr;
     }
 
     // returns true if we already have this item cached
-    bool Has(size_t item) const { return Get(item) != NULL; }
+    bool Has(size_t item) const { return Get(item) != nullptr; }
 
     // ensure that the item is cached
     void Store(size_t item, wxHtmlCell *cell)
@@ -234,7 +234,7 @@ wxHtmlListBox::wxHtmlListBox(wxWindow *parent,
 
 void wxHtmlListBox::Init()
 {
-    m_htmlParser = NULL;
+    m_htmlParser = nullptr;
     m_htmlRendStyle = new wxHtmlListBoxStyle(*this);
     m_cache = new wxHtmlListBoxCache;
 }
@@ -313,7 +313,7 @@ wxHtmlCell* wxHtmlListBox::CreateCellForItem(size_t n) const
 
     wxHtmlContainerCell *cell = (wxHtmlContainerCell *)m_htmlParser->
             Parse(OnGetItemMarkup(n));
-    wxCHECK_MSG( cell, NULL, wxT("wxHtmlParser::Parse() returned NULL?") );
+    wxCHECK_MSG( cell, nullptr, wxT("wxHtmlParser::Parse() returned NULL?") );
 
     // set the cell's ID to item's index so that CellCoordsToPhysical()
     // can quickly find the item:

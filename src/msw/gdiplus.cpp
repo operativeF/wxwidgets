@@ -778,7 +778,7 @@ public:
         if ( m_hdll )
         {
             wxDynamicLibrary::Unload(m_hdll);
-            m_hdll = 0;
+            m_hdll = nullptr;
         }
 
         m_initialized = -1;
@@ -813,7 +813,7 @@ wxFOR_ALL_FUNCNAMES(wxINIT_GDIPLUS_FUNC)
 #undef wxINIT_GDIPLUS_FUNC
 
 int wxGdiPlus::m_initialized = -1;
-wxDllType wxGdiPlus::m_hdll = 0;
+wxDllType wxGdiPlus::m_hdll = nullptr;
 
 /* static */
 bool wxGdiPlus::DoInit()
@@ -876,7 +876,7 @@ extern "C"
 void* WINGDIPAPI
 GdipAlloc(size_t size)
 {
-    return wxGdiPlus::Initialize() ? wxGdiPlus::Alloc(size) : NULL;
+    return wxGdiPlus::Initialize() ? wxGdiPlus::Alloc(size) : nullptr;
 }
 
 void WINGDIPAPI

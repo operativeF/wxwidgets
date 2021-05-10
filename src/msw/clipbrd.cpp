@@ -474,7 +474,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxClipboard, wxObject);
 
 wxClipboard::wxClipboard()
 {
-    m_lastDataObject = NULL;
+    m_lastDataObject = nullptr;
     m_isOpened = false;
 }
 
@@ -498,13 +498,13 @@ void wxClipboard::Clear()
         HRESULT hr = OleIsCurrentClipboard(m_lastDataObject);
         if (S_OK == hr)
         {
-            hr = OleSetClipboard(NULL);
+            hr = OleSetClipboard(nullptr);
             if ( FAILED(hr) )
             {
                 wxLogApiError(wxT("OleSetClipboard(NULL)"), hr);
             }
         }
-        m_lastDataObject = NULL;
+        m_lastDataObject = nullptr;
     }
 #endif // wxUSE_OLE_CLIPBOARD
 }
@@ -516,7 +516,7 @@ bool wxClipboard::Flush()
     {
         // don't touch data set by other applications
         HRESULT hr = OleIsCurrentClipboard(m_lastDataObject);
-        m_lastDataObject = NULL;
+        m_lastDataObject = nullptr;
         if (S_OK == hr)
         {
             hr = OleFlushClipboard();
@@ -724,7 +724,7 @@ bool wxClipboard::GetData( wxDataObject& data )
         return false;
 
 #if wxUSE_OLE_CLIPBOARD
-    IDataObject *pDataObject = NULL;
+    IDataObject *pDataObject = nullptr;
     HRESULT hr = OleGetClipboard(&pDataObject);
     if ( FAILED(hr) || !pDataObject )
     {
@@ -810,7 +810,7 @@ bool wxClipboard::GetData( wxDataObject& data )
             continue;
 
         formatEtc.cfFormat = cf;
-        formatEtc.ptd      = NULL;
+        formatEtc.ptd      = nullptr;
         formatEtc.dwAspect = DVASPECT_CONTENT;
         formatEtc.lindex   = -1;
 

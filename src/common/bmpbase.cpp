@@ -179,7 +179,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapBaseModule, wxModule);
 
 wxBitmap::wxBitmap(const char* const* bits)
 {
-    wxCHECK2_MSG(bits != NULL, return, wxT("invalid bitmap data"));
+    wxCHECK2_MSG(bits != nullptr, return, wxT("invalid bitmap data"));
 
 #if wxUSE_IMAGE && wxUSE_XPM
     wxImage image(bits);

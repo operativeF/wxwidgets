@@ -292,7 +292,7 @@ wxPaintDCImpl::~wxPaintDCImpl()
     if ( m_hDC )
     {
         SelectOldObjects(m_hDC);
-        m_hDC = 0;
+        m_hDC = nullptr;
     }
 }
 
@@ -310,7 +310,7 @@ WXHDC wxPaintDCImpl::FindDCInCache(wxWindow* win)
 {
     wxPaintDCInfo* const info = FindInCache(win);
 
-    return info ? info->GetHDC() : 0;
+    return info ? info->GetHDC() : nullptr;
 }
 
 /* static */
@@ -359,5 +359,5 @@ wxPaintDCExImpl::wxPaintDCExImpl(wxDC *owner, wxWindow *window, WXHDC dc)
 wxPaintDCExImpl::~wxPaintDCExImpl()
 {
     // prevent the base class dtor from ReleaseDC()ing it again
-    m_hDC = 0;
+    m_hDC = nullptr;
 }

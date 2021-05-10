@@ -208,7 +208,7 @@ static const char * const csoundWordListDesc[] = {
 	"Opcodes",
 	"Header Statements",
 	"User keywords",
-	0
+	nullptr
 };
 
 LexerModule lmCsound(SCLEX_CSOUND, ColouriseCsoundDoc, "csound", FoldCsoundInstruments, csoundWordListDesc);

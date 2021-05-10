@@ -164,7 +164,7 @@ private:
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxTCPEventHandlerModule, wxModule);
 
-wxTCPEventHandler *wxTCPEventHandlerModule::ms_handler = NULL;
+wxTCPEventHandler *wxTCPEventHandlerModule::ms_handler = nullptr;
 
 // --------------------------------------------------------------------------
 // wxIPCSocketStreams
@@ -233,13 +233,13 @@ public:
     {
         Flush();
 
-        wxCHECK_MSG( conn, NULL, "NULL connection parameter" );
-        wxCHECK_MSG( size, NULL, "NULL size parameter" );
+        wxCHECK_MSG( conn, nullptr, "NULL connection parameter" );
+        wxCHECK_MSG( size, nullptr, "NULL size parameter" );
 
         *size = Read32();
 
         void * const data = conn->GetBufferAtLeast(*size);
-        wxCHECK_MSG( data, NULL, "IPC buffer allocation failed" );
+        wxCHECK_MSG( data, nullptr, "IPC buffer allocation failed" );
 
         m_socketStream.Read(data, *size);
 
@@ -250,7 +250,7 @@ public:
     void *
     ReadFormatData(wxConnectionBase *conn, wxIPCFormat *format, size_t *size)
     {
-        wxCHECK_MSG( format, NULL, "NULL format parameter" );
+        wxCHECK_MSG( format, nullptr, "NULL format parameter" );
 
         *format = static_cast<wxIPCFormat>(Read8());
 
@@ -372,7 +372,7 @@ wxConnectionBase *wxTCPClient::MakeConnection(const wxString& host,
 {
     wxSockAddress *addr = GetAddressFromName(serverName, host);
     if ( !addr )
-        return NULL;
+        return nullptr;
 
     wxSocketClient * const client = new wxSocketClient(wxSOCKET_WAITALL);
     wxIPCSocketStreams * const streams = new wxIPCSocketStreams(*client);
@@ -420,7 +420,7 @@ wxConnectionBase *wxTCPClient::MakeConnection(const wxString& host,
     delete streams;
     client->Destroy();
 
-    return NULL;
+    return nullptr;
 }
 
 wxConnectionBase *wxTCPClient::OnMakeConnection()
@@ -435,7 +435,7 @@ wxConnectionBase *wxTCPClient::OnMakeConnection()
 wxTCPServer::wxTCPServer()
            : wxServerBase()
 {
-    m_server = NULL;
+    m_server = nullptr;
 }
 
 bool wxTCPServer::Create(const wxString& serverName)
@@ -443,9 +443,9 @@ bool wxTCPServer::Create(const wxString& serverName)
     // Destroy previous server, if any
     if (m_server)
     {
-        m_server->SetClientData(NULL);
+        m_server->SetClientData(nullptr);
         m_server->Destroy();
-        m_server = NULL;
+        m_server = nullptr;
     }
 
     wxSockAddress *addr = GetAddressFromName(serverName);
@@ -497,7 +497,7 @@ bool wxTCPServer::Create(const wxString& serverName)
     if (!m_server->IsOk())
     {
         m_server->Destroy();
-        m_server = NULL;
+        m_server = nullptr;
 
         return false;
     }
@@ -515,7 +515,7 @@ wxTCPServer::~wxTCPServer()
 {
     if ( m_server )
     {
-        m_server->SetClientData(NULL);
+        m_server->SetClientData(nullptr);
         m_server->Destroy();
     }
 
@@ -542,8 +542,8 @@ wxTCPServer::OnAcceptConnection(const wxString& WXUNUSED(topic))
 
 void wxTCPConnection::Init()
 {
-    m_sock = NULL;
-    m_streams = NULL;
+    m_sock = nullptr;
+    m_streams = nullptr;
 }
 
 wxTCPConnection::~wxTCPConnection()
@@ -552,7 +552,7 @@ wxTCPConnection::~wxTCPConnection()
 
     if ( m_sock )
     {
-        m_sock->SetClientData(NULL);
+        m_sock->SetClientData(nullptr);
         m_sock->Destroy();
     }
 
@@ -606,13 +606,13 @@ const void *wxTCPConnection::Request(const wxString& item,
                                      wxIPCFormat format)
 {
     if ( !m_sock->IsConnected() )
-        return NULL;
+        return nullptr;
 
     IPCOutput(m_streams).Write(IPC_REQUEST, item, format);
 
     const int ret = m_streams->Read8();
     if ( ret != IPC_REQUEST_REPLY )
-        return NULL;
+        return nullptr;
 
     // ReadData() needs a non-NULL size pointer but the client code can call us
     // with NULL pointer (this makes sense if it knows that it always works
@@ -694,7 +694,7 @@ void wxTCPEventHandler::HandleDisconnect(wxTCPConnection *connection)
     // don't leave references to this soon-to-be-dangling connection in the
     // socket as it won't be destroyed immediately as its destruction will be
     // delayed in case there are more events pending for it
-    connection->m_sock->SetClientData(NULL);
+    connection->m_sock->SetClientData(nullptr);
 
     connection->SetConnected(false);
     connection->OnDisconnect();

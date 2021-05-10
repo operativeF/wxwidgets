@@ -187,7 +187,7 @@ static void FoldLotDoc(Sci_PositionU startPos, Sci_Position length, int, WordLis
 }
 
 static const char * const emptyWordListDesc[] = {
-	0
+	nullptr
 };
 
 LexerModule lmLot(SCLEX_LOT, ColourizeLotDoc, "lot", FoldLotDoc, emptyWordListDesc);

@@ -172,7 +172,7 @@ private:
     void Init()
     {
         m_isCompiled = false;
-        m_Matches = NULL;
+        m_Matches = nullptr;
         m_nMatches = 0;
     }
 
@@ -240,7 +240,7 @@ wxString wxRegExImpl::GetErrorMsg(int errorcode, bool badconv) const
     wxString szError;
 
     // first get the string length needed
-    int len = wx_regerror(errorcode, &m_RegEx, NULL, 0);
+    int len = wx_regerror(errorcode, &m_RegEx, nullptr, 0);
     if ( len > 0 )
     {
         char* szcmbError = new char[++len];
@@ -406,11 +406,11 @@ bool wxRegExImpl::Matches(const wxRegChar *str,
         self->m_Matches = new wxRegExMatches(m_nMatches);
     }
 
-    wxRegExMatches::match_type matches = m_Matches ? m_Matches->get() : NULL;
+    wxRegExMatches::match_type matches = m_Matches ? m_Matches->get() : nullptr;
 
     // do match it
 #if defined WXREGEX_USING_BUILTIN
-    int rc = wx_re_exec(&self->m_RegEx, str, len, NULL, m_nMatches, matches, flagsRE);
+    int rc = wx_re_exec(&self->m_RegEx, str, len, nullptr, m_nMatches, matches, flagsRE);
 #elif defined WXREGEX_USING_RE_SEARCH
     int rc = str ? ReSearch(&self->m_RegEx, str, len, matches, flagsRE) : REG_BADPAT;
 #else
@@ -621,7 +621,7 @@ int wxRegExImpl::Replace(wxString *text,
 
 void wxRegEx::Init()
 {
-    m_impl = NULL;
+    m_impl = nullptr;
 }
 
 wxRegEx::~wxRegEx()

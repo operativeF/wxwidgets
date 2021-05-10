@@ -313,7 +313,7 @@ static const char * const povWordLists[] = {
 	"User defined 1",
 	"User defined 2",
 	"User defined 3",
-	0,
+	nullptr,
 };
 
 LexerModule lmPOV(SCLEX_POV, ColourisePovDoc, "pov", FoldPovDoc, povWordLists);

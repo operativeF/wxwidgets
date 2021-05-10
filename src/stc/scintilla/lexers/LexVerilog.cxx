@@ -242,7 +242,7 @@ public:
 	void SCI_METHOD Lex(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
 	void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
 	void* SCI_METHOD PrivateCall(int, void*) {
-		return 0;
+		return nullptr;
 	}
 	int SCI_METHOD LineEndTypesSupported() {
 		return SC_LINE_END_TYPE_UNICODE;
@@ -286,7 +286,7 @@ public:
 };
 
 Sci_Position SCI_METHOD LexerVerilog::WordListSet(int n, const char *wl) {
-	WordList *wordListN = 0;
+	WordList *wordListN = nullptr;
 	switch (n) {
 	case 0:
 		wordListN = &keywords;
@@ -1068,7 +1068,7 @@ static const char * const verilogWordLists[] = {
             "User defined tasks and identifiers",
             "Documentation comment keywords",
             "Preprocessor definitions",
-            0,
+            nullptr,
         };
 
 LexerModule lmVerilog(SCLEX_VERILOG, LexerVerilog::LexerFactoryVerilog, "verilog", verilogWordLists);

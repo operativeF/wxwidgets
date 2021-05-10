@@ -94,7 +94,7 @@ int LexInterface::LineEndTypesSupported() {
 
 Document::Document() {
 	refCount = 0;
-	pcf = NULL;
+	pcf = nullptr;
 #ifdef _WIN32
 	eolMode = SC_EOL_CRLF;
 #else
@@ -117,7 +117,7 @@ Document::Document() {
 	durationStyleOneLine = 0.00001;
 
 	matchesValid = false;
-	regex = 0;
+	regex = nullptr;
 
 	UTF8BytesOfLeadInitialise();
 
@@ -129,7 +129,7 @@ Document::Document() {
 
 	cb.SetPerLine(this);
 
-	pli = 0;
+	pli = nullptr;
 }
 
 Document::~Document() {
@@ -138,14 +138,14 @@ Document::~Document() {
 	}
 	for (int j=0; j<ldSize; j++) {
 		delete perLineData[j];
-		perLineData[j] = 0;
+		perLineData[j] = nullptr;
 	}
 	delete regex;
-	regex = 0;
+	regex = nullptr;
 	delete pli;
-	pli = 0;
+	pli = nullptr;
 	delete pcf;
-	pcf = 0;
+	pcf = nullptr;
 }
 
 void Document::Init() {
@@ -165,7 +165,7 @@ int Document::LineEndTypesSupported() const {
 bool Document::SetDBCSCodePage(int dbcsCodePage_) {
 	if (dbcsCodePage != dbcsCodePage_) {
 		dbcsCodePage = dbcsCodePage_;
-		SetCaseFolder(NULL);
+		SetCaseFolder(nullptr);
 		cb.SetLineEndTypes(lineEndBitSet & LineEndTypesSupported());
 		return true;
 	} else {
@@ -295,7 +295,7 @@ int Document::AddMark(int line, int markerNum) {
 	if (line >= 0 && line <= LinesTotal()) {
 		int prev = static_cast<LineMarkers *>(perLineData[ldMarkers])->
 			AddMark(line, markerNum, LinesTotal());
-		DocModification mh(SC_MOD_CHANGEMARKER, LineStart(line), 0, 0, 0, line);
+		DocModification mh(SC_MOD_CHANGEMARKER, LineStart(line), 0, 0, nullptr, line);
 		NotifyModified(mh);
 		return prev;
 	} else {
@@ -312,19 +312,19 @@ void Document::AddMarkSet(int line, int valueSet) {
 		if (m & 1)
 			static_cast<LineMarkers *>(perLineData[ldMarkers])->
 				AddMark(line, i, LinesTotal());
-	DocModification mh(SC_MOD_CHANGEMARKER, LineStart(line), 0, 0, 0, line);
+	DocModification mh(SC_MOD_CHANGEMARKER, LineStart(line), 0, 0, nullptr, line);
 	NotifyModified(mh);
 }
 
 void Document::DeleteMark(int line, int markerNum) {
 	static_cast<LineMarkers *>(perLineData[ldMarkers])->DeleteMark(line, markerNum, false);
-	DocModification mh(SC_MOD_CHANGEMARKER, LineStart(line), 0, 0, 0, line);
+	DocModification mh(SC_MOD_CHANGEMARKER, LineStart(line), 0, 0, nullptr, line);
 	NotifyModified(mh);
 }
 
 void Document::DeleteMarkFromHandle(int markerHandle) {
 	static_cast<LineMarkers *>(perLineData[ldMarkers])->DeleteMarkFromHandle(markerHandle);
-	DocModification mh(SC_MOD_CHANGEMARKER, 0, 0, 0, 0);
+	DocModification mh(SC_MOD_CHANGEMARKER, 0, 0, 0, nullptr);
 	mh.line = -1;
 	NotifyModified(mh);
 }
@@ -336,7 +336,7 @@ void Document::DeleteAllMarks(int markerNum) {
 			someChanges = true;
 	}
 	if (someChanges) {
-		DocModification mh(SC_MOD_CHANGEMARKER, 0, 0, 0, 0);
+		DocModification mh(SC_MOD_CHANGEMARKER, 0, 0, 0, nullptr);
 		mh.line = -1;
 		NotifyModified(mh);
 	}
@@ -421,7 +421,7 @@ int SCI_METHOD Document::SetLevel(Sci_Position line, int level) {
 	int prev = static_cast<LineLevels *>(perLineData[ldLevels])->SetLevel(line, level, LinesTotal());
 	if (prev != level) {
 		DocModification mh(SC_MOD_CHANGEFOLD | SC_MOD_CHANGEMARKER,
-		                   LineStart(line), 0, 0, 0, line);
+		                   LineStart(line), 0, 0, nullptr, line);
 		mh.foldLevelNow = level;
 		mh.foldLevelPrev = prev;
 		NotifyModified(mh);
@@ -1051,7 +1051,7 @@ bool Document::DeleteChars(int pos, int len) {
 			    DocModification(
 			        SC_MOD_BEFOREDELETE | SC_PERFORMED_USER,
 			        pos, len,
-			        0, 0));
+			        0, nullptr));
 			int prevLinesTotal = LinesTotal();
 			bool startSavePoint = cb.IsSavePoint();
 			bool startSequence = false;
@@ -1806,7 +1806,7 @@ bool Document::MatchesWordOptions(bool word, bool wordStart, int pos, int length
 }
 
 bool Document::HasCaseFolder(void) const {
-	return pcf != 0;
+	return pcf != nullptr;
 }
 
 void Document::SetCaseFolder(CaseFolder *pcf_) {
@@ -2001,7 +2001,7 @@ const char *Document::SubstituteByPosition(const char *text, int *length) {
 	if (regex)
 		return regex->SubstituteByPosition(this, text, length);
 	else
-		return 0;
+		return nullptr;
 }
 
 int Document::LinesTotal() const {
@@ -2123,7 +2123,7 @@ void Document::LexerChanged() {
 int SCI_METHOD Document::SetLineState(Sci_Position line, int state) {
 	int statePrevious = static_cast<LineState *>(perLineData[ldState])->SetLineState(line, state);
 	if (state != statePrevious) {
-		DocModification mh(SC_MOD_CHANGELINESTATE, LineStart(line), 0, 0, 0, line);
+		DocModification mh(SC_MOD_CHANGELINESTATE, LineStart(line), 0, 0, nullptr, line);
 		NotifyModified(mh);
 	}
 	return statePrevious;
@@ -2138,7 +2138,7 @@ int Document::GetMaxLineState() {
 }
 
 void SCI_METHOD Document::ChangeLexerState(Sci_Position start, Sci_Position end) {
-	DocModification mh(SC_MOD_LEXERSTATE, start, end-start, 0, 0, 0);
+	DocModification mh(SC_MOD_LEXERSTATE, start, end-start, 0, nullptr, 0);
 	NotifyModified(mh);
 }
 
@@ -2150,24 +2150,24 @@ StyledText Document::MarginStyledText(int line) const {
 
 void Document::MarginSetText(int line, const char *text) {
 	static_cast<LineAnnotation *>(perLineData[ldMargin])->SetText(line, text);
-	DocModification mh(SC_MOD_CHANGEMARGIN, LineStart(line), 0, 0, 0, line);
+	DocModification mh(SC_MOD_CHANGEMARGIN, LineStart(line), 0, 0, nullptr, line);
 	NotifyModified(mh);
 }
 
 void Document::MarginSetStyle(int line, int style) {
 	static_cast<LineAnnotation *>(perLineData[ldMargin])->SetStyle(line, style);
-	NotifyModified(DocModification(SC_MOD_CHANGEMARGIN, LineStart(line), 0, 0, 0, line));
+	NotifyModified(DocModification(SC_MOD_CHANGEMARGIN, LineStart(line), 0, 0, nullptr, line));
 }
 
 void Document::MarginSetStyles(int line, const unsigned char *styles) {
 	static_cast<LineAnnotation *>(perLineData[ldMargin])->SetStyles(line, styles);
-	NotifyModified(DocModification(SC_MOD_CHANGEMARGIN, LineStart(line), 0, 0, 0, line));
+	NotifyModified(DocModification(SC_MOD_CHANGEMARGIN, LineStart(line), 0, 0, nullptr, line));
 }
 
 void Document::MarginClearAll() {
 	int maxEditorLine = LinesTotal();
 	for (int l=0; l<maxEditorLine; l++)
-		MarginSetText(l, 0);
+		MarginSetText(l, nullptr);
 	// Free remaining data
 	static_cast<LineAnnotation *>(perLineData[ldMargin])->ClearAll();
 }
@@ -2183,7 +2183,7 @@ void Document::AnnotationSetText(int line, const char *text) {
 		const int linesBefore = AnnotationLines(line);
 		static_cast<LineAnnotation *>(perLineData[ldAnnotation])->SetText(line, text);
 		const int linesAfter = AnnotationLines(line);
-		DocModification mh(SC_MOD_CHANGEANNOTATION, LineStart(line), 0, 0, 0, line);
+		DocModification mh(SC_MOD_CHANGEANNOTATION, LineStart(line), 0, 0, nullptr, line);
 		mh.annotationLinesAdded = linesAfter - linesBefore;
 		NotifyModified(mh);
 	}
@@ -2191,7 +2191,7 @@ void Document::AnnotationSetText(int line, const char *text) {
 
 void Document::AnnotationSetStyle(int line, int style) {
 	static_cast<LineAnnotation *>(perLineData[ldAnnotation])->SetStyle(line, style);
-	DocModification mh(SC_MOD_CHANGEANNOTATION, LineStart(line), 0, 0, 0, line);
+	DocModification mh(SC_MOD_CHANGEANNOTATION, LineStart(line), 0, 0, nullptr, line);
 	NotifyModified(mh);
 }
 
@@ -2208,7 +2208,7 @@ int Document::AnnotationLines(int line) const {
 void Document::AnnotationClearAll() {
 	int maxEditorLine = LinesTotal();
 	for (int l=0; l<maxEditorLine; l++)
-		AnnotationSetText(l, 0);
+		AnnotationSetText(l, nullptr);
 	// Free remaining data
 	static_cast<LineAnnotation *>(perLineData[ldAnnotation])->ClearAll();
 }

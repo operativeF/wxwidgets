@@ -37,7 +37,7 @@ const LexerModule *Catalogue::Find(int language) {
 			return *it;
 		}
 	}
-	return 0;
+	return nullptr;
 }
 
 const LexerModule *Catalogue::Find(const char *languageName) {
@@ -50,7 +50,7 @@ const LexerModule *Catalogue::Find(const char *languageName) {
 			}
 		}
 	}
-	return 0;
+	return nullptr;
 }
 
 void Catalogue::AddLexerModule(LexerModule *plm) {

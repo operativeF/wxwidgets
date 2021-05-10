@@ -107,7 +107,7 @@ static const char * const dWordLists[] = {
 			"Keywords 5",
 			"Keywords 6",
 			"Keywords 7",
-			0,
+			nullptr,
 		};
 
 struct OptionSetD : public OptionSet<OptionsD> {
@@ -186,7 +186,7 @@ public:
 	void SCI_METHOD Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess);
 
 	void * SCI_METHOD PrivateCall(int, void *) {
-		return 0;
+		return nullptr;
 	}
 
 	static ILexer *LexerFactoryD() {
@@ -205,7 +205,7 @@ Sci_Position SCI_METHOD LexerD::PropertySet(const char *key, const char *val) {
 }
 
 Sci_Position SCI_METHOD LexerD::WordListSet(int n, const char *wl) {
-	WordList *wordListN = 0;
+	WordList *wordListN = nullptr;
 	switch (n) {
 	case 0:
 		wordListN = &keywords;

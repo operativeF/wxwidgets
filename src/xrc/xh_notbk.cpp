@@ -28,7 +28,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxNotebookXmlHandler, wxXmlResourceHandler);
 wxNotebookXmlHandler::wxNotebookXmlHandler()
                      :wxXmlResourceHandler(),
                       m_isInside(false),
-                      m_notebook(NULL)
+                      m_notebook(nullptr)
 {
     XRC_ADD_STYLE(wxBK_DEFAULT);
     XRC_ADD_STYLE(wxBK_LEFT);
@@ -63,7 +63,7 @@ wxObject *wxNotebookXmlHandler::DoCreateResource()
         {
             bool old_ins = m_isInside;
             m_isInside = false;
-            wxObject *item = CreateResFromNode(n, m_notebook, NULL);
+            wxObject *item = CreateResFromNode(n, m_notebook, nullptr);
             m_isInside = old_ins;
             wxWindow *wnd = wxDynamicCast(item, wxWindow);
 
@@ -75,7 +75,7 @@ wxObject *wxNotebookXmlHandler::DoCreateResource()
                 {
                     wxBitmap bmp = GetBitmap(wxT("bitmap"), wxART_OTHER);
                     wxImageList *imgList = m_notebook->GetImageList();
-                    if ( imgList == NULL )
+                    if ( imgList == nullptr )
                     {
                         imgList = new wxImageList( bmp.GetWidth(), bmp.GetHeight() );
                         m_notebook->AssignImageList( imgList );
@@ -106,7 +106,7 @@ wxObject *wxNotebookXmlHandler::DoCreateResource()
         else
         {
             ReportError("notebookpage must have a window child");
-            return NULL;
+            return nullptr;
         }
     }
 

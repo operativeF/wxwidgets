@@ -64,7 +64,7 @@ namespace wxPrivate
 // to make it safe to access it even before all global statics are initialized
 UntypedBufferData *GetUntypedNullData()
 {
-    static UntypedBufferData s_untypedNullData(NULL, 0);
+    static UntypedBufferData s_untypedNullData(nullptr, 0);
 
     return &s_untypedNullData;
 }
@@ -529,20 +529,20 @@ const char *wxString::AsChar(const wxMBConv& conv) const
     const size_t lenWC = m_impl.length();
 #endif // wxUSE_UNICODE_UTF8/wxUSE_UNICODE_WCHAR
 
-    const size_t lenMB = conv.FromWChar(NULL, 0, strWC, lenWC);
+    const size_t lenMB = conv.FromWChar(nullptr, 0, strWC, lenWC);
     if ( lenMB == wxCONV_FAILED )
-        return NULL;
+        return nullptr;
 
     if ( !m_convertedToChar.m_str || lenMB != m_convertedToChar.m_len )
     {
         if ( !const_cast<wxString *>(this)->m_convertedToChar.Extend(lenMB) )
-            return NULL;
+            return nullptr;
     }
 
     m_convertedToChar.m_str[lenMB] = '\0';
     if ( conv.FromWChar(m_convertedToChar.m_str, lenMB,
                         strWC, lenWC) == wxCONV_FAILED )
-        return NULL;
+        return nullptr;
 
     return m_convertedToChar.m_str;
 }
@@ -2185,8 +2185,8 @@ bool wxString::Matches(const wxString& mask) const
 #endif
 
   // the last location where '*' matched
-  const wxChar *pszLastStarInText = NULL;
-  const wxChar *pszLastStarInMask = NULL;
+  const wxChar *pszLastStarInText = nullptr;
+  const wxChar *pszLastStarInMask = nullptr;
 
 match:
   for ( ; *pszMask != wxT('\0'); pszMask++, pszTxt++ ) {
@@ -2218,7 +2218,7 @@ match:
           size_t uiLenMask;
           const wxChar *pEndMask = wxStrpbrk(pszMask, wxT("*?"));
 
-          if ( pEndMask != NULL ) {
+          if ( pEndMask != nullptr ) {
             // we have to match the string between two metachars
             uiLenMask = pEndMask - pszMask;
           }
@@ -2229,7 +2229,7 @@ match:
 
           wxString strToMatch(pszMask, uiLenMask);
           const wxChar* pMatch = wxStrstr(pszTxt, strToMatch);
-          if ( pMatch == NULL )
+          if ( pMatch == nullptr )
             return false;
 
           // -1 to compensate "++" in the loop
@@ -2254,7 +2254,7 @@ match:
     pszTxt = pszLastStarInText + 1;
     pszMask = pszLastStarInMask;
 
-    pszLastStarInText = NULL;
+    pszLastStarInText = nullptr;
 
     // don't bother resetting pszLastStarInMask, it's unnecessary
 

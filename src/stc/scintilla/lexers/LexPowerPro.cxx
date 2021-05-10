@@ -617,7 +617,7 @@ static const char * const powerProWordLists[] = {
             "Keyword list 2",
             "Keyword list 3",
             "Keyword list 4",
-            0,
+            nullptr,
         };
 
 static void ColourisePowerProDocWrapper(Sci_PositionU startPos, Sci_Position length, int initStyle, WordList *keywordlists[],

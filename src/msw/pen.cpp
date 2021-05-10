@@ -109,7 +109,7 @@ public:
     WXHPEN GetHPEN() const;
 
     // return true if we have a valid HPEN
-    bool HasHPEN() const { return m_hPen != 0; }
+    bool HasHPEN() const { return m_hPen != nullptr; }
 
     // return true if we had a valid handle before, false otherwise
     bool Free();
@@ -124,8 +124,8 @@ private:
         m_cap = wxCAP_ROUND;
         m_quality = wxPEN_QUALITY_DEFAULT;
         m_nbDash = 0;
-        m_dash = NULL;
-        m_hPen = 0;
+        m_dash = nullptr;
+        m_hPen = nullptr;
     }
 
     int           m_width;
@@ -169,7 +169,7 @@ wxPenRefData::wxPenRefData(const wxPenRefData& data)
     m_quality = data.m_quality;
     m_nbDash = data.m_nbDash;
     m_dash = data.m_dash;
-    m_hPen = 0;
+    m_hPen = nullptr;
 }
 
 wxPenRefData::wxPenRefData(const wxPenInfo& info)
@@ -401,7 +401,7 @@ bool wxPenRefData::Alloc()
        }
        else
        {
-           dash = NULL;
+           dash = nullptr;
        }
 
        // Note that width can't be 0 for ExtCreatePen(), unlike for CreatePen().
@@ -412,7 +412,7 @@ bool wxPenRefData::Alloc()
        delete [] dash;
    }
 
-   return m_hPen != 0;
+   return m_hPen != nullptr;
 }
 
 bool wxPenRefData::Free()
@@ -421,7 +421,7 @@ bool wxPenRefData::Free()
         return false;
 
     ::DeleteObject(m_hPen);
-    m_hPen = 0;
+    m_hPen = nullptr;
 
     return true;
 }
@@ -479,7 +479,7 @@ bool wxPen::RealizeResource()
 
 WXHANDLE wxPen::GetResourceHandle() const
 {
-    return M_PENDATA ? M_PENDATA->GetHPEN() : 0;
+    return M_PENDATA ? M_PENDATA->GetHPEN() : nullptr;
 }
 
 bool wxPen::FreeResource(bool WXUNUSED(force))
@@ -615,9 +615,9 @@ int wxPen::GetDashes(wxDash** ptr) const
 
 wxDash* wxPen::GetDash() const
 {
-    wxCHECK_MSG( IsOk(), NULL, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), nullptr, wxT("invalid pen") );
 
-    return m_refData ? M_PENDATA->GetDash() : NULL;
+    return m_refData ? M_PENDATA->GetDash() : nullptr;
 }
 
 int wxPen::GetDashCount() const
@@ -629,7 +629,7 @@ int wxPen::GetDashCount() const
 
 wxBitmap* wxPen::GetStipple() const
 {
-    wxCHECK_MSG( IsOk(), NULL, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), nullptr, wxT("invalid pen") );
 
-    return m_refData ? M_PENDATA->GetStipple() : NULL;
+    return m_refData ? M_PENDATA->GetStipple() : nullptr;
 }

@@ -425,7 +425,7 @@ wxArrayString wxFSVolumeBase::GetVolumes(int flagsSet, int flagsUnset)
     // Local and mapped drives first.
     //-------------------------------
     // Allocate the required space for the API call.
-    const DWORD chars = GetLogicalDriveStrings(0, NULL);
+    const DWORD chars = GetLogicalDriveStrings(0, nullptr);
     TCHAR* buf = new TCHAR[chars+1];
 
     // Get the list of drives.
@@ -455,7 +455,7 @@ wxArrayString wxFSVolumeBase::GetVolumes(int flagsSet, int flagsUnset)
         // The returned list will be sorted alphabetically.  We don't pass
         // our in since we don't want to change to order of the local drives.
         wxArrayString nn;
-        if (BuildRemoteList(nn, 0, flagsSet, flagsUnset))
+        if (BuildRemoteList(nn, nullptr, flagsSet, flagsUnset))
         {
             for (size_t idx = 0; idx < nn.GetCount(); idx++)
                 list.Add(nn[idx]);

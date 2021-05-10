@@ -32,7 +32,7 @@ AutoComplete::AutoComplete() :
 	typesep('?'),
 	ignoreCase(false),
 	chooseSingle(false),
-	lb(0),
+	lb(nullptr),
 	posStart(0),
 	startLen(0),
 	cancelAtStartPos(true),
@@ -49,7 +49,7 @@ AutoComplete::~AutoComplete() {
 	if (lb) {
 		lb->Destroy();
 		delete lb;
-		lb = 0;
+		lb = nullptr;
 	}
 }
 

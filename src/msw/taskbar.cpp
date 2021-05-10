@@ -58,7 +58,7 @@ class wxTaskBarIconWindow : public wxFrame
 {
 public:
     wxTaskBarIconWindow(wxTaskBarIcon *icon)
-        : wxFrame(NULL, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0),
+        : wxFrame(nullptr, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0),
           m_icon(icon)
     {
     }
@@ -114,7 +114,7 @@ struct NotifyIconData : public NOTIFYICONDATA
 
 wxTaskBarIcon::wxTaskBarIcon(wxTaskBarIconType WXUNUSED(iconType))
 {
-    m_win = NULL;
+    m_win = nullptr;
     m_iconAdded = false;
     RegisterWindowMessages();
 }
@@ -296,7 +296,7 @@ bool wxTaskBarIcon::RemoveIcon()
 #if wxUSE_MENUS
 bool wxTaskBarIcon::PopupMenu(wxMenu *menu)
 {
-    wxASSERT_MSG( m_win != NULL, wxT("taskbar icon not initialized") );
+    wxASSERT_MSG( m_win != nullptr, wxT("taskbar icon not initialized") );
 
     static bool s_inPopup = false;
 

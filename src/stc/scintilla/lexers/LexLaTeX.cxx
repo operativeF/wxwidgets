@@ -534,7 +534,7 @@ void SCI_METHOD LexerLaTeX::Fold(Sci_PositionU startPos, Sci_Position length, in
 }
 
 static const char *const emptyWordListDesc[] = {
-	0
+	nullptr
 };
 
 LexerModule lmLatex(SCLEX_LATEX, LexerLaTeX::LexerFactoryLaTeX, "latex", emptyWordListDesc);
