@@ -144,7 +144,7 @@ private:
 
 
     // not implemented
-    wxBitmapRefData& operator=(const wxBitmapRefData&);
+    wxBitmapRefData& operator=(const wxBitmapRefData&) = delete;
 };
 
 // ----------------------------------------------------------------------------

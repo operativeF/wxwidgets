@@ -66,7 +66,7 @@ private:
 // because copy constructor is explicitly declared above;
 // but no copy assignment operator is defined, so declare
 // it private to prevent the compiler from defining it:
-    wxRegionRefData& operator=(const wxRegionRefData&);
+    wxRegionRefData& operator=(const wxRegionRefData&) = delete;
 };
 
 #define M_REGION (((wxRegionRefData*)m_refData)->m_region)

@@ -66,7 +66,7 @@ private:
 
     // no assignment operator, the objects of this class are shared and never
     // assigned after being created once
-    wxBrushRefData& operator=(const wxBrushRefData&);
+    wxBrushRefData& operator=(const wxBrushRefData&) = delete;
 };
 
 #define M_BRUSHDATA ((wxBrushRefData *)m_refData)

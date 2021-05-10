@@ -1000,8 +1000,8 @@ public:
 
 private:
     // Private so SurfaceD2D objects can not be copied
-    SurfaceD2D(const SurfaceD2D &);
-    SurfaceD2D &operator=(const SurfaceD2D &);
+    SurfaceD2D(const SurfaceD2D &) = delete;
+    SurfaceD2D &operator=(const SurfaceD2D &) = delete;
 
     bool m_unicodeMode;
     int m_x, m_y;

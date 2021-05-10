@@ -1473,8 +1473,8 @@ public:
     }
 private:
     // Private so IMContext objects can not be copied.
-    IMContext(const IMContext&);
-    IMContext& operator=(const IMContext&);
+    IMContext(const IMContext&) = delete;
+    IMContext& operator=(const IMContext&) = delete;
 };
 
 }
