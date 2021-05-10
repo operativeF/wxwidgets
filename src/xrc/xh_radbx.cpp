@@ -108,7 +108,7 @@ wxObject *wxRadioBoxXmlHandler::DoCreateResource()
         // label="1" attribute needs to be explicitly specified to handle them
         // consistently with the other labels.
         m_labels.push_back(GetNodeText(m_node,
-                                       GetBoolAttr("label", 0)
+                                       GetBoolAttr("label", false)
                                         ? 0
                                         : wxXRC_TEXT_NO_ESCAPE));
 #if wxUSE_TOOLTIPS
@@ -120,8 +120,8 @@ wxObject *wxRadioBoxXmlHandler::DoCreateResource()
         m_helptexts.push_back(GetNodeText(nodeHelp, wxXRC_TEXT_NO_ESCAPE));
         m_helptextSpecified.push_back(nodeHelp != nullptr);
 #endif // wxUSE_HELP
-        m_isEnabled.push_back(GetBoolAttr("enabled", 1));
-        m_isShown.push_back(!GetBoolAttr("hidden", 0));
+        m_isEnabled.push_back(GetBoolAttr("enabled", true));
+        m_isShown.push_back(!GetBoolAttr("hidden", false));
 
         return nullptr;
     }

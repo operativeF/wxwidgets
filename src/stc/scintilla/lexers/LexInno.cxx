@@ -35,7 +35,7 @@ static void ColouriseInnoDoc(Sci_PositionU startPos, Sci_Position length, int, W
 	Sci_Position lengthDoc = startPos + length;
 	char *buffer = new char[length+1];
 	Sci_Position bufferCount = 0;
-	bool isBOL, isEOL, isWS, isBOLWS = 0;
+	bool isBOL, isEOL, isWS, isBOLWS = false;
 	bool isCStyleComment = false;
 
 	WordList &sectionKeywords = *keywordLists[0];
@@ -65,7 +65,7 @@ static void ColouriseInnoDoc(Sci_PositionU startPos, Sci_Position length, int, W
 		}
 
 		isBOL = (chPrev == 0) || (chPrev == '\n') || (chPrev == '\r' && ch != '\n');
-		isBOLWS = (isBOL) ? 1 : (isBOLWS && (chPrev == ' ' || chPrev == '\t'));
+		isBOLWS = (isBOL) ? true : (isBOLWS && (chPrev == ' ' || chPrev == '\t'));
 		isEOL = (ch == '\n' || ch == '\r');
 		isWS = (ch == ' ' || ch == '\t');
 

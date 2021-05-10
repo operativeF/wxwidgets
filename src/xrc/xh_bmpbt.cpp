@@ -37,7 +37,7 @@ wxObject *wxBitmapButtonXmlHandler::DoCreateResource()
 {
     XRC_MAKE_INSTANCE(button, wxBitmapButton)
 
-    if ( GetBool("close", 0) )
+    if ( GetBool("close", false) )
     {
         button->CreateCloseButton(m_parentAsWindow,
                                   GetID(),
@@ -54,7 +54,7 @@ wxObject *wxBitmapButtonXmlHandler::DoCreateResource()
                        GetName());
     }
 
-    if (GetBool(wxT("default"), 0))
+    if (GetBool(wxT("default"), false))
         button->SetDefault();
     SetupWindow(button);
 

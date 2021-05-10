@@ -100,7 +100,7 @@ static void ColouriseTCMDLine( char *lineBuffer, Sci_PositionU lengthLine, Sci_P
 	Sci_PositionU wbo;			// Word Buffer Offset - also Special Keyword Buffer Length
 	WordList &keywords = *keywordlists[0];      // Internal Commands
 //	WordList &keywords2 = *keywordlists[1];     // Aliases (optional)
-	bool isDelayedExpansion = 1;				// !var!
+	bool isDelayedExpansion = true;				// !var!
 
 	bool continueProcessing = true;	// Used to toggle Regular Keyword Checking
 	// Special Keywords are those that allow certain characters without whitespace after the command

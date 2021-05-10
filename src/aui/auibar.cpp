@@ -647,7 +647,7 @@ void wxAuiGenericToolBarArt::DrawGripper(wxDC& dc,
                                     const wxRect& rect)
 {
     int i = 0;
-    while (1)
+    while (true)
     {
         int x, y;
 
@@ -1330,7 +1330,7 @@ bool wxAuiToolBar::GetToolSticky(int tool_id) const
 {
     wxAuiToolBarItem* item = FindTool(tool_id);
     if (!item)
-        return 0;
+        return false;
 
     return item->m_sticky;
 }

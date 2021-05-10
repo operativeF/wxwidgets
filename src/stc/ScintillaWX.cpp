@@ -1219,7 +1219,7 @@ int  ScintillaWX::DoKeyDown(const wxKeyEvent& evt, bool* consumed)
 #ifdef __WXMAC__
                     evt.RawControlDown()
 #else
-                    0
+                    false
 #endif
                 ),
                 consumed

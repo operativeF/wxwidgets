@@ -262,8 +262,8 @@ public:
 
 
 SurfaceImpl::SurfaceImpl() :
-    hdc(nullptr), hdcOwned(0), bitmap(nullptr),
-    x(0), y(0), unicodeMode(0)
+    hdc(nullptr), hdcOwned(false), bitmap(nullptr),
+    x(0), y(0), unicodeMode(false)
 {}
 
 SurfaceImpl::~SurfaceImpl() {

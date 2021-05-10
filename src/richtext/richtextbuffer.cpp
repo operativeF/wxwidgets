@@ -13444,7 +13444,7 @@ bool wxRichTextBufferDataObject::GetDataHere(void *pBuf) const
         if (!m_richTextBuffer->SaveFile(stream, wxRICHTEXT_TYPE_XML))
         {
             wxLogError(wxT("Could not write the buffer to an XML stream.\nYou may have forgotten to add the XML file handler."));
-            return 0;
+            return false;
         }
     }
 

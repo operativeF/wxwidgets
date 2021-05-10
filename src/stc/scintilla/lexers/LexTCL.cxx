@@ -55,8 +55,8 @@ static void ColouriseTCLDoc(Sci_PositionU startPos, Sci_Position length, int , W
 	                } lineState = LS_DEFAULT;
 	bool prevSlash = false;
 	int currentLevel = 0;
-	bool expected = 0;
-	bool subParen = 0;
+	bool expected = false;
+	bool subParen = false;
 
 	Sci_Position currentLine = styler.GetLine(startPos);
 	if (currentLine > 0)
@@ -137,7 +137,7 @@ next:
 				// maybe spaces should be allowed ???
 				if (!IsAWordChar(sc.ch)) { // probably the code is wrong
 					sc.SetState(SCE_TCL_DEFAULT);
-					subParen = 0;
+					subParen = false;
 				}
 				break;
 			}
@@ -323,7 +323,7 @@ next:
 					expected = true;
 					break;
 				case '$':
-					subParen = 0;
+					subParen = false;
 					if (sc.chNext != '{') {
 						sc.SetState(SCE_TCL_SUBSTITUTION);
 					} else {

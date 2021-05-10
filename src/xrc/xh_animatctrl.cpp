@@ -54,7 +54,7 @@ wxObject *wxAnimationCtrlXmlHandler::DoCreateResource()
                                               GetName());
         }
     }
-    if ( GetBool("hidden", 0) == 1 )
+    if ( GetBool("hidden", false) == 1 )
         ctrl->Hide();
 
     wxScopedPtr<wxAnimation> animation(GetAnimation("animation", ctrl));

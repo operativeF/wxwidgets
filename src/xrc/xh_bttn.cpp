@@ -44,7 +44,7 @@ wxObject *wxButtonXmlHandler::DoCreateResource()
                     wxDefaultValidator,
                     GetName());
 
-    if (GetBool(wxT("default"), 0))
+    if (GetBool(wxT("default"), false))
         button->SetDefault();
 
     if ( GetParamNode("bitmap") )

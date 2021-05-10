@@ -1121,8 +1121,8 @@ wxIdRange::wxIdRange(const wxXmlNode* node,
     : m_name(rname),
       m_start(0),
       m_size(0),
-      m_item_end_found(0),
-      m_finalised(0)
+      m_item_end_found(false),
+      m_finalised(false)
 {
     long l;
     if ( startno.ToLong(&l) )
@@ -2631,9 +2631,9 @@ void wxXmlResourceHandlerImpl::SetupWindow(wxWindow *wnd)
         wnd->SetForegroundColour(GetColour(wxT("fg")));
     if (HasParam(wxT("ownfg")))
         wnd->SetOwnForegroundColour(GetColour(wxT("ownfg")));
-    if (GetBool(wxT("enabled"), 1) == 0)
+    if (GetBool(wxT("enabled"), true) == 0)
         wnd->Enable(false);
-    if (GetBool(wxT("focused"), 0) == 1)
+    if (GetBool(wxT("focused"), false) == 1)
         wnd->SetFocus();
 #if wxUSE_TOOLTIPS
     if (HasParam(wxT("tooltip")))

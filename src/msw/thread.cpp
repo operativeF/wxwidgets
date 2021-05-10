@@ -953,7 +953,7 @@ bool wxThread::SetConcurrency(size_t level)
 
     // ok only for the default one
     if ( level == 0 )
-        return 0;
+        return false;
 
     // get system affinity mask first
     HANDLE hProcess = ::GetCurrentProcess();

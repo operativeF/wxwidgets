@@ -787,8 +787,8 @@ static bool IsCommentLine(Sci_Position line, LexAccessor &styler) {
 void SCI_METHOD LexerVerilog::Fold(Sci_PositionU startPos, Sci_Position length, int initStyle, IDocument *pAccess)
 {
 	LexAccessor styler(pAccess);
-	bool foldAtBrace  = 1;
-	bool foldAtParenthese  = 1;
+	bool foldAtBrace  = true;
+	bool foldAtParenthese  = true;
 
 	Sci_Position lineCurrent = styler.GetLine(startPos);
 	// Move back one line to be compatible with LexerModule::Fold behavior, fixes problem with foldComment behavior

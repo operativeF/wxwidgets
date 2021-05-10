@@ -265,7 +265,7 @@ wxObject* wxSizerXmlHandler::Handle_sizer()
     CreateChildren(parent, true/*only this handler*/);
 
     // This has to be done after CreateChildren().
-    if ( GetBool(wxT("hideitems"), 0) == 1 )
+    if ( GetBool(wxT("hideitems"), false) == 1 )
         sizer->ShowItems(false);
 
     // set growable rows and cols for sizers which support this

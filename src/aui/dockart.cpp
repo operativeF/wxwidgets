@@ -725,7 +725,7 @@ void wxAuiDefaultDockArt::DrawGripper(wxDC& dc,
     if (!pane.HasGripperTop())
     {
         int y = window->FromDIP(5);
-        while (1)
+        while (true)
         {
             dc.SetPen(m_gripperPen1);
             dc.DrawPoint(rect.x+window->FromDIP(3), rect.y+y);
@@ -745,7 +745,7 @@ void wxAuiDefaultDockArt::DrawGripper(wxDC& dc,
     else
     {
         int x = window->FromDIP(5);
-        while (1)
+        while (true)
         {
             dc.SetPen(m_gripperPen1);
             dc.DrawPoint(rect.x+x, rect.y+window->FromDIP(3));

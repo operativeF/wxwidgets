@@ -233,7 +233,7 @@ wxFindReplaceDialogImpl::FindMessageHandler(wxWindow * WXUNUSED(win),
     {
         wxFAIL_MSG( wxT("unknown find dialog event") );
 
-        return 0;
+        return false;
     }
 
     wxUint32 flags = 0;

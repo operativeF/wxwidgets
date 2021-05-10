@@ -539,7 +539,7 @@ double wxVariant::GetDouble() const
 class WXDLLIMPEXP_BASE wxVariantDataBool: public wxVariantData
 {
 public:
-    wxVariantDataBool() { m_value = 0; }
+    wxVariantDataBool() { m_value = false; }
     wxVariantDataBool(bool value) { m_value = value; }
 
     inline bool GetValue() const { return m_value; }

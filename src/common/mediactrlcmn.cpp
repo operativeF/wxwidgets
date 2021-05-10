@@ -325,21 +325,21 @@ bool wxMediaCtrl::Play()
 {
     if(m_imp && m_bLoaded)
         return m_imp->Play();
-    return 0;
+    return false;
 }
 
 bool wxMediaCtrl::Pause()
 {
     if(m_imp && m_bLoaded)
         return m_imp->Pause();
-    return 0;
+    return false;
 }
 
 bool wxMediaCtrl::Stop()
 {
     if(m_imp && m_bLoaded)
         return m_imp->Stop();
-    return 0;
+    return false;
 }
 
 double wxMediaCtrl::GetPlaybackRate()

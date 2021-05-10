@@ -135,7 +135,7 @@ ColouriseGui4CliDoc(Sci_PositionU startPos, Sci_Position length, int initStyle,
 		colorFirstWord(keywordlists, styler, &sc, buff, BUFFSIZE, currentline);
 
 	while (sc.More())
-	{	noforward = 0;
+	{	noforward = false;
 
 		switch (sc.ch)
 		{
@@ -193,7 +193,7 @@ ColouriseGui4CliDoc(Sci_PositionU startPos, Sci_Position length, int initStyle,
 					sc.ChangeState(SCE_GC_DEFAULT);
 					sc.Forward();
 					colorFirstWord(keywordlists, styler, &sc, buff, BUFFSIZE, currentline);
-					noforward = 1; // don't move forward - already positioned at next char..
+					noforward = true; // don't move forward - already positioned at next char..
 				}
 				break;
 
@@ -227,7 +227,7 @@ ColouriseGui4CliDoc(Sci_PositionU startPos, Sci_Position length, int initStyle,
 				}
 				else if (sc.state != SCE_GC_COMMENTBLOCK)
 				{	colorFirstWord(keywordlists, styler, &sc, buff, BUFFSIZE, currentline);
-					noforward = 1; // don't move forward - already positioned at next char..
+					noforward = true; // don't move forward - already positioned at next char..
 				}
 				break;
 
