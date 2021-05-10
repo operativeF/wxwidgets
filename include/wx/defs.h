@@ -249,9 +249,6 @@ typedef short int WXTYPE;
 /*  wrap it in this guard, but such cases should still be relatively rare. */
 #define wxUSE_NESTED_CLASSES    1
 
-/* This macro is obsolete, use the 'explicit' keyword in the new code. */
-#define wxEXPLICIT explicit
-
 /* check for override keyword support */
 #ifndef HAVE_OVERRIDE
     #if __cplusplus >= 201103L
