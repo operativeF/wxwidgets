@@ -311,11 +311,6 @@ typedef short int WXTYPE;
     #define wxFALLTHROUGH ((void)0)
 #endif
 
-/* these macros are obsolete, use the standard C++ casts directly now */
-#define wx_static_cast(t, x) static_cast<t>(x)
-#define wx_const_cast(t, x) const_cast<t>(x)
-#define wx_reinterpret_cast(t, x) reinterpret_cast<t>(x)
-
 /*
    This one is a wx invention: like static cast but used when we intentionally
    truncate from a larger to smaller type, static_cast<> can't be used for it
