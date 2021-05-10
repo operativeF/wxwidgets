@@ -45,11 +45,7 @@ bool wxRect2DDouble::Intersects( const wxRect2DDouble &rect ) const
     top = wxMax ( m_y , rect.m_y );
     bottom = wxMin ( m_y+m_height, rect.m_y + rect.m_height );
 
-    if ( left < right && top < bottom )
-    {
-        return true;
-    }
-    return false;
+    return left < right && top < bottom;
 }
 
 void wxRect2DDouble::Intersect( const wxRect2DDouble &src1 , const wxRect2DDouble &src2 , wxRect2DDouble *dest )
@@ -232,11 +228,7 @@ bool wxRect2DInt::Intersects( const wxRect2DInt &rect ) const
     top = wxMax ( m_y , rect.m_y );
     bottom = wxMin ( m_y+m_height, rect.m_y + rect.m_height );
 
-    if ( left < right && top < bottom )
-    {
-        return true;
-    }
-    return false;
+    return left < right && top < bottom;
 }
 
 void wxRect2DInt::Intersect( const wxRect2DInt &src1 , const wxRect2DInt &src2 , wxRect2DInt *dest )

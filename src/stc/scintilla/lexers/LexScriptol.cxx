@@ -71,8 +71,7 @@ static bool IsSolComment(Accessor &styler, Sci_Position pos, Sci_Position len)
 
 static bool IsSolStringStart(char ch)
 {
-    if (ch == '\'' || ch == '"')  return true;
-    return false;
+    return ch == '\'' || ch == '"';
 }
 
 static bool IsSolWordStart(char ch)

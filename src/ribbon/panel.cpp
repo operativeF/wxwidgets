@@ -291,10 +291,7 @@ bool wxRibbonPanel::IsMinimised(wxSize at_size) const
         // we have no information on size change direction
         // so check both
         wxSize size = GetMinNotMinimisedSize();
-        if(size.x > at_size.x || size.y > at_size.y)
-            return true;
-
-        return false;
+        return size.x > at_size.x || size.y > at_size.y;
     }
 
     if(!m_minimised_size.IsFullySpecified())

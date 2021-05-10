@@ -539,10 +539,7 @@ bool wxWebViewIE::CanSetZoomType(wxWebViewZoomType type) const
     key.QueryValue("Version", value);
 
     long version = wxAtoi(value.Left(1));
-    if(version <= 6 && type == wxWEBVIEW_ZOOM_TYPE_LAYOUT)
-        return false;
-    else
-        return true;
+    return !(version <= 6 && type == wxWEBVIEW_ZOOM_TYPE_LAYOUT);
 }
 
 void wxWebViewIE::Print()

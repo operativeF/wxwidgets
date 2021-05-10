@@ -287,7 +287,7 @@ static void ColouriseCmakeDoc(Sci_PositionU startPos, Sci_Position length, int, 
                 if ( bNextLine ) {
                     styler.ColourTo(i+1,state);
                 }
-                if ( bNextLine == false ) {
+                if ( !bNextLine ) {
                     styler.ColourTo(i,state);
                     state = SCE_CMAKE_DEFAULT;
                 }
@@ -403,7 +403,7 @@ static void FoldCmakeDoc(Sci_PositionU startPos, Sci_Position length, int, WordL
             if ( nWordStart == -1 && (isCmakeLetter(chCurr)) ) {
                 nWordStart = i;
             }
-            else if ( isCmakeLetter(chCurr) == false && nWordStart > -1 ) {
+            else if ( !isCmakeLetter(chCurr) && nWordStart > -1 ) {
                 int newLevel = calculateFoldCmake( nWordStart, i-1, levelNext, styler, foldAtElse);
 
                 if ( newLevel == levelNext ) {

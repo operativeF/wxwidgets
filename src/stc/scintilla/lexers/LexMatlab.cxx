@@ -238,11 +238,7 @@ static void ColouriseMatlabOctaveDoc(
 			} else if (isalpha(sc.ch)) {
 				sc.SetState(SCE_MATLAB_KEYWORD);
 			} else if (isoperator(static_cast<char>(sc.ch)) || sc.ch == '@' || sc.ch == '\\') {
-				if (sc.ch == ')' || sc.ch == ']' || sc.ch == '}') {
-					transpose = true;
-				} else {
-					transpose = false;
-				}
+				transpose = sc.ch == ')' || sc.ch == ']' || sc.ch == '}';
 				sc.SetState(SCE_MATLAB_OPERATOR);
 			} else {
 				transpose = false;

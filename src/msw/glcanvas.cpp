@@ -726,10 +726,7 @@ bool wxGLCanvas::CreateWindow(wxWindow *parent,
         return false;
 
     m_hDC = ::GetDC(GetHwnd());
-    if ( !m_hDC )
-        return false;
-
-    return true;
+    return m_hDC != nullptr;
 }
 
 bool wxGLCanvas::Create(wxWindow *parent,

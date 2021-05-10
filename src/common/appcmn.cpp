@@ -111,10 +111,7 @@ bool wxAppBase::Initialize(int& argcOrig, wxChar **argvOrig)
     wxBitmap::InitStandardHandlers();
 
     // for compatibility call the old initialization function too
-    if ( !OnInitGui() )
-        return false;
-
-    return true;
+    return OnInitGui();
 }
 
 // ----------------------------------------------------------------------------

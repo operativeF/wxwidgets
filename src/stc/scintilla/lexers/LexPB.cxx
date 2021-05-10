@@ -321,7 +321,7 @@ static void FoldPBDoc(Sci_PositionU startPos, Sci_Position length, int, WordList
         {
             case '=':                              //To test single line macros
             {
-                if (fBeginOfCommentFound==false)
+                if (!fBeginOfCommentFound)
                     fMightBeMultiLineMacro=false;  //The found macro is a single line macro only;
                 break;
             }

@@ -226,7 +226,7 @@ wxComboCtrl::PrepareBackground( wxDC& dc, const wxRect& rect, int flags ) const
     {
         // Drawing a list item
         isEnabled = true; // they are never disabled
-        doDrawFocusRect = flags & wxCONTROL_SELECTED ? true : false;
+        doDrawFocusRect = (flags & wxCONTROL_SELECTED) != 0;
 
         focusSpacingX = 0;
         focusSpacingY = 0;
@@ -398,7 +398,7 @@ void wxComboCtrl::OnPaintEvent( wxPaintEvent& WXUNUSED(event) )
 
         bool drawFullButton = false;
         int bgState = butState;
-        const bool isFocused = (FindFocus() == GetMainWindowOfCompositeControl()) ? true : false;
+        const bool isFocused = FindFocus() == GetMainWindowOfCompositeControl();
 
         if ( useVistaComboBox )
         {

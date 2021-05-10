@@ -193,10 +193,7 @@ bool wxRichTextFormattingDialog::TransferDataToWindow()
     if (m_styleDefinition)
         m_attributes = m_styleDefinition->GetStyle();
 
-    if (!wxPropertySheetDialog::TransferDataToWindow())
-        return false;
-
-    return true;
+    return wxPropertySheetDialog::TransferDataToWindow();
 }
 
 bool wxRichTextFormattingDialog::TransferDataFromWindow()

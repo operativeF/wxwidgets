@@ -950,10 +950,7 @@ bool wxURI::ParseIPv6address(const char*& uri)
 
             uri = start;
 
-            if (ParseIPv4address(uri))
-                return true;
-            else
-                return false;
+            return ParseIPv4address(uri);
         }
         else
         {

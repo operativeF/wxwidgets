@@ -659,7 +659,7 @@ void wxAuiDefaultDockArt::DrawCaption(wxDC& dc,
     dc.SetFont(m_captionFont);
 
     DrawCaptionBackground(dc, rect,
-                          (pane.state & wxAuiPaneInfo::optionActive)?true:false);
+                          (pane.state & wxAuiPaneInfo::optionActive) != 0);
 
     int caption_offset = 0;
     if ( pane.icon.IsOk() )

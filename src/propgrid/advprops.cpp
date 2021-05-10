@@ -442,10 +442,7 @@ bool wxPGDatePickerCtrlEditor::OnEvent( wxPropertyGrid* WXUNUSED(propgrid),
                                         wxWindow* WXUNUSED(wnd),
                                         wxEvent& event ) const
 {
-    if ( event.GetEventType() == wxEVT_DATE_CHANGED )
-        return true;
-
-    return false;
+    return event.GetEventType() == wxEVT_DATE_CHANGED;
 }
 
 bool wxPGDatePickerCtrlEditor::GetValueFromControl( wxVariant& variant, wxPGProperty* WXUNUSED(property), wxWindow* wnd ) const
@@ -2201,7 +2198,7 @@ wxString wxDateProperty::ValueToString( wxVariant& value,
     if ( ms_defaultDateFormat.empty() )
     {
 #if wxUSE_DATEPICKCTRL
-        bool showCentury = m_dpStyle & wxDP_SHOWCENTURY ? true : false;
+        bool showCentury = (m_dpStyle & wxDP_SHOWCENTURY) != 0;
 #else
         bool showCentury = true;
 #endif

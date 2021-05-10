@@ -382,9 +382,7 @@ void wxHtmlPrintout::OnPreparePrinting()
 
 bool wxHtmlPrintout::OnBeginDocument(int startPage, int endPage)
 {
-    if (!wxPrintout::OnBeginDocument(startPage, endPage)) return false;
-
-    return true;
+    return wxPrintout::OnBeginDocument(startPage, endPage);
 }
 
 

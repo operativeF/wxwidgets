@@ -341,8 +341,5 @@ bool wxIsStockLabel(wxWindowID id, const wxString& label)
         return true;
 
     stock.Replace(wxT("&"), wxEmptyString);
-    if (label == stock)
-        return true;
-
-    return false;
+    return label == stock;
 }

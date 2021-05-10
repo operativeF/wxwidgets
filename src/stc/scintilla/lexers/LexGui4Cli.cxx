@@ -53,12 +53,10 @@ inline bool isGCOperator(int ch)
 {	if (isalnum(ch))
 		return false;
 	// '.' left out as it is used to make up numbers
-	if (ch == '*' || ch == '/' || ch == '-' || ch == '+' ||
+	return ch == '*' || ch == '/' || ch == '-' || ch == '+' ||
 		 ch == '(' || ch == ')' || ch == '=' || ch == '%' ||
 		 ch == '[' || ch == ']' || ch == '<' || ch == '>' ||
-		 ch == ',' || ch == ';' || ch == ':')
-		return true;
-	return false;
+		 ch == ',' || ch == ';' || ch == ':';
 }
 
 #define isSpace(x)		((x)==' ' || (x)=='\t')

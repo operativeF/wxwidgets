@@ -118,15 +118,13 @@ static inline bool IsAWordChar(const int  ch) {
 static inline bool IsAnOperator(int ch) {
 	if (IsAlphaNumeric(ch))
 		return false;
-	if (ch == '#' || ch == '^' || ch == '&' || ch == '*' ||
+	return ch == '#' || ch == '^' || ch == '&' || ch == '*' ||
 		ch == '(' || ch == ')' || ch == '-' || ch == '+' ||
 		ch == '=' || ch == '|' || ch == '{' || ch == '}' ||
 		ch == '[' || ch == ']' || ch == ':' || ch == ';' ||
 		ch == '<' || ch == '>' || ch == ',' || ch == '/' ||
 		ch == '?' || ch == '!' || ch == '"' || ch == '~' ||
-		ch == '\\')
-		return true;
-	return false;
+		ch == '\\';
 }
 
 static inline int IsAnyOtherIdentifier(char *s, int sLength) {

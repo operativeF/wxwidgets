@@ -127,10 +127,7 @@ static bool latexNextNotBlankIs(Sci_Position i, Accessor &styler, char needle) {
 	while (i < styler.Length()) {
     ch = styler.SafeGetCharAt(i);
 		if (!latexIsBlankAndNL(ch) && ch != '*') {
-      if (ch == needle)
-        return true;
-      else
-        return false;
+      return ch == needle;
 		}
 		i++;
 	}

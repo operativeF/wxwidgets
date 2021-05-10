@@ -53,7 +53,7 @@ bool FontSpecification::operator<(const FontSpecification &other) const {
 	if (weight != other.weight)
 		return weight < other.weight;
 	if (italic != other.italic)
-		return italic == false;
+		return !italic;
 	if (size != other.size)
 		return size < other.size;
 	if (characterSet != other.characterSet)

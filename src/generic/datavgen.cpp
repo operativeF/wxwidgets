@@ -2383,10 +2383,7 @@ bool wxDataViewMainWindow::OnDrop( wxDataFormat format, wxCoord x, wxCoord y )
     wxDataViewEvent event(wxEVT_DATAVIEW_ITEM_DROP_POSSIBLE, m_owner, dropItemInfo.m_item);
     event.SetProposedDropIndex(dropItemInfo.m_proposedDropIndex);
     event.SetDataFormat( format );
-    if (!m_owner->HandleWindowEvent( event ) || !event.IsAllowed())
-        return false;
-
-    return true;
+    return !(!m_owner->HandleWindowEvent( event ) || !event.IsAllowed());
 }
 
 wxDragResult wxDataViewMainWindow::OnData( wxDataFormat format, wxCoord x, wxCoord y,

@@ -89,11 +89,9 @@ static inline bool IsAWordStart(const int ch)
 static inline bool IsAOperator(char ch) {
 	if (IsASCII(ch) && isalnum(ch))
 		return false;
-	if (ch == '+' || ch == '-' || ch == '*' || ch == '/' ||
+	return ch == '+' || ch == '-' || ch == '*' || ch == '/' ||
 	    ch == '&' || ch == '^' || ch == '=' || ch == '<' || ch == '>' ||
-	    ch == '(' || ch == ')' || ch == '[' || ch == ']' || ch == ',' )
-		return true;
-	return false;
+	    ch == '(' || ch == ')' || ch == '[' || ch == ']' || ch == ',';
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -142,7 +140,7 @@ static int GetSendKey(const char *szLine, char *szKey)
 				// Save second portion into var...
 				szSpecial[nSpecPos++] = cTemp;
 				// check if Second portion is all numbers for repeat fuction
-				if (isdigit(cTemp) == false) {nSpecNum = 0;}
+				if (!static_cast<bool>(isdigit(cTemp))) {nSpecNum = 0;}
 			}
 		}
 		nPos++;									// skip to next char
@@ -182,10 +180,7 @@ static bool IsContinuationLine(Sci_PositionU szLine, Accessor &styler)
 		if (!(stylech == SCE_AU3_COMMENT)) {
 			char ch = styler.SafeGetCharAt(nePos);
 			if (!isspacechar(ch)) {
-				if (ch == '_')
-					return true;
-				else
-					return false;
+				return ch == '_';
 			}
 		}
 		nePos--; // skip to next char

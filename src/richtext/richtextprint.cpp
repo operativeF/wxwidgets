@@ -150,9 +150,7 @@ void wxRichTextPrintout::OnPreparePrinting()
 
 bool wxRichTextPrintout::OnBeginDocument(int startPage, int endPage)
 {
-    if (!wxPrintout::OnBeginDocument(startPage, endPage)) return false;
-
-    return true;
+    return wxPrintout::OnBeginDocument(startPage, endPage);
 }
 
 bool wxRichTextPrintout::OnPrintPage(int page)

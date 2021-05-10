@@ -849,8 +849,7 @@ bool wxHtmlWindow::HistoryBack()
 
 bool wxHtmlWindow::HistoryCanBack()
 {
-    if (m_HistoryPos < 1) return false;
-    return true ;
+    return m_HistoryPos >= 1 ;
 }
 
 

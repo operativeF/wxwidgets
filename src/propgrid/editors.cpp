@@ -1690,11 +1690,7 @@ void wxPGCheckBoxEditor::UpdateControl( wxPGProperty* property,
 bool wxPGCheckBoxEditor::OnEvent( wxPropertyGrid* WXUNUSED(propGrid), wxPGProperty* WXUNUSED(property),
     wxWindow* WXUNUSED(ctrl), wxEvent& event ) const
 {
-    if ( event.GetEventType() == wxEVT_CHECKBOX )
-    {
-        return true;
-    }
-    return false;
+    return event.GetEventType() == wxEVT_CHECKBOX;
 }
 
 

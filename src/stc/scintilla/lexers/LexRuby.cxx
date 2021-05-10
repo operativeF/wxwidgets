@@ -323,7 +323,7 @@ static bool isEmptyLine(Sci_Position pos,
 }
 
 static bool RE_CanFollowKeyword(const char *keyword) {
-    if (!strcmp(keyword, "and")
+    return !strcmp(keyword, "and")
             || !strcmp(keyword, "begin")
             || !strcmp(keyword, "break")
             || !strcmp(keyword, "case")
@@ -337,10 +337,7 @@ static bool RE_CanFollowKeyword(const char *keyword) {
             || !strcmp(keyword, "unless")
             || !strcmp(keyword, "until")
             || !strcmp(keyword, "not")
-            || !strcmp(keyword, "or")) {
-        return true;
-    }
-    return false;
+            || !strcmp(keyword, "or");
 }
 
 // Look at chars up to but not including endPos
@@ -1515,16 +1512,12 @@ static bool keywordIsAmbiguous(const char *prevWord)
 {
     // Order from most likely used to least likely
     // Lots of ways to do a loop in Ruby besides 'while/until'
-    if (!strcmp(prevWord, "if")
+    return !strcmp(prevWord, "if")
             || !strcmp(prevWord, "do")
             || !strcmp(prevWord, "while")
             || !strcmp(prevWord, "unless")
             || !strcmp(prevWord, "until")
-            || !strcmp(prevWord, "for")) {
-        return true;
-    } else {
-        return false;
-    }
+            || !strcmp(prevWord, "for");
 }
 
 // Demote keywords in the following conditions:

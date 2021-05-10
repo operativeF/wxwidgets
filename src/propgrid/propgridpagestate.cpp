@@ -1176,10 +1176,7 @@ bool wxPropertyGridPageState::ArePropertiesAdjacent( wxPGProperty* prop1,
                                              iterFlags,
                                              prop1,
                                              -1);
-    if ( ap2 && ap2 == prop2 )
-        return true;
-
-    return false;
+    return ap2 && ap2 == prop2;
 }
 
 // -----------------------------------------------------------------------

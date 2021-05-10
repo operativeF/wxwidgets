@@ -430,7 +430,7 @@ static void ColouriseNsisDoc(Sci_PositionU startPos, Sci_Position length, int, W
           {
             styler.ColourTo(i+1,state);
           }
-          if( bNextLine == false )
+          if( !bNextLine )
           {
             styler.ColourTo(i,state);
 				    state = SCE_NSIS_DEFAULT;
@@ -601,7 +601,7 @@ static void FoldNsisDoc(Sci_PositionU startPos, Sci_Position length, int, WordLi
       {
         nWordStart = i;
       }
-      else if( isNsisLetter(chCurr) == false && nWordStart > -1 )
+      else if( !isNsisLetter(chCurr) && nWordStart > -1 )
       {
         int newLevel = calculateFoldNsis( nWordStart, i-1, levelNext, styler, foldAtElse, foldUtilityCmd );
 

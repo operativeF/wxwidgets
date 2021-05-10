@@ -35,9 +35,7 @@ using namespace Scintilla;
 static inline bool isLispoperator(char ch) {
 	if (IsASCII(ch) && isalnum(ch))
 		return false;
-	if (ch == '\'' || ch == '`' || ch == '(' || ch == ')' || ch == '[' || ch == ']' || ch == '{' || ch == '}')
-		return true;
-	return false;
+	return ch == '\'' || ch == '`' || ch == '(' || ch == ')' || ch == '[' || ch == ']' || ch == '{' || ch == '}';
 }
 
 static inline bool isLispwordstart(char ch) {

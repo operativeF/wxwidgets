@@ -61,7 +61,7 @@ public:
 	{
 		if (strcmp(key, "fold"))
 			return -1;
-		m_bFold = strcmp(val, "0") ? true : false;
+		m_bFold = strcmp(val, "0") != 0;
 		return 0;
 	}
 	const char * SCI_METHOD DescribeWordListSets()

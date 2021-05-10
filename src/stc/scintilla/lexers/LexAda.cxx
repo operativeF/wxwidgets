@@ -338,7 +338,7 @@ static bool IsValidIdentifier(const std::string& identifier) {
 	}
 
 	// Check for underscore at the end
-	if (lastWasUnderscore == true) {
+	if (lastWasUnderscore) {
 		return false;
 	}
 

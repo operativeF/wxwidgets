@@ -37,10 +37,7 @@ bool wxLaunchDefaultApplication(const wxString& document, int flags)
     // function
     sei.fMask = SEE_MASK_FLAG_NO_UI;
 
-    if ( ::ShellExecuteEx(&sei) )
-        return true;
-
-    return false;
+    return ::ShellExecuteEx(&sei) != 0;
 }
 
 // ----------------------------------------------------------------------------
@@ -139,8 +136,5 @@ bool wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
     sei.nShow = SW_SHOWNORMAL;
     sei.fMask = SEE_MASK_FLAG_NO_UI; // we give error message ourselves
 
-    if ( ::ShellExecuteEx(&sei) )
-        return true;
-
-    return false;
+    return ::ShellExecuteEx(&sei) != 0;
 }

@@ -2045,8 +2045,7 @@ bool wxVariantDataList::Eq(wxVariantData& data) const
         node1 = node1->GetNext();
         node2 = node2->GetNext();
     }
-    if (node1 || node2) return false;
-    return true;
+    return !(node1 || node2);
 }
 
 #if wxUSE_STD_IOSTREAM

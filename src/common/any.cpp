@@ -295,7 +295,7 @@ bool wxAnyValueTypeImplInt::ConvertValue(const wxAnyValueBuffer& src,
     }
     else if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, bool) )
     {
-        bool value2 = value ? true : false;
+        bool value2 = value != 0;
         wxAnyValueTypeImpl<bool>::SetValue(value2, dst);
     }
     else
@@ -333,7 +333,7 @@ bool wxAnyValueTypeImplUint::ConvertValue(const wxAnyValueBuffer& src,
     }
     else if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, bool) )
     {
-        bool value2 = value ? true : false;
+        bool value2 = value != 0;
         wxAnyValueTypeImpl<bool>::SetValue(value2, dst);
     }
     else

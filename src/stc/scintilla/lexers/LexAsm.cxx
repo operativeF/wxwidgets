@@ -49,13 +49,11 @@ static inline bool IsAsmOperator(const int ch) {
 	if ((ch < 0x80) && (isalnum(ch)))
 		return false;
 	// '.' left out as it is used to make up numbers
-	if (ch == '*' || ch == '/' || ch == '-' || ch == '+' ||
+	return ch == '*' || ch == '/' || ch == '-' || ch == '+' ||
 		ch == '(' || ch == ')' || ch == '=' || ch == '^' ||
 		ch == '[' || ch == ']' || ch == '<' || ch == '&' ||
 		ch == '>' || ch == ',' || ch == '|' || ch == '~' ||
-		ch == '%' || ch == ':')
-		return true;
-	return false;
+		ch == '%' || ch == ':';
 }
 
 static bool IsStreamCommentStyle(int style) {

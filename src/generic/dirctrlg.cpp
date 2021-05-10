@@ -854,10 +854,7 @@ wxTreeItemId wxGenericDirCtrl::FindChild(wxTreeItemId parentId, const wxString& 
                 wxString path3 = path2.Mid(0, childPath.length());
                 if (childPath == path3)
                 {
-                    if (path3.length() == path2.length())
-                        done = true;
-                    else
-                        done = false;
+                    done = path3.length() == path2.length();
                     return childId;
                 }
             }

@@ -37,14 +37,12 @@ static inline bool IsAWordChar(const int ch) {
 inline bool isMMIXALOperator(char ch) {
 	if (IsASCII(ch) && isalnum(ch))
 		return false;
-	if (ch == '+' || ch == '-' || ch == '|' || ch == '^' ||
+	return ch == '+' || ch == '-' || ch == '|' || ch == '^' ||
 		ch == '*' || ch == '/' ||
 		ch == '%' || ch == '<' || ch == '>' || ch == '&' ||
 		ch == '~' || ch == '$' ||
 		ch == ',' || ch == '(' || ch == ')' ||
-		ch == '[' || ch == ']')
-		return true;
-	return false;
+		ch == '[' || ch == ']';
 }
 
 static void ColouriseMMIXALDoc(Sci_PositionU startPos, Sci_Position length, int initStyle, WordList *keywordlists[],

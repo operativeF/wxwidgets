@@ -711,10 +711,7 @@ wxMenuBase::ProcessMenuEvent(wxMenu* menu, wxMenuEvent& event, wxWindow* win)
     // processed before so, as it's not a command event and hence doesn't
     // bubble up by default, send it there explicitly if not done yet.
     wxWindow* const tlw = wxGetTopLevelParent(win);
-    if ( tlw != win && tlw->HandleWindowEvent(event) )
-        return true;
-
-    return false;
+    return tlw != win && tlw->HandleWindowEvent(event);
 }
 
 // ----------------------------------------------------------------------------

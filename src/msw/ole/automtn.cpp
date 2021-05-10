@@ -357,21 +357,13 @@ wxVariant wxAutomationObject::GetProperty(const wxString& property,
 bool wxAutomationObject::PutProperty(const wxString& property, int noArgs, wxVariant args[])
 {
     wxVariant retVariant;
-    if (!Invoke(property, DISPATCH_PROPERTYPUT, retVariant, noArgs, args))
-    {
-        return false;
-    }
-    return true;
+    return Invoke(property, DISPATCH_PROPERTYPUT, retVariant, noArgs, args);
 }
 
 bool wxAutomationObject::PutPropertyArray(const wxString& property, int noArgs, const wxVariant **args)
 {
     wxVariant retVariant;
-    if (!Invoke(property, DISPATCH_PROPERTYPUT, retVariant, noArgs, nullptr, args))
-    {
-        return false;
-    }
-    return true;
+    return Invoke(property, DISPATCH_PROPERTYPUT, retVariant, noArgs, nullptr, args);
 }
 
 bool wxAutomationObject::PutProperty(const wxString& property,

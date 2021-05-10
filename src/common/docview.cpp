@@ -2194,10 +2194,7 @@ bool wxDocPrintout::HasPage(int pageNum)
 
 bool wxDocPrintout::OnBeginDocument(int startPage, int endPage)
 {
-    if (!wxPrintout::OnBeginDocument(startPage, endPage))
-        return false;
-
-    return true;
+    return wxPrintout::OnBeginDocument(startPage, endPage);
 }
 
 void wxDocPrintout::GetPageInfo(int *minPage, int *maxPage,

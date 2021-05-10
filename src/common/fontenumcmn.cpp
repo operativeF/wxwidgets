@@ -118,10 +118,7 @@ bool wxFontEnumerator::IsValidFacename(const wxString &facename)
 #endif
 
     // is given font face name a valid one ?
-    if (gs_allFacenames.Index(facename, false) == wxNOT_FOUND)
-        return false;
-
-    return true;
+    return gs_allFacenames.Index(facename, false) != wxNOT_FOUND;
 }
 
 /* static */

@@ -110,7 +110,7 @@ public:
 
     bool CanBeUsedWithXRCCTRL(const wxString& name)
     {
-        if (name == wxT("tool") ||
+        return !(name == wxT("tool") ||
             name == wxT("data") ||
             name == wxT("unknown") ||
             name == wxT("notebookpage") ||
@@ -119,11 +119,7 @@ public:
             name == wxT("wxMenu") ||
             name == wxT("wxMenuBar") ||
             name == wxT("wxMenuItem") ||
-            name.EndsWith(wxT("Sizer")) )
-        {
-            return false;
-        }
-        return true;
+            name.EndsWith(wxT("Sizer")));
     }
 
     void GenerateHeaderCode(wxFFile& file)

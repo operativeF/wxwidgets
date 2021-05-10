@@ -379,11 +379,7 @@ static bool ScanNumericEscape(Accessor &styler, Sci_Position& pos, Sci_Position 
 		if (num_digits == 0 && stop_asap)
 			return true;
 	}
-	if (num_digits == 0) {
-		return true;
-	} else {
-		return false;
-	}
+	return num_digits == 0;
 }
 
 /* This is overly permissive for character literals in order to accept UTF-8 encoded

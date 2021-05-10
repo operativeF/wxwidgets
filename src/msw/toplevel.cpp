@@ -1212,10 +1212,7 @@ bool wxTopLevelWindowMSW::SetTransparent(wxByte alpha)
     // Otherwise, set the layered style if needed and set the alpha value
     updateExStyle.TurnOn(WS_EX_LAYERED).Apply();
 
-    if ( ::SetLayeredWindowAttributes(GetHwnd(), 0, (BYTE)alpha, LWA_ALPHA) )
-        return true;
-
-    return false;
+    return ::SetLayeredWindowAttributes(GetHwnd(), 0, (BYTE)alpha, LWA_ALPHA) != 0;
 }
 
 bool wxTopLevelWindowMSW::CanSetTransparent()

@@ -944,12 +944,7 @@ bool wxTGAHandler::DoCanRead(wxInputStream& stream)
     }
 
     short bpp = hdr[HDR_BPP];
-    if ( bpp != 8 && bpp != 16 && bpp != 24 && bpp != 32 )
-    {
-        return false;
-    }
-
-    return true;
+    return !(bpp != 8 && bpp != 16 && bpp != 24 && bpp != 32);
 }
 
 #endif // wxUSE_STREAMS

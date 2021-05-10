@@ -30,13 +30,11 @@ using namespace Scintilla;
 
 static inline bool IsGAPOperator(char ch) {
 	if (IsASCII(ch) && isalnum(ch)) return false;
-	if (ch == '+' || ch == '-' || ch == '*' || ch == '/' ||
+	return ch == '+' || ch == '-' || ch == '*' || ch == '/' ||
 		ch == '^' || ch == ',' || ch == '!' || ch == '.' ||
 		ch == '=' || ch == '<' || ch == '>' || ch == '(' ||
 		ch == ')' || ch == ';' || ch == '[' || ch == ']' ||
-		ch == '{' || ch == '}' || ch == ':' )
-		return true;
-	return false;
+		ch == '{' || ch == '}' || ch == ':';
 }
 
 static void GetRange(Sci_PositionU start, Sci_PositionU end, Accessor &styler, char *s, Sci_PositionU len) {

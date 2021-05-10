@@ -863,8 +863,8 @@ bool wxAuiToolBar::Create(wxWindow* parent,
 
     m_windowStyle = style;
 
-    m_gripperVisible  = (style & wxAUI_TB_GRIPPER) ? true : false;
-    m_overflowVisible = (style & wxAUI_TB_OVERFLOW) ? true : false;
+    m_gripperVisible  = (style & wxAUI_TB_GRIPPER) != 0;
+    m_overflowVisible = (style & wxAUI_TB_OVERFLOW) != 0;
 
     m_orientation = GetOrientation(style);
     if (m_orientation == wxBOTH)
@@ -906,16 +906,10 @@ void wxAuiToolBar::SetWindowStyleFlag(long style)
         SetArtFlags();
     }
 
-    if (m_windowStyle & wxAUI_TB_GRIPPER)
-        m_gripperVisible = true;
-    else
-        m_gripperVisible = false;
+    m_gripperVisible = (m_windowStyle & wxAUI_TB_GRIPPER) != 0;
 
 
-    if (m_windowStyle & wxAUI_TB_OVERFLOW)
-        m_overflowVisible = true;
-    else
-        m_overflowVisible = false;
+    m_overflowVisible = (m_windowStyle & wxAUI_TB_OVERFLOW) != 0;
 
     if (style & wxAUI_TB_HORZ_LAYOUT)
         SetToolTextOrientation(wxAUI_TBTOOL_TEXT_RIGHT);
@@ -1572,7 +1566,7 @@ void wxAuiToolBar::ToggleTool(int tool_id, bool state)
         }
          else if (tool->m_kind == wxITEM_CHECK)
         {
-            if (state == true)
+            if (state)
                 tool->m_state |= wxAUI_BUTTON_STATE_CHECKED;
             else
                 tool->m_state &= ~wxAUI_BUTTON_STATE_CHECKED;
@@ -1585,7 +1579,7 @@ bool wxAuiToolBar::GetToolToggled(int tool_id) const
     wxAuiToolBarItem* tool = FindTool(tool_id);
 
     if ( tool && tool->CanBeToggled() )
-        return (tool->m_state & wxAUI_BUTTON_STATE_CHECKED) ? true : false;
+        return (tool->m_state & wxAUI_BUTTON_STATE_CHECKED) != 0;
 
     return false;
 }
@@ -1596,7 +1590,7 @@ void wxAuiToolBar::EnableTool(int tool_id, bool state)
 
     if (tool)
     {
-        if (state == true)
+        if (state)
             tool->m_state &= ~wxAUI_BUTTON_STATE_DISABLED;
         else
             tool->m_state |= wxAUI_BUTTON_STATE_DISABLED;
@@ -1608,7 +1602,7 @@ bool wxAuiToolBar::GetToolEnabled(int tool_id) const
     wxAuiToolBarItem* tool = FindTool(tool_id);
 
     if (tool)
-        return (tool->m_state & wxAUI_BUTTON_STATE_DISABLED) ? false : true;
+        return (tool->m_state & wxAUI_BUTTON_STATE_DISABLED) == 0;
 
     return false;
 }
@@ -2203,7 +2197,7 @@ void wxAuiToolBar::DoIdleUpdate()
                 if (item.m_window)
                     is_enabled = item.m_window->IsThisEnabled();
                 else
-                    is_enabled = (item.m_state & wxAUI_BUTTON_STATE_DISABLED) ? false : true;
+                    is_enabled = (item.m_state & wxAUI_BUTTON_STATE_DISABLED) == 0;
 
                 bool new_enabled = evt.GetEnabled();
                 if (new_enabled != is_enabled)
@@ -2229,7 +2223,7 @@ void wxAuiToolBar::DoIdleUpdate()
                 if (item.m_kind != wxITEM_CHECK && item.m_kind != wxITEM_RADIO)
                     continue;
 
-                bool is_checked = (item.m_state & wxAUI_BUTTON_STATE_CHECKED) ? true : false;
+                bool is_checked = (item.m_state & wxAUI_BUTTON_STATE_CHECKED) != 0;
                 bool new_checked = evt.GetChecked();
 
                 if (new_checked != is_checked)

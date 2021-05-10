@@ -789,7 +789,7 @@ bool wxPropertyGridInterface::GetPropertyValueAsBool( wxPGPropArg id ) const
     }
     if ( value.IsType(wxPG_VARIANT_TYPE_LONG) )
     {
-        return value.GetLong()?true:false;
+        return value.GetLong() != 0;
     }
     wxPGGetFailed(p, wxPG_VARIANT_TYPE_BOOL);
     return false;

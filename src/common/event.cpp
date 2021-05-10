@@ -510,12 +510,7 @@ bool wxUpdateUIEvent::CanUpdate(wxWindowBase *win)
 
 #if wxUSE_STOPWATCH && wxUSE_LONGLONG
     wxLongLong now = wxGetLocalTimeMillis();
-    if (now > (sm_lastUpdate + sm_updateInterval))
-    {
-        return true;
-    }
-
-    return false;
+    return now > (sm_lastUpdate + sm_updateInterval);
 #else
     // If we don't have wxStopWatch or wxLongLong, we
     // should err on the safe side and update now anyway.

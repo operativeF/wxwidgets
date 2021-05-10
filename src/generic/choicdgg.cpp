@@ -504,13 +504,10 @@ bool wxMultiChoiceDialog::Create( wxWindow *parent,
     styleLbox = wxLB_ALWAYS_SB | wxLB_EXTENDED;
 #endif
 
-    if ( !wxAnyChoiceDialog::Create(parent, message, caption,
+    return wxAnyChoiceDialog::Create(parent, message, caption,
                                     n, choices,
                                     style, pos,
-                                    styleLbox) )
-        return false;
-
-    return true;
+                                    styleLbox);
 }
 
 bool wxMultiChoiceDialog::Create( wxWindow *parent,

@@ -327,10 +327,7 @@ static bool IsCommentLine(Sci_Position line, LexAccessor &styler) {
 static bool IsPackageLine(Sci_Position line, LexAccessor &styler) {
 	Sci_Position pos = styler.LineStart(line);
 	int style = styler.StyleAt(pos);
-	if (style == SCE_PL_WORD && styler.Match(pos, "package")) {
-		return true;
-	}
-	return false;
+	return style == SCE_PL_WORD && styler.Match(pos, "package");
 }
 
 static int PodHeadingLevel(Sci_Position pos, LexAccessor &styler) {

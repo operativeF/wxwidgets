@@ -260,10 +260,7 @@ bool wxIniConfig::IsEmpty() const
         return false;
 
     GetProfileString(m_strGroup.t_str(), nullptr, wxT(""), szBuf, WXSIZEOF(szBuf));
-    if ( !wxIsEmpty(szBuf) )
-        return false;
-
-    return true;
+    return wxIsEmpty(szBuf);
 }
 
 // ----------------------------------------------------------------------------

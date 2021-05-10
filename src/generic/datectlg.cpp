@@ -151,10 +151,7 @@ private:
         wxASSERT(pDt);
 
         pDt->ParseFormat(s, m_format);
-        if ( !pDt->IsValid() )
-            return false;
-
-        return true;
+        return pDt->IsValid();
     }
 
     void SendDateEvent(const wxDateTime& dt)

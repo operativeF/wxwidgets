@@ -34,30 +34,21 @@ using namespace Scintilla;
 //additionally numbers that follow 'M' can be contained in a keyword
 static inline bool IsSWordStart(const int ch, const int prev_ch)
 {
-    if (isalpha(ch) || (ch == '_') || ((isdigit(ch)) && (prev_ch == 'M')))
-        return true;
-
-    return false;
+    return isalpha(ch) || (ch == '_') || ((isdigit(ch)) && (prev_ch == 'M'));
 }
 
 
 //only digits that are not preceded by 'M' count as a number
 static inline bool IsSorcusNumber(const int ch, const int prev_ch)
 {
-    if ((isdigit(ch)) && (prev_ch != 'M'))
-        return true;
-
-    return false;
+    return (isdigit(ch)) && (prev_ch != 'M');
 }
 
 
 //only = is a valid operator
 static inline bool IsSorcusOperator(const int ch)
 {
-    if (ch == '=')
-        return true;
-
-    return false;
+    return ch == '=';
 }
 
 

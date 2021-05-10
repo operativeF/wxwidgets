@@ -1152,7 +1152,7 @@ bool wxBoolProperty::StringToValue( wxVariant& variant, const wxString& text, in
 
 bool wxBoolProperty::IntToValue( wxVariant& variant, int value, int ) const
 {
-    bool boolValue = value ? true : false;
+    bool boolValue = value != 0;
 
     if ( variant != boolValue )
     {
@@ -1557,7 +1557,7 @@ void wxFlagsProperty::Init()
         for ( i=0; i<GetItemCount(); i++ )
         {
             bool child_val;
-            child_val = ( value & choices.GetValue(i) )?true:false;
+            child_val = ( value & choices.GetValue(i) ) != 0;
 
             wxPGProperty* boolProp;
             wxString label = GetLabel(i);
@@ -1801,7 +1801,7 @@ void wxFlagsProperty::RefreshChildren()
         if ( subVal != (m_oldValue & flag) )
             p->ChangeFlag( wxPG_PROP_MODIFIED, true );
 
-        p->SetValue( subVal == flag?true:false );
+        p->SetValue( subVal == flag );
     }
 
     m_oldValue = flags;

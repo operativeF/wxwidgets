@@ -534,7 +534,7 @@ public:
     {return S_OK;}
     HRESULT STDMETHODCALLTYPE LockInPlaceActive(BOOL fLock) wxOVERRIDE
     {
-        m_bInPlaceLocked = (fLock) ? true : false;
+        m_bInPlaceLocked = (fLock) != 0;
         return S_OK;
     }
     HRESULT STDMETHODCALLTYPE GetExtendedControl(IDispatch **) wxOVERRIDE

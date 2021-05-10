@@ -154,11 +154,7 @@ class LexerRegistry : public ILexer {
 			count = (portion == 4) ? 13 : 5;
 		}
 		digit = styler.SafeGetCharAt(start+offset);
-		if (digit == '}') {
-			return true;
-		} else {
-			return false;
-		}
+		return digit == '}';
 	}
 
 public:
@@ -222,7 +218,7 @@ void SCI_METHOD LexerRegistry::Lex(Sci_PositionU startPos,
 		if (context.atLineStart) {
 			Sci_Position currPos = static_cast<Sci_Position>(context.currentPos);
 			bool continued = styler[currPos-3] == '\\';
-			highlight = continued ? true : false;
+			highlight = continued;
 		}
 		switch (context.state) {
 			case SCE_REG_COMMENT:

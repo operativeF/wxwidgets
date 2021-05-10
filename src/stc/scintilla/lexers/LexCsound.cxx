@@ -42,13 +42,11 @@ static inline bool IsCsoundOperator(char ch) {
 	if (IsASCII(ch) && isalnum(ch))
 		return false;
 	// '.' left out as it is used to make up numbers
-	if (ch == '*' || ch == '/' || ch == '-' || ch == '+' ||
+	return ch == '*' || ch == '/' || ch == '-' || ch == '+' ||
 		ch == '(' || ch == ')' || ch == '=' || ch == '^' ||
 		ch == '[' || ch == ']' || ch == '<' || ch == '&' ||
 		ch == '>' || ch == ',' || ch == '|' || ch == '~' ||
-		ch == '%' || ch == ':')
-		return true;
-	return false;
+		ch == '%' || ch == ':';
 }
 
 static void ColouriseCsoundDoc(Sci_PositionU startPos, Sci_Position length, int initStyle, WordList *keywordlists[],

@@ -34,13 +34,11 @@ static inline bool IsAWordChar(const int ch) {
 
 static inline bool IsAnOperator(char ch) {
 	// '.' left out as it is used to make up numbers
-	if (ch == '*' || ch == '/' || ch == '-' || ch == '+' ||
+	return ch == '*' || ch == '/' || ch == '-' || ch == '+' ||
 		ch == '(' || ch == ')' || ch == '=' || ch == '^' ||
 		ch == '[' || ch == ']' || ch == '<' || ch == '&' ||
 		ch == '>' || ch == ',' || ch == '|' || ch == '~' ||
-		ch == '$' || ch == ':' || ch == '%')
-		return true;
-	return false;
+		ch == '$' || ch == ':' || ch == '%';
 }
 
 static void ColouriseAPDLDoc(Sci_PositionU startPos, Sci_Position length, int initStyle, WordList *keywordlists[],

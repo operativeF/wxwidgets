@@ -10975,10 +10975,7 @@ bool wxRichTextTable::GetCellRowColumnPosition(long pos, int& row, int& col) con
 
     wxASSERT(row < m_rowCount && col < m_colCount);
 
-    if (row < m_rowCount && col < m_colCount)
-        return true;
-    else
-        return false;
+    return row < m_rowCount && col < m_colCount;
 }
 
 // Calculate range, taking row/cell ordering into account instead of relying
@@ -14266,10 +14263,7 @@ bool wxTextAttrDimension::EqPartial(const wxTextAttrDimension& dim, bool weakTes
     if (!weakTest && !IsValid() && dim.IsValid())
         return false;
 
-    if (dim.IsValid() && IsValid() && !((*this) == dim))
-        return false;
-    else
-        return true;
+    return !(dim.IsValid() && IsValid() && !((*this) == dim));
 }
 
 bool wxTextAttrDimension::Apply(const wxTextAttrDimension& dim, const wxTextAttrDimension* compareWith)

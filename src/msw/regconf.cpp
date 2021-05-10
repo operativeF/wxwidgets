@@ -595,12 +595,8 @@ bool wxRegConfig::DoReadValue(const wxString& key, T* pValue) const
   }
 
   // first try local key
-  if ( (m_keyLocal.Exists() && TryGetValue(LocalKey(), path.Name(), pValue)) ||
-       (bQueryGlobal && TryGetValue(m_keyGlobal, path.Name(), pValue)) ) {
-    return true;
-  }
-
-  return false;
+  return static_cast<bool>((m_keyLocal.Exists() && TryGetValue(LocalKey(), path.Name(), pValue)) ||
+       (bQueryGlobal && TryGetValue(m_keyGlobal, path.Name(), pValue)));
 }
 
 bool wxRegConfig::DoReadString(const wxString& key, wxString *pStr) const

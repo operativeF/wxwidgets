@@ -611,7 +611,7 @@ wxFont* wxHtmlWinParser::CreateCurrentFont()
                        ff ? wxFONTFAMILY_MODERN : wxFONTFAMILY_SWISS,
                        fi ? wxFONTSTYLE_ITALIC : wxFONTSTYLE_NORMAL,
                        fb ? wxFONTWEIGHT_BOLD : wxFONTWEIGHT_NORMAL,
-                       fu ? true : false, face
+                       fu != 0, face
 #if wxUSE_UNICODE
                        );
 #else
@@ -778,7 +778,7 @@ void wxHtmlWinTagHandler::ApplyStyle(const wxHtmlStyleParams &styleParams)
             str.Truncate(foundIndex);
 
             long sizeValue;
-            if (str.ToLong(&sizeValue) == true)
+            if (str.ToLong(&sizeValue))
             {
                 // Set point size
                 m_WParser->SetFontPointSize(sizeValue);

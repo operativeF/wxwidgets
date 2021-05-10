@@ -320,14 +320,7 @@ static void FoldTALDoc(Sci_PositionU startPos, Sci_Position length, int initStyl
 						}
 					else
 						levelCurrent += classifyFoldPointTAL(s);
-					if (strcmp(s, "end") == 0)
-						{
-						was_end = true;
-						}
-					else
-						{
-						was_end = false;
-						}
+					was_end = strcmp(s, "end") == 0;
 					}
 			}
 		}

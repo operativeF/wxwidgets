@@ -61,7 +61,7 @@ wxAuiFloatingFrame::wxAuiFloatingFrame(wxWindow* parent,
 #ifdef __WXMSW__
     BOOL b = TRUE;
     SystemParametersInfo(38 /*SPI_GETDRAGFULLWINDOWS*/, 0, &b, 0);
-    m_solidDrag = b ? true : false;
+    m_solidDrag = b != 0;
 #endif
 
     SetExtraStyle(wxWS_EX_PROCESS_IDLE);

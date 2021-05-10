@@ -2779,7 +2779,7 @@ void wxPropertyGrid::SwitchState( wxPropertyGridPageState* pNewState )
     if ( orig_mode != new_state_mode )
     {
         // This should refresh as well.
-        EnableCategories( orig_mode?false:true );
+        EnableCategories( !orig_mode );
     }
     else if ( !IsFrozen() )
     {
@@ -2902,10 +2902,7 @@ bool wxPropertyGrid::CommitChangesFromEditor( wxUint32 flags )
     // induce recursive dialogs and crap like that.
     if ( m_iFlags & wxPG_FL_IN_HANDLECUSTOMEDITOREVENT )
     {
-        if ( m_inDoPropertyChanged )
-            return true;
-
-        return false;
+        return m_inDoPropertyChanged;
     }
 
     wxPGProperty* selected = GetSelection();
@@ -2925,7 +2922,7 @@ bool wxPropertyGrid::CommitChangesFromEditor( wxUint32 flags )
         wxWindow* oldFocus = m_curFocused;
 
         bool validationFailure = false;
-        bool forceSuccess = (flags & (wxPG_SEL_NOVALIDATE|wxPG_SEL_FORCE)) ? true : false;
+        bool forceSuccess = (flags & (wxPG_SEL_NOVALIDATE|wxPG_SEL_FORCE)) != 0;
 
         m_chgInfo_changedProperty = nullptr;
 
@@ -3312,7 +3309,7 @@ bool wxPropertyGrid::DoOnValidationFailure( wxPGProperty* property, wxVariant& W
         }
     }
 
-    return (vfb & wxPG_VFB_STAY_IN_PROPERTY) ? false : true;
+    return (vfb & wxPG_VFB_STAY_IN_PROPERTY) == 0;
 }
 
 // -----------------------------------------------------------------------
@@ -6220,10 +6217,7 @@ bool wxPGStringTokenizer::HasMoreTokens()
 
     m_curPos = str.end();
 
-    if ( inToken )
-        return true;
-
-    return false;
+    return inToken;
 }
 
 wxString wxPGStringTokenizer::GetNextToken()

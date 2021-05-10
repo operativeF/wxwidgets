@@ -751,9 +751,7 @@ const wxPluralFormsToken& wxPluralFormsParser::token() const
 
 bool wxPluralFormsParser::nextToken()
 {
-    if (!m_scanner.nextToken())
-        return false;
-    return true;
+    return m_scanner.nextToken();
 }
 
 wxPluralFormsNode* wxPluralFormsParser::expression()

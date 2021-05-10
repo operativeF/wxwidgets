@@ -574,10 +574,7 @@ bool wxHtmlTag::ParseAsColour(const wxString& str, wxColour *clr)
     // known names (note that this doesn't strictly conform to HTML spec,
     // but it doesn't do real harm -- but it *must* be done after the standard
     // colors are handled above):
-    if (clr->Set(str))
-        return true;
-
-    return false;
+    return clr->Set(str);
 }
 
 bool wxHtmlTag::GetParamAsColour(const wxString& par, wxColour *clr) const

@@ -78,7 +78,7 @@ WordList::~WordList() {
 }
 
 WordList::operator bool() const {
-	return len ? true : false;
+	return len != 0;
 }
 
 bool WordList::operator!=(const WordList &other) const {

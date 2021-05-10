@@ -3459,10 +3459,7 @@ static void wxConvertFromMSWListItem(HWND hwndListCtrl,
     bool needText = false;
     if (hwndListCtrl != nullptr)
     {
-        if ( lvItem.mask & LVIF_TEXT )
-            needText = false;
-        else
-            needText = true;
+        needText = (lvItem.mask & LVIF_TEXT) == 0;
 
         if ( needText )
         {

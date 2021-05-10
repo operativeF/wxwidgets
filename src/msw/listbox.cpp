@@ -362,7 +362,7 @@ bool wxListBox::IsSelected(int N) const
     wxCHECK_MSG( IsValid(N), false,
                  wxT("invalid index in wxListBox::Selected") );
 
-    return SendMessage(GetHwnd(), LB_GETSEL, N, 0) == 0 ? false : true;
+    return SendMessage(GetHwnd(), LB_GETSEL, N, 0) != 0;
 }
 
 void *wxListBox::DoGetItemClientData(unsigned int n) const
