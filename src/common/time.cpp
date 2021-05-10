@@ -37,7 +37,7 @@
     #endif
 #endif
 
-#include <time.h>
+#include <ctime>
 
 wxDECL_FOR_STRICT_MINGW32(void, tzset, (void));
 

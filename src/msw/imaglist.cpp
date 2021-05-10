@@ -22,16 +22,16 @@
 
 #ifndef WX_PRECOMP
     #include "wx/app.h"
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include "wx/window.h"
-    #include "wx/icon.h"
     #include "wx/dc.h"
-    #include "wx/string.h"
     #include "wx/dcmemory.h"
+    #include "wx/icon.h"
+    #include "wx/image.h"
     #include "wx/intl.h"
     #include "wx/log.h"
-    #include "wx/image.h"
-    #include <stdio.h>
+    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+    #include "wx/string.h"
+    #include "wx/window.h"
+    #include <cstdio>
 #endif
 
 #include "wx/imaglist.h"

@@ -15,10 +15,10 @@
 #include "wx/gdiobj.h"
 
 #ifndef WX_PRECOMP
-    #include <stdio.h>
+    #include "wx/app.h"
     #include "wx/list.h"
     #include "wx/utils.h"
-    #include "wx/app.h"
+    #include <cstdio>
 #endif
 
 #include "wx/msw/private.h"

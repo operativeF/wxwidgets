@@ -26,12 +26,12 @@
 #include "wx/modalhook.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/msw/wrapcdlg.h"
-    #include <stdio.h>
     #include "wx/colour.h"
     #include "wx/gdicmn.h"
-    #include "wx/utils.h"
     #include "wx/math.h"
+    #include "wx/msw/wrapcdlg.h"
+    #include "wx/utils.h"
+    #include <cstdio>
 #endif
 
 #include "wx/scopeguard.h"
@@ -39,8 +39,8 @@
 #include "wx/msw/private.h"
 #include "wx/msw/private/dpiaware.h"
 
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 
 // ----------------------------------------------------------------------------
 // globals

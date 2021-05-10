@@ -37,7 +37,7 @@
 #include "wx/paper.h"
 #include "wx/modalhook.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 // smart pointer like class using OpenPrinter and ClosePrinter
 class WinPrinter

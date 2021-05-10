@@ -11,12 +11,12 @@
 // In SCE_VISUALPROLOG_STRING_VERBATIM_EOL (i.e. multiline string literal): The closingQuote.
 // else (for SCE_VISUALPROLOG_COMMENT_BLOCK): The comment nesting level
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include <assert.h>
-#include <ctype.h>
+#include <cassert>
+#include <cctype>
+#include <cstdarg>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #ifdef _MSC_VER
 #pragma warning(disable: 4786)

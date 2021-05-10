@@ -63,8 +63,8 @@
     #include <ole2.h>
 #endif
 
-#include <string.h>
-#include <ctype.h>
+#include <cctype>
+#include <cstring>
 
 #include "wx/msw/missing.h"
 

@@ -23,8 +23,8 @@
 
 #include "wx/vector.h"
 
-#include <stdio.h> // for vsscanf
-#include <stdarg.h>
+#include <cstdarg>
+#include <cstdio> // for vsscanf
 
 //-----------------------------------------------------------------------------
 // wxHtmlTagsCache

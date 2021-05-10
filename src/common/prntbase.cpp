@@ -45,8 +45,8 @@
 #include "wx/dcprint.h"
 #include "wx/artprov.h"
 
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
 #include "wx/msw/printdlg.h"

@@ -36,7 +36,7 @@
 #include "wx/private/icondir.h"
 
 // For memcpy
-#include <string.h>
+#include <cstring>
 
 // ----------------------------------------------------------------------------
 // private functions

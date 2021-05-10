@@ -89,7 +89,7 @@
   #include  <signal.h>      // for SIGTRAP used by wxTrap()
 #endif  //Win/Unix
 
-#include <locale.h>
+#include <clocale>
 
 #if wxUSE_FONTMAP
     #include "wx/fontmap.h"

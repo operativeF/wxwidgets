@@ -23,8 +23,8 @@
     #include "wx/module.h"
 #endif
 
-#include <string.h>
-#include <ctype.h>
+#include <cctype>
+#include <cstring>
 
 wxIMPLEMENT_CLASS(wxURL, wxURI);
 

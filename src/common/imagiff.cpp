@@ -29,8 +29,8 @@
     #include "wx/palette.h"
 #endif // wxUSE_PALETTE
 
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 
 
 // --------------------------------------------------------------------------

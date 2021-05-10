@@ -47,7 +47,7 @@
 #include "wx/msw/dcprint.h"
 #include "wx/msw/enhmeta.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 // ---------------------------------------------------------------------------
 // private functions

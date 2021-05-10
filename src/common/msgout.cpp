@@ -31,10 +31,10 @@
     #endif // wxUSE_GUI
 #endif
 
-#include "wx/msgout.h"
 #include "wx/apptrait.h"
-#include <stdarg.h>
-#include <stdio.h>
+#include "wx/msgout.h"
+#include <cstdarg>
+#include <cstdio>
 
 #if defined(__WINDOWS__)
     #include "wx/msw/private.h"

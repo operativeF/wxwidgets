@@ -23,11 +23,11 @@
 
 #include "wx/strconv.h"
 
-#include <errno.h>
+#include <cerrno>
 
-#include <ctype.h>
-#include <string.h>
-#include <stdlib.h>
+#include <cctype>
+#include <cstdlib>
+#include <cstring>
 
 #if defined(__WIN32__)
     #include "wx/msw/private.h"

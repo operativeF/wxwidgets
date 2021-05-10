@@ -20,13 +20,13 @@
 #include "wx/filename.h"
 #include "wx/msw/helpwin.h"
 
-#include <time.h>
+#include <ctime>
 
 #ifdef __WXMSW__
 #include "wx/msw/private.h"
 #endif
 
-#include <string.h>
+#include <cstring>
 
 static HWND GetSuitableHWND(wxWinHelpController* controller)
 {

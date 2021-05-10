@@ -29,7 +29,7 @@
 #include "wx/xpmdecod.h"
 
 // For memcpy
-#include <string.h>
+#include <cstring>
 
 // make the code compile with either wxFile*Stream or wxFFile*Stream:
 #define HAS_FILE_STREAMS (wxUSE_STREAMS && (wxUSE_FILE || wxUSE_FFILE))

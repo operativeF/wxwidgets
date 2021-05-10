@@ -24,12 +24,12 @@
     #include "wx/log.h"
 #endif
 
-#include <ctype.h>
+#include <cctype>
 
-#include <errno.h>
+#include <cerrno>
 
-#include <string.h>
-#include <stdlib.h>
+#include <cstdlib>
+#include <cstring>
 
 #include "wx/hashmap.h"
 #include "wx/vector.h"

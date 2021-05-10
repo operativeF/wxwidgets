@@ -21,7 +21,7 @@
 
 
 #ifndef WX_PRECOMP
-    #include <stdio.h>
+    #include <cstdio>
 
     #include "wx/wx.h"
 #endif

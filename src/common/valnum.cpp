@@ -29,7 +29,7 @@
 #include "wx/valnum.h"
 #include "wx/numformatter.h"
 
-#include <math.h>
+#include <cmath>
 
 // ============================================================================
 // wxNumValidatorBase implementation

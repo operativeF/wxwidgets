@@ -19,7 +19,7 @@
     #include "wx/log.h"
 #endif
 
-#include <ctype.h>
+#include <cctype>
 
 #include "wx/html/helpdata.h"
 #include "wx/tokenzr.h"

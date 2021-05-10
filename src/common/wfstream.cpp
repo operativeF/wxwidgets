@@ -20,7 +20,7 @@
     #include "wx/stream.h"
 #endif
 
-#include <stdio.h>
+#include <cstdio>
 
 #if wxUSE_FILE
 

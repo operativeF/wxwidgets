@@ -28,7 +28,7 @@
     #include  "wx/stream.h"
 #endif  //WX_PRECOMP
 
-#include <stdlib.h>
+#include <cstdlib>
 
 // ============================================================================
 // implementation

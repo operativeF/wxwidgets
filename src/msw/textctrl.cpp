@@ -54,8 +54,8 @@
 #include "wx/msw/private.h"
 #include "wx/msw/winundef.h"
 
-#include <string.h>
-#include <stdlib.h>
+#include <cstdlib>
+#include <cstring>
 
 #include <sys/types.h>
 

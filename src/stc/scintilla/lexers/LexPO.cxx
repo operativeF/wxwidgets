@@ -13,12 +13,12 @@
 // * highlight formats inside c-format strings (%s, %d, etc.)
 // * style for previous untranslated string? ("#|" comment)
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include <assert.h>
-#include <ctype.h>
+#include <cassert>
+#include <cctype>
+#include <cstdarg>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #include "ILexer.h"
 #include "Scintilla.h"

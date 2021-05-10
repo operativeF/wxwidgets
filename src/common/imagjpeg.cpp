@@ -40,9 +40,9 @@
 #include "wx/wfstream.h"
 
 // For memcpy
-#include <string.h>
+#include <cstring>
 // For JPEG library error handling
-#include <setjmp.h>
+#include <csetjmp>
 
 // ----------------------------------------------------------------------------
 // types

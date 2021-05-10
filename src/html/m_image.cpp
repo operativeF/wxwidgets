@@ -32,7 +32,7 @@
 #include "wx/gifdecod.h"
 #include "wx/artprov.h"
 
-#include <float.h>
+#include <cfloat>
 
 FORCE_LINK_ME(m_image)
 

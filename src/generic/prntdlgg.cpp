@@ -55,8 +55,8 @@
 #include "wx/tokenzr.h"
 #include "wx/imaglist.h"
 
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 
 #ifndef __WXUNIVERSAL__
 

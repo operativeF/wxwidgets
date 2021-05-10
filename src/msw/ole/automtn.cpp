@@ -25,7 +25,7 @@
 #include "wx/msw/ole/oleutils.h"
 #include "wx/msw/ole/automtn.h"
 
-#include <time.h>
+#include <ctime>
 
 #include <wtypes.h>
 #include <unknwn.h>

@@ -23,7 +23,7 @@
 #if wxUSE_NUMBERDLG
 
 #ifndef WX_PRECOMP
-    #include <stdio.h>
+    #include <cstdio>
 
     #include "wx/utils.h"
     #include "wx/dialog.h"

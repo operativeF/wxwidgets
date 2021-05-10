@@ -27,8 +27,8 @@
 
 #include "wx/xlocale.h"
 
-#include <errno.h>
-#include <locale.h>
+#include <cerrno>
+#include <clocale>
 
 // ----------------------------------------------------------------------------
 // module globals

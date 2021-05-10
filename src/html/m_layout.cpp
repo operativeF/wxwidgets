@@ -22,7 +22,7 @@
 
 FORCE_LINK_ME(m_layout)
 
-#include <stdlib.h>                     // bsearch()
+#include <cstdlib>                     // bsearch()
 
 //-----------------------------------------------------------------------------
 // wxHtmlPageBreakCell

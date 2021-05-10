@@ -22,10 +22,10 @@
 #define _ISOC9X_SOURCE 1 // to get vsscanf()
 #define _BSD_SOURCE    1 // to still get strdup()
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <wchar.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cwchar>
 
 #ifdef __SGI__
     // wide character functions are declared in std namespace under IRIX
@@ -36,8 +36,8 @@
     extern "C" int vswscanf(const wchar_t *, const wchar_t *, va_list);
 #endif
 
-#include <time.h>
-#include <locale.h>
+#include <clocale>
+#include <ctime>
 
 #ifndef WX_PRECOMP
     #include "wx/string.h"
@@ -50,7 +50,7 @@
     #include <langinfo.h>
 #endif
 
-#include <errno.h>
+#include <cerrno>
 
 #if defined(__DARWIN__)
     #include "wx/osx/core/cfref.h"

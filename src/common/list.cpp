@@ -20,9 +20,9 @@
 #include "wx/wxprec.h"
 
 
-#include <stdarg.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdarg>
+#include <cstdlib>
+#include <cstring>
 
 #ifndef WX_PRECOMP
     #include "wx/list.h"

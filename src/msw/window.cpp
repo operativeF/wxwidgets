@@ -104,7 +104,7 @@
 #include "wx/dynlib.h"
 #include "wx/display.h"
 
-#include <string.h>
+#include <cstring>
 
 #include <shellapi.h>
 #include <mmsystem.h>

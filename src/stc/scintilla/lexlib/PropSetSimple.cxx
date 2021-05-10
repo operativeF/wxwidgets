@@ -7,9 +7,9 @@
 
 // Maintain a dictionary of properties
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #include <string>
 #include <map>

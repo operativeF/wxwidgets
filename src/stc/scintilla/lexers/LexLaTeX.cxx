@@ -7,12 +7,12 @@
 
 // Modified by G. HU in 2013. Added folding, syntax highting inside math environments, and changed some minor behaviors.
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include <assert.h>
-#include <ctype.h>
+#include <cassert>
+#include <cctype>
+#include <cstdarg>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <vector>
 
 #include "ILexer.h"

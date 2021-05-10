@@ -5,11 +5,11 @@
 // Copyright 2001 Simon Steele <ss@pnotepad.org>, portions copyright Neil Hodgson.
 // The License.txt file describes the conditions under which this software may be distributed.
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <assert.h>
-#include <ctype.h>
+#include <cassert>
+#include <cctype>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #include <stdexcept>
 #include <string>

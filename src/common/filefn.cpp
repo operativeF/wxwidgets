@@ -42,11 +42,11 @@
     #pragma warning(disable:4706)   // assignment within conditional expression
 #endif // VC++
 
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
+#include <cctype>
+#include <cerrno>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #if defined(__WXMAC__)
     #include  "wx/osx/private.h"  // includes mac headers

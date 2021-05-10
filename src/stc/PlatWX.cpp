@@ -17,7 +17,7 @@
     #include "wx/settings.h"
 #endif // WX_PRECOMP
 
-#include <ctype.h>
+#include <cctype>
 
 #include "wx/display.h"
 
@@ -55,8 +55,8 @@
 
 #ifdef HAVE_DIRECTWRITE_TECHNOLOGY
 #include "ScintillaWX.h"
-#include <float.h>
 #include "wx/dcscreen.h"
+#include <cfloat>
 #endif
 
 #if defined(__WXGTK__) && wxSTC_POPUP_IS_FRAME

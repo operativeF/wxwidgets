@@ -12,12 +12,12 @@
 // This lexer is derived from the one written for the texwork environment (1999++) which in
 // turn is inspired on texedit (1991++) which finds its roots in wdt (1986).
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include <assert.h>
-#include <ctype.h>
+#include <cassert>
+#include <cctype>
+#include <cstdarg>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #include "ILexer.h"
 #include "Scintilla.h"

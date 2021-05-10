@@ -29,7 +29,7 @@
     #include "wx/txtstrm.h"
 #endif
 
-#include <string.h>            // for memset()
+#include <cstring>            // for memset()
 
 #include "wx/ioswrap.h"
 

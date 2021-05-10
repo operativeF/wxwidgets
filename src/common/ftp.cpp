@@ -29,12 +29,12 @@
 #if wxUSE_PROTOCOL_FTP
 
 #ifndef WX_PRECOMP
-    #include <stdlib.h>
+    #include "wx/intl.h"
+    #include "wx/log.h"
     #include "wx/string.h"
     #include "wx/utils.h"
-    #include "wx/log.h"
-    #include "wx/intl.h"
     #include "wx/wxcrtvararg.h"
+    #include <cstdlib>
 #endif // WX_PRECOMP
 
 #include "wx/sckaddr.h"

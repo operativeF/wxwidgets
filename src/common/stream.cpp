@@ -29,10 +29,10 @@
     #include "wx/log.h"
 #endif
 
-#include <ctype.h>
 #include "wx/datstrm.h"
-#include "wx/textfile.h"
 #include "wx/scopeguard.h"
+#include "wx/textfile.h"
+#include <cctype>
 
 // ----------------------------------------------------------------------------
 // constants

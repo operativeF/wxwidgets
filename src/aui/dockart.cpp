@@ -52,7 +52,7 @@
 #endif
 #endif
 
-#include <math.h>
+#include <cmath>
 
 wxColor wxAuiLightContrastColour(const wxColour& c)
 {

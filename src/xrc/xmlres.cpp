@@ -44,8 +44,8 @@
 #include "wx/config.h"
 #include "wx/platinfo.h"
 
-#include <limits.h>
-#include <locale.h>
+#include <climits>
+#include <clocale>
 
 namespace
 {

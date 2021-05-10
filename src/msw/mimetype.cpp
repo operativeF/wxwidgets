@@ -54,7 +54,7 @@
 #define wxASSOCSTR_DEFAULTICON (static_cast<ASSOCSTR>(15))
 
 // other standard headers
-#include <ctype.h>
+#include <cctype>
 
 // in case we're compiling in non-GUI mode
 class WXDLLIMPEXP_FWD_CORE wxIcon;

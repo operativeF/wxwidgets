@@ -32,7 +32,7 @@
 #include "wx/msw/private.h"
 
 // other std headers
-#include  <stdlib.h>      // for _MAX_PATH
+#include  <cstdlib>      // for _MAX_PATH
 
 #ifndef _MAX_PATH
     #define _MAX_PATH 512

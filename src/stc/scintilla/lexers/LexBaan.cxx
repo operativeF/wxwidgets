@@ -7,8 +7,8 @@
 // The License.txt file describes the conditions under which this software may be distributed.
 
 // C standard library
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 
 // C++ wrappers of C standard library
 #include <cassert>

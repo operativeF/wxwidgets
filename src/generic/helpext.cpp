@@ -27,8 +27,8 @@
 #include "wx/textfile.h"
 #include "wx/generic/helpext.h"
 
-#include <stdio.h>
-#include <ctype.h>
+#include <cctype>
+#include <cstdio>
 #include <sys/stat.h>
 
 #if !defined(__WINDOWS__)

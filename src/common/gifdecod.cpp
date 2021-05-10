@@ -19,12 +19,12 @@
     #include "wx/log.h"
 #endif
 
-#include <stdlib.h>
-#include <string.h>
 #include "wx/gifdecod.h"
 #include "wx/scopedarray.h"
 #include "wx/scopedptr.h"
 #include "wx/scopeguard.h"
+#include <cstdlib>
+#include <cstring>
 
 enum
 {

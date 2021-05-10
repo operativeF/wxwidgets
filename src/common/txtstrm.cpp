@@ -20,7 +20,7 @@
     #include "wx/crt.h"
 #endif
 
-#include <ctype.h>
+#include <cctype>
 
 // ----------------------------------------------------------------------------
 // wxTextInputStream

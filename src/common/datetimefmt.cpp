@@ -43,11 +43,11 @@
 
 #include "wx/thread.h"
 
-#include <ctype.h>
+#include <cctype>
 
 #ifdef __WINDOWS__
+    #include <clocale>
     #include <winnls.h>
-    #include <locale.h>
 #endif
 
 #include "wx/datetime.h"

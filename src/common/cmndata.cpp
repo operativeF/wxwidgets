@@ -28,12 +28,12 @@
     #if defined(__WXMSW__)
         #include "wx/msw/wrapcdlg.h"
     #endif // MSW
-    #include <stdio.h>
+    #include "wx/app.h"
+    #include "wx/gdicmn.h"
+    #include "wx/log.h"
     #include "wx/string.h"
     #include "wx/utils.h"
-    #include "wx/app.h"
-    #include "wx/log.h"
-    #include "wx/gdicmn.h"
+    #include <cstdio>
 #endif
 
 #include "wx/prntbase.h"

@@ -33,7 +33,7 @@
 #include "png.h"
 
 // For memcpy
-#include <string.h>
+#include <cstring>
 
 // ----------------------------------------------------------------------------
 // local functions

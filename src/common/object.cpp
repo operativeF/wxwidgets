@@ -20,7 +20,7 @@
     #include "wx/crt.h"
 #endif
 
-#include <string.h>
+#include <cstring>
 
 // we must disable optimizations for VC.NET because otherwise its too eager
 // linker discards wxClassInfo objects in release build thus breaking many,

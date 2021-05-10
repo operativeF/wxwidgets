@@ -28,7 +28,7 @@
 
 #include "wx/private/secretstore.h"
 
-#include <string.h>
+#include <cstring>
 
 // ============================================================================
 // wxSecretValue implementation

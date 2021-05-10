@@ -42,7 +42,7 @@
 #include "wx/private/menuradio.h" // for wxMenuRadioItemsData
 
 // other standard headers
-#include <string.h>
+#include <cstring>
 
 #include "wx/dynlib.h"
 

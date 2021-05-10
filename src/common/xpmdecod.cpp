@@ -107,8 +107,8 @@ license is as follows:
     #include "wx/palette.h"
 #endif
 
-#include <string.h>
-#include <ctype.h>
+#include <cctype>
+#include <cstring>
 
 #if wxUSE_STREAMS
 bool wxXPMDecoder::CanRead(wxInputStream& stream)

@@ -43,7 +43,7 @@
     #include "wx/tooltip.h"
 #endif // wxUSE_TOOLTIPS
 
-#include <limits.h>         // for INT_MIN
+#include <climits>         // for INT_MIN
 
 // ----------------------------------------------------------------------------
 // macros

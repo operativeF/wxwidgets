@@ -27,7 +27,7 @@
     #include "wx/math.h"
 #endif
 
-#include <stdlib.h>
+#include <cstdlib>
 
 #include "wx/laywin.h"
 

@@ -24,7 +24,7 @@
 #include "wx/html/htmlcell.h"
 #include "wx/html/htmlwin.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 //-----------------------------------------------------------------------------
 // Helper classes

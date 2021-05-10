@@ -23,17 +23,17 @@
 #if wxUSE_DRAGIMAGE
 
 #ifndef WX_PRECOMP
-    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
-    #include <stdio.h>
-    #include "wx/window.h"
     #include "wx/dcclient.h"
-    #include "wx/dcscreen.h"
     #include "wx/dcmemory.h"
-    #include "wx/settings.h"
-    #include "wx/intl.h"
-    #include "wx/log.h"
+    #include "wx/dcscreen.h"
     #include "wx/frame.h"
     #include "wx/image.h"
+    #include "wx/intl.h"
+    #include "wx/log.h"
+    #include "wx/msw/wrapcctl.h" // include <commctrl.h> "properly"
+    #include "wx/settings.h"
+    #include "wx/window.h"
+    #include <cstdio>
 #endif
 
 #include "wx/msw/private.h"

@@ -25,10 +25,10 @@
 
 #include "wx/msw/wrapshl.h"
 
-#include <string.h>
-#include "wx/taskbar.h"
-#include "wx/platinfo.h"
 #include "wx/msw/private.h"
+#include "wx/platinfo.h"
+#include "wx/taskbar.h"
+#include <cstring>
 
 #ifndef NIN_BALLOONTIMEOUT
     #define NIN_BALLOONTIMEOUT      0x0404

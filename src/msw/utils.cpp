@@ -90,7 +90,7 @@
 #define PROCESSOR_ARCHITECTURE_ARM64 12
 #endif
 
-#include <errno.h>
+#include <cerrno>
 
 // For wxKillAllChildren
 #include <tlhelp32.h>

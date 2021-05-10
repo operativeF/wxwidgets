@@ -14,12 +14,12 @@
 // but we match directive keywords and colorize incorrect ones.
 // Block comments can be nested (code stolen from my code in LexLua).
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include <assert.h>
-#include <ctype.h>
+#include <cassert>
+#include <cctype>
+#include <cstdarg>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #include "ILexer.h"
 #include "Scintilla.h"

@@ -28,7 +28,7 @@
 #endif
 
 // Required for wxIs... functions
-#include <ctype.h>
+#include <cctype>
 
 // ============================================================================
 // implementation

@@ -76,11 +76,11 @@
 #include "wx/versioninfo.h"
 #include "wx/math.h"
 
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
+#include <cctype>
+#include <cerrno>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #if wxUSE_GUI
     #include "wx/filename.h"
@@ -90,7 +90,7 @@
     #include "wx/private/launchbrowser.h"
 #endif // wxUSE_GUI
 
-#include <time.h>
+#include <ctime>
 
 #ifdef __WXMAC__
     #include "wx/osx/private.h"

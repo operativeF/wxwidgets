@@ -66,9 +66,9 @@
     #error  "Please specify the header with file functions declarations."
 #endif  //Win/UNIX
 
-#include  <stdio.h>       // SEEK_xxx constants
+#include  <cstdio>       // SEEK_xxx constants
 
-#include <errno.h>
+#include <cerrno>
 
 // Windows compilers don't have these constants
 #ifndef W_OK

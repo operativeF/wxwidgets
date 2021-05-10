@@ -40,7 +40,7 @@
 
 #include "wx/msw/private.h"
 
-#include <ctype.h>
+#include <cctype>
 
 #if !defined(__GNUWIN32__)
     #include <direct.h>
@@ -59,11 +59,11 @@
     #include <shellapi.h>
 #endif
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
-#include <stdarg.h>
+#include <cerrno>
+#include <cstdarg>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #if wxUSE_IPC
     #include "wx/dde.h"         // for WX_DDE hack in wxExecute

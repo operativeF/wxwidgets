@@ -43,7 +43,7 @@
 #include "wx/msw/private.h"
 #include "wx/msw/private/winstyle.h"
 
-#include <string.h>
+#include <cstring>
 
 // ---------------------------------------------------------------------------
 // global variables

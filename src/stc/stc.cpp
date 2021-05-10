@@ -38,7 +38,7 @@
     #include "wx/wx.h"
 #endif // WX_PRECOMP
 
-#include <ctype.h>
+#include <cctype>
 
 #include "wx/tokenzr.h"
 #include "wx/mstream.h"

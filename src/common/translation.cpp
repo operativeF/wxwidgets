@@ -34,8 +34,8 @@
 #endif // WX_PRECOMP
 
 // standard headers
-#include <ctype.h>
-#include <stdlib.h>
+#include <cctype>
+#include <cstdlib>
 
 #include "wx/arrstr.h"
 #include "wx/dir.h"

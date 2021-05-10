@@ -43,11 +43,11 @@
 #include "wx/vector.h"
 
 // other standard headers
-#include <errno.h>
+#include <cerrno>
 
-#include <string.h>
+#include <cstring>
 
-#include <stdlib.h>
+#include <cstdlib>
 
 #if defined(__WINDOWS__)
     #include "wx/msw/private.h" // includes windows.h

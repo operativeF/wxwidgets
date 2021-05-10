@@ -37,7 +37,7 @@
 
 #include "wx/sysopt.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 // ---------------------------------------------------------------------------
 // macros

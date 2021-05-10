@@ -20,7 +20,7 @@
 
 #include "wx/msw/private.h"
 
-#include <string.h>
+#include <cstring>
 
 // Colour
 

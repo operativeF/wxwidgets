@@ -8,8 +8,8 @@
  * @date April 18, 2009
  */
 
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 
 #include <cassert>
 #include <cctype>

@@ -34,11 +34,11 @@
     #include "wx/module.h"
 #endif // WX_PRECOMP
 
-#include <locale.h>
+#include <clocale>
 
 // standard headers
-#include <ctype.h>
-#include <stdlib.h>
+#include <cctype>
+#include <cstdlib>
 #ifdef HAVE_LANGINFO_H
     #include <langinfo.h>
 #endif

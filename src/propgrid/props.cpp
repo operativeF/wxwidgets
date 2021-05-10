@@ -27,8 +27,8 @@
 #include "wx/propgrid/propgrid.h"
 #include "wx/propgrid/editors.h"
 
-#include <float.h>
-#include <limits.h>
+#include <cfloat>
+#include <climits>
 
 // MinGW in strict ANSI mode doesn't define those in its limits.h.
 #if defined(wxNEEDS_STRICT_ANSI_WORKAROUNDS) && !defined(LLONG_MAX)

@@ -39,7 +39,7 @@
 #include "wx/confbase.h"
 
 // other standard headers
-#include <ctype.h>
+#include <cctype>
 
 // implementation classes:
 #if defined(__WINDOWS__)

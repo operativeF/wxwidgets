@@ -39,7 +39,7 @@
 #include "wx/progdlg.h"
 #include "wx/paper.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 // ----------------------------------------------------------------------------
 // wxWin macros

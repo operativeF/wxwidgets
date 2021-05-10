@@ -25,7 +25,7 @@
 
 #include "wx/private/wxprintf.h"
 
-#include <errno.h>
+#include <cerrno>
 
 // ============================================================================
 // printf() implementation

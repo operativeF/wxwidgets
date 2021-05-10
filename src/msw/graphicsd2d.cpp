@@ -54,7 +54,7 @@
     #pragma warning(pop)
 #endif
 
-#include <float.h> // for FLT_MAX, FLT_MIN
+#include <cfloat> // for FLT_MAX, FLT_MIN
 
 #ifndef WX_PRECOMP
     #include "wx/dc.h"

@@ -35,10 +35,10 @@
 #include "wx/apptrait.h"
 #include "wx/file.h"
 
-#include <stdlib.h>
-#include <ctype.h>
-#include <limits.h>     // for INT_MAX
-#include <float.h>      // for FLT_MAX
+#include <cctype>
+#include <cfloat>      // for FLT_MAX
+#include <climits>     // for INT_MAX
+#include <cstdlib>
 
 // ----------------------------------------------------------------------------
 // global and class static variables

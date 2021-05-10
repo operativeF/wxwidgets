@@ -16,12 +16,12 @@
 // TeX Folding code added by instanton (soft_share@126.com) with borrowed code from VisualTeX source by Alex Romanenko.
 // Version: June 22, 2007
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include <assert.h>
-#include <ctype.h>
+#include <cassert>
+#include <cctype>
+#include <cstdarg>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #include "ILexer.h"
 #include "Scintilla.h"

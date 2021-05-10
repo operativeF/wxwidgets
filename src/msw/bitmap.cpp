@@ -23,7 +23,7 @@
 #include "wx/bitmap.h"
 
 #ifndef WX_PRECOMP
-    #include <stdio.h>
+    #include <cstdio>
 
     #include "wx/list.h"
     #include "wx/utils.h"

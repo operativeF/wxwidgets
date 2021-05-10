@@ -36,8 +36,8 @@
     #include "wx/math.h"
 #endif
 
-#include <stdlib.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstring>
 
 #include "wx/dynlib.h"
 #include "wx/filename.h"
