@@ -430,7 +430,7 @@ bool wxArtProvider::HasNativeProvider()
 class wxArtProviderModule: public wxModule
 {
 public:
-    bool OnInit() wxOVERRIDE
+    bool OnInit() override
     {
         // The order here is such that the native provider will be used first
         // and the standard one last as all these default providers add
@@ -444,7 +444,7 @@ public:
 #endif // wxUSE_ARTPROVIDER_STD
         return true;
     }
-    void OnExit() wxOVERRIDE
+    void OnExit() override
     {
         wxArtProvider::CleanUpProviders();
     }

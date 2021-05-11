@@ -145,8 +145,8 @@ class wxPGGlobalVarsClassManager : public wxModule
     wxDECLARE_DYNAMIC_CLASS(wxPGGlobalVarsClassManager);
 public:
     wxPGGlobalVarsClassManager() = default;
-    virtual bool OnInit() wxOVERRIDE { wxPGGlobalVars = new wxPGGlobalVarsClass(); return true; }
-    virtual void OnExit() wxOVERRIDE { wxDELETE(wxPGGlobalVars); }
+    virtual bool OnInit() override { wxPGGlobalVars = new wxPGGlobalVarsClass(); return true; }
+    virtual void OnExit() override { wxDELETE(wxPGGlobalVars); }
 };
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxPGGlobalVarsClassManager, wxModule);
@@ -3904,7 +3904,7 @@ public:
     = default;
 
 private:
-    bool ProcessEvent( wxEvent& event ) wxOVERRIDE
+    bool ProcessEvent( wxEvent& event ) override
     {
         // Always skip
         event.Skip();

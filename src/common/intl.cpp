@@ -2017,12 +2017,12 @@ class wxLocaleModule: public wxModule
     public:
         wxLocaleModule() = default;
 
-        bool OnInit() wxOVERRIDE
+        bool OnInit() override
         {
             return true;
         }
 
-        void OnExit() wxOVERRIDE
+        void OnExit() override
         {
             wxLocale::DestroyLanguagesDB();
         }

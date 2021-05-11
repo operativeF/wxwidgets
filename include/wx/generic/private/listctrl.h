@@ -365,7 +365,7 @@ public:
     virtual ~wxListHeaderWindow();
 
     // We never need focus as we don't have any keyboard interface.
-    virtual bool AcceptsFocus() const wxOVERRIDE { return false; }
+    virtual bool AcceptsFocus() const override { return false; }
 
     void DrawCurrent();
     void AdjustDC( wxDC& dc );
@@ -381,9 +381,9 @@ public:
     int m_colToSend;
     int m_widthToSend;
 
-    virtual wxWindow *GetMainWindowOfCompositeControl() wxOVERRIDE { return GetParent(); }
+    virtual wxWindow *GetMainWindowOfCompositeControl() override { return GetParent(); }
 
-    virtual void OnInternalIdle() wxOVERRIDE;
+    virtual void OnInternalIdle() override;
 
 private:
     // common part of all ctors
@@ -407,7 +407,7 @@ private:
 
 public:
     wxListRenameTimer( wxListMainWindow *owner );
-    void Notify() wxOVERRIDE;
+    void Notify() override;
 };
 
 //-----------------------------------------------------------------------------
@@ -425,7 +425,7 @@ public:
     {
     }
 
-    virtual void Notify() wxOVERRIDE;
+    virtual void Notify() override;
 
 private:
     wxListMainWindow *m_owner;
@@ -730,7 +730,7 @@ public:
                      const wxPoint& point = wxDefaultPosition );
 
     // override base class virtual to reset m_lineHeight when the font changes
-    virtual bool SetFont(const wxFont& font) wxOVERRIDE
+    virtual bool SetFont(const wxFont& font) override
     {
         if ( !wxWindow::SetFont(font) )
             return false;
@@ -766,7 +766,7 @@ public:
         return m_hasFocus ? m_highlightBrush : m_highlightUnfocusedBrush;
     }
 
-    bool HasFocus() const wxOVERRIDE
+    bool HasFocus() const override
     {
         return m_hasFocus;
     }
@@ -841,7 +841,7 @@ protected:
     bool m_hasCheckBoxes;
 
 protected:
-    wxWindow *GetMainWindowOfCompositeControl() wxOVERRIDE { return GetParent(); }
+    wxWindow *GetMainWindowOfCompositeControl() override { return GetParent(); }
 
     // the total count of items selected in a non virtual list control with
     // multiple selections (always 0 otherwise)

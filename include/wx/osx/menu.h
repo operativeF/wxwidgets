@@ -34,7 +34,7 @@ public:
 
     virtual ~wxMenu();
 
-    virtual void SetTitle(const wxString& title) wxOVERRIDE;
+    virtual void SetTitle(const wxString& title) override;
 
     bool ProcessCommand(wxCommandEvent& event);
 
@@ -71,9 +71,9 @@ protected:
     // that are expected in the app menu
     void DoRearrange() ;
 
-    virtual wxMenuItem* DoAppend(wxMenuItem *item) wxOVERRIDE;
-    virtual wxMenuItem* DoInsert(size_t pos, wxMenuItem *item) wxOVERRIDE;
-    virtual wxMenuItem* DoRemove(wxMenuItem *item) wxOVERRIDE;
+    virtual wxMenuItem* DoAppend(wxMenuItem *item) override;
+    virtual wxMenuItem* DoInsert(size_t pos, wxMenuItem *item) override;
+    virtual wxMenuItem* DoRemove(wxMenuItem *item) override;
 
 private:
     // common part of all ctors
@@ -123,16 +123,16 @@ public:
     virtual ~wxMenuBar();
 
     // menubar construction
-    virtual bool Append( wxMenu *menu, const wxString &title ) wxOVERRIDE;
-    virtual bool Insert(size_t pos, wxMenu *menu, const wxString& title) wxOVERRIDE;
-    virtual wxMenu *Replace(size_t pos, wxMenu *menu, const wxString& title) wxOVERRIDE;
-    virtual wxMenu *Remove(size_t pos) wxOVERRIDE;
+    virtual bool Append( wxMenu *menu, const wxString &title ) override;
+    virtual bool Insert(size_t pos, wxMenu *menu, const wxString& title) override;
+    virtual wxMenu *Replace(size_t pos, wxMenu *menu, const wxString& title) override;
+    virtual wxMenu *Remove(size_t pos) override;
 
-    virtual void EnableTop( size_t pos, bool flag ) wxOVERRIDE;
-    virtual bool IsEnabledTop(size_t pos) const wxOVERRIDE;
-    virtual void SetMenuLabel( size_t pos, const wxString& label ) wxOVERRIDE;
-    virtual wxString GetMenuLabel( size_t pos ) const wxOVERRIDE;
-    virtual bool Enable( bool enable = true ) wxOVERRIDE;
+    virtual void EnableTop( size_t pos, bool flag ) override;
+    virtual bool IsEnabledTop(size_t pos) const override;
+    virtual void SetMenuLabel( size_t pos, const wxString& label ) override;
+    virtual wxString GetMenuLabel( size_t pos ) const override;
+    virtual bool Enable( bool enable = true ) override;
     // for virtual function hiding
     virtual void Enable( int itemid, bool enable )
     {
@@ -148,7 +148,7 @@ public:
 
     // if the menubar is modified, the display is not updated automatically,
     // call this function to update it (m_menuBarFrame should be !NULL)
-    void Refresh(bool eraseBackground = true, const wxRect *rect = NULL) wxOVERRIDE;
+    void Refresh(bool eraseBackground = true, const wxRect *rect = NULL) override;
 
 #if wxABI_VERSION >= 30001
     wxMenu *OSXGetAppleMenu() const { return m_appleMenu; }
@@ -166,9 +166,9 @@ public:
 
     static WXHMENU MacGetWindowMenuHMenu() { return s_macWindowMenuHandle ; }
 
-    virtual void DoGetPosition(int *x, int *y) const wxOVERRIDE;
-    virtual void DoGetSize(int *width, int *height) const wxOVERRIDE;
-    virtual void DoGetClientSize(int *width, int *height) const wxOVERRIDE;
+    virtual void DoGetPosition(int *x, int *y) const override;
+    virtual void DoGetSize(int *width, int *height) const override;
+    virtual void DoGetClientSize(int *width, int *height) const override;
 
 protected:
     // common part of all ctors

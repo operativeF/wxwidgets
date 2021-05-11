@@ -1167,7 +1167,7 @@ template <class NotifierT, class EntryT>
 class ArchiveNotifier : public NotifierT
 {
 public:
-    void OnEntryUpdated(EntryT& WXUNUSED(entry)) wxOVERRIDE { }
+    void OnEntryUpdated(EntryT& WXUNUSED(entry)) override { }
 };
 
 template <class ClassFactoryT>
@@ -1193,7 +1193,7 @@ public:
     { }
 
     // the entry point for the test
-    void runTest() wxOVERRIDE;
+    void runTest() override;
 
 protected:
     void CreateArchive(wxOutputStream& out);

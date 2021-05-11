@@ -60,7 +60,7 @@ protected:
     // event handlers
     void OnMouseClick(wxMouseEvent& event);
 
-    virtual void OnDismiss() wxOVERRIDE;
+    virtual void OnDismiss() override;
 
 private:
     wxTipWindowView *m_view;

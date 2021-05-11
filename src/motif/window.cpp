@@ -294,7 +294,7 @@ bool wxWindow::Create(wxWindow *parent, wxWindowID id,
     XtFree((char *) ptr);
 
 #if 0
-    if (GetWindowStyleFlag() & wxOVERRIDE_KEY_TRANSLATIONS)
+    if (GetWindowStyleFlag() & override_KEY_TRANSLATIONS)
     {
         ptr = XtParseTranslationTable ("<Key>: DrawingAreaInput()");
         XtOverrideTranslations ((Widget) m_drawingArea, ptr);

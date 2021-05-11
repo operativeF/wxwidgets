@@ -30,8 +30,8 @@ class FileFunctionsTestCase : public CppUnit::TestCase
 {
 public:
     FileFunctionsTestCase() { }
-    void setUp() wxOVERRIDE;
-    void tearDown() wxOVERRIDE;
+    void setUp() override;
+    void tearDown() override;
 
 private:
     CPPUNIT_TEST_SUITE( FileFunctionsTestCase );

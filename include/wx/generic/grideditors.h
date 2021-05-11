@@ -59,29 +59,29 @@ public:
 
     virtual void Create(wxWindow* parent,
                         wxWindowID id,
-                        wxEvtHandler* evtHandler) wxOVERRIDE;
-    virtual void SetSize(const wxRect& rect) wxOVERRIDE;
+                        wxEvtHandler* evtHandler) override;
+    virtual void SetSize(const wxRect& rect) override;
 
-    virtual bool IsAcceptedKey(wxKeyEvent& event) wxOVERRIDE;
-    virtual void BeginEdit(int row, int col, wxGrid* grid) wxOVERRIDE;
+    virtual bool IsAcceptedKey(wxKeyEvent& event) override;
+    virtual void BeginEdit(int row, int col, wxGrid* grid) override;
     virtual bool EndEdit(int row, int col, const wxGrid* grid,
-                         const wxString& oldval, wxString *newval) wxOVERRIDE;
-    virtual void ApplyEdit(int row, int col, wxGrid* grid) wxOVERRIDE;
+                         const wxString& oldval, wxString *newval) override;
+    virtual void ApplyEdit(int row, int col, wxGrid* grid) override;
 
-    virtual void Reset() wxOVERRIDE;
-    virtual void StartingKey(wxKeyEvent& event) wxOVERRIDE;
-    virtual void HandleReturn(wxKeyEvent& event) wxOVERRIDE;
+    virtual void Reset() override;
+    virtual void StartingKey(wxKeyEvent& event) override;
+    virtual void HandleReturn(wxKeyEvent& event) override;
 
     // parameters string format is "max_width"
-    virtual void SetParameters(const wxString& params) wxOVERRIDE;
+    virtual void SetParameters(const wxString& params) override;
 #if wxUSE_VALIDATORS
     virtual void SetValidator(const wxValidator& validator);
 #endif
 
-    virtual wxGridCellEditor *Clone() const wxOVERRIDE;
+    virtual wxGridCellEditor *Clone() const override;
 
     // added GetValue so we can get the value which is in the control
-    virtual wxString GetValue() const wxOVERRIDE;
+    virtual wxString GetValue() const override;
 
 protected:
     wxTextCtrl *Text() const { return (wxTextCtrl *)m_control; }
@@ -112,27 +112,27 @@ public:
 
     virtual void Create(wxWindow* parent,
                         wxWindowID id,
-                        wxEvtHandler* evtHandler) wxOVERRIDE;
+                        wxEvtHandler* evtHandler) override;
 
-    virtual void SetSize(const wxRect& rect) wxOVERRIDE;
+    virtual void SetSize(const wxRect& rect) override;
 
-    virtual bool IsAcceptedKey(wxKeyEvent& event) wxOVERRIDE;
-    virtual void BeginEdit(int row, int col, wxGrid* grid) wxOVERRIDE;
+    virtual bool IsAcceptedKey(wxKeyEvent& event) override;
+    virtual void BeginEdit(int row, int col, wxGrid* grid) override;
     virtual bool EndEdit(int row, int col, const wxGrid* grid,
-                         const wxString& oldval, wxString *newval) wxOVERRIDE;
-    virtual void ApplyEdit(int row, int col, wxGrid* grid) wxOVERRIDE;
+                         const wxString& oldval, wxString *newval) override;
+    virtual void ApplyEdit(int row, int col, wxGrid* grid) override;
 
-    virtual void Reset() wxOVERRIDE;
-    virtual void StartingKey(wxKeyEvent& event) wxOVERRIDE;
+    virtual void Reset() override;
+    virtual void StartingKey(wxKeyEvent& event) override;
 
     // parameters string format is "min,max"
-    virtual void SetParameters(const wxString& params) wxOVERRIDE;
+    virtual void SetParameters(const wxString& params) override;
 
-    virtual wxGridCellEditor *Clone() const wxOVERRIDE
+    virtual wxGridCellEditor *Clone() const override
         { return new wxGridCellNumberEditor(m_min, m_max); }
 
     // added GetValue so we can get the value which is in the control
-    virtual wxString GetValue() const wxOVERRIDE;
+    virtual wxString GetValue() const override;
 
 protected:
 #if wxUSE_SPINCTRL
@@ -197,23 +197,23 @@ public:
 
     virtual void Create(wxWindow* parent,
                         wxWindowID id,
-                        wxEvtHandler* evtHandler) wxOVERRIDE;
+                        wxEvtHandler* evtHandler) override;
 
-    virtual bool IsAcceptedKey(wxKeyEvent& event) wxOVERRIDE;
-    virtual void BeginEdit(int row, int col, wxGrid* grid) wxOVERRIDE;
+    virtual bool IsAcceptedKey(wxKeyEvent& event) override;
+    virtual void BeginEdit(int row, int col, wxGrid* grid) override;
     virtual bool EndEdit(int row, int col, const wxGrid* grid,
-                         const wxString& oldval, wxString *newval) wxOVERRIDE;
-    virtual void ApplyEdit(int row, int col, wxGrid* grid) wxOVERRIDE;
+                         const wxString& oldval, wxString *newval) override;
+    virtual void ApplyEdit(int row, int col, wxGrid* grid) override;
 
-    virtual void Reset() wxOVERRIDE;
-    virtual void StartingKey(wxKeyEvent& event) wxOVERRIDE;
+    virtual void Reset() override;
+    virtual void StartingKey(wxKeyEvent& event) override;
 
-    virtual wxGridCellEditor *Clone() const wxOVERRIDE
+    virtual wxGridCellEditor *Clone() const override
         { return new wxGridCellFloatEditor(m_width, m_precision); }
 
     // parameters string format is "width[,precision[,format]]"
     // format to choose between f|e|g|E|G (f is used by default)
-    virtual void SetParameters(const wxString& params) wxOVERRIDE;
+    virtual void SetParameters(const wxString& params) override;
 
 protected:
     // string representation of our value
@@ -242,32 +242,32 @@ public:
 
     virtual wxGridActivationResult
     TryActivate(int row, int col, wxGrid* grid,
-                const wxGridActivationSource& actSource) wxOVERRIDE;
-    virtual void DoActivate(int row, int col, wxGrid* grid) wxOVERRIDE;
+                const wxGridActivationSource& actSource) override;
+    virtual void DoActivate(int row, int col, wxGrid* grid) override;
 
     virtual void Create(wxWindow* parent,
                         wxWindowID id,
-                        wxEvtHandler* evtHandler) wxOVERRIDE;
+                        wxEvtHandler* evtHandler) override;
 
-    virtual void SetSize(const wxRect& rect) wxOVERRIDE;
-    virtual void Show(bool show, wxGridCellAttr *attr = NULL) wxOVERRIDE;
+    virtual void SetSize(const wxRect& rect) override;
+    virtual void Show(bool show, wxGridCellAttr *attr = NULL) override;
 
-    virtual bool IsAcceptedKey(wxKeyEvent& event) wxOVERRIDE;
-    virtual void BeginEdit(int row, int col, wxGrid* grid) wxOVERRIDE;
+    virtual bool IsAcceptedKey(wxKeyEvent& event) override;
+    virtual void BeginEdit(int row, int col, wxGrid* grid) override;
     virtual bool EndEdit(int row, int col, const wxGrid* grid,
-                         const wxString& oldval, wxString *newval) wxOVERRIDE;
-    virtual void ApplyEdit(int row, int col, wxGrid* grid) wxOVERRIDE;
+                         const wxString& oldval, wxString *newval) override;
+    virtual void ApplyEdit(int row, int col, wxGrid* grid) override;
 
-    virtual void Reset() wxOVERRIDE;
-    virtual void StartingClick() wxOVERRIDE;
-    virtual void StartingKey(wxKeyEvent& event) wxOVERRIDE;
+    virtual void Reset() override;
+    virtual void StartingClick() override;
+    virtual void StartingKey(wxKeyEvent& event) override;
 
-    virtual wxGridCellEditor *Clone() const wxOVERRIDE
+    virtual wxGridCellEditor *Clone() const override
         { return new wxGridCellBoolEditor; }
 
     // added GetValue so we can get the value which is in the control, see
     // also UseStringValues()
-    virtual wxString GetValue() const wxOVERRIDE;
+    virtual wxString GetValue() const override;
 
     // set the string values returned by GetValue() for the true and false
     // states, respectively
@@ -315,24 +315,24 @@ public:
 
     virtual void Create(wxWindow* parent,
                         wxWindowID id,
-                        wxEvtHandler* evtHandler) wxOVERRIDE;
+                        wxEvtHandler* evtHandler) override;
 
-    virtual void SetSize(const wxRect& rect) wxOVERRIDE;
+    virtual void SetSize(const wxRect& rect) override;
 
-    virtual void BeginEdit(int row, int col, wxGrid* grid) wxOVERRIDE;
+    virtual void BeginEdit(int row, int col, wxGrid* grid) override;
     virtual bool EndEdit(int row, int col, const wxGrid* grid,
-                         const wxString& oldval, wxString *newval) wxOVERRIDE;
-    virtual void ApplyEdit(int row, int col, wxGrid* grid) wxOVERRIDE;
+                         const wxString& oldval, wxString *newval) override;
+    virtual void ApplyEdit(int row, int col, wxGrid* grid) override;
 
-    virtual void Reset() wxOVERRIDE;
+    virtual void Reset() override;
 
     // parameters string format is "item1[,item2[...,itemN]]"
-    virtual void SetParameters(const wxString& params) wxOVERRIDE;
+    virtual void SetParameters(const wxString& params) override;
 
-    virtual wxGridCellEditor *Clone() const wxOVERRIDE;
+    virtual wxGridCellEditor *Clone() const override;
 
     // added GetValue so we can get the value which is in the control
-    virtual wxString GetValue() const wxOVERRIDE;
+    virtual wxString GetValue() const override;
 
 protected:
     wxComboBox *Combo() const { return (wxComboBox *)m_control; }
@@ -356,12 +356,12 @@ public:
     wxGridCellEnumEditor( const wxString& choices = wxEmptyString );
     virtual ~wxGridCellEnumEditor() {}
 
-    virtual wxGridCellEditor*  Clone() const wxOVERRIDE;
+    virtual wxGridCellEditor*  Clone() const override;
 
-    virtual void BeginEdit(int row, int col, wxGrid* grid) wxOVERRIDE;
+    virtual void BeginEdit(int row, int col, wxGrid* grid) override;
     virtual bool EndEdit(int row, int col, const wxGrid* grid,
-                         const wxString& oldval, wxString *newval) wxOVERRIDE;
-    virtual void ApplyEdit(int row, int col, wxGrid* grid) wxOVERRIDE;
+                         const wxString& oldval, wxString *newval) override;
+    virtual void ApplyEdit(int row, int col, wxGrid* grid) override;
 
 private:
     long m_index;
@@ -377,9 +377,9 @@ public:
     wxGridCellAutoWrapStringEditor() : wxGridCellTextEditor() { }
     virtual void Create(wxWindow* parent,
                         wxWindowID id,
-                        wxEvtHandler* evtHandler) wxOVERRIDE;
+                        wxEvtHandler* evtHandler) override;
 
-    virtual wxGridCellEditor *Clone() const wxOVERRIDE
+    virtual wxGridCellEditor *Clone() const override
         { return new wxGridCellAutoWrapStringEditor; }
 
     wxDECLARE_NO_COPY_CLASS(wxGridCellAutoWrapStringEditor);
@@ -392,24 +392,24 @@ class WXDLLIMPEXP_ADV wxGridCellDateEditor : public wxGridCellEditor
 public:
     explicit wxGridCellDateEditor(const wxString& format = wxString());
 
-    virtual void SetParameters(const wxString& params) wxOVERRIDE;
+    virtual void SetParameters(const wxString& params) override;
 
     virtual void Create(wxWindow* parent,
                         wxWindowID id,
-                        wxEvtHandler* evtHandler) wxOVERRIDE;
+                        wxEvtHandler* evtHandler) override;
 
-    virtual void SetSize(const wxRect& rect) wxOVERRIDE;
+    virtual void SetSize(const wxRect& rect) override;
 
-    virtual void BeginEdit(int row, int col, wxGrid* grid) wxOVERRIDE;
+    virtual void BeginEdit(int row, int col, wxGrid* grid) override;
     virtual bool EndEdit(int row, int col, const wxGrid* grid,
-                         const wxString& oldval, wxString *newval) wxOVERRIDE;
-    virtual void ApplyEdit(int row, int col, wxGrid* grid) wxOVERRIDE;
+                         const wxString& oldval, wxString *newval) override;
+    virtual void ApplyEdit(int row, int col, wxGrid* grid) override;
 
-    virtual void Reset() wxOVERRIDE;
+    virtual void Reset() override;
 
-    virtual wxGridCellEditor *Clone() const wxOVERRIDE;
+    virtual wxGridCellEditor *Clone() const override;
 
-    virtual wxString GetValue() const wxOVERRIDE;
+    virtual wxString GetValue() const override;
 
 protected:
     wxDatePickerCtrl* DatePicker() const;

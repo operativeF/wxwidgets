@@ -2087,12 +2087,12 @@ class wxTranslationsModule: public wxModule
 public:
         wxTranslationsModule() = default;
 
-        bool OnInit() wxOVERRIDE
+        bool OnInit() override
         {
             return true;
         }
 
-        void OnExit() wxOVERRIDE
+        void OnExit() override
         {
             if ( gs_translationsOwned )
                 delete gs_translations;

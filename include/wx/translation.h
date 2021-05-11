@@ -234,9 +234,9 @@ public:
     static void AddCatalogLookupPathPrefix(const wxString& prefix);
 
     virtual wxMsgCatalog *LoadCatalog(const wxString& domain,
-                                      const wxString& lang) wxOVERRIDE;
+                                      const wxString& lang) override;
 
-    virtual wxArrayString GetAvailableTranslations(const wxString& domain) const wxOVERRIDE;
+    virtual wxArrayString GetAvailableTranslations(const wxString& domain) const override;
 };
 
 
@@ -247,9 +247,9 @@ class WXDLLIMPEXP_BASE wxResourceTranslationsLoader
 {
 public:
     virtual wxMsgCatalog *LoadCatalog(const wxString& domain,
-                                      const wxString& lang) wxOVERRIDE;
+                                      const wxString& lang) override;
 
-    virtual wxArrayString GetAvailableTranslations(const wxString& domain) const wxOVERRIDE;
+    virtual wxArrayString GetAvailableTranslations(const wxString& domain) const override;
 
 protected:
     // returns resource type to use for translations

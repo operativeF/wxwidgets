@@ -1599,7 +1599,7 @@ public:
     {
     }
 
-    bool match(const wxBitmap& bmp) const wxOVERRIDE
+    bool match(const wxBitmap& bmp) const override
     {
         const wxImage img(bmp.ConvertToImage());
 
@@ -1616,7 +1616,7 @@ public:
         return true;
     }
 
-    std::string describe() const wxOVERRIDE
+    std::string describe() const override
     {
         return wxString::Format("doesn't have all %s pixels",
                                 m_col.GetAsString()).ToStdString();

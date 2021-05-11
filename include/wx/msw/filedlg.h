@@ -28,12 +28,12 @@ public:
                  const wxSize& sz = wxDefaultSize,
                  const wxString& name = wxASCII_STR(wxFileDialogNameStr));
 
-    virtual void GetPaths(wxArrayString& paths) const wxOVERRIDE;
-    virtual void GetFilenames(wxArrayString& files) const wxOVERRIDE;
-    virtual bool SupportsExtraControl() const wxOVERRIDE { return true; }
+    virtual void GetPaths(wxArrayString& paths) const override;
+    virtual void GetFilenames(wxArrayString& files) const override;
+    virtual bool SupportsExtraControl() const override { return true; }
     void MSWOnInitDialogHook(WXHWND hwnd);
 
-    virtual int ShowModal() wxOVERRIDE;
+    virtual int ShowModal() override;
 
     // wxMSW-specific implementation from now on
     // -----------------------------------------
@@ -49,10 +49,10 @@ public:
 
 protected:
 
-    virtual void DoMoveWindow(int x, int y, int width, int height) wxOVERRIDE;
-    virtual void DoCentre(int dir) wxOVERRIDE;
-    virtual void DoGetSize( int *width, int *height ) const wxOVERRIDE;
-    virtual void DoGetPosition( int *x, int *y ) const wxOVERRIDE;
+    virtual void DoMoveWindow(int x, int y, int width, int height) override;
+    virtual void DoCentre(int dir) override;
+    virtual void DoGetSize( int *width, int *height ) const override;
+    virtual void DoGetPosition( int *x, int *y ) const override;
 
 private:
     wxArrayString m_fileNames;

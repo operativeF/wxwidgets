@@ -249,34 +249,6 @@ typedef short int WXTYPE;
 /*  wrap it in this guard, but such cases should still be relatively rare. */
 #define wxUSE_NESTED_CLASSES    1
 
-/* check for override keyword support */
-#ifndef HAVE_OVERRIDE
-    #if __cplusplus >= 201103L
-        /* All C++11 compilers should have it. */
-        #define HAVE_OVERRIDE
-    #elif wxCHECK_VISUALC_VERSION(11)
-        /*
-           VC++ supports override keyword since version 8 but doesn't define
-           __cplusplus as indicating C++11 support (at least up to and
-           including 12), so handle its case specially.
-
-           Also note that while the keyword is supported, using it with
-           versions 8, 9 and 10 results in C4481 compiler warning ("nonstandard
-           extension used") and so we avoid using it there, you could disable
-           this warning and predefine HAVE_OVERRIDE if you don't care about it.
-         */
-        #define HAVE_OVERRIDE
-    #elif WX_HAS_CLANG_FEATURE(cxx_override_control)
-        #define HAVE_OVERRIDE
-    #endif
-#endif /* !HAVE_OVERRIDE */
-
-#ifdef HAVE_OVERRIDE
-    #define wxOVERRIDE override
-#else /*  !HAVE_OVERRIDE */
-    #define wxOVERRIDE
-#endif /*  HAVE_OVERRIDE */
-
 /* same for more C++11 keywords which don't have such historic baggage as
    override and so can be detected by just testing for C++11 support (which
    still requires handling MSVS specially, unfortunately) */
@@ -724,7 +696,7 @@ typedef short int WXTYPE;
     compilers, so define a specific macro for gcc 11 only.
  */
 #if wxCHECK_GCC_VERSION(11, 0)
-#   define wxDUMMY_OVERRIDE wxOVERRIDE
+#   define wxDUMMY_OVERRIDE override
 #else
 #   define wxDUMMY_OVERRIDE
 #endif

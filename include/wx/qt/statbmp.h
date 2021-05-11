@@ -30,12 +30,12 @@ public:
                  long style = 0,
                  const wxString& name = wxASCII_STR(wxStaticBitmapNameStr));
 
-    virtual void SetIcon(const wxIcon& icon) wxOVERRIDE;
-    virtual void SetBitmap(const wxBitmap& bitmap) wxOVERRIDE;
-    virtual wxBitmap GetBitmap() const wxOVERRIDE;
-    virtual wxIcon GetIcon() const wxOVERRIDE;
+    virtual void SetIcon(const wxIcon& icon) override;
+    virtual void SetBitmap(const wxBitmap& bitmap) override;
+    virtual wxBitmap GetBitmap() const override;
+    virtual wxIcon GetIcon() const override;
 
-    virtual QWidget *GetHandle() const wxOVERRIDE;
+    virtual QWidget *GetHandle() const override;
 protected:
 
 private:

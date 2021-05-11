@@ -27,10 +27,10 @@ public:
     virtual ~wxMenuItem();
 
     // implement base class virtuals
-    virtual void SetItemLabel( const wxString& str ) wxOVERRIDE;
-    virtual void Enable( bool enable = true ) wxOVERRIDE;
-    virtual void Check( bool check = true ) wxOVERRIDE;
-    virtual bool IsChecked() const wxOVERRIDE;
+    virtual void SetItemLabel( const wxString& str ) override;
+    virtual void Enable( bool enable = true ) override;
+    virtual void Check( bool check = true ) override;
+    virtual bool IsChecked() const override;
     virtual void SetBitmap(const wxBitmap& bitmap);
     virtual const wxBitmap& GetBitmap() const { return m_bitmap; }
 

@@ -1109,8 +1109,8 @@ class wxPrivateFontsListModule : public wxModule
 public:
     wxPrivateFontsListModule() = default;
 
-    bool OnInit() wxOVERRIDE { return true; }
-    void OnExit() wxOVERRIDE { gs_privateFontFileNames.clear(); }
+    bool OnInit() override { return true; }
+    void OnExit() override { gs_privateFontFileNames.clear(); }
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxPrivateFontsListModule);

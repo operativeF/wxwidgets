@@ -26,11 +26,11 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxStaticBitmapNameStr));
 
-    virtual void SetBitmap(const wxBitmap& bitmap) wxOVERRIDE;
+    virtual void SetBitmap(const wxBitmap& bitmap) override;
 
-    virtual wxBitmap GetBitmap() const wxOVERRIDE { return m_bitmap; }
+    virtual wxBitmap GetBitmap() const override { return m_bitmap; }
 
-    virtual void SetIcon(const wxIcon& icon) wxOVERRIDE
+    virtual void SetIcon(const wxIcon& icon) override
     {
         wxBitmap bmp;
         bmp.CopyFromIcon(icon);
@@ -39,12 +39,12 @@ public:
 
 #if defined(__WXGTK20__) || defined(__WXMAC__)
     // icons and bitmaps are really the same thing in wxGTK and wxMac
-    wxIcon GetIcon() const wxOVERRIDE  { return (const wxIcon &)m_bitmap; }
+    wxIcon GetIcon() const override  { return (const wxIcon &)m_bitmap; }
 #endif
 
-    virtual void SetScaleMode(ScaleMode scaleMode) wxOVERRIDE;
+    virtual void SetScaleMode(ScaleMode scaleMode) override;
 
-    virtual ScaleMode GetScaleMode() const wxOVERRIDE { return m_scaleMode; }
+    virtual ScaleMode GetScaleMode() const override { return m_scaleMode; }
 
 private:
     wxSize GetBitmapSize()

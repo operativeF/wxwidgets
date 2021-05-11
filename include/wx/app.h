@@ -264,7 +264,7 @@ public:
 
     // Implement the inherited wxEventFilter method but just return -1 from it
     // to indicate that default processing should take place.
-    virtual int FilterEvent(wxEvent& event) wxOVERRIDE;
+    virtual int FilterEvent(wxEvent& event) override;
 
     // return true if we're running event loop, i.e. if the events can
     // (already) be dispatched
@@ -564,7 +564,7 @@ public:
         // very first initialization function
         //
         // Override: very rarely
-    virtual bool Initialize(int& argc, wxChar **argv) wxOVERRIDE;
+    virtual bool Initialize(int& argc, wxChar **argv) override;
 
         // a platform-dependent version of OnInit(): the code here is likely to
         // depend on the toolkit. default version does nothing.
@@ -579,15 +579,15 @@ public:
         // of the program really starts here
         //
         // Override: rarely in GUI applications, always in console ones.
-    virtual int OnRun() wxOVERRIDE;
+    virtual int OnRun() override;
 
         // a matching function for OnInit()
-    virtual int OnExit() wxOVERRIDE;
+    virtual int OnExit() override;
 
         // very last clean up function
         //
         // Override: very rarely
-    virtual void CleanUp() wxOVERRIDE;
+    virtual void CleanUp() override;
 
 
     // the worker functions - usually not used directly by the user code
@@ -602,10 +602,10 @@ public:
         // parties
         //
         // it should return true if more idle events are needed, false if not
-    virtual bool ProcessIdle() wxOVERRIDE;
+    virtual bool ProcessIdle() override;
 
         // override base class version: GUI apps always use an event loop
-    virtual bool UsesEventLoop() const wxOVERRIDE { return true; }
+    virtual bool UsesEventLoop() const override { return true; }
 
 
     // top level window functions
@@ -672,8 +672,8 @@ public:
     // ------------------------------------------------------------------------
 
 #if wxUSE_CMDLINE_PARSER
-    virtual bool OnCmdLineParsed(wxCmdLineParser& parser) wxOVERRIDE;
-    virtual void OnInitCmdLine(wxCmdLineParser& parser) wxOVERRIDE;
+    virtual bool OnCmdLineParsed(wxCmdLineParser& parser) override;
+    virtual void OnInitCmdLine(wxCmdLineParser& parser) override;
 #endif
 
     // miscellaneous other stuff
@@ -686,7 +686,7 @@ public:
 
 protected:
     // override base class method to use GUI traits
-    virtual wxAppTraits *CreateTraits() wxOVERRIDE;
+    virtual wxAppTraits *CreateTraits() override;
 
     // Helper method deleting all existing top level windows: this is used
     // during the application shutdown.

@@ -89,7 +89,7 @@ public:
 protected:
     virtual wxBitmap CreateBitmap(const wxArtID& id,
                                   const wxArtClient& client,
-                                  const wxSize& size) wxOVERRIDE;
+                                  const wxSize& size) override;
 
 private:
     bool m_imageHandledAdded;

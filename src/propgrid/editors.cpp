@@ -625,7 +625,7 @@ public:
     virtual void OnDrawItem( wxDC& dc,
                              const wxRect& rect,
                              int item,
-                             int flags ) const wxOVERRIDE
+                             int flags ) const override
     {
         wxPropertyGrid* pg = GetGrid();
 
@@ -642,7 +642,7 @@ public:
         }
     }
 
-    virtual wxCoord OnMeasureItem( size_t item ) const wxOVERRIDE
+    virtual wxCoord OnMeasureItem( size_t item ) const override
     {
         wxPropertyGrid* pg = GetGrid();
         wxRect rect;
@@ -660,7 +660,7 @@ public:
         return pg;
     }
 
-    virtual wxCoord OnMeasureItemWidth( size_t item ) const wxOVERRIDE
+    virtual wxCoord OnMeasureItemWidth( size_t item ) const override
     {
         wxPropertyGrid* pg = GetGrid();
         wxRect rect;
@@ -685,7 +685,7 @@ public:
 #endif
 
     virtual void PositionTextCtrl( int textCtrlXAdjust,
-                                   int WXUNUSED(textCtrlYAdjust) ) wxOVERRIDE
+                                   int WXUNUSED(textCtrlYAdjust) ) override
     {
     #ifdef wxPG_TEXTCTRLXADJUST
         textCtrlXAdjust = wxPG_TEXTCTRLXADJUST -

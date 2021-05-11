@@ -37,7 +37,7 @@ public:
     {
     }
 
-    bool match(const wxImage& other) const wxOVERRIDE
+    bool match(const wxImage& other) const override
     {
         if ( other.GetWidth() != m_image.GetWidth() )
             return false;
@@ -141,7 +141,7 @@ public:
         return true;
     }
 
-    std::string describe() const wxOVERRIDE
+    std::string describe() const override
     {
         std::string desc = "doesn't have the same RGB data as " +
                                 Catch::toString(m_image);
@@ -188,7 +188,7 @@ public:
     {
     }
 
-    bool match(const wxImage& other) const wxOVERRIDE
+    bool match(const wxImage& other) const override
     {
         if (!other.HasAlpha())
         {
@@ -208,7 +208,7 @@ public:
         return true;
     }
 
-    std::string describe() const wxOVERRIDE
+    std::string describe() const override
     {
         std::string desc;
 

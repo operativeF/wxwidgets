@@ -29,8 +29,8 @@ class ButtonTestCase : public CppUnit::TestCase
 public:
     ButtonTestCase() { }
 
-    void setUp() wxOVERRIDE;
-    void tearDown() wxOVERRIDE;
+    void setUp() override;
+    void tearDown() override;
 
 private:
     CPPUNIT_TEST_SUITE( ButtonTestCase );

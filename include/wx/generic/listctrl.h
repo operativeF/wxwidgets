@@ -64,17 +64,17 @@ public:
                  const wxValidator& validator = wxDefaultValidator,
                  const wxString &name = wxASCII_STR(wxListCtrlNameStr));
 
-    bool GetColumn( int col, wxListItem& item ) const wxOVERRIDE;
-    bool SetColumn( int col, const wxListItem& item ) wxOVERRIDE;
-    int GetColumnWidth( int col ) const wxOVERRIDE;
-    bool SetColumnWidth( int col, int width) wxOVERRIDE;
+    bool GetColumn( int col, wxListItem& item ) const override;
+    bool SetColumn( int col, const wxListItem& item ) override;
+    int GetColumnWidth( int col ) const override;
+    bool SetColumnWidth( int col, int width) override;
 
     // Column ordering functions
-    int GetColumnOrder(int col) const wxOVERRIDE;
-    int GetColumnIndexFromOrder(int order) const wxOVERRIDE;
+    int GetColumnOrder(int col) const override;
+    int GetColumnIndexFromOrder(int order) const override;
 
-    wxArrayInt GetColumnsOrder() const wxOVERRIDE;
-    bool SetColumnsOrder(const wxArrayInt& orders) wxOVERRIDE;
+    wxArrayInt GetColumnsOrder() const override;
+    bool SetColumnsOrder(const wxArrayInt& orders) override;
 
     int GetCountPerPage() const; // not the same in wxGLC as in Windows, I think
     wxRect GetViewRect() const;
@@ -95,8 +95,8 @@ public:
     bool GetSubItemRect( long item, long subItem, wxRect& rect, int code = wxLIST_RECT_BOUNDS ) const;
     bool GetItemPosition( long item, wxPoint& pos ) const;
     bool SetItemPosition( long item, const wxPoint& pos ); // not supported in wxGLC
-    int GetItemCount() const wxOVERRIDE;
-    int GetColumnCount() const wxOVERRIDE;
+    int GetItemCount() const override;
+    int GetColumnCount() const override;
     void SetItemSpacing( int spacing, bool isSmall = false );
     wxSize GetItemSpacing() const;
     void SetItemTextColour( long item, const wxColour& col);
@@ -110,25 +110,25 @@ public:
     void SetTextColour(const wxColour& col);
     long GetTopItem() const;
 
-    virtual bool HasCheckBoxes() const wxOVERRIDE;
-    virtual bool EnableCheckBoxes(bool enable = true) wxOVERRIDE;
-    virtual bool IsItemChecked(long item) const wxOVERRIDE;
-    virtual void CheckItem(long item, bool check) wxOVERRIDE;
+    virtual bool HasCheckBoxes() const override;
+    virtual bool EnableCheckBoxes(bool enable = true) override;
+    virtual bool IsItemChecked(long item) const override;
+    virtual void CheckItem(long item, bool check) override;
 
     void SetSingleStyle( long style, bool add = true ) ;
-    void SetWindowStyleFlag( long style ) wxOVERRIDE;
+    void SetWindowStyleFlag( long style ) override;
     void RecreateWindow() {}
     long GetNextItem( long item, int geometry = wxLIST_NEXT_ALL, int state = wxLIST_STATE_DONTCARE ) const;
-    wxImageList *GetImageList( int which ) const wxOVERRIDE;
-    void SetImageList( wxImageList *imageList, int which ) wxOVERRIDE;
-    void AssignImageList( wxImageList *imageList, int which ) wxOVERRIDE;
+    wxImageList *GetImageList( int which ) const override;
+    void SetImageList( wxImageList *imageList, int which ) override;
+    void AssignImageList( wxImageList *imageList, int which ) override;
     bool Arrange( int flag = wxLIST_ALIGN_DEFAULT ); // always wxLIST_ALIGN_LEFT in wxGLC
 
     void ClearAll();
     bool DeleteItem( long item );
     bool DeleteAllItems();
-    bool DeleteAllColumns() wxOVERRIDE;
-    bool DeleteColumn( int col ) wxOVERRIDE;
+    bool DeleteAllColumns() override;
+    bool DeleteColumn( int col ) override;
 
     void SetItemCount(long count);
 
@@ -139,7 +139,7 @@ public:
     bool EndEditLabel(bool cancel);
 
     wxTextCtrl* GetEditControl() const;
-    bool IsVisible(long item) const wxOVERRIDE;
+    bool IsVisible(long item) const override;
     void Edit( long item ) { EditLabel(item); }
 
     bool EnsureVisible( long item );
@@ -162,12 +162,12 @@ public:
     void RefreshItem(long item);
     void RefreshItems(long itemFrom, long itemTo);
 
-    virtual void EnableBellOnNoMatch(bool on = true) wxOVERRIDE;
+    virtual void EnableBellOnNoMatch(bool on = true) override;
 
     // overridden base class virtuals
     // ------------------------------
 
-    virtual wxVisualAttributes GetDefaultAttributes() const wxOVERRIDE
+    virtual wxVisualAttributes GetDefaultAttributes() const override
     {
         return GetClassDefaultAttributes(GetWindowVariant());
     }
@@ -175,7 +175,7 @@ public:
     static wxVisualAttributes
     GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
 
-    virtual void Update() wxOVERRIDE;
+    virtual void Update() override;
 
 
     // implementation only from now on
@@ -184,27 +184,27 @@ public:
     // generic version extension, don't use in portable code
     bool Update( long item );
 
-    void OnInternalIdle( ) wxOVERRIDE;
+    void OnInternalIdle( ) override;
 
     // We have to hand down a few functions
     virtual void Refresh(bool eraseBackground = true,
-                         const wxRect *rect = NULL) wxOVERRIDE;
+                         const wxRect *rect = NULL) override;
 
-    virtual bool SetBackgroundColour( const wxColour &colour ) wxOVERRIDE;
-    virtual bool SetForegroundColour( const wxColour &colour ) wxOVERRIDE;
+    virtual bool SetBackgroundColour( const wxColour &colour ) override;
+    virtual bool SetForegroundColour( const wxColour &colour ) override;
     virtual wxColour GetBackgroundColour() const;
     virtual wxColour GetForegroundColour() const;
-    virtual bool SetFont( const wxFont &font ) wxOVERRIDE;
-    virtual bool SetCursor( const wxCursor &cursor ) wxOVERRIDE;
+    virtual bool SetFont( const wxFont &font ) override;
+    virtual bool SetCursor( const wxCursor &cursor ) override;
 
-    virtual void ExtendRulesAndAlternateColour(bool extend = true) wxOVERRIDE;
+    virtual void ExtendRulesAndAlternateColour(bool extend = true) override;
 
 #if wxUSE_DRAG_AND_DROP
-    virtual void SetDropTarget( wxDropTarget *dropTarget ) wxOVERRIDE;
-    virtual wxDropTarget *GetDropTarget() const wxOVERRIDE;
+    virtual void SetDropTarget( wxDropTarget *dropTarget ) override;
+    virtual wxDropTarget *GetDropTarget() const override;
 #endif
 
-    virtual bool ShouldInheritColours() const wxOVERRIDE { return false; }
+    virtual bool ShouldInheritColours() const override { return false; }
 
     // implementation
     // --------------
@@ -220,17 +220,17 @@ public:
 
 protected:
     // Implement base class pure virtual methods.
-    long DoInsertColumn(long col, const wxListItem& info) wxOVERRIDE;
+    long DoInsertColumn(long col, const wxListItem& info) override;
 
 
-    virtual wxSize DoGetBestClientSize() const wxOVERRIDE;
+    virtual wxSize DoGetBestClientSize() const override;
 
     // it calls our OnGetXXX() functions
     friend class WXDLLIMPEXP_FWD_CORE wxListMainWindow;
 
-    virtual wxBorder GetDefaultBorder() const wxOVERRIDE;
+    virtual wxBorder GetDefaultBorder() const override;
 
-    virtual wxSize GetSizeAvailableForScrollTarget(const wxSize& size) wxOVERRIDE;
+    virtual wxSize GetSizeAvailableForScrollTarget(const wxSize& size) override;
 
 private:
     void CreateOrDestroyHeaderWindowAsNeeded();

@@ -3937,8 +3937,8 @@ class wxImageModule: public wxModule
     wxDECLARE_DYNAMIC_CLASS(wxImageModule);
 public:
     wxImageModule() = default;
-    bool OnInit() wxOVERRIDE { wxImage::InitStandardHandlers(); return true; }
-    void OnExit() wxOVERRIDE { wxImage::CleanUpHandlers(); }
+    bool OnInit() override { wxImage::InitStandardHandlers(); return true; }
+    void OnExit() override { wxImage::CleanUpHandlers(); }
 };
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxImageModule, wxModule);

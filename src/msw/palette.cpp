@@ -75,7 +75,7 @@ public:
             ::DeleteObject(m_hPalette);
     }
 
-    virtual bool IsOk() const wxOVERRIDE { return m_hPalette != nullptr; }
+    virtual bool IsOk() const override { return m_hPalette != nullptr; }
 
     UINT GetEntries() const
     {

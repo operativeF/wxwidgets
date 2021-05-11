@@ -65,7 +65,7 @@ public:
         m_reason = reason;
     }
 
-    void Notify() wxOVERRIDE {
+    void Notify() override {
         m_swx->TickFor(m_reason);
     }
 
@@ -124,7 +124,7 @@ public:
         delete surfaceWindow;
     }
 
-    virtual void Refresh(bool eraseBg=true, const wxRect *rect=nullptr) wxOVERRIDE
+    virtual void Refresh(bool eraseBg=true, const wxRect *rect=nullptr) override
     {
         if ( rect == nullptr )
             DrawBack(GetSize());

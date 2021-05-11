@@ -1052,12 +1052,12 @@ public:
     WebRequestModule()
     = default;
 
-    virtual bool OnInit() wxOVERRIDE
+    virtual bool OnInit() override
     {
         return true;
     }
 
-    virtual void OnExit() wxOVERRIDE
+    virtual void OnExit() override
     {
         for ( wxStringWebSessionFactoryMap::iterator it = gs_factoryMap.begin();
               it != gs_factoryMap.end();

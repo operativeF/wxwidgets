@@ -124,7 +124,7 @@ public:
     {
     }
 
-    virtual void setUp() wxOVERRIDE { wxASSERT( m_dc ); }
+    virtual void setUp() override { wxASSERT( m_dc ); }
     virtual wxDC* GetDC(wxMemoryDC* dc) = 0;
 
 protected:
@@ -187,7 +187,7 @@ public:
         m_mdc.SelectObject(wxNullBitmap);
     }
 
-    virtual void setUp() wxOVERRIDE
+    virtual void setUp() override
     {
         m_mdc.DestroyClippingRegion();
         wxBrush bgBrush(s_bgColour, wxBRUSHSTYLE_SOLID);
@@ -195,13 +195,13 @@ public:
         m_mdc.Clear();
     }
 
-    virtual wxDC* GetDC(wxMemoryDC* dc) wxOVERRIDE
+    virtual wxDC* GetDC(wxMemoryDC* dc) override
     {
         return dc;
     }
 
 protected:
-    virtual void FlushDC() wxOVERRIDE {}
+    virtual void FlushDC() override {}
 
 private:
     CPPUNIT_TEST_SUITE( ClippingBoxTestCaseDC );
@@ -265,7 +265,7 @@ public:
         delete m_gcdc;
     }
 
-    virtual void setUp() wxOVERRIDE
+    virtual void setUp() override
     {
         CPPUNIT_ASSERT_MESSAGE("Invalid wxGCDC", m_gcdc);
 
@@ -278,7 +278,7 @@ public:
         m_gcdc->Clear();
     }
 
-    virtual wxDC* GetDC(wxMemoryDC* dc) wxOVERRIDE
+    virtual wxDC* GetDC(wxMemoryDC* dc) override
     {
         wxGraphicsRenderer* rend = m_gcdc->GetGraphicsContext()->GetRenderer();
         wxGraphicsContext* ctx = rend->CreateContext(*dc);
@@ -288,7 +288,7 @@ public:
     }
 
 protected:
-    virtual void FlushDC() wxOVERRIDE
+    virtual void FlushDC() override
     {
         m_gcdc->GetGraphicsContext()->Flush();
     }
@@ -411,7 +411,7 @@ public:
 
     virtual ~ClippingBoxTestCaseGCDCDirect2D() {}
 
-    virtual void FlushDC() wxOVERRIDE
+    virtual void FlushDC() override
     {
         // Apparently, flushing native Direct2D renderer
         // is not enough to update underlying DC (bitmap)
@@ -1511,7 +1511,7 @@ public:
         delete m_gc;
     }
 
-    virtual void setUp() wxOVERRIDE
+    virtual void setUp() override
     {
         m_mdc.DestroyClippingRegion();
         wxBrush bgBrush(s_bgColour, wxBRUSHSTYLE_SOLID);
@@ -1613,7 +1613,7 @@ public:
 
     virtual ~ClippingBoxTestCaseGCDirect2D() {}
 
-    virtual void FlushGC() wxOVERRIDE
+    virtual void FlushGC() override
     {
         // Apparently, flushing native Direct2D renderer
         // is not enough to update underlying DC (bitmap)

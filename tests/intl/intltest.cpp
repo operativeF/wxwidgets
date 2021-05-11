@@ -30,8 +30,8 @@ class IntlTestCase : public CppUnit::TestCase
 public:
     IntlTestCase() { m_locale=NULL; }
 
-    virtual void setUp() wxOVERRIDE;
-    virtual void tearDown() wxOVERRIDE;
+    virtual void setUp() override;
+    virtual void tearDown() override;
 
 private:
     CPPUNIT_TEST_SUITE( IntlTestCase );
@@ -197,7 +197,7 @@ void IntlTestCase::DateTimeFmtFrench()
 
 #ifdef __WXOSX__
     // Things are difficult to test under macOS as the format keeps changing,
-    // e.g. at some time between 10.10 and 10.12 a new " à " string appeared in
+    // e.g. at some time between 10.10 and 10.12 a new " ï¿½ " string appeared in
     // its middle, so test it piece-wise and hope it doesn't change too much.
     CHECK( fmtDT.StartsWith("%A %d %B %Y") );
     CHECK( fmtDT.EndsWith("%H:%M:%S") );
