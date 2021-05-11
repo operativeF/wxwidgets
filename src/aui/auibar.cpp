@@ -801,7 +801,7 @@ static wxOrientation GetOrientation(long style)
             return wxVERTICAL;
         default:
             wxFAIL_MSG("toolbar cannot be locked in both horizontal and vertical orientations (maybe no lock was intended?)");
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case 0:
             return wxBOTH;
     }

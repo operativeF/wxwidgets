@@ -1097,9 +1097,9 @@ void wxWebSessionCURL::ProcessSocketCallback(CURL* curl, curl_socket_t s,
     switch ( what )
     {
         case CURL_POLL_IN:
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case CURL_POLL_OUT:
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case CURL_POLL_INOUT:
             {
                 m_activeSockets[curl] = s;

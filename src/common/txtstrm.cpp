@@ -148,7 +148,7 @@ wxChar wxTextInputStream::GetChar()
                 // remember the second one for the next call, as there is no
                 // way to fit both of them into a single wxChar in this case.
                 m_lastWChar = wbuf[1];
-                wxFALLTHROUGH;
+                [[fallthrough]];
 #endif // SIZEOF_WCHAR_T == 2
 
             case 1:
@@ -544,7 +544,7 @@ void wxTextOutputStream::WriteString(const wxString& string)
 
                 default:
                     wxFAIL_MSG( wxT("unknown EOL mode in wxTextOutputStream") );
-                    wxFALLTHROUGH;
+                    [[fallthrough]];
 
                 case wxEOL_UNIX:
                     // don't treat '\n' specially
@@ -613,7 +613,7 @@ wxTextOutputStream& wxTextOutputStream::PutChar(wxChar c)
 
                     default:
                         wxFAIL_MSG( wxT("unknown EOL mode in wxTextOutputStream") );
-                        wxFALLTHROUGH;
+                        [[fallthrough]];
 
                     case wxEOL_UNIX:
                         // don't treat '\n' specially

@@ -601,7 +601,7 @@ bool wxSpinCtrl::GTKOutput(wxString* text) const
     {
         default:
             wxFAIL_MSG("unsupported base");
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case 10:
             // Don't override the default output format unless really needed.

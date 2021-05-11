@@ -1122,7 +1122,7 @@ bool wxToolBar::Realize()
                     button.iBitmap = MSWGetFittingtSizeForControl(tool).x;
                 }
 
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case wxTOOL_STYLE_SEPARATOR:
                 if ( tool->IsStretchableSpace() )

@@ -933,7 +933,7 @@ void WidgetsFrame::OnSetBorder(wxCommandEvent& event)
 
         default:
             wxFAIL_MSG( "unknown border style" );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case Widgets_BorderDefault: border = wxBORDER_DEFAULT; break;
     }
@@ -962,7 +962,7 @@ void WidgetsFrame::OnSetVariant(wxCommandEvent& event)
 
         default:
             wxFAIL_MSG( "unknown window variant" );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case Widgets_VariantNormal: v = wxWINDOW_VARIANT_NORMAL; break;
     }

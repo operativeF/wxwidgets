@@ -123,7 +123,7 @@ size_t wxDir::Traverse(wxDirTraverser& sink,
             {
                 default:
                     wxFAIL_MSG(wxT("unexpected OnDir() return value") );
-                    wxFALLTHROUGH;
+                    [[fallthrough]];
 
                 case wxDIR_STOP:
                     cont = false;
@@ -151,11 +151,11 @@ size_t wxDir::Traverse(wxDirTraverser& sink,
                                 {
                                     default:
                                         wxFAIL_MSG(wxT("unexpected OnOpenError() return value") );
-                                        wxFALLTHROUGH;
+                                        [[fallthrough]];
 
                                     case wxDIR_STOP:
                                         cont = false;
-                                        wxFALLTHROUGH;
+                                        [[fallthrough]];
 
                                     case wxDIR_IGNORE:
                                         tryagain = false;

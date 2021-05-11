@@ -167,7 +167,7 @@ bool wxColourBase::FromString(const wxString& str)
         {
             case 6: // #rrggbb
                 tmp = (tmp << 8) + wxALPHA_OPAQUE;
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case 8: // #rrggbbaa
                 Set((unsigned char)((tmp >> 24) & 0xFF),
@@ -178,7 +178,7 @@ bool wxColourBase::FromString(const wxString& str)
 
             case 3: // #rgb
                 tmp = (tmp << 4) + 0xF;
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case 4: // #rgba
                 Set((unsigned char)(((tmp >> 12) & 0xF) * 0x11),

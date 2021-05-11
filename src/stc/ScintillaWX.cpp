@@ -1145,13 +1145,13 @@ int  ScintillaWX::DoKeyDown(const wxKeyEvent& evt, bool* consumed)
     case WXK_ESCAPE:            key = SCK_ESCAPE;   break;
     case WXK_BACK:              key = SCK_BACK;     break;
     case WXK_TAB:               key = SCK_TAB;      break;
-    case WXK_NUMPAD_ENTER:      wxFALLTHROUGH;
+    case WXK_NUMPAD_ENTER:      [[fallthrough]];
     case WXK_RETURN:            key = SCK_RETURN;   break;
-    case WXK_ADD:               wxFALLTHROUGH;
+    case WXK_ADD:               [[fallthrough]];
     case WXK_NUMPAD_ADD:        key = SCK_ADD;      break;
-    case WXK_SUBTRACT:          wxFALLTHROUGH;
+    case WXK_SUBTRACT:          [[fallthrough]];
     case WXK_NUMPAD_SUBTRACT:   key = SCK_SUBTRACT; break;
-    case WXK_DIVIDE:            wxFALLTHROUGH;
+    case WXK_DIVIDE:            [[fallthrough]];
     case WXK_NUMPAD_DIVIDE:     key = SCK_DIVIDE;   break;
     case WXK_CONTROL:           key = 0; break;
     case WXK_ALT:               key = 0; break;

@@ -1561,7 +1561,7 @@ WXDWORD wxWindowMSW::MSWGetStyle(long flags, WXDWORD *exstyle) const
             default:
             case wxBORDER_DEFAULT:
                 wxFAIL_MSG( wxT("unknown border style") );
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case wxBORDER_NONE:
             case wxBORDER_SIMPLE:
@@ -2269,7 +2269,7 @@ wxSize wxWindowMSW::DoGetBorderSize() const
 
         default:
             wxFAIL_MSG( wxT("unknown border style") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxBORDER_NONE:
             border = 0;
@@ -2553,7 +2553,7 @@ bool wxWindowMSW::MSWProcessMessage(WXMSG* pMsg)
 
                 case VK_PRIOR:
                     bForward = false;
-                    wxFALLTHROUGH;
+                    [[fallthrough]];
 
                 case VK_NEXT:
                     // we treat PageUp/Dn as arrows because chances are that
@@ -4570,7 +4570,7 @@ bool wxWindowMSW::HandlePower(WXWPARAM wParam,
 
         default:
             wxLogDebug(wxT("Unknown WM_POWERBROADCAST(%zd) event"), wParam);
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         // these messages are currently not mapped to wx events
         case PBT_APMQUERYSTANDBY:
@@ -5421,7 +5421,7 @@ bool wxWindowMSW::HandleEraseBkgnd(WXHDC hdc)
                     return true;
                 }
             }
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxBG_STYLE_SYSTEM:
             if ( !DoEraseBackground(hdc) )
@@ -5730,10 +5730,10 @@ bool wxWindowMSW::HandleSize(int WXUNUSED(w), int WXUNUSED(h), WXUINT wParam)
         default:
             wxFAIL_MSG( wxT("unexpected WM_SIZE parameter") );
             // fall through nevertheless
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case SIZE_MAXHIDE:
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case SIZE_MAXSHOW:
             // we're not interested in these messages at all
             break;
@@ -5745,7 +5745,7 @@ bool wxWindowMSW::HandleSize(int WXUNUSED(w), int WXUNUSED(h), WXUINT wParam)
         case SIZE_MAXIMIZED:
             /* processed = */ HandleMaximize();
             // fall through to send a normal size event as well
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case SIZE_RESTORED:
             // don't use w and h parameters as they specify the client size
@@ -6906,70 +6906,70 @@ WXWORD WXToVK(int wxk, bool *isExtended)
     {
         case WXK_PAGEUP:
             extended = true;
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case WXK_NUMPAD_PAGEUP:
             vk = VK_PRIOR;
             break;
 
         case WXK_PAGEDOWN:
             extended = true;
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case WXK_NUMPAD_PAGEDOWN:
             vk = VK_NEXT;
             break;
 
         case WXK_END:
             extended = true;
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case WXK_NUMPAD_END:
             vk = VK_END;
             break;
 
         case WXK_HOME:
             extended = true;
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case WXK_NUMPAD_HOME:
             vk = VK_HOME;
             break;
 
         case WXK_LEFT:
             extended = true;
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case WXK_NUMPAD_LEFT:
             vk = VK_LEFT;
             break;
 
         case WXK_UP:
             extended = true;
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case WXK_NUMPAD_UP:
             vk = VK_UP;
             break;
 
         case WXK_RIGHT:
             extended = true;
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case WXK_NUMPAD_RIGHT:
             vk = VK_RIGHT;
             break;
 
         case WXK_DOWN:
             extended = true;
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case WXK_NUMPAD_DOWN:
             vk = VK_DOWN;
             break;
 
         case WXK_INSERT:
             extended = true;
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case WXK_NUMPAD_INSERT:
             vk = VK_INSERT;
             break;
 
         case WXK_DELETE:
             extended = true;
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case WXK_NUMPAD_DELETE:
             vk = VK_DELETE;
             break;

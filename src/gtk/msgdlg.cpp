@@ -279,7 +279,7 @@ int wxMessageDialog::ShowModal()
     {
         default:
             wxFAIL_MSG(wxT("unexpected GtkMessageDialog return code"));
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case GTK_RESPONSE_CANCEL:
         case GTK_RESPONSE_DELETE_EVENT:

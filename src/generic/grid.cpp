@@ -4624,7 +4624,7 @@ void wxGrid::ChangeCursorMode(CursorMode mode,
         case WXGRID_CURSOR_SELECT_CELL:
             // Mouse is captured in ProcessGridCellMouseEvent() in this mode.
             captureMouse = false;
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case WXGRID_CURSOR_SELECT_ROW:
         case WXGRID_CURSOR_SELECT_COL:
@@ -6039,7 +6039,7 @@ void wxGrid::OnKeyDown( wxKeyEvent& event )
                                 MoveCursorRight(false);
                                 break;
                             }
-                            wxFALLTHROUGH;
+                            [[fallthrough]];
 
                         default:
                             event.Skip();
@@ -6123,7 +6123,7 @@ void wxGrid::OnKeyDown( wxKeyEvent& event )
                     wxTheClipboard->SetData(new wxTextDataObject(buf));
                     break;
                 }
-                wxFALLTHROUGH;
+                [[fallthrough]];
 #endif // wxUSE_CLIPBOARD
 
             default:
@@ -7482,7 +7482,7 @@ bool wxGrid::DoShowCellEditControl(const wxGridActivationSource& actSource)
                     }
                     break;
             }
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxGridActivationResult::Ignore:
             // In any case, don't start editing normally.

@@ -139,7 +139,7 @@ private:
 
             default:
                 wxFAIL_MSG("unknown wxPowerType value");
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case wxPOWER_UNKNOWN:
                 powerStr = "psychic";
@@ -167,7 +167,7 @@ private:
 
             default:
                 wxFAIL_MSG("unknown wxBatteryState value");
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case wxBATTERY_UNKNOWN_STATE:
                 batteryStr = "unknown";

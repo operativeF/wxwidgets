@@ -134,7 +134,7 @@ wxSize wxActivityIndicator::DoGetBestClientSize() const
     {
         case wxWINDOW_VARIANT_MAX:
             wxFAIL_MSG(wxS("Invalid window variant"));
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxWINDOW_VARIANT_NORMAL:
             factor = 2.;

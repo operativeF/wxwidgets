@@ -429,7 +429,7 @@ void ListboxWidgetsPage::CreateLbox()
     {
         default:
             wxFAIL_MSG( "unexpected radio box selection" );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case LboxSel_Single:    flags |= wxLB_SINGLE; break;
         case LboxSel_Extended:  flags |= wxLB_EXTENDED; break;
@@ -498,7 +498,7 @@ void ListboxWidgetsPage::CreateLbox()
             break;
 #endif // wxUSE_REARRANGECTRL
         case LboxType_ListBox:
-            wxFALLTHROUGH;
+            [[fallthrough]];
         default:
             m_lbox = new wxListBox(this, ListboxPage_Listbox,
                                wxDefaultPosition, wxDefaultSize,

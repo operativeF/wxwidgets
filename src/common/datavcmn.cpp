@@ -1150,7 +1150,7 @@ void wxDataViewEditorCtrlEvtHandler::OnChar( wxKeyEvent &event )
                 m_owner->FinishEditing();
                 break;
             }
-            wxFALLTHROUGH; // Ctrl/Alt/Shift-Enter is not handled specially
+            [[fallthrough]]; // Ctrl/Alt/Shift-Enter is not handled specially
 
         default:
             event.Skip();

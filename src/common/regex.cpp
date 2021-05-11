@@ -427,7 +427,7 @@ bool wxRegExImpl::Matches(const wxRegChar *str,
             // an error occurred
             wxLogError(_("Failed to find match for regular expression: %s"),
                        GetErrorMsg(rc, !str).c_str());
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case REG_NOMATCH:
             // no match

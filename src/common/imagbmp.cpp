@@ -202,18 +202,18 @@ bool wxBMPHandler::SaveDib(wxImage *image,
     {
         default:
             wxFAIL_MSG( wxT("unexpected image resolution units") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxIMAGE_RESOLUTION_NONE:
             hres =
             vres = 72;
-            wxFALLTHROUGH;// fall through to convert it to correct units
+            [[fallthrough]];// fall through to convert it to correct units
 
         case wxIMAGE_RESOLUTION_INCHES:
             // convert resolution in inches to resolution in centimeters
             hres = (int)(10*mm2inches*hres);
             vres = (int)(10*mm2inches*vres);
-            wxFALLTHROUGH;// fall through to convert it to resolution in meters
+            [[fallthrough]];// fall through to convert it to resolution in meters
 
         case wxIMAGE_RESOLUTION_CM:
             // convert resolution in centimeters to resolution in meters

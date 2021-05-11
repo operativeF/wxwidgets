@@ -742,7 +742,7 @@ STDMETHODIMP wxIDataObject::SetData(FORMATETC *pformatetc,
                         break;
 
                     case wxDF_PNG:
-                        wxFALLTHROUGH;
+                        [[fallthrough]];
 
                     default:
                         size = ptr.GetSize();

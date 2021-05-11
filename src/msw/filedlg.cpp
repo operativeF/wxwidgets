@@ -537,7 +537,7 @@ int wxFileDialog::ShowModal()
             case wxT('/'):
                 // convert to backslash
                 ch = wxT('\\');
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case wxT('\\'):
                 while ( i < len - 1 )
@@ -552,7 +552,7 @@ int wxFileDialog::ShowModal()
                     else
                         break;
                 }
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             default:
                 // normal char

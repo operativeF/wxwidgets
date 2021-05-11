@@ -270,7 +270,7 @@ size_t wxLZMAOutputStream::OnSysWrite(const void *inbuf, size_t size)
             case LZMA_STREAM_END:
                 // This is unexpected as we don't use LZMA_FINISH here.
                 wxFAIL_MSG( "Unexpected LZMA stream end" );
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             default:
                 err = wxTRANSLATE("unknown compression error");

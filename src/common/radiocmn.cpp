@@ -346,7 +346,7 @@ wxString wxRadioBoxBase::DoGetHelpTextAtPoint(const wxWindow *derived,
 
         default:
             wxFAIL_MSG( "unknown help even origin" );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxHelpEvent::Origin_Unknown:
             // this value is used when we're called from GetHelpText() for the

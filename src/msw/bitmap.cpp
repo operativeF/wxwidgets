@@ -557,7 +557,7 @@ bool wxBitmap::CopyFromIconOrCursor(const wxGDIImage& icon,
     {
         default:
             wxFAIL_MSG( wxT("unknown wxBitmapTransparency value") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxBitmapTransparency_None:
             // nothing to do, refData->m_hasAlpha is false by default

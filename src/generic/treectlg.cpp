@@ -3128,7 +3128,7 @@ void wxGenericTreeCtrl::OnChar( wxKeyEvent &event )
                 ExpandAllChildren(m_current);
                 break;
             }
-            wxFALLTHROUGH;//else: fall through to Collapse() it
+            [[fallthrough]];//else: fall through to Collapse() it
 
         case '-':
         case WXK_SUBTRACT:

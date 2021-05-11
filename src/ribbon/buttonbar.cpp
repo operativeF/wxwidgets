@@ -204,7 +204,7 @@ public:
                     *size = wxRIBBON_BUTTONBAR_BUTTON_MEDIUM;
                     break;
                 }
-                wxFALLTHROUGH;
+                [[fallthrough]];
             case wxRIBBON_BUTTONBAR_BUTTON_MEDIUM:
                 if(sizes[wxRIBBON_BUTTONBAR_BUTTON_SMALL].is_supported
                    && min_size_class <= wxRIBBON_BUTTONBAR_BUTTON_SMALL)
@@ -212,7 +212,7 @@ public:
                     *size = wxRIBBON_BUTTONBAR_BUTTON_SMALL;
                     break;
                 }
-                wxFALLTHROUGH;
+                [[fallthrough]];
             case wxRIBBON_BUTTONBAR_BUTTON_SMALL:
             default:
                 return false;

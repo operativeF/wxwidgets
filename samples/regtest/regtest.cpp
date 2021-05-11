@@ -1070,7 +1070,7 @@ bool RegTreeCtrl::TreeNode::OnExpand()
             m_pKey->QueryValue(str, &ldw);
             strItem << ldw;
         }
-        wxFALLTHROUGH;
+        [[fallthrough]];
 
         default:
             icon = RegImageList::BinaryValue;

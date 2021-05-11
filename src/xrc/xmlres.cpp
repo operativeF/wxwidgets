@@ -1632,7 +1632,7 @@ wxString wxXmlResourceHandlerImpl::GetNodeText(const wxXmlNode* node, int flags)
                             str2 << wxT('\\');
                             break;
                         }
-                        wxFALLTHROUGH;// else fall-through to default: branch below
+                        [[fallthrough]];// else fall-through to default: branch below
 
                     default:
                         str2 << wxT('\\') << *dt;

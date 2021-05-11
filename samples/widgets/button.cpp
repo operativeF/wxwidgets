@@ -459,7 +459,7 @@ void ButtonWidgetsPage::CreateButton()
 
         default:
             wxFAIL_MSG("unexpected radiobox selection");
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case ButtonHAlign_Centre:
             break;
@@ -477,7 +477,7 @@ void ButtonWidgetsPage::CreateButton()
 
         default:
             wxFAIL_MSG("unexpected radiobox selection");
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case ButtonVAlign_Centre:
             // centre vertical alignment is the default (no style)

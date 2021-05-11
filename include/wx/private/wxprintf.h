@@ -302,7 +302,7 @@ bool wxPrintfConvSpec<CharType>::Parse(const CharType *format)
                     break;
                 }
                 // else: fall-through, 'I' is MSVC equivalent of C99 'z'
-                wxFALLTHROUGH;
+                [[fallthrough]];
 #endif      // __WINDOWS__
 
             case wxT('z'):

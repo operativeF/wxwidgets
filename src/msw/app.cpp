@@ -1002,7 +1002,7 @@ terminate the program,\r\n\
 
         default:
             wxFAIL_MSG( wxT("unexpected MessageBox() return code") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case IDRETRY:
             return false;

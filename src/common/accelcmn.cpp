@@ -253,7 +253,7 @@ wxAcceleratorEntry::ParseAccel(const wxString& text, int *flagsOut, int *keyOut)
                     keyCode = wxToupper(keyCode);
                 break;
             }
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         default:
             keyCode = IsNumberedAccelKey(current, wxTRANSLATE("F"),

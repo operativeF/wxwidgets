@@ -238,7 +238,7 @@ bool wxRegion::DoCombine(const wxRegion& region, wxRegionOp op)
 
             default:
                 wxFAIL_MSG(wxT("unknown region operation"));
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case wxRGN_AND:
             case wxRGN_DIFF:
@@ -270,7 +270,7 @@ bool wxRegion::DoCombine(const wxRegion& region, wxRegionOp op)
 
         default:
             wxFAIL_MSG(wxT("unknown region operation"));
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxRGN_COPY:
             M_REGIONDATA = QRegion(region.GetHandle());

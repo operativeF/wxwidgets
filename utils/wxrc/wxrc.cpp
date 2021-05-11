@@ -1008,7 +1008,7 @@ XmlResApp::FindStrings(const wxString& filename, wxXmlNode *node)
 
                 case Contents_Text:
                     s = ConvertText(s);
-                    wxFALLTHROUGH;
+                    [[fallthrough]];
 
                 case Contents_TransOnly:
                     if (!flagGettext ||

@@ -477,7 +477,7 @@ void wxFileName::SetPath( const wxString& pathOrig, wxPathFormat format )
 
         default:
             wxFAIL_MSG( wxT("Unknown path format") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxPATH_UNIX:
             m_relative = leadingChar != wxT('/');
@@ -1806,7 +1806,7 @@ bool wxFileName::MakeRelativeTo(const wxString& pathBase, wxPathFormat format)
         case wxPATH_NATIVE:
         case wxPATH_MAX:
             wxFAIL_MSG( wxS("unreachable") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxPATH_UNIX:
         case wxPATH_DOS:
@@ -1880,7 +1880,7 @@ wxString wxFileName::GetForbiddenChars(wxPathFormat format)
     {
         default :
             wxFAIL_MSG( wxT("Unknown path format") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxPATH_UNIX:
             break;
@@ -1931,7 +1931,7 @@ wxString wxFileName::GetPathSeparators(wxPathFormat format)
 
         default:
             wxFAIL_MSG( wxT("Unknown wxPATH_XXX style") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxPATH_UNIX:
             seps = wxFILE_SEP_PATH_UNIX;
@@ -2080,7 +2080,7 @@ wxString wxFileName::GetPath( int flags, wxPathFormat format ) const
 
         default:
             wxFAIL_MSG( wxT("Unknown path format") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxPATH_UNIX:
             if ( !m_relative )
@@ -2129,7 +2129,7 @@ wxString wxFileName::GetPath( int flags, wxPathFormat format ) const
 
             default:
                 wxFAIL_MSG( wxT("Unexpected path format") );
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case wxPATH_DOS:
             case wxPATH_UNIX:

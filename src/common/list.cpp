@@ -48,7 +48,7 @@ bool wxListKey::operator==(wxListKeyValue value) const
             wxFAIL_MSG(wxT("bad key type."));
             // let compiler optimize the line above away in release build
             // by not putting return here...
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxKEY_STRING:
             return *m_key.string == *value.string;

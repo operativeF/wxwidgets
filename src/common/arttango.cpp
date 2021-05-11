@@ -264,7 +264,7 @@ wxTangoArtProvider::CreateBitmap(const wxArtID& id,
         {
             default:
                 wxFAIL_MSG( "Unsupported Tango bitmap size" );
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case TangoSize_16:
                 data = entry.data16;

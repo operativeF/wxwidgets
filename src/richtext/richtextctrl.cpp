@@ -869,13 +869,13 @@ void wxRichTextCtrl::OnMoveMouse(wxMouseEvent& event)
 
                 case wxDragError:
                     wxLogError(wxT("An error occurred during drag and drop operation"));
-                    wxFALLTHROUGH;
+                    [[fallthrough]];
                 case wxDragNone:
                 case wxDragCancel:
                     Refresh(); // This is needed in wxMSW, otherwise resetting the position doesn't 'take'
                     SetCaretPosition(oldPos);
                     SetFocusObject(oldFocus, false);
-                    wxFALLTHROUGH;
+                    [[fallthrough]];
                 default: break;
             }
             EndBatchUndo();

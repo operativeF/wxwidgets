@@ -2253,7 +2253,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
             case HDN_BEGINTRACKA:
             case HDN_BEGINTRACKW:
                 eventType = wxEVT_LIST_COL_BEGIN_DRAG;
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case HDN_ITEMCHANGING:
                 if ( eventType == wxEVT_NULL )
@@ -2279,7 +2279,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 
                     eventType = wxEVT_LIST_COL_DRAGGING;
                 }
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case HDN_ENDTRACKA:
             case HDN_ENDTRACKW:
@@ -2334,7 +2334,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                     if ( *result != CDRF_DODEFAULT )
                         return true;
                 }
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             default:
                 ignore = true;
@@ -2367,7 +2367,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
         {
             case LVN_BEGINRDRAG:
                 eventType = wxEVT_LIST_BEGIN_RDRAG;
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case LVN_BEGINDRAG:
                 if ( eventType == wxEVT_NULL )
@@ -2835,7 +2835,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 
                     return true;
                 }
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             default:
                 processed = false;

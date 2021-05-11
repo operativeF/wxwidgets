@@ -458,7 +458,7 @@ public:
                     if ( image != -1 )
                         break;
                     //else: fall through
-                    wxFALLTHROUGH;
+                    [[fallthrough]];
 
                 case wxTreeItemIcon_Selected:
                 case wxTreeItemIcon_Expanded:
@@ -3135,7 +3135,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                         processed = true;
                     }
                 }
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case WM_RBUTTONUP:
 #if wxUSE_DRAGIMAGE
@@ -3308,7 +3308,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
     {
         case TVN_BEGINDRAG:
             eventType = wxEVT_TREE_BEGIN_DRAG;
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case TVN_BEGINRDRAG:
             {
@@ -3399,7 +3399,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 
         case TVN_GETDISPINFO:
             eventType = wxEVT_TREE_GET_INFO;
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case TVN_SETDISPINFO:
             {
@@ -3423,7 +3423,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                 {
                     default:
                         wxLogDebug(wxT("unexpected code %d in TVN_ITEMEXPAND message"), tv->action);
-                        wxFALLTHROUGH;
+                        [[fallthrough]];
 
                     case TVE_EXPAND:
                         what = IDX_EXPAND;
@@ -3491,7 +3491,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
             {
                 eventType = wxEVT_TREE_SEL_CHANGED;
             }
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case TVN_SELCHANGINGA:
         case TVN_SELCHANGINGW:
@@ -3710,7 +3710,7 @@ bool wxTreeCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
                     break;
                 }
             }
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         default:
             return wxControl::MSWOnNotify(idCtrl, lParam, result);

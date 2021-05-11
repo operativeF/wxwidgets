@@ -885,7 +885,7 @@ void wxAnyScrollHelperBase::HandleOnChar(wxKeyEvent& event)
 
         case WXK_LEFT:
             newEvent.SetOrientation(wxHORIZONTAL);
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case WXK_UP:
             newEvent.SetEventType(wxEVT_SCROLLWIN_LINEUP);
@@ -893,7 +893,7 @@ void wxAnyScrollHelperBase::HandleOnChar(wxKeyEvent& event)
 
         case WXK_RIGHT:
             newEvent.SetOrientation(wxHORIZONTAL);
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case WXK_DOWN:
             newEvent.SetEventType(wxEVT_SCROLLWIN_LINEDOWN);
@@ -1303,7 +1303,7 @@ wxScrollHelper::DoAdjustScrollbar(int orient,
 
         default:
             wxFAIL_MSG( wxS("unknown scrollbar visibility") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxSHOW_SB_DEFAULT:
             range = scrollUnits;

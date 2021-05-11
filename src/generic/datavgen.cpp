@@ -4474,7 +4474,7 @@ void wxDataViewMainWindow::OnCharHook(wxKeyEvent& event)
                 // Shift-Enter is not special neither.
                 if ( event.ShiftDown() )
                     break;
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case WXK_TAB:
                 // Ctrl/Alt-Tab or Enter could be used for something else, so
@@ -4542,7 +4542,7 @@ void wxDataViewMainWindow::OnChar( wxKeyEvent &event )
                     break;
                 // else: fall through to WXK_SPACE handling
             }
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case WXK_SPACE:
             if ( event.HasModifiers() )
@@ -4577,7 +4577,7 @@ void wxDataViewMainWindow::OnChar( wxKeyEvent &event )
                     break;
                 }
                 // else: fall through to WXK_F2 handling
-                wxFALLTHROUGH;
+                [[fallthrough]];
             }
 
         case WXK_F2:
@@ -4639,7 +4639,7 @@ void wxDataViewMainWindow::OnChar( wxKeyEvent &event )
                 break;
             }
             //else: fall through to Collapse()
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case '-':
         case WXK_SUBTRACT:
@@ -6621,15 +6621,15 @@ wxAccStatus wxDataViewCtrlAccessible::Navigate(wxNavDir navDir, int fromId,
             }
             return wxACC_FALSE;
         case wxNAVDIR_DOWN:
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case wxNAVDIR_NEXT:
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case wxNAVDIR_UP:
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case wxNAVDIR_PREVIOUS:
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case wxNAVDIR_LEFT:
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case wxNAVDIR_RIGHT:
             // Standard wxWindow navigation is applicable here.
             return wxWindowAccessible::Navigate(navDir, fromId, toId, toObject);
@@ -6648,7 +6648,7 @@ wxAccStatus wxDataViewCtrlAccessible::Navigate(wxNavDir navDir, int fromId,
         case wxNAVDIR_RIGHT:
             return wxACC_FALSE;
         case wxNAVDIR_DOWN:
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case wxNAVDIR_NEXT:
             if ( fromId < numRows )
             {
@@ -6658,7 +6658,7 @@ wxAccStatus wxDataViewCtrlAccessible::Navigate(wxNavDir navDir, int fromId,
             }
             return wxACC_FALSE;
         case wxNAVDIR_PREVIOUS:
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case wxNAVDIR_UP:
             if ( fromId > 1 )
             {

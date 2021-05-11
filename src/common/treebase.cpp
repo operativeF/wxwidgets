@@ -351,7 +351,7 @@ void wxTreeCtrlBase::OnCharHook(wxKeyEvent& event)
         {
             case WXK_ESCAPE:
                 discardChanges = true;
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case WXK_RETURN:
             case WXK_NUMPAD_ENTER:

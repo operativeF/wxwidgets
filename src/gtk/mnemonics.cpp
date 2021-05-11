@@ -117,7 +117,7 @@ static wxString GTKProcessMnemonics(const wxString& label, MnemonicsFlag flag)
                             labelGTK += wxT("_-");
                             break;
                         }
-                        wxFALLTHROUGH;
+                        [[fallthrough]];
 
                     default:
                         if ( flag != MNEMONICS_REMOVE )
@@ -134,7 +134,7 @@ static wxString GTKProcessMnemonics(const wxString& label, MnemonicsFlag flag)
                     labelGTK += wxT("__");
                     break;
                 }
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             default:
                 labelGTK += ch;

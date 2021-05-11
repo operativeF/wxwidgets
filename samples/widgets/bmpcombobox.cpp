@@ -430,7 +430,7 @@ void BitmapComboBoxWidgetsPage::CreateCombo()
     {
         default:
             wxFAIL_MSG( "unknown combo kind" );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case ComboKind_Default:
             break;

@@ -1368,7 +1368,7 @@ wxLongLong wxAMMediaBackend::GetDuration()
     {
         default:
             wxAMLOG(hr);
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case S_FALSE:
             return 0;

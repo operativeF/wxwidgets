@@ -393,7 +393,7 @@ void wxAnyButton::DoSetBitmapPosition(wxDirection dir)
         {
             default:
                 wxFAIL_MSG( "invalid position" );
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case wxLEFT:
                 gtkpos = GTK_POS_LEFT;

@@ -363,7 +363,7 @@ void HyperlinkWidgetsPage::OnAlignment(wxCommandEvent& WXUNUSED(event))
         default:
         case Align_Max:
             wxFAIL_MSG( "unknown alignment" );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case Align_Left:
             addstyle = wxHL_ALIGN_LEFT;

@@ -381,7 +381,7 @@ wxPNGImageData::DoLoadPNGFile(wxImage* image, wxPNGInfoStruct& wxinfo)
         {
             default:
                 wxLogWarning(_("Unknown PNG resolution unit %d"), unitType);
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case PNG_RESOLUTION_UNKNOWN:
                 image->SetOption(wxIMAGE_OPTION_RESOLUTIONX, resX);
@@ -768,7 +768,7 @@ bool wxPNGHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool verbos
             {
                 default:
                     wxFAIL_MSG( wxT("unknown wxPNG_TYPE_XXX") );
-                    wxFALLTHROUGH;
+                    [[fallthrough]];
 
                 case wxPNG_TYPE_COLOUR:
                     *pData++ = clr.red;

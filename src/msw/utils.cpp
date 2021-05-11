@@ -703,11 +703,11 @@ int wxKill(long pid, wxSignal sig, wxKillError *krc, int flags)
 
             default:
                 wxFAIL_MSG( wxT("unexpected WaitForSingleObject() return") );
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case WAIT_FAILED:
                 wxLogLastError(wxT("WaitForSingleObject"));
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case WAIT_TIMEOUT:
                 // Process didn't terminate: normally this is a failure but not
@@ -1080,7 +1080,7 @@ wxString wxGetOsDescription()
                                 break;
                             }
                             //else: must be XP, fall through
-                            wxFALLTHROUGH;
+                            [[fallthrough]];
 
                         case 1:
                             str = "Windows XP";

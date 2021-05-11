@@ -623,7 +623,7 @@ void wxCmdLineParser::SetDesc(const wxCmdLineEntryDesc *desc)
 
             default:
                 wxFAIL_MSG( wxT("unknown command line entry type") );
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case wxCMD_LINE_NONE:
                 return;
@@ -1091,7 +1091,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                     {
                         default:
                             wxFAIL_MSG( wxT("unknown option type") );
-                            wxFALLTHROUGH;
+                            [[fallthrough]];
 
                         case wxCMD_LINE_VAL_STRING:
                             opt.SetStrVal(value);
@@ -1477,7 +1477,7 @@ static wxString GetTypeName(wxCmdLineParamType type)
     {
         default:
             wxFAIL_MSG( wxT("unknown option type") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxCMD_LINE_VAL_STRING:
             s = _("str");

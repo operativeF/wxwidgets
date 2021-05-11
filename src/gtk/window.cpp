@@ -5202,7 +5202,7 @@ void wxWindowGTK::GTKSendPaintEvents(const GdkRegion* region)
                     break;
                 }
             }
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxBG_STYLE_SYSTEM:
             if ( GetThemeEnabled() )

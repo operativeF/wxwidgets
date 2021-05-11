@@ -3950,7 +3950,7 @@ void wxDataViewColumn::SetWidth(int width)
 
         case wxCOL_WIDTH_DEFAULT:
             width = wxDVC_DEFAULT_WIDTH;
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         default:
             [m_NativeDataPtr->GetNativeColumnPtr() setWidth:width];

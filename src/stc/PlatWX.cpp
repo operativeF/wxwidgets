@@ -3232,7 +3232,7 @@ wxSTCListBoxWin::wxSTCListBoxWin(wxWindow* parent, wxSTCListBox** lb,
             break;
 #endif
         case wxSTC_TECHNOLOGY_DEFAULT:
-            wxFALLTHROUGH;
+            [[fallthrough]];
         default:
             *lb = new wxSTCListBox(this, v, h);
     }

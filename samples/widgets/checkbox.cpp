@@ -256,7 +256,7 @@ void CheckBoxWidgetsPage::CreateCheckbox()
     {
         default:
             wxFAIL_MSG("unexpected radiobox selection");
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case CheckboxKind_2State:
             flags |= wxCHK_2STATE;
@@ -264,7 +264,7 @@ void CheckBoxWidgetsPage::CreateCheckbox()
 
         case CheckboxKind_3StateUser:
             flags |= wxCHK_ALLOW_3RD_STATE_FOR_USER;
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case CheckboxKind_3State:
             flags |= wxCHK_3STATE;

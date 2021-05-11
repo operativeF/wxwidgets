@@ -902,7 +902,7 @@ bool wxHtmlHelpWindow::KeywordSearch(const wxString& keyword,
         {
             default:
                 wxFAIL_MSG( wxT("unknown help search mode") );
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case wxHELP_SEARCH_ALL:
             {

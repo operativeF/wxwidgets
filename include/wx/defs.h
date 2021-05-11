@@ -297,20 +297,6 @@ typedef short int WXTYPE;
     #define wxHAS_NULLPTR_T
 #endif
 
-/* wxFALLTHROUGH is used to notate explicit fallthroughs in switch statements */
-
-#if __cplusplus >= 201703L
-    #define wxFALLTHROUGH [[fallthrough]]
-#elif __cplusplus >= 201103L && defined(__has_warning) && WX_HAS_CLANG_FEATURE(cxx_attributes)
-    #define wxFALLTHROUGH [[clang::fallthrough]]
-#elif wxCHECK_GCC_VERSION(7, 0)
-    #define wxFALLTHROUGH __attribute__ ((fallthrough))
-#endif
-
-#ifndef wxFALLTHROUGH
-    #define wxFALLTHROUGH ((void)0)
-#endif
-
 /*
    This one is a wx invention: like static cast but used when we intentionally
    truncate from a larger to smaller type, static_cast<> can't be used for it

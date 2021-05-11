@@ -829,7 +829,7 @@ bool wxMSWHeaderCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 
             m_isColBeingResized = true;
             evtType = wxEVT_HEADER_BEGIN_RESIZE;
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case HDN_ENDTRACKA:
         case HDN_ENDTRACKW:

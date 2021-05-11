@@ -144,7 +144,7 @@ public:
                 // convert to DPI
                 xres = wxRound(xres / 10.0 * inches2mm);
                 yres = wxRound(yres / 10.0 * inches2mm);
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case wxIMAGE_RESOLUTION_INCHES:
                 info = wxString::Format("DPI %i x %i", xres, yres);
@@ -1155,7 +1155,7 @@ void MyFrame::OnImageInfo( wxCommandEvent &WXUNUSED(event) )
             {
                 default:
                     wxFAIL_MSG( "unknown image resolution units" );
-                    wxFALLTHROUGH;
+                    [[fallthrough]];
 
                 case wxIMAGE_RESOLUTION_NONE:
                     info += " in default units";

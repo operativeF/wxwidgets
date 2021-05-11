@@ -157,11 +157,11 @@ wxRect wxBookCtrlBase::GetPageRect() const
     {
         default:
             wxFAIL_MSG( wxT("unexpected alignment") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxBK_TOP:
             rectPage.y = size.y + GetInternalBorder();
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxBK_BOTTOM:
             rectPage.height -= size.y + GetInternalBorder();
@@ -171,7 +171,7 @@ wxRect wxBookCtrlBase::GetPageRect() const
 
         case wxBK_LEFT:
             rectPage.x = size.x + GetInternalBorder();
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxBK_RIGHT:
             rectPage.width -= size.x + GetInternalBorder();
@@ -216,7 +216,7 @@ void wxBookCtrlBase::DoSize()
         {
             default:
                 wxFAIL_MSG( wxT("unexpected alignment") );
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             case wxBK_TOP:
             case wxBK_LEFT:

@@ -4037,7 +4037,7 @@ long TestMessageBoxDialog::GetStyle()
     {
         case MsgDlgIcon_Max:
             wxFAIL_MSG( "unexpected selection" );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case MsgDlgIcon_No:
             break;

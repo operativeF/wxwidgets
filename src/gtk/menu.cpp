@@ -702,7 +702,7 @@ void wxMenuItem::Check( bool check )
             if ( !check )
                 return;
 
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case wxITEM_CHECK:
             wxMenuItemBase::Check( check );
             gtk_check_menu_item_set_active( (GtkCheckMenuItem*)m_menuItem, (gint)check );
@@ -918,7 +918,7 @@ void wxMenu::GtkAppend(wxMenuItem* mitem, int pos)
             break;
         default:
             wxFAIL_MSG("unexpected menu item kind");
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case wxITEM_NORMAL:
 #ifdef __WXGTK4__
             //TODO GtkImageMenuItem is gone, have to implement it ourselves with

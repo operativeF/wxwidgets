@@ -277,7 +277,7 @@ void Card::Draw(wxDC& dc, int x, int y)
                     symsize * m_suit,
                     sympos,
                     wxCOPY);
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case 2:
             dc.Blit((wxCoord)(x - symdist + m_width / 2),
                     (wxCoord)(y - symdist + m_height / 4),
@@ -306,7 +306,7 @@ void Card::Draw(wxDC& dc, int x, int y)
                     symsize * m_suit,
                     sympos,
                     wxCOPY);
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case 4:
             dc.Blit((wxCoord)(x - symdist +  m_width / 4),
                     (wxCoord)(y - symdist + m_height / 4),
@@ -351,7 +351,7 @@ void Card::Draw(wxDC& dc, int x, int y)
                     symsize * m_suit,
                     sympos2,
                     wxCOPY);
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case 7:
             dc.Blit((wxCoord)(x - symdist + 5 * m_width / 10),
                     (wxCoord)(y - symdist + 3 * m_height / 8),
@@ -361,7 +361,7 @@ void Card::Draw(wxDC& dc, int x, int y)
                     symsize * m_suit,
                     sympos,
                     wxCOPY);
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case 6:
             dc.Blit((wxCoord)(x - symdist + m_width / 4),
                     (wxCoord)(y - symdist + m_height / 4),
@@ -419,7 +419,7 @@ void Card::Draw(wxDC& dc, int x, int y)
                     symsize * m_suit,
                     sympos2,
                     wxCOPY);
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case 9:
             dc.Blit((wxCoord)(x - symdist + m_width / 4),
                     (wxCoord)(y - symdist2 + m_height / 4),
@@ -496,9 +496,9 @@ void Card::Draw(wxDC& dc, int x, int y)
                     wxCOPY);
             break;
         case 11:
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case 12:
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case 13:
             memoryDC.SelectObject(*m_pictureBmap);
             int picwidth = 40,picheight = 45;

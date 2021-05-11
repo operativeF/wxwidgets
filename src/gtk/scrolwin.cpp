@@ -189,7 +189,7 @@ GtkPolicyType GtkPolicyFromWX(wxScrollbarVisibility visibility)
 
         default:
             wxFAIL_MSG( wxS("unknown scrollbar visibility") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxSHOW_SB_ALWAYS:
             policy = GTK_POLICY_ALWAYS;

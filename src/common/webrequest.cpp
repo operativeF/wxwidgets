@@ -367,7 +367,7 @@ void wxWebRequestImpl::ProcessStateEvent(wxWebRequest::State state, const wxStri
                 dataFile = response->GetDataFile();
                 evt.SetDataFile(dataFile);
             }
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxWebRequest::State_Failed:
         case wxWebRequest::State_Cancelled:

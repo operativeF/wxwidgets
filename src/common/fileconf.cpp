@@ -2027,7 +2027,7 @@ static wxString FilterOutValue(const wxString& str)
           c = wxT('"');
           break;
         }
-        wxFALLTHROUGH;
+        [[fallthrough]];
 
       default:
         strResult += str[n];

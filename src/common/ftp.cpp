@@ -383,7 +383,7 @@ bool wxFTP::SetTransferMode(TransferMode transferMode)
     {
         default:
             wxFAIL_MSG(wxT("unknown FTP transfer mode"));
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case BINARY:
             mode = wxT('I');

@@ -554,7 +554,7 @@ void wxNativeFontInfo::SetStyle(wxFontStyle style)
     {
         default:
             wxFAIL_MSG( "unknown font style" );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxFONTSTYLE_NORMAL:
             lf.lfItalic = FALSE;

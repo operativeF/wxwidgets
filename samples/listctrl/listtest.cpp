@@ -1426,7 +1426,7 @@ void MyListCtrl::OnListKeyDown(wxListEvent& event)
                 }
                 break;
             }
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         default:
             event.Skip();

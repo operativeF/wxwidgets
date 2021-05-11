@@ -677,7 +677,7 @@ void wxSVGFileDCImpl::DoDrawRotatedText(const wxString& sText, wxCoord x, wxCoor
     {
         case wxFONTSTYLE_MAX:
             wxFAIL_MSG(wxS("invalid font style value"));
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case wxFONTSTYLE_NORMAL:
             fontstyle = wxS("normal");
             break;

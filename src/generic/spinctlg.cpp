@@ -692,7 +692,7 @@ wxString wxSpinCtrl::DoValueToText(double val)
 
         default:
             wxFAIL_MSG( wxS("Unsupported spin control base") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case 10:
             return wxString::Format("%ld", static_cast<long>(val));

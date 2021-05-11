@@ -404,7 +404,7 @@ bool wxDialogBase::SendCloseButtonClickEvent()
             if ( EmulateButtonClickIfPresent(wxID_CANCEL) )
                 return true;
             idCancel = GetAffirmativeId();
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         default:
             // translate Esc to button press for the button with given id

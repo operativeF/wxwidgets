@@ -2129,7 +2129,7 @@ int wxDateTime::IsDST(wxDateTime::Country country) const
                 {
                     return true;
                 }
-                wxFALLTHROUGH;
+                [[fallthrough]];
 
             default:
                 if ( !IsDSTApplicable(year, country) )

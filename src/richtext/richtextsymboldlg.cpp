@@ -1128,7 +1128,7 @@ void wxSymbolListCtrl::OnKeyDown(wxKeyEvent& event)
                 ne.SetEventObject(this);
                 GetParent()->GetEventHandler()->ProcessEvent(ne);
             }
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         default:
             event.Skip();

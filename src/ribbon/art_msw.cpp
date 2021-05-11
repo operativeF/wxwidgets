@@ -1723,7 +1723,7 @@ void wxRibbonMSWArtProvider::DrawScrollButton(
         {
         case wxRIBBON_SCROLL_BTN_LEFT:
             rect.x++;
-            wxFALLTHROUGH;
+            [[fallthrough]];
         case wxRIBBON_SCROLL_BTN_RIGHT:
             rect.y--;
             rect.width--;
@@ -3189,7 +3189,7 @@ bool wxRibbonMSWArtProvider::GetButtonBarButtonSize(
                 break;
             case wxRIBBON_BUTTON_HYBRID:
                 dropdown_region->SetX(dropdown_region->GetX() + text_size);
-                wxFALLTHROUGH;// no break
+                [[fallthrough]];// no break
             case wxRIBBON_BUTTON_NORMAL:
             case wxRIBBON_BUTTON_TOGGLE:
                 normal_region->SetWidth(normal_region->GetWidth() + text_size);

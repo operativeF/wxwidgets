@@ -215,7 +215,7 @@ bool wxStringTokenizer::DoHasMoreTokens() const
         case wxTOKEN_INVALID:
         case wxTOKEN_DEFAULT:
             wxFAIL_MSG( wxT("unexpected tokenizer mode") );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxTOKEN_STRTOK:
             // never return empty delimiters

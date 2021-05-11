@@ -895,25 +895,25 @@ D2D1_DASH_STYLE wxD2DConvertPenStyle(wxPenStyle dashStyle)
     // NB: These styles cannot be converted to a D2D1_DASH_STYLE
     // and must be handled separately.
     case wxPENSTYLE_TRANSPARENT:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxPENSTYLE_INVALID:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxPENSTYLE_STIPPLE_MASK_OPAQUE:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxPENSTYLE_STIPPLE_MASK:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxPENSTYLE_STIPPLE:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxPENSTYLE_BDIAGONAL_HATCH:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxPENSTYLE_CROSSDIAG_HATCH:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxPENSTYLE_FDIAGONAL_HATCH:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxPENSTYLE_CROSS_HATCH:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxPENSTYLE_HORIZONTAL_HATCH:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxPENSTYLE_VERTICAL_HATCH:
         return D2D1_DASH_STYLE_SOLID;
     }
@@ -971,9 +971,9 @@ D2D1_COMPOSITE_MODE wxD2DConvertCompositionMode(wxCompositionMode compositionMod
 
     // unsupported composition modes
     case wxCOMPOSITION_DEST:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxCOMPOSITION_CLEAR:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxCOMPOSITION_INVALID:
         return D2D1_COMPOSITE_MODE_SOURCE_COPY;
     }
@@ -991,9 +991,9 @@ D2D1_INTERPOLATION_MODE wxD2DConvertInterpolationMode(wxInterpolationQuality int
     switch (interpolationQuality)
     {
     case wxINTERPOLATION_DEFAULT:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxINTERPOLATION_NONE:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxINTERPOLATION_FAST:
         return D2D1_INTERPOLATION_MODE_NEAREST_NEIGHBOR;
     case wxINTERPOLATION_GOOD:
@@ -1012,11 +1012,11 @@ D2D1_BITMAP_INTERPOLATION_MODE wxD2DConvertBitmapInterpolationMode(wxInterpolati
     switch (interpolationQuality)
     {
     case wxINTERPOLATION_DEFAULT:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxINTERPOLATION_NONE:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxINTERPOLATION_FAST:
-        wxFALLTHROUGH;
+        [[fallthrough]];
     case wxINTERPOLATION_GOOD:
         return D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR;
     case wxINTERPOLATION_BEST:

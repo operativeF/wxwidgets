@@ -412,7 +412,7 @@ void wxGtkStyleContext::Bg(wxColour& color, int state) const
                     a = guchar(pixel >> 24);
                     if (a == 0)
                         break;
-                    wxFALLTHROUGH;
+                    [[fallthrough]];
                 case CAIRO_FORMAT_RGB24:
                     r = guchar(pixel >> 16);
                     g = guchar(pixel >> 8);
@@ -501,7 +501,7 @@ wxColour wxSystemSettingsNative::GetColour(wxSystemColour index)
             sc.AddHeaderbar().Bg(color, state);
             break;
         }
-        wxFALLTHROUGH;
+        [[fallthrough]];
 #endif
     case wxSYS_COLOUR_3DLIGHT:
     case wxSYS_COLOUR_ACTIVEBORDER:
@@ -536,7 +536,7 @@ wxColour wxSystemSettingsNative::GetColour(wxSystemColour index)
             sc.AddHeaderbar().AddLabel().Fg(color);
             break;
         }
-        wxFALLTHROUGH;
+        [[fallthrough]];
 #endif
     case wxSYS_COLOUR_BTNTEXT:
         sc.AddButton().AddLabel().Fg(color);
@@ -548,7 +548,7 @@ wxColour wxSystemSettingsNative::GetColour(wxSystemColour index)
             sc.AddHeaderbar().AddLabel().Fg(color, GTK_STATE_FLAG_BACKDROP);
             break;
         }
-        wxFALLTHROUGH;
+        [[fallthrough]];
 #endif
     case wxSYS_COLOUR_GRAYTEXT:
         sc.AddLabel().Fg(color, GTK_STATE_FLAG_INSENSITIVE);

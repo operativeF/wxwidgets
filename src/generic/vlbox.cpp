@@ -656,7 +656,7 @@ void wxVListBox::OnKeyDown(wxKeyEvent& event)
             // events for the tabs on MSW
             HandleAsNavigationKey(event);
             // fall through to default
-            wxFALLTHROUGH;
+            [[fallthrough]];
 #endif
         default:
             event.Skip();

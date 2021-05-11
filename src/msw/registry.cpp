@@ -1370,7 +1370,7 @@ wxString wxRegKey::FormatValue(const wxString& name) const
                         case wxT('\\'):
                             // escape special symbol
                             rhs += wxT('\\');
-                            wxFALLTHROUGH;
+                            [[fallthrough]];
 
                         default:
                             rhs += *p;
@@ -1565,7 +1565,7 @@ long GetMSWViewFlags(wxRegKey::WOW64ViewMode viewMode)
 
         default:
             wxFAIL_MSG("Unknown registry view.");
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxRegKey::WOW64ViewMode_Default:
             // Use default registry view for the current application,

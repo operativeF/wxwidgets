@@ -624,7 +624,7 @@ void MyFrame::OnKill(wxCommandEvent& WXUNUSED(event))
     {
         default:
             wxFAIL_MSG( "unexpected return value" );
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case -1:
             // cancelled

@@ -322,7 +322,7 @@ WXLRESULT wxDialog::MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lPar
                     break;
 
                 case SIZE_MAXIMIZED:
-                    wxFALLTHROUGH;
+                    [[fallthrough]];
 
                 case SIZE_RESTORED:
                     if ( m_hGripper )
