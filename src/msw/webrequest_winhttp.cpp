@@ -269,7 +269,7 @@ wxWebRequestWinHTTP::HandleCallback(DWORD dwInternetStatus,
 
         case WINHTTP_CALLBACK_STATUS_WRITE_COMPLETE:
         {
-            DWORD written = *(reinterpret_cast<LPDWORD>(lpvStatusInformation));
+            DWORD written = *(static_cast<LPDWORD>(lpvStatusInformation));
             m_dataWritten += written;
             WriteData();
             break;
@@ -278,7 +278,7 @@ wxWebRequestWinHTTP::HandleCallback(DWORD dwInternetStatus,
         case WINHTTP_CALLBACK_STATUS_REQUEST_ERROR:
         {
             LPWINHTTP_ASYNC_RESULT
-                asyncResult = reinterpret_cast<LPWINHTTP_ASYNC_RESULT>(lpvStatusInformation);
+                asyncResult = static_cast<LPWINHTTP_ASYNC_RESULT>(lpvStatusInformation);
 
             // "Failing" with "cancelled" error is not actually an error if
             // we're expecting it, i.e. if our Cancel() had been called.

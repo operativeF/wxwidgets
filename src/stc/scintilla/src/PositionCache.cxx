@@ -574,7 +574,7 @@ void PositionCacheEntry::Set(unsigned int styleNumber_, const char *s_,
 		for (unsigned int i=0; i<len; i++) {
 			positions[i] = positions_[i];
 		}
-		memcpy(reinterpret_cast<char *>(reinterpret_cast<void *>(positions + len)), s_, len);
+		memcpy(static_cast<char *>(reinterpret_cast<void *>(positions + len)), s_, len);
 	}
 }
 
@@ -593,7 +593,7 @@ void PositionCacheEntry::Clear() {
 bool PositionCacheEntry::Retrieve(unsigned int styleNumber_, const char *s_,
 	unsigned int len_, XYPOSITION *positions_) const {
 	if ((styleNumber == styleNumber_) && (len == len_) &&
-		(memcmp(reinterpret_cast<char *>(reinterpret_cast<void *>(positions + len)), s_, len)== 0)) {
+		(memcmp(static_cast<char *>(reinterpret_cast<void *>(positions + len)), s_, len)== 0)) {
 		for (unsigned int i=0; i<len; i++) {
 			positions_[i] = positions[i];
 		}

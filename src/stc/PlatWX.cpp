@@ -1072,7 +1072,7 @@ void SurfaceD2D::Init(SurfaceID sid, WindowID wid)
         const wxSize sz = dc->GetSize();
         m_logPixelsY = win->GetDPI().GetY();
         ScintillaWX* const
-            sciwx = reinterpret_cast<ScintillaWX*>(stc->GetDirectPointer());
+            sciwx = static_cast<ScintillaWX*>(stc->GetDirectPointer());
         m_surfaceData = static_cast<SurfaceDataD2D*>(sciwx->GetSurfaceData());
         HRESULT hr = m_surfaceData->CreateGraphicsResources();
 
@@ -1081,7 +1081,7 @@ void SurfaceD2D::Init(SurfaceID sid, WindowID wid)
             RECT rc;
             ::SetRect(&rc,0,0,sz.GetWidth(),sz.GetHeight());
             hr = m_surfaceData->GetRenderTarget()
-                ->BindDC(reinterpret_cast<HDC>(dc->GetHandle()),&rc);
+                ->BindDC(static_cast<HDC>(dc->GetHandle()),&rc);
         }
 
         if ( SUCCEEDED(hr) )

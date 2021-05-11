@@ -1253,8 +1253,8 @@ wxGDIPlusBitmapData::wxGDIPlusBitmapData( wxGraphicsRenderer* renderer,
         {
             BYTE maskPattern = 0;
             BYTE maskByte = 0;
-            const BYTE* mask = reinterpret_cast<BYTE*>(dataMask.Scan0) + dataMask.Stride * y;
-            ARGB* dest = reinterpret_cast<ARGB*>(reinterpret_cast<BYTE*>(imageData.Scan0) + imageData.Stride * y);
+            const BYTE* mask = static_cast<BYTE*>(dataMask.Scan0) + dataMask.Stride * y;
+            ARGB* dest = reinterpret_cast<ARGB*>(static_cast<BYTE*>(imageData.Scan0) + imageData.Stride * y);
             for( size_t x = 0 ; x < width; ++x)
             {
                 if ( x % 8 == 0)
@@ -1321,7 +1321,7 @@ wxGDIPlusBitmapData::wxGDIPlusBitmapData(wxGraphicsRenderer* renderer, const wxI
 
     const unsigned char* imgRGB = img.GetData();
     const unsigned char* imgAlpha = img.GetAlpha();
-    BYTE* pPixLine = reinterpret_cast<BYTE*>(bmpData.Scan0);
+    BYTE* pPixLine = static_cast<BYTE*>(bmpData.Scan0);
     for ( UINT y = 0; y < h; y++ )
     {
         BYTE* pPixByte = pPixLine;
@@ -1347,7 +1347,7 @@ wxGDIPlusBitmapData::wxGDIPlusBitmapData(wxGraphicsRenderer* renderer, const wxI
         unsigned char mg = img.GetMaskGreen();
         unsigned char mb = img.GetMaskBlue();
         imgRGB = img.GetData();
-        pPixLine = reinterpret_cast<BYTE*>(bmpData.Scan0);
+        pPixLine = static_cast<BYTE*>(bmpData.Scan0);
         for ( UINT y = 0; y < h; y++ )
         {
             BYTE* pPixByte = pPixLine;

@@ -75,7 +75,7 @@ wxString wxArgNormalizedString::GetString() const
             return wxString(reinterpret_cast<const char*>(m_ptr));
         else
     #endif
-        return wxString(reinterpret_cast<const wxChar*>(m_ptr));
+        return wxString(static_cast<const wxChar*>(m_ptr));
 #endif // !wxUSE_UTF8_LOCALE_ONLY
 }
 
