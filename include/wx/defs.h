@@ -262,14 +262,6 @@ typedef short int WXTYPE;
 #endif
 
 /*
-    Support for nullptr is available since MSVS 2010, even though it doesn't
-    define __cplusplus as a C++11 compiler.
- */
-#if __cplusplus >= 201103 || wxCHECK_VISUALC_VERSION(10)
-    #define wxHAS_NULLPTR_T
-#endif
-
-/*
    This one is a wx invention: like static cast but used when we intentionally
    truncate from a larger to smaller type, static_cast<> can't be used for it
    as it results in warnings when using some compilers (SGI mipspro for example)

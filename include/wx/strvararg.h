@@ -459,9 +459,7 @@ wxFORMAT_STRING_SPECIFIER(int*, wxFormatString::Arg_IntPtr | wxFormatString::Arg
 wxFORMAT_STRING_SPECIFIER(short int*, wxFormatString::Arg_ShortIntPtr | wxFormatString::Arg_Pointer)
 wxFORMAT_STRING_SPECIFIER(long int*, wxFormatString::Arg_LongIntPtr | wxFormatString::Arg_Pointer)
 
-#ifdef wxHAS_NULLPTR_T
 wxFORMAT_STRING_SPECIFIER(std::nullptr_t, wxFormatString::Arg_Pointer)
-#endif
 
 #undef wxFORMAT_STRING_SPECIFIER
 #undef wxDISABLED_FORMAT_STRING_SPECIFIER

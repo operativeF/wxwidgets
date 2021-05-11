@@ -264,9 +264,7 @@ TEST_CASE("CRT::Strtox", "[crt][strtod][strtol]")
     SECTION("other")
     {
         CHECK( wxStrtod(s, 0) == d );
-#ifdef wxHAS_NULLPTR_T
         CHECK( wxStrtod(s, nullptr) == d );
         CHECK( wxStrtol(s, nullptr, 10) == l );
-#endif
     }
 }
