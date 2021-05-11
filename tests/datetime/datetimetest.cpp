@@ -824,7 +824,7 @@ void DateTimeTestCase::TestTimeFormat()
                                 dt2.SetYear(dt.GetYear());
                             }
                             // fall through and compare everything
-                            wxFALLTHROUGH;
+                            [[fallthrough]];
 
                         case CompareBoth:
                             CHECK( dt == dt2 );

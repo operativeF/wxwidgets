@@ -109,7 +109,7 @@ public:
                 wxFileName fn(evt.GetDataFile());
                 CHECK( fn.GetSize() == expectedFileSize );
             }
-            wxFALLTHROUGH;
+            [[fallthrough]];
 
         case wxWebRequest::State_Unauthorized:
         case wxWebRequest::State_Failed:
