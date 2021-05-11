@@ -203,7 +203,7 @@ private:
     class WXDLLEXPORT RasTimer : public wxTimer
     {
     public:
-        RasTimer(wxDialUpManagerMSW *dialUpManager)
+        explicit RasTimer(wxDialUpManagerMSW *dialUpManager)
             { m_dialUpManager = dialUpManager; }
 
         virtual void Notify() override { m_dialUpManager->CheckRasStatus(); }

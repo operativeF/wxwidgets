@@ -183,7 +183,7 @@ public:
     //
     // note that we use a bigger than default buffer size which matches the
     // typical Ethernet MTU (minus TCP header overhead)
-    wxIPCSocketStreams(wxSocketBase& sock)
+    explicit wxIPCSocketStreams(wxSocketBase& sock)
         : m_socketStream(sock),
 #ifdef USE_BUFFER
           m_bufferedOut(m_socketStream, 1448),
@@ -296,7 +296,7 @@ class IPCOutput
 public:
     // construct an object associated with the given streams (which must have
     // life time greater than ours as we keep a reference to it)
-    IPCOutput(wxIPCSocketStreams *streams)
+    explicit IPCOutput(wxIPCSocketStreams *streams)
         : m_streams(*streams)
     {
         wxASSERT_MSG( streams, "NULL streams pointer" );

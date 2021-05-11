@@ -57,7 +57,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxTaskBarIcon, wxEvtHandler);
 class wxTaskBarIconWindow : public wxFrame
 {
 public:
-    wxTaskBarIconWindow(wxTaskBarIcon *icon)
+    explicit wxTaskBarIconWindow(wxTaskBarIcon *icon)
         : wxFrame(nullptr, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0),
           m_icon(icon)
     {
@@ -87,7 +87,7 @@ private:
 
 struct NotifyIconData : public NOTIFYICONDATA
 {
-    NotifyIconData(WXHWND hwnd)
+    explicit NotifyIconData(WXHWND hwnd)
     {
         wxZeroMemory(*this);
 

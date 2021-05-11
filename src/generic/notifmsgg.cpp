@@ -52,7 +52,7 @@
 class wxNotificationMessageWindow : public wxFrame
 {
 public:
-    wxNotificationMessageWindow(wxGenericNotificationMessageImpl* notificationImpl);
+    explicit wxNotificationMessageWindow(wxGenericNotificationMessageImpl* notificationImpl);
 
     virtual ~wxNotificationMessageWindow();
 

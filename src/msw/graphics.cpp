@@ -135,7 +135,7 @@ class wxGDIPlusContext;
 class wxGDIPlusPathData : public wxGraphicsPathData
 {
 public :
-    wxGDIPlusPathData(wxGraphicsRenderer* renderer, GraphicsPath* path = nullptr);
+    explicit wxGDIPlusPathData(wxGraphicsRenderer* renderer, GraphicsPath* path = nullptr);
     ~wxGDIPlusPathData();
 
     virtual wxGraphicsObjectRefData *Clone() const override;
@@ -210,7 +210,7 @@ private :
 class wxGDIPlusMatrixData : public wxGraphicsMatrixData
 {
 public :
-    wxGDIPlusMatrixData(wxGraphicsRenderer* renderer, Matrix* matrix = nullptr) ;
+    explicit wxGDIPlusMatrixData(wxGraphicsRenderer* renderer, Matrix* matrix = nullptr) ;
     virtual ~wxGDIPlusMatrixData() ;
 
     virtual wxGraphicsObjectRefData* Clone() const override;
@@ -269,7 +269,7 @@ private:
 class wxGDIPlusPenBrushBaseData : public wxGraphicsObjectRefData
 {
 public:
-    wxGDIPlusPenBrushBaseData(wxGraphicsRenderer* renderer);
+    explicit wxGDIPlusPenBrushBaseData(wxGraphicsRenderer* renderer);
 
     virtual void Init();
 
@@ -319,7 +319,7 @@ protected :
 class wxGDIPlusBrushData : public wxGDIPlusPenBrushBaseData
 {
 public:
-    wxGDIPlusBrushData( wxGraphicsRenderer* renderer );
+    explicit wxGDIPlusBrushData( wxGraphicsRenderer* renderer );
     wxGDIPlusBrushData( wxGraphicsRenderer* renderer, const wxBrush &brush );
     ~wxGDIPlusBrushData ();
 
@@ -411,7 +411,7 @@ public:
     wxGDIPlusContext( wxGraphicsRenderer* renderer, HDC hdc, wxDouble width, wxDouble height );
     wxGDIPlusContext( wxGraphicsRenderer* renderer, HWND hwnd, wxWindow* window = nullptr);
     wxGDIPlusContext( wxGraphicsRenderer* renderer, Graphics* gr);
-    wxGDIPlusContext(wxGraphicsRenderer* renderer);
+    explicit wxGDIPlusContext(wxGraphicsRenderer* renderer);
 
     virtual ~wxGDIPlusContext();
 
@@ -539,7 +539,7 @@ private:
 class wxGDIPlusMeasuringContext : public wxGDIPlusContext
 {
 public:
-    wxGDIPlusMeasuringContext( wxGraphicsRenderer* renderer ) : wxGDIPlusContext( renderer , m_hdc = GetDC(nullptr), 1000, 1000 )
+    explicit wxGDIPlusMeasuringContext( wxGraphicsRenderer* renderer ) : wxGDIPlusContext( renderer , m_hdc = GetDC(nullptr), 1000, 1000 )
     {
     }
 

@@ -65,7 +65,7 @@ WX_CHECK_BUILD_OPTIONS("wxQA")
 class XmlStackWalker : public wxStackWalker
 {
 public:
-    XmlStackWalker(wxXmlNode *nodeStack)
+    explicit XmlStackWalker(wxXmlNode *nodeStack)
     {
         m_isOk = false;
         m_nodeStack = nodeStack;

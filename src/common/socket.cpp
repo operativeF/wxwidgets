@@ -201,7 +201,7 @@ private:
 class wxSocketReadGuard
 {
 public:
-    wxSocketReadGuard(wxSocketBase *socket)
+    explicit wxSocketReadGuard(wxSocketBase *socket)
         : m_socket(socket)
     {
         wxASSERT_MSG( !m_socket->m_reading, "read reentrancy?" );
@@ -229,7 +229,7 @@ private:
 class wxSocketWriteGuard
 {
 public:
-    wxSocketWriteGuard(wxSocketBase *socket)
+    explicit wxSocketWriteGuard(wxSocketBase *socket)
         : m_socket(socket)
     {
         wxASSERT_MSG( !m_socket->m_writing, "write reentrancy?" );

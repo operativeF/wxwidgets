@@ -443,7 +443,7 @@ public:
     size_t m_httpsize;
     unsigned long m_read_bytes;
 
-    wxHTTPStream(wxHTTP *http) : wxSocketInputStream(*http)
+    explicit wxHTTPStream(wxHTTP *http) : wxSocketInputStream(*http)
     {
         m_http = http;
         m_httpsize = 0;

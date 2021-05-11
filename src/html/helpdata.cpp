@@ -144,7 +144,7 @@ class HP_TagHandler : public wxHtmlTagHandler
         wxHtmlHelpDataItems *m_data;
 
     public:
-        HP_TagHandler(wxHtmlBookRecord *b) : wxHtmlTagHandler()
+        explicit HP_TagHandler(wxHtmlBookRecord *b) : wxHtmlTagHandler()
         {
             m_data = nullptr;
             m_book = b;

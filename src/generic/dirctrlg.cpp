@@ -1397,7 +1397,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFileIconsTableModule, wxModule);
 class wxFileIconEntry : public wxObject
 {
 public:
-    wxFileIconEntry(int i) { iconid = i; }
+    explicit wxFileIconEntry(int i) { iconid = i; }
 
     int iconid;
 };

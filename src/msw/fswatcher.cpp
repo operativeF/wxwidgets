@@ -27,7 +27,7 @@
 class wxFSWatcherImplMSW : public wxFSWatcherImpl
 {
 public:
-    wxFSWatcherImplMSW(wxFileSystemWatcherBase* watcher);
+    explicit wxFSWatcherImplMSW(wxFileSystemWatcherBase* watcher);
 
     virtual ~wxFSWatcherImplMSW();
 

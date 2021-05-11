@@ -1147,7 +1147,7 @@ bool operator==(const D2D1::Matrix3x2F& lhs, const D2D1::Matrix3x2F& rhs)
 class wxD2DMatrixData : public wxGraphicsMatrixData
 {
 public:
-    wxD2DMatrixData(wxGraphicsRenderer* renderer);
+    explicit wxD2DMatrixData(wxGraphicsRenderer* renderer);
     wxD2DMatrixData(wxGraphicsRenderer* renderer, const D2D1::Matrix3x2F& matrix);
 
     virtual wxGraphicsObjectRefData* Clone() const override;
@@ -2136,11 +2136,11 @@ wxD2DPathData* wxGetD2DPathData(const wxGraphicsPath& path)
 // pixel data to easily read and write color values.
 struct wxPBGRAColor
 {
-    wxPBGRAColor(BYTE* stream) :
+    explicit wxPBGRAColor(BYTE* stream) :
         b(*stream), g(*(stream + 1)), r(*(stream + 2)), a(*(stream + 3))
     {}
 
-    wxPBGRAColor(const wxColor& color) :
+    explicit wxPBGRAColor(const wxColor& color) :
         b(color.Blue()), g(color.Green()), r(color.Red()), a(color.Alpha())
     {}
 
@@ -2496,7 +2496,7 @@ private:
 class wxBitmapPixelWriteLock
 {
 public:
-    wxBitmapPixelWriteLock(IWICBitmap* bitmap)
+    explicit wxBitmapPixelWriteLock(IWICBitmap* bitmap)
     {
         // Retrieve the size of the bitmap
         UINT w, h;
@@ -2516,7 +2516,7 @@ private:
 class wxD2DBitmapResourceHolder : public wxD2DResourceHolder<ID2D1Bitmap>
 {
 public:
-    wxD2DBitmapResourceHolder(const wxBitmap& sourceBitmap)
+    explicit wxD2DBitmapResourceHolder(const wxBitmap& sourceBitmap)
     {
         HRESULT hr;
         if ( sourceBitmap.GetMask() )
@@ -2575,7 +2575,7 @@ public:
         }
     }
 
-    wxD2DBitmapResourceHolder(IWICBitmap* pSrcBmp) :
+    explicit wxD2DBitmapResourceHolder(IWICBitmap* pSrcBmp) :
         m_srcBitmap(pSrcBmp)
     {
     }
@@ -2590,7 +2590,7 @@ public:
     }
 
 #if wxUSE_IMAGE
-    wxD2DBitmapResourceHolder(const wxImage& img)
+    explicit wxD2DBitmapResourceHolder(const wxImage& img)
     {
         CreateWICBitmapFromImage(img, false, &m_srcBitmap);
     }
@@ -2700,7 +2700,7 @@ wxD2DBitmapData* wxGetD2DBitmapData(const wxGraphicsBitmap& bitmap)
 class wxD2DGradientStopsHelper : public wxD2DResourceHolder<ID2D1GradientStopCollection>
 {
 public:
-    wxD2DGradientStopsHelper(const wxGraphicsGradientStops& gradientStops)
+    explicit wxD2DGradientStopsHelper(const wxGraphicsGradientStops& gradientStops)
     {
         const int stopCount = gradientStops.GetCount();
         m_gradientStops.reserve(stopCount);
@@ -2731,7 +2731,7 @@ template <typename B>
 class wxD2DBrushResourceHolder : public wxD2DResourceHolder<B>
 {
 public:
-    wxD2DBrushResourceHolder(const wxBrush& brush) : m_sourceBrush(brush) {}
+    explicit wxD2DBrushResourceHolder(const wxBrush& brush) : m_sourceBrush(brush) {}
     virtual ~wxD2DBrushResourceHolder() = default;
 protected:
     const wxBrush m_sourceBrush;
@@ -2740,7 +2740,7 @@ protected:
 class wxD2DSolidBrushResourceHolder : public wxD2DBrushResourceHolder<ID2D1SolidColorBrush>
 {
 public:
-    wxD2DSolidBrushResourceHolder(const wxBrush& brush) : wxD2DBrushResourceHolder(brush) {}
+    explicit wxD2DSolidBrushResourceHolder(const wxBrush& brush) : wxD2DBrushResourceHolder(brush) {}
 
 protected:
     void DoAcquireResource() override
@@ -2754,7 +2754,7 @@ protected:
 class wxD2DBitmapBrushResourceHolder : public wxD2DBrushResourceHolder<ID2D1BitmapBrush>
 {
 public:
-    wxD2DBitmapBrushResourceHolder(const wxBrush& brush) : wxD2DBrushResourceHolder(brush) {}
+    explicit wxD2DBitmapBrushResourceHolder(const wxBrush& brush) : wxD2DBrushResourceHolder(brush) {}
 
 protected:
     void DoAcquireResource() override
@@ -2778,7 +2778,7 @@ protected:
 class wxD2DHatchBrushResourceHolder : public wxD2DBrushResourceHolder<ID2D1BitmapBrush>
 {
 public:
-    wxD2DHatchBrushResourceHolder(const wxBrush& brush) : wxD2DBrushResourceHolder(brush) {}
+    explicit wxD2DHatchBrushResourceHolder(const wxBrush& brush) : wxD2DBrushResourceHolder(brush) {}
 
 protected:
     void DoAcquireResource() override
@@ -2915,7 +2915,7 @@ class wxD2DBrushData : public wxGraphicsObjectRefData, public wxD2DManagedGraphi
 public:
     wxD2DBrushData(wxGraphicsRenderer* renderer, const wxBrush brush);
 
-    wxD2DBrushData(wxGraphicsRenderer* renderer);
+    explicit wxD2DBrushData(wxGraphicsRenderer* renderer);
 
     void CreateLinearGradientBrush(wxDouble x1, wxDouble y1,
                                    wxDouble x2, wxDouble y2,
@@ -3807,7 +3807,7 @@ private:
 class wxNullContext : public wxGraphicsContext
 {
 public:
-    wxNullContext(wxGraphicsRenderer* renderer) : wxGraphicsContext(renderer) {}
+    explicit wxNullContext(wxGraphicsRenderer* renderer) : wxGraphicsContext(renderer) {}
     void GetTextExtent(const wxString&, wxDouble*, wxDouble*, wxDouble*, wxDouble*) const override {}
     void GetPartialTextExtents(const wxString&, wxArrayDouble&) const override {}
     void Clip(const wxRegion&) override {}
@@ -3842,7 +3842,7 @@ protected:
 class wxD2DMeasuringContext : public wxNullContext
 {
 public:
-    wxD2DMeasuringContext(wxGraphicsRenderer* renderer) : wxNullContext(renderer) {}
+    explicit wxD2DMeasuringContext(wxGraphicsRenderer* renderer) : wxNullContext(renderer) {}
 
     void GetTextExtent(const wxString& str, wxDouble* width, wxDouble* height, wxDouble* descent, wxDouble* externalLeading) const override
     {

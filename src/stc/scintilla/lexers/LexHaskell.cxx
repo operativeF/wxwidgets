@@ -316,7 +316,7 @@ class LexerHaskell : public ILexer {
       LiterateMode lmode;
       KeywordMode mode;
 
-      HaskellLineInfo(int state) :
+      explicit HaskellLineInfo(int state) :
          nestLevel (state >> 10)
        , nonexternalStyle ((state >> 5) & 0x1F)
        , pragma ((state >> 4) & 0x1)
@@ -389,7 +389,7 @@ class LexerHaskell : public ILexer {
    }
 
 public:
-   LexerHaskell(bool literate_)
+   explicit LexerHaskell(bool literate_)
       : literate(literate_)
       , firstImportLine(-1)
       , firstImportIndent(0)

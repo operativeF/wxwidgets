@@ -2500,14 +2500,14 @@ public:
     }
 
 #if wxUSE_FONTMAP
-    wxMBConv_win32(const char* name)
+    explicit wxMBConv_win32(const char* name)
     {
         m_CodePage = wxCharsetToCodepage(name);
         m_minMBCharWidth = 0;
     }
 #endif // wxUSE_FONTMAP
 
-    wxMBConv_win32(wxFontEncoding encoding)
+    explicit wxMBConv_win32(wxFontEncoding encoding)
     {
         m_CodePage = wxEncodingToCodepage(encoding);
         m_minMBCharWidth = 0;
@@ -2713,7 +2713,7 @@ private:
 public:
     // temporarily just use wxEncodingConverter stuff,
     // so that it works while a better implementation is built
-    wxMBConv_wxwin(const char* name)
+    explicit wxMBConv_wxwin(const char* name)
     {
         if (name)
             m_enc = wxFontMapperBase::Get()->CharsetToEncoding(name, false);
@@ -2723,7 +2723,7 @@ public:
         Init();
     }
 
-    wxMBConv_wxwin(wxFontEncoding enc)
+    explicit wxMBConv_wxwin(wxFontEncoding enc)
     {
         m_enc = enc;
 

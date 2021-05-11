@@ -49,7 +49,7 @@ class wxToastEventHandler :
     public Microsoft::WRL::Implements<DesktopToastActivatedEventHandler, DesktopToastDismissedEventHandler, DesktopToastFailedEventHandler>
 {
 public:
-    wxToastEventHandler(wxToastNotifMsgImpl* toastImpl) :
+    explicit wxToastEventHandler(wxToastNotifMsgImpl* toastImpl) :
         m_impl(toastImpl)
     {
 
@@ -88,7 +88,7 @@ IMPLEMENT_IUNKNOWN_METHODS(wxToastEventHandler)
 class wxToastNotifMsgImpl : public wxNotificationMessageImpl
 {
 public:
-    wxToastNotifMsgImpl(wxNotificationMessageBase* notification) :
+    explicit wxToastNotifMsgImpl(wxNotificationMessageBase* notification) :
         wxNotificationMessageImpl(notification),
         m_toastEventHandler(nullptr)
     {

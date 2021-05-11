@@ -63,7 +63,7 @@ namespace
 class HDCHandler
 {
 protected:
-    HDCHandler(HDC hdc) : m_hdc(hdc) { }
+    explicit HDCHandler(HDC hdc) : m_hdc(hdc) { }
 
     const HDC m_hdc;
 };
@@ -263,7 +263,7 @@ public:
         return ms_instance;
     }
 
-    MenuDrawData(const wxWindow* window)
+    explicit MenuDrawData(const wxWindow* window)
     {
         Init(window);
     }

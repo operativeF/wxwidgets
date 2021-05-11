@@ -185,7 +185,7 @@ class LexerVerilog : public ILexerWithSubStyles {
 	struct SymbolValue {
 		std::string value;
 		std::string arguments;
-		SymbolValue(const std::string &value_="", const std::string &arguments_="") : value(value_), arguments(arguments_) {
+		explicit SymbolValue(const std::string &value_="", const std::string &arguments_="") : value(value_), arguments(arguments_) {
 		}
 		SymbolValue &operator = (const std::string &value_) {
 			value = value_;

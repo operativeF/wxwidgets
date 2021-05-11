@@ -52,7 +52,7 @@
 class wxListBoxItem : public wxOwnerDrawn
 {
 public:
-    wxListBoxItem(wxListBox *parent)
+    explicit wxListBoxItem(wxListBox *parent)
         { m_parent = parent; }
 
     wxListBox *GetParent() const

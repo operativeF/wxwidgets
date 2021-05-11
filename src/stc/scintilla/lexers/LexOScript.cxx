@@ -122,7 +122,7 @@ class IdentifierClassifier {
 	IdentifierClassifier& operator=(IdentifierClassifier const&) = delete;
 
 public:
-	IdentifierClassifier(WordList *keywordlists[]) :
+	explicit IdentifierClassifier(WordList *keywordlists[]) :
 		keywords(*keywordlists[0]), constants(*keywordlists[1]),
 		operators(*keywordlists[2]), types(*keywordlists[3]),
 		functions(*keywordlists[4]), objects(*keywordlists[5])

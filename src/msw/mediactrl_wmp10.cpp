@@ -685,7 +685,7 @@ public:
 class WXDLLIMPEXP_MEDIA wxWMP10MediaEvtHandler : public wxEvtHandler
 {
 public:
-    wxWMP10MediaEvtHandler(wxWMP10MediaBackend *amb) :
+    explicit wxWMP10MediaEvtHandler(wxWMP10MediaBackend *amb) :
        m_amb(amb)
     {
         m_amb->m_pAX->Bind(wxEVT_ACTIVEX,

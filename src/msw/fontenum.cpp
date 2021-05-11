@@ -45,7 +45,7 @@
 class wxFontEnumeratorHelper
 {
 public:
-    wxFontEnumeratorHelper(wxFontEnumerator *fontEnum);
+    explicit wxFontEnumeratorHelper(wxFontEnumerator *fontEnum);
 
     // control what exactly are we enumerating
         // we enumerate fonts with the given encoding

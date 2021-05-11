@@ -33,7 +33,7 @@ const char wxEditableListBoxNameStr[] = "editableListBox";
 class CleverListCtrl : public wxListCtrl
 {
 public:
-   CleverListCtrl(wxWindow *parent,
+   explicit CleverListCtrl(wxWindow *parent,
                   wxWindowID id = wxID_ANY,
                   const wxPoint &pos = wxDefaultPosition,
                   const wxSize &size = wxDefaultSize,

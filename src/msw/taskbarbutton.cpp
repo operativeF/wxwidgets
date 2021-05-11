@@ -552,7 +552,7 @@ public:
 class wxTaskBarJumpListImpl
 {
 public:
-    wxTaskBarJumpListImpl(wxTaskBarJumpList *jumpList = nullptr,
+    explicit wxTaskBarJumpListImpl(wxTaskBarJumpList *jumpList = nullptr,
                           const wxString& appID = wxEmptyString);
     virtual ~wxTaskBarJumpListImpl();
     void ShowRecentCategory(bool shown = true);

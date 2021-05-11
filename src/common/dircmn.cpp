@@ -217,7 +217,7 @@ size_t wxDir::Traverse(wxDirTraverser& sink,
 class wxDirTraverserSimple : public wxDirTraverser
 {
 public:
-    wxDirTraverserSimple(wxArrayString& files) : m_files(files) { }
+    explicit wxDirTraverserSimple(wxArrayString& files) : m_files(files) { }
 
     virtual wxDirTraverseResult OnFile(const wxString& filename) override
     {

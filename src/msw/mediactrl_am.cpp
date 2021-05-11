@@ -888,7 +888,7 @@ public:
 class WXDLLIMPEXP_MEDIA wxAMMediaEvtHandler : public wxEvtHandler
 {
 public:
-    wxAMMediaEvtHandler(wxAMMediaBackend *amb) :
+    explicit wxAMMediaEvtHandler(wxAMMediaBackend *amb) :
        m_amb(amb), m_bLoadEventSent(false)
     {
         m_amb->m_pAX->Bind(

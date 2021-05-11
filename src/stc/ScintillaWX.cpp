@@ -1446,7 +1446,7 @@ class IMContext {
     HWND hwnd;
 public:
     HIMC hIMC;
-    IMContext(HWND hwnd_) wxNOEXCEPT :
+    explicit IMContext(HWND hwnd_) wxNOEXCEPT :
         hwnd(hwnd_), hIMC(::ImmGetContext(hwnd_)) {
     }
     ~IMContext() {

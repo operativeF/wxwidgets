@@ -73,7 +73,7 @@ private:
 class WXDLLIMPEXP_ADV wxRegTipProvider : public wxTipProvider
 {
 public:
-    wxRegTipProvider(const wxString& keyname);
+    explicit wxRegTipProvider(const wxString& keyname);
 
     virtual wxString GetTip() override;
 };

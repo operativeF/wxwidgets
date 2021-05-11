@@ -44,7 +44,7 @@
 class wxContextHelpEvtHandler: public wxEvtHandler
 {
 public:
-    wxContextHelpEvtHandler(wxContextHelp* contextHelp)
+    explicit wxContextHelpEvtHandler(wxContextHelp* contextHelp)
     {
         m_contextHelp = contextHelp;
     }

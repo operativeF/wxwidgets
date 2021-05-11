@@ -3895,7 +3895,7 @@ wxPropertyGrid::GetUnspecifiedValueText( int argFlags ) const
 class wxPropertyGridEditorEventForwarder : public wxEvtHandler
 {
 public:
-    wxPropertyGridEditorEventForwarder( wxPropertyGrid* propGrid )
+    explicit wxPropertyGridEditorEventForwarder( wxPropertyGrid* propGrid )
         : wxEvtHandler(), m_propGrid(propGrid)
     {
     }

@@ -84,7 +84,7 @@ class TreeItemUnlocker
 {
 public:
     // unlock a single item
-    TreeItemUnlocker(HTREEITEM item)
+    explicit TreeItemUnlocker(HTREEITEM item)
     {
         m_oldUnlockedItem = ms_unlockedItem;
         ms_unlockedItem = item;
@@ -121,7 +121,7 @@ HTREEITEM TreeItemUnlocker::ms_unlockedItem = nullptr;
 class TempSetter
 {
 public:
-    TempSetter(bool& var) : m_var(var)
+    explicit TempSetter(bool& var) : m_var(var)
     {
         wxASSERT_MSG( !m_var, "variable shouldn't be already set" );
         m_var = true;
@@ -502,7 +502,7 @@ protected:
 class wxVirtualNode : public wxTreeViewItem
 {
 public:
-    wxVirtualNode(wxTreeItemParam *param)
+    explicit wxVirtualNode(wxTreeItemParam *param)
         : wxTreeViewItem(TVI_ROOT, 0)
     {
         m_param = param;
@@ -537,7 +537,7 @@ private:
 class wxTreeTraversal
 {
 public:
-    wxTreeTraversal(const wxTreeCtrl *tree)
+    explicit wxTreeTraversal(const wxTreeCtrl *tree)
     {
         m_tree = tree;
     }

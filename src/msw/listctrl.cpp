@@ -175,10 +175,10 @@ public:
     }
 
     // ctor without conversion
-    wxLV_ITEM(LV_ITEM_NATIVE& item) : m_buf(nullptr), m_pItem(&item) { }
+    explicit wxLV_ITEM(LV_ITEM_NATIVE& item) : m_buf(nullptr), m_pItem(&item) { }
 
     // ctor with conversion
-    wxLV_ITEM(LV_ITEM_OTHER& item) : m_buf(nullptr)
+    explicit wxLV_ITEM(LV_ITEM_OTHER& item) : m_buf(nullptr)
     {
         Init(item);
     }

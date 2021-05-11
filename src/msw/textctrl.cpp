@@ -210,7 +210,7 @@ extern wxMenu *wxCurrentPopupMenu;
 class wxTextCtrlOleCallback : public IRichEditOleCallback
 {
 public:
-    wxTextCtrlOleCallback(wxTextCtrl *text) : m_textCtrl(text), m_menu(nullptr) {}
+    explicit wxTextCtrlOleCallback(wxTextCtrl *text) : m_textCtrl(text), m_menu(nullptr) {}
     virtual ~wxTextCtrlOleCallback() { DeleteContextMenuObject(); }
 
     wxSTDMETHODIMP ContextSensitiveHelp(BOOL WXUNUSED(enterMode)) override { return E_NOTIMPL; }
@@ -277,7 +277,7 @@ IMPLEMENT_IUNKNOWN_METHODS(wxTextCtrlOleCallback)
 class UpdatesCountFilter
 {
 public:
-    UpdatesCountFilter(int& count)
+    explicit UpdatesCountFilter(int& count)
         : m_count(count)
     {
         wxASSERT_MSG( m_count == -1 || m_count == -2,

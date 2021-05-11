@@ -200,7 +200,7 @@ static const char * const freebasicWordListDesc[] = {
 };
 
 struct OptionSetBasic : public OptionSet<OptionsBasic> {
-	OptionSetBasic(const char * const wordListDescriptions[]) {
+	explicit OptionSetBasic(const char * const wordListDescriptions[]) {
 		DefineProperty("fold", &OptionsBasic::fold);
 
 		DefineProperty("fold.basic.syntax.based", &OptionsBasic::foldSyntaxBased,

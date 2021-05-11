@@ -631,7 +631,7 @@ wxEND_EVENT_TABLE()
 class wxCallBaseCleanup
 {
 public:
-    wxCallBaseCleanup(wxApp *app) : m_app(app) { }
+    explicit wxCallBaseCleanup(wxApp *app) : m_app(app) { }
     ~wxCallBaseCleanup() { if ( m_app ) m_app->wxAppBase::CleanUp(); }
 
     void Dismiss() { m_app = nullptr; }

@@ -48,7 +48,7 @@ static const wxCoord TEXT_MARGIN_Y = 3;
 class WXDLLEXPORT wxTipWindowView : public wxWindow
 {
 public:
-    wxTipWindowView(wxWindow *parent);
+    explicit wxTipWindowView(wxWindow *parent);
 
     // event handlers
     void OnPaint(wxPaintEvent& event);

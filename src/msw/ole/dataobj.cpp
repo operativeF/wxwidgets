@@ -195,7 +195,7 @@ private:
 class wxIDataObject : public IDataObject
 {
 public:
-    wxIDataObject(wxDataObject *pDataObject);
+    explicit wxIDataObject(wxDataObject *pDataObject);
     virtual ~wxIDataObject();
 
     // normally, wxDataObject controls our lifetime (i.e. we're deleted when it

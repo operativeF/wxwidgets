@@ -1095,7 +1095,7 @@ enum { MAX_PAGE_NUMBER = 99999 };
 class wxPrintPageMaxCtrl : public wxStaticText
 {
 public:
-    wxPrintPageMaxCtrl(wxWindow *parent)
+    explicit wxPrintPageMaxCtrl(wxWindow *parent)
         : wxStaticText(
                         parent,
                         wxID_ANY,
@@ -1138,7 +1138,7 @@ private:
 class wxPrintPageTextCtrl : public wxTextCtrl
 {
 public:
-    wxPrintPageTextCtrl(wxPreviewControlBar *preview)
+    explicit wxPrintPageTextCtrl(wxPreviewControlBar *preview)
         : wxTextCtrl(preview,
                      wxID_PREVIEW_GOTO,
                      wxString(),
@@ -1468,7 +1468,7 @@ class SizerWithButtons
 public:
     // Constructor creates the sizer that will hold the buttons and stores the
     // parent that will be used for their creation.
-    SizerWithButtons(wxWindow *parent)
+    explicit SizerWithButtons(wxWindow *parent)
         : m_sizer(new wxBoxSizer(wxHORIZONTAL)),
           m_parent(parent)
     {

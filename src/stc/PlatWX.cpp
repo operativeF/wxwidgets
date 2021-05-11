@@ -2303,7 +2303,7 @@ void wxSTCPopupWindow::OnParentMove(wxMoveEvent& event)
 class wxSTCListBoxVisualData
 {
 public:
-    wxSTCListBoxVisualData(int d);
+    explicit wxSTCListBoxVisualData(int d);
     virtual ~wxSTCListBoxVisualData();
 
     // ListBoxImpl implementation

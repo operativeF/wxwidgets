@@ -536,7 +536,7 @@ class wxComboPopupWindowEvtHandler : public wxEvtHandler
 {
 public:
 
-    wxComboPopupWindowEvtHandler( wxComboCtrlBase *parent )
+    explicit wxComboPopupWindowEvtHandler( wxComboCtrlBase *parent )
     {
         m_combo = parent;
     }
@@ -727,7 +727,7 @@ class wxComboBoxExtraInputHandler : public wxEvtHandler
 {
 public:
 
-    wxComboBoxExtraInputHandler( wxComboCtrlBase* combo )
+    explicit wxComboBoxExtraInputHandler( wxComboCtrlBase* combo )
         : wxEvtHandler()
     {
         m_combo = combo;
@@ -804,7 +804,7 @@ class wxComboPopupEvtHandler : public wxEvtHandler
 {
 public:
 
-    wxComboPopupEvtHandler( wxComboCtrlBase* combo )
+    explicit wxComboPopupEvtHandler( wxComboCtrlBase* combo )
         : wxEvtHandler()
     {
         m_combo = combo;

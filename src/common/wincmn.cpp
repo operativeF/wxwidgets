@@ -2172,7 +2172,7 @@ bool wxWindowBase::TransferDataFromWindow()
     class DataFromWindowTraverser : public ValidationTraverserBase
     {
     public:
-        DataFromWindowTraverser(wxWindowBase* win)
+        explicit DataFromWindowTraverser(wxWindowBase* win)
             : ValidationTraverserBase(win)
         {
         }

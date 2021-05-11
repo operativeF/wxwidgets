@@ -52,7 +52,7 @@
 class wxDialogModalData
 {
 public:
-    wxDialogModalData(wxDialog *dialog) : m_evtLoop(dialog) { }
+    explicit wxDialogModalData(wxDialog *dialog) : m_evtLoop(dialog) { }
 
     void RunLoop()
     {

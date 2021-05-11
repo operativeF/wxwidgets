@@ -47,7 +47,7 @@
 class wxTitleTextWrapper : public wxTextSizerWrapper
 {
 public:
-    wxTitleTextWrapper(wxWindow *win)
+    explicit wxTitleTextWrapper(wxWindow *win)
         : wxTextSizerWrapper(win)
     {
     }

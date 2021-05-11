@@ -84,7 +84,7 @@ class wxHtmlListCell : public wxHtmlContainerCell
         int m_ListmarkWidth;
 
     public:
-        wxHtmlListCell(wxHtmlContainerCell *parent);
+        explicit wxHtmlListCell(wxHtmlContainerCell *parent);
         virtual ~wxHtmlListCell();
         void AddRow(wxHtmlContainerCell *mark, wxHtmlContainerCell *cont);
         virtual void Layout(int w) override;
@@ -201,7 +201,7 @@ void wxHtmlListCell::ComputeMinMaxWidths()
 class wxHtmlListcontentCell : public wxHtmlContainerCell
 {
 public:
-    wxHtmlListcontentCell(wxHtmlContainerCell *p) : wxHtmlContainerCell(p) {}
+    explicit wxHtmlListcontentCell(wxHtmlContainerCell *p) : wxHtmlContainerCell(p) {}
     virtual void Layout(int w) override {
         // Reset top indentation, fixes <li><p>
         SetIndent(0, wxHTML_INDENT_TOP);

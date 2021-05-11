@@ -60,7 +60,7 @@ wxAccSelectionFlags wxConvertFromWindowsSelFlag(int sel);
 class wxIEnumVARIANT : public IEnumVARIANT
 {
 public:
-    wxIEnumVARIANT(const wxVariant& variant);
+    explicit wxIEnumVARIANT(const wxVariant& variant);
     virtual ~wxIEnumVARIANT() = default;
 
     DECLARE_IUNKNOWN_METHODS;
@@ -173,7 +173,7 @@ STDMETHODIMP wxIEnumVARIANT::Clone(IEnumVARIANT **ppenum)
 class wxIAccessible : public IAccessible
 {
 public:
-    wxIAccessible(wxAccessible *pAccessible);
+    explicit wxIAccessible(wxAccessible *pAccessible);
     virtual ~wxIAccessible() = default;
 
     // Called to indicate object should prepare to be deleted.

@@ -131,7 +131,7 @@ static const wxChar* FONTMAPPER_FONT_DONT_ASK = wxT("none");
 class ReentrancyBlocker
 {
 public:
-    ReentrancyBlocker(bool& flag) : m_flagOld(flag), m_flag(flag)
+    explicit ReentrancyBlocker(bool& flag) : m_flagOld(flag), m_flag(flag)
         { m_flag = true; }
     ~ReentrancyBlocker() { m_flag = m_flagOld; }
 

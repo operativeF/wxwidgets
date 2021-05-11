@@ -76,7 +76,7 @@ public:
     // been clicked/moved)
     enum { DELAY = 500 };
 
-    wxTreeRenameTimer( wxGenericTreeCtrl *owner );
+    explicit wxTreeRenameTimer( wxGenericTreeCtrl *owner );
 
     virtual void Notify() override;
 
@@ -122,7 +122,7 @@ public:
     // reset the current prefix after half a second of inactivity
     enum { DELAY = 500 };
 
-    wxTreeFindTimer( wxGenericTreeCtrl *owner ) { m_owner = owner; }
+    explicit wxTreeFindTimer( wxGenericTreeCtrl *owner ) { m_owner = owner; }
 
     virtual void Notify() override { m_owner->ResetFindState(); }
 

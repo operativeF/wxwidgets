@@ -82,7 +82,7 @@ int wxRichTextFloatRectMapCmp(wxRichTextFloatRectMap* r1, wxRichTextFloatRectMap
 class wxRichTextFloatCollector
 {
 public:
-    wxRichTextFloatCollector(const wxRect& availableRect);
+    explicit wxRichTextFloatCollector(const wxRect& availableRect);
     ~wxRichTextFloatCollector();
 
     // Collect the floating objects info in the given paragraph

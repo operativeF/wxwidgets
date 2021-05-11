@@ -42,7 +42,7 @@
 class wxIDropSource : public IDropSource
 {
 public:
-  wxIDropSource(wxDropSource *pDropSource);
+  explicit wxIDropSource(wxDropSource *pDropSource);
   virtual ~wxIDropSource() = default;
 
   // IDropSource

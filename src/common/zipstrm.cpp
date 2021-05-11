@@ -279,7 +279,7 @@ inline wxUint64 wxZipHeader::Read64()
 class wxStoredInputStream : public wxFilterInputStream
 {
 public:
-    wxStoredInputStream(wxInputStream& stream);
+    explicit wxStoredInputStream(wxInputStream& stream);
 
     void Open(wxFileOffset len) { Close(); m_len = len; }
     void Close() { m_pos = 0; m_lasterror = wxSTREAM_NO_ERROR; }
@@ -326,7 +326,7 @@ size_t wxStoredInputStream::OnSysRead(void *buffer, size_t size)
 class wxStoredOutputStream : public wxFilterOutputStream
 {
 public:
-    wxStoredOutputStream(wxOutputStream& stream) :
+    explicit wxStoredOutputStream(wxOutputStream& stream) :
         wxFilterOutputStream(stream), m_pos(0) { }
 
     bool Close() override {
@@ -383,7 +383,7 @@ size_t wxStoredOutputStream::OnSysWrite(const void *buffer, size_t size)
 class wxTeeInputStream : public wxFilterInputStream
 {
 public:
-    wxTeeInputStream(wxInputStream& stream);
+    explicit wxTeeInputStream(wxInputStream& stream);
 
     size_t GetCount() const { return m_end - m_start; }
     size_t GetData(char *buffer, size_t size);
@@ -482,7 +482,7 @@ size_t wxTeeInputStream::GetData(char *buffer, size_t size)
 class wxRawInputStream : public wxFilterInputStream
 {
 public:
-    wxRawInputStream(wxInputStream& stream);
+    explicit wxRawInputStream(wxInputStream& stream);
     virtual ~wxRawInputStream() { delete m_tee; }
 
     wxInputStream* Open(wxInputStream *decomp);
@@ -580,7 +580,7 @@ bool wxZlibOutputStream2::Open(wxOutputStream& stream)
 class wxZlibInputStream2 : public wxZlibInputStream
 {
 public:
-    wxZlibInputStream2(wxInputStream& stream) :
+    explicit wxZlibInputStream2(wxInputStream& stream) :
         wxZlibInputStream(stream, wxZLIB_NO_HEADER) { }
 
     bool Open(wxInputStream& stream);
@@ -1562,7 +1562,7 @@ bool wxZipEndRec::Read(wxInputStream& stream, wxMBConv& conv)
 class wxZipStreamLink
 {
 public:
-    wxZipStreamLink(wxZipOutputStream *stream) : m_ref(1), m_stream(stream) { }
+    explicit wxZipStreamLink(wxZipOutputStream *stream) : m_ref(1), m_stream(stream) { }
 
     wxZipStreamLink *AddRef() { m_ref++; return this; }
     wxZipOutputStream *GetOutputStream() const { return m_stream; }

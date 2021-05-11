@@ -247,7 +247,7 @@ void wxDumpOpenExternalDlg::OnBrowse(wxCommandEvent& )
 class wxDebugReportDialog : public wxDialog
 {
 public:
-    wxDebugReportDialog(wxDebugReport& dbgrpt);
+    explicit wxDebugReportDialog(wxDebugReport& dbgrpt);
 
     virtual bool TransferDataToWindow() override;
     virtual bool TransferDataFromWindow() override;

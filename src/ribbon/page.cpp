@@ -37,7 +37,7 @@ static int GetSizeInOrientation(wxSize size, wxOrientation orientation);
 class wxRibbonPageScrollButton : public wxRibbonControl
 {
 public:
-    wxRibbonPageScrollButton(wxRibbonPage* sibling,
+    explicit wxRibbonPageScrollButton(wxRibbonPage* sibling,
                  wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,

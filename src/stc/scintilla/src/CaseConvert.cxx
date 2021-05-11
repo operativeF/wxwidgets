@@ -379,7 +379,7 @@ class CaseConverter : public ICaseConverter {
 	struct CharacterConversion {
 		int character;
 		ConversionString conversion;
-		CharacterConversion(int character_=0, const char *conversion_="") : character(character_) {
+		explicit CharacterConversion(int character_=0, const char *conversion_="") : character(character_) {
 			StringCopy(conversion.conversion, conversion_);
 		}
 		bool operator<(const CharacterConversion &other) const {

@@ -178,7 +178,7 @@ namespace
 class wxProgressDialogModalLoop : public wxEventLoop
 {
 public:
-    wxProgressDialogModalLoop(wxProgressDialogSharedData& data)
+    explicit wxProgressDialogModalLoop(wxProgressDialogSharedData& data)
         : m_data(data)
     {
     }

@@ -48,7 +48,7 @@ const wxTreeListItem wxTLI_LAST(reinterpret_cast<wxTreeListModelNode*>(-2));
 class wxTreeListModelNode
 {
 public:
-    wxTreeListModelNode(wxTreeListModelNode* parent,
+    explicit wxTreeListModelNode(wxTreeListModelNode* parent,
                         const wxString& text = wxString(),
                         int imageClosed = wxWithImages::NO_IMAGE,
                         int imageOpened = wxWithImages::NO_IMAGE,
@@ -299,7 +299,7 @@ public:
     // is associated with the control, not the model, so our GetValue() is also
     // bound to it (otherwise, what would it return for an item expanded in one
     // associated control and collapsed in another one?).
-    wxTreeListModel(wxTreeListCtrl* treelist);
+    explicit wxTreeListModel(wxTreeListCtrl* treelist);
     virtual ~wxTreeListModel();
 
 

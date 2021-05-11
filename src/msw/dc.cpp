@@ -396,7 +396,7 @@ class wxBrushAttrsSetter : private wxBkModeChanger,
                            private wxTextColoursChanger
 {
 public:
-    wxBrushAttrsSetter(wxMSWDCImpl& dc);
+    explicit wxBrushAttrsSetter(wxMSWDCImpl& dc);
 
 private:
     wxDECLARE_NO_COPY_CLASS(wxBrushAttrsSetter);
@@ -406,7 +406,7 @@ private:
 class StretchBltModeChanger
 {
 public:
-    StretchBltModeChanger(HDC hdc)
+    explicit StretchBltModeChanger(HDC hdc)
         : m_hdc(hdc)
     {
         m_modeOld = ::SetStretchBltMode(m_hdc, COLORONCOLOR);

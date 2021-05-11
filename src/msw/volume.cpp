@@ -80,7 +80,7 @@ static wxInterlockedArg_t s_cancelSearch = FALSE;
 
 struct FileInfo
 {
-    FileInfo(unsigned flag=0, wxFSVolumeKind type=wxFS_VOL_OTHER) :
+    explicit FileInfo(unsigned flag=0, wxFSVolumeKind type=wxFS_VOL_OTHER) :
         m_flags(flag), m_type(type) {}
 
     FileInfo(const FileInfo& other) { *this = other; }

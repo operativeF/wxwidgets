@@ -54,9 +54,9 @@ static const int PITCH_MASK = FIXED_PITCH | VARIABLE_PITCH;
 class WXDLLEXPORT wxFontRefData: public wxGDIRefData
 {
 public:
-    wxFontRefData(const wxFontInfo& info = wxFontInfo());
+    explicit wxFontRefData(const wxFontInfo& info = wxFontInfo());
 
-    wxFontRefData(const wxNativeFontInfo& info, WXHFONT hFont = nullptr)
+    explicit wxFontRefData(const wxNativeFontInfo& info, WXHFONT hFont = nullptr)
     {
         Init(info, hFont);
     }

@@ -31,7 +31,7 @@ wxCURHandler wxANIDecoder::sm_handler;
 class wxANIFrameInfo
 {
 public:
-    wxANIFrameInfo(unsigned int delay = 0, int idx = -1)
+    explicit wxANIFrameInfo(unsigned int delay = 0, int idx = -1)
         { m_delay=delay; m_imageIndex=idx; }
 
     unsigned int m_delay;

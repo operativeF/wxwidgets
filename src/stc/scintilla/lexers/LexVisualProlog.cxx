@@ -143,7 +143,7 @@ Sci_Position SCI_METHOD LexerVisualProlog::WordListSet(int n, const char *wl) {
 // Functor used to truncate history
 struct After {
     Sci_Position line;
-    After(Sci_Position line_) : line(line_) {}
+    explicit After(Sci_Position line_) : line(line_) {}
 };
 
 static bool isLowerLetter(int ch){

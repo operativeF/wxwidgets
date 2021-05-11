@@ -229,7 +229,7 @@ class WXDLLIMPEXP_BASE wxVariantDataLong: public wxVariantData
 {
 public:
     wxVariantDataLong() { m_value = 0; }
-    wxVariantDataLong(long value) { m_value = value; }
+    explicit wxVariantDataLong(long value) { m_value = value; }
 
     inline long GetValue() const { return m_value; }
     inline void SetValue(long value) { m_value = value; }
@@ -398,7 +398,7 @@ class WXDLLIMPEXP_BASE wxVariantDoubleData: public wxVariantData
 {
 public:
     wxVariantDoubleData() { m_value = 0.0; }
-    wxVariantDoubleData(double value) { m_value = value; }
+    explicit wxVariantDoubleData(double value) { m_value = value; }
 
     inline double GetValue() const { return m_value; }
     inline void SetValue(double value) { m_value = value; }
@@ -538,7 +538,7 @@ class WXDLLIMPEXP_BASE wxVariantDataBool: public wxVariantData
 {
 public:
     wxVariantDataBool() { m_value = false; }
-    wxVariantDataBool(bool value) { m_value = value; }
+    explicit wxVariantDataBool(bool value) { m_value = value; }
 
     inline bool GetValue() const { return m_value; }
     inline void SetValue(bool value) { m_value = value; }
@@ -681,7 +681,7 @@ class WXDLLIMPEXP_BASE wxVariantDataChar: public wxVariantData
 {
 public:
     wxVariantDataChar() : m_value(0) { }
-    wxVariantDataChar(const wxUniChar& value) : m_value(value) { }
+    explicit wxVariantDataChar(const wxUniChar& value) : m_value(value) { }
 
     inline wxUniChar GetValue() const { return m_value; }
     inline void SetValue(const wxUniChar& value) { m_value = value; }
@@ -834,7 +834,7 @@ class WXDLLIMPEXP_BASE wxVariantDataString: public wxVariantData
 {
 public:
     wxVariantDataString() = default;
-    wxVariantDataString(const wxString& value) : m_value(value) { }
+    explicit wxVariantDataString(const wxString& value) : m_value(value) { }
 
     inline wxString GetValue() const { return m_value; }
     inline void SetValue(const wxString& value) { m_value = value; }
@@ -1029,7 +1029,7 @@ class wxVariantDataWxObjectPtr: public wxVariantData
 {
 public:
     wxVariantDataWxObjectPtr() = default;
-    wxVariantDataWxObjectPtr(wxObject* value) { m_value = value; }
+    explicit wxVariantDataWxObjectPtr(wxObject* value) { m_value = value; }
 
     inline wxObject* GetValue() const { return m_value; }
     inline void SetValue(wxObject* value) { m_value = value; }
@@ -1153,7 +1153,7 @@ class wxVariantDataVoidPtr: public wxVariantData
 {
 public:
     wxVariantDataVoidPtr() = default;
-    wxVariantDataVoidPtr(void* value) { m_value = value; }
+    explicit wxVariantDataVoidPtr(void* value) { m_value = value; }
 
     inline void* GetValue() const { return m_value; }
     inline void SetValue(void* value) { m_value = value; }
@@ -1268,7 +1268,7 @@ class wxVariantDataDateTime: public wxVariantData
 {
 public:
     wxVariantDataDateTime() = default;
-    wxVariantDataDateTime(const wxDateTime& value) : m_value(value) { }
+    explicit wxVariantDataDateTime(const wxDateTime& value) : m_value(value) { }
 
     inline wxDateTime GetValue() const { return m_value; }
     inline void SetValue(const wxDateTime& value) { m_value = value; }
@@ -1401,7 +1401,7 @@ class wxVariantDataArrayString: public wxVariantData
 {
 public:
     wxVariantDataArrayString() = default;
-    wxVariantDataArrayString(const wxArrayString& value) : m_value(value) { }
+    explicit wxVariantDataArrayString(const wxArrayString& value) : m_value(value) { }
 
     wxArrayString GetValue() const { return m_value; }
     void SetValue(const wxArrayString& value) { m_value = value; }
@@ -1529,7 +1529,7 @@ class WXDLLIMPEXP_BASE wxVariantDataLongLong : public wxVariantData
 {
 public:
     wxVariantDataLongLong() : m_value(0) { }
-    wxVariantDataLongLong(wxLongLong value) : m_value(value) { }
+    explicit wxVariantDataLongLong(wxLongLong value) : m_value(value) { }
 
     wxLongLong GetValue() const { return m_value; }
     void SetValue(wxLongLong value) { m_value = value; }
@@ -1728,7 +1728,7 @@ class WXDLLIMPEXP_BASE wxVariantDataULongLong : public wxVariantData
 {
 public:
     wxVariantDataULongLong() : m_value(0) { }
-    wxVariantDataULongLong(wxULongLong value) : m_value(value) { }
+    explicit wxVariantDataULongLong(wxULongLong value) : m_value(value) { }
 
     wxULongLong GetValue() const { return m_value; }
     void SetValue(wxULongLong value) { m_value = value; }
@@ -1926,7 +1926,7 @@ class WXDLLIMPEXP_BASE wxVariantDataList: public wxVariantData
 {
 public:
     wxVariantDataList() = default;
-    wxVariantDataList(const wxVariantList& list);
+    explicit wxVariantDataList(const wxVariantList& list);
     virtual ~wxVariantDataList();
 
     wxVariantList& GetValue() { return m_value; }

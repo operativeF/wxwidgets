@@ -85,7 +85,7 @@ const int auiToolBarLayer = 10;
 class wxPseudoTransparentFrame : public wxFrame
 {
 public:
-    wxPseudoTransparentFrame(wxWindow* parent = nullptr,
+    explicit wxPseudoTransparentFrame(wxWindow* parent = nullptr,
                 wxWindowID id = wxID_ANY,
                 const wxString& title = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,

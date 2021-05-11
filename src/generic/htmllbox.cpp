@@ -156,7 +156,7 @@ private:
 class wxHtmlListBoxStyle : public wxDefaultHtmlRenderingStyle
 {
 public:
-    wxHtmlListBoxStyle(const wxHtmlListBox& hlbox)
+    explicit wxHtmlListBoxStyle(const wxHtmlListBox& hlbox)
         : wxDefaultHtmlRenderingStyle(&hlbox), m_hlbox(hlbox)
     { }
 

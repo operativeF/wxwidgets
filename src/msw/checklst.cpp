@@ -75,7 +75,7 @@ class wxCheckListBoxItem : public wxOwnerDrawn
 {
 public:
     // ctor
-    wxCheckListBoxItem(wxCheckListBox *parent);
+    explicit wxCheckListBoxItem(wxCheckListBox *parent);
 
     // drawing functions
     virtual bool OnDrawItem(wxDC& dc, const wxRect& rc, wxODAction act, wxODStatus stat) override;

@@ -48,7 +48,7 @@
 class wxWizardSizer : public wxSizer
 {
 public:
-    wxWizardSizer(wxWizard *owner);
+    explicit wxWizardSizer(wxWizard *owner);
 
     virtual wxSizerItem *Insert(size_t index, wxSizerItem *item) override;
 

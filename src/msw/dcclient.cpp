@@ -45,7 +45,7 @@
 class wxPaintDCInfo
 {
 public:
-    wxPaintDCInfo(HDC hdc)
+    explicit wxPaintDCInfo(HDC hdc)
         : m_hdc(hdc)
     {
     }
@@ -69,7 +69,7 @@ namespace
 class wxPaintDCInfoOur : public wxPaintDCInfo
 {
 public:
-    wxPaintDCInfoOur(wxWindow* win)
+    explicit wxPaintDCInfoOur(wxWindow* win)
         : wxPaintDCInfo(::BeginPaint(GetHwndOf(win), GetPaintStructPtr(m_ps))),
           m_hwnd(GetHwndOf(win))
     {
@@ -100,7 +100,7 @@ private:
 class wxPaintDCInfoExternal : public wxPaintDCInfo
 {
 public:
-    wxPaintDCInfoExternal(HDC hdc)
+    explicit wxPaintDCInfoExternal(HDC hdc)
         : wxPaintDCInfo(hdc),
           m_state(::SaveDC(hdc))
     {

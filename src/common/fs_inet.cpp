@@ -33,7 +33,7 @@
 class wxTemporaryFileInputStream : public wxFileInputStream
 {
 public:
-    wxTemporaryFileInputStream(const wxString& filename) :
+    explicit wxTemporaryFileInputStream(const wxString& filename) :
         wxFileInputStream(filename), m_filename(filename) {}
 
     virtual ~wxTemporaryFileInputStream()

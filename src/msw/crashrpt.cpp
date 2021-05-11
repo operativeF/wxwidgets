@@ -61,7 +61,7 @@ private:
 class wxCrashReportImpl
 {
 public:
-    wxCrashReportImpl(const wxChar *filename);
+    explicit wxCrashReportImpl(const wxChar *filename);
 
     bool Generate(int flags, EXCEPTION_POINTERS *ep);
 

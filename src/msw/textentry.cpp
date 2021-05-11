@@ -110,7 +110,7 @@ DEFINE_GUID(wxCLSID_AutoComplete,
 class CSLock
 {
 public:
-    CSLock(CRITICAL_SECTION& cs) : m_cs(&cs)
+    explicit CSLock(CRITICAL_SECTION& cs) : m_cs(&cs)
     {
         ::EnterCriticalSection(m_cs);
     }
@@ -365,7 +365,7 @@ class wxTextAutoCompleteData
 {
 public:
     // The constructor associates us with the given text entry.
-    wxTextAutoCompleteData(wxTextEntry *entry)
+    explicit wxTextAutoCompleteData(wxTextEntry *entry)
         : m_entry(entry),
           m_win(entry->GetEditableWindow())
     {

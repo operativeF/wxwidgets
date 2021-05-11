@@ -1840,7 +1840,7 @@ namespace
 class WeightValue
 {
 public:
-    WeightValue(double r = 0.0, double g = 0.0, double b = 0.0)
+    explicit WeightValue(double r = 0.0, double g = 0.0, double b = 0.0)
         : red(r), green(g), blue(b) {}
     double red;
     double green;

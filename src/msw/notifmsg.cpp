@@ -50,7 +50,7 @@ public:
     // level parent of the given window) unless UseTaskBarIcon() had been
     // previously called  which can be used to show an attached balloon later
     // by the derived classes.
-    wxBalloonNotifMsgImpl(wxNotificationMessageBase* notification) :
+    explicit wxBalloonNotifMsgImpl(wxNotificationMessageBase* notification) :
         wxNotificationMessageImpl(notification),
         m_flags(wxICON_INFORMATION),
         m_parent(nullptr)

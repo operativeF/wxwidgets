@@ -887,7 +887,7 @@ protected:
 class wxMetaTagHandler : public wxHtmlTagHandler
 {
 public:
-    wxMetaTagHandler(wxString *retval) : wxHtmlTagHandler(), m_retval(retval) {}
+    explicit wxMetaTagHandler(wxString *retval) : wxHtmlTagHandler(), m_retval(retval) {}
     wxString GetSupportedTags() override { return wxT("META,BODY"); }
     bool HandleTag(const wxHtmlTag& tag) override;
 

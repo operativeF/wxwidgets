@@ -100,7 +100,7 @@ public:
   void SetPrev(wxFileConfigLineList *pPrev)  { m_pPrev = pPrev; }
 
   // ctor
-  wxFileConfigLineList(const wxString& str,
+  explicit wxFileConfigLineList(const wxString& str,
                        wxFileConfigLineList *pNext = nullptr) : m_strLine(str)
     { SetNext(pNext); SetPrev(nullptr); }
 

@@ -74,7 +74,7 @@ const wxCoord CONTENT_TREE_INDEX_MIN_WIDTH = 150;
 class wxHtmlHelpTreeItemData : public wxTreeItemData
 {
     public:
-        wxHtmlHelpTreeItemData(int id) : wxTreeItemData()
+        explicit wxHtmlHelpTreeItemData(int id) : wxTreeItemData()
             { m_Id = id;}
 
         int m_Id;
@@ -1194,7 +1194,7 @@ public:
     wxSpinCtrl *FontSize;
     wxHtmlWindow *TestWin;
 
-    wxHtmlHelpWindowOptionsDialog(wxWindow *parent)
+    explicit wxHtmlHelpWindowOptionsDialog(wxWindow *parent)
         : wxDialog(parent, wxID_ANY, wxString(_("Help Browser Options")))
     {
         wxBoxSizer *topsizer = new wxBoxSizer(wxVERTICAL);

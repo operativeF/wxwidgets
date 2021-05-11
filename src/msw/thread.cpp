@@ -158,7 +158,7 @@ void wxCriticalSection::Leave()
 class wxMutexInternal
 {
 public:
-    wxMutexInternal(wxMutexType mutexType);
+    explicit wxMutexInternal(wxMutexType mutexType);
     ~wxMutexInternal();
 
     bool IsOk() const { return m_mutex != nullptr; }
@@ -393,7 +393,7 @@ wxSemaError wxSemaphoreInternal::Post()
 class wxThreadInternal
 {
 public:
-    wxThreadInternal(wxThread *thread)
+    explicit wxThreadInternal(wxThread *thread)
     {
         m_thread = thread;
         m_hThread = nullptr;
@@ -492,7 +492,7 @@ private:
 class wxThreadKeepAlive
 {
 public:
-    wxThreadKeepAlive(wxThreadInternal& thrImpl) : m_thrImpl(thrImpl)
+    explicit wxThreadKeepAlive(wxThreadInternal& thrImpl) : m_thrImpl(thrImpl)
         { m_thrImpl.KeepAlive(); }
     ~wxThreadKeepAlive()
         { m_thrImpl.LetDie(); }

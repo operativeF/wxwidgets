@@ -291,7 +291,7 @@ void wxDataViewColumn::SetSortOrder(bool ascending)
 class wxDataViewHeaderWindow : public wxHeaderCtrl
 {
 public:
-    wxDataViewHeaderWindow(wxDataViewCtrl *parent)
+    explicit wxDataViewHeaderWindow(wxDataViewCtrl *parent)
         : wxHeaderCtrl(parent, wxID_ANY,
                        wxDefaultPosition, wxDefaultSize,
                        wxHD_DEFAULT_STYLE | wxHD_BITMAP_ON_RIGHT)
@@ -465,7 +465,7 @@ private:
     wxDataViewMainWindow *m_owner;
 
 public:
-    wxDataViewRenameTimer( wxDataViewMainWindow *owner );
+    explicit wxDataViewRenameTimer( wxDataViewMainWindow *owner );
     void Notify() override;
 };
 
@@ -1070,7 +1070,7 @@ private:
 class wxGenericDataViewModelNotifier: public wxDataViewModelNotifier
 {
 public:
-    wxGenericDataViewModelNotifier( wxDataViewMainWindow *mainWindow )
+    explicit wxGenericDataViewModelNotifier( wxDataViewMainWindow *mainWindow )
         { m_mainWindow = mainWindow; }
 
     virtual bool ItemAdded( const wxDataViewItem & parent, const wxDataViewItem & item ) override

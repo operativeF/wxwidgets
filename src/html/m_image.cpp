@@ -234,7 +234,7 @@ wxHtmlLinkInfo *wxHtmlImageMapAreaCell::GetLink( int x, int y ) const
 class wxHtmlImageMapCell : public wxHtmlCell
 {
     public:
-        wxHtmlImageMapCell( wxString &name );
+        explicit wxHtmlImageMapCell( wxString &name );
     protected:
         wxString m_Name;
     public:
@@ -339,7 +339,7 @@ private:
 class wxGIFTimer : public wxTimer
 {
     public:
-        wxGIFTimer(wxHtmlImageCell *cell) : m_cell(cell) {}
+        explicit wxGIFTimer(wxHtmlImageCell *cell) : m_cell(cell) {}
         virtual void Notify() override
         {
             m_cell->AdvanceAnimation(this);

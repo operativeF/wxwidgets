@@ -169,7 +169,7 @@ inline bool IsHidden(FIND_ATTR attr)
 class wxDirData
 {
 public:
-    wxDirData(const wxString& dirname);
+    explicit wxDirData(const wxString& dirname);
     ~wxDirData();
 
     void SetFileSpec(const wxString& filespec) { m_filespec = filespec; }

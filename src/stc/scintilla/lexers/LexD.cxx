@@ -157,7 +157,7 @@ class LexerD : public ILexer {
 	OptionsD options;
 	OptionSetD osD;
 public:
-	LexerD(bool caseSensitive_) :
+	explicit LexerD(bool caseSensitive_) :
 		caseSensitive(caseSensitive_) {
 	}
 	virtual ~LexerD() = default;

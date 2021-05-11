@@ -105,7 +105,7 @@ public:
 class wxCallAppCleanup
 {
 public:
-    wxCallAppCleanup(wxAppConsole *app) : m_app(app) { }
+    explicit wxCallAppCleanup(wxAppConsole *app) : m_app(app) { }
     ~wxCallAppCleanup() { if ( m_app ) m_app->CleanUp(); }
 
     void Dismiss() { m_app = nullptr; }

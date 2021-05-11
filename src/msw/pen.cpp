@@ -43,7 +43,7 @@ public:
 
     wxPenRefData();
     wxPenRefData(const wxPenRefData& data);
-    wxPenRefData(const wxPenInfo& info);
+    explicit wxPenRefData(const wxPenInfo& info);
     virtual ~wxPenRefData();
 
     bool operator==(const wxPenRefData& data) const

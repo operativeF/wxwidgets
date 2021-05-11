@@ -91,7 +91,7 @@ public:
     int GetTransparentColour() const;
 
     // constructor, destructor, etc.
-    wxIFFDecoder(wxInputStream *s);
+    explicit wxIFFDecoder(wxInputStream *s);
     ~wxIFFDecoder() { Destroy(); }
 
     // NOTE: this function modifies the current stream position

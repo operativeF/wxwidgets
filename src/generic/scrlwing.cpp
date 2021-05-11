@@ -66,7 +66,7 @@
 class WXDLLEXPORT wxScrollHelperEvtHandler : public wxEvtHandler
 {
 public:
-    wxScrollHelperEvtHandler(wxScrollHelperBase *scrollHelper)
+    explicit wxScrollHelperEvtHandler(wxScrollHelperBase *scrollHelper)
     {
         m_scrollHelper = scrollHelper;
     }

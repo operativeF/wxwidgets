@@ -150,7 +150,7 @@ class LexerAsm : public ILexer {
 	OptionSetAsm osAsm;
 	int commentChar;
 public:
-	LexerAsm(int commentChar_) {
+	explicit LexerAsm(int commentChar_) {
 		commentChar = commentChar_;
 	}
 	virtual ~LexerAsm() = default;

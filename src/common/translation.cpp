@@ -365,7 +365,7 @@ private:
 class wxPluralFormsScanner
 {
 public:
-    wxPluralFormsScanner(const char* s);
+    explicit wxPluralFormsScanner(const char* s);
     const wxPluralFormsToken& token() const { return m_token; }
     bool nextToken();  // returns false if error
 private:
@@ -513,7 +513,7 @@ class wxPluralFormsNode;
 class wxPluralFormsNodePtr
 {
 public:
-    wxPluralFormsNodePtr(wxPluralFormsNode *p = nullptr) : m_p(p) {}
+    explicit wxPluralFormsNodePtr(wxPluralFormsNode *p = nullptr) : m_p(p) {}
     ~wxPluralFormsNodePtr();
     wxPluralFormsNode& operator*() const { return *m_p; }
     wxPluralFormsNode* operator->() const { return m_p; }
@@ -528,7 +528,7 @@ private:
 class wxPluralFormsNode
 {
 public:
-    wxPluralFormsNode(const wxPluralFormsToken& t) : m_token(t) {}
+    explicit wxPluralFormsNode(const wxPluralFormsToken& t) : m_token(t) {}
     const wxPluralFormsToken& token() const { return m_token; }
     const wxPluralFormsNode* node(unsigned i) const
         { return m_nodes[i].get(); }
@@ -670,7 +670,7 @@ int wxPluralFormsCalculator::evaluate(int n) const
 class wxPluralFormsParser
 {
 public:
-    wxPluralFormsParser(wxPluralFormsScanner& scanner) : m_scanner(scanner) {}
+    explicit wxPluralFormsParser(wxPluralFormsScanner& scanner) : m_scanner(scanner) {}
     bool parse(wxPluralFormsCalculator& rCalculator);
 
 private:

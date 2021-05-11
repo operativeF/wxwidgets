@@ -72,7 +72,7 @@ namespace
 class wxIDropTarget : public IDropTarget
 {
 public:
-    wxIDropTarget(wxDropTarget *p);
+    explicit wxIDropTarget(wxDropTarget *p);
     virtual ~wxIDropTarget();
 
     // accessors for wxDropTarget
