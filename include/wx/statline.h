@@ -46,11 +46,11 @@ public:
     static int GetDefaultSize() { return 2; }
 
     // overridden base class virtuals
-    virtual bool AcceptsFocus() const override { return false; }
+    bool AcceptsFocus() const override { return false; }
 
 protected:
     // choose the default border for this window
-    virtual wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     // set the right size for the right dimension
     wxSize AdjustSize(const wxSize& size) const
@@ -70,7 +70,7 @@ protected:
         return sizeReal;
     }
 
-    virtual wxSize DoGetBestSize() const override
+    wxSize DoGetBestSize() const override
     {
         return AdjustSize(wxDefaultSize);
     }

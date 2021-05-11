@@ -439,7 +439,7 @@ public:
     virtual ~wxLogFrame();
 
     // Don't prevent the application from exiting if just this frame remains.
-    virtual bool ShouldPreventAppExit() const override { return false; }
+    bool ShouldPreventAppExit() const override { return false; }
 
     // menu callbacks
     void OnClose(wxCommandEvent& event);

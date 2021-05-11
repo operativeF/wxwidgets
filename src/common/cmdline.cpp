@@ -96,18 +96,18 @@ public:
     wxCmdLineParamType type;
 
     // from wxCmdLineArg
-    virtual wxCmdLineEntryType GetKind() const override { return kind; }
-    virtual wxString GetShortName() const override {
+    wxCmdLineEntryType GetKind() const override { return kind; }
+    wxString GetShortName() const override {
         wxASSERT_MSG( kind == wxCMD_LINE_OPTION || kind == wxCMD_LINE_SWITCH,
                       wxT("kind mismatch in wxCmdLineArg") );
         return shortName;
     }
-    virtual wxString GetLongName() const override {
+    wxString GetLongName() const override {
         wxASSERT_MSG( kind == wxCMD_LINE_OPTION || kind == wxCMD_LINE_SWITCH,
                       wxT("kind mismatch in wxCmdLineArg") );
         return longName;
     }
-    virtual wxCmdLineParamType GetType() const override {
+    wxCmdLineParamType GetType() const override {
         wxASSERT_MSG( kind == wxCMD_LINE_OPTION,
                       wxT("kind mismatch in wxCmdLineArg") );
         return type;

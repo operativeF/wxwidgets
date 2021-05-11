@@ -118,14 +118,14 @@ wxCUSTOM_TYPE_INFO(wxDateTime, wxToStringConverter<wxDateTime> , wxFromStringCon
 class wxDateTimeHolidaysModule : public wxModule
 {
 public:
-    virtual bool OnInit() override
+    bool OnInit() override
     {
         wxDateTimeHolidayAuthority::AddAuthority(new wxDateTimeWorkDays);
 
         return true;
     }
 
-    virtual void OnExit() override
+    void OnExit() override
     {
         wxDateTimeHolidayAuthority::ClearAllAuthorities();
         wxDateTimeHolidayAuthority::ms_authorities.clear();

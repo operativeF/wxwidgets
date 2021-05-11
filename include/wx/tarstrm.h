@@ -121,7 +121,7 @@ public:
 private:
     void SetOffset(wxFileOffset offset) override         { m_Offset = offset; }
 
-    virtual wxArchiveEntry* DoClone() const override     { return Clone(); }
+    wxArchiveEntry* DoClone() const override     { return Clone(); }
 
     wxString     m_Name;
     int          m_Mode;

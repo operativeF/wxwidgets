@@ -668,13 +668,13 @@ class wxFileSystemModule : public wxModule
         {
         }
 
-        virtual bool OnInit() override
+        bool OnInit() override
         {
             m_handler = new wxLocalFSHandler;
             wxFileSystem::AddHandler(m_handler);
             return true;
         }
-        virtual void OnExit() override
+        void OnExit() override
         {
             delete wxFileSystem::RemoveHandler(m_handler);
 

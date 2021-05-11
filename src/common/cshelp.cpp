@@ -49,7 +49,7 @@ public:
         m_contextHelp = contextHelp;
     }
 
-    virtual bool ProcessEvent(wxEvent& event) override;
+    bool ProcessEvent(wxEvent& event) override;
 
 //// Data
     wxContextHelp* m_contextHelp;

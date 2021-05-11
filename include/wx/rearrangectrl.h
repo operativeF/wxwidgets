@@ -97,7 +97,7 @@ public:
 
 
     // Override this to keep our m_order array in sync with the real item state.
-    virtual void Check(unsigned int item, bool check = true) override;
+    void Check(unsigned int item, bool check = true) override;
 
     int DoInsertItems(const wxArrayStringsAdapter& items, unsigned int pos,
                       void **clientData, wxClientDataType type) override;

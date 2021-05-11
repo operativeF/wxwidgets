@@ -36,11 +36,11 @@ public:
     }
 
     virtual ~wxMemoryInputStream();
-    virtual wxFileOffset GetLength() const override { return m_length; }
-    virtual bool IsSeekable() const override { return true; }
+    wxFileOffset GetLength() const override { return m_length; }
+    bool IsSeekable() const override { return true; }
 
-    virtual char Peek() override;
-    virtual bool CanRead() const override;
+    char Peek() override;
+    bool CanRead() const override;
 
     wxStreamBuffer *GetInputStreamBuffer() const { return m_i_streambuf; }
 
@@ -68,8 +68,8 @@ public:
     // if data is !NULL it must be allocated with malloc()
     wxMemoryOutputStream(void *data = NULL, size_t length = 0);
     virtual ~wxMemoryOutputStream();
-    virtual wxFileOffset GetLength() const override { return m_o_streambuf->GetLastAccess(); }
-    virtual bool IsSeekable() const override { return true; }
+    wxFileOffset GetLength() const override { return m_o_streambuf->GetLastAccess(); }
+    bool IsSeekable() const override { return true; }
 
     size_t CopyTo(void *buffer, size_t len) const;
 

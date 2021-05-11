@@ -280,7 +280,7 @@ private:
         return true;
     }
 
-    virtual void SetStringValue(const wxString& s) override
+    void SetStringValue(const wxString& s) override
     {
         wxDateTime dt;
         if ( ParseDateTime(s, &dt) )
@@ -288,7 +288,7 @@ private:
         //else: keep the old value
     }
 
-    virtual wxString GetStringValue() const override
+    wxString GetStringValue() const override
     {
         return GetStringValueFor(GetDate());
     }

@@ -69,7 +69,7 @@ public:
 
     // Inserts a new page just before the page indicated by page.
     // The new page is placed on the same level as page.
-    virtual bool InsertPage(size_t pos,
+    bool InsertPage(size_t pos,
                             wxWindow *page,
                             const wxString& text,
                             bool bSelect = false,
@@ -83,7 +83,7 @@ public:
                                int imageId = NO_IMAGE);
 
     // Adds a new page at top level after all other pages.
-    virtual bool AddPage(wxWindow *page,
+    bool AddPage(wxWindow *page,
                          const wxString& text,
                          bool bSelect = false,
                          int imageId = NO_IMAGE) override;
@@ -98,7 +98,7 @@ public:
     // Deletes the page and ALL its children. Could trigger page selection
     // change in a case when selected page is removed. In that case its parent
     // is selected (or the next page if no parent).
-    virtual bool DeletePage(size_t pos) override;
+    bool DeletePage(size_t pos) override;
 
 
     // Tree operations
@@ -125,24 +125,24 @@ public:
     // Standard operations inherited from wxBookCtrlBase
     // -------------------------------------------------
 
-    virtual bool SetPageText(size_t n, const wxString& strText) override;
-    virtual wxString GetPageText(size_t n) const override;
-    virtual int GetPageImage(size_t n) const override;
-    virtual bool SetPageImage(size_t n, int imageId) override;
-    virtual int SetSelection(size_t n) override { return DoSetSelection(n, SetSelection_SendEvent); }
-    virtual int ChangeSelection(size_t n) override { return DoSetSelection(n); }
-    virtual int HitTest(const wxPoint& pt, long *flags = NULL) const override;
-    virtual void SetImageList(wxImageList *imageList) override;
+    bool SetPageText(size_t n, const wxString& strText) override;
+    wxString GetPageText(size_t n) const override;
+    int GetPageImage(size_t n) const override;
+    bool SetPageImage(size_t n, int imageId) override;
+    int SetSelection(size_t n) override { return DoSetSelection(n, SetSelection_SendEvent); }
+    int ChangeSelection(size_t n) override { return DoSetSelection(n); }
+    int HitTest(const wxPoint& pt, long *flags = NULL) const override;
+    void SetImageList(wxImageList *imageList) override;
     virtual void AssignImageList(wxImageList *imageList);
-    virtual bool DeleteAllPages() override;
+    bool DeleteAllPages() override;
 
 protected:
     // Implementation of a page removal. See DeletPage for comments.
     wxTreebookPage *DoRemovePage(size_t pos) override;
 
     // This subclass of wxBookCtrlBase accepts NULL page pointers (empty pages)
-    virtual bool AllowNullPage() const override { return true; }
-    virtual wxWindow *TryGetNonNullPage(size_t page) override;
+    bool AllowNullPage() const override { return true; }
+    wxWindow *TryGetNonNullPage(size_t page) override;
 
     // event handlers
     void OnTreeSelectionChange(wxTreeEvent& event);

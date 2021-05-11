@@ -61,15 +61,15 @@ public:
     wxSimpleFontEnumerator() = default;
 
     // called by EnumerateFacenames
-    virtual bool OnFacename(const wxString& facename) override
+    bool OnFacename(const wxString& facename) override
     {
         m_arrFacenames.Add(facename);
         return true;
     }
 
     // called by EnumerateEncodings
-    virtual bool OnFontEncoding(const wxString& WXUNUSED(facename),
-                                const wxString& encoding) override
+    bool OnFontEncoding(const wxString& WXUNUSED(facename),
+                        const wxString& encoding) override
     {
         m_arrEncodings.Add(encoding);
         return true;

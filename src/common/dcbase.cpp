@@ -107,8 +107,8 @@ wxDCFactory *wxDCFactory::Get()
 class wxDCFactoryCleanupModule : public wxModule
 {
 public:
-    virtual bool OnInit() override { return true; }
-    virtual void OnExit() override { wxDCFactory::Set(nullptr); }
+    bool OnInit() override { return true; }
+    void OnExit() override { wxDCFactory::Set(nullptr); }
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxDCFactoryCleanupModule);

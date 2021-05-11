@@ -224,11 +224,11 @@ public:
     wxAnyValueTypeGlobalsManager() : wxModule() { }
     virtual ~wxAnyValueTypeGlobalsManager() = default;
 
-    virtual bool OnInit() override
+    bool OnInit() override
     {
         return true;
     }
-    virtual void OnExit() override
+    void OnExit() override
     {
         GetAnyValueTypeGlobals().reset();
     }
@@ -497,21 +497,21 @@ class wxAnyValueTypeImpl<wxAnyNullValue> : public wxAnyValueType
     WX_DECLARE_ANY_VALUE_TYPE(wxAnyValueTypeImpl<wxAnyNullValue>)
 public:
     // Dummy implementations
-    virtual void DeleteValue(wxAnyValueBuffer& buf) const override
+    void DeleteValue(wxAnyValueBuffer& buf) const override
     {
         wxUnusedVar(buf);
     }
 
-    virtual void CopyBuffer(const wxAnyValueBuffer& src,
-                            wxAnyValueBuffer& dst) const override
+    void CopyBuffer(const wxAnyValueBuffer& src,
+                    wxAnyValueBuffer& dst) const override
     {
         wxUnusedVar(src);
         wxUnusedVar(dst);
     }
 
-    virtual bool ConvertValue(const wxAnyValueBuffer& src,
-                              wxAnyValueType* dstType,
-                              wxAnyValueBuffer& dst) const override
+    bool ConvertValue(const wxAnyValueBuffer& src,
+                      wxAnyValueType* dstType,
+                      wxAnyValueBuffer& dst) const override
     {
         wxUnusedVar(src);
         wxUnusedVar(dstType);

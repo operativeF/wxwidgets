@@ -470,10 +470,10 @@ public:
     }
 
 #if USES_WXPOPUPTRANSIENTWINDOW
-    virtual bool Show( bool show ) override;
-    virtual bool ProcessLeftDown(wxMouseEvent& event) override;
+    bool Show( bool show ) override;
+    bool ProcessLeftDown(wxMouseEvent& event) override;
 protected:
-    virtual void OnDismiss() override;
+    void OnDismiss() override;
 #endif
 
 private:
@@ -955,7 +955,7 @@ public:
     wxComboCtrlTextCtrl() : wxTextCtrl() { }
     virtual ~wxComboCtrlTextCtrl() = default;
 
-    virtual wxWindow *GetMainWindowOfCompositeControl() override
+    wxWindow *GetMainWindowOfCompositeControl() override
     {
         wxComboCtrl* combo = (wxComboCtrl*) GetParent();
 
