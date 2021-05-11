@@ -123,7 +123,7 @@ public:
 
 protected:
     // Override to pass menu/toolbar events to the active child first.
-    virtual bool TryBefore(wxEvent& event) override;
+    bool TryBefore(wxEvent& event) override;
 
 
     // This is wxMDIClientWindow for all the native implementations but not for
@@ -177,12 +177,12 @@ public:
     // in most ports MDI children frames are not really top-level, the only
     // exception are the Mac ports in which MDI children are just normal top
     // level windows too
-    virtual bool IsTopLevel() const override { return false; }
+    bool IsTopLevel() const override { return false; }
 
     // In all ports keyboard navigation must stop at MDI child frame level and
     // can't cross its boundary. Indicate this by overriding this function to
     // return true.
-    virtual bool IsTopNavigationDomain(NavigationKind kind) const override
+    bool IsTopNavigationDomain(NavigationKind kind) const override
     {
         switch ( kind )
         {
@@ -201,7 +201,7 @@ public:
     // Raising any frame is supposed to show it but wxFrame Raise()
     // implementation doesn't work for MDI child frames in most forms so
     // forward this to Activate() which serves the same purpose by default.
-    virtual void Raise() override { Activate(); }
+    void Raise() override { Activate(); }
 
 protected:
     wxMDIParentFrame *m_mdiParent;
@@ -220,20 +220,20 @@ public:
     // no status bars
     //
     // TODO: MDI children should have their own status bars, why not?
-    virtual wxStatusBar* CreateStatusBar(int WXUNUSED(number) = 1,
-                                         long WXUNUSED(style) = 1,
-                                         wxWindowID WXUNUSED(id) = 1,
-                                         const wxString& WXUNUSED(name)
-                                            = wxEmptyString) override
+    wxStatusBar* CreateStatusBar(int WXUNUSED(number) = 1,
+                                 long WXUNUSED(style) = 1,
+                                 wxWindowID WXUNUSED(id) = 1,
+                                 const wxString& WXUNUSED(name)
+                                    = wxEmptyString) override
       { return NULL; }
 
-    virtual wxStatusBar *GetStatusBar() const override
+    wxStatusBar *GetStatusBar() const override
         { return NULL; }
-    virtual void SetStatusText(const wxString &WXUNUSED(text),
-                               int WXUNUSED(number)=0) override
+    void SetStatusText(const wxString &WXUNUSED(text),
+                       int WXUNUSED(number)=0) override
         { }
-    virtual void SetStatusWidths(int WXUNUSED(n),
-                                 const int WXUNUSED(widths)[]) override
+    void SetStatusWidths(int WXUNUSED(n),
+                         const int WXUNUSED(widths)[]) override
         { }
 #endif // wxUSE_STATUSBAR
 
@@ -241,31 +241,31 @@ public:
     // no toolbar
     //
     // TODO: again, it should be possible to have tool bars
-    virtual wxToolBar *CreateToolBar(long WXUNUSED(style),
-                                     wxWindowID WXUNUSED(id),
-                                     const wxString& WXUNUSED(name)) override
+    wxToolBar *CreateToolBar(long WXUNUSED(style),
+                             wxWindowID WXUNUSED(id),
+                             const wxString& WXUNUSED(name)) override
         { return NULL; }
-    virtual wxToolBar *GetToolBar() const override { return NULL; }
+    wxToolBar *GetToolBar() const override { return NULL; }
 #endif // wxUSE_TOOLBAR
 
     // no icon
-    virtual void SetIcons(const wxIconBundle& WXUNUSED(icons)) override { }
+    void SetIcons(const wxIconBundle& WXUNUSED(icons)) override { }
 
     // title is used as the tab label
-    virtual wxString GetTitle() const override { return m_title; }
-    virtual void SetTitle(const wxString& title) override = 0;
+    wxString GetTitle() const override { return m_title; }
+    void SetTitle(const wxString& title) override = 0;
 
     // no maximize etc
-    virtual void Maximize(bool WXUNUSED(maximize) = true) override { }
-    virtual bool IsMaximized() const override { return true; }
-    virtual bool IsAlwaysMaximized() const override { return true; }
-    virtual void Iconize(bool WXUNUSED(iconize) = true) override { }
-    virtual bool IsIconized() const override { return false; }
-    virtual void Restore() override { }
+    void Maximize(bool WXUNUSED(maximize) = true) override { }
+    bool IsMaximized() const override { return true; }
+    bool IsAlwaysMaximized() const override { return true; }
+    void Iconize(bool WXUNUSED(iconize) = true) override { }
+    bool IsIconized() const override { return false; }
+    void Restore() override { }
 
-    virtual bool ShowFullScreen(bool WXUNUSED(show),
-                                long WXUNUSED(style)) override { return false; }
-    virtual bool IsFullScreen() const override { return false; }
+    bool ShowFullScreen(bool WXUNUSED(show),
+                        long WXUNUSED(style)) override { return false; }
+    bool IsFullScreen() const override { return false; }
 
 
     // we need to override these functions to ensure that a child window is
@@ -273,18 +273,18 @@ public:
     // behave as just a wxWindow by short-circuiting wxTLW changes to the base
     // class behaviour
 
-    virtual void AddChild(wxWindowBase *child) override { wxWindow::AddChild(child); }
+    void AddChild(wxWindowBase *child) override { wxWindow::AddChild(child); }
 
-    virtual bool Destroy() override { return wxWindow::Destroy(); }
+    bool Destroy() override { return wxWindow::Destroy(); }
 
     // extra platform-specific hacks
 #ifdef __WXMSW__
-    virtual WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override
+    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override
     {
         return wxWindow::MSWGetStyle(flags, exstyle);
     }
 
-    virtual WXHWND MSWGetParent() const override
+    WXHWND MSWGetParent() const override
     {
         return wxWindow::MSWGetParent();
     }
@@ -296,40 +296,40 @@ public:
 #endif // __WXMSW__
 
 protected:
-    virtual void DoGetSize(int *width, int *height) const override
+    void DoGetSize(int *width, int *height) const override
     {
         wxWindow::DoGetSize(width, height);
     }
 
-    virtual void DoSetSize(int x, int y, int width, int height, int sizeFlags) override
+    void DoSetSize(int x, int y, int width, int height, int sizeFlags) override
     {
         wxWindow::DoSetSize(x, y, width, height, sizeFlags);
     }
 
-    virtual void DoGetClientSize(int *width, int *height) const override
+    void DoGetClientSize(int *width, int *height) const override
     {
         wxWindow::DoGetClientSize(width, height);
     }
 
-    virtual void DoSetClientSize(int width, int height) override
+    void DoSetClientSize(int width, int height) override
     {
         wxWindow::DoSetClientSize(width, height);
     }
 
-    virtual void DoMoveWindow(int x, int y, int width, int height) override
+    void DoMoveWindow(int x, int y, int width, int height) override
     {
         wxWindow::DoMoveWindow(x, y, width, height);
     }
 
-    virtual void DoGetScreenPosition(int *x, int *y) const override
+    void DoGetScreenPosition(int *x, int *y) const override
     {
         wxWindow::DoGetScreenPosition(x, y);
     }
 
     // no size hints
-    virtual void DoSetSizeHints(int WXUNUSED(minW), int WXUNUSED(minH),
-                                int WXUNUSED(maxW), int WXUNUSED(maxH),
-                                int WXUNUSED(incW), int WXUNUSED(incH)) override { }
+    void DoSetSizeHints(int WXUNUSED(minW), int WXUNUSED(minH),
+                        int WXUNUSED(maxW), int WXUNUSED(maxH),
+                        int WXUNUSED(incW), int WXUNUSED(incH)) override { }
 
     wxString m_title;
 };

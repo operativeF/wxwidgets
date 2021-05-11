@@ -34,13 +34,12 @@ public:
     wxWrapSizer(int orient = wxHORIZONTAL, int flags = wxWRAPSIZER_DEFAULT_FLAGS);
     virtual ~wxWrapSizer();
 
-    // override base class virtual methods
-    virtual wxSize CalcMin() override;
-    virtual void RepositionChildren(const wxSize& minSize) override;
+    wxSize CalcMin() override;
+    void RepositionChildren(const wxSize& minSize) override;
 
-    virtual bool InformFirstDirection(int direction,
-                                      int size,
-                                      int availableOtherDir) override;
+    bool InformFirstDirection(int direction,
+                              int size,
+                              int availableOtherDir) override;
 
 protected:
     // This method is called to decide if an item represents empty space or

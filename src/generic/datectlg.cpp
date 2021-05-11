@@ -60,14 +60,14 @@ public:
     {
     }
 
-    virtual void Init() override
+    void Init() override
     {
     }
 
     // NB: Don't create lazily since it didn't work that way before
     //     wxComboCtrl was used, and changing behaviour would almost
     //     certainly introduce new bugs.
-    virtual bool Create(wxWindow* parent) override
+    bool Create(wxWindow* parent) override
     {
         if ( !wxCalendarCtrl::Create(parent, wxID_ANY, wxDefaultDateTime,
                               wxPoint(0, 0), wxDefaultSize,
@@ -88,14 +88,14 @@ public:
         return true;
     }
 
-    virtual wxSize GetAdjustedSize(int WXUNUSED(minWidth),
-                                   int WXUNUSED(prefHeight),
-                                   int WXUNUSED(maxHeight)) override
+    wxSize GetAdjustedSize(int WXUNUSED(minWidth),
+                           int WXUNUSED(prefHeight),
+                           int WXUNUSED(maxHeight)) override
     {
         return m_useSize;
     }
 
-    virtual wxWindow *GetControl() override { return this; }
+    wxWindow *GetControl() override { return this; }
 
     void SetDateValue(const wxDateTime& date)
     {

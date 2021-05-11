@@ -362,30 +362,28 @@ public:
 
     void CheckItem(Node* item, wxCheckBoxState checkedState);
 
-
-    // Implement the base class pure virtual methods.
-    virtual unsigned GetColumnCount() const override;
-    virtual wxString GetColumnType(unsigned col) const override;
-    virtual void GetValue(wxVariant& variant,
-                          const wxDataViewItem& item,
-                          unsigned col) const override;
-    virtual bool SetValue(const wxVariant& variant,
-                          const wxDataViewItem& item,
-                          unsigned col) override;
-    virtual wxDataViewItem GetParent(const wxDataViewItem& item) const override;
-    virtual bool IsContainer(const wxDataViewItem& item) const override;
-    virtual bool HasContainerColumns(const wxDataViewItem& item) const override;
-    virtual unsigned GetChildren(const wxDataViewItem& item,
-                                 wxDataViewItemArray& children) const override;
-    virtual bool IsListModel() const override { return m_isFlat; }
-    virtual int Compare(const wxDataViewItem& item1,
-                        const wxDataViewItem& item2,
-                        unsigned col,
-                        bool ascending) const override;
+    unsigned GetColumnCount() const override;
+    wxString GetColumnType(unsigned col) const override;
+    void GetValue(wxVariant& variant,
+                  const wxDataViewItem& item,
+                  unsigned col) const override;
+    bool SetValue(const wxVariant& variant,
+                  const wxDataViewItem& item,
+                  unsigned col) override;
+    wxDataViewItem GetParent(const wxDataViewItem& item) const override;
+    bool IsContainer(const wxDataViewItem& item) const override;
+    bool HasContainerColumns(const wxDataViewItem& item) const override;
+    unsigned GetChildren(const wxDataViewItem& item,
+                         wxDataViewItemArray& children) const override;
+    bool IsListModel() const override { return m_isFlat; }
+    int Compare(const wxDataViewItem& item1,
+                const wxDataViewItem& item2,
+                unsigned col,
+                bool ascending) const override;
 
 protected:
-    virtual int DoCompareValues(const wxVariant& value1,
-                                const wxVariant& value2) const override;
+    int DoCompareValues(const wxVariant& value1,
+                        const wxVariant& value2) const override;
 
 private:
     // The control we're associated with.

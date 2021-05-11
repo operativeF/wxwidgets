@@ -50,10 +50,10 @@ class wxWizardSizer : public wxSizer
 public:
     explicit wxWizardSizer(wxWizard *owner);
 
-    virtual wxSizerItem *Insert(size_t index, wxSizerItem *item) override;
+    wxSizerItem *Insert(size_t index, wxSizerItem *item) override;
 
-    virtual void RecalcSizes() override;
-    virtual wxSize CalcMin() override;
+    void RecalcSizes() override;
+    wxSize CalcMin() override;
 
     // get the max size of all wizard pages
     wxSize GetMaxChildSize();

@@ -80,19 +80,19 @@ public:
 
 #if wxUSE_VALIDATORS
     // Override the base functions to allow a validator to be assigned to this page.
-    virtual bool TransferDataToWindow() override
+    bool TransferDataToWindow() override
     {
         return GetValidator() ? GetValidator()->TransferToWindow()
                               : wxPanel::TransferDataToWindow();
     }
 
-    virtual bool TransferDataFromWindow() override
+    bool TransferDataFromWindow() override
     {
         return GetValidator() ? GetValidator()->TransferFromWindow()
                               : wxPanel::TransferDataFromWindow();
     }
 
-    virtual bool Validate() override
+    bool Validate() override
     {
         return GetValidator() ? GetValidator()->Validate(this)
                               : wxPanel::Validate();
@@ -164,7 +164,7 @@ public:
         second->SetPrev(first);
     }
 
-    // base class pure virtuals
+    // FIXME: Is this true? -> base class pure virtuals
     virtual wxWizardPage *GetPrev() const override;
     virtual wxWizardPage *GetNext() const override;
 
@@ -279,7 +279,7 @@ public:
 
     wxWizardPage*   GetPage() const { return m_page; }
 
-    virtual wxEvent *Clone() const override { return new wxWizardEvent(*this); }
+    wxEvent *Clone() const override { return new wxWizardEvent(*this); }
 
 private:
     bool m_direction;

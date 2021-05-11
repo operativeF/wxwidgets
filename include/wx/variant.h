@@ -387,8 +387,8 @@ public:
 
 // Attributes
 protected:
-    virtual wxObjectRefData *CreateRefData() const override;
-    virtual wxObjectRefData *CloneRefData(const wxObjectRefData *data) const override;
+    wxObjectRefData *CreateRefData() const override;
+    wxObjectRefData *CloneRefData(const wxObjectRefData *data) const override;
 
     wxString        m_name;
 
