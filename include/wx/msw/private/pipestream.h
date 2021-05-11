@@ -20,10 +20,10 @@ public:
     bool IsOpened() const { return m_hInput != INVALID_HANDLE_VALUE; }
 
     // returns true if there is any data to be read from the pipe
-    virtual bool CanRead() const override;
+    bool CanRead() const override;
 
 protected:
-    virtual size_t OnSysRead(void *buffer, size_t len) override;
+    size_t OnSysRead(void *buffer, size_t len) override;
 
 protected:
     HANDLE m_hInput;

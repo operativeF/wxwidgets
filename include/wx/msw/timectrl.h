@@ -47,14 +47,14 @@ public:
     }
 
     // Override MSW-specific functions used during control creation.
-    virtual WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
 
 protected:
 #if wxUSE_INTL
-    virtual wxLocaleInfo MSWGetFormat() const override;
+    wxLocaleInfo MSWGetFormat() const override;
 #endif // wxUSE_INTL
-    virtual bool MSWAllowsNone() const override { return false; }
-    virtual bool MSWOnDateTimeChange(const tagNMDATETIMECHANGE& dtch) override;
+    bool MSWAllowsNone() const override { return false; }
+    bool MSWOnDateTimeChange(const tagNMDATETIMECHANGE& dtch) override;
 
     wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxTimePickerCtrl);
 };

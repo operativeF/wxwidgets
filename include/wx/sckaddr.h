@@ -114,14 +114,14 @@ class WXDLLIMPEXP_NET wxIPV4address : public wxIPaddress
 {
 public:
     // implement wxSockAddress pure virtuals:
-    virtual Family Type() override { return IPV4; }
-    virtual wxSockAddress *Clone() const override { return new wxIPV4address(*this); }
+    Family Type() override { return IPV4; }
+    wxSockAddress *Clone() const override { return new wxIPV4address(*this); }
 
 
     // implement wxIPaddress pure virtuals:
-    virtual bool IsLocalHost() const override;
+    bool IsLocalHost() const override;
 
-    virtual wxString IPAddress() const override;
+    wxString IPAddress() const override;
 
 
     // IPv4-specific methods:
@@ -133,7 +133,7 @@ public:
     bool BroadcastAddress();
 
 private:
-    virtual void DoInitImpl() override;
+    void DoInitImpl() override;
 
     wxDECLARE_DYNAMIC_CLASS(wxIPV4address);
 };
@@ -146,14 +146,14 @@ class WXDLLIMPEXP_NET wxIPV6address : public wxIPaddress
 {
 public:
     // implement wxSockAddress pure virtuals:
-    virtual Family Type() override { return IPV6; }
-    virtual wxSockAddress *Clone() const override { return new wxIPV6address(*this); }
+    Family Type() override { return IPV6; }
+    wxSockAddress *Clone() const override { return new wxIPV6address(*this); }
 
 
     // implement wxIPaddress pure virtuals:
-    virtual bool IsLocalHost() const override;
+    bool IsLocalHost() const override;
 
-    virtual wxString IPAddress() const override;
+    wxString IPAddress() const override;
 
     // IPv6-specific methods:
     bool Hostname(unsigned char addr[16]);
@@ -161,7 +161,7 @@ public:
     using wxIPaddress::Hostname;
 
 private:
-    virtual void DoInitImpl() override;
+    void DoInitImpl() override;
 
     wxDECLARE_DYNAMIC_CLASS(wxIPV6address);
 };
@@ -182,8 +182,8 @@ public:
     void Filename(const wxString& name);
     wxString Filename() const;
 
-    virtual Family Type() override { return UNIX; }
-    virtual wxSockAddress *Clone() const override { return new wxUNIXaddress(*this); }
+    Family Type() override { return UNIX; }
+    wxSockAddress *Clone() const override { return new wxUNIXaddress(*this); }
 
 private:
     wxSockAddressImpl& GetUNIX();

@@ -642,7 +642,7 @@ public:
         }
     }
 
-    virtual wxCoord OnMeasureItem( size_t item ) const override
+    wxCoord OnMeasureItem( size_t item ) const override
     {
         wxPropertyGrid* pg = GetGrid();
         wxRect rect;
@@ -660,7 +660,7 @@ public:
         return pg;
     }
 
-    virtual wxCoord OnMeasureItemWidth( size_t item ) const override
+    wxCoord OnMeasureItemWidth( size_t item ) const override
     {
         wxPropertyGrid* pg = GetGrid();
         wxRect rect;

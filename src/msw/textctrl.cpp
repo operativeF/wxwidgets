@@ -171,8 +171,8 @@ public:
         Version_Max
     };
 
-    virtual bool OnInit() override;
-    virtual void OnExit() override;
+    bool OnInit() override;
+    void OnExit() override;
 
     // load the richedit DLL for the specified version of rich edit
     static bool Load(Version version);

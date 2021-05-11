@@ -40,13 +40,13 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxButtonNameStr));
 
-    virtual void SetLabel(const wxString& label) override;
-    virtual wxWindow *SetDefault() override;
-    virtual void Command(wxCommandEvent& event) override;
+    void SetLabel(const wxString& label) override;
+    wxWindow *SetDefault() override;
+    void Command(wxCommandEvent& event) override;
 
     // osx specific event handling common for all osx-ports
 
-    virtual bool OSXHandleClicked(double timestampsec) override;
+    bool OSXHandleClicked(double timestampsec) override;
 
 #if wxOSX_USE_COCOA
     void OSXUpdateAfterLabelChange(const wxString& label);

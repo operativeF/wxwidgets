@@ -92,7 +92,7 @@ of MSW, MAC and OS2
 class MyAppTraits : public wxGUIAppTraits
 {
 public:
-    virtual wxLog *CreateLogTarget() override;
+    wxLog *CreateLogTarget() override;
 };
 
 #endif // wxUSE_LOG
@@ -103,16 +103,16 @@ class MyApp: public wxApp
 public:
     MyApp() { m_startupProgressStyle = -1; }
 
-    virtual bool OnInit() override;
+    bool OnInit() override;
 
 #if wxUSE_CMDLINE_PARSER
-    virtual void OnInitCmdLine(wxCmdLineParser& parser) override;
-    virtual bool OnCmdLineParsed(wxCmdLineParser& parser) override;
+    void OnInitCmdLine(wxCmdLineParser& parser) override;
+    bool OnCmdLineParsed(wxCmdLineParser& parser) override;
 #endif // wxUSE_CMDLINE_PARSER
 
 protected:
 #if wxUSE_LOG
-    virtual wxAppTraits *CreateTraits() override { return new MyAppTraits; }
+    wxAppTraits *CreateTraits() override { return new MyAppTraits; }
 #endif // wxUSE_LOG
 
 private:
@@ -267,8 +267,8 @@ public:
 
 protected:
     // overrides method in base class
-    virtual void AddAdditionalTextOptions(wxSizer *sizer) override;
-    virtual void AddAdditionalFlags(wxSizer *sizer) override;
+    void AddAdditionalTextOptions(wxSizer *sizer) override;
+    void AddAdditionalFlags(wxSizer *sizer) override;
 
     void OnApply(wxCommandEvent& event);
 

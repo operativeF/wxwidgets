@@ -18,11 +18,11 @@ public:
     wxMemoryDCImpl( wxMemoryDC *owner, wxDC *dc );
     ~wxMemoryDCImpl();
 
-    virtual wxBitmap DoGetAsBitmap(const wxRect *subrect) const override;
-    virtual void DoSelect(const wxBitmap& bitmap) override;
+    wxBitmap DoGetAsBitmap(const wxRect *subrect) const override;
+    void DoSelect(const wxBitmap& bitmap) override;
 
-    virtual const wxBitmap& GetSelectedBitmap() const override;
-    virtual wxBitmap& GetSelectedBitmap() override;
+    const wxBitmap& GetSelectedBitmap() const override;
+    wxBitmap& GetSelectedBitmap() override;
 
 private:
     wxBitmap m_selected;

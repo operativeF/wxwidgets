@@ -62,9 +62,9 @@ public:
         m_service(service)
     {  }
 
-    virtual void OnReadWaiting() override;
-    virtual void OnWriteWaiting() override;
-    virtual void OnExceptionWaiting() override;
+    void OnReadWaiting() override;
+    void OnWriteWaiting() override;
+    void OnExceptionWaiting() override;
 
 protected:
     wxFSWatcherImplKqueue* m_service;
@@ -134,7 +134,7 @@ public:
         wxDELETE(m_source);
     }
 
-    virtual bool DoAdd(wxSharedPtr<wxFSWatchEntryKq> watch) override
+    bool DoAdd(wxSharedPtr<wxFSWatchEntryKq> watch) override
     {
         wxCHECK_MSG( IsOk(), false,
                     "Kqueue not initialized or invalid kqueue descriptor" );
@@ -157,7 +157,7 @@ public:
         return true;
     }
 
-    virtual bool DoRemove(wxSharedPtr<wxFSWatchEntryKq> watch) override
+    bool DoRemove(wxSharedPtr<wxFSWatchEntryKq> watch) override
     {
         wxCHECK_MSG( IsOk(), false,
                     "Kqueue not initialized or invalid kqueue descriptor" );
@@ -174,7 +174,7 @@ public:
         return true;
     }
 
-    virtual bool RemoveAll() override
+    bool RemoveAll() override
     {
         wxFSWatchEntries::iterator it = m_watches.begin();
         for ( ; it != m_watches.end(); ++it )

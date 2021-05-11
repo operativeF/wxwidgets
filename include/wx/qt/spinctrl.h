@@ -29,13 +29,13 @@ public:
         T min, T max, T initial, T inc,
         const wxString& name );
 
-    virtual wxString GetTextValue() const override;
-    virtual void SetValue(const wxString&) override {}
+    wxString GetTextValue() const override;
+    void SetValue(const wxString&) override {}
 
-    virtual void SetSnapToTicks(bool snap_to_ticks) override;
-    virtual bool GetSnapToTicks() const override;
+    void SetSnapToTicks(bool snap_to_ticks) override;
+    bool GetSnapToTicks() const override;
 
-    virtual void SetSelection(long from, long to) override;
+    void SetSelection(long from, long to) override;
 
     virtual void SetValue(T val);
     void SetRange(T minVal, T maxVal);
@@ -46,7 +46,7 @@ public:
     T GetMax() const;
     T GetIncrement() const;
 
-    virtual QWidget *GetHandle() const override;
+    QWidget *GetHandle() const override;
 
 protected:
     Widget *m_qtSpinBox;
@@ -74,10 +74,10 @@ public:
                 long style = wxSP_ARROW_KEYS,
                 int min = 0, int max = 100, int initial = 0,
                 const wxString& name = wxT("wxSpinCtrl"));
-    virtual int GetBase() const override { return m_base; }
-    virtual bool SetBase(int base) override;
-    virtual void SetValue(const wxString & val) override;
-    virtual void SetValue(int val) override { wxSpinCtrlQt<int,QSpinBox>::SetValue(val); }
+    int GetBase() const override { return m_base; }
+    bool SetBase(int base) override;
+    void SetValue(const wxString & val) override;
+    void SetValue(int val) override { wxSpinCtrlQt<int,QSpinBox>::SetValue(val); }
 
 private:
     // Common part of all ctors.
@@ -116,10 +116,10 @@ public:
     void SetDigits(unsigned digits);
     unsigned GetDigits() const;
 
-    virtual int GetBase() const override { return 10; }
-    virtual bool SetBase(int WXUNUSED(base)) override { return false; }
-    virtual void SetValue(const wxString & val) override;
-    virtual void SetValue(double val) override { wxSpinCtrlQt<double,QDoubleSpinBox>::SetValue(val); }
+    int GetBase() const override { return 10; }
+    bool SetBase(int WXUNUSED(base)) override { return false; }
+    void SetValue(const wxString & val) override;
+    void SetValue(double val) override { wxSpinCtrlQt<double,QDoubleSpinBox>::SetValue(val); }
 
 private:
     wxDECLARE_DYNAMIC_CLASS( wxSpinCtrlDouble );

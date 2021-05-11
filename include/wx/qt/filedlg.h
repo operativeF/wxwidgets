@@ -33,20 +33,20 @@ public:
                  const wxSize& sz = wxDefaultSize,
                  const wxString& name = wxASCII_STR(wxFileDialogNameStr));
 
-    virtual wxString GetPath() const override;
-    virtual void GetPaths(wxArrayString& paths) const override;
-    virtual wxString GetFilename() const override;
-    virtual void GetFilenames(wxArrayString& files) const override;
-    virtual int GetFilterIndex() const override;
+    wxString GetPath() const override;
+    void GetPaths(wxArrayString& paths) const override;
+    wxString GetFilename() const override;
+    void GetFilenames(wxArrayString& files) const override;
+    int GetFilterIndex() const override;
 
-    virtual void SetMessage(const wxString& message) override;
-    virtual void SetPath(const wxString& path) override;
-    virtual void SetDirectory(const wxString& dir) override;
-    virtual void SetFilename(const wxString& name) override;
-    virtual void SetWildcard(const wxString& wildCard) override;
-    virtual void SetFilterIndex(int filterIndex) override;
+    void SetMessage(const wxString& message) override;
+    void SetPath(const wxString& path) override;
+    void SetDirectory(const wxString& dir) override;
+    void SetFilename(const wxString& name) override;
+    void SetWildcard(const wxString& wildCard) override;
+    void SetFilterIndex(int filterIndex) override;
 
-    virtual bool SupportsExtraControl() const override { return true; }
+    bool SupportsExtraControl() const override { return true; }
 
     virtual QFileDialog *GetQFileDialog() const;
 

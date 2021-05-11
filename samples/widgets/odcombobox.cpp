@@ -87,14 +87,14 @@ class ODComboboxWidgetsPage : public ItemContainerWidgetsPage
 public:
     ODComboboxWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_combobox; }
-    virtual wxTextEntryBase *GetTextEntry() const override
+    wxWindow *GetWidget() const override { return m_combobox; }
+    wxTextEntryBase *GetTextEntry() const override
         { return m_combobox ? m_combobox->GetTextCtrl() : NULL; }
-    virtual wxItemContainer* GetContainer() const override { return m_combobox; }
-    virtual void RecreateWidget() override { CreateCombo(); }
+    wxItemContainer* GetContainer() const override { return m_combobox; }
+    void RecreateWidget() override { CreateCombo(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 protected:
     // event handlers
@@ -284,12 +284,12 @@ public:
         dc.DrawRectangle(rect);
     }
 
-    virtual wxCoord OnMeasureItem(size_t WXUNUSED(item)) const override
+    wxCoord OnMeasureItem(size_t WXUNUSED(item)) const override
     {
         return 48;
     }
 
-    virtual wxCoord OnMeasureItemWidth(size_t WXUNUSED(item)) const override
+    wxCoord OnMeasureItemWidth(size_t WXUNUSED(item)) const override
     {
         return -1; // default - will be measured from text width
     }

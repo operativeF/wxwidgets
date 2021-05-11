@@ -160,10 +160,10 @@ public:
     // list or report view
     long GetTopItem() const;
 
-    virtual bool HasCheckBoxes() const override;
-    virtual bool EnableCheckBoxes(bool enable = true) override;
-    virtual bool IsItemChecked(long item) const override;
-    virtual void CheckItem(long item, bool check) override;
+    bool HasCheckBoxes() const override;
+    bool EnableCheckBoxes(bool enable = true) override;
+    bool IsItemChecked(long item) const override;
+    void CheckItem(long item, bool check) override;
 
     // Add or remove a single window style
     void SetSingleStyle(long style, bool add = true);
@@ -271,13 +271,13 @@ public:
     // data is arbitrary data to be passed to the sort function.
     bool SortItems(wxListCtrlCompare fn, wxIntPtr data);
 
-    virtual QWidget *GetHandle() const override;
+    QWidget *GetHandle() const override;
 
 protected:
     void Init();
 
     // Implement base class pure virtual methods.
-    virtual long DoInsertColumn(long col, const wxListItem& info) override;
+    long DoInsertColumn(long col, const wxListItem& info) override;
 
     wxImageList *     m_imageListNormal; // The image list for normal icons
     wxImageList *     m_imageListSmall;  // The image list for small icons

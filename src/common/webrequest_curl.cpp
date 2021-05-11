@@ -500,9 +500,9 @@ class WinSock1SocketPoller: public SocketPollerImpl
 public:
     WinSock1SocketPoller(wxEvtHandler*);
     virtual ~WinSock1SocketPoller();
-    virtual bool StartPolling(wxSOCKET_T, int) override;
-    virtual void StopPolling(wxSOCKET_T) override;
-    virtual void ResumePolling(wxSOCKET_T) override;
+    bool StartPolling(wxSOCKET_T, int) override;
+    void StopPolling(wxSOCKET_T) override;
+    void ResumePolling(wxSOCKET_T) override;
 
 private:
     static LRESULT CALLBACK MsgProc(HWND hwnd, WXUINT uMsg, WXWPARAM wParam,

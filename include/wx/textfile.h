@@ -34,12 +34,12 @@ public:
 
 protected:
     // implement the base class pure virtuals
-    virtual bool OnExists() const override;
+    bool OnExists() const override;
     virtual bool OnOpen(const wxString &strBufferName,
                         wxTextBufferOpenMode openMode) override;
-    virtual bool OnClose() override;
-    virtual bool OnRead(const wxMBConv& conv) override;
-    virtual bool OnWrite(wxTextFileType typeNew, const wxMBConv& conv) override;
+    bool OnClose() override;
+    bool OnRead(const wxMBConv& conv) override;
+    bool OnWrite(wxTextFileType typeNew, const wxMBConv& conv) override;
 
 private:
 

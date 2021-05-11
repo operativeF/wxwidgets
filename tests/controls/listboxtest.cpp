@@ -25,12 +25,12 @@ class ListBoxTestCase : public ItemContainerTestCase, public CppUnit::TestCase
 public:
     ListBoxTestCase() { }
 
-    virtual void setUp() override;
-    virtual void tearDown() override;
+    void setUp() override;
+    void tearDown() override;
 
 private:
-    virtual wxItemContainer *GetContainer() const override { return m_list; }
-    virtual wxWindow *GetContainerWindow() const override { return m_list; }
+    wxItemContainer *GetContainer() const override { return m_list; }
+    wxWindow *GetContainerWindow() const override { return m_list; }
 
     CPPUNIT_TEST_SUITE( ListBoxTestCase );
         wxITEM_CONTAINER_TESTS();

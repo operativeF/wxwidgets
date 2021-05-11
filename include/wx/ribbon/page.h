@@ -44,28 +44,28 @@ public:
     void SetArtProvider(wxRibbonArtProvider* art) override;
 
     wxBitmap& GetIcon() {return m_icon;}
-    virtual wxSize GetMinSize() const override;
+    wxSize GetMinSize() const override;
     void SetSizeWithScrollButtonAdjustment(int x, int y, int width, int height);
     void AdjustRectToIncludeScrollButtons(wxRect* rect) const;
 
     bool DismissExpandedPanel();
 
-    virtual bool Realize() override;
-    virtual bool Show(bool show = true) override;
-    virtual bool Layout() override;
-    virtual bool ScrollLines(int lines) override;
+    bool Realize() override;
+    bool Show(bool show = true) override;
+    bool Layout() override;
+    bool ScrollLines(int lines) override;
     bool ScrollPixels(int pixels);
     bool ScrollSections(int sections);
 
     wxOrientation GetMajorAxis() const;
 
-    virtual void RemoveChild(wxWindowBase *child) override;
+    void RemoveChild(wxWindowBase *child) override;
 
     void HideIfExpanded();
 
 protected:
-    virtual wxSize DoGetBestSize() const override;
-    virtual wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxSize DoGetBestSize() const override;
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     void DoSetSize(int x, int y, int width, int height, int sizeFlags = wxSIZE_AUTO) override;
     bool DoActualLayout();

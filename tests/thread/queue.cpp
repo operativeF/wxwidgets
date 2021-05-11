@@ -52,7 +52,7 @@ private:
         {}
 
         // thread execution starts here
-        virtual void *Entry() override;
+        void *Entry() override;
 
         // Thread message queue
         Queue& GetQueue()

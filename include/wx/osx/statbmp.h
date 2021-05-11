@@ -26,11 +26,11 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxStaticBitmapNameStr));
 
-    virtual void SetBitmap(const wxBitmap& bitmap) override;
+    void SetBitmap(const wxBitmap& bitmap) override;
 
-    virtual wxBitmap GetBitmap() const override { return m_bitmap; }
+    wxBitmap GetBitmap() const override { return m_bitmap; }
 
-    virtual void SetIcon(const wxIcon& icon) override
+    void SetIcon(const wxIcon& icon) override
     {
         wxBitmap bmp;
         bmp.CopyFromIcon(icon);
@@ -42,9 +42,9 @@ public:
     wxIcon GetIcon() const override  { return (const wxIcon &)m_bitmap; }
 #endif
 
-    virtual void SetScaleMode(ScaleMode scaleMode) override;
+    void SetScaleMode(ScaleMode scaleMode) override;
 
-    virtual ScaleMode GetScaleMode() const override { return m_scaleMode; }
+    ScaleMode GetScaleMode() const override { return m_scaleMode; }
 
 private:
     wxSize GetBitmapSize()

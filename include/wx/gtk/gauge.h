@@ -47,12 +47,12 @@ public:
     void SetValue(int pos) override;
     int GetValue() const override;
 
-    virtual void Pulse() override;
+    void Pulse() override;
 
     static wxVisualAttributes
     GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
 
-    virtual wxVisualAttributes GetDefaultAttributes() const override;
+    wxVisualAttributes GetDefaultAttributes() const override;
 
     // implementation
     // -------------

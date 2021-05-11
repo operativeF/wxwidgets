@@ -34,13 +34,13 @@ public:
         }
 
 protected:
-    virtual void showEvent ( QShowEvent * event ) override;
-    virtual void hideEvent ( QHideEvent * event ) override;
-    virtual void resizeEvent ( QResizeEvent * event ) override;
-    virtual void paintEvent ( QPaintEvent * event ) override;
+    void showEvent ( QShowEvent * event ) override;
+    void hideEvent ( QHideEvent * event ) override;
+    void resizeEvent ( QResizeEvent * event ) override;
+    void paintEvent ( QPaintEvent * event ) override;
 
-    virtual void resizeGL(int w, int h) override;
-    virtual void paintGL() override;
+    void resizeGL(int w, int h) override;
+    void paintGL() override;
 };
 
 void wxQtGLWidget::showEvent ( QShowEvent * event )

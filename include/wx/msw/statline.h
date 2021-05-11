@@ -38,10 +38,10 @@ public:
                  const wxString &name = wxASCII_STR(wxStaticLineNameStr) );
 
     // overridden base class virtuals
-    virtual bool AcceptsFocus() const override { return false; }
+    bool AcceptsFocus() const override { return false; }
 
     // usually overridden base class virtuals
-    virtual WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
 
     wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxStaticLine);
 };

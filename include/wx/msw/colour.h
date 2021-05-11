@@ -27,7 +27,7 @@ public:
     // accessors
     // ---------
 
-    virtual bool IsOk() const override { return m_isInit; }
+    bool IsOk() const override { return m_isInit; }
 
     unsigned char Red() const override { return m_red; }
     unsigned char Green() const override { return m_green; }

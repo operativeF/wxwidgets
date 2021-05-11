@@ -24,16 +24,16 @@ class ChoicebookTestCase : public BookCtrlBaseTestCase, public CppUnit::TestCase
 public:
     ChoicebookTestCase() { }
 
-    virtual void setUp() override;
-    virtual void tearDown() override;
+    void setUp() override;
+    void tearDown() override;
 
 private:
-    virtual wxBookCtrlBase *GetBase() const override { return m_choicebook; }
+    wxBookCtrlBase *GetBase() const override { return m_choicebook; }
 
-    virtual wxEventType GetChangedEvent() const override
+    wxEventType GetChangedEvent() const override
     { return wxEVT_CHOICEBOOK_PAGE_CHANGED; }
 
-    virtual wxEventType GetChangingEvent() const override
+    wxEventType GetChangingEvent() const override
     { return wxEVT_CHOICEBOOK_PAGE_CHANGING; }
 
     CPPUNIT_TEST_SUITE( ChoicebookTestCase );

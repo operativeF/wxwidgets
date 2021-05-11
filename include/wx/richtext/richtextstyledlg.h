@@ -99,8 +99,8 @@ public:
     void Init();
 
     /// Transfer data from/to window
-    virtual bool TransferDataFromWindow() override;
-    virtual bool TransferDataToWindow() override;
+    bool TransferDataFromWindow() override;
+    bool TransferDataToWindow() override;
 
     /// Set/get style sheet
     void SetStyleSheet(wxRichTextStyleSheet* sheet) { m_richTextStyleSheet = sheet; }

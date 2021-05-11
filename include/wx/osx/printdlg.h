@@ -33,11 +33,11 @@ public:
     virtual ~wxMacPrintDialog();
 
     bool Create(wxWindow *parent, wxPrintDialogData* data = NULL);
-    virtual int ShowModal() override;
+    int ShowModal() override;
 
-    virtual wxPrintDialogData& GetPrintDialogData() override { return m_printDialogData; }
-    virtual wxPrintData& GetPrintData() override { return m_printDialogData.GetPrintData(); }
-    virtual wxDC *GetPrintDC() override;
+    wxPrintDialogData& GetPrintDialogData() override { return m_printDialogData; }
+    wxPrintData& GetPrintData() override { return m_printDialogData.GetPrintData(); }
+    wxDC *GetPrintDC() override;
 
 private:
     wxPrintDialogData   m_printDialogData;
@@ -60,10 +60,10 @@ public:
     wxMacPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data = NULL);
     virtual ~wxMacPageSetupDialog();
 
-    virtual wxPageSetupDialogData& GetPageSetupDialogData() override;
+    wxPageSetupDialogData& GetPageSetupDialogData() override;
 
     bool Create(wxWindow *parent, wxPageSetupDialogData *data = NULL);
-    virtual int ShowModal() override;
+    int ShowModal() override;
 
 private:
     wxPageSetupDialogData   m_pageSetupData;

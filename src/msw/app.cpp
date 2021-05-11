@@ -152,12 +152,12 @@ public:
     wxOleInitModule()
     = default;
 
-    virtual bool OnInit() override
+    bool OnInit() override
     {
         return wxOleInitialize();
     }
 
-    virtual void OnExit() override
+    void OnExit() override
     {
         wxOleUninitialize();
     }

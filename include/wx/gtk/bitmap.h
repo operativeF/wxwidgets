@@ -44,9 +44,9 @@ public:
 #endif
 
 protected:
-    virtual void FreeData() override;
-    virtual bool InitFromColour(const wxBitmap& bitmap, const wxColour& colour) override;
-    virtual bool InitFromMonoBitmap(const wxBitmap& bitmap) override;
+    void FreeData() override;
+    bool InitFromColour(const wxBitmap& bitmap, const wxColour& colour) override;
+    bool InitFromMonoBitmap(const wxBitmap& bitmap) override;
 
 private:
 #ifdef __WXGTK3__
@@ -86,20 +86,20 @@ public:
     bool Create(int width, int height, const wxDC& WXUNUSED(dc))
         { return Create(width,height); }
 #ifdef __WXGTK3__
-    virtual bool CreateScaled(int w, int h, int depth, double scale) override;
-    virtual double GetScaleFactor() const override;
+    bool CreateScaled(int w, int h, int depth, double scale) override;
+    double GetScaleFactor() const override;
 #endif
 
-    virtual int GetHeight() const override;
-    virtual int GetWidth() const override;
-    virtual int GetDepth() const override;
+    int GetHeight() const override;
+    int GetWidth() const override;
+    int GetDepth() const override;
 
 #if wxUSE_IMAGE
     wxImage ConvertToImage() const override;
 #endif // wxUSE_IMAGE
 
     // copies the contents and mask of the given (colour) icon to the bitmap
-    virtual bool CopyFromIcon(const wxIcon& icon) override;
+    bool CopyFromIcon(const wxIcon& icon) override;
 
     wxMask *GetMask() const override;
     void SetMask( wxMask *mask ) override;
@@ -154,8 +154,8 @@ protected:
 #endif // wxUSE_IMAGE
 #endif
 
-    virtual wxGDIRefData* CreateGDIRefData() const override;
-    virtual wxGDIRefData* CloneGDIRefData(const wxGDIRefData* data) const override;
+    wxGDIRefData* CreateGDIRefData() const override;
+    wxGDIRefData* CloneGDIRefData(const wxGDIRefData* data) const override;
 
 private:
 #ifndef __WXGTK3__

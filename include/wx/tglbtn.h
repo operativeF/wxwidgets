@@ -37,7 +37,7 @@ public:
     virtual bool GetValue() const = 0;
 
     // The current "normal" state for the toggle button depends upon its value.
-    virtual State GetNormalState() const override
+    State GetNormalState() const override
     {
         return GetValue() ? State_Pressed : State_Normal;
     }

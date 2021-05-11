@@ -23,8 +23,8 @@ public:
     // Operations
     virtual bool SetIcon(const wxIcon& icon,
                          const wxString& tooltip = wxEmptyString) override;
-    virtual bool RemoveIcon() override;
-    virtual bool PopupMenu(wxMenu *menu) override;
+    bool RemoveIcon() override;
+    bool PopupMenu(wxMenu *menu) override;
 
 private:
     QSystemTrayIcon *m_qtSystemTrayIcon;

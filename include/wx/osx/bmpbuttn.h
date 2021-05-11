@@ -42,7 +42,7 @@ public:
                            const wxString& name = wxString());
 protected:
 
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
 
     wxDECLARE_DYNAMIC_CLASS(wxBitmapButton);
 };

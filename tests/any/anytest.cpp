@@ -483,15 +483,15 @@ public:
         m_value = value;
     }
 
-    virtual bool Eq(wxVariantData& WXUNUSED(data)) const override
+    bool Eq(wxVariantData& WXUNUSED(data)) const override
     {
         return false;
     }
 
     // What type is it? Return a string name.
-    virtual wxString GetType() const override { return "MyClass"; }
+    wxString GetType() const override { return "MyClass"; }
 
-    virtual wxVariantData* Clone() const override
+    wxVariantData* Clone() const override
     {
         return new wxMyVariantData(m_value);
     }

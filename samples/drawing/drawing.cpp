@@ -85,9 +85,9 @@ public:
     // this one is called on application startup and is a good place for the app
     // initialization (doing it here and not in the ctor allows to have an error
     // return: if OnInit() returns false, the application terminates)
-    virtual bool OnInit() override;
+    bool OnInit() override;
 
-    virtual int OnExit() override { DeleteBitmaps(); return 0; }
+    int OnExit() override { DeleteBitmaps(); return 0; }
 
 protected:
     void DeleteBitmaps();
@@ -2143,7 +2143,7 @@ public:
         SetSizerAndFit(sizer);
     }
 
-    virtual bool TransferDataFromWindow() override
+    bool TransferDataFromWindow() override
     {
         if ( !wxDialog::TransferDataFromWindow() )
             return false;

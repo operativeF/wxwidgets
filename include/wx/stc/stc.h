@@ -5254,16 +5254,16 @@ public:
     // implement wxTextEntryBase pure virtual methods
     // ----------------------------------------------
 
-    virtual void WriteText(const wxString& text) override
+    void WriteText(const wxString& text) override
     {
         ReplaceSelection(text);
     }
 
-    virtual void Remove(long from, long to) override
+    void Remove(long from, long to) override
     {
         Replace(from, to, wxString());
     }
-    virtual void Replace(long from, long to, const wxString& text) override
+    void Replace(long from, long to, const wxString& text) override
     {
         SetTargetStart((int)from);
         SetTargetEnd((int)to);
@@ -5285,14 +5285,14 @@ public:
 
     */
 
-    virtual void SetInsertionPoint(long pos) override
+    void SetInsertionPoint(long pos) override
     {
         SetCurrentPos(int(pos == -1 ? GetLastPosition() : pos));
     }
-    virtual long GetInsertionPoint() const override { return GetCurrentPos(); }
-    virtual long GetLastPosition() const override { return GetTextLength(); }
+    long GetInsertionPoint() const override { return GetCurrentPos(); }
+    long GetLastPosition() const override { return GetTextLength(); }
 
-    virtual void SetSelection(long from, long to) override
+    void SetSelection(long from, long to) override
     {
         if ( from == -1 && to == -1 )
         {
@@ -5305,7 +5305,7 @@ public:
         }
     }
 
-    virtual void SelectNone() override
+    void SelectNone() override
     {
         ClearSelections();
     }
@@ -5313,7 +5313,7 @@ public:
 #ifdef SWIG
     void GetSelection(long* OUTPUT, long* OUTPUT) const;
 #else
-    virtual void GetSelection(long *from, long *to) const override
+    void GetSelection(long *from, long *to) const override
     {
         if ( from )
             *from = GetSelectionStart();
@@ -5333,13 +5333,13 @@ public:
     }
 #endif
 
-    virtual bool IsEditable() const override { return !GetReadOnly(); }
-    virtual void SetEditable(bool editable) override { SetReadOnly(!editable); }
+    bool IsEditable() const override { return !GetReadOnly(); }
+    void SetEditable(bool editable) override { SetReadOnly(!editable); }
 
     // implement wxTextAreaBase pure virtual methods
     // ---------------------------------------------
 
-    virtual int GetLineLength(long lineNo) const override
+    int GetLineLength(long lineNo) const override
     {
         if ( lineNo < 0 || lineNo >= GetNumberOfLines() )
             return -1;
@@ -5347,7 +5347,7 @@ public:
         return static_cast<int>(GetLineText(lineNo).length());
     }
 
-    virtual wxString GetLineText(long lineNo) const override
+    wxString GetLineText(long lineNo) const override
     {
         wxString text = GetLine(static_cast<int>(lineNo));
         size_t lastNewLine = text.find_last_not_of(wxS("\r\n"));
@@ -5358,11 +5358,11 @@ public:
             text.clear();
         return text;
     }
-    virtual int GetNumberOfLines() const override { return GetLineCount(); }
+    int GetNumberOfLines() const override { return GetLineCount(); }
 
-    virtual bool IsModified() const override { return GetModify(); }
-    virtual void MarkDirty() override { wxFAIL_MSG("not implemented"); }
-    virtual void DiscardEdits() override { SetSavePoint(); }
+    bool IsModified() const override { return GetModify(); }
+    void MarkDirty() override { wxFAIL_MSG("not implemented"); }
+    void DiscardEdits() override { SetSavePoint(); }
 
     virtual bool SetStyle(long WXUNUSED(start), long WXUNUSED(end),
                           const wxTextAttr& WXUNUSED(style)) override
@@ -5372,21 +5372,21 @@ public:
         return false;
     }
 
-    virtual bool GetStyle(long WXUNUSED(position), wxTextAttr& WXUNUSED(style)) override
+    bool GetStyle(long WXUNUSED(position), wxTextAttr& WXUNUSED(style)) override
     {
         wxFAIL_MSG("not implemented");
 
         return false;
     }
 
-    virtual bool SetDefaultStyle(const wxTextAttr& WXUNUSED(style)) override
+    bool SetDefaultStyle(const wxTextAttr& WXUNUSED(style)) override
     {
         wxFAIL_MSG("not implemented");
 
         return false;
     }
 
-    virtual long XYToPosition(long x, long y) const override
+    long XYToPosition(long x, long y) const override
     {
         long pos = PositionFromLine((int)y);
         if ( pos == -1 )
@@ -5399,7 +5399,7 @@ public:
         return pos;
     }
 
-    virtual bool PositionToXY(long pos, long *x, long *y) const override
+    bool PositionToXY(long pos, long *x, long *y) const override
     {
         int l = LineFromPosition((int)pos);
         if ( l == -1 )
@@ -5418,11 +5418,11 @@ public:
         return true;
     }
 
-    virtual void ShowPosition(long pos) override { GotoPos((int)pos); }
+    void ShowPosition(long pos) override { GotoPos((int)pos); }
 
     using wxWindow::HitTest;
 
-    virtual wxTextCtrlHitTestResult HitTest(const wxPoint& pt, long *pos) const override
+    wxTextCtrlHitTestResult HitTest(const wxPoint& pt, long *pos) const override
     {
         const long l = PositionFromPoint(pt);
         if ( l == -1 )
@@ -5455,13 +5455,13 @@ public:
     static wxVersionInfo GetLibraryVersionInfo();
 
 protected:
-    virtual void DoSetValue(const wxString& value, int flags) override;
-    virtual wxString DoGetValue() const override { return GetText(); }
-    virtual wxWindow *GetEditableWindow() override { return this; }
+    void DoSetValue(const wxString& value, int flags) override;
+    wxString DoGetValue() const override { return GetText(); }
+    wxWindow *GetEditableWindow() override { return this; }
 
 #ifndef SWIG
-    virtual bool DoLoadFile(const wxString& file, int fileType) override;
-    virtual bool DoSaveFile(const wxString& file, int fileType) override;
+    bool DoLoadFile(const wxString& file, int fileType) override;
+    bool DoSaveFile(const wxString& file, int fileType) override;
 
     // Event handlers
     void OnPaint(wxPaintEvent& evt);
@@ -5487,14 +5487,14 @@ protected:
     void OnIdle(wxIdleEvent& evt);
     void OnMouseCaptureLost(wxMouseCaptureLostEvent& evt);
 
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
 
     // Turn notifications from Scintilla into events
     void NotifyChange();
     void NotifyParent(SCNotification* scn);
 
 #ifdef __WXMSW__
-    virtual WXLRESULT MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam) override;
+    WXLRESULT MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam) override;
 #endif // __WXMSW__
 
 private:
@@ -5600,7 +5600,7 @@ public:
     bool GetControl() const;
     bool GetAlt() const;
 
-    virtual wxEvent* Clone() const override { return new wxStyledTextEvent(*this); }
+    wxEvent* Clone() const override { return new wxStyledTextEvent(*this); }
 
 #ifndef SWIG
 private:

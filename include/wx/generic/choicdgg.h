@@ -269,7 +269,7 @@ public:
     wxArrayInt GetSelections() const { return m_selections; }
 
     // implementation from now on
-    virtual bool TransferDataFromWindow() override;
+    bool TransferDataFromWindow() override;
 
 protected:
 #if wxUSE_CHECKLISTBOX

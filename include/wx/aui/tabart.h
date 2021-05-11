@@ -189,7 +189,7 @@ public:
                  const wxSize& requiredBmpSize) override;
 
     // Provide opportunity for subclasses to recalculate colours
-    virtual void UpdateColoursFromSystem() override;
+    void UpdateColoursFromSystem() override;
 
 protected:
 

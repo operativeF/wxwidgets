@@ -43,8 +43,8 @@ public:
         m_qtToolButton = NULL;
     }
 
-    virtual void SetLabel( const wxString &label ) override;
-    virtual void SetDropdownMenu(wxMenu* menu) override;
+    void SetLabel( const wxString &label ) override;
+    void SetDropdownMenu(wxMenu* menu) override;
 
     void SetIcon();
     void ClearToolTip();

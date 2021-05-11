@@ -284,12 +284,12 @@ public:
     void Open(wxFileOffset len) { Close(); m_len = len; }
     void Close() { m_pos = 0; m_lasterror = wxSTREAM_NO_ERROR; }
 
-    virtual char Peek() override { return wxInputStream::Peek(); }
-    virtual wxFileOffset GetLength() const override { return m_len; }
+    char Peek() override { return wxInputStream::Peek(); }
+    wxFileOffset GetLength() const override { return m_len; }
 
 protected:
-    virtual size_t OnSysRead(void *buffer, size_t size) override;
-    virtual wxFileOffset OnSysTell() const override { return m_pos; }
+    size_t OnSysRead(void *buffer, size_t size) override;
+    wxFileOffset OnSysTell() const override { return m_pos; }
 
 private:
     wxFileOffset m_pos;
@@ -336,8 +336,8 @@ public:
     }
 
 protected:
-    virtual size_t OnSysWrite(const void *buffer, size_t size) override;
-    virtual wxFileOffset OnSysTell() const override { return m_pos; }
+    size_t OnSysWrite(const void *buffer, size_t size) override;
+    wxFileOffset OnSysTell() const override { return m_pos; }
 
 private:
     wxFileOffset m_pos;
@@ -394,8 +394,8 @@ public:
     wxInputStream& Read(void *buffer, size_t size) override;
 
 protected:
-    virtual size_t OnSysRead(void *buffer, size_t size) override;
-    virtual wxFileOffset OnSysTell() const override { return m_pos; }
+    size_t OnSysRead(void *buffer, size_t size) override;
+    wxFileOffset OnSysTell() const override { return m_pos; }
 
 private:
     wxFileOffset m_pos;
@@ -489,8 +489,8 @@ public:
     wxInputStream& GetTee() const { return *m_tee; }
 
 protected:
-    virtual size_t OnSysRead(void *buffer, size_t size) override;
-    virtual wxFileOffset OnSysTell() const override { return m_pos; }
+    size_t OnSysRead(void *buffer, size_t size) override;
+    wxFileOffset OnSysTell() const override { return m_pos; }
 
 private:
     wxFileOffset m_pos;

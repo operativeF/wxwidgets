@@ -42,13 +42,13 @@ public:
             long style = wxCAPTION | wxRESIZE_BORDER,
             const wxString& name = wxASCII_STR(wxFrameNameStr));
 
-    virtual void SetTitle( const wxString &title ) override;
+    void SetTitle( const wxString &title ) override;
 
 protected:
     virtual void DoSetSizeHints( int minW, int minH,
                                  int maxW, int maxH,
                                  int incW, int incH ) override;
-    virtual void DoGetClientSize(int* width, int* height) const override;
+    void DoGetClientSize(int* width, int* height) const override;
 
  // implementation
 public:

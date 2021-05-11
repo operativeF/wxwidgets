@@ -38,15 +38,15 @@ public:
                 long style = wxTB_DEFAULT_STYLE | wxNO_BORDER,
                 const wxString& name = wxASCII_STR(wxToolBarNameStr));
 
-    virtual wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const override;
+    wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const override;
 
-    virtual void SetWindowStyleFlag( long style ) override;
+    void SetWindowStyleFlag( long style ) override;
 
-    virtual void SetToolShortHelp(int id, const wxString& helpString) override;
-    virtual void SetToolNormalBitmap(int id, const wxBitmap& bitmap) override;
-    virtual void SetToolDisabledBitmap(int id, const wxBitmap& bitmap) override;
+    void SetToolShortHelp(int id, const wxString& helpString) override;
+    void SetToolNormalBitmap(int id, const wxBitmap& bitmap) override;
+    void SetToolDisabledBitmap(int id, const wxBitmap& bitmap) override;
 
-    virtual bool Realize() override;
+    bool Realize() override;
 
     virtual wxToolBarToolBase *CreateTool(int toolid,
                                           const wxString& label,
@@ -66,11 +66,11 @@ public:
 
 protected:
     QActionGroup* GetActionGroup(size_t pos);
-    virtual bool DoInsertTool(size_t pos, wxToolBarToolBase *tool) override;
-    virtual bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool) override;
-    virtual void DoEnableTool(wxToolBarToolBase *tool, bool enable) override;
-    virtual void DoToggleTool(wxToolBarToolBase *tool, bool toggle) override;
-    virtual void DoSetToggle(wxToolBarToolBase *tool, bool toggle) override;
+    bool DoInsertTool(size_t pos, wxToolBarToolBase *tool) override;
+    bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool) override;
+    void DoEnableTool(wxToolBarToolBase *tool, bool enable) override;
+    void DoToggleTool(wxToolBarToolBase *tool, bool toggle) override;
+    void DoSetToggle(wxToolBarToolBase *tool, bool toggle) override;
 
 private:
     void Init();

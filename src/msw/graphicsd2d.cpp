@@ -391,7 +391,7 @@ public:
     = default;
 
     // IDWriteFontFileEnumerator methods
-    virtual wxSTDMETHODIMP MoveNext(BOOL* pHasCurrentFile) override
+    wxSTDMETHODIMP MoveNext(BOOL* pHasCurrentFile) override
     {
         HRESULT hr = S_OK;
 
@@ -411,7 +411,7 @@ public:
         return hr;
     }
 
-    virtual wxSTDMETHODIMP GetCurrentFontFile(IDWriteFontFile** ppFontFile) override
+    wxSTDMETHODIMP GetCurrentFontFile(IDWriteFontFile** ppFontFile) override
     {
         if ( m_currentFile )
         {
@@ -1150,7 +1150,7 @@ public:
     explicit wxD2DMatrixData(wxGraphicsRenderer* renderer);
     wxD2DMatrixData(wxGraphicsRenderer* renderer, const D2D1::Matrix3x2F& matrix);
 
-    virtual wxGraphicsObjectRefData* Clone() const override;
+    wxGraphicsObjectRefData* Clone() const override;
 
     void Concat(const wxGraphicsMatrixData* t) override;
 
@@ -5389,12 +5389,12 @@ public:
         AddDependency("wxOleInitModule");
     }
 
-    virtual bool OnInit() override
+    bool OnInit() override
     {
         return true;
     }
 
-    virtual void OnExit() override
+    void OnExit() override
     {
         if ( gs_WICImagingFactory )
         {

@@ -20,7 +20,7 @@ public:
 
 private:
     void valueChanged(int value);
-    virtual void stepBy(int steps) override; // see QAbstractSpinBox::stepBy()
+    void stepBy(int steps) override; // see QAbstractSpinBox::stepBy()
 };
 
 wxQtSpinButton::wxQtSpinButton( wxWindow *parent, wxSpinButton *handler )

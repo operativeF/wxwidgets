@@ -95,40 +95,40 @@ public:
                 const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
     // implement the listbox interface defined by wxListBoxBase
-    virtual void DoClear() override;
-    virtual void DoDeleteOneItem(unsigned int n) override;
+    void DoClear() override;
+    void DoDeleteOneItem(unsigned int n) override;
 
-    virtual unsigned int GetCount() const override;
-    virtual wxString GetString(unsigned int n) const override;
-    virtual void SetString(unsigned int n, const wxString& s) override;
-    virtual int FindString(const wxString& s, bool bCase = false) const override;
+    unsigned int GetCount() const override;
+    wxString GetString(unsigned int n) const override;
+    void SetString(unsigned int n, const wxString& s) override;
+    int FindString(const wxString& s, bool bCase = false) const override;
 
-    virtual bool IsSelected(int n) const override
+    bool IsSelected(int n) const override
         { return m_selections.Index(n) != wxNOT_FOUND; }
-    virtual int GetSelection() const override;
-    virtual int GetSelections(wxArrayInt& aSelections) const override;
+    int GetSelection() const override;
+    int GetSelections(wxArrayInt& aSelections) const override;
 
 protected:
-    virtual void DoSetSelection(int n, bool select) override;
+    void DoSetSelection(int n, bool select) override;
 
     virtual int DoInsertItems(const wxArrayStringsAdapter& items,
                               unsigned int pos,
                               void **clientData,
                               wxClientDataType type) override;
 
-    virtual int DoListHitTest(const wxPoint& point) const override;
+    int DoListHitTest(const wxPoint& point) const override;
 
     // universal wxComboBox implementation internally uses wxListBox
     friend class WXDLLIMPEXP_FWD_CORE wxComboBox;
 
-    virtual void DoSetFirstItem(int n) override;
+    void DoSetFirstItem(int n) override;
 
-    virtual void DoSetItemClientData(unsigned int n, void* clientData) override;
-    virtual void* DoGetItemClientData(unsigned int n) const override;
+    void DoSetItemClientData(unsigned int n, void* clientData) override;
+    void* DoGetItemClientData(unsigned int n) const override;
 
 public:
     // override some more base class methods
-    virtual bool SetFont(const wxFont& font) override;
+    bool SetFont(const wxFont& font) override;
 
     // the wxUniversal-specific methods
     // --------------------------------
@@ -156,7 +156,7 @@ public:
     void SelectAndNotify(int item);
 
     // ensure that the given item is visible by scrolling it into view
-    virtual void EnsureVisible(int n) override;
+    void EnsureVisible(int n) override;
 
     // find the first item [strictly] after the current one which starts with
     // the given string and make it the current one, return true if the current
@@ -184,23 +184,23 @@ public:
                                const wxString& strArg = wxEmptyString) override;
 
     static wxInputHandler *GetStdInputHandler(wxInputHandler *handlerDef);
-    virtual wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
+    wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
     {
         return GetStdInputHandler(handlerDef);
     }
 
     // idle processing
-    virtual void OnInternalIdle() override;
+    void OnInternalIdle() override;
 
 protected:
     // geometry
-    virtual wxSize DoGetBestClientSize() const override;
+    wxSize DoGetBestClientSize() const override;
     virtual void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
 
-    virtual void DoDraw(wxControlRenderer *renderer) override;
-    virtual wxBorder GetDefaultBorder() const override;
+    void DoDraw(wxControlRenderer *renderer) override;
+    wxBorder GetDefaultBorder() const override;
 
     // special hook for wxCheckListBox which allows it to update its internal
     // data when a new item is inserted into the listbox

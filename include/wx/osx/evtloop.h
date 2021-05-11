@@ -26,11 +26,11 @@ public:
 
 #ifdef __WXOSX_COCOA__
     // skip wxGUIEventLoop to avoid missing Enter/Exit notifications
-    virtual int Run() override { return wxCFEventLoop::Run(); }
+    int Run() override { return wxCFEventLoop::Run(); }
 #endif
 protected:
-    virtual void OSXDoRun() override;
-    virtual void OSXDoStop() override;
+    void OSXDoRun() override;
+    void OSXDoStop() override;
 
     // (in case) the modal window for this event loop
     wxNonOwnedWindow* m_modalWindow;

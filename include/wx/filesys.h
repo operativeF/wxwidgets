@@ -269,10 +269,10 @@ special characters :
 class WXDLLIMPEXP_BASE wxLocalFSHandler : public wxFileSystemHandler
 {
 public:
-    virtual bool CanOpen(const wxString& location) override;
-    virtual wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
-    virtual wxString FindFirst(const wxString& spec, int flags = 0) override;
-    virtual wxString FindNext() override;
+    bool CanOpen(const wxString& location) override;
+    wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
+    wxString FindFirst(const wxString& spec, int flags = 0) override;
+    wxString FindNext() override;
 
     // wxLocalFSHandler will prefix all filenames with 'root' before accessing
     // files on disk. This effectively makes 'root' the top-level directory

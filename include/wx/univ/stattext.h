@@ -50,16 +50,16 @@ public:
 
     // implementation only from now on
 
-    virtual void SetLabel(const wxString& label) override;
+    void SetLabel(const wxString& label) override;
 
-    virtual bool IsFocused() const override { return false; }
+    bool IsFocused() const override { return false; }
 
 protected:
     // draw the control
-    virtual void DoDraw(wxControlRenderer *renderer) override;
+    void DoDraw(wxControlRenderer *renderer) override;
 
-    virtual void WXSetVisibleLabel(const wxString& str) override;
-    virtual wxString WXGetVisibleLabel() const override;
+    void WXSetVisibleLabel(const wxString& str) override;
+    wxString WXGetVisibleLabel() const override;
 
     wxDECLARE_DYNAMIC_CLASS(wxStaticText);
 };

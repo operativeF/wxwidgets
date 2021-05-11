@@ -37,13 +37,13 @@ public:
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxControlNameStr));
 
-    virtual wxVisualAttributes GetDefaultAttributes() const override;
+    wxVisualAttributes GetDefaultAttributes() const override;
 #ifdef __WXGTK3__
-    virtual bool SetFont(const wxFont& font) override;
+    bool SetFont(const wxFont& font) override;
 #endif
 
 protected:
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
     void PostCreation(const wxSize& size);
 
     // sets the label to the given string and also sets it for the given widget

@@ -42,20 +42,20 @@ public:
 #if wxUSE_MENUS
     // get/set search button menu
     // --------------------------
-    virtual void SetMenu( wxMenu* menu ) override;
-    virtual wxMenu* GetMenu() override;
+    void SetMenu( wxMenu* menu ) override;
+    wxMenu* GetMenu() override;
 #endif  // wxUSE_MENUS
 
     // get/set search options
     // ----------------------
-    virtual void ShowSearchButton( bool show ) override;
-    virtual bool IsSearchButtonVisible() const override;
+    void ShowSearchButton( bool show ) override;
+    bool IsSearchButtonVisible() const override;
 
-    virtual void ShowCancelButton( bool show ) override;
-    virtual bool IsCancelButtonVisible() const override;
+    void ShowCancelButton( bool show ) override;
+    bool IsCancelButtonVisible() const override;
 
-    virtual void SetDescriptiveText(const wxString& text) override;
-    virtual wxString GetDescriptiveText() const override;
+    void SetDescriptiveText(const wxString& text) override;
+    wxString GetDescriptiveText() const override;
 
     virtual bool    HandleSearchFieldSearchHit() ;
     virtual bool    HandleSearchFieldCancelHit() ;
@@ -63,7 +63,7 @@ public:
     wxSearchWidgetImpl * GetSearchPeer() const;
 
 #if wxUSE_MENUS
-    virtual void OSXAfterMenuEvent() override;
+    void OSXAfterMenuEvent() override;
 #endif  // wxUSE_MENUS
 
 protected:

@@ -141,7 +141,7 @@ public:
                   wxAuiPaneInfo& pane);
 #endif
 
-    virtual void UpdateColoursFromSystem() override;
+    void UpdateColoursFromSystem() override;
 
 
 protected:

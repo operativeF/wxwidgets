@@ -23,19 +23,19 @@ public:
                         int align = wxDVR_DEFAULT_ALIGNMENT );
     virtual ~wxDataViewRenderer();
 
-    virtual wxDC *GetDC() override;
+    wxDC *GetDC() override;
 
-    virtual void SetAlignment( int align ) override;
-    virtual int GetAlignment() const override;
+    void SetAlignment( int align ) override;
+    int GetAlignment() const override;
 
-    virtual void EnableEllipsize(wxEllipsizeMode mode = wxELLIPSIZE_MIDDLE) override
+    void EnableEllipsize(wxEllipsizeMode mode = wxELLIPSIZE_MIDDLE) override
         { m_ellipsizeMode = mode; }
-    virtual wxEllipsizeMode GetEllipsizeMode() const override
+    wxEllipsizeMode GetEllipsizeMode() const override
         { return m_ellipsizeMode; }
 
-    virtual void SetMode( wxDataViewCellMode mode ) override
+    void SetMode( wxDataViewCellMode mode ) override
         { m_mode = mode; }
-    virtual wxDataViewCellMode GetMode() const override
+    wxDataViewCellMode GetMode() const override
         { return m_mode; }
 
     // implementation
@@ -55,7 +55,7 @@ public:
     void SetState(int state) { m_state = state; }
 
 protected:
-    virtual bool IsHighlighted() const override
+    bool IsHighlighted() const override
         { return m_state & wxDATAVIEW_CELL_SELECTED; }
 
 private:

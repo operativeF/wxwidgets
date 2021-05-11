@@ -23,19 +23,19 @@ class WXDLLIMPEXP_ADV wxDateTimePickerCtrl : public wxDateTimePickerCtrlBase
 {
 public:
     // set/get the date
-    virtual void SetValue(const wxDateTime& dt) override;
-    virtual wxDateTime GetValue() const override;
+    void SetValue(const wxDateTime& dt) override;
+    wxDateTime GetValue() const override;
 
-    virtual void SetNullText(const wxString& text) override;
+    void SetNullText(const wxString& text) override;
 
     // returns true if the platform should explicitly apply a theme border
-    virtual bool CanApplyThemeBorder() const override { return false; }
+    bool CanApplyThemeBorder() const override { return false; }
 
-    virtual bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
+    bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
 
 protected:
-    virtual wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
-    virtual wxSize DoGetBestSize() const override;
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxSize DoGetBestSize() const override;
 
     // Helper for the derived classes Create(): creates a native control with
     // the specified attributes.

@@ -24,27 +24,27 @@ class WXDLLIMPEXP_CORE wxTaskBarButtonImpl : public wxTaskBarButton
 public:
     virtual ~wxTaskBarButtonImpl();
 
-    virtual void SetProgressRange(int range) override;
-    virtual void SetProgressValue(int value) override;
-    virtual void PulseProgress() override;
-    virtual void Show(bool show = true) override;
-    virtual void Hide() override;
-    virtual void SetThumbnailTooltip(const wxString& tooltip) override;
-    virtual void SetProgressState(wxTaskBarButtonState state) override;
+    void SetProgressRange(int range) override;
+    void SetProgressValue(int value) override;
+    void PulseProgress() override;
+    void Show(bool show = true) override;
+    void Hide() override;
+    void SetThumbnailTooltip(const wxString& tooltip) override;
+    void SetProgressState(wxTaskBarButtonState state) override;
     virtual void SetOverlayIcon(const wxIcon& icon,
         const wxString& description = wxString()) override;
-    virtual void SetThumbnailClip(const wxRect& rect) override;
-    virtual void SetThumbnailContents(const wxWindow *child) override;
+    void SetThumbnailClip(const wxRect& rect) override;
+    void SetThumbnailContents(const wxWindow *child) override;
     virtual bool InsertThumbBarButton(size_t pos,
                                       wxThumbBarButton *button) override;
-    virtual bool AppendThumbBarButton(wxThumbBarButton *button) override;
-    virtual bool AppendSeparatorInThumbBar() override;
+    bool AppendThumbBarButton(wxThumbBarButton *button) override;
+    bool AppendSeparatorInThumbBar() override;
     virtual wxThumbBarButton* RemoveThumbBarButton(
         wxThumbBarButton *button) override;
-    virtual wxThumbBarButton* RemoveThumbBarButton(int id) override;
+    wxThumbBarButton* RemoveThumbBarButton(int id) override;
     wxThumbBarButton* GetThumbBarButtonByIndex(size_t index);
     bool InitOrUpdateThumbBarButtons();
-    virtual void Realize() override;
+    void Realize() override;
 
 private:
     // This ctor is only used by wxTaskBarButton::New()

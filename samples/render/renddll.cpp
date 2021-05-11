@@ -38,7 +38,7 @@ public:
         return dc.GetTextExtent("MyDllRenderer").x;
     }
 
-    virtual wxRendererVersion GetVersion() const override
+    wxRendererVersion GetVersion() const override
     {
         return wxRendererVersion(wxRendererVersion::Current_Version,
                                  wxRendererVersion::Current_Age);

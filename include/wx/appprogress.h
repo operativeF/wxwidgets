@@ -42,12 +42,12 @@ private:
         {
         }
 
-        virtual bool IsAvailable() const override { return false; }
+        bool IsAvailable() const override { return false; }
 
-        virtual void SetValue(int WXUNUSED(value)) override { }
-        virtual void SetRange(int WXUNUSED(range)) override { }
-        virtual void Pulse() override { }
-        virtual void Reset() override { }
+        void SetValue(int WXUNUSED(value)) override { }
+        void SetRange(int WXUNUSED(range)) override { }
+        void Pulse() override { }
+        void Reset() override { }
     };
 #endif
 

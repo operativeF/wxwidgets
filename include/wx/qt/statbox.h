@@ -29,12 +29,12 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxStaticBoxNameStr));
 
-    virtual void GetBordersForSizer(int *borderTop, int *borderOther) const override;
+    void GetBordersForSizer(int *borderTop, int *borderOther) const override;
 
-    virtual QWidget *GetHandle() const override;
+    QWidget *GetHandle() const override;
 
-    virtual void SetLabel(const wxString& label) override;
-    virtual wxString GetLabel() const override;
+    void SetLabel(const wxString& label) override;
+    wxString GetLabel() const override;
 
 protected:
 

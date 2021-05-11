@@ -29,9 +29,9 @@ public:
     // implementation only
     // -------------------
 
-    virtual bool MacRender() override;
+    bool MacRender() override;
 
-    virtual wxDC* GetDC() override; // creates a device context and keeps it
+    wxDC* GetDC() override; // creates a device context and keeps it
     void SetDC(wxDC* newDCPtr); // this method takes ownership of the pointer
 
 private:
@@ -58,7 +58,7 @@ protected:
     {
     }
 
-    virtual void SetEnabled(bool enabled) override
+    void SetEnabled(bool enabled) override
     {
         wxDataViewRenderer::SetEnabled(enabled &&
                                         GetMode() != wxDATAVIEW_CELL_INERT);
@@ -82,7 +82,7 @@ public:
     void EnableMarkup(bool enable = true);
 #endif // wxUSE_MARKUP && Cocoa
 
-    virtual bool MacRender() override;
+    bool MacRender() override;
 
     virtual void OSXOnCellChanged(NSObject *value,
                                   const wxDataViewItem& item,
@@ -110,7 +110,7 @@ public:
                              wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                              int align = wxDVR_DEFAULT_ALIGNMENT);
 
-    virtual bool MacRender() override;
+    bool MacRender() override;
 
 private:
     wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewBitmapRenderer);
@@ -128,7 +128,7 @@ public:
                              wxDataViewCellMode mode = wxDATAVIEW_CELL_EDITABLE,
                              int alignment = wxDVR_DEFAULT_ALIGNMENT );
 
-    virtual bool MacRender() override;
+    bool MacRender() override;
 
     wxString GetChoice(size_t index) const { return m_choices[index]; }
     const wxArrayString& GetChoices() const { return m_choices; }
@@ -154,8 +154,8 @@ public:
                                     wxDataViewCellMode mode = wxDATAVIEW_CELL_EDITABLE,
                                     int alignment = wxDVR_DEFAULT_ALIGNMENT);
 
-    virtual bool SetValue(const wxVariant& value) override;
-    virtual bool GetValue(wxVariant& value) const override;
+    bool SetValue(const wxVariant& value) override;
+    bool GetValue(wxVariant& value) const override;
 
     virtual void OSXOnCellChanged(NSObject *value,
                                   const wxDataViewItem& item,
@@ -174,7 +174,7 @@ public:
                                wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                                int align = wxDVR_DEFAULT_ALIGNMENT);
 
-    virtual bool MacRender() override;
+    bool MacRender() override;
 
     virtual void OSXOnCellChanged(NSObject *value,
                                   const wxDataViewItem& item,
@@ -206,7 +206,7 @@ public:
     // this to happen.
     void Allow3rdStateForUser(bool allow = true);
 
-    virtual bool MacRender() override;
+    bool MacRender() override;
 
     virtual void OSXOnCellChanged(NSObject *value,
                                   const wxDataViewItem& item,
@@ -234,7 +234,7 @@ public:
 
     void ShowAsRadio();
 
-    virtual bool MacRender() override;
+    bool MacRender() override;
 
     virtual void OSXOnCellChanged(NSObject *value,
                                   const wxDataViewItem& item,
@@ -260,7 +260,7 @@ public:
                                wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                                int align = wxDVR_DEFAULT_ALIGNMENT);
 
-    virtual bool MacRender() override;
+    bool MacRender() override;
 
     virtual void OSXOnCellChanged(NSObject *value,
                                   const wxDataViewItem& item,
@@ -283,7 +283,7 @@ public:
                            wxDataViewCellMode mode = wxDATAVIEW_CELL_ACTIVATABLE,
                            int align = wxDVR_DEFAULT_ALIGNMENT);
 
-    virtual bool MacRender() override;
+    bool MacRender() override;
 
     virtual void OSXOnCellChanged(NSObject *value,
                                   const wxDataViewItem& item,

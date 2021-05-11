@@ -7858,7 +7858,7 @@ bool wxWindowMSW::HandleHotKey(WXWPARAM wParam, WXLPARAM lParam)
 class wxIdleWakeUpModule : public wxModule
 {
 public:
-    virtual bool OnInit() override
+    bool OnInit() override
     {
         ms_hMsgHookProc = ::SetWindowsHookEx
                             (
@@ -7878,7 +7878,7 @@ public:
         return true;
     }
 
-    virtual void OnExit() override
+    void OnExit() override
     {
         ::UnhookWindowsHookEx(wxIdleWakeUpModule::ms_hMsgHookProc);
     }

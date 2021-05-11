@@ -75,8 +75,8 @@ public:
     wxTextValidator* GetTextValidator() { return (wxTextValidator*)m_textctrl->GetValidator(); }
 #endif // wxUSE_VALIDATORS
 
-    virtual bool TransferDataToWindow() override;
-    virtual bool TransferDataFromWindow() override;
+    bool TransferDataToWindow() override;
+    bool TransferDataFromWindow() override;
 
     // implementation only
     void OnOK(wxCommandEvent& event);

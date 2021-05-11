@@ -67,11 +67,11 @@ class DatePickerWidgetsPage : public WidgetsPage
 public:
     DatePickerWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_datePicker; }
-    virtual void RecreateWidget() override { CreateDatePicker(); }
+    wxWindow *GetWidget() const override { return m_datePicker; }
+    void RecreateWidget() override { CreateDatePicker(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 protected:
     // event handlers

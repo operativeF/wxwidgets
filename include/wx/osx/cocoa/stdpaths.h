@@ -20,18 +20,18 @@ public:
     virtual ~wxStandardPaths();
 
     // implement base class pure virtuals
-    virtual wxString GetExecutablePath() const override;
-    virtual wxString GetConfigDir() const override;
-    virtual wxString GetUserConfigDir() const override;
-    virtual wxString GetDataDir() const override;
-    virtual wxString GetLocalDataDir() const override;
-    virtual wxString GetUserDataDir() const override;
-    virtual wxString GetPluginsDir() const override;
-    virtual wxString GetResourcesDir() const override;
+    wxString GetExecutablePath() const override;
+    wxString GetConfigDir() const override;
+    wxString GetUserConfigDir() const override;
+    wxString GetDataDir() const override;
+    wxString GetLocalDataDir() const override;
+    wxString GetUserDataDir() const override;
+    wxString GetPluginsDir() const override;
+    wxString GetResourcesDir() const override;
     virtual wxString
     GetLocalizedResourcesDir(const wxString& lang,
                              ResourceCat category = ResourceCat_None) const override;
-    virtual wxString GetUserDir(Dir userDir) const override;
+    wxString GetUserDir(Dir userDir) const override;
     virtual wxString MakeConfigFileName(const wxString& basename,
                                         ConfigFileConv conv = ConfigFileConv_Ext
                                         ) const override;

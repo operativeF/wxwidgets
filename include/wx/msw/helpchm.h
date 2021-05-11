@@ -21,20 +21,20 @@ public:
     wxCHMHelpController(wxWindow* parentWindow = NULL): wxHelpControllerBase(parentWindow) { }
 
     // Must call this to set the filename
-    virtual bool Initialize(const wxString& file) override;
-    virtual bool Initialize(const wxString& file, int WXUNUSED(server) ) override { return Initialize( file ); }
+    bool Initialize(const wxString& file) override;
+    bool Initialize(const wxString& file, int WXUNUSED(server) ) override { return Initialize( file ); }
 
     // If file is "", reloads file given in Initialize
-    virtual bool LoadFile(const wxString& file = wxEmptyString) override;
-    virtual bool DisplayContents() override;
-    virtual bool DisplaySection(int sectionNo) override;
-    virtual bool DisplaySection(const wxString& section) override;
-    virtual bool DisplayBlock(long blockNo) override;
-    virtual bool DisplayContextPopup(int contextId) override;
-    virtual bool DisplayTextPopup(const wxString& text, const wxPoint& pos) override;
+    bool LoadFile(const wxString& file = wxEmptyString) override;
+    bool DisplayContents() override;
+    bool DisplaySection(int sectionNo) override;
+    bool DisplaySection(const wxString& section) override;
+    bool DisplayBlock(long blockNo) override;
+    bool DisplayContextPopup(int contextId) override;
+    bool DisplayTextPopup(const wxString& text, const wxPoint& pos) override;
     virtual bool KeywordSearch(const wxString& k,
                                wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override;
-    virtual bool Quit() override;
+    bool Quit() override;
 
     wxString GetHelpFile() const { return m_helpFile; }
 

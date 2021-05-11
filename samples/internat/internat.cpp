@@ -48,9 +48,9 @@ class MyApp: public wxApp
 public:
     MyApp() { m_lang = wxLANGUAGE_UNKNOWN; }
 
-    virtual void OnInitCmdLine(wxCmdLineParser& parser) override;
-    virtual bool OnCmdLineParsed(wxCmdLineParser& parser) override;
-    virtual bool OnInit() override;
+    void OnInitCmdLine(wxCmdLineParser& parser) override;
+    bool OnCmdLineParsed(wxCmdLineParser& parser) override;
+    bool OnInit() override;
 
 protected:
     wxLanguage m_lang;  // language specified by user

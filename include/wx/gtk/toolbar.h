@@ -41,16 +41,16 @@ public:
 
     virtual ~wxToolBar();
 
-    virtual wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const override;
+    wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const override;
 
-    virtual void SetToolShortHelp(int id, const wxString& helpString) override;
+    void SetToolShortHelp(int id, const wxString& helpString) override;
 
-    virtual void SetWindowStyleFlag( long style ) override;
+    void SetWindowStyleFlag( long style ) override;
 
-    virtual void SetToolNormalBitmap(int id, const wxBitmap& bitmap) override;
-    virtual void SetToolDisabledBitmap(int id, const wxBitmap& bitmap) override;
+    void SetToolNormalBitmap(int id, const wxBitmap& bitmap) override;
+    void SetToolDisabledBitmap(int id, const wxBitmap& bitmap) override;
 
-    virtual bool Realize() override;
+    bool Realize() override;
 
     static wxVisualAttributes
     GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
@@ -73,24 +73,24 @@ public:
 
 protected:
     // choose the default border for this window
-    virtual wxBorder GetDefaultBorder() const override { return wxBORDER_DEFAULT; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_DEFAULT; }
 
-    virtual wxSize DoGetBestSize() const override;
-    virtual GdkWindow *GTKGetWindow(wxArrayGdkWindows& windows) const override;
+    wxSize DoGetBestSize() const override;
+    GdkWindow *GTKGetWindow(wxArrayGdkWindows& windows) const override;
 
     // implement base class pure virtuals
-    virtual bool DoInsertTool(size_t pos, wxToolBarToolBase *tool) override;
-    virtual bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool) override;
+    bool DoInsertTool(size_t pos, wxToolBarToolBase *tool) override;
+    bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool) override;
 
-    virtual void DoEnableTool(wxToolBarToolBase *tool, bool enable) override;
-    virtual void DoToggleTool(wxToolBarToolBase *tool, bool toggle) override;
-    virtual void DoSetToggle(wxToolBarToolBase *tool, bool toggle) override;
+    void DoEnableTool(wxToolBarToolBase *tool, bool enable) override;
+    void DoToggleTool(wxToolBarToolBase *tool, bool toggle) override;
+    void DoSetToggle(wxToolBarToolBase *tool, bool toggle) override;
 
 private:
     void Init();
     void GtkSetStyle();
     GSList* GetRadioGroup(size_t pos);
-    virtual void AddChildGTK(wxWindowGTK* child) override;
+    void AddChildGTK(wxWindowGTK* child) override;
 
     GtkToolbar* m_toolbar;
     GtkTooltips* m_tooltips;

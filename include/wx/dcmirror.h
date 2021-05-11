@@ -33,39 +33,39 @@ public:
     }
 
     // wxDCBase operations
-    virtual void Clear() override { m_dc.Clear(); }
-    virtual void SetFont(const wxFont& font) override { m_dc.SetFont(font); }
-    virtual void SetPen(const wxPen& pen) override { m_dc.SetPen(pen); }
-    virtual void SetBrush(const wxBrush& brush) override { m_dc.SetBrush(brush); }
-    virtual void SetBackground(const wxBrush& brush) override
+    void Clear() override { m_dc.Clear(); }
+    void SetFont(const wxFont& font) override { m_dc.SetFont(font); }
+    void SetPen(const wxPen& pen) override { m_dc.SetPen(pen); }
+    void SetBrush(const wxBrush& brush) override { m_dc.SetBrush(brush); }
+    void SetBackground(const wxBrush& brush) override
         { m_dc.SetBackground(brush); }
-    virtual void SetBackgroundMode(int mode) override { m_dc.SetBackgroundMode(mode); }
+    void SetBackgroundMode(int mode) override { m_dc.SetBackgroundMode(mode); }
 #if wxUSE_PALETTE
-    virtual void SetPalette(const wxPalette& palette) override
+    void SetPalette(const wxPalette& palette) override
         { m_dc.SetPalette(palette); }
 #endif // wxUSE_PALETTE
-    virtual void DestroyClippingRegion() override { m_dc.DestroyClippingRegion(); }
-    virtual wxCoord GetCharHeight() const override { return m_dc.GetCharHeight(); }
-    virtual wxCoord GetCharWidth() const override { return m_dc.GetCharWidth(); }
-    virtual bool CanDrawBitmap() const override { return m_dc.CanDrawBitmap(); }
-    virtual bool CanGetTextExtent() const override { return m_dc.CanGetTextExtent(); }
-    virtual int GetDepth() const override { return m_dc.GetDepth(); }
-    virtual wxSize GetPPI() const override { return m_dc.GetPPI(); }
-    virtual bool IsOk() const override { return m_dc.IsOk(); }
-    virtual void SetMapMode(wxMappingMode mode) override { m_dc.SetMapMode(mode); }
-    virtual void SetUserScale(double x, double y) override
+    void DestroyClippingRegion() override { m_dc.DestroyClippingRegion(); }
+    wxCoord GetCharHeight() const override { return m_dc.GetCharHeight(); }
+    wxCoord GetCharWidth() const override { return m_dc.GetCharWidth(); }
+    bool CanDrawBitmap() const override { return m_dc.CanDrawBitmap(); }
+    bool CanGetTextExtent() const override { return m_dc.CanGetTextExtent(); }
+    int GetDepth() const override { return m_dc.GetDepth(); }
+    wxSize GetPPI() const override { return m_dc.GetPPI(); }
+    bool IsOk() const override { return m_dc.IsOk(); }
+    void SetMapMode(wxMappingMode mode) override { m_dc.SetMapMode(mode); }
+    void SetUserScale(double x, double y) override
         { m_dc.SetUserScale(GetX(x, y), GetY(x, y)); }
-    virtual void SetLogicalOrigin(wxCoord x, wxCoord y) override
+    void SetLogicalOrigin(wxCoord x, wxCoord y) override
         { m_dc.SetLogicalOrigin(GetX(x, y), GetY(x, y)); }
-    virtual void SetDeviceOrigin(wxCoord x, wxCoord y) override
+    void SetDeviceOrigin(wxCoord x, wxCoord y) override
         { m_dc.SetDeviceOrigin(GetX(x, y), GetY(x, y)); }
-    virtual void SetAxisOrientation(bool xLeftRight, bool yBottomUp) override
+    void SetAxisOrientation(bool xLeftRight, bool yBottomUp) override
         { m_dc.SetAxisOrientation(GetX(xLeftRight, yBottomUp),
                                   GetY(xLeftRight, yBottomUp)); }
-    virtual void SetLogicalFunction(wxRasterOperationMode function) override
+    void SetLogicalFunction(wxRasterOperationMode function) override
         { m_dc.SetLogicalFunction(function); }
 
-    virtual void* GetHandle() const override
+    void* GetHandle() const override
         { return m_dc.GetHandle(); }
 
 protected:
@@ -105,18 +105,18 @@ protected:
         return m_dc.DoFloodFill(GetX(x, y), GetY(x, y), col, style);
     }
 
-    virtual bool DoGetPixel(wxCoord x, wxCoord y, wxColour *col) const override
+    bool DoGetPixel(wxCoord x, wxCoord y, wxColour *col) const override
     {
         return m_dc.DoGetPixel(GetX(x, y), GetY(x, y), col);
     }
 
 
-    virtual void DoDrawPoint(wxCoord x, wxCoord y) override
+    void DoDrawPoint(wxCoord x, wxCoord y) override
     {
         m_dc.DoDrawPoint(GetX(x, y), GetY(x, y));
     }
 
-    virtual void DoDrawLine(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2) override
+    void DoDrawLine(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2) override
     {
         m_dc.DoDrawLine(GetX(x1, y1), GetY(x1, y1), GetX(x2, y2), GetY(x2, y2));
     }
@@ -149,7 +149,7 @@ protected:
                                sa, ea);
     }
 
-    virtual void DoDrawRectangle(wxCoord x, wxCoord y, wxCoord w, wxCoord h) override
+    void DoDrawRectangle(wxCoord x, wxCoord y, wxCoord w, wxCoord h) override
     {
         m_dc.DoDrawRectangle(GetX(x, y), GetY(x, y), GetX(w, h), GetY(w, h));
     }
@@ -163,17 +163,17 @@ protected:
                                     radius);
     }
 
-    virtual void DoDrawEllipse(wxCoord x, wxCoord y, wxCoord w, wxCoord h) override
+    void DoDrawEllipse(wxCoord x, wxCoord y, wxCoord w, wxCoord h) override
     {
         m_dc.DoDrawEllipse(GetX(x, y), GetY(x, y), GetX(w, h), GetY(w, h));
     }
 
-    virtual void DoCrossHair(wxCoord x, wxCoord y) override
+    void DoCrossHair(wxCoord x, wxCoord y) override
     {
         m_dc.DoCrossHair(GetX(x, y), GetY(x, y));
     }
 
-    virtual void DoDrawIcon(const wxIcon& icon, wxCoord x, wxCoord y) override
+    void DoDrawIcon(const wxIcon& icon, wxCoord x, wxCoord y) override
     {
         m_dc.DoDrawIcon(icon, GetX(x, y), GetY(x, y));
     }
@@ -184,7 +184,7 @@ protected:
         m_dc.DoDrawBitmap(bmp, GetX(x, y), GetY(x, y), useMask);
     }
 
-    virtual void DoDrawText(const wxString& text, wxCoord x, wxCoord y) override
+    void DoDrawText(const wxString& text, wxCoord x, wxCoord y) override
     {
         // this is never mirrored
         m_dc.DoDrawText(text, x, y);
@@ -211,12 +211,12 @@ protected:
                            GetX(xsrcMask, ysrcMask), GetX(xsrcMask, ysrcMask));
     }
 
-    virtual void DoGetSize(int *w, int *h) const override
+    void DoGetSize(int *w, int *h) const override
     {
         m_dc.DoGetSize(GetX(w, h), GetY(w, h));
     }
 
-    virtual void DoGetSizeMM(int *w, int *h) const override
+    void DoGetSizeMM(int *w, int *h) const override
     {
         m_dc.DoGetSizeMM(GetX(w, h), GetY(w, h));
     }
@@ -245,7 +245,7 @@ protected:
         delete[] points_alloc;
     }
 
-    virtual void DoSetDeviceClippingRegion(const wxRegion& WXUNUSED(region)) override
+    void DoSetDeviceClippingRegion(const wxRegion& WXUNUSED(region)) override
     {
         wxFAIL_MSG( wxT("not implemented") );
     }

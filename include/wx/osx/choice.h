@@ -66,28 +66,28 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxChoiceNameStr));
 
-    virtual unsigned int GetCount() const override;
-    virtual int GetSelection() const override;
-    virtual void SetSelection(int n) override;
+    unsigned int GetCount() const override;
+    int GetSelection() const override;
+    void SetSelection(int n) override;
 
-    virtual int FindString(const wxString& s, bool bCase = false) const override;
-    virtual wxString GetString(unsigned int n) const override;
-    virtual void SetString(unsigned int pos, const wxString& s) override;
+    int FindString(const wxString& s, bool bCase = false) const override;
+    wxString GetString(unsigned int n) const override;
+    void SetString(unsigned int pos, const wxString& s) override;
     // osx specific event handling common for all osx-ports
 
-    virtual bool OSXHandleClicked(double timestampsec) override;
+    bool OSXHandleClicked(double timestampsec) override;
 
 protected:
-    virtual void DoDeleteOneItem(unsigned int n) override;
-    virtual void DoClear() override;
+    void DoDeleteOneItem(unsigned int n) override;
+    void DoClear() override;
 
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
     virtual int DoInsertItems(const wxArrayStringsAdapter& items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
 
-    virtual void DoSetItemClientData(unsigned int n, void* clientData) override;
-    virtual void* DoGetItemClientData(unsigned int n) const override;
+    void DoSetItemClientData(unsigned int n, void* clientData) override;
+    void* DoGetItemClientData(unsigned int n) const override;
 
     wxArrayString m_strings;
     wxChoiceDataArray m_datas ;

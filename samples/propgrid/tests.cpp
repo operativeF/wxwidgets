@@ -60,7 +60,7 @@ public:
     {
     }
 
-    virtual wxColour GetColour( int index ) const override
+    wxColour GetColour( int index ) const override
     {
         switch (index)
         {
@@ -94,7 +94,7 @@ public:
         return wxColourProperty::ColourToString(col, index, argFlags);
     }
 
-    virtual int GetCustomColourIndex() const override
+    int GetCustomColourIndex() const override
     {
         return m_choices.GetCount()-2;
     }

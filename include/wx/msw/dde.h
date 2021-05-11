@@ -51,12 +51,12 @@ public:
   virtual const void *Request(const wxString& item,
                               size_t *size = NULL,
                               wxIPCFormat format = wxIPC_TEXT) override;
-  virtual bool StartAdvise(const wxString& item) override;
-  virtual bool StopAdvise(const wxString& item) override;
-  virtual bool Disconnect() override;
+  bool StartAdvise(const wxString& item) override;
+  bool StopAdvise(const wxString& item) override;
+  bool Disconnect() override;
 
 protected:
-  virtual bool DoExecute(const void *data, size_t size, wxIPCFormat format) override;
+  bool DoExecute(const void *data, size_t size, wxIPCFormat format) override;
   virtual bool DoPoke(const wxString& item, const void *data, size_t size,
                       wxIPCFormat format) override;
   virtual bool DoAdvise(const wxString& item, const void *data, size_t size,
@@ -82,7 +82,7 @@ public:
     bool Create(const wxString& server_name) override;
     virtual ~wxDDEServer();
 
-    virtual wxConnectionBase *OnAcceptConnection(const wxString& topic) override;
+    wxConnectionBase *OnAcceptConnection(const wxString& topic) override;
 
     // Find/delete wxDDEConnection corresponding to the HCONV
     wxDDEConnection *FindConnection(WXHCONV conv);
@@ -115,7 +115,7 @@ public:
                                              const wxString& topic) override;
 
     // Tailor this to return own connection.
-    virtual wxConnectionBase *OnMakeConnection() override;
+    wxConnectionBase *OnMakeConnection() override;
 
     // Find/delete wxDDEConnection corresponding to the HCONV
     wxDDEConnection *FindConnection(WXHCONV conv);

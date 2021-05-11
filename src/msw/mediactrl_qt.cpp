@@ -355,31 +355,31 @@ public:
                                      const wxValidator& validator,
                                      const wxString& name) override;
 
-    virtual bool Play() override;
-    virtual bool Pause() override;
-    virtual bool Stop() override;
+    bool Play() override;
+    bool Pause() override;
+    bool Stop() override;
 
     virtual bool Load(const wxURI& location,
                       const wxURI& proxy) override
     { return wxMediaBackend::Load(location, proxy); }
 
-    virtual bool Load(const wxString& fileName) override;
-    virtual bool Load(const wxURI& location) override;
+    bool Load(const wxString& fileName) override;
+    bool Load(const wxURI& location) override;
 
-    virtual wxMediaState GetState() override;
+    wxMediaState GetState() override;
 
-    virtual bool SetPosition(wxLongLong where) override;
-    virtual wxLongLong GetPosition() override;
-    virtual wxLongLong GetDuration() override;
+    bool SetPosition(wxLongLong where) override;
+    wxLongLong GetPosition() override;
+    wxLongLong GetDuration() override;
 
-    virtual void Move(int x, int y, int w, int h) override;
+    void Move(int x, int y, int w, int h) override;
     wxSize GetVideoSize() const override;
 
-    virtual double GetPlaybackRate() override;
-    virtual bool SetPlaybackRate(double dRate) override;
+    double GetPlaybackRate() override;
+    bool SetPlaybackRate(double dRate) override;
 
-    virtual double GetVolume() override;
-    virtual bool SetVolume(double) override;
+    double GetVolume() override;
+    bool SetVolume(double) override;
 
     void Cleanup();
     void FinishLoad();
@@ -392,7 +392,7 @@ public:
 
     static LRESULT CALLBACK QTWndProc(HWND, UINT, WPARAM, LPARAM);
 
-    virtual bool ShowPlayerControls(wxMediaCtrlPlayerControls flags) override;
+    bool ShowPlayerControls(wxMediaCtrlPlayerControls flags) override;
 
     wxSize m_bestSize;              // Original movie size
     Movie m_movie;    // QT Movie handle/instance

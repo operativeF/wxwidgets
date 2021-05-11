@@ -79,7 +79,7 @@ void wxGenericDragImage::Init()
 // Operations
 ////////////////////////////////////////////////////////////////////////////
 
-// Create a drag image with a virtual image (need to override DoDrawImage, GetImageRect)
+// Create a drag image with a image (need to override DoDrawImage, GetImageRect)
 bool wxGenericDragImage::Create(const wxCursor& cursor)
 {
     m_cursor = cursor;

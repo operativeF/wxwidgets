@@ -27,10 +27,10 @@ public:
                 long style = wxSTB_DEFAULT_STYLE,
                 const wxString& name = wxASCII_STR(wxStatusBarNameStr));
 
-    virtual bool GetFieldRect(int i, wxRect& rect) const override;
-    virtual void SetMinHeight(int height) override;
-    virtual int GetBorderX() const override;
-    virtual int GetBorderY() const override;
+    bool GetFieldRect(int i, wxRect& rect) const override;
+    void SetMinHeight(int height) override;
+    int GetBorderX() const override;
+    int GetBorderY() const override;
     virtual void Refresh( bool eraseBackground = true,
                           const wxRect *rect = (const wxRect *) NULL ) override;
 
@@ -38,7 +38,7 @@ public:
     QWidget *GetHandle() const override;
 
 protected:
-    virtual void DoUpdateStatusText(int number) override;
+    void DoUpdateStatusText(int number) override;
 
 private:
     void Init();

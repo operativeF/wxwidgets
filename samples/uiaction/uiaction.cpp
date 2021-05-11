@@ -62,7 +62,7 @@ enum
 class MyApp : public wxApp
 {
 public:
-    virtual bool OnInit() override;
+    bool OnInit() override;
 };
 
 #if wxUSE_UIACTIONSIMULATOR

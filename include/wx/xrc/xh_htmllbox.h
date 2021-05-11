@@ -18,8 +18,8 @@ class WXDLLIMPEXP_XRC wxSimpleHtmlListBoxXmlHandler : public wxXmlResourceHandle
 {
 public:
     wxSimpleHtmlListBoxXmlHandler();
-    virtual wxObject *DoCreateResource() override;
-    virtual bool CanHandle(wxXmlNode *node) override;
+    wxObject *DoCreateResource() override;
+    bool CanHandle(wxXmlNode *node) override;
 
 private:
     bool m_insideBox;

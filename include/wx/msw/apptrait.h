@@ -18,19 +18,19 @@
 class WXDLLIMPEXP_BASE wxConsoleAppTraits : public wxConsoleAppTraitsBase
 {
 public:
-    virtual wxEventLoopBase *CreateEventLoop() override;
-    virtual void *BeforeChildWaitLoop() override;
-    virtual void AfterChildWaitLoop(void *data) override;
+    wxEventLoopBase *CreateEventLoop() override;
+    void *BeforeChildWaitLoop() override;
+    void AfterChildWaitLoop(void *data) override;
 #if wxUSE_TIMER
-    virtual wxTimerImpl *CreateTimerImpl(wxTimer *timer) override;
+    wxTimerImpl *CreateTimerImpl(wxTimer *timer) override;
 #endif // wxUSE_TIMER
 #if wxUSE_THREADS
-    virtual bool DoMessageFromThreadWait() override;
-    virtual WXDWORD WaitForThread(WXHANDLE hThread, int flags) override;
+    bool DoMessageFromThreadWait() override;
+    WXDWORD WaitForThread(WXHANDLE hThread, int flags) override;
 #endif // wxUSE_THREADS
-    virtual bool CanUseStderr() override { return true; }
-    virtual bool WriteToStderr(const wxString& text) override;
-    virtual WXHWND GetMainHWND() const override { return NULL; }
+    bool CanUseStderr() override { return true; }
+    bool WriteToStderr(const wxString& text) override;
+    WXHWND GetMainHWND() const override { return NULL; }
 };
 
 #if wxUSE_GUI
@@ -40,23 +40,23 @@ public:
 class WXDLLIMPEXP_CORE wxGUIAppTraits : public wxGUIAppTraitsBase
 {
 public:
-    virtual wxEventLoopBase *CreateEventLoop() override;
-    virtual void *BeforeChildWaitLoop() override;
-    virtual void AfterChildWaitLoop(void *data) override;
+    wxEventLoopBase *CreateEventLoop() override;
+    void *BeforeChildWaitLoop() override;
+    void AfterChildWaitLoop(void *data) override;
 #if wxUSE_TIMER
-    virtual wxTimerImpl *CreateTimerImpl(wxTimer *timer) override;
+    wxTimerImpl *CreateTimerImpl(wxTimer *timer) override;
 #endif // wxUSE_TIMER
 #if wxUSE_THREADS
-    virtual bool DoMessageFromThreadWait() override;
-    virtual WXDWORD WaitForThread(WXHANDLE hThread, int flags) override;
+    bool DoMessageFromThreadWait() override;
+    WXDWORD WaitForThread(WXHANDLE hThread, int flags) override;
 #endif // wxUSE_THREADS
     wxPortId GetToolkitVersion(int *majVer = NULL,
                                int *minVer = NULL,
                                int *microVer = NULL) const override;
 
-    virtual bool CanUseStderr() override;
-    virtual bool WriteToStderr(const wxString& text) override;
-    virtual WXHWND GetMainHWND() const override;
+    bool CanUseStderr() override;
+    bool WriteToStderr(const wxString& text) override;
+    WXHWND GetMainHWND() const override;
 };
 
 #elif defined(__WXGTK__)
@@ -87,7 +87,7 @@ public:
 
     virtual bool CanUseStderr() { return false; }
     virtual bool WriteToStderr(const wxString& WXUNUSED(text)) { return false; }
-    virtual WXHWND GetMainHWND() const override { return NULL; }
+    WXHWND GetMainHWND() const override { return NULL; }
 };
 
 #elif defined(__WXQT__)
@@ -113,7 +113,7 @@ public:
 
     virtual bool CanUseStderr() { return false; }
     virtual bool WriteToStderr(const wxString&) { return false; }
-    virtual WXHWND GetMainHWND() const override { return NULL; }
+    WXHWND GetMainHWND() const override { return NULL; }
 };
 
 #endif

@@ -139,12 +139,12 @@ public:
     wxToolTipModule()
     = default;
 
-    virtual bool OnInit() override
+    bool OnInit() override
     {
         return true;
     }
 
-    virtual void OnExit() override
+    void OnExit() override
     {
         wxToolTip::DeleteToolTipCtrl();
     }

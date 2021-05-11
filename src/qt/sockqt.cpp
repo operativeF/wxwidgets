@@ -54,7 +54,7 @@ public:
 class QtFDIOManager : public wxFDIOManager
 {
 public:
-    virtual int AddInput(wxFDIOHandler *handler, int fd, Direction d) override
+    int AddInput(wxFDIOHandler *handler, int fd, Direction d) override
     {
         QSocketNotifier::Type type;
         switch (d)

@@ -25,18 +25,18 @@ public:
     wxPrinterDCImpl( wxPrinterDC *owner, const wxPrintData& printdata );
     virtual ~wxPrinterDCImpl();
 
-    virtual bool StartDoc( const wxString& WXUNUSED(message) ) override;
-    virtual void EndDoc() override;
-    virtual void StartPage() override;
-    virtual void EndPage() override;
+    bool StartDoc( const wxString& WXUNUSED(message) ) override;
+    void EndDoc() override;
+    void StartPage() override;
+    void EndPage() override;
 
     wxRect GetPaperRect() const override;
 
     wxPrintData& GetPrintData() { return m_printData; }
-    virtual wxSize GetPPI() const override;
+    wxSize GetPPI() const override;
 
 protected:
-    virtual void DoGetSize( int *width, int *height ) const override;
+    void DoGetSize( int *width, int *height ) const override;
 
     wxPrintData        m_printData ;
     wxNativePrinterDC* m_nativePrinterDC ;

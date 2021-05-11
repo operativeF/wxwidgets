@@ -23,14 +23,14 @@ public:
     wxAnimationGenericImpl() : m_decoder(NULL) {}
     virtual ~wxAnimationGenericImpl() { UnRef(); }
 
-    virtual bool IsOk() const override
+    bool IsOk() const override
         { return m_decoder != NULL; }
-    virtual bool IsCompatibleWith(wxClassInfo* ci) const override;
+    bool IsCompatibleWith(wxClassInfo* ci) const override;
 
-    virtual unsigned int GetFrameCount() const override;
-    virtual int GetDelay(unsigned int i) const override;
-    virtual wxImage GetFrame(unsigned int i) const override;
-    virtual wxSize GetSize() const override;
+    unsigned int GetFrameCount() const override;
+    int GetDelay(unsigned int i) const override;
+    wxImage GetFrame(unsigned int i) const override;
+    wxSize GetSize() const override;
 
     virtual bool LoadFile(const wxString& filename,
                           wxAnimationType type = wxANIMATION_TYPE_ANY) override;

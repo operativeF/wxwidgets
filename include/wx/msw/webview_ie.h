@@ -70,73 +70,73 @@ public:
            long style = 0,
            const wxString& name = wxASCII_STR(wxWebViewNameStr)) override;
 
-    virtual void LoadURL(const wxString& url) override;
-    virtual void LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item) override;
-    virtual wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() override;
-    virtual wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() override;
+    void LoadURL(const wxString& url) override;
+    void LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item) override;
+    wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() override;
+    wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() override;
 
-    virtual bool CanGoForward() const override;
-    virtual bool CanGoBack() const override;
-    virtual void GoBack() override;
-    virtual void GoForward() override;
-    virtual void ClearHistory() override;
-    virtual void EnableHistory(bool enable = true) override;
-    virtual void Stop() override;
-    virtual void Reload(wxWebViewReloadFlags flags = wxWEBVIEW_RELOAD_DEFAULT) override;
+    bool CanGoForward() const override;
+    bool CanGoBack() const override;
+    void GoBack() override;
+    void GoForward() override;
+    void ClearHistory() override;
+    void EnableHistory(bool enable = true) override;
+    void Stop() override;
+    void Reload(wxWebViewReloadFlags flags = wxWEBVIEW_RELOAD_DEFAULT) override;
 
-    virtual wxString GetPageSource() const override;
-    virtual wxString GetPageText() const override;
+    wxString GetPageSource() const override;
+    wxString GetPageText() const override;
 
-    virtual bool IsBusy() const override;
-    virtual wxString GetCurrentURL() const override;
-    virtual wxString GetCurrentTitle() const override;
+    bool IsBusy() const override;
+    wxString GetCurrentURL() const override;
+    wxString GetCurrentTitle() const override;
 
-    virtual void SetZoomType(wxWebViewZoomType) override;
-    virtual wxWebViewZoomType GetZoomType() const override;
-    virtual bool CanSetZoomType(wxWebViewZoomType) const override;
+    void SetZoomType(wxWebViewZoomType) override;
+    wxWebViewZoomType GetZoomType() const override;
+    bool CanSetZoomType(wxWebViewZoomType) const override;
 
-    virtual void Print() override;
+    void Print() override;
 
-    virtual wxWebViewZoom GetZoom() const override;
-    virtual float GetZoomFactor() const override;
-    virtual void SetZoom(wxWebViewZoom zoom) override;
-    virtual void SetZoomFactor(float zoom) override;
+    wxWebViewZoom GetZoom() const override;
+    float GetZoomFactor() const override;
+    void SetZoom(wxWebViewZoom zoom) override;
+    void SetZoomFactor(float zoom) override;
 
     //Clipboard functions
-    virtual bool CanCut() const override;
-    virtual bool CanCopy() const override;
-    virtual bool CanPaste() const override;
-    virtual void Cut() override;
-    virtual void Copy() override;
-    virtual void Paste() override;
+    bool CanCut() const override;
+    bool CanCopy() const override;
+    bool CanPaste() const override;
+    void Cut() override;
+    void Copy() override;
+    void Paste() override;
 
     //Undo / redo functionality
-    virtual bool CanUndo() const override;
-    virtual bool CanRedo() const override;
-    virtual void Undo() override;
-    virtual void Redo() override;
+    bool CanUndo() const override;
+    bool CanRedo() const override;
+    void Undo() override;
+    void Redo() override;
 
     //Find function
-    virtual long Find(const wxString& text, int flags = wxWEBVIEW_FIND_DEFAULT) override;
+    long Find(const wxString& text, int flags = wxWEBVIEW_FIND_DEFAULT) override;
 
     //Editing functions
-    virtual void SetEditable(bool enable = true) override;
-    virtual bool IsEditable() const override;
+    void SetEditable(bool enable = true) override;
+    bool IsEditable() const override;
 
     //Selection
-    virtual void SelectAll() override;
-    virtual bool HasSelection() const override;
-    virtual void DeleteSelection() override;
-    virtual wxString GetSelectedText() const override;
-    virtual wxString GetSelectedSource() const override;
-    virtual void ClearSelection() override;
+    void SelectAll() override;
+    bool HasSelection() const override;
+    void DeleteSelection() override;
+    wxString GetSelectedText() const override;
+    wxString GetSelectedSource() const override;
+    void ClearSelection() override;
 
-    virtual bool RunScript(const wxString& javascript, wxString* output = NULL) const override;
+    bool RunScript(const wxString& javascript, wxString* output = NULL) const override;
 
     //Virtual Filesystem Support
-    virtual void RegisterHandler(wxSharedPtr<wxWebViewHandler> handler) override;
+    void RegisterHandler(wxSharedPtr<wxWebViewHandler> handler) override;
 
-    virtual void* GetNativeBackend() const override;
+    void* GetNativeBackend() const override;
 
     // ---- IE-specific methods
 
@@ -172,7 +172,7 @@ public:
     wxDECLARE_EVENT_TABLE();
 
 protected:
-    virtual void DoSetPage(const wxString& html, const wxString& baseUrl) override;
+    void DoSetPage(const wxString& html, const wxString& baseUrl) override;
 
 private:
     wxWebViewIEImpl* m_impl;
@@ -183,7 +183,7 @@ private:
 class WXDLLIMPEXP_WEBVIEW wxWebViewFactoryIE : public wxWebViewFactory
 {
 public:
-    virtual wxWebView* Create() override { return new wxWebViewIE; }
+    wxWebView* Create() override { return new wxWebViewIE; }
     virtual wxWebView* Create(wxWindow* parent,
                               wxWindowID id,
                               const wxString& url = wxWebViewDefaultURLStr,
@@ -192,7 +192,7 @@ public:
                               long style = 0,
                               const wxString& name = wxASCII_STR(wxWebViewNameStr)) override
     { return new wxWebViewIE(parent, id, url, pos, size, style, name); }
-    virtual wxVersionInfo GetVersionInfo() override;
+    wxVersionInfo GetVersionInfo() override;
 };
 
 #endif // wxUSE_WEBVIEW && wxUSE_WEBVIEW_IE && defined(__WXMSW__)

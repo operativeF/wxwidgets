@@ -46,7 +46,7 @@ public:
                pos, size, style, validator, name);
     }
 
-    virtual wxControl *AsControl() override { return this; }
+    wxControl *AsControl() override { return this; }
 
 public:     // overridable
 
@@ -57,7 +57,7 @@ public:     // overridable
 
     virtual wxEventType GetEventType() const = 0;
 
-    virtual void SetInitialDirectory(const wxString& dir) override;
+    void SetInitialDirectory(const wxString& dir) override;
 
 public:
 
@@ -144,7 +144,7 @@ public:     // overridable
         return filedlgstyle;
     }
 
-    virtual wxDialog *CreateDialog() override;
+    wxDialog *CreateDialog() override;
 
     wxEventType GetEventType() const override
         { return wxEVT_FILEPICKER_CHANGED; }
@@ -199,7 +199,7 @@ public:     // overridable
         return dirdlgstyle;
     }
 
-    virtual wxDialog *CreateDialog() override;
+    wxDialog *CreateDialog() override;
 
     wxEventType GetEventType() const override
         { return wxEVT_DIRPICKER_CHANGED; }

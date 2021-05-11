@@ -152,7 +152,7 @@ public:
     const wxString& GetCompressedFileName() const { return m_zipfile; }
 
 protected:
-    virtual bool DoProcess() override;
+    bool DoProcess() override;
 
     // return the location where the report will be saved
     wxFileName GetSaveLocation() const override;
@@ -185,7 +185,7 @@ public:
                         const wxString& curl = wxT("curl"));
 
 protected:
-    virtual bool DoProcess() override;
+    bool DoProcess() override;
 
     // this function may be overridden in a derived class to show the output
     // from curl: this may be an HTML page or anything else that the server
@@ -246,7 +246,7 @@ class WXDLLIMPEXP_QA wxDebugReportPreviewStd : public wxDebugReportPreview
 public:
     wxDebugReportPreviewStd() { }
 
-    virtual bool Show(wxDebugReport& dbgrpt) const override;
+    bool Show(wxDebugReport& dbgrpt) const override;
 };
 
 #endif // wxUSE_GUI

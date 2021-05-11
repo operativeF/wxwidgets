@@ -98,7 +98,7 @@ public:
     }
 
     // no need for the copy constructor as the default one will be fine.
-    virtual wxEvent *Clone() const override { return new wxFileCtrlEvent( *this ); }
+    wxEvent *Clone() const override { return new wxFileCtrlEvent( *this ); }
 
     void SetFiles( const wxArrayString &files ) { m_files = files; }
     void SetDirectory( const wxString &directory ) { m_directory = directory; }

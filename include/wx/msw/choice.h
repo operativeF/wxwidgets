@@ -67,20 +67,20 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxChoiceNameStr));
 
-    virtual bool Show(bool show = true) override;
+    bool Show(bool show = true) override;
 
-    virtual void SetLabel(const wxString& label) override;
+    void SetLabel(const wxString& label) override;
 
-    virtual unsigned int GetCount() const override;
-    virtual int GetSelection() const override;
-    virtual int GetCurrentSelection() const override;
-    virtual void SetSelection(int n) override;
+    unsigned int GetCount() const override;
+    int GetSelection() const override;
+    int GetCurrentSelection() const override;
+    void SetSelection(int n) override;
 
-    virtual int FindString(const wxString& s, bool bCase = false) const override;
-    virtual wxString GetString(unsigned int n) const override;
-    virtual void SetString(unsigned int n, const wxString& s) override;
+    int FindString(const wxString& s, bool bCase = false) const override;
+    wxString GetString(unsigned int n) const override;
+    void SetString(unsigned int n, const wxString& s) override;
 
-    virtual wxVisualAttributes GetDefaultAttributes() const override
+    wxVisualAttributes GetDefaultAttributes() const override
     {
         return GetClassDefaultAttributes(GetWindowVariant());
     }
@@ -89,18 +89,18 @@ public:
     GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
 
     // MSW only
-    virtual bool MSWCommand(WXUINT param, WXWORD id) override;
+    bool MSWCommand(WXUINT param, WXWORD id) override;
     WXLRESULT MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam) override;
-    virtual WXHBRUSH MSWControlColor(WXHDC hDC, WXHWND hWnd) override;
-    virtual bool MSWShouldPreProcessMessage(WXMSG *pMsg) override;
-    virtual WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    WXHBRUSH MSWControlColor(WXHDC hDC, WXHWND hWnd) override;
+    bool MSWShouldPreProcessMessage(WXMSG *pMsg) override;
+    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
 
     // returns true if the platform should explicitly apply a theme border
-    virtual bool CanApplyThemeBorder() const override { return false; }
+    bool CanApplyThemeBorder() const override { return false; }
 
 protected:
     // choose the default border for this window
-    virtual wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     // common part of all ctors
     void Init()
@@ -110,24 +110,24 @@ protected:
         m_heightOwn = wxDefaultCoord;
     }
 
-    virtual void DoDeleteOneItem(unsigned int n) override;
-    virtual void DoClear() override;
+    void DoDeleteOneItem(unsigned int n) override;
+    void DoClear() override;
 
     virtual int DoInsertItems(const wxArrayStringsAdapter& items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
 
-    virtual void DoMoveWindow(int x, int y, int width, int height) override;
-    virtual void DoSetItemClientData(unsigned int n, void* clientData) override;
-    virtual void* DoGetItemClientData(unsigned int n) const override;
+    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoSetItemClientData(unsigned int n, void* clientData) override;
+    void* DoGetItemClientData(unsigned int n) const override;
 
     // MSW implementation
-    virtual wxSize DoGetBestSize() const override;
-    virtual void DoGetSize(int *w, int *h) const override;
+    wxSize DoGetBestSize() const override;
+    void DoGetSize(int *w, int *h) const override;
     virtual void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
-    virtual wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
+    wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
 
     // Show or hide the popup part of the control.
     void MSWDoPopupOrDismiss(bool show);
@@ -155,7 +155,7 @@ protected:
     int SetHeightSimpleComboBox(int nItems) const;
 
 #if wxUSE_DEFERRED_SIZING
-    virtual void MSWEndDeferWindowPos() override;
+    void MSWEndDeferWindowPos() override;
 #endif // wxUSE_DEFERRED_SIZING
 
     // These variables are only used while the drop down is opened.

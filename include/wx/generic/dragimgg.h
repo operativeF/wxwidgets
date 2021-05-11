@@ -156,7 +156,7 @@ public:
     // Operations
     ////////////////////////////////////////////////////////////////////////////
 
-    // Create a drag image with a virtual image (need to override DoDrawImage, GetImageRect)
+    // Create a drag image with a image (need to override DoDrawImage, GetImageRect)
     bool Create(const wxCursor& cursor = wxNullCursor);
 
     // Create a drag image from a bitmap and optional cursor

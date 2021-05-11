@@ -109,7 +109,7 @@ public:
         SetTransparent(0);
     }
 
-    virtual bool SetTransparent(wxByte alpha) override
+    bool SetTransparent(wxByte alpha) override
     {
         if (m_canSetShape)
         {

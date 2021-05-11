@@ -37,7 +37,7 @@ public:
                                wxDC& dc,
                                int row, int col) override;
 
-    virtual wxGridCellRenderer *Clone() const override
+    wxGridCellRenderer *Clone() const override
         { return new wxGridCellStringRenderer; }
 
 protected:
@@ -76,9 +76,9 @@ public:
                                   wxDC& dc) override;
 
     // Optional parameters for this renderer are "<min>,<max>".
-    virtual void SetParameters(const wxString& params) override;
+    void SetParameters(const wxString& params) override;
 
-    virtual wxGridCellRenderer *Clone() const override
+    wxGridCellRenderer *Clone() const override
         { return new wxGridCellNumberRenderer(m_minValue, m_maxValue); }
 
 protected:
@@ -118,9 +118,9 @@ public:
 
     // parameters string format is "width[,precision[,format]]"
     // with format being one of f|e|g|E|F|G
-    virtual void SetParameters(const wxString& params) override;
+    void SetParameters(const wxString& params) override;
 
-    virtual wxGridCellRenderer *Clone() const override;
+    wxGridCellRenderer *Clone() const override;
 
 protected:
     wxString GetString(const wxGrid& grid, int row, int col);
@@ -156,7 +156,7 @@ public:
                                   wxGridCellAttr& attr,
                                   wxDC& dc) override;
 
-    virtual wxGridCellRenderer *Clone() const override
+    wxGridCellRenderer *Clone() const override
         { return new wxGridCellBoolRenderer; }
 };
 
@@ -196,10 +196,10 @@ public:
                                   wxGridCellAttr& attr,
                                   wxDC& dc) override;
 
-    virtual wxGridCellRenderer *Clone() const override;
+    wxGridCellRenderer *Clone() const override;
 
     // output strptime()-like format string
-    virtual void SetParameters(const wxString& params) override;
+    void SetParameters(const wxString& params) override;
 
 protected:
     wxString GetString(const wxGrid& grid, int row, int col);
@@ -226,7 +226,7 @@ public:
     {
     }
 
-    virtual wxGridCellRenderer *Clone() const override;
+    wxGridCellRenderer *Clone() const override;
 
 protected:
     virtual void
@@ -249,9 +249,9 @@ public:
                                   wxDC& dc) override;
 
     // Parameters string is a comma-separated list of values.
-    virtual void SetParameters(const wxString& params) override;
+    void SetParameters(const wxString& params) override;
 
-    virtual wxGridCellRenderer *Clone() const override
+    wxGridCellRenderer *Clone() const override
     {
         return new wxGridCellChoiceRenderer(*this);
     }
@@ -285,7 +285,7 @@ public:
                                wxDC& dc,
                                int row, int col) override;
 
-    virtual wxGridCellRenderer *Clone() const override;
+    wxGridCellRenderer *Clone() const override;
 
 protected:
     wxString GetString(const wxGrid& grid, int row, int col);
@@ -321,7 +321,7 @@ public:
                               int row, int col,
                               int height) override;
 
-    virtual wxGridCellRenderer *Clone() const override
+    wxGridCellRenderer *Clone() const override
         { return new wxGridCellAutoWrapStringRenderer; }
 
 private:

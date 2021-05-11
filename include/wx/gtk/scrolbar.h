@@ -37,7 +37,7 @@ public:
     int GetThumbSize() const override;
     int GetPageSize() const override;
     int GetRange() const override;
-    virtual void SetThumbPosition( int viewStart ) override;
+    void SetThumbPosition( int viewStart ) override;
     virtual void SetScrollbar( int position, int thumbSize, int range, int pageSize,
       bool refresh = true ) override;
 

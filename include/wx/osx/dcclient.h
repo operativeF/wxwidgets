@@ -28,11 +28,11 @@ public:
     wxWindowDCImpl( wxDC *owner, wxWindow *window );
     virtual ~wxWindowDCImpl();
 
-    virtual void DoGetSize( int *width, int *height ) const override;
-    virtual wxBitmap DoGetAsBitmap(const wxRect *subrect) const override;
+    void DoGetSize( int *width, int *height ) const override;
+    wxBitmap DoGetAsBitmap(const wxRect *subrect) const override;
 
 protected:
-    virtual wxPoint OSXGetOrigin() const override;
+    wxPoint OSXGetOrigin() const override;
 
     bool m_release;
     int m_width;

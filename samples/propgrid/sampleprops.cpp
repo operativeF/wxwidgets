@@ -349,12 +349,12 @@ protected:
     int             m_precision;
 
     // Mandatory overridden methods
-    virtual wxString ArrayGet( size_t index ) override;
-    virtual size_t ArrayGetCount() override;
-    virtual bool ArrayInsert( const wxString& str, int index ) override;
-    virtual bool ArraySet( size_t index, const wxString& str ) override;
-    virtual void ArrayRemoveAt( int index ) override;
-    virtual void ArraySwap( size_t first, size_t second ) override;
+    wxString ArrayGet( size_t index ) override;
+    size_t ArrayGetCount() override;
+    bool ArrayInsert( const wxString& str, int index ) override;
+    bool ArraySet( size_t index, const wxString& str ) override;
+    void ArrayRemoveAt( int index ) override;
+    void ArraySwap( size_t first, size_t second ) override;
 
 private:
     wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxArrayDoubleEditorDialog);

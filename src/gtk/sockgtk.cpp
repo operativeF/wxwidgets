@@ -44,7 +44,7 @@ static gboolean wxSocket_Input(GIOChannel*, GIOCondition condition, gpointer dat
 class GTKFDIOManager : public wxFDIOManager
 {
 public:
-    virtual int AddInput(wxFDIOHandler *handler, int fd, Direction d) override
+    int AddInput(wxFDIOHandler *handler, int fd, Direction d) override
     {
         GIOChannel* channel = g_io_channel_unix_new(fd);
         unsigned id = g_io_add_watch(

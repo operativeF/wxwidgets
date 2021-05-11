@@ -72,14 +72,14 @@ public:
 
   // control the appearance of the notebook pages
     // set the size (the same for all pages)
-  virtual void SetPageSize(const wxSize& size) override;
+  void SetPageSize(const wxSize& size) override;
     // set the padding between tabs (in pixels)
-  virtual void SetPadding(const wxSize& padding) override;
+  void SetPadding(const wxSize& padding) override;
     // sets the size of the tabs (assumes all tabs are the same size)
-  virtual void SetTabSize(const wxSize& sz) override;
+  void SetTabSize(const wxSize& sz) override;
 
   // hit test
-  virtual int HitTest(const wxPoint& pt, long *flags = NULL) const override;
+  int HitTest(const wxPoint& pt, long *flags = NULL) const override;
 
   // calculate size for wxNotebookSizer
   wxSize CalcSizeFromPage(const wxSize& sizePage) const override;
@@ -106,20 +106,20 @@ public:
     // --------------
 
 #if wxUSE_CONSTRAINTS
-  virtual void SetConstraintSizes(bool recurse = true) override;
-  virtual bool DoPhase(int nPhase) override;
+  void SetConstraintSizes(bool recurse = true) override;
+  bool DoPhase(int nPhase) override;
 
 #endif
 
   // base class virtuals
   // -------------------
-  virtual void Command(wxCommandEvent& event) override;
+  void Command(wxCommandEvent& event) override;
     // osx specific event handling common for all osx-ports
 
-    virtual bool OSXHandleClicked( double timestampsec ) override;
+    bool OSXHandleClicked( double timestampsec ) override;
 
 protected:
-  virtual wxNotebookPage *DoRemovePage(size_t page) override;
+  wxNotebookPage *DoRemovePage(size_t page) override;
   // common part of all ctors
   void Init();
 

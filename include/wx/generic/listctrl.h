@@ -110,10 +110,10 @@ public:
     void SetTextColour(const wxColour& col);
     long GetTopItem() const;
 
-    virtual bool HasCheckBoxes() const override;
-    virtual bool EnableCheckBoxes(bool enable = true) override;
-    virtual bool IsItemChecked(long item) const override;
-    virtual void CheckItem(long item, bool check) override;
+    bool HasCheckBoxes() const override;
+    bool EnableCheckBoxes(bool enable = true) override;
+    bool IsItemChecked(long item) const override;
+    void CheckItem(long item, bool check) override;
 
     void SetSingleStyle( long style, bool add = true ) ;
     void SetWindowStyleFlag( long style ) override;
@@ -162,12 +162,12 @@ public:
     void RefreshItem(long item);
     void RefreshItems(long itemFrom, long itemTo);
 
-    virtual void EnableBellOnNoMatch(bool on = true) override;
+    void EnableBellOnNoMatch(bool on = true) override;
 
     // overridden base class virtuals
     // ------------------------------
 
-    virtual wxVisualAttributes GetDefaultAttributes() const override
+    wxVisualAttributes GetDefaultAttributes() const override
     {
         return GetClassDefaultAttributes(GetWindowVariant());
     }
@@ -175,7 +175,7 @@ public:
     static wxVisualAttributes
     GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
 
-    virtual void Update() override;
+    void Update() override;
 
 
     // implementation only from now on
@@ -190,21 +190,21 @@ public:
     virtual void Refresh(bool eraseBackground = true,
                          const wxRect *rect = NULL) override;
 
-    virtual bool SetBackgroundColour( const wxColour &colour ) override;
-    virtual bool SetForegroundColour( const wxColour &colour ) override;
+    bool SetBackgroundColour( const wxColour &colour ) override;
+    bool SetForegroundColour( const wxColour &colour ) override;
     virtual wxColour GetBackgroundColour() const;
     virtual wxColour GetForegroundColour() const;
-    virtual bool SetFont( const wxFont &font ) override;
-    virtual bool SetCursor( const wxCursor &cursor ) override;
+    bool SetFont( const wxFont &font ) override;
+    bool SetCursor( const wxCursor &cursor ) override;
 
-    virtual void ExtendRulesAndAlternateColour(bool extend = true) override;
+    void ExtendRulesAndAlternateColour(bool extend = true) override;
 
 #if wxUSE_DRAG_AND_DROP
-    virtual void SetDropTarget( wxDropTarget *dropTarget ) override;
-    virtual wxDropTarget *GetDropTarget() const override;
+    void SetDropTarget( wxDropTarget *dropTarget ) override;
+    wxDropTarget *GetDropTarget() const override;
 #endif
 
-    virtual bool ShouldInheritColours() const override { return false; }
+    bool ShouldInheritColours() const override { return false; }
 
     // implementation
     // --------------
@@ -223,14 +223,14 @@ protected:
     long DoInsertColumn(long col, const wxListItem& info) override;
 
 
-    virtual wxSize DoGetBestClientSize() const override;
+    wxSize DoGetBestClientSize() const override;
 
     // it calls our OnGetXXX() functions
     friend class WXDLLIMPEXP_FWD_CORE wxListMainWindow;
 
-    virtual wxBorder GetDefaultBorder() const override;
+    wxBorder GetDefaultBorder() const override;
 
-    virtual wxSize GetSizeAvailableForScrollTarget(const wxSize& size) override;
+    wxSize GetSizeAvailableForScrollTarget(const wxSize& size) override;
 
 private:
     void CreateOrDestroyHeaderWindowAsNeeded();

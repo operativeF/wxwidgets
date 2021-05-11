@@ -23,36 +23,36 @@ public:
 
     virtual ~wxProgressDialog();
 
-    virtual bool Update(int value, const wxString& newmsg = wxEmptyString, bool *skip = NULL) override;
-    virtual bool Pulse(const wxString& newmsg = wxEmptyString, bool *skip = NULL) override;
+    bool Update(int value, const wxString& newmsg = wxEmptyString, bool *skip = NULL) override;
+    bool Pulse(const wxString& newmsg = wxEmptyString, bool *skip = NULL) override;
 
-    virtual void Resume() override;
+    void Resume() override;
 
-    virtual int GetValue() const override;
-    virtual wxString GetMessage() const override;
+    int GetValue() const override;
+    wxString GetMessage() const override;
 
-    virtual void SetRange(int maximum) override;
+    void SetRange(int maximum) override;
 
     // Return whether "Cancel" or "Skip" button was pressed, always return
     // false if the corresponding button is not shown.
-    virtual bool WasSkipped() const override;
-    virtual bool WasCancelled() const override;
+    bool WasSkipped() const override;
+    bool WasCancelled() const override;
 
-    virtual void SetTitle(const wxString& title) override;
-    virtual wxString GetTitle() const override;
+    void SetTitle(const wxString& title) override;
+    wxString GetTitle() const override;
 
-    virtual void SetIcons(const wxIconBundle& icons) override;
-    virtual void DoMoveWindow(int x, int y, int width, int height) override;
-    virtual void DoGetPosition(int *x, int *y) const override;
-    virtual void DoGetSize(int *width, int *height) const override;
-    virtual void Fit() override;
+    void SetIcons(const wxIconBundle& icons) override;
+    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoGetPosition(int *x, int *y) const override;
+    void DoGetSize(int *width, int *height) const override;
+    void Fit() override;
 
-    virtual bool Show( bool show = true ) override;
+    bool Show( bool show = true ) override;
 
     // Must provide overload to avoid hiding it (and warnings about it)
-    virtual void Update() override { wxGenericProgressDialog::Update(); }
+    void Update() override { wxGenericProgressDialog::Update(); }
 
-    virtual WXWidget GetHandle() const override;
+    WXWidget GetHandle() const override;
 
 private:
     // Common part of Update() and Pulse().

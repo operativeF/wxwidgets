@@ -78,7 +78,7 @@ public:
         m_workerFailed = false;
     }
 
-    virtual wxEvent* Clone() const override
+    wxEvent* Clone() const override
     {
         return new WorkerEvent(*this);
     }
@@ -112,8 +112,8 @@ private:
       EVENTS
     };
 
-    virtual bool OnInit() override;
-    virtual int OnExit() override;
+    bool OnInit() override;
+    int OnExit() override;
 
     void OnInitCmdLine(wxCmdLineParser& pParser) override;
     bool OnCmdLineParsed(wxCmdLineParser& pParser) override;
@@ -168,7 +168,7 @@ class ThreadWorker : public wxThread, private WorkerBase
 {
 public:
     ThreadWorker(wxSocketBase* pSocket);
-    virtual ExitCode Entry() override;
+    ExitCode Entry() override;
 
 private:
     wxSocketBase* m_socket;

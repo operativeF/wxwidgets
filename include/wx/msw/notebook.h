@@ -48,7 +48,7 @@ public:
   // accessors
   // ---------
     // get number of pages in the dialog
-  virtual size_t GetPageCount() const override;
+  size_t GetPageCount() const override;
 
     // set the currently selected page, return the index of the previously
     // selected one (or wxNOT_FOUND on error)
@@ -102,10 +102,10 @@ public:
   void SetTabSize(const wxSize& sz) override;
 
     // hit test
-  virtual int HitTest(const wxPoint& pt, long *flags = NULL) const override;
+  int HitTest(const wxPoint& pt, long *flags = NULL) const override;
 
     // calculate the size of the notebook from the size of its page
-  virtual wxSize CalcSizeFromPage(const wxSize& sizePage) const override;
+  wxSize CalcSizeFromPage(const wxSize& sizePage) const override;
 
   // callbacks
   // ---------
@@ -115,13 +115,13 @@ public:
   // base class virtuals
   // -------------------
 
-  virtual bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
+  bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
   virtual bool MSWOnScroll(int orientation, WXWORD nSBCode,
                            WXWORD pos, WXHWND control) override;
 
 #if wxUSE_CONSTRAINTS
-  virtual void SetConstraintSizes(bool recurse = true) override;
-  virtual bool DoPhase(int nPhase) override;
+  void SetConstraintSizes(bool recurse = true) override;
+  bool DoPhase(int nPhase) override;
 #endif // wxUSE_CONSTRAINTS
 
   // Attempts to get colour for UX theme page background
@@ -131,7 +131,7 @@ public:
   // -------------------
 
 #if wxUSE_UXTHEME
-  virtual bool SetBackgroundColour(const wxColour& colour) override
+  bool SetBackgroundColour(const wxColour& colour) override
   {
       if ( !wxNotebookBase::SetBackgroundColour(colour) )
           return false;
@@ -142,13 +142,13 @@ public:
   }
 
   // draw child background
-  virtual bool MSWPrintChild(WXHDC hDC, wxWindow *win) override;
+  bool MSWPrintChild(WXHDC hDC, wxWindow *win) override;
 
-  virtual bool MSWHasInheritableBackground() const override { return true; }
+  bool MSWHasInheritableBackground() const override { return true; }
 #endif // wxUSE_UXTHEME
 
   // translate wxWin styles to the Windows ones
-  virtual WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
+  WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
 
 protected:
   // common part of all ctors
@@ -159,7 +159,7 @@ protected:
   void UpdateSelection(int selNew);
 
   // remove one page from the notebook, without deleting
-  virtual wxNotebookPage *DoRemovePage(size_t nPage) override;
+  wxNotebookPage *DoRemovePage(size_t nPage) override;
 
   // get the page rectangle for the current notebook size
   //
@@ -170,14 +170,14 @@ protected:
   void AdjustPageSize(wxNotebookPage *page);
 
 #if wxUSE_UXTHEME
-  virtual void MSWAdjustBrushOrg(int *xOrg, int* yOrg) const override
+  void MSWAdjustBrushOrg(int *xOrg, int* yOrg) const override
   {
       *xOrg -= m_bgBrushAdj.x;
       *yOrg -= m_bgBrushAdj.y;
   }
 
   // return the themed brush for painting our children
-  virtual WXHBRUSH MSWGetCustomBgBrush() override { return m_hbrBackground; }
+  WXHBRUSH MSWGetCustomBgBrush() override { return m_hbrBackground; }
 
   // gets the bitmap of notebook background and returns a brush from it and
   // sets m_bgBrushAdj

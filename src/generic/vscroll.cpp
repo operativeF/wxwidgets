@@ -45,7 +45,7 @@ public:
         m_scrollHelper = scrollHelper;
     }
 
-    virtual bool ProcessEvent(wxEvent& event) override;
+    bool ProcessEvent(wxEvent& event) override;
 
 private:
     wxVarScrollHelperBase *m_scrollHelper;

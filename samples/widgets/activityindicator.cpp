@@ -61,11 +61,11 @@ public:
         m_sizerIndicator = NULL;
     }
 
-    virtual wxWindow *GetWidget() const override { return m_indicator; }
-    virtual void RecreateWidget() override;
+    wxWindow *GetWidget() const override { return m_indicator; }
+    void RecreateWidget() override;
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 protected:
     void OnButtonStart(wxCommandEvent&) { m_indicator->Start(); }

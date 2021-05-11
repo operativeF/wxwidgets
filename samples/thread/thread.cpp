@@ -65,7 +65,7 @@ public:
     MyApp();
     virtual ~MyApp(){}
 
-    virtual bool OnInit() override;
+    bool OnInit() override;
 
     // critical section protects access to all of the fields below
     wxCriticalSection m_critsect;
@@ -210,7 +210,7 @@ public:
     virtual ~MyThread();
 
     // thread execution starts here
-    virtual void *Entry() override;
+    void *Entry() override;
 
 public:
     unsigned m_count;
@@ -226,11 +226,11 @@ public:
     MyWorkerThread(MyFrame *frame);
 
     // thread execution starts here
-    virtual void *Entry() override;
+    void *Entry() override;
 
     // called when the thread exits - whether it terminates normally or is
     // stopped with Delete() (but not when it is Kill()ed!)
-    virtual void OnExit() override;
+    void OnExit() override;
 
 public:
     MyFrame *m_frame;
@@ -253,7 +253,7 @@ public:
         m_dlg = dlg;
     }
 
-    virtual ExitCode Entry() override;
+    ExitCode Entry() override;
 
 private:
     MyImageDialog *m_dlg;

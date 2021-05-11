@@ -72,10 +72,10 @@ public:
     virtual ~wxHtmlListBox();
 
     // override some base class virtuals
-    virtual void RefreshRow(size_t line) override;
-    virtual void RefreshRows(size_t from, size_t to) override;
-    virtual void RefreshAll() override;
-    virtual void SetItemCount(size_t count) override;
+    void RefreshRow(size_t line) override;
+    void RefreshRows(size_t from, size_t to) override;
+    void RefreshAll() override;
+    void SetItemCount(size_t count) override;
 
 #if wxUSE_FILESYSTEM
     // retrieve the file system used by the wxHtmlWinParser: if you use
@@ -84,7 +84,7 @@ public:
     const wxFileSystem& GetFileSystem() const { return m_filesystem; }
 #endif // wxUSE_FILESYSTEM
 
-    virtual void OnInternalIdle() override;
+    void OnInternalIdle() override;
 
 protected:
     // this method must be implemented in the derived class and should return
@@ -111,11 +111,11 @@ protected:
 
     // we implement both of these functions in terms of OnGetItem(), they are
     // not supposed to be overridden by our descendants
-    virtual void OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const override;
-    virtual wxCoord OnMeasureItem(size_t n) const override;
+    void OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const override;
+    wxCoord OnMeasureItem(size_t n) const override;
 
     // override this one to draw custom background for selected items correctly
-    virtual void OnDrawBackground(wxDC& dc, const wxRect& rect, size_t n) const override;
+    void OnDrawBackground(wxDC& dc, const wxRect& rect, size_t n) const override;
 
     // this method may be overridden to handle clicking on a link in the
     // listbox (by default, clicks on links are simply ignored)
@@ -135,19 +135,19 @@ protected:
 
 private:
     // wxHtmlWindowInterface methods:
-    virtual void SetHTMLWindowTitle(const wxString& title) override;
-    virtual void OnHTMLLinkClicked(const wxHtmlLinkInfo& link) override;
+    void SetHTMLWindowTitle(const wxString& title) override;
+    void OnHTMLLinkClicked(const wxHtmlLinkInfo& link) override;
     virtual wxHtmlOpeningStatus OnHTMLOpeningURL(wxHtmlURLType type,
                                                  const wxString& url,
                                                  wxString *redirect) const override;
     virtual wxPoint HTMLCoordsToWindow(wxHtmlCell *cell,
                                        const wxPoint& pos) const override;
-    virtual wxWindow* GetHTMLWindow() override;
-    virtual wxColour GetHTMLBackgroundColour() const override;
-    virtual void SetHTMLBackgroundColour(const wxColour& clr) override;
-    virtual void SetHTMLBackgroundImage(const wxBitmap& bmpBg) override;
-    virtual void SetHTMLStatusText(const wxString& text) override;
-    virtual wxCursor GetHTMLCursor(HTMLCursor type) const override;
+    wxWindow* GetHTMLWindow() override;
+    wxColour GetHTMLBackgroundColour() const override;
+    void SetHTMLBackgroundColour(const wxColour& clr) override;
+    void SetHTMLBackgroundImage(const wxBitmap& bmpBg) override;
+    void SetHTMLStatusText(const wxString& text) override;
+    wxCursor GetHTMLCursor(HTMLCursor type) const override;
 
     // returns index of item that contains given HTML cell
     size_t GetItemForCell(const wxHtmlCell *cell) const;
@@ -264,16 +264,16 @@ public:
     // accessing strings
     // -----------------
 
-    virtual unsigned int GetCount() const override
+    unsigned int GetCount() const override
         { return m_items.GetCount(); }
 
-    virtual wxString GetString(unsigned int n) const override;
+    wxString GetString(unsigned int n) const override;
 
     // override default unoptimized wxItemContainer::GetStrings() function
     wxArrayString GetStrings() const
         { return m_items; }
 
-    virtual void SetString(unsigned int n, const wxString& s) override;
+    void SetString(unsigned int n, const wxString& s) override;
 
     // resolve ambiguity between wxItemContainer and wxVListBox versions
     void Clear() override;
@@ -283,30 +283,30 @@ protected:
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
 
-    virtual void DoSetItemClientData(unsigned int n, void *clientData) override
+    void DoSetItemClientData(unsigned int n, void *clientData) override
         { m_HTMLclientData[n] = clientData; }
 
-    virtual void *DoGetItemClientData(unsigned int n) const override
+    void *DoGetItemClientData(unsigned int n) const override
         { return m_HTMLclientData[n]; }
 
     // wxItemContainer methods
-    virtual void DoClear() override;
-    virtual void DoDeleteOneItem(unsigned int n) override;
+    void DoClear() override;
+    void DoDeleteOneItem(unsigned int n) override;
 
     // calls wxHtmlListBox::SetItemCount() and RefreshAll()
     void UpdateCount();
 
     // override these functions just to change their visibility: users of
     // wxSimpleHtmlListBox shouldn't be allowed to call them directly!
-    virtual void SetItemCount(size_t count) override
+    void SetItemCount(size_t count) override
         { wxHtmlListBox::SetItemCount(count); }
     virtual void SetRowCount(size_t count)
         { wxHtmlListBox::SetRowCount(count); }
 
-    virtual wxString OnGetItem(size_t n) const override
+    wxString OnGetItem(size_t n) const override
         { return m_items[n]; }
 
-    virtual void InitEvent(wxCommandEvent& event, int n) override
+    void InitEvent(wxCommandEvent& event, int n) override
         {
             // we're not a virtual control and we can include the string
             // of the item which was clicked:

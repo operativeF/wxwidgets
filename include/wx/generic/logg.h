@@ -33,7 +33,7 @@ public:
 
 protected:
     // implement sink function
-    virtual void DoLogText(const wxString& msg) override;
+    void DoLogText(const wxString& msg) override;
 
 private:
     // the control we use
@@ -57,7 +57,7 @@ public:
     wxLogGui();
 
     // show all messages that were logged since the last Flush()
-    virtual void Flush() override;
+    void Flush() override;
 
 protected:
     virtual void DoLogRecord(wxLogLevel level,
@@ -136,7 +136,7 @@ public:
     virtual void OnFrameDelete(wxFrame *frame);
 
 protected:
-    virtual void DoLogTextAtLevel(wxLogLevel level, const wxString& msg) override;
+    void DoLogTextAtLevel(wxLogLevel level, const wxString& msg) override;
 
 private:
     wxLogFrame *m_pLogFrame;      // the log frame

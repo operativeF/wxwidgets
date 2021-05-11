@@ -242,7 +242,7 @@ public:
     static wxFontMapper *Get();
 
     // pseudo-RTTI since we aren't a wxObject.
-    virtual bool IsDummy() override { return false; }
+    bool IsDummy() override { return false; }
 
 protected:
     // GetAltForEncoding() helper: tests for the existence of the given

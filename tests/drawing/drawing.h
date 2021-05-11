@@ -62,14 +62,14 @@ private:
     {
     public:
         virtual ~ImageGraphicsContextLifeCycle() {}
-        virtual wxString GetIdForFileName () const override { return "image"; }
-        virtual wxString GetExtensionForFileName () const override { return "png"; }
-        virtual bool UseImageComparison() const override { return true; }
-        virtual bool PlatformIndependent() const override { return false; }
+        wxString GetIdForFileName () const override { return "image"; }
+        wxString GetExtensionForFileName () const override { return "png"; }
+        bool UseImageComparison() const override { return true; }
+        bool PlatformIndependent() const override { return false; }
         virtual wxGraphicsContext *BuildNewContext (wxSize expectedSize,
             double pointsPerInch, const wxFileName &targetFileName) override;
-        virtual void SaveBuiltContext (wxGraphicsContext *&gc) override;
-        virtual void CleanUp (wxGraphicsContext *gc) override;
+        void SaveBuiltContext (wxGraphicsContext *&gc) override;
+        void CleanUp (wxGraphicsContext *gc) override;
     private:
         wxImage *m_image;
         wxString m_targetFileName;
@@ -81,14 +81,14 @@ private:
     class SvgGraphicsContextLifeCycle: public DrawingTestGCFactory
     {
     public:
-        virtual wxString GetIdForFileName () const override { return "svg"; }
-        virtual wxString GetExtensionForFileName () const override { return "svg"; }
-        virtual bool UseImageComparison() const override { return false; }
-        virtual bool PlatformIndependent() const override { return true; }
+        wxString GetIdForFileName () const override { return "svg"; }
+        wxString GetExtensionForFileName () const override { return "svg"; }
+        bool UseImageComparison() const override { return false; }
+        bool PlatformIndependent() const override { return true; }
         virtual wxGraphicsContext *BuildNewContext (wxSize expectedSize,
             double pointsPerInch, const wxFileName &targetFileName) override;
-        virtual void SaveBuiltContext (wxGraphicsContext *&gc) override;
-        virtual void CleanUp (wxGraphicsContext *gc) override;
+        void SaveBuiltContext (wxGraphicsContext *&gc) override;
+        void CleanUp (wxGraphicsContext *gc) override;
 
     private:
         wxSVGFileDC *m_svgFileDc;

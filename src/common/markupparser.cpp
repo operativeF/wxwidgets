@@ -434,31 +434,31 @@ wxString wxMarkupParser::Strip(const wxString& text)
 
         const wxString& GetText() const { return m_text; }
 
-        virtual void OnText(const wxString& string) override { m_text += string; }
+        void OnText(const wxString& string) override { m_text += string; }
 
-        virtual void OnBoldStart() override { }
-        virtual void OnBoldEnd() override { }
+        void OnBoldStart() override { }
+        void OnBoldEnd() override { }
 
-        virtual void OnItalicStart() override { }
-        virtual void OnItalicEnd() override { }
+        void OnItalicStart() override { }
+        void OnItalicEnd() override { }
 
-        virtual void OnUnderlinedStart() override { }
-        virtual void OnUnderlinedEnd() override { }
+        void OnUnderlinedStart() override { }
+        void OnUnderlinedEnd() override { }
 
-        virtual void OnStrikethroughStart() override { }
-        virtual void OnStrikethroughEnd() override { }
+        void OnStrikethroughStart() override { }
+        void OnStrikethroughEnd() override { }
 
-        virtual void OnBigStart() override { }
-        virtual void OnBigEnd() override { }
+        void OnBigStart() override { }
+        void OnBigEnd() override { }
 
-        virtual void OnSmallStart() override { }
-        virtual void OnSmallEnd() override { }
+        void OnSmallStart() override { }
+        void OnSmallEnd() override { }
 
-        virtual void OnTeletypeStart() override { }
-        virtual void OnTeletypeEnd() override { }
+        void OnTeletypeStart() override { }
+        void OnTeletypeEnd() override { }
 
-        virtual void OnSpanStart(const wxMarkupSpanAttributes& WXUNUSED(a)) override { }
-        virtual void OnSpanEnd(const wxMarkupSpanAttributes& WXUNUSED(a)) override { }
+        void OnSpanStart(const wxMarkupSpanAttributes& WXUNUSED(a)) override { }
+        void OnSpanEnd(const wxMarkupSpanAttributes& WXUNUSED(a)) override { }
 
     private:
         wxString m_text;

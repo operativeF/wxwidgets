@@ -20,8 +20,8 @@ class WXDLLIMPEXP_XRC wxGenericDirCtrlXmlHandler : public wxXmlResourceHandler
 
 public:
     wxGenericDirCtrlXmlHandler();
-    virtual wxObject *DoCreateResource() override;
-    virtual bool CanHandle(wxXmlNode *node) override;
+    wxObject *DoCreateResource() override;
+    bool CanHandle(wxXmlNode *node) override;
 };
 
 #endif // wxUSE_XRC && wxUSE_DIRDLG

@@ -19,49 +19,49 @@ public:
     wxQtDCImpl( wxDC *owner );
     ~wxQtDCImpl();
 
-    virtual bool CanDrawBitmap() const override;
-    virtual bool CanGetTextExtent() const override;
+    bool CanDrawBitmap() const override;
+    bool CanGetTextExtent() const override;
 
-    virtual void DoGetSize(int *width, int *height) const override;
-    virtual void DoGetSizeMM(int* width, int* height) const override;
+    void DoGetSize(int *width, int *height) const override;
+    void DoGetSizeMM(int* width, int* height) const override;
 
-    virtual int GetDepth() const override;
-    virtual wxSize GetPPI() const override;
+    int GetDepth() const override;
+    wxSize GetPPI() const override;
 
-    virtual void SetFont(const wxFont& font) override;
-    virtual void SetPen(const wxPen& pen) override;
-    virtual void SetBrush(const wxBrush& brush) override;
-    virtual void SetBackground(const wxBrush& brush) override;
-    virtual void SetBackgroundMode(int mode) override;
+    void SetFont(const wxFont& font) override;
+    void SetPen(const wxPen& pen) override;
+    void SetBrush(const wxBrush& brush) override;
+    void SetBackground(const wxBrush& brush) override;
+    void SetBackgroundMode(int mode) override;
 
 #if wxUSE_PALETTE
-    virtual void SetPalette(const wxPalette& palette) override;
+    void SetPalette(const wxPalette& palette) override;
 #endif // wxUSE_PALETTE
 
-    virtual void SetLogicalFunction(wxRasterOperationMode function) override;
+    void SetLogicalFunction(wxRasterOperationMode function) override;
 
-    virtual wxCoord GetCharHeight() const override;
-    virtual wxCoord GetCharWidth() const override;
+    wxCoord GetCharHeight() const override;
+    wxCoord GetCharWidth() const override;
     virtual void DoGetTextExtent(const wxString& string,
                                  wxCoord *x, wxCoord *y,
                                  wxCoord *descent = NULL,
                                  wxCoord *externalLeading = NULL,
                                  const wxFont *theFont = NULL) const override;
 
-    virtual void Clear() override;
+    void Clear() override;
 
     virtual void DoSetClippingRegion(wxCoord x, wxCoord y,
                                      wxCoord width, wxCoord height) override;
 
-    virtual void DoSetDeviceClippingRegion(const wxRegion& region) override;
-    virtual void DestroyClippingRegion() override;
+    void DoSetDeviceClippingRegion(const wxRegion& region) override;
+    void DestroyClippingRegion() override;
 
     virtual bool DoFloodFill(wxCoord x, wxCoord y, const wxColour& col,
                              wxFloodFillStyle style = wxFLOOD_SURFACE) override;
-    virtual bool DoGetPixel(wxCoord x, wxCoord y, wxColour *col) const override;
+    bool DoGetPixel(wxCoord x, wxCoord y, wxColour *col) const override;
 
-    virtual void DoDrawPoint(wxCoord x, wxCoord y) override;
-    virtual void DoDrawLine(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2) override;
+    void DoDrawPoint(wxCoord x, wxCoord y) override;
+    void DoDrawLine(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2) override;
 
     virtual void DoDrawArc(wxCoord x1, wxCoord y1,
                            wxCoord x2, wxCoord y2,
@@ -70,20 +70,20 @@ public:
     virtual void DoDrawEllipticArc(wxCoord x, wxCoord y, wxCoord w, wxCoord h,
                                    double sa, double ea) override;
 
-    virtual void DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height) override;
+    void DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height) override;
     virtual void DoDrawRoundedRectangle(wxCoord x, wxCoord y,
                                         wxCoord width, wxCoord height,
                                         double radius) override;
     virtual void DoDrawEllipse(wxCoord x, wxCoord y,
                                wxCoord width, wxCoord height) override;
 
-    virtual void DoCrossHair(wxCoord x, wxCoord y) override;
+    void DoCrossHair(wxCoord x, wxCoord y) override;
 
-    virtual void DoDrawIcon(const wxIcon& icon, wxCoord x, wxCoord y) override;
+    void DoDrawIcon(const wxIcon& icon, wxCoord x, wxCoord y) override;
     virtual void DoDrawBitmap(const wxBitmap &bmp, wxCoord x, wxCoord y,
                               bool useMask = false) override;
 
-    virtual void DoDrawText(const wxString& text, wxCoord x, wxCoord y) override;
+    void DoDrawText(const wxString& text, wxCoord x, wxCoord y) override;
     virtual void DoDrawRotatedText(const wxString& text,
                                    wxCoord x, wxCoord y, double angle) override;
 
@@ -104,11 +104,11 @@ public:
                            wxPolygonFillMode fillStyle = wxODDEVEN_RULE) override;
 
     // Use Qt transformations, as they automatically scale pen widths, text...
-    virtual void ComputeScaleAndOrigin() override;
+    void ComputeScaleAndOrigin() override;
 
     void QtPreparePainter();
 
-    virtual void* GetHandle() const override { return (void*) m_qtPainter; }
+    void* GetHandle() const override { return (void*) m_qtPainter; }
 
 protected:
     virtual QPixmap *GetQPixmap() { return m_qtPixmap; }

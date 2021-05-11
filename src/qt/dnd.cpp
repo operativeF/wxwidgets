@@ -161,7 +161,7 @@ public:
         }
     }
 
-    virtual bool eventFilter(QObject* watched, QEvent* event) override
+    bool eventFilter(QObject* watched, QEvent* event) override
     {
         if ( m_dropTarget != NULL )
         {

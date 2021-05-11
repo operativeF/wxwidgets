@@ -56,7 +56,7 @@ public:
     void SetImage();
     void CreateDropDown();
     void ShowDropdown(GtkToggleButton* button);
-    virtual void SetLabel(const wxString& label) override;
+    void SetLabel(const wxString& label) override;
 
     GtkToolItem* m_item;
 };
@@ -176,7 +176,7 @@ namespace
 struct BitmapProvider: wxGtkImage::BitmapProvider
 {
     BitmapProvider(wxToolBarTool* tool) : m_tool(tool) { }
-    virtual wxBitmap Get() const override;
+    wxBitmap Get() const override;
     wxToolBarTool* const m_tool;
 };
 

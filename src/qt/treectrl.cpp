@@ -157,7 +157,7 @@ public:
         QTreeWidget::paintEvent(event);
     }
 
-    virtual void mouseReleaseEvent(QMouseEvent * event) override
+    void mouseReleaseEvent(QMouseEvent * event) override
     {
         const QPoint qPos = event->pos();
         QTreeWidgetItem *item = itemAt(qPos);
@@ -485,12 +485,12 @@ private:
         EmitEvent(tree_event);
     }
 
-    virtual QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex &index, const QEvent *event) const override
+    QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex &index, const QEvent *event) const override
     {
         return state() == DragSelectingState ? QItemSelectionModel::NoUpdate : QTreeWidget::selectionCommand(index, event);
     }
 
-    virtual void dropEvent(QDropEvent* event) override
+    void dropEvent(QDropEvent* event) override
     {
         endDrag(event->pos());
 
@@ -498,7 +498,7 @@ private:
         event->ignore();
     }
 
-    virtual void mouseMoveEvent(QMouseEvent *event) override
+    void mouseMoveEvent(QMouseEvent *event) override
     {
         const bool wasDragging = state() == DraggingState;
         wxQtEventSignalHandler<QTreeWidget, wxTreeCtrl>::mouseMoveEvent(event);

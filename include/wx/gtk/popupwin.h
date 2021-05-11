@@ -24,9 +24,9 @@ public:
         { (void)Create(parent, flags); }
     bool Create(wxWindow *parent, int flags = wxBORDER_NONE);
 
-    virtual bool Show(bool show = true) override;
+    bool Show(bool show = true) override;
 
-    virtual void SetFocus() override;
+    void SetFocus() override;
 
     // implementation
     // --------------
@@ -39,7 +39,7 @@ protected:
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
 
-    virtual void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoMoveWindow(int x, int y, int width, int height) override;
 
 #ifdef __WXUNIVERSAL__
     wxDECLARE_EVENT_TABLE();

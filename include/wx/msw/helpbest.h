@@ -32,41 +32,41 @@ public:
     virtual ~wxBestHelpController() { delete m_helpController; }
 
     // Must call this to set the filename
-    virtual bool Initialize(const wxString& file) override;
-    virtual bool Initialize(const wxString& file, int WXUNUSED(server) ) override { return Initialize( file ); }
+    bool Initialize(const wxString& file) override;
+    bool Initialize(const wxString& file, int WXUNUSED(server) ) override { return Initialize( file ); }
 
     // If file is "", reloads file given in Initialize
-    virtual bool LoadFile(const wxString& file = wxEmptyString) override
+    bool LoadFile(const wxString& file = wxEmptyString) override
     {
         return m_helpController->LoadFile( GetValidFilename( file ) );
     }
 
-    virtual bool DisplayContents() override
+    bool DisplayContents() override
     {
         return m_helpController->DisplayContents();
     }
 
-    virtual bool DisplaySection(int sectionNo) override
+    bool DisplaySection(int sectionNo) override
     {
         return m_helpController->DisplaySection( sectionNo );
     }
 
-    virtual bool DisplaySection(const wxString& section) override
+    bool DisplaySection(const wxString& section) override
     {
         return m_helpController->DisplaySection( section );
     }
 
-    virtual bool DisplayBlock(long blockNo) override
+    bool DisplayBlock(long blockNo) override
     {
         return m_helpController->DisplayBlock( blockNo );
     }
 
-    virtual bool DisplayContextPopup(int contextId) override
+    bool DisplayContextPopup(int contextId) override
     {
         return m_helpController->DisplayContextPopup( contextId );
     }
 
-    virtual bool DisplayTextPopup(const wxString& text, const wxPoint& pos) override
+    bool DisplayTextPopup(const wxString& text, const wxPoint& pos) override
     {
         return m_helpController->DisplayTextPopup( text, pos );
     }
@@ -77,7 +77,7 @@ public:
         return m_helpController->KeywordSearch( k, mode );
     }
 
-    virtual bool Quit() override
+    bool Quit() override
     {
         return m_helpController->Quit();
     }
@@ -102,10 +102,10 @@ public:
     }
 
     /// Set the window that can optionally be used for the help window's parent.
-    virtual void SetParentWindow(wxWindow* win) override { m_helpController->SetParentWindow(win); }
+    void SetParentWindow(wxWindow* win) override { m_helpController->SetParentWindow(win); }
 
     /// Get the window that can optionally be used for the help window's parent.
-    virtual wxWindow* GetParentWindow() const override { return m_helpController->GetParentWindow(); }
+    wxWindow* GetParentWindow() const override { return m_helpController->GetParentWindow(); }
 
 protected:
     // Append/change extension if necessary.

@@ -77,22 +77,22 @@ public:
     virtual ~wxVListBoxComboPopup();
 
     // required virtuals
-    virtual void Init() override;
-    virtual bool Create(wxWindow* parent) override;
-    virtual void SetFocus() override;
-    virtual wxWindow *GetControl() override { return this; }
-    virtual void SetStringValue( const wxString& value ) override;
-    virtual wxString GetStringValue() const override;
+    void Init() override;
+    bool Create(wxWindow* parent) override;
+    void SetFocus() override;
+    wxWindow *GetControl() override { return this; }
+    void SetStringValue( const wxString& value ) override;
+    wxString GetStringValue() const override;
 
     // more customization
-    virtual void OnPopup() override;
-    virtual wxSize GetAdjustedSize( int minWidth, int prefHeight, int maxHeight ) override;
-    virtual void PaintComboControl( wxDC& dc, const wxRect& rect ) override;
-    virtual void OnComboKeyEvent( wxKeyEvent& event ) override;
-    virtual void OnComboCharEvent( wxKeyEvent& event ) override;
-    virtual void OnComboDoubleClick() override;
-    virtual bool LazyCreate() override;
-    virtual bool FindItem(const wxString& item, wxString* trueItem) override;
+    void OnPopup() override;
+    wxSize GetAdjustedSize( int minWidth, int prefHeight, int maxHeight ) override;
+    void PaintComboControl( wxDC& dc, const wxRect& rect ) override;
+    void OnComboKeyEvent( wxKeyEvent& event ) override;
+    void OnComboCharEvent( wxKeyEvent& event ) override;
+    void OnComboDoubleClick() override;
+    bool LazyCreate() override;
+    bool FindItem(const wxString& item, wxString* trueItem) override;
     virtual void OnDPIChanged(wxDPIChangedEvent& event);
 
     // Item management
@@ -149,7 +149,7 @@ protected:
     virtual void OnDrawItem( wxDC& dc, const wxRect& rect, int item, int flags) const;
 
     // This is same as in wxVListBox
-    virtual wxCoord OnMeasureItem( size_t item ) const override;
+    wxCoord OnMeasureItem( size_t item ) const override;
 
     // Return item width, or -1 for calculating from text extent (default)
     virtual wxCoord OnMeasureItemWidth( size_t item ) const;
@@ -159,7 +159,7 @@ protected:
     virtual void OnDrawBg(wxDC& dc, const wxRect& rect, int item, int flags) const;
 
     // Additional wxVListBox implementation (no need to override in derived classes)
-    virtual void OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const override;
+    void OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const override;
     void OnDrawBackground(wxDC& dc, const wxRect& rect, size_t n) const override;
 
     // filter mouse move events happening outside the list box
@@ -309,12 +309,12 @@ public:
     }
 
     // wxControlWithItems methods
-    virtual unsigned int GetCount() const override;
-    virtual wxString GetString(unsigned int n) const override;
-    virtual void SetString(unsigned int n, const wxString& s) override;
-    virtual int FindString(const wxString& s, bool bCase = false) const override;
+    unsigned int GetCount() const override;
+    wxString GetString(unsigned int n) const override;
+    void SetString(unsigned int n, const wxString& s) override;
+    int FindString(const wxString& s, bool bCase = false) const override;
     virtual void Select(int n);
-    virtual int GetSelection() const override;
+    int GetSelection() const override;
 
     // See wxComboBoxBase discussion of IsEmpty().
     bool IsListEmpty() const { return wxItemContainer::IsEmpty(); }
@@ -322,14 +322,14 @@ public:
 
     // Override these just to maintain consistency with virtual methods
     // between classes.
-    virtual void Clear() override;
-    virtual void GetSelection(long *from, long *to) const override;
+    void Clear() override;
+    void GetSelection(long *from, long *to) const override;
 
-    virtual void SetSelection(int n) override { Select(n); }
+    void SetSelection(int n) override { Select(n); }
 
 
     // Prevent a method from being hidden
-    virtual void SetSelection(long from, long to) override
+    void SetSelection(long from, long to) override
     {
         wxComboCtrl::SetSelection(from,to);
     }
@@ -340,11 +340,11 @@ public:
     // Return the index of the widest item (recalculating it if necessary)
     virtual int GetWidestItem() { EnsurePopupControl(); return GetVListBoxComboPopup()->GetWidestItem(); }
 
-    virtual bool IsSorted() const override { return HasFlag(wxCB_SORT); }
+    bool IsSorted() const override { return HasFlag(wxCB_SORT); }
 
 protected:
-    virtual void DoClear() override;
-    virtual void DoDeleteOneItem(unsigned int n) override;
+    void DoClear() override;
+    void DoDeleteOneItem(unsigned int n) override;
 
     // Callback for drawing. Font, background and text colour have been
     // prepared according to selection, focus and such.
@@ -361,14 +361,14 @@ protected:
 
     // override base implementation so we can return the size for the
     // largest item
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
 
     // Callback for background drawing. Flags are same as with
     // OnDrawItem.
     virtual void OnDrawBackground( wxDC& dc, const wxRect& rect, int item, int flags ) const;
 
     // NULL popup can be used to indicate default interface
-    virtual void DoSetPopupControl(wxComboPopup* popup) override;
+    void DoSetPopupControl(wxComboPopup* popup) override;
 
     // clears all allocated client data
     void ClearClientDatas();
@@ -381,8 +381,8 @@ protected:
     virtual int DoInsertItems(const wxArrayStringsAdapter& items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
-    virtual void DoSetItemClientData(unsigned int n, void* clientData) override;
-    virtual void* DoGetItemClientData(unsigned int n) const override;
+    void DoSetItemClientData(unsigned int n, void* clientData) override;
+    void* DoGetItemClientData(unsigned int n) const override;
 
     // temporary storage for the initial choices
     //const wxString*         m_baseChoices;

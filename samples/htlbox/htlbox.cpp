@@ -68,11 +68,11 @@ public:
 protected:
     // override this method to return data to be shown in the listbox (this is
     // mandatory)
-    virtual wxString OnGetItem(size_t n) const override;
+    wxString OnGetItem(size_t n) const override;
 
     // change the appearance by overriding these functions (this is optional)
-    virtual void OnDrawSeparator(wxDC& dc, wxRect& rect, size_t n) const override;
-    virtual wxColour GetSelectedTextColour(const wxColour& colFg) const override;
+    void OnDrawSeparator(wxDC& dc, wxRect& rect, size_t n) const override;
+    wxColour GetSelectedTextColour(const wxColour& colFg) const override;
 
     // flag telling us whether we should use fg colour even for the selected
     // item
@@ -149,7 +149,7 @@ private:
 class MyApp : public wxApp
 {
 public:
-    virtual bool OnInit() override { (new MyFrame())->Show(); return true; }
+    bool OnInit() override { (new MyFrame())->Show(); return true; }
 };
 
 // ----------------------------------------------------------------------------

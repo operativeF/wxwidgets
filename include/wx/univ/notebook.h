@@ -62,24 +62,24 @@ public:
     // implement wxNotebookBase pure virtuals
     // --------------------------------------
 
-    virtual int SetSelection(size_t nPage) override { return DoSetSelection(nPage, SetSelection_SendEvent); }
+    int SetSelection(size_t nPage) override { return DoSetSelection(nPage, SetSelection_SendEvent); }
 
     // changes selected page without sending events
     int ChangeSelection(size_t nPage) override { return DoSetSelection(nPage); }
 
-    virtual bool SetPageText(size_t nPage, const wxString& strText) override;
-    virtual wxString GetPageText(size_t nPage) const override;
+    bool SetPageText(size_t nPage, const wxString& strText) override;
+    wxString GetPageText(size_t nPage) const override;
 
-    virtual int GetPageImage(size_t nPage) const override;
-    virtual bool SetPageImage(size_t nPage, int nImage) override;
+    int GetPageImage(size_t nPage) const override;
+    bool SetPageImage(size_t nPage, int nImage) override;
 
-    virtual void SetPageSize(const wxSize& size) override;
-    virtual void SetPadding(const wxSize& padding) override;
-    virtual void SetTabSize(const wxSize& sz) override;
+    void SetPageSize(const wxSize& size) override;
+    void SetPadding(const wxSize& padding) override;
+    void SetTabSize(const wxSize& sz) override;
 
-    virtual wxSize CalcSizeFromPage(const wxSize& sizePage) const override;
+    wxSize CalcSizeFromPage(const wxSize& sizePage) const override;
 
-    virtual bool DeleteAllPages() override;
+    bool DeleteAllPages() override;
 
     virtual bool InsertPage(size_t nPage,
                             wxNotebookPage *pPage,
@@ -103,7 +103,7 @@ public:
     // hit testing
     // -----------
 
-    virtual int HitTest(const wxPoint& pt, long *flags = NULL) const override;
+    int HitTest(const wxPoint& pt, long *flags = NULL) const override;
 
     // input handling
     // --------------
@@ -113,7 +113,7 @@ public:
                                const wxString& strArg = wxEmptyString) override;
 
     static wxInputHandler *GetStdInputHandler(wxInputHandler *handlerDef);
-    virtual wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
+    wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
     {
         return GetStdInputHandler(handlerDef);
     }
@@ -122,14 +122,14 @@ public:
     void RefreshCurrent();
 
 protected:
-    virtual wxNotebookPage *DoRemovePage(size_t nPage) override;
+    wxNotebookPage *DoRemovePage(size_t nPage) override;
 
     // drawing
-    virtual void DoDraw(wxControlRenderer *renderer) override;
+    void DoDraw(wxControlRenderer *renderer) override;
     void DoDrawTab(wxDC& dc, const wxRect& rect, size_t n);
 
     // resizing
-    virtual void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoMoveWindow(int x, int y, int width, int height) override;
     virtual void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;

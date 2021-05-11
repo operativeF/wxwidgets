@@ -49,37 +49,37 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
-    virtual bool IsSelected(int n) const override;
-    virtual int GetSelections(wxArrayInt& aSelections) const override;
+    bool IsSelected(int n) const override;
+    int GetSelections(wxArrayInt& aSelections) const override;
 
-    virtual unsigned int GetCount() const override;
-    virtual wxString GetString(unsigned int n) const override;
-    virtual void SetString(unsigned int n, const wxString& s) override;
+    unsigned int GetCount() const override;
+    wxString GetString(unsigned int n) const override;
+    void SetString(unsigned int n, const wxString& s) override;
 
-    virtual int GetSelection() const override;
+    int GetSelection() const override;
 
-    virtual QWidget *GetHandle() const override;
+    QWidget *GetHandle() const override;
 
     void QtSendEvent(wxEventType evtType, int rowIndex, bool selected);
 
 protected:
-    virtual void DoSetFirstItem(int n) override;
+    void DoSetFirstItem(int n) override;
 
-    virtual void DoSetSelection(int n, bool select) override;
+    void DoSetSelection(int n, bool select) override;
 
     virtual int DoInsertItems(const wxArrayStringsAdapter & items,
                               unsigned int pos,
                               void **clientData,
                               wxClientDataType type) override;
-    virtual int DoInsertOneItem(const wxString& item, unsigned int pos) override;
+    int DoInsertOneItem(const wxString& item, unsigned int pos) override;
 
-    virtual void DoSetItemClientData(unsigned int n, void *clientData) override;
-    virtual void *DoGetItemClientData(unsigned int n) const override;
+    void DoSetItemClientData(unsigned int n, void *clientData) override;
+    void *DoGetItemClientData(unsigned int n) const override;
 
-    virtual void DoClear() override;
-    virtual void DoDeleteOneItem(unsigned int pos) override;
+    void DoClear() override;
+    void DoDeleteOneItem(unsigned int pos) override;
 
-    virtual QScrollArea *QtGetScrollBarsContainer() const override;
+    QScrollArea *QtGetScrollBarsContainer() const override;
 
 #if wxUSE_CHECKLISTBOX
     bool       m_hasCheckBoxes;

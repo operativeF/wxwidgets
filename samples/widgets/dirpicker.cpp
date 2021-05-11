@@ -63,11 +63,11 @@ class DirPickerWidgetsPage : public WidgetsPage
 public:
     DirPickerWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_dirPicker; }
-    virtual void RecreateWidget() override { RecreatePicker(); }
+    wxWindow *GetWidget() const override { return m_dirPicker; }
+    void RecreateWidget() override { RecreatePicker(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 protected:
 

@@ -359,7 +359,7 @@ class wxFontMapperModule : public wxModule
 public:
     wxFontMapperModule() : wxModule() { }
 
-    virtual bool OnInit() override
+    bool OnInit() override
     {
         // a dummy wxFontMapperBase object could have been created during the
         // program startup before wxApp was created, we have to delete it to
@@ -373,7 +373,7 @@ public:
         return true;
     }
 
-    virtual void OnExit() override
+    void OnExit() override
     {
         wxFontMapperBase::Reset();
     }

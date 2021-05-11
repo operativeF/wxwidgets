@@ -94,15 +94,15 @@ public:
                               int page,
                               int range,
                               bool refresh = true ) override;
-    virtual void SetScrollPos(int orient, int pos, bool refresh = true) override;
-    virtual int GetScrollPos(int orient) const override;
-    virtual int GetScrollThumb(int orient) const override;
-    virtual int GetScrollRange(int orient) const override;
+    void SetScrollPos(int orient, int pos, bool refresh = true) override;
+    int GetScrollPos(int orient) const override;
+    int GetScrollThumb(int orient) const override;
+    int GetScrollRange(int orient) const override;
     virtual void ScrollWindow(int dx, int dy,
                               const wxRect* rect = NULL) override;
 
     // take into account the borders here
-    virtual wxPoint GetClientAreaOrigin() const override;
+    wxPoint GetClientAreaOrigin() const override;
 
     // popup menu support
     // ------------------
@@ -182,12 +182,12 @@ public:
                          const wxRect *rect = (const wxRect *) NULL) override;
 
     // we refresh the window when it is dis/enabled
-    virtual bool Enable(bool enable = true) override;
+    bool Enable(bool enable = true) override;
 
     // should we use the standard control colours or not?
-    virtual bool ShouldInheritColours() const override { return false; }
+    bool ShouldInheritColours() const override { return false; }
 
-    virtual bool IsClientAreaChild(const wxWindow *child) const override
+    bool IsClientAreaChild(const wxWindow *child) const override
     {
 #if wxUSE_SCROLLBAR
         if ( child == (wxWindow*)m_scrollbarHorz ||
@@ -202,13 +202,13 @@ protected:
     void Init();
 
 #if wxUSE_MENUS
-    virtual bool DoPopupMenu(wxMenu *menu, int x, int y) override;
+    bool DoPopupMenu(wxMenu *menu, int x, int y) override;
 #endif // wxUSE_MENUS
 
     // we deal with the scrollbars in these functions
-    virtual void DoSetClientSize(int width, int height) override;
-    virtual void DoGetClientSize(int *width, int *height) const override;
-    virtual wxHitTest DoHitTest(wxCoord x, wxCoord y) const override;
+    void DoSetClientSize(int width, int height) override;
+    void DoGetClientSize(int *width, int *height) const override;
+    wxHitTest DoHitTest(wxCoord x, wxCoord y) const override;
 
     // event handlers
     void OnSize(wxSizeEvent& event);
@@ -235,7 +235,7 @@ protected:
     virtual void DoDraw(wxControlRenderer *renderer);
 
     // override the base class method to return the size of the window borders
-    virtual wxSize DoGetBorderSize() const override;
+    wxSize DoGetBorderSize() const override;
 
     // adjust the size of the window to take into account its borders
     wxSize AdjustSize(const wxSize& size) const;

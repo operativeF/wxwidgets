@@ -45,7 +45,7 @@
 class MyApp : public wxApp
 {
 public:
-    virtual bool OnInit() override;
+    bool OnInit() override;
 };
 
 

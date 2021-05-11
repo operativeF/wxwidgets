@@ -34,14 +34,14 @@ public:
 
     virtual void SetBackgroundColour(const wxColour& col,
                                      const wxColour& colEnd) override;
-    virtual void SetCustomIcon(const wxIcon& icon) override;
-    virtual void SetStandardIcon(int icon) override;
+    void SetCustomIcon(const wxIcon& icon) override;
+    void SetStandardIcon(int icon) override;
     virtual void SetTimeout(unsigned milliseconds,
                             unsigned millisecondsDelay = 0) override;
-    virtual void SetTipKind(wxTipKind tipKind) override;
-    virtual void SetTitleFont(const wxFont& font) override;
+    void SetTipKind(wxTipKind tipKind) override;
+    void SetTitleFont(const wxFont& font) override;
 
-    virtual void ShowFor(wxWindow* win, const wxRect* rect = NULL) override;
+    void ShowFor(wxWindow* win, const wxRect* rect = NULL) override;
 
 protected:
     wxString m_title,

@@ -51,7 +51,7 @@ public:
     // -----------------------------
 
     // do the same thing as in the generic case here
-    virtual void SetLabel(const wxString& label) override
+    void SetLabel(const wxString& label) override
     {
         SetMainLabelAndNote(label.BeforeFirst('\n'), label.AfterFirst('\n'));
     }
@@ -59,12 +59,12 @@ public:
     virtual void SetMainLabelAndNote(const wxString& mainLabel,
                                      const wxString& note) override;
 
-    virtual WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
 
 protected:
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
 
-    virtual bool HasNativeBitmap() const override;
+    bool HasNativeBitmap() const override;
 
 private:
     wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxCommandLinkButton);

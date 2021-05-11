@@ -49,8 +49,8 @@ public:
     virtual ~wxSlider();
 
     // slider methods
-    virtual int GetValue() const override;
-    virtual void SetValue(int) override;
+    int GetValue() const override;
+    void SetValue(int) override;
 
     void SetRange(int minValue, int maxValue) override;
 
@@ -76,25 +76,25 @@ public:
     WXHWND GetStaticMin() const;
     WXHWND GetStaticMax() const;
     WXHWND GetEditValue() const;
-    virtual bool ContainsHWND(WXHWND hWnd) const override;
+    bool ContainsHWND(WXHWND hWnd) const override;
 
     // we should let background show through the slider (and its labels)
-    virtual bool HasTransparentBackground() override { return true; }
+    bool HasTransparentBackground() override { return true; }
 
     // returns true if the platform should explicitly apply a theme border
-    virtual bool CanApplyThemeBorder() const override { return false; }
+    bool CanApplyThemeBorder() const override { return false; }
 
     void Command(wxCommandEvent& event) override;
     virtual bool MSWOnScroll(int orientation, WXWORD wParam,
                              WXWORD pos, WXHWND control) override;
 
-    virtual bool Show(bool show = true) override;
-    virtual bool Enable(bool show = true) override;
-    virtual bool SetFont(const wxFont& font) override;
-    virtual bool SetForegroundColour(const wxColour& colour) override;
-    virtual bool SetBackgroundColour(const wxColour& colour) override;
+    bool Show(bool show = true) override;
+    bool Enable(bool show = true) override;
+    bool SetFont(const wxFont& font) override;
+    bool SetForegroundColour(const wxColour& colour) override;
+    bool SetBackgroundColour(const wxColour& colour) override;
 
-    virtual WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
+    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
 
 protected:
     // common part of all ctors
@@ -115,14 +115,14 @@ protected:
 
 
     // overridden base class virtuals
-    virtual void DoGetPosition(int *x, int *y) const override;
-    virtual void DoGetSize(int *width, int *height) const override;
-    virtual void DoMoveWindow(int x, int y, int width, int height) override;
-    virtual wxSize DoGetBestSize() const override;
+    void DoGetPosition(int *x, int *y) const override;
+    void DoGetSize(int *width, int *height) const override;
+    void DoMoveWindow(int x, int y, int width, int height) override;
+    wxSize DoGetBestSize() const override;
 
     WXHBRUSH DoMSWControlColor(WXHDC pDC, wxColour colBg, WXHWND hWnd) override;
 
-    virtual void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
+    void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
 
     void OnDPIChanged(wxDPIChangedEvent& event);
 
@@ -143,7 +143,7 @@ protected:
     bool m_isDragging;
 
     // Platform-specific implementation of SetTickFreq
-    virtual void DoSetTickFreq(int freq) override;
+    void DoSetTickFreq(int freq) override;
 
     wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxSlider);
 };

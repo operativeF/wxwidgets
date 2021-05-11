@@ -46,13 +46,13 @@ public:
     virtual ~wxWizard();
 
     // implement base class pure virtuals
-    virtual bool RunWizard(wxWizardPage *firstPage) override;
-    virtual wxWizardPage *GetCurrentPage() const override;
-    virtual void SetPageSize(const wxSize& size) override;
-    virtual wxSize GetPageSize() const override;
-    virtual void FitToPage(const wxWizardPage *firstPage) override;
-    virtual wxSizer *GetPageAreaSizer() const override;
-    virtual void SetBorder(int border) override;
+    bool RunWizard(wxWizardPage *firstPage) override;
+    wxWizardPage *GetCurrentPage() const override;
+    void SetPageSize(const wxSize& size) override;
+    wxSize GetPageSize() const override;
+    void FitToPage(const wxWizardPage *firstPage) override;
+    wxSizer *GetPageAreaSizer() const override;
+    void SetBorder(int border) override;
 
     /// set/get bitmap
     const wxBitmap& GetBitmap() const { return m_bitmap; }
@@ -74,7 +74,7 @@ public:
     virtual void DoCreateControls();
 
     // Do the adaptation
-    virtual bool DoLayoutAdaptation() override;
+    bool DoLayoutAdaptation() override;
 
     // Set/get bitmap background colour
     void SetBitmapBackgroundColour(const wxColour& colour) { m_bitmapBackgroundColour = colour; }

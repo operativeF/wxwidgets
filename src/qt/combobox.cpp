@@ -23,8 +23,8 @@ class wxQtComboBox : public wxQtEventSignalHandler< QComboBox, wxComboBox >
 {
 public:
     wxQtComboBox( wxWindow *parent, wxComboBox *handler );
-    virtual void showPopup() override;
-    virtual void hidePopup() override;
+    void showPopup() override;
+    void hidePopup() override;
 
     class IgnoreTextChange
     {

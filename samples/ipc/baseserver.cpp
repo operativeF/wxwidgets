@@ -42,7 +42,7 @@
 class MyConnection : public MyConnectionBase, public wxTimer
 {
 public:
-    virtual bool Disconnect() override { return wxConnection::Disconnect(); }
+    bool Disconnect() override { return wxConnection::Disconnect(); }
     virtual bool OnExecute(const wxString& topic,
                            const void *data,
                            size_t size,
@@ -56,14 +56,14 @@ public:
                         const void *data,
                         size_t size,
                         wxIPCFormat format) override;
-    virtual bool OnStartAdvise(const wxString& topic, const wxString& item) override;
-    virtual bool OnStopAdvise(const wxString& topic, const wxString& item) override;
+    bool OnStartAdvise(const wxString& topic, const wxString& item) override;
+    bool OnStopAdvise(const wxString& topic, const wxString& item) override;
     virtual bool DoAdvise(const wxString& item,
                           const void *data,
                           size_t size,
                           wxIPCFormat format) override;
-    virtual bool OnDisconnect() override;
-    virtual void Notify() override;
+    bool OnDisconnect() override;
+    void Notify() override;
 
 private:
     wxString        m_sAdvise;
@@ -84,8 +84,8 @@ public:
                         const void *data,
                         size_t size,
                         wxIPCFormat format) override;
-    virtual bool OnStartAdvise(const wxString& topic, const wxString& item) override;
-    virtual bool OnStopAdvise(const wxString& topic, const wxString& item) override;
+    bool OnStartAdvise(const wxString& topic, const wxString& item) override;
+    bool OnStopAdvise(const wxString& topic, const wxString& item) override;
 
 private:
     // return true if this is the supported topic+item combination, log an
@@ -112,7 +112,7 @@ public:
     void Disconnect();
     bool IsConnected() { return m_connection != NULL; }
 
-    virtual wxConnectionBase *OnAcceptConnection(const wxString& topic) override;
+    wxConnectionBase *OnAcceptConnection(const wxString& topic) override;
 
 private:
     wxConnection *m_connection;
@@ -122,7 +122,7 @@ private:
 class MyApp : public wxApp
 {
 public:
-    virtual bool OnInit() override;
+    bool OnInit() override;
 
 protected:
     MyServer m_server;

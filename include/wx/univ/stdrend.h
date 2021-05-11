@@ -37,7 +37,7 @@ public:
                                    int flags) override;
 
 
-    virtual void DrawFocusRect(wxWindow* win, wxDC& dc, const wxRect& rect, int flags = 0) override;
+    void DrawFocusRect(wxWindow* win, wxDC& dc, const wxRect& rect, int flags = 0) override;
 
     virtual void DrawLabel(wxDC& dc,
                            const wxString& label,
@@ -119,7 +119,7 @@ public:
                               int selEnd = -1,
                               int flags = 0) override;
 
-    virtual void DrawLineWrapMark(wxDC& dc, const wxRect& rect) override;
+    void DrawLineWrapMark(wxDC& dc, const wxRect& rect) override;
 
     virtual wxRect GetTextTotalArea(const wxTextCtrl *text,
                                     const wxRect& rect) const override;
@@ -128,13 +128,13 @@ public:
                                      wxCoord *extraSpaceBeyond) const override;
 #endif // wxUSE_TEXTCTRL
 
-    virtual wxRect GetBorderDimensions(wxBorder border) const override;
+    wxRect GetBorderDimensions(wxBorder border) const override;
 
-    virtual bool AreScrollbarsInsideBorder() const override;
+    bool AreScrollbarsInsideBorder() const override;
 
-    virtual void AdjustSize(wxSize *size, const wxWindow *window) override;
+    void AdjustSize(wxSize *size, const wxWindow *window) override;
 
-    virtual wxCoord GetListboxItemHeight(wxCoord fontHeight) override;
+    wxCoord GetListboxItemHeight(wxCoord fontHeight) override;
 
 #if wxUSE_STATUSBAR
     virtual void DrawStatusField(wxDC& dc,
@@ -142,14 +142,14 @@ public:
                                  const wxString& label,
                                  int flags = 0, int style = 0) override;
 
-    virtual wxSize GetStatusBarBorders() const override;
+    wxSize GetStatusBarBorders() const override;
 
-    virtual wxCoord GetStatusBarBorderBetweenFields() const override;
+    wxCoord GetStatusBarBorderBetweenFields() const override;
 
-    virtual wxSize GetStatusBarFieldMargins() const override;
+    wxSize GetStatusBarFieldMargins() const override;
 #endif // wxUSE_STATUSBAR
 
-    virtual wxCoord GetCheckItemMargin() const override { return 0; }
+    wxCoord GetCheckItemMargin() const override { return 0; }
 
 
     virtual void DrawFrameTitleBar(wxDC& dc,
@@ -178,13 +178,13 @@ public:
                                  int button,
                                  int flags = 0) override;
 
-    virtual wxRect GetFrameClientArea(const wxRect& rect, int flags) const override;
+    wxRect GetFrameClientArea(const wxRect& rect, int flags) const override;
 
-    virtual wxSize GetFrameTotalSize(const wxSize& clientSize, int flags) const override;
+    wxSize GetFrameTotalSize(const wxSize& clientSize, int flags) const override;
 
-    virtual wxSize GetFrameMinSize(int flags) const override;
+    wxSize GetFrameMinSize(int flags) const override;
 
-    virtual wxSize GetFrameIconSize() const override;
+    wxSize GetFrameIconSize() const override;
 
     virtual int HitTestFrame(const wxRect& rect,
                              const wxPoint& pt,

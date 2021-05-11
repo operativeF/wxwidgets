@@ -538,23 +538,23 @@ public:
     virtual wxGridActivationResult
     TryActivate(int row, int col, wxGrid* grid,
                 const wxGridActivationSource& actSource) override = 0;
-    virtual void DoActivate(int row, int col, wxGrid* grid) override = 0;
+    void DoActivate(int row, int col, wxGrid* grid) override = 0;
 
     // All the other methods that normally must be implemented in an editor are
     // defined as just stubs below, as they should be never called.
 
-    virtual void Create(wxWindow*, wxWindowID, wxEvtHandler*) override
+    void Create(wxWindow*, wxWindowID, wxEvtHandler*) override
         { wxFAIL; }
-    virtual void BeginEdit(int, int, wxGrid*) override
+    void BeginEdit(int, int, wxGrid*) override
         { wxFAIL; }
     virtual bool EndEdit(int, int, const wxGrid*,
                          const wxString&, wxString*) override
         { wxFAIL; return false; }
-    virtual void ApplyEdit(int, int, wxGrid*) override
+    void ApplyEdit(int, int, wxGrid*) override
         { wxFAIL; }
-    virtual void Reset() override
+    void Reset() override
         { wxFAIL; }
-    virtual wxString GetValue() const override
+    wxString GetValue() const override
         { wxFAIL; return wxString(); }
 };
 
@@ -1370,10 +1370,10 @@ public:
 
     // these are pure virtual in wxGridTableBase
     //
-    virtual int GetNumberRows() override { return static_cast<int>(m_data.size()); }
-    virtual int GetNumberCols() override { return m_numCols; }
-    virtual wxString GetValue( int row, int col ) override;
-    virtual void SetValue( int row, int col, const wxString& s ) override;
+    int GetNumberRows() override { return static_cast<int>(m_data.size()); }
+    int GetNumberCols() override { return m_numCols; }
+    wxString GetValue( int row, int col ) override;
+    void SetValue( int row, int col, const wxString& s ) override;
 
     // overridden functions from wxGridTableBase
     //
@@ -1670,7 +1670,7 @@ public:
 
     int      GetBatchCount() const { return m_batchCount; }
 
-    virtual void Refresh(bool eraseb = true, const wxRect* rect = NULL) override;
+    void Refresh(bool eraseb = true, const wxRect* rect = NULL) override;
 
     // Use this, rather than wxWindow::Refresh(), to force an
     // immediate repainting of the grid. Has no effect if you are
@@ -2320,7 +2320,7 @@ public:
 
     // ------- drag and drop
 #if wxUSE_DRAG_AND_DROP
-    virtual void SetDropTarget(wxDropTarget *dropTarget) override;
+    void SetDropTarget(wxDropTarget *dropTarget) override;
 #endif // wxUSE_DRAG_AND_DROP
 
 
@@ -2516,15 +2516,15 @@ public:
 
 
     // override some base class functions
-    virtual void Fit() override;
-    virtual void SetFocus() override;
+    void Fit() override;
+    void SetFocus() override;
 
     // implementation only
     void CancelMouseCapture();
 
 protected:
-    virtual wxSize DoGetBestSize() const override;
-    virtual void DoEnable(bool enable) override;
+    wxSize DoGetBestSize() const override;
+    void DoEnable(bool enable) override;
 
     bool m_created;
 
@@ -2842,7 +2842,7 @@ protected:
         { return SetCurrentCell( wxGridCellCoords(row, col) ); }
 
 
-    virtual bool ShouldScrollToChildOnFocus(wxWindow* WXUNUSED(win)) override
+    bool ShouldScrollToChildOnFocus(wxWindow* WXUNUSED(win)) override
         { return false; }
 
     friend class WXDLLIMPEXP_FWD_CORE wxGridSelection;
@@ -2869,7 +2869,7 @@ private:
     void OnDPIChanged(wxDPIChangedEvent& event);
 
     // implement wxScrolledCanvas method to return m_gridWin size
-    virtual wxSize GetSizeAvailableForScrollTarget(const wxSize& size) override;
+    wxSize GetSizeAvailableForScrollTarget(const wxSize& size) override;
 
     // depending on the values of m_numFrozenRows and m_numFrozenCols, it will
     // create and initialize or delete the frozen windows
@@ -3221,7 +3221,7 @@ public:
     wxPoint GetPosition() const { return wxPoint( m_x, m_y ); }
     bool Selecting() const { return m_selecting; }
 
-    virtual wxEvent *Clone() const override { return new wxGridEvent(*this); }
+    wxEvent *Clone() const override { return new wxGridEvent(*this); }
 
 protected:
     int         m_row;
@@ -3281,7 +3281,7 @@ public:
     int GetRowOrCol() const { return m_rowOrCol; }
     wxPoint GetPosition() const { return wxPoint( m_x, m_y ); }
 
-    virtual wxEvent *Clone() const override { return new wxGridSizeEvent(*this); }
+    wxEvent *Clone() const override { return new wxGridSizeEvent(*this); }
 
 protected:
     int         m_rowOrCol;
@@ -3345,7 +3345,7 @@ public:
     int GetRightCol() const { return m_bottomRight.GetCol(); }
     bool Selecting() const { return m_selecting; }
 
-    virtual wxEvent *Clone() const override { return new wxGridRangeSelectEvent(*this); }
+    wxEvent *Clone() const override { return new wxGridRangeSelectEvent(*this); }
 
 protected:
     void Init(const wxGridCellCoords& topLeft,
@@ -3391,7 +3391,7 @@ public:
     wxControl* GetControl()             { return wxDynamicCast(m_window, wxControl); }
     void SetControl(wxControl* ctrl)    { m_window = ctrl; }
 
-    virtual wxEvent *Clone() const override { return new wxGridEditorCreatedEvent(*this); }
+    wxEvent *Clone() const override { return new wxGridEditorCreatedEvent(*this); }
 
 private:
     int m_row;

@@ -40,7 +40,7 @@ public:
     {
     }
 
-    virtual void Save() const override
+    void Save() const override
     {
         const wxTreebook * const book = GetTreeBook();
 
@@ -62,7 +62,7 @@ public:
         wxPersistentBookCtrl::Save();
     }
 
-    virtual bool Restore() override
+    bool Restore() override
     {
         wxTreebook * const book = GetTreeBook();
 
@@ -85,7 +85,7 @@ public:
         return wxPersistentBookCtrl::Restore();
     }
 
-    virtual wxString GetKind() const override { return wxPERSIST_TREEBOOK_KIND; }
+    wxString GetKind() const override { return wxPERSIST_TREEBOOK_KIND; }
 
     wxTreebook *GetTreeBook() const { return static_cast<wxTreebook *>(Get()); }
 };

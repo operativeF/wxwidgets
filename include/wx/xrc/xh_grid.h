@@ -21,8 +21,8 @@ class WXDLLIMPEXP_XRC wxGridXmlHandler : public wxXmlResourceHandler
 public:
     wxGridXmlHandler();
 
-    virtual wxObject *DoCreateResource() override;
-    virtual bool CanHandle(wxXmlNode *node) override;
+    wxObject *DoCreateResource() override;
+    bool CanHandle(wxXmlNode *node) override;
 };
 
 #endif // wxUSE_XRC && wxUSE_GRID

@@ -57,11 +57,11 @@ public:
         m_sizerHeader = NULL;
     }
 
-    virtual wxWindow *GetWidget() const override { return m_header; }
-    virtual void RecreateWidget() override;
+    wxWindow *GetWidget() const override { return m_header; }
+    void RecreateWidget() override;
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 protected:
     // event handlers

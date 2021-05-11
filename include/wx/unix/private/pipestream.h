@@ -21,7 +21,7 @@ public:
     bool IsOpened() const { return !Eof(); }
 
     // return true if we have anything to read, don't block
-    virtual bool CanRead() const override;
+    bool CanRead() const override;
 };
 
 class wxPipeOutputStream : public wxFileOutputStream

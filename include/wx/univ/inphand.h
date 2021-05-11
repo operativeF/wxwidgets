@@ -98,12 +98,12 @@ public:
         return m_handler ? m_handler->HandleMouse(consumer, event) : false;
     }
 
-    virtual bool HandleMouseMove(wxInputConsumer *consumer, const wxMouseEvent& event) override
+    bool HandleMouseMove(wxInputConsumer *consumer, const wxMouseEvent& event) override
     {
         return m_handler ? m_handler->HandleMouseMove(consumer, event) : false;
     }
 
-    virtual bool HandleFocus(wxInputConsumer *consumer, const wxFocusEvent& event) override
+    bool HandleFocus(wxInputConsumer *consumer, const wxFocusEvent& event) override
     {
         return m_handler ? m_handler->HandleFocus(consumer, event) : false;
     }

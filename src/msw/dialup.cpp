@@ -152,21 +152,21 @@ public:
     virtual ~wxDialUpManagerMSW();
 
     // implement base class pure virtuals
-    virtual bool IsOk() const override;
-    virtual size_t GetISPNames(wxArrayString& names) const override;
+    bool IsOk() const override;
+    size_t GetISPNames(wxArrayString& names) const override;
     virtual bool Dial(const wxString& nameOfISP,
                       const wxString& username,
                       const wxString& password,
                       bool async) override;
-    virtual bool IsDialing() const override;
-    virtual bool CancelDialing() override;
-    virtual bool HangUp() override;
-    virtual bool IsAlwaysOnline() const override;
-    virtual bool IsOnline() const override;
-    virtual void SetOnlineStatus(bool isOnline = true) override;
-    virtual bool EnableAutoCheckOnlineStatus(size_t nSeconds) override;
-    virtual void DisableAutoCheckOnlineStatus() override;
-    virtual void SetWellKnownHost(const wxString& hostname, int port) override;
+    bool IsDialing() const override;
+    bool CancelDialing() override;
+    bool HangUp() override;
+    bool IsAlwaysOnline() const override;
+    bool IsOnline() const override;
+    void SetOnlineStatus(bool isOnline = true) override;
+    bool EnableAutoCheckOnlineStatus(size_t nSeconds) override;
+    void DisableAutoCheckOnlineStatus() override;
+    void SetWellKnownHost(const wxString& hostname, int port) override;
     virtual void SetConnectCommand(const wxString& commandDial,
                                    const wxString& commandHangup) override;
 
@@ -206,7 +206,7 @@ private:
         explicit RasTimer(wxDialUpManagerMSW *dialUpManager)
             { m_dialUpManager = dialUpManager; }
 
-        virtual void Notify() override { m_dialUpManager->CheckRasStatus(); }
+        void Notify() override { m_dialUpManager->CheckRasStatus(); }
 
     private:
         wxDialUpManagerMSW *m_dialUpManager;

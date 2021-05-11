@@ -32,25 +32,25 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxSliderNameStr));
 
-    virtual int GetValue() const override;
-    virtual void SetValue(int value) override;
+    int GetValue() const override;
+    void SetValue(int value) override;
 
-    virtual void SetRange(int minValue, int maxValue) override;
-    virtual int GetMin() const override;
-    virtual int GetMax() const override;
+    void SetRange(int minValue, int maxValue) override;
+    int GetMin() const override;
+    int GetMax() const override;
 
-    virtual void DoSetTickFreq(int freq) override;
-    virtual int GetTickFreq() const override;
+    void DoSetTickFreq(int freq) override;
+    int GetTickFreq() const override;
 
-    virtual void SetLineSize(int lineSize) override;
-    virtual void SetPageSize(int pageSize) override;
-    virtual int GetLineSize() const override;
-    virtual int GetPageSize() const override;
+    void SetLineSize(int lineSize) override;
+    void SetPageSize(int pageSize) override;
+    int GetLineSize() const override;
+    int GetPageSize() const override;
 
-    virtual void SetThumbLength(int lenPixels) override;
-    virtual int GetThumbLength() const override;
+    void SetThumbLength(int lenPixels) override;
+    int GetThumbLength() const override;
 
-    virtual QWidget *GetHandle() const override;
+    QWidget *GetHandle() const override;
 
 private:
     QSlider *m_qtSlider;

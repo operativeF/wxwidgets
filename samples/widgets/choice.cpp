@@ -74,12 +74,12 @@ class ChoiceWidgetsPage : public ItemContainerWidgetsPage
 public:
     ChoiceWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_choice; }
-    virtual wxItemContainer* GetContainer() const override { return m_choice; }
-    virtual void RecreateWidget() override { CreateChoice(); }
+    wxWindow *GetWidget() const override { return m_choice; }
+    wxItemContainer* GetContainer() const override { return m_choice; }
+    void RecreateWidget() override { CreateChoice(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 protected:
     // event handlers

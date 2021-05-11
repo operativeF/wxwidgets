@@ -82,9 +82,9 @@ public:
     virtual ~wxBitmapComboBox();
 
     // Sets the image for the given item.
-    virtual void SetItemBitmap(unsigned int n, const wxBitmap& bitmap) override;
+    void SetItemBitmap(unsigned int n, const wxBitmap& bitmap) override;
 
-    virtual bool SetFont(const wxFont& font) override;
+    bool SetFont(const wxFont& font) override;
 
     // Adds item with image to the end of the combo box.
     int Append(const wxString& item, const wxBitmap& bitmap = wxNullBitmap);
@@ -102,25 +102,25 @@ public:
 protected:
 
     WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
-    virtual bool MSWOnDraw(WXDRAWITEMSTRUCT *item) override;
-    virtual bool MSWOnMeasure(WXMEASUREITEMSTRUCT *item) override;
-    virtual void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
+    bool MSWOnDraw(WXDRAWITEMSTRUCT *item) override;
+    bool MSWOnMeasure(WXMEASUREITEMSTRUCT *item) override;
+    void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
 
     // Event handlers
     void OnSize(wxSizeEvent& event);
 
-    virtual wxItemContainer* GetItemContainer() override { return this; }
-    virtual wxWindow* GetControl() override { return this; }
+    wxItemContainer* GetItemContainer() override { return this; }
+    wxWindow* GetControl() override { return this; }
 
     // wxItemContainer implementation
     virtual int DoInsertItems(const wxArrayStringsAdapter & items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
-    virtual void DoClear() override;
-    virtual void DoDeleteOneItem(unsigned int n) override;
+    void DoClear() override;
+    void DoDeleteOneItem(unsigned int n) override;
 
-    virtual bool OnAddBitmap(const wxBitmap& bitmap) override;
-    virtual wxSize DoGetBestSize() const override;
+    bool OnAddBitmap(const wxBitmap& bitmap) override;
+    wxSize DoGetBestSize() const override;
     void RecreateControl();
 
 private:

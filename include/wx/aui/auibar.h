@@ -347,13 +347,13 @@ public:
     wxAuiGenericToolBarArt();
     virtual ~wxAuiGenericToolBarArt();
 
-    virtual wxAuiToolBarArt* Clone() override;
-    virtual void SetFlags(unsigned int flags) override;
-    virtual unsigned int GetFlags() override;
-    virtual void SetFont(const wxFont& font) override;
-    virtual wxFont GetFont() override;
-    virtual void SetTextOrientation(int orientation) override;
-    virtual int GetTextOrientation() override;
+    wxAuiToolBarArt* Clone() override;
+    void SetFlags(unsigned int flags) override;
+    unsigned int GetFlags() override;
+    void SetFont(const wxFont& font) override;
+    wxFont GetFont() override;
+    void SetTextOrientation(int orientation) override;
+    int GetTextOrientation() override;
 
     virtual void DrawBackground(
                 wxDC& dc,
@@ -414,13 +414,13 @@ public:
                 wxWindow* wnd,
                 const wxAuiToolBarItem& item) override;
 
-    virtual int GetElementSize(int element) override;
-    virtual void SetElementSize(int elementId, int size) override;
+    int GetElementSize(int element) override;
+    void SetElementSize(int elementId, int size) override;
 
     virtual int ShowDropDown(wxWindow* wnd,
                              const wxAuiToolBarItemArray& items) override;
 
-    virtual void UpdateColoursFromSystem() override;
+    void UpdateColoursFromSystem() override;
 
 protected:
 
@@ -471,7 +471,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = wxAUI_TB_DEFAULT_STYLE);
 
-    virtual void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(long style) override;
 
     void SetArtProvider(wxAuiToolBarArt* art);
     wxAuiToolBarArt* GetArtProvider() const;
@@ -607,7 +607,7 @@ public:
     bool IsPaneValid(const wxAuiPaneInfo& pane) const;
 
     // Override to call DoIdleUpdate().
-    virtual void UpdateWindowUI(long flags = wxUPDATE_UI_NONE) override;
+    void UpdateWindowUI(long flags = wxUPDATE_UI_NONE) override;
 
 protected:
     void Init();

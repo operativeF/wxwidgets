@@ -50,64 +50,64 @@ public:
                 const wxString& name = wxASCII_STR(wxWebViewNameStr)) override;
     virtual ~wxWebViewWebKit();
 
-    virtual bool CanGoBack() const override;
-    virtual bool CanGoForward() const override;
-    virtual void GoBack() override;
-    virtual void GoForward() override;
-    virtual void Reload(wxWebViewReloadFlags flags = wxWEBVIEW_RELOAD_DEFAULT) override;
-    virtual void Stop() override;
+    bool CanGoBack() const override;
+    bool CanGoForward() const override;
+    void GoBack() override;
+    void GoForward() override;
+    void Reload(wxWebViewReloadFlags flags = wxWEBVIEW_RELOAD_DEFAULT) override;
+    void Stop() override;
 
-    virtual void Print() override;
+    void Print() override;
 
-    virtual void LoadURL(const wxString& url) override;
-    virtual wxString GetCurrentURL() const override;
-    virtual wxString GetCurrentTitle() const override;
-    virtual float GetZoomFactor() const override;
-    virtual void SetZoomFactor(float zoom) override;
+    void LoadURL(const wxString& url) override;
+    wxString GetCurrentURL() const override;
+    wxString GetCurrentTitle() const override;
+    float GetZoomFactor() const override;
+    void SetZoomFactor(float zoom) override;
 
-    virtual void SetZoomType(wxWebViewZoomType zoomType) override;
-    virtual wxWebViewZoomType GetZoomType() const override;
-    virtual bool CanSetZoomType(wxWebViewZoomType type) const override;
+    void SetZoomType(wxWebViewZoomType zoomType) override;
+    wxWebViewZoomType GetZoomType() const override;
+    bool CanSetZoomType(wxWebViewZoomType type) const override;
 
-    virtual bool IsBusy() const override;
+    bool IsBusy() const override;
 
-    virtual bool IsAccessToDevToolsEnabled() const override;
-    virtual void EnableAccessToDevTools(bool enable = true) override;
-    virtual bool SetUserAgent(const wxString& userAgent) override;
+    bool IsAccessToDevToolsEnabled() const override;
+    void EnableAccessToDevTools(bool enable = true) override;
+    bool SetUserAgent(const wxString& userAgent) override;
 
     //History functions
-    virtual void ClearHistory() override;
-    virtual void EnableHistory(bool enable = true) override;
-    virtual wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() override;
-    virtual wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() override;
-    virtual void LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item) override;
+    void ClearHistory() override;
+    void EnableHistory(bool enable = true) override;
+    wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() override;
+    wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() override;
+    void LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item) override;
 
-    virtual void Paste() override;
+    void Paste() override;
 
     //Undo / redo functionality
-    virtual bool CanUndo() const override;
-    virtual bool CanRedo() const override;
-    virtual void Undo() override;
-    virtual void Redo() override;
+    bool CanUndo() const override;
+    bool CanRedo() const override;
+    void Undo() override;
+    void Redo() override;
 
     //Editing functions
-    virtual void SetEditable(bool enable = true) override;
-    virtual bool IsEditable() const override;
+    void SetEditable(bool enable = true) override;
+    bool IsEditable() const override;
 
     bool RunScript(const wxString& javascript, wxString* output = NULL) const override;
-    virtual bool AddScriptMessageHandler(const wxString& name) override;
-    virtual bool RemoveScriptMessageHandler(const wxString& name) override;
+    bool AddScriptMessageHandler(const wxString& name) override;
+    bool RemoveScriptMessageHandler(const wxString& name) override;
     virtual bool AddUserScript(const wxString& javascript,
         wxWebViewUserScriptInjectionTime injectionTime = wxWEBVIEW_INJECT_AT_DOCUMENT_START) override;
-    virtual void RemoveAllUserScripts() override;
+    void RemoveAllUserScripts() override;
 
     //Virtual Filesystem Support
-    virtual void RegisterHandler(wxSharedPtr<wxWebViewHandler> handler) override;
+    void RegisterHandler(wxSharedPtr<wxWebViewHandler> handler) override;
 
-    virtual void* GetNativeBackend() const override { return m_webView; }
+    void* GetNativeBackend() const override { return m_webView; }
 
 protected:
-    virtual void DoSetPage(const wxString& html, const wxString& baseUrl) override;
+    void DoSetPage(const wxString& html, const wxString& baseUrl) override;
 
     wxDECLARE_EVENT_TABLE();
 
@@ -125,7 +125,7 @@ private:
 class WXDLLIMPEXP_WEBVIEW wxWebViewFactoryWebKit : public wxWebViewFactory
 {
 public:
-    virtual wxWebView* Create() override { return new wxWebViewWebKit; }
+    wxWebView* Create() override { return new wxWebViewWebKit; }
     virtual wxWebView* Create(wxWindow* parent,
                               wxWindowID id,
                               const wxString& url = wxWebViewDefaultURLStr,
@@ -134,7 +134,7 @@ public:
                               long style = 0,
                               const wxString& name = wxASCII_STR(wxWebViewNameStr)) override
     { return new wxWebViewWebKit(parent, id, url, pos, size, style, name); }
-    virtual wxVersionInfo GetVersionInfo() override;
+    wxVersionInfo GetVersionInfo() override;
 };
 
 #endif // wxUSE_WEBVIEW && wxUSE_WEBVIEW_WEBKIT

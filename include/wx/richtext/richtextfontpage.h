@@ -70,8 +70,8 @@ public:
     void CreateControls();
 
     /// Transfer data from/to window
-    virtual bool TransferDataFromWindow() override;
-    virtual bool TransferDataToWindow() override;
+    bool TransferDataFromWindow() override;
+    bool TransferDataToWindow() override;
 
     /// Updates the font preview
     void UpdatePreview();

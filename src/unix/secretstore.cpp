@@ -95,14 +95,14 @@ public:
         secret_value_unref(m_value);
     }
 
-    virtual size_t GetSize() const override
+    size_t GetSize() const override
     {
         gsize length = 0;
         (void)secret_value_get(m_value, &length);
         return length;
     }
 
-    virtual const void *GetData() const override
+    const void *GetData() const override
     {
         return secret_value_get(m_value, NULL);
     }
@@ -125,7 +125,7 @@ public:
     {
     }
 
-    virtual bool IsOk(wxString* errmsg) const override
+    bool IsOk(wxString* errmsg) const override
     {
         if ( errmsg )
             *errmsg = m_error;

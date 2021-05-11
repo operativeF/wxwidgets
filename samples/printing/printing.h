@@ -14,8 +14,8 @@ class MyApp: public wxApp
 public:
     MyApp() {}
 
-    virtual bool OnInit() override;
-    virtual int OnExit() override;
+    bool OnInit() override;
+    int OnExit() override;
 
     void Draw(wxDC& dc);
 
@@ -76,7 +76,7 @@ public:
     MyCanvas(wxFrame *frame, const wxPoint& pos, const wxSize& size, long style = wxRETAINED);
 
     //void OnPaint(wxPaintEvent& evt);
-    virtual void OnDraw(wxDC& dc) override;
+    void OnDraw(wxDC& dc) override;
 
 private:
     wxDECLARE_EVENT_TABLE();
@@ -89,10 +89,10 @@ public:
     MyPrintout(MyFrame* frame, const wxString &title = "My printout")
         : wxPrintout(title) { m_frame=frame; }
 
-    virtual bool OnPrintPage(int page) override;
-    virtual bool HasPage(int page) override;
-    virtual bool OnBeginDocument(int startPage, int endPage) override;
-    virtual void GetPageInfo(int *minPage, int *maxPage, int *selPageFrom, int *selPageTo) override;
+    bool OnPrintPage(int page) override;
+    bool HasPage(int page) override;
+    bool OnBeginDocument(int startPage, int endPage) override;
+    void GetPageInfo(int *minPage, int *maxPage, int *selPageFrom, int *selPageTo) override;
 
     void DrawPageOne();
     void DrawPageTwo();

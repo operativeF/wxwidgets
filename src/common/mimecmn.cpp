@@ -737,8 +737,8 @@ class wxMimeTypeCmnModule: public wxModule
 public:
     wxMimeTypeCmnModule() : wxModule() { }
 
-    virtual bool OnInit() override { return true; }
-    virtual void OnExit() override
+    bool OnInit() override { return true; }
+    void OnExit() override
     {
         wxMimeTypesManagerFactory::Set(nullptr);
 

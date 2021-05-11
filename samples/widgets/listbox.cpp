@@ -83,12 +83,12 @@ class ListboxWidgetsPage : public ItemContainerWidgetsPage
 public:
     ListboxWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_lbox; }
-    virtual wxItemContainer* GetContainer() const override { return m_lbox; }
-    virtual void RecreateWidget() override { CreateLbox(); }
+    wxWindow *GetWidget() const override { return m_lbox; }
+    wxItemContainer* GetContainer() const override { return m_lbox; }
+    void RecreateWidget() override { CreateLbox(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 protected:
     // event handlers

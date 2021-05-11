@@ -91,33 +91,33 @@ public:
 
     // Implement all pure virtual methods inherited from the base class in
     // terms of our own ones.
-    virtual void OnBoldStart() override { DoChangeFont(&wxFont::Bold); }
-    virtual void OnBoldEnd() override { DoEndAttr(); }
+    void OnBoldStart() override { DoChangeFont(&wxFont::Bold); }
+    void OnBoldEnd() override { DoEndAttr(); }
 
-    virtual void OnItalicStart() override { DoChangeFont(&wxFont::Italic); }
-    virtual void OnItalicEnd() override { DoEndAttr(); }
+    void OnItalicStart() override { DoChangeFont(&wxFont::Italic); }
+    void OnItalicEnd() override { DoEndAttr(); }
 
-    virtual void OnUnderlinedStart() override { DoChangeFont(&wxFont::Underlined); }
-    virtual void OnUnderlinedEnd() override { DoEndAttr(); }
+    void OnUnderlinedStart() override { DoChangeFont(&wxFont::Underlined); }
+    void OnUnderlinedEnd() override { DoEndAttr(); }
 
-    virtual void OnStrikethroughStart() override { DoChangeFont(&wxFont::Strikethrough); }
-    virtual void OnStrikethroughEnd() override { DoEndAttr(); }
+    void OnStrikethroughStart() override { DoChangeFont(&wxFont::Strikethrough); }
+    void OnStrikethroughEnd() override { DoEndAttr(); }
 
-    virtual void OnBigStart() override { DoChangeFont(&wxFont::Larger); }
-    virtual void OnBigEnd() override { DoEndAttr(); }
+    void OnBigStart() override { DoChangeFont(&wxFont::Larger); }
+    void OnBigEnd() override { DoEndAttr(); }
 
-    virtual void OnSmallStart() override { DoChangeFont(&wxFont::Smaller); }
-    virtual void OnSmallEnd() override { DoEndAttr(); }
+    void OnSmallStart() override { DoChangeFont(&wxFont::Smaller); }
+    void OnSmallEnd() override { DoEndAttr(); }
 
-    virtual void OnTeletypeStart() override
+    void OnTeletypeStart() override
     {
         wxFont font(GetFont());
         font.SetFamily(wxFONTFAMILY_TELETYPE);
         DoSetFont(font);
     }
-    virtual void OnTeletypeEnd() override { DoEndAttr(); }
+    void OnTeletypeEnd() override { DoEndAttr(); }
 
-    virtual void OnSpanStart(const wxMarkupSpanAttributes& spanAttr) override
+    void OnSpanStart(const wxMarkupSpanAttributes& spanAttr) override
     {
         wxFont font(GetFont());
         if ( !spanAttr.m_fontFace.empty() )
@@ -172,7 +172,7 @@ public:
         m_attrs.push(attr);
     }
 
-    virtual void OnSpanEnd(const wxMarkupSpanAttributes& WXUNUSED(spanAttr)) override
+    void OnSpanEnd(const wxMarkupSpanAttributes& WXUNUSED(spanAttr)) override
     {
         DoEndAttr();
     }

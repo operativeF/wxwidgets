@@ -75,8 +75,8 @@ public:
                 const wxString& name = wxASCII_STR(wxCheckBoxNameStr));
 
     // implement the checkbox interface
-    virtual void SetValue(bool value) override;
-    virtual bool GetValue() const override;
+    void SetValue(bool value) override;
+    bool GetValue() const override;
 
     // set/get the bitmaps to use for the checkbox indicator
     void SetBitmap(const wxBitmap& bmp, State state, Status status);
@@ -89,25 +89,25 @@ public:
     virtual void ChangeValue(bool value);
 
     // overridden base class virtuals
-    virtual bool IsPressed() const override { return m_isPressed; }
+    bool IsPressed() const override { return m_isPressed; }
 
     virtual bool PerformAction(const wxControlAction& action,
                                long numArg = -1,
                                const wxString& strArg = wxEmptyString) override;
 
-    virtual bool CanBeHighlighted() const override { return true; }
+    bool CanBeHighlighted() const override { return true; }
     virtual wxInputHandler *CreateStdInputHandler(wxInputHandler *handlerDef);
-    virtual wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
+    wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
     {
         return CreateStdInputHandler(handlerDef);
     }
 
 protected:
-    virtual void DoSet3StateValue(wxCheckBoxState WXUNUSED(state)) override;
-    virtual wxCheckBoxState DoGet3StateValue() const override;
+    void DoSet3StateValue(wxCheckBoxState WXUNUSED(state)) override;
+    wxCheckBoxState DoGet3StateValue() const override;
 
-    virtual void DoDraw(wxControlRenderer *renderer) override;
-    virtual wxSize DoGetBestClientSize() const override;
+    void DoDraw(wxControlRenderer *renderer) override;
+    wxSize DoGetBestClientSize() const override;
 
     // get the size of the bitmap using either the current one or the default
     // one (query renderer then)

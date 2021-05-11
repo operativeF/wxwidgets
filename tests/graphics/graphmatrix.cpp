@@ -39,13 +39,13 @@ public:
         m_bmp = wxNullBitmap;
     }
 
-    virtual void setUp() override
+    void setUp() override
     {
         wxASSERT( m_rend );
         m_ctx = m_rend->CreateContext(m_dc);
     }
 
-    virtual void tearDown() override
+    void tearDown() override
     {
         delete m_ctx;
         m_ctx = NULL;

@@ -29,17 +29,17 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxCheckBoxNameStr) );
 
-    virtual void SetValue(bool value) override;
-    virtual bool GetValue() const override;
+    void SetValue(bool value) override;
+    bool GetValue() const override;
 
-    virtual void SetLabel(const wxString& label) override;
-    virtual wxString GetLabel() const override;
+    void SetLabel(const wxString& label) override;
+    wxString GetLabel() const override;
 
-    virtual QWidget *GetHandle() const override;
+    QWidget *GetHandle() const override;
 
 protected:
-    virtual void DoSet3StateValue(wxCheckBoxState state) override;
-    virtual wxCheckBoxState DoGet3StateValue() const override;
+    void DoSet3StateValue(wxCheckBoxState state) override;
+    wxCheckBoxState DoGet3StateValue() const override;
 
 private:
     QCheckBox *m_qtCheckBox;

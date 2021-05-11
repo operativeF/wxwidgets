@@ -29,22 +29,22 @@ public:
                 long style = wxDEFAULT_FRAME_STYLE,
                 const wxString& name = wxASCII_STR(wxFrameNameStr));
 
-    virtual bool Show(bool show = true) override;
-    virtual void Maximize(bool maximize = true) override;
-    virtual void Restore() override;
-    virtual void Iconize(bool iconize = true) override;
-    virtual bool IsMaximized() const override;
-    virtual bool IsIconized() const override;
+    bool Show(bool show = true) override;
+    void Maximize(bool maximize = true) override;
+    void Restore() override;
+    void Iconize(bool iconize = true) override;
+    bool IsMaximized() const override;
+    bool IsIconized() const override;
 
-    virtual bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
-    virtual bool IsFullScreen() const override;
-    virtual void SetTitle(const wxString& title) override;
-    virtual wxString GetTitle() const override;
-    virtual void SetIcons(const wxIconBundle& icons) override;
+    bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
+    bool IsFullScreen() const override;
+    void SetTitle(const wxString& title) override;
+    wxString GetTitle() const override;
+    void SetIcons(const wxIconBundle& icons) override;
 
     // Styles
-    virtual void SetWindowStyleFlag( long style ) override;
-    virtual long GetWindowStyleFlag() const override;
+    void SetWindowStyleFlag( long style ) override;
+    long GetWindowStyleFlag() const override;
 };
 
 #endif // _WX_QT_TOPLEVEL_H_

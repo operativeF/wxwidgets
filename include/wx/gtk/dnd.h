@@ -30,10 +30,10 @@ class WXDLLIMPEXP_CORE wxDropTarget: public wxDropTargetBase
 public:
     wxDropTarget(wxDataObject *dataObject = NULL );
 
-    virtual wxDragResult OnDragOver(wxCoord x, wxCoord y, wxDragResult def) override;
-    virtual bool OnDrop(wxCoord x, wxCoord y) override;
-    virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override;
-    virtual bool GetData() override;
+    wxDragResult OnDragOver(wxCoord x, wxCoord y, wxDragResult def) override;
+    bool OnDrop(wxCoord x, wxCoord y) override;
+    wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override;
+    bool GetData() override;
 
     // Can only be called during OnXXX methods.
     wxDataFormat GetMatchingPair();
@@ -92,7 +92,7 @@ public:
     }
 
     // start drag action
-    virtual wxDragResult DoDragDrop(int flags = wxDrag_CopyOnly) override;
+    wxDragResult DoDragDrop(int flags = wxDrag_CopyOnly) override;
 
     void PrepareIcon( int action, GdkDragContext *context );
 

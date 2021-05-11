@@ -38,7 +38,7 @@ public:
     void SetValue( bool state ) override;
     bool GetValue() const override;
 
-    virtual void SetLabel( const wxString& label ) override;
+    void SetLabel( const wxString& label ) override;
 
     static wxVisualAttributes
     GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
@@ -48,10 +48,10 @@ public:
     void GTKEnableEvents();
 
 protected:
-    virtual void DoApplyWidgetStyle(GtkRcStyle *style) override;
-    virtual GdkWindow *GTKGetWindow(wxArrayGdkWindows& windows) const override;
+    void DoApplyWidgetStyle(GtkRcStyle *style) override;
+    GdkWindow *GTKGetWindow(wxArrayGdkWindows& windows) const override;
 
-    virtual void DoEnable(bool enable) override;
+    void DoEnable(bool enable) override;
 
     void DoSet3StateValue(wxCheckBoxState state) override;
     wxCheckBoxState DoGet3StateValue() const override;

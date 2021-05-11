@@ -51,12 +51,12 @@ public:
                 long style = 0,
                 const wxString& name = wxActivityIndicatorNameStr);
 
-    virtual void Start() override;
-    virtual void Stop() override;
-    virtual bool IsRunning() const override;
+    void Start() override;
+    void Stop() override;
+    bool IsRunning() const override;
 
 protected:
-    virtual wxSize DoGetBestClientSize() const override;
+    wxSize DoGetBestClientSize() const override;
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxActivityIndicator);

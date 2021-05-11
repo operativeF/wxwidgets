@@ -40,9 +40,9 @@ public:
 
     virtual ~wxMenu();
 
-    virtual void Break() override;
+    void Break() override;
 
-    virtual void SetTitle(const wxString& title) override;
+    void SetTitle(const wxString& title) override;
 
     // MSW-only methods
     // ----------------
@@ -111,9 +111,9 @@ private:
 #endif // wxUSE_OWNER_DRAWN
 
 protected:
-    virtual wxMenuItem* DoAppend(wxMenuItem *item) override;
-    virtual wxMenuItem* DoInsert(size_t pos, wxMenuItem *item) override;
-    virtual wxMenuItem* DoRemove(wxMenuItem *item) override;
+    wxMenuItem* DoAppend(wxMenuItem *item) override;
+    wxMenuItem* DoInsert(size_t pos, wxMenuItem *item) override;
+    wxMenuItem* DoRemove(wxMenuItem *item) override;
 
 private:
     // This constructor is private, use MSWNewFromHMENU() to use it.
@@ -179,20 +179,20 @@ public:
     virtual ~wxMenuBar();
 
     // menubar construction
-    virtual bool Append( wxMenu *menu, const wxString &title ) override;
-    virtual bool Insert(size_t pos, wxMenu *menu, const wxString& title) override;
-    virtual wxMenu *Replace(size_t pos, wxMenu *menu, const wxString& title) override;
-    virtual wxMenu *Remove(size_t pos) override;
+    bool Append( wxMenu *menu, const wxString &title ) override;
+    bool Insert(size_t pos, wxMenu *menu, const wxString& title) override;
+    wxMenu *Replace(size_t pos, wxMenu *menu, const wxString& title) override;
+    wxMenu *Remove(size_t pos) override;
 
-    virtual void EnableTop( size_t pos, bool flag ) override;
-    virtual bool IsEnabledTop(size_t pos) const override;
-    virtual void SetMenuLabel( size_t pos, const wxString& label ) override;
-    virtual wxString GetMenuLabel( size_t pos ) const override;
+    void EnableTop( size_t pos, bool flag ) override;
+    bool IsEnabledTop(size_t pos) const override;
+    void SetMenuLabel( size_t pos, const wxString& label ) override;
+    wxString GetMenuLabel( size_t pos ) const override;
 
     // implementation from now on
     WXHMENU Create();
-    virtual void Detach() override;
-    virtual void Attach(wxFrame *frame) override;
+    void Detach() override;
+    void Attach(wxFrame *frame) override;
 
 #if wxUSE_ACCEL
     // update the accel table (must be called after adding/deleting a menu)

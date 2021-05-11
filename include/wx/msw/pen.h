@@ -65,14 +65,14 @@ public:
 
 
     // internal: wxGDIObject methods
-    virtual bool RealizeResource() override;
-    virtual bool FreeResource(bool force = false) override;
-    virtual WXHANDLE GetResourceHandle() const override;
-    virtual bool IsFree() const override;
+    bool RealizeResource() override;
+    bool FreeResource(bool force = false) override;
+    WXHANDLE GetResourceHandle() const override;
+    bool IsFree() const override;
 
 protected:
-    virtual wxGDIRefData* CreateGDIRefData() const override;
-    virtual wxGDIRefData* CloneGDIRefData(const wxGDIRefData* data) const override;
+    wxGDIRefData* CreateGDIRefData() const override;
+    wxGDIRefData* CloneGDIRefData(const wxGDIRefData* data) const override;
 
     // same as FreeResource() + RealizeResource()
     bool Recreate();

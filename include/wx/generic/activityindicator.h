@@ -49,12 +49,12 @@ public:
 
     virtual ~wxActivityIndicatorGeneric();
 
-    virtual void Start() override;
-    virtual void Stop() override;
-    virtual bool IsRunning() const override;
+    void Start() override;
+    void Stop() override;
+    bool IsRunning() const override;
 
 protected:
-    virtual wxSize DoGetBestClientSize() const override;
+    wxSize DoGetBestClientSize() const override;
 
 private:
     class wxActivityIndicatorImpl *m_impl;

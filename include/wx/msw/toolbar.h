@@ -44,27 +44,27 @@ public:
     virtual ~wxToolBar();
 
     // override/implement base class virtuals
-    virtual wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const override;
+    wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const override;
 
-    virtual bool Realize() override;
+    bool Realize() override;
 
-    virtual void SetToolBitmapSize(const wxSize& size) override;
-    virtual wxSize GetToolSize() const override;
+    void SetToolBitmapSize(const wxSize& size) override;
+    wxSize GetToolSize() const override;
 
-    virtual void SetRows(int nRows) override;
+    void SetRows(int nRows) override;
 
-    virtual void SetToolNormalBitmap(int id, const wxBitmap& bitmap) override;
-    virtual void SetToolDisabledBitmap(int id, const wxBitmap& bitmap) override;
+    void SetToolNormalBitmap(int id, const wxBitmap& bitmap) override;
+    void SetToolDisabledBitmap(int id, const wxBitmap& bitmap) override;
 
-    virtual void SetToolPacking(int packing) override;
+    void SetToolPacking(int packing) override;
 
     // implementation only from now on
     // -------------------------------
 
-    virtual void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(long style) override;
 
-    virtual bool MSWCommand(WXUINT param, WXWORD id) override;
-    virtual bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
+    bool MSWCommand(WXUINT param, WXWORD id) override;
+    bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
 
     void OnMouseEvent(wxMouseEvent& event);
     void OnSysColourChanged(wxSysColourChangedEvent& event);
@@ -75,16 +75,16 @@ public:
     static WXHBITMAP MapBitmap(WXHBITMAP bitmap, int width, int height);
 
     // override WndProc mainly to process WM_SIZE
-    virtual WXLRESULT MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam) override;
+    WXLRESULT MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam) override;
 
-    virtual WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
 
     // returns true if the platform should explicitly apply a theme border
-    virtual bool CanApplyThemeBorder() const override { return false; }
+    bool CanApplyThemeBorder() const override { return false; }
 
 #ifdef wxHAS_MSW_BACKGROUND_ERASE_HOOK
-    virtual bool MSWEraseBgHook(WXHDC hDC) override;
-    virtual WXHBRUSH MSWGetBgBrushForChild(WXHDC hDC, wxWindowMSW *child) override;
+    bool MSWEraseBgHook(WXHDC hDC) override;
+    WXHBRUSH MSWGetBgBrushForChild(WXHDC hDC, wxWindowMSW *child) override;
 #endif // wxHAS_MSW_BACKGROUND_ERASE_HOOK
 
     virtual wxToolBarToolBase *CreateTool(int id,
@@ -109,15 +109,15 @@ protected:
     void Recreate();
 
     // implement base class pure virtuals
-    virtual bool DoInsertTool(size_t pos, wxToolBarToolBase *tool) override;
-    virtual bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool) override;
+    bool DoInsertTool(size_t pos, wxToolBarToolBase *tool) override;
+    bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool) override;
 
-    virtual void DoEnableTool(wxToolBarToolBase *tool, bool enable) override;
-    virtual void DoToggleTool(wxToolBarToolBase *tool, bool toggle) override;
-    virtual void DoSetToggle(wxToolBarToolBase *tool, bool toggle) override;
+    void DoEnableTool(wxToolBarToolBase *tool, bool enable) override;
+    void DoToggleTool(wxToolBarToolBase *tool, bool toggle) override;
+    void DoSetToggle(wxToolBarToolBase *tool, bool toggle) override;
 
     // return the appropriate size and flags for the toolbar control
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
 
     // handlers for various events
     bool HandleSize(WXWPARAM wParam, WXLPARAM lParam);

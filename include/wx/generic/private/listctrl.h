@@ -365,7 +365,7 @@ public:
     virtual ~wxListHeaderWindow();
 
     // We never need focus as we don't have any keyboard interface.
-    virtual bool AcceptsFocus() const override { return false; }
+    bool AcceptsFocus() const override { return false; }
 
     void DrawCurrent();
     void AdjustDC( wxDC& dc );
@@ -381,9 +381,9 @@ public:
     int m_colToSend;
     int m_widthToSend;
 
-    virtual wxWindow *GetMainWindowOfCompositeControl() override { return GetParent(); }
+    wxWindow *GetMainWindowOfCompositeControl() override { return GetParent(); }
 
-    virtual void OnInternalIdle() override;
+    void OnInternalIdle() override;
 
 private:
     // common part of all ctors
@@ -425,7 +425,7 @@ public:
     {
     }
 
-    virtual void Notify() override;
+    void Notify() override;
 
 private:
     wxListMainWindow *m_owner;
@@ -730,7 +730,7 @@ public:
                      const wxPoint& point = wxDefaultPosition );
 
     // override base class virtual to reset m_lineHeight when the font changes
-    virtual bool SetFont(const wxFont& font) override
+    bool SetFont(const wxFont& font) override
     {
         if ( !wxWindow::SetFont(font) )
             return false;

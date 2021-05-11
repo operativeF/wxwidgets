@@ -52,48 +52,48 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxComboBoxNameStr));
 
-    virtual void SetSelection(int n) override;
-    virtual void SetSelection(long from, long to) override;
+    void SetSelection(int n) override;
+    void SetSelection(long from, long to) override;
 
-    virtual int GetSelection() const override { return wxChoice::GetSelection(); }
-    virtual void GetSelection(long *from, long *to) const override;
+    int GetSelection() const override { return wxChoice::GetSelection(); }
+    void GetSelection(long *from, long *to) const override;
 
-    virtual wxString GetStringSelection() const override
+    wxString GetStringSelection() const override
     {
         return wxItemContainer::GetStringSelection();
     }
 
-    virtual void Clear() override;
+    void Clear() override;
 
     // See wxComboBoxBase discussion of IsEmpty().
     bool IsListEmpty() const { return wxItemContainer::IsEmpty(); }
     bool IsTextEmpty() const { return wxTextEntry::IsEmpty(); }
 
-    virtual void SetValue(const wxString& value) override;
-    virtual void ChangeValue(const wxString& value) override;
-    virtual void AppendText(const wxString &value) override;
-    virtual void Replace(long from, long to, const wxString &value) override;
-    virtual void WriteText(const wxString &value) override;
-    virtual void SetInsertionPoint(long insertion) override;
-    virtual long GetInsertionPoint() const override;
+    void SetValue(const wxString& value) override;
+    void ChangeValue(const wxString& value) override;
+    void AppendText(const wxString &value) override;
+    void Replace(long from, long to, const wxString &value) override;
+    void WriteText(const wxString &value) override;
+    void SetInsertionPoint(long insertion) override;
+    long GetInsertionPoint() const override;
 
     virtual void Popup();
     virtual void Dismiss();
 
-    virtual const wxTextEntry* WXGetTextEntry() const override { return this; }
+    const wxTextEntry* WXGetTextEntry() const override { return this; }
 
-    virtual bool QtHandleFocusEvent(QWidget *handler, QFocusEvent *event) override;
+    bool QtHandleFocusEvent(QWidget *handler, QFocusEvent *event) override;
 protected:
 
     // From wxTextEntry:
-    virtual wxString DoGetValue() const override;
+    wxString DoGetValue() const override;
 
 private:
     void SetActualValue(const wxString& value);
     bool IsReadOnly() const;
 
     // From wxTextEntry:
-    virtual wxWindow *GetEditableWindow() override { return this; }
+    wxWindow *GetEditableWindow() override { return this; }
 
     wxDECLARE_DYNAMIC_CLASS(wxComboBox);
 };

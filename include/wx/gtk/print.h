@@ -33,7 +33,7 @@ typedef struct _cairo cairo_t;
 class wxGtkPrintFactory: public wxPrintFactory
 {
 public:
-    virtual wxPrinterBase *CreatePrinter( wxPrintDialogData *data ) override;
+    wxPrinterBase *CreatePrinter( wxPrintDialogData *data ) override;
 
     virtual wxPrintPreviewBase *CreatePrintPreview( wxPrintout *preview,
                                                     wxPrintout *printout = NULL,
@@ -50,17 +50,17 @@ public:
     virtual wxPageSetupDialogBase *CreatePageSetupDialog( wxWindow *parent,
                                                           wxPageSetupDialogData * data = NULL ) override;
 
-    virtual wxDCImpl* CreatePrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data ) override;
+    wxDCImpl* CreatePrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data ) override;
 
-    virtual bool HasPrintSetupDialog() override;
-    virtual wxDialog *CreatePrintSetupDialog( wxWindow *parent, wxPrintData *data ) override;
-    virtual bool HasOwnPrintToFile() override;
-    virtual bool HasPrinterLine() override;
-    virtual wxString CreatePrinterLine() override;
-    virtual bool HasStatusLine() override;
-    virtual wxString CreateStatusLine() override;
+    bool HasPrintSetupDialog() override;
+    wxDialog *CreatePrintSetupDialog( wxWindow *parent, wxPrintData *data ) override;
+    bool HasOwnPrintToFile() override;
+    bool HasPrinterLine() override;
+    wxString CreatePrinterLine() override;
+    bool HasStatusLine() override;
+    wxString CreateStatusLine() override;
 
-    virtual wxPrintNativeDataBase *CreatePrintNativeData() override;
+    wxPrintNativeDataBase *CreatePrintNativeData() override;
 };
 
 //----------------------------------------------------------------------------
@@ -82,11 +82,11 @@ public:
 
     wxDC *GetPrintDC() override;
 
-    virtual int ShowModal() override;
+    int ShowModal() override;
 
-    virtual bool Validate() override { return true; }
-    virtual bool TransferDataToWindow() override { return true; }
-    virtual bool TransferDataFromWindow() override { return true; }
+    bool Validate() override { return true; }
+    bool TransferDataToWindow() override { return true; }
+    bool TransferDataFromWindow() override { return true; }
 
     void SetShowDialog(bool show) { m_showDialog = show; }
     bool GetShowDialog() { return m_showDialog; }
@@ -119,13 +119,13 @@ public:
                             wxPageSetupDialogData* data = NULL );
     virtual ~wxGtkPageSetupDialog();
 
-    virtual wxPageSetupDialogData& GetPageSetupDialogData() override { return m_pageDialogData; }
+    wxPageSetupDialogData& GetPageSetupDialogData() override { return m_pageDialogData; }
 
-    virtual int ShowModal() override;
+    int ShowModal() override;
 
-    virtual bool Validate() override { return true; }
-    virtual bool TransferDataToWindow() override { return true; }
-    virtual bool TransferDataFromWindow() override { return true; }
+    bool Validate() override { return true; }
+    bool TransferDataToWindow() override { return true; }
+    bool TransferDataFromWindow() override { return true; }
 
 protected:
     // Implement some base class methods to do nothing to avoid asserts and
@@ -156,8 +156,8 @@ public:
     virtual bool Print(wxWindow *parent,
                        wxPrintout *printout,
                        bool prompt = true) override;
-    virtual wxDC* PrintDialog(wxWindow *parent) override;
-    virtual bool Setup(wxWindow *parent) override;
+    wxDC* PrintDialog(wxWindow *parent) override;
+    bool Setup(wxWindow *parent) override;
 
     GtkPrintContext *GetPrintContext() { return m_gpc; }
     void SetPrintContext(GtkPrintContext *context) {m_gpc = context;}
@@ -182,11 +182,11 @@ public:
     wxGtkPrintNativeData();
     virtual ~wxGtkPrintNativeData();
 
-    virtual bool TransferTo( wxPrintData &data ) override;
-    virtual bool TransferFrom( const wxPrintData &data ) override;
+    bool TransferTo( wxPrintData &data ) override;
+    bool TransferFrom( const wxPrintData &data ) override;
 
-    virtual bool Ok() const override { return IsOk(); }
-    virtual bool IsOk() const override { return true; }
+    bool Ok() const override { return IsOk(); }
+    bool IsOk() const override { return true; }
 
     GtkPrintSettings* GetPrintConfig() { return m_config; }
     void SetPrintConfig( GtkPrintSettings * config );
@@ -224,8 +224,8 @@ public:
     bool Ok() const { return IsOk(); }
     bool IsOk() const override;
 
-    virtual void* GetCairoContext() const override;
-    virtual void* GetHandle() const override;
+    void* GetCairoContext() const override;
+    void* GetHandle() const override;
 
     bool CanDrawBitmap() const override { return true; }
     void Clear() override;
@@ -243,7 +243,7 @@ public:
     wxCoord GetCharWidth() const override;
     bool CanGetTextExtent() const override { return true; }
     wxSize GetPPI() const override;
-    virtual int GetDepth() const override { return 24; }
+    int GetDepth() const override { return 24; }
     void SetBackgroundMode(int mode) override;
 #if wxUSE_PALETTE
     void SetPalette(const wxPalette& WXUNUSED(palette)) override { }
@@ -251,8 +251,8 @@ public:
     void SetResolution(int ppi);
 
     // overridden for wxPrinterDC Impl
-    virtual int GetResolution() const override;
-    virtual wxRect GetPaperRect() const override;
+    int GetResolution() const override;
+    wxRect GetPaperRect() const override;
 
 protected:
     bool DoFloodFill(wxCoord x1, wxCoord y1, const wxColour &col,
@@ -336,8 +336,8 @@ public:
 
     virtual ~wxGtkPrintPreview();
 
-    virtual bool Print(bool interactive) override;
-    virtual void DetermineScaling() override;
+    bool Print(bool interactive) override;
+    void DetermineScaling() override;
 
 private:
     void Init(wxPrintout *printout,

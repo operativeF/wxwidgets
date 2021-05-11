@@ -71,11 +71,11 @@ class CheckBoxWidgetsPage : public WidgetsPage
 public:
     CheckBoxWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_checkbox; }
-    virtual void RecreateWidget() override { CreateCheckbox(); }
+    wxWindow *GetWidget() const override { return m_checkbox; }
+    void RecreateWidget() override { CreateCheckbox(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 protected:
     // event handlers

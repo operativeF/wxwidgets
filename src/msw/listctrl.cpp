@@ -243,7 +243,7 @@ public:
     wxItemAttr m_attr;
 
 private:
-    virtual bool HasCustomDrawnItems() const override
+    bool HasCustomDrawnItems() const override
     {
         // We only exist if the header does need to be custom drawn.
         return true;

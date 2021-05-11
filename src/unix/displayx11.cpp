@@ -55,7 +55,7 @@ inline wxSize wxGetMainScreenSizeMM()
 class wxDisplayImplSingleX11 : public wxDisplayImplSingle
 {
 public:
-    virtual wxRect GetGeometry() const override
+    wxRect GetGeometry() const override
     {
         Display* const dpy = wxGetX11Display();
 
@@ -64,12 +64,12 @@ public:
                       DisplayHeight(dpy, DefaultScreen (dpy)));
     }
 
-    virtual wxRect GetClientArea() const override
+    wxRect GetClientArea() const override
     {
         return wxGetMainScreenWorkArea();
     }
 
-    virtual int GetDepth() const override
+    int GetDepth() const override
     {
         return wxGetMainScreenDepth();
     }
@@ -135,15 +135,15 @@ public:
     {
     }
 
-    virtual wxRect GetGeometry() const override { return m_rect; }
-    virtual wxRect GetClientArea() const override
+    wxRect GetGeometry() const override { return m_rect; }
+    wxRect GetClientArea() const override
     {
         // we intentionally don't cache the result here because the client
         // display area may change (e.g. the user resized or hid a panel) and
         // we don't currently react to its changes
         return IsPrimary() ? wxGetMainScreenWorkArea() : m_rect;
     }
-    virtual int GetDepth() const override
+    int GetDepth() const override
     {
         const wxVideoMode& mode = GetCurrentMode();
         if ( mode.bpp )
@@ -152,9 +152,9 @@ public:
         return wxGetMainScreenDepth();
     }
 
-    virtual wxArrayVideoModes GetModes(const wxVideoMode& mode) const override;
-    virtual wxVideoMode GetCurrentMode() const override;
-    virtual bool ChangeMode(const wxVideoMode& mode) override;
+    wxArrayVideoModes GetModes(const wxVideoMode& mode) const override;
+    wxVideoMode GetCurrentMode() const override;
+    bool ChangeMode(const wxVideoMode& mode) override;
 
 private:
     wxRect m_rect;
@@ -167,9 +167,9 @@ class wxDisplayFactoryX11 : public wxDisplayFactory
 public:
     wxDisplayFactoryX11() { }
 
-    virtual wxDisplayImpl *CreateDisplay(unsigned n) override;
-    virtual unsigned GetCount() override;
-    virtual int GetFromPoint(const wxPoint& pt) override;
+    wxDisplayImpl *CreateDisplay(unsigned n) override;
+    unsigned GetCount() override;
+    int GetFromPoint(const wxPoint& pt) override;
 
 protected:
     wxDECLARE_NO_COPY_CLASS(wxDisplayFactoryX11);

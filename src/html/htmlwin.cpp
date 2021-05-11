@@ -63,7 +63,7 @@ public:
         m_orient = orient;
     }
 
-    virtual void Notify() override;
+    void Notify() override;
 
 private:
     wxScrolledWindow *m_win;

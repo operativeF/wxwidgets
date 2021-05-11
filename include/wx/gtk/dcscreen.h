@@ -22,7 +22,7 @@ public:
     wxScreenDCImpl( wxScreenDC *owner );
     ~wxScreenDCImpl();
 
-    virtual void DoGetSize(int *width, int *height) const override;
+    void DoGetSize(int *width, int *height) const override;
 
 private:
     void Init();

@@ -508,7 +508,7 @@ public:
                                    const wxRect& rect,
                                    int flags) override
         { m_renderer->DrawButtonSurface(dc, col, rect, flags); }
-    virtual void DrawFocusRect(wxWindow* win, wxDC& dc, const wxRect& rect, int flags = 0) override
+    void DrawFocusRect(wxWindow* win, wxDC& dc, const wxRect& rect, int flags = 0) override
         { m_renderer->DrawFocusRect(win, dc, rect, flags); }
     virtual void DrawLabel(wxDC& dc,
                            const wxString& label,
@@ -630,7 +630,7 @@ public:
                               int selEnd = -1,
                               int flags = 0) override
         { m_renderer->DrawTextLine(dc, text, rect, selStart, selEnd, flags); }
-    virtual void DrawLineWrapMark(wxDC& dc, const wxRect& rect) override
+    void DrawLineWrapMark(wxDC& dc, const wxRect& rect) override
         { m_renderer->DrawLineWrapMark(dc, rect); }
 #endif // wxUSE_TEXTCTRL
 
@@ -747,31 +747,31 @@ public:
                                       bmpPressed, bmpDisabled); }
 #endif // wxUSE_COMBOBOX
 
-    virtual void AdjustSize(wxSize *size, const wxWindow *window) override
+    void AdjustSize(wxSize *size, const wxWindow *window) override
         { m_renderer->AdjustSize(size, window); }
-    virtual wxRect GetBorderDimensions(wxBorder border) const override
+    wxRect GetBorderDimensions(wxBorder border) const override
         { return m_renderer->GetBorderDimensions(border); }
-    virtual bool AreScrollbarsInsideBorder() const override
+    bool AreScrollbarsInsideBorder() const override
         { return m_renderer->AreScrollbarsInsideBorder(); }
 
 #if wxUSE_SCROLLBAR
-    virtual wxSize GetScrollbarArrowSize() const override
+    wxSize GetScrollbarArrowSize() const override
         { return m_renderer->GetScrollbarArrowSize(); }
 #endif // wxUSE_SCROLLBAR
 
-    virtual wxCoord GetListboxItemHeight(wxCoord fontHeight) override
+    wxCoord GetListboxItemHeight(wxCoord fontHeight) override
         { return m_renderer->GetListboxItemHeight(fontHeight); }
-    virtual wxSize GetCheckBitmapSize() const override
+    wxSize GetCheckBitmapSize() const override
         { return m_renderer->GetCheckBitmapSize(); }
-    virtual wxSize GetRadioBitmapSize() const override
+    wxSize GetRadioBitmapSize() const override
         { return m_renderer->GetRadioBitmapSize(); }
-    virtual wxCoord GetCheckItemMargin() const override
+    wxCoord GetCheckItemMargin() const override
         { return m_renderer->GetCheckItemMargin(); }
 
 #if wxUSE_TOOLBAR
-    virtual wxSize GetToolBarButtonSize(wxCoord *separator) const override
+    wxSize GetToolBarButtonSize(wxCoord *separator) const override
         { return m_renderer->GetToolBarButtonSize(separator); }
-    virtual wxSize GetToolBarMargin() const override
+    wxSize GetToolBarMargin() const override
         { return m_renderer->GetToolBarMargin(); }
 #endif // wxUSE_TOOLBAR
 
@@ -786,14 +786,14 @@ public:
 #endif // wxUSE_TEXTCTRL
 
 #if wxUSE_NOTEBOOK
-    virtual wxSize GetTabIndent() const override { return m_renderer->GetTabIndent(); }
-    virtual wxSize GetTabPadding() const override { return m_renderer->GetTabPadding(); }
+    wxSize GetTabIndent() const override { return m_renderer->GetTabIndent(); }
+    wxSize GetTabPadding() const override { return m_renderer->GetTabPadding(); }
 #endif // wxUSE_NOTEBOOK
 
 #if wxUSE_SLIDER
-    virtual wxCoord GetSliderDim() const override
+    wxCoord GetSliderDim() const override
         { return m_renderer->GetSliderDim(); }
-    virtual wxCoord GetSliderTickLen() const override
+    wxCoord GetSliderTickLen() const override
         { return m_renderer->GetSliderTickLen(); }
 
     virtual wxRect GetSliderShaftRect(const wxRect& rect,
@@ -807,11 +807,11 @@ public:
         { return m_renderer->GetSliderThumbSize(rect, lenThumb, orient); }
 #endif // wxUSE_SLIDER
 
-    virtual wxSize GetProgressBarStep() const override
+    wxSize GetProgressBarStep() const override
         { return m_renderer->GetProgressBarStep(); }
 
 #if wxUSE_MENUS
-    virtual wxSize GetMenuBarItemSize(const wxSize& sizeText) const override
+    wxSize GetMenuBarItemSize(const wxSize& sizeText) const override
         { return m_renderer->GetMenuBarItemSize(sizeText); }
     virtual wxMenuGeometryInfo *GetMenuGeometry(wxWindow *win,
                                                 const wxMenu& menu) const override
@@ -819,21 +819,21 @@ public:
 #endif // wxUSE_MENUS
 
 #if wxUSE_STATUSBAR
-    virtual wxSize GetStatusBarBorders() const override
+    wxSize GetStatusBarBorders() const override
         { return m_renderer->GetStatusBarBorders(); }
-    virtual wxCoord GetStatusBarBorderBetweenFields() const override
+    wxCoord GetStatusBarBorderBetweenFields() const override
         { return m_renderer->GetStatusBarBorderBetweenFields(); }
-    virtual wxSize GetStatusBarFieldMargins() const override
+    wxSize GetStatusBarFieldMargins() const override
         { return m_renderer->GetStatusBarFieldMargins(); }
 #endif // wxUSE_STATUSBAR
 
-    virtual wxRect GetFrameClientArea(const wxRect& rect, int flags) const override
+    wxRect GetFrameClientArea(const wxRect& rect, int flags) const override
         { return m_renderer->GetFrameClientArea(rect, flags); }
-    virtual wxSize GetFrameTotalSize(const wxSize& clientSize, int flags) const override
+    wxSize GetFrameTotalSize(const wxSize& clientSize, int flags) const override
         { return m_renderer->GetFrameTotalSize(clientSize, flags); }
-    virtual wxSize GetFrameMinSize(int flags) const override
+    wxSize GetFrameMinSize(int flags) const override
         { return m_renderer->GetFrameMinSize(flags); }
-    virtual wxSize GetFrameIconSize() const override
+    wxSize GetFrameIconSize() const override
         { return m_renderer->GetFrameIconSize(); }
     virtual int HitTestFrame(const wxRect& rect,
                              const wxPoint& pt,

@@ -28,8 +28,8 @@ public:
     virtual bool Print(wxWindow *parent,
                        wxPrintout *printout,
                        bool prompt = true) override;
-    virtual wxDC* PrintDialog(wxWindow *parent) override;
-    virtual bool Setup(wxWindow *parent) override;
+    wxDC* PrintDialog(wxWindow *parent) override;
+    bool Setup(wxWindow *parent) override;
 
 };
 
@@ -51,8 +51,8 @@ public:
                           wxPrintData *data);
     virtual ~wxMacPrintPreview();
 
-    virtual bool Print(bool interactive) override;
-    virtual void DetermineScaling() override;
+    bool Print(bool interactive) override;
+    void DetermineScaling() override;
 };
 
 #endif

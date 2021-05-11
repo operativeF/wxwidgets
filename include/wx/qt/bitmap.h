@@ -35,40 +35,40 @@ public:
 
     static void InitStandardHandlers();
 
-    virtual bool Create(int width, int height, int depth = wxBITMAP_SCREEN_DEPTH) override;
-    virtual bool Create(const wxSize& sz, int depth = wxBITMAP_SCREEN_DEPTH) override;
+    bool Create(int width, int height, int depth = wxBITMAP_SCREEN_DEPTH) override;
+    bool Create(const wxSize& sz, int depth = wxBITMAP_SCREEN_DEPTH) override;
     virtual bool Create(int width, int height, const wxDC& WXUNUSED(dc));
 
-    virtual int GetHeight() const override;
-    virtual int GetWidth() const override;
-    virtual int GetDepth() const override;
+    int GetHeight() const override;
+    int GetWidth() const override;
+    int GetDepth() const override;
 
 #if wxUSE_IMAGE
-    virtual wxImage ConvertToImage() const override;
+    wxImage ConvertToImage() const override;
 #endif // wxUSE_IMAGE
 
-    virtual wxMask *GetMask() const override;
-    virtual void SetMask(wxMask *mask) override;
+    wxMask *GetMask() const override;
+    void SetMask(wxMask *mask) override;
 
-    virtual wxBitmap GetSubBitmap(const wxRect& rect) const override;
+    wxBitmap GetSubBitmap(const wxRect& rect) const override;
 
     virtual bool SaveFile(const wxString &name, wxBitmapType type,
                           const wxPalette *palette = NULL) const override;
-    virtual bool LoadFile(const wxString &name, wxBitmapType type = wxBITMAP_DEFAULT_TYPE) override;
+    bool LoadFile(const wxString &name, wxBitmapType type = wxBITMAP_DEFAULT_TYPE) override;
 
 #if wxUSE_PALETTE
-    virtual wxPalette *GetPalette() const override;
-    virtual void SetPalette(const wxPalette& palette) override;
+    wxPalette *GetPalette() const override;
+    void SetPalette(const wxPalette& palette) override;
 #endif // wxUSE_PALETTE
 
     // copies the contents and mask of the given (colour) icon to the bitmap
-    virtual bool CopyFromIcon(const wxIcon& icon) override;
+    bool CopyFromIcon(const wxIcon& icon) override;
 
     // implementation:
 #if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED(virtual void SetHeight(int height) override);
-    wxDEPRECATED(virtual void SetWidth(int width) override);
-    wxDEPRECATED(virtual void SetDepth(int depth) override);
+    wxDEPRECATED(void SetHeight(int height) override);
+    wxDEPRECATED(void SetWidth(int width) override);
+    wxDEPRECATED(void SetDepth(int depth) override);
 #endif
 
     void *GetRawData(wxPixelDataBase& data, int bpp);
@@ -81,8 +81,8 @@ public:
     QPixmap *GetHandle() const;
 
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const override;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
+    wxGDIRefData *CreateGDIRefData() const override;
+    wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
 
     wxDECLARE_DYNAMIC_CLASS(wxBitmap);
 };

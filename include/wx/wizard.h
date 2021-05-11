@@ -165,8 +165,8 @@ public:
     }
 
     // FIXME: Is this true? -> base class pure virtuals
-    virtual wxWizardPage *GetPrev() const override;
-    virtual wxWizardPage *GetNext() const override;
+    wxWizardPage *GetPrev() const override;
+    wxWizardPage *GetNext() const override;
 
 private:
     // common part of ctors:

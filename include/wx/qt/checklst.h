@@ -46,11 +46,11 @@ public:
                   const wxValidator& validator = wxDefaultValidator,
                   const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
-    virtual bool IsChecked(unsigned int item) const override;
-    virtual void Check(unsigned int item, bool check = true) override;
+    bool IsChecked(unsigned int item) const override;
+    void Check(unsigned int item, bool check = true) override;
 
 private:
-    virtual void Init() override; //common construction
+    void Init() override; //common construction
 
     wxDECLARE_DYNAMIC_CLASS(wxCheckListBox);
 };

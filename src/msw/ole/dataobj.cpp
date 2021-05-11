@@ -1385,7 +1385,7 @@ class CFSTR_SHELLURLDataObject : public wxCustomDataObject
 public:
     CFSTR_SHELLURLDataObject() : wxCustomDataObject(CFSTR_SHELLURL) {}
 
-    virtual size_t GetBufferOffset( const wxDataFormat& WXUNUSED(format) ) override
+    size_t GetBufferOffset( const wxDataFormat& WXUNUSED(format) ) override
     {
         return 0;
     }

@@ -486,7 +486,7 @@ private:
 class WebRequestApp : public wxApp
 {
 public:
-    virtual bool OnInit() override
+    bool OnInit() override
     {
         if ( !wxApp::OnInit() )
             return false;

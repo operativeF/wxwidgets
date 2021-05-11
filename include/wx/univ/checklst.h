@@ -69,8 +69,8 @@ public:
                 const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
     // implement check list box methods
-    virtual bool IsChecked(unsigned int item) const override;
-    virtual void Check(unsigned int item, bool check = true) override;
+    bool IsChecked(unsigned int item) const override;
+    void Check(unsigned int item, bool check = true) override;
 
     // and input handling
     virtual bool PerformAction(const wxControlAction& action,
@@ -78,7 +78,7 @@ public:
                                const wxString& strArg = wxEmptyString) override;
 
     static wxInputHandler *GetStdInputHandler(wxInputHandler *handlerDef);
-    virtual wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
+    wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
     {
         return GetStdInputHandler(handlerDef);
     }
@@ -86,16 +86,16 @@ public:
 protected:
     // override all methods which add/delete items to update m_checks array as
     // well
-    virtual void OnItemInserted(unsigned int pos) override;
-    virtual void DoDeleteOneItem(unsigned int n) override;
-    virtual void DoClear() override;
+    void OnItemInserted(unsigned int pos) override;
+    void DoDeleteOneItem(unsigned int n) override;
+    void DoClear() override;
 
     // draw the check items instead of the usual ones
     virtual void DoDrawRange(wxControlRenderer *renderer,
                              int itemFirst, int itemLast) override;
 
     // take them also into account for size calculation
-    virtual wxSize DoGetBestClientSize() const override;
+    wxSize DoGetBestClientSize() const override;
 
     // common part of all ctors
     void Init();

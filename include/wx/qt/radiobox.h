@@ -65,21 +65,21 @@ public:
     using wxWindowBase::Enable;
     using wxRadioBoxBase::GetDefaultBorder;
 
-    virtual bool Enable(unsigned int n, bool enable = true) override;
-    virtual bool Enable(bool enable = true) override;
-    virtual bool Show(unsigned int n, bool show = true) override;
-    virtual bool Show(bool show = true) override;
-    virtual bool IsItemEnabled(unsigned int n) const override;
-    virtual bool IsItemShown(unsigned int n) const override;
+    bool Enable(unsigned int n, bool enable = true) override;
+    bool Enable(bool enable = true) override;
+    bool Show(unsigned int n, bool show = true) override;
+    bool Show(bool show = true) override;
+    bool IsItemEnabled(unsigned int n) const override;
+    bool IsItemShown(unsigned int n) const override;
 
-    virtual unsigned int GetCount() const override;
-    virtual wxString GetString(unsigned int n) const override;
-    virtual void SetString(unsigned int n, const wxString& s) override;
+    unsigned int GetCount() const override;
+    wxString GetString(unsigned int n) const override;
+    void SetString(unsigned int n, const wxString& s) override;
 
-    virtual void SetSelection(int n) override;
-    virtual int GetSelection() const override;
+    void SetSelection(int n) override;
+    int GetSelection() const override;
 
-    virtual QWidget *GetHandle() const override;
+    QWidget *GetHandle() const override;
 
 private:
     // The 'visual' group box:

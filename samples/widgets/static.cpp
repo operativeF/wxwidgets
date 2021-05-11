@@ -80,8 +80,8 @@ class StaticWidgetsPage : public WidgetsPage
 public:
     StaticWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_statText; }
-    virtual Widgets GetWidgets() const override
+    wxWindow *GetWidget() const override { return m_statText; }
+    Widgets GetWidgets() const override
     {
         Widgets widgets;
         widgets.push_back(m_sizerStatBox->GetStaticBox());
@@ -95,10 +95,10 @@ public:
 
         return widgets;
     }
-    virtual void RecreateWidget() override { CreateStatic(); }
+    void RecreateWidget() override { CreateStatic(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 protected:
     // event handlers

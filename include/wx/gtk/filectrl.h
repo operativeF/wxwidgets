@@ -99,22 +99,22 @@ public:
                  const wxSize& size = wxDefaultSize,
                  const wxString& name = wxASCII_STR(wxFileCtrlNameStr) );
 
-    virtual void SetWildcard( const wxString& wildCard ) override;
-    virtual void SetFilterIndex( int filterIndex ) override;
-    virtual bool SetDirectory( const wxString& dir ) override;
-    virtual bool SetFilename( const wxString& name ) override;
-    virtual bool SetPath( const wxString& path ) override;
+    void SetWildcard( const wxString& wildCard ) override;
+    void SetFilterIndex( int filterIndex ) override;
+    bool SetDirectory( const wxString& dir ) override;
+    bool SetFilename( const wxString& name ) override;
+    bool SetPath( const wxString& path ) override;
 
-    virtual wxString GetFilename() const override;
-    virtual wxString GetDirectory() const override;
-    virtual wxString GetWildcard() const override { return this->m_wildCard; }
-    virtual wxString GetPath() const override;
-    virtual void GetPaths( wxArrayString& paths ) const override;
-    virtual void GetFilenames( wxArrayString& files ) const override;
-    virtual int GetFilterIndex() const override { return m_fc.GetFilterIndex(); }
+    wxString GetFilename() const override;
+    wxString GetDirectory() const override;
+    wxString GetWildcard() const override { return this->m_wildCard; }
+    wxString GetPath() const override;
+    void GetPaths( wxArrayString& paths ) const override;
+    void GetFilenames( wxArrayString& files ) const override;
+    int GetFilterIndex() const override { return m_fc.GetFilterIndex(); }
 
-    virtual bool HasMultipleFileSelection() const override { return HasFlag( wxFC_MULTIPLE ); }
-    virtual void ShowHidden(bool show) override;
+    bool HasMultipleFileSelection() const override { return HasFlag( wxFC_MULTIPLE ); }
+    void ShowHidden(bool show) override;
 
     virtual bool HasFilterChoice() const
         { return m_fc.HasFilterChoice(); }

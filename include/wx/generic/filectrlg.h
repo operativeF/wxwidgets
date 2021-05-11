@@ -218,32 +218,32 @@ public:
                  const wxSize& size = wxDefaultSize,
                  const wxString& name = wxASCII_STR(wxFileCtrlNameStr) );
 
-    virtual void SetWildcard( const wxString& wildCard ) override;
-    virtual void SetFilterIndex( int filterindex ) override;
-    virtual bool SetDirectory( const wxString& dir ) override;
+    void SetWildcard( const wxString& wildCard ) override;
+    void SetFilterIndex( int filterindex ) override;
+    bool SetDirectory( const wxString& dir ) override;
 
     // Selects a certain file.
     // In case the filename specified isn't found/couldn't be shown with
     // currently selected filter, false is returned and nothing happens
-    virtual bool SetFilename( const wxString& name ) override;
+    bool SetFilename( const wxString& name ) override;
 
     // Changes to a certain directory and selects a certain file.
     // In case the filename specified isn't found/couldn't be shown with
     // currently selected filter, false is returned and if directory exists
     // it's chdir'ed to
-    virtual bool SetPath( const wxString& path ) override;
+    bool SetPath( const wxString& path ) override;
 
-    virtual wxString GetFilename() const override;
-    virtual wxString GetDirectory() const override;
-    virtual wxString GetWildcard() const override { return this->m_wildCard; }
-    virtual wxString GetPath() const override;
-    virtual void GetPaths( wxArrayString& paths ) const override;
-    virtual void GetFilenames( wxArrayString& files ) const override;
-    virtual int GetFilterIndex() const override { return m_filterIndex; }
+    wxString GetFilename() const override;
+    wxString GetDirectory() const override;
+    wxString GetWildcard() const override { return this->m_wildCard; }
+    wxString GetPath() const override;
+    void GetPaths( wxArrayString& paths ) const override;
+    void GetFilenames( wxArrayString& files ) const override;
+    int GetFilterIndex() const override { return m_filterIndex; }
 
-    virtual bool HasMultipleFileSelection() const override
+    bool HasMultipleFileSelection() const override
         { return HasFlag(wxFC_MULTIPLE); }
-    virtual void ShowHidden(bool show) override { m_list->ShowHidden( show ); }
+    void ShowHidden(bool show) override { m_list->ShowHidden( show ); }
 
     void GoToParentDir();
     void GoToHomeDir();

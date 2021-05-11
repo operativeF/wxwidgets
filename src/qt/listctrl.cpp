@@ -970,7 +970,7 @@ public:
         return m_itemDelegate.GetEditControl();
     }
 
-    virtual void paintEvent(QPaintEvent *event) override
+    void paintEvent(QPaintEvent *event) override
     {
         QTreeView::paintEvent(event);
     }

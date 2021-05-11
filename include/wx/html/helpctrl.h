@@ -81,14 +81,14 @@ public:
 
     //// Backward compatibility with wxHelpController API
 
-    virtual bool Initialize(const wxString& file, int WXUNUSED(server) ) override { return Initialize(file); }
-    virtual bool Initialize(const wxString& file) override;
-    virtual void SetViewer(const wxString& WXUNUSED(viewer), long WXUNUSED(flags) = 0) override {}
-    virtual bool LoadFile(const wxString& file = wxT("")) override;
-    virtual bool DisplaySection(int sectionNo) override;
-    virtual bool DisplaySection(const wxString& section) override { return Display(section); }
-    virtual bool DisplayBlock(long blockNo) override { return DisplaySection(blockNo); }
-    virtual bool DisplayTextPopup(const wxString& text, const wxPoint& pos) override;
+    bool Initialize(const wxString& file, int WXUNUSED(server) ) override { return Initialize(file); }
+    bool Initialize(const wxString& file) override;
+    void SetViewer(const wxString& WXUNUSED(viewer), long WXUNUSED(flags) = 0) override {}
+    bool LoadFile(const wxString& file = wxT("")) override;
+    bool DisplaySection(int sectionNo) override;
+    bool DisplaySection(const wxString& section) override { return Display(section); }
+    bool DisplayBlock(long blockNo) override { return DisplaySection(blockNo); }
+    bool DisplayTextPopup(const wxString& text, const wxPoint& pos) override;
 
     virtual void SetFrameParameters(const wxString& titleFormat,
                                const wxSize& size,
@@ -103,8 +103,8 @@ public:
     // Get direct access to help data:
     wxHtmlHelpData *GetHelpData() { return &m_helpData; }
 
-    virtual bool Quit() override ;
-    virtual void OnQuit() override {}
+    bool Quit() override ;
+    void OnQuit() override {}
 
     void OnCloseFrame(wxCloseEvent& evt);
 

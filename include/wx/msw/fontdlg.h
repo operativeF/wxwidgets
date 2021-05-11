@@ -24,9 +24,9 @@ public:
     wxFontDialog(wxWindow *parent, const wxFontData& data)
         : wxFontDialogBase(parent, data) { Create(parent, data); }
 
-    virtual int ShowModal() override;
-    virtual void SetTitle(const wxString& title) override;
-    virtual wxString GetTitle() const override;
+    int ShowModal() override;
+    void SetTitle(const wxString& title) override;
+    wxString GetTitle() const override;
 
 protected:
     wxString m_title;

@@ -45,39 +45,39 @@ public:
     virtual ~wxTopLevelWindowGTK();
 
     // implement base class pure virtuals
-    virtual void Maximize(bool maximize = true) override;
-    virtual bool IsMaximized() const override;
-    virtual void Iconize(bool iconize = true) override;
-    virtual bool IsIconized() const override;
-    virtual void SetIcons(const wxIconBundle& icons) override;
-    virtual void Restore() override;
+    void Maximize(bool maximize = true) override;
+    bool IsMaximized() const override;
+    void Iconize(bool iconize = true) override;
+    bool IsIconized() const override;
+    void SetIcons(const wxIconBundle& icons) override;
+    void Restore() override;
 
-    virtual bool EnableCloseButton(bool enable = true) override;
+    bool EnableCloseButton(bool enable = true) override;
 
-    virtual void ShowWithoutActivating() override;
-    virtual bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
-    virtual bool IsFullScreen() const override { return m_fsIsShowing; }
+    void ShowWithoutActivating() override;
+    bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
+    bool IsFullScreen() const override { return m_fsIsShowing; }
 
-    virtual void RequestUserAttention(int flags = wxUSER_ATTENTION_INFO) override;
+    void RequestUserAttention(int flags = wxUSER_ATTENTION_INFO) override;
 
-    virtual void SetWindowStyleFlag( long style ) override;
+    void SetWindowStyleFlag( long style ) override;
 
-    virtual bool Show(bool show = true) override;
+    bool Show(bool show = true) override;
 
-    virtual void Raise() override;
+    void Raise() override;
 
-    virtual bool IsActive() override;
+    bool IsActive() override;
 
-    virtual void SetTitle( const wxString &title ) override;
-    virtual wxString GetTitle() const override { return m_title; }
+    void SetTitle( const wxString &title ) override;
+    wxString GetTitle() const override { return m_title; }
 
-    virtual void SetLabel(const wxString& label) override { SetTitle( label ); }
-    virtual wxString GetLabel() const override            { return GetTitle(); }
+    void SetLabel(const wxString& label) override { SetTitle( label ); }
+    wxString GetLabel() const override            { return GetTitle(); }
 
-    virtual wxVisualAttributes GetDefaultAttributes() const override;
+    wxVisualAttributes GetDefaultAttributes() const override;
 
-    virtual bool SetTransparent(wxByte alpha) override;
-    virtual bool CanSetTransparent() override;
+    bool SetTransparent(wxByte alpha) override;
+    bool CanSetTransparent() override;
 
     // Experimental, to allow help windows to be
     // viewable from within modal dialogs
@@ -93,7 +93,7 @@ public:
     // --------------------------
 
     // GTK callbacks
-    virtual void GTKHandleRealized() override;
+    void GTKHandleRealized() override;
 
     void GTKConfigureEvent(int x, int y);
 
@@ -141,9 +141,9 @@ public:
 #ifdef __WXGTK3__
     void GTKUpdateClientSizeIfNecessary();
 
-    virtual void SetMinSize(const wxSize& minSize) override;
+    void SetMinSize(const wxSize& minSize) override;
 
-    virtual void WXSetInitialFittingClientSize(int flags) override;
+    void WXSetInitialFittingClientSize(int flags) override;
 
 private:
     // Flags to call WXSetInitialFittingClientSize() with if != 0.
@@ -157,15 +157,15 @@ protected:
                                  int maxW, int maxH,
                                  int incW, int incH) override;
     // move the window to the specified location and resize it
-    virtual void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoMoveWindow(int x, int y, int width, int height) override;
 
     // take into account WM decorations here
     virtual void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
 
-    virtual void DoSetClientSize(int width, int height) override;
-    virtual void DoGetClientSize(int *width, int *height) const override;
+    void DoSetClientSize(int width, int height) override;
+    void DoGetClientSize(int *width, int *height) const override;
 
     // string shown in the title bar
     wxString m_title;

@@ -29,11 +29,11 @@ public:
                 long style = wxSP_VERTICAL,
                 const wxString& name = wxSPIN_BUTTON_NAME);
 
-    virtual int GetValue() const override;
-    virtual void SetValue(int val) override;
-    virtual void SetRange(int min, int max) override;
+    int GetValue() const override;
+    void SetValue(int val) override;
+    void SetRange(int min, int max) override;
 
-    virtual QWidget *GetHandle() const override;
+    QWidget *GetHandle() const override;
 
 private:
     QSpinBox *m_qtSpinBox;

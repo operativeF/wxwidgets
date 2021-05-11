@@ -38,7 +38,7 @@
 class MyApp : public wxApp
 {
 public:
-    virtual bool OnInit() override;
+    bool OnInit() override;
 };
 
 // Define a new html window type: this is a wrapper for handling wxHtmlWindow events
@@ -107,7 +107,7 @@ private:
 class BoldProcessor : public wxHtmlProcessor
 {
 public:
-    virtual wxString Process(const wxString& s) const override
+    wxString Process(const wxString& s) const override
     {
         wxString r(s);
         r.Replace("<b>", wxEmptyString);

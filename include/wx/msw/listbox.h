@@ -80,28 +80,28 @@ public:
 
     virtual ~wxListBox();
 
-    virtual unsigned int GetCount() const override;
-    virtual wxString GetString(unsigned int n) const override;
-    virtual void SetString(unsigned int n, const wxString& s) override;
-    virtual int FindString(const wxString& s, bool bCase = false) const override;
+    unsigned int GetCount() const override;
+    wxString GetString(unsigned int n) const override;
+    void SetString(unsigned int n, const wxString& s) override;
+    int FindString(const wxString& s, bool bCase = false) const override;
 
-    virtual bool IsSelected(int n) const override;
-    virtual int GetSelection() const override;
-    virtual int GetSelections(wxArrayInt& aSelections) const override;
+    bool IsSelected(int n) const override;
+    int GetSelection() const override;
+    int GetSelections(wxArrayInt& aSelections) const override;
 
     // return the index of the item at this position or wxNOT_FOUND
     int HitTest(const wxPoint& pt) const { return DoHitTestList(pt); }
     int HitTest(wxCoord x, wxCoord y) const { return DoHitTestList(wxPoint(x, y)); }
 
-    virtual void EnsureVisible(int n) override;
+    void EnsureVisible(int n) override;
 
-    virtual int GetTopItem() const override;
-    virtual int GetCountPerPage() const override;
+    int GetTopItem() const override;
+    int GetCountPerPage() const override;
 
     // ownerdrawn wxListBox and wxCheckListBox support
 #if wxUSE_OWNER_DRAWN
     // override base class virtuals
-    virtual bool SetFont(const wxFont &font) override;
+    bool SetFont(const wxFont &font) override;
 
     bool MSWOnMeasure(WXMEASUREITEMSTRUCT *item) override;
     bool MSWOnDraw(WXDRAWITEMSTRUCT *item) override;
@@ -138,12 +138,12 @@ public:
 
     // under XP when using "transition effect for menus and tooltips" if we
     // return true for WM_PRINTCLIENT here then it causes noticeable slowdown
-    virtual bool MSWShouldPropagatePrintChild() override
+    bool MSWShouldPropagatePrintChild() override
     {
         return false;
     }
 
-    virtual wxVisualAttributes GetDefaultAttributes() const override
+    wxVisualAttributes GetDefaultAttributes() const override
     {
         return GetClassDefaultAttributes(GetWindowVariant());
     }
@@ -155,25 +155,25 @@ public:
     }
 
     // returns true if the platform should explicitly apply a theme border
-    virtual bool CanApplyThemeBorder() const override { return false; }
+    bool CanApplyThemeBorder() const override { return false; }
 
-    virtual void OnInternalIdle() override;
+    void OnInternalIdle() override;
 
 protected:
-    virtual wxSize DoGetBestClientSize() const override;
+    wxSize DoGetBestClientSize() const override;
 
-    virtual void DoClear() override;
-    virtual void DoDeleteOneItem(unsigned int n) override;
+    void DoClear() override;
+    void DoDeleteOneItem(unsigned int n) override;
 
-    virtual void DoSetSelection(int n, bool select) override;
+    void DoSetSelection(int n, bool select) override;
 
     virtual int DoInsertItems(const wxArrayStringsAdapter& items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
 
-    virtual void DoSetFirstItem(int n) override;
-    virtual void DoSetItemClientData(unsigned int n, void* clientData) override;
-    virtual void* DoGetItemClientData(unsigned int n) const override;
+    void DoSetFirstItem(int n) override;
+    void DoSetItemClientData(unsigned int n, void* clientData) override;
+    void* DoGetItemClientData(unsigned int n) const override;
 
     // this can't be called DoHitTest() because wxWindow already has this method
     virtual int DoHitTestList(const wxPoint& point) const;
@@ -185,7 +185,7 @@ protected:
         return wxSize(w, h);
     }
 
-    virtual void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
+    void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
 
     // free memory (common part of Clear() and dtor)
     void Free();

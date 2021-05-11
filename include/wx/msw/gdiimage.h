@@ -50,7 +50,7 @@ public:
     }
 
     // accessors
-    virtual bool IsOk() const override { return m_handle != NULL; }
+    bool IsOk() const override { return m_handle != NULL; }
 
     void SetSize(int w, int h) { m_width = w; m_height = h; }
 
@@ -129,14 +129,14 @@ public:
 
     // forward some of base class virtuals to wxGDIImageRefData
     bool FreeResource(bool force = false) override;
-    virtual WXHANDLE GetResourceHandle() const override;
+    WXHANDLE GetResourceHandle() const override;
 
 protected:
     // create the data for the derived class here
     virtual wxGDIImageRefData *CreateData() const = 0;
 
     // implement the wxGDIObject method in terms of our, more specific, one
-    virtual wxGDIRefData *CreateGDIRefData() const override { return CreateData(); }
+    wxGDIRefData *CreateGDIRefData() const override { return CreateData(); }
 
     // we can't [efficiently] clone objects of this class
     virtual wxGDIRefData *

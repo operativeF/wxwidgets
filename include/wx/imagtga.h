@@ -35,7 +35,7 @@ public:
     virtual bool SaveFile(wxImage* image, wxOutputStream& stream,
                              bool verbose = true) override;
 protected:
-    virtual bool DoCanRead(wxInputStream& stream) override;
+    bool DoCanRead(wxInputStream& stream) override;
 #endif // wxUSE_STREAMS
 
     wxDECLARE_DYNAMIC_CLASS(wxTGAHandler);

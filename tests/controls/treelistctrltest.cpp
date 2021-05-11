@@ -28,8 +28,8 @@ class TreeListCtrlTestCase : public CppUnit::TestCase
 public:
     TreeListCtrlTestCase() { }
 
-    virtual void setUp() override;
-    virtual void tearDown() override;
+    void setUp() override;
+    void tearDown() override;
 
 private:
     CPPUNIT_TEST_SUITE( TreeListCtrlTestCase );

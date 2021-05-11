@@ -65,10 +65,10 @@ static int firstAvailable;
 class wxSocketMSWManager : public wxSocketManager
 {
 public:
-    virtual bool OnInit() override;
-    virtual void OnExit() override;
+    bool OnInit() override;
+    void OnExit() override;
 
-    virtual wxSocketImpl *CreateSocket(wxSocketBase& wxsocket) override
+    wxSocketImpl *CreateSocket(wxSocketBase& wxsocket) override
     {
         return new wxSocketImplMSW(wxsocket);
     }

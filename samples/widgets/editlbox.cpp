@@ -66,11 +66,11 @@ class EditableListboxWidgetsPage : public WidgetsPage
 public:
     EditableListboxWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_lbox->GetListCtrl(); }
-    virtual void RecreateWidget() override { CreateLbox(); }
+    wxWindow *GetWidget() const override { return m_lbox->GetListCtrl(); }
+    void RecreateWidget() override { CreateLbox(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 protected:
     // event handlers

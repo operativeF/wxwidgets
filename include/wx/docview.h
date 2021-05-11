@@ -282,7 +282,7 @@ public:
 
 protected:
     // hook the document into event handlers chain here
-    virtual bool TryBefore(wxEvent& event) override;
+    bool TryBefore(wxEvent& event) override;
 
     wxDocument*       m_viewDocument;
     wxString          m_viewTypeName;
@@ -544,7 +544,7 @@ protected:
 #endif // wxUSE_PRINTING_ARCHITECTURE
 
     // hook the currently active view into event handlers chain here
-    virtual bool TryBefore(wxEvent& event) override;
+    bool TryBefore(wxEvent& event) override;
 
     // return the command processor for the current document, if any
     wxCommandProcessor *GetCurrentCommandProcessor() const;
@@ -720,7 +720,7 @@ public:
 
 protected:
     // hook the child view into event handlers chain here
-    virtual bool TryBefore(wxEvent& event) override
+    bool TryBefore(wxEvent& event) override
     {
         return TryProcessEvent(event) || BaseClass::TryBefore(event);
     }
@@ -873,7 +873,7 @@ public:
 
 protected:
     // hook the document manager into event handling chain here
-    virtual bool TryBefore(wxEvent& event) override
+    bool TryBefore(wxEvent& event) override
     {
         // It is important to send the event to the base class first as
         // wxMDIParentFrame overrides its TryBefore() to send the menu events
@@ -956,9 +956,9 @@ public:
     wxDocPrintout(wxView *view = NULL, const wxString& title = wxString());
 
     // implement wxPrintout methods
-    virtual bool OnPrintPage(int page) override;
-    virtual bool HasPage(int page) override;
-    virtual bool OnBeginDocument(int startPage, int endPage) override;
+    bool OnPrintPage(int page) override;
+    bool HasPage(int page) override;
+    bool OnBeginDocument(int startPage, int endPage) override;
     virtual void GetPageInfo(int *minPage, int *maxPage,
                              int *selPageFrom, int *selPageTo) override;
 

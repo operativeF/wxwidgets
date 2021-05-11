@@ -54,7 +54,7 @@ public:
     int GetTimeout() const { return m_milliseconds; }
 
     // Override wxEventFilter method to hide splash screen on any user input.
-    virtual int FilterEvent(wxEvent& event) override;
+    int FilterEvent(wxEvent& event) override;
 
 protected:
     // Common part of all ctors.

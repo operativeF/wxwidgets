@@ -101,7 +101,7 @@ protected:
                                 wxControl::EscapeMnemonics(line));
     }
 
-    virtual void OnOutputLine(const wxString& line) override
+    void OnOutputLine(const wxString& line) override
     {
         if ( !line.empty() )
         {

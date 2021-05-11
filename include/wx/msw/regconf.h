@@ -42,36 +42,36 @@ public:
   // ------------------------------------------
 
   // path management
-  virtual void SetPath(const wxString& strPath) override;
-  virtual const wxString& GetPath() const override { return m_strPath; }
+  void SetPath(const wxString& strPath) override;
+  const wxString& GetPath() const override { return m_strPath; }
 
   // entry/subgroup info
     // enumerate all of them
-  virtual bool GetFirstGroup(wxString& str, long& lIndex) const override;
-  virtual bool GetNextGroup (wxString& str, long& lIndex) const override;
-  virtual bool GetFirstEntry(wxString& str, long& lIndex) const override;
-  virtual bool GetNextEntry (wxString& str, long& lIndex) const override;
+  bool GetFirstGroup(wxString& str, long& lIndex) const override;
+  bool GetNextGroup (wxString& str, long& lIndex) const override;
+  bool GetFirstEntry(wxString& str, long& lIndex) const override;
+  bool GetNextEntry (wxString& str, long& lIndex) const override;
 
     // tests for existence
-  virtual bool HasGroup(const wxString& strName) const override;
-  virtual bool HasEntry(const wxString& strName) const override;
-  virtual EntryType GetEntryType(const wxString& name) const override;
+  bool HasGroup(const wxString& strName) const override;
+  bool HasEntry(const wxString& strName) const override;
+  EntryType GetEntryType(const wxString& name) const override;
 
     // get number of entries/subgroups in the current group, with or without
     // it's subgroups
-  virtual size_t GetNumberOfEntries(bool bRecursive = false) const override;
-  virtual size_t GetNumberOfGroups(bool bRecursive = false) const override;
+  size_t GetNumberOfEntries(bool bRecursive = false) const override;
+  size_t GetNumberOfGroups(bool bRecursive = false) const override;
 
-  virtual bool Flush(bool WXUNUSED(bCurrentOnly) = false) override { return true; }
+  bool Flush(bool WXUNUSED(bCurrentOnly) = false) override { return true; }
 
   // rename
-  virtual bool RenameEntry(const wxString& oldName, const wxString& newName) override;
-  virtual bool RenameGroup(const wxString& oldName, const wxString& newName) override;
+  bool RenameEntry(const wxString& oldName, const wxString& newName) override;
+  bool RenameGroup(const wxString& oldName, const wxString& newName) override;
 
   // delete
-  virtual bool DeleteEntry(const wxString& key, bool bGroupIfEmptyAlso = true) override;
-  virtual bool DeleteGroup(const wxString& key) override;
-  virtual bool DeleteAll() override;
+  bool DeleteEntry(const wxString& key, bool bGroupIfEmptyAlso = true) override;
+  bool DeleteGroup(const wxString& key) override;
+  bool DeleteAll() override;
 
 protected:
   // opens the local key creating it if necessary and returns it
@@ -95,18 +95,18 @@ protected:
   bool DoWriteValue(const wxString& key, const T& value);
 
   // implement read/write methods
-  virtual bool DoReadString(const wxString& key, wxString *pStr) const override;
-  virtual bool DoReadLong(const wxString& key, long *plResult) const override;
-  virtual bool DoReadLongLong(const wxString& key, wxLongLong_t *pll) const override;
+  bool DoReadString(const wxString& key, wxString *pStr) const override;
+  bool DoReadLong(const wxString& key, long *plResult) const override;
+  bool DoReadLongLong(const wxString& key, wxLongLong_t *pll) const override;
 #if wxUSE_BASE64
-  virtual bool DoReadBinary(const wxString& key, wxMemoryBuffer* buf) const override;
+  bool DoReadBinary(const wxString& key, wxMemoryBuffer* buf) const override;
 #endif // wxUSE_BASE64
 
-  virtual bool DoWriteString(const wxString& key, const wxString& szValue) override;
-  virtual bool DoWriteLong(const wxString& key, long lValue) override;
-  virtual bool DoWriteLongLong(const wxString& key, wxLongLong_t llValue) override;
+  bool DoWriteString(const wxString& key, const wxString& szValue) override;
+  bool DoWriteLong(const wxString& key, long lValue) override;
+  bool DoWriteLongLong(const wxString& key, wxLongLong_t llValue) override;
 #if wxUSE_BASE64
-  virtual bool DoWriteBinary(const wxString& key, const wxMemoryBuffer& buf) override;
+  bool DoWriteBinary(const wxString& key, const wxMemoryBuffer& buf) override;
 #endif // wxUSE_BASE64
 
 private:

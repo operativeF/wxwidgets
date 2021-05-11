@@ -34,8 +34,8 @@ class WXDLLIMPEXP_XRC wxTreebookXmlHandler : public wxXmlResourceHandler
 
 public:
     wxTreebookXmlHandler();
-    virtual wxObject *DoCreateResource() override;
-    virtual bool CanHandle(wxXmlNode *node) override;
+    wxObject *DoCreateResource() override;
+    bool CanHandle(wxXmlNode *node) override;
 
 private:
     wxTreebook *m_tbk;

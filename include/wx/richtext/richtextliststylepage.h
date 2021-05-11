@@ -63,8 +63,8 @@ public:
     void UpdatePreview();
 
     /// Transfer data from/to window
-    virtual bool TransferDataFromWindow() override;
-    virtual bool TransferDataToWindow() override;
+    bool TransferDataFromWindow() override;
+    bool TransferDataToWindow() override;
 
     /// Get attributes for selected level
     wxRichTextAttr* GetAttributesForSelection();

@@ -46,16 +46,16 @@ class wxDisplayImplGTK : public wxDisplayImpl
     typedef wxDisplayImpl base_type;
 public:
     wxDisplayImplGTK(unsigned i);
-    virtual wxRect GetGeometry() const override;
-    virtual wxRect GetClientArea() const override;
-    virtual int GetDepth() const override;
-    virtual double GetScaleFactor() const override;
+    wxRect GetGeometry() const override;
+    wxRect GetClientArea() const override;
+    int GetDepth() const override;
+    double GetScaleFactor() const override;
 
 #if wxUSE_DISPLAY
-    virtual bool IsPrimary() const override;
-    virtual wxArrayVideoModes GetModes(const wxVideoMode& mode) const override;
-    virtual wxVideoMode GetCurrentMode() const override;
-    virtual bool ChangeMode(const wxVideoMode& mode) override;
+    bool IsPrimary() const override;
+    wxArrayVideoModes GetModes(const wxVideoMode& mode) const override;
+    wxVideoMode GetCurrentMode() const override;
+    bool ChangeMode(const wxVideoMode& mode) override;
 #endif // wxUSE_DISPLAY
 
     GdkMonitor* const m_monitor;
@@ -66,10 +66,10 @@ public:
 class wxDisplayFactoryGTK: public wxDisplayFactory
 {
 public:
-    virtual wxDisplayImpl* CreateDisplay(unsigned n) override;
-    virtual unsigned GetCount() override;
-    virtual int GetFromPoint(const wxPoint& pt) override;
-    virtual int GetFromWindow(const wxWindow* win) override;
+    wxDisplayImpl* CreateDisplay(unsigned n) override;
+    unsigned GetCount() override;
+    int GetFromPoint(const wxPoint& pt) override;
+    int GetFromWindow(const wxWindow* win) override;
 };
 
 wxDisplayImpl* wxDisplayFactoryGTK::CreateDisplay(unsigned n)
@@ -239,18 +239,18 @@ class wxDisplayImplGTK : public wxDisplayImpl
     typedef wxDisplayImpl base_type;
 public:
     wxDisplayImplGTK(unsigned i);
-    virtual wxRect GetGeometry() const override;
-    virtual wxRect GetClientArea() const override;
-    virtual int GetDepth() const override;
+    wxRect GetGeometry() const override;
+    wxRect GetClientArea() const override;
+    int GetDepth() const override;
 #if GTK_CHECK_VERSION(3,10,0)
-    virtual double GetScaleFactor() const override;
+    double GetScaleFactor() const override;
 #endif // GTK+ 3.10
 
 #if wxUSE_DISPLAY
-    virtual bool IsPrimary() const override;
-    virtual wxArrayVideoModes GetModes(const wxVideoMode& mode) const override;
-    virtual wxVideoMode GetCurrentMode() const override;
-    virtual bool ChangeMode(const wxVideoMode& mode) override;
+    bool IsPrimary() const override;
+    wxArrayVideoModes GetModes(const wxVideoMode& mode) const override;
+    wxVideoMode GetCurrentMode() const override;
+    bool ChangeMode(const wxVideoMode& mode) override;
 #endif // wxUSE_DISPLAY
 
     GdkScreen* const m_screen;
@@ -260,10 +260,10 @@ public:
 class wxDisplayFactoryGTK: public wxDisplayFactory
 {
 public:
-    virtual wxDisplayImpl* CreateDisplay(unsigned n) override;
-    virtual unsigned GetCount() override;
-    virtual int GetFromPoint(const wxPoint& pt) override;
-    virtual int GetFromWindow(const wxWindow* win) override;
+    wxDisplayImpl* CreateDisplay(unsigned n) override;
+    unsigned GetCount() override;
+    int GetFromPoint(const wxPoint& pt) override;
+    int GetFromWindow(const wxWindow* win) override;
 };
 
 wxGCC_WARNING_SUPPRESS(deprecated-declarations)

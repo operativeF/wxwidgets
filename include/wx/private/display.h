@@ -174,12 +174,12 @@ public:
         return wxArrayVideoModes();
     }
 
-    virtual wxVideoMode GetCurrentMode() const override
+    wxVideoMode GetCurrentMode() const override
     {
         return wxVideoMode();
     }
 
-    virtual bool ChangeMode(const wxVideoMode& WXUNUSED(mode)) override
+    bool ChangeMode(const wxVideoMode& WXUNUSED(mode)) override
     {
         return false;
     }
@@ -202,11 +202,11 @@ public:
 class wxDisplayFactorySingle : public wxDisplayFactory
 {
 public:
-    virtual unsigned GetCount() override { return 1; }
-    virtual int GetFromPoint(const wxPoint& pt) override;
+    unsigned GetCount() override { return 1; }
+    int GetFromPoint(const wxPoint& pt) override;
 
 protected:
-    virtual wxDisplayImpl *CreateDisplay(unsigned n) override;
+    wxDisplayImpl *CreateDisplay(unsigned n) override;
 
     virtual wxDisplayImpl *CreateSingleDisplay() = 0;
 };

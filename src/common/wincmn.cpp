@@ -2111,12 +2111,12 @@ bool wxWindowBase::Validate()
         {
         }
 
-        virtual bool OnDo(wxValidator* validator) override
+        bool OnDo(wxValidator* validator) override
         {
             return validator->Validate(m_win);
         }
 
-        virtual bool OnRecurse(wxWindow* child) override
+        bool OnRecurse(wxWindow* child) override
         {
             return child->Validate();
         }
@@ -2139,7 +2139,7 @@ bool wxWindowBase::TransferDataToWindow()
         {
         }
 
-        virtual bool OnDo(wxValidator* validator) override
+        bool OnDo(wxValidator* validator) override
         {
             if ( !validator->TransferToWindow() )
             {
@@ -2154,7 +2154,7 @@ bool wxWindowBase::TransferDataToWindow()
             return true;
         }
 
-        virtual bool OnRecurse(wxWindow* child) override
+        bool OnRecurse(wxWindow* child) override
         {
             return child->TransferDataToWindow();
         }
@@ -2177,12 +2177,12 @@ bool wxWindowBase::TransferDataFromWindow()
         {
         }
 
-        virtual bool OnDo(wxValidator* validator) override
+        bool OnDo(wxValidator* validator) override
         {
             return validator->TransferFromWindow();
         }
 
-        virtual bool OnRecurse(wxWindow* child) override
+        bool OnRecurse(wxWindow* child) override
         {
             return child->TransferDataFromWindow();
         }

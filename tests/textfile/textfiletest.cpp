@@ -37,7 +37,7 @@ public:
         srand((unsigned)time(NULL));
     }
 
-    virtual void tearDown() override { unlink(GetTestFileName()); }
+    void tearDown() override { unlink(GetTestFileName()); }
 
 private:
     CPPUNIT_TEST_SUITE( TextFileTestCase );

@@ -15,9 +15,9 @@ class WXDLLIMPEXP_CORE wxQtPrinter : public wxPrinterBase
 public:
     wxQtPrinter( wxPrintDialogData *data = NULL );
 
-    virtual bool Setup(wxWindow *parent) override;
-    virtual bool Print(wxWindow *parent, wxPrintout *printout, bool prompt = true) override;
-    virtual wxDC* PrintDialog(wxWindow *parent) override;
+    bool Setup(wxWindow *parent) override;
+    bool Print(wxWindow *parent, wxPrintout *printout, bool prompt = true) override;
+    wxDC* PrintDialog(wxWindow *parent) override;
 private:
 };
 
@@ -33,8 +33,8 @@ public:
                           wxPrintout *printoutForPrinting,
                           wxPrintData *data);
 
-    virtual bool Print(bool interactive) override;
-    virtual void DetermineScaling() override;
+    bool Print(bool interactive) override;
+    void DetermineScaling() override;
 
 protected:
 };

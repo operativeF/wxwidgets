@@ -33,7 +33,7 @@ public:
     wxCursorRefData();
     virtual ~wxCursorRefData();
 
-    virtual bool IsOk() const override { return m_cursor != NULL; }
+    bool IsOk() const override { return m_cursor != NULL; }
 
     GdkCursor *m_cursor;
 

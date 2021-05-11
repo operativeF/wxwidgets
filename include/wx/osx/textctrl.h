@@ -60,46 +60,46 @@ public:
     // accessors
     // ---------
 
-    virtual int GetLineLength(long lineNo) const override;
-    virtual wxString GetLineText(long lineNo) const override;
-    virtual int GetNumberOfLines() const override;
+    int GetLineLength(long lineNo) const override;
+    wxString GetLineText(long lineNo) const override;
+    int GetNumberOfLines() const override;
 
-    virtual bool IsModified() const override;
+    bool IsModified() const override;
 
     // operations
     // ----------
 
 
     // sets/clears the dirty flag
-    virtual void MarkDirty() override;
-    virtual void DiscardEdits() override;
+    void MarkDirty() override;
+    void DiscardEdits() override;
 
     // text control under some platforms supports the text styles: these
     // methods apply the given text style to the given selection or to
     // set/get the style which will be used for all appended text
-    virtual bool SetFont( const wxFont &font ) override;
-    virtual bool GetStyle(long position, wxTextAttr& style) override;
-    virtual bool SetStyle(long start, long end, const wxTextAttr& style) override;
-    virtual bool SetDefaultStyle(const wxTextAttr& style) override;
+    bool SetFont( const wxFont &font ) override;
+    bool GetStyle(long position, wxTextAttr& style) override;
+    bool SetStyle(long start, long end, const wxTextAttr& style) override;
+    bool SetDefaultStyle(const wxTextAttr& style) override;
 
     // translate between the position (which is just an index into the textctrl
     // considering all its contents as a single strings) and (x, y) coordinates
     // which represent column and line.
-    virtual long XYToPosition(long x, long y) const override;
-    virtual bool PositionToXY(long pos, long *x, long *y) const override;
+    long XYToPosition(long x, long y) const override;
+    bool PositionToXY(long pos, long *x, long *y) const override;
 
-    virtual void ShowPosition(long pos) override;
+    void ShowPosition(long pos) override;
 
     // overrides so that we can send text updated events
-    virtual void Copy() override;
-    virtual void Cut() override;
-    virtual void Paste() override;
+    void Copy() override;
+    void Cut() override;
+    void Paste() override;
 
     // Implementation
     // --------------
-    virtual void Command(wxCommandEvent& event) override;
+    void Command(wxCommandEvent& event) override;
 
-    virtual void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(long style) override;
 
     // callbacks
     void OnDropFiles(wxDropFilesEvent& event);
@@ -124,10 +124,10 @@ public:
 
     void OnContextMenu(wxContextMenuEvent& event);
 
-    virtual bool MacSetupCursor( const wxPoint& pt ) override;
+    bool MacSetupCursor( const wxPoint& pt ) override;
 
-    virtual void MacVisibilityChanged() override;
-    virtual void MacSuperChangedPosition() override;
+    void MacVisibilityChanged() override;
+    void MacSuperChangedPosition() override;
     virtual void MacCheckSpelling(bool check);
 
     void OSXEnableAutomaticQuoteSubstitution(bool enable);
@@ -138,13 +138,13 @@ protected:
     // common part of all ctors
     void Init();
 
-    virtual wxSize DoGetBestSize() const override;
-    virtual wxSize DoGetSizeFromTextSize(int xlen, int ylen) const override;
+    wxSize DoGetBestSize() const override;
+    wxSize DoGetSizeFromTextSize(int xlen, int ylen) const override;
 
     // flag is set to true when the user edits the controls contents
     bool m_dirty;
 
-    virtual void EnableTextChangedEvents(bool WXUNUSED(enable)) override
+    void EnableTextChangedEvents(bool WXUNUSED(enable)) override
     {
         // nothing to do here as the events are never generated when we change
         // the controls value programmatically anyhow

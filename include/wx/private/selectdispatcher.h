@@ -86,11 +86,11 @@ public:
     wxSelectDispatcher() { m_maxFD = -1; }
 
     // implement pure virtual methods of the base class
-    virtual bool RegisterFD(int fd, wxFDIOHandler *handler, int flags = wxFDIO_ALL) override;
-    virtual bool ModifyFD(int fd, wxFDIOHandler *handler, int flags = wxFDIO_ALL) override;
-    virtual bool UnregisterFD(int fd) override;
-    virtual bool HasPending() const override;
-    virtual int Dispatch(int timeout = TIMEOUT_INFINITE) override;
+    bool RegisterFD(int fd, wxFDIOHandler *handler, int flags = wxFDIO_ALL) override;
+    bool ModifyFD(int fd, wxFDIOHandler *handler, int flags = wxFDIO_ALL) override;
+    bool UnregisterFD(int fd) override;
+    bool HasPending() const override;
+    int Dispatch(int timeout = TIMEOUT_INFINITE) override;
 
 private:
     // common part of RegisterFD() and ModifyFD()

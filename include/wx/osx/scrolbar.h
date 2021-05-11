@@ -36,12 +36,12 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxScrollBarNameStr));
 
-    virtual int GetThumbPosition() const override;
-    virtual int GetThumbSize() const override { return m_viewSize; }
-    virtual int GetPageSize() const override { return m_pageSize; }
-    virtual int GetRange() const override { return m_objectSize; }
+    int GetThumbPosition() const override;
+    int GetThumbSize() const override { return m_viewSize; }
+    int GetPageSize() const override { return m_pageSize; }
+    int GetRange() const override { return m_objectSize; }
 
-    virtual void SetThumbPosition(int viewStart) override;
+    void SetThumbPosition(int viewStart) override;
     virtual void SetScrollbar(int position, int thumbSize, int range,
             int pageSize, bool refresh = true) override;
 
@@ -52,10 +52,10 @@ public:
 
         // implementation only from now on
     void Command(wxCommandEvent& event) override;
-    virtual void TriggerScrollEvent( wxEventType scrollEvent ) override;
-    virtual bool OSXHandleClicked( double timestampsec ) override;
+    void TriggerScrollEvent( wxEventType scrollEvent ) override;
+    bool OSXHandleClicked( double timestampsec ) override;
 protected:
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
 
     int m_pageSize;
     int m_viewSize;

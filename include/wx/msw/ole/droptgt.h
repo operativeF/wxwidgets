@@ -44,8 +44,8 @@ public:
     void Revoke(WXHWND hwnd);
 
     // provide default implementation for base class pure virtuals
-    virtual bool OnDrop(wxCoord x, wxCoord y) override;
-    virtual bool GetData() override;
+    bool OnDrop(wxCoord x, wxCoord y) override;
+    bool GetData() override;
 
     // Can only be called during OnXXX methods.
     wxDataFormat GetMatchingPair();

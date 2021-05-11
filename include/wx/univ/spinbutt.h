@@ -41,18 +41,18 @@ public:
                 const wxString& name = wxSPIN_BUTTON_NAME);
 
     // implement wxSpinButtonBase methods
-    virtual int GetValue() const override;
-    virtual void SetValue(int val) override;
-    virtual void SetRange(int minVal, int maxVal) override;
+    int GetValue() const override;
+    void SetValue(int val) override;
+    void SetRange(int minVal, int maxVal) override;
 
     // implement wxControlWithArrows methods
-    virtual wxRenderer *GetRenderer() const override { return m_renderer; }
-    virtual wxWindow *GetWindow() override { return this; }
-    virtual bool IsVertical() const override { return wxSpinButtonBase::IsVertical(); }
-    virtual int GetArrowState(wxScrollArrows::Arrow arrow) const override;
-    virtual void SetArrowFlag(wxScrollArrows::Arrow arrow, int flag, bool set) override;
-    virtual bool OnArrow(wxScrollArrows::Arrow arrow) override;
-    virtual wxScrollArrows::Arrow HitTestArrow(const wxPoint& pt) const override;
+    wxRenderer *GetRenderer() const override { return m_renderer; }
+    wxWindow *GetWindow() override { return this; }
+    bool IsVertical() const override { return wxSpinButtonBase::IsVertical(); }
+    int GetArrowState(wxScrollArrows::Arrow arrow) const override;
+    void SetArrowFlag(wxScrollArrows::Arrow arrow, int flag, bool set) override;
+    bool OnArrow(wxScrollArrows::Arrow arrow) override;
+    wxScrollArrows::Arrow HitTestArrow(const wxPoint& pt) const override;
 
     // for wxStdSpinButtonInputHandler
     const wxScrollArrows& GetArrows() { return m_arrows; }
@@ -62,15 +62,15 @@ public:
                                const wxString& strArg = wxEmptyString) override;
 
     static wxInputHandler *GetStdInputHandler(wxInputHandler *handlerDef);
-    virtual wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
+    wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
     {
         return GetStdInputHandler(handlerDef);
     }
 
 protected:
-    virtual wxSize DoGetBestClientSize() const override;
-    virtual void DoDraw(wxControlRenderer *renderer) override;
-    virtual wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxSize DoGetBestClientSize() const override;
+    void DoDraw(wxControlRenderer *renderer) override;
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     // the common part of all ctors
     void Init();

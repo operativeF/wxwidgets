@@ -83,7 +83,7 @@ public:
 // cases, but we show this here just for completeness)
 class MyTraits : public wxGUIAppTraits
 {
-    virtual wxRendererNative *CreateRenderer() override
+    wxRendererNative *CreateRenderer() override
     {
         // it will be deleted on program shutdown by wxWidgets itself
         return new MyRenderer;
@@ -94,10 +94,10 @@ class MyTraits : public wxGUIAppTraits
 class MyApp : public wxApp
 {
 public:
-    virtual bool OnInit() override;
+    bool OnInit() override;
 
     // if we want MyTraits to be used we must override CreateTraits()
-    virtual wxAppTraits *CreateTraits() override { return new MyTraits; }
+    wxAppTraits *CreateTraits() override { return new MyTraits; }
 };
 
 // Define a new frame type: this is going to be our main frame

@@ -146,7 +146,7 @@ public:        // internal functions
     void OnColourChange(wxColourPickerEvent &);
 
 protected:
-    virtual long GetPickerStyle(long style) const override
+    long GetPickerStyle(long style) const override
         { return (style & (wxCLRP_SHOW_LABEL | wxCLRP_SHOW_ALPHA)); }
 
 private:
@@ -178,7 +178,7 @@ public:
 
 
     // default copy ctor, assignment operator and dtor are ok
-    virtual wxEvent *Clone() const override { return new wxColourPickerEvent(*this); }
+    wxEvent *Clone() const override { return new wxColourPickerEvent(*this); }
 
 private:
     wxColour m_colour;

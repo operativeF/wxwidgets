@@ -383,7 +383,7 @@ public:
     wxString ToText();
 #endif // wxUSE_CLIPBOARD
 
-    virtual void OnInternalIdle() override;
+    void OnInternalIdle() override;
 
     /// Returns standard HTML cursor as used by wxHtmlWindow
     static wxCursor GetDefaultHTMLCursor(HTMLCursor type);
@@ -450,19 +450,19 @@ protected:
 
 public:
     // wxHtmlWindowInterface methods:
-    virtual void SetHTMLWindowTitle(const wxString& title) override;
-    virtual void OnHTMLLinkClicked(const wxHtmlLinkInfo& link) override;
+    void SetHTMLWindowTitle(const wxString& title) override;
+    void OnHTMLLinkClicked(const wxHtmlLinkInfo& link) override;
     virtual wxHtmlOpeningStatus OnHTMLOpeningURL(wxHtmlURLType type,
                                                  const wxString& url,
                                                  wxString *redirect) const override;
     virtual wxPoint HTMLCoordsToWindow(wxHtmlCell *cell,
                                        const wxPoint& pos) const override;
-    virtual wxWindow* GetHTMLWindow() override;
-    virtual wxColour GetHTMLBackgroundColour() const override;
-    virtual void SetHTMLBackgroundColour(const wxColour& clr) override;
-    virtual void SetHTMLBackgroundImage(const wxBitmap& bmpBg) override;
-    virtual void SetHTMLStatusText(const wxString& text) override;
-    virtual wxCursor GetHTMLCursor(HTMLCursor type) const override;
+    wxWindow* GetHTMLWindow() override;
+    wxColour GetHTMLBackgroundColour() const override;
+    void SetHTMLBackgroundColour(const wxColour& clr) override;
+    void SetHTMLBackgroundImage(const wxBitmap& bmpBg) override;
+    void SetHTMLStatusText(const wxString& text) override;
+    wxCursor GetHTMLCursor(HTMLCursor type) const override;
 
     // implementation of SetPage()
     bool DoSetPage(const wxString& source);
@@ -595,7 +595,7 @@ public:
     bool GetLinkClicked() const { return m_bLinkWasClicked; }
 
     // default copy ctor, assignment operator and dtor are ok
-    virtual wxEvent *Clone() const override { return new wxHtmlCellEvent(*this); }
+    wxEvent *Clone() const override { return new wxHtmlCellEvent(*this); }
 
 private:
     wxHtmlCell *m_cell;
@@ -626,7 +626,7 @@ public:
     const wxHtmlLinkInfo &GetLinkInfo() const { return m_linkInfo; }
 
     // default copy ctor, assignment operator and dtor are ok
-    virtual wxEvent *Clone() const override { return new wxHtmlLinkEvent(*this); }
+    wxEvent *Clone() const override { return new wxHtmlLinkEvent(*this); }
 
 private:
     wxHtmlLinkInfo m_linkInfo;

@@ -35,15 +35,15 @@ public:
     // wxSpinCtrl(Double) methods call DoXXX functions of the same name
 
     // accessors
-    virtual wxString GetTextValue() const override;
+    wxString GetTextValue() const override;
     // T GetValue() const
     // T GetMin() const
     // T GetMax() const
     // T GetIncrement() const
-    virtual bool GetSnapToTicks() const override;
+    bool GetSnapToTicks() const override;
 
     // operations
-    virtual void SetValue(const wxString& value) override;
+    void SetValue(const wxString& value) override;
     // void SetValue(T val)
     // void SetRange(T minVal, T maxVal)
     // void SetIncrement(T inc)
@@ -95,12 +95,12 @@ protected:
     // base or number of digits depending on the derived class).
     virtual void GtkSetEntryWidth() = 0;
 
-    virtual wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
-    virtual GdkWindow *GTKGetWindow(wxArrayGdkWindows& windows) const override;
+    wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
+    GdkWindow *GTKGetWindow(wxArrayGdkWindows& windows) const override;
 
     // Widgets that use the style->base colour for the BG colour should
     // override this and return true.
-    virtual bool UseGTKStyleBase() const override { return true; }
+    bool UseGTKStyleBase() const override { return true; }
 
     // Set m_textOverride to use the given text instead of the numeric value.
     void GTKSetTextOverride(const wxString& text);
@@ -174,15 +174,15 @@ public:
     void SetRange( int minVal, int maxVal ) { DoSetRange(minVal, maxVal); }
     void SetIncrement(int inc) { DoSetIncrement(inc); }
 
-    virtual int GetBase() const override { return m_base; }
-    virtual bool SetBase(int base) override;
+    int GetBase() const override { return m_base; }
+    bool SetBase(int base) override;
 
-    virtual GTKInputResult GTKInput(double* value) const override;
-    virtual bool GTKOutput(wxString* text) const override;
-    virtual void GTKValueChanged() override;
+    GTKInputResult GTKInput(double* value) const override;
+    bool GTKOutput(wxString* text) const override;
+    void GTKValueChanged() override;
 
 protected:
-    virtual void GtkSetEntryWidth() override;
+    void GtkSetEntryWidth() override;
 
 private:
     // Common part of all ctors.
@@ -246,15 +246,15 @@ public:
     void SetIncrement(double inc)               { DoSetIncrement(inc); }
     void SetDigits(unsigned digits);
 
-    virtual int GetBase() const override { return 10; }
-    virtual bool SetBase(int WXUNUSED(base)) override { return false; }
+    int GetBase() const override { return 10; }
+    bool SetBase(int WXUNUSED(base)) override { return false; }
 
-    virtual GTKInputResult GTKInput(double* value) const override;
-    virtual bool GTKOutput(wxString* text) const override;
-    virtual void GTKValueChanged() override;
+    GTKInputResult GTKInput(double* value) const override;
+    bool GTKOutput(wxString* text) const override;
+    void GTKValueChanged() override;
 
 protected:
-    virtual void GtkSetEntryWidth() override;
+    void GtkSetEntryWidth() override;
 
     wxDECLARE_DYNAMIC_CLASS(wxSpinCtrlDouble);
 };

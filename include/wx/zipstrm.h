@@ -325,8 +325,8 @@ public:
     wxZipArchiveFormat GetFormat() const        { return m_format; }
 
 protected:
-    virtual size_t WXZIPFIX OnSysWrite(const void *buffer, size_t size) override;
-    virtual wxFileOffset OnSysTell() const override      { return m_entrySize; }
+    size_t WXZIPFIX OnSysWrite(const void *buffer, size_t size) override;
+    wxFileOffset OnSysTell() const override      { return m_entrySize; }
 
     // this protected interface isn't yet finalised
     struct Buffer { const char *m_data; size_t m_size; };
@@ -395,7 +395,7 @@ public:
     wxString WXZIPFIX GetComment();
     int WXZIPFIX GetTotalEntries();
 
-    virtual wxFileOffset GetLength() const override { return m_entry.GetSize(); }
+    wxFileOffset GetLength() const override { return m_entry.GetSize(); }
 
 protected:
     size_t WXZIPFIX OnSysRead(void *buffer, size_t size) override;

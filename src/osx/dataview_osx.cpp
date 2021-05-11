@@ -63,15 +63,15 @@ public:
  //
  // inherited methods from wxDataViewModelNotifier
  //
-  virtual bool ItemAdded   (wxDataViewItem const &parent, wxDataViewItem const &item) override;
-  virtual bool ItemsAdded  (wxDataViewItem const& parent, wxDataViewItemArray const& items) override;
-  virtual bool ItemChanged (wxDataViewItem const& item) override;
-  virtual bool ItemsChanged(wxDataViewItemArray const& items) override;
-  virtual bool ItemDeleted (wxDataViewItem const& parent, wxDataViewItem const& item) override;
-  virtual bool ItemsDeleted(wxDataViewItem const& parent, wxDataViewItemArray const& items) override;
-  virtual bool ValueChanged(wxDataViewItem const& item, unsigned int col) override;
-  virtual bool Cleared() override;
-  virtual void Resort() override;
+  bool ItemAdded   (wxDataViewItem const &parent, wxDataViewItem const &item) override;
+  bool ItemsAdded  (wxDataViewItem const& parent, wxDataViewItemArray const& items) override;
+  bool ItemChanged (wxDataViewItem const& item) override;
+  bool ItemsChanged(wxDataViewItemArray const& items) override;
+  bool ItemDeleted (wxDataViewItem const& parent, wxDataViewItem const& item) override;
+  bool ItemsDeleted(wxDataViewItem const& parent, wxDataViewItemArray const& items) override;
+  bool ValueChanged(wxDataViewItem const& item, unsigned int col) override;
+  bool Cleared() override;
+  void Resort() override;
 
  // adjust wxCOL_WIDTH_AUTOSIZE columns to fit the data
   void AdjustAutosizedColumns();

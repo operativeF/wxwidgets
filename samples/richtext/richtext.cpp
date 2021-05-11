@@ -91,15 +91,15 @@ public:
     {
     }
 
-    virtual bool CanEditProperties(wxRichTextField* WXUNUSED(obj)) const override { return true; }
-    virtual bool EditProperties(wxRichTextField* WXUNUSED(obj), wxWindow* WXUNUSED(parent), wxRichTextBuffer* WXUNUSED(buffer)) override
+    bool CanEditProperties(wxRichTextField* WXUNUSED(obj)) const override { return true; }
+    bool EditProperties(wxRichTextField* WXUNUSED(obj), wxWindow* WXUNUSED(parent), wxRichTextBuffer* WXUNUSED(buffer)) override
     {
         wxString label = GetLabel();
         wxMessageBox(wxString::Format("Editing %s", label));
         return true;
     }
 
-    virtual wxString GetPropertiesMenuLabel(wxRichTextField* WXUNUSED(obj)) const override
+    wxString GetPropertiesMenuLabel(wxRichTextField* WXUNUSED(obj)) const override
     {
         return GetLabel();
     }
@@ -114,7 +114,7 @@ public:
     {
     }
 
-    virtual bool UpdateField(wxRichTextBuffer* buffer, wxRichTextField* obj) override
+    bool UpdateField(wxRichTextBuffer* buffer, wxRichTextField* obj) override
     {
         if (buffer)
         {
@@ -166,19 +166,19 @@ public:
         Prepares the content just before insertion (or after buffer reset). Called by the same function in wxRichTextBuffer.
         Currently is only called if undo mode is on.
     */
-    virtual void PrepareContent(wxRichTextParagraphLayoutBox& container) override;
+    void PrepareContent(wxRichTextParagraphLayoutBox& container) override;
 
     /**
         Can we delete this range?
         Sends an event to the control.
     */
-    virtual bool CanDeleteRange(wxRichTextParagraphLayoutBox& container, const wxRichTextRange& range) const override;
+    bool CanDeleteRange(wxRichTextParagraphLayoutBox& container, const wxRichTextRange& range) const override;
 
     /**
         Can we insert content at this position?
         Sends an event to the control.
     */
-    virtual bool CanInsertContent(wxRichTextParagraphLayoutBox& container, long pos) const override;
+    bool CanInsertContent(wxRichTextParagraphLayoutBox& container, long pos) const override;
 
     /**
         Finds a table,  either selected or near the cursor
@@ -204,8 +204,8 @@ public:
     // this one is called on application startup and is a good place for the app
     // initialization (doing it here and not in the ctor allows to have an error
     // return: if OnInit() returns false, the application terminates)
-    virtual bool OnInit() override;
-    virtual int OnExit() override;
+    bool OnInit() override;
+    int OnExit() override;
 
     void CreateStyles();
 
@@ -2220,37 +2220,37 @@ public:
     /**
         Returns @true if this object has virtual attributes that we can provide.
     */
-    virtual bool HasVirtualAttributes(wxRichTextObject* obj) const override;
+    bool HasVirtualAttributes(wxRichTextObject* obj) const override;
 
     /**
         Provides virtual attributes that we can provide.
     */
-    virtual bool GetVirtualAttributes(wxRichTextAttr& attr, wxRichTextObject* obj) const override;
+    bool GetVirtualAttributes(wxRichTextAttr& attr, wxRichTextObject* obj) const override;
 
     /**
         Gets the count for mixed virtual attributes for individual positions within the object.
         For example, individual characters within a text object may require special highlighting.
     */
-    virtual int GetVirtualSubobjectAttributesCount(wxRichTextObject* WXUNUSED(obj)) const override { return 0; }
+    int GetVirtualSubobjectAttributesCount(wxRichTextObject* WXUNUSED(obj)) const override { return 0; }
 
     /**
         Gets the mixed virtual attributes for individual positions within the object.
         For example, individual characters within a text object may require special highlighting.
         Returns the number of virtual attributes found.
     */
-    virtual int GetVirtualSubobjectAttributes(wxRichTextObject* WXUNUSED(obj), wxArrayInt& WXUNUSED(positions), wxRichTextAttrArray& WXUNUSED(attributes)) const override  { return 0; }
+    int GetVirtualSubobjectAttributes(wxRichTextObject* WXUNUSED(obj), wxArrayInt& WXUNUSED(positions), wxRichTextAttrArray& WXUNUSED(attributes)) const override  { return 0; }
 
     /**
         Do we have virtual text for this object? Virtual text allows an application
         to replace characters in an object for editing and display purposes, for example
         for highlighting special characters.
     */
-    virtual bool HasVirtualText(const wxRichTextPlainText* WXUNUSED(obj)) const override { return false; }
+    bool HasVirtualText(const wxRichTextPlainText* WXUNUSED(obj)) const override { return false; }
 
     /**
         Gets the virtual text for this object.
     */
-    virtual bool GetVirtualText(const wxRichTextPlainText* WXUNUSED(obj), wxString& WXUNUSED(text)) const override { return false; }
+    bool GetVirtualText(const wxRichTextPlainText* WXUNUSED(obj), wxString& WXUNUSED(text)) const override { return false; }
 
     wxColour    m_lockBackgroundColour;
 };

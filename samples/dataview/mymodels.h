@@ -149,12 +149,12 @@ public:
 
     // implementation of base class virtuals to define model
 
-    virtual unsigned int GetColumnCount() const override
+    unsigned int GetColumnCount() const override
     {
         return 6;
     }
 
-    virtual wxString GetColumnType( unsigned int col ) const override
+    wxString GetColumnType( unsigned int col ) const override
     {
         if (col == 2)
             return "long";
@@ -170,8 +170,8 @@ public:
     virtual bool IsEnabled( const wxDataViewItem &item,
                             unsigned int col ) const override;
 
-    virtual wxDataViewItem GetParent( const wxDataViewItem &item ) const override;
-    virtual bool IsContainer( const wxDataViewItem &item ) const override;
+    wxDataViewItem GetParent( const wxDataViewItem &item ) const override;
+    bool IsContainer( const wxDataViewItem &item ) const override;
     virtual unsigned int GetChildren( const wxDataViewItem &parent,
                                       wxDataViewItemArray &array ) const override;
 
@@ -228,12 +228,12 @@ public:
 
     // implementation of base class virtuals to define model
 
-    virtual unsigned int GetColumnCount() const override
+    unsigned int GetColumnCount() const override
     {
         return Col_Max;
     }
 
-    virtual wxString GetColumnType( unsigned int col ) const override
+    wxString GetColumnType( unsigned int col ) const override
     {
         if (col == Col_ToggleIconText)
             return wxDataViewCheckIconTextRenderer::GetDefaultType();
@@ -263,7 +263,7 @@ private:
 class MyListStoreDerivedModel : public wxDataViewListStore
 {
 public:
-    virtual bool IsEnabledByRow(unsigned int row, unsigned int col) const override;
+    bool IsEnabledByRow(unsigned int row, unsigned int col) const override;
 };
 
 // ----------------------------------------------------------------------------
@@ -273,7 +273,7 @@ public:
 class MyListStoreHasValueModel : public MyListStoreDerivedModel
 {
 public:
-    virtual bool HasValue(const wxDataViewItem &item, unsigned int col) const override;
+    bool HasValue(const wxDataViewItem &item, unsigned int col) const override;
 };
 
 // ----------------------------------------------------------------------------

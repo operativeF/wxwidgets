@@ -22,11 +22,11 @@ public:
     wxScrollHelper(wxWindow *winToScroll);
 
     // implement base class pure virtuals
-    virtual void AdjustScrollbars() override;
-    virtual bool IsScrollbarShown(int orient) const override;
+    void AdjustScrollbars() override;
+    bool IsScrollbarShown(int orient) const override;
 
 protected:
-    virtual void DoScroll(int x, int y) override;
+    void DoScroll(int x, int y) override;
     virtual void DoShowScrollbars(wxScrollbarVisibility horz,
                                   wxScrollbarVisibility vert) override;
 

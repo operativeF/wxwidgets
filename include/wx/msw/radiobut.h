@@ -43,25 +43,25 @@ public:
                 const wxString& name = wxASCII_STR(wxRadioButtonNameStr));
 
     // implement the radio button interface
-    virtual void SetValue(bool value) override;
-    virtual bool GetValue() const override;
+    void SetValue(bool value) override;
+    bool GetValue() const override;
 
     // implementation only from now on
-    virtual bool MSWCommand(WXUINT param, WXWORD id) override;
-    virtual void Command(wxCommandEvent& event) override;
+    bool MSWCommand(WXUINT param, WXWORD id) override;
+    void Command(wxCommandEvent& event) override;
 
-    virtual bool HasTransparentBackground() override { return true; }
+    bool HasTransparentBackground() override { return true; }
 
-    virtual WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
 
 protected:
-    virtual wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
-    virtual wxSize DoGetBestSize() const override;
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxSize DoGetBestSize() const override;
 
     // Implement wxMSWOwnerDrawnButtonBase methods.
-    virtual int MSWGetButtonStyle() const override;
-    virtual void MSWOnButtonResetOwnerDrawn() override;
-    virtual int MSWGetButtonCheckedFlag() const override;
+    int MSWGetButtonStyle() const override;
+    void MSWOnButtonResetOwnerDrawn() override;
+    int MSWGetButtonCheckedFlag() const override;
     virtual void
         MSWDrawButtonBitmap(wxDC& dc, const wxRect& rect, int flags) override;
 

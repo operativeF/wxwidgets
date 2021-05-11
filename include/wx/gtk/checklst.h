@@ -34,8 +34,8 @@ public:
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
-    virtual bool IsChecked(unsigned int index) const override;
-    virtual void Check(unsigned int index, bool check = true) override;
+    bool IsChecked(unsigned int index) const override;
+    void Check(unsigned int index, bool check = true) override;
 
     int GetItemHeight() const;
 

@@ -39,8 +39,8 @@ public:
     WXHCURSOR GetHCURSOR() const;
 
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const override;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
+    wxGDIRefData *CreateGDIRefData() const override;
+    wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
 
 private:
     void InitFromStock(wxStockCursor);

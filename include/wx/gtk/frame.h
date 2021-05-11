@@ -47,21 +47,21 @@ public:
     void SetToolBar(wxToolBar *toolbar) override;
 #endif // wxUSE_TOOLBAR
 
-    virtual bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
+    bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
     wxPoint GetClientAreaOrigin() const override { return wxPoint(0, 0); }
 
     // implementation from now on
     // --------------------------
 
-    virtual bool SendIdleEvents(wxIdleEvent& event) override;
+    bool SendIdleEvents(wxIdleEvent& event) override;
 
 protected:
     // override wxWindow methods to take into account tool/menu/statusbars
-    virtual void DoGetClientSize( int *width, int *height ) const override;
+    void DoGetClientSize( int *width, int *height ) const override;
 
 #if wxUSE_MENUS_NATIVE
-    virtual void DetachMenuBar() override;
-    virtual void AttachMenuBar(wxMenuBar *menubar) override;
+    void DetachMenuBar() override;
+    void AttachMenuBar(wxMenuBar *menubar) override;
 #endif // wxUSE_MENUS_NATIVE
 
 private:

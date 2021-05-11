@@ -21,12 +21,12 @@ public:
     wxAppProgressIndicator(wxWindow* parent = NULL, int maxValue = 100);
     virtual ~wxAppProgressIndicator();
 
-    virtual bool IsAvailable() const override;
+    bool IsAvailable() const override;
 
-    virtual void SetValue(int value) override;
-    virtual void SetRange(int range) override;
-    virtual void Pulse() override;
-    virtual void Reset() override;
+    void SetValue(int value) override;
+    void SetRange(int range) override;
+    void Pulse() override;
+    void Reset() override;
 
 private:
     int m_maxValue;

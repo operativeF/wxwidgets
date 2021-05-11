@@ -73,8 +73,8 @@ public:
   void SetTabSize(const wxSize& sz) override;
 
   // geometry
-  virtual wxSize CalcSizeFromPage(const wxSize& sizePage) const override;
-  virtual int HitTest(const wxPoint& pt, long *flags = NULL) const override;
+  wxSize CalcSizeFromPage(const wxSize& sizePage) const override;
+  int HitTest(const wxPoint& pt, long *flags = NULL) const override;
 
   // operations
   // ----------
@@ -122,11 +122,11 @@ public:
 
 protected:
     // set all page's attributes
-    virtual void DoApplyWidgetStyle(GtkRcStyle *style) override;
-    virtual GdkWindow *GTKGetWindow(wxArrayGdkWindows& windows) const override;
+    void DoApplyWidgetStyle(GtkRcStyle *style) override;
+    GdkWindow *GTKGetWindow(wxArrayGdkWindows& windows) const override;
 
     // remove one page from the notebook but do not destroy it
-    virtual wxNotebookPage *DoRemovePage(size_t nPage) override;
+    wxNotebookPage *DoRemovePage(size_t nPage) override;
 
     int DoSetSelection(size_t nPage, int flags = 0) override;
 
@@ -135,7 +135,7 @@ private:
     int m_padding;
 
     void Init();
-    virtual void AddChildGTK(wxWindowGTK* child) override;
+    void AddChildGTK(wxWindowGTK* child) override;
 
     wxDECLARE_DYNAMIC_CLASS(wxNotebook);
     wxDECLARE_EVENT_TABLE();

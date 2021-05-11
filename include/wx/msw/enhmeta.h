@@ -43,7 +43,7 @@ public:
     bool Play(wxDC *dc, wxRect *rectBound = NULL);
 
     // accessors
-    virtual bool IsOk() const override { return m_hMF != NULL; }
+    bool IsOk() const override { return m_hMF != NULL; }
 
     wxSize GetSize() const;
     int GetWidth() const { return GetSize().x; }
@@ -75,8 +75,8 @@ protected:
 
     // we don't use these functions (but probably should) but have to implement
     // them as they're pure virtual in the base class
-    virtual wxGDIRefData *CreateGDIRefData() const override;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
+    wxGDIRefData *CreateGDIRefData() const override;
+    wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
 
 private:
     wxString m_filename;
@@ -129,7 +129,7 @@ public:
     wxEnhMetaFileDataObject(const wxEnhMetaFile& metafile)
         : m_metafile(metafile) { }
 
-    // virtual functions which you may override if you want to provide data on
+    // functions which you may override if you want to provide data on
     // demand only - otherwise, the trivial default versions will be used
     virtual void SetMetafile(const wxEnhMetaFile& metafile)
         { m_metafile = metafile; }
@@ -137,11 +137,11 @@ public:
         { return m_metafile; }
 
     // implement base class pure virtuals
-    virtual wxDataFormat GetPreferredFormat(Direction dir) const override;
-    virtual size_t GetFormatCount(Direction dir) const override;
-    virtual void GetAllFormats(wxDataFormat *formats, Direction dir) const override;
-    virtual size_t GetDataSize(const wxDataFormat& format) const override;
-    virtual bool GetDataHere(const wxDataFormat& format, void *buf) const override;
+    wxDataFormat GetPreferredFormat(Direction dir) const override;
+    size_t GetFormatCount(Direction dir) const override;
+    void GetAllFormats(wxDataFormat *formats, Direction dir) const override;
+    size_t GetDataSize(const wxDataFormat& format) const override;
+    bool GetDataHere(const wxDataFormat& format, void *buf) const override;
     virtual bool SetData(const wxDataFormat& format, size_t len,
                          const void *buf) override;
 
@@ -167,7 +167,7 @@ public:
     wxEnhMetaFileSimpleDataObject(const wxEnhMetaFile& metafile)
         : wxDataObjectSimple(wxDF_ENHMETAFILE), m_metafile(metafile) { }
 
-    // virtual functions which you may override if you want to provide data on
+    // functions which you may override if you want to provide data on
     // demand only - otherwise, the trivial default versions will be used
     virtual void SetEnhMetafile(const wxEnhMetaFile& metafile)
         { m_metafile = metafile; }
@@ -175,11 +175,11 @@ public:
         { return m_metafile; }
 
     // implement base class pure virtuals
-    virtual size_t GetDataSize() const override;
-    virtual bool GetDataHere(void *buf) const override;
-    virtual bool SetData(size_t len, const void *buf) override;
+    size_t GetDataSize() const override;
+    bool GetDataHere(void *buf) const override;
+    bool SetData(size_t len, const void *buf) override;
 
-    virtual size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
+    size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
         { return GetDataSize(); }
     virtual bool GetDataHere(const wxDataFormat& WXUNUSED(format),
                              void *buf) const override

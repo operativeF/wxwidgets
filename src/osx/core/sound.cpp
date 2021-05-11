@@ -38,9 +38,9 @@ public:
 
     virtual ~wxOSXAudioToolboxSoundData();
 
-    virtual bool Play(unsigned flags) override;
+    bool Play(unsigned flags) override;
 
-    virtual void DoStop() override;
+    void DoStop() override;
 protected:
     static void CompletionCallback(SystemSoundID  mySSID, void * soundRef);
     void SoundCompleted();

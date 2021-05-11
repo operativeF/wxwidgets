@@ -39,20 +39,20 @@ public:
     virtual void SetViewer(const wxString& viewer = wxEmptyString,
                             long flags = wxHELP_NETSCAPE) override;
 
-    virtual bool Initialize(const wxString& dir, int WXUNUSED(server)) override
+    bool Initialize(const wxString& dir, int WXUNUSED(server)) override
         { return Initialize(dir); }
 
-    virtual bool Initialize(const wxString& dir) override;
-    virtual bool LoadFile(const wxString& file = wxEmptyString) override;
-    virtual bool DisplayContents() override;
-    virtual bool DisplaySection(int sectionNo) override;
-    virtual bool DisplaySection(const wxString& section) override;
-    virtual bool DisplayBlock(long blockNo) override;
+    bool Initialize(const wxString& dir) override;
+    bool LoadFile(const wxString& file = wxEmptyString) override;
+    bool DisplayContents() override;
+    bool DisplaySection(int sectionNo) override;
+    bool DisplaySection(const wxString& section) override;
+    bool DisplayBlock(long blockNo) override;
     virtual bool KeywordSearch(const wxString& k,
                                 wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override;
 
-    virtual bool Quit() override;
-    virtual void OnQuit() override;
+    bool Quit() override;
+    void OnQuit() override;
 
     virtual bool DisplayHelp(const wxString &) ;
 

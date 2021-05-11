@@ -434,7 +434,7 @@ public:
     {
     }
 
-    virtual wxAnyValueType* GetAssociatedType() override
+    wxAnyValueType* GetAssociatedType() override
     {
         return wxAnyValueTypeImpl<T>::GetInstance();
     }
@@ -442,7 +442,7 @@ private:
 };
 
 #define DECLARE_WXANY_CONVERSION() \
-virtual bool GetAsAny(wxAny* any) const override; \
+bool GetAsAny(wxAny* any) const override; \
 static wxVariantData* VariantDataFactory(const wxAny& any);
 
 #define _REGISTER_WXANY_CONVERSION(T, CLASSNAME, FUNC) \
@@ -493,12 +493,12 @@ public:\
 \
     classname &GetValue() { return m_value; } \
 \
-    virtual bool Eq(wxVariantData& data) const override; \
+    bool Eq(wxVariantData& data) const override; \
 \
-    virtual wxString GetType() const override; \
-    virtual wxClassInfo* GetValueClassInfo() override; \
+    wxString GetType() const override; \
+    wxClassInfo* GetValueClassInfo() override; \
 \
-    virtual wxVariantData* Clone() const override { return new classname##VariantData(m_value); } \
+    wxVariantData* Clone() const override { return new classname##VariantData(m_value); } \
 \
     DECLARE_WXANY_CONVERSION() \
 protected:\

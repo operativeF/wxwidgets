@@ -37,17 +37,17 @@ public:
   void SetLabel( const wxString &str ) override;
   bool SetFont( const wxFont &font ) override;
 
-    virtual bool AcceptsFocus() const override { return false; }
+    bool AcceptsFocus() const override { return false; }
 
 protected :
 
-    virtual wxString WXGetVisibleLabel() const override;
-    virtual void WXSetVisibleLabel(const wxString& str) override;
+    wxString WXGetVisibleLabel() const override;
+    void WXSetVisibleLabel(const wxString& str) override;
 
-  virtual wxSize DoGetBestSize() const override;
+  wxSize DoGetBestSize() const override;
 
 #if wxUSE_MARKUP && wxOSX_USE_COCOA
-    virtual bool DoSetLabelMarkup(const wxString& markup) override;
+    bool DoSetLabelMarkup(const wxString& markup) override;
 #endif // wxUSE_MARKUP && wxOSX_USE_COCOA
 
     wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxStaticText);

@@ -35,8 +35,8 @@ public:
            const wxValidator& validator = wxDefaultValidator,
            const wxString& name = wxASCII_STR(wxRadioButtonNameStr));
 
-    virtual void SetValue(bool val) override;
-    virtual bool GetValue() const override;
+    void SetValue(bool val) override;
+    bool GetValue() const override;
 
     // implementation
 
@@ -47,7 +47,7 @@ public:
 
     // osx specific event handling common for all osx-ports
 
-    virtual bool OSXHandleClicked(double timestampsec) override;
+    bool OSXHandleClicked(double timestampsec) override;
   protected:
 
     wxRadioButton *m_cycle;

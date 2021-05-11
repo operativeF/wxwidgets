@@ -86,11 +86,11 @@ class ToggleWidgetsPage : public WidgetsPage
 public:
     ToggleWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_toggle; }
-    virtual void RecreateWidget() override { CreateToggle(); }
+    wxWindow *GetWidget() const override { return m_toggle; }
+    void RecreateWidget() override { CreateToggle(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 protected:
     // event handlers

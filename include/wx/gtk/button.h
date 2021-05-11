@@ -34,8 +34,8 @@ public:
            const wxValidator& validator = wxDefaultValidator,
            const wxString& name = wxASCII_STR(wxButtonNameStr));
 
-    virtual wxWindow *SetDefault() override;
-    virtual void SetLabel( const wxString &label ) override;
+    wxWindow *SetDefault() override;
+    void SetLabel( const wxString &label ) override;
 
     // implementation
     // --------------
@@ -54,11 +54,11 @@ public:
     void GTKReleased();
 
 protected:
-    virtual wxSize DoGetBestSize() const override;
-    virtual void DoApplyWidgetStyle(GtkRcStyle *style) override;
+    wxSize DoGetBestSize() const override;
+    void DoApplyWidgetStyle(GtkRcStyle *style) override;
 
 #if wxUSE_MARKUP
-    virtual bool DoSetLabelMarkup(const wxString& markup) override;
+    bool DoSetLabelMarkup(const wxString& markup) override;
 #endif // wxUSE_MARKUP
 
 private:

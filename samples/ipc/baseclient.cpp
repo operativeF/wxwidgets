@@ -46,8 +46,8 @@ class MyApp : public wxApp
 public:
     MyApp() { Bind(wxEVT_IDLE, &MyApp::OnIdle, this); }
 
-    virtual bool OnInit() override;
-    virtual int OnExit() override;
+    bool OnInit() override;
+    int OnExit() override;
 
 private:
     void OnIdle(wxIdleEvent& event);
@@ -58,11 +58,11 @@ private:
 class MyConnection : public MyConnectionBase
 {
 public:
-    virtual bool DoExecute(const void *data, size_t size, wxIPCFormat format) override;
-    virtual const void *Request(const wxString& item, size_t *size = NULL, wxIPCFormat format = wxIPC_TEXT) override;
-    virtual bool DoPoke(const wxString& item, const void* data, size_t size, wxIPCFormat format) override;
-    virtual bool OnAdvise(const wxString& topic, const wxString& item, const void *data, size_t size, wxIPCFormat format) override;
-    virtual bool OnDisconnect() override;
+    bool DoExecute(const void *data, size_t size, wxIPCFormat format) override;
+    const void *Request(const wxString& item, size_t *size = NULL, wxIPCFormat format = wxIPC_TEXT) override;
+    bool DoPoke(const wxString& item, const void* data, size_t size, wxIPCFormat format) override;
+    bool OnAdvise(const wxString& topic, const wxString& item, const void *data, size_t size, wxIPCFormat format) override;
+    bool OnDisconnect() override;
 };
 
 class MyClient : public wxClient,
@@ -77,7 +77,7 @@ public:
     wxConnectionBase *OnMakeConnection() override;
     bool IsConnected() { return m_connection != NULL; }
 
-    virtual void Notify() override;
+    void Notify() override;
 
     void StartNextTestIfNecessary();
 

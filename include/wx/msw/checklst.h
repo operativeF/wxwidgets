@@ -55,17 +55,17 @@ public:
                 const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
     // items may be checked
-    virtual bool IsChecked(unsigned int uiIndex) const override;
-    virtual void Check(unsigned int uiIndex, bool bCheck = true) override;
+    bool IsChecked(unsigned int uiIndex) const override;
+    void Check(unsigned int uiIndex, bool bCheck = true) override;
     virtual void Toggle(unsigned int uiIndex);
 
     // we create our items ourselves and they have non-standard size,
     // so we need to override these functions
-    virtual wxOwnerDrawn *CreateLboxItem(size_t n) override;
-    virtual bool MSWOnMeasure(WXMEASUREITEMSTRUCT *item) override;
+    wxOwnerDrawn *CreateLboxItem(size_t n) override;
+    bool MSWOnMeasure(WXMEASUREITEMSTRUCT *item) override;
 
 protected:
-    virtual wxSize MSWGetFullItemSize(int w, int h) const override;
+    wxSize MSWGetFullItemSize(int w, int h) const override;
 
     // pressing space or clicking the check box toggles the item
     void OnKeyDown(wxKeyEvent& event);
@@ -81,7 +81,7 @@ protected:
         ProcessCommand(event);
     }
 
-    virtual void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
+    void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
 
     wxSize DoGetBestClientSize() const override;
 

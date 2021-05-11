@@ -232,12 +232,12 @@ public:
     RTModule()
     = default;
 
-    virtual bool OnInit() override
+    bool OnInit() override
     {
         return true;
     }
 
-    virtual void OnExit() override
+    void OnExit() override
     {
         RTCore::Uninitalize();
     }

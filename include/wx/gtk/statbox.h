@@ -64,18 +64,18 @@ public:
         return DoCreate( parent, id, NULL, label, pos, size, style, name );
     }
 
-    virtual void SetLabel( const wxString &label ) override;
+    void SetLabel( const wxString &label ) override;
 
     static wxVisualAttributes
     GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
 
     // implementation
 
-    virtual bool GTKIsTransparentForMouse() const override { return true; }
+    bool GTKIsTransparentForMouse() const override { return true; }
 
-    virtual void GetBordersForSizer(int *borderTop, int *borderOther) const override;
+    void GetBordersForSizer(int *borderTop, int *borderOther) const override;
 
-    virtual void AddChild( wxWindowBase *child ) override;
+    void AddChild( wxWindowBase *child ) override;
 
 protected:
     // Common implementation of both Create() overloads: exactly one of
@@ -89,8 +89,8 @@ protected:
                   long style,
                   const wxString& name);
 
-    virtual bool GTKWidgetNeedsMnemonic() const override;
-    virtual void GTKWidgetDoSetMnemonic(GtkWidget* w) override;
+    bool GTKWidgetNeedsMnemonic() const override;
+    void GTKWidgetDoSetMnemonic(GtkWidget* w) override;
 
     void DoApplyWidgetStyle(GtkRcStyle *style) override;
 

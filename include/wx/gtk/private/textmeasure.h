@@ -35,8 +35,8 @@ protected:
     // Common part of both ctors.
     void Init();
 
-    virtual void BeginMeasuring() override;
-    virtual void EndMeasuring() override;
+    void BeginMeasuring() override;
+    void EndMeasuring() override;
 
     virtual void DoGetTextExtent(const wxString& string,
                                  wxCoord *width,

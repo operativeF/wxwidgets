@@ -35,10 +35,10 @@ public:
         Create(parent, id, initial, pos, size, style, validator, name);
     }
 
-    virtual wxColour GetSelectedColour() const override
+    wxColour GetSelectedColour() const override
         { return m_data.GetColour(); }
 
-    virtual void SetSelectedColour(const wxColour &colour) override
+    void SetSelectedColour(const wxColour &colour) override
         { m_data.SetColour(colour); UpdateFont(); }
 
     virtual ~wxGenericFontButton() {}

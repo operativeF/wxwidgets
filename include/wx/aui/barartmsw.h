@@ -15,7 +15,7 @@ class WXDLLIMPEXP_AUI wxAuiMSWToolBarArt : public wxAuiGenericToolBarArt
 public:
     wxAuiMSWToolBarArt();
 
-    virtual wxAuiToolBarArt* Clone() override;
+    wxAuiToolBarArt* Clone() override;
 
     virtual void DrawBackground(
         wxDC& dc,
@@ -72,8 +72,8 @@ public:
         wxWindow* wnd,
         const wxAuiToolBarItem& item) override;
 
-    virtual int GetElementSize(int element) override;
-    virtual void SetElementSize(int elementId, int size) override;
+    int GetElementSize(int element) override;
+    void SetElementSize(int elementId, int size) override;
 
     virtual int ShowDropDown(wxWindow* wnd,
         const wxAuiToolBarItemArray& items) override;

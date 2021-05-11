@@ -48,8 +48,8 @@ protected:
                            int sizeFlags = wxSIZE_AUTO);
 
     virtual wxSize DoGetBestSize() const;
-    virtual wxString WXGetVisibleLabel() const override;
-    virtual void WXSetVisibleLabel(const wxString& str) override;
+    wxString WXGetVisibleLabel() const override;
+    void WXSetVisibleLabel(const wxString& str) override;
 
     wxDECLARE_DYNAMIC_CLASS(wxStaticText);
 };

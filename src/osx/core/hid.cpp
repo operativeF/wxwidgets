@@ -642,11 +642,11 @@ class wxHIDModule : public wxModule
 
 public:
         static wxArrayPtrVoid sm_keyboards;
-        virtual bool OnInit() override
+        bool OnInit() override
         {
             return true;
         }
-        virtual void OnExit() override
+        void OnExit() override
         {
             for(size_t i = 0; i < sm_keyboards.GetCount(); ++i)
                 delete (wxHIDKeyboard*) sm_keyboards[i];

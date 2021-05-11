@@ -126,7 +126,7 @@ private:
     struct reftype_with_deleter : public reftype
     {
         reftype_with_deleter(T* ptr, Deleter d) : reftype(ptr), m_deleter(d) {}
-        virtual void delete_ptr() override { m_deleter(this->m_ptr); }
+        void delete_ptr() override { m_deleter(this->m_ptr); }
 
         Deleter m_deleter;
     };

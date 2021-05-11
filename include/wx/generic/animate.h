@@ -48,21 +48,21 @@ public:
 
 
 public:
-    virtual bool LoadFile(const wxString& filename, wxAnimationType type = wxANIMATION_TYPE_ANY) override;
-    virtual bool Load(wxInputStream& stream, wxAnimationType type = wxANIMATION_TYPE_ANY) override;
+    bool LoadFile(const wxString& filename, wxAnimationType type = wxANIMATION_TYPE_ANY) override;
+    bool Load(wxInputStream& stream, wxAnimationType type = wxANIMATION_TYPE_ANY) override;
 
-    virtual void Stop() override;
-    virtual bool Play() override
+    void Stop() override;
+    bool Play() override
         { return Play(true /* looped */); }
-    virtual bool IsPlaying() const override
+    bool IsPlaying() const override
         { return m_isPlaying; }
 
     void SetAnimation(const wxAnimation &animation) override;
 
-    virtual void SetInactiveBitmap(const wxBitmap &bmp) override;
+    void SetInactiveBitmap(const wxBitmap &bmp) override;
 
     // override base class method
-    virtual bool SetBackgroundColour(const wxColour& col) override;
+    bool SetBackgroundColour(const wxColour& col) override;
 
     static wxAnimation CreateCompatibleAnimation();
 
@@ -93,7 +93,7 @@ public:     // extended API specific to this implementation of wxAnimateCtrl
         { return m_backingStore; }
 
 protected:      // internal utilities
-    virtual wxAnimationImpl* DoCreateAnimationImpl() const override;
+    wxAnimationImpl* DoCreateAnimationImpl() const override;
 
     // resize this control to fit m_animation
     void FitToAnimation();
@@ -107,8 +107,8 @@ protected:      // internal utilities
     bool RebuildBackingStoreUpToFrame(unsigned int);
     void DrawFrame(wxDC &dc, unsigned int);
 
-    virtual void DisplayStaticImage() override;
-    virtual wxSize DoGetBestSize() const override;
+    void DisplayStaticImage() override;
+    wxSize DoGetBestSize() const override;
 
     // Helpers to safely access methods in the wxAnimationGenericImpl that are
     // specific to the generic implementation

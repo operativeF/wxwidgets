@@ -68,15 +68,15 @@ public:
     void  Check(unsigned int uiIndex, bool bCheck = true) override;
 
     // data callbacks
-    virtual void GetValueCallback( unsigned int n, wxListWidgetColumn* col , wxListWidgetCellValue& value ) override;
-    virtual void SetValueCallback( unsigned int n, wxListWidgetColumn* col , wxListWidgetCellValue& value ) override;
+    void GetValueCallback( unsigned int n, wxListWidgetColumn* col , wxListWidgetCellValue& value ) override;
+    void SetValueCallback( unsigned int n, wxListWidgetColumn* col , wxListWidgetCellValue& value ) override;
 
 protected:
    // override all methods which add/delete items to update m_checks array as
     // well
-    virtual void OnItemInserted(unsigned int pos) override;
-    virtual void DoDeleteOneItem(unsigned int n) override;
-    virtual void DoClear() override;
+    void OnItemInserted(unsigned int pos) override;
+    void DoDeleteOneItem(unsigned int n) override;
+    void DoClear() override;
 
     // the array containing the checked status of the items
     wxArrayInt m_checks;

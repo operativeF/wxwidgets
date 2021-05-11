@@ -321,23 +321,23 @@ class BugsGridTable : public wxGridTableBase
 public:
     BugsGridTable() { }
 
-    virtual int GetNumberRows() override;
-    virtual int GetNumberCols() override;
-    virtual bool IsEmptyCell( int row, int col ) override;
-    virtual wxString GetValue( int row, int col ) override;
-    virtual void SetValue( int row, int col, const wxString& value ) override;
+    int GetNumberRows() override;
+    int GetNumberCols() override;
+    bool IsEmptyCell( int row, int col ) override;
+    wxString GetValue( int row, int col ) override;
+    void SetValue( int row, int col, const wxString& value ) override;
 
-    virtual wxString GetColLabelValue( int col ) override;
+    wxString GetColLabelValue( int col ) override;
 
-    virtual wxString GetTypeName( int row, int col ) override;
-    virtual bool CanGetValueAs( int row, int col, const wxString& typeName ) override;
-    virtual bool CanSetValueAs( int row, int col, const wxString& typeName ) override;
+    wxString GetTypeName( int row, int col ) override;
+    bool CanGetValueAs( int row, int col, const wxString& typeName ) override;
+    bool CanSetValueAs( int row, int col, const wxString& typeName ) override;
 
-    virtual long GetValueAsLong( int row, int col ) override;
-    virtual bool GetValueAsBool( int row, int col ) override;
+    long GetValueAsLong( int row, int col ) override;
+    bool GetValueAsBool( int row, int col ) override;
 
-    virtual void SetValueAsLong( int row, int col, long value ) override;
-    virtual void SetValueAsBool( int row, int col, bool value ) override;
+    void SetValueAsLong( int row, int col, long value ) override;
+    void SetValueAsBool( int row, int col, bool value ) override;
 };
 
 class BugsGridFrame : public wxFrame

@@ -47,22 +47,22 @@ public:
 
     virtual ~wxButtonToolBar();
 
-    virtual bool Realize() override;
+    bool Realize() override;
 
-    virtual void SetToolShortHelp(int id, const wxString& helpString) override;
-    virtual wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const override;
+    void SetToolShortHelp(int id, const wxString& helpString) override;
+    wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const override;
 
 protected:
     // common part of all ctors
     void Init();
 
     // implement base class pure virtuals
-    virtual bool DoInsertTool(size_t pos, wxToolBarToolBase *tool) override;
-    virtual bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool) override;
+    bool DoInsertTool(size_t pos, wxToolBarToolBase *tool) override;
+    bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool) override;
 
-    virtual void DoEnableTool(wxToolBarToolBase *tool, bool enable) override;
-    virtual void DoToggleTool(wxToolBarToolBase *tool, bool toggle) override;
-    virtual void DoSetToggle(wxToolBarToolBase *tool, bool toggle) override;
+    void DoEnableTool(wxToolBarToolBase *tool, bool enable) override;
+    void DoToggleTool(wxToolBarToolBase *tool, bool toggle) override;
+    void DoSetToggle(wxToolBarToolBase *tool, bool toggle) override;
 
     virtual wxToolBarToolBase *CreateTool(int id,
                                           const wxString& label,
@@ -75,7 +75,7 @@ protected:
     virtual wxToolBarToolBase *CreateTool(wxControl *control,
                                           const wxString& label) override;
 
-    virtual wxSize DoGetBestClientSize() const override;
+    wxSize DoGetBestClientSize() const override;
 
     // calculate layout
     void DoLayout();

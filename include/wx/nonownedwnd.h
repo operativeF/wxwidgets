@@ -68,7 +68,7 @@ public:
         // client area origin so simply do nothing here.
     }
 
-    virtual void InheritAttributes() override
+    void InheritAttributes() override
     {
         // Non owned windows don't inherit attributes from their parent window
         // (if the parent frame is red, it doesn't mean that all dialogs shown

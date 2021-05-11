@@ -25,11 +25,11 @@ public:
     wxFilterFSHandler() : wxFileSystemHandler() { }
     virtual ~wxFilterFSHandler() { }
 
-    virtual bool CanOpen(const wxString& location) override;
-    virtual wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
+    bool CanOpen(const wxString& location) override;
+    wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
 
-    virtual wxString FindFirst(const wxString& spec, int flags = 0) override;
-    virtual wxString FindNext() override;
+    wxString FindFirst(const wxString& spec, int flags = 0) override;
+    wxString FindNext() override;
 
 private:
     wxDECLARE_NO_COPY_CLASS(wxFilterFSHandler);

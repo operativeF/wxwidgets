@@ -56,7 +56,7 @@
 class MyApp: public wxApp
 {
 public:
-    virtual bool OnInit() override;
+    bool OnInit() override;
 };
 
 // ----------------------------------------------------------------------------
@@ -226,7 +226,7 @@ public:
         : wxDataViewCustomRenderer("string", mode, wxALIGN_CENTER)
        { }
 
-    virtual bool Render( wxRect rect, wxDC *dc, int state ) override
+    bool Render( wxRect rect, wxDC *dc, int state ) override
     {
         dc->SetBrush( *wxLIGHT_GREY_BRUSH );
         dc->SetPen( *wxTRANSPARENT_PEN );
@@ -257,27 +257,27 @@ public:
         return false;
     }
 
-    virtual wxSize GetSize() const override
+    wxSize GetSize() const override
     {
         return GetView()->FromDIP(wxSize(60, 20));
     }
 
-    virtual bool SetValue( const wxVariant &value ) override
+    bool SetValue( const wxVariant &value ) override
     {
         m_value = value.GetString();
         return true;
     }
 
-    virtual bool GetValue( wxVariant &WXUNUSED(value) ) const override { return true; }
+    bool GetValue( wxVariant &WXUNUSED(value) ) const override { return true; }
 
 #if wxUSE_ACCESSIBILITY
-    virtual wxString GetAccessibleDescription() const override
+    wxString GetAccessibleDescription() const override
     {
         return m_value;
     }
 #endif // wxUSE_ACCESSIBILITY
 
-    virtual bool HasEditorCtrl() const override { return true; }
+    bool HasEditorCtrl() const override { return true; }
 
     virtual wxWindow*
     CreateEditorCtrl(wxWindow* parent,
@@ -322,13 +322,13 @@ public:
         : wxDataViewCustomRenderer("string", wxDATAVIEW_CELL_INERT, 0)
     { }
 
-    virtual bool Render(wxRect rect, wxDC *dc, int state) override
+    bool Render(wxRect rect, wxDC *dc, int state) override
     {
         RenderText(m_value, 0, rect, dc, state);
         return true;
     }
 
-    virtual wxSize GetSize() const override
+    wxSize GetSize() const override
     {
         wxSize txtSize = GetTextExtent(m_value);
         int lines = m_value.Freq('\n') + 1;
@@ -336,17 +336,17 @@ public:
         return txtSize;
     }
 
-    virtual bool SetValue(const wxVariant &value) override
+    bool SetValue(const wxVariant &value) override
     {
         m_value = value.GetString();
         m_value.Replace(" ", "\n");
         return true;
     }
 
-    virtual bool GetValue(wxVariant &WXUNUSED(value)) const override { return true; }
+    bool GetValue(wxVariant &WXUNUSED(value)) const override { return true; }
 
 #if wxUSE_ACCESSIBILITY
-    virtual wxString GetAccessibleDescription() const override
+    wxString GetAccessibleDescription() const override
     {
         return m_value;
     }

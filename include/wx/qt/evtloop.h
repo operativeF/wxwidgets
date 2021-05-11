@@ -17,13 +17,13 @@ public:
     wxQtEventLoopBase();
     ~wxQtEventLoopBase();
 
-    virtual int DoRun() override;
-    virtual void ScheduleExit(int rc = 0) override;
-    virtual bool Pending() const override;
-    virtual bool Dispatch() override;
-    virtual int DispatchTimeout(unsigned long timeout) override;
-    virtual void WakeUp() override;
-    virtual void DoYieldFor(long eventsToProcess) override;
+    int DoRun() override;
+    void ScheduleExit(int rc = 0) override;
+    bool Pending() const override;
+    bool Dispatch() override;
+    int DispatchTimeout(unsigned long timeout) override;
+    void WakeUp() override;
+    void DoYieldFor(long eventsToProcess) override;
 
     void ScheduleIdleCheck();
 

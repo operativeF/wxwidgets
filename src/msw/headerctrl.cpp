@@ -64,7 +64,7 @@ public:
     wxItemAttr m_attr;
 
 private:
-    virtual bool HasCustomDrawnItems() const override
+    bool HasCustomDrawnItems() const override
     {
         // We only exist if the header does need to be custom drawn.
         return true;
@@ -100,9 +100,9 @@ public:
     virtual ~wxMSWHeaderCtrl();
 
     // Override to implement colours support via custom drawing.
-    virtual bool SetBackgroundColour(const wxColour& colour) override;
-    virtual bool SetForegroundColour(const wxColour& colour) override;
-    virtual bool SetFont(const wxFont& font) override;
+    bool SetBackgroundColour(const wxColour& colour) override;
+    bool SetForegroundColour(const wxColour& colour) override;
+    bool SetFont(const wxFont& font) override;
 
     // The implementation of wxHeaderCtrlBase virtual functions
     void SetCount(unsigned int count);
@@ -116,16 +116,16 @@ public:
 
 protected:
     // override wxWindow methods which must be implemented by a new control
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
     virtual void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
-    virtual void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
+    void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
 
 private:
     // override MSW-specific methods needed for new control
-    virtual WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
-    virtual bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
+    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
 
     // common part of all ctors
     void Init();

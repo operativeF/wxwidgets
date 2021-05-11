@@ -24,12 +24,12 @@ class HtmlListBoxTestCase : public ItemContainerTestCase,
 public:
     HtmlListBoxTestCase() { }
 
-    virtual void setUp() override;
-    virtual void tearDown() override;
+    void setUp() override;
+    void tearDown() override;
 
 private:
-    virtual wxItemContainer *GetContainer() const override { return m_htmllbox; }
-    virtual wxWindow *GetContainerWindow() const override { return m_htmllbox; }
+    wxItemContainer *GetContainer() const override { return m_htmllbox; }
+    wxWindow *GetContainerWindow() const override { return m_htmllbox; }
 
     CPPUNIT_TEST_SUITE( HtmlListBoxTestCase );
         wxITEM_CONTAINER_TESTS();

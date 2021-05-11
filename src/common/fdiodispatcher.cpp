@@ -133,8 +133,8 @@ bool wxMappedFDIODispatcher::UnregisterFD(int fd)
 class wxFDIODispatcherModule : public wxModule
 {
 public:
-    virtual bool OnInit() override { return true; }
-    virtual void OnExit() override { wxDELETE(gs_dispatcher); }
+    bool OnInit() override { return true; }
+    void OnExit() override { wxDELETE(gs_dispatcher); }
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxFDIODispatcherModule);

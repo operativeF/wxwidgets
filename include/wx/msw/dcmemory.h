@@ -22,11 +22,11 @@ public:
     wxMemoryDCImpl( wxMemoryDC *owner, wxDC *dc ); // Create compatible DC
 
     // override some base class virtuals
-    virtual void DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height) override;
-    virtual void DoGetSize(int* width, int* height) const override;
-    virtual void DoSelect(const wxBitmap& bitmap) override;
+    void DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height) override;
+    void DoGetSize(int* width, int* height) const override;
+    void DoSelect(const wxBitmap& bitmap) override;
 
-    virtual wxBitmap DoGetAsBitmap(const wxRect* subrect) const override
+    wxBitmap DoGetAsBitmap(const wxRect* subrect) const override
     { return subrect == NULL ? GetSelectedBitmap() : GetSelectedBitmap().GetSubBitmapOfHDC(*subrect, GetHDC() );}
 
 protected:

@@ -52,7 +52,7 @@ public:
 
     virtual ~wxCursorRefData() { Free(); }
 
-    virtual void Free() override;
+    void Free() override;
 
 
     // return the size of the standard cursor: notice that the system only
@@ -85,14 +85,14 @@ static wxCursor *gs_globalCursor = nullptr;
 class wxCursorModule : public wxModule
 {
 public:
-    virtual bool OnInit() override
+    bool OnInit() override
     {
         gs_globalCursor = new wxCursor;
 
         return true;
     }
 
-    virtual void OnExit() override
+    void OnExit() override
     {
         wxDELETE(gs_globalCursor);
     }

@@ -94,35 +94,35 @@ public:
     // implement the combobox interface
 
     // wxTextCtrl methods
-    virtual wxString GetValue() const override { return DoGetValue(); }
-    virtual void SetValue(const wxString& value) override;
-    virtual void WriteText(const wxString& value) override;
-    virtual void Copy() override;
-    virtual void Cut() override;
-    virtual void Paste() override;
-    virtual void SetInsertionPoint(long pos) override;
-    virtual void SetInsertionPointEnd() override;
-    virtual long GetInsertionPoint() const override;
-    virtual wxTextPos GetLastPosition() const override;
-    virtual void Replace(long from, long to, const wxString& value) override;
-    virtual void Remove(long from, long to) override;
-    virtual void SetSelection(long from, long to) override;
-    virtual void GetSelection(long *from, long *to) const override;
-    virtual void SetEditable(bool editable) override;
-    virtual bool IsEditable() const override;
+    wxString GetValue() const override { return DoGetValue(); }
+    void SetValue(const wxString& value) override;
+    void WriteText(const wxString& value) override;
+    void Copy() override;
+    void Cut() override;
+    void Paste() override;
+    void SetInsertionPoint(long pos) override;
+    void SetInsertionPointEnd() override;
+    long GetInsertionPoint() const override;
+    wxTextPos GetLastPosition() const override;
+    void Replace(long from, long to, const wxString& value) override;
+    void Remove(long from, long to) override;
+    void SetSelection(long from, long to) override;
+    void GetSelection(long *from, long *to) const override;
+    void SetEditable(bool editable) override;
+    bool IsEditable() const override;
 
-    virtual void Undo() override;
-    virtual void Redo() override;
-    virtual void SelectAll() override;
+    void Undo() override;
+    void Redo() override;
+    void SelectAll() override;
 
-    virtual bool CanCopy() const override;
-    virtual bool CanCut() const override;
-    virtual bool CanPaste() const override;
-    virtual bool CanUndo() const override;
-    virtual bool CanRedo() const override;
+    bool CanCopy() const override;
+    bool CanCut() const override;
+    bool CanPaste() const override;
+    bool CanUndo() const override;
+    bool CanRedo() const override;
 
     // override these methods to disambiguate between two base classes versions
-    virtual void Clear() override
+    void Clear() override
     {
         wxItemContainer::Clear();
     }
@@ -132,15 +132,15 @@ public:
     bool IsTextEmpty() const { return wxTextEntry::IsEmpty(); }
 
     // wxControlWithItems methods
-    virtual void DoClear() override;
-    virtual void DoDeleteOneItem(unsigned int n) override;
-    virtual unsigned int GetCount() const override;
-    virtual wxString GetString(unsigned int n) const override;
-    virtual void SetString(unsigned int n, const wxString& s) override;
-    virtual int FindString(const wxString& s, bool bCase = false) const override;
-    virtual void SetSelection(int n) override;
-    virtual int GetSelection() const override;
-    virtual wxString GetStringSelection() const override;
+    void DoClear() override;
+    void DoDeleteOneItem(unsigned int n) override;
+    unsigned int GetCount() const override;
+    wxString GetString(unsigned int n) const override;
+    void SetString(unsigned int n, const wxString& s) override;
+    int FindString(const wxString& s, bool bCase = false) const override;
+    void SetSelection(int n) override;
+    int GetSelection() const override;
+    wxString GetStringSelection() const override;
 
     // we have our own input handler and our own actions
     // (but wxComboCtrl already handled Popup/Dismiss)
@@ -151,25 +151,25 @@ public:
     */
 
     static wxInputHandler *GetStdInputHandler(wxInputHandler *handlerDef);
-    virtual wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
+    wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
     {
         return GetStdInputHandler(handlerDef);
     }
 
     // we delegate our client data handling to wxListBox which we use for the
     // items, so override this and other methods dealing with the client data
-    virtual wxClientDataType GetClientDataType() const override;
-    virtual void SetClientDataType(wxClientDataType clientDataItemsType) override;
+    wxClientDataType GetClientDataType() const override;
+    void SetClientDataType(wxClientDataType clientDataItemsType) override;
 
-    virtual const wxTextEntry* WXGetTextEntry() const override { return this; }
+    const wxTextEntry* WXGetTextEntry() const override { return this; }
 
 protected:
     virtual int DoInsertItems(const wxArrayStringsAdapter& items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
 
-    virtual void DoSetItemClientData(unsigned int n, void* clientData) override;
-    virtual void* DoGetItemClientData(unsigned int n) const override;
+    void DoSetItemClientData(unsigned int n, void* clientData) override;
+    void* DoGetItemClientData(unsigned int n) const override;
 
 
     // common part of all ctors
@@ -180,7 +180,7 @@ protected:
 
 private:
     // implement wxTextEntry pure virtual method
-    virtual wxWindow *GetEditableWindow() override { return this; }
+    wxWindow *GetEditableWindow() override { return this; }
 
     // the popup listbox
     wxListBox *m_lbox;

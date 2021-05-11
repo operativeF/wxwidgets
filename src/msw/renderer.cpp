@@ -160,11 +160,11 @@ public:
                                     wxTitleBarButton button,
                                     int flags = 0) override;
 
-    virtual wxSize GetCheckBoxSize(wxWindow *win, int flags = 0) override;
+    wxSize GetCheckBoxSize(wxWindow *win, int flags = 0) override;
 
-    virtual int GetHeaderButtonHeight(wxWindow *win) override;
+    int GetHeaderButtonHeight(wxWindow *win) override;
 
-    virtual int GetHeaderButtonMargin(wxWindow *win) override;
+    int GetHeaderButtonMargin(wxWindow *win) override;
 
 private:
     // wrapper of DrawFrameControl()
@@ -259,7 +259,7 @@ public:
                                     const wxRect& rect,
                                     int flags = 0) override;
 
-    virtual wxSize GetCollapseButtonSize(wxWindow *win, wxDC& dc) override;
+    wxSize GetCollapseButtonSize(wxWindow *win, wxDC& dc) override;
 
     virtual void DrawItemSelectionRect(wxWindow *win,
                                        wxDC& dc,
@@ -286,11 +286,11 @@ public:
                                     wxTitleBarButton button,
                                     int flags = 0) override;
 
-    virtual wxSize GetCheckBoxSize(wxWindow *win, int flags = 0) override;
+    wxSize GetCheckBoxSize(wxWindow *win, int flags = 0) override;
 
-    virtual wxSize GetCheckMarkSize(wxWindow* win) override;
+    wxSize GetCheckMarkSize(wxWindow* win) override;
 
-    virtual wxSize GetExpanderSize(wxWindow *win) override;
+    wxSize GetExpanderSize(wxWindow *win) override;
 
     virtual void DrawGauge(wxWindow* win,
                            wxDC& dc,
@@ -307,7 +307,7 @@ public:
                               int flags = 0,
                               wxEllipsizeMode ellipsizeMode = wxELLIPSIZE_END) override;
 
-    virtual wxSplitterRenderParams GetSplitterParams(const wxWindow *win) override;
+    wxSplitterRenderParams GetSplitterParams(const wxWindow *win) override;
 
 private:
     // wrapper around DrawThemeBackground() translating flags to NORMAL/HOT/

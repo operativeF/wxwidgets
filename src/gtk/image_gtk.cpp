@@ -20,14 +20,14 @@ struct BitmapProviderDefault: wxGtkImage::BitmapProvider
 {
 #ifdef __WXGTK3__
     BitmapProviderDefault(wxWindow* win) : m_win(win) { }
-    virtual wxBitmap Get() const override;
-    virtual void Set(const wxBitmap& bitmap) override;
+    wxBitmap Get() const override;
+    void Set(const wxBitmap& bitmap) override;
     wxWindow* const m_win;
     wxBitmap m_bitmap;
     wxBitmap m_bitmapDisabled;
 #else
     BitmapProviderDefault(wxWindow*) { }
-    virtual wxBitmap Get() const override { return wxBitmap(); }
+    wxBitmap Get() const override { return wxBitmap(); }
 #endif
 };
 

@@ -133,7 +133,7 @@ public:
     virtual int GetItemId(wxRibbonButtonBarButtonBase *button) const;
 
 
-    virtual bool Realize() override;
+    bool Realize() override;
     virtual void ClearButtons();
     virtual bool DeleteButton(int button_id);
     virtual void EnableButton(int button_id, bool enable = true);
@@ -158,17 +158,17 @@ public:
     virtual wxRibbonButtonBarButtonBase *GetActiveItem() const;
     virtual wxRibbonButtonBarButtonBase *GetHoveredItem() const;
 
-    virtual void SetArtProvider(wxRibbonArtProvider* art) override;
-    virtual bool IsSizingContinuous() const override;
+    void SetArtProvider(wxRibbonArtProvider* art) override;
+    bool IsSizingContinuous() const override;
 
-    virtual wxSize GetMinSize() const override;
+    wxSize GetMinSize() const override;
 
     void SetShowToolTipsForDisabled(bool show);
     bool GetShowToolTipsForDisabled() const;
 
 protected:
     friend class wxRibbonButtonBarEvent;
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     void OnEraseBackground(wxEraseEvent& evt);
@@ -192,7 +192,7 @@ protected:
                      wxRibbonButtonBarButtonState target_size);
     void FetchButtonSizeInfo(wxRibbonButtonBarButtonBase* button,
         wxRibbonButtonBarButtonState size, wxDC& dc);
-    virtual void UpdateWindowUI(long flags) override;
+    void UpdateWindowUI(long flags) override;
 
     wxArrayRibbonButtonBarLayout m_layouts;
     wxArrayRibbonButtonBarButtonBase m_buttons;

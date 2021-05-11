@@ -127,9 +127,9 @@ public:
 
 
     // implement base class pure virtuals
-    virtual bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
-    virtual wxPoint GetClientAreaOrigin() const override;
-    virtual void SetIcons(const wxIconBundle& icons) override;
+    bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
+    wxPoint GetClientAreaOrigin() const override;
+    void SetIcons(const wxIconBundle& icons) override;
 
     // implementation from now on
     // --------------------------
@@ -142,7 +142,7 @@ public:
                                const wxString& strArg = wxEmptyString) override;
 
     static wxInputHandler *GetStdInputHandler(wxInputHandler *handlerDef);
-    virtual wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
+    wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
     {
         return GetStdInputHandler(handlerDef);
     }
@@ -150,13 +150,13 @@ public:
     // move/resize the frame interactively, i.e. let the user do it
     virtual void InteractiveMove(int flags = wxINTERACTIVE_MOVE);
 
-    virtual wxSize GetMinSize() const override;
+    wxSize GetMinSize() const override;
 
-    virtual wxWindow *GetInputWindow() const override { return const_cast<wxTopLevelWindow*>(this); }
+    wxWindow *GetInputWindow() const override { return const_cast<wxTopLevelWindow*>(this); }
 
 protected:
-    virtual void DoGetClientSize(int *width, int *height) const override;
-    virtual void DoSetClientSize(int width, int height) override;
+    void DoGetClientSize(int *width, int *height) const override;
+    void DoSetClientSize(int width, int height) override;
 
     // handle titlebar button click event
     virtual void ClickTitleBarButton(long button);

@@ -80,30 +80,30 @@ public:
     virtual ~wxRadioBox();
 
     // implement wxRadioBox interface
-    virtual void SetSelection(int n) override;
-    virtual int GetSelection() const override;
+    void SetSelection(int n) override;
+    int GetSelection() const override;
 
-    virtual unsigned int GetCount() const override
+    unsigned int GetCount() const override
         { return (unsigned int)m_buttons.GetCount(); }
 
-    virtual wxString GetString(unsigned int n) const override;
-    virtual void SetString(unsigned int n, const wxString& label) override;
+    wxString GetString(unsigned int n) const override;
+    void SetString(unsigned int n, const wxString& label) override;
 
-    virtual bool Enable(unsigned int n, bool enable = true) override;
-    virtual bool Show(unsigned int n, bool show = true) override;
+    bool Enable(unsigned int n, bool enable = true) override;
+    bool Show(unsigned int n, bool show = true) override;
 
-    virtual bool IsItemEnabled(unsigned int n) const override;
-    virtual bool IsItemShown(unsigned int n) const override;
+    bool IsItemEnabled(unsigned int n) const override;
+    bool IsItemShown(unsigned int n) const override;
 
     // we also override the wxControl methods to avoid virtual function hiding
-    virtual bool Enable(bool enable = true) override;
-    virtual bool Show(bool show = true) override;
-    virtual wxString GetLabel() const override;
-    virtual void SetLabel(const wxString& label) override;
+    bool Enable(bool enable = true) override;
+    bool Show(bool show = true) override;
+    wxString GetLabel() const override;
+    void SetLabel(const wxString& label) override;
 
     // we inherit a version always returning false from wxStaticBox, override
     // it to behave normally
-    virtual bool AcceptsFocus() const override { return wxControl::AcceptsFocus(); }
+    bool AcceptsFocus() const override { return wxControl::AcceptsFocus(); }
 
 #if wxUSE_TOOLTIPS
     virtual void DoSetToolTip( wxToolTip *tip );
@@ -119,12 +119,12 @@ public:
     bool OnKeyDown(wxKeyEvent& event);
 
 protected:
-    virtual wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     // override the base class methods dealing with window positioning/sizing
     // as we must move/size the buttons as well
-    virtual void DoMoveWindow(int x, int y, int width, int height) override;
-    virtual wxSize DoGetBestClientSize() const override;
+    void DoMoveWindow(int x, int y, int width, int height) override;
+    wxSize DoGetBestClientSize() const override;
 
     // generate a radiobutton click event for the current item
     void SendRadioEvent();

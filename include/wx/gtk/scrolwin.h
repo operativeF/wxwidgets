@@ -27,12 +27,12 @@ public:
                                int noUnitsX, int noUnitsY,
                                int xPos = 0, int yPos = 0,
                                bool noRefresh = false) override;
-    virtual void AdjustScrollbars() override;
+    void AdjustScrollbars() override;
 
-    virtual bool IsScrollbarShown(int orient) const override;
+    bool IsScrollbarShown(int orient) const override;
 
 protected:
-    virtual void DoScroll(int x, int y) override;
+    void DoScroll(int x, int y) override;
     virtual void DoShowScrollbars(wxScrollbarVisibility horz,
                                   wxScrollbarVisibility vert) override;
 

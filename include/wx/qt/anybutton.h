@@ -23,17 +23,17 @@ public:
     // implementation
     // --------------
 
-    virtual void SetLabel( const wxString &label ) override;
+    void SetLabel( const wxString &label ) override;
 
-    virtual QWidget *GetHandle() const override;
+    QWidget *GetHandle() const override;
 
     // implementation only
     void QtUpdateState();
     virtual int QtGetEventType() const = 0;
 
 protected:
-    virtual wxBitmap DoGetBitmap(State state) const override;
-    virtual void DoSetBitmap(const wxBitmap& bitmap, State which) override;
+    wxBitmap DoGetBitmap(State state) const override;
+    void DoSetBitmap(const wxBitmap& bitmap, State which) override;
 
     QPushButton *m_qtPushButton;
 

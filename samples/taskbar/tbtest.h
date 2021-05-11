@@ -26,7 +26,7 @@ public:
     void OnMenuCheckmark(wxCommandEvent&);
     void OnMenuUICheckmark(wxUpdateUIEvent&);
     void OnMenuSub(wxCommandEvent&);
-    virtual wxMenu *CreatePopupMenu() override;
+    wxMenu *CreatePopupMenu() override;
 
     wxDECLARE_EVENT_TABLE();
 };
@@ -36,7 +36,7 @@ public:
 class MyApp : public wxApp
 {
 public:
-    virtual bool OnInit() override;
+    bool OnInit() override;
 };
 
 class MyDialog: public wxDialog

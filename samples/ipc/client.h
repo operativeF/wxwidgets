@@ -29,8 +29,8 @@ class MyFrame;
 class MyApp: public wxApp
 {
 public:
-    virtual bool OnInit() override;
-    virtual int OnExit() override;
+    bool OnInit() override;
+    int OnExit() override;
     MyFrame *GetFrame() { return m_frame; }
 
 protected:
@@ -81,11 +81,11 @@ protected:
 class MyConnection : public MyConnectionBase
 {
 public:
-    virtual bool DoExecute(const void *data, size_t size, wxIPCFormat format) override;
-    virtual const void *Request(const wxString& item, size_t *size = NULL, wxIPCFormat format = wxIPC_TEXT) override;
-    virtual bool DoPoke(const wxString& item, const void* data, size_t size, wxIPCFormat format) override;
-    virtual bool OnAdvise(const wxString& topic, const wxString& item, const void *data, size_t size, wxIPCFormat format) override;
-    virtual bool OnDisconnect() override;
+    bool DoExecute(const void *data, size_t size, wxIPCFormat format) override;
+    const void *Request(const wxString& item, size_t *size = NULL, wxIPCFormat format = wxIPC_TEXT) override;
+    bool DoPoke(const wxString& item, const void* data, size_t size, wxIPCFormat format) override;
+    bool OnAdvise(const wxString& topic, const wxString& item, const void *data, size_t size, wxIPCFormat format) override;
+    bool OnDisconnect() override;
 };
 
 class MyClient: public wxClient

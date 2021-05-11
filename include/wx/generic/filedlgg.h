@@ -60,45 +60,45 @@ public:
 
     virtual ~wxGenericFileDialog();
 
-    virtual void SetDirectory(const wxString& dir) override
+    void SetDirectory(const wxString& dir) override
         { m_filectrl->SetDirectory(dir); }
-    virtual void SetFilename(const wxString& name) override
+    void SetFilename(const wxString& name) override
         { m_filectrl->SetFilename(name); }
-    virtual void SetMessage(const wxString& message) override { SetTitle(message); }
-    virtual void SetPath(const wxString& path) override
+    void SetMessage(const wxString& message) override { SetTitle(message); }
+    void SetPath(const wxString& path) override
         { m_filectrl->SetPath(path); }
-    virtual void SetFilterIndex(int filterIndex) override
+    void SetFilterIndex(int filterIndex) override
         { m_filectrl->SetFilterIndex(filterIndex); }
-    virtual void SetWildcard(const wxString& wildCard) override
+    void SetWildcard(const wxString& wildCard) override
         { m_filectrl->SetWildcard(wildCard); }
 
-    virtual wxString GetPath() const override
+    wxString GetPath() const override
         {
             wxCHECK_MSG( !HasFlag(wxFD_MULTIPLE), wxString(), "When using wxFD_MULTIPLE, must call GetPaths() instead" );
             return m_filectrl->GetPath();
         }
-    virtual void GetPaths(wxArrayString& paths) const override
+    void GetPaths(wxArrayString& paths) const override
         { m_filectrl->GetPaths(paths); }
-    virtual wxString GetDirectory() const override
+    wxString GetDirectory() const override
         { return m_filectrl->GetDirectory(); }
-    virtual wxString GetFilename() const override
+    wxString GetFilename() const override
         {
             wxCHECK_MSG( !HasFlag(wxFD_MULTIPLE), wxString(), "When using wxFD_MULTIPLE, must call GetFilenames() instead" );
             return m_filectrl->GetFilename();
         }
-    virtual void GetFilenames(wxArrayString& files) const override
+    void GetFilenames(wxArrayString& files) const override
         { m_filectrl->GetFilenames(files); }
-    virtual wxString GetWildcard() const override
+    wxString GetWildcard() const override
         { return m_filectrl->GetWildcard(); }
-    virtual int GetFilterIndex() const override
+    int GetFilterIndex() const override
         { return m_filectrl->GetFilterIndex(); }
-    virtual bool SupportsExtraControl() const override { return true; }
+    bool SupportsExtraControl() const override { return true; }
 
     // implementation only from now on
     // -------------------------------
 
-    virtual int ShowModal() override;
-    virtual bool Show( bool show = true ) override;
+    int ShowModal() override;
+    bool Show( bool show = true ) override;
 
     void OnList( wxCommandEvent &event );
     void OnReport( wxCommandEvent &event );

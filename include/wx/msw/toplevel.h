@@ -47,36 +47,36 @@ public:
     virtual ~wxTopLevelWindowMSW();
 
     // implement base class pure virtuals
-    virtual void SetTitle( const wxString& title) override;
-    virtual wxString GetTitle() const override;
-    virtual void Maximize(bool maximize = true) override;
-    virtual bool IsMaximized() const override;
-    virtual void Iconize(bool iconize = true) override;
-    virtual bool IsIconized() const override;
-    virtual void SetIcons(const wxIconBundle& icons ) override;
-    virtual void Restore() override;
-    virtual bool Destroy() override;
+    void SetTitle( const wxString& title) override;
+    wxString GetTitle() const override;
+    void Maximize(bool maximize = true) override;
+    bool IsMaximized() const override;
+    void Iconize(bool iconize = true) override;
+    bool IsIconized() const override;
+    void SetIcons(const wxIconBundle& icons ) override;
+    void Restore() override;
+    bool Destroy() override;
 
-    virtual void SetLayoutDirection(wxLayoutDirection dir) override;
+    void SetLayoutDirection(wxLayoutDirection dir) override;
 
-    virtual void RequestUserAttention(int flags = wxUSER_ATTENTION_INFO) override;
+    void RequestUserAttention(int flags = wxUSER_ATTENTION_INFO) override;
 
-    virtual bool Show(bool show = true) override;
-    virtual void Raise() override;
+    bool Show(bool show = true) override;
+    void Raise() override;
 
-    virtual void ShowWithoutActivating() override;
-    virtual bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
-    virtual bool IsFullScreen() const override { return m_fsIsShowing; }
+    void ShowWithoutActivating() override;
+    bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
+    bool IsFullScreen() const override { return m_fsIsShowing; }
 
     // wxMSW only: EnableCloseButton(false) may be used to remove the "Close"
     // button from the title bar
-    virtual bool EnableCloseButton(bool enable = true) override;
-    virtual bool EnableMaximizeButton(bool enable = true) override;
-    virtual bool EnableMinimizeButton(bool enable = true) override;
+    bool EnableCloseButton(bool enable = true) override;
+    bool EnableMaximizeButton(bool enable = true) override;
+    bool EnableMinimizeButton(bool enable = true) override;
 
     // Set window transparency if the platform supports it
-    virtual bool SetTransparent(wxByte alpha) override;
-    virtual bool CanSetTransparent() override;
+    bool SetTransparent(wxByte alpha) override;
+    bool CanSetTransparent() override;
 
 
     // MSW-specific methods
@@ -103,22 +103,22 @@ public:
 
     // called from wxWidgets code itself only when the pending focus, i.e. the
     // element which should get focus when this TLW is activated again, changes
-    virtual void WXSetPendingFocus(wxWindow* win) override
+    void WXSetPendingFocus(wxWindow* win) override
     {
         m_winLastFocused = win;
     }
 
     // translate wxWidgets flags to Windows ones
-    virtual WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle) const override;
 
     // choose the right parent to use with CreateWindow()
-    virtual WXHWND MSWGetParent() const override;
+    WXHWND MSWGetParent() const override;
 
     // window proc for the frames
-    virtual WXLRESULT MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lParam) override;
+    WXLRESULT MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lParam) override;
 
     // returns true if the platform should explicitly apply a theme border
-    virtual bool CanApplyThemeBorder() const override { return false; }
+    bool CanApplyThemeBorder() const override { return false; }
 
     // This function is only for internal use.
     void MSWSetShowCommand(WXUINT showCmd) { m_showCmd = showCmd; }
@@ -147,12 +147,12 @@ protected:
 
     // override those to return the normal window coordinates even when the
     // window is minimized
-    virtual void DoGetPosition(int *x, int *y) const override;
-    virtual void DoGetSize(int *width, int *height) const override;
+    void DoGetPosition(int *x, int *y) const override;
+    void DoGetSize(int *width, int *height) const override;
 
     // Top level windows have different freeze semantics on Windows
-    virtual void DoFreeze() override;
-    virtual void DoThaw() override;
+    void DoFreeze() override;
+    void DoThaw() override;
 
     // helper of SetIcons(): calls gets the icon with the size specified by the
     // given system metrics (SM_C{X|Y}[SM]ICON) from the bundle and sets it

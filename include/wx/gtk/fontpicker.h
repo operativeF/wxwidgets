@@ -45,7 +45,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxFontPickerWidgetNameStr));
 
-    virtual wxColour GetSelectedColour() const override
+    wxColour GetSelectedColour() const override
         { return m_selectedColour; }
 
     void SetSelectedColour(const wxColour &colour) override

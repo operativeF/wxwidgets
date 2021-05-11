@@ -26,10 +26,10 @@ class WXDLLIMPEXP_BASE wxArchiveFSHandler : public wxFileSystemHandler
 {
 public:
     wxArchiveFSHandler();
-    virtual bool CanOpen(const wxString& location) override;
-    virtual wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
-    virtual wxString FindFirst(const wxString& spec, int flags = 0) override;
-    virtual wxString FindNext() override;
+    bool CanOpen(const wxString& location) override;
+    wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
+    wxString FindFirst(const wxString& spec, int flags = 0) override;
+    wxString FindNext() override;
     void Cleanup();
     virtual ~wxArchiveFSHandler();
 

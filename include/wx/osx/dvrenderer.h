@@ -31,31 +31,31 @@ public:
     // inherited methods from wxDataViewRendererBase
     // ---------------------------------------------
 
-    virtual int GetAlignment() const override
+    int GetAlignment() const override
     {
         return m_alignment;
     }
-    virtual wxDataViewCellMode GetMode() const override
+    wxDataViewCellMode GetMode() const override
     {
         return m_mode;
     }
-    virtual bool GetValue(wxVariant& value) const override
+    bool GetValue(wxVariant& value) const override
     {
         value = m_value;
         return true;
     }
 
     // NB: in Carbon this is always identical to the header alignment
-    virtual void SetAlignment(int align) override;
-    virtual void SetMode(wxDataViewCellMode mode) override;
-    virtual bool SetValue(const wxVariant& newValue) override
+    void SetAlignment(int align) override;
+    void SetMode(wxDataViewCellMode mode) override;
+    bool SetValue(const wxVariant& newValue) override
     {
         m_value = newValue;
         return true;
     }
 
-    virtual void EnableEllipsize(wxEllipsizeMode mode = wxELLIPSIZE_MIDDLE) override;
-    virtual wxEllipsizeMode GetEllipsizeMode() const override;
+    void EnableEllipsize(wxEllipsizeMode mode = wxELLIPSIZE_MIDDLE) override;
+    wxEllipsizeMode GetEllipsizeMode() const override;
 
     // implementation
     // --------------
@@ -85,15 +85,15 @@ public:
                                   unsigned col);
 
 protected:
-    virtual void SetAttr(const wxDataViewItemAttr& attr) override;
-    virtual void SetEnabled(bool enabled) override;
+    void SetAttr(const wxDataViewItemAttr& attr) override;
+    void SetEnabled(bool enabled) override;
 #else
 protected:
     void SetAttr(const wxDataViewItemAttr& WXUNUSED(attr)) override { };
     void SetEnabled(bool WXUNUSED(enabled)) override { };
 #endif
 
-    virtual bool IsHighlighted() const override;
+    bool IsHighlighted() const override;
 
 private:
     // contains the alignment flags

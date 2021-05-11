@@ -60,36 +60,36 @@ public:
 
     virtual ~wxBalloonNotifMsgImpl();
 
-    virtual bool Show(int timeout) override;
+    bool Show(int timeout) override;
 
-    virtual bool Close() override;
+    bool Close() override;
 
-    virtual void SetTitle(const wxString& title) override
+    void SetTitle(const wxString& title) override
     {
         m_title = title;
     }
 
-    virtual void SetMessage(const wxString& message) override
+    void SetMessage(const wxString& message) override
     {
         m_message = message;
     }
 
-    virtual void SetParent(wxWindow *parent) override
+    void SetParent(wxWindow *parent) override
     {
         m_parent = parent;
     }
 
-    virtual void SetFlags(int flags) override
+    void SetFlags(int flags) override
     {
         m_flags = flags;
     }
 
-    virtual void SetIcon(const wxIcon& icon) override
+    void SetIcon(const wxIcon& icon) override
     {
         m_icon = icon;
     }
 
-    virtual bool AddAction(wxWindowID WXUNUSED(actionid), const wxString &WXUNUSED(label)) override
+    bool AddAction(wxWindowID WXUNUSED(actionid), const wxString &WXUNUSED(label)) override
     {
         // Actions are not supported in balloon notifications
         return false;

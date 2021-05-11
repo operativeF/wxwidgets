@@ -219,7 +219,7 @@ public:
         return S_OK;
     }
 
-    virtual HRESULT STDMETHODCALLTYPE Skip(ULONG celt) override
+    HRESULT STDMETHODCALLTYPE Skip(ULONG celt) override
     {
         if ( !celt )
             return E_INVALIDARG;
@@ -241,7 +241,7 @@ public:
         return S_OK;
     }
 
-    virtual HRESULT STDMETHODCALLTYPE Reset() override
+    HRESULT STDMETHODCALLTYPE Reset() override
     {
         CSLock lock(m_csRestart);
 
@@ -250,7 +250,7 @@ public:
         return S_OK;
     }
 
-    virtual HRESULT STDMETHODCALLTYPE Clone(IEnumString **ppEnum) override
+    HRESULT STDMETHODCALLTYPE Clone(IEnumString **ppEnum) override
     {
         if ( !ppEnum )
             return E_POINTER;

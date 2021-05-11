@@ -63,34 +63,34 @@ public:
                                      const wxValidator& validator,
                                      const wxString& name) override;
 
-    virtual bool Play() override;
-    virtual bool Pause() override;
-    virtual bool Stop() override;
+    bool Play() override;
+    bool Pause() override;
+    bool Stop() override;
 
-    virtual bool Load(const wxString& fileName) override;
-    virtual bool Load(const wxURI& location) override;
+    bool Load(const wxString& fileName) override;
+    bool Load(const wxURI& location) override;
     virtual bool Load(const wxURI& location,
                       const wxURI& proxy) override
         { return wxMediaBackendCommonBase::Load(location, proxy); }
 
 
-    virtual bool SetPosition(wxLongLong where) override;
-    virtual wxLongLong GetPosition() override;
-    virtual wxLongLong GetDuration() override;
+    bool SetPosition(wxLongLong where) override;
+    wxLongLong GetPosition() override;
+    wxLongLong GetDuration() override;
 
-    virtual void Move(int x, int y, int w, int h) override;
+    void Move(int x, int y, int w, int h) override;
     wxSize GetVideoSize() const override;
 
-    virtual double GetPlaybackRate() override;
-    virtual bool SetPlaybackRate(double dRate) override;
+    double GetPlaybackRate() override;
+    bool SetPlaybackRate(double dRate) override;
 
-    virtual wxMediaState GetState() override;
+    wxMediaState GetState() override;
 
-    virtual bool SetVolume(double dVolume) override;
-    virtual double GetVolume() override;
+    bool SetVolume(double dVolume) override;
+    double GetVolume() override;
 
-    virtual wxLongLong GetDownloadProgress() override;
-    virtual wxLongLong GetDownloadTotal() override;
+    wxLongLong GetDownloadProgress() override;
+    wxLongLong GetDownloadTotal() override;
 
     bool DoLoad(const wxString& locstring);
     wxMediaCtrl* GetControl() { return m_ctrl; } // for C Callbacks

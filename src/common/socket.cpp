@@ -2158,14 +2158,14 @@ wxDatagramSocket& wxDatagramSocket::SendTo( const wxSockAddress& addr,
 class wxSocketModule : public wxModule
 {
 public:
-    virtual bool OnInit() override
+    bool OnInit() override
     {
         // wxSocketBase will call Initialize() itself only if sockets are
         // really used, don't do it from here
         return true;
     }
 
-    virtual void OnExit() override
+    void OnExit() override
     {
         if ( wxSocketBase::IsInitialized() )
             wxSocketBase::Shutdown();

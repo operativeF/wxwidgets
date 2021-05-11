@@ -42,7 +42,7 @@ private:
     void OnMouseLeftDown(wxMouseEvent& event);
     void OnMouseLeftUp(wxMouseEvent& event);
 
-    virtual wxSize DoGetBestClientSize() const override;
+    wxSize DoGetBestClientSize() const override;
 };
 
 ChessBoard::ChessBoard(wxWindow* parent)

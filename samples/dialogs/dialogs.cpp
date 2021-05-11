@@ -2963,14 +2963,14 @@ void MyFrame::OnModalHook(wxCommandEvent& event)
     class TestModalHook : public wxModalDialogHook
     {
     protected:
-        virtual int Enter(wxDialog* dialog) override
+        int Enter(wxDialog* dialog) override
         {
             wxLogStatus("Showing %s modal dialog",
                         dialog->GetClassInfo()->GetClassName());
             return wxID_NONE;
         }
 
-        virtual void Exit(wxDialog* dialog) override
+        void Exit(wxDialog* dialog) override
         {
             wxLogStatus("Leaving %s modal dialog",
                         dialog->GetClassInfo()->GetClassName());
@@ -3226,7 +3226,7 @@ public:
     }
 
     // add some custom controls
-    virtual void DoAddCustomControls() override
+    void DoAddCustomControls() override
     {
         AddControl(new wxStaticLine(this), wxSizerFlags().Expand());
         AddText("Some custom text");

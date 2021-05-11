@@ -60,29 +60,29 @@ public:
                 const wxString& name = wxEmptyString);
 
 
-    virtual bool SetPageText(size_t n, const wxString& strText) override;
-    virtual wxString GetPageText(size_t n) const override;
-    virtual int GetPageImage(size_t n) const override;
-    virtual bool SetPageImage(size_t n, int imageId) override;
+    bool SetPageText(size_t n, const wxString& strText) override;
+    wxString GetPageText(size_t n) const override;
+    int GetPageImage(size_t n) const override;
+    bool SetPageImage(size_t n, int imageId) override;
     virtual bool InsertPage(size_t n,
                             wxWindow *page,
                             const wxString& text,
                             bool bSelect = false,
                             int imageId = NO_IMAGE) override;
-    virtual int SetSelection(size_t n) override
+    int SetSelection(size_t n) override
         { return DoSetSelection(n, SetSelection_SendEvent); }
-    virtual int ChangeSelection(size_t n) override { return DoSetSelection(n); }
-    virtual void SetImageList(wxImageList *imageList) override;
+    int ChangeSelection(size_t n) override { return DoSetSelection(n); }
+    void SetImageList(wxImageList *imageList) override;
 
-    virtual bool DeleteAllPages() override;
+    bool DeleteAllPages() override;
 
     // returns the choice control
     wxChoice* GetChoiceCtrl() const { return (wxChoice*)m_bookctrl; }
 
 protected:
-    virtual void DoSetWindowVariant(wxWindowVariant variant) override;
+    void DoSetWindowVariant(wxWindowVariant variant) override;
 
-    virtual wxWindow *DoRemovePage(size_t page) override;
+    wxWindow *DoRemovePage(size_t page) override;
 
     void UpdateSelectedPage(size_t newsel) override
     {

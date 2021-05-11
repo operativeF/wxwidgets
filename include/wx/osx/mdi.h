@@ -43,20 +43,20 @@ public:
 
     static bool IsTDI() { return false; }
 
-    virtual void AddChild(wxWindowBase *child) override;
-    virtual void RemoveChild(wxWindowBase *child) override;
+    void AddChild(wxWindowBase *child) override;
+    void RemoveChild(wxWindowBase *child) override;
 
-    virtual void ActivateNext() override { /* TODO */ }
-    virtual void ActivatePrevious() override { /* TODO */ }
+    void ActivateNext() override { /* TODO */ }
+    void ActivatePrevious() override { /* TODO */ }
 
-    virtual bool Show(bool show = true) override;
+    bool Show(bool show = true) override;
 
 
     // Mac-specific implementation from now on
     // ---------------------------------------
 
     // Mac OS activate event
-    virtual void MacActivate(long timestamp, bool activating) override;
+    void MacActivate(long timestamp, bool activating) override;
 
     // wxWidgets activate event
     void OnActivate(wxActivateEvent& event);
@@ -65,7 +65,7 @@ public:
     void SetMenuBar(wxMenuBar *menu_bar) override;
 
     // Get rect to be used to center top-level children
-    virtual void GetRectForTopLevelChildren(int *x, int *y, int *w, int *h) override;
+    void GetRectForTopLevelChildren(int *x, int *y, int *w, int *h) override;
 
 protected:
     // common part of all ctors
@@ -119,14 +119,14 @@ public:
     virtual ~wxMDIChildFrame();
 
     // un-override the base class override
-    virtual bool IsTopLevel() const override { return true; }
+    bool IsTopLevel() const override { return true; }
 
     // implement MDI operations
-    virtual void Activate() override;
+    void Activate() override;
 
 
     // Mac OS activate event
-    virtual void MacActivate(long timestamp, bool activating) override;
+    void MacActivate(long timestamp, bool activating) override;
 
 protected:
     // common part of all ctors
@@ -145,7 +145,7 @@ public:
                               long style = wxVSCROLL | wxHSCROLL) override;
 
 protected:
-    virtual void DoGetClientSize(int *width, int *height) const override;
+    void DoGetClientSize(int *width, int *height) const override;
 
     wxDECLARE_DYNAMIC_CLASS(wxMDIClientWindow);
 };

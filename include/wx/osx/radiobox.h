@@ -56,26 +56,26 @@ public:
              const wxString& name = wxASCII_STR(wxRadioBoxNameStr));
 
     // Enabling
-    virtual bool Enable(bool enable = true) override;
-    virtual bool Enable(unsigned int item, bool enable = true) override;
-    virtual bool IsItemEnabled(unsigned int item) const override;
+    bool Enable(bool enable = true) override;
+    bool Enable(unsigned int item, bool enable = true) override;
+    bool IsItemEnabled(unsigned int item) const override;
 
     // Showing
-    virtual bool Show(bool show = true) override;
-    virtual bool Show(unsigned int item, bool show = true) override;
-    virtual bool IsItemShown(unsigned int item) const override;
+    bool Show(bool show = true) override;
+    bool Show(unsigned int item, bool show = true) override;
+    bool IsItemShown(unsigned int item) const override;
 
     // Specific functions (in wxWidgets2 reference)
-    virtual void SetSelection(int item) override;
-    virtual int GetSelection() const override;
+    void SetSelection(int item) override;
+    int GetSelection() const override;
 
-    virtual unsigned int GetCount() const override { return m_noItems; }
+    unsigned int GetCount() const override { return m_noItems; }
 
-    virtual wxString GetString(unsigned int item) const override;
-    virtual void SetString(unsigned int item, const wxString& label) override;
+    wxString GetString(unsigned int item) const override;
+    void SetString(unsigned int item, const wxString& label) override;
 
     // protect native font of box
-    virtual bool SetFont( const wxFont &font ) override;
+    bool SetFont( const wxFont &font ) override;
 // Other external functions
     void Command(wxCommandEvent& event) override;
     void SetFocus() override;
@@ -88,7 +88,7 @@ public:
 
 protected:
     // resolve ambiguity in base classes
-    virtual wxBorder GetDefaultBorder() const override { return wxRadioBoxBase::GetDefaultBorder(); }
+    wxBorder GetDefaultBorder() const override { return wxRadioBoxBase::GetDefaultBorder(); }
 
     wxRadioButton    *m_radioButtonCycle;
 
@@ -96,7 +96,7 @@ protected:
     int               m_noRowsOrCols;
 
 // Internal functions
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
     virtual void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;

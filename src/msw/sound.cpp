@@ -58,9 +58,9 @@ public:
 
     void *GetPtr() const { return m_waveDataPtr; }
 
-    virtual bool IsOk() const override { return GetPtr() != nullptr; }
-    virtual DWORD GetSoundFlag() const override { return SND_MEMORY; }
-    virtual LPCTSTR GetSoundData() const override { return (LPCTSTR)GetPtr(); }
+    bool IsOk() const override { return GetPtr() != nullptr; }
+    DWORD GetSoundFlag() const override { return SND_MEMORY; }
+    LPCTSTR GetSoundData() const override { return (LPCTSTR)GetPtr(); }
 
 private:
     GlobalPtr m_waveData;
@@ -75,12 +75,12 @@ class wxSoundDataFile : public wxSoundData
 public:
     wxSoundDataFile(const wxString& filename, bool isResource);
 
-    virtual bool IsOk() const override { return !m_name.empty(); }
-    virtual DWORD GetSoundFlag() const override
+    bool IsOk() const override { return !m_name.empty(); }
+    DWORD GetSoundFlag() const override
     {
         return m_isResource ? SND_RESOURCE : SND_FILENAME;
     }
-    virtual LPCTSTR GetSoundData() const override { return m_name.c_str(); }
+    LPCTSTR GetSoundData() const override { return m_name.c_str(); }
 
 private:
     const wxString m_name;

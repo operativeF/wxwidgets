@@ -83,11 +83,11 @@ public:
     wxPostScriptPrintNativeData();
     virtual ~wxPostScriptPrintNativeData();
 
-    virtual bool TransferTo( wxPrintData &data ) override;
-    virtual bool TransferFrom( const wxPrintData &data ) override;
+    bool TransferTo( wxPrintData &data ) override;
+    bool TransferFrom( const wxPrintData &data ) override;
 
-    virtual bool Ok() const override { return IsOk(); }
-    virtual bool IsOk() const override { return true; }
+    bool Ok() const override { return IsOk(); }
+    bool IsOk() const override { return true; }
 
     const wxString& GetPrinterCommand() const { return m_printerCommand; }
     const wxString& GetPrinterOptions() const { return m_printerOptions; }
@@ -149,10 +149,10 @@ public:
     void OnRange(wxCommandEvent& event);
     void OnOK(wxCommandEvent& event);
 
-    virtual bool TransferDataFromWindow() override;
-    virtual bool TransferDataToWindow() override;
+    bool TransferDataFromWindow() override;
+    bool TransferDataToWindow() override;
 
-    virtual int ShowModal() override;
+    int ShowModal() override;
 
     wxPrintData& GetPrintData() override
         { return m_printDialogData.GetPrintData(); }
@@ -193,8 +193,8 @@ public:
 
     void OnPrinter(wxListEvent& event);
 
-    virtual bool TransferDataFromWindow() override;
-    virtual bool TransferDataToWindow() override;
+    bool TransferDataFromWindow() override;
+    bool TransferDataToWindow() override;
 
     virtual wxComboBox *CreatePaperTypeChoice();
 
@@ -226,10 +226,10 @@ public:
                              wxPageSetupDialogData* data = NULL);
     virtual ~wxGenericPageSetupDialog();
 
-    virtual bool TransferDataFromWindow() override;
-    virtual bool TransferDataToWindow() override;
+    bool TransferDataFromWindow() override;
+    bool TransferDataToWindow() override;
 
-    virtual wxPageSetupDialogData& GetPageSetupDialogData() override;
+    wxPageSetupDialogData& GetPageSetupDialogData() override;
 
     void OnPrinter(wxCommandEvent& event);
     wxComboBox *CreatePaperTypeChoice(int* x, int* y);

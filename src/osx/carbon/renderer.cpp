@@ -64,9 +64,9 @@ public:
         wxHeaderSortIconType sortArrow = wxHDR_SORT_ICON_NONE,
         wxHeaderButtonParams* params = NULL ) override;
 
-    virtual int GetHeaderButtonHeight(wxWindow *win) override;
+    int GetHeaderButtonHeight(wxWindow *win) override;
 
-    virtual int GetHeaderButtonMargin(wxWindow *win) override;
+    int GetHeaderButtonMargin(wxWindow *win) override;
 
     // draw the expanded/collapsed icon for a tree control item
     virtual void DrawTreeItemButton( wxWindow *win,
@@ -87,7 +87,7 @@ public:
                               const wxRect& rect,
                               int flags = 0) override;
 
-    virtual wxSize GetCheckBoxSize(wxWindow* win, int flags = 0) override;
+    wxSize GetCheckBoxSize(wxWindow* win, int flags = 0) override;
 
     virtual void DrawComboBoxDropButton(wxWindow *win,
                                         wxDC& dc,
@@ -104,22 +104,22 @@ public:
                                     const wxRect& rect,
                                     int flags = 0) override;
 
-    virtual wxSize GetCollapseButtonSize(wxWindow *win, wxDC& dc) override;
+    wxSize GetCollapseButtonSize(wxWindow *win, wxDC& dc) override;
 
     virtual void DrawItemSelectionRect(wxWindow *win,
                                        wxDC& dc,
                                        const wxRect& rect,
                                        int flags = 0) override;
 
-    virtual void DrawFocusRect(wxWindow* win, wxDC& dc, const wxRect& rect, int flags = 0) override;
+    void DrawFocusRect(wxWindow* win, wxDC& dc, const wxRect& rect, int flags = 0) override;
 
-    virtual void DrawChoice(wxWindow* win, wxDC& dc, const wxRect& rect, int flags=0) override;
+    void DrawChoice(wxWindow* win, wxDC& dc, const wxRect& rect, int flags=0) override;
 
-    virtual void DrawComboBox(wxWindow* win, wxDC& dc, const wxRect& rect, int flags=0) override;
+    void DrawComboBox(wxWindow* win, wxDC& dc, const wxRect& rect, int flags=0) override;
 
-    virtual void DrawTextCtrl(wxWindow* win, wxDC& dc, const wxRect& rect, int flags=0) override;
+    void DrawTextCtrl(wxWindow* win, wxDC& dc, const wxRect& rect, int flags=0) override;
 
-    virtual void DrawRadioBitmap(wxWindow* win, wxDC& dc, const wxRect& rect, int flags=0) override;
+    void DrawRadioBitmap(wxWindow* win, wxDC& dc, const wxRect& rect, int flags=0) override;
 
 #ifdef wxHAS_DRAW_TITLE_BAR_BITMAP
     virtual void DrawTitleBarBitmap(wxWindow *win,
@@ -136,7 +136,7 @@ public:
                            int max,
                            int flags = 0) override;
 
-    virtual wxSplitterRenderParams GetSplitterParams(const wxWindow *win) override;
+    wxSplitterRenderParams GetSplitterParams(const wxWindow *win) override;
 
 private:
     void DrawMacThemeButton(wxWindow *win,

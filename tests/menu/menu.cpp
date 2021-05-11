@@ -78,8 +78,8 @@ class MenuTestCase : public CppUnit::TestCase
 public:
     MenuTestCase() {}
 
-    virtual void setUp() override { CreateFrame(); }
-    virtual void tearDown() override { m_frame->Destroy(); }
+    void setUp() override { CreateFrame(); }
+    void tearDown() override { m_frame->Destroy(); }
 
 private:
     CPPUNIT_TEST_SUITE( MenuTestCase );

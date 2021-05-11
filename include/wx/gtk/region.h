@@ -56,8 +56,8 @@ public:
     virtual ~wxRegion();
 
     // wxRegionBase methods
-    virtual void Clear() override;
-    virtual bool IsEmpty() const override;
+    void Clear() override;
+    bool IsEmpty() const override;
 
 #ifdef __WXGTK3__
     cairo_region_t* GetRegion() const;
@@ -67,21 +67,21 @@ public:
 #endif
 
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const override;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
+    wxGDIRefData *CreateGDIRefData() const override;
+    wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
 
     // wxRegionBase pure virtuals
-    virtual bool DoIsEqual(const wxRegion& region) const override;
-    virtual bool DoGetBox(wxCoord& x, wxCoord& y, wxCoord& w, wxCoord& h) const override;
-    virtual wxRegionContain DoContainsPoint(wxCoord x, wxCoord y) const override;
-    virtual wxRegionContain DoContainsRect(const wxRect& rect) const override;
+    bool DoIsEqual(const wxRegion& region) const override;
+    bool DoGetBox(wxCoord& x, wxCoord& y, wxCoord& w, wxCoord& h) const override;
+    wxRegionContain DoContainsPoint(wxCoord x, wxCoord y) const override;
+    wxRegionContain DoContainsRect(const wxRect& rect) const override;
 
-    virtual bool DoOffset(wxCoord x, wxCoord y) override;
-    virtual bool DoUnionWithRect(const wxRect& rect) override;
-    virtual bool DoUnionWithRegion(const wxRegion& region) override;
-    virtual bool DoIntersect(const wxRegion& region) override;
-    virtual bool DoSubtract(const wxRegion& region) override;
-    virtual bool DoXor(const wxRegion& region) override;
+    bool DoOffset(wxCoord x, wxCoord y) override;
+    bool DoUnionWithRect(const wxRect& rect) override;
+    bool DoUnionWithRegion(const wxRegion& region) override;
+    bool DoIntersect(const wxRegion& region) override;
+    bool DoSubtract(const wxRegion& region) override;
+    bool DoXor(const wxRegion& region) override;
 
     // common part of ctors for a rectangle region
     void InitRect(wxCoord x, wxCoord y, wxCoord w, wxCoord h);

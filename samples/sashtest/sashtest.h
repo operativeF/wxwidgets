@@ -21,7 +21,7 @@ class MyCanvas: public wxScrolledWindow
 {
   public:
     MyCanvas(wxWindow *parent, const wxPoint& pos, const wxSize& size);
-    virtual void OnDraw(wxDC& dc) override;
+    void OnDraw(wxDC& dc) override;
     void OnEvent(wxMouseEvent& event);
 
     wxDECLARE_EVENT_TABLE();

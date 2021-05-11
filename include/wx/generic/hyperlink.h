@@ -110,7 +110,7 @@ protected:
 
     // Returns the best size for the window, which is the size needed
     // to display the text label.
-    virtual wxSize DoGetBestClientSize() const override;
+    wxSize DoGetBestClientSize() const override;
 
     // creates a context menu with "Copy URL" menuitem
     virtual void DoContextMenu(const wxPoint &);

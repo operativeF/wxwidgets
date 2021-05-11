@@ -122,7 +122,7 @@ protected:
 // receive data via drag and drop.
 //
 // To use this class, you should derive from wxDropTarget and implement
-// OnData() pure virtual method. You may also wish to override OnDrop() if you
+// OnData() pure method. You may also wish to override OnDrop() if you
 // want to accept the data only inside some region of the window (this may
 // avoid having to copy the data to this application which happens only when
 // OnData() is called)
@@ -239,7 +239,7 @@ public:
 
     virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& text) = 0;
 
-    virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override;
+    wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override;
 
 private:
     wxDECLARE_NO_COPY_CLASS(wxTextDropTarget);
@@ -255,7 +255,7 @@ public:
     virtual bool OnDropFiles(wxCoord x, wxCoord y,
                              const wxArrayString& filenames) = 0;
 
-    virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override;
+    wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override;
 
 private:
     wxDECLARE_NO_COPY_CLASS(wxFileDropTarget);

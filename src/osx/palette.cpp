@@ -28,7 +28,7 @@ public:
     wxPaletteRefData(const wxPaletteRefData& data);
     virtual ~wxPaletteRefData();
 
-    virtual bool IsOk() const override { return m_count > 0; }
+    bool IsOk() const override { return m_count > 0; }
 
 protected:
     wxColour* m_palette;

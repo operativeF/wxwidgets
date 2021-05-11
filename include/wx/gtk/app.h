@@ -27,14 +27,14 @@ public:
      * (palette/visual/colorcube). under wxMSW, OnInitGui() does nothing by
      * default. when overriding this method, the code in it is likely to be
      * platform dependent, otherwise use OnInit(). */
-    virtual bool SetNativeTheme(const wxString& theme) override;
-    virtual bool OnInitGui() override;
+    bool SetNativeTheme(const wxString& theme) override;
+    bool OnInitGui() override;
 
     // override base class (pure) virtuals
-    virtual void WakeUpIdle() override;
+    void WakeUpIdle() override;
 
-    virtual bool Initialize(int& argc, wxChar **argv) override;
-    virtual void CleanUp() override;
+    bool Initialize(int& argc, wxChar **argv) override;
+    void CleanUp() override;
 
     virtual void OnAssertFailure(const wxChar *file,
                                  int line,

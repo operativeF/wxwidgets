@@ -658,7 +658,7 @@ private:
             { wxNodeBase::SetData(data); }                                  \
                                                                             \
     protected:                                                              \
-        virtual void DeleteData() override;                               \
+        void DeleteData() override;                               \
                                                                             \
         wxDECLARE_NO_COPY_CLASS(nodetype);                                  \
     };                                                                      \

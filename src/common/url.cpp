@@ -447,8 +447,8 @@ class wxURLModule : public wxModule
 public:
     wxURLModule();
 
-    virtual bool OnInit() override;
-    virtual void OnExit() override;
+    bool OnInit() override;
+    void OnExit() override;
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxURLModule);

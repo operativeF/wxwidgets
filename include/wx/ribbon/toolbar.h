@@ -143,7 +143,7 @@ public:
     virtual wxRect GetToolRect(int tool_id)const;
     virtual bool GetToolState(int tool_id)const;
 
-    virtual bool Realize() override;
+    bool Realize() override;
     virtual void SetRows(int nMin, int nMax = -1);
 
     virtual void SetToolClientData(int tool_id, wxObject* clientData);
@@ -151,17 +151,17 @@ public:
     virtual void SetToolHelpString(int tool_id, const wxString& helpString);
     virtual void SetToolNormalBitmap(int tool_id, const wxBitmap &bitmap);
 
-    virtual bool IsSizingContinuous() const override;
+    bool IsSizingContinuous() const override;
 
     virtual void EnableTool(int tool_id, bool enable = true);
     virtual void ToggleTool(int tool_id, bool checked);
 
     // Finds the best width and height given the parent's width and height
-    virtual wxSize GetBestSizeForParentSize(const wxSize& parentSize) const override;
+    wxSize GetBestSizeForParentSize(const wxSize& parentSize) const override;
 
 protected:
     friend class wxRibbonToolBarEvent;
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     void OnEraseBackground(wxEraseEvent& evt);
@@ -181,7 +181,7 @@ protected:
     void CommonInit(long style);
     void AppendGroup();
     wxRibbonToolBarToolGroup* InsertGroup(size_t pos);
-    virtual void UpdateWindowUI(long flags) override;
+    void UpdateWindowUI(long flags) override;
 
     static wxBitmap MakeDisabledBitmap(const wxBitmap& original);
 

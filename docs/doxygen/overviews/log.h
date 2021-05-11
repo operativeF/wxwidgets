@@ -254,7 +254,7 @@ boxes.
 
 To use your custom log target you may either call wxLog::SetActiveTarget() with
 your custom log object or create a wxAppTraits-derived class and override
-wxAppTraits::CreateLogTarget() virtual method in it and also override wxApp::CreateTraits()
+wxAppTraits::CreateLogTarget() method in it and also override wxApp::CreateTraits()
 to return an instance of your custom traits object. Notice that in the latter
 case you should be prepared for logging messages early during the program
 startup and also during program shutdown so you shouldn't rely on existence of

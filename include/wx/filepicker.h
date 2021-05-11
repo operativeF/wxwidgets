@@ -50,7 +50,7 @@ public:
     void SetPath(const wxString &p) { m_path = p; }
 
     // default copy ctor, assignment operator and dtor are ok
-    virtual wxEvent *Clone() const override { return new wxFileDirPickerEvent(*this); }
+    wxEvent *Clone() const override { return new wxFileDirPickerEvent(*this); }
 
 private:
     wxString m_path;
@@ -275,7 +275,7 @@ public:     // overrides
     wxEventType GetEventType() const override
         { return wxEVT_FILEPICKER_CHANGED; }
 
-    virtual void DoConnect( wxControl *sender, wxFileDirPickerCtrlBase *eventSink ) override
+    void DoConnect( wxControl *sender, wxFileDirPickerCtrlBase *eventSink ) override
     {
         sender->Bind(wxEVT_FILEPICKER_CHANGED,
             &wxFileDirPickerCtrlBase::OnFileDirChange, eventSink );
@@ -374,7 +374,7 @@ public:     // overrides
     wxEventType GetEventType() const override
         { return wxEVT_DIRPICKER_CHANGED; }
 
-    virtual void DoConnect( wxControl *sender, wxFileDirPickerCtrlBase *eventSink ) override
+    void DoConnect( wxControl *sender, wxFileDirPickerCtrlBase *eventSink ) override
     {
         sender->Bind( wxEVT_DIRPICKER_CHANGED,
             &wxFileDirPickerCtrlBase::OnFileDirChange, eventSink );

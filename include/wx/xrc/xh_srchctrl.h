@@ -19,8 +19,8 @@ class WXDLLIMPEXP_XRC wxSearchCtrlXmlHandler : public wxXmlResourceHandler
 public:
     wxSearchCtrlXmlHandler();
 
-    virtual wxObject *DoCreateResource() override;
-    virtual bool CanHandle(wxXmlNode *node) override;
+    wxObject *DoCreateResource() override;
+    bool CanHandle(wxXmlNode *node) override;
 
     wxDECLARE_DYNAMIC_CLASS(wxSearchCtrlXmlHandler);
 };

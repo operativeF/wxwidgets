@@ -61,7 +61,7 @@ public:
     // this one is called on application startup and is a good place for the app
     // initialization (doing it here and not in the ctor allows to have an error
     // return: if OnInit() returns false, the application terminates)
-    virtual bool OnInit() override;
+    bool OnInit() override;
 };
 
 // FontPanel contains controls allowing to specify the font properties
@@ -152,7 +152,7 @@ public:
     void OnPaint( wxPaintEvent &event );
 
 protected:
-    virtual wxSize DoGetBestClientSize() const override
+    wxSize DoGetBestClientSize() const override
     {
         return wxSize(80*GetCharWidth(), 15*GetCharHeight());
     }
@@ -611,7 +611,7 @@ public:
         { return m_facenames; }
 
 protected:
-    virtual bool OnFacename(const wxString& facename) override
+    bool OnFacename(const wxString& facename) override
     {
         m_facenames.Add(facename);
         return true;

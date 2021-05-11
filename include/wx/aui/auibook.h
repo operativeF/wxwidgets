@@ -202,7 +202,7 @@ public:
 
 protected:
     // choose the default border for this window
-    virtual wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     void OnPaint(wxPaintEvent& evt);
     void OnEraseBackground(wxEraseEvent& evt);
@@ -288,8 +288,8 @@ public:
     bool DeletePage(size_t page) override;
     bool RemovePage(size_t page) override;
 
-    virtual size_t GetPageCount() const override;
-    virtual wxWindow* GetPage(size_t pageIdx) const override;
+    size_t GetPageCount() const override;
+    wxWindow* GetPage(size_t pageIdx) const override;
     int GetPageIndex(wxWindow* pageWnd) const;
 
     bool SetPageText(size_t page, const wxString& text) override;
@@ -318,7 +318,7 @@ public:
     void SetMeasuringFont(const wxFont& font);
 
     // Sets the tab font
-    virtual bool SetFont(const wxFont& font) override;
+    bool SetFont(const wxFont& font) override;
 
     // Gets the tab control height
     int GetTabCtrlHeight() const;
@@ -330,28 +330,28 @@ public:
     bool ShowWindowMenu();
 
     // we do have multiple pages
-    virtual bool HasMultiplePages() const override { return true; }
+    bool HasMultiplePages() const override { return true; }
 
     // we don't want focus for ourselves
     // virtual bool AcceptsFocus() const { return false; }
 
     //wxBookCtrlBase functions
 
-    virtual void SetPageSize (const wxSize &size) override;
-    virtual int  HitTest (const wxPoint &pt, long *flags=NULL) const override;
+    void SetPageSize (const wxSize &size) override;
+    int  HitTest (const wxPoint &pt, long *flags=NULL) const override;
 
-    virtual int GetPageImage(size_t n) const override;
-    virtual bool SetPageImage(size_t n, int imageId) override;
+    int GetPageImage(size_t n) const override;
+    bool SetPageImage(size_t n, int imageId) override;
 
-    virtual int ChangeSelection(size_t n) override;
+    int ChangeSelection(size_t n) override;
 
     virtual bool AddPage(wxWindow *page, const wxString &text, bool select,
                          int imageId) override;
-    virtual bool DeleteAllPages() override;
+    bool DeleteAllPages() override;
     virtual bool InsertPage(size_t index, wxWindow *page, const wxString &text,
                             bool select, int imageId) override;
 
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
 
     wxAuiTabCtrl* GetTabCtrlFromPoint(const wxPoint& pt);
     wxAuiTabCtrl* GetActiveTabCtrl();
@@ -362,10 +362,10 @@ protected:
     void Init();
 
     // choose the default border for this window
-    virtual wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     // Redo sizing after thawing
-    virtual void DoThaw() override;
+    void DoThaw() override;
 
     // these can be overridden
 
@@ -377,7 +377,7 @@ protected:
     virtual wxSize CalculateNewSplitSize();
 
     // remove the page and return a pointer to it
-    virtual wxWindow *DoRemovePage(size_t WXUNUSED(page)) override { return NULL; }
+    wxWindow *DoRemovePage(size_t WXUNUSED(page)) override { return NULL; }
 
     //A general selection function
     virtual int DoModifySelection(size_t n, bool events);

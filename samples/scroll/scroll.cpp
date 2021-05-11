@@ -289,7 +289,7 @@ public:
 
     // override the base class function so that when this window is scrolled,
     // the labels are scrolled in sync
-    virtual void ScrollWindow(int dx, int dy, const wxRect *rect) override
+    void ScrollWindow(int dx, int dy, const wxRect *rect) override
     {
         wxPanel::ScrollWindow( dx, dy, rect );
         m_colLabels->ScrollWindow( dx, 0, rect );
@@ -397,7 +397,7 @@ public:
 protected:
     // scrolled windows which use scroll target different from the window
     // itself must override this virtual method
-    virtual wxSize GetSizeAvailableForScrollTarget(const wxSize& size) override
+    wxSize GetSizeAvailableForScrollTarget(const wxSize& size) override
     {
         // decrease the total size by the size of the non-scrollable parts
         // above/to the left of the canvas
@@ -468,7 +468,7 @@ public:
         DoSyncIfNecessary();
     }
 
-    virtual void ScrollWindow(int dx, int dy, const wxRect *rect = NULL) override
+    void ScrollWindow(int dx, int dy, const wxRect *rect = NULL) override
     {
         wxScrolled<wxWindow>::ScrollWindow(dx, dy, rect);
 
@@ -518,7 +518,7 @@ public:
         SetScrollbars(0, m_hLine, 0, m_nLines + 1, 0, 0, true /* no refresh */);
     }
 
-    virtual void OnDraw(wxDC& dc) override;
+    void OnDraw(wxDC& dc) override;
 };
 
 // this class does "smart" redrawing - only redraws the lines which must be
@@ -537,7 +537,7 @@ public:
         SetVirtualSize( wxDefaultCoord, ( m_nLines + 1 ) * m_hLine );
     }
 
-    virtual void OnDraw(wxDC& dc) override;
+    void OnDraw(wxDC& dc) override;
 };
 
 // ----------------------------------------------------------------------------
@@ -634,7 +634,7 @@ private:
 class MyApp : public wxApp
 {
 public:
-    virtual bool OnInit() override;
+    bool OnInit() override;
 };
 
 

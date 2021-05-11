@@ -50,37 +50,37 @@ public:
                 wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
 
     // accessors: get the font characteristics
-    virtual int GetPointSize() const override;
-    virtual double GetFractionalPointSize() const override;
-    virtual wxSize GetPixelSize() const override;
-    virtual wxFontStyle GetStyle() const override;
-    virtual int GetNumericWeight() const override;
-    virtual bool GetUnderlined() const override;
-    virtual wxString GetFaceName() const override;
-    virtual wxFontEncoding GetEncoding() const override;
-    virtual const wxNativeFontInfo *GetNativeFontInfo() const override;
-    virtual bool GetStrikethrough() const override;
+    int GetPointSize() const override;
+    double GetFractionalPointSize() const override;
+    wxSize GetPixelSize() const override;
+    wxFontStyle GetStyle() const override;
+    int GetNumericWeight() const override;
+    bool GetUnderlined() const override;
+    wxString GetFaceName() const override;
+    wxFontEncoding GetEncoding() const override;
+    const wxNativeFontInfo *GetNativeFontInfo() const override;
+    bool GetStrikethrough() const override;
 
     // change the font characteristics
-    virtual void SetFractionalPointSize(double pointSize) override;
-    virtual void SetPixelSize(const wxSize& pixelSize) override;
-    virtual void SetFamily( wxFontFamily family ) override;
-    virtual void SetStyle( wxFontStyle style ) override;
-    virtual void SetNumericWeight(int weight) override;
-    virtual bool SetFaceName(const wxString& facename) override;
-    virtual void SetUnderlined( bool underlined ) override;
-    virtual void SetStrikethrough(bool strikethrough) override;
-    virtual void SetEncoding(wxFontEncoding encoding) override;
+    void SetFractionalPointSize(double pointSize) override;
+    void SetPixelSize(const wxSize& pixelSize) override;
+    void SetFamily( wxFontFamily family ) override;
+    void SetStyle( wxFontStyle style ) override;
+    void SetNumericWeight(int weight) override;
+    bool SetFaceName(const wxString& facename) override;
+    void SetUnderlined( bool underlined ) override;
+    void SetStrikethrough(bool strikethrough) override;
+    void SetEncoding(wxFontEncoding encoding) override;
 
     wxDECLARE_COMMON_FONT_METHODS();
 
     virtual QFont GetHandle() const;
 
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const override;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
-    virtual wxFontFamily DoGetFamily() const override;
-    virtual void DoSetNativeFontInfo(const wxNativeFontInfo& info) override;
+    wxGDIRefData *CreateGDIRefData() const override;
+    wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
+    wxFontFamily DoGetFamily() const override;
+    void DoSetNativeFontInfo(const wxNativeFontInfo& info) override;
 
     wxDECLARE_DYNAMIC_CLASS(wxFont);
 

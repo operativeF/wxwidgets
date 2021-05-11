@@ -35,7 +35,7 @@ public:
               int WXUNUSED(view_y1), int WXUNUSED(view_y2),
               wxHtmlRenderingInfo& WXUNUSED(info)) override {}
 
-    virtual const wxHtmlCell* Find(int condition, const void* param) const override
+    const wxHtmlCell* Find(int condition, const void* param) const override
     {
         if ((condition == wxHTML_COND_ISANCHOR) &&
             (m_AnchorName == (*((const wxString*)param))))

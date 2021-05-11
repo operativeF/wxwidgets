@@ -44,15 +44,15 @@ public:
     // --------------
 
 protected:
-    virtual bool GTKWidgetNeedsMnemonic() const override;
-    virtual void GTKWidgetDoSetMnemonic(GtkWidget* w) override;
+    bool GTKWidgetNeedsMnemonic() const override;
+    void GTKWidgetDoSetMnemonic(GtkWidget* w) override;
 
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
 
-    virtual wxString WXGetVisibleLabel() const override;
-    virtual void WXSetVisibleLabel(const wxString& str) override;
+    wxString WXGetVisibleLabel() const override;
+    void WXSetVisibleLabel(const wxString& str) override;
 #if wxUSE_MARKUP
-    virtual bool DoSetLabelMarkup(const wxString& markup) override;
+    bool DoSetLabelMarkup(const wxString& markup) override;
 #endif // wxUSE_MARKUP
 
 private:

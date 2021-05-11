@@ -49,9 +49,9 @@ public:
     StatBmpWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist)
         : WidgetsPage(book, imaglist, statbmp_xpm) {}
 
-    virtual void CreateContent() override;
-    virtual wxWindow *GetWidget() const override { return m_statbmp; }
-    virtual void RecreateWidget() override;
+    void CreateContent() override;
+    wxWindow *GetWidget() const override { return m_statbmp; }
+    void RecreateWidget() override;
 
 private:
     void OnFileChange(wxFileDirPickerEvent &WXUNUSED(ev)) { RecreateWidget(); }

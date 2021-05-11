@@ -51,31 +51,31 @@ public:
   virtual ~wxIniConfig();
 
   // implement inherited pure virtual functions
-  virtual void SetPath(const wxString& strPath) override;
-  virtual const wxString& GetPath() const override;
+  void SetPath(const wxString& strPath) override;
+  const wxString& GetPath() const override;
 
-  virtual bool GetFirstGroup(wxString& str, long& lIndex) const override;
-  virtual bool GetNextGroup (wxString& str, long& lIndex) const override;
-  virtual bool GetFirstEntry(wxString& str, long& lIndex) const override;
-  virtual bool GetNextEntry (wxString& str, long& lIndex) const override;
+  bool GetFirstGroup(wxString& str, long& lIndex) const override;
+  bool GetNextGroup (wxString& str, long& lIndex) const override;
+  bool GetFirstEntry(wxString& str, long& lIndex) const override;
+  bool GetNextEntry (wxString& str, long& lIndex) const override;
 
-  virtual size_t GetNumberOfEntries(bool bRecursive = false) const override;
-  virtual size_t GetNumberOfGroups(bool bRecursive = false) const override;
+  size_t GetNumberOfEntries(bool bRecursive = false) const override;
+  size_t GetNumberOfGroups(bool bRecursive = false) const override;
 
-  virtual bool HasGroup(const wxString& strName) const override;
-  virtual bool HasEntry(const wxString& strName) const override;
+  bool HasGroup(const wxString& strName) const override;
+  bool HasEntry(const wxString& strName) const override;
 
   // return true if the current group is empty
   bool IsEmpty() const;
 
-  virtual bool Flush(bool bCurrentOnly = false) override;
+  bool Flush(bool bCurrentOnly = false) override;
 
-  virtual bool RenameEntry(const wxString& oldName, const wxString& newName) override;
-  virtual bool RenameGroup(const wxString& oldName, const wxString& newName) override;
+  bool RenameEntry(const wxString& oldName, const wxString& newName) override;
+  bool RenameGroup(const wxString& oldName, const wxString& newName) override;
 
-  virtual bool DeleteEntry(const wxString& Key, bool bGroupIfEmptyAlso = true) override;
-  virtual bool DeleteGroup(const wxString& szKey) override;
-  virtual bool DeleteAll() override;
+  bool DeleteEntry(const wxString& Key, bool bGroupIfEmptyAlso = true) override;
+  bool DeleteGroup(const wxString& szKey) override;
+  bool DeleteAll() override;
 
 protected:
   // read/write

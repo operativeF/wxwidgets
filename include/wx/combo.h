@@ -205,9 +205,9 @@ public:
     wxWindow *GetButton() const { return m_btn; }
 
     // forward these methods to all subcontrols
-    virtual bool Enable(bool enable = true) override;
-    virtual bool Show(bool show = true) override;
-    virtual bool SetFont(const wxFont& font) override;
+    bool Enable(bool enable = true) override;
+    bool Show(bool show = true) override;
+    bool SetFont(const wxFont& font) override;
 
     //
     // wxTextEntry methods
@@ -215,49 +215,49 @@ public:
     // NB: We basically need to override all of them because there is
     //     no guarantee how platform-specific wxTextEntry is implemented.
     //
-    virtual void SetValue(const wxString& value) override
+    void SetValue(const wxString& value) override
         { wxTextEntryBase::SetValue(value); }
-    virtual void ChangeValue(const wxString& value) override
+    void ChangeValue(const wxString& value) override
         { wxTextEntryBase::ChangeValue(value); }
 
-    virtual void WriteText(const wxString& text) override;
-    virtual void AppendText(const wxString& text) override
+    void WriteText(const wxString& text) override;
+    void AppendText(const wxString& text) override
         { wxTextEntryBase::AppendText(text); }
 
-    virtual wxString GetValue() const override
+    wxString GetValue() const override
         { return wxTextEntryBase::GetValue(); }
 
-    virtual wxString GetRange(long from, long to) const override
+    wxString GetRange(long from, long to) const override
         { return wxTextEntryBase::GetRange(from, to); }
 
     // Replace() and DoSetValue() need to be fully re-implemented since
     // EventSuppressor utility class does not work with the way
     // wxComboCtrl is implemented.
-    virtual void Replace(long from, long to, const wxString& value) override;
+    void Replace(long from, long to, const wxString& value) override;
 
-    virtual void Remove(long from, long to) override;
+    void Remove(long from, long to) override;
 
-    virtual void Copy() override;
-    virtual void Cut() override;
-    virtual void Paste() override;
+    void Copy() override;
+    void Cut() override;
+    void Paste() override;
 
-    virtual void Undo() override;
-    virtual void Redo() override;
-    virtual bool CanUndo() const override;
-    virtual bool CanRedo() const override;
+    void Undo() override;
+    void Redo() override;
+    bool CanUndo() const override;
+    bool CanRedo() const override;
 
-    virtual void SetInsertionPoint(long pos) override;
-    virtual long GetInsertionPoint() const override;
-    virtual long GetLastPosition() const override;
+    void SetInsertionPoint(long pos) override;
+    long GetInsertionPoint() const override;
+    long GetLastPosition() const override;
 
-    virtual void SetSelection(long from, long to) override;
-    virtual void GetSelection(long *from, long *to) const override;
+    void SetSelection(long from, long to) override;
+    void GetSelection(long *from, long *to) const override;
 
-    virtual bool IsEditable() const override;
-    virtual void SetEditable(bool editable) override;
+    bool IsEditable() const override;
+    void SetEditable(bool editable) override;
 
-    virtual bool SetHint(const wxString& hint) override;
-    virtual wxString GetHint() const override;
+    bool SetHint(const wxString& hint) override;
+    wxString GetHint() const override;
 
     // This method sets the text without affecting list selection
     // (ie. wxComboPopup::SetStringValue doesn't get called).
@@ -468,12 +468,12 @@ public:
     void SetCtrlMainWnd( wxWindow* wnd ) { m_mainCtrlWnd = wnd; }
 
     // This is public so we can access it from wxComboCtrlTextCtrl
-    virtual wxWindow *GetMainWindowOfCompositeControl() override
+    wxWindow *GetMainWindowOfCompositeControl() override
         { return m_mainCtrlWnd; }
 
     // also set the embedded wxTextCtrl colours
-    virtual bool SetForegroundColour(const wxColour& colour) override;
-    virtual bool SetBackgroundColour(const wxColour& colour) override;
+    bool SetForegroundColour(const wxColour& colour) override;
+    bool SetBackgroundColour(const wxColour& colour) override;
 
 protected:
 
@@ -547,8 +547,8 @@ protected:
     // override the base class virtuals involved in geometry calculations
     // The common version only sets a default width, so the derived classes
     // should override it and set the height and change the width as needed.
-    virtual wxSize DoGetBestSize() const override;
-    virtual wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
+    wxSize DoGetBestSize() const override;
+    wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
 
     // NULL popup can be used to indicate default in a derived class
     virtual void DoSetPopupControl(wxComboPopup* popup);
@@ -599,17 +599,17 @@ protected:
     virtual bool AnimateShow( const wxRect& rect, int flags );
 
 #if wxUSE_TOOLTIPS
-    virtual void DoSetToolTip( wxToolTip *tip ) override;
+    void DoSetToolTip( wxToolTip *tip ) override;
 #endif
 
     // protected wxTextEntry methods
-    virtual void DoSetValue(const wxString& value, int flags) override;
-    virtual wxString DoGetValue() const override;
-    virtual wxWindow *GetEditableWindow() override { return this; }
+    void DoSetValue(const wxString& value, int flags) override;
+    wxString DoGetValue() const override;
+    wxWindow *GetEditableWindow() override { return this; }
 
     // margins functions
-    virtual bool DoSetMargins(const wxPoint& pt) override;
-    virtual wxPoint DoGetMargins() const override;
+    bool DoSetMargins(const wxPoint& pt) override;
+    wxPoint DoGetMargins() const override;
 
     // This is used when m_text is hidden (readonly).
     wxString                m_valueString;

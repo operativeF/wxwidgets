@@ -59,8 +59,8 @@ class wxTLWHiddenParentModule : public wxModule
 {
 public:
     // module init/finalize
-    virtual bool OnInit() override;
-    virtual void OnExit() override;
+    bool OnInit() override;
+    void OnExit() override;
 
     // get the hidden window (creates on demand)
     static HWND GetHWND();

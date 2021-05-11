@@ -69,9 +69,9 @@ public:
     virtual const void *Request(const wxString& item,
                                 size_t *size = NULL,
                                 wxIPCFormat format = wxIPC_TEXT) override;
-    virtual bool StartAdvise(const wxString& item) override;
-    virtual bool StopAdvise(const wxString& item) override;
-    virtual bool Disconnect() override;
+    bool StartAdvise(const wxString& item) override;
+    bool StopAdvise(const wxString& item) override;
+    bool Disconnect() override;
 
     // Will be used in the future to enable the compression but does nothing
     // for now.
@@ -79,7 +79,7 @@ public:
 
 
 protected:
-    virtual bool DoExecute(const void *data, size_t size, wxIPCFormat format) override;
+    bool DoExecute(const void *data, size_t size, wxIPCFormat format) override;
     virtual bool DoPoke(const wxString& item, const void *data, size_t size,
                         wxIPCFormat format) override;
     virtual bool DoAdvise(const wxString& item, const void *data, size_t size,
@@ -119,9 +119,9 @@ public:
     virtual ~wxTCPServer();
 
     // Returns false on error (e.g. port number is already in use)
-    virtual bool Create(const wxString& serverName) override;
+    bool Create(const wxString& serverName) override;
 
-    virtual wxConnectionBase *OnAcceptConnection(const wxString& topic) override;
+    wxConnectionBase *OnAcceptConnection(const wxString& topic) override;
 
 protected:
     wxSocketServer *m_server;
@@ -140,7 +140,7 @@ class WXDLLIMPEXP_NET wxTCPClient : public wxClientBase
 public:
     wxTCPClient();
 
-    virtual bool ValidHost(const wxString& host) override;
+    bool ValidHost(const wxString& host) override;
 
     // Call this to make a connection. Returns NULL if cannot.
     virtual wxConnectionBase *MakeConnection(const wxString& host,
@@ -148,7 +148,7 @@ public:
                                              const wxString& topic) override;
 
     // Callbacks to CLIENT - override at will
-    virtual wxConnectionBase *OnMakeConnection() override;
+    wxConnectionBase *OnMakeConnection() override;
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxTCPClient);

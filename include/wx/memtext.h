@@ -27,17 +27,17 @@ public:
     wxMemoryText(const wxString& name) : wxTextBuffer(name) { }
 
 protected:
-    virtual bool OnExists() const override
+    bool OnExists() const override
         { return false; }
 
     virtual bool OnOpen(const wxString & WXUNUSED(strBufferName),
                         wxTextBufferOpenMode WXUNUSED(OpenMode)) override
         { return true; }
 
-    virtual bool OnClose() override
+    bool OnClose() override
         { return true; }
 
-    virtual bool OnRead(const wxMBConv& WXUNUSED(conv)) override
+    bool OnRead(const wxMBConv& WXUNUSED(conv)) override
         { return true; }
 
     virtual bool OnWrite(wxTextFileType WXUNUSED(typeNew),

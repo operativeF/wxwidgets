@@ -105,8 +105,8 @@ public:
 
     // Title and caption are the same thing, GetCaption() mostly exists just
     // for compatibility.
-    virtual void SetTitle(const wxString& title) override { m_caption = title; }
-    virtual wxString GetTitle() const override { return m_caption; }
+    void SetTitle(const wxString& title) override { m_caption = title; }
+    wxString GetTitle() const override { return m_caption; }
 
 
     virtual void SetMessage(const wxString& message)

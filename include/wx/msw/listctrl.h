@@ -113,7 +113,7 @@ public:
     bool SetBackgroundColour(const wxColour& col) override;
 
     // Header attributes
-    virtual bool SetHeaderAttr(const wxItemAttr& attr) override;
+    bool SetHeaderAttr(const wxItemAttr& attr) override;
 
     // Gets information about this column
     bool GetColumn(int col, wxListItem& item) const override;
@@ -220,10 +220,10 @@ public:
     wxFont GetItemFont( long item ) const;
 
     // Checkbox state of an item
-    virtual bool HasCheckBoxes() const override;
-    virtual bool EnableCheckBoxes(bool enable = true) override;
-    virtual bool IsItemChecked(long item) const override;
-    virtual void CheckItem(long item, bool check) override;
+    bool HasCheckBoxes() const override;
+    bool EnableCheckBoxes(bool enable = true) override;
+    bool IsItemChecked(long item) const override;
+    void CheckItem(long item, bool check) override;
 
     // Gets the number of selected items in the list control
     int GetSelectedItemCount() const;
@@ -345,9 +345,9 @@ public:
     bool SortItems(wxListCtrlCompare fn, wxIntPtr data);
 
     // IMPLEMENTATION
-    virtual bool MSWCommand(WXUINT param, WXWORD id) override;
-    virtual bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
-    virtual bool MSWShouldPreProcessMessage(WXMSG* msg) override;
+    bool MSWCommand(WXUINT param, WXWORD id) override;
+    bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
+    bool MSWShouldPreProcessMessage(WXMSG* msg) override;
 
 #if WXWIN_COMPATIBILITY_3_0
     // bring the control in sync with current m_windowStyle value
@@ -363,12 +363,12 @@ public:
     // Override SetDoubleBuffered() to do nothing, its implementation in the
     // base class is incompatible with the double buffering done by this native
     // control.
-    virtual bool IsDoubleBuffered() const override;
-    virtual void SetDoubleBuffered(bool on) override;
+    bool IsDoubleBuffered() const override;
+    void SetDoubleBuffered(bool on) override;
 
-    virtual bool ShouldInheritColours() const override { return false; }
+    bool ShouldInheritColours() const override { return false; }
 
-    virtual wxVisualAttributes GetDefaultAttributes() const override
+    wxVisualAttributes GetDefaultAttributes() const override
     {
         return GetClassDefaultAttributes(GetWindowVariant());
     }
@@ -377,7 +377,7 @@ public:
     GetClassDefaultAttributes(wxWindowVariant variant = wxWINDOW_VARIANT_NORMAL);
 
     // convert our styles to Windows
-    virtual WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
 
     // special Windows message handling
     virtual WXLRESULT MSWWindowProc(WXUINT nMsg,
@@ -388,18 +388,18 @@ protected:
     // common part of all ctors
     void Init();
 
-    virtual bool MSWShouldSetDefaultFont() const override { return false; }
+    bool MSWShouldSetDefaultFont() const override { return false; }
 
     // Implement constrained best size calculation.
-    virtual int DoGetBestClientHeight(int width) const override
+    int DoGetBestClientHeight(int width) const override
         { return MSWGetBestViewRect(width, -1).y; }
-    virtual int DoGetBestClientWidth(int height) const override
+    int DoGetBestClientWidth(int height) const override
         { return MSWGetBestViewRect(-1, height).x; }
 #if wxUSE_TOOLTIPS
-    virtual void DoSetToolTip(wxToolTip *tip) override;
+    void DoSetToolTip(wxToolTip *tip) override;
 #endif // wxUSE_TOOLTIPS
 
-    virtual void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
+    void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
 
     void OnDPIChanged(wxDPIChangedEvent& event);
 

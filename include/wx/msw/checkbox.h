@@ -39,36 +39,36 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxCheckBoxNameStr));
 
-    virtual void SetValue(bool value) override;
-    virtual bool GetValue() const override;
+    void SetValue(bool value) override;
+    bool GetValue() const override;
 
     // override some base class virtuals
-    virtual void SetLabel(const wxString& label) override;
+    void SetLabel(const wxString& label) override;
 
-    virtual void SetTransparentPartColour(const wxColour& col) override
+    void SetTransparentPartColour(const wxColour& col) override
     {
         SetBackgroundColour(col);
     }
 
-    virtual bool MSWCommand(WXUINT param, WXWORD id) override;
-    virtual void Command(wxCommandEvent& event) override;
+    bool MSWCommand(WXUINT param, WXWORD id) override;
+    void Command(wxCommandEvent& event) override;
 
     // returns true if the platform should explicitly apply a theme border
-    virtual bool CanApplyThemeBorder() const override { return false; }
+    bool CanApplyThemeBorder() const override { return false; }
 
     // implementation only from now on
-    virtual WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
+    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
 
 protected:
-    virtual wxSize DoGetBestClientSize() const override;
+    wxSize DoGetBestClientSize() const override;
 
-    virtual void DoSet3StateValue(wxCheckBoxState value) override;
-    virtual wxCheckBoxState DoGet3StateValue() const override;
+    void DoSet3StateValue(wxCheckBoxState value) override;
+    wxCheckBoxState DoGet3StateValue() const override;
 
     // Implement wxMSWOwnerDrawnButtonBase methods.
-    virtual int MSWGetButtonStyle() const override;
-    virtual void MSWOnButtonResetOwnerDrawn() override;
-    virtual int MSWGetButtonCheckedFlag() const override;
+    int MSWGetButtonStyle() const override;
+    void MSWOnButtonResetOwnerDrawn() override;
+    int MSWGetButtonCheckedFlag() const override;
     virtual void
         MSWDrawButtonBitmap(wxDC& dc, const wxRect& rect, int flags) override;
 

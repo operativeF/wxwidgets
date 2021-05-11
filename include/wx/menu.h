@@ -547,17 +547,17 @@ public:
     virtual void Detach();
 
     // need to override these ones to avoid virtual function hiding
-    virtual bool Enable(bool enable = true) override { return wxWindow::Enable(enable); }
-    virtual void SetLabel(const wxString& s) override { wxWindow::SetLabel(s); }
-    virtual wxString GetLabel() const override { return wxWindow::GetLabel(); }
+    bool Enable(bool enable = true) override { return wxWindow::Enable(enable); }
+    void SetLabel(const wxString& s) override { wxWindow::SetLabel(s); }
+    wxString GetLabel() const override { return wxWindow::GetLabel(); }
 
     // don't want menu bars to accept the focus by tabbing to them
-    virtual bool AcceptsFocusFromKeyboard() const override { return false; }
+    bool AcceptsFocusFromKeyboard() const override { return false; }
 
     // update all menu item states in all menus
     virtual void UpdateMenus();
 
-    virtual bool CanBeOutsideClientArea() const override { return true; }
+    bool CanBeOutsideClientArea() const override { return true; }
 
 #if wxUSE_EXTENDED_RTTI
     // XTI helpers:

@@ -264,7 +264,7 @@ public:
     }
 
 protected:
-    virtual void OnDismiss() override
+    void OnDismiss() override
     {
         Destroy();
     }

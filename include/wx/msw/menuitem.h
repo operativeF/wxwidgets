@@ -43,11 +43,11 @@ public:
     virtual ~wxMenuItem();
 
     // override base class virtuals
-    virtual void SetItemLabel(const wxString& strName) override;
+    void SetItemLabel(const wxString& strName) override;
 
-    virtual void Enable(bool bDoEnable = true) override;
-    virtual void Check(bool bDoCheck = true) override;
-    virtual bool IsChecked() const override;
+    void Enable(bool bDoEnable = true) override;
+    void Check(bool bDoCheck = true) override;
+    bool IsChecked() const override;
 
     // unfortunately needed to resolve ambiguity between
     // wxMenuItemBase::IsCheckable() and wxOwnerDrawn::IsCheckable()
@@ -101,13 +101,13 @@ public:
     int MeasureAccelWidth() const;
 
     // override wxOwnerDrawn base class virtuals
-    virtual wxString GetName() const override;
-    virtual bool OnMeasureItem(size_t *pwidth, size_t *pheight) override;
-    virtual bool OnDrawItem(wxDC& dc, const wxRect& rc, wxODAction act, wxODStatus stat) override;
+    wxString GetName() const override;
+    bool OnMeasureItem(size_t *pwidth, size_t *pheight) override;
+    bool OnDrawItem(wxDC& dc, const wxRect& rc, wxODAction act, wxODStatus stat) override;
 
 protected:
-    virtual void GetFontToUse(wxFont& font) const override;
-    virtual void GetColourToUse(wxODStatus stat, wxColour& colText, wxColour& colBack) const override;
+    void GetFontToUse(wxFont& font) const override;
+    void GetColourToUse(wxODStatus stat, wxColour& colText, wxColour& colBack) const override;
 
 private:
     // helper function for draw std menu check mark

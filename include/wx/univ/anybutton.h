@@ -32,19 +32,19 @@ public:
                                const wxString& strArg = wxEmptyString) override;
 
     static wxInputHandler *GetStdInputHandler(wxInputHandler *handlerDef);
-    virtual wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
+    wxInputHandler *DoGetStdInputHandler(wxInputHandler *handlerDef) override
     {
         return GetStdInputHandler(handlerDef);
     }
 
 protected:
     // choose the default border for this window
-    virtual wxBorder GetDefaultBorder() const override { return wxBORDER_STATIC; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_STATIC; }
 
-    virtual wxSize DoGetBestClientSize() const override;
+    wxSize DoGetBestClientSize() const override;
 
-    virtual bool DoDrawBackground(wxDC& dc) override;
-    virtual void DoDraw(wxControlRenderer *renderer) override;
+    bool DoDrawBackground(wxDC& dc) override;
+    void DoDraw(wxControlRenderer *renderer) override;
     // current state
     bool m_isPressed,
          m_isDefault;
@@ -77,7 +77,7 @@ public:
                                  const wxMouseEvent& event) override;
     virtual bool HandleFocus(wxInputConsumer *consumer,
                              const wxFocusEvent& event) override;
-    virtual bool HandleActivation(wxInputConsumer *consumer, bool activated) override;
+    bool HandleActivation(wxInputConsumer *consumer, bool activated) override;
 
 private:
     // the window (button) which has capture or NULL and the flag telling if

@@ -40,21 +40,21 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxCheckBoxNameStr));
 
-    virtual void SetValue(bool value) override;
-    virtual bool GetValue() const override;
+    void SetValue(bool value) override;
+    bool GetValue() const override;
 
-    virtual bool MSWCommand(WXUINT param, WXWORD id) override;
-    virtual void Command(wxCommandEvent& event) override;
+    bool MSWCommand(WXUINT param, WXWORD id) override;
+    void Command(wxCommandEvent& event) override;
 
     // returns true if the platform should explicitly apply a theme border
-    virtual bool CanApplyThemeBorder() const override { return false; }
+    bool CanApplyThemeBorder() const override { return false; }
 
 protected:
-    virtual wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
+    wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
-    virtual WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
+    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
 
-    virtual bool MSWIsPushed() const override;
+    bool MSWIsPushed() const override;
 
     void Init();
 
@@ -100,7 +100,7 @@ public:
     wxDEPRECATED_INLINE( void SetLabel(const wxBitmap& bitmap),
        SetBitmapLabel(bitmap); )
     // prevent virtual function hiding
-    virtual void SetLabel(const wxString& label) override { wxToggleButton::SetLabel(label); }
+    void SetLabel(const wxString& label) override { wxToggleButton::SetLabel(label); }
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxBitmapToggleButton);

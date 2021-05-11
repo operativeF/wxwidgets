@@ -250,11 +250,11 @@ class NativeWidgetsPage : public WidgetsPage
 public:
     NativeWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_nativeWindow; }
-    virtual void RecreateWidget() override;
+    wxWindow *GetWidget() const override { return m_nativeWindow; }
+    void RecreateWidget() override;
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 private:
     void OnCheckExpand(wxCommandEvent& event);

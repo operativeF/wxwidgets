@@ -41,8 +41,8 @@ public:
 
     virtual wxWindow *GetPane() const = 0;
 
-    virtual wxString GetLabel() const override = 0;
-    virtual void SetLabel(const wxString& label) override = 0;
+    wxString GetLabel() const override = 0;
+    void SetLabel(const wxString& label) override = 0;
 
     virtual bool
     InformFirstDirection(int direction,
@@ -87,7 +87,7 @@ public:
 
 
     // default copy ctor, assignment operator and dtor are ok
-    virtual wxEvent *Clone() const override { return new wxCollapsiblePaneEvent(*this); }
+    wxEvent *Clone() const override { return new wxCollapsiblePaneEvent(*this); }
 
 private:
     bool m_bCollapsed;

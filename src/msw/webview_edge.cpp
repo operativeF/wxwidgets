@@ -991,12 +991,12 @@ public:
     {
     }
 
-    virtual bool OnInit() override
+    bool OnInit() override
     {
         return true;
     }
 
-    virtual void OnExit() override
+    void OnExit() override
     {
         wxWebViewEdgeImpl::Uninitialize();
     }

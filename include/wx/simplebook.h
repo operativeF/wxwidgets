@@ -108,19 +108,19 @@ public:
         return true;
     }
 
-    virtual int SetSelection(size_t n) override
+    int SetSelection(size_t n) override
     {
         return DoSetSelection(n, SetSelection_SendEvent);
     }
 
-    virtual int ChangeSelection(size_t n) override
+    int ChangeSelection(size_t n) override
     {
         return DoSetSelection(n);
     }
 
     // Neither labels nor images are supported but we still store the labels
     // just in case the user code attaches some importance to them.
-    virtual bool SetPageText(size_t n, const wxString& strText) override
+    bool SetPageText(size_t n, const wxString& strText) override
     {
         wxCHECK_MSG( n < GetPageCount(), false, wxS("Invalid page") );
 
@@ -129,25 +129,25 @@ public:
         return true;
     }
 
-    virtual wxString GetPageText(size_t n) const override
+    wxString GetPageText(size_t n) const override
     {
         wxCHECK_MSG( n < GetPageCount(), wxString(), wxS("Invalid page") );
 
         return m_pageTexts[n];
     }
 
-    virtual bool SetPageImage(size_t WXUNUSED(n), int WXUNUSED(imageId)) override
+    bool SetPageImage(size_t WXUNUSED(n), int WXUNUSED(imageId)) override
     {
         return false;
     }
 
-    virtual int GetPageImage(size_t WXUNUSED(n)) const override
+    int GetPageImage(size_t WXUNUSED(n)) const override
     {
         return NO_IMAGE;
     }
 
     // Override some wxWindow methods too.
-    virtual void SetFocus() override
+    void SetFocus() override
     {
         wxWindow* const page = GetCurrentPage();
         if ( page )
@@ -155,24 +155,24 @@ public:
     }
 
 protected:
-    virtual void UpdateSelectedPage(size_t WXUNUSED(newsel)) override
+    void UpdateSelectedPage(size_t WXUNUSED(newsel)) override
     {
         // Nothing to do here, but must be overridden to avoid the assert in
         // the base class version.
     }
 
-    virtual wxBookCtrlEvent* CreatePageChangingEvent() const override
+    wxBookCtrlEvent* CreatePageChangingEvent() const override
     {
         return new wxBookCtrlEvent(wxEVT_BOOKCTRL_PAGE_CHANGING,
                                    GetId());
     }
 
-    virtual void MakeChangedEvent(wxBookCtrlEvent& event) override
+    void MakeChangedEvent(wxBookCtrlEvent& event) override
     {
         event.SetEventType(wxEVT_BOOKCTRL_PAGE_CHANGED);
     }
 
-    virtual wxWindow *DoRemovePage(size_t page) override
+    wxWindow *DoRemovePage(size_t page) override
     {
         wxWindow* const win = wxBookCtrlBase::DoRemovePage(page);
         if ( win )
@@ -185,14 +185,14 @@ protected:
         return win;
     }
 
-    virtual void DoSize() override
+    void DoSize() override
     {
         wxWindow* const page = GetCurrentPage();
         if ( page )
             page->SetSize(GetPageRect());
     }
 
-    virtual void DoShowPage(wxWindow* page, bool show) override
+    void DoShowPage(wxWindow* page, bool show) override
     {
         if ( show )
             page->ShowWithEffect(m_showEffect, m_showTimeout);

@@ -54,7 +54,7 @@ public:
     virtual ~wxPropertyGridPage();
 
     // Deletes all properties on page.
-    virtual void Clear() override;
+    void Clear() override;
 
     // Reduces column sizes to minimum possible that contents are still
     // visibly (naturally some margin space will be applied as well).
@@ -110,7 +110,7 @@ public:
     virtual void OnShow();
 
     //  Refreshes given property on page.
-    virtual void RefreshProperty( wxPGProperty* p ) override;
+    void RefreshProperty( wxPGProperty* p ) override;
 
     // Sets splitter position on page.
     // Splitter position cannot exceed grid size, and therefore setting it
@@ -208,7 +208,7 @@ public:
     }
 
     // Deletes all all properties and all pages.
-    virtual void Clear() override;
+    void Clear() override;
 
     // Deletes all properties on given page.
     void ClearPage( int page );
@@ -310,7 +310,7 @@ public:
     // Similar to GetIterator, but instead returns wxPGVIterator instance,
     // which can be useful for forward-iterating through arbitrary property
     // containers.
-    virtual wxPGVIterator GetVIterator( int flags ) const override;
+    wxPGVIterator GetVIterator( int flags ) const override;
 
     // Returns currently selected page.
     wxPropertyGridPage* GetCurrentPage() const
@@ -340,7 +340,7 @@ public:
 
 protected:
     // Returns wxPropertyGridPageState of given page, current page's for -1.
-    virtual wxPropertyGridPageState* GetPageState( int page ) const override;
+    wxPropertyGridPageState* GetPageState( int page ) const override;
 
 public:
     // Returns number of managed pages.
@@ -504,23 +504,23 @@ protected:
     virtual wxPropertyGrid* CreatePropertyGrid() const;
 
 public:
-    virtual void RefreshProperty( wxPGProperty* p ) override;
+    void RefreshProperty( wxPGProperty* p ) override;
 
     //
     // Overridden functions - no documentation required.
     //
 
     void SetId( wxWindowID winid ) override;
-    virtual void SetExtraStyle ( long exStyle ) override;
-    virtual bool SetFont ( const wxFont& font ) override;
-    virtual void SetWindowStyleFlag ( long style ) override;
-    virtual bool Reparent( wxWindowBase *newParent ) override;
+    void SetExtraStyle ( long exStyle ) override;
+    bool SetFont ( const wxFont& font ) override;
+    void SetWindowStyleFlag ( long style ) override;
+    bool Reparent( wxWindowBase *newParent ) override;
 
 protected:
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
 
-    virtual void DoFreeze() override;
-    virtual void DoThaw() override;
+    void DoFreeze() override;
+    void DoThaw() override;
 
     //
     // Event handlers
@@ -587,10 +587,10 @@ protected:
 
     bool            m_showHeader;
 
-    virtual wxPGProperty* DoGetPropertyByName( const wxString& name ) const override;
+    wxPGProperty* DoGetPropertyByName( const wxString& name ) const override;
 
     // Select and displays a given page.
-    virtual bool DoSelectPage( int index ) override;
+    bool DoSelectPage( int index ) override;
 
     // Sets some members to defaults.
     void Init1();
@@ -602,7 +602,7 @@ protected:
     virtual WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle) const;
 #endif*/
 
-    virtual bool ProcessEvent( wxEvent& event ) override;
+    bool ProcessEvent( wxEvent& event ) override;
 
     // Recalculates new positions for components, according to the
     // given size.
@@ -621,8 +621,8 @@ protected:
     void SetDescribedProperty( wxPGProperty* p );
 
     // Reimplement these to handle "descboxheight" state item
-    virtual bool SetEditableStateItem( const wxString& name, wxVariant value ) override;
-    virtual wxVariant GetEditableStateItem( const wxString& name ) const override;
+    bool SetEditableStateItem( const wxString& name, wxVariant value ) override;
+    wxVariant GetEditableStateItem( const wxString& name ) const override;
 
     // Reconnect propgrid event handlers.
     void ReconnectEventHandlers(wxWindowID oldId, wxWindowID newId);

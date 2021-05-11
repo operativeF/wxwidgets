@@ -21,11 +21,11 @@ public:
                     long style = wxOK|wxCENTRE,
                     const wxPoint& pos = wxDefaultPosition);
 
-    virtual int ShowModal() override;
+    int ShowModal() override;
 
 #if wxOSX_USE_COCOA
-    virtual void ShowWindowModal() override;
-    virtual void ModalFinishedCallback(void* panel, int resultCode) override;
+    void ShowWindowModal() override;
+    void ModalFinishedCallback(void* panel, int resultCode) override;
 #endif
 
 protected:

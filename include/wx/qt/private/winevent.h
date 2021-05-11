@@ -71,7 +71,7 @@ public:
     {
     }
 
-    virtual Handler *GetHandler() const override
+    Handler *GetHandler() const override
     {
         // Only process the signal / event if the wxWindow is not destroyed
         if ( !wxWindow::QtRetrieveWindowPointer( this ) )
@@ -88,7 +88,7 @@ protected:
      * wxPowerEvent, wxScrollWinEvent, wxSysColourChangedEvent */
 
     //wxActivateEvent
-    virtual void changeEvent ( QEvent * event ) override
+    void changeEvent ( QEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -100,7 +100,7 @@ protected:
     }
 
     //wxCloseEvent
-    virtual void closeEvent ( QCloseEvent * event ) override
+    void closeEvent ( QCloseEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -112,7 +112,7 @@ protected:
     }
 
     //wxContextMenuEvent
-    virtual void contextMenuEvent ( QContextMenuEvent * event ) override
+    void contextMenuEvent ( QContextMenuEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -127,7 +127,7 @@ protected:
     //virtual void dropEvent ( QDropEvent * event ) { }
 
     //wxMouseEvent
-    virtual void enterEvent ( QEvent * event ) override
+    void enterEvent ( QEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -139,7 +139,7 @@ protected:
     }
 
     //wxFocusEvent.
-    virtual void focusInEvent ( QFocusEvent * event ) override
+    void focusInEvent ( QFocusEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -151,7 +151,7 @@ protected:
     }
 
     //wxFocusEvent.
-    virtual void focusOutEvent ( QFocusEvent * event ) override
+    void focusOutEvent ( QFocusEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -163,7 +163,7 @@ protected:
     }
 
     //wxShowEvent
-    virtual void hideEvent ( QHideEvent * event ) override
+    void hideEvent ( QHideEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -175,7 +175,7 @@ protected:
     }
 
     //wxKeyEvent
-    virtual void keyPressEvent ( QKeyEvent * event ) override
+    void keyPressEvent ( QKeyEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -187,7 +187,7 @@ protected:
     }
 
     //wxKeyEvent
-    virtual void keyReleaseEvent ( QKeyEvent * event ) override
+    void keyReleaseEvent ( QKeyEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -199,7 +199,7 @@ protected:
     }
 
     //wxMouseEvent
-    virtual void leaveEvent ( QEvent * event ) override
+    void leaveEvent ( QEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -211,7 +211,7 @@ protected:
     }
 
     //wxMouseEvent
-    virtual void mouseDoubleClickEvent ( QMouseEvent * event ) override
+    void mouseDoubleClickEvent ( QMouseEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -223,7 +223,7 @@ protected:
     }
 
     //wxMouseEvent
-    virtual void mouseMoveEvent ( QMouseEvent * event ) override
+    void mouseMoveEvent ( QMouseEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -235,7 +235,7 @@ protected:
     }
 
     //wxMouseEvent
-    virtual void mousePressEvent ( QMouseEvent * event ) override
+    void mousePressEvent ( QMouseEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -247,7 +247,7 @@ protected:
     }
 
     //wxMouseEvent
-    virtual void mouseReleaseEvent ( QMouseEvent * event ) override
+    void mouseReleaseEvent ( QMouseEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -259,7 +259,7 @@ protected:
     }
 
     //wxMoveEvent
-    virtual void moveEvent ( QMoveEvent * event ) override
+    void moveEvent ( QMoveEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -271,7 +271,7 @@ protected:
     }
 
     //wxEraseEvent then wxPaintEvent
-    virtual void paintEvent ( QPaintEvent * event ) override
+    void paintEvent ( QPaintEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -283,7 +283,7 @@ protected:
     }
 
     //wxSizeEvent
-    virtual void resizeEvent ( QResizeEvent * event ) override
+    void resizeEvent ( QResizeEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -295,7 +295,7 @@ protected:
     }
 
     //wxShowEvent
-    virtual void showEvent ( QShowEvent * event ) override
+    void showEvent ( QShowEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;
@@ -307,7 +307,7 @@ protected:
     }
 
     //wxMouseEvent
-    virtual void wheelEvent ( QWheelEvent * event ) override
+    void wheelEvent ( QWheelEvent * event ) override
     {
         if ( !this->GetHandler() )
             return;

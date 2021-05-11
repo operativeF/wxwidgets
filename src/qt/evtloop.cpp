@@ -27,7 +27,7 @@ class wxQtIdleTimer : public QTimer, public wxRefCounter
 public:
     wxQtIdleTimer();
     ~wxQtIdleTimer();
-    virtual bool eventFilter( QObject * watched, QEvent * event  ) override;
+    bool eventFilter( QObject * watched, QEvent * event  ) override;
 
 private:
     void idle();

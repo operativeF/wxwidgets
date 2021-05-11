@@ -161,7 +161,7 @@ public:
 private:
     wxProgressDialogSharedData m_sharedData;
 
-    virtual void* Entry() override;
+    void* Entry() override;
 
     static HRESULT CALLBACK TaskDialogCallbackProc(HWND hwnd,
                                                    UINT uNotification,
@@ -184,7 +184,7 @@ public:
     }
 
 protected:
-    virtual void OnNextIteration() override
+    void OnNextIteration() override
     {
         wxCriticalSectionLocker locker(m_data.m_cs);
 

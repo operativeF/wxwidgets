@@ -69,16 +69,16 @@ public:
     // -------------------------------
 
     // overridden base class methods
-    virtual bool Destroy() override;
+    bool Destroy() override;
 
 protected:
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
 
 private:
     void Init();
 
     // return the list of the windows composing this one
-    virtual wxWindowList GetCompositeWindowParts() const override;
+    wxWindowList GetCompositeWindowParts() const override;
 
     void OnText(wxCommandEvent &event);
     void OnSize(wxSizeEvent& event);

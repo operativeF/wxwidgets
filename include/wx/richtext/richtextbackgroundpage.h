@@ -72,8 +72,8 @@ public:
     wxRichTextAttr* GetAttributes();
 
     /// Data transfer
-    virtual bool TransferDataToWindow() override;
-    virtual bool TransferDataFromWindow() override;
+    bool TransferDataToWindow() override;
+    bool TransferDataFromWindow() override;
 
     /// Respond to colour swatch click
     void OnColourSwatch(wxCommandEvent& event);

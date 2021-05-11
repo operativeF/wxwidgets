@@ -18,19 +18,19 @@ public:
 
     static wxSize GetDefaultSize();
 
-    virtual void SetLabel(const wxString& label) override;
+    void SetLabel(const wxString& label) override;
 
 protected:
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
 
     void OnEnterWindow( wxMouseEvent& event);
     void OnLeaveWindow( wxMouseEvent& event);
 
-    virtual wxBitmap DoGetBitmap(State which) const override;
-    virtual void DoSetBitmap(const wxBitmap& bitmap, State which) override;
-    virtual void DoSetBitmapPosition(wxDirection dir) override;
+    wxBitmap DoGetBitmap(State which) const override;
+    void DoSetBitmap(const wxBitmap& bitmap, State which) override;
+    void DoSetBitmapPosition(wxDirection dir) override;
 
-    virtual void DoSetBitmapMargins(int x, int y) override
+    void DoSetBitmapMargins(int x, int y) override
     {
         m_marginX = x;
         m_marginY = y;
@@ -38,7 +38,7 @@ protected:
     }
 
 #if wxUSE_MARKUP && wxOSX_USE_COCOA
-    virtual bool DoSetLabelMarkup(const wxString& markup) override;
+    bool DoSetLabelMarkup(const wxString& markup) override;
 #endif // wxUSE_MARKUP && wxOSX_USE_COCOA
 
 

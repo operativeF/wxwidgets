@@ -124,7 +124,7 @@ public:
     // change the DC origin according to the scroll position. To properly
     // forward calls to wxWindow::Layout use WX_FORWARD_TO_SCROLL_HELPER()
     // derived class
-    virtual void DoPrepareDC(wxDC& dc) override;
+    void DoPrepareDC(wxDC& dc) override;
 
     // the methods to be called from the window event handlers
     void HandleOnScroll(wxScrollWinEvent& event);
@@ -326,11 +326,11 @@ public:
     size_t GetVisibleRowsEnd() const            { return GetVisibleEnd(); }
     bool IsRowVisible(size_t row) const         { return IsVisible(row); }
 
-    virtual int GetOrientationTargetSize() const override
+    int GetOrientationTargetSize() const override
         { return GetTargetWindow()->GetClientSize().y; }
-    virtual int GetNonOrientationTargetSize() const override
+    int GetNonOrientationTargetSize() const override
         { return GetTargetWindow()->GetClientSize().x; }
-    virtual wxOrientation GetOrientation() const override { return wxVERTICAL; }
+    wxOrientation GetOrientation() const override { return wxVERTICAL; }
 
 protected:
     // this function must be overridden in the derived class and it should
@@ -342,7 +342,7 @@ protected:
                                      size_t WXUNUSED(rowMax)) const { }
 
     // forward calls to OnGetRowsHeightHint()
-    virtual void OnGetUnitsSizeHint(size_t unitMin, size_t unitMax) const override
+    void OnGetUnitsSizeHint(size_t unitMin, size_t unitMax) const override
         { OnGetRowsHeightHint(unitMin, unitMax); }
 
     // again, if not overridden, it will fall back on default method
@@ -350,7 +350,7 @@ protected:
         { return DoEstimateTotalSize(); }
 
     // forward calls to EstimateTotalHeight()
-    virtual wxCoord EstimateTotalSize() const override { return EstimateTotalHeight(); }
+    wxCoord EstimateTotalSize() const override { return EstimateTotalHeight(); }
 
     wxCoord GetRowsHeight(size_t rowMin, size_t rowMax) const
         { return GetUnitsSize(rowMin, rowMax); }
@@ -406,11 +406,11 @@ public:
         { return IsVisible(column); }
 
 
-    virtual int GetOrientationTargetSize() const override
+    int GetOrientationTargetSize() const override
         { return GetTargetWindow()->GetClientSize().x; }
-    virtual int GetNonOrientationTargetSize() const override
+    int GetNonOrientationTargetSize() const override
         { return GetTargetWindow()->GetClientSize().y; }
-    virtual wxOrientation GetOrientation() const override   { return wxHORIZONTAL; }
+    wxOrientation GetOrientation() const override   { return wxHORIZONTAL; }
 
 protected:
     // this function must be overridden in the derived class and it should
@@ -423,14 +423,14 @@ protected:
         { }
 
     // forward calls to OnGetColumnsWidthHint()
-    virtual void OnGetUnitsSizeHint(size_t unitMin, size_t unitMax) const override
+    void OnGetUnitsSizeHint(size_t unitMin, size_t unitMax) const override
         { OnGetColumnsWidthHint(unitMin, unitMax); }
 
     // again, if not overridden, it will fall back on default method
     virtual wxCoord EstimateTotalWidth() const { return DoEstimateTotalSize(); }
 
     // forward calls to EstimateTotalWidth()
-    virtual wxCoord EstimateTotalSize() const override { return EstimateTotalWidth(); }
+    wxCoord EstimateTotalSize() const override { return EstimateTotalWidth(); }
 
     wxCoord GetColumnsWidth(size_t columnMin, size_t columnMax) const
         { return GetUnitsSize(columnMin, columnMax); }
@@ -513,7 +513,7 @@ public:
     // forward calls to wxWindow::Layout use WX_FORWARD_TO_SCROLL_HELPER()
     // derived class. We use this version to call both base classes'
     // DoPrepareDC()
-    virtual void DoPrepareDC(wxDC& dc) override;
+    void DoPrepareDC(wxDC& dc) override;
 
     // replacement implementation of wxWindow::Layout virtual method.  To
     // properly forward calls to wxWindow::Layout use
@@ -655,8 +655,8 @@ typedef wxVarVScrollHelper wxVarVScrollLegacyAdaptor;
 // classes
 #define WX_FORWARD_TO_VAR_SCROLL_HELPER()                                     \
 public:                                                                       \
-    virtual void PrepareDC(wxDC& dc) override { DoPrepareDC(dc); }                     \
-    virtual bool Layout() override { return ScrollLayout(); }
+    void PrepareDC(wxDC& dc) override { DoPrepareDC(dc); }                     \
+    bool Layout() override { return ScrollLayout(); }
 
 
 
@@ -727,7 +727,7 @@ public:
 
 #ifdef __WXMAC__
 protected:
-    virtual void UpdateMacScrollWindow() override { Update(); }
+    void UpdateMacScrollWindow() override { Update(); }
 #endif // __WXMAC__
 
 private:
@@ -794,7 +794,7 @@ public:
 
 #ifdef __WXMAC__
 protected:
-    virtual void UpdateMacScrollWindow() override { Update(); }
+    void UpdateMacScrollWindow() override { Update(); }
 #endif // __WXMAC__
 
 private:
@@ -859,7 +859,7 @@ public:
 
 #ifdef __WXMAC__
 protected:
-    virtual void UpdateMacScrollWindow() override { Update(); }
+    void UpdateMacScrollWindow() override { Update(); }
 #endif // __WXMAC__
 
 private:

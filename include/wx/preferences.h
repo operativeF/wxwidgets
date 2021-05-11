@@ -79,9 +79,9 @@ public:
     wxStockPreferencesPage(Kind kind) : m_kind(kind) {}
     Kind GetKind() const { return m_kind; }
 
-    virtual wxString GetName() const override;
+    wxString GetName() const override;
 #ifdef __WXOSX_COCOA__
-    virtual wxBitmap GetLargeIcon() const override;
+    wxBitmap GetLargeIcon() const override;
 #endif
 
 private:

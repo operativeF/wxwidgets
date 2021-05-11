@@ -124,7 +124,7 @@ public:
         delete surfaceWindow;
     }
 
-    virtual void Refresh(bool eraseBg=true, const wxRect *rect=nullptr) override
+    void Refresh(bool eraseBg=true, const wxRect *rect=nullptr) override
     {
         if ( rect == nullptr )
             DrawBack(GetSize());

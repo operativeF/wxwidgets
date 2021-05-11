@@ -44,9 +44,9 @@ public:
 
 
     // Implement wxEventLoopSourceHandler pure virtual methods
-    virtual void OnReadWaiting() override;
-    virtual void OnWriteWaiting() override { }
-    virtual void OnExceptionWaiting() override { }
+    void OnReadWaiting() override;
+    void OnWriteWaiting() override { }
+    void OnExceptionWaiting() override { }
 
 private:
     wxPipe m_pipe;
@@ -80,7 +80,7 @@ public:
         WakeUpNoLock();
     }
 
-    virtual void OnReadWaiting() override
+    void OnReadWaiting() override
     {
         wxCriticalSectionLocker lock(m_pipeLock);
 

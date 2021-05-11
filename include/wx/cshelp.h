@@ -204,14 +204,14 @@ class WXDLLIMPEXP_CORE wxSimpleHelpProvider : public wxHelpProvider
 {
 public:
     // implement wxHelpProvider methods
-    virtual wxString GetHelp(const wxWindowBase *window) override;
+    wxString GetHelp(const wxWindowBase *window) override;
 
     // override ShowHelp() and not ShowHelpAtPoint() as explained above
-    virtual bool ShowHelp(wxWindowBase *window) override;
+    bool ShowHelp(wxWindowBase *window) override;
 
-    virtual void AddHelp(wxWindowBase *window, const wxString& text) override;
-    virtual void AddHelp(wxWindowID id, const wxString& text) override;
-    virtual void RemoveHelp(wxWindowBase* window) override;
+    void AddHelp(wxWindowBase *window, const wxString& text) override;
+    void AddHelp(wxWindowID id, const wxString& text) override;
+    void RemoveHelp(wxWindowBase* window) override;
 
 protected:
     // we use 2 hashes for storing the help strings associated with windows
@@ -235,7 +235,7 @@ public:
 
     // again (see above): this should be ShowHelpAtPoint() but we need to
     // override ShowHelp() to avoid breaking existing code
-    virtual bool ShowHelp(wxWindowBase *window) override;
+    bool ShowHelp(wxWindowBase *window) override;
 
     // Other accessors
     void SetHelpController(wxHelpControllerBase* hc) { m_helpController = hc; }

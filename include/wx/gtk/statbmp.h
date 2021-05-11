@@ -34,9 +34,9 @@ public:
                  long style = 0,
                  const wxString& name = wxASCII_STR(wxStaticBitmapNameStr));
 
-    virtual void SetIcon(const wxIcon& icon) override { SetBitmap( icon ); }
-    virtual void SetBitmap( const wxBitmap& bitmap ) override;
-    virtual wxBitmap GetBitmap() const override { return m_bitmap; }
+    void SetIcon(const wxIcon& icon) override { SetBitmap( icon ); }
+    void SetBitmap( const wxBitmap& bitmap ) override;
+    wxBitmap GetBitmap() const override { return m_bitmap; }
 
     // for compatibility with wxMSW
     wxIcon GetIcon() const override

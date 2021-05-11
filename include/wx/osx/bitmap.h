@@ -71,14 +71,14 @@ public:
 
 protected:
     // this function is called from Create() to free the existing mask data
-    virtual void FreeData() override;
+    void FreeData() override;
 
     // these functions must be overridden to implement the corresponding public
     // Create() methods, they shouldn't call FreeData() as it's already called
     // by the public wrappers
     virtual bool InitFromColour(const wxBitmap& bitmap,
                                 const wxColour& colour) override;
-    virtual bool InitFromMonoBitmap(const wxBitmap& bitmap) override;
+    bool InitFromMonoBitmap(const wxBitmap& bitmap) override;
 
 private:
     void DoCreateMaskBitmap(int width, int height, int bytesPerRow = -1);
@@ -138,8 +138,8 @@ public:
     // get the given part of bitmap
     wxBitmap GetSubBitmap( const wxRect& rect ) const override;
 
-    virtual bool Create(int width, int height, int depth = wxBITMAP_SCREEN_DEPTH) override;
-    virtual bool Create(const wxSize& sz, int depth = wxBITMAP_SCREEN_DEPTH) override
+    bool Create(int width, int height, int depth = wxBITMAP_SCREEN_DEPTH) override;
+    bool Create(const wxSize& sz, int depth = wxBITMAP_SCREEN_DEPTH) override
         { return Create(sz.GetWidth(), sz.GetHeight(), depth); }
 
     virtual bool Create(const void* data, wxBitmapType type, int width, int height, int depth = 1);
@@ -154,8 +154,8 @@ public:
     bool CreateScaled(int logwidth, int logheight, int depth, double logicalScale) override;
 
     // virtual bool Create( WXHICON icon) ;
-    virtual bool LoadFile(const wxString& name, wxBitmapType type = wxBITMAP_DEFAULT_TYPE) override;
-    virtual bool SaveFile(const wxString& name, wxBitmapType type, const wxPalette *cmap = NULL) const override;
+    bool LoadFile(const wxString& name, wxBitmapType type = wxBITMAP_DEFAULT_TYPE) override;
+    bool SaveFile(const wxString& name, wxBitmapType type, const wxPalette *cmap = NULL) const override;
 
     const wxBitmapRefData *GetBitmapData() const
         { return (const wxBitmapRefData *)m_refData; }
@@ -164,7 +164,7 @@ public:
         { return (wxBitmapRefData *)m_refData; }
 
     // copies the contents and mask of the given (colour) icon to the bitmap
-    virtual bool CopyFromIcon(const wxIcon& icon) override;
+    bool CopyFromIcon(const wxIcon& icon) override;
 
     int GetWidth() const override;
     int GetHeight() const override;
@@ -244,8 +244,8 @@ public:
     wxDC *GetSelectedInto() const;
 
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const override;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
+    wxGDIRefData *CreateGDIRefData() const override;
+    wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
 };
 
 #endif // _WX_BITMAP_H_

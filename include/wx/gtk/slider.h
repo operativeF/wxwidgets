@@ -41,23 +41,23 @@ public:
                 const wxString& name = wxASCII_STR(wxSliderNameStr));
 
     // implement the base class pure virtuals
-    virtual int GetValue() const override;
-    virtual void SetValue(int value) override;
+    int GetValue() const override;
+    void SetValue(int value) override;
 
-    virtual void SetRange(int minValue, int maxValue) override;
-    virtual int GetMin() const override;
-    virtual int GetMax() const override;
+    void SetRange(int minValue, int maxValue) override;
+    int GetMin() const override;
+    int GetMax() const override;
 
-    virtual void SetLineSize(int lineSize) override;
-    virtual void SetPageSize(int pageSize) override;
-    virtual int GetLineSize() const override;
-    virtual int GetPageSize() const override;
+    void SetLineSize(int lineSize) override;
+    void SetPageSize(int pageSize) override;
+    int GetLineSize() const override;
+    int GetPageSize() const override;
 
-    virtual void SetThumbLength(int lenPixels) override;
-    virtual int GetThumbLength() const override;
+    void SetThumbLength(int lenPixels) override;
+    int GetThumbLength() const override;
 
-    virtual void ClearTicks() override;
-    virtual void SetTick(int tickPos) override;
+    void ClearTicks() override;
+    void SetTick(int tickPos) override;
     int GetTickFreq() const override;
 
     static wxVisualAttributes
@@ -74,7 +74,7 @@ public:
     GtkWidget *m_scale;
 
 protected:
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
 
     GtkWidget *m_minLabel,*m_maxLabel;
     bool m_blockScrollEvent;
@@ -82,13 +82,13 @@ protected:
     // Note the following member is not used in GTK+2 < 2.16.
     int m_tickFreq;
 
-    virtual GdkWindow *GTKGetWindow(wxArrayGdkWindows& windows) const override;
+    GdkWindow *GTKGetWindow(wxArrayGdkWindows& windows) const override;
 
     // set the slider value unconditionally
     void GTKSetValue(int value);
 
     // Platform-specific implementation of SetTickFreq
-    virtual void DoSetTickFreq(int freq) override;
+    void DoSetTickFreq(int freq) override;
 
 private:
     void Init();

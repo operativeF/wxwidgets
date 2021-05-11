@@ -38,8 +38,8 @@ public:
     TestGLContext& GetContext(wxGLCanvas *canvas, bool useStereo);
 
     // virtual wxApp methods
-    virtual bool OnInit() override;
-    virtual int OnExit() override;
+    bool OnInit() override;
+    int OnExit() override;
 
 private:
     // the GL context we use for all our mono rendering windows

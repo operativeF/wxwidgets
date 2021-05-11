@@ -46,11 +46,11 @@ public:
 
     // get the origin of the client area (which may be different from (0, 0)
     // if the frame has a toolbar) in client coordinates
-    virtual wxPoint GetClientAreaOrigin() const override;
+    wxPoint GetClientAreaOrigin() const override;
 
     // override some more virtuals
-    virtual bool Show(bool show = true) override;
-    virtual bool Enable(bool enable = true) override;
+    bool Show(bool show = true) override;
+    bool Enable(bool enable = true) override;
 
     // event handlers
     void OnActivate(wxActivateEvent& event);
@@ -62,7 +62,7 @@ public:
                                      wxWindowID id = -1,
                                      const wxString& name = wxASCII_STR(wxToolBarNameStr)) override;
 
-    virtual void SetToolBar(wxToolBar *toolbar) override;
+    void SetToolBar(wxToolBar *toolbar) override;
 #endif // wxUSE_TOOLBAR
 
     // Status bar
@@ -72,32 +72,32 @@ public:
                                            wxWindowID id = 0,
                                            const wxString& name = wxASCII_STR(wxStatusLineNameStr)) override;
 
-    virtual void SetStatusBar(wxStatusBar *statbar) override;
+    void SetStatusBar(wxStatusBar *statbar) override;
 #endif // wxUSE_STATUSBAR
 
     void PositionBars();
 
     // internal response to size events
-    virtual void MacOnInternalSize() override { PositionBars(); }
+    void MacOnInternalSize() override { PositionBars(); }
 
 protected:
 #if wxUSE_TOOLBAR
-    virtual void PositionToolBar() override;
+    void PositionToolBar() override;
 #endif
 #if wxUSE_STATUSBAR
-    virtual void PositionStatusBar() override;
+    void PositionStatusBar() override;
 #endif
 
     // override base class virtuals
-    virtual void DoGetClientSize(int *width, int *height) const override;
-    virtual void DoSetClientSize(int width, int height) override;
+    void DoGetClientSize(int *width, int *height) const override;
+    void DoSetClientSize(int width, int height) override;
 
 #if wxUSE_MENUBAR
-    virtual void DetachMenuBar() override;
-    virtual void AttachMenuBar(wxMenuBar *menubar) override;
+    void DetachMenuBar() override;
+    void AttachMenuBar(wxMenuBar *menubar) override;
 #endif
 
-    virtual bool        MacIsChildOfClientArea( const wxWindow* child ) const override;
+    bool        MacIsChildOfClientArea( const wxWindow* child ) const override;
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxFrame);

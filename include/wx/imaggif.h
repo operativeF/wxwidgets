@@ -51,8 +51,8 @@ public:
         bool verbose = true, int delayMilliSecs = 1000);
 
 protected:
-    virtual int DoGetImageCount(wxInputStream& stream) override;
-    virtual bool DoCanRead(wxInputStream& stream) override;
+    int DoGetImageCount(wxInputStream& stream) override;
+    bool DoCanRead(wxInputStream& stream) override;
 
     bool DoSaveFile(const wxImage&, wxOutputStream *, bool verbose,
         bool first, int delayMilliSecs, bool loop,

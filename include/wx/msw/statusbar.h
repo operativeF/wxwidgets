@@ -40,17 +40,17 @@ public:
     virtual ~wxStatusBar();
 
     // implement base class methods
-    virtual void SetFieldsCount(int number = 1, const int *widths = NULL) override;
-    virtual void SetStatusWidths(int n, const int widths_field[]) override;
-    virtual void SetStatusStyles(int n, const int styles[]) override;
-    virtual void SetMinHeight(int height) override;
-    virtual bool GetFieldRect(int i, wxRect& rect) const override;
+    void SetFieldsCount(int number = 1, const int *widths = NULL) override;
+    void SetStatusWidths(int n, const int widths_field[]) override;
+    void SetStatusStyles(int n, const int styles[]) override;
+    void SetMinHeight(int height) override;
+    bool GetFieldRect(int i, wxRect& rect) const override;
 
-    virtual int GetBorderX() const override;
-    virtual int GetBorderY() const override;
+    int GetBorderX() const override;
+    int GetBorderY() const override;
 
     // override some wxWindow virtual methods too
-    virtual bool SetFont(const wxFont& font) override;
+    bool SetFont(const wxFont& font) override;
 
     virtual WXLRESULT MSWWindowProc(WXUINT nMsg,
                                     WXWPARAM wParam,
@@ -58,21 +58,21 @@ public:
 
 protected:
     // implement base class pure virtual method
-    virtual void DoUpdateStatusText(int number) override;
+    void DoUpdateStatusText(int number) override;
 
     // override some base class virtuals
-    virtual WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
-    virtual wxSize DoGetBestSize() const override;
-    virtual void DoMoveWindow(int x, int y, int width, int height) override;
+    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
+    wxSize DoGetBestSize() const override;
+    void DoMoveWindow(int x, int y, int width, int height) override;
 #if wxUSE_TOOLTIPS
-    virtual bool MSWProcessMessage(WXMSG* pMsg) override;
-    virtual bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM* result) override;
+    bool MSWProcessMessage(WXMSG* pMsg) override;
+    bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM* result) override;
 #endif
 
     // implementation of the public SetStatusWidths()
     void MSWUpdateFieldsWidths();
 
-    virtual void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
+    void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
 
     // used by DoUpdateStatusText()
     wxClientDC *m_pDC;

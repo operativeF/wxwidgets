@@ -29,10 +29,10 @@ public:
            const wxValidator& validator = wxDefaultValidator,
            const wxString& name = wxASCII_STR(wxButtonNameStr));
 
-   virtual wxWindow *SetDefault() override;
+   wxWindow *SetDefault() override;
 
     // implementation only
-    virtual int QtGetEventType() const override { return wxEVT_BUTTON; }
+    int QtGetEventType() const override { return wxEVT_BUTTON; }
 
 private:
     wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxButton);

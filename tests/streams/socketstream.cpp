@@ -63,7 +63,7 @@ public:
     }
 
 protected:
-    virtual void *Entry() override
+    void *Entry() override
     {
         wxSocketServer srv(LocalAddress(m_port), wxSOCKET_REUSEADDR);
         CPPUNIT_ASSERT( srv.IsOk() );
@@ -100,8 +100,8 @@ public:
     socketStream();
     virtual ~socketStream();
 
-    virtual void setUp() override;
-    virtual void tearDown() override;
+    void setUp() override;
+    void tearDown() override;
 
     // repeat all socket tests several times with different socket flags, so we
     // define this macro which is used several times in the test suite
@@ -134,9 +134,9 @@ public:
 
 private:
     // Implement base class functions.
-    virtual wxSocketInputStream  *DoCreateInStream() override;
-    virtual wxSocketOutputStream *DoCreateOutStream() override;
-    virtual void DoCheckInputStream(wxSocketInputStream& stream_in) override;
+    wxSocketInputStream  *DoCreateInStream() override;
+    wxSocketOutputStream *DoCreateOutStream() override;
+    void DoCheckInputStream(wxSocketInputStream& stream_in) override;
 
     // socket thread functions
     static void WriteSocket(wxSocketBase& socket)

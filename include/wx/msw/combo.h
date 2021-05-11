@@ -64,8 +64,8 @@ public:
 
     virtual ~wxComboCtrl();
 
-    virtual void PrepareBackground( wxDC& dc, const wxRect& rect, int flags ) const override;
-    virtual bool IsKeyPopupToggle(const wxKeyEvent& event) const override;
+    void PrepareBackground( wxDC& dc, const wxRect& rect, int flags ) const override;
+    bool IsKeyPopupToggle(const wxKeyEvent& event) const override;
 
     static int GetFeatures() { return wxComboCtrlFeatures::All; }
 
@@ -75,23 +75,23 @@ public:
 protected:
     void DoTimerEvent();
 
-    virtual bool AnimateShow( const wxRect& rect, int flags ) override;
+    bool AnimateShow( const wxRect& rect, int flags ) override;
 #endif // wxUSE_COMBOCTRL_POPUP_ANIMATION
 
 protected:
 
     // Dummy method - we override all functions that call this
-    virtual WXHWND GetEditHWND() const override { return NULL; }
+    WXHWND GetEditHWND() const override { return NULL; }
 
     // customization
-    virtual void OnResize() override;
-    virtual wxCoord GetNativeTextIndent() const override;
+    void OnResize() override;
+    wxCoord GetNativeTextIndent() const override;
 
     // event handlers
     void OnPaintEvent( wxPaintEvent& event );
     void OnMouseEvent( wxMouseEvent& event );
 
-    virtual bool HasTransparentBackground() override { return IsDoubleBuffered(); }
+    bool HasTransparentBackground() override { return IsDoubleBuffered(); }
 
 private:
     void Init();

@@ -49,7 +49,7 @@ public:
         m_addrFrame = addrFrame;
     }
 
-    virtual size_t GetParamCount() const override
+    size_t GetParamCount() const override
     {
         ConstCast()->OnGetParam();
         return DoGetParamCount();
@@ -62,8 +62,8 @@ public:
     void OnParam(wxSYMBOL_INFO *pSymInfo);
 
 protected:
-    virtual void OnGetName() override;
-    virtual void OnGetLocation() override;
+    void OnGetName() override;
+    void OnGetLocation() override;
 
     void OnGetParam();
 
@@ -96,9 +96,9 @@ public:
     // only
     wxStackWalker(const char * WXUNUSED(argv0) = NULL) { }
 
-    virtual void Walk(size_t skip = 1, size_t maxDepth = wxSTACKWALKER_MAX_DEPTH) override;
+    void Walk(size_t skip = 1, size_t maxDepth = wxSTACKWALKER_MAX_DEPTH) override;
 #if wxUSE_ON_FATAL_EXCEPTION
-    virtual void WalkFromException(size_t maxDepth = wxSTACKWALKER_MAX_DEPTH) override;
+    void WalkFromException(size_t maxDepth = wxSTACKWALKER_MAX_DEPTH) override;
 #endif // wxUSE_ON_FATAL_EXCEPTION
 
 

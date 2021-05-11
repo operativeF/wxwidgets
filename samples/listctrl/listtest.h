@@ -22,7 +22,7 @@ class MyApp: public wxApp
 public:
     MyApp() { }
 
-    virtual bool OnInit() override;
+    bool OnInit() override;
 
 private:
     wxDECLARE_NO_COPY_CLASS(MyApp);
@@ -74,8 +74,8 @@ public:
 
     void OnRightClick(wxMouseEvent& event);
 
-    virtual void CheckItem(long item, bool check) override;
-    virtual bool IsItemChecked(long item) const override;
+    void CheckItem(long item, bool check) override;
+    bool IsItemChecked(long item) const override;
 
 private:
     void ShowContextMenu(const wxPoint& pos, long item);
@@ -84,10 +84,10 @@ private:
     void LogEvent(const wxListEvent& event, const wxString& eventName);
     void LogColEvent(const wxListEvent& event, const wxString& eventName);
 
-    virtual wxString OnGetItemText(long item, long column) const override;
-    virtual bool OnGetItemIsChecked(long item) const override;
-    virtual int OnGetItemColumnImage(long item, long column) const override;
-    virtual wxItemAttr *OnGetItemAttr(long item) const override;
+    wxString OnGetItemText(long item, long column) const override;
+    bool OnGetItemIsChecked(long item) const override;
+    int OnGetItemColumnImage(long item, long column) const override;
+    wxItemAttr *OnGetItemAttr(long item) const override;
 
     long m_updated;
 

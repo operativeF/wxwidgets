@@ -36,9 +36,9 @@ public:
         m_fds[1] = -1;
     }
 
-    virtual wxSocketError GetLastError() const override;
+    wxSocketError GetLastError() const override;
 
-    virtual void ReenableEvents(wxSocketEventFlags flags) override
+    void ReenableEvents(wxSocketEventFlags flags) override
     {
         // Events are only ever used for non-blocking sockets.
         if ( GetSocketFlags() & wxSOCKET_BLOCK )
@@ -59,7 +59,7 @@ public:
         EnableEvents(flags);
     }
 
-    virtual void UpdateBlockingState() override
+    void UpdateBlockingState() override
     {
         // Make this int and not bool to allow passing it to ioctl().
         int isNonBlocking = (GetSocketFlags() & wxSOCKET_BLOCK) == 0;
@@ -69,13 +69,13 @@ public:
     }
 
     // wxFDIOHandler methods
-    virtual void OnReadWaiting() override;
-    virtual void OnWriteWaiting() override;
-    virtual void OnExceptionWaiting() override;
-    virtual bool IsOk() const override { return m_fd != INVALID_SOCKET; }
+    void OnReadWaiting() override;
+    void OnWriteWaiting() override;
+    void OnExceptionWaiting() override;
+    bool IsOk() const override { return m_fd != INVALID_SOCKET; }
 
 private:
-    virtual void DoClose() override
+    void DoClose() override
     {
         DisableEvents();
 
@@ -121,16 +121,16 @@ public:
         m_fdioManager = NULL;
     }
 
-    virtual bool OnInit() override;
-    virtual void OnExit() override { }
+    bool OnInit() override;
+    void OnExit() override { }
 
-    virtual wxSocketImpl *CreateSocket(wxSocketBase& wxsocket) override
+    wxSocketImpl *CreateSocket(wxSocketBase& wxsocket) override
     {
         return new wxSocketImplUnix(wxsocket);
     }
 
-    virtual void Install_Callback(wxSocketImpl *socket_, wxSocketNotify event) override;
-    virtual void Uninstall_Callback(wxSocketImpl *socket_, wxSocketNotify event) override;
+    void Install_Callback(wxSocketImpl *socket_, wxSocketNotify event) override;
+    void Uninstall_Callback(wxSocketImpl *socket_, wxSocketNotify event) override;
 
 protected:
     // get the FD index corresponding to the given wxSocketNotify

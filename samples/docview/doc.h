@@ -138,8 +138,8 @@ public:
     {
     }
 
-    virtual bool Do() override { return DoAdd(); }
-    virtual bool Undo() override { return DoRemove(); }
+    bool Do() override { return DoAdd(); }
+    bool Undo() override { return DoRemove(); }
 };
 
 // The command for removing the last segment
@@ -151,8 +151,8 @@ public:
     {
     }
 
-    virtual bool Do() override { return DoRemove(); }
-    virtual bool Undo() override { return DoAdd(); }
+    bool Do() override { return DoRemove(); }
+    bool Undo() override { return DoAdd(); }
 };
 
 
@@ -165,16 +165,16 @@ class wxTextDocument : public wxDocument
 public:
     wxTextDocument() : wxDocument() { }
 
-    virtual bool OnCreate(const wxString& path, long flags) override;
+    bool OnCreate(const wxString& path, long flags) override;
 
     virtual wxTextCtrl* GetTextCtrl() const = 0;
 
-    virtual bool IsModified() const override;
-    virtual void Modify(bool mod) override;
+    bool IsModified() const override;
+    void Modify(bool mod) override;
 
 protected:
-    virtual bool DoSaveDocument(const wxString& filename) override;
-    virtual bool DoOpenDocument(const wxString& filename) override;
+    bool DoSaveDocument(const wxString& filename) override;
+    bool DoOpenDocument(const wxString& filename) override;
 
     void OnTextChange(wxCommandEvent& event);
 
@@ -190,7 +190,7 @@ class TextEditDocument : public wxTextDocument
 {
 public:
     TextEditDocument() : wxTextDocument() { }
-    virtual wxTextCtrl* GetTextCtrl() const override;
+    wxTextCtrl* GetTextCtrl() const override;
 
     wxDECLARE_NO_COPY_CLASS(TextEditDocument);
     wxDECLARE_DYNAMIC_CLASS(TextEditDocument);
@@ -208,12 +208,12 @@ class ImageDocument : public wxDocument
 public:
     ImageDocument() : wxDocument() { }
 
-    virtual bool OnOpenDocument(const wxString& file) override;
+    bool OnOpenDocument(const wxString& file) override;
 
     wxImage GetImage() const { return m_image; }
 
 protected:
-    virtual bool DoOpenDocument(const wxString& file) override;
+    bool DoOpenDocument(const wxString& file) override;
 
 private:
     wxImage m_image;

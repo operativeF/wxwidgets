@@ -46,13 +46,13 @@ public:
 
     virtual ~wxGenericCalendarCtrl();
 
-    virtual bool Destroy() override;
+    bool Destroy() override;
 
     // set/get the current date
     // ------------------------
 
-    virtual bool SetDate(const wxDateTime& date) override;
-    virtual wxDateTime GetDate() const override { return m_date; }
+    bool SetDate(const wxDateTime& date) override;
+    wxDateTime GetDate() const override { return m_date; }
 
 
     // set/get the range in which selection can occur
@@ -61,7 +61,7 @@ public:
     virtual bool SetDateRange(const wxDateTime& lowerdate = wxDefaultDateTime,
                               const wxDateTime& upperdate = wxDefaultDateTime) override;
 
-    virtual bool GetDateRange(wxDateTime *lowerdate, wxDateTime *upperdate) const override;
+    bool GetDateRange(wxDateTime *lowerdate, wxDateTime *upperdate) const override;
 
     // these functions are for generic version only, don't use them but use the
     // Set/GetDateRange() above instead
@@ -79,7 +79,7 @@ public:
     // should be used instead for them
 
     // corresponds to wxCAL_NO_MONTH_CHANGE bit
-    virtual bool EnableMonthChange(bool enable = true) override;
+    bool EnableMonthChange(bool enable = true) override;
 
     // corresponds to wxCAL_NO_YEAR_CHANGE bit, deprecated, generic only
     void EnableYearChange(bool enable = true);
@@ -88,48 +88,48 @@ public:
     // customization
     // -------------
 
-    virtual void Mark(size_t day, bool mark) override;
+    void Mark(size_t day, bool mark) override;
 
     // all other functions in this section are for generic version only
 
     // header colours are used for painting the weekdays at the top
-    virtual void SetHeaderColours(const wxColour& colFg, const wxColour& colBg) override
+    void SetHeaderColours(const wxColour& colFg, const wxColour& colBg) override
     {
         m_colHeaderFg = colFg;
         m_colHeaderBg = colBg;
     }
 
-    virtual const wxColour& GetHeaderColourFg() const override { return m_colHeaderFg; }
-    virtual const wxColour& GetHeaderColourBg() const override { return m_colHeaderBg; }
+    const wxColour& GetHeaderColourFg() const override { return m_colHeaderFg; }
+    const wxColour& GetHeaderColourBg() const override { return m_colHeaderBg; }
 
     // highlight colour is used for the currently selected date
-    virtual void SetHighlightColours(const wxColour& colFg, const wxColour& colBg) override
+    void SetHighlightColours(const wxColour& colFg, const wxColour& colBg) override
     {
         m_colHighlightFg = colFg;
         m_colHighlightBg = colBg;
     }
 
-    virtual const wxColour& GetHighlightColourFg() const override { return m_colHighlightFg; }
-    virtual const wxColour& GetHighlightColourBg() const override { return m_colHighlightBg; }
+    const wxColour& GetHighlightColourFg() const override { return m_colHighlightFg; }
+    const wxColour& GetHighlightColourBg() const override { return m_colHighlightBg; }
 
     // holiday colour is used for the holidays (if style & wxCAL_SHOW_HOLIDAYS)
-    virtual void SetHolidayColours(const wxColour& colFg, const wxColour& colBg) override
+    void SetHolidayColours(const wxColour& colFg, const wxColour& colBg) override
     {
         m_colHolidayFg = colFg;
         m_colHolidayBg = colBg;
     }
 
-    virtual const wxColour& GetHolidayColourFg() const override { return m_colHolidayFg; }
-    virtual const wxColour& GetHolidayColourBg() const override { return m_colHolidayBg; }
+    const wxColour& GetHolidayColourFg() const override { return m_colHolidayFg; }
+    const wxColour& GetHolidayColourBg() const override { return m_colHolidayBg; }
 
-    virtual wxCalendarDateAttr *GetAttr(size_t day) const override
+    wxCalendarDateAttr *GetAttr(size_t day) const override
     {
         wxCHECK_MSG( day > 0 && day < 32, NULL, wxT("invalid day") );
 
         return m_attrs[day - 1];
     }
 
-    virtual void SetAttr(size_t day, wxCalendarDateAttr *attr) override
+    void SetAttr(size_t day, wxCalendarDateAttr *attr) override
     {
         wxCHECK_RET( day > 0 && day < 32, wxT("invalid day") );
 
@@ -137,9 +137,9 @@ public:
         m_attrs[day - 1] = attr;
     }
 
-    virtual void ResetAttr(size_t day) override { SetAttr(day, NULL); }
+    void ResetAttr(size_t day) override { SetAttr(day, NULL); }
 
-    virtual void SetHoliday(size_t day) override;
+    void SetHoliday(size_t day) override;
 
     virtual wxCalendarHitTestResult HitTest(const wxPoint& pos,
                                             wxDateTime *date = NULL,
@@ -149,12 +149,12 @@ public:
     // -------------------------------
 
     // forward these functions to all subcontrols
-    virtual bool Enable(bool enable = true) override;
-    virtual bool Show(bool show = true) override;
+    bool Enable(bool enable = true) override;
+    bool Show(bool show = true) override;
 
-    virtual void SetWindowStyleFlag(long style) override;
+    void SetWindowStyleFlag(long style) override;
 
-    virtual wxVisualAttributes GetDefaultAttributes() const override
+    wxVisualAttributes GetDefaultAttributes() const override
         { return GetClassDefaultAttributes(GetWindowVariant()); }
 
     static wxVisualAttributes
@@ -164,9 +164,9 @@ public:
 
 protected:
     // override some base class virtuals
-    virtual wxSize DoGetBestSize() const override;
-    virtual void DoMoveWindow(int x, int y, int width, int height) override;
-    virtual void DoGetSize(int *width, int *height) const override;
+    wxSize DoGetBestSize() const override;
+    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoGetSize(int *width, int *height) const override;
 
 private:
     // common part of all ctors
@@ -248,8 +248,8 @@ public:
     wxControl *GetYearControl() const;
 
 private:
-    virtual void ResetHolidayAttrs() override;
-    virtual void RefreshHolidays() override { Refresh(); }
+    void ResetHolidayAttrs() override;
+    void RefreshHolidays() override { Refresh(); }
 
     // OnPaint helper-methods
 

@@ -64,24 +64,24 @@ public:
     virtual ~wxFont();
 
     // implement base class pure virtuals
-    virtual double GetFractionalPointSize() const override;
-    virtual wxFontStyle GetStyle() const override;
-    virtual int GetNumericWeight() const override;
-    virtual wxString GetFaceName() const override;
-    virtual bool GetUnderlined() const override;
-    virtual bool GetStrikethrough() const override;
-    virtual wxFontEncoding GetEncoding() const override;
-    virtual const wxNativeFontInfo *GetNativeFontInfo() const override;
-    virtual bool IsFixedWidth() const override;
+    double GetFractionalPointSize() const override;
+    wxFontStyle GetStyle() const override;
+    int GetNumericWeight() const override;
+    wxString GetFaceName() const override;
+    bool GetUnderlined() const override;
+    bool GetStrikethrough() const override;
+    wxFontEncoding GetEncoding() const override;
+    const wxNativeFontInfo *GetNativeFontInfo() const override;
+    bool IsFixedWidth() const override;
 
-    virtual void SetFractionalPointSize(double pointSize) override;
-    virtual void SetFamily(wxFontFamily family) override;
-    virtual void SetStyle(wxFontStyle style) override;
-    virtual void SetNumericWeight(int weight) override;
-    virtual bool SetFaceName( const wxString& faceName ) override;
-    virtual void SetUnderlined( bool underlined ) override;
-    virtual void SetStrikethrough(bool strikethrough) override;
-    virtual void SetEncoding(wxFontEncoding encoding) override;
+    void SetFractionalPointSize(double pointSize) override;
+    void SetFamily(wxFontFamily family) override;
+    void SetStyle(wxFontStyle style) override;
+    void SetNumericWeight(int weight) override;
+    bool SetFaceName( const wxString& faceName ) override;
+    void SetUnderlined( bool underlined ) override;
+    void SetStrikethrough(bool strikethrough) override;
+    void SetEncoding(wxFontEncoding encoding) override;
 
     wxDECLARE_COMMON_FONT_METHODS();
 
@@ -105,12 +105,12 @@ public:
     bool GTKSetPangoAttrs(PangoLayout* layout) const;
 
 protected:
-    virtual void DoSetNativeFontInfo( const wxNativeFontInfo& info ) override;
+    void DoSetNativeFontInfo( const wxNativeFontInfo& info ) override;
 
-    virtual wxGDIRefData* CreateGDIRefData() const override;
-    virtual wxGDIRefData* CloneGDIRefData(const wxGDIRefData* data) const override;
+    wxGDIRefData* CreateGDIRefData() const override;
+    wxGDIRefData* CloneGDIRefData(const wxGDIRefData* data) const override;
 
-    virtual wxFontFamily DoGetFamily() const override;
+    wxFontFamily DoGetFamily() const override;
 
 private:
     void Init();

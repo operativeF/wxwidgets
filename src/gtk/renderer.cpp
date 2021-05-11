@@ -62,9 +62,9 @@ public:
                                   wxHeaderSortIconType sortArrow = wxHDR_SORT_ICON_NONE,
                                   wxHeaderButtonParams* params = NULL) override;
 
-    virtual int GetHeaderButtonHeight(wxWindow *win) override;
+    int GetHeaderButtonHeight(wxWindow *win) override;
 
-    virtual int GetHeaderButtonMargin(wxWindow *win) override;
+    int GetHeaderButtonMargin(wxWindow *win) override;
 
 
     // draw the expanded/collapsed icon for a tree control item
@@ -129,11 +129,11 @@ public:
                                 const wxRect& rect,
                                 int flags=0) override;
 
-    virtual void DrawFocusRect(wxWindow* win, wxDC& dc, const wxRect& rect, int flags = 0) override;
+    void DrawFocusRect(wxWindow* win, wxDC& dc, const wxRect& rect, int flags = 0) override;
 
-    virtual wxSize GetCheckBoxSize(wxWindow *win, int flags = 0) override;
+    wxSize GetCheckBoxSize(wxWindow *win, int flags = 0) override;
 
-    virtual wxSplitterRenderParams GetSplitterParams(const wxWindow *win) override;
+    wxSplitterRenderParams GetSplitterParams(const wxWindow *win) override;
 };
 
 // ============================================================================

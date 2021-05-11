@@ -37,7 +37,7 @@ public:
     }
 
 #if wxUSE_ACCESSIBILITY
-    virtual wxString GetAccessibleDescription() const override;
+    wxString GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
 private:
@@ -63,20 +63,20 @@ public:
     void EnableMarkup(bool enable = true);
 #endif // wxUSE_MARKUP
 
-    virtual bool SetValue( const wxVariant &value ) override;
-    virtual bool GetValue( wxVariant &value ) const override;
+    bool SetValue( const wxVariant &value ) override;
+    bool GetValue( wxVariant &value ) const override;
 #if wxUSE_ACCESSIBILITY
-    virtual wxString GetAccessibleDescription() const override;
+    wxString GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
-    virtual bool Render(wxRect cell, wxDC *dc, int state) override;
-    virtual wxSize GetSize() const override;
+    bool Render(wxRect cell, wxDC *dc, int state) override;
+    wxSize GetSize() const override;
 
     // in-place editing
-    virtual bool HasEditorCtrl() const override;
+    bool HasEditorCtrl() const override;
     virtual wxWindow* CreateEditorCtrl( wxWindow *parent, wxRect labelRect,
                                         const wxVariant &value ) override;
-    virtual bool GetValueFromEditorCtrl( wxWindow* editor, wxVariant &value ) override;
+    bool GetValueFromEditorCtrl( wxWindow* editor, wxVariant &value ) override;
 
 protected:
     wxString   m_text;
@@ -102,14 +102,14 @@ public:
                               wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                               int align = wxDVR_DEFAULT_ALIGNMENT );
 
-    virtual bool SetValue( const wxVariant &value ) override;
-    virtual bool GetValue( wxVariant &value ) const override;
+    bool SetValue( const wxVariant &value ) override;
+    bool GetValue( wxVariant &value ) const override;
 #if wxUSE_ACCESSIBILITY
-    virtual wxString GetAccessibleDescription() const override;
+    wxString GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
-    virtual bool Render( wxRect cell, wxDC *dc, int state ) override;
-    virtual wxSize GetSize() const override;
+    bool Render( wxRect cell, wxDC *dc, int state ) override;
+    wxSize GetSize() const override;
 
 private:
     wxIcon m_icon;
@@ -134,14 +134,14 @@ public:
 
     void ShowAsRadio() { m_radio = true; }
 
-    virtual bool SetValue( const wxVariant &value ) override;
-    virtual bool GetValue( wxVariant &value ) const override;
+    bool SetValue( const wxVariant &value ) override;
+    bool GetValue( wxVariant &value ) const override;
 #if wxUSE_ACCESSIBILITY
-    virtual wxString GetAccessibleDescription() const override;
+    wxString GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
-    virtual bool Render( wxRect cell, wxDC *dc, int state ) override;
-    virtual wxSize GetSize() const override;
+    bool Render( wxRect cell, wxDC *dc, int state ) override;
+    wxSize GetSize() const override;
 
     // Implementation only, don't use nor override
     virtual bool WXActivateCell(const wxRect& cell,
@@ -171,14 +171,14 @@ public:
                                 wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                                 int align = wxDVR_DEFAULT_ALIGNMENT );
 
-    virtual bool SetValue( const wxVariant &value ) override;
-    virtual bool GetValue( wxVariant& value ) const override;
+    bool SetValue( const wxVariant &value ) override;
+    bool GetValue( wxVariant& value ) const override;
 #if wxUSE_ACCESSIBILITY
-    virtual wxString GetAccessibleDescription() const override;
+    wxString GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
-    virtual bool Render(wxRect cell, wxDC *dc, int state) override;
-    virtual wxSize GetSize() const override;
+    bool Render(wxRect cell, wxDC *dc, int state) override;
+    wxSize GetSize() const override;
 
 private:
     wxString    m_label;
@@ -201,19 +201,19 @@ public:
                                 wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                                 int align = wxDVR_DEFAULT_ALIGNMENT );
 
-    virtual bool SetValue( const wxVariant &value ) override;
-    virtual bool GetValue( wxVariant &value ) const override;
+    bool SetValue( const wxVariant &value ) override;
+    bool GetValue( wxVariant &value ) const override;
 #if wxUSE_ACCESSIBILITY
-    virtual wxString GetAccessibleDescription() const override;
+    wxString GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
-    virtual bool Render(wxRect cell, wxDC *dc, int state) override;
-    virtual wxSize GetSize() const override;
+    bool Render(wxRect cell, wxDC *dc, int state) override;
+    wxSize GetSize() const override;
 
-    virtual bool HasEditorCtrl() const override { return true; }
+    bool HasEditorCtrl() const override { return true; }
     virtual wxWindow* CreateEditorCtrl( wxWindow *parent, wxRect labelRect,
                                         const wxVariant &value ) override;
-    virtual bool GetValueFromEditorCtrl( wxWindow* editor, wxVariant &value ) override;
+    bool GetValueFromEditorCtrl( wxWindow* editor, wxVariant &value ) override;
 
 private:
     wxDataViewIconText   m_value;

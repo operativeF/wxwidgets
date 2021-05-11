@@ -280,10 +280,10 @@ public:
     }
 
 private:
-    virtual wxObjectRefData *CreateRefData() const override
+    wxObjectRefData *CreateRefData() const override
         { return new wxPGCellData(); }
 
-    virtual wxObjectRefData *CloneRefData(const wxObjectRefData *data) const override;
+    wxObjectRefData *CloneRefData(const wxObjectRefData *data) const override;
 };
 
 // -----------------------------------------------------------------------
@@ -2096,7 +2096,7 @@ private:
 //
 
 #define WX_PG_DECLARE_DOGETEDITORCLASS \
-    virtual const wxPGEditor* DoGetEditorClass() const override;
+    const wxPGEditor* DoGetEditorClass() const override;
 
 #ifndef WX_PG_DECLARE_PROPERTY_CLASS
     #define WX_PG_DECLARE_PROPERTY_CLASS(CLASSNAME) \
@@ -2133,7 +2133,7 @@ public:
     wxPGRootProperty( const wxString& name = wxS("<Root>") );
     virtual ~wxPGRootProperty();
 
-    virtual bool StringToValue( wxVariant&, const wxString&, int ) const override
+    bool StringToValue( wxVariant&, const wxString&, int ) const override
     {
         return false;
     }
@@ -2160,8 +2160,8 @@ public:
 
     int GetTextExtent( const wxWindow* wnd, const wxFont& font ) const;
 
-    virtual wxString ValueToString( wxVariant& value, int argFlags ) const override;
-    virtual wxString GetValueAsString( int argFlags = 0 ) const override;
+    wxString ValueToString( wxVariant& value, int argFlags ) const override;
+    wxString GetValueAsString( int argFlags = 0 ) const override;
 
 protected:
     void SetTextColIndex( unsigned int colInd )

@@ -31,9 +31,9 @@ public :
     }
     virtual ~wxNSTextBase() { }
 
-    virtual bool ShouldHandleKeyNavigation(const wxKeyEvent &event) const override;
+    bool ShouldHandleKeyNavigation(const wxKeyEvent &event) const override;
 
-    virtual void SetInitialLabel(const wxString& WXUNUSED(title), wxFontEncoding WXUNUSED(encoding)) override
+    void SetInitialLabel(const wxString& WXUNUSED(title), wxFontEncoding WXUNUSED(encoding)) override
     {
         // Don't do anything here, text controls don't have any label and
         // setting it would overwrite the string value set when creating it.
@@ -53,33 +53,33 @@ public :
     wxNSTextFieldControl( wxWindow *wxPeer, wxTextEntry *entry, WXWidget w );
     virtual ~wxNSTextFieldControl();
 
-    virtual bool CanClipMaxLength() const override { return true; }
-    virtual void SetMaxLength(unsigned long len) override;
+    bool CanClipMaxLength() const override { return true; }
+    void SetMaxLength(unsigned long len) override;
 
-    virtual bool CanForceUpper() override { return true; }
-    virtual void ForceUpper() override;
+    bool CanForceUpper() override { return true; }
+    void ForceUpper() override;
 
-    virtual wxString GetStringValue() const override ;
-    virtual void SetStringValue( const wxString &str) override ;
-    virtual void Copy() override ;
-    virtual void Cut() override ;
-    virtual void Paste() override ;
-    virtual bool CanPaste() const override ;
-    virtual void SetEditable(bool editable) override ;
-    virtual long GetLastPosition() const override;
-    virtual void GetSelection( long* from, long* to) const override ;
-    virtual void SetSelection( long from , long to ) override;
-    virtual bool PositionToXY(long pos, long *x, long *y) const override;
-    virtual long XYToPosition(long x, long y) const override;
-    virtual void ShowPosition(long pos) override;
-    virtual void WriteText(const wxString& str) override ;
-    virtual bool HasOwnContextMenu() const override { return true; }
-    virtual bool SetHint(const wxString& hint) override;
-    virtual void SetJustification() override;
+    wxString GetStringValue() const override ;
+    void SetStringValue( const wxString &str) override ;
+    void Copy() override ;
+    void Cut() override ;
+    void Paste() override ;
+    bool CanPaste() const override ;
+    void SetEditable(bool editable) override ;
+    long GetLastPosition() const override;
+    void GetSelection( long* from, long* to) const override ;
+    void SetSelection( long from , long to ) override;
+    bool PositionToXY(long pos, long *x, long *y) const override;
+    long XYToPosition(long x, long y) const override;
+    void ShowPosition(long pos) override;
+    void WriteText(const wxString& str) override ;
+    bool HasOwnContextMenu() const override { return true; }
+    bool SetHint(const wxString& hint) override;
+    void SetJustification() override;
 
-    virtual void controlAction(WXWidget slf, void* _cmd, void *sender) override;
-    virtual bool becomeFirstResponder(WXWidget slf, void *_cmd) override;
-    virtual bool resignFirstResponder(WXWidget slf, void *_cmd) override;
+    void controlAction(WXWidget slf, void* _cmd, void *sender) override;
+    bool becomeFirstResponder(WXWidget slf, void *_cmd) override;
+    bool resignFirstResponder(WXWidget slf, void *_cmd) override;
 
     virtual void SetInternalSelection( long from , long to );
     virtual void UpdateInternalSelectionFromEditor( wxNSTextFieldEditor* editor);
@@ -102,39 +102,39 @@ public:
     wxNSTextViewControl( wxTextCtrl *wxPeer, WXWidget w, long style );
     virtual ~wxNSTextViewControl();
 
-    virtual void insertText(NSString* text, WXWidget slf, void *_cmd) override;
+    void insertText(NSString* text, WXWidget slf, void *_cmd) override;
 
-    virtual wxString GetStringValue() const override ;
-    virtual void SetStringValue( const wxString &str) override ;
-    virtual void Copy() override ;
-    virtual void Cut() override ;
-    virtual void Paste() override ;
-    virtual bool CanPaste() const override ;
-    virtual void SetEditable(bool editable) override ;
-    virtual long GetLastPosition() const override;
-    virtual void GetSelection( long* from, long* to) const override ;
-    virtual void SetSelection( long from , long to ) override;
-    virtual bool PositionToXY(long pos, long *x, long *y) const override;
-    virtual long XYToPosition(long x, long y) const override;
-    virtual void ShowPosition(long pos) override;
-    virtual void WriteText(const wxString& str) override ;
-    virtual void SetFont(const wxFont & font) override;
+    wxString GetStringValue() const override ;
+    void SetStringValue( const wxString &str) override ;
+    void Copy() override ;
+    void Cut() override ;
+    void Paste() override ;
+    bool CanPaste() const override ;
+    void SetEditable(bool editable) override ;
+    long GetLastPosition() const override;
+    void GetSelection( long* from, long* to) const override ;
+    void SetSelection( long from , long to ) override;
+    bool PositionToXY(long pos, long *x, long *y) const override;
+    long XYToPosition(long x, long y) const override;
+    void ShowPosition(long pos) override;
+    void WriteText(const wxString& str) override ;
+    void SetFont(const wxFont & font) override;
 
-    virtual bool GetStyle(long position, wxTextAttr& style) override;
-    virtual void SetStyle(long start, long end, const wxTextAttr& style) override;
+    bool GetStyle(long position, wxTextAttr& style) override;
+    void SetStyle(long start, long end, const wxTextAttr& style) override;
 
-    virtual bool CanFocus() const override;
+    bool CanFocus() const override;
 
-    virtual bool HasOwnContextMenu() const override { return true; }
+    bool HasOwnContextMenu() const override { return true; }
 
-    virtual void CheckSpelling(bool check) override;
-    virtual void EnableAutomaticQuoteSubstitution(bool enable) override;
-    virtual void EnableAutomaticDashSubstitution(bool enable) override;
+    void CheckSpelling(bool check) override;
+    void EnableAutomaticQuoteSubstitution(bool enable) override;
+    void EnableAutomaticDashSubstitution(bool enable) override;
 
-    virtual wxSize GetBestSize() const override;
-    virtual void SetJustification() override;
+    wxSize GetBestSize() const override;
+    void SetJustification() override;
 
-    virtual void controlTextDidChange() override;
+    void controlTextDidChange() override;
 
 protected:
     void DoUpdateTextStyle();

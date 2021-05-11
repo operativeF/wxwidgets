@@ -101,7 +101,7 @@ public:
             m_toastEventHandler->Detach();
     }
 
-    virtual bool Show(int WXUNUSED(timeout)) override
+    bool Show(int WXUNUSED(timeout)) override
     {
         wxCOMPtr<IXmlDocument> toastXml;
         HRESULT hr = CreateToastXML(&toastXml);
@@ -113,7 +113,7 @@ public:
         return SUCCEEDED(hr);
     }
 
-    virtual bool Close() override
+    bool Close() override
     {
         if ( m_notifier.get() && m_toast.get() )
         {
@@ -125,33 +125,33 @@ public:
             return false;
     }
 
-    virtual void SetTitle(const wxString& title) override
+    void SetTitle(const wxString& title) override
     {
         m_title = title;
     }
 
-    virtual void SetMessage(const wxString& message) override
+    void SetMessage(const wxString& message) override
     {
         m_message = message;
     }
 
-    virtual void SetParent(wxWindow *WXUNUSED(parent)) override
+    void SetParent(wxWindow *WXUNUSED(parent)) override
     {
 
     }
 
-    virtual void SetFlags(int WXUNUSED(flags)) override
+    void SetFlags(int WXUNUSED(flags)) override
     {
 
     }
 
-    virtual void SetIcon(const wxIcon& WXUNUSED(icon)) override
+    void SetIcon(const wxIcon& WXUNUSED(icon)) override
     {
         // Icon would have to be saved to disk (temporarily?)
         // to be used as a file:// url in the notifications XML
     }
 
-    virtual bool AddAction(wxWindowID WXUNUSED(actionid), const wxString &WXUNUSED(label)) override
+    bool AddAction(wxWindowID WXUNUSED(actionid), const wxString &WXUNUSED(label)) override
     {
         return false;
     }
@@ -464,12 +464,12 @@ public:
         AddDependency("wxOleInitModule");
     }
 
-    virtual bool OnInit() override
+    bool OnInit() override
     {
         return true;
     }
 
-    virtual void OnExit() override
+    void OnExit() override
     {
         wxToastNotifMsgImpl::Uninitalize();
     }

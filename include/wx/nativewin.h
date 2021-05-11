@@ -168,42 +168,42 @@ public:
 
 
     // provide (trivial) implementation of the base class pure virtuals
-    virtual void SetTitle(const wxString& WXUNUSED(title)) override
+    void SetTitle(const wxString& WXUNUSED(title)) override
     {
         wxFAIL_MSG( "not implemented for native windows" );
     }
 
-    virtual wxString GetTitle() const override
+    wxString GetTitle() const override
     {
         wxFAIL_MSG( "not implemented for native windows" );
 
         return wxString();
     }
 
-    virtual void Maximize(bool WXUNUSED(maximize) = true) override
+    void Maximize(bool WXUNUSED(maximize) = true) override
     {
         wxFAIL_MSG( "not implemented for native windows" );
     }
 
-    virtual bool IsMaximized() const override
+    bool IsMaximized() const override
     {
         wxFAIL_MSG( "not implemented for native windows" );
 
         return false;
     }
 
-    virtual void Iconize(bool WXUNUSED(iconize) = true) override
+    void Iconize(bool WXUNUSED(iconize) = true) override
     {
         wxFAIL_MSG( "not implemented for native windows" );
     }
 
-    virtual bool IsIconized() const override
+    bool IsIconized() const override
     {
         // this is called by wxGTK implementation so don't assert
         return false;
     }
 
-    virtual void Restore() override
+    void Restore() override
     {
         wxFAIL_MSG( "not implemented for native windows" );
     }
@@ -216,7 +216,7 @@ public:
         return false;
     }
 
-    virtual bool IsFullScreen() const override
+    bool IsFullScreen() const override
     {
         wxFAIL_MSG( "not implemented for native windows" );
 
@@ -224,7 +224,7 @@ public:
     }
 
 #ifdef __WXMSW__
-    virtual bool IsShown() const override;
+    bool IsShown() const override;
 #endif // __WXMSW__
 
     // this is an implementation detail: called when the native window is

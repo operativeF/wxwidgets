@@ -48,7 +48,7 @@ public:
 
     // multiple selection logic
     virtual bool IsSelected(int n) const = 0;
-    virtual void SetSelection(int n) override;
+    void SetSelection(int n) override;
     void SetSelection(int n, bool select) { DoSetSelection(n, select); }
     void Deselect(int n) { DoSetSelection(n, false); }
     void DeselectAll(int itemToLeaveSelected = -1);
@@ -87,7 +87,7 @@ public:
     }
 
     // override wxItemContainer::IsSorted
-    virtual bool IsSorted() const override { return HasFlag( wxLB_SORT ); }
+    bool IsSorted() const override { return HasFlag( wxLB_SORT ); }
 
     // emulate selecting or deselecting the item event.GetInt() (depending on
     // event.GetExtraLong())

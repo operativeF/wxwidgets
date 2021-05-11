@@ -157,7 +157,7 @@ public:
 
     virtual ~wxBlindPlateWindow();
 
-    virtual bool AcceptsFocus() const override
+    bool AcceptsFocus() const override
     {
         return false;
     }

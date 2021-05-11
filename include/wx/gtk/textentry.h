@@ -28,34 +28,34 @@ public:
     virtual ~wxTextEntry();
 
     // implement wxTextEntryBase pure virtual methods
-    virtual void WriteText(const wxString& text) override;
-    virtual void Remove(long from, long to) override;
+    void WriteText(const wxString& text) override;
+    void Remove(long from, long to) override;
 
-    virtual void Copy() override;
-    virtual void Cut() override;
-    virtual void Paste() override;
+    void Copy() override;
+    void Cut() override;
+    void Paste() override;
 
-    virtual void Undo() override;
-    virtual void Redo() override;
-    virtual bool CanUndo() const override;
-    virtual bool CanRedo() const override;
+    void Undo() override;
+    void Redo() override;
+    bool CanUndo() const override;
+    bool CanRedo() const override;
 
-    virtual void SetInsertionPoint(long pos) override;
-    virtual long GetInsertionPoint() const override;
-    virtual long GetLastPosition() const override;
+    void SetInsertionPoint(long pos) override;
+    long GetInsertionPoint() const override;
+    long GetLastPosition() const override;
 
-    virtual void SetSelection(long from, long to) override;
-    virtual void GetSelection(long *from, long *to) const override;
+    void SetSelection(long from, long to) override;
+    void GetSelection(long *from, long *to) const override;
 
-    virtual bool IsEditable() const override;
-    virtual void SetEditable(bool editable) override;
+    bool IsEditable() const override;
+    void SetEditable(bool editable) override;
 
-    virtual void SetMaxLength(unsigned long len) override;
-    virtual void ForceUpper() override;
+    void SetMaxLength(unsigned long len) override;
+    void ForceUpper() override;
 
 #ifdef __WXGTK3__
-    virtual bool SetHint(const wxString& hint) override;
-    virtual wxString GetHint() const override;
+    bool SetHint(const wxString& hint) override;
+    wxString GetHint() const override;
 #endif
 
     // implementation only from now on
@@ -86,15 +86,15 @@ protected:
     void GTKConnectChangedSignal();
 
 
-    virtual void DoSetValue(const wxString& value, int flags) override;
-    virtual wxString DoGetValue() const override;
+    void DoSetValue(const wxString& value, int flags) override;
+    wxString DoGetValue() const override;
 
     // margins functions
-    virtual bool DoSetMargins(const wxPoint& pt) override;
-    virtual wxPoint DoGetMargins() const override;
+    bool DoSetMargins(const wxPoint& pt) override;
+    wxPoint DoGetMargins() const override;
 
-    virtual bool DoAutoCompleteStrings(const wxArrayString& choices) override;
-    virtual bool DoAutoCompleteCustom(wxTextCompleter *completer) override;
+    bool DoAutoCompleteStrings(const wxArrayString& choices) override;
+    bool DoAutoCompleteCustom(wxTextCompleter *completer) override;
 
     // Call this from the overridden wxWindow::GTKIMFilterKeypress() to use
     // GtkEntry IM context.
@@ -112,7 +112,7 @@ protected:
     //
     // Note that we make it protected in wxGTK as it is called from wxComboBox
     // currently.
-    virtual void EnableTextChangedEvents(bool enable) override;
+    void EnableTextChangedEvents(bool enable) override;
 
     // Helper for wxTE_PROCESS_ENTER handling: activates the default button in
     // the dialog containing this control if any.

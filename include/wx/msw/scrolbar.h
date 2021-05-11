@@ -39,7 +39,7 @@ public:
     int GetPageSize() const override { return m_viewSize; }
     int GetRange() const override { return m_objectSize; }
 
-    virtual void SetThumbPosition(int viewStart) override;
+    void SetThumbPosition(int viewStart) override;
     virtual void SetScrollbar(int position, int thumbSize, int range, int pageSize,
             bool refresh = true) override;
 
@@ -53,15 +53,15 @@ public:
                              WXWORD pos, WXHWND control) override;
 
     // override wxControl version to not use solid background here
-    virtual WXHBRUSH MSWControlColor(WXHDC pDC, WXHWND hWnd) override;
+    WXHBRUSH MSWControlColor(WXHDC pDC, WXHWND hWnd) override;
 
-    virtual WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
 
     // returns true if the platform should explicitly apply a theme border
-    virtual bool CanApplyThemeBorder() const override { return false; }
+    bool CanApplyThemeBorder() const override { return false; }
 
 protected:
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
 
     int m_pageSize;
     int m_viewSize;

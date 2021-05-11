@@ -35,12 +35,12 @@ public:
     void EnableMarkup(bool enable = true);
 #endif // wxUSE_MARKUP
 
-    virtual bool SetValue( const wxVariant &value ) override
+    bool SetValue( const wxVariant &value ) override
     {
         return SetTextValue(value);
     }
 
-    virtual bool GetValue( wxVariant &value ) const override
+    bool GetValue( wxVariant &value ) const override
     {
         wxString str;
         if ( !GetTextValue(str) )
@@ -51,12 +51,12 @@ public:
         return true;
     }
 
-    virtual void GtkUpdateAlignment() override;
+    void GtkUpdateAlignment() override;
 
-    virtual GtkCellRendererText *GtkGetTextRenderer() const override;
+    GtkCellRendererText *GtkGetTextRenderer() const override;
 
 protected:
-    virtual void SetAttr(const wxDataViewItemAttr& attr) override;
+    void SetAttr(const wxDataViewItemAttr& attr) override;
 
     // implementation of Set/GetValue()
     bool SetTextValue(const wxString& str);
@@ -133,7 +133,7 @@ public:
 
 
     // Create DC on request
-    virtual wxDC *GetDC() override;
+    wxDC *GetDC() override;
 
     // override the base class function to use GTK text cell renderer
     virtual void RenderText(const wxString& text,
@@ -150,10 +150,10 @@ public:
         m_renderParams = renderParams;
     }
 
-    virtual GtkCellRendererText *GtkGetTextRenderer() const override;
-    virtual GtkWidget* GtkGetEditorWidget() const override;
+    GtkCellRendererText *GtkGetTextRenderer() const override;
+    GtkWidget* GtkGetEditorWidget() const override;
 
-    virtual void GtkUpdateAlignment() override;
+    void GtkUpdateAlignment() override;
 
 private:
     bool Init(wxDataViewCellMode mode, int align);
@@ -191,8 +191,8 @@ public:
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
 
-    virtual bool Render( wxRect cell, wxDC *dc, int state ) override;
-    virtual wxSize GetSize() const override;
+    bool Render( wxRect cell, wxDC *dc, int state ) override;
+    wxSize GetSize() const override;
 
 private:
     void GTKSetLabel();
@@ -227,10 +227,10 @@ public:
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
 
-    virtual void GtkPackIntoColumn(GtkTreeViewColumn *column) override;
+    void GtkPackIntoColumn(GtkTreeViewColumn *column) override;
 
 protected:
-    virtual wxVariant GtkGetValueFromString(const wxString& str) const override;
+    wxVariant GtkGetValueFromString(const wxString& str) const override;
 
 private:
     wxDataViewIconText   m_value;
@@ -251,12 +251,12 @@ public:
     wxDataViewChoiceRenderer(const wxArrayString &choices,
                              wxDataViewCellMode mode = wxDATAVIEW_CELL_EDITABLE,
                              int alignment = wxDVR_DEFAULT_ALIGNMENT );
-    virtual bool Render( wxRect rect, wxDC *dc, int state ) override;
-    virtual wxSize GetSize() const override;
-    virtual bool SetValue( const wxVariant &value ) override;
-    virtual bool GetValue( wxVariant &value ) const override;
+    bool Render( wxRect rect, wxDC *dc, int state ) override;
+    wxSize GetSize() const override;
+    bool SetValue( const wxVariant &value ) override;
+    bool GetValue( wxVariant &value ) const override;
 
-    virtual void GtkUpdateAlignment() override;
+    void GtkUpdateAlignment() override;
 
     wxString GetChoice(size_t index) const { return m_choices[index]; }
     const wxArrayString& GetChoices() const { return m_choices; }
@@ -277,11 +277,11 @@ public:
                               wxDataViewCellMode mode = wxDATAVIEW_CELL_EDITABLE,
                               int alignment = wxDVR_DEFAULT_ALIGNMENT );
 
-    virtual bool SetValue( const wxVariant &value ) override;
-    virtual bool GetValue( wxVariant &value ) const override;
+    bool SetValue( const wxVariant &value ) override;
+    bool GetValue( wxVariant &value ) const override;
 
 private:
-    virtual wxVariant GtkGetValueFromString(const wxString& str) const override;
+    wxVariant GtkGetValueFromString(const wxString& str) const override;
 };
 
 

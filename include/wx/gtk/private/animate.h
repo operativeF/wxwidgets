@@ -30,23 +30,23 @@ public:
         : m_pixbuf(NULL) {}
     ~wxAnimationGTKImpl() { UnRef(); }
 
-    virtual bool IsOk() const override
+    bool IsOk() const override
         { return m_pixbuf != NULL; }
-    virtual bool IsCompatibleWith(wxClassInfo* ci) const override;
+    bool IsCompatibleWith(wxClassInfo* ci) const override;
 
 
     // unfortunately GdkPixbufAnimation does not expose these info:
 
-    virtual unsigned int GetFrameCount() const override { return 0; }
-    virtual wxImage GetFrame(unsigned int frame) const override;
+    unsigned int GetFrameCount() const override { return 0; }
+    wxImage GetFrame(unsigned int frame) const override;
 
     // we can retrieve the delay for a frame only after building
     // a GdkPixbufAnimationIter...
-    virtual int GetDelay(unsigned int WXUNUSED(frame)) const override { return 0; }
-    virtual wxSize GetSize() const override;
+    int GetDelay(unsigned int WXUNUSED(frame)) const override { return 0; }
+    wxSize GetSize() const override;
 
-    virtual bool LoadFile(const wxString &name, wxAnimationType type = wxANIMATION_TYPE_ANY) override;
-    virtual bool Load(wxInputStream &stream, wxAnimationType type = wxANIMATION_TYPE_ANY) override;
+    bool LoadFile(const wxString &name, wxAnimationType type = wxANIMATION_TYPE_ANY) override;
+    bool Load(wxInputStream &stream, wxAnimationType type = wxANIMATION_TYPE_ANY) override;
 
     // Implementation
 public:     // used by GTK callbacks

@@ -91,7 +91,7 @@ class MyPage : public wxScrolledWindow
 {
 public:
     MyPage(wxNotebook *parent, int index);
-    virtual void OnDraw(wxDC& dc) override;
+    void OnDraw(wxDC& dc) override;
     bool OnSave(wxString);
 private:
     int m_index;

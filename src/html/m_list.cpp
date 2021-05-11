@@ -87,7 +87,7 @@ class wxHtmlListCell : public wxHtmlContainerCell
         explicit wxHtmlListCell(wxHtmlContainerCell *parent);
         virtual ~wxHtmlListCell();
         void AddRow(wxHtmlContainerCell *mark, wxHtmlContainerCell *cont);
-        virtual void Layout(int w) override;
+        void Layout(int w) override;
 
     wxDECLARE_NO_COPY_CLASS(wxHtmlListCell);
 };
@@ -202,7 +202,7 @@ class wxHtmlListcontentCell : public wxHtmlContainerCell
 {
 public:
     explicit wxHtmlListcontentCell(wxHtmlContainerCell *p) : wxHtmlContainerCell(p) {}
-    virtual void Layout(int w) override {
+    void Layout(int w) override {
         // Reset top indentation, fixes <li><p>
         SetIndent(0, wxHTML_INDENT_TOP);
         wxHtmlContainerCell::Layout(w);

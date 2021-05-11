@@ -70,11 +70,11 @@ class FilePickerWidgetsPage : public WidgetsPage
 public:
     FilePickerWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_filePicker; }
-    virtual void RecreateWidget() override { RecreatePicker(); }
+    wxWindow *GetWidget() const override { return m_filePicker; }
+    void RecreateWidget() override { RecreatePicker(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 protected:
 

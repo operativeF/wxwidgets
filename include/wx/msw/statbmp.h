@@ -46,18 +46,18 @@ public:
 
     virtual ~wxStaticBitmap() { Free(); }
 
-    virtual void SetIcon(const wxIcon& icon) override { SetImage(&icon); }
-    virtual void SetBitmap(const wxBitmap& bitmap) override { SetImage(&bitmap); }
-    virtual wxBitmap GetBitmap() const override;
-    virtual wxIcon GetIcon() const override;
+    void SetIcon(const wxIcon& icon) override { SetImage(&icon); }
+    void SetBitmap(const wxBitmap& bitmap) override { SetImage(&bitmap); }
+    wxBitmap GetBitmap() const override;
+    wxIcon GetIcon() const override;
 
-    virtual WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
+    WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
 
     // returns true if the platform should explicitly apply a theme border
-    virtual bool CanApplyThemeBorder() const override { return false; }
+    bool CanApplyThemeBorder() const override { return false; }
 
 protected:
-    virtual wxSize DoGetBestClientSize() const override;
+    wxSize DoGetBestClientSize() const override;
 
     // ctor/dtor helpers
     void Init();

@@ -105,7 +105,7 @@ private:
         {
         }
 
-        virtual void Notify() override
+        void Notify() override
         {
             m_owner->Advance();
         }

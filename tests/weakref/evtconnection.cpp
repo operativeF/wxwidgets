@@ -34,7 +34,7 @@ class wxTestEvent : public wxEvent
 {
 public:
     wxTestEvent(wxEventType type = wxEVT_TEST) : wxEvent(0, type) { }
-    virtual wxEvent *Clone() const override { return new wxTestEvent(GetEventType()); }
+    wxEvent *Clone() const override { return new wxTestEvent(GetEventType()); }
 };
 
 class wxTestSink : public wxEvtHandler

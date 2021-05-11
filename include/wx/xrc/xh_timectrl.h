@@ -18,8 +18,8 @@ class WXDLLIMPEXP_XRC wxTimeCtrlXmlHandler : public wxXmlResourceHandler
 {
 public:
     wxTimeCtrlXmlHandler();
-    virtual wxObject *DoCreateResource() override;
-    virtual bool CanHandle(wxXmlNode *node) override;
+    wxObject *DoCreateResource() override;
+    bool CanHandle(wxXmlNode *node) override;
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxTimeCtrlXmlHandler);

@@ -44,8 +44,8 @@ public:
                 const wxString& name = wxASCII_STR(wxGaugeNameStr));
 
     // implement base class virtuals
-    virtual void SetRange(int range) override;
-    virtual void SetValue(int pos) override;
+    void SetRange(int range) override;
+    void SetValue(int pos) override;
 
     // wxUniv-specific methods
 
@@ -60,13 +60,13 @@ protected:
     void Init();
 
     // return the def border for a progress bar
-    virtual wxBorder GetDefaultBorder() const override;
+    wxBorder GetDefaultBorder() const override;
 
     // return the default size
-    virtual wxSize DoGetBestClientSize() const override;
+    wxSize DoGetBestClientSize() const override;
 
     // draw the control
-    virtual void DoDraw(wxControlRenderer *renderer) override;
+    void DoDraw(wxControlRenderer *renderer) override;
 
     wxDECLARE_DYNAMIC_CLASS(wxGauge);
 };

@@ -170,12 +170,12 @@ public:
     {
     }
 
-    virtual wxObject* Clone() const override
+    wxObject* Clone() const override
     {
         return new wxInvalidWordValidator(m_invalidWord);
     }
 
-    virtual bool Validate(wxWindow* WXUNUSED(parent)) override
+    bool Validate(wxWindow* WXUNUSED(parent)) override
     {
         wxTextCtrl* tc = wxDynamicCast(GetWindow(), wxTextCtrl);
         wxCHECK_MSG(tc, true, "validator window must be wxTextCtrl");
@@ -350,13 +350,13 @@ public:
     }
 
     // Set editor to have button
-    virtual const wxPGEditor* DoGetEditorClass() const override
+    const wxPGEditor* DoGetEditorClass() const override
     {
         return wxPGEditor_TextCtrlAndButton;
     }
 
     // Set what happens on button click
-    virtual wxPGEditorDialogAdapter* GetEditorDialog() const override
+    wxPGEditorDialogAdapter* GetEditorDialog() const override
     {
         return new wxSingleChoiceDialogAdapter(m_choices);
     }
@@ -1741,7 +1741,7 @@ public:
 
     // Return false here to indicate unhandled events should be
     // propagated to manager's parent, as normal.
-    virtual bool IsHandlingAllEvents() const override { return false; }
+    bool IsHandlingAllEvents() const override { return false; }
 
 protected:
 

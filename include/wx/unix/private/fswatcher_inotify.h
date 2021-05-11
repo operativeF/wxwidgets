@@ -60,9 +60,9 @@ public:
         m_service(service)
     {  }
 
-    virtual void OnReadWaiting() override;
-    virtual void OnWriteWaiting() override;
-    virtual void OnExceptionWaiting() override;
+    void OnReadWaiting() override;
+    void OnWriteWaiting() override;
+    void OnExceptionWaiting() override;
 
 protected:
     wxFSWatcherImplUnix* m_service;

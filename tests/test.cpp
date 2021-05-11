@@ -204,11 +204,11 @@ public:
     TestApp();
 
     // standard overrides
-    virtual bool OnInit() override;
-    virtual int  OnExit() override;
+    bool OnInit() override;
+    int  OnExit() override;
 
 #ifdef __WIN32__
-    virtual wxAppTraits *CreateTraits() override
+    wxAppTraits *CreateTraits() override
     {
         // Define a new class just to customize CanUseStderr() behaviour.
         class TestAppTraits : public TestAppTraitsBase
@@ -218,11 +218,11 @@ public:
             // in this case we really don't want to show any message boxes, as
             // wxMessageOutputBest, used e.g. from the default implementation
             // of wxApp::OnUnhandledException(), would do by default.
-            virtual bool CanUseStderr() override { return true; }
+            bool CanUseStderr() override { return true; }
 
             // Overriding CanUseStderr() is not enough, we also need to
             // override this one to avoid returning false from it.
-            virtual bool WriteToStderr(const wxString& text) override
+            bool WriteToStderr(const wxString& text) override
             {
                 wxFputs(text, stderr);
                 fflush(stderr);
@@ -239,7 +239,7 @@ public:
 
     // Also override this method to avoid showing any dialogs from here -- and
     // show some details about the exception along the way.
-    virtual bool OnExceptionInMainLoop() override
+    bool OnExceptionInMainLoop() override
     {
         wxFprintf(stderr, wxASCII_STR("Unhandled exception in the main loop: %s\n"),
                   wxASCII_STR(Catch::translateActiveException().c_str()));
@@ -248,8 +248,8 @@ public:
     }
 
     // used by events propagation test
-    virtual int FilterEvent(wxEvent& event) override;
-    virtual bool ProcessEvent(wxEvent& event) override;
+    int FilterEvent(wxEvent& event) override;
+    bool ProcessEvent(wxEvent& event) override;
 
     void SetFilterEventFunc(FilterEventFunc f) { m_filterEventFunc = f; }
     void SetProcessEventFunc(ProcessEventFunc f) { m_processEventFunc = f; }
@@ -287,7 +287,7 @@ public:
         event.Skip();
     }
 
-    virtual int OnRun() override
+    int OnRun() override
     {
         if ( TestAppBase::OnRun() != 0 )
             m_exitcode = EXIT_FAILURE;
@@ -295,7 +295,7 @@ public:
         return m_exitcode;
     }
 #else // !wxUSE_GUI
-    virtual int OnRun() override
+    int OnRun() override
     {
         return RunTests();
     }

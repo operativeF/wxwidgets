@@ -24,16 +24,16 @@ class TreebookTestCase : public BookCtrlBaseTestCase, public CppUnit::TestCase
 public:
     TreebookTestCase() { }
 
-    virtual void setUp() override;
-    virtual void tearDown() override;
+    void setUp() override;
+    void tearDown() override;
 
 private:
-    virtual wxBookCtrlBase *GetBase() const override { return m_treebook; }
+    wxBookCtrlBase *GetBase() const override { return m_treebook; }
 
-    virtual wxEventType GetChangedEvent() const override
+    wxEventType GetChangedEvent() const override
         { return wxEVT_TREEBOOK_PAGE_CHANGED; }
 
-    virtual wxEventType GetChangingEvent() const override
+    wxEventType GetChangingEvent() const override
         { return wxEVT_TREEBOOK_PAGE_CHANGING; }
 
     CPPUNIT_TEST_SUITE( TreebookTestCase );

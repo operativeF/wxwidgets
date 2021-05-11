@@ -163,7 +163,7 @@ class wxIEContainer : public wxActiveXContainer
 public:
     wxIEContainer(wxWindow *parent, REFIID iid, IUnknown *pUnk, DocHostUIHandler* uiHandler = NULL);
     virtual ~wxIEContainer();
-    virtual bool QueryClientSiteInterface(REFIID iid, void **_interface, const char *&desc) override;
+    bool QueryClientSiteInterface(REFIID iid, void **_interface, const char *&desc) override;
 private:
     DocHostUIHandler* m_uiHandler;
 };
@@ -178,7 +178,7 @@ public:
                                               IUnknown *pcmdtReserved,
                                               IDispatch *pdispReserved) override;
 
-    virtual HRESULT wxSTDCALL GetHostInfo(DOCHOSTUIINFO *pInfo) override;
+    HRESULT wxSTDCALL GetHostInfo(DOCHOSTUIINFO *pInfo) override;
 
     virtual HRESULT wxSTDCALL ShowUI(DWORD dwID,
                                      IOleInPlaceActiveObject *pActiveObject,
@@ -186,15 +186,15 @@ public:
                                      IOleInPlaceFrame *pFrame,
                                      IOleInPlaceUIWindow *pDoc) override;
 
-    virtual HRESULT wxSTDCALL HideUI(void) override;
+    HRESULT wxSTDCALL HideUI(void) override;
 
-    virtual HRESULT wxSTDCALL UpdateUI(void) override;
+    HRESULT wxSTDCALL UpdateUI(void) override;
 
-    virtual HRESULT wxSTDCALL EnableModeless(BOOL fEnable) override;
+    HRESULT wxSTDCALL EnableModeless(BOOL fEnable) override;
 
-    virtual HRESULT wxSTDCALL OnDocWindowActivate(BOOL fActivate) override;
+    HRESULT wxSTDCALL OnDocWindowActivate(BOOL fActivate) override;
 
-    virtual HRESULT wxSTDCALL OnFrameWindowActivate(BOOL fActivate) override;
+    HRESULT wxSTDCALL OnFrameWindowActivate(BOOL fActivate) override;
 
     virtual HRESULT wxSTDCALL ResizeBorder(LPCRECT prcBorder,
                                            IOleInPlaceUIWindow *pUIWindow,
@@ -210,7 +210,7 @@ public:
     virtual HRESULT wxSTDCALL GetDropTarget(IDropTarget *pDropTarget,
                                             IDropTarget **ppDropTarget) override;
 
-    virtual HRESULT wxSTDCALL GetExternal(IDispatch **ppDispatch) override;
+    HRESULT wxSTDCALL GetExternal(IDispatch **ppDispatch) override;
 
     virtual HRESULT wxSTDCALL TranslateUrl(DWORD dwTranslate,
                                            OLECHAR *pchURLIn,

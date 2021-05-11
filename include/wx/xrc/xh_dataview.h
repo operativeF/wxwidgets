@@ -20,8 +20,8 @@ class WXDLLIMPEXP_XRC wxDataViewXmlHandler : public wxXmlResourceHandler
 
 public:
     wxDataViewXmlHandler();
-    virtual wxObject *DoCreateResource() override;
-    virtual bool CanHandle(wxXmlNode *node) override;
+    wxObject *DoCreateResource() override;
+    bool CanHandle(wxXmlNode *node) override;
 
 private:
     wxObject* HandleCtrl();

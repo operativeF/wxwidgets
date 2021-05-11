@@ -82,8 +82,8 @@ class SpinBtnWidgetsPage : public WidgetsPage
 public:
     SpinBtnWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_spinbtn; }
-    virtual Widgets GetWidgets() const override
+    wxWindow *GetWidget() const override { return m_spinbtn; }
+    Widgets GetWidgets() const override
     {
         Widgets widgets(WidgetsPage::GetWidgets());
         widgets.push_back(m_spinctrl);
@@ -91,10 +91,10 @@ public:
         return widgets;
     }
 
-    virtual void RecreateWidget() override { CreateSpin(); }
+    void RecreateWidget() override { CreateSpin(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 protected:
     // event handlers

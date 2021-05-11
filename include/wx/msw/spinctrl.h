@@ -74,21 +74,21 @@ public:
 
     virtual ~wxSpinCtrl();
 
-    virtual void SetValue(int val) override;
-    virtual int  GetValue() const override;
-    virtual void SetRange(int minVal, int maxVal) override;
-    virtual bool SetFont(const wxFont &font) override;
+    void SetValue(int val) override;
+    int  GetValue() const override;
+    void SetRange(int minVal, int maxVal) override;
+    bool SetFont(const wxFont &font) override;
 
-    virtual bool Enable(bool enable = true) override;
-    virtual bool Show(bool show = true) override;
+    bool Enable(bool enable = true) override;
+    bool Show(bool show = true) override;
 
-    virtual bool Reparent(wxWindowBase *newParent) override;
+    bool Reparent(wxWindowBase *newParent) override;
 
     // wxSpinButton doesn't accept focus, but we do
-    virtual bool AcceptsFocus() const override { return wxWindow::AcceptsFocus(); }
+    bool AcceptsFocus() const override { return wxWindow::AcceptsFocus(); }
 
     // we're like wxTextCtrl and not (default) wxButton
-    virtual wxVisualAttributes GetDefaultAttributes() const override
+    wxVisualAttributes GetDefaultAttributes() const override
     {
         return GetClassDefaultAttributes(GetWindowVariant());
     }
@@ -111,29 +111,29 @@ public:
     bool ProcessTextCommand(WXWORD cmd, WXWORD id);
 
     // recognize buddy window as part of this control at wx level
-    virtual bool ContainsHWND(WXHWND hWnd) const override { return hWnd == m_hwndBuddy; }
+    bool ContainsHWND(WXHWND hWnd) const override { return hWnd == m_hwndBuddy; }
 
-    virtual void SetLayoutDirection(wxLayoutDirection dir) override;
+    void SetLayoutDirection(wxLayoutDirection dir) override;
 
-    virtual WXHWND MSWGetFocusHWND() const override;
+    WXHWND MSWGetFocusHWND() const override;
 
 protected:
-    virtual void DoGetPosition(int *x, int *y) const override;
-    virtual void DoMoveWindow(int x, int y, int width, int height) override;
-    virtual wxSize DoGetBestSize() const override;
-    virtual wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
-    virtual void DoGetSize(int *width, int *height) const override;
-    virtual void DoGetClientSize(int *x, int *y) const override;
-    virtual void DoClientToScreen(int *x, int *y) const override;
-    virtual void DoScreenToClient(int *x, int *y) const override;
+    void DoGetPosition(int *x, int *y) const override;
+    void DoMoveWindow(int x, int y, int width, int height) override;
+    wxSize DoGetBestSize() const override;
+    wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
+    void DoGetSize(int *width, int *height) const override;
+    void DoGetClientSize(int *x, int *y) const override;
+    void DoClientToScreen(int *x, int *y) const override;
+    void DoScreenToClient(int *x, int *y) const override;
 #if wxUSE_TOOLTIPS
-    virtual void DoSetToolTip( wxToolTip *tip ) override;
+    void DoSetToolTip( wxToolTip *tip ) override;
 #endif // wxUSE_TOOLTIPS
 
-    virtual bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
+    bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
     virtual bool MSWOnScroll(int orientation, WXWORD wParam,
                              WXWORD pos, WXHWND control) override;
-    virtual void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
+    void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
 
     // handle processing of special keys
     void OnChar(wxKeyEvent& event);
@@ -144,7 +144,7 @@ protected:
     void SendSpinUpdate(int value);
 
     // called to ensure that the value is in the correct range
-    virtual void NormalizeValue() override;
+    void NormalizeValue() override;
 
     // the value of the control before the latest change (which might not have
     // changed anything in fact -- this is why we need this field)

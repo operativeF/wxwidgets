@@ -238,8 +238,8 @@ class wxTimerUnixModule : public wxModule
 {
 public:
     wxTimerUnixModule() {}
-    virtual bool OnInit() override { return true; }
-    virtual void OnExit() override { wxTimerScheduler::Shutdown(); }
+    bool OnInit() override { return true; }
+    void OnExit() override { wxTimerScheduler::Shutdown(); }
 
     wxDECLARE_DYNAMIC_CLASS(wxTimerUnixModule);
 };

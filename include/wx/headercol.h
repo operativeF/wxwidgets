@@ -234,34 +234,34 @@ public:
     }
 
     // implement base class pure virtuals
-    virtual void SetTitle(const wxString& title) override { m_title = title; }
-    virtual wxString GetTitle() const override { return m_title; }
+    void SetTitle(const wxString& title) override { m_title = title; }
+    wxString GetTitle() const override { return m_title; }
 
-    virtual void SetBitmap(const wxBitmap& bitmap) override { m_bitmap = bitmap; }
+    void SetBitmap(const wxBitmap& bitmap) override { m_bitmap = bitmap; }
     wxBitmap GetBitmap() const override { return m_bitmap; }
 
-    virtual void SetWidth(int width) override { m_width = width; }
-    virtual int GetWidth() const override { return m_width; }
+    void SetWidth(int width) override { m_width = width; }
+    int GetWidth() const override { return m_width; }
 
-    virtual void SetMinWidth(int minWidth) override { m_minWidth = minWidth; }
-    virtual int GetMinWidth() const override { return m_minWidth; }
+    void SetMinWidth(int minWidth) override { m_minWidth = minWidth; }
+    int GetMinWidth() const override { return m_minWidth; }
 
-    virtual void SetAlignment(wxAlignment align) override { m_align = align; }
-    virtual wxAlignment GetAlignment() const override { return m_align; }
+    void SetAlignment(wxAlignment align) override { m_align = align; }
+    wxAlignment GetAlignment() const override { return m_align; }
 
-    virtual void SetFlags(int flags) override { m_flags = flags; }
-    virtual int GetFlags() const override { return m_flags; }
+    void SetFlags(int flags) override { m_flags = flags; }
+    int GetFlags() const override { return m_flags; }
 
-    virtual bool IsSortKey() const override { return m_sort; }
-    virtual void UnsetAsSortKey() override { m_sort = false; }
+    bool IsSortKey() const override { return m_sort; }
+    void UnsetAsSortKey() override { m_sort = false; }
 
-    virtual void SetSortOrder(bool ascending) override
+    void SetSortOrder(bool ascending) override
     {
         m_sort = true;
         m_sortAscending = ascending;
     }
 
-    virtual bool IsSortOrderAscending() const override { return m_sortAscending; }
+    bool IsSortOrderAscending() const override { return m_sortAscending; }
 
 private:
     // common part of all ctors

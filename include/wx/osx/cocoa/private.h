@@ -78,8 +78,8 @@ public :
 
     void Init();
 
-    virtual bool        IsVisible() const override;
-    virtual void        SetVisibility(bool) override;
+    bool        IsVisible() const override;
+    void        SetVisibility(bool) override;
 
     // we provide a static function which can be reused from
     // wxNonOwnedWindowCocoaImpl too
@@ -92,42 +92,42 @@ public :
                                 wxShowEffect effect,
                                 unsigned timeout) override;
 
-    virtual void        Raise() override;
+    void        Raise() override;
 
-    virtual void        Lower() override;
+    void        Lower() override;
 
-    virtual void        ScrollRect( const wxRect *rect, int dx, int dy ) override;
+    void        ScrollRect( const wxRect *rect, int dx, int dy ) override;
 
-    virtual WXWidget    GetWXWidget() const override { return m_osxView; }
+    WXWidget    GetWXWidget() const override { return m_osxView; }
 
-    virtual void        SetBackgroundColour(const wxColour&) override;
-    virtual bool        SetBackgroundStyle(wxBackgroundStyle style) override;
-    virtual void        SetForegroundColour(const wxColour& col) override;
+    void        SetBackgroundColour(const wxColour&) override;
+    bool        SetBackgroundStyle(wxBackgroundStyle style) override;
+    void        SetForegroundColour(const wxColour& col) override;
 
-    virtual void        GetContentArea( int &left, int &top, int &width, int &height ) const override;
-    virtual void        Move(int x, int y, int width, int height) override;
-    virtual void        GetPosition( int &x, int &y ) const override;
-    virtual void        GetSize( int &width, int &height ) const override;
-    virtual void        SetControlSize( wxWindowVariant variant ) override;
+    void        GetContentArea( int &left, int &top, int &width, int &height ) const override;
+    void        Move(int x, int y, int width, int height) override;
+    void        GetPosition( int &x, int &y ) const override;
+    void        GetSize( int &width, int &height ) const override;
+    void        SetControlSize( wxWindowVariant variant ) override;
 
-    virtual void        SetNeedsDisplay( const wxRect* where = NULL ) override;
-    virtual bool        GetNeedsDisplay() const override;
+    void        SetNeedsDisplay( const wxRect* where = NULL ) override;
+    bool        GetNeedsDisplay() const override;
 
-    virtual void        EnableFocusRing(bool enabled) override;
+    void        EnableFocusRing(bool enabled) override;
 
-    virtual void        SetDrawingEnabled(bool enabled) override;
+    void        SetDrawingEnabled(bool enabled) override;
 
-    virtual bool        CanFocus() const override;
+    bool        CanFocus() const override;
     // return true if successful
-    virtual bool        SetFocus() override;
-    virtual bool        HasFocus() const override;
+    bool        SetFocus() override;
+    bool        HasFocus() const override;
 
     void                RemoveFromParent() override;
     void                Embed( wxWidgetImpl *parent ) override;
 
     void                SetDefaultButton( bool isDefault ) override;
     void                PerformClick() override;
-    virtual void        SetLabel(const wxString& title, wxFontEncoding encoding) override;
+    void        SetLabel(const wxString& title, wxFontEncoding encoding) override;
 
     void                SetCursor( const wxCursor & cursor ) override;
     void                CaptureMouse() override;
@@ -185,7 +185,7 @@ public :
     virtual bool        IsFlipped() const { return m_isFlipped; }
 #endif
 
-    virtual double      GetContentScaleFactor() const override;
+    double      GetContentScaleFactor() const override;
 
     // cocoa thunk connected calls
 
@@ -262,7 +262,7 @@ public :
 
     virtual ~wxNonOwnedWindowCocoaImpl();
 
-    virtual void WillBeDestroyed() override;
+    void WillBeDestroyed() override;
     void Create( wxWindow* parent, const wxPoint& pos, const wxSize& size,
     long style, long extraStyle, const wxString& name ) override;
     void Create( wxWindow* parent, WXWindow nativeWindow );
@@ -291,42 +291,42 @@ public :
     void GetContentArea( int &left, int &top, int &width, int &height ) const override;
     bool SetShape(const wxRegion& region) override;
 
-    virtual void SetTitle( const wxString& title, wxFontEncoding encoding ) override;
+    void SetTitle( const wxString& title, wxFontEncoding encoding ) override;
 
-    virtual bool EnableCloseButton(bool enable) override;
-    virtual bool EnableMaximizeButton(bool enable) override;
-    virtual bool EnableMinimizeButton(bool enable) override;
+    bool EnableCloseButton(bool enable) override;
+    bool EnableMaximizeButton(bool enable) override;
+    bool EnableMinimizeButton(bool enable) override;
 
-    virtual bool IsMaximized() const override;
+    bool IsMaximized() const override;
 
-    virtual bool IsIconized() const override;
+    bool IsIconized() const override;
 
-    virtual void Iconize( bool iconize ) override;
+    void Iconize( bool iconize ) override;
 
-    virtual void Maximize(bool maximize) override;
+    void Maximize(bool maximize) override;
 
-    virtual bool IsFullScreen() const override;
+    bool IsFullScreen() const override;
 
     bool EnableFullScreenView(bool enable) override;
 
-    virtual bool ShowFullScreen(bool show, long style) override;
+    bool ShowFullScreen(bool show, long style) override;
 
-    virtual void ShowWithoutActivating() override;
+    void ShowWithoutActivating() override;
 
-    virtual void RequestUserAttention(int flags) override;
+    void RequestUserAttention(int flags) override;
 
-    virtual void ScreenToWindow( int *x, int *y ) override;
+    void ScreenToWindow( int *x, int *y ) override;
 
-    virtual void WindowToScreen( int *x, int *y ) override;
+    void WindowToScreen( int *x, int *y ) override;
 
-    virtual bool IsActive() override;
+    bool IsActive() override;
 
-    virtual void SetModified(bool modified) override;
-    virtual bool IsModified() const override;
+    void SetModified(bool modified) override;
+    bool IsModified() const override;
 
-    virtual void SetRepresentedFilename(const wxString& filename) override;
+    void SetRepresentedFilename(const wxString& filename) override;
 
-    virtual void SetBottomBorderThickness(int thickness) override;
+    void SetBottomBorderThickness(int thickness) override;
 
     wxNonOwnedWindow*   GetWXPeer() { return m_wxPeer; }
 
@@ -354,9 +354,9 @@ class wxButtonCocoaImpl : public wxWidgetCocoaImpl, public wxButtonImpl
 {
 public:
     wxButtonCocoaImpl(wxWindowMac *wxpeer, wxNSButton *v);
-    virtual void SetBitmap(const wxBitmap& bitmap) override;
+    void SetBitmap(const wxBitmap& bitmap) override;
 #if wxUSE_MARKUP
-    virtual void SetLabelMarkup(const wxString& markup) override;
+    void SetLabelMarkup(const wxString& markup) override;
 #endif // wxUSE_MARKUP
 
     void SetPressedBitmap( const wxBitmap& bitmap ) override;

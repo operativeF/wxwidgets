@@ -27,13 +27,13 @@ public:
               const wxString& name = wxASCII_STR(wxStatusBarNameStr));
 
     // Implementation
-    virtual void MacHiliteChanged() override;
+    void MacHiliteChanged() override;
     void OnPaint(wxPaintEvent& event);
 
 protected:
-    virtual int GetEffectiveFieldStyle(int WXUNUSED(i)) const override { return wxSB_NORMAL; }
+    int GetEffectiveFieldStyle(int WXUNUSED(i)) const override { return wxSB_NORMAL; }
 
-    virtual void InitColours() override;
+    void InitColours() override;
 
 private:
     wxColour m_textActive, m_textInactive;

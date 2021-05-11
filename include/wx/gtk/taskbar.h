@@ -15,9 +15,9 @@ class WXDLLIMPEXP_ADV wxTaskBarIcon: public wxTaskBarIconBase
 public:
     wxTaskBarIcon(wxTaskBarIconType iconType = wxTBI_DEFAULT_TYPE);
     ~wxTaskBarIcon();
-    virtual bool SetIcon(const wxIcon& icon, const wxString& tooltip = wxString()) override;
-    virtual bool RemoveIcon() override;
-    virtual bool PopupMenu(wxMenu* menu) override;
+    bool SetIcon(const wxIcon& icon, const wxString& tooltip = wxString()) override;
+    bool RemoveIcon() override;
+    bool PopupMenu(wxMenu* menu) override;
     bool IsOk() const { return true; }
     bool IsIconInstalled() const;
 

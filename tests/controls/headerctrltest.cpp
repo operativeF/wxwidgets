@@ -28,8 +28,8 @@ class HeaderCtrlTestCase : public CppUnit::TestCase
 public:
     HeaderCtrlTestCase() { }
 
-    virtual void setUp() override;
-    virtual void tearDown() override;
+    void setUp() override;
+    void tearDown() override;
 
 private:
     CPPUNIT_TEST_SUITE( HeaderCtrlTestCase );

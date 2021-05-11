@@ -43,8 +43,8 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxSliderNameStr));
 
-    virtual int GetValue() const override;
-    virtual void SetValue(int) override;
+    int GetValue() const override;
+    void SetValue(int) override;
 
     void SetRange(int minValue, int maxValue) override;
 
@@ -72,15 +72,15 @@ public:
     void Command(wxCommandEvent& event) override;
     // osx specific event handling common for all osx-ports
 
-    virtual bool OSXHandleClicked( double timestampsec ) override;
-    virtual void TriggerScrollEvent( wxEventType scrollEvent ) override;
+    bool OSXHandleClicked( double timestampsec ) override;
+    void TriggerScrollEvent( wxEventType scrollEvent ) override;
 
 protected:
     // Platform-specific implementation of SetTickFreq
-    virtual void DoSetTickFreq(int freq) override;
+    void DoSetTickFreq(int freq) override;
 
-    virtual wxSize DoGetBestSize() const override;
-    virtual void   DoSetSize(int x, int y, int w, int h, int sizeFlags) override;
+    wxSize DoGetBestSize() const override;
+    void   DoSetSize(int x, int y, int w, int h, int sizeFlags) override;
 
     // set min/max size of the slider
     virtual void DoSetSizeHints( int minW, int minH,
@@ -88,7 +88,7 @@ protected:
                                  int incW, int incH) override;
 
     // Common processing to invert slider values based on wxSL_INVERSE
-    virtual int ValueInvertOrNot(int value) const override;
+    int ValueInvertOrNot(int value) const override;
 
     wxStaticText*    m_macMinimumStatic ;
     wxStaticText*    m_macMaximumStatic ;
@@ -100,7 +100,7 @@ protected:
     int           m_lineSize;
     int           m_tickFreq;
 private :
-    virtual wxWindowList GetCompositeWindowParts() const override
+    wxWindowList GetCompositeWindowParts() const override
     {
         wxWindowList parts;
         parts.push_back(m_macMinimumStatic);

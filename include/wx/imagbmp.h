@@ -51,11 +51,11 @@ public:
     }
 
 #if wxUSE_STREAMS
-    virtual bool SaveFile( wxImage *image, wxOutputStream& stream, bool verbose=true ) override;
-    virtual bool LoadFile( wxImage *image, wxInputStream& stream, bool verbose=true, int index=-1 ) override;
+    bool SaveFile( wxImage *image, wxOutputStream& stream, bool verbose=true ) override;
+    bool LoadFile( wxImage *image, wxInputStream& stream, bool verbose=true, int index=-1 ) override;
 
 protected:
-    virtual bool DoCanRead( wxInputStream& stream ) override;
+    bool DoCanRead( wxInputStream& stream ) override;
     bool SaveDib(wxImage *image, wxOutputStream& stream, bool verbose,
                  bool IsBmp, bool IsMask);
     bool DoLoadDib(wxImage *image, int width, int height, int bpp, int ncolors,
@@ -85,13 +85,13 @@ public:
     }
 
 #if wxUSE_STREAMS
-    virtual bool SaveFile( wxImage *image, wxOutputStream& stream, bool verbose=true ) override;
-    virtual bool LoadFile( wxImage *image, wxInputStream& stream, bool verbose=true, int index=-1 ) override;
+    bool SaveFile( wxImage *image, wxOutputStream& stream, bool verbose=true ) override;
+    bool LoadFile( wxImage *image, wxInputStream& stream, bool verbose=true, int index=-1 ) override;
     virtual bool DoLoadFile( wxImage *image, wxInputStream& stream, bool verbose, int index );
 
 protected:
-    virtual int DoGetImageCount( wxInputStream& stream ) override;
-    virtual bool DoCanRead( wxInputStream& stream ) override;
+    int DoGetImageCount( wxInputStream& stream ) override;
+    bool DoCanRead( wxInputStream& stream ) override;
 #endif // wxUSE_STREAMS
 
 private:
@@ -120,7 +120,7 @@ public:
 
 protected:
 #if wxUSE_STREAMS
-    virtual bool DoCanRead( wxInputStream& stream ) override;
+    bool DoCanRead( wxInputStream& stream ) override;
 #endif // wxUSE_STREAMS
 
 private:
@@ -143,12 +143,12 @@ public:
 
 
 #if wxUSE_STREAMS
-    virtual bool SaveFile( wxImage *WXUNUSED(image), wxOutputStream& WXUNUSED(stream), bool WXUNUSED(verbose=true) ) override{return false ;}
-    virtual bool LoadFile( wxImage *image, wxInputStream& stream, bool verbose=true, int index=-1 ) override;
+    bool SaveFile( wxImage *WXUNUSED(image), wxOutputStream& WXUNUSED(stream), bool WXUNUSED(verbose=true) ) override{return false ;}
+    bool LoadFile( wxImage *image, wxInputStream& stream, bool verbose=true, int index=-1 ) override;
 
 protected:
-    virtual int DoGetImageCount( wxInputStream& stream ) override;
-    virtual bool DoCanRead( wxInputStream& stream ) override;
+    int DoGetImageCount( wxInputStream& stream ) override;
+    bool DoCanRead( wxInputStream& stream ) override;
 #endif // wxUSE_STREAMS
 
 private:

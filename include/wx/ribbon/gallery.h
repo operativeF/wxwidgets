@@ -63,11 +63,11 @@ public:
     wxRibbonGalleryButtonState GetExtensionButtonState() const;
 
     bool IsHovered() const;
-    virtual bool IsSizingContinuous() const override;
-    virtual bool Realize() override;
-    virtual bool Layout() override;
+    bool IsSizingContinuous() const override;
+    bool Realize() override;
+    bool Layout() override;
 
-    virtual bool ScrollLines(int lines) override;
+    bool ScrollLines(int lines) override;
     bool ScrollPixels(int pixels);
     void EnsureVisible(const wxRibbonGalleryItem* item);
 
@@ -89,7 +89,7 @@ protected:
     void OnSize(wxSizeEvent& evt);
     int GetScrollLineSize() const;
 
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
     virtual wxSize DoGetNextSmallerSize(wxOrientation direction,
                                         wxSize relative_to) const override;
     virtual wxSize DoGetNextLargerSize(wxOrientation direction,

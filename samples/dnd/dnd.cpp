@@ -44,7 +44,7 @@ class DnDText : public wxTextDropTarget
 public:
     DnDText(wxListBox *pOwner) { m_pOwner = pOwner; }
 
-    virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& text) override;
+    bool OnDropText(wxCoord x, wxCoord y, const wxString& text) override;
 
 private:
     wxListBox *m_pOwner;
@@ -87,7 +87,7 @@ public:
         }
 
     // translate this to calls to OnDropURL() just for convenience
-    virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override
+    wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override
     {
         if ( !GetData() )
             return wxDragNone;
@@ -107,7 +107,7 @@ public:
 class DnDApp : public wxApp
 {
 public:
-    virtual bool OnInit() override;
+    bool OnInit() override;
 };
 
 wxIMPLEMENT_APP(DnDApp);
@@ -375,8 +375,8 @@ public:
         wxLogMessage("DnDTriangularShape is being deleted");
     }
 
-    virtual Kind GetKind() const override { return Triangle; }
-    virtual void Draw(wxDC& dc) override
+    Kind GetKind() const override { return Triangle; }
+    void Draw(wxDC& dc) override
     {
         DnDShape::Draw(dc);
 
@@ -412,8 +412,8 @@ public:
         wxLogMessage("DnDRectangularShape is being deleted");
     }
 
-    virtual Kind GetKind() const override { return Rectangle; }
-    virtual void Draw(wxDC& dc) override
+    Kind GetKind() const override { return Rectangle; }
+    void Draw(wxDC& dc) override
     {
         DnDShape::Draw(dc);
 
@@ -448,8 +448,8 @@ public:
         wxLogMessage("DnDEllipticShape is being deleted");
     }
 
-    virtual Kind GetKind() const override { return Ellipse; }
-    virtual void Draw(wxDC& dc) override
+    Kind GetKind() const override { return Ellipse; }
+    void Draw(wxDC& dc) override
     {
         DnDShape::Draw(dc);
 
@@ -529,12 +529,12 @@ public:
     // implement base class pure virtuals
     // ----------------------------------
 
-    virtual wxDataFormat GetPreferredFormat(Direction WXUNUSED(dir)) const override
+    wxDataFormat GetPreferredFormat(Direction WXUNUSED(dir)) const override
     {
         return m_formatShape;
     }
 
-    virtual size_t GetFormatCount(Direction dir) const override
+    size_t GetFormatCount(Direction dir) const override
     {
         // our custom format is supported by both GetData() and SetData()
         size_t nFormats = 1;
@@ -551,7 +551,7 @@ public:
         return nFormats;
     }
 
-    virtual void GetAllFormats(wxDataFormat *formats, Direction dir) const override
+    void GetAllFormats(wxDataFormat *formats, Direction dir) const override
     {
         formats[0] = m_formatShape;
         if ( dir == Get )
@@ -568,7 +568,7 @@ public:
         }
     }
 
-    virtual size_t GetDataSize(const wxDataFormat& format) const override
+    size_t GetDataSize(const wxDataFormat& format) const override
     {
         if ( format == m_formatShape )
         {
@@ -595,7 +595,7 @@ public:
         }
     }
 
-    virtual bool GetDataHere(const wxDataFormat& format, void *pBuf) const override
+    bool GetDataHere(const wxDataFormat& format, void *pBuf) const override
     {
         if ( format == m_formatShape )
         {
@@ -674,8 +674,8 @@ public:
 
     DnDShape *GetShape() const;
 
-    virtual bool TransferDataToWindow() override;
-    virtual bool TransferDataFromWindow() override;
+    bool TransferDataToWindow() override;
+    bool TransferDataFromWindow() override;
 
     void OnColour(wxCommandEvent& event);
 
@@ -752,20 +752,20 @@ public:
     }
 
     // override base class (pure) virtuals
-    virtual wxDragResult OnEnter(wxCoord x, wxCoord y, wxDragResult def) override
+    wxDragResult OnEnter(wxCoord x, wxCoord y, wxDragResult def) override
     {
 #if wxUSE_STATUSBAR
         m_frame->SetStatusText("Mouse entered the frame");
 #endif // wxUSE_STATUSBAR
         return OnDragOver(x, y, def);
     }
-    virtual void OnLeave() override
+    void OnLeave() override
     {
 #if wxUSE_STATUSBAR
         m_frame->SetStatusText("Mouse left the frame");
 #endif // wxUSE_STATUSBAR
     }
-    virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override
+    wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override
     {
         if ( !GetData() )
         {

@@ -51,7 +51,7 @@ public:
     virtual ~wxPostScriptDCImpl();
 
     virtual bool Ok() const { return IsOk(); }
-    virtual bool IsOk() const override;
+    bool IsOk() const override;
 
     bool CanDrawBitmap() const override { return true; }
 
@@ -76,7 +76,7 @@ public:
     // Resolution in pixels per logical inch
     wxSize GetPPI() const override;
 
-    virtual void ComputeScaleAndOrigin() override;
+    void ComputeScaleAndOrigin() override;
 
     void SetBackgroundMode(int WXUNUSED(mode)) override { }
 #if wxUSE_PALETTE
@@ -86,16 +86,16 @@ public:
     void SetPrintData(const wxPrintData& data);
     wxPrintData& GetPrintData() { return m_printData; }
 
-    virtual int GetDepth() const override { return 24; }
+    int GetDepth() const override { return 24; }
 
     void PsPrint( const wxString& psdata );
 
     // Overridden for wxPrinterDC Impl
 
-    virtual int GetResolution() const override;
-    virtual wxRect GetPaperRect() const override;
+    int GetResolution() const override;
+    wxRect GetPaperRect() const override;
 
-    virtual void* GetHandle() const override { return NULL; }
+    void* GetHandle() const override { return NULL; }
 
 protected:
     bool DoFloodFill(wxCoord x1, wxCoord y1, const wxColour &col,

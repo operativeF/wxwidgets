@@ -29,12 +29,12 @@ public:
     // default copy ctor and dtor are ok
 
     // accessors
-    virtual ChannelType Red() const override;
-    virtual ChannelType Green() const override;
-    virtual ChannelType Blue() const override;
-    virtual ChannelType Alpha() const override;
+    ChannelType Red() const override;
+    ChannelType Green() const override;
+    ChannelType Blue() const override;
+    ChannelType Alpha() const override;
 
-    virtual bool IsSolid() const override;
+    bool IsSolid() const override;
 
     // comparison
     bool operator == (const wxColour& colour) const;
@@ -73,8 +73,8 @@ protected :
     virtual void
     InitRGBA(ChannelType r, ChannelType g, ChannelType b, ChannelType a) override;
 
-    virtual wxGDIRefData *CreateGDIRefData() const override;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
+    wxGDIRefData *CreateGDIRefData() const override;
+    wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
 
 private:
 

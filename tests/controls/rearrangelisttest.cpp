@@ -24,12 +24,12 @@ class RearrangeListTestCase : public ItemContainerTestCase, public CppUnit::Test
 public:
     RearrangeListTestCase() { }
 
-    virtual void setUp() override;
-    virtual void tearDown() override;
+    void setUp() override;
+    void tearDown() override;
 
 private:
-    virtual wxItemContainer *GetContainer() const override { return m_rearrange; }
-    virtual wxWindow *GetContainerWindow() const override { return m_rearrange; }
+    wxItemContainer *GetContainer() const override { return m_rearrange; }
+    wxWindow *GetContainerWindow() const override { return m_rearrange; }
 
     CPPUNIT_TEST_SUITE( RearrangeListTestCase );
         wxITEM_CONTAINER_TESTS();

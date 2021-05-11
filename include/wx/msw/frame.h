@@ -43,7 +43,7 @@ public:
     virtual ~wxFrame();
 
     // implement base class pure virtuals
-    virtual bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
+    bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
 
     // implementation only from now on
     // -------------------------------
@@ -87,12 +87,12 @@ public:
 #endif // tooltips
 
     // override the base class function to handle iconized/maximized frames
-    virtual void SendSizeEvent(int flags = 0) override;
+    void SendSizeEvent(int flags = 0) override;
 
-    virtual wxPoint GetClientAreaOrigin() const override;
+    wxPoint GetClientAreaOrigin() const override;
 
     // override base class version to add menu bar accel processing
-    virtual bool MSWTranslateMessage(WXMSG *msg) override
+    bool MSWTranslateMessage(WXMSG *msg) override
     {
         return MSWDoTranslateMessage(this, msg);
     }
@@ -107,11 +107,11 @@ public:
     // normal frames but is overridden by wxMDIParentFrame
     virtual WXHMENU MSWGetActiveMenu() const { return m_hMenu; }
 
-    virtual bool HandleMenuSelect(WXWORD nItem, WXWORD nFlags, WXHMENU hMenu) override;
-    virtual bool DoSendMenuOpenCloseEvent(wxEventType evtType, wxMenu* menu) override;
+    bool HandleMenuSelect(WXWORD nItem, WXWORD nFlags, WXHMENU hMenu) override;
+    bool DoSendMenuOpenCloseEvent(wxEventType evtType, wxMenu* menu) override;
 
     // Look up the menu in the menu bar.
-    virtual wxMenu* MSWFindMenuFromHMENU(WXHMENU hMenu) override;
+    wxMenu* MSWFindMenuFromHMENU(WXHMENU hMenu) override;
 #endif // wxUSE_MENUS
 
 #if wxUSE_TASKBARBUTTON
@@ -128,12 +128,12 @@ protected:
     void Init();
 
     // override base class virtuals
-    virtual void DoGetClientSize(int *width, int *height) const override;
-    virtual void DoSetClientSize(int width, int height) override;
+    void DoGetClientSize(int *width, int *height) const override;
+    void DoSetClientSize(int width, int height) override;
 
 #if wxUSE_MENUS_NATIVE
     // perform MSW-specific action when menubar is changed
-    virtual void AttachMenuBar(wxMenuBar *menubar) override;
+    void AttachMenuBar(wxMenuBar *menubar) override;
 
     // a plug in for MDI frame classes which need to do something special when
     // the menubar is set
@@ -153,11 +153,11 @@ protected:
     virtual WXHICON GetDefaultIcon() const;
 
 #if wxUSE_TOOLBAR
-    virtual void PositionToolBar() override;
+    void PositionToolBar() override;
 #endif // wxUSE_TOOLBAR
 
 #if wxUSE_STATUSBAR
-    virtual void PositionStatusBar() override;
+    void PositionStatusBar() override;
 
     static bool           m_useNativeStatusBar;
 #endif // wxUSE_STATUSBAR

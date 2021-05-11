@@ -118,23 +118,23 @@ public:
     ~ScintillaWX();
 
     // base class virtuals
-    virtual void Initialise() override;
-    virtual void Finalise() override;
-    virtual void StartDrag() override;
-    virtual bool SetIdle(bool on) override;
-    virtual void SetMouseCapture(bool on) override;
-    virtual bool HaveMouseCapture() override;
-    virtual void ScrollText(int linesToMove) override;
-    virtual void SetVerticalScrollPos() override;
-    virtual void SetHorizontalScrollPos() override;
-    virtual bool ModifyScrollBars(int nMax, int nPage) override;
-    virtual void Copy() override;
-    virtual void Paste() override;
-    virtual void CopyToClipboard(const SelectionText &selectedText) override;
+    void Initialise() override;
+    void Finalise() override;
+    void StartDrag() override;
+    bool SetIdle(bool on) override;
+    void SetMouseCapture(bool on) override;
+    bool HaveMouseCapture() override;
+    void ScrollText(int linesToMove) override;
+    void SetVerticalScrollPos() override;
+    void SetHorizontalScrollPos() override;
+    bool ModifyScrollBars(int nMax, int nPage) override;
+    void Copy() override;
+    void Paste() override;
+    void CopyToClipboard(const SelectionText &selectedText) override;
 
-    virtual void CreateCallTipWindow(PRectangle rc) override;
-    virtual void AddToPopUp(const char *label, int cmd = 0, bool enabled = true) override;
-    virtual void ClaimSelection() override;
+    void CreateCallTipWindow(PRectangle rc) override;
+    void AddToPopUp(const char *label, int cmd = 0, bool enabled = true) override;
+    void ClaimSelection() override;
 
     virtual sptr_t DefWndProc(unsigned int iMessage,
                               uptr_t wParam,
@@ -143,16 +143,16 @@ public:
                            uptr_t wParam,
                            sptr_t lParam) override;
 
-    virtual void NotifyChange() override;
-    virtual void NotifyParent(SCNotification scn) override;
+    void NotifyChange() override;
+    void NotifyParent(SCNotification scn) override;
 
-    virtual void CancelModes() override;
+    void CancelModes() override;
 
-    virtual void UpdateSystemCaret() override;
-    virtual bool FineTickerAvailable() override;
-    virtual bool FineTickerRunning(TickReason reason) override;
-    virtual void FineTickerStart(TickReason reason, int millis, int tolerance) override;
-    virtual void FineTickerCancel(TickReason reason) override;
+    void UpdateSystemCaret() override;
+    bool FineTickerAvailable() override;
+    bool FineTickerRunning(TickReason reason) override;
+    void FineTickerStart(TickReason reason, int millis, int tolerance) override;
+    void FineTickerCancel(TickReason reason) override;
 
     // Event delegates
     void DoPaint(wxDC* dc, wxRect rect);

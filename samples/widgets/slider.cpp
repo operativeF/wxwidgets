@@ -96,11 +96,11 @@ class SliderWidgetsPage : public WidgetsPage
 public:
     SliderWidgetsPage(WidgetsBookCtrl *book, wxImageList *imaglist);
 
-    virtual wxWindow *GetWidget() const override { return m_slider; }
-    virtual void RecreateWidget() override { CreateSlider(); }
+    wxWindow *GetWidget() const override { return m_slider; }
+    void RecreateWidget() override { CreateSlider(); }
 
     // lazy creation of the content
-    virtual void CreateContent() override;
+    void CreateContent() override;
 
 protected:
     // event handlers

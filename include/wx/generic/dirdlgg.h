@@ -58,8 +58,8 @@ public:
     wxString GetPath() const override;
 
     //// Overrides
-    virtual int ShowModal() override;
-    virtual void EndModal(int retCode) override;
+    int ShowModal() override;
+    void EndModal(int retCode) override;
 
     // this one is specific to wxGenericDirDialog
     wxTextCtrl* GetInputCtrl() const { return m_input; }

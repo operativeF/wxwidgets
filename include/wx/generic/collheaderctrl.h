@@ -39,14 +39,14 @@ public:
         const wxValidator& validator = wxDefaultValidator,
         const wxString& name = wxASCII_STR(wxCollapsibleHeaderCtrlNameStr));
 
-    virtual void SetCollapsed(bool collapsed = true) override;
+    void SetCollapsed(bool collapsed = true) override;
 
-    virtual bool IsCollapsed() const override
+    bool IsCollapsed() const override
         { return m_collapsed; }
 
 protected:
 
-    virtual wxSize DoGetBestClientSize() const override;
+    wxSize DoGetBestClientSize() const override;
 
 private:
     bool m_collapsed;

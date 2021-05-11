@@ -32,8 +32,8 @@ public:
     }
 
     // process wxWindow notifications
-    virtual void OnSetFocus() override;
-    virtual void OnKillFocus() override;
+    void OnSetFocus() override;
+    void OnKillFocus() override;
 
 protected:
     void Init()
@@ -44,10 +44,10 @@ protected:
     }
 
     // override base class virtuals
-    virtual void DoMove() override;
-    virtual void DoShow() override;
-    virtual void DoHide() override;
-    virtual void DoSize() override;
+    void DoMove() override;
+    void DoShow() override;
+    void DoHide() override;
+    void DoSize() override;
 
     // helper function which creates the system caret
     bool MSWCreateCaret();

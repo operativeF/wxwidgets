@@ -43,15 +43,15 @@ public:
                 const wxValidator& val = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxCollapsiblePaneNameStr));
 
-    virtual void Collapse(bool collapse = true) override;
-    virtual bool IsCollapsed() const override;
-    virtual void SetLabel(const wxString& str) override;
+    void Collapse(bool collapse = true) override;
+    bool IsCollapsed() const override;
+    void SetLabel(const wxString& str) override;
 
-    virtual wxWindow *GetPane() const override { return m_pPane; }
-    virtual wxString GetLabel() const override { return m_strLabel; }
+    wxWindow *GetPane() const override { return m_pPane; }
+    wxString GetLabel() const override { return m_strLabel; }
 
 protected:
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
 
 public:     // used by GTK callbacks
     bool m_bIgnoreNextChange;
@@ -69,7 +69,7 @@ private:
     }
 
     void OnSize(wxSizeEvent&);
-    virtual void AddChildGTK(wxWindowGTK* child) override;
+    void AddChildGTK(wxWindowGTK* child) override;
     GdkWindow *GTKGetWindow(wxArrayGdkWindows& windows) const override;
 
     wxDECLARE_DYNAMIC_CLASS(wxCollapsiblePane);

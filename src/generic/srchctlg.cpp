@@ -59,7 +59,7 @@ public:
         InvalidateBestSize();
     }
 
-    virtual wxWindow* GetMainWindowOfCompositeControl() override
+    wxWindow* GetMainWindowOfCompositeControl() override
     {
         return m_search;
     }
@@ -116,7 +116,7 @@ protected:
     // to do this easily and as there is much in that code I don't understand
     // (notably what is the logic for buttons sizing?) I prefer to not touch it
     // at all.
-    virtual wxSize DoGetBestSize() const override
+    wxSize DoGetBestSize() const override
     {
         const long flags = GetWindowStyleFlag();
         wxSearchTextCtrl* const self = const_cast<wxSearchTextCtrl*>(this);
@@ -178,9 +178,9 @@ public:
     // control and not give it to the button inside the same control. Besides,
     // the search button can be already activated by pressing "Enter" so there
     // is really no reason for it to be able to get focus from keyboard.
-    virtual bool AcceptsFocusFromKeyboard() const override { return false; }
+    bool AcceptsFocusFromKeyboard() const override { return false; }
 
-    virtual wxWindow* GetMainWindowOfCompositeControl() override
+    wxWindow* GetMainWindowOfCompositeControl() override
     {
         return m_search;
     }

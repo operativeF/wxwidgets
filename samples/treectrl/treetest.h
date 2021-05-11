@@ -128,7 +128,7 @@ public:
     }
 
 protected:
-    virtual int OnCompareItems(const wxTreeItemId& i1, const wxTreeItemId& i2) override;
+    int OnCompareItems(const wxTreeItemId& i1, const wxTreeItemId& i2) override;
 
     // is this the test item which we use in several event handlers?
     bool IsTestItem(const wxTreeItemId& item)

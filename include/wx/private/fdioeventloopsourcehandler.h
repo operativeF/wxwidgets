@@ -25,9 +25,9 @@ public:
     }
 
     // Just forward to the real handler.
-    virtual void OnReadWaiting() override { m_handler->OnReadWaiting(); }
-    virtual void OnWriteWaiting() override { m_handler->OnWriteWaiting(); }
-    virtual void OnExceptionWaiting() override { m_handler->OnExceptionWaiting(); }
+    void OnReadWaiting() override { m_handler->OnReadWaiting(); }
+    void OnWriteWaiting() override { m_handler->OnWriteWaiting(); }
+    void OnExceptionWaiting() override { m_handler->OnExceptionWaiting(); }
 
 protected:
     wxEventLoopSourceHandler* const m_handler;

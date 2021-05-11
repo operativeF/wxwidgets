@@ -32,8 +32,8 @@ class HtmlWindowTestCase : public CppUnit::TestCase
 public:
     HtmlWindowTestCase() { }
 
-    virtual void setUp() override;
-    virtual void tearDown() override;
+    void setUp() override;
+    void tearDown() override;
 
 private:
     CPPUNIT_TEST_SUITE( HtmlWindowTestCase );

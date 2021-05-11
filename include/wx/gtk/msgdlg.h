@@ -19,8 +19,8 @@ public:
                     long style = wxOK|wxCENTRE,
                     const wxPoint& pos = wxDefaultPosition);
 
-    virtual int ShowModal() override;
-    virtual bool Show(bool WXUNUSED(show) = true) override { return false; }
+    int ShowModal() override;
+    bool Show(bool WXUNUSED(show) = true) override { return false; }
 
 protected:
     // implement some base class methods to do nothing to avoid asserts and
@@ -31,15 +31,15 @@ protected:
     virtual void DoMoveWindow(int WXUNUSED(x), int WXUNUSED(y),
                               int WXUNUSED(width), int WXUNUSED(height)) override {}
     // override to convert wx mnemonics to GTK+ ones and handle stock ids
-    virtual void DoSetCustomLabel(wxString& var, const ButtonLabel& label) override;
+    void DoSetCustomLabel(wxString& var, const ButtonLabel& label) override;
 
 private:
     // override to use stock GTK+ defaults instead of just string ones
-    virtual wxString GetDefaultYesLabel() const override;
-    virtual wxString GetDefaultNoLabel() const override;
-    virtual wxString GetDefaultOKLabel() const override;
-    virtual wxString GetDefaultCancelLabel() const override;
-    virtual wxString GetDefaultHelpLabel() const override;
+    wxString GetDefaultYesLabel() const override;
+    wxString GetDefaultNoLabel() const override;
+    wxString GetDefaultOKLabel() const override;
+    wxString GetDefaultCancelLabel() const override;
+    wxString GetDefaultHelpLabel() const override;
 
     // create the real GTK+ dialog: this is done from ShowModal() to allow
     // changing the message between constructing the dialog and showing it

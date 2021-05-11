@@ -166,7 +166,7 @@ public: \
     { \
         return AreSameClasses(*sm_instance.get(), *otherType); \
     } \
-    virtual bool IsSameType(const wxAnyValueType* otherType) const override \
+    bool IsSameType(const wxAnyValueType* otherType) const override \
     { \
         return IsSameClass(otherType); \
     } \

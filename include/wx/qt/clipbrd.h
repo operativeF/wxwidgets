@@ -18,16 +18,16 @@ public:
     wxClipboard();
     ~wxClipboard();
 
-    virtual bool Open() override;
-    virtual void Close() override;
-    virtual bool IsOpened() const override;
+    bool Open() override;
+    void Close() override;
+    bool IsOpened() const override;
 
-    virtual bool AddData( wxDataObject *data ) override;
-    virtual bool SetData( wxDataObject *data ) override;
-    virtual bool GetData( wxDataObject& data ) override;
-    virtual void Clear() override;
-    virtual bool IsSupported( const wxDataFormat& format ) override;
-    virtual bool IsSupportedAsync(wxEvtHandler *sink) override;
+    bool AddData( wxDataObject *data ) override;
+    bool SetData( wxDataObject *data ) override;
+    bool GetData( wxDataObject& data ) override;
+    void Clear() override;
+    bool IsSupported( const wxDataFormat& format ) override;
+    bool IsSupportedAsync(wxEvtHandler *sink) override;
 
 private:
     friend class QtClipBoardSignalHandler;

@@ -78,14 +78,14 @@ private:
     public:
         StyleValidator(long* style) { m_style = style; }
 
-        virtual bool Validate(wxWindow *WXUNUSED(parent)) override { return true; }
-        virtual wxObject* Clone() const override { return new StyleValidator(*this); }
+        bool Validate(wxWindow *WXUNUSED(parent)) override { return true; }
+        wxObject* Clone() const override { return new StyleValidator(*this); }
 
         // Called to transfer data to the window
-        virtual bool TransferToWindow() override;
+        bool TransferToWindow() override;
 
         // Called to transfer data from the window
-        virtual bool TransferFromWindow() override;
+        bool TransferFromWindow() override;
 
     private:
         long* m_style;
@@ -165,14 +165,14 @@ class MyComboBoxValidator : public wxValidator
 public:
     MyComboBoxValidator(wxString* var) { m_var=var; }
 
-    virtual bool Validate(wxWindow* parent) override;
-    virtual wxObject* Clone() const override { return new MyComboBoxValidator(*this); }
+    bool Validate(wxWindow* parent) override;
+    wxObject* Clone() const override { return new MyComboBoxValidator(*this); }
 
     // Called to transfer data to the window
-    virtual bool TransferToWindow() override;
+    bool TransferToWindow() override;
 
     // Called to transfer data from the window
-    virtual bool TransferFromWindow() override;
+    bool TransferFromWindow() override;
 
 protected:
     wxString* m_var;

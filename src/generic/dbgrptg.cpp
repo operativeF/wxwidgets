@@ -249,8 +249,8 @@ class wxDebugReportDialog : public wxDialog
 public:
     explicit wxDebugReportDialog(wxDebugReport& dbgrpt);
 
-    virtual bool TransferDataToWindow() override;
-    virtual bool TransferDataFromWindow() override;
+    bool TransferDataToWindow() override;
+    bool TransferDataFromWindow() override;
 
 private:
     void OnView(wxCommandEvent& );

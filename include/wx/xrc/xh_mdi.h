@@ -22,8 +22,8 @@ class WXDLLIMPEXP_XRC wxMdiXmlHandler : public wxXmlResourceHandler
 
 public:
     wxMdiXmlHandler();
-    virtual wxObject *DoCreateResource() override;
-    virtual bool CanHandle(wxXmlNode *node) override;
+    wxObject *DoCreateResource() override;
+    bool CanHandle(wxXmlNode *node) override;
 
 private:
     wxWindow *CreateFrame();

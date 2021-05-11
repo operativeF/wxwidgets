@@ -28,7 +28,7 @@
     /* needs to create the dialog in ::Create() and not for each user      */ \
     /* request in response to the user click as the generic implementation */ \
     /* does.                                                               */ \
-    virtual wxWindow *GetDialogParent() override                            \
+    wxWindow *GetDialogParent() override                            \
     {                                                                         \
         return NULL;                                                          \
     }                                                                         \
@@ -92,8 +92,8 @@ public:     // overrides
     // event handler for the click
     void OnDialogOK(wxCommandEvent &);
 
-    virtual void SetPath(const wxString &str) override;
-    virtual void SetInitialDirectory(const wxString& dir) override;
+    void SetPath(const wxString &str) override;
+    void SetInitialDirectory(const wxString& dir) override;
 
     // see macro defined above
     FILEDIRBTN_OVERRIDES
@@ -101,7 +101,7 @@ public:     // overrides
 protected:
     wxDialog *m_dialog;
 
-    virtual void DoApplyWidgetStyle(GtkRcStyle*) override;
+    void DoApplyWidgetStyle(GtkRcStyle*) override;
 
 private:
     // common part of all ctors
@@ -163,8 +163,8 @@ public:     // overrides
         return (wxGenericDirButton::GetDialogStyle() | wxDD_DIR_MUST_EXIST);
     }
 
-    virtual void SetPath(const wxString &str) override;
-    virtual void SetInitialDirectory(const wxString& dir) override;
+    void SetPath(const wxString &str) override;
+    void SetInitialDirectory(const wxString& dir) override;
 
     // see macro defined above
     FILEDIRBTN_OVERRIDES
@@ -172,7 +172,7 @@ public:     // overrides
 protected:
     wxDialog *m_dialog;
 
-    virtual void DoApplyWidgetStyle(GtkRcStyle*) override;
+    void DoApplyWidgetStyle(GtkRcStyle*) override;
 
 public:    // used by the GTK callback only
 

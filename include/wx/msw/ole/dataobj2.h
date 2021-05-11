@@ -33,11 +33,11 @@ public:
         }
 
     // implement base class pure virtuals
-    virtual size_t GetDataSize() const override;
-    virtual bool GetDataHere(void *buf) const override;
-    virtual bool SetData(size_t len, const void *buf) override;
+    size_t GetDataSize() const override;
+    bool GetDataHere(void *buf) const override;
+    bool SetData(size_t len, const void *buf) override;
 
-    virtual size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
+    size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
         { return GetDataSize(); }
     virtual bool GetDataHere(const wxDataFormat& WXUNUSED(format),
                              void *buf) const override
@@ -69,11 +69,11 @@ public:
         }
 
     // implement base class pure virtuals
-    virtual size_t GetDataSize() const override;
-    virtual bool GetDataHere(void *buf) const override;
-    virtual bool SetData(size_t len, const void *buf) override;
+    size_t GetDataSize() const override;
+    bool GetDataHere(void *buf) const override;
+    bool SetData(size_t len, const void *buf) override;
 
-    virtual size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
+    size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
         { return GetDataSize(); }
     virtual bool GetDataHere(const wxDataFormat& WXUNUSED(format),
                              void *buf) const override
@@ -96,12 +96,12 @@ public:
     wxFileDataObject() { }
 
     // implement base class pure virtuals
-    virtual bool SetData(size_t len, const void *buf) override;
-    virtual size_t GetDataSize() const override;
-    virtual bool GetDataHere(void *pData) const override;
+    bool SetData(size_t len, const void *buf) override;
+    size_t GetDataSize() const override;
+    bool GetDataHere(void *pData) const override;
     virtual void AddFile(const wxString& file);
 
-    virtual size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
+    size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
         { return GetDataSize(); }
     virtual bool GetDataHere(const wxDataFormat& WXUNUSED(format),
                              void *buf) const override

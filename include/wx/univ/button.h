@@ -84,22 +84,22 @@ public:
 
     virtual ~wxButton();
 
-    virtual wxWindow *SetDefault() override;
+    wxWindow *SetDefault() override;
 
-    virtual bool IsPressed() const override { return m_isPressed; }
-    virtual bool IsDefault() const override { return m_isDefault; }
+    bool IsPressed() const override { return m_isPressed; }
+    bool IsDefault() const override { return m_isDefault; }
 
     // wxButton actions
-    virtual void Click() override;
+    void Click() override;
 
-    virtual bool CanBeHighlighted() const override { return true; }
+    bool CanBeHighlighted() const override { return true; }
 
 
 
 protected:
-    virtual void DoSetBitmap(const wxBitmap& bitmap, State which) override;
-    virtual wxBitmap DoGetBitmap(State which) const override;
-    virtual void DoSetBitmapMargins(wxCoord x, wxCoord y) override;
+    void DoSetBitmap(const wxBitmap& bitmap, State which) override;
+    wxBitmap DoGetBitmap(State which) const override;
+    void DoSetBitmapMargins(wxCoord x, wxCoord y) override;
 
     // common part of all ctors
     void Init();

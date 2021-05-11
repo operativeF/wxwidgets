@@ -27,15 +27,15 @@ public:
           m_detailsPane(NULL)
     { }
 
-    virtual bool IsCheckBoxChecked() const override;
+    bool IsCheckBoxChecked() const override;
 
 protected:
     wxCheckBox *m_checkBox;
     wxCollapsiblePane *m_detailsPane;
 
     // overrides methods in the base class
-    virtual void AddMessageDialogCheckBox(wxSizer *sizer) override;
-    virtual void AddMessageDialogDetails(wxSizer *sizer) override;
+    void AddMessageDialogCheckBox(wxSizer *sizer) override;
+    void AddMessageDialogDetails(wxSizer *sizer) override;
 
 private:
     void OnPaneChanged(wxCollapsiblePaneEvent& event);

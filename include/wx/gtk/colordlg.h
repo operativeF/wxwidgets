@@ -25,7 +25,7 @@ public:
 
     wxColourData &GetColourData() { return m_data; }
 
-    virtual int ShowModal() override;
+    int ShowModal() override;
 
 protected:
     // implement some base class methods to do nothing to avoid asserts and

@@ -16,11 +16,11 @@ public:
     wxDropTarget(wxDataObject *dataObject = NULL);
     virtual ~wxDropTarget();
 
-    virtual bool OnDrop(wxCoord x, wxCoord y) override;
+    bool OnDrop(wxCoord x, wxCoord y) override;
     virtual wxDragResult OnData(wxCoord x,
                                 wxCoord y,
                                 wxDragResult def) override;
-    virtual bool GetData() override;
+    bool GetData() override;
 
     wxDataFormat GetMatchingPair();
 
@@ -46,7 +46,7 @@ public:
                  const wxCursor &move = wxNullCursor,
                  const wxCursor &none = wxNullCursor);
 
-    virtual wxDragResult DoDragDrop(int flags = wxDrag_CopyOnly) override;
+    wxDragResult DoDragDrop(int flags = wxDrag_CopyOnly) override;
 
 private:
     wxWindow* m_parentWindow;

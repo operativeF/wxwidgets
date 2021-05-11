@@ -274,7 +274,7 @@ public:
     wxSoundAsyncPlaybackThread(wxSoundSyncOnlyAdaptor *adaptor,
                               wxSoundData *data, unsigned flags)
         : wxThread(), m_adapt(adaptor), m_data(data), m_flags(flags) {}
-    virtual ExitCode Entry() override;
+    ExitCode Entry() override;
 
 protected:
     wxSoundSyncOnlyAdaptor *m_adapt;

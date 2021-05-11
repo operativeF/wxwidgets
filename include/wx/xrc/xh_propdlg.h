@@ -22,8 +22,8 @@ class WXDLLIMPEXP_XRC wxPropertySheetDialogXmlHandler : public wxXmlResourceHand
 
 public:
     wxPropertySheetDialogXmlHandler();
-    virtual wxObject *DoCreateResource() override;
-    virtual bool CanHandle(wxXmlNode *node) override;
+    wxObject *DoCreateResource() override;
+    bool CanHandle(wxXmlNode *node) override;
 
 private:
     bool m_isInside;

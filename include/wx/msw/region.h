@@ -35,23 +35,23 @@ public:
     virtual ~wxRegion();
 
     // wxRegionBase methods
-    virtual void Clear() override;
-    virtual bool IsEmpty() const override;
+    void Clear() override;
+    bool IsEmpty() const override;
 
     // Get internal region handle
     WXHRGN GetHRGN() const;
 
 protected:
-    virtual wxGDIRefData *CreateGDIRefData() const override;
-    virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
+    wxGDIRefData *CreateGDIRefData() const override;
+    wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
 
-    virtual bool DoIsEqual(const wxRegion& region) const override;
-    virtual bool DoGetBox(wxCoord& x, wxCoord& y, wxCoord& w, wxCoord& h) const override;
-    virtual wxRegionContain DoContainsPoint(wxCoord x, wxCoord y) const override;
-    virtual wxRegionContain DoContainsRect(const wxRect& rect) const override;
+    bool DoIsEqual(const wxRegion& region) const override;
+    bool DoGetBox(wxCoord& x, wxCoord& y, wxCoord& w, wxCoord& h) const override;
+    wxRegionContain DoContainsPoint(wxCoord x, wxCoord y) const override;
+    wxRegionContain DoContainsRect(const wxRect& rect) const override;
 
-    virtual bool DoOffset(wxCoord x, wxCoord y) override;
-    virtual bool DoCombine(const wxRegion& region, wxRegionOp op) override;
+    bool DoOffset(wxCoord x, wxCoord y) override;
+    bool DoCombine(const wxRegion& region, wxRegionOp op) override;
 
     friend class WXDLLIMPEXP_FWD_CORE wxRegionIterator;
 

@@ -53,7 +53,7 @@ public:
     virtual void Position(const wxPoint& ptOrigin,
                           const wxSize& size);
 
-    virtual bool IsTopLevel() const override { return true; }
+    bool IsTopLevel() const override { return true; }
 
     wxDECLARE_NO_COPY_CLASS(wxPopupWindowBase);
 };
@@ -109,7 +109,7 @@ public:
         { return false; }
 
     // Override to implement delayed destruction of this window.
-    virtual bool Destroy() override;
+    bool Destroy() override;
 
 protected:
     // this is called when the popup is disappeared because of anything
@@ -135,8 +135,8 @@ public:
         { Create(parent, style); }
 
     // Implement base class pure virtuals.
-    virtual void Popup(wxWindow *focus = NULL) override;
-    virtual void Dismiss() override;
+    void Popup(wxWindow *focus = NULL) override;
+    void Dismiss() override;
 
     // Override to handle WM_NCACTIVATE.
     virtual bool MSWHandleMessage(WXLRESULT *result,
@@ -145,7 +145,7 @@ public:
                                   WXLPARAM lParam) override;
 
     // Override to dismiss the popup.
-    virtual void MSWDismissUnfocusedPopup() override;
+    void MSWDismissUnfocusedPopup() override;
 
 private:
     void DismissOnDeactivate();
@@ -169,11 +169,11 @@ public:
     virtual ~wxPopupTransientWindow();
 
     // Implement base class pure virtuals.
-    virtual void Popup(wxWindow *focus = NULL) override;
-    virtual void Dismiss() override;
+    void Popup(wxWindow *focus = NULL) override;
+    void Dismiss() override;
 
     // Overridden to grab the input on some platforms
-    virtual bool Show( bool show = true ) override;
+    bool Show( bool show = true ) override;
 
 protected:
     // common part of all ctors

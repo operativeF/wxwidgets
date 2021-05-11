@@ -63,16 +63,16 @@ public:
     virtual void SubclassWin(WXWindow nativeWindow);
     virtual void UnsubclassWin();
 
-    virtual wxPoint GetClientAreaOrigin() const override;
+    wxPoint GetClientAreaOrigin() const override;
 
     // implement base class pure virtuals
 
-    virtual bool SetTransparent(wxByte alpha) override;
-    virtual bool CanSetTransparent() override;
+    bool SetTransparent(wxByte alpha) override;
+    bool CanSetTransparent() override;
 
-    virtual bool SetBackgroundStyle(wxBackgroundStyle style) override;
+    bool SetBackgroundStyle(wxBackgroundStyle style) override;
 
-    virtual void Update() override;
+    void Update() override;
 
     WXWindow GetWXWindow() const ;
     static wxNonOwnedWindow* GetFromWXWindow( WXWindow win );
@@ -90,21 +90,21 @@ public:
     static void MacDelayedDeactivation(long timestamp);
     virtual void MacActivate( long timestamp , bool inIsActivating ) ;
 
-    virtual void SetWindowStyleFlag(long flags) override;
+    void SetWindowStyleFlag(long flags) override;
 
-    virtual void Raise() override;
-    virtual void Lower() override;
-    virtual bool Show( bool show = true ) override;
+    void Raise() override;
+    void Lower() override;
+    bool Show( bool show = true ) override;
 
-    virtual void SetExtraStyle(long exStyle) override;
+    void SetExtraStyle(long exStyle) override;
 
-    virtual bool SetBackgroundColour( const wxColour &colour ) override;
+    bool SetBackgroundColour( const wxColour &colour ) override;
 
     wxNonOwnedWindowImpl* GetNonOwnedPeer() const { return m_nowpeer; }
 
 #if wxOSX_USE_COCOA_OR_IPHONE
     // override the base class method to return an NSWindow instead of NSView
-    virtual void *OSXGetViewOrWindow() const override;
+    void *OSXGetViewOrWindow() const override;
 #endif // Cocoa
 
     // osx specific event handling common for all osx-ports
@@ -120,25 +120,25 @@ public:
 
     void WindowWasPainted();
 
-    virtual bool Destroy() override;
+    bool Destroy() override;
 
 protected:
     // common part of all ctors
     void Init();
 
-    virtual void DoGetPosition( int *x, int *y ) const override;
-    virtual void DoGetSize( int *width, int *height ) const override;
-    virtual void DoMoveWindow(int x, int y, int width, int height) override;
-    virtual void DoGetClientSize(int *width, int *height) const override;
+    void DoGetPosition( int *x, int *y ) const override;
+    void DoGetSize( int *width, int *height ) const override;
+    void DoMoveWindow(int x, int y, int width, int height) override;
+    void DoGetClientSize(int *width, int *height) const override;
 
     virtual bool OSXShowWithEffect(bool show,
                                    wxShowEffect effect,
                                    unsigned timeout) override;
 
-    virtual bool DoClearShape() override;
-    virtual bool DoSetRegionShape(const wxRegion& region) override;
+    bool DoClearShape() override;
+    bool DoSetRegionShape(const wxRegion& region) override;
 #if wxUSE_GRAPHICS_CONTEXT
-    virtual bool DoSetPathShape(const wxGraphicsPath& path) override;
+    bool DoSetPathShape(const wxGraphicsPath& path) override;
 #endif // wxUSE_GRAPHICS_CONTEXT
 
     virtual void WillBeDestroyed();

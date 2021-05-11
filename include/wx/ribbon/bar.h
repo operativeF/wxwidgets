@@ -144,11 +144,11 @@ public:
     bool ArePanelsShown() const { return m_arePanelsShown; }
     wxRibbonDisplayMode GetDisplayMode() const { return m_ribbon_state; }
 
-    virtual bool HasMultiplePages() const override { return true; }
+    bool HasMultiplePages() const override { return true; }
 
     void SetWindowStyleFlag(long style) override;
     long GetWindowStyleFlag() const override;
-    virtual bool Realize() override;
+    bool Realize() override;
 
     // Implementation only.
     bool IsToggleButtonHovered() const { return m_toggle_button_hovered; }
@@ -163,7 +163,7 @@ public:
 protected:
     friend class wxRibbonPage;
 
-    virtual wxSize DoGetBestSize() const override;
+    wxSize DoGetBestSize() const override;
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
     wxRibbonPageTabInfo* HitTestTabs(wxPoint position, int* index = NULL);
     void HitTestRibbonButton(const wxRect& rect, const wxPoint& position, bool &hover_flag);
