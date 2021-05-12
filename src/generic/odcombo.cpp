@@ -64,7 +64,7 @@ void wxVListBoxComboPopup::Init()
     m_itemHeight = 0;
     m_value = -1;
     m_itemHover = -1;
-    m_clientDataItemsType = wxClientData_None;
+    m_clientDataItemsType = wxClientDataType::None;
     m_partialCompletionString.clear();
 }
 
@@ -256,7 +256,7 @@ void wxVListBoxComboPopup::SendComboBoxEvent( int selection )
     if ( selection >= 0 && (int)m_clientDatas.size() > selection )
     {
         void* clientData = m_clientDatas[selection];
-        if ( m_clientDataItemsType == wxClientData_Object )
+        if ( m_clientDataItemsType == wxClientDataType::Object )
             evt.SetClientObject((wxClientData*)clientData);
         else
             evt.SetClientData(clientData);
@@ -589,14 +589,14 @@ void wxVListBoxComboPopup::Clear()
 
 void wxVListBoxComboPopup::ClearClientDatas()
 {
-    if ( m_clientDataItemsType == wxClientData_Object )
+    if ( m_clientDataItemsType == wxClientDataType::Object )
     {
         for ( wxVector<void*>::iterator it = m_clientDatas.begin(); it != m_clientDatas.end(); ++it )
             delete (wxClientData*) *it;
     }
 
     m_clientDatas.clear();
-    m_clientDataItemsType = wxClientData_None;
+    m_clientDataItemsType = wxClientDataType::None;
 }
 
 void wxVListBoxComboPopup::SetItemClientData( unsigned int n,
@@ -621,7 +621,7 @@ void wxVListBoxComboPopup::Delete( unsigned int item )
     // Remove client data, if set
     if ( !m_clientDatas.empty() )
     {
-        if ( m_clientDataItemsType == wxClientData_Object )
+        if ( m_clientDataItemsType == wxClientDataType::Object )
             delete (wxClientData*) m_clientDatas[item];
 
         m_clientDatas.erase(m_clientDatas.begin()+item);
@@ -1000,7 +1000,7 @@ void wxOwnerDrawnComboBox::DoClear()
 void wxOwnerDrawnComboBox::Clear()
 {
     DoClear();
-    SetClientDataType(wxClientData_None);
+    SetClientDataType(wxClientDataType::None);
 }
 
 void wxOwnerDrawnComboBox::DoDeleteOneItem(unsigned int n)

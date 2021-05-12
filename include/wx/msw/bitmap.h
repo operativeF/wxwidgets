@@ -31,11 +31,11 @@ class WXDLLIMPEXP_FWD_CORE wxPixelDataBase;
 
 // What kind of transparency should a bitmap copied from an icon or cursor
 // have?
-enum wxBitmapTransparency
+enum class wxBitmapTransparency
 {
-  wxBitmapTransparency_Auto,    // default: copy alpha if the source has it
-  wxBitmapTransparency_None,    // never create alpha
-  wxBitmapTransparency_Always   // always use alpha
+  Auto,    // default: copy alpha if the source has it
+  None,    // never create alpha
+  Always   // always use alpha
 };
 
 // ----------------------------------------------------------------------------
@@ -86,7 +86,7 @@ public:
     // we must have this, otherwise icons are silently copied into bitmaps using
     // the copy ctor but the resulting bitmap is invalid!
     wxBitmap(const wxIcon& icon,
-             wxBitmapTransparency transp = wxBitmapTransparency_Auto)
+             wxBitmapTransparency transp = wxBitmapTransparency::Auto)
     {
         CopyFromIcon(icon, transp);
     }
@@ -94,7 +94,7 @@ public:
     // Convert from wxCursor
     explicit wxBitmap(const wxCursor& cursor)
     {
-        (void)CopyFromCursor(cursor, wxBitmapTransparency_Auto);
+        (void)CopyFromCursor(cursor, wxBitmapTransparency::Auto);
     }
 
 #if wxUSE_IMAGE
@@ -139,11 +139,11 @@ public:
 
     // copies the contents and mask of the given (colour) icon to the bitmap
     bool CopyFromIcon(const wxIcon& icon,
-                      wxBitmapTransparency transp = wxBitmapTransparency_Auto);
+                      wxBitmapTransparency transp = wxBitmapTransparency::Auto);
 
     // copies the contents and mask of the given cursor to the bitmap
     bool CopyFromCursor(const wxCursor& cursor,
-                        wxBitmapTransparency transp = wxBitmapTransparency_Auto);
+                        wxBitmapTransparency transp = wxBitmapTransparency::Auto);
 
 #if wxUSE_WXDIB
     // copies from a device independent bitmap
@@ -235,7 +235,7 @@ private:
     // common part of CopyFromIcon/CopyFromCursor for Win32
     bool
     CopyFromIconOrCursor(const wxGDIImage& icon,
-                         wxBitmapTransparency transp = wxBitmapTransparency_Auto);
+                         wxBitmapTransparency transp = wxBitmapTransparency::Auto);
 
 
     wxDECLARE_DYNAMIC_CLASS(wxBitmap);

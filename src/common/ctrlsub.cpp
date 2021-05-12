@@ -98,7 +98,7 @@ void wxItemContainer::Clear()
             ResetItemClientObject(i);
     }
 
-    SetClientDataType(wxClientData_None);
+    SetClientDataType(wxClientDataType::None);
 
     DoClear();
 }
@@ -114,7 +114,7 @@ void wxItemContainer::Delete(unsigned int pos)
 
     if ( IsEmpty() )
     {
-        SetClientDataType(wxClientData_None);
+        SetClientDataType(wxClientDataType::None);
     }
 }
 
@@ -174,7 +174,7 @@ void wxItemContainer::SetClientObject(unsigned int n, wxClientData *data)
         // now we have object client data
         DoInitItemClientData();
 
-        SetClientDataType(wxClientData_Object);
+        SetClientDataType(wxClientDataType::Object);
     }
 
     DoSetItemClientData(n, data);
@@ -208,7 +208,7 @@ void wxItemContainer::SetClientData(unsigned int n, void *data)
     if ( !HasClientData() )
     {
         DoInitItemClientData();
-        SetClientDataType(wxClientData_Void);
+        SetClientDataType(wxClientDataType::Void);
     }
 
     wxASSERT_MSG( HasClientUntypedData(),
@@ -237,7 +237,7 @@ void wxItemContainer::AssignNewItemClientData(unsigned int pos,
 {
     switch ( type )
     {
-        case wxClientData_Object:
+        case wxClientDataType::Object:
             SetClientObject
             (
                 pos,
@@ -245,7 +245,7 @@ void wxItemContainer::AssignNewItemClientData(unsigned int pos,
             );
             break;
 
-        case wxClientData_Void:
+        case wxClientDataType::Void:
             SetClientData(pos, clientData[n]);
             break;
 
@@ -253,7 +253,7 @@ void wxItemContainer::AssignNewItemClientData(unsigned int pos,
             wxFAIL_MSG( wxT("unknown client data type") );
             [[fallthrough]];
 
-        case wxClientData_None:
+        case wxClientDataType::None:
             // nothing to do
             break;
     }

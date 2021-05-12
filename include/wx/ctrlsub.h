@@ -119,25 +119,25 @@ private:
 
     int AppendItems(const wxArrayStringsAdapter& items)
     {
-        return AppendItems(items, NULL, wxClientData_None);
+        return AppendItems(items, NULL, wxClientDataType::None);
     }
 
     int AppendItems(const wxArrayStringsAdapter& items, void **clientData)
     {
-        wxASSERT_MSG( GetClientDataType() != wxClientData_Object,
+        wxASSERT_MSG( GetClientDataType() != wxClientDataType::Object,
                       wxT("can't mix different types of client data") );
 
-        return AppendItems(items, clientData, wxClientData_Void);
+        return AppendItems(items, clientData, wxClientDataType::Void);
     }
 
     int AppendItems(const wxArrayStringsAdapter& items,
                     wxClientData **clientData)
     {
-        wxASSERT_MSG( GetClientDataType() != wxClientData_Void,
+        wxASSERT_MSG( GetClientDataType() != wxClientDataType::Void,
                       wxT("can't mix different types of client data") );
 
         return AppendItems(items, reinterpret_cast<void **>(clientData),
-                           wxClientData_Object);
+                           wxClientDataType::Object);
     }
 
     int InsertItems(const wxArrayStringsAdapter& items,
@@ -162,33 +162,33 @@ private:
 
     int InsertItems(const wxArrayStringsAdapter& items, unsigned int pos)
     {
-        return InsertItems(items, pos, NULL, wxClientData_None);
+        return InsertItems(items, pos, NULL, wxClientDataType::None);
     }
 
     int InsertItems(const wxArrayStringsAdapter& items,
                      unsigned int pos,
                      void **clientData)
     {
-        wxASSERT_MSG( GetClientDataType() != wxClientData_Object,
+        wxASSERT_MSG( GetClientDataType() != wxClientDataType::Object,
                       wxT("can't mix different types of client data") );
 
-        return InsertItems(items, pos, clientData, wxClientData_Void);
+        return InsertItems(items, pos, clientData, wxClientDataType::Void);
     }
 
     int InsertItems(const wxArrayStringsAdapter& items,
                      unsigned int pos,
                      wxClientData **clientData)
     {
-        wxASSERT_MSG( GetClientDataType() != wxClientData_Void,
+        wxASSERT_MSG( GetClientDataType() != wxClientDataType::Void,
                       wxT("can't mix different types of client data") );
 
         return InsertItems(items, pos,
                            reinterpret_cast<void **>(clientData),
-                           wxClientData_Object);
+                           wxClientDataType::Object);
     }
 
 public:
-    wxItemContainer() { m_clientDataItemsType = wxClientData_None; }
+    wxItemContainer() { m_clientDataItemsType = wxClientDataType::None; }
     virtual ~wxItemContainer();
 
     // adding items
@@ -333,11 +333,11 @@ public:
         { return m_clientDataItemsType; }
 
     bool HasClientData() const
-        { return GetClientDataType() != wxClientData_None; }
+        { return GetClientDataType() != wxClientDataType::None; }
     bool HasClientObjectData() const
-        { return GetClientDataType() == wxClientData_Object; }
+        { return GetClientDataType() == wxClientDataType::Object; }
     bool HasClientUntypedData() const
-        { return GetClientDataType() == wxClientData_Void; }
+        { return GetClientDataType() == wxClientDataType::Void; }
 
 protected:
     // there is usually no need to override this method but you can do it if it

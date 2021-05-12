@@ -87,11 +87,11 @@ private:
 // ----------------------------------------------------------------------------
 
 // what kind of client data do we have?
-enum wxClientDataType
+enum class wxClientDataType
 {
-    wxClientData_None,    // we don't know yet because we don't have it at all
-    wxClientData_Object,  // our client data is typed and we own it
-    wxClientData_Void     // client data is untyped and we don't own it
+    None,    // we don't know yet because we don't have it at all
+    Object,  // our client data is typed and we own it
+    Void     // client data is untyped and we don't own it
 };
 
 class WXDLLIMPEXP_BASE wxClientData

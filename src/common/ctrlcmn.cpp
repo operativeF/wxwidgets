@@ -99,15 +99,15 @@ void wxControlBase::InitCommandEvent(wxCommandEvent& event) const
 
     switch ( m_clientDataType )
     {
-        case wxClientData_Void:
+        case wxClientDataType::Void:
             event.SetClientData(GetClientData());
             break;
 
-        case wxClientData_Object:
+        case wxClientDataType::Object:
             event.SetClientObject(GetClientObject());
             break;
 
-        case wxClientData_None:
+        case wxClientDataType::None:
             // nothing to do
             ;
     }

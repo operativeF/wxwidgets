@@ -22,31 +22,31 @@ wxClientDataContainer::wxClientDataContainer()
 {
     // no client data (yet)
     m_clientData = nullptr;
-    m_clientDataType = wxClientData_None;
+    m_clientDataType = wxClientDataType::None;
 }
 
 wxClientDataContainer::~wxClientDataContainer()
 {
     // we only delete object data, not untyped
-    if ( m_clientDataType == wxClientData_Object )
+    if ( m_clientDataType == wxClientDataType::Object )
         delete m_clientObject;
 }
 
 void wxClientDataContainer::DoSetClientObject( wxClientData *data )
 {
-    wxASSERT_MSG( m_clientDataType != wxClientData_Void,
+    wxASSERT_MSG( m_clientDataType != wxClientDataType::Void,
                   wxT("can't have both object and void client data") );
 
     delete m_clientObject;
     m_clientObject = data;
-    m_clientDataType = wxClientData_Object;
+    m_clientDataType = wxClientDataType::Object;
 }
 
 wxClientData *wxClientDataContainer::DoGetClientObject() const
 {
     // it's not an error to call GetClientObject() on a window which doesn't
     // have client data at all - NULL will be returned
-    wxASSERT_MSG( m_clientDataType != wxClientData_Void,
+    wxASSERT_MSG( m_clientDataType != wxClientDataType::Void,
                   wxT("this window doesn't have object client data") );
 
     return m_clientObject;
@@ -54,18 +54,18 @@ wxClientData *wxClientDataContainer::DoGetClientObject() const
 
 void wxClientDataContainer::DoSetClientData( void *data )
 {
-    wxASSERT_MSG( m_clientDataType != wxClientData_Object,
+    wxASSERT_MSG( m_clientDataType != wxClientDataType::Object,
                   wxT("can't have both object and void client data") );
 
     m_clientData = data;
-    m_clientDataType = wxClientData_Void;
+    m_clientDataType = wxClientDataType::Void;
 }
 
 void *wxClientDataContainer::DoGetClientData() const
 {
     // it's not an error to call GetClientData() on a window which doesn't have
     // client data at all - NULL will be returned
-    wxASSERT_MSG( m_clientDataType != wxClientData_Object,
+    wxASSERT_MSG( m_clientDataType != wxClientDataType::Object,
                   wxT("this window doesn't have void client data") );
 
     return m_clientData;

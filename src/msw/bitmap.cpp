@@ -559,11 +559,11 @@ bool wxBitmap::CopyFromIconOrCursor(const wxGDIImage& icon,
             wxFAIL_MSG( wxT("unknown wxBitmapTransparency value") );
             [[fallthrough]];
 
-        case wxBitmapTransparency_None:
+        case wxBitmapTransparency::None:
             // nothing to do, refData->m_hasAlpha is false by default
             break;
 
-        case wxBitmapTransparency_Auto:
+        case wxBitmapTransparency::Auto:
 #if wxUSE_WXDIB
             // If the icon is 32 bits per pixel then it may have alpha channel
             // data, although there are some icons that are 32 bpp but have no
@@ -576,7 +576,7 @@ bool wxBitmap::CopyFromIconOrCursor(const wxGDIImage& icon,
             break;
 #endif // wxUSE_WXDIB
 
-        case wxBitmapTransparency_Always:
+        case wxBitmapTransparency::Always:
             refData->m_hasAlpha = true;
             break;
     }

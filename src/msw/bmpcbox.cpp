@@ -138,16 +138,16 @@ void wxBitmapComboBox::RecreateControl()
     wxVector<void*> voidClientData;
     switch ( clientDataType )
     {
-        case wxClientData_None:
+        case wxClientDataType::None:
             break;
 
-        case wxClientData_Object:
+        case wxClientDataType::Object:
             objectClientData.reserve(numItems);
             for ( i = 0; i < numItems; ++i )
                 objectClientData.push_back(GetClientObject(i));
             break;
 
-        case wxClientData_Void:
+        case wxClientDataType::Void:
             voidClientData.reserve(numItems);
             for ( i = 0; i < numItems; ++i )
                 voidClientData.push_back(GetClientData(i));
@@ -323,7 +323,7 @@ int wxBitmapComboBox::DoInsertItems(const wxArrayStringsAdapter & items,
             if ( clientData )
                 index = wxComboBox::DoInsertItems(items[i], pos+i, clientData+i, type);
             else
-                index = wxComboBox::DoInsertItems(items[i], pos+i, nullptr, wxClientData_None);
+                index = wxComboBox::DoInsertItems(items[i], pos+i, nullptr, wxClientDataType::None);
 
             wxASSERT_MSG( index != wxNOT_FOUND, wxS("Invalid wxBitmapComboBox state") );
             if ( index == wxNOT_FOUND )

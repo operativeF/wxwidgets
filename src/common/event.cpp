@@ -1144,7 +1144,7 @@ wxEvtHandler::wxEvtHandler()
 
     // no client data (yet)
     m_clientData = nullptr;
-    m_clientDataType = wxClientData_None;
+    m_clientDataType = wxClientDataType::None;
 }
 
 wxEvtHandler::~wxEvtHandler()
@@ -1185,7 +1185,7 @@ wxEvtHandler::~wxEvtHandler()
     DeletePendingEvents();
 
     // we only delete object data, not untyped
-    if ( m_clientDataType == wxClientData_Object )
+    if ( m_clientDataType == wxClientDataType::Object )
         delete m_clientObject;
 }
 
@@ -1917,20 +1917,20 @@ bool wxEvtHandler::SearchDynamicEventTable( wxEvent& event )
 
 void wxEvtHandler::DoSetClientObject( wxClientData *data )
 {
-    wxASSERT_MSG( m_clientDataType != wxClientData_Void,
+    wxASSERT_MSG( m_clientDataType != wxClientDataType::Void,
                   wxT("can't have both object and void client data") );
 
     delete m_clientObject;
 
     m_clientObject = data;
-    m_clientDataType = wxClientData_Object;
+    m_clientDataType = wxClientDataType::Object;
 }
 
 wxClientData *wxEvtHandler::DoGetClientObject() const
 {
     // it's not an error to call GetClientObject() on a window which doesn't
     // have client data at all - NULL will be returned
-    wxASSERT_MSG( m_clientDataType != wxClientData_Void,
+    wxASSERT_MSG( m_clientDataType != wxClientDataType::Void,
                   wxT("this window doesn't have object client data") );
 
     return m_clientObject;
@@ -1938,18 +1938,18 @@ wxClientData *wxEvtHandler::DoGetClientObject() const
 
 void wxEvtHandler::DoSetClientData( void *data )
 {
-    wxASSERT_MSG( m_clientDataType != wxClientData_Object,
+    wxASSERT_MSG( m_clientDataType != wxClientDataType::Object,
                   wxT("can't have both object and void client data") );
 
     m_clientData = data;
-    m_clientDataType = wxClientData_Void;
+    m_clientDataType = wxClientDataType::Void;
 }
 
 void *wxEvtHandler::DoGetClientData() const
 {
     // it's not an error to call GetClientData() on a window which doesn't have
     // client data at all - NULL will be returned
-    wxASSERT_MSG( m_clientDataType != wxClientData_Object,
+    wxASSERT_MSG( m_clientDataType != wxClientDataType::Object,
                   wxT("this window doesn't have void client data") );
 
     return m_clientData;

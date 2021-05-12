@@ -99,7 +99,7 @@ private:
     {
         if ( !HasClientData() )
         {
-            if ( type == wxClientData_None )
+            if ( type == wxClientDataType::None )
             {
                 // we didn't have the client data before and are not asked to
                 // store it now neither

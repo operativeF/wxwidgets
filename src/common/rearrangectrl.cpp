@@ -144,11 +144,11 @@ void wxRearrangeList::Swap(int pos1, int pos2)
     // and finally the client data, if necessary
     switch ( GetClientDataType() )
     {
-        case wxClientData_None:
+        case wxClientDataType::None:
             // nothing to do
             break;
 
-        case wxClientData_Object:
+        case wxClientDataType::Object:
             {
                 wxClientData * const dataTmp = DetachClientObject(pos1);
                 SetClientObject(pos1, DetachClientObject(pos2));
@@ -156,7 +156,7 @@ void wxRearrangeList::Swap(int pos1, int pos2)
             }
             break;
 
-        case wxClientData_Void:
+        case wxClientDataType::Void:
             {
                 void * const dataTmp = GetClientData(pos1);
                 SetClientData(pos1, GetClientData(pos2));
