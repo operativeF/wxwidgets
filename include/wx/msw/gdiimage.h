@@ -118,15 +118,6 @@ public:
                wxSize(GetGDIImageData()->m_width, GetGDIImageData()->m_height);
     }
 
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_INLINE(void SetWidth(int w), AllocExclusive(); GetGDIImageData()->m_width = w; )
-    wxDEPRECATED_INLINE(void SetHeight(int h), AllocExclusive(); GetGDIImageData()->m_height = h; )
-    wxDEPRECATED_INLINE(void SetDepth(int d), AllocExclusive(); GetGDIImageData()->m_depth = d; )
-
-    wxDEPRECATED_INLINE(void SetSize(int w, int h), AllocExclusive(); GetGDIImageData()->SetSize(w, h); )
-    wxDEPRECATED_INLINE(void SetSize(const wxSize& size), AllocExclusive(); GetGDIImageData()->SetSize(size.x, size.y); )
-#endif // WXWIN_COMPATIBILITY_3_0
-
     // forward some of base class virtuals to wxGDIImageRefData
     bool FreeResource(bool force = false) override;
     WXHANDLE GetResourceHandle() const override;

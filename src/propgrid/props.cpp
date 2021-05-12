@@ -883,80 +883,6 @@ wxFloatProperty::wxFloatProperty( const wxString& label,
 
 wxFloatProperty::~wxFloatProperty() = default;
 
-#if WXWIN_COMPATIBILITY_3_0
-// This helper method provides standard way for floating point-using
-// properties to convert values to string.
-const wxString& wxPropertyGrid::DoubleToString(wxString& target,
-                                               double value,
-                                               int precision,
-                                               bool removeZeroes,
-                                               wxString* precTemplate)
-{
-    if ( precision >= 0 )
-    {
-        wxString text1;
-        if (!precTemplate)
-            precTemplate = &text1;
-
-        if ( precTemplate->empty() )
-        {
-            *precTemplate = wxS("%.");
-            *precTemplate << wxString::Format( wxS("%i"), precision );
-            *precTemplate << wxS('f');
-        }
-
-        target.Printf( *precTemplate, value );
-    }
-    else
-    {
-        target.Printf( wxS("%f"), value );
-    }
-
-    if ( removeZeroes && precision != 0 && !target.empty() )
-    {
-        // Remove excess zeros (do not remove this code just yet,
-        // since sprintf can't do the same consistently across platforms).
-        wxString::const_iterator i = target.end() - 1;
-        size_t new_len = target.length() - 1;
-
-        for ( ; i != target.begin(); --i )
-        {
-            if ( *i != wxS('0') )
-                break;
-            new_len--;
-        }
-
-        wxUniChar cur_char = *i;
-        if ( cur_char != wxS('.') && cur_char != wxS(',') )
-            new_len++;
-
-        if ( new_len != target.length() )
-            target.resize(new_len);
-    }
-
-    // Remove sign from zero
-    if ( target.length() >= 2 && target[0] == wxS('-') )
-    {
-        bool isZero = true;
-        wxString::const_iterator i = target.begin() + 1;
-
-        for ( ; i != target.end(); ++i )
-        {
-            if ( *i != wxS('0') && *i != wxS('.') && *i != wxS(',') )
-            {
-                isZero = false;
-                break;
-            }
-        }
-
-        if ( isZero )
-            target.erase(target.begin());
-    }
-
-    return target;
-}
-#endif // WXWIN_COMPATIBILITY_3_0
-
 wxString wxFloatProperty::ValueToString( wxVariant& value,
                                          int argFlags ) const
 {
@@ -1907,18 +1833,6 @@ bool wxDirProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value)
     return false;
 }
 
-#if WXWIN_COMPATIBILITY_3_0
-bool wxDirProperty::DoSetAttribute(const wxString& name, wxVariant& value)
-{
-    if ( name == wxPG_DIR_DIALOG_MESSAGE )
-    {
-        m_dlgTitle = value.GetString();
-        return true;
-    }
-    return wxEditorDialogProperty::DoSetAttribute(name, value);
-}
-#endif // WXWIN_COMPATIBILITY_3_0
-
 // -----------------------------------------------------------------------
 // wxPGDialogAdapter
 // -----------------------------------------------------------------------
@@ -2163,13 +2077,6 @@ bool wxFileProperty::DoSetAttribute( const wxString& name, wxVariant& value )
         m_initialPath = value.GetString();
         return true;
     }
-#if WXWIN_COMPATIBILITY_3_0
-    else if ( name == wxPG_FILE_DIALOG_TITLE )
-    {
-        m_dlgTitle = value.GetString();
-        return true;
-    }
-#endif // WXWIN_COMPATIBILITY_3_0
     else if ( name == wxPG_FILE_DIALOG_STYLE )
     {
         m_dlgStyle = value.GetLong();
@@ -2783,15 +2690,6 @@ bool wxArrayStringProperty::OnCustomStringEdit( wxWindow*, wxString& )
 {
     return false;
 }
-
-#if WXWIN_COMPATIBILITY_3_0
-bool wxArrayStringProperty::OnButtonClick(wxPropertyGrid* WXUNUSED(propgrid),
-                                          wxWindow* WXUNUSED(primary),
-                                          const wxChar* WXUNUSED(cbt))
-{
-    return false;
-}
-#endif // WXWIN_COMPATIBILITY_3_0
 
 wxPGArrayEditorDialog* wxArrayStringProperty::CreateEditorDialog()
 {

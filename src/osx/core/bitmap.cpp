@@ -867,29 +867,6 @@ wxGDIRefData* wxBitmap::CloneGDIRefData(const wxGDIRefData* data) const
     return new wxBitmapRefData(*static_cast<const wxBitmapRefData *>(data));
 }
 
-#if WXWIN_COMPATIBILITY_3_0
-const void * wxBitmap::GetRawAccess() const
-{
-    wxCHECK_MSG( IsOk() , NULL , wxT("invalid bitmap") ) ;
-
-    return GetBitmapData()->GetRawAccess() ;
-}
-
-void * wxBitmap::BeginRawAccess()
-{
-    wxCHECK_MSG( IsOk() , NULL , wxT("invalid bitmap") ) ;
-
-    return GetBitmapData()->BeginRawAccess() ;
-}
-
-void wxBitmap::EndRawAccess()
-{
-    wxCHECK_RET( IsOk() , wxT("invalid bitmap") ) ;
-
-    GetBitmapData()->EndRawAccess() ;
-}
-#endif
-
 CGImageRef wxBitmap::CreateCGImage() const
 {
     wxCHECK_MSG( IsOk(), NULL , wxT("invalid bitmap") ) ;
@@ -1416,26 +1393,6 @@ bool wxBitmap::HasAlpha() const
 
    return GetBitmapData()->HasAlpha() ;
 }
-
-#if WXWIN_COMPATIBILITY_3_0
-void wxBitmap::SetWidth(int WXUNUSED_UNLESS_DEBUG(w))
-{
-    AllocExclusive();
-    wxASSERT_MSG( GetWidth() == w, "Changing the bitmap width is not supported");
-}
-
-void wxBitmap::SetHeight(int WXUNUSED_UNLESS_DEBUG(h))
-{
-    AllocExclusive();
-    wxASSERT_MSG( GetHeight() == h, "Changing the bitmap height is not supported");
-}
-
-void wxBitmap::SetDepth(int WXUNUSED_UNLESS_DEBUG(d))
-{
-    AllocExclusive();
-    wxASSERT_MSG( d == -1 || GetDepth() == d, "Changing the bitmap depth is not supported");
-}
-#endif
 
 #if wxUSE_PALETTE
 wxPalette *wxBitmap::GetPalette() const

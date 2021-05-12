@@ -695,13 +695,6 @@ void wxAuiDefaultDockArt::DrawCaption(wxDC& dc,
     dc.DestroyClippingRegion();
 }
 
-#if WXWIN_COMPATIBILITY_3_0
-void wxAuiDefaultDockArt::DrawIcon(wxDC& dc, const wxRect& rect, wxAuiPaneInfo& pane)
-{
-    DrawIcon(dc, nullptr, rect, pane);
-}
-#endif
-
 void
 wxAuiDefaultDockArt::DrawIcon(wxDC& dc, wxWindow *window, const wxRect& rect, wxAuiPaneInfo& pane)
 {

@@ -619,11 +619,7 @@ public:
     bool IsPropertyModified( wxPGPropArg id ) const
     {
         wxPG_PROP_ARG_CALL_PROLOG_RETVAL(false)
-#if WXWIN_COMPATIBILITY_3_0
-        return p->HasFlag(wxPG_PROP_MODIFIED)?true:false;
-#else
         return p->HasFlag(wxPG_PROP_MODIFIED);
-#endif
     }
 
     // Returns true if property is selected.
@@ -775,12 +771,7 @@ public:
     // id - Property name or pointer.
     // flags - Default is wxPG_DONT_RECURSE which causes colour to be reset
     //   only for the property in question (for backward compatibility).
-#if WXWIN_COMPATIBILITY_3_0
-    void SetPropertyColoursToDefault(wxPGPropArg id);
-    void SetPropertyColoursToDefault(wxPGPropArg id, int flags);
-#else
     void SetPropertyColoursToDefault(wxPGPropArg id, int flags = wxPG_DONT_RECURSE);
-#endif // WXWIN_COMPATIBILITY_3_0
 
     // Sets text colour of a property.
     // id - Property name or pointer.

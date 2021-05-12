@@ -79,27 +79,6 @@ TEST_CASE("wxFont::Construct", "[font][ctor]")
     CHECK( wxFont(10, wxFONTFAMILY_DEFAULT,
                       wxFONTSTYLE_NORMAL,
                       wxFONTWEIGHT_NORMAL).IsOk() );
-
-#if WXWIN_COMPATIBILITY_3_0
-    // Disable the warning about deprecated wxNORMAL as we use it here
-    // intentionally.
-    #ifdef __VISUALC__
-        #pragma warning(push)
-        #pragma warning(disable:4996)
-    #endif
-
-    wxGCC_WARNING_SUPPRESS(deprecated-declarations)
-
-    // Tests relying on the soon-to-be-deprecated ctor taking ints and not
-    // wxFontXXX enum elements.
-    CHECK( wxFont(10, wxDEFAULT, wxNORMAL, wxNORMAL).IsOk() );
-
-    wxGCC_WARNING_RESTORE(deprecated-declarations)
-
-    #ifdef __VISUALC__
-        #pragma warning(pop)
-    #endif
-#endif // WXWIN_COMPATIBILITY_3_0
 }
 
 TEST_CASE("wxFont::Size", "[font][size]")
@@ -157,39 +136,6 @@ TEST_CASE("wxFont::Size", "[font][size]")
     CHECK( font.GetPointSize() == 10 );
 }
 
-TEST_CASE("wxFont::Style", "[font][style]")
-{
-#if WXWIN_COMPATIBILITY_3_0
-    // Disable the warning about deprecated wxNORMAL as we use it here
-    // intentionally.
-    #ifdef __VISUALC__
-        #pragma warning(push)
-        #pragma warning(disable:4996)
-    #endif
-
-    wxGCC_WARNING_SUPPRESS(deprecated-declarations)
-
-    wxFont fontNormal(10, wxDEFAULT, wxNORMAL, wxNORMAL);
-    CHECK( fontNormal.GetStyle() == wxFONTSTYLE_NORMAL );
-
-    wxFont fontItalic(10, wxDEFAULT, wxITALIC, wxNORMAL);
-    CHECK( fontItalic.GetStyle() == wxFONTSTYLE_ITALIC );
-
-    wxFont fontSlant(10, wxDEFAULT, wxSLANT, wxNORMAL);
-#ifdef __WXMSW__
-    CHECK( fontSlant.GetStyle() == wxFONTSTYLE_ITALIC );
-#else
-    CHECK( fontSlant.GetStyle() == wxFONTSTYLE_SLANT );
-#endif
-
-    wxGCC_WARNING_RESTORE(deprecated-declarations)
-
-    #ifdef __VISUALC__
-        #pragma warning(pop)
-    #endif
-#endif // WXWIN_COMPATIBILITY_3_0
-}
-
 TEST_CASE("wxFont::Weight", "[font][weight]")
 {
     wxFont font;
@@ -209,32 +155,6 @@ TEST_CASE("wxFont::Weight", "[font][weight]")
     font.SetNumericWeight(wxFONTWEIGHT_SEMIBOLD);
     CHECK( font.GetNumericWeight() == wxFONTWEIGHT_SEMIBOLD );
     CHECK( font.GetWeight() == wxFONTWEIGHT_SEMIBOLD );
-
-#if WXWIN_COMPATIBILITY_3_0
-    // Disable the warning about deprecated wxNORMAL as we use it here
-    // intentionally.
-    #ifdef __VISUALC__
-        #pragma warning(push)
-        #pragma warning(disable:4996)
-    #endif
-
-    wxGCC_WARNING_SUPPRESS(deprecated-declarations)
-
-    wxFont fontNormal(10, wxDEFAULT, wxNORMAL, wxNORMAL);
-    CHECK( fontNormal.GetWeight() == wxFONTWEIGHT_NORMAL );
-
-    wxFont fontBold(10, wxDEFAULT, wxNORMAL, wxBOLD);
-    CHECK( fontBold.GetWeight() == wxFONTWEIGHT_BOLD );
-
-    wxFont fontLight(10, wxDEFAULT, wxNORMAL, wxLIGHT);
-    CHECK( fontLight.GetWeight() == wxFONTWEIGHT_LIGHT );
-
-    wxGCC_WARNING_RESTORE(deprecated-declarations)
-
-    #ifdef __VISUALC__
-        #pragma warning(pop)
-    #endif
-#endif // WXWIN_COMPATIBILITY_3_0
 }
 
 TEST_CASE("wxFont::GetSet", "[font][getters]")

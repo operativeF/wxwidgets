@@ -66,10 +66,6 @@ public:
     // implementation only from now on
     wxIconRefData *GetIconData() const { return (wxIconRefData *)m_refData; }
 
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_INLINE(void SetHICON(WXHICON icon), SetHandle((WXHANDLE)icon); )
-#endif // WXWIN_COMPATIBILITY_3_0
-
     WXHICON GetHICON() const { return (WXHICON)GetHandle(); }
     bool InitFromHICON(WXHICON icon, int width, int height);
 

@@ -8960,11 +8960,6 @@ $(OBJS)\monodll_dseldlg.obj: ..\..\src\common\dseldlg.cpp
 !endif
 
 !if "$(USE_GUI)" == "1"
-$(OBJS)\monodll_effects.obj: ..\..\src\common\effects.cpp
-	$(CXX) /c /nologo /TP /Fo$@ $(MONODLL_CXXFLAGS) ..\..\src\common\effects.cpp
-!endif
-
-!if "$(USE_GUI)" == "1"
 $(OBJS)\monodll_fddlgcmn.obj: ..\..\src\common\fddlgcmn.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MONODLL_CXXFLAGS) ..\..\src\common\fddlgcmn.cpp
 !endif
@@ -9162,11 +9157,6 @@ $(OBJS)\monodll_listctrlcmn.obj: ..\..\src\common\listctrlcmn.cpp
 !if "$(USE_GUI)" == "1"
 $(OBJS)\monodll_markupparser.obj: ..\..\src\common\markupparser.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MONODLL_CXXFLAGS) ..\..\src\common\markupparser.cpp
-!endif
-
-!if "$(USE_GUI)" == "1"
-$(OBJS)\monodll_matrix.obj: ..\..\src\common\matrix.cpp
-	$(CXX) /c /nologo /TP /Fo$@ $(MONODLL_CXXFLAGS) ..\..\src\common\matrix.cpp
 !endif
 
 !if "$(USE_GUI)" == "1"
@@ -11528,11 +11518,6 @@ $(OBJS)\monolib_dseldlg.obj: ..\..\src\common\dseldlg.cpp
 !endif
 
 !if "$(USE_GUI)" == "1"
-$(OBJS)\monolib_effects.obj: ..\..\src\common\effects.cpp
-	$(CXX) /c /nologo /TP /Fo$@ $(MONOLIB_CXXFLAGS) ..\..\src\common\effects.cpp
-!endif
-
-!if "$(USE_GUI)" == "1"
 $(OBJS)\monolib_fddlgcmn.obj: ..\..\src\common\fddlgcmn.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MONOLIB_CXXFLAGS) ..\..\src\common\fddlgcmn.cpp
 !endif
@@ -11730,11 +11715,6 @@ $(OBJS)\monolib_listctrlcmn.obj: ..\..\src\common\listctrlcmn.cpp
 !if "$(USE_GUI)" == "1"
 $(OBJS)\monolib_markupparser.obj: ..\..\src\common\markupparser.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(MONOLIB_CXXFLAGS) ..\..\src\common\markupparser.cpp
-!endif
-
-!if "$(USE_GUI)" == "1"
-$(OBJS)\monolib_matrix.obj: ..\..\src\common\matrix.cpp
-	$(CXX) /c /nologo /TP /Fo$@ $(MONOLIB_CXXFLAGS) ..\..\src\common\matrix.cpp
 !endif
 
 !if "$(USE_GUI)" == "1"
@@ -14063,11 +14043,6 @@ $(OBJS)\coredll_dseldlg.obj: ..\..\src\common\dseldlg.cpp
 !endif
 
 !if "$(USE_GUI)" == "1"
-$(OBJS)\coredll_effects.obj: ..\..\src\common\effects.cpp
-	$(CXX) /c /nologo /TP /Fo$@ $(COREDLL_CXXFLAGS) ..\..\src\common\effects.cpp
-!endif
-
-!if "$(USE_GUI)" == "1"
 $(OBJS)\coredll_fddlgcmn.obj: ..\..\src\common\fddlgcmn.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(COREDLL_CXXFLAGS) ..\..\src\common\fddlgcmn.cpp
 !endif
@@ -14265,11 +14240,6 @@ $(OBJS)\coredll_listctrlcmn.obj: ..\..\src\common\listctrlcmn.cpp
 !if "$(USE_GUI)" == "1"
 $(OBJS)\coredll_markupparser.obj: ..\..\src\common\markupparser.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(COREDLL_CXXFLAGS) ..\..\src\common\markupparser.cpp
-!endif
-
-!if "$(USE_GUI)" == "1"
-$(OBJS)\coredll_matrix.obj: ..\..\src\common\matrix.cpp
-	$(CXX) /c /nologo /TP /Fo$@ $(COREDLL_CXXFLAGS) ..\..\src\common\matrix.cpp
 !endif
 
 !if "$(USE_GUI)" == "1"
@@ -15803,11 +15773,6 @@ $(OBJS)\corelib_dseldlg.obj: ..\..\src\common\dseldlg.cpp
 !endif
 
 !if "$(USE_GUI)" == "1"
-$(OBJS)\corelib_effects.obj: ..\..\src\common\effects.cpp
-	$(CXX) /c /nologo /TP /Fo$@ $(CORELIB_CXXFLAGS) ..\..\src\common\effects.cpp
-!endif
-
-!if "$(USE_GUI)" == "1"
 $(OBJS)\corelib_fddlgcmn.obj: ..\..\src\common\fddlgcmn.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(CORELIB_CXXFLAGS) ..\..\src\common\fddlgcmn.cpp
 !endif
@@ -16005,11 +15970,6 @@ $(OBJS)\corelib_listctrlcmn.obj: ..\..\src\common\listctrlcmn.cpp
 !if "$(USE_GUI)" == "1"
 $(OBJS)\corelib_markupparser.obj: ..\..\src\common\markupparser.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(CORELIB_CXXFLAGS) ..\..\src\common\markupparser.cpp
-!endif
-
-!if "$(USE_GUI)" == "1"
-$(OBJS)\corelib_matrix.obj: ..\..\src\common\matrix.cpp
-	$(CXX) /c /nologo /TP /Fo$@ $(CORELIB_CXXFLAGS) ..\..\src\common\matrix.cpp
 !endif
 
 !if "$(USE_GUI)" == "1"

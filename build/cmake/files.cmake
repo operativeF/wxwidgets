@@ -748,7 +748,6 @@ set(GUI_CMN_SRC
     src/common/docview.cpp
     src/common/dpycmn.cpp
     src/common/dseldlg.cpp
-    src/common/effects.cpp
     src/common/fddlgcmn.cpp
     src/common/filectrlcmn.cpp
     src/common/filehistorycmn.cpp
@@ -789,7 +788,6 @@ set(GUI_CMN_SRC
     src/common/lboxcmn.cpp
     src/common/listctrlcmn.cpp
     src/common/markupparser.cpp
-    src/common/matrix.cpp
     src/common/menucmn.cpp
     src/common/modalhook.cpp
     src/common/mousemanager.cpp

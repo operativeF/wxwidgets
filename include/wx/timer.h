@@ -174,14 +174,6 @@ public:
     wxEvent *Clone() const override { return new wxTimerEvent(*this); }
     wxEventCategory GetEventCategory() const override { return wxEVT_CATEGORY_TIMER; }
 
-    // default ctor creates an unusable event object and should not be used (in
-    // fact, no code outside wxWidgets is supposed to create event objects)
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_MSG("wxTimerEvent not supposed to be created by user code")
-    wxTimerEvent()
-        : wxEvent(wxID_ANY, wxEVT_TIMER) { m_timer=NULL; }
-#endif // WXWIN_COMPATIBILITY_3_0
-
 private:
     wxTimer* m_timer;
 

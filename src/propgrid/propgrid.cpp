@@ -104,21 +104,6 @@
 // adjusted.
 #define IN_CELL_EXPANDER_BUTTON_X_ADJUST    2
 
-#if WXWIN_COMPATIBILITY_3_0
-namespace
-{
-// Hash containing for every active wxPG the list of editors and their event handlers
-// to be deleted in the idle event handler.
-// It emulates member variable 'm_deletedEditorObjects' in 3.0 compatibility mode.
-WX_DECLARE_HASH_MAP(wxPropertyGrid*, wxArrayPGObject*,
-                    wxPointerHash, wxPointerEqual,
-                    DeletedObjects);
-
-DeletedObjects gs_deletedEditorObjects;
-
-} // anonymous namespace
-#endif
-
 // -----------------------------------------------------------------------
 
 #if wxUSE_INTL
@@ -394,11 +379,6 @@ void wxPropertyGrid::Init1()
     m_cvUnspecified = 0;
 
     m_chgInfo_changedProperty = nullptr;
-#if WXWIN_COMPATIBILITY_3_0
-    // Object array for this wxPG shouldn't exist in the hash map.
-    wxASSERT( gs_deletedEditorObjects.find(this) == gs_deletedEditorObjects.end() );
-    gs_deletedEditorObjects[this] = new wxArrayPGObject;
-#endif
 }
 
 // -----------------------------------------------------------------------
@@ -552,10 +532,6 @@ wxPropertyGrid::~wxPropertyGrid()
         // We are inside event handler and we cannot delete
         // editor objects immediately. They have to be deleted
         // later on in the global idle handler.
-#if WXWIN_COMPATIBILITY_3_0
-        // Emulate member variable.
-        wxArrayPGObject& m_deletedEditorObjects = *gs_deletedEditorObjects[this];
-#endif
         while ( !m_deletedEditorObjects.empty() )
         {
             wxObject* obj = m_deletedEditorObjects.back();
@@ -590,12 +566,6 @@ wxPropertyGrid::~wxPropertyGrid()
         wxPGCommonValue* value = m_commonValues[i];
         delete value;
     }
-#if WXWIN_COMPATIBILITY_3_0
-    wxASSERT( gs_deletedEditorObjects[this]->empty() );
-
-    delete gs_deletedEditorObjects[this];
-    gs_deletedEditorObjects.erase(this);
-#endif
 }
 
 // -----------------------------------------------------------------------
@@ -2066,14 +2036,9 @@ void wxPropertyGrid::DrawItems( wxDC& dc,
 
 // -----------------------------------------------------------------------
 
-#if WXWIN_COMPATIBILITY_3_0
-int wxPropertyGrid::DoDrawItemsBase( wxDC& dc,
-                                 const wxRect* itemsRect,
-                                 bool WXUNUSED(isBuffered) ) const
-#else
+
 int wxPropertyGrid::DoDrawItems( wxDC& dc,
                                  const wxRect* itemsRect ) const
-#endif
 {
     const wxPGProperty* firstItem = DoGetItemAtY(itemsRect->y);
     if ( !firstItem ) // Signal a need to clear entire paint area if grid is empty
@@ -3956,10 +3921,6 @@ void wxPropertyGrid::SetupChildEventHandling( wxWindow* argWnd )
 
 void wxPropertyGrid::DeletePendingObjects()
 {
-#if WXWIN_COMPATIBILITY_3_0
-    // Emulate member variable.
-    wxArrayPGObject& m_deletedEditorObjects = *gs_deletedEditorObjects[this];
-#endif
     // Delete pending property editors and their event handlers.
     while ( !m_deletedEditorObjects.empty() )
     {
@@ -3978,10 +3939,6 @@ void wxPropertyGrid::DestroyEditorWnd( wxWindow* wnd )
     wnd->Hide();
 
     // Do not free editors immediately (for sake of processing events)
-#if WXWIN_COMPATIBILITY_3_0
-    // Emulate member variable.
-    wxArrayPGObject& m_deletedEditorObjects = *gs_deletedEditorObjects[this];
-#endif
     m_deletedEditorObjects.push_back(wnd);
 }
 
@@ -3993,10 +3950,6 @@ void wxPropertyGrid::FreeEditors()
     // instead of moving it to closest parent).
     SetFocusOnCanvas();
 
-#if WXWIN_COMPATIBILITY_3_0
-    // Emulate member variable.
-    wxArrayPGObject& m_deletedEditorObjects = *gs_deletedEditorObjects[this];
-#endif
     // Do not free editors immediately if processing events
     if ( m_wndEditor2 )
     {
@@ -5708,12 +5661,7 @@ void wxPropertyGrid::HandleKeyEvent( wxKeyEvent &event, bool fromChild )
     // Except for TAB, ESC, and any keys specifically dedicated to
     // wxPropertyGrid itself, handle child control events in child control.
     if ( fromChild &&
-#if WXWIN_COMPATIBILITY_3_0
-         // Deprecated: use a hash set instead.
-         !wxPGItemExistsInVector<int>(m_dedicatedKeys, keycode) )
-#else
          m_dedicatedKeys.find(keycode) == m_dedicatedKeys.end() )
-#endif
     {
         // Only propagate event if it had modifiers
         if ( !event.HasModifiers() )

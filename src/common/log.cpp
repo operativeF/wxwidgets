@@ -197,21 +197,6 @@ bool wxSafeShowMessage(const wxString& title, const wxString& text)
 // wxLogFormatter class implementation
 // ----------------------------------------------------------------------------
 
-#if WXWIN_COMPATIBILITY_3_0
-
-// Special string used to check if FormatTime() is overridden: hopefully
-// different from anything that could be reasonably returned by the overridden
-// version without being as long as a GUID.
-static const char* DEFAULT_FORMAT_TIME = "??";
-
-wxString
-wxLogFormatter::FormatTime(time_t WXUNUSED(t)) const
-{
-    return wxString::FromAscii(DEFAULT_FORMAT_TIME);
-}
-
-#endif // WXWIN_COMPATIBILITY_3_0
-
 wxString
 wxLogFormatter::Format(wxLogLevel level,
                        const wxString& msg,
@@ -225,12 +210,6 @@ wxLogFormatter::Format(wxLogLevel level,
     if ( level != wxLOG_Debug && level != wxLOG_Trace )
 #endif // __WINDOWS__
     {
-#if WXWIN_COMPATIBILITY_3_0
-        // Another backwards compatibility hack: check if FormatTime() was
-        // overridden in the user code.
-        prefix = FormatTime(info.timestamp);
-        if ( prefix == DEFAULT_FORMAT_TIME )
-#endif // WXWIN_COMPATIBILITY_3_0
             prefix = FormatTimeMS(info.timestampMS);
     }
 
@@ -458,18 +437,7 @@ void wxLog::DoLogRecord(wxLogLevel level,
                              const wxString& msg,
                              const wxLogRecordInfo& info)
 {
-#if WXWIN_COMPATIBILITY_2_8
-    // call the old DoLog() to ensure that existing custom log classes still
-    // work
-    //
-    // as the user code could have defined it as either taking "const char *"
-    // (in ANSI build) or "const wxChar *" (in ANSI/Unicode), we have no choice
-    // but to call both of them
-    DoLog(level, (const char*)msg.mb_str(), info.timestamp);
-    DoLog(level, (const wchar_t*)msg.wc_str(), info.timestamp);
-#else // !WXWIN_COMPATIBILITY_2_8
     wxUnusedVar(info);
-#endif // WXWIN_COMPATIBILITY_2_8/!WXWIN_COMPATIBILITY_2_8
 
     // Use wxLogFormatter to format the message
     DoLogTextAtLevel(level, m_formatter->Format (level, msg, info));
@@ -494,24 +462,8 @@ void wxLog::DoLogText(const wxString& WXUNUSED(msg))
 {
     // in 2.8-compatible build the derived class might override DoLog() or
     // DoLogString() instead so we can't have this assert there
-#if !WXWIN_COMPATIBILITY_2_8
     wxFAIL_MSG( "must be overridden if it is called" );
-#endif // WXWIN_COMPATIBILITY_2_8
 }
-
-#if WXWIN_COMPATIBILITY_2_8
-
-void wxLog::DoLog(wxLogLevel WXUNUSED(level), const char *szString, time_t t)
-{
-    DoLogString(szString, t);
-}
-
-void wxLog::DoLog(wxLogLevel WXUNUSED(level), const wchar_t *wzString, time_t t)
-{
-    DoLogString(wzString, t);
-}
-
-#endif // WXWIN_COMPATIBILITY_2_8
 
 // ----------------------------------------------------------------------------
 // wxLog active target management
@@ -1038,10 +990,6 @@ wxLogLevel      wxLog::ms_logLevel     = wxLOG_Max;  // log everything by defaul
 size_t          wxLog::ms_suspendCount = 0;
 
 wxString        wxLog::ms_timestamp(wxS("%X"));  // time only, no date
-
-#if WXWIN_COMPATIBILITY_2_8
-wxTraceMask     wxLog::ms_ulTraceMask  = (wxTraceMask)0;
-#endif // wxDEBUG_LEVEL
 
 // ----------------------------------------------------------------------------
 // stdout error logging helper

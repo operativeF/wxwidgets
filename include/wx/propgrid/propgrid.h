@@ -73,33 +73,13 @@ public:
     wxPGChoices         m_boolChoices;
 
     // Some shared variants
-#if WXWIN_COMPATIBILITY_3_0
-    wxVariant           m_vEmptyString;
-    wxVariant           m_vZero;
-    wxVariant           m_vMinusOne;
-    wxVariant           m_vTrue;
-    wxVariant           m_vFalse;
-#else
     const wxVariant     m_vEmptyString;
     const wxVariant     m_vZero;
     const wxVariant     m_vMinusOne;
     const wxVariant     m_vTrue;
     const wxVariant     m_vFalse;
-#endif // WXWIN_COMPATIBILITY_3_0
 
     // Cached constant strings
-#if WXWIN_COMPATIBILITY_3_0
-    wxPGCachedString    m_strstring;
-    wxPGCachedString    m_strlong;
-    wxPGCachedString    m_strbool;
-    wxPGCachedString    m_strlist;
-
-    wxPGCachedString    m_strDefaultValue;
-    wxPGCachedString    m_strMin;
-    wxPGCachedString    m_strMax;
-    wxPGCachedString    m_strUnits;
-    wxPGCachedString    m_strHint;
-#else
     const wxString      m_strstring;
     const wxString      m_strlong;
     const wxString      m_strbool;
@@ -110,7 +90,6 @@ public:
     const wxString      m_strMax;
     const wxString      m_strUnits;
     const wxString      m_strHint;
-#endif // WXWIN_COMPATIBILITY_3_0
 
 #if wxPG_COMPATIBILITY_1_4
     wxPGCachedString    m_strInlineHelp;
@@ -695,12 +674,7 @@ public:
     // control.
     void DedicateKey( int keycode )
     {
-#if WXWIN_COMPATIBILITY_3_0
-        // Deprecated: use a hash set instead.
-        m_dedicatedKeys.push_back(keycode);
-#else
         m_dedicatedKeys.insert(keycode);
-#endif
     }
 
     // This static function enables or disables automatic use of
@@ -904,11 +878,7 @@ public:
 
     // Returns true if any property has been modified by the user.
     bool IsAnyModified() const
-#if WXWIN_COMPATIBILITY_3_0
-         { return m_pState->m_anyModified != (unsigned char)false; }
-#else
          { return m_pState->m_anyModified; }
-#endif
 
     // It is recommended that you call this function any time your code causes
     // wxPropertyGrid's top-level parent to change. wxPropertyGrid's OnIdle()
@@ -1279,15 +1249,6 @@ public:
                            wxRect& rect,
                            int flags );
 
-#if WXWIN_COMPATIBILITY_3_0
-    // Standardized double-to-string conversion.
-    static const wxString& DoubleToString( wxString& target,
-                                           double value,
-                                           int precision,
-                                           bool removeZeroes,
-                                           wxString* precTemplate = NULL );
-#endif // WXWIN_COMPATIBILITY_3_0
-
     // Call this from wxPGProperty::OnEvent() to cause property value to be
     // changed after the function returns (with true as return value).
     // ValueChangeInEvent() must be used if you wish the application to be
@@ -1566,18 +1527,10 @@ protected:
     wxVector<wxPGProperty*>  m_deletedProperties;
     wxVector<wxPGProperty*>  m_removedProperties;
 
-#if !WXWIN_COMPATIBILITY_3_0
-    // List of editors and their event handlers to be deleted in idle event handler.
     wxVector<wxObject*> m_deletedEditorObjects;
-#endif
 
     // List of key codes that will not be handed over to editor controls.
-#if WXWIN_COMPATIBILITY_3_0
-    // Deprecated: use a hash set instead.
-    wxVector<int>       m_dedicatedKeys;
-#else
     wxPGHashSetInt      m_dedicatedKeys;
-#endif
 
     //
     // Temporary values
@@ -1592,24 +1545,9 @@ protected:
     // 0 = not dragging, 1 = drag just started, 2 = drag in progress
     unsigned char       m_dragStatus;
 
-#if WXWIN_COMPATIBILITY_3_0
-    // Unused variable.
-    // 0 = margin, 1 = label, 2 = value.
-    unsigned char       m_mouseSide;
-
-    // True when editor control is focused.
-    unsigned char       m_editorFocused;
-#else
     bool                m_editorFocused;
-#endif
 
     unsigned char       m_vspacing;
-
-#if WXWIN_COMPATIBILITY_3_0
-    // Unused variable.
-    // Used to track when Alt/Ctrl+Key was consumed.
-    unsigned char       m_keyComboConsumed;
-#endif
 
     // 1 if in DoPropertyChanged()
     bool                m_inDoPropertyChanged;
@@ -1629,12 +1567,6 @@ protected:
 
     // Internal flags - see wxPG_FL_XXX constants.
     wxUint32            m_iFlags;
-
-#if WXWIN_COMPATIBILITY_3_0
-    // Unused variable.
-    // When drawing next time, clear this many item slots at the end.
-    int                 m_clearThisMany;
-#endif
 
     // Mouse is hovering over this column (index), -1 for margin
     int                 m_colHover;
@@ -1798,28 +1730,8 @@ protected:
     // on virtual height changes.
     void CorrectEditorWidgetPosY();
 
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_MSG("use two-argument function DoDrawItems(dc,rect)")
-    int DoDrawItems( wxDC& dc,
-                     const wxRect* itemsRect,
-                     bool isBuffered ) const
-    {
-        return DoDrawItemsBase(dc, itemsRect, isBuffered);
-    }
-
-    int DoDrawItems( wxDC& dc,
-                     const wxRect* itemsRect ) const
-    {
-        return DoDrawItemsBase(dc, itemsRect, true);
-    }
-
-    int DoDrawItemsBase( wxDC& dc,
-                     const wxRect* itemsRect,
-                     bool isBuffered ) const;
-#else
     int DoDrawItems( wxDC& dc,
                      const wxRect* itemsRect ) const;
-#endif
 
     // Draws an expand/collapse (ie. +/-) button.
     virtual void DrawExpanderButton( wxDC& dc, const wxRect& rect,

@@ -74,13 +74,6 @@ public:
 
     bool HasAlpha() const;
 
-    // implementation:
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED(virtual void SetHeight(int height));
-    wxDEPRECATED(virtual void SetWidth(int width));
-    wxDEPRECATED(virtual void SetDepth(int depth));
-#endif
-
     // get underlying native representation:
     wxIDirectFBSurfacePtr GetDirectFBSurface() const;
 

@@ -170,15 +170,6 @@ public:
     int GetHeight() const override;
     int GetDepth() const override;
 
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_MSG("this value is determined during creation, this method could lead to inconsistencies")
-    void SetWidth(int width) override;
-    wxDEPRECATED_MSG("this value is determined during creation, this method could lead to inconsistencies")
-    void SetHeight(int height) override;
-    wxDEPRECATED_MSG("this value is determined during creation, this method could lead to inconsistencies")
-    void SetDepth(int depth) override;
-#endif
-
 #if wxUSE_PALETTE
     wxPalette* GetPalette() const override;
     void SetPalette(const wxPalette& palette) override;
@@ -214,28 +205,6 @@ public:
     // returns an autoreleased version of the image
     WX_UIImage GetUIImage() const
         { return GetImage(); }
-#endif
-
-#if WXWIN_COMPATIBILITY_3_0
-
-#if wxOSX_USE_ICONREF
-    // returns a IconRef which must be retained before and released after usage
-    wxDEPRECATED_MSG("IconRefs are deprecated, this will be removed in the future")
-    IconRef GetIconRef() const;
-    // returns a IconRef which must be released after usage
-    wxDEPRECATED_MSG("IconRefs are deprecated, this will be removed in the future")
-    IconRef CreateIconRef() const;
-#endif
-
-    // get read only access to the underlying buffer
-    wxDEPRECATED_MSG("use GetRawData for accessing the buffer")
-    const void *GetRawAccess() const;
-    // brackets to the underlying OS structure for read/write access
-    // makes sure that no cached images will be constructed until terminated
-    wxDEPRECATED_MSG("use GetRawData for accessing the buffer")
-    void *BeginRawAccess();
-    wxDEPRECATED_MSG("use GetRawData for accessing the buffer")
-    void EndRawAccess();
 #endif
 
     double GetScaleFactor() const override;

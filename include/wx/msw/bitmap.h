@@ -111,18 +111,6 @@ public:
         return *this;
     }
 
-#if WXWIN_COMPATIBILITY_3_0
-    // This assignment operator is not portable as it is not implemented in any
-    // other ports.
-    wxDEPRECATED_MSG("Don't assign wxCursor to an existing wxBitmap, create a new wxBitmap from wxCursor instead.")
-    wxBitmap& operator=(const wxCursor& cursor)
-    {
-        (void)CopyFromCursor(cursor);
-
-        return *this;
-    }
-#endif // WXWIN_COMPATIBILITY_3_0
-
     virtual ~wxBitmap();
 
 #if wxUSE_IMAGE
@@ -203,9 +191,6 @@ public:
     void MSWBlendMaskWithAlpha();
 
 public:
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_INLINE(void SetHBITMAP(WXHBITMAP bmp), SetHandle((WXHANDLE)bmp); )
-#endif // WXWIN_COMPATIBILITY_3_0
     WXHBITMAP GetHBITMAP() const { return (WXHBITMAP)GetHandle(); }
     bool InitFromHBITMAP(WXHBITMAP bmp, int width, int height, int depth);
     void ResetHBITMAP() { InitFromHBITMAP(NULL, 0, 0, 0); }

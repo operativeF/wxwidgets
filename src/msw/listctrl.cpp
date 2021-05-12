@@ -462,40 +462,6 @@ void wxListCtrl::SetDoubleBuffered(bool WXUNUSED(on))
     // Nothing to do, it's always enabled if supported.
 }
 
-#if WXWIN_COMPATIBILITY_3_0
-// Deprecated
-void wxListCtrl::UpdateStyle()
-{
-    if ( GetHwnd() )
-    {
-        // The new window view style
-        DWORD dwStyleNew = MSWGetStyle(m_windowStyle, nullptr);
-
-        // some styles are not returned by MSWGetStyle()
-        if ( IsShown() )
-            dwStyleNew |= WS_VISIBLE;
-
-        // Get the current window style.
-        DWORD dwStyleOld = ::GetWindowLong(GetHwnd(), GWL_STYLE);
-
-        // we don't have wxVSCROLL style, but the list control may have it,
-        // don't change it then
-        dwStyleNew |= dwStyleOld & (WS_HSCROLL | WS_VSCROLL);
-
-        // Only set the window style if the view bits have changed.
-        if ( dwStyleOld != dwStyleNew )
-        {
-            ::SetWindowLong(GetHwnd(), GWL_STYLE, dwStyleNew);
-
-            // if we switched to the report view, set the extended styles for
-            // it too
-            if ( (dwStyleOld & LVS_TYPEMASK) != LVS_REPORT && (dwStyleNew & LVS_TYPEMASK) == LVS_REPORT )
-                MSWSetExListStyles();
-        }
-    }
-}
-#endif // WXWIN_COMPATIBILITY_3_0
-
 void wxListCtrl::FreeAllInternalData()
 {
     const unsigned count = m_internalData.size();

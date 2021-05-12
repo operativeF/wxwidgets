@@ -379,26 +379,6 @@ bool wxBitmap::CopyFromIcon(const wxIcon& icon)
     return IsOk();
 }
 
-#if WXWIN_COMPATIBILITY_3_0
-void wxBitmap::SetHeight(int height)
-{
-    M_PIXDATA = QPixmap(GetWidth(), height);
-}
-
-void wxBitmap::SetWidth(int width)
-{
-    M_PIXDATA = QPixmap(width, GetHeight());
-}
-
-void wxBitmap::SetDepth(int depth)
-{
-    if (depth == 1)
-        M_PIXDATA = QBitmap(GetWidth(), GetHeight());
-    else
-        M_PIXDATA = QPixmap(GetWidth(), GetHeight());
-}
-#endif
-
 void *wxBitmap::GetRawData(wxPixelDataBase& data, int bpp)
 {
     void* bits = NULL;

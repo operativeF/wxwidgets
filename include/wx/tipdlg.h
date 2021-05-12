@@ -47,12 +47,6 @@ public:
     // virtual dtor for the base class
     virtual ~wxTipProvider() { }
 
-
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_MSG("this method does nothing, simply don't call it")
-    wxString PreprocessTip(const wxString& tip) { return tip; }
-#endif
-
 protected:
     size_t m_currentTip;
 };

@@ -121,12 +121,6 @@ public:
     // implementation
     // --------------
 
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED(void SetHeight( int height ) override);
-    wxDEPRECATED(void SetWidth( int width ) override);
-    wxDEPRECATED(void SetDepth( int depth ) override);
-#endif
-
 #ifdef __WXGTK3__
     cairo_t* CairoCreate() const;
     void Draw(cairo_t* cr, int x, int y, bool useMask = true, const wxColour* fg = NULL, const wxColour* bg = NULL) const;

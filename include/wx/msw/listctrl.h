@@ -349,12 +349,6 @@ public:
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
     bool MSWShouldPreProcessMessage(WXMSG* msg) override;
 
-#if WXWIN_COMPATIBILITY_3_0
-    // bring the control in sync with current m_windowStyle value
-    wxDEPRECATED_MSG("useless and will be removed in the future, use SetWindowStyleFlag() instead")
-    void UpdateStyle();
-#endif // WXWIN_COMPATIBILITY_3_0
-
     // Event handlers
     ////////////////////////////////////////////////////////////////////////////
     // Necessary for drawing hrules and vrules, if specified

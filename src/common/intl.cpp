@@ -265,16 +265,8 @@ bool wxLocale::Init(const wxString& name,
                     const wxString& shortName,
                     const wxString& locale,
                     bool            bLoadDefault
-#if WXWIN_COMPATIBILITY_2_8
-                   ,bool            WXUNUSED_UNLESS_DEBUG(bConvertEncoding)
-#endif
                     )
 {
-#if WXWIN_COMPATIBILITY_2_8
-    wxASSERT_MSG( bConvertEncoding,
-                  wxS("wxLocale::Init with bConvertEncoding=false is no longer supported, add charset to your catalogs") );
-#endif
-
     // change current locale (default: same as long name)
     wxString szLocale(locale);
     if ( szLocale.empty() )
@@ -481,11 +473,6 @@ static void wxMSWSetThreadUILanguage(LANGID langid)
 
 bool wxLocale::Init(int lang, int flags)
 {
-#if WXWIN_COMPATIBILITY_2_8
-    wxASSERT_MSG( !(flags & wxLOCALE_CONV_ENCODING),
-                  wxS("wxLOCALE_CONV_ENCODING is no longer supported, add charset to your catalogs") );
-#endif
-
     wxCHECK_MSG( lang != wxLANGUAGE_UNKNOWN, false,
                  wxS("Initializing unknown locale doesn't make sense, did you ")
                  wxS("mean to use wxLANGUAGE_DEFAULT perhaps?") );

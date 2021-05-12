@@ -64,13 +64,6 @@ public:
     // copies the contents and mask of the given (colour) icon to the bitmap
     bool CopyFromIcon(const wxIcon& icon) override;
 
-    // implementation:
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED(void SetHeight(int height) override);
-    wxDEPRECATED(void SetWidth(int width) override);
-    wxDEPRECATED(void SetDepth(int depth) override);
-#endif
-
     void *GetRawData(wxPixelDataBase& data, int bpp);
     void UngetRawData(wxPixelDataBase& data);
 

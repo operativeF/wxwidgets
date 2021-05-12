@@ -39,18 +39,6 @@ public:
     GtkWidget *GetMenuItem() const { return m_menuItem; }
     void SetGtkLabel();
 
-#if WXWIN_COMPATIBILITY_2_8
-    // compatibility only, don't use in new code
-    wxDEPRECATED_CONSTRUCTOR(
-    wxMenuItem(wxMenu *parentMenu,
-               int id,
-               const wxString& text,
-               const wxString& help,
-               bool isCheckable,
-               wxMenu *subMenu = NULL)
-    );
-#endif
-
 private:
     wxBitmap  m_bitmap; // Bitmap for menuitem, if any
     GtkWidget *m_menuItem;  // GtkMenuItem

@@ -5174,22 +5174,6 @@ int wxStyledTextCtrl::ReplaceTargetRERaw(const char* text, int length)
     return SendMsg(SCI_REPLACETARGETRE, length, reinterpret_cast<sptr_t>(text));
 }
 
-#if WXWIN_COMPATIBILITY_3_0
-// Deprecated since Scintilla 3.7.2
-void wxStyledTextCtrl::UsePopUp(bool allowPopUp)
-{
-    SendMsg(SCI_USEPOPUP, allowPopUp ? SC_POPUP_ALL : SC_POPUP_NEVER, 0);
-}
-
-void wxStyledTextCtrl::StartStyling(int start, int unused)
-{
-        wxASSERT_MSG(unused==0,
-                     "The second argument passed to StartStyling should be 0");
-
-        SendMsg(SCI_STARTSTYLING, start, unused);
-}
-#endif // WXWIN_COMPATIBILITY_3_0
-
 //----------------------------------------------------------------------
 // Event handlers
 

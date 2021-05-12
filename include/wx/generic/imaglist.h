@@ -46,14 +46,6 @@ public:
               int flags = wxIMAGELIST_DRAW_NORMAL,
               bool solidBackground = false);
 
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_MSG("Don't use this overload: it's not portable and does nothing")
-    bool Create() { return true; }
-
-    wxDEPRECATED_MSG("Use GetBitmap() instead")
-    const wxBitmap *GetBitmapPtr(int index) const { return DoGetPtr(index); }
-#endif // WXWIN_COMPATIBILITY_3_0
-
 private:
     const wxBitmap *DoGetPtr(int index) const;
 

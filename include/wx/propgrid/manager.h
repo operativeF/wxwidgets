@@ -118,12 +118,6 @@ public:
     // than desired splitter position, especially when sizers are being used.
     void SetSplitterPosition( int splitterPos, int col = 0 );
 
-#if WXWIN_COMPATIBILITY_3_0
-    // To avoid ambiguity between functions inherited
-    // from both wxPropertyGridInterface and wxPropertyGridPageState
-    using wxPropertyGridInterface::GetPropertyByLabel;
-#endif // WXWIN_COMPATIBILITY_3_0
-
 protected:
 
     // Propagate to other pages.

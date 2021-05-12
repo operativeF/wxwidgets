@@ -1164,26 +1164,6 @@ void wxBitmap::SetPalette(const wxPalette& WXUNUSED(palette))
 }
 #endif // wxUSE_PALETTE
 
-#if WXWIN_COMPATIBILITY_3_0
-void wxBitmap::SetHeight( int height )
-{
-    AllocExclusive();
-    M_BMPDATA->m_height = height;
-}
-
-void wxBitmap::SetWidth( int width )
-{
-    AllocExclusive();
-    M_BMPDATA->m_width = width;
-}
-
-void wxBitmap::SetDepth( int depth )
-{
-    AllocExclusive();
-    M_BMPDATA->m_bpp = depth;
-}
-#endif
-
 #ifndef __WXGTK3__
 void wxBitmap::SetPixmap( GdkPixmap *pixmap )
 {

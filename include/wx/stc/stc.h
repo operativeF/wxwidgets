@@ -2475,58 +2475,6 @@ class WXDLLIMPEXP_FWD_CORE wxScrollBar;
     #define wxSTC_DEPRECATED_MACRO_VALUE(value,msg) value
 #endif
 
-#if WXWIN_COMPATIBILITY_3_0
-
-// The wxSTC_INDIC{0,1,2,S}_MASK values are no longer used in Scintilla
-
-#if wxCHECK_VISUALC_VERSION(10)
-    #pragma deprecated(wxSTC_INDIC0_MASK, wxSTC_INDIC1_MASK, \
-                       wxSTC_INDIC2_MASK, wxSTC_INDICS_MASK)
-#endif
-
-#define wxSTC_INDIC0_MASK wxSTC_DEPRECATED_MACRO_VALUE(0x20,\
-    "wxSTC_INDIC0_MASK is deprecated. Style byte indicators are no longer used.")
-#define wxSTC_INDIC1_MASK wxSTC_DEPRECATED_MACRO_VALUE(0x40,\
-    "wxSTC_INDIC1_MASK is deprecated. Style byte indicators are no longer used.")
-#define wxSTC_INDIC2_MASK wxSTC_DEPRECATED_MACRO_VALUE(0x80,\
-    "wxSTC_INDIC2_MASK is deprecated. Style byte indicators are no longer used.")
-#define wxSTC_INDICS_MASK wxSTC_DEPRECATED_MACRO_VALUE(0xE0,\
-    "wxSTC_INDICS_MASK is deprecated. Style byte indicators are no longer used.")
-
-
-// The following entries have non-conformant prefixes.
-
-#if wxCHECK_VISUALC_VERSION(10)
-    #pragma deprecated(wxSTC_SCMOD_NORM, wxSTC_SCMOD_SHIFT, wxSTC_SCMOD_CTRL, \
-                       wxSTC_SCMOD_ALT, wxSTC_SCMOD_SUPER, wxSTC_SCMOD_META, \
-                       wxSTC_SCVS_NONE, wxSTC_SCVS_RECTANGULARSELECTION, \
-                       wxSTC_SCVS_USERACCESSIBLE, wxSTC_SCVS_NOWRAPLINESTART)
-#endif
-
-#define wxSTC_SCMOD_NORM wxSTC_DEPRECATED_MACRO_VALUE(0,\
-    "wxSTC_SCMOD_NORM is deprecated. Use wxSTC_KEYMOD_NORM instead.")
-#define wxSTC_SCMOD_SHIFT wxSTC_DEPRECATED_MACRO_VALUE(1,\
-    "wxSTC_SCMOD_SHIFT is deprecated. Use wxSTC_KEYMOD_SHIFT instead.")
-#define wxSTC_SCMOD_CTRL wxSTC_DEPRECATED_MACRO_VALUE(2,\
-    "wxSTC_SCMOD_CTRL is deprecated. Use wxSTC_KEYMOD_CTRL instead.")
-#define wxSTC_SCMOD_ALT wxSTC_DEPRECATED_MACRO_VALUE(4,\
-    "wxSTC_SCMOD_ALT is deprecated. Use wxSTC_KEYMOD_ALT instead.")
-#define wxSTC_SCMOD_SUPER wxSTC_DEPRECATED_MACRO_VALUE(8,\
-    "wxSTC_SCMOD_SUPER is deprecated. Use wxSTC_KEYMOD_SUPER instead.")
-#define wxSTC_SCMOD_META wxSTC_DEPRECATED_MACRO_VALUE(16,\
-    "wxSTC_SCMOD_META is deprecated. Use wxSTC_KEYMOD_META instead.")
-
-#define wxSTC_SCVS_NONE wxSTC_DEPRECATED_MACRO_VALUE(0, \
-    "wxSTC_SCVS_NONE is deprecated. Use wxSTC_VS_NONE instead.")
-#define wxSTC_SCVS_RECTANGULARSELECTION wxSTC_DEPRECATED_MACRO_VALUE(1, \
-    "wxSTC_SCVS_RECTANGULARSELECTION is deprecated. Use wxSTC_VS_RECTANGULARSELECTION instead.")
-#define wxSTC_SCVS_USERACCESSIBLE wxSTC_DEPRECATED_MACRO_VALUE(2, \
-    "wxSTC_SCVS_USERACCESSIBLE is deprecated. Use wxSTC_VS_USERACCESSIBLE instead.")
-#define wxSTC_SCVS_NOWRAPLINESTART wxSTC_DEPRECATED_MACRO_VALUE(4, \
-    "wxSTC_SCVS_NOWRAPLINESTART is deprecated. Use wxSTC_VS_NOWRAPLINESTART instead.")
-
-#endif // WXWIN_COMPATIBILITY_3_0
-
 // wxSTC is currently built without c++11 regex support, but the search flag
 // wxSTC_FIND_CXX11REGEX was included with wxSTC any way. gen_iface.py has since
 // been changed so that this flag will no longer be generated or documented,
@@ -5442,16 +5390,6 @@ public:
         return wxTextAreaBase::HitTest(pt, col, row);
     }
 
-    // methods deprecated due to changes in the scintilla library
-    // ---------------------------------------------
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_MSG("use UsePopUp(int) instead.")
-    void UsePopUp(bool allowPopUp);
-
-    wxDEPRECATED_MSG("use StartStyling(int start) instead.")
-    void StartStyling(int start, int unused);
-#endif // WXWIN_COMPATIBILITY_3_0
-
     static wxVersionInfo GetLibraryVersionInfo();
 
 protected:
@@ -5648,10 +5586,6 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_CHARADDED, wxStyledTextEven
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_SAVEPOINTREACHED, wxStyledTextEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_SAVEPOINTLEFT, wxStyledTextEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_ROMODIFYATTEMPT, wxStyledTextEvent );
-#if WXWIN_COMPATIBILITY_3_0
-wxDEPRECATED_MSG( "Don't handle wxEVT_STC_KEY. It's never generated." ) \
-    wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_KEY, wxStyledTextEvent );
-#endif // WXWIN_COMPATIBILITY_3_0
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_DOUBLECLICK, wxStyledTextEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_UPDATEUI, wxStyledTextEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_MODIFIED, wxStyledTextEvent );
@@ -5660,10 +5594,6 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_MARGINCLICK, wxStyledTextEv
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_NEEDSHOWN, wxStyledTextEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_PAINTED, wxStyledTextEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_USERLISTSELECTION, wxStyledTextEvent );
-#if WXWIN_COMPATIBILITY_3_0
-wxDEPRECATED_MSG( "Don't handle wxEVT_STC_URIDROPPED. It's never generated." ) \
-    wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_URIDROPPED, wxStyledTextEvent );
-#endif // WXWIN_COMPATIBILITY_3_0
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_DWELLSTART, wxStyledTextEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_DWELLEND, wxStyledTextEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_START_DRAG, wxStyledTextEvent );
@@ -5693,9 +5623,6 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_AUTOCOMP_SELECTION_CHANGE, 
         wxEVT_STC_SAVEPOINTREACHED,
         wxEVT_STC_SAVEPOINTLEFT,
         wxEVT_STC_ROMODIFYATTEMPT,
-#if WXWIN_COMPATIBILITY_3_0
-        wxEVT_STC_KEY, // deprecated
-#endif // WXWIN_COMPATIBILITY_3_0
         wxEVT_STC_DOUBLECLICK,
         wxEVT_STC_UPDATEUI,
         wxEVT_STC_MODIFIED,
@@ -5704,9 +5631,6 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_STC, wxEVT_STC_AUTOCOMP_SELECTION_CHANGE, 
         wxEVT_STC_NEEDSHOWN,
         wxEVT_STC_PAINTED,
         wxEVT_STC_USERLISTSELECTION,
-#if WXWIN_COMPATIBILITY_3_0
-        wxEVT_STC_URIDROPPED, // deprecated
-#endif // WXWIN_COMPATIBILITY_3_0
         wxEVT_STC_DWELLSTART,
         wxEVT_STC_DWELLEND,
         wxEVT_STC_START_DRAG,

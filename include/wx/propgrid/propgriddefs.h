@@ -177,11 +177,7 @@ class WXDLLIMPEXP_FWD_CORE wxFont;
 // (for tree buttons)
 //#undef wxPG_ICON_WIDTH
 
-#if WXWIN_COMPATIBILITY_2_8
-    #define wxPG_COMPATIBILITY_1_4      1
-#else
-    #define wxPG_COMPATIBILITY_1_4      0
-#endif
+#define wxPG_COMPATIBILITY_1_4      0
 
 // Set 1 to include advanced properties (wxFontProperty, wxColourProperty, etc.)
 #ifndef wxPG_INCLUDE_ADVPROPS
@@ -220,9 +216,7 @@ class WXDLLIMPEXP_FWD_PROPGRID wxPGValidationInfo;
 
 // This is the value placed in wxPGProperty::sm_wxPG_LABEL
 #define wxPG_LABEL_STRING       wxS("@!")
-#if WXWIN_COMPATIBILITY_3_0
-#define wxPG_NULL_BITMAP        wxNullBitmap
-#endif // WXWIN_COMPATIBILITY_3_0
+
 #define wxPG_COLOUR_BLACK       (*wxBLACK)
 
 // Convert Red, Green and Blue to a single 32-bit value.
@@ -248,11 +242,6 @@ class WXDLLIMPEXP_FWD_PROPGRID wxPGValidationInfo;
 typedef int (*wxPGSortCallback)(wxPropertyGrid* propGrid,
                                 wxPGProperty* p1,
                                 wxPGProperty* p2);
-
-
-#if WXWIN_COMPATIBILITY_3_0
-typedef wxString wxPGCachedString;
-#endif
 
 // -----------------------------------------------------------------------
 
@@ -290,12 +279,6 @@ WX_DECLARE_HASH_SET_WITH_DECL(int,
                               wxIntegerEqual,
                               wxPGHashSetInt,
                               class WXDLLIMPEXP_PROPGRID);
-
-#if WXWIN_COMPATIBILITY_3_0
-WX_DEFINE_TYPEARRAY_WITH_DECL_PTR(wxObject*, wxArrayPGObject,
-                                  wxBaseArrayPtrVoid,
-                                  class WXDLLIMPEXP_PROPGRID);
-#endif // WXWIN_COMPATIBILITY_3_0
 
 // -----------------------------------------------------------------------
 

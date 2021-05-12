@@ -134,13 +134,6 @@ public:
                   const wxRect& rect,
                   wxAuiPaneInfo& pane) override;
 
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_MSG("This is not intended for the public API")
-    void DrawIcon(wxDC& dc,
-                  const wxRect& rect,
-                  wxAuiPaneInfo& pane);
-#endif
-
     void UpdateColoursFromSystem() override;
 
 

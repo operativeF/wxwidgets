@@ -164,29 +164,6 @@ inline int wxRound(float x)
 
 inline int wxRound(long double x) { return wxRound(double(x)); }
 
-// For compatibility purposes, make wxRound() work with integer types too, as
-// this used to compile with wx 3.0.
-#if WXWIN_COMPATIBILITY_3_0
-
-template <typename T>
-wxDEPRECATED_MSG("rounding an integer is useless")
-inline int wxRound(T x)
-{
-    // We have to disable this warning for the unsigned types. We do handle
-    // them correctly in this comparison due to "x > 0" below (removing it
-    // would make this fail for them!).
-    wxGCC_WARNING_SUPPRESS(sign-compare)
-
-    wxASSERT_MSG((x > 0 || x > INT_MIN) && x < INT_MAX,
-        "argument out of supported range");
-
-    wxGCC_WARNING_RESTORE(sign-compare)
-
-    return int(x);
-}
-
-#endif // WXWIN_COMPATIBILITY_3_0
-
 // Convert between degrees and radians.
 inline double wxDegToRad(double deg) { return (deg * M_PI) / 180.0; }
 inline double wxRadToDeg(double rad) { return (rad * 180.0) / M_PI; }
@@ -210,12 +187,6 @@ WXDLLIMPEXP_BASE unsigned int wxCTZ(wxUint32 x);
     /* functions from common/extended.c */
     WXDLLIMPEXP_BASE wxFloat64 wxConvertFromIeeeExtended(const wxInt8 *bytes);
     WXDLLIMPEXP_BASE void wxConvertToIeeeExtended(wxFloat64 num, wxInt8 *bytes);
-
-    /* use wxConvertFromIeeeExtended() and wxConvertToIeeeExtended() instead */
-#if WXWIN_COMPATIBILITY_2_8
-    wxDEPRECATED( WXDLLIMPEXP_BASE wxFloat64 ConvertFromIeeeExtended(const wxInt8 *bytes) );
-    wxDEPRECATED( WXDLLIMPEXP_BASE void ConvertToIeeeExtended(wxFloat64 num, wxInt8 *bytes) );
-#endif
 
 #ifdef __cplusplus
     }

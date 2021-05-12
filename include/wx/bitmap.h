@@ -223,14 +223,6 @@ public:
     // copies the contents and mask of the given (colour) icon to the bitmap
     virtual bool CopyFromIcon(const wxIcon& icon) = 0;
 
-    // implementation:
-#if WXWIN_COMPATIBILITY_3_0
-    // deprecated
-    virtual void SetHeight(int height) = 0;
-    virtual void SetWidth(int width) = 0;
-    virtual void SetDepth(int depth) = 0;
-#endif
-
     // Format handling
     static inline wxList& GetHandlers() { return sm_handlers; }
     static void AddHandler(wxBitmapHandler *handler);

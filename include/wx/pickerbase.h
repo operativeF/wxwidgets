@@ -137,21 +137,6 @@ protected:
         return m_sizer->GetItem((size_t)0);
     }
 
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_MSG("useless and will be removed in the future")
-    int GetDefaultPickerCtrlFlag() const
-    {
-        return wxALIGN_CENTER_VERTICAL;
-    }
-
-    wxDEPRECATED_MSG("useless and will be removed in the future")
-    int GetDefaultTextCtrlFlag() const
-    {
-        // Cast to avoid warnings about mixing elements of different enums.
-        return wxALIGN_CENTER_VERTICAL | static_cast<int>(wxRIGHT);
-    }
-#endif // WXWIN_COMPATIBILITY_3_0
-
     void PostCreation();
 
 protected:

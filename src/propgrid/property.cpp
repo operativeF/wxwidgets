@@ -49,19 +49,10 @@ static void wxPGDrawFocusRect(wxWindow *win, wxDC& dc,
                               int x, int y, int w, int h)
 {
     wxRect rect(x, y+((h-dc.GetCharHeight())/2), w, h);
-    // In 3.0 comaptibilty mode we always need to use custom renderer because
-    // native renderer for this port requires a reference to the valid window
-    // to be drawn which is not passed to DrawCaptionSelectionRect function.
-#if wxPG_USE_RENDERER_NATIVE && !WXWIN_COMPATIBILITY_3_0
+#if wxPG_USE_RENDERER_NATIVE
     wxASSERT_MSG( win, wxS("Invalid window to be drawn") );
     wxRendererNative::Get().DrawFocusRect(win, dc, rect);
-#else
-    wxUnusedVar(win);
-
-    dc.SetPen(wxPen(*wxBLACK,1,wxPENSTYLE_DOT));
-    dc.SetBrush(*wxTRANSPARENT_BRUSH);
-    dc.DrawRectangle(rect);
-#endif // wxPG_USE_RENDERER_NATIVE/!wxPG_USE_RENDERER_NATIVE
+#endif // wxPG_USE_RENDERER_NATIVE
 }
 
 // -----------------------------------------------------------------------
@@ -105,19 +96,11 @@ void wxPGCellRenderer::DrawEditorValue( wxDC& dc, const wxRect& rect,
     }
 }
 
-#if WXWIN_COMPATIBILITY_3_0
-void wxPGCellRenderer::DrawCaptionSelectionRect(wxDC& dc,
-                                                int x, int y, int w, int h) const
-{
-    wxPGDrawFocusRect(nullptr, dc, x, y, w, h);
-}
-#else
 void wxPGCellRenderer::DrawCaptionSelectionRect(wxWindow* win, wxDC& dc,
                                                 int x, int y, int w, int h) const
 {
     wxPGDrawFocusRect(win, dc, x, y, w, h);
 }
-#endif // WXWIN_COMPATIBILITY_3_0/!WXWIN_COMPATIBILITY_3_0
 
 int wxPGCellRenderer::PreDrawCell( wxDC& dc, const wxRect& rect, const wxPGCell& cell, int flags ) const
 {
@@ -312,11 +295,7 @@ bool wxPGDefaultRenderer::Render( wxDC& dc, const wxRect& rect,
                 imageOffset += wxCC_CUSTOM_IMAGE_MARGIN2 + 4;
             }
 
-#if WXWIN_COMPATIBILITY_3_0
-            DrawCaptionSelectionRect( dc,
-#else
             DrawCaptionSelectionRect( const_cast<wxPropertyGrid*>(propertyGrid), dc,
-#endif // WXWIN_COMPATIBILITY_3_0
                                       rect.x+wxPG_XBEFORETEXT-wxPG_CAPRECTXMARGIN+imageOffset,
                                       rect.y-wxPG_CAPRECTYMARGIN+1,
                                       ((wxPropertyCategory*)property)->GetTextExtent(propertyGrid,
@@ -772,20 +751,6 @@ void wxPGProperty::RefreshChildren ()
 void wxPGProperty::OnValidationFailure( wxVariant& WXUNUSED(pendingValue) )
 {
 }
-
-#if WXWIN_COMPATIBILITY_3_0
-void wxPGProperty::GetDisplayInfo( unsigned int column,
-                                   int choiceIndex,
-                                   int flags,
-                                   wxString* pString,
-                                   const wxPGCell** pCell )
-{
-    wxASSERT_MSG(!pCell || !(*pCell),
-          wxS("Cell pointer is a dummy argument and shouldn't be used"));
-    wxUnusedVar(pCell);
-    GetDisplayInfo(column, choiceIndex, flags, pString, (wxPGCell*)nullptr);
-}
-#endif // WXWIN_COMPATIBILITY_3_0
 
 void wxPGProperty::GetDisplayInfo( unsigned int column,
                                    int choiceIndex,

@@ -136,11 +136,6 @@ public:
     // will be queried as the last one).
     static void PushBack(wxArtProvider *provider);
 
-#if WXWIN_COMPATIBILITY_2_8
-    // use PushBack(), it's the same thing
-    static wxDEPRECATED( void Insert(wxArtProvider *provider) );
-#endif
-
     // Remove latest added provider and delete it.
     static bool Pop();
 

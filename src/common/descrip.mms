@@ -411,12 +411,10 @@ SOURCES = \
 		dpycmn.cpp,\
 		dseldlg.cpp,\
 		dynload.cpp,\
-		effects.cpp,\
 		fddlgcmn.cpp,\
 		fs_mem.cpp,\
 		gbsizer.cpp,\
 		geometry.cpp,\
-		matrix.cpp,\
 		radiocmn.cpp,\
 		regex.cpp,\
 		taskbarcmn.cpp,\
@@ -648,12 +646,10 @@ dndcmn.obj : dndcmn.cpp
 dpycmn.obj : dpycmn.cpp
 dseldlg.obj : dseldlg.cpp
 dynload.obj : dynload.cpp
-effects.obj : effects.cpp
 fddlgcmn.obj : fddlgcmn.cpp
 fs_mem.obj : fs_mem.cpp
 gbsizer.obj : gbsizer.cpp
 geometry.obj : geometry.cpp
-matrix.obj : matrix.cpp
 radiocmn.obj : radiocmn.cpp
 regex.obj : regex.cpp
 taskbarcmn.obj : taskbarcmn.cpp

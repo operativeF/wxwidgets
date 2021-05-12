@@ -1109,29 +1109,6 @@ wxPalette *wxBitmap::GetPalette() const
     return M_BMPDATA->m_palette;
 }
 
-#if WXWIN_COMPATIBILITY_3_0
-void wxBitmap::SetHeight( int height )
-{
-    AllocExclusive();
-
-    M_BMPDATA->m_height = height;
-}
-
-void wxBitmap::SetWidth( int width )
-{
-    AllocExclusive();
-
-    M_BMPDATA->m_width = width;
-}
-
-void wxBitmap::SetDepth( int depth )
-{
-    AllocExclusive();
-
-    M_BMPDATA->m_bpp = depth;
-}
-#endif
-
 void wxBitmap::SetPixmap( WXPixmap pixmap )
 {
     if (!m_refData) m_refData = new wxBitmapRefData();

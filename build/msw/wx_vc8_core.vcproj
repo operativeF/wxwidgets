@@ -986,10 +986,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\..\src\common\effects.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\common\event.cpp"
 				>
 			</File>
@@ -1159,10 +1155,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\common\markupparser.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\common\matrix.cpp"
 				>
 			</File>
 			<File

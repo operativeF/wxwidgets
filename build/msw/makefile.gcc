@@ -8512,11 +8512,6 @@ $(OBJS)\monodll_dseldlg.o: ../../src/common/dseldlg.cpp
 endif
 
 ifeq ($(USE_GUI),1)
-$(OBJS)\monodll_effects.o: ../../src/common/effects.cpp
-	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
-endif
-
-ifeq ($(USE_GUI),1)
 $(OBJS)\monodll_fddlgcmn.o: ../../src/common/fddlgcmn.cpp
 	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
 endif
@@ -8713,11 +8708,6 @@ endif
 
 ifeq ($(USE_GUI),1)
 $(OBJS)\monodll_markupparser.o: ../../src/common/markupparser.cpp
-	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
-endif
-
-ifeq ($(USE_GUI),1)
-$(OBJS)\monodll_matrix.o: ../../src/common/matrix.cpp
 	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
 endif
 
@@ -11080,11 +11070,6 @@ $(OBJS)\monolib_dseldlg.o: ../../src/common/dseldlg.cpp
 endif
 
 ifeq ($(USE_GUI),1)
-$(OBJS)\monolib_effects.o: ../../src/common/effects.cpp
-	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
-endif
-
-ifeq ($(USE_GUI),1)
 $(OBJS)\monolib_fddlgcmn.o: ../../src/common/fddlgcmn.cpp
 	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
 endif
@@ -11281,11 +11266,6 @@ endif
 
 ifeq ($(USE_GUI),1)
 $(OBJS)\monolib_markupparser.o: ../../src/common/markupparser.cpp
-	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
-endif
-
-ifeq ($(USE_GUI),1)
-$(OBJS)\monolib_matrix.o: ../../src/common/matrix.cpp
 	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
 endif
 
@@ -13615,11 +13595,6 @@ $(OBJS)\coredll_dseldlg.o: ../../src/common/dseldlg.cpp
 endif
 
 ifeq ($(USE_GUI),1)
-$(OBJS)\coredll_effects.o: ../../src/common/effects.cpp
-	$(CXX) -c -o $@ $(COREDLL_CXXFLAGS) $(CPPDEPS) $<
-endif
-
-ifeq ($(USE_GUI),1)
 $(OBJS)\coredll_fddlgcmn.o: ../../src/common/fddlgcmn.cpp
 	$(CXX) -c -o $@ $(COREDLL_CXXFLAGS) $(CPPDEPS) $<
 endif
@@ -13816,11 +13791,6 @@ endif
 
 ifeq ($(USE_GUI),1)
 $(OBJS)\coredll_markupparser.o: ../../src/common/markupparser.cpp
-	$(CXX) -c -o $@ $(COREDLL_CXXFLAGS) $(CPPDEPS) $<
-endif
-
-ifeq ($(USE_GUI),1)
-$(OBJS)\coredll_matrix.o: ../../src/common/matrix.cpp
 	$(CXX) -c -o $@ $(COREDLL_CXXFLAGS) $(CPPDEPS) $<
 endif
 
@@ -15355,11 +15325,6 @@ $(OBJS)\corelib_dseldlg.o: ../../src/common/dseldlg.cpp
 endif
 
 ifeq ($(USE_GUI),1)
-$(OBJS)\corelib_effects.o: ../../src/common/effects.cpp
-	$(CXX) -c -o $@ $(CORELIB_CXXFLAGS) $(CPPDEPS) $<
-endif
-
-ifeq ($(USE_GUI),1)
 $(OBJS)\corelib_fddlgcmn.o: ../../src/common/fddlgcmn.cpp
 	$(CXX) -c -o $@ $(CORELIB_CXXFLAGS) $(CPPDEPS) $<
 endif
@@ -15556,11 +15521,6 @@ endif
 
 ifeq ($(USE_GUI),1)
 $(OBJS)\corelib_markupparser.o: ../../src/common/markupparser.cpp
-	$(CXX) -c -o $@ $(CORELIB_CXXFLAGS) $(CPPDEPS) $<
-endif
-
-ifeq ($(USE_GUI),1)
-$(OBJS)\corelib_matrix.o: ../../src/common/matrix.cpp
 	$(CXX) -c -o $@ $(CORELIB_CXXFLAGS) $(CPPDEPS) $<
 endif
 

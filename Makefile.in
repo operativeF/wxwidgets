@@ -20376,9 +20376,6 @@ monodll_sound_sdl.o: $(srcdir)/src/unix/sound_sdl.cpp $(MONODLL_ODEP)
 @COND_USE_GUI_1@monodll_dseldlg.o: $(srcdir)/src/common/dseldlg.cpp $(MONODLL_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(MONODLL_CXXFLAGS) $(srcdir)/src/common/dseldlg.cpp
 
-@COND_USE_GUI_1@monodll_effects.o: $(srcdir)/src/common/effects.cpp $(MONODLL_ODEP)
-@COND_USE_GUI_1@	$(CXXC) -c -o $@ $(MONODLL_CXXFLAGS) $(srcdir)/src/common/effects.cpp
-
 @COND_USE_GUI_1@monodll_fddlgcmn.o: $(srcdir)/src/common/fddlgcmn.cpp $(MONODLL_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(MONODLL_CXXFLAGS) $(srcdir)/src/common/fddlgcmn.cpp
 
@@ -20498,9 +20495,6 @@ monodll_sound_sdl.o: $(srcdir)/src/unix/sound_sdl.cpp $(MONODLL_ODEP)
 
 @COND_USE_GUI_1@monodll_markupparser.o: $(srcdir)/src/common/markupparser.cpp $(MONODLL_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(MONODLL_CXXFLAGS) $(srcdir)/src/common/markupparser.cpp
-
-@COND_USE_GUI_1@monodll_matrix.o: $(srcdir)/src/common/matrix.cpp $(MONODLL_ODEP)
-@COND_USE_GUI_1@	$(CXXC) -c -o $@ $(MONODLL_CXXFLAGS) $(srcdir)/src/common/matrix.cpp
 
 @COND_USE_GUI_1@monodll_menucmn.o: $(srcdir)/src/common/menucmn.cpp $(MONODLL_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(MONODLL_CXXFLAGS) $(srcdir)/src/common/menucmn.cpp
@@ -25653,9 +25647,6 @@ monolib_sound_sdl.o: $(srcdir)/src/unix/sound_sdl.cpp $(MONOLIB_ODEP)
 @COND_USE_GUI_1@monolib_dseldlg.o: $(srcdir)/src/common/dseldlg.cpp $(MONOLIB_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(MONOLIB_CXXFLAGS) $(srcdir)/src/common/dseldlg.cpp
 
-@COND_USE_GUI_1@monolib_effects.o: $(srcdir)/src/common/effects.cpp $(MONOLIB_ODEP)
-@COND_USE_GUI_1@	$(CXXC) -c -o $@ $(MONOLIB_CXXFLAGS) $(srcdir)/src/common/effects.cpp
-
 @COND_USE_GUI_1@monolib_fddlgcmn.o: $(srcdir)/src/common/fddlgcmn.cpp $(MONOLIB_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(MONOLIB_CXXFLAGS) $(srcdir)/src/common/fddlgcmn.cpp
 
@@ -25775,9 +25766,6 @@ monolib_sound_sdl.o: $(srcdir)/src/unix/sound_sdl.cpp $(MONOLIB_ODEP)
 
 @COND_USE_GUI_1@monolib_markupparser.o: $(srcdir)/src/common/markupparser.cpp $(MONOLIB_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(MONOLIB_CXXFLAGS) $(srcdir)/src/common/markupparser.cpp
-
-@COND_USE_GUI_1@monolib_matrix.o: $(srcdir)/src/common/matrix.cpp $(MONOLIB_ODEP)
-@COND_USE_GUI_1@	$(CXXC) -c -o $@ $(MONOLIB_CXXFLAGS) $(srcdir)/src/common/matrix.cpp
 
 @COND_USE_GUI_1@monolib_menucmn.o: $(srcdir)/src/common/menucmn.cpp $(MONOLIB_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(MONOLIB_CXXFLAGS) $(srcdir)/src/common/menucmn.cpp
@@ -31023,9 +31011,6 @@ coredll_sound_sdl.o: $(srcdir)/src/unix/sound_sdl.cpp $(COREDLL_ODEP)
 @COND_USE_GUI_1@coredll_dseldlg.o: $(srcdir)/src/common/dseldlg.cpp $(COREDLL_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(COREDLL_CXXFLAGS) $(srcdir)/src/common/dseldlg.cpp
 
-@COND_USE_GUI_1@coredll_effects.o: $(srcdir)/src/common/effects.cpp $(COREDLL_ODEP)
-@COND_USE_GUI_1@	$(CXXC) -c -o $@ $(COREDLL_CXXFLAGS) $(srcdir)/src/common/effects.cpp
-
 @COND_USE_GUI_1@coredll_fddlgcmn.o: $(srcdir)/src/common/fddlgcmn.cpp $(COREDLL_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(COREDLL_CXXFLAGS) $(srcdir)/src/common/fddlgcmn.cpp
 
@@ -31145,9 +31130,6 @@ coredll_sound_sdl.o: $(srcdir)/src/unix/sound_sdl.cpp $(COREDLL_ODEP)
 
 @COND_USE_GUI_1@coredll_markupparser.o: $(srcdir)/src/common/markupparser.cpp $(COREDLL_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(COREDLL_CXXFLAGS) $(srcdir)/src/common/markupparser.cpp
-
-@COND_USE_GUI_1@coredll_matrix.o: $(srcdir)/src/common/matrix.cpp $(COREDLL_ODEP)
-@COND_USE_GUI_1@	$(CXXC) -c -o $@ $(COREDLL_CXXFLAGS) $(srcdir)/src/common/matrix.cpp
 
 @COND_USE_GUI_1@coredll_menucmn.o: $(srcdir)/src/common/menucmn.cpp $(COREDLL_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(COREDLL_CXXFLAGS) $(srcdir)/src/common/menucmn.cpp
@@ -35277,9 +35259,6 @@ corelib_sound_sdl.o: $(srcdir)/src/unix/sound_sdl.cpp $(CORELIB_ODEP)
 @COND_USE_GUI_1@corelib_dseldlg.o: $(srcdir)/src/common/dseldlg.cpp $(CORELIB_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(CORELIB_CXXFLAGS) $(srcdir)/src/common/dseldlg.cpp
 
-@COND_USE_GUI_1@corelib_effects.o: $(srcdir)/src/common/effects.cpp $(CORELIB_ODEP)
-@COND_USE_GUI_1@	$(CXXC) -c -o $@ $(CORELIB_CXXFLAGS) $(srcdir)/src/common/effects.cpp
-
 @COND_USE_GUI_1@corelib_fddlgcmn.o: $(srcdir)/src/common/fddlgcmn.cpp $(CORELIB_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(CORELIB_CXXFLAGS) $(srcdir)/src/common/fddlgcmn.cpp
 
@@ -35399,9 +35378,6 @@ corelib_sound_sdl.o: $(srcdir)/src/unix/sound_sdl.cpp $(CORELIB_ODEP)
 
 @COND_USE_GUI_1@corelib_markupparser.o: $(srcdir)/src/common/markupparser.cpp $(CORELIB_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(CORELIB_CXXFLAGS) $(srcdir)/src/common/markupparser.cpp
-
-@COND_USE_GUI_1@corelib_matrix.o: $(srcdir)/src/common/matrix.cpp $(CORELIB_ODEP)
-@COND_USE_GUI_1@	$(CXXC) -c -o $@ $(CORELIB_CXXFLAGS) $(srcdir)/src/common/matrix.cpp
 
 @COND_USE_GUI_1@corelib_menucmn.o: $(srcdir)/src/common/menucmn.cpp $(CORELIB_ODEP)
 @COND_USE_GUI_1@	$(CXXC) -c -o $@ $(CORELIB_CXXFLAGS) $(srcdir)/src/common/menucmn.cpp

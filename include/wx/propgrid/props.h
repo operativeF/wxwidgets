@@ -36,13 +36,6 @@ class WXDLLIMPEXP_FWD_PROPGRID wxPGArrayEditorDialog;
 wxIMPLEMENT_DYNAMIC_CLASS(NAME, UPCLASS); \
 wxPG_IMPLEMENT_PROPERTY_CLASS_PLAIN(NAME, EDITOR)
 
-#if WXWIN_COMPATIBILITY_3_0
-// This macro is deprecated. Use wxPG_IMPLEMENT_PROPERTY_CLASS instead.
-#define WX_PG_IMPLEMENT_PROPERTY_CLASS(NAME, UPCLASS, T, T_AS_ARG, EDITOR) \
-wxIMPLEMENT_DYNAMIC_CLASS(NAME, UPCLASS); \
-WX_PG_IMPLEMENT_PROPERTY_CLASS_PLAIN(NAME, T, EDITOR)
-#endif // WXWIN_COMPATIBILITY_3_0
-
 // -----------------------------------------------------------------------
 
 //
@@ -430,22 +423,6 @@ protected:
     int GetIndex() const;
     void SetIndex( int index );
 
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_MSG("use ValueFromString_(wxVariant&, int*, const wxString&, int) function instead")
-    bool ValueFromString_( wxVariant& value,
-                           const wxString& text,
-                           int argFlags ) const
-    {
-        return ValueFromString_(value, NULL, text, argFlags);
-    }
-    wxDEPRECATED_MSG("use ValueFromInt_(wxVariant&, int*, int, int) function instead")
-    bool ValueFromInt_( wxVariant& value, int intVal, int argFlags ) const
-    {
-        return ValueFromInt_(value, NULL, intVal, argFlags);
-    }
-    wxDEPRECATED_MSG("don't use ResetNextIndex() function")
-    static void ResetNextIndex() { }
-#endif
     // Converts text to value and returns corresponding index in the collection
     bool ValueFromString_(wxVariant& value,
                           int* pIndex,
@@ -673,9 +650,6 @@ public:
     wxString ValueToString(wxVariant& value, int argFlags = 0) const override;
     virtual bool StringToValue(wxVariant& variant, const wxString& text,
                                int argFlags = 0) const override;
-#if WXWIN_COMPATIBILITY_3_0
-    bool DoSetAttribute(const wxString& name, wxVariant& value) override;
-#endif // WXWIN_COMPATIBILITY_3_0
     wxValidator* DoGetValidator() const override;
 
 protected:
@@ -718,14 +692,6 @@ public:
     // value, and if dialog is not cancelled, it should be stored back and true
     // should be returned if that was the case.
     virtual bool OnCustomStringEdit( wxWindow* parent, wxString& value );
-
-#if WXWIN_COMPATIBILITY_3_0
-    // Helper.
-    wxDEPRECATED_MSG("OnButtonClick() function is no longer used")
-    virtual bool OnButtonClick( wxPropertyGrid* propgrid,
-                                wxWindow* primary,
-                                const wxChar* cbt );
-#endif // WXWIN_COMPATIBILITY_3_0
 
     // Creates wxPGArrayEditorDialog for string editing. Called in OnButtonClick.
     virtual wxPGArrayEditorDialog* CreateEditorDialog();

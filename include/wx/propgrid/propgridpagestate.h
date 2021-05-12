@@ -446,12 +446,6 @@ public:
 
     wxPropertyCategory* GetPropertyCategory( const wxPGProperty* p ) const;
 
-#if WXWIN_COMPATIBILITY_3_0
-    wxDEPRECATED_MSG("don't refer directly to wxPropertyGridPageState::GetPropertyByLabel")
-    wxPGProperty* GetPropertyByLabel( const wxString& name,
-                                      wxPGProperty* parent = NULL ) const;
-#endif // WXWIN_COMPATIBILITY_3_0
-
     wxVariant DoGetPropertyValues( const wxString& listname,
                                    wxPGProperty* baseparent,
                                    long flags ) const;
@@ -631,17 +625,6 @@ protected:
     // Indicates total virtual height of visible properties.
     unsigned int                m_virtualHeight;
 
-#if WXWIN_COMPATIBILITY_3_0
-    // 1 items appended/inserted, so stuff needs to be done before drawing;
-    // If m_virtualHeight == 0, then calcylatey's must be done.
-    // Otherwise just sort.
-    unsigned char               m_itemsAdded;
-
-    // 1 if any value is modified.
-    unsigned char               m_anyModified;
-
-    unsigned char               m_vhCalcPending;
-#else
     // True: items appended/inserted, so stuff needs to be done before drawing;
     // If m_virtualHeight == 0, then calcylatey's must be done.
     // Otherwise just sort.
@@ -651,7 +634,6 @@ protected:
     bool                        m_anyModified;
 
     bool                        m_vhCalcPending;
-#endif // WXWIN_COMPATIBILITY_3_0
 
     // True if splitter has been pre-set by the application.
     bool                        m_isSplitterPreSet;

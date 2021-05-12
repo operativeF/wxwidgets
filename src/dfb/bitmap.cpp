@@ -700,43 +700,6 @@ void wxBitmap::SetPalette(const wxPalette& palette)
 }
 #endif // wxUSE_PALETTE
 
-#if WXWIN_COMPATIBILITY_3_0
-void wxBitmap::SetHeight(int height)
-{
-    AllocExclusive();
-
-    wxFAIL_MSG( "SetHeight not implemented" );
-}
-
-void wxBitmap::SetWidth(int width)
-{
-    AllocExclusive();
-
-    wxFAIL_MSG( "SetWidth not implemented" );
-}
-
-void wxBitmap::SetDepth(int depth)
-{
-    DFBSurfacePixelFormat format = DepthToFormat(depth);
-    if ( M_BITMAP->m_surface->GetPixelFormat() == format )
-        return;
-
-    AllocExclusive();
-
-    int w, h;
-    M_BITMAP->m_surface->GetSize(&w, &h);
-    wxIDirectFBSurfacePtr s = CreateSurfaceWithFormat(w, h, format);
-    if ( !s )
-        return;
-    if ( !s->SetBlittingFlags(DSBLIT_NOFX) )
-        return;
-    if ( !s->Blit(M_BITMAP->m_surface->GetRaw(), NULL, 0, 0) )
-        return;
-
-    M_BITMAP->m_surface = s;
-}
-#endif // WXWIN_COMPATIBILITY_3_0
-
 wxIDirectFBSurfacePtr wxBitmap::GetDirectFBSurface() const
 {
     wxCHECK_MSG( IsOk(), NULL, wxT("invalid bitmap") );
