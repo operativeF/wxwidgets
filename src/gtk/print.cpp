@@ -922,7 +922,7 @@ bool wxGtkPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt )
 {
     if (!printout)
     {
-        sm_lastError = wxPRINTER_ERROR;
+        sm_lastError = wxPrinterError::Error;
         return false;
     }
 
@@ -979,17 +979,17 @@ bool wxGtkPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt )
     int ret = dialog.ShowModal();
     if (ret == wxID_CANCEL)
     {
-        sm_lastError = wxPRINTER_CANCELLED;
+        sm_lastError = wxPrinterError::Cancelled;
     }
     if (ret == wxID_NO)
     {
-        sm_lastError = wxPRINTER_ERROR;
+        sm_lastError = wxPrinterError::Error;
     }
 
     printout->SetDC(NULL);
     wxDELETE(m_dc);
 
-    return (sm_lastError == wxPRINTER_NO_ERROR);
+    return (sm_lastError == wxPrinterError::NoError);
 }
 
 void wxGtkPrinter::BeginPrint(wxPrintout *printout, GtkPrintOperation *operation, GtkPrintContext *context)
@@ -1011,9 +1011,9 @@ void wxGtkPrinter::BeginPrint(wxPrintout *printout, GtkPrintOperation *operation
 
     if (!m_dc->IsOk())
     {
-        if (sm_lastError != wxPRINTER_CANCELLED)
+        if (sm_lastError != wxPrinterError::Cancelled)
         {
-            sm_lastError = wxPRINTER_ERROR;
+            sm_lastError = wxPrinterError::Error;
             wxFAIL_MSG("The wxGtkPrinterDC cannot be used.");
         }
         return;
@@ -1030,7 +1030,7 @@ void wxGtkPrinter::BeginPrint(wxPrintout *printout, GtkPrintOperation *operation
 
     if (maxPage == 0)
     {
-        sm_lastError = wxPRINTER_ERROR;
+        sm_lastError = wxPrinterError::Error;
         wxFAIL_MSG("wxPrintout::GetPageInfo gives a null maxPage.");
         return;
     }
@@ -1127,7 +1127,7 @@ void wxGtkPrinter::DrawPage(wxPrintout *printout,
         if (!printout->OnBeginDocument(startPage, endPage))
         {
             wxLogError(_("Could not start printing."));
-            sm_lastError = wxPRINTER_ERROR;
+            sm_lastError = wxPrinterError::Error;
         }
     }
 
@@ -1156,12 +1156,12 @@ wxDC* wxGtkPrinter::PrintDialog( wxWindow *parent )
 
     if (ret == wxID_CANCEL)
     {
-        sm_lastError = wxPRINTER_CANCELLED;
+        sm_lastError = wxPrinterError::Cancelled;
         return NULL;
     }
     if (ret == wxID_NO)
     {
-        sm_lastError = wxPRINTER_ERROR;
+        sm_lastError = wxPrinterError::Error;
         return NULL;
     }
 

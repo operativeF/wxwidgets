@@ -82,7 +82,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
 
     if (!printout)
     {
-        sm_lastError = wxPRINTER_ERROR;
+        sm_lastError = wxPrinterError::Error;
         return false;
     }
 
@@ -115,7 +115,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
     if (!printout->SetUp(*dc))
     {
         delete dc;
-        sm_lastError = wxPRINTER_ERROR;
+        sm_lastError = wxPrinterError::Error;
         return false;
     }
 
@@ -131,7 +131,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
 
     if (maxPage == 0)
     {
-        sm_lastError = wxPRINTER_ERROR;
+        sm_lastError = wxPrinterError::Error;
         return false;
     }
 
@@ -148,7 +148,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
     if (!win)
     {
         wxLogDebug(wxT("Could not create an abort dialog."));
-        sm_lastError = wxPRINTER_ERROR;
+        sm_lastError = wxPrinterError::Error;
 
         delete dc;
         return false;
@@ -159,7 +159,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
 
     printout->OnBeginPrinting();
 
-    sm_lastError = wxPRINTER_NO_ERROR;
+    sm_lastError = wxPrinterError::NoError;
 
     int minPageNum = minPage, maxPageNum = maxPage;
 
@@ -182,12 +182,12 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
         if ( !printout->OnBeginDocument(minPageNum, maxPageNum) )
         {
             wxLogError(_("Could not start printing."));
-            sm_lastError = wxPRINTER_ERROR;
+            sm_lastError = wxPrinterError::Error;
             break;
         }
         if (sm_abortIt)
         {
-            sm_lastError = wxPRINTER_CANCELLED;
+            sm_lastError = wxPrinterError::Cancelled;
             break;
         }
 
@@ -203,7 +203,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
 
             if ( sm_abortIt )
             {
-                sm_lastError = wxPRINTER_CANCELLED;
+                sm_lastError = wxPrinterError::Cancelled;
                 break;
             }
 
@@ -213,7 +213,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
 
             if ( !cont )
             {
-                sm_lastError = wxPRINTER_CANCELLED;
+                sm_lastError = wxPrinterError::Cancelled;
                 break;
             }
         }
@@ -231,7 +231,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
 
     delete dc;
 
-    return sm_lastError == wxPRINTER_NO_ERROR;
+    return sm_lastError == wxPrinterError::NoError;
 }
 
 wxDC *wxWindowsPrinter::PrintDialog(wxWindow *parent)
@@ -246,12 +246,12 @@ wxDC *wxWindowsPrinter::PrintDialog(wxWindow *parent)
         dc = dialog.GetPrintDC();
         m_printDialogData = dialog.GetPrintDialogData();
         if (dc == nullptr)
-            sm_lastError = wxPRINTER_ERROR;
+            sm_lastError = wxPrinterError::Error;
         else
-            sm_lastError = wxPRINTER_NO_ERROR;
+            sm_lastError = wxPrinterError::NoError;
     }
     else
-        sm_lastError = wxPRINTER_CANCELLED;
+        sm_lastError = wxPrinterError::Cancelled;
 
     return dc;
 }

@@ -548,7 +548,7 @@ bool wxMacPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt)
 
     if (!printout)
     {
-        sm_lastError = wxPRINTER_ERROR;
+        sm_lastError = wxPrinterError::Error;
         return false;
     }
 
@@ -615,7 +615,7 @@ bool wxMacPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt)
 
     if (maxPage == 0)
     {
-        sm_lastError = wxPRINTER_ERROR;
+        sm_lastError = wxPrinterError::Error;
         return false;
     }
 

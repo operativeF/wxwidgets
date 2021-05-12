@@ -420,7 +420,7 @@ void AppFrame::OnPrint (wxCommandEvent &WXUNUSED(event)) {
     wxPrinter printer (&printDialogData);
     EditPrint printout (m_edit);
     if (!printer.Print (this, &printout, true)) {
-        if (wxPrinter::GetLastError() == wxPRINTER_ERROR) {
+        if (wxPrinter::GetLastError() == wxPrinterError::Error) {
         wxMessageBox (_("There was a problem with printing.\n\
                          Perhaps your current printer is not correctly?"),
                       _("Previewing"), wxOK);

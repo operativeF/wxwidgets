@@ -89,14 +89,14 @@ wxFileSystemWatcherBase::~wxFileSystemWatcherBase()
 
 bool wxFileSystemWatcherBase::Add(const wxFileName& path, int events)
 {
-    wxFSWPathType type = wxFSWPath_None;
+    wxFSWPathType type = wxFSWPathType::None;
     if ( path.FileExists() )
     {
-        type = wxFSWPath_File;
+        type = wxFSWPathType::File;
     }
     else if ( path.DirExists() )
     {
-        type = wxFSWPath_Dir;
+        type = wxFSWPathType::Dir;
     }
     else
     {
@@ -197,7 +197,7 @@ bool wxFileSystemWatcherBase::AddTree(const wxFileName& path, int events,
         wxDirTraverseResult OnDir(const wxString& dirname) override
         {
             if ( m_watcher->AddAny(wxFileName::DirName(dirname),
-                                   m_events, wxFSWPath_Tree, m_filespec) )
+                                   m_events, wxFSWPathType::Tree, m_filespec) )
             {
                 wxLogTrace(wxTRACE_FSWATCHER,
                    "--- AddTree adding directory '%s' ---", dirname);
@@ -222,7 +222,7 @@ bool wxFileSystemWatcherBase::AddTree(const wxFileName& path, int events,
     dir.Traverse(traverser, filespec, flags);
 
     // Add the path itself explicitly as Traverse() doesn't return it.
-    AddAny(path.GetPathWithSep(), events, wxFSWPath_Tree, filespec);
+    AddAny(path.GetPathWithSep(), events, wxFSWPathType::Tree, filespec);
 
     return true;
 }

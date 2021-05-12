@@ -347,14 +347,14 @@ protected:
         // We watch only dirs explicitly, so we don't want file IN_CREATEs.
         // Distinguish by whether nativeFlags contain IN_ISDIR
         else if ((nativeFlags & IN_CREATE) &&
-                 (watch.GetType() == wxFSWPath_Tree) && (inevt.mask & IN_ISDIR))
+                 (watch.GetType() == wxFSWPathType::Tree) && (inevt.mask & IN_ISDIR))
         {
             wxFileName fn = GetEventPath(watch, inevt);
             // Though it's a dir, fn treats it as a file. So:
             fn.AssignDir(fn.GetFullPath());
 
             if (m_watcher->AddAny(fn, wxFSW_EVENT_ALL,
-                                   wxFSWPath_Tree, watch.GetFilespec()))
+                                   wxFSWPathType::Tree, watch.GetFilespec()))
             {
                 // Tell the owner, in case it's interested
                 // If there's a filespec, assume he's not
@@ -374,8 +374,8 @@ protected:
         // to do something here only inside a tree watch, or if it's the parent
         // dir that's deleted. Otherwise let the parent dir cope
         else if ((nativeFlags & IN_DELETE_SELF) &&
-                    ((watch.GetType() == wxFSWPath_Dir) ||
-                     (watch.GetType() == wxFSWPath_Tree)))
+                    ((watch.GetType() == wxFSWPathType::Dir) ||
+                     (watch.GetType() == wxFSWPathType::Tree)))
         {
             // We must remove the deleted directory from the map, so that
             // DoRemoveInotify() isn't called on it in the future. Don't assert

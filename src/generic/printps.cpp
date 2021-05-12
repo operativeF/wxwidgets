@@ -71,7 +71,7 @@ bool wxPostScriptPrinter::Print(wxWindow *parent, wxPrintout *printout, bool pro
 
     if (!printout)
     {
-        sm_lastError = wxPRINTER_ERROR;
+        sm_lastError = wxPrinterError::Error;
         return false;
     }
 
@@ -97,7 +97,7 @@ bool wxPostScriptPrinter::Print(wxWindow *parent, wxPrintout *printout, bool pro
     if (!dc || !dc->IsOk())
     {
         delete dc;
-        sm_lastError = wxPRINTER_ERROR;
+        sm_lastError = wxPrinterError::Error;
         return false;
     }
 
@@ -116,7 +116,7 @@ bool wxPostScriptPrinter::Print(wxWindow *parent, wxPrintout *printout, bool pro
 
     if (maxPage == 0)
     {
-        sm_lastError = wxPRINTER_ERROR;
+        sm_lastError = wxPrinterError::Error;
         wxEndBusyCursor();
         return false;
     }
@@ -145,7 +145,7 @@ bool wxPostScriptPrinter::Print(wxWindow *parent, wxPrintout *printout, bool pro
 
     printout->OnBeginPrinting();
 
-    sm_lastError = wxPRINTER_NO_ERROR;
+    sm_lastError = wxPrinterError::NoError;
 
     bool keepGoing = true;
 
@@ -156,12 +156,12 @@ bool wxPostScriptPrinter::Print(wxWindow *parent, wxPrintout *printout, bool pro
         {
             wxEndBusyCursor();
             wxLogError(_("Could not start printing."));
-            sm_lastError = wxPRINTER_ERROR;
+            sm_lastError = wxPrinterError::Error;
             break;
         }
         if (sm_abortIt)
         {
-            sm_lastError = wxPRINTER_CANCELLED;
+            sm_lastError = wxPrinterError::Cancelled;
             break;
         }
 
@@ -172,7 +172,7 @@ bool wxPostScriptPrinter::Print(wxWindow *parent, wxPrintout *printout, bool pro
             if (sm_abortIt)
             {
                 keepGoing = false;
-                sm_lastError = wxPRINTER_CANCELLED;
+                sm_lastError = wxPrinterError::Cancelled;
                 break;
             }
             else
@@ -188,7 +188,7 @@ bool wxPostScriptPrinter::Print(wxWindow *parent, wxPrintout *printout, bool pro
                else
                {
                   sm_abortIt = true;
-                  sm_lastError = wxPRINTER_CANCELLED;
+                  sm_lastError = wxPrinterError::Cancelled;
                   keepGoing = false;
                }
             }
@@ -204,7 +204,7 @@ bool wxPostScriptPrinter::Print(wxWindow *parent, wxPrintout *printout, bool pro
 
     delete dc;
 
-    return (sm_lastError == wxPRINTER_NO_ERROR);
+    return (sm_lastError == wxPrinterError::NoError);
 }
 
 wxDC* wxPostScriptPrinter::PrintDialog(wxWindow *parent)
@@ -218,12 +218,12 @@ wxDC* wxPostScriptPrinter::PrintDialog(wxWindow *parent)
         m_printDialogData = dialog.GetPrintDialogData();
 
         if (dc == nullptr)
-            sm_lastError = wxPRINTER_ERROR;
+            sm_lastError = wxPrinterError::Error;
         else
-            sm_lastError = wxPRINTER_NO_ERROR;
+            sm_lastError = wxPrinterError::NoError;
     }
     else
-        sm_lastError = wxPRINTER_CANCELLED;
+        sm_lastError = wxPrinterError::Cancelled;
 
     return dc;
 }

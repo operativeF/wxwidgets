@@ -48,11 +48,11 @@ class wxPrintPageTextCtrl;
 // error consts
 //----------------------------------------------------------------------------
 
-enum wxPrinterError
+enum class wxPrinterError
 {
-    wxPRINTER_NO_ERROR = 0,
-    wxPRINTER_CANCELLED,
-    wxPRINTER_ERROR
+    NoError = 0,
+    Cancelled,
+    Error
 };
 
 // Preview frame modality kind used with wxPreviewFrame::Initialize()

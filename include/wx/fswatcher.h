@@ -58,12 +58,12 @@ enum
 };
 
 // Type of the path watched, used only internally for now.
-enum wxFSWPathType
+enum class wxFSWPathType
 {
-    wxFSWPath_None,     // Invalid value for an initialized watch.
-    wxFSWPath_File,     // Plain file.
-    wxFSWPath_Dir,      // Watch a directory and the files in it.
-    wxFSWPath_Tree      // Watch a directory and all its children recursively.
+    None,     // Invalid value for an initialized watch.
+    File,     // Plain file.
+    Dir,      // Watch a directory and the files in it.
+    Tree      // Watch a directory and all its children recursively.
 };
 
 // Type of the warning for the events notifying about them.
@@ -226,7 +226,7 @@ class wxFSWatchInfo
 {
 public:
     wxFSWatchInfo() :
-        m_events(-1), m_type(wxFSWPath_None), m_refcount(-1)
+        m_events(-1), m_type(wxFSWPathType::None), m_refcount(-1)
     {
     }
 

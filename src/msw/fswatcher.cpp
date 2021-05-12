@@ -136,20 +136,20 @@ bool wxFSWatcherImplMSW::DoSetUpWatch(wxFSWatchEntryMSW& watch)
 
     switch ( watch.GetType() )
     {
-        case wxFSWPath_File:
+        case wxFSWPathType::File:
             wxLogError(_("Monitoring individual files for changes is not "
                          "supported currently."));
             return false;
 
-        case wxFSWPath_Dir:
+        case wxFSWPathType::Dir:
             bWatchSubtree = FALSE;
             break;
 
-        case wxFSWPath_Tree:
+        case wxFSWPathType::Tree:
             bWatchSubtree = TRUE;
             break;
 
-        case wxFSWPath_None:
+        case wxFSWPathType::None:
             wxFAIL_MSG( "Invalid watch type." );
             return false;
     }
@@ -477,7 +477,7 @@ wxMSWFileSystemWatcher::AddTree(const wxFileName& path,
         return false;
     }
 
-    return AddAny(path, events, wxFSWPath_Tree);
+    return AddAny(path, events, wxFSWPathType::Tree);
 }
 
 #endif // wxUSE_FSWATCHER

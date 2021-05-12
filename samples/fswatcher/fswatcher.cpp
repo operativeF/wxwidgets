@@ -91,7 +91,7 @@ public:
         if ( m_frame->CreateWatcherIfNecessary() )
         {
             if ( !m_dirToWatch.empty() )
-                m_frame->AddEntry(wxFSWPath_Dir, m_dirToWatch);
+                m_frame->AddEntry(wxFSWPathType::Dir, m_dirToWatch);
         }
     }
 
@@ -341,12 +341,12 @@ void MyFrame::OnFollowLinks(wxCommandEvent& event)
 
 void MyFrame::OnAdd(wxCommandEvent& WXUNUSED(event))
 {
-    AddEntry(wxFSWPath_Dir);
+    AddEntry(wxFSWPathType::Dir);
 }
 
 void MyFrame::OnAddTree(wxCommandEvent& WXUNUSED(event))
 {
-    AddEntry(wxFSWPath_Tree);
+    AddEntry(wxFSWPathType::Tree);
 }
 
 void MyFrame::AddEntry(wxFSWPathType type, wxString filename)
@@ -364,7 +364,7 @@ void MyFrame::AddEntry(wxFSWPathType type, wxString filename)
 
     wxLogDebug("Adding %s: '%s'",
                filename,
-               type == wxFSWPath_Dir ? "directory" : "directory tree");
+               type == wxFSWPathType::Dir ? "directory" : "directory tree");
 
     wxString prefix;
     bool ok = false;
@@ -378,18 +378,18 @@ void MyFrame::AddEntry(wxFSWPathType type, wxString filename)
 
     switch ( type )
     {
-        case wxFSWPath_Dir:
+        case wxFSWPathType::Dir:
             ok = m_watcher->Add(fn);
             prefix = "Dir:  ";
             break;
 
-        case wxFSWPath_Tree:
+        case wxFSWPathType::Tree:
             ok = m_watcher->AddTree(fn);
             prefix = "Tree: ";
             break;
 
-        case wxFSWPath_File:
-        case wxFSWPath_None:
+        case wxFSWPathType::File:
+        case wxFSWPathType::None:
             wxFAIL_MSG( "Unexpected path type." );
     }
 
