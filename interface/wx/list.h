@@ -90,7 +90,7 @@
     @library{wxbase}
     @category{containers}
 
-    @see wxArray<T>, wxVector<T>, wxNode<T>
+    @see wxArray<T>, std::vector<T>, wxNode<T>
 */
 template<typename T>
 class wxList<T>
@@ -396,7 +396,7 @@ public:
 
         @since 2.9.5
     */
-    wxVector<T> AsVector() const;
+    std::vector<T> AsVector() const;
 };
 
 

@@ -26,7 +26,7 @@
 #ifndef WX_PRECOMP
 #endif // WX_PRECOMP
 
-#include "wx/vector.h"
+#include <vector>
 #include "wx/stockitem.h"
 
 #include "wx/gtk/private.h"
@@ -65,7 +65,7 @@ public:
         GtkWidget *button;
         int id;
     };
-    typedef wxVector<Button> Buttons;
+    typedef std::vector<Button> Buttons;
 
     Buttons m_buttons;
 };

@@ -20,7 +20,7 @@
 #if wxUSE_BOOKCTRL
 
 #include "wx/control.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/withimages.h"
 
 class WXDLLIMPEXP_FWD_CORE wxImageList;
@@ -330,7 +330,7 @@ protected:
 
 
     // the array of all pages of this control
-    wxVector<wxWindow*> m_pages;
+    std::vector<wxWindow*> m_pages;
 
     // get the page area
     virtual wxRect GetPageRect() const;

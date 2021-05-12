@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Name:        tests/vectors/vectors.cpp
-// Purpose:     wxVector<T> unit test
+// Purpose:     std::vector<T> unit test
 // Author:      Vaclav Slavik
 // Created:     2007-07-07
 // Copyright:   (c) 2007 Vaclav Slavik
@@ -17,7 +17,7 @@
     #include "wx/wx.h"
 #endif // WX_PRECOMP
 
-#include "wx/vector.h"
+#include <vector>
 
 #if wxUSE_STD_CONTAINERS_COMPATIBLY
     #include <vector>
@@ -71,7 +71,7 @@ private:
 
 TEST_CASE("wxVector::Push/Pop", "[vector][push_back][pop_back]")
 {
-    wxVector<int> v;
+    std::vector<int> v;
 
     CHECK( v.size() == 0 );
     v.push_back(1);
@@ -98,12 +98,12 @@ TEST_CASE("wxVector::Push/Pop", "[vector][push_back][pop_back]")
     CHECK( v.size() == 0 );
     CHECK( v.empty() );
 
-    wxVector<char> vEmpty;
+    std::vector<char> vEmpty;
 }
 
 TEST_CASE("wxVector::Insert", "[vector][insert]")
 {
-    wxVector<char> v;
+    std::vector<char> v;
 
     v.insert(v.end(), 'a');
     CHECK( v.size() == 1 );
@@ -140,7 +140,7 @@ TEST_CASE("wxVector::Insert", "[vector][insert]")
 
 TEST_CASE("wxVector::Erase", "[vector][erase]")
 {
-    wxVector<int> v;
+    std::vector<int> v;
 
     v.push_back(1);
     v.push_back(2);
@@ -168,14 +168,14 @@ TEST_CASE("wxVector::Erase", "[vector][erase]")
 
 TEST_CASE("wxVector::Iterators", "[vector][iterator]")
 {
-    wxVector<int> v;
+    std::vector<int> v;
     v.push_back(1);
     v.push_back(2);
     v.push_back(3);
     v.push_back(4);
 
     int value = 1;
-    for ( wxVector<int>::iterator i = v.begin(); i != v.end(); ++i, ++value )
+    for ( std::vector<int>::iterator i = v.begin(); i != v.end(); ++i, ++value )
     {
         CHECK( *i == value );
     }
@@ -183,7 +183,7 @@ TEST_CASE("wxVector::Iterators", "[vector][iterator]")
 
 TEST_CASE("wxVector::Objects", "[vector]")
 {
-    wxVector<CountedObject> v;
+    std::vector<CountedObject> v;
     v.push_back(CountedObject(1));
     v.push_back(CountedObject(2));
     v.push_back(CountedObject(3));
@@ -198,7 +198,7 @@ TEST_CASE("wxVector::Objects", "[vector]")
 
 TEST_CASE("wxVector::NonPODs", "[vector]")
 {
-    wxVector<SelfPointingObject> v;
+    std::vector<SelfPointingObject> v;
     v.push_back(SelfPointingObject());
     v.push_back(SelfPointingObject());
     v.push_back(SelfPointingObject());
@@ -210,7 +210,7 @@ TEST_CASE("wxVector::NonPODs", "[vector]")
     // a movable way (this won't assert, but would crash or show some memory
     // problems under Valgrind if wxString couldn't be safely moved with
     // memmove()):
-    wxVector<wxString> vs;
+    std::vector<wxString> vs;
     vs.push_back("one");
     vs.push_back("two");
     vs.push_back("three");
@@ -221,7 +221,7 @@ TEST_CASE("wxVector::NonPODs", "[vector]")
 
 TEST_CASE("wxVector::Resize", "[vector][resize]")
 {
-    wxVector<CountedObject> v;
+    std::vector<CountedObject> v;
     v.resize(3);
 
     CHECK( v.size() == 3 );
@@ -245,7 +245,7 @@ TEST_CASE("wxVector::Resize", "[vector][resize]")
 
 TEST_CASE("wxVector::Swap", "[vector][swap]")
 {
-    wxVector<int> v1, v2;
+    std::vector<int> v1, v2;
     v1.push_back(17);
     v1.swap(v2);
     CHECK( v1.empty() );
@@ -267,7 +267,7 @@ TEST_CASE("wxVector::Swap", "[vector][swap]")
 TEST_CASE("wxVector::Sort", "[vector][sort]")
 {
     size_t  idx;
-    wxVector<int> v;
+    std::vector<int> v;
 
     v.push_back(5);
     v.push_back(7);
@@ -290,7 +290,7 @@ TEST_CASE("wxVector::Sort", "[vector][sort]")
 
 TEST_CASE("wxVector::Contains", "[vector][contains]")
 {
-    wxVector<int> v;
+    std::vector<int> v;
     CHECK( !wxVectorContains(v, 0) );
 
     v.push_back(3);
@@ -306,7 +306,7 @@ TEST_CASE("wxVector::Contains", "[vector][contains]")
 
 TEST_CASE("wxVector::operator==", "[vector][compare]")
 {
-    wxVector<wxString> v1, v2;
+    std::vector<wxString> v1, v2;
     CHECK( v1 == v2 );
     CHECK( !(v1 != v2) );
 
@@ -323,15 +323,15 @@ TEST_CASE("wxVector::operator==", "[vector][compare]")
 
 TEST_CASE("wxVector::reverse_iterator", "[vector][reverse_iterator]")
 {
-    wxVector<int> v;
+    std::vector<int> v;
     for ( int i = 0; i < 10; ++i )
         v.push_back(i + 1);
 
-    const wxVector<int>::reverse_iterator rb = v.rbegin();
-    const wxVector<int>::reverse_iterator re = v.rend();
+    const std::vector<int>::reverse_iterator rb = v.rbegin();
+    const std::vector<int>::reverse_iterator re = v.rend();
     CHECK( re - rb == 10 );
 
-    wxVector<int>::reverse_iterator ri = rb;
+    std::vector<int>::reverse_iterator ri = rb;
     ++ri;
     CHECK( ri - rb == 1 );
     CHECK( re - ri == 9 );
@@ -361,7 +361,7 @@ TEST_CASE("wxVector::reverse_iterator", "[vector][reverse_iterator]")
 
 TEST_CASE("wxVector::capacity", "[vector][capacity][shrink_to_fit]")
 {
-    wxVector<int> v;
+    std::vector<int> v;
     CHECK( v.capacity() == 0 );
 
     v.push_back(0);

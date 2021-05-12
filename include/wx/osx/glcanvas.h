@@ -22,7 +22,7 @@
 #include <OpenGL/gl.h>
 #endif
 
-#include "wx/vector.h"
+#include <vector>
 
 // low level calls
 

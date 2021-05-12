@@ -581,9 +581,9 @@ void wxWebViewIE::LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item)
     m_impl->m_historyPosition = pos;
 }
 
-wxVector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewIE::GetBackwardHistory()
+std::vector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewIE::GetBackwardHistory()
 {
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > backhist;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > backhist;
     //As we don't have std::copy or an iterator constructor in the wxwidgets
     //native vector we construct it by hand
     for(int i = 0; i < m_impl->m_historyPosition; i++)
@@ -593,9 +593,9 @@ wxVector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewIE::GetBackwardHistory()
     return backhist;
 }
 
-wxVector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewIE::GetForwardHistory()
+std::vector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewIE::GetForwardHistory()
 {
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > forwardhist;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > forwardhist;
     //As we don't have std::copy or an iterator constructor in the wxwidgets
     //native vector we construct it by hand
     for(int i = m_impl->m_historyPosition + 1; i < static_cast<int>(m_impl->m_historyList.size()); i++)

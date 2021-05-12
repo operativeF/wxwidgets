@@ -13,7 +13,7 @@
 #define _WX_SAMPLES_DOCVIEW_DOCVIEW_H_
 
 #include "wx/docview.h"
-#include "wx/vector.h"
+#include <vector>
 
 class MyCanvas;
 
@@ -77,7 +77,7 @@ private:
     void OnAbout(wxCommandEvent& event);
 
     // contains the file names given on the command line, possibly empty
-    wxVector<wxString> m_filesFromCmdLine;
+    std::vector<wxString> m_filesFromCmdLine;
 
     // the currently used mode
     Mode m_mode;

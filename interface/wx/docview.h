@@ -10,21 +10,21 @@
 
     @since 2.9.5
 */
-typedef wxVector<wxDocument*> wxDocVector;
+typedef std::vector<wxDocument*> wxDocVector;
 
 /**
     A vector of wxView pointers.
 
     @since 2.9.5
 */
-typedef wxVector<wxView*> wxViewVector;
+typedef std::vector<wxView*> wxViewVector;
 
 /**
     A vector of wxDocTemplate pointers.
 
     @since 2.9.5
 */
-typedef wxVector<wxDocTemplate*> wxDocTemplateVector;
+typedef std::vector<wxDocTemplate*> wxDocTemplateVector;
 
 /**
     @class wxDocTemplate

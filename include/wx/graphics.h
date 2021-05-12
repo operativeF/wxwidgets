@@ -22,7 +22,7 @@
 #include "wx/font.h"
 #include "wx/image.h"
 #include "wx/peninfobase.h"
-#include "wx/vector.h"
+#include <vector>
 
 enum wxAntialiasMode
 {
@@ -357,7 +357,7 @@ public:
 
 private:
     // All the stops stored in ascending order of positions.
-    wxVector<wxGraphicsGradientStop> m_stops;
+    std::vector<wxGraphicsGradientStop> m_stops;
 };
 
 // ----------------------------------------------------------------------------

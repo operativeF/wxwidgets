@@ -95,9 +95,9 @@ protected:
 private:
     void Init();
 
-    static wxVector<wxDialog*> s_modalStack;
+    static std::vector<wxDialog*> s_modalStack;
 #if wxOSX_USE_COCOA
-    static wxVector<bool> s_modalWorksStack;
+    static std::vector<bool> s_modalWorksStack;
 #endif
 };
 

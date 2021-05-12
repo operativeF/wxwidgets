@@ -13,7 +13,7 @@
 
 #if wxUSE_NATIVE_STATUSBAR
 
-#include "wx/vector.h"
+#include <vector>
 #include "wx/tooltip.h"
 
 class WXDLLIMPEXP_FWD_CORE wxClientDC;
@@ -79,7 +79,7 @@ protected:
 
 #if wxUSE_TOOLTIPS
     // the tooltips used when wxSTB_SHOW_TIPS is given
-    wxVector<wxToolTip*> m_tooltips;
+    std::vector<wxToolTip*> m_tooltips;
 #endif
 
 private:

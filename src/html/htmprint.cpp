@@ -209,7 +209,7 @@ int wxHtmlDCRenderer::GetTotalHeight() const
 //--------------------------------------------------------------------------------
 
 
-wxVector<wxHtmlFilter*> wxHtmlPrintout::m_Filters;
+std::vector<wxHtmlFilter*> wxHtmlPrintout::m_Filters;
 
 wxHtmlPrintout::wxHtmlPrintout(const wxString& title) : wxPrintout(title)
 {

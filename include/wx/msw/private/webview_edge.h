@@ -55,8 +55,8 @@ public:
     wxString m_pendingURL;
     int m_pendingContextMenuEnabled;
     int m_pendingAccessToDevToolsEnabled;
-    wxVector<wxString> m_pendingUserScripts;
-    wxVector<wxString> m_userScriptIds;
+    std::vector<wxString> m_pendingUserScripts;
+    std::vector<wxString> m_userScriptIds;
     wxString m_scriptMsgHandlerName;
     wxString m_customUserAgent;
 
@@ -84,7 +84,7 @@ public:
     HRESULT OnEnvironmentCreated(HRESULT result, ICoreWebView2Environment* environment);
     HRESULT OnWebViewCreated(HRESULT result, ICoreWebView2Controller* webViewController);
 
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > m_historyList;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > m_historyList;
     int m_historyPosition;
     bool m_historyLoadingFromList;
     bool m_historyEnabled;

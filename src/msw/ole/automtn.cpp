@@ -121,7 +121,7 @@ bool wxAutomationObject::Invoke(const wxString& member, int action,
     }
 
     int namedArgStringCount = namedArgCount + 1;
-    wxVector<wxBasicString> argNames(namedArgStringCount);
+    std::vector<wxBasicString> argNames(namedArgStringCount);
     argNames[0].AssignFromString(member);
 
     // Note that arguments are specified in reverse order
@@ -138,7 +138,7 @@ bool wxAutomationObject::Invoke(const wxString& member, int action,
     }
 
     // + 1 for the member name, + 1 again in case we're a 'put'
-    wxVector<DISPID> dispIds(namedArgCount + 2);
+    std::vector<DISPID> dispIds(namedArgCount + 2);
 
     HRESULT hr;
     DISPPARAMS dispparams;
@@ -167,7 +167,7 @@ bool wxAutomationObject::Invoke(const wxString& member, int action,
     }
 
     // Convert the wxVariants to VARIANTARGs
-    wxVector<wxOleVariantArg> oleArgs(noArgs);
+    std::vector<wxOleVariantArg> oleArgs(noArgs);
     for (i = 0; i < noArgs; i++)
     {
         // Again, reverse args

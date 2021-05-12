@@ -9,7 +9,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/hashmap.h"
-#include "wx/vector.h"
+#include <vector>
 
 WX_DECLARE_HASH_MAP(unsigned, wxString, wxIntegerHash, wxIntegerEqual,
                     IntToStringMap);
@@ -249,7 +249,7 @@ public:
                                 unsigned int row, unsigned int col ) override;
 
 private:
-    wxVector<bool>   m_toggleColValues;
+    std::vector<bool>   m_toggleColValues;
     wxArrayString    m_textColValues;
     wxArrayString    m_iconColValues;
     IntToStringMap   m_customColValues;

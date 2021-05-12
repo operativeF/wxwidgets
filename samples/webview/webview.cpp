@@ -998,8 +998,8 @@ void WebFrame::OnToolsClicked(wxCommandEvent& WXUNUSED(evt))
     }
     m_histMenuItems.clear();
 
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > back = m_browser->GetBackwardHistory();
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > forward = m_browser->GetForwardHistory();
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > back = m_browser->GetBackwardHistory();
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > forward = m_browser->GetForwardHistory();
 
     wxMenuItem* item;
 

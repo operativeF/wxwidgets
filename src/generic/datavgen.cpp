@@ -32,7 +32,7 @@
     #include "wx/msgdlg.h"
     #include "wx/dcscreen.h"
     #include "wx/frame.h"
-    #include "wx/vector.h"
+    #include <vector>
 #endif
 
 #include "wx/stockitem.h"
@@ -476,7 +476,7 @@ public:
 class wxDataViewMainWindow;
 class wxDataViewTreeNode;
 
-typedef wxVector<wxDataViewTreeNode*> wxDataViewTreeNodes;
+typedef std::vector<wxDataViewTreeNode*> wxDataViewTreeNodes;
 
 // Note: this class is not used at all for virtual list models, so all code
 // using it, i.e. any functions taking or returning objects of this type,
@@ -4076,7 +4076,7 @@ wxDataViewTreeNode * wxDataViewMainWindow::FindNode( const wxDataViewItem & item
         return m_root;
 
     // Compose the parent-chain for the item we are looking for
-    wxVector<wxDataViewItem> parentChain;
+    std::vector<wxDataViewItem> parentChain;
     wxDataViewItem it( item );
     while( it.IsOk() )
     {
@@ -4249,7 +4249,7 @@ public:
     // the first node passed to our operator() is the root node which is not
     // visible on screen and so we should return 0 for its first child node and
     // not for the root itself.
-    ItemToRowJob(const wxDataViewItem& item, wxVector<wxDataViewItem>::reverse_iterator iter)
+    ItemToRowJob(const wxDataViewItem& item, std::vector<wxDataViewItem>::reverse_iterator iter)
         : m_item(item), m_iter(iter), m_current(-1)
     {
     }
@@ -4284,7 +4284,7 @@ public:
 
 private:
     const wxDataViewItem m_item;
-    wxVector<wxDataViewItem>::reverse_iterator m_iter;
+    std::vector<wxDataViewItem>::reverse_iterator m_iter;
 
     // The row corresponding to the last node seen in our operator().
     int m_current;
@@ -4309,7 +4309,7 @@ wxDataViewMainWindow::GetRowByItem(const wxDataViewItem & item,
             return -1;
 
         // Compose the parent-chain of the item we are looking for
-        wxVector<wxDataViewItem> parentChain;
+        std::vector<wxDataViewItem> parentChain;
         wxDataViewItem it( item );
         while( it.IsOk() )
         {
@@ -6042,7 +6042,7 @@ bool wxDataViewCtrl::DeleteColumn( wxDataViewColumn *column )
 
 void wxDataViewCtrl::DoClearColumns()
 {
-    typedef wxVector<wxDataViewColumn*>::const_iterator citer;
+    typedef std::vector<wxDataViewColumn*>::const_iterator citer;
     for ( citer it = m_cols.begin(); it != m_cols.end(); ++it )
         delete *it;
 }
@@ -6134,11 +6134,11 @@ wxDataViewColumn *wxDataViewCtrl::GetSortingColumn() const
     return GetColumn(m_sortingColumnIdxs.front());
 }
 
-wxVector<wxDataViewColumn *> wxDataViewCtrl::GetSortingColumns() const
+std::vector<wxDataViewColumn *> wxDataViewCtrl::GetSortingColumns() const
 {
-    wxVector<wxDataViewColumn *> out;
+    std::vector<wxDataViewColumn *> out;
 
-    for ( wxVector<int>::const_iterator it = m_sortingColumnIdxs.begin(),
+    for ( std::vector<int>::const_iterator it = m_sortingColumnIdxs.begin(),
                                        end = m_sortingColumnIdxs.end();
           it != end;
           ++it )
@@ -6409,8 +6409,8 @@ void wxDataViewCtrl::EditItem(const wxDataViewItem& item, const wxDataViewColumn
 void wxDataViewCtrl::ResetAllSortColumns()
 {
     // Must make copy, because unsorting will remove it from original vector
-    wxVector<int> const copy(m_sortingColumnIdxs);
-    for ( wxVector<int>::const_iterator it = copy.begin(),
+    std::vector<int> const copy(m_sortingColumnIdxs);
+    for ( std::vector<int>::const_iterator it = copy.begin(),
                                        end = copy.end();
           it != end;
           ++it )
@@ -6443,7 +6443,7 @@ bool wxDataViewCtrl::AllowMultiColumnSort(bool allow)
 
 bool wxDataViewCtrl::IsColumnSorted(int idx) const
 {
-    for ( wxVector<int>::const_iterator it = m_sortingColumnIdxs.begin(),
+    for ( std::vector<int>::const_iterator it = m_sortingColumnIdxs.begin(),
                                        end = m_sortingColumnIdxs.end();
           it != end;
           ++it )
@@ -6462,7 +6462,7 @@ void wxDataViewCtrl::UseColumnForSorting(int idx )
 
 void wxDataViewCtrl::DontUseColumnForSorting(int idx)
 {
-    for ( wxVector<int>::iterator it = m_sortingColumnIdxs.begin(),
+    for ( std::vector<int>::iterator it = m_sortingColumnIdxs.begin(),
                                  end = m_sortingColumnIdxs.end();
           it != end;
           ++it )

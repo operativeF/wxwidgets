@@ -17,7 +17,7 @@
 #include "wx/event.h"
 #include "wx/sstream.h"
 #include "wx/sharedptr.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/versioninfo.h"
 
 #if defined(__WXOSX__)
@@ -221,8 +221,8 @@ public:
     virtual void GoForward() = 0;
     virtual void ClearHistory() = 0;
     virtual void EnableHistory(bool enable = true) = 0;
-    virtual wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() = 0;
-    virtual wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() = 0;
+    virtual std::vector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() = 0;
+    virtual std::vector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() = 0;
     virtual void LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item) = 0;
 
     //Zoom

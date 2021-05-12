@@ -12,7 +12,7 @@
 
 #include "wx/msw/wrapwin.h"
 #include "wx/thread.h"
-#include "wx/vector.h"
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // wxTlsKey is a helper class encapsulating a TLS slot
@@ -59,7 +59,7 @@ public:
         wxCriticalSectionLocker lock(m_csAllValues);
         if ( old )
         {
-            for ( wxVector<void*>::iterator i = m_allValues.begin();
+            for ( std::vector<void*>::iterator i = m_allValues.begin();
                   i != m_allValues.end();
                   ++i )
             {
@@ -99,7 +99,7 @@ public:
         //
         // NB: No need to lock m_csAllValues, by the time this code is called,
         //     no other thread can be using this key.
-        for ( wxVector<void*>::iterator i = m_allValues.begin();
+        for ( std::vector<void*>::iterator i = m_allValues.begin();
               i != m_allValues.end();
               ++i )
         {
@@ -113,7 +113,7 @@ private:
     wxTlsDestructorFunction m_destructor;
     DWORD m_slot;
 
-    wxVector<void*> m_allValues;
+    std::vector<void*> m_allValues;
     wxCriticalSection m_csAllValues;
 
     wxDECLARE_NO_COPY_CLASS(wxTlsKey);

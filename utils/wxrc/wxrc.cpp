@@ -26,7 +26,7 @@
 #include "wx/utils.h"
 #include "wx/hashset.h"
 #include "wx/mimetype.h"
-#include "wx/vector.h"
+#include <vector>
 
 WX_DECLARE_HASH_SET(wxString, wxStringHash, wxStringEqual, explicit StringSet);
 
@@ -209,7 +209,7 @@ struct ExtractedString
     int      lineNo;
 };
 
-typedef wxVector<ExtractedString> ExtractedStrings;
+typedef std::vector<ExtractedString> ExtractedStrings;
 
 
 class XmlResApp : public wxAppConsole

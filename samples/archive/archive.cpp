@@ -19,7 +19,7 @@
 #include "wx/cmdline.h"
 #include "wx/filename.h"
 #include "wx/scopedptr.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/wfstream.h"
 #include "wx/zipstrm.h"
 
@@ -59,7 +59,7 @@ private:
 
     ArchiveCommandType m_command;
     wxString m_archiveFileName;
-    wxVector<wxString> m_fileNames;
+    std::vector<wxString> m_fileNames;
     bool m_forceZip64;
 
     // At most one of these pointers is non-NULL.
@@ -202,7 +202,7 @@ int ArchiveApp::DoCreate()
         if (m_archiveClassFactory->GetProtocol().IsSameAs("zip", false) && m_forceZip64)
             reinterpret_cast<wxZipOutputStream*>(archiveOutputStream.get())->SetFormat(wxZIP_FORMAT_ZIP64);
 
-        for(wxVector<wxString>::iterator fileName = m_fileNames.begin(); fileName != m_fileNames.end(); fileName++)
+        for(std::vector<wxString>::iterator fileName = m_fileNames.begin(); fileName != m_fileNames.end(); fileName++)
         {
             wxFileName inputFileName(*fileName);
             wxPrintf("Adding %s...\n", inputFileName.GetFullName());

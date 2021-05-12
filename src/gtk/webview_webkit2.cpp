@@ -380,9 +380,9 @@ wxgtk_webview_webkit_uri_scheme_request_cb(WebKitURISchemeRequest *request,
     const wxString scheme = wxString::FromUTF8(webkit_uri_scheme_request_get_scheme(request));
 
     wxSharedPtr<wxWebViewHandler> handler;
-    wxVector<wxSharedPtr<wxWebViewHandler> > handlers = webKitCtrl->GetHandlers();
+    std::vector<wxSharedPtr<wxWebViewHandler> > handlers = webKitCtrl->GetHandlers();
 
-    for(wxVector<wxSharedPtr<wxWebViewHandler> >::iterator it = handlers.begin();
+    for(std::vector<wxSharedPtr<wxWebViewHandler> >::iterator it = handlers.begin();
         it != handlers.end(); ++it)
     {
         if(scheme == (*it)->GetName())
@@ -826,9 +826,9 @@ void wxWebViewWebKit::EnableHistory(bool)
     // In WebKit2GTK+, history can't be disabled so do nothing here.
 }
 
-wxVector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewWebKit::GetBackwardHistory()
+std::vector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewWebKit::GetBackwardHistory()
 {
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > backhist;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > backhist;
     WebKitBackForwardList* history =
         webkit_web_view_get_back_forward_list(m_web_view);
     GList* list = webkit_back_forward_list_get_back_list(history);
@@ -846,9 +846,9 @@ wxVector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewWebKit::GetBackwardHistory
     return backhist;
 }
 
-wxVector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewWebKit::GetForwardHistory()
+std::vector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewWebKit::GetForwardHistory()
 {
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > forwardhist;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > forwardhist;
     WebKitBackForwardList* history =
         webkit_web_view_get_back_forward_list(m_web_view);
     GList* list = webkit_back_forward_list_get_forward_list(history);

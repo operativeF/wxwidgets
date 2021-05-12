@@ -884,7 +884,7 @@ wxString wxPropertyGridInterface::SaveEditableState( int includedStates ) const
 
     //
     // Save state on page basis
-    wxVector<wxPropertyGridPageState*> pageStates;
+    std::vector<wxPropertyGridPageState*> pageStates;
     for (int pageIndex = 0; ; pageIndex++)
     {
         wxPropertyGridPageState* page = GetPageState(pageIndex);
@@ -893,7 +893,7 @@ wxString wxPropertyGridInterface::SaveEditableState( int includedStates ) const
         pageStates.push_back(page);
     }
 
-    for (wxVector<wxPropertyGridPageState*>::const_iterator it_ps = pageStates.begin();
+    for (std::vector<wxPropertyGridPageState*>::const_iterator it_ps = pageStates.begin();
          it_ps != pageStates.end(); ++it_ps)
     {
         wxPropertyGridPageState* pageState = *it_ps;

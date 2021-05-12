@@ -48,7 +48,7 @@
     #include "wx/textctrl.h"
     #include "wx/menuitem.h"
     #include "wx/module.h"
-    #include "wx/vector.h"
+    #include <vector>
 #endif
 
 #if wxUSE_OWNER_DRAWN && !defined(__WXUNIVERSAL__)
@@ -911,7 +911,7 @@ bool wxWindowMSW::EnableTouchEvents(int eventsMask)
 
         // This is used only if we need to allocate the configurations
         // dynamically.
-        wxVector<GESTURECONFIG> configs;
+        std::vector<GESTURECONFIG> configs;
 
         // There are two simple cases: enabling or disabling all gestures.
         if ( eventsMask == wxTOUCH_NONE )

@@ -60,7 +60,7 @@
 #include "wx/dnd.h"         // drag and drop for the playlist
 #include "wx/filename.h"    // For wxFileName::GetName()
 #include "wx/config.h"      // for native wxConfig
-#include "wx/vector.h"
+#include <vector>
 
 // Under MSW we have several different backends but when linking statically
 // they may be discarded by the linker (this definitely happens with MSVC) so
@@ -146,7 +146,7 @@ public:
     bool OnCmdLineParsed(wxCmdLineParser& parser) override;
 
     // Files specified on the command line, if any.
-    wxVector<wxString> m_params;
+    std::vector<wxString> m_params;
 #endif // wxUSE_CMDLINE_PARSER
 
     bool OnInit() override;

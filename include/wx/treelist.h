@@ -18,7 +18,7 @@
 #include "wx/containr.h"
 #include "wx/headercol.h"
 #include "wx/itemid.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/window.h"
 #include "wx/withimages.h"
 
@@ -72,7 +72,7 @@ public:
 };
 
 // Container of multiple items.
-typedef wxVector<wxTreeListItem> wxTreeListItems;
+typedef std::vector<wxTreeListItem> wxTreeListItems;
 
 // Some special "items" that can be used with InsertItem():
 extern WXDLLIMPEXP_DATA_CORE(const wxTreeListItem) wxTLI_FIRST;

@@ -507,7 +507,7 @@ protected:
                     return true;
                 }
 
-                wxVector<MyHeaderColumn> m_cols;
+                std::vector<MyHeaderColumn> m_cols;
             };
         @endcode
 

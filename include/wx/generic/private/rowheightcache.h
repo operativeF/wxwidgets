@@ -11,7 +11,7 @@
 #define _WX_PRIVATE_ROWHEIGHTCACHE_H_
 
 #include "wx/hashmap.h"
-#include "wx/vector.h"
+#include <vector>
 
 // struct describing a range of rows which contains rows <from> .. <to-1>
 struct RowRange
@@ -66,7 +66,7 @@ public:
     unsigned int GetSize() const { return m_ranges.size(); }
 
 private:
-    wxVector<RowRange> m_ranges;
+    std::vector<RowRange> m_ranges;
 
     /**
         If a new row index was inserted, Cleanup() checks if the neighbour

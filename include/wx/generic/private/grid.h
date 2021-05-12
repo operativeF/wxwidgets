@@ -250,7 +250,7 @@ private:
         GetOwner()->DoEndMoveCol(event.GetNewOrder());
     }
 
-    wxVector<wxGridHeaderColumn> m_columns;
+    std::vector<wxGridHeaderColumn> m_columns;
 
     // The count of OnResizing() call nesting, 0 if not inside it.
     int m_inResizing;

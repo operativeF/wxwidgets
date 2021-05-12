@@ -487,7 +487,7 @@ protected:
 
     int GenId( int id ) const;
 
-    wxVector<wxWindow*> m_buttons;
+    std::vector<wxWindow*> m_buttons;
     wxSize          m_fullEditorSize;
     int             m_buttonsWidth;
 };

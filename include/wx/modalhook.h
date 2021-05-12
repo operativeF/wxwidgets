@@ -10,7 +10,7 @@
 #ifndef _WX_MODALHOOK_H_
 #define _WX_MODALHOOK_H_
 
-#include "wx/vector.h"
+#include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxDialog;
 
@@ -66,7 +66,7 @@ private:
     bool DoUnregister();
 
     // All the hooks in reverse registration order (i.e. in call order).
-    typedef wxVector<wxModalDialogHook*> Hooks;
+    typedef std::vector<wxModalDialogHook*> Hooks;
     static Hooks ms_hooks;
 
     wxDECLARE_NO_COPY_CLASS(wxModalDialogHook);

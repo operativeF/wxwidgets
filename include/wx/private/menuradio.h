@@ -11,7 +11,7 @@
 #ifndef WX_PRIVATE_MENURADIO_H_
 #define WX_PRIVATE_MENURADIO_H_
 
-#include "wx/vector.h"
+#include <vector>
 
 // Contains the data about the radio items groups in the given menu.
 class wxMenuRadioItemsData
@@ -209,7 +209,7 @@ private:
         int end;
     };
 
-    typedef wxVector<Range> Ranges;
+    typedef std::vector<Range> Ranges;
     Ranges m_ranges;
 };
 

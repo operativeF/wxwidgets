@@ -715,8 +715,8 @@ wxGDIPlusPenBrushBaseData::SetGradientStops(T *brush,
         return;
     }
 
-    wxVector<Color> colors(numStops);
-    wxVector<REAL> positions(numStops);
+    std::vector<Color> colors(numStops);
+    std::vector<REAL> positions(numStops);
 
     if ( reversed )
     {

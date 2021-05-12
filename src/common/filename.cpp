@@ -92,7 +92,7 @@
 #include "wx/uri.h"
 
 #if defined(wxHAS_NATIVE_READLINK)
-    #include "wx/vector.h"
+    #include <vector>
 #endif
 
 #if defined(__WIN32__) && defined(__MINGW32__)
@@ -1702,7 +1702,7 @@ wxFileName wxFileName::ResolveLink()
     if( st.st_size != 0 )
         bufSize = st.st_size + 1;
 
-    wxVector<char> bufData(bufSize);
+    std::vector<char> bufData(bufSize);
     char* const buf = &bufData[0];
     ssize_t result = wxReadlink(link, buf, bufSize - 1);
 

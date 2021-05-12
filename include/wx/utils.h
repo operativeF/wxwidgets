@@ -25,7 +25,7 @@
 #if wxUSE_GUI
     #include "wx/gdicmn.h"
     #include "wx/mousestate.h"
-    #include "wx/vector.h"
+    #include <vector>
 #endif
 
 class WXDLLIMPEXP_FWD_BASE wxArrayString;
@@ -695,7 +695,7 @@ private:
 
     wxEventLoop* m_modalEventLoop = NULL;
 #endif
-    wxVector<wxWindow*> m_winDisabled;
+    std::vector<wxWindow*> m_winDisabled;
     bool m_disabled;
 
     wxDECLARE_NO_COPY_CLASS(wxWindowDisabler);

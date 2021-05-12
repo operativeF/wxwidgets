@@ -174,7 +174,7 @@ private:
         DestroyDrawingTestLifeCycleFunction destroy;
     };
 
-    wxVector<PluginInfo> m_drawingPlugins;
+    std::vector<PluginInfo> m_drawingPlugins;
 
     wxDECLARE_NO_COPY_CLASS(GraphicsContextDrawingTestCase);
 };

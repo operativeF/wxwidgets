@@ -12,7 +12,7 @@
 
 #include "wx/aui/auibar.h"
 #include "wx/menu.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/xrc/xmlres.h"
 
 #if wxUSE_XRC && wxUSE_AUI
@@ -38,7 +38,7 @@ private:
         unsigned RegisterMenu(wxAuiToolBar *toobar, int id, wxMenu *menu);
 
     private:
-        wxVector<wxMenu*> m_menus;
+        std::vector<wxMenu*> m_menus;
     };
 
     MenuHandler m_menuHandler;

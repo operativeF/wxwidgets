@@ -187,7 +187,7 @@ private:
     wxDECLARE_NO_COPY_CLASS(wxTaskBarJumpListItem);
 };
 
-typedef wxVector<wxTaskBarJumpListItem*> wxTaskBarJumpListItems;
+typedef std::vector<wxTaskBarJumpListItem*> wxTaskBarJumpListItems;
 
 class WXDLLIMPEXP_CORE wxTaskBarJumpListCategory
 {
@@ -218,7 +218,7 @@ private:
     wxDECLARE_NO_COPY_CLASS(wxTaskBarJumpListCategory);
 };
 
-typedef wxVector<wxTaskBarJumpListCategory*> wxTaskBarJumpListCategories;
+typedef std::vector<wxTaskBarJumpListCategory*> wxTaskBarJumpListCategories;
 
 class WXDLLIMPEXP_CORE wxTaskBarJumpList
 {

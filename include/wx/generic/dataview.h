@@ -15,7 +15,7 @@
 #include "wx/control.h"
 #include "wx/scrolwin.h"
 #include "wx/icon.h"
-#include "wx/vector.h"
+#include <vector>
 #if wxUSE_ACCESSIBILITY
     #include "wx/access.h"
 #endif // wxUSE_ACCESSIBILITY
@@ -234,7 +234,7 @@ public:
     int GetColumnPosition( const wxDataViewColumn *column ) const override;
 
     wxDataViewColumn *GetSortingColumn() const override;
-    wxVector<wxDataViewColumn *> GetSortingColumns() const override;
+    std::vector<wxDataViewColumn *> GetSortingColumns() const override;
 
     wxDataViewItem GetTopItem() const override;
     int GetCountPerPage() const override;
@@ -372,7 +372,7 @@ private:
 
     void DoClearColumns();
 
-    wxVector<wxDataViewColumn*> m_cols;
+    std::vector<wxDataViewColumn*> m_cols;
     // cached column best widths information, values are for
     // respective columns from m_cols and the arrays have same size
     struct CachedColWidthInfo
@@ -381,7 +381,7 @@ private:
         int width;  // cached width or 0 if not computed
         bool dirty; // column was invalidated, header needs updating
     };
-    wxVector<CachedColWidthInfo> m_colsBestWidths;
+    std::vector<CachedColWidthInfo> m_colsBestWidths;
     // This indicates that at least one entry in m_colsBestWidths has 'dirty'
     // flag set. It's cheaper to check one flag in OnInternalIdle() than to
     // iterate over m_colsBestWidths to check if anything needs to be done.
@@ -395,7 +395,7 @@ private:
     wxColour m_alternateRowColour;
 
     // columns indices used for sorting, empty if nothing is sorted
-    wxVector<int> m_sortingColumnIdxs;
+    std::vector<int> m_sortingColumnIdxs;
 
     // if true, allow sorting by more than one column
     bool m_allowMultiColumnSort;

@@ -25,7 +25,7 @@
 #include "wx/fontmap.h"
 #include "wx/html/htmldefs.h"
 #include "wx/html/htmlpars.h"
-#include "wx/vector.h"
+#include <vector>
 
 // DLL options compatibility check:
 WX_CHECK_BUILD_OPTIONS("wxHTML")
@@ -47,7 +47,7 @@ public:
 };
 
 // NB: this is an empty class and not typedef because of forward declaration
-class wxHtmlTextPieces : public wxVector<wxHtmlTextPiece>
+class wxHtmlTextPieces : public std::vector<wxHtmlTextPiece>
 {
 };
 

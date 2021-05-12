@@ -3542,7 +3542,7 @@ wxSize wxAuiNotebook::DoGetBestSize() const
         processed in a specific order. Therefore we need to collect them in the
         following variable which is sorted later on.
      */
-    wxVector<wxAuiLayoutObject> layouts;
+    std::vector<wxAuiLayoutObject> layouts;
     const wxAuiPaneInfoArray& all_panes =
         const_cast<wxAuiManager&>(m_mgr).GetAllPanes();
     const size_t pane_count = all_panes.GetCount();
@@ -3568,7 +3568,7 @@ wxSize wxAuiNotebook::DoGetBestSize() const
     if ( layouts.empty() )
         return wxSize(0, 0);
 
-    wxVectorSort(layouts);
+    std::sort(layouts.begin(), layouts.end());
 
     /*
         The sizes of the panes are merged here. As the center pane is always at

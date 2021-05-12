@@ -17,9 +17,9 @@
 
 #include "wx/grid.h"
 
-#include "wx/vector.h"
+#include <vector>
 
-typedef wxVector<wxGridBlockCoords> wxVectorGridBlockCoords;
+typedef std::vector<wxGridBlockCoords> wxVectorGridBlockCoords;
 
 // Note: for all eventType arguments of the methods of this class wxEVT_NULL
 //       may be passed to forbid events generation completely.

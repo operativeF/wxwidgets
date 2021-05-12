@@ -914,7 +914,7 @@ void MyFrame::BuildDataViewCtrl(wxPanel* parent, unsigned int nPanel, unsigned l
             lc->AppendTextColumn( "Text" );
             lc->AppendProgressColumn( "Progress" )->SetMinWidth(FromDIP(100));
 
-            wxVector<wxVariant> data;
+            std::vector<wxVariant> data;
             for (unsigned int i=0; i<10; i++)
             {
                 data.clear();
@@ -1029,7 +1029,7 @@ void MyFrame::BuildDataViewCtrl(wxPanel* parent, unsigned int nPanel, unsigned l
             lc->AppendTextColumn( "Text" );
             lc->AppendProgressColumn( "Progress" )->SetMinWidth(FromDIP(100));
 
-            wxVector<wxVariant> data;
+            std::vector<wxVariant> data;
             for (unsigned int i=0; i<10; i++)
             {
                 data.clear();
@@ -1558,10 +1558,10 @@ void MyFrame::OnColumnReordered(wxDataViewEvent& event)
 
 void MyFrame::OnSortedList( wxDataViewEvent &/*event*/)
 {
-    wxVector<wxDataViewColumn *> const columns = m_ctrl[Page_List]->GetSortingColumns();
+    std::vector<wxDataViewColumn *> const columns = m_ctrl[Page_List]->GetSortingColumns();
     wxLogMessage( "wxEVT_DATAVIEW_COLUMN_SORTED using the following columns");
 
-    for ( wxVector<wxDataViewColumn *>::const_iterator it = columns.begin(),
+    for ( std::vector<wxDataViewColumn *>::const_iterator it = columns.begin(),
                                                       end = columns.end();
           it != end;
           ++it )

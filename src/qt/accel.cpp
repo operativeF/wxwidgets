@@ -82,9 +82,9 @@ wxAcceleratorTable::wxAcceleratorTable(int n, const wxAcceleratorEntry entries[]
     }
 }
 
-wxVector<QShortcut*> wxAcceleratorTable::ConvertShortcutTable( QWidget *parent ) const
+std::vector<QShortcut*> wxAcceleratorTable::ConvertShortcutTable( QWidget *parent ) const
 {
-    wxVector<QShortcut*> shortcuts;
+    std::vector<QShortcut*> shortcuts;
 
     for ( wxAccelList::compatibility_iterator node = M_ACCELDATA->m_accels.GetFirst();
           node; node = node->GetNext() )

@@ -24,9 +24,9 @@
 
 #include "wx/file.h"
 
-#include "wx/vector.h"
+#include <vector>
 
-wxVector<wxSoundData*> s_soundsPlaying;
+std::vector<wxSoundData*> s_soundsPlaying;
 
 wxSoundData::wxSoundData()
 {
@@ -70,7 +70,7 @@ wxSound::~wxSound()
     // delete it after it plays. Otherwise, async sounds created on the stack
     // may never get the chance to play.
     bool isPlaying = false;
-    for ( wxVector<wxSoundData*>::reverse_iterator s = s_soundsPlaying.rbegin();
+    for ( std::vector<wxSoundData*>::reverse_iterator s = s_soundsPlaying.rbegin();
          s != s_soundsPlaying.rend(); ++s )
     {
         if (*s == m_data)
@@ -110,7 +110,7 @@ bool wxSound::IsPlaying()
 
 void wxSound::Stop()
 {
-    for ( wxVector<wxSoundData*>::reverse_iterator s = s_soundsPlaying.rbegin();
+    for ( std::vector<wxSoundData*>::reverse_iterator s = s_soundsPlaying.rbegin();
          s != s_soundsPlaying.rend(); ++s )
     {
         (*s)->Stop();
@@ -120,7 +120,7 @@ void wxSound::Stop()
 // Notification when a sound has stopped
 void wxSound::SoundStopped(const wxSoundData* data)
 {
-    for ( wxVector<wxSoundData*>::iterator s = s_soundsPlaying.begin();
+    for ( std::vector<wxSoundData*>::iterator s = s_soundsPlaying.begin();
          s != s_soundsPlaying.end(); ++s )
     {
         if ( (*s) == data )

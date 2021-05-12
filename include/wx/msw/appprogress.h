@@ -10,7 +10,7 @@
 #ifndef _WX_MSW_APPPROG_H_
 #define _WX_MSW_APPPROG_H_
 
-#include "wx/vector.h"
+#include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxTaskBarButton;
 
@@ -31,7 +31,7 @@ public:
 private:
     int m_maxValue;
 
-    wxVector<wxTaskBarButton*> m_taskBarButtons;
+    std::vector<wxTaskBarButton*> m_taskBarButtons;
 
     wxDECLARE_NO_COPY_CLASS(wxAppProgressIndicator);
 };

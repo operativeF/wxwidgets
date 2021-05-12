@@ -33,7 +33,7 @@
 
 #include "wx/timer.h"
 #include "wx/datetime.h"
-#include "wx/vector.h"
+#include <vector>
 
 class MyClient;
 
@@ -94,7 +94,7 @@ private:
 
     // the test functions to be executed by StartNextTestIfNecessary()
     typedef void (MyClient::*MyClientTestFunc)();
-    wxVector<MyClientTestFunc> m_tests;
+    std::vector<MyClientTestFunc> m_tests;
 
     // number of seconds since the start of the test
     int m_step;

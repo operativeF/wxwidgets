@@ -136,7 +136,7 @@ public:
 /**
     Container of multiple items.
  */
-typedef wxVector<wxTreeListItem> wxTreeListItems;
+typedef std::vector<wxTreeListItem> wxTreeListItems;
 
 
 /**

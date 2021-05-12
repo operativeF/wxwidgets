@@ -12,7 +12,7 @@
 
 #include "wx/display.h"
 #include "wx/gdicmn.h"      // for wxRect
-#include "wx/vector.h"
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // wxDisplayFactory: allows to create wxDisplay objects
@@ -87,7 +87,7 @@ private:
     void ClearImpls();
 
     // On-demand populated vector of wxDisplayImpl objects.
-    wxVector<wxDisplayImpl*> m_impls;
+    std::vector<wxDisplayImpl*> m_impls;
 
     wxDECLARE_NO_COPY_CLASS(wxDisplayFactory);
 };

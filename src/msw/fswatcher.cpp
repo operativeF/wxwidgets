@@ -284,7 +284,7 @@ bool wxIOCPThread::ReadEvents()
         return true;
 
     // extract events from buffer info our vector container
-    wxVector<wxEventProcessingData> events;
+    std::vector<wxEventProcessingData> events;
     const char* memory = static_cast<const char*>(watch->GetBuffer());
     int offset = 0;
     do
@@ -308,9 +308,9 @@ bool wxIOCPThread::ReadEvents()
     return true;
 }
 
-void wxIOCPThread::ProcessNativeEvents(wxVector<wxEventProcessingData>& events)
+void wxIOCPThread::ProcessNativeEvents(std::vector<wxEventProcessingData>& events)
 {
-    wxVector<wxEventProcessingData>::iterator it = events.begin();
+    std::vector<wxEventProcessingData>::iterator it = events.begin();
     for ( ; it != events.end(); ++it )
     {
         const FILE_NOTIFY_INFORMATION& e = *(it->nativeEvent);

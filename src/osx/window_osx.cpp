@@ -98,7 +98,7 @@ typedef struct  {
     wxWindow* window;
 } wxHotKeyRec;
 
-wxVector<wxHotKeyRec> s_hotkeys;
+std::vector<wxHotKeyRec> s_hotkeys;
 
 #endif
 

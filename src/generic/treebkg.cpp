@@ -350,7 +350,7 @@ void wxTreebook::DoInternalRemovePageRange(size_t pagePos, size_t subCount)
 
     wxTreeItemId pageId = m_treeIds[pagePos];
 
-    wxVector<wxTreeItemId>::iterator itPos = m_treeIds.begin() + pagePos;
+    std::vector<wxTreeItemId>::iterator itPos = m_treeIds.begin() + pagePos;
     m_treeIds.erase(itPos, itPos + subCount + 1);
 
     if ( m_selection != wxNOT_FOUND )

@@ -22,7 +22,7 @@
 #endif // WX_PRECOMP
 
 #include "wx/uiaction.h"
-#include "wx/vector.h"
+#include <vector>
 
 #ifdef __WXGTK__
 #include "wx/stopwatch.h"
@@ -67,7 +67,7 @@ public:
     {
         m_keyDownEvents =
         m_charEvents =
-        m_keyUpEvents = wxVector<wxKeyEvent>();
+        m_keyUpEvents = std::vector<wxKeyEvent>();
     }
 
 private:
@@ -89,7 +89,7 @@ private:
         event.Skip();
     }
 
-    wxVector<wxKeyEvent> m_keyDownEvents,
+    std::vector<wxKeyEvent> m_keyDownEvents,
                          m_charEvents,
                          m_keyUpEvents;
 

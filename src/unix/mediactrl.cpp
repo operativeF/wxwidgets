@@ -31,7 +31,7 @@
 
 #include "wx/filesys.h"             // FileNameToURL()
 #include "wx/thread.h"              // wxMutex/wxMutexLocker
-#include "wx/vector.h"              // wxVector<wxString>
+#include <vector>              // std::vector<wxString>
 
 #ifdef __WXGTK__
     #include "wx/gtk/private/wrapgtk.h"
@@ -194,7 +194,7 @@ public:
                  m_debug;
     };
 
-    wxVector<Error> m_errors;
+    std::vector<Error> m_errors;
 
     friend class wxGStreamerMediaEventHandler;
     friend class wxGStreamerLoadWaitTimer;

@@ -22,7 +22,7 @@
 #endif
 
 #include "wx/fontutil.h"
-#include "wx/vector.h"
+#include <vector>
 
 #include "wx/x11/private.h"
 #include "wx/x11/dcclient.h"
@@ -1237,7 +1237,7 @@ void wxWindowDCImpl::DoDrawBitmap( const wxBitmap &bitmap,
                 XSetStipple( xdisplay, gc, (Pixmap) mask);
             }
 
-            wxVector<XRectangle> rects;
+            std::vector<XRectangle> rects;
             for ( wxRegionIterator iter(m_currentClippingRegion);
                   iter;
                   ++iter )

@@ -130,7 +130,7 @@ public:
 
     // This is a wrapper for LB_SETTABSTOPS message and takes tab stops in
     // dialog units, with the same conventions as LB_SETTABSTOPS uses.
-    virtual bool MSWSetTabStops(const wxVector<int>& tabStops);
+    virtual bool MSWSetTabStops(const std::vector<int>& tabStops);
 
     // Windows callbacks
     bool MSWCommand(WXUINT param, WXWORD id) override;

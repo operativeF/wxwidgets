@@ -32,6 +32,7 @@
 #include "wx/headerctrl.h"
 #include "wx/generic/gridctrl.h"
 #include "wx/generic/grideditors.h"
+#include "wx/vector.h"
 
 #include "griddemo.h"
 
@@ -1286,7 +1287,7 @@ void HandleEdits(wxGrid* grid, wxGridDirection direction, bool isInsertion)
 
     wxGridUpdateLocker locker(grid);
 
-    wxVector<int> deletions;
+    std::vector<int> deletions;
 
     for (; it != selected.end(); ++it )
     {

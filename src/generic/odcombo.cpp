@@ -591,7 +591,7 @@ void wxVListBoxComboPopup::ClearClientDatas()
 {
     if ( m_clientDataItemsType == wxClientDataType::Object )
     {
-        for ( wxVector<void*>::iterator it = m_clientDatas.begin(); it != m_clientDatas.end(); ++it )
+        for ( std::vector<void*>::iterator it = m_clientDatas.begin(); it != m_clientDatas.end(); ++it )
             delete (wxClientData*) *it;
     }
 
@@ -724,7 +724,7 @@ void wxVListBoxComboPopup::CalcWidths()
     {
         unsigned int n = m_widths.size();
         int dirtyHandled = 0;
-        wxVector<int>& widths = m_widths;
+        std::vector<int>& widths = m_widths;
 
         // I think using wxDC::GetTextExtent is faster than
         // wxWindow::GetTextExtent (assuming same dc is used

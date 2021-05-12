@@ -31,7 +31,7 @@
 #include "wx/defs.h"
 #include "wx/object.h"
 #include "wx/string.h"
-#include "wx/vector.h"
+#include <vector>
 
 #if wxUSE_STD_CONTAINERS
     #include "wx/beforestd.h"
@@ -1185,9 +1185,9 @@ public:
 #endif // !wxUSE_STD_CONTAINERS
 
     template<typename T>
-    wxVector<T> AsVector() const
+    std::vector<T> AsVector() const
     {
-        wxVector<T> vector(size());
+        std::vector<T> vector(size());
         size_t i = 0;
 
         for ( const_iterator it = begin(); it != end(); ++it )

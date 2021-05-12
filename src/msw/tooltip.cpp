@@ -32,7 +32,7 @@
 #endif
 
 #include "wx/tokenzr.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/msw/private.h"
 
 #ifndef TTTOOLINFO_V1_SIZE
@@ -76,7 +76,7 @@ static WNDPROC gs_wndprocToolTip = (WNDPROC)NULL;
 
 // This is simply a wrapper for vector<HWND> but defined as a class to hide the
 // details from the public header.
-class wxToolTipOtherWindows : public wxVector<WXHWND>
+class wxToolTipOtherWindows : public std::vector<WXHWND>
 {
 };
 

@@ -39,7 +39,7 @@ bool wxCairoInit();
 
 #include "wx/private/graphics.h"
 #include "wx/rawbmp.h"
-#include "wx/vector.h"
+#include <vector>
 #ifdef __WXMSW__
     #include "wx/msw/enhmeta.h"
 #endif
@@ -574,7 +574,7 @@ private:
     cairo_t* m_context;
     cairo_matrix_t m_internalTransform;
 
-    wxVector<float> m_layerOpacities;
+    std::vector<float> m_layerOpacities;
 
     wxDECLARE_NO_COPY_CLASS(wxCairoContext);
 };

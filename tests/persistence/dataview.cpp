@@ -68,7 +68,7 @@ static wxDataViewCtrl* CreatePersistenceTestDVC()
                                 wxDATAVIEW_COL_SORTABLE);
 
     // Populate with DVC data.
-    wxVector<wxVariant> data;
+    std::vector<wxVariant> data;
 
     data.push_back("AAAA");
     data.push_back("BBBB");

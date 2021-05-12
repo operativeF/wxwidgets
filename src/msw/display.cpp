@@ -255,7 +255,7 @@ private:
 
     // the array containing information about all available displays, filled by
     // MultimonEnumProc()
-    wxVector<wxDisplayInfo> m_displays;
+    std::vector<wxDisplayInfo> m_displays;
 
     // The hidden window we use for receiving WM_SETTINGCHANGE and its class
     // name.

@@ -179,7 +179,7 @@ protected:
     void StopPartialCompletion();
 
     wxArrayString           m_strings;
-    wxVector<void*>         m_clientDatas;
+    std::vector<void*>         m_clientDatas;
 
     wxFont                  m_useFont;
 
@@ -193,7 +193,7 @@ protected:
 private:
 
     // Cached item widths (in pixels).
-    wxVector<int>           m_widths;
+    std::vector<int>           m_widths;
 
     // Width of currently widest item.
     int                     m_widestWidth;

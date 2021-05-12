@@ -69,8 +69,8 @@ public:
     void ClearHistory() override;
     void EnableContextMenu(bool enable = true) override;
     void EnableHistory(bool enable = true) override;
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() override;
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() override;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() override;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() override;
     void LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item) override;
     wxString GetCurrentURL() const override;
     wxString GetCurrentTitle() const override;
@@ -130,7 +130,7 @@ public:
 
     //Virtual Filesystem Support
     void RegisterHandler(wxSharedPtr<wxWebViewHandler> handler) override;
-    virtual wxVector<wxSharedPtr<wxWebViewHandler> > GetHandlers() { return m_handlerList; }
+    virtual std::vector<wxSharedPtr<wxWebViewHandler> > GetHandlers() { return m_handlerList; }
 
     void* GetNativeBackend() const override { return m_web_view; }
 
@@ -180,7 +180,7 @@ private:
     wxString m_customUserAgent;
     int m_historyLimit;
 
-    wxVector<wxSharedPtr<wxWebViewHandler> > m_handlerList;
+    std::vector<wxSharedPtr<wxWebViewHandler> > m_handlerList;
 
     //variables used for Find()
     int m_findFlags;

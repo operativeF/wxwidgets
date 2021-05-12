@@ -40,7 +40,7 @@ wxIMPLEMENT_CLASS(wxGLApp, wxApp);
 void wxGLAttribsBase::AddAttribBits(int searchVal, int combineVal)
 {
     // Search for searchVal
-    wxVector<int>::iterator it = m_GLValues.begin();
+    std::vector<int>::iterator it = m_GLValues.begin();
     while ( it != m_GLValues.end() && *it != searchVal )
         ++it;
     // Have we searchVal?
@@ -355,7 +355,7 @@ static wxGLAPI s_glAPI;
 
 #if wxUSE_OPENGL_EMULATION
 
-#include "wx/vector.h"
+#include <vector>
 
 static GLenum s_mode;
 
@@ -366,10 +366,10 @@ static GLfloat s_currentNormal[3];
 // TODO move this into a different construct with locality for all attributes
 // of a vertex
 
-static wxVector<GLfloat> s_texCoords;
-static wxVector<GLfloat> s_vertices;
-static wxVector<GLfloat> s_normals;
-static wxVector<GLfloat> s_colors;
+static std::vector<GLfloat> s_texCoords;
+static std::vector<GLfloat> s_vertices;
+static std::vector<GLfloat> s_normals;
+static std::vector<GLfloat> s_colors;
 
 static bool s_texCoordsUsed;
 static bool s_colorsUsed;

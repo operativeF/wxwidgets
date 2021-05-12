@@ -1280,7 +1280,7 @@ void wxDataViewCtrlBase::ExpandAncestors( const wxDataViewItem & item )
 
     if (!item.IsOk()) return;
 
-    wxVector<wxDataViewItem> parentChain;
+    std::vector<wxDataViewItem> parentChain;
 
     // at first we get all the parents of the selected item
     wxDataViewItem parent = m_model->GetParent(item);
@@ -2223,7 +2223,7 @@ wxDataViewListStore::wxDataViewListStore()
 
 wxDataViewListStore::~wxDataViewListStore()
 {
-    wxVector<wxDataViewListStoreLine*>::iterator it;
+    std::vector<wxDataViewListStoreLine*>::iterator it;
     for (it = m_data.begin(); it != m_data.end(); ++it)
     {
         wxDataViewListStoreLine* line = *it;
@@ -2261,7 +2261,7 @@ wxString wxDataViewListStore::GetColumnType( unsigned int pos ) const
     return m_cols[pos];
 }
 
-void wxDataViewListStore::AppendItem( const wxVector<wxVariant> &values, wxUIntPtr data )
+void wxDataViewListStore::AppendItem( const std::vector<wxVariant> &values, wxUIntPtr data )
 {
     wxCHECK_RET( values.size() == GetColumnCount(), "wrong number of values" );
     wxDataViewListStoreLine *line = new wxDataViewListStoreLine( data );
@@ -2271,7 +2271,7 @@ void wxDataViewListStore::AppendItem( const wxVector<wxVariant> &values, wxUIntP
     RowAppended();
 }
 
-void wxDataViewListStore::PrependItem( const wxVector<wxVariant> &values, wxUIntPtr data )
+void wxDataViewListStore::PrependItem( const std::vector<wxVariant> &values, wxUIntPtr data )
 {
     wxCHECK_RET( values.size() == GetColumnCount(), "wrong number of values" );
     wxDataViewListStoreLine *line = new wxDataViewListStoreLine( data );
@@ -2281,7 +2281,7 @@ void wxDataViewListStore::PrependItem( const wxVector<wxVariant> &values, wxUInt
     RowPrepended();
 }
 
-void wxDataViewListStore::InsertItem(  unsigned int row, const wxVector<wxVariant> &values,
+void wxDataViewListStore::InsertItem(  unsigned int row, const std::vector<wxVariant> &values,
                                        wxUIntPtr data )
 {
     wxCHECK_RET( values.size() == GetColumnCount(), "wrong number of values" );
@@ -2294,7 +2294,7 @@ void wxDataViewListStore::InsertItem(  unsigned int row, const wxVector<wxVarian
 
 void wxDataViewListStore::DeleteItem( unsigned int row )
 {
-    wxVector<wxDataViewListStoreLine*>::iterator it = m_data.begin() + row;
+    std::vector<wxDataViewListStoreLine*>::iterator it = m_data.begin() + row;
     delete *it;
     m_data.erase( it );
 
@@ -2303,7 +2303,7 @@ void wxDataViewListStore::DeleteItem( unsigned int row )
 
 void wxDataViewListStore::DeleteAllItems()
 {
-    wxVector<wxDataViewListStoreLine*>::iterator it;
+    std::vector<wxDataViewListStoreLine*>::iterator it;
     for (it = m_data.begin(); it != m_data.end(); ++it)
     {
         wxDataViewListStoreLine* line = *it;

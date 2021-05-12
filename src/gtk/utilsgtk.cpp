@@ -20,7 +20,7 @@
 #include "wx/apptrait.h"
 #include "wx/process.h"
 #include "wx/sysopt.h"
-#include "wx/vector.h"
+#include <vector>
 
 #include "wx/gtk/private/timer.h"
 #include "wx/evtloop.h"
@@ -289,7 +289,7 @@ public:
     {
         ProcessFrames(0);
 
-        for ( wxVector<Frame>::const_iterator it = m_frames.begin();
+        for ( std::vector<Frame>::const_iterator it = m_frames.begin();
               it != m_frames.end();
               ++it )
         {
@@ -340,7 +340,7 @@ private:
         int line;
     };
 
-    wxVector<Frame> m_frames;
+    std::vector<Frame> m_frames;
 };
 
 static void get_stackframe_callback(void* p)

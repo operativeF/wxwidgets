@@ -13,7 +13,7 @@
 
 #include "wx/textctrl.h"
 #include "wx/dynarray.h"
-#include "wx/vector.h"
+#include <vector>
 
 class wxMSWListItemData;
 class wxMSWListHeaderCustomDraw;
@@ -425,7 +425,7 @@ protected:
                                     // keep track of inserted/deleted columns
 
     // all wxMSWListItemData objects we use
-    wxVector<wxMSWListItemData *> m_internalData;
+    std::vector<wxMSWListItemData *> m_internalData;
 
     // true if we have any items with custom attributes
     bool m_hasAnyAttr;

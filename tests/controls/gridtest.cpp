@@ -270,7 +270,7 @@ protected:
         int top, bottom;
     };
 
-    typedef wxVector<RowRange> RowRanges;
+    typedef std::vector<RowRange> RowRanges;
 
     void CheckRowSelection(const RowRanges& ranges)
     {

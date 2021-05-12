@@ -16,7 +16,7 @@
 #include "wx/filesys.h"
 #include "wx/hashmap.h"
 #include "wx/hashset.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/fontenc.h"
 
 class WXDLLIMPEXP_FWD_BASE wxMBConv;
@@ -195,7 +195,7 @@ protected:
     // class for opening files (file system)
     wxFileSystem *m_FS;
     // handlers stack used by PushTagHandler and PopTagHandler
-    wxVector<wxHtmlTagHandlersHash*> m_HandlersStack;
+    std::vector<wxHtmlTagHandlersHash*> m_HandlersStack;
 
     // entity parse
     wxHtmlEntitiesParser *m_entitiesParser;

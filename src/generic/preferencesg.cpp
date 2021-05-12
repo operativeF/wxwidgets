@@ -32,7 +32,7 @@
 #include "wx/sharedptr.h"
 #include "wx/scopedptr.h"
 #include "wx/scopeguard.h"
-#include "wx/vector.h"
+#include <vector>
 
 namespace
 {
@@ -131,7 +131,7 @@ protected:
         return dlg;
     }
 
-    typedef wxVector< wxSharedPtr<wxPreferencesPage> > Pages;
+    typedef std::vector< wxSharedPtr<wxPreferencesPage> > Pages;
     Pages m_pages;
 
 private:

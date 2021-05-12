@@ -20,7 +20,7 @@
 #include "wx/string.h"
 #include "wx/frame.h"
 #include "wx/filehistory.h"
-#include "wx/vector.h"
+#include <vector>
 
 #if wxUSE_PRINTING_ARCHITECTURE
     #include "wx/print.h"
@@ -60,9 +60,9 @@ enum
 
 #define wxMAX_FILE_HISTORY 9
 
-typedef wxVector<wxDocument*> wxDocVector;
-typedef wxVector<wxView*> wxViewVector;
-typedef wxVector<wxDocTemplate*> wxDocTemplateVector;
+typedef std::vector<wxDocument*> wxDocVector;
+typedef std::vector<wxView*> wxViewVector;
+typedef std::vector<wxDocTemplate*> wxDocTemplateVector;
 
 class WXDLLIMPEXP_CORE wxDocument : public wxEvtHandler
 {

@@ -12,11 +12,11 @@
 #define _WX_MODULE_H_
 
 #include "wx/object.h"
-#include "wx/vector.h"
+#include <vector>
 
 class wxModule;
 
-typedef wxVector<wxModule*> wxModuleList;
+typedef std::vector<wxModule*> wxModuleList;
 
 // declaring a class derived from wxModule will automatically create an
 // instance of this class on program startup, call its OnInit() method and call
@@ -94,12 +94,12 @@ private:
 
     // module dependencies: contains wxClassInfo pointers for all modules which
     // must be initialized before this one
-    typedef wxVector<wxClassInfo*> wxArrayClassInfo;
+    typedef std::vector<wxClassInfo*> wxArrayClassInfo;
     wxArrayClassInfo m_dependencies;
 
     // and the named dependencies: those will be resolved during run-time and
     // added to m_dependencies
-    wxVector<wxString> m_namedDependencies;
+    std::vector<wxString> m_namedDependencies;
 
     // used internally while initializing/cleaning up modules
     enum

@@ -313,7 +313,7 @@ private:
                            int width);
 };
 
-class wxListLineDataArray : public wxVector<wxListLineData*>
+class wxListLineDataArray : public std::vector<wxListLineData*>
 {
 public:
     void Clear()

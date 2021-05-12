@@ -28,7 +28,7 @@
 #include "wx/tracker.h"
 #include "wx/typeinfo.h"
 #include "wx/any.h"
-#include "wx/vector.h"
+#include <vector>
 
 #include "wx/meta/convertible.h"
 #include "wx/meta/removeref.h"
@@ -3982,7 +3982,7 @@ protected:
     wxEvtHandler*       m_nextHandler;
     wxEvtHandler*       m_previousHandler;
 
-    typedef wxVector<wxDynamicEventTableEntry*> DynamicEvents;
+    typedef std::vector<wxDynamicEventTableEntry*> DynamicEvents;
     DynamicEvents* m_dynamicEvents;
 
     wxList*             m_pendingEvents;

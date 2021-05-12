@@ -99,7 +99,7 @@
     #pragma warning(disable: 4127) /*  conditional expression is constant */
 
     /* There are too many false positives for this one, particularly when
-       using templates like wxVector<T> */
+       using templates like std::vector<T> */
     /* class 'foo' needs to have dll-interface to be used by clients of
        class 'bar'" */
 #   pragma warning(disable:4251)

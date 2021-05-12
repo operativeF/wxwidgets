@@ -107,7 +107,7 @@ private:
     void DeleteSinkItems();
 
     OSXPasteboard m_pasteboard;
-    wxVector<wxOSXDataSinkItem*> m_sinkItems;
+    std::vector<wxOSXDataSinkItem*> m_sinkItems;
 };
 
 #endif

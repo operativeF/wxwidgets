@@ -15,7 +15,7 @@
 #include "wx/private/webrequest.h"
 
 #include "wx/thread.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/timer.h"
 #include "wx/hashmap.h"
 

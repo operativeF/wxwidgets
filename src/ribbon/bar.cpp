@@ -17,7 +17,9 @@
 #include "wx/ribbon/art.h"
 #include "wx/dcbuffer.h"
 #include "wx/app.h"
-#include "wx/vector.h"
+
+#include <algorithm>
+#include <vector>
 
 #ifndef WX_PRECOMP
 #endif
@@ -656,12 +658,12 @@ void wxRibbonBar::RecalculateTabSizes()
             if(width >= total_small_width)
             {
                 // Do (2)
-                wxVector<PageComparedBySmallWidthAsc> sorted_pages;
+                std::vector<PageComparedBySmallWidthAsc> sorted_pages;
                 sorted_pages.reserve(numtabs);
                 for ( i = 0; i < numtabs; ++i )
                     sorted_pages.push_back(PageComparedBySmallWidthAsc(&m_pages.Item(i)));
 
-                wxVectorSort(sorted_pages);
+                std::sort(sorted_pages.begin(), sorted_pages.end());
                 width -= tabsep * (numtabs - 1);
                 for(i = 0; i < numtabs; ++i)
                 {

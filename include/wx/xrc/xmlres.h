@@ -25,7 +25,7 @@
 #include "wx/icon.h"
 #include "wx/artprov.h"
 #include "wx/colour.h"
-#include "wx/vector.h"
+#include <vector>
 
 #include "wx/xrc/xmlreshandler.h"
 
@@ -410,7 +410,7 @@ private:
     long m_version;
 
     int m_flags;
-    wxVector<wxXmlResourceHandler*> m_handlers;
+    std::vector<wxXmlResourceHandler*> m_handlers;
     wxXmlResourceDataRecords *m_data;
 #if wxUSE_FILESYSTEM
     wxFileSystem m_curFileSystem;

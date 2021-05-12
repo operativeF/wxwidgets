@@ -611,7 +611,7 @@ void wxListBox::SetHorizontalExtent(const wxString& s)
     //else: it shouldn't change
 }
 
-bool wxListBox::MSWSetTabStops(const wxVector<int>& tabStops)
+bool wxListBox::MSWSetTabStops(const std::vector<int>& tabStops)
 {
     return SendMessage(GetHwnd(), LB_SETTABSTOPS, (WPARAM)tabStops.size(),
                        (LPARAM)(tabStops.empty() ? nullptr : &tabStops[0])) == TRUE;

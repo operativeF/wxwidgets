@@ -23,11 +23,11 @@
 #include "wx/icon.h"
 #include "wx/itemid.h"
 #include "wx/weakref.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/dataobj.h"
 #include "wx/withimages.h"
 #include "wx/systhemectrl.h"
-#include "wx/vector.h"
+#include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxImageList;
 class wxItemAttr;
@@ -189,7 +189,7 @@ private:
 // wxDataViewModel
 // ---------------------------------------------------------
 
-typedef wxVector<wxDataViewModelNotifier*> wxDataViewModelNotifiers;
+typedef std::vector<wxDataViewModelNotifier*> wxDataViewModelNotifiers;
 
 class WXDLLIMPEXP_CORE wxDataViewModel: public wxRefCounter
 {
@@ -677,9 +677,9 @@ public:
         { return m_expander_column; }
 
     virtual wxDataViewColumn *GetSortingColumn() const = 0;
-    virtual wxVector<wxDataViewColumn *> GetSortingColumns() const
+    virtual std::vector<wxDataViewColumn *> GetSortingColumns() const
     {
-        wxVector<wxDataViewColumn *> columns;
+        std::vector<wxDataViewColumn *> columns;
         if ( wxDataViewColumn* col = GetSortingColumn() )
             columns.push_back(col);
         return columns;
@@ -1040,7 +1040,7 @@ public:
     wxUIntPtr GetData() const
         { return m_data; }
 
-    wxVector<wxVariant>  m_values;
+    std::vector<wxVariant>  m_values;
 
 private:
     wxUIntPtr m_data;
@@ -1057,9 +1057,9 @@ public:
     void InsertColumn( unsigned int pos, const wxString &varianttype );
     void AppendColumn( const wxString &varianttype );
 
-    void AppendItem( const wxVector<wxVariant> &values, wxUIntPtr data = 0 );
-    void PrependItem( const wxVector<wxVariant> &values, wxUIntPtr data = 0 );
-    void InsertItem(  unsigned int row, const wxVector<wxVariant> &values, wxUIntPtr data = 0 );
+    void AppendItem( const std::vector<wxVariant> &values, wxUIntPtr data = 0 );
+    void PrependItem( const std::vector<wxVariant> &values, wxUIntPtr data = 0 );
+    void InsertItem(  unsigned int row, const std::vector<wxVariant> &values, wxUIntPtr data = 0 );
     void DeleteItem( unsigned int pos );
     void DeleteAllItems();
     void ClearColumns();
@@ -1083,7 +1083,7 @@ public:
 
 
 public:
-    wxVector<wxDataViewListStoreLine*> m_data;
+    std::vector<wxDataViewListStoreLine*> m_data;
     wxArrayString                      m_cols;
 };
 
@@ -1146,11 +1146,11 @@ public:
           wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
           int width = -1, wxAlignment align = wxALIGN_LEFT, int flags = wxDATAVIEW_COL_RESIZABLE );
 
-    void AppendItem( const wxVector<wxVariant> &values, wxUIntPtr data = 0 )
+    void AppendItem( const std::vector<wxVariant> &values, wxUIntPtr data = 0 )
         { GetStore()->AppendItem( values, data ); }
-    void PrependItem( const wxVector<wxVariant> &values, wxUIntPtr data = 0 )
+    void PrependItem( const std::vector<wxVariant> &values, wxUIntPtr data = 0 )
         { GetStore()->PrependItem( values, data ); }
-    void InsertItem(  unsigned int row, const wxVector<wxVariant> &values, wxUIntPtr data = 0 )
+    void InsertItem(  unsigned int row, const std::vector<wxVariant> &values, wxUIntPtr data = 0 )
         { GetStore()->InsertItem( row, values, data ); }
     void DeleteItem( unsigned row )
         { GetStore()->DeleteItem( row ); }
@@ -1230,7 +1230,7 @@ private:
     wxClientData             *m_data;
 };
 
-typedef wxVector<wxDataViewTreeStoreNode*> wxDataViewTreeStoreNodes;
+typedef std::vector<wxDataViewTreeStoreNode*> wxDataViewTreeStoreNodes;
 
 class WXDLLIMPEXP_CORE wxDataViewTreeStoreContainerNode: public wxDataViewTreeStoreNode
 {

@@ -20,7 +20,7 @@
 
 #include "wx/print.h"
 #include "wx/printdlg.h"
-#include "wx/vector.h"
+#include <vector>
 
 #include <limits.h> // INT_MAX
 
@@ -196,7 +196,7 @@ private:
 
 
 private:
-    wxVector<int> m_PageBreaks;
+    std::vector<int> m_PageBreaks;
 
     wxString m_Document, m_BasePath;
     bool m_BasePathIsDir;
@@ -207,7 +207,7 @@ private:
     float m_MarginTop, m_MarginBottom, m_MarginLeft, m_MarginRight, m_MarginSpace;
 
     // list of HTML filters
-    static wxVector<wxHtmlFilter*> m_Filters;
+    static std::vector<wxHtmlFilter*> m_Filters;
 
     wxDECLARE_NO_COPY_CLASS(wxHtmlPrintout);
 };

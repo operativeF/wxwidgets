@@ -178,7 +178,7 @@ class TestRunner
 {
 public:
 
-    TestRunner( const wxString& name, wxPropertyGridManager* man, wxTextCtrl* ed, wxVector<wxString>* errorMessages )
+    TestRunner( const wxString& name, wxPropertyGridManager* man, wxTextCtrl* ed, std::vector<wxString>* errorMessages )
     {
         m_name = name;
         m_man = man;
@@ -218,7 +218,7 @@ public:
 protected:
     wxPropertyGridManager* m_man;
     wxTextCtrl* m_ed;
-    wxVector<wxString>* m_errorMessages;
+    std::vector<wxString>* m_errorMessages;
     wxString m_name;
 #ifdef __WXDEBUG__
     int m_preWarnings;
@@ -284,9 +284,9 @@ int gpiro_cmpfunc(const void* a, const void* b)
     return (int) (((size_t)p1->GetClientData()) - ((size_t)p2->GetClientData()));
 }
 
-wxVector<wxPGProperty*> GetPropertiesInRandomOrder( wxPropertyGridInterface* props, int iterationFlags = wxPG_ITERATE_ALL )
+std::vector<wxPGProperty*> GetPropertiesInRandomOrder( wxPropertyGridInterface* props, int iterationFlags = wxPG_ITERATE_ALL )
 {
-    wxVector<wxPGProperty*> arr;
+    std::vector<wxPGProperty*> arr;
 
     wxPropertyGridIterator it;
 
@@ -330,7 +330,7 @@ bool FormMain::RunTests( bool fullTest, bool interactive )
 
     int failures = 0;
     bool _failed_ = false;
-    wxVector<wxString> errorMessages;
+    std::vector<wxString> errorMessages;
     wxDialog* dlg = NULL;
 
     dlg = new wxDialog(this,wxID_ANY,"wxPropertyGrid Regression Tests",
@@ -455,14 +455,14 @@ bool FormMain::RunTests( bool fullTest, bool interactive )
         RT_START_TEST(DeleteProperty)
 
         wxPGVIterator it;
-        wxVector<wxPGProperty*> array;
+        std::vector<wxPGProperty*> array;
 
         for ( it = pgman->GetVIterator(wxPG_ITERATE_ALL&~(wxPG_IT_CHILDREN(wxPG_PROP_AGGREGATE)));
               !it.AtEnd();
               it.Next() )
             array.push_back(it.GetProperty());
 
-        wxVector<wxPGProperty*>::reverse_iterator it2;
+        std::vector<wxPGProperty*>::reverse_iterator it2;
 
         for ( it2 = array.rbegin(); it2 != array.rend(); ++it2 )
         {
@@ -1218,7 +1218,7 @@ bool FormMain::RunTests( bool fullTest, bool interactive )
 
         for ( i=0; i<3; i++ )
         {
-            wxVector<wxPGProperty*> arr;
+            std::vector<wxPGProperty*> arr;
 
             wxPropertyGridPage* page = pgman->GetPage(i);
 
@@ -1388,7 +1388,7 @@ bool FormMain::RunTests( bool fullTest, bool interactive )
 
         wxPropertyGridPage* page = pgman->GetPage(0);
 
-        wxVector<wxPGProperty*> arr1 = GetPropertiesInRandomOrder(page);
+        std::vector<wxPGProperty*> arr1 = GetPropertiesInRandomOrder(page);
 
         if ( !_failed_ )
         {
@@ -1406,7 +1406,7 @@ bool FormMain::RunTests( bool fullTest, bool interactive )
 
         if ( !_failed_ )
         {
-            wxVector<wxPGProperty*> arr2 = GetPropertiesInRandomOrder(page);
+            std::vector<wxPGProperty*> arr2 = GetPropertiesInRandomOrder(page);
 
             for ( i=0; i<arr2.size(); i++ )
             {
@@ -1440,7 +1440,7 @@ bool FormMain::RunTests( bool fullTest, bool interactive )
 
         if ( !_failed_ )
         {
-            wxVector<wxPGProperty*> arr2 = GetPropertiesInRandomOrder(page);
+            std::vector<wxPGProperty*> arr2 = GetPropertiesInRandomOrder(page);
 
             for ( i=0; i<arr2.size(); i++ )
             {
@@ -1475,7 +1475,7 @@ bool FormMain::RunTests( bool fullTest, bool interactive )
 
         if ( !_failed_ )
         {
-            wxVector<wxPGProperty*> arr2 = GetPropertiesInRandomOrder(page);
+            std::vector<wxPGProperty*> arr2 = GetPropertiesInRandomOrder(page);
 
             for ( i=0; i<arr2.size(); i++ )
             {

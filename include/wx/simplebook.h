@@ -14,7 +14,7 @@
 
 #if wxUSE_BOOKCTRL
 
-#include "wx/vector.h"
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // wxSimplebook: a book control without any user-actionable controller.
@@ -215,7 +215,7 @@ private:
         m_hideTimeout = 0;
     }
 
-    wxVector<wxString> m_pageTexts;
+    std::vector<wxString> m_pageTexts;
 
     wxShowEffect m_showEffect,
                  m_hideEffect;

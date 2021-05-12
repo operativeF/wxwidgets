@@ -122,7 +122,7 @@ private:
     wxTextCtrl *m_textCtrl;
     wxChoice *m_stateChoice;
 
-    typedef wxVector<wxThumbBarButton*> wxThumbBarButtons;
+    typedef std::vector<wxThumbBarButton*> wxThumbBarButtons;
     wxThumbBarButtons m_thumbBarButtons;
 };
 

@@ -23,9 +23,9 @@
 
 #include "wx/osx/private.h"
 
-wxVector<wxDialog*> wxDialog::s_modalStack;
+std::vector<wxDialog*> wxDialog::s_modalStack;
 #if wxOSX_USE_COCOA
-wxVector<bool> wxDialog::s_modalWorksStack;
+std::vector<bool> wxDialog::s_modalWorksStack;
 #endif
 
 bool wxDialog::OSXHasModalDialogsOpen()

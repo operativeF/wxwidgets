@@ -257,7 +257,7 @@ void GetClipboardData(Display* disp, Window win, wxDataObject &data, wxDataForma
         }
         case wxDF_BITMAP:
         {
-            wxVector<Atom> atomVector;
+            std::vector<Atom> atomVector;
             atomVector.push_back(XA_IMAGE_BMP);
             atomVector.push_back(XA_IMAGE_JPG);
             atomVector.push_back(XA_IMAGE_TIFF);
@@ -340,7 +340,7 @@ extern "C" void wxClipboardHandleSelectionRequest(XEvent event)
     data->GetAllFormats(dfarr.get());
 
     // retrieve the data with specific image Atom.
-    wxVector<Atom> atomVector;
+    std::vector<Atom> atomVector;
     atomVector.push_back(XA_IMAGE_BMP);
     atomVector.push_back(XA_IMAGE_JPG);
     atomVector.push_back(XA_IMAGE_TIFF);

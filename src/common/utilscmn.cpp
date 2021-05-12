@@ -76,11 +76,14 @@
 #include "wx/versioninfo.h"
 #include "wx/math.h"
 
+#include <algorithm>
 #include <cctype>
 #include <cerrno>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+
+#include "wx/vector.h"
 
 #if wxUSE_GUI
     #include "wx/filename.h"

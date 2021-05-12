@@ -16,7 +16,7 @@
 #ifndef WX_PRECOMP
     #include "wx/app.h"
     #include "wx/sizer.h"
-    #include "wx/vector.h"
+    #include <vector>
 #endif // WX_PRECOMP
 
 #include "asserthelper.h"
@@ -32,7 +32,7 @@ protected:
     ~GridSizerTestCase();
     // Clear the current sizer contents and add the specified windows to it,
     // using the same flags for all of them.
-    void SetChildren(const wxVector<wxWindow*>& children,
+    void SetChildren(const std::vector<wxWindow*>& children,
                      const wxSizerFlags& flags);
 
     wxWindow *m_win;
@@ -66,11 +66,11 @@ GridSizerTestCase::~GridSizerTestCase()
 // helpers
 // ----------------------------------------------------------------------------
 
-void GridSizerTestCase::SetChildren(const wxVector<wxWindow*>& children,
+void GridSizerTestCase::SetChildren(const std::vector<wxWindow*>& children,
                                     const wxSizerFlags& flags)
 {
     m_sizer->Clear();
-    for ( wxVector<wxWindow*>::const_iterator i = children.begin();
+    for ( std::vector<wxWindow*>::const_iterator i = children.begin();
           i != children.end();
           ++i )
     {
@@ -93,7 +93,7 @@ TEST_CASE_METHOD(GridSizerTestCase,
     const wxSize sizeRest(sizeTotal.x - sizeTotal.x / 4,
                           sizeTotal.y - sizeTotal.y / 4);
 
-    wxVector<wxWindow*> children;
+    std::vector<wxWindow*> children;
     for ( int n = 0; n < 4; n++ )
     {
         children.push_back(new wxWindow(m_win, wxID_ANY, wxDefaultPosition,

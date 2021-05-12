@@ -15,7 +15,7 @@
 #if wxUSE_PREFERENCES_EDITOR
 
 #include "wx/bitmap.h"
-#include "wx/vector.h"
+#include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 

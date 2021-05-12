@@ -3270,14 +3270,14 @@ namespace wxMouseCapture
 // NB: We use wxVector and not wxStack to be able to examine all of the stack
 //     elements for debug checks, but only the stack operations should be
 //     performed with this vector.
-wxVector<wxWindow*> stack;
+std::vector<wxWindow*> stack;
 
 // Flag preventing reentrancy in {Capture,Release}Mouse().
 wxRecursionGuardFlag changing;
 
 bool IsInCaptureStack(wxWindowBase* win)
 {
-    for ( wxVector<wxWindow*>::const_iterator it = stack.begin();
+    for ( std::vector<wxWindow*>::const_iterator it = stack.begin();
           it != stack.end();
           ++it )
     {

@@ -103,7 +103,7 @@ public:
     bool NeedsARB() const { return m_needsARB; }
 
 private:
-    wxVector<int> m_GLValues;
+    std::vector<int> m_GLValues;
     bool m_needsARB;
 };
 

@@ -1399,7 +1399,7 @@ void SurfaceD2D::DrawRGBAImage(PRectangle rc, int width, int height,
         rc.top += static_cast<int>((rc.Height() - height) / 2);
     rc.bottom = rc.top + height;
 
-    wxVector<unsigned char> image(height * width * 4);
+    std::vector<unsigned char> image(height * width * 4);
     for ( int yPixel = 0; yPixel < height; yPixel++ )
     {
         for ( int xPixel = 0; xPixel < width; xPixel++ )
@@ -1545,7 +1545,7 @@ void SurfaceD2D::MeasureWidths(Font &font_, const char *s, int len,
 {
     int fit = 0;
     wxString tbuf = stc2wx(s,len);
-    wxVector<FLOAT> poses;
+    std::vector<FLOAT> poses;
     poses.reserve(tbuf.Length());
     poses.resize(tbuf.Length());
 
@@ -2682,8 +2682,8 @@ protected:
     void OnDrawBackground(wxDC&, const wxRect&,size_t) const override;
 
     wxSTCListBoxVisualData* m_visualData;
-    wxVector<wxString>      m_labels;
-    wxVector<int>           m_imageNos;
+    std::vector<wxString>      m_labels;
+    std::vector<int>           m_imageNos;
     size_t                  m_maxStrWidth;
     int                     m_currentRow;
 

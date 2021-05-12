@@ -33,7 +33,7 @@
  * QShortcut. This handler will finally create and send the appropriate wx
  * event to the window. */
 
-#include "wx/vector.h"
+#include <vector>
 
 class QShortcut;
 template < class T > class QList;
@@ -45,7 +45,7 @@ public:
     wxAcceleratorTable(int n, const wxAcceleratorEntry entries[]);
 
     // Implementation
-    wxVector<QShortcut*> ConvertShortcutTable( QWidget *parent ) const;
+    std::vector<QShortcut*> ConvertShortcutTable( QWidget *parent ) const;
 
     bool Ok() const { return IsOk(); }
     bool IsOk() const;

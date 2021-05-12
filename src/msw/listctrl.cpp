@@ -36,7 +36,7 @@
 #endif
 
 #include "wx/imaglist.h"
-#include "wx/vector.h"
+#include <vector>
 
 #include "wx/msw/private.h"
 #include "wx/msw/private/customdraw.h"
@@ -3299,7 +3299,7 @@ void wxListCtrl::OnPaint(wxPaintEvent& event)
             }
 
             const int numCols = GetColumnCount();
-            wxVector<int> indexArray(numCols);
+            std::vector<int> indexArray(numCols);
             if ( !ListView_GetColumnOrderArray(GetHwnd(),
                                                numCols,
                                                &indexArray[0]) )

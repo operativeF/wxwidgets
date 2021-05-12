@@ -1410,7 +1410,7 @@ private :
     wxCOMPtr<ID2D1Factory> m_direct2dfactory;
 
     mutable wxCOMPtr<ID2D1GeometryGroup> m_combinedGeometry;
-    wxVector<ID2D1Geometry*> m_pTransformedGeometries;
+    std::vector<ID2D1Geometry*> m_pTransformedGeometries;
 
     bool m_currentPointSet;
     D2D1_POINT_2F m_currentPoint;
@@ -2724,7 +2724,7 @@ protected:
     }
 
 private:
-    wxVector<D2D1_GRADIENT_STOP> m_gradientStops;
+    std::vector<D2D1_GRADIENT_STOP> m_gradientStops;
 };
 
 template <typename B>

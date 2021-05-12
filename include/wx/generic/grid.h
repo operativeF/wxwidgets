@@ -1073,7 +1073,7 @@ private:
     int m_rightCol;
 };
 
-typedef wxVector<wxGridBlockCoords> wxGridBlockCoordsVector;
+typedef std::vector<wxGridBlockCoords> wxGridBlockCoordsVector;
 
 // ----------------------------------------------------------------------------
 // wxGridBlockDiffResult: The helper struct uses as a result type for difference

@@ -13,7 +13,7 @@
 
 #include "wx/defs.h"
 
-#include "wx/vector.h"
+#include <vector>
 
 /*
   This header defines legacy dynamic arrays and object arrays (i.e. arrays
@@ -41,7 +41,7 @@ typedef int (wxCMPFUNC_CONV *CMPFUNC)(const void* pItem1, const void* pItem2);
 }
 
 // ----------------------------------------------------------------------------
-// Array class providing legacy dynamic arrays API on top of wxVector<>
+// Array class providing legacy dynamic arrays API on top of std::vector<>
 // ----------------------------------------------------------------------------
 
 // For some reasons lost in the depths of time, sort functions with different
@@ -76,13 +76,13 @@ private:
 };
 
 template <typename T, typename Sorter = wxSortedArray_SortFunction<T> >
-class wxBaseArray : public wxVector<T>
+class wxBaseArray : public std::vector<T>
 {
 public:
     typedef typename Sorter::CMPFUNC SCMPFUNC;
     typedef typename wxArray_SortFunction<T>::CMPFUNC CMPFUNC;
 
-    typedef wxVector<T> base_vec;
+    typedef std::vector<T> base_vec;
 
     typedef typename base_vec::value_type value_type;
     typedef typename base_vec::reference reference;
@@ -111,7 +111,7 @@ public:
 
     void Shrink()
     {
-        wxShrinkToFit(*this);
+        this->shrink_to_fit();
     }
 
     size_t GetCount() const { return this->size(); }

@@ -45,8 +45,8 @@ public:
 
     void LoadURL(const wxString& url) override;
     void LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item) override;
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() override;
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() override;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() override;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() override;
 
     bool CanGoForward() const override;
     bool CanGoBack() const override;

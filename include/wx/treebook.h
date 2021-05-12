@@ -18,7 +18,7 @@
 #include "wx/bookctrl.h"
 #include "wx/containr.h"
 #include "wx/treebase.h"        // for wxTreeItemId
-#include "wx/vector.h"
+#include <vector>
 
 typedef wxWindow wxTreebookPage;
 
@@ -149,7 +149,7 @@ protected:
     void OnTreeNodeExpandedCollapsed(wxTreeEvent& event);
 
     // array of tree item ids corresponding to the page indices
-    wxVector<wxTreeItemId> m_treeIds;
+    std::vector<wxTreeItemId> m_treeIds;
 
 private:
     // The real implementations of page insertion functions

@@ -440,7 +440,7 @@ HRESULT wxWebViewEdgeImpl::OnWebViewCreated(HRESULT result, ICoreWebView2Control
 
     if (!m_pendingUserScripts.empty())
     {
-        for (wxVector<wxString>::iterator it = m_pendingUserScripts.begin();
+        for (std::vector<wxString>::iterator it = m_pendingUserScripts.begin();
             it != m_pendingUserScripts.end(); ++it)
             m_ctrl->AddUserScript(*it);
         m_pendingUserScripts.clear();
@@ -583,9 +583,9 @@ void wxWebViewEdge::LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item)
     m_impl->m_historyPosition = pos;
 }
 
-wxVector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewEdge::GetBackwardHistory()
+std::vector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewEdge::GetBackwardHistory()
 {
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > backhist;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > backhist;
     //As we don't have std::copy or an iterator constructor in the wxwidgets
     //native vector we construct it by hand
     for (int i = 0; i < m_impl->m_historyPosition; i++)
@@ -595,9 +595,9 @@ wxVector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewEdge::GetBackwardHistory()
     return backhist;
 }
 
-wxVector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewEdge::GetForwardHistory()
+std::vector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewEdge::GetForwardHistory()
 {
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > forwardhist;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > forwardhist;
     //As we don't have std::copy or an iterator constructor in the wxwidgets
     //native vector we construct it by hand
     for (int i = m_impl->m_historyPosition + 1; i < static_cast<int>(m_impl->m_historyList.size()); i++)

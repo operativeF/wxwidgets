@@ -44,7 +44,7 @@ struct wxIfImpl<false>
 // TTrue if the condition Cond (boolean compile-time constant) was met and
 // TFalse if it wasn't.
 //
-// See wxVector<T> in vector.h for usage example
+// See std::vector<T> in vector.h for usage example
 template<bool Cond, typename TTrue, typename TFalse>
 struct wxIf
 {

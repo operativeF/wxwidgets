@@ -47,7 +47,7 @@
 #include "wx/evtloop.h"
 #include "wx/thread.h"
 #include "wx/scopeguard.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/weakref.h"
 
 #include "wx/msw/private.h"
@@ -132,7 +132,7 @@ struct ClassRegInfo
 namespace
 {
 
-wxVector<ClassRegInfo> gs_regClassesInfo;
+std::vector<ClassRegInfo> gs_regClassesInfo;
 
 } // anonymous namespace
 

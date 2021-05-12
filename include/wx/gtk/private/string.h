@@ -36,7 +36,7 @@ private:
 // ----------------------------------------------------------------------------
 
 #include "wx/string.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/sharedptr.h"
 
 class wxGtkCollatableString
@@ -73,7 +73,7 @@ public:
 
         wxSharedPtr<wxGtkCollatableString> new_ptr( new wxGtkCollatableString( new_label, new_key ) );
 
-        wxVector< wxSharedPtr<wxGtkCollatableString> >::iterator iter;
+        std::vector< wxSharedPtr<wxGtkCollatableString> >::iterator iter;
         for (iter = m_list.begin(); iter != m_list.end(); ++iter)
         {
             wxSharedPtr<wxGtkCollatableString> ptr = *iter;
@@ -112,7 +112,7 @@ public:
     }
 
 private:
-    wxVector< wxSharedPtr<wxGtkCollatableString> > m_list;
+    std::vector< wxSharedPtr<wxGtkCollatableString> > m_list;
 };
 
 

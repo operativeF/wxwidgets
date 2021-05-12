@@ -520,7 +520,7 @@ void wxGraphicsPathData::AddArcToPoint( wxDouble x1, wxDouble y1 , wxDouble x2, 
 
 void wxGraphicsGradientStops::Add(const wxGraphicsGradientStop& stop)
 {
-    for ( wxVector<wxGraphicsGradientStop>::iterator it = m_stops.begin();
+    for ( std::vector<wxGraphicsGradientStop>::iterator it = m_stops.begin();
           it != m_stops.end();
           ++it )
     {

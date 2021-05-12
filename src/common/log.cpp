@@ -40,14 +40,12 @@
 #include "wx/thread.h"
 #include "wx/private/threadinfo.h"
 #include "wx/crt.h"
-#include "wx/vector.h"
 
 // other standard headers
 #include <cerrno>
-
 #include <cstring>
-
 #include <cstdlib>
+#include <vector>
 
 #if defined(__WINDOWS__)
     #include "wx/msw/private.h" // includes windows.h
@@ -83,7 +81,7 @@ namespace
 
 // contains messages logged by the other threads and waiting to be shown until
 // Flush() is called in the main one
-typedef wxVector<wxLogRecord> wxLogRecords;
+using wxLogRecords = std::vector<wxLogRecord>;
 wxLogRecords gs_bufferedLogRecords;
 
 #define WX_DEFINE_LOG_CS(name) WX_DEFINE_GLOBAL_VAR(wxCriticalSection, name##CS)

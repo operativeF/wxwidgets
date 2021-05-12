@@ -32,7 +32,7 @@
 #include "wx/dataobj.h"
 
 #include "wx/scopedarray.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/msw/private.h"         // includes <windows.h>
 #include "wx/msw/dib.h"
 #include "wx/msw/wrapshl.h"
@@ -244,7 +244,7 @@ private:
         FORMATETC *pformatetc;
         STGMEDIUM *pmedium;
     };
-    typedef wxVector<SystemDataEntry*> SystemData;
+    typedef std::vector<SystemDataEntry*> SystemData;
 
     // get system data specified by the given format
     bool GetSystemData(wxDataFormat format, STGMEDIUM*) const;

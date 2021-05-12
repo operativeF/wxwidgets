@@ -98,7 +98,7 @@ private:
 
     static int ms_presentationDirection;
 
-    static wxVector<wxNotificationMessageWindow*> ms_visibleNotifications;
+    static std::vector<wxNotificationMessageWindow*> ms_visibleNotifications;
 
     static void AddVisibleNotification(wxNotificationMessageWindow* notif);
 
@@ -123,7 +123,7 @@ wxBEGIN_EVENT_TABLE(wxNotificationMessageWindow, wxFrame)
     EVT_TIMER(wxID_ANY, wxNotificationMessageWindow::OnTimer)
 wxEND_EVENT_TABLE()
 
-wxVector<wxNotificationMessageWindow*> wxNotificationMessageWindow::ms_visibleNotifications;
+std::vector<wxNotificationMessageWindow*> wxNotificationMessageWindow::ms_visibleNotifications;
 
 wxNotificationMessageWindow::wxNotificationMessageWindow(wxGenericNotificationMessageImpl* notificationImpl)
                            : wxFrame(nullptr, wxID_ANY, _("Notice"),
@@ -323,7 +323,7 @@ void wxNotificationMessageWindow::OnActionButtonClicked(wxCommandEvent& event)
 void wxNotificationMessageWindow::AddVisibleNotification(wxNotificationMessageWindow* notif)
 {
     bool found = false;
-    for ( wxVector<wxNotificationMessageWindow*>::iterator it = ms_visibleNotifications.begin();
+    for ( std::vector<wxNotificationMessageWindow*>::iterator it = ms_visibleNotifications.begin();
         it != ms_visibleNotifications.end(); ++it )
     {
         if ( *it == notif )
@@ -341,7 +341,7 @@ void wxNotificationMessageWindow::AddVisibleNotification(wxNotificationMessageWi
 
 void wxNotificationMessageWindow::RemoveVisibleNotification(wxNotificationMessageWindow* notif)
 {
-    for ( wxVector<wxNotificationMessageWindow*>::iterator it = ms_visibleNotifications.begin();
+    for ( std::vector<wxNotificationMessageWindow*>::iterator it = ms_visibleNotifications.begin();
         it != ms_visibleNotifications.end(); ++it )
     {
         if ( *it == notif )
@@ -383,7 +383,7 @@ void wxNotificationMessageWindow::ResizeAndFitVisibleNotifications()
     int maxWidth = -1;
 
     // Determine max width
-    for (wxVector<wxNotificationMessageWindow*>::iterator notif = ms_visibleNotifications.begin();
+    for (std::vector<wxNotificationMessageWindow*>::iterator notif = ms_visibleNotifications.begin();
         notif != ms_visibleNotifications.end(); ++notif)
     {
         wxSize notifSize = (*notif)->GetSize();
@@ -398,7 +398,7 @@ void wxNotificationMessageWindow::ResizeAndFitVisibleNotifications()
 
     int prevNotifHeight = 0;
 
-    for (wxVector<wxNotificationMessageWindow*>::iterator notif = ms_visibleNotifications.begin();
+    for (std::vector<wxNotificationMessageWindow*>::iterator notif = ms_visibleNotifications.begin();
         notif != ms_visibleNotifications.end(); ++notif)
     {
         // Modify existing maxwidth

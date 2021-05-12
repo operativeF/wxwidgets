@@ -29,7 +29,7 @@
 #endif // WX_PRECOMP
 
 #include "wx/display.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/listimpl.cpp"
 #include "wx/private/window.h"
 #include "wx/scopedptr.h"
@@ -2232,7 +2232,7 @@ void wxBoxSizer::RepositionChildren(const wxSize& minSize)
     int totalProportion = m_totalProportion;
 
     // size of the (visible) items in major direction, -1 means "not fixed yet"
-    wxVector<int> majorSizes(GetItemCount(), wxDefaultCoord);
+    std::vector<int> majorSizes(GetItemCount(), wxDefaultCoord);
 
 
     // Check for the degenerated case when we don't have enough space for even

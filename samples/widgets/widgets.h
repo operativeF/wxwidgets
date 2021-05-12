@@ -47,7 +47,7 @@ class WXDLLIMPEXP_FWD_CORE WidgetsBookCtrl;
 class WidgetsPageInfo;
 
 #include "wx/panel.h"
-#include "wx/vector.h"
+#include <vector>
 
 // INTRODUCING NEW PAGES DON'T FORGET TO ADD ENTRIES TO 'WidgetsCategories'
 enum
@@ -79,7 +79,7 @@ enum
     ALL_CTRLS        = 1 << ALL_PAGE
 };
 
-typedef wxVector<wxWindow *> Widgets;
+typedef std::vector<wxWindow *> Widgets;
 
 // ----------------------------------------------------------------------------
 // WidgetsPage: a book page demonstrating some widget

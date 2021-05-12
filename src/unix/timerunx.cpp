@@ -31,7 +31,7 @@
 #include "wx/apptrait.h"
 #include "wx/longlong.h"
 #include "wx/time.h"
-#include "wx/vector.h"
+#include <vector>
 
 #include <sys/time.h>
 #include <signal.h>
@@ -128,7 +128,7 @@ bool wxTimerScheduler::NotifyExpired()
 
     const wxUsecClock_t now = wxGetUTCTimeUSec();
 
-    typedef wxVector<wxUnixTimerImpl *> TimerImpls;
+    typedef std::vector<wxUnixTimerImpl *> TimerImpls;
     TimerImpls toNotify;
     for ( wxTimerList::iterator next,
             cur = m_timers.begin(); cur != m_timers.end(); cur = next )

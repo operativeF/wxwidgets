@@ -140,9 +140,9 @@ wxgtk_webview_webkit_navigation(WebKitWebView *,
     {
         wxString wxuri = uri;
         wxSharedPtr<wxWebViewHandler> handler;
-        wxVector<wxSharedPtr<wxWebViewHandler> > handlers = webKitCtrl->GetHandlers();
+        std::vector<wxSharedPtr<wxWebViewHandler> > handlers = webKitCtrl->GetHandlers();
         //We are not vetoed so see if we match one of the additional handlers
-        for(wxVector<wxSharedPtr<wxWebViewHandler> >::iterator it = handlers.begin();
+        for(std::vector<wxSharedPtr<wxWebViewHandler> >::iterator it = handlers.begin();
             it != handlers.end(); ++it)
         {
             if(wxuri.substr(0, (*it)->GetName().length()) == (*it)->GetName())
@@ -362,10 +362,10 @@ wxgtk_webview_webkit_resource_req(WebKitWebView *,
     wxString uri = webkit_network_request_get_uri(request);
 
     wxSharedPtr<wxWebViewHandler> handler;
-    wxVector<wxSharedPtr<wxWebViewHandler> > handlers = webKitCtrl->GetHandlers();
+    std::vector<wxSharedPtr<wxWebViewHandler> > handlers = webKitCtrl->GetHandlers();
 
     //We are not vetoed so see if we match one of the additional handlers
-    for(wxVector<wxSharedPtr<wxWebViewHandler> >::iterator it = handlers.begin();
+    for(std::vector<wxSharedPtr<wxWebViewHandler> >::iterator it = handlers.begin();
         it != handlers.end(); ++it)
     {
         if(uri.substr(0, (*it)->GetName().length()) == (*it)->GetName())
@@ -623,9 +623,9 @@ void wxWebViewWebKit::EnableHistory(bool enable)
     }
 }
 
-wxVector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewWebKit::GetBackwardHistory()
+std::vector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewWebKit::GetBackwardHistory()
 {
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > backhist;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > backhist;
     WebKitWebBackForwardList* history;
     history = webkit_web_view_get_back_forward_list(m_web_view);
     GList* list = webkit_web_back_forward_list_get_back_list_with_limit(history,
@@ -644,9 +644,9 @@ wxVector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewWebKit::GetBackwardHistory
     return backhist;
 }
 
-wxVector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewWebKit::GetForwardHistory()
+std::vector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewWebKit::GetForwardHistory()
 {
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > forwardhist;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > forwardhist;
     WebKitWebBackForwardList* history;
     history = webkit_web_view_get_back_forward_list(m_web_view);
     GList* list = webkit_web_back_forward_list_get_forward_list_with_limit(history,

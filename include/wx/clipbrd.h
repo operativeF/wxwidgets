@@ -19,7 +19,7 @@
 #include "wx/event.h"
 #include "wx/chartype.h"
 #include "wx/dataobj.h"     // for wxDataFormat
-#include "wx/vector.h"
+#include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxClipboard;
 
@@ -124,7 +124,7 @@ public:
 
 
 protected:
-    wxVector<wxDataFormat> m_formats;
+    std::vector<wxDataFormat> m_formats;
 
     wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxClipboardEvent);
 };

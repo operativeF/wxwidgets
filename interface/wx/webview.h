@@ -974,14 +974,14 @@ public:
         Returns a list of items in the back history. The first item in the
         vector is the first page that was loaded by the control.
     */
-    virtual wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() = 0;
+    virtual std::vector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() = 0;
 
     /**
         Returns a list of items in the forward history. The first item in the
         vector is the next item in the history with respect to the currently
         loaded page.
     */
-    virtual wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() = 0;
+    virtual std::vector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() = 0;
 
     /**
         Navigate back in the history of visited pages.

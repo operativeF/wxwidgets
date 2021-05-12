@@ -1096,7 +1096,7 @@ void wxWindowQt::SetAcceleratorTable( const wxAcceleratorTable& accel )
     wxWindowBase::SetAcceleratorTable( accel );
 
     // Disable previously set accelerators
-    for ( wxVector<QShortcut*>::const_iterator it = m_qtShortcuts.begin();
+    for ( std::vector<QShortcut*>::const_iterator it = m_qtShortcuts.begin();
           it != m_qtShortcuts.end(); ++it )
     {
         delete *it;
@@ -1105,7 +1105,7 @@ void wxWindowQt::SetAcceleratorTable( const wxAcceleratorTable& accel )
     m_qtShortcuts = accel.ConvertShortcutTable(GetHandle());
 
     // Connect shortcuts to window
-    for ( wxVector<QShortcut*>::const_iterator it = m_qtShortcuts.begin();
+    for ( std::vector<QShortcut*>::const_iterator it = m_qtShortcuts.begin();
           it != m_qtShortcuts.end(); ++it )
     {
         QObject::connect( *it, &QShortcut::activated, m_qtShortcutHandler.get(), &wxQtShortcutHandler::activated );

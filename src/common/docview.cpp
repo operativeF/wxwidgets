@@ -53,7 +53,7 @@
 #include "wx/tokenzr.h"
 #include "wx/filename.h"
 #include "wx/stdpaths.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/scopedarray.h"
 #include "wx/scopedptr.h"
 #include "wx/scopeguard.h"

@@ -35,7 +35,7 @@
 #include "wx/thread.h"
 #include "wx/apptrait.h"
 #include "wx/evtloop.h"
-#include "wx/vector.h"
+#include <vector>
 
 
 #include "wx/msw/private.h"
@@ -94,7 +94,7 @@ static wxWinAPI::Event gs_heventShutdown;
 
 // handles of all threads monitoring the execution of asynchronously running
 // processes
-static wxVector<HANDLE> gs_asyncThreads;
+static std::vector<HANDLE> gs_asyncThreads;
 
 // ----------------------------------------------------------------------------
 // private types
@@ -351,7 +351,7 @@ wxExecuteWindowCbk(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         else
         {
             // asynchronous execution - we should do the clean up
-            for ( wxVector<HANDLE>::iterator it = gs_asyncThreads.begin();
+            for ( std::vector<HANDLE>::iterator it = gs_asyncThreads.begin();
                   it != gs_asyncThreads.end();
                   ++it )
             {

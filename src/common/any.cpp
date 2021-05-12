@@ -21,7 +21,7 @@
     #include "wx/crt.h"
 #endif
 
-#include "wx/vector.h"
+#include <vector>
 #include "wx/module.h"
 #include "wx/hashmap.h"
 #include "wx/hashset.h"
@@ -114,7 +114,7 @@ public:
 
 private:
     wxAnyTypeToVariantDataFactoryMap        m_anyToVariant;
-    wxVector<wxAnyToVariantRegistration*>   m_anyToVariantRegs;
+    std::vector<wxAnyToVariantRegistration*>   m_anyToVariantRegs;
 };
 
 static wxScopedPtr<wxAnyValueTypeGlobals>& GetAnyValueTypeGlobals()

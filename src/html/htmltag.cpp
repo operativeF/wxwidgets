@@ -21,7 +21,7 @@
 #include "wx/html/htmlpars.h"
 #include "wx/html/styleparams.h"
 
-#include "wx/vector.h"
+#include <vector>
 
 #include <cstdarg>
 #include <cstdio> // for vsscanf
@@ -55,7 +55,7 @@ struct wxHtmlCacheItem
 };
 
 // NB: this is an empty class and not typedef because of forward declaration
-class wxHtmlTagsCacheData : public wxVector<wxHtmlCacheItem>
+class wxHtmlTagsCacheData : public std::vector<wxHtmlCacheItem>
 {
 };
 

@@ -56,7 +56,7 @@ private:
     QTabWidget *m_qtTabWidget;
 
     // internal array to store imageId for each page:
-    wxVector<int> m_images;
+    std::vector<int> m_images;
 
     wxDECLARE_DYNAMIC_CLASS( wxNotebook );
 };

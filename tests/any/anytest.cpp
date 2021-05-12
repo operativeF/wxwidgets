@@ -13,7 +13,7 @@
 #include "wx/any.h"
 #include "wx/datetime.h"
 #include "wx/object.h"
-#include "wx/vector.h"
+#include <vector>
 
 #include <math.h>
 
@@ -424,7 +424,7 @@ void wxAnyTestCase::GetAs()
 
 class MyClass;
 
-static wxVector<MyClass*> gs_myClassInstances;
+static std::vector<MyClass*> gs_myClassInstances;
 
 class MyClass
 {

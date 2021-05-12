@@ -213,7 +213,7 @@
     @library{wxbase}
     @category{containers}
 
-    @see @ref overview_container, wxList<T>, wxVector<T>
+    @see @ref overview_container, wxList<T>, std::vector<T>
 */
 template <typename T>
 class wxArray<T>

@@ -14,7 +14,7 @@
 
 #if wxUSE_TASKBARBUTTON
 
-#include "wx/vector.h"
+#include <vector>
 #include "wx/taskbarbutton.h"
 
 class WXDLLIMPEXP_FWD_CORE wxITaskbarList3;
@@ -53,7 +53,7 @@ private:
     wxWindow* m_parent;
     wxITaskbarList3 *m_taskbarList;
 
-    typedef wxVector<wxThumbBarButton*> wxThumbBarButtons;
+    typedef std::vector<wxThumbBarButton*> wxThumbBarButtons;
     wxThumbBarButtons m_thumbBarButtons;
 
     int m_progressRange;

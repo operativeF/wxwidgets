@@ -31,7 +31,7 @@
 #endif // WX_PRECOMP
 
 #include "wx/display.h"
-#include "wx/vector.h"
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // constants
@@ -61,7 +61,7 @@ public:
 private:
     wxTipWindow* m_parent;
 
-    wxVector<wxString> m_textLines;
+    std::vector<wxString> m_textLines;
     wxCoord m_heightLine;
 
 

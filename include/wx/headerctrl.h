@@ -15,7 +15,7 @@
 #if wxUSE_HEADERCTRL
 
 #include "wx/dynarray.h"
-#include "wx/vector.h"
+#include <vector>
 
 #include "wx/headercol.h"
 
@@ -371,7 +371,7 @@ private:
 
 
     // all our current columns
-    typedef wxVector<wxHeaderColumnSimple> Columns;
+    typedef std::vector<wxHeaderColumnSimple> Columns;
     Columns m_cols;
 
     // the column currently used for sorting or -1 if none

@@ -16,7 +16,7 @@
     platforms, please always use @c std::stack directly instead.
 
     The main difference of this class compared to the standard version is that
-    it always uses wxVector<T> as the underlying container and doesn't allow
+    it always uses std::vector<T> as the underlying container and doesn't allow
     specifying an alternative container type. Another missing part is that the
     comparison operators between wxStacks are not currently implemented. Other
     than that, this class is exactly the same as @c std::stack, so please refer
@@ -25,7 +25,7 @@
     @nolibrary
     @category{containers}
 
-    @see @ref overview_container, wxVector<T>
+    @see @ref overview_container, std::vector<T>
 
     @since 2.9.2
 */
@@ -34,7 +34,7 @@ class wxStack<T>
 {
 public:
     /// Type of the underlying container used.
-    typedef wxVector<T> container_type;
+    typedef std::vector<T> container_type;
 
     /// Type returned by size() method.
     typedef typename container_type::size_type size_type;

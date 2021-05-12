@@ -1492,7 +1492,7 @@ void ImageTestCase::CreateBitmapFromCursor()
     }
     else
     {
-        wxVector<wxPoint> coords;
+        std::vector<wxPoint> coords;
         coords.push_back(wxPoint(14, 10)); // blue square
         coords.push_back(wxPoint(8, 22));  // red square
         coords.push_back(wxPoint(26, 18)); // yellow square

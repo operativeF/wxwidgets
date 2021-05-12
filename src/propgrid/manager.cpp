@@ -229,7 +229,7 @@ public:
 
     virtual ~wxPGHeaderCtrl()
     {
-        for (wxVector<wxHeaderColumnSimple*>::const_iterator it = m_columns.begin();
+        for (std::vector<wxHeaderColumnSimple*>::const_iterator it = m_columns.begin();
              it != m_columns.end(); ++it)
         {
             delete *it;
@@ -384,7 +384,7 @@ private:
 
     wxPropertyGridManager*          m_manager;
     const wxPropertyGridPage*       m_page;
-    wxVector<wxHeaderColumnSimple*> m_columns;
+    std::vector<wxHeaderColumnSimple*> m_columns;
 };
 
 #endif // wxUSE_HEADERCTRL

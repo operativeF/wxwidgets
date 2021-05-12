@@ -20,7 +20,7 @@ class WXDLLIMPEXP_FWD_CORE wxImageList;
 #include "wx/ribbon/control.h"
 #include "wx/ribbon/page.h"
 
-#include "wx/vector.h"
+#include <vector>
 
 enum wxRibbonBarOption
 {
@@ -216,7 +216,7 @@ protected:
 
     wxRibbonDisplayMode m_ribbon_state;
 
-    wxVector<wxImageList*> m_image_lists;
+    std::vector<wxImageList*> m_image_lists;
 
 #ifndef SWIG
     wxDECLARE_CLASS(wxRibbonBar);

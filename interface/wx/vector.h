@@ -1,17 +1,17 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:        vector.h
-// Purpose:     interface of wxVector<T>
+// Purpose:     interface of std::vector<T>
 // Author:      wxWidgets team
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
 /**
 
-    wxVector<T> is a template class which implements most of the @c std::vector
+    std::vector<T> is a template class which implements most of the @c std::vector
     class and can be used like it.
 
     If wxWidgets is compiled in STL mode, wxVector will just be a typedef to
-    @c std::vector. Just like for @c std::vector, objects stored in wxVector<T>
+    @c std::vector. Just like for @c std::vector, objects stored in std::vector<T>
     need to be @e assignable but don't have to be @e "default constructible".
 
     Please refer to the STL documentation for further information.
@@ -22,7 +22,7 @@
     @see @ref overview_container, wxList<T>, wxArray<T>, wxVectorSort<T>
 */
 template<typename T>
-class wxVector<T>
+class std::vector<T>
 {
 public:
     typedef size_t size_type;
@@ -66,7 +66,7 @@ public:
     /**
         Copy constructor.
     */
-    wxVector(const wxVector<T>& c);
+    wxVector(const std::vector<T>& c);
 
     /**
         Destructor.
@@ -290,30 +290,3 @@ public:
      */
     void swap(wxVector& v);
 };
-
-
-/**
-   Sort the contents of a @c wxVector<T>.  In a STL build this function will
-   be defined as a thin wrapper around std::sort.  To be sortable the
-   contained type must support the less-than operator.
-
-   @code
-   wxVector<SomeClass> v;
-   ... // items are added to the vector v...
-   wxVectorSort(v);
-   @endcode
-
-   @see wxVector<T>
-*/
-template<typename T>
-void wxVectorSort(wxVector<T>& v);
-
-/**
-    Returns true if the vector contains the given value.
-
-    This is just a trivial wrapper around std::find().
-
-    @since 3.1.5
- */
-template<typename T>
-bool wxVectorContains(const wxVector<T>& v, const T& value);

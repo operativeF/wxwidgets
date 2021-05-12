@@ -484,7 +484,7 @@ public:
 
     @since 3.1.0
 */
-typedef wxVector<wxTaskBarJumpListItem*> wxTaskBarJumpListItems;
+typedef std::vector<wxTaskBarJumpListItem*> wxTaskBarJumpListItems;
 
 /**
     @class wxTaskBarJumpListCategory
@@ -588,7 +588,7 @@ public:
 /**
     A vector of wxTaskBarJumpListCategory pointers.
 */
-typedef wxVector<wxTaskBarJumpListCategory*> wxTaskBarJumpListCategories;
+typedef std::vector<wxTaskBarJumpListCategory*> wxTaskBarJumpListCategories;
 
 /**
     @class wxTaskBarJumpList

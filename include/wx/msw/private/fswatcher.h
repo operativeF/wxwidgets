@@ -11,7 +11,7 @@
 #define WX_MSW_PRIVATE_FSWATCHER_H_
 
 #include "wx/filename.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/msw/private.h"
 
 // ============================================================================
@@ -282,7 +282,7 @@ protected:
     wxFSWatchEntries m_watches;
 
     // Contains the watches which had been removed but are still pending.
-    typedef wxVector< wxSharedPtr<wxFSWatchEntryMSW> > Watches;
+    typedef std::vector< wxSharedPtr<wxFSWatchEntryMSW> > Watches;
     Watches m_removedWatches;
 };
 
@@ -316,7 +316,7 @@ protected:
     //         true otherwise
     bool ReadEvents();
 
-    void ProcessNativeEvents(wxVector<wxEventProcessingData>& events);
+    void ProcessNativeEvents(std::vector<wxEventProcessingData>& events);
 
     void SendEvent(wxFileSystemWatcherEvent& evt);
 

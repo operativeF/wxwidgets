@@ -45,14 +45,14 @@ public:
     //which are added as documentcomplete events arrive, unless we are loading
     //an item from the history. The position is stored as an int, and reflects
     //where we are in the history list.
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > m_historyList;
-    wxVector<ClassFactory*> m_factories;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > m_historyList;
+    std::vector<ClassFactory*> m_factories;
     int m_historyPosition;
     bool m_historyLoadingFromList;
     bool m_historyEnabled;
 
     //We store find flag, results and position.
-    wxVector<wxFindPointers> m_findPointers;
+    std::vector<wxFindPointers> m_findPointers;
     int m_findFlags;
     wxString m_findText;
     int m_findPosition;

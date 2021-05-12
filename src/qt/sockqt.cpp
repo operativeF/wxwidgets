@@ -77,7 +77,7 @@ public:
     {
         QSocketNotifier::Type type = d == INPUT ? QSocketNotifier::Read :
                                                   QSocketNotifier::Write;
-        for ( wxVector<wxQtFDIONotifier*>::iterator it = m_qtNotifiers.begin();
+        for ( std::vector<wxQtFDIONotifier*>::iterator it = m_qtNotifiers.begin();
               it != m_qtNotifiers.end(); ++it )
         {
             wxQtFDIONotifier* notifier = static_cast<wxQtFDIONotifier*>(*it);
@@ -91,7 +91,7 @@ public:
             }
         }
     }
-    wxVector<wxQtFDIONotifier*> m_qtNotifiers;
+    std::vector<wxQtFDIONotifier*> m_qtNotifiers;
 };
 
 #if defined(__UNIX__)

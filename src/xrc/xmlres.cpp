@@ -28,7 +28,7 @@
     #include "wx/wxcrtvararg.h"
 #endif
 
-#include "wx/vector.h"
+#include <vector>
 #include "wx/wfstream.h"
 #include "wx/filesys.h"
 #include "wx/filename.h"
@@ -125,7 +125,7 @@ public:
     wxDECLARE_NO_COPY_CLASS(wxXmlResourceDataRecord);
 };
 
-class wxXmlResourceDataRecords : public wxVector<wxXmlResourceDataRecord*>
+class wxXmlResourceDataRecords : public std::vector<wxXmlResourceDataRecord*>
 {
     // this is a class so that it can be forward-declared
 };
@@ -184,7 +184,7 @@ protected:
     wxIdRange* FindRangeForItem(const wxXmlNode* node,
                                 const wxString& item,
                                 wxString& value) const;
-    wxVector<wxIdRange*> m_IdRanges;
+    std::vector<wxIdRange*> m_IdRanges;
 
 private:
     static wxIdRangeManager *ms_instance;
@@ -489,7 +489,7 @@ void wxXmlResource::InsertHandler(wxXmlResourceHandler *handler)
 
 void wxXmlResource::ClearHandlers()
 {
-    for ( wxVector<wxXmlResourceHandler*>::iterator i = m_handlers.begin();
+    for ( std::vector<wxXmlResourceHandler*>::iterator i = m_handlers.begin();
           i != m_handlers.end(); ++i )
         delete *i;
     m_handlers.clear();
@@ -1092,7 +1092,7 @@ wxXmlResource::DoCreateResFromNode(wxXmlNode& node,
     }
     else if (node.GetName() == wxT("object"))
     {
-        for ( wxVector<wxXmlResourceHandler*>::iterator h = m_handlers.begin();
+        for ( std::vector<wxXmlResourceHandler*>::iterator h = m_handlers.begin();
               h != m_handlers.end(); ++h )
         {
             wxXmlResourceHandler *handler = *h;
@@ -1324,7 +1324,7 @@ wxIdRangeManager *wxIdRangeManager::ms_instance = nullptr;
 
 wxIdRangeManager::~wxIdRangeManager()
 {
-    for ( wxVector<wxIdRange*>::iterator i = m_IdRanges.begin();
+    for ( std::vector<wxIdRange*>::iterator i = m_IdRanges.begin();
           i != m_IdRanges.end(); ++i )
     {
         delete *i;
@@ -1419,7 +1419,7 @@ int wxIdRangeManager::Find(const wxString& rangename) const
 
 void wxIdRangeManager::FinaliseRanges(const wxXmlNode* node) const
 {
-    for ( wxVector<wxIdRange*>::const_iterator i = m_IdRanges.begin();
+    for ( std::vector<wxIdRange*>::const_iterator i = m_IdRanges.begin();
           i != m_IdRanges.end(); ++i )
     {
         // Check if this range has already been finalised. Quite possible,
@@ -1433,7 +1433,7 @@ void wxIdRangeManager::FinaliseRanges(const wxXmlNode* node) const
 }
 
 
-class wxXmlSubclassFactories : public wxVector<wxXmlSubclassFactory*>
+class wxXmlSubclassFactories : public std::vector<wxXmlSubclassFactory*>
 {
     // this is a class so that it can be forward-declared
 };

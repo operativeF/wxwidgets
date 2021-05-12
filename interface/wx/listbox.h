@@ -350,7 +350,7 @@ public:
 
         @since 3.1.4
      */
-    virtual void MSWSetTabStops(const wxVector<int>& tabStops);
+    virtual void MSWSetTabStops(const std::vector<int>& tabStops);
 
     // NOTE: Phoenix needs to see the implementation of pure virtuals so it
     // knows that this class is not abstract.

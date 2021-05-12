@@ -14,7 +14,7 @@
 
 #if wxUSE_XRC && wxUSE_AUI
 
-#include "wx/vector.h"
+#include <vector>
 
 class WXDLLIMPEXP_FWD_AUI wxAuiManager;
 class WXDLLIMPEXP_FWD_AUI wxAuiNotebook;
@@ -33,7 +33,7 @@ private:
     // Used to UnInit() the wxAuiManager before destroying its managed window
     void OnManagedWindowClose(wxWindowDestroyEvent &event);
 
-    typedef wxVector<wxAuiManager*> Managers;
+    typedef std::vector<wxAuiManager*> Managers;
     Managers m_managers; // all wxAuiManagers created in this handler
 
     wxAuiManager    *m_manager;  // Current wxAuiManager

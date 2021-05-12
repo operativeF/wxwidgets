@@ -12,7 +12,7 @@
 
 #include "wx/bitmap.h"
 #include "wx/gdicmn.h"
-#include "wx/vector.h"
+#include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxDC;
 class WXDLLIMPEXP_FWD_CORE wxIcon;
@@ -49,7 +49,7 @@ public:
 private:
     const wxBitmap *DoGetPtr(int index) const;
 
-    wxVector<wxBitmap> m_images;
+    std::vector<wxBitmap> m_images;
     bool m_useMask;
 
     // Size of a single bitmap in the list.

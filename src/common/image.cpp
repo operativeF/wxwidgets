@@ -569,7 +569,7 @@ struct BoxPrecalc
     int boxEnd;
 };
 
-void ResampleBoxPrecalc(wxVector<BoxPrecalc>& boxes, int oldDim)
+void ResampleBoxPrecalc(std::vector<BoxPrecalc>& boxes, int oldDim)
 {
     const int newDim = boxes.size();
     wxASSERT( oldDim > 0 && newDim > 0 );
@@ -623,8 +623,8 @@ wxImage wxImage::ResampleBox(int width, int height) const
 
     wxImage ret_image(width, height, false);
 
-    wxVector<BoxPrecalc> vPrecalcs(height);
-    wxVector<BoxPrecalc> hPrecalcs(width);
+    std::vector<BoxPrecalc> vPrecalcs(height);
+    std::vector<BoxPrecalc> hPrecalcs(width);
 
     ResampleBoxPrecalc(vPrecalcs, M_IMGDATA->m_height);
     ResampleBoxPrecalc(hPrecalcs, M_IMGDATA->m_width);
@@ -745,7 +745,7 @@ inline void DoCalc(BilinearPrecalc& precalc, double srcpix, int srcpixmax)
                             : (int)srcpix2;
 }
 
-void ResampleBilinearPrecalc(wxVector<BilinearPrecalc>& precalcs, int oldDim)
+void ResampleBilinearPrecalc(std::vector<BilinearPrecalc>& precalcs, int oldDim)
 {
     const int newDim = precalcs.size();
     wxASSERT( oldDim > 0 && newDim > 0 );
@@ -792,8 +792,8 @@ wxImage wxImage::ResampleBilinear(int width, int height) const
         dst_alpha = ret_image.GetAlpha();
     }
 
-    wxVector<BilinearPrecalc> vPrecalcs(height);
-    wxVector<BilinearPrecalc> hPrecalcs(width);
+    std::vector<BilinearPrecalc> vPrecalcs(height);
+    std::vector<BilinearPrecalc> hPrecalcs(width);
     ResampleBilinearPrecalc(vPrecalcs, M_IMGDATA->m_height);
     ResampleBilinearPrecalc(hPrecalcs, M_IMGDATA->m_width);
 
@@ -897,7 +897,7 @@ inline void DoCalc(BicubicPrecalc& precalc, double srcpixd, int oldDim)
     }
 }
 
-void ResampleBicubicPrecalc(wxVector<BicubicPrecalc> &aWeight, int oldDim)
+void ResampleBicubicPrecalc(std::vector<BicubicPrecalc> &aWeight, int oldDim)
 {
     const int newDim = aWeight.size();
     wxASSERT( oldDim > 0 && newDim > 0 );
@@ -974,8 +974,8 @@ wxImage wxImage::ResampleBicubic(int width, int height) const
     }
 
     // Precalculate weights
-    wxVector<BicubicPrecalc> vPrecalcs(height);
-    wxVector<BicubicPrecalc> hPrecalcs(width);
+    std::vector<BicubicPrecalc> vPrecalcs(height);
+    std::vector<BicubicPrecalc> hPrecalcs(width);
 
     ResampleBicubicPrecalc(vPrecalcs, M_IMGDATA->m_height);
     ResampleBicubicPrecalc(hPrecalcs, M_IMGDATA->m_width);

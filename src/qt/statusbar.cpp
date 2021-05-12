@@ -111,7 +111,7 @@ void wxStatusBar::UpdateFields()
 {
     // is it a good idea to recreate all the panes every update?
 
-    for ( wxVector<QLabel*>::const_iterator it = m_qtPanes.begin();
+    for ( std::vector<QLabel*>::const_iterator it = m_qtPanes.begin();
           it != m_qtPanes.end(); ++it )
     {
         //Remove all panes

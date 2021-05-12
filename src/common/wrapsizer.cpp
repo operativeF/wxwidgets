@@ -20,7 +20,7 @@
 
 
 #include "wx/wrapsizer.h"
-#include "wx/vector.h"
+#include <vector>
 
 namespace
 {
@@ -395,7 +395,7 @@ void wxWrapSizer::CalcMinFromMinor(int totMinor)
     //      and redo loop
 
     // First algo step: put items on lines of known max width
-    wxVector<wxWrapLine*> lines;
+    std::vector<wxWrapLine*> lines;
 
     int sumMinor;       // Sum of all minor sizes (height of all lines)
 
@@ -456,7 +456,7 @@ void wxWrapSizer::CalcMinFromMinor(int totMinor)
         }
 
         // Clear helper items
-        for ( wxVector<wxWrapLine*>::iterator it=lines.begin(); it<lines.end(); ++it )
+        for ( std::vector<wxWrapLine*>::iterator it=lines.begin(); it<lines.end(); ++it )
             delete *it;
         lines.clear();
 

@@ -32,7 +32,7 @@
 #include <cstring>
 
 #include "wx/hashmap.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/xlocale.h"
 
 #ifdef __WINDOWS__
@@ -1419,7 +1419,7 @@ size_t wxString::Replace(const wxString& strOld,
 
         // first scan the string to find all positions at which the replacement
         // should be made
-        wxVector<size_t> replacePositions;
+        std::vector<size_t> replacePositions;
 
         size_t pos;
         for ( pos = m_impl.find(strOld.m_impl, 0);

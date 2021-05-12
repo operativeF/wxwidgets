@@ -25,7 +25,7 @@
 #include "wx/fswatcher.h"
 #include "wx/scopedptr.h"
 #include "wx/stdpaths.h"
-#include "wx/vector.h"
+#include <vector>
 
 #include "testfile.h"
 
@@ -330,7 +330,7 @@ protected:
 
     int m_eventTypes;  // Which event-types to watch. Normally all of them
 
-    wxVector<wxFileSystemWatcherEvent*> m_events;
+    std::vector<wxFileSystemWatcherEvent*> m_events;
 
 private:
     void OnFileSystemEvent(wxFileSystemWatcherEvent& evt)

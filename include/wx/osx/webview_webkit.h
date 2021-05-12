@@ -78,8 +78,8 @@ public:
     //History functions
     void ClearHistory() override;
     void EnableHistory(bool enable = true) override;
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() override;
-    wxVector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() override;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() override;
+    std::vector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() override;
     void LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item) override;
 
     void Paste() override;

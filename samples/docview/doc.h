@@ -14,7 +14,7 @@
 
 #include "wx/docview.h"
 #include "wx/cmdproc.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/image.h"
 
 // This sample is written to build both with wxUSE_STD_IOSTREAM==0 and 1, which
@@ -51,7 +51,7 @@ struct DoodleLine
     wxInt32 y2;
 };
 
-typedef wxVector<DoodleLine> DoodleLines;
+typedef std::vector<DoodleLine> DoodleLines;
 
 // Contains a list of lines: represents a mouse-down doodle
 class DoodleSegment
@@ -71,7 +71,7 @@ private:
     DoodleLines m_lines;
 };
 
-typedef wxVector<DoodleSegment> DoodleSegments;
+typedef std::vector<DoodleSegment> DoodleSegments;
 
 
 // The drawing document (model) class itself

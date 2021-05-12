@@ -27,7 +27,7 @@
 #endif
 
 #include "wx/settings.h"
-#include "wx/vector.h"
+#include <vector>
 
 #include "wx/msw/dcclient.h"
 #include "wx/msw/private.h"
@@ -134,8 +134,8 @@ void wxBitmapComboBox::RecreateControl()
 
     // Save the client data pointers before clearing the control, if any.
     const wxClientDataType clientDataType = GetClientDataType();
-    wxVector<wxClientData*> objectClientData;
-    wxVector<void*> voidClientData;
+    std::vector<wxClientData*> objectClientData;
+    std::vector<void*> voidClientData;
     switch ( clientDataType )
     {
         case wxClientDataType::None:

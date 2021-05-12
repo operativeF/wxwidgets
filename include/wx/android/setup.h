@@ -317,7 +317,7 @@
 // standard library.
 #define wxUSE_STD_CONTAINERS_COMPATIBLY wxUSE_STD_DEFAULT
 
-// Use standard C++ containers to implement wxVector<>, wxStack<>, wxDList<>
+// Use standard C++ containers to implement std::vector<>, wxStack<>, wxDList<>
 // and wxHashXXX<> classes. If disabled, wxWidgets own (mostly compatible but
 // usually more limited) implementations are used which allows to avoid the
 // dependency on the C++ run-time library.

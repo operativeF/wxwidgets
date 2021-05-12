@@ -26,7 +26,7 @@
 #endif // WX_PRECOMP
 
 #include "wx/cmdline.h"
-#include "wx/vector.h"
+#include <vector>
 #include "wx/process.h"
 #include "wx/sstream.h"
 #include "wx/utils.h"
@@ -100,10 +100,10 @@ public:
 // the real main
 // ----------------------------------------------------------------------------
 
-bool TestExec(const wxVector<wxFileName>& programs, long timeout)
+bool TestExec(const std::vector<wxFileName>& programs, long timeout)
 {
     size_t i;
-    wxVector<MonitorData*> data;
+    std::vector<MonitorData*> data;
 
     // run all programs specified as command line parameters
     wxArrayLong procID;
@@ -205,7 +205,7 @@ int main(int argc, char **argv)
     case 0:
         {
             // check arguments
-            wxVector<wxFileName> programs;
+            std::vector<wxFileName> programs;
             for (unsigned int i=0; i<parser.GetParamCount(); i++)
             {
                 wxFileName fn(parser.GetParam(i));
