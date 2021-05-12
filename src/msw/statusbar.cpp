@@ -50,7 +50,7 @@ namespace
 {
 
 // no idea for a default width, just choose something
-static const int DEFAULT_FIELD_WIDTH = 25;
+static constexpr int DEFAULT_FIELD_WIDTH = 25;
 
 } // anonymous namespace
 

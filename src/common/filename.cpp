@@ -358,7 +358,8 @@ bool StatAny(wxStructStat& st, const wxFileName& fn)
 // ----------------------------------------------------------------------------
 
 // length of \\?\Volume{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\ string
-static const size_t wxMSWUniqueVolumePrefixLength = 49;
+// FIXME: calculate from actual string
+static constexpr size_t wxMSWUniqueVolumePrefixLength = 49;
 
 } // anonymous namespace
 

@@ -30,10 +30,11 @@ namespace
 // initially no ids are in use and we allocate them consecutively, but after we
 // exhaust the entire range, we wrap around and reuse the ids freed in the
 // meanwhile
-static const wxUint8 ID_FREE = 0;
-static const wxUint8 ID_STARTCOUNT = 1;
-static const wxUint8 ID_COUNTTOOLARGE = 254;
-static const wxUint8 ID_RESERVED = 255;
+// FIXME: Enum?
+static constexpr wxUint8 ID_FREE = 0;
+static constexpr wxUint8 ID_STARTCOUNT = 1;
+static constexpr wxUint8 ID_COUNTTOOLARGE = 254;
+static constexpr wxUint8 ID_RESERVED = 255;
 
 // we use a two level count, most IDs will be used less than ID_COUNTTOOLARGE-1
 // thus we store their count directly in this array, however when the same ID

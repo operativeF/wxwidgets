@@ -35,11 +35,11 @@
 // constants
 // ----------------------------------------------------------------------------
 
-static const int ID_DIRCTRL = 1000;
-static const int ID_TEXTCTRL = 1001;
-static const int ID_NEW = 1004;
-static const int ID_SHOW_HIDDEN = 1005;
-static const int ID_GO_HOME = 1006;
+static constexpr int ID_DIRCTRL = 1000;
+static constexpr int ID_TEXTCTRL = 1001;
+static constexpr int ID_NEW = 1004;
+static constexpr int ID_SHOW_HIDDEN = 1005;
+static constexpr int ID_GO_HOME = 1006;
 
 //-----------------------------------------------------------------------------
 // wxGenericDirDialog

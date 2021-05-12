@@ -46,7 +46,7 @@
 
 #define LAYOUT_MARGIN 8
 
-static const int wxID_SKIP = 32000;  // whatever
+static constexpr int wxID_SKIP = 32000;  // whatever
 
 // ----------------------------------------------------------------------------
 // event tables

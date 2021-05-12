@@ -123,7 +123,7 @@ float wxSizerFlags::DoGetDefaultBorderInPx()
 // check for flags conflicts
 #if wxDEBUG_LEVEL
 
-static const int SIZER_FLAGS_MASK =
+static constexpr int SIZER_FLAGS_MASK =
     wxADD_FLAG(wxCENTRE,
     wxADD_FLAG(wxHORIZONTAL,
     wxADD_FLAG(wxVERTICAL,

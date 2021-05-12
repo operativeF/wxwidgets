@@ -75,7 +75,7 @@ wxColourData& wxColourData::operator=(const wxColourData& data)
 // ----------------------------------------------------------------------------
 
 // separator used between different fields
-static const char wxCOL_DATA_SEP = ',';
+static constexpr char wxCOL_DATA_SEP = ',';
 
 wxString wxColourData::ToString() const
 {

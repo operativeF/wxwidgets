@@ -2062,7 +2062,7 @@ static int DoStringPrintfV(wxString& str,
             // The limit is completely arbitrary, it's supposed to be big
             // enough to never become a problem in practice, but not so big as
             // to result in out of memory crashes.
-            static const size_t MAX_BUFFER_SIZE = 128*1024*1024;
+            static constexpr size_t MAX_BUFFER_SIZE = 128*1024*1024;
 
             if ( size >= MAX_BUFFER_SIZE )
                 return -1;

@@ -106,9 +106,9 @@ enum wxTreeItemIcon
 };
 
 // special values for the 'state' parameter of wxTreeCtrl::SetItemState()
-static const int wxTREE_ITEMSTATE_NONE  = -1;   // not state (no display state image)
-static const int wxTREE_ITEMSTATE_NEXT  = -2;   // cycle to the next state
-static const int wxTREE_ITEMSTATE_PREV  = -3;   // cycle to the previous state
+static constexpr int wxTREE_ITEMSTATE_NONE  = -1;   // not state (no display state image)
+static constexpr int wxTREE_ITEMSTATE_NEXT  = -2;   // cycle to the next state
+static constexpr int wxTREE_ITEMSTATE_PREV  = -3;   // cycle to the previous state
 
 // ----------------------------------------------------------------------------
 // wxTreeCtrl flags
@@ -149,33 +149,33 @@ static const int wxTREE_ITEMSTATE_PREV  = -3;   // cycle to the previous state
 // values for the `flags' parameter of wxTreeCtrl::HitTest() which determine
 // where exactly the specified point is situated:
 
-static const int wxTREE_HITTEST_ABOVE            = 0x0001;
-static const int wxTREE_HITTEST_BELOW            = 0x0002;
-static const int wxTREE_HITTEST_NOWHERE          = 0x0004;
+static constexpr int wxTREE_HITTEST_ABOVE            = 0x0001;
+static constexpr int wxTREE_HITTEST_BELOW            = 0x0002;
+static constexpr int wxTREE_HITTEST_NOWHERE          = 0x0004;
     // on the button associated with an item.
-static const int wxTREE_HITTEST_ONITEMBUTTON     = 0x0008;
+static constexpr int wxTREE_HITTEST_ONITEMBUTTON     = 0x0008;
     // on the bitmap associated with an item.
-static const int wxTREE_HITTEST_ONITEMICON       = 0x0010;
+static constexpr int wxTREE_HITTEST_ONITEMICON       = 0x0010;
     // on the indent associated with an item.
-static const int wxTREE_HITTEST_ONITEMINDENT     = 0x0020;
+static constexpr int wxTREE_HITTEST_ONITEMINDENT     = 0x0020;
     // on the label (string) associated with an item.
-static const int wxTREE_HITTEST_ONITEMLABEL      = 0x0040;
+static constexpr int wxTREE_HITTEST_ONITEMLABEL      = 0x0040;
     // on the right of the label associated with an item.
-static const int wxTREE_HITTEST_ONITEMRIGHT      = 0x0080;
+static constexpr int wxTREE_HITTEST_ONITEMRIGHT      = 0x0080;
     // on the label (string) associated with an item.
-static const int wxTREE_HITTEST_ONITEMSTATEICON  = 0x0100;
+static constexpr int wxTREE_HITTEST_ONITEMSTATEICON  = 0x0100;
     // on the left of the wxTreeCtrl.
-static const int wxTREE_HITTEST_TOLEFT           = 0x0200;
+static constexpr int wxTREE_HITTEST_TOLEFT           = 0x0200;
     // on the right of the wxTreeCtrl.
-static const int wxTREE_HITTEST_TORIGHT          = 0x0400;
+static constexpr int wxTREE_HITTEST_TORIGHT          = 0x0400;
     // on the upper part (first half) of the item.
-static const int wxTREE_HITTEST_ONITEMUPPERPART  = 0x0800;
+static constexpr int wxTREE_HITTEST_ONITEMUPPERPART  = 0x0800;
     // on the lower part (second half) of the item.
-static const int wxTREE_HITTEST_ONITEMLOWERPART  = 0x1000;
+static constexpr int wxTREE_HITTEST_ONITEMLOWERPART  = 0x1000;
 
     // anywhere on the item
-static const int wxTREE_HITTEST_ONITEM  = wxTREE_HITTEST_ONITEMICON |
-                                          wxTREE_HITTEST_ONITEMLABEL;
+static constexpr int wxTREE_HITTEST_ONITEM  = wxTREE_HITTEST_ONITEMICON |
+                                              wxTREE_HITTEST_ONITEMLABEL;
 
 // tree ctrl default name
 extern WXDLLIMPEXP_DATA_CORE(const char) wxTreeCtrlNameStr[];

@@ -56,10 +56,10 @@
 namespace
 {
     // space around check mark bitmap in pixels
-    static const int CHECKMARK_EXTRA_SPACE = 1;
+    static constexpr int CHECKMARK_EXTRA_SPACE = 1;
 
     // space between check bitmap and text label
-    static const int CHECKMARK_LABEL_SPACE = 2;
+    static constexpr int CHECKMARK_LABEL_SPACE = 2;
 
 } // anonymous namespace
 

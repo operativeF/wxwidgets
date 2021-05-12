@@ -556,7 +556,7 @@ wxGridCellAutoWrapStringRenderer::GetBestSize(wxGrid& grid,
     return wxSize(GetBestWidth(grid, attr, dc, row, col, height), height);
 }
 
-static const int AUTOWRAP_Y_MARGIN = 4;
+static constexpr int AUTOWRAP_Y_MARGIN = 4;
 
 int
 wxGridCellAutoWrapStringRenderer::GetBestHeight(wxGrid& grid,

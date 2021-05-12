@@ -3612,7 +3612,8 @@ unsigned long wxImage::ComputeHistogram( wxImageHistogram &h ) const
  * Rotation code by Carlos Moreno
  */
 
-static const double wxROTATE_EPSILON = 1e-10;
+// FIXME: Verify that this isn't arbitrary.
+static constexpr double wxROTATE_EPSILON = 1e-10;
 
 // Auxiliary function to rotate a point (x,y) with respect to point p0
 // make it inline and use a straight return to facilitate optimization

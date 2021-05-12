@@ -54,7 +54,7 @@ WINOLEAPI PropVariantClear(PROPVARIANT* pvar);
 namespace {
 
 // The maximum number of thumbnail toolbar buttons allowed on windows is 7.
-static const int MAX_BUTTON_COUNT = 7;
+static constexpr int MAX_BUTTON_COUNT = 7;
 
 DEFINE_GUID(wxCLSID_TaskbarList,
     0x56fdf344, 0xfd6d, 0x11d0, 0x95, 0x8a, 0x0, 0x60, 0x97, 0xc9, 0xa0, 0x90);

@@ -70,13 +70,14 @@ extern wxString wxCallStrftime(const wxString& format, const tm* tm);
 // constants (see also datetime.cpp)
 // ----------------------------------------------------------------------------
 
-static const int DAYS_PER_WEEK = 7;
+// FIXME: Aren't these already defined?
+static constexpr int DAYS_PER_WEEK = 7;
 
-static const int HOURS_PER_DAY = 24;
+static constexpr int HOURS_PER_DAY = 24;
 
-static const int SEC_PER_MIN = 60;
+static constexpr int SEC_PER_MIN = 60;
 
-static const int MIN_PER_HOUR = 60;
+static constexpr int MIN_PER_HOUR = 60;
 
 // ----------------------------------------------------------------------------
 // parsing helpers

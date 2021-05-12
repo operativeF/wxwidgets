@@ -246,9 +246,9 @@ wxPostScriptDC::wxPostScriptDC(const wxPrintData& printData)
 }
 
 // we don't want to use only 72 dpi from PS print
-static const int DPI = 600;
-static const double PS2DEV = 600.0 / 72.0;
-static const double DEV2PS = 72.0 / 600.0;
+static constexpr int DPI = 600;
+static constexpr double PS2DEV = 600.0 / 72.0;
+static constexpr double DEV2PS = 72.0 / 600.0;
 
 #define XLOG2DEV(x)     ((double)(LogicalToDeviceX(x)) * DEV2PS)
 #define XLOG2DEVREL(x)  ((double)(LogicalToDeviceXRel(x)) * DEV2PS)

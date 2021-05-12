@@ -45,7 +45,7 @@ const char wxGetPasswordFromUserPromptStr[] = "Enter Password";
 // constants
 // ----------------------------------------------------------------------------
 
-static const int wxID_TEXT = 3000;
+static constexpr int wxID_TEXT = 3000;
 
 // ============================================================================
 // implementation

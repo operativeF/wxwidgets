@@ -41,10 +41,10 @@ namespace
 {
 
 // Total number of "running" dots.
-static const int NUM_DOTS = 8;
+static constexpr int NUM_DOTS = 8;
 
 // Delay between the consecutive updates in milliseconds.
-static const int FRAME_DELAY = 150;
+static constexpr int FRAME_DELAY = 150;
 
 } // anonymous namespace
 

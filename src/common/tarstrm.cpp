@@ -58,7 +58,7 @@ enum {
     TAR_NUMFIELDS
 };
 
-static const int TAR_BLOCKSIZE = 512;
+static constexpr int TAR_BLOCKSIZE = 512;
 
 // checksum type
 enum {

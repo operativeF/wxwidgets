@@ -53,7 +53,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxSpinDoubleEvent, wxNotifyEvent);
 // so the generic control looks similarly to the native one there, we might
 // need to use different value for the other platforms (and maybe even
 // determine it dynamically?).
-static const wxCoord MARGIN = 1;
+static constexpr wxCoord MARGIN = 1;
 
 #define SPINCTRLBUT_MAX 32000 // large to avoid wrap around trouble
 
