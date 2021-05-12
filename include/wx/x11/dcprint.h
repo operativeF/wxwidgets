@@ -19,7 +19,7 @@ public:
     wxDECLARE_CLASS(wxPrinterDC);
 
     // Create a printer DC
-    wxPrinterDC(const wxString& driver, const wxString& device, const wxString& output, bool interactive = TRUE, wxPrintOrientation orientation = wxPORTRAIT);
+    wxPrinterDC(const wxString& driver, const wxString& device, const wxString& output, bool interactive = TRUE, wxPrintOrientation orientation = wxPrintOrientation::Portrait);
 
     virtual ~wxPrinterDC();
 };

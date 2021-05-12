@@ -77,8 +77,8 @@ bool MyApp::OnInit(void)
 
     // You could set an initial paper size here
 #if 0
-    g_printData->SetPaperId(wxPAPER_LETTER); // for Americans
-    g_printData->SetPaperId(wxPAPER_A4);    // for everyone else
+    g_printData->SetPaperId(wxPaperSize::Letter); // for Americans
+    g_printData->SetPaperId(wxPaperSize::A4);    // for everyone else
 #endif
 
     g_pageSetupData = new wxPageSetupDialogData;

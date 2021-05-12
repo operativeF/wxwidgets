@@ -949,7 +949,7 @@ void EditPrint::GetPageInfo (int *minPage, int *maxPage, int *selPageFrom, int *
     page.x = static_cast<int> (page.x * ppiScr.x / 25.4);
     page.y = static_cast<int> (page.y * ppiScr.y / 25.4);
     // In landscape mode we need to swap the width and height
-    if ( g_pageSetupData->GetPrintData().GetOrientation() == wxLANDSCAPE )
+    if ( g_pageSetupData->GetPrintData().GetOrientation() == wxPrintOrientation::Landscape )
     {
         wxSwap(page.x, page.y);
     }

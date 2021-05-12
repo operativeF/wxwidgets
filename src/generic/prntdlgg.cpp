@@ -282,7 +282,7 @@ void wxGenericPrintDialog::OnOK(wxCommandEvent& WXUNUSED(event))
     // or not.
     if (m_printDialogData.GetPrintToFile())
     {
-        m_printDialogData.GetPrintData().SetPrintMode(wxPRINT_MODE_FILE);
+        m_printDialogData.GetPrintData().SetPrintMode(wxPrintMode::File);
 
         wxFileName fname( m_printDialogData.GetPrintData().GetFilename() );
 
@@ -294,7 +294,7 @@ void wxGenericPrintDialog::OnOK(wxCommandEvent& WXUNUSED(event))
     }
     else
     {
-        m_printDialogData.GetPrintData().SetPrintMode(wxPRINT_MODE_PRINTER);
+        m_printDialogData.GetPrintData().SetPrintMode(wxPrintMode::Printer);
     }
 
     EndModal(wxID_OK);
@@ -710,7 +710,7 @@ bool wxGenericPrintSetupDialog::TransferDataToWindow()
 
     if (m_orientationRadioBox)
     {
-        if (m_printData.GetOrientation() == wxPORTRAIT)
+        if (m_printData.GetOrientation() == wxPrintOrientation::Portrait)
             m_orientationRadioBox->SetSelection(0);
         else
             m_orientationRadioBox->SetSelection(1);
@@ -749,9 +749,9 @@ bool wxGenericPrintSetupDialog::TransferDataFromWindow()
     {
         int sel = m_orientationRadioBox->GetSelection();
         if (sel == 0)
-            m_printData.SetOrientation(wxPORTRAIT);
+            m_printData.SetOrientation(wxPrintOrientation::Portrait);
         else
-            m_printData.SetOrientation(wxLANDSCAPE);
+            m_printData.SetOrientation(wxPrintOrientation::Landscape);
     }
     if (m_paperTypeChoice)
     {
@@ -951,7 +951,7 @@ bool wxGenericPageSetupDialog::TransferDataToWindow()
 
     if (m_orientationRadioBox)
     {
-        if (m_pageData.GetPrintData().GetOrientation() == wxPORTRAIT)
+        if (m_pageData.GetPrintData().GetOrientation() == wxPrintOrientation::Portrait)
             m_orientationRadioBox->SetSelection(0);
         else
             m_orientationRadioBox->SetSelection(1);
@@ -963,7 +963,7 @@ bool wxGenericPageSetupDialog::TransferDataToWindow()
     wxPrintPaperType* type = wxThePrintPaperDatabase->FindPaperType(
              wxSize(m_pageData.GetPaperSize().x * 10, m_pageData.GetPaperSize().y * 10));
 
-    if (!type && m_pageData.GetPrintData().GetPaperId() != wxPAPER_NONE)
+    if (!type && m_pageData.GetPrintData().GetPaperId() != wxPaperSize::None)
         type = wxThePrintPaperDatabase->FindPaperType(m_pageData.GetPrintData().GetPaperId());
 
     if (type)
@@ -994,11 +994,11 @@ bool wxGenericPageSetupDialog::TransferDataFromWindow()
         int sel = m_orientationRadioBox->GetSelection();
         if (sel == 0)
         {
-            m_pageData.GetPrintData().SetOrientation(wxPORTRAIT);
+            m_pageData.GetPrintData().SetOrientation(wxPrintOrientation::Portrait);
         }
         else
         {
-            m_pageData.GetPrintData().SetOrientation(wxLANDSCAPE);
+            m_pageData.GetPrintData().SetOrientation(wxPrintOrientation::Landscape);
         }
     }
 

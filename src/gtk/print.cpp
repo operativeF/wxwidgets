@@ -49,125 +49,125 @@ static const double DEG2RAD  = M_PI / 180.0;
 // Map wxPaperSize to GtkPaperSize names
 // Ordering must be the same as wxPaperSize enum
 static const char* const gs_paperList[] = {
-    NULL, // wxPAPER_NONE
-    "na_letter", // wxPAPER_LETTER
-    "na_legal", // wxPAPER_LEGAL
-    "iso_a4", // wxPAPER_A4
-    "na_c", // wxPAPER_CSHEET
-    "na_d", // wxPAPER_DSHEET
-    "na_e", // wxPAPER_ESHEET
-    "na_letter", // wxPAPER_LETTERSMALL
-    "na_ledger", // wxPAPER_TABLOID
-    "na_ledger", // wxPAPER_LEDGER
-    "na_invoice", // wxPAPER_STATEMENT
-    "na_executive", // wxPAPER_EXECUTIVE
-    "iso_a3", // wxPAPER_A3
-    "iso_a4", // wxPAPER_A4SMALL
-    "iso_a5", // wxPAPER_A5
-    "jis_b4", // wxPAPER_B4 "B4 (JIS) 257 x 364 mm"
-    "jis_b5", // wxPAPER_B5 "B5 (JIS) 182 x 257 mm"
-    "om_folio", // wxPAPER_FOLIO
-    "na_quarto", // wxPAPER_QUARTO
-    "na_10x14", // wxPAPER_10X14
-    "na_ledger", // wxPAPER_11X17
-    "na_letter", // wxPAPER_NOTE
-    "na_number-9", // wxPAPER_ENV_9
-    "na_number-10", // wxPAPER_ENV_10
-    "na_number-11", // wxPAPER_ENV_11
-    "na_number-12", // wxPAPER_ENV_12
-    "na_number-14", // wxPAPER_ENV_14
-    "iso_dl", // wxPAPER_ENV_DL
-    "iso_c5", // wxPAPER_ENV_C5
-    "iso_c3", // wxPAPER_ENV_C3
-    "iso_c4", // wxPAPER_ENV_C4
-    "iso_c6", // wxPAPER_ENV_C6
-    "iso_c6c5", // wxPAPER_ENV_C65
-    "iso_b4", // wxPAPER_ENV_B4
-    "iso_b5", // wxPAPER_ENV_B5
-    "iso_b6", // wxPAPER_ENV_B6
-    "om_italian", // wxPAPER_ENV_ITALY
-    "na_monarch", // wxPAPER_ENV_MONARCH
-    "na_personal", // wxPAPER_ENV_PERSONAL
-    "na_fanfold-us", // wxPAPER_FANFOLD_US
-    "na_fanfold-eur", // wxPAPER_FANFOLD_STD_GERMAN
-    "na_foolscap", // wxPAPER_FANFOLD_LGL_GERMAN
-    "iso_b4", // wxPAPER_ISO_B4
-    "jpn_hagaki", // wxPAPER_JAPANESE_POSTCARD
-    "na_9x11", // wxPAPER_9X11
-    "na_10x11", // wxPAPER_10X11
-    "na_11x15", // wxPAPER_15X11
-    "om_invite", // wxPAPER_ENV_INVITE
-    "na_letter-extra", // wxPAPER_LETTER_EXTRA
-    "na_legal-extra", // wxPAPER_LEGAL_EXTRA
-    "na_arch-b", // wxPAPER_TABLOID_EXTRA
-    "iso_a4-extra", // wxPAPER_A4_EXTRA
-    "na_letter", // wxPAPER_LETTER_TRANSVERSE
-    "iso_a4", // wxPAPER_A4_TRANSVERSE
-    "na_letter-extra", // wxPAPER_LETTER_EXTRA_TRANSVERSE
-    "na_super-a", // wxPAPER_A_PLUS
-    "na_super-b", // wxPAPER_B_PLUS
-    "na_letter-plus", // wxPAPER_LETTER_PLUS
-    "om_folio", // wxPAPER_A4_PLUS "A4 Plus 210 x 330 mm" (no A4 Plus in PWG standard)
-    "iso_a5", // wxPAPER_A5_TRANSVERSE
-    "jis_b5", // wxPAPER_B5_TRANSVERSE "B5 (JIS) Transverse 182 x 257 mm"
-    "iso_a3-extra", // wxPAPER_A3_EXTRA
-    "iso_a5-extra", // wxPAPER_A5_EXTRA
-    "iso_b5-extra", // wxPAPER_B5_EXTRA
-    "iso_a2", // wxPAPER_A2
-    "iso_a3", // wxPAPER_A3_TRANSVERSE
-    "iso_a3-extra", // wxPAPER_A3_EXTRA_TRANSVERSE
-    "jpn_oufuku", // wxPAPER_DBL_JAPANESE_POSTCARD
-    "iso_a6", // wxPAPER_A6
-    "jpn_kaku2", // wxPAPER_JENV_KAKU2
-    "jpn_kaku3_216x277mm", // wxPAPER_JENV_KAKU3
-    "jpn_chou3", // wxPAPER_JENV_CHOU3
-    "jpn_chou4", // wxPAPER_JENV_CHOU4
-    "na_letter", // wxPAPER_LETTER_ROTATED
-    "iso_a3", // wxPAPER_A3_ROTATED
-    "iso_a4", // wxPAPER_A4_ROTATED
-    "iso_a5", // wxPAPER_A5_ROTATED
-    "jis_b4", // wxPAPER_B4_JIS_ROTATED
-    "jis_b5", // wxPAPER_B5_JIS_ROTATED
-    "jpn_hagaki", // wxPAPER_JAPANESE_POSTCARD_ROTATED
-    "jpn_oufuku", // wxPAPER_DBL_JAPANESE_POSTCARD_ROTATED
-    "iso_a6", // wxPAPER_A6_ROTATED
-    "jpn_kaku2", // wxPAPER_JENV_KAKU2_ROTATED
-    "jpn_kaku3_216x277mm", // wxPAPER_JENV_KAKU3_ROTATED
-    "jpn_chou3", // wxPAPER_JENV_CHOU3_ROTATED
-    "jpn_chou4", // wxPAPER_JENV_CHOU4_ROTATED
-    "jis_b6", // wxPAPER_B6_JIS
-    "jis_b6", // wxPAPER_B6_JIS_ROTATED
-    "na_11x12", // wxPAPER_12X11
-    "jpn_you4", // wxPAPER_JENV_YOU4
-    "jpn_you4", // wxPAPER_JENV_YOU4_ROTATED
-    "prc_16k", // wxPAPER_P16K
-    "prc_32k", // wxPAPER_P32K
-    "prc_32k", // wxPAPER_P32KBIG
-    "prc_1", // wxPAPER_PENV_1
-    "prc_2", // wxPAPER_PENV_2
-    "prc_3", // wxPAPER_PENV_3
-    "prc_4", // wxPAPER_PENV_4
-    "prc_5", // wxPAPER_PENV_5
-    "prc_6", // wxPAPER_PENV_6
-    "prc_7", // wxPAPER_PENV_7
-    "prc_8", // wxPAPER_PENV_8
-    "prc_9", // wxPAPER_PENV_9
-    "prc_10", // wxPAPER_PENV_10
-    "prc_16k", // wxPAPER_P16K_ROTATED
-    "prc_32k", // wxPAPER_P32K_ROTATED
-    "prc_32k", // wxPAPER_P32KBIG_ROTATED
-    "prc_1", // wxPAPER_PENV_1_ROTATED
-    "prc_2", // wxPAPER_PENV_2_ROTATED
-    "prc_3", // wxPAPER_PENV_3_ROTATED
-    "prc_4", // wxPAPER_PENV_4_ROTATED
-    "prc_5", // wxPAPER_PENV_5_ROTATED
-    "prc_6", // wxPAPER_PENV_6_ROTATED
-    "prc_7", // wxPAPER_PENV_7_ROTATED
-    "prc_8", // wxPAPER_PENV_8_ROTATED
-    "prc_9", // wxPAPER_PENV_9_ROTATED
-    "prc_10", // wxPAPER_PENV_10_ROTATED
-    "iso_a0", // wxPAPER_A0
-    "iso_a1"  // wxPAPER_A1
+    NULL, // wxPaperSize::None
+    "na_letter", // wxPaperSize::Letter
+    "na_legal", // wxPaperSize::Legal
+    "iso_a4", // wxPaperSize::A4
+    "na_c", // wxPaperSize::Csheet
+    "na_d", // wxPaperSize::Dsheet
+    "na_e", // wxPaperSize::Esheet
+    "na_letter", // wxPaperSize::Lettersmall
+    "na_ledger", // wxPaperSize::Tabloid
+    "na_ledger", // wxPaperSize::Ledger
+    "na_invoice", // wxPaperSize::Statement
+    "na_executive", // wxPaperSize::Executive
+    "iso_a3", // wxPaperSize::A3
+    "iso_a4", // wxPaperSize::A4small
+    "iso_a5", // wxPaperSize::A5
+    "jis_b4", // wxPaperSize::B4 "B4 (JIS) 257 x 364 mm"
+    "jis_b5", // wxPaperSize::B5 "B5 (JIS) 182 x 257 mm"
+    "om_folio", // wxPaperSize::Folio
+    "na_quarto", // wxPaperSize::Quarto
+    "na_10x14", // wxPaperSize::_10X14
+    "na_ledger", // wxPaperSize::_11X17
+    "na_letter", // wxPaperSize::Note
+    "na_number-9", // wxPaperSize::Env_9
+    "na_number-10", // wxPaperSize::Env_10
+    "na_number-11", // wxPaperSize::Env_11
+    "na_number-12", // wxPaperSize::Env_12
+    "na_number-14", // wxPaperSize::Env_14
+    "iso_dl", // wxPaperSize::Env_dl
+    "iso_c5", // wxPaperSize::Env_c5
+    "iso_c3", // wxPaperSize::Env_c3
+    "iso_c4", // wxPaperSize::Env_c4
+    "iso_c6", // wxPaperSize::Env_c6
+    "iso_c6c5", // wxPaperSize::Env_c65
+    "iso_b4", // wxPaperSize::Env_b4
+    "iso_b5", // wxPaperSize::Env_b5
+    "iso_b6", // wxPaperSize::Env_b6
+    "om_italian", // wxPaperSize::Env_italy
+    "na_monarch", // wxPaperSize::Env_monarch
+    "na_personal", // wxPaperSize::Env_personal
+    "na_fanfold-us", // wxPaperSize::Fanfold_us
+    "na_fanfold-eur", // wxPaperSize::Fanfold_std_german
+    "na_foolscap", // wxPaperSize::Fanfold_lgl_german
+    "iso_b4", // wxPaperSize::Iso_b4
+    "jpn_hagaki", // wxPaperSize::Japanese_postcard
+    "na_9x11", // wxPaperSize::_9X11
+    "na_10x11", // wxPaperSize::_10X11
+    "na_11x15", // wxPaperSize::_15X11
+    "om_invite", // wxPaperSize::Env_invite
+    "na_letter-extra", // wxPaperSize::Letter_extra
+    "na_legal-extra", // wxPaperSize::Legal_extra
+    "na_arch-b", // wxPaperSize::Tabloid_extra
+    "iso_a4-extra", // wxPaperSize::A4_extra
+    "na_letter", // wxPaperSize::Letter_transverse
+    "iso_a4", // wxPaperSize::A4_transverse
+    "na_letter-extra", // wxPaperSize::Letter_extra_transverse
+    "na_super-a", // wxPaperSize::A_plus
+    "na_super-b", // wxPaperSize::B_plus
+    "na_letter-plus", // wxPaperSize::Letter_plus
+    "om_folio", // wxPaperSize::A4_plus "A4 Plus 210 x 330 mm" (no A4 Plus in PWG standard)
+    "iso_a5", // wxPaperSize::A5_transverse
+    "jis_b5", // wxPaperSize::B5_transverse "B5 (JIS) Transverse 182 x 257 mm"
+    "iso_a3-extra", // wxPaperSize::A3_extra
+    "iso_a5-extra", // wxPaperSize::A5_extra
+    "iso_b5-extra", // wxPaperSize::B5_extra
+    "iso_a2", // wxPaperSize::A2
+    "iso_a3", // wxPaperSize::A3_transverse
+    "iso_a3-extra", // wxPaperSize::A3_extra_transverse
+    "jpn_oufuku", // wxPaperSize::Dbl_japanese_postcard
+    "iso_a6", // wxPaperSize::A6
+    "jpn_kaku2", // wxPaperSize::Jenv_kaku2
+    "jpn_kaku3_216x277mm", // wxPaperSize::Jenv_kaku3
+    "jpn_chou3", // wxPaperSize::Jenv_chou3
+    "jpn_chou4", // wxPaperSize::Jenv_chou4
+    "na_letter", // wxPaperSize::Letter_rotated
+    "iso_a3", // wxPaperSize::A3_rotated
+    "iso_a4", // wxPaperSize::A4_rotated
+    "iso_a5", // wxPaperSize::A5_rotated
+    "jis_b4", // wxPaperSize::B4_jis_rotated
+    "jis_b5", // wxPaperSize::B5_jis_rotated
+    "jpn_hagaki", // wxPaperSize::Japanese_postcard_rotated
+    "jpn_oufuku", // wxPaperSize::Dbl_japanese_postcard_rotated
+    "iso_a6", // wxPaperSize::A6_rotated
+    "jpn_kaku2", // wxPaperSize::Jenv_kaku2_rotated
+    "jpn_kaku3_216x277mm", // wxPaperSize::Jenv_kaku3_rotated
+    "jpn_chou3", // wxPaperSize::Jenv_chou3_rotated
+    "jpn_chou4", // wxPaperSize::Jenv_chou4_rotated
+    "jis_b6", // wxPaperSize::B6_jis
+    "jis_b6", // wxPaperSize::B6_jis_rotated
+    "na_11x12", // wxPaperSize::_12X11
+    "jpn_you4", // wxPaperSize::Jenv_you4
+    "jpn_you4", // wxPaperSize::Jenv_you4_rotated
+    "prc_16k", // wxPaperSize::P16k
+    "prc_32k", // wxPaperSize::P32k
+    "prc_32k", // wxPaperSize::P32kbig
+    "prc_1", // wxPaperSize::Penv_1
+    "prc_2", // wxPaperSize::Penv_2
+    "prc_3", // wxPaperSize::Penv_3
+    "prc_4", // wxPaperSize::Penv_4
+    "prc_5", // wxPaperSize::Penv_5
+    "prc_6", // wxPaperSize::Penv_6
+    "prc_7", // wxPaperSize::Penv_7
+    "prc_8", // wxPaperSize::Penv_8
+    "prc_9", // wxPaperSize::Penv_9
+    "prc_10", // wxPaperSize::Penv_10
+    "prc_16k", // wxPaperSize::P16k_rotated
+    "prc_32k", // wxPaperSize::P32k_rotated
+    "prc_32k", // wxPaperSize::P32kbig_rotated
+    "prc_1", // wxPaperSize::Penv_1_rotated
+    "prc_2", // wxPaperSize::Penv_2_rotated
+    "prc_3", // wxPaperSize::Penv_3_rotated
+    "prc_4", // wxPaperSize::Penv_4_rotated
+    "prc_5", // wxPaperSize::Penv_5_rotated
+    "prc_6", // wxPaperSize::Penv_6_rotated
+    "prc_7", // wxPaperSize::Penv_7_rotated
+    "prc_8", // wxPaperSize::Penv_8_rotated
+    "prc_9", // wxPaperSize::Penv_9_rotated
+    "prc_10", // wxPaperSize::Penv_10_rotated
+    "iso_a0", // wxPaperSize::_A0
+    "iso_a1"  // wxPaperSize::_A1
 };
 
 static GtkPaperSize* wxGetGtkPaperSize(wxPaperSize paperId, const wxSize& size)
@@ -437,42 +437,42 @@ bool wxGtkPrintNativeData::TransferTo( wxPrintData &data )
 
     switch (gtk_print_settings_get_duplex(m_config))
     {
-        case GTK_PRINT_DUPLEX_SIMPLEX:      data.SetDuplex (wxDUPLEX_SIMPLEX);
+        case GTK_PRINT_DUPLEX_SIMPLEX:      data.SetDuplex (wxDuplexMode::Simplex);
                                             break;
 
-        case GTK_PRINT_DUPLEX_HORIZONTAL:   data.SetDuplex (wxDUPLEX_HORIZONTAL);
+        case GTK_PRINT_DUPLEX_HORIZONTAL:   data.SetDuplex (wxDuplexMode::Horizontal);
                                             break;
 
         default:
-        case GTK_PRINT_DUPLEX_VERTICAL:      data.SetDuplex (wxDUPLEX_VERTICAL);
+        case GTK_PRINT_DUPLEX_VERTICAL:      data.SetDuplex (wxDuplexMode::Vertical);
                                             break;
     }
 
     GtkPageOrientation orientation = gtk_print_settings_get_orientation (m_config);
     if (orientation == GTK_PAGE_ORIENTATION_PORTRAIT)
     {
-        data.SetOrientation(wxPORTRAIT);
+        data.SetOrientation(wxPrintOrientation::Portrait);
         data.SetOrientationReversed(false);
     }
     else if (orientation == GTK_PAGE_ORIENTATION_LANDSCAPE)
     {
-        data.SetOrientation(wxLANDSCAPE);
+        data.SetOrientation(wxPrintOrientation::Landscape);
         data.SetOrientationReversed(false);
     }
     else if (orientation == GTK_PAGE_ORIENTATION_REVERSE_PORTRAIT)
     {
-        data.SetOrientation(wxPORTRAIT);
+        data.SetOrientation(wxPrintOrientation::Portrait);
         data.SetOrientationReversed(true);
     }
     else if (orientation == GTK_PAGE_ORIENTATION_REVERSE_LANDSCAPE)
     {
-        data.SetOrientation(wxLANDSCAPE);
+        data.SetOrientation(wxPrintOrientation::Landscape);
         data.SetOrientationReversed(true);
     }
 
     data.SetCollate(gtk_print_settings_get_collate(m_config) != 0);
 
-    wxPaperSize paperId = wxPAPER_NONE;
+    wxPaperSize paperId = wxPaperSize::None;
     GtkPaperSize *paper_size = gtk_print_settings_get_paper_size (m_config);
     if (paper_size)
     {
@@ -485,7 +485,7 @@ bool wxGtkPrintNativeData::TransferTo( wxPrintData &data )
                 break;
             }
         }
-        if (paperId == wxPAPER_NONE)
+        if (paperId == wxPaperSize::None)
         {
             // look for a size match in wxThePrintPaperDatabase
             const wxSize size(
@@ -495,7 +495,7 @@ bool wxGtkPrintNativeData::TransferTo( wxPrintData &data )
             paperId = wxThePrintPaperDatabase->GetSize(size);
 
             // if no match, set custom size
-            if (paperId == wxPAPER_NONE)
+            if (paperId == wxPaperSize::None)
                 data.SetPaperSize(size);
         }
 
@@ -535,26 +535,26 @@ bool wxGtkPrintNativeData::TransferFrom( const wxPrintData &data )
 
     switch (data.GetDuplex())
     {
-        case wxDUPLEX_SIMPLEX:      gtk_print_settings_set_duplex (m_config, GTK_PRINT_DUPLEX_SIMPLEX);
+        case wxDuplexMode::Simplex:      gtk_print_settings_set_duplex (m_config, GTK_PRINT_DUPLEX_SIMPLEX);
                                 break;
 
-        case wxDUPLEX_HORIZONTAL:   gtk_print_settings_set_duplex (m_config, GTK_PRINT_DUPLEX_HORIZONTAL);
+        case wxDuplexMode::Horizontal:   gtk_print_settings_set_duplex (m_config, GTK_PRINT_DUPLEX_HORIZONTAL);
                                 break;
 
         default:
-        case wxDUPLEX_VERTICAL:      gtk_print_settings_set_duplex (m_config, GTK_PRINT_DUPLEX_VERTICAL);
+        case wxDuplexMode::Vertical:      gtk_print_settings_set_duplex (m_config, GTK_PRINT_DUPLEX_VERTICAL);
                                 break;
     }
 
     if (!data.IsOrientationReversed())
     {
-        if (data.GetOrientation() == wxLANDSCAPE)
+        if (data.GetOrientation() == wxPrintOrientation::Landscape)
             gtk_print_settings_set_orientation (m_config, GTK_PAGE_ORIENTATION_LANDSCAPE);
         else
             gtk_print_settings_set_orientation (m_config, GTK_PAGE_ORIENTATION_PORTRAIT);
     }
     else {
-        if (data.GetOrientation() == wxLANDSCAPE)
+        if (data.GetOrientation() == wxPrintOrientation::Landscape)
             gtk_print_settings_set_orientation (m_config, GTK_PAGE_ORIENTATION_REVERSE_LANDSCAPE);
         else
             gtk_print_settings_set_orientation (m_config, GTK_PAGE_ORIENTATION_REVERSE_PORTRAIT);
@@ -807,7 +807,7 @@ int wxGtkPageSetupDialog::ShowModal()
 
     // If the user used a custom paper format the last time he printed, we have to restore it too.
     wxPaperSize paperId = m_pageDialogData.GetPrintData().GetPaperId();
-    if (paperId == wxPAPER_NONE)
+    if (paperId == wxPaperSize::None)
     {
         wxSize customPaperSize = m_pageDialogData.GetPaperSize();
         if (customPaperSize.GetWidth() > 0 && customPaperSize.GetHeight() > 0)
@@ -863,7 +863,7 @@ int wxGtkPageSetupDialog::ShowModal()
                 m_pageDialogData.GetPrintData().ConvertFromNative();
 
                 // Store custom paper format if any.
-                if ( m_pageDialogData.GetPrintData().GetPaperId() == wxPAPER_NONE )
+                if ( m_pageDialogData.GetPrintData().GetPaperId() == wxPaperSize::None )
                 {
                     gdouble ml,mr,mt,mb,pw,ph;
                     ml = gtk_page_setup_get_left_margin (newPageSetup, GTK_UNIT_MM);
@@ -2445,7 +2445,7 @@ void wxGtkPrintPreview::DetermineScaling()
 
     wxPrintPaperType *paper = wxThePrintPaperDatabase->FindPaperType(paperType);
     if (!paper)
-        paper = wxThePrintPaperDatabase->FindPaperType(wxPAPER_A4);
+        paper = wxThePrintPaperDatabase->FindPaperType(wxPaperSize::A4);
 
     if (paper)
     {
@@ -2467,7 +2467,7 @@ void wxGtkPrintPreview::DetermineScaling()
         wxSize sizeMM(sizeTenthsMM.x / 10, sizeTenthsMM.y / 10);
 
         // If in landscape mode, we need to swap the width and height.
-        if ( m_printDialogData.GetPrintData().GetOrientation() == wxLANDSCAPE )
+        if ( m_printDialogData.GetPrintData().GetOrientation() == wxPrintOrientation::Landscape )
         {
             m_pageWidth = sizeDevUnits.y;
             m_pageHeight = sizeDevUnits.x;

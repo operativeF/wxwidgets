@@ -219,27 +219,27 @@ bool wxWindowsPrintNativeData::TransferTo( wxPrintData &data )
     //// Bin
     if (devMode->dmFields & DM_DEFAULTSOURCE) {
         switch (devMode->dmDefaultSource) {
-            case DMBIN_ONLYONE        : data.SetBin(wxPRINTBIN_ONLYONE       ); break;
-            case DMBIN_LOWER          : data.SetBin(wxPRINTBIN_LOWER         ); break;
-            case DMBIN_MIDDLE         : data.SetBin(wxPRINTBIN_MIDDLE        ); break;
-            case DMBIN_MANUAL         : data.SetBin(wxPRINTBIN_MANUAL        ); break;
-            case DMBIN_ENVELOPE       : data.SetBin(wxPRINTBIN_ENVELOPE      ); break;
-            case DMBIN_ENVMANUAL      : data.SetBin(wxPRINTBIN_ENVMANUAL     ); break;
-            case DMBIN_AUTO           : data.SetBin(wxPRINTBIN_AUTO          ); break;
-            case DMBIN_TRACTOR        : data.SetBin(wxPRINTBIN_TRACTOR       ); break;
-            case DMBIN_SMALLFMT       : data.SetBin(wxPRINTBIN_SMALLFMT      ); break;
-            case DMBIN_LARGEFMT       : data.SetBin(wxPRINTBIN_LARGEFMT      ); break;
-            case DMBIN_LARGECAPACITY  : data.SetBin(wxPRINTBIN_LARGECAPACITY ); break;
-            case DMBIN_CASSETTE       : data.SetBin(wxPRINTBIN_CASSETTE      ); break;
-            case DMBIN_FORMSOURCE     : data.SetBin(wxPRINTBIN_FORMSOURCE    ); break;
+            case DMBIN_ONLYONE        : data.SetBin(wxPrintBin::OnlyOne       ); break;
+            case DMBIN_LOWER          : data.SetBin(wxPrintBin::Lower         ); break;
+            case DMBIN_MIDDLE         : data.SetBin(wxPrintBin::Middle        ); break;
+            case DMBIN_MANUAL         : data.SetBin(wxPrintBin::Manual        ); break;
+            case DMBIN_ENVELOPE       : data.SetBin(wxPrintBin::Envelope      ); break;
+            case DMBIN_ENVMANUAL      : data.SetBin(wxPrintBin::EnvManual     ); break;
+            case DMBIN_AUTO           : data.SetBin(wxPrintBin::Auto          ); break;
+            case DMBIN_TRACTOR        : data.SetBin(wxPrintBin::Tractor       ); break;
+            case DMBIN_SMALLFMT       : data.SetBin(wxPrintBin::SmallFmt      ); break;
+            case DMBIN_LARGEFMT       : data.SetBin(wxPrintBin::LargeFmt      ); break;
+            case DMBIN_LARGECAPACITY  : data.SetBin(wxPrintBin::LargeCapacity ); break;
+            case DMBIN_CASSETTE       : data.SetBin(wxPrintBin::Cassette      ); break;
+            case DMBIN_FORMSOURCE     : data.SetBin(wxPrintBin::FormSource    ); break;
             default:
                 if (devMode->dmDefaultSource >= DMBIN_USER)
-                    data.SetBin((wxPrintBin)((devMode->dmDefaultSource)-DMBIN_USER+(int)wxPRINTBIN_USER));
+                    data.SetBin(static_cast<wxPrintBin>((devMode->dmDefaultSource) - DMBIN_USER + static_cast<int>(wxPrintBin::User)));
                 else
-                    data.SetBin(wxPRINTBIN_DEFAULT);
+                    data.SetBin(wxPrintBin::Default);
         }
     } else {
-        data.SetBin(wxPRINTBIN_DEFAULT);
+        data.SetBin(wxPrintBin::Default);
     }
     if (devMode->dmFields & DM_MEDIATYPE)
     {
@@ -287,7 +287,7 @@ bool wxWindowsPrintNativeData::TransferTo( wxPrintData &data )
         {
             // Shouldn't really get here
             wxFAIL_MSG(wxT("Paper database wasn't initialized in wxPrintData::ConvertFromNative."));
-            data.SetPaperId( wxPAPER_NONE );
+            data.SetPaperId( wxPaperSize::None );
             data.SetPaperSize( wxSize(0,0) );
             m_customWindowsPaperId = 0;
 
@@ -300,7 +300,7 @@ bool wxWindowsPrintNativeData::TransferTo( wxPrintData &data )
         {
             // DEVMODE is in tenths of a millimeter
             data.SetPaperSize( wxSize(devMode->dmPaperWidth / 10, devMode->dmPaperLength / 10) );
-            data.SetPaperId( wxPAPER_NONE );
+            data.SetPaperId( wxPaperSize::None );
             m_customWindowsPaperId = devMode->dmPaperSize;
         }
         else
@@ -310,7 +310,7 @@ bool wxWindowsPrintNativeData::TransferTo( wxPrintData &data )
             // m_customWindowsPaperId to devMode->dmPaperSize should be enough
             // to get this paper size working.
             data.SetPaperSize( wxSize(0,0) );
-            data.SetPaperId( wxPAPER_NONE );
+            data.SetPaperId( wxPaperSize::None );
             m_customWindowsPaperId = devMode->dmPaperSize;
         }
     }
@@ -321,14 +321,14 @@ bool wxWindowsPrintNativeData::TransferTo( wxPrintData &data )
     {
         switch (devMode->dmDuplex)
         {
-            case DMDUP_HORIZONTAL:   data.SetDuplex( wxDUPLEX_HORIZONTAL ); break;
-            case DMDUP_VERTICAL:     data.SetDuplex( wxDUPLEX_VERTICAL ); break;
+            case DMDUP_HORIZONTAL:   data.SetDuplex( wxDuplexMode::Horizontal ); break;
+            case DMDUP_VERTICAL:     data.SetDuplex( wxDuplexMode::Vertical ); break;
             default:
-            case DMDUP_SIMPLEX:      data.SetDuplex( wxDUPLEX_SIMPLEX ); break;
+            case DMDUP_SIMPLEX:      data.SetDuplex( wxDuplexMode::Simplex ); break;
         }
     }
     else
-        data.SetDuplex( wxDUPLEX_SIMPLEX );
+        data.SetDuplex( wxDuplexMode::Simplex );
 
     //// Quality
 
@@ -543,7 +543,7 @@ bool wxWindowsPrintNativeData::TransferFrom( const wxPrintData &data )
         wxPrintPaperType *paperType = nullptr;
 
         const wxPaperSize paperId = data.GetPaperId();
-        if ( paperId != wxPAPER_NONE && wxThePrintPaperDatabase )
+        if ( paperId != wxPaperSize::None && wxThePrintPaperDatabase )
         {
             paperType = wxThePrintPaperDatabase->FindPaperType(paperId);
         }
@@ -585,14 +585,14 @@ bool wxWindowsPrintNativeData::TransferFrom( const wxPrintData &data )
         short duplex;
         switch (data.GetDuplex())
         {
-            case wxDUPLEX_HORIZONTAL:
+            case wxDuplexMode::Horizontal:
                 duplex = DMDUP_HORIZONTAL;
                 break;
-            case wxDUPLEX_VERTICAL:
+            case wxDuplexMode::Vertical:
                 duplex = DMDUP_VERTICAL;
                 break;
             default:
-            // in fact case wxDUPLEX_SIMPLEX:
+            // in fact case wxDuplexMode::Simplex:
                 duplex = DMDUP_SIMPLEX;
                 break;
         }
@@ -631,26 +631,28 @@ bool wxWindowsPrintNativeData::TransferFrom( const wxPrintData &data )
             devMode->dmDriverExtra = (WXWORD)data.GetPrivDataLen();
         }
 
-        if (data.GetBin() != wxPRINTBIN_DEFAULT)
+        if (data.GetBin() != wxPrintBin::Default)
         {
             switch (data.GetBin())
             {
-                case wxPRINTBIN_ONLYONE:        devMode->dmDefaultSource = DMBIN_ONLYONE;       break;
-                case wxPRINTBIN_LOWER:          devMode->dmDefaultSource = DMBIN_LOWER;         break;
-                case wxPRINTBIN_MIDDLE:         devMode->dmDefaultSource = DMBIN_MIDDLE;        break;
-                case wxPRINTBIN_MANUAL:         devMode->dmDefaultSource = DMBIN_MANUAL;        break;
-                case wxPRINTBIN_ENVELOPE:       devMode->dmDefaultSource = DMBIN_ENVELOPE;      break;
-                case wxPRINTBIN_ENVMANUAL:      devMode->dmDefaultSource = DMBIN_ENVMANUAL;     break;
-                case wxPRINTBIN_AUTO:           devMode->dmDefaultSource = DMBIN_AUTO;          break;
-                case wxPRINTBIN_TRACTOR:        devMode->dmDefaultSource = DMBIN_TRACTOR;       break;
-                case wxPRINTBIN_SMALLFMT:       devMode->dmDefaultSource = DMBIN_SMALLFMT;      break;
-                case wxPRINTBIN_LARGEFMT:       devMode->dmDefaultSource = DMBIN_LARGEFMT;      break;
-                case wxPRINTBIN_LARGECAPACITY:  devMode->dmDefaultSource = DMBIN_LARGECAPACITY; break;
-                case wxPRINTBIN_CASSETTE:       devMode->dmDefaultSource = DMBIN_CASSETTE;      break;
-                case wxPRINTBIN_FORMSOURCE:     devMode->dmDefaultSource = DMBIN_FORMSOURCE;    break;
+                case wxPrintBin::OnlyOne:        devMode->dmDefaultSource = DMBIN_ONLYONE;       break;
+                case wxPrintBin::Lower:          devMode->dmDefaultSource = DMBIN_LOWER;         break;
+                case wxPrintBin::Middle:         devMode->dmDefaultSource = DMBIN_MIDDLE;        break;
+                case wxPrintBin::Manual:         devMode->dmDefaultSource = DMBIN_MANUAL;        break;
+                case wxPrintBin::Envelope:       devMode->dmDefaultSource = DMBIN_ENVELOPE;      break;
+                case wxPrintBin::EnvManual:      devMode->dmDefaultSource = DMBIN_ENVMANUAL;     break;
+                case wxPrintBin::Auto:           devMode->dmDefaultSource = DMBIN_AUTO;          break;
+                case wxPrintBin::Tractor:        devMode->dmDefaultSource = DMBIN_TRACTOR;       break;
+                case wxPrintBin::SmallFmt:       devMode->dmDefaultSource = DMBIN_SMALLFMT;      break;
+                case wxPrintBin::LargeFmt:       devMode->dmDefaultSource = DMBIN_LARGEFMT;      break;
+                case wxPrintBin::LargeCapacity:  devMode->dmDefaultSource = DMBIN_LARGECAPACITY; break;
+                case wxPrintBin::Cassette:       devMode->dmDefaultSource = DMBIN_CASSETTE;      break;
+                case wxPrintBin::FormSource:     devMode->dmDefaultSource = DMBIN_FORMSOURCE;    break;
 
                 default:
-                    devMode->dmDefaultSource = (short)(DMBIN_USER + data.GetBin() - wxPRINTBIN_USER); // 256 + data.GetBin() - 14 = 242 + data.GetBin()
+                    devMode->dmDefaultSource = (short)(DMBIN_USER + static_cast<int>(data.GetBin())
+                                                      - static_cast<int>(wxPrintBin::User));
+                                                      // 256 + data.GetBin() - 14 = 242 + data.GetBin()
                     break;
             }
 
@@ -1098,7 +1100,7 @@ bool wxWindowsPageSetupDialog::ConvertFromNative( wxPageSetupDialogData &data )
     data.EnableHelp( ((pd->Flags & PSD_SHOWHELP) == PSD_SHOWHELP) );
 
     //   PAGESETUPDLG is in hundreds of a mm
-    if (data.GetPrintData().GetOrientation() == wxLANDSCAPE)
+    if (data.GetPrintData().GetOrientation() == wxPrintOrientation::Landscape)
         data.SetPaperSize( wxSize(pd->ptPaperSize.y / 100, pd->ptPaperSize.x / 100) );
     else
         data.SetPaperSize( wxSize(pd->ptPaperSize.x / 100, pd->ptPaperSize.y / 100) );

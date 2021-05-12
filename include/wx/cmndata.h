@@ -11,7 +11,7 @@
 #ifndef _WX_CMNDATA_H_BASE_
 #define _WX_CMNDATA_H_BASE_
 
-#include "wx/defs.h"
+#include "wx/printercfg.h"
 
 #if wxUSE_PRINTING_ARCHITECTURE
 
@@ -22,32 +22,6 @@
 #endif
 
 class WXDLLIMPEXP_FWD_CORE wxPrintNativeDataBase;
-
-/*
- * wxPrintData
- * Encapsulates printer information (not printer dialog information)
- */
-
-enum wxPrintBin
-{
-    wxPRINTBIN_DEFAULT,
-
-    wxPRINTBIN_ONLYONE,
-    wxPRINTBIN_LOWER,
-    wxPRINTBIN_MIDDLE,
-    wxPRINTBIN_MANUAL,
-    wxPRINTBIN_ENVELOPE,
-    wxPRINTBIN_ENVMANUAL,
-    wxPRINTBIN_AUTO,
-    wxPRINTBIN_TRACTOR,
-    wxPRINTBIN_SMALLFMT,
-    wxPRINTBIN_LARGEFMT,
-    wxPRINTBIN_LARGECAPACITY,
-    wxPRINTBIN_CASSETTE,
-    wxPRINTBIN_FORMSOURCE,
-
-    wxPRINTBIN_USER
-};
 
 const int wxPRINTMEDIA_DEFAULT = 0;
 

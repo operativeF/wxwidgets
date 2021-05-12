@@ -207,10 +207,10 @@ bool App::OnInit () {
 #if wxUSE_PRINTING_ARCHITECTURE
     // initialize print data and setup
     g_printData = new wxPrintData;
-    wxPrintPaperType *paper = wxThePrintPaperDatabase->FindPaperType(wxPAPER_A4);
+    wxPrintPaperType *paper = wxThePrintPaperDatabase->FindPaperType(wxPaperSize::A4);
     g_printData->SetPaperId(paper->GetId());
     g_printData->SetPaperSize(paper->GetSize());
-    g_printData->SetOrientation(wxPORTRAIT);
+    g_printData->SetOrientation(wxPrintOrientation::Portrait);
 
     g_pageSetupData = new wxPageSetupDialogData;
     // copy over initial paper size from print record

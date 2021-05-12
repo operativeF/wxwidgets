@@ -299,12 +299,12 @@ bool wxPostScriptPrintPreview::Print(bool interactive)
 void wxPostScriptPrintPreview::DetermineScaling()
 {
     wxPaperSize paperType = m_printDialogData.GetPrintData().GetPaperId();
-    if (paperType == wxPAPER_NONE)
-        paperType = wxPAPER_NONE;
+    if (paperType == wxPaperSize::None)
+        paperType = wxPaperSize::None;
 
     wxPrintPaperType *paper = wxThePrintPaperDatabase->FindPaperType(paperType);
     if (!paper)
-        paper = wxThePrintPaperDatabase->FindPaperType(wxPAPER_A4);
+        paper = wxThePrintPaperDatabase->FindPaperType(wxPaperSize::A4);
 
     if (paper)
     {
@@ -326,7 +326,7 @@ void wxPostScriptPrintPreview::DetermineScaling()
         wxSize sizeMM(sizeTenthsMM.x / 10, sizeTenthsMM.y / 10);
 
         // If in landscape mode, we need to swap the width and height.
-        if ( m_printDialogData.GetPrintData().GetOrientation() == wxLANDSCAPE )
+        if ( m_printDialogData.GetPrintData().GetOrientation() == wxPrintOrientation::Landscape )
         {
             m_pageWidth = sizeDevUnits.y;
             m_pageHeight = sizeDevUnits.x;

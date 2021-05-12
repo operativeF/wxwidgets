@@ -2504,10 +2504,10 @@ void MyFrame::OnSave(wxCommandEvent& WXUNUSED(event))
             m_canvas->UseGraphicRenderer(NULL);
 #endif // wxUSE_GRAPHICS_CONTEXT
             wxPrintData printData;
-            printData.SetPrintMode(wxPRINT_MODE_FILE);
+            printData.SetPrintMode(wxPrintMode::File);
             printData.SetFilename(dlg.GetPath());
-            printData.SetOrientation(wxPORTRAIT);
-            printData.SetPaperId(wxPAPER_A4);
+            printData.SetOrientation(wxPrintOrientation::Portrait);
+            printData.SetPaperId(wxPaperSize::A4);
             wxPostScriptDC psdc(printData);
             // Save current scale factor
             const double curUserScaleX = m_xUserScale;

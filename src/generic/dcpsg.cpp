@@ -1554,7 +1554,7 @@ void wxPostScriptDCImpl::SetPrintData(const wxPrintData& data)
 
     wxPaperSize id = m_printData.GetPaperId();
     wxPrintPaperType *paper = wxThePrintPaperDatabase->FindPaperType(id);
-    if (!paper) paper = wxThePrintPaperDatabase->FindPaperType(wxPAPER_A4);
+    if (!paper) paper = wxThePrintPaperDatabase->FindPaperType(wxPaperSize::A4);
     int w = 595;
     int h = 842;
     if (paper)
@@ -1563,7 +1563,7 @@ void wxPostScriptDCImpl::SetPrintData(const wxPrintData& data)
         h = paper->GetSizeDeviceUnits().y;
     }
 
-    if (m_printData.GetOrientation() == wxLANDSCAPE)
+    if (m_printData.GetOrientation() == wxPrintOrientation::Landscape)
         m_pageHeight = w * PS2DEV;
     else
         m_pageHeight = h * PS2DEV;
@@ -1592,7 +1592,7 @@ void wxPostScriptDCImpl::DoGetSize(int* width, int* height) const
 
     wxPrintPaperType *paper = wxThePrintPaperDatabase->FindPaperType(id);
 
-    if (!paper) paper = wxThePrintPaperDatabase->FindPaperType(wxPAPER_A4);
+    if (!paper) paper = wxThePrintPaperDatabase->FindPaperType(wxPaperSize::A4);
 
     int w = 595;
     int h = 842;
@@ -1602,7 +1602,7 @@ void wxPostScriptDCImpl::DoGetSize(int* width, int* height) const
         h = paper->GetSizeDeviceUnits().y;
     }
 
-    if (m_printData.GetOrientation() == wxLANDSCAPE)
+    if (m_printData.GetOrientation() == wxPrintOrientation::Landscape)
     {
         wxSwap(w, h);
     }
@@ -1620,7 +1620,7 @@ void wxPostScriptDCImpl::DoGetSizeMM(int *width, int *height) const
 
     wxPrintPaperType *paper = wxThePrintPaperDatabase->FindPaperType(id);
 
-    if (!paper) paper = wxThePrintPaperDatabase->FindPaperType(wxPAPER_A4);
+    if (!paper) paper = wxThePrintPaperDatabase->FindPaperType(wxPaperSize::A4);
 
     int w = 210;
     int h = 297;
@@ -1630,7 +1630,7 @@ void wxPostScriptDCImpl::DoGetSizeMM(int *width, int *height) const
         h = paper->GetHeight() / 10;
     }
 
-    if (m_printData.GetOrientation() == wxLANDSCAPE)
+    if (m_printData.GetOrientation() == wxPrintOrientation::Landscape)
     {
         wxSwap(w, h);
     }
@@ -1650,7 +1650,7 @@ bool wxPostScriptDCImpl::StartDoc( const wxString& WXUNUSED(message) )
 {
     wxCHECK_MSG( m_ok, false, wxT("invalid postscript dc") );
 
-    if (m_printData.GetPrintMode() != wxPRINT_MODE_STREAM )
+    if (m_printData.GetPrintMode() != wxPrintMode::Stream )
     {
         if ( m_printData.GetFilename().empty() )
         {
@@ -1679,7 +1679,7 @@ bool wxPostScriptDCImpl::StartDoc( const wxString& WXUNUSED(message) )
     buffer.Printf( "%%%%CreationDate: %s\n", wxNow() );
     PsPrint( buffer );
 
-    if (m_printData.GetOrientation() == wxLANDSCAPE)
+    if (m_printData.GetOrientation() == wxPrintOrientation::Landscape)
         PsPrint( "%%Orientation: Landscape\n" );
     else
         PsPrint( "%%Orientation: Portrait\n" );
@@ -1687,20 +1687,20 @@ bool wxPostScriptDCImpl::StartDoc( const wxString& WXUNUSED(message) )
     const wxChar *paper;
     switch (m_printData.GetPaperId())
     {
-       case wxPAPER_LETTER: paper = wxT("Letter"); break;       // Letter: paper ""; 8 1/2 by 11 inches
-       case wxPAPER_LEGAL: paper = wxT("Legal"); break;         // Legal, 8 1/2 by 14 inches
-       case wxPAPER_A4: paper = wxT("A4"); break;               // A4 Sheet, 210 by 297 millimeters
-       case wxPAPER_TABLOID: paper = wxT("Tabloid"); break;     // Tabloid, 11 by 17 inches
-       case wxPAPER_LEDGER: paper = wxT("Ledger"); break;       // Ledger, 17 by 11 inches
-       case wxPAPER_STATEMENT: paper = wxT("Statement"); break; // Statement, 5 1/2 by 8 1/2 inches
-       case wxPAPER_EXECUTIVE: paper = wxT("Executive"); break; // Executive, 7 1/4 by 10 1/2 inches
-       case wxPAPER_A3: paper = wxT("A3"); break;               // A3 sheet, 297 by 420 millimeters
-       case wxPAPER_A5: paper = wxT("A5"); break;               // A5 sheet, 148 by 210 millimeters
-       case wxPAPER_B4: paper = wxT("B4"); break;               // B4 sheet, 250 by 354 millimeters
-       case wxPAPER_B5: paper = wxT("B5"); break;               // B5 sheet, 182-by-257-millimeter paper
-       case wxPAPER_FOLIO: paper = wxT("Folio"); break;         // Folio, 8-1/2-by-13-inch paper
-       case wxPAPER_QUARTO: paper = wxT("Quaro"); break;        // Quarto, 215-by-275-millimeter paper
-       case wxPAPER_10X14: paper = wxT("10x14"); break;         // 10-by-14-inch sheet
+       case wxPaperSize::Letter: paper = wxT("Letter"); break;       // Letter: paper ""; 8 1/2 by 11 inches
+       case wxPaperSize::Legal: paper = wxT("Legal"); break;         // Legal, 8 1/2 by 14 inches
+       case wxPaperSize::A4: paper = wxT("A4"); break;               // A4 Sheet, 210 by 297 millimeters
+       case wxPaperSize::Tabloid: paper = wxT("Tabloid"); break;     // Tabloid, 11 by 17 inches
+       case wxPaperSize::Ledger: paper = wxT("Ledger"); break;       // Ledger, 17 by 11 inches
+       case wxPaperSize::Statement: paper = wxT("Statement"); break; // Statement, 5 1/2 by 8 1/2 inches
+       case wxPaperSize::Executive: paper = wxT("Executive"); break; // Executive, 7 1/4 by 10 1/2 inches
+       case wxPaperSize::A3: paper = wxT("A3"); break;               // A3 sheet, 297 by 420 millimeters
+       case wxPaperSize::A5: paper = wxT("A5"); break;               // A5 sheet, 148 by 210 millimeters
+       case wxPaperSize::B4: paper = wxT("B4"); break;               // B4 sheet, 250 by 354 millimeters
+       case wxPaperSize::B5: paper = wxT("B5"); break;               // B5 sheet, 182-by-257-millimeter paper
+       case wxPaperSize::Folio: paper = wxT("Folio"); break;         // Folio, 8-1/2-by-13-inch paper
+       case wxPaperSize::Quarto: paper = wxT("Quaro"); break;        // Quarto, 215-by-275-millimeter paper
+       case wxPaperSize::_10X14: paper = wxT("10x14"); break;         // 10-by-14-inch sheet
        default: paper = wxT("A4");
     }
 
@@ -1789,7 +1789,7 @@ void wxPostScriptDCImpl::EndDoc ()
 
 
     // If we're landscape, our sense of "x" and "y" is reversed.
-    if (m_printData.GetOrientation() == wxLANDSCAPE)
+    if (m_printData.GetOrientation() == wxPrintOrientation::Landscape)
     {
         wxSwap(llx, lly);
         wxSwap(urx, ury);
@@ -1826,7 +1826,7 @@ void wxPostScriptDCImpl::EndDoc ()
     wxPostScriptPrintNativeData *data =
         wxDynamicCast(m_printData.GetNativeData(), wxPostScriptPrintNativeData);
 
-    if (m_ok && data && (m_printData.GetPrintMode() == wxPRINT_MODE_PRINTER))
+    if (m_ok && data && (m_printData.GetPrintMode() == wxPrintMode::Printer))
     {
         wxString command;
         command += data->GetPrinterCommand();
@@ -1876,7 +1876,7 @@ void wxPostScriptDCImpl::StartPage()
     // I copied this one from a PostScript tutorial, but to no avail. RR.
     // PsPrint( "90 rotate llx neg ury nef translate\n" );
 
-    if (m_printData.GetOrientation() == wxLANDSCAPE)
+    if (m_printData.GetOrientation() == wxPrintOrientation::Landscape)
         PsPrint( "90 rotate\n" );
 }
 
@@ -1927,7 +1927,7 @@ void wxPostScriptDCImpl::PsPrint( const wxString& str )
     {
 #if wxUSE_STREAMS
         // append to output stream
-        case wxPRINT_MODE_STREAM:
+        case wxPrintMode::Stream:
             {
                 // Pointer to PrintNativeData not always points to wxPostScriptPrintNativeData,
                 // e.g. under wxGTK it can point to wxGtkPrintNativeData and so calling

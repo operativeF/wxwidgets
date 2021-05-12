@@ -11,15 +11,14 @@
 #ifndef _WX_PAPERH__
 #define _WX_PAPERH__
 
-#include "wx/defs.h"
 #include "wx/event.h"
 #include "wx/cmndata.h"
 #include "wx/intl.h"
 #include "wx/hashmap.h"
 
 /*
- * Paper type: see defs.h for wxPaperSize enum.
- * A wxPrintPaperType can have an id and a name, or just a name and wxPAPER_NONE,
+ * Paper type: see printercfg.h for wxPaperSize enum.
+ * A wxPrintPaperType can have an id and a name, or just a name and wxPaperSize::None,
  * so you can add further paper types without needing new ids.
  */
 

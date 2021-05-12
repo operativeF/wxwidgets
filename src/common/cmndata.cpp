@@ -56,22 +56,22 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPageSetupDialogData, wxObject);
 wxPrintData::wxPrintData()
     : m_paperSize(wxDefaultSize)
 {
-    m_bin = wxPRINTBIN_DEFAULT;
+    m_bin = wxPrintBin::Default;
     m_media = wxPRINTMEDIA_DEFAULT;
-    m_printMode = wxPRINT_MODE_PRINTER;
-    m_printOrientation = wxPORTRAIT;
+    m_printMode = wxPrintMode::Printer;
+    m_printOrientation = wxPrintOrientation::Portrait;
     m_printOrientationReversed = false;
     m_printNoCopies = 1;
     m_printCollate = false;
 
     // New, 24/3/99
     m_colour = true;
-    m_duplexMode = wxDUPLEX_SIMPLEX;
+    m_duplexMode = wxDuplexMode::Simplex;
     m_printQuality = wxPRINT_QUALITY_HIGH;
 
     // we intentionally don't initialize paper id and size at all, like this
     // the default system settings will be used for them
-    m_paperId = wxPAPER_NONE;
+    m_paperId = wxPaperSize::None;
 
     m_privData = nullptr;
     m_privDataLen = 0;
@@ -356,7 +356,7 @@ void wxPageSetupDialogData::CalculateIdFromPaperSize()
     wxSize sz = GetPaperSize();
 
     wxPaperSize id = wxThePrintPaperDatabase->GetSize(wxSize(sz.x* 10, sz.y * 10));
-    if (id != wxPAPER_NONE)
+    if (id != wxPaperSize::None)
     {
         m_printData.SetPaperId(id);
     }

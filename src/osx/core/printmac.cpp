@@ -147,7 +147,7 @@ void wxOSXPrintData::TransferPaperInfoFrom( const wxPrintData &data )
 
     wxSize papersize = wxDefaultSize;
     const wxPaperSize paperId = data.GetPaperId();
-    if ( paperId != wxPAPER_NONE && wxThePrintPaperDatabase )
+    if ( paperId != wxPaperSize::None && wxThePrintPaperDatabase )
     {
         papersize = wxThePrintPaperDatabase->GetSize(paperId);
         if ( papersize != wxDefaultSize )
@@ -228,22 +228,22 @@ void wxOSXPrintData::TransferPaperInfoFrom( const wxPrintData &data )
     PMSetCopies( m_macPrintSettings , data.GetNoCopies() , false ) ;
     PMSetCollate(m_macPrintSettings, data.GetCollate());
     if ( data.IsOrientationReversed() )
-        PMSetOrientation( m_macPageFormat , ( data.GetOrientation() == wxLANDSCAPE ) ?
+        PMSetOrientation( m_macPageFormat , ( data.GetOrientation() == wxPrintOrientation::Landscape ) ?
                          kPMReverseLandscape : kPMReversePortrait , false ) ;
     else
-        PMSetOrientation( m_macPageFormat , ( data.GetOrientation() == wxLANDSCAPE ) ?
+        PMSetOrientation( m_macPageFormat , ( data.GetOrientation() == wxPrintOrientation::Landscape ) ?
                          kPMLandscape : kPMPortrait , false ) ;
 
     PMDuplexMode mode = 0 ;
     switch( data.GetDuplex() )
     {
-        case wxDUPLEX_HORIZONTAL :
+        case wxDuplexMode::Horizontal :
             mode = kPMDuplexNoTumble ;
             break ;
-        case wxDUPLEX_VERTICAL :
+        case wxDuplexMode::Vertical :
             mode = kPMDuplexTumble ;
             break ;
-        case wxDUPLEX_SIMPLEX :
+        case wxDuplexMode::Simplex :
         default :
             mode = kPMDuplexNone ;
             break ;
@@ -252,10 +252,10 @@ void wxOSXPrintData::TransferPaperInfoFrom( const wxPrintData &data )
 
 
     if ( data.IsOrientationReversed() )
-        PMSetOrientation(  m_macPageFormat , ( data.GetOrientation() == wxLANDSCAPE ) ?
+        PMSetOrientation(  m_macPageFormat , ( data.GetOrientation() == wxPrintOrientation::Landscape ) ?
                          kPMReverseLandscape : kPMReversePortrait , false ) ;
     else
-        PMSetOrientation(  m_macPageFormat , ( data.GetOrientation() == wxLANDSCAPE ) ?
+        PMSetOrientation(  m_macPageFormat , ( data.GetOrientation() == wxPrintOrientation::Landscape ) ?
                          kPMLandscape : kPMPortrait , false ) ;
 }
 
@@ -328,12 +328,12 @@ void wxOSXPrintData::TransferPaperInfoTo( wxPrintData &data )
     {
         if ( orientation == kPMPortrait || orientation == kPMReversePortrait )
         {
-            data.SetOrientation( wxPORTRAIT  );
+            data.SetOrientation( wxPrintOrientation::Portrait  );
             data.SetOrientationReversed( orientation == kPMReversePortrait );
         }
         else
         {
-            data.SetOrientation( wxLANDSCAPE );
+            data.SetOrientation( wxPrintOrientation::Landscape );
             data.SetOrientationReversed( orientation == kPMReverseLandscape );
         }
     }
@@ -348,14 +348,14 @@ void wxOSXPrintData::TransferPaperInfoTo( wxPrintData &data )
     switch( mode )
     {
         case kPMDuplexNoTumble :
-            data.SetDuplex(wxDUPLEX_HORIZONTAL);
+            data.SetDuplex(wxDuplexMode::Horizontal);
             break ;
         case kPMDuplexTumble :
-            data.SetDuplex(wxDUPLEX_VERTICAL);
+            data.SetDuplex(wxDuplexMode::Vertical);
             break ;
         case kPMDuplexNone :
         default :
-            data.SetDuplex(wxDUPLEX_SIMPLEX);
+            data.SetDuplex(wxDuplexMode::Simplex);
             break ;
     }
 
@@ -367,7 +367,7 @@ void wxOSXPrintData::TransferPaperInfoTo( wxPrintData &data )
               (int)(height * pt2mm + 0.5 ));
     data.SetPaperSize(sz);
     wxPaperSize id = wxThePrintPaperDatabase->GetSize(wxSize(sz.x* 10, sz.y * 10));
-    if (id != wxPAPER_NONE)
+    if (id != wxPaperSize::None)
     {
         data.SetPaperId(id);
     }
