@@ -18,7 +18,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxSearchCtrlXmlHandler, wxXmlResourceHandler);
 
-wxSearchCtrlXmlHandler::wxSearchCtrlXmlHandler() : wxXmlResourceHandler()
+wxSearchCtrlXmlHandler::wxSearchCtrlXmlHandler()  
 {
     XRC_ADD_STYLE(wxTE_PROCESS_ENTER);
     XRC_ADD_STYLE(wxTE_PROCESS_TAB);

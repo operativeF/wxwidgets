@@ -19,7 +19,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxBannerWindowXmlHandler, wxXmlResourceHandler);
 
 wxBannerWindowXmlHandler::wxBannerWindowXmlHandler()
-    : wxXmlResourceHandler()
+     
 {
     AddWindowStyles();
 }

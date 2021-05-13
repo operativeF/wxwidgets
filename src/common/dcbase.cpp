@@ -334,14 +334,10 @@ wxDCImpl::wxDCImpl( wxDC *owner )
         , m_logicalFunction(wxCOPY)
         , m_backgroundMode(wxBRUSHSTYLE_TRANSPARENT)
         , m_mappingMode(wxMM_TEXT)
-        , m_pen()
-        , m_brush()
-        , m_backgroundBrush()
         , m_textForegroundColour(*wxBLACK)
         , m_textBackgroundColour(*wxWHITE)
-        , m_font()
+         
 #if wxUSE_PALETTE
-        , m_palette()
         , m_hasCustomPalette(false)
 #endif // wxUSE_PALETTE
 {

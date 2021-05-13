@@ -321,7 +321,7 @@ long wxHashTableBase::MakeKey( const wxString& str )
 // ----------------------------------------------------------------------------
 
 wxHashTable::wxHashTable( const wxHashTable& table )
-           : wxHashTableBase()
+            
 {
     DoCopy( table );
 }

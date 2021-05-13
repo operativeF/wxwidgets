@@ -756,7 +756,7 @@ wxSockAddress::wxSockAddress()
 }
 
 wxSockAddress::wxSockAddress(const wxSockAddress& other)
-    : wxObject()
+     
 {
     Init();
 

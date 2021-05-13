@@ -22,7 +22,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapXmlHandler, wxXmlResourceHandler);
 
 wxBitmapXmlHandler::wxBitmapXmlHandler()
-                   :wxXmlResourceHandler()
+                   
 {
 }
 
@@ -39,7 +39,7 @@ bool wxBitmapXmlHandler::CanHandle(wxXmlNode *node)
 wxIMPLEMENT_DYNAMIC_CLASS(wxIconXmlHandler, wxXmlResourceHandler);
 
 wxIconXmlHandler::wxIconXmlHandler()
-: wxXmlResourceHandler()
+ 
 {
 }
 

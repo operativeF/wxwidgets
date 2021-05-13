@@ -13079,7 +13079,7 @@ wxRichTextImageBlock::wxRichTextImageBlock()
     Init();
 }
 
-wxRichTextImageBlock::wxRichTextImageBlock(const wxRichTextImageBlock& block):wxObject()
+wxRichTextImageBlock::wxRichTextImageBlock(const wxRichTextImageBlock& block)
 {
     Init();
     Copy(block);
@@ -13555,7 +13555,7 @@ wxRichTextFontTable::wxRichTextFontTable()
 }
 
 wxRichTextFontTable::wxRichTextFontTable(const wxRichTextFontTable& table)
-    : wxObject()
+     
 {
     (*this) = table;
 }

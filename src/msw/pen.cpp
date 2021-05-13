@@ -159,8 +159,8 @@ wxPenRefData::wxPenRefData()
 }
 
 wxPenRefData::wxPenRefData(const wxPenRefData& data)
-             :wxGDIRefData()
-    , m_colour(data.m_colour)
+             :
+     m_colour(data.m_colour)
 {
     m_style = data.m_style;
     m_width = data.m_width;

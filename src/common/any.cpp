@@ -221,7 +221,7 @@ class wxAnyValueTypeGlobalsManager : public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxAnyValueTypeGlobalsManager);
 public:
-    wxAnyValueTypeGlobalsManager() : wxModule() { }
+    wxAnyValueTypeGlobalsManager()  { }
     virtual ~wxAnyValueTypeGlobalsManager() = default;
 
     bool OnInit() override

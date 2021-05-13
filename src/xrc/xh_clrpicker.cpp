@@ -18,7 +18,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxColourPickerCtrlXmlHandler, wxXmlResourceHandler);
 
-wxColourPickerCtrlXmlHandler::wxColourPickerCtrlXmlHandler() : wxXmlResourceHandler()
+wxColourPickerCtrlXmlHandler::wxColourPickerCtrlXmlHandler()  
 {
     XRC_ADD_STYLE(wxCLRP_USE_TEXTCTRL);
     XRC_ADD_STYLE(wxCLRP_SHOW_LABEL);

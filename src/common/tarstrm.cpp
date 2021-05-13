@@ -479,7 +479,7 @@ wxTarEntry::~wxTarEntry()
 = default;
 
 wxTarEntry::wxTarEntry(const wxTarEntry& e)
-  : wxArchiveEntry(),
+  : 
     m_Name(e.m_Name),
     m_Mode(e.m_Mode),
     m_IsModeSet(e.m_IsModeSet),

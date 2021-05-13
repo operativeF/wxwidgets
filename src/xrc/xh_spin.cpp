@@ -26,7 +26,7 @@ static const long DEFAULT_MAX = 100;
 wxIMPLEMENT_DYNAMIC_CLASS(wxSpinButtonXmlHandler, wxXmlResourceHandler);
 
 wxSpinButtonXmlHandler::wxSpinButtonXmlHandler()
-: wxXmlResourceHandler()
+ 
 {
     XRC_ADD_STYLE(wxSP_HORIZONTAL);
     XRC_ADD_STYLE(wxSP_VERTICAL);
@@ -80,7 +80,7 @@ static void AddSpinCtrlStyles(wxXmlResourceHandler& handler)
 wxIMPLEMENT_DYNAMIC_CLASS(wxSpinCtrlXmlHandler, wxXmlResourceHandler);
 
 wxSpinCtrlXmlHandler::wxSpinCtrlXmlHandler()
-    : wxXmlResourceHandler()
+     
 {
     AddSpinCtrlStyles(*this);
 }
@@ -117,7 +117,7 @@ bool wxSpinCtrlXmlHandler::CanHandle(wxXmlNode *node)
 wxIMPLEMENT_DYNAMIC_CLASS(wxSpinCtrlDoubleXmlHandler, wxXmlResourceHandler);
 
 wxSpinCtrlDoubleXmlHandler::wxSpinCtrlDoubleXmlHandler()
-    : wxXmlResourceHandler()
+     
 {
     AddSpinCtrlStyles(*this);
 }

@@ -80,7 +80,7 @@ wxPrintData::wxPrintData()
 }
 
 wxPrintData::wxPrintData(const wxPrintData& printData)
-    : wxObject()
+     
 {
     m_nativeData = nullptr;
     m_privData = nullptr;
@@ -192,7 +192,7 @@ wxPrintDialogData::wxPrintDialogData()
 }
 
 wxPrintDialogData::wxPrintDialogData(const wxPrintDialogData& dialogData)
-    : wxObject()
+     
 {
     (*this) = dialogData;
 }
@@ -270,7 +270,7 @@ wxPageSetupDialogData::wxPageSetupDialogData()
 }
 
 wxPageSetupDialogData::wxPageSetupDialogData(const wxPageSetupDialogData& dialogData)
-    : wxObject()
+     
 {
     (*this) = dialogData;
 }

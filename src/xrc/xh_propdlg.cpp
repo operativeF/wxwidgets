@@ -28,7 +28,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxPropertySheetDialogXmlHandler, wxXmlResourceHandler);
 
 wxPropertySheetDialogXmlHandler::wxPropertySheetDialogXmlHandler()
-                     :wxXmlResourceHandler(),
+                     :
                       m_isInside(false),
                       m_dialog(nullptr)
 {

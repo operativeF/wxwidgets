@@ -23,7 +23,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxSimplebookXmlHandler, wxXmlResourceHandler);
 
 wxSimplebookXmlHandler::wxSimplebookXmlHandler()
-                      : wxXmlResourceHandler(),
+                      : 
                         m_isInside(false),
                         m_simplebook(nullptr)
 {

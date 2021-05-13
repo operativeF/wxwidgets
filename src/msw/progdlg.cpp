@@ -393,7 +393,7 @@ wxProgressDialog::wxProgressDialog( const wxString& title,
                                     int maximum,
                                     wxWindow *parent,
                                     int style )
-    : wxGenericProgressDialog(),
+    : 
       m_taskDialogRunner(nullptr),
       m_sharedData(nullptr),
       m_message(message),

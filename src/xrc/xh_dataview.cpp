@@ -19,7 +19,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxDataViewXmlHandler, wxXmlResourceHandler);
 
 wxDataViewXmlHandler::wxDataViewXmlHandler()
-    : wxXmlResourceHandler()
+     
 {
     XRC_ADD_STYLE(wxDV_SINGLE);
     XRC_ADD_STYLE(wxDV_MULTIPLE);

@@ -18,7 +18,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxFontPickerCtrlXmlHandler, wxXmlResourceHandler);
 
-wxFontPickerCtrlXmlHandler::wxFontPickerCtrlXmlHandler() : wxXmlResourceHandler()
+wxFontPickerCtrlXmlHandler::wxFontPickerCtrlXmlHandler()  
 {
     XRC_ADD_STYLE(wxFNTP_USE_TEXTCTRL);
     XRC_ADD_STYLE(wxFNTP_FONTDESC_AS_LABEL);

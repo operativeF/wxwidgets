@@ -40,7 +40,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxSizerXmlHandler, wxXmlResourceHandler);
 
 wxSizerXmlHandler::wxSizerXmlHandler()
-                  :wxXmlResourceHandler(),
+                  :
                    m_isInside(false),
                    m_isGBS(false),
                    m_parentSizer(nullptr)

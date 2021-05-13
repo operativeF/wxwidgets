@@ -52,7 +52,7 @@ public:
     // We need the copy ctor for CloneGDIRefData() but notice that we use the
     // base class default ctor in it and not the copy one which it doesn't have.
     wxIconBundleRefData(const wxIconBundleRefData& other)
-        : wxGDIRefData(),
+        : 
           m_icons(other.m_icons)
     {
     }

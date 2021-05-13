@@ -22,7 +22,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxStaticBitmapXmlHandler, wxXmlResourceHandler);
 
 wxStaticBitmapXmlHandler::wxStaticBitmapXmlHandler()
-                         :wxXmlResourceHandler()
+                         
 {
     AddWindowStyles();
 }

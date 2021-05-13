@@ -19,7 +19,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxGridXmlHandler, wxXmlResourceHandler);
 
 wxGridXmlHandler::wxGridXmlHandler()
-                : wxXmlResourceHandler()
+                 
 {
     AddWindowStyles();
 }

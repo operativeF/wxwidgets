@@ -20,7 +20,7 @@ using namespace Scintilla;
 
 FontAlias::FontAlias() = default;
 
-FontAlias::FontAlias(const FontAlias &other) : Font() {
+FontAlias::FontAlias(const FontAlias &other)  {
 	SetID(other.fid);
 }
 
@@ -74,13 +74,13 @@ void FontMeasurements::Clear() {
 	sizeZoomed = 2;
 }
 
-Style::Style() : FontSpecification() {
+Style::Style()  {
 	Clear(ColourDesired(0, 0, 0), ColourDesired(0xff, 0xff, 0xff),
 	      Platform::DefaultFontSize() * SC_FONT_SIZE_MULTIPLIER, nullptr, SC_CHARSET_DEFAULT,
 	      SC_WEIGHT_NORMAL, false, false, false, caseMixed, true, true, false);
 }
 
-Style::Style(const Style &source) : FontSpecification(), FontMeasurements() {
+Style::Style(const Style &source)  {
 	Clear(ColourDesired(0, 0, 0), ColourDesired(0xff, 0xff, 0xff),
 	      0, nullptr, 0,
 	      SC_WEIGHT_NORMAL, false, false, false, caseMixed, true, true, false);

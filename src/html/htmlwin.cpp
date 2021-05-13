@@ -1912,7 +1912,7 @@ class wxHtmlWinModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxHtmlWinModule);
 public:
-    wxHtmlWinModule() : wxModule() {}
+    wxHtmlWinModule()  {}
     bool OnInit() override { return true; }
     void OnExit() override { wxHtmlWindow::CleanUpStatics(); }
 };

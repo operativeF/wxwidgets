@@ -24,7 +24,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxCalendarCtrlXmlHandler, wxXmlResourceHandler);
 
 wxCalendarCtrlXmlHandler::wxCalendarCtrlXmlHandler()
-: wxXmlResourceHandler()
+ 
 {
     XRC_ADD_STYLE(wxCAL_SUNDAY_FIRST);
     XRC_ADD_STYLE(wxCAL_MONDAY_FIRST);

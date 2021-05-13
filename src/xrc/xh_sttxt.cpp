@@ -22,7 +22,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxStaticTextXmlHandler, wxXmlResourceHandler);
 
 wxStaticTextXmlHandler::wxStaticTextXmlHandler()
-: wxXmlResourceHandler()
+ 
 {
     XRC_ADD_STYLE(wxST_NO_AUTORESIZE);
     XRC_ADD_STYLE(wxALIGN_LEFT);

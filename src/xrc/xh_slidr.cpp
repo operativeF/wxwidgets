@@ -27,7 +27,7 @@ static const long DEFAULT_MAX = 100;
 wxIMPLEMENT_DYNAMIC_CLASS(wxSliderXmlHandler, wxXmlResourceHandler);
 
 wxSliderXmlHandler::wxSliderXmlHandler()
-                   :wxXmlResourceHandler()
+                   
 {
     XRC_ADD_STYLE(wxSL_HORIZONTAL);
     XRC_ADD_STYLE(wxSL_VERTICAL);

@@ -30,7 +30,7 @@ wxFontData::~wxFontData()
 = default;
 
 wxFontData::wxFontData(const wxFontData& data)
-    : wxObject(),
+    : 
       m_fontColour(data.m_fontColour),
       m_showHelp(data.m_showHelp),
       m_allowSymbols(data.m_allowSymbols),

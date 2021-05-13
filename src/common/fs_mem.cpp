@@ -80,7 +80,7 @@ private:
 wxMemoryFSHash wxMemoryFSHandlerBase::m_Hash;
 
 
-wxMemoryFSHandlerBase::wxMemoryFSHandlerBase() : wxFileSystemHandler()
+wxMemoryFSHandlerBase::wxMemoryFSHandlerBase()  
 {
 }
 

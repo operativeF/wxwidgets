@@ -24,7 +24,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxMdiXmlHandler, wxXmlResourceHandler);
 
-wxMdiXmlHandler::wxMdiXmlHandler() : wxXmlResourceHandler()
+wxMdiXmlHandler::wxMdiXmlHandler()  
 {
     XRC_ADD_STYLE(wxSTAY_ON_TOP);
     XRC_ADD_STYLE(wxCAPTION);

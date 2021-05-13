@@ -115,7 +115,7 @@ GetAddressFromName(const wxString& serverName,
 class wxTCPEventHandler : public wxEvtHandler
 {
 public:
-    wxTCPEventHandler() : wxEvtHandler() { }
+    wxTCPEventHandler()  { }
 
     void Client_OnRequest(wxSocketEvent& event);
     void Server_OnRequest(wxSocketEvent& event);
@@ -140,7 +140,7 @@ enum
 class wxTCPEventHandlerModule : public wxModule
 {
 public:
-    wxTCPEventHandlerModule() : wxModule() { }
+    wxTCPEventHandlerModule()  { }
 
     // get the global wxTCPEventHandler creating it if necessary
     static wxTCPEventHandler& GetHandler()
@@ -355,7 +355,7 @@ wxIMPLEMENT_CLASS(wxTCPConnection, wxConnectionBase);
 // --------------------------------------------------------------------------
 
 wxTCPClient::wxTCPClient()
-           : wxClientBase()
+            
 {
 }
 
@@ -433,7 +433,7 @@ wxConnectionBase *wxTCPClient::OnMakeConnection()
 // --------------------------------------------------------------------------
 
 wxTCPServer::wxTCPServer()
-           : wxServerBase()
+            
 {
     m_server = nullptr;
 }

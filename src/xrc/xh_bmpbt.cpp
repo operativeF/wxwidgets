@@ -22,7 +22,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapButtonXmlHandler, wxXmlResourceHandler);
 
 wxBitmapButtonXmlHandler::wxBitmapButtonXmlHandler()
-: wxXmlResourceHandler()
+ 
 {
     XRC_ADD_STYLE(wxBU_AUTODRAW);
     XRC_ADD_STYLE(wxBU_LEFT);

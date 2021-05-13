@@ -22,7 +22,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxStaticBoxXmlHandler, wxXmlResourceHandler);
 
 wxStaticBoxXmlHandler::wxStaticBoxXmlHandler()
-                      :wxXmlResourceHandler()
+                      
 {
     AddWindowStyles();
 }

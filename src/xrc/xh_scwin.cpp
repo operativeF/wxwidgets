@@ -23,7 +23,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxScrolledWindowXmlHandler, wxXmlResourceHandler);
 
 wxScrolledWindowXmlHandler::wxScrolledWindowXmlHandler()
-: wxXmlResourceHandler()
+ 
 {
     XRC_ADD_STYLE(wxHSCROLL);
     XRC_ADD_STYLE(wxVSCROLL);

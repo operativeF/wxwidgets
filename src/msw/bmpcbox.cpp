@@ -68,8 +68,8 @@ wxBitmapComboBox::wxBitmapComboBox(wxWindow *parent,
                                   long style,
                                   const wxValidator& validator,
                                   const wxString& name)
-    : wxComboBox(),
-      wxBitmapComboBoxBase()
+    
+      
 {
     Init();
 

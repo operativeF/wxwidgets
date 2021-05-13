@@ -357,7 +357,7 @@ wxCOMPILE_TIME_ASSERT( WXSIZEOF(gs_encodingNames) == WXSIZEOF(gs_encodings), Enc
 class wxFontMapperModule : public wxModule
 {
 public:
-    wxFontMapperModule() : wxModule() { }
+    wxFontMapperModule()  { }
 
     bool OnInit() override
     {

@@ -1771,13 +1771,13 @@ WX_DEFINE_OBJARRAY(wxGridStringArray)
 wxIMPLEMENT_DYNAMIC_CLASS(wxGridStringTable, wxGridTableBase);
 
 wxGridStringTable::wxGridStringTable()
-        : wxGridTableBase()
+         
 {
     m_numCols = 0;
 }
 
 wxGridStringTable::wxGridStringTable( int numRows, int numCols )
-        : wxGridTableBase()
+         
 {
     m_numCols = numCols;
 

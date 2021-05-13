@@ -74,7 +74,7 @@ const wxCoord CONTENT_TREE_INDEX_MIN_WIDTH = 150;
 class wxHtmlHelpTreeItemData : public wxTreeItemData
 {
     public:
-        explicit wxHtmlHelpTreeItemData(int id) : wxTreeItemData()
+        explicit wxHtmlHelpTreeItemData(int id)  
             { m_Id = id;}
 
         int m_Id;
@@ -88,7 +88,7 @@ class wxHtmlHelpTreeItemData : public wxTreeItemData
 class wxHtmlHelpHashData : public wxObject
 {
     public:
-        wxHtmlHelpHashData(int index, wxTreeItemId id) : wxObject()
+        wxHtmlHelpHashData(int index, wxTreeItemId id)  
             { m_Index = index; m_Id = id;}
         virtual ~wxHtmlHelpHashData() = default;
 

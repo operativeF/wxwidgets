@@ -26,7 +26,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxNotebookXmlHandler, wxXmlResourceHandler);
 
 wxNotebookXmlHandler::wxNotebookXmlHandler()
-                     :wxXmlResourceHandler(),
+                     :
                       m_isInside(false),
                       m_notebook(nullptr)
 {

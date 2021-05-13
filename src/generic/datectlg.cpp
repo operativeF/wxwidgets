@@ -55,8 +55,8 @@ class wxCalendarComboPopup : public wxCalendarCtrl,
 {
 public:
 
-    wxCalendarComboPopup() : wxCalendarCtrl(),
-                             wxComboPopup()
+    wxCalendarComboPopup() 
+                             
     {
     }
 

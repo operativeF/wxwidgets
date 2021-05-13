@@ -255,7 +255,7 @@ wxEND_EVENT_TABLE()
 // -----------------------------------------------------------------------
 
 wxPropertyGrid::wxPropertyGrid()
-    : wxScrolled<wxControl>()
+     
 {
     Init1();
 }
@@ -268,7 +268,7 @@ wxPropertyGrid::wxPropertyGrid( wxWindow *parent,
                                 const wxSize& size,
                                 long style,
                                 const wxString& name )
-    : wxScrolled<wxControl>()
+     
 {
     Init1();
     Create(parent,id,pos,size,style,name);
@@ -3861,7 +3861,7 @@ class wxPropertyGridEditorEventForwarder : public wxEvtHandler
 {
 public:
     explicit wxPropertyGridEditorEventForwarder( wxPropertyGrid* propGrid )
-        : wxEvtHandler(), m_propGrid(propGrid)
+        :  m_propGrid(propGrid)
     {
     }
 
@@ -6176,7 +6176,7 @@ wxString wxPGStringTokenizer::GetNextToken()
 // -----------------------------------------------------------------------
 
 wxPGChoiceEntry::wxPGChoiceEntry()
-    : wxPGCell(), m_value(wxPG_INVALID_VALUE)
+    :  m_value(wxPG_INVALID_VALUE)
 {
 }
 

@@ -150,7 +150,7 @@ wxEND_EVENT_TABLE()
 
 
 wxPropertyGridPage::wxPropertyGridPage()
-    : wxEvtHandler(), wxPropertyGridInterface(), wxPropertyGridPageState()
+    :  wxPropertyGridInterface() 
 {
     m_pState = this; // wxPropertyGridInterface to point to State
     m_manager = nullptr;
@@ -415,7 +415,7 @@ wxEND_EVENT_TABLE()
 // -----------------------------------------------------------------------
 
 wxPropertyGridManager::wxPropertyGridManager()
-    : wxPanel()
+     
 {
     Init1();
 }
@@ -428,7 +428,7 @@ wxPropertyGridManager::wxPropertyGridManager( wxWindow *parent,
                                               const wxSize& size,
                                               long style,
                                               const wxString& name )
-    : wxPanel()
+     
 {
     Init1();
     Create(parent,id,pos,size,style,name);

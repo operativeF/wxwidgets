@@ -26,7 +26,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxCheckListBoxXmlHandler, wxXmlResourceHandler);
 
 wxCheckListBoxXmlHandler::wxCheckListBoxXmlHandler()
-: wxXmlResourceHandler(), m_insideBox(false)
+:  m_insideBox(false)
 {
     // wxListBox styles:
     XRC_ADD_STYLE(wxLB_SINGLE);

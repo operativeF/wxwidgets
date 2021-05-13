@@ -25,7 +25,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxStatusBarXmlHandler, wxXmlResourceHandler);
 
 wxStatusBarXmlHandler::wxStatusBarXmlHandler()
-                      :wxXmlResourceHandler()
+                      
 {
     XRC_ADD_STYLE(wxSTB_SIZEGRIP);
     XRC_ADD_STYLE(wxSTB_SHOW_TIPS);

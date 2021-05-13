@@ -28,8 +28,8 @@ private:
     wxString m_AnchorName;
 
 public:
-    explicit wxHtmlAnchorCell(const wxString& name) : wxHtmlCell()
-        , m_AnchorName(name) { }
+    explicit wxHtmlAnchorCell(const wxString& name) : 
+         m_AnchorName(name) { }
     void Draw(wxDC& WXUNUSED(dc),
               int WXUNUSED(x), int WXUNUSED(y),
               int WXUNUSED(view_y1), int WXUNUSED(view_y2),

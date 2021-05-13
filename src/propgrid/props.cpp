@@ -1840,7 +1840,7 @@ bool wxDirProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value)
 class WXDLLIMPEXP_PROPGRID wxPGDialogAdapter : public wxPGEditorDialogAdapter
 {
 public:
-    wxPGDialogAdapter() : wxPGEditorDialogAdapter()
+    wxPGDialogAdapter()  
     {
     }
 
@@ -2250,7 +2250,7 @@ void wxPGArrayEditorDialog::OnIdle(wxIdleEvent& event)
 // -----------------------------------------------------------------------
 
 wxPGArrayEditorDialog::wxPGArrayEditorDialog()
-    : wxDialog()
+     
 {
     Init();
 }
@@ -2547,7 +2547,7 @@ void wxPGArrayStringEditorDialog::ArraySwap( size_t first, size_t second )
 }
 
 wxPGArrayStringEditorDialog::wxPGArrayStringEditorDialog()
-    : wxPGArrayEditorDialog()
+     
 {
     Init();
 }

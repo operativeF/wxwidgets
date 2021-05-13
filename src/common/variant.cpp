@@ -49,7 +49,7 @@ WX_DEFINE_LIST(wxVariantList)
 wxIMPLEMENT_DYNAMIC_CLASS(wxVariant, wxObject);
 
 wxVariant::wxVariant()
-    : wxObject()
+     
 {
 }
 
@@ -69,16 +69,16 @@ void wxVariant::Clear()
 }
 
 wxVariant::wxVariant(const wxVariant& variant)
-    : wxObject()
-    , m_name(variant.m_name)
+    : 
+     m_name(variant.m_name)
 {
     if (!variant.IsNull())
         Ref(variant);
 }
 
 wxVariant::wxVariant(wxVariantData* data, const wxString& name) // User-defined data
-    : wxObject()
-    , m_name(name)
+    : 
+     m_name(name)
 {
     m_refData = data;
 }
@@ -192,7 +192,7 @@ wxAnyToVariantRegistration::~wxAnyToVariantRegistration()
 = default;
 
 wxVariant::wxVariant(const wxAny& any)
-    : wxObject()
+     
 {
     wxVariant variant;
     if ( !any.GetAs(&variant) )

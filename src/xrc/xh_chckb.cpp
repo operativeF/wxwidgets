@@ -22,7 +22,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxCheckBoxXmlHandler, wxXmlResourceHandler);
 
 wxCheckBoxXmlHandler::wxCheckBoxXmlHandler()
-: wxXmlResourceHandler()
+ 
 {
     XRC_ADD_STYLE(wxCHK_2STATE);
     XRC_ADD_STYLE(wxCHK_3STATE);

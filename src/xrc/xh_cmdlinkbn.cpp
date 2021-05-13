@@ -20,7 +20,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxCommandLinkButtonXmlHandler, wxXmlResourceHandler);
 
 wxCommandLinkButtonXmlHandler::wxCommandLinkButtonXmlHandler()
-    : wxXmlResourceHandler()
+     
 {
     XRC_ADD_STYLE(wxBU_LEFT);
     XRC_ADD_STYLE(wxBU_RIGHT);

@@ -43,7 +43,7 @@ public:
         m_region = nullptr;
     }
 
-    wxRegionRefData(const wxRegionRefData& data) : wxGDIRefData()
+    wxRegionRefData(const wxRegionRefData& data)  
     {
         DWORD noBytes = ::GetRegionData(data.m_region, 0, nullptr);
         RGNDATA *rgnData = (RGNDATA*) new char[noBytes];

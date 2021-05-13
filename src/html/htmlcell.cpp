@@ -77,7 +77,7 @@ GetSelectedTextBgColour(const wxColour& WXUNUSED(clr))
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlCell, wxObject);
 
-wxHtmlCell::wxHtmlCell() : wxObject()
+wxHtmlCell::wxHtmlCell()  
 {
     m_Next = nullptr;
     m_Parent = nullptr;
@@ -314,8 +314,8 @@ wxString wxHtmlCell::Dump(int indent) const
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlWordCell, wxHtmlCell);
 
-wxHtmlWordCell::wxHtmlWordCell(const wxString& word, const wxDC& dc) : wxHtmlCell()
-    , m_Word(word)
+wxHtmlWordCell::wxHtmlWordCell(const wxString& word, const wxDC& dc) : 
+     m_Word(word)
 {
     wxCoord w, h, d;
     dc.GetTextExtent(m_Word, &w, &h, &d);
@@ -666,7 +666,7 @@ wxString wxHtmlWordCell::GetDescription() const
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlContainerCell, wxHtmlCell);
 
-wxHtmlContainerCell::wxHtmlContainerCell(wxHtmlContainerCell *parent) : wxHtmlCell()
+wxHtmlContainerCell::wxHtmlContainerCell(wxHtmlContainerCell *parent)  
 {
     m_Cells = m_LastCell = nullptr;
     m_Parent = parent;

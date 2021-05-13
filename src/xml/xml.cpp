@@ -464,7 +464,7 @@ wxXmlDocument::wxXmlDocument()
 }
 
 wxXmlDocument::wxXmlDocument(const wxString& filename, const wxString& encoding)
-              :wxObject(), m_docNode(nullptr)
+              : m_docNode(nullptr)
 {
     SetFileType(wxTextFileType_Unix);
 
@@ -475,7 +475,7 @@ wxXmlDocument::wxXmlDocument(const wxString& filename, const wxString& encoding)
 }
 
 wxXmlDocument::wxXmlDocument(wxInputStream& stream, const wxString& encoding)
-              :wxObject(), m_docNode(nullptr)
+              : m_docNode(nullptr)
 {
     SetFileType(wxTextFileType_Unix);
 
@@ -486,7 +486,7 @@ wxXmlDocument::wxXmlDocument(wxInputStream& stream, const wxString& encoding)
 }
 
 wxXmlDocument::wxXmlDocument(const wxXmlDocument& doc)
-              :wxObject()
+              
 {
     DoCopy(doc);
 }

@@ -19,7 +19,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxStaticLineXmlHandler, wxXmlResourceHandler);
 
 wxStaticLineXmlHandler::wxStaticLineXmlHandler()
-: wxXmlResourceHandler()
+ 
 {
     XRC_ADD_STYLE(wxLI_HORIZONTAL);
     XRC_ADD_STYLE(wxLI_VERTICAL);

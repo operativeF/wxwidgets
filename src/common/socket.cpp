@@ -153,7 +153,7 @@ public:
     void                    *m_clientData;
 
 public:
-    wxSocketState() : wxObject() {}
+    wxSocketState()  {}
 
     wxDECLARE_NO_COPY_CLASS(wxSocketState);
 };

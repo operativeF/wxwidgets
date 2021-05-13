@@ -122,7 +122,7 @@ void wxUnknownControlContainer::RemoveChild(wxWindowBase *child)
 wxIMPLEMENT_DYNAMIC_CLASS(wxUnknownWidgetXmlHandler, wxXmlResourceHandler);
 
 wxUnknownWidgetXmlHandler::wxUnknownWidgetXmlHandler()
-: wxXmlResourceHandler()
+ 
 {
     XRC_ADD_STYLE(wxNO_FULL_REPAINT_ON_RESIZE);
 }

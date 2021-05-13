@@ -20,7 +20,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxAnimationCtrlXmlHandler, wxXmlResourceHandler);
 
-wxAnimationCtrlXmlHandler::wxAnimationCtrlXmlHandler() : wxXmlResourceHandler()
+wxAnimationCtrlXmlHandler::wxAnimationCtrlXmlHandler()  
 {
     XRC_ADD_STYLE(wxAC_NO_AUTORESIZE);
     XRC_ADD_STYLE(wxAC_DEFAULT_STYLE);

@@ -142,7 +142,7 @@ class wxFileSystemInternetModule : public wxModule
 
     public:
         wxFileSystemInternetModule() :
-           wxModule(),
+           
            m_handler(nullptr)
         {
         }

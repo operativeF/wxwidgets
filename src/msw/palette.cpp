@@ -51,7 +51,7 @@ public:
     }
 
     wxPaletteRefData(const wxPaletteRefData& data)
-        : wxGDIRefData()
+         
     {
         Init();
 

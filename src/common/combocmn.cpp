@@ -728,7 +728,7 @@ class wxComboBoxExtraInputHandler : public wxEvtHandler
 public:
 
     explicit wxComboBoxExtraInputHandler( wxComboCtrlBase* combo )
-        : wxEvtHandler()
+         
     {
         m_combo = combo;
     }
@@ -805,7 +805,7 @@ class wxComboPopupEvtHandler : public wxEvtHandler
 public:
 
     explicit wxComboPopupEvtHandler( wxComboCtrlBase* combo )
-        : wxEvtHandler()
+         
     {
         m_combo = combo;
         m_beenInside = false;
@@ -952,7 +952,7 @@ void wxComboPopupEvtHandler::OnMouseEvent( wxMouseEvent& event )
 class wxComboCtrlTextCtrl : public wxTextCtrl
 {
 public:
-    wxComboCtrlTextCtrl() : wxTextCtrl() { }
+    wxComboCtrlTextCtrl()  { }
     virtual ~wxComboCtrlTextCtrl() = default;
 
     wxWindow *GetMainWindowOfCompositeControl() override

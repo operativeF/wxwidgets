@@ -35,7 +35,7 @@ wxColourData::wxColourData()
 }
 
 wxColourData::wxColourData(const wxColourData& data)
-            : wxObject()
+             
 {
     (*this) = data;
 }

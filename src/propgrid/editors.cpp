@@ -490,7 +490,7 @@ class wxPGDoubleClickProcessor : public wxEvtHandler
 public:
 
     wxPGDoubleClickProcessor( wxOwnerDrawnComboBox* combo, wxBoolProperty* property )
-        : wxEvtHandler()
+         
     {
         m_timeLastMouseUp = 0;
         m_combo = combo;
@@ -573,7 +573,7 @@ class wxPGComboBox : public wxOwnerDrawnComboBox
 public:
 
     wxPGComboBox()
-        : wxOwnerDrawnComboBox()
+         
     {
         m_dclickProcessor = nullptr;
     }

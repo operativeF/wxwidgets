@@ -24,7 +24,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxToggleButtonXmlHandler, wxXmlResourceHandler);
 
 wxToggleButtonXmlHandler::wxToggleButtonXmlHandler()
-    : wxXmlResourceHandler()
+     
 {
     XRC_ADD_STYLE(wxBU_EXACTFIT);
 

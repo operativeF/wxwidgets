@@ -2705,7 +2705,7 @@ protected:
 };
 
 wxSTCListBox::wxSTCListBox(wxWindow* parent, wxSTCListBoxVisualData* v, int ht)
-             :wxSystemThemedControl<wxVListBox>(),
+             :
               m_visualData(v), m_maxStrWidth(0), m_currentRow(wxNOT_FOUND),
               m_doubleClickAction(nullptr), m_doubleClickActionData(nullptr),
               m_aveCharWidth(8), m_textHeight(ht), m_itemHeight(ht),

@@ -499,7 +499,7 @@ wxDDEConnection::wxDDEConnection(void *buffer, size_t size)
 }
 
 wxDDEConnection::wxDDEConnection()
-     : wxConnectionBase()
+      
 {
     m_hConv = nullptr;
     m_sendingData = nullptr;

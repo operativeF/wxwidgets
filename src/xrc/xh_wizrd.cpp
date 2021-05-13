@@ -23,7 +23,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxWizardXmlHandler, wxXmlResourceHandler);
 
-wxWizardXmlHandler::wxWizardXmlHandler() : wxXmlResourceHandler()
+wxWizardXmlHandler::wxWizardXmlHandler()  
 {
     m_wizard = nullptr;
     m_lastSimplePage = nullptr;

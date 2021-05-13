@@ -111,7 +111,7 @@ void wxGenericProgressDialog::Init()
 }
 
 wxGenericProgressDialog::wxGenericProgressDialog()
-                       : wxDialog()
+                        
 {
     Init();
 }
@@ -121,7 +121,7 @@ wxGenericProgressDialog::wxGenericProgressDialog(const wxString& title,
                                                  int maximum,
                                                  wxWindow *parent,
                                                  int style)
-                       : wxDialog()
+                        
 {
     Init();
 

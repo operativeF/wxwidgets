@@ -36,7 +36,7 @@ const char *LISTCOL_CLASS_NAME = "listcol";
 wxIMPLEMENT_DYNAMIC_CLASS(wxListCtrlXmlHandler, wxXmlResourceHandler);
 
 wxListCtrlXmlHandler::wxListCtrlXmlHandler()
-    : wxXmlResourceHandler()
+     
 {
     // wxListItem styles
     XRC_ADD_STYLE(wxLIST_FORMAT_LEFT);

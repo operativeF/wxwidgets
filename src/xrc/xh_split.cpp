@@ -25,7 +25,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxSplitterWindowXmlHandler, wxXmlResourceHandler);
 
-wxSplitterWindowXmlHandler::wxSplitterWindowXmlHandler() : wxXmlResourceHandler()
+wxSplitterWindowXmlHandler::wxSplitterWindowXmlHandler()  
 {
     XRC_ADD_STYLE(wxSP_3D);
     XRC_ADD_STYLE(wxSP_3DSASH);

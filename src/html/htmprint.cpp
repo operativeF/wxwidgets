@@ -62,7 +62,7 @@
 //--------------------------------------------------------------------------------
 
 
-wxHtmlDCRenderer::wxHtmlDCRenderer() : wxObject()
+wxHtmlDCRenderer::wxHtmlDCRenderer()  
 {
     m_DC = nullptr;
     m_Width = m_Height = 0;
@@ -838,7 +838,7 @@ class wxHtmlPrintingModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxHtmlPrintingModule);
 public:
-    wxHtmlPrintingModule() : wxModule() {}
+    wxHtmlPrintingModule()  {}
     bool OnInit() override { return true; }
     void OnExit() override { wxHtmlPrintout::CleanUpStatics(); }
 };

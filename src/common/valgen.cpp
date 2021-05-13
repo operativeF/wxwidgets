@@ -101,7 +101,7 @@ wxGenericValidator::wxGenericValidator(double *val)
 }
 
 wxGenericValidator::wxGenericValidator(const wxGenericValidator& val)
-    : wxValidator()
+     
 {
     Copy(val);
 }

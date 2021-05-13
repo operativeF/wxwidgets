@@ -28,7 +28,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxToolbookXmlHandler, wxXmlResourceHandler);
 
 wxToolbookXmlHandler::wxToolbookXmlHandler()
-                     :wxXmlResourceHandler(),
+                     :
                       m_isInside(false),
                       m_toolbook(nullptr)
 {

@@ -663,7 +663,7 @@ class wxFileSystemModule : public wxModule
 
     public:
         wxFileSystemModule() :
-            wxModule(),
+            
             m_handler(nullptr)
         {
         }

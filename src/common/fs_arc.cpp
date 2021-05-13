@@ -304,7 +304,7 @@ wxArchiveFSCacheData *wxArchiveFSCache::Get(const wxString& name)
 wxIMPLEMENT_DYNAMIC_CLASS(wxArchiveFSHandler, wxFileSystemHandler);
 
 wxArchiveFSHandler::wxArchiveFSHandler()
- :  wxFileSystemHandler()
+   
 {
     m_Archive = nullptr;
     m_FindEntry = nullptr;

@@ -38,7 +38,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxHTTP, wxProtocol);
 IMPLEMENT_PROTOCOL(wxHTTP, wxT("http"), wxT("80"), true)
 
 wxHTTP::wxHTTP()
-  : wxProtocol()
+   
 {
     m_addr = nullptr;
     m_read = false;

@@ -1480,7 +1480,7 @@ wxMask::wxMask()
 
 // Copy constructor
 wxMask::wxMask(const wxMask &mask)
-      : wxObject()
+       
 {
     BITMAP bmp;
 

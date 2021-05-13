@@ -24,7 +24,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxMenuXmlHandler, wxXmlResourceHandler);
 
 wxMenuXmlHandler::wxMenuXmlHandler() :
-        wxXmlResourceHandler(), m_insideMenu(false)
+         m_insideMenu(false)
 {
     XRC_ADD_STYLE(wxMENU_TEAROFF);
 }
@@ -148,7 +148,7 @@ bool wxMenuXmlHandler::CanHandle(wxXmlNode *node)
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxMenuBarXmlHandler, wxXmlResourceHandler);
 
-wxMenuBarXmlHandler::wxMenuBarXmlHandler() : wxXmlResourceHandler()
+wxMenuBarXmlHandler::wxMenuBarXmlHandler()  
 {
     XRC_ADD_STYLE(wxMB_DOCKABLE);
 }

@@ -1700,7 +1700,7 @@ void wxGridCellChoiceEditor::OnComboCloseUp(wxCommandEvent& WXUNUSED(evt))
 // "John","Fred"..."Bob" in the combo choice box
 
 wxGridCellEnumEditor::wxGridCellEnumEditor(const wxString& choices)
-                     :wxGridCellChoiceEditor()
+                     
 {
     m_index = -1;
 

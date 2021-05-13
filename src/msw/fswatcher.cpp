@@ -426,15 +426,15 @@ wxFileName wxIOCPThread::GetEventPath(const wxFSWatchEntryMSW& watch,
 // wxMSWFileSystemWatcher implementation
 // ============================================================================
 
-wxMSWFileSystemWatcher::wxMSWFileSystemWatcher() :
-    wxFileSystemWatcherBase()
+wxMSWFileSystemWatcher::wxMSWFileSystemWatcher() 
+    
 {
     (void) Init();
 }
 
 wxMSWFileSystemWatcher::wxMSWFileSystemWatcher(const wxFileName& path,
-                                               int events) :
-    wxFileSystemWatcherBase()
+                                               int events) 
+    
 {
     if (!Init())
         return;

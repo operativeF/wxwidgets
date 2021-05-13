@@ -22,7 +22,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxScrollBarXmlHandler, wxXmlResourceHandler);
 
 wxScrollBarXmlHandler::wxScrollBarXmlHandler()
-: wxXmlResourceHandler()
+ 
 {
     XRC_ADD_STYLE(wxSB_HORIZONTAL);
     XRC_ADD_STYLE(wxSB_VERTICAL);

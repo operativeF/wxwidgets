@@ -27,7 +27,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxTreebookXmlHandler, wxXmlResourceHandler);
 
 wxTreebookXmlHandler::wxTreebookXmlHandler()
-                    : wxXmlResourceHandler(),
+                    : 
                       m_tbk(nullptr),
                       m_isInside(false)
 {

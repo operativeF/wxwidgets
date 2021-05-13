@@ -26,7 +26,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxComboCtrlXmlHandler, wxXmlResourceHandler);
 
 wxComboCtrlXmlHandler::wxComboCtrlXmlHandler()
-                     : wxXmlResourceHandler()
+                      
 {
     XRC_ADD_STYLE(wxCB_SORT);
     XRC_ADD_STYLE(wxCB_READONLY);

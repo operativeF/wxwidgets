@@ -110,7 +110,7 @@ bool operator == (const wxArrayInt& array1, const wxArrayInt& array2)
 class wxPGSpinButton : public wxSpinButton
 {
 public:
-    wxPGSpinButton() : wxSpinButton()
+    wxPGSpinButton()  
     {
         m_hasCapture = false;
         m_spins = 1;

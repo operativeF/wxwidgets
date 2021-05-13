@@ -18,7 +18,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxFilePickerCtrlXmlHandler, wxXmlResourceHandler);
 
-wxFilePickerCtrlXmlHandler::wxFilePickerCtrlXmlHandler() : wxXmlResourceHandler()
+wxFilePickerCtrlXmlHandler::wxFilePickerCtrlXmlHandler()  
 {
     XRC_ADD_STYLE(wxFLP_OPEN);
     XRC_ADD_STYLE(wxFLP_SAVE);

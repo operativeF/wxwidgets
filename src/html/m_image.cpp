@@ -361,8 +361,8 @@ class wxGIFTimer : public wxTimer
 wxHtmlImageCell::wxHtmlImageCell(wxHtmlWindowInterface *windowIface,
                                  wxFSFile *input, double scaleHDPI,
                                  int w, bool wpercent, int h, bool hpresent, double scale, int align,
-                                 const wxString& mapname) : wxHtmlCell()
-    , m_mapName(mapname)
+                                 const wxString& mapname) : 
+     m_mapName(mapname)
 {
     m_windowIface = windowIface;
     m_scale = scale;

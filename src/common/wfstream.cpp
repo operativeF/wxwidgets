@@ -29,7 +29,7 @@
 // ----------------------------------------------------------------------------
 
 wxFileInputStream::wxFileInputStream(const wxString& fileName)
-  : wxInputStream()
+   
 {
     m_file = new wxFile(fileName, wxFile::read);
     m_file_destroy = true;
@@ -38,7 +38,7 @@ wxFileInputStream::wxFileInputStream(const wxString& fileName)
 }
 
 wxFileInputStream::wxFileInputStream()
-  : wxInputStream()
+   
 {
     m_file_destroy = false;
     m_file = nullptr;
@@ -128,7 +128,7 @@ wxFileOutputStream::wxFileOutputStream(wxFile& file)
 }
 
 wxFileOutputStream::wxFileOutputStream()
-                  : wxOutputStream()
+                   
 {
     m_file_destroy = false;
     m_file = nullptr;
@@ -243,8 +243,8 @@ size_t wxTempFFileOutputStream::OnSysWrite(const void *buffer, size_t size)
 // ----------------------------------------------------------------------------
 
 wxFileStream::wxFileStream(const wxString& fileName)
-            : wxFileInputStream(),
-              wxFileOutputStream()
+            
+              
 {
     wxFileOutputStream::m_file =
     wxFileInputStream::m_file = new wxFile(fileName, wxFile::read_write);
@@ -270,7 +270,7 @@ bool wxFileStream::IsOk() const
 
 wxFFileInputStream::wxFFileInputStream(const wxString& fileName,
                                        const wxString& mode)
-                  : wxInputStream()
+                   
 {
     m_file = new wxFFile(fileName, mode);
     m_file_destroy = true;
@@ -280,7 +280,7 @@ wxFFileInputStream::wxFFileInputStream(const wxString& fileName,
 }
 
 wxFFileInputStream::wxFFileInputStream()
-                  : wxInputStream()
+                   
 {
     m_file = nullptr;
     m_file_destroy = false;
@@ -368,7 +368,7 @@ wxFFileOutputStream::wxFFileOutputStream(wxFFile& file)
 }
 
 wxFFileOutputStream::wxFFileOutputStream()
-                   : wxOutputStream()
+                    
 {
     m_file = nullptr;
     m_file_destroy = false;
@@ -431,8 +431,8 @@ bool wxFFileOutputStream::IsOk() const
 // ----------------------------------------------------------------------------
 
 wxFFileStream::wxFFileStream(const wxString& fileName, const wxString& mode)
-             : wxFFileInputStream(),
-               wxFFileOutputStream()
+             
+               
 {
     wxASSERT_MSG( mode.find_first_of('+') != wxString::npos,
                   "must be opened in read-write mode for this class to work" );

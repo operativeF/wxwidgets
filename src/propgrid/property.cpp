@@ -332,7 +332,7 @@ wxSize wxPGDefaultRenderer::GetImageSize( const wxPGProperty* property,
 // -----------------------------------------------------------------------
 
 wxPGCellData::wxPGCellData()
-    : wxObjectRefData()
+     
 {
     m_hasValidText = false;
 }
@@ -342,7 +342,7 @@ wxPGCellData::wxPGCellData()
 // -----------------------------------------------------------------------
 
 wxPGCell::wxPGCell()
-    : wxObject()
+     
 {
 }
 
@@ -350,7 +350,7 @@ wxPGCell::wxPGCell( const wxString& text,
                     const wxBitmap& bitmap,
                     const wxColour& fgCol,
                     const wxColour& bgCol )
-    : wxObject()
+     
 {
     wxPGCellData* data = new wxPGCellData();
     m_refData = data;
@@ -650,14 +650,14 @@ void wxPGProperty::OnDetached(wxPropertyGridPageState* WXUNUSED(state),
 }
 
 wxPGProperty::wxPGProperty()
-    : wxObject()
+     
 {
     Init();
 }
 
 
 wxPGProperty::wxPGProperty( const wxString& label, const wxString& name )
-    : wxObject()
+     
 {
     Init( label, name );
 }
@@ -2801,7 +2801,7 @@ bool wxPGProperty::SetMaxLength(int maxLen)
 wxPG_IMPLEMENT_PROPERTY_CLASS(wxPGRootProperty, wxPGProperty, TextCtrl)
 
 wxPGRootProperty::wxPGRootProperty( const wxString& name )
-    : wxPGProperty()
+     
 {
     m_name = name;
     m_label = m_name;
@@ -2829,7 +2829,7 @@ void wxPropertyCategory::Init()
 }
 
 wxPropertyCategory::wxPropertyCategory()
-    : wxPGProperty()
+     
 {
     Init();
 }

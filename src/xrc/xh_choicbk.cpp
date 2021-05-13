@@ -26,7 +26,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxChoicebookXmlHandler, wxXmlResourceHandler);
 
 wxChoicebookXmlHandler::wxChoicebookXmlHandler()
-                       :wxXmlResourceHandler(),
+                       :
                         m_isInside(false),
                         m_choicebook(nullptr)
 {

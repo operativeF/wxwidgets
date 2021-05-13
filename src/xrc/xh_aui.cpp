@@ -20,7 +20,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxAuiXmlHandler, wxXmlResourceHandler)
 
 wxAuiXmlHandler::wxAuiXmlHandler()
-                : wxXmlResourceHandler(),
+                : 
                   m_manager(nullptr),
                   m_window(nullptr),
                   m_notebook(nullptr),

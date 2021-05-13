@@ -43,7 +43,7 @@ wxConnectionBase::wxConnectionBase()
 }
 
 wxConnectionBase::wxConnectionBase(const wxConnectionBase& copy)
-    : wxObject(),
+    : 
       m_buffer(copy.m_buffer),
       m_buffersize(copy.m_buffersize),
       m_deletebufferwhendone(false),

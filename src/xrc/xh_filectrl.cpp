@@ -18,7 +18,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxFileCtrlXmlHandler, wxXmlResourceHandler);
 
-wxFileCtrlXmlHandler::wxFileCtrlXmlHandler() : wxXmlResourceHandler()
+wxFileCtrlXmlHandler::wxFileCtrlXmlHandler()  
 {
     XRC_ADD_STYLE(wxFC_DEFAULT_STYLE);
     XRC_ADD_STYLE(wxFC_OPEN);

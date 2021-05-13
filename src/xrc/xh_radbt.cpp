@@ -22,7 +22,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxRadioButtonXmlHandler, wxXmlResourceHandler);
 
 wxRadioButtonXmlHandler::wxRadioButtonXmlHandler()
-: wxXmlResourceHandler()
+ 
 {
     XRC_ADD_STYLE(wxRB_GROUP);
     XRC_ADD_STYLE(wxRB_SINGLE);

@@ -21,7 +21,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxTextCtrlXmlHandler, wxXmlResourceHandler);
 
-wxTextCtrlXmlHandler::wxTextCtrlXmlHandler() : wxXmlResourceHandler()
+wxTextCtrlXmlHandler::wxTextCtrlXmlHandler()  
 {
     XRC_ADD_STYLE(wxTE_NO_VSCROLL);
     XRC_ADD_STYLE(wxTE_PROCESS_ENTER);

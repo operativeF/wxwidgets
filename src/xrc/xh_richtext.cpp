@@ -18,7 +18,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextCtrlXmlHandler, wxXmlResourceHandler);
 
-wxRichTextCtrlXmlHandler::wxRichTextCtrlXmlHandler() : wxXmlResourceHandler()
+wxRichTextCtrlXmlHandler::wxRichTextCtrlXmlHandler()  
 {
     XRC_ADD_STYLE(wxTE_PROCESS_ENTER);
     XRC_ADD_STYLE(wxTE_PROCESS_TAB);

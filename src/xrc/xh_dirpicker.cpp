@@ -18,7 +18,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxDirPickerCtrlXmlHandler, wxXmlResourceHandler);
 
-wxDirPickerCtrlXmlHandler::wxDirPickerCtrlXmlHandler() : wxXmlResourceHandler()
+wxDirPickerCtrlXmlHandler::wxDirPickerCtrlXmlHandler()  
 {
     XRC_ADD_STYLE(wxDIRP_USE_TEXTCTRL);
     XRC_ADD_STYLE(wxDIRP_DIR_MUST_EXIST);

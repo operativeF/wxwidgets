@@ -66,7 +66,7 @@ wxTextValidator::wxTextValidator(long style, wxString *val)
 }
 
 wxTextValidator::wxTextValidator(const wxTextValidator& val)
-    : wxValidator()
+     
 {
     Copy(val);
 }

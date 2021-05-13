@@ -22,7 +22,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxButtonXmlHandler, wxXmlResourceHandler);
 
 wxButtonXmlHandler::wxButtonXmlHandler()
-: wxXmlResourceHandler()
+ 
 {
     XRC_ADD_STYLE(wxBU_LEFT);
     XRC_ADD_STYLE(wxBU_RIGHT);

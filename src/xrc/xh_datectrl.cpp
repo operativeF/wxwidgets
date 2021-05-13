@@ -18,7 +18,7 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxDateCtrlXmlHandler, wxXmlResourceHandler);
 
-wxDateCtrlXmlHandler::wxDateCtrlXmlHandler() : wxXmlResourceHandler()
+wxDateCtrlXmlHandler::wxDateCtrlXmlHandler()  
 {
     XRC_ADD_STYLE(wxDP_DEFAULT);
     XRC_ADD_STYLE(wxDP_SPIN);

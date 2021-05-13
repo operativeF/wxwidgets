@@ -24,7 +24,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxGenericDirCtrlXmlHandler, wxXmlResourceHandler);
 
 wxGenericDirCtrlXmlHandler::wxGenericDirCtrlXmlHandler()
-: wxXmlResourceHandler()
+ 
 {
     XRC_ADD_STYLE(wxDIRCTRL_DIR_ONLY);
     XRC_ADD_STYLE(wxDIRCTRL_3D_INTERNAL);

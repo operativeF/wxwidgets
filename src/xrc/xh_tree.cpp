@@ -19,7 +19,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxTreeCtrlXmlHandler, wxXmlResourceHandler);
 
 wxTreeCtrlXmlHandler::wxTreeCtrlXmlHandler()
-: wxXmlResourceHandler()
+ 
 {
     XRC_ADD_STYLE(wxTR_EDIT_LABELS);
     XRC_ADD_STYLE(wxTR_NO_BUTTONS);

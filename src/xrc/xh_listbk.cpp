@@ -26,7 +26,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxListbookXmlHandler, wxXmlResourceHandler);
 
 wxListbookXmlHandler::wxListbookXmlHandler()
-                     :wxXmlResourceHandler(),
+                     :
                       m_isInside(false),
                       m_listbook(nullptr)
 {

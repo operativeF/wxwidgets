@@ -24,7 +24,7 @@ static const long DEFAULT_RANGE = 100;
 wxIMPLEMENT_DYNAMIC_CLASS(wxGaugeXmlHandler, wxXmlResourceHandler);
 
 wxGaugeXmlHandler::wxGaugeXmlHandler()
-                  :wxXmlResourceHandler()
+                  
 {
     XRC_ADD_STYLE(wxGA_HORIZONTAL);
     XRC_ADD_STYLE(wxGA_VERTICAL);

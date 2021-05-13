@@ -23,7 +23,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxSimpleHtmlListBoxXmlHandler, wxXmlResourceHandler);
 
 wxSimpleHtmlListBoxXmlHandler::wxSimpleHtmlListBoxXmlHandler()
-: wxXmlResourceHandler(), m_insideBox(false)
+:  m_insideBox(false)
 {
     XRC_ADD_STYLE(wxHLB_DEFAULT_STYLE);
     XRC_ADD_STYLE(wxHLB_MULTIPLE);
