@@ -201,12 +201,12 @@ void Font::Release() {
 
 class SurfaceImpl : public Surface {
 private:
-    wxDC*       hdc;
-    bool        hdcOwned;
-    wxBitmap*   bitmap;
-    int         x;
-    int         y;
-    bool        unicodeMode;
+    wxDC*       hdc{nullptr};
+    bool        hdcOwned{false};
+    wxBitmap*   bitmap{nullptr};
+    int         x{0};
+    int         y{0};
+    bool        unicodeMode{false};
 
 public:
     SurfaceImpl();
@@ -260,9 +260,7 @@ public:
 
 
 
-SurfaceImpl::SurfaceImpl() :
-    hdc(nullptr), hdcOwned(false), bitmap(nullptr),
-    x(0), y(0), unicodeMode(false)
+SurfaceImpl::SurfaceImpl()  
 {}
 
 SurfaceImpl::~SurfaceImpl() {

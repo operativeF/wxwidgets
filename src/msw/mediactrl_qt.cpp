@@ -395,12 +395,12 @@ public:
     bool ShowPlayerControls(wxMediaCtrlPlayerControls flags) override;
 
     wxSize m_bestSize;              // Original movie size
-    Movie m_movie;    // QT Movie handle/instance
+    Movie m_movie{nullptr};    // QT Movie handle/instance
     bool m_bVideo;                  // Whether or not we have video
-    bool m_bPlaying;                // Whether or not movie is playing
-    wxTimer* m_timer;               // Load or Play timer
+    bool m_bPlaying{false};                // Whether or not movie is playing
+    wxTimer* m_timer{nullptr};               // Load or Play timer
     wxQuickTimeLibrary m_lib;       // DLL to load functions from
-    ComponentInstance m_pMC;        // Movie Controller
+    ComponentInstance m_pMC{nullptr};        // Movie Controller
     wxEvtHandler* m_evthandler;
 
     friend class wxQTMediaEvtHandler;
@@ -575,7 +575,7 @@ LRESULT CALLBACK wxQTMediaBackend::QTWndProc(HWND hWnd, UINT nMsg,
 // Sets m_timer to NULL signifying we havn't loaded anything yet
 //---------------------------------------------------------------------------
 wxQTMediaBackend::wxQTMediaBackend()
-: m_movie(nullptr), m_bPlaying(false), m_timer(nullptr), m_pMC(nullptr)
+ 
 {
     m_evthandler = nullptr;
 }

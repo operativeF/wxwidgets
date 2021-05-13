@@ -190,7 +190,7 @@ wxArchiveFSEntry *wxArchiveFSCacheDataImpl::GetNext(wxArchiveFSEntry *fse)
 class wxArchiveFSCacheData
 {
 public:
-    wxArchiveFSCacheData() : m_impl(nullptr) { }
+    wxArchiveFSCacheData()  { }
     wxArchiveFSCacheData(const wxArchiveClassFactory& factory,
                          const wxBackingFile& backer);
     wxArchiveFSCacheData(const wxArchiveClassFactory& factory,
@@ -207,7 +207,7 @@ public:
         { return m_impl->GetNext(fse); }
 
 private:
-    wxArchiveFSCacheDataImpl *m_impl;
+    wxArchiveFSCacheDataImpl *m_impl{nullptr};
 };
 
 wxArchiveFSCacheData::wxArchiveFSCacheData(

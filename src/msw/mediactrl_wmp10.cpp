@@ -665,12 +665,12 @@ public:
 #ifdef WXTEST_ATL
         CAxWindow  m_wndView;
 #else
-        wxActiveXContainer* m_pAX;
+        wxActiveXContainer* m_pAX{nullptr};
 #endif
-    IWMPPlayer* m_pWMPPlayer;       // Main activex interface
-    IWMPSettings* m_pWMPSettings;   // Settings such as volume
-    IWMPControls* m_pWMPControls;   // Control interface (play etc.)
-    IWMPControls2* m_pWMPControls2; // Control interface (play etc.)
+    IWMPPlayer* m_pWMPPlayer{nullptr};       // Main activex interface
+    IWMPSettings* m_pWMPSettings{nullptr};   // Settings such as volume
+    IWMPControls* m_pWMPControls{nullptr};   // Control interface (play etc.)
+    IWMPControls2* m_pWMPControls2{nullptr}; // Control interface (play etc.)
 
     wxSize m_bestSize;              // Actual movie size
 
@@ -718,14 +718,8 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxWMP10MediaBackend, wxMediaBackend);
 // wxWMP10MediaBackend Constructor
 //---------------------------------------------------------------------------
 wxWMP10MediaBackend::wxWMP10MediaBackend()
-                 :
-#ifndef WXTEST_ATL
-                m_pAX(nullptr),
-#endif
-                m_pWMPPlayer(nullptr),
-                m_pWMPSettings(nullptr),
-                m_pWMPControls(nullptr),
-                m_pWMPControls2(nullptr)
+                 
+                
 
 {
     m_evthandler = nullptr;

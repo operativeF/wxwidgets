@@ -238,7 +238,7 @@ bool wxTextMeasureBase::GetPartialTextExtents(const wxString& text,
 class FontWidthCache
 {
 public:
-    FontWidthCache() : m_scaleX(1), m_widths(nullptr) { }
+    FontWidthCache()  { }
     ~FontWidthCache() { delete []m_widths; }
 
     void Reset()
@@ -250,8 +250,8 @@ public:
     }
 
     wxFont m_font;
-    double m_scaleX;
-    int *m_widths;
+    double m_scaleX{1};
+    int *m_widths{nullptr};
 };
 
 static FontWidthCache s_fontWidthCache;

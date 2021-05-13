@@ -665,23 +665,19 @@ bool wxIsWhiteOnly(const wxString& buf)
 struct wxXmlParsingContext
 {
     wxXmlParsingContext()
-        : conv(nullptr),
-          node(nullptr),
-          lastChild(nullptr),
-          lastAsText(nullptr),
-          doctype(nullptr),
-          removeWhiteOnlyNodes(false)
+        
+          
     {}
 
     XML_Parser parser;
-    wxMBConv  *conv;
-    wxXmlNode *node;                    // the node being parsed
-    wxXmlNode *lastChild;               // the last child of "node"
-    wxXmlNode *lastAsText;              // the last _text_ child of "node"
+    wxMBConv  *conv{nullptr};
+    wxXmlNode *node{nullptr};                    // the node being parsed
+    wxXmlNode *lastChild{nullptr};               // the last child of "node"
+    wxXmlNode *lastAsText{nullptr};              // the last _text_ child of "node"
     wxString   encoding;
     wxString   version;
-    wxXmlDoctype *doctype;
-    bool       removeWhiteOnlyNodes;
+    wxXmlDoctype *doctype{nullptr};
+    bool       removeWhiteOnlyNodes{false};
 };
 
 // checks that ctx->lastChild is in consistent state

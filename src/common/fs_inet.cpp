@@ -141,9 +141,9 @@ class wxFileSystemInternetModule : public wxModule
     wxDECLARE_DYNAMIC_CLASS(wxFileSystemInternetModule);
 
     public:
-        wxFileSystemInternetModule() :
+        wxFileSystemInternetModule() 
            
-           m_handler(nullptr)
+           
         {
         }
 
@@ -160,7 +160,7 @@ class wxFileSystemInternetModule : public wxModule
         }
 
     private:
-        wxFileSystemHandler* m_handler;
+        wxFileSystemHandler* m_handler{nullptr};
 };
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxFileSystemInternetModule, wxModule);

@@ -51,9 +51,9 @@ struct PPDefinition {
 };
 
 class LinePPState {
-	int state;
-	int ifTaken;
-	int level;
+	int state{0};
+	int ifTaken{0};
+	int level{-1};
 	bool ValidLevel() const {
 		return level >= 0 && level < 32;
 	}
@@ -61,7 +61,7 @@ class LinePPState {
 		return 1 << level;
 	}
 public:
-	LinePPState() : state(0), ifTaken(0), level(-1) {
+	LinePPState()  {
 	}
 	bool IsInactive() const {
 		return state != 0;

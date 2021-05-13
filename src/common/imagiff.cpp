@@ -60,14 +60,14 @@ enum
 class IFFImage
 {
 public:
-    unsigned int w;                 /* width */
-    unsigned int h;                 /* height */
+    unsigned int w{0};                 /* width */
+    unsigned int h{0};                 /* height */
     int transparent;                /* transparent color (-1 = none) */
-    int colors;                     /* number of colors */
-    unsigned char *p;               /* bitmap */
-    unsigned char *pal;             /* palette */
+    int colors{0};                     /* number of colors */
+    unsigned char *p{nullptr};               /* bitmap */
+    unsigned char *pal{nullptr};             /* palette */
 
-    IFFImage() : w(0), h(0), colors(0), p(nullptr), pal(nullptr) {}
+    IFFImage()  {}
     ~IFFImage() { delete [] p; delete [] pal; }
 };
 

@@ -671,8 +671,8 @@ private:
     struct BranchNodeData
     {
         BranchNodeData()
-            : open(false),
-              subTreeCount(0)
+            
+              
         {
         }
 
@@ -694,13 +694,13 @@ private:
         SortOrder            sortOrder;
 
         // Is the branch node currently open (expanded)?
-        bool                 open;
+        bool                 open{false};
 
         // Total count of expanded (i.e. visible with the help of some
         // scrolling) items in the subtree, but excluding this node. I.e. it is
         // 0 for leaves and is the number of rows the subtree occupies for
         // branch nodes.
-        int                  subTreeCount;
+        int                  subTreeCount{0};
     };
 
     BranchNodeData *m_branchData;
@@ -905,18 +905,17 @@ public:
     struct DropItemInfo
     {
         unsigned int        m_row;
-        DropHint            m_hint;
+        DropHint            m_hint{DropHint_None};
 
         wxDataViewItem      m_item;
-        int                 m_proposedDropIndex;
-        int                 m_indentLevel;
+        int                 m_proposedDropIndex{-1};
+        int                 m_indentLevel{-1};
 
         DropItemInfo()
         :   m_row(static_cast<unsigned int>(-1))
-        ,   m_hint(DropHint_None)
-        ,   m_item(nullptr)
-        ,   m_proposedDropIndex(-1)
-        ,   m_indentLevel(-1)
+        ,   
+           m_item(nullptr)
+           
         {
         }
     };

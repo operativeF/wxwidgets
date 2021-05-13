@@ -222,11 +222,11 @@ private:
 class wxMSWListItemData
 {
 public:
-   wxMSWListItemData() : attr(nullptr), lParam(0) {}
+   wxMSWListItemData()  {}
    ~wxMSWListItemData() { delete attr; }
 
-    wxItemAttr *attr;
-    LPARAM lParam; // real user data
+    wxItemAttr *attr{nullptr};
+    LPARAM lParam{0}; // real user data
 
     wxDECLARE_NO_COPY_CLASS(wxMSWListItemData);
 };

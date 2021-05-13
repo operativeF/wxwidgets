@@ -609,7 +609,7 @@ bool wxZlibInputStream2::Open(wxInputStream& stream)
 class wxZipMemory
 {
 public:
-    wxZipMemory() : m_data(nullptr), m_size(0), m_capacity(0), m_ref(1) { }
+    wxZipMemory()  { }
 
     wxZipMemory *AddRef() { m_ref++; return this; }
     void Release() { if (--m_ref == 0) delete this; }
@@ -623,10 +623,10 @@ public:
 private:
     ~wxZipMemory() { delete [] m_data; }
 
-    char *m_data;
-    size_t m_size;
-    size_t m_capacity;
-    int m_ref;
+    char *m_data{nullptr};
+    size_t m_size{0};
+    size_t m_capacity{0};
+    int m_ref{1};
 
     wxSUPPRESS_GCC_PRIVATE_DTOR_WARNING(wxZipMemory)
 };
@@ -689,7 +689,7 @@ WX_DECLARE_HASH_MAP(long, wxZipEntry*, wxIntegerHash,
 class wxZipWeakLinks
 {
 public:
-    wxZipWeakLinks() : m_ref(1) { }
+    wxZipWeakLinks()  { }
 
     void Release(const wxZipInputStream* WXUNUSED(x))
         { if (--m_ref == 0) delete this; }
@@ -707,7 +707,7 @@ private:
 
     typedef wxOffsetZipEntryMap_::key_type key_type;
 
-    int m_ref;
+    int m_ref{1};
     wxOffsetZipEntryMap_ m_entries;
 
     wxSUPPRESS_GCC_PRIVATE_DTOR_WARNING(wxZipWeakLinks)
@@ -1425,22 +1425,18 @@ public:
     bool Write(wxOutputStream& stream, wxMBConv& conv) const;
 
 private:
-    wxUint32 m_DiskNumber;
-    wxUint32 m_StartDisk;
-    wxUint64 m_EntriesHere;
-    wxUint64 m_TotalEntries;
-    wxUint64 m_Size;
-    wxUint64 m_Offset;
+    wxUint32 m_DiskNumber{0};
+    wxUint32 m_StartDisk{0};
+    wxUint64 m_EntriesHere{0};
+    wxUint64 m_TotalEntries{0};
+    wxUint64 m_Size{0};
+    wxUint64 m_Offset{0};
     wxString m_Comment;
 };
 
 wxZipEndRec::wxZipEndRec()
-  : m_DiskNumber(0),
-    m_StartDisk(0),
-    m_EntriesHere(0),
-    m_TotalEntries(0),
-    m_Size(0),
-    m_Offset(0)
+  
+    
 {
 }
 

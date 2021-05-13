@@ -865,9 +865,9 @@ public:
         return total;
     }
 
-    wxActiveXContainer* m_pAX;   // ActiveX host
-    IActiveMovie* m_pAM;
-    IMediaPlayer* m_pMP;
+    wxActiveXContainer* m_pAX{nullptr};   // ActiveX host
+    IActiveMovie* m_pAM{nullptr};
+    IMediaPlayer* m_pMP{nullptr};
 
     IMediaPlayer* GetMP() {return m_pMP;}
     IActiveMovie* GetAM() {return m_pAM;}
@@ -961,9 +961,7 @@ wxString wxAMMediaBackend::GetErrorString(HRESULT hrdsv)
 // wxAMMediaBackend Constructor
 //---------------------------------------------------------------------------
 wxAMMediaBackend::wxAMMediaBackend()
-                 :m_pAX(nullptr),
-                  m_pAM(nullptr),
-                  m_pMP(nullptr),
+                 :
                   m_bestSize(wxDefaultSize)
 {
    m_evthandler = nullptr;

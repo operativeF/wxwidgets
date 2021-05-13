@@ -722,7 +722,7 @@ template<typename T>
 class wxD2DResourceHolder: public wxManagedResourceHolder
 {
 public:
-    wxD2DResourceHolder() : m_resourceManager(nullptr)
+    wxD2DResourceHolder()  
     {
     }
 
@@ -803,7 +803,7 @@ protected:
     virtual void DoAcquireResource() = 0;
 
 private:
-    wxD2DResourceManager* m_resourceManager;
+    wxD2DResourceManager* m_resourceManager{nullptr};
 
 protected:
     wxCOMPtr<T> m_nativeResource;

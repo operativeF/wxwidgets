@@ -624,7 +624,7 @@ wxPluralFormsNode::evaluate(wxPluralFormsToken::Number n) const
 class wxPluralFormsCalculator
 {
 public:
-    wxPluralFormsCalculator() : m_nplurals(0), m_plural(nullptr) {}
+    wxPluralFormsCalculator() :  m_plural(nullptr) {}
 
     // input: number, returns msgstr index
     int evaluate(int n) const;
@@ -639,7 +639,7 @@ public:
     void  init(wxPluralFormsToken::Number nplurals, wxPluralFormsNode* plural);
 
 private:
-    wxPluralFormsToken::Number m_nplurals;
+    wxPluralFormsToken::Number m_nplurals{0};
     wxPluralFormsNodePtr m_plural;
 };
 

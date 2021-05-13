@@ -760,11 +760,11 @@ struct wxStringFragment
         LetterOrSymbol // letters and symbols, i.e., anything not covered by the above types
     };
 
-    wxStringFragment() : type(Empty), value(0) {}
+    wxStringFragment()  {}
 
-    Type     type;
+    Type     type{Empty};
     wxString text;
-    wxUint64 value; // used only for Digit type
+    wxUint64 value{0}; // used only for Digit type
 };
 
 

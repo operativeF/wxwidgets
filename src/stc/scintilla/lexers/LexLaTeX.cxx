@@ -35,14 +35,14 @@ using namespace Scintilla;
 using namespace std;
 
 struct latexFoldSave {
-	latexFoldSave() : structLev(0) {
+	latexFoldSave()  {
 		for (int i = 0; i < 8; ++i) openBegins[i] = 0;
 	}
 	latexFoldSave(const latexFoldSave &save) : structLev(save.structLev) {
 		for (int i = 0; i < 8; ++i) openBegins[i] = save.openBegins[i];
 	}
 	int openBegins[8];
-	int structLev;
+	int structLev{0};
 };
 
 class LexerLaTeX : public LexerBase {

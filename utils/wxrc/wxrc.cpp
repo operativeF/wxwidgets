@@ -197,7 +197,7 @@ WX_DEFINE_OBJARRAY(ArrayOfXRCWndClassData)
 
 struct ExtractedString
 {
-    ExtractedString() : lineNo(-1) {}
+    ExtractedString()  {}
     ExtractedString(const wxString& str_,
                     const wxString& filename_, int lineNo_)
         : str(str_), filename(filename_), lineNo(lineNo_)
@@ -206,7 +206,7 @@ struct ExtractedString
     wxString str;
 
     wxString filename;
-    int      lineNo;
+    int      lineNo{-1};
 };
 
 typedef std::vector<ExtractedString> ExtractedStrings;

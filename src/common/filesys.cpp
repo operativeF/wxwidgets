@@ -662,9 +662,9 @@ class wxFileSystemModule : public wxModule
     wxDECLARE_DYNAMIC_CLASS(wxFileSystemModule);
 
     public:
-        wxFileSystemModule() :
+        wxFileSystemModule() 
             
-            m_handler(nullptr)
+            
         {
         }
 
@@ -682,7 +682,7 @@ class wxFileSystemModule : public wxModule
         }
 
     private:
-        wxFileSystemHandler* m_handler;
+        wxFileSystemHandler* m_handler{nullptr};
 
 };
 

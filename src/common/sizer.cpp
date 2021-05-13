@@ -2796,7 +2796,7 @@ void wxStdDialogButtonSizer::Realize()
     {
     public:
         TabOrderUpdater()
-            : m_lastAdded(nullptr)
+             
         {
         }
 
@@ -2813,7 +2813,7 @@ void wxStdDialogButtonSizer::Realize()
         }
 
     private:
-        wxButton* m_lastAdded;
+        wxButton* m_lastAdded{nullptr};
     };
 
     TabOrderUpdater tabOrder;
