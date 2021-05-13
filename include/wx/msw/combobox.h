@@ -54,6 +54,9 @@ public:
         Create(parent, id, value, pos, size, choices, style, validator, name);
     }
 
+	wxComboBox(const wxComboBox&) = delete;
+	wxComboBox& operator=(const wxComboBox&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& value = wxEmptyString,
@@ -177,7 +180,10 @@ private:
     // normally true, false if text events are currently disabled
     bool m_allowTextEvents;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxComboBox);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();
 };
 

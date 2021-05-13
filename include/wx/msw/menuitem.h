@@ -42,6 +42,9 @@ public:
                wxMenu *subMenu = NULL);
     virtual ~wxMenuItem();
 
+	wxMenuItem(const wxMenuItem&) = delete;
+	wxMenuItem& operator=(const wxMenuItem&) = delete;
+
     // override base class virtuals
     void SetItemLabel(const wxString& strName) override;
 
@@ -138,7 +141,10 @@ private:
     // Give wxMenu access to our MSWMustUseOwnerDrawn() and GetHBitmapForMenu().
     friend class wxMenu;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMenuItem);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif  //_MENUITEM_H

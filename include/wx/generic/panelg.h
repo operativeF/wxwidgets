@@ -29,8 +29,13 @@ public:
         Create(parent, winid, pos, size, style, name);
     }
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxPanel);
+    wxPanel(const wxPanel&) = delete;
+	wxPanel& operator=(const wxPanel&) = delete;
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_GENERIC_PANELG_H_

@@ -581,6 +581,9 @@ public :
         }
     }
 
+	wxGDIPlusRenderer(const wxGDIPlusRenderer&) = delete;
+	wxGDIPlusRenderer& operator=(const wxGDIPlusRenderer&) = delete;
+
     // Context
 
     wxGraphicsContext * CreateContext( const wxWindowDC& dc) override;
@@ -674,8 +677,11 @@ private :
     int m_loaded;
     ULONG_PTR m_gditoken;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGDIPlusRenderer);
-} ;
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
+};
 
 //-----------------------------------------------------------------------------
 // wxGDIPlusPenBrushBaseData implementation

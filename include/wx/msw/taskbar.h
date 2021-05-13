@@ -23,6 +23,9 @@ public:
     wxTaskBarIcon(wxTaskBarIconType iconType = wxTBI_DEFAULT_TYPE);
     virtual ~wxTaskBarIcon();
 
+	wxTaskBarIcon(const wxTaskBarIcon&) = delete;
+	wxTaskBarIcon& operator=(const wxTaskBarIcon&) = delete;
+
     // Accessors
     bool IsOk() const { return true; }
     bool IsIconInstalled() const { return m_iconAdded; }
@@ -79,7 +82,10 @@ private:
                    const wxString& tooltip,
                    Operation operation);
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxTaskBarIcon);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_TASKBAR_H_

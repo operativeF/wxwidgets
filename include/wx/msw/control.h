@@ -28,6 +28,9 @@ public:
         Create(parent, id, pos, size, style, validator, name);
     }
 
+	wxControl(const wxControl&) = delete;
+	wxControl& operator=(const wxControl&) = delete;
+
     bool Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize, long style = 0,
@@ -129,8 +132,10 @@ protected:
     // holds the ids (not HWNDs!) of the sub controls
     wxArrayLong m_subControls;
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxControl);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_CONTROL_H_

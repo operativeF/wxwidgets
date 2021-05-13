@@ -33,6 +33,9 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
+	wxRadioButton(const wxRadioButton&) = delete;
+	wxRadioButton& operator=(const wxRadioButton&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& label,
@@ -75,7 +78,10 @@ private:
     // sometimes gets out of sync in WM_COMMAND handler
     bool m_isChecked;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxRadioButton);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_RADIOBUT_H_

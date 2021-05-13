@@ -22,6 +22,9 @@ public:
            const wxValidator& validator = wxDefaultValidator,
            const wxString& name = wxASCII_STR(wxButtonNameStr));
 
+    wxButton(const wxButton&) = delete;
+    wxButton& operator=(const wxButton&) = delete;
+
     bool Create(wxWindow *parent, wxWindowID id,
            const wxString& label = wxEmptyString,
            const wxPoint& pos = wxDefaultPosition,
@@ -34,8 +37,10 @@ public:
     // implementation only
     int QtGetEventType() const override { return wxEVT_BUTTON; }
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxButton);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 

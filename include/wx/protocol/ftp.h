@@ -33,6 +33,9 @@ public:
     wxFTP();
     virtual ~wxFTP();
 
+	wxFTP(const wxFTP&) = delete;
+	wxFTP& operator=(const wxFTP&) = delete;
+
     // Connecting and disconnecting
     bool Connect(const wxSockAddress& addr, bool wait = true) override;
     bool Connect(const wxString& host) override { return Connect(host, 0); }
@@ -163,7 +166,10 @@ protected:
     friend class wxInputFTPStream;
     friend class wxOutputFTPStream;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxFTP);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
     DECLARE_PROTOCOL(wxFTP)
 };
 

@@ -1363,6 +1363,9 @@ class WXDLLIMPEXP_CORE wxGridStringTable : public wxGridTableBase
 public:
     wxGridStringTable();
     wxGridStringTable( int numRows, int numCols );
+    
+	wxGridStringTable(const wxGridStringTable&) = delete;
+	wxGridStringTable& operator=(const wxGridStringTable&) = delete;
 
     // these are pure virtual in wxGridTableBase
     //
@@ -1405,7 +1408,10 @@ private:
 
     wxString m_cornerLabel;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGridStringTable);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 

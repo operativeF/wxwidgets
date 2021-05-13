@@ -28,6 +28,9 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
+	wxToggleButton(const wxToggleButton&) = delete;
+	wxToggleButton& operator=(const wxToggleButton&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& label,
@@ -47,8 +50,10 @@ public:
 protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxToggleButton);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 
@@ -68,6 +73,9 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
+	wxBitmapToggleButton(const wxBitmapToggleButton&) = delete;
+	wxBitmapToggleButton& operator=(const wxBitmapToggleButton&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxBitmap& label,
@@ -77,8 +85,10 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxCheckBoxNameStr));
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxBitmapToggleButton);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_TOGGLEBUTTON_H_

@@ -31,6 +31,9 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
+	wxToggleButton(const wxToggleButton&) = delete;
+	wxToggleButton& operator=(const wxToggleButton&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& label,
@@ -61,8 +64,10 @@ protected:
     // current state of the button (when owner-drawn)
     bool m_state;
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxToggleButton);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 //-----------------------------------------------------------------------------

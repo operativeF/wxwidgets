@@ -23,6 +23,9 @@ public:
     wxPopupWindow(wxWindow *parent, int flags = wxBORDER_NONE)
         { (void)Create(parent, flags); }
 
+	wxPopupWindow(const wxPopupWindow&) = delete;
+	wxPopupWindow& operator=(const wxPopupWindow&) = delete;
+
     bool Create(wxWindow *parent, int flags = wxBORDER_NONE);
 
     virtual ~wxPopupWindow();
@@ -49,7 +52,10 @@ public:
 private:
     wxWindow* m_owner;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxPopupWindow);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MSW_POPUPWIN_H_

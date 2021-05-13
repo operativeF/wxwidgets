@@ -76,6 +76,9 @@ public :
     wxWidgetCocoaImpl() ;
     ~wxWidgetCocoaImpl();
 
+	wxWidgetCocoaImpl(const wxWidgetCocoaImpl&) = delete;
+	wxWidgetCocoaImpl& operator=(const wxWidgetCocoaImpl&) = delete;
+
     void Init();
 
     bool        IsVisible() const override;
@@ -249,7 +252,10 @@ protected:
 
     friend class wxWidgetCocoaNativeKeyDownSuspender;
     
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxWidgetCocoaImpl);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 DECLARE_WXCOCOA_OBJC_CLASS( wxNSWindow );
@@ -261,6 +267,9 @@ public :
     wxNonOwnedWindowCocoaImpl();
 
     virtual ~wxNonOwnedWindowCocoaImpl();
+
+	wxNonOwnedWindowCocoaImpl(const wxNonOwnedWindowCocoaImpl&) = delete;
+	wxNonOwnedWindowCocoaImpl& operator=(const wxNonOwnedWindowCocoaImpl&) = delete;
 
     void WillBeDestroyed() override;
     void Create( wxWindow* parent, const wxPoint& pos, const wxSize& size,
@@ -345,7 +354,10 @@ protected :
 private:
     void SetUpForModalParent();
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxNonOwnedWindowCocoaImpl);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 DECLARE_WXCOCOA_OBJC_CLASS( wxNSButton );

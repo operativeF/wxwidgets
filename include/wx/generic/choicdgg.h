@@ -118,6 +118,9 @@ public:
         Create(parent, message, caption, choices, clientData, style, pos);
     }
 
+    wxSingleChoiceDialog(const wxSingleChoiceDialog&) = delete;
+	wxSingleChoiceDialog& operator=(const wxSingleChoiceDialog&) = delete;
+
     bool Create(wxWindow *parent,
                 const wxString& message,
                 const wxString& caption,
@@ -149,8 +152,10 @@ protected:
 
     void DoChoice();
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxSingleChoiceDialog);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();
 };
 
@@ -213,7 +218,13 @@ protected:
     wxArrayInt m_selections;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMultiChoiceDialog);
+public:
+	wxMultiChoiceDialog(const wxMultiChoiceDialog&) = delete;
+	wxMultiChoiceDialog& operator=(const wxMultiChoiceDialog&) = delete;
+
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

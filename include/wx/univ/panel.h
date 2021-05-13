@@ -29,10 +29,14 @@ public:
         Create(parent, winid, pos, size, style, name);
     }
 
+	wxPanel(const wxPanel&) = delete;
+	wxPanel& operator=(const wxPanel&) = delete;
+
     virtual bool IsCanvasWindow() const { return true; }
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxPanel);
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_UNIV_PANEL_H_

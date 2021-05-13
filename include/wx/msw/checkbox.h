@@ -30,6 +30,9 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
+	wxCheckBox(const wxCheckBox&) = delete;
+	wxCheckBox& operator=(const wxCheckBox&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& label,
@@ -79,7 +82,10 @@ private:
     // current state of the checkbox
     wxCheckBoxState m_state;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxCheckBox);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_CHECKBOX_H_

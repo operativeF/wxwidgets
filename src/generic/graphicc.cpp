@@ -3085,6 +3085,9 @@ public :
 
     virtual ~wxCairoRenderer() {}
 
+	wxCairoRenderer(const wxCairoRenderer&) = delete;
+	wxCairoRenderer& operator=(const wxCairoRenderer&) = delete;
+
     // Context
 
     wxGraphicsContext * CreateContext( const wxWindowDC& dc) override;
@@ -3166,8 +3169,11 @@ public :
     wxString GetName() const override;
     void GetVersion(int *major, int *minor, int *micro) const override;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxCairoRenderer);
-} ;
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
+};
 
 //-----------------------------------------------------------------------------
 // wxCairoRenderer implementation

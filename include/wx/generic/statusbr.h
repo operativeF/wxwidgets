@@ -39,6 +39,9 @@ public:
 
     virtual ~wxStatusBarGeneric();
 
+	wxStatusBarGeneric(const wxStatusBarGeneric&) = delete;
+	wxStatusBarGeneric& operator=(const wxStatusBarGeneric&) = delete;
+
     bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY,
                 long style = wxSTB_DEFAULT_STYLE,
                 const wxString& name = wxASCII_STR(wxStatusBarNameStr));
@@ -110,7 +113,11 @@ private:
     void DoUpdateFieldWidths();
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxStatusBarGeneric);
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // wxUSE_STATUSBAR

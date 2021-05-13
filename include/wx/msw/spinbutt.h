@@ -34,6 +34,9 @@ public:
 
     virtual ~wxSpinButton();
 
+	wxSpinButton(const wxSpinButton&) = delete;
+	wxSpinButton& operator=(const wxSpinButton&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
@@ -65,8 +68,10 @@ protected:
    // ensure that the control displays a value in the current range
    virtual void NormalizeValue();
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxSpinButton);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // wxUSE_SPINBTN

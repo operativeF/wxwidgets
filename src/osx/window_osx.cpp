@@ -139,6 +139,9 @@ public:
         Create(parent, winid, pos, size, style, name);
     }
 
+	wxBlindPlateWindow(const wxBlindPlateWindow&) = delete;
+	wxBlindPlateWindow& operator=(const wxBlindPlateWindow&) = delete;
+
     // Pseudo ctor
     bool Create(wxWindow *parent,
                 wxWindowID winid = wxID_ANY,
@@ -168,7 +171,10 @@ protected:
     {
     }
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxBlindPlateWindow);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();
 };
 

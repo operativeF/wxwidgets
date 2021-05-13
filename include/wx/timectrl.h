@@ -121,8 +121,12 @@ typedef wxTimePickerCtrlCommonBase<wxDateTimePickerCtrl> wxTimePickerCtrlBase;
         {
         }
 
-    private:
-        wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxTimePickerCtrl);
+	    wxTimePickerCtrl(const wxTimePickerCtrl&) = delete;
+    	wxTimePickerCtrl& operator=(const wxTimePickerCtrl&) = delete;
+
+        wxClassInfo *GetClassInfo() const;
+        static wxClassInfo ms_classInfo;
+        static wxObject* wxCreateObject();
     };
 #endif
 

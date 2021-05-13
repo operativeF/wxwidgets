@@ -101,6 +101,9 @@ public:
     wxWindowsPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data = NULL);
     virtual ~wxWindowsPageSetupDialog();
 
+	wxWindowsPageSetupDialog(const wxWindowsPageSetupDialog&) = delete;
+	wxWindowsPageSetupDialog& operator=(const wxWindowsPageSetupDialog&) = delete;
+
     bool Create(wxWindow *parent, wxPageSetupDialogData *data = NULL);
     int ShowModal() override;
     bool ConvertToNative( wxPageSetupDialogData &data );
@@ -115,8 +118,10 @@ private:
     // holds MSW handle
     void*                   m_pageDlg;
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxWindowsPageSetupDialog);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // wxUSE_PRINTING_ARCHITECTURE

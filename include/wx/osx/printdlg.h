@@ -60,6 +60,9 @@ public:
     wxMacPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data = NULL);
     virtual ~wxMacPageSetupDialog();
 
+	wxMacPageSetupDialog(const wxMacPageSetupDialog&) = delete;
+	wxMacPageSetupDialog& operator=(const wxMacPageSetupDialog&) = delete;
+
     wxPageSetupDialogData& GetPageSetupDialogData() override;
 
     bool Create(wxWindow *parent, wxPageSetupDialogData *data = NULL);
@@ -69,8 +72,10 @@ private:
     wxPageSetupDialogData   m_pageSetupData;
     wxWindow*               m_dialogParent;
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMacPageSetupDialog);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
@@ -85,6 +90,10 @@ class WXDLLIMPEXP_CORE wxMacPageMarginsDialog : public wxDialog
 {
 public:
     wxMacPageMarginsDialog(wxFrame* parent, wxPageSetupDialogData* data);
+
+	wxMacPageMarginsDialog(const wxMacPageMarginsDialog&) = delete;
+	wxMacPageMarginsDialog& operator=(const wxMacPageMarginsDialog&) = delete;
+
     bool TransferToWindow();
     bool TransferDataFromWindow() override;
 
@@ -103,8 +112,10 @@ private:
     void GetMinMargins();
     bool CheckValue(wxTextCtrl* textCtrl, int *value, int minValue, const wxString& name);
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMacPageMarginsDialog);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 

@@ -23,6 +23,4 @@ inline bool wxVectorContains(const std::vector<T>& v, const T& obj)
     return std::find(v.begin(), v.end(), obj) != v.end();
 }
 
-}
-
 #endif // _WX_VECTOR_H_

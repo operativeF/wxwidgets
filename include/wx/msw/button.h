@@ -33,6 +33,9 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
+	wxButton(const wxButton&) = delete;
+	wxButton& operator=(const wxButton&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& label = wxEmptyString,
@@ -79,7 +82,11 @@ private:
     void OnCharHook(wxKeyEvent& event);
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxButton);
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MSW_BUTTON_H_

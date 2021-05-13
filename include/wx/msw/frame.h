@@ -33,6 +33,9 @@ public:
         Create(parent, id, title, pos, size, style, name);
     }
 
+	wxFrame(const wxFrame&) = delete;
+	wxFrame& operator=(const wxFrame&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& title,
@@ -184,7 +187,11 @@ private:
 #endif
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxFrame);
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif

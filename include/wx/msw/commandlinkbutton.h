@@ -37,6 +37,9 @@ public:
         Create(parent, id, mainLabel, note, pos, size, style, validator, name);
     }
 
+	wxCommandLinkButton(const wxCommandLinkButton&) = delete;
+	wxCommandLinkButton& operator=(const wxCommandLinkButton&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& mainLabel = wxEmptyString,
@@ -66,8 +69,10 @@ protected:
 
     bool HasNativeBitmap() const override;
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxCommandLinkButton);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MSW_COMMANDLINKBUTTON_H_

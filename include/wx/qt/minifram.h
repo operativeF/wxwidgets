@@ -16,6 +16,9 @@ class WXDLLIMPEXP_CORE wxMiniFrame : public wxFrame
 public:
   wxMiniFrame() { }
 
+	wxMiniFrame(const wxMiniFrame&) = delete;
+	wxMiniFrame& operator=(const wxMiniFrame&) = delete;
+
   bool Create(wxWindow *parent,
               wxWindowID id,
               const wxString& title,
@@ -40,8 +43,10 @@ public:
       Create(parent, id, title, pos, size, style, name);
   }
 
-protected:
-  wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMiniFrame);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif

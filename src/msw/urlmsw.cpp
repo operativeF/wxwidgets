@@ -33,6 +33,9 @@ class wxHTTPDummyProto : public wxProtocol
 public:
     wxHTTPDummyProto() : wxProtocol() { }
 
+	wxHTTPDummyProto(const wxHTTPDummyProto&) = delete;
+	wxHTTPDummyProto& operator=(const wxHTTPDummyProto&) = delete;
+
     wxProtocolError GetError() { return m_error; }
 
     virtual bool Abort() { return true; }
@@ -45,7 +48,10 @@ public:
 protected:
     wxProtocolError m_error;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxHTTPDummyProto);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
     DECLARE_PROTOCOL(wxHTTPDummyProto)
 };
 

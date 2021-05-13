@@ -2823,6 +2823,9 @@ public :
 
     virtual ~wxMacCoreGraphicsRenderer() {}
 
+	wxMacCoreGraphicsRenderer(const wxMacCoreGraphicsRenderer&) = delete;
+	wxMacCoreGraphicsRenderer& operator=(const wxMacCoreGraphicsRenderer&) = delete;
+
     // Context
 
     wxGraphicsContext * CreateContext( const wxWindowDC& dc) override;
@@ -2897,8 +2900,10 @@ public :
     wxString GetName() const override;
     void GetVersion(int *major, int *minor, int *micro) const override;
 
-private :
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMacCoreGraphicsRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 } ;
 
 //-----------------------------------------------------------------------------

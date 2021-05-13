@@ -393,7 +393,12 @@ protected:
         {
         }
 
-        wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxTopLevelWindow);
+        wxTopLevelWindow(const wxTopLevelWindow&) = delete;
+        wxTopLevelWindow& operator=(const wxTopLevelWindow&) = delete;
+
+    	wxClassInfo *GetClassInfo() const;
+	    static wxClassInfo ms_classInfo;
+	    static wxObject* wxCreateObject();
     };
 #endif // __WXUNIVERSAL__/!__WXUNIVERSAL__
 

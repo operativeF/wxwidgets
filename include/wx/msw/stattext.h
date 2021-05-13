@@ -27,6 +27,9 @@ public:
         Create(parent, id, label, pos, size, style, name);
     }
 
+	wxStaticText(const wxStaticText&) = delete;
+	wxStaticText& operator=(const wxStaticText&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& label,
@@ -50,7 +53,10 @@ protected:
     wxString WXGetVisibleLabel() const override;
     void WXSetVisibleLabel(const wxString& str) override;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxStaticText);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif

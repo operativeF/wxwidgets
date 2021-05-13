@@ -54,6 +54,9 @@ public:
         Create(parent, winid, pos, size, style, validator, name);
     }
 
+    wxListView(const wxListView&) = delete;
+	wxListView& operator=(const wxListView&) = delete;
+
     // focus/selection stuff
     // ---------------------
 
@@ -99,8 +102,10 @@ public:
 
     void ClearColumnImage(int col) { SetColumnImage(col, -1); }
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxListView);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // wxUSE_LISTCTRL

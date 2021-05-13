@@ -326,6 +326,9 @@ public:
                               const wxPoint& pos = wxDefaultPosition,
                               const wxSize& sz = wxDefaultSize );
 
+	wxArrayDoubleEditorDialog(const wxArrayDoubleEditorDialog&) = delete;
+	wxArrayDoubleEditorDialog& operator=(const wxArrayDoubleEditorDialog&) = delete;
+
     bool Create(wxWindow *parent,
                 const wxString& message,
                 const wxString& caption,
@@ -356,8 +359,10 @@ protected:
     void ArrayRemoveAt( int index ) override;
     void ArraySwap( size_t first, size_t second ) override;
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxArrayDoubleEditorDialog);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxArrayDoubleEditorDialog, wxPGArrayEditorDialog);

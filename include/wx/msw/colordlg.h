@@ -28,6 +28,9 @@ public:
         Create(parent, data);
     }
 
+	wxColourDialog(const wxColourDialog&) = delete;
+	wxColourDialog& operator=(const wxColourDialog&) = delete;
+
     bool Create(wxWindow *parent, const wxColourData *data = NULL);
 
     wxColourData& GetColourData() { return m_colourData; }
@@ -70,8 +73,10 @@ protected:
     // true if DoMoveWindow() had been called
     bool m_movedWindow;
 
-
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxColourDialog);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_COLORDLG_H_

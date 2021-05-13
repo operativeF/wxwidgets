@@ -51,6 +51,9 @@ public:
         (void)Create(parent, id, pos, size, style, name);
     }
 
+    wxChoicebook(const wxChoicebook&) = delete;
+	wxChoicebook& operator=(const wxChoicebook&) = delete;
+
     // quasi ctor
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -97,7 +100,11 @@ protected:
 
 private:
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxChoicebook);
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

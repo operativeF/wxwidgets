@@ -34,6 +34,9 @@ public:
     wxWrapSizer(int orient = wxHORIZONTAL, int flags = wxWRAPSIZER_DEFAULT_FLAGS);
     virtual ~wxWrapSizer();
 
+	wxWrapSizer(const wxWrapSizer&) = delete;
+	wxWrapSizer& operator=(const wxWrapSizer&) = delete;
+
     wxSize CalcMin() override;
     void RepositionChildren(const wxSize& minSize) override;
 
@@ -96,7 +99,10 @@ protected:
 
     wxBoxSizer m_rows;       // Sizer containing multiple rows of our items
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxWrapSizer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_WRAPSIZER_H_

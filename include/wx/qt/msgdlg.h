@@ -21,11 +21,15 @@ public:
                     const wxPoint& pos = wxDefaultPosition);
     virtual ~wxMessageDialog();
 
+	wxMessageDialog(const wxMessageDialog&) = delete;
+	wxMessageDialog& operator=(const wxMessageDialog&) = delete;
+
     // Reimplemented to translate return codes from Qt to wx
     int ShowModal() override;
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMessageDialog);
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_QT_MSGDLG_H_

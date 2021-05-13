@@ -23,6 +23,9 @@ public:
                         int align = wxDVR_DEFAULT_ALIGNMENT );
     virtual ~wxDataViewRenderer();
 
+    wxDataViewRenderer(const wxDataViewRenderer&) = delete;
+	wxDataViewRenderer& operator=(const wxDataViewRenderer&) = delete;
+
     wxDC *GetDC() override;
 
     void SetAlignment( int align ) override;
@@ -68,7 +71,10 @@ private:
 
     int m_state;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_GENERIC_DVRENDERER_H_

@@ -134,6 +134,9 @@ public:
                             int alignment = wxDVR_DEFAULT_ALIGNMENT );
     virtual ~wxDataViewRendererBase();
 
+    wxDataViewRendererBase(const wxDataViewRendererBase&) = delete;
+	wxDataViewRendererBase& operator=(const wxDataViewRendererBase&) = delete;
+
     virtual bool Validate( wxVariant& WXUNUSED(value) )
         { return true; }
 
@@ -262,7 +265,10 @@ private:
     // Called from {Called,Finish}Editing() and dtor to cleanup m_editorCtrl
     void DestroyEditControl();
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewRendererBase);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // include the real wxDataViewRenderer declaration for the native ports
@@ -553,6 +559,9 @@ public:
                   int align = wxDVR_DEFAULT_ALIGNMENT
              );
 
+	wxDataViewCheckIconTextRenderer(const wxDataViewCheckIconTextRenderer&) = delete;
+	wxDataViewCheckIconTextRenderer& operator=(const wxDataViewCheckIconTextRenderer&) = delete;
+
     // This renderer can always display the 3rd ("indeterminate") checkbox
     // state if the model contains cells with wxCHK_UNDETERMINED value, but it
     // doesn't allow the user to set it by default. Call this method to allow
@@ -588,7 +597,10 @@ private:
 
     bool m_allow3rdStateForUser;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewCheckIconTextRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // ! native __WXOSX__

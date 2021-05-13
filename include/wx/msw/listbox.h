@@ -80,6 +80,9 @@ public:
 
     virtual ~wxListBox();
 
+	wxListBox(const wxListBox&) = delete;
+	wxListBox& operator=(const wxListBox&) = delete;
+
     unsigned int GetCount() const override;
     wxString GetString(unsigned int n) const override;
     void SetString(unsigned int n, const wxString& s) override;
@@ -210,7 +213,10 @@ private:
     bool m_updateHorizontalExtent;
 
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxListBox);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // wxUSE_LISTBOX

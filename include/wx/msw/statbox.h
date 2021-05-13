@@ -44,6 +44,9 @@ public:
         Create(parent, id, label, pos, size, style, name);
     }
 
+	wxStaticBox(const wxStaticBox&) = delete;
+	wxStaticBox& operator=(const wxStaticBox&) = delete;
+
     bool Create(wxWindow *parent, wxWindowID id,
                 const wxString& label,
                 const wxPoint& pos = wxDefaultPosition,
@@ -95,7 +98,10 @@ protected:
 private:
     void PositionLabelWindow();
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxStaticBox);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // Indicate that we have the ctor overload taking wxWindow as label.

@@ -3588,6 +3588,8 @@ public:
     wxEvtHandler();
     virtual ~wxEvtHandler();
 
+	wxEvtHandler(const wxEvtHandler&) = delete;
+	wxEvtHandler& operator=(const wxEvtHandler&) = delete;
 
     // Event handler chain
     // -------------------
@@ -4030,7 +4032,10 @@ private:
     // Head of the event filter linked list.
     static wxEventFilter* ms_filterList;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxEvtHandler);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 WX_DEFINE_ARRAY_WITH_DECL_PTR(wxEvtHandler *, wxEvtHandlerArray, class WXDLLIMPEXP_BASE);

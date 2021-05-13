@@ -25,6 +25,10 @@ public:
     wxGenericImageList() { }
     wxGenericImageList( int width, int height, bool mask = true, int initialCount = 1 );
     virtual ~wxGenericImageList();
+
+    wxGenericImageList(const wxGenericImageList&) = delete;
+	wxGenericImageList& operator=(const wxGenericImageList&) = delete;
+
     bool Create( int width, int height, bool mask = true, int initialCount = 1 );
 
     virtual int GetImageCount() const;
@@ -57,7 +61,10 @@ private:
     // Images in the list should have the same scale factor.
     double m_scaleFactor;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGenericImageList);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #ifndef wxHAS_NATIVE_IMAGELIST

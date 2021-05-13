@@ -400,7 +400,12 @@ struct DerivedWithoutOverride : Base
 {
     void OnIdle(wxIdleEvent&) { }
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(DerivedWithoutOverride);
+	DerivedWithoutOverride(const DerivedWithoutOverride&) = delete;
+	DerivedWithoutOverride& operator=(const DerivedWithoutOverride&) = delete;
+
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();
 };
 
@@ -408,9 +413,14 @@ struct DerivedWithOverride : Base
 {
     void Foo() override { }
 
+	DerivedWithOverride(const DerivedWithOverride&) = delete;
+	DerivedWithOverride& operator=(const DerivedWithOverride&) = delete;
+
     void OnIdle(wxIdleEvent&) { }
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(DerivedWithOverride);
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();
 };
 

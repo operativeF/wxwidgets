@@ -32,6 +32,9 @@ public:
         Create(parent, id, bitmap, pos, size, style, validator, name);
     }
 
+    wxBitmapButton(const wxBitmapButton&) = delete;
+	wxBitmapButton& operator=(const wxBitmapButton&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxBitmap& bitmap,
@@ -46,7 +49,11 @@ public:
                            const wxString& name = wxString());
 protected:
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxBitmapButton);
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_BMPBUTTN_H_

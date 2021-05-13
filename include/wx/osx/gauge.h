@@ -30,6 +30,9 @@ class WXDLLIMPEXP_CORE wxGauge: public wxGaugeBase
     Create(parent, id, range, pos, size, style, validator, name);
   }
 
+	wxGauge(const wxGauge&) = delete;
+	wxGauge& operator=(const wxGauge&) = delete;
+
   bool Create(wxWindow *parent, wxWindowID id,
            int range,
            const wxPoint& pos = wxDefaultPosition,
@@ -45,8 +48,10 @@ class WXDLLIMPEXP_CORE wxGauge: public wxGaugeBase
 
     void Pulse() override;
 
- protected:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGauge);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif

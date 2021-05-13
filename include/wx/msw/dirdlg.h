@@ -22,6 +22,9 @@ public:
                 const wxSize& size = wxDefaultSize,
                 const wxString& name = wxASCII_STR(wxDirDialogNameStr));
 
+	wxDirDialog(const wxDirDialog&) = delete;
+	wxDirDialog& operator=(const wxDirDialog&) = delete;
+
     void SetPath(const wxString& path) override;
 
     int ShowModal() override;
@@ -32,7 +35,10 @@ private:
     int ShowSHBrowseForFolder(WXHWND owner);
     int ShowIFileOpenDialog(WXHWND owner);
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDirDialog);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif

@@ -41,6 +41,9 @@ public :
     wxWidgetIPhoneImpl() ;
     ~wxWidgetIPhoneImpl();
 
+	wxWidgetIPhoneImpl(const wxWidgetIPhoneImpl&) = delete;
+	wxWidgetIPhoneImpl& operator=(const wxWidgetIPhoneImpl&) = delete;
+
     void Init();
 
     virtual bool        IsVisible() const ;
@@ -121,9 +124,14 @@ public :
 
     virtual void        controlAction(void* sender, wxUint32 controlEvent, WX_UIEvent rawEvent);
     virtual void         controlTextDidChange();
+
 protected:
     WXWidget m_osxView;
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxWidgetIPhoneImpl);
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 class wxNonOwnedWindowIPhoneImpl : public wxNonOwnedWindowImpl
@@ -133,6 +141,9 @@ public :
     wxNonOwnedWindowIPhoneImpl();
 
     virtual ~wxNonOwnedWindowIPhoneImpl();
+
+	wxNonOwnedWindowIPhoneImpl(const wxNonOwnedWindowIPhoneImpl&) = delete;
+	wxNonOwnedWindowIPhoneImpl& operator=(const wxNonOwnedWindowIPhoneImpl&) = delete;
 
     virtual void WillBeDestroyed() ;
     void Create( wxWindow* parent, const wxPoint& pos, const wxSize& size,
@@ -196,7 +207,11 @@ protected :
     WX_UIWindow          m_macWindow;
     void *              m_macFullScreenData ;
     bool                m_initialShowSent;
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxNonOwnedWindowIPhoneImpl);
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #ifdef __OBJC__

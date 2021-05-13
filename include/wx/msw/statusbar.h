@@ -39,6 +39,9 @@ public:
 
     virtual ~wxStatusBar();
 
+	wxStatusBar(const wxStatusBar&) = delete;
+	wxStatusBar& operator=(const wxStatusBar&) = delete;
+
     // implement base class methods
     void SetFieldsCount(int number = 1, const int *widths = NULL) override;
     void SetStatusWidths(int n, const int widths_field[]) override;
@@ -105,7 +108,10 @@ private:
     // return the various status bar metrics
     static const MSWMetrics& MSWGetMetrics();
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxStatusBar);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif  // wxUSE_NATIVE_STATUSBAR

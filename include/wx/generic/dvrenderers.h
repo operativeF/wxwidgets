@@ -25,6 +25,9 @@ public:
                               int align = wxDVR_DEFAULT_ALIGNMENT );
 
 
+	wxDataViewCustomRenderer(const wxDataViewCustomRenderer&) = delete;
+	wxDataViewCustomRenderer& operator=(const wxDataViewCustomRenderer&) = delete;
+
     // see the explanation of the following WXOnXXX() methods in wx/generic/dvrenderer.h
 
     virtual bool WXActivateCell(const wxRect& cell,
@@ -40,8 +43,10 @@ public:
     wxString GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewCustomRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 
@@ -58,6 +63,9 @@ public:
                             wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                             int align = wxDVR_DEFAULT_ALIGNMENT );
     virtual ~wxDataViewTextRenderer();
+
+	wxDataViewTextRenderer(const wxDataViewTextRenderer&) = delete;
+	wxDataViewTextRenderer& operator=(const wxDataViewTextRenderer&) = delete;
 
 #if wxUSE_MARKUP
     void EnableMarkup(bool enable = true);
@@ -86,7 +94,10 @@ private:
     class wxItemMarkupText *m_markupText;
 #endif // wxUSE_MARKUP
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewTextRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------
@@ -102,6 +113,9 @@ public:
                               wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                               int align = wxDVR_DEFAULT_ALIGNMENT );
 
+	wxDataViewBitmapRenderer(const wxDataViewBitmapRenderer&) = delete;
+	wxDataViewBitmapRenderer& operator=(const wxDataViewBitmapRenderer&) = delete;
+
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
 #if wxUSE_ACCESSIBILITY
@@ -115,8 +129,10 @@ private:
     wxIcon m_icon;
     wxBitmap m_bitmap;
 
-protected:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewBitmapRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------
@@ -131,6 +147,9 @@ public:
     wxDataViewToggleRenderer( const wxString &varianttype = GetDefaultType(),
                               wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                               int align = wxDVR_DEFAULT_ALIGNMENT );
+
+	wxDataViewToggleRenderer(const wxDataViewToggleRenderer&) = delete;
+	wxDataViewToggleRenderer& operator=(const wxDataViewToggleRenderer&) = delete;
 
     void ShowAsRadio() { m_radio = true; }
 
@@ -153,8 +172,10 @@ private:
     bool    m_toggle;
     bool    m_radio;
 
-protected:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewToggleRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------
@@ -171,6 +192,9 @@ public:
                                 wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                                 int align = wxDVR_DEFAULT_ALIGNMENT );
 
+	wxDataViewProgressRenderer(const wxDataViewProgressRenderer&) = delete;
+	wxDataViewProgressRenderer& operator=(const wxDataViewProgressRenderer&) = delete;
+
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant& value ) const override;
 #if wxUSE_ACCESSIBILITY
@@ -184,8 +208,10 @@ private:
     wxString    m_label;
     int         m_value;
 
-protected:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewProgressRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------
@@ -200,6 +226,9 @@ public:
     wxDataViewIconTextRenderer( const wxString &varianttype = GetDefaultType(),
                                 wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                                 int align = wxDVR_DEFAULT_ALIGNMENT );
+
+	wxDataViewIconTextRenderer(const wxDataViewIconTextRenderer&) = delete;
+	wxDataViewIconTextRenderer& operator=(const wxDataViewIconTextRenderer&) = delete;
 
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
@@ -218,8 +247,10 @@ public:
 private:
     wxDataViewIconText   m_value;
 
-protected:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewIconTextRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_GENERIC_DVRENDERERS_H_

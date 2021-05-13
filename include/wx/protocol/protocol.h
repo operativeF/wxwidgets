@@ -58,6 +58,9 @@ public:
     wxProtocol();
     virtual ~wxProtocol();
 
+	wxProtocol(const wxProtocol&) = delete;
+	wxProtocol& operator=(const wxProtocol&) = delete;
+
 #if wxUSE_SOCKETS
     bool Reconnect();
     virtual bool Connect( const wxString& WXUNUSED(host) ) { return false; }
@@ -128,7 +131,10 @@ protected:
 private:
     wxProtocolLog *m_log;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxProtocol);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

@@ -24,6 +24,9 @@ public:
         m_hook = NULL;
     }
 
+	wxMessageDialog(const wxMessageDialog&) = delete;
+	wxMessageDialog& operator=(const wxMessageDialog&) = delete;
+
     int ShowModal() override;
 
     long GetEffectiveIcon() const override;
@@ -67,7 +70,10 @@ private:
 
     WXHANDLE m_hook; // HHOOK used to position the message box
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMessageDialog);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 

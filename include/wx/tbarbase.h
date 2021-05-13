@@ -102,6 +102,9 @@ public:
 
     virtual ~wxToolBarToolBase();
 
+	wxToolBarToolBase(const wxToolBarToolBase&) = delete;
+	wxToolBarToolBase& operator=(const wxToolBarToolBase&) = delete;
+
     // accessors
     // ---------
 
@@ -265,7 +268,10 @@ protected:
     wxMenu *m_dropdownMenu;
 #endif
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxToolBarToolBase);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // a list of toolbar tools

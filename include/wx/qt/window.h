@@ -66,6 +66,9 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxPanelNameStr));
 
+    wxWindowQt (const  wxWindowQt &) = delete;
+    wxWindowQt & operator=(const  wxWindowQt &) = delete;
+
     bool Create(wxWindowQt *parent,
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
@@ -253,7 +256,10 @@ private:
     bool m_processingShortcut;
 #endif // wxUSE_ACCEL
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY( wxWindowQt );
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_QT_WINDOW_H_

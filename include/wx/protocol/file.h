@@ -23,13 +23,17 @@ public:
     wxFileProto();
     virtual ~wxFileProto();
 
+	wxFileProto(const wxFileProto&) = delete;
+	wxFileProto& operator=(const wxFileProto&) = delete;
+
     bool Abort() override { return true; }
     wxString GetContentType() const override { return wxEmptyString; }
 
     wxInputStream *GetInputStream(const wxString& path) override;
 
-protected:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxFileProto);
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
     DECLARE_PROTOCOL(wxFileProto)
 };
 

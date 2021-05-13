@@ -51,6 +51,9 @@ public:
         (void)Create(parent, id, pos, size, style, name);
     }
 
+	wxTreebook(const wxTreebook&) = delete;
+	wxTreebook& operator=(const wxTreebook&) = delete;
+
     // Really creates the control
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -212,7 +215,11 @@ private:
 
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxTreebook);
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 

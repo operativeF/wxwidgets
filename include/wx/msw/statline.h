@@ -30,6 +30,9 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
+	wxStaticLine(const wxStaticLine&) = delete;
+	wxStaticLine& operator=(const wxStaticLine&) = delete;
+
     bool Create( wxWindow *parent,
                  wxWindowID id = wxID_ANY,
                  const wxPoint& pos = wxDefaultPosition,
@@ -43,7 +46,10 @@ public:
     // usually overridden base class virtuals
     WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxStaticLine);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MSW_STATLINE_H_

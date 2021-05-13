@@ -28,6 +28,9 @@ public:
 
     virtual ~wxDataViewRenderer();
 
+	wxDataViewRenderer(const wxDataViewRenderer&) = delete;
+	wxDataViewRenderer& operator=(const wxDataViewRenderer&) = delete;
+
     // inherited methods from wxDataViewRendererBase
     // ---------------------------------------------
 
@@ -108,7 +111,10 @@ private:
     // value that is going to be rendered
     wxVariant m_value;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_OSX_DVRENDERER_H_

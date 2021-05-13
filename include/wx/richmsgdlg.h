@@ -91,8 +91,12 @@ private:
             : wxGenericRichMessageDialog( parent, message, caption, style )
             { }
 
-    private:
-        wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxRichMessageDialog);
+        wxRichMessageDialog(const wxRichMessageDialog&) = delete;
+        wxRichMessageDialog& operator=(const wxRichMessageDialog&) = delete;
+
+        wxClassInfo *GetClassInfo() const;
+        static wxClassInfo ms_classInfo;
+        static wxObject* wxCreateObject();
     };
 #endif
 

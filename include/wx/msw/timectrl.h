@@ -32,6 +32,9 @@ public:
         Create(parent, id, dt, pos, size, style, validator, name);
     }
 
+	wxTimePickerCtrl(const wxTimePickerCtrl&) = delete;
+	wxTimePickerCtrl& operator=(const wxTimePickerCtrl&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxDateTime& dt = wxDefaultDateTime,
@@ -56,7 +59,10 @@ protected:
     bool MSWAllowsNone() const override { return false; }
     bool MSWOnDateTimeChange(const tagNMDATETIMECHANGE& dtch) override;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxTimePickerCtrl);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MSW_TIMECTRL_H_

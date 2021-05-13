@@ -16,6 +16,9 @@ public:
     wxTaskBarIcon(wxTaskBarIconType iconType = wxTBI_DEFAULT_TYPE);
     virtual ~wxTaskBarIcon();
 
+	wxTaskBarIcon(const wxTaskBarIcon&) = delete;
+	wxTaskBarIcon& operator=(const wxTaskBarIcon&) = delete;
+
     // Accessors
     bool IsOk() const { return false; }
     bool IsIconInstalled() const { return false; }
@@ -29,7 +32,10 @@ public:
 private:
     QSystemTrayIcon *m_qtSystemTrayIcon;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxTaskBarIcon);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_QT_TASKBAR_H_

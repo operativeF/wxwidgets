@@ -31,6 +31,9 @@ public:
                             wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                             int align = wxDVR_DEFAULT_ALIGNMENT );
 
+	wxDataViewTextRenderer(const wxDataViewTextRenderer&) = delete;
+	wxDataViewTextRenderer& operator=(const wxDataViewTextRenderer&) = delete;
+
 #if wxUSE_MARKUP
     void EnableMarkup(bool enable = true);
 #endif // wxUSE_MARKUP
@@ -71,7 +74,10 @@ protected:
     bool m_useMarkup;
 #endif // wxUSE_MARKUP
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewTextRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------
@@ -83,6 +89,9 @@ class WXDLLIMPEXP_ADV wxDataViewBitmapRenderer: public wxDataViewRenderer
 public:
     static wxString GetDefaultType() { return wxS("wxBitmap"); }
 
+	wxDataViewBitmapRenderer(const wxDataViewBitmapRenderer&) = delete;
+	wxDataViewBitmapRenderer& operator=(const wxDataViewBitmapRenderer&) = delete;
+
     wxDataViewBitmapRenderer( const wxString &varianttype = GetDefaultType(),
                               wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                               int align = wxDVR_DEFAULT_ALIGNMENT );
@@ -90,8 +99,9 @@ public:
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
 
-protected:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewBitmapRenderer);
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------
@@ -107,13 +117,18 @@ public:
                               wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                               int align = wxDVR_DEFAULT_ALIGNMENT );
 
+	wxDataViewToggleRenderer(const wxDataViewToggleRenderer&) = delete;
+	wxDataViewToggleRenderer& operator=(const wxDataViewToggleRenderer&) = delete;
+
     void ShowAsRadio();
 
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
 
-protected:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewToggleRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------
@@ -131,6 +146,8 @@ public:
                               bool no_init = false );
     virtual ~wxDataViewCustomRenderer();
 
+	wxDataViewCustomRenderer(const wxDataViewCustomRenderer&) = delete;
+	wxDataViewCustomRenderer& operator=(const wxDataViewCustomRenderer&) = delete;
 
     // Create DC on request
     wxDC *GetDC() override;
@@ -170,7 +187,10 @@ private:
     // them forward to m_text_renderer if our RenderText() is called
     GTKRenderParams* m_renderParams;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewCustomRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------
@@ -187,6 +207,9 @@ public:
                                 wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                                 int align = wxDVR_DEFAULT_ALIGNMENT );
     virtual ~wxDataViewProgressRenderer();
+
+	wxDataViewProgressRenderer(const wxDataViewProgressRenderer&) = delete;
+	wxDataViewProgressRenderer& operator=(const wxDataViewProgressRenderer&) = delete;
 
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
@@ -206,8 +229,10 @@ private:
     bool m_needsToSetLabel;
 #endif // !wxUSE_UNICODE
 
-protected:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewProgressRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------
@@ -224,6 +249,9 @@ public:
                                 int align = wxDVR_DEFAULT_ALIGNMENT );
     virtual ~wxDataViewIconTextRenderer();
 
+	wxDataViewIconTextRenderer(const wxDataViewIconTextRenderer&) = delete;
+	wxDataViewIconTextRenderer& operator=(const wxDataViewIconTextRenderer&) = delete;
+
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
 
@@ -238,7 +266,10 @@ private:
     // we use the base class m_renderer for the text and this one for the icon
     GtkCellRenderer *m_rendererIcon;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewIconTextRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // -------------------------------------

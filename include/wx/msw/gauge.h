@@ -35,6 +35,9 @@ public:
 
     virtual ~wxGauge();
 
+	wxGauge(const wxGauge&) = delete;
+	wxGauge& operator=(const wxGauge&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 int range,
@@ -71,7 +74,10 @@ private:
     void SetIndeterminateMode();
     void SetDeterminateMode();
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGauge);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // wxUSE_GAUGE

@@ -40,6 +40,9 @@ public:
 
     virtual ~wxMenu();
 
+	wxMenu(const wxMenu&) = delete;
+	wxMenu& operator=(const wxMenu&) = delete;
+
     void Break() override;
 
     void SetTitle(const wxString& title) override;
@@ -159,7 +162,10 @@ private:
     int m_maxAccelWidth;
 #endif // wxUSE_OWNER_DRAWN
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMenu);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------
@@ -177,6 +183,9 @@ public:
         // menubar takes ownership of the menus arrays but copies the titles
     wxMenuBar(size_t n, wxMenu *menus[], const wxString titles[], long style = 0);
     virtual ~wxMenuBar();
+
+	wxMenuBar(const wxMenuBar&) = delete;
+	wxMenuBar& operator=(const wxMenuBar&) = delete;
 
     // menubar construction
     bool Append( wxMenu *menu, const wxString &title ) override;
@@ -226,8 +235,10 @@ protected:
     // the wxWidgets position.
     int MSWPositionForWxMenu(wxMenu *menu, int wxpos);
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMenuBar);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MENU_H_

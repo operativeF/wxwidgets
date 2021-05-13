@@ -32,6 +32,9 @@ public:
         Create(parent, id, dt, pos, size, style, validator, name);
     }
 
+	wxDatePickerCtrl(const wxDatePickerCtrl&) = delete;
+	wxDatePickerCtrl& operator=(const wxDatePickerCtrl&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxDateTime& dt = wxDefaultDateTime,
@@ -47,8 +50,10 @@ public:
 
     void OSXGenerateEvent(const wxDateTime& dt) override;
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDatePickerCtrl);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_OSX_DATECTRL_H_

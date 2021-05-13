@@ -23,6 +23,9 @@ public:
 
     virtual ~wxProgressDialog();
 
+	wxProgressDialog(const wxProgressDialog&) = delete;
+	wxProgressDialog& operator=(const wxProgressDialog&) = delete;
+
     bool Update(int value, const wxString& newmsg = wxEmptyString, bool *skip = NULL) override;
     bool Pulse(const wxString& newmsg = wxEmptyString, bool *skip = NULL) override;
 
@@ -82,7 +85,10 @@ private:
     wxString m_message,
              m_title;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxProgressDialog);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_PROGDLG_H_

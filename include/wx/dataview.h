@@ -551,6 +551,9 @@ public:
     wxDataViewCtrlBase();
     virtual ~wxDataViewCtrlBase();
 
+	wxDataViewCtrlBase(const wxDataViewCtrlBase&) = delete;
+	wxDataViewCtrlBase& operator=(const wxDataViewCtrlBase&) = delete;
+
     // model
     // -----
 
@@ -809,8 +812,10 @@ private:
     wxDataViewColumn       *m_expander_column;
     int m_indent ;
 
-protected:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewCtrlBase);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

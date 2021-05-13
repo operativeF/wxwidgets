@@ -45,6 +45,9 @@ public:
               const wxString& name = wxASCII_STR(wxNotebookNameStr));
   virtual ~wxNotebook();
 
+	wxNotebook(const wxNotebook&) = delete;
+	wxNotebook& operator=(const wxNotebook&) = delete;
+
   // accessors
   // ---------
     // get number of pages in the dialog
@@ -203,7 +206,10 @@ protected:
 #endif // wxUSE_UXTHEME
 
 
-  wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxNotebook);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
   wxDECLARE_EVENT_TABLE();
 };
 

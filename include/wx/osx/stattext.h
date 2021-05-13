@@ -26,6 +26,9 @@ public:
     Create(parent, id, label, pos, size, style, name);
   }
 
+	wxStaticText(const wxStaticText&) = delete;
+	wxStaticText& operator=(const wxStaticText&) = delete;
+
   bool Create(wxWindow *parent, wxWindowID id,
            const wxString& label,
            const wxPoint& pos = wxDefaultPosition,
@@ -50,7 +53,10 @@ protected :
     bool DoSetLabelMarkup(const wxString& markup) override;
 #endif // wxUSE_MARKUP && wxOSX_USE_COCOA
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxStaticText);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif

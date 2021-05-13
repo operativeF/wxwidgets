@@ -88,8 +88,14 @@ public:
 
     void OnContextHelp(wxCommandEvent& event);
 
+	wxContextHelpButton(const wxContextHelpButton&) = delete;
+	wxContextHelpButton& operator=(const wxContextHelpButton&) = delete;
+
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
+
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxContextHelpButton);
     wxDECLARE_EVENT_TABLE();
 };
 

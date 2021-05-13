@@ -20,11 +20,15 @@ public:
         : wxGenericRichMessageDialog(parent, message, caption, style)
         { }
 
+	wxRichMessageDialog(const wxRichMessageDialog&) = delete;
+	wxRichMessageDialog& operator=(const wxRichMessageDialog&) = delete;
+
     // overridden base class method showing the native task dialog if possible
     int ShowModal() override;
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxRichMessageDialog);
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MSW_RICHMSGDLG_H_

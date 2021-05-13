@@ -36,6 +36,9 @@ public:
                      pos, size, style, validator, name);
     }
 
+	wxSlider(const wxSlider&) = delete;
+	wxSlider& operator=(const wxSlider&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 int value,
@@ -145,7 +148,10 @@ protected:
     // Platform-specific implementation of SetTickFreq
     void DoSetTickFreq(int freq) override;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxSlider);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_SLIDER_H_

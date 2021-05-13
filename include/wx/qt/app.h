@@ -18,6 +18,9 @@ public:
     wxApp();
     ~wxApp();
 
+    wxApp (const  wxApp &) = delete;
+    wxApp & operator=(const  wxApp &) = delete;
+
     bool Initialize(int& argc, wxChar **argv) override;
 
 private:
@@ -25,7 +28,10 @@ private:
     int m_qtArgc;
     wxScopedArray<char*> m_qtArgv;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY( wxApp );
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_QT_APP_H_

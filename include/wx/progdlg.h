@@ -53,8 +53,12 @@
                                        parent, style )
             { }
 
-    private:
-        wxDECLARE_DYNAMIC_CLASS_NO_COPY( wxProgressDialog );
+        wxProgressDialog (const  wxProgressDialog &) = delete;
+	    wxProgressDialog & operator=(const  wxProgressDialog &) = delete;
+
+        wxClassInfo *GetClassInfo() const;
+        static wxClassInfo ms_classInfo;
+        static wxObject* wxCreateObject();
     };
 #endif // !wxHAS_NATIVE_PROGRESSDIALOG
 

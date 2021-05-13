@@ -36,6 +36,9 @@ public:
         Create(parent, id, label, pos, size, style, name);
     }
 
+    wxGenericStaticText(const wxGenericStaticText&) = delete;
+	wxGenericStaticText& operator=(const wxGenericStaticText&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& label,
@@ -83,7 +86,10 @@ private:
     class wxMarkupText *m_markupText;
 #endif // wxUSE_MARKUP
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGenericStaticText);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_GENERIC_STATTEXTG_H_

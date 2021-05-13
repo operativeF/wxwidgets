@@ -226,6 +226,9 @@ public:
                              wxPageSetupDialogData* data = NULL);
     virtual ~wxGenericPageSetupDialog();
 
+	wxGenericPageSetupDialog(const wxGenericPageSetupDialog&) = delete;
+	wxGenericPageSetupDialog& operator=(const wxGenericPageSetupDialog&) = delete;
+
     bool TransferDataFromWindow() override;
     bool TransferDataToWindow() override;
 
@@ -247,7 +250,11 @@ public:
 
 private:
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxGenericPageSetupDialog);
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif

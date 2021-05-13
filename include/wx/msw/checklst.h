@@ -39,6 +39,9 @@ public:
                    const wxValidator& validator = wxDefaultValidator,
                    const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
+	wxCheckListBox(const wxCheckListBox&) = delete;
+	wxCheckListBox& operator=(const wxCheckListBox&) = delete;
+
     bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
@@ -86,7 +89,11 @@ protected:
     wxSize DoGetBestClientSize() const override;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxCheckListBox);
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif    //_CHECKLST_H

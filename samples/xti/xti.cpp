@@ -238,7 +238,13 @@ MyFrame::MyFrame(const wxString& title)
 //      wxButton* m_button;
 //
 //      wxDECLARE_EVENT_TABLE();
-//      wxDECLARE_DYNAMIC_CLASS_NO_COPY(MyXTIFrame);
+//public:
+//      MyXTIFrame(const MyXTIFrame&) = delete;
+//      MyXTIFrame& operator=(const MyXTIFrame&) = delete;
+
+//      wxClassInfo *GetClassInfo() const;
+//      static wxClassInfo ms_classInfo;
+//      static wxObject* wxCreateObject();
 //  };
 //
 //  wxIMPLEMENT_DYNAMIC_CLASS_XTI(MyXTIFrame, MyXTIFrame, "x.h");

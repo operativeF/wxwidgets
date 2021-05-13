@@ -787,6 +787,9 @@ public:
     wxPGArrayEditorDialog();
     virtual ~wxPGArrayEditorDialog() { }
 
+	wxPGArrayEditorDialog(const wxPGArrayEditorDialog&) = delete;
+	wxPGArrayEditorDialog& operator=(const wxPGArrayEditorDialog&) = delete;
+
     void Init();
 
     bool Create( wxWindow *parent,
@@ -875,8 +878,10 @@ protected:
         return false;
     }
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxPGArrayEditorDialog);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();
 };
 
@@ -892,6 +897,9 @@ class WXDLLIMPEXP_PROPGRID
 public:
     wxPGArrayStringEditorDialog();
     virtual ~wxPGArrayStringEditorDialog() { }
+
+	wxPGArrayStringEditorDialog(const wxPGArrayStringEditorDialog&) = delete;
+	wxPGArrayStringEditorDialog& operator=(const wxPGArrayStringEditorDialog&) = delete;
 
     void Init();
 
@@ -930,8 +938,10 @@ protected:
     void ArrayRemoveAt( int index ) override;
     void ArraySwap( size_t first, size_t second ) override;
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxPGArrayStringEditorDialog);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();
 };
 

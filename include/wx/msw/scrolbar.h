@@ -27,6 +27,10 @@ public:
     {
         Create(parent, id, pos, size, style, validator, name);
     }
+
+	wxScrollBar(const wxScrollBar&) = delete;
+	wxScrollBar& operator=(const wxScrollBar&) = delete;
+
     bool Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
@@ -67,7 +71,10 @@ protected:
     int m_viewSize;
     int m_objectSize;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxScrollBar);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif

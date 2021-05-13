@@ -24,6 +24,9 @@ public:
     wxFontDialog(wxWindow *parent, const wxFontData& data)
         : wxFontDialogBase(parent, data) { Create(parent, data); }
 
+	wxFontDialog(const wxFontDialog&) = delete;
+	wxFontDialog& operator=(const wxFontDialog&) = delete;
+
     int ShowModal() override;
     void SetTitle(const wxString& title) override;
     wxString GetTitle() const override;
@@ -31,7 +34,10 @@ public:
 protected:
     wxString m_title;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxFontDialog);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif

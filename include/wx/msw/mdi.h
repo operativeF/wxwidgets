@@ -189,6 +189,9 @@ public:
         Create(parent, id, title, pos, size, style, name);
     }
 
+	wxMDIChildFrame(const wxMDIChildFrame&) = delete;
+	wxMDIChildFrame& operator=(const wxMDIChildFrame&) = delete;
+
     bool Create(wxMDIParentFrame *parent,
                 wxWindowID id,
                 const wxString& title,
@@ -244,7 +247,11 @@ private:
     bool m_needsResize; // flag which tells us to artificially resize the frame
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMDIChildFrame);
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ---------------------------------------------------------------------------
@@ -255,6 +262,9 @@ class WXDLLIMPEXP_CORE wxMDIClientWindow : public wxMDIClientWindowBase
 {
 public:
     wxMDIClientWindow() { Init(); }
+
+	wxMDIClientWindow(const wxMDIClientWindow&) = delete;
+	wxMDIClientWindow& operator=(const wxMDIClientWindow&) = delete;
 
     // Note: this is virtual, to allow overridden behaviour.
     virtual bool CreateClient(wxMDIParentFrame *parent,
@@ -274,7 +284,11 @@ protected:
 
 private:
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxMDIClientWindow);
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_MSW_MDI_H_

@@ -51,6 +51,9 @@ public:
                           wxPrintData *data);
     virtual ~wxWindowsPrintPreview();
 
+	wxWindowsPrintPreview(const wxWindowsPrintPreview&) = delete;
+	wxWindowsPrintPreview& operator=(const wxWindowsPrintPreview&) = delete;
+
     bool Print(bool interactive) override;
     void DetermineScaling() override;
 
@@ -59,7 +62,10 @@ protected:
     bool RenderPageIntoBitmap(wxBitmap& bmp, int pageNum) override;
 #endif
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxWindowsPrintPreview);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif

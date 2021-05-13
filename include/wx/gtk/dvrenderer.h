@@ -25,6 +25,9 @@ public:
                         wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                         int align = wxDVR_DEFAULT_ALIGNMENT );
 
+	wxDataViewRenderer(const wxDataViewRenderer&) = delete;
+	wxDataViewRenderer& operator=(const wxDataViewRenderer&) = delete;
+
     void SetMode( wxDataViewCellMode mode ) override;
     wxDataViewCellMode GetMode() const override;
 
@@ -103,8 +106,10 @@ protected:
     // the item currently being rendered
     wxDataViewItem m_itemBeingRendered;
 
-protected:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_GTK_DVRENDERER_H_

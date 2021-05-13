@@ -159,8 +159,12 @@ private:
                                          name)
             { }
 
-    private:
-        wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxCommandLinkButton);
+        wxCommandLinkButton(const wxCommandLinkButton&) = delete;
+        wxCommandLinkButton& operator=(const wxCommandLinkButton&) = delete;
+
+        wxClassInfo *GetClassInfo() const;
+        static wxClassInfo ms_classInfo;
+        static wxObject* wxCreateObject();
     };
 #endif // __WXMSW__/!__WXMSW__
 

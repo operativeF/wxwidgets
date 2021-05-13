@@ -497,7 +497,12 @@ public:
                      const wxString& name = wxASCII_STR(wxPanelNameStr))
         : wxScrolled<wxPanel>(parent, winid, pos, size, style, name) {}
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxScrolledWindow);
+	wxScrolledWindow(const wxScrolledWindow&) = delete;
+	wxScrolledWindow& operator=(const wxScrolledWindow&) = delete;
+
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 typedef wxScrolled<wxWindow> wxScrolledCanvas;

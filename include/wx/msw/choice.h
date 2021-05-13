@@ -50,6 +50,9 @@ public:
         Create(parent, id, pos, size, choices, style, validator, name);
     }
 
+    wxChoice(const wxChoice&) = delete;
+    wxChoice& operator=(const wxChoice&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
@@ -170,7 +173,10 @@ protected:
     // wxDefaultCoord if it hadn't
     int m_heightOwn;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxChoice);
+public:
+    wxClassInfo *GetClassInfo() const;
+    static wxClassInfo ms_classInfo;
+    static wxObject* wxCreateObject();
 };
 
 #endif // _WX_CHOICE_H_

@@ -34,7 +34,11 @@ public:
   {
     Create(width, height, mask, initialCount);
   }
+  
   virtual ~wxImageList();
+
+	wxImageList(const wxImageList&) = delete;
+	wxImageList& operator=(const wxImageList&) = delete;
 
 
   // Attributes
@@ -196,7 +200,10 @@ protected:
   wxSize m_size;
   bool m_useMask;
 
-  wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxImageList);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif

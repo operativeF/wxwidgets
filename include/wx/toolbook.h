@@ -55,6 +55,9 @@ public:
         (void)Create(parent, id, pos, size, style, name);
     }
 
+	wxToolbook(const wxToolbook&) = delete;
+	wxToolbook& operator=(const wxToolbook&) = delete;
+
     // quasi ctor
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -127,7 +130,11 @@ private:
 
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxToolbook);
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

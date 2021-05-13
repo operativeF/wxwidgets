@@ -32,6 +32,9 @@ public:
         Create(parent, id, dt, pos, size, style, validator, name);
     }
 
+	wxTimePickerCtrl(const wxTimePickerCtrl&) = delete;
+	wxTimePickerCtrl& operator=(const wxTimePickerCtrl&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxDateTime& dt = wxDefaultDateTime,
@@ -43,8 +46,10 @@ public:
 
     void OSXGenerateEvent(const wxDateTime& dt) override;
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxTimePickerCtrl);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_OSX_TIMECTRL_H_

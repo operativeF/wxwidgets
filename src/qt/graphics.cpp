@@ -1098,6 +1098,9 @@ public:
 
     virtual ~wxQtGraphicsRenderer() {}
 
+	wxQtGraphicsRenderer(const wxQtGraphicsRenderer&) = delete;
+	wxQtGraphicsRenderer& operator=(const wxQtGraphicsRenderer&) = delete;
+
     // Context
 
     wxGraphicsContext* CreateContext(const wxWindowDC& dc) override;
@@ -1176,7 +1179,10 @@ public:
                             int *minor,
                             int *micro) const override;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxQtGraphicsRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 //-----------------------------------------------------------------------------

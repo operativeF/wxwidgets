@@ -162,9 +162,13 @@ typedef void (wxEvtHandler::*wxHyperlinkEventFunction)(wxHyperlinkEvent&);
                                      style, name)
         {
         }
+        
+        wxHyperlinkCtrl (const  wxHyperlinkCtrl &) = delete;
+        wxHyperlinkCtrl & operator=(const  wxHyperlinkCtrl &) = delete;
 
-    private:
-        wxDECLARE_DYNAMIC_CLASS_NO_COPY( wxHyperlinkCtrl );
+        wxClassInfo *GetClassInfo() const;
+        static wxClassInfo ms_classInfo;
+        static wxObject* wxCreateObject();
     };
 #endif
 

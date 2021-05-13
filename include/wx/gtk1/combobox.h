@@ -63,6 +63,9 @@ public:
 
     virtual ~wxComboBox();
 
+	wxComboBox(const wxComboBox&) = delete;
+	wxComboBox& operator=(const wxComboBox&) = delete;
+
     bool Create(wxWindow *parent, wxWindowID id,
            const wxString& value = wxEmptyString,
            const wxPoint& pos = wxDefaultPosition,
@@ -177,8 +180,10 @@ protected:
     // override this and return true.
     virtual bool UseGTKStyleBase() const { return true; }
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxComboBox);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();
 };
 

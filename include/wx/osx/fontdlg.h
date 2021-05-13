@@ -38,6 +38,9 @@ public:
     wxFontDialog(wxWindow *parent, const wxFontData& data);
     virtual ~wxFontDialog();
 
+	wxFontDialog(const wxFontDialog&) = delete;
+	wxFontDialog& operator=(const wxFontDialog&) = delete;
+
     bool Create(wxWindow *parent);
     bool Create(wxWindow *parent, const wxFontData& data);
 
@@ -47,7 +50,10 @@ public:
 protected:
     wxFontData m_fontData;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxFontDialog);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 extern "C" int RunMixedFontDialog(wxFontDialog* dialog) ;

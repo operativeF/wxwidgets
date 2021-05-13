@@ -32,6 +32,9 @@ public:
     }
     virtual ~wxTextCtrl();
 
+	wxTextCtrl(const wxTextCtrl&) = delete;
+	wxTextCtrl& operator=(const wxTextCtrl&) = delete;
+
     bool Create(wxWindow *parent, wxWindowID id,
                 const wxString& value = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,
@@ -324,7 +327,11 @@ private:
 #endif
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxTextCtrl);
+
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 #endif // _WX_TEXTCTRL_H_

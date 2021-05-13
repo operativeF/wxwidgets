@@ -64,6 +64,9 @@ public:
     wxWizardPage(wxWizard *parent,
                  const wxBitmap& bitmap = wxNullBitmap);
 
+	wxWizardPage(const wxWizardPage&) = delete;
+	wxWizardPage& operator=(const wxWizardPage&) = delete;
+
     bool Create(wxWizard *parent,
                 const wxBitmap& bitmap = wxNullBitmap);
 
@@ -105,8 +108,10 @@ protected:
 
     wxBitmap m_bitmap;
 
-private:
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxWizardPage);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------
@@ -131,6 +136,9 @@ public:
     {
         Create(parent, prev, next, bitmap);
     }
+
+    wxWizardPageSimple(const wxWizardPageSimple&) = delete;
+	wxWizardPageSimple& operator=(const wxWizardPageSimple&) = delete;
 
     bool Create(wxWizard *parent = NULL, // let it be default ctor too
                 wxWizardPage *prev = NULL,
@@ -180,7 +188,10 @@ private:
     wxWizardPage *m_prev,
                  *m_next;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxWizardPageSimple);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

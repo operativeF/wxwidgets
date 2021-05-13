@@ -4974,6 +4974,9 @@ public :
 
     virtual ~wxD2DRenderer();
 
+	wxD2DRenderer(const wxD2DRenderer&) = delete;
+	wxD2DRenderer& operator=(const wxD2DRenderer&) = delete;
+
     wxGraphicsContext* CreateContext(const wxWindowDC& dc) override;
 
     wxGraphicsContext* CreateContext(const wxMemoryDC& dc) override;
@@ -5056,8 +5059,10 @@ public :
 private:
     wxCOMPtr<ID2D1Factory> m_direct2dFactory;
 
-private :
-    wxDECLARE_DYNAMIC_CLASS_NO_COPY(wxD2DRenderer);
+public:
+	wxClassInfo *GetClassInfo() const;
+	static wxClassInfo ms_classInfo;
+	static wxObject* wxCreateObject();
 };
 
 //-----------------------------------------------------------------------------
