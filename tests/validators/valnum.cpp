@@ -33,7 +33,8 @@ public:
 protected:
     wxTextCtrl* const m_text;
 
-    wxDECLARE_NO_COPY_CLASS(NumValidatorTestCase);
+    NumValidatorTestCase(const NumValidatorTestCase&) = delete;
+	NumValidatorTestCase& operator=(const NumValidatorTestCase&) = delete;
 };
 
 NumValidatorTestCase::NumValidatorTestCase()

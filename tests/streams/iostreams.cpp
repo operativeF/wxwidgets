@@ -62,7 +62,8 @@ private:
 
     wxString m_fnTemp;
 
-    wxDECLARE_NO_COPY_CLASS(IOStreamsTestCase);
+    IOStreamsTestCase(const IOStreamsTestCase&) = delete;
+	IOStreamsTestCase& operator=(const IOStreamsTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

@@ -62,7 +62,8 @@ private:
     bool m_inDrawing;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxOverlay);
+    wxOverlay(const wxOverlay&) = delete;
+	wxOverlay& operator=(const wxOverlay&) = delete;
 };
 
 
@@ -90,7 +91,8 @@ private:
     wxDC* m_dc;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxDCOverlay);
+    wxDCOverlay(const wxDCOverlay&) = delete;
+	wxDCOverlay& operator=(const wxDCOverlay&) = delete;
 };
 
 #endif // _WX_OVERLAY_H_

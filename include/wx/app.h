@@ -536,7 +536,8 @@ protected:
 
     // the application object is a singleton anyhow, there is no sense in
     // copying it
-    wxDECLARE_NO_COPY_CLASS(wxAppConsoleBase);
+    wxAppConsoleBase(const wxAppConsoleBase&) = delete;
+	wxAppConsoleBase& operator=(const wxAppConsoleBase&) = delete;
 };
 
 #if defined(__UNIX__) && !defined(__WINDOWS__)
@@ -716,7 +717,8 @@ protected:
     // does any of our windows have focus?
     bool m_isActive;
 
-    wxDECLARE_NO_COPY_CLASS(wxAppBase);
+    wxAppBase(const wxAppBase&) = delete;
+	wxAppBase& operator=(const wxAppBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

@@ -121,7 +121,8 @@ protected:
 
     wxAppProgressIndicator *m_appProgressIndicator;
 
-    wxDECLARE_NO_COPY_CLASS(wxGaugeBase);
+    wxGaugeBase(const wxGaugeBase&) = delete;
+	wxGaugeBase& operator=(const wxGaugeBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

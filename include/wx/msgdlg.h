@@ -289,7 +289,8 @@ private:
              m_cancel,
              m_help;
 
-    wxDECLARE_NO_COPY_CLASS(wxMessageDialogBase);
+    wxMessageDialogBase(const wxMessageDialogBase&) = delete;
+	wxMessageDialogBase& operator=(const wxMessageDialogBase&) = delete;
 };
 
 #include "wx/generic/msgdlgg.h"

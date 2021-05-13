@@ -132,7 +132,8 @@ private:
     WXLCID m_lcid;
     long   m_convertVariantFlags;
 
-    wxDECLARE_NO_COPY_CLASS(wxAutomationObject);
+    wxAutomationObject(const wxAutomationObject&) = delete;
+	wxAutomationObject& operator=(const wxAutomationObject&) = delete;
 };
 
 #endif // wxUSE_OLE_AUTOMATION

@@ -164,7 +164,8 @@ private:
     void Iteration();
 #endif
 
-    wxDECLARE_NO_COPY_CLASS(UnicodeTestCase);
+    UnicodeTestCase(const UnicodeTestCase&) = delete;
+	UnicodeTestCase& operator=(const UnicodeTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

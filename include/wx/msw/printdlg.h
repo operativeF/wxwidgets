@@ -87,7 +87,8 @@ private:
 
 private:
     wxDECLARE_CLASS(wxWindowsPrintDialog);
-    wxDECLARE_NO_COPY_CLASS(wxWindowsPrintDialog);
+    wxWindowsPrintDialog(const wxWindowsPrintDialog&) = delete;
+	wxWindowsPrintDialog& operator=(const wxWindowsPrintDialog&) = delete;
 };
 
 // ---------------------------------------------------------------------------

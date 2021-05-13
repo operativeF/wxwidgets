@@ -2782,7 +2782,8 @@ private:
     // were we initialized successfully?
     bool m_ok;
 
-    wxDECLARE_NO_COPY_CLASS(wxMBConv_wxwin);
+    wxMBConv_wxwin(const wxMBConv_wxwin&) = delete;
+	wxMBConv_wxwin& operator=(const wxMBConv_wxwin&) = delete;
 };
 
 // make the constructors available for unit testing

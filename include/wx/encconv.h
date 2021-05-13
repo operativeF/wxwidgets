@@ -146,7 +146,8 @@ class WXDLLIMPEXP_BASE wxEncodingConverter : public wxObject
             bool m_UnicodeInput, m_UnicodeOutput;
             bool m_JustCopy;
 
-    wxDECLARE_NO_COPY_CLASS(wxEncodingConverter);
+    wxEncodingConverter(const wxEncodingConverter&) = delete;
+	wxEncodingConverter& operator=(const wxEncodingConverter&) = delete;
 };
 
 #endif  // _WX_ENCCONV_H_

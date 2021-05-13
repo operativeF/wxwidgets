@@ -264,7 +264,8 @@ private:
     wxStaticText *m_staticText;
     bool m_toBeDeleted;
 
-    wxDECLARE_NO_COPY_CLASS(wxToolBarTool);
+    wxToolBarTool(const wxToolBarTool&) = delete;
+	wxToolBarTool& operator=(const wxToolBarTool&) = delete;
 };
 
 // ----------------------------------------------------------------------------

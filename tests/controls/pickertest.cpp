@@ -44,7 +44,8 @@ private:
 
     wxColourPickerCtrl *m_colour;
 
-    wxDECLARE_NO_COPY_CLASS(ColourPickerCtrlTestCase);
+    ColourPickerCtrlTestCase(const ColourPickerCtrlTestCase&) = delete;
+	ColourPickerCtrlTestCase& operator=(const ColourPickerCtrlTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default
@@ -88,7 +89,8 @@ private:
 
     wxDirPickerCtrl *m_dir;
 
-    wxDECLARE_NO_COPY_CLASS(DirPickerCtrlTestCase);
+    DirPickerCtrlTestCase(const DirPickerCtrlTestCase&) = delete;
+	DirPickerCtrlTestCase& operator=(const DirPickerCtrlTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default
@@ -133,7 +135,8 @@ private:
 
     wxFilePickerCtrl *m_file;
 
-    wxDECLARE_NO_COPY_CLASS(FilePickerCtrlTestCase);
+    FilePickerCtrlTestCase(const FilePickerCtrlTestCase&) = delete;
+	FilePickerCtrlTestCase& operator=(const FilePickerCtrlTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default
@@ -182,7 +185,8 @@ private:
 
     wxFontPickerCtrl *m_font;
 
-    wxDECLARE_NO_COPY_CLASS(FontPickerCtrlTestCase);
+    FontPickerCtrlTestCase(const FontPickerCtrlTestCase&) = delete;
+	FontPickerCtrlTestCase& operator=(const FontPickerCtrlTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

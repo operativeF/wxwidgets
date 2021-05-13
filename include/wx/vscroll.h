@@ -614,7 +614,8 @@ protected:
 #endif // __WXMAC__
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxVScrolledWindow);
+    wxVScrolledWindow(const wxVScrolledWindow&) = delete;
+	wxVScrolledWindow& operator=(const wxVScrolledWindow&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxVScrolledWindow);
 };
 
@@ -681,7 +682,8 @@ protected:
 #endif // __WXMAC__
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxHScrolledWindow);
+    wxHScrolledWindow(const wxHScrolledWindow&) = delete;
+	wxHScrolledWindow& operator=(const wxHScrolledWindow&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxHScrolledWindow);
 };
 
@@ -746,7 +748,8 @@ protected:
 #endif // __WXMAC__
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxHVScrolledWindow);
+    wxHVScrolledWindow(const wxHVScrolledWindow&) = delete;
+	wxHVScrolledWindow& operator=(const wxHVScrolledWindow&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxHVScrolledWindow);
 };
 

@@ -39,7 +39,8 @@ private:
     void wxStdListTest();
     void wxListCtorTest();
 
-    wxDECLARE_NO_COPY_CLASS(ListsTestCase);
+    ListsTestCase(const ListsTestCase&) = delete;
+	ListsTestCase& operator=(const ListsTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

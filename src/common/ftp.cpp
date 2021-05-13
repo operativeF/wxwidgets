@@ -718,7 +718,8 @@ public:
 
     wxFTP *m_ftp;
 
-    wxDECLARE_NO_COPY_CLASS(wxInputFTPStream);
+    wxInputFTPStream(const wxInputFTPStream&) = delete;
+	wxInputFTPStream& operator=(const wxInputFTPStream&) = delete;
 };
 
 class wxOutputFTPStream : public wxSocketOutputStream
@@ -754,7 +755,8 @@ public:
 
     wxFTP *m_ftp;
 
-    wxDECLARE_NO_COPY_CLASS(wxOutputFTPStream);
+    wxOutputFTPStream(const wxOutputFTPStream&) = delete;
+	wxOutputFTPStream& operator=(const wxOutputFTPStream&) = delete;
 };
 
 wxInputStream *wxFTP::GetInputStream(const wxString& path)

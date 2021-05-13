@@ -25,7 +25,8 @@ public:
 
     BitmapProvider* m_provider;
 
-    wxDECLARE_NO_COPY_CLASS(wxGtkImage);
+    wxGtkImage(const wxGtkImage&) = delete;
+	wxGtkImage& operator=(const wxGtkImage&) = delete;
     wxGtkImage() wxMEMBER_DELETE;
     ~wxGtkImage() wxMEMBER_DELETE;
 };

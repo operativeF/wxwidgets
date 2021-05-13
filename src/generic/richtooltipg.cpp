@@ -598,7 +598,8 @@ private:
     // If true, delay showing the tooltip.
     bool m_delayShow;
 
-    wxDECLARE_NO_COPY_CLASS(wxRichToolTipPopup);
+    wxRichToolTipPopup(const wxRichToolTipPopup&) = delete;
+	wxRichToolTipPopup& operator=(const wxRichToolTipPopup&) = delete;
 };
 
 // ----------------------------------------------------------------------------

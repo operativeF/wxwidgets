@@ -44,7 +44,8 @@ private:
 
     wxHeaderCtrlSimple *m_header;
 
-    wxDECLARE_NO_COPY_CLASS(HeaderCtrlTestCase);
+    HeaderCtrlTestCase(const HeaderCtrlTestCase&) = delete;
+	HeaderCtrlTestCase& operator=(const HeaderCtrlTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

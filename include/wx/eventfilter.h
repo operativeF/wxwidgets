@@ -65,7 +65,8 @@ private:
     // And provide access to it for wxEvtHandler [only].
     friend class wxEvtHandler;
 
-    wxDECLARE_NO_COPY_CLASS(wxEventFilter);
+    wxEventFilter(const wxEventFilter&) = delete;
+	wxEventFilter& operator=(const wxEventFilter&) = delete;
 };
 
 #endif // _WX_EVENTFILTER_H_

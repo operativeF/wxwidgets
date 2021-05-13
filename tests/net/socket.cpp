@@ -106,7 +106,8 @@ private:
 
     static bool ms_useLoop;
 
-    wxDECLARE_NO_COPY_CLASS(SocketTestCase);
+    SocketTestCase(const SocketTestCase&) = delete;
+	SocketTestCase& operator=(const SocketTestCase&) = delete;
 };
 
 bool SocketTestCase::ms_useLoop = false;

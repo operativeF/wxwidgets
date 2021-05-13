@@ -72,7 +72,8 @@ private:
     // wxChoice part of the control, not the selected text
     virtual void CheckStringSelection(const char *sel);
 
-    wxDECLARE_NO_COPY_CLASS(TextEntryTestCase);
+    TextEntryTestCase(const TextEntryTestCase&) = delete;
+	TextEntryTestCase& operator=(const TextEntryTestCase&) = delete;
 };
 
 // Helper used for creating the control of the specific type (currently either
@@ -95,7 +96,8 @@ public:
     virtual ~TextLikeControlCreator() {}
 
 private:
-    wxDECLARE_NO_COPY_CLASS(TextLikeControlCreator);
+    TextLikeControlCreator(const TextLikeControlCreator&) = delete;
+	TextLikeControlCreator& operator=(const TextLikeControlCreator&) = delete;
 };
 
 // Use the given control creator to check that various combinations of

@@ -38,7 +38,8 @@ private:
 
     void NamesAndDesc();
 
-    wxDECLARE_NO_COPY_CLASS(FontMapperTestCase);
+    FontMapperTestCase(const FontMapperTestCase&) = delete;
+	FontMapperTestCase& operator=(const FontMapperTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

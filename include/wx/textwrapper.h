@@ -62,7 +62,8 @@ private:
 
     bool m_eol;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextWrapper);
+    wxTextWrapper(const wxTextWrapper&) = delete;
+	wxTextWrapper& operator=(const wxTextWrapper&) = delete;
 };
 
 #if wxUSE_STATTEXT

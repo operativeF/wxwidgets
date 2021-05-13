@@ -155,7 +155,8 @@ protected:
         return wxControl::RemoveMnemonics(text);
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxMarkupToAttrString);
+    wxMarkupToAttrString(const wxMarkupToAttrString&) = delete;
+	wxMarkupToAttrString& operator=(const wxMarkupToAttrString&) = delete;
 };
 
 
@@ -175,7 +176,8 @@ protected:
         return text;
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxItemMarkupToAttrString);
+    wxItemMarkupToAttrString(const wxItemMarkupToAttrString&) = delete;
+	wxItemMarkupToAttrString& operator=(const wxItemMarkupToAttrString&) = delete;
 };
 
 #endif // _WX_OSX_COCOA_PRIVATE_MARKUPTOATTR_H_

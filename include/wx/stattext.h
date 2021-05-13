@@ -90,7 +90,8 @@ protected:      // functions required for wxST_ELLIPSIZE_* support
     void AutoResizeIfNecessary();
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxStaticTextBase);
+    wxStaticTextBase(const wxStaticTextBase&) = delete;
+	wxStaticTextBase& operator=(const wxStaticTextBase&) = delete;
 };
 
 // see wx/generic/stattextg.h for the explanation

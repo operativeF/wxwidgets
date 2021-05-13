@@ -55,7 +55,8 @@ public:
     }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(IPCTestConnection);
+    IPCTestConnection(const IPCTestConnection&) = delete;
+	IPCTestConnection& operator=(const IPCTestConnection&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -80,7 +81,8 @@ protected:
         return NULL;
     }
 
-    wxDECLARE_NO_COPY_CLASS(EventThread);
+    EventThread(const EventThread&) = delete;
+	EventThread& operator=(const EventThread&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -132,7 +134,8 @@ private:
     EventThread *m_thread;
     IPCTestConnection *m_conn;
 
-    wxDECLARE_NO_COPY_CLASS(IPCTestServer);
+    IPCTestServer(const IPCTestServer&) = delete;
+	IPCTestServer& operator=(const IPCTestServer&) = delete;
 };
 
 static IPCTestServer *gs_server = NULL;
@@ -181,7 +184,8 @@ public:
 private:
     wxConnectionBase *m_conn;
 
-    wxDECLARE_NO_COPY_CLASS(IPCTestClient);
+    IPCTestClient(const IPCTestClient&) = delete;
+	IPCTestClient& operator=(const IPCTestClient&) = delete;
 };
 
 static IPCTestClient *gs_client = NULL;
@@ -206,7 +210,8 @@ private:
     void Execute();
     void Disconnect();
 
-    wxDECLARE_NO_COPY_CLASS(IPCTestCase);
+    IPCTestCase(const IPCTestCase&) = delete;
+	IPCTestCase& operator=(const IPCTestCase&) = delete;
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION( IPCTestCase );

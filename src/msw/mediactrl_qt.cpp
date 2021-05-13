@@ -428,7 +428,8 @@ private:
     wxQTMediaBackend *m_qtb;
     WXHWND m_hwnd;
 
-    wxDECLARE_NO_COPY_CLASS(wxQTMediaEvtHandler);
+    wxQTMediaEvtHandler(const wxQTMediaEvtHandler&) = delete;
+	wxQTMediaEvtHandler& operator=(const wxQTMediaEvtHandler&) = delete;
 };
 
 

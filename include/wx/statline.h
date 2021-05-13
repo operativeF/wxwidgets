@@ -75,7 +75,8 @@ protected:
         return AdjustSize(wxDefaultSize);
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxStaticLineBase);
+    wxStaticLineBase(const wxStaticLineBase&) = delete;
+	wxStaticLineBase& operator=(const wxStaticLineBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

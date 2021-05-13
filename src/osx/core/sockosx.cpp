@@ -176,7 +176,8 @@ private:
     CFSocketRef m_socket;
     CFRunLoopSourceRef m_source;
 
-    wxDECLARE_NO_COPY_CLASS(wxSocketImplMac);
+    wxSocketImplMac(const wxSocketImplMac&) = delete;
+	wxSocketImplMac& operator=(const wxSocketImplMac&) = delete;
 };
 
 } // anonymous namespace

@@ -135,7 +135,8 @@ protected:
     wxTaskBarButton() { }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxTaskBarButton);
+    wxTaskBarButton(const wxTaskBarButton&) = delete;
+	wxTaskBarButton& operator=(const wxTaskBarButton&) = delete;
 };
 
 enum wxTaskBarJumpListItemType
@@ -184,7 +185,8 @@ private:
     wxString m_iconPath;
     int      m_iconIndex;
 
-    wxDECLARE_NO_COPY_CLASS(wxTaskBarJumpListItem);
+    wxTaskBarJumpListItem(const wxTaskBarJumpListItem&) = delete;
+	wxTaskBarJumpListItem& operator=(const wxTaskBarJumpListItem&) = delete;
 };
 
 typedef std::vector<wxTaskBarJumpListItem*> wxTaskBarJumpListItems;
@@ -215,7 +217,8 @@ private:
     wxTaskBarJumpListItems m_items;
     wxString m_title;
 
-    wxDECLARE_NO_COPY_CLASS(wxTaskBarJumpListCategory);
+    wxTaskBarJumpListCategory(const wxTaskBarJumpListCategory&) = delete;
+	wxTaskBarJumpListCategory& operator=(const wxTaskBarJumpListCategory&) = delete;
 };
 
 typedef std::vector<wxTaskBarJumpListCategory*> wxTaskBarJumpListCategories;
@@ -245,7 +248,8 @@ private:
     void Update();
     wxTaskBarJumpListImpl *m_jumpListImpl;
 
-    wxDECLARE_NO_COPY_CLASS(wxTaskBarJumpList);
+    wxTaskBarJumpList(const wxTaskBarJumpList&) = delete;
+	wxTaskBarJumpList& operator=(const wxTaskBarJumpList&) = delete;
 };
 
 #endif // wxUSE_TASKBARBUTTON

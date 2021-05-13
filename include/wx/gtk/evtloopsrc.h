@@ -32,7 +32,8 @@ public:
 private:
     const unsigned m_sourceId;
 
-    wxDECLARE_NO_COPY_CLASS(wxGTKEventLoopSource);
+    wxGTKEventLoopSource(const wxGTKEventLoopSource&) = delete;
+	wxGTKEventLoopSource& operator=(const wxGTKEventLoopSource&) = delete;
 };
 
 #endif // _WX_GTK_EVTLOOPSRC_H_

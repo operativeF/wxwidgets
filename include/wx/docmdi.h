@@ -49,7 +49,8 @@ public:
 
 private:
     wxDECLARE_CLASS(wxDocMDIParentFrame);
-    wxDECLARE_NO_COPY_CLASS(wxDocMDIParentFrame);
+    wxDocMDIParentFrame(const wxDocMDIParentFrame&) = delete;
+	wxDocMDIParentFrame& operator=(const wxDocMDIParentFrame&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -80,7 +81,8 @@ public:
 
 private:
     wxDECLARE_CLASS(wxDocMDIChildFrame);
-    wxDECLARE_NO_COPY_CLASS(wxDocMDIChildFrame);
+    wxDocMDIChildFrame(const wxDocMDIChildFrame&) = delete;
+	wxDocMDIChildFrame& operator=(const wxDocMDIChildFrame&) = delete;
 };
 
 #endif // wxUSE_MDI_ARCHITECTURE

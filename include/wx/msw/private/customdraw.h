@@ -51,7 +51,8 @@ private:
     // the font was changed.
     LPARAM HandleItemPrepaint(const wxItemAttr& attr, HDC hdc);
 
-    wxDECLARE_NO_COPY_CLASS(CustomDraw);
+    CustomDraw(const CustomDraw&) = delete;
+	CustomDraw& operator=(const CustomDraw&) = delete;
 };
 
 } // namespace wxMSWImpl

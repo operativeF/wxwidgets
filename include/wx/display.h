@@ -158,7 +158,8 @@ private:
     wxDisplayImpl *m_impl;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxDisplay);
+    wxDisplay(const wxDisplay&) = delete;
+	wxDisplay& operator=(const wxDisplay&) = delete;
 };
 
 #endif // _WX_DISPLAY_H_BASE_

@@ -43,7 +43,8 @@ private:
     void CustomDialog();
     void InitDialog();
 
-    wxDECLARE_NO_COPY_CLASS(ModalDialogsTestCase);
+    ModalDialogsTestCase(const ModalDialogsTestCase&) = delete;
+	ModalDialogsTestCase& operator=(const ModalDialogsTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

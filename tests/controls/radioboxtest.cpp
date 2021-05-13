@@ -51,7 +51,8 @@ private:
 
     wxRadioBox* m_radio;
 
-    wxDECLARE_NO_COPY_CLASS(RadioBoxTestCase);
+    RadioBoxTestCase(const RadioBoxTestCase&) = delete;
+	RadioBoxTestCase& operator=(const RadioBoxTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

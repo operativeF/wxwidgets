@@ -118,7 +118,8 @@ protected:
     void   UngetLast(); // should be used instead of wxInputStream::Ungetch() because of Unicode issues
     wxChar NextNonSeparators();
 
-    wxDECLARE_NO_COPY_CLASS(wxTextInputStream);
+    wxTextInputStream(const wxTextInputStream&) = delete;
+	wxTextInputStream& operator=(const wxTextInputStream&) = delete;
 };
 
 enum wxEOL
@@ -196,7 +197,8 @@ protected:
 #endif // SIZEOF_WCHAR_T == 2
 #endif // wxUSE_UNICODE
 
-    wxDECLARE_NO_COPY_CLASS(wxTextOutputStream);
+    wxTextOutputStream(const wxTextOutputStream&) = delete;
+	wxTextOutputStream& operator=(const wxTextOutputStream&) = delete;
 };
 
 #endif

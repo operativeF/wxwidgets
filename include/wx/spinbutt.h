@@ -67,7 +67,8 @@ protected:
     int   m_min;
     int   m_max;
 
-    wxDECLARE_NO_COPY_CLASS(wxSpinButtonBase);
+    wxSpinButtonBase(const wxSpinButtonBase&) = delete;
+	wxSpinButtonBase& operator=(const wxSpinButtonBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

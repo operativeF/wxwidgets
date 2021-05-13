@@ -338,7 +338,8 @@ protected:
     // comparing against m_grid.
     TestableGrid *m_tempGrid;
 
-    wxDECLARE_NO_COPY_CLASS(GridTestCase);
+    GridTestCase(const GridTestCase&) = delete;
+	GridTestCase& operator=(const GridTestCase&) = delete;
 };
 
 GridTestCase::GridTestCase() : m_tempGrid(NULL)

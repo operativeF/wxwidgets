@@ -82,7 +82,8 @@ protected:
     friend class wxStreamBuffer;
 
     wxDECLARE_ABSTRACT_CLASS(wxStreamBase);
-    wxDECLARE_NO_COPY_CLASS(wxStreamBase);
+    wxStreamBase(const wxStreamBase&) = delete;
+	wxStreamBase& operator=(const wxStreamBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -222,7 +223,8 @@ protected:
     friend class wxStreamBuffer;
 
     wxDECLARE_ABSTRACT_CLASS(wxInputStream);
-    wxDECLARE_NO_COPY_CLASS(wxInputStream);
+    wxInputStream(const wxInputStream&) = delete;
+	wxInputStream& operator=(const wxInputStream&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -264,7 +266,8 @@ protected:
     friend class wxStreamBuffer;
 
     wxDECLARE_ABSTRACT_CLASS(wxOutputStream);
-    wxDECLARE_NO_COPY_CLASS(wxOutputStream);
+    wxOutputStream(const wxOutputStream&) = delete;
+	wxOutputStream& operator=(const wxOutputStream&) = delete;
 };
 
 // ============================================================================
@@ -293,7 +296,8 @@ protected:
            m_lastPos;
 
     wxDECLARE_DYNAMIC_CLASS(wxCountingOutputStream);
-    wxDECLARE_NO_COPY_CLASS(wxCountingOutputStream);
+    wxCountingOutputStream(const wxCountingOutputStream&) = delete;
+	wxCountingOutputStream& operator=(const wxCountingOutputStream&) = delete;
 };
 
 // ---------------------------------------------------------------------------
@@ -319,7 +323,8 @@ protected:
     bool m_owns;
 
     wxDECLARE_ABSTRACT_CLASS(wxFilterInputStream);
-    wxDECLARE_NO_COPY_CLASS(wxFilterInputStream);
+    wxFilterInputStream(const wxFilterInputStream&) = delete;
+	wxFilterInputStream& operator=(const wxFilterInputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxFilterOutputStream : public wxOutputStream
@@ -341,7 +346,8 @@ protected:
     bool m_owns;
 
     wxDECLARE_ABSTRACT_CLASS(wxFilterOutputStream);
-    wxDECLARE_NO_COPY_CLASS(wxFilterOutputStream);
+    wxFilterOutputStream(const wxFilterOutputStream&) = delete;
+	wxFilterOutputStream& operator=(const wxFilterOutputStream&) = delete;
 };
 
 enum wxStreamProtocolType
@@ -585,7 +591,8 @@ protected:
 
     wxStreamBuffer *m_i_streambuf;
 
-    wxDECLARE_NO_COPY_CLASS(wxBufferedInputStream);
+    wxBufferedInputStream(const wxBufferedInputStream&) = delete;
+	wxBufferedInputStream& operator=(const wxBufferedInputStream&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -632,7 +639,8 @@ protected:
 
     wxStreamBuffer *m_o_streambuf;
 
-    wxDECLARE_NO_COPY_CLASS(wxBufferedOutputStream);
+    wxBufferedOutputStream(const wxBufferedOutputStream&) = delete;
+	wxBufferedOutputStream& operator=(const wxBufferedOutputStream&) = delete;
 };
 
 // ---------------------------------------------------------------------------
@@ -679,7 +687,8 @@ protected:
     void InitParentStream(wxInputStream& stream);
     void InitParentStream(wxInputStream* stream);
 
-    wxDECLARE_NO_COPY_CLASS(wxWrapperInputStream);
+    wxWrapperInputStream(const wxWrapperInputStream&) = delete;
+	wxWrapperInputStream& operator=(const wxWrapperInputStream&) = delete;
 };
 
 

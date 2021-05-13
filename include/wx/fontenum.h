@@ -85,7 +85,8 @@ private:
     bool EnumerateEncodingsUTF8(const wxString& facename);
 #endif
 
-    wxDECLARE_NO_COPY_CLASS(wxFontEnumerator);
+    wxFontEnumerator(const wxFontEnumerator&) = delete;
+	wxFontEnumerator& operator=(const wxFontEnumerator&) = delete;
 };
 
 #endif // wxUSE_FONTENUM

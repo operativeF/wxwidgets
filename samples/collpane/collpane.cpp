@@ -75,7 +75,8 @@ public:
 
     bool OnInit() override;
 
-    wxDECLARE_NO_COPY_CLASS(MyApp);
+    MyApp(const MyApp&) = delete;
+	MyApp& operator=(const MyApp&) = delete;
 };
 
 class MyFrame: public wxFrame
@@ -104,7 +105,8 @@ private:
     wxBoxSizer *m_paneSizer;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(MyFrame);
+    MyFrame(const MyFrame&) = delete;
+	MyFrame& operator=(const MyFrame&) = delete;
 };
 
 class MyDialog : public wxDialog
@@ -120,7 +122,8 @@ private:
     wxGridSizer *m_paneSizer;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(MyDialog);
+    MyDialog(const MyDialog&) = delete;
+	MyDialog& operator=(const MyDialog&) = delete;
 };
 
 

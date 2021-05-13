@@ -41,7 +41,8 @@ private:
     // used to temporarily store events in DoYield()
     wxArrayPtrVoid m_arrGdkEvents;
 
-    wxDECLARE_NO_COPY_CLASS(wxGUIEventLoop);
+    wxGUIEventLoop(const wxGUIEventLoop&) = delete;
+	wxGUIEventLoop& operator=(const wxGUIEventLoop&) = delete;
 };
 
 #endif // _WX_GTK_EVTLOOP_H_

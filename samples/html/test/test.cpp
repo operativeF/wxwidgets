@@ -71,7 +71,8 @@ private:
     bool m_drawCustomBg;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(MyHtmlWindow);
+    MyHtmlWindow(const MyHtmlWindow&) = delete;
+	MyHtmlWindow& operator=(const MyHtmlWindow&) = delete;
 };
 
 // Define a new frame type: this is going to be our main frame

@@ -61,7 +61,8 @@ private:
     wxString m_item;
     bool m_gotAdvised;
 
-    wxDECLARE_NO_COPY_CLASS(PokeAdviseConn);
+    PokeAdviseConn(const PokeAdviseConn&) = delete;
+	PokeAdviseConn& operator=(const PokeAdviseConn&) = delete;
 };
 
 class PokeAdviseClient : public wxClient
@@ -124,7 +125,8 @@ private:
     PokeAdviseConn *m_conn;
     bool m_initDone;
 
-    wxDECLARE_NO_COPY_CLASS(PokeAdvisePersistentConnection);
+    PokeAdvisePersistentConnection(const PokeAdvisePersistentConnection&) = delete;
+	PokeAdvisePersistentConnection& operator=(const PokeAdvisePersistentConnection&) = delete;
 };
 
 PokeAdvisePersistentConnection *theConnection = NULL;

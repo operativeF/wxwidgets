@@ -128,7 +128,8 @@ private:
     // the size of the buffer
     size_t m_size;
 
-    wxDECLARE_NO_COPY_CLASS(wxStreamTempInputBuffer);
+    wxStreamTempInputBuffer(const wxStreamTempInputBuffer&) = delete;
+	wxStreamTempInputBuffer& operator=(const wxStreamTempInputBuffer&) = delete;
 };
 
 #endif // _WX_PRIVATE_STREAMTEMPINPUT_H

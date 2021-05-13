@@ -698,7 +698,8 @@ private:
     std::vector<wxWindow*> m_winDisabled;
     bool m_disabled;
 
-    wxDECLARE_NO_COPY_CLASS(wxWindowDisabler);
+    wxWindowDisabler(const wxWindowDisabler&) = delete;
+	wxWindowDisabler& operator=(const wxWindowDisabler&) = delete;
 };
 
 // ----------------------------------------------------------------------------

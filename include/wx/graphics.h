@@ -917,7 +917,8 @@ private:
     wxWindow* const m_window;
     double m_contentScaleFactor;
 
-    wxDECLARE_NO_COPY_CLASS(wxGraphicsContext);
+    wxGraphicsContext(const wxGraphicsContext&) = delete;
+	wxGraphicsContext& operator=(const wxGraphicsContext&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxGraphicsContext);
 };
 
@@ -1074,7 +1075,8 @@ public:
     GetVersion(int* major, int* minor = NULL, int* micro = NULL) const = 0;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxGraphicsRenderer);
+    wxGraphicsRenderer(const wxGraphicsRenderer&) = delete;
+	wxGraphicsRenderer& operator=(const wxGraphicsRenderer&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxGraphicsRenderer);
 };
 

@@ -412,7 +412,8 @@ private:
     GetConsoleCommandHistory_t m_pfnGetConsoleCommandHistory;
     GetConsoleCommandHistoryLength_t m_pfnGetConsoleCommandHistoryLength;
 
-    wxDECLARE_NO_COPY_CLASS(wxConsoleStderr);
+    wxConsoleStderr(const wxConsoleStderr&) = delete;
+	wxConsoleStderr& operator=(const wxConsoleStderr&) = delete;
 };
 
 bool wxConsoleStderr::DoInit()

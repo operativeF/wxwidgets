@@ -138,7 +138,8 @@ private:
     mutable char **m_argsA;
     mutable wchar_t **m_argsW;
 
-    wxDECLARE_NO_COPY_CLASS(wxCmdLineArgsArray);
+    wxCmdLineArgsArray(const wxCmdLineArgsArray&) = delete;
+	wxCmdLineArgsArray& operator=(const wxCmdLineArgsArray&) = delete;
 };
 
 // provide global operator overload for compatibility with the existing code

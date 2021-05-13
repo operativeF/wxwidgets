@@ -32,7 +32,8 @@ public:
     bool Setup(wxWindow *parent) override;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxWindowsPrinter);
+    wxWindowsPrinter(const wxWindowsPrinter&) = delete;
+	wxWindowsPrinter& operator=(const wxWindowsPrinter&) = delete;
 };
 
 // ---------------------------------------------------------------------------

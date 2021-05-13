@@ -54,7 +54,8 @@ public:
 //// Data
     wxContextHelp* m_contextHelp;
 
-    wxDECLARE_NO_COPY_CLASS(wxContextHelpEvtHandler);
+    wxContextHelpEvtHandler(const wxContextHelpEvtHandler&) = delete;
+	wxContextHelpEvtHandler& operator=(const wxContextHelpEvtHandler&) = delete;
 };
 
 // ============================================================================

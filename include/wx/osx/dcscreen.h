@@ -24,7 +24,8 @@ public:
 
 private:
     wxDECLARE_CLASS(wxScreenDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxScreenDCImpl);
+    wxScreenDCImpl(const wxScreenDCImpl&) = delete;
+	wxScreenDCImpl& operator=(const wxScreenDCImpl&) = delete;
 };
 
 #endif

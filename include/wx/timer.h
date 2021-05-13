@@ -116,7 +116,8 @@ protected:
 
     wxTimerImpl *m_impl;
 
-    wxDECLARE_NO_COPY_CLASS(wxTimer);
+    wxTimer(const wxTimer&) = delete;
+	wxTimer& operator=(const wxTimer&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -149,7 +150,8 @@ public:
 private:
     wxTimer& m_timer;
 
-    wxDECLARE_NO_COPY_CLASS(wxTimerRunner);
+    wxTimerRunner(const wxTimerRunner&) = delete;
+	wxTimerRunner& operator=(const wxTimerRunner&) = delete;
 };
 
 // ----------------------------------------------------------------------------

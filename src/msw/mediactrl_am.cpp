@@ -905,7 +905,8 @@ private:
     bool m_bLoadEventSent; // Whether or not FinishLoaded was already called
                            // prevents it being called multiple times
 
-    wxDECLARE_NO_COPY_CLASS(wxAMMediaEvtHandler);
+    wxAMMediaEvtHandler(const wxAMMediaEvtHandler&) = delete;
+	wxAMMediaEvtHandler& operator=(const wxAMMediaEvtHandler&) = delete;
 };
 
 //===========================================================================

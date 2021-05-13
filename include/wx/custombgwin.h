@@ -42,7 +42,8 @@ public:
 protected:
     virtual void DoSetBackgroundBitmap(const wxBitmap& bmp) = 0;
 
-    wxDECLARE_NO_COPY_CLASS(wxCustomBackgroundWindowBase);
+    wxCustomBackgroundWindowBase(const wxCustomBackgroundWindowBase&) = delete;
+	wxCustomBackgroundWindowBase& operator=(const wxCustomBackgroundWindowBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

@@ -243,7 +243,8 @@ private:
     // the one and only format we support
     wxDataFormat m_format;
 
-    wxDECLARE_NO_COPY_CLASS(wxDataObjectSimple);
+    wxDataObjectSimple(const wxDataObjectSimple&) = delete;
+	wxDataObjectSimple& operator=(const wxDataObjectSimple&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -308,7 +309,8 @@ private:
 
     wxDataFormat m_receivedFormat;
 
-    wxDECLARE_NO_COPY_CLASS(wxDataObjectComposite);
+    wxDataObjectComposite(const wxDataObjectComposite&) = delete;
+	wxDataObjectComposite& operator=(const wxDataObjectComposite&) = delete;
 };
 
 // ============================================================================
@@ -436,7 +438,8 @@ private:
 
     wxString m_text;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextDataObject);
+    wxTextDataObject(const wxTextDataObject&) = delete;
+	wxTextDataObject& operator=(const wxTextDataObject&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -461,7 +464,8 @@ public:
 protected:
     wxBitmap m_bitmap;
 
-    wxDECLARE_NO_COPY_CLASS(wxBitmapDataObjectBase);
+    wxBitmapDataObjectBase(const wxBitmapDataObjectBase&) = delete;
+	wxBitmapDataObjectBase& operator=(const wxBitmapDataObjectBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -483,7 +487,8 @@ public:
 protected:
     wxArrayString m_filenames;
 
-    wxDECLARE_NO_COPY_CLASS(wxFileDataObjectBase);
+    wxFileDataObjectBase(const wxFileDataObjectBase&) = delete;
+	wxFileDataObjectBase& operator=(const wxFileDataObjectBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -544,7 +549,8 @@ private:
     size_t m_size;
     void  *m_data;
 
-    wxDECLARE_NO_COPY_CLASS(wxCustomDataObject);
+    wxCustomDataObject(const wxCustomDataObject&) = delete;
+	wxCustomDataObject& operator=(const wxCustomDataObject&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -560,7 +566,8 @@ public:
     wxImage GetImage() const;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxImageDataObject);
+    wxImageDataObject(const wxImageDataObject&) = delete;
+	wxImageDataObject& operator=(const wxImageDataObject&) = delete;
 };
 
 // ----------------------------------------------------------------------------

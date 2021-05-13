@@ -59,7 +59,8 @@ protected:
 #endif
 
 private:
-    wxDECLARE_NO_COPY_CLASS(ItemContainerTestCase);
+    ItemContainerTestCase(const ItemContainerTestCase&) = delete;
+	ItemContainerTestCase& operator=(const ItemContainerTestCase&) = delete;
 };
 
 #endif // _WX_TESTS_CONTROLS_ITEMCONTAINERTEST_H_

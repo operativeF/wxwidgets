@@ -70,7 +70,8 @@ private:
     // only used when the native implementation is really being used
     class wxInfoBarGTKImpl *m_impl;
 
-    wxDECLARE_NO_COPY_CLASS(wxInfoBar);
+    wxInfoBar(const wxInfoBar&) = delete;
+	wxInfoBar& operator=(const wxInfoBar&) = delete;
 };
 
 #endif // _WX_GTK_INFOBAR_H_

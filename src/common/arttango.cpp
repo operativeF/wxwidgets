@@ -94,7 +94,8 @@ protected:
 private:
     bool m_imageHandledAdded;
 
-    wxDECLARE_NO_COPY_CLASS(wxTangoArtProvider);
+    wxTangoArtProvider(const wxTangoArtProvider&) = delete;
+	wxTangoArtProvider& operator=(const wxTangoArtProvider&) = delete;
 };
 
 } // anonymous namespace

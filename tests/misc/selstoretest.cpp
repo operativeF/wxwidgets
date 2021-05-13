@@ -32,7 +32,8 @@ public:
 
     wxSelectionStore m_store;
 
-    wxDECLARE_NO_COPY_CLASS(SelStoreTest);
+    SelStoreTest(const SelStoreTest&) = delete;
+	SelStoreTest& operator=(const SelStoreTest&) = delete;
 };
 
 const unsigned SelStoreTest::NUM_ITEMS = 10; // NB: must be even

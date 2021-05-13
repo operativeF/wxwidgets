@@ -121,7 +121,8 @@ private:
     // If the native widget owned by the user code.
     bool m_ownedByUser;
 
-    wxDECLARE_NO_COPY_CLASS(wxNativeWindow);
+    wxNativeWindow(const wxNativeWindow&) = delete;
+	wxNativeWindow& operator=(const wxNativeWindow&) = delete;
 };
 
 #endif // wxHAS_NATIVE_WINDOW
@@ -240,7 +241,8 @@ protected:
 #endif // __WXMSW__
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxNativeContainerWindow);
+    wxNativeContainerWindow(const wxNativeContainerWindow&) = delete;
+	wxNativeContainerWindow& operator=(const wxNativeContainerWindow&) = delete;
 };
 
 #endif // wxHAS_NATIVE_CONTAINER_WINDOW

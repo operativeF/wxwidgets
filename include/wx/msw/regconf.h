@@ -117,7 +117,8 @@ private:
   // current path (not '/' terminated)
   wxString  m_strPath;
 
-  wxDECLARE_NO_COPY_CLASS(wxRegConfig);
+  wxRegConfig(const wxRegConfig&) = delete;
+	wxRegConfig& operator=(const wxRegConfig&) = delete;
   wxDECLARE_ABSTRACT_CLASS(wxRegConfig);
 };
 

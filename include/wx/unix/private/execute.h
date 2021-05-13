@@ -96,7 +96,8 @@ private:
                         ChildProcessesData);
     static ChildProcessesData ms_childProcesses;
 
-    wxDECLARE_NO_COPY_CLASS(wxExecuteData);
+    wxExecuteData(const wxExecuteData&) = delete;
+	wxExecuteData& operator=(const wxExecuteData&) = delete;
 };
 
 #endif // _WX_UNIX_EXECUTE_H

@@ -431,7 +431,8 @@ private:
     wxArrayString m_filePaths;
     size_t m_nextIndex;
 
-    wxDECLARE_NO_COPY_CLASS(wxDirect2DFontFileEnumerator);
+    wxDirect2DFontFileEnumerator(const wxDirect2DFontFileEnumerator&) = delete;
+	wxDirect2DFontFileEnumerator& operator=(const wxDirect2DFontFileEnumerator&) = delete;
 };
 
 BEGIN_IID_TABLE(wxDirect2DFontFileEnumerator)
@@ -515,7 +516,8 @@ private:
     static wxArrayString ms_fontList;
     static wxDirect2DFontKey ms_key;
 
-    wxDECLARE_NO_COPY_CLASS(wxDirect2DFontCollectionLoader);
+    wxDirect2DFontCollectionLoader(const wxDirect2DFontCollectionLoader&) = delete;
+	wxDirect2DFontCollectionLoader& operator=(const wxDirect2DFontCollectionLoader&) = delete;
 };
 
 BEGIN_IID_TABLE(wxDirect2DFontCollectionLoader)
@@ -4045,7 +4047,8 @@ private:
     double m_clipX1, m_clipY1, m_clipX2, m_clipY2;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxD2DContext);
+    wxD2DContext(const wxD2DContext&) = delete;
+	wxD2DContext& operator=(const wxD2DContext&) = delete;
 };
 
 //-----------------------------------------------------------------------------

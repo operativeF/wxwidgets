@@ -1123,7 +1123,8 @@ private:
         return wxString::Format("/ %d", maxPage);
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxPrintPageMaxCtrl);
+    wxPrintPageMaxCtrl(const wxPrintPageMaxCtrl&) = delete;
+	wxPrintPageMaxCtrl& operator=(const wxPrintPageMaxCtrl&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1255,7 +1256,8 @@ private:
     // invalid page is entered.
     int m_page;
 
-    wxDECLARE_NO_COPY_CLASS(wxPrintPageTextCtrl);
+    wxPrintPageTextCtrl(const wxPrintPageTextCtrl&) = delete;
+	wxPrintPageTextCtrl& operator=(const wxPrintPageTextCtrl&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -1547,7 +1549,8 @@ private:
     // If true, a separator should be inserted before adding the next button.
     bool m_needsSeparator;
 
-    wxDECLARE_NO_COPY_CLASS(SizerWithButtons);
+    SizerWithButtons(const SizerWithButtons&) = delete;
+	SizerWithButtons& operator=(const SizerWithButtons&) = delete;
 };
 
 } // anonymous namespace

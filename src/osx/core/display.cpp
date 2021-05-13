@@ -115,7 +115,8 @@ public:
 private:
     CGDirectDisplayID m_id;
 
-    wxDECLARE_NO_COPY_CLASS(wxDisplayImplMacOSX);
+    wxDisplayImplMacOSX(const wxDisplayImplMacOSX&) = delete;
+	wxDisplayImplMacOSX& operator=(const wxDisplayImplMacOSX&) = delete;
 };
 
 class wxDisplayFactoryMacOSX : public wxDisplayFactory
@@ -129,7 +130,8 @@ public:
     int GetFromWindow(const wxWindow *window) override;
 
 protected:
-    wxDECLARE_NO_COPY_CLASS(wxDisplayFactoryMacOSX);
+    wxDisplayFactoryMacOSX(const wxDisplayFactoryMacOSX&) = delete;
+	wxDisplayFactoryMacOSX& operator=(const wxDisplayFactoryMacOSX&) = delete;
 };
 
 // ============================================================================

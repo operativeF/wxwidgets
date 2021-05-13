@@ -46,7 +46,8 @@ private:
     void GlobalBrushes();
     void GlobalPens();
 
-    wxDECLARE_NO_COPY_CLASS(SettingsTestCase);
+    SettingsTestCase(const SettingsTestCase&) = delete;
+	SettingsTestCase& operator=(const SettingsTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

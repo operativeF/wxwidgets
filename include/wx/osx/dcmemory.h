@@ -38,7 +38,8 @@ private:
     wxBitmap  m_selected;
 
     wxDECLARE_CLASS(wxMemoryDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxMemoryDCImpl);
+    wxMemoryDCImpl(const wxMemoryDCImpl&) = delete;
+	wxMemoryDCImpl& operator=(const wxMemoryDCImpl&) = delete;
 };
 
 #endif

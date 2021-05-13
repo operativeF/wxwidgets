@@ -54,7 +54,8 @@ protected:
     void HitTest();
     void Sort();
 
-    wxDECLARE_NO_COPY_CLASS(ListBaseTestCase);
+    ListBaseTestCase(const ListBaseTestCase&) = delete;
+	ListBaseTestCase& operator=(const ListBaseTestCase&) = delete;
 };
 
 #endif

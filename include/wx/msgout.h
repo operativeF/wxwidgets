@@ -102,7 +102,8 @@ public:
 protected:
     FILE *m_fp;
 
-    wxDECLARE_NO_COPY_CLASS(wxMessageOutputStderr);
+    wxMessageOutputStderr(const wxMessageOutputStderr&) = delete;
+	wxMessageOutputStderr& operator=(const wxMessageOutputStderr&) = delete;
 };
 
 // ----------------------------------------------------------------------------

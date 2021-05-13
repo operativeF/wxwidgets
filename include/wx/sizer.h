@@ -498,7 +498,8 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxSizerItem);
-    wxDECLARE_NO_COPY_CLASS(wxSizerItem);
+    wxSizerItem(const wxSizerItem&) = delete;
+	wxSizerItem& operator=(const wxSizerItem&) = delete;
 };
 
 WX_DECLARE_EXPORTED_LIST( wxSizerItem, wxSizerItemList );
@@ -944,7 +945,8 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxFlexGridSizer);
-    wxDECLARE_NO_COPY_CLASS(wxFlexGridSizer);
+    wxFlexGridSizer(const wxFlexGridSizer&) = delete;
+	wxFlexGridSizer& operator=(const wxFlexGridSizer&) = delete;
 };
 
 //---------------------------------------------------------------------------
@@ -1073,7 +1075,8 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxStaticBoxSizer);
-    wxDECLARE_NO_COPY_CLASS(wxStaticBoxSizer);
+    wxStaticBoxSizer(const wxStaticBoxSizer&) = delete;
+	wxStaticBoxSizer& operator=(const wxStaticBoxSizer&) = delete;
 };
 
 #endif // wxUSE_STATBOX
@@ -1125,7 +1128,8 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxStdDialogButtonSizer);
-    wxDECLARE_NO_COPY_CLASS(wxStdDialogButtonSizer);
+    wxStdDialogButtonSizer(const wxStdDialogButtonSizer&) = delete;
+	wxStdDialogButtonSizer& operator=(const wxStdDialogButtonSizer&) = delete;
 };
 
 #endif // wxUSE_BUTTON

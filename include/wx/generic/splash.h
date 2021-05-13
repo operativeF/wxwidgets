@@ -67,7 +67,8 @@ protected:
 
     wxDECLARE_DYNAMIC_CLASS(wxSplashScreen);
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxSplashScreen);
+    wxSplashScreen(const wxSplashScreen&) = delete;
+	wxSplashScreen& operator=(const wxSplashScreen&) = delete;
 };
 
 /*
@@ -89,7 +90,8 @@ protected:
     wxBitmap    m_bitmap;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxSplashScreenWindow);
+    wxSplashScreenWindow(const wxSplashScreenWindow&) = delete;
+	wxSplashScreenWindow& operator=(const wxSplashScreenWindow&) = delete;
 };
 
 

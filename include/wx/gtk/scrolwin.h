@@ -72,7 +72,8 @@ private:
                         int pixelsPerLine,
                         int *posOld);
 
-    wxDECLARE_NO_COPY_CLASS(wxScrollHelper);
+    wxScrollHelper(const wxScrollHelper&) = delete;
+	wxScrollHelper& operator=(const wxScrollHelper&) = delete;
 };
 
 #endif // _WX_GTK_SCROLLWIN_H_

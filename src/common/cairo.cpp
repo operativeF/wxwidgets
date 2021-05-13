@@ -298,7 +298,8 @@ public:
     //wxFOR_ALL_PANGO_METHODS(wxDL_STATIC_METHOD_DEFINE)
 #endif
 
-    wxDECLARE_NO_COPY_CLASS(wxCairo);
+    wxCairo(const wxCairo&) = delete;
+	wxCairo& operator=(const wxCairo&) = delete;
 };
 
 #define wxINIT_CAIRO_VOIDFUNC(name, params, args) \

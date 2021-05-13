@@ -69,7 +69,8 @@ private:
 
     wxOwnerDrawnComboBox *m_combo;
 
-    wxDECLARE_NO_COPY_CLASS(OwnerDrawnComboBoxTestCase);
+    OwnerDrawnComboBoxTestCase(const OwnerDrawnComboBoxTestCase&) = delete;
+	OwnerDrawnComboBoxTestCase& operator=(const OwnerDrawnComboBoxTestCase&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(OwnerDrawnComboBoxTestCase,

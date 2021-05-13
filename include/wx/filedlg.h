@@ -190,7 +190,8 @@ private:
 
     void Init();
     wxDECLARE_DYNAMIC_CLASS(wxFileDialogBase);
-    wxDECLARE_NO_COPY_CLASS(wxFileDialogBase);
+    wxFileDialogBase(const wxFileDialogBase&) = delete;
+	wxFileDialogBase& operator=(const wxFileDialogBase&) = delete;
 };
 
 

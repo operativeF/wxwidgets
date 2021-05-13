@@ -81,7 +81,8 @@ private:
     IDataObject       *m_pIDataSource; // the pointer to the source data object
     wxIDropTargetHelper *m_dropTargetHelper; // the drop target helper
 
-    wxDECLARE_NO_COPY_CLASS(wxDropTarget);
+    wxDropTarget(const wxDropTarget&) = delete;
+	wxDropTarget& operator=(const wxDropTarget&) = delete;
 };
 
 #endif  //wxUSE_DRAG_AND_DROP

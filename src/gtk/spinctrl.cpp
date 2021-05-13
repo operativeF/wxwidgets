@@ -120,7 +120,8 @@ public:
 private:
     wxSpinCtrlGTKBase* const m_spin;
 
-    wxDECLARE_NO_COPY_CLASS(wxSpinCtrlEventDisabler);
+    wxSpinCtrlEventDisabler(const wxSpinCtrlEventDisabler&) = delete;
+	wxSpinCtrlEventDisabler& operator=(const wxSpinCtrlEventDisabler&) = delete;
 };
 
 // ----------------------------------------------------------------------------

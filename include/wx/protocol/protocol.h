@@ -175,7 +175,8 @@ protected:
     friend class wxURL;
 
     wxDECLARE_DYNAMIC_CLASS(wxProtoInfo);
-    wxDECLARE_NO_COPY_CLASS(wxProtoInfo);
+    wxProtoInfo(const wxProtoInfo&) = delete;
+	wxProtoInfo& operator=(const wxProtoInfo&) = delete;
 };
 
 #endif // wxUSE_PROTOCOL

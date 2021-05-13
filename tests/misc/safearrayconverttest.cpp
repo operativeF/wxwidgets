@@ -46,7 +46,8 @@ private:
     void VariantListReturnSafeArray();
     void StringsReturnSafeArray();
 
-    wxDECLARE_NO_COPY_CLASS(SafeArrayConvertTestCase);
+    SafeArrayConvertTestCase(const SafeArrayConvertTestCase&) = delete;
+	SafeArrayConvertTestCase& operator=(const SafeArrayConvertTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

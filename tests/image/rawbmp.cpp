@@ -47,7 +47,8 @@ private:
 
     void RGBImage();
 
-    wxDECLARE_NO_COPY_CLASS(ImageRawTestCase);
+    ImageRawTestCase(const ImageRawTestCase&) = delete;
+	ImageRawTestCase& operator=(const ImageRawTestCase&) = delete;
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION( ImageRawTestCase );

@@ -40,7 +40,8 @@ private:
     static wxIDirectFBEventBufferPtr ms_buffer;
     static int ms_bufferFd;
 
-    wxDECLARE_NO_COPY_CLASS(wxGUIEventLoop);
+    wxGUIEventLoop(const wxGUIEventLoop&) = delete;
+	wxGUIEventLoop& operator=(const wxGUIEventLoop&) = delete;
 };
 
 #endif // _WX_DFB_EVTLOOP_H_

@@ -222,7 +222,8 @@ private:
     // this flag is set on entry into Run() and reset before leaving it
     bool m_isInsideRun;
 
-    wxDECLARE_NO_COPY_CLASS(wxEventLoopBase);
+    wxEventLoopBase(const wxEventLoopBase&) = delete;
+	wxEventLoopBase& operator=(const wxEventLoopBase&) = delete;
 };
 
 #if defined(__WINDOWS__) || defined(__WXMAC__) || defined(__WXDFB__) || (defined(__UNIX__) && !defined(__WXOSX__))
@@ -260,7 +261,8 @@ private:
     // returns the return value of Dispatch()
     bool ProcessEvents();
 
-    wxDECLARE_NO_COPY_CLASS(wxEventLoopManual);
+    wxEventLoopManual(const wxEventLoopManual&) = delete;
+	wxEventLoopManual& operator=(const wxEventLoopManual&) = delete;
 };
 
 #endif // platforms using "manual" loop
@@ -336,7 +338,8 @@ protected:
     // the pointer to the port specific implementation class
     wxEventLoopImpl *m_impl;
 
-    wxDECLARE_NO_COPY_CLASS(wxGUIEventLoop);
+    wxGUIEventLoop(const wxGUIEventLoop&) = delete;
+	wxGUIEventLoop& operator=(const wxGUIEventLoop&) = delete;
 };
 
 #endif // platforms

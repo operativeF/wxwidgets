@@ -48,7 +48,8 @@ protected:
 
     wxFontData m_fontData;
 
-    wxDECLARE_NO_COPY_CLASS(wxFontDialogBase);
+    wxFontDialogBase(const wxFontDialogBase&) = delete;
+	wxFontDialogBase& operator=(const wxFontDialogBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

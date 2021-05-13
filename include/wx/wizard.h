@@ -262,7 +262,8 @@ public:
     bool Validate() override { return true; }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxWizardBase);
+    wxWizardBase(const wxWizardBase&) = delete;
+	wxWizardBase& operator=(const wxWizardBase&) = delete;
 };
 
 // include the real class declaration

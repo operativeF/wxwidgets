@@ -63,7 +63,8 @@ private:
     void DynamicRefTest();
 #endif
 
-    wxDECLARE_NO_COPY_CLASS(WeakRefTestCase);
+    WeakRefTestCase(const WeakRefTestCase&) = delete;
+	WeakRefTestCase& operator=(const WeakRefTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

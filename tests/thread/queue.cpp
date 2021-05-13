@@ -77,7 +77,8 @@ private:
     void TestReceive();
     void TestReceiveTimeout();
 
-    wxDECLARE_NO_COPY_CLASS(QueueTestCase);
+    QueueTestCase(const QueueTestCase&) = delete;
+	QueueTestCase& operator=(const QueueTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

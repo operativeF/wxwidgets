@@ -308,5 +308,6 @@ public:
 private:
     wxArrayString m_strings;
 
-    wxDECLARE_NO_COPY_CLASS(MyIndexListModel);
+    MyIndexListModel(const MyIndexListModel&) = delete;
+	MyIndexListModel& operator=(const MyIndexListModel&) = delete;
 };

@@ -116,7 +116,8 @@ private:
     // only once, before first Layout().
     void ComputeMinMaxWidths();
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlTableCell);
+    wxHtmlTableCell(const wxHtmlTableCell&) = delete;
+	wxHtmlTableCell& operator=(const wxHtmlTableCell&) = delete;
 };
 
 

@@ -59,7 +59,8 @@ protected:
 
     wxSize DoGetBestSize() const override;
 
-    wxDECLARE_NO_COPY_CLASS(wxStaticBitmapBase);
+    wxStaticBitmapBase(const wxStaticBitmapBase&) = delete;
+	wxStaticBitmapBase& operator=(const wxStaticBitmapBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

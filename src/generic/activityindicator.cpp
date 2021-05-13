@@ -113,7 +113,8 @@ private:
     private:
         wxActivityIndicatorImpl* const m_owner;
 
-        wxDECLARE_NO_COPY_CLASS(AdvanceTimer);
+        AdvanceTimer(const AdvanceTimer&) = delete;
+	AdvanceTimer& operator=(const AdvanceTimer&) = delete;
     };
 
     void OnPaint(wxPaintEvent& WXUNUSED(event))
@@ -171,7 +172,8 @@ private:
 
     int m_frame;
 
-    wxDECLARE_NO_COPY_CLASS(wxActivityIndicatorImpl);
+    wxActivityIndicatorImpl(const wxActivityIndicatorImpl&) = delete;
+	wxActivityIndicatorImpl& operator=(const wxActivityIndicatorImpl&) = delete;
 };
 
 // ============================================================================

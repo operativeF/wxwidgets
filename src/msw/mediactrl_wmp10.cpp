@@ -698,7 +698,8 @@ public:
 private:
     wxWMP10MediaBackend *m_amb;
 
-    wxDECLARE_NO_COPY_CLASS(wxWMP10MediaEvtHandler);
+    wxWMP10MediaEvtHandler(const wxWMP10MediaEvtHandler&) = delete;
+	wxWMP10MediaEvtHandler& operator=(const wxWMP10MediaEvtHandler&) = delete;
 };
 #endif
 

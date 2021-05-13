@@ -170,7 +170,8 @@ public:
 
 protected:
 
-    wxDECLARE_NO_COPY_CLASS(wxControlContainer);
+    wxControlContainer(const wxControlContainer&) = delete;
+	wxControlContainer& operator=(const wxControlContainer&) = delete;
 };
 
 #endif // wxHAS_NATIVE_TAB_TRAVERSAL/!wxHAS_NATIVE_TAB_TRAVERSAL

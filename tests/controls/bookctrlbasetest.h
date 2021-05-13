@@ -57,7 +57,8 @@ protected:
     wxImageList* m_list;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(BookCtrlBaseTestCase);
+    BookCtrlBaseTestCase(const BookCtrlBaseTestCase&) = delete;
+	BookCtrlBaseTestCase& operator=(const BookCtrlBaseTestCase&) = delete;
 };
 
 #endif // _WX_TESTS_CONTROLS_BOOKCTRLBASETEST_H_

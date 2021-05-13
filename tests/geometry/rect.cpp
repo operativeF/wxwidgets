@@ -43,7 +43,8 @@ private:
     void Operators();
     void Union();
 
-    wxDECLARE_NO_COPY_CLASS(RectTestCase);
+    RectTestCase(const RectTestCase&) = delete;
+	RectTestCase& operator=(const RectTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

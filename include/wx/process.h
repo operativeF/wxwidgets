@@ -144,7 +144,8 @@ protected:
     bool m_redirect;
 
     wxDECLARE_DYNAMIC_CLASS(wxProcess);
-    wxDECLARE_NO_COPY_CLASS(wxProcess);
+    wxProcess(const wxProcess&) = delete;
+	wxProcess& operator=(const wxProcess&) = delete;
 };
 
 // ----------------------------------------------------------------------------

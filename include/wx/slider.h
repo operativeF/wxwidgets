@@ -116,7 +116,8 @@ protected:
     }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxSliderBase);
+    wxSliderBase(const wxSliderBase&) = delete;
+	wxSliderBase& operator=(const wxSliderBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

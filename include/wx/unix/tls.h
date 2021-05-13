@@ -58,7 +58,8 @@ private:
     wxTlsDestructorFunction m_destructor;
     pthread_key_t m_key;
 
-    wxDECLARE_NO_COPY_CLASS(wxTlsKey);
+    wxTlsKey(const wxTlsKey&) = delete;
+	wxTlsKey& operator=(const wxTlsKey&) = delete;
 };
 
 #endif // _WX_UNIX_TLS_H_

@@ -456,7 +456,8 @@ public:
 protected:
     size_t OnSysRead(void *buffer, size_t bufsize) override;
 
-    wxDECLARE_NO_COPY_CLASS(wxHTTPStream);
+    wxHTTPStream(const wxHTTPStream&) = delete;
+	wxHTTPStream& operator=(const wxHTTPStream&) = delete;
 };
 
 size_t wxHTTPStream::OnSysRead(void *buffer, size_t bufsize)

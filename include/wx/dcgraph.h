@@ -45,7 +45,8 @@ public:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGCDC);
-    wxDECLARE_NO_COPY_CLASS(wxGCDC);
+    wxGCDC(const wxGCDC&) = delete;
+	wxGCDC& operator=(const wxGCDC&) = delete;
 };
 
 
@@ -258,7 +259,8 @@ private:
     bool DoInitContext(wxGraphicsContext* ctx);
 
     wxDECLARE_CLASS(wxGCDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxGCDCImpl);
+    wxGCDCImpl(const wxGCDCImpl&) = delete;
+	wxGCDCImpl& operator=(const wxGCDCImpl&) = delete;
 };
 
 #endif // wxUSE_GRAPHICS_CONTEXT

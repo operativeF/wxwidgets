@@ -496,7 +496,8 @@ private:
     GraphicsState m_state1;
     GraphicsState m_state2;
 
-    wxDECLARE_NO_COPY_CLASS(wxGDIPlusContext);
+    wxGDIPlusContext(const wxGDIPlusContext&) = delete;
+	wxGDIPlusContext& operator=(const wxGDIPlusContext&) = delete;
 };
 
 #if wxUSE_IMAGE
@@ -531,7 +532,8 @@ private:
     wxImage& m_image;
     wxGDIPlusBitmapData m_bitmap;
 
-    wxDECLARE_NO_COPY_CLASS(wxGDIPlusImageContext);
+    wxGDIPlusImageContext(const wxGDIPlusImageContext&) = delete;
+	wxGDIPlusImageContext& operator=(const wxGDIPlusImageContext&) = delete;
 };
 
 #endif // wxUSE_IMAGE

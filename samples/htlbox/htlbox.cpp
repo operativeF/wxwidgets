@@ -91,7 +91,8 @@ public:
     wxTextFile m_file;
 #endif
 
-    wxDECLARE_NO_COPY_CLASS(MyHtmlListBox);
+    MyHtmlListBox(const MyHtmlListBox&) = delete;
+	MyHtmlListBox& operator=(const MyHtmlListBox&) = delete;
     wxDECLARE_DYNAMIC_CLASS(MyHtmlListBox);
 };
 

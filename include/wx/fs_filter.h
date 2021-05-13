@@ -32,7 +32,8 @@ public:
     wxString FindNext() override;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxFilterFSHandler);
+    wxFilterFSHandler(const wxFilterFSHandler&) = delete;
+	wxFilterFSHandler& operator=(const wxFilterFSHandler&) = delete;
 };
 
 #endif // wxUSE_FILESYSTEM

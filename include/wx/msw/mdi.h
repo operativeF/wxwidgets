@@ -165,7 +165,8 @@ private:
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxMDIParentFrame);
-    wxDECLARE_NO_COPY_CLASS(wxMDIParentFrame);
+    wxMDIParentFrame(const wxMDIParentFrame&) = delete;
+	wxMDIParentFrame& operator=(const wxMDIParentFrame&) = delete;
 };
 
 // ---------------------------------------------------------------------------

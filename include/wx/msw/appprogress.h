@@ -33,7 +33,8 @@ private:
 
     std::vector<wxTaskBarButton*> m_taskBarButtons;
 
-    wxDECLARE_NO_COPY_CLASS(wxAppProgressIndicator);
+    wxAppProgressIndicator(const wxAppProgressIndicator&) = delete;
+	wxAppProgressIndicator& operator=(const wxAppProgressIndicator&) = delete;
 };
 
 #endif  // _WX_MSW_APPPROG_H_

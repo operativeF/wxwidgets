@@ -369,7 +369,8 @@ private:
     // socket is shut down
     wxSocketBase *m_wxsocket;
 
-    wxDECLARE_NO_COPY_CLASS(wxSocketImpl);
+    wxSocketImpl(const wxSocketImpl&) = delete;
+	wxSocketImpl& operator=(const wxSocketImpl&) = delete;
 };
 
 #if defined(__WINDOWS__)

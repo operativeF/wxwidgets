@@ -130,7 +130,8 @@ public:
 
 protected:
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxApp);
+    wxApp(const wxApp&) = delete;
+	wxApp& operator=(const wxApp&) = delete;
     wxDECLARE_DYNAMIC_CLASS(wxApp);
 };
 

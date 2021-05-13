@@ -84,7 +84,8 @@ public:
 #endif
     wxByte m_alpha;
 
-    wxDECLARE_NO_COPY_CLASS(wxColourRefData);
+    wxColourRefData(const wxColourRefData&) = delete;
+	wxColourRefData& operator=(const wxColourRefData&) = delete;
 };
 
 #ifndef __WXGTK3__

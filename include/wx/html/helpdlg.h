@@ -80,7 +80,8 @@ protected:
     wxHtmlHelpController* m_helpController;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxHtmlHelpDialog);
+    wxHtmlHelpDialog(const wxHtmlHelpDialog&) = delete;
+	wxHtmlHelpDialog& operator=(const wxHtmlHelpDialog&) = delete;
 };
 
 #endif

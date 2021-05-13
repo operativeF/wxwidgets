@@ -558,7 +558,8 @@ private:
     static wxCursor *ms_cursorDefault;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxHtmlWindow);
+    wxHtmlWindow(const wxHtmlWindow&) = delete;
+	wxHtmlWindow& operator=(const wxHtmlWindow&) = delete;
 };
 
 class WXDLLIMPEXP_FWD_HTML wxHtmlCellEvent;

@@ -144,7 +144,8 @@ protected:
 private:
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxHtmlHelpFrame);
+    wxHtmlHelpFrame(const wxHtmlHelpFrame&) = delete;
+	wxHtmlHelpFrame& operator=(const wxHtmlHelpFrame&) = delete;
 };
 
 #endif // wxUSE_WXHTML_HELP

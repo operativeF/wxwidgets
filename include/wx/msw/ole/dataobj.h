@@ -72,7 +72,8 @@ public:
 private:
     IDataObject *m_pIDataObject; // pointer to the COM interface
 
-    wxDECLARE_NO_COPY_CLASS(wxDataObject);
+    wxDataObject(const wxDataObject&) = delete;
+	wxDataObject& operator=(const wxDataObject&) = delete;
 };
 
 #endif  //_WX_MSW_OLE_DATAOBJ_H

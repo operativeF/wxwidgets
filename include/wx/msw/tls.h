@@ -116,7 +116,8 @@ private:
     std::vector<void*> m_allValues;
     wxCriticalSection m_csAllValues;
 
-    wxDECLARE_NO_COPY_CLASS(wxTlsKey);
+    wxTlsKey(const wxTlsKey&) = delete;
+	wxTlsKey& operator=(const wxTlsKey&) = delete;
 };
 
 #endif // _WX_MSW_TLS_H_

@@ -66,7 +66,8 @@ private:
 
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxTipWindowView);
+    wxTipWindowView(const wxTipWindowView&) = delete;
+	wxTipWindowView& operator=(const wxTipWindowView&) = delete;
 };
 
 // ============================================================================

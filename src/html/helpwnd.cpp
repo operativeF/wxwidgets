@@ -139,7 +139,8 @@ public:
 private:
     wxHtmlHelpWindow *m_Window;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlHelpHtmlWindow);
+    wxHtmlHelpHtmlWindow(const wxHtmlHelpHtmlWindow&) = delete;
+	wxHtmlHelpHtmlWindow& operator=(const wxHtmlHelpHtmlWindow&) = delete;
 };
 
 
@@ -1282,7 +1283,8 @@ public:
     }
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxHtmlHelpWindowOptionsDialog);
+    wxHtmlHelpWindowOptionsDialog(const wxHtmlHelpWindowOptionsDialog&) = delete;
+	wxHtmlHelpWindowOptionsDialog& operator=(const wxHtmlHelpWindowOptionsDialog&) = delete;
 };
 
 wxBEGIN_EVENT_TABLE(wxHtmlHelpWindowOptionsDialog, wxDialog)

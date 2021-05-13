@@ -90,7 +90,8 @@ private:
     bool m_pendingTextChanged;
     const gulong m_handlerAfterKeyPress;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextCoalesceData);
+    wxTextCoalesceData(const wxTextCoalesceData&) = delete;
+	wxTextCoalesceData& operator=(const wxTextCoalesceData&) = delete;
 };
 
 //-----------------------------------------------------------------------------
@@ -424,7 +425,8 @@ protected:
     // in ToggleProcessEnterFlag().
     bool m_hadProcessEnterFlag;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextAutoCompleteData);
+    wxTextAutoCompleteData(const wxTextAutoCompleteData&) = delete;
+	wxTextAutoCompleteData& operator=(const wxTextAutoCompleteData&) = delete;
 };
 
 // This class simply forwards to GtkListStore.
@@ -468,7 +470,8 @@ private:
     {
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxTextAutoCompleteFixed);
+    wxTextAutoCompleteFixed(const wxTextAutoCompleteFixed&) = delete;
+	wxTextAutoCompleteFixed& operator=(const wxTextAutoCompleteFixed&) = delete;
 };
 
 // Dynamic completion using the provided custom wxTextCompleter.
@@ -561,7 +564,8 @@ private:
     // The associated window, we need to store it to unbind our event handler.
     wxWindow* const m_win;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextAutoCompleteDynamic);
+    wxTextAutoCompleteDynamic(const wxTextAutoCompleteDynamic&) = delete;
+	wxTextAutoCompleteDynamic& operator=(const wxTextAutoCompleteDynamic&) = delete;
 };
 
 extern "C"

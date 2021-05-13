@@ -106,7 +106,8 @@ private:
     unsigned char m_buffer[256];    // buffer for reading
     unsigned char *m_bufp;          // pointer to next byte in buffer
 
-    wxDECLARE_NO_COPY_CLASS(wxGIFDecoder);
+    wxGIFDecoder(const wxGIFDecoder&) = delete;
+	wxGIFDecoder& operator=(const wxGIFDecoder&) = delete;
 };
 
 #endif // wxUSE_STREAMS && wxUSE_GIF

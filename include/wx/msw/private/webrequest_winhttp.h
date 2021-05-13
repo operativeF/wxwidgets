@@ -42,7 +42,8 @@ private:
     HINTERNET m_requestHandle;
     wxFileOffset m_contentLength;
 
-    wxDECLARE_NO_COPY_CLASS(wxWebResponseWinHTTP);
+    wxWebResponseWinHTTP(const wxWebResponseWinHTTP&) = delete;
+	wxWebResponseWinHTTP& operator=(const wxWebResponseWinHTTP&) = delete;
 };
 
 class wxWebAuthChallengeWinHTTP : public wxWebAuthChallengeImpl
@@ -60,7 +61,8 @@ private:
     DWORD m_target;
     DWORD m_selectedScheme;
 
-    wxDECLARE_NO_COPY_CLASS(wxWebAuthChallengeWinHTTP);
+    wxWebAuthChallengeWinHTTP(const wxWebAuthChallengeWinHTTP&) = delete;
+	wxWebAuthChallengeWinHTTP& operator=(const wxWebAuthChallengeWinHTTP&) = delete;
 };
 
 class wxWebRequestWinHTTP : public wxWebRequestImpl
@@ -126,7 +128,8 @@ private:
 
     friend class wxWebAuthChallengeWinHTTP;
 
-    wxDECLARE_NO_COPY_CLASS(wxWebRequestWinHTTP);
+    wxWebRequestWinHTTP(const wxWebRequestWinHTTP&) = delete;
+	wxWebRequestWinHTTP& operator=(const wxWebRequestWinHTTP&) = delete;
 };
 
 class wxWebSessionWinHTTP : public wxWebSessionImpl
@@ -158,7 +161,8 @@ private:
 
     bool Open();
 
-    wxDECLARE_NO_COPY_CLASS(wxWebSessionWinHTTP);
+    wxWebSessionWinHTTP(const wxWebSessionWinHTTP&) = delete;
+	wxWebSessionWinHTTP& operator=(const wxWebSessionWinHTTP&) = delete;
 };
 
 class wxWebSessionFactoryWinHTTP : public wxWebSessionFactory

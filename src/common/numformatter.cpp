@@ -90,7 +90,8 @@ private:
     // Owned pointer to the C locale string.
     char *m_cloc;
 
-    wxDECLARE_NO_COPY_CLASS(LocaleId);
+    LocaleId(const LocaleId&) = delete;
+	LocaleId& operator=(const LocaleId&) = delete;
 };
 
 } // anonymous namespace

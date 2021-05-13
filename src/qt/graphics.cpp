@@ -61,7 +61,8 @@ private:
     QPicture m_picture;
     bool m_wasActive;
 
-    wxDECLARE_NO_COPY_CLASS(EnsurePainterIsActive);
+    EnsurePainterIsActive(const EnsurePainterIsActive&) = delete;
+	EnsurePainterIsActive& operator=(const EnsurePainterIsActive&) = delete;
 };
 
 } // anonymous namespace
@@ -121,7 +122,8 @@ private:
 
     QBrush m_brush;
 
-    wxDECLARE_NO_COPY_CLASS(wxQtBrushData);
+    wxQtBrushData(const wxQtBrushData&) = delete;
+	wxQtBrushData& operator=(const wxQtBrushData&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxQtPenData : public wxGraphicsObjectRefData
@@ -162,7 +164,8 @@ private:
     }
     QPen m_pen;
 
-    wxDECLARE_NO_COPY_CLASS(wxQtPenData);
+    wxQtPenData(const wxQtPenData&) = delete;
+	wxQtPenData& operator=(const wxQtPenData&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxQtBitmapData : public wxGraphicsBitmapData
@@ -209,7 +212,8 @@ public:
 private:
     QPixmap* m_pixmap;
 
-    wxDECLARE_NO_COPY_CLASS(wxQtBitmapData);
+    wxQtBitmapData(const wxQtBitmapData&) = delete;
+	wxQtBitmapData& operator=(const wxQtBitmapData&) = delete;
 };
 
 
@@ -371,7 +375,8 @@ public:
 private:
     QTransform* m_transform;
 
-    wxDECLARE_NO_COPY_CLASS(wxQtMatrixData);
+    wxQtMatrixData(const wxQtMatrixData&) = delete;
+	wxQtMatrixData& operator=(const wxQtMatrixData&) = delete;
 };
 
 class wxQtFontData : public wxGraphicsObjectRefData
@@ -427,7 +432,8 @@ private:
     QFont m_font;
     QColor m_color;
 
-    wxDECLARE_NO_COPY_CLASS(wxQtFontData);
+    wxQtFontData(const wxQtFontData&) = delete;
+	wxQtFontData& operator=(const wxQtFontData&) = delete;
 };
 
 //-----------------------------------------------------------------------------
@@ -1051,7 +1057,8 @@ private:
     // This pointer may be empty if we don't own m_qtPainter.
     wxScopedPtr<QPainter> m_ownedPainter;
 
-    wxDECLARE_NO_COPY_CLASS(wxQtGraphicsContext);
+    wxQtGraphicsContext(const wxQtGraphicsContext&) = delete;
+	wxQtGraphicsContext& operator=(const wxQtGraphicsContext&) = delete;
 };
 
 class wxQtMeasuringContext : public wxQtGraphicsContext

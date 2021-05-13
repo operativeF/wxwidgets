@@ -271,7 +271,8 @@ private:
   mutable long  m_dwLastError;   // last error (0 if none)
 
 
-  wxDECLARE_NO_COPY_CLASS(wxRegKey);
+  wxRegKey(const wxRegKey&) = delete;
+	wxRegKey& operator=(const wxRegKey&) = delete;
 };
 
 #endif // wxUSE_REGKEY

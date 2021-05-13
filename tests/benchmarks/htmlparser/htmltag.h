@@ -40,7 +40,8 @@ public:
     // Finds parameters for tag starting at at and fills the variables
     void QueryTag(int at, int* end1, int* end2);
 
-    wxDECLARE_NO_COPY_CLASS(wx28HtmlTagsCache);
+    wx28HtmlTagsCache(const wx28HtmlTagsCache&) = delete;
+	wx28HtmlTagsCache& operator=(const wx28HtmlTagsCache&) = delete;
 };
 
 
@@ -129,7 +130,8 @@ private:
     wx28HtmlTag *m_FirstChild, *m_LastChild;
     wx28HtmlTag *m_Parent;
 
-    wxDECLARE_NO_COPY_CLASS(wx28HtmlTag);
+    wx28HtmlTag(const wx28HtmlTag&) = delete;
+	wx28HtmlTag& operator=(const wx28HtmlTag&) = delete;
 };
 
 

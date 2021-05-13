@@ -247,7 +247,8 @@ private:
     // counter should be created for a new object instead and compilation
     // errors in the code using wxRefCounter due to the lack of copy ctor often
     // indicate a problem, e.g. a forgotten copy ctor implementation somewhere.
-    wxDECLARE_NO_COPY_CLASS(wxRefCounter);
+    wxRefCounter(const wxRefCounter&) = delete;
+	wxRefCounter& operator=(const wxRefCounter&) = delete;
 };
 
 // ----------------------------------------------------------------------------

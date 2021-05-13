@@ -95,7 +95,8 @@ public:
     wxArrayString   m_optionNames;
     wxArrayString   m_optionValues;
 
-    wxDECLARE_NO_COPY_CLASS(wxImageRefData);
+    wxImageRefData(const wxImageRefData&) = delete;
+	wxImageRefData& operator=(const wxImageRefData&) = delete;
 };
 
 // For compatibility, if nothing else, loading is verbose by default.

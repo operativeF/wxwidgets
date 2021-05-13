@@ -50,7 +50,8 @@ private:
                                int flags = wxDIR_DEFAULT,
                                const wxString& filespec = wxEmptyString);
 
-    wxDECLARE_NO_COPY_CLASS(DirTestCase);
+    DirTestCase(const DirTestCase&) = delete;
+	DirTestCase& operator=(const DirTestCase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

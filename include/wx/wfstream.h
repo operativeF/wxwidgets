@@ -54,7 +54,8 @@ protected:
     wxFile *m_file;
     bool m_file_destroy;
 
-    wxDECLARE_NO_COPY_CLASS(wxFileInputStream);
+    wxFileInputStream(const wxFileInputStream&) = delete;
+	wxFileInputStream& operator=(const wxFileInputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxFileOutputStream : public wxOutputStream
@@ -86,7 +87,8 @@ protected:
     wxFile *m_file;
     bool m_file_destroy;
 
-    wxDECLARE_NO_COPY_CLASS(wxFileOutputStream);
+    wxFileOutputStream(const wxFileOutputStream&) = delete;
+	wxFileOutputStream& operator=(const wxFileOutputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxTempFileOutputStream : public wxOutputStream
@@ -111,7 +113,8 @@ protected:
 private:
     wxTempFile *m_file;
 
-    wxDECLARE_NO_COPY_CLASS(wxTempFileOutputStream);
+    wxTempFileOutputStream(const wxTempFileOutputStream&) = delete;
+	wxTempFileOutputStream& operator=(const wxTempFileOutputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxTempFFileOutputStream : public wxOutputStream
@@ -136,7 +139,8 @@ protected:
 private:
     wxTempFFile *m_file;
 
-    wxDECLARE_NO_COPY_CLASS(wxTempFFileOutputStream);
+    wxTempFFileOutputStream(const wxTempFFileOutputStream&) = delete;
+	wxTempFFileOutputStream& operator=(const wxTempFFileOutputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxFileStream : public wxFileInputStream,
@@ -172,7 +176,8 @@ protected:
     }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxFileStream);
+    wxFileStream(const wxFileStream&) = delete;
+	wxFileStream& operator=(const wxFileStream&) = delete;
 };
 
 #endif //wxUSE_FILE
@@ -210,7 +215,8 @@ protected:
     wxFFile *m_file;
     bool m_file_destroy;
 
-    wxDECLARE_NO_COPY_CLASS(wxFFileInputStream);
+    wxFFileInputStream(const wxFFileInputStream&) = delete;
+	wxFFileInputStream& operator=(const wxFFileInputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxFFileOutputStream : public wxOutputStream
@@ -242,7 +248,8 @@ protected:
     wxFFile *m_file;
     bool m_file_destroy;
 
-    wxDECLARE_NO_COPY_CLASS(wxFFileOutputStream);
+    wxFFileOutputStream(const wxFFileOutputStream&) = delete;
+	wxFFileOutputStream& operator=(const wxFFileOutputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxFFileStream : public wxFFileInputStream,
@@ -278,7 +285,8 @@ protected:
     }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxFFileStream);
+    wxFFileStream(const wxFFileStream&) = delete;
+	wxFFileStream& operator=(const wxFFileStream&) = delete;
 };
 
 #endif //wxUSE_FFILE

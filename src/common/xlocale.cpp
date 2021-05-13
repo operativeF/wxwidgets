@@ -303,7 +303,8 @@ public:
 private:
     char * const m_oldLocale;
 
-    wxDECLARE_NO_COPY_CLASS(CNumericLocaleSetter);
+    CNumericLocaleSetter(const CNumericLocaleSetter&) = delete;
+	CNumericLocaleSetter& operator=(const CNumericLocaleSetter&) = delete;
 };
 
 } // anonymous namespace

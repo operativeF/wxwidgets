@@ -77,7 +77,8 @@ private:
     // just to suppress a gcc warning
     friend class wxRendererPtrDummyFriend;
 
-    wxDECLARE_NO_COPY_CLASS(wxRendererPtr);
+    wxRendererPtr(const wxRendererPtr&) = delete;
+	wxRendererPtr& operator=(const wxRendererPtr&) = delete;
 };
 
 // return the global and unique wxRendererPtr

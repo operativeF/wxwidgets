@@ -472,7 +472,8 @@ protected:
     void InitCommandEventWithItems(wxCommandEvent& event, int n);
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxControlWithItemsBase);
+    wxControlWithItemsBase(const wxControlWithItemsBase&) = delete;
+	wxControlWithItemsBase& operator=(const wxControlWithItemsBase&) = delete;
 };
 
 // define the platform-specific wxControlWithItems class
@@ -490,7 +491,8 @@ private:
 
     private:
         wxDECLARE_ABSTRACT_CLASS(wxControlWithItems);
-        wxDECLARE_NO_COPY_CLASS(wxControlWithItems);
+        wxControlWithItems(const wxControlWithItems&) = delete;
+	wxControlWithItems& operator=(const wxControlWithItems&) = delete;
     };
 #endif
 

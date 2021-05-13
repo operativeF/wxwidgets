@@ -167,7 +167,8 @@ protected:
 
     wxDECLARE_DYNAMIC_CLASS(wxWizard);
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxWizard);
+    wxWizard(const wxWizard&) = delete;
+	wxWizard& operator=(const wxWizard&) = delete;
 };
 
 #endif // _WX_GENERIC_WIZARD_H_

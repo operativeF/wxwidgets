@@ -37,7 +37,8 @@ private:
 
     wxGauge* m_gauge;
 
-    wxDECLARE_NO_COPY_CLASS(GaugeTestCase);
+    GaugeTestCase(const GaugeTestCase&) = delete;
+	GaugeTestCase& operator=(const GaugeTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

@@ -39,7 +39,8 @@ private:
     void HexToDec1();
     void HexToDec2();
 
-    wxDECLARE_NO_COPY_CLASS(HexConvTestCase);
+    HexConvTestCase(const HexConvTestCase&) = delete;
+	HexConvTestCase& operator=(const HexConvTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

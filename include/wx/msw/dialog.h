@@ -88,7 +88,8 @@ private:
     wxDialogModalData *m_modalData;
 
     wxDECLARE_DYNAMIC_CLASS(wxDialog);
-    wxDECLARE_NO_COPY_CLASS(wxDialog);
+    wxDialog(const wxDialog&) = delete;
+	wxDialog& operator=(const wxDialog&) = delete;
 };
 
 #endif

@@ -63,7 +63,8 @@ public:
 private:
     wxString m_name;
 
-    wxDECLARE_NO_COPY_CLASS(TempFile);
+    TempFile(const TempFile&) = delete;
+	TempFile& operator=(const TempFile&) = delete;
 };
 
 #endif // _WX_TESTS_TEMPFILE_H_

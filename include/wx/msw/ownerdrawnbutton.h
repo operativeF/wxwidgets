@@ -92,7 +92,8 @@ private:
     bool m_isHot;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxMSWOwnerDrawnButtonBase);
+    wxMSWOwnerDrawnButtonBase(const wxMSWOwnerDrawnButtonBase&) = delete;
+	wxMSWOwnerDrawnButtonBase& operator=(const wxMSWOwnerDrawnButtonBase&) = delete;
 };
 
 // This class uses a weak version of CRTP, i.e. it's a template class taking

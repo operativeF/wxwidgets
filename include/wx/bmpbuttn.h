@@ -122,7 +122,8 @@ protected:
         m_marginY;
 #endif // !wxHAS_BUTTON_BITMAP
 
-    wxDECLARE_NO_COPY_CLASS(wxBitmapButtonBase);
+    wxBitmapButtonBase(const wxBitmapButtonBase&) = delete;
+	wxBitmapButtonBase& operator=(const wxBitmapButtonBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

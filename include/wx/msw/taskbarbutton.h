@@ -67,7 +67,8 @@ private:
 
     friend wxTaskBarButton* wxTaskBarButton::New(wxWindow*);
 
-    wxDECLARE_NO_COPY_CLASS(wxTaskBarButtonImpl);
+    wxTaskBarButtonImpl(const wxTaskBarButtonImpl&) = delete;
+	wxTaskBarButtonImpl& operator=(const wxTaskBarButtonImpl&) = delete;
 };
 
 #endif // wxUSE_TASKBARBUTTON

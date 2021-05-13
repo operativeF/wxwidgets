@@ -191,7 +191,8 @@ private:
     wxString m_Label;
 
     wxDECLARE_DYNAMIC_CLASS(wxWindowX11);
-    wxDECLARE_NO_COPY_CLASS(wxWindowX11);
+    wxWindowX11(const wxWindowX11&) = delete;
+	wxWindowX11& operator=(const wxWindowX11&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

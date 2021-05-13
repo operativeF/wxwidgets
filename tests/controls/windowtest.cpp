@@ -50,7 +50,8 @@ public:
 protected:
     wxWindow* const m_window;
 
-    wxDECLARE_NO_COPY_CLASS(WindowTestCase);
+    WindowTestCase(const WindowTestCase&) = delete;
+	WindowTestCase& operator=(const WindowTestCase&) = delete;
 };
 
 TEST_CASE_METHOD(WindowTestCase, "Window::ShowHideEvent", "[window]")

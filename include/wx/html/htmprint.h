@@ -93,7 +93,8 @@ private:
     int m_Width, m_Height;
     bool m_ownsCells;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlDCRenderer);
+    wxHtmlDCRenderer(const wxHtmlDCRenderer&) = delete;
+	wxHtmlDCRenderer& operator=(const wxHtmlDCRenderer&) = delete;
 };
 
 
@@ -209,7 +210,8 @@ private:
     // list of HTML filters
     static std::vector<wxHtmlFilter*> m_Filters;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlPrintout);
+    wxHtmlPrintout(const wxHtmlPrintout&) = delete;
+	wxHtmlPrintout& operator=(const wxHtmlPrintout&) = delete;
 };
 
 
@@ -316,7 +318,8 @@ private:
 
     PromptMode m_promptMode;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlEasyPrinting);
+    wxHtmlEasyPrinting(const wxHtmlEasyPrinting&) = delete;
+	wxHtmlEasyPrinting& operator=(const wxHtmlEasyPrinting&) = delete;
 };
 
 

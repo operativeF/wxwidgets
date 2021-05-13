@@ -68,7 +68,8 @@ private:
     QWidget* m_actualParent;
     wxRecursionGuardFlag m_moving;
 
-    wxDECLARE_NO_COPY_CLASS(wxQtListTextCtrl);
+    wxQtListTextCtrl(const wxQtListTextCtrl&) = delete;
+	wxQtListTextCtrl& operator=(const wxQtListTextCtrl&) = delete;
 };
 
 // QT doesn't give us direct access to the editor within the QTreeWidget.
@@ -116,7 +117,8 @@ private:
     wxWindow* m_parent;
     mutable wxTextCtrl* m_textCtrl;
 
-    wxDECLARE_NO_COPY_CLASS(wxQtTreeItemEditorFactory);
+    wxQtTreeItemEditorFactory(const wxQtTreeItemEditorFactory&) = delete;
+	wxQtTreeItemEditorFactory& operator=(const wxQtTreeItemEditorFactory&) = delete;
 };
 
 #endif //_WX_QT_PRIVATE_TREEITEM_FACTORY_H_

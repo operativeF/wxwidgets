@@ -59,7 +59,8 @@ private:
 
     wxCheckBox* m_check;
 
-    wxDECLARE_NO_COPY_CLASS(CheckBoxTestCase);
+    CheckBoxTestCase(const CheckBoxTestCase&) = delete;
+	CheckBoxTestCase& operator=(const CheckBoxTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

@@ -42,7 +42,8 @@ private:
 
     wxSimplebook *m_simplebook;
 
-    wxDECLARE_NO_COPY_CLASS(SimplebookTestCase);
+    SimplebookTestCase(const SimplebookTestCase&) = delete;
+	SimplebookTestCase& operator=(const SimplebookTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

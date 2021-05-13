@@ -51,7 +51,8 @@ private:
     // application manifest contains <dpiAwareness>PerMonitorV2</dpiAwareness>.
     bool m_perMonitorDPIaware;
 
-    wxDECLARE_NO_COPY_CLASS(wxNonOwnedWindow);
+    wxNonOwnedWindow(const wxNonOwnedWindow&) = delete;
+	wxNonOwnedWindow& operator=(const wxNonOwnedWindow&) = delete;
 };
 
 #endif // _WX_MSW_NONOWNEDWND_H_

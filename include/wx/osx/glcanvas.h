@@ -54,7 +54,8 @@ public:
 private:
     WXGLContext m_glContext;
 
-    wxDECLARE_NO_COPY_CLASS(wxGLContext);
+    wxGLContext(const wxGLContext&) = delete;
+	wxGLContext& operator=(const wxGLContext&) = delete;
 };
 
 class WXDLLIMPEXP_GL wxGLCanvas : public wxGLCanvasBase

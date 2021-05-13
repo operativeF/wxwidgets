@@ -88,7 +88,8 @@ private:
     // the mutex handle, may be NULL
     HANDLE m_hMutex;
 
-    wxDECLARE_NO_COPY_CLASS(wxSingleInstanceCheckerImpl);
+    wxSingleInstanceCheckerImpl(const wxSingleInstanceCheckerImpl&) = delete;
+	wxSingleInstanceCheckerImpl& operator=(const wxSingleInstanceCheckerImpl&) = delete;
 };
 
 // ============================================================================

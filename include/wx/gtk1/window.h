@@ -265,7 +265,8 @@ protected:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxWindowGTK);
-    wxDECLARE_NO_COPY_CLASS(wxWindowGTK);
+    wxWindowGTK(const wxWindowGTK&) = delete;
+	wxWindowGTK& operator=(const wxWindowGTK&) = delete;
 };
 
 extern WXDLLIMPEXP_CORE wxWindow *wxFindFocusedChild(wxWindowGTK *win);

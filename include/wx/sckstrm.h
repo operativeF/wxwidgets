@@ -33,7 +33,8 @@ protected:
     wxFileOffset OnSysSeek(wxFileOffset WXUNUSED(pos), wxSeekMode WXUNUSED(mode)) override
         { return wxInvalidOffset; }
 
-    wxDECLARE_NO_COPY_CLASS(wxSocketOutputStream);
+    wxSocketOutputStream(const wxSocketOutputStream&) = delete;
+	wxSocketOutputStream& operator=(const wxSocketOutputStream&) = delete;
 };
 
 class WXDLLIMPEXP_NET wxSocketInputStream : public wxInputStream
@@ -54,7 +55,8 @@ protected:
     wxFileOffset OnSysSeek(wxFileOffset WXUNUSED(pos), wxSeekMode WXUNUSED(mode)) override
         { return wxInvalidOffset; }
 
-    wxDECLARE_NO_COPY_CLASS(wxSocketInputStream);
+    wxSocketInputStream(const wxSocketInputStream&) = delete;
+	wxSocketInputStream& operator=(const wxSocketInputStream&) = delete;
 };
 
 class WXDLLIMPEXP_NET wxSocketStream : public wxSocketInputStream,
@@ -64,7 +66,8 @@ public:
     wxSocketStream(wxSocketBase& s);
     virtual ~wxSocketStream();
 
-    wxDECLARE_NO_COPY_CLASS(wxSocketStream);
+    wxSocketStream(const wxSocketStream&) = delete;
+	wxSocketStream& operator=(const wxSocketStream&) = delete;
 };
 
 #endif

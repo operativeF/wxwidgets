@@ -38,7 +38,8 @@ private:
 
     wxToggleButton* m_button;
 
-    wxDECLARE_NO_COPY_CLASS(ToggleButtonTestCase);
+    ToggleButtonTestCase(const ToggleButtonTestCase&) = delete;
+	ToggleButtonTestCase& operator=(const ToggleButtonTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

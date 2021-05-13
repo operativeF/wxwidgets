@@ -95,7 +95,8 @@ private:
 
     wxAddRemoveAdaptor* const m_adaptor;
 
-    wxDECLARE_NO_COPY_CLASS(wxAddRemoveImplBase);
+    wxAddRemoveImplBase(const wxAddRemoveImplBase&) = delete;
+	wxAddRemoveImplBase& operator=(const wxAddRemoveImplBase&) = delete;
 };
 
 // GTK+ uses a wxToolBar-based implementation and so doesn't need this class.
@@ -138,7 +139,8 @@ protected:
     wxButton *m_btnAdd,
              *m_btnRemove;
 
-    wxDECLARE_NO_COPY_CLASS(wxAddRemoveImplWithButtons);
+    wxAddRemoveImplWithButtons(const wxAddRemoveImplWithButtons&) = delete;
+	wxAddRemoveImplWithButtons& operator=(const wxAddRemoveImplWithButtons&) = delete;
 };
 
 #endif // !wxGTK

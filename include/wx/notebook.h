@@ -149,7 +149,8 @@ protected:
 #if wxUSE_EXTENDED_RTTI
     wxNotebookPageInfoList m_pageInfos;
 #endif
-    wxDECLARE_NO_COPY_CLASS(wxNotebookBase);
+    wxNotebookBase(const wxNotebookBase&) = delete;
+	wxNotebookBase& operator=(const wxNotebookBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

@@ -86,7 +86,8 @@ private:
     static bool ms_useIEEE754;
 #endif // wxUSE_APPLE_IEEE
 
-    wxDECLARE_NO_COPY_CLASS(DataStreamTestCase);
+    DataStreamTestCase(const DataStreamTestCase&) = delete;
+	DataStreamTestCase& operator=(const DataStreamTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

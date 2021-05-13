@@ -40,7 +40,8 @@ public:
 private:
     void Init();
 
-    wxDECLARE_NO_COPY_CLASS(wxGenericNotificationMessage);
+    wxGenericNotificationMessage(const wxGenericNotificationMessage&) = delete;
+	wxGenericNotificationMessage& operator=(const wxGenericNotificationMessage&) = delete;
 };
 
 #endif // _WX_GENERIC_NOTIFMSG_H_

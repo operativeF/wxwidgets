@@ -183,7 +183,8 @@ private:
 private:
     wxDECLARE_DYNAMIC_CLASS(wxSashWindow);
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxSashWindow);
+    wxSashWindow(const wxSashWindow&) = delete;
+	wxSashWindow& operator=(const wxSashWindow&) = delete;
 };
 
 class WXDLLIMPEXP_FWD_CORE wxSashEvent;

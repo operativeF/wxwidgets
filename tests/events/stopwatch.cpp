@@ -50,7 +50,8 @@ private:
     void BackwardsClockBug();
     void RestartBug();
 
-    wxDECLARE_NO_COPY_CLASS(StopWatchTestCase);
+    StopWatchTestCase(const StopWatchTestCase&) = delete;
+	StopWatchTestCase& operator=(const StopWatchTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

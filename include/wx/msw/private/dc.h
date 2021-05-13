@@ -98,7 +98,8 @@ private:
     COLORREF m_oldColFg,
              m_oldColBg;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextColoursChanger);
+    wxTextColoursChanger(const wxTextColoursChanger&) = delete;
+	wxTextColoursChanger& operator=(const wxTextColoursChanger&) = delete;
 };
 
 // background mode
@@ -138,7 +139,8 @@ private:
     const HDC m_hdc;
     int m_oldMode;
 
-    wxDECLARE_NO_COPY_CLASS(wxBkModeChanger);
+    wxBkModeChanger(const wxBkModeChanger&) = delete;
+	wxBkModeChanger& operator=(const wxBkModeChanger&) = delete;
 };
 
 } // namespace wxMSWImpl

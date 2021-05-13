@@ -108,7 +108,8 @@ private:
     friend class wxTCPClient;
     friend class wxTCPEventHandler;
 
-    wxDECLARE_NO_COPY_CLASS(wxTCPConnection);
+    wxTCPConnection(const wxTCPConnection&) = delete;
+	wxTCPConnection& operator=(const wxTCPConnection&) = delete;
     wxDECLARE_DYNAMIC_CLASS(wxTCPConnection);
 };
 
@@ -131,7 +132,8 @@ protected:
     wxString m_filename;
 #endif // __UNIX_LIKE__
 
-    wxDECLARE_NO_COPY_CLASS(wxTCPServer);
+    wxTCPServer(const wxTCPServer&) = delete;
+	wxTCPServer& operator=(const wxTCPServer&) = delete;
     wxDECLARE_DYNAMIC_CLASS(wxTCPServer);
 };
 

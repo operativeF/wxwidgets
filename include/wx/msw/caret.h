@@ -55,7 +55,8 @@ protected:
 private:
     bool m_hasCaret;
 
-    wxDECLARE_NO_COPY_CLASS(wxCaret);
+    wxCaret(const wxCaret&) = delete;
+	wxCaret& operator=(const wxCaret&) = delete;
 };
 
 #endif // _WX_CARET_H_

@@ -76,7 +76,8 @@ protected:
     virtual bool MSWIsPushed() const;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxAnyButton);
+    wxAnyButton(const wxAnyButton&) = delete;
+	wxAnyButton& operator=(const wxAnyButton&) = delete;
 };
 
 #endif // _WX_MSW_ANYBUTTON_H_

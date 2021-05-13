@@ -49,7 +49,8 @@ private:
                           m_yVisibility;
     wxRecursionGuardFlag m_adjustScrollFlagReentrancy;
 
-    wxDECLARE_NO_COPY_CLASS(wxScrollHelper);
+    wxScrollHelper(const wxScrollHelper&) = delete;
+	wxScrollHelper& operator=(const wxScrollHelper&) = delete;
 };
 
 #endif // _WX_GENERIC_SCROLLWIN_H_

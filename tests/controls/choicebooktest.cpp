@@ -45,7 +45,8 @@ private:
 
     wxChoicebook *m_choicebook;
 
-    wxDECLARE_NO_COPY_CLASS(ChoicebookTestCase);
+    ChoicebookTestCase(const ChoicebookTestCase&) = delete;
+	ChoicebookTestCase& operator=(const ChoicebookTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

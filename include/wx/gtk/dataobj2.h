@@ -106,7 +106,8 @@ private:
     class wxTextURIListDataObject* const m_dobjURIList;
     wxTextDataObject* const m_dobjText;
 
-    wxDECLARE_NO_COPY_CLASS(wxURLDataObject);
+    wxURLDataObject(const wxURLDataObject&) = delete;
+	wxURLDataObject& operator=(const wxURLDataObject&) = delete;
 };
 
 

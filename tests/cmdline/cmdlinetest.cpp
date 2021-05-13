@@ -46,7 +46,8 @@ private:
     void Usage();
     void Found();
 
-    wxDECLARE_NO_COPY_CLASS(CmdLineTestCase);
+    CmdLineTestCase(const CmdLineTestCase&) = delete;
+	CmdLineTestCase& operator=(const CmdLineTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

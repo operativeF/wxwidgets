@@ -109,7 +109,8 @@ private:
     static HTREEITEM ms_unlockedItem;
     HTREEITEM m_oldUnlockedItem;
 
-    wxDECLARE_NO_COPY_CLASS(TreeItemUnlocker);
+    TreeItemUnlocker(const TreeItemUnlocker&) = delete;
+	TreeItemUnlocker& operator=(const TreeItemUnlocker&) = delete;
 };
 
 HTREEITEM TreeItemUnlocker::ms_unlockedItem = nullptr;
@@ -135,7 +136,8 @@ public:
 private:
     bool& m_var;
 
-    wxDECLARE_NO_COPY_CLASS(TempSetter);
+    TempSetter(const TempSetter&) = delete;
+	TempSetter& operator=(const TempSetter&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -494,7 +496,8 @@ protected:
     // the real client data
     wxTreeItemData *m_data;
 
-    wxDECLARE_NO_COPY_CLASS(wxTreeItemParam);
+    wxTreeItemParam(const wxTreeItemParam&) = delete;
+	wxTreeItemParam& operator=(const wxTreeItemParam&) = delete;
 };
 
 // wxVirutalNode is used in place of a single root when 'hidden' root is
@@ -519,7 +522,8 @@ public:
 private:
     wxTreeItemParam *m_param;
 
-    wxDECLARE_NO_COPY_CLASS(wxVirtualNode);
+    wxVirtualNode(const wxVirtualNode&) = delete;
+	wxVirtualNode& operator=(const wxVirtualNode&) = delete;
 };
 
 #ifdef __VISUALC__
@@ -564,7 +568,8 @@ private:
 
     const wxTreeCtrl *m_tree;
 
-    wxDECLARE_NO_COPY_CLASS(wxTreeTraversal);
+    wxTreeTraversal(const wxTreeTraversal&) = delete;
+	wxTreeTraversal& operator=(const wxTreeTraversal&) = delete;
 };
 
 // internal class for getting the selected items
@@ -604,7 +609,8 @@ public:
 private:
     wxArrayTreeItemIds& m_selections;
 
-    wxDECLARE_NO_COPY_CLASS(TraverseSelections);
+    TraverseSelections(const TraverseSelections&) = delete;
+	TraverseSelections& operator=(const TraverseSelections&) = delete;
 };
 
 // internal class for counting tree items
@@ -633,7 +639,8 @@ public:
 private:
     size_t m_count;
 
-    wxDECLARE_NO_COPY_CLASS(TraverseCounter);
+    TraverseCounter(const TraverseCounter&) = delete;
+	TraverseCounter& operator=(const TraverseCounter&) = delete;
 };
 
 // ----------------------------------------------------------------------------

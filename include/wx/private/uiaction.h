@@ -38,7 +38,8 @@ public:
     virtual bool DoKey(int keycode, int modifiers, bool isDown) = 0;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxUIActionSimulatorImpl);
+    wxUIActionSimulatorImpl(const wxUIActionSimulatorImpl&) = delete;
+	wxUIActionSimulatorImpl& operator=(const wxUIActionSimulatorImpl&) = delete;
 };
 
 #endif // _WX_PRIVATE_UIACTION_H_

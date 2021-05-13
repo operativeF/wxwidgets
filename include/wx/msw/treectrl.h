@@ -343,7 +343,8 @@ private:
     friend class wxTreeSortHelper;
 
     wxDECLARE_DYNAMIC_CLASS(wxTreeCtrl);
-    wxDECLARE_NO_COPY_CLASS(wxTreeCtrl);
+    wxTreeCtrl(const wxTreeCtrl&) = delete;
+	wxTreeCtrl& operator=(const wxTreeCtrl&) = delete;
 };
 
 #endif // wxUSE_TREECTRL

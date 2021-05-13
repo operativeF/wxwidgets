@@ -63,7 +63,8 @@ private:
     wxDateTime m_selectedDate;
 
     wxDECLARE_DYNAMIC_CLASS(wxGtkCalendarCtrl);
-    wxDECLARE_NO_COPY_CLASS(wxGtkCalendarCtrl);
+    wxGtkCalendarCtrl(const wxGtkCalendarCtrl&) = delete;
+	wxGtkCalendarCtrl& operator=(const wxGtkCalendarCtrl&) = delete;
 };
 
 #endif // GTK_CALCTRL_H__

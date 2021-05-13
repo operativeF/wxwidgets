@@ -55,7 +55,8 @@ protected:
              m_marginBmpY;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxAnyButton);
+    wxAnyButton(const wxAnyButton&) = delete;
+	wxAnyButton& operator=(const wxAnyButton&) = delete;
 };
 
 // ----------------------------------------------------------------------------

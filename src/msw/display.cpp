@@ -156,7 +156,8 @@ protected:
     wxDisplayInfo m_info;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxDisplayMSW);
+    wxDisplayMSW(const wxDisplayMSW&) = delete;
+	wxDisplayMSW& operator=(const wxDisplayMSW&) = delete;
 };
 
 
@@ -262,7 +263,8 @@ private:
     HWND m_hiddenHwnd;
     const wxChar* m_hiddenClass;
 
-    wxDECLARE_NO_COPY_CLASS(wxDisplayFactoryMSW);
+    wxDisplayFactoryMSW(const wxDisplayFactoryMSW&) = delete;
+	wxDisplayFactoryMSW& operator=(const wxDisplayFactoryMSW&) = delete;
 };
 
 wxDisplayFactoryMSW::GetDpiForMonitorData

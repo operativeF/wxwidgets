@@ -1253,7 +1253,8 @@ private:
     wxImage m_image;
     wxBitmap m_bitmap;
 
-    wxDECLARE_NO_COPY_CLASS(MyGraphicsFrame);
+    MyGraphicsFrame(const MyGraphicsFrame&) = delete;
+	MyGraphicsFrame& operator=(const MyGraphicsFrame&) = delete;
 };
 
 void MyFrame::OnTestGraphics(wxCommandEvent& WXUNUSED(event))

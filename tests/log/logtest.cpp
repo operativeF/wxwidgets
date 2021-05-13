@@ -65,7 +65,8 @@ protected:
     wxString m_logs[wxLOG_Trace + 1];
     wxLogRecordInfo m_logsInfo[wxLOG_Trace + 1];
 
-    wxDECLARE_NO_COPY_CLASS(TestLogBase);
+    TestLogBase(const TestLogBase&) = delete;
+	TestLogBase& operator=(const TestLogBase&) = delete;
 };
 
 // simple log sink which just stores the messages logged for each level
@@ -84,7 +85,8 @@ protected:
     }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(TestLog);
+    TestLog(const TestLog&) = delete;
+	TestLog& operator=(const TestLog&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -124,7 +126,8 @@ private:
     wxLog *m_logOld;
     bool m_logWasEnabled;
 
-    wxDECLARE_NO_COPY_CLASS(LogTestCase);
+    LogTestCase(const LogTestCase&) = delete;
+	LogTestCase& operator=(const LogTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

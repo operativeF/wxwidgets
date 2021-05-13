@@ -76,7 +76,8 @@ private:
     wxMSWHeaderCtrl* m_nativeControl;
     friend class wxMSWHeaderCtrl;
 
-    wxDECLARE_NO_COPY_CLASS(wxHeaderCtrl);
+    wxHeaderCtrl(const wxHeaderCtrl&) = delete;
+	wxHeaderCtrl& operator=(const wxHeaderCtrl&) = delete;
 };
 
 #endif // _WX_MSW_HEADERCTRL_H_

@@ -70,7 +70,8 @@ private:
     // If true, DisableCallback() had been already called.
     bool m_callbackDisabled;
 
-    wxDECLARE_NO_COPY_CLASS(wxExecuteIOHandlerBase);
+    wxExecuteIOHandlerBase(const wxExecuteIOHandlerBase&) = delete;
+	wxExecuteIOHandlerBase& operator=(const wxExecuteIOHandlerBase&) = delete;
 };
 
 // This is the version used with wxFDIODispatcher, which must be passed to the
@@ -100,7 +101,8 @@ private:
 
     wxFDIODispatcher& m_dispatcher;
 
-    wxDECLARE_NO_COPY_CLASS(wxExecuteFDIOHandler);
+    wxExecuteFDIOHandler(const wxExecuteFDIOHandler&) = delete;
+	wxExecuteFDIOHandler& operator=(const wxExecuteFDIOHandler&) = delete;
 };
 
 // And this is the version used with an event loop. As AddSourceForFD() is
@@ -130,7 +132,8 @@ private:
 
     wxEventLoopSource* m_source;
 
-    wxDECLARE_NO_COPY_CLASS(wxExecuteEventLoopSourceHandler);
+    wxExecuteEventLoopSourceHandler(const wxExecuteEventLoopSourceHandler&) = delete;
+	wxExecuteEventLoopSourceHandler& operator=(const wxExecuteEventLoopSourceHandler&) = delete;
 };
 
 #endif // _WX_UNIX_PRIVATE_EXECUTEIOHANDLER_H_

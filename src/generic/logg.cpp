@@ -149,7 +149,8 @@ private:
     static size_t ms_maxLength;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxLogDialog);
+    wxLogDialog(const wxLogDialog&) = delete;
+	wxLogDialog& operator=(const wxLogDialog&) = delete;
 };
 
 wxBEGIN_EVENT_TABLE(wxLogDialog, wxDialog)
@@ -471,7 +472,8 @@ private:
     wxLogWindow *m_log;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxLogFrame);
+    wxLogFrame(const wxLogFrame&) = delete;
+	wxLogFrame& operator=(const wxLogFrame&) = delete;
 };
 
 wxBEGIN_EVENT_TABLE(wxLogFrame, wxFrame)

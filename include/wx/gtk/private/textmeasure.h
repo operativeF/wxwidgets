@@ -58,7 +58,8 @@ protected:
     PangoContext *m_context;
     PangoLayout *m_layout;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextMeasure);
+    wxTextMeasure(const wxTextMeasure&) = delete;
+	wxTextMeasure& operator=(const wxTextMeasure&) = delete;
 };
 
 #endif // _WX_GTK_PRIVATE_TEXTMEASURE_H_

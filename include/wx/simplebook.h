@@ -223,7 +223,8 @@ private:
     unsigned m_showTimeout,
              m_hideTimeout;
 
-    wxDECLARE_NO_COPY_CLASS(wxSimplebook);
+    wxSimplebook(const wxSimplebook&) = delete;
+	wxSimplebook& operator=(const wxSimplebook&) = delete;
 };
 
 #endif // wxUSE_BOOKCTRL

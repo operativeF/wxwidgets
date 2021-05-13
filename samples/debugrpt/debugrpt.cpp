@@ -186,7 +186,8 @@ private:
     // number of lines drawn in OnPaint()
     int m_numLines;
 
-    wxDECLARE_NO_COPY_CLASS(MyFrame);
+    MyFrame(const MyFrame&) = delete;
+	MyFrame& operator=(const MyFrame&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 
@@ -221,7 +222,8 @@ public:
 private:
     bool m_uploadReport;
 
-    wxDECLARE_NO_COPY_CLASS(MyApp);
+    MyApp(const MyApp&) = delete;
+	MyApp& operator=(const MyApp&) = delete;
 };
 
 wxIMPLEMENT_APP(MyApp);

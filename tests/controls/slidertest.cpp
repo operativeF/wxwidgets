@@ -56,7 +56,8 @@ private:
 
     wxSlider* m_slider;
 
-    wxDECLARE_NO_COPY_CLASS(SliderTestCase);
+    SliderTestCase(const SliderTestCase&) = delete;
+	SliderTestCase& operator=(const SliderTestCase&) = delete;
 };
 
 bool SliderTestCase::ms_inversed = false;

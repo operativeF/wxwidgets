@@ -49,7 +49,8 @@ protected:
     HACCEL      m_hAccel;
     bool        m_ok;
 
-    wxDECLARE_NO_COPY_CLASS(wxAcceleratorRefData);
+    wxAcceleratorRefData(const wxAcceleratorRefData&) = delete;
+	wxAcceleratorRefData& operator=(const wxAcceleratorRefData&) = delete;
 };
 
 // ============================================================================

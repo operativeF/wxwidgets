@@ -65,7 +65,8 @@ private:
     // Implementation data.
     class wxTimePickerGenericImpl* m_impl;
 
-    wxDECLARE_NO_COPY_CLASS(wxTimePickerCtrlGeneric);
+    wxTimePickerCtrlGeneric(const wxTimePickerCtrlGeneric&) = delete;
+	wxTimePickerCtrlGeneric& operator=(const wxTimePickerCtrlGeneric&) = delete;
 };
 
 #endif // _WX_GENERIC_TIMECTRL_H_

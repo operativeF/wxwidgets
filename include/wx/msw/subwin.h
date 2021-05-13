@@ -174,7 +174,8 @@ private:
     wxWindowIDRef *m_ids;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxSubwindows);
+    wxSubwindows(const wxSubwindows&) = delete;
+	wxSubwindows& operator=(const wxSubwindows&) = delete;
 };
 
 // convenient macro to forward a few methods which are usually propagated to

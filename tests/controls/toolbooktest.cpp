@@ -48,7 +48,8 @@ private:
 
     wxToolbook *m_toolbook;
 
-    wxDECLARE_NO_COPY_CLASS(ToolbookTestCase);
+    ToolbookTestCase(const ToolbookTestCase&) = delete;
+	ToolbookTestCase& operator=(const ToolbookTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

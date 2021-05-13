@@ -42,7 +42,8 @@ public:
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxPrintDialogBase);
-    wxDECLARE_NO_COPY_CLASS(wxPrintDialogBase);
+    wxPrintDialogBase(const wxPrintDialogBase&) = delete;
+	wxPrintDialogBase& operator=(const wxPrintDialogBase&) = delete;
 };
 
 // ---------------------------------------------------------------------------
@@ -67,7 +68,8 @@ private:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxPrintDialog);
-    wxDECLARE_NO_COPY_CLASS(wxPrintDialog);
+    wxPrintDialog(const wxPrintDialog&) = delete;
+	wxPrintDialog& operator=(const wxPrintDialog&) = delete;
 };
 
 // ---------------------------------------------------------------------------
@@ -89,7 +91,8 @@ public:
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxPageSetupDialogBase);
-    wxDECLARE_NO_COPY_CLASS(wxPageSetupDialogBase);
+    wxPageSetupDialogBase(const wxPageSetupDialogBase&) = delete;
+	wxPageSetupDialogBase& operator=(const wxPageSetupDialogBase&) = delete;
 };
 
 // ---------------------------------------------------------------------------
@@ -112,7 +115,8 @@ private:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxPageSetupDialog);
-    wxDECLARE_NO_COPY_CLASS(wxPageSetupDialog);
+    wxPageSetupDialog(const wxPageSetupDialog&) = delete;
+	wxPageSetupDialog& operator=(const wxPageSetupDialog&) = delete;
 };
 
 #endif

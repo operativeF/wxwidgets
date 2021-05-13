@@ -463,7 +463,8 @@ private:
                 m_strOldPath;   // saved path
   bool          m_bChanged;     // was the path changed?
 
-  wxDECLARE_NO_COPY_CLASS(wxConfigPathChanger);
+  wxConfigPathChanger(const wxConfigPathChanger&) = delete;
+	wxConfigPathChanger& operator=(const wxConfigPathChanger&) = delete;
 };
 
 

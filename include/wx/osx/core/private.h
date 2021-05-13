@@ -79,7 +79,8 @@ WXDLLIMPEXP_BASE CFURLRef wxOSXCreateURLFromFileSystemPath( const wxString& path
 
 class WXDLLIMPEXP_CORE wxMacCGContextStateSaver
 {
-    wxDECLARE_NO_COPY_CLASS(wxMacCGContextStateSaver);
+    wxMacCGContextStateSaver(const wxMacCGContextStateSaver&) = delete;
+	wxMacCGContextStateSaver& operator=(const wxMacCGContextStateSaver&) = delete;
 
 public:
     wxMacCGContextStateSaver( CGContextRef cg )
@@ -747,7 +748,8 @@ public :
 private:
     wxTextEntry * const m_entry;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextWidgetImpl);
+    wxTextWidgetImpl(const wxTextWidgetImpl&) = delete;
+	wxTextWidgetImpl& operator=(const wxTextWidgetImpl&) = delete;
 };
 
 // common interface for all combobox implementations

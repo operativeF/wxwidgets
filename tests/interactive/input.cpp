@@ -57,7 +57,8 @@ private:
     void TestRegExInteractive();
     void TestDateTimeInteractive();
 
-    wxDECLARE_NO_COPY_CLASS(InteractiveInputTestCase);
+    InteractiveInputTestCase(const InteractiveInputTestCase&) = delete;
+	InteractiveInputTestCase& operator=(const InteractiveInputTestCase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

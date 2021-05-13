@@ -497,7 +497,8 @@ public:
 #endif
 
     wxDECLARE_DYNAMIC_CLASS(wxWindowGTK);
-    wxDECLARE_NO_COPY_CLASS(wxWindowGTK);
+    wxWindowGTK(const wxWindowGTK&) = delete;
+	wxWindowGTK& operator=(const wxWindowGTK&) = delete;
 };
 
 #endif // _WX_GTK_WINDOW_H_

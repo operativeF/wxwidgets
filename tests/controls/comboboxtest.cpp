@@ -82,7 +82,8 @@ private:
 
     wxComboBox *m_combo;
 
-    wxDECLARE_NO_COPY_CLASS(ComboBoxTestCase);
+    ComboBoxTestCase(const ComboBoxTestCase&) = delete;
+	ComboBoxTestCase& operator=(const ComboBoxTestCase&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(ComboBoxTestCase,

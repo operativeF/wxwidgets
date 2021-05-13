@@ -49,7 +49,8 @@ private:
 
     int m_events;
 
-    wxDECLARE_NO_COPY_CLASS(TimerCounterHandler);
+    TimerCounterHandler(const TimerCounterHandler&) = delete;
+	TimerCounterHandler& operator=(const TimerCounterHandler&) = delete;
 };
 
 // --------------------------------------------------------------------------
@@ -70,7 +71,8 @@ private:
     void OneShot();
     void Multiple();
 
-    wxDECLARE_NO_COPY_CLASS(TimerEventTestCase);
+    TimerEventTestCase(const TimerEventTestCase&) = delete;
+	TimerEventTestCase& operator=(const TimerEventTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default
@@ -95,7 +97,8 @@ void TimerEventTestCase::OneShot()
 
         wxEventLoopBase& m_loop;
 
-        // don't use wxDECLARE_NO_COPY_CLASS() to avoid upsetting MSVC
+        // don't use (const &) = delete;
+	& operator=(const &) = delete to avoid upsetting MSVC
     };
 
     wxEventLoop loop;

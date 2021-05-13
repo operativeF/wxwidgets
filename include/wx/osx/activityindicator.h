@@ -53,7 +53,8 @@ private:
     bool m_isRunning;
 
     wxDECLARE_DYNAMIC_CLASS(wxActivityIndicator);
-    wxDECLARE_NO_COPY_CLASS(wxActivityIndicator);
+    wxActivityIndicator(const wxActivityIndicator&) = delete;
+	wxActivityIndicator& operator=(const wxActivityIndicator&) = delete;
 };
 
 #endif // _WX_OSX_ACTIVITYINDICATOR_H_

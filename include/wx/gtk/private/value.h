@@ -42,7 +42,8 @@ private:
 
     // For now we just don't support copying at all for simplicity, it could be
     // implemented later if needed.
-    wxDECLARE_NO_COPY_CLASS(wxGtkValue);
+    wxGtkValue(const wxGtkValue&) = delete;
+	wxGtkValue& operator=(const wxGtkValue&) = delete;
 };
 
 #endif // _WX_GTK_PRIVATE_VALUE_H_

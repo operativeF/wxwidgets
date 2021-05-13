@@ -86,7 +86,8 @@ protected:
 private:
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxTextEntryDialog);
-    wxDECLARE_NO_COPY_CLASS(wxTextEntryDialog);
+    wxTextEntryDialog(const wxTextEntryDialog&) = delete;
+	wxTextEntryDialog& operator=(const wxTextEntryDialog&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -117,7 +118,8 @@ public:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxPasswordEntryDialog);
-    wxDECLARE_NO_COPY_CLASS(wxPasswordEntryDialog);
+    wxPasswordEntryDialog(const wxPasswordEntryDialog&) = delete;
+	wxPasswordEntryDialog& operator=(const wxPasswordEntryDialog&) = delete;
 };
 
 // ----------------------------------------------------------------------------

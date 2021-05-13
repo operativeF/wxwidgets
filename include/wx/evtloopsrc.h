@@ -79,7 +79,8 @@ protected:
     wxEventLoopSourceHandler* m_handler;
     int m_flags;
 
-    wxDECLARE_NO_COPY_CLASS(wxEventLoopSource);
+    wxEventLoopSource(const wxEventLoopSource&) = delete;
+	wxEventLoopSource& operator=(const wxEventLoopSource&) = delete;
 };
 
 inline wxEventLoopSource::~wxEventLoopSource() { }

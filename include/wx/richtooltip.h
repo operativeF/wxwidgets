@@ -95,7 +95,8 @@ public:
 private:
     wxRichToolTipImpl* const m_impl;
 
-    wxDECLARE_NO_COPY_CLASS(wxRichToolTip);
+    wxRichToolTip(const wxRichToolTip&) = delete;
+	wxRichToolTip& operator=(const wxRichToolTip&) = delete;
 };
 
 #endif // wxUSE_RICHTOOLTIP

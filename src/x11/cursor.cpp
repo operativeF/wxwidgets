@@ -44,7 +44,8 @@ public:
 private:
     // There is no way to copy m_cursor so we can't implement a copy ctor
     // properly.
-    wxDECLARE_NO_COPY_CLASS(wxCursorRefData);
+    wxCursorRefData(const wxCursorRefData&) = delete;
+	wxCursorRefData& operator=(const wxCursorRefData&) = delete;
 };
 
 wxCursorRefData::wxCursorRefData()

@@ -101,7 +101,8 @@ private:
     void EncodeDecodeRandom();
     void DecodeInvalid();
 
-    wxDECLARE_NO_COPY_CLASS(Base64TestCase);
+    Base64TestCase(const Base64TestCase&) = delete;
+	Base64TestCase& operator=(const Base64TestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

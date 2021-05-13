@@ -51,7 +51,8 @@ protected:
     // is valid
     wxBitmap m_bitmaps[State_Max];
 
-    wxDECLARE_NO_COPY_CLASS(wxAnyButton);
+    wxAnyButton(const wxAnyButton&) = delete;
+	wxAnyButton& operator=(const wxAnyButton&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

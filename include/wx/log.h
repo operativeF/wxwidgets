@@ -628,7 +628,8 @@ private:
     // disabled
     static wxString    ms_timestamp;
 
-    wxDECLARE_NO_COPY_CLASS(wxLog);
+    wxLog(const wxLog&) = delete;
+	wxLog& operator=(const wxLog&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -655,7 +656,8 @@ protected:
 private:
     wxString m_str;
 
-    wxDECLARE_NO_COPY_CLASS(wxLogBuffer);
+    wxLogBuffer(const wxLogBuffer&) = delete;
+	wxLogBuffer& operator=(const wxLogBuffer&) = delete;
 };
 
 
@@ -672,7 +674,8 @@ protected:
     // implement sink function
     void DoLogText(const wxString& msg) override;
 
-    wxDECLARE_NO_COPY_CLASS(wxLogStderr);
+    wxLogStderr(const wxLogStderr&) = delete;
+	wxLogStderr& operator=(const wxLogStderr&) = delete;
 };
 
 #if wxUSE_STD_IOSTREAM
@@ -693,7 +696,8 @@ protected:
     // using ptr here to avoid including <iostream.h> from this file
     wxSTD ostream *m_ostr;
 
-    wxDECLARE_NO_COPY_CLASS(wxLogStream);
+    wxLogStream(const wxLogStream&) = delete;
+	wxLogStream& operator=(const wxLogStream&) = delete;
 };
 
 #endif // wxUSE_STD_IOSTREAM
@@ -778,7 +782,8 @@ private:
     // do we pass the messages to the old logger?
     bool m_bPassMessages;
 
-    wxDECLARE_NO_COPY_CLASS(wxLogChain);
+    wxLogChain(const wxLogChain&) = delete;
+	wxLogChain& operator=(const wxLogChain&) = delete;
 };
 
 // a chain log target which uses itself as the new logger
@@ -791,7 +796,8 @@ public:
     wxLogInterposer();
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxLogInterposer);
+    wxLogInterposer(const wxLogInterposer&) = delete;
+	wxLogInterposer& operator=(const wxLogInterposer&) = delete;
 };
 
 // a temporary interposer which doesn't destroy the old log target
@@ -803,7 +809,8 @@ public:
     wxLogInterposerTemp();
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxLogInterposerTemp);
+    wxLogInterposerTemp(const wxLogInterposerTemp&) = delete;
+	wxLogInterposerTemp& operator=(const wxLogInterposerTemp&) = delete;
 };
 
 #if wxUSE_GUI
@@ -1087,7 +1094,8 @@ private:
 
     wxString m_optKey;
 
-    wxDECLARE_NO_COPY_CLASS(wxLogger);
+    wxLogger(const wxLogger&) = delete;
+	wxLogger& operator=(const wxLogger&) = delete;
 };
 
 // ============================================================================

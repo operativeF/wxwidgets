@@ -300,7 +300,8 @@ private:
     size_t m_gradientUniqueId;
 
     wxDECLARE_ABSTRACT_CLASS(wxSVGFileDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxSVGFileDCImpl);
+    wxSVGFileDCImpl(const wxSVGFileDCImpl&) = delete;
+	wxSVGFileDCImpl& operator=(const wxSVGFileDCImpl&) = delete;
 };
 
 

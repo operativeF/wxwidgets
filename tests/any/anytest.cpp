@@ -102,7 +102,8 @@ private:
     wxAny   m_anyVoidPtr2;
     wxAny   m_anyDateTime2;
 
-    wxDECLARE_NO_COPY_CLASS(wxAnyTestCase);
+    wxAnyTestCase(const wxAnyTestCase&) = delete;
+	wxAnyTestCase& operator=(const wxAnyTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

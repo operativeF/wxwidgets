@@ -44,7 +44,8 @@ protected:
     wxBitmap m_bitmapBg;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxCustomBackgroundWindowGenericBase);
+    wxCustomBackgroundWindowGenericBase(const wxCustomBackgroundWindowGenericBase&) = delete;
+	wxCustomBackgroundWindowGenericBase& operator=(const wxCustomBackgroundWindowGenericBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

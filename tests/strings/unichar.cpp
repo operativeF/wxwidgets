@@ -174,7 +174,8 @@ private:
     wxIF_LONG_LONG_TYPE( void RefwxULongLongCompare(); )
     wxIF_WCHAR_T_TYPE( void RefWideCharCompare(); )
 
-    wxDECLARE_NO_COPY_CLASS(UniCharTestCase);
+    UniCharTestCase(const UniCharTestCase&) = delete;
+	UniCharTestCase& operator=(const UniCharTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

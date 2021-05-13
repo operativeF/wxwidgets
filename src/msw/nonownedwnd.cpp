@@ -124,7 +124,8 @@ private:
     wxNonOwnedWindow* const m_win;
     wxGraphicsPath m_path;
 
-    wxDECLARE_NO_COPY_CLASS(wxNonOwnedWindowShapeImpl);
+    wxNonOwnedWindowShapeImpl(const wxNonOwnedWindowShapeImpl&) = delete;
+	wxNonOwnedWindowShapeImpl& operator=(const wxNonOwnedWindowShapeImpl&) = delete;
 };
 
 bool wxNonOwnedWindow::DoSetPathShape(const wxGraphicsPath& path)

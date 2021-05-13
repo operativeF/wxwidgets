@@ -136,7 +136,8 @@ private:
 
     wxDECLARE_EVENT_TABLE();
 
-    wxDECLARE_NO_COPY_CLASS(wxBannerWindow);
+    wxBannerWindow(const wxBannerWindow&) = delete;
+	wxBannerWindow& operator=(const wxBannerWindow&) = delete;
 };
 
 #endif // wxUSE_BANNERWINDOW

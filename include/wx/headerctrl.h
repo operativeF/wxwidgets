@@ -378,7 +378,8 @@ private:
     unsigned int m_sortKey;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxHeaderCtrlSimple);
+    wxHeaderCtrlSimple(const wxHeaderCtrlSimple&) = delete;
+	wxHeaderCtrlSimple& operator=(const wxHeaderCtrlSimple&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

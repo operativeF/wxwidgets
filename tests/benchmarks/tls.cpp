@@ -92,7 +92,8 @@ public:
 private:
     pthread_key_t m_key;
 
-    wxDECLARE_NO_COPY_CLASS(PthreadKey);
+    PthreadKey(const PthreadKey&) = delete;
+	PthreadKey& operator=(const PthreadKey&) = delete;
 };
 
 BENCHMARK_FUNC(PosixTLS)
@@ -132,7 +133,8 @@ public:
 private:
     DWORD m_slot;
 
-    wxDECLARE_NO_COPY_CLASS(TlsSlot);
+    TlsSlot(const TlsSlot&) = delete;
+	TlsSlot& operator=(const TlsSlot&) = delete;
 };
 
 BENCHMARK_FUNC(Win32TLS)

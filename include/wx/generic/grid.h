@@ -524,7 +524,8 @@ protected:
     // no friends
     friend class wxGridCellEditorDummyFriend;
 
-    wxDECLARE_NO_COPY_CLASS(wxGridCellEditor);
+    wxGridCellEditor(const wxGridCellEditor&) = delete;
+	wxGridCellEditor& operator=(const wxGridCellEditor&) = delete;
 };
 
 // Smart pointer to wxGridCellEditor, calling DecRef() on it automatically.
@@ -856,7 +857,8 @@ private:
     wxAttrKind m_attrkind;
 
     // use Clone() instead
-    wxDECLARE_NO_COPY_CLASS(wxGridCellAttr);
+    wxGridCellAttr(const wxGridCellAttr&) = delete;
+	wxGridCellAttr& operator=(const wxGridCellAttr&) = delete;
 
     // suppress the stupid gcc warning about the class having private dtor and
     // no friends
@@ -919,7 +921,8 @@ private:
 
     wxGridCellAttrProviderData *m_data;
 
-    wxDECLARE_NO_COPY_CLASS(wxGridCellAttrProvider);
+    wxGridCellAttrProvider(const wxGridCellAttrProvider&) = delete;
+	wxGridCellAttrProvider& operator=(const wxGridCellAttrProvider&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1294,7 +1297,8 @@ private:
     wxGridCellAttrProvider *m_attrProvider;
 
     wxDECLARE_ABSTRACT_CLASS(wxGridTableBase);
-    wxDECLARE_NO_COPY_CLASS(wxGridTableBase);
+    wxGridTableBase(const wxGridTableBase&) = delete;
+	wxGridTableBase& operator=(const wxGridTableBase&) = delete;
 };
 
 
@@ -1338,7 +1342,8 @@ private:
     int m_comInt1;
     int m_comInt2;
 
-    wxDECLARE_NO_COPY_CLASS(wxGridTableMessage);
+    wxGridTableMessage(const wxGridTableMessage&) = delete;
+	wxGridTableMessage& operator=(const wxGridTableMessage&) = delete;
 };
 
 
@@ -2968,7 +2973,8 @@ private:
 
     wxDECLARE_DYNAMIC_CLASS(wxGrid);
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxGrid);
+    wxGrid(const wxGrid&) = delete;
+	wxGrid& operator=(const wxGrid&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -3009,7 +3015,8 @@ private:
 
     wxGrid *m_grid;
 
-    wxDECLARE_NO_COPY_CLASS(wxGridUpdateLocker);
+    wxGridUpdateLocker(const wxGridUpdateLocker&) = delete;
+	wxGridUpdateLocker& operator=(const wxGridUpdateLocker&) = delete;
 };
 
 // ----------------------------------------------------------------------------

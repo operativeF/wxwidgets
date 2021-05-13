@@ -39,7 +39,8 @@ public:
 private:
     wxTopLevelWindow* const m_tlw;
 
-    wxDECLARE_NO_COPY_CLASS(DestroyOnScopeExit);
+    DestroyOnScopeExit(const DestroyOnScopeExit&) = delete;
+	DestroyOnScopeExit& operator=(const DestroyOnScopeExit&) = delete;
 };
 
 static void TopLevelWindowShowTest(wxTopLevelWindow* tlw)

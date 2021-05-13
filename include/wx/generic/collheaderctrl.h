@@ -76,7 +76,8 @@ private:
 
     void DoSetCollapsed(bool collapsed);
 
-    wxDECLARE_NO_COPY_CLASS(wxGenericCollapsibleHeaderCtrl);
+    wxGenericCollapsibleHeaderCtrl(const wxGenericCollapsibleHeaderCtrl&) = delete;
+	wxGenericCollapsibleHeaderCtrl& operator=(const wxGenericCollapsibleHeaderCtrl&) = delete;
 };
 
 

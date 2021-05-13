@@ -43,7 +43,8 @@ public:
 private:
     wxWindow* const m_window;
 
-    wxDECLARE_NO_COPY_CLASS(QtPictureSetter);
+    QtPictureSetter(const QtPictureSetter&) = delete;
+	QtPictureSetter& operator=(const QtPictureSetter&) = delete;
 };
 }
 

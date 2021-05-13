@@ -56,7 +56,8 @@ private:
 
     int m_numPageChanges;
 
-    wxDECLARE_NO_COPY_CLASS(NotebookTestCase);
+    NotebookTestCase(const NotebookTestCase&) = delete;
+	NotebookTestCase& operator=(const NotebookTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

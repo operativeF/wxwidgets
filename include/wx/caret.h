@@ -186,7 +186,8 @@ protected:
     int m_countVisible;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxCaretBase);
+    wxCaretBase(const wxCaretBase&) = delete;
+	wxCaretBase& operator=(const wxCaretBase&) = delete;
 };
 
 // ---------------------------------------------------------------------------
@@ -213,7 +214,8 @@ class WXDLLIMPEXP_CORE wxCaretSuspend
 public:
     wxCaretSuspend(wxWindow *WXUNUSED(win)) {}
 
-    wxDECLARE_NO_COPY_CLASS(wxCaretSuspend);
+    wxCaretSuspend(const wxCaretSuspend&) = delete;
+	wxCaretSuspend& operator=(const wxCaretSuspend&) = delete;
 };
 
 #else // !wxHAS_CARET_USING_OVERLAYS
@@ -242,7 +244,8 @@ private:
     wxCaret *m_caret;
     bool     m_show;
 
-    wxDECLARE_NO_COPY_CLASS(wxCaretSuspend);
+    wxCaretSuspend(const wxCaretSuspend&) = delete;
+	wxCaretSuspend& operator=(const wxCaretSuspend&) = delete;
 };
 
 #endif // wxHAS_CARET_USING_OVERLAYS/!wxHAS_CARET_USING_OVERLAYS

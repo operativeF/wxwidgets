@@ -27,7 +27,8 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxWindowDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxWindowDCImpl);
+    wxWindowDCImpl(const wxWindowDCImpl&) = delete;
+	wxWindowDCImpl& operator=(const wxWindowDCImpl&) = delete;
 };
 
 
@@ -42,7 +43,8 @@ private:
     wxScopedPtr<QPicture> m_pict;
 
     wxDECLARE_CLASS(wxClientDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxClientDCImpl);
+    wxClientDCImpl(const wxClientDCImpl&) = delete;
+	wxClientDCImpl& operator=(const wxClientDCImpl&) = delete;
 };
 
 
@@ -53,7 +55,8 @@ public:
     wxPaintDCImpl( wxDC *owner, wxWindow *win );
 private:
     wxDECLARE_CLASS(wxPaintDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxPaintDCImpl);
+    wxPaintDCImpl(const wxPaintDCImpl&) = delete;
+	wxPaintDCImpl& operator=(const wxPaintDCImpl&) = delete;
 };
 
 #endif // _WX_QT_DCCLIENT_H_

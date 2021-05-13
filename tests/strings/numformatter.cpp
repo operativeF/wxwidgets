@@ -39,7 +39,8 @@ protected:
 private:
     wxLocale m_locale;
 
-    wxDECLARE_NO_COPY_CLASS(NumFormatterTestCase);
+    NumFormatterTestCase(const NumFormatterTestCase&) = delete;
+	NumFormatterTestCase& operator=(const NumFormatterTestCase&) = delete;
 };
 
 // A couple of helpers to avoid writing over long expressions.

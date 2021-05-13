@@ -27,7 +27,8 @@ public:
 private:
     gchar *m_str;
 
-    wxDECLARE_NO_COPY_CLASS(wxGtkString);
+    wxGtkString(const wxGtkString&) = delete;
+	wxGtkString& operator=(const wxGtkString&) = delete;
 };
 
 

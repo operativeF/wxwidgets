@@ -175,7 +175,8 @@ private:
 
     wxDECLARE_DYNAMIC_CLASS(wxSpinCtrl);
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxSpinCtrl);
+    wxSpinCtrl(const wxSpinCtrl&) = delete;
+	wxSpinCtrl& operator=(const wxSpinCtrl&) = delete;
 };
 
 #endif // wxUSE_SPINCTRL

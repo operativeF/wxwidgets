@@ -193,7 +193,8 @@ private:
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxToolBar);
-    wxDECLARE_NO_COPY_CLASS(wxToolBar);
+    wxToolBar(const wxToolBar&) = delete;
+	wxToolBar& operator=(const wxToolBar&) = delete;
 };
 
 #endif // wxUSE_TOOLBAR

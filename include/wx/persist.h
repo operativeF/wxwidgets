@@ -169,7 +169,8 @@ private:
     bool m_doSave,
          m_doRestore;
 
-    wxDECLARE_NO_COPY_CLASS(wxPersistenceManager);
+    wxPersistenceManager(const wxPersistenceManager&) = delete;
+	wxPersistenceManager& operator=(const wxPersistenceManager&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -226,7 +227,8 @@ protected:
 private:
     void * const m_obj;
 
-    wxDECLARE_NO_COPY_CLASS(wxPersistentObject);
+    wxPersistentObject(const wxPersistentObject&) = delete;
+	wxPersistentObject& operator=(const wxPersistentObject&) = delete;
 };
 
 // Helper function calling RegisterAndRestore() on the global persistence

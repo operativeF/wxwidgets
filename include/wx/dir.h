@@ -184,7 +184,8 @@ private:
 
     wxDirData *m_data;
 
-    wxDECLARE_NO_COPY_CLASS(wxDir);
+    wxDir(const wxDir&) = delete;
+	wxDir& operator=(const wxDir&) = delete;
 };
 
 #endif // _WX_DIR_H_

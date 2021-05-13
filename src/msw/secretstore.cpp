@@ -50,7 +50,8 @@ public:
 private:
     CREDENTIAL* const m_cred;
 
-    wxDECLARE_NO_COPY_CLASS(CredentialPtr);
+    CredentialPtr(const CredentialPtr&) = delete;
+	CredentialPtr& operator=(const CredentialPtr&) = delete;
 };
 
 class wxSecretStoreMSWImpl : public wxSecretStoreImpl

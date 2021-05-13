@@ -46,7 +46,8 @@ public:
 private:
     int m_regmask;
 
-    wxDECLARE_NO_COPY_CLASS(wxFDIOHandler);
+    wxFDIOHandler(const wxFDIOHandler&) = delete;
+	wxFDIOHandler& operator=(const wxFDIOHandler&) = delete;
 };
 
 #endif // _WX_PRIVATE_FDIOHANDLER_H_

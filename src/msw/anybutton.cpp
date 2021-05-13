@@ -114,7 +114,8 @@ public:
     virtual void SetBitmapPosition(wxDirection dir) = 0;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxButtonImageData);
+    wxButtonImageData(const wxButtonImageData&) = delete;
+	wxButtonImageData& operator=(const wxButtonImageData&) = delete;
 };
 
 namespace
@@ -181,7 +182,8 @@ private:
     wxSize m_margin;
     wxDirection m_dir;
 
-    wxDECLARE_NO_COPY_CLASS(wxODButtonImageData);
+    wxODButtonImageData(const wxODButtonImageData&) = delete;
+	wxODButtonImageData& operator=(const wxODButtonImageData&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxODButtonImageData);
 };
 
@@ -344,7 +346,8 @@ private:
     const HWND m_hwndBtn;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxXPButtonImageData);
+    wxXPButtonImageData(const wxXPButtonImageData&) = delete;
+	wxXPButtonImageData& operator=(const wxXPButtonImageData&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxXPButtonImageData);
 };
 

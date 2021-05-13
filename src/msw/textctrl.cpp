@@ -258,7 +258,8 @@ private:
     wxTextCtrl *m_textCtrl;
     wxMenu *m_menu;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextCtrlOleCallback);
+    wxTextCtrlOleCallback(const wxTextCtrlOleCallback&) = delete;
+	wxTextCtrlOleCallback& operator=(const wxTextCtrlOleCallback&) = delete;
 };
 
 BEGIN_IID_TABLE(wxTextCtrlOleCallback)
@@ -303,7 +304,8 @@ public:
 private:
     int& m_count;
 
-    wxDECLARE_NO_COPY_CLASS(UpdatesCountFilter);
+    UpdatesCountFilter(const UpdatesCountFilter&) = delete;
+	UpdatesCountFilter& operator=(const UpdatesCountFilter&) = delete;
 };
 
 namespace

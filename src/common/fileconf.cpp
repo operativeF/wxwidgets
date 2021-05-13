@@ -117,7 +117,8 @@ private:
   wxFileConfigLineList *m_pNext,        // next node
                        *m_pPrev;        // previous one
 
-    wxDECLARE_NO_COPY_CLASS(wxFileConfigLineList);
+    wxFileConfigLineList(const wxFileConfigLineList&) = delete;
+	wxFileConfigLineList& operator=(const wxFileConfigLineList&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -158,7 +159,8 @@ public:
   void SetValue(const wxString& strValue, bool bUser = true);
   void SetLine(wxFileConfigLineList *pLine);
 
-    wxDECLARE_NO_COPY_CLASS(wxFileConfigEntry);
+    wxFileConfigEntry(const wxFileConfigEntry&) = delete;
+	wxFileConfigEntry& operator=(const wxFileConfigEntry&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -230,7 +232,8 @@ public:
   void SetLastGroup(wxFileConfigGroup *pGroup)
     { m_pLastGroup = pGroup; }
 
-  wxDECLARE_NO_COPY_CLASS(wxFileConfigGroup);
+  wxFileConfigGroup(const wxFileConfigGroup&) = delete;
+	wxFileConfigGroup& operator=(const wxFileConfigGroup&) = delete;
 };
 
 // ============================================================================

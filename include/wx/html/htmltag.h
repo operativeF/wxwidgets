@@ -46,7 +46,8 @@ public:
                   wxString::const_iterator *end2,
                   bool *hasEnding);
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlTagsCache);
+    wxHtmlTagsCache(const wxHtmlTagsCache&) = delete;
+	wxHtmlTagsCache& operator=(const wxHtmlTagsCache&) = delete;
 };
 
 
@@ -150,7 +151,8 @@ private:
     wxHtmlTag *m_FirstChild, *m_LastChild;
     wxHtmlTag *m_Parent;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlTag);
+    wxHtmlTag(const wxHtmlTag&) = delete;
+	wxHtmlTag& operator=(const wxHtmlTag&) = delete;
 };
 
 #endif // wxUSE_HTML

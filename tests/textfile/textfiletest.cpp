@@ -88,7 +88,8 @@ private:
     static void CreateTestFile(size_t len, const char *contents);
 
 
-    wxDECLARE_NO_COPY_CLASS(TextFileTestCase);
+    TextFileTestCase(const TextFileTestCase&) = delete;
+	TextFileTestCase& operator=(const TextFileTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

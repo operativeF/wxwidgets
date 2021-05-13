@@ -262,7 +262,8 @@ private:
     wxHtmlHelpMergedIndex *m_mergedIndex;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxHtmlHelpWindow);
+    wxHtmlHelpWindow(const wxHtmlHelpWindow&) = delete;
+	wxHtmlHelpWindow& operator=(const wxHtmlHelpWindow&) = delete;
 };
 
 /*!

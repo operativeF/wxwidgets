@@ -83,7 +83,8 @@ public:
 private:
     wxGenericTreeCtrl *m_owner;
 
-    wxDECLARE_NO_COPY_CLASS(wxTreeRenameTimer);
+    wxTreeRenameTimer(const wxTreeRenameTimer&) = delete;
+	wxTreeRenameTimer& operator=(const wxTreeRenameTimer&) = delete;
 };
 
 // control used for in-place edit
@@ -111,7 +112,8 @@ private:
     bool                m_aboutToFinish;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxTreeTextCtrl);
+    wxTreeTextCtrl(const wxTreeTextCtrl&) = delete;
+	wxTreeTextCtrl& operator=(const wxTreeTextCtrl&) = delete;
 };
 
 // timer used to clear wxGenericTreeCtrl::m_findPrefix if no key was pressed
@@ -129,7 +131,8 @@ public:
 private:
     wxGenericTreeCtrl *m_owner;
 
-    wxDECLARE_NO_COPY_CLASS(wxTreeFindTimer);
+    wxTreeFindTimer(const wxTreeFindTimer&) = delete;
+	wxTreeFindTimer& operator=(const wxTreeFindTimer&) = delete;
 };
 
 // a tree item
@@ -352,7 +355,8 @@ private:
     unsigned int        m_isBold      :1; // render the label in bold font
     unsigned int        m_ownsAttr    :1; // delete attribute when done
 
-    wxDECLARE_NO_COPY_CLASS(wxGenericTreeItem);
+    wxGenericTreeItem(const wxGenericTreeItem&) = delete;
+	wxGenericTreeItem& operator=(const wxGenericTreeItem&) = delete;
 };
 
 // =============================================================================

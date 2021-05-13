@@ -80,7 +80,8 @@ protected:
                                       const wxString *choices,
                                       long styleLbox);
 
-    wxDECLARE_NO_COPY_CLASS(wxAnyChoiceDialog);
+    wxAnyChoiceDialog(const wxAnyChoiceDialog&) = delete;
+	wxAnyChoiceDialog& operator=(const wxAnyChoiceDialog&) = delete;
 };
 
 // ----------------------------------------------------------------------------

@@ -162,7 +162,8 @@ public:
 private:
     wxFrame *m_frame;
 
-    wxDECLARE_NO_COPY_CLASS(ImageDetailsView);
+    ImageDetailsView(const ImageDetailsView&) = delete;
+	ImageDetailsView& operator=(const ImageDetailsView&) = delete;
 };
 
 #endif // _WX_SAMPLES_DOCVIEW_VIEW_H_

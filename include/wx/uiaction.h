@@ -83,7 +83,8 @@ private:
     // platform-specific implementation.
     class wxUIActionSimulatorImpl* const m_impl;
 
-    wxDECLARE_NO_COPY_CLASS(wxUIActionSimulator);
+    wxUIActionSimulator(const wxUIActionSimulator&) = delete;
+	wxUIActionSimulator& operator=(const wxUIActionSimulator&) = delete;
 };
 
 #endif // wxUSE_UIACTIONSIMULATOR

@@ -45,7 +45,8 @@ protected:
         { return true; }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxMemoryText);
+    wxMemoryText(const wxMemoryText&) = delete;
+	wxMemoryText& operator=(const wxMemoryText&) = delete;
 };
 
 #endif // wxUSE_TEXTBUFFER

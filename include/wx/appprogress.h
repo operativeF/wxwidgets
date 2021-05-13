@@ -26,7 +26,8 @@ public:
     virtual void Reset() = 0;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxAppProgressIndicatorBase);
+    wxAppProgressIndicatorBase(const wxAppProgressIndicatorBase&) = delete;
+	wxAppProgressIndicatorBase& operator=(const wxAppProgressIndicatorBase&) = delete;
 };
 
 #if defined(__WXMSW__) && wxUSE_TASKBARBUTTON

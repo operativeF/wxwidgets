@@ -635,7 +635,8 @@ protected:
     wxTextAttr m_defaultStyle;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxTextAreaBase);
+    wxTextAreaBase(const wxTextAreaBase&) = delete;
+	wxTextAreaBase& operator=(const wxTextAreaBase&) = delete;
 };
 
 // this class defines wxTextCtrl interface, wxTextCtrlBase actually implements
@@ -666,7 +667,8 @@ protected:
     }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxTextCtrlIface);
+    wxTextCtrlIface(const wxTextCtrlIface&) = delete;
+	wxTextCtrlIface& operator=(const wxTextCtrlIface&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -776,7 +778,8 @@ protected:
     // implement the wxTextEntry pure virtual method
     wxWindow *GetEditableWindow() override { return this; }
 
-    wxDECLARE_NO_COPY_CLASS(wxTextCtrlBase);
+    wxTextCtrlBase(const wxTextCtrlBase&) = delete;
+	wxTextCtrlBase& operator=(const wxTextCtrlBase&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxTextCtrlBase);
 };
 

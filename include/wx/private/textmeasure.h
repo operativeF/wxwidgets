@@ -155,7 +155,8 @@ protected:
     // This one can be NULL or not.
     const wxFont* const m_font;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextMeasureBase);
+    wxTextMeasureBase(const wxTextMeasureBase&) = delete;
+	wxTextMeasureBase& operator=(const wxTextMeasureBase&) = delete;
 };
 
 // Include the platform dependent class declaration, if any.

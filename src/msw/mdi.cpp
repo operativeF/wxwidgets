@@ -1557,7 +1557,8 @@ private:
     wxChar m_buf[1024];
     WinStruct<MENUITEMINFO> m_mii;
 
-    wxDECLARE_NO_COPY_CLASS(MenuIterator);
+    MenuIterator(const MenuIterator&) = delete;
+	MenuIterator& operator=(const MenuIterator&) = delete;
 };
 
 void MDIInsertWindowMenu(wxWindow *win, WXHMENU hMenu, HMENU menuWin, const wxString& windowMenuLabelTranslated)

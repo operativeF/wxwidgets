@@ -1394,7 +1394,8 @@ private:
     wxTextCtrl *m_text;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(MyRearrangeDialog);
+    MyRearrangeDialog(const MyRearrangeDialog&) = delete;
+	MyRearrangeDialog& operator=(const MyRearrangeDialog&) = delete;
 };
 
 wxBEGIN_EVENT_TABLE(MyRearrangeDialog, wxRearrangeDialog)

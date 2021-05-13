@@ -115,7 +115,8 @@ private:
     unsigned int m_id;          // the id of this tooltip (ignored when m_rect width/height is 0)
 
     wxDECLARE_ABSTRACT_CLASS(wxToolTip);
-    wxDECLARE_NO_COPY_CLASS(wxToolTip);
+    wxToolTip(const wxToolTip&) = delete;
+	wxToolTip& operator=(const wxToolTip&) = delete;
 };
 
 #endif // _WX_MSW_TOOLTIP_H_

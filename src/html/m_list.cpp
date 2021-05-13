@@ -37,7 +37,8 @@ class wxHtmlListmarkCell : public wxHtmlCell
         void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
                   wxHtmlRenderingInfo& info) override;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlListmarkCell);
+    wxHtmlListmarkCell(const wxHtmlListmarkCell&) = delete;
+	wxHtmlListmarkCell& operator=(const wxHtmlListmarkCell&) = delete;
 };
 
 wxHtmlListmarkCell::wxHtmlListmarkCell(wxDC* dc, const wxColour& clr) :  m_Brush(clr, wxBRUSHSTYLE_SOLID)
@@ -89,7 +90,8 @@ class wxHtmlListCell : public wxHtmlContainerCell
         void AddRow(wxHtmlContainerCell *mark, wxHtmlContainerCell *cont);
         void Layout(int w) override;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlListCell);
+    wxHtmlListCell(const wxHtmlListCell&) = delete;
+	wxHtmlListCell& operator=(const wxHtmlListCell&) = delete;
 };
 
 wxHtmlListCell::wxHtmlListCell(wxHtmlContainerCell *parent) : wxHtmlContainerCell(parent)

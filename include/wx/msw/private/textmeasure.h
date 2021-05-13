@@ -57,7 +57,8 @@ protected:
     // in EndMeasuring().
     HFONT m_hfontOld;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextMeasure);
+    wxTextMeasure(const wxTextMeasure&) = delete;
+	wxTextMeasure& operator=(const wxTextMeasure&) = delete;
 };
 
 #endif // _WX_MSW_PRIVATE_TEXTMEASURE_H_

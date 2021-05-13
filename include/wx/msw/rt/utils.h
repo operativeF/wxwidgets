@@ -53,7 +53,8 @@ public:
 private:
     const bool m_ok;
 
-    wxDECLARE_NO_COPY_CLASS(Initializer);
+    Initializer(const Initializer&) = delete;
+	Initializer& operator=(const Initializer&) = delete;
 };
 
 // Simple class to convert wxString to HSTRING
@@ -72,7 +73,8 @@ private:
     HSTRING             m_hstring;
     HSTRING_HEADER      m_header;
 
-    wxDECLARE_NO_COPY_CLASS(TempStringRef);
+    TempStringRef(const TempStringRef&) = delete;
+	TempStringRef& operator=(const TempStringRef&) = delete;
 };
 
 } // namespace wxWinRT

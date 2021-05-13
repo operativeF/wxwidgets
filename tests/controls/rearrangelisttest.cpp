@@ -42,7 +42,8 @@ private:
 
     wxRearrangeList* m_rearrange;
 
-    wxDECLARE_NO_COPY_CLASS(RearrangeListTestCase);
+    RearrangeListTestCase(const RearrangeListTestCase&) = delete;
+	RearrangeListTestCase& operator=(const RearrangeListTestCase&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(RearrangeListTestCase,

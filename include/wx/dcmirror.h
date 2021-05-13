@@ -271,7 +271,8 @@ private:
 
     bool m_mirror;
 
-    wxDECLARE_NO_COPY_CLASS(wxMirrorDCImpl);
+    wxMirrorDCImpl(const wxMirrorDCImpl&) = delete;
+	wxMirrorDCImpl& operator=(const wxMirrorDCImpl&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxMirrorDC : public wxDC
@@ -292,7 +293,8 @@ public:
 private:
     bool m_mirror;
 
-    wxDECLARE_NO_COPY_CLASS(wxMirrorDC);
+    wxMirrorDC(const wxMirrorDC&) = delete;
+	wxMirrorDC& operator=(const wxMirrorDC&) = delete;
 };
 
 #endif // _WX_DCMIRROR_H_

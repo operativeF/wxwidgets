@@ -63,7 +63,8 @@ private:
     int m_centreDir;        // nothing to do if 0
 
     wxDECLARE_DYNAMIC_CLASS(wxFileDialog);
-    wxDECLARE_NO_COPY_CLASS(wxFileDialog);
+    wxFileDialog(const wxFileDialog&) = delete;
+	wxFileDialog& operator=(const wxFileDialog&) = delete;
 };
 
 #endif // _WX_FILEDLG_H_

@@ -416,7 +416,8 @@ private:
     wxWindow* const m_win;
     WXHWND const m_hWndOrig;
 
-    wxDECLARE_NO_COPY_CLASS(TempHWNDSetter);
+    TempHWNDSetter(const TempHWNDSetter&) = delete;
+	TempHWNDSetter& operator=(const TempHWNDSetter&) = delete;
 };
 
 #endif // __WXMSW__
@@ -434,7 +435,8 @@ public:
 private:
     HDC m_hdc;
 
-    wxDECLARE_NO_COPY_CLASS(ScreenHDC);
+    ScreenHDC(const ScreenHDC&) = delete;
+	ScreenHDC& operator=(const ScreenHDC&) = delete;
 };
 
 // the same as ScreenHDC but for window DCs
@@ -451,7 +453,8 @@ private:
    HWND m_hwnd;
    HDC m_hdc;
 
-   wxDECLARE_NO_COPY_CLASS(WindowHDC);
+   WindowHDC(const WindowHDC&) = delete;
+	WindowHDC& operator=(const WindowHDC&) = delete;
 };
 
 // the same as ScreenHDC but for memory DCs: creates the HDC compatible with
@@ -467,7 +470,8 @@ public:
 private:
     HDC m_hdc;
 
-    wxDECLARE_NO_COPY_CLASS(MemoryHDC);
+    MemoryHDC(const MemoryHDC&) = delete;
+	MemoryHDC& operator=(const MemoryHDC&) = delete;
 };
 
 // a class which selects a GDI object into a DC in its ctor and deselects in
@@ -499,7 +503,8 @@ private:
     HDC m_hdc;
     HGDIOBJ m_hgdiobj;
 
-    wxDECLARE_NO_COPY_CLASS(SelectInHDC);
+    SelectInHDC(const SelectInHDC&) = delete;
+	SelectInHDC& operator=(const SelectInHDC&) = delete;
 };
 
 // a class which cleans up any GDI object
@@ -650,7 +655,8 @@ public:
 private:
     HDC m_hdc;
 
-    wxDECLARE_NO_COPY_CLASS(HDCClipper);
+    HDCClipper(const HDCClipper&) = delete;
+	HDCClipper& operator=(const HDCClipper&) = delete;
 };
 
 // set the given map mode for the life time of this object
@@ -677,7 +683,8 @@ private:
         HDC m_hdc;
         int m_modeOld;
 
-        wxDECLARE_NO_COPY_CLASS(HDCMapModeChanger);
+        HDCMapModeChanger(const HDCMapModeChanger&) = delete;
+	HDCMapModeChanger& operator=(const HDCMapModeChanger&) = delete;
     };
 
     #define wxCHANGE_HDC_MAP_MODE(hdc, mm) \
@@ -722,7 +729,8 @@ public:
 private:
     HGLOBAL m_hGlobal;
 
-    wxDECLARE_NO_COPY_CLASS(GlobalPtr);
+    GlobalPtr(const GlobalPtr&) = delete;
+	GlobalPtr& operator=(const GlobalPtr&) = delete;
 };
 
 // when working with global pointers (which is unfortunately still necessary
@@ -789,7 +797,8 @@ private:
     HGLOBAL m_hGlobal;
     void *m_ptr;
 
-    wxDECLARE_NO_COPY_CLASS(GlobalPtrLock);
+    GlobalPtrLock(const GlobalPtrLock&) = delete;
+	GlobalPtrLock& operator=(const GlobalPtrLock&) = delete;
 };
 
 // register the class when it is first needed and unregister it in dtor

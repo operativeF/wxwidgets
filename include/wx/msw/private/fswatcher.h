@@ -100,7 +100,8 @@ private:
     char m_buffer[BUFFER_SIZE];  // buffer for fs events
     OVERLAPPED* m_overlapped;
 
-    wxDECLARE_NO_COPY_CLASS(wxFSWatchEntryMSW);
+    wxFSWatchEntryMSW(const wxFSWatchEntryMSW&) = delete;
+	wxFSWatchEntryMSW& operator=(const wxFSWatchEntryMSW&) = delete;
 };
 
 // ============================================================================

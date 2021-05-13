@@ -55,7 +55,8 @@ protected:
     wxFindReplaceDialogImpl *m_impl;
 
     wxDECLARE_DYNAMIC_CLASS(wxFindReplaceDialog);
-    wxDECLARE_NO_COPY_CLASS(wxFindReplaceDialog);
+    wxFindReplaceDialog(const wxFindReplaceDialog&) = delete;
+	wxFindReplaceDialog& operator=(const wxFindReplaceDialog&) = delete;
 };
 
 #endif // _WX_MSW_FDREPDLG_H_

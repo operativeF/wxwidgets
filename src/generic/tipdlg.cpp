@@ -64,7 +64,8 @@ public:
 private:
     wxTextFile m_textfile;
 
-    wxDECLARE_NO_COPY_CLASS(wxFileTipProvider);
+    wxFileTipProvider(const wxFileTipProvider&) = delete;
+	wxFileTipProvider& operator=(const wxFileTipProvider&) = delete;
 };
 #endif // wxUSE_TEXTFILE
 
@@ -111,7 +112,8 @@ private:
     wxCheckBox *m_checkbox;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxTipDialog);
+    wxTipDialog(const wxTipDialog&) = delete;
+	wxTipDialog& operator=(const wxTipDialog&) = delete;
 };
 
 // ============================================================================

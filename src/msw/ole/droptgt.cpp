@@ -113,7 +113,8 @@ protected:
     }
 #endif // wxUSE_EXCEPTIONS
 
-    wxDECLARE_NO_COPY_CLASS(wxIDropTarget);
+    wxIDropTarget(const wxIDropTarget&) = delete;
+	wxIDropTarget& operator=(const wxIDropTarget&) = delete;
 };
 
 // ----------------------------------------------------------------------------

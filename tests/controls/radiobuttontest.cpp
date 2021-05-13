@@ -33,7 +33,8 @@ public:
 protected:
     wxRadioButton* m_radio;
 
-    wxDECLARE_NO_COPY_CLASS(RadioButtonTestCase);
+    RadioButtonTestCase(const RadioButtonTestCase&) = delete;
+	RadioButtonTestCase& operator=(const RadioButtonTestCase&) = delete;
 };
 
 RadioButtonTestCase::RadioButtonTestCase()

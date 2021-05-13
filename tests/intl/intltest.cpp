@@ -55,7 +55,8 @@ private:
 
     wxLocale *m_locale;
 
-    wxDECLARE_NO_COPY_CLASS(IntlTestCase);
+    IntlTestCase(const IntlTestCase&) = delete;
+	IntlTestCase& operator=(const IntlTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

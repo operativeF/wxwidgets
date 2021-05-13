@@ -38,7 +38,8 @@ public:
 protected:
     wxSpinCtrlDouble* const m_spin;
 
-    wxDECLARE_NO_COPY_CLASS(SpinCtrlDoubleTestCase);
+    SpinCtrlDoubleTestCase(const SpinCtrlDoubleTestCase&) = delete;
+	SpinCtrlDoubleTestCase& operator=(const SpinCtrlDoubleTestCase&) = delete;
 };
 
 class SpinCtrlDoubleTestCaseWrap : public SpinCtrlDoubleTestCase

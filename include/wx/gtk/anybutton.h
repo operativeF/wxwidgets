@@ -74,7 +74,8 @@ private:
     // true iff the button is in pressed state
     bool m_isPressed;
 
-    wxDECLARE_NO_COPY_CLASS(wxAnyButton);
+    wxAnyButton(const wxAnyButton&) = delete;
+	wxAnyButton& operator=(const wxAnyButton&) = delete;
 };
 
 #endif // _WX_GTK_ANYBUTTON_H_

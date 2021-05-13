@@ -104,7 +104,8 @@ private:
     wxCheckListBox *m_parent;
     bool m_checked;
 
-    wxDECLARE_NO_COPY_CLASS(wxCheckListBoxItem);
+    wxCheckListBoxItem(const wxCheckListBoxItem&) = delete;
+	wxCheckListBoxItem& operator=(const wxCheckListBoxItem&) = delete;
 };
 
 wxCheckListBoxItem::wxCheckListBoxItem(wxCheckListBox *parent)

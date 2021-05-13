@@ -40,7 +40,8 @@ private:
 
     wxCheckListBox* m_check;
 
-    wxDECLARE_NO_COPY_CLASS(CheckListBoxTestCase);
+    CheckListBoxTestCase(const CheckListBoxTestCase&) = delete;
+	CheckListBoxTestCase& operator=(const CheckListBoxTestCase&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(CheckListBoxTestCase,

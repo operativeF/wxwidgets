@@ -70,7 +70,8 @@ protected:
 private:
     void ShowDetails(bool shown);
 
-    wxDECLARE_NO_COPY_CLASS(wxRichMessageDialogBase);
+    wxRichMessageDialogBase(const wxRichMessageDialogBase&) = delete;
+	wxRichMessageDialogBase& operator=(const wxRichMessageDialogBase&) = delete;
 };
 
 // Always include the generic version as it's currently used as the base class

@@ -41,7 +41,8 @@ private:
     void InvertMatrix();
     void Concat();
 
-    wxDECLARE_NO_COPY_CLASS(AffineTransformTestCase);
+    AffineTransformTestCase(const AffineTransformTestCase&) = delete;
+	AffineTransformTestCase& operator=(const AffineTransformTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default
@@ -140,7 +141,8 @@ protected:
     wxBitmap m_bmpUsingMatrix;
     wxDC* m_dc;
 
-    wxDECLARE_NO_COPY_CLASS(TransformMatrixTestCaseDCBase);
+    TransformMatrixTestCaseDCBase(const TransformMatrixTestCaseDCBase&) = delete;
+	TransformMatrixTestCaseDCBase& operator=(const TransformMatrixTestCaseDCBase&) = delete;
 };
 
 // ===========
@@ -186,7 +188,8 @@ private:
 protected:
     wxMemoryDC m_mdc;
 
-    wxDECLARE_NO_COPY_CLASS(TransformMatrixTestCaseDC);
+    TransformMatrixTestCaseDC(const TransformMatrixTestCaseDC&) = delete;
+	TransformMatrixTestCaseDC& operator=(const TransformMatrixTestCaseDC&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default
@@ -239,7 +242,8 @@ private:
 protected:
     wxGCDC* m_gcdc;
 
-    wxDECLARE_NO_COPY_CLASS(TransformMatrixTestCaseGCDC);
+    TransformMatrixTestCaseGCDC(const TransformMatrixTestCaseGCDC&) = delete;
+	TransformMatrixTestCaseGCDC& operator=(const TransformMatrixTestCaseGCDC&) = delete;
 };
 
 // For MSW we have individual test cases for each graphics renderer
@@ -280,7 +284,8 @@ private:
 
 protected:
 
-    wxDECLARE_NO_COPY_CLASS(TransformMatrixTestCaseGCDCGDIPlus);
+    TransformMatrixTestCaseGCDCGDIPlus(const TransformMatrixTestCaseGCDCGDIPlus&) = delete;
+	TransformMatrixTestCaseGCDCGDIPlus& operator=(const TransformMatrixTestCaseGCDCGDIPlus&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default
@@ -326,7 +331,8 @@ private:
 
 protected:
 
-    wxDECLARE_NO_COPY_CLASS(TransformMatrixTestCaseGCDCDirect2D);
+    TransformMatrixTestCaseGCDCDirect2D(const TransformMatrixTestCaseGCDCDirect2D&) = delete;
+	TransformMatrixTestCaseGCDCDirect2D& operator=(const TransformMatrixTestCaseGCDCDirect2D&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default
@@ -364,7 +370,8 @@ private:
 
 protected:
 
-    wxDECLARE_NO_COPY_CLASS(TransformMatrixTestCaseGCDCCairo);
+    TransformMatrixTestCaseGCDCCairo(const TransformMatrixTestCaseGCDCCairo&) = delete;
+	TransformMatrixTestCaseGCDCCairo& operator=(const TransformMatrixTestCaseGCDCCairo&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

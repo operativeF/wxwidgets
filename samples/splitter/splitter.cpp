@@ -73,7 +73,8 @@ public:
 
     bool OnInit() override;
 
-    wxDECLARE_NO_COPY_CLASS(MyApp);
+    MyApp(const MyApp&) = delete;
+	MyApp& operator=(const MyApp&) = delete;
 };
 
 class MyFrame: public wxFrame
@@ -123,7 +124,8 @@ private:
     wxWindow *m_replacewindow;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(MyFrame);
+    MyFrame(const MyFrame&) = delete;
+	MyFrame& operator=(const MyFrame&) = delete;
 };
 
 class MySplitterWindow : public wxSplitterWindow
@@ -141,7 +143,8 @@ private:
     wxFrame *m_frame;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(MySplitterWindow);
+    MySplitterWindow(const MySplitterWindow&) = delete;
+	MySplitterWindow& operator=(const MySplitterWindow&) = delete;
 };
 
 class MyCanvas: public wxScrolledWindow
@@ -155,7 +158,8 @@ public:
 private:
     bool m_mirror;
 
-    wxDECLARE_NO_COPY_CLASS(MyCanvas);
+    MyCanvas(const MyCanvas&) = delete;
+	MyCanvas& operator=(const MyCanvas&) = delete;
 };
 
 // ============================================================================

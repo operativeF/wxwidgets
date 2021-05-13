@@ -449,7 +449,8 @@ private:
     int m_argc;
     char **m_argv;
 
-    wxDECLARE_NO_COPY_CLASS(ArgsArray);
+    ArgsArray(const ArgsArray&) = delete;
+	ArgsArray& operator=(const ArgsArray&) = delete;
 };
 
 } // anonymous namespace

@@ -591,7 +591,8 @@ public:
 protected:
     wxRendererNative& m_rendererNative;
 
-    wxDECLARE_NO_COPY_CLASS(wxDelegateRendererNative);
+    wxDelegateRendererNative(const wxDelegateRendererNative&) = delete;
+	wxDelegateRendererNative& operator=(const wxDelegateRendererNative&) = delete;
 };
 
 // ----------------------------------------------------------------------------

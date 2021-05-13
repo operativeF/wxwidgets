@@ -123,7 +123,8 @@ public:
 private:
     CRITICAL_SECTION * const m_cs;
 
-    wxDECLARE_NO_COPY_CLASS(CSLock);
+    CSLock(const CSLock&) = delete;
+	CSLock& operator=(const CSLock&) = delete;
 };
 
 } // anonymity namespace
@@ -348,7 +349,8 @@ private:
     LONG m_restart;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxIEnumString);
+    wxIEnumString(const wxIEnumString&) = delete;
+	wxIEnumString& operator=(const wxIEnumString&) = delete;
 };
 
 BEGIN_IID_TABLE(wxIEnumString)
@@ -656,7 +658,8 @@ private:
     bool m_connectedCharEvent;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxTextAutoCompleteData);
+    wxTextAutoCompleteData(const wxTextAutoCompleteData&) = delete;
+	wxTextAutoCompleteData& operator=(const wxTextAutoCompleteData&) = delete;
 };
 
 // Special pointer value which indicates that we're using SHAutoComplete().

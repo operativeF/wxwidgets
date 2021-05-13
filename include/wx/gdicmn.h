@@ -1008,7 +1008,8 @@ protected:
 
     static wxObject* ms_stockObject[ITEMCOUNT];
 
-    wxDECLARE_NO_COPY_CLASS(wxStockGDI);
+    wxStockGDI(const wxStockGDI&) = delete;
+	wxStockGDI& operator=(const wxStockGDI&) = delete;
 };
 
 #define wxITALIC_FONT  wxStockGDI::instance().GetFont(wxStockGDI::FONT_ITALIC)

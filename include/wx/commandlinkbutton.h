@@ -78,7 +78,8 @@ protected:
     virtual bool HasNativeBitmap() const { return false; }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxCommandLinkButtonBase);
+    wxCommandLinkButtonBase(const wxCommandLinkButtonBase&) = delete;
+	wxCommandLinkButtonBase& operator=(const wxCommandLinkButtonBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -128,7 +129,8 @@ public:
 private:
     void SetDefaultBitmap();
 
-    wxDECLARE_NO_COPY_CLASS(wxGenericCommandLinkButton);
+    wxGenericCommandLinkButton(const wxGenericCommandLinkButton&) = delete;
+	wxGenericCommandLinkButton& operator=(const wxGenericCommandLinkButton&) = delete;
 };
 
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)

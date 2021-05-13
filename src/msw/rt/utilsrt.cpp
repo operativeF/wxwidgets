@@ -150,7 +150,8 @@ private:
     static RTCore ms_rtcore;
     static int ms_isAvailable;
 
-    wxDECLARE_NO_COPY_CLASS(RTCore);
+    RTCore(const RTCore&) = delete;
+	RTCore& operator=(const RTCore&) = delete;
 };
 
 RTCore RTCore::ms_rtcore;

@@ -32,7 +32,8 @@ protected:
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxControlWithItems);
-    wxDECLARE_NO_COPY_CLASS(wxControlWithItems);
+    wxControlWithItems(const wxControlWithItems&) = delete;
+	wxControlWithItems& operator=(const wxControlWithItems&) = delete;
 };
 
 #endif // _WX_MOTIF_CTRLSUB_H_

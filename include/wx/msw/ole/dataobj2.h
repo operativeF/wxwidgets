@@ -50,7 +50,8 @@ private:
     // the DIB data
     void /* BITMAPINFO */ *m_data;
 
-    wxDECLARE_NO_COPY_CLASS(wxBitmapDataObject);
+    wxBitmapDataObject(const wxBitmapDataObject&) = delete;
+	wxBitmapDataObject& operator=(const wxBitmapDataObject&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -83,7 +84,8 @@ public:
         { return SetData(len, buf); }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxBitmapDataObject2);
+    wxBitmapDataObject2(const wxBitmapDataObject2&) = delete;
+	wxBitmapDataObject2& operator=(const wxBitmapDataObject2&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -111,7 +113,8 @@ public:
         { return SetData(len, buf); }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxFileDataObject);
+    wxFileDataObject(const wxFileDataObject&) = delete;
+	wxFileDataObject& operator=(const wxFileDataObject&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -139,7 +142,8 @@ private:
     // last data object we got data in
     wxDataObjectSimple *m_dataObjectLast;
 
-    wxDECLARE_NO_COPY_CLASS(wxURLDataObject);
+    wxURLDataObject(const wxURLDataObject&) = delete;
+	wxURLDataObject& operator=(const wxURLDataObject&) = delete;
 };
 
 #endif // _WX_MSW_OLE_DATAOBJ2_H

@@ -38,7 +38,8 @@ protected:
     wxWindow *m_win;
     wxFlexGridSizer *m_sizer;
 
-    wxDECLARE_NO_COPY_CLASS(GridSizerTestCase);
+    GridSizerTestCase(const GridSizerTestCase&) = delete;
+	GridSizerTestCase& operator=(const GridSizerTestCase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

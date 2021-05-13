@@ -121,7 +121,8 @@ private:
     bool m_CaseSensitive;
     bool m_WholeWords;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlSearchEngine);
+    wxHtmlSearchEngine(const wxHtmlSearchEngine&) = delete;
+	wxHtmlSearchEngine& operator=(const wxHtmlSearchEngine&) = delete;
 };
 
 
@@ -156,7 +157,8 @@ private:
     int m_MaxIndex;  // number of files we search
     // For progress bar: 100*curindex/maxindex = % complete
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlSearchStatus);
+    wxHtmlSearchStatus(const wxHtmlSearchStatus&) = delete;
+	wxHtmlSearchStatus& operator=(const wxHtmlSearchStatus&) = delete;
 };
 
 class WXDLLIMPEXP_HTML wxHtmlHelpData : public wxObject
@@ -214,7 +216,8 @@ protected:
     // Writes binary book
     bool SaveCachedBook(wxHtmlBookRecord *book, wxOutputStream *f);
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlHelpData);
+    wxHtmlHelpData(const wxHtmlHelpData&) = delete;
+	wxHtmlHelpData& operator=(const wxHtmlHelpData&) = delete;
 };
 
 #endif

@@ -186,7 +186,8 @@ private:
         DoDrawFrameControl(DFC_BUTTON, kind, win, dc, rect, flags);
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxRendererMSW);
+    wxRendererMSW(const wxRendererMSW&) = delete;
+	wxRendererMSW& operator=(const wxRendererMSW&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -332,7 +333,8 @@ private:
                          const wxRect& rect,
                          int flags);
 
-    wxDECLARE_NO_COPY_CLASS(wxRendererXP);
+    wxRendererXP(const wxRendererXP&) = delete;
+	wxRendererXP& operator=(const wxRendererXP&) = delete;
 };
 
 #endif // wxUSE_UXTHEME

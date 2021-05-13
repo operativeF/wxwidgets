@@ -87,7 +87,8 @@ protected:
 
     wxDECLARE_DYNAMIC_CLASS(wxHTTP);
     DECLARE_PROTOCOL(wxHTTP)
-    wxDECLARE_NO_COPY_CLASS(wxHTTP);
+    wxHTTP(const wxHTTP&) = delete;
+	wxHTTP& operator=(const wxHTTP&) = delete;
 };
 
 #endif // wxUSE_PROTOCOL_HTTP

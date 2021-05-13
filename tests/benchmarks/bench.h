@@ -74,7 +74,8 @@ private:
     // pointer to the next object in the linked list or NULL
     Function * const m_next;
 
-    wxDECLARE_NO_COPY_CLASS(Function);
+    Function(const Function&) = delete;
+	Function& operator=(const Function&) = delete;
 };
 
 /**

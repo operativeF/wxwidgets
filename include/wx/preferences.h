@@ -62,7 +62,8 @@ public:
     // ownership of the returned window.
     virtual wxWindow *CreateWindow(wxWindow *parent) = 0;
 
-    wxDECLARE_NO_COPY_CLASS(wxPreferencesPage);
+    wxPreferencesPage(const wxPreferencesPage&) = delete;
+	wxPreferencesPage& operator=(const wxPreferencesPage&) = delete;
 };
 
 
@@ -137,7 +138,8 @@ public:
 private:
     wxPreferencesEditorImpl* m_impl;
 
-    wxDECLARE_NO_COPY_CLASS(wxPreferencesEditor);
+    wxPreferencesEditor(const wxPreferencesEditor&) = delete;
+	wxPreferencesEditor& operator=(const wxPreferencesEditor&) = delete;
 };
 
 #endif // wxUSE_PREFERENCES_EDITOR

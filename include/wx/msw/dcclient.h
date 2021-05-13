@@ -41,7 +41,8 @@ protected:
     void InitDC();
 
     wxDECLARE_CLASS(wxWindowDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxWindowDCImpl);
+    wxWindowDCImpl(const wxWindowDCImpl&) = delete;
+	wxWindowDCImpl& operator=(const wxWindowDCImpl&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxClientDCImpl : public wxWindowDCImpl
@@ -61,7 +62,8 @@ protected:
     void InitDC();
 
     wxDECLARE_CLASS(wxClientDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxClientDCImpl);
+    wxClientDCImpl(const wxClientDCImpl&) = delete;
+	wxClientDCImpl& operator=(const wxClientDCImpl&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxPaintDCImpl : public wxClientDCImpl
@@ -86,7 +88,8 @@ protected:
     static wxPaintDCInfo *FindInCache(wxWindow* win);
 
     wxDECLARE_CLASS(wxPaintDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxPaintDCImpl);
+    wxPaintDCImpl(const wxPaintDCImpl&) = delete;
+	wxPaintDCImpl& operator=(const wxPaintDCImpl&) = delete;
 };
 
 /*
@@ -101,7 +104,8 @@ public:
     wxPaintDCEx(wxWindow *canvas, WXHDC dc);
 
     wxDECLARE_CLASS(wxPaintDCEx);
-    wxDECLARE_NO_COPY_CLASS(wxPaintDCEx);
+    wxPaintDCEx(const wxPaintDCEx&) = delete;
+	wxPaintDCEx& operator=(const wxPaintDCEx&) = delete;
 };
 
 #endif

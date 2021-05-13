@@ -84,7 +84,8 @@ protected:
     wxFileOffset OnSysTell() const override;
 
     wxDECLARE_DYNAMIC_CLASS(wxMemoryOutputStream);
-    wxDECLARE_NO_COPY_CLASS(wxMemoryOutputStream);
+    wxMemoryOutputStream(const wxMemoryOutputStream&) = delete;
+	wxMemoryOutputStream& operator=(const wxMemoryOutputStream&) = delete;
 };
 
 #endif

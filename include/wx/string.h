@@ -269,7 +269,8 @@ private:
 
     // the node belongs to a particular iterator instance, it's not copied
     // when a copy of the iterator is made
-    wxDECLARE_NO_COPY_CLASS(wxStringIteratorNode);
+    wxStringIteratorNode(const wxStringIteratorNode&) = delete;
+	wxStringIteratorNode& operator=(const wxStringIteratorNode&) = delete;
 };
 #endif // wxUSE_UNICODE_UTF8
 
@@ -3663,7 +3664,8 @@ private:
 
       // copying is disallowed as it would result in more than one pointer into
       // the same linked list
-      wxDECLARE_NO_COPY_CLASS(wxStringIteratorNodeHead);
+      wxStringIteratorNodeHead(const wxStringIteratorNodeHead&) = delete;
+	wxStringIteratorNodeHead& operator=(const wxStringIteratorNodeHead&) = delete;
   };
 
   wxStringIteratorNodeHead m_iterators;
@@ -3808,7 +3810,8 @@ private:
     wxString&         m_str;
     wxStringCharType *m_buf;
 
-    wxDECLARE_NO_COPY_CLASS(wxStringInternalBuffer);
+    wxStringInternalBuffer(const wxStringInternalBuffer&) = delete;
+	wxStringInternalBuffer& operator=(const wxStringInternalBuffer&) = delete;
 };
 
 class wxStringInternalBufferLength
@@ -3838,7 +3841,8 @@ private:
     size_t            m_len;
     bool              m_lenSet;
 
-    wxDECLARE_NO_COPY_CLASS(wxStringInternalBufferLength);
+    wxStringInternalBufferLength(const wxStringInternalBufferLength&) = delete;
+	wxStringInternalBufferLength& operator=(const wxStringInternalBufferLength&) = delete;
 };
 
 #endif // !wxUSE_STL_BASED_WXSTRING
@@ -3916,7 +3920,8 @@ public:
         this->m_str.assign(this->m_buf.data());
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxStringTypeBuffer);
+    wxStringTypeBuffer(const wxStringTypeBuffer&) = delete;
+	wxStringTypeBuffer& operator=(const wxStringTypeBuffer&) = delete;
 };
 
 template<typename T>
@@ -3932,7 +3937,8 @@ public:
         this->m_str.assign(this->m_buf.data(), this->m_len);
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxStringTypeBufferLength);
+    wxStringTypeBufferLength(const wxStringTypeBufferLength&) = delete;
+	wxStringTypeBufferLength& operator=(const wxStringTypeBufferLength&) = delete;
 };
 
 #if wxUSE_STL_BASED_WXSTRING
@@ -3945,7 +3951,8 @@ public:
     ~wxStringInternalBuffer()
         { m_str.m_impl.assign(m_buf.data()); }
 
-    wxDECLARE_NO_COPY_CLASS(wxStringInternalBuffer);
+    wxStringInternalBuffer(const wxStringInternalBuffer&) = delete;
+	wxStringInternalBuffer& operator=(const wxStringInternalBuffer&) = delete;
 };
 
 class wxStringInternalBufferLength
@@ -3960,7 +3967,8 @@ public:
         m_str.m_impl.assign(m_buf.data(), m_len);
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxStringInternalBufferLength);
+    wxStringInternalBufferLength(const wxStringInternalBufferLength&) = delete;
+	wxStringInternalBufferLength& operator=(const wxStringInternalBufferLength&) = delete;
 };
 
 #endif // wxUSE_STL_BASED_WXSTRING
@@ -4008,7 +4016,8 @@ public:
         conv.ToWChar(wbuf, wlen, m_buf);
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxUTF8StringBuffer);
+    wxUTF8StringBuffer(const wxUTF8StringBuffer&) = delete;
+	wxUTF8StringBuffer& operator=(const wxUTF8StringBuffer&) = delete;
 };
 
 class wxUTF8StringBufferLength : public wxStringTypeBufferLengthBase<char>
@@ -4029,7 +4038,8 @@ public:
         wbuf.SetLength(wlen);
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxUTF8StringBufferLength);
+    wxUTF8StringBufferLength(const wxUTF8StringBufferLength&) = delete;
+	wxUTF8StringBufferLength& operator=(const wxUTF8StringBufferLength&) = delete;
 };
 #endif // wxUSE_UNICODE_UTF8/wxUSE_UNICODE_WCHAR
 

@@ -2061,7 +2061,8 @@ protected:
     // The window whose children we're traversing.
     wxWindow* const m_win;
 
-    wxDECLARE_NO_COPY_CLASS(ValidationTraverserBase);
+    ValidationTraverserBase(const ValidationTraverserBase&) = delete;
+	ValidationTraverserBase& operator=(const ValidationTraverserBase&) = delete;
 };
 
 } // anonymous namespace
@@ -3605,7 +3606,8 @@ public:
 private:
     wxWindowBase * const m_win;
 
-    wxDECLARE_NO_COPY_CLASS(DragAcceptFilesTarget);
+    DragAcceptFilesTarget(const DragAcceptFilesTarget&) = delete;
+	DragAcceptFilesTarget& operator=(const DragAcceptFilesTarget&) = delete;
 };
 
 

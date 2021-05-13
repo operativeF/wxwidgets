@@ -169,7 +169,8 @@ private:
 
     friend class wxFontMapperPathChanger;
 
-    wxDECLARE_NO_COPY_CLASS(wxFontMapperBase);
+    wxFontMapperBase(const wxFontMapperBase&) = delete;
+	wxFontMapperBase& operator=(const wxFontMapperBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -263,7 +264,8 @@ protected:
     wxWindow *m_windowParent;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxFontMapper);
+    wxFontMapper(const wxFontMapper&) = delete;
+	wxFontMapper& operator=(const wxFontMapper&) = delete;
 };
 
 #endif // wxUSE_GUI

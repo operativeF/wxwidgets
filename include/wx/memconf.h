@@ -45,7 +45,8 @@ public:
     {
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxMemoryConfig);
+    wxMemoryConfig(const wxMemoryConfig&) = delete;
+	wxMemoryConfig& operator=(const wxMemoryConfig&) = delete;
 };
 
 #endif // wxUSE_CONFIG

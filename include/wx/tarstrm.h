@@ -199,7 +199,8 @@ private:
     wxTarHeaderRecords *m_HeaderRecs;
     wxTarHeaderRecords *m_GlobalHeaderRecs;
 
-    wxDECLARE_NO_COPY_CLASS(wxTarInputStream);
+    wxTarInputStream(const wxTarInputStream&) = delete;
+	wxTarInputStream& operator=(const wxTarInputStream&) = delete;
 };
 
 
@@ -282,7 +283,8 @@ private:
     wxString m_badfit;
     bool m_endrecWritten;
 
-    wxDECLARE_NO_COPY_CLASS(wxTarOutputStream);
+    wxTarOutputStream(const wxTarOutputStream&) = delete;
+	wxTarOutputStream& operator=(const wxTarOutputStream&) = delete;
 };
 
 

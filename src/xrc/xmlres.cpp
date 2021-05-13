@@ -122,7 +122,8 @@ public:
     wxDateTime Time;
 #endif
 
-    wxDECLARE_NO_COPY_CLASS(wxXmlResourceDataRecord);
+    wxXmlResourceDataRecord(const wxXmlResourceDataRecord&) = delete;
+	wxXmlResourceDataRecord& operator=(const wxXmlResourceDataRecord&) = delete;
 };
 
 class wxXmlResourceDataRecords : public std::vector<wxXmlResourceDataRecord*>

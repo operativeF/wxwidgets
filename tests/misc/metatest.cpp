@@ -39,7 +39,8 @@ private:
     void ImplicitConversion();
     void MinMax();
 
-    wxDECLARE_NO_COPY_CLASS(MetaProgrammingTestCase);
+    MetaProgrammingTestCase(const MetaProgrammingTestCase&) = delete;
+	MetaProgrammingTestCase& operator=(const MetaProgrammingTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

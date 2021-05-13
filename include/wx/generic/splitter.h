@@ -303,7 +303,8 @@ protected:
 private:
     wxDECLARE_DYNAMIC_CLASS(wxSplitterWindow);
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxSplitterWindow);
+    wxSplitterWindow(const wxSplitterWindow&) = delete;
+	wxSplitterWindow& operator=(const wxSplitterWindow&) = delete;
 };
 
 // ----------------------------------------------------------------------------

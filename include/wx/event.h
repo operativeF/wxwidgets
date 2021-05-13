@@ -1160,7 +1160,8 @@ private:
     wxEvent& m_event;
     int m_propagationLevelOld;
 
-    wxDECLARE_NO_COPY_CLASS(wxPropagationDisabler);
+    wxPropagationDisabler(const wxPropagationDisabler&) = delete;
+	wxPropagationDisabler& operator=(const wxPropagationDisabler&) = delete;
 };
 
 /*
@@ -1194,7 +1195,8 @@ private:
     wxEvent& m_event;
     wxEvtHandler* const m_propagatedFromOld;
 
-    wxDECLARE_NO_COPY_CLASS(wxPropagateOnce);
+    wxPropagateOnce(const wxPropagateOnce&) = delete;
+	wxPropagateOnce& operator=(const wxPropagateOnce&) = delete;
 };
 
 // A helper object used to temporarily make wxEvent::ShouldProcessOnlyIn()
@@ -1218,7 +1220,8 @@ private:
     wxEvent& m_event;
     wxEvtHandler * const m_handlerToProcessOnlyInOld;
 
-    wxDECLARE_NO_COPY_CLASS(wxEventProcessInHandlerOnly);
+    wxEventProcessInHandlerOnly(const wxEventProcessInHandlerOnly&) = delete;
+	wxEventProcessInHandlerOnly& operator=(const wxEventProcessInHandlerOnly&) = delete;
 };
 
 
@@ -3574,7 +3577,8 @@ protected:
     wxEventHashTable* m_previous;
     wxEventHashTable* m_next;
 
-    wxDECLARE_NO_COPY_CLASS(wxEventHashTable);
+    wxEventHashTable(const wxEventHashTable&) = delete;
+	wxEventHashTable& operator=(const wxEventHashTable&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -4155,7 +4159,8 @@ protected:
     wxArrayInt m_eventsToBlock;
     wxWindow *m_window;
 
-    wxDECLARE_NO_COPY_CLASS(wxEventBlocker);
+    wxEventBlocker(const wxEventBlocker&) = delete;
+	wxEventBlocker& operator=(const wxEventBlocker&) = delete;
 };
 
 typedef void (wxEvtHandler::*wxCommandEventFunction)(wxCommandEvent&);

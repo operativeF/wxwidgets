@@ -186,7 +186,8 @@ private:
     friend class wxWindowDCImpl; // for PaintOverlays
 
     wxDECLARE_DYNAMIC_CLASS(wxWindowDFB);
-    wxDECLARE_NO_COPY_CLASS(wxWindowDFB);
+    wxWindowDFB(const wxWindowDFB&) = delete;
+	wxWindowDFB& operator=(const wxWindowDFB&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

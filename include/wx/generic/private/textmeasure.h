@@ -33,7 +33,8 @@ protected:
                                          wxArrayInt& widths,
                                          double scaleX) override;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextMeasure);
+    wxTextMeasure(const wxTextMeasure&) = delete;
+	wxTextMeasure& operator=(const wxTextMeasure&) = delete;
 };
 
 #endif // _WX_GENERIC_PRIVATE_TEXTMEASURE_H_

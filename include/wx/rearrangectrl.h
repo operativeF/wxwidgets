@@ -117,7 +117,8 @@ private:
 
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxRearrangeList);
+    wxRearrangeList(const wxRearrangeList&) = delete;
+	wxRearrangeList& operator=(const wxRearrangeList&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -174,7 +175,8 @@ private:
 
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxRearrangeCtrl);
+    wxRearrangeCtrl(const wxRearrangeCtrl&) = delete;
+	wxRearrangeCtrl& operator=(const wxRearrangeCtrl&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -232,7 +234,8 @@ private:
 
     wxRearrangeCtrl *m_ctrl;
 
-    wxDECLARE_NO_COPY_CLASS(wxRearrangeDialog);
+    wxRearrangeDialog(const wxRearrangeDialog&) = delete;
+	wxRearrangeDialog& operator=(const wxRearrangeDialog&) = delete;
 };
 
 #endif // wxUSE_REARRANGECTRL

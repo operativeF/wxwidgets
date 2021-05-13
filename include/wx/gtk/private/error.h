@@ -51,7 +51,8 @@ public:
 private:
     GError* m_error;
 
-    wxDECLARE_NO_COPY_CLASS(wxGtkError);
+    wxGtkError(const wxGtkError&) = delete;
+	wxGtkError& operator=(const wxGtkError&) = delete;
 };
 
 #endif // _WX_GTK_PRIVATE_ERROR_H_

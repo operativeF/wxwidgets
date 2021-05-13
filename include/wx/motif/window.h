@@ -298,7 +298,8 @@ private:
     void Init();
 
     wxDECLARE_DYNAMIC_CLASS(wxWindow);
-    wxDECLARE_NO_COPY_CLASS(wxWindow);
+    wxWindow(const wxWindow&) = delete;
+	wxWindow& operator=(const wxWindow&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

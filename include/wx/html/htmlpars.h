@@ -190,7 +190,8 @@ protected:
     wxHtmlTagHandlersSet m_HandlersSet;
     wxHtmlTagHandlersHash m_HandlersHash;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlParser);
+    wxHtmlParser(const wxHtmlParser&) = delete;
+	wxHtmlParser& operator=(const wxHtmlParser&) = delete;
 
     // class for opening files (file system)
     wxFileSystem *m_FS;
@@ -256,7 +257,8 @@ protected:
 
     wxHtmlParser *m_Parser;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlTagHandler);
+    wxHtmlTagHandler(const wxHtmlTagHandler&) = delete;
+	wxHtmlTagHandler& operator=(const wxHtmlTagHandler&) = delete;
 };
 
 
@@ -298,7 +300,8 @@ protected:
     wxFontEncoding m_encoding;
 #endif
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlEntitiesParser);
+    wxHtmlEntitiesParser(const wxHtmlEntitiesParser&) = delete;
+	wxHtmlEntitiesParser& operator=(const wxHtmlEntitiesParser&) = delete;
 };
 
 

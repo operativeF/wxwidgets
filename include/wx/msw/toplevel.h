@@ -197,7 +197,8 @@ private:
     wxMenu *m_menuSystem;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxTopLevelWindowMSW);
+    wxTopLevelWindowMSW(const wxTopLevelWindowMSW&) = delete;
+	wxTopLevelWindowMSW& operator=(const wxTopLevelWindowMSW&) = delete;
 };
 
 #endif // _WX_MSW_TOPLEVEL_H_

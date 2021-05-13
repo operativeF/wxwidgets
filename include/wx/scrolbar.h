@@ -59,7 +59,8 @@ public:
     bool IsNeeded() const { return GetRange() > GetThumbSize(); }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxScrollBarBase);
+    wxScrollBarBase(const wxScrollBarBase&) = delete;
+	wxScrollBarBase& operator=(const wxScrollBarBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

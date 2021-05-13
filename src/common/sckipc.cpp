@@ -124,7 +124,8 @@ private:
     void HandleDisconnect(wxTCPConnection *connection);
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxTCPEventHandler);
+    wxTCPEventHandler(const wxTCPEventHandler&) = delete;
+	wxTCPEventHandler& operator=(const wxTCPEventHandler&) = delete;
 };
 
 enum
@@ -159,7 +160,8 @@ private:
     static wxTCPEventHandler *ms_handler;
 
     wxDECLARE_DYNAMIC_CLASS(wxTCPEventHandlerModule);
-    wxDECLARE_NO_COPY_CLASS(wxTCPEventHandlerModule);
+    wxTCPEventHandlerModule(const wxTCPEventHandlerModule&) = delete;
+	wxTCPEventHandlerModule& operator=(const wxTCPEventHandlerModule&) = delete;
 };
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxTCPEventHandlerModule, wxModule);
@@ -280,7 +282,8 @@ private:
     wxDataInputStream  m_dataIn;
     wxDataOutputStream m_dataOut;
 
-    wxDECLARE_NO_COPY_CLASS(wxIPCSocketStreams);
+    wxIPCSocketStreams(const wxIPCSocketStreams&) = delete;
+	wxIPCSocketStreams& operator=(const wxIPCSocketStreams&) = delete;
 };
 
 namespace
@@ -337,7 +340,8 @@ public:
 private:
     wxIPCSocketStreams& m_streams;
 
-    wxDECLARE_NO_COPY_CLASS(IPCOutput);
+    IPCOutput(const IPCOutput&) = delete;
+	IPCOutput& operator=(const IPCOutput&) = delete;
 };
 
 } // anonymous namespace

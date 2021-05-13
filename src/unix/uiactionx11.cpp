@@ -113,7 +113,8 @@ private:
     // Time of the last simulated event.
     static wxMilliClock_t ms_lastEvent;
 
-    wxDECLARE_NO_COPY_CLASS(wxXSync);
+    wxXSync(const wxXSync&) = delete;
+	wxXSync& operator=(const wxXSync&) = delete;
 };
 
 /* static */
@@ -200,7 +201,8 @@ private:
     virtual bool DoX11MouseMove(long x, long y) = 0;
     virtual bool DoX11Key(KeyCode xkeycode, int modifiers, bool isDown) = 0;
 
-    wxDECLARE_NO_COPY_CLASS(wxUIActionSimulatorX11Impl);
+    wxUIActionSimulatorX11Impl(const wxUIActionSimulatorX11Impl&) = delete;
+	wxUIActionSimulatorX11Impl& operator=(const wxUIActionSimulatorX11Impl&) = delete;
 };
 
 bool wxUIActionSimulatorX11Impl::SendButtonEvent(int button, bool isDown)
@@ -244,7 +246,8 @@ private:
     bool DoX11MouseMove(long x, long y) override;
     bool DoX11Key(KeyCode xkeycode, int modifiers, bool isDown) override;
 
-    wxDECLARE_NO_COPY_CLASS(wxUIActionSimulatorPlainX11Impl);
+    wxUIActionSimulatorPlainX11Impl(const wxUIActionSimulatorPlainX11Impl&) = delete;
+	wxUIActionSimulatorPlainX11Impl& operator=(const wxUIActionSimulatorPlainX11Impl&) = delete;
 };
 
 bool wxUIActionSimulatorPlainX11Impl::DoX11Button(int xbutton, bool isDown)
@@ -358,7 +361,8 @@ private:
     bool DoX11MouseMove(long x, long y) override;
     bool DoX11Key(KeyCode xkeycode, int modifiers, bool isDown) override;
 
-    wxDECLARE_NO_COPY_CLASS(wxUIActionSimulatorXTestImpl);
+    wxUIActionSimulatorXTestImpl(const wxUIActionSimulatorXTestImpl&) = delete;
+	wxUIActionSimulatorXTestImpl& operator=(const wxUIActionSimulatorXTestImpl&) = delete;
 };
 
 bool wxUIActionSimulatorXTestImpl::DoX11Button(int xbutton, bool isDown)

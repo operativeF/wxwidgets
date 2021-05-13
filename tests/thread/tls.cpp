@@ -89,7 +89,8 @@ private:
     void TestInt();
     void TestStruct();
 
-    wxDECLARE_NO_COPY_CLASS(TLSTestCase);
+    TLSTestCase(const TLSTestCase&) = delete;
+	TLSTestCase& operator=(const TLSTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

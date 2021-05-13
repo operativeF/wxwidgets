@@ -57,7 +57,8 @@ public:
     void InitDialog() override;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxPanelBase);
+    wxPanelBase(const wxPanelBase&) = delete;
+	wxPanelBase& operator=(const wxPanelBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

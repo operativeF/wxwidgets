@@ -46,7 +46,8 @@ private:
 
     wxListCtrl *m_list;
 
-    wxDECLARE_NO_COPY_CLASS(VirtListCtrlTestCase);
+    VirtListCtrlTestCase(const VirtListCtrlTestCase&) = delete;
+	VirtListCtrlTestCase& operator=(const VirtListCtrlTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

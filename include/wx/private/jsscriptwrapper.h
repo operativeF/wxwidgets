@@ -190,7 +190,8 @@ private:
     wxString m_escapedCode;
     wxString m_outputVarName;
 
-    wxDECLARE_NO_COPY_CLASS(wxJSScriptWrapper);
+    wxJSScriptWrapper(const wxJSScriptWrapper&) = delete;
+	wxJSScriptWrapper& operator=(const wxJSScriptWrapper&) = delete;
 };
 
 #endif // _WX_PRIVATE_JSSCRIPTWRAPPER_H_

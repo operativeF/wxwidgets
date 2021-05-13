@@ -178,7 +178,8 @@ protected:
 
     void OnTextChange(wxCommandEvent& event);
 
-    wxDECLARE_NO_COPY_CLASS(wxTextDocument);
+    wxTextDocument(const wxTextDocument&) = delete;
+	wxTextDocument& operator=(const wxTextDocument&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxTextDocument);
 };
 
@@ -192,7 +193,8 @@ public:
     TextEditDocument() : wxTextDocument() { }
     wxTextCtrl* GetTextCtrl() const override;
 
-    wxDECLARE_NO_COPY_CLASS(TextEditDocument);
+    TextEditDocument(const TextEditDocument&) = delete;
+	TextEditDocument& operator=(const TextEditDocument&) = delete;
     wxDECLARE_DYNAMIC_CLASS(TextEditDocument);
 };
 
@@ -218,7 +220,8 @@ protected:
 private:
     wxImage m_image;
 
-    wxDECLARE_NO_COPY_CLASS(ImageDocument);
+    ImageDocument(const ImageDocument&) = delete;
+	ImageDocument& operator=(const ImageDocument&) = delete;
     wxDECLARE_DYNAMIC_CLASS(ImageDocument);
 };
 
@@ -243,7 +246,8 @@ private:
     wxBitmapType m_type;
     bool m_hasAlpha;
 
-    wxDECLARE_NO_COPY_CLASS(ImageDetailsDocument);
+    ImageDetailsDocument(const ImageDetailsDocument&) = delete;
+	ImageDetailsDocument& operator=(const ImageDetailsDocument&) = delete;
 };
 
 #endif // _WX_SAMPLES_DOCVIEW_DOC_H_

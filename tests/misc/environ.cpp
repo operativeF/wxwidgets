@@ -32,7 +32,8 @@ private:
     void GetSet();
     void Path();
 
-    wxDECLARE_NO_COPY_CLASS(EnvTestCase);
+    EnvTestCase(const EnvTestCase&) = delete;
+	EnvTestCase& operator=(const EnvTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

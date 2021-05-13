@@ -360,7 +360,8 @@ private:
 
     static wxLanguageInfoArray *ms_languagesDB;
 
-    wxDECLARE_NO_COPY_CLASS(wxLocale);
+    wxLocale(const wxLocale&) = delete;
+	wxLocale& operator=(const wxLocale&) = delete;
 };
 
 // ----------------------------------------------------------------------------

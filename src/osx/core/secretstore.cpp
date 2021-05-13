@@ -66,7 +66,8 @@ private:
     UInt32 m_size;
     void *m_data;
 
-    wxDECLARE_NO_COPY_CLASS(PasswordData);
+    PasswordData(const PasswordData&) = delete;
+	PasswordData& operator=(const PasswordData&) = delete;
 };
 
 // Implement wxSecretStore API using OS X Keychain Services.

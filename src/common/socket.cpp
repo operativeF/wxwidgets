@@ -89,7 +89,8 @@
             const wxSigHandler_t m_handler;
             const int m_sig;
 
-            wxDECLARE_NO_COPY_CLASS(IgnoreSignal);
+            IgnoreSignal(const IgnoreSignal&) = delete;
+	IgnoreSignal& operator=(const IgnoreSignal&) = delete;
         };
     } // anonymous namespace
 
@@ -155,7 +156,8 @@ public:
 public:
     wxSocketState()  {}
 
-    wxDECLARE_NO_COPY_CLASS(wxSocketState);
+    wxSocketState(const wxSocketState&) = delete;
+	wxSocketState& operator=(const wxSocketState&) = delete;
 };
 
 // wxSocketWaitModeChanger: temporarily change the socket flags affecting its
@@ -193,7 +195,8 @@ private:
     wxSocketBase * const m_socket;
     const int m_oldflags;
 
-    wxDECLARE_NO_COPY_CLASS(wxSocketWaitModeChanger);
+    wxSocketWaitModeChanger(const wxSocketWaitModeChanger&) = delete;
+	wxSocketWaitModeChanger& operator=(const wxSocketWaitModeChanger&) = delete;
 };
 
 // wxSocketRead/WriteGuard are instantiated before starting reading
@@ -223,7 +226,8 @@ public:
 private:
     wxSocketBase * const m_socket;
 
-    wxDECLARE_NO_COPY_CLASS(wxSocketReadGuard);
+    wxSocketReadGuard(const wxSocketReadGuard&) = delete;
+	wxSocketReadGuard& operator=(const wxSocketReadGuard&) = delete;
 };
 
 class wxSocketWriteGuard
@@ -249,7 +253,8 @@ public:
 private:
     wxSocketBase * const m_socket;
 
-    wxDECLARE_NO_COPY_CLASS(wxSocketWriteGuard);
+    wxSocketWriteGuard(const wxSocketWriteGuard&) = delete;
+	wxSocketWriteGuard& operator=(const wxSocketWriteGuard&) = delete;
 };
 
 // ============================================================================

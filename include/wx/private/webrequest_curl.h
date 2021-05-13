@@ -37,7 +37,8 @@ public:
 private:
     wxWebRequestCURL& m_request;
 
-    wxDECLARE_NO_COPY_CLASS(wxWebAuthChallengeCURL);
+    wxWebAuthChallengeCURL(const wxWebAuthChallengeCURL&) = delete;
+	wxWebAuthChallengeCURL& operator=(const wxWebAuthChallengeCURL&) = delete;
 };
 
 class wxWebRequestCURL : public wxWebRequestImpl
@@ -93,7 +94,8 @@ private:
 
     void DestroyHeaderList();
 
-    wxDECLARE_NO_COPY_CLASS(wxWebRequestCURL);
+    wxWebRequestCURL(const wxWebRequestCURL&) = delete;
+	wxWebRequestCURL& operator=(const wxWebRequestCURL&) = delete;
 };
 
 class wxWebResponseCURL : public wxWebResponseImpl
@@ -125,7 +127,8 @@ private:
     CURL* GetHandle() const
     { return static_cast<wxWebRequestCURL&>(m_request).GetHandle(); }
 
-    wxDECLARE_NO_COPY_CLASS(wxWebResponseCURL);
+    wxWebResponseCURL(const wxWebResponseCURL&) = delete;
+	wxWebResponseCURL& operator=(const wxWebResponseCURL&) = delete;
 };
 
 class wxWebSessionCURL : public wxWebSessionImpl, public wxEvtHandler
@@ -187,7 +190,8 @@ private:
     static int ms_activeSessions;
     static unsigned int ms_runtimeVersion;
 
-    wxDECLARE_NO_COPY_CLASS(wxWebSessionCURL);
+    wxWebSessionCURL(const wxWebSessionCURL&) = delete;
+	wxWebSessionCURL& operator=(const wxWebSessionCURL&) = delete;
 };
 
 class wxWebSessionFactoryCURL : public wxWebSessionFactory

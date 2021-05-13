@@ -36,7 +36,8 @@ private:
     // called from different threads.
     wxAtomicInt m_count;
 
-    wxDECLARE_NO_COPY_CLASS(wxRefCounterMT);
+    wxRefCounterMT(const wxRefCounterMT&) = delete;
+	wxRefCounterMT& operator=(const wxRefCounterMT&) = delete;
 };
 
 #endif // _WX_PRIVATE_REFCOUNTERMT_H_

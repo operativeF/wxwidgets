@@ -115,7 +115,8 @@ private:
     const size_t m_column;
     int m_width;
 
-    wxDECLARE_NO_COPY_CLASS(wxMaxWidthCalculatorBase);
+    wxMaxWidthCalculatorBase(const wxMaxWidthCalculatorBase&) = delete;
+	wxMaxWidthCalculatorBase& operator=(const wxMaxWidthCalculatorBase&) = delete;
 };
 
 #endif // wxUSE_DATAVIEWCTRL || wxUSE_LISTCTRL

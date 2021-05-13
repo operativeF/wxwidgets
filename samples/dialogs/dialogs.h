@@ -256,7 +256,8 @@ private:
     wxStaticText *m_labelResult;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(TestMessageBoxDialog);
+    TestMessageBoxDialog(const TestMessageBoxDialog&) = delete;
+	TestMessageBoxDialog& operator=(const TestMessageBoxDialog&) = delete;
 };
 
 #if wxUSE_RICHMSGDLG

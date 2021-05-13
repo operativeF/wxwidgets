@@ -135,7 +135,8 @@ private:
     // This class has no public ctors, use Get() instead.
     wxUIActionSimulatorOSXImpl() { }
 
-    wxDECLARE_NO_COPY_CLASS(wxUIActionSimulatorOSXImpl);
+    wxUIActionSimulatorOSXImpl(const wxUIActionSimulatorOSXImpl&) = delete;
+	wxUIActionSimulatorOSXImpl& operator=(const wxUIActionSimulatorOSXImpl&) = delete;
 };
 
 } // anonymous namespace

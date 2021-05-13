@@ -72,7 +72,8 @@ private:
     static wxCURHandler sm_handler;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxANIDecoder);
+    wxANIDecoder(const wxANIDecoder&) = delete;
+	wxANIDecoder& operator=(const wxANIDecoder&) = delete;
 };
 
 

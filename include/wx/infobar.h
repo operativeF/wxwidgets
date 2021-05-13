@@ -52,7 +52,8 @@ public:
     virtual bool HasButtonId(wxWindowID btnid) const = 0;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxInfoBarBase);
+    wxInfoBarBase(const wxInfoBarBase&) = delete;
+	wxInfoBarBase& operator=(const wxInfoBarBase&) = delete;
 };
 
 // currently only GTK+ has a native implementation

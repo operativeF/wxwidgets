@@ -132,7 +132,8 @@ private:
     int m_effectDuration;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxInfoBarGeneric);
+    wxInfoBarGeneric(const wxInfoBarGeneric&) = delete;
+	wxInfoBarGeneric& operator=(const wxInfoBarGeneric&) = delete;
 };
 
 #endif // _WX_GENERIC_INFOBAR_H_

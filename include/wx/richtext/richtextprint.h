@@ -149,7 +149,8 @@ private:
 
     wxRichTextHeaderFooterData  m_headerFooterData;
 
-    wxDECLARE_NO_COPY_CLASS(wxRichTextPrintout);
+    wxRichTextPrintout(const wxRichTextPrintout&) = delete;
+	wxRichTextPrintout& operator=(const wxRichTextPrintout&) = delete;
 };
 
 /*
@@ -242,7 +243,8 @@ private:
     wxRichTextBuffer*           m_richTextBufferPrinting;
     wxRect                      m_previewRect;
 
-    wxDECLARE_NO_COPY_CLASS(wxRichTextPrinting);
+    wxRichTextPrinting(const wxRichTextPrinting&) = delete;
+	wxRichTextPrinting& operator=(const wxRichTextPrinting&) = delete;
 };
 
 #endif  // wxUSE_RICHTEXT & wxUSE_PRINTING_ARCHITECTURE

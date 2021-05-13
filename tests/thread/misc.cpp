@@ -220,7 +220,8 @@ private:
     void TestThreadRun();
     void TestThreadConditions();
 
-    wxDECLARE_NO_COPY_CLASS(MiscThreadTestCase);
+    MiscThreadTestCase(const MiscThreadTestCase&) = delete;
+	MiscThreadTestCase& operator=(const MiscThreadTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

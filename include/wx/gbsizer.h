@@ -196,7 +196,8 @@ protected:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGBSizerItem);
-    wxDECLARE_NO_COPY_CLASS(wxGBSizerItem);
+    wxGBSizerItem(const wxGBSizerItem&) = delete;
+	wxGBSizerItem& operator=(const wxGBSizerItem&) = delete;
 };
 
 
@@ -334,7 +335,8 @@ protected:
 private:
 
     wxDECLARE_CLASS(wxGridBagSizer);
-    wxDECLARE_NO_COPY_CLASS(wxGridBagSizer);
+    wxGridBagSizer(const wxGridBagSizer&) = delete;
+	wxGridBagSizer& operator=(const wxGridBagSizer&) = delete;
 };
 
 //---------------------------------------------------------------------------

@@ -44,7 +44,8 @@ public:
     static wxSize GetDefaultSize(wxWindow* win = NULL);
 
 protected:
-    wxDECLARE_NO_COPY_CLASS(wxButtonBase);
+    wxButtonBase(const wxButtonBase&) = delete;
+	wxButtonBase& operator=(const wxButtonBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

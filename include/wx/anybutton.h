@@ -172,7 +172,8 @@ protected:
     virtual void DoSetAuthNeeded(bool WXUNUSED(show)) { }
 
 
-    wxDECLARE_NO_COPY_CLASS(wxAnyButtonBase);
+    wxAnyButtonBase(const wxAnyButtonBase&) = delete;
+	wxAnyButtonBase& operator=(const wxAnyButtonBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

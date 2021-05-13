@@ -64,7 +64,8 @@ private:
     // the text we show
     wxTextCtrl *m_text;
 
-    wxDECLARE_NO_COPY_CLASS(wxDumpPreviewDlg);
+    wxDumpPreviewDlg(const wxDumpPreviewDlg&) = delete;
+	wxDumpPreviewDlg& operator=(const wxDumpPreviewDlg&) = delete;
 };
 
 wxDumpPreviewDlg::wxDumpPreviewDlg(wxWindow *parent,
@@ -139,7 +140,8 @@ private:
 #endif // wxUSE_FILEDLG
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxDumpOpenExternalDlg);
+    wxDumpOpenExternalDlg(const wxDumpOpenExternalDlg&) = delete;
+	wxDumpOpenExternalDlg& operator=(const wxDumpOpenExternalDlg&) = delete;
 };
 
 wxBEGIN_EVENT_TABLE(wxDumpOpenExternalDlg, wxDialog)
@@ -277,7 +279,8 @@ private:
     wxArrayString m_files;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxDebugReportDialog);
+    wxDebugReportDialog(const wxDebugReportDialog&) = delete;
+	wxDebugReportDialog& operator=(const wxDebugReportDialog&) = delete;
 };
 
 // ============================================================================

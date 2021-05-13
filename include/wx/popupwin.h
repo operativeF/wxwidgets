@@ -55,7 +55,8 @@ public:
 
     bool IsTopLevel() const override { return true; }
 
-    wxDECLARE_NO_COPY_CLASS(wxPopupWindowBase);
+    wxPopupWindowBase(const wxPopupWindowBase&) = delete;
+	wxPopupWindowBase& operator=(const wxPopupWindowBase&) = delete;
 };
 
 
@@ -151,7 +152,8 @@ private:
     void DismissOnDeactivate();
 
     wxDECLARE_DYNAMIC_CLASS(wxPopupTransientWindow);
-    wxDECLARE_NO_COPY_CLASS(wxPopupTransientWindow);
+    wxPopupTransientWindow(const wxPopupTransientWindow&) = delete;
+	wxPopupTransientWindow& operator=(const wxPopupTransientWindow&) = delete;
 };
 
 #else // !__WXMSW__
@@ -207,7 +209,8 @@ protected:
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxPopupTransientWindow);
-    wxDECLARE_NO_COPY_CLASS(wxPopupTransientWindow);
+    wxPopupTransientWindow(const wxPopupTransientWindow&) = delete;
+	wxPopupTransientWindow& operator=(const wxPopupTransientWindow&) = delete;
 };
 
 #endif // __WXMSW__/!__WXMSW__

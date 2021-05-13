@@ -152,7 +152,8 @@ protected:
     bool m_deleteContents;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxHashTableBase);
+    wxHashTableBase(const wxHashTableBase&) = delete;
+	wxHashTableBase& operator=(const wxHashTableBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -278,7 +279,8 @@ private:
         void DoDeleteContents( wxHashTableBase_Node* node ) override\
             { delete (eltype*)node->GetData(); }                              \
                                                                               \
-        wxDECLARE_NO_COPY_CLASS(hashclass);                                   \
+        hashclass(const hashclass&) = delete;                                 \
+        hashclass& operator=(const hashclass&) = delete;                      \
     }
 
 

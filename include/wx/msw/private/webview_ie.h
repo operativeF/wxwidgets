@@ -70,7 +70,8 @@ public:
     //Toggles control features see INTERNETFEATURELIST for values.
     bool EnableControlFeature(long flag, bool enable = true);
 
-    wxDECLARE_NO_COPY_CLASS(wxWebViewIEImpl);
+    wxWebViewIEImpl(const wxWebViewIEImpl&) = delete;
+	wxWebViewIEImpl& operator=(const wxWebViewIEImpl&) = delete;
 };
 
 class VirtualProtocol : public wxIInternetProtocol, public wxIInternetProtocolInfo

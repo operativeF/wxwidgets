@@ -46,7 +46,8 @@ public:
 private:
     wxWindow *m_win;
 
-    wxDECLARE_NO_COPY_CLASS(wxWindowUpdateLocker);
+    wxWindowUpdateLocker(const wxWindowUpdateLocker&) = delete;
+	wxWindowUpdateLocker& operator=(const wxWindowUpdateLocker&) = delete;
 };
 
 #endif // _WX_WUPDLOCK_H_

@@ -92,7 +92,8 @@ private:
 
 
     wxDECLARE_DYNAMIC_CLASS(wxCalendarCtrl);
-    wxDECLARE_NO_COPY_CLASS(wxCalendarCtrl);
+    wxCalendarCtrl(const wxCalendarCtrl&) = delete;
+	wxCalendarCtrl& operator=(const wxCalendarCtrl&) = delete;
 };
 
 #endif // _WX_MSW_CALCTRL_H_

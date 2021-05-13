@@ -42,7 +42,8 @@ class wxHtmlLineCell : public wxHtmlCell
         // Should we draw 3-D shading or not
       bool m_HasShading;
 
-      wxDECLARE_NO_COPY_CLASS(wxHtmlLineCell);
+      wxHtmlLineCell(const wxHtmlLineCell&) = delete;
+	wxHtmlLineCell& operator=(const wxHtmlLineCell&) = delete;
 };
 
 

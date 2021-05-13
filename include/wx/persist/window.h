@@ -55,7 +55,8 @@ private:
         }
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxPersistentWindowBase);
+    wxPersistentWindowBase(const wxPersistentWindowBase&) = delete;
+	wxPersistentWindowBase& operator=(const wxPersistentWindowBase&) = delete;
 };
 
 template <class T>

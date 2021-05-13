@@ -43,7 +43,8 @@ private:
     wxWebRequestURLSession& m_request;
     WX_NSURLCredential m_cred = NULL;
 
-    wxDECLARE_NO_COPY_CLASS(wxWebAuthChallengeURLSession);
+    wxWebAuthChallengeURLSession(const wxWebAuthChallengeURLSession&) = delete;
+	wxWebAuthChallengeURLSession& operator=(const wxWebAuthChallengeURLSession&) = delete;
 };
 
 class wxWebResponseURLSession : public wxWebResponseImpl
@@ -70,7 +71,8 @@ public:
 private:
     WX_NSURLSessionTask m_task;
 
-    wxDECLARE_NO_COPY_CLASS(wxWebResponseURLSession);
+    wxWebResponseURLSession(const wxWebResponseURLSession&) = delete;
+	wxWebResponseURLSession& operator=(const wxWebResponseURLSession&) = delete;
 };
 
 class wxWebRequestURLSession : public wxWebRequestImpl
@@ -126,7 +128,8 @@ private:
     wxObjectDataPtr<wxWebResponseURLSession> m_response;
     wxObjectDataPtr<wxWebAuthChallengeURLSession> m_authChallenge;
 
-    wxDECLARE_NO_COPY_CLASS(wxWebRequestURLSession);
+    wxWebRequestURLSession(const wxWebRequestURLSession&) = delete;
+	wxWebRequestURLSession& operator=(const wxWebRequestURLSession&) = delete;
 };
 
 class wxWebSessionURLSession : public wxWebSessionImpl
@@ -157,7 +160,8 @@ private:
     WX_NSURLSession m_session;
     WX_wxWebSessionDelegate m_delegate;
 
-    wxDECLARE_NO_COPY_CLASS(wxWebSessionURLSession);
+    wxWebSessionURLSession(const wxWebSessionURLSession&) = delete;
+	wxWebSessionURLSession& operator=(const wxWebSessionURLSession&) = delete;
 };
 
 class wxWebSessionFactoryURLSession : public wxWebSessionFactory

@@ -42,7 +42,8 @@ private:
     GtkWidgetPath* const m_path;
     const int m_scale;
 
-    wxDECLARE_NO_COPY_CLASS(wxGtkStyleContext);
+    wxGtkStyleContext(const wxGtkStyleContext&) = delete;
+	wxGtkStyleContext& operator=(const wxGtkStyleContext&) = delete;
 };
 
 #endif // __WXGTK3__

@@ -27,7 +27,8 @@ private:
     Private* m_priv;
 
     wxDECLARE_DYNAMIC_CLASS(wxTaskBarIcon);
-    wxDECLARE_NO_COPY_CLASS(wxTaskBarIcon);
+    wxTaskBarIcon(const wxTaskBarIcon&) = delete;
+	wxTaskBarIcon& operator=(const wxTaskBarIcon&) = delete;
 };
 
 #endif // _WX_GTK_TASKBARICON_H_

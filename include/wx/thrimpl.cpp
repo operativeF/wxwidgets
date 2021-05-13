@@ -100,7 +100,8 @@ private:
     wxMutex& m_mutex;
     wxSemaphore m_semaphore;
 
-    wxDECLARE_NO_COPY_CLASS(wxConditionInternal);
+    wxConditionInternal(const wxConditionInternal&) = delete;
+	wxConditionInternal& operator=(const wxConditionInternal&) = delete;
 };
 
 wxConditionInternal::wxConditionInternal(wxMutex& mutex)

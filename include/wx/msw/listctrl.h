@@ -455,7 +455,8 @@ private:
 
     wxDECLARE_DYNAMIC_CLASS(wxListCtrl);
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxListCtrl);
+    wxListCtrl(const wxListCtrl&) = delete;
+	wxListCtrl& operator=(const wxListCtrl&) = delete;
 };
 
 #endif // _WX_LISTCTRL_H_

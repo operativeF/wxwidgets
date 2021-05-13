@@ -96,7 +96,8 @@ private:
 
     wxDECLARE_DYNAMIC_CLASS(wxStaticBitmap);
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxStaticBitmap);
+    wxStaticBitmap(const wxStaticBitmap&) = delete;
+	wxStaticBitmap& operator=(const wxStaticBitmap&) = delete;
 };
 
 #endif

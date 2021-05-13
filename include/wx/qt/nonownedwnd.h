@@ -24,7 +24,8 @@ protected:
     bool DoSetPathShape(const wxGraphicsPath& path) override;
 #endif // wxUSE_GRAPHICS_CONTEXT
 
-    wxDECLARE_NO_COPY_CLASS(wxNonOwnedWindow);
+    wxNonOwnedWindow(const wxNonOwnedWindow&) = delete;
+	wxNonOwnedWindow& operator=(const wxNonOwnedWindow&) = delete;
 };
 
 #endif // _WX_QT_NONOWNEDWND_H_

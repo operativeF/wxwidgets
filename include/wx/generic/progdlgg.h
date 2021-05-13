@@ -226,7 +226,8 @@ private:
 
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxGenericProgressDialog);
+    wxGenericProgressDialog(const wxGenericProgressDialog&) = delete;
+	wxGenericProgressDialog& operator=(const wxGenericProgressDialog&) = delete;
 };
 
 #endif // __PROGDLGH_G__

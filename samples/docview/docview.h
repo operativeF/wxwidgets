@@ -87,7 +87,8 @@ private:
     wxMenu *m_menuEdit;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(MyApp);
+    MyApp(const MyApp&) = delete;
+	MyApp& operator=(const MyApp&) = delete;
 };
 
 wxDECLARE_APP(MyApp);

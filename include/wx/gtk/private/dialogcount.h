@@ -42,7 +42,8 @@ public:
     }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxOpenModalDialogLocker);
+    wxOpenModalDialogLocker(const wxOpenModalDialogLocker&) = delete;
+	wxOpenModalDialogLocker& operator=(const wxOpenModalDialogLocker&) = delete;
 };
 
 #endif // _WX_GTK_PRIVATE_DIALOGCOUNT_H_

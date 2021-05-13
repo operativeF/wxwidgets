@@ -38,7 +38,8 @@ public:
 private:
     const wxLogLevel m_levelOld;
 
-    wxDECLARE_NO_COPY_CLASS(LogLevelSetter);
+    LogLevelSetter(const LogLevelSetter&) = delete;
+	LogLevelSetter& operator=(const LogLevelSetter&) = delete;
 };
 
 BENCHMARK_FUNC(LogDebugDisabled)

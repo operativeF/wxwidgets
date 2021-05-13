@@ -47,7 +47,8 @@ private:
     // position in the stream in bytes, *not* in chars
     size_t m_pos;
 
-    wxDECLARE_NO_COPY_CLASS(wxStringInputStream);
+    wxStringInputStream(const wxStringInputStream&) = delete;
+	wxStringInputStream& operator=(const wxStringInputStream&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -94,7 +95,8 @@ private:
     wxMemoryBuffer m_unconv;
 #endif // wxUSE_UNICODE
 
-    wxDECLARE_NO_COPY_CLASS(wxStringOutputStream);
+    wxStringOutputStream(const wxStringOutputStream&) = delete;
+	wxStringOutputStream& operator=(const wxStringOutputStream&) = delete;
 };
 
 #endif // wxUSE_STREAMS

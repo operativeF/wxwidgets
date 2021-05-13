@@ -41,7 +41,8 @@ private:
 
     wxHyperlinkCtrl* m_hyperlink;
 
-    wxDECLARE_NO_COPY_CLASS(HyperlinkCtrlTestCase);
+    HyperlinkCtrlTestCase(const HyperlinkCtrlTestCase&) = delete;
+	HyperlinkCtrlTestCase& operator=(const HyperlinkCtrlTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

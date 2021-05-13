@@ -65,7 +65,8 @@ private:
     // Also the total number of items in it initially
     unsigned m_numItems;
 
-    wxDECLARE_NO_COPY_CLASS(TreeListCtrlTestCase);
+    TreeListCtrlTestCase(const TreeListCtrlTestCase&) = delete;
+	TreeListCtrlTestCase& operator=(const TreeListCtrlTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

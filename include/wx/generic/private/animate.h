@@ -49,7 +49,8 @@ private:
 
     wxAnimationDecoder* m_decoder;
 
-    wxDECLARE_NO_COPY_CLASS(wxAnimationGenericImpl);
+    wxAnimationGenericImpl(const wxAnimationGenericImpl&) = delete;
+	wxAnimationGenericImpl& operator=(const wxAnimationGenericImpl&) = delete;
 };
 
 

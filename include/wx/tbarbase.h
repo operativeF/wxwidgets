@@ -648,7 +648,8 @@ protected:
 
 private:
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxToolBarBase);
+    wxToolBarBase(const wxToolBarBase&) = delete;
+	wxToolBarBase& operator=(const wxToolBarBase&) = delete;
 };
 
 #endif // wxUSE_TOOLBAR

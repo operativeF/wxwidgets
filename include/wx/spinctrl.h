@@ -58,7 +58,8 @@ public:
     virtual void SetSelection(long from, long to) = 0;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxSpinCtrlBase);
+    wxSpinCtrlBase(const wxSpinCtrlBase&) = delete;
+	wxSpinCtrlBase& operator=(const wxSpinCtrlBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

@@ -42,7 +42,8 @@ private:
 
     wxDECLARE_EVENT_TABLE();
 
-    wxDECLARE_NO_COPY_CLASS(wxGenericRichMessageDialog);
+    wxGenericRichMessageDialog(const wxGenericRichMessageDialog&) = delete;
+	wxGenericRichMessageDialog& operator=(const wxGenericRichMessageDialog&) = delete;
 };
 
 #endif // _WX_GENERIC_RICHMSGDLGG_H_

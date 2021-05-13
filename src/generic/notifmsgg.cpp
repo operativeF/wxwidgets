@@ -107,7 +107,8 @@ private:
     static void ResizeAndFitVisibleNotifications();
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxNotificationMessageWindow);
+    wxNotificationMessageWindow(const wxNotificationMessageWindow&) = delete;
+	wxNotificationMessageWindow& operator=(const wxNotificationMessageWindow&) = delete;
 };
 
 int wxNotificationMessageWindow::ms_presentationDirection = 0;

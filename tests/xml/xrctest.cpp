@@ -147,7 +147,8 @@ public:
     XrcTestCase() { }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(XrcTestCase);
+    XrcTestCase(const XrcTestCase&) = delete;
+	XrcTestCase& operator=(const XrcTestCase&) = delete;
 };
 
 TEST_CASE_METHOD(XrcTestCase, "XRC::ObjectReferences", "[xrc]")

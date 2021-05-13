@@ -233,7 +233,8 @@ public:
 private:
     wxArrayString& m_files;
 
-    wxDECLARE_NO_COPY_CLASS(wxDirTraverserSimple);
+    wxDirTraverserSimple(const wxDirTraverserSimple&) = delete;
+	wxDirTraverserSimple& operator=(const wxDirTraverserSimple&) = delete;
 };
 
 /* static */
@@ -285,7 +286,8 @@ public:
 private:
     wxString m_file;
 
-    wxDECLARE_NO_COPY_CLASS(wxDirTraverserFindFirst);
+    wxDirTraverserFindFirst(const wxDirTraverserFindFirst&) = delete;
+	wxDirTraverserFindFirst& operator=(const wxDirTraverserFindFirst&) = delete;
 };
 
 /* static */

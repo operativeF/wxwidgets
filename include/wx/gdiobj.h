@@ -22,8 +22,6 @@
 class WXDLLIMPEXP_CORE wxGDIRefData : public wxObjectRefData
 {
 public:
-    // Default ctor which needs to be defined just because we use
-    // wxDECLARE_NO_COPY_CLASS() below.
     wxGDIRefData() { }
 
     // override this in the derived classes to check if this data object is
@@ -31,7 +29,8 @@ public:
     virtual bool IsOk() const { return true; }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxGDIRefData);
+    wxGDIRefData(const wxGDIRefData&) = delete;
+	wxGDIRefData& operator=(const wxGDIRefData&) = delete;
 };
 
 // ----------------------------------------------------------------------------

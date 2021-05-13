@@ -119,7 +119,8 @@ protected:
     int m_style;
 
     wxDECLARE_DYNAMIC_CLASS(wxBestHelpController);
-    wxDECLARE_NO_COPY_CLASS(wxBestHelpController);
+    wxBestHelpController(const wxBestHelpController&) = delete;
+	wxBestHelpController& operator=(const wxBestHelpController&) = delete;
 };
 
 #endif // wxUSE_HELP && wxUSE_MS_HTML_HELP && wxUSE_WXHTML_HELP

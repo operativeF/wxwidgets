@@ -256,7 +256,8 @@ private:
     int m_inResizing;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxGridHeaderCtrl);
+    wxGridHeaderCtrl(const wxGridHeaderCtrl&) = delete;
+	wxGridHeaderCtrl& operator=(const wxGridHeaderCtrl&) = delete;
 };
 
 // common base class for various grid subwindows
@@ -286,7 +287,8 @@ protected:
     wxGrid *m_owner;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxGridSubwindow);
+    wxGridSubwindow(const wxGridSubwindow&) = delete;
+	wxGridSubwindow& operator=(const wxGridSubwindow&) = delete;
 };
 
 class WXDLLIMPEXP_ADV wxGridRowLabelWindow : public wxGridSubwindow
@@ -305,7 +307,8 @@ private:
     void OnMouseWheel( wxMouseEvent& event );
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxGridRowLabelWindow);
+    wxGridRowLabelWindow(const wxGridRowLabelWindow&) = delete;
+	wxGridRowLabelWindow& operator=(const wxGridRowLabelWindow&) = delete;
 };
 
 
@@ -337,7 +340,8 @@ private:
     void OnMouseWheel( wxMouseEvent& event );
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxGridColLabelWindow);
+    wxGridColLabelWindow(const wxGridColLabelWindow&) = delete;
+	wxGridColLabelWindow& operator=(const wxGridColLabelWindow&) = delete;
 };
 
 
@@ -367,7 +371,8 @@ private:
     void OnPaint( wxPaintEvent& event );
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxGridCornerLabelWindow);
+    wxGridCornerLabelWindow(const wxGridCornerLabelWindow&) = delete;
+	wxGridCornerLabelWindow& operator=(const wxGridCornerLabelWindow&) = delete;
 };
 
 class WXDLLIMPEXP_ADV wxGridWindow : public wxGridSubwindow
@@ -411,7 +416,8 @@ private:
     void OnFocus( wxFocusEvent& );
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxGridWindow);
+    wxGridWindow(const wxGridWindow&) = delete;
+	wxGridWindow& operator=(const wxGridWindow&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -992,7 +998,8 @@ struct wxGridDataTypeInfo
     wxGridCellRenderer* m_renderer;
     wxGridCellEditor*   m_editor;
 
-    wxDECLARE_NO_COPY_CLASS(wxGridDataTypeInfo);
+    wxGridDataTypeInfo(const wxGridDataTypeInfo&) = delete;
+	wxGridDataTypeInfo& operator=(const wxGridDataTypeInfo&) = delete;
 };
 
 

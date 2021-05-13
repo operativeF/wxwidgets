@@ -1257,7 +1257,8 @@ protected:
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxDC);
-    wxDECLARE_NO_COPY_CLASS(wxDC);
+    wxDC(const wxDC&) = delete;
+	wxDC& operator=(const wxDC&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1293,7 +1294,8 @@ private:
 
     wxColour m_colFgOld;
 
-    wxDECLARE_NO_COPY_CLASS(wxDCTextColourChanger);
+    wxDCTextColourChanger(const wxDCTextColourChanger&) = delete;
+	wxDCTextColourChanger& operator=(const wxDCTextColourChanger&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1329,7 +1331,8 @@ private:
 
     wxColour m_colBgOld;
 
-    wxDECLARE_NO_COPY_CLASS(wxDCTextBgColourChanger);
+    wxDCTextBgColourChanger(const wxDCTextBgColourChanger&) = delete;
+	wxDCTextBgColourChanger& operator=(const wxDCTextBgColourChanger&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1365,7 +1368,8 @@ private:
 
     int m_modeOld;
 
-    wxDECLARE_NO_COPY_CLASS(wxDCTextBgModeChanger);
+    wxDCTextBgModeChanger(const wxDCTextBgModeChanger&) = delete;
+	wxDCTextBgModeChanger& operator=(const wxDCTextBgModeChanger&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1392,7 +1396,8 @@ private:
 
     wxPen m_penOld;
 
-    wxDECLARE_NO_COPY_CLASS(wxDCPenChanger);
+    wxDCPenChanger(const wxDCPenChanger&) = delete;
+	wxDCPenChanger& operator=(const wxDCPenChanger&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1419,7 +1424,8 @@ private:
 
     wxBrush m_brushOld;
 
-    wxDECLARE_NO_COPY_CLASS(wxDCBrushChanger);
+    wxDCBrushChanger(const wxDCBrushChanger&) = delete;
+	wxDCBrushChanger& operator=(const wxDCBrushChanger&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1462,7 +1468,8 @@ private:
     wxRect m_oldClipRect;
     bool m_restoreOld;
 
-    wxDECLARE_NO_COPY_CLASS(wxDCClipper);
+    wxDCClipper(const wxDCClipper&) = delete;
+	wxDCClipper& operator=(const wxDCClipper&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1502,7 +1509,8 @@ private:
 
     wxFont m_fontOld;
 
-    wxDECLARE_NO_COPY_CLASS(wxDCFontChanger);
+    wxDCFontChanger(const wxDCFontChanger&) = delete;
+	wxDCFontChanger& operator=(const wxDCFontChanger&) = delete;
 };
 
 

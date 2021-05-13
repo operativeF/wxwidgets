@@ -221,7 +221,8 @@ protected:
     // if true overrides the width info of the wxStatusBarPanes
     bool m_bSameWidthForAllPanes;
 
-    wxDECLARE_NO_COPY_CLASS(wxStatusBarBase);
+    wxStatusBarBase(const wxStatusBarBase&) = delete;
+	wxStatusBarBase& operator=(const wxStatusBarBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

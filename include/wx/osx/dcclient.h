@@ -40,7 +40,8 @@ protected:
     wxPoint m_origin;
 
     wxDECLARE_CLASS(wxWindowDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxWindowDCImpl);
+    wxWindowDCImpl(const wxWindowDCImpl&) = delete;
+	wxWindowDCImpl& operator=(const wxWindowDCImpl&) = delete;
 };
 
 
@@ -53,7 +54,8 @@ public:
 
 private:
     wxDECLARE_CLASS(wxClientDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxClientDCImpl);
+    wxClientDCImpl(const wxClientDCImpl&) = delete;
+	wxClientDCImpl& operator=(const wxClientDCImpl&) = delete;
 };
 
 
@@ -66,7 +68,8 @@ public:
 
 protected:
     wxDECLARE_CLASS(wxPaintDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxPaintDCImpl);
+    wxPaintDCImpl(const wxPaintDCImpl&) = delete;
+	wxPaintDCImpl& operator=(const wxPaintDCImpl&) = delete;
 };
 
 

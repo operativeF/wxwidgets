@@ -189,7 +189,8 @@ private:
 
     int      m_flags;
 
-    wxDECLARE_NO_COPY_CLASS(wxDirData);
+    wxDirData(const wxDirData&) = delete;
+	wxDirData& operator=(const wxDirData&) = delete;
 };
 
 // ============================================================================

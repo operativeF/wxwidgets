@@ -194,7 +194,8 @@ private:
     LV_ITEM_NATIVE *m_pItem;
     LV_ITEM_NATIVE m_item;
 
-    wxDECLARE_NO_COPY_CLASS(wxLV_ITEM);
+    wxLV_ITEM(const wxLV_ITEM&) = delete;
+	wxLV_ITEM& operator=(const wxLV_ITEM&) = delete;
 };
 
 ///////////////////////////////////////////////////////
@@ -228,7 +229,8 @@ public:
     wxItemAttr *attr{nullptr};
     LPARAM lParam{0}; // real user data
 
-    wxDECLARE_NO_COPY_CLASS(wxMSWListItemData);
+    wxMSWListItemData(const wxMSWListItemData&) = delete;
+	wxMSWListItemData& operator=(const wxMSWListItemData&) = delete;
 };
 
 // wxMSWListHeaderCustomDraw: custom draw helper for the header

@@ -170,7 +170,8 @@ public:
 private:
     char * const m_locOld;
 
-    wxDECLARE_NO_COPY_CLASS(LocaleSetter);
+    LocaleSetter(const LocaleSetter&) = delete;
+	LocaleSetter& operator=(const LocaleSetter&) = delete;
 };
 
 // An even simpler helper for setting the locale to "C" one during its lifetime.
@@ -180,7 +181,8 @@ public:
     CLocaleSetter() : LocaleSetter("C") { }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(CLocaleSetter);
+    CLocaleSetter(const CLocaleSetter&) = delete;
+	CLocaleSetter& operator=(const CLocaleSetter&) = delete;
 };
 
 #if wxUSE_GUI

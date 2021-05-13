@@ -32,7 +32,8 @@ public:
     virtual ~wxTextCompleter();
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxTextCompleter);
+    wxTextCompleter(const wxTextCompleter&) = delete;
+	wxTextCompleter& operator=(const wxTextCompleter&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -54,7 +55,8 @@ private:
     wxArrayString m_completions;
     unsigned m_index;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextCompleterSimple);
+    wxTextCompleterSimple(const wxTextCompleterSimple&) = delete;
+	wxTextCompleterSimple& operator=(const wxTextCompleterSimple&) = delete;
 };
 
 // ----------------------------------------------------------------------------

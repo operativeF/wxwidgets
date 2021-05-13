@@ -145,7 +145,8 @@ protected:
 
     wxFDIOManager *m_fdioManager;
 
-    wxDECLARE_NO_COPY_CLASS(wxSocketFDBasedManager);
+    wxSocketFDBasedManager(const wxSocketFDBasedManager&) = delete;
+	wxSocketFDBasedManager& operator=(const wxSocketFDBasedManager&) = delete;
 };
 
 #endif  /* _WX_UNIX_GSOCKUNX_H_ */

@@ -70,7 +70,8 @@ protected:
 private:
     wxIDropSource *m_pIDropSource;  // the pointer to COM interface
 
-    wxDECLARE_NO_COPY_CLASS(wxDropSource);
+    wxDropSource(const wxDropSource&) = delete;
+	wxDropSource& operator=(const wxDropSource&) = delete;
 };
 
 #endif  //wxUSE_DRAG_AND_DROP

@@ -364,7 +364,8 @@ private:
     unsigned int m_internalBorder;
 
     wxDECLARE_ABSTRACT_CLASS(wxBookCtrlBase);
-    wxDECLARE_NO_COPY_CLASS(wxBookCtrlBase);
+    wxBookCtrlBase(const wxBookCtrlBase&) = delete;
+	wxBookCtrlBase& operator=(const wxBookCtrlBase&) = delete;
 
     wxDECLARE_EVENT_TABLE();
 };

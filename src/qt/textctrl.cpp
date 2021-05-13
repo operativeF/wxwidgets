@@ -301,7 +301,8 @@ private:
 
     QTextEdit* const m_edit;
 
-    wxDECLARE_NO_COPY_CLASS(wxQtMultiLineEdit);
+    wxQtMultiLineEdit(const wxQtMultiLineEdit&) = delete;
+	wxQtMultiLineEdit& operator=(const wxQtMultiLineEdit&) = delete;
 };
 
 class wxQtSingleLineEdit : public wxQtEdit
@@ -442,7 +443,8 @@ public:
 private:
     QLineEdit *m_edit;
 
-    wxDECLARE_NO_COPY_CLASS(wxQtSingleLineEdit);
+    wxQtSingleLineEdit(const wxQtSingleLineEdit&) = delete;
+	wxQtSingleLineEdit& operator=(const wxQtSingleLineEdit&) = delete;
 };
 
 wxQtLineEdit::wxQtLineEdit( wxWindow *parent, wxTextCtrl *handler )

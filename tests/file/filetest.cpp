@@ -49,7 +49,8 @@ private:
     void DoRoundTripTest(const wxMBConv& conv);
     void TempFile();
 
-    wxDECLARE_NO_COPY_CLASS(FileTestCase);
+    FileTestCase(const FileTestCase&) = delete;
+	FileTestCase& operator=(const FileTestCase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

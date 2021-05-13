@@ -114,7 +114,8 @@ protected:
              m_cursorMove,
              m_cursorStop;
 
-    wxDECLARE_NO_COPY_CLASS(wxDropSourceBase);
+    wxDropSourceBase(const wxDropSourceBase&) = delete;
+	wxDropSourceBase& operator=(const wxDropSourceBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -202,7 +203,8 @@ protected:
     wxDataObject *m_dataObject;
     wxDragResult m_defaultAction;
 
-    wxDECLARE_NO_COPY_CLASS(wxDropTargetBase);
+    wxDropTargetBase(const wxDropTargetBase&) = delete;
+	wxDropTargetBase& operator=(const wxDropTargetBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -242,7 +244,8 @@ public:
     wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxTextDropTarget);
+    wxTextDropTarget(const wxTextDropTarget&) = delete;
+	wxTextDropTarget& operator=(const wxTextDropTarget&) = delete;
 };
 
 // A drop target which accepts files (dragged from File Manager or Explorer)
@@ -258,7 +261,8 @@ public:
     wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxFileDropTarget);
+    wxFileDropTarget(const wxFileDropTarget&) = delete;
+	wxFileDropTarget& operator=(const wxFileDropTarget&) = delete;
 };
 
 #endif // wxUSE_DRAG_AND_DROP

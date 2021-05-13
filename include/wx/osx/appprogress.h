@@ -30,7 +30,8 @@ private:
     int m_maxValue;
     void *m_dockIcon;
 
-    wxDECLARE_NO_COPY_CLASS(wxAppProgressIndicator);
+    wxAppProgressIndicator(const wxAppProgressIndicator&) = delete;
+	wxAppProgressIndicator& operator=(const wxAppProgressIndicator&) = delete;
 };
 
 #endif  // _WX_OSX_APPPROG_H_

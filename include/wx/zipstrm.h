@@ -370,7 +370,8 @@ private:
     bool m_endrecWritten;
     wxZipArchiveFormat m_format;
 
-    wxDECLARE_NO_COPY_CLASS(wxZipOutputStream);
+    wxZipOutputStream(const wxZipOutputStream&) = delete;
+	wxZipOutputStream& operator=(const wxZipOutputStream&) = delete;
 };
 
 
@@ -451,7 +452,8 @@ private:
     friend bool wxZipOutputStream::CopyArchiveMetaData(
                     wxZipInputStream& inputStream);
 
-    wxDECLARE_NO_COPY_CLASS(wxZipInputStream);
+    wxZipInputStream(const wxZipInputStream&) = delete;
+	wxZipInputStream& operator=(const wxZipInputStream&) = delete;
 };
 
 

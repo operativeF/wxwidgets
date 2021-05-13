@@ -32,7 +32,8 @@ public:
 
     virtual unsigned int GetCheckedItems(wxArrayInt& checkedItems) const;
 
-    wxDECLARE_NO_COPY_CLASS(wxCheckListBoxBase);
+    wxCheckListBoxBase(const wxCheckListBoxBase&) = delete;
+	wxCheckListBoxBase& operator=(const wxCheckListBoxBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

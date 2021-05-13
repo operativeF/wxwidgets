@@ -52,7 +52,8 @@ private:
 
     wxTreebook *m_treebook;
 
-    wxDECLARE_NO_COPY_CLASS(TreebookTestCase);
+    TreebookTestCase(const TreebookTestCase&) = delete;
+	TreebookTestCase& operator=(const TreebookTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

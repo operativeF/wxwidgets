@@ -71,7 +71,8 @@ private:
     int m_pos,
         m_orient;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlWinAutoScrollTimer);
+    wxHtmlWinAutoScrollTimer(const wxHtmlWinAutoScrollTimer&) = delete;
+	wxHtmlWinAutoScrollTimer& operator=(const wxHtmlWinAutoScrollTimer&) = delete;
 };
 
 void wxHtmlWinAutoScrollTimer::Notify()

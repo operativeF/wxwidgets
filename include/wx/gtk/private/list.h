@@ -26,7 +26,8 @@ public:
 protected:
     GList* const m_list;
 
-    wxDECLARE_NO_COPY_CLASS(wxGtkList);
+    wxGtkList(const wxGtkList&) = delete;
+	wxGtkList& operator=(const wxGtkList&) = delete;
 };
 
 #endif // _WX_GTK_PRIVATE_LIST_H_

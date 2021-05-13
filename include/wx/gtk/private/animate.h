@@ -62,7 +62,8 @@ private:
     void UnRef();
 
     typedef wxAnimationImpl base_type;
-    wxDECLARE_NO_COPY_CLASS(wxAnimationGTKImpl);
+    wxAnimationGTKImpl(const wxAnimationGTKImpl&) = delete;
+	wxAnimationGTKImpl& operator=(const wxAnimationGTKImpl&) = delete;
 };
 
 

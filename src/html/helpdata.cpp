@@ -123,7 +123,8 @@ public:
 protected:
     void AddText(const wxString& WXUNUSED(txt)) override {}
 
-    wxDECLARE_NO_COPY_CLASS(HP_Parser);
+    HP_Parser(const HP_Parser&) = delete;
+	HP_Parser& operator=(const HP_Parser&) = delete;
 };
 
 
@@ -164,7 +165,8 @@ class HP_TagHandler : public wxHtmlTagHandler
             m_parentItem = nullptr;
         }
 
-    wxDECLARE_NO_COPY_CLASS(HP_TagHandler);
+    HP_TagHandler(const HP_TagHandler&) = delete;
+	HP_TagHandler& operator=(const HP_TagHandler&) = delete;
 };
 
 

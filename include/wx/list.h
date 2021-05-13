@@ -430,7 +430,8 @@ private:
 
     wxListBase  *m_list;        // list we belong to
 
-    wxDECLARE_NO_COPY_CLASS(wxNodeBase);
+    wxNodeBase(const wxNodeBase&) = delete;
+	wxNodeBase& operator=(const wxNodeBase&) = delete;
 };
 
 // -----------------------------------------------------------------------------
@@ -658,9 +659,10 @@ private:
             { wxNodeBase::SetData(data); }                                  \
                                                                             \
     protected:                                                              \
-        void DeleteData() override;                               \
+        void DeleteData() override;                                         \
                                                                             \
-        wxDECLARE_NO_COPY_CLASS(nodetype);                                  \
+        nodetype(const nodetype&) = delete;                                 \
+        nodetype& operator=(const nodetype&) = delete;                      \
     };                                                                      \
                                                                             \
     classexp name : public wxListBase                                       \

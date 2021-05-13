@@ -41,7 +41,8 @@ private:
 
     wxChoice* m_choice;
 
-    wxDECLARE_NO_COPY_CLASS(ChoiceTestCase);
+    ChoiceTestCase(const ChoiceTestCase&) = delete;
+	ChoiceTestCase& operator=(const ChoiceTestCase&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(ChoiceTestCase,

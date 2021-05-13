@@ -800,7 +800,8 @@ protected:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxWindowMSW);
-    wxDECLARE_NO_COPY_CLASS(wxWindowMSW);
+    wxWindowMSW(const wxWindowMSW&) = delete;
+	wxWindowMSW& operator=(const wxWindowMSW&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

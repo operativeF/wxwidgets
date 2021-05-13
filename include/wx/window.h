@@ -593,7 +593,8 @@ public:
         wxWindowBase* const m_win;
         const bool m_callEnd;
 
-        wxDECLARE_NO_COPY_CLASS(ChildrenRepositioningGuard);
+        ChildrenRepositioningGuard(const ChildrenRepositioningGuard&) = delete;
+	ChildrenRepositioningGuard& operator=(const ChildrenRepositioningGuard&) = delete;
     };
 
 
@@ -1926,7 +1927,8 @@ private:
     unsigned int m_freezeCount;
 
     wxDECLARE_ABSTRACT_CLASS(wxWindowBase);
-    wxDECLARE_NO_COPY_CLASS(wxWindowBase);
+    wxWindowBase(const wxWindowBase&) = delete;
+	wxWindowBase& operator=(const wxWindowBase&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

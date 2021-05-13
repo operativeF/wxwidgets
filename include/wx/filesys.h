@@ -90,7 +90,8 @@ private:
 #endif // wxUSE_DATETIME
 
     wxDECLARE_ABSTRACT_CLASS(wxFSFile);
-    wxDECLARE_NO_COPY_CLASS(wxFSFile);
+    wxFSFile(const wxFSFile&) = delete;
+	wxFSFile& operator=(const wxFSFile&) = delete;
 };
 
 
@@ -238,7 +239,8 @@ protected:
             // Handlers local to this instance
 
     wxDECLARE_DYNAMIC_CLASS(wxFileSystem);
-    wxDECLARE_NO_COPY_CLASS(wxFileSystem);
+    wxFileSystem(const wxFileSystem&) = delete;
+	wxFileSystem& operator=(const wxFileSystem&) = delete;
 };
 
 
@@ -296,7 +298,8 @@ public:
 private:
     wxFSFile* m_file;
 
-    wxDECLARE_NO_COPY_CLASS(wxFSInputStream);
+    wxFSInputStream(const wxFSInputStream&) = delete;
+	wxFSInputStream& operator=(const wxFSInputStream&) = delete;
 };
 
 #endif

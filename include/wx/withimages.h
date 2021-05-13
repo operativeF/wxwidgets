@@ -90,7 +90,8 @@ private:
     // False by default, if true then we delete m_imageList.
     bool m_ownsImageList;
 
-    wxDECLARE_NO_COPY_CLASS(wxWithImages);
+    wxWithImages(const wxWithImages&) = delete;
+	wxWithImages& operator=(const wxWithImages&) = delete;
 };
 
 #endif // _WX_WITHIMAGES_H_

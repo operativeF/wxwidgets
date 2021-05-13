@@ -70,7 +70,8 @@ public:
               wxHtmlRenderingInfo& WXUNUSED(info)) override {}
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxHtmlPageBreakCell);
+    wxHtmlPageBreakCell(const wxHtmlPageBreakCell&) = delete;
+	wxHtmlPageBreakCell& operator=(const wxHtmlPageBreakCell&) = delete;
 };
 
 bool

@@ -99,7 +99,8 @@ private:
     GLData       m_gldata;
     DXFRenderer  m_renderer;
 
-    wxDECLARE_NO_COPY_CLASS(TestGLCanvas);
+    TestGLCanvas(const TestGLCanvas&) = delete;
+	TestGLCanvas& operator=(const TestGLCanvas&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

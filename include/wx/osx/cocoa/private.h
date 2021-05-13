@@ -66,7 +66,8 @@ private:
     NSEvent* m_nsevent;
     bool m_wxsent;
 
-    wxDECLARE_NO_COPY_CLASS(wxWidgetCocoaNativeKeyDownSuspender);
+    wxWidgetCocoaNativeKeyDownSuspender(const wxWidgetCocoaNativeKeyDownSuspender&) = delete;
+	wxWidgetCocoaNativeKeyDownSuspender& operator=(const wxWidgetCocoaNativeKeyDownSuspender&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxWidgetCocoaImpl : public wxWidgetImpl

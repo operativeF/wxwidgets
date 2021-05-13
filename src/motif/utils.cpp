@@ -118,7 +118,8 @@ public:
 private:
     const XtInputId m_inputId;
 
-    wxDECLARE_NO_COPY_CLASS(wxMotifEventLoopSource);
+    wxMotifEventLoopSource(const wxMotifEventLoopSource&) = delete;
+	wxMotifEventLoopSource& operator=(const wxMotifEventLoopSource&) = delete;
 };
 
 class wxMotifEventLoopSourcesManager : public wxEventLoopSourcesManagerBase

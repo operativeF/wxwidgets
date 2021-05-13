@@ -367,7 +367,8 @@ private:
     bool        m_unicodeMode;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxSymbolListCtrl);
+    wxSymbolListCtrl(const wxSymbolListCtrl&) = delete;
+	wxSymbolListCtrl& operator=(const wxSymbolListCtrl&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxSymbolListCtrl);
 };
 

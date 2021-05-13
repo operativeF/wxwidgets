@@ -100,7 +100,8 @@ private:
 #endif
     void wxHashSetTest();
 
-    wxDECLARE_NO_COPY_CLASS(HashesTestCase);
+    HashesTestCase(const HashesTestCase&) = delete;
+	HashesTestCase& operator=(const HashesTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

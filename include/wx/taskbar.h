@@ -74,7 +74,8 @@ private:
     void OnRightButtonDown(wxTaskBarIconEvent& event);
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxTaskBarIconBase);
+    wxTaskBarIconBase(const wxTaskBarIconBase&) = delete;
+	wxTaskBarIconBase& operator=(const wxTaskBarIconBase&) = delete;
 };
 
 

@@ -54,7 +54,8 @@ private:
     // either wxSelectDispatcher or wxEpollDispatcher
     wxFDIODispatcher *m_dispatcher;
 
-    wxDECLARE_NO_COPY_CLASS(wxConsoleEventLoop);
+    wxConsoleEventLoop(const wxConsoleEventLoop&) = delete;
+	wxConsoleEventLoop& operator=(const wxConsoleEventLoop&) = delete;
 };
 
 #endif // wxUSE_CONSOLE_EVENTLOOP

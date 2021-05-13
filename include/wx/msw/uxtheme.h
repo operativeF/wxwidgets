@@ -222,7 +222,8 @@ private:
 private:
     LOGFONTW m_lfW;
 
-    wxDECLARE_NO_COPY_CLASS(wxUxThemeFont);
+    wxUxThemeFont(const wxUxThemeFont&) = delete;
+	wxUxThemeFont& operator=(const wxUxThemeFont&) = delete;
 };
 
 WXDLLIMPEXP_CORE bool wxUxThemeIsActive();
@@ -252,7 +253,8 @@ public:
 private:
     HTHEME m_hTheme;
 
-    wxDECLARE_NO_COPY_CLASS(wxUxThemeHandle);
+    wxUxThemeHandle(const wxUxThemeHandle&) = delete;
+	wxUxThemeHandle& operator=(const wxUxThemeHandle&) = delete;
 };
 
 #else // !wxUSE_UXTHEME

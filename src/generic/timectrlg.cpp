@@ -565,7 +565,8 @@ private:
     // containing '8' will still replace it as "78" would be invalid).
     bool m_isFirstDigit;
 
-    wxDECLARE_NO_COPY_CLASS(wxTimePickerGenericImpl);
+    wxTimePickerGenericImpl(const wxTimePickerGenericImpl&) = delete;
+	wxTimePickerGenericImpl& operator=(const wxTimePickerGenericImpl&) = delete;
 };
 
 // ============================================================================

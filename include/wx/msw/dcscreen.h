@@ -24,7 +24,8 @@ public:
     void DoGetSize(int *w, int *h) const override;
 
     wxDECLARE_CLASS(wxScreenDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxScreenDCImpl);
+    wxScreenDCImpl(const wxScreenDCImpl&) = delete;
+	wxScreenDCImpl& operator=(const wxScreenDCImpl&) = delete;
 };
 
 #endif // _WX_MSW_DCSCREEN_H_

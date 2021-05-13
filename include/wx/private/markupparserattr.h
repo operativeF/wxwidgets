@@ -250,7 +250,8 @@ private:
 
     wxStack<Attr> m_attrs;
 
-    wxDECLARE_NO_COPY_CLASS(wxMarkupParserAttrOutput);
+    wxMarkupParserAttrOutput(const wxMarkupParserAttrOutput&) = delete;
+	wxMarkupParserAttrOutput& operator=(const wxMarkupParserAttrOutput&) = delete;
 };
 
 #endif // _WX_PRIVATE_MARKUPPARSERATTR_H_

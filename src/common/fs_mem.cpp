@@ -66,7 +66,8 @@ private:
 #endif // wxUSE_DATETIME
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxMemoryFSFile);
+    wxMemoryFSFile(const wxMemoryFSFile&) = delete;
+	wxMemoryFSFile& operator=(const wxMemoryFSFile&) = delete;
 };
 
 #if wxUSE_BASE

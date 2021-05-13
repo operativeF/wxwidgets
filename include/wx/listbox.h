@@ -137,7 +137,8 @@ protected:
     void UpdateOldSelections();
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxListBoxBase);
+    wxListBoxBase(const wxListBoxBase&) = delete;
+	wxListBoxBase& operator=(const wxListBoxBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

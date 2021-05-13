@@ -61,7 +61,8 @@ protected:
     // must correspond to its real state.
     bool m_areChildrenEnabled;
 
-    wxDECLARE_NO_COPY_CLASS(wxStaticBoxBase);
+    wxStaticBoxBase(const wxStaticBoxBase&) = delete;
+	wxStaticBoxBase& operator=(const wxStaticBoxBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

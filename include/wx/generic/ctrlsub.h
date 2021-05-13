@@ -115,7 +115,8 @@ private:
         return true;
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxControlWithItemsGeneric);
+    wxControlWithItemsGeneric(const wxControlWithItemsGeneric&) = delete;
+	wxControlWithItemsGeneric& operator=(const wxControlWithItemsGeneric&) = delete;
 };
 
 #endif // _WX_GENERIC_CTRLSUB_H_

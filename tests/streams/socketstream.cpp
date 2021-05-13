@@ -89,7 +89,8 @@ protected:
     int m_port;
     void (*m_accept)(wxSocketBase&);
 
-    wxDECLARE_NO_COPY_CLASS(SocketServerThread);
+    SocketServerThread(const SocketServerThread&) = delete;
+	SocketServerThread& operator=(const SocketServerThread&) = delete;
 };
 
 // The test case for socket streams

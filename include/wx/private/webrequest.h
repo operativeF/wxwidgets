@@ -44,7 +44,8 @@ protected:
 private:
     const wxWebAuthChallenge::Source m_source;
 
-    wxDECLARE_NO_COPY_CLASS(wxWebAuthChallengeImpl);
+    wxWebAuthChallengeImpl(const wxWebAuthChallengeImpl&) = delete;
+	wxWebAuthChallengeImpl& operator=(const wxWebAuthChallengeImpl&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -148,7 +149,8 @@ private:
     // Initially false, set to true after the first call to Cancel().
     bool m_cancelled;
 
-    wxDECLARE_NO_COPY_CLASS(wxWebRequestImpl);
+    wxWebRequestImpl(const wxWebRequestImpl&) = delete;
+	wxWebRequestImpl& operator=(const wxWebRequestImpl&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -207,7 +209,8 @@ private:
     mutable wxFFile m_file;
     mutable wxScopedPtr<wxInputStream> m_stream;
 
-    wxDECLARE_NO_COPY_CLASS(wxWebResponseImpl);
+    wxWebResponseImpl(const wxWebResponseImpl&) = delete;
+	wxWebResponseImpl& operator=(const wxWebResponseImpl&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -262,7 +265,8 @@ private:
     wxWebRequestHeaderMap m_headers;
     wxString m_tempDir;
 
-    wxDECLARE_NO_COPY_CLASS(wxWebSessionImpl);
+    wxWebSessionImpl(const wxWebSessionImpl&) = delete;
+	wxWebSessionImpl& operator=(const wxWebSessionImpl&) = delete;
 };
 
 #endif // _WX_PRIVATE_WEBREQUEST_H_

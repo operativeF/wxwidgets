@@ -48,7 +48,8 @@ public:
         }
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlAnchorCell);
+    wxHtmlAnchorCell(const wxHtmlAnchorCell&) = delete;
+	wxHtmlAnchorCell& operator=(const wxHtmlAnchorCell&) = delete;
 };
 
 

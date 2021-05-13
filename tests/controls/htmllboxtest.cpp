@@ -37,7 +37,8 @@ private:
 
     wxSimpleHtmlListBox* m_htmllbox;
 
-    wxDECLARE_NO_COPY_CLASS(HtmlListBoxTestCase);
+    HtmlListBoxTestCase(const HtmlListBoxTestCase&) = delete;
+	HtmlListBoxTestCase& operator=(const HtmlListBoxTestCase&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(HtmlListBoxTestCase,

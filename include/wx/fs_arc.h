@@ -46,7 +46,8 @@ private:
 
     wxString DoFind();
 
-    wxDECLARE_NO_COPY_CLASS(wxArchiveFSHandler);
+    wxArchiveFSHandler(const wxArchiveFSHandler&) = delete;
+	wxArchiveFSHandler& operator=(const wxArchiveFSHandler&) = delete;
     wxDECLARE_DYNAMIC_CLASS(wxArchiveFSHandler);
 };
 

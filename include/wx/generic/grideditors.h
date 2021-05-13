@@ -45,7 +45,8 @@ private:
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxGridCellEditorEvtHandler);
-    wxDECLARE_NO_COPY_CLASS(wxGridCellEditorEvtHandler);
+    wxGridCellEditorEvtHandler(const wxGridCellEditorEvtHandler&) = delete;
+	wxGridCellEditorEvtHandler& operator=(const wxGridCellEditorEvtHandler&) = delete;
 };
 
 
@@ -99,7 +100,8 @@ private:
 #endif
     wxString                 m_value;
 
-    wxDECLARE_NO_COPY_CLASS(wxGridCellTextEditor);
+    wxGridCellTextEditor(const wxGridCellTextEditor&) = delete;
+	wxGridCellTextEditor& operator=(const wxGridCellTextEditor&) = delete;
 };
 
 // the editor for numeric (long) data
@@ -159,7 +161,8 @@ private:
 
     long m_value;
 
-    wxDECLARE_NO_COPY_CLASS(wxGridCellNumberEditor);
+    wxGridCellNumberEditor(const wxGridCellNumberEditor&) = delete;
+	wxGridCellNumberEditor& operator=(const wxGridCellNumberEditor&) = delete;
 };
 
 
@@ -227,7 +230,8 @@ private:
     int m_style;
     wxString m_format;
 
-    wxDECLARE_NO_COPY_CLASS(wxGridCellFloatEditor);
+    wxGridCellFloatEditor(const wxGridCellFloatEditor&) = delete;
+	wxGridCellFloatEditor& operator=(const wxGridCellFloatEditor&) = delete;
 };
 
 #endif // wxUSE_TEXTCTRL
@@ -295,7 +299,8 @@ private:
 
     static wxString ms_stringValues[2];
 
-    wxDECLARE_NO_COPY_CLASS(wxGridCellBoolEditor);
+    wxGridCellBoolEditor(const wxGridCellBoolEditor&) = delete;
+	wxGridCellBoolEditor& operator=(const wxGridCellBoolEditor&) = delete;
 };
 
 #endif // wxUSE_CHECKBOX
@@ -343,7 +348,8 @@ protected:
     wxArrayString   m_choices;
     bool            m_allowOthers;
 
-    wxDECLARE_NO_COPY_CLASS(wxGridCellChoiceEditor);
+    wxGridCellChoiceEditor(const wxGridCellChoiceEditor&) = delete;
+	wxGridCellChoiceEditor& operator=(const wxGridCellChoiceEditor&) = delete;
 };
 
 #endif // wxUSE_COMBOBOX
@@ -366,7 +372,8 @@ public:
 private:
     long m_index;
 
-    wxDECLARE_NO_COPY_CLASS(wxGridCellEnumEditor);
+    wxGridCellEnumEditor(const wxGridCellEnumEditor&) = delete;
+	wxGridCellEnumEditor& operator=(const wxGridCellEnumEditor&) = delete;
 };
 
 #endif // wxUSE_COMBOBOX
@@ -382,7 +389,8 @@ public:
     wxGridCellEditor *Clone() const override
         { return new wxGridCellAutoWrapStringEditor; }
 
-    wxDECLARE_NO_COPY_CLASS(wxGridCellAutoWrapStringEditor);
+    wxGridCellAutoWrapStringEditor(const wxGridCellAutoWrapStringEditor&) = delete;
+	wxGridCellAutoWrapStringEditor& operator=(const wxGridCellAutoWrapStringEditor&) = delete;
 };
 
 #if wxUSE_DATEPICKCTRL
@@ -418,7 +426,8 @@ private:
     wxDateTime m_value;
     wxString m_format;
 
-    wxDECLARE_NO_COPY_CLASS(wxGridCellDateEditor);
+    wxGridCellDateEditor(const wxGridCellDateEditor&) = delete;
+	wxGridCellDateEditor& operator=(const wxGridCellDateEditor&) = delete;
 };
 
 #endif // wxUSE_DATEPICKCTRL

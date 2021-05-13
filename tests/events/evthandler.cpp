@@ -490,7 +490,8 @@ private:
     MyHandler& m_handler;
     Handler1& m_h1;
 
-    wxDECLARE_NO_COPY_CLASS(Handler2);
+    Handler2(const Handler2&) = delete;
+	Handler2& operator=(const Handler2&) = delete;
 };
 
 TEST_CASE("Event::UnbindFromHandler", "[event][bind][unbind]")

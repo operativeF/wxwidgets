@@ -405,7 +405,8 @@ protected:
     // its intended recipients, returns true if it was processed.
     static bool DoProcessEvent(wxMenuBase* menu, wxEvent& event, wxWindow* win);
 
-    wxDECLARE_NO_COPY_CLASS(wxMenuBase);
+    wxMenuBase(const wxMenuBase&) = delete;
+	wxMenuBase& operator=(const wxMenuBase&) = delete;
 };
 
 #if wxUSE_EXTENDED_RTTI
@@ -578,7 +579,8 @@ protected:
     // the frame we are attached to (may be NULL)
     wxFrame *m_menuBarFrame;
 
-    wxDECLARE_NO_COPY_CLASS(wxMenuBarBase);
+    wxMenuBarBase(const wxMenuBarBase&) = delete;
+	wxMenuBarBase& operator=(const wxMenuBarBase&) = delete;
 };
 #endif
 
@@ -632,7 +634,8 @@ public:
 private:
     wxMenu& m_menu;
 
-    wxDECLARE_NO_COPY_CLASS(wxMenuInvokingWindowSetter);
+    wxMenuInvokingWindowSetter(const wxMenuInvokingWindowSetter&) = delete;
+	wxMenuInvokingWindowSetter& operator=(const wxMenuInvokingWindowSetter&) = delete;
 };
 
 #endif // wxUSE_MENUS

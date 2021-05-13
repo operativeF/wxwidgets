@@ -76,7 +76,8 @@ public:
 private:
     wxScrollHelperBase *m_scrollHelper;
 
-    wxDECLARE_NO_COPY_CLASS(wxScrollHelperEvtHandler);
+    wxScrollHelperEvtHandler(const wxScrollHelperEvtHandler&) = delete;
+	wxScrollHelperEvtHandler& operator=(const wxScrollHelperEvtHandler&) = delete;
 };
 
 #if wxUSE_TIMER
@@ -102,7 +103,8 @@ private:
     int m_pos,
         m_orient;
 
-    wxDECLARE_NO_COPY_CLASS(wxAutoScrollTimer);
+    wxAutoScrollTimer(const wxAutoScrollTimer&) = delete;
+	wxAutoScrollTimer& operator=(const wxAutoScrollTimer&) = delete;
 };
 
 // ============================================================================

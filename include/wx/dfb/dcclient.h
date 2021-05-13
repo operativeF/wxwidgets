@@ -38,7 +38,8 @@ private:
     friend class wxOverlayImpl; // for m_shouldFlip;
 
     wxDECLARE_DYNAMIC_CLASS(wxWindowDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxWindowDCImpl);
+    wxWindowDCImpl(const wxWindowDCImpl&) = delete;
+	wxWindowDCImpl& operator=(const wxWindowDCImpl&) = delete;
 };
 
 //-----------------------------------------------------------------------------
@@ -52,7 +53,8 @@ public:
     wxClientDCImpl(wxDC *owner, wxWindow *win);
 
     wxDECLARE_DYNAMIC_CLASS(wxClientDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxClientDCImpl);
+    wxClientDCImpl(const wxClientDCImpl&) = delete;
+	wxClientDCImpl& operator=(const wxClientDCImpl&) = delete;
 };
 
 
@@ -67,7 +69,8 @@ public:
     wxPaintDCImpl(wxDC *owner, wxWindow *win) : wxClientDCImpl(owner, win) { }
 
     wxDECLARE_DYNAMIC_CLASS(wxPaintDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxPaintDCImpl);
+    wxPaintDCImpl(const wxPaintDCImpl&) = delete;
+	wxPaintDCImpl& operator=(const wxPaintDCImpl&) = delete;
 };
 
 #endif // _WX_DFB_DCCLIENT_H_

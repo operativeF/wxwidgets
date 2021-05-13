@@ -454,7 +454,8 @@ private:
     void OnCharHook(wxKeyEvent& event);
 
 
-    wxDECLARE_NO_COPY_CLASS(wxTreeCtrlBase);
+    wxTreeCtrlBase(const wxTreeCtrlBase&) = delete;
+	wxTreeCtrlBase& operator=(const wxTreeCtrlBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

@@ -232,7 +232,8 @@ private:
     wxGenericPrefsDialog* m_dlg;
     int m_currentPage;
 
-    wxDECLARE_NO_COPY_CLASS(wxModalPreferencesEditorImpl);
+    wxModalPreferencesEditorImpl(const wxModalPreferencesEditorImpl&) = delete;
+	wxModalPreferencesEditorImpl& operator=(const wxModalPreferencesEditorImpl&) = delete;
 };
 
 inline

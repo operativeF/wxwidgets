@@ -133,7 +133,8 @@ protected:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxCommandProcessor);
-    wxDECLARE_NO_COPY_CLASS(wxCommandProcessor);
+    wxCommandProcessor(const wxCommandProcessor&) = delete;
+	wxCommandProcessor& operator=(const wxCommandProcessor&) = delete;
 };
 
 #endif // _WX_CMDPROC_H_

@@ -71,7 +71,8 @@ private:
     // data of this object
     class wxSoundData *m_data;
 
-    wxDECLARE_NO_COPY_CLASS(wxSound);
+    wxSound(const wxSound&) = delete;
+	wxSound& operator=(const wxSound&) = delete;
 };
 
 #endif

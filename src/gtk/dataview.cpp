@@ -179,7 +179,8 @@ private:
 
     GtkTreeSelection * const m_selection;
 
-    wxDECLARE_NO_COPY_CLASS(wxGtkTreeSelectionLock);
+    wxGtkTreeSelectionLock(const wxGtkTreeSelectionLock&) = delete;
+	wxGtkTreeSelectionLock& operator=(const wxGtkTreeSelectionLock&) = delete;
 };
 
 wxGtkTreeSelectionLock *wxGtkTreeSelectionLock::ms_instance = NULL;
@@ -2454,7 +2455,8 @@ public:
 
     wxBitmap* m_bitmap;
 
-    wxDECLARE_NO_COPY_CLASS(wxCellRendererPixbuf);
+    wxCellRendererPixbuf(const wxCellRendererPixbuf&) = delete;
+	wxCellRendererPixbuf& operator=(const wxCellRendererPixbuf&) = delete;
     wxCellRendererPixbuf() wxMEMBER_DELETE;
     ~wxCellRendererPixbuf() wxMEMBER_DELETE;
 };

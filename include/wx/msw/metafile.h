@@ -106,7 +106,8 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxMetafileDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxMetafileDCImpl);
+    wxMetafileDCImpl(const wxMetafileDCImpl&) = delete;
+	wxMetafileDCImpl& operator=(const wxMetafileDCImpl&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxMetafileDC: public wxDC
@@ -132,7 +133,8 @@ public:
 
 private:
     wxDECLARE_CLASS(wxMetafileDC);
-    wxDECLARE_NO_COPY_CLASS(wxMetafileDC);
+    wxMetafileDC(const wxMetafileDC&) = delete;
+	wxMetafileDC& operator=(const wxMetafileDC&) = delete;
 };
 
 

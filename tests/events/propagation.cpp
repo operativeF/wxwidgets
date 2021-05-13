@@ -127,7 +127,8 @@ struct TestEvtSink : wxEvtHandler
 
     const char m_tag;
 
-    wxDECLARE_NO_COPY_CLASS(TestEvtSink);
+    TestEvtSink(const TestEvtSink&) = delete;
+	TestEvtSink& operator=(const TestEvtSink&) = delete;
 };
 
 // a window handling the test event
@@ -151,7 +152,8 @@ private:
 
     const char m_tag;
 
-    wxDECLARE_NO_COPY_CLASS(TestWindow);
+    TestWindow(const TestWindow&) = delete;
+	TestWindow& operator=(const TestWindow&) = delete;
 };
 
 // a scroll window handling paint event: we want to have a special test case
@@ -196,7 +198,8 @@ private:
         event.Skip();
     }
 
-    wxDECLARE_NO_COPY_CLASS(TestScrollWindow);
+    TestScrollWindow(const TestScrollWindow&) = delete;
+	TestScrollWindow& operator=(const TestScrollWindow&) = delete;
 };
 
 int DoFilterEvent(wxEvent& event)
@@ -270,7 +273,8 @@ private:
     void PropagationLevel();
 #endif
 
-    wxDECLARE_NO_COPY_CLASS(EventPropagationTestCase);
+    EventPropagationTestCase(const EventPropagationTestCase&) = delete;
+	EventPropagationTestCase& operator=(const EventPropagationTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default
@@ -646,7 +650,8 @@ private:
 
     const char m_tag;
 
-    wxDECLARE_NO_COPY_CLASS(ContextMenuTestWindow);
+    ContextMenuTestWindow(const ContextMenuTestWindow&) = delete;
+	ContextMenuTestWindow& operator=(const ContextMenuTestWindow&) = delete;
 };
 
 void EventPropagationTestCase::ContextMenuEvent()

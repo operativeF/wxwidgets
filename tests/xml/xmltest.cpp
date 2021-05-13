@@ -96,7 +96,8 @@ private:
     void CopyDocument();
     void Doctype();
 
-    wxDECLARE_NO_COPY_CLASS(XmlTestCase);
+    XmlTestCase(const XmlTestCase&) = delete;
+	XmlTestCase& operator=(const XmlTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

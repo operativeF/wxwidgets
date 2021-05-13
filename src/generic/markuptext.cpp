@@ -98,7 +98,8 @@ private:
     wxSize m_size;
     int * const m_visibleHeight;    // may be NULL
 
-    wxDECLARE_NO_COPY_CLASS(wxMarkupParserMeasureOutput);
+    wxMarkupParserMeasureOutput(const wxMarkupParserMeasureOutput&) = delete;
+	wxMarkupParserMeasureOutput& operator=(const wxMarkupParserMeasureOutput&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -187,7 +188,8 @@ protected:
     // TODO-MULTILINE-MARKUP: Must keep vertical position too.
     int m_pos;
 
-    wxDECLARE_NO_COPY_CLASS(wxMarkupParserRenderOutput);
+    wxMarkupParserRenderOutput(const wxMarkupParserRenderOutput&) = delete;
+	wxMarkupParserRenderOutput& operator=(const wxMarkupParserRenderOutput&) = delete;
 };
 
 // An output renderer suitable for control labels.
@@ -299,7 +301,8 @@ private:
     wxEllipsizeMode m_ellipsizeMode;
     wxRendererNative* const m_renderer;
 
-    wxDECLARE_NO_COPY_CLASS(wxMarkupParserRenderItemOutput);
+    wxMarkupParserRenderItemOutput(const wxMarkupParserRenderItemOutput&) = delete;
+	wxMarkupParserRenderItemOutput& operator=(const wxMarkupParserRenderItemOutput&) = delete;
 };
 
 } // anonymous namespace

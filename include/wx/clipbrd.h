@@ -194,7 +194,8 @@ public:
 private:
     wxClipboard *m_clipboard;
 
-    wxDECLARE_NO_COPY_CLASS(wxClipboardLocker);
+    wxClipboardLocker(const wxClipboardLocker&) = delete;
+	wxClipboardLocker& operator=(const wxClipboardLocker&) = delete;
 };
 
 #endif // wxUSE_CLIPBOARD

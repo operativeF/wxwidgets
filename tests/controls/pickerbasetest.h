@@ -36,7 +36,8 @@ protected:
     void Controls();
 
 private:
-    wxDECLARE_NO_COPY_CLASS(PickerBaseTestCase);
+    PickerBaseTestCase(const PickerBaseTestCase&) = delete;
+	PickerBaseTestCase& operator=(const PickerBaseTestCase&) = delete;
 };
 
 #endif // _WX_TESTS_CONTROLS_PICKERBASETEST_H_

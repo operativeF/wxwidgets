@@ -78,7 +78,8 @@ private:
 #endif
 #endif
 
-    wxDECLARE_NO_COPY_CLASS(URITestCase);
+    URITestCase(const URITestCase&) = delete;
+	URITestCase& operator=(const URITestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

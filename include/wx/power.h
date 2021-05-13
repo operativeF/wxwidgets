@@ -135,7 +135,8 @@ private:
     const wxPowerResourceKind m_kind;
     const bool m_acquired;
 
-    wxDECLARE_NO_COPY_CLASS(wxPowerResourceBlocker);
+    wxPowerResourceBlocker(const wxPowerResourceBlocker&) = delete;
+	wxPowerResourceBlocker& operator=(const wxPowerResourceBlocker&) = delete;
 };
 
 // ----------------------------------------------------------------------------

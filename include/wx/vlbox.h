@@ -304,7 +304,8 @@ private:
     wxColour m_colBgSel;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxVListBox);
+    wxVListBox(const wxVListBox&) = delete;
+	wxVListBox& operator=(const wxVListBox&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxVListBox);
 };
 

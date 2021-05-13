@@ -48,7 +48,8 @@ private:
     void TestCtypeFunctionsWith(const wxXLocale& loc);
     void TestStdlibFunctionsWith(const wxXLocale& loc);
 
-    wxDECLARE_NO_COPY_CLASS(XLocaleTestCase);
+    XLocaleTestCase(const XLocaleTestCase&) = delete;
+	XLocaleTestCase& operator=(const XLocaleTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

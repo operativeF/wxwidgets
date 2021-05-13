@@ -136,7 +136,8 @@ protected:
 
     bool                m_shouldPreventAppExit;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlHelpController);
+    wxHtmlHelpController(const wxHtmlHelpController&) = delete;
+	wxHtmlHelpController& operator=(const wxHtmlHelpController&) = delete;
 };
 
 /*

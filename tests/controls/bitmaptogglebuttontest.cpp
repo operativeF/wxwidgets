@@ -42,7 +42,8 @@ private:
 
     wxBitmapToggleButton* m_button;
 
-    wxDECLARE_NO_COPY_CLASS(BitmapToggleButtonTestCase);
+    BitmapToggleButtonTestCase(const BitmapToggleButtonTestCase&) = delete;
+	BitmapToggleButtonTestCase& operator=(const BitmapToggleButtonTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

@@ -64,7 +64,8 @@ public:
     }
 
 protected:
-    wxDECLARE_NO_COPY_CLASS(wxToggleButtonBase);
+    wxToggleButtonBase(const wxToggleButtonBase&) = delete;
+	wxToggleButtonBase& operator=(const wxToggleButtonBase&) = delete;
 };
 
 

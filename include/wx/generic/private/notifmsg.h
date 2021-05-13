@@ -46,7 +46,8 @@ private:
     // notification message is represented by a frame in this implementation
     class wxNotificationMessageWindow *m_window;
 
-    wxDECLARE_NO_COPY_CLASS(wxGenericNotificationMessageImpl);
+    wxGenericNotificationMessageImpl(const wxGenericNotificationMessageImpl&) = delete;
+	wxGenericNotificationMessageImpl& operator=(const wxGenericNotificationMessageImpl&) = delete;
 };
 
 #endif // _WX_GENERIC_PRIVATE_NOTIFMSG_H_

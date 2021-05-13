@@ -71,7 +71,8 @@ protected:
 private:
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxNumberEntryDialog);
-    wxDECLARE_NO_COPY_CLASS(wxNumberEntryDialog);
+    wxNumberEntryDialog(const wxNumberEntryDialog&) = delete;
+	wxNumberEntryDialog& operator=(const wxNumberEntryDialog&) = delete;
 };
 
 // ----------------------------------------------------------------------------

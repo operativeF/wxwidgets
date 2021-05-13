@@ -63,7 +63,8 @@ public:
 private:
     FILE *m_fp;
 
-    wxDECLARE_NO_COPY_CLASS(wxStdioPipe);
+    wxStdioPipe(const wxStdioPipe&) = delete;
+	wxStdioPipe& operator=(const wxStdioPipe&) = delete;
 };
 
 // ============================================================================

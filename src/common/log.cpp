@@ -165,7 +165,8 @@ protected:
     }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxLogOutputBest);
+    wxLogOutputBest(const wxLogOutputBest&) = delete;
+	wxLogOutputBest& operator=(const wxLogOutputBest&) = delete;
 };
 
 } // anonymous namespace

@@ -44,7 +44,8 @@ private:
     wxDatePickerCtrl* m_datepicker;
     wxButton* m_button;
 
-    wxDECLARE_NO_COPY_CLASS(DatePickerCtrlTestCase);
+    DatePickerCtrlTestCase(const DatePickerCtrlTestCase&) = delete;
+	DatePickerCtrlTestCase& operator=(const DatePickerCtrlTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

@@ -52,7 +52,8 @@ private:
     void ClientToScreen();
     void FindWindowAtPoint();
 
-    wxDECLARE_NO_COPY_CLASS(MiscGUIFuncsTestCase);
+    MiscGUIFuncsTestCase(const MiscGUIFuncsTestCase&) = delete;
+	MiscGUIFuncsTestCase& operator=(const MiscGUIFuncsTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

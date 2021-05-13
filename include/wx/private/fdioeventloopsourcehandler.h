@@ -32,7 +32,8 @@ public:
 protected:
     wxEventLoopSourceHandler* const m_handler;
 
-    wxDECLARE_NO_COPY_CLASS(wxFDIOEventLoopSourceHandler);
+    wxFDIOEventLoopSourceHandler(const wxFDIOEventLoopSourceHandler&) = delete;
+	wxFDIOEventLoopSourceHandler& operator=(const wxFDIOEventLoopSourceHandler&) = delete;
 };
 
 #endif // _WX_PRIVATE_FDIO_EVENT_LOOP_SOURCE_HANDLER_H

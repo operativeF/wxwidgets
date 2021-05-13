@@ -167,7 +167,8 @@ protected:
 
     friend class wxConditionInternal;
 
-    wxDECLARE_NO_COPY_CLASS(wxMutex);
+    wxMutex(const wxMutex&) = delete;
+	wxMutex& operator=(const wxMutex&) = delete;
 };
 
 // a helper class which locks the mutex in the ctor and unlocks it in the dtor:
@@ -271,7 +272,8 @@ private:
     };
 #endif // Unix/Win32
 
-    wxDECLARE_NO_COPY_CLASS(wxCriticalSection);
+    wxCriticalSection(const wxCriticalSection&) = delete;
+	wxCriticalSection& operator=(const wxCriticalSection&) = delete;
 };
 
 #if wxCRITSECT_IS_MUTEX
@@ -307,7 +309,8 @@ public:
 private:
     wxCriticalSection& m_critsect;
 
-    wxDECLARE_NO_COPY_CLASS(wxCriticalSectionLocker);
+    wxCriticalSectionLocker(const wxCriticalSectionLocker&) = delete;
+	wxCriticalSectionLocker& operator=(const wxCriticalSectionLocker&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -377,7 +380,8 @@ public:
 private:
     wxConditionInternal *m_internal;
 
-    wxDECLARE_NO_COPY_CLASS(wxCondition);
+    wxCondition(const wxCondition&) = delete;
+	wxCondition& operator=(const wxCondition&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -417,7 +421,8 @@ public:
 private:
     wxSemaphoreInternal *m_internal;
 
-    wxDECLARE_NO_COPY_CLASS(wxSemaphore);
+    wxSemaphore(const wxSemaphore&) = delete;
+	wxSemaphore& operator=(const wxSemaphore&) = delete;
 };
 
 // ----------------------------------------------------------------------------

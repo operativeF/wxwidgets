@@ -88,7 +88,8 @@ private:
     // the implementation details (platform specific)
     class WXDLLIMPEXP_FWD_BASE wxSingleInstanceCheckerImpl *m_impl;
 
-    wxDECLARE_NO_COPY_CLASS(wxSingleInstanceChecker);
+    wxSingleInstanceChecker(const wxSingleInstanceChecker&) = delete;
+	wxSingleInstanceChecker& operator=(const wxSingleInstanceChecker&) = delete;
 };
 
 #endif // wxUSE_SNGLINST_CHECKER

@@ -35,7 +35,8 @@ private:
 
     void Load();
 
-    wxDECLARE_NO_COPY_CLASS(DynamicLibraryTestCase);
+    DynamicLibraryTestCase(const DynamicLibraryTestCase&) = delete;
+	DynamicLibraryTestCase& operator=(const DynamicLibraryTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

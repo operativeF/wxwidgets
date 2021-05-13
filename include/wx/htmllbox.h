@@ -191,7 +191,8 @@ private:
 
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxHtmlListBox);
+    wxHtmlListBox(const wxHtmlListBox&) = delete;
+	wxHtmlListBox& operator=(const wxHtmlListBox&) = delete;
 };
 
 
@@ -321,7 +322,8 @@ protected:
     // not be named m_clientdata as that clashes with the name of an
     // anonymous struct member in wxEvtHandler, which we derive from.
 
-    wxDECLARE_NO_COPY_CLASS(wxSimpleHtmlListBox);
+    wxSimpleHtmlListBox(const wxSimpleHtmlListBox&) = delete;
+	wxSimpleHtmlListBox& operator=(const wxSimpleHtmlListBox&) = delete;
 };
 
 #endif // wxUSE_HTML

@@ -43,7 +43,8 @@ public:
     bool Reset();
 
 private:
-    wxDECLARE_NO_COPY_CLASS(Event);
+    Event(const Event&) = delete;
+	Event& operator=(const Event&) = delete;
 };
 
 } // namespace wxWinAPI

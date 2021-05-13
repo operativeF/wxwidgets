@@ -72,7 +72,8 @@ private:
 
     friend class wxTipWindowView;
 
-    wxDECLARE_NO_COPY_CLASS(wxTipWindow);
+    wxTipWindow(const wxTipWindow&) = delete;
+	wxTipWindow& operator=(const wxTipWindow&) = delete;
 };
 
 #endif // wxUSE_TIPWINDOW

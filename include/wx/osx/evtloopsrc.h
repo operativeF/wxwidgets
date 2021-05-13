@@ -37,7 +37,8 @@ public:
 private:
     CFSocketRef m_cfSocket;
 
-    wxDECLARE_NO_COPY_CLASS(wxCFEventLoopSource);
+    wxCFEventLoopSource(const wxCFEventLoopSource&) = delete;
+	wxCFEventLoopSource& operator=(const wxCFEventLoopSource&) = delete;
 };
 
 #endif // _WX_OSX_EVTLOOPSRC_H_

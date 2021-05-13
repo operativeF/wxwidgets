@@ -46,7 +46,8 @@ private:
     void Delete();
     void StaticCast();
 
-    wxDECLARE_NO_COPY_CLASS(MiscTestCase);
+    MiscTestCase(const MiscTestCase&) = delete;
+	MiscTestCase& operator=(const MiscTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

@@ -67,7 +67,8 @@ class wxHtmlImageMapAreaCell : public wxHtmlCell
                   wxHtmlRenderingInfo& WXUNUSED(info)) override {}
 
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlImageMapAreaCell);
+    wxHtmlImageMapAreaCell(const wxHtmlImageMapAreaCell&) = delete;
+	wxHtmlImageMapAreaCell& operator=(const wxHtmlImageMapAreaCell&) = delete;
 };
 
 
@@ -245,7 +246,8 @@ class wxHtmlImageMapCell : public wxHtmlCell
                   int WXUNUSED(view_y1), int WXUNUSED(view_y2),
                   wxHtmlRenderingInfo& WXUNUSED(info)) override {}
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlImageMapCell);
+    wxHtmlImageMapCell(const wxHtmlImageMapCell&) = delete;
+	wxHtmlImageMapCell& operator=(const wxHtmlImageMapCell&) = delete;
 };
 
 
@@ -332,7 +334,8 @@ private:
     mutable wxString    m_mapName;
     wxString            m_alt;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlImageCell);
+    wxHtmlImageCell(const wxHtmlImageCell&) = delete;
+	wxHtmlImageCell& operator=(const wxHtmlImageCell&) = delete;
 };
 
 #if wxUSE_GIF && wxUSE_TIMER
@@ -348,7 +351,8 @@ class wxGIFTimer : public wxTimer
     private:
         wxHtmlImageCell *m_cell;
 
-    wxDECLARE_NO_COPY_CLASS(wxGIFTimer);
+    wxGIFTimer(const wxGIFTimer&) = delete;
+	wxGIFTimer& operator=(const wxGIFTimer&) = delete;
 };
 #endif
 

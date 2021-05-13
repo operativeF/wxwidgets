@@ -71,7 +71,8 @@ public:
   const void*   m_sendingData;
   int           m_dataSize;
 
-  wxDECLARE_NO_COPY_CLASS(wxDDEConnection);
+  wxDDEConnection(const wxDDEConnection&) = delete;
+	wxDDEConnection& operator=(const wxDDEConnection&) = delete;
   wxDECLARE_DYNAMIC_CLASS(wxDDEConnection);
 };
 

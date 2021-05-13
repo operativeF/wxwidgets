@@ -41,7 +41,8 @@ private:
     wxFDIOHandler * const m_fdioHandler;
     const int m_fd;
 
-    wxDECLARE_NO_COPY_CLASS(wxUnixEventLoopSource);
+    wxUnixEventLoopSource(const wxUnixEventLoopSource&) = delete;
+	wxUnixEventLoopSource& operator=(const wxUnixEventLoopSource&) = delete;
 };
 
 #endif // _WX_UNIX_EVTLOOPSRC_H_

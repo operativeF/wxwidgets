@@ -176,7 +176,8 @@ public:
 
 private:
     wxDECLARE_CLASS(wxPrintNativeDataBase);
-    wxDECLARE_NO_COPY_CLASS(wxPrintNativeDataBase);
+    wxPrintNativeDataBase(const wxPrintNativeDataBase&) = delete;
+	wxPrintNativeDataBase& operator=(const wxPrintNativeDataBase&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -220,7 +221,8 @@ public:
 
 private:
     wxDECLARE_CLASS(wxPrinterBase);
-    wxDECLARE_NO_COPY_CLASS(wxPrinterBase);
+    wxPrinterBase(const wxPrinterBase&) = delete;
+	wxPrinterBase& operator=(const wxPrinterBase&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -247,7 +249,8 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxPrinter);
-    wxDECLARE_NO_COPY_CLASS(wxPrinter);
+    wxPrinter(const wxPrinter&) = delete;
+	wxPrinter& operator=(const wxPrinter&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -345,7 +348,8 @@ private:
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxPrintout);
-    wxDECLARE_NO_COPY_CLASS(wxPrintout);
+    wxPrintout(const wxPrintout&) = delete;
+	wxPrintout& operator=(const wxPrintout&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -384,7 +388,8 @@ private:
 
     wxDECLARE_CLASS(wxPreviewCanvas);
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxPreviewCanvas);
+    wxPreviewCanvas(const wxPreviewCanvas&) = delete;
+	wxPreviewCanvas& operator=(const wxPreviewCanvas&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -446,7 +451,8 @@ private:
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_CLASS(wxPreviewFrame);
-    wxDECLARE_NO_COPY_CLASS(wxPreviewFrame);
+    wxPreviewFrame(const wxPreviewFrame&) = delete;
+	wxPreviewFrame& operator=(const wxPreviewFrame&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -563,7 +569,8 @@ private:
     void OnZoomChoice(wxCommandEvent& WXUNUSED(event)) { DoZoom(); }
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxPreviewControlBar);
+    wxPreviewControlBar(const wxPreviewControlBar&) = delete;
+	wxPreviewControlBar& operator=(const wxPreviewControlBar&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -677,7 +684,8 @@ protected:
 private:
     void Init(wxPrintout *printout, wxPrintout *printoutForPrinting);
 
-    wxDECLARE_NO_COPY_CLASS(wxPrintPreviewBase);
+    wxPrintPreviewBase(const wxPrintPreviewBase&) = delete;
+	wxPrintPreviewBase& operator=(const wxPrintPreviewBase&) = delete;
     wxDECLARE_CLASS(wxPrintPreviewBase);
 };
 
@@ -731,7 +739,8 @@ private:
 
 private:
     wxDECLARE_CLASS(wxPrintPreview);
-    wxDECLARE_NO_COPY_CLASS(wxPrintPreview);
+    wxPrintPreview(const wxPrintPreview&) = delete;
+	wxPrintPreview& operator=(const wxPrintPreview&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -757,7 +766,8 @@ private:
     wxStaticText *m_progress;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxPrintAbortDialog);
+    wxPrintAbortDialog(const wxPrintAbortDialog&) = delete;
+	wxPrintAbortDialog& operator=(const wxPrintAbortDialog&) = delete;
 };
 
 #endif // wxUSE_PRINTING_ARCHITECTURE

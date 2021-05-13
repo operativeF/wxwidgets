@@ -226,7 +226,8 @@ protected:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxDragImage);
-    wxDECLARE_NO_COPY_CLASS(wxDragImage);
+    wxDragImage(const wxDragImage&) = delete;
+	wxDragImage& operator=(const wxDragImage&) = delete;
 };
 
 #endif // wxUSE_DRAGIMAGE

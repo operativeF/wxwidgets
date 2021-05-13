@@ -100,7 +100,8 @@ protected:
     void DoMisc(int expectedLen, const wxString& expectedString,
                 size_t max, const wxChar *format, ...);
 
-    wxDECLARE_NO_COPY_CLASS(VsnprintfTestCase);
+    VsnprintfTestCase(const VsnprintfTestCase&) = delete;
+	VsnprintfTestCase& operator=(const VsnprintfTestCase&) = delete;
 };
 
 TEST_CASE_METHOD(VsnprintfTestCase, "Vsnprintf::C", "[vsnprintf]")

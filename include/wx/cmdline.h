@@ -368,7 +368,8 @@ private:
 
     friend class wxCmdLineArgs;
     friend class wxCmdLineArgs::const_iterator;
-    wxDECLARE_NO_COPY_CLASS(wxCmdLineParser);
+    wxCmdLineParser(const wxCmdLineParser&) = delete;
+	wxCmdLineParser& operator=(const wxCmdLineParser&) = delete;
 };
 
 #else // !wxUSE_CMDLINE_PARSER

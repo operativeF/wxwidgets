@@ -47,7 +47,8 @@ private:
     void CopyObj();
     void AssignObj();
 
-    wxDECLARE_NO_COPY_CLASS(TokenizerTestCase);
+    TokenizerTestCase(const TokenizerTestCase&) = delete;
+	TokenizerTestCase& operator=(const TokenizerTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

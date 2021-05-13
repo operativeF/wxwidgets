@@ -98,7 +98,8 @@ private:
     void ScopedBuffers();
     void SupplementaryUniChar();
 
-    wxDECLARE_NO_COPY_CLASS(StringTestCase);
+    StringTestCase(const StringTestCase&) = delete;
+	StringTestCase& operator=(const StringTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

@@ -90,7 +90,8 @@ private:
 
     friend class wxSocketMSWManager;
 
-    wxDECLARE_NO_COPY_CLASS(wxSocketImplMSW);
+    wxSocketImplMSW(const wxSocketImplMSW&) = delete;
+	wxSocketImplMSW& operator=(const wxSocketImplMSW&) = delete;
 };
 
 #endif  /* _WX_MSW_GSOCKMSW_H_ */

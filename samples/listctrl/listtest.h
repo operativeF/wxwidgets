@@ -25,7 +25,8 @@ public:
     bool OnInit() override;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(MyApp);
+    MyApp(const MyApp&) = delete;
+	MyApp& operator=(const MyApp&) = delete;
 };
 
 class MyListCtrl: public wxListCtrl
@@ -94,7 +95,8 @@ private:
     // checked boxes in virtual list
     wxSelectionStore m_checked;
 
-    wxDECLARE_NO_COPY_CLASS(MyListCtrl);
+    MyListCtrl(const MyListCtrl&) = delete;
+	MyListCtrl& operator=(const MyListCtrl&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 
@@ -189,7 +191,8 @@ private:
     int m_numListItems;
 
 
-    wxDECLARE_NO_COPY_CLASS(MyFrame);
+    MyFrame(const MyFrame&) = delete;
+	MyFrame& operator=(const MyFrame&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

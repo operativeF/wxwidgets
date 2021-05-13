@@ -151,7 +151,8 @@ private:
         long wxExecuteReturnCode;
     };
 
-    wxDECLARE_NO_COPY_CLASS(ExecTestCase);
+    ExecTestCase(const ExecTestCase&) = delete;
+	ExecTestCase& operator=(const ExecTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default
@@ -326,7 +327,8 @@ public:
     }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(TestAsyncProcess);
+    TestAsyncProcess(const TestAsyncProcess&) = delete;
+	TestAsyncProcess& operator=(const TestAsyncProcess&) = delete;
 };
 
 void ExecTestCase::TestAsync()

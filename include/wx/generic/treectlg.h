@@ -375,7 +375,8 @@ private:
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxGenericTreeCtrl);
-    wxDECLARE_NO_COPY_CLASS(wxGenericTreeCtrl);
+    wxGenericTreeCtrl(const wxGenericTreeCtrl&) = delete;
+	wxGenericTreeCtrl& operator=(const wxGenericTreeCtrl&) = delete;
 };
 
 // Also define wxTreeCtrl to be wxGenericTreeCtrl on all platforms without a

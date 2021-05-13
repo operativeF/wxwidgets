@@ -366,7 +366,8 @@ protected:
 
     // no copy ctor/assignment operators (or we'd try to unload the library
     // twice)
-    wxDECLARE_NO_COPY_CLASS(wxDynamicLibrary);
+    wxDynamicLibrary(const wxDynamicLibrary&) = delete;
+	wxDynamicLibrary& operator=(const wxDynamicLibrary&) = delete;
 };
 
 #ifdef __WINDOWS__

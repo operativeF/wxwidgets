@@ -120,7 +120,8 @@ protected:
     // the last string we searched for
     wxString m_lastSearch;
 
-    wxDECLARE_NO_COPY_CLASS(wxFindReplaceDialogBase);
+    wxFindReplaceDialogBase(const wxFindReplaceDialogBase&) = delete;
+	wxFindReplaceDialogBase& operator=(const wxFindReplaceDialogBase&) = delete;
 };
 
 // include wxFindReplaceDialog declaration

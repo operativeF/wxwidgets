@@ -348,7 +348,8 @@ protected:
 
     wxScrollHelperEvtHandler *m_handler;
 
-    wxDECLARE_NO_COPY_CLASS(wxScrollHelperBase);
+    wxScrollHelperBase(const wxScrollHelperBase&) = delete;
+	wxScrollHelperBase& operator=(const wxScrollHelperBase&) = delete;
 };
 
 // this macro can be used in a wxScrollHelper-derived class to forward wxWindow
@@ -478,7 +479,8 @@ protected:
     }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxScrolled);
+    wxScrolled(const wxScrolled&) = delete;
+	wxScrolled& operator=(const wxScrolled&) = delete;
 };
 
 // for compatibility with existing code, we provide wxScrolledWindow

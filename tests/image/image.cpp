@@ -120,7 +120,8 @@ private:
     void ScaleCompare();
     void CreateBitmapFromCursor();
 
-    wxDECLARE_NO_COPY_CLASS(ImageTestCase);
+    ImageTestCase(const ImageTestCase&) = delete;
+	ImageTestCase& operator=(const ImageTestCase&) = delete;
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION( ImageTestCase );

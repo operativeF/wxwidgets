@@ -93,7 +93,8 @@ private:
 
     char m_testData[TEST_SIZE];
 
-    wxDECLARE_NO_COPY_CLASS(StdStreamTestCase);
+    StdStreamTestCase(const StdStreamTestCase&) = delete;
+	StdStreamTestCase& operator=(const StdStreamTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

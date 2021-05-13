@@ -41,7 +41,8 @@ private:
     void GetInputStream();
     void CopyAndAssignment();
 
-    wxDECLARE_NO_COPY_CLASS(URLTestCase);
+    URLTestCase(const URLTestCase&) = delete;
+	URLTestCase& operator=(const URLTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

@@ -106,7 +106,8 @@ private:
                  m_child2,
                  m_grandchild;
 
-    wxDECLARE_NO_COPY_CLASS(TreeCtrlTestCase);
+    TreeCtrlTestCase(const TreeCtrlTestCase&) = delete;
+	TreeCtrlTestCase& operator=(const TreeCtrlTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

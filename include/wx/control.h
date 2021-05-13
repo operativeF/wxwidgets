@@ -194,7 +194,8 @@ protected:
     // as it was passed to the last SetLabel() call
     wxString m_labelOrig;
 
-    wxDECLARE_NO_COPY_CLASS(wxControlBase);
+    wxControlBase(const wxControlBase&) = delete;
+	wxControlBase& operator=(const wxControlBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

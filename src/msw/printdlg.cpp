@@ -82,7 +82,8 @@ public:
 private:
     HANDLE m_hPrinter;
 
-    wxDECLARE_NO_COPY_CLASS(WinPrinter);
+    WinPrinter(const WinPrinter&) = delete;
+	WinPrinter& operator=(const WinPrinter&) = delete;
 };
 
 

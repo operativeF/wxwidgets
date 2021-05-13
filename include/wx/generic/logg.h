@@ -39,7 +39,8 @@ private:
     // the control we use
     wxTextCtrl *m_pTextCtrl;
 
-    wxDECLARE_NO_COPY_CLASS(wxLogTextCtrl);
+    wxLogTextCtrl(const wxLogTextCtrl&) = delete;
+	wxLogTextCtrl& operator=(const wxLogTextCtrl&) = delete;
 };
 
 #endif // wxUSE_TEXTCTRL
@@ -141,7 +142,8 @@ protected:
 private:
     wxLogFrame *m_pLogFrame;      // the log frame
 
-    wxDECLARE_NO_COPY_CLASS(wxLogWindow);
+    wxLogWindow(const wxLogWindow&) = delete;
+	wxLogWindow& operator=(const wxLogWindow&) = delete;
 };
 
 #endif // wxUSE_LOGWINDOW

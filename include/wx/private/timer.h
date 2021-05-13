@@ -66,7 +66,8 @@ protected:
     bool    m_oneShot;      // true if one shot
 
 
-    wxDECLARE_NO_COPY_CLASS(wxTimerImpl);
+    wxTimerImpl(const wxTimerImpl&) = delete;
+	wxTimerImpl& operator=(const wxTimerImpl&) = delete;
 };
 
 #endif // _WX_TIMERIMPL_H_BASE_

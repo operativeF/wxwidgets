@@ -83,7 +83,8 @@ private:
     // the list of facenames we already found while enumerating facenames
     wxArrayString m_facenames;
 
-    wxDECLARE_NO_COPY_CLASS(wxFontEnumeratorHelper);
+    wxFontEnumeratorHelper(const wxFontEnumeratorHelper&) = delete;
+	wxFontEnumeratorHelper& operator=(const wxFontEnumeratorHelper&) = delete;
 };
 
 // ----------------------------------------------------------------------------

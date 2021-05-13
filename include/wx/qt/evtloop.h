@@ -31,7 +31,8 @@ private:
     QEventLoop *m_qtEventLoop;
     wxObjectDataPtr<wxQtIdleTimer> m_qtIdleTimer;
 
-    wxDECLARE_NO_COPY_CLASS(wxQtEventLoopBase);
+    wxQtEventLoopBase(const wxQtEventLoopBase&) = delete;
+	wxQtEventLoopBase& operator=(const wxQtEventLoopBase&) = delete;
 };
 
 

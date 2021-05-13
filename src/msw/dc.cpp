@@ -400,7 +400,8 @@ public:
     explicit wxBrushAttrsSetter(wxMSWDCImpl& dc);
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxBrushAttrsSetter);
+    wxBrushAttrsSetter(const wxBrushAttrsSetter&) = delete;
+	wxBrushAttrsSetter& operator=(const wxBrushAttrsSetter&) = delete;
 };
 
 // this class sets the stretch blit mode to COLORONCOLOR during its lifetime
@@ -430,7 +431,8 @@ private:
 
     int m_modeOld;
 
-    wxDECLARE_NO_COPY_CLASS(StretchBltModeChanger);
+    StretchBltModeChanger(const StretchBltModeChanger&) = delete;
+	StretchBltModeChanger& operator=(const StretchBltModeChanger&) = delete;
 };
 
 // ===========================================================================

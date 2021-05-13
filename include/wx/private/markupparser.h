@@ -111,7 +111,8 @@ public:
     virtual void OnSpanEnd(const wxMarkupSpanAttributes& attrs) = 0;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxMarkupParserOutput);
+    wxMarkupParserOutput(const wxMarkupParserOutput&) = delete;
+	wxMarkupParserOutput& operator=(const wxMarkupParserOutput&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -170,7 +171,8 @@ private:
 
     wxMarkupParserOutput& m_output;
 
-    wxDECLARE_NO_COPY_CLASS(wxMarkupParser);
+    wxMarkupParser(const wxMarkupParser&) = delete;
+	wxMarkupParser& operator=(const wxMarkupParser&) = delete;
 };
 
 #endif // _WX_PRIVATE_MARKUPPARSER_H_

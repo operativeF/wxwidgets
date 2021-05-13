@@ -252,7 +252,8 @@ protected:
     wxDECLARE_EVENT_TABLE();
 #endif // wxUSE_MENUS
 
-    wxDECLARE_NO_COPY_CLASS(wxFrameBase);
+    wxFrameBase(const wxFrameBase&) = delete;
+	wxFrameBase& operator=(const wxFrameBase&) = delete;
 };
 
 // include the real class declaration

@@ -442,7 +442,8 @@ private:
     }
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxDataViewHeaderWindow);
+    wxDataViewHeaderWindow(const wxDataViewHeaderWindow&) = delete;
+	wxDataViewHeaderWindow& operator=(const wxDataViewHeaderWindow&) = delete;
 };
 
 wxBEGIN_EVENT_TABLE(wxDataViewHeaderWindow, wxHeaderCtrl)

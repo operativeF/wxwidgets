@@ -108,7 +108,8 @@ private:
     LONG_PTR m_styleCurrent;
     LONG_PTR m_style;
 
-    wxDECLARE_NO_COPY_CLASS(wxMSWWinLongUpdater);
+    wxMSWWinLongUpdater(const wxMSWWinLongUpdater&) = delete;
+	wxMSWWinLongUpdater& operator=(const wxMSWWinLongUpdater&) = delete;
 };
 
 // A variant of wxMSWWinLongUpdater which updates the extended style.

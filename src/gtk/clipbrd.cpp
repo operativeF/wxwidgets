@@ -106,7 +106,8 @@ public:
 private:
     static wxClipboard *ms_clipboard;
 
-    wxDECLARE_NO_COPY_CLASS(wxClipboardSync);
+    wxClipboardSync(const wxClipboardSync&) = delete;
+	wxClipboardSync& operator=(const wxClipboardSync&) = delete;
 };
 
 wxClipboard *wxClipboardSync::ms_clipboard = NULL;

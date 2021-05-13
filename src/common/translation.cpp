@@ -1092,7 +1092,8 @@ private:
 
     bool m_bSwapped;   // wrong endianness?
 
-    wxDECLARE_NO_COPY_CLASS(wxMsgCatalogFile);
+    wxMsgCatalogFile(const wxMsgCatalogFile&) = delete;
+	wxMsgCatalogFile& operator=(const wxMsgCatalogFile&) = delete;
 };
 
 // ----------------------------------------------------------------------------

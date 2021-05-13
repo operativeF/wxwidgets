@@ -434,7 +434,8 @@ private:
 
     std::queue<const wxModalExpectation*> m_expectations;
 
-    wxDECLARE_NO_COPY_CLASS(wxTestingModalHook);
+    wxTestingModalHook(const wxTestingModalHook&) = delete;
+	wxTestingModalHook& operator=(const wxTestingModalHook&) = delete;
 };
 
 

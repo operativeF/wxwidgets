@@ -68,7 +68,8 @@ private:
     void TestStandardPaths();
     void TestFSVolume();
 
-    wxDECLARE_NO_COPY_CLASS(InteractiveOutputTestCase);
+    InteractiveOutputTestCase(const InteractiveOutputTestCase&) = delete;
+	InteractiveOutputTestCase& operator=(const InteractiveOutputTestCase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

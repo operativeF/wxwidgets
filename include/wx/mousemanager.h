@@ -146,7 +146,8 @@ private:
 
     wxDECLARE_EVENT_TABLE();
 
-    wxDECLARE_NO_COPY_CLASS(wxMouseEventsManager);
+    wxMouseEventsManager(const wxMouseEventsManager&) = delete;
+	wxMouseEventsManager& operator=(const wxMouseEventsManager&) = delete;
 };
 
 #endif // _WX_MOUSEMANAGER_H_

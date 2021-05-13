@@ -76,7 +76,8 @@ public:
 private:
     const wxColour m_colFg, m_colBg;
 
-    wxDECLARE_NO_COPY_CLASS(CustomColumnHeaderRenderer);
+    CustomColumnHeaderRenderer(const CustomColumnHeaderRenderer&) = delete;
+	CustomColumnHeaderRenderer& operator=(const CustomColumnHeaderRenderer&) = delete;
 };
 
 // And a custom attributes provider which uses custom column header renderer
@@ -116,7 +117,8 @@ private:
 
     bool m_useCustom;
 
-    wxDECLARE_NO_COPY_CLASS(CustomColumnHeadersProvider);
+    CustomColumnHeadersProvider(const CustomColumnHeadersProvider&) = delete;
+	CustomColumnHeadersProvider& operator=(const CustomColumnHeadersProvider&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -2572,7 +2574,8 @@ private:
     // fla for EVT_IDLE handler
     bool m_shouldUpdateOrder;
 
-    wxDECLARE_NO_COPY_CLASS(TabularGridFrame);
+    TabularGridFrame(const TabularGridFrame&) = delete;
+	TabularGridFrame& operator=(const TabularGridFrame&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

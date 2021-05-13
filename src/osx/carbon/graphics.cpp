@@ -1525,7 +1525,8 @@ public:
 
     void SetNativeContext( CGContextRef cg );
 
-    wxDECLARE_NO_COPY_CLASS(wxMacCoreGraphicsContext);
+    wxMacCoreGraphicsContext(const wxMacCoreGraphicsContext&) = delete;
+	wxMacCoreGraphicsContext& operator=(const wxMacCoreGraphicsContext&) = delete;
 
 private:
     bool EnsureIsValid();

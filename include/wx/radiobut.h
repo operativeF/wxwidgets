@@ -48,7 +48,8 @@ public:
     wxRadioButton* GetNextInGroup() const;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxRadioButtonBase);
+    wxRadioButtonBase(const wxRadioButtonBase&) = delete;
+	wxRadioButtonBase& operator=(const wxRadioButtonBase&) = delete;
 };
 
 extern WXDLLIMPEXP_DATA_CORE(const char) wxRadioButtonNameStr[];

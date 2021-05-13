@@ -212,7 +212,8 @@ private:
     DocsList m_childDocuments;
 
     wxDECLARE_ABSTRACT_CLASS(wxDocument);
-    wxDECLARE_NO_COPY_CLASS(wxDocument);
+    wxDocument(const wxDocument&) = delete;
+	wxDocument& operator=(const wxDocument&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxView: public wxEvtHandler
@@ -285,7 +286,8 @@ protected:
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxView);
-    wxDECLARE_NO_COPY_CLASS(wxView);
+    wxView(const wxView&) = delete;
+	wxView& operator=(const wxView&) = delete;
 };
 
 // Represents user interface (and other) properties of documents and views
@@ -370,7 +372,8 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxDocTemplate);
-    wxDECLARE_NO_COPY_CLASS(wxDocTemplate);
+    wxDocTemplate(const wxDocTemplate&) = delete;
+	wxDocTemplate& operator=(const wxDocTemplate&) = delete;
 };
 
 // One object of this class may be created in an application, to manage all
@@ -550,7 +553,8 @@ protected:
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxDocManager);
-    wxDECLARE_NO_COPY_CLASS(wxDocManager);
+    wxDocManager(const wxDocManager&) = delete;
+	wxDocManager& operator=(const wxDocManager&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -642,7 +646,8 @@ private:
     // twice to wxDocManager, from here and from wxDocParentFrameAnyBase.
     wxEvent* m_lastEvent;
 
-    wxDECLARE_NO_COPY_CLASS(wxDocChildFrameAnyBase);
+    wxDocChildFrameAnyBase(const wxDocChildFrameAnyBase&) = delete;
+	wxDocChildFrameAnyBase& operator=(const wxDocChildFrameAnyBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -778,7 +783,8 @@ public:
 
 private:
     wxDECLARE_CLASS(wxDocChildFrame);
-    wxDECLARE_NO_COPY_CLASS(wxDocChildFrame);
+    wxDocChildFrame(const wxDocChildFrame&) = delete;
+	wxDocChildFrame& operator=(const wxDocChildFrame&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -813,7 +819,8 @@ protected:
     wxWindow* const m_frame;
     wxDocManager *m_docManager;
 
-    wxDECLARE_NO_COPY_CLASS(wxDocParentFrameAnyBase);
+    wxDocParentFrameAnyBase(const wxDocParentFrameAnyBase&) = delete;
+	wxDocParentFrameAnyBase& operator=(const wxDocParentFrameAnyBase&) = delete;
 };
 
 // This is similar to wxDocChildFrameAny and is used to provide common
@@ -889,7 +896,8 @@ private:
     }
 
 
-    wxDECLARE_NO_COPY_CLASS(wxDocParentFrameAny);
+    wxDocParentFrameAny(const wxDocParentFrameAny&) = delete;
+	wxDocParentFrameAny& operator=(const wxDocParentFrameAny&) = delete;
 };
 
 typedef wxDocParentFrameAny<wxFrame> wxDocParentFrameBase;
@@ -928,7 +936,8 @@ public:
 
 private:
     wxDECLARE_CLASS(wxDocParentFrame);
-    wxDECLARE_NO_COPY_CLASS(wxDocParentFrame);
+    wxDocParentFrame(const wxDocParentFrame&) = delete;
+	wxDocParentFrame& operator=(const wxDocParentFrame&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -955,7 +964,8 @@ protected:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxDocPrintout);
-    wxDECLARE_NO_COPY_CLASS(wxDocPrintout);
+    wxDocPrintout(const wxDocPrintout&) = delete;
+	wxDocPrintout& operator=(const wxDocPrintout&) = delete;
 };
 #endif // wxUSE_PRINTING_ARCHITECTURE
 

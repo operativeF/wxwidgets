@@ -69,7 +69,8 @@ private:
     GLfloat m_xrot;
     GLfloat m_yrot;
 
-    wxDECLARE_NO_COPY_CLASS(TestGLCanvas);
+    TestGLCanvas(const TestGLCanvas&) = delete;
+	TestGLCanvas& operator=(const TestGLCanvas&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

@@ -253,7 +253,8 @@ public:
 private:
     const bool m_ok;
 
-    wxDECLARE_NO_COPY_CLASS(wxOleInitializer);
+    wxOleInitializer(const wxOleInitializer&) = delete;
+	wxOleInitializer& operator=(const wxOleInitializer&) = delete;
 };
 
 #endif  //_WX_OLEUTILS_H

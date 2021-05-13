@@ -58,7 +58,8 @@ private:
     // This class has no public ctors, use Get() instead.
     wxUIActionSimulatorQtImpl() { }
 
-    wxDECLARE_NO_COPY_CLASS(wxUIActionSimulatorQtImpl);
+    wxUIActionSimulatorQtImpl(const wxUIActionSimulatorQtImpl&) = delete;
+	wxUIActionSimulatorQtImpl& operator=(const wxUIActionSimulatorQtImpl&) = delete;
 };
 
 static MouseButton ConvertMouseButton( int button )

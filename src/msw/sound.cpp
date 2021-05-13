@@ -66,7 +66,8 @@ private:
     GlobalPtr m_waveData;
     GlobalPtrLock m_waveDataPtr;
 
-    wxDECLARE_NO_COPY_CLASS(wxSoundDataMemory);
+    wxSoundDataMemory(const wxSoundDataMemory&) = delete;
+	wxSoundDataMemory& operator=(const wxSoundDataMemory&) = delete;
 };
 
 // class for sound files and resources
@@ -86,7 +87,8 @@ private:
     const wxString m_name;
     const bool m_isResource;
 
-    wxDECLARE_NO_COPY_CLASS(wxSoundDataFile);
+    wxSoundDataFile(const wxSoundDataFile&) = delete;
+	wxSoundDataFile& operator=(const wxSoundDataFile&) = delete;
 };
 
 // ============================================================================

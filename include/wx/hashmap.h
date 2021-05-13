@@ -72,7 +72,8 @@ struct WXDLLIMPEXP_BASE _wxHashTable_NodeBase
     _wxHashTable_NodeBase* m_next;
 
 // Cannot do this:
-//  wxDECLARE_NO_COPY_CLASS(_wxHashTable_NodeBase);
+//  _wxHashTable_NodeBase(const _wxHashTable_NodeBase&) = delete;
+	_wxHashTable_NodeBase& operator=(const _wxHashTable_NodeBase&) = delete;
 // without rewriting the macros, which require a public copy constructor.
 };
 

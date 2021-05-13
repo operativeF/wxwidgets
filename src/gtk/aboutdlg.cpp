@@ -87,7 +87,8 @@ private:
     const gchar **m_strings;
     size_t m_count;
 
-    wxDECLARE_NO_COPY_CLASS(GtkArray);
+    GtkArray(const GtkArray&) = delete;
+	GtkArray& operator=(const GtkArray&) = delete;
 };
 
 } // anonymous namespace

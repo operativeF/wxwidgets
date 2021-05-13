@@ -352,7 +352,8 @@ public:
     // is expensive and we don't want to do it implicitly (and possibly
     // accidentally). wxBitmap::CloneGDIRefData() which does need to do it does
     // it explicitly itself.
-    wxDECLARE_NO_COPY_CLASS(wxBitmapRefData);
+    wxBitmapRefData(const wxBitmapRefData&) = delete;
+	wxBitmapRefData& operator=(const wxBitmapRefData&) = delete;
 };
 
 wxBitmapRefData::wxBitmapRefData(int width, int height, int depth)

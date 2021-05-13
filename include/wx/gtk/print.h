@@ -169,7 +169,8 @@ private:
     wxDC            *m_dc;
 
     wxDECLARE_DYNAMIC_CLASS(wxGtkPrinter);
-    wxDECLARE_NO_COPY_CLASS(wxGtkPrinter);
+    wxGtkPrinter(const wxGtkPrinter&) = delete;
+	wxGtkPrinter& operator=(const wxGtkPrinter&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -316,7 +317,8 @@ private:
     double                  m_DEV2PS;
 
     wxDECLARE_DYNAMIC_CLASS(wxGtkPrinterDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxGtkPrinterDCImpl);
+    wxGtkPrinterDCImpl(const wxGtkPrinterDCImpl&) = delete;
+	wxGtkPrinterDCImpl& operator=(const wxGtkPrinterDCImpl&) = delete;
 };
 
 // ----------------------------------------------------------------------------

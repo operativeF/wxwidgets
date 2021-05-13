@@ -164,7 +164,8 @@ protected:
     }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxCheckBoxBase);
+    wxCheckBoxBase(const wxCheckBoxBase&) = delete;
+	wxCheckBoxBase& operator=(const wxCheckBoxBase&) = delete;
 };
 
 // Most ports support 3 state checkboxes so define this by default.

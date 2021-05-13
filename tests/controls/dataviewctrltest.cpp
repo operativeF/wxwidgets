@@ -46,7 +46,8 @@ protected:
                    m_child2,
                    m_grandchild;
 
-    wxDECLARE_NO_COPY_CLASS(DataViewCtrlTestCase);
+    DataViewCtrlTestCase(const DataViewCtrlTestCase&) = delete;
+	DataViewCtrlTestCase& operator=(const DataViewCtrlTestCase&) = delete;
 };
 
 class SingleSelectDataViewCtrlTestCase : public DataViewCtrlTestCase
@@ -85,7 +86,8 @@ protected:
     wxDataViewColumn* m_firstColumn;
     wxDataViewColumn* m_lastColumn;
 
-    wxDECLARE_NO_COPY_CLASS(MultiColumnsDataViewCtrlTestCase);
+    MultiColumnsDataViewCtrlTestCase(const MultiColumnsDataViewCtrlTestCase&) = delete;
+	MultiColumnsDataViewCtrlTestCase& operator=(const MultiColumnsDataViewCtrlTestCase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

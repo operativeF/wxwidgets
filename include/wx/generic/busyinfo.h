@@ -49,7 +49,8 @@ private:
     wxFrame *m_InfoFrame;
     wxControl *m_text;
 
-    wxDECLARE_NO_COPY_CLASS(wxBusyInfo);
+    wxBusyInfo(const wxBusyInfo&) = delete;
+	wxBusyInfo& operator=(const wxBusyInfo&) = delete;
 };
 
 #endif // wxUSE_BUSYINFO

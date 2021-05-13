@@ -103,7 +103,8 @@ private:
     // returns the return value of DoDispatchTimeout()
     int DoProcessEvents();
 
-    wxDECLARE_NO_COPY_CLASS(wxCFEventLoop);
+    wxCFEventLoop(const wxCFEventLoop&) = delete;
+	wxCFEventLoop& operator=(const wxCFEventLoop&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxCFEventLoopPauseIdleEvents : public wxObject

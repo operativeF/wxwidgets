@@ -60,7 +60,8 @@ class WXDLLIMPEXP_BASE wxZlibInputStream: public wxFilterInputStream {
   struct z_stream_s *m_inflate;
   wxFileOffset m_pos;
 
-  wxDECLARE_NO_COPY_CLASS(wxZlibInputStream);
+  wxZlibInputStream(const wxZlibInputStream&) = delete;
+	wxZlibInputStream& operator=(const wxZlibInputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxZlibOutputStream: public wxFilterOutputStream {
@@ -93,7 +94,8 @@ class WXDLLIMPEXP_BASE wxZlibOutputStream: public wxFilterOutputStream {
   struct z_stream_s *m_deflate;
   wxFileOffset m_pos;
 
-  wxDECLARE_NO_COPY_CLASS(wxZlibOutputStream);
+  wxZlibOutputStream(const wxZlibOutputStream&) = delete;
+	wxZlibOutputStream& operator=(const wxZlibOutputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxZlibClassFactory: public wxFilterClassFactory

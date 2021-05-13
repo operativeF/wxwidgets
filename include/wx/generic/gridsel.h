@@ -150,7 +150,8 @@ private:
     wxGrid                              *m_grid;
     wxGrid::wxGridSelectionModes        m_selectionMode;
 
-    wxDECLARE_NO_COPY_CLASS(wxGridSelection);
+    wxGridSelection(const wxGridSelection&) = delete;
+	wxGridSelection& operator=(const wxGridSelection&) = delete;
 };
 
 #endif  // wxUSE_GRID

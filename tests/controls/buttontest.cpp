@@ -51,7 +51,8 @@ private:
 
     wxButton* m_button;
 
-    wxDECLARE_NO_COPY_CLASS(ButtonTestCase);
+    ButtonTestCase(const ButtonTestCase&) = delete;
+	ButtonTestCase& operator=(const ButtonTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

@@ -210,7 +210,8 @@ private:
 private:
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxGenericDirCtrl);
-    wxDECLARE_NO_COPY_CLASS(wxGenericDirCtrl);
+    wxGenericDirCtrl(const wxGenericDirCtrl&) = delete;
+	wxGenericDirCtrl& operator=(const wxGenericDirCtrl&) = delete;
 };
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_DIRCTRL_SELECTIONCHANGED, wxTreeEvent );
@@ -259,7 +260,8 @@ protected:
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_CLASS(wxDirFilterListCtrl);
-    wxDECLARE_NO_COPY_CLASS(wxDirFilterListCtrl);
+    wxDirFilterListCtrl(const wxDirFilterListCtrl&) = delete;
+	wxDirFilterListCtrl& operator=(const wxDirFilterListCtrl&) = delete;
 };
 
 #if !defined(__WXMSW__) && !defined(__WXMAC__)

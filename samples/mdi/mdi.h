@@ -54,7 +54,8 @@ protected:
     const wxString m_label;
     wxFrame* const m_frame;
 
-    wxDECLARE_NO_COPY_CLASS(MenuEventLogger);
+    MenuEventLogger(const MenuEventLogger&) = delete;
+	MenuEventLogger& operator=(const MenuEventLogger&) = delete;
 };
 
 class MyCanvas : public wxScrolledWindow,
@@ -168,7 +169,8 @@ private:
 
         wxDECLARE_EVENT_TABLE();
 
-        wxDECLARE_NO_COPY_CLASS(EventHandler);
+        EventHandler(const EventHandler&) = delete;
+	EventHandler& operator=(const EventHandler&) = delete;
     };
 
     wxDECLARE_EVENT_TABLE();

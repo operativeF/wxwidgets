@@ -267,7 +267,8 @@ private:
     void OnSysColourChanged(wxSysColourChangedEvent& event);
 
 
-    wxDECLARE_NO_COPY_CLASS(wxDialogBase);
+    wxDialogBase(const wxDialogBase&) = delete;
+	wxDialogBase& operator=(const wxDialogBase&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

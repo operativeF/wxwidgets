@@ -152,7 +152,8 @@ public:
 protected:
     wxEnhMetaFile m_metafile;
 
-    wxDECLARE_NO_COPY_CLASS(wxEnhMetaFileDataObject);
+    wxEnhMetaFileDataObject(const wxEnhMetaFileDataObject&) = delete;
+	wxEnhMetaFileDataObject& operator=(const wxEnhMetaFileDataObject&) = delete;
 };
 
 
@@ -195,7 +196,8 @@ public:
 protected:
     wxEnhMetaFile m_metafile;
 
-    wxDECLARE_NO_COPY_CLASS(wxEnhMetaFileSimpleDataObject);
+    wxEnhMetaFileSimpleDataObject(const wxEnhMetaFileSimpleDataObject&) = delete;
+	wxEnhMetaFileSimpleDataObject& operator=(const wxEnhMetaFileSimpleDataObject&) = delete;
 };
 
 #endif // wxUSE_DATAOBJ

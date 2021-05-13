@@ -881,7 +881,8 @@ public:
 protected:
     void AddText(const wxString& WXUNUSED(txt)) override {}
 
-    wxDECLARE_NO_COPY_CLASS(wxMetaTagParser);
+    wxMetaTagParser(const wxMetaTagParser&) = delete;
+	wxMetaTagParser& operator=(const wxMetaTagParser&) = delete;
 };
 
 class wxMetaTagHandler : public wxHtmlTagHandler
@@ -894,7 +895,8 @@ public:
 private:
     wxString *m_retval;
 
-    wxDECLARE_NO_COPY_CLASS(wxMetaTagHandler);
+    wxMetaTagHandler(const wxMetaTagHandler&) = delete;
+	wxMetaTagHandler& operator=(const wxMetaTagHandler&) = delete;
 };
 
 bool wxMetaTagHandler::HandleTag(const wxHtmlTag& tag)

@@ -40,7 +40,8 @@ public:
 private:
     int m_wd;
 
-    wxDECLARE_NO_COPY_CLASS(wxFSWatchEntry);
+    wxFSWatchEntry(const wxFSWatchEntry&) = delete;
+	wxFSWatchEntry& operator=(const wxFSWatchEntry&) = delete;
 };
 
 

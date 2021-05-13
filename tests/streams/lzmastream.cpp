@@ -47,7 +47,8 @@ protected:
     wxLZMAOutputStream *DoCreateOutStream() override;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(LZMAStream);
+    LZMAStream(const LZMAStream&) = delete;
+	LZMAStream& operator=(const LZMAStream&) = delete;
 };
 
 STREAM_TEST_SUBSUITE_NAMED_REGISTRATION(LZMAStream)

@@ -311,7 +311,8 @@ private:
     friend class wxSocketWriteGuard;
 
     wxDECLARE_CLASS(wxSocketBase);
-    wxDECLARE_NO_COPY_CLASS(wxSocketBase);
+    wxSocketBase(const wxSocketBase&) = delete;
+	wxSocketBase& operator=(const wxSocketBase&) = delete;
 };
 
 
@@ -331,7 +332,8 @@ public:
     bool WaitForAccept(long seconds = -1, long milliseconds = 0);
 
     wxDECLARE_CLASS(wxSocketServer);
-    wxDECLARE_NO_COPY_CLASS(wxSocketServer);
+    wxSocketServer(const wxSocketServer&) = delete;
+	wxSocketServer& operator=(const wxSocketServer&) = delete;
 };
 
 
@@ -370,7 +372,8 @@ private:
     int m_initialSendBufferSize;
 
     wxDECLARE_CLASS(wxSocketClient);
-    wxDECLARE_NO_COPY_CLASS(wxSocketClient);
+    wxSocketClient(const wxSocketClient&) = delete;
+	wxSocketClient& operator=(const wxSocketClient&) = delete;
 };
 
 
@@ -399,7 +402,8 @@ public:
 
 private:
     wxDECLARE_CLASS(wxDatagramSocket);
-    wxDECLARE_NO_COPY_CLASS(wxDatagramSocket);
+    wxDatagramSocket(const wxDatagramSocket&) = delete;
+	wxDatagramSocket& operator=(const wxDatagramSocket&) = delete;
 };
 
 

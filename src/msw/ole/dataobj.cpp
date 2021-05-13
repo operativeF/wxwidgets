@@ -185,7 +185,8 @@ private:
     ULONG       m_nCount,   // number of formats we support
                 m_nCurrent; // current enum position
 
-    wxDECLARE_NO_COPY_CLASS(wxIEnumFORMATETC);
+    wxIEnumFORMATETC(const wxIEnumFORMATETC&) = delete;
+	wxIEnumFORMATETC& operator=(const wxIEnumFORMATETC&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -221,7 +222,8 @@ private:
 
     bool m_mustDelete;
 
-    wxDECLARE_NO_COPY_CLASS(wxIDataObject);
+    wxIDataObject(const wxIDataObject&) = delete;
+	wxIDataObject& operator=(const wxIDataObject&) = delete;
 
     // The following code is need to be able to store system data the operating
     // system is using for it own purposes, e.g. drag images.
@@ -1405,7 +1407,8 @@ public:
         return buffer;
     }
 
-    wxDECLARE_NO_COPY_CLASS(CFSTR_SHELLURLDataObject);
+    CFSTR_SHELLURLDataObject(const CFSTR_SHELLURLDataObject&) = delete;
+	CFSTR_SHELLURLDataObject& operator=(const CFSTR_SHELLURLDataObject&) = delete;
 };
 
 

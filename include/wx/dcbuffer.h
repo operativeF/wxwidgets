@@ -136,7 +136,8 @@ private:
     wxSize m_area;
 
     wxDECLARE_DYNAMIC_CLASS(wxBufferedDC);
-    wxDECLARE_NO_COPY_CLASS(wxBufferedDC);
+    wxBufferedDC(const wxBufferedDC&) = delete;
+	wxBufferedDC& operator=(const wxBufferedDC&) = delete;
 };
 
 
@@ -200,7 +201,8 @@ private:
     wxPaintDC m_paintdc;
 
     wxDECLARE_ABSTRACT_CLASS(wxBufferedPaintDC);
-    wxDECLARE_NO_COPY_CLASS(wxBufferedPaintDC);
+    wxBufferedPaintDC(const wxBufferedPaintDC&) = delete;
+	wxBufferedPaintDC& operator=(const wxBufferedPaintDC&) = delete;
 };
 
 
@@ -233,7 +235,8 @@ public:
     virtual ~wxAutoBufferedPaintDC() { }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxAutoBufferedPaintDC);
+    wxAutoBufferedPaintDC(const wxAutoBufferedPaintDC&) = delete;
+	wxAutoBufferedPaintDC& operator=(const wxAutoBufferedPaintDC&) = delete;
 };
 
 

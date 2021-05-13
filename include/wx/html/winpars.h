@@ -239,7 +239,8 @@ private:
     // expand TABs; only updated while inside <pre>
     int m_posColumn;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlWinParser);
+    wxHtmlWinParser(const wxHtmlWinParser&) = delete;
+	wxHtmlWinParser& operator=(const wxHtmlWinParser&) = delete;
 };
 
 
@@ -270,7 +271,8 @@ protected:
 
     void ApplyStyle(const wxHtmlStyleParams &styleParams);
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlWinTagHandler);
+    wxHtmlWinTagHandler(const wxHtmlWinTagHandler&) = delete;
+	wxHtmlWinTagHandler& operator=(const wxHtmlWinTagHandler&) = delete;
 };
 
 

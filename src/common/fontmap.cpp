@@ -139,7 +139,8 @@ private:
     bool m_flagOld;
     bool& m_flag;
 
-    wxDECLARE_NO_COPY_CLASS(ReentrancyBlocker);
+    ReentrancyBlocker(const ReentrancyBlocker&) = delete;
+	ReentrancyBlocker& operator=(const ReentrancyBlocker&) = delete;
 };
 
 // ============================================================================

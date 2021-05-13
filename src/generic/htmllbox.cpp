@@ -188,7 +188,8 @@ public:
 private:
     const wxHtmlListBox& m_hlbox;
 
-    wxDECLARE_NO_COPY_CLASS(wxHtmlListBoxStyle);
+    wxHtmlListBoxStyle(const wxHtmlListBoxStyle&) = delete;
+	wxHtmlListBoxStyle& operator=(const wxHtmlListBoxStyle&) = delete;
 };
 
 // ----------------------------------------------------------------------------

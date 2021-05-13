@@ -398,7 +398,8 @@ private:
     wxDataViewItemAttr m_attr;
     bool m_enabled;
 
-    wxDECLARE_NO_COPY_CLASS(wxDataViewCustomRendererBase);
+    wxDataViewCustomRendererBase(const wxDataViewCustomRendererBase&) = delete;
+	wxDataViewCustomRendererBase& operator=(const wxDataViewCustomRendererBase&) = delete;
 };
 
 // include the declaration of all the other renderers to get the real

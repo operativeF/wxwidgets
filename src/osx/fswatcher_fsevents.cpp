@@ -76,7 +76,8 @@ public:
 
 private:
 
-    wxDECLARE_NO_COPY_CLASS(wxFSEventWatcherContext);
+    wxFSEventWatcherContext(const wxFSEventWatcherContext&) = delete;
+	wxFSEventWatcherContext& operator=(const wxFSEventWatcherContext&) = delete;
 };
 
 // Translate kFSEventStreamEventFlag* flags

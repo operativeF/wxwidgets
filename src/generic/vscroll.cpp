@@ -50,7 +50,8 @@ public:
 private:
     wxVarScrollHelperBase *m_scrollHelper;
 
-    wxDECLARE_NO_COPY_CLASS(wxVarScrollHelperEvtHandler);
+    wxVarScrollHelperEvtHandler(const wxVarScrollHelperEvtHandler&) = delete;
+	wxVarScrollHelperEvtHandler& operator=(const wxVarScrollHelperEvtHandler&) = delete;
 };
 
 // ============================================================================

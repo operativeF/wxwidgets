@@ -114,7 +114,8 @@ private:
         m_impl = NULL;
     }
 
-    wxDECLARE_NO_COPY_CLASS(wxNotificationMessageBase);
+    wxNotificationMessageBase(const wxNotificationMessageBase&) = delete;
+	wxNotificationMessageBase& operator=(const wxNotificationMessageBase&) = delete;
 };
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_NOTIFICATION_MESSAGE_CLICK, wxCommandEvent );
@@ -173,7 +174,8 @@ private:
     // common part of all ctors
     void Init();
 
-    wxDECLARE_NO_COPY_CLASS(wxNotificationMessage);
+    wxNotificationMessage(const wxNotificationMessage&) = delete;
+	wxNotificationMessage& operator=(const wxNotificationMessage&) = delete;
 };
 
 #endif // wxUSE_NOTIFICATION_MESSAGE

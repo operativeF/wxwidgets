@@ -62,7 +62,8 @@ public:
     unsigned int ncolours;          // number of colours
     wxString comment;
 
-    wxDECLARE_NO_COPY_CLASS(GIFImage);
+    GIFImage(const GIFImage&) = delete;
+	GIFImage& operator=(const GIFImage&) = delete;
 };
 
 wxDECLARE_SCOPED_PTR(GIFImage, GIFImagePtr)

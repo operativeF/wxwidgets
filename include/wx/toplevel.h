@@ -341,7 +341,8 @@ protected:
 
     bool m_modified;
 
-    wxDECLARE_NO_COPY_CLASS(wxTopLevelWindowBase);
+    wxTopLevelWindowBase(const wxTopLevelWindowBase&) = delete;
+	wxTopLevelWindowBase& operator=(const wxTopLevelWindowBase&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

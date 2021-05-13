@@ -81,7 +81,8 @@ private:
     void SourceDestroyTest();
     void MultiConnectionTest();
 
-    wxDECLARE_NO_COPY_CLASS(EvtConnectionTestCase);
+    EvtConnectionTestCase(const EvtConnectionTestCase&) = delete;
+	EvtConnectionTestCase& operator=(const EvtConnectionTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

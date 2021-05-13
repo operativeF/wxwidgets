@@ -91,7 +91,8 @@ private:
 #endif // wxUSE_UNICODE
     wxString m_fileNameWork;
 
-    wxDECLARE_NO_COPY_CLASS(FileFunctionsTestCase);
+    FileFunctionsTestCase(const FileFunctionsTestCase&) = delete;
+	FileFunctionsTestCase& operator=(const FileFunctionsTestCase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

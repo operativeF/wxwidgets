@@ -79,7 +79,8 @@ private:
 
     // Our m_pdfDoc field can't be easily (deep) copied and so we don't define a
     // copy ctor.
-    wxDECLARE_NO_COPY_CLASS(wxMetafileRefData);
+    wxMetafileRefData(const wxMetafileRefData&) = delete;
+	wxMetafileRefData& operator=(const wxMetafileRefData&) = delete;
 };
 
 wxMetafileRefData::wxMetafileRefData(CFDataRef data) :

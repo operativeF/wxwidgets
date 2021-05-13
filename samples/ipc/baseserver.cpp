@@ -100,7 +100,8 @@ private:
     // should we notify the client about changes to m_item?
     bool m_advise;
 
-    wxDECLARE_NO_COPY_CLASS(BenchConnection);
+    BenchConnection(const BenchConnection&) = delete;
+	BenchConnection& operator=(const BenchConnection&) = delete;
 };
 
 // a simple server accepting connections to IPC_TOPIC and IPC_BENCHMARK_TOPIC

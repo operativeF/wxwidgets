@@ -179,7 +179,8 @@ private:
     wxString m_text;
 
 
-    wxDECLARE_NO_COPY_CLASS(wxTextEntryHintData);
+    wxTextEntryHintData(const wxTextEntryHintData&) = delete;
+	wxTextEntryHintData& operator=(const wxTextEntryHintData&) = delete;
 };
 
 // ============================================================================

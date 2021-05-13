@@ -139,7 +139,8 @@ protected:
     HINTERNET m_hFile;
     size_t OnSysRead(void *buffer, size_t bufsize);
 
-    wxDECLARE_NO_COPY_CLASS(wxWinINetInputStream);
+    wxWinINetInputStream(const wxWinINetInputStream&) = delete;
+	wxWinINetInputStream& operator=(const wxWinINetInputStream&) = delete;
 };
 
 size_t wxWinINetInputStream::GetSize() const

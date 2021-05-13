@@ -89,7 +89,8 @@ private:
     // On-demand populated vector of wxDisplayImpl objects.
     std::vector<wxDisplayImpl*> m_impls;
 
-    wxDECLARE_NO_COPY_CLASS(wxDisplayFactory);
+    wxDisplayFactory(const wxDisplayFactory&) = delete;
+	wxDisplayFactory& operator=(const wxDisplayFactory&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -151,7 +152,8 @@ protected:
 
     friend class wxDisplayFactory;
 
-    wxDECLARE_NO_COPY_CLASS(wxDisplayImpl);
+    wxDisplayImpl(const wxDisplayImpl&) = delete;
+	wxDisplayImpl& operator=(const wxDisplayImpl&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -185,7 +187,8 @@ public:
     }
 #endif // wxUSE_DISPLAY
 
-    wxDECLARE_NO_COPY_CLASS(wxDisplayImplSingle);
+    wxDisplayImplSingle(const wxDisplayImplSingle&) = delete;
+	wxDisplayImplSingle& operator=(const wxDisplayImplSingle&) = delete;
 };
 
 // ----------------------------------------------------------------------------

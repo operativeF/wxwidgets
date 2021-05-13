@@ -52,7 +52,8 @@ private:
     // This class has no public ctors, use Get() instead.
     wxUIActionSimulatorMSWImpl() = default;
 
-    wxDECLARE_NO_COPY_CLASS(wxUIActionSimulatorMSWImpl);
+    wxUIActionSimulatorMSWImpl(const wxUIActionSimulatorMSWImpl&) = delete;
+	wxUIActionSimulatorMSWImpl& operator=(const wxUIActionSimulatorMSWImpl&) = delete;
 };
 
 DWORD EventTypeForMouseButton(int button, bool isDown)

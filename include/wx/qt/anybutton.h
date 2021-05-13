@@ -46,7 +46,8 @@ private:
     typedef wxAnyButtonBase base_type;
     wxBitmap  m_bitmaps[State_Max];
 
-    wxDECLARE_NO_COPY_CLASS(wxAnyButton);
+    wxAnyButton(const wxAnyButton&) = delete;
+	wxAnyButton& operator=(const wxAnyButton&) = delete;
 };
 
 

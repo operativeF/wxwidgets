@@ -168,7 +168,8 @@ public:
 private:
     std::vector<Test*> m_tests;
 
-    wxDECLARE_NO_COPY_CLASS(TestSuite);
+    TestSuite(const TestSuite&) = delete;
+	TestSuite& operator=(const TestSuite&) = delete;
 };
 
 } // namespace CppUnit
@@ -201,7 +202,8 @@ private:
     std::string& m_str;
     const std::string m_orig;
 
-    wxDECLARE_NO_COPY_CLASS(TempStringAssign);
+    TempStringAssign(const TempStringAssign&) = delete;
+	TempStringAssign& operator=(const TempStringAssign&) = delete;
 };
 
 // These two strings are used to implement wxGetCurrentTestName() and must be

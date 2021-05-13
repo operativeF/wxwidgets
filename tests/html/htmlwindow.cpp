@@ -54,7 +54,8 @@ private:
 
     wxHtmlWindow *m_win;
 
-    wxDECLARE_NO_COPY_CLASS(HtmlWindowTestCase);
+    HtmlWindowTestCase(const HtmlWindowTestCase&) = delete;
+	HtmlWindowTestCase& operator=(const HtmlWindowTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

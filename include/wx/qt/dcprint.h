@@ -100,7 +100,8 @@ public:
 
 private:
     wxDECLARE_CLASS(wxPrinterDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxPrinterDCImpl);
+    wxPrinterDCImpl(const wxPrinterDCImpl&) = delete;
+	wxPrinterDCImpl& operator=(const wxPrinterDCImpl&) = delete;
 };
 
 #endif // _WX_QT_DCPRINT_H_

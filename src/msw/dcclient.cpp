@@ -58,7 +58,8 @@ public:
 protected:
     const HDC m_hdc;
 
-    wxDECLARE_NO_COPY_CLASS(wxPaintDCInfo);
+    wxPaintDCInfo(const wxPaintDCInfo&) = delete;
+	wxPaintDCInfo& operator=(const wxPaintDCInfo&) = delete;
 };
 
 namespace
@@ -92,7 +93,8 @@ private:
     const HWND m_hwnd;
     PAINTSTRUCT m_ps;
 
-    wxDECLARE_NO_COPY_CLASS(wxPaintDCInfoOur);
+    wxPaintDCInfoOur(const wxPaintDCInfoOur&) = delete;
+	wxPaintDCInfoOur& operator=(const wxPaintDCInfoOur&) = delete;
 };
 
 // This subclass contains information for the HDCs we receive from outside, as
@@ -114,7 +116,8 @@ public:
 private:
     const int m_state;
 
-    wxDECLARE_NO_COPY_CLASS(wxPaintDCInfoExternal);
+    wxPaintDCInfoExternal(const wxPaintDCInfoExternal&) = delete;
+	wxPaintDCInfoExternal& operator=(const wxPaintDCInfoExternal&) = delete;
 };
 
 // The global map containing HDC to use for the given window. The entries in

@@ -46,7 +46,8 @@ protected:
     wxSize m_size;
     wxLayoutDirection m_layoutDir;
 
-    wxDECLARE_NO_COPY_CLASS(wxGTKCairoDCImpl);
+    wxGTKCairoDCImpl(const wxGTKCairoDCImpl&) = delete;
+	wxGTKCairoDCImpl& operator=(const wxGTKCairoDCImpl&) = delete;
 };
 //-----------------------------------------------------------------------------
 
@@ -55,7 +56,8 @@ class wxWindowDCImpl: public wxGTKCairoDCImpl
 public:
     wxWindowDCImpl(wxWindowDC* owner, wxWindow* window);
 
-    wxDECLARE_NO_COPY_CLASS(wxWindowDCImpl);
+    wxWindowDCImpl(const wxWindowDCImpl&) = delete;
+	wxWindowDCImpl& operator=(const wxWindowDCImpl&) = delete;
 };
 //-----------------------------------------------------------------------------
 
@@ -64,7 +66,8 @@ class wxClientDCImpl: public wxGTKCairoDCImpl
 public:
     wxClientDCImpl(wxClientDC* owner, wxWindow* window);
 
-    wxDECLARE_NO_COPY_CLASS(wxClientDCImpl);
+    wxClientDCImpl(const wxClientDCImpl&) = delete;
+	wxClientDCImpl& operator=(const wxClientDCImpl&) = delete;
 };
 //-----------------------------------------------------------------------------
 
@@ -78,7 +81,8 @@ public:
 private:
     const wxRegion& m_clip;
 
-    wxDECLARE_NO_COPY_CLASS(wxPaintDCImpl);
+    wxPaintDCImpl(const wxPaintDCImpl&) = delete;
+	wxPaintDCImpl& operator=(const wxPaintDCImpl&) = delete;
 };
 //-----------------------------------------------------------------------------
 
@@ -89,7 +93,8 @@ public:
 
     wxSize GetPPI() const override;
 
-    wxDECLARE_NO_COPY_CLASS(wxScreenDCImpl);
+    wxScreenDCImpl(const wxScreenDCImpl&) = delete;
+	wxScreenDCImpl& operator=(const wxScreenDCImpl&) = delete;
 };
 //-----------------------------------------------------------------------------
 
@@ -108,7 +113,8 @@ private:
     void Setup();
     wxBitmap m_bitmap;
 
-    wxDECLARE_NO_COPY_CLASS(wxMemoryDCImpl);
+    wxMemoryDCImpl(const wxMemoryDCImpl&) = delete;
+	wxMemoryDCImpl& operator=(const wxMemoryDCImpl&) = delete;
 };
 //-----------------------------------------------------------------------------
 
@@ -117,7 +123,8 @@ class WXDLLIMPEXP_CORE wxGTKCairoDC: public wxDC
 public:
     wxGTKCairoDC(cairo_t* cr, wxWindow* window, wxLayoutDirection dir = wxLayout_LeftToRight, int width = 0);
 
-    wxDECLARE_NO_COPY_CLASS(wxGTKCairoDC);
+    wxGTKCairoDC(const wxGTKCairoDC&) = delete;
+	wxGTKCairoDC& operator=(const wxGTKCairoDC&) = delete;
 };
 
 #else

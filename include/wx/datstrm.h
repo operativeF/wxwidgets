@@ -67,7 +67,8 @@ protected:
     wxMBConv *m_conv;
 #endif
 
-    wxDECLARE_NO_COPY_CLASS(wxDataStreamBase);
+    wxDataStreamBase(const wxDataStreamBase&) = delete;
+	wxDataStreamBase& operator=(const wxDataStreamBase&) = delete;
 };
 
 
@@ -130,7 +131,8 @@ public:
 protected:
     wxInputStream *m_input;
 
-    wxDECLARE_NO_COPY_CLASS(wxDataInputStream);
+    wxDataInputStream(const wxDataInputStream&) = delete;
+	wxDataInputStream& operator=(const wxDataInputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxDataOutputStream : public wxDataStreamBase
@@ -194,7 +196,8 @@ public:
 protected:
     wxOutputStream *m_output;
 
-    wxDECLARE_NO_COPY_CLASS(wxDataOutputStream);
+    wxDataOutputStream(const wxDataOutputStream&) = delete;
+	wxDataOutputStream& operator=(const wxDataOutputStream&) = delete;
 };
 
 #endif

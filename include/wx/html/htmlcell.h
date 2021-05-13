@@ -137,7 +137,8 @@ public:
 private:
     const wxWindowBase* const m_wnd;
 
-    wxDECLARE_NO_COPY_CLASS(wxDefaultHtmlRenderingStyle);
+    wxDefaultHtmlRenderingStyle(const wxDefaultHtmlRenderingStyle&) = delete;
+	wxDefaultHtmlRenderingStyle& operator=(const wxDefaultHtmlRenderingStyle&) = delete;
 };
 
 
@@ -404,7 +405,8 @@ protected:
     wxString m_id;
 
     wxDECLARE_ABSTRACT_CLASS(wxHtmlCell);
-    wxDECLARE_NO_COPY_CLASS(wxHtmlCell);
+    wxHtmlCell(const wxHtmlCell&) = delete;
+	wxHtmlCell& operator=(const wxHtmlCell&) = delete;
 };
 
 
@@ -450,7 +452,8 @@ protected:
     bool     m_allowLinebreak;
 
     wxDECLARE_ABSTRACT_CLASS(wxHtmlWordCell);
-    wxDECLARE_NO_COPY_CLASS(wxHtmlWordCell);
+    wxHtmlWordCell(const wxHtmlWordCell&) = delete;
+	wxHtmlWordCell& operator=(const wxHtmlWordCell&) = delete;
 };
 
 
@@ -597,7 +600,8 @@ protected:
 
 
     wxDECLARE_ABSTRACT_CLASS(wxHtmlContainerCell);
-    wxDECLARE_NO_COPY_CLASS(wxHtmlContainerCell);
+    wxHtmlContainerCell(const wxHtmlContainerCell&) = delete;
+	wxHtmlContainerCell& operator=(const wxHtmlContainerCell&) = delete;
 };
 
 
@@ -623,7 +627,8 @@ protected:
     unsigned m_Flags;
 
     wxDECLARE_ABSTRACT_CLASS(wxHtmlColourCell);
-    wxDECLARE_NO_COPY_CLASS(wxHtmlColourCell);
+    wxHtmlColourCell(const wxHtmlColourCell&) = delete;
+	wxHtmlColourCell& operator=(const wxHtmlColourCell&) = delete;
 };
 
 
@@ -649,7 +654,8 @@ protected:
     wxFont m_Font;
 
     wxDECLARE_ABSTRACT_CLASS(wxHtmlFontCell);
-    wxDECLARE_NO_COPY_CLASS(wxHtmlFontCell);
+    wxHtmlFontCell(const wxHtmlFontCell&) = delete;
+	wxHtmlFontCell& operator=(const wxHtmlFontCell&) = delete;
 };
 
 
@@ -685,7 +691,8 @@ protected:
             // width float is used in adjustWidth (it is in percents)
 
     wxDECLARE_ABSTRACT_CLASS(wxHtmlWidgetCell);
-    wxDECLARE_NO_COPY_CLASS(wxHtmlWidgetCell);
+    wxHtmlWidgetCell(const wxHtmlWidgetCell&) = delete;
+	wxHtmlWidgetCell& operator=(const wxHtmlWidgetCell&) = delete;
 };
 
 

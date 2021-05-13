@@ -46,7 +46,8 @@ private:
 
     wxListbook *m_listbook;
 
-    wxDECLARE_NO_COPY_CLASS(ListbookTestCase);
+    ListbookTestCase(const ListbookTestCase&) = delete;
+	ListbookTestCase& operator=(const ListbookTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

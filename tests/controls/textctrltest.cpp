@@ -147,7 +147,8 @@ private:
 
     static long ms_style;
 
-    wxDECLARE_NO_COPY_CLASS(TextCtrlTestCase);
+    TextCtrlTestCase(const TextCtrlTestCase&) = delete;
+	TextCtrlTestCase& operator=(const TextCtrlTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

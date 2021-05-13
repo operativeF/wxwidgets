@@ -94,7 +94,8 @@ private:
                          m_keyUpEvents;
 
 
-    wxDECLARE_NO_COPY_CLASS(KeyboardTestWindow);
+    KeyboardTestWindow(const KeyboardTestWindow&) = delete;
+	KeyboardTestWindow& operator=(const KeyboardTestWindow&) = delete;
 };
 
 // Object describing the (main fields of) keyboard event.
@@ -220,7 +221,8 @@ private:
 
     KeyboardTestWindow *m_win;
 
-    wxDECLARE_NO_COPY_CLASS(KeyboardEventTestCase);
+    KeyboardEventTestCase(const KeyboardEventTestCase&) = delete;
+	KeyboardEventTestCase& operator=(const KeyboardEventTestCase&) = delete;
 };
 
 wxREGISTER_UNIT_TEST(KeyboardEvent);

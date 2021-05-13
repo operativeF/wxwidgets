@@ -69,7 +69,8 @@ private:
     void Validity();
     void Intersect();
 
-    wxDECLARE_NO_COPY_CLASS(RegionTestCase);
+    RegionTestCase(const RegionTestCase&) = delete;
+	RegionTestCase& operator=(const RegionTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

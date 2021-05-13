@@ -549,7 +549,8 @@ struct wxFindByPidParams
     // the PID we're looking from
     DWORD pid;
 
-    wxDECLARE_NO_COPY_CLASS(wxFindByPidParams);
+    wxFindByPidParams(const wxFindByPidParams&) = delete;
+	wxFindByPidParams& operator=(const wxFindByPidParams&) = delete;
 };
 
 // wxKill helper: EnumWindows() callback which is used to find the first (top

@@ -159,7 +159,8 @@ private:
     wxLog* m_logTarget;
 #endif // USE_LOG
 
-    wxDECLARE_NO_COPY_CLASS(WidgetsApp);
+    WidgetsApp(const WidgetsApp&) = delete;
+	WidgetsApp& operator=(const WidgetsApp&) = delete;
 };
 
 wxDECLARE_APP(WidgetsApp); // This provides a convenient wxGetApp() accessor.

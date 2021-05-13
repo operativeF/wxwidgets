@@ -55,7 +55,8 @@ private:
     wxSizerItem& m_item;
     const int m_propOld;
 
-    wxDECLARE_NO_COPY_CLASS(wxPropChanger);
+    wxPropChanger(const wxPropChanger&) = delete;
+	wxPropChanger& operator=(const wxPropChanger&) = delete;
 };
 
 } // anonymous namespace

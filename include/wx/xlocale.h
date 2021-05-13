@@ -125,7 +125,8 @@ private:
     // doesn't give us any means to copy a _locale_t object so we reduce the
     // functionality to least common denominator here -- it shouldn't be a
     // problem as copying the locale objects shouldn't be often needed
-    wxDECLARE_NO_COPY_CLASS(wxXLocale);
+    wxXLocale(const wxXLocale&) = delete;
+	wxXLocale& operator=(const wxXLocale&) = delete;
 };
 
 #else // !wxHAS_XLOCALE_SUPPORT
@@ -154,7 +155,8 @@ public:
     }
 
     // Default copy ctor, assignment operator and dtor are ok (or would be if
-    // we didn't use wxDECLARE_NO_COPY_CLASS() for consistency with the
+    // we didn't use (const &) = delete;
+	& operator=(const &) = delete for consistency with the
     // xlocale version)
 
 
@@ -178,7 +180,8 @@ private:
     // although it's not a problem to copy the objects of this class, we use
     // this macro in this implementation for consistency with the xlocale-based
     // one which can't be copied when using MSVC locale API
-    wxDECLARE_NO_COPY_CLASS(wxXLocale);
+    wxXLocale(const wxXLocale&) = delete;
+	wxXLocale& operator=(const wxXLocale&) = delete;
 };
 
 #endif // wxHAS_XLOCALE_SUPPORT/!wxHAS_XLOCALE_SUPPORT

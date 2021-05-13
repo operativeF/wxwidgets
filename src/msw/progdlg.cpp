@@ -194,7 +194,8 @@ protected:
 
     wxProgressDialogSharedData& m_data;
 
-    wxDECLARE_NO_COPY_CLASS(wxProgressDialogModalLoop);
+    wxProgressDialogModalLoop(const wxProgressDialogModalLoop&) = delete;
+	wxProgressDialogModalLoop& operator=(const wxProgressDialogModalLoop&) = delete;
 };
 
 // ============================================================================

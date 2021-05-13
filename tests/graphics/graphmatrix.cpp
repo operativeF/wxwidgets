@@ -69,7 +69,8 @@ private:
     wxMemoryDC m_dc;
     wxGraphicsContext* m_ctx;
 
-    wxDECLARE_NO_COPY_CLASS(GraphicsMatrixTestCaseBase);
+    GraphicsMatrixTestCaseBase(const GraphicsMatrixTestCaseBase&) = delete;
+	GraphicsMatrixTestCaseBase& operator=(const GraphicsMatrixTestCaseBase&) = delete;
 };
 
 // ========================
@@ -103,7 +104,8 @@ private:
     CPPUNIT_TEST_SUITE_END();
 
 protected:
-    wxDECLARE_NO_COPY_CLASS(GraphicsMatrixTestCaseGDIPlus);
+    GraphicsMatrixTestCaseGDIPlus(const GraphicsMatrixTestCaseGDIPlus&) = delete;
+	GraphicsMatrixTestCaseGDIPlus& operator=(const GraphicsMatrixTestCaseGDIPlus&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default
@@ -138,7 +140,8 @@ private:
     CPPUNIT_TEST_SUITE_END();
 
 protected:
-    wxDECLARE_NO_COPY_CLASS(GraphicsMatrixTestCaseDirect2D);
+    GraphicsMatrixTestCaseDirect2D(const GraphicsMatrixTestCaseDirect2D&) = delete;
+	GraphicsMatrixTestCaseDirect2D& operator=(const GraphicsMatrixTestCaseDirect2D&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default
@@ -175,7 +178,8 @@ private:
     CPPUNIT_TEST_SUITE_END();
 
 protected:
-    wxDECLARE_NO_COPY_CLASS(GraphicsMatrixTestCaseCairo);
+    GraphicsMatrixTestCaseCairo(const GraphicsMatrixTestCaseCairo&) = delete;
+	GraphicsMatrixTestCaseCairo& operator=(const GraphicsMatrixTestCaseCairo&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default
@@ -208,7 +212,8 @@ private:
     CPPUNIT_TEST_SUITE_END();
 
 protected:
-    wxDECLARE_NO_COPY_CLASS(GraphicsMatrixTestCaseDefault);
+    GraphicsMatrixTestCaseDefault(const GraphicsMatrixTestCaseDefault&) = delete;
+	GraphicsMatrixTestCaseDefault& operator=(const GraphicsMatrixTestCaseDefault&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

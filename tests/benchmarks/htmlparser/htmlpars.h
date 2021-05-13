@@ -171,7 +171,8 @@ protected:
     wxList m_HandlersList;
     wxHashTable m_HandlersHash;
 
-    wxDECLARE_NO_COPY_CLASS(wx28HtmlParser);
+    wx28HtmlParser(const wx28HtmlParser&) = delete;
+	wx28HtmlParser& operator=(const wx28HtmlParser&) = delete;
 
     // class for opening files (file system)
     wxFileSystem *m_FS;
@@ -234,7 +235,8 @@ protected:
 
     wx28HtmlParser *m_Parser;
 
-    wxDECLARE_NO_COPY_CLASS(wx28HtmlTagHandler);
+    wx28HtmlTagHandler(const wx28HtmlTagHandler&) = delete;
+	wx28HtmlTagHandler& operator=(const wx28HtmlTagHandler&) = delete;
 };
 
 
@@ -272,7 +274,8 @@ protected:
     wxFontEncoding m_encoding;
 #endif
 
-    wxDECLARE_NO_COPY_CLASS(wx28HtmlEntitiesParser);
+    wx28HtmlEntitiesParser(const wx28HtmlEntitiesParser&) = delete;
+	wx28HtmlEntitiesParser& operator=(const wx28HtmlEntitiesParser&) = delete;
 };
 
 

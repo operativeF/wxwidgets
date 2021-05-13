@@ -28,7 +28,8 @@ protected:
 protected:
     HANDLE m_hInput;
 
-    wxDECLARE_NO_COPY_CLASS(wxPipeInputStream);
+    wxPipeInputStream(const wxPipeInputStream&) = delete;
+	wxPipeInputStream& operator=(const wxPipeInputStream&) = delete;
 };
 
 class wxPipeOutputStream: public wxOutputStream
@@ -44,7 +45,8 @@ protected:
 protected:
     HANDLE m_hOutput;
 
-    wxDECLARE_NO_COPY_CLASS(wxPipeOutputStream);
+    wxPipeOutputStream(const wxPipeOutputStream&) = delete;
+	wxPipeOutputStream& operator=(const wxPipeOutputStream&) = delete;
 };
 
 #endif // _WX_MSW_PRIVATE_PIPESTREAM_H_

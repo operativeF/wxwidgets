@@ -45,7 +45,8 @@ private:
 
     wxFile m_file;
 
-    wxDECLARE_NO_COPY_CLASS(wxTextFile);
+    wxTextFile(const wxTextFile&) = delete;
+	wxTextFile& operator=(const wxTextFile&) = delete;
 };
 
 #else // !wxUSE_TEXTFILE

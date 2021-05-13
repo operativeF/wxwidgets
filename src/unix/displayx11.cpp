@@ -159,7 +159,8 @@ public:
 private:
     wxRect m_rect;
 
-    wxDECLARE_NO_COPY_CLASS(wxDisplayImplX11);
+    wxDisplayImplX11(const wxDisplayImplX11&) = delete;
+	wxDisplayImplX11& operator=(const wxDisplayImplX11&) = delete;
 };
 
 class wxDisplayFactoryX11 : public wxDisplayFactory
@@ -172,7 +173,8 @@ public:
     int GetFromPoint(const wxPoint& pt) override;
 
 protected:
-    wxDECLARE_NO_COPY_CLASS(wxDisplayFactoryX11);
+    wxDisplayFactoryX11(const wxDisplayFactoryX11&) = delete;
+	wxDisplayFactoryX11& operator=(const wxDisplayFactoryX11&) = delete;
 };
 
 // ============================================================================

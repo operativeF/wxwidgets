@@ -255,7 +255,8 @@ private:
     void TestTranslateFromUnicodeFormat();
     void TestConvToFromLocalTZ();
 
-    wxDECLARE_NO_COPY_CLASS(DateTimeTestCase);
+    DateTimeTestCase(const DateTimeTestCase&) = delete;
+	DateTimeTestCase& operator=(const DateTimeTestCase&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(DateTimeTestCase, "[datetime]");

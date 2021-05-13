@@ -179,7 +179,8 @@ protected:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxRadioBox);
-    wxDECLARE_NO_COPY_CLASS(wxRadioBox);
+    wxRadioBox(const wxRadioBox&) = delete;
+	wxRadioBox& operator=(const wxRadioBox&) = delete;
 };
 
 #endif

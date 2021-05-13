@@ -311,7 +311,8 @@ private:
 
  // wxWidget internal stuff:
   wxDECLARE_DYNAMIC_CLASS(wxDataViewCtrl);
-  wxDECLARE_NO_COPY_CLASS(wxDataViewCtrl);
+  wxDataViewCtrl(const wxDataViewCtrl&) = delete;
+	wxDataViewCtrl& operator=(const wxDataViewCtrl&) = delete;
   wxDECLARE_EVENT_TABLE();
 };
 

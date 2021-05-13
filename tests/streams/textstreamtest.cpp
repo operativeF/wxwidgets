@@ -78,7 +78,8 @@ private:
 #endif // wxUSE_UNICODE
 
 
-    wxDECLARE_NO_COPY_CLASS(TextStreamTestCase);
+    TextStreamTestCase(const TextStreamTestCase&) = delete;
+	TextStreamTestCase& operator=(const TextStreamTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

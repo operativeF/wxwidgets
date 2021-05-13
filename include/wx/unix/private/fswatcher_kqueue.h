@@ -102,7 +102,8 @@ private:
     int m_fd;
     wxDirState m_lastState;
 
-    wxDECLARE_NO_COPY_CLASS(wxFSWatchEntryKq);
+    wxFSWatchEntryKq(const wxFSWatchEntryKq&) = delete;
+	wxFSWatchEntryKq& operator=(const wxFSWatchEntryKq&) = delete;
 };
 
 #endif /* WX_UNIX_PRIVATE_FSWATCHER_KQUEUE_H_ */

@@ -102,7 +102,8 @@ public:
     virtual ~wxTreeListItemComparator() { }
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxTreeListItemComparator);
+    wxTreeListItemComparator(const wxTreeListItemComparator&) = delete;
+	wxTreeListItemComparator& operator=(const wxTreeListItemComparator&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -447,7 +448,8 @@ private:
     // It calls our inherited protected wxWithImages::GetImage() method.
     friend class wxTreeListModel;
 
-    wxDECLARE_NO_COPY_CLASS(wxTreeListCtrl);
+    wxTreeListCtrl(const wxTreeListCtrl&) = delete;
+	wxTreeListCtrl& operator=(const wxTreeListCtrl&) = delete;
 };
 
 // ----------------------------------------------------------------------------

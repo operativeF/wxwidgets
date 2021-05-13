@@ -83,7 +83,8 @@ private:
     void TestTwoThreadsSeparate() { TestWithThreads(2, IncOnly); }
     void TestWithThreads(int count, ETestType testtype);
 
-    wxDECLARE_NO_COPY_CLASS(AtomicTestCase);
+    AtomicTestCase(const AtomicTestCase&) = delete;
+	AtomicTestCase& operator=(const AtomicTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

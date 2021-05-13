@@ -46,7 +46,8 @@ public:
     virtual void OnRemove() = 0;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxAddRemoveAdaptor);
+    wxAddRemoveAdaptor(const wxAddRemoveAdaptor&) = delete;
+	wxAddRemoveAdaptor& operator=(const wxAddRemoveAdaptor&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -101,7 +102,8 @@ private:
 
     class wxAddRemoveImpl* m_impl;
 
-    wxDECLARE_NO_COPY_CLASS(wxAddRemoveCtrl);
+    wxAddRemoveCtrl(const wxAddRemoveCtrl&) = delete;
+	wxAddRemoveCtrl& operator=(const wxAddRemoveCtrl&) = delete;
 };
 
 #endif // wxUSE_ADDREMOVECTRL

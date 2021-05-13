@@ -63,7 +63,8 @@ public:
 
 private:
 
-    wxDECLARE_NO_COPY_CLASS(wxCollapsibleHeaderCtrlBase);
+    wxCollapsibleHeaderCtrlBase(const wxCollapsibleHeaderCtrlBase&) = delete;
+	wxCollapsibleHeaderCtrlBase& operator=(const wxCollapsibleHeaderCtrlBase&) = delete;
 };
 
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_COLLAPSIBLEHEADER_CHANGED, wxCommandEvent);
@@ -98,7 +99,8 @@ public:
 
 private:
 
-    wxDECLARE_NO_COPY_CLASS(wxCollapsibleHeaderCtrl);
+    wxCollapsibleHeaderCtrl(const wxCollapsibleHeaderCtrl&) = delete;
+	wxCollapsibleHeaderCtrl& operator=(const wxCollapsibleHeaderCtrl&) = delete;
 };
 
 #endif // wxUSE_COLLPANE

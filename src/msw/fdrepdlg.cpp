@@ -85,7 +85,8 @@ private:
     // registered Message for Dialog
     static UINT ms_msgFindDialog;
 
-    wxDECLARE_NO_COPY_CLASS(wxFindReplaceDialogImpl);
+    wxFindReplaceDialogImpl(const wxFindReplaceDialogImpl&) = delete;
+	wxFindReplaceDialogImpl& operator=(const wxFindReplaceDialogImpl&) = delete;
 };
 
 UINT wxFindReplaceDialogImpl::ms_msgFindDialog = 0;

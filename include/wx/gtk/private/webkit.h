@@ -38,7 +38,8 @@ public:
 private:
     WebKitJavascriptResult *m_jsresult;
 
-    wxDECLARE_NO_COPY_CLASS(wxWebKitJavascriptResult);
+    wxWebKitJavascriptResult(const wxWebKitJavascriptResult&) = delete;
+	wxWebKitJavascriptResult& operator=(const wxWebKitJavascriptResult&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -65,7 +66,8 @@ public:
 private:
     JSStringRef m_jssref;
 
-    wxDECLARE_NO_COPY_CLASS(wxJSStringRef);
+    wxJSStringRef(const wxJSStringRef&) = delete;
+	wxJSStringRef& operator=(const wxJSStringRef&) = delete;
 };
 
 #endif // _WX_GTK_PRIVATE_WEBKIT_H_

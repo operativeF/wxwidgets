@@ -509,7 +509,8 @@ private:
     // the reference count
     size_t m_ref;
 
-    wxDECLARE_NO_COPY_CLASS(wxMemoryBufferData);
+    wxMemoryBufferData(const wxMemoryBufferData&) = delete;
+	wxMemoryBufferData& operator=(const wxMemoryBufferData&) = delete;
 };
 
 

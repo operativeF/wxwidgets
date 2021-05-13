@@ -55,7 +55,8 @@ private:
 
     wxBitmapComboBox *m_combo;
 
-    wxDECLARE_NO_COPY_CLASS(BitmapComboBoxTestCase);
+    BitmapComboBoxTestCase(const BitmapComboBoxTestCase&) = delete;
+	BitmapComboBoxTestCase& operator=(const BitmapComboBoxTestCase&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(BitmapComboBoxTestCase,

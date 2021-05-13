@@ -65,7 +65,8 @@ protected:
     wxSize DoGetBestSize() const override;
 
 private:
-    wxDECLARE_NO_COPY_CLASS(wxChoiceBase);
+    wxChoiceBase(const wxChoiceBase&) = delete;
+	wxChoiceBase& operator=(const wxChoiceBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

@@ -325,7 +325,8 @@ protected:
     bool m_isClipBoxValid;
 
     wxDECLARE_CLASS(wxMSWDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxMSWDCImpl);
+    wxMSWDCImpl(const wxMSWDCImpl&) = delete;
+	wxMSWDCImpl& operator=(const wxMSWDCImpl&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -366,7 +367,8 @@ private:
     // find it ourselves
     const wxSize m_size;
 
-    wxDECLARE_NO_COPY_CLASS(wxDCTempImpl);
+    wxDCTempImpl(const wxDCTempImpl&) = delete;
+	wxDCTempImpl& operator=(const wxDCTempImpl&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxDCTemp : public wxDC

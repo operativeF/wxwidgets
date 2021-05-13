@@ -292,7 +292,8 @@ private:
 
     wxHatchStyle m_hatchStyle;
 
-    wxDECLARE_NO_COPY_CLASS(wxCairoPenBrushBaseData);
+    wxCairoPenBrushBaseData(const wxCairoPenBrushBaseData&) = delete;
+	wxCairoPenBrushBaseData& operator=(const wxCairoPenBrushBaseData&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxCairoPenData : public wxCairoPenBrushBaseData
@@ -316,7 +317,8 @@ private :
     const double *m_lengths;
     double *m_userLengths;
 
-    wxDECLARE_NO_COPY_CLASS(wxCairoPenData);
+    wxCairoPenData(const wxCairoPenData&) = delete;
+	wxCairoPenData& operator=(const wxCairoPenData&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxCairoBrushData : public wxCairoPenBrushBaseData
@@ -576,7 +578,8 @@ private:
 
     std::vector<float> m_layerOpacities;
 
-    wxDECLARE_NO_COPY_CLASS(wxCairoContext);
+    wxCairoContext(const wxCairoContext&) = delete;
+	wxCairoContext& operator=(const wxCairoContext&) = delete;
 };
 
 #if wxUSE_IMAGE
@@ -611,7 +614,8 @@ private:
     wxImage& m_image;
     wxCairoBitmapData m_data;
 
-    wxDECLARE_NO_COPY_CLASS(wxCairoImageContext);
+    wxCairoImageContext(const wxCairoImageContext&) = delete;
+	wxCairoImageContext& operator=(const wxCairoImageContext&) = delete;
 };
 #endif // wxUSE_IMAGE
 

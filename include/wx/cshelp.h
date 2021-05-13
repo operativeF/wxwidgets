@@ -250,7 +250,8 @@ public:
 protected:
     wxHelpControllerBase*   m_helpController;
 
-    wxDECLARE_NO_COPY_CLASS(wxHelpControllerHelpProvider);
+    wxHelpControllerHelpProvider(const wxHelpControllerHelpProvider&) = delete;
+	wxHelpControllerHelpProvider& operator=(const wxHelpControllerHelpProvider&) = delete;
 };
 
 // Convenience function for turning context id into wxString

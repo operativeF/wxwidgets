@@ -35,7 +35,8 @@ private:
 
     wxFrame *m_frame;
 
-    wxDECLARE_NO_COPY_CLASS(FrameTestCase);
+    FrameTestCase(const FrameTestCase&) = delete;
+	FrameTestCase& operator=(const FrameTestCase&) = delete;
 };
 
 // register in the unnamed registry so that these tests are run by default

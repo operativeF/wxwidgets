@@ -35,7 +35,8 @@ protected:
     wxUint8* m_streamBuf;
     wxFileOffset m_pos;
 
-    wxDECLARE_NO_COPY_CLASS(wxLZMAData);
+    wxLZMAData(const wxLZMAData&) = delete;
+	wxLZMAData& operator=(const wxLZMAData&) = delete;
 };
 
 } // namespace wxPrivate

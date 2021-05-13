@@ -176,7 +176,8 @@ private:
 
     std::vector<PluginInfo> m_drawingPlugins;
 
-    wxDECLARE_NO_COPY_CLASS(GraphicsContextDrawingTestCase);
+    GraphicsContextDrawingTestCase(const GraphicsContextDrawingTestCase&) = delete;
+	GraphicsContextDrawingTestCase& operator=(const GraphicsContextDrawingTestCase&) = delete;
 };
 
 

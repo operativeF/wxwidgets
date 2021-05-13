@@ -400,7 +400,8 @@ private:
     // AlwaysShowScrollbars()
     void DoUpdateScrollbarVisibility();
 
-    wxDECLARE_NO_COPY_CLASS(wxWindowMac);
+    wxWindowMac(const wxWindowMac&) = delete;
+	wxWindowMac& operator=(const wxWindowMac&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

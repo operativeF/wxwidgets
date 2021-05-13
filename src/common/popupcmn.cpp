@@ -76,7 +76,8 @@ private:
     wxPopupTransientWindow *m_popup;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxPopupWindowHandler);
+    wxPopupWindowHandler(const wxPopupWindowHandler&) = delete;
+	wxPopupWindowHandler& operator=(const wxPopupWindowHandler&) = delete;
 };
 
 class wxPopupFocusHandler : public wxEvtHandler
@@ -92,7 +93,8 @@ private:
     wxPopupTransientWindow *m_popup;
 
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxPopupFocusHandler);
+    wxPopupFocusHandler(const wxPopupFocusHandler&) = delete;
+	wxPopupFocusHandler& operator=(const wxPopupFocusHandler&) = delete;
 };
 
 // ----------------------------------------------------------------------------

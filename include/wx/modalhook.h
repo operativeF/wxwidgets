@@ -69,7 +69,8 @@ private:
     typedef std::vector<wxModalDialogHook*> Hooks;
     static Hooks ms_hooks;
 
-    wxDECLARE_NO_COPY_CLASS(wxModalDialogHook);
+    wxModalDialogHook(const wxModalDialogHook&) = delete;
+	wxModalDialogHook& operator=(const wxModalDialogHook&) = delete;
 };
 
 // Helper object used by WX_MODAL_DIALOG_HOOK below to ensure that CallExit()
@@ -90,7 +91,8 @@ public:
 private:
     wxDialog* const m_dialog;
 
-    wxDECLARE_NO_COPY_CLASS(wxModalDialogHookExitGuard);
+    wxModalDialogHookExitGuard(const wxModalDialogHookExitGuard&) = delete;
+	wxModalDialogHookExitGuard& operator=(const wxModalDialogHookExitGuard&) = delete;
 };
 
 // This macro needs to be used at the top of every implementation of

@@ -255,7 +255,8 @@ private:
   bool m_isDirty;                       // if true, we have unsaved changes
   bool m_autosave;                      // if true, save changes on destruction
 
-  wxDECLARE_NO_COPY_CLASS(wxFileConfig);
+  wxFileConfig(const wxFileConfig&) = delete;
+	wxFileConfig& operator=(const wxFileConfig&) = delete;
   wxDECLARE_ABSTRACT_CLASS(wxFileConfig);
 };
 

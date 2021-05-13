@@ -62,7 +62,8 @@ private:
 
     wxListBox* m_list;
 
-    wxDECLARE_NO_COPY_CLASS(ListBoxTestCase);
+    ListBoxTestCase(const ListBoxTestCase&) = delete;
+	ListBoxTestCase& operator=(const ListBoxTestCase&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(ListBoxTestCase,

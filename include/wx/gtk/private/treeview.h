@@ -56,7 +56,8 @@ public:
 private:
     GtkTreePath *m_path;
 
-    wxDECLARE_NO_COPY_CLASS(wxGtkTreePath);
+    wxGtkTreePath(const wxGtkTreePath&) = delete;
+	wxGtkTreePath& operator=(const wxGtkTreePath&) = delete;
 };
 
 #endif // _GTK_PRIVATE_TREEVIEW_H_

@@ -105,7 +105,8 @@ protected:
 
     wxBitmap m_bmp;
 
-    wxDECLARE_NO_COPY_CLASS(ClippingBoxTestCaseBase);
+    ClippingBoxTestCaseBase(const ClippingBoxTestCaseBase&) = delete;
+	ClippingBoxTestCaseBase& operator=(const ClippingBoxTestCaseBase&) = delete;
 };
 
 // ====================
@@ -166,7 +167,8 @@ protected:
 
     wxDC* m_dc;
 
-    wxDECLARE_NO_COPY_CLASS(ClippingBoxTestCaseDCBase);
+    ClippingBoxTestCaseDCBase(const ClippingBoxTestCaseDCBase&) = delete;
+	ClippingBoxTestCaseDCBase& operator=(const ClippingBoxTestCaseDCBase&) = delete;
 };
 
 // ===========
@@ -237,7 +239,8 @@ private:
 protected:
     wxMemoryDC m_mdc;
 
-    wxDECLARE_NO_COPY_CLASS(ClippingBoxTestCaseDC);
+    ClippingBoxTestCaseDC(const ClippingBoxTestCaseDC&) = delete;
+	ClippingBoxTestCaseDC& operator=(const ClippingBoxTestCaseDC&) = delete;
 };
 
 // For GTK+ 3 wxDC is equivalent to wxGCDC
@@ -331,7 +334,8 @@ private:
 protected:
     wxGCDC* m_gcdc;
 
-    wxDECLARE_NO_COPY_CLASS(ClippingBoxTestCaseGCDC);
+    ClippingBoxTestCaseGCDC(const ClippingBoxTestCaseGCDC&) = delete;
+	ClippingBoxTestCaseGCDC& operator=(const ClippingBoxTestCaseGCDC&) = delete;
 };
 
 // For MSW we have individual test cases for each graphics renderer
@@ -391,7 +395,8 @@ private:
 
 protected:
 
-    wxDECLARE_NO_COPY_CLASS(ClippingBoxTestCaseGCDCGDIPlus);
+    ClippingBoxTestCaseGCDCGDIPlus(const ClippingBoxTestCaseGCDCGDIPlus&) = delete;
+	ClippingBoxTestCaseGCDCGDIPlus& operator=(const ClippingBoxTestCaseGCDCGDIPlus&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(ClippingBoxTestCaseGCDCGDIPlus, "[clip][gcdc][gdi+]");
@@ -456,7 +461,8 @@ private:
 
 protected:
 
-    wxDECLARE_NO_COPY_CLASS(ClippingBoxTestCaseGCDCDirect2D);
+    ClippingBoxTestCaseGCDCDirect2D(const ClippingBoxTestCaseGCDCDirect2D&) = delete;
+	ClippingBoxTestCaseGCDCDirect2D& operator=(const ClippingBoxTestCaseGCDCDirect2D&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(ClippingBoxTestCaseGCDCDirect2D, "[clip][gcdc][d2d]");
@@ -513,7 +519,8 @@ private:
 
 protected:
 
-    wxDECLARE_NO_COPY_CLASS(ClippingBoxTestCaseGCDCCairo);
+    ClippingBoxTestCaseGCDCCairo(const ClippingBoxTestCaseGCDCCairo&) = delete;
+	ClippingBoxTestCaseGCDCCairo& operator=(const ClippingBoxTestCaseGCDCCairo&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(ClippingBoxTestCaseGCDCCairo, "[clip][gc][cairo]");
@@ -1557,7 +1564,8 @@ protected:
     wxGraphicsContext* m_gc;
     wxMemoryDC m_mdc;
 
-    wxDECLARE_NO_COPY_CLASS(ClippingBoxTestCaseGCBase);
+    ClippingBoxTestCaseGCBase(const ClippingBoxTestCaseGCBase&) = delete;
+	ClippingBoxTestCaseGCBase& operator=(const ClippingBoxTestCaseGCBase&) = delete;
 };
 
 #ifdef __WXMSW__
@@ -1595,7 +1603,8 @@ private:
 
 protected:
 
-    wxDECLARE_NO_COPY_CLASS(ClippingBoxTestCaseGCGDIPlus);
+    ClippingBoxTestCaseGCGDIPlus(const ClippingBoxTestCaseGCGDIPlus&) = delete;
+	ClippingBoxTestCaseGCGDIPlus& operator=(const ClippingBoxTestCaseGCGDIPlus&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(ClippingBoxTestCaseGCGDIPlus, "[clip][gc][gdi+]");
@@ -1645,7 +1654,8 @@ private:
 
 protected:
 
-    wxDECLARE_NO_COPY_CLASS(ClippingBoxTestCaseGCDirect2D);
+    ClippingBoxTestCaseGCDirect2D(const ClippingBoxTestCaseGCDirect2D&) = delete;
+	ClippingBoxTestCaseGCDirect2D& operator=(const ClippingBoxTestCaseGCDirect2D&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(ClippingBoxTestCaseGCDirect2D, "[clip][gc][d2d]");
@@ -1686,7 +1696,8 @@ private:
 
 protected:
 
-    wxDECLARE_NO_COPY_CLASS(ClippingBoxTestCaseGCCairo);
+    ClippingBoxTestCaseGCCairo(const ClippingBoxTestCaseGCCairo&) = delete;
+	ClippingBoxTestCaseGCCairo& operator=(const ClippingBoxTestCaseGCCairo&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(ClippingBoxTestCaseGCCairo, "[clip][gc][cairo]");
@@ -1725,7 +1736,8 @@ private:
 
 protected:
 
-    wxDECLARE_NO_COPY_CLASS(ClippingBoxTestCaseGCCoreGraphics);
+    ClippingBoxTestCaseGCCoreGraphics(const ClippingBoxTestCaseGCCoreGraphics&) = delete;
+	ClippingBoxTestCaseGCCoreGraphics& operator=(const ClippingBoxTestCaseGCCoreGraphics&) = delete;
 };
 
 wxREGISTER_UNIT_TEST_WITH_TAGS(ClippingBoxTestCaseGCCoreGraphics, "[clip][gc][cg]");

@@ -55,7 +55,8 @@ private:
     bool m_systemThemeDisabled;
 #endif // wxHAS_SYSTEM_THEMED_CONTROL
 
-    wxDECLARE_NO_COPY_CLASS(wxSystemThemedControlBase);
+    wxSystemThemedControlBase(const wxSystemThemedControlBase&) = delete;
+	wxSystemThemedControlBase& operator=(const wxSystemThemedControlBase&) = delete;
 };
 
 // This class used CRTP, i.e. it should be instantiated for the real base class

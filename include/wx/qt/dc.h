@@ -131,7 +131,8 @@ private:
     void ApplyRasterColourOp();
 
     wxDECLARE_CLASS(wxQtDCImpl);
-    wxDECLARE_NO_COPY_CLASS(wxQtDCImpl);
+    wxQtDCImpl(const wxQtDCImpl&) = delete;
+	wxQtDCImpl& operator=(const wxQtDCImpl&) = delete;
 
 };
 

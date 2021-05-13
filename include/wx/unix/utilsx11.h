@@ -80,7 +80,8 @@ public:
 private:
     Display *m_dpy;
 
-    wxDECLARE_NO_COPY_CLASS(wxX11Display);
+    wxX11Display(const wxX11Display&) = delete;
+	wxX11Display& operator=(const wxX11Display&) = delete;
 };
 
 #endif // __WXMOTIF__, __WXGTK__, __WXX11__

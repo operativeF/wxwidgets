@@ -74,7 +74,8 @@ private:
     // of m_widget or m_wxwindow of the wxWindow we're used with.
     virtual bool DoSetShape(GdkWindow* window) = 0;
 
-    wxDECLARE_NO_COPY_CLASS(wxNonOwnedWindowShapeImpl);
+    wxNonOwnedWindowShapeImpl(const wxNonOwnedWindowShapeImpl&) = delete;
+	wxNonOwnedWindowShapeImpl& operator=(const wxNonOwnedWindowShapeImpl&) = delete;
 };
 
 // Version not using any custom shape.

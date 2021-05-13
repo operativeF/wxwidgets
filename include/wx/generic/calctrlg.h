@@ -311,7 +311,8 @@ private:
 
     wxDECLARE_DYNAMIC_CLASS(wxGenericCalendarCtrl);
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_NO_COPY_CLASS(wxGenericCalendarCtrl);
+    wxGenericCalendarCtrl(const wxGenericCalendarCtrl&) = delete;
+	wxGenericCalendarCtrl& operator=(const wxGenericCalendarCtrl&) = delete;
 };
 
 #endif // _WX_GENERIC_CALCTRLG_H

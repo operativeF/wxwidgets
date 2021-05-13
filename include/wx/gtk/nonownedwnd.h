@@ -37,7 +37,8 @@ private:
     // If non-NULL, contains information about custom window shape.
     wxNonOwnedWindowShapeImpl* m_shapeImpl;
 
-    wxDECLARE_NO_COPY_CLASS(wxNonOwnedWindow);
+    wxNonOwnedWindow(const wxNonOwnedWindow&) = delete;
+	wxNonOwnedWindow& operator=(const wxNonOwnedWindow&) = delete;
 };
 
 #endif // _WX_GTK_NONOWNEDWND_H_

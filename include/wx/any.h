@@ -243,7 +243,8 @@ public:
 
         T2   m_value;
     private:
-        wxDECLARE_NO_COPY_CLASS(DataHolder);
+        DataHolder(const DataHolder&) = delete;
+	DataHolder& operator=(const DataHolder&) = delete;
     };
 
     static void DeleteValue(wxAnyValueBuffer& buf)

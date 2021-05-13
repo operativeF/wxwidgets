@@ -97,7 +97,8 @@ private:
     // Remove any existing entries from the associated menus.
     void RemoveExistingHistory();
 
-    wxDECLARE_NO_COPY_CLASS(wxFileHistoryBase);
+    wxFileHistoryBase(const wxFileHistoryBase&) = delete;
+	wxFileHistoryBase& operator=(const wxFileHistoryBase&) = delete;
 };
 
 #if defined(__WXGTK20__)
