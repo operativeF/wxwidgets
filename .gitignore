@@ -22,6 +22,14 @@
 /build/bakefiles/wxwin.pyc
 /build/bakefiles/wxpresets/presets/wx_presets.pyc
 
+# /build/libs CMake
+/build/_deps
+/build/.cmake
+/build/CMakeFiles
+/build/doctest
+/build/lib
+/build/libs
+
 # /build/msw/
 /build/msw/.m*
 /build/msw/config.dmc
