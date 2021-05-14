@@ -300,7 +300,7 @@ protected:
     wxBitmap          m_selectedBitmap;
 
     // TRUE => DeleteDC() in dtor, FALSE => only ReleaseDC() it
-    bool              m_bOwnsDC:1;
+    bool              m_bOwnsDC;
 
     // our HDC
     WXHDC             m_hDC;

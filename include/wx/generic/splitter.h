@@ -296,9 +296,9 @@ protected:
     wxPen      *m_sashTrackerPen;
 
     // when in live mode, set this to true to resize children in idle
-    bool        m_needUpdating:1;
-    bool        m_permitUnsplitAlways:1;
-    bool        m_isHot:1;
+    bool        m_needUpdating;
+    bool        m_permitUnsplitAlways;
+    bool        m_isHot;
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxSplitterWindow);

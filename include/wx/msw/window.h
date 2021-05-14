@@ -629,8 +629,8 @@ protected:
     WXWNDPROC             m_oldWndProc;
 
     // additional (MSW specific) flags
-    bool                  m_mouseInWindow:1;
-    bool                  m_lastKeydownProcessed:1;
+    bool                  m_mouseInWindow;
+    bool                  m_lastKeydownProcessed;
 
     // the size of one page for scrolling
     int                   m_xThumbSize;

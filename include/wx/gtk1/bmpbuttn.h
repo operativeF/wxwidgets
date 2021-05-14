@@ -60,8 +60,8 @@ public:
     void EndSelect();
     void DoApplyWidgetStyle(GtkRcStyle *style);
 
-    bool         m_hasFocus:1;
-    bool         m_isSelected:1;
+    bool         m_hasFocus;
+    bool         m_isSelected;
 
 protected:
     virtual void OnSetBitmap();

@@ -65,13 +65,13 @@ protected:
 protected:
     wxString      m_title;
 
-    bool          m_fsIsShowing:1;         /* full screen */
+    bool          m_fsIsShowing;         /* full screen */
     long          m_fsSaveStyle;
     long          m_fsSaveFlag;
     wxRect        m_fsSaveFrame;
 
     // is the frame currently maximized?
-    bool          m_isMaximized:1;
+    bool          m_isMaximized;
     wxRect        m_savedFrame;
 };
 

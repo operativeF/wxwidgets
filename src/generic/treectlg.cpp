@@ -347,13 +347,12 @@ private:
     int                 m_width;        // width of this item
     int                 m_height;       // height of this item
 
-    // use bitfields to save size
-    unsigned int        m_isCollapsed :1;
-    unsigned int        m_hasHilight  :1; // same as focused
-    unsigned int        m_hasPlus     :1; // used for item which doesn't have
-                                          // children but has a [+] button
-    unsigned int        m_isBold      :1; // render the label in bold font
-    unsigned int        m_ownsAttr    :1; // delete attribute when done
+    unsigned int        m_isCollapsed;
+    unsigned int        m_hasHilight; // same as focused
+    unsigned int        m_hasPlus; // used for item which doesn't have
+                                   // children but has a [+] button
+    unsigned int        m_isBold; // render the label in bold font
+    unsigned int        m_ownsAttr; // delete attribute when done
 
     wxGenericTreeItem(const wxGenericTreeItem&) = delete;
 	wxGenericTreeItem& operator=(const wxGenericTreeItem&) = delete;

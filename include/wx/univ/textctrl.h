@@ -499,10 +499,10 @@ private:
               m_selEnd;
 
     // flags
-    bool m_isModified:1,
-         m_isEditable:1,
-         m_hasCaret:1,
-         m_wrapLines:1; // can't be changed after creation
+    bool m_isModified;
+    bool m_isEditable;
+    bool m_hasCaret;
+    bool m_wrapLines; // can't be changed after creation
 
     // the rectangle (in client coordinates) to draw text inside
     wxRect m_rectText;

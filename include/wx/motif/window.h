@@ -244,11 +244,11 @@ protected:
     // Motif-specific flags
     // --------------------
 
-    bool m_needsRefresh:1;          // repaint backing store?
+    bool m_needsRefresh;          // repaint backing store?
 
     // For double-click detection
     long                  m_lastTS;           // last timestamp
-    unsigned              m_lastButton:2;     // last pressed button
+    unsigned              m_lastButton;     // last pressed button
 
 protected:
     WXWidget              m_mainWidget;
@@ -257,7 +257,7 @@ protected:
     WXWidget              m_borderWidget;
     WXWidget              m_scrolledWindow;
     WXWidget              m_drawingArea;
-    bool                  m_winCaptured:1;
+    bool                  m_winCaptured;
     WXPixmap              m_backingPixmap;
     int                   m_pixmapWidth;
     int                   m_pixmapHeight;

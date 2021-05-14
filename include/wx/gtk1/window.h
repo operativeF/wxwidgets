@@ -197,19 +197,19 @@ public:
     float                m_oldVerticalPos;
 
     // extra (wxGTK-specific) flags
-    bool                 m_needParent:1;        // ! wxFrame, wxDialog, wxNotebookPage ?
-    bool                 m_noExpose:1;          // wxGLCanvas has its own redrawing
-    bool                 m_nativeSizeEvent:1;   // wxGLCanvas sends wxSizeEvent upon "alloc_size"
-    bool                 m_hasScrolling:1;
-    bool                 m_hasVMT:1;
-    bool                 m_sizeSet:1;
-    bool                 m_resizing:1;
-    bool                 m_acceptsFocus:1;      // true if not static
-    bool                 m_hasFocus:1;          // true if == FindFocus()
-    bool                 m_isScrolling:1;       // dragging scrollbar thumb?
-    bool                 m_clipPaintRegion:1;   // true after ScrollWindow()
-    bool                 m_needsStyleChange:1;  // May not be able to change
-                                                // background style until OnIdle
+    bool                 m_needParent;        // ! wxFrame, wxDialog, wxNotebookPage ?
+    bool                 m_noExpose;          // wxGLCanvas has its own redrawing
+    bool                 m_nativeSizeEvent;   // wxGLCanvas sends wxSizeEvent upon "alloc_size"
+    bool                 m_hasScrolling;
+    bool                 m_hasVMT;
+    bool                 m_sizeSet;
+    bool                 m_resizing;
+    bool                 m_acceptsFocus;      // true if not static
+    bool                 m_hasFocus;          // true if == FindFocus()
+    bool                 m_isScrolling;       // dragging scrollbar thumb?
+    bool                 m_clipPaintRegion;   // true after ScrollWindow()
+    bool                 m_needsStyleChange;  // May not be able to change
+                                              // background style until OnIdle
 
     // C++ has no virtual methods in the constructor of any class but we need
     // different methods of inserting a child window into a wxFrame,

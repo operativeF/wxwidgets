@@ -146,7 +146,7 @@ public:
     void OnUpdateDelete(wxUpdateUIEvent& event);
     void OnUpdateSelectAll(wxUpdateUIEvent& event);
 
-    bool     m_ignoreNextUpdate:1;
+    bool     m_ignoreNextUpdate;
     wxList   m_clientDataList;
     wxList   m_clientObjectList;
     int      m_prevSelection;

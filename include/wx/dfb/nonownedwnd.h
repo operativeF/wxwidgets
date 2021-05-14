@@ -104,7 +104,7 @@ private:
 
 protected:
     // did we sent wxSizeEvent at least once?
-    bool          m_sizeSet:1;
+    bool          m_sizeSet;
 
     // window's opacity (0: transparent, 255: opaque)
     wxByte        m_opacity;

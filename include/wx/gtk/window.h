@@ -356,15 +356,15 @@ public:
         const wxCursor* overrideCursor = NULL);
 
     // extra (wxGTK-specific) flags
-    bool                 m_noExpose:1;          // wxGLCanvas has its own redrawing
-    bool                 m_nativeSizeEvent:1;   // wxGLCanvas sends wxSizeEvent upon "alloc_size"
-    bool                 m_isScrolling:1;       // dragging scrollbar thumb?
-    bool                 m_clipPaintRegion:1;   // true after ScrollWindow()
-    bool                 m_dirtyTabOrder:1;     // tab order changed, GTK focus
+    bool                 m_noExpose;          // wxGLCanvas has its own redrawing
+    bool                 m_nativeSizeEvent;   // wxGLCanvas sends wxSizeEvent upon "alloc_size"
+    bool                 m_isScrolling;       // dragging scrollbar thumb?
+    bool                 m_clipPaintRegion;   // true after ScrollWindow()
+    bool                 m_dirtyTabOrder;     // tab order changed, GTK focus
                                                 // chain needs update
-    bool                 m_mouseButtonDown:1;
-    bool                 m_showOnIdle:1;        // postpone showing the window until idle
-    bool m_needCursorReset:1;
+    bool                 m_mouseButtonDown;
+    bool                 m_showOnIdle;        // postpone showing the window until idle
+    bool m_needCursorReset;
 
     wxRegion             m_nativeUpdateRegion;  // not transformed for RTL
 

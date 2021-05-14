@@ -182,10 +182,10 @@ private:
     GtkWidget  *m_text;
     GtkWidget  *m_vScrollbar;
 
-    bool        m_modified:1;
-    bool        m_vScrollbarVisible:1;
-    bool        m_updateFont:1;
-    bool        m_ignoreNextUpdate:1;
+    bool        m_modified;
+    bool        m_vScrollbarVisible;
+    bool        m_updateFont;
+    bool        m_ignoreNextUpdate;
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxTextCtrl);

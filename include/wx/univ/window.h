@@ -260,7 +260,7 @@ protected:
     wxSize m_oldSize;
 
     // is the mouse currently inside the window?
-    bool m_isCurrent:1;
+    bool m_isCurrent;
 
 #ifdef __WXMSW__
 public:

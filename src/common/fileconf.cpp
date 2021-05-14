@@ -132,8 +132,8 @@ private:
 
   wxString      m_strName,      // entry name
                 m_strValue;     //       value
-  bool          m_bImmutable:1, // can be overridden locally?
-                m_bHasValue:1;  // set after first call to SetValue()
+  bool          m_bImmutable; // can be overridden locally?
+  bool          m_bHasValue;  // set after first call to SetValue()
 
   int           m_nLine;        // used if m_pLine == NULL only
 

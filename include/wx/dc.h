@@ -598,11 +598,11 @@ protected:
     wxWindow   *m_window;
 
     // flags
-    bool m_colour:1;
-    bool m_ok:1;
-    bool m_clipping:1;
-    bool m_isInteractive:1;
-    bool m_isBBoxValid:1;
+    bool m_colour;
+    bool m_ok;
+    bool m_clipping;
+    bool m_isInteractive;
+    bool m_isBBoxValid;
 
     // coordinate system variables
 
