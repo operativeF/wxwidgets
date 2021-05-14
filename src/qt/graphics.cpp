@@ -81,8 +81,8 @@ public:
     {
     }
 
-    void CreateLinearGradientBrush(wxDouble x1, wxDouble y1,
-                                   wxDouble x2, wxDouble y2,
+    void CreateLinearGradientBrush(double x1, double y1,
+                                   double x2, double y2,
                                    const wxGraphicsGradientStops& stops)
     {
         QLinearGradient gradient(x1, y1, x2, y2);
@@ -90,9 +90,9 @@ public:
         m_brush = QBrush(gradient);
     }
 
-    void CreateRadialGradientBrush(wxDouble startX, wxDouble startY,
-                                   wxDouble endX, wxDouble endY,
-                                   wxDouble radius,
+    void CreateRadialGradientBrush(double startX, double startY,
+                                   double endX, double endY,
+                                   double radius,
                                    const wxGraphicsGradientStops& stops)
     {
         QRadialGradient gradient(QPointF(endX, endY), radius, QPointF(startX, startY));
@@ -252,9 +252,9 @@ public:
     }
 
     // sets the matrix to the respective values
-    virtual void Set(wxDouble a = 1.0, wxDouble b = 0.0,
-                     wxDouble c = 0.0, wxDouble d = 1.0,
-                     wxDouble tx = 0.0, wxDouble ty = 0.0) override
+    virtual void Set(double a = 1.0, double b = 0.0,
+                     double c = 0.0, double d = 1.0,
+                     double tx = 0.0, double ty = 0.0) override
     {
         m_transform->setMatrix(a, b, 0.0,
                                c, d, 0.0,
@@ -262,9 +262,9 @@ public:
     }
 
     // gets the component values of the matrix
-    virtual void Get(wxDouble* a, wxDouble* b,
-                     wxDouble* c, wxDouble* d,
-                     wxDouble* tx, wxDouble* ty) const override
+    virtual void Get(double* a, double* b,
+                     double* c, double* d,
+                     double* tx, double* ty) const override
     {
         if ( a )
             *a = m_transform->m11();
@@ -309,19 +309,19 @@ public:
     //
 
     // add the translation to this matrix
-    void Translate(wxDouble dx, wxDouble dy) override
+    void Translate(double dx, double dy) override
     {
         m_transform->translate(dx, dy);
     }
 
     // add the scale to this matrix
-    void Scale(wxDouble xScale, wxDouble yScale) override
+    void Scale(double xScale, double yScale) override
     {
         m_transform->scale(xScale, yScale);
     }
 
     // add the rotation to this matrix (radians)
-    void Rotate(wxDouble angle) override
+    void Rotate(double angle) override
     {
         m_transform->rotateRadians(angle);
     }
@@ -331,7 +331,7 @@ public:
     //
 
     // applies that matrix to the point
-    void TransformPoint(wxDouble *x, wxDouble *y) const override
+    void TransformPoint(double *x, double *y) const override
     {
         qreal transformed_x, transformed_y;
         m_transform->map(static_cast<qreal>(*x), static_cast<qreal>(*y),
@@ -341,7 +341,7 @@ public:
     }
 
     // applies the matrix except for translations
-    void TransformDistance(wxDouble *dx, wxDouble *dy) const override
+    void TransformDistance(double *dx, double *dy) const override
     {
         const QTransform untransTransform(
             m_transform->m11(),
@@ -466,7 +466,7 @@ public:
     //
 
     // begins a new subpath at (x,y)
-    void MoveToPoint(wxDouble x, wxDouble y) override
+    void MoveToPoint(double x, double y) override
     {
         m_path->moveTo(x, y);
         m_current_subpath_start = m_path->elementCount() - 1;
@@ -474,7 +474,7 @@ public:
 
     // adds a straight line from the current point to (x,y)
     // if there is no current path, it is equivalent to a moveTo.
-    void AddLineToPoint(wxDouble x, wxDouble y) override
+    void AddLineToPoint(double x, double y) override
     {
         if ( !HasCurrentSubpath() )
             MoveToPoint(x, y);
@@ -485,9 +485,9 @@ public:
     // adds a cubic Bezier curve from the current point, using two control
     // points and an end point
     virtual void
-    AddCurveToPoint(wxDouble cx1, wxDouble cy1,
-                    wxDouble cx2, wxDouble cy2,
-                    wxDouble x, wxDouble y) override
+    AddCurveToPoint(double cx1, double cy1,
+                    double cx2, double cy2,
+                    double x, double y) override
     {
         if ( !HasCurrentSubpath() )
             MoveToPoint(cx1, cy1);
@@ -497,8 +497,8 @@ public:
     // adds an arc of a circle centering at (x,y) with radius (r) from
     // startAngle to endAngle
     virtual void
-    AddArc(wxDouble x, wxDouble y, wxDouble r,
-           wxDouble startAngle, wxDouble endAngle,
+    AddArc(double x, double y, double r,
+           double startAngle, double endAngle,
            bool clockwise) override
     {
         const bool fixupFirst = !HasCurrentSubpath();
@@ -529,7 +529,7 @@ public:
     }
 
     // gets the last point of the current path, (0,0) if not yet set
-    void GetCurrentPoint(wxDouble* x, wxDouble* y) const override
+    void GetCurrentPoint(double* x, double* y) const override
     {
         QPointF position = m_path->currentPosition();
         *x = position.x();
@@ -565,14 +565,14 @@ public:
     //
 
     // appends a circle as a new closed subpath
-    void AddCircle(wxDouble x, wxDouble y, wxDouble r) override
+    void AddCircle(double x, double y, double r) override
     {
         m_path->addEllipse(x - r, y - r, r*2, r*2);
     }
 
     // appends an ellipse as a new closed subpath fitting the passed rectangle
     virtual void
-    AddEllipse(wxDouble x, wxDouble y, wxDouble w, wxDouble h) override
+    AddEllipse(double x, double y, double w, double h) override
     {
         m_path->addEllipse(x, y, w, h);
     }
@@ -600,7 +600,7 @@ public:
     // gets the bounding box enclosing all points (possibly including control
     // points)
     virtual void
-    GetBox(wxDouble *x, wxDouble *y, wxDouble *w, wxDouble *h) const override
+    GetBox(double *x, double *y, double *w, double *h) const override
     {
         QRectF boundingRect = m_path->controlPointRect();
 
@@ -614,7 +614,7 @@ public:
     }
 
     virtual bool
-    Contains(wxDouble x, wxDouble y,
+    Contains(double x, double y,
              wxPolygonFillMode /*fillStyle = wxWINDING_RULE*/) const override
     {
         return m_path->contains(QPointF(x, y));
@@ -720,7 +720,7 @@ public:
     }
 
     // clips drawings to the rect
-    void Clip(wxDouble x, wxDouble y, wxDouble w, wxDouble h) override
+    void Clip(double x, double y, double w, double h) override
     {
         m_qtPainter->setClipRect(x, y, w, h);
     }
@@ -733,7 +733,7 @@ public:
 
     // returns bounding box of the clipping region
     virtual void
-    GetClipBox(wxDouble* x, wxDouble* y, wxDouble* w, wxDouble* h) override
+    GetClipBox(double* x, double* y, double* w, double* h) override
     {
         const QRectF box = m_qtPainter->clipBoundingRect();
         if ( x )
@@ -834,7 +834,7 @@ public:
         return true;
     }
 
-    void BeginLayer(wxDouble /*opacity*/) override
+    void BeginLayer(double /*opacity*/) override
     {
         wxFAIL_MSG("BeginLayer not implemented");
     }
@@ -875,22 +875,22 @@ public:
     }
 
     virtual void
-    ClearRectangle(wxDouble x, wxDouble y, wxDouble w, wxDouble h) override
+    ClearRectangle(double x, double y, double w, double h) override
     {
         m_qtPainter->fillRect(x, y, w, h, QBrush(QColor(0, 0, 0, 0)));
     }
 
-    void Translate(wxDouble dx, wxDouble dy) override
+    void Translate(double dx, double dy) override
     {
         m_qtPainter->translate(dx, dy);
     }
 
-    void Scale(wxDouble xScale, wxDouble yScale) override
+    void Scale(double xScale, double yScale) override
     {
         m_qtPainter->scale(xScale, yScale);
     }
 
-    void Rotate(wxDouble angle) override
+    void Rotate(double angle) override
     {
         // wx angle is in radians. Qt angle is in degrees.
         m_qtPainter->rotate(wxRadToDeg(angle));
@@ -923,7 +923,7 @@ public:
 
     virtual void
     DrawBitmap(const wxGraphicsBitmap& bmp,
-               wxDouble x, wxDouble y, wxDouble w, wxDouble h) override
+               double x, double y, double w, double h) override
     {
         const QPixmap* pixmap = wxQtBitmapData::GetPixmapFromBitmap(bmp);
         m_qtPainter->drawPixmap(x, y, w, h, *pixmap);
@@ -931,14 +931,14 @@ public:
 
     virtual void
     DrawBitmap(const wxBitmap& bmp,
-               wxDouble x, wxDouble y, wxDouble w, wxDouble h) override
+               double x, double y, double w, double h) override
     {
         DoDrawBitmap(bmp, x, y, w, h, true);
     }
 
     virtual void
     DrawIcon(const wxIcon& icon,
-             wxDouble x, wxDouble y, wxDouble w, wxDouble h) override
+             double x, double y, double w, double h) override
     {
         DoDrawBitmap(icon, x, y, w, h, true);
     }
@@ -958,10 +958,10 @@ public:
     }
 
     virtual void GetTextExtent(const wxString& str,
-                               wxDouble *width,
-                               wxDouble *height,
-                               wxDouble *descent,
-                               wxDouble *externalLeading) const override
+                               double *width,
+                               double *height,
+                               double *descent,
+                               double *externalLeading) const override
     {
         wxCHECK_RET( !m_font.IsNull(),
                      "wxQtContext::GetTextExtent - no valid font set" );
@@ -1016,7 +1016,7 @@ public:
 
 protected:
     virtual void
-    DoDrawText(const wxString& str, wxDouble x, wxDouble y) override
+    DoDrawText(const wxString& str, double x, double y) override
     {
         wxCHECK_RET( !m_font.IsNull(),
                      "wxQtContext::DrawText - no valid font set" );
@@ -1040,8 +1040,8 @@ protected:
 
     void
     DoDrawBitmap(const wxBitmap& bmp,
-                 wxDouble x, wxDouble y,
-                 wxDouble w, wxDouble h, bool useMask) const
+                 double x, double y,
+                 double w, double h, bool useMask) const
     {
         QPixmap pix = *bmp.GetHandle();
 
@@ -1134,24 +1134,24 @@ public:
 
     // Matrix
 
-    virtual wxGraphicsMatrix CreateMatrix(wxDouble a = 1.0, wxDouble b = 0.0,
-                                          wxDouble c = 0.0, wxDouble d = 1.0,
-                                          wxDouble tx = 0.0, wxDouble ty = 0.0) override;
+    virtual wxGraphicsMatrix CreateMatrix(double a = 1.0, double b = 0.0,
+                                          double c = 0.0, double d = 1.0,
+                                          double tx = 0.0, double ty = 0.0) override;
 
     wxGraphicsPen CreatePen(const wxGraphicsPenInfo& info) override;
 
     wxGraphicsBrush CreateBrush(const wxBrush& brush) override;
 
     virtual wxGraphicsBrush
-        CreateLinearGradientBrush(wxDouble x1, wxDouble y1,
-        wxDouble x2, wxDouble y2,
+        CreateLinearGradientBrush(double x1, double y1,
+        double x2, double y2,
         const wxGraphicsGradientStops& stops,
         const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) override;
 
     virtual wxGraphicsBrush
-        CreateRadialGradientBrush(wxDouble startX, wxDouble startY,
-        wxDouble endX, wxDouble endY,
-        wxDouble radius,
+        CreateRadialGradientBrush(double startX, double startY,
+        double endX, double endY,
+        double radius,
         const wxGraphicsGradientStops& stops,
         const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) override;
 
@@ -1178,8 +1178,8 @@ public:
 
     // create a subimage from a native image representation
     virtual wxGraphicsBitmap CreateSubBitmap(const wxGraphicsBitmap& bitmap,
-                                             wxDouble x, wxDouble y,
-                                             wxDouble w, wxDouble h) override;
+                                             double x, double y,
+                                             double w, double h) override;
 
     wxString GetName() const override;
     virtual void GetVersion(int *major,
@@ -1255,9 +1255,9 @@ wxGraphicsPath wxQtGraphicsRenderer::CreatePath()
 
 // Matrix
 
-wxGraphicsMatrix wxQtGraphicsRenderer::CreateMatrix(wxDouble a, wxDouble b,
-                                                    wxDouble c, wxDouble d,
-                                                    wxDouble tx, wxDouble ty)
+wxGraphicsMatrix wxQtGraphicsRenderer::CreateMatrix(double a, double b,
+                                                    double c, double d,
+                                                    double tx, double ty)
 
 {
     wxGraphicsMatrix m;
@@ -1288,8 +1288,8 @@ wxGraphicsBrush wxQtGraphicsRenderer::CreateBrush(const wxBrush& brush)
 }
 
 wxGraphicsBrush wxQtGraphicsRenderer::CreateLinearGradientBrush(
-    wxDouble x1, wxDouble y1,
-    wxDouble x2, wxDouble y2,
+    double x1, double y1,
+    double x2, double y2,
     const wxGraphicsGradientStops& stops, 
     const wxGraphicsMatrix& WXUNUSED(matrix))
 {
@@ -1301,8 +1301,8 @@ wxGraphicsBrush wxQtGraphicsRenderer::CreateLinearGradientBrush(
 }
 
 wxGraphicsBrush wxQtGraphicsRenderer::CreateRadialGradientBrush(
-    wxDouble startX, wxDouble startY,
-    wxDouble endX, wxDouble endY, wxDouble r,
+    double startX, double startY,
+    double endX, double endY, double r,
     const wxGraphicsGradientStops& stops, 
     const wxGraphicsMatrix& WXUNUSED(matrix))
 {
@@ -1387,8 +1387,8 @@ wxQtGraphicsRenderer::CreateBitmapFromNativeBitmap(void* bitmap)
 
 wxGraphicsBitmap
 wxQtGraphicsRenderer::CreateSubBitmap(const wxGraphicsBitmap& bitmap,
-    wxDouble x, wxDouble y,
-    wxDouble w, wxDouble h)
+    double x, double y,
+    double w, double h)
 {
     wxCHECK_MSG(!bitmap.IsNull(), wxNullGraphicsBitmap, wxS("Invalid bitmap"));
 

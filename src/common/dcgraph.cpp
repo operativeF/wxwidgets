@@ -445,7 +445,7 @@ wxSize wxGCDCImpl::GetPPI() const
 {
     if ( m_graphicContext )
     {
-        wxDouble x, y;
+        double x, y;
         m_graphicContext->GetDPI(&x, &y);
         return wxSize(wxRound(x), wxRound(y));
     }
@@ -593,32 +593,32 @@ void wxGCDCImpl::ResetTransformMatrix()
 // coordinates conversions and transforms
 wxPoint wxGCDCImpl::DeviceToLogical(wxCoord x, wxCoord y) const
 {
-    wxDouble px = x;
-    wxDouble py = y;
+    double px = x;
+    double py = y;
     m_matrixCurrentInv.TransformPoint(&px, &py);
     return wxPoint(wxRound(px), wxRound(py));
 }
 
 wxPoint wxGCDCImpl::LogicalToDevice(wxCoord x, wxCoord y) const
 {
-    wxDouble px = x;
-    wxDouble py = y;
+    double px = x;
+    double py = y;
     m_matrixCurrent.TransformPoint(&px, &py);
     return wxPoint(wxRound(px), wxRound(py));
 }
 
 wxSize wxGCDCImpl::DeviceToLogicalRel(int x, int y) const
 {
-    wxDouble dx = x;
-    wxDouble dy = y;
+    double dx = x;
+    double dy = y;
     m_matrixCurrentInv.TransformDistance(&dx, &dy);
     return wxSize(wxRound(dx), wxRound(dy));
 }
 
 wxSize wxGCDCImpl::LogicalToDeviceRel(int x, int y) const
 {
-    wxDouble dx = x;
-    wxDouble dy = y;
+    double dx = x;
+    double dy = y;
     m_matrixCurrent.TransformDistance(&dx, &dy);
     return wxSize(wxRound(dx), wxRound(dy));
 }
@@ -728,7 +728,7 @@ void wxGCDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord w, wxCoord h,
 
     wxCoord dx = x + w / 2.0;
     wxCoord dy = y + h / 2.0;
-    wxDouble factor = ((wxDouble) w) / h;
+    double factor = ((double) w) / h;
     m_graphicContext->PushState();
     m_graphicContext->Translate(dx, dy);
     m_graphicContext->Scale(factor, 1.0);
@@ -1247,7 +1247,7 @@ void wxGCDCImpl::DoGetTextExtent( const wxString &str, wxCoord *width, wxCoord *
         m_graphicContext->SetFont( *theFont, m_textForegroundColour );
     }
 
-    wxDouble w wxDUMMY_INITIALIZE(0),
+    double w wxDUMMY_INITIALIZE(0),
              h wxDUMMY_INITIALIZE(0),
              d wxDUMMY_INITIALIZE(0),
              e wxDUMMY_INITIALIZE(0);
@@ -1337,7 +1337,7 @@ void wxGCDCImpl::Clear()
 void wxGCDCImpl::DoGetSize(int *width, int *height) const
 {
     wxCHECK_RET( IsOk(), wxT("wxGCDC(cg)::DoGetSize - invalid DC") );
-    wxDouble w,h;
+    double w,h;
     m_graphicContext->GetSize( &w, &h );
     if ( height )
         *height = wxRound(h);

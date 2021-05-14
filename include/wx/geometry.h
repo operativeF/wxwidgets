@@ -45,15 +45,15 @@ public :
     inline void GetFloor( wxInt32 *x , wxInt32 *y ) const;
     inline void GetRounded( wxInt32 *x , wxInt32 *y ) const;
 
-    inline wxDouble GetVectorLength() const;
-           wxDouble GetVectorAngle() const;
-    inline void SetVectorLength( wxDouble length );
-           void SetVectorAngle( wxDouble degrees );
+    inline double GetVectorLength() const;
+           double GetVectorAngle() const;
+    inline void SetVectorLength( double length );
+           void SetVectorAngle( double degrees );
     // set the vector length to 1.0, preserving the angle
     inline void Normalize();
 
-    inline wxDouble GetDistance( const wxPoint2DInt &pt ) const;
-    inline wxDouble GetDistanceSquare( const wxPoint2DInt &pt ) const;
+    inline double GetDistance( const wxPoint2DInt &pt ) const;
+    inline double GetDistanceSquare( const wxPoint2DInt &pt ) const;
     inline wxInt32 GetDotProduct( const wxPoint2DInt &vec ) const;
     inline wxInt32 GetCrossProduct( const wxPoint2DInt &vec ) const;
 
@@ -63,10 +63,10 @@ public :
     inline wxPoint2DInt& operator+=(const wxPoint2DInt& pt);
     inline wxPoint2DInt& operator-=(const wxPoint2DInt& pt);
     inline wxPoint2DInt& operator*=(const wxPoint2DInt& pt);
-    inline wxPoint2DInt& operator*=(wxDouble n);
+    inline wxPoint2DInt& operator*=(double n);
     inline wxPoint2DInt& operator*=(wxInt32 n);
     inline wxPoint2DInt& operator/=(const wxPoint2DInt& pt);
-    inline wxPoint2DInt& operator/=(wxDouble n);
+    inline wxPoint2DInt& operator/=(double n);
     inline wxPoint2DInt& operator/=(wxInt32 n);
     inline operator wxPoint() const;
     inline bool operator==(const wxPoint2DInt& pt) const;
@@ -85,12 +85,12 @@ inline wxPoint2DInt operator+(const wxPoint2DInt& pt1 , const wxPoint2DInt& pt2)
 inline wxPoint2DInt operator-(const wxPoint2DInt& pt1 , const wxPoint2DInt& pt2);
 inline wxPoint2DInt operator*(const wxPoint2DInt& pt1 , const wxPoint2DInt& pt2);
 inline wxPoint2DInt operator*(wxInt32 n , const wxPoint2DInt& pt);
-inline wxPoint2DInt operator*(wxDouble n , const wxPoint2DInt& pt);
+inline wxPoint2DInt operator*(double n , const wxPoint2DInt& pt);
 inline wxPoint2DInt operator*(const wxPoint2DInt& pt , wxInt32 n);
-inline wxPoint2DInt operator*(const wxPoint2DInt& pt , wxDouble n);
+inline wxPoint2DInt operator*(const wxPoint2DInt& pt , double n);
 inline wxPoint2DInt operator/(const wxPoint2DInt& pt1 , const wxPoint2DInt& pt2);
 inline wxPoint2DInt operator/(const wxPoint2DInt& pt , wxInt32 n);
-inline wxPoint2DInt operator/(const wxPoint2DInt& pt , wxDouble n);
+inline wxPoint2DInt operator/(const wxPoint2DInt& pt , double n);
 
 inline wxPoint2DInt::wxPoint2DInt()
 {
@@ -123,15 +123,15 @@ inline void wxPoint2DInt::GetRounded( wxInt32 *x , wxInt32 *y ) const
     GetFloor(x, y);
 }
 
-inline wxDouble wxPoint2DInt::GetVectorLength() const
+inline double wxPoint2DInt::GetVectorLength() const
 {
     // cast needed MIPSpro compiler under SGI
-    return sqrt( (wxDouble)(m_x)*(m_x) + (wxDouble)(m_y)*(m_y) );
+    return sqrt( (double)(m_x)*(m_x) + (double)(m_y)*(m_y) );
 }
 
-inline void wxPoint2DInt::SetVectorLength( wxDouble length )
+inline void wxPoint2DInt::SetVectorLength( double length )
 {
-    wxDouble before = GetVectorLength();
+    double before = GetVectorLength();
     m_x = (wxInt32)(m_x * length / before);
     m_y = (wxInt32)(m_y * length / before);
 }
@@ -141,15 +141,15 @@ inline void wxPoint2DInt::Normalize()
     SetVectorLength( 1 );
 }
 
-inline wxDouble wxPoint2DInt::GetDistance( const wxPoint2DInt &pt ) const
+inline double wxPoint2DInt::GetDistance( const wxPoint2DInt &pt ) const
 {
     return sqrt( GetDistanceSquare( pt ) );
 }
 
-inline wxDouble wxPoint2DInt::GetDistanceSquare( const wxPoint2DInt &pt ) const
+inline double wxPoint2DInt::GetDistanceSquare( const wxPoint2DInt &pt ) const
 {
-    return ( ((wxDouble)pt.m_x-m_x)*((wxDouble)pt.m_x-m_x) +
-             ((wxDouble)pt.m_y-m_y)*((wxDouble)pt.m_y-m_y) );
+    return ( ((double)pt.m_x-m_x)*((double)pt.m_x-m_x) +
+             ((double)pt.m_y-m_y)*((double)pt.m_y-m_y) );
 }
 
 inline wxInt32 wxPoint2DInt::GetDotProduct( const wxPoint2DInt &vec ) const
@@ -231,7 +231,7 @@ inline wxPoint2DInt operator*(wxInt32 n , const wxPoint2DInt& pt)
     return wxPoint2DInt( pt.m_x * n , pt.m_y * n );
 }
 
-inline wxPoint2DInt operator*(wxDouble n , const wxPoint2DInt& pt)
+inline wxPoint2DInt operator*(double n , const wxPoint2DInt& pt)
 {
     return wxPoint2DInt( static_cast<wxInt32>(pt.m_x * n) ,
         static_cast<wxInt32>(pt.m_y * n) );
@@ -242,7 +242,7 @@ inline wxPoint2DInt operator*(const wxPoint2DInt& pt , wxInt32 n)
     return wxPoint2DInt( pt.m_x * n , pt.m_y * n );
 }
 
-inline wxPoint2DInt operator*(const wxPoint2DInt& pt , wxDouble n)
+inline wxPoint2DInt operator*(const wxPoint2DInt& pt , double n)
 {
     return wxPoint2DInt( static_cast<wxInt32>(pt.m_x * n) ,
         static_cast<wxInt32>(pt.m_y * n) );
@@ -258,7 +258,7 @@ inline wxPoint2DInt operator/(const wxPoint2DInt& pt , wxInt32 n)
     return wxPoint2DInt( pt.m_x / n , pt.m_y / n );
 }
 
-inline wxPoint2DInt operator/(const wxPoint2DInt& pt , wxDouble n)
+inline wxPoint2DInt operator/(const wxPoint2DInt& pt , double n)
 {
     return wxPoint2DInt( static_cast<wxInt32>(pt.m_x / n) ,
         static_cast<wxInt32>(pt.m_y / n) );
@@ -270,28 +270,28 @@ class WXDLLIMPEXP_CORE wxPoint2DDouble
 {
 public :
     inline wxPoint2DDouble();
-    inline wxPoint2DDouble( wxDouble x , wxDouble y );
+    inline wxPoint2DDouble( double x , double y );
     wxPoint2DDouble( const wxPoint2DInt &pt )
-        { m_x = (wxDouble) pt.m_x ; m_y = (wxDouble) pt.m_y ; }
+        { m_x = (double) pt.m_x ; m_y = (double) pt.m_y ; }
     wxPoint2DDouble( const wxPoint &pt )
-        { m_x = (wxDouble) pt.x ; m_y = (wxDouble) pt.y ; }
+        { m_x = (double) pt.x ; m_y = (double) pt.y ; }
     // default copy ctor and copy-assign operator are OK
 
     // two different conversions to integers, floor and rounding
     inline void GetFloor( wxInt32 *x , wxInt32 *y ) const;
     inline void GetRounded( wxInt32 *x , wxInt32 *y ) const;
 
-    inline wxDouble GetVectorLength() const;
-     wxDouble GetVectorAngle() const ;
-    void SetVectorLength( wxDouble length );
-    void SetVectorAngle( wxDouble degrees );
+    inline double GetVectorLength() const;
+     double GetVectorAngle() const ;
+    void SetVectorLength( double length );
+    void SetVectorAngle( double degrees );
     // set the vector length to 1.0, preserving the angle
     void Normalize();
 
-    inline wxDouble GetDistance( const wxPoint2DDouble &pt ) const;
-    inline wxDouble GetDistanceSquare( const wxPoint2DDouble &pt ) const;
-    inline wxDouble GetDotProduct( const wxPoint2DDouble &vec ) const;
-    inline wxDouble GetCrossProduct( const wxPoint2DDouble &vec ) const;
+    inline double GetDistance( const wxPoint2DDouble &pt ) const;
+    inline double GetDistanceSquare( const wxPoint2DDouble &pt ) const;
+    inline double GetDotProduct( const wxPoint2DDouble &vec ) const;
+    inline double GetCrossProduct( const wxPoint2DDouble &vec ) const;
 
     // the reflection of this point
     wxPoint2DDouble operator-() const;
@@ -299,28 +299,28 @@ public :
     inline wxPoint2DDouble& operator+=(const wxPoint2DDouble& pt);
     inline wxPoint2DDouble& operator-=(const wxPoint2DDouble& pt);
     inline wxPoint2DDouble& operator*=(const wxPoint2DDouble& pt);
-    inline wxPoint2DDouble& operator*=(wxDouble n);
+    inline wxPoint2DDouble& operator*=(double n);
     inline wxPoint2DDouble& operator*=(wxInt32 n);
     inline wxPoint2DDouble& operator/=(const wxPoint2DDouble& pt);
-    inline wxPoint2DDouble& operator/=(wxDouble n);
+    inline wxPoint2DDouble& operator/=(double n);
     inline wxPoint2DDouble& operator/=(wxInt32 n);
 
     inline bool operator==(const wxPoint2DDouble& pt) const;
     inline bool operator!=(const wxPoint2DDouble& pt) const;
 
-    wxDouble m_x;
-    wxDouble m_y;
+    double m_x;
+    double m_y;
 };
 
 inline wxPoint2DDouble operator+(const wxPoint2DDouble& pt1 , const wxPoint2DDouble& pt2);
 inline wxPoint2DDouble operator-(const wxPoint2DDouble& pt1 , const wxPoint2DDouble& pt2);
 inline wxPoint2DDouble operator*(const wxPoint2DDouble& pt1 , const wxPoint2DDouble& pt2);
-inline wxPoint2DDouble operator*(wxDouble n , const wxPoint2DDouble& pt);
+inline wxPoint2DDouble operator*(double n , const wxPoint2DDouble& pt);
 inline wxPoint2DDouble operator*(wxInt32 n , const wxPoint2DDouble& pt);
-inline wxPoint2DDouble operator*(const wxPoint2DDouble& pt , wxDouble n);
+inline wxPoint2DDouble operator*(const wxPoint2DDouble& pt , double n);
 inline wxPoint2DDouble operator*(const wxPoint2DDouble& pt , wxInt32 n);
 inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt1 , const wxPoint2DDouble& pt2);
-inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt , wxDouble n);
+inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt , double n);
 inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt , wxInt32 n);
 
 inline wxPoint2DDouble::wxPoint2DDouble()
@@ -329,7 +329,7 @@ inline wxPoint2DDouble::wxPoint2DDouble()
     m_y = 0.0;
 }
 
-inline wxPoint2DDouble::wxPoint2DDouble( wxDouble x , wxDouble y )
+inline wxPoint2DDouble::wxPoint2DDouble( double x , double y )
 {
     m_x = x;
     m_y = y;
@@ -347,14 +347,14 @@ inline void wxPoint2DDouble::GetRounded( wxInt32 *x , wxInt32 *y ) const
     *y = (wxInt32) floor( m_y + 0.5);
 }
 
-inline wxDouble wxPoint2DDouble::GetVectorLength() const
+inline double wxPoint2DDouble::GetVectorLength() const
 {
     return sqrt( (m_x)*(m_x) + (m_y)*(m_y) ) ;
 }
 
-inline void wxPoint2DDouble::SetVectorLength( wxDouble length )
+inline void wxPoint2DDouble::SetVectorLength( double length )
 {
-    wxDouble before = GetVectorLength() ;
+    double before = GetVectorLength() ;
     m_x = (m_x * length / before) ;
     m_y = (m_y * length / before) ;
 }
@@ -364,22 +364,22 @@ inline void wxPoint2DDouble::Normalize()
     SetVectorLength( 1 );
 }
 
-inline wxDouble wxPoint2DDouble::GetDistance( const wxPoint2DDouble &pt ) const
+inline double wxPoint2DDouble::GetDistance( const wxPoint2DDouble &pt ) const
 {
     return sqrt( GetDistanceSquare( pt ) );
 }
 
-inline wxDouble wxPoint2DDouble::GetDistanceSquare( const wxPoint2DDouble &pt ) const
+inline double wxPoint2DDouble::GetDistanceSquare( const wxPoint2DDouble &pt ) const
 {
     return ( (pt.m_x-m_x)*(pt.m_x-m_x) + (pt.m_y-m_y)*(pt.m_y-m_y) );
 }
 
-inline wxDouble wxPoint2DDouble::GetDotProduct( const wxPoint2DDouble &vec ) const
+inline double wxPoint2DDouble::GetDotProduct( const wxPoint2DDouble &vec ) const
 {
     return ( m_x * vec.m_x + m_y * vec.m_y );
 }
 
-inline wxDouble wxPoint2DDouble::GetCrossProduct( const wxPoint2DDouble &vec ) const
+inline double wxPoint2DDouble::GetCrossProduct( const wxPoint2DDouble &vec ) const
 {
     return ( m_x * vec.m_y - vec.m_x * m_y );
 }
@@ -443,7 +443,7 @@ inline wxPoint2DDouble operator*(const wxPoint2DDouble& pt1 , const wxPoint2DDou
     return wxPoint2DDouble( pt1.m_x * pt2.m_x , pt1.m_y * pt2.m_y );
 }
 
-inline wxPoint2DDouble operator*(wxDouble n , const wxPoint2DDouble& pt)
+inline wxPoint2DDouble operator*(double n , const wxPoint2DDouble& pt)
 {
     return wxPoint2DDouble( pt.m_x * n , pt.m_y * n );
 }
@@ -453,7 +453,7 @@ inline wxPoint2DDouble operator*(wxInt32 n , const wxPoint2DDouble& pt)
     return wxPoint2DDouble( pt.m_x * n , pt.m_y * n );
 }
 
-inline wxPoint2DDouble operator*(const wxPoint2DDouble& pt , wxDouble n)
+inline wxPoint2DDouble operator*(const wxPoint2DDouble& pt , double n)
 {
     return wxPoint2DDouble( pt.m_x * n , pt.m_y * n );
 }
@@ -468,7 +468,7 @@ inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt1 , const wxPoint2DDou
     return wxPoint2DDouble( pt1.m_x / pt2.m_x , pt1.m_y / pt2.m_y );
 }
 
-inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt , wxDouble n)
+inline wxPoint2DDouble operator/(const wxPoint2DDouble& pt , double n)
 {
     return wxPoint2DDouble( pt.m_x / n , pt.m_y / n );
 }
@@ -487,7 +487,7 @@ class WXDLLIMPEXP_CORE wxRect2DDouble
 public:
     wxRect2DDouble()
         { m_x = m_y = m_width = m_height = 0; }
-    wxRect2DDouble(wxDouble x, wxDouble y, wxDouble w, wxDouble h)
+    wxRect2DDouble(double x, double y, double w, double h)
         { m_x = x; m_y = y; m_width = w;  m_height = h; }
 /*
     wxRect2DDouble(const wxPoint2DDouble& topLeft, const wxPoint2DDouble& bottomRight);
@@ -504,18 +504,18 @@ public:
     // for the edge and corner accessors there are two setters counterparts, the Set.. functions keep the other corners at their
         // position whenever sensible, the Move.. functions keep the size of the rect and move the other corners appropriately
 
-    inline wxDouble GetLeft() const { return m_x; }
-    inline void SetLeft( wxDouble n ) { m_width += m_x - n; m_x = n; }
-    inline void MoveLeftTo( wxDouble n ) { m_x = n; }
-    inline wxDouble GetTop() const { return m_y; }
-    inline void SetTop( wxDouble n ) { m_height += m_y - n; m_y = n; }
-    inline void MoveTopTo( wxDouble n ) { m_y = n; }
-    inline wxDouble GetBottom() const { return m_y + m_height; }
-    inline void SetBottom( wxDouble n ) { m_height += n - (m_y+m_height);}
-    inline void MoveBottomTo( wxDouble n ) { m_y = n - m_height; }
-    inline wxDouble GetRight() const { return m_x + m_width; }
-    inline void SetRight( wxDouble n ) { m_width += n - (m_x+m_width) ; }
-    inline void MoveRightTo( wxDouble n ) { m_x = n - m_width; }
+    inline double GetLeft() const { return m_x; }
+    inline void SetLeft( double n ) { m_width += m_x - n; m_x = n; }
+    inline void MoveLeftTo( double n ) { m_x = n; }
+    inline double GetTop() const { return m_y; }
+    inline void SetTop( double n ) { m_height += m_y - n; m_y = n; }
+    inline void MoveTopTo( double n ) { m_y = n; }
+    inline double GetBottom() const { return m_y + m_height; }
+    inline void SetBottom( double n ) { m_height += n - (m_y+m_height);}
+    inline void MoveBottomTo( double n ) { m_y = n - m_height; }
+    inline double GetRight() const { return m_x + m_width; }
+    inline void SetRight( double n ) { m_width += n - (m_x+m_width) ; }
+    inline void MoveRightTo( double n ) { m_x = n - m_width; }
 
     inline wxPoint2DDouble GetLeftTop() const
         { return wxPoint2DDouble( m_x , m_y ); }
@@ -564,9 +564,9 @@ public:
     inline bool HaveEqualSize( const wxRect2DDouble &rect ) const
         { return wxIsSameDouble(rect.m_width, m_width) && wxIsSameDouble(rect.m_height, m_height); }
 
-    inline void Inset( wxDouble x , wxDouble y )
+    inline void Inset( double x , double y )
         { m_x += x; m_y += y; m_width -= 2 * x; m_height -= 2 * y; }
-    inline void Inset( wxDouble left , wxDouble top ,wxDouble right , wxDouble bottom  )
+    inline void Inset( double left , double top ,double right , double bottom  )
         { m_x += left; m_y += top; m_width -= left + right; m_height -= top + bottom;}
     inline void Offset( const wxPoint2DDouble &pt )
         { m_x += pt.m_x; m_y += pt.m_y; }
@@ -590,21 +590,21 @@ public:
     inline wxRect2DDouble CreateUnion( const wxRect2DDouble &otherRect ) const
         { wxRect2DDouble result; Union( *this , otherRect , &result); return result; }
 
-    inline void Scale( wxDouble f )
+    inline void Scale( double f )
         { m_x *= f; m_y *= f; m_width *= f; m_height *= f;}
     inline void Scale( wxInt32 num , wxInt32 denum )
-        { m_x *= ((wxDouble)num)/((wxDouble)denum); m_y *= ((wxDouble)num)/((wxDouble)denum);
-                m_width *= ((wxDouble)num)/((wxDouble)denum); m_height *= ((wxDouble)num)/((wxDouble)denum);}
+        { m_x *= ((double)num)/((double)denum); m_y *= ((double)num)/((double)denum);
+                m_width *= ((double)num)/((double)denum); m_height *= ((double)num)/((double)denum);}
 
     inline bool operator == (const wxRect2DDouble& rect) const
         { return wxIsSameDouble(m_x, rect.m_x) && wxIsSameDouble(m_y, rect.m_y) && HaveEqualSize(rect); }
     inline bool operator != (const wxRect2DDouble& rect) const
         { return !(*this == rect); }
 
-    wxDouble  m_x;
-    wxDouble  m_y;
-    wxDouble  m_width;
-    wxDouble m_height;
+    double  m_x;
+    double  m_y;
+    double  m_width;
+    double m_height;
 };
 
 

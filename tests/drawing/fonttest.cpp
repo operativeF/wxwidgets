@@ -74,9 +74,9 @@ void GraphicsContextDrawingTestCase::DoFontDrawings (wxGraphicsContext *gc)
 
     gc->DrawText( wxT("This is Swiss 18pt text."), 110, 40 );
 
-    wxDouble length;
-    wxDouble height;
-    wxDouble descent;
+    double length;
+    double height;
+    double descent;
     gc->GetTextExtent( wxT("This is Swiss 18pt text."), &length, &height, &descent );
     text.Printf( wxT("Dimensions are length %f, height %f, descent %f"), length, height, descent );
     gc->DrawText( text, 110, 80 );

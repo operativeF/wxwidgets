@@ -62,7 +62,7 @@ private:
 #endif // wxUSE_APPLE_IEEE
     CPPUNIT_TEST_SUITE_END();
 
-    wxFloat64 TestFloatRW(wxFloat64 fValue);
+    double TestFloatRW(double fValue);
 
     void FloatRW();
     void DoubleRW();
@@ -105,7 +105,7 @@ DataStreamTestCase::DataStreamTestCase()
 {
 }
 
-wxFloat64 DataStreamTestCase::TestFloatRW(wxFloat64 fValue)
+double DataStreamTestCase::TestFloatRW(double fValue)
 {
     TempFile f("mytext.dat");
 
@@ -133,7 +133,7 @@ wxFloat64 DataStreamTestCase::TestFloatRW(wxFloat64 fValue)
         pDataInput.UseBasicPrecisions();
 #endif // wxUSE_APPLE_IEEE
 
-    wxFloat64 fInFloat;
+    double fInFloat;
 
     pDataInput >> fInFloat;
 

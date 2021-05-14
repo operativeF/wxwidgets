@@ -259,11 +259,11 @@ public:
     bool        m_xAxisReversed,
                 m_yAxisReversed;
 #if wxUSE_DC_TRANSFORM_MATRIX
-    wxDouble    m_transform_dx;
-    wxDouble    m_transform_dy;
-    wxDouble    m_transform_scx;
-    wxDouble    m_transform_scy;
-    wxDouble    m_transform_rot;
+    double    m_transform_dx;
+    double    m_transform_dy;
+    double    m_transform_scx;
+    double    m_transform_scy;
+    double    m_transform_rot;
 #endif // wxUSE_DC_TRANSFORM_MATRIX
     wxColour    m_colourForeground,    // these are _text_ colours
                 m_colourBackground;
@@ -1072,9 +1072,9 @@ void MyCanvas::DrawWithLogicalOps(wxDC& dc)
 #if wxDRAWING_DC_SUPPORTS_ALPHA || wxUSE_GRAPHICS_CONTEXT
 void MyCanvas::DrawAlpha(wxDC& dc)
 {
-    wxDouble margin = 20 ;
-    wxDouble width = 180 ;
-    wxDouble radius = 30 ;
+    double margin = 20 ;
+    double width = 180 ;
+    double radius = 30 ;
 
     dc.SetPen( wxPen( wxColour( 128, 0, 0 ), 12 ));
     dc.SetBrush(*wxRED_BRUSH);
@@ -1154,7 +1154,7 @@ void MyCanvas::DrawGraphics(wxGraphicsContext* gc)
                 label = "DrawPath";
                 break;
         }
-        wxDouble w, h;
+        double w, h;
         gc->GetTextExtent(label, &w, &h, NULL, NULL);
         gc->DrawText(label, -w/2, -BASE2-h-4);
         switch( i )
@@ -1224,10 +1224,10 @@ void MyCanvas::DrawGraphics(wxGraphicsContext* gc)
     const wxString labelText("Scaled smiley inside a square");
     gc->DrawText(labelText, 0, 0);
     // Center a bitmap horizontally
-    wxDouble textWidth;
+    double textWidth;
     gc->GetTextExtent(labelText, &textWidth, NULL);
-    const wxDouble rectWidth = 100;
-    wxDouble x0 = (textWidth - rectWidth) / 2;
+    const double rectWidth = 100;
+    double x0 = (textWidth - rectWidth) / 2;
     gc->DrawRectangle(x0, BASE2, rectWidth, 100);
     gc->DrawBitmap(m_smile_bmp, x0, BASE2, rectWidth, 100);
     gc->PopState();
@@ -2108,7 +2108,7 @@ void MyCanvas::UseGraphicRenderer(wxGraphicsRenderer* renderer)
 class TransformDataDialog : public wxDialog
 {
 public:
-    TransformDataDialog(wxWindow* parent, wxDouble dx, wxDouble dy, wxDouble scx, wxDouble scy, wxDouble rotAngle)
+    TransformDataDialog(wxWindow* parent, double dx, double dy, double scx, double scy, double rotAngle)
         : wxDialog(parent, wxID_ANY, "Affine transformation parameters")
         , m_dx(dx)
         , m_dy(dy)
@@ -2121,19 +2121,19 @@ public:
         const int border = wxSizerFlags::GetDefaultBorder();
         wxFlexGridSizer* paramSizer = new wxFlexGridSizer(2, wxSize(border, border));
         paramSizer->Add(new wxStaticText(this, wxID_ANY, "Translation X:"), wxSizerFlags().CentreVertical());
-        wxFloatingPointValidator<wxDouble> val_dx(1, &m_dx, wxNUM_VAL_NO_TRAILING_ZEROES);
+        wxFloatingPointValidator<double> val_dx(1, &m_dx, wxNUM_VAL_NO_TRAILING_ZEROES);
         paramSizer->Add(new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, 0, val_dx), wxSizerFlags().CentreVertical());
         paramSizer->Add(new wxStaticText(this, wxID_ANY, "Translation Y:"), wxSizerFlags().CentreVertical());
-        wxFloatingPointValidator<wxDouble> val_dy(1, &m_dy, wxNUM_VAL_NO_TRAILING_ZEROES);
+        wxFloatingPointValidator<double> val_dy(1, &m_dy, wxNUM_VAL_NO_TRAILING_ZEROES);
         paramSizer->Add(new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, 0, val_dy), wxSizerFlags().CentreVertical());
         paramSizer->Add(new wxStaticText(this, wxID_ANY, "Scale X (0.2 - 5):"), wxSizerFlags().CentreVertical());
-        wxFloatingPointValidator<wxDouble> val_scx(2, &m_scx, wxNUM_VAL_NO_TRAILING_ZEROES);
+        wxFloatingPointValidator<double> val_scx(2, &m_scx, wxNUM_VAL_NO_TRAILING_ZEROES);
         paramSizer->Add(new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, 0, val_scx), wxSizerFlags().CentreVertical());
         paramSizer->Add(new wxStaticText(this, wxID_ANY, "Scale Y (0.2 - 5):"), wxSizerFlags().CentreVertical());
-        wxFloatingPointValidator<wxDouble> val_scy(2, &m_scy, wxNUM_VAL_NO_TRAILING_ZEROES);
+        wxFloatingPointValidator<double> val_scy(2, &m_scy, wxNUM_VAL_NO_TRAILING_ZEROES);
         paramSizer->Add(new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, 0, val_scy), wxSizerFlags().CentreVertical());
         paramSizer->Add(new wxStaticText(this, wxID_ANY, "Rotation angle (deg):"), wxSizerFlags().CentreVertical());
-        wxFloatingPointValidator<wxDouble> val_rot(1, &m_rotAngle, wxNUM_VAL_NO_TRAILING_ZEROES);
+        wxFloatingPointValidator<double> val_rot(1, &m_rotAngle, wxNUM_VAL_NO_TRAILING_ZEROES);
         paramSizer->Add(new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, 0, val_rot), wxSizerFlags().CentreVertical());
         sizer->Add(paramSizer, wxSizerFlags().DoubleBorder());
 
@@ -2159,7 +2159,7 @@ public:
         return true;
     }
 
-    void GetTransformationData(wxDouble* dx, wxDouble* dy, wxDouble* scx, wxDouble* scy, wxDouble* rotAngle) const
+    void GetTransformationData(double* dx, double* dy, double* scx, double* scy, double* rotAngle) const
     {
         if ( dx )
             *dx = m_dx;
@@ -2178,11 +2178,11 @@ public:
     }
 
 private:
-    wxDouble m_dx;
-    wxDouble m_dy;
-    wxDouble m_scx;
-    wxDouble m_scy;
-    wxDouble m_rotAngle;
+    double m_dx;
+    double m_dy;
+    double m_scx;
+    double m_scy;
+    double m_rotAngle;
 };
 #endif // wxUSE_DC_TRANSFORM_MATRIX
 

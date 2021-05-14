@@ -1328,7 +1328,7 @@ void wxWindowMac::DoGetTextExtent(const wxString& str,
     wxGraphicsContext* ctx = wxGraphicsContext::Create();
     ctx->SetFont( *fontToUse, *wxBLACK );
 
-    wxDouble h , d , e , w;
+    double h , d , e , w;
     ctx->GetTextExtent( str, &w, &h, &d, &e );
 
     delete ctx;

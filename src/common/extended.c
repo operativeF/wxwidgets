@@ -80,7 +80,7 @@
 # define UnsignedToFloat(u)   ((wxFloat64)(u))
 #else /*applec*/
 # define FloatToUnsigned(f)   ((wxUint32)(((wxInt32)((f) - 2147483648.0)) + 2147483647L) + 1)
-# define UnsignedToFloat(u)   (((wxFloat64)((wxInt32)((u) - 2147483647L - 1))) + 2147483648.0)
+# define UnsignedToFloat(u)   (((double)((wxInt32)((u) - 2147483647L - 1))) + 2147483648.0)
 #endif /*applec*/
 
 
@@ -92,9 +92,9 @@
  * and a 64-bit mantissa, with no hidden bit.
  ****************************************************************/
 
-WXDLLIMPEXP_BASE wxFloat64 wxConvertFromIeeeExtended(const wxInt8 *bytes)
+WXDLLIMPEXP_BASE double wxConvertFromIeeeExtended(const wxInt8 *bytes)
 {
-    wxFloat64 f;
+    double f;
     wxInt32 expon;
     wxUint32 hiMant, loMant;
 
@@ -132,11 +132,11 @@ WXDLLIMPEXP_BASE wxFloat64 wxConvertFromIeeeExtended(const wxInt8 *bytes)
 /****************************************************************/
 
 
-WXDLLIMPEXP_BASE void wxConvertToIeeeExtended(wxFloat64 num, wxInt8 *bytes)
+WXDLLIMPEXP_BASE void wxConvertToIeeeExtended(double num, wxInt8 *bytes)
 {
     wxInt32 sign;
     wxInt32 expon;
-    wxFloat64 fMant, fsMant;
+    double fMant, fsMant;
     wxUint32 hiMant, loMant;
 
     if (num < 0) {

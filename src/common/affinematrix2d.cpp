@@ -53,9 +53,9 @@ void wxAffineMatrix2D::Concat(const wxAffineMatrix2DBase &t)
 
     m_tx += tr.m_x*m_11 + tr.m_y*m_21;
     m_ty += tr.m_x*m_12 + tr.m_y*m_22;
-    wxDouble e11 = mat.m_11*m_11 + mat.m_12*m_21;
-    wxDouble e12 = mat.m_11*m_12 + mat.m_12*m_22;
-    wxDouble e21 = mat.m_21*m_11 + mat.m_22*m_21;
+    double e11 = mat.m_11*m_11 + mat.m_12*m_21;
+    double e12 = mat.m_11*m_12 + mat.m_12*m_22;
+    double e21 = mat.m_21*m_11 + mat.m_22*m_21;
     m_22 = mat.m_21*m_12 + mat.m_22*m_22;
     m_11 = e11;
     m_12 = e12;
@@ -69,15 +69,15 @@ void wxAffineMatrix2D::Concat(const wxAffineMatrix2DBase &t)
 // | m_tx  m_ty   1 |
 bool wxAffineMatrix2D::Invert()
 {
-    const wxDouble det = m_11*m_22 - m_12*m_21;
+    const double det = m_11*m_22 - m_12*m_21;
 
     if ( !det )
         return false;
 
-    wxDouble ex = (m_21*m_ty - m_22*m_tx) / det;
+    double ex = (m_21*m_ty - m_22*m_tx) / det;
     m_ty = (-m_11*m_ty + m_12*m_tx) / det;
     m_tx = ex;
-    wxDouble e11 = m_22 / det;
+    double e11 = m_22 / det;
     m_12 = -m_12 / det;
     m_21 = -m_21 / det;
     m_22 = m_11 / det;
@@ -106,7 +106,7 @@ bool wxAffineMatrix2D::IsEqual(const wxAffineMatrix2DBase& t) const
 // |  1   0   0 |   | m_11  m_12   0 |
 // |  0   1   0 | x | m_21  m_22   0 |
 // | dx  dy   1 |   | m_tx  m_ty   1 |
-void wxAffineMatrix2D::Translate(wxDouble dx, wxDouble dy)
+void wxAffineMatrix2D::Translate(double dx, double dy)
 {
     m_tx += m_11 * dx + m_21 * dy;
     m_ty += m_12 * dx + m_22 * dy;
@@ -116,7 +116,7 @@ void wxAffineMatrix2D::Translate(wxDouble dx, wxDouble dy)
 // | xScale   0      0 |   | m_11  m_12   0 |
 // |   0    yScale   0 | x | m_21  m_22   0 |
 // |   0      0      1 |   | m_tx  m_ty   1 |
-void wxAffineMatrix2D::Scale(wxDouble xScale, wxDouble yScale)
+void wxAffineMatrix2D::Scale(double xScale, double yScale)
 {
     m_11 *= xScale;
     m_12 *= xScale;
@@ -128,13 +128,13 @@ void wxAffineMatrix2D::Scale(wxDouble xScale, wxDouble yScale)
 // | cos    sin   0 |   | m_11  m_12   0 |
 // | -sin   cos   0 | x | m_21  m_22   0 |
 // |  0      0    1 |   | m_tx  m_ty   1 |
-void wxAffineMatrix2D::Rotate(wxDouble cRadians)
+void wxAffineMatrix2D::Rotate(double cRadians)
 {
-    wxDouble c = cos(cRadians);
-    wxDouble s = sin(cRadians);
+    double c = cos(cRadians);
+    double s = sin(cRadians);
 
-    wxDouble e11 = c*m_11 + s*m_21;
-    wxDouble e12 = c*m_12 + s*m_22;
+    double e11 = c*m_11 + s*m_21;
+    double e12 = c*m_12 + s*m_22;
     m_21 = c*m_21 - s*m_11;
     m_22 = c*m_22 - s*m_12;
     m_11 = e11;

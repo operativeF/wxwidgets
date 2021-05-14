@@ -34,16 +34,16 @@ public:
     bool Invert() override;
     bool IsIdentity() const override;
     bool IsEqual(const wxAffineMatrix2DBase& t) const override;
-    void Translate(wxDouble dx, wxDouble dy) override;
-    void Scale(wxDouble xScale, wxDouble yScale) override;
-    void Rotate(wxDouble cRadians) override;
+    void Translate(double dx, double dy) override;
+    void Scale(double xScale, double yScale) override;
+    void Rotate(double cRadians) override;
 
 protected:
     wxPoint2DDouble DoTransformPoint(const wxPoint2DDouble& p) const override;
     wxPoint2DDouble DoTransformDistance(const wxPoint2DDouble& p) const override;
 
 private:
-    wxDouble m_11, m_12, m_21, m_22, m_tx, m_ty;
+    double m_11, m_12, m_21, m_22, m_tx, m_ty;
 };
 
 #endif // wxUSE_GEOMETRY

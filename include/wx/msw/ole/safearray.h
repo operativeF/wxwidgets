@@ -74,7 +74,7 @@ struct wxSafeArrayConvertor {};
     Macro for specializing wxSafeArrayConvertor for simple types.
 
     The template parameters are:
-        - externType: basic C data type, e.g. wxFloat64 or wxInt32
+        - externType: basic C data type, e.g. double or std::int32_t
         - varType: corresponding VARIANT type constant, e.g. VT_R8 or VT_I4.
 */
 #define wxSPECIALIZE_WXSAFEARRAY_CONVERTOR_SIMPLE(externType, varType) \
@@ -97,8 +97,8 @@ struct wxSafeArrayConvertor<varType>                        \
 
 wxSPECIALIZE_WXSAFEARRAY_CONVERTOR_SIMPLE(wxInt16, VT_I2);
 wxSPECIALIZE_WXSAFEARRAY_CONVERTOR_SIMPLE(wxInt32, VT_I4);
-wxSPECIALIZE_WXSAFEARRAY_CONVERTOR_SIMPLE(wxFloat32, VT_R4);
-wxSPECIALIZE_WXSAFEARRAY_CONVERTOR_SIMPLE(wxFloat64, VT_R8);
+wxSPECIALIZE_WXSAFEARRAY_CONVERTOR_SIMPLE(float, VT_R4);
+wxSPECIALIZE_WXSAFEARRAY_CONVERTOR_SIMPLE(double, VT_R8);
 
 // Specialization for VT_BSTR using wxString.
 template <>

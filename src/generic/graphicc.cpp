@@ -132,20 +132,20 @@ public :
     //
 
     // begins a new subpath at (x,y)
-    void MoveToPoint( wxDouble x, wxDouble y ) override;
+    void MoveToPoint( double x, double y ) override;
 
     // adds a straight line from the current point to (x,y)
-    void AddLineToPoint( wxDouble x, wxDouble y ) override;
+    void AddLineToPoint( double x, double y ) override;
 
     // adds a cubic Bezier curve from the current point, using two control points and an end point
-    void AddCurveToPoint( wxDouble cx1, wxDouble cy1, wxDouble cx2, wxDouble cy2, wxDouble x, wxDouble y ) override;
+    void AddCurveToPoint( double cx1, double cy1, double cx2, double cy2, double x, double y ) override;
 
 
     // adds an arc of a circle centering at (x,y) with radius (r) from startAngle to endAngle
-    void AddArc( wxDouble x, wxDouble y, wxDouble r, wxDouble startAngle, wxDouble endAngle, bool clockwise ) override ;
+    void AddArc( double x, double y, double r, double startAngle, double endAngle, bool clockwise ) override ;
 
     // gets the last point of the current path, (0,0) if not yet set
-    void GetCurrentPoint( wxDouble* x, wxDouble* y) const override;
+    void GetCurrentPoint( double* x, double* y) const override;
 
     // adds another path
     void AddPath( const wxGraphicsPathData* path ) override;
@@ -159,17 +159,17 @@ public :
     //
 
     // appends a rectangle as a new closed subpath
-    void AddRectangle(wxDouble x, wxDouble y, wxDouble w, wxDouble h) override;
+    void AddRectangle(double x, double y, double w, double h) override;
 
     // appends a circle as a new closed subpath
-    void AddCircle(wxDouble x, wxDouble y, wxDouble r) override;
+    void AddCircle(double x, double y, double r) override;
 
     // appends an ellipse as a new closed subpath fitting the passed rectangle
-    void AddEllipse(wxDouble x, wxDouble y, wxDouble w, wxDouble h) override;
+    void AddEllipse(double x, double y, double w, double h) override;
 
     /*
     // draws a an arc to two tangents connecting (current) to (x1,y1) and (x1,y1) to (x2,y2), also a straight line from (current) to (x1,y1)
-    virtual void AddArcToPoint( wxDouble x1, wxDouble y1 , wxDouble x2, wxDouble y2, wxDouble r )  ;
+    virtual void AddArcToPoint( double x1, double y1 , double x2, double y2, double r )  ;
     */
 
     // returns the native path
@@ -182,9 +182,9 @@ public :
     void Transform( const wxGraphicsMatrixData* matrix ) override ;
 
     // gets the bounding box enclosing all points (possibly including control points)
-    void GetBox(wxDouble *x, wxDouble *y, wxDouble *w, wxDouble *h) const override;
+    void GetBox(double *x, double *y, double *w, double *h) const override;
 
-    bool Contains( wxDouble x, wxDouble y, wxPolygonFillMode fillStyle = wxWINDING_RULE) const override;
+    bool Contains( double x, double y, wxPolygonFillMode fillStyle = wxWINDING_RULE) const override;
 
 private :
     cairo_t* m_pathContext;
@@ -202,12 +202,12 @@ public :
     void Concat( const wxGraphicsMatrixData *t ) override;
 
     // sets the matrix to the respective values
-    virtual void Set(wxDouble a=1.0, wxDouble b=0.0, wxDouble c=0.0, wxDouble d=1.0,
-        wxDouble tx=0.0, wxDouble ty=0.0) override;
+    virtual void Set(double a=1.0, double b=0.0, double c=0.0, double d=1.0,
+        double tx=0.0, double ty=0.0) override;
 
     // gets the component valuess of the matrix
-    virtual void Get(wxDouble* a=NULL, wxDouble* b=NULL,  wxDouble* c=NULL,
-                     wxDouble* d=NULL, wxDouble* tx=NULL, wxDouble* ty=NULL) const override;
+    virtual void Get(double* a=NULL, double* b=NULL,  double* c=NULL,
+                     double* d=NULL, double* tx=NULL, double* ty=NULL) const override;
 
     // makes this the inverse matrix
     void Invert() override;
@@ -223,23 +223,23 @@ public :
     //
 
     // add the translation to this matrix
-    void Translate( wxDouble dx , wxDouble dy ) override;
+    void Translate( double dx , double dy ) override;
 
     // add the scale to this matrix
-    void Scale( wxDouble xScale , wxDouble yScale ) override;
+    void Scale( double xScale , double yScale ) override;
 
     // add the rotation to this matrix (radians)
-    void Rotate( wxDouble angle ) override;
+    void Rotate( double angle ) override;
 
     //
     // apply the transforms
     //
 
     // applies that matrix to the point
-    void TransformPoint( wxDouble *x, wxDouble *y ) const override;
+    void TransformPoint( double *x, double *y ) const override;
 
     // applies the matrix except for translations
-    void TransformDistance( wxDouble *dx, wxDouble *dy ) const override;
+    void TransformDistance( double *dx, double *dy ) const override;
 
     // returns the native representation
     void * GetNativeMatrix() const override;
@@ -258,12 +258,12 @@ public:
 
     virtual void Apply( wxGraphicsContext* context );
 
-    void CreateLinearGradientPattern(wxDouble x1, wxDouble y1,
-                                     wxDouble x2, wxDouble y2,
+    void CreateLinearGradientPattern(double x1, double y1,
+                                     double x2, double y2,
                                      const wxGraphicsGradientStops& stops,
                                      const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix);
-    void CreateRadialGradientPattern(wxDouble startX, wxDouble startY,
-                                     wxDouble endX, wxDouble endY, wxDouble radius,
+    void CreateRadialGradientPattern(double startX, double startY,
+                                     double endX, double endY, double radius,
                                      const wxGraphicsGradientStops& stops,
                                      const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix);
 
@@ -305,7 +305,7 @@ public:
     void Init();
 
     void Apply( wxGraphicsContext* context ) override;
-    wxDouble GetWidth() { return m_width; }
+    double GetWidth() { return m_width; }
 
 private :
     double m_width;
@@ -465,13 +465,13 @@ public:
     void Clip( const wxRegion &region ) override;
 
     // clips drawings to the rect
-    void Clip( wxDouble x, wxDouble y, wxDouble w, wxDouble h ) override;
+    void Clip( double x, double y, double w, double h ) override;
 
     // resets the clipping to original extent
     void ResetClip() override;
 
     // returns bounding box of the clipping region
-    void GetClipBox(wxDouble* x, wxDouble* y, wxDouble* w, wxDouble* h) override;
+    void GetClipBox(double* x, double* y, double* w, double* h) override;
 
     void * GetNativeContext() override;
 
@@ -481,18 +481,18 @@ public:
 
     bool SetCompositionMode(wxCompositionMode op) override;
 
-    void BeginLayer(wxDouble opacity) override;
+    void BeginLayer(double opacity) override;
 
     void EndLayer() override;
 
     void StrokePath( const wxGraphicsPath& p ) override;
     void FillPath( const wxGraphicsPath& p , wxPolygonFillMode fillStyle = wxWINDING_RULE ) override;
-    void ClearRectangle( wxDouble x, wxDouble y, wxDouble w, wxDouble h ) override;
-    void DrawRectangle( wxDouble x, wxDouble y, wxDouble w, wxDouble h) override;
+    void ClearRectangle( double x, double y, double w, double h ) override;
+    void DrawRectangle( double x, double y, double w, double h) override;
 
-    void Translate( wxDouble dx , wxDouble dy ) override;
-    void Scale( wxDouble xScale , wxDouble yScale ) override;
-    void Rotate( wxDouble angle ) override;
+    void Translate( double dx , double dy ) override;
+    void Scale( double xScale , double yScale ) override;
+    void Rotate( double angle ) override;
 
     // concatenates this transform with the current transform of this context
     void ConcatTransform( const wxGraphicsMatrix& matrix ) override;
@@ -503,19 +503,19 @@ public:
     // gets the matrix of this context
     wxGraphicsMatrix GetTransform() const override;
 
-    void DrawBitmap( const wxGraphicsBitmap &bmp, wxDouble x, wxDouble y, wxDouble w, wxDouble h ) override;
-    void DrawBitmap( const wxBitmap &bmp, wxDouble x, wxDouble y, wxDouble w, wxDouble h ) override;
-    void DrawIcon( const wxIcon &icon, wxDouble x, wxDouble y, wxDouble w, wxDouble h ) override;
+    void DrawBitmap( const wxGraphicsBitmap &bmp, double x, double y, double w, double h ) override;
+    void DrawBitmap( const wxBitmap &bmp, double x, double y, double w, double h ) override;
+    void DrawIcon( const wxIcon &icon, double x, double y, double w, double h ) override;
     void PushState() override;
     void PopState() override;
     void Flush() override;
 
-    virtual void GetTextExtent( const wxString &str, wxDouble *width, wxDouble *height,
-                                wxDouble *descent, wxDouble *externalLeading ) const override;
+    virtual void GetTextExtent( const wxString &str, double *width, double *height,
+                                double *descent, double *externalLeading ) const override;
     void GetPartialTextExtents(const wxString& text, wxArrayDouble& widths) const override;
 
 protected:
-    void DoDrawText( const wxString &str, wxDouble x, wxDouble y ) override;
+    void DoDrawText( const wxString &str, double x, double y ) override;
 
     void Init(cairo_t *context);
 
@@ -797,8 +797,8 @@ void wxCairoPenBrushBaseData::AddGradientStops(const wxGraphicsGradientStops& st
 }
 
 void
-wxCairoPenBrushBaseData::CreateLinearGradientPattern(wxDouble x1, wxDouble y1,
-                                                     wxDouble x2, wxDouble y2,
+wxCairoPenBrushBaseData::CreateLinearGradientPattern(double x1, double y1,
+                                                     double x2, double y2,
                                                      const wxGraphicsGradientStops& stops,
                                                      const wxGraphicsMatrix& matrix)
 {
@@ -814,9 +814,9 @@ wxCairoPenBrushBaseData::CreateLinearGradientPattern(wxDouble x1, wxDouble y1,
 }
 
 void
-wxCairoPenBrushBaseData::CreateRadialGradientPattern(wxDouble startX, wxDouble startY,
-                                                     wxDouble endX, wxDouble endY,
-                                                     wxDouble radius,
+wxCairoPenBrushBaseData::CreateRadialGradientPattern(double startX, double startY,
+                                                     double endX, double endY,
+                                                     double radius,
                                                      const wxGraphicsGradientStops& stops,
                                                      const wxGraphicsMatrix& matrix)
 {
@@ -1268,12 +1268,12 @@ void wxCairoPathData::UnGetNativePath(void *p) const
 // The Primitives
 //
 
-void wxCairoPathData::MoveToPoint( wxDouble x , wxDouble y )
+void wxCairoPathData::MoveToPoint( double x , double y )
 {
     cairo_move_to(m_pathContext,x,y);
 }
 
-void wxCairoPathData::AddLineToPoint( wxDouble x , wxDouble y )
+void wxCairoPathData::AddLineToPoint( double x , double y )
 {
     cairo_line_to(m_pathContext,x,y);
 }
@@ -1290,13 +1290,13 @@ void wxCairoPathData::CloseSubpath()
     cairo_close_path(m_pathContext);
 }
 
-void wxCairoPathData::AddCurveToPoint( wxDouble cx1, wxDouble cy1, wxDouble cx2, wxDouble cy2, wxDouble x, wxDouble y )
+void wxCairoPathData::AddCurveToPoint( double cx1, double cy1, double cx2, double cy2, double x, double y )
 {
     cairo_curve_to(m_pathContext,cx1,cy1,cx2,cy2,x,y);
 }
 
 // gets the last point of the current path, (0,0) if not yet set
-void wxCairoPathData::GetCurrentPoint( wxDouble* x, wxDouble* y) const
+void wxCairoPathData::GetCurrentPoint( double* x, double* y) const
 {
     double dx,dy;
     cairo_get_current_point(m_pathContext,&dx,&dy);
@@ -1306,7 +1306,7 @@ void wxCairoPathData::GetCurrentPoint( wxDouble* x, wxDouble* y) const
         *y = dy;
 }
 
-void wxCairoPathData::AddArc( wxDouble x, wxDouble y, wxDouble r, double startAngle, double endAngle, bool clockwise )
+void wxCairoPathData::AddArc( double x, double y, double r, double startAngle, double endAngle, bool clockwise )
 {
     // as clockwise means positive in our system (y pointing downwards)
     // TODO make this interpretation dependent of the
@@ -1328,7 +1328,7 @@ void wxCairoPathData::Transform( const wxGraphicsMatrixData* matrix )
 }
 
 // gets the bounding box enclosing all points (possibly including control points)
-void wxCairoPathData::GetBox(wxDouble *x, wxDouble *y, wxDouble *w, wxDouble *h) const
+void wxCairoPathData::GetBox(double *x, double *y, double *w, double *h) const
 {
     double x1,y1,x2,y2;
 
@@ -1366,7 +1366,7 @@ void wxCairoPathData::GetBox(wxDouble *x, wxDouble *y, wxDouble *w, wxDouble *h)
     }
 }
 
-bool wxCairoPathData::Contains( wxDouble x, wxDouble y, wxPolygonFillMode fillStyle ) const
+bool wxCairoPathData::Contains( double x, double y, wxPolygonFillMode fillStyle ) const
 {
     cairo_set_fill_rule(m_pathContext,fillStyle==wxODDEVEN_RULE ? CAIRO_FILL_RULE_EVEN_ODD : CAIRO_FILL_RULE_WINDING);
     return cairo_in_fill( m_pathContext, x, y) != 0;
@@ -1374,19 +1374,19 @@ bool wxCairoPathData::Contains( wxDouble x, wxDouble y, wxPolygonFillMode fillSt
 
 // Convenience functions
 
-void wxCairoPathData::AddRectangle(wxDouble x, wxDouble y, wxDouble w, wxDouble h)
+void wxCairoPathData::AddRectangle(double x, double y, double w, double h)
 {
     cairo_rectangle(m_pathContext, x, y, w, h);
 }
 
-void wxCairoPathData::AddCircle(wxDouble x, wxDouble y, wxDouble r)
+void wxCairoPathData::AddCircle(double x, double y, double r)
 {
     cairo_move_to(m_pathContext, x+r, y);
     cairo_arc(m_pathContext, x, y, r, 0.0, 2*M_PI);
     cairo_close_path(m_pathContext);
 }
 
-void wxCairoPathData::AddEllipse(wxDouble x, wxDouble y, wxDouble w, wxDouble h)
+void wxCairoPathData::AddEllipse(double x, double y, double w, double h)
 {
     cairo_move_to(m_pathContext, x+w, y+h/2.0);
     w /= 2.0;
@@ -1428,15 +1428,15 @@ void wxCairoMatrixData::Concat( const wxGraphicsMatrixData *t )
 }
 
 // sets the matrix to the respective values
-void wxCairoMatrixData::Set(wxDouble a, wxDouble b, wxDouble c, wxDouble d,
-                        wxDouble tx, wxDouble ty)
+void wxCairoMatrixData::Set(double a, double b, double c, double d,
+                        double tx, double ty)
 {
     cairo_matrix_init( &m_matrix, a, b, c, d, tx, ty);
 }
 
 // gets the component valuess of the matrix
-void wxCairoMatrixData::Get(wxDouble* a, wxDouble* b,  wxDouble* c,
-                            wxDouble* d, wxDouble* tx, wxDouble* ty) const
+void wxCairoMatrixData::Get(double* a, double* b,  double* c,
+                            double* d, double* tx, double* ty) const
 {
     if (a)  *a = m_matrix.xx;
     if (b)  *b = m_matrix.yx;
@@ -1477,19 +1477,19 @@ bool wxCairoMatrixData::IsIdentity() const
 //
 
 // add the translation to this matrix
-void wxCairoMatrixData::Translate( wxDouble dx , wxDouble dy )
+void wxCairoMatrixData::Translate( double dx , double dy )
 {
     cairo_matrix_translate( &m_matrix, dx, dy) ;
 }
 
 // add the scale to this matrix
-void wxCairoMatrixData::Scale( wxDouble xScale , wxDouble yScale )
+void wxCairoMatrixData::Scale( double xScale , double yScale )
 {
     cairo_matrix_scale( &m_matrix, xScale, yScale) ;
 }
 
 // add the rotation to this matrix (radians)
-void wxCairoMatrixData::Rotate( wxDouble angle )
+void wxCairoMatrixData::Rotate( double angle )
 {
     cairo_matrix_rotate( &m_matrix, angle) ;
 }
@@ -1499,7 +1499,7 @@ void wxCairoMatrixData::Rotate( wxDouble angle )
 //
 
 // applies that matrix to the point
-void wxCairoMatrixData::TransformPoint( wxDouble *x, wxDouble *y ) const
+void wxCairoMatrixData::TransformPoint( double *x, double *y ) const
 {
     double lx = *x, ly = *y ;
     cairo_matrix_transform_point( &m_matrix, &lx, &ly);
@@ -1508,7 +1508,7 @@ void wxCairoMatrixData::TransformPoint( wxDouble *x, wxDouble *y ) const
 }
 
 // applies the matrix except for translations
-void wxCairoMatrixData::TransformDistance( wxDouble *dx, wxDouble *dy ) const
+void wxCairoMatrixData::TransformDistance( double *dx, double *dy ) const
 {
     double lx = *dx, ly = *dy ;
     cairo_matrix_transform_distance( &m_matrix, &lx, &ly);
@@ -2572,7 +2572,7 @@ void wxCairoContext::Clip( const wxRegion& region )
     path.UnGetNativePath(cp);
 }
 
-void wxCairoContext::Clip( wxDouble x, wxDouble y, wxDouble w, wxDouble h )
+void wxCairoContext::Clip( double x, double y, double w, double h )
 {
     // Create a path with this rectangle
     wxGraphicsPath path = GetRenderer()->CreatePath();
@@ -2592,7 +2592,7 @@ void wxCairoContext::ResetClip()
     cairo_reset_clip(m_context);
 }
 
-void wxCairoContext::GetClipBox(wxDouble* x, wxDouble* y, wxDouble* w, wxDouble* h)
+void wxCairoContext::GetClipBox(double* x, double* y, double* w, double* h)
 {
     double x1, y1, x2, y2;
 #if CAIRO_VERSION >= CAIRO_VERSION_ENCODE(1, 4, 0)
@@ -2648,7 +2648,7 @@ void wxCairoContext::FillPath( const wxGraphicsPath& path , wxPolygonFillMode fi
     }
 }
 
-void wxCairoContext::ClearRectangle( wxDouble x, wxDouble y, wxDouble w, wxDouble h )
+void wxCairoContext::ClearRectangle( double x, double y, double w, double h )
 {
     cairo_save(m_context);
     cairo_set_operator(m_context, CAIRO_OPERATOR_CLEAR);
@@ -2657,7 +2657,7 @@ void wxCairoContext::ClearRectangle( wxDouble x, wxDouble y, wxDouble w, wxDoubl
     cairo_restore(m_context);
 }
 
-void wxCairoContext::DrawRectangle( wxDouble x, wxDouble y, wxDouble w, wxDouble h )
+void wxCairoContext::DrawRectangle( double x, double y, double w, double h )
 {
     if ( !m_brush.IsNull() )
     {
@@ -2674,17 +2674,17 @@ void wxCairoContext::DrawRectangle( wxDouble x, wxDouble y, wxDouble w, wxDouble
     }
 }
 
-void wxCairoContext::Rotate( wxDouble angle )
+void wxCairoContext::Rotate( double angle )
 {
     cairo_rotate(m_context,angle);
 }
 
-void wxCairoContext::Translate( wxDouble dx , wxDouble dy )
+void wxCairoContext::Translate( double dx , double dy )
 {
     cairo_translate(m_context,dx,dy);
 }
 
-void wxCairoContext::Scale( wxDouble xScale , wxDouble yScale )
+void wxCairoContext::Scale( double xScale , double yScale )
 {
     cairo_scale(m_context,xScale,yScale);
 }
@@ -2748,14 +2748,14 @@ void wxCairoContext::Flush()
 #endif
 }
 
-void wxCairoContext::DrawBitmap( const wxBitmap &bmp, wxDouble x, wxDouble y, wxDouble w, wxDouble h )
+void wxCairoContext::DrawBitmap( const wxBitmap &bmp, double x, double y, double w, double h )
 {
     wxGraphicsBitmap bitmap = GetRenderer()->CreateBitmap(bmp);
     DrawBitmap(bitmap, x, y, w, h);
 
 }
 
-void wxCairoContext::DrawBitmap(const wxGraphicsBitmap &bmp, wxDouble x, wxDouble y, wxDouble w, wxDouble h )
+void wxCairoContext::DrawBitmap(const wxGraphicsBitmap &bmp, double x, double y, double w, double h )
 {
     PushState();
 
@@ -2766,8 +2766,8 @@ void wxCairoContext::DrawBitmap(const wxGraphicsBitmap &bmp, wxDouble x, wxDoubl
     cairo_pattern_t* pattern = data->GetCairoPattern();
     wxSize size = data->GetSize();
 
-    wxDouble scaleX = w / size.GetWidth();
-    wxDouble scaleY = h / size.GetHeight();
+    double scaleX = w / size.GetWidth();
+    double scaleY = h / size.GetHeight();
 
     // prepare to draw the image
     cairo_translate(m_context, x, y);
@@ -2781,7 +2781,7 @@ void wxCairoContext::DrawBitmap(const wxGraphicsBitmap &bmp, wxDouble x, wxDoubl
     PopState();
 }
 
-void wxCairoContext::DrawIcon( const wxIcon &icon, wxDouble x, wxDouble y, wxDouble w, wxDouble h )
+void wxCairoContext::DrawIcon( const wxIcon &icon, double x, double y, double w, double h )
 {
     // An icon is a bitmap on wxGTK, so do this the easy way.  When we want to
     // start using the Cairo backend on other platforms then we may need to
@@ -2790,7 +2790,7 @@ void wxCairoContext::DrawIcon( const wxIcon &icon, wxDouble x, wxDouble y, wxDou
 }
 
 
-void wxCairoContext::DoDrawText(const wxString& str, wxDouble x, wxDouble y)
+void wxCairoContext::DoDrawText(const wxString& str, double x, double y)
 {
     wxCHECK_RET( !m_font.IsNull(),
                  wxT("wxCairoContext::DrawText - no valid font set") );
@@ -2836,8 +2836,8 @@ void wxCairoContext::DoDrawText(const wxString& str, wxDouble x, wxDouble y)
     cairo_show_text(m_context, data);
 }
 
-void wxCairoContext::GetTextExtent( const wxString &str, wxDouble *width, wxDouble *height,
-                                    wxDouble *descent, wxDouble *externalLeading ) const
+void wxCairoContext::GetTextExtent( const wxString &str, double *width, double *height,
+                                    double *descent, double *externalLeading ) const
 {
     wxCHECK_RET( !m_font.IsNull(), wxT("wxCairoContext::GetTextExtent - no valid font set") );
 
@@ -3064,7 +3064,7 @@ bool wxCairoContext::SetCompositionMode(wxCompositionMode op)
     return true;
 }
 
-void wxCairoContext::BeginLayer(wxDouble opacity)
+void wxCairoContext::BeginLayer(double opacity)
 {
     m_layerOpacities.push_back(opacity);
     cairo_push_group(m_context);
@@ -3126,8 +3126,8 @@ public :
 
     // Matrix
 
-    virtual wxGraphicsMatrix CreateMatrix( wxDouble a=1.0, wxDouble b=0.0, wxDouble c=0.0, wxDouble d=1.0,
-        wxDouble tx=0.0, wxDouble ty=0.0) override;
+    virtual wxGraphicsMatrix CreateMatrix( double a=1.0, double b=0.0, double c=0.0, double d=1.0,
+        double tx=0.0, double ty=0.0) override;
 
 
     wxGraphicsPen CreatePen(const wxGraphicsPenInfo& info) override ;
@@ -3135,15 +3135,15 @@ public :
     wxGraphicsBrush CreateBrush(const wxBrush& brush ) override ;
 
     virtual wxGraphicsBrush
-    CreateLinearGradientBrush(wxDouble x1, wxDouble y1,
-                              wxDouble x2, wxDouble y2,
+    CreateLinearGradientBrush(double x1, double y1,
+                              double x2, double y2,
                               const wxGraphicsGradientStops& stops,
                               const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) override;
 
     virtual wxGraphicsBrush
-    CreateRadialGradientBrush(wxDouble startX, wxDouble startY,
-                              wxDouble endX, wxDouble endY,
-                              wxDouble radius,
+    CreateRadialGradientBrush(double startX, double startY,
+                              double endX, double endY,
+                              double radius,
                               const wxGraphicsGradientStops& stops,
                               const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) override;
 
@@ -3168,7 +3168,7 @@ public :
     wxGraphicsBitmap CreateBitmapFromNativeBitmap( void* bitmap ) override;
 
     // create a subimage from a native image representation
-    wxGraphicsBitmap CreateSubBitmap( const wxGraphicsBitmap &bitmap, wxDouble x, wxDouble y, wxDouble w, wxDouble h  ) override;
+    wxGraphicsBitmap CreateSubBitmap( const wxGraphicsBitmap &bitmap, double x, double y, double w, double h  ) override;
 
     wxString GetName() const override;
     void GetVersion(int *major, int *minor, int *micro) const override;
@@ -3302,8 +3302,8 @@ wxGraphicsPath wxCairoRenderer::CreatePath()
 
 // Matrix
 
-wxGraphicsMatrix wxCairoRenderer::CreateMatrix( wxDouble a, wxDouble b, wxDouble c, wxDouble d,
-                                                wxDouble tx, wxDouble ty)
+wxGraphicsMatrix wxCairoRenderer::CreateMatrix( double a, double b, double c, double d,
+                                                double tx, double ty)
 
 {
     wxGraphicsMatrix m;
@@ -3337,8 +3337,8 @@ wxGraphicsBrush wxCairoRenderer::CreateBrush(const wxBrush& brush )
 }
 
 wxGraphicsBrush
-wxCairoRenderer::CreateLinearGradientBrush(wxDouble x1, wxDouble y1,
-                                           wxDouble x2, wxDouble y2,
+wxCairoRenderer::CreateLinearGradientBrush(double x1, double y1,
+                                           double x2, double y2,
                                            const wxGraphicsGradientStops& stops,
                                            const wxGraphicsMatrix& matrix)
 {
@@ -3351,8 +3351,8 @@ wxCairoRenderer::CreateLinearGradientBrush(wxDouble x1, wxDouble y1,
 }
 
 wxGraphicsBrush
-wxCairoRenderer::CreateRadialGradientBrush(wxDouble startX, wxDouble startY,
-                                           wxDouble endX, wxDouble endY, wxDouble r,
+wxCairoRenderer::CreateRadialGradientBrush(double startX, double startY,
+                                           double endX, double endY, double r,
                                            const wxGraphicsGradientStops& stops,
                                            const wxGraphicsMatrix& matrix)
 {
@@ -3452,8 +3452,8 @@ wxGraphicsBitmap wxCairoRenderer::CreateBitmapFromNativeBitmap( void* bitmap )
 
 wxGraphicsBitmap
 wxCairoRenderer::CreateSubBitmap(const wxGraphicsBitmap& bitmap,
-                                 wxDouble x, wxDouble y,
-                                 wxDouble w, wxDouble h)
+                                 double x, double y,
+                                 double w, double h)
 {
     ENSURE_LOADED_OR_RETURN(wxNullGraphicsBitmap);
 

@@ -50,8 +50,8 @@ void wxGenericStaticBitmap::OnPaint(wxPaintEvent& WXUNUSED(event))
         return;
 
     const wxSize bmpSize = m_bitmap.GetSize();
-    wxDouble w = 0;
-    wxDouble h = 0;
+    double w = 0;
+    double h = 0;
     switch ( m_scaleMode )
     {
         case Scale_None:
@@ -64,9 +64,9 @@ void wxGenericStaticBitmap::OnPaint(wxPaintEvent& WXUNUSED(event))
         case Scale_AspectFill:
         case Scale_AspectFit:
         {
-            wxDouble scaleFactor;
-            wxDouble scaleX = (wxDouble)drawSize.x / (wxDouble)bmpSize.x;
-            wxDouble scaleY = (wxDouble)drawSize.y / (wxDouble)bmpSize.y;
+            double scaleFactor;
+            double scaleX = (double)drawSize.x / (double)bmpSize.x;
+            double scaleY = (double)drawSize.y / (double)bmpSize.y;
             if ( ( m_scaleMode == Scale_AspectFit && scaleY < scaleX ) ||
                  ( m_scaleMode == Scale_AspectFill && scaleY > scaleX ) )
                 scaleFactor = scaleY;
@@ -82,8 +82,8 @@ void wxGenericStaticBitmap::OnPaint(wxPaintEvent& WXUNUSED(event))
 
     wxASSERT_MSG(w, wxS("Unknown scale mode"));
 
-    wxDouble x = (drawSize.x - w) / 2;
-    wxDouble y = (drawSize.y - h) / 2;
+    double x = (drawSize.x - w) / 2;
+    double y = (drawSize.y - h) / 2;
 #if wxUSE_GRAPHICS_CONTEXT
     wxScopedPtr<wxGraphicsContext> const
         gc(wxGraphicsRenderer::GetDefaultRenderer()->CreateContext(dc));

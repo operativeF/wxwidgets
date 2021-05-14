@@ -32,14 +32,14 @@
 // wxRect2D
 //
 
-// wxDouble version
+// double version
 
 // for the following calculations always remember
 // that the right and bottom edges are not part of a rect
 
 bool wxRect2DDouble::Intersects( const wxRect2DDouble &rect ) const
 {
-    wxDouble left,right,bottom,top;
+    double left,right,bottom,top;
     left = wxMax ( m_x , rect.m_x );
     right = wxMin ( m_x+m_width, rect.m_x + rect.m_width );
     top = wxMax ( m_y , rect.m_y );
@@ -50,7 +50,7 @@ bool wxRect2DDouble::Intersects( const wxRect2DDouble &rect ) const
 
 void wxRect2DDouble::Intersect( const wxRect2DDouble &src1 , const wxRect2DDouble &src2 , wxRect2DDouble *dest )
 {
-    wxDouble left,right,bottom,top;
+    double left,right,bottom,top;
     left = wxMax ( src1.m_x , src2.m_x );
     right = wxMin ( src1.m_x+src1.m_width, src2.m_x + src2.m_width );
     top = wxMax ( src1.m_y , src2.m_y );
@@ -71,7 +71,7 @@ void wxRect2DDouble::Intersect( const wxRect2DDouble &src1 , const wxRect2DDoubl
 
 void wxRect2DDouble::Union( const wxRect2DDouble &src1 , const wxRect2DDouble &src2 , wxRect2DDouble *dest )
 {
-    wxDouble left,right,bottom,top;
+    double left,right,bottom,top;
 
     left = wxMin ( src1.m_x , src2.m_x );
     right = wxMax ( src1.m_x+src1.m_width, src2.m_x + src2.m_width );
@@ -86,8 +86,8 @@ void wxRect2DDouble::Union( const wxRect2DDouble &src1 , const wxRect2DDouble &s
 
 void wxRect2DDouble::Union( const wxPoint2DDouble &pt )
 {
-    wxDouble x = pt.m_x;
-    wxDouble y = pt.m_y;
+    double x = pt.m_x;
+    double y = pt.m_y;
 
     if ( x < m_x )
     {
@@ -152,7 +152,7 @@ void wxPoint2DInt::ReadFrom( wxDataInputStream &stream )
 }
 #endif // wxUSE_STREAMS
 
-wxDouble wxPoint2DInt::GetVectorAngle() const
+double wxPoint2DInt::GetVectorAngle() const
 {
     if ( m_x == 0 )
     {
@@ -169,7 +169,7 @@ wxDouble wxPoint2DInt::GetVectorAngle() const
             return 180;
     }
 
-    wxDouble deg = wxRadToDeg(atan2( (double)m_y , (double)m_x ));
+    double deg = wxRadToDeg(atan2( (double)m_y , (double)m_x ));
     if ( deg < 0 )
     {
         deg += 360;
@@ -178,15 +178,15 @@ wxDouble wxPoint2DInt::GetVectorAngle() const
 }
 
 
-void wxPoint2DInt::SetVectorAngle( wxDouble degrees )
+void wxPoint2DInt::SetVectorAngle( double degrees )
 {
-    wxDouble length = GetVectorLength();
+    double length = GetVectorLength();
     double rad = wxDegToRad(degrees);
     m_x = (int)(length * cos(rad));
     m_y = (int)(length * sin(rad));
 }
 
-wxDouble wxPoint2DDouble::GetVectorAngle() const
+double wxPoint2DDouble::GetVectorAngle() const
 {
     if ( wxIsNullDouble(m_x) )
     {
@@ -202,7 +202,7 @@ wxDouble wxPoint2DDouble::GetVectorAngle() const
         else
             return 180;
     }
-    wxDouble deg = wxRadToDeg(atan2( m_y , m_x ));
+    double deg = wxRadToDeg(atan2( m_y , m_x ));
     if ( deg < 0 )
     {
         deg += 360;
@@ -210,9 +210,9 @@ wxDouble wxPoint2DDouble::GetVectorAngle() const
     return deg;
 }
 
-void wxPoint2DDouble::SetVectorAngle( wxDouble degrees )
+void wxPoint2DDouble::SetVectorAngle( double degrees )
 {
-    wxDouble length = GetVectorLength();
+    double length = GetVectorLength();
     double rad = wxDegToRad(degrees);
     m_x = length * cos(rad);
     m_y = length * sin(rad);

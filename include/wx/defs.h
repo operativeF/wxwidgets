@@ -843,20 +843,6 @@ inline void *wxUIntToPtr(wxUIntPtr p)
 }
 #endif /*__cplusplus*/
 
-
-
-/*  base floating point types */
-/*  wxFloat32: 32 bit IEEE float ( 1 sign, 8 exponent bits, 23 fraction bits ) */
-/*  wxFloat64: 64 bit IEEE float ( 1 sign, 11 exponent bits, 52 fraction bits ) */
-/*  wxDouble: native fastest representation that has at least wxFloat64 */
-/*            precision, so use the IEEE types for storage, and this for */
-/*            calculations */
-
-typedef float wxFloat32;
-typedef double wxFloat64;
-
-typedef double wxDouble;
-
 /*
     Some (non standard) compilers typedef wchar_t as an existing type instead
     of treating it as a real fundamental type, set wxWCHAR_T_IS_REAL_TYPE to 0

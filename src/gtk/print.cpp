@@ -1800,8 +1800,8 @@ void wxGtkPrinterDCImpl::DoDrawBitmap( const wxBitmap& bitmap, wxCoord x, wxCoor
     cairo_translate(m_cairo, x, y);
 
     // Scale the image
-    wxDouble scaleX = (wxDouble) XLOG2DEVREL(bw) / (wxDouble) bw;
-    wxDouble scaleY = (wxDouble) YLOG2DEVREL(bh) / (wxDouble) bh;
+    double scaleX = (double) XLOG2DEVREL(bw) / (double) bw;
+    double scaleY = (double) YLOG2DEVREL(bh) / (double) bh;
     cairo_scale(m_cairo, scaleX, scaleY);
 
 #ifdef __WXGTK3__

@@ -177,7 +177,7 @@ WXDLLIMPEXP_BASE unsigned int wxCTZ(wxUint32 x);
 #if defined(__WINDOWS__)
     #define wxMulDivInt32( a , b , c ) ::MulDiv( a , b , c )
 #else
-    #define wxMulDivInt32( a , b , c ) (wxRound((a)*(((wxDouble)b)/((wxDouble)c))))
+    #define wxMulDivInt32( a , b , c ) (wxRound((a)*(((double)b)/((double)c))))
 #endif
 
 #if wxUSE_APPLE_IEEE
@@ -185,8 +185,8 @@ WXDLLIMPEXP_BASE unsigned int wxCTZ(wxUint32 x);
     extern "C" {
 #endif
     /* functions from common/extended.c */
-    WXDLLIMPEXP_BASE wxFloat64 wxConvertFromIeeeExtended(const wxInt8 *bytes);
-    WXDLLIMPEXP_BASE void wxConvertToIeeeExtended(wxFloat64 num, wxInt8 *bytes);
+    WXDLLIMPEXP_BASE double wxConvertFromIeeeExtended(const wxInt8 *bytes);
+    WXDLLIMPEXP_BASE void wxConvertToIeeeExtended(double num, wxInt8 *bytes);
 
 #ifdef __cplusplus
     }

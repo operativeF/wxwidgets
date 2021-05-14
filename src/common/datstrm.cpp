@@ -26,13 +26,13 @@ namespace
 // helper unions used to swap bytes of floats and doubles
 union Float32Data
 {
-    wxFloat32 f;
+    float f;
     wxUint32 i;
 };
 
 union Float64Data
 {
-    wxFloat64 f;
+    double f;
     wxUint32 i[2];
 };
 
@@ -612,7 +612,7 @@ void wxDataOutputStream::WriteDouble(double d)
     {
         Float64Data floatData;
 
-        floatData.f = (wxFloat64)d;
+        floatData.f = d;
 
         if ( m_be_order == (wxBYTE_ORDER == wxBIG_ENDIAN) )
         {
@@ -639,7 +639,7 @@ void wxDataOutputStream::WriteFloat(float f)
     {
         Float32Data floatData;
 
-        floatData.f = (wxFloat32)f;
+        floatData.f = f;
         Write32(floatData.i);
     }
 }

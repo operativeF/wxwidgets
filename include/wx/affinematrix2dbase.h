@@ -18,16 +18,16 @@
 
 struct wxMatrix2D
 {
-    wxMatrix2D(wxDouble v11 = 1,
-               wxDouble v12 = 0,
-               wxDouble v21 = 0,
-               wxDouble v22 = 1)
+    wxMatrix2D(double v11 = 1,
+               double v12 = 0,
+               double v21 = 0,
+               double v22 = 1)
     {
         m_11 = v11; m_12 = v12;
         m_21 = v21; m_22 = v22;
     }
 
-    wxDouble m_11, m_12, m_21, m_22;
+    double m_11, m_12, m_21, m_22;
 };
 
 // A 2x3 matrix representing an affine 2D transformation.
@@ -67,19 +67,19 @@ public:
     //
 
     // add the translation to this matrix
-    virtual void Translate(wxDouble dx, wxDouble dy) = 0;
+    virtual void Translate(double dx, double dy) = 0;
 
     // add the scale to this matrix
-    virtual void Scale(wxDouble xScale, wxDouble yScale) = 0;
+    virtual void Scale(double xScale, double yScale) = 0;
 
     // add the rotation to this matrix (counter clockwise, radians)
-    virtual void Rotate(wxDouble ccRadians) = 0;
+    virtual void Rotate(double ccRadians) = 0;
 
     // add mirroring to this matrix
     void Mirror(int direction = wxHORIZONTAL)
     {
-        wxDouble x = (direction & wxHORIZONTAL) ? -1 : 1;
-        wxDouble y = (direction & wxVERTICAL) ? -1 : 1;
+        double x = (direction & wxHORIZONTAL) ? -1 : 1;
+        double y = (direction & wxVERTICAL) ? -1 : 1;
         Scale(x, y);
     }
 
@@ -90,7 +90,7 @@ public:
         return DoTransformPoint(src);
     }
 
-    void TransformPoint(wxDouble* x, wxDouble* y) const
+    void TransformPoint(double* x, double* y) const
     {
         wxCHECK_RET( x && y, "Can't be NULL" );
 
@@ -105,7 +105,7 @@ public:
         return DoTransformDistance(src);
     }
 
-    void TransformDistance(wxDouble* dx, wxDouble* dy) const
+    void TransformDistance(double* dx, double* dy) const
     {
         wxCHECK_RET( dx && dy, "Can't be NULL" );
 
