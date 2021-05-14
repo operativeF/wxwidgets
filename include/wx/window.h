@@ -1719,29 +1719,29 @@ protected:
     wxSizer             *m_containingSizer;
 
     // Layout() window automatically when its size changes?
-    bool                 m_autoLayout:1;
+    bool                 m_autoLayout;
 
     // window state
-    bool                 m_isShown:1;
-    bool                 m_isEnabled:1;
-    bool                 m_isBeingDeleted:1;
+    bool                 m_isShown {false};
+    bool                 m_isEnabled;
+    bool                 m_isBeingDeleted;
 
     // was the window colours/font explicitly changed by user?
-    bool                 m_hasBgCol:1;
-    bool                 m_hasFgCol:1;
-    bool                 m_hasFont:1;
+    bool                 m_hasBgCol;
+    bool                 m_hasFgCol;
+    bool                 m_hasFont;
 
     // and should it be inherited by children?
-    bool                 m_inheritBgCol:1;
-    bool                 m_inheritFgCol:1;
-    bool                 m_inheritFont:1;
+    bool                 m_inheritBgCol;
+    bool                 m_inheritFgCol;
+    bool                 m_inheritFont;
 
     // flag disabling accepting focus from keyboard
-    bool                 m_disableFocusFromKbd:1;
+    bool                 m_disableFocusFromKbd;
 
     // window attributes
-    long                 m_windowStyle,
-                         m_exStyle;
+    long                 m_windowStyle;
+    long                 m_exStyle;
     wxString             m_windowName;
     bool                 m_themeEnabled;
     wxBackgroundStyle    m_backgroundStyle;
@@ -1759,7 +1759,7 @@ protected:
 
     wxScrollHelper       *m_scrollHelper;
 
-    wxWindowVariant       m_windowVariant ;
+    wxWindowVariant       m_windowVariant;
 
     // override this to change the default (i.e. used when no style is
     // specified) border for the window class

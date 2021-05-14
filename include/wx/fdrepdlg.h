@@ -62,8 +62,8 @@ enum wxFindReplaceDialogStyles
 class WXDLLIMPEXP_CORE wxFindReplaceData : public wxObject
 {
 public:
-    wxFindReplaceData() { Init(); }
-    wxFindReplaceData(wxUint32 flags) { Init(); SetFlags(flags); }
+    wxFindReplaceData() { }
+    wxFindReplaceData(wxUint32 flags) { SetFlags(flags); }
 
     // accessors
     const wxString& GetFindString() const { return m_FindWhat; }
@@ -72,18 +72,16 @@ public:
     int GetFlags() const { return m_Flags; }
 
     // setters: may only be called before showing the dialog, no effect later
+    // FIXME: Then get rid of this and put it in the constructor.
     void SetFlags(wxUint32 flags) { m_Flags = flags; }
 
     void SetFindString(const wxString& str) { m_FindWhat = str; }
     void SetReplaceString(const wxString& str) { m_ReplaceWith = str; }
 
-protected:
-    void Init();
-
 private:
-    wxUint32 m_Flags;
-    wxString m_FindWhat,
-             m_ReplaceWith;
+    wxUint32 m_Flags {0};
+    wxString m_FindWhat;
+    wxString m_ReplaceWith;
 
     friend class wxFindReplaceDialogBase;
 };
@@ -115,7 +113,7 @@ public:
     void Send(wxFindDialogEvent& event);
 
 protected:
-    wxFindReplaceData *m_FindReplaceData;
+    wxFindReplaceData *m_FindReplaceData {nullptr};
 
     // the last string we searched for
     wxString m_lastSearch;

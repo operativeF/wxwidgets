@@ -283,22 +283,9 @@ wxFindReplaceDialogHookProc(HWND hwnd,
     return 0;
 }
 
-// ============================================================================
-// wxFindReplaceDialog implementation
-// ============================================================================
-
 // ----------------------------------------------------------------------------
 // wxFindReplaceDialog ctors/dtor
 // ----------------------------------------------------------------------------
-
-void wxFindReplaceDialog::Init()
-{
-    m_impl = nullptr;
-    m_FindReplaceData = nullptr;
-
-    // as we're created in the hidden state, bring the internal flag in sync
-    m_isShown = false;
-}
 
 wxFindReplaceDialog::wxFindReplaceDialog(wxWindow *parent,
                                          wxFindReplaceData *data,
@@ -306,8 +293,6 @@ wxFindReplaceDialog::wxFindReplaceDialog(wxWindow *parent,
                                          int flags)
                    : wxFindReplaceDialogBase(parent, data, title, flags)
 {
-    Init();
-
     (void)Create(parent, data, title, flags);
 }
 

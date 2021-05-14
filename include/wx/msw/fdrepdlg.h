@@ -48,11 +48,9 @@ protected:
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
 
-    void Init();
-
     wxString                m_title;
 
-    wxFindReplaceDialogImpl *m_impl;
+    wxFindReplaceDialogImpl *m_impl {nullptr};
 
     wxDECLARE_DYNAMIC_CLASS(wxFindReplaceDialog);
     wxFindReplaceDialog(const wxFindReplaceDialog&) = delete;
