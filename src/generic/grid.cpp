@@ -7066,9 +7066,9 @@ void wxGrid::DrawColLabel(wxDC& dc, int col)
                                     0,
                                     IsSortingBy(col)
                                         ? IsSortOrderAscending()
-                                            ? wxHDR_SORT_ICON_UP
-                                            : wxHDR_SORT_ICON_DOWN
-                                        : wxHDR_SORT_ICON_NONE
+                                            ? wxHeaderSortIconType::Up
+                                            : wxHeaderSortIconType::Down
+                                        : wxHeaderSortIconType::None
                                 );
         rect.Deflate(2);
     }

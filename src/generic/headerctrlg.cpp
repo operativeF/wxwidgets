@@ -529,12 +529,12 @@ void wxHeaderCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         wxHeaderSortIconType sortArrow;
         if ( col.IsSortKey() )
         {
-            sortArrow = col.IsSortOrderAscending() ? wxHDR_SORT_ICON_UP
-                                                   : wxHDR_SORT_ICON_DOWN;
+            sortArrow = col.IsSortOrderAscending() ? wxHeaderSortIconType::Up
+                                                   : wxHeaderSortIconType::Down;
         }
         else // not sorting by this column
         {
-            sortArrow = wxHDR_SORT_ICON_NONE;
+            sortArrow = wxHeaderSortIconType::None;
         }
 
         int state = 0;

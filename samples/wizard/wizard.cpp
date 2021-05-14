@@ -393,7 +393,7 @@ MyWizard::MyWizard(wxFrame *frame, bool useSizer)
 
     // Enable scrolling adaptation
     if (frame->GetMenuBar()->IsChecked(Wizard_LargeWizard))
-        SetLayoutAdaptationMode(wxDIALOG_ADAPTATION_MODE_ENABLED);
+        SetLayoutAdaptationMode(wxDialogLayoutAdaptationMode::Enabled);
 
     // a wizard page may be either an object of predefined class
     m_page1 = new wxWizardPageSimple(this);

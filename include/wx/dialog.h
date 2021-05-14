@@ -45,18 +45,18 @@ class wxTextSizerWrapper;
 #define wxDIALOG_ADAPTATION_LOOSE_BUTTONS    3
 
 // Layout adaptation mode, for SetLayoutAdaptationMode
-enum wxDialogLayoutAdaptationMode
+enum class wxDialogLayoutAdaptationMode
 {
-    wxDIALOG_ADAPTATION_MODE_DEFAULT = 0,   // use global adaptation enabled status
-    wxDIALOG_ADAPTATION_MODE_ENABLED = 1,   // enable this dialog overriding global status
-    wxDIALOG_ADAPTATION_MODE_DISABLED = 2   // disable this dialog overriding global status
+    Default,   // use global adaptation enabled status
+    Enabled,   // enable this dialog overriding global status
+    Disabled   // disable this dialog overriding global status
 };
 
-enum wxDialogModality
+enum class wxDialogModality
 {
-    wxDIALOG_MODALITY_NONE = 0,
-    wxDIALOG_MODALITY_WINDOW_MODAL = 1,
-    wxDIALOG_MODALITY_APP_MODAL = 2
+    None,
+    WindowModal,
+    AppModal
 };
 
 extern WXDLLIMPEXP_DATA_CORE(const char) wxDialogNameStr[];

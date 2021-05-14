@@ -60,7 +60,7 @@ void wxDialog::OSXEndModalDialog()
 
 void wxDialog::Init()
 {
-    m_modality = wxDIALOG_MODALITY_NONE;
+    m_modality = wxDialogModality::None;
     m_eventLoop = NULL;
 }
 
@@ -106,12 +106,12 @@ bool wxDialog::IsEscapeKey(const wxKeyEvent& event)
 
 bool wxDialog::IsModal() const
 {
-    return m_modality != wxDIALOG_MODALITY_NONE;
+    return m_modality != wxDialogModality::None;
 }
 
 bool wxDialog::Show(bool show)
 {
-    if ( m_modality == wxDIALOG_MODALITY_WINDOW_MODAL )
+    if ( m_modality == wxDialogModality::WindowModal )
     {
         if ( !wxWindow::Show(show) )
             // nothing to do
@@ -136,11 +136,11 @@ bool wxDialog::Show(bool show)
         const int modalityOrig = m_modality;
 
         // complete the 'hiding' before we send the event
-        m_modality = wxDIALOG_MODALITY_NONE;
+        m_modality = wxDialogModality::None;
 
         switch ( modalityOrig )
         {
-            case wxDIALOG_MODALITY_WINDOW_MODAL:
+            case wxDialogModality::WindowModal:
                 EndWindowModal(); // OS X implementation method for cleanup
                 SendWindowModalDialogEvent ( wxEVT_WINDOW_MODAL_DIALOG_CLOSED  );
                 break;
@@ -175,7 +175,7 @@ int wxDialog::ShowModal()
 
 void wxDialog::ShowWindowModal()
 {
-    m_modality = wxDIALOG_MODALITY_WINDOW_MODAL;
+    m_modality = wxDialogModality::WindowModal;
 
     Show();
 

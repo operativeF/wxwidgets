@@ -61,7 +61,7 @@ public:
         wxDC& dc,
         const wxRect& rect,
         int flags = 0,
-        wxHeaderSortIconType sortArrow = wxHDR_SORT_ICON_NONE,
+        wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
         wxHeaderButtonParams* params = NULL ) override;
 
     int GetHeaderButtonHeight(wxWindow *win) override;
@@ -210,12 +210,12 @@ int wxRendererMac::DrawHeaderButton( wxWindow *win,
 
             // The down arrow is drawn automatically (if value is kThemeButtonOn)
             // change it to an up arrow if needed.
-            if ( sortArrow == wxHDR_SORT_ICON_UP )
+            if ( sortArrow == wxHeaderSortIconType::Up )
             {
                 drawInfo.adornment = kThemeAdornmentHeaderButtonSortUp;
                 drawInfo.value = kThemeButtonOn;
             }
-            else if (sortArrow == wxHDR_SORT_ICON_DOWN )
+            else if (sortArrow == wxHeaderSortIconType::Down )
             {
                 drawInfo.value = kThemeButtonOn;
             }
@@ -227,10 +227,10 @@ int wxRendererMac::DrawHeaderButton( wxWindow *win,
     // Reserve room for the arrows before writing the label, and turn off the
     // flags we've already handled
     wxRect newRect(rect);
-    if ( sortArrow != wxHDR_SORT_ICON_NONE )
+    if ( sortArrow != wxHeaderSortIconType::None )
     {
         newRect.width -= 12;
-        sortArrow = wxHDR_SORT_ICON_NONE;
+        sortArrow = wxHeaderSortIconType::None;
     }
     flags &= ~wxCONTROL_PRESSED;
 

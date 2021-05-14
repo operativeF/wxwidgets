@@ -57,14 +57,14 @@ public:
                                   wxDC& dc,
                                   const wxRect& rect,
                                   int flags = 0,
-                                  wxHeaderSortIconType sortArrow = wxHDR_SORT_ICON_NONE,
+                                  wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
                                   wxHeaderButtonParams* params = nullptr) override;
 
     virtual int  DrawHeaderButtonContents(wxWindow *win,
                                           wxDC& dc,
                                           const wxRect& rect,
                                           int flags = 0,
-                                          wxHeaderSortIconType sortArrow = wxHDR_SORT_ICON_NONE,
+                                          wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
                                           wxHeaderButtonParams* params = nullptr) override;
 
     int GetHeaderButtonHeight(wxWindow *win) override;
@@ -359,7 +359,7 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
 
     // Draw an up or down arrow
     int arrowSpace = 0;
-    if (sortArrow != wxHDR_SORT_ICON_NONE )
+    if (sortArrow != wxHeaderSortIconType::None )
     {
         wxRect ar = rect;
 
@@ -370,7 +370,7 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
         arrowSpace = 3*ar.width/2; // space to preserve when drawing the label
 
         wxPoint triPt[3];
-        if ( sortArrow & wxHDR_SORT_ICON_UP )
+        if ( sortArrow == wxHeaderSortIconType::Up )
         {
             triPt[0].x = ar.width / 2;
             triPt[0].y = 0;

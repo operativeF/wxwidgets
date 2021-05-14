@@ -120,7 +120,7 @@ wxDialogBase::wxDialogBase()
     m_escapeId = wxID_ANY;
     m_layoutAdaptationLevel = 3;
     m_layoutAdaptationDone = FALSE;
-    m_layoutAdaptationMode = wxDIALOG_ADAPTATION_MODE_DEFAULT;
+    m_layoutAdaptationMode = wxDialogLayoutAdaptationMode::Default;
 
     // the dialogs have this flag on by default to prevent the events from the
     // dialog controls from reaching the parent frame which is usually
@@ -501,7 +501,7 @@ void wxDialogBase::SendWindowModalDialogEvent ( wxEventType type )
 
 wxDialogModality wxDialogBase::GetModality() const
 {
-    return IsModal() ? wxDIALOG_MODALITY_APP_MODAL : wxDIALOG_MODALITY_NONE;
+    return IsModal() ? wxDialogModality::AppModal : wxDialogModality::None;
 }
 
 // ----------------------------------------------------------------------------
@@ -577,7 +577,7 @@ bool wxDialogBase::DoLayoutAdaptation()
 bool wxDialogBase::CanDoLayoutAdaptation()
 {
     // Check if local setting overrides the global setting
-    bool layoutEnabled = (GetLayoutAdaptationMode() == wxDIALOG_ADAPTATION_MODE_ENABLED) || (IsLayoutAdaptationEnabled() && (GetLayoutAdaptationMode() != wxDIALOG_ADAPTATION_MODE_DISABLED));
+    bool layoutEnabled = (GetLayoutAdaptationMode() == wxDialogLayoutAdaptationMode::Enabled) || (IsLayoutAdaptationEnabled() && (GetLayoutAdaptationMode() != wxDialogLayoutAdaptationMode::Disabled));
 
     return (layoutEnabled && !m_layoutAdaptationDone && GetLayoutAdaptationLevel() != 0 && GetLayoutAdapter() != nullptr && GetLayoutAdapter()->CanDoLayoutAdaptation((wxDialog*) this));
 }

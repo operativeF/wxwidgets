@@ -62,7 +62,7 @@ public:
                                   const wxRect& rect,
                                   int WXUNUSED(flags) = 0,
                                   wxHeaderSortIconType WXUNUSED(sortArrow)
-                                    = wxHDR_SORT_ICON_NONE,
+                                    = wxHeaderSortIconType::None,
                                   wxHeaderButtonParams* params = NULL) override
     {
         wxDCBrushChanger setBrush(dc, *wxBLUE_BRUSH);
@@ -212,8 +212,8 @@ private:
         const wxCoord widthHdr = 120;
 
         const wxHeaderSortIconType
-            hdrSortIcon = m_useIcon ? wxHDR_SORT_ICON_UP
-                                    : wxHDR_SORT_ICON_NONE;
+            hdrSortIcon = m_useIcon ? wxHeaderSortIconType::Up
+                                    : wxHeaderSortIconType::None;
 
         wxHeaderButtonParams hdrParams;
         hdrParams.m_labelText = "Header";

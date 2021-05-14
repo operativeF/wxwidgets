@@ -207,7 +207,7 @@ public:
                                   wxDC& dc,
                                   const wxRect& rect,
                                   int flags = 0,
-                                  wxHeaderSortIconType sortArrow = wxHDR_SORT_ICON_NONE,
+                                  wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
                                   wxHeaderButtonParams* params = nullptr) override;
 
     virtual void DrawTreeItemButton(wxWindow *win,

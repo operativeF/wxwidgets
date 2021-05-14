@@ -844,7 +844,7 @@ public:
                                   wxDC& dc,
                                   const wxRect& rect,
                                   int flags = 0,
-                                  wxHeaderSortIconType sortIcon = wxHDR_SORT_ICON_NONE,
+                                  wxHeaderSortIconType sortIcon = wxHeaderSortIconType::None,
                                   wxHeaderButtonParams* params = NULL) override
         { return m_renderer->DrawHeaderButton(win, dc, rect, flags, sortIcon, params); }
     virtual void DrawTreeItemButton(wxWindow *win,

@@ -129,11 +129,11 @@ struct WXDLLIMPEXP_CORE wxHeaderButtonParams
     int         m_labelAlignment;
 };
 
-enum wxHeaderSortIconType
+enum class wxHeaderSortIconType
 {
-    wxHDR_SORT_ICON_NONE,        // Header button has no sort arrow
-    wxHDR_SORT_ICON_UP,          // Header button an up sort arrow icon
-    wxHDR_SORT_ICON_DOWN         // Header button a down sort arrow icon
+    None,        // Header button has no sort arrow
+    Up,          // Header button an up sort arrow icon
+    Down         // Header button a down sort arrow icon
 };
 
 
@@ -184,7 +184,7 @@ public:
                                   wxDC& dc,
                                   const wxRect& rect,
                                   int flags = 0,
-                                  wxHeaderSortIconType sortArrow = wxHDR_SORT_ICON_NONE,
+                                  wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
                                   wxHeaderButtonParams* params=NULL) = 0;
 
 
@@ -194,7 +194,7 @@ public:
                                           wxDC& dc,
                                           const wxRect& rect,
                                           int flags = 0,
-                                          wxHeaderSortIconType sortArrow = wxHDR_SORT_ICON_NONE,
+                                          wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
                                           wxHeaderButtonParams* params=NULL) = 0;
 
     // Returns the default height of a header button, either a fixed platform
@@ -433,7 +433,7 @@ public:
                           wxDC& dc,
                           const wxRect& rect,
                           int flags = 0,
-                          wxHeaderSortIconType sortArrow = wxHDR_SORT_ICON_NONE,
+                          wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
                           wxHeaderButtonParams* params = NULL) override
         { return m_rendererNative.DrawHeaderButton(win, dc, rect, flags, sortArrow, params); }
 
@@ -441,7 +441,7 @@ public:
                                   wxDC& dc,
                                   const wxRect& rect,
                                   int flags = 0,
-                                  wxHeaderSortIconType sortArrow = wxHDR_SORT_ICON_NONE,
+                                  wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
                                   wxHeaderButtonParams* params = NULL) override
         { return m_rendererNative.DrawHeaderButtonContents(win, dc, rect, flags, sortArrow, params); }
 

@@ -48,7 +48,7 @@ public:
                                  wxDC& dc,
                                  const wxRect& rect,
                                  int flags = 0,
-                                 wxHeaderSortIconType sortArrow = wxHDR_SORT_ICON_NONE,
+                                 wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
                                  wxHeaderButtonParams* params=NULL);
 
     virtual void DrawSplitterBorder(wxWindow *win,
