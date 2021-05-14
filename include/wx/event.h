@@ -1328,7 +1328,11 @@ protected:
     static wxIdleMode sm_idleMode;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxIdleEvent);
+    public:
+	wxIdleEvent& operator=(const wxIdleEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 
@@ -1362,7 +1366,11 @@ public:
         { return wxEVT_CATEGORY_THREAD; }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxThreadEvent);
+    public:
+	wxThreadEvent& operator=(const wxThreadEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 
@@ -1631,7 +1639,11 @@ protected:
 
 private:
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxCommandEvent);
+    public:
+	wxCommandEvent& operator=(const wxCommandEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // this class adds a possibility to react (from the user) code to a control
@@ -1662,7 +1674,11 @@ private:
     bool m_bAllow;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxNotifyEvent);
+    public:
+	wxNotifyEvent& operator=(const wxNotifyEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 
@@ -1694,7 +1710,11 @@ public:
     wxEvent *Clone() const override { return new wxScrollEvent(*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxScrollEvent);
+    public:
+	wxScrollEvent& operator=(const wxScrollEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // ScrollWin event class, derived fom wxEvent. wxScrollWinEvents
@@ -1731,7 +1751,11 @@ protected:
     long              m_extraLong;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxScrollWinEvent);
+    public:
+	wxScrollWinEvent& operator=(const wxScrollWinEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 
@@ -1932,7 +1956,11 @@ private:
     wxCursor m_cursor;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxSetCursorEvent);
+    public:
+	wxSetCursorEvent& operator=(const wxSetCursorEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
  // Gesture Event
@@ -1969,7 +1997,11 @@ protected:
     wxPoint m_pos;
     bool m_isStart, m_isEnd;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxGestureEvent);
+    public:
+	wxGestureEvent& operator=(const wxGestureEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 
 };
 
@@ -2001,7 +2033,11 @@ public:
 private:
     wxPoint m_delta;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxPanGestureEvent);
+    public:
+	wxPanGestureEvent& operator=(const wxPanGestureEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
  // Zoom Gesture Event
@@ -2030,7 +2066,11 @@ public:
 private:
     double m_zoomFactor;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxZoomGestureEvent);
+    public:
+	wxZoomGestureEvent& operator=(const wxZoomGestureEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
  // Rotate Gesture Event
@@ -2059,7 +2099,11 @@ public:
 private:
     double m_rotationAngle;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxRotateGestureEvent);
+    public:
+	wxRotateGestureEvent& operator=(const wxRotateGestureEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
  // Two Finger Tap Gesture Event
@@ -2081,7 +2125,11 @@ public:
     wxEvent *Clone() const override { return new wxTwoFingerTapEvent(*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxTwoFingerTapEvent);
+    public:
+	wxTwoFingerTapEvent& operator=(const wxTwoFingerTapEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
  // Long Press Gesture Event
@@ -2102,7 +2150,11 @@ public:
 
     wxEvent *Clone() const override { return new wxLongPressEvent(*this); }
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxLongPressEvent);
+    public:
+	wxLongPressEvent& operator=(const wxLongPressEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
  // Press And Tap Gesture Event
@@ -2123,7 +2175,11 @@ public:
 
     wxEvent *Clone() const override { return new wxPressAndTapEvent(*this); }
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxPressAndTapEvent);
+    public:
+	wxPressAndTapEvent& operator=(const wxPressAndTapEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // Keyboard input event class
@@ -2332,7 +2388,11 @@ public:
     wxRect m_rect; // Used for wxEVT_SIZING
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxSizeEvent);
+    public:
+	wxSizeEvent& operator=(const wxSizeEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // Move event class
@@ -2371,7 +2431,11 @@ protected:
     wxRect m_rect;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxMoveEvent);
+    public:
+	wxMoveEvent& operator=(const wxMoveEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // Paint event class
@@ -2395,7 +2459,11 @@ public:
     wxEvent *Clone() const override { return new wxPaintEvent(*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxPaintEvent);
+    public:
+	wxPaintEvent& operator=(const wxPaintEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 class WXDLLIMPEXP_CORE wxNcPaintEvent : public wxEvent
@@ -2411,7 +2479,11 @@ public:
     wxEvent *Clone() const override { return new wxNcPaintEvent(*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxNcPaintEvent);
+    public:
+	wxNcPaintEvent& operator=(const wxNcPaintEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // Erase background event class
@@ -2440,7 +2512,11 @@ protected:
     wxDC *m_dc;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxEraseEvent);
+    public:
+	wxEraseEvent& operator=(const wxEraseEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // Focus event class
@@ -2472,7 +2548,11 @@ private:
     wxWindow *m_win;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxFocusEvent);
+    public:
+	wxFocusEvent& operator=(const wxFocusEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // wxChildFocusEvent notifies the parent that a child has got the focus: unlike
@@ -2487,7 +2567,11 @@ public:
     wxEvent *Clone() const override { return new wxChildFocusEvent(*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxChildFocusEvent);
+    public:
+	wxChildFocusEvent& operator=(const wxChildFocusEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // Activate event class
@@ -2532,7 +2616,11 @@ private:
     Reason m_activationReason;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxActivateEvent);
+    public:
+	wxActivateEvent& operator=(const wxActivateEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // InitDialog event class
@@ -2550,7 +2638,11 @@ public:
     wxEvent *Clone() const override { return new wxInitDialogEvent(*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxInitDialogEvent);
+    public:
+	wxInitDialogEvent& operator=(const wxInitDialogEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // Miscellaneous menu event class
@@ -2585,7 +2677,11 @@ private:
     int     m_menuId;
     wxMenu* m_menu;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxMenuEvent);
+    public:
+	wxMenuEvent& operator=(const wxMenuEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // Window close or session close event class
@@ -2641,7 +2737,11 @@ protected:
          m_canVeto;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxCloseEvent);
+    public:
+	wxCloseEvent& operator=(const wxCloseEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 /*
@@ -2669,7 +2769,11 @@ protected:
     bool m_show;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxShowEvent);
+    public:
+	wxShowEvent& operator=(const wxShowEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 /*
@@ -2695,7 +2799,11 @@ protected:
     bool m_iconized;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxIconizeEvent);
+    public:
+	wxIconizeEvent& operator=(const wxIconizeEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 /*
  wxEVT_MAXIMIZE
@@ -2711,7 +2819,11 @@ public:
     wxEvent *Clone() const override { return new wxMaximizeEvent(*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxMaximizeEvent);
+    public:
+	wxMaximizeEvent& operator=(const wxMaximizeEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 /*
@@ -2735,7 +2847,11 @@ protected:
     bool m_fullscreen;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxFullScreenEvent);
+    public:
+	wxFullScreenEvent& operator=(const wxFullScreenEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // Joystick event class
@@ -2835,7 +2951,11 @@ public:
     wxEvent *Clone() const override { return new wxJoystickEvent(*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxJoystickEvent);
+    public:
+	wxJoystickEvent& operator=(const wxJoystickEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // Drop files event class
@@ -2885,7 +3005,11 @@ public:
     wxEvent *Clone() const override { return new wxDropFilesEvent(*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxDropFilesEvent);
+    public:
+	wxDropFilesEvent& operator=(const wxDropFilesEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // Update UI event
@@ -2994,7 +3118,11 @@ protected:
     static wxUpdateUIMode   sm_updateMode;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxUpdateUIEvent);
+    public:
+	wxUpdateUIEvent& operator=(const wxUpdateUIEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 /*
@@ -3012,7 +3140,11 @@ public:
     wxEvent *Clone() const override { return new wxSysColourChangedEvent(*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxSysColourChangedEvent);
+    public:
+	wxSysColourChangedEvent& operator=(const wxSysColourChangedEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 /*
@@ -3041,7 +3173,11 @@ public:
 private:
     wxWindow* m_gainedCapture;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxMouseCaptureChangedEvent);
+    public:
+	wxMouseCaptureChangedEvent& operator=(const wxMouseCaptureChangedEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 /*
@@ -3064,7 +3200,11 @@ public:
 
     wxEvent *Clone() const override { return new wxMouseCaptureLostEvent(*this); }
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxMouseCaptureLostEvent);
+    public:
+	wxMouseCaptureLostEvent& operator=(const wxMouseCaptureLostEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 /*
@@ -3073,7 +3213,11 @@ public:
 class WXDLLIMPEXP_CORE wxDisplayChangedEvent : public wxEvent
 {
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxDisplayChangedEvent);
+    public:
+	wxDisplayChangedEvent& operator=(const wxDisplayChangedEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 
 public:
     wxDisplayChangedEvent()
@@ -3106,7 +3250,11 @@ private:
     wxSize m_oldDPI;
     wxSize m_newDPI;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxDPIChangedEvent);
+    public:
+	wxDPIChangedEvent& operator=(const wxDPIChangedEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 /*
@@ -3135,7 +3283,11 @@ protected:
     wxWindow*     m_changedWindow;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxPaletteChangedEvent);
+    public:
+	wxPaletteChangedEvent& operator=(const wxPaletteChangedEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 /*
@@ -3165,7 +3317,11 @@ protected:
     bool m_paletteRealized;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxQueryNewPaletteEvent);
+    public:
+	wxQueryNewPaletteEvent& operator=(const wxQueryNewPaletteEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 /*
@@ -3232,7 +3388,11 @@ public:
     wxWindow *m_focus;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxNavigationKeyEvent);
+    public:
+	wxNavigationKeyEvent& operator=(const wxNavigationKeyEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // Window creation/destruction events: the first is sent as soon as window is
@@ -3255,7 +3415,11 @@ public:
     wxEvent *Clone() const override { return new wxWindowCreateEvent(*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxWindowCreateEvent);
+    public:
+	wxWindowCreateEvent& operator=(const wxWindowCreateEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 class WXDLLIMPEXP_CORE wxWindowDestroyEvent : public wxCommandEvent
@@ -3268,7 +3432,11 @@ public:
     wxEvent *Clone() const override { return new wxWindowDestroyEvent(*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxWindowDestroyEvent);
+    public:
+	wxWindowDestroyEvent& operator=(const wxWindowDestroyEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // A help event is sent when the user clicks on a window in context-help mode.
@@ -3333,7 +3501,11 @@ protected:
     static Origin GuessOrigin(Origin origin);
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxHelpEvent);
+    public:
+	wxHelpEvent& operator=(const wxHelpEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // A Clipboard Text event is sent when a window intercepts text copy/cut/paste
@@ -3361,7 +3533,11 @@ public:
     wxEvent *Clone() const override { return new wxClipboardTextEvent(*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxClipboardTextEvent);
+    public:
+	wxClipboardTextEvent& operator=(const wxClipboardTextEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // A Context event is sent when the user right clicks on a window or
@@ -3396,7 +3572,11 @@ protected:
     wxPoint   m_pos;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxContextMenuEvent);
+    public:
+	wxContextMenuEvent& operator=(const wxContextMenuEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 

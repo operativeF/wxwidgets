@@ -115,7 +115,11 @@ public:
     wxEvent *Clone() const override { return new wxSpinEvent(*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxSpinEvent);
+    public:
+	wxSpinEvent& operator=(const wxSpinEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 typedef void (wxEvtHandler::*wxSpinEventFunction)(wxSpinEvent&);

@@ -2877,16 +2877,6 @@ typedef const void* WXWidget;
         classname(const classname<arg1, arg2>&) wxMEMBER_DELETE; \
         classname& operator=(const classname<arg1, arg2>&) wxMEMBER_DELETE
 
-#define wxDECLARE_NO_ASSIGN_CLASS(classname)    \
-    private:                                    \
-        classname& operator=(const classname&) wxMEMBER_DELETE
-
-/* deprecated variants _not_ requiring a semicolon after them */
-#define DECLARE_NO_COPY_TEMPLATE_CLASS(classname, arg) \
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(classname, arg);
-#define DECLARE_NO_ASSIGN_CLASS(classname) \
-    wxDECLARE_NO_ASSIGN_CLASS(classname);
-
 /*  --------------------------------------------------------------------------- */
 /*  If a manifest is being automatically generated, add common controls 6 to it */
 /*  --------------------------------------------------------------------------- */

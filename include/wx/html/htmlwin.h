@@ -605,7 +605,11 @@ private:
 
     bool m_bLinkWasClicked;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxHtmlCellEvent);
+    public:
+	wxHtmlCellEvent& operator=(const wxHtmlCellEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 
@@ -632,7 +636,11 @@ public:
 private:
     wxHtmlLinkInfo m_linkInfo;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxHtmlLinkEvent);
+    public:
+	wxHtmlLinkEvent& operator=(const wxHtmlLinkEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 

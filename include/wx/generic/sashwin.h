@@ -233,7 +233,11 @@ private:
     wxSashDragStatus    m_dragStatus;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxSashEvent);
+    public:
+	wxSashEvent& operator=(const wxSashEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 typedef void (wxEvtHandler::*wxSashEventFunction)(wxSashEvent&);

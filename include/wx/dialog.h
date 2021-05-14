@@ -379,7 +379,11 @@ public:
     wxEvent *Clone() const override { return new wxWindowModalDialogEvent (*this); }
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxWindowModalDialogEvent);
+    public:
+	wxWindowModalDialogEvent& operator=(const wxWindowModalDialogEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_WINDOW_MODAL_DIALOG_CLOSED , wxWindowModalDialogEvent );

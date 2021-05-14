@@ -183,7 +183,11 @@ public:
 private:
     wxColour m_colour;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxColourPickerEvent);
+    public:
+	wxColourPickerEvent& operator=(const wxColourPickerEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

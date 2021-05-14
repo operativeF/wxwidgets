@@ -97,7 +97,11 @@ protected:
     wxLayoutAlignment       m_alignment;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxQueryLayoutInfoEvent);
+    public:
+	wxQueryLayoutInfoEvent& operator=(const wxQueryLayoutInfoEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 typedef void (wxEvtHandler::*wxQueryLayoutInfoEventFunction)(wxQueryLayoutInfoEvent&);
@@ -137,7 +141,11 @@ protected:
     wxRect                  m_rect;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxCalculateLayoutEvent);
+    public:
+	wxCalculateLayoutEvent& operator=(const wxCalculateLayoutEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 typedef void (wxEvtHandler::*wxCalculateLayoutEventFunction)(wxCalculateLayoutEvent&);

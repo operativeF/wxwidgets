@@ -97,7 +97,11 @@ private:
     int m_toolId;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxAuiToolBarEvent);
+    public:
+	wxAuiToolBarEvent& operator=(const wxAuiToolBarEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 

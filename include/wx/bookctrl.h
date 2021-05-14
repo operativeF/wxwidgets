@@ -406,7 +406,11 @@ private:
     int m_nSel,     // currently selected page
         m_nOldSel;  // previously selected page
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxBookCtrlEvent);
+    public:
+	wxBookCtrlEvent& operator=(const wxBookCtrlEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 typedef void (wxEvtHandler::*wxBookCtrlEventFunction)(wxBookCtrlEvent&);

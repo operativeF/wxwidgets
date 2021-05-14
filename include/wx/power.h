@@ -69,7 +69,11 @@ public:
 private:
     bool m_veto;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxPowerEvent);
+    public:
+	wxPowerEvent& operator=(const wxPowerEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_BASE, wxEVT_POWER_SUSPENDING, wxPowerEvent );

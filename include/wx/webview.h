@@ -308,7 +308,11 @@ private:
     wxWebViewNavigationActionFlags m_actionFlags;
     wxString m_messageHandler;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxWebViewEvent);
+    public:
+	wxWebViewEvent& operator=(const wxWebViewEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_WEBVIEW, wxEVT_WEBVIEW_NAVIGATING, wxWebViewEvent );

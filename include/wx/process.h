@@ -180,7 +180,11 @@ public:
     int m_pid,
         m_exitcode;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxProcessEvent);
+    public:
+	wxProcessEvent& operator=(const wxProcessEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 typedef void (wxEvtHandler::*wxProcessEventFunction)(wxProcessEvent&);

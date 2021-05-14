@@ -120,7 +120,11 @@ private:
     // URL associated with the hyperlink control that the used clicked on.
     wxString m_url;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxHyperlinkEvent);
+    public:
+	wxHyperlinkEvent& operator=(const wxHyperlinkEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 

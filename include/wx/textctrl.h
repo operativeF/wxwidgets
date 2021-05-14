@@ -850,7 +850,11 @@ protected:
          m_end;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxTextUrlEvent);
+    public:
+	wxTextUrlEvent& operator=(const wxTextUrlEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 
 public:
     // for wxWin RTTI only, don't use

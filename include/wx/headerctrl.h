@@ -431,7 +431,11 @@ protected:
     unsigned int m_order;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxHeaderCtrlEvent);
+    public:
+	wxHeaderCtrlEvent& operator=(const wxHeaderCtrlEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 

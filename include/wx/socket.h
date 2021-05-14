@@ -431,7 +431,11 @@ public:
     wxSocketNotify  m_event;
     void           *m_clientData;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxSocketEvent);
+    public:
+	wxSocketEvent& operator=(const wxSocketEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 

@@ -3083,7 +3083,11 @@ private:
         m_selecting = sel;
     }
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxGridEvent);
+    public:
+	wxGridEvent& operator=(const wxGridEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 class WXDLLIMPEXP_CORE wxGridSizeEvent : public wxNotifyEvent,
@@ -3139,7 +3143,11 @@ private:
         m_y = y;
     }
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxGridSizeEvent);
+    public:
+	wxGridSizeEvent& operator=(const wxGridSizeEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 
@@ -3204,7 +3212,11 @@ protected:
     wxGridCellCoords  m_bottomRight;
     bool              m_selecting;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxGridRangeSelectEvent);
+    public:
+	wxGridRangeSelectEvent& operator=(const wxGridRangeSelectEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 
@@ -3241,7 +3253,11 @@ private:
     int m_col;
     wxWindow* m_window;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxGridEditorCreatedEvent);
+    public:
+	wxGridEditorCreatedEvent& operator=(const wxGridEditorCreatedEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 

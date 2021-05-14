@@ -115,7 +115,11 @@ protected:
     wxString m_directory;
     wxArrayString m_files;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxFileCtrlEvent);
+    public:
+	wxFileCtrlEvent& operator=(const wxFileCtrlEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 typedef void ( wxEvtHandler::*wxFileCtrlEventFunction )( wxFileCtrlEvent& );

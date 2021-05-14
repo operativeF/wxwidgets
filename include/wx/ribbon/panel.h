@@ -160,7 +160,11 @@ protected:
 
 #ifndef SWIG
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxRibbonPanelEvent);
+    public:
+	wxRibbonPanelEvent& operator=(const wxRibbonPanelEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 #endif
 };
 

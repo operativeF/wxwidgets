@@ -218,7 +218,11 @@ public:
 private:
     wxFont m_font;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxFontPickerEvent);
+    public:
+	wxFontPickerEvent& operator=(const wxFontPickerEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

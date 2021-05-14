@@ -953,7 +953,11 @@ private:
               wxDataViewColumn* column,
               const wxDataViewItem& item);
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxDataViewEvent);
+    public:
+	wxDataViewEvent& operator=(const wxDataViewEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_DATAVIEW_SELECTION_CHANGED, wxDataViewEvent );
@@ -1192,7 +1196,11 @@ public:
 
 private:
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxDataViewListCtrl);
+    public:
+	wxDataViewListCtrl& operator=(const wxDataViewListCtrl&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 //-----------------------------------------------------------------------------
@@ -1420,7 +1428,11 @@ public:
 
 private:
     wxDECLARE_EVENT_TABLE();
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxDataViewTreeCtrl);
+    public:
+	wxDataViewTreeCtrl& operator=(const wxDataViewTreeCtrl&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // old wxEVT_COMMAND_* constants

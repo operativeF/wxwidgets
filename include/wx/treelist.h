@@ -517,7 +517,11 @@ private:
 
     friend class wxTreeListCtrl;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxTreeListEvent);
+    public:
+	wxTreeListEvent& operator=(const wxTreeListEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // Event types and event table macros.

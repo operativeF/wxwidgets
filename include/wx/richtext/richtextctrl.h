@@ -2660,7 +2660,11 @@ protected:
     wxRichTextParagraphLayoutBox*   m_oldContainer;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxRichTextEvent);
+    public:
+	wxRichTextEvent& operator=(const wxRichTextEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 /*!

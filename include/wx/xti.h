@@ -452,10 +452,6 @@ private:
     static const int ms_constructorPropertiesCount;         \
     _DECLARE_DYNAMIC_CLASS(name)
 
-#define wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(name)             \
-    wxDECLARE_NO_ASSIGN_CLASS(name);                        \
-    wxDECLARE_DYNAMIC_CLASS(name)
-
 #define wxDECLARE_CLASS(name)                               \
     wxDECLARE_DYNAMIC_CLASS(name)
 

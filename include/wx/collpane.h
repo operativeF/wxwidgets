@@ -92,7 +92,11 @@ public:
 private:
     bool m_bCollapsed;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxCollapsiblePaneEvent);
+    public:
+	wxCollapsiblePaneEvent& operator=(const wxCollapsiblePaneEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

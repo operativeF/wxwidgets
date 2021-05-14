@@ -55,7 +55,11 @@ public:
 private:
     wxString m_path;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxFileDirPickerEvent);
+    public:
+	wxFileDirPickerEvent& operator=(const wxFileDirPickerEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_FILEPICKER_CHANGED, wxFileDirPickerEvent );

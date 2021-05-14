@@ -179,7 +179,11 @@ public:
 private:
     wxTimer* m_timer;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxTimerEvent);
+    public:
+	wxTimerEvent& operator=(const wxTimerEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 typedef void (wxEvtHandler::*wxTimerEventFunction)(wxTimerEvent&);

@@ -172,7 +172,11 @@ public:
 private:
     wxDateTime::WeekDay m_wday;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxCalendarEvent);
+    public:
+	wxCalendarEvent& operator=(const wxCalendarEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

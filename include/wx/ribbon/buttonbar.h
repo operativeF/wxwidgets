@@ -238,7 +238,11 @@ protected:
 
 #ifndef SWIG
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxRibbonButtonBarEvent);
+    public:
+	wxRibbonButtonBarEvent& operator=(const wxRibbonButtonBarEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 #endif
 };
 

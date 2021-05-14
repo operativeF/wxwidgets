@@ -387,7 +387,11 @@ private:
         } pt;               // position of double click for DCLICK event
     } m_data;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxSplitterEvent);
+    public:
+	wxSplitterEvent& operator=(const wxSplitterEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 typedef void (wxEvtHandler::*wxSplitterEventFunction)(wxSplitterEvent&);

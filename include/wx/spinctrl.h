@@ -89,7 +89,11 @@ protected:
     double m_value;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxSpinDoubleEvent);
+    public:
+	wxSpinDoubleEvent& operator=(const wxSpinDoubleEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

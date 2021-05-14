@@ -542,7 +542,11 @@ protected:
     bool          m_editCancelled;
 
 private:
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxListEvent);
+    public:
+	wxListEvent& operator=(const wxListEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------

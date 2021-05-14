@@ -65,7 +65,11 @@ public:
 private:
     wxColour m_colour;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxColourDialogEvent);
+    public:
+	wxColourDialogEvent& operator=(const wxColourDialogEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_COLOUR_CHANGED, wxColourDialogEvent);

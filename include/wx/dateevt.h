@@ -39,7 +39,11 @@ public:
 private:
     wxDateTime m_date;
 
-    wxDECLARE_DYNAMIC_CLASS_NO_ASSIGN(wxDateEvent);
+    public:
+	wxDateEvent& operator=(const wxDateEvent&) = delete;
+	wxClassInfo *GetClassInfo() const ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
 };
 
 // ----------------------------------------------------------------------------
