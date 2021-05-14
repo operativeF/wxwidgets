@@ -134,7 +134,7 @@ private:
     const wxString * const m_str;
     const wxString::const_iterator m_iter;
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxAnyStrPtr);
+    wxAnyStrPtr& operator=(const wxAnyStrPtr&) = delete;
 };
 
 #endif // _WX_ANYSTR_H_

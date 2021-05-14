@@ -139,7 +139,7 @@ private:
     wxColour      m_colour;
     HPEN          m_hPen;
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxPenRefData);
+    wxPenRefData& operator=(const wxPenRefData&) = delete;
 };
 
 // ============================================================================

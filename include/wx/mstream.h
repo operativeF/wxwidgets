@@ -59,7 +59,7 @@ private:
 
     // copy ctor is implemented above: it copies the other stream in this one
     wxDECLARE_ABSTRACT_CLASS(wxMemoryInputStream);
-    wxDECLARE_NO_ASSIGN_CLASS(wxMemoryInputStream);
+    wxMemoryInputStream& operator=(const wxMemoryInputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxMemoryOutputStream : public wxOutputStream

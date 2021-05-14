@@ -126,7 +126,7 @@ private:
 
     wxDECLARE_EVENT_TABLE();
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxNumValidatorBase);
+    wxNumValidatorBase& operator=(const wxNumValidatorBase&) = delete;
 };
 
 namespace wxPrivate
@@ -272,7 +272,7 @@ private:
     // Minimal and maximal values accepted (inclusive).
     ValueType m_min, m_max;
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxNumValidator);
+    wxNumValidator& operator=(const wxNumValidator&) = delete;
 };
 
 } // namespace wxPrivate
@@ -318,7 +318,7 @@ protected:
     bool IsCharOk(const wxString& val, int pos, wxChar ch) const override;
 
 private:
-    wxDECLARE_NO_ASSIGN_CLASS(wxIntegerValidatorBase);
+    wxIntegerValidatorBase& operator=(const wxIntegerValidatorBase&) = delete;
 };
 
 // Validator for integer numbers. It can actually work with any integer type
@@ -368,7 +368,7 @@ public:
     }
 
 private:
-    wxDECLARE_NO_ASSIGN_CLASS(wxIntegerValidator);
+    wxIntegerValidator& operator=(const wxIntegerValidator&) = delete;
 };
 
 // Helper function for creating integer validators which allows to avoid
@@ -429,7 +429,7 @@ private:
     // Factor applied for the displayed the value.
     double m_factor;
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxFloatingPointValidatorBase);
+    wxFloatingPointValidatorBase& operator=(const wxFloatingPointValidatorBase&) = delete;
 };
 
 // Validator for floating point numbers. It can be used with float, double or

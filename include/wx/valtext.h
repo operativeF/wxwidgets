@@ -155,7 +155,7 @@ protected:
     wxArrayString        m_excludes;
 
 private:
-    wxDECLARE_NO_ASSIGN_CLASS(wxTextValidator);
+    wxTextValidator& operator=(const wxTextValidator&) = delete;
     wxDECLARE_DYNAMIC_CLASS(wxTextValidator);
     wxDECLARE_EVENT_TABLE();
 };

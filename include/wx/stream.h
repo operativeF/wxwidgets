@@ -547,7 +547,7 @@ protected:
          m_flushable;
 
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxStreamBuffer);
+    wxStreamBuffer& operator=(const wxStreamBuffer&) = delete;
 };
 
 // ---------------------------------------------------------------------------

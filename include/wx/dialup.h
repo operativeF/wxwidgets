@@ -179,7 +179,7 @@ public:
     wxEvent *Clone() const override { return new wxDialUpEvent(*this); }
 
 private:
-    wxDECLARE_NO_ASSIGN_CLASS(wxDialUpEvent);
+    wxDialUpEvent& operator=(const wxDialUpEvent&) = delete;
 };
 
 // the type of dialup event handler function

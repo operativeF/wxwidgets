@@ -221,7 +221,7 @@ private:
 protected:
   bool          m_connected;
 
-  wxDECLARE_NO_ASSIGN_CLASS(wxConnectionBase);
+  wxConnectionBase& operator=(const wxConnectionBase&) = delete;
   wxDECLARE_CLASS(wxConnectionBase);
 };
 

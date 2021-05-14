@@ -102,7 +102,7 @@ public:
     const wxString m_cond;
     const wxString m_msg;
 
-    wxDECLARE_NO_ASSIGN_CLASS(TestAssertFailure);
+    TestAssertFailure& operator=(const TestAssertFailure&) = delete;
 };
 
 // macro to use for the functions which are supposed to fail an assertion

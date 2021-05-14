@@ -242,7 +242,7 @@ private:
     const wxString * const m_str;
     const wxCStrData * const m_cstr;
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxFormatString);
+    wxFormatString& operator=(const wxFormatString&) = delete;
 };
 
 // these two helper classes are used to find wxFormatString argument among fixed

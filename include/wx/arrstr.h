@@ -559,7 +559,7 @@ private:
         const wxArrayString * array;
     } m_data;
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxArrayStringsAdapter);
+    wxArrayStringsAdapter& operator=(const wxArrayStringsAdapter&) = delete;
 };
 
 #endif // _WX_ARRSTR_H

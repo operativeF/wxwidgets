@@ -111,7 +111,7 @@ public:
     wxEvent *Clone() const override { return new wxTaskBarIconEvent(*this); }
 
 private:
-    wxDECLARE_NO_ASSIGN_CLASS(wxTaskBarIconEvent);
+    wxTaskBarIconEvent& operator=(const wxTaskBarIconEvent&) = delete;
 };
 
 typedef void (wxEvtHandler::*wxTaskBarIconEventFunction)(wxTaskBarIconEvent&);

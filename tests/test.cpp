@@ -84,7 +84,7 @@ struct CrtAssertFailure
 
     const wxString m_msg;
 
-    wxDECLARE_NO_ASSIGN_CLASS(CrtAssertFailure);
+    CrtAssertFailure& operator=(const CrtAssertFailure&) = delete;
 };
 
 CATCH_TRANSLATE_EXCEPTION(CrtAssertFailure& e)

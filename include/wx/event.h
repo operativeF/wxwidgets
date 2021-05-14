@@ -1250,7 +1250,7 @@ protected:
     int               m_commandInt;
     long              m_extraLong;     // Additional information (e.g. select/deselect)
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxEventBasicPayloadMixin);
+    wxEventBasicPayloadMixin& operator=(const wxEventBasicPayloadMixin&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxEventAnyPayloadMixin : public wxEventBasicPayloadMixin
@@ -1275,7 +1275,7 @@ protected:
     wxAny m_payload;
 #endif // wxUSE_ANY
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxEventBasicPayloadMixin);
+    wxEventBasicPayloadMixin& operator=(const wxEventBasicPayloadMixin&) = delete;
 };
 
 
@@ -3464,7 +3464,7 @@ struct WXDLLIMPEXP_BASE wxEventTableEntryBase
     wxObject* m_callbackUserData;
 
 private:
-    wxDECLARE_NO_ASSIGN_CLASS(wxEventTableEntryBase);
+    wxEventTableEntryBase& operator=(const wxEventTableEntryBase&) = delete;
 };
 
 // an entry from a static event table
@@ -3485,7 +3485,7 @@ struct WXDLLIMPEXP_BASE wxEventTableEntry : public wxEventTableEntryBase
     const int& m_eventType;
 
 private:
-    wxDECLARE_NO_ASSIGN_CLASS(wxEventTableEntry);
+    wxEventTableEntry& operator=(const wxEventTableEntry&) = delete;
 };
 
 // an entry used in dynamic event table managed by wxEvtHandler::Connect()
@@ -3503,7 +3503,7 @@ struct WXDLLIMPEXP_BASE wxDynamicEventTableEntry : public wxEventTableEntryBase
     int m_eventType;
 
 private:
-    wxDECLARE_NO_ASSIGN_CLASS(wxDynamicEventTableEntry);
+    wxDynamicEventTableEntry& operator=(const wxDynamicEventTableEntry&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -4101,7 +4101,7 @@ private:
 
     friend class wxEvtHandler;
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxEventConnectionRef);
+    wxEventConnectionRef& operator=(const wxEventConnectionRef&) = delete;
 };
 
 // Post a message to the given event handler which will be processed during the

@@ -158,7 +158,7 @@ private:
     bool m_consumedBOM;
 
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxConvAuto);
+    wxConvAuto& operator=(const wxConvAuto&) = delete;
 };
 
 #endif // _WX_CONVAUTO_H_

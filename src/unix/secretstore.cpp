@@ -58,7 +58,7 @@ public:
 private:
     GHashTable* const m_hash;
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxGHashTable);
+    wxGHashTable& operator=(const wxGHashTable&) = delete;
 };
 
 // ============================================================================

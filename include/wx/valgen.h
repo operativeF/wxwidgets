@@ -86,7 +86,7 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxGenericValidator);
-    wxDECLARE_NO_ASSIGN_CLASS(wxGenericValidator);
+    wxGenericValidator& operator=(const wxGenericValidator&) = delete;
 };
 
 #endif // wxUSE_VALIDATORS

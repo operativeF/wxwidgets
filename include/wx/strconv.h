@@ -238,7 +238,7 @@ private:
     // the conversion object we forward to
     wxMBConv *m_conv;
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxConvBrokenFileNames);
+    wxConvBrokenFileNames& operator=(const wxConvBrokenFileNames&) = delete;
 };
 
 #endif // __UNIX__

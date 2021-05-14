@@ -53,7 +53,7 @@ private:
     CGFloat m_green;
     CGFloat m_alpha;
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxCGColorRefData);
+    wxCGColorRefData& operator=(const wxCGColorRefData&) = delete;
 };
 
 wxCGColorRefData::wxCGColorRefData(CGFloat r, CGFloat g, CGFloat b, CGFloat a)

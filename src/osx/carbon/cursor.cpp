@@ -55,7 +55,7 @@ protected:
 
     friend class wxCursor;
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxCursorRefData);
+    wxCursorRefData& operator=(const wxCursorRefData&) = delete;
 };
 
 #define M_CURSORDATA static_cast<wxCursorRefData*>(m_refData)

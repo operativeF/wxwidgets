@@ -1228,7 +1228,7 @@ public:
         wxDC& m_dc;
         WXHDC m_hdc;
 
-        wxDECLARE_NO_ASSIGN_CLASS(TempHDC);
+        TempHDC& operator=(const TempHDC&) = delete;
     };
 
     // GetTempHDC() also works for wxGCDC (but still not for wxPostScriptDC &c)

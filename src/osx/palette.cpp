@@ -36,7 +36,7 @@ protected:
 
     friend class WXDLLIMPEXP_FWD_CORE wxPalette;
 
-    wxDECLARE_NO_ASSIGN_CLASS(wxPaletteRefData);
+    wxPaletteRefData& operator=(const wxPaletteRefData&) = delete;
 };
 
 wxPaletteRefData::wxPaletteRefData()

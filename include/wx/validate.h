@@ -84,7 +84,7 @@ private:
     static bool ms_isSilent;
 
     wxDECLARE_DYNAMIC_CLASS(wxValidator);
-    wxDECLARE_NO_ASSIGN_CLASS(wxValidator);
+    wxValidator& operator=(const wxValidator&) = delete;
 };
 
 #define wxVALIDATOR_PARAM(val) val
