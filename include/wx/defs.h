@@ -241,14 +241,6 @@ typedef short int WXTYPE;
 
 #ifdef __cplusplus
 
-/*  Every ride down a slippery slope begins with a single step.. */
-/*  */
-/*  Yes, using nested classes is indeed against our coding standards in */
-/*  general, but there are places where you can use them to advantage */
-/*  without totally breaking ports that cannot use them.  If you do, then */
-/*  wrap it in this guard, but such cases should still be relatively rare. */
-#define wxUSE_NESTED_CLASSES    1
-
 /* same for more C++11 keywords which don't have such historic baggage as
    override and so can be detected by just testing for C++11 support (which
    still requires handling MSVS specially, unfortunately) */

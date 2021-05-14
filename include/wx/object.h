@@ -62,73 +62,6 @@ class WXDLLIMPEXP_BASE const_iterator                                    \
 #define wxIMPLEMENT_CLASS2(name, basename1, basename2)                        \
     wxIMPLEMENT_ABSTRACT_CLASS2(name, basename1, basename2)
 
-// -----------------------------------
-// for pluggable classes
-// -----------------------------------
-
-    // NOTE: this should probably be the very first statement
-    //       in the class declaration so wxPluginSentinel is
-    //       the first member initialised and the last destroyed.
-
-// _DECLARE_DL_SENTINEL(name) wxPluginSentinel m_pluginsentinel;
-
-#if wxUSE_NESTED_CLASSES
-
-#define _DECLARE_DL_SENTINEL(name, exportdecl)  \
-class exportdecl name##PluginSentinel {         \
-private:                                        \
-    static const wxString sm_className;         \
-public:                                         \
-    name##PluginSentinel();                     \
-    ~name##PluginSentinel();                    \
-};                                              \
-name##PluginSentinel  m_pluginsentinel
-
-#define _IMPLEMENT_DL_SENTINEL(name)                                \
- const wxString name::name##PluginSentinel::sm_className(#name);    \
- name::name##PluginSentinel::name##PluginSentinel() {               \
-    wxPluginLibrary *e = (wxPluginLibrary*) wxPluginLibrary::ms_classes.Get(#name);   \
-    if( e != 0 ) { e->RefObj(); }                                      \
- }                                                                  \
- name::name##PluginSentinel::~name##PluginSentinel() {            \
-    wxPluginLibrary *e = (wxPluginLibrary*) wxPluginLibrary::ms_classes.Get(#name);   \
-    if( e != 0 ) { e->UnrefObj(); }                                 \
- }
-#else
-
-#define _DECLARE_DL_SENTINEL(name)
-#define _IMPLEMENT_DL_SENTINEL(name)
-
-#endif  // wxUSE_NESTED_CLASSES
-
-#define wxDECLARE_PLUGGABLE_CLASS(name) \
- wxDECLARE_DYNAMIC_CLASS(name); _DECLARE_DL_SENTINEL(name, WXDLLIMPEXP_CORE)
-#define wxDECLARE_ABSTRACT_PLUGGABLE_CLASS(name)  \
- wxDECLARE_ABSTRACT_CLASS(name); _DECLARE_DL_SENTINEL(name, WXDLLIMPEXP_CORE)
-
-#define wxDECLARE_USER_EXPORTED_PLUGGABLE_CLASS(name, usergoo) \
- wxDECLARE_DYNAMIC_CLASS(name); _DECLARE_DL_SENTINEL(name, usergoo)
-#define wxDECLARE_USER_EXPORTED_ABSTRACT_PLUGGABLE_CLASS(name, usergoo)  \
- wxDECLARE_ABSTRACT_CLASS(name); _DECLARE_DL_SENTINEL(name, usergoo)
-
-#define wxIMPLEMENT_PLUGGABLE_CLASS(name, basename) \
- wxIMPLEMENT_DYNAMIC_CLASS(name, basename) _IMPLEMENT_DL_SENTINEL(name)
-#define wxIMPLEMENT_PLUGGABLE_CLASS2(name, basename1, basename2)  \
- wxIMPLEMENT_DYNAMIC_CLASS2(name, basename1, basename2) _IMPLEMENT_DL_SENTINEL(name)
-#define wxIMPLEMENT_ABSTRACT_PLUGGABLE_CLASS(name, basename) \
- wxIMPLEMENT_ABSTRACT_CLASS(name, basename) _IMPLEMENT_DL_SENTINEL(name)
-#define wxIMPLEMENT_ABSTRACT_PLUGGABLE_CLASS2(name, basename1, basename2)  \
- wxIMPLEMENT_ABSTRACT_CLASS2(name, basename1, basename2) _IMPLEMENT_DL_SENTINEL(name)
-
-#define wxIMPLEMENT_USER_EXPORTED_PLUGGABLE_CLASS(name, basename) \
- wxIMPLEMENT_PLUGGABLE_CLASS(name, basename)
-#define wxIMPLEMENT_USER_EXPORTED_PLUGGABLE_CLASS2(name, basename1, basename2)  \
- wxIMPLEMENT_PLUGGABLE_CLASS2(name, basename1, basename2)
-#define wxIMPLEMENT_USER_EXPORTED_ABSTRACT_PLUGGABLE_CLASS(name, basename) \
- wxIMPLEMENT_ABSTRACT_PLUGGABLE_CLASS(name, basename)
-#define wxIMPLEMENT_USER_EXPORTED_ABSTRACT_PLUGGABLE_CLASS2(name, basename1, basename2)  \
- wxIMPLEMENT_ABSTRACT_PLUGGABLE_CLASS2(name, basename1, basename2)
-
 #define wxCLASSINFO(name) (&name::ms_classInfo)
 
 #define wxIS_KIND_OF(obj, className) obj->IsKindOf(&className::ms_classInfo)
@@ -213,11 +146,6 @@ inline T *wxCheckCast(const void *ptr)
 #define DECLARE_ABSTRACT_CLASS(n)                                   wxDECLARE_ABSTRACT_CLASS(n);
 #define DECLARE_DYNAMIC_CLASS(n)                                    wxDECLARE_DYNAMIC_CLASS(n);
 #define DECLARE_CLASS(n)                                            wxDECLARE_CLASS(n);
-
-#define DECLARE_PLUGGABLE_CLASS(n)                                  wxDECLARE_PLUGGABLE_CLASS(n);
-#define DECLARE_ABSTRACT_PLUGGABLE_CLASS(n)                         wxDECLARE_ABSTRACT_PLUGGABLE_CLASS(n);
-#define DECLARE_USER_EXPORTED_PLUGGABLE_CLASS(n,u)                  wxDECLARE_USER_EXPORTED_PLUGGABLE_CLASS(n,u);
-#define DECLARE_USER_EXPORTED_ABSTRACT_PLUGGABLE_CLASS(n,u)         wxDECLARE_USER_EXPORTED_ABSTRACT_PLUGGABLE_CLASS(n,u);
 
 // ----------------------------------------------------------------------------
 // wxRefCounter: ref counted data "manager"
@@ -495,15 +423,6 @@ inline wxObject *wxCheckDynamicCast(wxObject *obj, wxClassInfo *classInfo)
 #define IMPLEMENT_ABSTRACT_CLASS2(n,b1,b2)                          wxIMPLEMENT_ABSTRACT_CLASS2(n,b1,b2)
 #define IMPLEMENT_CLASS(n,b)                                        wxIMPLEMENT_CLASS(n,b)
 #define IMPLEMENT_CLASS2(n,b1,b2)                                   wxIMPLEMENT_CLASS2(n,b1,b2)
-
-#define IMPLEMENT_PLUGGABLE_CLASS(n,b)                              wxIMPLEMENT_PLUGGABLE_CLASS(n,b)
-#define IMPLEMENT_PLUGGABLE_CLASS2(n,b,b2)                          wxIMPLEMENT_PLUGGABLE_CLASS2(n,b,b2)
-#define IMPLEMENT_ABSTRACT_PLUGGABLE_CLASS(n,b)                     wxIMPLEMENT_ABSTRACT_PLUGGABLE_CLASS(n,b)
-#define IMPLEMENT_ABSTRACT_PLUGGABLE_CLASS2(n,b,b2)                 wxIMPLEMENT_ABSTRACT_PLUGGABLE_CLASS2(n,b,b2)
-#define IMPLEMENT_USER_EXPORTED_PLUGGABLE_CLASS(n,b)                wxIMPLEMENT_USER_EXPORTED_PLUGGABLE_CLASS(n,b)
-#define IMPLEMENT_USER_EXPORTED_PLUGGABLE_CLASS2(n,b,b2)            wxIMPLEMENT_USER_EXPORTED_PLUGGABLE_CLASS2(n,b,b2)
-#define IMPLEMENT_USER_EXPORTED_ABSTRACT_PLUGGABLE_CLASS(n,b)       wxIMPLEMENT_USER_EXPORTED_ABSTRACT_PLUGGABLE_CLASS(n,b)
-#define IMPLEMENT_USER_EXPORTED_ABSTRACT_PLUGGABLE_CLASS2(n,b,b2)   wxIMPLEMENT_USER_EXPORTED_ABSTRACT_PLUGGABLE_CLASS2(n,b,b2)
 
 #define CLASSINFO(n)                                wxCLASSINFO(n)
 
