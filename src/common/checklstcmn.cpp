@@ -95,16 +95,13 @@ wxCONSTRUCTOR_4( wxCheckListBox, wxWindow*, Parent, wxWindowID, Id, \
                  wxPoint, Position, wxSize, Size )
 
 
-// ============================================================================
-// implementation
-// ============================================================================
-
-unsigned int wxCheckListBoxBase::GetCheckedItems(wxArrayInt& checkedItems) const
+std::size_t wxCheckListBoxBase::GetCheckedItemsCount(std::vector<unsigned int>& checkedItems)
 {
-    unsigned int const numberOfItems = GetCount();
-
+    // TODO: Should this really clear the vector every time?
+    // Also, why bother pushing back the items if we're going to clear it every time?
     checkedItems.clear();
-    for ( unsigned int i = 0; i < numberOfItems; ++i )
+
+    for ( unsigned int i = 0; i < GetCount(); ++i )
     {
         if ( IsChecked(i) )
             checkedItems.push_back(i);

@@ -30,7 +30,7 @@ public:
     virtual bool IsChecked(unsigned int item) const = 0;
     virtual void Check(unsigned int item, bool check = true) = 0;
 
-    virtual unsigned int GetCheckedItems(wxArrayInt& checkedItems) const;
+    virtual std::size_t GetCheckedItemsCount(std::vector<unsigned int>& checkedItems);
 
     wxCheckListBoxBase(const wxCheckListBoxBase&) = delete;
 	wxCheckListBoxBase& operator=(const wxCheckListBoxBase&) = delete;

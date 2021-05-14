@@ -4330,13 +4330,13 @@ public:
 
     void Block(wxEventType type)
     {
-        m_eventsToBlock.push_back(type);
+        m_eventsToBlock.push_back(static_cast<int>(type));
     }
 
     bool ProcessEvent(wxEvent& event) override;
 
 protected:
-    wxArrayInt m_eventsToBlock;
+    std::vector<int> m_eventsToBlock;
     wxWindow *m_window;
 
     wxEventBlocker(const wxEventBlocker&) = delete;

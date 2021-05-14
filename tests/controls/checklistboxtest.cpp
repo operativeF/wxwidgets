@@ -79,7 +79,7 @@ void CheckListBoxTestCase::Check()
     CPPUNIT_ASSERT_EQUAL(true, m_check->IsChecked(0));
     CPPUNIT_ASSERT_EQUAL(false, m_check->IsChecked(1));
 
-    CPPUNIT_ASSERT_EQUAL(1, m_check->GetCheckedItems(checkedItems));
+    CPPUNIT_ASSERT_EQUAL(1, m_check->GetCheckedItemsCount(checkedItems));
     CPPUNIT_ASSERT_EQUAL(0, checkedItems[0]);
 
     //Make sure a double check of an items doesn't deselect it
