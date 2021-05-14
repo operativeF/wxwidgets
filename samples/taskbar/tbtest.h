@@ -12,7 +12,7 @@ class MyTaskBarIcon : public wxTaskBarIcon
 {
 public:
 #if defined(__WXOSX__) && wxOSX_USE_COCOA
-    MyTaskBarIcon(wxTaskBarIconType iconType = wxTBI_DEFAULT_TYPE)
+    MyTaskBarIcon(wxTaskBarIconType iconType = wxTaskBarIconType::DefaultType)
     :   wxTaskBarIcon(iconType)
 #else
     MyTaskBarIcon()

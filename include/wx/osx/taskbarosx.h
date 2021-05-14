@@ -24,7 +24,7 @@ public:
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 
-    wxTaskBarIcon(wxTaskBarIconType iconType = wxTBI_DEFAULT_TYPE);
+    wxTaskBarIcon(wxTaskBarIconType iconType = wxTaskBarIconType::DefaultType);
     virtual ~wxTaskBarIcon();
 
     // returns true if the taskbaricon is in the global menubar

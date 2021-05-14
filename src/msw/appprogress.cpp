@@ -94,7 +94,7 @@ void wxAppProgressIndicator::Reset()
 {
     for ( size_t i = 0; i < m_taskBarButtons.size(); ++i )
     {
-        m_taskBarButtons[i]->SetProgressState(wxTASKBAR_BUTTON_NO_PROGRESS);
+        m_taskBarButtons[i]->SetProgressState(wxTaskBarButtonState::NoProgress);
     }
 }
 

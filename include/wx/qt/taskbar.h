@@ -13,7 +13,7 @@ class QSystemTrayIcon;
 class WXDLLIMPEXP_ADV wxTaskBarIcon : public wxTaskBarIconBase
 {
 public:
-    wxTaskBarIcon(wxTaskBarIconType iconType = wxTBI_DEFAULT_TYPE);
+    wxTaskBarIcon(wxTaskBarIconType iconType = wxTaskBarIconType::DefaultType);
     virtual ~wxTaskBarIcon();
 
 	wxTaskBarIcon(const wxTaskBarIcon&) = delete;

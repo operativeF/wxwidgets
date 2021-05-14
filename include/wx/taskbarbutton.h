@@ -30,13 +30,13 @@ class WXDLLIMPEXP_FWD_CORE wxTaskBarJumpListImpl;
 /**
     State of the task bar button.
 */
-enum wxTaskBarButtonState
+enum class wxTaskBarButtonState
 {
-    wxTASKBAR_BUTTON_NO_PROGRESS   = 0,
-    wxTASKBAR_BUTTON_INDETERMINATE = 1,
-    wxTASKBAR_BUTTON_NORMAL        = 2,
-    wxTASKBAR_BUTTON_ERROR         = 4,
-    wxTASKBAR_BUTTON_PAUSED        = 8
+    NoProgress    = 0,
+    Indeterminate = 1,
+    Normal        = 2,
+    Error         = 4,
+    Paused        = 8
 };
 
 class WXDLLIMPEXP_CORE wxThumbBarButton : public wxObject
@@ -139,18 +139,18 @@ private:
 	wxTaskBarButton& operator=(const wxTaskBarButton&) = delete;
 };
 
-enum wxTaskBarJumpListItemType
+enum class wxTaskBarJumpListItemType
 {
-    wxTASKBAR_JUMP_LIST_SEPARATOR,
-    wxTASKBAR_JUMP_LIST_TASK,
-    wxTASKBAR_JUMP_LIST_DESTINATION
+    Separator,
+    Task,
+    Destination
 };
 
 class WXDLLIMPEXP_CORE wxTaskBarJumpListItem
 {
 public:
     wxTaskBarJumpListItem(wxTaskBarJumpListCategory *parentCategory = NULL,
-        wxTaskBarJumpListItemType type = wxTASKBAR_JUMP_LIST_SEPARATOR,
+        wxTaskBarJumpListItemType type = wxTaskBarJumpListItemType::Separator,
         const wxString& title = wxEmptyString,
         const wxString& filePath = wxEmptyString,
         const wxString& arguments = wxEmptyString,

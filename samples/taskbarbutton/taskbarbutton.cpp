@@ -136,7 +136,7 @@ bool MyApp::OnInit()
     wxTaskBarJumpList jumpList;
     wxTaskBarJumpListItem *item1 = new wxTaskBarJumpListItem(
         NULL,
-        wxTASKBAR_JUMP_LIST_TASK,
+        wxTaskBarJumpListItemType::Task,
         "Task 1",
         wxStandardPaths::Get().GetExecutablePath(),
         wxEmptyString,
@@ -145,7 +145,7 @@ bool MyApp::OnInit()
         0);
     wxTaskBarJumpListItem *item2 = new wxTaskBarJumpListItem(
         NULL,
-        wxTASKBAR_JUMP_LIST_TASK,
+        wxTaskBarJumpListItemType::Task,
         "Task 2",
         wxStandardPaths::Get().GetExecutablePath(),
         wxEmptyString,
@@ -154,7 +154,7 @@ bool MyApp::OnInit()
         0);
     jumpList.GetTasks().Append(item1);
     jumpList.GetTasks().Append(
-        new wxTaskBarJumpListItem(NULL, wxTASKBAR_JUMP_LIST_SEPARATOR));
+        new wxTaskBarJumpListItem(NULL, wxTaskBarJumpListItemType::Separator));
     jumpList.GetTasks().Append(item2);
     jumpList.ShowRecentCategory();
     jumpList.ShowFrequentCategory();
@@ -163,7 +163,7 @@ bool MyApp::OnInit()
         new wxTaskBarJumpListCategory(&jumpList, "Custom");
     wxTaskBarJumpListItem* item3 = new wxTaskBarJumpListItem(
         customCategory,
-        wxTASKBAR_JUMP_LIST_DESTINATION,
+        wxTaskBarJumpListItemType::Destination,
         "Help",
         wxStandardPaths::Get().GetExecutablePath(),
         "--help",
@@ -357,22 +357,22 @@ void MyFrame::OnChoice(wxCommandEvent& event)
     switch(sel)
     {
         case 0:
-            state = wxTASKBAR_BUTTON_NO_PROGRESS;
+            state = wxTaskBarButtonState::NoProgress;
             break;
         case 1:
-            state = wxTASKBAR_BUTTON_INDETERMINATE;
+            state = wxTaskBarButtonState::Indeterminate;
             break;
         case 2:
-            state = wxTASKBAR_BUTTON_NORMAL;
+            state = wxTaskBarButtonState::Normal;
             break;
         case 3:
-            state = wxTASKBAR_BUTTON_ERROR;
+            state = wxTaskBarButtonState::Error;
             break;
         case 4:
-            state = wxTASKBAR_BUTTON_PAUSED;
+            state = wxTaskBarButtonState::Paused;
             break;
         default:
-            state = wxTASKBAR_BUTTON_NO_PROGRESS;
+            state = wxTaskBarButtonState::NoProgress;
             break;
     }
 

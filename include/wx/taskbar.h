@@ -22,14 +22,14 @@ class WXDLLIMPEXP_FWD_CORE wxTaskBarIconEvent;
 // ----------------------------------------------------------------------------
 
 // type of taskbar item to create.  Only applicable in wxOSX_COCOA
-enum wxTaskBarIconType
+enum class wxTaskBarIconType
 {
-    wxTBI_DOCK,
-    wxTBI_CUSTOM_STATUSITEM,
+    Dock,
+    CustomStatusItem,
 #if defined(wxOSX_USE_COCOA) && wxOSX_USE_COCOA
-    wxTBI_DEFAULT_TYPE = wxTBI_CUSTOM_STATUSITEM
+    DefaultType = CustomStatusItem
 #else
-    wxTBI_DEFAULT_TYPE = wxTBI_DOCK
+    DefaultType = Dock
 #endif
 };
 

@@ -393,8 +393,8 @@ bool AddShellLink(IObjectCollection *collection,
         return false;
     }
 
-    if ( item.GetType() == wxTASKBAR_JUMP_LIST_TASK ||
-         item.GetType() == wxTASKBAR_JUMP_LIST_DESTINATION )
+    if ( item.GetType() == wxTaskBarJumpListItemType::Task ||
+         item.GetType() == wxTaskBarJumpListItemType::Destination )
     {
         if ( !item.GetFilePath().IsEmpty() )
             shellLink->SetPath(item.GetFilePath().wc_str());
@@ -418,8 +418,8 @@ bool AddShellLink(IObjectCollection *collection,
     }
 
     PROPVARIANT pv;
-    if ( item.GetType() == wxTASKBAR_JUMP_LIST_TASK ||
-         item.GetType() == wxTASKBAR_JUMP_LIST_DESTINATION )
+    if ( item.GetType() == wxTaskBarJumpListItemType::Task ||
+         item.GetType() == wxTaskBarJumpListItemType::Destination )
     {
         hr = InitPropVariantFromString(item.GetTitle().wc_str(), &pv);
         if ( SUCCEEDED(hr) )
@@ -427,7 +427,7 @@ bool AddShellLink(IObjectCollection *collection,
             hr = propertyStore->SetValue(PKEY_Title, pv);
         }
     }
-    else if ( item.GetType() == wxTASKBAR_JUMP_LIST_SEPARATOR )
+    else if ( item.GetType() == wxTaskBarJumpListItemType::Separator )
     {
         hr = InitPropVariantFromBoolean(TRUE, &pv);
         if ( SUCCEEDED(hr) )
@@ -453,7 +453,7 @@ wxTaskBarJumpListItem* GetItemFromIShellLink(IShellLink* link)
         return nullptr;
 
     wxTaskBarJumpListItem* item =
-        new wxTaskBarJumpListItem(nullptr, wxTASKBAR_JUMP_LIST_DESTINATION);
+        new wxTaskBarJumpListItem(nullptr, wxTaskBarJumpListItemType::Destination);
 
     wxCOMPtr<IPropertyStore> linkProps;
     HRESULT hr = link->QueryInterface
@@ -494,7 +494,7 @@ wxTaskBarJumpListItem* GetItemFromIShellItem(IShellItem *shellItem)
         return nullptr;
 
     wxTaskBarJumpListItem *item =
-        new wxTaskBarJumpListItem(nullptr, wxTASKBAR_JUMP_LIST_DESTINATION);
+        new wxTaskBarJumpListItem(nullptr, wxTaskBarJumpListItemType::Destination);
 
     wxCoTaskMemPtr<wchar_t> name;
     shellItem->GetDisplayName(SIGDN_FILESYSPATH, &name);
@@ -734,7 +734,7 @@ wxTaskBarButtonImpl::wxTaskBarButtonImpl(wxITaskbarList3* taskbarList,
       m_taskbarList(taskbarList),
       m_progressRange(0),
       m_progressValue(0),
-      m_progressState(wxTASKBAR_BUTTON_NO_PROGRESS),
+      m_progressState(wxTaskBarButtonState::NoProgress),
       m_hasInitThumbnailToolbar(false)
 {
 }
@@ -774,7 +774,7 @@ void wxTaskBarButtonImpl::SetProgressRange(int range)
 {
     m_progressRange = range;
     if ( m_progressRange == 0 )
-        SetProgressState(wxTASKBAR_BUTTON_NO_PROGRESS);
+        SetProgressState(wxTaskBarButtonState::NoProgress);
 }
 
 void wxTaskBarButtonImpl::SetProgressValue(int value)
@@ -785,7 +785,7 @@ void wxTaskBarButtonImpl::SetProgressValue(int value)
 
 void wxTaskBarButtonImpl::PulseProgress()
 {
-    SetProgressState(wxTASKBAR_BUTTON_INDETERMINATE);
+    SetProgressState(wxTaskBarButtonState::Indeterminate);
 }
 
 void wxTaskBarButtonImpl::Show(bool show)
@@ -1428,8 +1428,8 @@ void wxTaskBarJumpListImpl::AddTasksToDestinationList()
           it != tasks.end();
           ++it )
     {
-        wxASSERT_MSG( ((*it)->GetType() == wxTASKBAR_JUMP_LIST_TASK ||
-                       (*it)->GetType() == wxTASKBAR_JUMP_LIST_SEPARATOR),
+        wxASSERT_MSG( ((*it)->GetType() == wxTaskBarJumpListItemType::Task ||
+                       (*it)->GetType() == wxTaskBarJumpListItemType::Separator),
                       "Invalid task Item." );
         AddShellLink(collection, *(*it));
     }
@@ -1452,7 +1452,7 @@ void wxTaskBarJumpListImpl::AddCustomCategoriesToDestinationList()
               ++iter )
         {
             wxASSERT_MSG(
-                (*iter)->GetType() == wxTASKBAR_JUMP_LIST_DESTINATION,
+                (*iter)->GetType() == wxTaskBarJumpListItemType::Destination,
                 "Invalid category item." );
             AddShellLink(collection, *(*iter));
         }
