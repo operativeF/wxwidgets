@@ -155,7 +155,8 @@ private:
         }
     }
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxCompositeWindowSettersOnly, W);
+    wxCompositeWindowSettersOnly(const wxCompositeWindowSettersOnly<W>&)  = delete;
+	wxCompositeWindowSettersOnly& operator=(const wxCompositeWindowSettersOnly<W>&) = delete;
 };
 
 // The real wxCompositeWindow itself, inheriting all the setters defined above.
@@ -272,7 +273,8 @@ private:
             event.Skip();
     }
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxCompositeWindow, W);
+    wxCompositeWindow(const wxCompositeWindow<W>&)  = delete;
+	wxCompositeWindow& operator=(const wxCompositeWindow<W>&) = delete;
 };
 
 #endif // _WX_COMPOSITEWIN_H_

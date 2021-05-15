@@ -2757,11 +2757,6 @@ typedef const void* WXWidget;
     #define wxMEMBER_DELETE
 #endif
 
-#define wxDECLARE_NO_COPY_TEMPLATE_CLASS(classname, arg)  \
-    private:                                              \
-        classname(const classname<arg>&) wxMEMBER_DELETE; \
-        classname& operator=(const classname<arg>&) wxMEMBER_DELETE
-
 #define wxDECLARE_NO_COPY_TEMPLATE_CLASS_2(classname, arg1, arg2) \
     private:                                                      \
         classname(const classname<arg1, arg2>&) wxMEMBER_DELETE; \

@@ -35,7 +35,8 @@ public:
 private:
     T* const m_win;
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxGtkEventsDisabler, T);
+    wxGtkEventsDisabler(const wxGtkEventsDisabler<T>&)  = delete;
+	wxGtkEventsDisabler& operator=(const wxGtkEventsDisabler<T>&) = delete;
 };
 
 #endif // _GTK_PRIVATE_EVENTSDISABLER_H_

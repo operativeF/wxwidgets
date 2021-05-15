@@ -82,7 +82,8 @@ protected:
             DoEnableSystemTheme(true, this);
     }
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxSystemThemedControl, C);
+    wxSystemThemedControl(const wxSystemThemedControl<C>&)  = delete;
+	wxSystemThemedControl& operator=(const wxSystemThemedControl<C>&) = delete;
 };
 
 #endif // _WX_SYSTHEMECTRL_H

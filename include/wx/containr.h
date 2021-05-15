@@ -294,7 +294,8 @@ protected:
     wxControlContainer m_container;
 
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxNavigationEnabled, W);
+    wxNavigationEnabled(const wxNavigationEnabled<W>&)  = delete;
+	wxNavigationEnabled& operator=(const wxNavigationEnabled<W>&) = delete;
 };
 
 #endif // _WX_CONTAINR_H_

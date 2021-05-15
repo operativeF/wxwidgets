@@ -60,7 +60,8 @@ public:
 private:
     T *m_array;
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxScopedArray, T);
+    wxScopedArray(const wxScopedArray<T>&)  = delete;
+	wxScopedArray& operator=(const wxScopedArray<T>&) = delete;
 };
 
 // ----------------------------------------------------------------------------

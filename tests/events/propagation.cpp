@@ -83,7 +83,8 @@ private:
     const wxEventType m_evtType;
     const char m_tag;
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(TestEvtHandlerBase, Event);
+    TestEvtHandlerBase(const TestEvtHandlerBase<Event>&)  = delete;
+	TestEvtHandlerBase& operator=(const TestEvtHandlerBase<Event>&) = delete;
 };
 
 struct TestEvtHandler : TestEvtHandlerBase<wxCommandEvent>

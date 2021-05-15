@@ -130,7 +130,8 @@
     private:
         wxTlsKey m_key;
 
-        wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxTlsValue, T);
+        wxTlsValue(const wxTlsValue<T>&)  = delete;
+	wxTlsValue& operator=(const wxTlsValue<T>&) = delete;
     };
 
     #define wxTLS_TYPE(T) wxTlsValue<T>

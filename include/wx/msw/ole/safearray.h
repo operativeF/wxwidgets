@@ -386,7 +386,8 @@ public:
         return result;
     }
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxSafeArray, varType);
+    wxSafeArray(const wxSafeArray<varType>&)  = delete;
+	wxSafeArray& operator=(const wxSafeArray<varType>&) = delete;
 };
 
 #endif // wxUSE_OLE && wxUSE_VARIANT

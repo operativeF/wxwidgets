@@ -79,7 +79,8 @@ public:
 private:
     T* m_ptr;
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxCoTaskMemPtr, T);
+    wxCoTaskMemPtr(const wxCoTaskMemPtr<T>&)  = delete;
+	wxCoTaskMemPtr& operator=(const wxCoTaskMemPtr<T>&) = delete;
 };
 
 #endif // _WX_MSW_PRIVATE_COTASKMEMPTR_H_

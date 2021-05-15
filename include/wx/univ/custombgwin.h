@@ -30,7 +30,8 @@ protected:
         BaseWindowClass::SetBackground(bmp, wxALIGN_NOT, wxTILE);
     }
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxCustomBackgroundWindow, W);
+    wxCustomBackgroundWindow(const wxCustomBackgroundWindow<W>&)  = delete;
+	wxCustomBackgroundWindow& operator=(const wxCustomBackgroundWindow<W>&) = delete;
 };
 
 #endif // _WX_UNIV_CUSTOMBGWIN_H_

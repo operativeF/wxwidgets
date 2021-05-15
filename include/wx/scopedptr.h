@@ -96,7 +96,8 @@ public:
 private:
     T * m_ptr;
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxScopedPtr, T);
+    wxScopedPtr(const wxScopedPtr<T>&)  = delete;
+	wxScopedPtr& operator=(const wxScopedPtr<T>&) = delete;
 };
 
 // ----------------------------------------------------------------------------

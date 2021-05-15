@@ -93,7 +93,8 @@ private:
     }
 
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS(wxCustomBackgroundWindow, W);
+    wxCustomBackgroundWindow(const wxCustomBackgroundWindow<W>&)  = delete;
+	wxCustomBackgroundWindow& operator=(const wxCustomBackgroundWindow<W>&) = delete;
 };
 
 #endif // _WX_GENERIC_CUSTOMBGWIN_H_
