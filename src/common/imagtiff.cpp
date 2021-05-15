@@ -41,7 +41,7 @@ extern "C"
 #include "wx/wfstream.h"
 
 #ifndef TIFFLINKAGEMODE
-    #define TIFFLINKAGEMODE LINKAGEMODE
+    #define TIFFLINKAGEMODE
 #endif
 
 // ============================================================================

@@ -58,7 +58,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPNGHandler,wxImageHandler);
     #ifdef PNGAPI
         #define PNGLINKAGEMODE PNGAPI
     #else
-        #define PNGLINKAGEMODE LINKAGEMODE
+        #define PNGLINKAGEMODE
     #endif
 #endif
 

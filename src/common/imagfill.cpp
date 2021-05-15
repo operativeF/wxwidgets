@@ -26,7 +26,7 @@
 // a color different from the start pixel is reached (wxFLOOD_SURFACE)
 // or fill color is reached (wxFLOOD_BORDER)
 
-static bool LINKAGEMODE MatchPixel(wxImage *img, int x, int y, int w, int h, const wxColour& c)
+static bool MatchPixel(wxImage *img, int x, int y, int w, int h, const wxColour& c)
 {
     if ((x<0)||(x>=w)||(y<0)||(y>=h)) return false;
 
@@ -36,7 +36,7 @@ static bool LINKAGEMODE MatchPixel(wxImage *img, int x, int y, int w, int h, con
     return c.Red() == r && c.Green() == g && c.Blue() == b ;
 }
 
-static bool LINKAGEMODE MatchBoundaryPixel(wxImage *img, int x, int y, int w, int h, const wxColour & fill, const wxColour& bound)
+static bool MatchBoundaryPixel(wxImage *img, int x, int y, int w, int h, const wxColour & fill, const wxColour& bound)
 {
     if ((x<0)||(x>=w)||(y<0)||(y>=h)) return true;
 
@@ -51,7 +51,7 @@ static bool LINKAGEMODE MatchBoundaryPixel(wxImage *img, int x, int y, int w, in
 }
 
 
-static void LINKAGEMODE
+static void
 wxImageFloodFill(wxImage *image,
                  wxCoord x, wxCoord y, const wxBrush & fillBrush,
                  const wxColour& testColour, int style)

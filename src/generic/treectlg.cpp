@@ -2350,7 +2350,7 @@ void wxGenericTreeCtrl::ScrollTo(const wxTreeItemId &item)
 // FIXME: tree sorting functions are not reentrant and not MT-safe!
 static wxGenericTreeCtrl *s_treeBeingSorted = nullptr;
 
-static int LINKAGEMODE tree_ctrl_compare_func(wxGenericTreeItem **item1,
+static int tree_ctrl_compare_func(wxGenericTreeItem **item1,
                                   wxGenericTreeItem **item2)
 {
     wxCHECK_MSG( s_treeBeingSorted, 0,

@@ -134,7 +134,7 @@
 
 #ifdef __WXDEBUG__
     // turn on the trace masks specified in the env variable WXTRACE
-    static void LINKAGEMODE SetTraceMasks();
+    static void SetTraceMasks();
 #endif // __WXDEBUG__
 
 // ----------------------------------------------------------------------------
@@ -1272,7 +1272,7 @@ void wxOnAssert(const char *file,
 
 #ifdef __WXDEBUG__
 
-static void LINKAGEMODE SetTraceMasks()
+static void SetTraceMasks()
 {
 #if wxUSE_LOG
     wxString mask;

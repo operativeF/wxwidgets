@@ -518,7 +518,7 @@ struct wx28HtmlEntityInfo
     unsigned code;
 };
 
-extern "C" int LINKAGEMODE wx28HtmlEntityCompare(const void *key, const void *item)
+extern "C" int wx28HtmlEntityCompare(const void *key, const void *item)
 {
     return wxStrcmp((wxChar*)key, ((wx28HtmlEntityInfo*)item)->name);
 }

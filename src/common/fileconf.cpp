@@ -60,8 +60,8 @@
 // ----------------------------------------------------------------------------
 
 // compare functions for sorting the arrays
-static int LINKAGEMODE CompareEntries(wxFileConfigEntry *p1, wxFileConfigEntry *p2);
-static int LINKAGEMODE CompareGroups(wxFileConfigGroup *p1, wxFileConfigGroup *p2);
+static int CompareEntries(wxFileConfigEntry *p1, wxFileConfigEntry *p2);
+static int CompareGroups(wxFileConfigGroup *p1, wxFileConfigGroup *p2);
 
 // filter strings
 static wxString FilterInValue(const wxString& str);

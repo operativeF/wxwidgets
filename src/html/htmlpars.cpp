@@ -500,7 +500,7 @@ struct wxHtmlEntityInfo
 };
 
 extern "C" {
-static int LINKAGEMODE wxHtmlEntityCompare(const void *key, const void *item)
+static int wxHtmlEntityCompare(const void *key, const void *item)
 {
 #if wxUSE_UNICODE_UTF8
     return strcmp(static_cast<const char*>(key), static_cast<const wxHtmlEntityInfo*>(item)->name);

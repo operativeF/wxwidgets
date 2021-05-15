@@ -353,11 +353,6 @@
     #define wxSTDCALL
 #endif /*  platform */
 
-/*  LINKAGEMODE mode is most likely empty everywhere */
-#ifndef LINKAGEMODE
-    #define LINKAGEMODE
-#endif /*  LINKAGEMODE */
-
 /*  wxCALLBACK should be used for the functions which are called back by */
 /*  Windows (such as compare function for wxListCtrl) */
 #if defined(__WIN32__)
@@ -2245,10 +2240,10 @@ enum wxUpdateUI
    return a negative value, 0 or positive value if the first element is less
    than, equal or greater than the second */
 
-typedef int (* LINKAGEMODE wxSortCompareFunction)(const void *elem1, const void *elem2);
+typedef int (* wxSortCompareFunction)(const void *elem1, const void *elem2);
 
 /* wxList iterator function */
-typedef int (* LINKAGEMODE wxListIterateFunction)(void *current);
+typedef int (* wxListIterateFunction)(void *current);
 
 
 /*  ---------------------------------------------------------------------------- */

@@ -24,7 +24,7 @@
 FORCE_LINK_ME(m_pre)
 
 // replaces '\t', ' ' and '\n' with HTML markup:
-static wxString LINKAGEMODE HtmlizeLinebreaks(const wxString& str)
+static wxString HtmlizeLinebreaks(const wxString& str)
 {
     wxString out;
     out.reserve(str.length()); // we'll certainly need at least that

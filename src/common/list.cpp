@@ -682,8 +682,7 @@ bool wxStringList::Member(const wxChar *s) const
 
 extern "C"
 {
-static int LINKAGEMODE
-
+static int
 wx_comparestrings(const void *arg1, const void *arg2)
 {
     const wxChar* s1 = *static_cast<wxChar* const*>(arg1);

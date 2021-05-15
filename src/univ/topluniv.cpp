@@ -420,7 +420,7 @@ wxBEGIN_EVENT_TABLE(wxInteractiveMoveHandler, wxEvtHandler)
 wxEND_EVENT_TABLE()
 
 
-static inline LINKAGEMODE
+static inline
 void wxApplyResize(wxInteractiveMoveData& data, const wxPoint& diff)
 {
     if ( data.m_flags & wxINTERACTIVE_RESIZE_W )
