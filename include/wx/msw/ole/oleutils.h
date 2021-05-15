@@ -125,7 +125,7 @@ public:
     bool Eq(wxVariantData& data) const override;
 
 #if wxUSE_STD_IOSTREAM
-    bool Write(wxSTD ostream& str) const override;
+    bool Write(std::ostream& str) const override;
 #endif
     bool Write(wxString& str) const override;
 
@@ -151,7 +151,7 @@ public:
     bool Eq(wxVariantData& data) const override;
 
 #if wxUSE_STD_IOSTREAM
-    bool Write(wxSTD ostream& str) const override;
+    bool Write(std::ostream& str) const override;
 #endif
     bool Write(wxString& str) const override;
 
@@ -179,7 +179,7 @@ public:
     bool Eq(wxVariantData& data) const override;
 
 #if wxUSE_STD_IOSTREAM
-    bool Write(wxSTD ostream& str) const override;
+    bool Write(std::ostream& str) const override;
 #endif
     bool Write(wxString& str) const override;
 

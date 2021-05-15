@@ -485,11 +485,6 @@
  */
 #include "wx/chkconf.h"
 
-
-/* These macros exist only for compatibility, don't use them in the new code */
-#define wxUSE_IOSTREAMH 0
-#define wxSTD std::
-
 /* On OpenVMS with the most recent HP C++ compiler some function (i.e. wscanf)
  * are only available in the std-namespace. (BUG???)
  */

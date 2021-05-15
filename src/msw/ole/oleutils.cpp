@@ -129,7 +129,7 @@ bool wxVariantDataCurrency::Eq(wxVariantData& data) const
 }
 
 #if wxUSE_STD_IOSTREAM
-bool wxVariantDataCurrency::Write(wxSTD ostream& str) const
+bool wxVariantDataCurrency::Write(std::ostream& str) const
 {
     wxString s;
     Write(s);
@@ -182,7 +182,7 @@ bool wxVariantDataErrorCode::Eq(wxVariantData& data) const
 }
 
 #if wxUSE_STD_IOSTREAM
-bool wxVariantDataErrorCode::Write(wxSTD ostream& str) const
+bool wxVariantDataErrorCode::Write(std::ostream& str) const
 {
     wxString s;
     Write(s);
@@ -230,7 +230,7 @@ bool wxVariantDataSafeArray::Eq(wxVariantData& data) const
 }
 
 #if wxUSE_STD_IOSTREAM
-bool wxVariantDataSafeArray::Write(wxSTD ostream& str) const
+bool wxVariantDataSafeArray::Write(std::ostream& str) const
 {
     wxString s;
     Write(s);

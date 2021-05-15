@@ -24,8 +24,8 @@
 // In your own code you would normally use std::stream classes only and so
 // wouldn't need these typedefs
 #if wxUSE_STD_IOSTREAM
-    typedef wxSTD istream DocumentIstream;
-    typedef wxSTD ostream DocumentOstream;
+    typedef std::istream DocumentIstream;
+    typedef std::ostream DocumentOstream;
 #else // !wxUSE_STD_IOSTREAM
     typedef wxInputStream DocumentIstream;
     typedef wxOutputStream DocumentOstream;

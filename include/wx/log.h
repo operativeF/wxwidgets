@@ -686,7 +686,7 @@ class WXDLLIMPEXP_BASE wxLogStream : public wxLog,
 {
 public:
     // redirect log output to an ostream
-    wxLogStream(wxSTD ostream *ostr = (wxSTD ostream *) NULL,
+    wxLogStream(std::ostream *ostr = (std::ostream *) NULL,
                 const wxMBConv& conv = wxConvWhateverWorks);
 
 protected:
@@ -694,7 +694,7 @@ protected:
     void DoLogText(const wxString& msg) override;
 
     // using ptr here to avoid including <iostream.h> from this file
-    wxSTD ostream *m_ostr;
+    std::ostream *m_ostr;
 
     wxLogStream(const wxLogStream&) = delete;
 	wxLogStream& operator=(const wxLogStream&) = delete;
