@@ -611,11 +611,6 @@
         wxDEPRECATED(func) { body }
 #endif
 
-/*  NULL declaration: it must be defined as 0 for C++ programs (in particular, */
-/*  it must not be defined as "(void *)0" which is standard for C but completely */
-/*  breaks C++ code) */
-#include <stddef.h>
-
 /*  size of statically declared array */
 #define WXSIZEOF(array)   (sizeof(array)/sizeof(array[0]))
 
