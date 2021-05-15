@@ -326,7 +326,7 @@ void TextCtrlTestCase::StreamInput()
 
 void TextCtrlTestCase::Redirector()
 {
-#if wxHAS_TEXT_WINDOW_STREAM && wxUSE_STD_IOSTREAM
+#if wxHAS_TEXT_WINDOW_STREAM
 
     wxStreamToTextRedirector redirect(m_text);
 

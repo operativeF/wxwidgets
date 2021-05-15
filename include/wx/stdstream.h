@@ -11,9 +11,9 @@
 #ifndef _WX_STDSTREAM_H_
 #define _WX_STDSTREAM_H_
 
-#include "wx/defs.h"    // wxUSE_STD_IOSTREAM
+#include "wx/defs.h"
 
-#if wxUSE_STREAMS && wxUSE_STD_IOSTREAM
+#if wxUSE_STREAMS
 
 #include "wx/defs.h"
 #include "wx/stream.h"
@@ -117,6 +117,6 @@ protected:
     wxStdOutputStreamBuffer m_streamBuffer;
 };
 
-#endif // wxUSE_STREAMS && wxUSE_STD_IOSTREAM
+#endif // wxUSE_STREAMS
 
 #endif // _WX_STDSTREAM_H_

@@ -282,7 +282,7 @@
 #define wxUSE_STL 0
 
 // This is not a real option but is used as the default value for
-// wxUSE_STD_IOSTREAM, and wxUSE_STD_STRING.
+// wxUSE_STD_STRING.
 //
 // Set it to 0 if you want to disable the use of all standard classes
 // completely for some reason.

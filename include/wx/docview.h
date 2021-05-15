@@ -37,11 +37,7 @@ class WXDLLIMPEXP_FWD_BASE wxConfigBase;
 
 class wxDocChildFrameAnyBase;
 
-#if wxUSE_STD_IOSTREAM
-  #include "wx/iosfwrap.h"
-#else
-  #include "wx/stream.h"
-#endif
+#include "wx/iosfwrap.h"
 
 // Flags for wxDocManager (can be combined).
 enum
@@ -98,13 +94,8 @@ public:
     virtual bool SaveAs();
     virtual bool Revert();
 
-#if wxUSE_STD_IOSTREAM
     virtual std::ostream& SaveObject(std::ostream& stream);
     virtual std::istream& LoadObject(std::istream& stream);
-#else
-    virtual wxOutputStream& SaveObject(wxOutputStream& stream);
-    virtual wxInputStream& LoadObject(wxInputStream& stream);
-#endif
 
     // Called by wxWidgets
     virtual bool OnSaveDocument(const wxString& filename);
@@ -971,7 +962,6 @@ private:
 
 // For compatibility with existing file formats:
 // converts from/to a stream to/from a temporary file.
-#if wxUSE_STD_IOSTREAM
 bool WXDLLIMPEXP_CORE
 wxTransferFileToStream(const wxString& filename, std::ostream& stream);
 bool WXDLLIMPEXP_CORE
@@ -981,7 +971,6 @@ bool WXDLLIMPEXP_CORE
 wxTransferFileToStream(const wxString& filename, wxOutputStream& stream);
 bool WXDLLIMPEXP_CORE
 wxTransferStreamToFile(wxInputStream& stream, const wxString& filename);
-#endif // wxUSE_STD_IOSTREAM
 
 inline wxViewVector wxDocument::GetViewsVector() const
 {

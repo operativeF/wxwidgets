@@ -858,8 +858,8 @@ void wxLogStderr::DoLogText(const wxString& msg)
 // wxLogStream implementation
 // ----------------------------------------------------------------------------
 
-#if wxUSE_STD_IOSTREAM
 #include "wx/ioswrap.h"
+
 wxLogStream::wxLogStream(std::ostream *ostr, const wxMBConv& conv)
     : wxMessageOutputWithConv(conv)
 {
@@ -874,7 +874,6 @@ void wxLogStream::DoLogText(const wxString& msg)
     const wxCharBuffer& buf = PrepareForOutput(msg);
     m_ostr->write(buf, buf.length());
 }
-#endif // wxUSE_STD_IOSTREAM
 
 // ----------------------------------------------------------------------------
 // wxLogChain

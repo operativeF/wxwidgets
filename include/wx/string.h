@@ -4136,8 +4136,6 @@ namespace std
 // Implementation only from here until the end of file
 // ---------------------------------------------------------------------------
 
-#if wxUSE_STD_IOSTREAM
-
 #include "wx/iosfwrap.h"
 
 WXDLLIMPEXP_BASE std::ostream& operator<<(std::ostream&, const wxString&);
@@ -4154,8 +4152,6 @@ WXDLLIMPEXP_BASE std::wostream& operator<<(std::wostream&, const wxCStrData&);
 WXDLLIMPEXP_BASE std::wostream& operator<<(std::wostream&, const wxScopedWCharBuffer&);
 
 #endif  // defined(HAVE_WOSTREAM)
-
-#endif  // wxUSE_STD_IOSTREAM
 
 // ---------------------------------------------------------------------------
 // wxCStrData implementation

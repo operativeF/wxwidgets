@@ -1668,7 +1668,6 @@ void FormMain::PopulateWithLibraryConfig ()
     ADD_WX_LIB_CONF( wxUSE_CMDLINE_PARSER )
     ADD_WX_LIB_CONF( wxUSE_THREADS )
     ADD_WX_LIB_CONF( wxUSE_STREAMS )
-    ADD_WX_LIB_CONF( wxUSE_STD_IOSTREAM )
 
     ADD_WX_LIB_CONF_GROUP("Non-GUI Features")
     ADD_WX_LIB_CONF( wxUSE_LONGLONG )

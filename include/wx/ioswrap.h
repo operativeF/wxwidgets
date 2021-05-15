@@ -8,8 +8,6 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_STD_IOSTREAM
-
 #include "wx/beforestd.h"
 
 #include <iostream>
@@ -19,7 +17,3 @@
 #ifdef __WINDOWS__
 #   include "wx/msw/winundef.h"
 #endif
-
-#endif
-  // wxUSE_STD_IOSTREAM
-

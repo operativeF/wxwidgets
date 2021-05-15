@@ -17,8 +17,6 @@
     #include "wx/string.h"
 #endif // WX_PRECOMP
 
-#if wxUSE_STD_IOSTREAM
-
 #include <sstream>
 
 #define ASSERT_OSTREAM_EQUAL(p, s) CPPUNIT_ASSERT_EQUAL(std::string(p), s.str())
@@ -58,5 +56,3 @@ void StringIostreamTestCase::Out()
     ASSERT_WOSTREAM_EQUAL(L"bye", ws);
 #endif
 }
-
-#endif // wxUSE_STD_IOSTREAM

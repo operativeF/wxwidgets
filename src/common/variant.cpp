@@ -25,9 +25,7 @@
     #endif
 #endif
 
-#if wxUSE_STD_IOSTREAM
-    #include <fstream>
-#endif
+#include <fstream>
 
 #if wxUSE_STREAMS
     #include "wx/txtstrm.h"
@@ -238,10 +236,8 @@ public:
 
     bool Read(wxString& str) override;
     bool Write(wxString& str) const override;
-#if wxUSE_STD_IOSTREAM
     bool Read(std::istream& str) override;
     bool Write(std::ostream& str) const override;
-#endif
 #if wxUSE_STREAMS
     virtual bool Read(wxInputStream& str);
     virtual bool Write(wxOutputStream &str) const;
@@ -283,7 +279,6 @@ bool wxVariantDataLong::Eq(wxVariantData& data) const
     return (otherData.m_value == m_value);
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataLong::Write(std::ostream& str) const
 {
     wxString s;
@@ -291,7 +286,6 @@ bool wxVariantDataLong::Write(std::ostream& str) const
     str << (const char*) s.mb_str();
     return true;
 }
-#endif
 
 bool wxVariantDataLong::Write(wxString& str) const
 {
@@ -299,13 +293,11 @@ bool wxVariantDataLong::Write(wxString& str) const
     return true;
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataLong::Read(std::istream& str)
 {
     str >> m_value;
     return true;
 }
-#endif
 
 #if wxUSE_STREAMS
 bool wxVariantDataLong::Write(wxOutputStream& str) const
@@ -405,13 +397,9 @@ public:
 
     bool Eq(wxVariantData& data) const override;
     bool Read(wxString& str) override;
-#if wxUSE_STD_IOSTREAM
     bool Write(std::ostream& str) const override;
-#endif
     bool Write(wxString& str) const override;
-#if wxUSE_STD_IOSTREAM
     bool Read(std::istream& str) override;
-#endif
 #if wxUSE_STREAMS
     virtual bool Read(wxInputStream& str);
     virtual bool Write(wxOutputStream &str) const;
@@ -436,7 +424,6 @@ bool wxVariantDoubleData::Eq(wxVariantData& data) const
     return wxIsSameDouble(otherData.m_value, m_value);
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDoubleData::Write(std::ostream& str) const
 {
     wxString s;
@@ -444,7 +431,6 @@ bool wxVariantDoubleData::Write(std::ostream& str) const
     str << (const char*) s.mb_str();
     return true;
 }
-#endif
 
 bool wxVariantDoubleData::Write(wxString& str) const
 {
@@ -452,13 +438,11 @@ bool wxVariantDoubleData::Write(wxString& str) const
     return true;
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDoubleData::Read(std::istream& str)
 {
     str >> m_value;
     return true;
 }
-#endif
 
 #if wxUSE_STREAMS
 bool wxVariantDoubleData::Write(wxOutputStream& str) const
@@ -544,14 +528,10 @@ public:
     inline void SetValue(bool value) { m_value = value; }
 
     bool Eq(wxVariantData& data) const override;
-#if wxUSE_STD_IOSTREAM
     bool Write(std::ostream& str) const override;
-#endif
     bool Write(wxString& str) const override;
     bool Read(wxString& str) override;
-#if wxUSE_STD_IOSTREAM
     bool Read(std::istream& str) override;
-#endif
 #if wxUSE_STREAMS
     virtual bool Read(wxInputStream& str);
     virtual bool Write(wxOutputStream& str) const;
@@ -576,7 +556,6 @@ bool wxVariantDataBool::Eq(wxVariantData& data) const
     return (otherData.m_value == m_value);
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataBool::Write(std::ostream& str) const
 {
     wxString s;
@@ -584,7 +563,6 @@ bool wxVariantDataBool::Write(std::ostream& str) const
     str << (const char*) s.mb_str();
     return true;
 }
-#endif
 
 bool wxVariantDataBool::Write(wxString& str) const
 {
@@ -592,14 +570,12 @@ bool wxVariantDataBool::Write(wxString& str) const
     return true;
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataBool::Read(std::istream& WXUNUSED(str))
 {
     wxFAIL_MSG(wxT("Unimplemented"));
 //    str >> (long) m_value;
     return false;
 }
-#endif
 
 #if wxUSE_STREAMS
 bool wxVariantDataBool::Write(wxOutputStream& str) const
@@ -687,10 +663,8 @@ public:
     inline void SetValue(const wxUniChar& value) { m_value = value; }
 
     bool Eq(wxVariantData& data) const override;
-#if wxUSE_STD_IOSTREAM
     bool Read(std::istream& str) override;
     bool Write(std::ostream& str) const override;
-#endif
     bool Read(wxString& str) override;
     bool Write(wxString& str) const override;
 #if wxUSE_STREAMS
@@ -716,13 +690,11 @@ bool wxVariantDataChar::Eq(wxVariantData& data) const
     return (otherData.m_value == m_value);
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataChar::Write(std::ostream& str) const
 {
     str << wxString(m_value);
     return true;
 }
-#endif
 
 bool wxVariantDataChar::Write(wxString& str) const
 {
@@ -730,14 +702,12 @@ bool wxVariantDataChar::Write(wxString& str) const
     return true;
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataChar::Read(std::istream& WXUNUSED(str))
 {
     wxFAIL_MSG(wxT("Unimplemented"));
 
     return false;
 }
-#endif
 
 #if wxUSE_STREAMS
 bool wxVariantDataChar::Write(wxOutputStream& str) const
@@ -840,14 +810,10 @@ public:
     inline void SetValue(const wxString& value) { m_value = value; }
 
     bool Eq(wxVariantData& data) const override;
-#if wxUSE_STD_IOSTREAM
     bool Write(std::ostream& str) const override;
-#endif
     bool Read(wxString& str) override;
     bool Write(wxString& str) const override;
-#if wxUSE_STD_IOSTREAM
     bool Read(std::istream& WXUNUSED(str)) override { return false; }
-#endif
 #if wxUSE_STREAMS
     virtual bool Read(wxInputStream& str);
     virtual bool Write(wxOutputStream& str) const;
@@ -891,13 +857,11 @@ bool wxVariantDataString::Eq(wxVariantData& data) const
     return (otherData.m_value == m_value);
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataString::Write(std::ostream& str) const
 {
     str << (const char*) m_value.mb_str();
     return true;
 }
-#endif
 
 bool wxVariantDataString::Write(wxString& str) const
 {
@@ -1035,13 +999,9 @@ public:
     inline void SetValue(wxObject* value) { m_value = value; }
 
     bool Eq(wxVariantData& data) const override;
-#if wxUSE_STD_IOSTREAM
     bool Write(std::ostream& str) const override;
-#endif
     bool Write(wxString& str) const override;
-#if wxUSE_STD_IOSTREAM
     bool Read(std::istream& str) override;
-#endif
     bool Read(wxString& str) override;
     wxString GetType() const override ;
     wxVariantData* Clone() const override { return new wxVariantDataWxObjectPtr(m_value); }
@@ -1086,7 +1046,6 @@ wxClassInfo* wxVariantDataWxObjectPtr::GetValueClassInfo()
     return returnVal;
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataWxObjectPtr::Write(std::ostream& str) const
 {
     wxString s;
@@ -1094,7 +1053,6 @@ bool wxVariantDataWxObjectPtr::Write(std::ostream& str) const
     str << (const char*) s.mb_str();
     return true;
 }
-#endif
 
 bool wxVariantDataWxObjectPtr::Write(wxString& str) const
 {
@@ -1102,13 +1060,11 @@ bool wxVariantDataWxObjectPtr::Write(wxString& str) const
     return true;
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataWxObjectPtr::Read(std::istream& WXUNUSED(str))
 {
     // Not implemented
     return false;
 }
-#endif
 
 bool wxVariantDataWxObjectPtr::Read(wxString& WXUNUSED(str))
 {
@@ -1159,13 +1115,9 @@ public:
     inline void SetValue(void* value) { m_value = value; }
 
     bool Eq(wxVariantData& data) const override;
-#if wxUSE_STD_IOSTREAM
     bool Write(std::ostream& str) const override;
-#endif
     bool Write(wxString& str) const override;
-#if wxUSE_STD_IOSTREAM
     bool Read(std::istream& str) override;
-#endif
     bool Read(wxString& str) override;
     wxString GetType() const override { return wxT("void*"); }
     wxVariantData* Clone() const override { return new wxVariantDataVoidPtr(m_value); }
@@ -1186,7 +1138,6 @@ bool wxVariantDataVoidPtr::Eq(wxVariantData& data) const
     return (otherData.m_value == m_value);
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataVoidPtr::Write(std::ostream& str) const
 {
     wxString s;
@@ -1194,7 +1145,6 @@ bool wxVariantDataVoidPtr::Write(std::ostream& str) const
     str << (const char*) s.mb_str();
     return true;
 }
-#endif
 
 bool wxVariantDataVoidPtr::Write(wxString& str) const
 {
@@ -1202,13 +1152,11 @@ bool wxVariantDataVoidPtr::Write(wxString& str) const
     return true;
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataVoidPtr::Read(std::istream& WXUNUSED(str))
 {
     // Not implemented
     return false;
 }
-#endif
 
 bool wxVariantDataVoidPtr::Read(wxString& WXUNUSED(str))
 {
@@ -1274,13 +1222,9 @@ public:
     inline void SetValue(const wxDateTime& value) { m_value = value; }
 
     bool Eq(wxVariantData& data) const override;
-#if wxUSE_STD_IOSTREAM
     bool Write(std::ostream& str) const override;
-#endif
     bool Write(wxString& str) const override;
-#if wxUSE_STD_IOSTREAM
     bool Read(std::istream& str) override;
-#endif
     bool Read(wxString& str) override;
     wxString GetType() const override { return wxT("datetime"); }
     wxVariantData* Clone() const override { return new wxVariantDataDateTime(m_value); }
@@ -1302,7 +1246,6 @@ bool wxVariantDataDateTime::Eq(wxVariantData& data) const
 }
 
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataDateTime::Write(std::ostream& str) const
 {
     wxString value;
@@ -1310,7 +1253,6 @@ bool wxVariantDataDateTime::Write(std::ostream& str) const
     str << value.c_str();
     return true;
 }
-#endif
 
 
 bool wxVariantDataDateTime::Write(wxString& str) const
@@ -1323,13 +1265,11 @@ bool wxVariantDataDateTime::Write(wxString& str) const
 }
 
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataDateTime::Read(std::istream& WXUNUSED(str))
 {
     // Not implemented
     return false;
 }
-#endif
 
 
 bool wxVariantDataDateTime::Read(wxString& str)
@@ -1407,13 +1347,9 @@ public:
     void SetValue(const wxArrayString& value) { m_value = value; }
 
     bool Eq(wxVariantData& data) const override;
-#if wxUSE_STD_IOSTREAM
     bool Write(std::ostream& str) const override;
-#endif
     bool Write(wxString& str) const override;
-#if wxUSE_STD_IOSTREAM
     bool Read(std::istream& str) override;
-#endif
     bool Read(wxString& str) override;
     wxString GetType() const override { return wxT("arrstring"); }
     wxVariantData* Clone() const override { return new wxVariantDataArrayString(m_value); }
@@ -1434,13 +1370,11 @@ bool wxVariantDataArrayString::Eq(wxVariantData& data) const
     return otherData.m_value == m_value;
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataArrayString::Write(std::ostream& WXUNUSED(str)) const
 {
     // Not implemented
     return false;
 }
-#endif
 
 bool wxVariantDataArrayString::Write(wxString& str) const
 {
@@ -1457,13 +1391,11 @@ bool wxVariantDataArrayString::Write(wxString& str) const
 }
 
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataArrayString::Read(std::istream& WXUNUSED(str))
 {
     // Not implemented
     return false;
 }
-#endif
 
 
 bool wxVariantDataArrayString::Read(wxString& str)
@@ -1538,10 +1470,8 @@ public:
 
     bool Read(wxString& str) override;
     bool Write(wxString& str) const override;
-#if wxUSE_STD_IOSTREAM
     bool Read(std::istream& str) override;
     bool Write(std::ostream& str) const override;
-#endif
 #if wxUSE_STREAMS
     virtual bool Read(wxInputStream& str);
     virtual bool Write(wxOutputStream &str) const;
@@ -1606,7 +1536,6 @@ bool wxVariantDataLongLong::Eq(wxVariantData& data) const
     return (otherData.m_value == m_value);
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataLongLong::Write(std::ostream& str) const
 {
     wxString s;
@@ -1614,7 +1543,6 @@ bool wxVariantDataLongLong::Write(std::ostream& str) const
     str << (const char*) s.mb_str();
     return true;
 }
-#endif
 
 bool wxVariantDataLongLong::Write(wxString& str) const
 {
@@ -1626,13 +1554,11 @@ bool wxVariantDataLongLong::Write(wxString& str) const
 #endif
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataLongLong::Read(std::istream& WXUNUSED(str))
 {
     wxFAIL_MSG(wxS("Unimplemented"));
     return false;
 }
-#endif
 
 #if wxUSE_STREAMS
 bool wxVariantDataLongLong::Write(wxOutputStream& str) const
@@ -1737,10 +1663,8 @@ public:
 
     bool Read(wxString& str) override;
     bool Write(wxString& str) const override;
-#if wxUSE_STD_IOSTREAM
     bool Read(std::istream& str) override;
     bool Write(std::ostream& str) const override;
-#endif
 #if wxUSE_STREAMS
     virtual bool Read(wxInputStream& str);
     virtual bool Write(wxOutputStream &str) const;
@@ -1806,7 +1730,6 @@ bool wxVariantDataULongLong::Eq(wxVariantData& data) const
     return (otherData.m_value == m_value);
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataULongLong::Write(std::ostream& str) const
 {
     wxString s;
@@ -1814,7 +1737,6 @@ bool wxVariantDataULongLong::Write(std::ostream& str) const
     str << (const char*) s.mb_str();
     return true;
 }
-#endif
 
 bool wxVariantDataULongLong::Write(wxString& str) const
 {
@@ -1826,13 +1748,11 @@ bool wxVariantDataULongLong::Write(wxString& str) const
 #endif
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataULongLong::Read(std::istream& WXUNUSED(str))
 {
     wxFAIL_MSG(wxS("Unimplemented"));
     return false;
 }
-#endif
 
 #if wxUSE_STREAMS
 bool wxVariantDataULongLong::Write(wxOutputStream& str) const
@@ -1933,13 +1853,9 @@ public:
     void SetValue(const wxVariantList& value) ;
 
     bool Eq(wxVariantData& data) const override;
-#if wxUSE_STD_IOSTREAM
     bool Write(std::ostream& str) const override;
-#endif
     bool Write(wxString& str) const override;
-#if wxUSE_STD_IOSTREAM
     bool Read(std::istream& str) override;
-#endif
     bool Read(wxString& str) override;
     wxString GetType() const override { return wxT("list"); }
 
@@ -2046,7 +1962,6 @@ bool wxVariantDataList::Eq(wxVariantData& data) const
     return !(node1 || node2);
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataList::Write(std::ostream& str) const
 {
     wxString s;
@@ -2054,7 +1969,6 @@ bool wxVariantDataList::Write(std::ostream& str) const
     str << (const char*) s.mb_str();
     return true;
 }
-#endif
 
 bool wxVariantDataList::Write(wxString& str) const
 {
@@ -2073,14 +1987,12 @@ bool wxVariantDataList::Write(wxString& str) const
     return true;
 }
 
-#if wxUSE_STD_IOSTREAM
 bool wxVariantDataList::Read(std::istream& WXUNUSED(str))
 {
     wxFAIL_MSG(wxT("Unimplemented"));
     // TODO
     return false;
 }
-#endif
 
 bool wxVariantDataList::Read(wxString& WXUNUSED(str))
 {

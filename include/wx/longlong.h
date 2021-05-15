@@ -323,11 +323,9 @@ public:
         // conversion to byte array: returns a pointer to static buffer!
     void *asArray() const;
 
-#if wxUSE_STD_IOSTREAM
         // input/output
     friend WXDLLIMPEXP_BASE
     std::ostream& operator<<(std::ostream&, const wxLongLongNative&);
-#endif
 
     friend WXDLLIMPEXP_BASE
     wxString& operator<<(wxString&, const wxLongLongNative&);
@@ -542,11 +540,9 @@ public:
         // conversion to byte array: returns a pointer to static buffer!
     void *asArray() const;
 
-#if wxUSE_STD_IOSTREAM
-        // input/output
+    // input/output
     friend WXDLLIMPEXP_BASE
     std::ostream& operator<<(std::ostream&, const wxULongLongNative&);
-#endif
 
     friend WXDLLIMPEXP_BASE
     wxString& operator<<(wxString&, const wxULongLongNative&);
@@ -783,10 +779,8 @@ public:
 
     void *asArray() const;
 
-#if wxUSE_STD_IOSTREAM
     friend WXDLLIMPEXP_BASE
     std::ostream& operator<<(std::ostream&, const wxLongLongWx&);
-#endif // wxUSE_STD_IOSTREAM
 
     friend WXDLLIMPEXP_BASE
     wxString& operator<<(wxString&, const wxLongLongWx&);
@@ -999,10 +993,8 @@ public:
 
     void *asArray() const;
 
-#if wxUSE_STD_IOSTREAM
     friend WXDLLIMPEXP_BASE
     std::ostream& operator<<(std::ostream&, const wxULongLongWx&);
-#endif // wxUSE_STD_IOSTREAM
 
     friend WXDLLIMPEXP_BASE
     wxString& operator<<(wxString&, const wxULongLongWx&);

@@ -25,11 +25,8 @@
     #include "wx/wx.h"
 #endif
 
-#if wxUSE_STD_IOSTREAM
-    #include <iostream>
-#else
-    #include "wx/txtstrm.h"
-#endif
+#include <iostream>
+
 #include "wx/wfstream.h"
 
 #include "doc.h"
@@ -43,11 +40,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(DrawingDocument, wxDocument);
 
 DocumentOstream& DrawingDocument::SaveObject(DocumentOstream& ostream)
 {
-#if wxUSE_STD_IOSTREAM
     DocumentOstream& stream = ostream;
-#else
-    wxTextOutputStream stream(ostream);
-#endif
 
     wxDocument::SaveObject(ostream);
 
@@ -65,11 +58,7 @@ DocumentOstream& DrawingDocument::SaveObject(DocumentOstream& ostream)
 
 DocumentIstream& DrawingDocument::LoadObject(DocumentIstream& istream)
 {
-#if wxUSE_STD_IOSTREAM
     DocumentIstream& stream = istream;
-#else
-    wxTextInputStream stream(istream);
-#endif
 
     wxDocument::LoadObject(istream);
 
@@ -78,11 +67,7 @@ DocumentIstream& DrawingDocument::LoadObject(DocumentIstream& istream)
     if ( count < 0 )
     {
         wxLogWarning("Drawing document corrupted: invalid segments count.");
-#if wxUSE_STD_IOSTREAM
         istream.clear(std::ios::badbit);
-#else
-        istream.Reset(wxSTREAM_READ_ERROR);
-#endif
         return istream;
     }
 
@@ -130,12 +115,7 @@ bool DrawingDocument::PopLastSegment(DoodleSegment *segment)
 
 DocumentOstream& DoodleSegment::SaveObject(DocumentOstream& ostream)
 {
-#if wxUSE_STD_IOSTREAM
     DocumentOstream& stream = ostream;
-#else
-    wxTextOutputStream stream(ostream);
-#endif
-
     const wxInt32 count = m_lines.size();
     stream << count << '\n';
 
@@ -154,11 +134,7 @@ DocumentOstream& DoodleSegment::SaveObject(DocumentOstream& ostream)
 
 DocumentIstream& DoodleSegment::LoadObject(DocumentIstream& istream)
 {
-#if wxUSE_STD_IOSTREAM
     DocumentIstream& stream = istream;
-#else
-    wxTextInputStream stream(istream);
-#endif
 
     wxInt32 count = 0;
     stream >> count;

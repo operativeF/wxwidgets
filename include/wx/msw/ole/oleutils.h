@@ -124,9 +124,7 @@ public:
 
     bool Eq(wxVariantData& data) const override;
 
-#if wxUSE_STD_IOSTREAM
     bool Write(std::ostream& str) const override;
-#endif
     bool Write(wxString& str) const override;
 
     wxVariantData* Clone() const override { return new wxVariantDataCurrency(m_value); }
@@ -150,9 +148,7 @@ public:
 
     bool Eq(wxVariantData& data) const override;
 
-#if wxUSE_STD_IOSTREAM
     bool Write(std::ostream& str) const override;
-#endif
     bool Write(wxString& str) const override;
 
     wxVariantData* Clone() const override { return new wxVariantDataErrorCode(m_value); }
@@ -178,9 +174,7 @@ public:
 
     bool Eq(wxVariantData& data) const override;
 
-#if wxUSE_STD_IOSTREAM
     bool Write(std::ostream& str) const override;
-#endif
     bool Write(wxString& str) const override;
 
     wxVariantData* Clone() const override { return new wxVariantDataSafeArray(m_value); }

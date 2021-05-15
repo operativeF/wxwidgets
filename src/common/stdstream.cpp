@@ -16,7 +16,7 @@
 #include "wx/wxprec.h"
 
 
-#if wxUSE_STREAMS && wxUSE_STD_IOSTREAM
+#if wxUSE_STREAMS
 
 #ifndef WX_PRECOMP
 #endif
@@ -261,4 +261,4 @@ wxStdOutputStream::wxStdOutputStream(wxOutputStream& stream) :
     std::ios::init(&m_streamBuffer);
 }
 
-#endif // wxUSE_STREAMS && wxUSE_STD_IOSTREAM
+#endif // wxUSE_STREAMS

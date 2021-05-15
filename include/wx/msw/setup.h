@@ -286,25 +286,11 @@
 #define wxUSE_STL 0
 
 // This is not a real option but is used as the default value for
-// wxUSE_STD_IOSTREAM, and wxUSE_STD_STRING.
+// wxUSE_STD_STRING.
 //
 // Set it to 0 if you want to disable the use of all standard classes
 // completely for some reason.
 #define wxUSE_STD_DEFAULT  1
-
-// Use standard C++ streams if 1 instead of wx streams in some places. If
-// disabled, wx streams are used everywhere and wxWidgets doesn't depend on the
-// standard streams library.
-//
-// Notice that enabling this does not replace wx streams with std streams
-// everywhere, in a lot of places wx streams are used no matter what.
-//
-// Default is 1 if compiler supports it.
-//
-// Recommended setting: 1 if you use the standard streams anyhow and so
-//                      dependency on the standard streams library is not a
-//                      problem
-#define wxUSE_STD_IOSTREAM  wxUSE_STD_DEFAULT
 
 // Enable minimal interoperability with the standard C++ string class if 1.
 // "Minimal" means that wxString can be constructed from std::string or

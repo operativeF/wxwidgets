@@ -8,13 +8,8 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#if wxUSE_STD_IOSTREAM
-
 #include <iosfwd>
 
 #ifdef __WINDOWS__
 #   include "wx/msw/winundef.h"
 #endif
-
-#endif // wxUSE_STD_IOSTREAM
-

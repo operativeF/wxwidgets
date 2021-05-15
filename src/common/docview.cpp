@@ -59,14 +59,10 @@
 #include "wx/scopeguard.h"
 #include "wx/except.h"
 
-#if wxUSE_STD_IOSTREAM
-    #include "wx/beforestd.h"
-    #include <fstream>
-    #include <iostream>
-    #include "wx/afterstd.h"
-#else
-    #include "wx/wfstream.h"
-#endif
+#include "wx/beforestd.h"
+#include <fstream>
+#include <iostream>
+#include "wx/afterstd.h"
 
 // ----------------------------------------------------------------------------
 // wxWidgets macros
@@ -425,20 +421,12 @@ bool wxDocument::OnOpenDocument(const wxString& file)
     return true;
 }
 
-#if wxUSE_STD_IOSTREAM
 std::istream& wxDocument::LoadObject(std::istream& stream)
-#else
-wxInputStream& wxDocument::LoadObject(wxInputStream& stream)
-#endif
 {
     return stream;
 }
 
-#if wxUSE_STD_IOSTREAM
 std::ostream& wxDocument::SaveObject(std::ostream& stream)
-#else
-wxOutputStream& wxDocument::SaveObject(wxOutputStream& stream)
-#endif
 {
     return stream;
 }
@@ -607,13 +595,8 @@ void wxDocument::OnChangeFilename(bool notifyViews)
 
 bool wxDocument::DoSaveDocument(const wxString& file)
 {
-#if wxUSE_STD_IOSTREAM
     std::ofstream store(file.mb_str(), std::ios::binary);
     if ( !store )
-#else
-    wxFileOutputStream store(file);
-    if ( store.GetLastError() != wxSTREAM_NO_ERROR )
-#endif
     {
         wxLogError(_("File \"%s\" could not be opened for writing."), file);
         return false;
@@ -630,25 +613,15 @@ bool wxDocument::DoSaveDocument(const wxString& file)
 
 bool wxDocument::DoOpenDocument(const wxString& file)
 {
-#if wxUSE_STD_IOSTREAM
     std::ifstream store(file.mb_str(), std::ios::binary);
     if ( !store )
-#else
-    wxFileInputStream store(file);
-    if (store.GetLastError() != wxSTREAM_NO_ERROR || !store.IsOk())
-#endif
     {
         wxLogError(_("File \"%s\" could not be opened for reading."), file);
         return false;
     }
 
-#if wxUSE_STD_IOSTREAM
     LoadObject(store);
     if ( !store )
-#else
-    int res = LoadObject(store).GetLastError();
-    if ( res != wxSTREAM_NO_ERROR && res != wxSTREAM_EOF )
-#endif
     {
         wxLogError(_("Failed to read document from the file \"%s\"."), file);
         return false;
@@ -2176,8 +2149,6 @@ void wxDocPrintout::GetPageInfo(int *minPage, int *maxPage,
 // manipulate files directly
 // ----------------------------------------------------------------------------
 
-#if wxUSE_STD_IOSTREAM
-
 bool wxTransferFileToStream(const wxString& filename, std::ostream& stream)
 {
 #if wxUSE_FFILE
@@ -2229,68 +2200,5 @@ bool wxTransferStreamToFile(std::istream& stream, const wxString& filename)
 
     return true;
 }
-
-#else // !wxUSE_STD_IOSTREAM
-
-bool wxTransferFileToStream(const wxString& filename, wxOutputStream& stream)
-{
-#if wxUSE_FFILE
-    wxFFile file(filename, wxT("rb"));
-#elif wxUSE_FILE
-    wxFile file(filename, wxFile::read);
-#endif
-    if ( !file.IsOpened() )
-        return false;
-
-    char buf[4096];
-
-    size_t nRead;
-    do
-    {
-        nRead = file.Read(buf, WXSIZEOF(buf));
-        if ( file.Error() )
-            return false;
-
-        stream.Write(buf, nRead);
-        if ( !stream )
-            return false;
-    }
-    while ( !file.Eof() );
-
-    return true;
-}
-
-bool wxTransferStreamToFile(wxInputStream& stream, const wxString& filename)
-{
-#if wxUSE_FFILE
-    wxFFile file(filename, wxT("wb"));
-#elif wxUSE_FILE
-    wxFile file(filename, wxFile::write);
-#endif
-    if ( !file.IsOpened() )
-        return false;
-
-    char buf[4096];
-    for ( ;; )
-    {
-        stream.Read(buf, WXSIZEOF(buf));
-
-        const size_t nRead = stream.LastRead();
-        if ( !nRead )
-        {
-            if ( stream.Eof() )
-                break;
-
-            return false;
-        }
-
-        if ( !file.Write(buf, nRead) )
-            return false;
-    }
-
-    return true;
-}
-
-#endif // wxUSE_STD_IOSTREAM/!wxUSE_STD_IOSTREAM
 
 #endif // wxUSE_DOC_VIEW_ARCHITECTURE

@@ -16,8 +16,6 @@
     #include "wx/wx.h"
 #endif
 
-#if wxUSE_STD_IOSTREAM
-
 #include "wx/stdstream.h"
 
 #include <string.h>
@@ -432,4 +430,3 @@ void StdStreamTestCase::OutputBuffer_sputn()
     CPPUNIT_ASSERT(memcmp(result, m_testData, TEST_SIZE) == 0);
 }
 
-#endif // wxUSE_STD_IOSTREAM

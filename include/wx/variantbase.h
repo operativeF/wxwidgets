@@ -66,10 +66,9 @@ public:
         : m_count(1)
     { }
 
-#if wxUSE_STD_IOSTREAM
     virtual bool Write(std::ostream& WXUNUSED(str)) const { return false; }
     virtual bool Read(std::istream& WXUNUSED(str)) { return false; }
-#endif
+
     virtual bool Write(wxString& WXUNUSED(str)) const { return false; }
     virtual bool Read(wxString& WXUNUSED(str)) { return false; }
 

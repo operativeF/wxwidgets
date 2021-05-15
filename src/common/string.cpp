@@ -39,9 +39,7 @@
     #include "wx/msw/wrapwin.h"
 #endif // __WINDOWS__
 
-#if wxUSE_STD_IOSTREAM
-    #include <sstream>
-#endif
+#include <sstream>
 
 // define a function declared in wx/buffer.h here as we don't have buffer.cpp
 // and don't want to add it just because of this simple function
@@ -170,8 +168,6 @@ static wxStrCacheStatsDumper s_showCacheStats;
 // global functions
 // ----------------------------------------------------------------------------
 
-#if wxUSE_STD_IOSTREAM
-
 #include <iostream>
 
 std::ostream& operator<<(std::ostream& os, const wxCStrData& str)
@@ -220,8 +216,6 @@ std::wostream& operator<<(std::wostream& wos, const wxScopedWCharBuffer& str)
 }
 
 #endif  // defined(HAVE_WOSTREAM)
-
-#endif // wxUSE_STD_IOSTREAM
 
 // ===========================================================================
 // wxString class core

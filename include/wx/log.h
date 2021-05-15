@@ -678,8 +678,6 @@ protected:
 	wxLogStderr& operator=(const wxLogStderr&) = delete;
 };
 
-#if wxUSE_STD_IOSTREAM
-
 // log everything to an "ostream", cerr by default
 class WXDLLIMPEXP_BASE wxLogStream : public wxLog,
                                      private wxMessageOutputWithConv
@@ -699,8 +697,6 @@ protected:
     wxLogStream(const wxLogStream&) = delete;
 	wxLogStream& operator=(const wxLogStream&) = delete;
 };
-
-#endif // wxUSE_STD_IOSTREAM
 
 // ----------------------------------------------------------------------------
 // /dev/null log target: suppress logging until this object goes out of scope

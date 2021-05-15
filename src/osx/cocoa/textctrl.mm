@@ -33,9 +33,7 @@
     #include <stat.h>
 #endif
 
-#if wxUSE_STD_IOSTREAM
-    #include <fstream>
-#endif
+#include <fstream>
 
 #include "wx/filefn.h"
 #include "wx/sysopt.h"

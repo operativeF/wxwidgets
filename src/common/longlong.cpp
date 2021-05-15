@@ -1220,8 +1220,6 @@ void *wxULongLongWx::asArray() const
     ULL_TO_STRING(wxULongLongWx)
 #endif
 
-#if wxUSE_STD_IOSTREAM
-
 // input/output
 WXDLLIMPEXP_BASE
 std::ostream& operator<< (std::ostream& o, const wxLongLong& ll)
@@ -1234,8 +1232,6 @@ std::ostream& operator<< (std::ostream& o, const wxULongLong& ll)
 {
     return o << ll.ToString();
 }
-
-#endif // wxUSE_STD_IOSTREAM
 
 WXDLLIMPEXP_BASE wxString& operator<< (wxString& s, const wxLongLong& ll)
 {

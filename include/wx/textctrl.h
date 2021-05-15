@@ -24,12 +24,8 @@
 #include "wx/dynarray.h"        // wxArrayInt
 #include "wx/gdicmn.h"          // wxPoint
 
-#if wxUSE_STD_IOSTREAM
-    #include "wx/ioswrap.h"
-    #define wxHAS_TEXT_WINDOW_STREAM 1
-#else
-    #define wxHAS_TEXT_WINDOW_STREAM 0
-#endif
+#include "wx/ioswrap.h"
+#define wxHAS_TEXT_WINDOW_STREAM 1
 
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 class WXDLLIMPEXP_FWD_CORE wxTextCtrlBase;

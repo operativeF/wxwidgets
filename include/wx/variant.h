@@ -62,13 +62,9 @@ public:
     // Override these to provide common functionality
     virtual bool Eq(wxVariantData& data) const = 0;
 
-#if wxUSE_STD_IOSTREAM
     virtual bool Write(std::ostream& WXUNUSED(str)) const { return false; }
-#endif
     virtual bool Write(wxString& WXUNUSED(str)) const { return false; }
-#if wxUSE_STD_IOSTREAM
     virtual bool Read(std::istream& WXUNUSED(str)) { return false; }
-#endif
     virtual bool Read(wxString& WXUNUSED(str)) { return false; }
     // What type is it? Return a string name.
     virtual wxString GetType() const = 0;
