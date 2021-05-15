@@ -43,17 +43,6 @@
     #include <sstream>
 #endif
 
-#ifndef HAVE_STD_STRING_COMPARE
-// string handling functions used by wxString:
-#if wxUSE_UNICODE_UTF8
-    #define wxStringMemcmp   memcmp
-    #define wxStringStrlen   strlen
-#else
-    #define wxStringMemcmp   wxTmemcmp
-    #define wxStringStrlen   wxStrlen
-#endif
-#endif
-
 // define a function declared in wx/buffer.h here as we don't have buffer.cpp
 // and don't want to add it just because of this simple function
 namespace wxPrivate
@@ -678,8 +667,6 @@ bool wxString::IsSameAs(wxUniChar c, bool compareWithCase) const
                                : wxToupper(GetChar(0u)) == wxToupper(c));
 }
 
-#ifdef HAVE_STD_STRING_COMPARE
-
 // NB: Comparison code (both if HAVE_STD_STRING_COMPARE and if not) works with
 //     UTF-8 encoded strings too, thanks to UTF-8's design which allows us to
 //     sort strings in characters code point order by sorting the byte sequence
@@ -742,118 +729,6 @@ int wxString::compare(size_t nStart, size_t nLen,
 
     return m_impl.compare(pos, len, str.data, str.len);
 }
-
-#else // !HAVE_STD_STRING_COMPARE
-
-static inline int wxDoCmp(const wxStringCharType* s1, size_t l1,
-                          const wxStringCharType* s2, size_t l2)
-{
-    if( l1 == l2 )
-        return wxStringMemcmp(s1, s2, l1);
-    else if( l1 < l2 )
-    {
-        int ret = wxStringMemcmp(s1, s2, l1);
-        return ret == 0 ? -1 : ret;
-    }
-    else
-    {
-        int ret = wxStringMemcmp(s1, s2, l2);
-        return ret == 0 ? +1 : ret;
-    }
-}
-
-int wxString::compare(const wxString& str) const
-{
-    return ::wxDoCmp(m_impl.data(), m_impl.length(),
-                     str.m_impl.data(), str.m_impl.length());
-}
-
-int wxString::compare(size_t nStart, size_t nLen,
-                      const wxString& str) const
-{
-    wxASSERT(nStart <= length());
-    size_type strLen = length() - nStart;
-    nLen = strLen < nLen ? strLen : nLen;
-
-    size_t pos, len;
-    PosLenToImpl(nStart, nLen, &pos, &len);
-
-    return ::wxDoCmp(m_impl.data() + pos,  len,
-                     str.m_impl.data(), str.m_impl.length());
-}
-
-int wxString::compare(size_t nStart, size_t nLen,
-                      const wxString& str,
-                      size_t nStart2, size_t nLen2) const
-{
-    wxASSERT(nStart <= length());
-    wxASSERT(nStart2 <= str.length());
-    size_type strLen  =     length() - nStart,
-              strLen2 = str.length() - nStart2;
-    nLen  = strLen  < nLen  ? strLen  : nLen;
-    nLen2 = strLen2 < nLen2 ? strLen2 : nLen2;
-
-    size_t pos, len;
-    PosLenToImpl(nStart, nLen, &pos, &len);
-    size_t pos2, len2;
-    str.PosLenToImpl(nStart2, nLen2, &pos2, &len2);
-
-    return ::wxDoCmp(m_impl.data() + pos, len,
-                     str.m_impl.data() + pos2, len2);
-}
-
-int wxString::compare(const char* sz) const
-{
-    SubstrBufFromMB str(ImplStr(sz, npos));
-    if ( str.len == npos )
-        str.len = wxStringStrlen(str.data);
-    return ::wxDoCmp(m_impl.data(), m_impl.length(), str.data, str.len);
-}
-
-int wxString::compare(const wchar_t* sz) const
-{
-    SubstrBufFromWC str(ImplStr(sz, npos));
-    if ( str.len == npos )
-        str.len = wxStringStrlen(str.data);
-    return ::wxDoCmp(m_impl.data(), m_impl.length(), str.data, str.len);
-}
-
-int wxString::compare(size_t nStart, size_t nLen,
-                      const char* sz, size_t nCount) const
-{
-    wxASSERT(nStart <= length());
-    size_type strLen = length() - nStart;
-    nLen = strLen < nLen ? strLen : nLen;
-
-    size_t pos, len;
-    PosLenToImpl(nStart, nLen, &pos, &len);
-
-    SubstrBufFromMB str(ImplStr(sz, nCount));
-    if ( str.len == npos )
-        str.len = wxStringStrlen(str.data);
-
-    return ::wxDoCmp(m_impl.data() + pos, len, str.data, str.len);
-}
-
-int wxString::compare(size_t nStart, size_t nLen,
-                      const wchar_t* sz, size_t nCount) const
-{
-    wxASSERT(nStart <= length());
-    size_type strLen = length() - nStart;
-    nLen = strLen < nLen ? strLen : nLen;
-
-    size_t pos, len;
-    PosLenToImpl(nStart, nLen, &pos, &len);
-
-    SubstrBufFromWC str(ImplStr(sz, nCount));
-    if ( str.len == npos )
-        str.len = wxStringStrlen(str.data);
-
-    return ::wxDoCmp(m_impl.data() + pos, len, str.data, str.len);
-}
-
-#endif // HAVE_STD_STRING_COMPARE/!HAVE_STD_STRING_COMPARE
-
 
 // ---------------------------------------------------------------------------
 // find_{first,last}_[not]_of functions

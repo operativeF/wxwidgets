@@ -14,26 +14,8 @@
 #include "wx/string.h"
 #include "wx/wxcrt.h"
 
-// In wxUSE_STD_CONTAINERS build we prefer to use the standard hash map class
-// but it can be either in non-standard hash_map header (old g++ and some other
-// STL implementations) or in C++0x standard unordered_map which can in turn be
-// available either in std::tr1 or std namespace itself
-//
-// To summarize: if std::unordered_map is available use it, otherwise use tr1
-// and finally fall back to non-standard hash_map
-
-#if (defined(HAVE_EXT_HASH_MAP) || defined(HAVE_HASH_MAP)) \
-    && (defined(HAVE_GNU_CXX_HASH_MAP) || defined(HAVE_STD_HASH_MAP))
-    #define HAVE_STL_HASH_MAP
-#endif
-
-#if defined(HAVE_STD_UNORDERED_MAP)
-    #include <unordered_map>
-    #define WX_HASH_MAP_NAMESPACE std
-#elif defined(HAVE_TR1_UNORDERED_MAP)
-    #include <tr1/unordered_map>
-    #define WX_HASH_MAP_NAMESPACE std::tr1
-#endif
+#include <unordered_map>
+#define WX_HASH_MAP_NAMESPACE std
 
 #define _WX_DECLARE_HASH_MAP( KEY_T, VALUE_T, HASH_T, KEY_EQ_T, CLASSNAME, CLASSEXP ) \
     typedef WX_HASH_MAP_NAMESPACE::unordered_map< KEY_T, VALUE_T, HASH_T, KEY_EQ_T > CLASSNAME

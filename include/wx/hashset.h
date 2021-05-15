@@ -16,15 +16,8 @@
 // see comment in wx/hashmap.h which also applies to different standard hash
 // set classes
 
-#if defined(HAVE_STD_UNORDERED_SET)
-    #include <unordered_set>
-    #define WX_HASH_SET_BASE_TEMPLATE std::unordered_set
-#elif defined(HAVE_TR1_UNORDERED_SET)
-    #include <tr1/unordered_set>
-    #define WX_HASH_SET_BASE_TEMPLATE std::tr1::unordered_set
-#else
-    #error Update this code: unordered_set is available, but I do not know where.
-#endif
+#include <unordered_set>
+#define WX_HASH_SET_BASE_TEMPLATE std::unordered_set
 
 // we need to define the class declared by _WX_DECLARE_HASH_SET as a class and
 // not a typedef to allow forward declaring it

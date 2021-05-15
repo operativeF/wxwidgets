@@ -66,11 +66,7 @@ extern WXDLLIMPEXP_DATA_BASE(const wxStringCharType*) wxEmptyStringImpl;
 #include <string>
 #include "wx/afterstd.h"
 
-#ifdef HAVE_STD_WSTRING
-    typedef std::wstring wxStdWideString;
-#else
-    typedef std::basic_string<wchar_t> wxStdWideString;
-#endif
+using wxStdWideString = std::wstring;
 
 #if wxUSE_UNICODE_WCHAR
     typedef wxStdWideString wxStdString;
