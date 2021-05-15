@@ -306,14 +306,6 @@
 #   endif
 #endif /* !defined(wxUSE_SOCKETS) */
 
-#ifndef wxUSE_STD_CONTAINERS
-#   ifdef wxABORT_ON_CONFIG_ERROR
-#       error "wxUSE_STD_CONTAINERS must be defined, please read comment near the top of this file."
-#   else
-#       define wxUSE_STD_CONTAINERS 0
-#   endif
-#endif /* !defined(wxUSE_STD_CONTAINERS) */
-
 #ifndef wxUSE_STD_CONTAINERS_COMPATIBLY
 #   ifdef wxABORT_ON_CONFIG_ERROR
 #       error "wxUSE_STD_CONTAINERS_COMPATIBLY must be defined, please read comment near the top of this file."

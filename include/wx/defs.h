@@ -2265,7 +2265,7 @@ typedef int (* wxListIterateFunction)(void *current);
 #endif
 
 #if defined(__CYGWIN__) && defined(__WXMSW__)
-#   if wxUSE_STD_CONTAINERS || defined(wxUSE_STD_STRING)
+#   if defined(wxUSE_STD_STRING)
          /*
             NASTY HACK because the gethostname in sys/unistd.h which the gnu
             stl includes and wx builds with by default clash with each other

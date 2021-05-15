@@ -1194,11 +1194,7 @@ void wxMSWDCImpl::DoDrawSpline(const wxPointList *points)
     bezier_pos++;
     CalcBoundingBox(x2, y2);
 
-#if !wxUSE_STD_CONTAINERS
-    while ((node = node->GetNext()) != NULL)
-#else
     while ((node = node->GetNext()))
-#endif // !wxUSE_STD_CONTAINERS
     {
         int cx4, cy4;
         p = (wxPoint *)node->GetData();

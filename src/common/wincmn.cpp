@@ -3199,19 +3199,8 @@ wxAccessible* wxWindowBase::GetOrCreateAccessible()
 // list classes implementation
 // ----------------------------------------------------------------------------
 
-#if wxUSE_STD_CONTAINERS
-
 #include "wx/listimpl.cpp"
 WX_DEFINE_LIST(wxWindowList)
-
-#else // !wxUSE_STD_CONTAINERS
-
-void wxWindowListNode::DeleteData()
-{
-    delete (wxWindow *)GetData();
-}
-
-#endif // wxUSE_STD_CONTAINERS/!wxUSE_STD_CONTAINERS
 
 // ----------------------------------------------------------------------------
 // borders

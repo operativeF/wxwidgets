@@ -301,17 +301,6 @@
 // standard library.
 #define wxUSE_STD_CONTAINERS_COMPATIBLY wxUSE_STD_DEFAULT
 
-// Use standard C++ containers to implement std::vector<>, wxStack<>, wxDList<>
-// and wxHashXXX<> classes. If disabled, wxWidgets own (mostly compatible but
-// usually more limited) implementations are used which allows to avoid the
-// dependency on the C++ run-time library.
-//
-// Default is 0 for compatibility reasons.
-//
-// Recommended setting: 1 unless compatibility with the official wxWidgets
-// build and/or the existing code is a concern.
-#define wxUSE_STD_CONTAINERS 0
-
 // Use standard C++ streams if 1 instead of wx streams in some places. If
 // disabled, wx streams are used everywhere and wxWidgets doesn't depend on the
 // standard streams library.
