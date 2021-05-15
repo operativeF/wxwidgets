@@ -32,7 +32,7 @@
 #include "wx/listimpl.cpp"
 WX_DEFINE_LIST(wxObjectList)
 
-// with wxUSE_STD_CONTAINERS wxStringList contains wxString objects, not pointers
+// wxStringList contains wxString objects, not pointers
 void _WX_LIST_HELPER_wxStringListBase::DeleteFunction( wxString WXUNUSED(X) )
 {
 }

@@ -3529,7 +3529,7 @@ void wxWindowBase::DoMoveInTabOrder(wxWindow *win, WindowOrder move)
     wxWindowList::compatibility_iterator i = siblings.Find(win);
     wxCHECK_RET( i, wxT("MoveBefore/AfterInTabOrder(): win is not a sibling") );
 
-    // unfortunately, when wxUSE_STD_CONTAINERS == 1 DetachNode() is not
+    // unfortunately DetachNode() is not
     // implemented so we can't just move the node around
     wxWindow *self = (wxWindow *)this;
     siblings.DeleteObject(self);

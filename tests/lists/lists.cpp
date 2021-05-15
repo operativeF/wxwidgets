@@ -208,8 +208,6 @@ void ListsTestCase::wxListCtorTest()
     CPPUNIT_ASSERT( Baz::GetNumber() == 0 );
 }
 
-#if wxUSE_STD_CONTAINERS_COMPATIBLY
-
 #include <list>
 
 // Check that we convert wxList to std::list using the latter's ctor taking 2
@@ -231,4 +229,3 @@ TEST_CASE("wxList::iterator", "[list][std][iterator]")
     CHECK( std::list<Baz*>(cli.begin(), cli.end()).empty() );
 }
 
-#endif // wxUSE_STD_CONTAINERS_COMPATIBLY

@@ -18,9 +18,7 @@
 #include "wx/arrstr.h"
 #include "wx/control.h"      // base class
 
-#if wxUSE_STD_CONTAINERS_COMPATIBLY
 #include <vector>
-#endif // wxUSE_STD_CONTAINERS_COMPATIBLY
 
 // ----------------------------------------------------------------------------
 // wxItemContainer defines an interface which is implemented by all controls
@@ -220,10 +218,8 @@ public:
                wxClientData **clientData)
         { return AppendItems(wxArrayStringsAdapter(n, items), clientData); }
 
-#if wxUSE_STD_CONTAINERS_COMPATIBLY
     int Append(const std::vector<wxString>& items)
         { return AppendItems(items); }
-#endif // wxUSE_STD_CONTAINERS_COMPATIBLY
 
     // only for RTTI needs (separate name)
     void AppendString(const wxString& item)
@@ -264,10 +260,8 @@ public:
                wxClientData **clientData)
         { return InsertItems(wxArrayStringsAdapter(n, items), pos, clientData); }
 
-#if wxUSE_STD_CONTAINERS_COMPATIBLY
     int Insert(const std::vector<wxString>& items, unsigned int pos)
         { return InsertItems(items, pos); }
-#endif // wxUSE_STD_CONTAINERS_COMPATIBLY
 
     // replacing items
     // ---------------
@@ -285,10 +279,8 @@ public:
     void Set(unsigned int n, const wxString *items, wxClientData **clientData)
         { Clear(); Append(n, items, clientData); }
 
-#if wxUSE_STD_CONTAINERS_COMPATIBLY
     void Set(const std::vector<wxString>& items)
         { Clear(); Append(items); }
-#endif // wxUSE_STD_CONTAINERS_COMPATIBLY
 
     // deleting items
     // --------------
