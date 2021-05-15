@@ -159,19 +159,6 @@
 /*  ---------------------------------------------------------------------------- */
 
 #ifdef __cplusplus
-
-/* same for more C++11 keywords which don't have such historic baggage as
-   override and so can be detected by just testing for C++11 support (which
-   still requires handling MSVS specially, unfortunately) */
-#if __cplusplus >= 201103L || wxCHECK_VISUALC_VERSION(14)
-    #define wxHAS_MEMBER_DEFAULT
-
-    #define wxHAS_NOEXCEPT
-    #define wxNOEXCEPT noexcept
-#else
-    #define wxNOEXCEPT
-#endif
-
 /*
    This one is a wx invention: like static cast but used when we intentionally
    truncate from a larger to smaller type, static_cast<> can't be used for it

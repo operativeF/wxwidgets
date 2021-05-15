@@ -1423,7 +1423,7 @@ sptr_t ScintillaWX::DirectFunction(
 
 namespace {
 
-POINT POINTFromPoint(Point pt) wxNOEXCEPT {
+POINT POINTFromPoint(Point pt) noexcept {
     POINT ret;
     ret.x = static_cast<LONG>(pt.x);
     ret.y = static_cast<LONG>(pt.y);
@@ -1434,7 +1434,7 @@ class IMContext {
     HWND hwnd;
 public:
     HIMC hIMC;
-    explicit IMContext(HWND hwnd_) wxNOEXCEPT :
+    explicit IMContext(HWND hwnd_) noexcept :
         hwnd(hwnd_), hIMC(::ImmGetContext(hwnd_)) {
     }
     ~IMContext() {
@@ -1442,7 +1442,7 @@ public:
             ::ImmReleaseContext(hwnd, hIMC);
     }
 
-    unsigned int GetImeCaretPos() const wxNOEXCEPT {
+    unsigned int GetImeCaretPos() const noexcept {
         return ImmGetCompositionStringW(hIMC, GCS_CURSORPOS, wxNullPtr, 0);
     }
 
@@ -1467,7 +1467,7 @@ private:
 
 }
 
-HWND ScintillaWX::MainHWND() const wxNOEXCEPT {
+HWND ScintillaWX::MainHWND() const noexcept {
     return static_cast<HWND>(wMain.GetID());
 }
 

@@ -240,7 +240,7 @@ private:
 
 #ifdef __WXMSW__
     // ScintillaWin
-    HWND MainHWND() const wxNOEXCEPT;
+    HWND MainHWND() const noexcept;
 
     // DBCS
     void ImeStartComposition();

@@ -122,9 +122,7 @@ public:
     void OnEvent(wxEvent&) { g_called.method = true; }
     void OnAnotherEvent(AnotherEvent&);
     void OnIdle(wxIdleEvent&) { g_called.method = true; }
-#ifdef wxHAS_NOEXCEPT
     void OnIdleNoExcept(wxIdleEvent&) noexcept { }
-#endif
 
 private:
     wxDECLARE_EVENT_TABLE();
@@ -141,9 +139,7 @@ wxBEGIN_EVENT_TABLE(MyClassWithEventTable, wxEvtHandler)
     EVT_MYEVENT(MyClassWithEventTable::OnMyEvent)
     EVT_MYEVENT(MyClassWithEventTable::OnEvent)
 
-#ifdef wxHAS_NOEXCEPT
     EVT_IDLE(MyClassWithEventTable::OnIdleNoExcept)
-#endif
 
     // this shouldn't compile:
     //EVT_MYEVENT(MyClassWithEventTable::OnIdle)
