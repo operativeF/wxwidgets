@@ -69,11 +69,9 @@
 // We don't provide wxAtomicLong and it doesn't seem really useful to add it
 // now when C++11 is widely available, so just use the standard C++11 type if
 // possible and live without it otherwise.
-#if __cplusplus >= 201103L
-    #include <atomic>
+#include <atomic>
 
-    #define HAS_ATOMIC_ULONG
-#endif // C++11
+#define HAS_ATOMIC_ULONG
 
 #define THR_ID_CAST(id)  (reinterpret_cast<void*>(id))
 #define THR_ID(thr)      THR_ID_CAST((thr)->GetId())
