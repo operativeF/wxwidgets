@@ -37,6 +37,7 @@
   <PropertyGroup Label="Globals">
     <ProjectName>core</ProjectName>
     <ProjectGuid>{6744DAD8-9C70-574A-BFF2-9F8DDDB24A75}</ProjectGuid>
+    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="wx_config.props" />
@@ -265,6 +266,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE=1;_CRT_NON_CONFORMING_SWPRINTFS=1;_SCL_SECURE_NO_WARNINGS=1;__WXMSW__;NDEBUG;_UNICODE;WXBUILDING;wxUSE_BASE=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -499,7 +502,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\src\common\effects.cpp" />
     <ClCompile Include="..\..\src\common\event.cpp" />
     <ClCompile Include="..\..\src\common\fddlgcmn.cpp" />
     <ClCompile Include="..\..\src\common\filectrlcmn.cpp" />
@@ -541,7 +543,6 @@
     <ClCompile Include="..\..\src\common\lboxcmn.cpp" />
     <ClCompile Include="..\..\src\common\listctrlcmn.cpp" />
     <ClCompile Include="..\..\src\common\markupparser.cpp" />
-    <ClCompile Include="..\..\src\common\matrix.cpp" />
     <ClCompile Include="..\..\src\common\menucmn.cpp" />
     <ClCompile Include="..\..\src\common\modalhook.cpp" />
     <ClCompile Include="..\..\src\common\mousemanager.cpp" />
@@ -1290,7 +1291,6 @@
     <ClInclude Include="..\..\include\wx\docmdi.h" />
     <ClInclude Include="..\..\include\wx\docview.h" />
     <ClInclude Include="..\..\include\wx\dragimag.h" />
-    <ClInclude Include="..\..\include\wx\effects.h" />
     <ClInclude Include="..\..\include\wx\encinfo.h" />
     <ClInclude Include="..\..\include\wx\fdrepdlg.h" />
     <ClInclude Include="..\..\include\wx\filectrl.h" />
@@ -1339,7 +1339,6 @@
     <ClInclude Include="..\..\include\wx\listbook.h" />
     <ClInclude Include="..\..\include\wx\listbox.h" />
     <ClInclude Include="..\..\include\wx\listctrl.h" />
-    <ClInclude Include="..\..\include\wx\matrix.h" />
     <ClInclude Include="..\..\include\wx\mdi.h" />
     <ClInclude Include="..\..\include\wx\menu.h" />
     <ClInclude Include="..\..\include\wx\menuitem.h" />

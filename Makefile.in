@@ -3863,7 +3863,6 @@ COND_USE_GUI_1_ALL_GUI_HEADERS =  \
 	wx/dnd.h \
 	wx/docmdi.h \
 	wx/docview.h \
-	wx/effects.h \
 	wx/fdrepdlg.h \
 	wx/filectrl.h \
 	wx/filehistory.h \
@@ -3897,7 +3896,6 @@ COND_USE_GUI_1_ALL_GUI_HEADERS =  \
 	wx/listbase.h \
 	wx/listbook.h \
 	wx/listctrl.h \
-	wx/matrix.h \
 	wx/menuitem.h \
 	wx/metafile.h \
 	wx/minifram.h \

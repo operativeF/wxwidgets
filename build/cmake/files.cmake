@@ -1063,7 +1063,6 @@ set(GUI_CMN_HDR
     wx/dnd.h
     wx/docmdi.h
     wx/docview.h
-    wx/effects.h
     wx/fdrepdlg.h
     wx/filectrl.h
     wx/filehistory.h
@@ -1098,7 +1097,6 @@ set(GUI_CMN_HDR
     wx/listbase.h
     wx/listbook.h
     wx/listctrl.h
-    wx/matrix.h
     wx/menuitem.h
     wx/metafile.h
     wx/minifram.h

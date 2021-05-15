@@ -3565,10 +3565,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\wx\effects.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\include\wx\encinfo.h"
 				>
 			</File>
@@ -3802,10 +3798,6 @@
 			</File>
 			<File
 				RelativePath="..\..\include\wx\propgrid\manager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\include\wx\matrix.h"
 				>
 			</File>
 			<File

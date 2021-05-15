@@ -1000,7 +1000,6 @@ GUI_CMN_HDR =
     wx/dragimag.h
     wx/dvrenderers.h
     wx/editlbox.h
-    wx/effects.h
     wx/encinfo.h
     wx/fdrepdlg.h
     wx/filectrl.h
@@ -1106,7 +1105,6 @@ GUI_CMN_HDR =
     wx/listbook.h
     wx/listbox.h
     wx/listctrl.h
-    wx/matrix.h
     wx/mdi.h
     wx/menu.h
     wx/menuitem.h
