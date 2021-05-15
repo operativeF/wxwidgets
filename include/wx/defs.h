@@ -2734,21 +2734,6 @@ typedef const void* WXWidget;
 #include "wx/features.h"
 
 /*  --------------------------------------------------------------------------- */
-/*  macros to define a class without copy ctor nor assignment operator */
-/*  --------------------------------------------------------------------------- */
-
-#if defined(__cplusplus) && (__cplusplus >= 201103L || wxCHECK_VISUALC_VERSION(14))
-    #define wxMEMBER_DELETE = delete
-#else
-    #define wxMEMBER_DELETE
-#endif
-
-#define wxDECLARE_NO_COPY_TEMPLATE_CLASS_2(classname, arg1, arg2) \
-    private:                                                      \
-        classname(const classname<arg1, arg2>&) wxMEMBER_DELETE; \
-        classname& operator=(const classname<arg1, arg2>&) wxMEMBER_DELETE
-
-/*  --------------------------------------------------------------------------- */
 /*  If a manifest is being automatically generated, add common controls 6 to it */
 /*  --------------------------------------------------------------------------- */
 

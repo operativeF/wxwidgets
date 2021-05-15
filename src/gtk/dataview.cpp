@@ -2457,8 +2457,8 @@ public:
 
     wxCellRendererPixbuf(const wxCellRendererPixbuf&) = delete;
 	wxCellRendererPixbuf& operator=(const wxCellRendererPixbuf&) = delete;
-    wxCellRendererPixbuf() wxMEMBER_DELETE;
-    ~wxCellRendererPixbuf() wxMEMBER_DELETE;
+    wxCellRendererPixbuf() = delete;
+    ~wxCellRendererPixbuf() = delete;
 };
 
 GtkCellRendererClass* wxCellRendererPixbufParentClass;

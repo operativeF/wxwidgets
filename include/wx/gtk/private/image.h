@@ -27,8 +27,8 @@ public:
 
     wxGtkImage(const wxGtkImage&) = delete;
 	wxGtkImage& operator=(const wxGtkImage&) = delete;
-    wxGtkImage() wxMEMBER_DELETE;
-    ~wxGtkImage() wxMEMBER_DELETE;
+    wxGtkImage() = delete;
+    ~wxGtkImage() = delete;
 };
 
 #define WX_GTK_IMAGE(obj) G_TYPE_CHECK_INSTANCE_CAST(obj, wxGtkImage::Type(), wxGtkImage)

@@ -732,8 +732,8 @@ private:
         //else: vetoed
     }
 
-    wxDECLARE_NO_COPY_TEMPLATE_CLASS_2(wxDocChildFrameAny,
-                                        ChildFrame, ParentFrame);
+    wxDocChildFrameAny(const wxDocChildFrameAny<ChildFrame, ParentFrame>&) = delete;
+    wxDocChildFrameAny& operator=(const wxDocChildFrameAny<ChildFrame, ParentFrame>&) = delete;
 };
 
 // ----------------------------------------------------------------------------
