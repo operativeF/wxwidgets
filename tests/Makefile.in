@@ -834,9 +834,6 @@ test_uris.o: $(srcdir)/uris/uris.cpp $(TEST_ODEP)
 test_url.o: $(srcdir)/uris/url.cpp $(TEST_ODEP)
 	$(CXXC) -c -o $@ $(TEST_CXXFLAGS) $(srcdir)/uris/url.cpp
 
-test_vectors.o: $(srcdir)/vectors/vectors.cpp $(TEST_ODEP)
-	$(CXXC) -c -o $@ $(TEST_CXXFLAGS) $(srcdir)/vectors/vectors.cpp
-
 test_evtconnection.o: $(srcdir)/weakref/evtconnection.cpp $(TEST_ODEP)
 	$(CXXC) -c -o $@ $(TEST_CXXFLAGS) $(srcdir)/weakref/evtconnection.cpp
 

@@ -1211,10 +1211,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\vectors\vectors.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\strings\vsnprintf.cpp"
 				>
 			</File>

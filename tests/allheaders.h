@@ -378,7 +378,6 @@
 #include <wx/valnum.h>
 #include <wx/valtext.h>
 #include <wx/variant.h>
-#include <wx/vector.h>
 #include <wx/version.h>
 #include <wx/versioninfo.h>
 #include <wx/vidmode.h>
