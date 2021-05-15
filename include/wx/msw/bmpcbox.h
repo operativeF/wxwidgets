@@ -26,7 +26,6 @@ public:
     // ctors and such
     wxBitmapComboBox() : wxComboBox(), wxBitmapComboBoxBase()
     {
-        Init();
     }
 
     wxBitmapComboBox(wxWindow *parent,
@@ -42,8 +41,6 @@ public:
         : wxComboBox(),
           wxBitmapComboBoxBase()
     {
-        Init();
-
         (void)Create(parent, id, value, pos, size, n,
                      choices, style, validator, name);
     }
@@ -124,9 +121,7 @@ protected:
     void RecreateControl();
 
 private:
-    void Init();
-
-    bool m_inResize;
+    bool m_inResize {false};
 
     wxDECLARE_EVENT_TABLE();
 

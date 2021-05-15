@@ -56,11 +56,10 @@ class wxIPCSocketStreams;
 class WXDLLIMPEXP_NET wxTCPConnection : public wxConnectionBase
 {
 public:
-    wxTCPConnection() { Init(); }
+    wxTCPConnection() { }
     wxTCPConnection(void *buffer, size_t size)
         : wxConnectionBase(buffer, size)
     {
-        Init();
     }
 
     virtual ~wxTCPConnection();
@@ -92,18 +91,15 @@ protected:
 
     // the underlying socket (wxSocketClient for IPC client and wxSocketServer
     // for IPC server)
-    wxSocketBase *m_sock;
+    wxSocketBase *m_sock {nullptr};
 
     // various streams that we use
-    wxIPCSocketStreams *m_streams;
+    wxIPCSocketStreams *m_streams {nullptr};
 
     // the topic of this connection
     wxString m_topic;
 
 private:
-    // common part of both ctors
-    void Init();
-
     friend class wxTCPServer;
     friend class wxTCPClient;
     friend class wxTCPEventHandler;

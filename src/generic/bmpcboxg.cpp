@@ -58,11 +58,6 @@ wxEND_EVENT_TABLE()
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapComboBox, wxOwnerDrawnComboBox);
 
-void wxBitmapComboBox::Init()
-{
-    m_inResize = false;
-}
-
 wxBitmapComboBox::wxBitmapComboBox(wxWindow *parent,
                                   wxWindowID id,
                                   const wxString& value,
@@ -75,8 +70,6 @@ wxBitmapComboBox::wxBitmapComboBox(wxWindow *parent,
     : wxOwnerDrawnComboBox(),
       wxBitmapComboBoxBase()
 {
-    Init();
-
     Create(parent,id,value,pos,size,choices,style,validator,name);
 }
 

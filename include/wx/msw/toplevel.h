@@ -21,7 +21,7 @@ class WXDLLIMPEXP_CORE wxTopLevelWindowMSW : public wxTopLevelWindowBase
 {
 public:
     // constructors and such
-    wxTopLevelWindowMSW() { Init(); }
+    wxTopLevelWindowMSW() { }
 
     wxTopLevelWindowMSW(wxWindow *parent,
                         wxWindowID id,
@@ -31,8 +31,6 @@ public:
                         long style = wxDEFAULT_FRAME_STYLE,
                         const wxString& name = wxASCII_STR(wxFrameNameStr))
     {
-        Init();
-
         (void)Create(parent, id, title, pos, size, style, name);
     }
 
@@ -124,9 +122,6 @@ public:
     void MSWSetShowCommand(WXUINT showCmd) { m_showCmd = showCmd; }
 
 protected:
-    // common part of all ctors
-    void Init();
-
     // create a new frame, return false if it couldn't be created
     bool CreateFrame(const wxString& title,
                      const wxPoint& pos,
@@ -170,14 +165,14 @@ protected:
     // next time and also indicates whether the window should be considered
     // being iconized or maximized (which may be different from whether it's
     // actually iconized or maximized at MSW level).
-    WXUINT m_showCmd;
+    WXUINT m_showCmd {SW_SHOWNORMAL};
 
     // Data to save/restore when calling ShowFullScreen
-    long                  m_fsStyle; // Passed to ShowFullScreen
+    long                  m_fsStyle {0}; // Passed to ShowFullScreen
     wxRect                m_fsOldSize;
-    long                  m_fsOldWindowStyle;
-    bool                  m_fsIsMaximized;
-    bool                  m_fsIsShowing;
+    long                  m_fsOldWindowStyle {0};
+    bool                  m_fsIsMaximized {false};
+    bool                  m_fsIsShowing {false};
 
     // Save the current focus to m_winLastFocused if we're not iconized (the
     // focus is always NULL when we're iconized).
@@ -194,7 +189,7 @@ protected:
 private:
     // The system menu: initially NULL but can be set (once) by
     // MSWGetSystemMenu(). Owned by this window.
-    wxMenu *m_menuSystem;
+    wxMenu *m_menuSystem {nullptr};
 
     wxDECLARE_EVENT_TABLE();
     wxTopLevelWindowMSW(const wxTopLevelWindowMSW&) = delete;

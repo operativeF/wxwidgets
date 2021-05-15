@@ -24,7 +24,7 @@ class WXDLLIMPEXP_CORE wxComboBox : public wxChoice,
                                     public wxTextEntry
 {
 public:
-    wxComboBox() { Init(); }
+    wxComboBox() { }
 
     wxComboBox(wxWindow *parent, wxWindowID id,
             const wxString& value = wxEmptyString,
@@ -35,9 +35,7 @@ public:
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxComboBoxNameStr))
     {
-        Init();
         Create(parent, id, value, pos, size, n, choices, style, validator, name);
-
     }
 
     wxComboBox(wxWindow *parent, wxWindowID id,
@@ -49,8 +47,6 @@ public:
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxComboBoxNameStr))
     {
-        Init();
-
         Create(parent, id, value, pos, size, choices, style, validator, name);
     }
 
@@ -171,14 +167,8 @@ private:
     void MSWProcessSpecialKey(wxKeyEvent& event) override;
 #endif // wxUSE_OLE
 
-    // common part of all ctors
-    void Init()
-    {
-        m_allowTextEvents = true;
-    }
-
     // normally true, false if text events are currently disabled
-    bool m_allowTextEvents;
+    bool m_allowTextEvents {true};
 
 public:
 	wxClassInfo *GetClassInfo() const;

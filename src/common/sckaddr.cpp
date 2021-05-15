@@ -739,26 +739,24 @@ int wxSockAddress::GetAddressDataLen() const
     return GetAddress().GetLen();
 }
 
-void wxSockAddress::Init()
+wxSockAddress::wxSockAddress()
 {
     if ( wxIsMainThread() && !wxSocketBase::IsInitialized() )
     {
         // we must do it before using any socket functions
         (void)wxSocketBase::Initialize();
     }
-}
-
-wxSockAddress::wxSockAddress()
-{
-    Init();
 
     m_impl = new wxSockAddressImpl();
 }
 
 wxSockAddress::wxSockAddress(const wxSockAddress& other)
-     
 {
-    Init();
+    if ( wxIsMainThread() && !wxSocketBase::IsInitialized() )
+    {
+        // we must do it before using any socket functions
+        (void)wxSocketBase::Initialize();
+    }
 
     m_impl = new wxSockAddressImpl(*other.m_impl);
 }

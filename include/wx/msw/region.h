@@ -61,9 +61,9 @@ protected:
 class WXDLLIMPEXP_CORE wxRegionIterator : public wxObject
 {
 public:
-    wxRegionIterator() { Init(); }
+    wxRegionIterator() { }
     wxRegionIterator(const wxRegion& region);
-    wxRegionIterator(const wxRegionIterator& ri) : wxObject(ri) { Init(); *this = ri; }
+    wxRegionIterator(const wxRegionIterator& ri) : wxObject(ri) { *this = ri; }
 
     wxRegionIterator& operator=(const wxRegionIterator& ri);
 
@@ -89,13 +89,10 @@ public:
     wxRect GetRect() const { return wxRect(GetX(), GetY(), GetW(), GetH()); }
 
 private:
-    // common part of all ctors
-    void Init();
-
-    long     m_current;
-    long     m_numRects;
+    long     m_current {0};
+    long     m_numRects {0};
     wxRegion m_region;
-    wxRect*  m_rects;
+    wxRect*  m_rects {nullptr};
 
     wxDECLARE_DYNAMIC_CLASS(wxRegionIterator);
 };

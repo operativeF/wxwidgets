@@ -60,10 +60,9 @@ public:
     void SetAddress(const wxSockAddressImpl& address);
 
 protected:
-    wxSockAddressImpl *m_impl;
+    wxSockAddressImpl* m_impl;
 
 private:
-    void Init();
     wxDECLARE_ABSTRACT_CLASS(wxSockAddress);
 };
 

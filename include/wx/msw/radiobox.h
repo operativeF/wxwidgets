@@ -22,7 +22,7 @@ class WXDLLIMPEXP_FWD_CORE wxSubwindows;
 class WXDLLIMPEXP_CORE wxRadioBox : public wxStaticBox, public wxRadioBoxBase
 {
 public:
-    wxRadioBox() { Init(); }
+    wxRadioBox() { }
 
     wxRadioBox(wxWindow *parent,
                wxWindowID id,
@@ -35,8 +35,6 @@ public:
                const wxValidator& val = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxRadioBoxNameStr))
     {
-        Init();
-
         (void)Create(parent, id, title, pos, size, n, choices, majorDim,
                      style, val, name);
     }
@@ -52,8 +50,6 @@ public:
                const wxValidator& val = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxRadioBoxNameStr))
     {
-        Init();
-
         (void)Create(parent, id, title, pos, size, choices, majorDim,
                      style, val, name);
     }
@@ -135,9 +131,6 @@ public:
     void SendNotificationEvent();
 
 protected:
-    // common part of all ctors
-    void Init();
-
     // subclass one radio button
     void SubclassRadioButton(WXHWND hWndBtn);
 
@@ -168,14 +161,14 @@ protected:
     wxBorder GetDefaultBorder() const override { return wxRadioBoxBase::GetDefaultBorder(); }
 
     // the buttons we contain
-    wxSubwindows *m_radioButtons;
+    wxSubwindows *m_radioButtons {nullptr};
 
     // and the special dummy button used only as a tab group boundary
-    WXHWND m_dummyHwnd;
+    WXHWND m_dummyHwnd {nullptr};
     wxWindowIDRef m_dummyId;
 
     // currently selected button or wxNOT_FOUND if none
-    int m_selectedButton;
+    int m_selectedButton {wxNOT_FOUND};
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxRadioBox);

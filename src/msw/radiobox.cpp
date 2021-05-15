@@ -138,14 +138,6 @@ wxRadioBox* wxRadioBox::GetFromRadioButtonHWND(WXHWND hwnd)
 // wxRadioBox creation
 // ---------------------------------------------------------------------------
 
-// Radio box item
-void wxRadioBox::Init()
-{
-    m_selectedButton = wxNOT_FOUND;
-    m_radioButtons = nullptr;
-    m_dummyHwnd = nullptr;
-}
-
 bool wxRadioBox::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxString& title,

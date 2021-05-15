@@ -59,12 +59,6 @@ enum
 // wxCalendarCtrl creation
 // ----------------------------------------------------------------------------
 
-void wxCalendarCtrl::Init()
-{
-    m_marks =
-    m_holidays = 0;
-}
-
 bool
 wxCalendarCtrl::Create(wxWindow *parent,
                        wxWindowID id,

@@ -89,19 +89,6 @@ wxEND_EVENT_TABLE()
 // wxTopLevelWindowMSW creation
 // ----------------------------------------------------------------------------
 
-void wxTopLevelWindowMSW::Init()
-{
-    m_showCmd = SW_SHOWNORMAL;
-
-    // Data to save/restore when calling ShowFullScreen
-    m_fsStyle = 0;
-    m_fsOldWindowStyle = 0;
-    m_fsIsMaximized = false;
-    m_fsIsShowing = false;
-
-    m_menuSystem = nullptr;
-}
-
 WXDWORD wxTopLevelWindowMSW::MSWGetStyle(long style, WXDWORD *exflags) const
 {
     // let the base class deal with the common styles but fix the ones which

@@ -327,14 +327,6 @@ WXHRGN wxRegion::GetHRGN() const
 // wxRegionIterator ctors/dtor
 // ----------------------------------------------------------------------------
 
-void wxRegionIterator::Init()
-{
-    m_current =
-    m_numRects = 0;
-
-    m_rects = nullptr;
-}
-
 wxRegionIterator::~wxRegionIterator()
 {
     delete [] m_rects;
@@ -343,8 +335,6 @@ wxRegionIterator::~wxRegionIterator()
 // Initialize iterator for region
 wxRegionIterator::wxRegionIterator(const wxRegion& region)
 {
-    m_rects = nullptr;
-
     Reset(region);
 }
 

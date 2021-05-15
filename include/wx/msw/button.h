@@ -18,7 +18,7 @@
 class WXDLLIMPEXP_CORE wxButton : public wxButtonBase
 {
 public:
-    wxButton() { Init(); }
+    wxButton() { }
     wxButton(wxWindow *parent,
              wxWindowID id,
              const wxString& label = wxEmptyString,
@@ -28,8 +28,6 @@ public:
              const wxValidator& validator = wxDefaultValidator,
              const wxString& name = wxASCII_STR(wxButtonNameStr))
     {
-        Init();
-
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
@@ -71,14 +69,9 @@ protected:
     void DoSetAuthNeeded(bool show) override;
 
     // true if the UAC symbol is shown
-    bool m_authNeeded;
+    bool m_authNeeded {false};
 
 private:
-    void Init()
-    {
-        m_authNeeded = false;
-    }
-
     void OnCharHook(wxKeyEvent& event);
 
     wxDECLARE_EVENT_TABLE();

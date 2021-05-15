@@ -544,12 +544,6 @@ wxTCPServer::OnAcceptConnection(const wxString& WXUNUSED(topic))
 // wxTCPConnection
 // --------------------------------------------------------------------------
 
-void wxTCPConnection::Init()
-{
-    m_sock = nullptr;
-    m_streams = nullptr;
-}
-
 wxTCPConnection::~wxTCPConnection()
 {
     Disconnect();

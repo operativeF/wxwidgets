@@ -12,7 +12,7 @@
 class WXDLLIMPEXP_ADV wxCalendarCtrl : public wxCalendarCtrlBase
 {
 public:
-    wxCalendarCtrl() { Init(); }
+    wxCalendarCtrl() { }
     wxCalendarCtrl(wxWindow *parent,
                    wxWindowID id,
                    const wxDateTime& date = wxDefaultDateTime,
@@ -21,8 +21,6 @@ public:
                    long style = wxCAL_SHOW_HOLIDAYS,
                    const wxString& name = wxASCII_STR(wxCalendarNameStr))
     {
-        Init();
-
         Create(parent, id, date, pos, size, style, name);
     }
 
@@ -63,8 +61,6 @@ protected:
     void MSWOnDoubleClick(wxMouseEvent& event);
 
 private:
-    void Init();
-
     // bring the control in sync with m_marks
     void UpdateMarks();
 
@@ -85,10 +81,10 @@ private:
     wxDateTime m_date;
 
     // bit field containing the state (marked or not) of all days in the month
-    wxUint32 m_marks;
+    wxUint32 m_marks {0};
 
     // the same but indicating whether a day is a holiday or not
-    wxUint32 m_holidays;
+    wxUint32 m_holidays {0};
 
 
     wxDECLARE_DYNAMIC_CLASS(wxCalendarCtrl);
