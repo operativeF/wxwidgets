@@ -1982,15 +1982,6 @@ enum wxDeprecatedGUIConstants
     wxLAST_HATCH = wxHATCHSTYLE_LAST
 };
 
-/*  ToolPanel in wxFrame (VZ: unused?) */
-enum
-{
-    wxTOOL_TOP = 1,
-    wxTOOL_BOTTOM,
-    wxTOOL_LEFT,
-    wxTOOL_RIGHT
-};
-
 /*  the values of the format constants should be the same as corresponding */
 /*  CF_XXX constants in Windows API */
 enum wxDataFormatId
