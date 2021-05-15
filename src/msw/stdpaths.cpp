@@ -140,11 +140,7 @@ wxString wxStandardPaths::DoGetDirectory(int csidl)
 
     // somewhat incredibly, the error code in the Unicode version is
     // different from the one in ASCII version for this function
-#if wxUSE_UNICODE
     if ( hr == E_FAIL )
-#else
-    if ( hr == S_FALSE )
-#endif
     {
         // directory doesn't exist, maybe we can get its default value?
         hr = ::SHGetFolderPath

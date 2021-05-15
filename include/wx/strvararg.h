@@ -222,7 +222,7 @@ private:
     wxScopedCharBuffer m_convertedChar;
 #endif // !wxUSE_UNICODE_WCHAR && !defined wx_NO_IMPLICIT_WXSTRING_ENCODING
 
-#if wxUSE_UNICODE && !wxUSE_UTF8_LOCALE_ONLY
+#if !wxUSE_UTF8_LOCALE_ONLY
 public:
     operator const wchar_t*() const
         { return const_cast<wxFormatString*>(this)->AsWChar(); }
@@ -230,7 +230,7 @@ private:
     const wchar_t* InputAsWChar();
     const wchar_t* AsWChar();
     wxScopedWCharBuffer m_convertedWChar;
-#endif // wxUSE_UNICODE && !wxUSE_UTF8_LOCALE_ONLY
+#endif // !wxUSE_UTF8_LOCALE_ONLY
 
 private:
     wxScopedCharBuffer  m_char;
@@ -429,12 +429,6 @@ wxFORMAT_STRING_SPECIFIER(long double, wxFormatString::Arg_LongDouble)
 
 #if wxWCHAR_T_IS_REAL_TYPE
 wxFORMAT_STRING_SPECIFIER(wchar_t, wxFormatString::Arg_Char | wxFormatString::Arg_Int)
-#endif
-
-#if !wxUSE_UNICODE && !defined wxNO_IMPLICIT_WXSTRING_ENCODING
-wxFORMAT_STRING_SPECIFIER(char, wxFormatString::Arg_Char | wxFormatString::Arg_Int)
-wxFORMAT_STRING_SPECIFIER(signed char, wxFormatString::Arg_Char | wxFormatString::Arg_Int)
-wxFORMAT_STRING_SPECIFIER(unsigned char, wxFormatString::Arg_Char | wxFormatString::Arg_Int)
 #endif
 
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
@@ -847,7 +841,6 @@ struct wxArgNormalizer<const wxUniChar&> : public wxArgNormalizer<wchar_t>
 // wxUniChar) or as an integer value (which should be left as-is). We take
 // advantage of the fact that both char and wchar_t are converted into int
 // in variadic arguments here.
-#if wxUSE_UNICODE
 template<typename T>
 struct wxArgNormalizerNarrowChar
 {
@@ -896,7 +889,6 @@ struct wxArgNormalizer<signed char>
         : wxArgNormalizerNarrowChar<signed char>(value, fmt, index) {}
 };
 
-#endif // wxUSE_UNICODE
 
 // convert references:
 WX_ARG_NORMALIZER_FORWARD(wxUniChar, const wxUniChar&);

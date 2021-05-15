@@ -335,12 +335,8 @@ bool wxTextCtrl::Create( wxWindow *parent,
 #endif // GTK 1.0
 
         gint tmp = 0;
-#if wxUSE_UNICODE
         wxWX2MBbuf val = value.mbc_str();
         gtk_editable_insert_text( GTK_EDITABLE(m_text), val, strlen(val), &tmp );
-#else
-        gtk_editable_insert_text( GTK_EDITABLE(m_text), value, value.length(), &tmp );
-#endif
 
         if (multi_line)
         {
@@ -860,12 +856,8 @@ void wxTextCtrl::Replace( long from, long to, const wxString &value )
     if (!value.empty())
     {
         gint pos = (gint)from;
-#if wxUSE_UNICODE
         wxWX2MBbuf buf = value.mbc_str();
         gtk_editable_insert_text( GTK_EDITABLE(m_text), buf, strlen(buf), &pos );
-#else
-        gtk_editable_insert_text( GTK_EDITABLE(m_text), value, value.length(), &pos );
-#endif // wxUSE_UNICODE
     }
 }
 
@@ -1131,14 +1123,9 @@ bool wxTextCtrl::SetStyle( long start, long end, const wxTextAttr& style )
         gtk_editable_delete_text( GTK_EDITABLE(m_text), start, end );
         gtk_editable_set_position( GTK_EDITABLE(m_text), start );
 
-    #if wxUSE_UNICODE
         wxWX2MBbuf buf = tmp.mbc_str();
         const char *txt = buf;
         size_t txtlen = strlen(buf);
-    #else
-        const char *txt = tmp;
-        size_t txtlen = tmp.length();
-    #endif
 
         // use the attributes from style which are set in it and fall back
         // first to the default style and then to the text control default

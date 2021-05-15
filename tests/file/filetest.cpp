@@ -31,20 +31,16 @@ public:
 private:
     CPPUNIT_TEST_SUITE( FileTestCase );
         CPPUNIT_TEST( ReadAll );
-#if wxUSE_UNICODE
         CPPUNIT_TEST( RoundTripUTF8 );
         CPPUNIT_TEST( RoundTripUTF16 );
         CPPUNIT_TEST( RoundTripUTF32 );
-#endif // wxUSE_UNICODE
         CPPUNIT_TEST( TempFile );
     CPPUNIT_TEST_SUITE_END();
 
     void ReadAll();
-#if wxUSE_UNICODE
     void RoundTripUTF8() { DoRoundTripTest(wxConvUTF8); }
     void RoundTripUTF16() { DoRoundTripTest(wxMBConvUTF16()); }
     void RoundTripUTF32() { DoRoundTripTest(wxMBConvUTF32()); }
-#endif // wxUSE_UNICODE
 
     void DoRoundTripTest(const wxMBConv& conv);
     void TempFile();
@@ -87,8 +83,6 @@ void FileTestCase::ReadAll()
     }
 }
 
-#if wxUSE_UNICODE
-
 void FileTestCase::DoRoundTripTest(const wxMBConv& conv)
 {
     TestFile tf;
@@ -125,8 +119,6 @@ void FileTestCase::DoRoundTripTest(const wxMBConv& conv)
         CPPUNIT_ASSERT_EQUAL( data, dataReadBack );
     }
 }
-
-#endif // wxUSE_UNICODE
 
 void FileTestCase::TempFile()
 {

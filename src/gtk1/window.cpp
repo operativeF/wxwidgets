@@ -921,11 +921,9 @@ static void wxFillOtherKeyEventFields(wxKeyEvent& event,
     event.m_metaDown = (gdk_event->state & GDK_MOD2_MASK) != 0;
     event.m_rawCode = (wxUint32) gdk_event->keyval;
     event.m_rawFlags = 0;
-#if wxUSE_UNICODE
 #if 0
    // this is not gtk1.x
    event.m_uniChar = gdk_keyval_to_unicode(gdk_event->keyval);
-#endif
 #endif
     wxGetMousePosition( &x, &y );
     win->ScreenToClient( &x, &y );
@@ -1092,13 +1090,9 @@ static gint gtk_window_key_press_callback( GtkWidget *widget,
     if ( (!ret) && (gdk_event->length > 1) ) // If this event contains a pre-edited string from IM.
     {
         // We should translate this key event into wxEVT_CHAR not wxEVT_KEY_DOWN.
-        #if wxUSE_UNICODE   // GTK+ 1.2 is not UTF-8 based.
-            const wxWCharBuffer string = wxConvLocal.cMB2WC( gdk_event->string );
-            if( !string )
-                return false;
-        #else
-            const char* string = gdk_event->string;
-        #endif
+        const wxWCharBuffer string = wxConvLocal.cMB2WC( gdk_event->string );
+        if( !string )
+            return false;
 
         // Implement OnCharHook by checking ancestor top level windows
         wxWindow *parent = win;
@@ -1107,13 +1101,10 @@ static gint gtk_window_key_press_callback( GtkWidget *widget,
 
         for( const wxChar* pstr = string; *pstr; pstr++ )
         {
-        #if wxUSE_UNICODE
             event.m_uniChar = *pstr;
             // Backward compatible for ISO-8859-1
             event.m_keyCode = *pstr < 256 ? event.m_uniChar : 0;
-        #else
-            event.m_keyCode = *pstr;
-        #endif
+
             if (parent)
             {
                 event.SetEventType( wxEVT_CHAR_HOOK );

@@ -97,8 +97,7 @@ void TimerEventTestCase::OneShot()
 
         wxEventLoopBase& m_loop;
 
-        // don't use (const &) = delete;
-	& operator=(const &) = delete to avoid upsetting MSVC
+	    ExitOnTimerHandler& operator=(const ExitOnTimerHandler&) = delete;
     };
 
     wxEventLoop loop;
@@ -110,14 +109,14 @@ void TimerEventTestCase::OneShot()
     loop.Run();
 
     CPPUNIT_ASSERT_EQUAL( 1, handler.GetNumEvents() );
-}
+};
 
 void TimerEventTestCase::Multiple()
 {
     // FIXME: This test crashes on wxGTK ANSI build slave for unknown reason,
     //        disable it here to let the rest of the test suite run until this
     //        can be fixed.
-#if !defined(__WXGTK__) || wxUSE_UNICODE
+#if !defined(__WXGTK__)
     wxEventLoop loop;
 
     TimerCounterHandler handler;
@@ -143,5 +142,5 @@ void TimerEventTestCase::Multiple()
     // parallel actually) it may be much less than 20 so just check that we get
     // more than one
     CPPUNIT_ASSERT( numTicks > 1 );
-#endif // !(wxGTK Unicode)
+#endif // !(wxGTK)
 }

@@ -12,9 +12,6 @@
 
 #include "testprec.h"
 
-
-#if wxUSE_UNICODE
-
 #include "wx/convauto.h"
 
 #include "wx/mstream.h"
@@ -305,4 +302,3 @@ void ConvAutoTestCase::StreamFallbackMultibyte()
                    6, line1, line2, wxFONTENCODING_CP932);
 }
 
-#endif // wxUSE_UNICODE

@@ -241,17 +241,10 @@ wxMacAssertOutputHandler(const char *WXUNUSED(componentName),
     wxString exceptionStr ;
     wxString errorStr ;
 
-#if wxUSE_UNICODE
     fileNameStr = wxString(fileName, wxConvLocal);
     assertionStr = wxString(assertionString, wxConvLocal);
     exceptionStr = wxString((exceptionLabelString!=0) ? exceptionLabelString : "", wxConvLocal) ;
     errorStr = wxString((errorString!=0) ? errorString : "", wxConvLocal) ;
-#else
-    fileNameStr = fileName;
-    assertionStr = assertionString;
-    exceptionStr = (exceptionLabelString!=0) ? exceptionLabelString : "" ;
-    errorStr = (errorString!=0) ? errorString : "" ;
-#endif
 
     // turn this on, if you want the macOS asserts to flow into log, otherwise they are handled via wxOnAssert
 #if 0
@@ -892,9 +885,7 @@ void wxApp::MacCreateKeyEvent( wxKeyEvent& event, wxWindow* focus , long keymess
     event.m_altDown = modifiers & optionKey;
     event.m_controlDown = modifiers & cmdKey;
     event.m_keyCode = keyval ;
-#if wxUSE_UNICODE
     event.m_uniChar = uniChar ;
-#endif
 
     event.m_rawCode = keymessage;
     event.m_rawFlags = modifiers;

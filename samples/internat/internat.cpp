@@ -116,16 +116,12 @@ static const wxLanguage langIds[] =
     wxLANGUAGE_CZECH,
     wxLANGUAGE_POLISH,
     wxLANGUAGE_SWEDISH,
-#if wxUSE_UNICODE || defined(__WXMOTIF__)
     wxLANGUAGE_JAPANESE,
-#endif
-#if wxUSE_UNICODE
     wxLANGUAGE_GEORGIAN,
     wxLANGUAGE_ENGLISH,
     wxLANGUAGE_ENGLISH_US,
     wxLANGUAGE_ARABIC,
     wxLANGUAGE_ARABIC_EGYPT
-#endif
 };
 
 // note that it makes no sense to translate these strings, they are
@@ -141,16 +137,12 @@ const wxString langNames[] =
     "Czech",
     "Polish",
     "Swedish",
-#if wxUSE_UNICODE || defined(__WXMOTIF__)
     "Japanese",
-#endif
-#if wxUSE_UNICODE
     "Georgian",
     "English",
     "English (U.S.)",
     "Arabic",
     "Arabic (Egypt)"
-#endif
 };
 
 // the arrays must be in sync

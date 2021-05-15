@@ -1090,7 +1090,6 @@ wxTranslateGTKKeyEventToWx(wxKeyEvent& event,
 
     event.m_keyCode = key_code;
 
-#if wxUSE_UNICODE
     event.m_uniChar = gdk_keyval_to_unicode(key_code ? key_code : gdk_event->keyval);
     if ( !event.m_uniChar && event.m_keyCode <= WXK_DELETE )
     {
@@ -1103,10 +1102,6 @@ wxTranslateGTKKeyEventToWx(wxKeyEvent& event,
     // sending unknown key events doesn't really make sense
     if ( !key_code && !event.m_uniChar )
         return false;
-#else
-    if (!key_code)
-        return false;
-#endif // wxUSE_UNICODE
 
     // now fill all the other fields
     wxFillOtherKeyEventFields(event, win, gdk_event);
@@ -1156,20 +1151,16 @@ void AdjustCharEventKeyCodes(wxKeyEvent& event)
         else if ( code >= 'A' && code <= 'Z' )
             event.m_keyCode = code - 'A' + 1;
 
-#if wxUSE_UNICODE
         // Adjust the Unicode equivalent in the same way too.
         if ( event.m_keyCode != code )
             event.m_uniChar = event.m_keyCode;
-#endif // wxUSE_UNICODE
     }
 
-#if wxUSE_UNICODE
     // Check for (b) from above.
     //
     // FIXME: Should we do it for key codes up to 255?
     if ( !event.m_uniChar && code < WXK_DELETE )
         event.m_uniChar = code;
-#endif // wxUSE_UNICODE
 }
 
 } // anonymous namespace
@@ -1303,9 +1294,7 @@ gtk_window_key_press_callback( GtkWidget *WXUNUSED(widget),
             wxLogTrace(TRACE_KEYS, wxT("Char event: %ld"), key_code);
 
             eventChar.m_keyCode = key_code;
-#if wxUSE_UNICODE
             eventChar.m_uniChar = gdk_keyval_to_unicode(key_code);
-#endif // wxUSE_UNICODE
 
             AdjustCharEventKeyCodes(eventChar);
 
@@ -1356,14 +1345,10 @@ bool wxWindowGTK::GTKDoInsertTextFromIM(const char* str)
     bool processed = false;
     for( wxString::const_iterator pstr = data.begin(); pstr != data.end(); ++pstr )
     {
-#if wxUSE_UNICODE
         event.m_uniChar = *pstr;
         // Backward compatible for ISO-8859-1
         event.m_keyCode = *pstr < 256 ? event.m_uniChar : 0;
         wxLogTrace(TRACE_KEYS, wxT("IM sent character '%c'"), event.m_uniChar);
-#else
-        event.m_keyCode = (char)*pstr;
-#endif  // wxUSE_UNICODE
 
         AdjustCharEventKeyCodes(event);
 

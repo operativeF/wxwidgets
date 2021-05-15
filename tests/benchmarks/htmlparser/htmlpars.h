@@ -251,7 +251,7 @@ public:
     virtual ~wx28HtmlEntitiesParser();
 
     // Sets encoding of output string.
-    // Has no effect if wxUSE_UNICODE==1
+    // Has no effect.
     void SetEncoding(wxFontEncoding encoding);
 
     // Parses entities in input and replaces them with respective characters
@@ -262,18 +262,9 @@ public:
     wxChar GetEntityChar(const wxString& entity);
 
     // Returns character that represents given Unicode code
-#if wxUSE_UNICODE
     wxChar GetCharForCode(unsigned code) { return (wxChar)code; }
-#else
-    wxChar GetCharForCode(unsigned code);
-#endif
 
 protected:
-#if !wxUSE_UNICODE
-    wxMBConv *m_conv;
-    wxFontEncoding m_encoding;
-#endif
-
     wx28HtmlEntitiesParser(const wx28HtmlEntitiesParser&) = delete;
 	wx28HtmlEntitiesParser& operator=(const wx28HtmlEntitiesParser&) = delete;
 };

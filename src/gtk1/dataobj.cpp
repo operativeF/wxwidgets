@@ -75,15 +75,10 @@ void wxDataFormat::SetType( wxDataFormatId type )
 
     m_type = type;
 
-#if wxUSE_UNICODE
     if (m_type == wxDF_UNICODETEXT)
         m_format = g_textAtom;
     else if (m_type == wxDF_TEXT)
         m_format = g_altTextAtom;
-#else
-    if (m_type == wxDF_TEXT || m_type == wxDF_UNICODETEXT)
-        m_format = g_textAtom;
-#endif
     else
     if (m_type == wxDF_BITMAP)
         m_format = g_pngAtom;
@@ -115,11 +110,7 @@ void wxDataFormat::SetId( NativeFormat format )
     m_format = format;
 
     if (m_format == g_textAtom)
-#if wxUSE_UNICODE
         m_type = wxDF_UNICODETEXT;
-#else
-        m_type = wxDF_TEXT;
-#endif
     else
     if (m_format == g_altTextAtom)
         m_type = wxDF_TEXT;
@@ -150,12 +141,9 @@ void wxDataFormat::PrepareFormats()
     //     text/uri-list for file dnd because compatibility is not important
     //     here (with whom?)
     if (!g_textAtom)
-#if wxUSE_UNICODE
         g_textAtom = gdk_atom_intern( "UTF8_STRING", FALSE );
         g_altTextAtom = gdk_atom_intern( "STRING", FALSE );
-#else
-        g_textAtom = gdk_atom_intern( "STRING" /* "text/plain" */, FALSE );
-#endif
+
     if (!g_pngAtom)
         g_pngAtom = gdk_atom_intern( "image/png", FALSE );
     if (!g_fileAtom)

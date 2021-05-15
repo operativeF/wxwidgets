@@ -179,7 +179,7 @@ bool wxNotebook::Create(wxWindow *parent,
     }
 #endif //wxUSE_UXTHEME
 
-#if defined(__WINE__) && wxUSE_UNICODE
+#if defined(__WINE__)
     LPCTSTR className = L"SysTabControl32";
 #else
     LPCTSTR className = WC_TABCONTROL;

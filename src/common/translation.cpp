@@ -83,13 +83,6 @@ const size_t32 MSGCATALOG_MAGIC_SW = 0xde120495;
 namespace
 {
 
-#if !wxUSE_UNICODE
-// We need to keep track of (char*) msgids in non-Unicode legacy builds. Instead
-// of making the public wxMsgCatalog and wxTranslationsLoader APIs ugly, we
-// store them in this global map.
-wxStringToStringHashMap gs_msgIdCharset;
-#endif
-
 // ----------------------------------------------------------------------------
 // Platform specific helpers
 // ----------------------------------------------------------------------------
@@ -1247,11 +1240,6 @@ bool wxMsgCatalogFile::FillHash(wxStringToStringHashMap& hash,
 
     if ( !m_charset.empty() )
     {
-#if !wxUSE_UNICODE && wxUSE_FONTMAP
-        // determine if we need any conversion at all
-        wxFontEncoding encCat = wxFontMapperBase::GetEncodingFromName(m_charset);
-        if ( encCat != wxLocale::GetSystemEncoding() )
-#endif
         {
             inputConv = new wxCSConv(m_charset);
 
@@ -1262,23 +1250,10 @@ bool wxMsgCatalogFile::FillHash(wxStringToStringHashMap& hash,
     }
     else // no need or not possible to convert the encoding
     {
-#if wxUSE_UNICODE
         // we must somehow convert the narrow strings in the message catalog to
         // wide strings, so use the default conversion if we have no charset
         inputConv = wxConvCurrent;
-#endif
     }
-
-#if !wxUSE_UNICODE
-    wxString msgIdCharset = gs_msgIdCharset[domain];
-
-    // conversion to apply to msgid strings before looking them up: we only
-    // need it if the msgids are neither in 7 bit ASCII nor in the same
-    // encoding as the catalog
-    wxScopedPtr<wxCSConv> sourceConv;
-    if ( !msgIdCharset.empty() && (msgIdCharset != m_charset) )
-        sourceConv.reset(new wxCSConv(msgIdCharset));
-#endif // !wxUSE_UNICODE
 
     for (size_t32 i = 0; i < m_numStrings; i++)
     {
@@ -1287,14 +1262,7 @@ bool wxMsgCatalogFile::FillHash(wxStringToStringHashMap& hash,
             return false; // may happen for invalid MO files
 
         wxString msgid;
-#if wxUSE_UNICODE
         msgid = wxString(data, *inputConv);
-#else // ASCII
-        if ( inputConv && sourceConv )
-            msgid = wxString(inputConv->cMB2WC(data), *sourceConv);
-        else
-            msgid = data;
-#endif // wxUSE_UNICODE
 
         data = StringAtOfs(m_pTransTable, i);
         if (!data)
@@ -1308,14 +1276,7 @@ bool wxMsgCatalogFile::FillHash(wxStringToStringHashMap& hash,
             const char * const str = data + offset;
 
             wxString msgstr;
-#if wxUSE_UNICODE
             msgstr = wxString(str, *inputConv);
-#else
-            if ( inputConv )
-                msgstr = wxString(inputConv->cMB2WC(str), *wxConvUI);
-            else
-                msgstr = str;
-#endif // wxUSE_UNICODE/!wxUSE_UNICODE
 
             if ( !msgstr.empty() )
             {
@@ -1340,23 +1301,6 @@ bool wxMsgCatalogFile::FillHash(wxStringToStringHashMap& hash,
 // ----------------------------------------------------------------------------
 // wxMsgCatalog class
 // ----------------------------------------------------------------------------
-
-#if !wxUSE_UNICODE
-wxMsgCatalog::~wxMsgCatalog()
-{
-    if ( m_conv )
-    {
-        if ( wxConvUI == m_conv )
-        {
-            // we only change wxConvUI if it points to wxConvLocal so we reset
-            // it back to it too
-            wxConvUI = &wxConvLocal;
-        }
-
-        delete m_conv;
-    }
-}
-#endif // !wxUSE_UNICODE
 
 /* static */
 wxMsgCatalog *wxMsgCatalog::CreateFromFile(const wxString& filename,
@@ -1529,16 +1473,6 @@ bool wxTranslations::AddStdCatalog()
 
     return false;
 }
-
-#if !wxUSE_UNICODE
-bool wxTranslations::AddCatalog(const wxString& domain,
-                                wxLanguage msgIdLanguage,
-                                const wxString& msgIdCharset)
-{
-    gs_msgIdCharset[domain] = msgIdCharset;
-    return AddCatalog(domain, msgIdLanguage);
-}
-#endif // !wxUSE_UNICODE
 
 bool wxTranslations::AddCatalog(const wxString& domain,
                                 wxLanguage msgIdLanguage)

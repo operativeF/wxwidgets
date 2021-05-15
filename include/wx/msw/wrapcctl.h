@@ -21,7 +21,7 @@
 // Set Unicode format for a common control
 inline void wxSetCCUnicodeFormat(HWND hwnd)
 {
-    ::SendMessage(hwnd, CCM_SETUNICODEFORMAT, wxUSE_UNICODE, 0);
+    ::SendMessage(hwnd, CCM_SETUNICODEFORMAT, 1, 0);
 }
 
 #if wxUSE_GUI

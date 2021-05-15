@@ -1657,9 +1657,6 @@ void FormMain::PopulateWithLibraryConfig ()
     ADD_WX_LIB_CONF( wxUSE_DEBUG_NEW_ALWAYS )
     ADD_WX_LIB_CONF( wxUSE_ON_FATAL_EXCEPTION )
 
-    ADD_WX_LIB_CONF_GROUP("Unicode Support")
-    ADD_WX_LIB_CONF( wxUSE_UNICODE )
-
     ADD_WX_LIB_CONF_GROUP("Global Features")
     ADD_WX_LIB_CONF( wxUSE_EXCEPTIONS )
     ADD_WX_LIB_CONF( wxUSE_EXTENDED_RTTI )
@@ -2689,15 +2686,12 @@ void FormMain::OnAbout(wxCommandEvent& WXUNUSED(event))
 
     wxString msg;
     msg.Printf( "wxPropertyGrid Sample"
-#if wxUSE_UNICODE
-  #if defined(wxUSE_UNICODE_UTF8) && wxUSE_UNICODE_UTF8
-                " <utf-8>"
-  #else
-                " <unicode>"
-  #endif
+#if defined(wxUSE_UNICODE_UTF8) && wxUSE_UNICODE_UTF8
+            " <utf-8>"
 #else
-                " <ansi>"
+            " <unicode>"
 #endif
+
 #ifdef __WXDEBUG__
                 " <debug>"
 #else

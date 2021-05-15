@@ -746,12 +746,8 @@ void wxComboBox::Replace( long from, long to, const wxString& value )
     if ( value.empty() ) return;
     gint pos = (gint)to;
 
-#if wxUSE_UNICODE
     wxCharBuffer buffer = wxConvUTF8.cWX2MB( value );
     gtk_editable_insert_text( GTK_EDITABLE(entry), (const char*) buffer, strlen( (const char*) buffer ), &pos );
-#else
-    gtk_editable_insert_text( GTK_EDITABLE(entry), value.c_str(), value.length(), &pos );
-#endif
 }
 
 void wxComboBox::SetSelection( long from, long to )

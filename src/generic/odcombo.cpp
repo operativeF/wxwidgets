@@ -424,11 +424,7 @@ void wxVListBoxComboPopup::OnComboCharEvent( wxKeyEvent& event )
 {
     // unlike in OnComboKeyEvent, wxEVT_CHAR contains meaningful
     // printable character information, so pass it
-#if wxUSE_UNICODE
     const wxChar charcode = event.GetUnicodeKey();
-#else
-    const wxChar charcode = (wxChar)event.GetKeyCode();
-#endif
 
     if ( !HandleKey(event.GetKeyCode(), true, charcode) )
         event.Skip();
@@ -506,11 +502,8 @@ void wxVListBoxComboPopup::OnChar(wxKeyEvent& event)
     {
         // Process partial completion key codes here, but not the arrow keys as
         // the base class will do that for us
-#if wxUSE_UNICODE
         const wxChar charcode = event.GetUnicodeKey();
-#else
-        const wxChar charcode = (wxChar)event.GetKeyCode();
-#endif
+
         if ( wxIsprint(charcode) )
         {
             OnComboCharEvent(event);

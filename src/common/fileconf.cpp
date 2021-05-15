@@ -427,17 +427,12 @@ wxFileConfig::wxFileConfig(wxInputStream &inStream, const wxMBConv& conv)
     }
     while ( !inStream.Eof() );
 
-#if wxUSE_UNICODE
     size_t len;
     cbuf = conv.cMB2WC((char *)buf.GetData(), buf.GetDataLen() + 1, &len);
     if ( !len && buf.GetDataLen() )
     {
         wxLogError(_("Failed to read config options."));
     }
-#else // !wxUSE_UNICODE
-    // no need for conversion
-    cbuf = wxCharBuffer::CreateNonOwned((char *)buf.GetData(), buf.GetDataLen());
-#endif // wxUSE_UNICODE/!wxUSE_UNICODE
 
     // parse the input contents if there is anything to parse
     if ( cbuf )
@@ -2081,11 +2076,7 @@ static wxString FilterOutEntryName(const wxString& str)
     //
     // NB: note that wxCONFIG_IMMUTABLE_PREFIX and wxCONFIG_PATH_SEPARATOR
     //     should *not* be quoted
-    if (
-#if !wxUSE_UNICODE
-            ((unsigned char)c < 127) &&
-#endif // ANSI
-         !wxIsalnum(c) && !wxStrchr(wxT("@_/-!.*%()"), c) )
+    if ( !wxIsalnum(c) && !wxStrchr(wxT("@_/-!.*%()"), c) )
     {
       strResult += wxT('\\');
     }

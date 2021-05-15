@@ -126,11 +126,8 @@ void wxStringTokenizer::SetString(const wxString& str,
         }
     }
 
-#if wxUSE_UNICODE // FIXME-UTF8: only wc_str()
+    // FIXME-UTF8: only wc_str()
     m_delims = delims.wc_str();
-#else
-    m_delims = delims.mb_str();
-#endif
     m_delimsLen = delims.length();
 
     m_mode = mode;

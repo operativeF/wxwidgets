@@ -168,9 +168,7 @@ bool RegExTestCase::parseFlags(const wxString& flags)
             // match options
             case '^': m_matchFlags |= wxRE_NOTBOL; break;
             case '$': m_matchFlags |= wxRE_NOTEOL; break;
-#if wxUSE_UNICODE
             case '*': break;
-#endif
             // compile options
             case '&': m_advanced = m_basic = true; break;
             case 'b': m_basic = true; break;

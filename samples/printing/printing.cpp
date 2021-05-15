@@ -162,11 +162,9 @@ void MyApp::Draw(wxDC&dc)
 
     dc.DrawRotatedText( "This\nis\na multi-line\ntext", 170, 100, -m_angle/1.5);
 
-#if wxUSE_UNICODE
     const char *test = "Hebrew    שלום -- Japanese (日本語)";
     wxString tmp = wxConvUTF8.cMB2WC( test );
     dc.DrawText( tmp, 10, 200 );
-#endif
 
     wxPoint points[5];
     points[0].x = 0;

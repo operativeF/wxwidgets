@@ -266,46 +266,33 @@ enum wxPosixPermissions
     #endif
 
     // then wide char ones
-    #if wxUSE_UNICODE
+    #define wxCRT_OpenW         _wopen
 
-        #define wxCRT_OpenW         _wopen
+    wxDECL_FOR_STRICT_MINGW32(int, _wopen, (const wchar_t*, int, ...))
+    wxDECL_FOR_STRICT_MINGW32(int, _waccess, (const wchar_t*, int))
+    wxDECL_FOR_STRICT_MINGW32(int, _wchmod, (const wchar_t*, int))
+    wxDECL_FOR_STRICT_MINGW32(int, _wmkdir, (const wchar_t*))
+    wxDECL_FOR_STRICT_MINGW32(int, _wrmdir, (const wchar_t*))
+    wxDECL_FOR_STRICT_MINGW32(int, _wstati64, (const wchar_t*, struct _stati64*))
 
-        wxDECL_FOR_STRICT_MINGW32(int, _wopen, (const wchar_t*, int, ...))
-        wxDECL_FOR_STRICT_MINGW32(int, _waccess, (const wchar_t*, int))
-        wxDECL_FOR_STRICT_MINGW32(int, _wchmod, (const wchar_t*, int))
-        wxDECL_FOR_STRICT_MINGW32(int, _wmkdir, (const wchar_t*))
-        wxDECL_FOR_STRICT_MINGW32(int, _wrmdir, (const wchar_t*))
-        wxDECL_FOR_STRICT_MINGW32(int, _wstati64, (const wchar_t*, struct _stati64*))
-
-        #define   wxCRT_AccessW     _waccess
-        #define   wxCRT_ChmodW      _wchmod
-        #define   wxCRT_MkDirW      _wmkdir
-        #define   wxCRT_RmDirW      _wrmdir
-        #ifdef wxHAS_HUGE_FILES
-            #define   wxCRT_StatW       _wstati64
-        #else
-            #define   wxCRT_StatW       _wstat
-        #endif
-    #endif // wxUSE_UNICODE
+    #define   wxCRT_AccessW     _waccess
+    #define   wxCRT_ChmodW      _wchmod
+    #define   wxCRT_MkDirW      _wmkdir
+    #define   wxCRT_RmDirW      _wrmdir
+    #ifdef wxHAS_HUGE_FILES
+        #define   wxCRT_StatW       _wstati64
+    #else
+        #define   wxCRT_StatW       _wstat
+    #endif
 
 
     // finally the default char-type versions
-    #if wxUSE_UNICODE
-        #define wxCRT_Open      wxCRT_OpenW
-        #define wxCRT_Access    wxCRT_AccessW
-        #define wxCRT_Chmod     wxCRT_ChmodW
-        #define wxCRT_MkDir     wxCRT_MkDirW
-        #define wxCRT_RmDir     wxCRT_RmDirW
-        #define wxCRT_Stat      wxCRT_StatW
-    #else // !wxUSE_UNICODE
-        #define wxCRT_Open      wxCRT_OpenA
-        #define wxCRT_Access    wxCRT_AccessA
-        #define wxCRT_Chmod     wxCRT_ChmodA
-        #define wxCRT_MkDir     wxCRT_MkDirA
-        #define wxCRT_RmDir     wxCRT_RmDirA
-        #define wxCRT_Stat      wxCRT_StatA
-    #endif // wxUSE_UNICODE/!wxUSE_UNICODE
-
+    #define wxCRT_Open      wxCRT_OpenW
+    #define wxCRT_Access    wxCRT_AccessW
+    #define wxCRT_Chmod     wxCRT_ChmodW
+    #define wxCRT_MkDir     wxCRT_MkDirW
+    #define wxCRT_RmDir     wxCRT_RmDirW
+    #define wxCRT_Stat      wxCRT_StatW
 
     // constants (unless already defined by the user code)
     #ifdef wxHAS_UNDERSCORES_IN_POSIX_IDENTS

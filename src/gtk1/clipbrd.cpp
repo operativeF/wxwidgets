@@ -617,11 +617,7 @@ bool wxClipboard::GetData( wxDataObject& data )
            tokens is given (that is more than 1 for special characters)
            (tested with Gnumeric-1.6.1 and OpenOffice.org-2.0.2)
          */
-#if wxUSE_UNICODE
         if ( format != wxDF_UNICODETEXT || data.GetDataSize(format) > 0 )
-#else // !UNICODE
-        if ( format != wxDF_TEXT || data.GetDataSize(format) > 1 )
-#endif // UNICODE / !UNICODE
         {
             wxCHECK_MSG( m_formatSupported, false,
                          wxT("error retrieving data from clipboard") );

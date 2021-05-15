@@ -187,7 +187,7 @@ static wxStrCacheStatsDumper s_showCacheStats;
 
 wxSTD ostream& operator<<(wxSTD ostream& os, const wxCStrData& str)
 {
-#if wxUSE_UNICODE && !wxUSE_UNICODE_UTF8
+#if !wxUSE_UNICODE_UTF8
     return os << wxConvWhateverWorks.cWX2MB(str);
 #else
     return os << str.AsInternal();
@@ -213,7 +213,7 @@ wxSTD ostream& operator<<(wxSTD ostream& os, const wxScopedWCharBuffer& str)
     return os << wxConvWhateverWorks.cWC2MB(str.data());
 }
 
-#if wxUSE_UNICODE && defined(HAVE_WOSTREAM)
+#if defined(HAVE_WOSTREAM)
 
 wxSTD wostream& operator<<(wxSTD wostream& wos, const wxString& str)
 {
@@ -230,7 +230,7 @@ wxSTD wostream& operator<<(wxSTD wostream& wos, const wxScopedWCharBuffer& str)
     return wos << str.data();
 }
 
-#endif  // wxUSE_UNICODE && defined(HAVE_WOSTREAM)
+#endif  // defined(HAVE_WOSTREAM)
 
 #endif // wxUSE_STD_IOSTREAM
 
@@ -313,7 +313,6 @@ static inline void DeleteStringFromConversionCache(T& hash, const wxString *s)
     }
 }
 
-#if wxUSE_UNICODE
 // NB: non-STL implementation doesn't compile with "const wxString*" key type,
 //     so we have to use wxString* here and const-cast when used
 WX_DECLARE_HASH_MAP(wxString*, char*, wxPointerHash, wxPointerEqual,
@@ -331,7 +330,6 @@ const char* wxCStrData::AsChar() const
 
     return s + m_offset;
 }
-#endif // wxUSE_UNICODE
 
 #if !wxUSE_UNICODE_WCHAR
 WX_DECLARE_HASH_MAP(wxString*, wchar_t*, wxPointerHash, wxPointerEqual,
@@ -353,10 +351,8 @@ const wchar_t* wxCStrData::AsWChar() const
 
 wxString::~wxString()
 {
-#if wxUSE_UNICODE
     // FIXME-UTF8: do this only if locale is not UTF8 if wxUSE_UNICODE_UTF8
     DeleteStringFromConversionCache(gs_stringsCharCache, this);
-#endif
 #if !wxUSE_UNICODE_WCHAR
     DeleteStringFromConversionCache(gs_stringsWCharCache, this);
 #endif
@@ -436,7 +432,7 @@ wxString::SubstrBufFromMB wxString::ConvertStr(const char *psz, size_t nLength,
 }
 #endif // wxUSE_UNICODE_UTF8
 
-#if wxUSE_UNICODE_UTF8 || !wxUSE_UNICODE
+#if wxUSE_UNICODE_UTF8
 /* static */
 wxString::SubstrBufFromWC wxString::ConvertStr(const wchar_t *pwz, size_t nLength,
                                                const wxMBConv& conv)
@@ -455,7 +451,7 @@ wxString::SubstrBufFromWC wxString::ConvertStr(const wchar_t *pwz, size_t nLengt
     else
         return SubstrBufFromWC(mbBuf, mbLen);
 }
-#endif // wxUSE_UNICODE_UTF8 || !wxUSE_UNICODE
+#endif // wxUSE_UNICODE_UTF8
 
 // This std::string::c_str()-like method returns a wide char pointer to string
 // contents. In wxUSE_UNICODE_WCHAR case it is trivial as it can simply return
@@ -514,7 +510,6 @@ const wchar_t *wxString::AsWChar(const wxMBConv& conv) const
 // contents: this always requires converting it to the specified encoding in
 // non-ANSI build except if we need to convert to UTF-8 and this is what we
 // already use internally.
-#if wxUSE_UNICODE
 
 const char *wxString::AsChar(const wxMBConv& conv) const
 {
@@ -546,8 +541,6 @@ const char *wxString::AsChar(const wxMBConv& conv) const
 
     return m_convertedToChar.m_str;
 }
-
-#endif // wxUSE_UNICODE
 
 // shrink to minimal size (releasing extra memory)
 bool wxString::Shrink()
@@ -1011,13 +1004,8 @@ size_t wxString::find_last_not_of(wxUniChar ch, size_t nStart) const
 // the functions above were implemented for wchar_t* arguments in Unicode
 // build and char* in ANSI build; below are implementations for the other
 // version:
-#if wxUSE_UNICODE
-    #define wxOtherCharType char
-    #define STRCONV         (const wxChar*)wxConvLibc.cMB2WC
-#else
-    #define wxOtherCharType wchar_t
-    #define STRCONV         (const wxChar*)wxConvLibc.cWC2MB
-#endif
+#define wxOtherCharType char
+#define STRCONV         (const wxChar*)wxConvLibc.cMB2WC
 
 size_t wxString::find_first_of(const wxOtherCharType* sz, size_t nStart) const
     { return find_first_of(STRCONV(sz), nStart); }
@@ -1135,9 +1123,6 @@ int wxString::CmpNoCase(const wxString& s) const
 #endif // !wxUSE_UNICODE_UTF8/wxUSE_UNICODE_UTF8
 }
 
-
-#if wxUSE_UNICODE
-
 wxString wxString::FromAscii(const char *ascii, size_t len)
 {
     wxString res;
@@ -1200,7 +1185,6 @@ const wxScopedCharBuffer wxString::ToAscii(char replaceWith) const
     return buffer;
 }
 
-#endif // wxUSE_UNICODE
 
 // extract string of length nCount starting at nFirst
 wxString wxString::Mid(size_t nFirst, size_t nCount) const
@@ -1708,7 +1692,7 @@ bool wxString::ToCLong(long *pVal, int base) const
     wxASSERT_MSG( !base || (base > 1 && base <= 36), wxT("invalid base") );
 
     WX_STRING_TO_X_TYPE_START
-#if (wxUSE_UNICODE_UTF8 || !wxUSE_UNICODE) && defined(wxHAS_XLOCALE_SUPPORT)
+#if (wxUSE_UNICODE_UTF8) && defined(wxHAS_XLOCALE_SUPPORT)
     long val = wxStrtol_lA(start, &end, base, wxCLocale);
 #else
     long val = wxStrtol_l(start, &end, base, wxCLocale);
@@ -1721,7 +1705,7 @@ bool wxString::ToCULong(unsigned long *pVal, int base) const
     wxASSERT_MSG( !base || (base > 1 && base <= 36), wxT("invalid base") );
 
     WX_STRING_TO_X_TYPE_START
-#if (wxUSE_UNICODE_UTF8 || !wxUSE_UNICODE) && defined(wxHAS_XLOCALE_SUPPORT)
+#if (wxUSE_UNICODE_UTF8) && defined(wxHAS_XLOCALE_SUPPORT)
     unsigned long val = wxStrtoul_lA(start, &end, base, wxCLocale);
 #else
     unsigned long val = wxStrtoul_l(start, &end, base, wxCLocale);
@@ -1732,7 +1716,7 @@ bool wxString::ToCULong(unsigned long *pVal, int base) const
 bool wxString::ToCDouble(double *pVal) const
 {
     WX_STRING_TO_X_TYPE_START
-#if (wxUSE_UNICODE_UTF8 || !wxUSE_UNICODE) && defined(wxHAS_XLOCALE_SUPPORT)
+#if (wxUSE_UNICODE_UTF8) && defined(wxHAS_XLOCALE_SUPPORT)
     double val = wxStrtod_lA(start, &end, wxCLocale);
 #else
     double val = wxStrtod_l(start, &end, wxCLocale);

@@ -498,9 +498,6 @@ wxLogFrame::wxLogFrame(wxWindow *pParent, wxLogWindow *log, const wxString& szTi
             wxHSCROLL       |
             // needed for Win32 to avoid 65Kb limit but it doesn't work well
             // when using RichEdit 2.0 which we always do in the Unicode build
-#if !wxUSE_UNICODE
-            wxTE_RICH       |
-#endif // !wxUSE_UNICODE
             wxTE_READONLY);
 
 #if wxUSE_MENUS

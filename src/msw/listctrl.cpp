@@ -126,19 +126,11 @@ wxGetListCtrlItemRect(HWND hwnd, int item, int flags, RECT& rect)
 // convert LV_ITEMA and LV_ITEMW to LV_ITEM (which is either LV_ITEMA or
 // LV_ITEMW depending on wxUSE_UNICODE setting), so that it can be processed
 // by wxConvertToMSWListItem().
-#if wxUSE_UNICODE
-    #define LV_ITEM_NATIVE  LV_ITEMW
-    #define LV_ITEM_OTHER   LV_ITEMA
+#define LV_ITEM_NATIVE  LV_ITEMW
+#define LV_ITEM_OTHER   LV_ITEMA
 
-    #define LV_CONV_TO_WX   cMB2WX
-    #define LV_CONV_BUF     wxMB2WXbuf
-#else // ANSI
-    #define LV_ITEM_NATIVE  LV_ITEMA
-    #define LV_ITEM_OTHER   LV_ITEMW
-
-    #define LV_CONV_TO_WX   cWC2WX
-    #define LV_CONV_BUF     wxWC2WXbuf
-#endif // Unicode/ANSI
+#define LV_CONV_TO_WX   cMB2WX
+#define LV_CONV_BUF     wxMB2WXbuf
 
 class wxLV_ITEM
 {

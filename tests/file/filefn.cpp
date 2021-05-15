@@ -86,9 +86,7 @@ private:
                       const wxString& destFilePath);
 
     wxString m_fileNameASCII;
-#if wxUSE_UNICODE
     wxString m_fileNameNonASCII;
-#endif // wxUSE_UNICODE
     wxString m_fileNameWork;
 
     FileFunctionsTestCase(const FileFunctionsTestCase&) = delete;
@@ -113,12 +111,10 @@ void FileFunctionsTestCase::setUp()
     wxFileName fn1(wxFileName::GetTempDir(), wxT("wx_file_mask.txt"));
     m_fileNameASCII = fn1.GetFullPath();
 
-#if wxUSE_UNICODE
     // This file name is 'wx_file_mask.txt' in Russian.
     wxFileName fn2(wxFileName::GetTempDir(),
       wxT("wx_\u043C\u0430\u0441\u043A\u0430_\u0444\u0430\u0439\u043B\u0430.txt"));
     m_fileNameNonASCII = fn2.GetFullPath();
-#endif // wxUSE_UNICODE
 
     wxFileName fn3(wxFileName::GetTempDir(), wxT("wx_test_copy"));
     m_fileNameWork = fn3.GetFullPath();
@@ -131,12 +127,10 @@ void FileFunctionsTestCase::tearDown()
     {
         wxRemoveFile(m_fileNameASCII);
     }
-#if wxUSE_UNICODE
     if ( wxFileExists(m_fileNameNonASCII) )
     {
         wxRemoveFile(m_fileNameNonASCII);
     }
-#endif // wxUSE_UNICODE
     if ( wxFileExists(m_fileNameWork) )
     {
         wxRemoveFile(m_fileNameWork);
@@ -183,10 +177,8 @@ void FileFunctionsTestCase::CreateFile()
 {
     // Create file name containing ASCII characters only.
     DoCreateFile(m_fileNameASCII);
-#if wxUSE_UNICODE
     // Create file name containing non-ASCII characters.
     DoCreateFile(m_fileNameNonASCII);
-#endif // wxUSE_UNICODE
 }
 
 void FileFunctionsTestCase::DoCreateFile(const wxString& filePath)
@@ -208,10 +200,8 @@ void FileFunctionsTestCase::FileExists()
 
     // Check file name containing ASCII characters only.
     DoFileExists(m_fileNameASCII);
-#if wxUSE_UNICODE
     // Check file name containing non-ASCII characters.
     DoFileExists(m_fileNameNonASCII);
-#endif // wxUSE_UNICODE
 }
 
 void FileFunctionsTestCase::DoFileExists(const wxString& filePath)
@@ -234,10 +224,8 @@ void FileFunctionsTestCase::FindFile()
 {
     // Find file name containing ASCII characters only.
     DoFindFile(m_fileNameASCII);
-#if wxUSE_UNICODE
     // Find file name containing non-ASCII characters.
     DoFindFile(m_fileNameNonASCII);
-#endif // wxUSE_UNICODE
 }
 
 void FileFunctionsTestCase::DoFindFile(const wxString& filePath)
@@ -296,10 +284,8 @@ void FileFunctionsTestCase::RemoveFile()
 {
     // Create & remove file with name containing ASCII characters only.
     DoRemoveFile(m_fileNameASCII);
-#if wxUSE_UNICODE
     // Create & remove file with name containing non-ASCII characters.
     DoRemoveFile(m_fileNameNonASCII);
-#endif // wxUSE_UNICODE
 }
 
 void FileFunctionsTestCase::DoRemoveFile(const wxString& filePath)
@@ -320,7 +306,6 @@ void FileFunctionsTestCase::RenameFile()
 {
     // Verify renaming file with/without overwriting
     // when new file already exist/don't exist.
-#if wxUSE_UNICODE
     DoRenameFile(m_fileNameASCII, m_fileNameNonASCII, false, false);
     DoRenameFile(m_fileNameASCII, m_fileNameNonASCII, false, true);
     DoRenameFile(m_fileNameASCII, m_fileNameNonASCII, true, false);
@@ -329,7 +314,6 @@ void FileFunctionsTestCase::RenameFile()
     DoRenameFile(m_fileNameNonASCII, m_fileNameASCII, false, true);
     DoRenameFile(m_fileNameNonASCII, m_fileNameASCII, true, false);
     DoRenameFile(m_fileNameNonASCII, m_fileNameASCII, true, true);
-#endif // wxUSE_UNICODE
 }
 
 void
@@ -395,10 +379,8 @@ FileFunctionsTestCase::DoRenameFile(const wxString& oldFilePath,
 
 void FileFunctionsTestCase::ConcatenateFiles()
 {
-#if wxUSE_UNICODE
     DoConcatFile(m_fileNameASCII, m_fileNameNonASCII, m_fileNameWork);
     DoConcatFile(m_fileNameNonASCII, m_fileNameASCII, m_fileNameWork);
-#endif // wxUSE_UNICODE
 }
 
 void FileFunctionsTestCase::DoConcatFile(const wxString& filePath1,
@@ -550,25 +532,21 @@ void FileFunctionsTestCase::PathOnly()
 // Rmdir fails on them on Linux. See ticket #17644.
 void FileFunctionsTestCase::Mkdir()
 {
-#if wxUSE_UNICODE
     wxString dirname = wxString::FromUTF8("__wxMkdir_test_dir_with_\xc3\xb6");
     const std::string msg = wxString::Format("Dir: %s", dirname).ToStdString();
     CPPUNIT_ASSERT_MESSAGE( msg, wxMkdir(dirname) );
     CPPUNIT_ASSERT_MESSAGE( msg, wxDirExists(dirname) );
     CPPUNIT_ASSERT_MESSAGE( msg, wxRmdir(dirname) );
-#endif // wxUSE_UNICODE
 }
 
 void FileFunctionsTestCase::Rmdir()
 {
-#if wxUSE_UNICODE
     wxString dirname = wxString::FromUTF8("__wxRmdir_test_dir_with_\xc3\xb6");
     const std::string msg = wxString::Format("Dir: %s", dirname).ToStdString();
 
     CPPUNIT_ASSERT_MESSAGE( msg, wxMkdir(dirname) );
     CPPUNIT_ASSERT_MESSAGE( msg, wxRmdir(dirname) );
     CPPUNIT_ASSERT_MESSAGE( msg, !wxDirExists(dirname) );
-#endif // wxUSE_UNICODE
 }
 
 /*

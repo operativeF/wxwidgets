@@ -768,10 +768,10 @@ void MyFrame::BuildDataViewCtrl(wxPanel* parent, unsigned int nPanel, unsigned l
             m_music_model = new MyMusicTreeModel;
             m_ctrl[Page_Music]->AssociateModel( m_music_model.get() );
 
-#if wxUSE_DRAG_AND_DROP && wxUSE_UNICODE
+#if wxUSE_DRAG_AND_DROP
             m_ctrl[Page_Music]->EnableDragSource( wxDF_UNICODETEXT );
             m_ctrl[Page_Music]->EnableDropTarget( wxDF_UNICODETEXT );
-#endif // wxUSE_DRAG_AND_DROP && wxUSE_UNICODE
+#endif // wxUSE_DRAG_AND_DROP
 
             // column 0 of the view control:
 

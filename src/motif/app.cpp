@@ -170,7 +170,6 @@ bool wxApp::Initialize(int& argc_, wxChar **argv_)
     //             is just a temporary fix to make wxX11 compile in Unicode
     //             build, the real fix is to change Initialize()'s signature
     //             to use char* on Unix.
-#if wxUSE_UNICODE
     // XtOpenDisplay() wants char*, not wchar_t*, so convert
     int i;
     char **argvX11 = new char *[argc + 1];
@@ -219,21 +218,6 @@ bool wxApp::Initialize(int& argc_, wxChar **argv_)
 
     delete [] argvX11;
 
-#else // ANSI
-
-    Display *dpy = XtOpenDisplay((XtAppContext) wxTheApp->m_appContext,
-        (String)NULL,
-        appname.c_str(),
-        clsname.c_str(),
-        NULL, 0,    // no options
-# if XtSpecificationRelease < 5
-        (Cardinal*) &argc,
-# else
-        &argc,
-# endif
-        argv);
-
-#endif // Unicode/ANSI
 
     if (!dpy) {
          // if you don't log to stderr, nothing will be shown...

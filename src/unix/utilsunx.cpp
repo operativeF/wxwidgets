@@ -410,7 +410,6 @@ public:
         }
     }
 
-#if wxUSE_UNICODE
     ArgsArray(const wchar_t* const* wargv)
     {
         int argc = 0;
@@ -424,7 +423,6 @@ public:
             m_argv[i] = wxSafeConvertWX2MB(wargv[i]).release();
         }
     }
-#endif // wxUSE_UNICODE
 
     ~ArgsArray()
     {
@@ -472,8 +470,6 @@ long wxExecute(const wxString& command, int flags, wxProcess *process,
     return wxExecute(argv, flags, process, env);
 }
 
-#if wxUSE_UNICODE
-
 long wxExecute(const wchar_t* const* wargv, int flags, wxProcess* process,
         const wxExecuteEnv *env)
 {
@@ -481,8 +477,6 @@ long wxExecute(const wchar_t* const* wargv, int flags, wxProcess* process,
 
     return wxExecute(argv, flags, process, env);
 }
-
-#endif // wxUSE_UNICODE
 
 namespace
 {

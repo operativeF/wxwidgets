@@ -379,7 +379,7 @@
 // ANSI build hasn't been updated to work without implicit wxString encoding
 // and never will be, as it will be removed soon anyhow. And in UTF-8-only
 // build we actually want to use implicit encoding (UTF-8).
-#if wxUSE_UNICODE && !wxUSE_UTF8_LOCALE_ONLY
+#if !wxUSE_UTF8_LOCALE_ONLY
 #define wxNO_IMPLICIT_WXSTRING_ENCODING
 #endif
 

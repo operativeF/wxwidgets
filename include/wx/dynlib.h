@@ -299,11 +299,7 @@ public:
                (
                 handle,
                 name +
-#if wxUSE_UNICODE
                 L'W'
-#else
-                'A'
-#endif
                );
     }
 

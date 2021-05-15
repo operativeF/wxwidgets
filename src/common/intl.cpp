@@ -400,7 +400,7 @@ static const char *wxSetlocaleTryUTF8(int c, const wxString& lc)
     //     non-UTF-8 locale if it fails, but this is not necessary under the
     //     supported macOS versions where xx_YY locales are just aliases to
     //     xx_YY.UTF-8 anyhow.
-#if wxUSE_UNICODE && !defined(__WXMAC__)
+#if !defined(__WXMAC__)
     if ( !lc.empty() )
     {
         wxString buf(lc);
@@ -426,7 +426,7 @@ static const char *wxSetlocaleTryUTF8(int c, const wxString& lc)
 
     // if we can't set UTF-8 locale, try non-UTF-8 one:
     if ( !l )
-#endif // wxUSE_UNICODE && !__WXMAC__
+#endif // !__WXMAC__
         l = wxSetlocale(c, lc);
 
     return l;
@@ -579,7 +579,7 @@ bool wxLocale::Init(int lang, int flags)
         // and also call setlocale() to change locale used by the CRT
         retloc = info->TrySetLocale();
     }
-#if wxUSE_UNICODE && (defined(__VISUALC__) || defined(__MINGW32__))
+#if (defined(__VISUALC__) || defined(__MINGW32__))
     // VC++ setlocale() (also used by Mingw) can't set locale to languages that
     // can only be written using Unicode, therefore wxSetlocale() call fails
     // for such languages but we don't want to report it as an error -- so that
@@ -940,18 +940,6 @@ wxFontEncoding wxLocale::GetSystemEncoding()
     {
         wxFontEncoding enc = wxFontMapperBase::GetEncodingFromName(encname);
 
-        // on some modern Linux systems (RedHat 8) the default system locale
-        // is UTF8 -- but it isn't supported by wxGTK1 in ANSI build at all so
-        // don't even try to use it in this case
-#if !wxUSE_UNICODE && \
-        ((defined(__WXGTK__) && !defined(__WXGTK20__)) || defined(__WXMOTIF__))
-        if ( enc == wxFONTENCODING_UTF8 )
-        {
-            // the most similar supported encoding...
-            enc = wxFONTENCODING_ISO8859_1;
-        }
-#endif // !wxUSE_UNICODE
-
         // GetEncodingFromName() returns wxFONTENCODING_DEFAULT for C locale
         // (a.k.a. US-ASCII) which is arguably a bug but keep it like this for
         // backwards compatibility and just take care to not return
@@ -1174,12 +1162,9 @@ bool wxLocale::AddCatalog(const wxString& szDomain,
     wxTranslations *t = wxTranslations::Get();
     if ( !t )
         return false;
-#if wxUSE_UNICODE
+
     wxUnusedVar(msgIdCharset);
     return t->AddCatalog(szDomain, msgIdLanguage);
-#else
-    return t->AddCatalog(szDomain, msgIdLanguage, msgIdCharset);
-#endif
 }
 
 bool wxLocale::IsLoaded(const wxString& domain) const

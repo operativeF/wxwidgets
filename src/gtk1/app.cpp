@@ -533,7 +533,6 @@ bool wxApp::Initialize(int& argc, wxChar **argv)
     if (!wxOKlibc())
         wxConvCurrent = &wxConvLocal;
 
-#if wxUSE_UNICODE
     // gtk_init() wants UTF-8, not wchar_t, so convert
     int i;
     char **argvGTK = new char *[argc + 1];
@@ -575,12 +574,6 @@ bool wxApp::Initialize(int& argc, wxChar **argv)
     }
 
     delete [] argvGTK;
-#else // !wxUSE_UNICODE
-    // gtk_init() shouldn't actually change argv itself (just its contents) so
-    // it's ok to pass pointer to it
-    init_result = gtk_init_check( &argc, &argv );
-#endif // wxUSE_UNICODE/!wxUSE_UNICODE
-
     if (!init_result) {
         wxLogError(wxT("Unable to initialize gtk, is DISPLAY set properly?"));
         return false;

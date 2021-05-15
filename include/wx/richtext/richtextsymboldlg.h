@@ -34,9 +34,7 @@ class wxStdDialogButtonSizer;
 
 // __UNICODE__ is a symbol used by DialogBlocks-generated code.
 #ifndef __UNICODE__
-#if wxUSE_UNICODE
 #define __UNICODE__
-#endif
 #endif
 
 /*!

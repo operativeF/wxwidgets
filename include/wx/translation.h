@@ -81,9 +81,6 @@ class WXDLLIMPEXP_BASE wxMsgCatalog
 public:
     // Ctor is protected, because CreateFromXXX functions must be used,
     // but destruction should be unrestricted
-#if !wxUSE_UNICODE
-    ~wxMsgCatalog();
-#endif
 
     // load the catalog from disk or from data; caller is responsible for
     // deleting them if not NULL
@@ -102,9 +99,6 @@ public:
 protected:
     wxMsgCatalog(const wxString& domain)
         : m_pNext(NULL), m_domain(domain)
-#if !wxUSE_UNICODE
-        , m_conv(NULL)
-#endif
     {}
 
 private:
@@ -114,12 +108,6 @@ private:
 
     wxStringToStringHashMap m_messages; // all messages in the catalog
     wxString                m_domain;   // name of the domain
-
-#if !wxUSE_UNICODE
-    // the conversion corresponding to this catalog charset if we installed it
-    // as the global one
-    wxCSConv *m_conv;
-#endif
 
     wxPluralFormsCalculatorPtr m_pluralFormsCalculator;
 };
@@ -161,11 +149,6 @@ public:
     // wxTranslationsLoader
     bool AddCatalog(const wxString& domain,
                     wxLanguage msgIdLanguage = wxLANGUAGE_ENGLISH_US);
-#if !wxUSE_UNICODE
-    bool AddCatalog(const wxString& domain,
-                    wxLanguage msgIdLanguage,
-                    const wxString& msgIdCharset);
-#endif
 
     // check if the given catalog is loaded
     bool IsLoaded(const wxString& domain) const;

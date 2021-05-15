@@ -442,13 +442,8 @@ bool wxPrintfConvSpec<CharType>::Parse(const CharType *format)
                 }
                 else
                 {
-#if wxUSE_UNICODE
                     // in Unicode mode, %c == Unicode character
                     m_type = wxPAT_WCHAR;
-#else
-                    // in ANSI mode, %c == ANSI character
-                    m_type = wxPAT_CHAR;
-#endif
                 }
                 done = true;
                 break;
@@ -468,11 +463,7 @@ bool wxPrintfConvSpec<CharType>::Parse(const CharType *format)
                 }
                 else
                 {
-#if wxUSE_UNICODE
                     m_type = wxPAT_PWCHAR;
-#else
-                    m_type = wxPAT_PCHAR;
-#endif
                 }
                 done = true;
                 break;
