@@ -46,8 +46,8 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxTextCtrlNameStr[];
 
 // this is intentionally not enum to avoid warning fixes with
 // typecasting from enum type to wxTextCoord
-const wxTextCoord wxOutOfRangeTextCoord = -1;
-const wxTextCoord wxInvalidTextCoord    = -2;
+static constexpr wxTextCoord wxOutOfRangeTextCoord = -1;
+static constexpr wxTextCoord wxInvalidTextCoord    = -2;
 
 // ----------------------------------------------------------------------------
 // wxTextCtrl style flags
