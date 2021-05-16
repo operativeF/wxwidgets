@@ -469,7 +469,7 @@ bool operator==(const wxRealPoint& p1, const wxRealPoint& p2)
 }
 
 // FIXME: This is incorrect, and probably shouldn't be implemented at all.
-constexpr bool operator!=(const wxRealPoint& p1, const wxRealPoint& p2)
+bool operator!=(const wxRealPoint& p1, const wxRealPoint& p2)
 {
     return !(p1 == p2);
 }
