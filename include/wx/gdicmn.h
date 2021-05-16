@@ -273,25 +273,25 @@ enum wxEllipsizeMode
 class WXDLLIMPEXP_CORE wxSize
 {
 public:
-    // members are public for compatibility, don't use them directly.
-    int x, y;
+    int x {0};
+    int y {0};
 
     // constructors
-    wxSize() : x(0), y(0) { }
-    wxSize(int xx, int yy) : x(xx), y(yy) { }
+    constexpr wxSize() = default;
+    constexpr wxSize(int xx, int yy) : x(xx), y(yy) { }
 
     // no copy ctor or assignment operator - the defaults are ok
 
-    wxSize& operator+=(const wxSize& sz) { x += sz.x; y += sz.y; return *this; }
-    wxSize& operator-=(const wxSize& sz) { x -= sz.x; y -= sz.y; return *this; }
-    wxSize& operator/=(int i) { x /= i; y /= i; return *this; }
-    wxSize& operator*=(int i) { x *= i; y *= i; return *this; }
-    wxSize& operator/=(unsigned int i) { x /= i; y /= i; return *this; }
-    wxSize& operator*=(unsigned int i) { x *= i; y *= i; return *this; }
-    wxSize& operator/=(long i) { x /= i; y /= i; return *this; }
-    wxSize& operator*=(long i) { x *= i; y *= i; return *this; }
-    wxSize& operator/=(unsigned long i) { x /= i; y /= i; return *this; }
-    wxSize& operator*=(unsigned long i) { x *= i; y *= i; return *this; }
+    constexpr wxSize& operator+=(const wxSize& sz) { x += sz.x; y += sz.y; return *this; }
+    constexpr wxSize& operator-=(const wxSize& sz) { x -= sz.x; y -= sz.y; return *this; }
+    constexpr wxSize& operator/=(int i) { x /= i; y /= i; return *this; }
+    constexpr wxSize& operator*=(int i) { x *= i; y *= i; return *this; }
+    constexpr wxSize& operator/=(unsigned int i) { x /= i; y /= i; return *this; }
+    constexpr wxSize& operator*=(unsigned int i) { x *= i; y *= i; return *this; }
+    constexpr wxSize& operator/=(long i) { x /= i; y /= i; return *this; }
+    constexpr wxSize& operator*=(long i) { x *= i; y *= i; return *this; }
+    constexpr wxSize& operator/=(unsigned long i) { x /= i; y /= i; return *this; }
+    constexpr wxSize& operator*=(unsigned long i) { x *= i; y *= i; return *this; }
     wxSize& operator/=(double i) { x = wxRound(x/i); y = wxRound(y/i); return *this; }
     wxSize& operator*=(double i) { x = wxRound(x*i); y = wxRound(y*i); return *this; }
 
@@ -346,82 +346,82 @@ public:
     int GetY() const { return y; }
 };
 
-inline bool operator==(const wxSize& s1, const wxSize& s2)
+constexpr bool operator==(const wxSize& s1, const wxSize& s2)
 {
     return s1.x == s2.x && s1.y == s2.y;
 }
 
-inline bool operator!=(const wxSize& s1, const wxSize& s2)
+constexpr bool operator!=(const wxSize& s1, const wxSize& s2)
 {
     return s1.x != s2.x || s1.y != s2.y;
 }
 
-inline wxSize operator+(const wxSize& s1, const wxSize& s2)
+constexpr wxSize operator+(const wxSize& s1, const wxSize& s2)
 {
     return wxSize(s1.x + s2.x, s1.y + s2.y);
 }
 
-inline wxSize operator-(const wxSize& s1, const wxSize& s2)
+constexpr wxSize operator-(const wxSize& s1, const wxSize& s2)
 {
     return wxSize(s1.x - s2.x, s1.y - s2.y);
 }
 
-inline wxSize operator/(const wxSize& s, int i)
+constexpr wxSize operator/(const wxSize& s, int i)
 {
     return wxSize(s.x / i, s.y / i);
 }
 
-inline wxSize operator*(const wxSize& s, int i)
+constexpr wxSize operator*(const wxSize& s, int i)
 {
     return wxSize(s.x * i, s.y * i);
 }
 
-inline wxSize operator*(int i, const wxSize& s)
+constexpr wxSize operator*(int i, const wxSize& s)
 {
     return wxSize(s.x * i, s.y * i);
 }
 
-inline wxSize operator/(const wxSize& s, unsigned int i)
+constexpr wxSize operator/(const wxSize& s, unsigned int i)
 {
     return wxSize(s.x / i, s.y / i);
 }
 
-inline wxSize operator*(const wxSize& s, unsigned int i)
+constexpr wxSize operator*(const wxSize& s, unsigned int i)
 {
     return wxSize(s.x * i, s.y * i);
 }
 
-inline wxSize operator*(unsigned int i, const wxSize& s)
+constexpr wxSize operator*(unsigned int i, const wxSize& s)
 {
     return wxSize(s.x * i, s.y * i);
 }
 
-inline wxSize operator/(const wxSize& s, long i)
+constexpr wxSize operator/(const wxSize& s, long i)
 {
     return wxSize(s.x / i, s.y / i);
 }
 
-inline wxSize operator*(const wxSize& s, long i)
+constexpr wxSize operator*(const wxSize& s, long i)
 {
     return wxSize(int(s.x * i), int(s.y * i));
 }
 
-inline wxSize operator*(long i, const wxSize& s)
+constexpr wxSize operator*(long i, const wxSize& s)
 {
     return wxSize(int(s.x * i), int(s.y * i));
 }
 
-inline wxSize operator/(const wxSize& s, unsigned long i)
+constexpr wxSize operator/(const wxSize& s, unsigned long i)
 {
     return wxSize(int(s.x / i), int(s.y / i));
 }
 
-inline wxSize operator*(const wxSize& s, unsigned long i)
+constexpr wxSize operator*(const wxSize& s, unsigned long i)
 {
     return wxSize(int(s.x * i), int(s.y * i));
 }
 
-inline wxSize operator*(unsigned long i, const wxSize& s)
+constexpr wxSize operator*(unsigned long i, const wxSize& s)
 {
     return wxSize(int(s.x * i), int(s.y * i));
 }
@@ -445,112 +445,113 @@ inline wxSize operator*(double i, const wxSize& s)
 class WXDLLIMPEXP_CORE wxRealPoint
 {
 public:
-    double x;
-    double y;
+    double x {0.0};
+    double y {0.0};
 
-    wxRealPoint() : x(0.0), y(0.0) { }
-    wxRealPoint(double xx, double yy) : x(xx), y(yy) { }
-    wxRealPoint(const wxPoint& pt);
+    constexpr wxRealPoint() = default;
+    constexpr wxRealPoint(double xx, double yy) : x(xx), y(yy) { }
+    constexpr wxRealPoint(const wxPoint& pt);
 
     // no copy ctor or assignment operator - the defaults are ok
 
     //assignment operators
-    wxRealPoint& operator+=(const wxRealPoint& p) { x += p.x; y += p.y; return *this; }
-    wxRealPoint& operator-=(const wxRealPoint& p) { x -= p.x; y -= p.y; return *this; }
+    constexpr wxRealPoint& operator+=(const wxRealPoint& p) { x += p.x; y += p.y; return *this; }
+    constexpr wxRealPoint& operator-=(const wxRealPoint& p) { x -= p.x; y -= p.y; return *this; }
 
-    wxRealPoint& operator+=(const wxSize& s) { x += s.x; y += s.y; return *this; }
-    wxRealPoint& operator-=(const wxSize& s) { x -= s.x; y -= s.y; return *this; }
+    constexpr wxRealPoint& operator+=(const wxSize& s) { x += s.x; y += s.y; return *this; }
+    constexpr wxRealPoint& operator-=(const wxSize& s) { x -= s.x; y -= s.y; return *this; }
 };
 
-
-inline bool operator==(const wxRealPoint& p1, const wxRealPoint& p2)
+// FIXME: This is incorrect, and probably shouldn't be implemented at all.
+bool operator==(const wxRealPoint& p1, const wxRealPoint& p2)
 {
     return wxIsSameDouble(p1.x, p2.x) && wxIsSameDouble(p1.y, p2.y);
 }
 
-inline bool operator!=(const wxRealPoint& p1, const wxRealPoint& p2)
+// FIXME: This is incorrect, and probably shouldn't be implemented at all.
+constexpr bool operator!=(const wxRealPoint& p1, const wxRealPoint& p2)
 {
     return !(p1 == p2);
 }
 
-inline wxRealPoint operator+(const wxRealPoint& p1, const wxRealPoint& p2)
+constexpr wxRealPoint operator+(const wxRealPoint& p1, const wxRealPoint& p2)
 {
     return wxRealPoint(p1.x + p2.x, p1.y + p2.y);
 }
 
 
-inline wxRealPoint operator-(const wxRealPoint& p1, const wxRealPoint& p2)
+constexpr wxRealPoint operator-(const wxRealPoint& p1, const wxRealPoint& p2)
 {
     return wxRealPoint(p1.x - p2.x, p1.y - p2.y);
 }
 
 
-inline wxRealPoint operator/(const wxRealPoint& s, int i)
+constexpr wxRealPoint operator/(const wxRealPoint& s, int i)
 {
     return wxRealPoint(s.x / i, s.y / i);
 }
 
-inline wxRealPoint operator*(const wxRealPoint& s, int i)
+constexpr wxRealPoint operator*(const wxRealPoint& s, int i)
 {
     return wxRealPoint(s.x * i, s.y * i);
 }
 
-inline wxRealPoint operator*(int i, const wxRealPoint& s)
+constexpr wxRealPoint operator*(int i, const wxRealPoint& s)
 {
     return wxRealPoint(s.x * i, s.y * i);
 }
 
-inline wxRealPoint operator/(const wxRealPoint& s, unsigned int i)
+constexpr wxRealPoint operator/(const wxRealPoint& s, unsigned int i)
 {
     return wxRealPoint(s.x / i, s.y / i);
 }
 
-inline wxRealPoint operator*(const wxRealPoint& s, unsigned int i)
+constexpr wxRealPoint operator*(const wxRealPoint& s, unsigned int i)
 {
     return wxRealPoint(s.x * i, s.y * i);
 }
 
-inline wxRealPoint operator*(unsigned int i, const wxRealPoint& s)
+constexpr wxRealPoint operator*(unsigned int i, const wxRealPoint& s)
 {
     return wxRealPoint(s.x * i, s.y * i);
 }
 
-inline wxRealPoint operator/(const wxRealPoint& s, long i)
+constexpr wxRealPoint operator/(const wxRealPoint& s, long i)
 {
     return wxRealPoint(s.x / i, s.y / i);
 }
 
-inline wxRealPoint operator*(const wxRealPoint& s, long i)
+constexpr wxRealPoint operator*(const wxRealPoint& s, long i)
 {
     return wxRealPoint(s.x * i, s.y * i);
 }
 
-inline wxRealPoint operator*(long i, const wxRealPoint& s)
+constexpr wxRealPoint operator*(long i, const wxRealPoint& s)
 {
     return wxRealPoint(s.x * i, s.y * i);
 }
 
-inline wxRealPoint operator/(const wxRealPoint& s, unsigned long i)
+constexpr wxRealPoint operator/(const wxRealPoint& s, unsigned long i)
 {
     return wxRealPoint(s.x / i, s.y / i);
 }
 
-inline wxRealPoint operator*(const wxRealPoint& s, unsigned long i)
+constexpr wxRealPoint operator*(const wxRealPoint& s, unsigned long i)
 {
     return wxRealPoint(s.x * i, s.y * i);
 }
 
-inline wxRealPoint operator*(unsigned long i, const wxRealPoint& s)
+constexpr wxRealPoint operator*(unsigned long i, const wxRealPoint& s)
 {
     return wxRealPoint(s.x * i, s.y * i);
 }
 
-inline wxRealPoint operator*(const wxRealPoint& s, double i)
+constexpr wxRealPoint operator*(const wxRealPoint& s, double i)
 {
     return wxRealPoint(s.x * i, s.y * i);
 }
 
-inline wxRealPoint operator*(double i, const wxRealPoint& s)
+constexpr wxRealPoint operator*(double i, const wxRealPoint& s)
 {
     return wxRealPoint(s.x * i, s.y * i);
 }
