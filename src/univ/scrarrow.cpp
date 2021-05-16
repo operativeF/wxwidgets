@@ -245,7 +245,7 @@ bool wxScrollArrows::HandleMouse(const wxMouseEvent& event) const
                 return true;
             }
 
-            wxConstCast(this, wxScrollArrows)->m_captureData =
+            const_cast<wxScrollArrows *>(this)->m_captureData =
                 new wxScrollArrowCaptureData;
             m_captureData->m_arrowPressed = arrow;
             m_captureData->m_btnCapture = btn;
@@ -284,7 +284,7 @@ bool wxScrollArrows::HandleMouse(const wxMouseEvent& event) const
         Arrow arrow = m_captureData->m_arrowPressed;
 
         delete m_captureData;
-        wxConstCast(this, wxScrollArrows)->m_captureData = NULL;
+        const_cast<wxScrollArrows *>(this)->m_captureData = NULL;
 
         m_control->SetArrowFlag(arrow, wxCONTROL_PRESSED, false);
     }

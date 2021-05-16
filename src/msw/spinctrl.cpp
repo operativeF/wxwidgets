@@ -858,11 +858,11 @@ void wxSpinCtrl::DoGetPosition(int *x, int *y) const
     // hack: pretend that our HWND is the text control just for a moment
     int xBuddy;
     WXHWND hWnd = GetHWND();
-    wxConstCast(this, wxSpinCtrl)->m_hWnd = m_hwndBuddy;
+    const_cast<wxSpinCtrl *>(this)->m_hWnd = m_hwndBuddy;
     wxSpinButton::DoGetPosition(&xBuddy, y);
 
     int xText;
-    wxConstCast(this, wxSpinCtrl)->m_hWnd = hWnd;
+    const_cast<wxSpinCtrl *>(this)->m_hWnd = hWnd;
     wxSpinButton::DoGetPosition(&xText, y);
 
     *x = wxMin(xBuddy, xText);

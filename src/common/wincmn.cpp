@@ -677,7 +677,7 @@ wxSize wxWindowBase::DoGetBestSize() const
 #if wxUSE_CONSTRAINTS
     else if ( m_constraints )
     {
-        wxConstCast(this, wxWindowBase)->SatisfyConstraints();
+        const_cast<wxWindowBase *>(this)->SatisfyConstraints();
 
         // our minimal acceptable size is such that all our windows fit inside
         int maxX = 0,

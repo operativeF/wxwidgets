@@ -2307,7 +2307,7 @@ wxMBConv_iconv::ToWChar(wchar_t *dst, size_t dstLen,
     //     the handle is used by at most one thread at the time. Otherwise
     //     only a few wx classes would be safe to use from non-main threads
     //     as MB<->WC conversion would fail "randomly".
-    wxMutexLocker lock(wxConstCast(this, wxMBConv_iconv)->m_iconvMutex);
+    wxMutexLocker lock(const_cast<wxMBConv_iconv *>(this)->m_iconvMutex);
 #endif // wxUSE_THREADS
 
     size_t res, cres;
@@ -2369,7 +2369,7 @@ size_t wxMBConv_iconv::FromWChar(char *dst, size_t dstLen,
 {
 #if wxUSE_THREADS
     // NB: explained in MB2WC
-    wxMutexLocker lock(wxConstCast(this, wxMBConv_iconv)->m_iconvMutex);
+    wxMutexLocker lock(const_cast<wxMBConv_iconv *>(this)->m_iconvMutex);
 #endif
 
     if ( srcLen == wxNO_LEN )
@@ -2436,7 +2436,7 @@ size_t wxMBConv_iconv::GetMBNulLen() const
 {
     if ( m_minMBCharWidth == 0 )
     {
-        wxMBConv_iconv * const self = wxConstCast(this, wxMBConv_iconv);
+        wxMBConv_iconv * const self = const_cast<wxMBConv_iconv *>(this);
 
 #if wxUSE_THREADS
         // NB: explained in MB2WC
@@ -2653,7 +2653,7 @@ public:
                             nullptr            // [out] don't care if it was used
                         );
 
-            wxMBConv_win32 * const self = wxConstCast(this, wxMBConv_win32);
+            wxMBConv_win32 * const self = const_cast<wxMBConv_win32 *>(this);
             switch ( len )
             {
                 default:

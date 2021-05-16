@@ -1491,7 +1491,7 @@ wxSize wxAMMediaBackend::GetVideoSize() const
 {
     if (m_bestSize == wxDefaultSize)
     {
-        wxAMMediaBackend* self = wxConstCast(this, wxAMMediaBackend);
+        wxAMMediaBackend* self = const_cast<wxAMMediaBackend *>(this);
         long w = 0;
         long h = 0;
 

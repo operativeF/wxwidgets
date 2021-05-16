@@ -500,7 +500,7 @@ void wxDFBDCImpl::DoGetTextExtent(const wxString& string, wxCoord *x, wxCoord *y
     if ( theFont != NULL )
     {
         oldFont = m_font;
-        wxConstCast(this, wxDFBDCImpl)->SetFont(*theFont);
+        const_cast<wxDFBDCImpl *>(this)->SetFont(*theFont);
     }
 
     wxCoord xx = 0, yy = 0;
@@ -529,7 +529,7 @@ void wxDFBDCImpl::DoGetTextExtent(const wxString& string, wxCoord *x, wxCoord *y
     if ( externalLeading ) *externalLeading = 0;
 
     if ( theFont != NULL )
-        wxConstCast(this, wxDFBDCImpl)->SetFont(oldFont);
+        const_cast<wxDFBDCImpl *>(this)->SetFont(oldFont);
 }
 
 

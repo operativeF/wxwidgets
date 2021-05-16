@@ -401,7 +401,7 @@ public:
         // next time it is needed.
     void InvalidateBestSize();
     void CacheBestSize(const wxSize& size) const
-        { wxConstCast(this, wxWindowBase)->m_bestSizeCache = size; }
+        { const_cast<wxWindowBase *>(this)->m_bestSizeCache = size; }
 
 
         // This function will merge the window's best size into the window's

@@ -1937,7 +1937,7 @@ bool wxWindowDCImpl::DoGetClippingRect(wxRect& rect) const
     // SetDeviceOrigin(), SetLogicalOrigin(), SetUserScale(), SetLogicalScale().
     if ( !m_isClipBoxValid )
     {
-        wxWindowDCImpl *self = wxConstCast(this, wxWindowDCImpl);
+        wxWindowDCImpl *self = const_cast<wxWindowDCImpl *>(this);
         self->UpdateClipBox();
     }
 

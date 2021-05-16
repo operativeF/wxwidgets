@@ -864,7 +864,7 @@ protected:
 
         if ( IsVirtual() )
         {
-            wxConstCast(this, wxListMainWindow)->CacheLineData(n);
+            const_cast<wxListMainWindow *>(this)->CacheLineData(n);
             n = 0;
         }
 

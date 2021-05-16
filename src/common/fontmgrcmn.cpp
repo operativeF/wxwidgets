@@ -265,14 +265,14 @@ wxFontMgrFontRefData::~wxFontMgrFontRefData()
 
 wxFontBundle *wxFontMgrFontRefData::GetFontBundle() const
 {
-    wxConstCast(this, wxFontMgrFontRefData)->EnsureValidFont();
+    const_cast<wxFontMgrFontRefData *>(this)->EnsureValidFont();
     return m_fontBundle;
 }
 
 wxFontInstance *
 wxFontMgrFontRefData::GetFontInstance(float scale, bool antialiased) const
 {
-    wxConstCast(this, wxFontMgrFontRefData)->EnsureValidFont();
+    const_cast<wxFontMgrFontRefData *>(this)->EnsureValidFont();
     return m_fontFace->GetFontInstance(m_info.pointSize * scale,
                                        antialiased);
 }

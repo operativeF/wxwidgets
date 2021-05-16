@@ -288,7 +288,7 @@ void wxString::PosLenToImpl(size_t pos, size_t len,
 template<typename T>
 static inline void DeleteStringFromConversionCache(T& hash, const wxString *s)
 {
-    typename T::iterator i = hash.find(wxConstCast(s, wxString));
+    typename T::iterator i = hash.find(const_cast<wxString *>(s));
     if ( i != hash.end() )
     {
         free(i->second);
@@ -308,7 +308,7 @@ const char* wxCStrData::AsChar() const
     DeleteStringFromConversionCache(gs_stringsCharCache, m_str);
 
     // convert the string and keep it:
-    const char *s = gs_stringsCharCache[wxConstCast(m_str, wxString)] =
+    const char *s = gs_stringsCharCache[const_cast<wxString *>(m_str)] =
         m_str->mb_str().release();
 
     return s + m_offset;
@@ -325,7 +325,7 @@ const wchar_t* wxCStrData::AsWChar() const
     DeleteStringFromConversionCache(gs_stringsWCharCache, m_str);
 
     // convert the string and keep it:
-    const wchar_t *s = gs_stringsWCharCache[wxConstCast(m_str, wxString)] =
+    const wchar_t *s = gs_stringsWCharCache[const_cast<wxString *>(m_str)] =
         m_str->wc_str().release();
 
     return s + m_offset;

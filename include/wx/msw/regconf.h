@@ -77,7 +77,7 @@ protected:
   // opens the local key creating it if necessary and returns it
   wxRegKey& LocalKey() const // must be const to be callable from const funcs
   {
-      wxRegConfig* self = wxConstCast(this, wxRegConfig);
+      wxRegConfig* self = const_cast<wxRegConfig *>(this);
 
       if ( !m_keyLocal.IsOpened() )
       {

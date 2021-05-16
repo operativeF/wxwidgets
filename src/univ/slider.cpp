@@ -293,7 +293,7 @@ int wxSlider::GetLineSize() const
     if ( !m_lineSize )
     {
         // the default line increment is 1
-        wxConstCast(this, wxSlider)->m_lineSize = 1;
+        const_cast<wxSlider *>(this)->m_lineSize = 1;
     }
 
     return m_lineSize;
@@ -304,7 +304,7 @@ int wxSlider::GetPageSize() const
     if ( !m_pageSize )
     {
         // the default page increment is m_tickFreq
-        wxConstCast(this, wxSlider)->m_pageSize = m_tickFreq;
+        const_cast<wxSlider *>(this)->m_pageSize = m_tickFreq;
     }
 
     return m_pageSize;
@@ -444,7 +444,7 @@ const wxRect& wxSlider::GetSliderRect() const
 {
     if ( m_rectSlider.width < 0 )
     {
-        wxConstCast(this, wxSlider)->CalcGeometry();
+        const_cast<wxSlider *>(this)->CalcGeometry();
     }
 
     return m_rectSlider;

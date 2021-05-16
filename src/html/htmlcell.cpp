@@ -202,16 +202,16 @@ wxHtmlCell *wxHtmlCell::FindCellByPos(wxCoord x, wxCoord y,
 {
     if ( x >= 0 && x < m_Width && y >= 0 && y < m_Height )
     {
-        return wxConstCast(this, wxHtmlCell);
+        return const_cast<wxHtmlCell *>(this);
     }
     else
     {
         if ((flags & wxHTML_FIND_NEAREST_AFTER) &&
                 (y < 0 || (y < 0+m_Height && x < 0+m_Width)))
-            return wxConstCast(this, wxHtmlCell);
+            return const_cast<wxHtmlCell *>(this);
         else if ((flags & wxHTML_FIND_NEAREST_BEFORE) &&
                 (y >= 0+m_Height || (y >= 0 && x >= 0)))
-            return wxConstCast(this, wxHtmlCell);
+            return const_cast<wxHtmlCell *>(this);
         else
             return nullptr;
     }
@@ -237,7 +237,7 @@ wxRect wxHtmlCell::GetRect(const wxHtmlCell* rootCell) const
 
 wxHtmlCell *wxHtmlCell::GetRootCell() const
 {
-    wxHtmlCell *c = wxConstCast(this, wxHtmlCell);
+    wxHtmlCell *c = const_cast<wxHtmlCell *>(this);
     while ( c->m_Parent )
         c = c->m_Parent;
     return c;

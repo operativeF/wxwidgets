@@ -1695,7 +1695,7 @@ wxListLineData *wxListMainWindow::GetDummyLine() const
     wxASSERT_MSG( !IsEmpty(), wxT("invalid line index") );
     wxASSERT_MSG( IsVirtual(), wxT("GetDummyLine() shouldn't be called") );
 
-    wxListMainWindow *self = wxConstCast(this, wxListMainWindow);
+    wxListMainWindow *self = const_cast<wxListMainWindow *>(this);
 
     // we need to recreate the dummy line if the number of columns in the
     // control changed as it would have the incorrect number of fields
@@ -1728,7 +1728,7 @@ wxCoord wxListMainWindow::GetLineHeight() const
     // we cache the line height as calling GetTextExtent() is slow
     if ( !m_lineHeight )
     {
-        wxListMainWindow *self = wxConstCast(this, wxListMainWindow);
+        wxListMainWindow *self = const_cast<wxListMainWindow *>(this);
 
         wxClientDC dc( self );
         dc.SetFont( GetFont() );
@@ -3519,7 +3519,7 @@ int wxListMainWindow::GetHeaderWidth() const
 {
     if ( !m_headerWidth )
     {
-        wxListMainWindow *self = wxConstCast(this, wxListMainWindow);
+        wxListMainWindow *self = const_cast<wxListMainWindow *>(this);
 
         size_t count = GetColumnCount();
         for ( size_t col = 0; col < count; col++ )
@@ -3861,7 +3861,7 @@ wxListMainWindow::GetSubItemRect(long item, long subItem, wxRect& rect,
     // ensure that we're laid out, otherwise we could return nonsense
     if ( m_dirty )
     {
-        wxConstCast(this, wxListMainWindow)->
+        const_cast<wxListMainWindow *>(this)->
             RecalculatePositions(true /* no refresh */);
     }
 
@@ -4769,7 +4769,7 @@ int wxListMainWindow::GetCountPerPage() const
 {
     if ( !m_linesPerPage )
     {
-        wxConstCast(this, wxListMainWindow)->
+        const_cast<wxListMainWindow *>(this)->
             m_linesPerPage = GetClientSize().y / GetLineHeight();
     }
 

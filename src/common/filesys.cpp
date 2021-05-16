@@ -35,7 +35,7 @@ const wxString& wxFSFile::GetMimeType() const
 {
     if ( m_MimeType.empty() && !m_Location.empty() )
     {
-        wxConstCast(this, wxFSFile)->m_MimeType =
+        const_cast<wxFSFile *>(this)->m_MimeType =
             wxFileSystemHandler::GetMimeTypeFromExt(m_Location);
     }
 

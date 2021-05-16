@@ -331,7 +331,7 @@ bool wxGCDCImpl::DoGetClippingRect(wxRect& rect) const
     // with SetDeviceOrigin(), SetLogicalOrigin(), SetUserScale(), SetLogicalScale().
     if ( !m_isClipBoxValid )
     {
-        wxGCDCImpl *self = wxConstCast(this, wxGCDCImpl);
+        wxGCDCImpl *self = const_cast<wxGCDCImpl *>(this);
         self->UpdateClipBox();
     }
 

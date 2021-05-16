@@ -115,7 +115,7 @@ static wxVideoMode GetCurrentVideoMode()
 wxVideoMode wxApp::GetDisplayMode() const
 {
     if ( !m_videoMode.IsOk() )
-        wxConstCast(this, wxApp)->m_videoMode = GetCurrentVideoMode();
+        const_cast<wxApp *>(this)->m_videoMode = GetCurrentVideoMode();
 
     return m_videoMode;
 }

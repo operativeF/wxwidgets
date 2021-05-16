@@ -206,9 +206,6 @@
     #define wx_truncate_cast(t, x) ((t)(x))
 #endif
 
-/* for consistency with wxStatic/DynamicCast defined in wx/object.h */
-#define wxConstCast(obj, className) const_cast<className *>(obj)
-  
 #endif /* __cplusplus */
 
 /* provide replacement for C99 va_copy() if the compiler doesn't have it */

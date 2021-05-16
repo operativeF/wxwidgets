@@ -218,7 +218,7 @@ bool wxStatusBarUniv::GetFieldRect(int n, wxRect& rect) const
     // GetFieldRect() is called from the derived class OnSize() handler, then
     // our geometry info is wrong as our OnSize() didn't invalidate m_widthsAbs
     // yet - so recalc it just in case
-    wxConstCast(this, wxStatusBarUniv)->m_widthsAbs.Empty();
+    const_cast<wxStatusBarUniv *>(this)->m_widthsAbs.Empty();
 
     rect = DoGetFieldRect(n);
 
@@ -227,7 +227,7 @@ bool wxStatusBarUniv::GetFieldRect(int n, wxRect& rect) const
 
 wxRect wxStatusBarUniv::DoGetFieldRect(int n) const
 {
-    wxStatusBarUniv *self = wxConstCast(this, wxStatusBarUniv);
+    wxStatusBarUniv *self = const_cast<wxStatusBarUniv *>(this);
 
     wxCoord borderBetweenFields;
     wxRect rect = self->GetTotalFieldRect(&borderBetweenFields);

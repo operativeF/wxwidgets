@@ -338,7 +338,7 @@ void wxDIB::DoGetObject() const
             return;
         }
 
-        wxDIB *self = wxConstCast(this, wxDIB);
+        wxDIB *self = const_cast<wxDIB *>(this);
 
         self->m_width = ds.dsBm.bmWidth;
         self->m_height = ds.dsBm.bmHeight;

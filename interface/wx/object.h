@@ -826,16 +826,6 @@ public:
 #define wx_truncate_cast(T, x)
 
 /**
-    This macro expands into <tt>const_cast<classname *>(ptr)</tt> if the compiler
-    supports const_cast or into an old, C-style cast, otherwise.
-
-    @header{wx/defs.h}
-
-    @see wxDynamicCast(), wxStaticCast()
-*/
-#define wxConstCast( ptr, classname )
-
-/**
     This macro returns the pointer @e ptr cast to the type @e classname * if
     the pointer is of this type (the check is done during the run-time) or
     @NULL otherwise. Usage of this macro is preferred over obsoleted
@@ -860,7 +850,7 @@ public:
     }
     @endcode
 
-    @see @ref overview_rtti, wxDynamicCastThis(), wxConstCast(), wxStaticCast()
+    @see @ref overview_rtti, wxDynamicCastThis(), wxStaticCast()
 */
 #define wxDynamicCast( ptr, classname )
 
@@ -883,7 +873,7 @@ public:
 
     @header{wx/object.h}
 
-    @see wxDynamicCast(), wxConstCast()
+    @see wxDynamicCast()
 */
 #define wxStaticCast( ptr, classname )
 

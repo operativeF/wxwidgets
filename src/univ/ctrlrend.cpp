@@ -236,7 +236,7 @@ void wxControlRenderer::DrawScrollbar(const wxScrollBar *scrollbar,
         static bool s_refreshDebug = false;
         if ( s_refreshDebug )
         {
-            wxClientDC dc(wxConstCast(scrollbar, wxScrollBar));
+            wxClientDC dc(const_cast<wxScrollBar *>(scrollbar));
             dc.SetBrush(*wxRED_BRUSH);
             dc.SetPen(*wxTRANSPARENT_PEN);
             dc.DrawRectangle(rectUpdate);

@@ -162,7 +162,7 @@ bool wxFontEnumeratorHelper::OnFont(const LPLOGFONT lf,
         int cs = lf->lfCharSet;
         if ( m_charsets.Index(cs) == wxNOT_FOUND )
         {
-            wxConstCast(this, wxFontEnumeratorHelper)->m_charsets.Add(cs);
+            const_cast<wxFontEnumeratorHelper *>(this)->m_charsets.Add(cs);
 
 #if wxUSE_FONTMAP
             wxFontEncoding enc = wxGetFontEncFromCharSet(cs);
@@ -214,7 +214,7 @@ bool wxFontEnumeratorHelper::OnFont(const LPLOGFONT lf,
             return true;
         }
 
-        wxConstCast(this, wxFontEnumeratorHelper)->
+        const_cast<wxFontEnumeratorHelper *>(this)->
             m_facenames.Add(lf->lfFaceName);
     }
 

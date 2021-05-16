@@ -405,7 +405,7 @@ bool wxPipeInputStream::CanRead() const
     if ( m_wbacksize > m_wbackcur )
         return true;
 
-    wxPipeInputStream * const self = wxConstCast(this, wxPipeInputStream);
+    wxPipeInputStream * const self = const_cast<wxPipeInputStream *>(this);
 
     if ( !IsOpened() )
     {

@@ -143,7 +143,7 @@ wxScrollThumb::~wxScrollThumb()
     // make sure the mouse capture data will be released
     // when destroy the thumb.
     delete m_captureData;
-    wxConstCast(this, wxScrollThumb)->m_captureData = NULL;
+    const_cast<wxScrollThumb *>(this)->m_captureData = NULL;
 }
 
 // ----------------------------------------------------------------------------
@@ -180,7 +180,7 @@ bool wxScrollThumb::HandleMouse(const wxMouseEvent& event) const
         }
 
         // capture the mouse
-        wxConstCast(this, wxScrollThumb)->m_captureData =
+        const_cast<wxScrollThumb *>(this)->m_captureData =
             new wxScrollThumbCaptureData(shaftPart, btn, m_control);
 
         // modify the visual appearance before sending the event which will
@@ -220,7 +220,7 @@ bool wxScrollThumb::HandleMouse(const wxMouseEvent& event) const
 
         // release the mouse and free capture data
         delete m_captureData;
-        wxConstCast(this, wxScrollThumb)->m_captureData = NULL;
+        const_cast<wxScrollThumb *>(this)->m_captureData = NULL;
 
         m_control->SetShaftPartState(shaftPart, wxCONTROL_PRESSED, false);
     }
@@ -264,7 +264,7 @@ bool wxScrollThumb::HandleMouseMove(const wxMouseEvent& event) const
         {
             // update the highlighted state
             m_control->SetShaftPartState(m_shaftPart, wxCONTROL_CURRENT, false);
-            wxConstCast(this, wxScrollThumb)->m_shaftPart = shaftPart;
+            const_cast<wxScrollThumb *>(this)->m_shaftPart = shaftPart;
             m_control->SetShaftPartState(m_shaftPart, wxCONTROL_CURRENT, true);
         }
 

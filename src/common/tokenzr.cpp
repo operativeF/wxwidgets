@@ -173,7 +173,7 @@ bool wxStringTokenizer::HasMoreTokens() const
     if ( m_hasMoreTokens == MoreTokens_Unknown )
     {
         bool r = DoHasMoreTokens();
-        wxConstCast(this, wxStringTokenizer)->m_hasMoreTokens =
+        const_cast<wxStringTokenizer *>(this)->m_hasMoreTokens =
             r ? MoreTokens_Yes : MoreTokens_No;
         return r;
     }

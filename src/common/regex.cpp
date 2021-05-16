@@ -394,7 +394,7 @@ bool wxRegExImpl::Matches(const wxRegChar *str,
         flagsRE |= REG_NOTEOL;
 
     // allocate matches array if needed
-    wxRegExImpl *self = wxConstCast(this, wxRegExImpl);
+    wxRegExImpl *self = const_cast<wxRegExImpl *>(this);
     if ( !m_Matches && m_nMatches )
     {
         self->m_Matches = new wxRegExMatches(m_nMatches);

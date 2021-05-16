@@ -293,7 +293,7 @@ wxRect wxButtonToolBar::GetToolRect(wxToolBarToolBase *toolBase) const
     // ensure that we always have the valid tool position
     if ( m_needsLayout )
     {
-        wxConstCast(this, wxButtonToolBar)->DoLayout();
+        const_cast<wxButtonToolBar *>(this)->DoLayout();
     }
 
     rect.x = tool->m_x - (m_toolPacking/2);

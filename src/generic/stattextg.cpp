@@ -84,7 +84,7 @@ void wxGenericStaticText::OnPaint(wxPaintEvent& WXUNUSED(event))
 
 wxSize wxGenericStaticText::DoGetBestClientSize() const
 {
-    wxClientDC dc(wxConstCast(this, wxGenericStaticText));
+    wxClientDC dc(const_cast<wxGenericStaticText *>(this));
 
 #if wxUSE_MARKUP
     if ( m_markupText )

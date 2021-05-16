@@ -584,7 +584,7 @@ bool wxMSWDCImpl::DoGetClippingRect(wxRect& rect) const
     // SetTransformMatrix(), ResetTransformMatrix().
     if ( !m_isClipBoxValid )
     {
-        wxMSWDCImpl *self = wxConstCast(this, wxMSWDCImpl);
+        wxMSWDCImpl *self = const_cast<wxMSWDCImpl *>(this);
         self->UpdateClipBox();
     }
 

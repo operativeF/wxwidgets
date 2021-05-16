@@ -299,7 +299,7 @@ wxHtmlCell* wxHtmlListBox::CreateCellForItem(size_t n) const
 {
     if ( !m_htmlParser )
     {
-        wxHtmlListBox *self = wxConstCast(this, wxHtmlListBox);
+        wxHtmlListBox *self = const_cast<wxHtmlListBox *>(this);
 
         self->m_htmlParser = new wxHtmlWinParser(self);
         m_htmlParser->SetDC(new wxClientDC(self));

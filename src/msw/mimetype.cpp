@@ -164,7 +164,7 @@ size_t wxFileTypeImpl::GetAllCommands(wxArrayString *verbs,
     if ( m_strFileType.empty() )
     {
         // get it from the registry
-        wxFileTypeImpl *self = wxConstCast(this, wxFileTypeImpl);
+        wxFileTypeImpl *self = const_cast<wxFileTypeImpl *>(this);
         wxRegKey rkey(wxRegKey::HKCR, m_ext);
         if ( !rkey.Exists() || !rkey.QueryValue(wxEmptyString, self->m_strFileType) )
         {

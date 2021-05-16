@@ -415,7 +415,7 @@ void wxColourDatabase::AddColour(const wxString& name, const wxColour& colour)
 
 wxColour wxColourDatabase::Find(const wxString& colour) const
 {
-    wxColourDatabase * const self = wxConstCast(this, wxColourDatabase);
+    wxColourDatabase * const self = const_cast<wxColourDatabase *>(this);
     self->Initialize();
 
     // make the comparaison case insensitive and also match both grey and gray
@@ -441,7 +441,7 @@ wxColour wxColourDatabase::Find(const wxString& colour) const
 
 wxString wxColourDatabase::FindName(const wxColour& colour) const
 {
-    wxColourDatabase * const self = wxConstCast(this, wxColourDatabase);
+    wxColourDatabase * const self = const_cast<wxColourDatabase *>(this);
     self->Initialize();
 
     typedef wxStringToColourHashMap::iterator iterator;

@@ -83,7 +83,7 @@ public:
     {
         if ( !m_width )
         {
-            wxConstCast(this, wxMenuInfo)->CalcWidth(menubar);
+            const_cast<wxMenuInfo *>(this)->CalcWidth(menubar);
         }
 
         return m_width;
@@ -1074,7 +1074,7 @@ const wxMenuGeometryInfo& wxMenu::GetGeometryInfo() const
     {
         if ( m_popupMenu )
         {
-            wxConstCast(this, wxMenu)->m_geometry =
+            const_cast<wxMenu *>(this)->m_geometry =
                 m_popupMenu->GetRenderer()->GetMenuGeometry(m_popupMenu, *this);
         }
         else
@@ -1821,7 +1821,7 @@ wxMenu *wxMenuBar::Remove(size_t pos)
 
 wxCoord wxMenuBar::GetItemWidth(size_t pos) const
 {
-    return m_menuInfos[pos].GetWidth(wxConstCast(this, wxMenuBar));
+    return m_menuInfos[pos].GetWidth(const_cast<wxMenuBar *>(this));
 }
 
 void wxMenuBar::EnableTop(size_t pos, bool enable)
@@ -1982,7 +1982,7 @@ wxSize wxMenuBar::DoGetBestClientSize() const
     wxSize size;
     if ( GetMenuCount() > 0 )
     {
-        wxClientDC dc(wxConstCast(this, wxMenuBar));
+        wxClientDC dc(const_cast<wxMenuBar *>(this));
         dc.SetFont(wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT));
         dc.GetTextExtent(GetMenuLabel(0), &size.x, &size.y);
 

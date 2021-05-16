@@ -134,7 +134,7 @@ bool wxSoundBackendSDL::IsAvailable() const
         if (SDL_Init(SDL_INIT_AUDIO | SDL_INIT_NOPARACHUTE) == -1)
             return false;
     }
-    wxConstCast(this, wxSoundBackendSDL)->m_initialized = true;
+    const_cast<wxSoundBackendSDL *>(this)->m_initialized = true;
     wxLogTrace(wxT("sound"), wxT("initialized SDL audio subsystem"));
     return true;
 }

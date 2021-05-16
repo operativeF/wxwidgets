@@ -1151,7 +1151,7 @@ wxBitmap wxGTKRenderer::GetLineWrapBitmap() const
         }
         else
         {
-            wxConstCast(this, wxGTKRenderer)->m_bmpLineWrap = bmpLineWrap;
+            const_cast<wxGTKRenderer *>(this)->m_bmpLineWrap = bmpLineWrap;
         }
     }
 

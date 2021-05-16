@@ -356,9 +356,9 @@ public:
     // Returns first (last) terminal cell inside this cell. It may return NULL,
     // but it is rare -- only if there are no terminals in the tree.
     virtual wxHtmlCell *GetFirstTerminal() const
-        { return wxConstCast(this, wxHtmlCell); }
+        { return const_cast<wxHtmlCell *>(this); }
     virtual wxHtmlCell *GetLastTerminal() const
-        { return wxConstCast(this, wxHtmlCell); }
+        { return const_cast<wxHtmlCell *>(this); }
 
     // Returns cell's depth, i.e. how far under the root cell it is
     // (if it is the root, depth is 0)

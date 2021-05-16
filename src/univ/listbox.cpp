@@ -757,7 +757,7 @@ int wxListBox::GetItemsPerPage() const
 {
     if ( !m_itemsPerPage )
     {
-        wxConstCast(this, wxListBox)->CalcItemsPerPage();
+        const_cast<wxListBox *>(this)->CalcItemsPerPage();
     }
 
     return m_itemsPerPage;
@@ -767,7 +767,7 @@ wxCoord wxListBox::GetLineHeight() const
 {
     if ( !m_lineHeight )
     {
-        wxConstCast(this, wxListBox)->CalcItemsPerPage();
+        const_cast<wxListBox *>(this)->CalcItemsPerPage();
     }
 
     return m_lineHeight;
@@ -777,7 +777,7 @@ wxCoord wxListBox::GetMaxWidth() const
 {
     if ( m_maxWidth == 0 )
     {
-        wxListBox *self = wxConstCast(this, wxListBox);
+        wxListBox *self = const_cast<wxListBox *>(this);
         wxCoord width;
         unsigned int count = GetCount();
         for ( unsigned int n = 0; n < count; n++ )

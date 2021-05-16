@@ -509,7 +509,7 @@ void wxDialUpManagerImpl::CheckStatusInternal()
 
 bool wxDialUpManagerImpl::IsAlwaysOnline() const
 {
-    wxDialUpManagerImpl *self = wxConstCast(this, wxDialUpManagerImpl);
+    wxDialUpManagerImpl *self = const_cast<wxDialUpManagerImpl *>(this);
 
     int netDeviceType = self->CheckProcNet();
     if ( netDeviceType == NetDevice_Unknown )

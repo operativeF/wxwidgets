@@ -4186,7 +4186,7 @@ wxSize wxGenericTreeCtrl::DoGetBestSize() const
     // make sure all positions are calculated as normally this only done during
     // idle time but we need them for base class DoGetBestSize() to return the
     // correct result
-    wxConstCast(this, wxGenericTreeCtrl)->CalculatePositions();
+    const_cast<wxGenericTreeCtrl *>(this)->CalculatePositions();
 
     wxSize size = wxTreeCtrlBase::DoGetBestSize();
 

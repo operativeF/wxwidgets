@@ -826,7 +826,7 @@ wxString wxTextCtrl::DoGetValue() const
         // the first line is special as there is no \n before it, so it's
         // outside the loop
         const wxArrayString& lines = GetLines();
-        wxTextCtrl *self = wxConstCast(this, wxTextCtrl);
+        wxTextCtrl *self = const_cast<wxTextCtrl *>(this);
         self->m_value << lines[0u];
         size_t count = lines.GetCount();
         for ( size_t n = 1; n < count; n++ )
@@ -2375,7 +2375,7 @@ wxSize wxTextCtrl::DoGetBestClientSize() const
     // here
     if ( m_heightLine == -1 )
     {
-        wxConstCast(this, wxTextCtrl)->RecalcFontMetrics();
+        const_cast<wxTextCtrl *>(this)->RecalcFontMetrics();
     }
 
     wxCoord w, h;
@@ -2587,7 +2587,7 @@ wxRect wxTextCtrl::GetRealTextArea() const
 
         // when we're called for the very first time, the line height might not
         // had been calculated yet, so do get it now
-        wxTextCtrl *self = wxConstCast(this, wxTextCtrl);
+        wxTextCtrl *self = const_cast<wxTextCtrl *>(this);
         self->RecalcFontMetrics();
 
         int hLine = GetLineHeight();
@@ -2720,7 +2720,7 @@ void wxTextCtrl::LayoutLines(wxTextCoord lineLast) const
         lineLast = -1;
     }
 
-    wxTextCtrl *self = wxConstCast(this, wxTextCtrl);
+    wxTextCtrl *self = const_cast<wxTextCtrl *>(this);
     self->WData().m_rowFirstInvalid = lineLast;
 
     // also refresh the line end indicators (FIXME shouldn't do it always!)
@@ -2814,7 +2814,7 @@ size_t wxTextCtrl::GetPartOfWrappedLine(const wxChar* text,
     // VZ: old, horribly inefficient code which can still be used for checking
     //     the result (in line, not word, wrap mode only) - to be removed later
 #if 0
-    wxTextCtrl *self = wxConstCast(this, wxTextCtrl);
+    wxTextCtrl *self = const_cast<wxTextCtrl *>(this);
     wxClientDC dc(self);
     dc.SetFont(GetFont());
     self->DoPrepareDC(dc);
@@ -2875,7 +2875,7 @@ wxTextCtrlHitTestResult wxTextCtrl::HitTestLine(const wxString& line,
     wxTextCtrlHitTestResult res = wxTE_HT_ON_TEXT;
 
     int col;
-    wxTextCtrl *self = wxConstCast(this, wxTextCtrl);
+    wxTextCtrl *self = const_cast<wxTextCtrl *>(this);
     wxClientDC dc(self);
     dc.SetFont(GetFont());
     self->DoPrepareDC(dc);
@@ -3564,7 +3564,7 @@ wxCoord wxTextCtrl::GetMaxWidth() const
 
         // OPT: should we remember the widths of all the lines?
 
-        wxTextCtrl *self = wxConstCast(this, wxTextCtrl);
+        wxTextCtrl *self = const_cast<wxTextCtrl *>(this);
         wxClientDC dc(self);
         dc.SetFont(GetFont());
 
