@@ -2947,7 +2947,7 @@ void wxRichTextCtrl::SetupScrollbars(bool atTop, bool fromOnPaint)
         GetViewStart(& startX, & startY);
 
     int maxPositionX = 0;
-    int maxPositionY = (wxMax(unitsY * pixelsPerUnit - clientSize.y, 0) + pixelsPerUnit - 1) / pixelsPerUnit;
+    int maxPositionY = (wxMax(unitsY * pixelsPerUnit - clientSize.GetHeight(), 0) + pixelsPerUnit - 1) / pixelsPerUnit;
 
     int newStartX = wxMin(maxPositionX, startX);
     int newStartY = wxMin(maxPositionY, startY);
@@ -4173,23 +4173,23 @@ void wxRichTextCtrl::PositionCaret(wxRichTextParagraphLayoutBox* container)
                 GetCaret()->SetSize(newSz);
 
             // Adjust size so the caret size and position doesn't appear in the margins
-            if (((pt.y + newSz.y) <= topMargin) || (pt.y >= (GetClientSize().y - bottomMargin)))
+            if (((pt.y + newSz.GetHeight()) <= topMargin) || (pt.y >= (GetClientSize().GetHeight() - bottomMargin)))
             {
                 pt.x = -200;
                 pt.y = -200;
             }
-            else if (pt.y < topMargin && (pt.y + newSz.y) > topMargin)
+            else if (pt.y < topMargin && (pt.y + newSz.GetHeight()) > topMargin)
             {
-                newSz.y -= (topMargin - pt.y);
-                if (newSz.y > 0)
+                newSz.SetHeight(newSz.GetHeight() - topMargin - pt.y);
+                if (newSz.GetHeight() > 0)
                 {
                     pt.y = topMargin;
                     GetCaret()->SetSize(newSz);
                 }
             }
-            else if (pt.y < (GetClientSize().y - bottomMargin) && (pt.y + newSz.y) > (GetClientSize().y - bottomMargin))
+            else if (pt.y < (GetClientSize().GetHeight() - bottomMargin) && (pt.y + newSz.GetHeight()) > (GetClientSize().GetHeight() - bottomMargin))
             {
-                newSz.y = GetClientSize().y - bottomMargin - pt.y;
+                newSz.SetHeight(GetClientSize().GetHeight() - bottomMargin - pt.y);
                 GetCaret()->SetSize(newSz);
             }
 

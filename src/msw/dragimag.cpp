@@ -357,7 +357,7 @@ bool wxDragImage::BeginDrag(const wxPoint& hotspot, wxWindow* window, wxWindow* 
         fullScreenRect->GetParent()->ClientToScreen(& x, & y);
 
     rect.x = x; rect.y = y;
-    rect.width = sz.x; rect.height = sz.y;
+    rect.width = sz.GetWidth(); rect.height = sz.GetHeight();
 
     return BeginDrag(hotspot, window, true, & rect);
 }

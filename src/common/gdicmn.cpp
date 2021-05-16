@@ -855,9 +855,9 @@ void wxDisplaySize(int *width, int *height)
 {
     const wxSize size = wxGetDisplaySize();
     if ( width )
-        *width = size.x;
+        *width = size.GetWidth();
     if ( height )
-        *height = size.y;
+        *height = size.GetHeight();
 }
 
 wxSize wxGetDisplaySize()
@@ -887,20 +887,20 @@ void wxDisplaySizeMM(int *width, int *height)
 {
     const wxSize size = wxGetDisplaySizeMM();
     if ( width )
-        *width = size.x;
+        *width = size.GetWidth();
     if ( height )
-        *height = size.y;
+        *height = size.GetHeight();
 }
 
 wxSize wxGetDisplaySizeMM()
 {
     const wxSize ppi = wxGetDisplayPPI();
-    if ( !ppi.x || !ppi.y )
+    if ( !ppi.GetWidth() || !ppi.GetHeight() )
         return wxSize(0, 0);
 
     const wxSize pixels = wxGetDisplaySize();
-    return wxSize(wxRound(pixels.x * inches2mm / ppi.x),
-                  wxRound(pixels.y * inches2mm / ppi.y));
+    return wxSize(wxRound(pixels.GetWidth() * inches2mm / ppi.GetWidth()),
+                  wxRound(pixels.GetHeight() * inches2mm / ppi.GetHeight()));
 }
 
 wxSize wxGetDisplayPPI()

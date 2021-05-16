@@ -290,11 +290,11 @@ void wxAuiGenericToolBarArt::DrawButton(
     {
         bmpX = rect.x +
                 (rect.width/2) -
-                (bmpSize.x/2);
+                (bmpSize.GetWidth()/2);
 
         bmpY = rect.y +
                 ((rect.height-textHeight)/2) -
-                (bmpSize.y/2);
+                (bmpSize.GetHeight()/2);
 
         textX = rect.x + (rect.width/2) - (textWidth/2) + 1;
         textY = rect.y + rect.height - textHeight - 1;
@@ -305,9 +305,9 @@ void wxAuiGenericToolBarArt::DrawButton(
 
         bmpY = rect.y +
                 (rect.height/2) -
-                (bmpSize.y/2);
+                (bmpSize.GetHeight()/2);
 
-        textX = bmpX + wnd->FromDIP(3) + bmpSize.x;
+        textX = bmpX + wnd->FromDIP(3) + bmpSize.GetWidth();
         textY = rect.y +
                  (rect.height/2) -
                  (textHeight/2);
@@ -874,7 +874,7 @@ bool wxAuiToolBar::Create(wxWindow* parent,
 
     wxSize margin_lt = FromDIP(wxSize(5, 5));
     wxSize margin_rb = FromDIP(wxSize(2, 2));
-    SetMargins(margin_lt.x, margin_lt.y, margin_rb.x, margin_rb.y);
+    SetMargins(margin_lt.GetWidth(), margin_lt.GetHeight(), margin_rb.GetWidth(), margin_rb.GetHeight());
     SetFont(*wxNORMAL_FONT);
     SetArtFlags();
     SetExtraStyle(wxWS_EX_PROCESS_IDLE);
@@ -1028,7 +1028,7 @@ wxAuiToolBarItem* wxAuiToolBar::AddLabel(int tool_id,
 {
     wxSize min_size = wxDefaultSize;
     if (width != -1)
-        min_size.x = width;
+        min_size.SetWidth(width);
 
     wxAuiToolBarItem item;
     item.m_window = nullptr;
@@ -1791,7 +1791,7 @@ bool wxAuiToolBar::GetToolFitsByIndex(int tool_idx) const
     {
         // take the dropdown size into account
         if (m_overflowVisible && m_overflowSizerItem)
-            cli_h -= m_overflowSizerItem->GetMinSize().y;
+            cli_h -= m_overflowSizerItem->GetMinSize().GetHeight();
 
         if (rect.y+rect.height < cli_h)
             return true;
@@ -1800,7 +1800,7 @@ bool wxAuiToolBar::GetToolFitsByIndex(int tool_idx) const
     {
         // take the dropdown size into account
         if (m_overflowVisible && m_overflowSizerItem)
-            cli_w -= m_overflowSizerItem->GetMinSize().x;
+            cli_w -= m_overflowSizerItem->GetMinSize().GetWidth();
 
         if (rect.x+rect.width < cli_w)
             return true;
@@ -1921,8 +1921,8 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
             case wxITEM_LABEL:
             {
                 wxSize size = m_art->GetLabelSize(dc, this, item);
-                sizerItem = sizer->Add(size.x + (m_toolBorderPadding*2),
-                                        size.y + (m_toolBorderPadding*2),
+                sizerItem = sizer->Add(size.GetWidth() + (m_toolBorderPadding*2),
+                                        size.GetHeight() + (m_toolBorderPadding*2),
                                         item.m_proportion,
                                         item.m_alignment);
                 if (i+1 < count)
@@ -1938,8 +1938,8 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
             case wxITEM_RADIO:
             {
                 wxSize size = m_art->GetToolSize(dc, this, item);
-                sizerItem = sizer->Add(size.x + (m_toolBorderPadding*2),
-                                        size.y + (m_toolBorderPadding*2),
+                sizerItem = sizer->Add(size.GetWidth() + (m_toolBorderPadding*2),
+                                        size.GetHeight() + (m_toolBorderPadding*2),
                                         0,
                                         item.m_alignment);
                 // add tool packing
@@ -1987,7 +1987,7 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
                      !item.GetLabel().empty() )
                 {
                     wxSize s = GetLabelSize(item.GetLabel());
-                    vert_sizer->Add(1, s.y);
+                    vert_sizer->Add(1, s.GetHeight());
                 }
 
 
@@ -2000,7 +2000,7 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
                 // their min width is not set to something really small
                 if (item.m_proportion != 0)
                 {
-                    min_size.x = 1;
+                    min_size.SetWidth(1);
                 }
 
                 if (min_size.IsFullySpecified())
@@ -2096,8 +2096,8 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
 
     // set control size
     wxSize size = m_sizer->GetMinSize();
-    m_minWidth = size.x;
-    m_minHeight = size.y;
+    m_minWidth = size.GetWidth();
+    m_minHeight = size.GetHeight();
 
     if ((m_windowStyle & wxAUI_TB_NO_AUTORESIZE) == 0)
     {
@@ -2109,13 +2109,13 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
         }
         else
         {
-            m_sizer->SetDimension(0, 0, curSize.x, curSize.y);
+            m_sizer->SetDimension(0, 0, curSize.GetWidth(), curSize.GetHeight());
         }
     }
     else
     {
         wxSize curSize = GetClientSize();
-        m_sizer->SetDimension(0, 0, curSize.x, curSize.y);
+        m_sizer->SetDimension(0, 0, curSize.GetWidth(), curSize.GetHeight());
     }
 
     return true;
@@ -2253,8 +2253,8 @@ void wxAuiToolBar::OnSize(wxSizeEvent& WXUNUSED(evt))
     int x, y;
     GetClientSize(&x, &y);
 
-    if (((x >= y) && m_absoluteMinSize.x > x) ||
-        ((y > x) && m_absoluteMinSize.y > y))
+    if (((x >= y) && m_absoluteMinSize.GetWidth() > x) ||
+        ((y > x) && m_absoluteMinSize.GetHeight() > y))
     {
         // hide all flexible items
         size_t i, count;

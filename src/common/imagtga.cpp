@@ -780,7 +780,7 @@ int SaveTGA(const wxImage& image, wxOutputStream *stream)
     bool hasAlpha = image.HasAlpha();
     unsigned bytesPerPixel = 3 + (hasAlpha ? 1 : 0);
     wxSize size = image.GetSize();
-    size_t scanlineSize = size.x * bytesPerPixel;
+    size_t scanlineSize = size.GetWidth() * bytesPerPixel;
     wxScopedArray<unsigned char> scanlineData(scanlineSize);
     if (!scanlineData)
     {
@@ -794,11 +794,11 @@ int SaveTGA(const wxImage& image, wxOutputStream *stream)
     hdr[HDR_COLORTYPE] = wxTGA_UNMAPPED;
     hdr[HDR_IMAGETYPE] = 2 /* Uncompressed truecolour */;
 
-    hdr[HDR_WIDTH] =  size.x & 0xFF;
-    hdr[HDR_WIDTH + 1] =  (size.x >> 8) & 0xFF;
+    hdr[HDR_WIDTH] =  size.GetWidth() & 0xFF;
+    hdr[HDR_WIDTH + 1] =  (size.GetWidth() >> 8) & 0xFF;
 
-    hdr[HDR_HEIGHT] =  size.y & 0xFF;
-    hdr[HDR_HEIGHT + 1] =  (size.y >> 8) & 0xFF;
+    hdr[HDR_HEIGHT] =  size.GetHeight() & 0xFF;
+    hdr[HDR_HEIGHT + 1] =  (size.GetHeight() >> 8) & 0xFF;
 
     hdr[HDR_BPP] = hasAlpha ? 32 : 24;
     hdr[HDR_ORIENTATION] = 1 << 5; // set bit to indicate top-down order
@@ -817,10 +817,10 @@ int SaveTGA(const wxImage& image, wxOutputStream *stream)
 
     unsigned char *src = image.GetData();
     unsigned char *alpha = image.GetAlpha();
-    for (int y = 0; y < size.y; ++y)
+    for (int y = 0; y < size.GetHeight(); ++y)
     {
         unsigned char *dst = scanlineData.get();
-        for (int x = 0; x < size.x; ++x)
+        for (int x = 0; x < size.GetWidth(); ++x)
         {
             dst[0] = src[2];
             dst[1] = src[1];

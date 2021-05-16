@@ -467,14 +467,14 @@ void wxAuiTabContainer::Render(wxDC* raw_dc, wxWindow* wnd)
         if (i+1 < page_count)
             total_width += x_extent;
         else
-            total_width += size.x;
+            total_width += size.GetWidth();
 
         if (i >= m_tabOffset)
         {
             if (i+1 < page_count)
                 visible_width += x_extent;
             else
-                visible_width += size.x;
+                visible_width += size.GetWidth();
         }
     }
 
@@ -1892,8 +1892,8 @@ wxSize wxAuiNotebook::CalculateNewSplitSize()
     if (tab_ctrl_count < 2)
     {
         new_split_size = GetClientSize();
-        new_split_size.x /= 2;
-        new_split_size.y /= 2;
+        new_split_size.SetWidth(new_split_size.GetWidth() / 2);
+        new_split_size.SetHeight(new_split_size.GetHeight() / 2);
     }
     else
     {
@@ -2435,8 +2435,8 @@ void wxAuiNotebook::Split(size_t page, int direction)
         // because there are two panes, always split them
         // equally
         split_size = GetClientSize();
-        split_size.x /= 2;
-        split_size.y /= 2;
+        split_size.SetWidth(split_size.GetWidth() / 2);
+        split_size.SetHeight(split_size.GetHeight() / 2);
     }
 
 
@@ -2461,22 +2461,22 @@ void wxAuiNotebook::Split(size_t page, int direction)
     if (direction == wxLEFT)
     {
         paneInfo.Left();
-        mouse_pt = wxPoint(0, cli_size.y/2);
+        mouse_pt = wxPoint(0, cli_size.GetHeight() / 2);
     }
     else if (direction == wxRIGHT)
     {
         paneInfo.Right();
-        mouse_pt = wxPoint(cli_size.x, cli_size.y/2);
+        mouse_pt = wxPoint(cli_size.GetWidth(), cli_size.GetHeight() / 2);
     }
     else if (direction == wxTOP)
     {
         paneInfo.Top();
-        mouse_pt = wxPoint(cli_size.x/2, 0);
+        mouse_pt = wxPoint(cli_size.GetWidth() / 2, 0);
     }
     else if (direction == wxBOTTOM)
     {
         paneInfo.Bottom();
-        mouse_pt = wxPoint(cli_size.x/2, cli_size.y);
+        mouse_pt = wxPoint(cli_size.GetWidth() / 2, cli_size.GetHeight());
     }
 
     m_mgr.AddPane(new_tabs, paneInfo, mouse_pt);
@@ -3495,15 +3495,15 @@ public:
 
         if ( mergeHorizontal )
         {
-            m_size.x += lo2.m_size.x;
-            if ( lo2.m_size.y > m_size.y )
-                m_size.y = lo2.m_size.y;
+            m_size.SetWidth(m_size.GetWidth() + lo2.m_size.GetWidth());
+            if ( lo2.m_size.GetHeight() > m_size.GetHeight() )
+                m_size.SetHeight(lo2.m_size.GetHeight());
         }
         else
         {
-            if ( lo2.m_size.x > m_size.x )
-                m_size.x = lo2.m_size.x;
-            m_size.y += lo2.m_size.y;
+            if ( lo2.m_size.GetWidth() > m_size.GetWidth() )
+                m_size.SetWidth(lo2.m_size.GetWidth());
+            m_size.SetHeight(m_size.GetHeight() + lo2.m_size.GetHeight());
         }
     }
 
@@ -3560,7 +3560,7 @@ wxSize wxAuiNotebook::DoGetBestSize() const
         for ( size_t pIdx = 0; pIdx < pages.GetCount(); pIdx++ )
             bestPageSize.IncTo(pages[pIdx].window->GetBestSize());
 
-        bestPageSize.y += tabHeight;
+        bestPageSize.SetHeight(bestPageSize.GetHeight() + tabHeight);
         // Store the current pane with its largest window dimensions
         layouts.push_back(wxAuiLayoutObject(bestPageSize, pInfo));
     }

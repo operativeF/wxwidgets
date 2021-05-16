@@ -365,7 +365,7 @@ public:
     void SetRatio(int width, int height)
         { m_ratio = (width && height) ? ((float) width / (float) height) : 1; }
     void SetRatio(const wxSize& size)
-        { SetRatio(size.x, size.y); }
+        { SetRatio(size.GetWidth(), size.GetHeight()); }
     void SetRatio(float ratio)
         { m_ratio = ratio; }
     float GetRatio() const
@@ -634,24 +634,24 @@ public:
     void SetMinSize( int width, int height )
         { DoSetMinSize( width, height ); }
     void SetMinSize( const wxSize& size )
-        { DoSetMinSize( size.x, size.y ); }
+        { DoSetMinSize( size.GetWidth(), size.GetHeight() ); }
 
     // Searches recursively
     bool SetItemMinSize( wxWindow *window, int width, int height )
         { return DoSetItemMinSize( window, width, height ); }
     bool SetItemMinSize( wxWindow *window, const wxSize& size )
-        { return DoSetItemMinSize( window, size.x, size.y ); }
+        { return DoSetItemMinSize( window, size.GetWidth(), size.GetHeight() ); }
 
     // Searches recursively
     bool SetItemMinSize( wxSizer *sizer, int width, int height )
         { return DoSetItemMinSize( sizer, width, height ); }
     bool SetItemMinSize( wxSizer *sizer, const wxSize& size )
-        { return DoSetItemMinSize( sizer, size.x, size.y ); }
+        { return DoSetItemMinSize( sizer, size.GetWidth(), size.GetHeight() ); }
 
     bool SetItemMinSize( size_t index, int width, int height )
         { return DoSetItemMinSize( index, width, height ); }
     bool SetItemMinSize( size_t index, const wxSize& size )
-        { return DoSetItemMinSize( index, size.x, size.y ); }
+        { return DoSetItemMinSize( index, size.GetWidth(), size.GetHeight() ); }
 
     wxSize GetSize() const
         { return m_size; }
@@ -706,7 +706,7 @@ public:
 
         // This call is required for wxWrapSizer to be able to calculate its
         // minimal size correctly.
-        InformFirstDirection(wxHORIZONTAL, size.x, size.y);
+        InformFirstDirection(wxHORIZONTAL, size.GetWidth(), size.GetHeight());
     }
     void SetDimension(int x, int y, int width, int height)
         { SetDimension(wxPoint(x, y), wxSize(width, height)); }
@@ -989,12 +989,7 @@ protected:
     // the direction of the sizer and in the other direction, respectively
     int GetSizeInMajorDir(const wxSize& sz) const
     {
-        return m_orient == wxHORIZONTAL ? sz.x : sz.y;
-    }
-
-    int& SizeInMajorDir(wxSize& sz)
-    {
-        return m_orient == wxHORIZONTAL ? sz.x : sz.y;
+        return m_orient == wxHORIZONTAL ? sz.GetWidth() : sz.GetHeight();
     }
 
     int& PosInMajorDir(wxPoint& pt)
@@ -1004,17 +999,7 @@ protected:
 
     int GetSizeInMinorDir(const wxSize& sz) const
     {
-        return m_orient == wxHORIZONTAL ? sz.y : sz.x;
-    }
-
-    int& SizeInMinorDir(wxSize& sz)
-    {
-        return m_orient == wxHORIZONTAL ? sz.y : sz.x;
-    }
-
-    int& PosInMinorDir(wxPoint& pt)
-    {
-        return m_orient == wxHORIZONTAL ? pt.y : pt.x;
+        return m_orient == wxHORIZONTAL ? sz.GetHeight() : sz.GetWidth();
     }
 
     // another helper: creates wxSize from major and minor components

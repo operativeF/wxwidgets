@@ -169,14 +169,14 @@ void wxPopupWindowBase::Position(const wxPoint& ptOrigin,
 
     // is there enough space to put the popup below the window (where we put it
     // by default)?
-    wxCoord y = ptOrigin.y + size.y;
-    if ( y + sizeSelf.y > posScreen.y + sizeScreen.y )
+    wxCoord y = ptOrigin.y + size.GetHeight();
+    if ( y + sizeSelf.GetHeight() > posScreen.y + sizeScreen.y )
     {
         // check if there is enough space above
-        if ( ptOrigin.y > sizeSelf.y )
+        if ( ptOrigin.y > sizeSelf.GetHeight() )
         {
             // do position the control above the window
-            y -= size.y + sizeSelf.y;
+            y -= size.GetHeight() + sizeSelf.GetHeight();
         }
         //else: not enough space below nor above, leave below
     }
@@ -187,20 +187,20 @@ void wxPopupWindowBase::Position(const wxPoint& ptOrigin,
     if ( wxTheApp->GetLayoutDirection() == wxLayout_RightToLeft )
     {
         // shift the window to the left instead of the right.
-        x -= size.x;
-        x -= sizeSelf.x;        // also shift it by window width.
+        x -= size.GetWidth();
+        x -= sizeSelf.GetWidth();        // also shift it by window width.
     }
     else
-        x += size.x;
+        x += size.GetWidth();
 
 
-    if ( x + sizeSelf.x > posScreen.x + sizeScreen.x )
+    if ( x + sizeSelf.GetWidth() > posScreen.x + sizeScreen.GetWidth() )
     {
         // check if there is enough space to the left
-        if ( ptOrigin.x > sizeSelf.x )
+        if ( ptOrigin.x > sizeSelf.GetWidth() )
         {
             // do position the control to the left
-            x -= size.x + sizeSelf.x;
+            x -= size.GetWidth() + sizeSelf.GetWidth();
         }
         //else: not enough space there neither, leave in default position
     }

@@ -271,7 +271,7 @@ public:
         { DoSetSize( wxDefaultCoord, wxDefaultCoord, width, height, wxSIZE_USE_EXISTING ); }
 
     void SetSize( const wxSize& size )
-        { SetSize( size.x, size.y); }
+        { SetSize( size.GetWidth(), size.GetHeight()); }
 
     void SetSize(const wxRect& rect, int sizeFlags = wxSIZE_AUTO)
         { DoSetSize(rect.x, rect.y, rect.width, rect.height, sizeFlags); }
@@ -293,7 +293,7 @@ public:
         { DoSetClientSize(width, height); }
 
     void SetClientSize( const wxSize& size )
-        { DoSetClientSize(size.x, size.y); }
+        { DoSetClientSize(size.GetWidth(), size.GetHeight()); }
 
     void SetClientSize(const wxRect& rect)
         { SetClientSize( rect.width, rect.height ); }
@@ -382,9 +382,9 @@ public:
     {
         wxSize s = GetBestSize();
         if ( w )
-            *w = s.x;
+            *w = s.GetWidth();
         if ( h )
-            *h = s.y;
+            *h = s.GetHeight();
     }
 
         // Determine the best size in the other direction if one of them is
@@ -444,7 +444,8 @@ public:
     void SetSizeHints( const wxSize& minSize,
                        const wxSize& maxSize=wxDefaultSize,
                        const wxSize& incSize=wxDefaultSize)
-    { DoSetSizeHints(minSize.x, minSize.y, maxSize.x, maxSize.y, incSize.x, incSize.y); }
+    { DoSetSizeHints(minSize.GetWidth(), minSize.GetHeight(), maxSize.GetWidth(),
+                     maxSize.GetHeight(), incSize.GetWidth(), incSize.GetHeight()); }
 
         // Call these to override what GetBestSize() returns. This
         // method is only virtual because it is overridden in wxTLW
@@ -471,10 +472,10 @@ public:
         { return WindowToClientSize(GetMaxSize()); }
 
         // Get the min and max values one by one
-    int GetMinWidth() const { return GetMinSize().x; }
-    int GetMinHeight() const { return GetMinSize().y; }
-    int GetMaxWidth() const { return GetMaxSize().x; }
-    int GetMaxHeight() const { return GetMaxSize().y; }
+    int GetMinWidth() const { return GetMinSize().GetWidth(); }
+    int GetMinHeight() const { return GetMinSize().GetHeight(); }
+    int GetMaxWidth() const { return GetMaxSize().GetWidth(); }
+    int GetMaxHeight() const { return GetMaxSize().GetHeight(); }
 
 
         // Methods for accessing the virtual size of a window.  For most
@@ -483,7 +484,7 @@ public:
         // the screen window size.  You may override the DoXXXVirtual
         // methods below for classes where that is the case.
 
-    void SetVirtualSize( const wxSize &size ) { DoSetVirtualSize( size.x, size.y ); }
+    void SetVirtualSize( const wxSize &size ) { DoSetVirtualSize( size.GetWidth(), size.GetHeight() ); }
     void SetVirtualSize( int x, int y ) { DoSetVirtualSize( x, y ); }
 
     wxSize GetVirtualSize() const { return DoGetVirtualSize(); }
@@ -512,7 +513,7 @@ public:
         wxSize  client( GetClientSize() );
         wxSize  best( GetBestSize() );
 
-        return wxSize( wxMax( client.x, best.x ), wxMax( client.y, best.y ) );
+        return wxSize( wxMax( client.GetWidth(), best.GetWidth() ), wxMax( client.GetHeight(), best.GetHeight() ) );
     }
 
     // Return the magnification of the content of this window for the platforms
@@ -972,11 +973,11 @@ public:
     static wxPoint FromDIP(const wxPoint& pt, const wxWindowBase* w)
     {
         const wxSize sz = FromDIP(wxSize(pt.x, pt.y), w);
-        return wxPoint(sz.x, sz.y);
+        return wxPoint(sz.GetWidth(), sz.GetHeight());
     }
     static int FromDIP(int d, const wxWindowBase* w)
     {
-        return FromDIP(wxSize(d, 0), w).x;
+        return FromDIP(wxSize(d, 0), w).GetWidth();
     }
 
     wxSize FromDIP(const wxSize& sz) const { return FromDIP(sz, this); }
@@ -987,11 +988,11 @@ public:
     static wxPoint ToDIP(const wxPoint& pt, const wxWindowBase* w)
     {
         const wxSize sz = ToDIP(wxSize(pt.x, pt.y), w);
-        return wxPoint(sz.x, sz.y);
+        return wxPoint(sz.GetWidth(), sz.GetHeight());
     }
     static int ToDIP(int d, const wxWindowBase* w)
     {
-        return ToDIP(wxSize(d, 0), w).x;
+        return ToDIP(wxSize(d, 0), w).GetWidth();
     }
 
     wxSize ToDIP(const wxSize& sz) const { return ToDIP(sz, this); }
@@ -1005,14 +1006,14 @@ public:
     wxPoint ConvertDialogToPixels( const wxPoint& pt ) const;
     wxSize ConvertPixelsToDialog( const wxSize& sz ) const
     {
-        wxPoint pt(ConvertPixelsToDialog(wxPoint(sz.x, sz.y)));
+        wxPoint pt(ConvertPixelsToDialog(wxPoint(sz.GetWidth(), sz.GetHeight())));
 
         return wxSize(pt.x, pt.y);
     }
 
     wxSize ConvertDialogToPixels( const wxSize& sz ) const
     {
-        wxPoint pt(ConvertDialogToPixels(wxPoint(sz.x, sz.y)));
+        wxPoint pt(ConvertDialogToPixels(wxPoint(sz.GetWidth(), sz.GetHeight())));
 
         return wxSize(pt.x, pt.y);
     }

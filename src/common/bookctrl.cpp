@@ -109,9 +109,9 @@ wxSize wxBookCtrlBase::CalcSizeFromPage(const wxSize& sizePage) const
 
     wxSize size = sizePage;
     if ( IsVertical() )
-        size.y += sizeController.y + GetInternalBorder();
+        size.SetHeight(size.GetHeight() + sizeController.GetHeight() + GetInternalBorder());
     else // left/right aligned
-        size.x += sizeController.x + GetInternalBorder();
+        size.SetWidth(size.GetWidth() + sizeController.GetWidth() + GetInternalBorder());
 
     return size;
 }
@@ -160,21 +160,21 @@ wxRect wxBookCtrlBase::GetPageRect() const
             [[fallthrough]];
 
         case wxBK_TOP:
-            rectPage.y = size.y + GetInternalBorder();
+            rectPage.y = size.GetHeight() + GetInternalBorder();
             [[fallthrough]];
 
         case wxBK_BOTTOM:
-            rectPage.height -= size.y + GetInternalBorder();
+            rectPage.height -= size.GetHeight() + GetInternalBorder();
             if (rectPage.height < 0)
                 rectPage.height = 0;
             break;
 
         case wxBK_LEFT:
-            rectPage.x = size.x + GetInternalBorder();
+            rectPage.x = size.GetWidth() + GetInternalBorder();
             [[fallthrough]];
 
         case wxBK_RIGHT:
-            rectPage.width -= size.x + GetInternalBorder();
+            rectPage.width -= size.GetWidth() + GetInternalBorder();
             if (rectPage.width < 0)
                 rectPage.width = 0;
             break;
@@ -201,13 +201,13 @@ void wxBookCtrlBase::DoSize()
                     sizeBorder( m_bookctrl->GetSize() - m_bookctrl->GetClientSize() ),
                     sizeCtrl( GetControllerSize() );
 
-        m_bookctrl->SetClientSize( sizeCtrl.x - sizeBorder.x, sizeCtrl.y - sizeBorder.y );
+        m_bookctrl->SetClientSize( sizeCtrl.GetWidth() - sizeBorder.GetWidth(), sizeCtrl.GetHeight() - sizeBorder.GetHeight() );
         // if this changes the visibility of the scrollbars the best size changes, relayout in this case
         wxSize sizeCtrl2 = GetControllerSize();
         if ( sizeCtrl != sizeCtrl2 )
         {
             wxSize sizeBorder2 = m_bookctrl->GetSize() - m_bookctrl->GetClientSize();
-            m_bookctrl->SetClientSize( sizeCtrl2.x - sizeBorder2.x, sizeCtrl2.y - sizeBorder2.y );
+            m_bookctrl->SetClientSize( sizeCtrl2.GetWidth() - sizeBorder2.GetWidth(), sizeCtrl2.GetHeight() - sizeBorder2.GetHeight() );
         }
 
         const wxSize sizeNew = m_bookctrl->GetSize();
@@ -224,11 +224,11 @@ void wxBookCtrlBase::DoSize()
                 break;
 
             case wxBK_BOTTOM:
-                posCtrl.y = sizeClient.y - sizeNew.y;
+                posCtrl.y = sizeClient.GetHeight() - sizeNew.GetHeight();
                 break;
 
             case wxBK_RIGHT:
-                posCtrl.x = sizeClient.x - sizeNew.x;
+                posCtrl.x = sizeClient.GetWidth() - sizeNew.GetWidth();
                 break;
         }
 
@@ -275,13 +275,13 @@ wxSize wxBookCtrlBase::GetControllerSize() const
     // Ask for the best width/height considering the other direction.
     if ( IsVertical() )
     {
-        size.x = sizeClient.x;
-        size.y = m_bookctrl->GetBestHeight(sizeClient.x);
+        size.SetWidth(sizeClient.GetWidth());
+        size.SetHeight(m_bookctrl->GetBestHeight(sizeClient.GetWidth()));
     }
     else // left/right aligned
     {
-        size.x = m_bookctrl->GetBestWidth(sizeClient.y);
-        size.y = sizeClient.y;
+        size.SetWidth(m_bookctrl->GetBestWidth(sizeClient.GetHeight()));
+        size.SetHeight(sizeClient.GetHeight());
     }
 
     return size;

@@ -1816,13 +1816,13 @@ bool wxRichTextCompositeObject::GetRangeSize(const wxRichTextRange& range, wxSiz
 
                 // At present wxRICHTEXT_HEIGHT_ONLY is only fast if we're already cached the size,
                 // but it's only going to be used after caching has taken place.
-                if ((flags & wxRICHTEXT_HEIGHT_ONLY) && child->GetCachedSize().y != 0)
+                if ((flags & wxRICHTEXT_HEIGHT_ONLY) && child->GetCachedSize().GetHeight() != 0)
                 {
                     childDescent = child->GetDescent();
                     childSize = child->GetCachedSize();
 
-                    sz.y = wxMax(sz.y, childSize.y);
-                    sz.x += childSize.x;
+                    sz.SetHeight(wxMax(sz.GetHeight(), childSize.GetHeight()));
+                    sz.SetWidth(sz.GetWidth() + childSize.GetWidth());
                     descent = wxMax(descent, childDescent);
                 }
                 else if (child->GetRangeSize(rangeToUse, childSize, childDescent, dc, context, flags, wxPoint(position.x + sz.x, position.y), parentSize, p))

@@ -846,7 +846,7 @@ void wxComboPopupEvtHandler::OnMouseEvent( wxMouseEvent& event )
     wxPoint pt = event.GetPosition();
     wxSize sz = m_combo->GetPopupControl()->GetControl()->GetClientSize();
     int evtType = event.GetEventType();
-    bool isInside = pt.x >= 0 && pt.y >= 0 && pt.x < sz.x && pt.y < sz.y;
+    bool isInside = pt.x >= 0 && pt.y >= 0 && pt.x < sz.GetWidth() && pt.y < sz.GetHeight();
     bool relayToButton = false;
 
     event.Skip();
@@ -1057,7 +1057,7 @@ bool wxComboCtrlBase::Create(wxWindow *parent,
 
     // If x and y indicate valid size, wxSizeEvent won't be
     // emitted automatically, so we need to add artificial one.
-    if ( size.x > 0 && size.y > 0 )
+    if ( size.GetWidth() > 0 && size.GetHeight() > 0 )
     {
         wxSizeEvent evt(size,GetId());
         evt.SetEventObject(this);
@@ -1215,7 +1215,7 @@ void wxComboCtrlBase::CalculateAreas( int btnWidth )
     if ( butWidth <= 0 )
         return;
 
-    int butHeight = sz.y - btnBorder*2;
+    int butHeight = sz.GetHeight() - btnBorder*2;
 
     // Adjust button width
     if ( m_btnWid > 0 )
@@ -1224,8 +1224,8 @@ void wxComboCtrlBase::CalculateAreas( int btnWidth )
     {
         // Adjust button width to match aspect ratio
         // (but only if control is smaller than best size).
-        int bestHeight = GetBestSize().y;
-        int height = GetSize().y;
+        int bestHeight = GetBestSize().GetHeight();
+        int height = GetSize().GetHeight();
 
         if ( height < bestHeight )
         {
@@ -1265,7 +1265,7 @@ void wxComboCtrlBase::CalculateAreas( int btnWidth )
             butHeight = bmpReqHeight;
 
         // Need to fix height?
-        if ( (sz.y-(customBorder*2)) < butHeight && btnWidth == 0 )
+        if ( (sz.GetHeight()-(customBorder*2)) < butHeight && btnWidth == 0 )
         {
             int newY = butHeight+(customBorder*2);
             SetClientSize(wxDefaultCoord,newY);
@@ -1274,24 +1274,24 @@ void wxComboCtrlBase::CalculateAreas( int btnWidth )
             else
                 m_iFlags &= ~wxCC_IFLAG_HAS_NONSTANDARD_BUTTON;
 
-            sz.y = newY;
+            sz.SetHeight(newY);
         }
     }
 
     int butAreaWid = butWidth + (m_btnSpacingX*2);
 
-    m_btnSize.x = butWidth;
-    m_btnSize.y = butHeight;
+    m_btnSize.SetWidth(butWidth);
+    m_btnSize.SetHeight(butHeight);
 
-    m_btnArea.x = ( m_btnSide==wxRIGHT ? sz.x - butAreaWid - btnBorder : btnBorder );
+    m_btnArea.x = ( m_btnSide==wxRIGHT ? sz.GetWidth() - butAreaWid - btnBorder : btnBorder );
     m_btnArea.y = btnBorder + FOCUS_RING;
     m_btnArea.width = butAreaWid;
-    m_btnArea.height = sz.y - ((btnBorder+FOCUS_RING)*2);
+    m_btnArea.height = sz.GetHeight() - ((btnBorder+FOCUS_RING)*2);
 
     m_tcArea.x = ( m_btnSide==wxRIGHT ? 0 : butAreaWid ) + customBorder;
     m_tcArea.y = customBorder + FOCUS_RING;
-    m_tcArea.width = sz.x - butAreaWid - (customBorder*2) - FOCUS_RING;
-    m_tcArea.height = sz.y - ((customBorder+FOCUS_RING)*2);
+    m_tcArea.width = sz.GetWidth() - butAreaWid - (customBorder*2) - FOCUS_RING;
+    m_tcArea.height = sz.GetHeight() - ((customBorder+FOCUS_RING)*2);
 
 /*
     if ( m_text )
@@ -1333,8 +1333,8 @@ void wxComboCtrlBase::PositionTextCtrl( int textCtrlXAdjust, int textCtrlYAdjust
 
         // Centre textctrl vertically, if needed
 #if !TEXTCTRL_TEXT_CENTERED
-        int tcSizeY = m_text->GetBestSize().y;
-        int diff0 = sz.y - tcSizeY;
+        int tcSizeY = m_text->GetBestSize().GetHeight();
+        int diff0 = sz.GetHeight() - tcSizeY;
         int y = textCtrlYAdjust + (diff0/2);
 #else
         wxUnusedVar(textCtrlYAdjust);
@@ -1351,10 +1351,10 @@ void wxComboCtrlBase::PositionTextCtrl( int textCtrlXAdjust, int textCtrlYAdjust
 
         // Make sure textctrl doesn't exceed the bottom custom border
         wxSize tsz = m_text->GetSize();
-        int diff1 = (y + tsz.y) - (sz.y - customBorder);
+        int diff1 = (y + tsz.GetHeight()) - (sz.GetHeight() - customBorder);
         if ( diff1 >= 0 )
         {
-            tsz.y = tsz.y - diff1 - 1;
+            tsz.SetHeight(tsz.GetHeight() - diff1 - 1);
             m_text->SetSize(tsz);
         }
     }
@@ -1372,7 +1372,7 @@ void wxComboCtrlBase::PositionTextCtrl( int textCtrlXAdjust, int textCtrlYAdjust
 
 wxSize wxComboCtrlBase::DoGetBestSize() const
 {
-    int width = m_text ? m_text->GetBestSize().x : FromDIP(80);
+    int width = m_text ? m_text->GetBestSize().GetWidth() : FromDIP(80);
 
     return GetSizeFromTextSize(width);
 }
@@ -1421,7 +1421,7 @@ wxSize wxComboCtrlBase::DoGetSizeFromTextSize(int xlen, int ylen) const
 #endif // only for wxComboBox on MSW or GTK
 
     // Need to force height to accommodate bitmap?
-    int btnSizeY = m_btnSize.y;
+    int btnSizeY = m_btnSize.GetHeight();
     if ( m_bmpNormal.IsOk() && fhei < btnSizeY )
         fhei = btnSizeY;
 
@@ -1604,7 +1604,7 @@ void wxComboCtrlBase::PrepareBackground( wxDC& dc, const wxRect& rect, int flags
 
         // Windows-style: for smaller size control (and for disabled background) use less spacing
         focusSpacingX = isEnabled ? 2 : 1;
-        focusSpacingY = sz.y > (GetCharHeight()+2) && isEnabled ? 2 : 1;
+        focusSpacingY = sz.GetHeight() > (GetCharHeight()+2) && isEnabled ? 2 : 1;
     }
     else
     {
@@ -1717,9 +1717,9 @@ void wxComboCtrlBase::DrawButton( wxDC& dc, const wxRect& rect, int flags )
         drawState |= wxCONTROL_PRESSED;
 
     wxRect drawRect(rect.x+m_btnSpacingX,
-                    rect.y+((rect.height-m_btnSize.y)/2),
-                    m_btnSize.x,
-                    m_btnSize.y);
+                    rect.y+((rect.height-m_btnSize.GetHeight())/2),
+                    m_btnSize.GetWidth(),
+                    m_btnSize.GetHeight());
 
     // Make sure area is not larger than the control
     if ( drawRect.y < rect.y )
@@ -2297,14 +2297,14 @@ void wxComboCtrlBase::ShowPopup()
     scrPos = GetScreenPosition();
 
     spaceAbove = scrPos.y - displayRect.GetY();
-    spaceBelow = screenHeight - spaceAbove - ctrlSz.y;
+    spaceBelow = screenHeight - spaceAbove - ctrlSz.GetHeight();
 
     maxHeightPopup = spaceBelow;
     if ( spaceAbove > spaceBelow )
         maxHeightPopup = spaceAbove;
 
     // Width
-    int widthPopup = ctrlSz.x + m_extLeft + m_extRight;
+    int widthPopup = ctrlSz.GetWidth() + m_extLeft + m_extRight;
 
     if ( widthPopup < m_widthMinPopup )
         widthPopup = m_widthMinPopup;
@@ -2358,18 +2358,18 @@ void wxComboCtrlBase::ShowPopup()
     wxSize szp = popup->GetSize();
 
     int popupX;
-    int popupY = scrPos.y + ctrlSz.y;
+    int popupY = scrPos.y + ctrlSz.GetHeight();
 
     // Default anchor is wxLEFT
     int anchorSide = m_anchorSide;
     if ( !anchorSide )
         anchorSide = wxLEFT;
 
-    int rightX = scrPos.x + ctrlSz.x + m_extRight - szp.x;
+    int rightX = scrPos.x + ctrlSz.GetWidth() + m_extRight - szp.GetWidth();
     int leftX = scrPos.x - m_extLeft;
 
     if ( wxTheApp->GetLayoutDirection() == wxLayout_RightToLeft )
-        leftX -= ctrlSz.x;
+        leftX -= ctrlSz.GetWidth();
 
     int screenWidth = displayRect.GetWidth();
 
@@ -2379,7 +2379,7 @@ void wxComboCtrlBase::ShowPopup()
     {
         if ( rightX < 0 )
         {
-            if ( (leftX+szp.x) < screenWidth )
+            if ( (leftX+szp.GetWidth()) < screenWidth )
                 anchorSide = wxLEFT;
             else
                 anchorSide = 0;
@@ -2387,7 +2387,7 @@ void wxComboCtrlBase::ShowPopup()
     }
     else
     {
-        if ( (leftX+szp.x) >= screenWidth )
+        if ( (leftX + szp.GetWidth()) >= screenWidth )
         {
             if ( rightX >= 0 )
                 anchorSide = wxRIGHT;
@@ -2406,9 +2406,9 @@ void wxComboCtrlBase::ShowPopup()
 
     int showFlags = CanDeferShow;
 
-    if ( spaceBelow < szp.y )
+    if ( spaceBelow < szp.GetHeight() )
     {
-        popupY = scrPos.y - szp.y;
+        popupY = scrPos.y - szp.GetHeight();
         showFlags |= ShowAbove;
     }
 
@@ -2443,7 +2443,7 @@ void wxComboCtrlBase::ShowPopup()
     // This must be after SetStringValue
     m_popupWinState = Animating;
 
-    wxRect popupWinRect( popupX, popupY, szp.x, szp.y );
+    wxRect popupWinRect( popupX, popupY, szp.GetWidth(), szp.GetHeight() );
 
     m_popup = popup;
     if ( (m_iFlags & wxCC_IFLAG_DISABLE_POPUP_ANIM) ||
@@ -2621,14 +2621,14 @@ void wxComboCtrlBase::SetButtonPosition( int width, int height,
 
 wxSize wxComboCtrlBase::GetButtonSize()
 {
-    if ( m_btnSize.x > 0 )
+    if ( m_btnSize.GetWidth() > 0 )
         return m_btnSize;
 
     wxSize retSize(m_btnWid,m_btnHei);
 
     // Need to call CalculateAreas now if button size is
     // is not explicitly specified.
-    if ( retSize.x <= 0 || retSize.y <= 0)
+    if ( retSize.GetWidth() <= 0 || retSize.GetHeight() <= 0)
     {
         OnResize();
 

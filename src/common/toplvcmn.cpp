@@ -215,19 +215,18 @@ wxSize wxTopLevelWindowBase::GetDefaultSize()
     wxSize size = wxGetClientDisplayRect().GetSize();
 #ifndef __WXOSX_IPHONE__
     // create proportionally bigger windows on small screens
-    if ( size.x >= 1024 )
-        size.x = 400;
-    else if ( size.x >= 800 )
-        size.x = 300;
-    else if ( size.x >= 320 )
-        size.x = 240;
+    if ( size.GetWidth() >= 1024 )
+        size.SetWidth(400);
+    else if ( size.GetWidth() >= 800 )
+        size.SetWidth(300);
+    else if ( size.GetWidth() >= 320 )
+        size.SetWidth(240);
 
-    if ( size.y >= 768 )
-        size.y = 250;
-    else if ( size.y > 200 )
+    if ( size.GetHeight() >= 768 )
+        size.SetHeight(250);
+    else if ( size.GetHeight() > 200 )
     {
-        size.y *= 2;
-        size.y /= 3;
+        size.SetHeight(size.GetHeight() * 2 / 3);
     }
 #endif
     return size;

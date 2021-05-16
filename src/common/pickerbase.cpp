@@ -112,14 +112,14 @@ void wxPickerBase::PostCreation()
     const wxSize pickerBestSize(m_picker->GetBestSize());
     const wxSize textBestSize( HasTextCtrl() ? m_text->GetBestSize() : wxSize());
     wxSize pickerMinSize;
-    pickerMinSize.y = wxMax(pickerBestSize.y, textBestSize.y);
+    pickerMinSize.SetHeight(wxMax(pickerBestSize.GetHeight(), textBestSize.GetHeight()));
     if ( HasFlag(wxPB_SMALL) )
     {
-        pickerMinSize.x = pickerBestSize.x;
+        pickerMinSize.SetWidth(pickerBestSize.GetWidth());
     }
     else
     {
-        pickerMinSize.x = wxMax(pickerBestSize.x, pickerMinSize.y);
+        pickerMinSize.SetWidth(wxMax(pickerBestSize.GetWidth(), pickerMinSize.GetHeight()));
     }
     if ( pickerMinSize != pickerBestSize )
         m_picker->SetMinSize(pickerMinSize);

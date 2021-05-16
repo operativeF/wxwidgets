@@ -357,9 +357,9 @@ public:
                       wxT("size of this DC hadn't been set and is unknown") );
 
         if ( w )
-            *w = m_size.x;
+            *w = m_size.GetWidth();
         if ( h )
-            *h = m_size.y;
+            *h = m_size.GetHeight();
     }
 
 private:

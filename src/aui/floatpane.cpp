@@ -96,8 +96,8 @@ void wxAuiFloatingFrame::SetPaneWindow(const wxAuiPaneInfo& pane)
     // then set the max size to the min size as well
     wxSize cur_max_size = GetMaxSize();
     if (cur_max_size.IsFullySpecified() &&
-          (cur_max_size.x < pane.min_size.x ||
-           cur_max_size.y < pane.min_size.y)
+          (cur_max_size.GetWidth() < pane.min_size.GetWidth() ||
+           cur_max_size.GetHeight() < pane.min_size.GetHeight())
        )
     {
         SetMaxSize(pane_min_size);
@@ -149,9 +149,9 @@ void wxAuiFloatingFrame::SetPaneWindow(const wxAuiPaneInfo& pane)
         if (m_ownerMgr && pane.HasGripper())
         {
             if (pane.HasGripperTop())
-                size.y += m_ownerMgr->m_art->GetMetric(wxAUI_DOCKART_GRIPPER_SIZE);
+                size.SetHeight(size.GetHeight() + m_ownerMgr->m_art->GetMetric(wxAUI_DOCKART_GRIPPER_SIZE));
             else
-                size.x += m_ownerMgr->m_art->GetMetric(wxAUI_DOCKART_GRIPPER_SIZE);
+                size.SetWidth(size.GetWidth() + m_ownerMgr->m_art->GetMetric(wxAUI_DOCKART_GRIPPER_SIZE));
         }
 
         SetClientSize(size);

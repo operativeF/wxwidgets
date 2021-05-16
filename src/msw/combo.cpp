@@ -203,7 +203,7 @@ wxComboCtrl::PrepareBackground( wxDC& dc, const wxRect& rect, int flags ) const
         {
             // WinXP  Theme
             focusSpacingX = isEnabled ? 2 : 1;
-            focusSpacingY = sz.y > (GetCharHeight()+2) && isEnabled ? 2 : 1;
+            focusSpacingY = sz.GetHeight() > (GetCharHeight()+2) && isEnabled ? 2 : 1;
         }
         else
 #endif
@@ -341,7 +341,7 @@ void wxComboCtrl::OnPaintEvent( wxPaintEvent& WXUNUSED(event) )
     wxUxThemeHandle hTheme(this, L"COMBOBOX");
 #endif // wxUSE_UXTHEME
 
-    wxRect borderRect(0,0,sz.x,sz.y);
+    wxRect borderRect(0, 0, sz.GetWidth(), sz.GetHeight());
 
     if ( m_iFlags & wxCC_IFLAG_BUTTON_OUTSIDE )
     {

@@ -113,7 +113,7 @@ public:
     wxSize GetSizeFromTextSize(int xlen, int ylen = -1) const
         { return DoGetSizeFromTextSize(xlen, ylen); }
     wxSize GetSizeFromTextSize(const wxSize& tsize) const
-        { return DoGetSizeFromTextSize(tsize.x, tsize.y); }
+        { return DoGetSizeFromTextSize(tsize.GetWidth(), tsize.GetHeight()); }
 
     wxSize GetSizeFromText(const wxString& text) const
     {

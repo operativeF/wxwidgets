@@ -90,13 +90,13 @@ void wxRichTextPrintout::OnPreparePrinting()
                     // Break the page if either we're going off the bottom, or this paragraph specifies
                     // an explicit page break
 
-                    if (((lineY + line->GetSize().y) > rect.GetBottom()) || hasHardPageBreak)
+                    if (((lineY + line->GetSize().GetHeight()) > rect.GetBottom()) || hasHardPageBreak)
                     {
                         // Only if we're not at the start of the document, and
                         // even then, only if either it's a hard break or if the object
                         // can fit in a whole page (otherwise there's no point in making
                         // the rest of this page blank).
-                        if (lastLine && (hasHardPageBreak || (line->GetSize().y <= rect.GetHeight())))
+                        if (lastLine && (hasHardPageBreak || (line->GetSize().GetHeight() <= rect.GetHeight())))
                         {
                             // New page starting at this line
                             int newY = rect.y;
@@ -117,7 +117,7 @@ void wxRichTextPrintout::OnPreparePrinting()
                         lastLine = line;
 
                         // Now create page breaks for the rest of the line, if it's larger than the page height
-                        int contentLeft = line->GetSize().y - rect.GetHeight();
+                        int contentLeft = line->GetSize().GetHeight() - rect.GetHeight();
                         while (contentLeft >= 0)
                         {
                             yOffset += rect.GetHeight();
@@ -342,7 +342,7 @@ void wxRichTextPrintout::CalculateScaling(wxDC* dc, wxRect& textRect, wxRect& he
     // The dimensions used for indentation etc. have to be unscaled
     // during printing to be correct when scaling is applied.
     // Also, correct the conversions in wxRTC using DC instead of print DC.
-    m_richTextBuffer->SetScale(scale * dc->GetPPI().x / ppiPrinterX);
+    m_richTextBuffer->SetScale(scale * dc->GetPPI().GetWidth() / ppiPrinterX);
 
     // Calculate margins
     int marginLeft = wxRichTextObject::ConvertTenthsMMToPixels(ppiPrinterX, m_marginLeft);

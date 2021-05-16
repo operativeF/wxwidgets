@@ -215,8 +215,8 @@ void wxWrapSizer::CalcMinFittingSize(const wxSize& szBoundary)
     // provide a smaller size when possible to allow for resizing with
     // the help of re-arranging the lines.
     wxSize sizeMin = SizeFromMajorMinor(m_maxSizeMajor, m_minSizeMinor);
-    if ( m_minSizeMinor < SizeInMinorDir(m_size) &&
-            m_maxSizeMajor < SizeInMajorDir(m_size) )
+    if ( m_minSizeMinor < GetSizeInMinorDir(m_size) &&
+            m_maxSizeMajor < GetSizeInMajorDir(m_size) )
     {
         m_calculatedMinSize = sizeMin;
     }
@@ -229,9 +229,10 @@ void wxWrapSizer::CalcMinFittingSize(const wxSize& szBoundary)
             // We try to present a lower min value by removing an item in
             // the major direction (and preserving current minor min size).
             CalcMinFromMajor(m_maxSizeMajor - m_minItemMajor);
-            if ( m_calculatedMinSize.x <= szBoundary.x && m_calculatedMinSize.y <= szBoundary.y )
+            if ( m_calculatedMinSize.GetWidth() <= szBoundary.GetWidth() && m_calculatedMinSize.GetHeight() <= szBoundary.GetHeight() )
             {
-                SizeInMinorDir(m_calculatedMinSize) = SizeInMinorDir(sizeMin);
+                // FIXME: Fix this bullshit.
+                //SizeInMinorDir(m_calculatedMinSize) = SizeInMinorDir(sizeMin);
                 done = true;
             }
         }
@@ -257,10 +258,10 @@ void wxWrapSizer::CalcMaxSingleItemSize()
         if ( item->IsShown() )
         {
             wxSize sz = item->CalcMin();
-            if ( SizeInMajorDir(sz) > maxMajor )
-                maxMajor = SizeInMajorDir(sz);
-            if ( SizeInMinorDir(sz) > maxMinor )
-                maxMinor = SizeInMinorDir(sz);
+            if ( GetSizeInMajorDir(sz) > maxMajor )
+                maxMajor = GetSizeInMajorDir(sz);
+            if ( GetSizeInMinorDir(sz) > maxMinor )
+                maxMinor = GetSizeInMinorDir(sz);
         }
     }
 
@@ -292,8 +293,8 @@ void wxWrapSizer::CalcMinFromMajor(int totMajor)
             continue;
 
         wxSize minItemSize = item->CalcMin();
-        const int itemMajor = SizeInMajorDir(minItemSize);
-        const int itemMinor = SizeInMinorDir(minItemSize);
+        const int itemMajor = GetSizeInMajorDir(minItemSize);
+        const int itemMinor = GetSizeInMinorDir(minItemSize);
 
         // check if this is the first item in a new row: if so, we have to put
         // it in it, whether it fits or not, as it would never fit better
@@ -355,11 +356,11 @@ void wxWrapSizer::CalcMinFromMinor(int totMinor)
         if ( item->IsShown() )
         {
             sz = item->CalcMin();
-            totMajor += SizeInMajorDir(sz);
-            if ( SizeInMinorDir(sz)>maxMinor )
-                maxMinor = SizeInMinorDir(sz);
-            if ( SizeInMajorDir(sz)>maxMinor )
-                maxMajor = SizeInMajorDir(sz);
+            totMajor += GetSizeInMajorDir(sz);
+            if ( GetSizeInMinorDir(sz) > maxMinor )
+                maxMinor = GetSizeInMinorDir(sz);
+            if ( GetSizeInMajorDir(sz)>maxMinor )
+                maxMajor = GetSizeInMajorDir(sz);
             itemCount++;
         }
         node = node->GetNext();
@@ -415,23 +416,23 @@ void wxWrapSizer::CalcMinFromMinor(int totMinor)
             if ( item->IsShown() )
             {
                 sz = item->GetMinSizeWithBorder();
-                if ( line->m_width+SizeInMajorDir(sz)>lineSize )
+                if ( line->m_width + GetSizeInMajorDir(sz) > lineSize )
                 {
                     line = new wxWrapLine;
                     lines.push_back(line);
                     sumMinor += maxMinor;
                     maxMinor = 0;
                 }
-                line->m_width += SizeInMajorDir(sz);
+                line->m_width += GetSizeInMajorDir(sz);
                 if ( line->m_width && !line->m_first )
                     line->m_first = item;
-                if ( SizeInMinorDir(sz)>maxMinor )
-                    maxMinor = SizeInMinorDir(sz);
+                if ( GetSizeInMinorDir(sz)>maxMinor )
+                    maxMinor = GetSizeInMinorDir(sz);
                 if ( sumMinor+maxMinor>totMinor )
                 {
                     // Keep track of widest tail item
-                    if ( SizeInMajorDir(sz)>tailSize )
-                        tailSize = SizeInMajorDir(sz);
+                    if ( GetSizeInMajorDir(sz)>tailSize )
+                        tailSize = GetSizeInMajorDir(sz);
                 }
             }
         }
@@ -496,7 +497,7 @@ void wxWrapSizer::RepositionChildren(const wxSize& WXUNUSED(minSize))
         return;
 
     // Put all our items into as many row box sizers as needed.
-    const int majorSize = SizeInMajorDir(m_size);   // max size of each row
+    const int majorSize = GetSizeInMajorDir(m_size);   // max size of each row
     int rowTotalMajor = 0;                          // running row major size
     int maxRowMinor = 0;
 
@@ -521,8 +522,8 @@ void wxWrapSizer::RepositionChildren(const wxSize& WXUNUSED(minSize))
             continue;
 
         wxSize minItemSize = item->GetMinSizeWithBorder();
-        const int itemMajor = SizeInMajorDir(minItemSize);
-        const int itemMinor = SizeInMinorDir(minItemSize);
+        const int itemMajor = GetSizeInMajorDir(minItemSize);
+        const int itemMinor = GetSizeInMinorDir(minItemSize);
         if ( itemMajor > 0 && itemMajor < m_minItemMajor )
             m_minItemMajor = itemMajor;
 

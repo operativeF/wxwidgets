@@ -15,6 +15,8 @@
 // headers
 // ---------------------------------------------------------------------------
 
+#include <array>
+
 #include "wx/defs.h"
 #include "wx/list.h"
 #include "wx/string.h"
@@ -269,171 +271,232 @@ enum wxEllipsizeMode
 // ---------------------------------------------------------------------------
 // wxSize
 // ---------------------------------------------------------------------------
-
-class WXDLLIMPEXP_CORE wxSize
+template<typename T, std::size_t N>
+class WXDLLIMPEXP_CORE wxCoordinate
 {
 public:
-    // members are public for compatibility, don't use them directly.
-    int x, y;
-
-    // constructors
-    wxSize() : x(0), y(0) { }
-    wxSize(int xx, int yy) : x(xx), y(yy) { }
-
-    // no copy ctor or assignment operator - the defaults are ok
-
-    wxSize& operator+=(const wxSize& sz) { x += sz.x; y += sz.y; return *this; }
-    wxSize& operator-=(const wxSize& sz) { x -= sz.x; y -= sz.y; return *this; }
-    wxSize& operator/=(int i) { x /= i; y /= i; return *this; }
-    wxSize& operator*=(int i) { x *= i; y *= i; return *this; }
-    wxSize& operator/=(unsigned int i) { x /= i; y /= i; return *this; }
-    wxSize& operator*=(unsigned int i) { x *= i; y *= i; return *this; }
-    wxSize& operator/=(long i) { x /= i; y /= i; return *this; }
-    wxSize& operator*=(long i) { x *= i; y *= i; return *this; }
-    wxSize& operator/=(unsigned long i) { x /= i; y /= i; return *this; }
-    wxSize& operator*=(unsigned long i) { x *= i; y *= i; return *this; }
-    wxSize& operator/=(double i) { x = wxRound(x/i); y = wxRound(y/i); return *this; }
-    wxSize& operator*=(double i) { x = wxRound(x*i); y = wxRound(y*i); return *this; }
-
-    void IncTo(const wxSize& sz)
-        { if ( sz.x > x ) x = sz.x; if ( sz.y > y ) y = sz.y; }
-    void DecTo(const wxSize& sz)
-        { if ( sz.x < x ) x = sz.x; if ( sz.y < y ) y = sz.y; }
-    void DecToIfSpecified(const wxSize& sz)
+    template<std::size_t D>
+    constexpr T get() const
     {
-        if ( sz.x != wxDefaultCoord && sz.x < x )
-            x = sz.x;
-        if ( sz.y != wxDefaultCoord && sz.y < y )
-            y = sz.y;
+        return coordinates.at(D);
     }
 
-    void IncBy(int dx, int dy) { x += dx; y += dy; }
-    void IncBy(const wxPoint& pt);
-    void IncBy(const wxSize& sz) { IncBy(sz.x, sz.y); }
-    void IncBy(int d) { IncBy(d, d); }
-
-    void DecBy(int dx, int dy) { IncBy(-dx, -dy); }
-    void DecBy(const wxPoint& pt);
-    void DecBy(const wxSize& sz) { DecBy(sz.x, sz.y); }
-    void DecBy(int d) { DecBy(d, d); }
-
-
-    wxSize& Scale(double xscale, double yscale)
-        { x = wxRound(x*xscale); y = wxRound(y*yscale); return *this; }
-
-    // accessors
-    void Set(int xx, int yy) { x = xx; y = yy; }
-    void SetWidth(int w) { x = w; }
-    void SetHeight(int h) { y = h; }
-
-    int GetWidth() const { return x; }
-    int GetHeight() const { return y; }
-
-    bool IsFullySpecified() const { return x != wxDefaultCoord && y != wxDefaultCoord; }
-
-    // combine this size with the other one replacing the default (i.e. equal
-    // to wxDefaultCoord) components of this object with those of the other
-    void SetDefaults(const wxSize& size)
+    template<std::size_t D>
+    constexpr void set(T value)
     {
-        if ( x == wxDefaultCoord )
-            x = size.x;
-        if ( y == wxDefaultCoord )
-            y = size.y;
+        coordinates.at(D) = value;
     }
 
-    // compatibility
-    int GetX() const { return x; }
-    int GetY() const { return y; }
+private:
+    std::array<T, N> coordinates {};
 };
 
-inline bool operator==(const wxSize& s1, const wxSize& s2)
+class WXDLLIMPEXP_CORE wxSize : public wxCoordinate<int, 2>
 {
-    return s1.x == s2.x && s1.y == s2.y;
+public:
+    constexpr wxSize() = default;
+
+    constexpr wxSize(int a, int b)
+    {
+        this->template set<0>(a);
+        this->template set<1>(b);
+    }
+
+    constexpr int GetWidth() const
+    {
+        return this->template get<0>();
+    }
+    constexpr int GetHeight() const
+    {
+        return this->template get<1>();
+    }
+
+    constexpr void Set(int a, int b)
+    {
+        this->template set<0>(a);
+        this->template set<1>(b);
+    }
+
+    constexpr void SetHeight(int a)
+    {
+        this->template set<1>(a);
+    }
+    constexpr void SetWidth(int a)
+    {
+        this->template set<0>(a);
+    }
+
+    // FIXME: Move to separate non-class function
+    constexpr bool IsFullySpecified() const
+    {
+        return GetWidth() != wxDefaultCoord && GetHeight() != wxDefaultCoord;
+    }
+
+    constexpr void SetDefaults(const wxSize& size)
+    {
+        if ( GetWidth() == wxDefaultCoord )
+            SetWidth(size.GetWidth());
+        if ( GetHeight() == wxDefaultCoord )
+            SetHeight(size.GetHeight());
+    }
+
+    constexpr wxSize& operator+=(const wxSize& sz)
+    {
+        SetWidth(this->GetWidth() + sz.GetWidth());
+        SetHeight(this->GetHeight() + sz.GetHeight());
+        return *this;
+    }
+
+    constexpr wxSize& operator-=(const wxSize& sz)
+    {
+        SetWidth(GetWidth() - sz.GetWidth());
+        SetHeight(GetHeight() - sz.GetHeight());
+        return *this;
+    }
+
+    constexpr void IncBy(int dx, int dy)
+    {
+        *this += {dx, dy};
+    }
+
+    void IncBy(const wxPoint& pt);
+    constexpr void IncBy(const wxSize& sz) { *this += sz; }
+    constexpr void IncBy(int d) { IncBy(d, d); }
+
+    constexpr void DecBy(int dx, int dy)
+    {
+        IncBy(-dx, -dy);
+    }
+    void DecBy(const wxPoint& pt);
+    constexpr void DecBy(const wxSize& sz) { *this -= sz; }
+    constexpr void DecBy(int d) { DecBy(d, d); }
+
+    wxSize& operator/=(double i) { SetWidth(wxRound(GetWidth()/i)); SetHeight(wxRound(GetHeight()/i)); return *this; }
+    wxSize& operator*=(double i) { SetWidth(wxRound(GetWidth()*i)); SetHeight(wxRound(GetHeight()*i)); return *this; }
+
+    void IncTo(const wxSize& sz)
+    {
+        if ( sz.GetWidth() > GetWidth() ) SetWidth(sz.GetWidth());
+        if ( sz.GetHeight() > GetHeight() ) SetHeight(sz.GetHeight());
+    }
+    void DecTo(const wxSize& sz)
+    {
+        if ( sz.GetWidth() < GetWidth() ) SetWidth(sz.GetWidth());
+        if ( sz.GetHeight() < GetHeight() ) SetHeight(sz.GetHeight());
+    }
+    void DecToIfSpecified(const wxSize& sz)
+    {
+        if ( sz.GetWidth() != wxDefaultCoord && sz.GetWidth() < GetWidth() )
+            SetWidth(sz.GetWidth());
+        if ( sz.GetHeight() != wxDefaultCoord && sz.GetHeight() < GetHeight() )
+            SetHeight(sz.GetHeight());
+    }
+    wxSize& Scale(double xscale, double yscale)
+    {
+        SetWidth(wxRound(GetWidth() * xscale));
+        SetHeight(wxRound(GetHeight() * yscale));
+        return *this;
+    }
+
+    // FIXME: Remove GetX / Y
+    constexpr int GetX()
+    {
+        return GetWidth();
+    }
+    constexpr int GetY()
+    {
+        return GetHeight();
+    }
+};
+
+constexpr bool operator==(const wxSize& s1, const wxSize& s2)
+{
+    return s1.GetWidth() == s2.GetWidth() && s1.GetHeight() == s2.GetHeight();
 }
 
-inline bool operator!=(const wxSize& s1, const wxSize& s2)
+constexpr bool operator!=(const wxSize& s1, const wxSize& s2)
 {
-    return s1.x != s2.x || s1.y != s2.y;
+    return s1.GetWidth() != s2.GetWidth() || s1.GetHeight() != s2.GetHeight();
 }
 
-inline wxSize operator+(const wxSize& s1, const wxSize& s2)
+constexpr wxSize operator+(const wxSize& s1, const wxSize& s2)
 {
-    return wxSize(s1.x + s2.x, s1.y + s2.y);
+    return { s1.GetWidth() + s2.GetWidth(), s1.GetHeight() + s2.GetHeight() };
 }
 
-inline wxSize operator-(const wxSize& s1, const wxSize& s2)
+constexpr wxSize operator-(const wxSize& s1, const wxSize& s2)
 {
-    return wxSize(s1.x - s2.x, s1.y - s2.y);
+    return { s1.GetWidth() - s2.GetWidth(), s1.GetHeight() - s2.GetHeight() };
 }
 
-inline wxSize operator/(const wxSize& s, int i)
+constexpr wxSize operator/(const wxSize& s, int i)
 {
-    return wxSize(s.x / i, s.y / i);
+    return { s.GetWidth() / i, s.GetHeight() / i };
 }
 
-inline wxSize operator*(const wxSize& s, int i)
+constexpr wxSize operator*(const wxSize& s, int i)
 {
-    return wxSize(s.x * i, s.y * i);
+    return wxSize(s.GetWidth() * i, s.GetHeight() * i);
 }
 
-inline wxSize operator*(int i, const wxSize& s)
+constexpr wxSize operator*(int i, const wxSize& s)
 {
-    return wxSize(s.x * i, s.y * i);
+    return wxSize(s.GetWidth() * i, s.GetHeight() * i);
 }
 
-inline wxSize operator/(const wxSize& s, unsigned int i)
+constexpr wxSize operator/(const wxSize& s, unsigned int i)
 {
-    return wxSize(s.x / i, s.y / i);
+    return wxSize(s.GetWidth() / i, s.GetHeight() / i);
 }
 
-inline wxSize operator*(const wxSize& s, unsigned int i)
+constexpr wxSize operator*(const wxSize& s, unsigned int i)
 {
-    return wxSize(s.x * i, s.y * i);
+    return wxSize(s.GetWidth() * i, s.GetHeight() * i);
 }
 
-inline wxSize operator*(unsigned int i, const wxSize& s)
+constexpr wxSize operator*(unsigned int i, const wxSize& s)
 {
-    return wxSize(s.x * i, s.y * i);
+    return wxSize(s.GetWidth() * i, s.GetHeight() * i);
 }
 
-inline wxSize operator/(const wxSize& s, long i)
+constexpr wxSize operator/(const wxSize& s, long i)
 {
-    return wxSize(s.x / i, s.y / i);
+    return wxSize(s.GetWidth() / i, s.GetHeight() / i);
 }
 
-inline wxSize operator*(const wxSize& s, long i)
+constexpr wxSize operator*(const wxSize& s, long i)
 {
-    return wxSize(int(s.x * i), int(s.y * i));
+    return wxSize(int(s.GetWidth() * i), int(s.GetHeight() * i));
 }
 
-inline wxSize operator*(long i, const wxSize& s)
+constexpr wxSize operator*(long i, const wxSize& s)
 {
-    return wxSize(int(s.x * i), int(s.y * i));
+    return { int(s.GetWidth() * i), int(s.GetHeight() * i) };
 }
 
-inline wxSize operator/(const wxSize& s, unsigned long i)
+constexpr wxSize operator/(const wxSize& s, unsigned long i)
 {
-    return wxSize(int(s.x / i), int(s.y / i));
+    return { int(s.GetWidth() / i), int(s.GetHeight() / i) };
 }
 
-inline wxSize operator*(const wxSize& s, unsigned long i)
+constexpr wxSize operator*(const wxSize& s, unsigned long i)
 {
-    return wxSize(int(s.x * i), int(s.y * i));
+    return { int(s.GetWidth() * i), int(s.GetHeight() * i) };
 }
 
-inline wxSize operator*(unsigned long i, const wxSize& s)
+constexpr wxSize operator*(unsigned long i, const wxSize& s)
 {
-    return wxSize(int(s.x * i), int(s.y * i));
+    return wxSize(int(s.GetWidth() * i), int(s.GetHeight() * i));
 }
 
 inline wxSize operator*(const wxSize& s, double i)
 {
-    return wxSize(wxRound(s.x * i), wxRound(s.y * i));
+    return { wxRound(s.GetWidth() * i), wxRound(s.GetHeight() * i) };
 }
 
 inline wxSize operator*(double i, const wxSize& s)
 {
-    return wxSize(wxRound(s.x * i), wxRound(s.y * i));
+    return { wxRound(s.GetWidth() * i), wxRound(s.GetHeight() * i) };
 }
 
 
@@ -475,84 +538,84 @@ inline bool operator!=(const wxRealPoint& p1, const wxRealPoint& p2)
 
 inline wxRealPoint operator+(const wxRealPoint& p1, const wxRealPoint& p2)
 {
-    return wxRealPoint(p1.x + p2.x, p1.y + p2.y);
+    return { p1.x + p2.x, p1.y + p2.y };
 }
 
 
 inline wxRealPoint operator-(const wxRealPoint& p1, const wxRealPoint& p2)
 {
-    return wxRealPoint(p1.x - p2.x, p1.y - p2.y);
+    return { p1.x - p2.x, p1.y - p2.y };
 }
 
 
 inline wxRealPoint operator/(const wxRealPoint& s, int i)
 {
-    return wxRealPoint(s.x / i, s.y / i);
+    return { s.x / i, s.y / i };
 }
 
 inline wxRealPoint operator*(const wxRealPoint& s, int i)
 {
-    return wxRealPoint(s.x * i, s.y * i);
+    return { s.x * i, s.y * i };
 }
 
 inline wxRealPoint operator*(int i, const wxRealPoint& s)
 {
-    return wxRealPoint(s.x * i, s.y * i);
+    return { s.x * i, s.y * i };
 }
 
 inline wxRealPoint operator/(const wxRealPoint& s, unsigned int i)
 {
-    return wxRealPoint(s.x / i, s.y / i);
+    return { s.x / i, s.y / i };
 }
 
 inline wxRealPoint operator*(const wxRealPoint& s, unsigned int i)
 {
-    return wxRealPoint(s.x * i, s.y * i);
+    return { s.x * i, s.y * i };
 }
 
 inline wxRealPoint operator*(unsigned int i, const wxRealPoint& s)
 {
-    return wxRealPoint(s.x * i, s.y * i);
+    return { s.x * i, s.y * i };
 }
 
 inline wxRealPoint operator/(const wxRealPoint& s, long i)
 {
-    return wxRealPoint(s.x / i, s.y / i);
+    return { s.x / i, s.y / i };
 }
 
 inline wxRealPoint operator*(const wxRealPoint& s, long i)
 {
-    return wxRealPoint(s.x * i, s.y * i);
+    return { s.x * i, s.y * i };
 }
 
 inline wxRealPoint operator*(long i, const wxRealPoint& s)
 {
-    return wxRealPoint(s.x * i, s.y * i);
+    return { s.x * i, s.y * i };
 }
 
 inline wxRealPoint operator/(const wxRealPoint& s, unsigned long i)
 {
-    return wxRealPoint(s.x / i, s.y / i);
+    return { s.x / i, s.y / i };
 }
 
 inline wxRealPoint operator*(const wxRealPoint& s, unsigned long i)
 {
-    return wxRealPoint(s.x * i, s.y * i);
+    return { s.x * i, s.y * i };
 }
 
 inline wxRealPoint operator*(unsigned long i, const wxRealPoint& s)
 {
-    return wxRealPoint(s.x * i, s.y * i);
+    return { s.x * i, s.y * i };
 }
 
 inline wxRealPoint operator*(const wxRealPoint& s, double i)
 {
-    return wxRealPoint(s.x * i, s.y * i);
+    return { s.x * i, s.y * i };
 }
 
 inline wxRealPoint operator*(double i, const wxRealPoint& s)
 {
-    return wxRealPoint(s.x * i, s.y * i);
+    return { s.x * i, s.y * i };
 }
 
 
@@ -607,52 +670,52 @@ inline bool operator!=(const wxPoint& p1, const wxPoint& p2)
 // arithmetic operations (component wise)
 inline wxPoint operator+(const wxPoint& p1, const wxPoint& p2)
 {
-    return wxPoint(p1.x + p2.x, p1.y + p2.y);
+    return { p1.x + p2.x, p1.y + p2.y };
 }
 
 inline wxPoint operator-(const wxPoint& p1, const wxPoint& p2)
 {
-    return wxPoint(p1.x - p2.x, p1.y - p2.y);
+    return { p1.x - p2.x, p1.y - p2.y };
 }
 
 inline wxPoint operator+(const wxPoint& p, const wxSize& s)
 {
-    return wxPoint(p.x + s.x, p.y + s.y);
+    return { p.x + s.GetWidth(), p.y + s.GetHeight() };
 }
 
 inline wxPoint operator-(const wxPoint& p, const wxSize& s)
 {
-    return wxPoint(p.x - s.x, p.y - s.y);
+    return { p.x - s.GetWidth(), p.y - s.GetHeight() };
 }
 
 inline wxPoint operator+(const wxSize& s, const wxPoint& p)
 {
-    return wxPoint(p.x + s.x, p.y + s.y);
+    return { p.x + s.GetWidth(), p.y + s.GetHeight() };
 }
 
 inline wxPoint operator-(const wxSize& s, const wxPoint& p)
 {
-    return wxPoint(s.x - p.x, s.y - p.y);
+    return { s.GetWidth() - p.x, s.GetHeight() - p.y };
 }
 
 inline wxPoint operator-(const wxPoint& p)
 {
-    return wxPoint(-p.x, -p.y);
+    return { -p.x, -p.y };
 }
 
 inline wxPoint operator/(const wxPoint& s, int i)
 {
-    return wxPoint(s.x / i, s.y / i);
+    return { s.x / i, s.y / i };
 }
 
 inline wxPoint operator*(const wxPoint& s, int i)
 {
-    return wxPoint(s.x * i, s.y * i);
+    return { s.x * i, s.y * i };
 }
 
 inline wxPoint operator*(int i, const wxPoint& s)
 {
-    return wxPoint(s.x * i, s.y * i);
+    return { s.x * i, s.y * i };
 }
 
 inline wxPoint operator/(const wxPoint& s, unsigned int i)
@@ -672,17 +735,17 @@ inline wxPoint operator*(unsigned int i, const wxPoint& s)
 
 inline wxPoint operator/(const wxPoint& s, long i)
 {
-    return wxPoint(s.x / i, s.y / i);
+    return { s.x / i, s.y / i };
 }
 
 inline wxPoint operator*(const wxPoint& s, long i)
 {
-    return wxPoint(int(s.x * i), int(s.y * i));
+    return { int(s.x * i), int(s.y * i) };
 }
 
 inline wxPoint operator*(long i, const wxPoint& s)
 {
-    return wxPoint(int(s.x * i), int(s.y * i));
+    return { int(s.x * i), int(s.y * i) };
 }
 
 inline wxPoint operator/(const wxPoint& s, unsigned long i)
@@ -692,22 +755,22 @@ inline wxPoint operator/(const wxPoint& s, unsigned long i)
 
 inline wxPoint operator*(const wxPoint& s, unsigned long i)
 {
-    return wxPoint(int(s.x * i), int(s.y * i));
+    return { int(s.x * i), int(s.y * i) };
 }
 
 inline wxPoint operator*(unsigned long i, const wxPoint& s)
 {
-    return wxPoint(int(s.x * i), int(s.y * i));
+    return { int(s.x * i), int(s.y * i) };
 }
 
 inline wxPoint operator*(const wxPoint& s, double i)
 {
-    return wxPoint(int(s.x * i), int(s.y * i));
+    return { int(s.x * i), int(s.y * i) };
 }
 
 inline wxPoint operator*(double i, const wxPoint& s)
 {
-    return wxPoint(int(s.x * i), int(s.y * i));
+    return { int(s.x * i), int(s.y * i) };
 }
 
 WX_DECLARE_LIST_WITH_DECL(wxPoint, wxPointList, class WXDLLIMPEXP_CORE);
@@ -727,10 +790,10 @@ public:
         { }
     wxRect(const wxPoint& topLeft, const wxPoint& bottomRight);
     wxRect(const wxPoint& pt, const wxSize& size)
-        : x(pt.x), y(pt.y), width(size.x), height(size.y)
+        : x(pt.x), y(pt.y), width(size.GetWidth()), height(size.GetHeight())
         { }
     wxRect(const wxSize& size)
-        : x(0), y(0), width(size.x), height(size.y)
+        : x(0), y(0), width(size.GetWidth()), height(size.GetHeight())
         { }
 
     // default copy ctor and assignment operators ok
@@ -747,11 +810,11 @@ public:
     int GetHeight() const { return height; }
     void SetHeight(int h) { height = h; }
 
-    wxPoint GetPosition() const { return wxPoint(x, y); }
+    wxPoint GetPosition() const { return { x, y }; }
     void SetPosition( const wxPoint &p ) { x = p.x; y = p.y; }
 
     wxSize GetSize() const { return wxSize(width, height); }
-    void SetSize( const wxSize &s ) { width = s.GetWidth(); height = s.GetHeight(); }
+    void SetSize( const wxSize& s ) { width = s.GetWidth(); height = s.GetHeight(); }
 
     bool IsEmpty() const { return (width <= 0) || (height <= 0); }
 
@@ -770,24 +833,24 @@ public:
     void SetTopLeft(const wxPoint &p) { SetPosition(p); }
     void SetLeftTop(const wxPoint &p) { SetTopLeft(p); }
 
-    wxPoint GetBottomRight() const { return wxPoint(GetRight(), GetBottom()); }
+    wxPoint GetBottomRight() const { return { GetRight(), GetBottom() }; }
     wxPoint GetRightBottom() const { return GetBottomRight(); }
     void SetBottomRight(const wxPoint &p) { SetRight(p.x); SetBottom(p.y); }
     void SetRightBottom(const wxPoint &p) { SetBottomRight(p); }
 
-    wxPoint GetTopRight() const { return wxPoint(GetRight(), GetTop()); }
+    wxPoint GetTopRight() const { return { GetRight(), GetTop() }; }
     wxPoint GetRightTop() const { return GetTopRight(); }
     void SetTopRight(const wxPoint &p) { SetRight(p.x); SetTop(p.y); }
     void SetRightTop(const wxPoint &p) { SetTopRight(p); }
 
-    wxPoint GetBottomLeft() const { return wxPoint(GetLeft(), GetBottom()); }
+    wxPoint GetBottomLeft() const { return { GetLeft(), GetBottom() }; }
     wxPoint GetLeftBottom() const { return GetBottomLeft(); }
     void SetBottomLeft(const wxPoint &p) { SetLeft(p.x); SetBottom(p.y); }
     void SetLeftBottom(const wxPoint &p) { SetBottomLeft(p); }
 
     // operations with rect
     wxRect& Inflate(wxCoord dx, wxCoord dy);
-    wxRect& Inflate(const wxSize& d) { return Inflate(d.x, d.y); }
+    wxRect& Inflate(wxSize d) { return Inflate(d.GetWidth(), d.GetHeight()); }
     wxRect& Inflate(wxCoord d) { return Inflate(d, d); }
     wxRect Inflate(wxCoord dx, wxCoord dy) const
     {
@@ -797,7 +860,7 @@ public:
     }
 
     wxRect& Deflate(wxCoord dx, wxCoord dy) { return Inflate(-dx, -dy); }
-    wxRect& Deflate(const wxSize& d) { return Inflate(-d.x, -d.y); }
+    wxRect& Deflate(wxSize d) { return Inflate(-d.GetWidth(), -d.GetHeight()); }
     wxRect& Deflate(wxCoord d) { return Inflate(-d); }
     wxRect Deflate(wxCoord dx, wxCoord dy) const
     {

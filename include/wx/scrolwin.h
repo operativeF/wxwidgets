@@ -263,9 +263,9 @@ protected:
     {
         wxSize size = GetTargetSize();
         if ( w )
-            *w = size.x;
+            *w = size.GetWidth();
         if ( h )
-            *h = size.y;
+            *h = size.GetHeight();
     }
 
     // implementation of public methods with the same name

@@ -326,8 +326,8 @@ protected:
     // this method is only kept for compatibility, call Layout() instead.
     void DoLayout() { Layout(); }
 
-    static int WidthDefault(int w) { return w == wxDefaultCoord ? GetDefaultSize().x : w; }
-    static int HeightDefault(int h) { return h == wxDefaultCoord ? GetDefaultSize().y : h; }
+    static int WidthDefault(int w) { return w == wxDefaultCoord ? GetDefaultSize().GetWidth() : w; }
+    static int HeightDefault(int h) { return h == wxDefaultCoord ? GetDefaultSize().GetHeight() : h; }
 
 
     // the frame icon

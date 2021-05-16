@@ -308,7 +308,7 @@ wxTangoArtProvider::CreateBitmap(const wxArtID& id,
         if ( !sizeIsAHint )
         {
             // Notice that this won't do anything if the size is already right.
-            image.Rescale(size.x, size.y, wxIMAGE_QUALITY_HIGH);
+            image.Rescale(size.GetWidth(), size.GetHeight(), wxIMAGE_QUALITY_HIGH);
         }
 
         return image;
