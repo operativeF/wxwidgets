@@ -116,7 +116,7 @@ wxCheckListBoxItem::wxCheckListBoxItem(wxCheckListBox *parent)
     wxSize size = wxRendererNative::Get().GetCheckBoxSize(parent);
     size.x += 2 * CHECKMARK_EXTRA_SPACE + CHECKMARK_LABEL_SPACE;
 
-    SetMarginWidth(size.GetWidth());
+    SetMarginWidth(size.x);
     SetBackgroundColour(parent->GetBackgroundColour());
 }
 
@@ -135,7 +135,7 @@ bool wxCheckListBoxItem::OnDrawItem(wxDC& dc, const wxRect& rc,
 
     // first create bitmap in a memory DC
     MemoryHDC hdcMem(hdc);
-    CompatibleBitmap hBmpCheck(hdc, size.GetWidth(), size.GetHeight());
+    CompatibleBitmap hBmpCheck(hdc, size.x, size.y);
 
     // then draw a check mark into it
     {
@@ -153,7 +153,7 @@ bool wxCheckListBoxItem::OnDrawItem(wxDC& dc, const wxRect& rc,
 
     // position of check mark bitmap
     int x = rc.GetX() + CHECKMARK_EXTRA_SPACE;
-    int y = rc.GetY() + (rc.GetHeight() - size.GetHeight()) / 2;
+    int y = rc.GetY() + (rc.GetHeight() - size.y) / 2;
 
     UINT uState = stat & wxOwnerDrawn::wxODSelected ? wxDSB_SELECTED : wxDSB_NORMAL;
 
@@ -263,7 +263,7 @@ void wxCheckListBox::MSWUpdateFontOnDPIChange(const wxSize& newDPI)
 
     for ( unsigned int i = 0; i < GetCount(); ++i )
     {
-        GetItem(i)->SetMarginWidth(size.GetWidth());
+        GetItem(i)->SetMarginWidth(size.x);
     }
 }
 
@@ -389,7 +389,7 @@ void wxCheckListBox::OnLeftClick(wxMouseEvent& event)
         // convert item rect to check mark rect
         wxSize size = wxRendererNative::Get().GetCheckBoxSize(this);
         rect.x += CHECKMARK_EXTRA_SPACE;
-        rect.y += (rect.GetHeight() - size.GetHeight()) / 2;
+        rect.y += (rect.GetHeight() - size.y) / 2;
         rect.SetSize(size);
 
         if ( rect.Contains(event.GetX(), event.GetY()) )
@@ -433,9 +433,9 @@ wxSize wxCheckListBox::MSWGetFullItemSize(int w, int h) const
     size.x += 2 * CHECKMARK_EXTRA_SPACE;
     size.y += 2 * CHECKMARK_EXTRA_SPACE;
 
-    w += size.GetWidth();
-    if ( h < size.GetHeight() )
-        h = size.GetHeight();
+    w += size.x;
+    if ( h < size.y )
+        h = size.y;
 
     return wxSize(w, h);
 }

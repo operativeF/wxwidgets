@@ -196,7 +196,7 @@ void wxRibbonPanel::TestPositionForHover(const wxPoint& pos)
     if(pos.x >= 0 && pos.y >= 0)
     {
         wxSize size = GetSize();
-        if(pos.x < size.GetWidth() && pos.y < size.GetHeight())
+        if(pos.x < size.x && pos.y < size.y)
         {
             hovered = true;
         }
@@ -411,10 +411,10 @@ wxSize wxRibbonPanel::DoGetNextSmallerSize(wxOrientation direction,
                 switch(direction)
                 {
                 case wxHORIZONTAL:
-                    minimised.SetHeight(relative_to.GetHeight());
+                    minimised.y = relative_to.y;
                     break;
                 case wxVERTICAL:
-                    minimised.SetWidth(relative_to.GetWidth());
+                    minimised.x = relative_to.x;
                     break;
                 default:
                     break;
@@ -697,7 +697,7 @@ bool wxRibbonPanel::Realize()
                 scale = 2.0;
 
             wxImage img(m_minimised_icon.ConvertToImage());
-            img.Rescale(scale * bitmap_size.GetWidth(), scale * bitmap_size.GetHeight(), wxIMAGE_QUALITY_HIGH);
+            img.Rescale(scale * bitmap_size.x, scale * bitmap_size.y, wxIMAGE_QUALITY_HIGH);
             m_minimised_icon_resized = wxBitmap(img, -1, scale);
         }
         else
@@ -753,7 +753,7 @@ bool wxRibbonPanel::Layout()
     {
         // Common case of no sizer and single child taking up the entire panel
         wxWindow* child = GetChildren().Item(0)->GetData();
-        child->SetSize(position.x, position.y, size.GetWidth(), size.GetHeight());
+        child->SetSize(position.x, position.y, size.x, size.y);
     }
 
     if(HasExtButton())
@@ -1006,26 +1006,26 @@ wxRect wxRibbonPanel::GetExpandedPosition(wxRect panel,
     switch(direction)
     {
     case wxNORTH:
-        pos.x = panel.GetX() + (panel.GetWidth() - expanded_size.GetWidth()) / 2;
-        pos.y = panel.GetY() - expanded_size.GetHeight();
+        pos.x = panel.GetX() + (panel.GetWidth() - expanded_size.x) / 2;
+        pos.y = panel.GetY() - expanded_size.y;
         primary_x = true;
         secondary_y = 1;
         break;
     case wxEAST:
         pos.x = panel.GetRight();
-        pos.y = panel.GetY() + (panel.GetHeight() - expanded_size.GetHeight()) / 2;
+        pos.y = panel.GetY() + (panel.GetHeight() - expanded_size.y) / 2;
         secondary_x = -1;
         break;
     case wxSOUTH:
-        pos.x = panel.GetX() + (panel.GetWidth() - expanded_size.GetWidth()) / 2;
+        pos.x = panel.GetX() + (panel.GetWidth() - expanded_size.x) / 2;
         pos.y = panel.GetBottom();
         primary_x = true;
         secondary_y = -1;
         break;
     case wxWEST:
     default:
-        pos.x = panel.GetX() - expanded_size.GetWidth();
-        pos.y = panel.GetY() + (panel.GetHeight() - expanded_size.GetHeight()) / 2;
+        pos.x = panel.GetX() - expanded_size.x;
+        pos.y = panel.GetY() + (panel.GetHeight() - expanded_size.y) / 2;
         secondary_x = 1;
         break;
     }
@@ -1079,8 +1079,8 @@ wxRect wxRibbonPanel::GetExpandedPosition(wxRect panel,
             {
                 // Tried moving in primary axis, but failed.
                 // Hence try moving in the secondary axis.
-                int dx = secondary_x * (panel.GetWidth() + expanded_size.GetWidth());
-                int dy = secondary_y * (panel.GetHeight() + expanded_size.GetHeight());
+                int dx = secondary_x * (panel.GetWidth() + expanded_size.x);
+                int dy = secondary_y * (panel.GetHeight() + expanded_size.y);
                 new_rect.x += dx;
                 new_rect.y += dy;
 

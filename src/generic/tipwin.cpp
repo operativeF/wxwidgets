@@ -136,8 +136,8 @@ wxTipWindow::wxTipWindow(wxWindow *parent,
         posScreen = wxPoint(0, 0);
         sizeScreen = wxGetDisplaySize();
     }
-    wxPoint center(posScreen.x + sizeScreen.GetWidth() / 2,
-                   posScreen.y + sizeScreen.GetHeight() / 2);
+    wxPoint center(posScreen.x + sizeScreen.x / 2,
+                   posScreen.y + sizeScreen.y / 2);
     Move(center, wxSIZE_NO_ADJUSTMENTS);
 
     // set size, position and show it
@@ -151,8 +151,8 @@ wxTipWindow::wxTipWindow(wxWindow *parent,
     //     cursors hot spot is... it would be nice if we could find this out
     //     though
     int cursorOffset = wxSystemSettings::GetMetric(wxSYS_CURSOR_Y, this) / 2;
-    if (y + cursorOffset >= posScreen.y + sizeScreen.GetHeight())
-        cursorOffset = posScreen.y + sizeScreen.GetHeight() - y - 1;
+    if (y + cursorOffset >= posScreen.y + sizeScreen.y)
+        cursorOffset = posScreen.y + sizeScreen.y - y - 1;
     y += cursorOffset;
 
     Position(wxPoint(x, y), wxSize(0,0));

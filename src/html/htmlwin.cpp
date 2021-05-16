@@ -741,14 +741,14 @@ void wxHtmlWindow::CreateLayout()
 
     if ( HasFlag(wxHW_SCROLLBAR_NEVER) )
     {
-        m_Cell->Layout(GetClientSize().GetWidth());
+        m_Cell->Layout(GetClientSize().x);
     }
     else // Do show scrollbars if necessary.
     {
         // Get client width if a vertical scrollbar is shown
         // (which is usually the case).
         ShowScrollbars(wxSHOW_SB_DEFAULT, wxSHOW_SB_ALWAYS);
-        const int widthWithVScrollbar = GetClientSize().GetWidth();
+        const int widthWithVScrollbar = GetClientSize().x;
 
         // Let wxScrolledWindow decide whether it needs to show the vertical
         // scrollbar for the given contents size.
@@ -757,7 +757,7 @@ void wxHtmlWindow::CreateLayout()
         SetVirtualSize(m_Cell->GetWidth(), m_Cell->GetHeight());
 
         // Check if the vertical scrollbar was hidden.
-        const int newClientWidth = GetClientSize().GetWidth();
+        const int newClientWidth = GetClientSize().x;
         if ( newClientWidth != widthWithVScrollbar )
         {
             m_Cell->Layout(newClientWidth);

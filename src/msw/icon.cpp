@@ -150,7 +150,7 @@ bool wxIcon::LoadFile(const wxString& filename,
 bool wxIcon::CreateFromHICON(WXHICON icon)
 {
     wxSize size = wxGetHiconSize(icon);
-    return InitFromHICON(icon, size.GetWidth(), size.GetHeight());
+    return InitFromHICON(icon, size.x, size.y);
 }
 
 bool wxIcon::InitFromHICON(WXHICON icon, int width, int height)

@@ -458,8 +458,8 @@ public:
     wxRealPoint& operator+=(const wxRealPoint& p) { x += p.x; y += p.y; return *this; }
     wxRealPoint& operator-=(const wxRealPoint& p) { x -= p.x; y -= p.y; return *this; }
 
-    wxRealPoint& operator+=(const wxSize& s) { x += s.GetWidth(); y += s.GetHeight(); return *this; }
-    wxRealPoint& operator-=(const wxSize& s) { x -= s.GetWidth(); y -= s.GetHeight(); return *this; }
+    wxRealPoint& operator+=(const wxSize& s) { x += s.x; y += s.y; return *this; }
+    wxRealPoint& operator-=(const wxSize& s) { x -= s.x; y -= s.y; return *this; }
 };
 
 
@@ -575,8 +575,8 @@ public:
     wxPoint& operator+=(const wxPoint& p) { x += p.x; y += p.y; return *this; }
     wxPoint& operator-=(const wxPoint& p) { x -= p.x; y -= p.y; return *this; }
 
-    wxPoint& operator+=(const wxSize& s) { x += s.GetWidth(); y += s.GetHeight(); return *this; }
-    wxPoint& operator-=(const wxSize& s) { x -= s.GetWidth(); y -= s.GetHeight(); return *this; }
+    wxPoint& operator+=(const wxSize& s) { x += s.x; y += s.y; return *this; }
+    wxPoint& operator-=(const wxSize& s) { x -= s.x; y -= s.y; return *this; }
 
     // check if both components are set/initialized
     bool IsFullySpecified() const { return x != wxDefaultCoord && y != wxDefaultCoord; }
@@ -751,7 +751,7 @@ public:
     void SetPosition( const wxPoint &p ) { x = p.x; y = p.y; }
 
     wxSize GetSize() const { return wxSize(width, height); }
-    void SetSize( const wxSize &s ) { width = s.GetWidth(); height = s.GetHeight(); }
+    void SetSize( const wxSize &s ) { width = s.x; height = s.y; }
 
     bool IsEmpty() const { return (width <= 0) || (height <= 0); }
 

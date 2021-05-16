@@ -2258,7 +2258,7 @@ wxDataViewMainWindow::DropItemInfo wxDataViewMainWindow::GetDropItemInfo(const w
                 xStart += col->GetWidth();
             }
 
-            const int expanderWidth = wxRendererNative::Get().GetExpanderSize(this).GetWidth();
+            const int expanderWidth = wxRendererNative::Get().GetExpanderSize(this).x;
 
             int level = node->GetIndentLevel();
 
@@ -2429,7 +2429,7 @@ wxBitmap wxDataViewMainWindow::CreateItemBitmap( unsigned int row, int &indent )
     {
         wxDataViewTreeNode *node = GetTreeNodeByRow(row);
         indent = GetOwner()->GetIndent() * node->GetIndentLevel();
-        indent += wxRendererNative::Get().GetExpanderSize(this).GetWidth();
+        indent += wxRendererNative::Get().GetExpanderSize(this).x;
     }
     width -= indent;
 
@@ -2854,9 +2854,9 @@ void wxDataViewMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
                 {
                     wxRect rect = cell_rect;
                     rect.x += indent;
-                    rect.y += (cell_rect.GetHeight() - expSize.GetHeight()) / 2; // center vertically
-                    rect.width = expSize.GetWidth();
-                    rect.height = expSize.GetHeight();
+                    rect.y += (cell_rect.GetHeight() - expSize.y) / 2; // center vertically
+                    rect.width = expSize.x;
+                    rect.height = expSize.y;
 
                     int flag = 0;
                     if ( m_underMouse == node )
@@ -2871,7 +2871,7 @@ void wxDataViewMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
                     wxRendererNative::Get().DrawTreeItemButton( this, dc, rect, flag);
                 }
 
-                indent += expSize.GetWidth();
+                indent += expSize.x;
 
                 // force the expander column to left-center align
                 cell->SetAlignment( wxALIGN_CENTER_VERTICAL );
@@ -2880,8 +2880,8 @@ void wxDataViewMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
                 if (item == m_dropItemInfo.m_row)
                 {
                     dropItemRect = cell_rect;
-                    dropItemRect.x += expSize.GetWidth();
-                    dropItemRect.width -= expSize.GetWidth();
+                    dropItemRect.x += expSize.x;
+                    dropItemRect.width -= expSize.x;
                     if (m_dropItemInfo.m_indentLevel >= 0)
                     {
                         int hintIndent = GetOwner()->GetIndent()*m_dropItemInfo.m_indentLevel;
@@ -4205,7 +4205,7 @@ wxRect wxDataViewMainWindow::GetItemRect( const wxDataViewItem & item,
     {
         wxDataViewTreeNode* node = GetTreeNodeByRow(row);
         indent = GetOwner()->GetIndent() * node->GetIndentLevel();
-        indent += wxRendererNative::Get().GetExpanderSize(this).GetWidth();
+        indent += wxRendererNative::Get().GetExpanderSize(this).x;
     }
 
     wxRect itemRect( xpos + indent,
@@ -5073,7 +5073,7 @@ void wxDataViewMainWindow::OnMouse( wxMouseEvent &event )
 
         int indent = node->GetIndentLevel();
         itemOffset = GetOwner()->GetIndent()*indent;
-        const int expWidth = wxRendererNative::Get().GetExpanderSize(this).GetWidth();
+        const int expWidth = wxRendererNative::Get().GetExpanderSize(this).x;
 
         if ( node->HasChildren() )
         {

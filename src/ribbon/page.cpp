@@ -240,14 +240,14 @@ void wxRibbonPage::AdjustRectToIncludeScrollButtons(wxRect* rect) const
             if(m_scroll_left_btn)
             {
                 rect->SetY(rect->GetY() -
-                    m_scroll_left_btn->GetSize().GetHeight());
+                    m_scroll_left_btn->GetSize().y);
                 rect->SetHeight(rect->GetHeight() +
-                    m_scroll_left_btn->GetSize().GetHeight());
+                    m_scroll_left_btn->GetSize().y);
             }
             if(m_scroll_right_btn)
             {
                 rect->SetHeight(rect->GetHeight() +
-                    m_scroll_right_btn->GetSize().GetHeight());
+                    m_scroll_right_btn->GetSize().y);
             }
         }
         else
@@ -255,14 +255,14 @@ void wxRibbonPage::AdjustRectToIncludeScrollButtons(wxRect* rect) const
             if(m_scroll_left_btn)
             {
                 rect->SetX(rect->GetX() -
-                    m_scroll_left_btn->GetSize().GetWidth());
+                    m_scroll_left_btn->GetSize().x);
                 rect->SetWidth(rect->GetWidth() +
-                    m_scroll_left_btn->GetSize().GetWidth());
+                    m_scroll_left_btn->GetSize().x);
             }
             if(m_scroll_right_btn)
             {
                 rect->SetWidth(rect->GetWidth() +
-                    m_scroll_right_btn->GetSize().GetWidth());
+                    m_scroll_right_btn->GetSize().x);
             }
         }
     }
@@ -467,14 +467,14 @@ void wxRibbonPage::SetSizeWithScrollButtonAdjustment(int x, int y, int width, in
         {
             if(m_scroll_left_btn)
             {
-                int w = m_scroll_left_btn->GetSize().GetWidth();
+                int w = m_scroll_left_btn->GetSize().x;
                 m_scroll_left_btn->SetPosition(wxPoint(x, y));
                 x += w;
                 width -= w;
             }
             if(m_scroll_right_btn)
             {
-                int w = m_scroll_right_btn->GetSize().GetWidth();
+                int w = m_scroll_right_btn->GetSize().x;
                 width -= w;
                 m_scroll_right_btn->SetPosition(wxPoint(x + width, y));
             }
@@ -483,14 +483,14 @@ void wxRibbonPage::SetSizeWithScrollButtonAdjustment(int x, int y, int width, in
         {
             if(m_scroll_left_btn)
             {
-                int h = m_scroll_left_btn->GetSize().GetHeight();
+                int h = m_scroll_left_btn->GetSize().y;
                 m_scroll_left_btn->SetPosition(wxPoint(x, y));
                 y += h;
                 height -= h;
             }
             if(m_scroll_right_btn)
             {
-                int h = m_scroll_right_btn->GetSize().GetHeight();
+                int h = m_scroll_right_btn->GetSize().y;
                 height -= h;
                 m_scroll_right_btn->SetPosition(wxPoint(x, y + height));
             }
@@ -514,9 +514,9 @@ void wxRibbonPage::DoSetSize(int x, int y, int width, int height, int sizeFlags)
         if(m_scroll_buttons_visible)
         {
             if(m_scroll_left_btn)
-                m_size_in_major_axis_for_children += m_scroll_left_btn->GetSize().GetWidth();
+                m_size_in_major_axis_for_children += m_scroll_left_btn->GetSize().x;
             if(m_scroll_right_btn)
-                m_size_in_major_axis_for_children += m_scroll_right_btn->GetSize().GetWidth();
+                m_size_in_major_axis_for_children += m_scroll_right_btn->GetSize().x;
         }
     }
     else
@@ -525,9 +525,9 @@ void wxRibbonPage::DoSetSize(int x, int y, int width, int height, int sizeFlags)
         if(m_scroll_buttons_visible)
         {
             if(m_scroll_left_btn)
-                m_size_in_major_axis_for_children += m_scroll_left_btn->GetSize().GetHeight();
+                m_size_in_major_axis_for_children += m_scroll_left_btn->GetSize().y;
             if(m_scroll_right_btn)
-                m_size_in_major_axis_for_children += m_scroll_right_btn->GetSize().GetHeight();
+                m_size_in_major_axis_for_children += m_scroll_right_btn->GetSize().y;
         }
     }
 
@@ -668,13 +668,13 @@ bool wxRibbonPage::DoActualLayout()
     if(major_axis == wxHORIZONTAL)
     {
         gap = m_art->GetMetric(wxRIBBON_ART_PANEL_X_SEPARATION_SIZE);
-        minor_axis_size = GetSize().GetHeight() - origin.y - m_art->GetMetric(wxRIBBON_ART_PAGE_BORDER_BOTTOM_SIZE);
+        minor_axis_size = GetSize().y - origin.y - m_art->GetMetric(wxRIBBON_ART_PAGE_BORDER_BOTTOM_SIZE);
         available_space = m_size_in_major_axis_for_children - m_art->GetMetric(wxRIBBON_ART_PAGE_BORDER_RIGHT_SIZE) - origin.x;
     }
     else
     {
         gap = m_art->GetMetric(wxRIBBON_ART_PANEL_Y_SEPARATION_SIZE);
-        minor_axis_size = GetSize().GetWidth() - origin.x - m_art->GetMetric(wxRIBBON_ART_PAGE_BORDER_RIGHT_SIZE);
+        minor_axis_size = GetSize().x - origin.x - m_art->GetMetric(wxRIBBON_ART_PAGE_BORDER_RIGHT_SIZE);
         available_space = m_size_in_major_axis_for_children - m_art->GetMetric(wxRIBBON_ART_PAGE_BORDER_BOTTOM_SIZE) - origin.y;
     }
     if (minor_axis_size < 0) minor_axis_size = 0;
@@ -683,13 +683,13 @@ bool wxRibbonPage::DoActualLayout()
     {
         if(major_axis == wxHORIZONTAL)
         {
-            available_space -= m_size_calc_array[size_index].GetWidth();
-            m_size_calc_array[size_index].SetHeight(minor_axis_size);
+            available_space -= m_size_calc_array[size_index].x;
+            m_size_calc_array[size_index].y = minor_axis_size;
         }
         else
         {
-            available_space -= m_size_calc_array[size_index].GetHeight();
-            m_size_calc_array[size_index].SetWidth(minor_axis_size);
+            available_space -= m_size_calc_array[size_index].y;
+            m_size_calc_array[size_index].x = minor_axis_size;
         }
         if(size_index != 0)
             available_space -= gap;
@@ -731,13 +731,13 @@ bool wxRibbonPage::DoActualLayout()
         {
             origin.x -= m_scroll_amount;
             if(m_scroll_left_btn)
-                origin.x -= m_scroll_left_btn->GetSize().GetWidth();
+                origin.x -= m_scroll_left_btn->GetSize().x;
         }
         else
         {
             origin.y -= m_scroll_amount;
             if(m_scroll_left_btn)
-                origin.y -= m_scroll_left_btn->GetSize().GetHeight();
+                origin.y -= m_scroll_left_btn->GetSize().y;
         }
     }
     size_index = 0;
@@ -746,8 +746,8 @@ bool wxRibbonPage::DoActualLayout()
         node = node->GetNext(), ++size_index )
     {
         wxWindow* child = node->GetData();
-        int w = m_size_calc_array[size_index].GetWidth();
-        int h = m_size_calc_array[size_index].GetHeight();
+        int w = m_size_calc_array[size_index].x;
+        int h = m_size_calc_array[size_index].y;
         child->SetSize(origin.x, origin.y, w, h);
         if(major_axis == wxHORIZONTAL)
         {
@@ -811,13 +811,13 @@ bool wxRibbonPage::ShowScrollButtons()
         {
               direction = wxRIBBON_SCROLL_BTN_LEFT;
               size = m_art->GetScrollButtonMinimumSize(temp_dc, GetParent(), direction);
-              size.SetHeight(GetSize().GetHeight());
+              size.y = GetSize().y;
         }
         else
         {
               direction = wxRIBBON_SCROLL_BTN_UP;
               size = m_art->GetScrollButtonMinimumSize(temp_dc, GetParent(), direction);
-              size.SetWidth(GetSize().GetWidth());
+              size.x = GetSize().x;
         }
         if (m_scroll_left_btn)
         {
@@ -852,13 +852,13 @@ bool wxRibbonPage::ShowScrollButtons()
         {
               direction = wxRIBBON_SCROLL_BTN_RIGHT;
               size = m_art->GetScrollButtonMinimumSize(temp_dc, GetParent(), direction);
-              size.SetHeight(GetSize().GetHeight());
+              size.y = GetSize().y;
         }
         else
         {
               direction = wxRIBBON_SCROLL_BTN_DOWN;
               size = m_art->GetScrollButtonMinimumSize(temp_dc, GetParent(), direction);
-              size.SetWidth(GetSize().GetWidth());
+              size.x = GetSize().x;
         }
         wxPoint initial_pos = GetPosition() + GetSize() - size;
         if (m_scroll_right_btn)
@@ -897,9 +897,9 @@ static int GetSizeInOrientation(wxSize size, wxOrientation orientation)
 {
     switch(orientation)
     {
-    case wxHORIZONTAL: return size.GetWidth();
-    case wxVERTICAL: return size.GetHeight();
-    case wxBOTH: return size.GetWidth() * size.GetHeight();
+    case wxHORIZONTAL: return size.x;
+    case wxVERTICAL: return size.y;
+    case wxBOTH: return size.x * size.y;
     default: return 0;
     }
 }

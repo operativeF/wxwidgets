@@ -1567,10 +1567,10 @@ wxImage wxImage::Size( const wxSize& size, const wxPoint& pos,
     wxImage image;
 
     wxCHECK_MSG( IsOk(), image, wxT("invalid image") );
-    wxCHECK_MSG( (size.GetWidth() > 0) && (size.GetHeight() > 0), image, wxT("invalid size") );
+    wxCHECK_MSG( (size.x > 0) && (size.y > 0), image, wxT("invalid size") );
 
     int width = GetWidth(), height = GetHeight();
-    image.Create(size.GetWidth(), size.GetHeight(), false);
+    image.Create(size.x, size.y, false);
 
     unsigned char r = (unsigned char)r_;
     unsigned char g = (unsigned char)g_;

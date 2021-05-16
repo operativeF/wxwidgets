@@ -130,7 +130,7 @@ void wxRibbonBar::ShowPanels(wxRibbonDisplayMode mode)
             break;
     }
 
-    SetMinSize(wxSize(GetSize().GetWidth(), DoGetBestSize().GetHeight()));
+    SetMinSize(wxSize(GetSize().x, DoGetBestSize().y));
     Realise();
     GetParent()->Layout();
 
@@ -511,7 +511,7 @@ void wxRibbonBar::RecalculateTabSizes()
     if(numtabs == 0)
         return;
 
-    int width = GetSize().GetWidth() - m_tab_margin_left - m_tab_margin_right;
+    int width = GetSize().x - m_tab_margin_left - m_tab_margin_right;
     int tabsep = m_art->GetMetric(wxRIBBON_ART_TAB_SEPARATION_SIZE);
     int x = m_tab_margin_left;
     const int y = 0;
@@ -558,15 +558,15 @@ void wxRibbonBar::RecalculateTabSizes()
         }
         {
             wxClientDC temp_dc(this);
-            int right_button_pos = GetClientSize().GetWidth() - m_tab_margin_right - m_tab_scroll_right_button_rect.GetWidth();
+            int right_button_pos = GetClientSize().x - m_tab_margin_right - m_tab_scroll_right_button_rect.GetWidth();
             if ( right_button_pos < m_tab_margin_left )
                 right_button_pos = m_tab_margin_left;
 
-            m_tab_scroll_left_button_rect.SetWidth(m_art->GetScrollButtonMinimumSize(temp_dc, this, wxRIBBON_SCROLL_BTN_LEFT | wxRIBBON_SCROLL_BTN_NORMAL | wxRIBBON_SCROLL_BTN_FOR_TABS).GetWidth());
+            m_tab_scroll_left_button_rect.SetWidth(m_art->GetScrollButtonMinimumSize(temp_dc, this, wxRIBBON_SCROLL_BTN_LEFT | wxRIBBON_SCROLL_BTN_NORMAL | wxRIBBON_SCROLL_BTN_FOR_TABS).x);
             m_tab_scroll_left_button_rect.SetHeight(m_tab_height);
             m_tab_scroll_left_button_rect.SetX(m_tab_margin_left);
             m_tab_scroll_left_button_rect.SetY(0);
-            m_tab_scroll_right_button_rect.SetWidth(m_art->GetScrollButtonMinimumSize(temp_dc, this, wxRIBBON_SCROLL_BTN_RIGHT | wxRIBBON_SCROLL_BTN_NORMAL | wxRIBBON_SCROLL_BTN_FOR_TABS).GetWidth());
+            m_tab_scroll_right_button_rect.SetWidth(m_art->GetScrollButtonMinimumSize(temp_dc, this, wxRIBBON_SCROLL_BTN_RIGHT | wxRIBBON_SCROLL_BTN_NORMAL | wxRIBBON_SCROLL_BTN_FOR_TABS).x);
             m_tab_scroll_right_button_rect.SetHeight(m_tab_height);
             m_tab_scroll_right_button_rect.SetX(right_button_pos);
             m_tab_scroll_right_button_rect.SetY(0);
@@ -815,7 +815,7 @@ wxImageList* wxRibbonBar::GetButtonImageList(wxSize size)
     }
 
     wxImageList* const
-        il = new wxImageList(size.GetWidth(), size.GetHeight(), /*mask*/false);
+        il = new wxImageList(size.x, size.y, /*mask*/false);
     m_image_lists.push_back(il);
 
     return il;
@@ -848,7 +848,7 @@ void wxRibbonBar::OnPaint(wxPaintEvent& WXUNUSED(evt))
 {
     wxAutoBufferedPaintDC dc(this);
 
-    if(GetUpdateRegion().Contains(0, 0, GetClientSize().GetWidth(), m_tab_height) == wxOutRegion)
+    if(GetUpdateRegion().Contains(0, 0, GetClientSize().x, m_tab_height) == wxOutRegion)
     {
         // Nothing to do in the tab area, and the page area is handled by the active page
         return;
@@ -864,7 +864,7 @@ void wxRibbonBar::OnPaint(wxPaintEvent& WXUNUSED(evt))
     size_t numtabs = m_pages.GetCount();
     double sep_visibility = 0.0;
     bool draw_sep = false;
-    wxRect tabs_rect(m_tab_margin_left, 0, GetClientSize().GetWidth() - m_tab_margin_left - m_tab_margin_right, m_tab_height);
+    wxRect tabs_rect(m_tab_margin_left, 0, GetClientSize().x - m_tab_margin_left - m_tab_margin_right, m_tab_height);
     if(m_tab_scroll_buttons_shown)
     {
         tabs_rect.x += m_tab_scroll_left_button_rect.GetWidth();
@@ -978,7 +978,7 @@ void wxRibbonBar::RepositionPage(wxRibbonPage *page)
 
 wxRibbonPageTabInfo* wxRibbonBar::HitTestTabs(wxPoint position, int* index)
 {
-    wxRect tabs_rect(m_tab_margin_left, 0, GetClientSize().GetWidth() - m_tab_margin_left - m_tab_margin_right, m_tab_height);
+    wxRect tabs_rect(m_tab_margin_left, 0, GetClientSize().x - m_tab_margin_left - m_tab_margin_right, m_tab_height);
     if(m_tab_scroll_buttons_shown)
     {
         tabs_rect.SetX(tabs_rect.GetX() + m_tab_scroll_left_button_rect.GetWidth());
@@ -1065,7 +1065,7 @@ void wxRibbonBar::OnMouseLeftDown(wxMouseEvent& evt)
     if(position.x >= 0 && position.y >= 0)
     {
         wxSize size = GetSize();
-        if(position.x < size.GetWidth() && position.y < size.GetHeight())
+        if(position.x < size.x && position.y < size.y)
         {
             if(m_toggle_button_rect.Contains(position))
             {
@@ -1117,9 +1117,9 @@ void wxRibbonBar::ScrollTabBar(int amount)
         amount = -m_tab_scroll_amount;
         show_left = false;
     }
-    else if(m_tab_scroll_amount + amount + (GetClientSize().GetWidth() - m_tab_margin_left - m_tab_margin_right) >= m_tabs_total_width_minimum)
+    else if(m_tab_scroll_amount + amount + (GetClientSize().x - m_tab_margin_left - m_tab_margin_right) >= m_tabs_total_width_minimum)
     {
-        amount = m_tabs_total_width_minimum - m_tab_scroll_amount - (GetClientSize().GetWidth() - m_tab_margin_left - m_tab_margin_right);
+        amount = m_tabs_total_width_minimum - m_tab_scroll_amount - (GetClientSize().x - m_tab_margin_left - m_tab_margin_right);
         show_right = false;
     }
     if(amount == 0)
@@ -1142,7 +1142,7 @@ void wxRibbonBar::ScrollTabBar(int amount)
         wxClientDC temp_dc(this);
         if(show_left)
         {
-            m_tab_scroll_left_button_rect.SetWidth(m_art->GetScrollButtonMinimumSize(temp_dc, this, wxRIBBON_SCROLL_BTN_LEFT | wxRIBBON_SCROLL_BTN_NORMAL | wxRIBBON_SCROLL_BTN_FOR_TABS).GetWidth());
+            m_tab_scroll_left_button_rect.SetWidth(m_art->GetScrollButtonMinimumSize(temp_dc, this, wxRIBBON_SCROLL_BTN_LEFT | wxRIBBON_SCROLL_BTN_NORMAL | wxRIBBON_SCROLL_BTN_FOR_TABS).x);
         }
         else
         {
@@ -1153,7 +1153,7 @@ void wxRibbonBar::ScrollTabBar(int amount)
         {
             if(m_tab_scroll_right_button_rect.GetWidth() == 0)
             {
-                m_tab_scroll_right_button_rect.SetWidth(m_art->GetScrollButtonMinimumSize(temp_dc, this, wxRIBBON_SCROLL_BTN_RIGHT | wxRIBBON_SCROLL_BTN_NORMAL | wxRIBBON_SCROLL_BTN_FOR_TABS).GetWidth());
+                m_tab_scroll_right_button_rect.SetWidth(m_art->GetScrollButtonMinimumSize(temp_dc, this, wxRIBBON_SCROLL_BTN_RIGHT | wxRIBBON_SCROLL_BTN_NORMAL | wxRIBBON_SCROLL_BTN_FOR_TABS).x);
                 m_tab_scroll_right_button_rect.SetX(m_tab_scroll_right_button_rect.GetX() - m_tab_scroll_right_button_rect.GetWidth());
             }
         }
@@ -1172,7 +1172,7 @@ void wxRibbonBar::ScrollTabBar(int amount)
 
 void wxRibbonBar::RefreshTabBar()
 {
-    wxRect tab_rect(0, 0, GetClientSize().GetWidth(), m_tab_height);
+    wxRect tab_rect(0, 0, GetClientSize().x, m_tab_height);
     Refresh(false, &tab_rect);
 }
 
@@ -1251,8 +1251,8 @@ void wxRibbonBar::RecalculateMinSize()
         min_size.IncBy(0, m_tab_height);
     }
 
-    m_minWidth = min_size.GetWidth();
-    m_minHeight = m_arePanelsShown ? min_size.GetHeight() : m_tab_height;
+    m_minWidth = min_size.x;
+    m_minHeight = m_arePanelsShown ? min_size.y : m_tab_height;
 }
 
 wxSize wxRibbonBar::DoGetBestSize() const
@@ -1262,9 +1262,9 @@ wxSize wxRibbonBar::DoGetBestSize() const
     {
         best = m_pages.Item(m_current_page).page->GetBestSize();
     }
-    if(best.GetHeight() == wxDefaultCoord)
+    if(best.y == wxDefaultCoord)
     {
-        best.SetHeight(m_tab_height);
+        best.y = m_tab_height;
     }
     else
     {
@@ -1272,7 +1272,7 @@ wxSize wxRibbonBar::DoGetBestSize() const
     }
     if(!m_arePanelsShown)
     {
-        best.SetHeight(m_tab_height);
+        best.y = m_tab_height;
     }
     return best;
 }
@@ -1283,7 +1283,7 @@ void wxRibbonBar::HitTestRibbonButton(const wxRect& rect, const wxPoint& positio
     if(position.x >= 0 && position.y >= 0)
     {
         wxSize size = GetSize();
-        if(position.x < size.GetWidth() && position.y < size.GetHeight())
+        if(position.x < size.x && position.y < size.y)
         {
             hovered = true;
         }

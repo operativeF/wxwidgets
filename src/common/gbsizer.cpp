@@ -460,16 +460,16 @@ wxSize wxGridBagSizer::CalcMin()
 
             // fill heights and widths up to this item if needed
             while ( (int)m_rowHeights.GetCount() <= endrow )
-                m_rowHeights.Add(m_emptyCellSize.GetHeight());
+                m_rowHeights.Add(m_emptyCellSize.y);
             while ( (int)m_colWidths.GetCount() <= endcol )
-                m_colWidths.Add(m_emptyCellSize.GetWidth());
+                m_colWidths.Add(m_emptyCellSize.x);
 
             // See if this item increases the size of its row(s) or col(s)
             wxSize size(item->CalcMin());
             for (idx=row; idx <= endrow; idx++)
-                m_rowHeights[idx] = wxMax(m_rowHeights[idx], size.GetHeight() / (endrow-row+1));
+                m_rowHeights[idx] = wxMax(m_rowHeights[idx], size.y / (endrow-row+1));
             for (idx=col; idx <= endcol; idx++)
-                m_colWidths[idx] = wxMax(m_colWidths[idx], size.GetWidth() / (endcol-col+1));
+                m_colWidths[idx] = wxMax(m_colWidths[idx], size.x / (endcol-col+1));
         }
         node = node->GetNext();
     }
@@ -591,7 +591,7 @@ void wxGridBagSizer::AdjustForOverflow()
             // just look at the whole item height
             if ( item->GetPos() == pos && endrow == row )
             {
-                int itemHeight = item->CalcMin().GetHeight();
+                int itemHeight = item->CalcMin().y;
                 rowExtra = wxMin(rowExtra, rowHeight - itemHeight);
                 continue;
             }
@@ -600,7 +600,7 @@ void wxGridBagSizer::AdjustForOverflow()
             if ( endrow == row )
             {
                 // first deduct the portions of the item that are on prior rows
-                int itemHeight = item->CalcMin().GetHeight();
+                int itemHeight = item->CalcMin().y;
                 for (int r=item->GetPos().GetRow(); r<row; r++)
                     itemHeight -= (m_rowHeights[r] + GetHGap());
 
@@ -632,14 +632,14 @@ void wxGridBagSizer::AdjustForOverflow()
 
             if ( item->GetPos() == pos && endcol == col )
             {
-                int itemWidth = item->CalcMin().GetWidth();
+                int itemWidth = item->CalcMin().x;
                 colExtra = wxMin(colExtra, colWidth - itemWidth);
                 continue;
             }
 
             if ( endcol == col )
             {
-                int itemWidth = item->CalcMin().GetWidth();
+                int itemWidth = item->CalcMin().x;
                 for (int c=item->GetPos().GetCol(); c<col; c++)
                     itemWidth -= (m_colWidths[c] + GetVGap());
 

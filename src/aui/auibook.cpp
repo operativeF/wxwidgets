@@ -1038,7 +1038,7 @@ void wxAuiTabCtrl::OnEraseBackground(wxEraseEvent& WXUNUSED(evt))
 void wxAuiTabCtrl::OnSize(wxSizeEvent& evt)
 {
     wxSize s = evt.GetSize();
-    wxRect r(0, 0, s.GetWidth(), s.GetHeight());
+    wxRect r(0, 0, s.x, s.y);
     SetRect(r);
 }
 

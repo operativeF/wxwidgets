@@ -134,7 +134,7 @@ bool wxGIFDecoder::ConvertToImage(unsigned int frame, wxImage *image) const
 
     // create the image
     wxSize sz = GetFrameSize(frame);
-    image->Create(sz.GetWidth(), sz.GetHeight());
+    image->Create(sz.x, sz.y);
     image->SetType(wxBITMAP_TYPE_GIF);
 
     if (!image->IsOk())
@@ -217,7 +217,7 @@ bool wxGIFDecoder::ConvertToImage(unsigned int frame, wxImage *image) const
 #endif // wxUSE_PALETTE
 
     // copy image data
-    unsigned long npixel = sz.GetWidth() * sz.GetHeight();
+    unsigned long npixel = sz.x * sz.y;
     for (i = 0; i < npixel; i++, src++)
     {
         *(dst++) = pal[3 * (*src) + 0];
@@ -655,10 +655,10 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
         return wxGIF_INVFORMAT;
     }
 
-    m_szAnimation.SetWidth( buf[0] + 256 * buf[1] );
-    m_szAnimation.SetHeight( buf[2] + 256 * buf[3] );
+    m_szAnimation.x = buf[0] + 256 * buf[1];
+    m_szAnimation.y = buf[2] + 256 * buf[3];
 
-    if (anim && ((m_szAnimation.GetWidth() == 0) || (m_szAnimation.GetHeight() == 0)))
+    if (anim && ((m_szAnimation.x == 0) || (m_szAnimation.y == 0)))
     {
         return wxGIF_INVFORMAT;
     }

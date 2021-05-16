@@ -116,8 +116,8 @@ wxSize wxGenericCollapsiblePane::DoGetBestClientSize() const
     // when expanded, we need more vertical space
     if ( IsExpanded() )
     {
-        sz.SetWidth(wxMax( sz.GetWidth(), m_pPane->GetBestSize().x ));
-        sz.SetHeight(sz.y + GetBorder() + m_pPane->GetBestSize().y);
+        sz.x = wxMax( sz.x, m_pPane->GetBestSize().x );
+        sz.y = sz.y + GetBorder() + m_pPane->GetBestSize().y;
     }
 
     return sz;
@@ -192,13 +192,13 @@ bool wxGenericCollapsiblePane::Layout()
     wxSize oursz(GetSize());
 
     // move & resize the button and the static line
-    m_sz->SetDimension(0, 0, oursz.GetWidth(), m_sz->GetMinSize().GetHeight());
+    m_sz->SetDimension(0, 0, oursz.x, m_sz->GetMinSize().y);
     m_sz->Layout();
 
     if ( IsExpanded() )
     {
         // move & resize the container window
-        int yoffset = m_sz->GetSize().GetHeight() + GetBorder();
+        int yoffset = m_sz->GetSize().y + GetBorder();
         m_pPane->SetSize(0, yoffset,
                         oursz.x, oursz.y - yoffset);
 

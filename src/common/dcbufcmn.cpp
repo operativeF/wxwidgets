@@ -147,8 +147,8 @@ void wxBufferedDC::UnMask()
     // a shared bitmap has been reused for a smaller area, etc.) so avoid
     // blitting too much if possible, but only use the real DC size if the
     // wxBUFFER_VIRTUAL_AREA style is not set.
-    int width = m_area.GetWidth(),
-        height = m_area.GetHeight();
+    int width = m_area.x,
+        height = m_area.y;
 
     if (!(m_style & wxBUFFER_VIRTUAL_AREA))
     {

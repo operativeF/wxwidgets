@@ -411,9 +411,9 @@ int wxRibbonGallery::GetScrollLineSize() const
     if(m_art == nullptr)
         return 32;
 
-    int line_size = m_bitmap_padded_size.GetHeight();
+    int line_size = m_bitmap_padded_size.y;
     if(m_art->GetFlags() & wxRIBBON_BAR_FLOW_VERTICAL)
-        line_size = m_bitmap_padded_size.GetWidth();
+        line_size = m_bitmap_padded_size.x;
 
     return line_size;
 }
@@ -470,14 +470,14 @@ void wxRibbonGallery::EnsureVisible(const wxRibbonGalleryItem* item)
         int x = item->GetPosition().GetLeft();
         int base_x = m_items.Item(0)->GetPosition().GetLeft();
         int delta = x - base_x - m_scroll_amount;
-        ScrollLines(delta / m_bitmap_padded_size.GetWidth());
+        ScrollLines(delta / m_bitmap_padded_size.x);
     }
     else
     {
         int y = item->GetPosition().GetTop();
         int base_y = m_items.Item(0)->GetPosition().GetTop();
         int delta = y - base_y - m_scroll_amount;
-        ScrollLines(delta / m_bitmap_padded_size.GetHeight());
+        ScrollLines(delta / m_bitmap_padded_size.y);
     }
 }
 
@@ -640,7 +640,7 @@ bool wxRibbonGallery::Layout()
         item->SetIsVisible(true);
         if(art_flags & wxRIBBON_BAR_FLOW_VERTICAL)
         {
-            if(y_cursor + m_bitmap_padded_size.y > client_size.GetHeight())
+            if(y_cursor + m_bitmap_padded_size.y > client_size.y)
             {
                 if(y_cursor == 0)
                     break;
@@ -653,7 +653,7 @@ bool wxRibbonGallery::Layout()
         }
         else
         {
-            if(x_cursor + m_bitmap_padded_size.x > client_size.GetWidth())
+            if(x_cursor + m_bitmap_padded_size.x > client_size.x)
             {
                 if(x_cursor == 0)
                     break;
@@ -720,7 +720,7 @@ wxSize wxRibbonGallery::DoGetNextSmallerSize(wxOrientation direction,
         client.DecBy(1, 1);
         break;
     }
-    if(client.GetWidth() < 0 || client.GetHeight() < 0)
+    if(client.x < 0 || client.y < 0)
         return relative_to;
 
     client.x = (client.x / m_bitmap_padded_size.x) * m_bitmap_padded_size.x;
@@ -729,8 +729,8 @@ wxSize wxRibbonGallery::DoGetNextSmallerSize(wxOrientation direction,
     wxSize size = m_art->GetGallerySize(dc, this, client);
     wxSize minimum = GetMinSize();
 
-    if(size.GetWidth() < minimum.GetWidth() ||
-        size.GetHeight() < minimum.GetHeight())
+    if(size.x < minimum.x ||
+        size.y < minimum.y)
     {
         return relative_to;
     }
@@ -738,10 +738,10 @@ wxSize wxRibbonGallery::DoGetNextSmallerSize(wxOrientation direction,
     switch(direction)
     {
     case wxHORIZONTAL:
-        size.SetHeight(relative_to.GetHeight());
+        size.y = relative_to.y;
         break;
     case wxVERTICAL:
-        size.SetWidth(relative_to.GetWidth());
+        size.x = relative_to.x;
         break;
     default:
         break;
@@ -762,8 +762,8 @@ wxSize wxRibbonGallery::DoGetNextLargerSize(wxOrientation direction,
         nullptr, nullptr, nullptr);
 
     // No need to grow if the given size can already display every item
-    int nitems = (client.GetWidth() / m_bitmap_padded_size.x) *
-        (client.GetHeight() / m_bitmap_padded_size.y);
+    int nitems = (client.x / m_bitmap_padded_size.x) *
+        (client.y / m_bitmap_padded_size.y);
     if(nitems >= (int)m_items.GetCount())
         return relative_to;
 
@@ -786,8 +786,8 @@ wxSize wxRibbonGallery::DoGetNextLargerSize(wxOrientation direction,
     wxSize size = m_art->GetGallerySize(dc, this, client);
     wxSize minimum = GetMinSize();
 
-    if(size.GetWidth() < minimum.GetWidth() ||
-        size.GetHeight() < minimum.GetHeight())
+    if(size.x < minimum.x ||
+        size.y < minimum.y)
     {
         return relative_to;
     }
@@ -795,10 +795,10 @@ wxSize wxRibbonGallery::DoGetNextLargerSize(wxOrientation direction,
     switch(direction)
     {
     case wxHORIZONTAL:
-        size.SetHeight(relative_to.GetHeight());
+        size.y = relative_to.y;
         break;
     case wxVERTICAL:
-        size.SetWidth(relative_to.GetWidth());
+        size.x = relative_to.x;
         break;
     default:
         break;

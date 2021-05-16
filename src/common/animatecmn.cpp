@@ -138,15 +138,15 @@ void wxAnimationCtrlBase::UpdateStaticImage()
 
     // if given bitmap is not of the right size, recreate m_bmpStaticReal accordingly
     const wxSize &sz = GetClientSize();
-    if (sz.GetWidth() != m_bmpStaticReal.GetWidth() ||
-        sz.GetHeight() != m_bmpStaticReal.GetHeight())
+    if (sz.x != m_bmpStaticReal.GetWidth() ||
+        sz.y != m_bmpStaticReal.GetHeight())
     {
         if (!m_bmpStaticReal.IsOk() ||
-            m_bmpStaticReal.GetWidth() != sz.GetWidth() ||
-            m_bmpStaticReal.GetHeight() != sz.GetHeight())
+            m_bmpStaticReal.GetWidth() != sz.x ||
+            m_bmpStaticReal.GetHeight() != sz.y)
         {
             // need to (re)create m_bmpStaticReal
-            if (!m_bmpStaticReal.Create(sz.GetWidth(), sz.GetHeight(),
+            if (!m_bmpStaticReal.Create(sz.x, sz.y,
                                         m_bmpStatic.GetDepth()))
             {
                 wxLogDebug(wxT("Cannot create the static bitmap"));
@@ -155,8 +155,8 @@ void wxAnimationCtrlBase::UpdateStaticImage()
             }
         }
 
-        if (m_bmpStatic.GetWidth() <= sz.GetWidth() &&
-            m_bmpStatic.GetHeight() <= sz.GetHeight())
+        if (m_bmpStatic.GetWidth() <= sz.x &&
+            m_bmpStatic.GetHeight() <= sz.y)
         {
             // clear the background of m_bmpStaticReal
             wxBrush brush(GetBackgroundColour());
@@ -167,15 +167,15 @@ void wxAnimationCtrlBase::UpdateStaticImage()
 
             // center the user-provided bitmap in m_bmpStaticReal
             dc.DrawBitmap(m_bmpStatic,
-                        (sz.GetWidth()-m_bmpStatic.GetWidth())/2,
-                        (sz.GetHeight()-m_bmpStatic.GetHeight())/2,
+                        (sz.x-m_bmpStatic.GetWidth())/2,
+                        (sz.y-m_bmpStatic.GetHeight())/2,
                         true /* use mask */ );
         }
         else
         {
             // the user-provided bitmap is bigger than our control, strech it
             wxImage temp(m_bmpStatic.ConvertToImage());
-            temp.Rescale(sz.GetWidth(), sz.GetHeight(), wxIMAGE_QUALITY_HIGH);
+            temp.Rescale(sz.x, sz.y, wxIMAGE_QUALITY_HIGH);
             m_bmpStaticReal = wxBitmap(temp);
         }
     }

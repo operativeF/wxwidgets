@@ -10183,12 +10183,12 @@ void ExpandCellsWithRowspan(const wxRichTextTable* table, int paddingY, int& bot
                         continue;
 
                     int availableHeight = rowTops[row+span] - rowTops[row] - paddingY;
-                    wxSize newSize = wxSize(cell->GetCachedSize().GetWidth(), availableHeight);
+                    wxSize newSize = wxSize(cell->GetCachedSize().x, availableHeight);
                     wxRect availableCellSpace = wxRect(cell->GetPosition(), newSize);
                     cell->Invalidate(wxRICHTEXT_ALL);
                     cell->Layout(dc, context, availableCellSpace, availableSpace, style|wxRICHTEXT_FIXED_WIDTH|wxRICHTEXT_FIXED_HEIGHT);
                     // Ensure there's room in the span to display its contents, else it'll overwrite lower rows
-                    int overhang = cell->GetCachedSize().GetHeight() - availableHeight;
+                    int overhang = cell->GetCachedSize().y - availableHeight;
 
                     if (overhang > 0)
                     {
@@ -10234,7 +10234,7 @@ void ExpandCellsWithRowspan(const wxRichTextTable* table, int paddingY, int& bot
                 wxPoint position(cell->GetPosition().x, rowTops[row]);
 
                 // GetRowspan() will usually return 1, but may be greater
-                wxSize size(cell->GetCachedSize().GetWidth(), rowTops[row + cell->GetRowSpan()] - rowTops[row] - paddingY);
+                wxSize size(cell->GetCachedSize().x, rowTops[row + cell->GetRowSpan()] - rowTops[row] - paddingY);
 
                 wxRect availableCellSpace = wxRect(position, size);
                 cell->Invalidate(wxRICHTEXT_ALL);
@@ -12498,7 +12498,7 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
     // the image so long as the new cached bitmap size hasn't changed.
 
     wxImage image;
-    if (resetCache || m_originalImageSize.GetWidth() <= 0 || m_originalImageSize.GetHeight() <= 0)
+    if (resetCache || m_originalImageSize.x <= 0 || m_originalImageSize.y <= 0)
     {
         m_imageCache = wxNullBitmap;
         m_imageState = ImageState_Unloaded;
@@ -12516,8 +12516,8 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
         m_originalImageSize = wxSize(image.GetWidth(), image.GetHeight());
     }
 
-    int width = m_originalImageSize.GetWidth();
-    int height = m_originalImageSize.GetHeight();
+    int width = m_originalImageSize.x;
+    int height = m_originalImageSize.y;
 
     int parentWidth = 0;
     int parentHeight = 0;
@@ -12557,8 +12557,8 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
             }
 
             // Use a minimum size to stop images becoming very small
-            parentWidth = wxMax(100, sz.GetWidth());
-            parentHeight = wxMax(100, sz.GetHeight());
+            parentWidth = wxMax(100, sz.x);
+            parentHeight = wxMax(100, sz.y);
 
             // Start with a maximum width of the control size, even if not specified by the content,
             // to minimize the amount of picture overlapping the right-hand side
@@ -12591,8 +12591,8 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
         width = maxWidth;
 
     // Preserve the aspect ratio
-    if (width != m_originalImageSize.GetWidth())
-        height = (int) (float(m_originalImageSize.GetHeight()) * (float(width)/float(m_originalImageSize.GetWidth())));
+    if (width != m_originalImageSize.x)
+        height = (int) (float(m_originalImageSize.y) * (float(width)/float(m_originalImageSize.x)));
 
     if (attr.GetTextBoxAttr().GetHeight().IsValid() && attr.GetTextBoxAttr().GetHeight().GetValue() > 0)
     {
@@ -12601,8 +12601,8 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
             height = heightPixels;
 
         // Preserve the aspect ratio
-        if (height != m_originalImageSize.GetHeight())
-            width = (int) (float(m_originalImageSize.GetWidth()) * (float(height)/float(m_originalImageSize.GetHeight())));
+        if (height != m_originalImageSize.y)
+            width = (int) (float(m_originalImageSize.x) * (float(height)/float(m_originalImageSize.y)));
     }
 
     // Limit to max height
@@ -12619,8 +12619,8 @@ bool wxRichTextImage::LoadImageCache(wxDC& dc, wxRichTextDrawingContext& context
         height = maxHeight;
 
         // Preserve the aspect ratio
-        if (height != m_originalImageSize.GetHeight())
-            width = (int) (float(m_originalImageSize.GetWidth()) * (float(height)/float(m_originalImageSize.GetHeight())));
+        if (height != m_originalImageSize.y)
+            width = (int) (float(m_originalImageSize.x) * (float(height)/float(m_originalImageSize.y)));
     }
 
     // Prevent the use of zero size

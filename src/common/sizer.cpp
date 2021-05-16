@@ -1401,8 +1401,8 @@ wxGridSizer::wxGridSizer( int cols, int vgap, int hgap )
 wxGridSizer::wxGridSizer( int cols, const wxSize& gap )
     : m_rows( cols == 0 ? 1 : 0 ),
       m_cols( cols ),
-      m_vgap( gap.GetHeight() ),
-      m_hgap( gap.GetWidth() )
+      m_vgap( gap.y ),
+      m_hgap( gap.x )
 {
     wxASSERT(cols >= 0);
 }
@@ -1419,8 +1419,8 @@ wxGridSizer::wxGridSizer( int rows, int cols, int vgap, int hgap )
 wxGridSizer::wxGridSizer( int rows, int cols, const wxSize& gap )
     : m_rows( rows || cols ? rows : 1 ),
       m_cols( cols ),
-      m_vgap( gap.GetHeight() ),
-      m_hgap( gap.GetWidth() )
+      m_vgap( gap.y ),
+      m_hgap( gap.x )
 {
     wxASSERT(rows >= 0 && cols >= 0);
 }

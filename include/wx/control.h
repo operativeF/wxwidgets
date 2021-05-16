@@ -117,7 +117,7 @@ public:
 
     wxSize GetSizeFromText(const wxString& text) const
     {
-        return GetSizeFromTextSize(GetTextExtent(text).GetWidth());
+        return GetSizeFromTextSize(GetTextExtent(text).x);
     }
 
 

@@ -2453,20 +2453,18 @@ wxGrid::SetRenderScale(wxDC& dc,
     double scaleX, scaleY;
     wxSize sizeTemp;
 
-    if ( size.GetWidth() != wxDefaultSize.GetWidth() ) // size.x was specified
-        sizeTemp.SetWidth( size.GetWidth() );
+    if ( size.x != wxDefaultSize.x ) // size.x was specified
+        sizeTemp.x = size.x;
     else
-        sizeTemp.SetWidth( dc.DeviceToLogicalXRel( dc.GetSize().GetWidth() )
-                           - pos.x );
+        sizeTemp.x = dc.DeviceToLogicalXRel( dc.GetSize().x ) - pos.x;
 
-    if ( size.GetHeight() != wxDefaultSize.GetHeight() ) // size.y was specified
-        sizeTemp.SetHeight( size.GetHeight() );
+    if ( size.y != wxDefaultSize.y ) // size.y was specified
+        sizeTemp.y = size.y;
     else
-        sizeTemp.SetHeight( dc.DeviceToLogicalYRel( dc.GetSize().GetHeight() )
-                            - pos.y );
+        sizeTemp.y = dc.DeviceToLogicalYRel( dc.GetSize().y) - pos.y;
 
-    scaleX = (double)( (double) sizeTemp.GetWidth() / (double) sizeGrid.GetWidth() );
-    scaleY = (double)( (double) sizeTemp.GetHeight() / (double) sizeGrid.GetHeight() );
+    scaleX = (double)( (double) sizeTemp.x / (double) sizeGrid.x );
+    scaleY = (double)( (double) sizeTemp.y / (double) sizeGrid.y );
 
     dc.SetUserScale( wxMin( scaleX, scaleY), wxMin( scaleX, scaleY ) );
 }
@@ -2480,8 +2478,8 @@ void wxGrid::GetRenderSizes( const wxGridCellCoords& topLeft,
 {
     pointOffSet.x = 0;
     pointOffSet.y = 0;
-    sizeGrid.SetWidth( 0 );
-    sizeGrid.SetHeight( 0 );
+    sizeGrid.x = 0;
+    sizeGrid.y = 0;
 
     int col, row;
 
@@ -2543,8 +2541,8 @@ void wxGrid::DoRenderBox( wxDC& dc, const int& style,
     if ( !( style & wxGRID_DRAW_BOX_RECT ) )
         return;
 
-    int bottom = pointOffSet.y + sizeCells.GetY(),
-        right = pointOffSet.x + sizeCells.GetX() - 1;
+    int bottom = pointOffSet.y + sizeCells.y,
+        right = pointOffSet.x + sizeCells.x - 1;
 
     // horiz top line if we are not drawing column header/labels
     if ( !( style & wxGRID_DRAW_COLS_HEADER ) )
@@ -7652,7 +7650,7 @@ void wxGrid::DoHideCellEditControl()
     wxRect rect( CellToRect(m_currentCellCoords) );
     rect.Offset( -GetGridWindowOffset(gridWindow) );
     CalcGridWindowScrolledPosition(rect.x, rect.y, &rect.x, &rect.y, gridWindow);
-    rect.width = gridWindow->GetClientSize().GetWidth() - rect.x;
+    rect.width = gridWindow->GetClientSize().x - rect.x;
 
 #ifdef __WXMAC__
     // ensure that the pixels under the focus ring get refreshed as well
@@ -7671,7 +7669,7 @@ void wxGrid::DoHideCellEditControl()
     if ( rightGridWindow )
     {
         rect.x = 0;
-        rect.width = rightGridWindow->GetClientSize().GetWidth();
+        rect.width = rightGridWindow->GetClientSize().x;
         rightGridWindow->Refresh( false, &rect );
     }
 }
@@ -10631,7 +10629,7 @@ void wxGrid::SetCellValue( int row, int col, const wxString& s )
             int dummy;
             wxRect rect( CellToRect( row, col ) );
             rect.x = 0;
-            rect.width = m_gridWin->GetClientSize().GetWidth();
+            rect.width = m_gridWin->GetClientSize().x;
             CalcScrolledPosition(0, rect.y, &dummy, &rect.y);
             m_gridWin->Refresh( false, &rect );
         }

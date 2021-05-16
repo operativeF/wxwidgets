@@ -3331,7 +3331,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
     wxCHECK_HRESULT_RET(hr);
 
     FLOAT fontSize = !dpi.y
-        ? FLOAT(font.GetPixelSize().GetHeight())
+        ? FLOAT(font.GetPixelSize().y)
         : FLOAT(font.GetFractionalPointSize() * dpi.y / 72);
 
     hr = wxDWriteFactory()->CreateTextFormat(
@@ -4083,8 +4083,8 @@ wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer,
     if ( dc )
     {
         const wxSize dcSize = dc->GetSize();
-        m_width = dcSize.GetWidth();
-        m_height = dcSize.GetHeight();
+        m_width = dcSize.x;
+        m_height = dcSize.y;
     }
 
     Init();
@@ -4612,7 +4612,7 @@ void wxD2DContext::DrawBitmap(const wxGraphicsBitmap& bmp, double x, double y, d
 
     m_renderTargetHolder->DrawBitmap(
         bitmapData->GetD2DBitmap(),
-        D2D1::RectF(0, 0, bmpSize.GetWidth(), bmpSize.GetHeight()),
+        D2D1::RectF(0, 0, bmpSize.x, bmpSize.y),
         D2D1::RectF(x, y, x + w, y + h),
         GetInterpolationQuality(),
         GetCompositionMode());

@@ -1276,7 +1276,7 @@ void wxPropertyGridManager::UpdateDescriptionBox( int new_splittery, int new_wid
     // Fix help control positions.
     int cap_y = new_splittery+m_splitterHeight+5;
     m_pTxtHelpCaption->SetSize(3, cap_y, use_width, wxDefaultCoord, wxSIZE_AUTO_HEIGHT);
-    int cap_hei = m_pTxtHelpCaption->GetSize().GetHeight();
+    int cap_hei = m_pTxtHelpCaption->GetSize().y;
     int cnt_y = cap_y+cap_hei+3;
     int sub_cap_hei = cap_y+cap_hei-use_hei;
     int cnt_hei = use_hei-cnt_y;

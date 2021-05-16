@@ -3289,7 +3289,7 @@ void wxListCtrl::OnPaint(wxPaintEvent& event)
                 wxDCBrushChanger changeBrush(dc, GetBackgroundColour());
 
                 dc.DrawRectangle(0, topItemRect.GetY() - gap,
-                                 clientSize.GetWidth(), gap);
+                                 clientSize.x, gap);
             }
 
             const int numCols = GetColumnCount();

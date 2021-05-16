@@ -2000,7 +2000,7 @@ void wxPrintPreviewBase::AdjustScrollbars(wxPreviewCanvas *canvas)
     int scrollUnitsX = totalWidth / 10;
     int scrollUnitsY = totalHeight / 10;
     wxSize virtualSize = canvas->GetVirtualSize();
-    if (virtualSize.GetWidth() != totalWidth || virtualSize.GetHeight() != totalHeight)
+    if (virtualSize.x != totalWidth || virtualSize.y != totalHeight)
         canvas->SetScrollbars(10, 10, scrollUnitsX, scrollUnitsY, 0, 0, true);
 }
 

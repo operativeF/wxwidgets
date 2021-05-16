@@ -353,8 +353,8 @@ bool wxANIDecoder::Load( wxInputStream& stream )
 
     // if the header did not contain a valid frame size, try to grab
     // it from the size of the first frame (all frames are of the same size)
-    if (m_szAnimation.GetWidth() == 0 ||
-        m_szAnimation.GetHeight() == 0)
+    if (m_szAnimation.x == 0 ||
+        m_szAnimation.y == 0)
         m_szAnimation = wxSize(m_images[0].GetWidth(), m_images[0].GetHeight());
 
     return m_szAnimation != wxDefaultSize;

@@ -279,7 +279,7 @@ void wxFontBase::SetPointSize(int pointSize)
 
 void wxFontBase::SetPixelSize( const wxSize& pixelSize )
 {
-    wxCHECK_RET( pixelSize.GetWidth() >= 0 && pixelSize.GetHeight() > 0,
+    wxCHECK_RET( pixelSize.x >= 0 && pixelSize.y > 0,
                  "Negative values for the pixel size or zero pixel height are not allowed" );
 
     wxScreenDC dc;
@@ -304,9 +304,9 @@ void wxFontBase::SetPixelSize( const wxSize& pixelSize )
         // if currentSize (in points) results in a font that is smaller
         // than required by pixelSize it is considered a good size
         // NOTE: the pixel size width may be zero
-        if (dc.GetCharHeight() <= pixelSize.GetHeight() &&
-                (pixelSize.GetWidth() == 0 ||
-                 dc.GetCharWidth() <= pixelSize.GetWidth()))
+        if (dc.GetCharHeight() <= pixelSize.y &&
+                (pixelSize.x == 0 ||
+                 dc.GetCharWidth() <= pixelSize.x))
         {
             largestGood = currentSize;
             initialGoodFound = true;

@@ -65,7 +65,7 @@ wxObject *wxOwnerDrawnComboBoxXmlHandler::DoCreateResource()
         wxSize sizeBtn=GetSize(wxT("buttonsize"));
 
         if (sizeBtn != wxDefaultSize)
-            control->SetButtonPosition(sizeBtn.GetWidth(), sizeBtn.GetHeight());
+            control->SetButtonPosition(sizeBtn.x, sizeBtn.y);
 
         if (selection != -1)
             control->SetSelection(selection);

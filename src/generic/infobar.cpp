@@ -233,7 +233,7 @@ void wxInfoBarGeneric::ShowMessage(const wxString& msg, int flags)
     // notice the use of EscapeMnemonics() to ensure that "&" come through
     // correctly
     m_text->SetLabel(wxControl::EscapeMnemonics(msg));
-    m_text->Wrap( GetClientSize().GetWidth() );
+    m_text->Wrap( GetClientSize().x );
 
     // then show this entire window if not done yet
     if ( !IsShown() )

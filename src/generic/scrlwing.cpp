@@ -1125,8 +1125,8 @@ void wxScrollHelperBase::HandleOnChildFocus(wxChildFocusEvent& event)
     {
         wxWindow *parent=win->GetParent();
         wxSize parent_size=parent->GetSize();
-        if (parent_size.GetWidth() <= viewRect.GetWidth() &&
-            parent_size.GetHeight() <= viewRect.GetHeight())
+        if (parent_size.x <= viewRect.GetWidth() &&
+            parent_size.y <= viewRect.GetHeight())
             // make the immediate parent visible instead of the focused control
             win=parent;
     }

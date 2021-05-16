@@ -382,15 +382,15 @@ void wxAuiMSWTabArt::DrawButton(wxDC& dc,
     if ( orientation == wxLEFT )
     {
         rect.SetX(in_rect.x);
-        rect.SetY(((in_rect.y + in_rect.height) / 2) - (m_closeBtnSize.GetHeight() / 2));
-        rect.SetWidth(m_closeBtnSize.GetWidth());
-        rect.SetHeight(m_closeBtnSize.GetHeight());
+        rect.SetY(((in_rect.y + in_rect.height) / 2) - (m_closeBtnSize.y / 2));
+        rect.SetWidth(m_closeBtnSize.x);
+        rect.SetHeight(m_closeBtnSize.y);
     }
     else
     {
-        rect = wxRect(in_rect.x + in_rect.width - m_closeBtnSize.GetWidth(),
-            ((in_rect.y + in_rect.height) / 2) - (m_closeBtnSize.GetHeight() / 2),
-            m_closeBtnSize.GetWidth(), m_closeBtnSize.GetHeight());
+        rect = wxRect(in_rect.x + in_rect.width - m_closeBtnSize.x,
+            ((in_rect.y + in_rect.height) / 2) - (m_closeBtnSize.y / 2),
+            m_closeBtnSize.x, m_closeBtnSize.y);
     }
 
     if ( bitmap_id == wxAUI_BUTTON_LEFT ||

@@ -162,12 +162,12 @@ wxRect wxGenericHyperlinkCtrl::GetLabelRect() const
     wxPoint offset;
 
     // the label is always centered vertically
-    offset.y = (c.GetHeight()-b.GetHeight())/2;
+    offset.y = c.y - b.y / 2;
 
     if (HasFlag(wxHL_ALIGN_CENTRE))
-        offset.x = (c.GetWidth()-b.GetWidth())/2;
+        offset.x = (c.x - b.x) / 2;
     else if (HasFlag(wxHL_ALIGN_RIGHT))
-        offset.x = c.GetWidth()-b.GetWidth();
+        offset.x = c.x - b.x;
     else if (HasFlag(wxHL_ALIGN_LEFT))
         offset.x = 0;
     return wxRect(offset, b);

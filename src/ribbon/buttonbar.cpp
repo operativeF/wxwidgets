@@ -71,7 +71,7 @@ wxBitmap MakeResizedBitmap(const wxBitmap& original, wxSize size)
         scale = 2.0;
 
     wxImage img(original.ConvertToImage());
-    img.Rescale(scale * size.GetWidth(), scale * size.GetHeight(), wxIMAGE_QUALITY_HIGH);
+    img.Rescale(scale * size.x, scale * size.y, wxIMAGE_QUALITY_HIGH);
     return wxBitmap(img, -1, scale);
 }
 
@@ -260,15 +260,15 @@ public:
         {
             wxRibbonButtonBarButtonInstance& instance = buttons.Item(btn_i);
             wxSize size = instance.base->sizes[instance.size].size;
-            int right = instance.position.x + size.GetWidth();
-            int bottom = instance.position.y + size.GetHeight();
-            if(right > overall_size.GetWidth())
+            int right = instance.position.x + size.x;
+            int bottom = instance.position.y + size.y;
+            if(right > overall_size.x)
             {
-                overall_size.SetWidth(right);
+                overall_size.x = right;
             }
-            if(bottom > overall_size.GetHeight())
+            if(bottom > overall_size.y)
             {
-                overall_size.SetHeight(bottom);
+                overall_size.y = bottom;
             }
         }
     }
@@ -1050,7 +1050,7 @@ void wxRibbonButtonBar::MakeLayouts()
         wxRibbonButtonBarButtonBase* button = m_buttons.Item(btn_i);
         wxRibbonButtonBarButtonState size_class = button->GetLargestSize();
         available_height = wxMax(available_height,
-                                 button->sizes[size_class].size.GetHeight());
+                                 button->sizes[size_class].size.y);
         if(size_class == wxRIBBON_BUTTONBAR_BUTTON_LARGE)
             large_button_found = true;
     }
@@ -1063,7 +1063,7 @@ void wxRibbonButtonBar::MakeLayouts()
         //               small buttons small, stacked vertically
         wxRibbonButtonBarLayout* layout = new wxRibbonButtonBarLayout;
         wxPoint cursor(0, 0);
-        layout->overall_size.SetHeight(0);
+        layout->overall_size.y = 0;
         for(btn_i = 0; btn_i < btn_count; ++btn_i)
         {
             wxRibbonButtonBarButtonBase* button = m_buttons.Item(btn_i);
@@ -1074,8 +1074,8 @@ void wxRibbonButtonBar::MakeLayouts()
 
             if(instance.size < wxRIBBON_BUTTONBAR_BUTTON_LARGE)
             {
-                stacked_width = wxMax(stacked_width, size.GetWidth());
-                if(cursor.y + size.GetHeight() >= available_height)
+                stacked_width = wxMax(stacked_width, size.x);
+                if(cursor.y + size.y >= available_height)
                 {
                     cursor.y = 0;
                     cursor.x += stacked_width;
@@ -1083,7 +1083,7 @@ void wxRibbonButtonBar::MakeLayouts()
                 }
                 else
                 {
-                    cursor.y += size.GetHeight();
+                    cursor.y += size.y;
                 }
             }
             else
@@ -1095,12 +1095,12 @@ void wxRibbonButtonBar::MakeLayouts()
                     stacked_width = 0;
                     instance.position = cursor;
                 }
-                cursor.x += size.GetWidth();
+                cursor.x += size.x;
             }
             layout->buttons.Add(instance);
         }
-        layout->overall_size.SetHeight(available_height);
-        layout->overall_size.SetWidth(cursor.x + stacked_width);
+        layout->overall_size.y = available_height;
+        layout->overall_size.x = cursor.x + stacked_width;
         m_layouts.Add(layout);
     }
     if(btn_count >= 2)
@@ -1137,7 +1137,7 @@ void wxRibbonButtonBar::TryCollapseLayout(wxRibbonButtonBarLayout* original,
     int used_width = 0;
     int original_column_width = 0;
     int available_width = 0;
-    int available_height = original->overall_size.GetHeight();
+    int available_height = original->overall_size.y;
 
     // Search for button range from right which should be
     // collapsed into a column of small buttons.
@@ -1150,7 +1150,7 @@ void wxRibbonButtonBar::TryCollapseLayout(wxRibbonButtonBarLayout* original,
         int t_available_width = available_width;
 
         original_column_width = wxMax(original_column_width,
-                                      large_size.GetWidth());
+                                      large_size.x);
 
         // Top button in column: add column width to available width
         if(original->buttons.Item(btn_i).position.y == 0)
@@ -1171,8 +1171,8 @@ void wxRibbonButtonBar::TryCollapseLayout(wxRibbonButtonBarLayout* original,
             }
         }
         wxSize small_size = button->sizes[small_size_class].size;
-        int t_used_height = used_height + small_size.GetHeight();
-        int t_used_width = wxMax(used_width, small_size.GetWidth());
+        int t_used_height = used_height + small_size.y;
+        int t_used_width = wxMax(used_width, small_size.x);
 
         // Height is full: stop search
         if(t_used_height > available_height)
@@ -1212,7 +1212,7 @@ void wxRibbonButtonBar::TryCollapseLayout(wxRibbonButtonBarLayout* original,
                                           instance.size - target_size);
         }
         instance.position = cursor;
-        cursor.y += instance.base->sizes[instance.size].size.GetHeight();
+        cursor.y += instance.base->sizes[instance.size].size.y;
     }
 
     int x_adjust = available_width - used_width;
@@ -1227,8 +1227,8 @@ void wxRibbonButtonBar::TryCollapseLayout(wxRibbonButtonBarLayout* original,
     layout->CalculateOverallSize();
 
     // Sanity check
-    if(layout->overall_size.GetWidth() >= original->overall_size.GetWidth() ||
-        layout->overall_size.GetHeight() > original->overall_size.GetHeight())
+    if(layout->overall_size.x >= original->overall_size.x ||
+        layout->overall_size.y > original->overall_size.y)
     {
         delete layout;
         wxFAIL_MSG("Layout collapse resulted in increased size");
@@ -1242,7 +1242,7 @@ void wxRibbonButtonBar::TryCollapseLayout(wxRibbonButtonBarLayout* original,
     // only required when the first button is involved in a collapse but
     // if small, medium and large buttons as well as min/max size classes
     // are involved this is always a good idea.
-    layout->overall_size.SetHeight(original->overall_size.GetHeight());
+    layout->overall_size.y = original->overall_size.y;
 
     m_layouts.Add(layout);
 }

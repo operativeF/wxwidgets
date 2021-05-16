@@ -462,7 +462,7 @@ void wxPropertyGrid::Init2()
     m_iFlags |= wxPG_FL_INITIALIZED;
 
     wxSize wndsize = GetSize();
-    m_ncWidth = wndsize.GetWidth();
+    m_ncWidth = wndsize.x;
 
     // Need to call OnResize handler or size given in constructor/Create
     // will never work.

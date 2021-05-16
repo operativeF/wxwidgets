@@ -492,9 +492,9 @@ public:
         wxSize s( DoGetVirtualSize() );
 
         if( x )
-            *x = s.GetWidth();
+            *x = s.x;
         if( y )
-            *y = s.GetHeight();
+            *y = s.y;
     }
 
         // Override these methods for windows that have a virtual size

@@ -426,7 +426,7 @@ struct EllipsizeCalculator
         if ( estimatedWidth > m_maxFinalWidthPx )
             return false;
 
-        return m_dc.GetTextExtent(GetEllipsizedText()).GetWidth() <= m_maxFinalWidthPx;
+        return m_dc.GetTextExtent(GetEllipsizedText()).x <= m_maxFinalWidthPx;
     }
 
     // calculation state:
@@ -585,7 +585,7 @@ wxString wxControlBase::Ellipsize(const wxString& label, const wxDC& dc,
     // these cannot be cached between different Ellipsize() calls as they can
     // change because of e.g. a font change; however we calculate them only once
     // when ellipsizing multiline labels:
-    int replacementWidth = dc.GetTextExtent(wxELLIPSE_REPLACEMENT).GetWidth();
+    int replacementWidth = dc.GetTextExtent(wxELLIPSE_REPLACEMENT).x;
 
     // NB: we must handle correctly labels with newlines:
     wxString curLine;

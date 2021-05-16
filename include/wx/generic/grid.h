@@ -196,7 +196,7 @@ public:
                               int row, int col,
                               int WXUNUSED(width))
     {
-        return GetBestSize(grid, attr, dc, row, col).GetHeight();
+        return GetBestSize(grid, attr, dc, row, col).y;
     }
 
     // Get the preferred width for a given height, this is the symmetric
@@ -207,7 +207,7 @@ public:
                              int row, int col,
                              int WXUNUSED(height))
     {
-        return GetBestSize(grid, attr, dc, row, col).GetWidth();
+        return GetBestSize(grid, attr, dc, row, col).x;
     }
 
 

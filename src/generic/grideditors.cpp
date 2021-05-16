@@ -186,7 +186,7 @@ void wxGridCellEditorEvtHandler::OnChar(wxKeyEvent& event)
                 m_grid->GetTextExtent(value, &textWidth, &y, nullptr, nullptr, &font);
 
                 // try to RIGHT align the text by scrolling
-                int client_right = m_grid->GetGridWindow()->GetClientSize().GetWidth();
+                int client_right = m_grid->GetGridWindow()->GetClientSize().x;
 
                 // (m_grid->GetScrollLineX()*2) is a factor for not scrolling to far,
                 // otherwise the last part of the cell content might be hidden below the scroll bar
@@ -1899,8 +1899,8 @@ void wxGridCellDateEditor::SetSize(const wxRect& r)
 
     // Allow date picker to become a bit wider, if necessary, but not too wide,
     // otherwise it just looks ugly.
-    if ( r.GetWidth() > size.GetWidth()
-            && r.GetWidth() < 3*size.GetWidth()/2 )
+    if ( r.GetWidth() > size.x
+            && r.GetWidth() < 3*size.x / 2 )
     {
         size.x = r.GetWidth();
     }

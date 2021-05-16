@@ -259,7 +259,7 @@ wxString wxStaticTextBase::GetEllipsizedLabel() const
 wxString wxStaticTextBase::Ellipsize(const wxString& label) const
 {
     wxSize sz(GetClientSize());
-    if (sz.GetWidth() < 2 || sz.GetHeight() < 2)
+    if (sz.x < 2 || sz.y < 2)
     {
         // the size of this window is not valid (yet)
         return label;
@@ -281,7 +281,7 @@ wxString wxStaticTextBase::Ellipsize(const wxString& label) const
         return label;
     }
 
-    return wxControl::Ellipsize(label, dc, mode, sz.GetWidth());
+    return wxControl::Ellipsize(label, dc, mode, sz.x);
 }
 
 #endif // wxUSE_STATTEXT

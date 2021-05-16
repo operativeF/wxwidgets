@@ -142,7 +142,7 @@ public:
 
     virtual bool Create(int width, int height, int depth = wxBITMAP_SCREEN_DEPTH);
     virtual bool Create(const wxSize& sz, int depth = wxBITMAP_SCREEN_DEPTH)
-        { return Create(sz.GetWidth(), sz.GetHeight(), depth); }
+        { return Create(sz.x, sz.y, depth); }
 
     virtual bool Create(int width, int height, const wxDC& dc);
     virtual bool Create(const void* data, wxBitmapType type, int width, int height, int depth = 1);

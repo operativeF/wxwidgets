@@ -1070,7 +1070,7 @@ void SurfaceD2D::Init(SurfaceID sid, WindowID wid)
         if ( SUCCEEDED(hr) )
         {
             RECT rc;
-            ::SetRect(&rc,0,0,sz.GetWidth(),sz.GetHeight());
+            ::SetRect(&rc,0,0,sz.x,sz.y);
             hr = m_surfaceData->GetRenderTarget()
                 ->BindDC(static_cast<HDC>(dc->GetHandle()),&rc);
         }
@@ -2469,12 +2469,12 @@ const wxBitmap* wxSTCListBoxVisualData::GetImage(int i) const
 
 int wxSTCListBoxVisualData::GetImageAreaWidth() const
 {
-    return m_imgAreaSize.GetWidth();
+    return m_imgAreaSize.x;
 }
 
 int wxSTCListBoxVisualData::GetImageAreaHeight() const
 {
-    return m_imgAreaSize.GetHeight();
+    return m_imgAreaSize.y;
 }
 
 void wxSTCListBoxVisualData::ComputeColours()

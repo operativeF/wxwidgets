@@ -1906,7 +1906,7 @@ void wxRibbonMSWArtProvider::DrawPanelBackground(
 
         label_rect.SetX(label_rect.GetX() + 1);
         label_rect.SetWidth(label_rect.GetWidth() - 2);
-        label_rect.SetHeight(label_size.GetHeight() + 2);
+        label_rect.SetHeight(label_size.y + 2);
         label_rect.SetY(true_rect.GetBottom() - label_rect.GetHeight());
         label_height = label_rect.GetHeight();
 
@@ -1915,12 +1915,12 @@ void wxRibbonMSWArtProvider::DrawPanelBackground(
         if(has_ext_button)
             label_rect.SetWidth(label_rect.GetWidth() - 13);
 
-        if(label_size.GetWidth() > label_rect.GetWidth())
+        if(label_size.x > label_rect.GetWidth())
         {
             // Test if there is enough length for 3 letters and ...
             wxString new_label = label.Mid(0, 3) + wxT("...");
             label_size = dc.GetTextExtent(new_label);
-            if(label_size.GetWidth() > label_rect.GetWidth())
+            if(label_size.x > label_rect.GetWidth())
             {
                 // Not enough room for three characters and ...
                 // Display the entire label and just crop it
@@ -1934,7 +1934,7 @@ void wxRibbonMSWArtProvider::DrawPanelBackground(
                 {
                     new_label = label.Mid(0, len) + wxT("...");
                     label_size = dc.GetTextExtent(new_label);
-                    if(label_size.GetWidth() <= label_rect.GetWidth())
+                    if(label_size.x <= label_rect.GetWidth())
                     {
                         label = new_label;
                         break;
@@ -1948,14 +1948,14 @@ void wxRibbonMSWArtProvider::DrawPanelBackground(
         {
             wxDCClipper clip(dc, label_rect);
             dc.DrawText(label, label_rect.x, label_rect.y +
-                (label_rect.GetHeight() - label_size.GetHeight()) / 2);
+                (label_rect.GetHeight() - label_size.y) / 2);
         }
         else
         {
             dc.DrawText(label, label_rect.x +
-                (label_rect.GetWidth() - label_size.GetWidth()) / 2,
+                (label_rect.GetWidth() - label_size.x) / 2,
                 label_rect.y +
-                (label_rect.GetHeight() - label_size.GetHeight()) / 2);
+                (label_rect.GetHeight() - label_size.y) / 2);
         }
 
         if(has_ext_button)
@@ -2882,7 +2882,7 @@ void wxRibbonMSWArtProvider::GetBarTabWidth(
     if((m_flags & wxRIBBON_BAR_SHOW_PAGE_LABELS) && !label.IsEmpty())
     {
         dc.SetFont(m_tab_label_font);
-        width += dc.GetTextExtent(label).GetWidth();
+        width += dc.GetTextExtent(label).x;
         min += wxMin(25, width); // enough for a few chars
         if(bitmap.IsOk())
         {
@@ -2933,7 +2933,7 @@ int wxRibbonMSWArtProvider::GetTabCtrlHeight(
     if(m_flags & wxRIBBON_BAR_SHOW_PAGE_LABELS)
     {
         dc.SetFont(m_tab_label_font);
-        text_height = dc.GetTextExtent(wxT("ABCDEFXj")).GetHeight() + 10;
+        text_height = dc.GetTextExtent(wxT("ABCDEFXj")).y + 10;
     }
     if(m_flags & wxRIBBON_BAR_SHOW_PAGE_ICONS)
     {
@@ -2968,7 +2968,7 @@ wxSize wxRibbonMSWArtProvider::GetPanelSize(
     dc.SetFont(m_panel_label_font);
     wxSize label_size = dc.GetTextExtent(wnd->GetLabel());
 
-    client_size.IncBy(0, label_size.GetHeight());
+    client_size.IncBy(0, label_size.y);
     if(m_flags & wxRIBBON_BAR_FLOW_VERTICAL)
         client_size.IncBy(4, 8);
     else
@@ -2994,7 +2994,7 @@ wxSize wxRibbonMSWArtProvider::GetPanelClientSize(
     dc.SetFont(m_panel_label_font);
     wxSize label_size = dc.GetTextExtent(wnd->GetLabel());
 
-    size.DecBy(0, label_size.GetHeight());
+    size.DecBy(0, label_size.y);
     if(m_flags & wxRIBBON_BAR_FLOW_VERTICAL)
         size.DecBy(4, 8);
     else
@@ -3041,10 +3041,10 @@ wxSize wxRibbonMSWArtProvider::GetGalleryClientSize(
     if(m_flags & wxRIBBON_BAR_FLOW_VERTICAL)
     {
         // Flow is vertical - put buttons on bottom
-        scroll_up.y = size.GetHeight() - 15;
+        scroll_up.y = size.y - 15;
         scroll_up.height = 15;
         scroll_up.x = 0;
-        scroll_up.width = (size.GetWidth() + 2) / 3;
+        scroll_up.width = (size.x + 2) / 3;
         scroll_down.y = scroll_up.y;
         scroll_down.height = scroll_up.height;
         scroll_down.x = scroll_up.x + scroll_up.width;
@@ -3052,17 +3052,17 @@ wxSize wxRibbonMSWArtProvider::GetGalleryClientSize(
         extension.y = scroll_down.y;
         extension.height = scroll_down.height;
         extension.x = scroll_down.x + scroll_down.width;
-        extension.width = size.GetWidth() - scroll_up.width - scroll_down.width;
+        extension.width = size.x - scroll_up.width - scroll_down.width;
         size.DecBy(1, 16);
         size.DecBy( 2, 1);
     }
     else
     {
         // Flow is horizontal - put buttons on right
-        scroll_up.x = size.GetWidth() - 15;
+        scroll_up.x = size.x - 15;
         scroll_up.width = 15;
         scroll_up.y = 0;
-        scroll_up.height = (size.GetHeight() + 2) / 3;
+        scroll_up.height = (size.y + 2) / 3;
         scroll_down.x = scroll_up.x;
         scroll_down.width = scroll_up.width;
         scroll_down.y = scroll_up.y + scroll_up.height;
@@ -3070,7 +3070,7 @@ wxSize wxRibbonMSWArtProvider::GetGalleryClientSize(
         extension.x = scroll_down.x;
         extension.width = scroll_down.width;
         extension.y = scroll_down.y + scroll_down.height;
-        extension.height = size.GetHeight() - scroll_up.height - scroll_down.height;
+        extension.height = size.y - scroll_up.height - scroll_down.height;
         size.DecBy(16, 1);
         size.DecBy( 2, 1);
     }
@@ -3095,9 +3095,9 @@ wxRect wxRibbonMSWArtProvider::GetPageBackgroundRedrawArea(
 {
     wxRect new_rect, old_rect;
 
-    if(page_new_size.GetWidth() != page_old_size.GetWidth())
+    if(page_new_size.x != page_old_size.x)
     {
-        if(page_new_size.GetHeight() != page_old_size.GetHeight())
+        if(page_new_size.y != page_old_size.y)
         {
             // Width and height both changed - redraw everything
             return wxRect(page_new_size);
@@ -3107,13 +3107,13 @@ wxRect wxRibbonMSWArtProvider::GetPageBackgroundRedrawArea(
             // Only width changed - redraw right hand side
             const int right_edge_width = 4;
 
-            new_rect = wxRect(page_new_size.GetWidth() - right_edge_width, 0, right_edge_width, page_new_size.GetHeight());
-            old_rect = wxRect(page_old_size.GetWidth() - right_edge_width, 0, right_edge_width, page_old_size.GetHeight());
+            new_rect = wxRect(page_new_size.x - right_edge_width, 0, right_edge_width, page_new_size.y);
+            old_rect = wxRect(page_old_size.x - right_edge_width, 0, right_edge_width, page_old_size.y);
         }
     }
     else
     {
-        if(page_new_size.GetHeight() == page_old_size.GetHeight())
+        if(page_new_size.y == page_old_size.y)
         {
             // Nothing changed (should never happen) - redraw nothing
             return wxRect(0, 0, 0, 0);
@@ -3166,8 +3166,8 @@ bool wxRibbonMSWArtProvider::GetButtonBarButtonSize(
             break;
         case wxRIBBON_BUTTON_HYBRID:
             *normal_region = wxRect(*button_size);
-            *dropdown_region = wxRect(button_size->GetWidth(), 0,
-                drop_button_width, button_size->GetHeight());
+            *dropdown_region = wxRect(button_size->x, 0,
+                drop_button_width, button_size->y);
             *button_size += wxSize(drop_button_width, 0);
             break;
         }
@@ -3178,14 +3178,14 @@ bool wxRibbonMSWArtProvider::GetButtonBarButtonSize(
             GetButtonBarButtonSize(dc, wnd, kind, wxRIBBON_BUTTONBAR_BUTTON_SMALL,
                 label, text_min_width, bitmap_size_large, bitmap_size_small,
                 button_size, normal_region, dropdown_region);
-            int text_size = dc.GetTextExtent(label).GetWidth();
+            int text_size = dc.GetTextExtent(label).x;
             if(text_size < text_min_width)
                 text_size = text_min_width;
-            button_size->SetWidth(button_size->GetWidth() + text_size);
+            button_size->x = button_size->x + text_size;
             switch(kind)
             {
             case wxRIBBON_BUTTON_DROPDOWN:
-                dropdown_region->SetWidth(dropdown_region->GetWidth() + text_size);
+                dropdown_region->SetWidth(dropdown_region->x + text_size);
                 break;
             case wxRIBBON_BUTTON_HYBRID:
                 dropdown_region->SetX(dropdown_region->GetX() + text_size);
@@ -3218,8 +3218,8 @@ bool wxRibbonMSWArtProvider::GetButtonBarButtonSize(
                 if(wxRibbonCanLabelBreakAtPosition(label, i))
                 {
                     int width = wxMax(
-                        dc.GetTextExtent(label.Left(i)).GetWidth(),
-                        dc.GetTextExtent(label.Mid(i + 1)).GetWidth() + last_line_extra_width);
+                        dc.GetTextExtent(label.Left(i)).x,
+                        dc.GetTextExtent(label.Mid(i + 1)).x + last_line_extra_width);
                     if(best_width < text_min_width)
                         best_width = text_min_width;
                     if(width < best_width)
@@ -3230,8 +3230,8 @@ bool wxRibbonMSWArtProvider::GetButtonBarButtonSize(
             }
             label_height *= 2; // Assume two lines even when only one is used
                                // (to give all buttons a consistent height)
-            icon_size.SetWidth(wxMax(icon_size.GetWidth(), best_width) + 6);
-            icon_size.SetHeight(icon_size.GetHeight() + label_height);
+            icon_size.x = wxMax(icon_size.x, best_width) + 6;
+            icon_size.y = icon_size.y + label_height;
             *button_size = icon_size;
             switch(kind)
             {
@@ -3243,8 +3243,8 @@ bool wxRibbonMSWArtProvider::GetButtonBarButtonSize(
                 normal_region->height -= 2 + label_height;
                 dropdown_region->x = 0;
                 dropdown_region->y = normal_region->height;
-                dropdown_region->width = icon_size.GetWidth();
-                dropdown_region->height = icon_size.GetHeight() - normal_region->height;
+                dropdown_region->width = icon_size.x;
+                dropdown_region->height = icon_size.y - normal_region->height;
                 break;
             case wxRIBBON_BUTTON_NORMAL:
             case wxRIBBON_BUTTON_TOGGLE:
@@ -3268,7 +3268,7 @@ wxCoord wxRibbonMSWArtProvider::GetButtonBarButtonTextWidth(
     if((size & wxRIBBON_BUTTONBAR_BUTTON_SIZE_MASK)
        == wxRIBBON_BUTTONBAR_BUTTON_LARGE)
     {
-        best_width = dc.GetTextExtent(label).GetWidth();
+        best_width = dc.GetTextExtent(label).x;
         int last_line_extra_width = 0;
         if(kind != wxRIBBON_BUTTON_NORMAL && kind != wxRIBBON_BUTTON_TOGGLE)
         {
@@ -3280,8 +3280,8 @@ wxCoord wxRibbonMSWArtProvider::GetButtonBarButtonTextWidth(
             if(wxRibbonCanLabelBreakAtPosition(label, i))
             {
                 int width = wxMax(
-                    dc.GetTextExtent(label.Left(i)).GetWidth(),
-                    dc.GetTextExtent(label.Mid(i + 1)).GetWidth() + last_line_extra_width);
+                    dc.GetTextExtent(label.Left(i)).x,
+                    dc.GetTextExtent(label.Mid(i + 1)).x + last_line_extra_width);
                 if(width < best_width)
                 {
                     best_width = width;
@@ -3292,7 +3292,7 @@ wxCoord wxRibbonMSWArtProvider::GetButtonBarButtonTextWidth(
     else if((size & wxRIBBON_BUTTONBAR_BUTTON_SIZE_MASK)
        == wxRIBBON_BUTTONBAR_BUTTON_MEDIUM)
     {
-        best_width = dc.GetTextExtent(label).GetWidth();
+        best_width = dc.GetTextExtent(label).x;
     }
 
     return best_width;
@@ -3358,7 +3358,7 @@ wxSize wxRibbonMSWArtProvider::GetToolSize(
             if(kind == wxRIBBON_BUTTON_DROPDOWN)
                 *dropdown_region = size;
             else
-                *dropdown_region = wxRect(size.GetWidth() - 8, 0, 8, size.GetHeight());
+                *dropdown_region = wxRect(size.x - 8, 0, 8, size.y);
         }
     }
     else

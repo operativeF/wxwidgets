@@ -645,7 +645,7 @@ void wxGridCellStringRenderer::Draw(wxGrid& grid,
 
         int overflowCols = 0;
         int cols = grid.GetNumberCols();
-        int best_width = GetBestSize(grid,attr,dc,row,col).GetWidth();
+        int best_width = GetBestSize(grid,attr,dc,row,col).x;
         int cell_rows, cell_cols;
         attr.GetSize( &cell_rows, &cell_cols ); // shouldn't get here if <= 0
         if ((best_width > rectCell.width) && (col < cols) && grid.GetTable())

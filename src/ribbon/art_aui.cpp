@@ -357,7 +357,7 @@ int wxRibbonAUIArtProvider::GetTabCtrlHeight(
     if(m_flags & wxRIBBON_BAR_SHOW_PAGE_LABELS)
     {
         dc.SetFont(m_tab_active_label_font);
-        text_height = dc.GetTextExtent(wxT("ABCDEFXj")).GetHeight();
+        text_height = dc.GetTextExtent(wxT("ABCDEFXj")).y;
     }
     if(m_flags & wxRIBBON_BAR_SHOW_PAGE_ICONS)
     {
@@ -533,7 +533,7 @@ void wxRibbonAUIArtProvider::GetBarTabWidth(
     if((m_flags & wxRIBBON_BAR_SHOW_PAGE_LABELS) && !label.IsEmpty())
     {
         dc.SetFont(m_tab_active_label_font);
-        width += dc.GetTextExtent(label).GetWidth();
+        width += dc.GetTextExtent(label).x;
         min += wxMin(30, width); // enough for a few chars
         if(bitmap.IsOk())
         {
@@ -677,7 +677,7 @@ wxSize wxRibbonAUIArtProvider::GetPanelSize(
 {
     dc.SetFont(m_panel_label_font);
     wxSize label_size = dc.GetTextExtent(wnd->GetLabel());
-    int label_height = label_size.GetHeight() + 5;
+    int label_height = label_size.y + 5;
     if(m_flags & wxRIBBON_BAR_FLOW_VERTICAL)
     {
         client_size.IncBy(4, label_height + 6);
@@ -701,7 +701,7 @@ wxSize wxRibbonAUIArtProvider::GetPanelClientSize(
 {
     dc.SetFont(m_panel_label_font);
     wxSize label_size = dc.GetTextExtent(wnd->GetLabel());
-    int label_height = label_size.GetHeight() + 5;
+    int label_height = label_size.y + 5;
     if(m_flags & wxRIBBON_BAR_FLOW_VERTICAL)
     {
         size.DecBy(4, label_height + 6);
@@ -732,7 +732,7 @@ wxRect wxRibbonAUIArtProvider::GetPanelExtButtonArea(wxDC& dc,
 
     dc.SetFont(m_panel_label_font);
     wxSize label_size = dc.GetTextExtent(wnd->GetLabel());
-    int label_height = label_size.GetHeight() + 5;
+    int label_height = label_size.y + 5;
     wxRect label_rect(true_rect);
     label_rect.height = label_height - 1;
 
@@ -762,7 +762,7 @@ void wxRibbonAUIArtProvider::DrawPanelBackground(
 
     dc.SetFont(m_panel_label_font);
     wxSize label_size = dc.GetTextExtent(wnd->GetLabel());
-    int label_height = label_size.GetHeight() + 5;
+    int label_height = label_size.y + 5;
     wxRect label_rect(true_rect);
     label_rect.height = label_height - 1;
     dc.DrawLine(label_rect.x, label_rect.y + label_rect.height,
@@ -917,7 +917,7 @@ void wxRibbonAUIArtProvider::DrawPartialPanelBackground(wxDC& dc,
     background.x++;
     background.width -= 2;
     dc.SetFont(m_panel_label_font);
-    int caption_height = dc.GetTextExtent(panel->GetLabel()).GetHeight() + 7;
+    int caption_height = dc.GetTextExtent(panel->GetLabel()).y + 7;
     background.y += caption_height - 1;
     background.height -= caption_height;
 

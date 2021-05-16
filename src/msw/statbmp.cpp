@@ -248,12 +248,12 @@ void wxStaticBitmap::DoPaintManually(wxPaintEvent& WXUNUSED(event))
     const wxWindow *win = UseBgCol() ? this : GetParent();
     dc.SetBrush(win->GetBackgroundColour());
     dc.SetPen(*wxTRANSPARENT_PEN);
-    dc.DrawRectangle(0, 0, size.GetWidth(), size.GetHeight());
+    dc.DrawRectangle(0, 0, size.x, size.y);
 
     // Draw the image in the middle
     dc.DrawBitmap(bmp,
-                  (size.GetWidth() - bmp.GetWidth()) / 2,
-                  (size.GetHeight() - bmp.GetHeight()) / 2,
+                  (size.x - bmp.GetWidth()) / 2,
+                  (size.y - bmp.GetHeight()) / 2,
                   true /* use mask */);
 }
 

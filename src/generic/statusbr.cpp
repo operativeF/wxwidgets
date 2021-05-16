@@ -246,7 +246,7 @@ void wxStatusBarGeneric::DrawFieldText(wxDC& dc, const wxRect& rect, int i, int 
         // if we have the wxSTB_SHOW_TIPS we must set the ellipsized flag even if
         // we don't ellipsize the text but just truncate it
         if (HasFlag(wxSTB_SHOW_TIPS))
-            SetEllipsizedFlag(i, dc.GetTextExtent(text).GetWidth() > maxWidth);
+            SetEllipsizedFlag(i, dc.GetTextExtent(text).x > maxWidth);
 
         dc.SetClippingRegion(rect);
     }

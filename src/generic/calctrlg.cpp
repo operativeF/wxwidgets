@@ -775,7 +775,7 @@ void wxGenericCalendarCtrl::RecalcGeometry()
     }
 
     m_calendarWeekWidth = HasFlag( wxCAL_SHOW_WEEK_NUMBERS )
-        ? dc.GetTextExtent( wxString::Format( wxT( "%d" ), 42 )).GetWidth() + 4 : 0;
+        ? dc.GetTextExtent( wxString::Format( wxT( "%d" ), 42 )).x + 4 : 0;
 
     // leave some margins
     m_widthCol += 2;
@@ -919,7 +919,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         {
             const int weekNr = date.GetWeekOfYear();
             wxString text = wxString::Format( wxT( "%d" ), weekNr );
-            dc.DrawText( text, m_calendarWeekWidth - dc.GetTextExtent( text ).GetWidth() - 2, y + m_heightRow * i );
+            dc.DrawText( text, m_calendarWeekWidth - dc.GetTextExtent( text ).x - 2, y + m_heightRow * i );
             date += wxDateSpan::Week();
         }
     }

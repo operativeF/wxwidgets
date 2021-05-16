@@ -173,8 +173,8 @@ public:
 
     void SetPixelSize(const wxSize& pixelSize)
     {
-        wxCHECK_RET( pixelSize.GetWidth() >= 0, "negative font width" );
-        wxCHECK_RET( pixelSize.GetHeight() != 0, "zero font height" );
+        wxCHECK_RET( pixelSize.x >= 0, "negative font width" );
+        wxCHECK_RET( pixelSize.y != 0, "zero font height" );
 
         Free();
 
@@ -443,8 +443,8 @@ double wxNativeFontInfo::GetFractionalPointSize() const
 wxSize wxNativeFontInfo::GetPixelSize() const
 {
     wxSize ret;
-    ret.SetHeight(abs((int)lf.lfHeight));
-    ret.SetWidth(lf.lfWidth);
+    ret.y = abs((int)lf.lfHeight);
+    ret.x = lf.lfWidth;
     return ret;
 }
 
@@ -540,8 +540,8 @@ void wxNativeFontInfo::SetPixelSize(const wxSize& pixelSize)
     // still accept it for compatibility with the existing code which worked
     // around the wrong interpretation of the height argument in older wxMSW
     // versions by passing a negative value explicitly itself.
-    lf.lfHeight = -abs(pixelSize.GetHeight());
-    lf.lfWidth = pixelSize.GetWidth();
+    lf.lfHeight = -abs(pixelSize.y);
+    lf.lfWidth = pixelSize.x;
 
     // We don't have the right DPI to use here neither, but we need to update
     // the point size too, so fall back to the default.

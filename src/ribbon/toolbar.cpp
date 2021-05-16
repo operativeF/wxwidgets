@@ -643,9 +643,9 @@ static int GetSizeInOrientation(wxSize size, wxOrientation orientation)
 {
     switch(orientation)
     {
-    case wxHORIZONTAL: return size.GetWidth();
-    case wxVERTICAL: return size.GetHeight();
-    case wxBOTH: return size.GetWidth() * size.GetHeight();
+    case wxHORIZONTAL: return size.x;
+    case wxVERTICAL: return size.y;
+    case wxBOTH: return size.x * size.y;
     default: return 0;
     }
 }
@@ -663,24 +663,24 @@ wxSize wxRibbonToolBar::DoGetNextSmallerSize(wxOrientation direction,
         switch(direction)
         {
         case wxHORIZONTAL:
-            if(size.GetWidth() < relative_to.GetWidth()
-                && size.GetHeight() <= relative_to.GetHeight())
+            if(size.x < relative_to.x
+                && size.y <= relative_to.y)
             {
-                size.SetHeight(relative_to.GetHeight());
+                size.y = relative_to.y;
                 break;
             }
             continue;
         case wxVERTICAL:
-            if(size.GetWidth() <= relative_to.GetWidth()
-                && size.GetHeight() < relative_to.GetHeight())
+            if(size.x <= relative_to.x
+                && size.y < relative_to.y)
             {
-                size.SetWidth(relative_to.GetWidth());
+                size.x = relative_to.x;
                 break;
             }
             continue;
         case wxBOTH:
-            if(size.GetWidth() < relative_to.GetWidth()
-                && size.GetHeight() < relative_to.GetHeight())
+            if(size.x < relative_to.x
+                && size.y < relative_to.y)
             {
                 break;
             }
@@ -709,24 +709,24 @@ wxSize wxRibbonToolBar::DoGetNextLargerSize(wxOrientation direction,
         switch(direction)
         {
         case wxHORIZONTAL:
-            if(size.GetWidth() > relative_to.GetWidth()
-                && size.GetHeight() <= relative_to.GetHeight())
+            if(size.x > relative_to.x
+                && size.y <= relative_to.y)
             {
-                size.SetHeight(relative_to.GetHeight());
+                size.y = relative_to.y;
                 break;
             }
             continue;
         case wxVERTICAL:
-            if(size.GetWidth() <= relative_to.GetWidth()
-                && size.GetHeight() > relative_to.GetHeight())
+            if(size.x <= relative_to.x
+                && size.y > relative_to.y)
             {
-                size.SetWidth(relative_to.GetWidth());
+                size.x = relative_to.x;
                 break;
             }
             continue;
         case wxBOTH:
-            if(size.GetWidth() > relative_to.GetWidth()
-                && size.GetHeight() > relative_to.GetHeight())
+            if(size.x > relative_to.x
+                && size.y > relative_to.y)
             {
                 break;
             }
@@ -784,8 +784,8 @@ bool wxRibbonToolBar::Realize()
                 tool->state |= wxRIBBON_TOOLBAR_TOOL_FIRST;
             if(t == tool_count - 1)
                 tool->state |= wxRIBBON_TOOLBAR_TOOL_LAST;
-            if(tool->size.GetHeight() > tallest)
-                tallest = tool->size.GetHeight();
+            if(tool->size.y > tallest)
+                tallest = tool->size.y;
             if(prev)
             {
                 tool->position = prev->position;
@@ -803,7 +803,7 @@ bool wxRibbonToolBar::Realize()
         {
             group->size = wxSize(prev->position.x + prev->size.x, tallest);
             for(t = 0; t < tool_count; ++t)
-                group->tools.Item(t)->size.SetHeight(tallest);
+                group->tools.Item(t)->size.y = tallest;
         }
     }
 
@@ -839,7 +839,7 @@ bool wxRibbonToolBar::Realize()
             int shortest_row = 0;
             for(r = 1; r < nrows; ++r)
             {
-                if(row_sizes[r].GetWidth() < row_sizes[shortest_row].GetWidth())
+                if(row_sizes[r].x < row_sizes[shortest_row].x)
                     shortest_row = r;
             }
             row_sizes[shortest_row].x += group->size.x + sep;
@@ -849,10 +849,10 @@ bool wxRibbonToolBar::Realize()
         wxSize size(0, 0);
         for(r = 0; r < nrows; ++r)
         {
-            if(row_sizes[r].GetWidth() != 0)
+            if(row_sizes[r].x != 0)
                 row_sizes[r].DecBy(sep, 0);
-            if(row_sizes[r].GetWidth() > size.GetWidth())
-                size.SetWidth(row_sizes[r].GetWidth());
+            if(row_sizes[r].x > size.x)
+                size.x = row_sizes[r].x;
             size.IncBy(0, row_sizes[r].y);
         }
         m_sizes[nrows - m_nrows_min] = size;
@@ -937,7 +937,7 @@ void wxRibbonToolBar::OnSize(wxSizeEvent& evt)
         int shortest_row = 0;
         for(r = 1; r < row_count; ++r)
         {
-            if(row_sizes[r].GetWidth() < row_sizes[shortest_row].GetWidth())
+            if(row_sizes[r].x < row_sizes[shortest_row].x)
                 shortest_row = r;
         }
         group->position = wxPoint(row_sizes[shortest_row].x, shortest_row);
@@ -949,13 +949,13 @@ void wxRibbonToolBar::OnSize(wxSizeEvent& evt)
     // Calculate row positions
     int total_height = 0;
     for(r = 0; r < row_count; ++r)
-        total_height += row_sizes[r].GetHeight();
-    int rowsep = (size.GetHeight() - total_height) / (row_count + 1);
+        total_height += row_sizes[r].y;
+    int rowsep = (size.y - total_height) / (row_count + 1);
     int* rowypos = new int[row_count];
     rowypos[0] = rowsep;
     for(r = 1; r < row_count; ++r)
     {
-        rowypos[r] = rowypos[r - 1] + row_sizes[r - 1].GetHeight() + rowsep;
+        rowypos[r] = rowypos[r - 1] + row_sizes[r - 1].y + rowsep;
     }
 
     // Set group y positions
@@ -1253,7 +1253,7 @@ bool wxRibbonToolBarEvent::PopupMenu(wxMenu* menu)
                 {
                     pos = group->position;
                     pos += tool->position;
-                    pos.y += tool->size.GetHeight();
+                    pos.y += tool->size.y;
                     g = group_count;
                     break;
                 }

@@ -1359,8 +1359,8 @@ double wxDCImpl::GetMMToPXx() const
 {
     if ( wxIsNullDouble(m_mm_to_pix_x) )
     {
-        m_mm_to_pix_x = (double)wxGetDisplaySize().GetWidth() /
-                        (double)wxGetDisplaySizeMM().GetWidth();
+        m_mm_to_pix_x = (double)wxGetDisplaySize().x /
+                        (double)wxGetDisplaySizeMM().x;
     }
 
     return m_mm_to_pix_x;
@@ -1370,8 +1370,8 @@ double wxDCImpl::GetMMToPXy() const
 {
     if ( wxIsNullDouble(m_mm_to_pix_y) )
     {
-        m_mm_to_pix_y = (double)wxGetDisplaySize().GetHeight() /
-                        (double)wxGetDisplaySizeMM().GetHeight();
+        m_mm_to_pix_y = (double)wxGetDisplaySize().y /
+                        (double)wxGetDisplaySizeMM().y;
     }
 
     return m_mm_to_pix_y;

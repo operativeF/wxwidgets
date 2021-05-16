@@ -813,7 +813,7 @@ void wxFileListCtrl::OnSize( wxSizeEvent &event )
     if ( InReportView() )
     {
         // In report mode, set name column to use remaining width.
-        int newNameWidth = GetClientSize().GetWidth();
+        int newNameWidth = GetClientSize().x;
         for ( int i = 1; i < GetColumnCount(); i++ )
         {
             newNameWidth -= GetColumnWidth(i);

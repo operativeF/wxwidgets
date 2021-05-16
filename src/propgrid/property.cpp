@@ -1284,7 +1284,7 @@ wxSize wxPGProperty::OnMeasureImage( int WXUNUSED(item) ) const
         double scale = 1.0;
         if ( pg )
         {
-            int hMax = pg->GetImageSize().GetHeight();
+            int hMax = pg->GetImageSize().y;
             if ( m_valueBitmap->GetHeight() > hMax )
             {
                 scale = (double)hMax / m_valueBitmap->GetHeight();

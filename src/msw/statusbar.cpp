@@ -303,7 +303,7 @@ void wxStatusBar::DoUpdateStatusText(int nField)
         // if we have the wxSTB_SHOW_TIPS we must set the ellipsized flag even if
         // we don't ellipsize the text but just truncate it
         if (HasFlag(wxSTB_SHOW_TIPS))
-            SetEllipsizedFlag(nField, m_pDC->GetTextExtent(text).GetWidth() > maxWidth);
+            SetEllipsizedFlag(nField, m_pDC->GetTextExtent(text).x > maxWidth);
     }
     else
     {

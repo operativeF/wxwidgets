@@ -172,18 +172,18 @@ public:
     void OnSize(wxSizeEvent& event)
     {
         // We sometimes get surplus size events
-        if ((event.GetSize().GetWidth() == m_lastWidth) &&
-            (event.GetSize().GetHeight() == m_lastHeight))
+        if ((event.GetSize().x == m_lastWidth) &&
+            (event.GetSize().y == m_lastHeight))
         {
             event.Skip();
             return;
         }
-        m_lastWidth = event.GetSize().GetWidth();
-        m_lastHeight = event.GetSize().GetHeight();
+        m_lastWidth = event.GetSize().x;
+        m_lastHeight = event.GetSize().y;
 
         SetTransparent(m_amount);
-        m_region.Intersect(0, 0, event.GetSize().GetWidth(),
-                           event.GetSize().GetHeight());
+        m_region.Intersect(0, 0, event.GetSize().x,
+                           event.GetSize().y);
         SetShape(m_region);
         Refresh();
         event.Skip();
@@ -4238,8 +4238,8 @@ bool wxAuiManager::DoEndResizeAction(wxMouseEvent& event)
         }
 
 
-        int available_width = client_size.GetWidth() - used_width;
-        int available_height = client_size.GetHeight() - used_height;
+        int available_width = client_size.x - used_width;
+        int available_height = client_size.y - used_height;
 
 
 #if wxUSE_STATUSBAR
@@ -4252,7 +4252,7 @@ bool wxAuiManager::DoEndResizeAction(wxMouseEvent& event)
             if (status)
             {
                 wxSize status_client_size = status->GetClientSize();
-                available_height -= status_client_size.GetHeight();
+                available_height -= status_client_size.y;
             }
         }
 #endif

@@ -388,8 +388,8 @@ void wxNotificationMessageWindow::ResizeAndFitVisibleNotifications()
         notif != ms_visibleNotifications.end(); ++notif)
     {
         wxSize notifSize = (*notif)->GetSize();
-        if ( notifSize.GetWidth() > maxWidth )
-            maxWidth = notifSize.GetWidth();
+        if ( notifSize.x > maxWidth )
+            maxWidth = notifSize.x;
     }
 
     int notifPadding = 2;
@@ -404,9 +404,9 @@ void wxNotificationMessageWindow::ResizeAndFitVisibleNotifications()
     {
         // Modify existing maxwidth
         wxSize notifSize = (*notif)->GetSize();
-        if ( notifSize.GetWidth() < maxWidth )
+        if ( notifSize.x < maxWidth )
         {
-            notifSize.SetWidth(maxWidth);
+            notifSize.x = maxWidth;
             (*notif)->SetSize(notifSize);
             (*notif)->Layout();
         }
@@ -414,11 +414,11 @@ void wxNotificationMessageWindow::ResizeAndFitVisibleNotifications()
         if ( ms_presentationDirection > 0 )
         {
             presentPos.y += (notifPadding + prevNotifHeight);
-            prevNotifHeight = notifSize.GetHeight();
+            prevNotifHeight = notifSize.y;
         }
         else
         {
-            presentPos.y -= (notifPadding + notifSize.GetHeight());
+            presentPos.y -= (notifPadding + notifSize.y);
         }
 
         (*notif)->SetPosition(presentPos);

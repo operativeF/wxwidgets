@@ -322,11 +322,11 @@ public:
 
     // Create() variants using wxSize:
     bool Create( const wxSize& sz, bool clear = true )
-        { return Create(sz.GetWidth(), sz.GetHeight(), clear); }
+        { return Create(sz.x, sz.y, clear); }
     bool Create( const wxSize& sz, unsigned char* data, bool static_data = false )
-        { return Create(sz.GetWidth(), sz.GetHeight(), data, static_data); }
+        { return Create(sz.x, sz.y, data, static_data); }
     bool Create( const wxSize& sz, unsigned char* data, unsigned char* alpha, bool static_data = false )
-        { return Create(sz.GetWidth(), sz.GetHeight(), data, alpha, static_data); }
+        { return Create(sz.x, sz.y, data, alpha, static_data); }
 
     void Destroy();
 

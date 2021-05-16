@@ -803,8 +803,8 @@ bool wxRichTextSizePage::TransferDataToWindow()
         m_heightCheckbox->SetValue(false);
         m_unitsW->SetSelection(0);
         m_unitsH->SetSelection(0);
-        m_width->SetValue(wxString::Format(wxT("%d"), (int) imageObj->GetOriginalImageSize().GetWidth()));
-        m_height->SetValue(wxString::Format(wxT("%d"), (int) imageObj->GetOriginalImageSize().GetHeight()));
+        m_width->SetValue(wxString::Format(wxT("%d"), (int) imageObj->GetOriginalImageSize().x));
+        m_height->SetValue(wxString::Format(wxT("%d"), (int) imageObj->GetOriginalImageSize().y));
     }
     else
     {
