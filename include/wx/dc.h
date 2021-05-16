@@ -855,7 +855,7 @@ public:
     void SetClippingRegion(wxCoord x, wxCoord y, wxCoord width, wxCoord height)
         { m_pimpl->DoSetClippingRegion(x, y, width, height); }
     void SetClippingRegion(const wxPoint& pt, const wxSize& sz)
-        { m_pimpl->DoSetClippingRegion(pt.x, pt.y, sz.GetWidth(), sz.GetHeight()); }
+        { m_pimpl->DoSetClippingRegion(pt.x, pt.y, sz.x, sz.y); }
     void SetClippingRegion(const wxRect& rect)
         { m_pimpl->DoSetClippingRegion(rect.x, rect.y, rect.width, rect.height); }
 
@@ -909,7 +909,7 @@ public:
     wxPoint DeviceToLogical(wxCoord x, wxCoord y) const
         { return m_pimpl->DeviceToLogical(x, y); }
     wxSize DeviceToLogicalRel(const wxSize& dim) const
-        { return m_pimpl->DeviceToLogicalRel(dim.GetWidth(), dim.GetHeight()); }
+        { return m_pimpl->DeviceToLogicalRel(dim.x, dim.y); }
     wxSize DeviceToLogicalRel(int x, int y) const
         { return m_pimpl->DeviceToLogicalRel(x, y); }
     wxCoord LogicalToDeviceX(wxCoord x) const
@@ -925,7 +925,7 @@ public:
     wxPoint LogicalToDevice(wxCoord x, wxCoord y) const
         { return m_pimpl->LogicalToDevice(x, y); }
     wxSize LogicalToDeviceRel(const wxSize& dim) const
-        { return m_pimpl->LogicalToDeviceRel(dim.GetWidth(), dim.GetHeight()); }
+        { return m_pimpl->LogicalToDeviceRel(dim.x, dim.y); }
     wxSize LogicalToDeviceRel(int x, int y) const
         { return m_pimpl->LogicalToDeviceRel(x, y); }
 
@@ -1044,7 +1044,7 @@ public:
         { m_pimpl->DoDrawEllipticArc(x, y, w, h, sa, ea); }
     void DrawEllipticArc(const wxPoint& pt, const wxSize& sz,
                          double sa, double ea)
-        { m_pimpl->DoDrawEllipticArc(pt.x, pt.y, sz.GetWidth(), sz.GetHeight(), sa, ea); }
+        { m_pimpl->DoDrawEllipticArc(pt.x, pt.y, sz.x, sz.y, sa, ea); }
 
     void DrawPoint(wxCoord x, wxCoord y)
         { m_pimpl->DoDrawPoint(x, y); }
@@ -1072,7 +1072,7 @@ public:
     void DrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height)
         { m_pimpl->DoDrawRectangle(x, y, width, height); }
     void DrawRectangle(const wxPoint& pt, const wxSize& sz)
-        { m_pimpl->DoDrawRectangle(pt.x, pt.y, sz.GetWidth(), sz.GetHeight()); }
+        { m_pimpl->DoDrawRectangle(pt.x, pt.y, sz.x, sz.y); }
     void DrawRectangle(const wxRect& rect)
         { m_pimpl->DoDrawRectangle(rect.x, rect.y, rect.width, rect.height); }
 
@@ -1081,7 +1081,7 @@ public:
         { m_pimpl->DoDrawRoundedRectangle(x, y, width, height, radius); }
     void DrawRoundedRectangle(const wxPoint& pt, const wxSize& sz,
                              double radius)
-        { m_pimpl->DoDrawRoundedRectangle(pt.x, pt.y, sz.GetWidth(), sz.GetHeight(), radius); }
+        { m_pimpl->DoDrawRoundedRectangle(pt.x, pt.y, sz.x, sz.y, radius); }
     void DrawRoundedRectangle(const wxRect& r, double radius)
         { m_pimpl->DoDrawRoundedRectangle(r.x, r.y, r.width, r.height, radius); }
 
@@ -1093,7 +1093,7 @@ public:
     void DrawEllipse(wxCoord x, wxCoord y, wxCoord width, wxCoord height)
         { m_pimpl->DoDrawEllipse(x, y, width, height); }
     void DrawEllipse(const wxPoint& pt, const wxSize& sz)
-        { m_pimpl->DoDrawEllipse(pt.x, pt.y, sz.GetWidth(), sz.GetHeight()); }
+        { m_pimpl->DoDrawEllipse(pt.x, pt.y, sz.x, sz.y); }
     void DrawEllipse(const wxRect& rect)
         { m_pimpl->DoDrawEllipse(rect.x, rect.y, rect.width, rect.height); }
 
@@ -1148,7 +1148,7 @@ public:
               wxRasterOperationMode rop = wxCOPY, bool useMask = false,
               const wxPoint& srcPtMask = wxDefaultPosition)
     {
-        return m_pimpl->DoBlit(destPt.x, destPt.y, sz.GetWidth(), sz.GetHeight(),
+        return m_pimpl->DoBlit(destPt.x, destPt.y, sz.x, sz.y,
                       source, srcPt.x, srcPt.y, rop, useMask, srcPtMask.x, srcPtMask.y);
     }
 
@@ -1168,8 +1168,8 @@ public:
                      wxRasterOperationMode rop = wxCOPY, bool useMask = false,
                      const wxPoint& srcMaskPt = wxDefaultPosition)
     {
-        return m_pimpl->DoStretchBlit(dstPt.x, dstPt.y, dstSize.GetWidth(), dstSize.GetHeight(),
-                      source, srcPt.x, srcPt.y, srcSize.GetWidth(), srcSize.GetHeight(), rop, useMask, srcMaskPt.x, srcMaskPt.y);
+        return m_pimpl->DoStretchBlit(dstPt.x, dstPt.y, dstSize.x, dstSize.y,
+                      source, srcPt.x, srcPt.y, srcSize.x, srcSize.y, rop, useMask, srcMaskPt.x, srcMaskPt.y);
     }
 
     wxBitmap GetAsBitmap(const wxRect *subrect = (const wxRect *) NULL) const

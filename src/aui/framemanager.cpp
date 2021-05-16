@@ -1116,10 +1116,10 @@ bool wxAuiManager::AddPane(wxWindow* window, const wxAuiPaneInfo& paneInfo)
 
         if (pinfo.min_size != wxDefaultSize)
         {
-            if (pinfo.best_size.GetWidth() < pinfo.min_size.GetWidth())
-                pinfo.best_size.SetWidth(pinfo.min_size.GetWidth());
-            if (pinfo.best_size.GetHeight() < pinfo.min_size.GetHeight())
-                pinfo.best_size.SetHeight(pinfo.min_size.GetHeight());
+            if (pinfo.best_size.x < pinfo.min_size.x)
+                pinfo.best_size.x = pinfo.min_size.x;
+            if (pinfo.best_size.y < pinfo.min_size.y)
+                pinfo.best_size.y = pinfo.min_size.y;
         }
     }
 
@@ -1433,16 +1433,16 @@ wxString wxAuiManager::SavePaneInfo(const wxAuiPaneInfo& pane)
     result += wxString::Format(wxT("row=%d;"), pane.dock_row);
     result += wxString::Format(wxT("pos=%d;"), pane.dock_pos);
     result += wxString::Format(wxT("prop=%d;"), pane.dock_proportion);
-    result += wxString::Format(wxT("bestw=%d;"), pane.best_size.GetWidth());
-    result += wxString::Format(wxT("besth=%d;"), pane.best_size.GetHeight());
-    result += wxString::Format(wxT("minw=%d;"), pane.min_size.GetWidth());
-    result += wxString::Format(wxT("minh=%d;"), pane.min_size.GetHeight());
-    result += wxString::Format(wxT("maxw=%d;"), pane.max_size.GetWidth());
-    result += wxString::Format(wxT("maxh=%d;"), pane.max_size.GetHeight());
+    result += wxString::Format(wxT("bestw=%d;"), pane.best_size.x);
+    result += wxString::Format(wxT("besth=%d;"), pane.best_size.y);
+    result += wxString::Format(wxT("minw=%d;"), pane.min_size.x);
+    result += wxString::Format(wxT("minh=%d;"), pane.min_size.y);
+    result += wxString::Format(wxT("maxw=%d;"), pane.max_size.x);
+    result += wxString::Format(wxT("maxh=%d;"), pane.max_size.y);
     result += wxString::Format(wxT("floatx=%d;"), pane.floating_pos.x);
     result += wxString::Format(wxT("floaty=%d;"), pane.floating_pos.y);
-    result += wxString::Format(wxT("floatw=%d;"), pane.floating_size.GetWidth());
-    result += wxString::Format(wxT("floath=%d"), pane.floating_size.GetHeight());
+    result += wxString::Format(wxT("floatw=%d;"), pane.floating_size.x);
+    result += wxString::Format(wxT("floath=%d"), pane.floating_size.y);
 
     return result;
 }
@@ -1487,25 +1487,25 @@ void wxAuiManager::LoadPaneInfo(wxString pane_part, wxAuiPaneInfo &pane)
         else if (val_name == wxT("prop"))
             pane.dock_proportion = wxAtoi(value.c_str());
         else if (val_name == wxT("bestw"))
-            pane.best_size.SetWidth(wxAtoi(value.c_str()));
+            pane.best_size.x = wxAtoi(value.c_str());
         else if (val_name == wxT("besth"))
-            pane.best_size.SetHeight(wxAtoi(value.c_str()));
+            pane.best_size.y = wxAtoi(value.c_str());
         else if (val_name == wxT("minw"))
-            pane.min_size.SetWidth(wxAtoi(value.c_str()));
+            pane.min_size.x = wxAtoi(value.c_str());
         else if (val_name == wxT("minh"))
-            pane.min_size.SetHeight(wxAtoi(value.c_str()));
+            pane.min_size.y = wxAtoi(value.c_str());
         else if (val_name == wxT("maxw"))
-            pane.max_size.SetWidth(wxAtoi(value.c_str()));
+            pane.max_size.x = wxAtoi(value.c_str());
         else if (val_name == wxT("maxh"))
-            pane.max_size.SetHeight(wxAtoi(value.c_str()));
+            pane.max_size.y = wxAtoi(value.c_str());
         else if (val_name == wxT("floatx"))
             pane.floating_pos.x = wxAtoi(value.c_str());
         else if (val_name == wxT("floaty"))
             pane.floating_pos.y = wxAtoi(value.c_str());
         else if (val_name == wxT("floatw"))
-            pane.floating_size.SetWidth(wxAtoi(value.c_str()));
+            pane.floating_size.x = wxAtoi(value.c_str());
         else if (val_name == wxT("floath"))
-            pane.floating_size.SetHeight(wxAtoi(value.c_str()));
+            pane.floating_size.y = wxAtoi(value.c_str());
         else {
             wxFAIL_MSG(wxT("Bad Perspective String"));
         }
@@ -1696,7 +1696,7 @@ void wxAuiManager::GetPanePositionsAndSizes(wxAuiDockInfo& dock,
         {
             if (pane.HasGripper() && !pane.HasGripperTop())
                 size += gripperSize;
-            size += pane.best_size.GetWidth();
+            size += pane.best_size.x;
         }
         else
         {
@@ -1705,7 +1705,7 @@ void wxAuiManager::GetPanePositionsAndSizes(wxAuiDockInfo& dock,
 
             if (pane.HasCaption())
                 size += caption_size;
-            size += pane.best_size.GetHeight();
+            size += pane.best_size.y;
         }
 
         sizes.Add(size);
@@ -1894,7 +1894,7 @@ void wxAuiManager::LayoutAddPane(wxSizer* cont,
     {
         vert_pane_sizer->SetItemMinSize(
                         vert_pane_sizer->GetChildren().GetCount()-1,
-                        min_size.GetWidth(), min_size.GetHeight());
+                        min_size.x, min_size.y);
     }
 
 
@@ -2191,9 +2191,9 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
                     pane_size = pane.window->GetSize();
 
                 if (dock.IsHorizontal())
-                    size = wxMax(pane_size.GetHeight(), size);
+                    size = wxMax(pane_size.y, size);
                 else
-                    size = wxMax(pane_size.GetWidth(), size);
+                    size = wxMax(pane_size.x, size);
             }
 
             // add space for the border (two times), but only
@@ -2225,8 +2225,8 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
             // new dock's size may not be more than the dock constraint
             // parameter specifies.  See SetDockSizeConstraint()
 
-            int max_dock_x_size = (int)(m_dockConstraintX * ((double)cli_size.GetWidth()));
-            int max_dock_y_size = (int)(m_dockConstraintY * ((double)cli_size.GetHeight()));
+            int max_dock_x_size = (int)(m_dockConstraintX * ((double)cli_size.x));
+            int max_dock_y_size = (int)(m_dockConstraintY * ((double)cli_size.y));
 
             if (dock.IsHorizontal())
                 size = wxMin(size, max_dock_y_size);
@@ -2255,13 +2255,13 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
                     plus_caption = true;
                 if (dock.IsHorizontal())
                 {
-                    if (pane.min_size.GetHeight() > dock_min_size)
-                        dock_min_size = pane.min_size.GetHeight();
+                    if (pane.min_size.y > dock_min_size)
+                        dock_min_size = pane.min_size.y;
                 }
                 else
                 {
-                    if (pane.min_size.GetWidth() > dock_min_size)
-                        dock_min_size = pane.min_size.GetWidth();
+                    if (pane.min_size.x > dock_min_size)
+                        dock_min_size = pane.min_size.x;
                 }
             }
         }
@@ -2599,7 +2599,7 @@ void wxAuiManager::Update()
                 if ((p.frame->GetPosition() != p.floating_pos) || (p.frame->GetSize() != p.floating_size))
                 {
                     p.frame->SetSize(p.floating_pos.x, p.floating_pos.y,
-                                     p.floating_size.GetWidth(), p.floating_size.GetHeight(),
+                                     p.floating_size.x, p.floating_size.y,
                                      wxSIZE_USE_EXISTING);
                 /*
                     p.frame->SetSize(p.floating_pos.x, p.floating_pos.y,
@@ -2694,8 +2694,8 @@ void wxAuiManager::Update()
     wxSize frame_size = m_frame->GetSize();
     wxSize client_size = m_frame->GetClientSize();
 
-    wxSize minframe_size(min_size.GetWidth()+frame_size.x-client_size.GetWidth(),
-                         min_size.GetHeight()+frame_size.y-client_size.GetHeight() );
+    wxSize minframe_size(min_size.x+frame_size.x-client_size.x,
+                         min_size.y+frame_size.y-client_size.y );
 
     m_frame->SetMinSize(minframe_size);
 
@@ -2805,7 +2805,7 @@ int wxAuiManager::GetDockPixelOffset(wxAuiPaneInfo& test)
 
     wxSizer* sizer = LayoutAll(panes, docks, uiparts, true);
     wxSize client_size = m_frame->GetClientSize();
-    sizer->SetDimension(0, 0, client_size.GetWidth(), client_size.GetHeight());
+    sizer->SetDimension(0, 0, client_size.x, client_size.y);
     sizer->Layout();
 
     for (i = 0, part_count = uiparts.GetCount(); i < part_count; ++i)
@@ -2913,10 +2913,10 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
 
     wxSize layer_insert_pixels = m_frame->FromDIP(wxSize(auiLayerInsertPixels, auiLayerInsertPixels));
 
-    if (pt.x < layer_insert_offset.GetWidth() &&
-        pt.x > layer_insert_offset.GetWidth() - layer_insert_pixels.GetWidth() &&
+    if (pt.x < layer_insert_offset.x &&
+        pt.x > layer_insert_offset.x-layer_insert_pixels.x &&
         pt.y > 0 &&
-        pt.y < cli_size.GetHeight())
+        pt.y < cli_size.y)
     {
         int new_layer = wxMax(wxMax(GetMaxLayer(docks, wxAUI_DOCK_LEFT),
                                 GetMaxLayer(docks, wxAUI_DOCK_BOTTOM)),
@@ -2931,10 +2931,10 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
              Position(pt.y - GetDockPixelOffset(drop) - offset.y);
         return ProcessDockResult(target, drop);
     }
-    else if (pt.y < layer_insert_offset.GetHeight() &&
-             pt.y > layer_insert_offset.GetHeight() - layer_insert_pixels.GetHeight() &&
+    else if (pt.y < layer_insert_offset.y &&
+             pt.y > layer_insert_offset.y-layer_insert_pixels.y &&
              pt.x > 0 &&
-             pt.x < cli_size.GetWidth())
+             pt.x < cli_size.x)
     {
         int new_layer = wxMax(wxMax(GetMaxLayer(docks, wxAUI_DOCK_TOP),
                                 GetMaxLayer(docks, wxAUI_DOCK_LEFT)),
@@ -2949,10 +2949,10 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
              Position(pt.x - GetDockPixelOffset(drop) - offset.x);
         return ProcessDockResult(target, drop);
     }
-    else if (pt.x >= cli_size.GetWidth() - layer_insert_offset.GetWidth() &&
-             pt.x < cli_size.GetWidth() - layer_insert_offset.GetWidth() + layer_insert_pixels.GetWidth() &&
+    else if (pt.x >= cli_size.x - layer_insert_offset.x &&
+             pt.x < cli_size.x - layer_insert_offset.x + layer_insert_pixels.x &&
              pt.y > 0 &&
-             pt.y < cli_size.GetHeight())
+             pt.y < cli_size.y)
     {
         int new_layer = wxMax(wxMax(GetMaxLayer(docks, wxAUI_DOCK_RIGHT),
                                 GetMaxLayer(docks, wxAUI_DOCK_TOP)),
@@ -2967,10 +2967,10 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
              Position(pt.y - GetDockPixelOffset(drop) - offset.y);
         return ProcessDockResult(target, drop);
     }
-    else if (pt.y >= cli_size.GetHeight() - layer_insert_offset.GetHeight() &&
-             pt.y < cli_size.GetHeight() - layer_insert_offset.GetHeight() + layer_insert_pixels.GetHeight() &&
+    else if (pt.y >= cli_size.y - layer_insert_offset.y &&
+             pt.y < cli_size.y - layer_insert_offset.y + layer_insert_pixels.y &&
              pt.x > 0 &&
-             pt.x < cli_size.GetWidth())
+             pt.x < cli_size.x)
     {
         int new_layer = wxMax( wxMax( GetMaxLayer(docks, wxAUI_DOCK_BOTTOM),
                                       GetMaxLayer(docks, wxAUI_DOCK_LEFT)),
@@ -3008,7 +3008,7 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
         // otherwise we will try to float the pane.  Also, the pane
         // should float if being dragged over center pane windows
         if (!part->dock->fixed || part->dock->dock_direction == wxAUI_DOCK_CENTER ||
-            pt.x >= cli_size.GetWidth() || pt.x <= 0 || pt.y >= cli_size.GetHeight() || pt.y <= 0)
+            pt.x >= cli_size.x || pt.x <= 0 || pt.y >= cli_size.y || pt.y <= 0)
         {
             if (m_lastRect.IsEmpty() || m_lastRect.Contains(pt.x, pt.y ))
             {
@@ -3175,21 +3175,21 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
         {
             case wxAUI_DOCK_TOP:
                 if (pt.y >= part->rect.y &&
-                    pt.y < part->rect.y+insert_row_pixels.GetHeight())
+                    pt.y < part->rect.y+insert_row_pixels.y)
                         insert_dock_row = true;
                 break;
             case wxAUI_DOCK_BOTTOM:
-                if (pt.y > part->rect.y+part->rect.height-insert_row_pixels.GetHeight() &&
+                if (pt.y > part->rect.y+part->rect.height-insert_row_pixels.y &&
                     pt.y <= part->rect.y + part->rect.height)
                         insert_dock_row = true;
                 break;
             case wxAUI_DOCK_LEFT:
                 if (pt.x >= part->rect.x &&
-                    pt.x < part->rect.x+insert_row_pixels.GetWidth())
+                    pt.x < part->rect.x+insert_row_pixels.x)
                         insert_dock_row = true;
                 break;
             case wxAUI_DOCK_RIGHT:
-                if (pt.x > part->rect.x+part->rect.width-insert_row_pixels.GetWidth() &&
+                if (pt.x > part->rect.x+part->rect.width-insert_row_pixels.x &&
                     pt.x <= part->rect.x+part->rect.width)
                         insert_dock_row = true;
                 break;
@@ -3198,8 +3198,8 @@ bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
                 // "new row pixels" will be set to the default, but
                 // must never exceed 20% of the window size
                 wxSize new_row_pixels = m_frame->FromDIP(wxSize(auiNewRowPixels, auiNewRowPixels));
-                int new_row_pixels_x = new_row_pixels.GetWidth();
-                int new_row_pixels_y = new_row_pixels.GetHeight();
+                int new_row_pixels_x = new_row_pixels.x;
+                int new_row_pixels_y = new_row_pixels.y;
 
                 if (new_row_pixels_x > (part->rect.width*20)/100)
                     new_row_pixels_x = (part->rect.width*20)/100;
@@ -3533,7 +3533,7 @@ wxRect wxAuiManager::CalculateHintRect(wxWindow* pane_window,
 
     wxSizer* sizer = LayoutAll(panes, docks, uiparts, true);
     wxSize client_size = m_frame->GetClientSize();
-    sizer->SetDimension(0, 0, client_size.GetWidth(), client_size.GetHeight());
+    sizer->SetDimension(0, 0, client_size.x, client_size.y);
     sizer->Layout();
 
     for (i = 0, part_count = uiparts.GetCount();
@@ -4353,9 +4353,9 @@ bool wxAuiManager::DoEndResizeAction(wxMouseEvent& event)
             if (p.IsFixed())
             {
                 if (dock.IsHorizontal())
-                    dock_pixels -= p.best_size.GetWidth();
+                    dock_pixels -= p.best_size.x;
                 else
-                    dock_pixels -= p.best_size.GetHeight();
+                    dock_pixels -= p.best_size.y;
             }
             else
             {
@@ -4415,13 +4415,13 @@ bool wxAuiManager::DoEndResizeAction(wxMouseEvent& event)
             // calculate minimum size with decorations (border,caption)
             if (pane_part->orientation == wxVERTICAL)
             {
-                min_size += pane.min_size.GetHeight();
+                min_size += pane.min_size.y;
                 if (pane.HasCaption())
                     min_size += caption_size;
             }
             else
             {
-                min_size += pane.min_size.GetWidth();
+                min_size += pane.min_size.x;
             }
         }
 

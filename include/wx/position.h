@@ -37,18 +37,18 @@ public:
     wxPosition& operator-=(const wxPosition& p)
         { m_row -= p.m_row; m_column -= p.m_column; return *this; }
     wxPosition& operator+=(const wxSize& s)
-        { m_row += s.GetHeight(); m_column += s.GetWidth(); return *this; }
+        { m_row += s.y; m_column += s.x; return *this; }
     wxPosition& operator-=(const wxSize& s)
-        { m_row -= s.GetHeight(); m_column -= s.GetWidth(); return *this; }
+        { m_row -= s.y; m_column -= s.x; return *this; }
 
     wxPosition operator+(const wxPosition& p) const
         { return wxPosition(m_row + p.m_row, m_column + p.m_column); }
     wxPosition operator-(const wxPosition& p) const
         { return wxPosition(m_row - p.m_row, m_column - p.m_column); }
     wxPosition operator+(const wxSize& s) const
-        { return wxPosition(m_row + s.GetHeight(), m_column + s.GetWidth()); }
+        { return wxPosition(m_row + s.y, m_column + s.x); }
     wxPosition operator-(const wxSize& s) const
-        { return wxPosition(m_row - s.GetHeight(), m_column - s.GetWidth()); }
+        { return wxPosition(m_row - s.y, m_column - s.x); }
 
 private:
     int m_row;

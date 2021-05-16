@@ -724,8 +724,8 @@ inline wxRect2DInt::wxRect2DInt( const wxPoint2DInt& pos, const wxSize& size)
 {
     m_x = pos.m_x;
     m_y = pos.m_y;
-    m_width = size.GetWidth();
-    m_height = size.GetHeight();
+    m_width = size.x;
+    m_height = size.y;
 }
 
 inline bool wxRect2DInt::operator == (const wxRect2DInt& rect) const

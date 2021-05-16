@@ -92,7 +92,7 @@ public:
     {
         InitCommon(dc, style);
 
-        UseBuffer(area.GetWidth(), area.GetHeight());
+        UseBuffer(area.x, area.y);
     }
 
     // Blits the buffer to the dc, and detaches the dc from the buffer (so it

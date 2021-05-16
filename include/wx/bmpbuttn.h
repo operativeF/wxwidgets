@@ -91,8 +91,8 @@ public:
         DoSetBitmapMargins(x, y);
     }
 
-    int GetMarginX() const { return DoGetBitmapMargins().GetWidth(); }
-    int GetMarginY() const { return DoGetBitmapMargins().GetHeight(); }
+    int GetMarginX() const { return DoGetBitmapMargins().x; }
+    int GetMarginY() const { return DoGetBitmapMargins().y; }
 
 protected:
 #ifndef wxHAS_BUTTON_BITMAP

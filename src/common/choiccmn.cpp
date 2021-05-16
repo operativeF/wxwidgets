@@ -110,7 +110,7 @@ wxSize wxChoiceBase::DoGetBestSize() const
     if ( nItems > 0 )
     {
         wxTextMeasure txm(this);
-        best.SetWidth(txm.GetLargestStringExtent(GetStrings()).GetWidth());
+        best.x = txm.GetLargestStringExtent(GetStrings()).x;
     }
 
     return best;

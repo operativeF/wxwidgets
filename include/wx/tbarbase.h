@@ -443,7 +443,7 @@ public:
 
     virtual void SetMargins(int x, int y);
     void SetMargins(const wxSize& size)
-        { SetMargins((int) size.GetWidth(), (int) size.GetHeight()); }
+        { SetMargins((int) size.x, (int) size.y); }
     virtual void SetToolPacking(int packing)
         { m_toolPacking = packing; }
     virtual void SetToolSeparation(int separation)
@@ -468,7 +468,7 @@ public:
     // get/set the size of the bitmaps used by the toolbar: should be called
     // before adding any tools to the toolbar
     virtual void SetToolBitmapSize(const wxSize& size)
-        { m_defaultWidth = size.GetWidth(); m_defaultHeight = size.GetHeight(); }
+        { m_defaultWidth = size.x; m_defaultHeight = size.y; }
     virtual wxSize GetToolBitmapSize() const
         { return wxSize(m_defaultWidth, m_defaultHeight); }
 

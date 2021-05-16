@@ -260,20 +260,20 @@ wxSize wxSizerItem::AddBorderToSize(const wxSize& size) const
     // size, it's perfectly valid to have either min or max size specified in
     // one direction only and it shouldn't be applied in the other one then.
 
-    if ( result.GetWidth() != wxDefaultCoord )
+    if ( result.x != wxDefaultCoord )
     {
         if (m_flag & wxWEST)
-            result.SetWidth(result.GetWidth() + m_border);
+            result.x += m_border;
         if (m_flag & wxEAST)
-            result.SetWidth(result.GetWidth() + m_border);
+            result.x += m_border;
     }
 
-    if ( result.GetHeight() != wxDefaultCoord )
+    if ( result.y != wxDefaultCoord )
     {
         if (m_flag & wxNORTH)
-            result.SetHeight(result.SetHeight() + m_border);
+            result.y += m_border;
         if (m_flag & wxSOUTH)
-            result.SetHeight(result.SetHeight() + m_border);
+            result.y += m_border;
     }
 
     return result;
@@ -368,13 +368,13 @@ wxSize wxSizerItem::GetSize() const
     }
 
     if (m_flag & wxWEST)
-        ret.SetWidth(ret.GetWidth() + m_border);
+        ret.x += m_border;
     if (m_flag & wxEAST)
-        ret.SetWidth(ret.GetWidth() + m_border);
+        ret.x += m_border;
     if (m_flag & wxNORTH)
-        ret.SetHeight(ret.GetHeight() + m_border);
+        ret.y += m_border;
     if (m_flag & wxSOUTH)
-        ret.SetHeight(ret.GetHeight() + m_border);
+        ret.y += m_border;
 
     return ret;
 }
@@ -427,15 +427,15 @@ bool wxSizerItem::InformFirstDirection(int direction, int size, int availableOth
                 if ( direction == wxHORIZONTAL )
                 {
                     // Clip size so that we don't take too much
-                    if( availableOtherDir>=0 && int(size/m_ratio)-m_minSize.GetHeight()>availableOtherDir )
-                        size = int((availableOtherDir+m_minSize.GetHeight())*m_ratio);
+                    if( availableOtherDir>=0 && int(size/m_ratio)-m_minSize.y>availableOtherDir )
+                        size = int((availableOtherDir+m_minSize.y)*m_ratio);
                     m_minSize = wxSize(size,int(size/m_ratio));
                 }
                 else if( direction==wxVERTICAL )
                 {
                     // Clip size so that we don't take too much
-                    if( availableOtherDir>=0 && int(size*m_ratio)-m_minSize.GetWidth()>availableOtherDir )
-                        size = int((availableOtherDir+m_minSize.GetWidth())/m_ratio);
+                    if( availableOtherDir>=0 && int(size*m_ratio)-m_minSize.x>availableOtherDir )
+                        size = int((availableOtherDir+m_minSize.x)/m_ratio);
                     m_minSize = wxSize(int(size*m_ratio),size);
                 }
                 didUse = true;
@@ -501,10 +501,10 @@ void wxSizerItem::SetDimension( const wxPoint& pos_, const wxSize& size_ )
         {
             // add horizontal space
             if (m_flag & wxALIGN_CENTER_HORIZONTAL)
-                pos.x += (size.GetWidth() - rwidth) / 2;
+                pos.x += (size.x - rwidth) / 2;
             else if (m_flag & wxALIGN_RIGHT)
-                pos.x += (size.GetWidth() - rwidth);
-            size.SetWidth(rwidth);
+                pos.x += (size.x - rwidth);
+            size.x = rwidth;
         }
     }
 
@@ -516,26 +516,26 @@ void wxSizerItem::SetDimension( const wxPoint& pos_, const wxSize& size_ )
     if (m_flag & wxWEST)
     {
         pos.x += m_border;
-        size.SetWidth(size.GetWidth() - m_border);
+        size.x -= m_border;
     }
     if (m_flag & wxEAST)
     {
-        size.SetWidth(size.GetWidth() - m_border);
+        size.x -= m_border;
     }
     if (m_flag & wxNORTH)
     {
         pos.y += m_border;
-        size.SetHeight(size.GetHeight() - m_border);
+        size.y -= m_border;
     }
     if (m_flag & wxSOUTH)
     {
-        size.SetHeight(size.GetHeight() - m_border);
+        size.y -= m_border;
     }
 
-    if (size.GetWidth() < 0)
-        size.SetWidth(0);
-    if (size.GetHeight() < 0)
-        size.SetHeight(0);
+    if (size.x < 0)
+        size.x = 0;
+    if (size.y < 0)
+        size.y = 0;
 
     m_rect = wxRect(pos, size);
 
@@ -553,7 +553,7 @@ void wxSizerItem::SetDimension( const wxPoint& pos_, const wxSize& size_ )
             // wxSizeEvent would normally be generated and thus the
             // control wouldn't get laid out correctly here.
 #if 1
-            m_window->SetSize(pos.x, pos.y, size.GetWidth(), size.GetHeight(),
+            m_window->SetSize(pos.x, pos.y, size.x, size.y,
                               wxSIZE_ALLOW_MINUS_ONE|wxSIZE_FORCE_EVENT );
 #else
             m_window->SetSize(pos.x, pos.y, size.x, size.y,
@@ -973,7 +973,7 @@ wxSize wxSizer::ComputeFittingClientSize(wxWindow *window)
 
         // If determining the display size failed, skip the max size checks as
         // we really don't want to create windows of (0, 0) size.
-        if ( !sizeMax.GetWidth() || !sizeMax.GetHeight() )
+        if ( !sizeMax.x || !sizeMax.y )
             return size;
 
         // space for decorations and toolbars etc.
@@ -984,10 +984,10 @@ wxSize wxSizer::ComputeFittingClientSize(wxWindow *window)
         sizeMax = GetMaxClientSize(window);
     }
 
-    if ( sizeMax.GetWidth() != wxDefaultCoord && size.GetWidth() > sizeMax.GetWidth() )
-            size.SetWidth(sizeMax.GetWidth());
-    if ( sizeMax.GetHeight() != wxDefaultCoord && size.GetHeight() > sizeMax.GetHeight() )
-            size.SetHeight(sizeMax.GetHeight());
+    if ( sizeMax.x != wxDefaultCoord && size.x > sizeMax.x )
+            size.x = sizeMax.x;
+    if ( sizeMax.y != wxDefaultCoord && size.y > sizeMax.y )
+            size.y = sizeMax.y;
 
     return size;
 }
@@ -1067,10 +1067,10 @@ wxSize wxSizer::VirtualFitSize( wxWindow *window )
 
     // Limit the size if sizeMax != wxDefaultSize
 
-    if ( size.GetWidth() > sizeMax.GetWidth() && sizeMax.GetWidth() != wxDefaultCoord )
-        size.SetWidth(sizeMax.GetWidth());
-    if ( size.GetHeight() > sizeMax.GetHeight() && sizeMax.GetHeight() != wxDefaultCoord )
-        size.SetHeight(sizeMax.GetHeight());
+    if ( size.x > sizeMax.x && sizeMax.x != wxDefaultCoord )
+        size.x = sizeMax.x;
+    if ( size.y > sizeMax.y && sizeMax.y != wxDefaultCoord )
+        size.y = sizeMax.y;
 
     return size;
 }
@@ -1078,15 +1078,15 @@ wxSize wxSizer::VirtualFitSize( wxWindow *window )
 wxSize wxSizer::GetMinSize()
 {
     wxSize ret( CalcMin() );
-    if (ret.GetWidth() < m_minSize.GetWidth()) ret.SetWidth(m_minSize.GetWidth());
-    if (ret.GetHeight() < m_minSize.GetHeight()) ret.SetWidth(m_minSize.GetWidth());
+    if (ret.x < m_minSize.x) ret.x = m_minSize.x;
+    if (ret.y < m_minSize.y) ret.y = m_minSize.y;
     return ret;
 }
 
 void wxSizer::DoSetMinSize( int width, int height )
 {
-    m_minSize.SetWidth(width);
-    m_minSize.SetHeight(height);
+    m_minSize.x = width;
+    m_minSize.y = height;
 }
 
 bool wxSizer::DoSetItemMinSize( wxWindow *window, int width, int height )
@@ -1496,8 +1496,8 @@ void wxGridSizer::RepositionChildren(const wxSize& WXUNUSED(minSize))
     wxSize sz( GetSize() );
     wxPoint pt( GetPosition() );
 
-    int w = (sz.GetWidth() - (ncols - 1) * m_hgap) / ncols;
-    int h = (sz.GetHeight() - (nrows - 1) * m_vgap) / nrows;
+    int w = (sz.x - (ncols - 1) * m_hgap) / ncols;
+    int h = (sz.y - (nrows - 1) * m_vgap) / nrows;
 
     int x = pt.x;
     for (int c = 0; c < ncols; c++)
@@ -1536,8 +1536,8 @@ wxSize wxGridSizer::CalcMin()
         wxSizerItem     *item = node->GetData();
         wxSize           sz( item->CalcMin() );
 
-        w = wxMax( w, sz.GetWidth() );
-        h = wxMax( h, sz.GetHeight() );
+        w = wxMax( w, sz.x );
+        h = wxMax( h, sz.y );
 
         node = node->GetNext();
     }
@@ -1564,8 +1564,8 @@ wxSize wxGridSizer::CalcMin()
             wxSizerItem     *item = node->GetData();
             wxSize           sz( item->GetMinSizeWithBorder() );
 
-            w = wxMax( w, sz.GetWidth() );
-            h = wxMax( h, sz.GetHeight() );
+            w = wxMax( w, sz.x );
+            h = wxMax( h, sz.y );
 
             node = node->GetNext();
         }
@@ -1591,28 +1591,28 @@ void wxGridSizer::SetItemBounds( wxSizerItem *item, int x, int y, int w, int h )
     {
         if (flag & wxALIGN_CENTER_HORIZONTAL)
         {
-            pt.x = x + (w - sz.GetWidth()) / 2;
+            pt.x = x + (w - sz.x) / 2;
         }
         else if (flag & wxALIGN_RIGHT)
         {
-            pt.x = x + (w - sz.GetWidth());
+            pt.x = x + (w - sz.x);
         }
         else if (flag & wxEXPAND)
         {
-            sz.SetWidth(w);
+            sz.x = w;
         }
 
         if (flag & wxALIGN_CENTER_VERTICAL)
         {
-            pt.y = y + (h - sz.GetHeight()) / 2;
+            pt.y = y + (h - sz.y) / 2;
         }
         else if (flag & wxALIGN_BOTTOM)
         {
-            pt.y = y + (h - sz.GetHeight());
+            pt.y = y + (h - sz.y);
         }
         else if ( flag & wxEXPAND )
         {
-            sz.SetHeight(h);
+            sz.y = h;
         }
     }
 
@@ -1686,7 +1686,7 @@ void wxFlexGridSizer::RepositionChildren(const wxSize& minSize)
         }
 
         const int hrow = m_rowHeights[r];
-        int h = sz.GetHeight() - y; // max remaining height, don't overflow it
+        int h = sz.y - y; // max remaining height, don't overflow it
         if ( hrow < h )
             h = hrow;
 
@@ -1698,7 +1698,7 @@ void wxFlexGridSizer::RepositionChildren(const wxSize& minSize)
             if ( wcol == -1 )
                 continue;
 
-            int w = sz.GetWidth() - x; // max possible value, ensure we don't overflow
+            int w = sz.x - x; // max possible value, ensure we don't overflow
             if ( wcol < w )
                 w = wcol;
 
@@ -1754,10 +1754,10 @@ wxSize wxFlexGridSizer::FindWidthsAndHeights(int WXUNUSED(nrows), int ncols)
             const int row = n / ncols;
             const int col = n % ncols;
 
-            if ( sz.GetHeight() > m_rowHeights[row] )
-                m_rowHeights[row] = sz.GetHeight();
-            if ( sz.GetWidth() > m_colWidths[col] )
-                m_colWidths[col] = sz.GetWidth();
+            if ( sz.y > m_rowHeights[row] )
+                m_rowHeights[row] = sz.y;
+            if ( sz.x > m_colWidths[col] )
+                m_colWidths[col] = sz.x;
         }
     }
 
@@ -1948,7 +1948,7 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
     {
         DoAdjustForGrowables
         (
-            sz.GetWidth() - minSize.GetWidth(),
+            sz.x - minSize.x,
             m_growableCols,
             m_colWidths,
             m_growMode == wxFLEX_GROWMODE_SPECIFIED ? &m_growableColsProportions
@@ -1966,7 +1966,7 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
               i != m_children.end();
               ++i )
         {
-            didAdjustMinSize |= (*i)->InformFirstDirection(wxHORIZONTAL, m_colWidths[col], sz.GetHeight() - minSize.GetHeight());
+            didAdjustMinSize |= (*i)->InformFirstDirection(wxHORIZONTAL, m_colWidths[col], sz.y - minSize.y);
             if ( ++col == ncols )
                 col = 0;
         }
@@ -1976,7 +1976,7 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
         {
             DoAdjustForGrowables
             (
-                sz.GetWidth() - minSize.GetWidth(),
+                sz.x - minSize.x,
                 m_growableCols,
                 m_colWidths,
                 m_growMode == wxFLEX_GROWMODE_SPECIFIED ? &m_growableColsProportions
@@ -1991,7 +1991,7 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
         // should treat all rows as having proportion of 1 then
         DoAdjustForGrowables
         (
-            sz.GetHeight() - minSize.GetHeight(),
+            sz.y - minSize.y,
             m_growableRows,
             m_rowHeights,
             m_growMode == wxFLEX_GROWMODE_SPECIFIED ? &m_growableRowsProportions
@@ -2159,7 +2159,7 @@ GetMinOrRemainingSize(int orient, const wxSizerItem *item, int *remainingSpace_)
     if ( remainingSpace > 0 )
     {
         const wxSize sizeMin = item->GetMinSizeWithBorder();
-        size = orient == wxHORIZONTAL ? sizeMin.GetWidth() : sizeMin.GetHeight();
+        size = orient == wxHORIZONTAL ? sizeMin.x : sizeMin.y;
 
         if ( size >= remainingSpace )
         {
@@ -2543,20 +2543,17 @@ wxSize wxBoxSizer::CalcMin()
         else // fixed size item
         {
             // Just account for its size directly
-            // FIXME: Fix this bullshit
-            //SizeInMajorDir(minSize) += GetSizeInMajorDir(sizeMinThis);
+            SizeInMajorDir(minSize) += GetSizeInMajorDir(sizeMinThis);
         }
 
         // In the transversal direction we just need to find the maximum.
         if ( GetSizeInMinorDir(sizeMinThis) > GetSizeInMinorDir(minSize) )
-            // FIXME: Fix this bullshit.
-            //SizeInMinorDir(minSize) = GetSizeInMinorDir(sizeMinThis);
+            SizeInMinorDir(minSize) = GetSizeInMinorDir(sizeMinThis);
     }
 
     // Using the max ratio ensures that the min size is big enough for all
     // items to have their min size and satisfy the proportions among them.
-    // FIXME: Fix this bullshit.
-    //SizeInMajorDir(minSize) += (int)(maxMinSizeToProp*m_totalProportion);
+    SizeInMajorDir(minSize) += (int)(maxMinSizeToProp*m_totalProportion);
 
     return minSize;
 }
@@ -2681,15 +2678,15 @@ wxSize wxStaticBoxSizer::CalcMin()
     m_staticBox->GetBordersForSizer(&top_border, &other_border);
 
     wxSize ret( wxBoxSizer::CalcMin() );
-    ret.SetWidth(ret.GetWidth() + 2 * other_border);
+    ret.x += 2*other_border;
 
     // ensure that we're wide enough to show the static box label (there is no
     // need to check for the static box best size in vertical direction though)
-    const int boxWidth = m_staticBox->GetBestSize().GetWidth();
-    if ( ret.GetWidth() < boxWidth )
-        ret.SetWidth(boxWidth);
+    const int boxWidth = m_staticBox->GetBestSize().x;
+    if ( ret.x < boxWidth )
+        ret.x = boxWidth;
 
-    ret.SetWidth(ret.GetHeight() + other_border + top_border);
+    ret.y += other_border + top_border;
 
     return ret;
 }
@@ -2924,29 +2921,29 @@ void wxStdDialogButtonSizer::Realize()
         Add(0, 0, 1, wxEXPAND, 0);
 
         if (m_buttonAffirmative){
-            Add((wxWindow*)m_buttonAffirmative, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonAffirmative->ConvertDialogToPixels(wxSize(2, 0)).GetWidth());
+            Add((wxWindow*)m_buttonAffirmative, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonAffirmative->ConvertDialogToPixels(wxSize(2, 0)).x);
             tabOrder.Add(m_buttonAffirmative);
         }
 
         if (m_buttonNegative){
-            Add((wxWindow*)m_buttonNegative, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonNegative->ConvertDialogToPixels(wxSize(2, 0)).GetWidth());
+            Add((wxWindow*)m_buttonNegative, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonNegative->ConvertDialogToPixels(wxSize(2, 0)).x);
             tabOrder.Add(m_buttonNegative);
         }
 
         if (m_buttonCancel){
-            Add((wxWindow*)m_buttonCancel, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonCancel->ConvertDialogToPixels(wxSize(2, 0)).GetWidth());
+            Add((wxWindow*)m_buttonCancel, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonCancel->ConvertDialogToPixels(wxSize(2, 0)).x);
             tabOrder.Add(m_buttonCancel);
         }
 
         if (m_buttonApply)
         {
-            Add((wxWindow*)m_buttonApply, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonApply->ConvertDialogToPixels(wxSize(2, 0)).GetWidth());
+            Add((wxWindow*)m_buttonApply, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonApply->ConvertDialogToPixels(wxSize(2, 0)).x);
             tabOrder.Add(m_buttonApply);
         }
 
         if (m_buttonHelp)
         {
-            Add((wxWindow*)m_buttonHelp, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonHelp->ConvertDialogToPixels(wxSize(2, 0)).GetWidth());
+            Add((wxWindow*)m_buttonHelp, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonHelp->ConvertDialogToPixels(wxSize(2, 0)).x);
             tabOrder.Add(m_buttonHelp);
         }
 #else
@@ -2955,7 +2952,7 @@ void wxStdDialogButtonSizer::Realize()
         // Add(0, 0, 0, wxLEFT, 5); // Not sure what this was for but it unbalances the dialog
         if (m_buttonHelp)
         {
-            Add((wxWindow*)m_buttonHelp, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonHelp->ConvertDialogToPixels(wxSize(4, 0)).GetWidth());
+            Add((wxWindow*)m_buttonHelp, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonHelp->ConvertDialogToPixels(wxSize(4, 0)).x);
             tabOrder.Add(m_buttonHelp);
         }
 
@@ -2964,22 +2961,22 @@ void wxStdDialogButtonSizer::Realize()
 
         if (m_buttonApply)
         {
-            Add((wxWindow*)m_buttonApply, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonApply->ConvertDialogToPixels(wxSize(4, 0)).GetWidth());
+            Add((wxWindow*)m_buttonApply, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonApply->ConvertDialogToPixels(wxSize(4, 0)).x);
             tabOrder.Add(m_buttonApply);
         }
 
         if (m_buttonAffirmative){
-            Add((wxWindow*)m_buttonAffirmative, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonAffirmative->ConvertDialogToPixels(wxSize(4, 0)).GetWidth());
+            Add((wxWindow*)m_buttonAffirmative, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonAffirmative->ConvertDialogToPixels(wxSize(4, 0)).x);
             tabOrder.Add(m_buttonAffirmative);
         }
 
         if (m_buttonNegative){
-            Add((wxWindow*)m_buttonNegative, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonNegative->ConvertDialogToPixels(wxSize(4, 0)).GetWidth());
+            Add((wxWindow*)m_buttonNegative, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonNegative->ConvertDialogToPixels(wxSize(4, 0)).x);
             tabOrder.Add(m_buttonNegative);
         }
 
         if (m_buttonCancel){
-            Add((wxWindow*)m_buttonCancel, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonCancel->ConvertDialogToPixels(wxSize(4, 0)).GetWidth());
+            Add((wxWindow*)m_buttonCancel, 0, wxALIGN_CENTRE | wxLEFT | wxRIGHT, m_buttonCancel->ConvertDialogToPixels(wxSize(4, 0)).x);
             // Cancel or help should be default
             // m_buttonCancel->SetDefaultButton();
             tabOrder.Add(m_buttonCancel);

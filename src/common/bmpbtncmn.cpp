@@ -102,7 +102,7 @@ GetCloseButtonBitmap(wxWindow *win,
 {
     // size is physical here because it comes from wxArtProvider::GetSizeHint
     wxBitmap bmp;
-    bmp.Create(size.GetWidth(), size.GetHeight(), wxBITMAP_SCREEN_DEPTH);
+    bmp.Create(size.x, size.y, wxBITMAP_SCREEN_DEPTH);
     wxMemoryDC dc(bmp);
     dc.SetBackground(colBg);
     dc.Clear();

@@ -222,9 +222,9 @@ protected:
     {
         wxSize size = GetTargetSize();
         if ( w )
-            *w = size.GetWidth();
+            *w = size.x;
         if ( h )
-            *h = size.GetHeight();
+            *h = size.y;
     }
 
     // calculate the new scroll position based on scroll event type
@@ -327,9 +327,9 @@ public:
     bool IsRowVisible(size_t row) const         { return IsVisible(row); }
 
     int GetOrientationTargetSize() const override
-        { return GetTargetWindow()->GetClientSize().GetHeight(); }
+        { return GetTargetWindow()->GetClientSize().y; }
     int GetNonOrientationTargetSize() const override
-        { return GetTargetWindow()->GetClientSize().GetWidth(); }
+        { return GetTargetWindow()->GetClientSize().x; }
     wxOrientation GetOrientation() const override { return wxVERTICAL; }
 
 protected:
@@ -407,9 +407,9 @@ public:
 
 
     int GetOrientationTargetSize() const override
-        { return GetTargetWindow()->GetClientSize().GetWidth(); }
+        { return GetTargetWindow()->GetClientSize().x; }
     int GetNonOrientationTargetSize() const override
-        { return GetTargetWindow()->GetClientSize().GetHeight(); }
+        { return GetTargetWindow()->GetClientSize().y; }
     wxOrientation GetOrientation() const override   { return wxHORIZONTAL; }
 
 protected:

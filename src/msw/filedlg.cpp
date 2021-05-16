@@ -513,8 +513,8 @@ int wxFileDialog::ShowModal()
         // convert the size of the extra controls to the dialog units
         const wxSize extraSize = GetExtraControlSize();
         const LONG baseUnits = ::GetDialogBaseUnits();
-        lpdt->cx = ::MulDiv(extraSize.GetWidth(), 4, LOWORD(baseUnits));
-        lpdt->cy = ::MulDiv(extraSize.GetHeight(), 8, HIWORD(baseUnits));
+        lpdt->cx = ::MulDiv(extraSize.x, 4, LOWORD(baseUnits));
+        lpdt->cy = ::MulDiv(extraSize.y, 8, HIWORD(baseUnits));
 
         // after the DLGTEMPLATE there are 3 additional WORDs for dialog menu,
         // class and title, all three set to zeros.

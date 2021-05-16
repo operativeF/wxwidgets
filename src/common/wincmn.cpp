@@ -842,16 +842,16 @@ wxSize wxWindowBase::GetWindowBorderSize() const
 
         case wxBORDER_SIMPLE:
         case wxBORDER_STATIC:
-            size.SetWidth(wxGetMetricOrDefault(wxSYS_BORDER_X, this));
-            size.SetHeight(wxGetMetricOrDefault(wxSYS_BORDER_Y, this));
+            size.x = wxGetMetricOrDefault(wxSYS_BORDER_X, this);
+            size.y = wxGetMetricOrDefault(wxSYS_BORDER_Y, this);
             break;
 
         case wxBORDER_SUNKEN:
         case wxBORDER_RAISED:
-            size.SetWidth(wxMax(wxGetMetricOrDefault(wxSYS_EDGE_X, this),
-                           wxGetMetricOrDefault(wxSYS_BORDER_X, this)));
-            size.SetHeight(wxMax(wxGetMetricOrDefault(wxSYS_EDGE_Y, this),
-                           wxGetMetricOrDefault(wxSYS_BORDER_Y, this)));
+            size.x = wxMax(wxGetMetricOrDefault(wxSYS_EDGE_X, this),
+                           wxGetMetricOrDefault(wxSYS_BORDER_X, this));
+            size.y = wxMax(wxGetMetricOrDefault(wxSYS_EDGE_Y, this),
+                           wxGetMetricOrDefault(wxSYS_BORDER_Y, this));
             break;
 
         case wxBORDER_DOUBLE:
@@ -885,11 +885,11 @@ wxSize wxWindowBase::GetEffectiveMinSize() const
     // merge the best size with the min size, giving priority to the min size
     wxSize min = GetMinSize();
 
-    if (min.GetWidth() == wxDefaultCoord || min.GetHeight() == wxDefaultCoord)
+    if (min.x == wxDefaultCoord || min.y == wxDefaultCoord)
     {
         wxSize best = GetBestSize();
-        if (min.GetWidth() == wxDefaultCoord) min.SetWidth(best.x);
-        if (min.GetHeight() == wxDefaultCoord) min.SetHeight(best.y);
+        if (min.x == wxDefaultCoord) min.x =  best.x;
+        if (min.y == wxDefaultCoord) min.y =  best.y;
     }
 
     return min;
@@ -936,8 +936,8 @@ int wxWindowBase::GetBestHeight(int width) const
     const int height = DoGetBestClientHeight(width);
 
     return height == wxDefaultCoord
-            ? GetBestSize().GetHeight()
-            : height + DoGetBorderSize().GetHeight();
+            ? GetBestSize().y
+            : height + DoGetBorderSize().y;
 }
 
 int wxWindowBase::GetBestWidth(int height) const
@@ -951,16 +951,16 @@ int wxWindowBase::GetBestWidth(int height) const
 
 void wxWindowBase::SetMinSize(const wxSize& minSize)
 {
-    m_minWidth = minSize.GetWidth();
-    m_minHeight = minSize.GetHeight();
+    m_minWidth = minSize.x;
+    m_minHeight = minSize.y;
 
     InvalidateBestSize();
 }
 
 void wxWindowBase::SetMaxSize(const wxSize& maxSize)
 {
-    m_maxWidth = maxSize.GetWidth();
-    m_maxHeight = maxSize.GetHeight();
+    m_maxWidth = maxSize.x;
+    m_maxHeight = maxSize.y;
 
     InvalidateBestSize();
 }
@@ -990,16 +990,16 @@ wxSize wxWindowBase::ClientToWindowSize(const wxSize& size) const
 {
     const wxSize diff(GetSize() - GetClientSize());
 
-    return wxSize(size.GetWidth() == -1 ? -1 : size.x + diff.GetWidth(),
-                  size.GetHeight() == -1 ? -1 : size.y + diff.GetHeight());
+    return wxSize(size.x == -1 ? -1 : size.x + diff.x,
+                  size.y == -1 ? -1 : size.y + diff.y);
 }
 
 wxSize wxWindowBase::WindowToClientSize(const wxSize& size) const
 {
     const wxSize diff(GetSize() - GetClientSize());
 
-    return wxSize(size.GetWidth() == -1 ? -1 : size.GetWidth() - diff.GetWidth(),
-                  size.GetHeight() == -1 ? -1 : size.GetHeight() - diff.GetHeight());
+    return wxSize(size.x == -1 ? -1 : size.x - diff.x,
+                  size.y == -1 ? -1 : size.y - diff.y);
 }
 
 void wxWindowBase::WXSetInitialFittingClientSize(int flags)
@@ -1088,11 +1088,11 @@ wxSize wxWindowBase::DoGetVirtualSize() const
     // virtual size, expand it to fit (otherwise if the window is big enough we
     // wouldn't be using parts of it)
     wxSize size = GetClientSize();
-    if ( m_virtualSize.GetWidth() > size.GetWidth() )
-        size.SetWidth(m_virtualSize.GetWidth());
+    if ( m_virtualSize.x > size.x )
+        size.x = m_virtualSize.x;
 
-    if ( m_virtualSize.GetHeight() >= size.GetHeight() )
-        size.SetHeight(m_virtualSize.GetHeight());
+    if ( m_virtualSize.y >= size.y )
+        size.y = m_virtualSize.y;
 
     return size;
 }
@@ -1142,8 +1142,8 @@ bool wxWindowBase::HasScrollbar(int orient) const
     const wxSize sizeVirt = GetVirtualSize();
     const wxSize sizeClient = GetClientSize();
 
-    return orient == wxHORIZONTAL ? sizeVirt.GetWidth() > sizeClient.GetWidth()
-                                  : sizeVirt.GetHeight() > sizeClient.GetHeight();
+    return orient == wxHORIZONTAL ? sizeVirt.x > sizeClient.x
+                                  : sizeVirt.y > sizeClient.y;
 }
 
 // ----------------------------------------------------------------------------
@@ -2865,8 +2865,8 @@ wxWindowBase::FromDIP(const wxSize& sz, const wxWindowBase* w)
 
     // Take care to not scale -1 because it has a special meaning of
     // "unspecified" which should be preserved.
-    return wxSize(sz.GetWidth() == -1 ? -1 : wxMulDivInt32(sz.x, dpi.x, baseline),
-                  sz.GetHeight() == -1 ? -1 : wxMulDivInt32(sz.y, dpi.y, baseline));
+    return wxSize(sz.x == -1 ? -1 : wxMulDivInt32(sz.x, dpi.x, baseline),
+                  sz.y == -1 ? -1 : wxMulDivInt32(sz.y, dpi.y, baseline));
 }
 
 /* static */
@@ -2879,8 +2879,8 @@ wxWindowBase::ToDIP(const wxSize& sz, const wxWindowBase* w)
 
     // Take care to not scale -1 because it has a special meaning of
     // "unspecified" which should be preserved.
-    return wxSize(sz.GetWidth() == -1 ? -1 : wxMulDivInt32(sz.x, baseline, dpi.x),
-                  sz.GetHeight() == -1 ? -1 : wxMulDivInt32(sz.y, baseline, dpi.y));
+    return wxSize(sz.x == -1 ? -1 : wxMulDivInt32(sz.x, baseline, dpi.x),
+                  sz.y == -1 ? -1 : wxMulDivInt32(sz.y, baseline, dpi.y));
 }
 
 #endif // !wxHAVE_DPI_INDEPENDENT_PIXELS
@@ -2923,9 +2923,9 @@ wxPoint wxWindowBase::ConvertPixelsToDialog(const wxPoint& pt) const
 
     wxPoint pt2 = wxDefaultPosition;
     if (pt.x != wxDefaultCoord)
-        pt2.x = wxMulDivInt32(pt.x, 4, base.GetWidth());
+        pt2.x = wxMulDivInt32(pt.x, 4, base.x);
     if (pt.y != wxDefaultCoord)
-        pt2.y = wxMulDivInt32(pt.y, 8, base.GetHeight());
+        pt2.y = wxMulDivInt32(pt.y, 8, base.y);
 
     return pt2;
 }
@@ -2936,9 +2936,9 @@ wxPoint wxWindowBase::ConvertDialogToPixels(const wxPoint& pt) const
 
     wxPoint pt2 = wxDefaultPosition;
     if (pt.x != wxDefaultCoord)
-        pt2.x = wxMulDivInt32(pt.x, base.GetWidth(), 4);
+        pt2.x = wxMulDivInt32(pt.x, base.x, 4);
     if (pt.y != wxDefaultCoord)
-        pt2.y = wxMulDivInt32(pt.y, base.GetHeight(), 8);
+        pt2.y = wxMulDivInt32(pt.y, base.y, 8);
 
     return pt2;
 }
@@ -3240,7 +3240,7 @@ wxHitTest wxWindowBase::DoHitTest(wxCoord x, wxCoord y) const
     {
         // check the right and bottom borders too
         wxSize size = GetSize();
-        outside = x >= size.GetWidth() || y >= size.GetHeight();
+        outside = x >= size.x || y >= size.y;
     }
 
     return outside ? wxHT_WINDOW_OUTSIDE : wxHT_WINDOW_INSIDE;

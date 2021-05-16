@@ -551,7 +551,7 @@ public:
     bool GetToolFitsByIndex(int toolId) const;
     bool GetToolBarFits() const;
 
-    void SetMargins(const wxSize& size) { SetMargins(size.GetWidth(), size.GetWidth(), size.GetHeight(), size.GetHeight()); }
+    void SetMargins(const wxSize& size) { SetMargins(size.x, size.x, size.y, size.y); }
     void SetMargins(int x, int y) { SetMargins(x, x, y, y); }
     void SetMargins(int left, int right, int top, int bottom);
 

@@ -58,13 +58,13 @@ protected:
         wxSize sizeReal(size);
         if ( IsVertical() )
         {
-            if ( size.GetWidth() == wxDefaultCoord )
-                sizeReal.SetWidth(GetDefaultSize());
+            if ( size.x == wxDefaultCoord )
+                sizeReal.x = GetDefaultSize();
         }
         else
         {
-            if ( size.GetHeight() == wxDefaultCoord )
-                sizeReal.SetHeight(GetDefaultSize());
+            if ( size.y == wxDefaultCoord )
+                sizeReal.y = GetDefaultSize();
         }
 
         return sizeReal;
