@@ -23,7 +23,6 @@
 #include "wx/icon.h"
 #include "wx/itemid.h"
 #include "wx/weakref.h"
-#include <vector>
 #include "wx/dataobj.h"
 #include "wx/withimages.h"
 #include "wx/systhemectrl.h"
