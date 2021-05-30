@@ -25,15 +25,14 @@ public:
     wxFilterFSHandler()  = default;
     ~wxFilterFSHandler() override = default;
 
+    wxFilterFSHandler(const wxFilterFSHandler&) = delete;
+	wxFilterFSHandler& operator=(const wxFilterFSHandler&) = delete;
+
     bool CanOpen(const wxString& location) override;
     wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;
 
     wxString FindFirst(const wxString& spec, int flags = 0) override;
     wxString FindNext() override;
-
-private:
-    wxFilterFSHandler(const wxFilterFSHandler&) = delete;
-	wxFilterFSHandler& operator=(const wxFilterFSHandler&) = delete;
 };
 
 #endif // wxUSE_FILESYSTEM

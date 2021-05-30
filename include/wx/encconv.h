@@ -55,6 +55,9 @@ class WXDLLIMPEXP_BASE wxEncodingConverter : public wxObject
             wxEncodingConverter();
             ~wxEncodingConverter() override { delete[] m_Table; }
 
+            wxEncodingConverter(const wxEncodingConverter&) = delete;
+            wxEncodingConverter& operator=(const wxEncodingConverter&) = delete;
+
             // Initialize conversion. Both output or input encoding may
             // be wxFONTENCODING_UNICODE.
             //
@@ -145,9 +148,6 @@ class WXDLLIMPEXP_BASE wxEncodingConverter : public wxObject
             wchar_t *m_Table;
             bool m_UnicodeInput, m_UnicodeOutput;
             bool m_JustCopy;
-
-    wxEncodingConverter(const wxEncodingConverter&) = delete;
-	wxEncodingConverter& operator=(const wxEncodingConverter&) = delete;
 };
 
 #endif  // _WX_ENCCONV_H_

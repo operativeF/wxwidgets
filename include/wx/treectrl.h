@@ -40,6 +40,9 @@ public:
     wxTreeCtrlBase();
     ~wxTreeCtrlBase() override;
 
+    wxTreeCtrlBase(const wxTreeCtrlBase&) = delete;
+	wxTreeCtrlBase& operator=(const wxTreeCtrlBase&) = delete;
+
     // accessors
     // ---------
 
@@ -452,10 +455,6 @@ private:
     // control always gets them before they're used for dialog navigation or
     // anything else.
     void OnCharHook(wxKeyEvent& event);
-
-
-    wxTreeCtrlBase(const wxTreeCtrlBase&) = delete;
-	wxTreeCtrlBase& operator=(const wxTreeCtrlBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

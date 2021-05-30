@@ -28,6 +28,9 @@ public:
 #endif // wxHAS_SYSTEM_THEMED_CONTROL
     }
 
+    wxSystemThemedControlBase(const wxSystemThemedControlBase&) = delete;
+	wxSystemThemedControlBase& operator=(const wxSystemThemedControlBase&) = delete;
+
     bool IsSystemThemeDisabled() const
     {
 #ifdef wxHAS_SYSTEM_THEMED_CONTROL
@@ -54,9 +57,6 @@ private:
 #ifdef wxHAS_SYSTEM_THEMED_CONTROL
     bool m_systemThemeDisabled;
 #endif // wxHAS_SYSTEM_THEMED_CONTROL
-
-    wxSystemThemedControlBase(const wxSystemThemedControlBase&) = delete;
-	wxSystemThemedControlBase& operator=(const wxSystemThemedControlBase&) = delete;
 };
 
 // This class used CRTP, i.e. it should be instantiated for the real base class

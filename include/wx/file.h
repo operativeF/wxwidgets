@@ -59,6 +59,9 @@ public:
     // attach to (already opened) file
   wxFile(int lfd) { m_fd = lfd; m_lasterror = 0; }
 
+  wxFile(const wxFile&) = delete;;
+  wxFile& operator=(const wxFile&) = delete;
+
   // open/close
     // create a new file (with the default value of bOverwrite, it will fail if
     // the file already exists, otherwise it will overwrite it and succeed)
@@ -114,12 +117,6 @@ public:
   ~wxFile() { Close(); }
 
 private:
-  // copy ctor and assignment operator are private because
-  // it doesn't make sense to copy files this way:
-  // attempt to do it will provoke a compile-time error.
-  wxFile(const wxFile&);
-  wxFile& operator=(const wxFile&);
-
   // Copy the value of errno into m_lasterror if rc == -1 and return true in
   // this case (indicating that we've got an error). Otherwise return false.
   //

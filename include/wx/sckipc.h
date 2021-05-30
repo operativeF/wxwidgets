@@ -64,6 +64,9 @@ public:
 
     ~wxTCPConnection() override;
 
+    wxTCPConnection(const wxTCPConnection&) = delete;
+	wxTCPConnection& operator=(const wxTCPConnection&) = delete;
+
     // implement base class pure virtual methods
     const void *Request(const wxString& item,
                                 size_t *size = nullptr,
@@ -104,8 +107,6 @@ private:
     friend class wxTCPClient;
     friend class wxTCPEventHandler;
 
-    wxTCPConnection(const wxTCPConnection&) = delete;
-	wxTCPConnection& operator=(const wxTCPConnection&) = delete;
     wxDECLARE_DYNAMIC_CLASS(wxTCPConnection);
 };
 

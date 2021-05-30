@@ -42,8 +42,7 @@ enum class wxTaskBarButtonState
 class WXDLLIMPEXP_CORE wxThumbBarButton : public wxObject
 {
 public:
-    wxThumbBarButton()  
-    = default;
+    wxThumbBarButton() = default;
 
     wxThumbBarButton(int id,
                      const wxIcon& icon,
@@ -106,6 +105,10 @@ private:
 class WXDLLIMPEXP_CORE wxTaskBarButton
 {
 public:
+
+    wxTaskBarButton(const wxTaskBarButton&) = delete;
+	wxTaskBarButton& operator=(const wxTaskBarButton&) = delete;
+
     // Factory function, may return NULL if task bar buttons are not supported
     // by the current system.
     static wxTaskBarButton* New(wxWindow* parent);
@@ -133,10 +136,6 @@ public:
 
 protected:
     wxTaskBarButton() = default;
-
-private:
-    wxTaskBarButton(const wxTaskBarButton&) = delete;
-	wxTaskBarButton& operator=(const wxTaskBarButton&) = delete;
 };
 
 enum class wxTaskBarJumpListItemType

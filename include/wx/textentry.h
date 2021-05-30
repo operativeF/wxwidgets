@@ -32,7 +32,6 @@ public:
     wxTextEntryBase() { m_eventsBlock = 0; m_hintData = nullptr; }
     virtual ~wxTextEntryBase();
 
-
     // accessing the value
     // -------------------
 

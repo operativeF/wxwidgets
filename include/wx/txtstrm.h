@@ -42,6 +42,9 @@ public:
 
     ~wxTextInputStream();
 
+    wxTextInputStream(const wxTextInputStream&) = delete;
+	wxTextInputStream& operator=(const wxTextInputStream&) = delete;
+
     const wxInputStream& GetInputStream() const { return m_input; }
 
     // base may be between 2 and 36, inclusive, or the special 0 (= C format)
@@ -112,9 +115,6 @@ protected:
     bool   EatEOL(const wxChar &c);
     void   UngetLast(); // should be used instead of wxInputStream::Ungetch() because of Unicode issues
     wxChar NextNonSeparators();
-
-    wxTextInputStream(const wxTextInputStream&) = delete;
-	wxTextInputStream& operator=(const wxTextInputStream&) = delete;
 };
 
 enum wxEOL

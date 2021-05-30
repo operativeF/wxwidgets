@@ -56,9 +56,11 @@ class WXDLLIMPEXP_FWD_CORE wxToolBar;
 class WXDLLIMPEXP_CORE wxFrameBase : public wxTopLevelWindow
 {
 public:
-    // construction
     wxFrameBase();
     ~wxFrameBase() override;
+
+    wxFrameBase(const wxFrameBase&) = delete;
+	wxFrameBase& operator=(const wxFrameBase&) = delete;
 
     wxFrame *New(wxWindow *parent,
                  wxWindowID winid,
@@ -251,9 +253,6 @@ protected:
 #if wxUSE_MENUS
     wxDECLARE_EVENT_TABLE();
 #endif // wxUSE_MENUS
-
-    wxFrameBase(const wxFrameBase&) = delete;
-	wxFrameBase& operator=(const wxFrameBase&) = delete;
 };
 
 // include the real class declaration

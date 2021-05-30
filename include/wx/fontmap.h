@@ -58,6 +58,9 @@ public:
     // virtual dtor for any base class
     virtual ~wxFontMapperBase();
 
+    wxFontMapperBase(const wxFontMapperBase&) = delete;
+	wxFontMapperBase& operator=(const wxFontMapperBase&) = delete;
+    
     // return instance of the wxFontMapper singleton
     // wxBase code only cares that it's a wxFontMapperBase
     // In wxBase, wxFontMapper is only forward declared
@@ -168,9 +171,6 @@ private:
     static wxFontMapper *sm_instance;
 
     friend class wxFontMapperPathChanger;
-
-    wxFontMapperBase(const wxFontMapperBase&) = delete;
-	wxFontMapperBase& operator=(const wxFontMapperBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

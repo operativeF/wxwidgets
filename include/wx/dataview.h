@@ -143,13 +143,7 @@ private:
 class WXDLLIMPEXP_CORE wxDataViewItemAttr
 {
 public:
-    // ctors
-    wxDataViewItemAttr()
-    {
-        m_bold = false;
-        m_italic = false;
-        m_strikethrough = false;
-    }
+    wxDataViewItemAttr() = default;
 
     // setters
     void SetColour(const wxColour& colour) { m_colour = colour; }
@@ -177,9 +171,9 @@ public:
 
 private:
     wxColour m_colour;
-    bool     m_bold;
-    bool     m_italic;
-    bool     m_strikethrough;
+    bool     m_bold{false};
+    bool     m_italic{false};
+    bool     m_strikethrough{false};
     wxColour m_bgColour;
 };
 

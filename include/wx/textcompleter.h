@@ -31,7 +31,6 @@ public:
 
     virtual ~wxTextCompleter();
 
-private:
     wxTextCompleter(const wxTextCompleter&) = delete;
 	wxTextCompleter& operator=(const wxTextCompleter&) = delete;
 };

@@ -38,12 +38,7 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TOOLBOOK_PAGE_CHANGING, wxBook
 class WXDLLIMPEXP_CORE wxToolbook : public wxNavigationEnabled<wxBookCtrlBase>
 {
 public:
-    wxToolbook()
-    {
-        
-    m_needsRealizing = false;
-
-    }
+    wxToolbook() = default;
 
     wxToolbook(wxWindow *parent,
                wxWindowID id,
@@ -52,10 +47,6 @@ public:
                long style = 0,
                const wxString& name = wxEmptyString)
     {
-        
-    m_needsRealizing = false;
-
-
         (void)Create(parent, id, pos, size, style, name);
     }
 
@@ -116,15 +107,12 @@ protected:
     void MakeChangedEvent(wxBookCtrlEvent &event) override;
 
     // whether the toolbar needs to be realized
-    bool m_needsRealizing;
+    bool m_needsRealizing{false};
 
     // maximum bitmap size
     wxSize m_maxBitmapSize;
 
-private:
-    // common part of all constructors
-    
-
+private:    
     // returns the tool identifier for the specified page
     int PageToToolId(size_t page) const;
 

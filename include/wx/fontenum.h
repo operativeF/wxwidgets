@@ -32,6 +32,9 @@ public:
     // virtual dtor for the base class
     virtual ~wxFontEnumerator() = default;
 
+    wxFontEnumerator(const wxFontEnumerator&) = delete;
+	wxFontEnumerator& operator=(const wxFontEnumerator&) = delete;
+
     // start enumerating font facenames (either all of them or those which
     // support the given encoding) - will result in OnFacename() being
     // called for each available facename (until they are exhausted or
@@ -84,9 +87,6 @@ private:
     // helper for ports that only use UTF-8 encoding natively
     bool EnumerateEncodingsUTF8(const wxString& facename);
 #endif
-
-    wxFontEnumerator(const wxFontEnumerator&) = delete;
-	wxFontEnumerator& operator=(const wxFontEnumerator&) = delete;
 };
 
 #endif // wxUSE_FONTENUM

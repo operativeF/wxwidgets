@@ -124,7 +124,6 @@ public:
       return GetLocalFile(szFile, style).GetFullPath();
   }
 
-  // ctor & dtor
     // New constructor: one size fits all. Specify wxCONFIG_USE_LOCAL_FILE or
     // wxCONFIG_USE_GLOBAL_FILE to say which files should be used.
   wxFileConfig(const wxString& appName = wxEmptyString,
@@ -141,6 +140,9 @@ public:
 
     // dtor will save unsaved data
   ~wxFileConfig() override;
+
+  wxFileConfig(const wxFileConfig&) = delete;
+	wxFileConfig& operator=(const wxFileConfig&) = delete;
 
   // under Unix, set the umask to be used for the file creation, do nothing
   // under other systems
@@ -211,10 +213,6 @@ private:
   static wxString GetGlobalDir();
   static wxString GetLocalDir(int style = 0);
 
-  // common part of all ctors (assumes that m_str{Local|Global}File are already
-  // initialized
-  
-
   // common part of from dtor and DeleteAll
   void CleanUp();
 
@@ -255,8 +253,6 @@ private:
   bool m_isDirty;                       // if true, we have unsaved changes
   bool m_autosave;                      // if true, save changes on destruction
 
-  wxFileConfig(const wxFileConfig&) = delete;
-	wxFileConfig& operator=(const wxFileConfig&) = delete;
   wxDECLARE_ABSTRACT_CLASS(wxFileConfig);
 };
 

@@ -23,6 +23,9 @@ class WXDLLIMPEXP_CORE wxTextWrapper
 public:
     wxTextWrapper() { m_eol = false; }
 
+    wxTextWrapper(const wxTextWrapper&) = delete;
+	wxTextWrapper& operator=(const wxTextWrapper&) = delete;
+
     // win is used for getting the font, text is the text to wrap, width is the
     // max line width or -1 to disable wrapping
     void Wrap(wxWindow *win, const wxString& text, int widthMax);
@@ -61,9 +64,6 @@ private:
 
 
     bool m_eol;
-
-    wxTextWrapper(const wxTextWrapper&) = delete;
-	wxTextWrapper& operator=(const wxTextWrapper&) = delete;
 };
 
 #if wxUSE_STATTEXT

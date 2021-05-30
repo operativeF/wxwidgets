@@ -46,6 +46,8 @@ public:
         SetEventObject(generator);
     }
 
+	wxFileDirPickerEvent& operator=(const wxFileDirPickerEvent&) = delete;
+
     wxString GetPath() const { return m_path; }
     void SetPath(const wxString &p) { m_path = p; }
 
@@ -55,9 +57,8 @@ public:
 private:
     wxString m_path;
 
-    public:
-	wxFileDirPickerEvent& operator=(const wxFileDirPickerEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
+public:
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

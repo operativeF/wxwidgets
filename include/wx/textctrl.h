@@ -36,7 +36,7 @@ class WXDLLIMPEXP_FWD_CORE wxTextCtrlBase;
 
 // wxTextCoord is the line or row number (which should have been unsigned but
 // is long for backwards compatibility)
-typedef long wxTextCoord;
+using wxTextCoord = long;
 
 // ----------------------------------------------------------------------------
 // constants

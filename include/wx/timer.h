@@ -66,6 +66,8 @@ public:
 
     ~wxTimer() override;
 
+    wxTimer(const wxTimer&) = delete;
+	wxTimer& operator=(const wxTimer&) = delete;
 
     // working with the timer
     // ----------------------
@@ -115,9 +117,6 @@ protected:
     void Init();
 
     wxTimerImpl *m_impl;
-
-    wxTimer(const wxTimer&) = delete;
-	wxTimer& operator=(const wxTimer&) = delete;
 };
 
 // ----------------------------------------------------------------------------

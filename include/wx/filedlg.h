@@ -65,13 +65,10 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxFileSelectorDefaultWildcardStr[];
 class WXDLLIMPEXP_CORE wxFileDialogBase: public wxDialog
 {
 public:
-    wxFileDialogBase () { 
-    m_filterIndex = 0;
-    m_currentlySelectedFilterIndex = wxNOT_FOUND;
-    m_windowStyle = 0;
-    m_extraControl = nullptr;
-    m_extraControlCreator = nullptr;
- }
+    wxFileDialogBase()
+    {
+        m_windowStyle = 0;
+    }
 
     wxFileDialogBase(wxWindow *parent,
                      const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
@@ -83,15 +80,13 @@ public:
                      const wxSize& sz = wxDefaultSize,
                      const wxString& name = wxASCII_STR(wxFileDialogNameStr))
     {
-        
-    m_filterIndex = 0;
-    m_currentlySelectedFilterIndex = wxNOT_FOUND;
-    m_windowStyle = 0;
-    m_extraControl = nullptr;
-    m_extraControlCreator = nullptr;
+        m_windowStyle = 0;
 
         Create(parent, message, defaultDir, defaultFile, wildCard, style, pos, sz, name);
     }
+
+    wxFileDialogBase(const wxFileDialogBase&) = delete;
+	wxFileDialogBase& operator=(const wxFileDialogBase&) = delete;
 
     ~wxFileDialogBase() override = default;
 
@@ -170,7 +165,7 @@ protected:
     wxString      m_path;       // Full path
     wxString      m_fileName;
     wxString      m_wildCard;
-    int           m_filterIndex;
+    int           m_filterIndex{0};
 
     // Currently selected, but not yet necessarily accepted by the user, file.
     // This should be updated whenever the selection in the control changes by
@@ -182,9 +177,9 @@ protected:
     // type (a.k.a. filter) index. This should be updated whenever the
     // selection in the control changes by the platform-specific code to
     // provide a useful implementation of GetCurrentlySelectedFilterIndex().
-    int           m_currentlySelectedFilterIndex;
+    int           m_currentlySelectedFilterIndex{wxNOT_FOUND};
 
-    wxWindow*     m_extraControl;
+    wxWindow*     m_extraControl{nullptr};
 
     // returns true if control is created (if it already exists returns false)
     bool CreateExtraControl();
@@ -198,12 +193,9 @@ protected:
     void UpdateExtraControlUI();
 
 private:
-    ExtraControlCreatorFunction m_extraControlCreator;
+    ExtraControlCreatorFunction m_extraControlCreator{nullptr};
 
-    
     wxDECLARE_DYNAMIC_CLASS(wxFileDialogBase);
-    wxFileDialogBase(const wxFileDialogBase&) = delete;
-	wxFileDialogBase& operator=(const wxFileDialogBase&) = delete;
 };
 
 

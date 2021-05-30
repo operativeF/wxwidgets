@@ -41,6 +41,9 @@ public:
 
     ~wxTipWindow() override;
 
+    wxTipWindow(const wxTipWindow&) = delete;
+	wxTipWindow& operator=(const wxTipWindow&) = delete;
+
     // If windowPtr is not NULL the given address will be NULLed when the
     // window has closed
     void SetTipWindowPtr(wxTipWindow** windowPtr) { m_windowPtr = windowPtr; }
@@ -71,9 +74,6 @@ private:
     wxDECLARE_EVENT_TABLE();
 
     friend class wxTipWindowView;
-
-    wxTipWindow(const wxTipWindow&) = delete;
-	wxTipWindow& operator=(const wxTipWindow&) = delete;
 };
 
 #endif // wxUSE_TIPWINDOW

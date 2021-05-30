@@ -32,6 +32,9 @@ public:
     wxTextFile() = default;
     wxTextFile(const wxString& strFileName);
 
+    wxTextFile(const wxTextFile&) = delete;
+	wxTextFile& operator=(const wxTextFile&) = delete;
+
 protected:
     // implement the base class pure virtuals
     bool OnExists() const override;
@@ -42,11 +45,7 @@ protected:
     bool OnWrite(wxTextFileType typeNew, const wxMBConv& conv) override;
 
 private:
-
     wxFile m_file;
-
-    wxTextFile(const wxTextFile&) = delete;
-	wxTextFile& operator=(const wxTextFile&) = delete;
 };
 
 #else // !wxUSE_TEXTFILE
@@ -54,7 +53,7 @@ private:
 // old code relies on the static methods of wxTextFile being always available
 // and they still are available in wxTextBuffer (even if !wxUSE_TEXTBUFFER), so
 // make it possible to use them in a backwards compatible way
-typedef wxTextBuffer wxTextFile;
+using wxTextFile = wxTextBuffer;
 
 #endif // wxUSE_TEXTFILE/!wxUSE_TEXTFILE
 

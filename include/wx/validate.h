@@ -43,6 +43,8 @@ public:
     }
     ~wxValidator() override;
 
+    wxValidator& operator=(const wxValidator&) = delete;
+
     // Make a clone of this validator (or return NULL) - currently necessary
     // if you're passing a reference to a validator.
     // Another possibility is to always pass a pointer to a new validator
@@ -84,7 +86,6 @@ private:
     static bool ms_isSilent;
 
     wxDECLARE_DYNAMIC_CLASS(wxValidator);
-    wxValidator& operator=(const wxValidator&) = delete;
 };
 
 #define wxVALIDATOR_PARAM(val) val

@@ -32,6 +32,9 @@ class WXDLLIMPEXP_CORE wxToggleButtonBase : public wxAnyButton
 public:
     wxToggleButtonBase() = default;
 
+    wxToggleButtonBase(const wxToggleButtonBase&) = delete;
+	wxToggleButtonBase& operator=(const wxToggleButtonBase&) = delete;
+
     // Get/set the value
     virtual void SetValue(bool state) = 0;
     virtual bool GetValue() const = 0;
@@ -62,10 +65,6 @@ public:
                 SetValue( event.GetChecked() );
         }
     }
-
-protected:
-    wxToggleButtonBase(const wxToggleButtonBase&) = delete;
-	wxToggleButtonBase& operator=(const wxToggleButtonBase&) = delete;
 };
 
 

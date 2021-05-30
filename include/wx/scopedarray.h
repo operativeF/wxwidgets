@@ -29,6 +29,9 @@ public:
 
     ~wxScopedArray() { delete [] m_array; }
 
+    wxScopedArray(const wxScopedArray<T>&)  = delete;
+	wxScopedArray& operator=(const wxScopedArray<T>&) = delete;
+
     // test for pointer validity: defining conversion to unspecified_bool_type
     // and not more obvious bool to avoid implicit conversions to integer types
     typedef T *(wxScopedArray<T>::*unspecified_bool_type)() const;
@@ -59,9 +62,6 @@ public:
 
 private:
     T *m_array;
-
-    wxScopedArray(const wxScopedArray<T>&)  = delete;
-	wxScopedArray& operator=(const wxScopedArray<T>&) = delete;
 };
 
 // ----------------------------------------------------------------------------

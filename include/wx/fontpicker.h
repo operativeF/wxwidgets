@@ -102,9 +102,7 @@ protected:
 class WXDLLIMPEXP_CORE wxFontPickerCtrl : public wxPickerBase
 {
 public:
-     wxFontPickerCtrl()
-         
-    = default;
+     wxFontPickerCtrl() = default;
 
     ~wxFontPickerCtrl() override = default;
 
@@ -132,8 +130,6 @@ public:
                 const wxString& name = wxASCII_STR(wxFontPickerCtrlNameStr));
 
 
-public:         // public API
-
     // get the font chosen
     wxFont GetSelectedFont() const
         { return GetPickerWidget()->GetSelectedFont(); }
@@ -158,8 +154,6 @@ public:         // public API
     void SetMaxPointSize(unsigned int max);
     unsigned int GetMaxPointSize() const
         { return m_nMaxPointSize; }
-
-public:        // internal functions
 
     void UpdatePickerFromTextCtrl() override;
     void UpdateTextCtrlFromPicker() override;

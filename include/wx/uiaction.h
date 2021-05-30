@@ -24,6 +24,8 @@ public:
     wxUIActionSimulator();
     ~wxUIActionSimulator();
 
+    wxUIActionSimulator(const wxUIActionSimulator&) = delete;
+	wxUIActionSimulator& operator=(const wxUIActionSimulator&) = delete;
 
     // Mouse simulation
     // ----------------
@@ -82,9 +84,6 @@ private:
     // This pointer is allocated in the ctor and points to the
     // platform-specific implementation.
     class wxUIActionSimulatorImpl* const m_impl;
-
-    wxUIActionSimulator(const wxUIActionSimulator&) = delete;
-	wxUIActionSimulator& operator=(const wxUIActionSimulator&) = delete;
 };
 
 #endif // wxUSE_UIACTIONSIMULATOR

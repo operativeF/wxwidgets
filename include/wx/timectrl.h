@@ -92,7 +92,7 @@ public:
 
 // This class is defined mostly for compatibility and is used as the base class
 // by native wxTimePickerCtrl implementations.
-typedef wxTimePickerCtrlCommonBase<wxDateTimePickerCtrl> wxTimePickerCtrlBase;
+using wxTimePickerCtrlBase = wxTimePickerCtrlCommonBase<wxDateTimePickerCtrl>;
 
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
     #include "wx/msw/timectrl.h"

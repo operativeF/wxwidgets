@@ -49,6 +49,10 @@ WX_DEFINE_USER_EXPORTED_ARRAY_INT(wxTextFileType,
 class WXDLLIMPEXP_BASE wxTextBuffer
 {
 public:
+
+    wxTextBuffer(const wxTextBuffer&) = delete;
+    wxTextBuffer& operator=(const wxTextBuffer&) = delete;
+
     // constants and static functions
     // default type for current platform (determined at compile time)
     static const wxTextFileType typeDefault;
@@ -168,9 +172,6 @@ public:
     virtual ~wxTextBuffer();
 
 protected:
-    // ctors
-    // -----
-
     // default ctor, use Open(string)
     wxTextBuffer() { m_nCurLine = 0; m_isOpened = false; }
 
@@ -198,10 +199,6 @@ private:
 
     bool          m_isOpened; // was the buffer successfully opened the last time?
 #endif // wxUSE_TEXTBUFFER
-
-    // copy ctor/assignment operator not implemented
-    wxTextBuffer(const wxTextBuffer&);
-    wxTextBuffer& operator=(const wxTextBuffer&);
 };
 
 #endif // _WX_TEXTBUFFER_H

@@ -72,7 +72,7 @@ public:
 };
 
 // Container of multiple items.
-typedef std::vector<wxTreeListItem> wxTreeListItems;
+using wxTreeListItems = std::vector<wxTreeListItem>;
 
 // Some special "items" that can be used with InsertItem():
 extern WXDLLIMPEXP_DATA_CORE(const wxTreeListItem) wxTLI_FIRST;
@@ -101,7 +101,6 @@ public:
     // provide virtual dtor in case it's used like this in the user code.
     virtual ~wxTreeListItemComparator() = default;
 
-private:
     wxTreeListItemComparator(const wxTreeListItemComparator&) = delete;
 	wxTreeListItemComparator& operator=(const wxTreeListItemComparator&) = delete;
 };
@@ -126,11 +125,8 @@ public:
     // Constructors and such
     // ---------------------
 
-    wxTreeListCtrl() { 
-    m_view = nullptr;
-    m_model = nullptr;
-    m_comparator = nullptr;
- }
+    wxTreeListCtrl() = default;
+
     wxTreeListCtrl(wxWindow* parent,
                    wxWindowID id,
                    const wxPoint& pos = wxDefaultPosition,
@@ -138,14 +134,11 @@ public:
                    long style = wxTL_DEFAULT_STYLE,
                    const wxString& name = wxASCII_STR(wxTreeListCtrlNameStr))
     {
-        
-    m_view = nullptr;
-    m_model = nullptr;
-    m_comparator = nullptr;
-
-
         Create(parent, id, pos, size, style, name);
     }
+
+    wxTreeListCtrl(const wxTreeListCtrl&) = delete;
+	wxTreeListCtrl& operator=(const wxTreeListCtrl&) = delete;
 
     bool Create(wxWindow* parent,
                 wxWindowID id,
@@ -447,17 +440,14 @@ private:
     wxDECLARE_EVENT_TABLE();
 
 
-    wxDataViewCtrl* m_view;
-    wxTreeListModel* m_model;
+    wxDataViewCtrl* m_view{nullptr};
+    wxTreeListModel* m_model{nullptr};
 
-    wxTreeListItemComparator* m_comparator;
+    wxTreeListItemComparator* m_comparator{nullptr};
 
 
     // It calls our inherited protected wxWithImages::GetImage() method.
     friend class wxTreeListModel;
-
-    wxTreeListCtrl(const wxTreeListCtrl&) = delete;
-	wxTreeListCtrl& operator=(const wxTreeListCtrl&) = delete;
 };
 
 // ----------------------------------------------------------------------------

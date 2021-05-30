@@ -36,8 +36,7 @@ public:
     // ---------------------
 
     // Default ctor doesn't create the control, use Create() afterwards
-    wxTreebook()
-    = default;
+    wxTreebook() = default;
 
     // This ctor creates the tree book control
     wxTreebook(wxWindow *parent,

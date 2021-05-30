@@ -50,6 +50,9 @@ public:
 
     ~wxFSFile() override { delete m_Stream; }
 
+    wxFSFile(const wxFSFile&) = delete;
+	wxFSFile& operator=(const wxFSFile&) = delete;
+
     // returns stream. This doesn't give away ownership of the stream object.
     wxInputStream *GetStream() const { return m_Stream; }
 
@@ -90,8 +93,6 @@ private:
 #endif // wxUSE_DATETIME
 
     wxDECLARE_ABSTRACT_CLASS(wxFSFile);
-    wxFSFile(const wxFSFile&) = delete;
-	wxFSFile& operator=(const wxFSFile&) = delete;
 };
 
 

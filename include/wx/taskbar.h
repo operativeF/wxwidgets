@@ -43,6 +43,9 @@ class WXDLLIMPEXP_CORE wxTaskBarIconBase : public wxEvtHandler
 public:
     wxTaskBarIconBase() = default;
 
+    wxTaskBarIconBase(const wxTaskBarIconBase&) = delete;
+	wxTaskBarIconBase& operator=(const wxTaskBarIconBase&) = delete;
+
 #if defined(__WXGTK__) || defined(__WXX11__) || defined(__WXMOTIF__) || defined(__WXQT__)
     static bool IsAvailable();
 #else
@@ -74,8 +77,6 @@ private:
     void OnRightButtonDown(wxTaskBarIconEvent& event);
 
     wxDECLARE_EVENT_TABLE();
-    wxTaskBarIconBase(const wxTaskBarIconBase&) = delete;
-	wxTaskBarIconBase& operator=(const wxTaskBarIconBase&) = delete;
 };
 
 
