@@ -38,9 +38,6 @@ class WXDLLIMPEXP_CORE wxGenericTreeCtrl : public wxTreeCtrlBase,
                                       public wxScrollHelper
 {
 public:
-    // creation
-    // --------
-
     wxGenericTreeCtrl() :  wxScrollHelper(this) { Init(); }
 
     wxGenericTreeCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
@@ -57,6 +54,9 @@ public:
     }
 
     ~wxGenericTreeCtrl() override;
+
+    wxGenericTreeCtrl(const wxGenericTreeCtrl&) = delete;
+	wxGenericTreeCtrl& operator=(const wxGenericTreeCtrl&) = delete;
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
@@ -375,8 +375,6 @@ private:
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxGenericTreeCtrl);
-    wxGenericTreeCtrl(const wxGenericTreeCtrl&) = delete;
-	wxGenericTreeCtrl& operator=(const wxGenericTreeCtrl&) = delete;
 };
 
 // Also define wxTreeCtrl to be wxGenericTreeCtrl on all platforms without a

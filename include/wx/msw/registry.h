@@ -258,12 +258,12 @@ private:
   wxString FormatValue(const wxString& name) const;
 
 
-  WXHKEY        m_hKey,          // our handle
-                m_hRootKey;      // handle of the top key (i.e. StdKey)
-  wxString      m_strKey;        // key name (relative to m_hRootKey)
-  WOW64ViewMode m_viewMode;      // which view to select under WOW64
-  AccessMode    m_mode;          // valid only if key is opened
-  mutable long  m_dwLastError;   // last error (0 if none)
+  WXHKEY        m_hKey{nullptr};    // our handle
+  WXHKEY        m_hRootKey;         // handle of the top key (i.e. StdKey)
+  wxString      m_strKey;           // key name (relative to m_hRootKey)
+  WOW64ViewMode m_viewMode;         // which view to select under WOW64
+  AccessMode    m_mode;             // FIXME: Default value? valid only if key is opened
+  mutable long  m_dwLastError{0};   // last error (0 if none)
 };
 
 #endif // wxUSE_REGKEY

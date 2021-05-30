@@ -419,6 +419,8 @@ public:
     {
     }
 
+    wxSocketEvent& operator=(const wxSocketEvent&) = delete;
+
     wxSocketNotify GetSocketEvent() const { return m_event; }
     wxSocketBase *GetSocket() const
         { return (wxSocketBase *) GetEventObject(); }
@@ -428,12 +430,10 @@ public:
     wxEventCategory GetEventCategory() const override { return wxEVT_CATEGORY_SOCKET; }
 
 public:
-    wxSocketNotify  m_event;
-    void           *m_clientData;
+    wxSocketNotify  m_event; // FIXME: Default value?
+    void           *m_clientData{nullptr};
 
-    public:
-	wxSocketEvent& operator=(const wxSocketEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

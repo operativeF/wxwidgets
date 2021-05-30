@@ -311,11 +311,6 @@ wxBEGIN_EVENT_TABLE(wxGenericDirCtrl, wxControl)
   EVT_SIZE                    (wxGenericDirCtrl::OnSize)
 wxEND_EVENT_TABLE()
 
-wxGenericDirCtrl::wxGenericDirCtrl()
-{
-    Init();
-}
-
 void wxGenericDirCtrl::ExpandRoot()
 {
     ExpandDir(m_rootId); // automatically expand first level
@@ -421,18 +416,6 @@ bool wxGenericDirCtrl::Create(wxWindow *parent,
     DoResize();
 
     return true;
-}
-
-wxGenericDirCtrl::~wxGenericDirCtrl()
-= default;
-
-void wxGenericDirCtrl::Init()
-{
-    m_showHidden = false;
-    m_currentFilter = 0;
-    m_currentFilterStr.clear(); // Default: any file
-    m_treeCtrl = nullptr;
-    m_filterListCtrl = nullptr;
 }
 
 wxTreeCtrl* wxGenericDirCtrl::CreateTreeCtrl(wxWindow *parent, wxWindowID treeid, const wxPoint& pos, const wxSize& size, long treeStyle)
@@ -1241,11 +1224,6 @@ bool wxDirFilterListCtrl::Create(wxGenericDirCtrl* parent,
 {
     m_dirCtrl = parent;
     return wxChoice::Create(parent, treeid, pos, size, 0, nullptr, style);
-}
-
-void wxDirFilterListCtrl::Init()
-{
-    m_dirCtrl = nullptr;
 }
 
 void wxDirFilterListCtrl::OnSelFilter(wxCommandEvent& WXUNUSED(event))

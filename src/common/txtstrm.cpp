@@ -31,12 +31,6 @@ wxTextInputStream::wxTextInputStream(wxInputStream &s,
                                      const wxMBConv& conv)
   : m_input(s), m_separators(sep), m_conv(conv.Clone())
 {
-    m_validBegin =
-    m_validEnd = 0;
-
-#if SIZEOF_WCHAR_T == 2
-    m_lastWChar = 0;
-#endif // SIZEOF_WCHAR_T == 2
 }
 
 

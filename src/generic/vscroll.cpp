@@ -184,17 +184,6 @@ bool wxVarScrollHelperEvtHandler::ProcessEvent(wxEvent& event)
 wxVarScrollHelperBase::wxVarScrollHelperBase(wxWindow *win)
     : wxAnyScrollHelperBase(win)
 {
-#if wxUSE_MOUSEWHEEL
-    m_sumWheelRotation = 0;
-#endif
-
-    m_unitMax = 0;
-    m_sizeTotal = 0;
-    m_unitFirst = 0;
-
-    m_physicalScrolling = true;
-    m_handler = nullptr;
-
     // by default, the associated window is also the target window
     DoSetTargetWindow(win);
 }

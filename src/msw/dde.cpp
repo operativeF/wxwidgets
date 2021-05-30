@@ -487,20 +487,6 @@ bool wxDDEClient::DeleteConnection(WXHCONV conv)
 wxDDEConnection::wxDDEConnection(void *buffer, size_t size)
      : wxConnectionBase(buffer, size)
 {
-    m_client = nullptr;
-    m_server = nullptr;
-
-    m_hConv = nullptr;
-    m_sendingData = nullptr;
-}
-
-wxDDEConnection::wxDDEConnection()
-      
-{
-    m_hConv = nullptr;
-    m_sendingData = nullptr;
-    m_server = nullptr;
-    m_client = nullptr;
 }
 
 wxDDEConnection::~wxDDEConnection()

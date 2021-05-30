@@ -172,6 +172,9 @@ public:
     explicit wxDirData(const wxString& dirname);
     ~wxDirData();
 
+    wxDirData(const wxDirData&) = delete;
+	wxDirData& operator=(const wxDirData&) = delete;
+
     void SetFileSpec(const wxString& filespec) { m_filespec = filespec; }
     void SetFlags(int flags) { m_flags = flags; }
 
@@ -187,10 +190,7 @@ private:
     wxString m_dirname;
     wxString m_filespec;
 
-    int      m_flags;
-
-    wxDirData(const wxDirData&) = delete;
-	wxDirData& operator=(const wxDirData&) = delete;
+    int      m_flags{0};
 };
 
 // ============================================================================

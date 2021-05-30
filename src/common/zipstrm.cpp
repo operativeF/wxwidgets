@@ -2160,39 +2160,26 @@ size_t wxZipInputStream::OnSysRead(void *buffer, size_t size)
 #include "wx/listimpl.cpp"
 WX_DEFINE_LIST(wxZipEntryList_)
 
+// FIXME: Isn't this a bit redundant, having one take a ref
+// and another a ptr?
 wxZipOutputStream::wxZipOutputStream(wxOutputStream& stream,
                                      int level      /*=-1*/,
                                      wxMBConv& conv /*=wxConvUTF8*/)
-  : wxArchiveOutputStream(stream, conv)
+  : wxArchiveOutputStream(stream, conv),
+    m_level(level)
 {
-    Init(level);
+    m_store = new wxStoredOutputStream(*m_parent_o_stream);
+    m_initialData = new char[OUTPUT_LATENCY];
 }
 
 wxZipOutputStream::wxZipOutputStream(wxOutputStream *stream,
                                      int level      /*=-1*/,
                                      wxMBConv& conv /*=wxConvUTF8*/)
-  : wxArchiveOutputStream(stream, conv)
-{
-    Init(level);
-}
-
-void wxZipOutputStream::Init(int level)
+  : wxArchiveOutputStream(stream, conv),
+    m_level(level)
 {
     m_store = new wxStoredOutputStream(*m_parent_o_stream);
-    m_deflate = nullptr;
-    m_backlink = nullptr;
     m_initialData = new char[OUTPUT_LATENCY];
-    m_initialSize = 0;
-    m_pending = nullptr;
-    m_raw = false;
-    m_headerOffset = 0;
-    m_headerSize = 0;
-    m_entrySize = 0;
-    m_comp = nullptr;
-    m_level = level;
-    m_offsetAdjustment = wxInvalidOffset;
-    m_endrecWritten = false;
-    m_format = wxZIP_FORMAT_DEFAULT;
 }
 
 wxZipOutputStream::~wxZipOutputStream()

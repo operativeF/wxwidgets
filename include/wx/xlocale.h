@@ -154,7 +154,7 @@ public:
 
     // Default copy ctor, assignment operator and dtor are ok (or would be if
     // we didn't use (const &) = delete;
-	& operator=(const &) = delete for consistency with the
+	// & operator=(const &) = delete for consistency with the
     // xlocale version)
 
 

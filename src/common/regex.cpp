@@ -143,7 +143,7 @@ class wxRegExImpl
 {
 public:
     // ctor and dtor
-    wxRegExImpl();
+    wxRegExImpl() = default;
     ~wxRegExImpl();
 
     // return true if Compile() had been called successfully
@@ -191,11 +191,11 @@ private:
     regex_t         m_RegEx;
 
     // the subexpressions data
-    wxRegExMatches *m_Matches;
-    size_t          m_nMatches;
+    wxRegExMatches *m_Matches{nullptr};
+    size_t          m_nMatches{0};
 
     // true if m_RegEx is valid
-    bool            m_isCompiled;
+    bool            m_isCompiled{false};
 };
 
 
@@ -206,15 +206,6 @@ private:
 // ----------------------------------------------------------------------------
 // wxRegExImpl
 // ----------------------------------------------------------------------------
-
-wxRegExImpl::wxRegExImpl()
-{
-    
-        m_isCompiled = false;
-        m_Matches = nullptr;
-        m_nMatches = 0;
-    
-}
 
 wxRegExImpl::~wxRegExImpl()
 {

@@ -122,12 +122,6 @@ namespace
 // by OnLog() to (optionally) avoid logging multiple copies of the same message
 struct PreviousLogInfo
 {
-    PreviousLogInfo()
-    {
-        numRepeated = 0;
-    }
-
-
     // previous message itself
     wxString msg;
 
@@ -138,7 +132,7 @@ struct PreviousLogInfo
     wxLogRecordInfo info;
 
     // the number of times it was already repeated
-    unsigned numRepeated;
+    unsigned numRepeated{0};
 };
 
 PreviousLogInfo gs_prevLog;
@@ -158,15 +152,14 @@ class wxLogOutputBest : public wxLog
 public:
     wxLogOutputBest() = default;
 
+    wxLogOutputBest(const wxLogOutputBest&) = delete;
+	wxLogOutputBest& operator=(const wxLogOutputBest&) = delete;
+    
 protected:
     void DoLogText(const wxString& msg) override
     {
         wxMessageOutputBest().Output(msg);
     }
-
-private:
-    wxLogOutputBest(const wxLogOutputBest&) = delete;
-	wxLogOutputBest& operator=(const wxLogOutputBest&) = delete;
 };
 
 } // anonymous namespace

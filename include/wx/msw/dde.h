@@ -44,8 +44,11 @@ class WXDLLIMPEXP_BASE wxDDEConnection : public wxConnectionBase
 {
 public:
   wxDDEConnection(void *buffer, size_t size); // use external buffer
-  wxDDEConnection(); // use internal buffer
+  wxDDEConnection() = default; // use internal buffer
   ~wxDDEConnection() override;
+
+  wxDDEConnection(const wxDDEConnection&) = delete;
+	wxDDEConnection& operator=(const wxDDEConnection&) = delete;
 
   // implement base class pure virtual methods
   const void *Request(const wxString& item,
@@ -64,15 +67,13 @@ protected:
 
 public:
   wxString      m_topicName;
-  wxDDEServer*  m_server;
-  wxDDEClient*  m_client;
+  wxDDEServer*  m_server{nullptr};
+  wxDDEClient*  m_client{nullptr};
 
-  WXHCONV       m_hConv;
-  const void*   m_sendingData;
+  WXHCONV       m_hConv{nullptr};
+  const void*   m_sendingData{nullptr};
   int           m_dataSize;
 
-  wxDDEConnection(const wxDDEConnection&) = delete;
-	wxDDEConnection& operator=(const wxDDEConnection&) = delete;
   wxDECLARE_DYNAMIC_CLASS(wxDDEConnection);
 };
 

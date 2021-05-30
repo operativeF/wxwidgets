@@ -81,7 +81,7 @@ class WXDLLIMPEXP_FWD_CORE wxDirFilterListCtrl;
 class WXDLLIMPEXP_CORE wxGenericDirCtrl: public wxControl
 {
 public:
-    wxGenericDirCtrl();
+    wxGenericDirCtrl() = default;
     wxGenericDirCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
               const wxString &dir = wxASCII_STR(wxDirDialogDefaultFolderStr),
               const wxPoint& pos = wxDefaultPosition,
@@ -91,9 +91,11 @@ public:
               int defaultFilter = 0,
               const wxString& name = wxASCII_STR(wxTreeCtrlNameStr) )
     {
-        Init();
         Create(parent, id, dir, pos, size, style, filter, defaultFilter, name);
     }
+
+    wxGenericDirCtrl(const wxGenericDirCtrl&) = delete;
+	wxGenericDirCtrl& operator=(const wxGenericDirCtrl&) = delete;
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
               const wxString &dir = wxASCII_STR(wxDirDialogDefaultFolderStr),
@@ -104,9 +106,7 @@ public:
               int defaultFilter = 0,
               const wxString& name = wxASCII_STR(wxTreeCtrlNameStr) );
 
-    virtual void Init();
-
-    ~wxGenericDirCtrl() override;
+    ~wxGenericDirCtrl() override = default;
 
     void OnExpandItem(wxTreeEvent &event );
     void OnCollapseItem(wxTreeEvent &event );
@@ -197,21 +197,18 @@ private:
     void PopulateNode(wxTreeItemId node);
     wxDirItemData* GetItemData(wxTreeItemId itemId);
 
-    bool            m_showHidden;
+    bool            m_showHidden{false};
     wxTreeItemId    m_rootId;
     wxString        m_defaultPath; // Starting path
     long            m_styleEx; // Extended style
     wxString        m_filter;  // Wildcards in same format as per wxFileDialog
-    int             m_currentFilter; // The current filter index
+    int             m_currentFilter{0}; // The current filter index
     wxString        m_currentFilterStr; // Current filter string
-    wxTreeCtrl*     m_treeCtrl;
-    wxDirFilterListCtrl* m_filterListCtrl;
+    wxTreeCtrl*     m_treeCtrl{nullptr};
+    wxDirFilterListCtrl* m_filterListCtrl{nullptr};
 
-private:
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxGenericDirCtrl);
-    wxGenericDirCtrl(const wxGenericDirCtrl&) = delete;
-	wxGenericDirCtrl& operator=(const wxGenericDirCtrl&) = delete;
 };
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_DIRCTRL_SELECTIONCHANGED, wxTreeEvent );
@@ -230,22 +227,22 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_DIRCTRL_FILEACTIVATED, wxTreeE
 class WXDLLIMPEXP_CORE wxDirFilterListCtrl: public wxChoice
 {
 public:
-    wxDirFilterListCtrl() { Init(); }
+    wxDirFilterListCtrl() = default;
     wxDirFilterListCtrl(wxGenericDirCtrl* parent, wxWindowID id = wxID_ANY,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
               long style = 0)
     {
-        Init();
         Create(parent, id, pos, size, style);
     }
+
+    wxDirFilterListCtrl(const wxDirFilterListCtrl&) = delete;
+	wxDirFilterListCtrl& operator=(const wxDirFilterListCtrl&) = delete;
 
     bool Create(wxGenericDirCtrl* parent, wxWindowID id = wxID_ANY,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
               long style = 0);
-
-    void Init();
 
     ~wxDirFilterListCtrl() override = default;
 
@@ -256,12 +253,10 @@ public:
     void OnSelFilter(wxCommandEvent& event);
 
 protected:
-    wxGenericDirCtrl*    m_dirCtrl;
+    wxGenericDirCtrl*    m_dirCtrl{nullptr};
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_CLASS(wxDirFilterListCtrl);
-    wxDirFilterListCtrl(const wxDirFilterListCtrl&) = delete;
-	wxDirFilterListCtrl& operator=(const wxDirFilterListCtrl&) = delete;
 };
 
 #if !defined(__WXMSW__) && !defined(__WXMAC__)

@@ -98,8 +98,8 @@ protected:
     // wchar_t. Finally, the bytes [m_validBegin, m_validEnd) remain to be
     // decoded and returned during the next call (again, this interval can, and
     // usually will, be empty too if m_validBegin == m_validEnd).
-    size_t m_validBegin,
-           m_validEnd;
+    size_t m_validBegin{0};
+    size_t m_validEnd{0};
 
     wxMBConv *m_conv;
 
@@ -109,7 +109,7 @@ protected:
     // neither because it can't separately decoded, so we have a separate 1
     // wchar_t buffer just for this case.
 #if SIZEOF_WCHAR_T == 2
-    wchar_t m_lastWChar;
+    wchar_t m_lastWChar{0};
 #endif // SIZEOF_WCHAR_T == 2
 
     bool   EatEOL(const wxChar &c);

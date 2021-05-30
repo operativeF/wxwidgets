@@ -306,6 +306,9 @@ public:
                       wxMBConv& conv = wxConvUTF8);
     WXZIPFIX ~wxZipOutputStream() override;
 
+    wxZipOutputStream(const wxZipOutputStream&) = delete;
+	wxZipOutputStream& operator=(const wxZipOutputStream&) = delete;
+
     bool PutNextEntry(wxZipEntry *entry)        { return DoCreate(entry); }
 
     bool WXZIPFIX PutNextEntry(const wxString& name,
@@ -345,8 +348,6 @@ protected:
         { return m_offsetAdjustment != wxInvalidOffset; }
 
 private:
-    void Init(int level);
-
     bool WXZIPFIX PutNextEntry(wxArchiveEntry *entry) override;
     bool WXZIPFIX CopyEntry(wxArchiveEntry *entry, wxArchiveInputStream& stream) override;
     bool WXZIPFIX CopyArchiveMetaData(wxArchiveInputStream& stream) override;
@@ -358,26 +359,23 @@ private:
     void CreatePendingEntry();
 
     class wxStoredOutputStream *m_store;
-    class wxZlibOutputStream2 *m_deflate;
-    class wxZipStreamLink *m_backlink;
+    class wxZlibOutputStream2 *m_deflate{nullptr};
+    class wxZipStreamLink *m_backlink{nullptr};
     wxZipEntryList_ m_entries;
     char *m_initialData;
-    size_t m_initialSize;
-    wxZipEntry *m_pending;
-    bool m_raw;
-    wxFileOffset m_headerOffset;
-    size_t m_headerSize;
-    wxFileOffset m_entrySize;
+    size_t m_initialSize{0};
+    wxZipEntry *m_pending{nullptr};
+    bool m_raw{false};
+    wxFileOffset m_headerOffset{0};
+    size_t m_headerSize{0};
+    wxFileOffset m_entrySize{0};
     wxUint32 m_crcAccumulator;
-    wxOutputStream *m_comp;
+    wxOutputStream *m_comp{nullptr};
     int m_level;
-    wxFileOffset m_offsetAdjustment;
+    wxFileOffset m_offsetAdjustment{wxInvalidOffset};
     wxString m_Comment;
-    bool m_endrecWritten;
-    wxZipArchiveFormat m_format;
-
-    wxZipOutputStream(const wxZipOutputStream&) = delete;
-	wxZipOutputStream& operator=(const wxZipOutputStream&) = delete;
+    bool m_endrecWritten{false};
+    wxZipArchiveFormat m_format{wxZIP_FORMAT_DEFAULT};
 };
 
 

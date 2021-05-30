@@ -39,12 +39,10 @@
 class WXDLLIMPEXP_BASE wxSingleInstanceCheckerImpl
 {
 public:
-    wxSingleInstanceCheckerImpl()
-    {
-        // we don't care about m_wasOpened, it can't be accessed before being
-        // initialized
-        m_hMutex = nullptr;
-    }
+    wxSingleInstanceCheckerImpl() = default;
+
+    wxSingleInstanceCheckerImpl(const wxSingleInstanceCheckerImpl&) = delete;
+	wxSingleInstanceCheckerImpl& operator=(const wxSingleInstanceCheckerImpl&) = delete;
 
     bool Create(const wxString& name)
     {
@@ -83,13 +81,10 @@ public:
 
 private:
     // the result of the CreateMutex() call
-    bool m_wasOpened;
+    bool m_wasOpened{false};
 
     // the mutex handle, may be NULL
-    HANDLE m_hMutex;
-
-    wxSingleInstanceCheckerImpl(const wxSingleInstanceCheckerImpl&) = delete;
-	wxSingleInstanceCheckerImpl& operator=(const wxSingleInstanceCheckerImpl&) = delete;
+    HANDLE m_hMutex{nullptr};
 };
 
 // ============================================================================

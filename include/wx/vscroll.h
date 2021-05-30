@@ -259,28 +259,28 @@ protected:
 
 private:
     // the total number of (logical) units
-    size_t m_unitMax;
+    size_t m_unitMax{0};
 
     // the total (estimated) size
-    wxCoord m_sizeTotal;
+    wxCoord m_sizeTotal{0};
 
     // the first currently visible unit
-    size_t m_unitFirst;
+    size_t m_unitFirst{0};
 
     // the number of currently visible units (including the last, possibly only
     // partly, visible one)
-    size_t m_nUnitsVisible;
+    size_t m_nUnitsVisible{0};
 
     // accumulated mouse wheel rotation
 #if wxUSE_MOUSEWHEEL
-    int m_sumWheelRotation;
+    int m_sumWheelRotation{0};
 #endif
 
     // do child scrolling (used in DoPrepareDC())
-    bool m_physicalScrolling;
+    bool m_physicalScrolling{true};
 
     // handler injected into target window to forward some useful events to us
-    wxVarScrollHelperEvtHandler *m_handler;
+    wxVarScrollHelperEvtHandler *m_handler{nullptr};
 };
 
 
