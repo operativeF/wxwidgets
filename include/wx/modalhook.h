@@ -66,7 +66,7 @@ private:
     bool DoUnregister();
 
     // All the hooks in reverse registration order (i.e. in call order).
-    typedef std::vector<wxModalDialogHook*> Hooks;
+    using Hooks = std::vector<wxModalDialogHook *>;
     static Hooks ms_hooks;
 
     wxModalDialogHook(const wxModalDialogHook&) = delete;

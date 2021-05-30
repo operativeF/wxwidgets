@@ -490,7 +490,7 @@ struct wxArgNormalizerWchar : public wxArgNormalizer<T>
 template<typename CharType>
 struct wxArgNormalizerWithBuffer
 {
-    typedef wxScopedCharTypeBuffer<CharType> CharBuffer;
+    using CharBuffer = wxScopedCharTypeBuffer<CharType>;
 
     wxArgNormalizerWithBuffer() {}
     wxArgNormalizerWithBuffer(const CharBuffer& buf,

@@ -147,13 +147,13 @@ inline wxInt32 wxAtomicDec(wxAtomicInt32 &value) { return value.Dec(); }
 inline void wxAtomicInc(wxInt32 &value) { wxAtomicInc((wxUint32&)value); }
 inline wxInt32 wxAtomicDec(wxInt32 &value) { return wxAtomicDec((wxUint32&)value); }
 
-typedef wxInt32 wxAtomicInt32;
+using wxAtomicInt32 = wxInt32;
 
 #endif // wxNEEDS_GENERIC_ATOMIC_OPS
 
 // all the native implementations use 32 bits currently
 // for a 64 bits implementation we could use (a future) wxAtomicInt64 as
 // default type
-typedef wxAtomicInt32 wxAtomicInt;
+using wxAtomicInt = wxAtomicInt32;
 
 #endif // _WX_ATOMIC_H_

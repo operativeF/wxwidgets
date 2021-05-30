@@ -51,10 +51,10 @@ public:
     wxDEPRECATED(void SetPostBuffer(const wxString& post_buf));
 
 protected:
-    typedef wxStringToStringHashMap::iterator wxHeaderIterator;
-    typedef wxStringToStringHashMap::const_iterator wxHeaderConstIterator;
-    typedef wxStringToStringHashMap::iterator wxCookieIterator;
-    typedef wxStringToStringHashMap::const_iterator wxCookieConstIterator;
+    using wxHeaderIterator = wxStringToStringHashMap::iterator;
+    using wxHeaderConstIterator = wxStringToStringHashMap::const_iterator;
+    using wxCookieIterator = wxStringToStringHashMap::iterator;
+    using wxCookieConstIterator = wxStringToStringHashMap::const_iterator;
 
     bool BuildRequest(const wxString& path, const wxString& method);
     void SendHeaders();

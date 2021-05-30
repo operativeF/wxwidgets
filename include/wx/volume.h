@@ -136,7 +136,7 @@ private:
 #else // !wxUSE_GUI
 
 // wxFSVolume is the same thing as wxFSVolume in wxBase
-typedef wxFSVolumeBase wxFSVolume;
+using wxFSVolume = wxFSVolumeBase;
 
 #endif // wxUSE_GUI/!wxUSE_GUI
 

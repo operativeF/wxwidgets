@@ -43,8 +43,8 @@
 #include  "wx/msw/registry.h"
 
 // some registry functions don't like signed chars
-typedef unsigned char *RegString;
-typedef BYTE* RegBinary;
+using RegString = unsigned char *;
+using RegBinary = BYTE *;
 
 #ifndef KEY_WOW64_64KEY
     #define KEY_WOW64_64KEY 0x0100

@@ -12,7 +12,7 @@
 
 // wxTextPos is the position in the text (currently it's hardly used anywhere
 // and should probably be replaced with int anyhow)
-typedef long wxTextPos;
+using wxTextPos = long;
 
 class WXDLLIMPEXP_FWD_BASE wxArrayString;
 class WXDLLIMPEXP_FWD_CORE wxTextCompleter;

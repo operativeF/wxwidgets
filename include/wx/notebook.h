@@ -50,7 +50,7 @@ enum
 #define wxNB_NOPAGETHEME      0x0400
 
 
-typedef wxWindow wxNotebookPage;  // so far, any window can be a page
+using wxNotebookPage = wxWindow;  // so far, any window can be a page
 
 extern WXDLLIMPEXP_DATA_CORE(const char) wxNotebookNameStr[];
 
@@ -161,7 +161,7 @@ protected:
 // we use #define and not typedef to also keep compatibility with the existing
 // code which forward declares it)
 #define wxNotebookEvent wxBookCtrlEvent
-typedef wxBookCtrlEventFunction wxNotebookEventFunction;
+using wxNotebookEventFunction = wxBookCtrlEventFunction;
 #define wxNotebookEventHandler(func) wxBookCtrlEventHandler(func)
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_NOTEBOOK_PAGE_CHANGED, wxBookCtrlEvent );

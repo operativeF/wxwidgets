@@ -16,13 +16,13 @@
 template <typename T>
 struct wxRemoveRef
 {
-    typedef T type;
+    using type = T;
 };
 
 template <typename T>
 struct wxRemoveRef<T&>
 {
-    typedef T type;
+    using type = T;
 };
 
 // Define this for compatibility with the previous versions in which

@@ -463,7 +463,7 @@ class LexerCPP : public ILexerWithSubStyles {
 			return !arguments.empty();
 		}
 	};
-	typedef std::map<std::string, SymbolValue> SymbolTable;
+	using SymbolTable = std::map<std::string, SymbolValue>;
 	SymbolTable preprocessorDefinitionsStart;
 	OptionsCPP options;
 	OptionSetCPP osCPP;

@@ -146,7 +146,7 @@ public:
 	}
 };
 
-typedef std::map<int, Representation> MapRepresentation;
+using MapRepresentation = std::map<int, Representation>;
 
 class SpecialRepresentations {
 	MapRepresentation mapReprs;

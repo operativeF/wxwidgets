@@ -115,7 +115,7 @@ wxTarClassFactory::GetProtocols(wxStreamProtocolType type) const
 /////////////////////////////////////////////////////////////////////////////
 // tar header block
 
-typedef wxFileOffset wxTarNumber;
+using wxTarNumber = wxFileOffset;
 
 struct wxTarField { const wxChar *name; int pos; };
 

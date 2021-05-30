@@ -104,8 +104,8 @@ wxSPECIALIZE_WXSAFEARRAY_CONVERTOR_SIMPLE(double, VT_R8);
 template <>
 struct wxSafeArrayConvertor<VT_BSTR>
 {
-    typedef wxString externT;
-    typedef BSTR internT;
+    using externT = wxString;
+    using internT = BSTR;
 
     static bool ToArray(const wxString& from, BSTR& to)
     {
@@ -132,8 +132,8 @@ struct wxSafeArrayConvertor<VT_BSTR>
 template <>
 struct wxSafeArrayConvertor<VT_VARIANT>
 {
-    typedef wxVariant externT;
-    typedef VARIANT internT;
+    using externT = wxVariant;
+    using internT = VARIANT;
 
     static bool ToArray(const wxVariant& from, VARIANT& to)
     {
@@ -151,9 +151,9 @@ template <VARTYPE varType>
 class wxSafeArray : public wxSafeArrayBase
 {
 public:
-    typedef wxSafeArrayConvertor<varType> Convertor;
-    typedef typename Convertor::internT internT;
-    typedef typename Convertor::externT externT;
+    using Convertor = wxSafeArrayConvertor<varType>;
+    using internT = typename Convertor::internT;
+    using externT = typename Convertor::externT;
 
     // Default constructor.
     wxSafeArray()

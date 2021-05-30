@@ -36,7 +36,7 @@ template <class W>
 class wxCompositeWindowSettersOnly : public W
 {
 public:
-    typedef W BaseWindowClass;
+    using BaseWindowClass = W;
 
     // Override all wxWindow methods which must be forwarded to the composite
     // window parts.

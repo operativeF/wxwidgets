@@ -10,12 +10,12 @@
 #define SCI_POSITION_H
 
 // Basic signed type used throughout interface
-typedef int Sci_Position;
+using Sci_Position = int;
 
 // Unsigned variant used for ILexer::Lex and ILexer::Fold
-typedef unsigned int Sci_PositionU;
+using Sci_PositionU = unsigned int;
 
 // For Sci_CharacterRange  which is defined as long to be compatible with Win32 CHARRANGE
-typedef long Sci_PositionCR;
+using Sci_PositionCR = long;
 
 #endif

@@ -17,7 +17,7 @@
 // wxRecursionGuardFlag is used with wxRecursionGuard
 // ----------------------------------------------------------------------------
 
-typedef int wxRecursionGuardFlag;
+using wxRecursionGuardFlag = int;
 
 // ----------------------------------------------------------------------------
 // wxRecursionGuard is the simplest way to protect a function from reentrancy

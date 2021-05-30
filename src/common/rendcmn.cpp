@@ -38,7 +38,7 @@
 // wxRendererPtr: auto pointer holding the global renderer
 // ----------------------------------------------------------------------------
 
-typedef wxScopedPtr<wxRendererNative> wxRendererPtrBase;
+using wxRendererPtrBase = wxScopedPtr<wxRendererNative>;
 
 class wxRendererPtr : public wxRendererPtrBase
 {

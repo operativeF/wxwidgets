@@ -660,8 +660,8 @@ extern WXDLLIMPEXP_DATA_BASE(wxMBConv *) wxConvUI;
     typedef wxMBConvUTF16BE wxMBConvUTF16;
     typedef wxMBConvUTF32BE wxMBConvUTF32;
 #else
-    typedef wxMBConvUTF16LE wxMBConvUTF16;
-    typedef wxMBConvUTF32LE wxMBConvUTF32;
+    using wxMBConvUTF16 = wxMBConvUTF16LE;
+    using wxMBConvUTF32 = wxMBConvUTF32LE;
 #endif
 
 // ----------------------------------------------------------------------------

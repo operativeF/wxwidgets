@@ -507,6 +507,6 @@ public:
 	static wxObject* wxCreateObject();
 };
 
-typedef wxScrolled<wxWindow> wxScrolledCanvas;
+using wxScrolledCanvas = wxScrolled<wxWindow>;
 
 #endif // _WX_SCROLWIN_H_BASE_

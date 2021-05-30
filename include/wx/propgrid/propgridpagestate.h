@@ -264,8 +264,8 @@ public:
 // Preferable way to iterate through contents of wxPropertyGrid,
 // wxPropertyGridManager, and wxPropertyGridPage.
 // See wxPropertyGridInterface::GetIterator() for more information about usage.
-typedef wxPGIterator<wxPGProperty, wxPropertyGridPageState> wxPropertyGridIterator;
-typedef wxPGIterator<const wxPGProperty, const wxPropertyGridPageState> wxPropertyGridConstIterator;
+using wxPropertyGridIterator = wxPGIterator<wxPGProperty, wxPropertyGridPageState>;
+using wxPropertyGridConstIterator = wxPGIterator<const wxPGProperty, const wxPropertyGridPageState>;
 
 // -----------------------------------------------------------------------
 

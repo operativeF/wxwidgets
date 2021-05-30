@@ -190,7 +190,7 @@ template <class W>
 class wxNavigationEnabled : public W
 {
 public:
-    typedef W BaseWindowClass;
+    using BaseWindowClass = W;
 
     wxNavigationEnabled()
     {

@@ -47,7 +47,7 @@ private:
 };
 
 // Add this typedef as long as the generic version is the only one available
-typedef wxGenericCredentialEntryDialog wxCredentialEntryDialog;
+using wxCredentialEntryDialog = wxGenericCredentialEntryDialog;
 
 #endif // wxUSE_CREDENTIALDLG
 

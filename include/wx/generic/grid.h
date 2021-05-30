@@ -236,7 +236,7 @@ protected:
 };
 
 // Smart pointer to wxGridCellRenderer, calling DecRef() on it automatically.
-typedef wxObjectDataPtr<wxGridCellRenderer> wxGridCellRendererPtr;
+using wxGridCellRendererPtr = wxObjectDataPtr<wxGridCellRenderer>;
 
 
 // ----------------------------------------------------------------------------
@@ -527,7 +527,7 @@ protected:
 };
 
 // Smart pointer to wxGridCellEditor, calling DecRef() on it automatically.
-typedef wxObjectDataPtr<wxGridCellEditor> wxGridCellEditorPtr;
+using wxGridCellEditorPtr = wxObjectDataPtr<wxGridCellEditor>;
 
 // Base class for editors that can be only activated and not edited normally.
 class wxGridCellActivatableEditor : public wxGridCellEditor
@@ -864,7 +864,7 @@ private:
 };
 
 // Smart pointer to wxGridCellAttr, calling DecRef() on it automatically.
-typedef wxObjectDataPtr<wxGridCellAttr> wxGridCellAttrPtr;
+using wxGridCellAttrPtr = wxObjectDataPtr<wxGridCellAttr>;
 
 // ----------------------------------------------------------------------------
 // wxGridCellAttrProvider: class used by wxGridTableBase to retrieve/store the
@@ -1070,7 +1070,7 @@ private:
     int m_rightCol{-1};
 };
 
-typedef std::vector<wxGridBlockCoords> wxGridBlockCoordsVector;
+using wxGridBlockCoordsVector = std::vector<wxGridBlockCoords>;
 
 // ----------------------------------------------------------------------------
 // wxGridBlockDiffResult: The helper struct uses as a result type for difference
@@ -1090,17 +1090,17 @@ struct wxGridBlockDiffResult
 
 class wxGridBlocks
 {
-    typedef wxGridBlockCoordsVector::const_iterator iterator_impl;
+    using iterator_impl = wxGridBlockCoordsVector::const_iterator;
 
 public:
     class iterator
     {
     public:
-        typedef std::forward_iterator_tag iterator_category;
-        typedef ptrdiff_t difference_type;
-        typedef wxGridBlockCoords value_type;
-        typedef const value_type& reference;
-        typedef const value_type* pointer;
+        using iterator_category = std::forward_iterator_tag;
+        using difference_type = ptrdiff_t;
+        using value_type = wxGridBlockCoords;
+        using reference = const value_type &;
+        using pointer = const value_type *;
 
         iterator()  = default;
 

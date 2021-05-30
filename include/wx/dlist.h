@@ -24,11 +24,11 @@ class wxDList: public std::list<T*>
 {
 private:
     bool m_destroy{ false };
-    typedef std::list<T*> BaseListType;
-    typedef wxDList<T> ListType;
+    using BaseListType = std::list<T *>;
+    using ListType = wxDList<T>;
 
 public:
-    typedef typename BaseListType::iterator iterator;
+    using iterator = typename BaseListType::iterator;
 
     class compatibility_iterator
     {

@@ -283,7 +283,7 @@ protected:
     wxFSWatchEntries m_watches;
 
     // Contains the watches which had been removed but are still pending.
-    typedef std::vector< wxSharedPtr<wxFSWatchEntryMSW> > Watches;
+    using Watches = std::vector<wxSharedPtr<wxFSWatchEntryMSW>>;
     Watches m_removedWatches;
 };
 

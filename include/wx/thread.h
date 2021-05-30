@@ -442,14 +442,14 @@ private:
 #ifdef __VMS
    typedef unsigned long long wxThreadIdType;
 #else
-   typedef unsigned long wxThreadIdType;
+   using wxThreadIdType = unsigned long;
 #endif
 
 class WXDLLIMPEXP_BASE wxThread
 {
 public:
     // the return type for the thread function
-    typedef void *ExitCode;
+    using ExitCode = void *;
 
     // static functions
         // Returns the wxThread object for the calling thread. NULL is returned

@@ -118,7 +118,7 @@ public:
 // we use #define and not typedef to also keep compatibility with the existing
 // code which forward declares it)
 #define wxListbookEvent wxBookCtrlEvent
-typedef wxBookCtrlEventFunction wxListbookEventFunction;
+using wxListbookEventFunction = wxBookCtrlEventFunction;
 #define wxListbookEventHandler(func) wxBookCtrlEventHandler(func)
 
 #define EVT_LISTBOOK_PAGE_CHANGED(winid, fn) \

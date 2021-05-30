@@ -22,7 +22,7 @@ template <class T>
 class wxScopedArray
 {
 public:
-    typedef T element_type;
+    using element_type = T;
 
     explicit wxScopedArray(T * array = nullptr) : m_array(array) { }
     explicit wxScopedArray(size_t count) : m_array(new T[count]) { }

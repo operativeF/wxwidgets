@@ -15,7 +15,7 @@
 
 namespace Sci {
 
-typedef int Position;
+using Position = int;
 
 // A later version (4.x) of this file may:
 //#if defined(SCI_LARGE_FILE_SUPPORT)

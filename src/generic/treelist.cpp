@@ -291,7 +291,7 @@ private:
 class wxTreeListModel : public wxDataViewModel
 {
 public:
-    typedef wxTreeListModelNode Node;
+    using Node = wxTreeListModelNode;
 
     // Unlike a general wxDataViewModel, this model can only be used with a
     // single control at once. The main reason for this is that we need to

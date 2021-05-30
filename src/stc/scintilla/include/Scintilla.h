@@ -37,9 +37,9 @@ int Scintilla_LinkLexers(void);
 #endif
 
 // Define uptr_t, an unsigned integer type large enough to hold a pointer.
-typedef uintptr_t uptr_t;
+using uptr_t = uintptr_t;
 // Define sptr_t, a signed integer large enough to hold a pointer.
-typedef intptr_t sptr_t;
+using sptr_t = intptr_t;
 
 #include "Sci_Position.h"
 
@@ -1119,7 +1119,7 @@ struct Sci_TextToFind {
 	struct Sci_CharacterRange chrgText;
 };
 
-typedef void *Sci_SurfaceID;
+using Sci_SurfaceID = void *;
 
 struct Sci_Rectangle {
 	int left;

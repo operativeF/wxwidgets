@@ -19,7 +19,7 @@ class WXDLLIMPEXP_CORE wxDataFormat
 {
 public:
     // the clipboard formats under Win32 are WORD's
-    typedef unsigned short NativeFormat;
+    using NativeFormat = unsigned short;
 
     wxDataFormat(NativeFormat format = wxDF_INVALID) { m_format = format; }
 

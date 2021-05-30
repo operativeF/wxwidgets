@@ -16,10 +16,10 @@ namespace Scintilla {
 
 template <typename T>
 class OptionSet {
-	typedef T Target;
-	typedef bool T::*plcob;
-	typedef int T::*plcoi;
-	typedef std::string T::*plcos;
+	using Target = T;
+	using plcob = bool T::*;
+	using plcoi = int T::*;
+	using plcos = std::string T::*;
 	struct Option {
 		int opType{SC_TYPE_BOOLEAN};
 		union {
@@ -69,7 +69,7 @@ class OptionSet {
 			return false;
 		}
 	};
-	typedef std::map<std::string, Option> OptionMap;
+	using OptionMap = std::map<std::string, Option>;
 	OptionMap nameToDef;
 	std::string names;
 	std::string wordLists;

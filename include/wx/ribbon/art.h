@@ -953,7 +953,7 @@ protected:
 };
 
 #if defined(__WXMSW__)
-typedef wxRibbonMSWArtProvider wxRibbonDefaultArtProvider;
+using wxRibbonDefaultArtProvider = wxRibbonMSWArtProvider;
 #elif defined(__WXOSX_COCOA__) || \
       defined(__WXOSX_IPHONE__)
 // TODO: Once implemented, change typedef to OSX

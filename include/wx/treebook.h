@@ -20,7 +20,7 @@
 #include "wx/treebase.h"        // for wxTreeItemId
 #include <vector>
 
-typedef wxWindow wxTreebookPage;
+using wxTreebookPage = wxWindow;
 
 class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;
 class WXDLLIMPEXP_FWD_CORE wxTreeEvent;
@@ -227,7 +227,7 @@ public:
 
 // wxTreebookEvent is obsolete and defined for compatibility only
 #define wxTreebookEvent wxBookCtrlEvent
-typedef wxBookCtrlEventFunction wxTreebookEventFunction;
+using wxTreebookEventFunction = wxBookCtrlEventFunction;
 #define wxTreebookEventHandler(func) wxBookCtrlEventHandler(func)
 
 

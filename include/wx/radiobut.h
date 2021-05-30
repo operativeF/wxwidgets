@@ -28,7 +28,7 @@ class WXDLLIMPEXP_FWD_CORE wxRadioButton;
 
     typedef wxCheckBox wxRadioButtonBaseBase;
 #else
-    typedef wxControl wxRadioButtonBaseBase;
+    using wxRadioButtonBaseBase = wxControl;
 #endif
 
 class WXDLLIMPEXP_CORE wxRadioButtonBase : public wxRadioButtonBaseBase

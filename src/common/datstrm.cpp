@@ -190,7 +190,7 @@ template <class T>
 static
 void DoReadLL(T *buffer, size_t size, wxInputStream *input, bool be_order)
 {
-    typedef T DataType;
+    using DataType = T;
     unsigned char *pchBuffer = new unsigned char[size * 8];
     // TODO: Check for overflow when size is of type uint and is > than 512m
     input->Read(pchBuffer, size * 8);
@@ -226,7 +226,7 @@ void DoReadLL(T *buffer, size_t size, wxInputStream *input, bool be_order)
 template <class T>
 static void DoWriteLL(const T *buffer, size_t size, wxOutputStream *output, bool be_order)
 {
-    typedef T DataType;
+    using DataType = T;
     unsigned char *pchBuffer = new unsigned char[size * 8];
     size_t idx_base = 0;
     if ( be_order )
@@ -273,7 +273,7 @@ template <class T>
 static
 void DoReadI64(T *buffer, size_t size, wxInputStream *input, bool be_order)
 {
-    typedef T DataType;
+    using DataType = T;
     unsigned char *pchBuffer = (unsigned char*) buffer;
     // TODO: Check for overflow when size is of type uint and is > than 512m
     input->Read(pchBuffer, size * 8);
@@ -299,7 +299,7 @@ template <class T>
 static
 void DoWriteI64(const T *buffer, size_t size, wxOutputStream *output, bool be_order)
 {
-  typedef T DataType;
+  using DataType = T;
   if ( be_order )
   {
     for ( size_t i = 0; i < size; i++ )

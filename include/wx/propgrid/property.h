@@ -306,7 +306,7 @@ public:
         return wxVariant();
     }
 
-    typedef wxPGHashMapS2P::const_iterator const_iterator;
+    using const_iterator = wxPGHashMapS2P::const_iterator;
     const_iterator StartIteration() const
     {
         return m_map.begin();
@@ -649,7 +649,7 @@ protected:
 };
 
 
-typedef void* wxPGChoicesId;
+using wxPGChoicesId = void *;
 
 class WXDLLIMPEXP_PROPGRID wxPGChoicesData : public wxObjectRefData
 {
@@ -703,7 +703,7 @@ protected:
 class WXDLLIMPEXP_PROPGRID wxPGChoices
 {
 public:
-    typedef long ValArrItem;
+    using ValArrItem = long;
 
     // Default constructor.
     wxPGChoices()
@@ -982,7 +982,7 @@ class WXDLLIMPEXP_PROPGRID wxPGProperty : public wxObject
 
     wxDECLARE_ABSTRACT_CLASS(wxPGProperty);
 public:
-    typedef wxUint32 FlagType;
+    using FlagType = wxUint32;
 
     // Virtual destructor.
     // It is customary for derived properties to implement this.

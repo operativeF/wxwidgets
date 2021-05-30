@@ -21,7 +21,7 @@ template <typename T>
 class wxItemId
 {
 public:
-    typedef T Type;
+    using Type = T;
 
     // This ctor is implicit which is fine for non-void* types, but if you use
     // this class with void* you're strongly advised to make the derived class

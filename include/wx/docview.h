@@ -56,9 +56,9 @@ enum
 
 #define wxMAX_FILE_HISTORY 9
 
-typedef std::vector<wxDocument*> wxDocVector;
-typedef std::vector<wxView*> wxViewVector;
-typedef std::vector<wxDocTemplate*> wxDocTemplateVector;
+using wxDocVector = std::vector<wxDocument *>;
+using wxViewVector = std::vector<wxView *>;
+using wxDocTemplateVector = std::vector<wxDocTemplate *>;
 
 class WXDLLIMPEXP_CORE wxDocument : public wxEvtHandler
 {
@@ -199,7 +199,7 @@ protected:
 
 private:
     // list of all documents whose m_documentParent is this one
-    typedef wxDList<wxDocument> DocsList;
+    using DocsList = wxDList<wxDocument>;
     DocsList m_childDocuments;
 
     wxDECLARE_ABSTRACT_CLASS(wxDocument);
@@ -659,7 +659,7 @@ class wxDocChildFrameAny : public ChildFrame,
                            public wxDocChildFrameAnyBase
 {
 public:
-    typedef ChildFrame BaseClass;
+    using BaseClass = ChildFrame;
 
     // default ctor, use Create after it
     wxDocChildFrameAny() = default;
@@ -732,7 +732,7 @@ private:
 // otherwise we could simply typedef it
 // ----------------------------------------------------------------------------
 
-typedef wxDocChildFrameAny<wxFrame, wxFrame> wxDocChildFrameBase;
+using wxDocChildFrameBase = wxDocChildFrameAny<wxFrame, wxFrame>;
 
 class WXDLLIMPEXP_CORE wxDocChildFrame : public wxDocChildFrameBase
 {
@@ -890,7 +890,7 @@ private:
 	wxDocParentFrameAny& operator=(const wxDocParentFrameAny&) = delete;
 };
 
-typedef wxDocParentFrameAny<wxFrame> wxDocParentFrameBase;
+using wxDocParentFrameBase = wxDocParentFrameAny<wxFrame>;
 
 class WXDLLIMPEXP_CORE wxDocParentFrame : public wxDocParentFrameBase
 {

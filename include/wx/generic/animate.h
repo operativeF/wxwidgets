@@ -131,7 +131,7 @@ protected:
                                       // on the screen
 
 private:
-    typedef wxAnimationCtrlBase base_type;
+    using base_type = wxAnimationCtrlBase;
     wxDECLARE_DYNAMIC_CLASS(wxGenericAnimationCtrl);
     wxDECLARE_EVENT_TABLE();
 };

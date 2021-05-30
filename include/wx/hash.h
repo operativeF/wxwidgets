@@ -81,7 +81,7 @@ class WXDLLIMPEXP_BASE wxHashTableBase
 {
     friend class WXDLLIMPEXP_FWD_BASE wxHashTableBase_Node;
 public:
-    typedef wxHashTableBase_Node Node;
+    using Node = wxHashTableBase_Node;
 
     wxHashTableBase();
     virtual ~wxHashTableBase() = default;
@@ -177,10 +177,10 @@ public:
 // order to publicly inherit from wxObject
 class WXDLLIMPEXP_BASE wxHashTable : public wxHashTableBase
 {
-    typedef wxHashTableBase hash;
+    using hash = wxHashTableBase;
 public:
-    typedef wxHashTable_Node Node;
-    typedef wxHashTable_Node* compatibility_iterator;
+    using Node = wxHashTable_Node;
+    using compatibility_iterator = wxHashTable_Node *;
 public:
     wxHashTable( wxKeyType keyType = wxKEY_INTEGER,
                  size_t size = wxHASH_SIZE_DEFAULT )

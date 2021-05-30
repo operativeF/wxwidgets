@@ -182,7 +182,7 @@ private:
 // wxObjectRefData: ref counted data meant to be stored in wxObject
 // ----------------------------------------------------------------------------
 
-typedef wxRefCounter wxObjectRefData;
+using wxObjectRefData = wxRefCounter;
 
 // ----------------------------------------------------------------------------
 // wxObjectDataPtr: helper class to avoid memleaks because of missing calls
@@ -193,7 +193,7 @@ template <class T>
 class wxObjectDataPtr
 {
 public:
-    typedef T element_type;
+    using element_type = T;
 
     explicit wxObjectDataPtr(T *ptr = nullptr) : m_ptr(ptr) {}
 

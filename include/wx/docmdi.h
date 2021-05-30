@@ -26,8 +26,7 @@
 // An MDI document parent frame
 // ----------------------------------------------------------------------------
 
-typedef
-  wxDocParentFrameAny<wxMDIParentFrame> wxDocMDIParentFrameBase;
+using wxDocMDIParentFrameBase = wxDocParentFrameAny<wxMDIParentFrame>;
 
 class WXDLLIMPEXP_CORE wxDocMDIParentFrame : public wxDocMDIParentFrameBase
 {
@@ -57,8 +56,7 @@ private:
 // An MDI document child frame
 // ----------------------------------------------------------------------------
 
-typedef
-  wxDocChildFrameAny<wxMDIChildFrame, wxMDIParentFrame> wxDocMDIChildFrameBase;
+using wxDocMDIChildFrameBase = wxDocChildFrameAny<wxMDIChildFrame, wxMDIParentFrame>;
 
 class WXDLLIMPEXP_CORE wxDocMDIChildFrame : public wxDocMDIChildFrameBase
 {

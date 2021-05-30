@@ -66,7 +66,7 @@ template <typename T>
 class wxScopedCharTypeBuffer
 {
 public:
-    typedef T CharType;
+    using CharType = T;
 
     wxScopedCharTypeBuffer()
     {
@@ -238,8 +238,8 @@ protected:
     Data *m_data;
 };
 
-typedef wxScopedCharTypeBuffer<char> wxScopedCharBuffer;
-typedef wxScopedCharTypeBuffer<wchar_t> wxScopedWCharBuffer;
+using wxScopedCharBuffer = wxScopedCharTypeBuffer<char>;
+using wxScopedWCharBuffer = wxScopedCharTypeBuffer<wchar_t>;
 
 
 // this buffer class always stores data in "owned" (persistent) manner
@@ -247,10 +247,10 @@ template <typename T>
 class wxCharTypeBuffer : public wxScopedCharTypeBuffer<T>
 {
 protected:
-    typedef typename wxScopedCharTypeBuffer<T>::Data Data;
+    using Data = typename wxScopedCharTypeBuffer<T>::Data;
 
 public:
-    typedef T CharType;
+    using CharType = T;
 
     wxCharTypeBuffer(const CharType *str = nullptr, size_t len = wxNO_LEN)
     {
@@ -357,8 +357,8 @@ public:
 class wxCharBuffer : public wxCharTypeBuffer<char>
 {
 public:
-    typedef wxCharTypeBuffer<char> wxCharTypeBufferBase;
-    typedef wxScopedCharTypeBuffer<char> wxScopedCharTypeBufferBase;
+    using wxCharTypeBufferBase = wxCharTypeBuffer<char>;
+    using wxScopedCharTypeBufferBase = wxScopedCharTypeBuffer<char>;
 
     wxCharBuffer(const wxCharTypeBufferBase& buf)
         : wxCharTypeBufferBase(buf) {}
@@ -374,8 +374,8 @@ public:
 class wxWCharBuffer : public wxCharTypeBuffer<wchar_t>
 {
 public:
-    typedef wxCharTypeBuffer<wchar_t> wxCharTypeBufferBase;
-    typedef wxScopedCharTypeBuffer<wchar_t> wxScopedCharTypeBufferBase;
+    using wxCharTypeBufferBase = wxCharTypeBuffer<wchar_t>;
+    using wxScopedCharTypeBufferBase = wxScopedCharTypeBuffer<wchar_t>;
 
     wxWCharBuffer(const wxCharTypeBufferBase& buf)
         : wxCharTypeBufferBase(buf) {}
@@ -393,7 +393,7 @@ template <typename T>
 class wxWritableCharTypeBuffer : public wxCharTypeBuffer<T>
 {
 public:
-    typedef typename wxScopedCharTypeBuffer<T>::CharType CharType;
+    using CharType = typename wxScopedCharTypeBuffer<T>::CharType;
 
     wxWritableCharTypeBuffer(const wxScopedCharTypeBuffer<T>& src)
         : wxCharTypeBuffer<T>(src) {}
@@ -407,8 +407,8 @@ public:
     operator CharType*() { return this->data(); }
 };
 
-typedef wxWritableCharTypeBuffer<char> wxWritableCharBuffer;
-typedef wxWritableCharTypeBuffer<wchar_t> wxWritableWCharBuffer;
+using wxWritableCharBuffer = wxWritableCharTypeBuffer<char>;
+using wxWritableWCharBuffer = wxWritableCharTypeBuffer<wchar_t>;
 
 
 #define wxWxCharBuffer wxWCharBuffer

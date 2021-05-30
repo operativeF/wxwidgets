@@ -38,9 +38,9 @@
 namespace
 {
 
-typedef WIN32_FIND_DATA FIND_STRUCT;
-typedef HANDLE FIND_DATA;
-typedef DWORD FIND_ATTR;
+using FIND_STRUCT = WIN32_FIND_DATA;
+using FIND_DATA = HANDLE;
+using FIND_ATTR = DWORD;
 
 inline FIND_DATA InitFindData()
 {

@@ -29,7 +29,7 @@ class SparseState {
 		}
 	};
 	int positionFirst;
-	typedef std::vector<State> stateVector;
+	using stateVector = std::vector<State>;
 	stateVector states;
 
 	typename stateVector::iterator Find(int position) {

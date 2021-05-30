@@ -15,8 +15,8 @@
 #include <string>
 
 #if SIZEOF_WCHAR_T == 2
-typedef wxWCharBuffer wxU16CharBuffer;
-typedef wxScopedWCharBuffer wxScopedU16CharBuffer;
+using wxU16CharBuffer = wxWCharBuffer;
+using wxScopedU16CharBuffer = wxScopedWCharBuffer;
 #else
 typedef wxCharTypeBuffer<wxChar16> wxU16CharBuffer;
 typedef wxScopedCharTypeBuffer<wxChar16> wxScopedU16CharBuffer;
@@ -26,8 +26,8 @@ typedef wxScopedCharTypeBuffer<wxChar16> wxScopedU16CharBuffer;
 typedef wxWCharBuffer wxU32CharBuffer;
 typedef wxScopedWCharBuffer wxScopedU32CharBuffer;
 #else
-typedef wxCharTypeBuffer<wxChar32> wxU32CharBuffer;
-typedef wxScopedCharTypeBuffer<wxChar32> wxScopedU32CharBuffer;
+using wxU32CharBuffer = wxCharTypeBuffer<wxChar32>;
+using wxScopedU32CharBuffer = wxScopedCharTypeBuffer<wxChar32>;
 #endif
 
 #ifdef __VISUALC__

@@ -130,15 +130,15 @@ public:
     class WXDLLIMPEXP_BASE const_iterator
     {
     public:
-        typedef int difference_type;
-        typedef wxCmdLineArg value_type;
-        typedef const wxCmdLineArg* pointer;
-        typedef const wxCmdLineArg& reference;
+        using difference_type = int;
+        using value_type = wxCmdLineArg;
+        using pointer = const wxCmdLineArg *;
+        using reference = const wxCmdLineArg &;
 
 // We avoid dependency on standard library by default but if we do use
 // std::string, then it's ok to use iterator tags as well.
 #if wxUSE_STD_STRING
-        typedef std::bidirectional_iterator_tag iterator_category;
+        using iterator_category = std::bidirectional_iterator_tag;
 #endif // wx_USE_STD_STRING
 
         const_iterator()  = default;

@@ -18,9 +18,9 @@
 #include "wx/object.h"
 #include "wx/variant.h"
 
-typedef void            WXIDISPATCH;
-typedef unsigned short* WXBSTR;
-typedef unsigned long   WXLCID;
+using WXIDISPATCH = void;
+using WXBSTR = unsigned short *;
+using WXLCID = unsigned long;
 
 #ifdef GetObject
 #undef GetObject

@@ -20,7 +20,7 @@
 using namespace Scintilla;
 #endif
 
-typedef std::map<std::string, std::string> mapss;
+using mapss = std::map<std::string, std::string>;
 
 PropSetSimple::PropSetSimple() {
 	mapss *props = new mapss;

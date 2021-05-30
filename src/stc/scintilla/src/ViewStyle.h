@@ -57,7 +57,7 @@ enum WhiteSpaceVisibility {wsInvisible=0, wsVisibleAlways=1, wsVisibleAfterInden
 
 enum TabDrawMode {tdLongArrow=0, tdStrikeOut=1};
 
-typedef std::map<FontSpecification, FontRealised *> FontMap;
+using FontMap = std::map<FontSpecification, FontRealised *>;
 
 enum WrapMode { eWrapNone, eWrapWord, eWrapChar, eWrapWhitespace };
 

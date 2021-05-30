@@ -90,7 +90,7 @@ private:
 class WXDLLIMPEXP_BASE wxArchiveInputStream : public wxFilterInputStream
 {
 public:
-    typedef wxArchiveEntry entry_type;
+    using entry_type = wxArchiveEntry;
 
     ~wxArchiveInputStream() override = default;
 
@@ -185,11 +185,11 @@ template <class Arc, class T = typename Arc::entry_type*>
 class wxArchiveIterator
 {
 public:
-    typedef std::input_iterator_tag iterator_category;
-    typedef T value_type;
-    typedef ptrdiff_t difference_type;
-    typedef T* pointer;
-    typedef T& reference;
+    using iterator_category = std::input_iterator_tag;
+    using value_type = T;
+    using difference_type = ptrdiff_t;
+    using pointer = T *;
+    using reference = T &;
 
     wxArchiveIterator() : m_rep(NULL) { }
 
@@ -292,9 +292,8 @@ private:
     } *m_rep;
 };
 
-typedef wxArchiveIterator<wxArchiveInputStream> wxArchiveIter;
-typedef wxArchiveIterator<wxArchiveInputStream,
-        std::pair<wxString, wxArchiveEntry*> >  wxArchivePairIter;
+using wxArchiveIter = wxArchiveIterator<wxArchiveInputStream>;
+using wxArchivePairIter = wxArchiveIterator<wxArchiveInputStream, std::pair<wxString, wxArchiveEntry *>>;
 
 #endif // wxUSE_STL || defined WX_TEST_ARCHIVE_ITERATOR
 
@@ -310,13 +309,13 @@ void WXDLLIMPEXP_BASE wxUseArchiveClasses();
 class WXDLLIMPEXP_BASE wxArchiveClassFactory : public wxFilterClassFactoryBase
 {
 public:
-    typedef wxArchiveEntry        entry_type;
-    typedef wxArchiveInputStream  instream_type;
-    typedef wxArchiveOutputStream outstream_type;
-    typedef wxArchiveNotifier     notifier_type;
+    using entry_type = wxArchiveEntry;
+    using instream_type = wxArchiveInputStream;
+    using outstream_type = wxArchiveOutputStream;
+    using notifier_type = wxArchiveNotifier;
 #if wxUSE_STL || defined WX_TEST_ARCHIVE_ITERATOR
-    typedef wxArchiveIter         iter_type;
-    typedef wxArchivePairIter     pairiter_type;
+    using iter_type = wxArchiveIter;
+    using pairiter_type = wxArchivePairIter;
 #endif
 
     ~wxArchiveClassFactory() override = default;

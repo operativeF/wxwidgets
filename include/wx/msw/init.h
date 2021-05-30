@@ -31,7 +31,7 @@ extern int WXDLLIMPEXP_BASE wxEntry();
 #endif
 
 // WinMain() is always ANSI, even in Unicode build.
-typedef char *wxCmdLineArgType;
+using wxCmdLineArgType = char *;
 
 // Windows-only overloads of wxEntry() and wxEntryStart() which take the
 // parameters passed to WinMain() instead of those passed to main()

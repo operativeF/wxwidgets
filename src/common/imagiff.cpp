@@ -237,7 +237,7 @@ bool wxIFFDecoder::CanRead()
 // Based on xv source code by Thomas Meyer
 // Permission for use in wxWidgets has been gratefully given.
 
-typedef unsigned char byte;
+using byte = unsigned char;
 
 /*************************************************************************
 void decomprle(source, destination, source length, buffer size)

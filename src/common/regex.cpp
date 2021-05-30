@@ -74,7 +74,7 @@
 class wxRegExMatches
 {
 public:
-    typedef regmatch_t *match_type;
+    using match_type = regmatch_t *;
 
     explicit wxRegExMatches(size_t n)        { m_matches = new regmatch_t[n]; }
     ~wxRegExMatches()               { delete [] m_matches; }
@@ -133,7 +133,7 @@ private:
 
 // the character type used by the regular expression engine
 #ifndef WXREGEX_CONVERT_TO_MB
-typedef wxChar wxRegChar;
+using wxRegChar = wxChar;
 #else
 typedef char wxRegChar;
 #endif

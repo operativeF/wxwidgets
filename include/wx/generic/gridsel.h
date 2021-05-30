@@ -19,7 +19,7 @@
 
 #include <vector>
 
-typedef std::vector<wxGridBlockCoords> wxVectorGridBlockCoords;
+using wxVectorGridBlockCoords = std::vector<wxGridBlockCoords>;
 
 // Note: for all eventType arguments of the methods of this class wxEVT_NULL
 //       may be passed to forbid events generation completely.

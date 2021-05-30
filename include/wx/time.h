@@ -22,7 +22,7 @@ extern long WXDLLIMPEXP_BASE wxGetLocalTime();
 extern long WXDLLIMPEXP_BASE wxGetUTCTime();
 
 #if wxUSE_LONGLONG
-    typedef wxLongLong wxMilliClock_t;
+    using wxMilliClock_t = wxLongLong;
     inline long wxMilliClockToLong(wxLongLong ll) { return ll.ToLong(); }
 #else
     typedef double wxMilliClock_t;

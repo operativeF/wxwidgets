@@ -68,7 +68,7 @@
 #if defined(__CYGWIN__) && defined(__LP64__) && defined(__WINDOWS__)
     typedef __ms_timeval wxTimeVal_t;
 #else
-    typedef timeval wxTimeVal_t;
+    using wxTimeVal_t = timeval;
 #endif
 
 // these definitions are for MSW when we don't use configure, otherwise these
@@ -91,7 +91,7 @@
     #define SOCKET_ERROR (-1)
 #endif
 
-typedef int wxSocketEventFlags;
+using wxSocketEventFlags = int;
 
 class wxSocketImpl;
 

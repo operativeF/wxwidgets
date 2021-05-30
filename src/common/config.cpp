@@ -181,7 +181,7 @@ bool wxConfigBase::Read(const wxString& key, int *pi, int defVal) const
 #if SIZEOF_SIZE_T == SIZEOF_LONG
     typedef long SizeSameSizeAsSizeT;
 #elif SIZEOF_SIZE_T == SIZEOF_LONG_LONG
-    typedef wxLongLong_t SizeSameSizeAsSizeT;
+    using SizeSameSizeAsSizeT = long long;
 #else
     #error Unexpected sizeof(size_t)
 #endif

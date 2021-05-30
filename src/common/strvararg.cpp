@@ -139,7 +139,7 @@ template<typename T>
 class wxFormatConverterBase
 {
 public:
-    typedef T CharType;
+    using CharType = T;
 
     wxFormatConverterBase()
     {

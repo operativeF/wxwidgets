@@ -80,7 +80,7 @@ public:
 
 // This class is defined mostly for compatibility and is used as the base class
 // by native wxDatePickerCtrl implementations.
-typedef wxDatePickerCtrlCommonBase<wxDateTimePickerCtrl> wxDatePickerCtrlBase;
+using wxDatePickerCtrlBase = wxDatePickerCtrlCommonBase<wxDateTimePickerCtrl>;
 
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)
     #include "wx/msw/datectrl.h"

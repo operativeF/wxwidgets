@@ -75,7 +75,7 @@ WXDLLIMPEXP_BASE void wxSetInstance(HINSTANCE hInst);
 // this defines a CASTWNDPROC macro which casts a pointer to the type of a
 // window proc
 #if defined(STRICT) || defined(__GNUC__)
-    typedef WNDPROC WndProcCast;
+    using WndProcCast = WNDPROC;
 #else
     typedef FARPROC WndProcCast;
 #endif

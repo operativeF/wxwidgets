@@ -110,13 +110,13 @@ template<typename CharType> struct wxPrintfStringHelper {};
 
 template<> struct wxPrintfStringHelper<char>
 {
-    typedef const wxWX2MBbuf ConvertedType;
+    using ConvertedType = const wxCharBuffer;
     static ConvertedType Convert(const wxString& s) { return s.mb_str(); }
 };
 
 template<> struct wxPrintfStringHelper<wchar_t>
 {
-    typedef const wxWX2WCbuf ConvertedType;
+    using ConvertedType = const wxChar *;
     static ConvertedType Convert(const wxString& s) { return s.wc_str(); }
 };
 
@@ -785,7 +785,7 @@ int wxPrintfConvSpec<CharType>::Process(CharType *buf, size_t lenMax, wxPrintfAr
 template<typename CharType>
 struct wxPrintfConvSpecParser
 {
-    typedef wxPrintfConvSpec<CharType> ConvSpec;
+    using ConvSpec = wxPrintfConvSpec<CharType>;
 
     wxPrintfConvSpecParser(const CharType *fmt)
     {

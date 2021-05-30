@@ -28,7 +28,7 @@ template <class T>
 class wxWeakRef : public wxTrackerNode
 {
 public:
-    typedef T element_type;
+    using element_type = T;
 
     // Default ctor
     wxWeakRef() : m_pobj(nullptr) { }
@@ -220,8 +220,8 @@ class WXDLLIMPEXP_FWD_BASE wxEvtHandler;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 
 
-typedef wxWeakRef<wxEvtHandler>  wxEvtHandlerRef;
-typedef wxWeakRef<wxWindow>      wxWindowRef;
+using wxEvtHandlerRef = wxWeakRef<wxEvtHandler>;
+using wxWindowRef = wxWeakRef<wxWindow>;
 
 #endif // _WX_WEAKREF_H_
 

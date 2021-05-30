@@ -86,7 +86,7 @@ class WXDLLIMPEXP_CORE wxColourBase : public
 {
 public:
     // type of a single colour component
-    typedef unsigned char ChannelType;
+    using ChannelType = unsigned char;
 
     wxColourBase() = default;
     ~wxColourBase() override = default;

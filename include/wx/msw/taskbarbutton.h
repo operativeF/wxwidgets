@@ -56,7 +56,7 @@ private:
     wxWindow* m_parent;
     wxITaskbarList3 *m_taskbarList;
 
-    typedef std::vector<wxThumbBarButton*> wxThumbBarButtons;
+    using wxThumbBarButtons = std::vector<wxThumbBarButton *>;
     wxThumbBarButtons m_thumbBarButtons;
 
     int m_progressRange;

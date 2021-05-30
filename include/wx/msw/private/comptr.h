@@ -18,7 +18,7 @@ template <class T>
 class wxCOMPtr
 {
 public:
-    typedef T element_type;
+    using element_type = T;
 
     wxCOMPtr()
         : m_ptr(nullptr)

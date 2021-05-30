@@ -75,8 +75,8 @@
 namespace Scintilla {
 #endif
 
-typedef float XYPOSITION;
-typedef double XYACCUMULATOR;
+using XYPOSITION = float;
+using XYACCUMULATOR = double;
 inline int RoundXYPosition(XYPOSITION xyPos) {
 	return int(xyPos + 0.5);
 }
@@ -84,13 +84,13 @@ inline int RoundXYPosition(XYPOSITION xyPos) {
 // Underlying the implementation of the platform classes are platform specific types.
 // Sometimes these need to be passed around by client code so they are defined here
 
-typedef void *FontID;
-typedef void *SurfaceID;
-typedef void *WindowID;
-typedef void *MenuID;
-typedef void *TickerID;
-typedef void *Function;
-typedef void *IdlerID;
+using FontID = void *;
+using SurfaceID = void *;
+using WindowID = void *;
+using MenuID = void *;
+using TickerID = void *;
+using Function = void *;
+using IdlerID = void *;
 
 /**
  * A geometric point class.

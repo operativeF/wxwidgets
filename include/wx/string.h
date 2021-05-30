@@ -327,8 +327,8 @@ private:
   typedef SubstrBufFromType<wxScopedCharBuffer>    SubstrBufFromWC;
   typedef SubstrBufFromType<wxScopedCharBuffer>    SubstrBufFromMB;
 #elif wxUSE_UNICODE_WCHAR
-  typedef SubstrBufFromType<const wchar_t*>        SubstrBufFromWC;
-  typedef SubstrBufFromType<wxScopedWCharBuffer>   SubstrBufFromMB;
+  using SubstrBufFromWC = SubstrBufFromType<const wchar_t *>;
+  using SubstrBufFromMB = SubstrBufFromType<wxScopedWCharBuffer>;
 #else
   typedef SubstrBufFromType<const char*>           SubstrBufFromMB;
   typedef SubstrBufFromType<wxScopedCharBuffer>    SubstrBufFromWC;
@@ -705,14 +705,14 @@ private:
 
 public:
   // standard types
-  typedef wxUniChar value_type;
-  typedef wxUniChar char_type;
-  typedef wxUniCharRef reference;
-  typedef wxChar* pointer;
-  typedef const wxChar* const_pointer;
+  using value_type = wxUniChar;
+  using char_type = wxUniChar;
+  using reference = wxUniCharRef;
+  using pointer = wxChar *;
+  using const_pointer = const wxChar *;
 
-  typedef size_t size_type;
-  typedef const wxUniChar const_reference;
+  using size_type = size_t;
+  using const_reference = const wxUniChar;
 
 #if wxUSE_STD_STRING
   #if wxUSE_UNICODE_UTF8
@@ -1022,13 +1022,13 @@ public:
   class reverse_iterator_impl
   {
   public:
-      typedef T iterator_type;
+      using iterator_type = T;
 
       WX_DEFINE_ITERATOR_CATEGORY(typename T::iterator_category)
-      typedef typename T::value_type value_type;
-      typedef typename T::difference_type difference_type;
-      typedef typename T::reference reference;
-      typedef typename T::pointer *pointer;
+      using value_type = typename T::value_type;
+      using difference_type = typename T::difference_type;
+      using reference = typename T::reference;
+      using pointer = typename T::pointer *;
 
       reverse_iterator_impl() {}
       reverse_iterator_impl(iterator_type i) : m_cur(i) {}
@@ -1077,8 +1077,8 @@ public:
       iterator_type m_cur;
   };
 
-  typedef reverse_iterator_impl<iterator> reverse_iterator;
-  typedef reverse_iterator_impl<const_iterator> const_reverse_iterator;
+  using reverse_iterator = reverse_iterator_impl<iterator>;
+  using const_reverse_iterator = reverse_iterator_impl<const_iterator>;
 
 private:
   // used to transform an expression built using c_str() (and hence of type
@@ -3773,7 +3773,7 @@ template<typename T>
 class wxStringTypeBufferBase
 {
 public:
-    typedef T CharType;
+    using CharType = T;
 
     wxStringTypeBufferBase(wxString& str, size_t lenWanted = 1024)
         : m_str(str), m_buf(lenWanted)
@@ -3897,8 +3897,8 @@ public:
 
 
 #if wxUSE_STL_BASED_WXSTRING || wxUSE_UNICODE_UTF8
-typedef wxStringTypeBuffer<wxChar>        wxStringBuffer;
-typedef wxStringTypeBufferLength<wxChar>  wxStringBufferLength;
+using wxStringBuffer = wxStringTypeBuffer<wxChar>;
+using wxStringBufferLength = wxStringTypeBufferLength<wxChar>;
 #else // if !wxUSE_STL_BASED_WXSTRING && !wxUSE_UNICODE_UTF8
 typedef wxStringInternalBuffer                wxStringBuffer;
 typedef wxStringInternalBufferLength          wxStringBufferLength;

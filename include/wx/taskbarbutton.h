@@ -188,7 +188,7 @@ private:
 	wxTaskBarJumpListItem& operator=(const wxTaskBarJumpListItem&) = delete;
 };
 
-typedef std::vector<wxTaskBarJumpListItem*> wxTaskBarJumpListItems;
+using wxTaskBarJumpListItems = std::vector<wxTaskBarJumpListItem *>;
 
 class WXDLLIMPEXP_CORE wxTaskBarJumpListCategory
 {
@@ -220,7 +220,7 @@ private:
 	wxTaskBarJumpListCategory& operator=(const wxTaskBarJumpListCategory&) = delete;
 };
 
-typedef std::vector<wxTaskBarJumpListCategory*> wxTaskBarJumpListCategories;
+using wxTaskBarJumpListCategories = std::vector<wxTaskBarJumpListCategory *>;
 
 class WXDLLIMPEXP_CORE wxTaskBarJumpList
 {

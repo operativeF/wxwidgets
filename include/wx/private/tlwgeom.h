@@ -27,7 +27,7 @@
 class wxTLWGeometryBase
 {
 public:
-    typedef wxTopLevelWindow::GeometrySerializer Serializer;
+    using Serializer = wxTopLevelWindow::GeometrySerializer;
 
     wxTLWGeometryBase() = default;
     virtual ~wxTLWGeometryBase() = default;

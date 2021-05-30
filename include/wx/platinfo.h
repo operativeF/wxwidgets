@@ -96,7 +96,7 @@ enum wxBitness
     wxBITNESS_MAX
 };
 
-typedef wxBitness wxArchitecture;
+using wxArchitecture = wxBitness;
 
 const wxArchitecture
     wxARCH_INVALID = wxBITNESS_INVALID,

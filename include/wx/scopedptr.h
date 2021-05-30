@@ -38,7 +38,7 @@ template <class T>
 class wxScopedPtr
 {
 public:
-    typedef T element_type;
+    using element_type = T;
 
     explicit wxScopedPtr(T * ptr = nullptr) : m_ptr(ptr) { }
 

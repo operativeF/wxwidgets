@@ -90,7 +90,7 @@ private:
 };
 
 // wxScopeGuard is just a reference, see the explanation in CUJ article
-typedef const wxScopeGuardImplBase& wxScopeGuard;
+using wxScopeGuard = const wxScopeGuardImplBase &;
 
 // ----------------------------------------------------------------------------
 // wxScopeGuardImpl0: scope guard for actions without parameters
@@ -365,7 +365,7 @@ namespace wxPrivate
 // empty class just to be able to define a reference to it
 class VariableSetterBase : public wxScopeGuardImplBase { };
 
-typedef const VariableSetterBase& VariableSetter;
+using VariableSetter = const VariableSetterBase &;
 
 template <typename T, typename U>
 class VariableSetterImpl : public VariableSetterBase

@@ -182,7 +182,7 @@ private:
 // wxDataViewModel
 // ---------------------------------------------------------
 
-typedef std::vector<wxDataViewModelNotifier*> wxDataViewModelNotifiers;
+using wxDataViewModelNotifiers = std::vector<wxDataViewModelNotifier *>;
 
 class WXDLLIMPEXP_CORE wxDataViewModel: public wxRefCounter
 {
@@ -1216,7 +1216,7 @@ private:
     wxClientData             *m_data;
 };
 
-typedef std::vector<wxDataViewTreeStoreNode*> wxDataViewTreeStoreNodes;
+using wxDataViewTreeStoreNodes = std::vector<wxDataViewTreeStoreNode *>;
 
 class WXDLLIMPEXP_CORE wxDataViewTreeStoreContainerNode: public wxDataViewTreeStoreNode
 {

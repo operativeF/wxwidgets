@@ -386,7 +386,7 @@ class CaseConverter : public ICaseConverter {
 			return character < other.character;
 		}
 	};
-	typedef std::vector<CharacterConversion> CharacterToConversion;
+	using CharacterToConversion = std::vector<CharacterConversion>;
 	CharacterToConversion characterToConversion;
 	// The parallel arrays
 	std::vector<int> characters;

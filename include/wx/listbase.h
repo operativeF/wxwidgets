@@ -162,7 +162,7 @@ enum
 // For compatibility, define the old name for this class. There is no need to
 // deprecate it as it doesn't cost us anything to keep this typedef, but the
 // new code should prefer to use the new wxItemAttr name.
-typedef wxItemAttr wxListItemAttr;
+using wxListItemAttr = wxItemAttr;
 
 // ----------------------------------------------------------------------------
 // wxListItem: the item or column info, used to exchange data with wxListCtrl

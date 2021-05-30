@@ -34,7 +34,7 @@
   #define UUID_DEFINED          // prevent redefinition
 #endif  // GUID_DEFINED
 
-typedef unsigned char uchar;
+using uchar = unsigned char;
 
 // ------------------------------------------------------------------
 // a class to store UUID and it's string representation

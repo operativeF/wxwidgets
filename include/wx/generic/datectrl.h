@@ -19,7 +19,7 @@ class WXDLLIMPEXP_FWD_CORE wxComboCtrl;
 class WXDLLIMPEXP_FWD_CORE wxCalendarCtrl;
 class WXDLLIMPEXP_FWD_CORE wxCalendarComboPopup;
 
-typedef wxDatePickerCtrlCommonBase<wxDateTimePickerCtrlBase> wxDatePickerCtrlGenericBase;
+using wxDatePickerCtrlGenericBase = wxDatePickerCtrlCommonBase<wxDateTimePickerCtrlBase>;
 
 class WXDLLIMPEXP_CORE wxDatePickerCtrlGeneric
     : public wxCompositeWindow< wxNavigationEnabled<wxDatePickerCtrlGenericBase> >

@@ -19,7 +19,7 @@
 // ----------------------------------------------------------------------------
 
 // NB: this is needed even if wxUSE_LOG == 0
-typedef unsigned long wxLogLevel;
+using wxLogLevel = unsigned long;
 
 // ----------------------------------------------------------------------------
 // headers

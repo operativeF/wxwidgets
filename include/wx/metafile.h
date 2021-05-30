@@ -30,10 +30,10 @@
             // use normal metafiles as well
             #include "wx/msw/metafile.h"
         #else // also map all metafile classes to enh metafile
-            typedef wxEnhMetaFile wxMetafile;
-            typedef wxEnhMetaFileDC wxMetafileDC;
+            using wxMetafile = wxEnhMetaFile;
+            using wxMetafileDC = wxEnhMetaFileDC;
             #if wxUSE_DATAOBJ
-                typedef wxEnhMetaFileDataObject wxMetafileDataObject;
+                using wxMetafileDataObject = wxEnhMetaFileDataObject;
             #endif
 
             // this flag will be set if wxMetafile class is wxEnhMetaFile

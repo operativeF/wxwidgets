@@ -247,7 +247,7 @@ wxPrintPaperType *wxPrintPaperDatabase::FindPaperType(const wxString& name) cons
 
 wxPrintPaperType *wxPrintPaperDatabase::FindPaperType(wxPaperSize id) const
 {
-    typedef wxStringToPrintPaperTypeHashMap::iterator iterator;
+    using iterator = wxStringToPrintPaperTypeHashMap::iterator;
 
     for (iterator it = m_map->begin(), en = m_map->end(); it != en; ++it)
     {
@@ -261,7 +261,7 @@ wxPrintPaperType *wxPrintPaperDatabase::FindPaperType(wxPaperSize id) const
 
 wxPrintPaperType *wxPrintPaperDatabase::FindPaperTypeByPlatformId(int id) const
 {
-    typedef wxStringToPrintPaperTypeHashMap::iterator iterator;
+    using iterator = wxStringToPrintPaperTypeHashMap::iterator;
 
     for (iterator it = m_map->begin(), en = m_map->end(); it != en; ++it)
     {

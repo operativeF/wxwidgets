@@ -24,7 +24,7 @@ struct wxIfImpl<true>
 {
     template<typename TTrue, typename TFalse> struct Result
     {
-        typedef TTrue value;
+        using value = TTrue;
     };
 };
 
@@ -34,7 +34,7 @@ struct wxIfImpl<false>
 {
     template<typename TTrue, typename TFalse> struct Result
     {
-        typedef TFalse value;
+        using value = TFalse;
     };
 };
 
@@ -48,9 +48,7 @@ struct wxIfImpl<false>
 template<bool Cond, typename TTrue, typename TFalse>
 struct wxIf
 {
-    typedef typename wxPrivate::wxIfImpl<Cond>
-                     ::template Result<TTrue, TFalse>::value
-            value;
+    using value = typename wxPrivate::wxIfImpl<Cond>::template Result<TTrue, TFalse>::value;
 };
 
 #endif // _WX_META_IF_H_

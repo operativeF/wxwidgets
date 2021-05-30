@@ -101,7 +101,7 @@ private:
     unsigned char m_flags;
 };
 
-typedef const wxPGPropArgCls& wxPGPropArg;
+using wxPGPropArg = const wxPGPropArgCls &;
 
 // -----------------------------------------------------------------------
 

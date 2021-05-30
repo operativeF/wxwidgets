@@ -74,7 +74,7 @@ class wxEventConnectionRef;
 // Event types
 // ----------------------------------------------------------------------------
 
-typedef int wxEventType;
+using wxEventType = int;
 
 #define wxEVT_ANY           ((wxEventType)-1)
 
@@ -203,7 +203,7 @@ class wxEventTypeTag
 {
 public:
     // The class of wxEvent-derived class carried by the events of this type.
-    typedef T EventClass;
+    using EventClass = T;
 
     wxEventTypeTag(wxEventType type) : m_type(type) { }
 
@@ -223,7 +223,7 @@ private:
 // this for backwards compatibility and, despite its name, this is a typedef
 // for wxEvtHandler member now -- but if we have the same problem with another
 // compiler we can restore its old definition for it.
-typedef wxEventFunction wxObjectEventFunction;
+using wxObjectEventFunction = wxEventFunction;
 
 // The event functor which is stored in the static and dynamic event tables:
 class WXDLLIMPEXP_BASE wxEventFunctor
@@ -331,7 +331,7 @@ template <typename T> struct EventClassOf;
 template <typename T>
 struct EventClassOf< wxEventTypeTag<T> >
 {
-    typedef typename wxEventTypeTag<T>::EventClass type;
+    using type = typename wxEventTypeTag<T>::EventClass;
 };
 
 // for the old untyped events we don't have information about the exact event
@@ -339,7 +339,7 @@ struct EventClassOf< wxEventTypeTag<T> >
 template <>
 struct EventClassOf<wxEventType>
 {
-    typedef wxEvent type;
+    using type = wxEvent;
 };
 
 
@@ -403,7 +403,7 @@ private:
 
 public:
     // the event class associated with the given event tag
-    typedef typename wxPrivate::EventClassOf<EventTag>::type EventClass;
+    using EventClass = typename wxPrivate::EventClassOf<EventTag>::type;
 
 
     wxEventFunctorMethod(void (Class::*method)(EventArg&), EventHandler *handler)
@@ -441,8 +441,7 @@ public:
         if ( wxTypeId(functor) != wxTypeId(*this) )
             return false;
 
-        typedef wxEventFunctorMethod<EventTag, Class, EventArg, EventHandler>
-            ThisFunctor;
+        using ThisFunctor = wxEventFunctorMethod<EventTag, Class, EventArg, EventHandler>;
 
         // the cast is valid because wxTypeId()s matched above
         const ThisFunctor& other = static_cast<const ThisFunctor &>(functor);
@@ -464,8 +463,7 @@ private:
     // Provide a dummy default ctor for type info purposes
     wxEventFunctorMethod() { }
 
-    typedef wxEventFunctorMethod<EventTag, Class,
-                                 EventArg, EventHandler> thisClass;
+    using thisClass = wxEventFunctorMethod<EventTag, Class, EventArg, EventHandler>;
     WX_DECLARE_TYPEINFO_INLINE(thisClass)
 };
 
@@ -479,7 +477,7 @@ private:
 
 public:
     // the event class associated with the given event tag
-    typedef typename wxPrivate::EventClassOf<EventTag>::type EventClass;
+    using EventClass = typename wxPrivate::EventClassOf<EventTag>::type;
 
     wxEventFunctorFunction( void ( *handler )( EventArg & ))
         : m_handler( handler )
@@ -520,7 +518,7 @@ private:
     // Provide a dummy default ctor for type info purposes
     wxEventFunctorFunction() { }
 
-    typedef wxEventFunctorFunction<EventTag, EventArg> thisClass;
+    using thisClass = wxEventFunctorFunction<EventTag, EventArg>;
     WX_DECLARE_TYPEINFO_INLINE(thisClass)
 };
 
@@ -529,7 +527,7 @@ template <typename EventTag, typename Functor>
 class wxEventFunctorFunctor : public wxEventFunctor
 {
 public:
-    typedef typename EventTag::EventClass EventArg;
+    using EventArg = typename EventTag::EventClass;
 
     wxEventFunctorFunctor(const Functor& handler)
         : m_handler(handler), m_handlerAddr(&handler)
@@ -572,7 +570,7 @@ private:
     // Provide a dummy default ctor for type info purposes
     wxEventFunctorFunctor() { }
 
-    typedef wxEventFunctorFunctor<EventTag, Functor> thisClass;
+    using thisClass = wxEventFunctorFunctor<EventTag, Functor>;
     WX_DECLARE_TYPEINFO_INLINE(thisClass)
 };
 
@@ -1530,7 +1528,7 @@ template <typename T>
 class wxAsyncMethodCallEventFunctor : public wxAsyncMethodCallEvent
 {
 public:
-    typedef T FunctorType;
+    using FunctorType = T;
 
     wxAsyncMethodCallEventFunctor(wxObject *object, const FunctorType& fn)
         : wxAsyncMethodCallEvent(object),
@@ -3679,7 +3677,7 @@ private:
         wxEventType                   eventType;
         wxEventTableEntryPointerArray eventEntryTable;
     };
-    typedef EventTypeTable* EventTypeTablePointer;
+    using EventTypeTablePointer = EventTypeTable *;
 
 public:
     // Constructor, needs the event table it needs to hash later on.
@@ -4136,7 +4134,7 @@ protected:
     wxEvtHandler*       m_nextHandler;
     wxEvtHandler*       m_previousHandler;
 
-    typedef std::vector<wxDynamicEventTableEntry*> DynamicEvents;
+    using DynamicEvents = std::vector<wxDynamicEventTableEntry *>;
     DynamicEvents* m_dynamicEvents;
 
     wxList*             m_pendingEvents;

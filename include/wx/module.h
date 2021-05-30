@@ -16,7 +16,7 @@
 
 class wxModule;
 
-typedef std::vector<wxModule*> wxModuleList;
+using wxModuleList = std::vector<wxModule *>;
 
 // declaring a class derived from wxModule will automatically create an
 // instance of this class on program startup, call its OnInit() method and call
@@ -94,7 +94,7 @@ private:
 
     // module dependencies: contains wxClassInfo pointers for all modules which
     // must be initialized before this one
-    typedef std::vector<wxClassInfo*> wxArrayClassInfo;
+    using wxArrayClassInfo = std::vector<wxClassInfo *>;
     wxArrayClassInfo m_dependencies;
 
     // and the named dependencies: those will be resolved during run-time and

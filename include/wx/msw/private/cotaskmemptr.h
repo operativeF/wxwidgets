@@ -21,7 +21,7 @@ template <class T>
 class wxCoTaskMemPtr
 {
 public:
-    typedef T element_type;
+    using element_type = T;
 
     wxCoTaskMemPtr()
         : m_ptr(nullptr)

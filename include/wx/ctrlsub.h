@@ -416,8 +416,8 @@ template <class W, class C>
 class wxWindowWithItems : public W, public C
 {
 public:
-    typedef W BaseWindowClass;
-    typedef C BaseContainerInterface;
+    using BaseWindowClass = W;
+    using BaseContainerInterface = C;
 
     wxWindowWithItems() = default;
 

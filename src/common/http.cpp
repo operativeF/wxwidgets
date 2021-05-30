@@ -227,7 +227,7 @@ wxHTTP::SetPostText(const wxString& contentType,
 
 void wxHTTP::SendHeaders()
 {
-    typedef wxStringToStringHashMap::iterator iterator;
+    using iterator = wxStringToStringHashMap::iterator;
     wxString buf;
 
     for (iterator it = m_headers.begin(), en = m_headers.end(); it != en; ++it )

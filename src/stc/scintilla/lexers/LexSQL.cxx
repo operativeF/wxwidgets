@@ -62,7 +62,7 @@ static inline bool IsANumberChar(int ch, int chPrev) {
 	        ch == '.' || ((ch == '-' || ch == '+') && chPrev < 0x80 && toupper(chPrev) == 'E'));
 }
 
-typedef unsigned int sql_state_t;
+using sql_state_t = unsigned int;
 
 class SQLStates {
 public :

@@ -33,7 +33,7 @@ private:
     // Used to UnInit() the wxAuiManager before destroying its managed window
     void OnManagedWindowClose(wxWindowDestroyEvent &event);
 
-    typedef std::vector<wxAuiManager*> Managers;
+    using Managers = std::vector<wxAuiManager *>;
     Managers m_managers; // all wxAuiManagers created in this handler
 
     wxAuiManager    *m_manager{nullptr};  // Current wxAuiManager

@@ -62,7 +62,7 @@ template<typename T1, typename T2>
 inline typename wxImplicitConversionType<T1,T2>::value
 wxMax(T1 a, T2 b)
 {
-    typedef typename wxImplicitConversionType<T1,T2>::value ResultType;
+    using ResultType = typename wxImplicitConversionType<T1, T2>::value;
 
     // Cast both operands to the same type before comparing them to avoid
     // warnings about signed/unsigned comparisons from some compilers:
@@ -73,7 +73,7 @@ template<typename T1, typename T2>
 inline typename wxImplicitConversionType<T1,T2>::value
 wxMin(T1 a, T2 b)
 {
-    typedef typename wxImplicitConversionType<T1,T2>::value ResultType;
+    using ResultType = typename wxImplicitConversionType<T1, T2>::value;
 
     return static_cast<ResultType>(a) < static_cast<ResultType>(b) ? a : b;
 }
@@ -82,7 +82,7 @@ template<typename T1, typename T2, typename T3>
 inline typename wxImplicitConversionType3<T1,T2,T3>::value
 wxClip(T1 a, T2 b, T3 c)
 {
-    typedef typename wxImplicitConversionType3<T1,T2,T3>::value ResultType;
+    using ResultType = typename wxImplicitConversionType3<T1, T2, T3>::value;
 
     if ( static_cast<ResultType>(a) < static_cast<ResultType>(b) )
         return b;
@@ -101,7 +101,7 @@ wxClip(T1 a, T2 b, T3 c)
 // so to always use long long for its result type on all platforms which
 // support it
 #if wxUSE_LONGLONG
-    typedef wxLongLong wxMemorySize;
+    using wxMemorySize = wxLongLong;
 #else
     typedef long wxMemorySize;
 #endif
@@ -357,7 +357,7 @@ enum
 };
 
 // Map storing environment variables.
-typedef wxStringToStringHashMap wxEnvVariableHashMap;
+using wxEnvVariableHashMap = wxStringToStringHashMap;
 
 // Used to pass additional parameters for child process to wxExecute(). Could
 // be extended with other fields later.
@@ -548,7 +548,7 @@ WXDLLIMPEXP_BASE wxString wxGetUserHome(const wxString& user = wxEmptyString);
 
 
 #if wxUSE_LONGLONG
-    typedef wxLongLong wxDiskspaceSize_t;
+    using wxDiskspaceSize_t = wxLongLong;
 #else
     typedef long wxDiskspaceSize_t;
 #endif

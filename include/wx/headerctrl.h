@@ -382,7 +382,7 @@ private:
 
 
     // all our current columns
-    typedef std::vector<wxHeaderColumnSimple> Columns;
+    using Columns = std::vector<wxHeaderColumnSimple>;
     Columns m_cols;
 
     // the column currently used for sorting or -1 if none

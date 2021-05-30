@@ -293,7 +293,7 @@ enum wxRichTextHitTestFlags
 /**
     The type for wxTextAttrDimension flags.
  */
-typedef unsigned short wxTextAttrDimensionFlags;
+using wxTextAttrDimensionFlags = unsigned short;
 
 /**
     Miscellaneous text box flags

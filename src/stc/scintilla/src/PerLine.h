@@ -109,7 +109,7 @@ public:
 	int Lines(int line) const;
 };
 
-typedef std::vector<int> TabstopList;
+using TabstopList = std::vector<int>;
 
 class LineTabstops : public PerLine {
 	SplitVector<TabstopList *> tabstops;

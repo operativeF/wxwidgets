@@ -154,7 +154,7 @@ WX_DECLARE_STRING_HASH_MAP(wxString, wxTarHeaderRecords);
 class WXDLLIMPEXP_BASE wxTarInputStream : public wxArchiveInputStream
 {
 public:
-    typedef wxTarEntry entry_type;
+    using entry_type = wxTarEntry;
 
     wxTarInputStream(wxInputStream& stream, wxMBConv& conv = wxConvLocal);
     wxTarInputStream(wxInputStream *stream, wxMBConv& conv = wxConvLocal);
@@ -292,9 +292,8 @@ private:
 // Iterators
 
 #if wxUSE_STL || defined WX_TEST_ARCHIVE_ITERATOR
-typedef wxArchiveIterator<wxTarInputStream> wxTarIter;
-typedef wxArchiveIterator<wxTarInputStream,
-         std::pair<wxString, wxTarEntry*> > wxTarPairIter;
+using wxTarIter = wxArchiveIterator<wxTarInputStream>;
+using wxTarPairIter = wxArchiveIterator<wxTarInputStream, std::pair<wxString, wxTarEntry *>>;
 #endif
 
 
@@ -304,13 +303,13 @@ typedef wxArchiveIterator<wxTarInputStream,
 class WXDLLIMPEXP_BASE wxTarClassFactory : public wxArchiveClassFactory
 {
 public:
-    typedef wxTarEntry        entry_type;
-    typedef wxTarInputStream  instream_type;
-    typedef wxTarOutputStream outstream_type;
-    typedef wxTarNotifier     notifier_type;
+    using entry_type = wxTarEntry;
+    using instream_type = wxTarInputStream;
+    using outstream_type = wxTarOutputStream;
+    using notifier_type = wxTarNotifier;
 #if wxUSE_STL || defined WX_TEST_ARCHIVE_ITERATOR
-    typedef wxTarIter         iter_type;
-    typedef wxTarPairIter     pairiter_type;
+    using iter_type = wxTarIter;
+    using pairiter_type = wxTarPairIter;
 #endif
 
     wxTarClassFactory();

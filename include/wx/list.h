@@ -44,7 +44,7 @@
 // ----------------------------------------------------------------------------
 
 class WXDLLIMPEXP_FWD_BASE wxObjectListNode;
-typedef wxObjectListNode wxNode;
+using wxNode = wxObjectListNode;
 
 #define wxLIST_COMPATIBILITY
 

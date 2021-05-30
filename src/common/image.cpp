@@ -36,8 +36,8 @@
 
 #if HAS_FILE_STREAMS
     #if wxUSE_FFILE
-        typedef wxFFileInputStream wxImageFileInputStream;
-        typedef wxFFileOutputStream wxImageFileOutputStream;
+        using wxImageFileInputStream = wxFFileInputStream;
+        using wxImageFileOutputStream = wxFFileOutputStream;
     #elif wxUSE_FILE
         typedef wxFileInputStream wxImageFileInputStream;
         typedef wxFileOutputStream wxImageFileOutputStream;

@@ -136,7 +136,7 @@ public:
         // the number of milliseconds - it may also be 'int' because there is
         // no size penalty associated with it in our code, we don't store any
         // data in this format
-    typedef unsigned short wxDateTime_t;
+    using wxDateTime_t = unsigned short;
 
     // constants
     // ------------------------------------------------------------------------

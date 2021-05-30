@@ -65,10 +65,7 @@ template<int all, int add> struct SafelyAddToMask
     // FlagsHaveConflictingValues<add>. The next statement will try to use
     // AddedValue::value, but there's no such thing in
     // FlagsHaveConflictingValues<> and so compilation will fail.
-    typedef typename wxIf<(all & add) == 0,
-                          FlagValue<add>,
-                          FlagsHaveConflictingValues<add> >::value
-            AddedValue;
+    using AddedValue = typename wxIf<(all & add) == 0, FlagValue<add>, FlagsHaveConflictingValues<add>>::value;
 
     enum { value = all | AddedValue::value };
 };

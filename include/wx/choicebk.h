@@ -113,7 +113,7 @@ public:
 
 // wxChoicebookEvent is obsolete and defined for compatibility only
 #define wxChoicebookEvent wxBookCtrlEvent
-typedef wxBookCtrlEventFunction wxChoicebookEventFunction;
+using wxChoicebookEventFunction = wxBookCtrlEventFunction;
 #define wxChoicebookEventHandler(func) wxBookCtrlEventHandler(func)
 
 #define EVT_CHOICEBOOK_PAGE_CHANGED(winid, fn) \

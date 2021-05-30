@@ -198,7 +198,7 @@ private:
 #if wxUSE_UNICODE_UTF8
 typedef wxStringOperationsUtf8 wxStringOperations;
 #else
-typedef wxStringOperationsWchar wxStringOperations;
+using wxStringOperations = wxStringOperationsWchar;
 #endif
 
 #endif  // _WX_WXSTRINGOPS_H_

@@ -694,7 +694,7 @@ public:
 private:
     ~wxZipWeakLinks() { wxASSERT(IsEmpty()); }
 
-    typedef wxOffsetZipEntryMap_::key_type key_type;
+    using key_type = wxOffsetZipEntryMap_::key_type;
 
     int m_ref{1};
     wxOffsetZipEntryMap_ m_entries;

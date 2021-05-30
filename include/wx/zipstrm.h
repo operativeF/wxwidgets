@@ -385,7 +385,7 @@ private:
 class WXDLLIMPEXP_BASE wxZipInputStream : public wxArchiveInputStream
 {
 public:
-    typedef wxZipEntry entry_type;
+    using entry_type = wxZipEntry;
 
     wxZipInputStream(wxInputStream& stream, wxMBConv& conv = wxConvLocal);
     wxZipInputStream(wxInputStream *stream, wxMBConv& conv = wxConvLocal);
@@ -465,9 +465,8 @@ private:
 // Iterators
 
 #if wxUSE_STL || defined WX_TEST_ARCHIVE_ITERATOR
-typedef wxArchiveIterator<wxZipInputStream> wxZipIter;
-typedef wxArchiveIterator<wxZipInputStream,
-         std::pair<wxString, wxZipEntry*> > wxZipPairIter;
+using wxZipIter = wxArchiveIterator<wxZipInputStream>;
+using wxZipPairIter = wxArchiveIterator<wxZipInputStream, std::pair<wxString, wxZipEntry *>>;
 #endif
 
 
@@ -477,13 +476,13 @@ typedef wxArchiveIterator<wxZipInputStream,
 class WXDLLIMPEXP_BASE wxZipClassFactory : public wxArchiveClassFactory
 {
 public:
-    typedef wxZipEntry        entry_type;
-    typedef wxZipInputStream  instream_type;
-    typedef wxZipOutputStream outstream_type;
-    typedef wxZipNotifier     notifier_type;
+    using entry_type = wxZipEntry;
+    using instream_type = wxZipInputStream;
+    using outstream_type = wxZipOutputStream;
+    using notifier_type = wxZipNotifier;
 #if wxUSE_STL || defined WX_TEST_ARCHIVE_ITERATOR
-    typedef wxZipIter         iter_type;
-    typedef wxZipPairIter     pairiter_type;
+    using iter_type = wxZipIter;
+    using pairiter_type = wxZipPairIter;
 #endif
 
     wxZipClassFactory();

@@ -69,7 +69,7 @@ extern WXDLLIMPEXP_DATA_BASE(const wxStringCharType*) wxEmptyStringImpl;
 using wxStdWideString = std::wstring;
 
 #if wxUSE_UNICODE_WCHAR
-    typedef wxStdWideString wxStdString;
+    using wxStdString = wxStdWideString;
 #else
     typedef std::string wxStdString;
 #endif
@@ -83,7 +83,7 @@ using wxStdWideString = std::wstring;
     #undef wxUSE_STD_STRING
     #define wxUSE_STD_STRING 1
 
-    typedef wxStdString wxStringImpl;
+    using wxStringImpl = wxStdString;
 #else // if !wxUSE_STL_BASED_WXSTRING
 
 // in non-STL mode, compare() is implemented in wxString and not wxStringImpl

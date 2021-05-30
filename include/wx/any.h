@@ -282,10 +282,7 @@ struct wxAnyAsImpl;
 template<typename T>
 class wxAnyValueTypeImplBase : public wxAnyValueType
 {
-    typedef typename wxIf< sizeof(T) <= WX_ANY_VALUE_BUFFER_SIZE,
-                           wxPrivate::wxAnyValueTypeOpsInplace<T>,
-                           wxPrivate::wxAnyValueTypeOpsGeneric<T> >::value
-            Ops;
+    using Ops = typename wxIf<sizeof(T) <= WX_ANY_VALUE_BUFFER_SIZE, wxPrivate::wxAnyValueTypeOpsInplace<T>, wxPrivate::wxAnyValueTypeOpsGeneric<T>>::value;
 
 public:
     wxAnyValueTypeImplBase() : wxAnyValueType() { }
@@ -402,8 +399,8 @@ _WX_ANY_DEFINE_SUB_TYPE(T, CLSTYPE)\
 //
 
 #ifdef wxLongLong_t
-    typedef wxLongLong_t wxAnyBaseIntType;
-    typedef wxULongLong_t wxAnyBaseUintType;
+    using wxAnyBaseIntType = long long;
+    using wxAnyBaseUintType = unsigned long long;
 #else
     typedef long wxAnyBaseIntType;
     typedef unsigned long wxAnyBaseUintType;
@@ -546,7 +543,7 @@ public:
 };
 
 // WX_ANY_DEFINE_SUB_TYPE requires this
-typedef double wxAnyBaseDoubleType;
+using wxAnyBaseDoubleType = double;
 
 WX_ANY_DEFINE_SUB_TYPE(float, Double)
 WX_ANY_DEFINE_SUB_TYPE(double, Double)

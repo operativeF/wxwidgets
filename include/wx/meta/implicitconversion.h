@@ -80,15 +80,7 @@ WX_TYPE_HIERARCHY_LEVEL(13, long double);
 template<typename T1, typename T2>
 struct wxImplicitConversionType
 {
-    typedef typename wxIf
-            <
-                // if T2 is "higher" type, convert to it
-                (int)(wxPrivate::TypeHierarchy<T1>::level) < (int)(wxPrivate::TypeHierarchy<T2>::level),
-                T2,
-                // otherwise use T1
-                T1
-            >::value
-            value;
+    using value = typename wxIf<(int)(wxPrivate::TypeHierarchy<T1>::level) < (int)(wxPrivate::TypeHierarchy<T2>::level), T2, T1>::value;
 };
 
 

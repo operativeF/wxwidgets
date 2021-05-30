@@ -53,10 +53,10 @@ class wxWebRequestImpl;
 class wxWebResponseImpl;
 class wxWebSessionImpl;
 
-typedef wxObjectDataPtr<wxWebAuthChallengeImpl> wxWebAuthChallengeImplPtr;
-typedef wxObjectDataPtr<wxWebRequestImpl> wxWebRequestImplPtr;
-typedef wxObjectDataPtr<wxWebResponseImpl> wxWebResponseImplPtr;
-typedef wxObjectDataPtr<wxWebSessionImpl> wxWebSessionImplPtr;
+using wxWebAuthChallengeImplPtr = wxObjectDataPtr<wxWebAuthChallengeImpl>;
+using wxWebRequestImplPtr = wxObjectDataPtr<wxWebRequestImpl>;
+using wxWebResponseImplPtr = wxObjectDataPtr<wxWebResponseImpl>;
+using wxWebSessionImplPtr = wxObjectDataPtr<wxWebSessionImpl>;
 
 class WXDLLIMPEXP_NET wxWebAuthChallenge
 {

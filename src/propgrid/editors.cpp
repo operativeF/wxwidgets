@@ -2188,7 +2188,7 @@ bool wxPGEditorBitmapButton::m_exactFitStyleDefined = false;
 
 #else // !__WXGTK__
 
-typedef wxBitmapButton wxPGEditorBitmapButton;
+using wxPGEditorBitmapButton = wxBitmapButton;
 
 #endif // __WXGTK__ / !__WXGTK__
 

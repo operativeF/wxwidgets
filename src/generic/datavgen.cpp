@@ -477,7 +477,7 @@ public:
 class wxDataViewMainWindow;
 class wxDataViewTreeNode;
 
-typedef std::vector<wxDataViewTreeNode*> wxDataViewTreeNodes;
+using wxDataViewTreeNodes = std::vector<wxDataViewTreeNode *>;
 
 // Note: this class is not used at all for virtual list models, so all code
 // using it, i.e. any functions taking or returning objects of this type,
@@ -6041,7 +6041,7 @@ bool wxDataViewCtrl::DeleteColumn( wxDataViewColumn *column )
 
 void wxDataViewCtrl::DoClearColumns()
 {
-    typedef std::vector<wxDataViewColumn*>::const_iterator citer;
+    using citer = std::vector<wxDataViewColumn *>::const_iterator;
     for ( citer it = m_cols.begin(); it != m_cols.end(); ++it )
         delete *it;
 }
@@ -6483,7 +6483,7 @@ void wxDataViewCtrl::ToggleSortByColumn(int column)
 
 void wxDataViewCtrl::DoEnableSystemTheme(bool enable, wxWindow* window)
 {
-    typedef wxSystemThemedControl<wxControl> Base;
+    using Base = wxSystemThemedControl<wxControl>;
     Base::DoEnableSystemTheme(enable, window);
     Base::DoEnableSystemTheme(enable, m_clientArea);
     if ( m_headerArea )

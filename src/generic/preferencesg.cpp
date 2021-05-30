@@ -131,7 +131,7 @@ protected:
         return dlg;
     }
 
-    typedef std::vector< wxSharedPtr<wxPreferencesPage> > Pages;
+    using Pages = std::vector<wxSharedPtr<wxPreferencesPage>>;
     Pages m_pages;
 
 private:

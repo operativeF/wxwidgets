@@ -209,7 +209,7 @@ struct ExtractedString
     int      lineNo{-1};
 };
 
-typedef std::vector<ExtractedString> ExtractedStrings;
+using ExtractedStrings = std::vector<ExtractedString>;
 
 
 class XmlResApp : public wxAppConsole

@@ -541,7 +541,7 @@ public:
 // shortcut to avoid checking compatibility modes later
 // remove this and all references to wxVarVScrollLegacyAdaptor once
 // wxWidgets 2.6 and 2.8 compatibility is removed
-typedef wxVarVScrollHelper wxVarVScrollLegacyAdaptor;
+using wxVarVScrollLegacyAdaptor = wxVarVScrollHelper;
 
 // this macro must be used in declaration of wxVarScrollHelperBase-derived
 // classes

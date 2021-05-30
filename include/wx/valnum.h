@@ -146,10 +146,10 @@ template <class B, typename T>
 class wxNumValidator : public B
 {
 public:
-    typedef B BaseValidator;
-    typedef T ValueType;
+    using BaseValidator = B;
+    using ValueType = T;
 
-    typedef typename BaseValidator::LongestValueType LongestValueType;
+    using LongestValueType = typename BaseValidator::LongestValueType;
 
     wxCOMPILE_TIME_ASSERT
     (
@@ -292,8 +292,8 @@ protected:
     // we support to make it possible to base wxIntegerValidator<> for any type
     // on it.
 #ifdef wxLongLong_t
-    typedef wxLongLong_t LongestValueType;
-    typedef wxULongLong_t ULongestValueType;
+    using LongestValueType = long long;
+    using ULongestValueType = unsigned long long;
 #else
     typedef long LongestValueType;
     typedef unsigned long ULongestValueType;
@@ -329,12 +329,10 @@ class wxIntegerValidator
     : public wxPrivate::wxNumValidator<wxIntegerValidatorBase, T>
 {
 public:
-    typedef T ValueType;
+    using ValueType = T;
 
-    typedef
-        wxPrivate::wxNumValidator<wxIntegerValidatorBase, T> Base;
-    typedef
-        wxIntegerValidatorBase::LongestValueType LongestValueType;
+    using Base = wxPrivate::wxNumValidator<wxIntegerValidatorBase, T>;
+    using LongestValueType = wxIntegerValidatorBase::LongestValueType;
 
     // Ctor for an integer validator.
     //
@@ -403,7 +401,7 @@ protected:
     // Notice that we can't use "long double" here because it's not supported
     // by wxNumberFormatter yet, so restrict ourselves to just double (and
     // float).
-    typedef double LongestValueType;
+    using LongestValueType = double;
 
     wxFloatingPointValidatorBase(int style)
         : wxNumValidatorBase(style)
@@ -439,9 +437,9 @@ class wxFloatingPointValidator
     : public wxPrivate::wxNumValidator<wxFloatingPointValidatorBase, T>
 {
 public:
-    typedef T ValueType;
-    typedef wxPrivate::wxNumValidator<wxFloatingPointValidatorBase, T> Base;
-    typedef wxFloatingPointValidatorBase::LongestValueType LongestValueType;
+    using ValueType = T;
+    using Base = wxPrivate::wxNumValidator<wxFloatingPointValidatorBase, T>;
+    using LongestValueType = wxFloatingPointValidatorBase::LongestValueType;
 
 
     // Ctor using implicit (maximal) precision for this type.

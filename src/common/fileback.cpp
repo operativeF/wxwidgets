@@ -24,7 +24,7 @@
 // Prefer wxFFile unless wxFile has large file support but wxFFile does not.
 //
 #if wxUSE_FFILE && (defined wxHAS_LARGE_FFILES || !defined wxHAS_LARGE_FILES)
-typedef wxFFile wxBFFile;
+using wxBFFile = wxFFile;
 static const bool wxBadSeek = false;
 #else
 typedef wxFile wxBFFile;

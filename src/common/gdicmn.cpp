@@ -444,7 +444,7 @@ wxString wxColourDatabase::FindName(const wxColour& colour) const
     wxColourDatabase * const self = const_cast<wxColourDatabase *>(this);
     self->Initialize();
 
-    typedef wxStringToColourHashMap::iterator iterator;
+    using iterator = wxStringToColourHashMap::iterator;
 
     for ( iterator it = m_map->begin(), en = m_map->end(); it != en; ++it )
     {

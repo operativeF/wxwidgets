@@ -195,7 +195,7 @@ class LexerVerilog : public ILexerWithSubStyles {
 			return !arguments.empty();
 		}
 	};
-	typedef std::map<std::string, SymbolValue> SymbolTable;
+	using SymbolTable = std::map<std::string, SymbolValue>;
 	SymbolTable preprocessorDefinitionsStart;
 	OptionsVerilog options;
 	OptionSetVerilog osVerilog;

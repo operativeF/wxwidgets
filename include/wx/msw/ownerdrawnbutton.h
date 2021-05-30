@@ -104,7 +104,7 @@ class wxMSWOwnerDrawnButton
       private wxMSWOwnerDrawnButtonBase
 {
 private:
-    typedef T Base;
+    using Base = T;
 
 public:
     wxMSWOwnerDrawnButton() : wxMSWOwnerDrawnButtonBase(this)

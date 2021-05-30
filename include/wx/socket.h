@@ -33,7 +33,7 @@ class wxSocketImpl;
 #if defined(__WINDOWS__)
     // Although socket descriptors are still 32 bit values, even under Win64,
     // the socket type is 64 bit there.
-    typedef wxUIntPtr wxSOCKET_T;
+    using wxSOCKET_T = wxUIntPtr;
 #else
     typedef int wxSOCKET_T;
 #endif
@@ -60,7 +60,7 @@ enum
 };
 
 // this is a combination of the bit masks defined above
-typedef int wxSocketEventFlags;
+using wxSocketEventFlags = int;
 
 enum wxSocketError
 {
@@ -93,7 +93,7 @@ enum
     wxSOCKET_NOBIND         = 0x0080
 };
 
-typedef int wxSocketFlags;
+using wxSocketFlags = int;
 
 // socket kind values (badly defined, don't use)
 enum wxSocketType

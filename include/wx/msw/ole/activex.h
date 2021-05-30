@@ -72,7 +72,7 @@ template<typename I>
 class wxAutoOleInterface
 {
 public:
-    typedef I Interface;
+    using Interface = I;
 
     explicit wxAutoOleInterface(I *pInterface = nullptr) : m_interface(pInterface)
         {}
@@ -140,14 +140,14 @@ protected:
     I *m_interface;
 };
 
-typedef wxAutoOleInterface<IDispatch> wxAutoIDispatch;
-typedef wxAutoOleInterface<IOleClientSite> wxAutoIOleClientSite;
-typedef wxAutoOleInterface<IUnknown> wxAutoIUnknown;
-typedef wxAutoOleInterface<IOleObject> wxAutoIOleObject;
-typedef wxAutoOleInterface<IOleInPlaceObject> wxAutoIOleInPlaceObject;
-typedef wxAutoOleInterface<IOleInPlaceActiveObject> wxAutoIOleInPlaceActiveObject;
-typedef wxAutoOleInterface<IOleDocumentView> wxAutoIOleDocumentView;
-typedef wxAutoOleInterface<IViewObject> wxAutoIViewObject;
+using wxAutoIDispatch = wxAutoOleInterface<IDispatch>;
+using wxAutoIOleClientSite = wxAutoOleInterface<IOleClientSite>;
+using wxAutoIUnknown = wxAutoOleInterface<IUnknown>;
+using wxAutoIOleObject = wxAutoOleInterface<IOleObject>;
+using wxAutoIOleInPlaceObject = wxAutoOleInterface<IOleInPlaceObject>;
+using wxAutoIOleInPlaceActiveObject = wxAutoOleInterface<IOleInPlaceActiveObject>;
+using wxAutoIOleDocumentView = wxAutoOleInterface<IOleDocumentView>;
+using wxAutoIViewObject = wxAutoOleInterface<IViewObject>;
 
 class WXDLLIMPEXP_CORE wxActiveXContainer : public wxWindow
 {

@@ -209,7 +209,7 @@ private:
         int end;
     };
 
-    typedef std::vector<Range> Ranges;
+    using Ranges = std::vector<Range>;
     Ranges m_ranges;
 };
 

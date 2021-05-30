@@ -59,7 +59,7 @@
 
     // the return type of the thread function entry point: notice that this
     // type can't hold a pointer under Win64
-    typedef unsigned THREAD_RETVAL;
+    using THREAD_RETVAL = unsigned int;
 
     // the calling convention of the thread function entry point
     #define THREAD_CALLCONV __stdcall

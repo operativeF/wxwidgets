@@ -246,7 +246,7 @@ private:
         FORMATETC *pformatetc;
         STGMEDIUM *pmedium;
     };
-    typedef std::vector<SystemDataEntry*> SystemData;
+    using SystemData = std::vector<SystemDataEntry *>;
 
     // get system data specified by the given format
     bool GetSystemData(wxDataFormat format, STGMEDIUM*) const;

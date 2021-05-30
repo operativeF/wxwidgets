@@ -36,7 +36,7 @@ inline wxCriticalSection& GetAllThreadInfosCS()
     return s_csAllThreadInfos;
 }
 
-typedef std::vector< wxSharedPtr<wxThreadSpecificInfo> > wxAllThreadInfos;
+using wxAllThreadInfos = std::vector<wxSharedPtr<wxThreadSpecificInfo>>;
 inline wxAllThreadInfos& GetAllThreadInfos()
 {
     static wxAllThreadInfos s_allThreadInfos;

@@ -16,7 +16,7 @@ namespace Scintilla {
  * A Position is a position within a document between two characters or at the beginning or end.
  * Sometimes used as a character index where it identifies the character after the position.
  */
-typedef int Position;
+using Position = int;
 const Position invalidPosition = -1;
 
 enum EncodingFamily { efEightBit, efUnicode, efDBCS };

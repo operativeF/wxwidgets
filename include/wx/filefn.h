@@ -42,14 +42,14 @@
 // had already predefined it.
 #if defined(__VISUALC__) && !defined(wxHAS_MODE_T)
     #define wxHAS_MODE_T
-    typedef int mode_t;
+    using mode_t = int;
 #endif
 
 // define off_t
 #include  <sys/types.h>
 
 #if defined(__VISUALC__)
-    typedef _off_t off_t;
+    using off_t = _off_t;
 #endif
 
 enum wxSeekMode
@@ -180,7 +180,7 @@ enum wxPosixPermissions
     // types
 
     #ifdef wxHAS_HUGE_FILES
-        typedef wxLongLong_t wxFileOffset;
+        using wxFileOffset = long long;
         #define wxFileOffsetFmtSpec wxLongLongFmtSpec
     #else
         typedef off_t wxFileOffset;

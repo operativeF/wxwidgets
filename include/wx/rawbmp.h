@@ -116,10 +116,10 @@ template <class Channel,
 struct wxPixelFormat
 {
     // iterator over pixels is usually of type "ChannelType *"
-    typedef Channel ChannelType;
+    using ChannelType = Channel;
 
     // the type which may hold the entire pixel value
-    typedef Pixel PixelType;
+    using PixelType = Pixel;
 
     // size of one pixel in bits
     static const int BitsPerPixel = Bpp;
@@ -145,12 +145,12 @@ struct wxPixelFormat
 // -------------------------------
 
 // wxImage format is common to all platforms
-typedef wxPixelFormat<unsigned char, 24, 0, 1, 2> wxImagePixelFormat;
+using wxImagePixelFormat = wxPixelFormat<unsigned char, 24, 0, 1, 2>;
 
 // the (most common) native bitmap format without alpha support
 #if defined(__WXMSW__)
     // under MSW the RGB components are reversed, they're in BGR order
-    typedef wxPixelFormat<unsigned char, 24, 2, 1, 0> wxNativePixelFormat;
+    using wxNativePixelFormat = wxPixelFormat<unsigned char, 24, 2, 1, 0>;
 
     #define wxPIXEL_FORMAT_ALPHA 3
 
@@ -158,7 +158,7 @@ typedef wxPixelFormat<unsigned char, 24, 0, 1, 2> wxImagePixelFormat;
     struct wxPixelFormat<void, 1, -1, -1, -1, -1, bool>
     {
         // the type which may hold the entire pixel value
-        typedef bool PixelType;
+        using PixelType = bool;
 
         // size of one pixel in bits
         static const int BitsPerPixel = 1;
@@ -170,7 +170,7 @@ typedef wxPixelFormat<unsigned char, 24, 0, 1, 2> wxImagePixelFormat;
         // doesn't cover the case of wxImage which stores alpha separately)
         enum { HasAlpha = false };
     };
-    typedef wxPixelFormat<void, 1, -1, -1, -1, -1, bool> wxMonoPixelFormat;
+    using wxMonoPixelFormat = wxPixelFormat<void, 1, -1, -1, -1, -1, bool>;
 #elif defined(__WXMAC__)
     // under Mac, first component is unused but still present, hence we use
     // 32bpp, not 24
@@ -195,11 +195,7 @@ typedef wxPixelFormat<unsigned char, 24, 0, 1, 2> wxImagePixelFormat;
 
 // the (most common) native format for bitmaps with alpha channel
 #ifdef wxPIXEL_FORMAT_ALPHA
-    typedef wxPixelFormat<unsigned char, 32,
-                          wxNativePixelFormat::RED,
-                          wxNativePixelFormat::GREEN,
-                          wxNativePixelFormat::BLUE,
-                          wxPIXEL_FORMAT_ALPHA> wxAlphaPixelFormat;
+    using wxAlphaPixelFormat = wxPixelFormat<unsigned char, 32, wxNativePixelFormat::RED, wxNativePixelFormat::GREEN, wxNativePixelFormat::BLUE, 3>;
 #endif // wxPIXEL_FORMAT_ALPHA
 
 // we also define the (default/best) pixel format for the given class: this is
@@ -213,7 +209,7 @@ template <class T> struct wxPixelFormatFor;
 template <>
 struct wxPixelFormatFor<wxImage>
 {
-    typedef wxImagePixelFormat Format;
+    using Format = wxImagePixelFormat;
 };
 #endif //wxUSE_IMAGE
 
@@ -316,7 +312,7 @@ struct wxPixelDataOut<wxImage>
     {
     public:
         // the type of the class we're working with
-        typedef wxImage ImageType;
+        using ImageType = wxImage;
 
         // the iterator which should be used for working with data in this
         // format
@@ -324,11 +320,10 @@ struct wxPixelDataOut<wxImage>
         {
         public:
             // the pixel format we use
-            typedef wxImagePixelFormat PixelFormat;
+            using PixelFormat = wxImagePixelFormat;
 
             // the pixel data we're working with
-            typedef
-                wxPixelDataOut<wxImage>::wxPixelDataIn<PixelFormat> PixelData;
+            using PixelData = wxPixelDataOut<wxImage>::wxPixelDataIn<PixelFormat>;
 
             // go back to (0, 0)
             void Reset(const PixelData& data)
@@ -507,19 +502,19 @@ struct wxPixelDataOut<wxBitmap>
     {
     public:
         // the type of the class we're working with
-        typedef wxBitmap ImageType;
+        using ImageType = wxBitmap;
 
         class Iterator
         {
         public:
             // the pixel format we use
-            typedef Format PixelFormat;
+            using PixelFormat = Format;
 
             // the type of the pixel components
-            typedef typename PixelFormat::ChannelType ChannelType;
+            using ChannelType = typename PixelFormat::ChannelType;
 
             // the pixel data we're working with
-            typedef wxPixelDataOut<wxBitmap>::wxPixelDataIn<Format> PixelData;
+            using PixelData = wxPixelDataOut<wxBitmap>::wxPixelDataIn<Format>;
 
 
             // go back to (0, 0)
@@ -701,7 +696,7 @@ struct wxPixelDataOut<wxBitmap>
         {
         public:
             // the type of the class we're working with
-            typedef wxBitmap ImageType;
+            using ImageType = wxBitmap;
 
             // Reference emulates ChannelType& for monochrome bitmap
             class Iterator;
@@ -737,13 +732,13 @@ struct wxPixelDataOut<wxBitmap>
             {
             public:
                 // emulate unspecialized template
-                typedef wxMonoPixelFormat Format;
+                using Format = wxMonoPixelFormat;
 
                 // the pixel format we use
-                typedef Format PixelFormat;
+                using PixelFormat = Format;
 
                 // the pixel data we're working with
-                typedef wxPixelDataOut<wxBitmap>::wxPixelDataIn<Format> PixelData;
+                using PixelData = wxPixelDataOut<wxBitmap>::wxPixelDataIn<Format>;
 
 
                 // go back to (0, 0)
@@ -917,9 +912,7 @@ class wxPixelData :
     public wxPixelDataOut<Image>::template wxPixelDataIn<PixelFormat>
 {
 public:
-    typedef
-        typename wxPixelDataOut<Image>::template wxPixelDataIn<PixelFormat>
-        Base;
+    using Base = typename wxPixelDataOut<Image>::template wxPixelDataIn<PixelFormat>;
 
     wxPixelData(Image& image) : Base(image) { }
 
@@ -933,14 +926,14 @@ public:
 
 // some "predefined" pixel data classes
 #if wxUSE_IMAGE
-typedef wxPixelData<wxImage> wxImagePixelData;
+using wxImagePixelData = wxPixelData<wxImage>;
 #endif //wxUSE_IMAGE
 #if wxUSE_GUI
-typedef wxPixelData<wxBitmap, wxNativePixelFormat> wxNativePixelData;
-typedef wxPixelData<wxBitmap, wxAlphaPixelFormat> wxAlphaPixelData;
+using wxNativePixelData = wxPixelData<wxBitmap, wxNativePixelFormat>;
+using wxAlphaPixelData = wxPixelData<wxBitmap, wxAlphaPixelFormat>;
 
 #if defined(__WXMSW__)
-typedef wxPixelData<wxBitmap, wxMonoPixelFormat> wxMonoPixelData;
+using wxMonoPixelData = wxPixelData<wxBitmap, wxMonoPixelFormat>;
 #endif
 
 #endif //wxUSE_GUI

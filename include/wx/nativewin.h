@@ -34,9 +34,9 @@
 #if defined(__WXMSW__)
     #include "wx/msw/wrapwin.h"
 
-    typedef HWND wxNativeContainerWindowId;
-    typedef HWND wxNativeContainerWindowHandle;
-    typedef HWND wxNativeWindowHandle;
+    using wxNativeContainerWindowId = HWND;
+    using wxNativeContainerWindowHandle = HWND;
+    using wxNativeWindowHandle = HWND;
 #elif defined(__WXGTK__)
     // GdkNativeWindow is guint32 under GDK/X11 and gpointer under GDK/WIN32
     #ifdef __UNIX__

@@ -64,7 +64,7 @@
 // simple types
 // ----------------------------------------------------------------------------
 
-typedef wxUint32 size_t32;
+using size_t32 = wxUint32;
 
 // ----------------------------------------------------------------------------
 // constants
@@ -346,7 +346,7 @@ public:
     Type type() const { return m_type; }
     void setType(Type t) { m_type = t; }
     // for T_NUMBER only
-    typedef int Number;
+    using Number = int;
     Number number() const { return m_number; }
     void setNumber(Number num) { m_number = num; }
 private:
@@ -1008,7 +1008,7 @@ wxPluralFormsCalculator* wxPluralFormsCalculator::make(const char* s)
 class wxMsgCatalogFile
 {
 public:
-    typedef wxScopedCharBuffer DataBuffer;
+    using DataBuffer = wxScopedCharBuffer;
 
     // ctor & dtor
     wxMsgCatalogFile();

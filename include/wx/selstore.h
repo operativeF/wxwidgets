@@ -91,7 +91,7 @@ public:
 
     // type of a "cookie" used to preserve the iteration state, this is an
     // opaque type, don't rely on its current representation
-    typedef size_t IterationState;
+    using IterationState = size_t;
 
     // constant representing absence of selection and hence end of iteration
     static const unsigned NO_SELECTION;
