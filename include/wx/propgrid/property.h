@@ -1458,9 +1458,7 @@ public:
     bool IsSubProperty() const
     {
         wxPGProperty* parent = m_parent;
-        if ( parent && !parent->IsCategory() )
-            return true;
-        return false;
+        return parent && !parent->IsCategory();
     }
 
     // Returns last visible sub-property, recursively.

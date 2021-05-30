@@ -479,7 +479,7 @@ public:
     wxUint32 GetInternalFlags() const { return m_iFlags; }
 
     // Return true if Create has finished
-    bool IsCreated() const { return m_iFlags & wxCC_IFLAG_CREATED ? true : false; }
+    bool IsCreated() const { return (m_iFlags & wxCC_IFLAG_CREATED) != 0; }
 
     // Need to override to return text area background colour
     wxColour GetBackgroundColour() const;
@@ -496,7 +496,7 @@ public:
         Visible      = 3
     };
 
-    bool IsPopupWindowState( int state ) const { return (state == m_popupWinState) ? true : false; }
+    bool IsPopupWindowState( int state ) const { return state == m_popupWinState; }
 
     wxByte GetPopupWindowState() const { return m_popupWinState; }
 
@@ -876,7 +876,7 @@ public:
     // Returns true if Create has been called.
     bool IsCreated() const
     {
-        return (m_iFlags & wxCP_IFLAG_CREATED) ? true : false;
+        return (m_iFlags & wxCP_IFLAG_CREATED) != 0;
     }
 
     // Returns pointer to the associated parent wxComboCtrl.

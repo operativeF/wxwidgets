@@ -148,14 +148,12 @@ inline bool iswordstart(int ch) {
 inline bool isoperator(int ch) {
 	if (IsAlphaNumeric(ch))
 		return false;
-	if (ch == '%' || ch == '^' || ch == '&' || ch == '*' ||
+	return ch == '%' || ch == '^' || ch == '&' || ch == '*' ||
 	        ch == '(' || ch == ')' || ch == '-' || ch == '+' ||
 	        ch == '=' || ch == '|' || ch == '{' || ch == '}' ||
 	        ch == '[' || ch == ']' || ch == ':' || ch == ';' ||
 	        ch == '<' || ch == '>' || ch == ',' || ch == '/' ||
-	        ch == '?' || ch == '!' || ch == '.' || ch == '~')
-		return true;
-	return false;
+	        ch == '?' || ch == '!' || ch == '.' || ch == '~';
 }
 
 // Simple case functions for ASCII.

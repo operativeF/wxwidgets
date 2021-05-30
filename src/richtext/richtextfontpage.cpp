@@ -428,10 +428,7 @@ bool wxRichTextFontPage::TransferDataFromWindow()
     if (m_underliningCtrl->GetSelection() != wxNOT_FOUND && m_underliningCtrl->GetSelection() != 0)
     {
         bool underlined;
-        if (m_underliningCtrl->GetSelection() == 2)
-            underlined = true;
-        else
-            underlined = false;
+        underlined = m_underliningCtrl->GetSelection() == 2;
 
         attr->SetFontUnderlined(underlined);
     }
@@ -839,10 +836,7 @@ void wxRichTextFontPage::UpdatePreview()
     if (m_underliningCtrl->GetSelection() != wxNOT_FOUND && m_underliningCtrl->GetSelection() != 0)
     {
         bool underlined;
-        if (m_underliningCtrl->GetSelection() == 2)
-            underlined = true;
-        else
-            underlined = false;
+        underlined = m_underliningCtrl->GetSelection() == 2;
 
         attr.SetFontUnderlined(underlined);
     }
