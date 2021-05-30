@@ -16,10 +16,10 @@ namespace Scintilla {
  */
 class Timer {
 public:
-	bool ticking;
-	int ticksToWait;
+	bool ticking{false};
+	int ticksToWait{0};
 	enum {tickSize = 100};
-	TickerID tickerID;
+	TickerID tickerID{nullptr};
 
 	Timer();
 };
@@ -28,8 +28,8 @@ public:
  */
 class Idler {
 public:
-	bool state;
-	IdlerID idlerID;
+	bool state{false};
+	IdlerID idlerID{nullptr};
 
 	Idler();
 };
@@ -46,10 +46,10 @@ public:
 		workStyle=1,
 		workUpdateUI=2
 	};
-	enum workItems items;
-	Position upTo;
+	enum workItems items{workNone};
+	Position upTo{0};
 
-	WorkNeeded() : items(workNone), upTo(0) {}
+	WorkNeeded()  {}
 	void Reset() {
 		items = workNone;
 		upTo = 0;
@@ -67,11 +67,11 @@ public:
 class SelectionText {
 	std::string s;
 public:
-	bool rectangular;
-	bool lineCopy;
-	int codePage;
-	int characterSet;
-	SelectionText() : rectangular(false), lineCopy(false), codePage(0), characterSet(0) {}
+	bool rectangular{false};
+	bool lineCopy{false};
+	int codePage{0};
+	int characterSet{0};
+	SelectionText()  {}
 	~SelectionText() {
 	}
 	void Clear() {

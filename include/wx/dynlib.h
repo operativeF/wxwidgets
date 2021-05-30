@@ -220,7 +220,7 @@ public:
     // return the platform standard DLL extension (with leading dot)
     static wxString GetDllExt(wxDynamicLibraryCategory cat = wxDL_LIBRARY);
 
-    wxDynamicLibrary() : m_handle(NULL) { }
+    wxDynamicLibrary()  { }
     wxDynamicLibrary(const wxString& libname, int flags = wxDL_DEFAULT)
         : m_handle(NULL)
     {
@@ -358,7 +358,7 @@ protected:
                             const wxString& name = wxString());
 
     // the handle to DLL or NULL
-    wxDllType m_handle;
+    wxDllType m_handle{NULL};
 
     // no copy ctor/assignment operators (or we'd try to unload the library
     // twice)

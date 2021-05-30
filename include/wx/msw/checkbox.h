@@ -17,7 +17,7 @@
 class WXDLLIMPEXP_CORE wxCheckBox : public wxMSWOwnerDrawnButton<wxCheckBoxBase>
 {
 public:
-    wxCheckBox() : m_state(wxCHK_UNCHECKED) { }
+    wxCheckBox()  { }
     wxCheckBox(wxWindow *parent,
                wxWindowID id,
                const wxString& label,
@@ -80,7 +80,7 @@ private:
     
 
     // current state of the checkbox
-    wxCheckBoxState m_state;
+    wxCheckBoxState m_state{wxCHK_UNCHECKED};
 
 public:
 	wxClassInfo *GetClassInfo() const;

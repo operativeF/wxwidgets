@@ -42,8 +42,8 @@ wxIMPLEMENT_CLASS(wxURI, wxObject);
 // ---------------------------------------------------------------------------
 
 wxURI::wxURI()
-     : m_hostType(wxURI_REGNAME),
-       m_fields(0)
+     
+       
 {
 }
 

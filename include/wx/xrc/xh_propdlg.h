@@ -26,8 +26,8 @@ public:
     bool CanHandle(wxXmlNode *node) override;
 
 private:
-    bool m_isInside;
-    wxPropertySheetDialog *m_dialog;
+    bool m_isInside{false};
+    wxPropertySheetDialog *m_dialog{nullptr};
 };
 
 #endif // wxUSE_XRC

@@ -98,11 +98,11 @@ public:
 /**
  */
 class LineLayoutCache {
-	int level;
+	int level{0};
 	std::vector<LineLayout *>cache;
-	bool allInvalidated;
-	int styleClock;
-	int useCount;
+	bool allInvalidated{false};
+	int styleClock{-1};
+	int useCount{0};
 	void Allocate(size_t length_);
 	void AllocateForLevel(int linesOnScreen, int linesInDoc);
 public:
@@ -127,7 +127,7 @@ class PositionCacheEntry {
 	unsigned int styleNumber:8;
 	unsigned int len:8;
 	unsigned int clock:16;
-	XYPOSITION *positions;
+	XYPOSITION *positions{nullptr};
 public:
 	PositionCacheEntry();
 	~PositionCacheEntry();

@@ -20,7 +20,7 @@
 class WXDLLIMPEXP_ADV wxAnimationGenericImpl : public wxAnimationImpl
 {
 public:
-    wxAnimationGenericImpl() : m_decoder(NULL) {}
+    wxAnimationGenericImpl()  {}
     virtual ~wxAnimationGenericImpl() { UnRef(); }
 
     bool IsOk() const override
@@ -47,7 +47,7 @@ public:
 private:
     void UnRef();
 
-    wxAnimationDecoder* m_decoder;
+    wxAnimationDecoder* m_decoder{NULL};
 
     wxAnimationGenericImpl(const wxAnimationGenericImpl&) = delete;
 	wxAnimationGenericImpl& operator=(const wxAnimationGenericImpl&) = delete;

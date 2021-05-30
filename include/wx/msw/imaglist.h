@@ -196,9 +196,9 @@ public:
   WXHIMAGELIST GetHIMAGELIST() const { return m_hImageList; }
 
 protected:
-  WXHIMAGELIST m_hImageList;
+  WXHIMAGELIST m_hImageList{nullptr};
   wxSize m_size;
-  bool m_useMask;
+  bool m_useMask{false};
 
 public:
 	wxClassInfo *GetClassInfo() const;

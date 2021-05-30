@@ -719,7 +719,7 @@ class WXDLLIMPEXP_CORE wxRect
 {
 public:
     wxRect()
-        : x(0), y(0), width(0), height(0)
+         
         { }
     wxRect(int xx, int yy, int ww, int hh)
         : x(xx), y(yy), width(ww), height(hh)
@@ -854,7 +854,7 @@ public:
     }
 
 public:
-    int x, y, width, height;
+    int x{0}, y{0}, width{0}, height{0};
 };
 
 

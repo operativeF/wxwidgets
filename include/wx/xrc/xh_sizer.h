@@ -31,10 +31,10 @@ protected:
     virtual bool IsSizerNode(wxXmlNode *node) const;
 
 private:
-    bool m_isInside;
-    bool m_isGBS;
+    bool m_isInside{false};
+    bool m_isGBS{false};
 
-    wxSizer *m_parentSizer;
+    wxSizer *m_parentSizer{nullptr};
 
 
     wxObject* Handle_sizeritem();
@@ -73,8 +73,8 @@ public:
     bool CanHandle(wxXmlNode *node) override;
 
 private:
-    bool m_isInside;
-    wxStdDialogButtonSizer *m_parentSizer;
+    bool m_isInside{false};
+    wxStdDialogButtonSizer *m_parentSizer{nullptr};
 };
 
 #endif // wxUSE_BUTTON

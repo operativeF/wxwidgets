@@ -36,12 +36,12 @@ private:
     typedef std::vector<wxAuiManager*> Managers;
     Managers m_managers; // all wxAuiManagers created in this handler
 
-    wxAuiManager    *m_manager;  // Current wxAuiManager
-    wxWindow        *m_window;   // Current managed wxWindow
-    wxAuiNotebook   *m_notebook;
+    wxAuiManager    *m_manager{nullptr};  // Current wxAuiManager
+    wxWindow        *m_window{nullptr};   // Current managed wxWindow
+    wxAuiNotebook   *m_notebook{nullptr};
 
-    bool m_mgrInside; // Are we handling a wxAuiManager or panes inside it?
-    bool m_anbInside; // Are we handling a wxAuiNotebook or pages inside it?
+    bool m_mgrInside{false}; // Are we handling a wxAuiManager or panes inside it?
+    bool m_anbInside{false}; // Are we handling a wxAuiNotebook or pages inside it?
 
     wxDECLARE_DYNAMIC_CLASS(wxAuiXmlHandler);
 };

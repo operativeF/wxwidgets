@@ -250,9 +250,7 @@ int LineLayout::EndLineStyle() const {
 	return styles[numCharsBeforeEOL > 0 ? numCharsBeforeEOL-1 : 0];
 }
 
-LineLayoutCache::LineLayoutCache() :
-	level(0),
-	allInvalidated(false), styleClock(-1), useCount(0) {
+LineLayoutCache::LineLayoutCache()  {
 	Allocate(0);
 }
 
@@ -560,7 +558,7 @@ bool BreakFinder::More() const {
 }
 
 PositionCacheEntry::PositionCacheEntry() :
-	styleNumber(0), len(0), clock(0), positions(nullptr) {
+	styleNumber(0), len(0), clock(0) {
 }
 
 void PositionCacheEntry::Set(unsigned int styleNumber_, const char *s_,

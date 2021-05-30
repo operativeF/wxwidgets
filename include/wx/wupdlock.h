@@ -21,7 +21,7 @@ class wxWindowUpdateLocker
 public:
     // Prefer using the ctor below if possible, this ctor is only useful if
     // Lock() must be called only conditionally.
-    wxWindowUpdateLocker() : m_win(NULL) { }
+    wxWindowUpdateLocker()  { }
 
     // create an object preventing updates of the given window (which must have
     // a lifetime at least as great as ours)
@@ -44,7 +44,7 @@ public:
     }
 
 private:
-    wxWindow *m_win;
+    wxWindow *m_win{NULL};
 
     wxWindowUpdateLocker(const wxWindowUpdateLocker&) = delete;
 	wxWindowUpdateLocker& operator=(const wxWindowUpdateLocker&) = delete;

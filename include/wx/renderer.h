@@ -117,7 +117,7 @@ struct WXDLLIMPEXP_CORE wxSplitterRenderParams
 struct WXDLLIMPEXP_CORE wxHeaderButtonParams
 {
     wxHeaderButtonParams()
-        : m_labelAlignment(wxALIGN_LEFT)
+         
     { }
 
     wxColour    m_arrowColour;
@@ -126,7 +126,7 @@ struct WXDLLIMPEXP_CORE wxHeaderButtonParams
     wxFont      m_labelFont;
     wxColour    m_labelColour;
     wxBitmap    m_labelBitmap;
-    int         m_labelAlignment;
+    int         m_labelAlignment{wxALIGN_LEFT};
 };
 
 enum class wxHeaderSortIconType

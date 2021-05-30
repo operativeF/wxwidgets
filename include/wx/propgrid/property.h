@@ -646,7 +646,7 @@ public:
     }
 
 protected:
-    int m_value;
+    int m_value{wxPG_INVALID_VALUE};
 };
 
 

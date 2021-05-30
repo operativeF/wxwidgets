@@ -129,8 +129,8 @@ public:
     // Default ctor uses the default font size appropriate for the current
     // platform.
     wxFontInfo()
-        : m_pointSize(-1.0)
-        , m_pixelSize(wxDefaultSize)
+        : 
+         m_pixelSize(wxDefaultSize)
     {
         
         m_family = wxFONTFAMILY_DEFAULT;
@@ -308,7 +308,7 @@ private:
     // The size information: if m_pixelSize is valid (!= wxDefaultSize), then
     // it is used. Otherwise m_pointSize is used, except if it is < 0, which
     // means that the platform dependent font size should be used instead.
-    double m_pointSize;
+    double m_pointSize{-1.0};
     wxSize m_pixelSize;
 
     wxFontFamily m_family;

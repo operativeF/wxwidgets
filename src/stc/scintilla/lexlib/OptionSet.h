@@ -21,7 +21,7 @@ class OptionSet {
 	typedef int T::*plcoi;
 	typedef std::string T::*plcos;
 	struct Option {
-		int opType;
+		int opType{SC_TYPE_BOOLEAN};
 		union {
 			plcob pb;
 			plcoi pi;
@@ -29,7 +29,7 @@ class OptionSet {
 		};
 		std::string description;
 		Option() :
-			opType(SC_TYPE_BOOLEAN), pb(0), description("") {
+			 pb(0), description("") {
 		}
 		Option(plcob pb_, std::string description_="") :
 			opType(SC_TYPE_BOOLEAN), pb(pb_), description(description_) {

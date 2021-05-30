@@ -130,19 +130,19 @@ private:
 
 protected:
     // number of buckets
-    size_t m_size;
+    size_t m_size{ 0 };
 
     // number of nodes (key/value pairs)
-    size_t m_count;
+    size_t m_count{ 0 };
 
     // table
-    Node** m_table;
+    Node** m_table{ nullptr };
 
     // key typ (INTEGER/STRING)
-    wxKeyType m_keyType;
+    wxKeyType m_keyType{ wxKEY_NONE };
 
     // delete contents when hash is cleared
-    bool m_deleteContents;
+    bool m_deleteContents{ false };
 
 private:
     wxHashTableBase(const wxHashTableBase&) = delete;

@@ -16,9 +16,9 @@ namespace Scintilla {
 */
 class Caret {
 public:
-	bool active;
-	bool on;
-	int period;
+	bool active{false};
+	bool on{false};
+	int period{500};
 
 	Caret();
 };

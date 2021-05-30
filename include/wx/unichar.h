@@ -34,7 +34,7 @@ public:
     //     (e.g. on Win32 where wchar_t* is encoded in UTF-16)
     typedef wxUint32 value_type;
 
-    wxUniChar() : m_value(0) {}
+    wxUniChar()  {}
 
     // Create the character from 8bit character value encoded in the current
     // locale's charset.
@@ -199,7 +199,7 @@ private:
     static bool GetAsHi8bit(value_type v, char *c);
 
 private:
-    value_type m_value;
+    value_type m_value{0};
 };
 
 

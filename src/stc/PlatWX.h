@@ -20,7 +20,7 @@ wxColour wxColourFromCD(const ColourDesired& ca);
 
 class ListBoxImpl : public ListBox {
 private:
-    wxSTCListBox*           m_listBox;
+    wxSTCListBox*           m_listBox{nullptr};
     wxSTCListBoxVisualData* m_visualData;
 
 public:

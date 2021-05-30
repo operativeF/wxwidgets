@@ -24,7 +24,7 @@ public:
     bool CanHandle(wxXmlNode *node) override;
 
 private:
-    bool m_isInside;
+    bool m_isInside{false};
     wxCollapsiblePane *m_collpane;
 
     wxDECLARE_DYNAMIC_CLASS(wxCollapsiblePaneXmlHandler);

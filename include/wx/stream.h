@@ -319,8 +319,8 @@ public:
     wxInputStream *GetFilterInputStream() const { return m_parent_i_stream; }
 
 protected:
-    wxInputStream *m_parent_i_stream;
-    bool m_owns;
+    wxInputStream *m_parent_i_stream{nullptr};
+    bool m_owns{false};
 
     wxDECLARE_ABSTRACT_CLASS(wxFilterInputStream);
     wxFilterInputStream(const wxFilterInputStream&) = delete;
@@ -342,8 +342,8 @@ public:
     bool Close() override;
 
 protected:
-    wxOutputStream *m_parent_o_stream;
-    bool m_owns;
+    wxOutputStream *m_parent_o_stream{nullptr};
+    bool m_owns{false};
 
     wxDECLARE_ABSTRACT_CLASS(wxFilterOutputStream);
     wxFilterOutputStream(const wxFilterOutputStream&) = delete;

@@ -43,9 +43,9 @@ public:
 class LineMarkers : public PerLine {
 	SplitVector<MarkerHandleSet *> markers;
 	/// Handles are allocated sequentially and should never have to be reused as 32 bit ints are very big.
-	int handleCurrent;
+	int handleCurrent{0};
 public:
-	LineMarkers() : handleCurrent(0) {
+	LineMarkers()  {
 	}
 	virtual ~LineMarkers();
 	virtual void Init();

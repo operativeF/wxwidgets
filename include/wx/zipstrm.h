@@ -118,6 +118,12 @@ enum wxZipArchiveFormat
     wxZIP_FORMAT_ZIP64
 };
 
+// value for the 'version needed to extract' field (20 means 2.0)
+enum {
+    VERSION_NEEDED_TO_EXTRACT = 20,
+    Z64_VERSION_NEEDED_TO_EXTRACT = 45 // File uses ZIP64 format extensions
+};
+
 // Forward decls
 //
 class WXDLLIMPEXP_FWD_BASE wxZipEntry;
@@ -251,14 +257,14 @@ private:
 
     wxUint16 GetInternalFlags(bool checkForUTF8) const;
 
-    wxUint8      m_SystemMadeBy;       // one of enum wxZipSystem
+    wxUint8      m_SystemMadeBy{wxZIP_SYSTEM_MSDOS};       // one of enum wxZipSystem
     wxUint8      m_VersionMadeBy;      // major * 10 + minor
 
-    wxUint16     m_VersionNeeded;      // ver needed to extract (20 i.e. v2.0)
-    wxUint16     m_Flags;
-    wxUint16     m_Method;             // compression method (one of wxZipMethod)
+    wxUint16     m_VersionNeeded{VERSION_NEEDED_TO_EXTRACT};      // ver needed to extract (20 i.e. v2.0)
+    wxUint16     m_Flags{0};
+    wxUint16     m_Method{wxZIP_METHOD_DEFAULT};             // compression method (one of wxZipMethod)
     wxDateTime   m_DateTime;
-    wxUint32     m_Crc;
+    wxUint32     m_Crc{0};
     wxFileOffset m_CompressedSize;
     wxFileOffset m_Size;
     wxString     m_Name;               // in internal format
@@ -266,16 +272,16 @@ private:
     wxFileOffset m_Offset;             // file offset of the entry
 
     wxString     m_Comment;
-    wxUint16     m_DiskStart;          // for multidisk archives, not unsupported
-    wxUint16     m_InternalAttributes; // bit 0 set for text files
-    wxUint32     m_ExternalAttributes; // system specific depends on SystemMadeBy
-    wxUint16     m_z64infoOffset;      // Offset of ZIP64 local extra data for file sizes
+    wxUint16     m_DiskStart{0};          // for multidisk archives, not unsupported
+    wxUint16     m_InternalAttributes{0}; // bit 0 set for text files
+    wxUint32     m_ExternalAttributes{0}; // system specific depends on SystemMadeBy
+    wxUint16     m_z64infoOffset{0};      // Offset of ZIP64 local extra data for file sizes
 
-    class wxZipMemory *m_Extra;
-    class wxZipMemory *m_LocalExtra;
+    class wxZipMemory *m_Extra{nullptr};
+    class wxZipMemory *m_LocalExtra{nullptr};
 
-    wxZipNotifier *m_zipnotifier;
-    class wxZipWeakLinks *m_backlink;
+    wxZipNotifier *m_zipnotifier{nullptr};
+    class wxZipWeakLinks *m_backlink{nullptr};
 
     friend class wxZipInputStream;
     friend class wxZipOutputStream;

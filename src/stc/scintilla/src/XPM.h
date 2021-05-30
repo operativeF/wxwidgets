@@ -70,8 +70,8 @@ public:
 class RGBAImageSet {
 	typedef std::map<int, RGBAImage*> ImageMap;
 	ImageMap images;
-	mutable int height;	///< Memorize largest height of the set.
-	mutable int width;	///< Memorize largest width of the set.
+	mutable int height{-1};	///< Memorize largest height of the set.
+	mutable int width{-1};	///< Memorize largest width of the set.
 public:
 	RGBAImageSet();
 	~RGBAImageSet();

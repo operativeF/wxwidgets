@@ -34,8 +34,7 @@ bool Decoration::Empty() const {
 	return (rs.Runs() == 1) && (rs.AllSameAs(0));
 }
 
-DecorationList::DecorationList() : currentIndicator(0), currentValue(1), current(nullptr),
-	lengthDocument(0), root(nullptr), clickNotified(false) {
+DecorationList::DecorationList()  {
 }
 
 DecorationList::~DecorationList() {

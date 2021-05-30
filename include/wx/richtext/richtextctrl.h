@@ -2543,8 +2543,8 @@ public:
     */
     wxRichTextEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
         : wxNotifyEvent(commandType, winid),
-        m_flags(0), m_position(-1), m_oldStyleSheet(NULL), m_newStyleSheet(NULL),
-        m_char((wxChar) 0), m_container(NULL), m_oldContainer(NULL)
+        
+        m_char((wxChar) 0) 
         { }
 
     /**
@@ -2650,14 +2650,14 @@ public:
     wxEvent *Clone() const override { return new wxRichTextEvent(*this); }
 
 protected:
-    int                             m_flags;
-    long                            m_position;
-    wxRichTextStyleSheet*           m_oldStyleSheet;
-    wxRichTextStyleSheet*           m_newStyleSheet;
+    int                             m_flags{0};
+    long                            m_position{-1};
+    wxRichTextStyleSheet*           m_oldStyleSheet{NULL};
+    wxRichTextStyleSheet*           m_newStyleSheet{NULL};
     wxRichTextRange                 m_range;
     wxChar                          m_char;
-    wxRichTextParagraphLayoutBox*   m_container;
-    wxRichTextParagraphLayoutBox*   m_oldContainer;
+    wxRichTextParagraphLayoutBox*   m_container{NULL};
+    wxRichTextParagraphLayoutBox*   m_oldContainer{NULL};
 
 private:
     public:

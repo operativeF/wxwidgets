@@ -23,8 +23,7 @@ public:
     wxBestHelpController(wxWindow* parentWindow = NULL,
                          int style = wxHF_DEFAULT_STYLE)
         : wxHelpControllerBase(parentWindow),
-          m_helpControllerType(wxUseNone),
-          m_helpController(NULL),
+          
           m_style(style)
     {
     }
@@ -114,8 +113,8 @@ protected:
 protected:
     enum HelpControllerType { wxUseNone, wxUseHtmlHelp, wxUseChmHelp };
 
-    HelpControllerType m_helpControllerType;
-    wxHelpControllerBase* m_helpController;
+    HelpControllerType m_helpControllerType{wxUseNone};
+    wxHelpControllerBase* m_helpController{NULL};
     int m_style;
 
     wxDECLARE_DYNAMIC_CLASS(wxBestHelpController);

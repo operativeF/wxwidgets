@@ -354,9 +354,9 @@ typedef void (*CallBackAction)(void*);
  */
 class Window {
 protected:
-	WindowID wid;
+	WindowID wid{0};
 public:
-	Window() : wid(0), cursorLast(cursorInvalid) {
+	Window()  {
 	}
 	Window(const Window &source) : wid(source.wid), cursorLast(cursorInvalid) {
 	}
@@ -382,7 +382,7 @@ public:
 	void SetTitle(const char *s);
 	PRectangle GetMonitorRect(Point pt);
 private:
-	Cursor cursorLast;
+	Cursor cursorLast{cursorInvalid};
 };
 
 /**
@@ -420,7 +420,7 @@ public:
  * Menu management.
  */
 class Menu {
-	MenuID mid;
+	MenuID mid{nullptr};
 public:
 	Menu();
 	MenuID GetID() { return mid; }

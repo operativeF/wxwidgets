@@ -29,8 +29,7 @@
 using namespace Scintilla;
 #endif
 
-MarginStyle::MarginStyle() :
-	style(SC_MARGIN_SYMBOL), width(0), mask(0), sensitive(false), cursor(SC_CURSORREVERSEARROW) {
+MarginStyle::MarginStyle()  {
 }
 
 // A list of the fontnames - avoids wasting space in each style

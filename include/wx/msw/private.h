@@ -443,15 +443,15 @@ private:
 class WindowHDC
 {
 public:
-    WindowHDC() : m_hwnd(NULL), m_hdc(NULL) { }
+    WindowHDC()  { }
     WindowHDC(HWND hwnd) { m_hdc = ::GetDC(m_hwnd = hwnd); }
    ~WindowHDC() { if ( m_hwnd && m_hdc ) { ::ReleaseDC(m_hwnd, m_hdc); } }
 
     operator HDC() const { return m_hdc; }
 
 private:
-   HWND m_hwnd;
-   HDC m_hdc;
+   HWND m_hwnd{NULL};
+   HDC m_hdc{NULL};
 
    WindowHDC(const WindowHDC&) = delete;
 	WindowHDC& operator=(const WindowHDC&) = delete;
@@ -482,7 +482,7 @@ private:
     void DoInit(HGDIOBJ hgdiobj) { m_hgdiobj = ::SelectObject(m_hdc, hgdiobj); }
 
 public:
-    SelectInHDC() : m_hdc(NULL), m_hgdiobj(NULL) { }
+    SelectInHDC()  { }
     SelectInHDC(HDC hdc, HGDIOBJ hgdiobj) : m_hdc(hdc) { DoInit(hgdiobj); }
 
     void Init(HDC hdc, HGDIOBJ hgdiobj)
@@ -500,8 +500,8 @@ public:
     operator bool() const { return m_hgdiobj != NULL; }
 
 private:
-    HDC m_hdc;
-    HGDIOBJ m_hgdiobj;
+    HDC m_hdc{NULL};
+    HGDIOBJ m_hgdiobj{NULL};
 
     SelectInHDC(const SelectInHDC&) = delete;
 	SelectInHDC& operator=(const SelectInHDC&) = delete;

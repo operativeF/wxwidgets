@@ -699,7 +699,7 @@ private:
 public:
     // constructor only initializes m_thread to NULL
     wxThreadHelper(wxThreadKind kind = wxTHREAD_JOINABLE)
-        : m_thread(NULL), m_kind(kind) { }
+        :  m_kind(kind) { }
 
     // destructor deletes m_thread
     virtual ~wxThreadHelper() { KillThread(); }
@@ -732,7 +732,7 @@ public:
     }
 
 protected:
-    wxThread *m_thread;
+    wxThread *m_thread{NULL};
     wxThreadKind m_kind;
     mutable wxCriticalSection m_critSection; // To guard the m_thread variable
 

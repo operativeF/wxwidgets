@@ -68,7 +68,7 @@ static char **ArrayFromWordList(char *wordlist, int *len, bool onlyLineEnds = fa
 }
 
 WordList::WordList(bool onlyLineEnds_) :
-	words(nullptr), list(nullptr), len(0), onlyLineEnds(onlyLineEnds_) {
+	 onlyLineEnds(onlyLineEnds_) {
 	// Prevent warnings by static analyzers about uninitialized starts.
 	starts[0] = -1;
 }

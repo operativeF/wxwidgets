@@ -103,7 +103,7 @@ class WXDLLIMPEXP_CORE wxFontPickerCtrl : public wxPickerBase
 {
 public:
      wxFontPickerCtrl()
-        : m_nMinPointSize(wxFNTP_MINPOINT_SIZE), m_nMaxPointSize(wxFNTP_MAXPOINT_SIZE)
+         
     {
     }
 
@@ -179,10 +179,10 @@ protected:
         { return (style & (wxFNTP_FONTDESC_AS_LABEL|wxFNTP_USEFONT_FOR_LABEL)); }
 
     // the minimum pointsize allowed to the user
-    unsigned int m_nMinPointSize;
+    unsigned int m_nMinPointSize{wxFNTP_MINPOINT_SIZE};
 
     // the maximum pointsize allowed to the user
-    unsigned int m_nMaxPointSize;
+    unsigned int m_nMaxPointSize{wxFNTP_MAXPOINT_SIZE};
 
 private:
     wxFontPickerWidget* GetPickerWidget() const

@@ -66,7 +66,7 @@ namespace wxPrivate
 class wxScopeGuardImplBase
 {
 public:
-    wxScopeGuardImplBase() : m_wasDismissed(false) { }
+    wxScopeGuardImplBase()  { }
 
     wxScopeGuardImplBase(const wxScopeGuardImplBase& other)
         : m_wasDismissed(other.m_wasDismissed)
@@ -83,7 +83,7 @@ protected:
     ~wxScopeGuardImplBase() { }
 
     // must be mutable for copy ctor to work
-    mutable bool m_wasDismissed;
+    mutable bool m_wasDismissed{false};
 
 private:
     wxScopeGuardImplBase& operator=(const wxScopeGuardImplBase&);

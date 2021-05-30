@@ -22,7 +22,7 @@ public:
     bool CanHandle(wxXmlNode *node) override;
 
 private:
-    bool m_insideBox;
+    bool m_insideBox{false};
     wxArrayString strList;
 
     wxDECLARE_DYNAMIC_CLASS(wxSimpleHtmlListBoxXmlHandler);

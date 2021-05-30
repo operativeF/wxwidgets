@@ -47,8 +47,8 @@ wxHashTableBase_Node::~wxHashTableBase_Node()
 //
 
 wxHashTableBase::wxHashTableBase()
-    : m_size( 0 ), m_count( 0 ), m_table( nullptr ), m_keyType( wxKEY_NONE ),
-      m_deleteContents( false )
+    
+      
 {
 }
 

@@ -181,8 +181,8 @@ public:
 
 protected:
     wxHelpProvider()
-        : m_helptextAtPoint(wxDefaultPosition),
-          m_helptextOrigin(wxHelpEvent::Origin_Unknown)
+        : m_helptextAtPoint(wxDefaultPosition)
+          
     {
     }
 
@@ -194,7 +194,7 @@ protected:
 
     // parameters of the last ShowHelpAtPoint() call, used by ShowHelp()
     wxPoint m_helptextAtPoint;
-    wxHelpEvent::Origin m_helptextOrigin;
+    wxHelpEvent::Origin m_helptextOrigin{wxHelpEvent::Origin_Unknown};
 
 private:
     static wxHelpProvider *ms_helpProvider;

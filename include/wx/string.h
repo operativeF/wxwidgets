@@ -3479,7 +3479,7 @@ private:
   {
       // notice that there is no need to initialize m_len here as it's unused
       // as long as m_str is NULL
-      ConvertedBuffer() : m_str(NULL), m_len(0) {}
+      ConvertedBuffer() : m_str(NULL) {}
       ~ConvertedBuffer()
           { free(m_str); }
 
@@ -3502,7 +3502,7 @@ private:
       }
 
       T *m_str;     // pointer to the string data
-      size_t m_len; // length, not size, i.e. in chars and without last NUL
+      size_t m_len{0}; // length, not size, i.e. in chars and without last NUL
   };
 
 

@@ -453,14 +453,13 @@ static inline wxFileOffset GetDataSize(const wxTarEntry& entry)
 wxTarEntry::wxTarEntry(const wxString& name /*=wxEmptyString*/,
                        const wxDateTime& dt /*=wxDateTime::Now()*/,
                        wxFileOffset size    /*=0*/)
-  : m_Mode(0644),
-    m_IsModeSet(false),
+  : 
     m_UserId(wxGetTarUser().uid),
     m_GroupId(wxGetTarUser().gid),
     m_Size(size),
     m_Offset(wxInvalidOffset),
     m_ModifyTime(dt),
-    m_TypeFlag(wxTAR_REGTYPE),
+    
     m_UserName(wxGetTarUser().uname),
     m_GroupName(wxGetTarUser().gname),
     m_DevMajor(~0),

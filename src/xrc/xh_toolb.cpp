@@ -27,7 +27,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxToolBarXmlHandler, wxXmlResourceHandler);
 
 wxToolBarXmlHandler::wxToolBarXmlHandler()
-:  m_isInside(false), m_toolbar(nullptr)
+ 
 {
     XRC_ADD_STYLE(wxTB_FLAT);
     XRC_ADD_STYLE(wxTB_DOCKABLE);

@@ -15,33 +15,33 @@ namespace Scintilla {
 /**
  */
 class AutoComplete {
-	bool active;
+	bool active{false};
 	std::string stopChars;
 	std::string fillUpChars;
-	char separator;
-	char typesep; // Type seperator
+	char separator{' '};
+	char typesep{'?'}; // Type seperator
 	enum { maxItemLen=1000 };
 	std::vector<int> sortMatrix;
 
 public:
 
-	bool ignoreCase;
-	bool chooseSingle;
-	ListBox *lb;
-	int posStart;
-	int startLen;
+	bool ignoreCase{false};
+	bool chooseSingle{false};
+	ListBox *lb{nullptr};
+	int posStart{0};
+	int startLen{0};
 	/// Should autocompletion be canceled if editor's currentPos <= startPos?
-	bool cancelAtStartPos;
-	bool autoHide;
-	bool dropRestOfWord;
-	unsigned int ignoreCaseBehaviour;
-	int widthLBDefault;
-	int heightLBDefault;
+	bool cancelAtStartPos{true};
+	bool autoHide{true};
+	bool dropRestOfWord{false};
+	unsigned int ignoreCaseBehaviour{SC_CASEINSENSITIVEBEHAVIOUR_RESPECTCASE};
+	int widthLBDefault{100};
+	int heightLBDefault{100};
 	/** SC_ORDER_PRESORTED:   Assume the list is presorted; selection will fail if it is not alphabetical<br />
 	 *  SC_ORDER_PERFORMSORT: Sort the list alphabetically; start up performance cost for sorting<br />
 	 *  SC_ORDER_CUSTOM:      Handle non-alphabetical entries; start up performance cost for generating a sorted lookup table
 	 */
-	int autoSort;
+	int autoSort{SC_ORDER_PRESORTED};
 
 	AutoComplete();
 	~AutoComplete();

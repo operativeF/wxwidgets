@@ -25,8 +25,8 @@ public:
     bool CanHandle(wxXmlNode *node) override;
 
 private:
-    bool m_isInside;
-    wxChoicebook *m_choicebook;
+    bool m_isInside{false};
+    wxChoicebook *m_choicebook{nullptr};
 };
 
 #endif // wxUSE_XRC && wxUSE_CHOICEBOOK

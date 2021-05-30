@@ -131,7 +131,7 @@ struct StyledText {
 
 class HighlightDelimiter {
 public:
-	HighlightDelimiter() : isEnabled(false) {
+	HighlightDelimiter()  {
 		Clear();
 	}
 
@@ -166,7 +166,7 @@ public:
 	int endFoldBlock;	// End of current fold block
 	int firstChangeableLineBefore;	// First line that triggers repaint before starting line that determined current fold block
 	int firstChangeableLineAfter;	// First line that triggers repaint after starting line that determined current fold block
-	bool isEnabled;
+	bool isEnabled{false};
 };
 
 class Document;

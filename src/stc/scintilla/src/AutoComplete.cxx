@@ -26,22 +26,8 @@
 using namespace Scintilla;
 #endif
 
-AutoComplete::AutoComplete() :
-	active(false),
-	separator(' '),
-	typesep('?'),
-	ignoreCase(false),
-	chooseSingle(false),
-	lb(nullptr),
-	posStart(0),
-	startLen(0),
-	cancelAtStartPos(true),
-	autoHide(true),
-	dropRestOfWord(false),
-	ignoreCaseBehaviour(SC_CASEINSENSITIVEBEHAVIOUR_RESPECTCASE),
-	widthLBDefault(100),
-	heightLBDefault(100),
-	autoSort(SC_ORDER_PRESORTED) {
+AutoComplete::AutoComplete() 
+	{
 	lb = ListBox::Allocate();
 }
 

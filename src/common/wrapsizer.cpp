@@ -70,13 +70,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxWrapSizer, wxBoxSizer);
 wxWrapSizer::wxWrapSizer(int orient, int flags)
            : wxBoxSizer(orient),
              m_flags(flags),
-             m_dirInform(0),
-             m_availSize(-1),
-             m_availableOtherDir(0),
-             m_lastUsed(true),
-             m_minSizeMinor(0),
-             m_maxSizeMajor(0),
-             m_minItemMajor(INT_MAX),
+             
              m_rows(orient ^ wxBOTH)
 {
 }

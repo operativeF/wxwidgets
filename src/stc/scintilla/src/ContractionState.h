@@ -19,12 +19,12 @@ class SparseVector;
  */
 class ContractionState {
 	// These contain 1 element for every document line.
-	RunStyles *visible;
-	RunStyles *expanded;
-	RunStyles *heights;
-	SparseVector<const char *> *foldDisplayTexts;
-	Partitioning *displayLines;
-	int linesInDocument;
+	RunStyles *visible{nullptr};
+	RunStyles *expanded{nullptr};
+	RunStyles *heights{nullptr};
+	SparseVector<const char *> *foldDisplayTexts{nullptr};
+	Partitioning *displayLines{nullptr};
+	int linesInDocument{1};
 
 	void EnsureData();
 

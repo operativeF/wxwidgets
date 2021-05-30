@@ -16,12 +16,12 @@ namespace Scintilla {
  */
 class MarginStyle {
 public:
-	int style;
+	int style{SC_MARGIN_SYMBOL};
 	ColourDesired back;
-	int width;
-	int mask;
-	bool sensitive;
-	int cursor;
+	int width{0};
+	int mask{0};
+	bool sensitive{false};
+	int cursor{SC_CURSORREVERSEARROW};
 	MarginStyle();
 };
 

@@ -69,8 +69,8 @@ public:
 wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlParser,wxObject);
 
 wxHtmlParser::wxHtmlParser()
-    : 
-      m_FS(nullptr)
+     
+      
 {
     m_Source = nullptr;
     m_entitiesParser = new wxHtmlEntitiesParser;

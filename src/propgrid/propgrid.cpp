@@ -6176,7 +6176,7 @@ wxString wxPGStringTokenizer::GetNextToken()
 // -----------------------------------------------------------------------
 
 wxPGChoiceEntry::wxPGChoiceEntry()
-    :  m_value(wxPG_INVALID_VALUE)
+      
 {
 }
 

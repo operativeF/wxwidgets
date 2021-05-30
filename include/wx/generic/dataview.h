@@ -377,9 +377,9 @@ private:
     // respective columns from m_cols and the arrays have same size
     struct CachedColWidthInfo
     {
-        CachedColWidthInfo() : width(0), dirty(true) {}
-        int width;  // cached width or 0 if not computed
-        bool dirty; // column was invalidated, header needs updating
+        CachedColWidthInfo()  {}
+        int width{0};  // cached width or 0 if not computed
+        bool dirty{true}; // column was invalidated, header needs updating
     };
     std::vector<CachedColWidthInfo> m_colsBestWidths;
     // This indicates that at least one entry in m_colsBestWidths has 'dirty'

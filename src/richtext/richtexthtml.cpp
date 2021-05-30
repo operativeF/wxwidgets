@@ -34,7 +34,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextHTMLHandler, wxRichTextFileHandler);
 int wxRichTextHTMLHandler::sm_fileCounter = 1;
 
 wxRichTextHTMLHandler::wxRichTextHTMLHandler(const wxString& name, const wxString& ext, int type)
-    : wxRichTextFileHandler(name, ext, type), m_buffer(nullptr), m_font(false), m_inTable(false)
+    : wxRichTextFileHandler(name, ext, type) 
 {
     m_fontSizeMapping.Add(8);
     m_fontSizeMapping.Add(10);

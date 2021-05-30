@@ -19,7 +19,7 @@ class wxEventConnectionRef;
 class WXDLLIMPEXP_BASE wxTrackerNode
 {
 public:
-    wxTrackerNode() : m_nxt(NULL) { }
+    wxTrackerNode()  { }
     virtual ~wxTrackerNode() { }
 
     virtual void OnObjectDestroy() = 0;
@@ -27,7 +27,7 @@ public:
     virtual wxEventConnectionRef *ToEventConnection() { return NULL; }
 
 private:
-    wxTrackerNode *m_nxt;
+    wxTrackerNode *m_nxt{NULL};
 
     friend class wxTrackable;        // For list access
     friend class wxEvtHandler;       // For list access
@@ -63,7 +63,7 @@ protected:
     // this class is only supposed to be used as a base class but never be
     // created nor destroyed directly so all ctors and dtor are protected
 
-    wxTrackable() : m_first(NULL) { }
+    wxTrackable()  { }
 
     // copy ctor and assignment operator intentionally do not copy m_first: the
     // objects which track the original trackable shouldn't track the new copy
@@ -84,7 +84,7 @@ protected:
         }
     }
 
-    wxTrackerNode *m_first;
+    wxTrackerNode *m_first{NULL};
 };
 
 #endif // _WX_TRACKER_H_

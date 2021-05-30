@@ -157,7 +157,7 @@ public:
     }
 
 private:
-    HINTERNET m_handle;
+    HINTERNET m_handle{nullptr};
 
     bool Open();
 

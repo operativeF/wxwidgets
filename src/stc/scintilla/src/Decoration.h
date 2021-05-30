@@ -24,17 +24,17 @@ public:
 };
 
 class DecorationList {
-	int currentIndicator;
-	int currentValue;
-	Decoration *current;
-	int lengthDocument;
+	int currentIndicator{0};
+	int currentValue{1};
+	Decoration *current{nullptr};
+	int lengthDocument{0};
 	Decoration *DecorationFromIndicator(int indicator);
 	Decoration *Create(int indicator, int length);
 	void Delete(int indicator);
 	void DeleteAnyEmpty();
 public:
-	Decoration *root;
-	bool clickNotified;
+	Decoration *root{nullptr};
+	bool clickNotified{false};
 
 	DecorationList();
 	~DecorationList();

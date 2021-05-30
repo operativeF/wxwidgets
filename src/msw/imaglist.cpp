@@ -65,8 +65,7 @@ static HBITMAP GetMaskForImage(const wxBitmap& bitmap, const wxBitmap& mask);
 // ----------------------------------------------------------------------------
 
 wxImageList::wxImageList()
-    : m_hImageList(nullptr)
-    , m_useMask(false)
+     
 {
 }
 

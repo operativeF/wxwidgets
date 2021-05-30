@@ -214,12 +214,12 @@ protected:
 
 
 private:
-  char         *m_buffer;
-  size_t        m_buffersize;
-  bool          m_deletebufferwhendone;
+  char         *m_buffer{nullptr};
+  size_t        m_buffersize{0};
+  bool          m_deletebufferwhendone{true};
 
 protected:
-  bool          m_connected;
+  bool          m_connected{true};
 
   wxConnectionBase& operator=(const wxConnectionBase&) = delete;
   wxDECLARE_CLASS(wxConnectionBase);

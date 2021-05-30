@@ -124,8 +124,8 @@ private:
     wxArchiveEntry* DoClone() const override     { return Clone(); }
 
     wxString     m_Name;
-    int          m_Mode;
-    bool         m_IsModeSet;
+    int          m_Mode{0644};
+    bool         m_IsModeSet{false};
     int          m_UserId;
     int          m_GroupId;
     wxFileOffset m_Size;
@@ -133,7 +133,7 @@ private:
     wxDateTime   m_ModifyTime;
     wxDateTime   m_AccessTime;
     wxDateTime   m_CreateTime;
-    int          m_TypeFlag;
+    int          m_TypeFlag{wxTAR_REGTYPE};
     wxString     m_LinkName;
     wxString     m_UserName;
     wxString     m_GroupName;

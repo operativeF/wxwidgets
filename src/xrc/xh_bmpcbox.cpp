@@ -27,9 +27,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapComboBoxXmlHandler, wxXmlResourceHandler);
 
 wxBitmapComboBoxXmlHandler::wxBitmapComboBoxXmlHandler()
-                     :
-                     m_combobox(nullptr)
-                     ,m_isInside(false)
+                     
 {
     XRC_ADD_STYLE(wxCB_SORT);
     XRC_ADD_STYLE(wxCB_READONLY);

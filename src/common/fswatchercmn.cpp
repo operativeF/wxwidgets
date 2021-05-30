@@ -77,7 +77,7 @@ wxString wxFileSystemWatcherEvent::ToString() const
 // ============================================================================
 
 wxFileSystemWatcherBase::wxFileSystemWatcherBase() :
-    m_service(nullptr), m_owner(this)
+     m_owner(this)
 {
 }
 

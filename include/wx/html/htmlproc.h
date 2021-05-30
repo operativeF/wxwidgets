@@ -33,7 +33,7 @@ class WXDLLIMPEXP_HTML wxHtmlProcessor : public wxObject
     wxDECLARE_ABSTRACT_CLASS(wxHtmlProcessor);
 
 public:
-    wxHtmlProcessor() : wxObject(), m_enabled(true) {}
+    wxHtmlProcessor() : wxObject() {}
     virtual ~wxHtmlProcessor() {}
 
     // Process input text and return processed result
@@ -49,7 +49,7 @@ public:
     bool IsEnabled() const { return m_enabled; }
 
 protected:
-    bool m_enabled;
+    bool m_enabled{true};
 };
 
 #endif // wxUSE_HTML

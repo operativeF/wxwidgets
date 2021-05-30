@@ -124,8 +124,8 @@ protected:
     wxSize m_smallest_unminimised_size;
     wxSize m_minimised_size;
     wxDirection m_preferred_expand_direction;
-    wxRibbonPanel* m_expanded_dummy;
-    wxRibbonPanel* m_expanded_panel;
+    wxRibbonPanel* m_expanded_dummy{nullptr};
+    wxRibbonPanel* m_expanded_panel{nullptr};
     wxWindow* m_child_with_focus;
     long m_flags;
     bool m_minimised;

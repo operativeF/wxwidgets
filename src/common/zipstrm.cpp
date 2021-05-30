@@ -28,12 +28,6 @@
 #include "wx/wfstream.h"
 #include "zlib.h"
 
-// value for the 'version needed to extract' field (20 means 2.0)
-enum {
-    VERSION_NEEDED_TO_EXTRACT = 20,
-    Z64_VERSION_NEEDED_TO_EXTRACT = 45 // File uses ZIP64 format extensions
-};
-
 // signatures for the various records (PKxx)
 enum {
     CENTRAL_MAGIC = 0x02014b50,     // central directory record
@@ -731,25 +725,16 @@ wxZipEntry::wxZipEntry(
     const wxDateTime& dt /*=wxDateTime::Now()*/,
     wxFileOffset size    /*=wxInvalidOffset*/)
   :
-    m_SystemMadeBy(wxZIP_SYSTEM_MSDOS),
+    
     m_VersionMadeBy(wxMAJOR_VERSION * 10 + wxMINOR_VERSION),
-    m_VersionNeeded(VERSION_NEEDED_TO_EXTRACT),
-    m_Flags(0),
-    m_Method(wxZIP_METHOD_DEFAULT),
+    
     m_DateTime(dt),
-    m_Crc(0),
+    
     m_CompressedSize(wxInvalidOffset),
     m_Size(size),
     m_Key(wxInvalidOffset),
-    m_Offset(wxInvalidOffset),
-    m_DiskStart(0),
-    m_InternalAttributes(0),
-    m_ExternalAttributes(0),
-    m_z64infoOffset(0),
-    m_Extra(nullptr),
-    m_LocalExtra(nullptr),
-    m_zipnotifier(nullptr),
-    m_backlink(nullptr)
+    m_Offset(wxInvalidOffset)
+    
 {
     if (!name.empty())
         SetName(name);

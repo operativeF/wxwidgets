@@ -21,9 +21,7 @@
 class WXDLLIMPEXP_CORE wxAffineMatrix2D : public wxAffineMatrix2DBase
 {
 public:
-    wxAffineMatrix2D() : m_11(1), m_12(0),
-                         m_21(0), m_22(1),
-                         m_tx(0), m_ty(0)
+    wxAffineMatrix2D()  
     {
     }
 
@@ -43,7 +41,7 @@ protected:
     wxPoint2DDouble DoTransformDistance(const wxPoint2DDouble& p) const override;
 
 private:
-    double m_11, m_12, m_21, m_22, m_tx, m_ty;
+    double m_11{1}, m_12{0}, m_21{0}, m_22{1}, m_tx{0}, m_ty{0};
 };
 
 #endif // wxUSE_GEOMETRY

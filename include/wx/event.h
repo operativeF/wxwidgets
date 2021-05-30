@@ -285,11 +285,11 @@ public:
         { return m_method; }
 
 private:
-    wxEvtHandler *m_handler;
-    wxEventFunction m_method;
+    wxEvtHandler *m_handler{NULL};
+    wxEventFunction m_method{NULL};
 
     // Provide a dummy default ctor for type info purposes
-    wxObjectEventFunctor() : m_handler(NULL), m_method(NULL) { }
+    wxObjectEventFunctor()  { }
 
     WX_DECLARE_TYPEINFO_INLINE(wxObjectEventFunctor)
 };
@@ -1229,8 +1229,8 @@ class WXDLLIMPEXP_BASE wxEventBasicPayloadMixin
 {
 public:
     wxEventBasicPayloadMixin()
-        : m_commandInt(0),
-          m_extraLong(0)
+        
+          
     {
     }
 
@@ -1247,8 +1247,8 @@ protected:
     // Note: these variables have "cmd" or "command" in their name for backward compatibility:
     //       they used to be part of wxCommandEvent, not this mixin.
     wxString          m_cmdString;     // String event argument
-    int               m_commandInt;
-    long              m_extraLong;     // Additional information (e.g. select/deselect)
+    int               m_commandInt{0};
+    long              m_extraLong{0};     // Additional information (e.g. select/deselect)
 
     wxEventBasicPayloadMixin& operator=(const wxEventBasicPayloadMixin&) = delete;
 };
@@ -1302,8 +1302,8 @@ class WXDLLIMPEXP_BASE wxIdleEvent : public wxEvent
 {
 public:
     wxIdleEvent()
-        : wxEvent(0, wxEVT_IDLE),
-          m_requestMore(false)
+        : wxEvent(0, wxEVT_IDLE)
+          
         { }
     wxIdleEvent(const wxIdleEvent& event)
         : wxEvent(event),
@@ -1324,7 +1324,7 @@ public:
     static wxIdleMode GetMode() { return sm_idleMode; }
 
 protected:
-    bool m_requestMore;
+    bool m_requestMore{false};
     static wxIdleMode sm_idleMode;
 
 private:
@@ -2298,7 +2298,7 @@ public:
 
     // This contains the full Unicode character
     // in a character events in Unicode mode
-    wxChar        m_uniChar;
+    wxChar        m_uniChar{WXK_NONE};
 
     // these fields contain the platform-specific information about
     // key that was pressed
@@ -2689,10 +2689,8 @@ class WXDLLIMPEXP_CORE wxCloseEvent : public wxEvent
 {
 public:
     wxCloseEvent(wxEventType type = wxEVT_NULL, int winid = 0)
-        : wxEvent(winid, type),
-          m_loggingOff(true),
-          m_veto(false),      // should be false by default
-          m_canVeto(true) {}
+        : wxEvent(winid, type)
+          {}
 
     wxCloseEvent(const wxCloseEvent& event)
         : wxEvent(event),
@@ -2726,9 +2724,9 @@ public:
     wxEvent *Clone() const override { return new wxCloseEvent(*this); }
 
 protected:
-    bool m_loggingOff,
-         m_veto,
-         m_canVeto;
+    bool m_loggingOff{true},
+         m_veto{false},
+         m_canVeto{true};
 
 private:
     public:
@@ -2877,7 +2875,7 @@ class WXDLLIMPEXP_CORE wxJoystickEvent : public wxEvent
 {
 protected:
     wxPoint   m_pos;
-    int       m_zPosition;
+    int       m_zPosition{0};
     int       m_buttonChange;   // Which button changed?
     int       m_buttonState;    // Which buttons are down?
     int       m_joyStick;       // Which joystick?
@@ -2889,7 +2887,7 @@ public:
                     int change = 0)
         : wxEvent(0, type),
           m_pos(),
-          m_zPosition(0),
+          
           m_buttonChange(change),
           m_buttonState(state),
           m_joyStick(joystick)
@@ -3259,8 +3257,8 @@ class WXDLLIMPEXP_CORE wxPaletteChangedEvent : public wxEvent
 {
 public:
     wxPaletteChangedEvent(wxWindowID winid = 0)
-        : wxEvent(winid, wxEVT_PALETTE_CHANGED),
-          m_changedWindow(NULL)
+        : wxEvent(winid, wxEVT_PALETTE_CHANGED)
+          
         { }
 
     wxPaletteChangedEvent(const wxPaletteChangedEvent& event)
@@ -3274,7 +3272,7 @@ public:
     wxEvent *Clone() const override { return new wxPaletteChangedEvent(*this); }
 
 protected:
-    wxWindow*     m_changedWindow;
+    wxWindow*     m_changedWindow{NULL};
 
 private:
     public:
@@ -3293,8 +3291,8 @@ class WXDLLIMPEXP_CORE wxQueryNewPaletteEvent : public wxEvent
 {
 public:
     wxQueryNewPaletteEvent(wxWindowID winid = 0)
-        : wxEvent(winid, wxEVT_QUERY_NEW_PALETTE),
-          m_paletteRealized(false)
+        : wxEvent(winid, wxEVT_QUERY_NEW_PALETTE)
+          
         { }
     wxQueryNewPaletteEvent(const wxQueryNewPaletteEvent& event)
         : wxEvent(event),
@@ -3308,7 +3306,7 @@ public:
     wxEvent *Clone() const override { return new wxQueryNewPaletteEvent(*this); }
 
 protected:
-    bool m_paletteRealized;
+    bool m_paletteRealized{false};
 
 private:
     public:
@@ -3328,8 +3326,8 @@ class WXDLLIMPEXP_CORE wxNavigationKeyEvent : public wxEvent
 public:
     wxNavigationKeyEvent()
         : wxEvent(0, wxEVT_NAVIGATION_KEY),
-          m_flags(IsForward | FromTab),    // defaults are for TAB
-          m_focus(NULL)
+          m_flags(IsForward | FromTab)
+          
         {
             m_propagationLevel = wxEVENT_PROPAGATE_NONE;
         }
@@ -3379,7 +3377,7 @@ public:
     };
 
     long m_flags;
-    wxWindow *m_focus;
+    wxWindow *m_focus{NULL};
 
 private:
     public:
@@ -4239,7 +4237,7 @@ inline void wxObjectEventFunctor::operator()(wxEvtHandler *handler, wxEvent& eve
 class wxEventConnectionRef : public wxTrackerNode
 {
 public:
-    wxEventConnectionRef() : m_src(NULL), m_sink(NULL), m_refCount(0) { }
+    wxEventConnectionRef()  { }
     wxEventConnectionRef(wxEvtHandler *src, wxEvtHandler *sink)
         : m_src(src), m_sink(sink), m_refCount(1)
     {
@@ -4269,9 +4267,9 @@ public:
     }
 
 private:
-    wxEvtHandler *m_src,
-                 *m_sink;
-    int m_refCount;
+    wxEvtHandler *m_src{NULL},
+                 *m_sink{NULL};
+    int m_refCount{0};
 
     friend class wxEvtHandler;
 

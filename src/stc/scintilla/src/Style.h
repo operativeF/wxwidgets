@@ -13,19 +13,16 @@ namespace Scintilla {
 #endif
 
 struct FontSpecification {
-	const char *fontName;
-	int weight;
-	bool italic;
+	const char *fontName{0};
+	int weight{SC_WEIGHT_NORMAL};
+	bool italic{false};
 	int size;
-	int characterSet;
-	int extraFontFlag;
+	int characterSet{0};
+	int extraFontFlag{0};
 	FontSpecification() :
-		fontName(0),
-		weight(SC_WEIGHT_NORMAL),
-		italic(false),
-		size(10 * SC_FONT_SIZE_MULTIPLIER),
-		characterSet(0),
-		extraFontFlag(0) {
+		
+		size(10 * SC_FONT_SIZE_MULTIPLIER)
+		{
 	}
 	bool operator==(const FontSpecification &other) const;
 	bool operator<(const FontSpecification &other) const;

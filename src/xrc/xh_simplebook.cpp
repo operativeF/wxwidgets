@@ -23,9 +23,8 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxSimplebookXmlHandler, wxXmlResourceHandler);
 
 wxSimplebookXmlHandler::wxSimplebookXmlHandler()
-                      : 
-                        m_isInside(false),
-                        m_simplebook(nullptr)
+                      
+                        
 {
     AddWindowStyles();
 }

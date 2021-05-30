@@ -26,7 +26,7 @@
 using namespace Scintilla;
 #endif
 
-LineVector::LineVector() : starts(256), perLine(nullptr) {
+LineVector::LineVector() : starts(256) {
 	Init();
 }
 

@@ -16,9 +16,9 @@ namespace Scintilla {
  */
 class WordList {
 	// Each word contains at least one character - a empty word acts as sentinel at the end.
-	char **words;
-	char *list;
-	int len;
+	char **words{nullptr};
+	char *list{nullptr};
+	int len{0};
 	bool onlyLineEnds;	///< Delimited by any white space or only line ends
 	int starts[256];
 public:

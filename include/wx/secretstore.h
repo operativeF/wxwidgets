@@ -36,7 +36,7 @@ class WXDLLIMPEXP_BASE wxSecretValue
 {
 public:
     // Creates an empty secret value (not the same as an empty password).
-    wxSecretValue() : m_impl(NULL) { }
+    wxSecretValue()  { }
 
     // Creates a secret value from the given data.
     wxSecretValue(size_t size, const void *data)
@@ -96,7 +96,7 @@ private:
     // provided existing impl pointer.
     explicit wxSecretValue(wxSecretValueImpl* impl) : m_impl(impl) { }
 
-    wxSecretValueImpl* m_impl;
+    wxSecretValueImpl* m_impl{NULL};
 
     friend class wxSecretStore;
 };

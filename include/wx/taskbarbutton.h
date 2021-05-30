@@ -42,7 +42,7 @@ enum class wxTaskBarButtonState
 class WXDLLIMPEXP_CORE wxThumbBarButton : public wxObject
 {
 public:
-    wxThumbBarButton() : m_taskBarButtonParent(NULL)
+    wxThumbBarButton()  
     { }
 
     wxThumbBarButton(int id,
@@ -98,7 +98,7 @@ private:
     bool m_hasBackground;
     bool m_shown;
     bool m_interactive;
-    wxTaskBarButton *m_taskBarButtonParent;
+    wxTaskBarButton *m_taskBarButtonParent{NULL};
 
     wxDECLARE_DYNAMIC_CLASS(wxThumbBarButton);
 };

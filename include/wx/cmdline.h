@@ -141,7 +141,7 @@ public:
         typedef std::bidirectional_iterator_tag iterator_category;
 #endif // wx_USE_STD_STRING
 
-        const_iterator() : m_parser(NULL), m_index(0) {}
+        const_iterator()  {}
         reference operator *() const;
         pointer operator ->() const;
         const_iterator &operator ++ ();
@@ -161,8 +161,8 @@ public:
             : m_parser(&parser), m_index(index) {
         }
 
-        const wxCmdLineParser* m_parser;
-        size_t m_index;
+        const wxCmdLineParser* m_parser{NULL};
+        size_t m_index{0};
 
         friend class wxCmdLineArgs;
     };

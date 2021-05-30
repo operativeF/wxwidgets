@@ -3256,7 +3256,7 @@ void wxSTCListBoxWin::OnPaint(wxPaintEvent& WXUNUSED(evt))
 //----------------------------------------------------------------------
 
 ListBoxImpl::ListBoxImpl()
-            :m_listBox(nullptr), m_visualData(new wxSTCListBoxVisualData(5))
+            : m_visualData(new wxSTCListBoxVisualData(5))
 {
 }
 
@@ -3385,7 +3385,7 @@ ListBox *ListBox::Allocate() {
 
 //----------------------------------------------------------------------
 
-Menu::Menu() : mid(nullptr) {
+Menu::Menu()  {
 }
 
 void Menu::CreatePopUp() {

@@ -36,7 +36,7 @@ class WXDLLIMPEXP_CORE wxPickerBase : public wxNavigationEnabled<wxControl>
 {
 public:
     // ctor: text is the associated text control
-    wxPickerBase() : m_text(NULL), m_picker(NULL), m_sizer(NULL)
+    wxPickerBase()  
         { }
     virtual ~wxPickerBase() {}
 
@@ -140,9 +140,9 @@ protected:
     void PostCreation();
 
 protected:
-    wxTextCtrl *m_text;     // can be NULL
-    wxControl *m_picker;
-    wxBoxSizer *m_sizer;
+    wxTextCtrl *m_text{NULL};     // can be NULL
+    wxControl *m_picker{NULL};
+    wxBoxSizer *m_sizer{NULL};
 
 private:
     // Common implementation of Set{Text,Picker}CtrlGrowable().

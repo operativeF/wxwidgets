@@ -26,8 +26,8 @@ public:
     bool CanHandle(wxXmlNode *node) override;
 
 private:
-    wxBitmapComboBox*    m_combobox;
-    bool                m_isInside;
+    wxBitmapComboBox*    m_combobox{nullptr};
+    bool                m_isInside{false};
 };
 
 #endif // wxUSE_XRC && wxUSE_BITMAPCOMBOBOX

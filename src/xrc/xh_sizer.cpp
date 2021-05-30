@@ -40,10 +40,8 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxSizerXmlHandler, wxXmlResourceHandler);
 
 wxSizerXmlHandler::wxSizerXmlHandler()
-                  :
-                   m_isInside(false),
-                   m_isGBS(false),
-                   m_parentSizer(nullptr)
+                  
+                   
 {
     XRC_ADD_STYLE(wxHORIZONTAL);
     XRC_ADD_STYLE(wxVERTICAL);
@@ -935,7 +933,7 @@ void wxSizerXmlHandler::AddSizerItem(wxSizerItem* sitem)
 wxIMPLEMENT_DYNAMIC_CLASS(wxStdDialogButtonSizerXmlHandler, wxXmlResourceHandler);
 
 wxStdDialogButtonSizerXmlHandler::wxStdDialogButtonSizerXmlHandler()
-    : m_isInside(false), m_parentSizer(nullptr)
+     
 {
 }
 

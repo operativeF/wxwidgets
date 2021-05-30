@@ -80,18 +80,18 @@ protected:
 
     const int m_flags;       // Flags specified in the ctor
 
-    int m_dirInform;         // Direction for size information
-    int m_availSize;         // Size available in m_dirInform direction
-    int m_availableOtherDir; // Size available in the other direction
-    bool m_lastUsed;         // Indicates whether value from InformFirst... has
+    int m_dirInform{0};         // Direction for size information
+    int m_availSize{-1};         // Size available in m_dirInform direction
+    int m_availableOtherDir{0}; // Size available in the other direction
+    bool m_lastUsed{true};         // Indicates whether value from InformFirst... has
                              //  been used yet
 
     // The sizes below are computed by RepositionChildren(), i.e. they don't have
     // valid values during the initial call to CalcMin() and they are only
     // valid for the current layout (i.e. the current number of rows)
-    int m_minSizeMinor;      // Min size in minor direction
-    int m_maxSizeMajor;      // Size of longest row
-    int m_minItemMajor;      // Size of smallest item in major direction
+    int m_minSizeMinor{0};      // Min size in minor direction
+    int m_maxSizeMajor{0};      // Size of longest row
+    int m_minItemMajor{INT_MAX};      // Size of smallest item in major direction
 
     // the minimal size needed for this sizer as calculated by the last call to
     // our CalcMin()

@@ -49,7 +49,7 @@ class WXDLLIMPEXP_BASE wxPowerEvent : public wxEvent
 {
 public:
     wxPowerEvent()            // just for use by wxRTTI
-        : m_veto(false) { }
+         { }
 
     wxPowerEvent(wxEventType evtType) : wxEvent(wxID_NONE, evtType)
     {
@@ -67,7 +67,7 @@ public:
     wxEvent *Clone() const override { return new wxPowerEvent(*this); }
 
 private:
-    bool m_veto;
+    bool m_veto{false};
 
     public:
 	wxPowerEvent& operator=(const wxPowerEvent&) = delete;

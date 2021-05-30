@@ -480,13 +480,10 @@ class WXDLLIMPEXP_CORE wxListEvent : public wxNotifyEvent
 public:
     wxListEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
         : wxNotifyEvent(commandType, winid)
-        , m_code(-1)
-        , m_oldItemIndex(-1)
-        , m_itemIndex(-1)
-        , m_col(-1)
-        , m_pointDrag()
+        , 
+         m_pointDrag()
         , m_item()
-        , m_editCancelled(false)
+         
         { }
 
     wxListEvent(const wxListEvent& event)
@@ -530,16 +527,16 @@ public:
     wxEvent *Clone() const override { return new wxListEvent(*this); }
 
 //protected: -- not for backwards compatibility
-    int           m_code;
-    long          m_oldItemIndex; // only for wxEVT_LIST_CACHE_HINT
-    long          m_itemIndex;
-    int           m_col;
+    int           m_code{-1};
+    long          m_oldItemIndex{-1}; // only for wxEVT_LIST_CACHE_HINT
+    long          m_itemIndex{-1};
+    int           m_col{-1};
     wxPoint       m_pointDrag;
 
     wxListItem    m_item;
 
 protected:
-    bool          m_editCancelled;
+    bool          m_editCancelled{false};
 
 private:
     public:

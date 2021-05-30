@@ -439,7 +439,7 @@ public:
     // everything is private as it can only be used by wxMemoryBuffer
 private:
     wxMemoryBufferData(size_t size = wxMemoryBufferData::DefBufSize)
-        : m_data(size ? malloc(size) : NULL), m_size(size), m_len(0), m_ref(0)
+        : m_data(size ? malloc(size) : NULL), m_size(size) 
     {
     }
     ~wxMemoryBufferData() { free(m_data); }
@@ -495,10 +495,10 @@ private:
     size_t m_size;
 
     // the amount of data currently in the buffer
-    size_t m_len;
+    size_t m_len{0};
 
     // the reference count
-    size_t m_ref;
+    size_t m_ref{0};
 
     wxMemoryBufferData(const wxMemoryBufferData&) = delete;
 	wxMemoryBufferData& operator=(const wxMemoryBufferData&) = delete;

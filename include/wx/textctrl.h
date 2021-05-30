@@ -842,8 +842,8 @@ protected:
     wxMouseEvent m_evtMouse;
 
     // the start and end indices of the URL in the text control
-    long m_start,
-         m_end;
+    long m_start{0},
+         m_end{0};
 
 private:
     public:
@@ -854,7 +854,7 @@ private:
 
 public:
     // for wxWin RTTI only, don't use
-    wxTextUrlEvent() : m_evtMouse(), m_start(0), m_end(0) { }
+    wxTextUrlEvent() : m_evtMouse() { }
 };
 
 typedef void (wxEvtHandler::*wxTextUrlEventFunction)(wxTextUrlEvent&);

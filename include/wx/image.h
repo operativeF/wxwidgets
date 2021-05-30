@@ -115,7 +115,7 @@ class WXDLLIMPEXP_CORE wxImageHandler: public wxObject
 {
 public:
     wxImageHandler()
-        : m_name(wxEmptyString), m_extension(wxEmptyString), m_mime(), m_type(wxBITMAP_TYPE_INVALID)
+        : m_name(wxEmptyString), m_extension(wxEmptyString), m_mime() 
         { }
 
 #if wxUSE_STREAMS
@@ -172,7 +172,7 @@ protected:
     wxString  m_extension;
     wxArrayString m_altExtensions;
     wxString  m_mime;
-    wxBitmapType m_type;
+    wxBitmapType m_type{wxBITMAP_TYPE_INVALID};
 
 private:
     wxDECLARE_CLASS(wxImageHandler);

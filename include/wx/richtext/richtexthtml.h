@@ -116,7 +116,7 @@ protected:
 
 // Data members
 
-    wxRichTextBuffer* m_buffer;
+    wxRichTextBuffer* m_buffer{nullptr};
 
     /// Indentation values of the table tags
     wxArrayInt      m_indents;
@@ -125,10 +125,10 @@ protected:
     wxArrayInt      m_listTypes;
 
     /// Is there any opened font tag?
-    bool            m_font;
+    bool            m_font{false};
 
     /// Are we in a table?
-    bool            m_inTable;
+    bool            m_inTable{false};
 
     /// A list of the image files or in-memory images created by the last operation.
     wxArrayString   m_imageLocations;

@@ -79,7 +79,7 @@ private:
 
     wxIDropTarget     *m_pIDropTarget; // the pointer to our COM interface
     IDataObject       *m_pIDataSource; // the pointer to the source data object
-    wxIDropTargetHelper *m_dropTargetHelper; // the drop target helper
+    wxIDropTargetHelper *m_dropTargetHelper{nullptr}; // the drop target helper
 
     wxDropTarget(const wxDropTarget&) = delete;
 	wxDropTarget& operator=(const wxDropTarget&) = delete;

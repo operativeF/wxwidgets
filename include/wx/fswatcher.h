@@ -87,8 +87,8 @@ public:
     // Constructor for any kind of events, also used as default ctor.
     wxFileSystemWatcherEvent(int changeType = 0, int watchid = wxID_ANY) :
         wxEvent(watchid, wxEVT_FSWATCHER),
-        m_changeType(changeType),
-        m_warningType(wxFSW_WARNING_NONE)
+        m_changeType(changeType)
+        
     {
     }
 
@@ -200,7 +200,7 @@ public:
 
 protected:
     int m_changeType;
-    wxFSWWarningType m_warningType;
+    wxFSWWarningType m_warningType{wxFSW_WARNING_NONE};
     wxFileName m_path;
     wxFileName m_newPath;
     wxString m_errorMsg;
@@ -229,8 +229,7 @@ typedef void (wxEvtHandler::*wxFileSystemWatcherEventFunction)
 class wxFSWatchInfo
 {
 public:
-    wxFSWatchInfo() :
-        m_events(-1), m_type(wxFSWPathType::None), m_refcount(-1)
+    wxFSWatchInfo()  
     {
     }
 
@@ -278,9 +277,9 @@ public:
 protected:
     wxString m_path;
     wxString m_filespec;      // For tree watches, holds any filespec to apply
-    int m_events;
-    wxFSWPathType m_type;
-    int m_refcount;
+    int m_events{-1};
+    wxFSWPathType m_type{wxFSWPathType::None};
+    int m_refcount{-1};
 };
 
 WX_DECLARE_STRING_HASH_MAP(wxFSWatchInfo, wxFSWatchInfoMap);
@@ -387,7 +386,7 @@ protected:
 
 
     wxFSWatchInfoMap m_watches;        // path=>wxFSWatchInfo map
-    wxFSWatcherImpl* m_service;     // file system events service
+    wxFSWatcherImpl* m_service{nullptr};     // file system events service
     wxEvtHandler* m_owner;             // handler for file system events
 
     friend class wxFSWatcherImpl;

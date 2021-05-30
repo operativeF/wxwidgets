@@ -6641,7 +6641,7 @@ public:
         Creates a file handler object.
     */
     wxRichTextFileHandler(const wxString& name = wxEmptyString, const wxString& ext = wxEmptyString, int type = 0)
-        : m_name(name), m_extension(ext), m_type(type), m_flags(0), m_visible(true)
+        : m_name(name), m_extension(ext), m_type(type) 
         { }
 
 #if wxUSE_STREAMS
@@ -6773,8 +6773,8 @@ protected:
     wxString  m_encoding;
     wxString  m_extension;
     int       m_type;
-    int       m_flags;
-    bool      m_visible;
+    int       m_flags{0};
+    bool      m_visible{true};
 };
 
 /**

@@ -25,8 +25,8 @@ public:
     bool CanHandle(wxXmlNode *node) override;
 
 private:
-    bool m_isInside;
-    wxSimplebook *m_simplebook;
+    bool m_isInside{false};
+    wxSimplebook *m_simplebook{nullptr};
 
     wxDECLARE_DYNAMIC_CLASS(wxSimplebookXmlHandler);
 };

@@ -37,7 +37,7 @@ public:
     // the thread-specific logger or NULL if the thread is using the global one
     // (this is not used for the main thread which always uses the global
     // logger)
-    wxLog *logger;
+    wxLog *logger{NULL};
 
     // true if logging is currently disabled for this thread (this is also not
     // used for the main thread which uses wxLog::ms_doLog)
@@ -45,7 +45,7 @@ public:
     // NB: we use a counter-intuitive "disabled" flag instead of "enabled" one
     //     because the default, for 0-initialized struct, should be to enable
     //     logging
-    bool loggingDisabled;
+    bool loggingDisabled{false};
 
 #if wxUSE_INTL
     // Storage for wxTranslations::GetUntranslatedString()
@@ -60,7 +60,7 @@ public:
 #endif
 
 private:
-    wxThreadSpecificInfo() : logger(NULL), loggingDisabled(false) {}
+    wxThreadSpecificInfo()  {}
 };
 
 #define wxThreadInfo wxThreadSpecificInfo::Get()

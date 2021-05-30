@@ -56,7 +56,7 @@ class WXDLLIMPEXP_RIBBON wxRibbonHSLColour
 {
 public:
    wxRibbonHSLColour()
-       : hue(0.0), saturation(0.0), luminance(0.0) {}
+        {}
    wxRibbonHSLColour(float H, float S, float L)
        : hue(H), saturation(S), luminance(L) { }
    wxRibbonHSLColour(const wxColour& C);
@@ -70,7 +70,7 @@ public:
    wxRibbonHSLColour Desaturated(float delta) const;
    wxRibbonHSLColour ShiftHue(float delta) const;
 
-   float       hue, saturation, luminance;
+   float       hue{0.0}, saturation{0.0}, luminance{0.0};
 };
 
 WXDLLIMPEXP_RIBBON wxRibbonHSLColour wxRibbonShiftLuminance(

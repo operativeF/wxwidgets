@@ -77,14 +77,14 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxHtmlBookRecord, wxHtmlBookRecArray,
 
 struct WXDLLIMPEXP_HTML wxHtmlHelpDataItem
 {
-    wxHtmlHelpDataItem() : level(0), parent(NULL), id(wxID_ANY), book(NULL) {}
+    wxHtmlHelpDataItem()  {}
 
-    int level;
-    wxHtmlHelpDataItem *parent;
-    int id;
+    int level{0};
+    wxHtmlHelpDataItem *parent{NULL};
+    int id{wxID_ANY};
     wxString name;
     wxString page;
-    wxHtmlBookRecord *book;
+    wxHtmlBookRecord *book{NULL};
 
     // returns full filename of m_Page, i.e. with book's basePath prepended
     wxString GetFullPath() const { return book->GetFullPath(page); }

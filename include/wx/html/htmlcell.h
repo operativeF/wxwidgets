@@ -33,10 +33,7 @@ class WXDLLIMPEXP_HTML wxHtmlSelection
 {
 public:
     wxHtmlSelection()
-        : m_fromPos(wxDefaultPosition), m_toPos(wxDefaultPosition),
-          m_fromCharacterPos(-1), m_toCharacterPos(-1),
-          m_fromCell(NULL), m_toCell(NULL),
-          m_extBeforeSel(0), m_extBeforeSelEnd(0) {}
+        : m_fromPos(wxDefaultPosition), m_toPos(wxDefaultPosition) {}
 
     // this version is used for the user selection defined with the mouse
     void Set(const wxPoint& fromPos, const wxHtmlCell *fromCell,
@@ -70,14 +67,14 @@ public:
 
 private:
     wxPoint m_fromPos, m_toPos;
-    wxCoord m_fromCharacterPos, m_toCharacterPos;
-    const wxHtmlCell *m_fromCell, *m_toCell;
+    wxCoord m_fromCharacterPos{-1}, m_toCharacterPos{-1};
+    const wxHtmlCell *m_fromCell{NULL}, *m_toCell{NULL};
 
     // Extent of the text before selection start.
-    unsigned m_extBeforeSel;
+    unsigned m_extBeforeSel{0};
 
     // Extent of the text from the beginning to the selection end.
-    unsigned m_extBeforeSelEnd;
+    unsigned m_extBeforeSelEnd{0};
 };
 
 
@@ -94,7 +91,7 @@ enum wxHtmlSelectionState
 class WXDLLIMPEXP_HTML wxHtmlRenderingState
 {
 public:
-    wxHtmlRenderingState() : m_selState(wxHTML_SEL_OUT) { m_bgMode = wxBRUSHSTYLE_SOLID; }
+    wxHtmlRenderingState()  { m_bgMode = wxBRUSHSTYLE_SOLID; }
 
     void SetSelectionState(wxHtmlSelectionState s) { m_selState = s; }
     wxHtmlSelectionState GetSelectionState() const { return m_selState; }
@@ -107,7 +104,7 @@ public:
     int GetBgMode() const { return m_bgMode; }
 
 private:
-    wxHtmlSelectionState  m_selState;
+    wxHtmlSelectionState  m_selState{wxHTML_SEL_OUT};
     wxColour              m_fgColour, m_bgColour;
     int                   m_bgMode;
 };
@@ -149,9 +146,8 @@ class WXDLLIMPEXP_HTML wxHtmlRenderingInfo
 {
 public:
     wxHtmlRenderingInfo()
-        : m_selection(NULL),
-          m_style(NULL),
-          m_prevUnderlined(false)
+        
+          
     {
     }
 
@@ -167,10 +163,10 @@ public:
     wxHtmlRenderingState& GetState() { return m_state; }
 
 protected:
-    wxHtmlSelection      *m_selection;
-    wxHtmlRenderingStyle *m_style;
+    wxHtmlSelection      *m_selection{NULL};
+    wxHtmlRenderingStyle *m_style{NULL};
     wxHtmlRenderingState m_state;
-    bool m_prevUnderlined;
+    bool m_prevUnderlined{false};
 };
 
 

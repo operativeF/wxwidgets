@@ -63,7 +63,7 @@ enum wxXmlNodeType
 class WXDLLIMPEXP_XML wxXmlAttribute
 {
 public:
-    wxXmlAttribute() : m_next(NULL) {}
+    wxXmlAttribute()  {}
     wxXmlAttribute(const wxString& name, const wxString& value,
                   wxXmlAttribute *next = NULL)
             : m_name(name), m_value(value), m_next(next) {}
@@ -80,7 +80,7 @@ public:
 private:
     wxString m_name;
     wxString m_value;
-    wxXmlAttribute *m_next;
+    wxXmlAttribute *m_next{NULL};
 };
 
 // Represents node in XML document. Node has name and may have content and
@@ -92,8 +92,7 @@ class WXDLLIMPEXP_XML wxXmlNode
 {
 public:
     wxXmlNode()
-        : m_attrs(NULL), m_parent(NULL), m_children(NULL), m_next(NULL),
-          m_lineNo(-1), m_noConversion(false)
+         
     {
     }
 
@@ -173,10 +172,10 @@ private:
     wxXmlNodeType m_type;
     wxString m_name;
     wxString m_content;
-    wxXmlAttribute *m_attrs;
-    wxXmlNode *m_parent, *m_children, *m_next;
-    int m_lineNo; // line number in original file, or -1
-    bool m_noConversion; // don't do encoding conversion - node is plain text
+    wxXmlAttribute *m_attrs{NULL};
+    wxXmlNode *m_parent{NULL}, *m_children{NULL}, *m_next{NULL};
+    int m_lineNo{-1}; // line number in original file, or -1
+    bool m_noConversion{false}; // don't do encoding conversion - node is plain text
 
     void DoFree();
     void DoCopy(const wxXmlNode& node);
@@ -286,7 +285,7 @@ private:
     wxString   m_version;
     wxString   m_fileEncoding;
     wxXmlDoctype m_doctype;
-    wxXmlNode *m_docNode;
+    wxXmlNode *m_docNode{nullptr};
     wxTextFileType m_fileType;
     wxString m_eol;
 

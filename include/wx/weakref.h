@@ -31,7 +31,7 @@ public:
     typedef T element_type;
 
     // Default ctor
-    wxWeakRef() : m_pobj(NULL), m_ptbase(NULL) { }
+    wxWeakRef() : m_pobj(NULL) { }
 
     // Ctor from the object of this type: this is needed as the template ctor
     // below is not used by at least g++4 when a literal NULL is used
@@ -125,7 +125,7 @@ protected:
     }
 
     T *m_pobj;
-    wxTrackable *m_ptbase;
+    wxTrackable *m_ptbase{NULL};
 };
 
 

@@ -35,7 +35,7 @@ public:
 
     // ctor for invalid pointer
     wxAnyStrPtr()
-        : m_str(NULL)
+         
     {
     }
 
@@ -131,7 +131,7 @@ public:
 private:
     // the original string and the position in it we correspond to, if the
     // string is NULL this object is NULL pointer-like
-    const wxString * const m_str;
+    const wxString * const m_str{NULL};
     const wxString::const_iterator m_iter;
 
     wxAnyStrPtr& operator=(const wxAnyStrPtr&) = delete;

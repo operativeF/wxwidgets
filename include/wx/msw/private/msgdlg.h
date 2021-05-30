@@ -32,24 +32,21 @@ namespace wxMSWMessageDialog
         enum { MAX_BUTTONS = 4  };
 
         wxMSWTaskDialogConfig()
-            : buttons(new TASKDIALOG_BUTTON[MAX_BUTTONS]),
-              parent(NULL),
-              iconId(0),
-              style(0),
-              useCustomLabels(false)
+            : buttons(new TASKDIALOG_BUTTON[MAX_BUTTONS])
+              
             { }
 
         // initializes the object from a message dialog.
         wxMSWTaskDialogConfig(const wxMessageDialogBase& dlg);
 
         wxScopedArray<TASKDIALOG_BUTTON> buttons;
-        wxWindow *parent;
+        wxWindow *parent{NULL};
         wxString caption;
         wxString message;
         wxString extendedMessage;
-        long iconId;
-        long style;
-        bool useCustomLabels;
+        long iconId{0};
+        long style{0};
+        bool useCustomLabels{false};
         wxString btnYesLabel;
         wxString btnNoLabel;
         wxString btnOKLabel;

@@ -24,7 +24,7 @@
 using namespace Scintilla;
 #endif
 
-ContractionState::ContractionState() : visible(nullptr), expanded(nullptr), heights(nullptr), foldDisplayTexts(nullptr), displayLines(nullptr), linesInDocument(1) {
+ContractionState::ContractionState()  {
 	//InsertLine(0);
 }
 

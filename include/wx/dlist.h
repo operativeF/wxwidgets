@@ -23,7 +23,7 @@ template<typename T>
 class wxDList: public std::list<T*>
 {
 private:
-    bool m_destroy;
+    bool m_destroy{ false };
     typedef std::list<T*> BaseListType;
     typedef wxDList<T> ListType;
 
@@ -88,7 +88,7 @@ public:
     };
 
 public:
-    wxDList() : m_destroy( false ) {}
+    wxDList()  {}
 
     ~wxDList() { Clear(); }
 

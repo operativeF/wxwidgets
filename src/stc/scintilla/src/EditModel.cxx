@@ -50,8 +50,7 @@
 using namespace Scintilla;
 #endif
 
-Caret::Caret() :
-	active(false), on(false), period(500) {}
+Caret::Caret()  {}
 
 EditModel::EditModel() {
 	inOverstrike = false;

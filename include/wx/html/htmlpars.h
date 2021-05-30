@@ -194,7 +194,7 @@ protected:
 	wxHtmlParser& operator=(const wxHtmlParser&) = delete;
 
     // class for opening files (file system)
-    wxFileSystem *m_FS;
+    wxFileSystem *m_FS{nullptr};
     // handlers stack used by PushTagHandler and PopTagHandler
     std::vector<wxHtmlTagHandlersHash*> m_HandlersStack;
 

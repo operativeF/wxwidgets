@@ -45,9 +45,8 @@ class WXDLLIMPEXP_CORE wxBufferedDC : public wxMemoryDC
 public:
     // Default ctor, must subsequently call Init for two stage construction.
     wxBufferedDC()
-        : m_dc(NULL),
-          m_buffer(NULL),
-          m_style(0)
+        
+          
     {
     }
 
@@ -125,13 +124,13 @@ private:
     //
     // NB: Without the existence of a wxNullDC, this must be a pointer, else it
     //     could probably be a reference.
-    wxDC *m_dc;
+    wxDC *m_dc{NULL};
 
     // the buffer (selected in this DC), initially invalid
-    wxBitmap *m_buffer;
+    wxBitmap *m_buffer{NULL};
 
     // the buffering style
-    int m_style;
+    int m_style{0};
 
     wxSize m_area;
 

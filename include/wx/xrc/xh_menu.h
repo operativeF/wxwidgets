@@ -24,7 +24,7 @@ public:
     bool CanHandle(wxXmlNode *node) override;
 
 private:
-    bool m_insideMenu;
+    bool m_insideMenu{false};
 };
 
 class WXDLLIMPEXP_XRC wxMenuBarXmlHandler : public wxXmlResourceHandler

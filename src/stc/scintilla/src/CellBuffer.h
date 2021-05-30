@@ -27,7 +27,7 @@ public:
 class LineVector {
 
 	Partitioning starts;
-	PerLine *perLine;
+	PerLine *perLine{nullptr};
 
 public:
 

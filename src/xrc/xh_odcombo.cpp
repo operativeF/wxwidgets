@@ -27,8 +27,8 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxOwnerDrawnComboBoxXmlHandler, wxXmlResourceHandler);
 
 wxOwnerDrawnComboBoxXmlHandler::wxOwnerDrawnComboBoxXmlHandler()
-                     :
-                     m_insideBox(false)
+                     
+                     
 {
     XRC_ADD_STYLE(wxCB_SIMPLE);
     XRC_ADD_STYLE(wxCB_SORT);

@@ -23,8 +23,8 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxMenuXmlHandler, wxXmlResourceHandler);
 
-wxMenuXmlHandler::wxMenuXmlHandler() :
-         m_insideMenu(false)
+wxMenuXmlHandler::wxMenuXmlHandler() 
+         
 {
     XRC_ADD_STYLE(wxMENU_TEAROFF);
 }

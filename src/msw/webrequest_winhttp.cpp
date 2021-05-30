@@ -647,8 +647,8 @@ wxWebAuthChallengeWinHTTP::SetCredentials(const wxWebCredentials& cred)
 // wxWebSessionWinHTTP
 //
 
-wxWebSessionWinHTTP::wxWebSessionWinHTTP():
-    m_handle(nullptr)
+wxWebSessionWinHTTP::wxWebSessionWinHTTP()
+    
 {
 }
 

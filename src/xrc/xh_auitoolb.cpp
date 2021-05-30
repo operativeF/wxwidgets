@@ -27,9 +27,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxAuiToolBarXmlHandler, wxXmlResourceHandler);
 
 wxAuiToolBarXmlHandler::wxAuiToolBarXmlHandler()
-    : 
-     m_isInside(false)
-    , m_toolbar(nullptr)
+     
 {
     XRC_ADD_STYLE(wxAUI_TB_TEXT);
     XRC_ADD_STYLE(wxAUI_TB_NO_TOOLTIPS);

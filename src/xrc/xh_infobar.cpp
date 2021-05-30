@@ -23,7 +23,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxInfoBarXmlHandler, wxXmlResourceHandler);
 #define XRC_ADD_SHOW_EFFECT(style) m_effectNames[style] = #style;
 
 wxInfoBarXmlHandler::wxInfoBarXmlHandler()
-    :  m_insideBar(false)
+      
 {
     XRC_ADD_SHOW_EFFECT(wxSHOW_EFFECT_NONE);
     XRC_ADD_SHOW_EFFECT(wxSHOW_EFFECT_ROLL_TO_LEFT);

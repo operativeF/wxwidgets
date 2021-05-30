@@ -438,8 +438,8 @@ STDMETHODIMP wxIDropTarget::Drop(IDataObject *pIDataSource,
 // ----------------------------------------------------------------------------
 
 wxDropTarget::wxDropTarget(wxDataObject *dataObj)
-            : wxDropTargetBase(dataObj),
-              m_dropTargetHelper(nullptr)
+            : wxDropTargetBase(dataObj)
+              
 {
     // create an IDropTarget implementation which will notify us about d&d
     // operations.

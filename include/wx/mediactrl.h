@@ -123,7 +123,7 @@ public:
 class WXDLLIMPEXP_MEDIA wxMediaCtrl : public wxControl
 {
 public:
-    wxMediaCtrl() : m_imp(NULL), m_bLoaded(false)
+    wxMediaCtrl()  
     {                                                                   }
 
     wxMediaCtrl(wxWindow* parent, wxWindowID winid,
@@ -218,8 +218,8 @@ protected:
     void DoMoveWindow(int x, int y, int w, int h) override;
     wxSize DoGetBestSize() const override;
 
-    class wxMediaBackend* m_imp;
-    bool m_bLoaded;
+    class wxMediaBackend* m_imp{NULL};
+    bool m_bLoaded{false};
 
     wxDECLARE_DYNAMIC_CLASS(wxMediaCtrl);
 };

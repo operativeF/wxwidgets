@@ -113,7 +113,7 @@ public:
 
         // Instance methods.
 
-    wxPluginManager() : m_entry(NULL) {}
+    wxPluginManager()  {}
     wxPluginManager(const wxString &libname, int flags = wxDL_DEFAULT)
     {
         Load(libname, flags);
@@ -143,7 +143,7 @@ private:
     }
 
     static wxDLManifest* ms_manifest;  // Static hash of loaded libs.
-    wxPluginLibrary*     m_entry;      // Cache our entry in the manifest.
+    wxPluginLibrary*     m_entry{NULL};      // Cache our entry in the manifest.
 
     // We could allow this class to be copied if we really
     // wanted to, but not without modification.

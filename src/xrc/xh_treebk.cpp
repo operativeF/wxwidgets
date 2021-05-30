@@ -27,9 +27,8 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxTreebookXmlHandler, wxXmlResourceHandler);
 
 wxTreebookXmlHandler::wxTreebookXmlHandler()
-                    : 
-                      m_tbk(nullptr),
-                      m_isInside(false)
+                    
+                      
 {
     XRC_ADD_STYLE(wxBK_DEFAULT);
     XRC_ADD_STYLE(wxBK_TOP);

@@ -26,7 +26,7 @@ public:
 private:
     wxShowEffect GetShowEffect(wxString const& param);
 
-    bool m_insideBar;
+    bool m_insideBar{false};
 
     wxString m_effectNames[wxSHOW_EFFECT_MAX];
 };

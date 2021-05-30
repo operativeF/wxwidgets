@@ -1183,8 +1183,8 @@ wxFileOffset wxCountingOutputStream::OnSysTell() const
 wxIMPLEMENT_ABSTRACT_CLASS(wxFilterInputStream, wxInputStream);
 
 wxFilterInputStream::wxFilterInputStream()
- :  m_parent_i_stream(nullptr),
-    m_owns(false)
+ 
+    
 {
 }
 
@@ -1213,8 +1213,8 @@ wxFilterInputStream::~wxFilterInputStream()
 wxIMPLEMENT_ABSTRACT_CLASS(wxFilterOutputStream, wxOutputStream);
 
 wxFilterOutputStream::wxFilterOutputStream()
- :  m_parent_o_stream(nullptr),
-    m_owns(false)
+ 
+    
 {
 }
 

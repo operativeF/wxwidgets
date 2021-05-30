@@ -30,7 +30,7 @@
 class WXDLLIMPEXP_CORE wxGBPosition
 {
 public:
-    wxGBPosition() : m_row(0), m_col(0) {}
+    wxGBPosition()  {}
     wxGBPosition(int row, int col) : m_row(row), m_col(col) {}
 
     // default copy ctor and assignment operator are okay.
@@ -44,8 +44,8 @@ public:
     bool operator!=(const wxGBPosition& p) const { return !(*this == p); }
 
 private:
-    int m_row;
-    int m_col;
+    int m_row{0};
+    int m_col{0};
 };
 
 
@@ -193,7 +193,7 @@ public:
 protected:
     wxGBPosition    m_pos;
     wxGBSpan        m_span;
-    wxGridBagSizer* m_gbsizer;  // so SetPos/SetSpan can check for intersects
+    wxGridBagSizer* m_gbsizer{nullptr};  // so SetPos/SetSpan can check for intersects
 
 
 private:

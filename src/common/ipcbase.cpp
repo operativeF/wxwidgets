@@ -35,10 +35,8 @@ wxConnectionBase::wxConnectionBase(void *buffer, size_t bytes)
 }
 
 wxConnectionBase::wxConnectionBase()
-    : m_buffer(nullptr),
-      m_buffersize(0),
-      m_deletebufferwhendone(true),
-      m_connected(true)
+    
+      
 {
 }
 

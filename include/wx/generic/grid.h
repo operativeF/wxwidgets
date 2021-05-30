@@ -641,7 +641,7 @@ class wxGridFitMode
 {
 public:
     // Default ctor creates an object not specifying any particular behaviour.
-    wxGridFitMode() : m_mode(Mode_Unset) {}
+    wxGridFitMode()  {}
 
     // Static methods allowing to create objects actually specifying behaviour.
     static wxGridFitMode Clip() { return wxGridFitMode(Mode_Clip); }
@@ -694,7 +694,7 @@ private:
 
     explicit wxGridFitMode(Mode mode) : m_mode(mode) {}
 
-    Mode m_mode;
+    Mode m_mode{Mode_Unset};
 };
 
 // ----------------------------------------------------------------------------
@@ -971,11 +971,8 @@ struct wxGridBlockDiffResult;
 class WXDLLIMPEXP_CORE wxGridBlockCoords
 {
 public:
-    wxGridBlockCoords() :
-        m_topRow(-1),
-        m_leftCol(-1),
-        m_bottomRow(-1),
-        m_rightCol(-1)
+    wxGridBlockCoords() 
+        
     {
     }
 
@@ -1068,10 +1065,10 @@ public:
     }
 
 private:
-    int m_topRow;
-    int m_leftCol;
-    int m_bottomRow;
-    int m_rightCol;
+    int m_topRow{-1};
+    int m_leftCol{-1};
+    int m_bottomRow{-1};
+    int m_rightCol{-1};
 };
 
 typedef std::vector<wxGridBlockCoords> wxGridBlockCoordsVector;

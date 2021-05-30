@@ -1060,7 +1060,7 @@ public:
     // members non-const) because we use these objects as out-parameters as
     // they are not fully declared in the public headers. The factory functions
     // below must be used to create a really usable object.
-    DateParseParams() : fallbackParseDate(false) { }
+    DateParseParams()  { }
 
     // Use these functions to really initialize the object.
     static DateParseParams WithFallback(const wxString& format)
@@ -1077,7 +1077,7 @@ public:
     wxString format;
 
     // Whether fall back to ParseDate() is allowed.
-    bool fallbackParseDate;
+    bool fallbackParseDate{false};
 
 private:
     DateParseParams(const wxString& format_, bool fallbackParseDate_)

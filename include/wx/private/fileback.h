@@ -34,7 +34,7 @@ public:
                   size_t bufsize = DefaultBufSize,
                   const wxString& prefix = wxT("wxbf"));
 
-    wxBackingFile() : m_impl(NULL) { }
+    wxBackingFile()  { }
     ~wxBackingFile();
 
     wxBackingFile(const wxBackingFile& backer);
@@ -43,7 +43,7 @@ public:
     operator bool() const { return m_impl != NULL; }
 
 private:
-    class wxBackingFileImpl *m_impl;
+    class wxBackingFileImpl *m_impl{NULL};
     friend class wxBackedInputStream;
 };
 

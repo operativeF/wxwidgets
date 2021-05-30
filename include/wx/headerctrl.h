@@ -403,8 +403,7 @@ class WXDLLIMPEXP_CORE wxHeaderCtrlEvent : public wxNotifyEvent
 public:
     wxHeaderCtrlEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
         : wxNotifyEvent(commandType, winid),
-          m_col(-1),
-          m_width(0),
+          
           m_order(static_cast<unsigned int>(-1))
     {
     }
@@ -433,10 +432,10 @@ public:
 
 protected:
     // the column affected by the event
-    int m_col;
+    int m_col{-1};
 
     // the current width for the dragging events
-    int m_width;
+    int m_width{0};
 
     // the new column position for end reorder event
     unsigned int m_order;

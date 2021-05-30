@@ -25,8 +25,8 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxListBoxXmlHandler, wxXmlResourceHandler);
 
 wxListBoxXmlHandler::wxListBoxXmlHandler()
-                   : 
-                     m_insideBox(false)
+                    
+                     
 {
     XRC_ADD_STYLE(wxLB_SINGLE);
     XRC_ADD_STYLE(wxLB_MULTIPLE);

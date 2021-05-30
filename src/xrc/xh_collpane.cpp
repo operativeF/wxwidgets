@@ -23,7 +23,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxCollapsiblePaneXmlHandler, wxXmlResourceHandler);
 
 wxCollapsiblePaneXmlHandler::wxCollapsiblePaneXmlHandler()
-:  m_isInside(false)
+  
 {
     XRC_ADD_STYLE(wxCP_NO_TLW_RESIZE);
     XRC_ADD_STYLE(wxCP_DEFAULT_STYLE);

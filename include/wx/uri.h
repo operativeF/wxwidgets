@@ -172,9 +172,9 @@ protected:
     wxString m_server;
     wxString m_port;
 
-    wxURIHostType m_hostType;
+    wxURIHostType m_hostType{wxURI_REGNAME};
 
-    size_t m_fields;
+    size_t m_fields{0};
 
     wxDECLARE_DYNAMIC_CLASS(wxURI);
 };

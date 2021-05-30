@@ -157,7 +157,7 @@ class WXDLLIMPEXP_FWD_CORE wxCalendarCtrl;
 class WXDLLIMPEXP_CORE wxCalendarEvent : public wxDateEvent
 {
 public:
-    wxCalendarEvent() : m_wday(wxDateTime::Inv_WeekDay)  { }
+    wxCalendarEvent()   { }
     wxCalendarEvent(wxWindow *win, const wxDateTime& dt, wxEventType type)
         : wxDateEvent(win, dt, type),
           m_wday(wxDateTime::Inv_WeekDay) { }
@@ -170,7 +170,7 @@ public:
     wxEvent *Clone() const override { return new wxCalendarEvent(*this); }
 
 private:
-    wxDateTime::WeekDay m_wday;
+    wxDateTime::WeekDay m_wday{wxDateTime::Inv_WeekDay};
 
     public:
 	wxCalendarEvent& operator=(const wxCalendarEvent&) = delete;

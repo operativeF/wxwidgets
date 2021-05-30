@@ -61,7 +61,7 @@ public:
     virtual void UnsetNotifier() { m_notifier = NULL; }
 
 protected:
-    wxArchiveEntry() : m_notifier(NULL) { }
+    wxArchiveEntry()  { }
     wxArchiveEntry(const wxArchiveEntry& e) : wxObject(e), m_notifier(NULL) { }
 
     virtual void SetOffset(wxFileOffset offset) = 0;
@@ -71,7 +71,7 @@ protected:
     wxArchiveEntry& operator=(const wxArchiveEntry& entry);
 
 private:
-    wxArchiveNotifier *m_notifier;
+    wxArchiveNotifier *m_notifier{NULL};
 
     wxDECLARE_ABSTRACT_CLASS(wxArchiveEntry);
 };
@@ -361,12 +361,12 @@ protected:
     virtual wxArchiveInputStream  *DoNewStream(wxInputStream *stream) const = 0;
     virtual wxArchiveOutputStream *DoNewStream(wxOutputStream *stream) const = 0;
 
-    wxArchiveClassFactory() : m_pConv(NULL), m_next(this) { }
+    wxArchiveClassFactory() :  m_next(this) { }
     wxArchiveClassFactory& operator=(const wxArchiveClassFactory& WXUNUSED(f))
         { return *this; }
 
 private:
-    wxMBConv *m_pConv;
+    wxMBConv *m_pConv{NULL};
     static wxArchiveClassFactory *sm_first;
     wxArchiveClassFactory *m_next;
 

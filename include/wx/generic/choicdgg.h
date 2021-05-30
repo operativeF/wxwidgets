@@ -33,7 +33,7 @@ class WXDLLIMPEXP_FWD_CORE wxListBoxBase;
 class WXDLLIMPEXP_CORE wxAnyChoiceDialog : public wxDialog
 {
 public:
-    wxAnyChoiceDialog() : m_listbox(NULL) { }
+    wxAnyChoiceDialog()  { }
 
     wxAnyChoiceDialog(wxWindow *parent,
                       const wxString& message,
@@ -74,7 +74,7 @@ public:
                 long styleLbox = wxLB_ALWAYS_SB);
 
 protected:
-    wxListBoxBase *m_listbox;
+    wxListBoxBase *m_listbox{NULL};
 
     virtual wxListBoxBase *CreateList(int n,
                                       const wxString *choices,

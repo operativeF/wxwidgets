@@ -67,7 +67,7 @@ class WXDLLIMPEXP_CORE wxBasicString
 {
 public:
     // Constructs with the owned BSTR set to NULL
-    wxBasicString() : m_bstrBuf(NULL) {}
+    wxBasicString()  {}
 
     // Constructs with the owned BSTR created from a wxString
     wxBasicString(const wxString& str)
@@ -105,7 +105,7 @@ public:
     BSTR Get() const { return Copy(); }
 private:
     // actual string
-    BSTR m_bstrBuf;
+    BSTR m_bstrBuf{NULL};
 };
 
 #if wxUSE_VARIANT

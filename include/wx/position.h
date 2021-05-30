@@ -15,7 +15,7 @@
 class WXDLLIMPEXP_CORE wxPosition
 {
 public:
-    wxPosition() : m_row(0), m_column(0) {}
+    wxPosition()  {}
     wxPosition(int row, int col) : m_row(row), m_column(col) {}
 
     // default copy ctor and assignment operator are okay.
@@ -51,8 +51,8 @@ public:
         { return wxPosition(m_row - s.y, m_column - s.x); }
 
 private:
-    int m_row;
-    int m_column;
+    int m_row{0};
+    int m_column{0};
 };
 
 #endif // _WX_POSITION_H_

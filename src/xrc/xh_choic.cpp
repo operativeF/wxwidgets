@@ -25,7 +25,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxChoiceXmlHandler, wxXmlResourceHandler);
 
 wxChoiceXmlHandler::wxChoiceXmlHandler()
-:  m_insideBox(false)
+  
 {
     XRC_ADD_STYLE(wxCB_SORT);
     AddWindowStyles();

@@ -136,12 +136,12 @@ class Selection {
 	std::vector<SelectionRange> ranges;
 	std::vector<SelectionRange> rangesSaved;
 	SelectionRange rangeRectangular;
-	size_t mainRange;
-	bool moveExtends;
-	bool tentativeMain;
+	size_t mainRange{0};
+	bool moveExtends{false};
+	bool tentativeMain{false};
 public:
 	enum selTypes { noSel, selStream, selRectangle, selLines, selThin };
-	selTypes selType;
+	selTypes selType{selStream};
 
 	Selection();
 	~Selection();

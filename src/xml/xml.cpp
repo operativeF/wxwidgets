@@ -454,7 +454,7 @@ bool wxXmlDoctype::IsValid() const
 //-----------------------------------------------------------------------------
 
 wxXmlDocument::wxXmlDocument()
-    : m_version(wxS("1.0")), m_fileEncoding(wxS("UTF-8")), m_docNode(nullptr)
+    : m_version(wxS("1.0")), m_fileEncoding(wxS("UTF-8")) 
 {
     SetFileType(wxTextFileType_Unix);
 }

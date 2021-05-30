@@ -25,7 +25,7 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxRadioBoxXmlHandler, wxXmlResourceHandler);
 
 wxRadioBoxXmlHandler::wxRadioBoxXmlHandler()
-:  m_insideBox(false)
+  
 {
     XRC_ADD_STYLE(wxRA_SPECIFY_COLS);
     XRC_ADD_STYLE(wxRA_HORIZONTAL);

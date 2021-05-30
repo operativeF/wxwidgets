@@ -26,8 +26,8 @@ public:
     bool CanHandle(wxXmlNode *node) override;
 
 private:
-    bool m_isInside;
-    wxToolBar *m_toolbar;
+    bool m_isInside{false};
+    wxToolBar *m_toolbar{nullptr};
     wxSize m_toolSize;
 };
 
