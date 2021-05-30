@@ -76,7 +76,13 @@ enum wxPropertySheetDialogFlags
 class WXDLLIMPEXP_ADV wxPropertySheetDialog : public wxDialog
 {
 public:
-    wxPropertySheetDialog() : wxDialog() { Init(); }
+    wxPropertySheetDialog() : wxDialog() { 
+    m_sheetStyle = wxPROPSHEET_DEFAULT;
+    m_innerSizer = nullptr;
+    m_bookCtrl = nullptr;
+    m_sheetOuterBorder = 2;
+    m_sheetInnerBorder = 5;
+ }
 
     wxPropertySheetDialog(wxWindow* parent, wxWindowID id,
                        const wxString& title,
@@ -85,7 +91,13 @@ public:
                        long style = wxDEFAULT_DIALOG_STYLE,
                        const wxString& name = wxASCII_STR(wxDialogNameStr))
     {
-        Init();
+        
+    m_sheetStyle = wxPROPSHEET_DEFAULT;
+    m_innerSizer = nullptr;
+    m_bookCtrl = nullptr;
+    m_sheetOuterBorder = 2;
+    m_sheetInnerBorder = 5;
+
         Create(parent, id, title, pos, sz, style, name);
     }
 
@@ -142,7 +154,7 @@ public:
     void OnIdle(wxIdleEvent& event);
 
 private:
-    void Init();
+    
 
 protected:
     wxBookCtrlBase* m_bookCtrl;

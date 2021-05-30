@@ -3993,7 +3993,7 @@ public:
     }
 
 private:
-    void Init();
+    
 
     void DoDrawText(const wxString& str, double x, double y) override;
 
@@ -4069,7 +4069,15 @@ wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer,
     RECT r = wxGetWindowRect(hwnd);
     m_width = r.right - r.left;
     m_height = r.bottom - r.top;
-    Init();
+    
+    m_cachedRenderTarget = nullptr;
+    m_composition = wxCOMPOSITION_OVER;
+    m_renderTargetHolder->Bind(this);
+    m_enableOffset = true;
+    m_isClipBoxValid = false;
+    m_clipX1 = m_clipY1 = m_clipX2 = m_clipY2 = 0.0;
+    EnsureInitialized();
+
 }
 
 wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer,
@@ -4087,7 +4095,15 @@ wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer,
         m_height = dcSize.y;
     }
 
-    Init();
+    
+    m_cachedRenderTarget = nullptr;
+    m_composition = wxCOMPOSITION_OVER;
+    m_renderTargetHolder->Bind(this);
+    m_enableOffset = true;
+    m_isClipBoxValid = false;
+    m_clipX1 = m_clipY1 = m_clipX2 = m_clipY2 = 0.0;
+    EnsureInitialized();
+
 }
 
 #if wxUSE_IMAGE
@@ -4097,7 +4113,15 @@ wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer, ID2D1Factory* direct2dF
 {
     m_width = image.GetWidth();
     m_height = image.GetHeight();
-    Init();
+    
+    m_cachedRenderTarget = nullptr;
+    m_composition = wxCOMPOSITION_OVER;
+    m_renderTargetHolder->Bind(this);
+    m_enableOffset = true;
+    m_isClipBoxValid = false;
+    m_clipX1 = m_clipY1 = m_clipX2 = m_clipY2 = 0.0;
+    EnsureInitialized();
+
 }
 #endif // wxUSE_IMAGE
 
@@ -4107,11 +4131,7 @@ wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer, ID2D1Factory* direct2dF
     m_renderTargetHolder = *((wxSharedPtr<wxD2DRenderTargetResourceHolder>*)nativeContext);
     m_width = 0;
     m_height = 0;
-    Init();
-}
-
-void wxD2DContext::Init()
-{
+    
     m_cachedRenderTarget = nullptr;
     m_composition = wxCOMPOSITION_OVER;
     m_renderTargetHolder->Bind(this);
@@ -4119,7 +4139,10 @@ void wxD2DContext::Init()
     m_isClipBoxValid = false;
     m_clipX1 = m_clipY1 = m_clipX2 = m_clipY2 = 0.0;
     EnsureInitialized();
+
 }
+
+
 
 wxD2DContext::~wxD2DContext()
 {

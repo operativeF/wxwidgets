@@ -23,7 +23,9 @@ class WXDLLIMPEXP_CORE wxHeaderCtrl : public wxCompositeWindow<wxHeaderCtrlBase>
 public:
     wxHeaderCtrl()
     {
-        Init();
+        
+    m_nativeControl = nullptr;
+
     }
 
     wxHeaderCtrl(wxWindow *parent,
@@ -33,7 +35,9 @@ public:
                  long style = wxHD_DEFAULT_STYLE,
                  const wxString& name = wxASCII_STR(wxHeaderCtrlNameStr))
     {
-        Init();
+        
+    m_nativeControl = nullptr;
+
 
         Create(parent, id, pos, size, style, name);
     }
@@ -67,7 +71,7 @@ private:
     wxWindowList GetCompositeWindowParts() const override;
 
     // Common part of all ctors.
-    void Init();
+    
 
     // Events.
     void OnSize(wxSizeEvent& event);

@@ -69,14 +69,54 @@ public:
     // Default constructor
     wxSashWindow()
     {
-        Init();
+        
+    m_draggingEdge = wxSASH_NONE;
+    m_dragMode = wxSASH_DRAG_NONE;
+    m_oldX = 0;
+    m_oldY = 0;
+    m_firstX = 0;
+    m_firstY = 0;
+    m_borderSize = 3;
+    m_extraBorderSize = 0;
+    m_minimumPaneSizeX = 0;
+    m_minimumPaneSizeY = 0;
+    m_maximumPaneSizeX = 10000;
+    m_maximumPaneSizeY = 10000;
+    m_sashCursorWE = new wxCursor(wxCURSOR_SIZEWE);
+    m_sashCursorNS = new wxCursor(wxCURSOR_SIZENS);
+    m_mouseCaptured = false;
+    m_currentCursor = nullptr;
+
+    // Eventually, we'll respond to colour change messages
+    InitColours();
+
     }
 
     // Normal constructor
     wxSashWindow(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, long style = wxSW_3D|wxCLIP_CHILDREN, const wxString& name = wxT("sashWindow"))
     {
-        Init();
+        
+    m_draggingEdge = wxSASH_NONE;
+    m_dragMode = wxSASH_DRAG_NONE;
+    m_oldX = 0;
+    m_oldY = 0;
+    m_firstX = 0;
+    m_firstY = 0;
+    m_borderSize = 3;
+    m_extraBorderSize = 0;
+    m_minimumPaneSizeX = 0;
+    m_minimumPaneSizeY = 0;
+    m_maximumPaneSizeX = 10000;
+    m_maximumPaneSizeY = 10000;
+    m_sashCursorWE = new wxCursor(wxCURSOR_SIZEWE);
+    m_sashCursorNS = new wxCursor(wxCURSOR_SIZENS);
+    m_mouseCaptured = false;
+    m_currentCursor = nullptr;
+
+    // Eventually, we'll respond to colour change messages
+    InitColours();
+
         Create(parent, id, pos, size, style, name);
     }
 
@@ -155,7 +195,7 @@ public:
     void InitColours();
 
 private:
-    void Init();
+    
 
     wxSashEdge  m_sashes[4];
     int         m_dragMode;

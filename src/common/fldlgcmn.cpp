@@ -40,14 +40,7 @@ extern WXDLLEXPORT_DATA(const char) wxFileSelectorDefaultWildcardStr[] =
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxFileDialogBase, wxDialog);
 
-void wxFileDialogBase::Init()
-{
-    m_filterIndex = 0;
-    m_currentlySelectedFilterIndex = wxNOT_FOUND;
-    m_windowStyle = 0;
-    m_extraControl = nullptr;
-    m_extraControlCreator = nullptr;
-}
+
 
 bool wxFileDialogBase::Create(wxWindow *parent,
                               const wxString& message,

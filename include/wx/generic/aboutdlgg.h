@@ -41,12 +41,12 @@ public:
     // --------------------------------
 
     // default ctor, you must use Create() to really initialize the dialog
-    wxGenericAboutDialog() { Init(); }
+    wxGenericAboutDialog() {  m_sizerText = NULL;  }
 
     // ctor which fully initializes the object
     wxGenericAboutDialog(const wxAboutDialogInfo& info, wxWindow* parent = NULL)
     {
-        Init();
+         m_sizerText = NULL; 
 
         (void)Create(info, parent);
     }
@@ -80,7 +80,7 @@ protected:
 
 private:
     // common part of all ctors
-    void Init() { m_sizerText = NULL; }
+    
 
 #if !wxUSE_MODAL_ABOUT_DIALOG
     // An explicit handler for deleting the dialog when it's closed is needed

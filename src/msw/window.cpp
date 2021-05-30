@@ -450,25 +450,7 @@ bool wxWindowMSW::MSWCommand(WXUINT WXUNUSED(param), WXWORD WXUNUSED(id))
 // constructors and such
 // ----------------------------------------------------------------------------
 
-void wxWindowMSW::Init()
-{
-    // MSW specific
-    m_oldWndProc = nullptr;
-    m_mouseInWindow = false;
-    m_lastKeydownProcessed = false;
 
-    m_hWnd = nullptr;
-
-    m_xThumbSize = 0;
-    m_yThumbSize = 0;
-
-#if wxUSE_DEFERRED_SIZING
-    m_hDWP = nullptr;
-    m_pendingPosition = wxDefaultPosition;
-    m_pendingSize = wxDefaultSize;
-#endif // wxUSE_DEFERRED_SIZING
-
-}
 
 // Destructor
 wxWindowMSW::~wxWindowMSW()

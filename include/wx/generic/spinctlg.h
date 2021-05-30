@@ -45,7 +45,18 @@ class WXDLLIMPEXP_CORE wxSpinCtrlGenericBase
                 : public wxNavigationEnabled<wxCompositeWindow<wxSpinCtrlBase> >
 {
 public:
-    wxSpinCtrlGenericBase() { Init(); }
+    wxSpinCtrlGenericBase() { 
+    m_value         = 0;
+    m_min           = 0;
+    m_max           = 100;
+    m_increment     = 1;
+    m_snap_to_ticks = false;
+
+    m_spin_value    = 0;
+
+    m_textCtrl = nullptr;
+    m_spinButton  = nullptr;
+ }
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
@@ -165,7 +176,7 @@ protected:
 
 private:
     // common part of all ctors
-    void Init();
+    
 
     // Implement pure virtual function inherited from wxCompositeWindow.
     wxWindowList GetCompositeWindowParts() const override;
@@ -357,7 +368,10 @@ private:
 class WXDLLIMPEXP_CORE wxSpinCtrlDouble : public wxSpinCtrlGenericBase
 {
 public:
-    wxSpinCtrlDouble() { Init(); }
+    wxSpinCtrlDouble() { 
+        m_digits = 0;
+        m_format = wxASCII_STR("%0.0f");
+     }
     wxSpinCtrlDouble(wxWindow *parent,
                      wxWindowID id = wxID_ANY,
                      const wxString& value = wxEmptyString,
@@ -368,7 +382,10 @@ public:
                      double inc = 1,
                      const wxString& name = wxT("wxSpinCtrlDouble"))
     {
-        Init();
+        
+        m_digits = 0;
+        m_format = wxASCII_STR("%0.0f");
+    
 
         Create(parent, id, value, pos, size, style,
                min, max, initial, inc, name);
@@ -422,11 +439,7 @@ protected:
 
 private:
     // Common part of all ctors.
-    void Init()
-    {
-        m_digits = 0;
-        m_format = wxASCII_STR("%0.0f");
-    }
+    
 
     wxString m_format;
 

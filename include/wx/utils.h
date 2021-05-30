@@ -195,16 +195,16 @@ WXDLLIMPEXP_CORE wxMouseState wxGetMouseState();
 class WXDLLIMPEXP_BASE wxPlatform
 {
 public:
-    wxPlatform() { Init(); }
+    wxPlatform() {  m_longValue = 0; m_doubleValue = 0.0;  }
     wxPlatform(const wxPlatform& platform) { Copy(platform); }
     void operator = (const wxPlatform& platform) { if (&platform != this) Copy(platform); }
     void Copy(const wxPlatform& platform);
 
     // Specify an optional default value
-    wxPlatform(int defValue) { Init(); m_longValue = (long)defValue; }
-    wxPlatform(long defValue) { Init(); m_longValue = defValue; }
-    wxPlatform(const wxString& defValue) { Init(); m_stringValue = defValue; }
-    wxPlatform(double defValue) { Init(); m_doubleValue = defValue; }
+    wxPlatform(int defValue) {  m_longValue = 0; m_doubleValue = 0.0;  m_longValue = (long)defValue; }
+    wxPlatform(long defValue) {  m_longValue = 0; m_doubleValue = 0.0;  m_longValue = defValue; }
+    wxPlatform(const wxString& defValue) {  m_longValue = 0; m_doubleValue = 0.0;  m_stringValue = defValue; }
+    wxPlatform(double defValue) {  m_longValue = 0; m_doubleValue = 0.0;  m_doubleValue = defValue; }
 
     static wxPlatform If(int platform, long value);
     static wxPlatform IfNot(int platform, long value);
@@ -245,7 +245,7 @@ public:
 
 private:
 
-    void Init() { m_longValue = 0; m_doubleValue = 0.0; }
+    
 
     long                m_longValue;
     double              m_doubleValue;

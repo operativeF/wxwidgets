@@ -54,12 +54,7 @@ wxBEGIN_EVENT_TABLE(wxGenericCollapsiblePane, wxControl)
     EVT_SIZE(wxGenericCollapsiblePane::OnSize)
 wxEND_EVENT_TABLE()
 
-void wxGenericCollapsiblePane::Init()
-{
-    m_pButton = nullptr;
-    m_pPane = nullptr;
-    m_sz = nullptr;
-}
+
 
 bool wxGenericCollapsiblePane::Create(wxWindow *parent,
                                       wxWindowID id,

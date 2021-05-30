@@ -1586,18 +1586,7 @@ wxZipInputStream::wxZipInputStream(wxInputStream& stream,
                                    wxMBConv& conv /*=wxConvLocal*/)
   : wxArchiveInputStream(stream, conv)
 {
-    Init();
-}
-
-wxZipInputStream::wxZipInputStream(wxInputStream *stream,
-                                   wxMBConv& conv /*=wxConvLocal*/)
-  : wxArchiveInputStream(stream, conv)
-{
-    Init();
-}
-
-void wxZipInputStream::Init()
-{
+    
     m_store = new wxStoredInputStream(*m_parent_i_stream);
     m_inflate = nullptr;
     m_rawin = nullptr;
@@ -1612,7 +1601,32 @@ void wxZipInputStream::Init()
     m_signature = 0;
     m_TotalEntries = 0;
     m_lasterror = m_parent_i_stream->GetLastError();
+
 }
+
+wxZipInputStream::wxZipInputStream(wxInputStream *stream,
+                                   wxMBConv& conv /*=wxConvLocal*/)
+  : wxArchiveInputStream(stream, conv)
+{
+    
+    m_store = new wxStoredInputStream(*m_parent_i_stream);
+    m_inflate = nullptr;
+    m_rawin = nullptr;
+    m_raw = false;
+    m_headerSize = 0;
+    m_decomp = nullptr;
+    m_parentSeekable = false;
+    m_weaklinks = new wxZipWeakLinks;
+    m_streamlink = nullptr;
+    m_offsetAdjustment = 0;
+    m_position = wxInvalidOffset;
+    m_signature = 0;
+    m_TotalEntries = 0;
+    m_lasterror = m_parent_i_stream->GetLastError();
+
+}
+
+
 
 wxZipInputStream::~wxZipInputStream()
 {

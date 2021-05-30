@@ -35,7 +35,14 @@ public:
     // default ctor, the real conversion will be created on demand
     wxConvAuto(wxFontEncoding enc = wxFONTENCODING_DEFAULT)
     {
-        Init();
+        
+        // We don't initialize m_encDefault here as different ctors do it
+        // differently.
+        m_conv = NULL;
+        m_bomType = wxBOM_Unknown;
+        m_ownsConv = false;
+        m_consumedBOM = false;
+    
 
         m_encDefault = enc;
     }
@@ -44,7 +51,14 @@ public:
     // deduced on first use
     wxConvAuto(const wxConvAuto& other) : wxMBConv()
     {
-        Init();
+        
+        // We don't initialize m_encDefault here as different ctors do it
+        // differently.
+        m_conv = NULL;
+        m_bomType = wxBOM_Unknown;
+        m_ownsConv = false;
+        m_consumedBOM = false;
+    
 
         m_encDefault = other.m_encDefault;
     }
@@ -103,15 +117,7 @@ public:
 
 private:
     // common part of all ctors
-    void Init()
-    {
-        // We don't initialize m_encDefault here as different ctors do it
-        // differently.
-        m_conv = NULL;
-        m_bomType = wxBOM_Unknown;
-        m_ownsConv = false;
-        m_consumedBOM = false;
-    }
+    
 
     // initialize m_conv with the UTF-8 conversion
     void InitWithUTF8()

@@ -876,9 +876,7 @@ void wxVListBoxComboPopup::Populate( const wxArrayString& choices )
 wxBEGIN_EVENT_TABLE(wxOwnerDrawnComboBox, wxComboCtrl)
 wxEND_EVENT_TABLE()
 
-void wxOwnerDrawnComboBox::Init()
-{
-}
+
 
 bool wxOwnerDrawnComboBox::Create(wxWindow *parent,
                                   wxWindowID id,
@@ -902,7 +900,8 @@ wxOwnerDrawnComboBox::wxOwnerDrawnComboBox(wxWindow *parent,
                                            const wxValidator& validator,
                                            const wxString& name)
 {
-    Init();
+    
+
 
     Create(parent,id,value,pos,size,choices,style, validator, name);
 }

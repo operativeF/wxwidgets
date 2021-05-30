@@ -218,7 +218,11 @@ public:
           m_align(align),
           m_flags(flags)
     {
-        Init();
+        
+        m_minWidth = 0;
+        m_sort = false;
+        m_sortAscending = true;
+    
     }
 
     wxHeaderColumnSimple(const wxBitmap& bitmap,
@@ -230,7 +234,11 @@ public:
           m_align(align),
           m_flags(flags)
     {
-        Init();
+        
+        m_minWidth = 0;
+        m_sort = false;
+        m_sortAscending = true;
+    
     }
 
     // implement base class pure virtuals
@@ -265,12 +273,7 @@ public:
 
 private:
     // common part of all ctors
-    void Init()
-    {
-        m_minWidth = 0;
-        m_sort = false;
-        m_sortAscending = true;
-    }
+    
 
     wxString m_title;
     wxBitmap m_bitmap;

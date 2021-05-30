@@ -73,12 +73,16 @@ class WXDLLIMPEXP_BASE wxRegEx
 {
 public:
     // default ctor: use Compile() later
-    wxRegEx() { Init(); }
+    wxRegEx() { 
+    m_impl = nullptr;
+ }
 
     // create and compile
     wxRegEx(const wxString& expr, int flags = wxRE_DEFAULT)
     {
-        Init();
+        
+    m_impl = nullptr;
+
         (void)Compile(expr, flags);
     }
 
@@ -149,7 +153,7 @@ public:
 
 private:
     // common part of all ctors
-    void Init();
+    
 
     // the real guts of this class
     wxRegExImpl *m_impl;

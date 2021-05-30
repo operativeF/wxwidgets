@@ -407,7 +407,7 @@ protected:
     virtual bool WXZIPFIX CloseDecompressor(wxInputStream *decomp);
 
 private:
-    void Init();
+    
     void Init(const wxString& file);
 
     wxArchiveEntry *DoGetNextEntry() override    { return GetNextEntry(); }

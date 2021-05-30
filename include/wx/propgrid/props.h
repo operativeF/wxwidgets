@@ -262,7 +262,7 @@ protected:
     wxByte      m_realBase; // translated to 8,16,etc.
     wxByte      m_prefix;
 private:
-    void Init();
+    
 
     // Validation helpers.
 #if wxUSE_LONGLONG

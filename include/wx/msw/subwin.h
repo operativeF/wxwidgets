@@ -22,7 +22,11 @@ class WXDLLIMPEXP_CORE wxSubwindows
 public:
     // the number of subwindows can be specified either as parameter to ctor or
     // later in Create()
-    wxSubwindows(size_t n = 0) { Init(); if ( n ) Create(n); }
+    wxSubwindows(size_t n = 0) { 
+        m_count = 0;
+        m_hwnds = NULL;
+        m_ids = NULL;
+     if ( n ) Create(n); }
 
     // allocate enough space for the given number of windows
     void Create(size_t n)
@@ -157,12 +161,7 @@ public:
     }
 
 private:
-    void Init()
-    {
-        m_count = 0;
-        m_hwnds = NULL;
-        m_ids = NULL;
-    }
+    
 
     // number of elements in m_hwnds array
     size_t m_count;

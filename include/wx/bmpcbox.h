@@ -38,7 +38,12 @@ class WXDLLIMPEXP_CORE wxBitmapComboBoxBase
 {
 public:
     // ctors and such
-    wxBitmapComboBoxBase() { Init(); }
+    wxBitmapComboBoxBase() { 
+    m_fontHeight = 0;
+    m_imgAreaWidth = 0;
+    m_indent = 0;
+    m_usedImgSize = wxSize(-1, -1);
+ }
 
     virtual ~wxBitmapComboBoxBase() { }
 
@@ -105,7 +110,7 @@ protected:
     int                 m_indent;
 
 private:
-    void Init();
+    
 #endif // !wxBITMAPCOMBOBOX_OWNERDRAWN_BASED/wxBITMAPCOMBOBOX_OWNERDRAWN_BASED
 };
 

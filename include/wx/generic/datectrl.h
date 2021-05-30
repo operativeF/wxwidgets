@@ -26,7 +26,10 @@ class WXDLLIMPEXP_CORE wxDatePickerCtrlGeneric
 {
 public:
     // creating the control
-    wxDatePickerCtrlGeneric() { Init(); }
+    wxDatePickerCtrlGeneric() { 
+    m_combo = nullptr;
+    m_popup = nullptr;
+ }
     virtual ~wxDatePickerCtrlGeneric();
     wxDatePickerCtrlGeneric(wxWindow *parent,
                             wxWindowID id,
@@ -37,7 +40,10 @@ public:
                             const wxValidator& validator = wxDefaultValidator,
                             const wxString& name = wxDatePickerCtrlNameStr)
     {
-        Init();
+        
+    m_combo = nullptr;
+    m_popup = nullptr;
+
 
         (void)Create(parent, id, date, pos, size, style, validator, name);
     }
@@ -75,7 +81,7 @@ protected:
     wxSize DoGetBestSize() const override;
 
 private:
-    void Init();
+    
 
     // return the list of the windows composing this one
     wxWindowList GetCompositeWindowParts() const override;

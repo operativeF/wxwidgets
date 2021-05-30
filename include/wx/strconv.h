@@ -513,7 +513,7 @@ public:
 
 private:
     // common part of all ctors
-    void Init();
+    
 
     // Creates the conversion to use, called from all ctors to initialize
     // m_convReal.

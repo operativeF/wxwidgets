@@ -24,7 +24,7 @@ class wxRibbonArtProvider;
 class WXDLLIMPEXP_RIBBON wxRibbonControl : public wxControl
 {
 public:
-    wxRibbonControl() { Init(); }
+    wxRibbonControl() {  m_art = NULL;  }
 
     wxRibbonControl(wxWindow *parent, wxWindowID id,
                     const wxPoint& pos = wxDefaultPosition,
@@ -32,7 +32,7 @@ public:
                     const wxValidator& validator = wxDefaultValidator,
                     const wxString& name = wxASCII_STR(wxControlNameStr))
     {
-        Init();
+         m_art = NULL; 
 
         Create(parent, id, pos, size, style, validator, name);
     }
@@ -69,7 +69,7 @@ protected:
                                        wxSize relative_to) const;
 
 private:
-    void Init() { m_art = NULL; }
+    
 
 #ifndef SWIG
     wxDECLARE_CLASS(wxRibbonControl);

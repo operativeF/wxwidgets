@@ -35,8 +35,16 @@ public:
     // a mouse event manager is always associated with a window and must be
     // deleted by the window when it is destroyed so if it is created using the
     // default ctor Create() must be called later
-    wxMouseEventsManager() { Init(); }
-    wxMouseEventsManager(wxWindow *win) { Init(); Create(win); }
+    wxMouseEventsManager() { 
+    m_win = nullptr;
+    m_state = State_Normal;
+    m_item = wxNOT_FOUND;
+ }
+    wxMouseEventsManager(wxWindow *win) { 
+    m_win = nullptr;
+    m_state = State_Normal;
+    m_item = wxNOT_FOUND;
+ Create(win); }
     bool Create(wxWindow *win);
 
     virtual ~wxMouseEventsManager();
@@ -116,7 +124,7 @@ private:
     };
 
     // common part of both ctors
-    void Init();
+    
 
     // various event handlers
     void OnCaptureLost(wxMouseCaptureLostEvent& event);

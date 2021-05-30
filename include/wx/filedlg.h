@@ -65,7 +65,13 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxFileSelectorDefaultWildcardStr[];
 class WXDLLIMPEXP_CORE wxFileDialogBase: public wxDialog
 {
 public:
-    wxFileDialogBase () { Init(); }
+    wxFileDialogBase () { 
+    m_filterIndex = 0;
+    m_currentlySelectedFilterIndex = wxNOT_FOUND;
+    m_windowStyle = 0;
+    m_extraControl = nullptr;
+    m_extraControlCreator = nullptr;
+ }
 
     wxFileDialogBase(wxWindow *parent,
                      const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
@@ -77,7 +83,13 @@ public:
                      const wxSize& sz = wxDefaultSize,
                      const wxString& name = wxASCII_STR(wxFileDialogNameStr))
     {
-        Init();
+        
+    m_filterIndex = 0;
+    m_currentlySelectedFilterIndex = wxNOT_FOUND;
+    m_windowStyle = 0;
+    m_extraControl = nullptr;
+    m_extraControlCreator = nullptr;
+
         Create(parent, message, defaultDir, defaultFile, wildCard, style, pos, sz, name);
     }
 
@@ -188,7 +200,7 @@ protected:
 private:
     ExtraControlCreatorFunction m_extraControlCreator;
 
-    void Init();
+    
     wxDECLARE_DYNAMIC_CLASS(wxFileDialogBase);
     wxFileDialogBase(const wxFileDialogBase&) = delete;
 	wxFileDialogBase& operator=(const wxFileDialogBase&) = delete;

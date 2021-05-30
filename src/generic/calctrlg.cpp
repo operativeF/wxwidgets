@@ -120,13 +120,7 @@ wxGenericCalendarCtrl::wxGenericCalendarCtrl(wxWindow *parent,
                                              long style,
                                              const wxString& name)
 {
-    Init();
-
-    (void)Create(parent, id, date, pos, size, style, name);
-}
-
-void wxGenericCalendarCtrl::Init()
-{
+    
     m_comboMonth = nullptr;
     m_spinYear = nullptr;
     m_staticYear = nullptr;
@@ -150,7 +144,12 @@ void wxGenericCalendarCtrl::Init()
     }
 
     InitColours();
+
+
+    (void)Create(parent, id, date, pos, size, style, name);
 }
+
+
 
 void wxGenericCalendarCtrl::InitColours()
 {

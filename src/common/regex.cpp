@@ -163,12 +163,7 @@ private:
     wxString GetErrorMsg(int errorcode, bool badconv) const;
 
     // init the members
-    void Init()
-    {
-        m_isCompiled = false;
-        m_Matches = nullptr;
-        m_nMatches = 0;
-    }
+    
 
     // free the RE if compiled
     void Free()
@@ -185,7 +180,11 @@ private:
     void Reinit()
     {
         Free();
-        Init();
+        
+        m_isCompiled = false;
+        m_Matches = nullptr;
+        m_nMatches = 0;
+    
     }
 
     // compiled RE
@@ -210,7 +209,11 @@ private:
 
 wxRegExImpl::wxRegExImpl()
 {
-    Init();
+    
+        m_isCompiled = false;
+        m_Matches = nullptr;
+        m_nMatches = 0;
+    
 }
 
 wxRegExImpl::~wxRegExImpl()
@@ -613,10 +616,7 @@ int wxRegExImpl::Replace(wxString *text,
 // wxRegEx: all methods are mostly forwarded to wxRegExImpl
 // ----------------------------------------------------------------------------
 
-void wxRegEx::Init()
-{
-    m_impl = nullptr;
-}
+
 
 wxRegEx::~wxRegEx()
 {

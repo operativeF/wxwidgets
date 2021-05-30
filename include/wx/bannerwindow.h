@@ -32,7 +32,12 @@ class WXDLLIMPEXP_CORE wxBannerWindow : public wxWindow
 {
 public:
     // Default constructor, use Create() later.
-    wxBannerWindow() { Init(); }
+    wxBannerWindow() { 
+    m_direction = wxLEFT;
+
+    m_colStart = *wxWHITE;
+    m_colEnd = *wxBLUE;
+ }
 
     // Convenient constructor that should be used in the majority of cases.
     //
@@ -42,7 +47,12 @@ public:
     // of in the usual way, e.g. using sizers.
     wxBannerWindow(wxWindow* parent, wxDirection dir = wxLEFT)
     {
-        Init();
+        
+    m_direction = wxLEFT;
+
+    m_colStart = *wxWHITE;
+    m_colEnd = *wxBLUE;
+
 
         Create(parent, wxID_ANY, dir);
     }
@@ -56,7 +66,12 @@ public:
                    long style = 0,
                    const wxString& name = wxASCII_STR(wxBannerWindowNameStr))
     {
-        Init();
+        
+    m_direction = wxLEFT;
+
+    m_colStart = *wxWHITE;
+    m_colEnd = *wxBLUE;
+
 
         Create(parent, winid, dir, pos, size, style, name);
     }
@@ -91,7 +106,7 @@ protected:
 
 private:
     // Common part of all constructors.
-    void Init();
+    
 
     // Fully invalidates the window.
     void OnSize(wxSizeEvent& event);

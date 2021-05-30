@@ -32,7 +32,24 @@ class WXDLLIMPEXP_CORE wxWindowMSW : public wxWindowBase
     friend class wxSlider;
     friend class wxRadioBox;
 public:
-    wxWindowMSW() { Init(); }
+    wxWindowMSW() { 
+    // MSW specific
+    m_oldWndProc = nullptr;
+    m_mouseInWindow = false;
+    m_lastKeydownProcessed = false;
+
+    m_hWnd = nullptr;
+
+    m_xThumbSize = 0;
+    m_yThumbSize = 0;
+
+#if wxUSE_DEFERRED_SIZING
+    m_hDWP = nullptr;
+    m_pendingPosition = wxDefaultPosition;
+    m_pendingSize = wxDefaultSize;
+#endif // wxUSE_DEFERRED_SIZING
+
+ }
 
     wxWindowMSW(wxWindow *parent,
                 wxWindowID id,
@@ -41,7 +58,24 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxPanelNameStr))
     {
-        Init();
+        
+    // MSW specific
+    m_oldWndProc = nullptr;
+    m_mouseInWindow = false;
+    m_lastKeydownProcessed = false;
+
+    m_hWnd = nullptr;
+
+    m_xThumbSize = 0;
+    m_yThumbSize = 0;
+
+#if wxUSE_DEFERRED_SIZING
+    m_hDWP = nullptr;
+    m_pendingPosition = wxDefaultPosition;
+    m_pendingSize = wxDefaultSize;
+#endif // wxUSE_DEFERRED_SIZING
+
+
         Create(parent, id, pos, size, style, name);
     }
 
@@ -745,7 +779,7 @@ protected:
 
 private:
     // common part of all ctors
-    void Init();
+    
 
     // the (non-virtual) handlers for the events
     bool HandleMove(int x, int y);

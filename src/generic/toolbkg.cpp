@@ -51,10 +51,7 @@ wxEND_EVENT_TABLE()
 // wxToolbook creation
 // ----------------------------------------------------------------------------
 
-void wxToolbook::Init()
-{
-    m_needsRealizing = false;
-}
+
 
 bool wxToolbook::Create(wxWindow *parent,
                    wxWindowID id,

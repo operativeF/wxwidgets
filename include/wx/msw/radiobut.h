@@ -17,7 +17,9 @@ class WXDLLIMPEXP_CORE wxRadioButton : public wxMSWOwnerDrawnButton<wxRadioButto
 {
 public:
     // ctors and creation functions
-    wxRadioButton() { Init(); }
+    wxRadioButton() { 
+    m_isChecked = false;
+ }
 
     wxRadioButton(wxWindow *parent,
                   wxWindowID id,
@@ -28,7 +30,9 @@ public:
                   const wxValidator& validator = wxDefaultValidator,
                   const wxString& name = wxASCII_STR(wxRadioButtonNameStr))
     {
-        Init();
+        
+    m_isChecked = false;
+
 
         Create(parent, id, label, pos, size, style, validator, name);
     }
@@ -71,7 +75,7 @@ protected:
 
 private:
     // common part of all ctors
-    void Init();
+    
 
 
     // we need to store the state internally as the result of GetValue()

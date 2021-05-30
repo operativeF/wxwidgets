@@ -23,7 +23,14 @@ class WXDLLIMPEXP_FWD_CORE wxAcceleratorTable;
 class WXDLLIMPEXP_CORE wxMDIParentFrame : public wxMDIParentFrameBase
 {
 public:
-    wxMDIParentFrame() { Init(); }
+    wxMDIParentFrame() { 
+#if wxUSE_MENUS && wxUSE_ACCEL
+  // the default menu doesn't have any accelerators (even if we have it)
+  m_accelWindowMenu = nullptr;
+#endif // wxUSE_MENUS && wxUSE_ACCEL
+
+  m_activationNotHandled = false;
+ }
     wxMDIParentFrame(wxWindow *parent,
                      wxWindowID id,
                      const wxString& title,
@@ -32,7 +39,14 @@ public:
                      long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                      const wxString& name = wxASCII_STR(wxFrameNameStr))
     {
-        Init();
+        
+#if wxUSE_MENUS && wxUSE_ACCEL
+  // the default menu doesn't have any accelerators (even if we have it)
+  m_accelWindowMenu = nullptr;
+#endif // wxUSE_MENUS && wxUSE_ACCEL
+
+  m_activationNotHandled = false;
+
 
         Create(parent, id, title, pos, size, style, name);
     }
@@ -129,7 +143,7 @@ protected:
 
 private:
     // common part of all ctors
-    void Init();
+    
 
 #if wxUSE_MENUS
     // "Window" menu commands event handlers

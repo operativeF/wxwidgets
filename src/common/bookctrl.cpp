@@ -47,17 +47,7 @@ wxEND_EVENT_TABLE()
 // constructors and destructors
 // ----------------------------------------------------------------------------
 
-void wxBookCtrlBase::Init()
-{
-    m_selection = wxNOT_FOUND;
-    m_bookctrl = nullptr;
-    m_fitToCurrentPage = false;
 
-    m_internalBorder = 5;
-
-    m_controlMargin = 0;
-    m_controlSizer = nullptr;
-}
 
 bool
 wxBookCtrlBase::Create(wxWindow *parent,

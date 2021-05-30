@@ -23,11 +23,31 @@ class WXDLLIMPEXP_CORE wxInfoBarGeneric : public wxInfoBarBase
 public:
     // the usual ctors and Create() but remember that info bar is created
     // hidden
-    wxInfoBarGeneric() { Init(); }
+    wxInfoBarGeneric() { 
+    m_icon = nullptr;
+    m_text = nullptr;
+    m_button = nullptr;
+
+    m_showEffect =
+    m_hideEffect = wxSHOW_EFFECT_MAX;
+
+    // use default effect duration
+    m_effectDuration = 0;
+ }
 
     wxInfoBarGeneric(wxWindow *parent, wxWindowID winid = wxID_ANY)
     {
-        Init();
+        
+    m_icon = nullptr;
+    m_text = nullptr;
+    m_button = nullptr;
+
+    m_showEffect =
+    m_hideEffect = wxSHOW_EFFECT_MAX;
+
+    // use default effect duration
+    m_effectDuration = 0;
+
         Create(parent, winid);
     }
 
@@ -98,7 +118,7 @@ protected:
 
 private:
     // common part of all ctors
-    void Init();
+    
 
     // handler for the close button
     void OnButton(wxCommandEvent& event);

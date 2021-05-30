@@ -76,14 +76,7 @@ bool wxPropertySheetDialog::Create(wxWindow* parent, wxWindowID id, const wxStri
     return true;
 }
 
-void wxPropertySheetDialog::Init()
-{
-    m_sheetStyle = wxPROPSHEET_DEFAULT;
-    m_innerSizer = nullptr;
-    m_bookCtrl = nullptr;
-    m_sheetOuterBorder = 2;
-    m_sheetInnerBorder = 5;
-}
+
 
 // Layout the dialog, to be called after pages have been created
 void wxPropertySheetDialog::LayoutDialog(int centreFlags)

@@ -819,12 +819,7 @@ wxEND_EVENT_TABLE()
 // Creation
 // ----------------------------------------------------------------------------
 
-void wxTreeListCtrl::Init()
-{
-    m_view = nullptr;
-    m_model = nullptr;
-    m_comparator = nullptr;
-}
+
 
 bool wxTreeListCtrl::Create(wxWindow* parent,
                             wxWindowID id,

@@ -258,6 +258,13 @@ private:
 #endif // platform
 
 // ----------------------------------------------------------------------------
+// constants
+// ----------------------------------------------------------------------------
+
+constexpr unsigned int wxNO_COLUMN = static_cast<unsigned>(-1);
+constexpr unsigned int wxID_COLUMNS_BASE = 1;
+
+// ----------------------------------------------------------------------------
 // wxHeaderCtrlSimple: concrete header control which can be used standalone
 // ----------------------------------------------------------------------------
 
@@ -267,7 +274,9 @@ public:
     // control creation
     // ----------------
 
-    wxHeaderCtrlSimple() { Init(); }
+    wxHeaderCtrlSimple() { 
+    m_sortKey = wxNO_COLUMN;
+ }
     wxHeaderCtrlSimple(wxWindow *parent,
                        wxWindowID winid = wxID_ANY,
                        const wxPoint& pos = wxDefaultPosition,
@@ -275,7 +284,9 @@ public:
                        long style = wxHD_DEFAULT_STYLE,
                        const wxString& name = wxASCII_STR(wxHeaderCtrlNameStr))
     {
-        Init();
+        
+    m_sortKey = wxNO_COLUMN;
+
 
         Create(parent, winid, pos, size, style, name);
     }
@@ -361,7 +372,7 @@ private:
     void DoShowSortIndicator(unsigned int idx, bool ascending);
 
     // common part of all ctors
-    void Init();
+    
 
     // bring the column count in sync with the number of columns we store
     void UpdateColumnCount()

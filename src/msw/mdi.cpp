@@ -142,15 +142,7 @@ wxEND_EVENT_TABLE()
 // the children
 // ===========================================================================
 
-void wxMDIParentFrame::Init()
-{
-#if wxUSE_MENUS && wxUSE_ACCEL
-  // the default menu doesn't have any accelerators (even if we have it)
-  m_accelWindowMenu = nullptr;
-#endif // wxUSE_MENUS && wxUSE_ACCEL
 
-  m_activationNotHandled = false;
-}
 
 bool wxMDIParentFrame::Create(wxWindow *parent,
                               wxWindowID id,

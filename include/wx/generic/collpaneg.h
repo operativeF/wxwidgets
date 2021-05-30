@@ -24,7 +24,11 @@ class WXDLLIMPEXP_CORE wxGenericCollapsiblePane :
     public wxNavigationEnabled<wxCollapsiblePaneBase>
 {
 public:
-    wxGenericCollapsiblePane() { Init(); }
+    wxGenericCollapsiblePane() { 
+    m_pButton = nullptr;
+    m_pPane = nullptr;
+    m_sz = nullptr;
+ }
 
     wxGenericCollapsiblePane(wxWindow *parent,
                         wxWindowID winid,
@@ -35,7 +39,11 @@ public:
                         const wxValidator& val = wxDefaultValidator,
                         const wxString& name = wxASCII_STR(wxCollapsiblePaneNameStr))
     {
-        Init();
+        
+    m_pButton = nullptr;
+    m_pPane = nullptr;
+    m_sz = nullptr;
+
 
         Create(parent, winid, label, pos, size, style, val, name);
     }
@@ -83,7 +91,7 @@ protected:
     wxSizer *m_sz;
 
 private:
-    void Init();
+    
 
     // event handlers
     void OnButton(wxCommandEvent &ev);

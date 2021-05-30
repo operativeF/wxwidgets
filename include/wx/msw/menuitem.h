@@ -123,7 +123,7 @@ private:
 
 private:
     // common part of all ctors
-    void Init();
+    
 
     // Return the item position in the menu containing it.
     //

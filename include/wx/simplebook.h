@@ -27,7 +27,18 @@ class wxSimplebook : public wxBookCtrlBase
 public:
     wxSimplebook()
     {
-        Init();
+        
+        // We don't need any border as we don't have anything to separate the
+        // page contents from.
+        SetInternalBorder(0);
+
+        // No effects by default.
+        m_showEffect =
+        m_hideEffect = wxSHOW_EFFECT_NONE;
+
+        m_showTimeout =
+        m_hideTimeout = 0;
+    
     }
 
     wxSimplebook(wxWindow *parent,
@@ -38,7 +49,18 @@ public:
                  const wxString& name = wxEmptyString)
         : wxBookCtrlBase(parent, winid, pos, size, style | wxBK_TOP, name)
     {
-        Init();
+        
+        // We don't need any border as we don't have anything to separate the
+        // page contents from.
+        SetInternalBorder(0);
+
+        // No effects by default.
+        m_showEffect =
+        m_hideEffect = wxSHOW_EFFECT_NONE;
+
+        m_showTimeout =
+        m_hideTimeout = 0;
+    
     }
 
     bool Create(wxWindow *parent,
@@ -201,19 +223,7 @@ protected:
     }
 
 private:
-    void Init()
-    {
-        // We don't need any border as we don't have anything to separate the
-        // page contents from.
-        SetInternalBorder(0);
-
-        // No effects by default.
-        m_showEffect =
-        m_hideEffect = wxSHOW_EFFECT_NONE;
-
-        m_showTimeout =
-        m_hideTimeout = 0;
-    }
+    
 
     std::vector<wxString> m_pageTexts;
 

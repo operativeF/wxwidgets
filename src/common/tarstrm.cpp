@@ -634,18 +634,7 @@ wxTarInputStream::wxTarInputStream(wxInputStream& stream,
                                    wxMBConv& conv /*=wxConvLocal*/)
  :  wxArchiveInputStream(stream, conv)
 {
-    Init();
-}
-
-wxTarInputStream::wxTarInputStream(wxInputStream *stream,
-                                   wxMBConv& conv /*=wxConvLocal*/)
- :  wxArchiveInputStream(stream, conv)
-{
-    Init();
-}
-
-void wxTarInputStream::Init()
-{
+    
     m_pos = wxInvalidOffset;
     m_offset = 0;
     m_size = wxInvalidOffset;
@@ -655,7 +644,27 @@ void wxTarInputStream::Init()
     m_HeaderRecs = nullptr;
     m_GlobalHeaderRecs = nullptr;
     m_lasterror = m_parent_i_stream->GetLastError();
+
 }
+
+wxTarInputStream::wxTarInputStream(wxInputStream *stream,
+                                   wxMBConv& conv /*=wxConvLocal*/)
+ :  wxArchiveInputStream(stream, conv)
+{
+    
+    m_pos = wxInvalidOffset;
+    m_offset = 0;
+    m_size = wxInvalidOffset;
+    m_sumType = SUM_UNKNOWN;
+    m_tarType = TYPE_USTAR;
+    m_hdr = new wxTarHeaderBlock;
+    m_HeaderRecs = nullptr;
+    m_GlobalHeaderRecs = nullptr;
+    m_lasterror = m_parent_i_stream->GetLastError();
+
+}
+
+
 
 wxTarInputStream::~wxTarInputStream()
 {

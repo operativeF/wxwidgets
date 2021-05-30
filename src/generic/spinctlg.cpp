@@ -189,19 +189,7 @@ wxEND_EVENT_TABLE()
 // wxSpinCtrlGenericBase creation
 // ----------------------------------------------------------------------------
 
-void wxSpinCtrlGenericBase::Init()
-{
-    m_value         = 0;
-    m_min           = 0;
-    m_max           = 100;
-    m_increment     = 1;
-    m_snap_to_ticks = false;
 
-    m_spin_value    = 0;
-
-    m_textCtrl = nullptr;
-    m_spinButton  = nullptr;
-}
 
 bool wxSpinCtrlGenericBase::Create(wxWindow *parent,
                                    wxWindowID id,

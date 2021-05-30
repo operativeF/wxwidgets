@@ -441,8 +441,23 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxPGProperty, wxObject);
 
 wxString* wxPGProperty::sm_wxPG_LABEL = nullptr;
 
-void wxPGProperty::Init()
+
+
+
+void wxPGProperty::Init( const wxString& label, const wxString& name )
 {
+    // wxPG_LABEL reference can be NULL if we are called before property
+    // grid has been initialized
+
+    if ( sm_wxPG_LABEL && label != wxPG_LABEL )
+        m_label = label;
+
+    if ( sm_wxPG_LABEL && name != wxPG_LABEL )
+        DoSetName( name );
+    else
+        DoSetName( m_label );
+
+    
     m_commonValue = -1;
     m_arrIndex = 0xFFFF;
     m_parent = nullptr;
@@ -465,23 +480,7 @@ void wxPGProperty::Init()
     m_depth = 1;
 
     SetExpanded(true);
-}
 
-
-void wxPGProperty::Init( const wxString& label, const wxString& name )
-{
-    // wxPG_LABEL reference can be NULL if we are called before property
-    // grid has been initialized
-
-    if ( sm_wxPG_LABEL && label != wxPG_LABEL )
-        m_label = label;
-
-    if ( sm_wxPG_LABEL && name != wxPG_LABEL )
-        DoSetName( name );
-    else
-        DoSetName( m_label );
-
-    Init();
 }
 
 void wxPGProperty::InitAfterAdded( wxPropertyGridPageState* pageState,
@@ -652,7 +651,30 @@ void wxPGProperty::OnDetached(wxPropertyGridPageState* WXUNUSED(state),
 wxPGProperty::wxPGProperty()
      
 {
-    Init();
+    
+    m_commonValue = -1;
+    m_arrIndex = 0xFFFF;
+    m_parent = nullptr;
+
+    m_parentState = nullptr;
+
+    m_clientData = nullptr;
+    m_clientObject = nullptr;
+
+    m_customEditor = nullptr;
+#if wxUSE_VALIDATORS
+    m_validator = nullptr;
+#endif
+    m_valueBitmap = nullptr;
+
+    m_maxLen = 0; // infinite maximum length
+
+    m_flags = wxPG_PROP_PROPERTY;
+
+    m_depth = 1;
+
+    SetExpanded(true);
+
 }
 
 
@@ -2820,25 +2842,29 @@ wxPGRootProperty::~wxPGRootProperty()
 
 wxPG_IMPLEMENT_PROPERTY_CLASS(wxPropertyCategory, wxPGProperty, TextCtrl)
 
-void wxPropertyCategory::Init()
-{
-    // don't set colour - prepareadditem method should do this
-    SetParentalType(wxPG_PROP_CATEGORY);
-    m_capFgColIndex = 1;
-    m_textExtent = -1;
-}
+
 
 wxPropertyCategory::wxPropertyCategory()
      
 {
-    Init();
+    
+    // don't set colour - prepareadditem method should do this
+    SetParentalType(wxPG_PROP_CATEGORY);
+    m_capFgColIndex = 1;
+    m_textExtent = -1;
+
 }
 
 
 wxPropertyCategory::wxPropertyCategory( const wxString &label, const wxString& name )
     : wxPGProperty(label,name)
 {
-    Init();
+    
+    // don't set colour - prepareadditem method should do this
+    SetParentalType(wxPG_PROP_CATEGORY);
+    m_capFgColIndex = 1;
+    m_textExtent = -1;
+
 }
 
 

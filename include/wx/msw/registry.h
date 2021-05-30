@@ -246,11 +246,7 @@ public:
 
 private:
   // common part of all ctors
-  void Init()
-  {
-    m_hKey = (WXHKEY) NULL;
-    m_dwLastError = 0;
-  }
+  
 
   // recursive helper for Export()
   bool DoExport(wxOutputStream& ostr) const;

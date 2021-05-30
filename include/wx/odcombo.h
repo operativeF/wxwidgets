@@ -241,7 +241,8 @@ class WXDLLIMPEXP_ADV wxOwnerDrawnComboBox :
 public:
 
     // ctors and such
-    wxOwnerDrawnComboBox() { Init(); }
+    wxOwnerDrawnComboBox() { 
+ }
 
     wxOwnerDrawnComboBox(wxWindow *parent,
                          wxWindowID id,
@@ -254,7 +255,8 @@ public:
                          const wxValidator& validator = wxDefaultValidator,
                          const wxString& name = wxASCII_STR(wxComboBoxNameStr))
     {
-        Init();
+        
+
 
         (void)Create(parent, id, value, pos, size, n,
                      choices, style, validator, name);
@@ -390,7 +392,7 @@ protected:
     wxArrayString           m_initChs;
 
 private:
-    void Init();
+    
 
     wxDECLARE_EVENT_TABLE();
 

@@ -43,10 +43,7 @@
 // wxCheckBox creation
 // ----------------------------------------------------------------------------
 
-void wxCheckBox::Init()
-{
-    m_state = wxCHK_UNCHECKED;
-}
+
 
 bool wxCheckBox::Create(wxWindow *parent,
                         wxWindowID id,
@@ -56,7 +53,9 @@ bool wxCheckBox::Create(wxWindow *parent,
                         const wxValidator& validator,
                         const wxString& name)
 {
-    Init();
+    
+    m_state = wxCHK_UNCHECKED;
+
 
     WXValidateStyle(&style);
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )

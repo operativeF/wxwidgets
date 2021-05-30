@@ -25,13 +25,13 @@ class WXDLLIMPEXP_BASE wxSingleInstanceChecker
 {
 public:
     // default ctor, use Create() after it
-    wxSingleInstanceChecker() { Init(); }
+    wxSingleInstanceChecker() {  m_impl = NULL;  }
 
     // like Create() but no error checking (dangerous!)
     wxSingleInstanceChecker(const wxString& name,
                             const wxString& path = wxEmptyString)
     {
-        Init();
+         m_impl = NULL; 
         Create(name, path);
     }
 
@@ -80,7 +80,7 @@ public:
 
 private:
     // common part of all ctors
-    void Init() { m_impl = NULL; }
+    
 
     // do check if another instance is running, called only if m_impl != NULL
     bool DoIsAnotherRunning() const;

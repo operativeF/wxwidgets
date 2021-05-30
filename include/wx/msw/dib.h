@@ -37,23 +37,59 @@ public:
     // after using this ctor, GetData() and GetHandle() may be used if IsOk()
     // returns true
     wxDIB(int width, int height, int depth)
-        { Init(); (void)Create(width, height, depth); }
+        { 
+    m_handle = NULL;
+    m_ownsHandle = true;
+
+    m_data = NULL;
+
+    m_width =
+    m_height =
+    m_depth = 0;
+ (void)Create(width, height, depth); }
 
 #ifdef __WXMSW__
     // create a DIB from the DDB
     wxDIB(const wxBitmap& bmp, int depth = -1)
-        { Init(); (void)Create(bmp, depth); }
+        { 
+    m_handle = NULL;
+    m_ownsHandle = true;
+
+    m_data = NULL;
+
+    m_width =
+    m_height =
+    m_depth = 0;
+ (void)Create(bmp, depth); }
 #endif // __WXMSW__
 
     // create a DIB from the Windows DDB
     wxDIB(HBITMAP hbmp)
-        { Init(); (void)Create(hbmp); }
+        { 
+    m_handle = NULL;
+    m_ownsHandle = true;
+
+    m_data = NULL;
+
+    m_width =
+    m_height =
+    m_depth = 0;
+ (void)Create(hbmp); }
 
     // load a DIB from file (any depth is supoprted here unlike above)
     //
     // as above, use IsOk() to see if the bitmap was loaded successfully
     wxDIB(const wxString& filename)
-        { Init(); (void)Load(filename); }
+        { 
+    m_handle = NULL;
+    m_ownsHandle = true;
+
+    m_data = NULL;
+
+    m_width =
+    m_height =
+    m_depth = 0;
+ (void)Load(filename); }
 
     // same as the corresponding ctors but with return value
     bool Create(int width, int height, int depth);
@@ -156,7 +192,16 @@ public:
     // does pre-multiplication internally.
     wxDIB(const wxImage& image, PixelFormat pf = PixelFormat_PreMultiplied, int depth = -1)
     {
-        Init();
+        
+    m_handle = NULL;
+    m_ownsHandle = true;
+
+    m_data = NULL;
+
+    m_width =
+    m_height =
+    m_depth = 0;
+
         (void)Create(image, pf, depth);
     }
 
@@ -192,7 +237,7 @@ public:
 
 private:
     // common part of all ctors
-    void Init();
+    
 
     // free resources
     void Free();
@@ -239,18 +284,7 @@ private:
 // inline functions implementation
 // ----------------------------------------------------------------------------
 
-inline
-void wxDIB::Init()
-{
-    m_handle = NULL;
-    m_ownsHandle = true;
 
-    m_data = NULL;
-
-    m_width =
-    m_height =
-    m_depth = 0;
-}
 
 inline
 void wxDIB::Free()
@@ -262,7 +296,14 @@ void wxDIB::Free()
             wxLogLastError(wxT("DeleteObject(hDIB)"));
         }
 
-        Init();
+        m_handle = NULL;
+        m_ownsHandle = true;
+
+        m_data = NULL;
+
+        m_width =
+        m_height =
+        m_depth = 0;
     }
 }
 

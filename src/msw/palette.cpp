@@ -25,14 +25,14 @@
 class WXDLLEXPORT wxPaletteRefData: public wxGDIRefData
 {
 public:
-    wxPaletteRefData() { Init(); }
+    wxPaletteRefData() {  m_hPalette = nullptr;  }
 
     wxPaletteRefData(int n,
                      const unsigned char *red,
                      const unsigned char *green,
                      const unsigned char *blue)
     {
-        Init();
+         m_hPalette = nullptr; 
 
         LOGPALETTE *pPal = Alloc(n);
         if ( !pPal )
@@ -53,7 +53,7 @@ public:
     wxPaletteRefData(const wxPaletteRefData& data)
          
     {
-        Init();
+         m_hPalette = nullptr; 
 
         const UINT n = data.GetEntries();
         if ( !n )
@@ -97,7 +97,7 @@ private:
         return pPal;
     }
 
-    void Init() { m_hPalette = nullptr; }
+    
 
     HPALETTE m_hPalette;
 

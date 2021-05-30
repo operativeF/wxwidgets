@@ -52,13 +52,19 @@ private:
 class WXDLLIMPEXP_CORE wxGBSpan
 {
 public:
-    wxGBSpan() { Init(); }
+    wxGBSpan() { 
+        m_rowspan =
+        m_colspan = 1;
+     }
     wxGBSpan(int rowspan, int colspan)
     {
         // Initialize the members to valid values as not doing it may result in
         // infinite loop in wxGBSizer code if the user passed 0 for any of
         // them, see #12934.
-        Init();
+        
+        m_rowspan =
+        m_colspan = 1;
+    
 
         SetRowspan(rowspan);
         SetColspan(colspan);
@@ -101,11 +107,7 @@ private:
         m_colspan = -1;
     }
 
-    void Init()
-    {
-        m_rowspan =
-        m_colspan = 1;
-    }
+    
 
     int m_rowspan;
     int m_colspan;

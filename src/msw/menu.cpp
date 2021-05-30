@@ -120,25 +120,7 @@ void wxMenu::InitNoCreate()
 #endif // wxUSE_OWNER_DRAWN
 }
 
-void wxMenu::Init()
-{
-    InitNoCreate();
 
-    // create the menu
-    m_hMenu = (WXHMENU)CreatePopupMenu();
-    if ( !m_hMenu )
-    {
-        wxLogLastError(wxT("CreatePopupMenu"));
-    }
-
-    // if we have a title, insert it in the beginning of the menu
-    if ( !m_title.empty() )
-    {
-        const wxString title = m_title;
-        m_title.clear(); // so that SetTitle() knows there was no title before
-        SetTitle(title);
-    }
-}
 
 wxMenu::wxMenu(WXHMENU hMenu)
 {

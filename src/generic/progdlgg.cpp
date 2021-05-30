@@ -69,8 +69,12 @@ wxIMPLEMENT_CLASS(wxProgressDialog, wxDialog)
 // wxGenericProgressDialog creation
 // ----------------------------------------------------------------------------
 
-void wxGenericProgressDialog::Init()
+
+
+wxGenericProgressDialog::wxGenericProgressDialog()
+                        
 {
+    
     // we may disappear at any moment, let the others know about it
     SetExtraStyle(GetExtraStyle() | wxWS_EX_TRANSIENT);
 
@@ -108,12 +112,7 @@ void wxGenericProgressDialog::Init()
     m_tempEventLoop = nullptr;
 
     SetWindowStyle(wxDEFAULT_DIALOG_STYLE);
-}
 
-wxGenericProgressDialog::wxGenericProgressDialog()
-                        
-{
-    Init();
 }
 
 wxGenericProgressDialog::wxGenericProgressDialog(const wxString& title,
@@ -123,7 +122,45 @@ wxGenericProgressDialog::wxGenericProgressDialog(const wxString& title,
                                                  int style)
                         
 {
-    Init();
+    
+    // we may disappear at any moment, let the others know about it
+    SetExtraStyle(GetExtraStyle() | wxWS_EX_TRANSIENT);
+
+    // Initialize all our members that we always use (even when we don't
+    // create a valid window in this class).
+
+    m_pdStyle = 0;
+    m_parentTop = nullptr;
+
+    m_gauge = nullptr;
+    m_msg = nullptr;
+    m_elapsed =
+    m_estimated =
+    m_remaining = nullptr;
+
+    m_state = Uncancelable;
+    m_maximum = 0;
+
+    m_timeStart = wxGetCurrentTime();
+    m_timeStop = (unsigned long)-1;
+    m_break = 0;
+
+    m_skip = false;
+
+    m_btnAbort =
+    m_btnSkip = nullptr;
+
+    m_display_estimated =
+    m_last_timeupdate =
+    m_ctdelay = 0;
+
+    m_delay = 3;
+
+    m_winDisabler = nullptr;
+    m_tempEventLoop = nullptr;
+
+    SetWindowStyle(wxDEFAULT_DIALOG_STYLE);
+
 
     Create( title, message, maximum, parent, style );
 }

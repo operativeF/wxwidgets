@@ -19,7 +19,16 @@ class WXDLLIMPEXP_ADV wxGenericHyperlinkCtrl : public wxHyperlinkCtrlBase
 {
 public:
     // Default constructor (for two-step construction).
-    wxGenericHyperlinkCtrl() { Init(); }
+    wxGenericHyperlinkCtrl() { 
+    m_rollover = false;
+    m_clicking = false;
+    m_visited = false;
+
+    // colours
+    m_normalColour = *wxBLUE;
+    m_hoverColour = *wxRED;
+    m_visitedColour = wxColour("#551a8b");
+ }
 
     // Constructor.
     wxGenericHyperlinkCtrl(wxWindow *parent,
@@ -30,7 +39,16 @@ public:
                             long style = wxHL_DEFAULT_STYLE,
                             const wxString& name = wxASCII_STR(wxHyperlinkCtrlNameStr))
     {
-        Init();
+        
+    m_rollover = false;
+    m_clicking = false;
+    m_visited = false;
+
+    // colours
+    m_normalColour = *wxBLUE;
+    m_hoverColour = *wxRED;
+    m_visitedColour = wxColour("#551a8b");
+
         (void) Create(parent, id, label, url, pos, size, style, name);
     }
 
@@ -117,7 +135,7 @@ protected:
 
 private:
     // Common part of all ctors.
-    void Init();
+    
 
     // URL associated with the link. This is transmitted inside
     // the HyperlinkEvent fired when the user clicks on the label.

@@ -28,7 +28,7 @@ class WXDLLIMPEXP_CORE wxGenericFileDirButton : public wxButton,
                                                 public wxFileDirPickerWidgetBase
 {
 public:
-    wxGenericFileDirButton() { Init(); }
+    wxGenericFileDirButton() {  m_pickerStyle = -1;  }
     wxGenericFileDirButton(wxWindow *parent,
                            wxWindowID id,
                            const wxString& label = wxASCII_STR(wxFilePickerWidgetLabel),
@@ -41,7 +41,7 @@ public:
                            const wxValidator& validator = wxDefaultValidator,
                            const wxString& name = wxASCII_STR(wxFilePickerWidgetNameStr))
     {
-        Init();
+         m_pickerStyle = -1; 
         Create(parent, id, label, path, message, wildcard,
                pos, size, style, validator, name);
     }
@@ -88,7 +88,7 @@ protected:
 
 private:
     // common part of all ctors
-    void Init() { m_pickerStyle = -1; }
+    
 };
 
 

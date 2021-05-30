@@ -27,7 +27,31 @@ class WXDLLIMPEXP_ADV wxGenericCalendarCtrl : public wxCalendarCtrlBase
 {
 public:
     // construction
-    wxGenericCalendarCtrl() { Init(); }
+    wxGenericCalendarCtrl() { 
+    m_comboMonth = nullptr;
+    m_spinYear = nullptr;
+    m_staticYear = nullptr;
+    m_staticMonth = nullptr;
+
+    m_userChangedYear = false;
+
+    m_widthCol =
+    m_heightRow =
+    m_calendarWeekWidth = 0;
+
+    wxDateTime::WeekDay wd;
+    for ( wd = wxDateTime::Sun; wd < wxDateTime::Inv_WeekDay; wxNextWDay(wd) )
+    {
+        m_weekdays[wd] = wxDateTime::GetWeekDayName(wd, wxDateTime::Name_Abbr);
+    }
+
+    for ( size_t n = 0; n < WXSIZEOF(m_attrs); n++ )
+    {
+        m_attrs[n] = nullptr;
+    }
+
+    InitColours();
+ }
     wxGenericCalendarCtrl(wxWindow *parent,
                           wxWindowID id,
                           const wxDateTime& date = wxDefaultDateTime,
@@ -170,7 +194,7 @@ protected:
 
 private:
     // common part of all ctors
-    void Init();
+    
 
     // startup colours and reinitialization after colour changes in system
     void InitColours();

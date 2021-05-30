@@ -174,7 +174,7 @@ protected:
     wxFileOffset OnSysSeek(wxFileOffset seek, wxSeekMode mode) override;
 
 private:
-    void Init();
+    
 
     wxArchiveEntry *DoGetNextEntry() override    { return GetNextEntry(); }
     bool OpenEntry(wxArchiveEntry& entry) override;

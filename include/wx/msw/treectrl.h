@@ -37,6 +37,35 @@ struct WXDLLIMPEXP_FWD_CORE wxTreeViewItem;
 class wxItemAttr;
 WX_DECLARE_EXPORTED_VOIDPTR_HASH_MAP(wxItemAttr *, wxMapTreeAttr);
 
+// indices in gs_expandEvents table below
+enum
+{
+    IDX_COLLAPSE,
+    IDX_EXPAND,
+    IDX_WHAT_MAX
+};
+
+enum
+{
+    IDX_DONE,
+    IDX_DOING,
+    IDX_HOW_MAX
+};
+
+// handy table for sending events - it has to be initialized during run-time
+// now so can't be const any more
+// TODO: Maybe not.
+static /* const */ wxEventType gs_expandEvents[IDX_WHAT_MAX][IDX_HOW_MAX];
+
+/*
+   but logically it's a const table with the following entries:
+=
+{
+    { wxEVT_TREE_ITEM_COLLAPSED, wxEVT_TREE_ITEM_COLLAPSING },
+    { wxEVT_TREE_ITEM_EXPANDED,  wxEVT_TREE_ITEM_EXPANDING  }
+};
+*/
+
 // ----------------------------------------------------------------------------
 // wxTreeCtrl
 // ----------------------------------------------------------------------------
@@ -46,7 +75,26 @@ class WXDLLIMPEXP_CORE wxTreeCtrl : public wxTreeCtrlBase
 public:
     // creation
     // --------
-    wxTreeCtrl() { Init(); }
+    wxTreeCtrl() { 
+    m_textCtrl = nullptr;
+    m_hasAnyAttr = false;
+#if wxUSE_DRAGIMAGE
+    m_dragImage = nullptr;
+#endif
+    m_pVirtualRoot = nullptr;
+    m_dragStarted = false;
+    m_focusLost = true;
+    m_changingSelection = false;
+    m_triggerStateImageClick = false;
+    m_mouseUpDeselect = false;
+
+    // initialize the global array of events now as it can't be done statically
+    // with the wxEVT_XXX values being allocated during run-time only
+    gs_expandEvents[IDX_COLLAPSE][IDX_DONE] = wxEVT_TREE_ITEM_COLLAPSED;
+    gs_expandEvents[IDX_COLLAPSE][IDX_DOING] = wxEVT_TREE_ITEM_COLLAPSING;
+    gs_expandEvents[IDX_EXPAND][IDX_DONE] = wxEVT_TREE_ITEM_EXPANDED;
+    gs_expandEvents[IDX_EXPAND][IDX_DOING] = wxEVT_TREE_ITEM_EXPANDING;
+ }
 
     wxTreeCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
@@ -269,7 +317,7 @@ protected:
 
 private:
     // the common part of all ctors
-    void Init();
+    
 
     // helper functions
     bool DoGetItem(wxTreeViewItem *tvItem) const;

@@ -118,15 +118,7 @@ private:
     // initialize the fields which have reasonable default values
     //
     // doesn't initialize m_width and m_style which must be initialize in ctor
-    void Init()
-    {
-        m_join = wxJOIN_ROUND;
-        m_cap = wxCAP_ROUND;
-        m_quality = wxPEN_QUALITY_DEFAULT;
-        m_nbDash = 0;
-        m_dash = nullptr;
-        m_hPen = nullptr;
-    }
+    
 
     int           m_width;
     wxPenStyle    m_style;
@@ -152,7 +144,14 @@ private:
 
 wxPenRefData::wxPenRefData()
 {
-    Init();
+    
+        m_join = wxJOIN_ROUND;
+        m_cap = wxCAP_ROUND;
+        m_quality = wxPEN_QUALITY_DEFAULT;
+        m_nbDash = 0;
+        m_dash = nullptr;
+        m_hPen = nullptr;
+    
 
     m_style = wxPENSTYLE_SOLID;
     m_width = 1;
@@ -176,7 +175,14 @@ wxPenRefData::wxPenRefData(const wxPenInfo& info)
     : m_stipple(info.GetStipple())
     , m_colour(info.GetColour())
 {
-    Init();
+    
+        m_join = wxJOIN_ROUND;
+        m_cap = wxCAP_ROUND;
+        m_quality = wxPEN_QUALITY_DEFAULT;
+        m_nbDash = 0;
+        m_dash = nullptr;
+        m_hPen = nullptr;
+    
 
     m_style = info.GetStyle();
     m_width = info.GetWidth();

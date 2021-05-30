@@ -131,7 +131,9 @@ public:
     // ctors/Create function are the same as for wxRearrangeList
     wxRearrangeCtrl()
     {
-        Init();
+        
+    m_list = nullptr;
+
     }
 
     wxRearrangeCtrl(wxWindow *parent,
@@ -144,7 +146,9 @@ public:
                     const wxValidator& validator = wxDefaultValidator,
                     const wxString& name = wxASCII_STR(wxRearrangeListNameStr))
     {
-        Init();
+        
+    m_list = nullptr;
+
 
         Create(parent, id, pos, size, order, items, style, validator, name);
     }
@@ -164,7 +168,7 @@ public:
 
 private:
     // common part of all ctors
-    void Init();
+    
 
     // event handlers for the buttons
     void OnUpdateButtonUI(wxUpdateUIEvent& event);
@@ -187,7 +191,7 @@ class WXDLLIMPEXP_CORE wxRearrangeDialog : public wxDialog
 {
 public:
     // default ctor, use Create() later
-    wxRearrangeDialog() { Init(); }
+    wxRearrangeDialog() {  m_ctrl = NULL;  }
 
     // ctor for the dialog: message is shown inside the dialog itself, order
     // and items are passed to wxRearrangeList used internally
@@ -199,7 +203,7 @@ public:
                       const wxPoint& pos = wxDefaultPosition,
                       const wxString& name = wxASCII_STR(wxRearrangeDialogNameStr))
     {
-        Init();
+         m_ctrl = NULL; 
 
         Create(parent, message, title, order, items, pos, name);
     }
@@ -230,7 +234,7 @@ public:
 
 private:
     // common part of all ctors
-    void Init() { m_ctrl = NULL; }
+    
 
     wxRearrangeCtrl *m_ctrl;
 

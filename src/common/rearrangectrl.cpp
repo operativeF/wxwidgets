@@ -242,10 +242,7 @@ wxBEGIN_EVENT_TABLE(wxRearrangeCtrl, wxPanel)
     EVT_BUTTON(wxID_DOWN, wxRearrangeCtrl::OnButton)
 wxEND_EVENT_TABLE()
 
-void wxRearrangeCtrl::Init()
-{
-    m_list = nullptr;
-}
+
 
 bool
 wxRearrangeCtrl::Create(wxWindow *parent,

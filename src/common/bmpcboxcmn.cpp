@@ -55,13 +55,7 @@ const char wxBitmapComboBoxNameStr[] = "bitmapComboBox";
 // Initialization
 // ----------------------------------------------------------------------------
 
-void wxBitmapComboBoxBase::Init()
-{
-    m_fontHeight = 0;
-    m_imgAreaWidth = 0;
-    m_indent = 0;
-    m_usedImgSize = wxSize(-1, -1);
-}
+
 
 void wxBitmapComboBoxBase::UpdateInternals()
 {

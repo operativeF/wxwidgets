@@ -156,7 +156,7 @@ private:
     static void SetTimeLabel(unsigned long val, wxStaticText *label);
 
     // common part of all ctors
-    void Init();
+    
 
     // create the label with given text and another one to show the time nearby
     // as the next windows in the sizer, returns the created control

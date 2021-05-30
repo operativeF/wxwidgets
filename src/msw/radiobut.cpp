@@ -42,10 +42,7 @@
 // wxRadioButton creation
 // ----------------------------------------------------------------------------
 
-void wxRadioButton::Init()
-{
-    m_isChecked = false;
-}
+
 
 bool wxRadioButton::Create(wxWindow *parent,
                            wxWindowID id,

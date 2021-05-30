@@ -435,11 +435,7 @@ wxMenuItem::wxMenuItem(wxMenu *pParentMenu,
                        wxMenu *pSubMenu)
           : wxMenuItemBase(pParentMenu, id, text, strHelp, kind, pSubMenu)
 {
-    Init();
-}
-
-void wxMenuItem::Init()
-{
+    
 #if  wxUSE_OWNER_DRAWN
 
     // when the color is not valid, wxOwnerDraw takes the default ones.
@@ -457,7 +453,10 @@ void wxMenuItem::Init()
         SetMarginWidth(GetMarginWidth());
 
 #endif // wxUSE_OWNER_DRAWN
+
 }
+
+
 
 wxMenuItem::~wxMenuItem()
 = default;

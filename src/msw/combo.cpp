@@ -63,9 +63,7 @@ wxEND_EVENT_TABLE()
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxComboCtrl, wxComboCtrlBase);
 
-void wxComboCtrl::Init()
-{
-}
+
 
 bool wxComboCtrl::Create(wxWindow *parent,
                             wxWindowID id,

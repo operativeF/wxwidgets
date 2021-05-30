@@ -87,7 +87,14 @@ public:
     explicit wxMSWHeaderCtrl(wxHeaderCtrl& header) :
         m_header(header)
     {
-        Init();
+        
+    m_numColumns = 0;
+    m_imageList = nullptr;
+    m_scrollOffset = 0;
+    m_colBeingDragged = -1;
+    m_isColBeingResized = false;
+    m_customDraw = nullptr;
+
     }
 
     bool Create(wxWindow *parent,
@@ -128,7 +135,7 @@ private:
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
 
     // common part of all ctors
-    void Init();
+    
 
     // wrapper around Header_InsertItem(): insert the item using information
     // from the given column at the given index
@@ -213,15 +220,7 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxMSWHeaderCtrlNameStr[] = "wxMSWHeader
 // wxMSWHeaderCtrl construction/destruction
 // ----------------------------------------------------------------------------
 
-void wxMSWHeaderCtrl::Init()
-{
-    m_numColumns = 0;
-    m_imageList = nullptr;
-    m_scrollOffset = 0;
-    m_colBeingDragged = -1;
-    m_isColBeingResized = false;
-    m_customDraw = nullptr;
-}
+
 
 bool wxMSWHeaderCtrl::Create(wxWindow *parent,
                              wxWindowID id,
@@ -1023,10 +1022,7 @@ bool wxMSWHeaderCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
 // wxHeaderCtrl construction/destruction
 // ----------------------------------------------------------------------------
 
-void wxHeaderCtrl::Init()
-{
-    m_nativeControl = nullptr;
-}
+
 
 bool wxHeaderCtrl::Create(wxWindow *parent,
                           wxWindowID id,

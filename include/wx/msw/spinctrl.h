@@ -29,7 +29,12 @@ WX_DEFINE_EXPORTED_ARRAY_PTR(wxSpinCtrl *, wxArraySpins);
 class WXDLLIMPEXP_CORE wxSpinCtrl : public wxSpinButton
 {
 public:
-    wxSpinCtrl() { Init(); }
+    wxSpinCtrl() { 
+    m_blockEvent = false;
+    m_hwndBuddy = nullptr;
+    m_wndProcBuddy = nullptr;
+    m_oldValue = INT_MIN;
+ }
 
     wxSpinCtrl(wxWindow *parent,
                wxWindowID id = wxID_ANY,
@@ -40,7 +45,12 @@ public:
                int min = 0, int max = 100, int initial = 0,
                const wxString& name = wxT("wxSpinCtrl"))
     {
-        Init();
+        
+    m_blockEvent = false;
+    m_hwndBuddy = nullptr;
+    m_wndProcBuddy = nullptr;
+    m_oldValue = INT_MIN;
+
 
         Create(parent, id, value, pos, size, style, min, max, initial, name);
     }
@@ -159,7 +169,7 @@ protected:
 
 private:
     // Common part of all ctors.
-    void Init();
+    
 
     // Adjust the text control style depending on whether we need to enter only
     // digits or may need to enter something else (e.g. "-" sign, "x"

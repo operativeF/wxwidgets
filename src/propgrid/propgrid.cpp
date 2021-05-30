@@ -6256,14 +6256,7 @@ wxDEFINE_EVENT( wxEVT_PG_COLS_RESIZED, wxPropertyGridEvent);
 
 // -----------------------------------------------------------------------
 
-void wxPropertyGridEvent::Init()
-{
-    m_validationInfo = nullptr;
-    m_column = 1;
-    m_canVeto = false;
-    m_wasVetoed = false;
-    m_pg = nullptr;
-}
+
 
 // -----------------------------------------------------------------------
 
@@ -6271,7 +6264,13 @@ wxPropertyGridEvent::wxPropertyGridEvent(wxEventType commandType, int id)
     : wxCommandEvent(commandType,id)
 {
     m_property = nullptr;
-    Init();
+    
+    m_validationInfo = nullptr;
+    m_column = 1;
+    m_canVeto = false;
+    m_wasVetoed = false;
+    m_pg = nullptr;
+
 }
 
 // -----------------------------------------------------------------------

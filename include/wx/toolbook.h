@@ -40,7 +40,9 @@ class WXDLLIMPEXP_CORE wxToolbook : public wxNavigationEnabled<wxBookCtrlBase>
 public:
     wxToolbook()
     {
-        Init();
+        
+    m_needsRealizing = false;
+
     }
 
     wxToolbook(wxWindow *parent,
@@ -50,7 +52,9 @@ public:
                long style = 0,
                const wxString& name = wxEmptyString)
     {
-        Init();
+        
+    m_needsRealizing = false;
+
 
         (void)Create(parent, id, pos, size, style, name);
     }
@@ -119,7 +123,7 @@ protected:
 
 private:
     // common part of all constructors
-    void Init();
+    
 
     // returns the tool identifier for the specified page
     int PageToToolId(size_t page) const;

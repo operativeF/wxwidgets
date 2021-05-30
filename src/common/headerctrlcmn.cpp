@@ -33,13 +33,6 @@ namespace
 {
 
 // ----------------------------------------------------------------------------
-// constants
-// ----------------------------------------------------------------------------
-
-const unsigned int wxNO_COLUMN = static_cast<unsigned>(-1);
-const unsigned int wxID_COLUMNS_BASE = 1;
-
-// ----------------------------------------------------------------------------
 // wxHeaderColumnsRearrangeDialog: dialog for customizing our columns
 // ----------------------------------------------------------------------------
 
@@ -389,10 +382,7 @@ wxBEGIN_EVENT_TABLE(wxHeaderCtrlSimple, wxHeaderCtrl)
     EVT_HEADER_RESIZING(wxID_ANY, wxHeaderCtrlSimple::OnHeaderResizing)
 wxEND_EVENT_TABLE()
 
-void wxHeaderCtrlSimple::Init()
-{
-    m_sortKey = wxNO_COLUMN;
-}
+
 
 const wxHeaderColumn& wxHeaderCtrlSimple::GetColumn(unsigned int idx) const
 {

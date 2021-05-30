@@ -292,8 +292,50 @@ wxFileName wxFileConfig::GetLocalFile(const wxString& szFile, int style)
 // ----------------------------------------------------------------------------
 wxIMPLEMENT_ABSTRACT_CLASS(wxFileConfig, wxConfigBase);
 
-void wxFileConfig::Init()
+
+
+// constructor supports creation of wxFileConfig objects of any type
+wxFileConfig::wxFileConfig(const wxString& appName, const wxString& vendorName,
+                           const wxString& strLocal, const wxString& strGlobal,
+                           long style,
+                           const wxMBConv& conv)
+            : wxConfigBase(( !appName && wxTheApp ) ? wxTheApp->GetAppName() : appName,
+                           vendorName,
+                           strLocal, strGlobal,
+                           style),
+              m_fnLocalFile(strLocal),
+              m_fnGlobalFile(strGlobal),
+              m_conv(conv.Clone())
 {
+    // Make up names for files if empty
+    if ( !m_fnLocalFile.IsOk() && (style & wxCONFIG_USE_LOCAL_FILE) )
+        m_fnLocalFile = GetLocalFile(GetAppName(), style);
+
+    if ( !m_fnGlobalFile.IsOk() && (style & wxCONFIG_USE_GLOBAL_FILE) )
+        m_fnGlobalFile = GetGlobalFile(GetAppName());
+
+    // Check if styles are not supplied, but filenames are, in which case
+    // add the correct styles.
+    if ( m_fnLocalFile.IsOk() )
+        SetStyle(GetStyle() | wxCONFIG_USE_LOCAL_FILE);
+
+    if ( m_fnGlobalFile.IsOk() )
+        SetStyle(GetStyle() | wxCONFIG_USE_GLOBAL_FILE);
+
+    // if the path is not absolute, prepend the standard directory to it
+    // unless explicitly asked not to
+    if ( !(style & wxCONFIG_USE_RELATIVE_PATH) )
+    {
+        if ( m_fnLocalFile.IsOk() )
+            m_fnLocalFile.MakeAbsolute(GetLocalDir(style));
+
+        if ( m_fnGlobalFile.IsOk() )
+            m_fnGlobalFile.MakeAbsolute(GetGlobalDir());
+    }
+
+    SetUmask(-1);
+
+    
     m_pCurrentGroup =
     m_pRootGroup    = new wxFileConfigGroup(nullptr, wxEmptyString, this);
 
@@ -344,50 +386,7 @@ void wxFileConfig::Init()
 
     m_isDirty = false;
     m_autosave = true;
-}
 
-// constructor supports creation of wxFileConfig objects of any type
-wxFileConfig::wxFileConfig(const wxString& appName, const wxString& vendorName,
-                           const wxString& strLocal, const wxString& strGlobal,
-                           long style,
-                           const wxMBConv& conv)
-            : wxConfigBase(( !appName && wxTheApp ) ? wxTheApp->GetAppName() : appName,
-                           vendorName,
-                           strLocal, strGlobal,
-                           style),
-              m_fnLocalFile(strLocal),
-              m_fnGlobalFile(strGlobal),
-              m_conv(conv.Clone())
-{
-    // Make up names for files if empty
-    if ( !m_fnLocalFile.IsOk() && (style & wxCONFIG_USE_LOCAL_FILE) )
-        m_fnLocalFile = GetLocalFile(GetAppName(), style);
-
-    if ( !m_fnGlobalFile.IsOk() && (style & wxCONFIG_USE_GLOBAL_FILE) )
-        m_fnGlobalFile = GetGlobalFile(GetAppName());
-
-    // Check if styles are not supplied, but filenames are, in which case
-    // add the correct styles.
-    if ( m_fnLocalFile.IsOk() )
-        SetStyle(GetStyle() | wxCONFIG_USE_LOCAL_FILE);
-
-    if ( m_fnGlobalFile.IsOk() )
-        SetStyle(GetStyle() | wxCONFIG_USE_GLOBAL_FILE);
-
-    // if the path is not absolute, prepend the standard directory to it
-    // unless explicitly asked not to
-    if ( !(style & wxCONFIG_USE_RELATIVE_PATH) )
-    {
-        if ( m_fnLocalFile.IsOk() )
-            m_fnLocalFile.MakeAbsolute(GetLocalDir(style));
-
-        if ( m_fnGlobalFile.IsOk() )
-            m_fnGlobalFile.MakeAbsolute(GetGlobalDir());
-    }
-
-    SetUmask(-1);
-
-    Init();
 }
 
 #if wxUSE_STREAMS
@@ -1142,7 +1141,58 @@ bool wxFileConfig::DeleteAll()
       }
   }
 
-  Init();
+  
+    m_pCurrentGroup =
+    m_pRootGroup    = new wxFileConfigGroup(nullptr, wxEmptyString, this);
+
+    m_linesHead =
+    m_linesTail = nullptr;
+
+    // It's not an error if (one of the) file(s) doesn't exist.
+
+    // parse the global file
+    if ( m_fnGlobalFile.IsOk() && m_fnGlobalFile.FileExists() )
+    {
+        wxTextFile fileGlobal(m_fnGlobalFile.GetFullPath());
+
+        if ( fileGlobal.Open(*m_conv/*ignored in ANSI build*/) )
+        {
+            Parse(fileGlobal, false /* global */);
+            SetRootPath();
+        }
+        else
+        {
+            wxLogWarning(_("can't open global configuration file '%s'."), m_fnGlobalFile.GetFullPath().c_str());
+        }
+    }
+
+    // parse the local file
+    if ( m_fnLocalFile.IsOk() && m_fnLocalFile.FileExists() )
+    {
+        wxTextFile fileLocal(m_fnLocalFile.GetFullPath());
+        if ( fileLocal.Open(*m_conv/*ignored in ANSI build*/) )
+        {
+            Parse(fileLocal, true /* local */);
+            SetRootPath();
+        }
+        else
+        {
+            const wxString path = m_fnLocalFile.GetFullPath();
+            wxLogWarning(_("can't open user configuration file '%s'."),
+                         path.c_str());
+
+            if ( m_fnLocalFile.FileExists() )
+            {
+                wxLogWarning(_("Changes won't be saved to avoid overwriting the existing file \"%s\""),
+                             path.c_str());
+                m_fnLocalFile.Clear();
+            }
+        }
+    }
+
+    m_isDirty = false;
+    m_autosave = true;
+
 
   return true;
 }

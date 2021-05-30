@@ -69,7 +69,9 @@ public:
     // Default ctor, Create() must be called later to really create the window.
     wxNativeWindow()
     {
-        Init();
+        
+        m_ownedByUser = true;
+    
     }
 
     // Create a window from an existing native window handle.
@@ -81,7 +83,9 @@ public:
     // 0 if the handle was invalid.
     wxNativeWindow(wxWindow* parent, wxWindowID winid, wxNativeWindowHandle handle)
     {
-        Init();
+        
+        m_ownedByUser = true;
+    
 
         Create(parent, winid, handle);
     }
@@ -110,10 +114,7 @@ public:
 #endif // __WXMSW__
 
 private:
-    void Init()
-    {
-        m_ownedByUser = true;
-    }
+    
 
     // This is implemented in platform-specific code.
     void DoDisown();

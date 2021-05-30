@@ -126,7 +126,9 @@ public:
 class WXDLLIMPEXP_CORE wxWizardPageSimple : public wxWizardPage
 {
 public:
-    wxWizardPageSimple() { Init(); }
+    wxWizardPageSimple() { 
+        m_prev = m_next = NULL;
+     }
 
     // ctor takes the previous and next pages
     wxWizardPageSimple(wxWizard *parent,
@@ -178,10 +180,7 @@ public:
 
 private:
     // common part of ctors:
-    void Init()
-    {
-        m_prev = m_next = NULL;
-    }
+    
 
     // pointers are private, the derived classes shouldn't mess with them -
     // just derive from wxWizardPage directly to implement different behaviour

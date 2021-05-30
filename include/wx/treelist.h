@@ -126,7 +126,11 @@ public:
     // Constructors and such
     // ---------------------
 
-    wxTreeListCtrl() { Init(); }
+    wxTreeListCtrl() { 
+    m_view = nullptr;
+    m_model = nullptr;
+    m_comparator = nullptr;
+ }
     wxTreeListCtrl(wxWindow* parent,
                    wxWindowID id,
                    const wxPoint& pos = wxDefaultPosition,
@@ -134,7 +138,11 @@ public:
                    long style = wxTL_DEFAULT_STYLE,
                    const wxString& name = wxASCII_STR(wxTreeListCtrlNameStr))
     {
-        Init();
+        
+    m_view = nullptr;
+    m_model = nullptr;
+    m_comparator = nullptr;
+
 
         Create(parent, id, pos, size, style, name);
     }
@@ -394,7 +402,7 @@ public:
 
 private:
     // Common part of all ctors.
-    void Init();
+    
 
     // Pure virtual method inherited from wxCompositeWindow.
     wxWindowList GetCompositeWindowParts() const override;
@@ -460,7 +468,11 @@ class WXDLLIMPEXP_CORE wxTreeListEvent : public wxNotifyEvent
 {
 public:
     // Default ctor is provided for wxRTTI needs only but should never be used.
-    wxTreeListEvent() { Init(); }
+    wxTreeListEvent() { 
+        m_column = static_cast<unsigned>(-1);
+
+        m_oldCheckedState = wxCHK_UNDETERMINED;
+     }
 
     // The item affected by the event. Valid for all events except
     // column-specific ones such as COLUMN_SORTED.
@@ -477,12 +489,7 @@ public:
 
 private:
     // Common part of all ctors.
-    void Init()
-    {
-        m_column = static_cast<unsigned>(-1);
-
-        m_oldCheckedState = wxCHK_UNDETERMINED;
-    }
+    
 
     // Ctor is private, only wxTreeListCtrl can create events of this type.
     wxTreeListEvent(wxEventType evtType,
@@ -493,7 +500,11 @@ private:
     {
         SetEventObject(treelist);
 
-        Init();
+        
+        m_column = static_cast<unsigned>(-1);
+
+        m_oldCheckedState = wxCHK_UNDETERMINED;
+    
     }
 
     // Set the checkbox state before this event for ITEM_CHECKED events.

@@ -213,7 +213,7 @@ private:
 
   // common part of all ctors (assumes that m_str{Local|Global}File are already
   // initialized
-  void Init();
+  
 
   // common part of from dtor and DeleteAll
   void CleanUp();

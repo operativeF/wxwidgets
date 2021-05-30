@@ -38,13 +38,7 @@ wxBEGIN_EVENT_TABLE(wxBannerWindow, wxWindow)
     EVT_PAINT(wxBannerWindow::OnPaint)
 wxEND_EVENT_TABLE()
 
-void wxBannerWindow::Init()
-{
-    m_direction = wxLEFT;
 
-    m_colStart = *wxWHITE;
-    m_colEnd = *wxBLUE;
-}
 
 bool
 wxBannerWindow::Create(wxWindow* parent,

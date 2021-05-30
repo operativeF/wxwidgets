@@ -13,6 +13,7 @@
 
 #if wxUSE_FILECTRL
 
+#include "wx/generic/dirctrlg.h"
 #include "wx/containr.h"
 #include "wx/listctrl.h"
 #include "wx/filectrl.h"
@@ -41,7 +42,11 @@ public:
         is_drive = 0x0008
     };
 
-    wxFileData() { Init(); }
+    wxFileData() { 
+    m_size = 0;
+    m_type = wxFileData::is_file;
+    m_image = wxFileIconsTable::file;
+ }
     // Full copy constructor
     wxFileData( const wxFileData& fileData ) { Copy(fileData); }
     // Create a filedata from this information
@@ -117,7 +122,7 @@ protected:
     int      m_image;
 
 private:
-    void Init();
+    
 };
 
 //-----------------------------------------------------------------------------

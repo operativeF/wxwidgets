@@ -34,9 +34,43 @@ class WXDLLIMPEXP_CORE wxMenu : public wxMenuBase
 public:
     // ctors & dtor
     wxMenu(const wxString& title, long style = 0)
-        : wxMenuBase(title, style) { Init(); }
+        : wxMenuBase(title, style) { 
+    InitNoCreate();
 
-    wxMenu(long style = 0) : wxMenuBase(style) { Init(); }
+    // create the menu
+    m_hMenu = (WXHMENU)CreatePopupMenu();
+    if ( !m_hMenu )
+    {
+        wxLogLastError(wxT("CreatePopupMenu"));
+    }
+
+    // if we have a title, insert it in the beginning of the menu
+    if ( !m_title.empty() )
+    {
+        const wxString title = m_title;
+        m_title.clear(); // so that SetTitle() knows there was no title before
+        SetTitle(title);
+    }
+ }
+
+    wxMenu(long style = 0) : wxMenuBase(style) { 
+    InitNoCreate();
+
+    // create the menu
+    m_hMenu = (WXHMENU)CreatePopupMenu();
+    if ( !m_hMenu )
+    {
+        wxLogLastError(wxT("CreatePopupMenu"));
+    }
+
+    // if we have a title, insert it in the beginning of the menu
+    if ( !m_title.empty() )
+    {
+        const wxString title = m_title;
+        m_title.clear(); // so that SetTitle() knows there was no title before
+        SetTitle(title);
+    }
+ }
 
     virtual ~wxMenu();
 
@@ -127,7 +161,7 @@ private:
 
     // Common part of all ctors except of the one above taking a native menu
     // handler: calls InitNoCreate() and also creates a new menu.
-    void Init();
+    
 
     // common part of Append/Insert (behaves as Append is pos == (size_t)-1)
     bool DoInsertOrAppend(wxMenuItem *item, size_t pos = (size_t)-1);

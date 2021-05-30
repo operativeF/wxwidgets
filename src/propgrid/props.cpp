@@ -586,17 +586,16 @@ enum
 
 wxPG_IMPLEMENT_PROPERTY_CLASS(wxUIntProperty,wxNumericProperty,TextCtrl)
 
-void wxUIntProperty::Init()
-{
-    m_base = wxPG_UINT_DEC;
-    m_realBase = 10;
-    m_prefix = wxPG_PREFIX_NONE;
-}
+
 
 wxUIntProperty::wxUIntProperty( const wxString& label, const wxString& name,
     unsigned long value ) : wxNumericProperty(label,name)
 {
-    Init();
+    
+    m_base = wxPG_UINT_DEC;
+    m_realBase = 10;
+    m_prefix = wxPG_PREFIX_NONE;
+
     SetValue((long)value);
 }
 
@@ -604,7 +603,11 @@ wxUIntProperty::wxUIntProperty( const wxString& label, const wxString& name,
 wxUIntProperty::wxUIntProperty( const wxString& label, const wxString& name,
     const wxULongLong& value ) : wxNumericProperty(label,name)
 {
-    Init();
+    
+    m_base = wxPG_UINT_DEC;
+    m_realBase = 10;
+    m_prefix = wxPG_PREFIX_NONE;
+
     SetValue(wxVariant(value));
 }
 #endif

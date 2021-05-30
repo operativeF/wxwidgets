@@ -41,12 +41,7 @@ wxEND_EVENT_TABLE()
 // wxMouseEventsManager implementation
 // ============================================================================
 
-void wxMouseEventsManager::Init()
-{
-    m_win = nullptr;
-    m_state = State_Normal;
-    m_item = wxNOT_FOUND;
-}
+
 
 bool wxMouseEventsManager::Create(wxWindow *win)
 {

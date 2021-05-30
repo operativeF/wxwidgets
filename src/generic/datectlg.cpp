@@ -379,11 +379,7 @@ bool wxDatePickerCtrlGeneric::Create(wxWindow *parent,
 }
 
 
-void wxDatePickerCtrlGeneric::Init()
-{
-    m_combo = nullptr;
-    m_popup = nullptr;
-}
+
 
 wxDatePickerCtrlGeneric::~wxDatePickerCtrlGeneric()
 = default;

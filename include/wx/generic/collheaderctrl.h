@@ -14,7 +14,11 @@ class WXDLLIMPEXP_CORE wxGenericCollapsibleHeaderCtrl
     : public wxCollapsibleHeaderCtrlBase
 {
 public:
-    wxGenericCollapsibleHeaderCtrl() { Init(); }
+    wxGenericCollapsibleHeaderCtrl() { 
+    m_collapsed = true;
+    m_inWindow = false;
+    m_mouseDown = false;
+ }
 
     wxGenericCollapsibleHeaderCtrl(wxWindow *parent,
         wxWindowID id,
@@ -25,7 +29,11 @@ public:
         const wxValidator& validator = wxDefaultValidator,
         const wxString& name = wxASCII_STR(wxCollapsibleHeaderCtrlNameStr))
     {
-        Init();
+        
+    m_collapsed = true;
+    m_inWindow = false;
+    m_mouseDown = false;
+
 
         Create(parent, id, label, pos, size, style, validator, name);
     }
@@ -53,7 +61,7 @@ private:
     bool m_inWindow;
     bool m_mouseDown;
 
-    void Init();
+    
 
     void OnPaint(wxPaintEvent& event);
 

@@ -46,14 +46,7 @@ bool wxSashLayoutWindow::Create(wxWindow *parent, wxWindowID id, const wxPoint& 
     return wxSashWindow::Create(parent, id, pos, size, style, name);
 }
 
-void wxSashLayoutWindow::Init()
-{
-    m_orientation = wxLAYOUT_HORIZONTAL;
-    m_alignment = wxLAYOUT_TOP;
-#ifdef __WXMAC__
-    MacSetClipChildren( true ) ;
-#endif
-}
+
 
 // This is the function that wxLayoutAlgorithm calls to ascertain the window
 // dimensions.

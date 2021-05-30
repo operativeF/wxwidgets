@@ -2701,14 +2701,7 @@ private:
 class wxMBConv_wxwin : public wxMBConv
 {
 private:
-    void Init()
-    {
-        // Refuse to use broken wxEncodingConverter code for Mac-specific encodings.
-        // The wxMBConv_cf class does a better job.
-        m_ok = (m_enc < wxFONTENCODING_MACMIN || m_enc > wxFONTENCODING_MACMAX) &&
-               m2w.Init(m_enc, wxFONTENCODING_UNICODE) &&
-               w2m.Init(wxFONTENCODING_UNICODE, m_enc);
-    }
+    
 
 public:
     // temporarily just use wxEncodingConverter stuff,
@@ -2720,14 +2713,26 @@ public:
         else
             m_enc = wxFONTENCODING_SYSTEM;
 
-        Init();
+        
+        // Refuse to use broken wxEncodingConverter code for Mac-specific encodings.
+        // The wxMBConv_cf class does a better job.
+        m_ok = (m_enc < wxFONTENCODING_MACMIN || m_enc > wxFONTENCODING_MACMAX) &&
+               m2w.Init(m_enc, wxFONTENCODING_UNICODE) &&
+               w2m.Init(wxFONTENCODING_UNICODE, m_enc);
+    
     }
 
     explicit wxMBConv_wxwin(wxFontEncoding enc)
     {
         m_enc = enc;
 
-        Init();
+        
+        // Refuse to use broken wxEncodingConverter code for Mac-specific encodings.
+        // The wxMBConv_cf class does a better job.
+        m_ok = (m_enc < wxFONTENCODING_MACMIN || m_enc > wxFONTENCODING_MACMAX) &&
+               m2w.Init(m_enc, wxFONTENCODING_UNICODE) &&
+               w2m.Init(wxFONTENCODING_UNICODE, m_enc);
+    
     }
 
     size_t MB2WC(wchar_t *buf, const char *psz, size_t WXUNUSED(n)) const override
@@ -2805,11 +2810,7 @@ WXDLLIMPEXP_BASE wxMBConv* new_wxMBConv_wxwin( const char* name )
 // wxCSConv implementation
 // ============================================================================
 
-void wxCSConv::Init()
-{
-    m_name = nullptr;
-    m_convReal =  nullptr;
-}
+
 
 void wxCSConv::SetEncoding(wxFontEncoding encoding)
 {
@@ -2848,7 +2849,10 @@ void wxCSConv::SetEncoding(wxFontEncoding encoding)
 
 wxCSConv::wxCSConv(const wxString& charset)
 {
-    Init();
+    
+    m_name = nullptr;
+    m_convReal =  nullptr;
+
 
     if ( !charset.empty() )
     {
@@ -2873,7 +2877,10 @@ wxCSConv::wxCSConv(wxFontEncoding encoding)
         encoding = wxFONTENCODING_SYSTEM;
     }
 
-    Init();
+    
+    m_name = nullptr;
+    m_convReal =  nullptr;
+
 
     SetEncoding(encoding);
 
@@ -2888,7 +2895,10 @@ wxCSConv::~wxCSConv()
 wxCSConv::wxCSConv(const wxCSConv& conv)
         : wxMBConv()
 {
-    Init();
+    
+    m_name = nullptr;
+    m_convReal =  nullptr;
+
 
     SetName(conv.m_name);
     SetEncoding(conv.m_encoding);

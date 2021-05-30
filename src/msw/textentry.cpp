@@ -139,7 +139,13 @@ class wxIEnumString : public IEnumString
 public:
     wxIEnumString()
     {
-        Init();
+        
+        ::InitializeCriticalSection(&m_csCompleter);
+        ::InitializeCriticalSection(&m_csRestart);
+
+        m_completer = nullptr;
+        m_restart = FALSE;
+    
     }
 
     void ChangeCompleter(wxTextCompleter *completer)
@@ -282,14 +288,7 @@ private:
     }
 
     // Common part of all ctors.
-    void Init()
-    {
-        ::InitializeCriticalSection(&m_csCompleter);
-        ::InitializeCriticalSection(&m_csRestart);
-
-        m_completer = nullptr;
-        m_restart = FALSE;
-    }
+    
 
     // Restart completions generation if needed. Should be only called from
     // inside m_csCompleter.

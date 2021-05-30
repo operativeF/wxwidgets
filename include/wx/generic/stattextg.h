@@ -21,7 +21,11 @@
 class WXDLLIMPEXP_CORE wxGenericStaticText : public wxStaticTextBase
 {
 public:
-    wxGenericStaticText() { Init(); }
+    wxGenericStaticText() { 
+#if wxUSE_MARKUP
+        m_markupText = NULL;
+#endif // wxUSE_MARKUP
+     }
 
     wxGenericStaticText(wxWindow *parent,
                  wxWindowID id,
@@ -31,7 +35,11 @@ public:
                  long style = 0,
                  const wxString& name = wxASCII_STR(wxStaticTextNameStr))
     {
-        Init();
+        
+#if wxUSE_MARKUP
+        m_markupText = NULL;
+#endif // wxUSE_MARKUP
+    
 
         Create(parent, id, label, pos, size, style, name);
     }
@@ -67,12 +75,7 @@ protected:
 #endif // wxUSE_MARKUP
 
 private:
-    void Init()
-    {
-#if wxUSE_MARKUP
-        m_markupText = NULL;
-#endif // wxUSE_MARKUP
-    }
+    
 
     void OnPaint(wxPaintEvent& event);
 

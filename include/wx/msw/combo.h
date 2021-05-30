@@ -36,7 +36,8 @@ class WXDLLIMPEXP_CORE wxComboCtrl : public wxComboCtrlBase
 {
 public:
     // ctors and such
-    wxComboCtrl() : wxComboCtrlBase() { Init(); }
+    wxComboCtrl() : wxComboCtrlBase() { 
+ }
 
     wxComboCtrl(wxWindow *parent,
                    wxWindowID id = wxID_ANY,
@@ -48,7 +49,8 @@ public:
                    const wxString& name = wxASCII_STR(wxComboBoxNameStr))
         : wxComboCtrlBase()
     {
-        Init();
+        
+
 
         (void)Create(parent, id, value, pos, size, style, validator, name);
     }
@@ -94,7 +96,7 @@ protected:
     bool HasTransparentBackground() override { return IsDoubleBuffered(); }
 
 private:
-    void Init();
+    
 
 #if wxUSE_COMBOCTRL_POPUP_ANIMATION
     // Popup animation related

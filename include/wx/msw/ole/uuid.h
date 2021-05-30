@@ -51,13 +51,13 @@ private:
   void  UuidToCForm();
 
   // function used to set initial state by all ctors
-  void  Init() { m_pszUuid = NULL; m_pszCForm = NULL; }
+  
 
 public:
   // ctors & dtor
-  Uuid()                 { Init();            }
-  Uuid(const wxChar *pc) { Init(); Set(pc);   }
-  Uuid(const UUID &uuid) { Init(); Set(uuid); }
+  Uuid()                 {  m_pszUuid = NULL; m_pszCForm = NULL;             }
+  Uuid(const wxChar *pc) {  m_pszUuid = NULL; m_pszCForm = NULL;  Set(pc);   }
+  Uuid(const UUID &uuid) {  m_pszUuid = NULL; m_pszCForm = NULL;  Set(uuid); }
  ~Uuid();
 
   // copy ctor and assignment operator needed for this class

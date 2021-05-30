@@ -83,11 +83,7 @@ wxOwnerDrawn *wxListBox::CreateLboxItem(size_t WXUNUSED(n))
 // creation
 // ----------------------------------------------------------------------------
 
-void wxListBox::Init()
-{
-    m_noItems = 0;
-    m_updateHorizontalExtent = false;
-}
+
 
 bool wxListBox::Create(wxWindow *parent,
                        wxWindowID id,

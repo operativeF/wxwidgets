@@ -2033,7 +2033,7 @@ protected:
 
 private:
     // Called in constructors.
-    void Init();
+    
     void Init( const wxString& label, const wxString& name );
 };
 
@@ -2118,7 +2118,7 @@ protected:
     wxByte  m_capFgColIndex;  // caption text colour index
 
 private:
-    void Init();
+    
 };
 
 // -----------------------------------------------------------------------

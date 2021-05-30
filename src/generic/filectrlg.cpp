@@ -134,7 +134,11 @@ extern size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, w
 
 wxFileData::wxFileData( const wxString &filePath, const wxString &fileName, fileType type, int image_id )
 {
-    Init();
+    
+    m_size = 0;
+    m_type = wxFileData::is_file;
+    m_image = wxFileIconsTable::file;
+
     m_fileName = fileName;
     m_filePath = filePath;
     m_type = type;
@@ -143,12 +147,7 @@ wxFileData::wxFileData( const wxString &filePath, const wxString &fileName, file
     ReadData();
 }
 
-void wxFileData::Init()
-{
-    m_size = 0;
-    m_type = wxFileData::is_file;
-    m_image = wxFileIconsTable::file;
-}
+
 
 void wxFileData::Copy( const wxFileData& fileData )
 {

@@ -262,13 +262,7 @@ void wxSpinCtrl::NormalizeValue()
 // construction
 // ----------------------------------------------------------------------------
 
-void wxSpinCtrl::Init()
-{
-    m_blockEvent = false;
-    m_hwndBuddy = nullptr;
-    m_wndProcBuddy = nullptr;
-    m_oldValue = INT_MIN;
-}
+
 
 bool wxSpinCtrl::Create(wxWindow *parent,
                         wxWindowID id,

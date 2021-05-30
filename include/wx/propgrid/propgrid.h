@@ -2068,7 +2068,7 @@ public:
     }
 
 private:
-    void Init();
+    
     void OnPropertyGridSet();
     wxDECLARE_DYNAMIC_CLASS(wxPropertyGridEvent);
 

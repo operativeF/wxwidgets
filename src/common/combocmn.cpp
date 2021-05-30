@@ -219,17 +219,6 @@ wxCONSTRUCTOR_5( wxComboBox, wxWindow*, Parent, wxWindowID, Id, \
     #define USE_TRANSIENT_POPUP 0
 #endif
 
-
-// Define different types of popup windows
-enum
-{
-    POPUPWIN_NONE                   = 0,
-    POPUPWIN_WXPOPUPTRANSIENTWINDOW = 1,
-    POPUPWIN_WXPOPUPWINDOW          = 2,
-    POPUPWIN_GENERICTLW             = 3
-};
-
-
 #if USE_TRANSIENT_POPUP
     // wxPopupTransientWindow is implemented
 
@@ -985,49 +974,7 @@ wxEND_EVENT_TABLE()
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxComboCtrlBase, wxControl);
 
-void wxComboCtrlBase::Init()
-{
-    m_winPopup = nullptr;
-    m_popup = nullptr;
-    m_popupWinState = Hidden;
-    m_btn = nullptr;
-    m_text = nullptr;
-    m_popupInterface = nullptr;
 
-    m_popupEvtHandler = nullptr;
-    m_textEvtHandler = nullptr;
-
-#if INSTALL_TOPLEV_HANDLER
-    m_toplevEvtHandler = NULL;
-#endif
-
-    m_mainCtrlWnd = this;
-
-    m_heightPopup = -1;
-    m_widthMinPopup = -1;
-    m_anchorSide = 0;
-    m_widthCustomPaint = 0;
-    m_widthCustomBorder = 0;
-
-    m_btnState = 0;
-    m_btnWidDefault = 0;
-    m_blankButtonBg = false;
-    m_ignoreEvtText = 0;
-    m_popupWinType = POPUPWIN_NONE;
-    m_btnWid = m_btnHei = -1;
-    m_btnSide = wxRIGHT;
-    m_btnSpacingX = 0;
-
-    m_extLeft = 0;
-    m_extRight = 0;
-    m_marginLeft = -1;
-    m_iFlags = 0;
-    m_textCtrlStyle = 0;
-    m_timeCanAcceptClick = 0;
-
-    m_resetFocus = false;
-    m_hasTcBgCol = false;
-}
 
 bool wxComboCtrlBase::Create(wxWindow *parent,
                              wxWindowID id,

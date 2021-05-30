@@ -62,7 +62,20 @@
 class WXDLLEXPORT wxBitmapRefData : public wxGDIImageRefData
 {
 public:
-    wxBitmapRefData() { Init(); }
+    wxBitmapRefData() { 
+#if wxDEBUG_LEVEL
+    m_selectedInto = nullptr;
+#endif
+    m_bitmapMask = nullptr;
+
+    m_hBitmap = (WXHBITMAP) nullptr;
+#if wxUSE_WXDIB
+    m_dib = nullptr;
+#endif
+
+    m_isDIB =
+    m_hasAlpha = false;
+ }
     wxBitmapRefData(const wxBitmapRefData& data);
     virtual ~wxBitmapRefData() { Free(); }
 
@@ -128,7 +141,7 @@ public:
     bool m_isDIB;
 
 private:
-    void Init();
+    
 
 #if wxUSE_WXDIB
     // Initialize using the given DIB but use (and take ownership of) the
@@ -199,8 +212,12 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapHandler, wxObject);
 // wxBitmapRefData
 // ----------------------------------------------------------------------------
 
-void wxBitmapRefData::Init()
+
+
+wxBitmapRefData::wxBitmapRefData(const wxBitmapRefData& data)
+               : wxGDIImageRefData(data)
 {
+    
 #if wxDEBUG_LEVEL
     m_selectedInto = nullptr;
 #endif
@@ -213,12 +230,7 @@ void wxBitmapRefData::Init()
 
     m_isDIB =
     m_hasAlpha = false;
-}
 
-wxBitmapRefData::wxBitmapRefData(const wxBitmapRefData& data)
-               : wxGDIImageRefData(data)
-{
-    Init();
 
 #if wxUSE_WXDIB
     wxASSERT_MSG( !data.m_dib,

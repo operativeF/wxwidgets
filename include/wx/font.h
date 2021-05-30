@@ -132,7 +132,12 @@ public:
         : m_pointSize(-1.0)
         , m_pixelSize(wxDefaultSize)
     {
-        Init();
+        
+        m_family = wxFONTFAMILY_DEFAULT;
+        m_flags = wxFONTFLAG_DEFAULT;
+        m_weight = wxFONTWEIGHT_NORMAL;
+        m_encoding = wxFONTENCODING_DEFAULT;
+    
     }
 
     // These ctors specify the font size, either in points or in pixels.
@@ -140,7 +145,12 @@ public:
         : m_pointSize(pointSize >= 0.0 ? pointSize : -1.0)
         , m_pixelSize(wxDefaultSize)
     {
-        Init();
+        
+        m_family = wxFONTFAMILY_DEFAULT;
+        m_flags = wxFONTFLAG_DEFAULT;
+        m_weight = wxFONTWEIGHT_NORMAL;
+        m_encoding = wxFONTENCODING_DEFAULT;
+    
         if (!wxIsSameDouble(m_pointSize, pointSize))
         {
             wxFAIL_MSG("Invalid font point size");
@@ -150,7 +160,12 @@ public:
         : m_pointSize(-1.0)
         , m_pixelSize(pixelSize)
     {
-        Init();
+        
+        m_family = wxFONTFAMILY_DEFAULT;
+        m_flags = wxFONTFLAG_DEFAULT;
+        m_weight = wxFONTWEIGHT_NORMAL;
+        m_encoding = wxFONTENCODING_DEFAULT;
+    
     }
     // Default copy ctor, assignment operator and dtor are OK
 
@@ -278,13 +293,7 @@ public:
     }
 
 private:
-    void Init()
-    {
-        m_family = wxFONTFAMILY_DEFAULT;
-        m_flags = wxFONTFLAG_DEFAULT;
-        m_weight = wxFONTWEIGHT_NORMAL;
-        m_encoding = wxFONTENCODING_DEFAULT;
-    }
+    
 
     // Turn on or off the given bit in m_flags depending on the value of the
     // boolean argument.

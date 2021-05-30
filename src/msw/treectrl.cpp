@@ -651,33 +651,6 @@ private:
 // constants
 // ----------------------------------------------------------------------------
 
-// indices in gs_expandEvents table below
-enum
-{
-    IDX_COLLAPSE,
-    IDX_EXPAND,
-    IDX_WHAT_MAX
-};
-
-enum
-{
-    IDX_DONE,
-    IDX_DOING,
-    IDX_HOW_MAX
-};
-
-// handy table for sending events - it has to be initialized during run-time
-// now so can't be const any more
-static /* const */ wxEventType gs_expandEvents[IDX_WHAT_MAX][IDX_HOW_MAX];
-
-/*
-   but logically it's a const table with the following entries:
-=
-{
-    { wxEVT_TREE_ITEM_COLLAPSED, wxEVT_TREE_ITEM_COLLAPSING },
-    { wxEVT_TREE_ITEM_EXPANDED,  wxEVT_TREE_ITEM_EXPANDING  }
-};
-*/
 
 // ============================================================================
 // implementation
@@ -718,8 +691,17 @@ bool wxTreeTraversal::Traverse(const wxTreeItemId& root, bool recursively)
 // construction and destruction
 // ----------------------------------------------------------------------------
 
-void wxTreeCtrl::Init()
+
+
+bool wxTreeCtrl::Create(wxWindow *parent,
+                        wxWindowID id,
+                        const wxPoint& pos,
+                        const wxSize& size,
+                        long style,
+                        const wxValidator& validator,
+                        const wxString& name)
 {
+    
     m_textCtrl = nullptr;
     m_hasAnyAttr = false;
 #if wxUSE_DRAGIMAGE
@@ -738,17 +720,7 @@ void wxTreeCtrl::Init()
     gs_expandEvents[IDX_COLLAPSE][IDX_DOING] = wxEVT_TREE_ITEM_COLLAPSING;
     gs_expandEvents[IDX_EXPAND][IDX_DONE] = wxEVT_TREE_ITEM_EXPANDED;
     gs_expandEvents[IDX_EXPAND][IDX_DOING] = wxEVT_TREE_ITEM_EXPANDING;
-}
 
-bool wxTreeCtrl::Create(wxWindow *parent,
-                        wxWindowID id,
-                        const wxPoint& pos,
-                        const wxSize& size,
-                        long style,
-                        const wxValidator& validator,
-                        const wxString& name)
-{
-    Init();
 
     if ( (style & wxBORDER_MASK) == wxBORDER_DEFAULT )
         style |= wxBORDER_SUNKEN;

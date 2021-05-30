@@ -165,7 +165,13 @@ class WXDLLIMPEXP_CORE wxSashLayoutWindow: public wxSashWindow
 public:
     wxSashLayoutWindow()
     {
-        Init();
+        
+    m_orientation = wxLAYOUT_HORIZONTAL;
+    m_alignment = wxLAYOUT_TOP;
+#ifdef __WXMAC__
+    MacSetClipChildren( true ) ;
+#endif
+
     }
 
     wxSashLayoutWindow(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
@@ -200,7 +206,7 @@ public:
     void OnQueryLayoutInfo(wxQueryLayoutInfoEvent& event);
 
 private:
-    void Init();
+    
 
     wxLayoutAlignment           m_alignment;
     wxLayoutOrientation         m_orientation;

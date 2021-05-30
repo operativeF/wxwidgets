@@ -41,12 +41,7 @@ wxDEFINE_EVENT(wxEVT_COLLAPSIBLEHEADER_CHANGED, wxCommandEvent);
 // implementation
 // ============================================================================
 
-void wxGenericCollapsibleHeaderCtrl::Init()
-{
-    m_collapsed = true;
-    m_inWindow = false;
-    m_mouseDown = false;
-}
+
 
 bool wxGenericCollapsibleHeaderCtrl::Create(wxWindow *parent,
     wxWindowID id,

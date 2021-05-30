@@ -59,7 +59,9 @@ class WXDLLIMPEXP_CORE wxAddRemoveCtrl : public wxPanel
 public:
     wxAddRemoveCtrl()
     {
-        Init();
+        
+        m_impl = NULL;
+    
     }
 
     wxAddRemoveCtrl(wxWindow* parent,
@@ -69,7 +71,9 @@ public:
                     long style = 0,
                     const wxString& name = wxASCII_STR(wxAddRemoveCtrlNameStr))
     {
-        Init();
+        
+        m_impl = NULL;
+    
 
         Create(parent, winid, pos, size, style, name);
     }
@@ -95,10 +99,7 @@ protected:
 
 private:
     // Common part of all ctors.
-    void Init()
-    {
-        m_impl = NULL;
-    }
+    
 
     class wxAddRemoveImpl* m_impl;
 

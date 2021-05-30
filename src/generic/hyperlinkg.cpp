@@ -67,7 +67,16 @@ bool wxGenericHyperlinkCtrl::Create(wxWindow *parent, wxWindowID id,
     SetURL(url.empty() ? label : url);
     SetLabel(label.empty() ? url : label);
 
-    Init();
+    
+    m_rollover = false;
+    m_clicking = false;
+    m_visited = false;
+
+    // colours
+    m_normalColour = *wxBLUE;
+    m_hoverColour = *wxRED;
+    m_visitedColour = wxColour("#551a8b");
+
     SetForegroundColour(m_normalColour);
 
     // by default the font of a hyperlink control is underlined
@@ -100,17 +109,7 @@ bool wxGenericHyperlinkCtrl::Create(wxWindow *parent, wxWindowID id,
     return true;
 }
 
-void wxGenericHyperlinkCtrl::Init()
-{
-    m_rollover = false;
-    m_clicking = false;
-    m_visited = false;
 
-    // colours
-    m_normalColour = *wxBLUE;
-    m_hoverColour = *wxRED;
-    m_visitedColour = wxColour("#551a8b");
-}
 
 void wxGenericHyperlinkCtrl::ConnectMenuHandlers()
 {

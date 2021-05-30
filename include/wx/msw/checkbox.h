@@ -77,7 +77,7 @@ protected:
 
 private:
     // common part of all ctors
-    void Init();
+    
 
     // current state of the checkbox
     wxCheckBoxState m_state;

@@ -39,7 +39,7 @@ WX_DEFINE_SORTED_EXPORTED_ARRAY_CMP_INT(unsigned, wxUIntCmp, wxSelectedIndices);
 class WXDLLIMPEXP_CORE wxSelectionStore
 {
 public:
-    wxSelectionStore() : m_itemsSel(wxUIntCmp) { Init(); }
+    wxSelectionStore() : m_itemsSel(wxUIntCmp) {  m_count = 0; m_defaultState = false;  }
 
     // set the total number of items we handle
     void SetItemCount(unsigned count);
@@ -104,7 +104,7 @@ public:
 
 private:
     // (re)init
-    void Init() { m_count = 0; m_defaultState = false; }
+    
 
     // the total number of items we handle
     unsigned m_count;
