@@ -906,7 +906,7 @@ wxXmlNode *wxXmlResource::FindResource(const wxString& name,
             nullptr,
             wxString::Format
             (
-                "XRC resource \"%s\" (class \"%s\") not found",
+                R"(XRC resource "%s" (class "%s") not found)",
                 name, classname
             )
         );
@@ -1097,7 +1097,7 @@ wxXmlResource::DoCreateResFromNode(wxXmlNode& node,
         &node,
         wxString::Format
         (
-            "no handler found for XML node \"%s\" (class \"%s\")",
+            R"(no handler found for XML node "%s" (class "%s"))",
             node.GetName(),
             node.GetAttribute("class", wxEmptyString)
         )
@@ -1508,7 +1508,7 @@ wxObject *wxXmlResourceHandlerImpl::CreateResource(wxXmlNode *node, wxObject *pa
                     node,
                     wxString::Format
                     (
-                        "subclass \"%s\" not found for resource \"%s\", not subclassing",
+                        R"(subclass "%s" not found for resource "%s", not subclassing)",
                         subclass, name
                     )
                 );
@@ -2494,7 +2494,7 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
             ReportParamError
             (
                 param,
-                "double specification of \"sysfont\" and \"inherit\""
+                R"(double specification of "sysfont" and "inherit")"
             );
         }
     }
@@ -2523,7 +2523,7 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
                 ReportParamError
                 (
                     param,
-                    "double specification of \"size\" and \"relativesize\""
+                    R"(double specification of "size" and "relativesize")"
                 );
             }
         }

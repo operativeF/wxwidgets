@@ -258,10 +258,10 @@ static wxString wxGetVolumeString(const wxString& volume, wxPathFormat format)
         {
             // We also have to check for Windows unique volume names here and
             // return it with '\\?\' prepended to it
-            if ( wxFileName::IsMSWUniqueVolumeNamePath("\\\\?\\" + volume + "\\",
+            if ( wxFileName::IsMSWUniqueVolumeNamePath(R"(\\?\)" + volume + "\\",
                                                        format) )
             {
-                path << "\\\\?\\" << volume;
+                path << R"(\\?\)" << volume;
             }
             else
             {

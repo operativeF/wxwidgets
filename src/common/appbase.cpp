@@ -671,7 +671,7 @@ void wxAppConsoleBase::OnUnhandledException()
 #ifdef wxNO_RTTI
         what.Printf("standard exception with message \"%s\"", e.what());
 #else
-        what.Printf("standard exception of type \"%s\" with message \"%s\"",
+        what.Printf(R"(standard exception of type "%s" with message "%s")",
                     typeid(e).name(), e.what());
 #endif
     }

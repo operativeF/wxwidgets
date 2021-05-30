@@ -143,7 +143,7 @@ static void ColouriseAvsDoc(
 				sc.ForwardSetState(SCE_AVS_DEFAULT);
 			}
 		} else if (sc.state == SCE_AVS_TRIPLESTRING) {
-			if (sc.Match("\"\"\"")) {
+			if (sc.Match(R"(""")")) {
 				sc.Forward();
 				sc.Forward();
 				sc.ForwardSetState(SCE_AVS_DEFAULT);
@@ -168,7 +168,7 @@ static void ColouriseAvsDoc(
 			} else if (sc.ch == '#') {
 				sc.SetState(SCE_AVS_COMMENTLINE);
 			} else if (sc.ch == '\"') {
-				if (sc.Match("\"\"\"")) {
+				if (sc.Match(R"(""")")) {
 					sc.SetState(SCE_AVS_TRIPLESTRING);
 				} else {
 					sc.SetState(SCE_AVS_STRING);

@@ -410,7 +410,7 @@ wxSVGBitmapEmbedHandler::ProcessBitmap(const wxBitmap& bmp,
 
     // write image meta information
     wxString s;
-    s += wxString::Format("  <image x=\"%d\" y=\"%d\" width=\"%dpx\" height=\"%dpx\"",
+    s += wxString::Format(R"(  <image x="%d" y="%d" width="%dpx" height="%dpx")",
                           x, y, bmp.GetWidth(), bmp.GetHeight());
     s += wxString::Format(" id=\"image%d\" "
                           "xlink:href=\"data:image/png;base64,\n",
@@ -463,7 +463,7 @@ wxSVGBitmapFileHandler::ProcessBitmap(const wxBitmap& bmp,
 
     // reference the bitmap from the SVG doc
     wxString s;
-    s += wxString::Format("  <image x=\"%d\" y=\"%d\" width=\"%dpx\" height=\"%dpx\"",
+    s += wxString::Format(R"(  <image x="%d" y="%d" width="%dpx" height="%dpx")",
                           x, y, bmp.GetWidth(), bmp.GetHeight());
     s += wxString::Format(" xlink:href=\"%s\"/>\n", sPNG.GetFullName());
 

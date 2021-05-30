@@ -1557,7 +1557,7 @@ bool wxTranslations::LoadCatalog(const wxString& domain, const wxString& lang, c
     {
         // Nothing worked, the catalog just isn't there
         wxLogTrace(TRACE_I18N,
-                   "Catalog \"%s.mo\" not found for language \"%s\".",
+                   R"(Catalog "%s.mo" not found for language "%s".)",
                    domain, lang);
         return false;
     }

@@ -38,7 +38,7 @@ static Sci_Position tillEndOfTripleQuote(Accessor &styler, Sci_Position pos, Sci
   for (;;) {
     if (styler.SafeGetCharAt(pos, '\0') == '\0') return pos;
     if (pos >= max) return pos;
-    if (styler.Match(pos, "\"\"\"")) {
+    if (styler.Match(pos, R"(""")")) {
       return pos + 2;
     }
     pos++;

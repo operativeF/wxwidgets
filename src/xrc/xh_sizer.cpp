@@ -798,7 +798,7 @@ int wxSizerXmlHandler::GetSizerFlags()
                 "flag",
                 wxString::Format
                 (
-                    "\"%s\" has no effect when combined with \"%s\"",
+                    R"("%s" has no effect when combined with "%s")",
                     centreFlag,
                     expandFlag
                 )

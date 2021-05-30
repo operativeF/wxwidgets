@@ -354,7 +354,7 @@ static void ColorizeTxt2tagsDoc(Sci_PositionU startPos, Sci_Position length, int
         // New state only within the initial whitespace
         if (sc.state == SCE_TXT2TAGS_PRECHAR) {
             // Blockquote
-            if (sc.Match("\"\"\"") && precharCount < 5){
+            if (sc.Match(R"(""")") && precharCount < 5){
 
                 sc.SetState(SCE_TXT2TAGS_BLOCKQUOTE);
                 sc.Forward(1);
