@@ -653,7 +653,7 @@ public:
                     const wxString& name = wxASCII_STR(wxPropertyGridNameStr) );
 
     // Destructor
-    virtual ~wxPropertyGrid();
+    ~wxPropertyGrid() override;
 
     // Adds given key combination to trigger given action.
     // Here is a sample code to make Enter key press move focus to
@@ -1404,13 +1404,13 @@ public:
     // Returns property at given y coordinate (relative to grid's top left).
     wxPGProperty* GetItemAtY( int y ) const { return DoGetItemAtY(y); }
 
-    virtual void Refresh( bool eraseBackground = true,
+    void Refresh( bool eraseBackground = true,
                           const wxRect *rect = (const wxRect *) nullptr ) override;
     bool SetFont( const wxFont& font ) override;
     void SetExtraStyle( long exStyle ) override;
     bool Reparent( wxWindowBase *newParent ) override;
     void ScrollWindow(int dx, int dy, const wxRect* rect) override;
-    virtual void SetScrollbars(int pixelsPerUnitX, int pixelsPerUnitY,
+    void SetScrollbars(int pixelsPerUnitX, int pixelsPerUnitY,
                                int noUnitsX, int noUnitsY,
                                int xPos, int yPos, bool noRefresh) override;
 protected:
@@ -1937,7 +1937,7 @@ public:
     wxPropertyGridEvent(const wxPropertyGridEvent& event);
 
     // Destructor.
-    ~wxPropertyGridEvent();
+    ~wxPropertyGridEvent() override;
 
     // Copyer.
     wxEvent* Clone() const override;

@@ -43,7 +43,7 @@ public:
               const wxSize& size = wxDefaultSize,
               long style = 0,
               const wxString& name = wxASCII_STR(wxNotebookNameStr));
-  virtual ~wxNotebook();
+  ~wxNotebook() override;
 
 	wxNotebook(const wxNotebook&) = delete;
 	wxNotebook& operator=(const wxNotebook&) = delete;
@@ -119,7 +119,7 @@ public:
   // -------------------
 
   bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
-  virtual bool MSWOnScroll(int orientation, WXWORD nSBCode,
+  bool MSWOnScroll(int orientation, WXWORD nSBCode,
                            WXWORD pos, WXHWND control) override;
 
 #if wxUSE_CONSTRAINTS
@@ -207,7 +207,7 @@ protected:
 
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
   wxDECLARE_EVENT_TABLE();

@@ -201,7 +201,7 @@ public:
     // default ctor doesn't initialize the window, use Create() later
     wxGLCanvasBase();
 
-    virtual ~wxGLCanvasBase();
+    ~wxGLCanvasBase() override;
 
 
     /*
@@ -353,7 +353,7 @@ class WXDLLIMPEXP_GL wxGLAPI : public wxObject
 {
 public:
     wxGLAPI();
-    ~wxGLAPI();
+    ~wxGLAPI() override;
 
     static void glFrustum(GLfloat left, GLfloat right, GLfloat bottom,
                             GLfloat top, GLfloat zNear, GLfloat zFar);

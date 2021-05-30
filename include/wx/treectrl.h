@@ -38,7 +38,7 @@ class WXDLLIMPEXP_CORE wxTreeCtrlBase : public wxSystemThemedControl<wxControl>
 {
 public:
     wxTreeCtrlBase();
-    virtual ~wxTreeCtrlBase();
+    ~wxTreeCtrlBase() override;
 
     // accessors
     // ---------

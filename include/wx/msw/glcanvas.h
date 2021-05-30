@@ -27,7 +27,7 @@ public:
     wxGLContext(wxGLCanvas *win,
                 const wxGLContext *other = nullptr,
                 const wxGLContextAttrs *ctxAttrs = nullptr);
-    virtual ~wxGLContext();
+    ~wxGLContext() override;
 
     bool SetCurrent(const wxGLCanvas& win) const override;
 
@@ -85,7 +85,7 @@ public:
                 const int *attribList = nullptr,
                 const wxPalette& palette = wxNullPalette);
 
-    virtual ~wxGLCanvas();
+    ~wxGLCanvas() override;
 
     // implement wxGLCanvasBase methods
     bool SwapBuffers() override;

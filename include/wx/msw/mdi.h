@@ -51,7 +51,7 @@ public:
         Create(parent, id, title, pos, size, style, name);
     }
 
-    virtual ~wxMDIParentFrame();
+    ~wxMDIParentFrame() override;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -215,7 +215,7 @@ public:
                 long style = wxDEFAULT_FRAME_STYLE,
                 const wxString& name = wxASCII_STR(wxFrameNameStr));
 
-    virtual ~wxMDIChildFrame();
+    ~wxMDIChildFrame() override;
 
     // implement MDI operations
     void Activate() override;
@@ -264,7 +264,7 @@ private:
     wxDECLARE_EVENT_TABLE();
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -282,14 +282,14 @@ public:
 	wxMDIClientWindow& operator=(const wxMDIClientWindow&) = delete;
 
     // Note: this is virtual, to allow overridden behaviour.
-    virtual bool CreateClient(wxMDIParentFrame *parent,
+    bool CreateClient(wxMDIParentFrame *parent,
                               long style = wxVSCROLL | wxHSCROLL) override;
 
     // Explicitly call default scroll behaviour
     void OnScroll(wxScrollEvent& event);
 
 protected:
-    virtual void DoSetSize(int x, int y,
+    void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
 
@@ -301,7 +301,7 @@ private:
     wxDECLARE_EVENT_TABLE();
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

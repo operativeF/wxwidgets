@@ -87,7 +87,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
-    virtual ~wxListBox();
+    ~wxListBox() override;
 
 	wxListBox(const wxListBox&) = delete;
 	wxListBox& operator=(const wxListBox&) = delete;
@@ -179,7 +179,7 @@ protected:
 
     void DoSetSelection(int n, bool select) override;
 
-    virtual int DoInsertItems(const wxArrayStringsAdapter& items,
+    int DoInsertItems(const wxArrayStringsAdapter& items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
 
@@ -223,7 +223,7 @@ private:
 
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

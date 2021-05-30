@@ -40,7 +40,7 @@ public:
                const wxString& help = wxEmptyString,
                wxItemKind kind = wxITEM_NORMAL,
                wxMenu *subMenu = nullptr);
-    virtual ~wxMenuItem();
+    ~wxMenuItem() override;
 
 	wxMenuItem(const wxMenuItem&) = delete;
 	wxMenuItem& operator=(const wxMenuItem&) = delete;
@@ -142,7 +142,7 @@ private:
     friend class wxMenu;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

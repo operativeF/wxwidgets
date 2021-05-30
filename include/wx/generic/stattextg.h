@@ -55,7 +55,7 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxStaticTextNameStr));
 
-    virtual ~wxGenericStaticText();
+    ~wxGenericStaticText() override;
 
 
     // overridden base class virtual methods
@@ -90,7 +90,7 @@ private:
 #endif // wxUSE_MARKUP
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

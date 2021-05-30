@@ -221,7 +221,7 @@ public:
                          const wxDC& referenceDC,
                          const wxString& filename, int width, int height,
                          const wxString& description );
-    virtual ~wxEnhMetaFileDCImpl();
+    ~wxEnhMetaFileDCImpl() override;
 
     // obtain a pointer to the new metafile (caller should delete it)
     wxEnhMetaFile *Close();

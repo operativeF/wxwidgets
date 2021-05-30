@@ -38,7 +38,7 @@ public:
     // ctor: text is the associated text control
     wxPickerBase()  
         = default;
-    virtual ~wxPickerBase() = default;
+    ~wxPickerBase() override = default;
 
 
     // if present, intercepts wxPB_USE_TEXTCTRL style and creates the text control

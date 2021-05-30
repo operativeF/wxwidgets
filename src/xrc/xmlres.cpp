@@ -1443,7 +1443,7 @@ wxXmlSubclassFactories *wxXmlResource::ms_subclassFactories = nullptr;
 class wxXmlSubclassFactoryCXX : public wxXmlSubclassFactory
 {
 public:
-    ~wxXmlSubclassFactoryCXX() = default;
+    ~wxXmlSubclassFactoryCXX() override = default;
 
     wxObject *Create(const wxString& className) override
     {

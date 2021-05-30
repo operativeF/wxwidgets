@@ -35,7 +35,7 @@ class WXDLLIMPEXP_CORE wxPopupWindowBase : public wxNonOwnedWindow
 {
 public:
     wxPopupWindowBase() = default;
-    virtual ~wxPopupWindowBase();
+    ~wxPopupWindowBase() override;
 
     // create the popup window
     //
@@ -140,7 +140,7 @@ public:
     void Dismiss() override;
 
     // Override to handle WM_NCACTIVATE.
-    virtual bool MSWHandleMessage(WXLRESULT *result,
+    bool MSWHandleMessage(WXLRESULT *result,
                                   WXUINT message,
                                   WXWPARAM wParam,
                                   WXLPARAM lParam) override;

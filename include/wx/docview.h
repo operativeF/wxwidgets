@@ -64,7 +64,7 @@ class WXDLLIMPEXP_CORE wxDocument : public wxEvtHandler
 {
 public:
     wxDocument(wxDocument *parent = nullptr);
-    virtual ~wxDocument();
+    ~wxDocument() override;
 
     // accessors
     void SetFilename(const wxString& filename, bool notifyViews = false);
@@ -211,7 +211,7 @@ class WXDLLIMPEXP_CORE wxView: public wxEvtHandler
 {
 public:
     wxView();
-    virtual ~wxView();
+    ~wxView() override;
 
     wxDocument *GetDocument() const { return m_viewDocument; }
     virtual void SetDocument(wxDocument *doc);
@@ -301,7 +301,7 @@ public:
                   wxClassInfo *viewClassInfo = nullptr,
                   long flags = wxDEFAULT_TEMPLATE_FLAGS);
 
-    virtual ~wxDocTemplate();
+    ~wxDocTemplate() override;
 
     // By default, these two member functions dynamically creates document and
     // view using dynamic instance construction. Override these if you need a
@@ -374,7 +374,7 @@ class WXDLLIMPEXP_CORE wxDocManager: public wxEvtHandler
 public:
     // NB: flags are unused, don't pass wxDOC_XXX to this ctor
     wxDocManager(long flags = 0, bool initialize = true);
-    virtual ~wxDocManager();
+    ~wxDocManager() override;
 
     virtual bool Initialize();
 
@@ -944,7 +944,7 @@ public:
     bool OnPrintPage(int page) override;
     bool HasPage(int page) override;
     bool OnBeginDocument(int startPage, int endPage) override;
-    virtual void GetPageInfo(int *minPage, int *maxPage,
+    void GetPageInfo(int *minPage, int *maxPage,
                              int *selPageFrom, int *selPageTo) override;
 
     virtual wxView *GetView() { return m_printoutView; }

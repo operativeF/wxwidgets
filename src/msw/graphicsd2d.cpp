@@ -454,7 +454,7 @@ public:
     = default;
 
     // IDWriteFontCollectionLoader methods
-    virtual wxSTDMETHODIMP CreateEnumeratorFromKey(IDWriteFactory* pFactory,
+    wxSTDMETHODIMP CreateEnumeratorFromKey(IDWriteFactory* pFactory,
                                         void const* pCollectionKey, UINT32 collectionKeySize,
                                         IDWriteFontFileEnumerator** pFontFileEnumerator) override
     {
@@ -664,7 +664,7 @@ public:
 class wxManagedResourceHolder : public wxResourceHolder, public wxD2DManagedObject
 {
 public:
-    virtual ~wxManagedResourceHolder() = default;
+    ~wxManagedResourceHolder() override = default;
 };
 
 // A Direct2D resource manager handles the device-dependent
@@ -727,7 +727,7 @@ public:
     wxD2DResourceHolder()  
     = default;
 
-    virtual ~wxD2DResourceHolder()
+    ~wxD2DResourceHolder() override
     {
         UnBind();
         ReleaseResource();
@@ -837,7 +837,7 @@ public:
 
     virtual wxD2DManagedObject* GetManagedObject() = 0;
 
-    ~wxD2DManagedGraphicsData() = default;
+    ~wxD2DManagedGraphicsData() override = default;
 };
 
 D2D1_CAP_STYLE wxD2DConvertPenCap(wxPenCap cap)
@@ -1315,7 +1315,7 @@ public :
     // thrown away by the GPU.
     wxD2DPathData(wxGraphicsRenderer* renderer, ID2D1Factory* d2dFactory);
 
-    ~wxD2DPathData();
+    ~wxD2DPathData() override;
 
     void SetFillMode(D2D1_FILL_MODE fillMode)
     {
@@ -2657,7 +2657,7 @@ public:
     wxD2DBitmapData(wxGraphicsRenderer* renderer, NativeType* pseudoNativeBitmap) :
         wxGraphicsBitmapData(renderer), m_bitmapHolder(pseudoNativeBitmap) {}
 
-    ~wxD2DBitmapData();
+    ~wxD2DBitmapData() override;
 
     // returns the native representation
     void* GetNativeBitmap() const override;
@@ -2733,7 +2733,7 @@ class wxD2DBrushResourceHolder : public wxD2DResourceHolder<B>
 {
 public:
     explicit wxD2DBrushResourceHolder(const wxBrush& brush) : m_sourceBrush(brush) {}
-    virtual ~wxD2DBrushResourceHolder() = default;
+    ~wxD2DBrushResourceHolder() override = default;
 protected:
     const wxBrush m_sourceBrush;
 };
@@ -3465,7 +3465,7 @@ public:
         return hr;
     }
 
-    ~wxD2DImageRenderTargetResourceHolder()
+    ~wxD2DImageRenderTargetResourceHolder() override
     {
         FlushRenderTargetToImage();
     }
@@ -3914,7 +3914,7 @@ public:
 
     wxD2DContext(wxGraphicsRenderer* renderer, ID2D1Factory* direct2dFactory, void* nativeContext);
 
-    ~wxD2DContext();
+    ~wxD2DContext() override;
 
     void Clip(const wxRegion& region) override;
 
@@ -4997,7 +4997,7 @@ class wxD2DRenderer : public wxGraphicsRenderer
 public :
     wxD2DRenderer();
 
-    virtual ~wxD2DRenderer();
+    ~wxD2DRenderer() override;
 
 	wxD2DRenderer(const wxD2DRenderer&) = delete;
 	wxD2DRenderer& operator=(const wxD2DRenderer&) = delete;
@@ -5066,7 +5066,7 @@ public :
         int flags = wxFONTFLAG_DEFAULT,
         const wxColour& col = *wxBLACK) override;
 
-    virtual wxGraphicsFont CreateFontAtDPI(const wxFont& font,
+    wxGraphicsFont CreateFontAtDPI(const wxFont& font,
                                            const wxRealPoint& dpi,
                                            const wxColour& col) override;
 
@@ -5085,7 +5085,7 @@ private:
     wxCOMPtr<ID2D1Factory> m_direct2dFactory;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

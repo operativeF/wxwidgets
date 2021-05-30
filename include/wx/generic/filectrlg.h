@@ -142,7 +142,7 @@ public:
                 long style = wxLC_LIST,
                 const wxValidator &validator = wxDefaultValidator,
                 const wxString &name = wxT("filelist") );
-    virtual ~wxFileListCtrl();
+    ~wxFileListCtrl() override;
 
     virtual void ChangeToListMode();
     virtual void ChangeToReportMode();
@@ -211,7 +211,7 @@ public:
                style, pos, size, name );
     }
 
-    virtual ~wxGenericFileCtrl() = default;
+    ~wxGenericFileCtrl() override = default;
 
     bool Create( wxWindow *parent,
                  wxWindowID id,

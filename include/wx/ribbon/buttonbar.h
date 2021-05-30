@@ -36,7 +36,7 @@ public:
                   const wxSize& size = wxDefaultSize,
                   long style = 0);
 
-    virtual ~wxRibbonButtonBar();
+    ~wxRibbonButtonBar() override;
 
     bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,
@@ -180,9 +180,9 @@ protected:
     void OnMouseDown(wxMouseEvent& evt);
     void OnMouseUp(wxMouseEvent& evt);
 
-    virtual wxSize DoGetNextSmallerSize(wxOrientation direction,
+    wxSize DoGetNextSmallerSize(wxOrientation direction,
                                       wxSize relative_to) const override;
-    virtual wxSize DoGetNextLargerSize(wxOrientation direction,
+    wxSize DoGetNextLargerSize(wxOrientation direction,
                                      wxSize relative_to) const override;
 
     void CommonInit(long style);
@@ -240,7 +240,7 @@ protected:
 private:
     public:
 	wxRibbonButtonBarEvent& operator=(const wxRibbonButtonBarEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 #endif

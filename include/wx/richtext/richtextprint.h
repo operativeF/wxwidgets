@@ -107,7 +107,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextPrintout : public wxPrintout
 {
 public:
     wxRichTextPrintout(const wxString& title = wxGetTranslation("Printout"));
-    virtual ~wxRichTextPrintout();
+    ~wxRichTextPrintout() override;
 
     /// The buffer to print
     void SetRichTextBuffer(wxRichTextBuffer* buffer) { m_richTextBuffer = buffer; }
@@ -162,7 +162,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextPrinting : public wxObject
 {
 public:
     wxRichTextPrinting(const wxString& name = wxGetTranslation("Printing"), wxWindow *parentWindow = nullptr);
-    virtual ~wxRichTextPrinting();
+    ~wxRichTextPrinting() override;
 
     /// Preview the file or buffer
 #if wxUSE_FFILE && wxUSE_STREAMS

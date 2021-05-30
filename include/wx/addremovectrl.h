@@ -85,7 +85,7 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxAddRemoveCtrlNameStr));
 
-    virtual ~wxAddRemoveCtrl();
+    ~wxAddRemoveCtrl() override;
 
     // Must be called for the control to be usable, takes ownership of the
     // pointer.

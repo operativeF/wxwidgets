@@ -67,7 +67,7 @@ public:
                 const wxString& name = wxASCII_STR(wxVListBoxNameStr));
 
     // dtor does some internal cleanup (deletes m_selStore if any)
-    virtual ~wxVListBox();
+    ~wxVListBox() override;
 
 
     // accessors

@@ -227,15 +227,15 @@ public:
         { return m_format; }
     size_t GetFormatCount(wxDataObjectBase::Direction WXUNUSED(dir) = Get) const override
         { return 1; }
-    virtual void GetAllFormats(wxDataFormat *formats,
+    void GetAllFormats(wxDataFormat *formats,
                                wxDataObjectBase::Direction WXUNUSED(dir) = Get) const override
         { *formats = m_format; }
     size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
         { return GetDataSize(); }
-    virtual bool GetDataHere(const wxDataFormat& WXUNUSED(format),
+    bool GetDataHere(const wxDataFormat& WXUNUSED(format),
                              void *buf) const override
         { return GetDataHere(buf); }
-    virtual bool SetData(const wxDataFormat& WXUNUSED(format),
+    bool SetData(const wxDataFormat& WXUNUSED(format),
                          size_t len, const void *buf) override
         { return SetData(len, buf); }
 
@@ -264,7 +264,7 @@ class WXDLLIMPEXP_CORE wxDataObjectComposite : public wxDataObject
 public:
     // ctor
     wxDataObjectComposite();
-    virtual ~wxDataObjectComposite();
+    ~wxDataObjectComposite() override;
 
     // add data object (it will be deleted by wxDataObjectComposite, hence it
     // must be allocated on the heap) whose format will become the preferred
@@ -292,9 +292,9 @@ public:
     bool GetDataHere(const wxDataFormat& format, void *buf) const override;
     bool SetData(const wxDataFormat& format, size_t len, const void *buf) override;
 #if defined(__WXMSW__)
-    virtual const void* GetSizeFromBuffer( const void* buffer, size_t* size,
+    const void* GetSizeFromBuffer( const void* buffer, size_t* size,
                                            const wxDataFormat& format ) override;
-    virtual void* SetSizeInBuffer( void* buffer, size_t size,
+    void* SetSizeInBuffer( void* buffer, size_t size,
                                    const wxDataFormat& format ) override;
     size_t GetBufferOffset( const wxDataFormat& format ) override;
 #endif
@@ -497,7 +497,7 @@ public:
     wxCustomDataObject(const wxDataFormat& format = wxFormatInvalid);
 
     // the dtor calls Free()
-    virtual ~wxCustomDataObject();
+    ~wxCustomDataObject() override;
 
     // you can call SetData() to set m_data: it will make a copy of the data
     // you pass - or you can use TakeData() which won't copy anything, but

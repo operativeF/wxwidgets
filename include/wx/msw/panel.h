@@ -34,7 +34,7 @@ public:
 	wxPanel(const wxPanel&) = delete;
 	wxPanel& operator=(const wxPanel&) = delete;
 
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

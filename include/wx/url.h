@@ -49,7 +49,7 @@ public:
     wxURL(const wxString& sUrl = wxEmptyString);
     wxURL(const wxURI& uri);
     wxURL(const wxURL& url);
-    virtual ~wxURL();
+    ~wxURL() override;
 
     wxURL& operator = (const wxString& url);
     wxURL& operator = (const wxURI& uri);

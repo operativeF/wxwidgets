@@ -117,7 +117,7 @@ public:
 private:
     public:
 	wxSpinEvent& operator=(const wxSpinEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

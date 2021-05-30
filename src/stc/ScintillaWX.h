@@ -115,7 +115,7 @@ class ScintillaWX : public ScintillaBase {
 public:
 
     ScintillaWX(wxStyledTextCtrl* win);
-    ~ScintillaWX();
+    ~ScintillaWX() override;
 
     // base class virtuals
     void Initialise() override;
@@ -136,10 +136,10 @@ public:
     void AddToPopUp(const char *label, int cmd = 0, bool enabled = true) override;
     void ClaimSelection() override;
 
-    virtual sptr_t DefWndProc(unsigned int iMessage,
+    sptr_t DefWndProc(unsigned int iMessage,
                               uptr_t wParam,
                               sptr_t lParam) override;
-    virtual sptr_t WndProc(unsigned int iMessage,
+    sptr_t WndProc(unsigned int iMessage,
                            uptr_t wParam,
                            sptr_t lParam) override;
 

@@ -61,7 +61,7 @@ public:
     // Overridden base class methods.
     // ------------------------------
 
-    virtual void AdjustForParentClientOrigin(int& WXUNUSED(x), int& WXUNUSED(y),
+    void AdjustForParentClientOrigin(int& WXUNUSED(x), int& WXUNUSED(y),
                                              int WXUNUSED(sizeFlags) = 0) const override
     {
         // Non owned windows positions don't need to be adjusted for parent

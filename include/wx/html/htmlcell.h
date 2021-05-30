@@ -200,7 +200,7 @@ class WXDLLIMPEXP_HTML wxHtmlCell : public wxObject
 {
 public:
     wxHtmlCell();
-    virtual ~wxHtmlCell();
+    ~wxHtmlCell() override;
 
     void SetParent(wxHtmlContainerCell *p) {m_Parent = p;}
     wxHtmlContainerCell *GetParent() const {return m_Parent;}
@@ -482,12 +482,12 @@ class WXDLLIMPEXP_HTML wxHtmlContainerCell : public wxHtmlCell
 {
 public:
     explicit wxHtmlContainerCell(wxHtmlContainerCell *parent);
-    virtual ~wxHtmlContainerCell();
+    ~wxHtmlContainerCell() override;
 
     void Layout(int w) override;
-    virtual void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
+    void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
                       wxHtmlRenderingInfo& info) override;
-    virtual void DrawInvisible(wxDC& dc, int x, int y,
+    void DrawInvisible(wxDC& dc, int x, int y,
                                wxHtmlRenderingInfo& info) override;
 
     bool AdjustPagebreak(int *pagebreak, int pageHeight) const override;
@@ -532,7 +532,7 @@ public:
     wxHtmlLinkInfo* GetLink(int x = 0, int y = 0) const override;
     const wxHtmlCell* Find(int condition, const void* param) const override;
 
-    virtual bool ProcessMouseClick(wxHtmlWindowInterface *window,
+    bool ProcessMouseClick(wxHtmlWindowInterface *window,
                                    const wxPoint& pos,
                                    const wxMouseEvent& event) override;
 
@@ -544,7 +544,7 @@ public:
     // see comment in wxHtmlCell about this method
     bool IsTerminalCell() const override { return false; }
 
-    virtual wxHtmlCell *FindCellByPos(wxCoord x, wxCoord y,
+    wxHtmlCell *FindCellByPos(wxCoord x, wxCoord y,
                                   unsigned flags = wxHTML_FIND_EXACT) const override;
 
     wxHtmlCell *GetFirstTerminal() const override;
@@ -610,9 +610,9 @@ class WXDLLIMPEXP_HTML wxHtmlColourCell : public wxHtmlCell
 {
 public:
     wxHtmlColourCell(const wxColour& clr, int flags = wxHTML_CLR_FOREGROUND) :  m_Colour(clr) { m_Flags = flags;}
-    virtual void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
+    void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
                       wxHtmlRenderingInfo& info) override;
-    virtual void DrawInvisible(wxDC& dc, int x, int y,
+    void DrawInvisible(wxDC& dc, int x, int y,
                                wxHtmlRenderingInfo& info) override;
 
     wxString GetDescription() const override;
@@ -638,9 +638,9 @@ class WXDLLIMPEXP_HTML wxHtmlFontCell : public wxHtmlCell
 {
 public:
     wxHtmlFontCell(wxFont *font) :  m_Font(*font) { }
-    virtual void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
+    void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
                       wxHtmlRenderingInfo& info) override;
-    virtual void DrawInvisible(wxDC& dc, int x, int y,
+    void DrawInvisible(wxDC& dc, int x, int y,
                                wxHtmlRenderingInfo& info) override;
 
     wxString GetDescription() const override;
@@ -673,10 +673,10 @@ public:
     // it's width according to parent container's width
     // (w is percent of parent's width)
     wxHtmlWidgetCell(wxWindow *wnd, int w = 0);
-    virtual ~wxHtmlWidgetCell() { m_Wnd->Destroy(); }
-    virtual void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
+    ~wxHtmlWidgetCell() override { m_Wnd->Destroy(); }
+    void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
                       wxHtmlRenderingInfo& info) override;
-    virtual void DrawInvisible(wxDC& dc, int x, int y,
+    void DrawInvisible(wxDC& dc, int x, int y,
                                wxHtmlRenderingInfo& info) override;
     void Layout(int w) override;
 

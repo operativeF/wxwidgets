@@ -48,7 +48,7 @@ public:
         m_Stream = stream;
     }
 
-    virtual ~wxFSFile() { delete m_Stream; }
+    ~wxFSFile() override { delete m_Stream; }
 
     // returns stream. This doesn't give away ownership of the stream object.
     wxInputStream *GetStream() const { return m_Stream; }
@@ -172,7 +172,7 @@ class WXDLLIMPEXP_BASE wxFileSystem : public wxObject
 {
 public:
     wxFileSystem()  { m_FindFileHandler = nullptr;}
-    virtual ~wxFileSystem();
+    ~wxFileSystem() override;
 
     // sets the current location. Every call to OpenFile is
     // relative to this location.
@@ -293,7 +293,7 @@ class WXDLLIMPEXP_BASE wxFSInputStream : public wxWrapperInputStream
 public:
     // Notice that wxFS_READ is implied in flags.
     wxFSInputStream(const wxString& filename, int flags = 0);
-    virtual ~wxFSInputStream();
+    ~wxFSInputStream() override;
 
 private:
     wxFSFile* m_file;

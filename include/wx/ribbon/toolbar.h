@@ -50,7 +50,7 @@ public:
                   const wxSize& size = wxDefaultSize,
                   long style = 0);
 
-    virtual ~wxRibbonToolBar();
+    ~wxRibbonToolBar() override;
 
     bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,
@@ -173,9 +173,9 @@ protected:
     void OnPaint(wxPaintEvent& evt);
     void OnSize(wxSizeEvent& evt);
 
-    virtual wxSize DoGetNextSmallerSize(wxOrientation direction,
+    wxSize DoGetNextSmallerSize(wxOrientation direction,
                                       wxSize relative_to) const override;
-    virtual wxSize DoGetNextLargerSize(wxOrientation direction,
+    wxSize DoGetNextLargerSize(wxOrientation direction,
                                      wxSize relative_to) const override;
 
     void CommonInit(long style);
@@ -222,7 +222,7 @@ protected:
 private:
     public:
 	wxRibbonToolBarEvent& operator=(const wxRibbonToolBarEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 #endif

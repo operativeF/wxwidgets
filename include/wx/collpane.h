@@ -44,7 +44,7 @@ public:
     wxString GetLabel() const override = 0;
     void SetLabel(const wxString& label) override = 0;
 
-    virtual bool
+    bool
     InformFirstDirection(int direction,
                          int size,
                          int availableOtherDir) override
@@ -94,7 +94,7 @@ private:
 
     public:
 	wxCollapsiblePaneEvent& operator=(const wxCollapsiblePaneEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

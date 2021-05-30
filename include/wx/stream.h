@@ -55,7 +55,7 @@ class WXDLLIMPEXP_BASE wxStreamBase : public wxObject
 {
 public:
     wxStreamBase();
-    virtual ~wxStreamBase();
+    ~wxStreamBase() override;
 
     // error testing
     wxStreamError GetLastError() const { return m_lasterror; }
@@ -95,7 +95,7 @@ class WXDLLIMPEXP_BASE wxInputStream : public wxStreamBase
 public:
     // ctor and dtor, nothing exciting
     wxInputStream();
-    virtual ~wxInputStream();
+    ~wxInputStream() override;
 
 
     // IO functions
@@ -235,7 +235,7 @@ class WXDLLIMPEXP_BASE wxOutputStream : public wxStreamBase
 {
 public:
     wxOutputStream();
-    virtual ~wxOutputStream();
+    ~wxOutputStream() override;
 
     void PutC(char c);
     virtual wxOutputStream& Write(const void *buffer, size_t size);
@@ -310,7 +310,7 @@ public:
     wxFilterInputStream();
     wxFilterInputStream(wxInputStream& stream);
     wxFilterInputStream(wxInputStream *stream);
-    virtual ~wxFilterInputStream();
+    ~wxFilterInputStream() override;
 
     char Peek() override { return m_parent_i_stream->Peek(); }
 
@@ -333,7 +333,7 @@ public:
     wxFilterOutputStream();
     wxFilterOutputStream(wxOutputStream& stream);
     wxFilterOutputStream(wxOutputStream *stream);
-    virtual ~wxFilterOutputStream();
+    ~wxFilterOutputStream() override;
 
     wxFileOffset GetLength() const override { return m_parent_o_stream->GetLength(); }
 
@@ -363,7 +363,7 @@ void WXDLLIMPEXP_BASE wxUseFilterClasses();
 class WXDLLIMPEXP_BASE wxFilterClassFactoryBase : public wxObject
 {
 public:
-    virtual ~wxFilterClassFactoryBase() = default;
+    ~wxFilterClassFactoryBase() override = default;
 
     wxString GetProtocol() const { return wxString(*GetProtocols()); }
     wxString PopExtension(const wxString& location) const;
@@ -384,7 +384,7 @@ protected:
 class WXDLLIMPEXP_BASE wxFilterClassFactory : public wxFilterClassFactoryBase
 {
 public:
-    virtual ~wxFilterClassFactory() = default;
+    ~wxFilterClassFactory() override = default;
 
     virtual wxFilterInputStream  *NewStream(wxInputStream& stream)  const = 0;
     virtual wxFilterOutputStream *NewStream(wxOutputStream& stream) const = 0;
@@ -570,7 +570,7 @@ public:
     wxBufferedInputStream(wxInputStream& stream, size_t bufsize);
 
 
-    virtual ~wxBufferedInputStream();
+    ~wxBufferedInputStream() override;
 
     char Peek() override;
     wxInputStream& Read(void *buffer, size_t size) override;
@@ -614,7 +614,7 @@ public:
     // and using the ctor above
     wxBufferedOutputStream(wxOutputStream& stream, size_t bufsize);
 
-    virtual ~wxBufferedOutputStream();
+    ~wxBufferedOutputStream() override;
 
     wxOutputStream& Write(const void *buffer, size_t size) override;
 

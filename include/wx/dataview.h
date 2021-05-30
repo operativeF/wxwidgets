@@ -283,7 +283,7 @@ public:
 protected:
     // Dtor is protected because the objects of this class must not be deleted,
     // DecRef() must be used instead.
-    virtual ~wxDataViewModel();
+    ~wxDataViewModel() override;
 
     // Helper function used by the default Compare() implementation to compare
     // values of types it is not aware about. Can be overridden in the derived
@@ -337,7 +337,7 @@ public:
     virtual unsigned int GetCount() const = 0;
 
     // implement some base class pure virtual directly
-    virtual wxDataViewItem
+    wxDataViewItem
     GetParent( const wxDataViewItem & WXUNUSED(item) ) const override
     {
         // items never have valid parent in this model
@@ -351,19 +351,19 @@ public:
     }
 
     // and implement some others by forwarding them to our own ones
-    virtual void GetValue( wxVariant &variant,
+    void GetValue( wxVariant &variant,
                            const wxDataViewItem &item, unsigned int col ) const override
     {
         GetValueByRow(variant, GetRow(item), col);
     }
 
-    virtual bool SetValue( const wxVariant &variant,
+    bool SetValue( const wxVariant &variant,
                            const wxDataViewItem &item, unsigned int col ) override
     {
         return SetValueByRow( variant, GetRow(item), col );
     }
 
-    virtual bool GetAttr(const wxDataViewItem &item, unsigned int col,
+    bool GetAttr(const wxDataViewItem &item, unsigned int col,
                          wxDataViewItemAttr &attr) const override
     {
         return GetAttrByRow( GetRow(item), col, attr );
@@ -442,7 +442,7 @@ public:
 
     // compare based on index
 
-    virtual int Compare( const wxDataViewItem &item1, const wxDataViewItem &item2,
+    int Compare( const wxDataViewItem &item1, const wxDataViewItem &item2,
                          unsigned int column, bool ascending ) const override;
     bool HasDefaultCompare() const override;
 
@@ -497,7 +497,7 @@ public:
         Init(renderer, model_column);
     }
 
-    virtual ~wxDataViewColumnBase();
+    ~wxDataViewColumnBase() override;
 
     // setters:
     virtual void SetOwner( wxDataViewCtrl *owner )
@@ -548,7 +548,7 @@ class WXDLLIMPEXP_CORE wxDataViewCtrlBase: public wxSystemThemedControl<wxContro
 {
 public:
     wxDataViewCtrlBase();
-    virtual ~wxDataViewCtrlBase();
+    ~wxDataViewCtrlBase() override;
 
 	wxDataViewCtrlBase(const wxDataViewCtrlBase&) = delete;
 	wxDataViewCtrlBase& operator=(const wxDataViewCtrlBase&) = delete;
@@ -812,7 +812,7 @@ private:
     int m_indent ;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -934,7 +934,7 @@ private:
 
     public:
 	wxDataViewEvent& operator=(const wxDataViewEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1039,7 +1039,7 @@ class WXDLLIMPEXP_CORE wxDataViewListStore: public wxDataViewIndexListModel
 {
 public:
     wxDataViewListStore();
-    ~wxDataViewListStore();
+    ~wxDataViewListStore() override;
 
     void PrependColumn( const wxString &varianttype );
     void InsertColumn( unsigned int pos, const wxString &varianttype );
@@ -1063,10 +1063,10 @@ public:
 
     wxString GetColumnType( unsigned int col ) const override;
 
-    virtual void GetValueByRow( wxVariant &value,
+    void GetValueByRow( wxVariant &value,
                            unsigned int row, unsigned int col ) const override;
 
-    virtual bool SetValueByRow( const wxVariant &value,
+    bool SetValueByRow( const wxVariant &value,
                            unsigned int row, unsigned int col ) override;
 
 
@@ -1085,7 +1085,7 @@ public:
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize, long style = wxDV_ROW_LINES,
            const wxValidator& validator = wxDefaultValidator );
-    ~wxDataViewListCtrl();
+    ~wxDataViewListCtrl() override;
 
     bool Create( wxWindow *parent, wxWindowID id,
            const wxPoint& pos = wxDefaultPosition,
@@ -1177,7 +1177,7 @@ private:
     wxDECLARE_EVENT_TABLE();
     public:
 	wxDataViewListCtrl& operator=(const wxDataViewListCtrl&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1230,7 +1230,7 @@ public:
     wxDataViewTreeStoreContainerNode( wxDataViewTreeStoreNode *parent,
         const wxString &text, const wxIcon &icon = wxNullIcon, const wxIcon &expanded = wxNullIcon,
         wxClientData *data = nullptr );
-    virtual ~wxDataViewTreeStoreContainerNode();
+    ~wxDataViewTreeStoreContainerNode() override;
 
     const wxDataViewTreeStoreNodes &GetChildren() const
         { return m_children; }
@@ -1266,7 +1266,7 @@ class WXDLLIMPEXP_CORE wxDataViewTreeStore: public wxDataViewModel
 {
 public:
     wxDataViewTreeStore();
-    ~wxDataViewTreeStore();
+    ~wxDataViewTreeStore() override;
 
     wxDataViewItem AppendItem( const wxDataViewItem& parent,
         const wxString &text, const wxIcon &icon = wxNullIcon, wxClientData *data = nullptr );
@@ -1303,15 +1303,15 @@ public:
 
     // implement base methods
 
-    virtual void GetValue( wxVariant &variant,
+    void GetValue( wxVariant &variant,
                            const wxDataViewItem &item, unsigned int col ) const override;
-    virtual bool SetValue( const wxVariant &variant,
+    bool SetValue( const wxVariant &variant,
                            const wxDataViewItem &item, unsigned int col ) override;
     wxDataViewItem GetParent( const wxDataViewItem &item ) const override;
     bool IsContainer( const wxDataViewItem &item ) const override;
     unsigned int GetChildren( const wxDataViewItem &item, wxDataViewItemArray &children ) const override;
 
-    virtual int Compare( const wxDataViewItem &item1, const wxDataViewItem &item2,
+    int Compare( const wxDataViewItem &item1, const wxDataViewItem &item2,
                          unsigned int column, bool ascending ) const override;
 
     bool HasDefaultCompare() const override
@@ -1409,7 +1409,7 @@ private:
     wxDECLARE_EVENT_TABLE();
     public:
 	wxDataViewTreeCtrl& operator=(const wxDataViewTreeCtrl&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

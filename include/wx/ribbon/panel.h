@@ -41,7 +41,7 @@ public:
                   const wxSize& size = wxDefaultSize,
                   long style = wxRIBBON_PANEL_DEFAULT_STYLE);
 
-    virtual ~wxRibbonPanel();
+    ~wxRibbonPanel() override;
 
     bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,
@@ -92,9 +92,9 @@ protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
     wxSize GetMinNotMinimisedSize() const;
 
-    virtual wxSize DoGetNextSmallerSize(wxOrientation direction,
+    wxSize DoGetNextSmallerSize(wxOrientation direction,
                                       wxSize relative_to) const override;
-    virtual wxSize DoGetNextLargerSize(wxOrientation direction,
+    wxSize DoGetNextLargerSize(wxOrientation direction,
                                      wxSize relative_to) const override;
 
     void DoSetSize(int x, int y, int width, int height, int sizeFlags = wxSIZE_AUTO) override;
@@ -162,7 +162,7 @@ protected:
 private:
     public:
 	wxRibbonPanelEvent& operator=(const wxRibbonPanelEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 #endif

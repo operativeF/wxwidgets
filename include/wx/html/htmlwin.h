@@ -250,7 +250,7 @@ public:
         Init();
         Create(parent, id, pos, size, style, name);
     }
-    virtual ~wxHtmlWindow();
+    ~wxHtmlWindow() override;
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
@@ -452,10 +452,10 @@ public:
     // wxHtmlWindowInterface methods:
     void SetHTMLWindowTitle(const wxString& title) override;
     void OnHTMLLinkClicked(const wxHtmlLinkInfo& link) override;
-    virtual wxHtmlOpeningStatus OnHTMLOpeningURL(wxHtmlURLType type,
+    wxHtmlOpeningStatus OnHTMLOpeningURL(wxHtmlURLType type,
                                                  const wxString& url,
                                                  wxString *redirect) const override;
-    virtual wxPoint HTMLCoordsToWindow(wxHtmlCell *cell,
+    wxPoint HTMLCoordsToWindow(wxHtmlCell *cell,
                                        const wxPoint& pos) const override;
     wxWindow* GetHTMLWindow() override;
     wxColour GetHTMLBackgroundColour() const override;
@@ -607,7 +607,7 @@ private:
 
     public:
 	wxHtmlCellEvent& operator=(const wxHtmlCellEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -638,7 +638,7 @@ private:
 
     public:
 	wxHtmlLinkEvent& operator=(const wxHtmlLinkEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

@@ -42,7 +42,7 @@ public:
                 long style = wxDEFAULT_FRAME_STYLE,
                 const wxString& name = wxASCII_STR(wxFrameNameStr));
 
-    virtual ~wxTopLevelWindowMSW();
+    ~wxTopLevelWindowMSW() override;
 
     // implement base class pure virtuals
     void SetTitle( const wxString& title) override;
@@ -156,7 +156,7 @@ protected:
     bool DoSelectAndSetIcon(const wxIconBundle& icons, int smX, int smY, int i);
 
     // override wxWindow virtual method to use CW_USEDEFAULT if necessary
-    virtual void MSWGetCreateWindowCoords(const wxPoint& pos,
+    void MSWGetCreateWindowCoords(const wxPoint& pos,
                                           const wxSize& size,
                                           int& x, int& y,
                                           int& w, int& h) const override;

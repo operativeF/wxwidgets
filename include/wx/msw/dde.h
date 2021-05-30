@@ -45,10 +45,10 @@ class WXDLLIMPEXP_BASE wxDDEConnection : public wxConnectionBase
 public:
   wxDDEConnection(void *buffer, size_t size); // use external buffer
   wxDDEConnection(); // use internal buffer
-  virtual ~wxDDEConnection();
+  ~wxDDEConnection() override;
 
   // implement base class pure virtual methods
-  virtual const void *Request(const wxString& item,
+  const void *Request(const wxString& item,
                               size_t *size = nullptr,
                               wxIPCFormat format = wxIPC_TEXT) override;
   bool StartAdvise(const wxString& item) override;
@@ -57,9 +57,9 @@ public:
 
 protected:
   bool DoExecute(const void *data, size_t size, wxIPCFormat format) override;
-  virtual bool DoPoke(const wxString& item, const void *data, size_t size,
+  bool DoPoke(const wxString& item, const void *data, size_t size,
                       wxIPCFormat format) override;
-  virtual bool DoAdvise(const wxString& item, const void *data, size_t size,
+  bool DoAdvise(const wxString& item, const void *data, size_t size,
                         wxIPCFormat format) override;
 
 public:
@@ -81,7 +81,7 @@ class WXDLLIMPEXP_BASE wxDDEServer : public wxServerBase
 public:
     wxDDEServer();
     bool Create(const wxString& server_name) override;
-    virtual ~wxDDEServer();
+    ~wxDDEServer() override;
 
     wxConnectionBase *OnAcceptConnection(const wxString& topic) override;
 
@@ -106,12 +106,12 @@ class WXDLLIMPEXP_BASE wxDDEClient: public wxClientBase
 {
 public:
     wxDDEClient();
-    virtual ~wxDDEClient();
+    ~wxDDEClient() override;
 
     bool ValidHost(const wxString& host) override;
 
     // Call this to make a connection. Returns NULL if cannot.
-    virtual wxConnectionBase *MakeConnection(const wxString& host,
+    wxConnectionBase *MakeConnection(const wxString& host,
                                              const wxString& server,
                                              const wxString& topic) override;
 

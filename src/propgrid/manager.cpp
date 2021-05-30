@@ -227,7 +227,7 @@ public:
         Bind(wxEVT_HEADER_END_RESIZE, &wxPGHeaderCtrl::OnEndResize, this);
     }
 
-    virtual ~wxPGHeaderCtrl()
+    ~wxPGHeaderCtrl() override
     {
         for (std::vector<wxHeaderColumnSimple*>::const_iterator it = m_columns.begin();
              it != m_columns.end(); ++it)
@@ -2174,7 +2174,7 @@ public:
     {
         m_it.Init(manager->GetPage(0), flags);
     }
-    virtual ~wxPGVIteratorBase_Manager() = default;
+    ~wxPGVIteratorBase_Manager() override = default;
     void Next() override
     {
         m_it.Next();

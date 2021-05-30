@@ -66,7 +66,7 @@ public:
         Create(parent, title, defaultPath, style, pos, sz, name);
     }
 
-    virtual ~wxDirDialogBase() = default;
+    ~wxDirDialogBase() override = default;
 
 
     bool Create(wxWindow *parent,

@@ -102,7 +102,7 @@ class wxButtonImageData: public wxObject
 {
 public:
     wxButtonImageData() = default;
-    virtual ~wxButtonImageData() = default;
+    ~wxButtonImageData() override = default;
 
     virtual wxBitmap GetBitmap(wxAnyButton::State which) const = 0;
     virtual void SetBitmap(const wxBitmap& bitmap, wxAnyButton::State which) = 0;

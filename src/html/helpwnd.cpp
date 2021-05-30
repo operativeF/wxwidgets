@@ -90,7 +90,7 @@ class wxHtmlHelpHashData : public wxObject
     public:
         wxHtmlHelpHashData(int index, wxTreeItemId id)  
             { m_Index = index; m_Id = id;}
-        virtual ~wxHtmlHelpHashData() = default;
+        ~wxHtmlHelpHashData() override = default;
 
         int m_Index;
         wxTreeItemId m_Id;

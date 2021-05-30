@@ -208,7 +208,7 @@ public:
         Create(parent, id, pos, size, style, validator, name);
     }
 
-    virtual ~wxDataViewCtrl();
+    ~wxDataViewCtrl() override;
 
     void Init();
 
@@ -249,11 +249,11 @@ public:
     void SelectAll() override;
     void UnselectAll() override;
 
-    virtual void EnsureVisible( const wxDataViewItem & item,
+    void EnsureVisible( const wxDataViewItem & item,
                                 const wxDataViewColumn *column = nullptr ) override;
-    virtual void HitTest( const wxPoint & point, wxDataViewItem & item,
+    void HitTest( const wxPoint & point, wxDataViewItem & item,
                           wxDataViewColumn* &column ) const override;
-    virtual wxRect GetItemRect( const wxDataViewItem & item,
+    wxRect GetItemRect( const wxDataViewItem & item,
                                 const wxDataViewColumn *column = nullptr ) const override;
 
     bool SetRowHeight( int rowHeight ) override;
@@ -428,14 +428,14 @@ class WXDLLIMPEXP_CORE wxDataViewCtrlAccessible: public wxWindowAccessible
 {
 public:
     wxDataViewCtrlAccessible(wxDataViewCtrl* win);
-    virtual ~wxDataViewCtrlAccessible() = default;
+    ~wxDataViewCtrlAccessible() override = default;
 
-    virtual wxAccStatus HitTest(const wxPoint& pt, int* childId,
+    wxAccStatus HitTest(const wxPoint& pt, int* childId,
                                 wxAccessible** childObject) override;
 
     wxAccStatus GetLocation(wxRect& rect, int elementId) override;
 
-    virtual wxAccStatus Navigate(wxNavDir navDir, int fromId,
+    wxAccStatus Navigate(wxNavDir navDir, int fromId,
                                  int* toId, wxAccessible** toObject) override;
 
     wxAccStatus GetName(int childId, wxString* name) override;

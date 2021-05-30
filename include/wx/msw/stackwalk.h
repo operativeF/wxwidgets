@@ -51,7 +51,7 @@ public:
         return DoGetParamCount();
     }
 
-    virtual bool
+    bool
     GetParam(size_t n, wxString *type, wxString *name, wxString *value) const override;
 
     // callback used by OnGetParam(), don't call directly

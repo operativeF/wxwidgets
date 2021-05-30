@@ -140,7 +140,7 @@ public:
 #endif // wxUSE_STREAMS
 
     // dtor will save unsaved data
-  virtual ~wxFileConfig();
+  ~wxFileConfig() override;
 
   // under Unix, set the umask to be used for the file creation, do nothing
   // under other systems

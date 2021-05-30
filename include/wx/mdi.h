@@ -54,7 +54,7 @@ public:
      */
 
 #if wxUSE_MENUS
-    virtual ~wxMDIParentFrameBase()
+    ~wxMDIParentFrameBase() override
     {
         delete m_windowMenu;
     }

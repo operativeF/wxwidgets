@@ -34,7 +34,7 @@ public:
     };
 
     wxStaticBitmapBase() = default;
-    virtual ~wxStaticBitmapBase();
+    ~wxStaticBitmapBase() override;
 
     // our interface
     virtual void SetIcon(const wxIcon& icon) = 0;

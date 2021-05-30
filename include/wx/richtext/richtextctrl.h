@@ -256,7 +256,7 @@ public:
     /**
         Destructor.
     */
-    virtual ~wxRichTextCtrl( );
+    ~wxRichTextCtrl( ) override;
 
 // Operations
 
@@ -608,7 +608,7 @@ public:
 
         This function looks for a suitable wxRichTextFileHandler object.
     */
-    virtual bool DoSaveFile(const wxString& file = wxEmptyString,
+    bool DoSaveFile(const wxString& file = wxEmptyString,
                             int fileType = wxRICHTEXT_TYPE_ANY) override;
 #endif // wxUSE_FFILE && wxUSE_STREAMS
 
@@ -898,7 +898,7 @@ public:
         scrolling).
     */
     wxTextCtrlHitTestResult HitTest(const wxPoint& pt, long *pos) const override;
-    virtual wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
+    wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
                                             wxTextCoord *col,
                                             wxTextCoord *row) const override;
 
@@ -2000,7 +2000,7 @@ public:
     /**
         Overrides standard refresh in order to provoke delayed image loading.
     */
-    virtual void Refresh( bool eraseBackground = true,
+    void Refresh( bool eraseBackground = true,
                        const wxRect *rect = (const wxRect *) nullptr ) override;
 
     /**
@@ -2662,7 +2662,7 @@ protected:
 private:
     public:
 	wxRichTextEvent& operator=(const wxRichTextEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

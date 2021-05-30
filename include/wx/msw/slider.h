@@ -49,7 +49,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxSliderNameStr));
 
-    virtual ~wxSlider();
+    ~wxSlider() override;
 
     // slider methods
     int GetValue() const override;
@@ -88,7 +88,7 @@ public:
     bool CanApplyThemeBorder() const override { return false; }
 
     void Command(wxCommandEvent& event) override;
-    virtual bool MSWOnScroll(int orientation, WXWORD wParam,
+    bool MSWOnScroll(int orientation, WXWORD wParam,
                              WXWORD pos, WXHWND control) override;
 
     bool Show(bool show = true) override;
@@ -149,7 +149,7 @@ protected:
     void DoSetTickFreq(int freq) override;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

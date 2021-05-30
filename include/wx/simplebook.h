@@ -113,7 +113,7 @@ public:
     // Implement base class pure virtual methods.
 
     // Page management
-    virtual bool InsertPage(size_t n,
+    bool InsertPage(size_t n,
                             wxWindow *page,
                             const wxString& text,
                             bool bSelect = false,

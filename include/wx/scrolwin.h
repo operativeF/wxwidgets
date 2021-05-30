@@ -113,7 +113,7 @@ class WXDLLIMPEXP_CORE wxScrollHelperBase : public wxAnyScrollHelperBase
 public:
     // ctor must be given the associated window
     wxScrollHelperBase(wxWindow *winToScroll);
-    virtual ~wxScrollHelperBase();
+    ~wxScrollHelperBase() override;
 
     // configure the scrolling
     virtual void SetScrollbars(int pixelsPerUnitX, int pixelsPerUnitY,
@@ -502,7 +502,7 @@ public:
 	wxScrolledWindow(const wxScrolledWindow&) = delete;
 	wxScrolledWindow& operator=(const wxScrolledWindow&) = delete;
 
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

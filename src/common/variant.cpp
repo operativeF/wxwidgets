@@ -1846,7 +1846,7 @@ class WXDLLIMPEXP_BASE wxVariantDataList: public wxVariantData
 public:
     wxVariantDataList() = default;
     explicit wxVariantDataList(const wxVariantList& list);
-    virtual ~wxVariantDataList();
+    ~wxVariantDataList() override;
 
     wxVariantList& GetValue() { return m_value; }
     void SetValue(const wxVariantList& value) ;

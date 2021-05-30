@@ -260,7 +260,7 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	bool convertPastes;
 
 	Editor();
-	virtual ~Editor();
+	~Editor() override;
 	virtual void Initialise() = 0;
 	virtual void Finalise();
 
@@ -273,14 +273,14 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 
 	// The top left visible point in main window coordinates. Will be 0,0 except for
 	// scroll views where it will be equivalent to the current scroll position.
-	virtual Point GetVisibleOriginInMain() const;
+	Point GetVisibleOriginInMain() const override;
 	PointDocument DocumentPointFromView(Point ptView) const;  // Convert a point from view space to document
-	int TopLineOfMain() const;   // Return the line at Main's y coordinate 0
+	int TopLineOfMain() const override;   // Return the line at Main's y coordinate 0
 	virtual PRectangle GetClientRectangle() const;
 	virtual PRectangle GetClientDrawingRectangle();
 	PRectangle GetTextRectangle() const;
 
-	virtual int LinesOnScreen() const;
+	int LinesOnScreen() const override;
 	int LinesToScroll() const;
 	int MaxScrollPos() const;
 	SelectionPosition ClampPositionIntoDocument(SelectionPosition sp) const;
@@ -443,14 +443,14 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	void NotifyDwelling(Point pt, bool state);
 	void NotifyZoom();
 
-	void NotifyModifyAttempt(Document *document, void *userData);
-	void NotifySavePoint(Document *document, void *userData, bool atSavePoint);
+	void NotifyModifyAttempt(Document *document, void *userData) override;
+	void NotifySavePoint(Document *document, void *userData, bool atSavePoint) override;
 	void CheckModificationForWrap(DocModification mh);
-	void NotifyModified(Document *document, DocModification mh, void *userData);
-	void NotifyDeleted(Document *document, void *userData);
-	void NotifyStyleNeeded(Document *doc, void *userData, int endPos);
-	void NotifyLexerChanged(Document *doc, void *userData);
-	void NotifyErrorOccurred(Document *doc, void *userData, int status);
+	void NotifyModified(Document *document, DocModification mh, void *userData) override;
+	void NotifyDeleted(Document *document, void *userData) override;
+	void NotifyStyleNeeded(Document *doc, void *userData, int endPos) override;
+	void NotifyLexerChanged(Document *doc, void *userData) override;
+	void NotifyErrorOccurred(Document *doc, void *userData, int status) override;
 	void NotifyMacroRecord(unsigned int iMessage, uptr_t wParam, sptr_t lParam);
 
 	void ContainerNeedsUpdate(int flags);
@@ -563,7 +563,7 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	bool PositionIsHotspot(int position) const;
 	bool PointIsHotspot(Point pt);
 	void SetHotSpotRange(Point *pt);
-	Range GetHotSpotRange() const;
+	Range GetHotSpotRange() const override;
 	void SetHoverIndicatorPosition(int position);
 	void SetHoverIndicatorPoint(Point pt);
 

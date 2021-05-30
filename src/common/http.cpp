@@ -446,7 +446,7 @@ public:
     }
 
     size_t GetSize() const override { return m_httpsize; }
-    virtual ~wxHTTPStream() { m_http->Abort(); }
+    ~wxHTTPStream() override { m_http->Abort(); }
 
 protected:
     size_t OnSysRead(void *buffer, size_t bufsize) override;

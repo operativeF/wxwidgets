@@ -147,7 +147,7 @@ public:
 protected:
     // virtual dtor for any base class - private because only DecRef() can
     // delete us
-    virtual ~wxGridCellWorker();
+    ~wxGridCellWorker() override;
 
 private:
     // suppress the stupid gcc warning about the class having private dtor and
@@ -492,7 +492,7 @@ public:
 
 protected:
     // the dtor is private because only DecRef() can delete us
-    virtual ~wxGridCellEditor();
+    ~wxGridCellEditor() override;
 
     // Helper for the derived classes positioning the control according to the
     // attribute alignment if the desired control size is smaller than the cell
@@ -534,7 +534,7 @@ class wxGridCellActivatableEditor : public wxGridCellEditor
 {
 public:
     // In this class these methods must be overridden.
-    virtual wxGridActivationResult
+    wxGridActivationResult
     TryActivate(int row, int col, wxGrid* grid,
                 const wxGridActivationSource& actSource) override = 0;
     void DoActivate(int row, int col, wxGrid* grid) override = 0;
@@ -546,7 +546,7 @@ public:
         { wxFAIL; }
     void BeginEdit(int, int, wxGrid*) override
         { wxFAIL; }
-    virtual bool EndEdit(int, int, const wxGrid*,
+    bool EndEdit(int, int, const wxGrid*,
                          const wxString&, wxString*) override
         { wxFAIL; return false; }
     void ApplyEdit(int, int, wxGrid*) override
@@ -607,7 +607,7 @@ class WXDLLIMPEXP_CORE wxGridRowHeaderRendererDefault
     : public wxGridRowHeaderRenderer
 {
 public:
-    virtual void DrawBorder(const wxGrid& grid,
+    void DrawBorder(const wxGrid& grid,
                             wxDC& dc,
                             wxRect& rect) const override;
 };
@@ -617,7 +617,7 @@ class WXDLLIMPEXP_CORE wxGridColumnHeaderRendererDefault
     : public wxGridColumnHeaderRenderer
 {
 public:
-    virtual void DrawBorder(const wxGrid& grid,
+    void DrawBorder(const wxGrid& grid,
                             wxDC& dc,
                             wxRect& rect) const override;
 };
@@ -627,7 +627,7 @@ class WXDLLIMPEXP_CORE wxGridCornerHeaderRendererDefault
     : public wxGridCornerHeaderRenderer
 {
 public:
-    virtual void DrawBorder(const wxGrid& grid,
+    void DrawBorder(const wxGrid& grid,
                             wxDC& dc,
                             wxRect& rect) const override;
 };
@@ -818,7 +818,7 @@ public:
 
 protected:
     // the dtor is private because only DecRef() can delete us
-    virtual ~wxGridCellAttr()
+    ~wxGridCellAttr() override
     {
         wxSafeDecRef(m_renderer);
         wxSafeDecRef(m_editor);
@@ -882,7 +882,7 @@ class WXDLLIMPEXP_CORE wxGridCellAttrProvider : public wxClientDataContainer
 {
 public:
     wxGridCellAttrProvider();
-    virtual ~wxGridCellAttrProvider();
+    ~wxGridCellAttrProvider() override;
 
     // DecRef() must be called on the returned pointer
     virtual wxGridCellAttr *GetAttr(int row, int col,
@@ -1175,7 +1175,7 @@ class WXDLLIMPEXP_CORE wxGridTableBase : public wxObject,
 {
 public:
     wxGridTableBase();
-    virtual ~wxGridTableBase();
+    ~wxGridTableBase() override;
 
     // You must override these functions in a derived table class
     //
@@ -1406,7 +1406,7 @@ private:
     wxString m_cornerLabel;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -1501,7 +1501,7 @@ public:
                 long style = wxWANTS_CHARS,
                 const wxString& name = wxASCII_STR(wxGridNameStr));
 
-    virtual ~wxGrid();
+    ~wxGrid() override;
 
     // however to initialize grid data either CreateGrid() (to use a simple
     // default table class) or {Set,Assign}Table() (to use a custom table) must
@@ -3077,7 +3077,7 @@ private:
 
     public:
 	wxGridEvent& operator=(const wxGridEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3137,7 +3137,7 @@ private:
 
     public:
 	wxGridSizeEvent& operator=(const wxGridSizeEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3206,7 +3206,7 @@ protected:
 
     public:
 	wxGridRangeSelectEvent& operator=(const wxGridRangeSelectEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3247,7 +3247,7 @@ private:
 
     public:
 	wxGridEditorCreatedEvent& operator=(const wxGridEditorCreatedEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

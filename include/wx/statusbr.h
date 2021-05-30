@@ -111,7 +111,7 @@ class WXDLLIMPEXP_CORE wxStatusBarBase : public wxControl
 public:
     wxStatusBarBase();
 
-    virtual ~wxStatusBarBase();
+    ~wxStatusBarBase() override;
 
     // field count
     // -----------

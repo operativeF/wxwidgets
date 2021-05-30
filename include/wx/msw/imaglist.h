@@ -35,7 +35,7 @@ public:
     Create(width, height, mask, initialCount);
   }
   
-  virtual ~wxImageList();
+  ~wxImageList() override;
 
 	wxImageList(const wxImageList&) = delete;
 	wxImageList& operator=(const wxImageList&) = delete;
@@ -201,7 +201,7 @@ protected:
   bool m_useMask{false};
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

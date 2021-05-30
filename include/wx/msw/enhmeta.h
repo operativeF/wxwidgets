@@ -36,7 +36,7 @@ public:
     wxEnhMetaFile& operator=(const wxEnhMetaFile& metafile)
         { Free(); Assign(metafile); return *this; }
 
-    virtual ~wxEnhMetaFile()
+    ~wxEnhMetaFile() override
         { Free(); }
 
     // display the picture stored in the metafile on the given DC
@@ -112,7 +112,7 @@ public:
     // obtain a pointer to the new metafile (caller should delete it)
     wxEnhMetaFile *Close();
 
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -146,7 +146,7 @@ public:
     void GetAllFormats(wxDataFormat *formats, Direction dir) const override;
     size_t GetDataSize(const wxDataFormat& format) const override;
     bool GetDataHere(const wxDataFormat& format, void *buf) const override;
-    virtual bool SetData(const wxDataFormat& format, size_t len,
+    bool SetData(const wxDataFormat& format, size_t len,
                          const void *buf) override;
 
 protected:
@@ -186,10 +186,10 @@ public:
 
     size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
         { return GetDataSize(); }
-    virtual bool GetDataHere(const wxDataFormat& WXUNUSED(format),
+    bool GetDataHere(const wxDataFormat& WXUNUSED(format),
                              void *buf) const override
         { return GetDataHere(buf); }
-    virtual bool SetData(const wxDataFormat& WXUNUSED(format),
+    bool SetData(const wxDataFormat& WXUNUSED(format),
                          size_t len, const void *buf) override
         { return SetData(len, buf); }
 

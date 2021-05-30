@@ -59,7 +59,7 @@ public:
         SetMainLabelAndNote(label.BeforeFirst('\n'), label.AfterFirst('\n'));
     }
 
-    virtual void SetMainLabelAndNote(const wxString& mainLabel,
+    void SetMainLabelAndNote(const wxString& mainLabel,
                                      const wxString& note) override;
 
     WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
@@ -70,7 +70,7 @@ protected:
     bool HasNativeBitmap() const override;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

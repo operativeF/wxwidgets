@@ -107,7 +107,7 @@ class WXDLLIMPEXP_HTML wxHtmlSearchEngine : public wxObject
 {
 public:
     wxHtmlSearchEngine()  = default;
-    virtual ~wxHtmlSearchEngine() = default;
+    ~wxHtmlSearchEngine() override = default;
 
     // Sets the keyword we will be searching for
     virtual void LookFor(const wxString& keyword, bool case_sensitive, bool whole_words_only);
@@ -168,7 +168,7 @@ class WXDLLIMPEXP_HTML wxHtmlHelpData : public wxObject
 
 public:
     wxHtmlHelpData();
-    virtual ~wxHtmlHelpData();
+    ~wxHtmlHelpData() override;
 
     // Sets directory where temporary files are stored.
     // These temp files are index & contents file in binary (much faster to read)

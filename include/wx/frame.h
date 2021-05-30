@@ -58,7 +58,7 @@ class WXDLLIMPEXP_CORE wxFrameBase : public wxTopLevelWindow
 public:
     // construction
     wxFrameBase();
-    virtual ~wxFrameBase();
+    ~wxFrameBase() override;
 
     wxFrame *New(wxWindow *parent,
                  wxWindowID winid,

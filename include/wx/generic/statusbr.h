@@ -37,7 +37,7 @@ public:
         Create(parent, winid, style, name);
     }
 
-    virtual ~wxStatusBarGeneric();
+    ~wxStatusBarGeneric() override;
 
 	wxStatusBarGeneric(const wxStatusBarGeneric&) = delete;
 	wxStatusBarGeneric& operator=(const wxStatusBarGeneric&) = delete;
@@ -115,7 +115,7 @@ private:
     wxDECLARE_EVENT_TABLE();
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

@@ -62,7 +62,7 @@ public:
     wxTarEntry(const wxString& name = wxEmptyString,
                const wxDateTime& dt = wxDateTime::Now(),
                wxFileOffset size = wxInvalidOffset);
-    virtual ~wxTarEntry();
+    ~wxTarEntry() override;
 
     wxTarEntry(const wxTarEntry& entry);
     wxTarEntry& operator=(const wxTarEntry& entry);
@@ -158,7 +158,7 @@ public:
 
     wxTarInputStream(wxInputStream& stream, wxMBConv& conv = wxConvLocal);
     wxTarInputStream(wxInputStream *stream, wxMBConv& conv = wxConvLocal);
-    virtual ~wxTarInputStream();
+    ~wxTarInputStream() override;
 
     bool OpenEntry(wxTarEntry& entry);
     bool CloseEntry() override;
@@ -216,7 +216,7 @@ public:
     wxTarOutputStream(wxOutputStream *stream,
                       wxTarFormat format = wxTAR_PAX,
                       wxMBConv& conv = wxConvLocal);
-    virtual ~wxTarOutputStream();
+    ~wxTarOutputStream() override;
 
     bool PutNextEntry(wxTarEntry *entry);
 

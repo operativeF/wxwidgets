@@ -68,7 +68,7 @@ public:
                 double inc = 1,
                 const wxString& name = wxT("wxSpinCtrl"));
 
-    virtual ~wxSpinCtrlGenericBase();
+    ~wxSpinCtrlGenericBase() override;
 
     // accessors
     wxString GetTextValue() const override;

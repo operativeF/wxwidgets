@@ -409,7 +409,7 @@ public:
 		else
 			return nullptr;
 	}
-	size_t CaseConvertString(char *converted, size_t sizeConverted, const char *mixed, size_t lenMixed) {
+	size_t CaseConvertString(char *converted, size_t sizeConverted, const char *mixed, size_t lenMixed) override {
 		size_t lenConverted = 0;
 		size_t mixedPos = 0;
 		unsigned char bytes[UTF8MaxBytes + 1];

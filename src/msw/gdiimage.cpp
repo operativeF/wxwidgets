@@ -67,10 +67,10 @@ public:
     {
     }
 
-    virtual bool LoadFile(wxBitmap *bitmap,
+    bool LoadFile(wxBitmap *bitmap,
                           const wxString& name, wxBitmapType flags,
                           int desiredWidth, int desiredHeight) override;
-    virtual bool SaveFile(const wxBitmap *bitmap,
+    bool SaveFile(const wxBitmap *bitmap,
                           const wxString& name, wxBitmapType type,
                           const wxPalette *palette = nullptr) const override;
 
@@ -87,7 +87,7 @@ public:
     {
     }
 
-    virtual bool LoadFile(wxBitmap *bitmap,
+    bool LoadFile(wxBitmap *bitmap,
                           const wxString& name, wxBitmapType flags,
                           int desiredWidth, int desiredHeight) override;
 
@@ -104,7 +104,7 @@ public:
     }
 
     // creating and saving icons is not supported
-    virtual bool Create(wxGDIImage *WXUNUSED(image),
+    bool Create(wxGDIImage *WXUNUSED(image),
                         const void* WXUNUSED(data),
                         wxBitmapType WXUNUSED(flags),
                         int WXUNUSED(width),
@@ -114,14 +114,14 @@ public:
         return false;
     }
 
-    virtual bool Save(const wxGDIImage *WXUNUSED(image),
+    bool Save(const wxGDIImage *WXUNUSED(image),
                       const wxString& WXUNUSED(name),
                       wxBitmapType WXUNUSED(type)) const override
     {
         return false;
     }
 
-    virtual bool Load(wxGDIImage *image,
+    bool Load(wxGDIImage *image,
                       const wxString& name,
                       wxBitmapType flags,
                       int desiredWidth, int desiredHeight) override
@@ -148,7 +148,7 @@ public:
     }
 
 protected:
-    virtual bool LoadIcon(wxIcon *icon,
+    bool LoadIcon(wxIcon *icon,
                           const wxString& name, wxBitmapType flags,
                           int desiredWidth = -1, int desiredHeight = -1) override;
 
@@ -166,7 +166,7 @@ public:
     }
 
 protected:
-    virtual bool LoadIcon(wxIcon *icon,
+    bool LoadIcon(wxIcon *icon,
                           const wxString& name, wxBitmapType flags,
                           int desiredWidth = -1, int desiredHeight = -1) override;
 
@@ -185,7 +185,7 @@ public:
     {
     }
 
-    virtual bool LoadFile(wxBitmap *bitmap,
+    bool LoadFile(wxBitmap *bitmap,
                           const wxString& name, wxBitmapType flags,
                           int desiredWidth, int desiredHeight) override;
 

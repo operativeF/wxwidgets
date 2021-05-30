@@ -44,7 +44,7 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxStaticBitmapNameStr));
 
-    virtual ~wxStaticBitmap() { Free(); }
+    ~wxStaticBitmap() override { Free(); }
 
     void SetIcon(const wxIcon& icon) override { SetImage(&icon); }
     void SetBitmap(const wxBitmap& bitmap) override { SetImage(&bitmap); }

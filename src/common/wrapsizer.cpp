@@ -43,7 +43,7 @@ public:
         item.SetProportion(INT_MAX);
     }
 
-    ~wxPropChanger()
+    ~wxPropChanger() override
     {
         // check if the sizer still has this item, it could have been removed
         if ( m_sizer.GetChildren().Find(&m_item) )

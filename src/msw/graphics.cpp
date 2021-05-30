@@ -136,7 +136,7 @@ class wxGDIPlusPathData : public wxGraphicsPathData
 {
 public :
     explicit wxGDIPlusPathData(wxGraphicsRenderer* renderer, GraphicsPath* path = nullptr);
-    ~wxGDIPlusPathData();
+    ~wxGDIPlusPathData() override;
 
     wxGraphicsObjectRefData *Clone() const override;
 
@@ -211,7 +211,7 @@ class wxGDIPlusMatrixData : public wxGraphicsMatrixData
 {
 public :
     explicit wxGDIPlusMatrixData(wxGraphicsRenderer* renderer, Matrix* matrix = nullptr) ;
-    virtual ~wxGDIPlusMatrixData() ;
+    ~wxGDIPlusMatrixData() override ;
 
     wxGraphicsObjectRefData* Clone() const override;
 
@@ -219,11 +219,11 @@ public :
     void Concat( const wxGraphicsMatrixData *t ) override;
 
     // sets the matrix to the respective values
-    virtual void Set(double a=1.0, double b=0.0, double c=0.0, double d=1.0,
+    void Set(double a=1.0, double b=0.0, double c=0.0, double d=1.0,
         double tx=0.0, double ty=0.0) override;
 
     // gets the component valuess of the matrix
-    virtual void Get(double* a=nullptr, double* b=nullptr,  double* c=nullptr,
+    void Get(double* a=nullptr, double* b=nullptr,  double* c=nullptr,
                      double* d=nullptr, double* tx=nullptr, double* ty=nullptr) const override;
 
     // makes this the inverse matrix
@@ -283,7 +283,7 @@ public:
                                    const wxGraphicsGradientStops& stops,
                                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix);
 protected:
-    virtual ~wxGDIPlusPenBrushBaseData();
+    ~wxGDIPlusPenBrushBaseData() override;
 
     Brush* m_brush;
     GraphicsPath* m_brushPath;
@@ -303,7 +303,7 @@ class wxGDIPlusPenData : public wxGDIPlusPenBrushBaseData
 {
 public:
     wxGDIPlusPenData( wxGraphicsRenderer* renderer, const wxGraphicsPenInfo &info );
-    ~wxGDIPlusPenData();
+    ~wxGDIPlusPenData() override;
 
     void Init() override;
 
@@ -321,7 +321,7 @@ class wxGDIPlusBrushData : public wxGDIPlusPenBrushBaseData
 public:
     explicit wxGDIPlusBrushData( wxGraphicsRenderer* renderer );
     wxGDIPlusBrushData( wxGraphicsRenderer* renderer, const wxBrush &brush );
-    ~wxGDIPlusBrushData ();
+    ~wxGDIPlusBrushData () override;
 
     virtual Brush* GetGDIPlusBrush() { return m_brush; }
 
@@ -333,7 +333,7 @@ public:
     wxGDIPlusBitmapData( wxGraphicsRenderer* renderer, Bitmap* bitmap );
     wxGDIPlusBitmapData( wxGraphicsRenderer* renderer, const wxBitmap &bmp );
     wxGDIPlusBitmapData(wxGraphicsRenderer* renderer, const wxImage& img);
-    ~wxGDIPlusBitmapData ();
+    ~wxGDIPlusBitmapData () override;
 
     virtual Bitmap* GetGDIPlusBitmap() { return m_bitmap; }
     void* GetNativeBitmap() const override { return m_bitmap; }
@@ -367,7 +367,7 @@ public:
                       int style,
                       Brush* textBrush);
 
-    ~wxGDIPlusFontData();
+    ~wxGDIPlusFontData() override;
 
     virtual Brush* GetGDIPlusBrush() { return m_textBrush; }
     virtual Font* GetGDIPlusFont() { return m_font; }
@@ -413,7 +413,7 @@ public:
     wxGDIPlusContext( wxGraphicsRenderer* renderer, Graphics* gr);
     explicit wxGDIPlusContext(wxGraphicsRenderer* renderer);
 
-    virtual ~wxGDIPlusContext();
+    ~wxGDIPlusContext() override;
 
     void Clip( const wxRegion &region ) override;
     // clips drawings to the rect
@@ -474,7 +474,7 @@ public:
     void PushState() override;
     void PopState() override;
 
-    virtual void GetTextExtent( const wxString &str, double *width, double *height,
+    void GetTextExtent( const wxString &str, double *width, double *height,
         double *descent, double *externalLeading ) const override;
     void GetPartialTextExtents(const wxString& text, wxArrayDouble& widths) const override;
     bool ShouldOffset() const override;
@@ -518,7 +518,7 @@ public:
         );
     }
 
-    virtual ~wxGDIPlusImageContext()
+    ~wxGDIPlusImageContext() override
     {
         Flush();
     }
@@ -545,7 +545,7 @@ public:
     {
     }
 
-    virtual ~wxGDIPlusMeasuringContext()
+    ~wxGDIPlusMeasuringContext() override
     {
         ReleaseDC( nullptr, m_hdc );
     }
@@ -575,7 +575,7 @@ public :
         m_gditoken = 0;
     }
 
-    virtual ~wxGDIPlusRenderer()
+    ~wxGDIPlusRenderer() override
     {
         if ( m_loaded == 1 )
         {
@@ -620,7 +620,7 @@ public :
 
     // Matrix
 
-    virtual wxGraphicsMatrix CreateMatrix( double a=1.0, double b=0.0, double c=0.0, double d=1.0,
+    wxGraphicsMatrix CreateMatrix( double a=1.0, double b=0.0, double c=0.0, double d=1.0,
         double tx=0.0, double ty=0.0) override;
 
 
@@ -628,13 +628,13 @@ public :
 
     wxGraphicsBrush CreateBrush(const wxBrush& brush ) override;
 
-    virtual wxGraphicsBrush
+    wxGraphicsBrush
     CreateLinearGradientBrush(double x1, double y1,
                               double x2, double y2,
                               const wxGraphicsGradientStops& stops,
                               const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix) override;
 
-    virtual wxGraphicsBrush
+    wxGraphicsBrush
     CreateRadialGradientBrush(double startX, double startY,
                               double endX, double endY,
                               double radius,
@@ -648,15 +648,15 @@ public :
     wxImage CreateImageFromBitmap(const wxGraphicsBitmap& bmp) override;
 #endif // wxUSE_IMAGE
 
-    virtual wxGraphicsFont CreateFont( const wxFont& font,
+    wxGraphicsFont CreateFont( const wxFont& font,
                                        const wxColour& col) override;
 
-    virtual wxGraphicsFont CreateFont(double sizeInPixels,
+    wxGraphicsFont CreateFont(double sizeInPixels,
                                       const wxString& facename,
                                       int flags = wxFONTFLAG_DEFAULT,
                                       const wxColour& col = *wxBLACK) override;
 
-    virtual wxGraphicsFont CreateFontAtDPI(const wxFont& font,
+    wxGraphicsFont CreateFontAtDPI(const wxFont& font,
                                            const wxRealPoint& dpi,
                                            const wxColour& col) override;
 
@@ -680,7 +680,7 @@ private :
     ULONG_PTR m_gditoken;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

@@ -41,7 +41,7 @@ public:
     explicit wxBrushRefData(const wxColour& colour = wxNullColour, wxBrushStyle style = wxBRUSHSTYLE_SOLID);
     explicit wxBrushRefData(const wxBitmap& stipple);
     wxBrushRefData(const wxBrushRefData& data);
-    virtual ~wxBrushRefData();
+    ~wxBrushRefData() override;
 
     bool operator==(const wxBrushRefData& data) const;
 

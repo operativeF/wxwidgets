@@ -32,7 +32,7 @@ class WXDLLIMPEXP_BASE wxMemoryFSHandlerBase : public wxFileSystemHandler
 {
 public:
     wxMemoryFSHandlerBase();
-    virtual ~wxMemoryFSHandlerBase();
+    ~wxMemoryFSHandlerBase() override;
 
     // Add file to list of files stored in memory. Stored data (bitmap, text or
     // raw data) will be copied into private memory stream and available under

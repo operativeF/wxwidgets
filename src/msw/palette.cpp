@@ -69,7 +69,7 @@ public:
         free(pPal);
     }
 
-    virtual ~wxPaletteRefData()
+    ~wxPaletteRefData() override
     {
         if ( m_hPalette )
             ::DeleteObject(m_hPalette);

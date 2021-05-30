@@ -24,7 +24,7 @@ class WXDLLIMPEXP_CORE wxFontData : public wxObject
 {
 public:
     wxFontData();
-    virtual ~wxFontData();
+    ~wxFontData() override;
 
     wxFontData(const wxFontData& data);
     wxFontData& operator=(const wxFontData& data);

@@ -46,10 +46,10 @@ class LineMarkers : public PerLine {
 	int handleCurrent{0};
 public:
 	LineMarkers()  = default;
-	virtual ~LineMarkers();
-	virtual void Init();
-	virtual void InsertLine(int line);
-	virtual void RemoveLine(int line);
+	~LineMarkers() override;
+	void Init() override;
+	void InsertLine(int line) override;
+	void RemoveLine(int line) override;
 
 	int MarkValue(int line);
 	int MarkerNext(int lineStart, int mask) const;
@@ -63,10 +63,10 @@ public:
 class LineLevels : public PerLine {
 	SplitVector<int> levels;
 public:
-	virtual ~LineLevels();
-	virtual void Init();
-	virtual void InsertLine(int line);
-	virtual void RemoveLine(int line);
+	~LineLevels() override;
+	void Init() override;
+	void InsertLine(int line) override;
+	void RemoveLine(int line) override;
 
 	void ExpandLevels(int sizeNew=-1);
 	void ClearLevels();
@@ -78,10 +78,10 @@ class LineState : public PerLine {
 	SplitVector<int> lineStates;
 public:
 	LineState() = default;
-	virtual ~LineState();
-	virtual void Init();
-	virtual void InsertLine(int line);
-	virtual void RemoveLine(int line);
+	~LineState() override;
+	void Init() override;
+	void InsertLine(int line) override;
+	void RemoveLine(int line) override;
 
 	int SetLineState(int line, int state);
 	int GetLineState(int line);
@@ -92,10 +92,10 @@ class LineAnnotation : public PerLine {
 	SplitVector<char *> annotations;
 public:
 	LineAnnotation() = default;
-	virtual ~LineAnnotation();
-	virtual void Init();
-	virtual void InsertLine(int line);
-	virtual void RemoveLine(int line);
+	~LineAnnotation() override;
+	void Init() override;
+	void InsertLine(int line) override;
+	void RemoveLine(int line) override;
 
 	bool MultipleStyles(int line) const;
 	int Style(int line) const;
@@ -115,10 +115,10 @@ class LineTabstops : public PerLine {
 	SplitVector<TabstopList *> tabstops;
 public:
 	LineTabstops() = default;
-	virtual ~LineTabstops();
-	virtual void Init();
-	virtual void InsertLine(int line);
-	virtual void RemoveLine(int line);
+	~LineTabstops() override;
+	void Init() override;
+	void InsertLine(int line) override;
+	void RemoveLine(int line) override;
 
 	bool ClearTabstops(int line);
 	bool AddTabstop(int line, int x);

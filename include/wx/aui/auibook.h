@@ -82,7 +82,7 @@ private:
 private:
     public:
 	wxAuiNotebookEvent& operator=(const wxAuiNotebookEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 #endif
@@ -200,7 +200,7 @@ public:
                  const wxSize& size = wxDefaultSize,
                  long style = 0);
 
-    ~wxAuiTabCtrl();
+    ~wxAuiTabCtrl() override;
 
     bool IsDragging() const { return m_isDragging; }
 
@@ -263,7 +263,7 @@ public:
         Create(parent, id, pos, size, style);
     }
 
-    virtual ~wxAuiNotebook();
+    ~wxAuiNotebook() override;
 
     bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,
@@ -349,10 +349,10 @@ public:
 
     int ChangeSelection(size_t n) override;
 
-    virtual bool AddPage(wxWindow *page, const wxString &text, bool select,
+    bool AddPage(wxWindow *page, const wxString &text, bool select,
                          int imageId) override;
     bool DeleteAllPages() override;
-    virtual bool InsertPage(size_t index, wxWindow *page, const wxString &text,
+    bool InsertPage(size_t index, wxWindow *page, const wxString &text,
                             bool select, int imageId) override;
 
     wxSize DoGetBestSize() const override;

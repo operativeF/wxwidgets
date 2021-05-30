@@ -69,7 +69,7 @@ public:
                 const wxString& name = wxASCII_STR(wxHtmlListBoxNameStr));
 
     // destructor cleans up whatever resources we use
-    virtual ~wxHtmlListBox();
+    ~wxHtmlListBox() override;
 
     // override some base class virtuals
     void RefreshRow(size_t line) override;
@@ -137,10 +137,10 @@ private:
     // wxHtmlWindowInterface methods:
     void SetHTMLWindowTitle(const wxString& title) override;
     void OnHTMLLinkClicked(const wxHtmlLinkInfo& link) override;
-    virtual wxHtmlOpeningStatus OnHTMLOpeningURL(wxHtmlURLType type,
+    wxHtmlOpeningStatus OnHTMLOpeningURL(wxHtmlURLType type,
                                                  const wxString& url,
                                                  wxString *redirect) const override;
-    virtual wxPoint HTMLCoordsToWindow(wxHtmlCell *cell,
+    wxPoint HTMLCoordsToWindow(wxHtmlCell *cell,
                                        const wxPoint& pos) const override;
     wxWindow* GetHTMLWindow() override;
     wxColour GetHTMLBackgroundColour() const override;
@@ -252,7 +252,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxSimpleHtmlListBoxNameStr));
 
-    virtual ~wxSimpleHtmlListBox();
+    ~wxSimpleHtmlListBox() override;
 
     // these must be overloaded otherwise the compiler will complain
     // about  wxItemContainerImmutable::[G|S]etSelection being pure virtuals...
@@ -280,7 +280,7 @@ public:
     void Clear() override;
 
 protected:
-    virtual int DoInsertItems(const wxArrayStringsAdapter & items,
+    int DoInsertItems(const wxArrayStringsAdapter & items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
 

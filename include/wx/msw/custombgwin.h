@@ -26,7 +26,7 @@ public:
 
     wxCustomBackgroundWindow() { m_backgroundBrush = nullptr; }
 
-    virtual ~wxCustomBackgroundWindow() { delete m_backgroundBrush; }
+    ~wxCustomBackgroundWindow() override { delete m_backgroundBrush; }
 
 protected:
     void DoSetBackgroundBitmap(const wxBitmap& bmp) override

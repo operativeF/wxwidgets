@@ -58,7 +58,7 @@ public:
 
     }
 
-    virtual ~wxBalloonNotifMsgImpl();
+    ~wxBalloonNotifMsgImpl() override;
 
     bool Show(int timeout) override;
 

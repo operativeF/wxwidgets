@@ -30,7 +30,7 @@ public:
     m_combo = nullptr;
     m_popup = nullptr;
  }
-    virtual ~wxDatePickerCtrlGeneric();
+    ~wxDatePickerCtrlGeneric() override;
     wxDatePickerCtrlGeneric(wxWindow *parent,
                             wxWindowID id,
                             const wxDateTime& date = wxDefaultDateTime,

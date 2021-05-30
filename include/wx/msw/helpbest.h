@@ -28,7 +28,7 @@ public:
     {
     }
 
-    virtual ~wxBestHelpController() { delete m_helpController; }
+    ~wxBestHelpController() override { delete m_helpController; }
 
     // Must call this to set the filename
     bool Initialize(const wxString& file) override;
@@ -70,7 +70,7 @@ public:
         return m_helpController->DisplayTextPopup( text, pos );
     }
 
-    virtual bool KeywordSearch(const wxString& k,
+    bool KeywordSearch(const wxString& k,
                                wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override
     {
         return m_helpController->KeywordSearch( k, mode );
@@ -82,7 +82,7 @@ public:
     }
 
     // Allows one to override the default settings for the help frame.
-    virtual void SetFrameParameters(const wxString& title,
+    void SetFrameParameters(const wxString& title,
                                     const wxSize& size,
                                     const wxPoint& pos = wxDefaultPosition,
                                     bool newFrameEachTime = false) override
@@ -92,7 +92,7 @@ public:
     }
 
     // Obtains the latest settings used by the help frame and the help frame.
-    virtual wxFrame *GetFrameParameters(wxSize *size = nullptr,
+    wxFrame *GetFrameParameters(wxSize *size = nullptr,
                                         wxPoint *pos = nullptr,
                                         bool *newFrameEachTime = nullptr) override
     {

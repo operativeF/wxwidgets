@@ -62,10 +62,10 @@ public:
     {
     }
 
-    virtual ~wxTCPConnection();
+    ~wxTCPConnection() override;
 
     // implement base class pure virtual methods
-    virtual const void *Request(const wxString& item,
+    const void *Request(const wxString& item,
                                 size_t *size = nullptr,
                                 wxIPCFormat format = wxIPC_TEXT) override;
     bool StartAdvise(const wxString& item) override;
@@ -79,9 +79,9 @@ public:
 
 protected:
     bool DoExecute(const void *data, size_t size, wxIPCFormat format) override;
-    virtual bool DoPoke(const wxString& item, const void *data, size_t size,
+    bool DoPoke(const wxString& item, const void *data, size_t size,
                         wxIPCFormat format) override;
-    virtual bool DoAdvise(const wxString& item, const void *data, size_t size,
+    bool DoAdvise(const wxString& item, const void *data, size_t size,
                           wxIPCFormat format) override;
 
 
@@ -113,7 +113,7 @@ class WXDLLIMPEXP_NET wxTCPServer : public wxServerBase
 {
 public:
     wxTCPServer();
-    virtual ~wxTCPServer();
+    ~wxTCPServer() override;
 
     // Returns false on error (e.g. port number is already in use)
     bool Create(const wxString& serverName) override;
@@ -141,7 +141,7 @@ public:
     bool ValidHost(const wxString& host) override;
 
     // Call this to make a connection. Returns NULL if cannot.
-    virtual wxConnectionBase *MakeConnection(const wxString& host,
+    wxConnectionBase *MakeConnection(const wxString& host,
                                              const wxString& server,
                                              const wxString& topic) override;
 

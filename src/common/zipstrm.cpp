@@ -471,7 +471,7 @@ class wxRawInputStream : public wxFilterInputStream
 {
 public:
     explicit wxRawInputStream(wxInputStream& stream);
-    virtual ~wxRawInputStream() { delete m_tee; }
+    ~wxRawInputStream() override { delete m_tee; }
 
     wxInputStream* Open(wxInputStream *decomp);
     wxInputStream& GetTee() const { return *m_tee; }

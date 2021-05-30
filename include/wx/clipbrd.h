@@ -127,7 +127,7 @@ protected:
 
     public:
 	wxClipboardEvent& operator=(const wxClipboardEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

@@ -70,7 +70,7 @@ private:
         return true;
     }
 
-    virtual const wxItemAttr*
+    const wxItemAttr*
     GetItemAttr(DWORD_PTR WXUNUSED(dwItemSpec)) const override
     {
         // We use the same attribute for all items for now.
@@ -104,7 +104,7 @@ public:
                 long style,
                 const wxString& name);
 
-    virtual ~wxMSWHeaderCtrl();
+    ~wxMSWHeaderCtrl() override;
 
     // Override to implement colours support via custom drawing.
     bool SetBackgroundColour(const wxColour& colour) override;
@@ -124,7 +124,7 @@ public:
 protected:
     // override wxWindow methods which must be implemented by a new control
     wxSize DoGetBestSize() const override;
-    virtual void DoSetSize(int x, int y,
+    void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
     void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;

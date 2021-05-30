@@ -65,7 +65,7 @@ class WXDLLIMPEXP_CORE wxDialogBase : public wxNavigationEnabled<wxTopLevelWindo
 {
 public:
     wxDialogBase();
-    virtual ~wxDialogBase() = default;
+    ~wxDialogBase() override = default;
 
     // define public wxDialog methods to be implemented by the derived classes
     virtual int ShowModal() = 0;
@@ -381,7 +381,7 @@ public:
 private:
     public:
 	wxWindowModalDialogEvent& operator=(const wxWindowModalDialogEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

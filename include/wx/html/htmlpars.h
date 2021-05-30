@@ -53,7 +53,7 @@ class WXDLLIMPEXP_HTML wxHtmlParser : public wxObject
 
 public:
     wxHtmlParser();
-    virtual ~wxHtmlParser();
+    ~wxHtmlParser() override;
 
     // Sets the class which will be used for opening files
     void SetFS(wxFileSystem *fs) { m_FS = fs; }
@@ -270,7 +270,7 @@ class WXDLLIMPEXP_HTML wxHtmlEntitiesParser : public wxObject
 
 public:
     wxHtmlEntitiesParser();
-    virtual ~wxHtmlEntitiesParser();
+    ~wxHtmlEntitiesParser() override;
 
     // Sets encoding of output string.
     // Has no effect.

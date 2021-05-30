@@ -683,7 +683,7 @@ public:
     // --------
 
     wxTextCtrlBase() = default;
-    virtual ~wxTextCtrlBase() = default;
+    ~wxTextCtrlBase() override = default;
 
 
     // more readable flag testing methods
@@ -717,7 +717,7 @@ public:
         return wxTextAreaBase::HitTest(pt, pos);
     }
 
-    virtual wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
+    wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
                                             wxTextCoord *col,
                                             wxTextCoord *row) const override
     {
@@ -846,7 +846,7 @@ protected:
 private:
     public:
 	wxTextUrlEvent& operator=(const wxTextUrlEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 

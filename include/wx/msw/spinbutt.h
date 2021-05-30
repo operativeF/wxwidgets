@@ -32,7 +32,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    virtual ~wxSpinButton();
+    ~wxSpinButton() override;
 
 	wxSpinButton(const wxSpinButton&) = delete;
 	wxSpinButton& operator=(const wxSpinButton&) = delete;
@@ -53,7 +53,7 @@ public:
     // implementation
     bool MSWCommand(WXUINT param, WXWORD id) override;
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
-    virtual bool MSWOnScroll(int orientation, WXWORD wParam,
+    bool MSWOnScroll(int orientation, WXWORD wParam,
                              WXWORD pos, WXHWND control) override;
 
     // a wxSpinButton can't do anything useful with focus, only wxSpinCtrl can
@@ -69,7 +69,7 @@ protected:
    virtual void NormalizeValue();
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

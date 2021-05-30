@@ -100,7 +100,7 @@ public:
         m_control = control;
     }
 
-    virtual ~wxToolBarToolBase();
+    ~wxToolBarToolBase() override;
 
 	wxToolBarToolBase(const wxToolBarToolBase&) = delete;
 	wxToolBarToolBase& operator=(const wxToolBarToolBase&) = delete;
@@ -269,7 +269,7 @@ protected:
 #endif
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -285,7 +285,7 @@ class WXDLLIMPEXP_CORE wxToolBarBase : public wxControl
 {
 public:
     wxToolBarBase();
-    virtual ~wxToolBarBase();
+    ~wxToolBarBase() override;
 
     // toolbar construction
     // --------------------

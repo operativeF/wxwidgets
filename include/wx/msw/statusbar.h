@@ -37,7 +37,7 @@ public:
                 long style = wxSTB_DEFAULT_STYLE,
                 const wxString& name = wxASCII_STR(wxStatusBarNameStr));
 
-    virtual ~wxStatusBar();
+    ~wxStatusBar() override;
 
 	wxStatusBar(const wxStatusBar&) = delete;
 	wxStatusBar& operator=(const wxStatusBar&) = delete;
@@ -55,7 +55,7 @@ public:
     // override some wxWindow virtual methods too
     bool SetFont(const wxFont& font) override;
 
-    virtual WXLRESULT MSWWindowProc(WXUINT nMsg,
+    WXLRESULT MSWWindowProc(WXUINT nMsg,
                                     WXWPARAM wParam,
                                     WXLPARAM lParam) override;
 
@@ -109,7 +109,7 @@ private:
     static const MSWMetrics& MSWGetMetrics();
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

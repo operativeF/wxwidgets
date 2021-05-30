@@ -54,7 +54,7 @@ public:
 
     wxRegionRefData& operator=(const wxRegionRefData&) = delete;
 
-    virtual ~wxRegionRefData()
+    ~wxRegionRefData() override
     {
         ::DeleteObject(m_region);
         m_region = nullptr;

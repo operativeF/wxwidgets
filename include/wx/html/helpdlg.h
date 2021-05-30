@@ -43,7 +43,7 @@ public:
     wxHtmlHelpDialog(wxWindow* parent, wxWindowID wxWindowID,
                     const wxString& title = wxEmptyString,
                     int style = wxHF_DEFAULT_STYLE, wxHtmlHelpData* data = nullptr);
-    virtual ~wxHtmlHelpDialog();
+    ~wxHtmlHelpDialog() override;
 
     bool Create(wxWindow* parent, wxWindowID id, const wxString& title = wxEmptyString,
                 int style = wxHF_DEFAULT_STYLE);

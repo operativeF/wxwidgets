@@ -30,7 +30,7 @@ public:
 
         Create(parent, id, value, pos, size, style, validator, name);
     }
-    virtual ~wxTextCtrl();
+    ~wxTextCtrl() override;
 
 	wxTextCtrl(const wxTextCtrl&) = delete;
 	wxTextCtrl& operator=(const wxTextCtrl&) = delete;
@@ -97,7 +97,7 @@ public:
 
     void ShowPosition(long pos) override;
     wxTextCtrlHitTestResult HitTest(const wxPoint& pt, long *pos) const override;
-    virtual wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
+    wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
                                             wxTextCoord *col,
                                             wxTextCoord *row) const override
     {
@@ -188,7 +188,7 @@ public:
     void OnSetFocus(wxFocusEvent& event);
 
     // intercept WM_GETDLGCODE
-    virtual bool MSWHandleMessage(WXLRESULT *result,
+    bool MSWHandleMessage(WXLRESULT *result,
                                   WXUINT message,
                                   WXWPARAM wParam,
                                   WXLPARAM lParam) override;
@@ -320,7 +320,7 @@ private:
     wxDECLARE_EVENT_TABLE();
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

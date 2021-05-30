@@ -61,7 +61,7 @@ public:
     bool Create( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTSIZEPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTSIZEPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTSIZEPAGE_SIZE, long style = SYMBOL_WXRICHTEXTSIZEPAGE_STYLE );
 
     /// Destructor
-    ~wxRichTextSizePage();
+    ~wxRichTextSizePage() override;
 
     /// Initialises member variables
     void Init();

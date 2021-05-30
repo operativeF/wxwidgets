@@ -60,7 +60,7 @@ public:
     wxRichTextStyleDefinition(const wxString& name = wxEmptyString) { Init(); m_name = name; }
 
     /// Destructor
-    virtual ~wxRichTextStyleDefinition() = default;
+    ~wxRichTextStyleDefinition() override = default;
 
     /// Initialises members
     void Init() {}
@@ -137,7 +137,7 @@ public:
         wxRichTextStyleDefinition(name) {}
 
     /// Destructor
-    virtual ~wxRichTextCharacterStyleDefinition() = default;
+    ~wxRichTextCharacterStyleDefinition() override = default;
 
     /// Clones the object
     wxRichTextStyleDefinition* Clone() const override { return new wxRichTextCharacterStyleDefinition(*this); }
@@ -162,7 +162,7 @@ public:
         wxRichTextStyleDefinition(name) {}
 
     // Destructor
-    virtual ~wxRichTextParagraphStyleDefinition() = default;
+    ~wxRichTextParagraphStyleDefinition() override = default;
 
     /// Sets and gets the next style
     void SetNextStyle(const wxString& name) { m_nextStyle = name; }
@@ -203,7 +203,7 @@ public:
         wxRichTextParagraphStyleDefinition(name) { Init(); }
 
     /// Destructor
-    virtual ~wxRichTextListStyleDefinition() = default;
+    ~wxRichTextListStyleDefinition() override = default;
 
     /// Copies from def
     void Copy(const wxRichTextListStyleDefinition& def);
@@ -269,7 +269,7 @@ public:
         wxRichTextStyleDefinition(name) {}
 
     // Destructor
-    virtual ~wxRichTextBoxStyleDefinition() = default;
+    ~wxRichTextBoxStyleDefinition() override = default;
 
     /// Copies from def
     void Copy(const wxRichTextBoxStyleDefinition& def);
@@ -303,7 +303,7 @@ public:
         Copy(sheet);
     }
     wxRichTextStyleSheet() { Init(); }
-    virtual ~wxRichTextStyleSheet();
+    ~wxRichTextStyleSheet() override;
 
     /// Initialisation
     void Init();
@@ -483,7 +483,7 @@ public:
     }
     wxRichTextStyleListBox(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, long style = 0);
-    virtual ~wxRichTextStyleListBox();
+    ~wxRichTextStyleListBox() override;
 
     void Init()
     {
@@ -590,7 +590,7 @@ public:
         const wxSize& size = wxDefaultSize, long style = 0);
 
     /// Constructors
-    virtual ~wxRichTextStyleListCtrl();
+    ~wxRichTextStyleListCtrl() override;
 
     /// Member initialisation
     void Init()
@@ -713,7 +713,7 @@ public:
         Create(parent, id, pos, size, style);
     }
 
-    virtual ~wxRichTextStyleComboCtrl() = default;
+    ~wxRichTextStyleComboCtrl() override = default;
 
     void Init()
     {

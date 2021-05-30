@@ -150,7 +150,7 @@ public:
     {   Create(parent, winid, location, pos, size, style,
                szBackend, validator, name);                             }
 
-    virtual ~wxMediaCtrl();
+    ~wxMediaCtrl() override;
 
     bool Create(wxWindow* parent, wxWindowID winid,
                 const wxString& fileName = wxEmptyString,
@@ -244,7 +244,7 @@ public:
     wxMediaBackend()
     = default;
 
-    virtual ~wxMediaBackend();
+    ~wxMediaBackend() override;
 
     virtual bool CreateControl(wxControl* WXUNUSED(ctrl),
                                wxWindow* WXUNUSED(parent),

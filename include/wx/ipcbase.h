@@ -55,7 +55,7 @@ public:
   wxConnectionBase(void *buffer, size_t size); // use external buffer
   wxConnectionBase(); // use internal, adaptive buffer
   wxConnectionBase(const wxConnectionBase& copy);
-  virtual ~wxConnectionBase();
+  ~wxConnectionBase() override;
 
   void SetConnected( bool c ) { m_connected = c; }
   bool GetConnected() const { return m_connected; }
@@ -230,7 +230,7 @@ class WXDLLIMPEXP_BASE wxServerBase : public wxObject
 {
 public:
   wxServerBase() = default;
-  virtual ~wxServerBase() = default;
+  ~wxServerBase() override = default;
 
   // Returns false on error (e.g. port number is already in use)
   virtual bool Create(const wxString& serverName) = 0;
@@ -245,7 +245,7 @@ class WXDLLIMPEXP_BASE wxClientBase : public wxObject
 {
 public:
   wxClientBase() = default;
-  virtual ~wxClientBase() = default;
+  ~wxClientBase() override = default;
 
   virtual bool ValidHost(const wxString& host) = 0;
 

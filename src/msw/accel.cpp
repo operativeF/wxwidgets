@@ -42,7 +42,7 @@ class WXDLLEXPORT wxAcceleratorRefData: public wxObjectRefData
     friend class WXDLLIMPEXP_FWD_CORE wxAcceleratorTable;
 public:
     wxAcceleratorRefData();
-    virtual ~wxAcceleratorRefData();
+    ~wxAcceleratorRefData() override;
 
     inline HACCEL GetHACCEL() const { return m_hAccel; }
 protected:

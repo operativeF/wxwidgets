@@ -103,7 +103,7 @@ public:
         m_FindReplaceData = data;
     }
 
-    virtual ~wxFindReplaceDialogBase();
+    ~wxFindReplaceDialogBase() override;
 
     // find dialog data access
     const wxFindReplaceData *GetData() const { return m_FindReplaceData; }
@@ -162,7 +162,7 @@ private:
 
     public:
 	wxFindDialogEvent& operator=(const wxFindDialogEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

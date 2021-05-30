@@ -74,7 +74,7 @@ public:
 
     // init and dtor
     wxVListBoxComboPopup()  = default;
-    virtual ~wxVListBoxComboPopup();
+    ~wxVListBoxComboPopup() override;
 
     // required virtuals
     void Init() override;
@@ -301,7 +301,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxComboBoxNameStr));
 
-    virtual ~wxOwnerDrawnComboBox();
+    ~wxOwnerDrawnComboBox() override;
 
     // Prevent app from using wxComboPopup
     void SetPopupControl(wxVListBoxComboPopup* popup)
@@ -379,7 +379,7 @@ protected:
         return (wxVListBoxComboPopup*) m_popupInterface;
     }
 
-    virtual int DoInsertItems(const wxArrayStringsAdapter& items,
+    int DoInsertItems(const wxArrayStringsAdapter& items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
     void DoSetItemClientData(unsigned int n, void* clientData) override;

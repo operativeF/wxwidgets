@@ -33,7 +33,7 @@ class WXDLLIMPEXP_CORE wxANIDecoder : public wxAnimationDecoder
 public:
     // constructor, destructor, etc.
     wxANIDecoder();
-    ~wxANIDecoder();
+    ~wxANIDecoder() override;
 
 
     wxSize GetFrameSize(unsigned int frame) const override;

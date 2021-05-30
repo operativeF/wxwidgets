@@ -30,7 +30,7 @@ public:
 
     // see the explanation of the following WXOnXXX() methods in wx/generic/dvrenderer.h
 
-    virtual bool WXActivateCell(const wxRect& cell,
+    bool WXActivateCell(const wxRect& cell,
                                 wxDataViewModel *model,
                                 const wxDataViewItem& item,
                                 unsigned int col,
@@ -44,7 +44,7 @@ public:
 #endif // wxUSE_ACCESSIBILITY
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -62,7 +62,7 @@ public:
     wxDataViewTextRenderer( const wxString &varianttype = GetDefaultType(),
                             wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                             int align = wxDVR_DEFAULT_ALIGNMENT );
-    virtual ~wxDataViewTextRenderer();
+    ~wxDataViewTextRenderer() override;
 
 	wxDataViewTextRenderer(const wxDataViewTextRenderer&) = delete;
 	wxDataViewTextRenderer& operator=(const wxDataViewTextRenderer&) = delete;
@@ -82,7 +82,7 @@ public:
 
     // in-place editing
     bool HasEditorCtrl() const override;
-    virtual wxWindow* CreateEditorCtrl( wxWindow *parent, wxRect labelRect,
+    wxWindow* CreateEditorCtrl( wxWindow *parent, wxRect labelRect,
                                         const wxVariant &value ) override;
     bool GetValueFromEditorCtrl( wxWindow* editor, wxVariant &value ) override;
 
@@ -95,7 +95,7 @@ private:
 #endif // wxUSE_MARKUP
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -130,7 +130,7 @@ private:
     wxBitmap m_bitmap;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -163,7 +163,7 @@ public:
     wxSize GetSize() const override;
 
     // Implementation only, don't use nor override
-    virtual bool WXActivateCell(const wxRect& cell,
+    bool WXActivateCell(const wxRect& cell,
                                 wxDataViewModel *model,
                                 const wxDataViewItem& item,
                                 unsigned int col,
@@ -173,7 +173,7 @@ private:
     bool    m_radio;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -209,7 +209,7 @@ private:
     int         m_value;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -240,7 +240,7 @@ public:
     wxSize GetSize() const override;
 
     bool HasEditorCtrl() const override { return true; }
-    virtual wxWindow* CreateEditorCtrl( wxWindow *parent, wxRect labelRect,
+    wxWindow* CreateEditorCtrl( wxWindow *parent, wxRect labelRect,
                                         const wxVariant &value ) override;
     bool GetValueFromEditorCtrl( wxWindow* editor, wxVariant &value ) override;
 
@@ -248,7 +248,7 @@ private:
     wxDataViewIconText   m_value;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

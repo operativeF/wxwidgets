@@ -141,7 +141,7 @@ public:
         m_runScriptCount = 0;
     }
 
-    virtual ~wxWebView() = default;
+    ~wxWebView() override = default;
 
     virtual bool Create(wxWindow* parent,
            wxWindowID id,
@@ -310,7 +310,7 @@ private:
 
     public:
 	wxWebViewEvent& operator=(const wxWebViewEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

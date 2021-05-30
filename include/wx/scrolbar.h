@@ -51,7 +51,7 @@ public:
 
     // operations
     virtual void SetThumbPosition(int viewStart) = 0;
-    virtual void SetScrollbar(int position, int thumbSize,
+    void SetScrollbar(int position, int thumbSize,
                               int range, int pageSize,
                               bool refresh = true) override = 0;
 

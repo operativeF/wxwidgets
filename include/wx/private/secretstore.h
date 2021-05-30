@@ -45,7 +45,7 @@ public:
         memcpy(m_data, data, size);
     }
 
-    virtual ~wxSecretValueGenericImpl()
+    ~wxSecretValueGenericImpl() override
     {
         if ( m_data )
         {

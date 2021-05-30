@@ -21,7 +21,7 @@ class WXDLLIMPEXP_NET wxFileProto: public wxProtocol
 {
 public:
     wxFileProto();
-    virtual ~wxFileProto();
+    ~wxFileProto() override;
 
 	wxFileProto(const wxFileProto&) = delete;
 	wxFileProto& operator=(const wxFileProto&) = delete;
@@ -31,7 +31,7 @@ public:
 
     wxInputStream *GetInputStream(const wxString& path) override;
 
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
     DECLARE_PROTOCOL(wxFileProto)

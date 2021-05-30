@@ -207,7 +207,7 @@ protected:
 private:
     public:
 	wxFileSystemWatcherEvent& operator=(const wxFileSystemWatcherEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -297,7 +297,7 @@ class WXDLLIMPEXP_BASE wxFileSystemWatcherBase: public wxEvtHandler
 public:
     wxFileSystemWatcherBase();
 
-    virtual ~wxFileSystemWatcherBase();
+    ~wxFileSystemWatcherBase() override;
 
     /**
      * Adds path to currently watched files. Any events concerning this

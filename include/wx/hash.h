@@ -187,7 +187,7 @@ public:
          { Create( keyType, size ); BeginFind(); }
     wxHashTable( const wxHashTable& table );
 
-    virtual ~wxHashTable() { Destroy(); }
+    ~wxHashTable() override { Destroy(); }
 
     const wxHashTable& operator=( const wxHashTable& );
 

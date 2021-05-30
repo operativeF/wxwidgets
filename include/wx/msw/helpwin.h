@@ -23,7 +23,7 @@ class WXDLLIMPEXP_CORE wxWinHelpController: public wxHelpControllerBase
 
 public:
     wxWinHelpController(wxWindow* parentWindow = nullptr): wxHelpControllerBase(parentWindow) {}
-    virtual ~wxWinHelpController() = default;
+    ~wxWinHelpController() override = default;
 
     // Must call this to set the filename
     bool Initialize(const wxString& file) override;
@@ -36,7 +36,7 @@ public:
     bool DisplaySection(const wxString& section) override { return KeywordSearch(section); }
     bool DisplayBlock(long blockNo) override;
     bool DisplayContextPopup(int contextId) override;
-    virtual bool KeywordSearch(const wxString& k,
+    bool KeywordSearch(const wxString& k,
                                wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override;
     bool Quit() override;
 

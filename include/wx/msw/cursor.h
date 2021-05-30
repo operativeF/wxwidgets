@@ -30,7 +30,7 @@ public:
 
     wxPoint GetHotSpot() const override;
 
-    virtual ~wxCursor();
+    ~wxCursor() override;
 
     // implementation only
     void SetHCURSOR(WXHCURSOR cursor) { SetHandle((WXHANDLE)cursor); }

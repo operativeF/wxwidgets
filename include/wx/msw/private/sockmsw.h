@@ -45,7 +45,7 @@ class wxSocketImplMSW : public wxSocketImpl
 public:
     wxSocketImplMSW(wxSocketBase& wxsocket);
 
-    virtual ~wxSocketImplMSW();
+    ~wxSocketImplMSW() override;
 
     wxSocketError GetLastError() const override;
 

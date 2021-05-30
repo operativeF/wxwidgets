@@ -64,7 +64,7 @@ public:
     // same as ctor above
     void SetOwner(wxEvtHandler *owner, int timerid = wxID_ANY);
 
-    virtual ~wxTimer();
+    ~wxTimer() override;
 
 
     // working with the timer
@@ -181,7 +181,7 @@ private:
 
     public:
 	wxTimerEvent& operator=(const wxTimerEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

@@ -75,7 +75,7 @@ protected:
 private:
     public:
 	wxRibbonBarEvent& operator=(const wxRibbonBarEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 #endif
@@ -111,7 +111,7 @@ public:
                   const wxSize& size = wxDefaultSize,
                   long style = wxRIBBON_BAR_DEFAULT_STYLE);
 
-    virtual ~wxRibbonBar();
+    ~wxRibbonBar() override;
 
     bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,

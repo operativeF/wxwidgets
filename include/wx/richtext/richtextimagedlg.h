@@ -57,7 +57,7 @@ public:
     bool Create( wxRichTextObject* obj, wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_IDNAME, const wxString& caption = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_TITLE, const wxPoint& pos = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_SIZE, long style = SYMBOL_WXRICHTEXTOBJECTPROPERTIESDIALOG_STYLE );
 
     /// Destructor
-    ~wxRichTextObjectPropertiesDialog();
+    ~wxRichTextObjectPropertiesDialog() override;
 
     /// Initialises member variables
     void Init();

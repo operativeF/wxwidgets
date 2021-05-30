@@ -120,7 +120,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxButtonNameStr));
 
-    virtual void SetMainLabelAndNote(const wxString& mainLabel,
+    void SetMainLabelAndNote(const wxString& mainLabel,
                                      const wxString& note) override
     {
         wxButton::SetLabel(mainLabel + '\n' + note);

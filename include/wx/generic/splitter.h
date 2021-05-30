@@ -72,7 +72,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    virtual ~wxSplitterWindow();
+    ~wxSplitterWindow() override;
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                      const wxPoint& pos = wxDefaultPosition,
@@ -389,7 +389,7 @@ private:
 
     public:
 	wxSplitterEvent& operator=(const wxSplitterEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

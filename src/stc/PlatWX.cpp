@@ -113,7 +113,7 @@ public:
     {
     }
 
-    virtual ~wxFontWithAscent()
+    ~wxFontWithAscent() override
     {
         delete m_surfaceFontData;
     }
@@ -210,7 +210,7 @@ private:
 
 public:
     SurfaceImpl();
-    ~SurfaceImpl();
+    ~SurfaceImpl() override;
 
     void Init(WindowID wid) override;
     void Init(SurfaceID sid, WindowID wid) override;
@@ -228,9 +228,9 @@ public:
     void FillRectangle(PRectangle rc, ColourDesired back) override;
     void FillRectangle(PRectangle rc, Surface &surfacePattern) override;
     void RoundedRectangle(PRectangle rc, ColourDesired fore, ColourDesired back) override;
-    virtual void AlphaRectangle(PRectangle rc, int cornerSize, ColourDesired fill, int alphaFill,
+    void AlphaRectangle(PRectangle rc, int cornerSize, ColourDesired fill, int alphaFill,
                                 ColourDesired outline, int alphaOutline, int flags) override;
-    virtual void DrawRGBAImage(PRectangle rc, int width, int height,
+    void DrawRGBAImage(PRectangle rc, int width, int height,
                                const unsigned char *pixelsImage) override;
     void Ellipse(PRectangle rc, ColourDesired fore, ColourDesired back) override;
     void Copy(PRectangle rc, Point from, Surface &surfaceSource) override;
@@ -923,12 +923,12 @@ class SurfaceD2D : public Surface
 {
 public:
     SurfaceD2D();
-    virtual ~SurfaceD2D();
+    ~SurfaceD2D() override;
 
     // base class virtuals
     void Init(WindowID wid) override;
     void Init(SurfaceID sid, WindowID wid) override;
-    virtual void InitPixMap(int width, int height, Surface *surface_,
+    void InitPixMap(int width, int height, Surface *surface_,
                             WindowID wid) override;
 
     void Release() override;
@@ -938,34 +938,34 @@ public:
     int DeviceHeightFont(int points) override;
     void MoveTo(int x_, int y_) override;
     void LineTo(int x_, int y_) override;
-    virtual void Polygon(Point *pts, int npts, ColourDesired fore,
+    void Polygon(Point *pts, int npts, ColourDesired fore,
                          ColourDesired back) override;
-    virtual void RectangleDraw(PRectangle rc, ColourDesired fore,
+    void RectangleDraw(PRectangle rc, ColourDesired fore,
                                ColourDesired back) override;
     void FillRectangle(PRectangle rc, ColourDesired back) override;
     void FillRectangle(PRectangle rc, Surface &surfacePattern) override;
-    virtual void RoundedRectangle(PRectangle rc, ColourDesired fore,
+    void RoundedRectangle(PRectangle rc, ColourDesired fore,
                                   ColourDesired back) override;
-    virtual void AlphaRectangle(PRectangle rc, int cornerSize,
+    void AlphaRectangle(PRectangle rc, int cornerSize,
                                 ColourDesired fill, int alphaFill,
                                 ColourDesired outline, int alphaOutline,
                                 int flags) override;
-    virtual void DrawRGBAImage(PRectangle rc, int width, int height,
+    void DrawRGBAImage(PRectangle rc, int width, int height,
                                const unsigned char *pixelsImage) override;
-    virtual void Ellipse(PRectangle rc, ColourDesired fore,
+    void Ellipse(PRectangle rc, ColourDesired fore,
                          ColourDesired back) override;
     void Copy(PRectangle rc, Point from, Surface &surfaceSource) override;
 
-    virtual void DrawTextNoClip(PRectangle rc, Font &font_, XYPOSITION ybase,
+    void DrawTextNoClip(PRectangle rc, Font &font_, XYPOSITION ybase,
                                 const char *s, int len, ColourDesired fore,
                                 ColourDesired back) override;
-    virtual void DrawTextClipped(PRectangle rc, Font &font_, XYPOSITION ybase,
+    void DrawTextClipped(PRectangle rc, Font &font_, XYPOSITION ybase,
                                  const char *s, int len, ColourDesired fore,
                                  ColourDesired back) override;
-    virtual void DrawTextTransparent(PRectangle rc, Font &font_,
+    void DrawTextTransparent(PRectangle rc, Font &font_,
                                      XYPOSITION ybase, const char *s, int len,
                                      ColourDesired fore) override;
-    virtual void MeasureWidths(Font &font_, const char *s, int len,
+    void MeasureWidths(Font &font_, const char *s, int len,
                                XYPOSITION *positions) override;
     XYPOSITION WidthText(Font &font_, const char *s, int len) override;
     XYPOSITION WidthChar(Font &font_, char ch) override;
@@ -3117,7 +3117,7 @@ public:
     {
     }
 
-    ~wxSTCListBoxD2D()
+    ~wxSTCListBoxD2D() override
     {
         delete m_surfaceFontData;
     }

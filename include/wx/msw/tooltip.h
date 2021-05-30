@@ -22,7 +22,7 @@ class WXDLLIMPEXP_CORE wxToolTip : public wxObject
 public:
     // ctor & dtor
     wxToolTip(const wxString &tip);
-    virtual ~wxToolTip();
+    ~wxToolTip() override;
 
     // ctor used by wxStatusBar to associate a tooltip to a portion of
     // the status bar window:

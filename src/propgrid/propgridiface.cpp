@@ -845,7 +845,7 @@ public:
     {
         m_it.Init( state, flags );
     }
-    virtual ~wxPGVIteratorBase_State() = default;
+    ~wxPGVIteratorBase_State() override = default;
     void Next() override { m_it.Next(); }
 };
 

@@ -43,7 +43,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxButtonNameStr));
 
-    virtual ~wxButton();
+    ~wxButton() override;
 
     wxWindow *SetDefault() override;
 
@@ -77,7 +77,7 @@ private:
     wxDECLARE_EVENT_TABLE();
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

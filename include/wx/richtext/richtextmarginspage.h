@@ -60,7 +60,7 @@ public:
     bool Create( wxWindow* parent, wxWindowID id = SYMBOL_WXRICHTEXTMARGINSPAGE_IDNAME, const wxPoint& pos = SYMBOL_WXRICHTEXTMARGINSPAGE_POSITION, const wxSize& size = SYMBOL_WXRICHTEXTMARGINSPAGE_SIZE, long style = SYMBOL_WXRICHTEXTMARGINSPAGE_STYLE );
 
     /// Destructor
-    ~wxRichTextMarginsPage();
+    ~wxRichTextMarginsPage() override;
 
     /// Initialises member variables
     void Init();

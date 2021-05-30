@@ -235,7 +235,7 @@ class WXDLLIMPEXP_CORE wxAccessibleBase : public wxObject
 
 public:
     wxAccessibleBase(wxWindow* win): m_window(win) {}
-    virtual ~wxAccessibleBase() = default;
+    ~wxAccessibleBase() override = default;
 
 // Overridables
 

@@ -124,19 +124,19 @@ class WXDLLIMPEXP_CORE wxNativePrintFactory: public wxPrintFactory
 public:
     wxPrinterBase *CreatePrinter( wxPrintDialogData *data ) override;
 
-    virtual wxPrintPreviewBase *CreatePrintPreview( wxPrintout *preview,
+    wxPrintPreviewBase *CreatePrintPreview( wxPrintout *preview,
                                                     wxPrintout *printout = nullptr,
                                                     wxPrintDialogData *data = nullptr ) override;
-    virtual wxPrintPreviewBase *CreatePrintPreview( wxPrintout *preview,
+    wxPrintPreviewBase *CreatePrintPreview( wxPrintout *preview,
                                                     wxPrintout *printout,
                                                     wxPrintData *data ) override;
 
-    virtual wxPrintDialogBase *CreatePrintDialog( wxWindow *parent,
+    wxPrintDialogBase *CreatePrintDialog( wxWindow *parent,
                                                   wxPrintDialogData *data = nullptr ) override;
-    virtual wxPrintDialogBase *CreatePrintDialog( wxWindow *parent,
+    wxPrintDialogBase *CreatePrintDialog( wxWindow *parent,
                                                   wxPrintData *data ) override;
 
-    virtual wxPageSetupDialogBase *CreatePageSetupDialog( wxWindow *parent,
+    wxPageSetupDialogBase *CreatePageSetupDialog( wxWindow *parent,
                                                           wxPageSetupDialogData * data = nullptr ) override;
 
     wxDCImpl* CreatePrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data ) override;
@@ -160,7 +160,7 @@ class WXDLLIMPEXP_CORE wxPrintNativeDataBase: public wxObject
 {
 public:
     wxPrintNativeDataBase();
-    virtual ~wxPrintNativeDataBase() = default;
+    ~wxPrintNativeDataBase() override = default;
 
     virtual bool TransferTo( wxPrintData &data ) = 0;
     virtual bool TransferFrom( const wxPrintData &data ) = 0;
@@ -192,7 +192,7 @@ class WXDLLIMPEXP_CORE wxPrinterBase: public wxObject
 {
 public:
     wxPrinterBase(wxPrintDialogData *data = nullptr);
-    virtual ~wxPrinterBase();
+    ~wxPrinterBase() override;
 
     virtual wxPrintAbortDialog *CreateAbortWindow(wxWindow *parent, wxPrintout *printout);
     virtual void ReportError(wxWindow *parent, wxPrintout *printout, const wxString& message);
@@ -233,7 +233,7 @@ class WXDLLIMPEXP_CORE wxPrinter: public wxPrinterBase
 {
 public:
     wxPrinter(wxPrintDialogData *data = nullptr);
-    virtual ~wxPrinter();
+    ~wxPrinter() override;
 
     wxPrintAbortDialog *CreateAbortWindow(wxWindow *parent, wxPrintout *printout) override;
     void ReportError(wxWindow *parent, wxPrintout *printout, const wxString& message) override;
@@ -268,7 +268,7 @@ class WXDLLIMPEXP_CORE wxPrintout: public wxObject
 {
 public:
     wxPrintout(const wxString& title = wxGetTranslation("Printout"));
-    virtual ~wxPrintout();
+    ~wxPrintout() override;
 
     virtual bool OnBeginDocument(int startPage, int endPage);
     virtual void OnEndDocument();
@@ -369,7 +369,7 @@ public:
                     const wxSize& size = wxDefaultSize,
                     long style = 0,
                     const wxString& name = wxT("canvas"));
-    virtual ~wxPreviewCanvas();
+    ~wxPreviewCanvas() override;
 
     void SetPreview(wxPrintPreviewBase *preview) { m_printPreview = preview; }
 
@@ -410,7 +410,7 @@ public:
                    const wxSize& size = wxDefaultSize,
                    long style = wxDEFAULT_FRAME_STYLE | wxFRAME_FLOAT_ON_PARENT,
                    const wxString& name = wxASCII_STR(wxFrameNameStr));
-    virtual ~wxPreviewFrame();
+    ~wxPreviewFrame() override;
 
     // Either Initialize() or InitializeWithModality() must be called before
     // showing the preview frame, the former being just a particular case of
@@ -500,7 +500,7 @@ public:
                         const wxSize& size = wxDefaultSize,
                         long style = wxTAB_TRAVERSAL,
                         const wxString& name = wxT("panel"));
-    virtual ~wxPreviewControlBar();
+    ~wxPreviewControlBar() override;
 
     virtual void CreateButtons();
     virtual void SetPageInfo(int minPage, int maxPage);
@@ -590,7 +590,7 @@ public:
     wxPrintPreviewBase(wxPrintout *printout,
                        wxPrintout *printoutForPrinting,
                        wxPrintData *data);
-    virtual ~wxPrintPreviewBase();
+    ~wxPrintPreviewBase() override;
 
     virtual bool SetCurrentPage(int pageNum);
     virtual int GetCurrentPage() const;
@@ -702,7 +702,7 @@ public:
     wxPrintPreview(wxPrintout *printout,
                    wxPrintout *printoutForPrinting,
                    wxPrintData *data);
-    virtual ~wxPrintPreview();
+    ~wxPrintPreview() override;
 
     bool SetCurrentPage(int pageNum) override;
     int GetCurrentPage() const override;

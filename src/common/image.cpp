@@ -63,7 +63,7 @@ class wxImageRefData: public wxObjectRefData
 {
 public:
     wxImageRefData();
-    virtual ~wxImageRefData();
+    ~wxImageRefData() override;
 
     int             m_width;
     int             m_height;

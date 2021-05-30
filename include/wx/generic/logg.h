@@ -61,7 +61,7 @@ public:
     void Flush() override;
 
 protected:
-    virtual void DoLogRecord(wxLogLevel level,
+    void DoLogRecord(wxLogLevel level,
                              const wxString& msg,
                              const wxLogRecordInfo& info) override;
 
@@ -118,7 +118,7 @@ public:
                 bool bShow = true,        // show window immediately?
                 bool bPassToOld = true);  // pass messages to the old target?
 
-    virtual ~wxLogWindow();
+    ~wxLogWindow() override;
 
     // window operations
         // show/hide the log window

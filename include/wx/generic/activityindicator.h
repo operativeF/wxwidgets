@@ -47,7 +47,7 @@ public:
                 long style = 0,
                 const wxString& name = wxActivityIndicatorNameStr);
 
-    virtual ~wxActivityIndicatorGeneric();
+    ~wxActivityIndicatorGeneric() override;
 
     void Start() override;
     void Stop() override;

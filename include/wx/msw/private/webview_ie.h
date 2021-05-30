@@ -163,7 +163,7 @@ class wxIEContainer : public wxActiveXContainer
 {
 public:
     wxIEContainer(wxWindow *parent, REFIID iid, IUnknown *pUnk, DocHostUIHandler* uiHandler = nullptr);
-    virtual ~wxIEContainer();
+    ~wxIEContainer() override;
     bool QueryClientSiteInterface(REFIID iid, void **_interface, const char *&desc) override;
 private:
     DocHostUIHandler* m_uiHandler;
@@ -175,13 +175,13 @@ public:
     DocHostUIHandler(wxWebView* browser) { m_browser = browser; }
     virtual ~DocHostUIHandler() = default;
 
-    virtual HRESULT wxSTDCALL ShowContextMenu(DWORD dwID, POINT *ppt,
+    HRESULT wxSTDCALL ShowContextMenu(DWORD dwID, POINT *ppt,
                                               IUnknown *pcmdtReserved,
                                               IDispatch *pdispReserved) override;
 
     HRESULT wxSTDCALL GetHostInfo(DOCHOSTUIINFO *pInfo) override;
 
-    virtual HRESULT wxSTDCALL ShowUI(DWORD dwID,
+    HRESULT wxSTDCALL ShowUI(DWORD dwID,
                                      IOleInPlaceActiveObject *pActiveObject,
                                      IOleCommandTarget *pCommandTarget,
                                      IOleInPlaceFrame *pFrame,
@@ -197,7 +197,7 @@ public:
 
     HRESULT wxSTDCALL OnFrameWindowActivate(BOOL fActivate) override;
 
-    virtual HRESULT wxSTDCALL ResizeBorder(LPCRECT prcBorder,
+    HRESULT wxSTDCALL ResizeBorder(LPCRECT prcBorder,
                                            IOleInPlaceUIWindow *pUIWindow,
                                            BOOL fRameWindow) override;
 
@@ -205,19 +205,19 @@ public:
                                                    const GUID *pguidCmdGroup,
                                                    DWORD nCmdID) override;
 
-    virtual HRESULT wxSTDCALL GetOptionKeyPath(LPOLESTR *pchKey,
+    HRESULT wxSTDCALL GetOptionKeyPath(LPOLESTR *pchKey,
                                                DWORD dw) override;
 
-    virtual HRESULT wxSTDCALL GetDropTarget(IDropTarget *pDropTarget,
+    HRESULT wxSTDCALL GetDropTarget(IDropTarget *pDropTarget,
                                             IDropTarget **ppDropTarget) override;
 
     HRESULT wxSTDCALL GetExternal(IDispatch **ppDispatch) override;
 
-    virtual HRESULT wxSTDCALL TranslateUrl(DWORD dwTranslate,
+    HRESULT wxSTDCALL TranslateUrl(DWORD dwTranslate,
                                            OLECHAR *pchURLIn,
                                            OLECHAR **ppchURLOut) override;
 
-    virtual HRESULT wxSTDCALL FilterDataObject(IDataObject *pDO,
+    HRESULT wxSTDCALL FilterDataObject(IDataObject *pDO,
                                                IDataObject **ppDORet) override;
     //IUnknown
     DECLARE_IUNKNOWN_METHODS;

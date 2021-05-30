@@ -171,7 +171,7 @@ private:
     bool m_allowTextEvents {true};
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();

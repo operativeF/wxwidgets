@@ -101,7 +101,7 @@ class WXDLLIMPEXP_CORE wxColourPickerCtrl : public wxPickerBase
 {
 public:
     wxColourPickerCtrl() = default;
-    virtual ~wxColourPickerCtrl() = default;
+    ~wxColourPickerCtrl() override = default;
 
 
     wxColourPickerCtrl(wxWindow *parent, wxWindowID id,
@@ -185,7 +185,7 @@ private:
 
     public:
 	wxColourPickerEvent& operator=(const wxColourPickerEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

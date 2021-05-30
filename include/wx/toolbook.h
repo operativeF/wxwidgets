@@ -76,7 +76,7 @@ public:
     wxString GetPageText(size_t n) const override;
     int GetPageImage(size_t n) const override;
     bool SetPageImage(size_t n, int imageId) override;
-    virtual bool InsertPage(size_t n,
+    bool InsertPage(size_t n,
                             wxWindow *page,
                             const wxString& text,
                             bool bSelect = false,
@@ -136,7 +136,7 @@ private:
     wxDECLARE_EVENT_TABLE();
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

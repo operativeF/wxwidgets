@@ -149,12 +149,12 @@ class WXDLLEXPORT wxDialUpManagerMSW : public wxDialUpManager
 public:
     // ctor & dtor
     wxDialUpManagerMSW();
-    virtual ~wxDialUpManagerMSW();
+    ~wxDialUpManagerMSW() override;
 
     // implement base class pure virtuals
     bool IsOk() const override;
     size_t GetISPNames(wxArrayString& names) const override;
-    virtual bool Dial(const wxString& nameOfISP,
+    bool Dial(const wxString& nameOfISP,
                       const wxString& username,
                       const wxString& password,
                       bool async) override;
@@ -167,7 +167,7 @@ public:
     bool EnableAutoCheckOnlineStatus(size_t nSeconds) override;
     void DisableAutoCheckOnlineStatus() override;
     void SetWellKnownHost(const wxString& hostname, int port) override;
-    virtual void SetConnectCommand(const wxString& commandDial,
+    void SetConnectCommand(const wxString& commandDial,
                                    const wxString& commandHangup) override;
 
     // for RasTimer

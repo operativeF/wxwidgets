@@ -407,7 +407,7 @@ public:
 
     wxAuiManager(wxWindow* managedWnd = nullptr,
                    unsigned int flags = wxAUI_MGR_DEFAULT);
-    virtual ~wxAuiManager();
+    ~wxAuiManager() override;
     void UnInit();
 
     void SetFlags(unsigned int flags);
@@ -667,7 +667,7 @@ public:
 private:
     public:
 	wxAuiManagerEvent& operator=(const wxAuiManagerEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 #endif

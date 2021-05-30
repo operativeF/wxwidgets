@@ -76,7 +76,7 @@ public:
         m_strings = strings;
     }
 
-    virtual void GetCompletions(const wxString& WXUNUSED(prefix),
+    void GetCompletions(const wxString& WXUNUSED(prefix),
                                 wxArrayString& res) override
     {
         res = m_strings;

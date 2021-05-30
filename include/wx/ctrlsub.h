@@ -187,7 +187,7 @@ private:
 
 public:
     wxItemContainer() { m_clientDataItemsType = wxClientDataType::None; }
-    virtual ~wxItemContainer();
+    ~wxItemContainer() override;
 
     // adding items
     // ------------

@@ -62,7 +62,7 @@ public:
     virtual WXHWND GetMainHWND() const = 0;
 
     // implement this base class function for both console and GUI applications
-    virtual bool SafeMessageBox(const wxString& text,
+    bool SafeMessageBox(const wxString& text,
                                 const wxString& title) override;
 
 protected:

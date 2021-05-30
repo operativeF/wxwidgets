@@ -43,7 +43,7 @@ public:
              const wxPoint& pos = wxDefaultPosition,
              long style = wxDEFAULT_DIALOG_STYLE);
     void Init();
-    virtual ~wxWizard();
+    ~wxWizard() override;
 
     // implement base class pure virtuals
     bool RunWizard(wxWizardPage *firstPage) override;

@@ -269,27 +269,27 @@ public:
 	DecorationList decorations;
 
 	Document();
-	virtual ~Document();
+	~Document() override;
 
 	int AddRef();
-	int SCI_METHOD Release();
+	int SCI_METHOD Release() override;
 
-	virtual void Init();
+	void Init() override;
 	int LineEndTypesSupported() const;
 	bool SetDBCSCodePage(int dbcsCodePage_);
 	int GetLineEndTypesAllowed() const { return cb.GetLineEndTypes(); }
 	bool SetLineEndTypesAllowed(int lineEndBitSet_);
 	int GetLineEndTypesActive() const { return cb.GetLineEndTypes(); }
-	virtual void InsertLine(int line);
-	virtual void RemoveLine(int line);
+	void InsertLine(int line) override;
+	void RemoveLine(int line) override;
 
-	int SCI_METHOD Version() const {
+	int SCI_METHOD Version() const override {
 		return dvLineEnd;
 	}
 
-	void SCI_METHOD SetErrorStatus(int status);
+	void SCI_METHOD SetErrorStatus(int status) override;
 
-	Sci_Position SCI_METHOD LineFromPosition(Sci_Position pos) const;
+	Sci_Position SCI_METHOD LineFromPosition(Sci_Position pos) const override;
 	int ClampPositionIntoDocument(int pos) const;
 	bool ContainsLineEnd(const char *s, int length) const { return cb.ContainsLineEnd(s, length); }
 	bool IsCrLf(int pos) const;
@@ -300,11 +300,11 @@ public:
 	bool NextCharacter(int &pos, int moveDir) const;	// Returns true if pos changed
 	Document::CharacterExtracted CharacterAfter(int position) const;
 	Document::CharacterExtracted CharacterBefore(int position) const;
-	Sci_Position SCI_METHOD GetRelativePosition(Sci_Position positionStart, Sci_Position characterOffset) const;
+	Sci_Position SCI_METHOD GetRelativePosition(Sci_Position positionStart, Sci_Position characterOffset) const override;
 	int GetRelativePositionUTF16(int positionStart, int characterOffset) const;
-	int SCI_METHOD GetCharacterAndWidth(Sci_Position position, Sci_Position *pWidth) const;
-	int SCI_METHOD CodePage() const;
-	bool SCI_METHOD IsDBCSLeadByte(char ch) const;
+	int SCI_METHOD GetCharacterAndWidth(Sci_Position position, Sci_Position *pWidth) const override;
+	int SCI_METHOD CodePage() const override;
+	bool SCI_METHOD IsDBCSLeadByte(char ch) const override;
 	int SafeSegment(const char *text, int length, int lengthSegment) const;
 	EncodingFamily CodePageFamily() const;
 
@@ -314,8 +314,8 @@ public:
 	bool DeleteChars(int pos, int len);
 	int InsertString(int position, const char *s, int insertLength);
 	void ChangeInsertion(const char *s, int length);
-	int SCI_METHOD AddData(char *data, Sci_Position length);
-	void * SCI_METHOD ConvertToDocument();
+	int SCI_METHOD AddData(char *data, Sci_Position length) override;
+	void * SCI_METHOD ConvertToDocument() override;
 	int Undo();
 	int Redo();
 	bool CanUndo() const { return cb.CanUndo(); }
@@ -336,11 +336,11 @@ public:
 	void TentativeUndo();
 	bool TentativeActive() const { return cb.TentativeActive(); }
 
-	const char * SCI_METHOD BufferPointer() { return cb.BufferPointer(); }
+	const char * SCI_METHOD BufferPointer() override { return cb.BufferPointer(); }
 	const char *RangePointer(int position, int rangeLength) { return cb.RangePointer(position, rangeLength); }
 	int GapPosition() const { return cb.GapPosition(); }
 
-	int SCI_METHOD GetLineIndentation(Sci_Position line);
+	int SCI_METHOD GetLineIndentation(Sci_Position line) override;
 	int SetLineIndentation(int line, int indent);
 	int GetLineIndentPosition(int line) const;
 	int GetColumn(int position);
@@ -357,10 +357,10 @@ public:
 	void DelCharBack(int pos);
 
 	char CharAt(int position) const { return cb.CharAt(position); }
-	void SCI_METHOD GetCharRange(char *buffer, Sci_Position position, Sci_Position lengthRetrieve) const {
+	void SCI_METHOD GetCharRange(char *buffer, Sci_Position position, Sci_Position lengthRetrieve) const override {
 		cb.GetCharRange(buffer, position, lengthRetrieve);
 	}
-	char SCI_METHOD StyleAt(Sci_Position position) const { return cb.StyleAt(position); }
+	char SCI_METHOD StyleAt(Sci_Position position) const override { return cb.StyleAt(position); }
 	int StyleIndexAt(Sci_Position position) const { return static_cast<unsigned char>(cb.StyleAt(position)); }
 	void GetStyleRange(unsigned char *buffer, int position, int lengthRetrieve) const {
 		cb.GetStyleRange(buffer, position, lengthRetrieve);
@@ -373,16 +373,16 @@ public:
 	void DeleteMarkFromHandle(int markerHandle);
 	void DeleteAllMarks(int markerNum);
 	int LineFromHandle(int markerHandle);
-	Sci_Position SCI_METHOD LineStart(Sci_Position line) const;
+	Sci_Position SCI_METHOD LineStart(Sci_Position line) const override;
 	bool IsLineStartPosition(int position) const;
-	Sci_Position SCI_METHOD LineEnd(Sci_Position line) const;
+	Sci_Position SCI_METHOD LineEnd(Sci_Position line) const override;
 	int LineEndPosition(int position) const;
 	bool IsLineEndPosition(int position) const;
 	bool IsPositionInLineEnd(int position) const;
 	int VCHomePosition(int position) const;
 
-	int SCI_METHOD SetLevel(Sci_Position line, int level);
-	int SCI_METHOD GetLevel(Sci_Position line) const;
+	int SCI_METHOD SetLevel(Sci_Position line, int level) override;
+	int SCI_METHOD GetLevel(Sci_Position line) const override;
 	void ClearLevels();
 	int GetLastChild(int lineParent, int level=-1, int lastLine=-1);
 	int GetFoldParent(int line) const;
@@ -392,7 +392,7 @@ public:
 	int ExtendWordSelect(int pos, int delta, bool onlyWordCharacters=false) const;
 	int NextWordStart(int pos, int delta) const;
 	int NextWordEnd(int pos, int delta) const;
-	Sci_Position SCI_METHOD Length() const { return cb.Length(); }
+	Sci_Position SCI_METHOD Length() const override { return cb.Length(); }
 	void Allocate(int newSize) { cb.Allocate(newSize); }
 
 	CharacterExtracted ExtractCharacter(int position) const;
@@ -411,24 +411,24 @@ public:
 	void SetDefaultCharClasses(bool includeWordClass);
 	void SetCharClasses(const unsigned char *chars, CharClassify::cc newCharClass);
 	int GetCharsOfClass(CharClassify::cc characterClass, unsigned char *buffer) const;
-	void SCI_METHOD StartStyling(Sci_Position position, char mask);
-	bool SCI_METHOD SetStyleFor(Sci_Position length, char style);
-	bool SCI_METHOD SetStyles(Sci_Position length, const char *styles);
+	void SCI_METHOD StartStyling(Sci_Position position, char mask) override;
+	bool SCI_METHOD SetStyleFor(Sci_Position length, char style) override;
+	bool SCI_METHOD SetStyles(Sci_Position length, const char *styles) override;
 	int GetEndStyled() const { return endStyled; }
 	void EnsureStyledTo(int pos);
 	void StyleToAdjustingLineDuration(int pos);
 	void LexerChanged();
 	int GetStyleClock() const { return styleClock; }
 	void IncrementStyleClock();
-	void SCI_METHOD DecorationSetCurrentIndicator(int indicator) {
+	void SCI_METHOD DecorationSetCurrentIndicator(int indicator) override {
 		decorations.SetCurrentIndicator(indicator);
 	}
-	void SCI_METHOD DecorationFillRange(Sci_Position position, int value, Sci_Position fillLength);
+	void SCI_METHOD DecorationFillRange(Sci_Position position, int value, Sci_Position fillLength) override;
 
-	int SCI_METHOD SetLineState(Sci_Position line, int state);
-	int SCI_METHOD GetLineState(Sci_Position line) const;
+	int SCI_METHOD SetLineState(Sci_Position line, int state) override;
+	int SCI_METHOD GetLineState(Sci_Position line) const override;
 	int GetMaxLineState();
-	void SCI_METHOD ChangeLexerState(Sci_Position start, Sci_Position end);
+	void SCI_METHOD ChangeLexerState(Sci_Position start, Sci_Position end) override;
 
 	StyledText MarginStyledText(int line) const;
 	void MarginSetStyle(int line, int style);

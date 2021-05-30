@@ -30,7 +30,7 @@ protected:
     bool OnExists() const override
         { return false; }
 
-    virtual bool OnOpen(const wxString & WXUNUSED(strBufferName),
+    bool OnOpen(const wxString & WXUNUSED(strBufferName),
                         wxTextBufferOpenMode WXUNUSED(OpenMode)) override
         { return true; }
 
@@ -40,7 +40,7 @@ protected:
     bool OnRead(const wxMBConv& WXUNUSED(conv)) override
         { return true; }
 
-    virtual bool OnWrite(wxTextFileType WXUNUSED(typeNew),
+    bool OnWrite(wxTextFileType WXUNUSED(typeNew),
                          const wxMBConv& WXUNUSED(conv) = wxMBConvUTF8()) override
         { return true; }
 

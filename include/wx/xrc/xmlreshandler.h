@@ -54,7 +54,7 @@ public:
     {}
 
     // Destructor.
-    virtual ~wxXmlResourceHandlerImplBase() = default;
+    ~wxXmlResourceHandlerImplBase() override = default;
 
     virtual wxObject *CreateResource(wxXmlNode *node, wxObject *parent,
                                      wxObject *instance) = 0;
@@ -164,7 +164,7 @@ public:
 
 
     // Destructor.
-    virtual ~wxXmlResourceHandler()
+    ~wxXmlResourceHandler() override
     {
         delete m_impl;
     }

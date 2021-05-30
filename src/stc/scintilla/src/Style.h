@@ -35,7 +35,7 @@ class FontAlias : public Font {
 public:
 	FontAlias();
 	FontAlias(const FontAlias &);
-	virtual ~FontAlias();
+	~FontAlias() override;
 	void MakeAlias(Font &fontOrigin);
 	void ClearFont();
 };

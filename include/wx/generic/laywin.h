@@ -99,7 +99,7 @@ protected:
 private:
     public:
 	wxQueryLayoutInfoEvent& operator=(const wxQueryLayoutInfoEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -143,7 +143,7 @@ protected:
 private:
     public:
 	wxCalculateLayoutEvent& operator=(const wxCalculateLayoutEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -213,7 +213,7 @@ private:
     wxSize                      m_defaultSize;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();

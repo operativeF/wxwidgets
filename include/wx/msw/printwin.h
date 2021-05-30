@@ -24,7 +24,7 @@ class WXDLLIMPEXP_CORE wxWindowsPrinter : public wxPrinterBase
 public:
     wxWindowsPrinter(wxPrintDialogData *data = nullptr);
 
-    virtual bool Print(wxWindow *parent,
+    bool Print(wxWindow *parent,
                        wxPrintout *printout,
                        bool prompt = true) override;
 
@@ -50,7 +50,7 @@ public:
     wxWindowsPrintPreview(wxPrintout *printout,
                           wxPrintout *printoutForPrinting,
                           wxPrintData *data);
-    virtual ~wxWindowsPrintPreview();
+    ~wxWindowsPrintPreview() override;
 
 	wxWindowsPrintPreview(const wxWindowsPrintPreview&) = delete;
 	wxWindowsPrintPreview& operator=(const wxWindowsPrintPreview&) = delete;
@@ -64,7 +64,7 @@ protected:
 #endif
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

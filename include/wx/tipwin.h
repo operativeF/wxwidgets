@@ -39,7 +39,7 @@ public:
                 wxTipWindow** windowPtr = nullptr,
                 wxRect *rectBound = nullptr);
 
-    virtual ~wxTipWindow();
+    ~wxTipWindow() override;
 
     // If windowPtr is not NULL the given address will be NULLed when the
     // window has closed

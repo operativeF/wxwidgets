@@ -37,13 +37,13 @@ protected:
     void BeginMeasuring() override;
     void EndMeasuring() override;
 
-    virtual void DoGetTextExtent(const wxString& string,
+    void DoGetTextExtent(const wxString& string,
                                wxCoord *width,
                                wxCoord *height,
                                wxCoord *descent = nullptr,
                                wxCoord *externalLeading = nullptr) override;
 
-    virtual bool DoGetPartialTextExtents(const wxString& text,
+    bool DoGetPartialTextExtents(const wxString& text,
                                          wxArrayInt& widths,
                                          double scaleX) override;
 

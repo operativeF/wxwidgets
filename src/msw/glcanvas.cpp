@@ -846,7 +846,7 @@ public:
             hdc = ::GetDC(GetHwnd());
         }
     }
-    ~wxGLdummyWin()
+    ~wxGLdummyWin() override
     {
         if ( hdc )
             ::ReleaseDC(GetHwnd(), hdc);

@@ -25,7 +25,7 @@ public:
     // Override the base class function to provide a much more efficient
     // implementation for it using the platform native support for watching the
     // entire directory trees.
-    virtual bool AddTree(const wxFileName& path, int events = wxFSW_EVENT_ALL,
+    bool AddTree(const wxFileName& path, int events = wxFSW_EVENT_ALL,
                          const wxString& filter = wxEmptyString) override;
 
 protected:

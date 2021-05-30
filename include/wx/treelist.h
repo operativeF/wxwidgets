@@ -155,7 +155,7 @@ public:
                 const wxString& name = wxASCII_STR(wxTreeListCtrlNameStr));
 
 
-    virtual ~wxTreeListCtrl();
+    ~wxTreeListCtrl() override;
 
     // Columns methods
     // ---------------
@@ -530,7 +530,7 @@ private:
 
     public:
 	wxTreeListEvent& operator=(const wxTreeListEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

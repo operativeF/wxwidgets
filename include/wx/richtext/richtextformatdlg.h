@@ -86,7 +86,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextFormattingDialogFactory: public wxObject
 {
 public:
     wxRichTextFormattingDialogFactory() = default;
-    virtual ~wxRichTextFormattingDialogFactory() = default;
+    ~wxRichTextFormattingDialogFactory() override = default;
 
 // Overridables
 
@@ -138,7 +138,7 @@ public:
         Create(flags, parent, title, id, pos, sz, style);
     }
 
-    ~wxRichTextFormattingDialog();
+    ~wxRichTextFormattingDialog() override;
 
     void Init();
 
@@ -304,7 +304,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextColourSwatchCtrl: public wxControl
     wxDECLARE_CLASS(wxRichTextColourSwatchCtrl);
 public:
     wxRichTextColourSwatchCtrl(wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0);
-    ~wxRichTextColourSwatchCtrl();
+    ~wxRichTextColourSwatchCtrl() override;
 
     void OnMouseEvent(wxMouseEvent& event);
 
@@ -337,7 +337,7 @@ public:
     }
     wxRichTextFontListBox(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, long style = 0);
-    virtual ~wxRichTextFontListBox();
+    ~wxRichTextFontListBox() override;
 
     void Init()
     {

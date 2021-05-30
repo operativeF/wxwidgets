@@ -19,7 +19,7 @@ public:
     wxSound();
     wxSound(const wxString& fileName, bool isResource = false);
     wxSound(size_t size, const void* data);
-    virtual ~wxSound();
+    ~wxSound() override;
 
     // Create from resource or file
     bool Create(const wxString& fileName, bool isResource = false);

@@ -1329,7 +1329,7 @@ protected:
 private:
     public:
 	wxIdleEvent& operator=(const wxIdleEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1367,7 +1367,7 @@ public:
 private:
     public:
 	wxThreadEvent& operator=(const wxThreadEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1639,7 +1639,7 @@ private:
 
     public:
 	wxCommandEvent& operator=(const wxCommandEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1674,7 +1674,7 @@ private:
 private:
     public:
 	wxNotifyEvent& operator=(const wxNotifyEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1710,7 +1710,7 @@ public:
 private:
     public:
 	wxScrollEvent& operator=(const wxScrollEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1751,7 +1751,7 @@ protected:
 private:
     public:
 	wxScrollWinEvent& operator=(const wxScrollWinEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1954,7 +1954,7 @@ private:
 private:
     public:
 	wxSetCursorEvent& operator=(const wxSetCursorEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -1995,7 +1995,7 @@ protected:
 
     public:
 	wxGestureEvent& operator=(const wxGestureEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 
@@ -2030,7 +2030,7 @@ private:
 
     public:
 	wxPanGestureEvent& operator=(const wxPanGestureEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2063,7 +2063,7 @@ private:
 
     public:
 	wxZoomGestureEvent& operator=(const wxZoomGestureEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2096,7 +2096,7 @@ private:
 
     public:
 	wxRotateGestureEvent& operator=(const wxRotateGestureEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2122,7 +2122,7 @@ public:
 private:
     public:
 	wxTwoFingerTapEvent& operator=(const wxTwoFingerTapEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2147,7 +2147,7 @@ public:
 private:
     public:
 	wxLongPressEvent& operator=(const wxLongPressEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2172,7 +2172,7 @@ public:
 private:
     public:
 	wxPressAndTapEvent& operator=(const wxPressAndTapEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2378,7 +2378,7 @@ public:
 private:
     public:
 	wxSizeEvent& operator=(const wxSizeEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2421,7 +2421,7 @@ protected:
 private:
     public:
 	wxMoveEvent& operator=(const wxMoveEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2449,7 +2449,7 @@ public:
 private:
     public:
 	wxPaintEvent& operator=(const wxPaintEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2469,7 +2469,7 @@ public:
 private:
     public:
 	wxNcPaintEvent& operator=(const wxNcPaintEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2502,7 +2502,7 @@ protected:
 private:
     public:
 	wxEraseEvent& operator=(const wxEraseEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2538,7 +2538,7 @@ private:
 private:
     public:
 	wxFocusEvent& operator=(const wxFocusEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2557,7 +2557,7 @@ public:
 private:
     public:
 	wxChildFocusEvent& operator=(const wxChildFocusEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2606,7 +2606,7 @@ private:
 private:
     public:
 	wxActivateEvent& operator=(const wxActivateEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2628,7 +2628,7 @@ public:
 private:
     public:
 	wxInitDialogEvent& operator=(const wxInitDialogEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2667,7 +2667,7 @@ private:
 
     public:
 	wxMenuEvent& operator=(const wxMenuEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2723,7 +2723,7 @@ protected:
 private:
     public:
 	wxCloseEvent& operator=(const wxCloseEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2755,7 +2755,7 @@ protected:
 private:
     public:
 	wxShowEvent& operator=(const wxShowEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2785,7 +2785,7 @@ protected:
 private:
     public:
 	wxIconizeEvent& operator=(const wxIconizeEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2805,7 +2805,7 @@ public:
 private:
     public:
 	wxMaximizeEvent& operator=(const wxMaximizeEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2833,7 +2833,7 @@ protected:
 private:
     public:
 	wxFullScreenEvent& operator=(const wxFullScreenEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2933,7 +2933,7 @@ public:
 private:
     public:
 	wxJoystickEvent& operator=(const wxJoystickEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -2973,7 +2973,7 @@ public:
         }
     }
 
-    virtual ~wxDropFilesEvent()
+    ~wxDropFilesEvent() override
     {
         delete [] m_files;
     }
@@ -2987,7 +2987,7 @@ public:
 private:
     public:
 	wxDropFilesEvent& operator=(const wxDropFilesEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3092,7 +3092,7 @@ protected:
 private:
     public:
 	wxUpdateUIEvent& operator=(const wxUpdateUIEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3114,7 +3114,7 @@ public:
 private:
     public:
 	wxSysColourChangedEvent& operator=(const wxSysColourChangedEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3147,7 +3147,7 @@ private:
 
     public:
 	wxMouseCaptureChangedEvent& operator=(const wxMouseCaptureChangedEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3174,7 +3174,7 @@ public:
 
     public:
 	wxMouseCaptureLostEvent& operator=(const wxMouseCaptureLostEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3187,7 +3187,7 @@ class WXDLLIMPEXP_CORE wxDisplayChangedEvent : public wxEvent
 private:
     public:
 	wxDisplayChangedEvent& operator=(const wxDisplayChangedEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 
@@ -3224,7 +3224,7 @@ private:
 
     public:
 	wxDPIChangedEvent& operator=(const wxDPIChangedEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3257,7 +3257,7 @@ protected:
 private:
     public:
 	wxPaletteChangedEvent& operator=(const wxPaletteChangedEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3291,7 +3291,7 @@ protected:
 private:
     public:
 	wxQueryNewPaletteEvent& operator=(const wxQueryNewPaletteEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3361,7 +3361,7 @@ public:
 private:
     public:
 	wxNavigationKeyEvent& operator=(const wxNavigationKeyEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3388,7 +3388,7 @@ public:
 private:
     public:
 	wxWindowCreateEvent& operator=(const wxWindowCreateEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3405,7 +3405,7 @@ public:
 private:
     public:
 	wxWindowDestroyEvent& operator=(const wxWindowDestroyEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3471,7 +3471,7 @@ protected:
 private:
     public:
 	wxHelpEvent& operator=(const wxHelpEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3503,7 +3503,7 @@ public:
 private:
     public:
 	wxClipboardTextEvent& operator=(const wxClipboardTextEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3542,7 +3542,7 @@ protected:
 private:
     public:
 	wxContextMenuEvent& operator=(const wxContextMenuEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -3738,7 +3738,7 @@ class WXDLLIMPEXP_BASE wxEvtHandler : public wxObject
 {
 public:
     wxEvtHandler();
-    virtual ~wxEvtHandler();
+    ~wxEvtHandler() override;
 
 	wxEvtHandler(const wxEvtHandler&) = delete;
 	wxEvtHandler& operator=(const wxEvtHandler&) = delete;
@@ -4185,7 +4185,7 @@ private:
     static wxEventFilter* ms_filterList;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -4294,7 +4294,7 @@ class WXDLLIMPEXP_CORE wxEventBlocker : public wxEvtHandler
 {
 public:
     wxEventBlocker(wxWindow *win, wxEventType type = wxEVT_ANY);
-    virtual ~wxEventBlocker();
+    ~wxEventBlocker() override;
 
     void Block(wxEventType type)
     {

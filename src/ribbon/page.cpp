@@ -43,7 +43,7 @@ public:
                  const wxSize& size = wxDefaultSize,
                  long style = 0);
 
-    virtual ~wxRibbonPageScrollButton();
+    ~wxRibbonPageScrollButton() override;
 
 protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }

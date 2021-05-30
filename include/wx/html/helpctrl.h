@@ -47,7 +47,7 @@ public:
     wxHtmlHelpController(int style = wxHF_DEFAULT_STYLE, wxWindow* parentWindow = nullptr);
     wxHtmlHelpController(wxWindow* parentWindow, int style = wxHF_DEFAULT_STYLE);
 
-    virtual ~wxHtmlHelpController();
+    ~wxHtmlHelpController() override;
 
     void SetShouldPreventAppExit(bool enable);
 
@@ -90,13 +90,13 @@ public:
     bool DisplayBlock(long blockNo) override { return DisplaySection(blockNo); }
     bool DisplayTextPopup(const wxString& text, const wxPoint& pos) override;
 
-    virtual void SetFrameParameters(const wxString& titleFormat,
+    void SetFrameParameters(const wxString& titleFormat,
                                const wxSize& size,
                                const wxPoint& pos = wxDefaultPosition,
                                bool newFrameEachTime = false) override;
     /// Obtains the latest settings used by the help frame and the help
     /// frame.
-    virtual wxFrame *GetFrameParameters(wxSize *size = nullptr,
+    wxFrame *GetFrameParameters(wxSize *size = nullptr,
                                wxPoint *pos = nullptr,
                                bool *newFrameEachTime = nullptr) override;
 

@@ -145,7 +145,7 @@ public:
     }
 #endif
 
-    virtual ~wxDragImage();
+    ~wxDragImage() override;
 
     // Attributes
     ////////////////////////////////////////////////////////////////////////////

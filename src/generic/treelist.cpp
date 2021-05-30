@@ -300,7 +300,7 @@ public:
     // bound to it (otherwise, what would it return for an item expanded in one
     // associated control and collapsed in another one?).
     explicit wxTreeListModel(wxTreeListCtrl* treelist);
-    virtual ~wxTreeListModel();
+    ~wxTreeListModel() override;
 
 
     // Helpers for converting between wxDataViewItem and wxTreeListItem. These

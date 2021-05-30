@@ -57,7 +57,7 @@ private:
 
     public:
 	wxFileDirPickerEvent& operator=(const wxFileDirPickerEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };
@@ -287,7 +287,7 @@ public:     // overrides
 
 
 protected:
-    virtual
+    
     wxFileDirPickerWidgetBase *CreatePicker(wxWindow *parent,
                                             const wxString& path,
                                             const wxString& message,
@@ -386,7 +386,7 @@ public:     // overrides
 
 
 protected:
-    virtual
+    
     wxFileDirPickerWidgetBase *CreatePicker(wxWindow *parent,
                                             const wxString& path,
                                             const wxString& message,

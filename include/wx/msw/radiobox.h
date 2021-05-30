@@ -54,7 +54,7 @@ public:
                      style, val, name);
     }
 
-    virtual ~wxRadioBox();
+    ~wxRadioBox() override;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -143,7 +143,7 @@ protected:
     // Adjust all the buttons to the new window size.
     void PositionAllButtons(int x, int y, int width, int height);
 
-    virtual void DoSetSize(int x, int y,
+    void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
     void DoMoveWindow(int x, int y, int width, int height) override;

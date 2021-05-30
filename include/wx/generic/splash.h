@@ -44,7 +44,7 @@ public:
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    long style = wxSIMPLE_BORDER|wxFRAME_NO_TASKBAR|wxSTAY_ON_TOP);
-    virtual ~wxSplashScreen();
+    ~wxSplashScreen() override;
 
     void OnCloseWindow(wxCloseEvent& event);
     void OnNotify(wxTimerEvent& event);

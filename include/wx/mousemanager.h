@@ -47,7 +47,7 @@ public:
  Create(win); }
     bool Create(wxWindow *win);
 
-    virtual ~wxMouseEventsManager();
+    ~wxMouseEventsManager() override;
 
 protected:
     // called to find the item at the given position: return wxNOT_FOUND (-1)

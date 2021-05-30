@@ -61,7 +61,7 @@ public:
 
     wxPGCellRenderer()
          = default;
-    virtual ~wxPGCellRenderer() = default;
+    ~wxPGCellRenderer() override = default;
 
     // Render flags
     enum
@@ -147,7 +147,7 @@ public:
 class WXDLLIMPEXP_PROPGRID wxPGDefaultRenderer : public wxPGCellRenderer
 {
 public:
-    virtual bool Render( wxDC& dc,
+    bool Render( wxDC& dc,
                          const wxRect& rect,
                          const wxPropertyGrid* propertyGrid,
                          wxPGProperty* property,
@@ -155,7 +155,7 @@ public:
                          int item,
                          int flags ) const override;
 
-    virtual wxSize GetImageSize( const wxPGProperty* property,
+    wxSize GetImageSize( const wxPGProperty* property,
                                  int column,
                                  int item ) const override;
 
@@ -180,7 +180,7 @@ public:
     void SetFont( const wxFont& font ) { m_font = font; }
 
 protected:
-    virtual ~wxPGCellData() = default;
+    ~wxPGCellData() override = default;
 
     wxString    m_text;
     wxBitmap    m_bitmap;
@@ -207,7 +207,7 @@ public:
               const wxColour& fgCol = wxNullColour,
               const wxColour& bgCol = wxNullColour );
 
-    virtual ~wxPGCell() = default;
+    ~wxPGCell() override = default;
 
     wxPGCellData* GetData()
     {
@@ -629,7 +629,7 @@ public:
         SetText(label);
     }
 
-    virtual ~wxPGChoiceEntry() = default;
+    ~wxPGChoiceEntry() override = default;
 
     void SetValue( int value ) { m_value = value; }
     int GetValue() const { return m_value; }
@@ -686,7 +686,7 @@ private:
     std::vector<wxPGChoiceEntry>   m_items;
 
 protected:
-    virtual ~wxPGChoicesData();
+    ~wxPGChoicesData() override;
 };
 
 #define wxPGChoicesEmptyData    ((wxPGChoicesData*)NULL)
@@ -986,7 +986,7 @@ public:
 
     // Virtual destructor.
     // It is customary for derived properties to implement this.
-    virtual ~wxPGProperty();
+    ~wxPGProperty() override;
 
     // This virtual function is called after m_value has been set.
     // Remarks:
@@ -2073,7 +2073,7 @@ public:
 
     // Constructor.
     wxPGRootProperty( const wxString& name = wxS("<Root>") );
-    virtual ~wxPGRootProperty();
+    ~wxPGRootProperty() override;
 
     bool StringToValue( wxVariant&, const wxString&, int ) const override
     {
@@ -2098,7 +2098,7 @@ public:
 
     wxPropertyCategory( const wxString& label,
                         const wxString& name = wxPG_LABEL );
-    ~wxPropertyCategory();
+    ~wxPropertyCategory() override;
 
     int GetTextExtent( const wxWindow* wnd, const wxFont& font ) const;
 

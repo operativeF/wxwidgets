@@ -33,7 +33,7 @@ public:
         (void)Create(parent, id, range, pos, size, style, validator, name);
     }
 
-    virtual ~wxGauge();
+    ~wxGauge() override;
 
 	wxGauge(const wxGauge&) = delete;
 	wxGauge& operator=(const wxGauge&) = delete;
@@ -75,7 +75,7 @@ private:
     void SetDeterminateMode();
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

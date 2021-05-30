@@ -123,7 +123,7 @@ public:
     // ctors and dtors
     wxSocketBase();
     wxSocketBase(wxSocketFlags flags, wxSocketType type);
-    virtual ~wxSocketBase();
+    ~wxSocketBase() override;
     void Init();
     bool Destroy();
 
@@ -433,7 +433,7 @@ public:
 
     public:
 	wxSocketEvent& operator=(const wxSocketEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

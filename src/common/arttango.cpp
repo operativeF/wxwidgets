@@ -87,7 +87,7 @@ public:
     }
 
 protected:
-    virtual wxBitmap CreateBitmap(const wxArtID& id,
+    wxBitmap CreateBitmap(const wxArtID& id,
                                   const wxArtClient& client,
                                   const wxSize& size) override;
 

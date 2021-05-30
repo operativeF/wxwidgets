@@ -58,14 +58,14 @@ class WXDLLIMPEXP_ADV wxGridCellTextEditor : public wxGridCellEditor
 public:
     explicit wxGridCellTextEditor(size_t maxChars = 0);
 
-    virtual void Create(wxWindow* parent,
+    void Create(wxWindow* parent,
                         wxWindowID id,
                         wxEvtHandler* evtHandler) override;
     void SetSize(const wxRect& rect) override;
 
     bool IsAcceptedKey(wxKeyEvent& event) override;
     void BeginEdit(int row, int col, wxGrid* grid) override;
-    virtual bool EndEdit(int row, int col, const wxGrid* grid,
+    bool EndEdit(int row, int col, const wxGrid* grid,
                          const wxString& oldval, wxString *newval) override;
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 
@@ -112,7 +112,7 @@ public:
     // done
     wxGridCellNumberEditor(int min = -1, int max = -1);
 
-    virtual void Create(wxWindow* parent,
+    void Create(wxWindow* parent,
                         wxWindowID id,
                         wxEvtHandler* evtHandler) override;
 
@@ -120,7 +120,7 @@ public:
 
     bool IsAcceptedKey(wxKeyEvent& event) override;
     void BeginEdit(int row, int col, wxGrid* grid) override;
-    virtual bool EndEdit(int row, int col, const wxGrid* grid,
+    bool EndEdit(int row, int col, const wxGrid* grid,
                          const wxString& oldval, wxString *newval) override;
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 
@@ -198,13 +198,13 @@ public:
                           int precision = -1,
                           int format = wxGRID_FLOAT_FORMAT_DEFAULT);
 
-    virtual void Create(wxWindow* parent,
+    void Create(wxWindow* parent,
                         wxWindowID id,
                         wxEvtHandler* evtHandler) override;
 
     bool IsAcceptedKey(wxKeyEvent& event) override;
     void BeginEdit(int row, int col, wxGrid* grid) override;
-    virtual bool EndEdit(int row, int col, const wxGrid* grid,
+    bool EndEdit(int row, int col, const wxGrid* grid,
                          const wxString& oldval, wxString *newval) override;
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 
@@ -244,12 +244,12 @@ class WXDLLIMPEXP_ADV wxGridCellBoolEditor : public wxGridCellEditor
 public:
     wxGridCellBoolEditor() = default;
 
-    virtual wxGridActivationResult
+    wxGridActivationResult
     TryActivate(int row, int col, wxGrid* grid,
                 const wxGridActivationSource& actSource) override;
     void DoActivate(int row, int col, wxGrid* grid) override;
 
-    virtual void Create(wxWindow* parent,
+    void Create(wxWindow* parent,
                         wxWindowID id,
                         wxEvtHandler* evtHandler) override;
 
@@ -258,7 +258,7 @@ public:
 
     bool IsAcceptedKey(wxKeyEvent& event) override;
     void BeginEdit(int row, int col, wxGrid* grid) override;
-    virtual bool EndEdit(int row, int col, const wxGrid* grid,
+    bool EndEdit(int row, int col, const wxGrid* grid,
                          const wxString& oldval, wxString *newval) override;
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 
@@ -318,14 +318,14 @@ public:
     wxGridCellChoiceEditor(const wxArrayString& choices,
                            bool allowOthers = false);
 
-    virtual void Create(wxWindow* parent,
+    void Create(wxWindow* parent,
                         wxWindowID id,
                         wxEvtHandler* evtHandler) override;
 
     void SetSize(const wxRect& rect) override;
 
     void BeginEdit(int row, int col, wxGrid* grid) override;
-    virtual bool EndEdit(int row, int col, const wxGrid* grid,
+    bool EndEdit(int row, int col, const wxGrid* grid,
                          const wxString& oldval, wxString *newval) override;
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 
@@ -360,12 +360,12 @@ class WXDLLIMPEXP_ADV wxGridCellEnumEditor : public wxGridCellChoiceEditor
 {
 public:
     wxGridCellEnumEditor( const wxString& choices = wxEmptyString );
-    virtual ~wxGridCellEnumEditor() = default;
+    ~wxGridCellEnumEditor() override = default;
 
     wxGridCellEditor*  Clone() const override;
 
     void BeginEdit(int row, int col, wxGrid* grid) override;
-    virtual bool EndEdit(int row, int col, const wxGrid* grid,
+    bool EndEdit(int row, int col, const wxGrid* grid,
                          const wxString& oldval, wxString *newval) override;
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 
@@ -382,7 +382,7 @@ class WXDLLIMPEXP_ADV wxGridCellAutoWrapStringEditor : public wxGridCellTextEdit
 {
 public:
     wxGridCellAutoWrapStringEditor()  = default;
-    virtual void Create(wxWindow* parent,
+    void Create(wxWindow* parent,
                         wxWindowID id,
                         wxEvtHandler* evtHandler) override;
 
@@ -402,14 +402,14 @@ public:
 
     void SetParameters(const wxString& params) override;
 
-    virtual void Create(wxWindow* parent,
+    void Create(wxWindow* parent,
                         wxWindowID id,
                         wxEvtHandler* evtHandler) override;
 
     void SetSize(const wxRect& rect) override;
 
     void BeginEdit(int row, int col, wxGrid* grid) override;
-    virtual bool EndEdit(int row, int col, const wxGrid* grid,
+    bool EndEdit(int row, int col, const wxGrid* grid,
                          const wxString& oldval, wxString *newval) override;
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 

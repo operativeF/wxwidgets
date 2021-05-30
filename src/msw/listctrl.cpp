@@ -243,7 +243,7 @@ private:
         return true;
     }
 
-    virtual const wxItemAttr*
+    const wxItemAttr*
     GetItemAttr(DWORD_PTR WXUNUSED(dwItemSpec)) const override
     {
         // We use the same attribute for all items for now.

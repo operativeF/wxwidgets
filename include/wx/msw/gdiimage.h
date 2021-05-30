@@ -130,7 +130,7 @@ protected:
     wxGDIRefData *CreateGDIRefData() const override { return CreateData(); }
 
     // we can't [efficiently] clone objects of this class
-    virtual wxGDIRefData *
+    wxGDIRefData *
     CloneGDIRefData(const wxGDIRefData *WXUNUSED(data)) const override
     {
         wxFAIL_MSG( wxT("must be implemented if used") );

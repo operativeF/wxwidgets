@@ -24,7 +24,7 @@ class WXDLLIMPEXP_ADV wxGridCellStringRenderer : public wxGridCellRenderer
 {
 public:
     // draw the string
-    virtual void Draw(wxGrid& grid,
+    void Draw(wxGrid& grid,
                       wxGridCellAttr& attr,
                       wxDC& dc,
                       const wxRect& rect,
@@ -32,7 +32,7 @@ public:
                       bool isSelected) override;
 
     // return the string extent
-    virtual wxSize GetBestSize(wxGrid& grid,
+    wxSize GetBestSize(wxGrid& grid,
                                wxGridCellAttr& attr,
                                wxDC& dc,
                                int row, int col) override;
@@ -59,19 +59,19 @@ public:
     }
 
     // draw the string right aligned
-    virtual void Draw(wxGrid& grid,
+    void Draw(wxGrid& grid,
                       wxGridCellAttr& attr,
                       wxDC& dc,
                       const wxRect& rect,
                       int row, int col,
                       bool isSelected) override;
 
-    virtual wxSize GetBestSize(wxGrid& grid,
+    wxSize GetBestSize(wxGrid& grid,
                                wxGridCellAttr& attr,
                                wxDC& dc,
                                int row, int col) override;
 
-    virtual wxSize GetMaxBestSize(wxGrid& grid,
+    wxSize GetMaxBestSize(wxGrid& grid,
                                   wxGridCellAttr& attr,
                                   wxDC& dc) override;
 
@@ -104,14 +104,14 @@ public:
     void SetFormat(int format) { m_style = format; m_format.clear(); }
 
     // draw the string right aligned with given width/precision
-    virtual void Draw(wxGrid& grid,
+    void Draw(wxGrid& grid,
                       wxGridCellAttr& attr,
                       wxDC& dc,
                       const wxRect& rect,
                       int row, int col,
                       bool isSelected) override;
 
-    virtual wxSize GetBestSize(wxGrid& grid,
+    wxSize GetBestSize(wxGrid& grid,
                                wxGridCellAttr& attr,
                                wxDC& dc,
                                int row, int col) override;
@@ -139,7 +139,7 @@ class WXDLLIMPEXP_ADV wxGridCellBoolRenderer : public wxGridCellRenderer
 {
 public:
     // draw a check mark or nothing
-    virtual void Draw(wxGrid& grid,
+    void Draw(wxGrid& grid,
                       wxGridCellAttr& attr,
                       wxDC& dc,
                       const wxRect& rect,
@@ -147,12 +147,12 @@ public:
                       bool isSelected) override;
 
     // return the checkmark size
-    virtual wxSize GetBestSize(wxGrid& grid,
+    wxSize GetBestSize(wxGrid& grid,
                                wxGridCellAttr& attr,
                                wxDC& dc,
                                int row, int col) override;
 
-    virtual wxSize GetMaxBestSize(wxGrid& grid,
+    wxSize GetMaxBestSize(wxGrid& grid,
                                   wxGridCellAttr& attr,
                                   wxDC& dc) override;
 
@@ -180,19 +180,19 @@ public:
     }
 
     // draw the string right aligned
-    virtual void Draw(wxGrid& grid,
+    void Draw(wxGrid& grid,
                       wxGridCellAttr& attr,
                       wxDC& dc,
                       const wxRect& rect,
                       int row, int col,
                       bool isSelected) override;
 
-    virtual wxSize GetBestSize(wxGrid& grid,
+    wxSize GetBestSize(wxGrid& grid,
                                wxGridCellAttr& attr,
                                wxDC& dc,
                                int row, int col) override;
 
-    virtual wxSize GetMaxBestSize(wxGrid& grid,
+    wxSize GetMaxBestSize(wxGrid& grid,
                                   wxGridCellAttr& attr,
                                   wxDC& dc) override;
 
@@ -228,7 +228,7 @@ public:
     wxGridCellRenderer *Clone() const override;
 
 protected:
-    virtual void
+    void
     GetDateParseParams(wxGridPrivate::DateParseParams& params) const override;
 
     wxString m_iformat;
@@ -243,7 +243,7 @@ class WXDLLIMPEXP_ADV wxGridCellChoiceRenderer : public wxGridCellStringRenderer
 public:
     wxGridCellChoiceRenderer() = default;
 
-    virtual wxSize GetMaxBestSize(wxGrid& grid,
+    wxSize GetMaxBestSize(wxGrid& grid,
                                   wxGridCellAttr& attr,
                                   wxDC& dc) override;
 
@@ -272,14 +272,14 @@ public:
     wxGridCellEnumRenderer( const wxString& choices = wxEmptyString );
 
     // draw the string right aligned
-    virtual void Draw(wxGrid& grid,
+    void Draw(wxGrid& grid,
                       wxGridCellAttr& attr,
                       wxDC& dc,
                       const wxRect& rect,
                       int row, int col,
                       bool isSelected) override;
 
-    virtual wxSize GetBestSize(wxGrid& grid,
+    wxSize GetBestSize(wxGrid& grid,
                                wxGridCellAttr& attr,
                                wxDC& dc,
                                int row, int col) override;
@@ -296,25 +296,25 @@ class WXDLLIMPEXP_ADV wxGridCellAutoWrapStringRenderer : public wxGridCellString
 public:
     wxGridCellAutoWrapStringRenderer() : wxGridCellStringRenderer() { }
 
-    virtual void Draw(wxGrid& grid,
+    void Draw(wxGrid& grid,
                       wxGridCellAttr& attr,
                       wxDC& dc,
                       const wxRect& rect,
                       int row, int col,
                       bool isSelected) override;
 
-    virtual wxSize GetBestSize(wxGrid& grid,
+    wxSize GetBestSize(wxGrid& grid,
                                wxGridCellAttr& attr,
                                wxDC& dc,
                                int row, int col) override;
 
-    virtual int GetBestHeight(wxGrid& grid,
+    int GetBestHeight(wxGrid& grid,
                               wxGridCellAttr& attr,
                               wxDC& dc,
                               int row, int col,
                               int width) override;
 
-    virtual int GetBestWidth(wxGrid& grid,
+    int GetBestWidth(wxGrid& grid,
                               wxGridCellAttr& attr,
                               wxDC& dc,
                               int row, int col,

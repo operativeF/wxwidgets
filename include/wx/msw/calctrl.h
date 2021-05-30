@@ -35,7 +35,7 @@ public:
     bool SetDate(const wxDateTime& date) override;
     wxDateTime GetDate() const override;
 
-    virtual bool SetDateRange(const wxDateTime& lowerdate = wxDefaultDateTime,
+    bool SetDateRange(const wxDateTime& lowerdate = wxDefaultDateTime,
                               const wxDateTime& upperdate = wxDefaultDateTime) override;
     bool GetDateRange(wxDateTime *lowerdate, wxDateTime *upperdate) const override;
 
@@ -44,7 +44,7 @@ public:
     void Mark(size_t day, bool mark) override;
     void SetHoliday(size_t day) override;
 
-    virtual wxCalendarHitTestResult HitTest(const wxPoint& pos,
+    wxCalendarHitTestResult HitTest(const wxPoint& pos,
                                             wxDateTime *date = nullptr,
                                             wxDateTime::WeekDay *wd = nullptr) override;
 

@@ -39,7 +39,7 @@ public:
 
     wxSockAddress();
     wxSockAddress(const wxSockAddress& other);
-    virtual ~wxSockAddress();
+    ~wxSockAddress() override;
 
     wxSockAddress& operator=(const wxSockAddress& other);
 

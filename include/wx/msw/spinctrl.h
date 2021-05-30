@@ -76,13 +76,13 @@ public:
     virtual int GetBase() const;
     virtual bool SetBase(int base);
 
-    virtual void Refresh( bool eraseBackground = true,
+    void Refresh( bool eraseBackground = true,
                           const wxRect *rect = (const wxRect *) nullptr ) override;
 
     // implementation only from now on
     // -------------------------------
 
-    virtual ~wxSpinCtrl();
+    ~wxSpinCtrl() override;
 
     void SetValue(int val) override;
     int  GetValue() const override;
@@ -141,7 +141,7 @@ protected:
 #endif // wxUSE_TOOLTIPS
 
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
-    virtual bool MSWOnScroll(int orientation, WXWORD wParam,
+    bool MSWOnScroll(int orientation, WXWORD wParam,
                              WXWORD pos, WXHWND control) override;
     void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
 

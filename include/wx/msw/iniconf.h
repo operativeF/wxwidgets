@@ -48,7 +48,7 @@ public:
     // same as strAppName.
   wxIniConfig(const wxString& strAppName = wxEmptyString, const wxString& strVendor = wxEmptyString,
     const wxString& localFilename = wxEmptyString, const wxString& globalFilename = wxEmptyString, long style = wxCONFIG_USE_LOCAL_FILE);
-  virtual ~wxIniConfig();
+  ~wxIniConfig() override;
 
   // implement inherited pure virtual functions
   void SetPath(const wxString& strPath) override;

@@ -51,7 +51,7 @@ class WXDLLIMPEXP_PROPGRID wxPropertyGridPage : public wxEvtHandler,
 public:
 
     wxPropertyGridPage();
-    virtual ~wxPropertyGridPage();
+    ~wxPropertyGridPage() override;
 
     // Deletes all properties on page.
     void Clear() override;
@@ -121,7 +121,7 @@ public:
 protected:
 
     // Propagate to other pages.
-    virtual void DoSetSplitterPosition( int pos,
+    void DoSetSplitterPosition( int pos,
                                         int splitterColumn = 0,
                                         int flags = wxPG_SPLITTER_REFRESH ) override;
 
@@ -181,7 +181,7 @@ public:
                            const wxString& name = wxASCII_STR(wxPropertyGridManagerNameStr) );
 
     // Destructor.
-    virtual ~wxPropertyGridManager();
+    ~wxPropertyGridManager() override;
 
     // Creates new property page. Note that the first page is not created
     // automatically.
@@ -393,7 +393,7 @@ public:
     // based, this function checks every page in the manager.
     virtual bool IsPropertySelected( wxPGPropArg id ) const;
 
-    virtual void Refresh( bool eraseBackground = true,
+    void Refresh( bool eraseBackground = true,
                           const wxRect* rect = (const wxRect*) nullptr ) override;
 
     // Removes a page.

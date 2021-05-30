@@ -222,7 +222,7 @@ public:
                 const wxString& name = wxASCII_STR(wxPanelNameStr));
 
     // dtor does some internal cleanup
-    virtual ~wxSymbolListCtrl();
+    ~wxSymbolListCtrl() override;
 
 
     // accessors

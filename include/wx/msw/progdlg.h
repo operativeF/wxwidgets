@@ -21,7 +21,7 @@ public:
                      wxWindow *parent = nullptr,
                      int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 
-    virtual ~wxProgressDialog();
+    ~wxProgressDialog() override;
 
 	wxProgressDialog(const wxProgressDialog&) = delete;
 	wxProgressDialog& operator=(const wxProgressDialog&) = delete;
@@ -86,7 +86,7 @@ private:
              m_title;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

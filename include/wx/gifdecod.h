@@ -50,7 +50,7 @@ class WXDLLIMPEXP_CORE wxGIFDecoder : public wxAnimationDecoder
 public:
     // constructor, destructor, etc.
     wxGIFDecoder();
-    ~wxGIFDecoder();
+    ~wxGIFDecoder() override;
 
     // get data of current frame
     unsigned char* GetData(unsigned int frame) const;

@@ -25,7 +25,7 @@ public:
 #endif // wxUSE_MARKUP
     }
 
-    virtual ~wxAnyButton();
+    ~wxAnyButton() override;
 
     // overridden base class methods
     void SetLabel(const wxString& label) override;

@@ -43,7 +43,7 @@ public:
                 long style = wxDEFAULT_DIALOG_STYLE,
                 const wxString& name = wxASCII_STR(wxDialogNameStr));
 
-    virtual ~wxDialog();
+    ~wxDialog() override;
 
     // return true if we're showing the dialog modally
     bool IsModal() const override { return m_modalData != nullptr; }

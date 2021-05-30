@@ -46,7 +46,7 @@ class WXDLLIMPEXP_CORE wxClipboard : public wxClipboardBase
 {
 public:
     wxClipboard();
-    virtual ~wxClipboard();
+    ~wxClipboard() override;
 
     // open the clipboard before SetData() and GetData()
     bool Open() override;

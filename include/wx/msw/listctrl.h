@@ -94,7 +94,7 @@ public:
         Create(parent, id, pos, size, style, validator, name);
     }
 
-    virtual ~wxListCtrl();
+    ~wxListCtrl() override;
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
@@ -374,7 +374,7 @@ public:
     WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
 
     // special Windows message handling
-    virtual WXLRESULT MSWWindowProc(WXUINT nMsg,
+    WXLRESULT MSWWindowProc(WXUINT nMsg,
                                     WXWPARAM wParam,
                                     WXLPARAM lParam) override;
 

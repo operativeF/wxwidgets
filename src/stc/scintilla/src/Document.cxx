@@ -2481,13 +2481,13 @@ class BuiltinRegex : public RegexSearchBase {
 public:
 	explicit BuiltinRegex(CharClassify *charClassTable) : search(charClassTable) {}
 
-	virtual ~BuiltinRegex() = default;
+	~BuiltinRegex() override = default;
 
-	virtual long FindText(Document *doc, int minPos, int maxPos, const char *s,
+	long FindText(Document *doc, int minPos, int maxPos, const char *s,
                         bool caseSensitive, bool word, bool wordStart, int flags,
-                        int *length);
+                        int *length) override;
 
-	virtual const char *SubstituteByPosition(Document *doc, const char *text, int *length);
+	const char *SubstituteByPosition(Document *doc, const char *text, int *length) override;
 
 private:
 	RESearch search;
@@ -2558,9 +2558,9 @@ public:
 		pdoc(pdoc_), end(end_) {
 	}
 
-	virtual ~DocumentIndexer() = default;
+	~DocumentIndexer() override = default;
 
-	virtual char CharAt(int index) {
+	char CharAt(int index) override {
 		if (index < 0 || index >= end)
 			return 0;
 		else

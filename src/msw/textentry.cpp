@@ -182,7 +182,7 @@ public:
         return true;
     }
 
-    virtual HRESULT STDMETHODCALLTYPE Next(ULONG celt,
+    HRESULT STDMETHODCALLTYPE Next(ULONG celt,
                                            LPOLESTR *rgelt,
                                            ULONG *pceltFetched) override
     {

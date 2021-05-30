@@ -36,7 +36,7 @@ public:
                const wxValidator& validator = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxSearchCtrlNameStr));
 
-    virtual ~wxSearchCtrl();
+    ~wxSearchCtrl() override;
 
     bool Create(wxWindow *parent, wxWindowID id,
                 const wxString& value = wxEmptyString,
@@ -137,7 +137,7 @@ public:
     // NB: pt is in device coords (not adjusted for the client area origin nor
     //     scrolling)
     wxTextCtrlHitTestResult HitTest(const wxPoint& pt, long *pos) const override;
-    virtual wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
+    wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
                                             wxTextCoord *col,
                                             wxTextCoord *row) const override;
 

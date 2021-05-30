@@ -27,7 +27,7 @@ class WXDLLIMPEXP_CORE wxIconRefData : public wxGDIImageRefData
 {
 public:
     wxIconRefData() = default;
-    virtual ~wxIconRefData() { Free(); }
+    ~wxIconRefData() override { Free(); }
 
     void Free() override;
 };
@@ -55,7 +55,7 @@ public:
 
     wxIcon(const wxIconLocation& loc);
 
-    virtual ~wxIcon();
+    ~wxIcon() override;
 
     virtual bool LoadFile(const wxString& name,
                           wxBitmapType type = wxICON_DEFAULT_TYPE,

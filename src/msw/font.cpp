@@ -66,7 +66,7 @@ public:
         Init(data.m_nativeFontInfo);
     }
 
-    virtual ~wxFontRefData();
+    ~wxFontRefData() override;
 
     // operations
     bool Alloc();

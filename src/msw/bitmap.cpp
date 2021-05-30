@@ -77,7 +77,7 @@ public:
     m_hasAlpha = false;
  }
     wxBitmapRefData(const wxBitmapRefData& data);
-    virtual ~wxBitmapRefData() { Free(); }
+    ~wxBitmapRefData() override { Free(); }
 
     void Free() override;
 

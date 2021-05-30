@@ -32,11 +32,11 @@ public:
         m_delay = 0;
     }
 
-    virtual void SetBackgroundColour(const wxColour& col,
+    void SetBackgroundColour(const wxColour& col,
                                      const wxColour& colEnd) override;
     void SetCustomIcon(const wxIcon& icon) override;
     void SetStandardIcon(int icon) override;
-    virtual void SetTimeout(unsigned milliseconds,
+    void SetTimeout(unsigned milliseconds,
                             unsigned millisecondsDelay = 0) override;
     void SetTipKind(wxTipKind tipKind) override;
     void SetTitleFont(const wxFont& font) override;

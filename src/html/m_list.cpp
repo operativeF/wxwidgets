@@ -86,7 +86,7 @@ class wxHtmlListCell : public wxHtmlContainerCell
 
     public:
         explicit wxHtmlListCell(wxHtmlContainerCell *parent);
-        virtual ~wxHtmlListCell();
+        ~wxHtmlListCell() override;
         void AddRow(wxHtmlContainerCell *mark, wxHtmlContainerCell *cont);
         void Layout(int w) override;
 

@@ -16,7 +16,7 @@ class WXDLLIMPEXP_CORE wxScrollBar: public wxScrollBarBase
 {
 public:
     wxScrollBar() { m_pageSize = 0; m_viewSize = 0; m_objectSize = 0; }
-    virtual ~wxScrollBar();
+    ~wxScrollBar() override;
 
     wxScrollBar(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
@@ -44,7 +44,7 @@ public:
     int GetRange() const override { return m_objectSize; }
 
     void SetThumbPosition(int viewStart) override;
-    virtual void SetScrollbar(int position, int thumbSize, int range, int pageSize,
+    void SetScrollbar(int position, int thumbSize, int range, int pageSize,
             bool refresh = true) override;
 
     // needed for RTTI
@@ -53,7 +53,7 @@ public:
     void SetRange( int s ) { SetScrollbar( GetThumbPosition() , GetThumbSize() , s , GetPageSize() , true ) ; }
 
     void Command(wxCommandEvent& event) override;
-    virtual bool MSWOnScroll(int orientation, WXWORD wParam,
+    bool MSWOnScroll(int orientation, WXWORD wParam,
                              WXWORD pos, WXHWND control) override;
 
     // override wxControl version to not use solid background here
@@ -72,7 +72,7 @@ protected:
     int m_objectSize;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

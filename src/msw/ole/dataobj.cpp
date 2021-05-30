@@ -1392,7 +1392,7 @@ public:
         return 0;
     }
 
-    virtual const void* GetSizeFromBuffer( const void* buffer, size_t* size,
+    const void* GetSizeFromBuffer( const void* buffer, size_t* size,
                                            const wxDataFormat& WXUNUSED(format) ) override
     {
         // CFSTR_SHELLURL is _always_ ANSI text
@@ -1401,7 +1401,7 @@ public:
         return buffer;
     }
 
-    virtual void* SetSizeInBuffer( void* buffer, size_t WXUNUSED(size),
+    void* SetSizeInBuffer( void* buffer, size_t WXUNUSED(size),
                                    const wxDataFormat& WXUNUSED(format) ) override
     {
         return buffer;

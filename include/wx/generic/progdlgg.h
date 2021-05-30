@@ -33,7 +33,7 @@ public:
                             wxWindow *parent = nullptr,
                             int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 
-    virtual ~wxGenericProgressDialog();
+    ~wxGenericProgressDialog() override;
 
     bool Create(const wxString& title,
                 const wxString& message,

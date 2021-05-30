@@ -53,14 +53,14 @@ class WXDLLEXPORT wxRendererGeneric : public wxRendererNative
 public:
     wxRendererGeneric();
 
-    virtual int  DrawHeaderButton(wxWindow *win,
+    int  DrawHeaderButton(wxWindow *win,
                                   wxDC& dc,
                                   const wxRect& rect,
                                   int flags = 0,
                                   wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
                                   wxHeaderButtonParams* params = nullptr) override;
 
-    virtual int  DrawHeaderButtonContents(wxWindow *win,
+    int  DrawHeaderButtonContents(wxWindow *win,
                                           wxDC& dc,
                                           const wxRect& rect,
                                           int flags = 0,
@@ -71,39 +71,39 @@ public:
 
     int GetHeaderButtonMargin(wxWindow *win) override;
 
-    virtual void DrawTreeItemButton(wxWindow *win,
+    void DrawTreeItemButton(wxWindow *win,
                                     wxDC& dc,
                                     const wxRect& rect,
                                     int flags = 0) override;
 
-    virtual void DrawSplitterBorder(wxWindow *win,
+    void DrawSplitterBorder(wxWindow *win,
                                     wxDC& dc,
                                     const wxRect& rect,
                                     int flags = 0) override;
 
-    virtual void DrawSplitterSash(wxWindow *win,
+    void DrawSplitterSash(wxWindow *win,
                                   wxDC& dc,
                                   const wxSize& size,
                                   wxCoord position,
                                   wxOrientation orient,
                                   int flags = 0) override;
 
-    virtual void DrawComboBoxDropButton(wxWindow *win,
+    void DrawComboBoxDropButton(wxWindow *win,
                                         wxDC& dc,
                                         const wxRect& rect,
                                         int flags = 0) override;
 
-    virtual void DrawDropArrow(wxWindow *win,
+    void DrawDropArrow(wxWindow *win,
                                wxDC& dc,
                                const wxRect& rect,
                                int flags = 0) override;
 
-    virtual void DrawCheckBox(wxWindow *win,
+    void DrawCheckBox(wxWindow *win,
                               wxDC& dc,
                               const wxRect& rect,
                               int flags = 0) override;
 
-    virtual void DrawCheckMark(wxWindow *win,
+    void DrawCheckMark(wxWindow *win,
                                wxDC& dc,
                                const wxRect& rect,
                                int flags = 0) override;
@@ -114,19 +114,19 @@ public:
 
     wxSize GetExpanderSize(wxWindow *win) override;
 
-    virtual void DrawPushButton(wxWindow *win,
+    void DrawPushButton(wxWindow *win,
                                 wxDC& dc,
                                 const wxRect& rect,
                                 int flags = 0) override;
 
-    virtual void DrawCollapseButton(wxWindow *win,
+    void DrawCollapseButton(wxWindow *win,
         wxDC& dc,
         const wxRect& rect,
         int flags = 0) override;
 
     wxSize GetCollapseButtonSize(wxWindow *win, wxDC& dc) override;
 
-    virtual void DrawItemSelectionRect(wxWindow *win,
+    void DrawItemSelectionRect(wxWindow *win,
                                        wxDC& dc,
                                        const wxRect& rect,
                                        int flags = 0) override;
@@ -142,7 +142,7 @@ public:
     void DrawRadioBitmap(wxWindow* win, wxDC& dc, const wxRect& rect, int flags=0) override;
 
 #ifdef wxHAS_DRAW_TITLE_BAR_BITMAP
-    virtual void DrawTitleBarBitmap(wxWindow *win,
+    void DrawTitleBarBitmap(wxWindow *win,
                                     wxDC& dc,
                                     const wxRect& rect,
                                     wxTitleBarButton button,
@@ -151,7 +151,7 @@ public:
 
     void DrawGauge(wxWindow* win, wxDC& dc, const wxRect& rect, int value, int max, int flags = 0) override;
 
-    virtual void DrawItemText(wxWindow* win,
+    void DrawItemText(wxWindow* win,
                               wxDC& dc,
                               const wxString& text,
                               const wxRect& rect,

@@ -211,7 +211,7 @@ public:
         return *this;
     }
 
-    virtual ~wxListItem() { delete m_attr; }
+    ~wxListItem() override { delete m_attr; }
 
     // resetting
     void Clear() { Init(); m_text.clear(); ClearAttributes(); }
@@ -532,7 +532,7 @@ protected:
 private:
     public:
 	wxListEvent& operator=(const wxListEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

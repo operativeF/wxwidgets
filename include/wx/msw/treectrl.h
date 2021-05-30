@@ -106,7 +106,7 @@ public:
         Create(parent, id, pos, size, style, validator, name);
     }
 
-    virtual ~wxTreeCtrl();
+    ~wxTreeCtrl() override;
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
@@ -127,7 +127,7 @@ public:
     void SetStateImageList(wxImageList *imageList) override;
 
     wxString GetItemText(const wxTreeItemId& item) const override;
-    virtual int GetItemImage(const wxTreeItemId& item,
+    int GetItemImage(const wxTreeItemId& item,
                         wxTreeItemIcon which = wxTreeItemIcon_Normal) const override;
     wxTreeItemData *GetItemData(const wxTreeItemId& item) const override;
     wxColour GetItemTextColour(const wxTreeItemId& item) const override;
@@ -135,16 +135,16 @@ public:
     wxFont GetItemFont(const wxTreeItemId& item) const override;
 
     void SetItemText(const wxTreeItemId& item, const wxString& text) override;
-    virtual void SetItemImage(const wxTreeItemId& item, int image,
+    void SetItemImage(const wxTreeItemId& item, int image,
                       wxTreeItemIcon which = wxTreeItemIcon_Normal) override;
     void SetItemData(const wxTreeItemId& item, wxTreeItemData *data) override;
     void SetItemHasChildren(const wxTreeItemId& item, bool has = true) override;
     void SetItemBold(const wxTreeItemId& item, bool bold = true) override;
-    virtual void SetItemDropHighlight(const wxTreeItemId& item,
+    void SetItemDropHighlight(const wxTreeItemId& item,
                                       bool highlight = true) override;
-    virtual void SetItemTextColour(const wxTreeItemId& item,
+    void SetItemTextColour(const wxTreeItemId& item,
                                    const wxColour& col) override;
-    virtual void SetItemBackgroundColour(const wxTreeItemId& item,
+    void SetItemBackgroundColour(const wxTreeItemId& item,
                                          const wxColour& col) override;
     void SetItemFont(const wxTreeItemId& item, const wxFont& font) override;
 
@@ -157,7 +157,7 @@ public:
     bool IsSelected(const wxTreeItemId& item) const override;
     bool IsBold(const wxTreeItemId& item) const override;
 
-    virtual size_t GetChildrenCount(const wxTreeItemId& item,
+    size_t GetChildrenCount(const wxTreeItemId& item,
                                     bool recursively = true) const override;
 
     // navigation
@@ -173,9 +173,9 @@ public:
 
 
     wxTreeItemId GetItemParent(const wxTreeItemId& item) const override;
-    virtual wxTreeItemId GetFirstChild(const wxTreeItemId& item,
+    wxTreeItemId GetFirstChild(const wxTreeItemId& item,
                                        wxTreeItemIdValue& cookie) const override;
-    virtual wxTreeItemId GetNextChild(const wxTreeItemId& item,
+    wxTreeItemId GetNextChild(const wxTreeItemId& item,
                                       wxTreeItemIdValue& cookie) const override;
     wxTreeItemId GetLastChild(const wxTreeItemId& item) const override;
 
@@ -189,7 +189,7 @@ public:
     // operations
     // ----------
 
-    virtual wxTreeItemId AddRoot(const wxString& text,
+    wxTreeItemId AddRoot(const wxString& text,
                          int image = -1, int selectedImage = -1,
                          wxTreeItemData *data = nullptr) override;
 
@@ -210,10 +210,10 @@ public:
     void EnsureVisible(const wxTreeItemId& item) override;
     void ScrollTo(const wxTreeItemId& item) override;
 
-    virtual wxTextCtrl *EditLabel(const wxTreeItemId& item,
+    wxTextCtrl *EditLabel(const wxTreeItemId& item,
                           wxClassInfo* textCtrlClass = wxCLASSINFO(wxTextCtrl)) override;
     wxTextCtrl *GetEditControl() const override;
-    virtual void EndEditLabel(const wxTreeItemId& WXUNUSED(item),
+    void EndEditLabel(const wxTreeItemId& WXUNUSED(item),
                               bool discardChanges = false) override
     {
         DoEndEditLabel(discardChanges);
@@ -221,7 +221,7 @@ public:
 
     void SortChildren(const wxTreeItemId& item) override;
 
-    virtual bool GetBoundingRect(const wxTreeItemId& item,
+    bool GetBoundingRect(const wxTreeItemId& item,
                                  wxRect& rect,
                                  bool textOnly = false) const override;
 
@@ -272,12 +272,12 @@ protected:
     int DoGetItemState(const wxTreeItemId& item) const override;
     void DoSetItemState(const wxTreeItemId& item, int state) override;
 
-    virtual wxTreeItemId DoInsertItem(const wxTreeItemId& parent,
+    wxTreeItemId DoInsertItem(const wxTreeItemId& parent,
                                       size_t pos,
                                       const wxString& text,
                                       int image, int selectedImage,
                                       wxTreeItemData *data) override;
-    virtual wxTreeItemId DoInsertAfter(const wxTreeItemId& parent,
+    wxTreeItemId DoInsertAfter(const wxTreeItemId& parent,
                                        const wxTreeItemId& idPrevious,
                                        const wxString& text,
                                        int image = -1, int selImage = -1,

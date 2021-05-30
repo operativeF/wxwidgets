@@ -84,7 +84,7 @@ public:
                 , wxConfigBase *config=nullptr, const wxString& rootpath = wxEmptyString
 #endif // wxUSE_CONFIG
                 );
-    virtual ~wxHtmlHelpFrame();
+    ~wxHtmlHelpFrame() override;
 
     /// Returns the data associated with the window.
     wxHtmlHelpData* GetData() { return m_Data; }

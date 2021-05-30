@@ -36,7 +36,7 @@ class WXDLLIMPEXP_CORE wxDropTarget : public wxDropTargetBase
 public:
     // ctor & dtor
     wxDropTarget(wxDataObject *dataObject = nullptr);
-    virtual ~wxDropTarget();
+    ~wxDropTarget() override;
 
     // normally called by wxWindow on window creation/destruction, but might be
     // called `manually' as well. Register() returns true on success.

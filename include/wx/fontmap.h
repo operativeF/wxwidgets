@@ -195,14 +195,14 @@ public:
     wxFontMapper();
 
     // virtual dtor for a base class
-    virtual ~wxFontMapper();
+    ~wxFontMapper() override;
 
     // working with the encodings
     // --------------------------
 
     // returns the encoding for the given charset (in the form of RFC 2046) or
     // wxFONTENCODING_SYSTEM if couldn't decode it
-    virtual wxFontEncoding CharsetToEncoding(const wxString& charset,
+    wxFontEncoding CharsetToEncoding(const wxString& charset,
                                              bool interactive = true) override;
 
     // find an alternative for the given encoding (which is supposed to not be

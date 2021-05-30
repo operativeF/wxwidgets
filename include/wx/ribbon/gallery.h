@@ -32,7 +32,7 @@ public:
                   const wxSize& size = wxDefaultSize,
                   long style = 0);
 
-    virtual ~wxRibbonGallery();
+    ~wxRibbonGallery() override;
 
     bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,
@@ -90,9 +90,9 @@ protected:
     int GetScrollLineSize() const;
 
     wxSize DoGetBestSize() const override;
-    virtual wxSize DoGetNextSmallerSize(wxOrientation direction,
+    wxSize DoGetNextSmallerSize(wxOrientation direction,
                                         wxSize relative_to) const override;
-    virtual wxSize DoGetNextLargerSize(wxOrientation direction,
+    wxSize DoGetNextLargerSize(wxOrientation direction,
                                        wxSize relative_to) const override;
 
     wxArrayRibbonGalleryItem m_items;
@@ -155,7 +155,7 @@ protected:
 private:
     public:
 	wxRibbonGalleryEvent& operator=(const wxRibbonGalleryEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 #endif

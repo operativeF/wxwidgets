@@ -14,7 +14,7 @@ class wxPipeInputStream : public wxInputStream
 {
 public:
     explicit wxPipeInputStream(HANDLE hInput);
-    virtual ~wxPipeInputStream();
+    ~wxPipeInputStream() override;
 
     // returns true if the pipe is still opened
     bool IsOpened() const { return m_hInput != INVALID_HANDLE_VALUE; }
@@ -36,7 +36,7 @@ class wxPipeOutputStream: public wxOutputStream
 {
 public:
     explicit wxPipeOutputStream(HANDLE hOutput);
-    virtual ~wxPipeOutputStream() { Close(); }
+    ~wxPipeOutputStream() override { Close(); }
     bool Close() override;
 
 protected:

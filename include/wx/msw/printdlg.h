@@ -29,7 +29,7 @@ class WXDLLIMPEXP_CORE wxWindowsPrintNativeData: public wxPrintNativeDataBase
 {
 public:
     wxWindowsPrintNativeData();
-    virtual ~wxWindowsPrintNativeData();
+    ~wxWindowsPrintNativeData() override;
 
     bool TransferTo( wxPrintData &data ) override;
     bool TransferFrom( const wxPrintData &data ) override;
@@ -62,7 +62,7 @@ class WXDLLIMPEXP_CORE wxWindowsPrintDialog : public wxPrintDialogBase
 public:
     wxWindowsPrintDialog(wxWindow *parent, wxPrintDialogData* data = nullptr);
     wxWindowsPrintDialog(wxWindow *parent, wxPrintData* data);
-    virtual ~wxWindowsPrintDialog();
+    ~wxWindowsPrintDialog() override;
 
     bool Create(wxWindow *parent, wxPrintDialogData* data = nullptr);
     int ShowModal() override;
@@ -100,7 +100,7 @@ class WXDLLIMPEXP_CORE wxWindowsPageSetupDialog: public wxPageSetupDialogBase
 public:
     wxWindowsPageSetupDialog();
     wxWindowsPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data = nullptr);
-    virtual ~wxWindowsPageSetupDialog();
+    ~wxWindowsPageSetupDialog() override;
 
 	wxWindowsPageSetupDialog(const wxWindowsPageSetupDialog&) = delete;
 	wxWindowsPageSetupDialog& operator=(const wxWindowsPageSetupDialog&) = delete;
@@ -120,7 +120,7 @@ private:
     void*                   m_pageDlg;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

@@ -75,7 +75,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxBitmapComboBoxNameStr));
 
-    virtual ~wxBitmapComboBox();
+    ~wxBitmapComboBox() override;
 
     // Sets the image for the given item.
     void SetItemBitmap(unsigned int n, const wxBitmap& bitmap) override;
@@ -109,7 +109,7 @@ protected:
     wxWindow* GetControl() override { return this; }
 
     // wxItemContainer implementation
-    virtual int DoInsertItems(const wxArrayStringsAdapter & items,
+    int DoInsertItems(const wxArrayStringsAdapter & items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
     void DoClear() override;

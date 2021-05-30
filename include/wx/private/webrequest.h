@@ -31,7 +31,7 @@ const int wxWEBREQUEST_BUFFER_SIZE = 64 * 1024;
 class wxWebAuthChallengeImpl : public wxRefCounterMT
 {
 public:
-    virtual ~wxWebAuthChallengeImpl() = default;
+    ~wxWebAuthChallengeImpl() override = default;
 
     wxWebAuthChallenge::Source GetSource() const { return m_source; }
 
@@ -55,7 +55,7 @@ private:
 class wxWebRequestImpl : public wxRefCounterMT
 {
 public:
-    virtual ~wxWebRequestImpl() = default;
+    ~wxWebRequestImpl() override = default;
 
     void SetHeader(const wxString& name, const wxString& value)
     { m_headers[name] = value; }
@@ -160,7 +160,7 @@ private:
 class wxWebResponseImpl : public wxRefCounterMT
 {
 public:
-    virtual ~wxWebResponseImpl();
+    ~wxWebResponseImpl() override;
 
     virtual wxFileOffset GetContentLength() const = 0;
 
@@ -234,7 +234,7 @@ public:
 class wxWebSessionImpl : public wxRefCounterMT
 {
 public:
-    virtual ~wxWebSessionImpl() = default;
+    ~wxWebSessionImpl() override = default;
 
     virtual wxWebRequestImplPtr
     CreateRequest(wxWebSession& session,

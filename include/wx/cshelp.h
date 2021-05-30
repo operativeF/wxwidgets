@@ -39,7 +39,7 @@ class WXDLLIMPEXP_CORE wxContextHelp : public wxObject
 {
 public:
     wxContextHelp(wxWindow* win = nullptr, bool beginHelp = true);
-    virtual ~wxContextHelp();
+    ~wxContextHelp() override;
 
     bool BeginContextHelp(wxWindow* win);
     bool EndContextHelp();
@@ -91,7 +91,7 @@ public:
 	wxContextHelpButton(const wxContextHelpButton&) = delete;
 	wxContextHelpButton& operator=(const wxContextHelpButton&) = delete;
 
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 

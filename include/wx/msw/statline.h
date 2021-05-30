@@ -47,7 +47,7 @@ public:
     WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

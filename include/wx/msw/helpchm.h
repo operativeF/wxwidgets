@@ -32,7 +32,7 @@ public:
     bool DisplayBlock(long blockNo) override;
     bool DisplayContextPopup(int contextId) override;
     bool DisplayTextPopup(const wxString& text, const wxPoint& pos) override;
-    virtual bool KeywordSearch(const wxString& k,
+    bool KeywordSearch(const wxString& k,
                                wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override;
     bool Quit() override;
 

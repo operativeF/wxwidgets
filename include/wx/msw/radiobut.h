@@ -69,7 +69,7 @@ protected:
     int MSWGetButtonStyle() const override;
     void MSWOnButtonResetOwnerDrawn() override;
     int MSWGetButtonCheckedFlag() const override;
-    virtual void
+    void
         MSWDrawButtonBitmap(wxDC& dc, const wxRect& rect, int flags) override;
 
 
@@ -83,7 +83,7 @@ private:
     bool m_isChecked;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

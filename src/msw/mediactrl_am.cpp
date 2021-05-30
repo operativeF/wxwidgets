@@ -813,9 +813,9 @@ class WXDLLIMPEXP_MEDIA wxAMMediaBackend : public wxMediaBackendCommonBase
 {
 public:
     wxAMMediaBackend();
-    virtual ~wxAMMediaBackend();
+    ~wxAMMediaBackend() override;
 
-    virtual bool CreateControl(wxControl* ctrl, wxWindow* parent,
+    bool CreateControl(wxControl* ctrl, wxWindow* parent,
                                      wxWindowID id,
                                      const wxPoint& pos,
                                      const wxSize& size,

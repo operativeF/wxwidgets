@@ -63,7 +63,7 @@ public:
     {
     }
 
-    virtual bool ProcessBitmap(const wxBitmap& bitmap,
+    bool ProcessBitmap(const wxBitmap& bitmap,
                                wxCoord x, wxCoord y,
                                wxOutputStream& stream) const override;
 
@@ -76,7 +76,7 @@ private:
 class WXDLLIMPEXP_CORE wxSVGBitmapEmbedHandler : public wxSVGBitmapHandler
 {
 public:
-    virtual bool ProcessBitmap(const wxBitmap& bitmap,
+    bool ProcessBitmap(const wxBitmap& bitmap,
                                wxCoord x, wxCoord y,
                                wxOutputStream& stream) const override;
 };
@@ -88,7 +88,7 @@ public:
                     int width = 320, int height = 240, double dpi = 72.0,
                     const wxString& title = wxString());
 
-    virtual ~wxSVGFileDCImpl();
+    ~wxSVGFileDCImpl() override;
 
     bool IsOk() const override { return m_OK; }
 
@@ -157,14 +157,14 @@ public:
     void SetShapeRenderingMode(wxSVGShapeRenderingMode renderingMode);
 
 private:
-    virtual bool DoGetPixel(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
+    bool DoGetPixel(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
                             wxColour* WXUNUSED(col)) const override
     {
         wxFAIL_MSG(wxT("wxSVGFILEDC::DoGetPixel Call not implemented"));
         return true;
     }
 
-    virtual bool DoBlit(wxCoord xdest, wxCoord ydest,
+    bool DoBlit(wxCoord xdest, wxCoord ydest,
                         wxCoord width, wxCoord height,
                         wxDC* source,
                         wxCoord xsrc, wxCoord ysrc,
@@ -178,48 +178,48 @@ private:
         wxFAIL_MSG(wxT("wxSVGFILEDC::CrossHair Call not implemented"));
     }
 
-    virtual void DoDrawArc(wxCoord x1, wxCoord y1,
+    void DoDrawArc(wxCoord x1, wxCoord y1,
                            wxCoord x2, wxCoord y2,
                            wxCoord xc, wxCoord yc) override;
 
-    virtual void DoDrawBitmap(const wxBitmap& bmp, wxCoord x, wxCoord y,
+    void DoDrawBitmap(const wxBitmap& bmp, wxCoord x, wxCoord y,
                               bool useMask = false) override;
 
-    virtual void DoDrawEllipse(wxCoord x, wxCoord y,
+    void DoDrawEllipse(wxCoord x, wxCoord y,
                                wxCoord width, wxCoord height) override;
 
-    virtual void DoDrawEllipticArc(wxCoord x, wxCoord y, wxCoord w, wxCoord h,
+    void DoDrawEllipticArc(wxCoord x, wxCoord y, wxCoord w, wxCoord h,
                                    double sa, double ea) override;
 
     void DoDrawIcon(const wxIcon& icon, wxCoord x, wxCoord y) override;
 
     void DoDrawLine(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2) override;
 
-    virtual void DoDrawLines(int n, const wxPoint points[],
+    void DoDrawLines(int n, const wxPoint points[],
                              wxCoord xoffset, wxCoord yoffset) override;
 
     void DoDrawPoint(wxCoord x, wxCoord y) override;
 
-    virtual void DoDrawPolygon(int n, const wxPoint points[],
+    void DoDrawPolygon(int n, const wxPoint points[],
                                wxCoord xoffset, wxCoord yoffset,
                                wxPolygonFillMode fillStyle = wxODDEVEN_RULE) override;
 
-    virtual void DoDrawPolyPolygon(int n, const int count[], const wxPoint points[],
+    void DoDrawPolyPolygon(int n, const int count[], const wxPoint points[],
                                    wxCoord xoffset, wxCoord yoffset,
                                    wxPolygonFillMode fillStyle) override;
 
     void DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height) override;
 
-    virtual void DoDrawRotatedText(const wxString& text, wxCoord x, wxCoord y,
+    void DoDrawRotatedText(const wxString& text, wxCoord x, wxCoord y,
                                    double angle) override;
 
-    virtual void DoDrawRoundedRectangle(wxCoord x, wxCoord y,
+    void DoDrawRoundedRectangle(wxCoord x, wxCoord y,
                                         wxCoord width, wxCoord height,
                                         double radius) override;
 
     void DoDrawText(const wxString& text, wxCoord x, wxCoord y) override;
 
-    virtual bool DoFloodFill(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
+    bool DoFloodFill(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
                              const wxColour& WXUNUSED(col),
                              wxFloodFillStyle WXUNUSED(style)) override
     {
@@ -227,12 +227,12 @@ private:
         return false;
     }
 
-    virtual void DoGradientFillLinear(const wxRect& rect,
+    void DoGradientFillLinear(const wxRect& rect,
                                       const wxColour& initialColour,
                                       const wxColour& destColour,
                                       wxDirection nDirection) override;
 
-    virtual void DoGradientFillConcentric(const wxRect& rect,
+    void DoGradientFillConcentric(const wxRect& rect,
                                           const wxColour& initialColour,
                                           const wxColour& destColour,
                                           const wxPoint& circleCenter) override;
@@ -245,7 +245,7 @@ private:
             *height = m_height;
     }
 
-    virtual void DoGetTextExtent(const wxString& string,
+    void DoGetTextExtent(const wxString& string,
                                  wxCoord* x, wxCoord* y,
                                  wxCoord* descent = nullptr,
                                  wxCoord* externalLeading = nullptr,
@@ -257,7 +257,7 @@ private:
                             region.GetBox().width, region.GetBox().height);
     }
 
-    virtual void DoSetClippingRegion(wxCoord x, wxCoord y,
+    void DoSetClippingRegion(wxCoord x, wxCoord y,
                                      wxCoord w, wxCoord h) override;
 
     void DoGetSizeMM(int* width, int* height) const override;

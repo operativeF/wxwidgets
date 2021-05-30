@@ -3865,8 +3865,8 @@ public:
     {
     }
 
-    virtual ~wxPropertyGridEditorEventForwarder()
-    = default;
+    ~wxPropertyGridEditorEventForwarder()
+    override = default;
 
 private:
     bool ProcessEvent( wxEvent& event ) override

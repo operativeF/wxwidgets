@@ -27,7 +27,7 @@ public:
 
 protected:
     void DoScroll(int x, int y) override;
-    virtual void DoShowScrollbars(wxScrollbarVisibility horz,
+    void DoShowScrollbars(wxScrollbarVisibility horz,
                                   wxScrollbarVisibility vert) override;
 
 private:

@@ -15,7 +15,7 @@ class WXDLLIMPEXP_BASE wxMSWEventLoopBase : public wxEventLoopManual
 {
 public:
     wxMSWEventLoopBase();
-    virtual ~wxMSWEventLoopBase();
+    ~wxMSWEventLoopBase() override;
 
     // implement base class pure virtuals
     bool Pending() const override;

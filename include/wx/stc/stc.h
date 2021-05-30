@@ -2840,7 +2840,7 @@ public:
                      const wxSize& size = wxDefaultSize, long style = 0,
                      const wxString& name = wxSTCNameStr);
     wxStyledTextCtrl() { m_swx = nullptr; }
-    ~wxStyledTextCtrl();
+    ~wxStyledTextCtrl() override;
 
 #endif
 
@@ -5312,7 +5312,7 @@ public:
     void MarkDirty() override { wxFAIL_MSG("not implemented"); }
     void DiscardEdits() override { SetSavePoint(); }
 
-    virtual bool SetStyle(long WXUNUSED(start), long WXUNUSED(end),
+    bool SetStyle(long WXUNUSED(start), long WXUNUSED(end),
                           const wxTextAttr& WXUNUSED(style)) override
     {
         wxFAIL_MSG("not implemented");
@@ -5383,7 +5383,7 @@ public:
     }
 
     // just unhide it
-    virtual wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
+    wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
                                             wxTextCoord *col,
                                             wxTextCoord *row) const override
     {
@@ -5461,7 +5461,7 @@ public:
 #ifndef SWIG
     wxStyledTextEvent(const wxStyledTextEvent& event);
 #endif
-    ~wxStyledTextEvent() = default;
+    ~wxStyledTextEvent() override = default;
 
     void SetPosition(int pos)             { m_position = pos; }
     void SetKey(int k)                    { m_key = k; }

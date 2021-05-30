@@ -53,7 +53,7 @@ class WXDLLIMPEXP_BASE wxEncodingConverter : public wxObject
     public:
 
             wxEncodingConverter();
-            virtual ~wxEncodingConverter() { delete[] m_Table; }
+            ~wxEncodingConverter() override { delete[] m_Table; }
 
             // Initialize conversion. Both output or input encoding may
             // be wxFONTENCODING_UNICODE.

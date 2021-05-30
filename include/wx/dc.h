@@ -164,7 +164,7 @@ class WXDLLIMPEXP_CORE wxDCImpl: public wxObject
 {
 public:
     wxDCImpl( wxDC *owner );
-    virtual ~wxDCImpl();
+    ~wxDCImpl() override;
 
     wxDC *GetOwner() const { return m_owner; }
 
@@ -664,7 +664,7 @@ public:
     // copy attributes (font, colours and writing direction) from another DC
     void CopyAttributes(const wxDC& dc);
 
-    virtual ~wxDC() { delete m_pimpl; }
+    ~wxDC() override { delete m_pimpl; }
 
     wxDCImpl *GetImpl()
         { return m_pimpl; }

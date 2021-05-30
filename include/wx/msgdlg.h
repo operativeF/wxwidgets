@@ -99,7 +99,7 @@ public:
     }
 
     // virtual dtor for the base class
-    virtual ~wxMessageDialogBase() = default;
+    ~wxMessageDialogBase() override = default;
 
     wxString GetCaption() const { return m_caption; }
 

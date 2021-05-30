@@ -68,7 +68,7 @@ public:
                 long style = wxCAL_SHOW_HOLIDAYS,
                 const wxString& name = wxASCII_STR(wxCalendarNameStr));
 
-    virtual ~wxGenericCalendarCtrl();
+    ~wxGenericCalendarCtrl() override;
 
     bool Destroy() override;
 
@@ -82,7 +82,7 @@ public:
     // set/get the range in which selection can occur
     // ---------------------------------------------
 
-    virtual bool SetDateRange(const wxDateTime& lowerdate = wxDefaultDateTime,
+    bool SetDateRange(const wxDateTime& lowerdate = wxDefaultDateTime,
                               const wxDateTime& upperdate = wxDefaultDateTime) override;
 
     bool GetDateRange(wxDateTime *lowerdate, wxDateTime *upperdate) const override;
@@ -165,7 +165,7 @@ public:
 
     void SetHoliday(size_t day) override;
 
-    virtual wxCalendarHitTestResult HitTest(const wxPoint& pos,
+    wxCalendarHitTestResult HitTest(const wxPoint& pos,
                                             wxDateTime *date = nullptr,
                                             wxDateTime::WeekDay *wd = nullptr) override;
 

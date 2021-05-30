@@ -24,7 +24,7 @@ public:
    */
 
   wxJoystick(int joystick = wxJOYSTICK1);
-  virtual ~wxJoystick();
+  ~wxJoystick() override;
 
   // Attributes
   ////////////////////////////////////////////////////////////////////////////

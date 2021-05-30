@@ -154,7 +154,7 @@ protected:
     void DoChoice();
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
     wxDECLARE_EVENT_TABLE();
@@ -211,7 +211,7 @@ public:
 
 protected:
 #if wxUSE_CHECKLISTBOX
-    virtual wxListBoxBase *CreateList(int n,
+    wxListBoxBase *CreateList(int n,
                                       const wxString *choices,
                                       long styleLbox) override;
 #endif // wxUSE_CHECKLISTBOX
@@ -223,7 +223,7 @@ public:
 	wxMultiChoiceDialog(const wxMultiChoiceDialog&) = delete;
 	wxMultiChoiceDialog& operator=(const wxMultiChoiceDialog&) = delete;
 
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

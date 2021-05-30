@@ -121,7 +121,7 @@ class WXDLLIMPEXP_CORE wxTopLevelWindowBase : public wxNonOwnedWindow
 public:
     // construction
     wxTopLevelWindowBase();
-    virtual ~wxTopLevelWindowBase();
+    ~wxTopLevelWindowBase() override;
 
     // top level wnd state
     // --------------------
@@ -397,7 +397,7 @@ protected:
         wxTopLevelWindow(const wxTopLevelWindow&) = delete;
         wxTopLevelWindow& operator=(const wxTopLevelWindow&) = delete;
 
-    	wxClassInfo *GetClassInfo() const;
+    	wxClassInfo *GetClassInfo() const override;
 	    static wxClassInfo ms_classInfo;
 	    static wxObject* wxCreateObject();
     };

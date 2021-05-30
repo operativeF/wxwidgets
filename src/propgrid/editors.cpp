@@ -578,7 +578,7 @@ public:
         m_dclickProcessor = nullptr;
     }
 
-    ~wxPGComboBox()
+    ~wxPGComboBox() override
     {
         if ( m_dclickProcessor )
         {
@@ -622,7 +622,7 @@ public:
         return true;
     }
 
-    virtual void OnDrawItem( wxDC& dc,
+    void OnDrawItem( wxDC& dc,
                              const wxRect& rect,
                              int item,
                              int flags ) const override
@@ -684,7 +684,7 @@ public:
 #define wxPG_TEXTCTRLXADJUST3 0
 #endif
 
-    virtual void PositionTextCtrl( int textCtrlXAdjust,
+    void PositionTextCtrl( int textCtrlXAdjust,
                                    int WXUNUSED(textCtrlYAdjust) ) override
     {
     #ifdef wxPG_TEXTCTRLXADJUST
@@ -1490,7 +1490,7 @@ public:
         SetBackgroundStyle( wxBG_STYLE_PAINT );
     }
 
-    virtual ~wxSimpleCheckBox();
+    ~wxSimpleCheckBox() override;
 
 
     void SetBoxHeight(int height)

@@ -170,7 +170,7 @@ public:
 
 #if wxUSE_DISPLAY
     // no video modes support for us, provide just the stubs
-    virtual wxArrayVideoModes
+    wxArrayVideoModes
     GetModes(const wxVideoMode& WXUNUSED(mode)) const override
     {
         return wxArrayVideoModes();

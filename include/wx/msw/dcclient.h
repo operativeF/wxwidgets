@@ -54,7 +54,7 @@ public:
     // Create a DC corresponding to the client area of the window
     wxClientDCImpl( wxDC *owner, wxWindow *win );
 
-    virtual ~wxClientDCImpl();
+    ~wxClientDCImpl() override;
 
     void DoGetSize(int *width, int *height) const override;
 
@@ -74,7 +74,7 @@ public:
     // Create a DC corresponding for painting the window in OnPaint()
     wxPaintDCImpl( wxDC *owner, wxWindow *win );
 
-    virtual ~wxPaintDCImpl();
+    ~wxPaintDCImpl() override;
 
     // find the entry for this DC in the cache (keyed by the window)
     static WXHDC FindDCInCache(wxWindow* win);

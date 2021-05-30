@@ -81,7 +81,7 @@ class WXDLLIMPEXP_CORE wxPostScriptPrintNativeData: public wxPrintNativeDataBase
 {
 public:
     wxPostScriptPrintNativeData();
-    virtual ~wxPostScriptPrintNativeData();
+    ~wxPostScriptPrintNativeData() override;
 
     bool TransferTo( wxPrintData &data ) override;
     bool TransferFrom( const wxPrintData &data ) override;
@@ -143,7 +143,7 @@ public:
                          wxPrintDialogData* data = nullptr);
     wxGenericPrintDialog(wxWindow *parent, wxPrintData* data);
 
-    virtual ~wxGenericPrintDialog();
+    ~wxGenericPrintDialog() override;
 
     void OnSetup(wxCommandEvent& event);
     void OnRange(wxCommandEvent& event);
@@ -187,7 +187,7 @@ public:
     // There are no configuration options for the dialog, so we
     // just pass the wxPrintData object (no wxPrintSetupDialogData class needed)
     wxGenericPrintSetupDialog(wxWindow *parent, wxPrintData* data);
-    virtual ~wxGenericPrintSetupDialog();
+    ~wxGenericPrintSetupDialog() override;
 
     void Init(wxPrintData* data);
 
@@ -224,7 +224,7 @@ class WXDLLIMPEXP_CORE wxGenericPageSetupDialog : public wxPageSetupDialogBase
 public:
     wxGenericPageSetupDialog(wxWindow *parent = nullptr,
                              wxPageSetupDialogData* data = nullptr);
-    virtual ~wxGenericPageSetupDialog();
+    ~wxGenericPageSetupDialog() override;
 
 	wxGenericPageSetupDialog(const wxGenericPageSetupDialog&) = delete;
 	wxGenericPageSetupDialog& operator=(const wxGenericPageSetupDialog&) = delete;
@@ -252,7 +252,7 @@ private:
     wxDECLARE_EVENT_TABLE();
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

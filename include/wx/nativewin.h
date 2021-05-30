@@ -110,7 +110,7 @@ public:
 #ifdef __WXMSW__
     // Prevent the native window, not owned by us, from being destroyed by the
     // base class dtor, unless Disown() had been called.
-    virtual ~wxNativeWindow();
+    ~wxNativeWindow() override;
 #endif // __WXMSW__
 
 private:
@@ -166,7 +166,7 @@ public:
 
     // unlike for the normal windows, dtor will not destroy the native window
     // as it normally doesn't belong to us
-    virtual ~wxNativeContainerWindow();
+    ~wxNativeContainerWindow() override;
 
 
     // provide (trivial) implementation of the base class pure virtuals
@@ -210,7 +210,7 @@ public:
         wxFAIL_MSG( "not implemented for native windows" );
     }
 
-    virtual bool ShowFullScreen(bool WXUNUSED(show),
+    bool ShowFullScreen(bool WXUNUSED(show),
                                 long WXUNUSED(style) = wxFULLSCREEN_ALL) override
     {
         wxFAIL_MSG( "not implemented for native windows" );
@@ -237,7 +237,7 @@ public:
 
 protected:
 #ifdef __WXMSW__
-    virtual WXLRESULT
+    WXLRESULT
     MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam) override;
 #endif // __WXMSW__
 

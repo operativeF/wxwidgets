@@ -292,7 +292,7 @@ public:
                     int h = wxDefaultCoord, bool hpresent = false,
                     double scale = 1.0, int align = wxHTML_ALIGN_BOTTOM,
                     const wxString& mapname = wxEmptyString);
-    virtual ~wxHtmlImageCell();
+    ~wxHtmlImageCell() override;
     void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
               wxHtmlRenderingInfo& info) override;
     wxHtmlLinkInfo *GetLink(int x = 0, int y = 0) const override;

@@ -43,7 +43,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_FRAME_STYLE,
                 const wxString& name = wxASCII_STR(wxFrameNameStr));
-    virtual ~wxFrame();
+    ~wxFrame() override;
 
     // implement base class pure virtuals
     bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
@@ -56,14 +56,14 @@ public:
 
     // Toolbar
 #if wxUSE_TOOLBAR
-    virtual wxToolBar* CreateToolBar(long style = -1,
+    wxToolBar* CreateToolBar(long style = -1,
                                      wxWindowID id = wxID_ANY,
                                      const wxString& name = wxASCII_STR(wxToolBarNameStr)) override;
 #endif // wxUSE_TOOLBAR
 
     // Status bar
 #if wxUSE_STATUSBAR
-    virtual wxStatusBar* OnCreateStatusBar(int number = 1,
+    wxStatusBar* OnCreateStatusBar(int number = 1,
                                            long style = wxSTB_DEFAULT_STYLE,
                                            wxWindowID id = 0,
                                            const wxString& name = wxASCII_STR(wxStatusLineNameStr)) override;
@@ -101,7 +101,7 @@ public:
     }
 
     // window proc for the frames
-    virtual WXLRESULT MSWWindowProc(WXUINT message,
+    WXLRESULT MSWWindowProc(WXUINT message,
                                     WXWPARAM wParam,
                                     WXLPARAM lParam) override;
 
@@ -189,7 +189,7 @@ private:
     wxDECLARE_EVENT_TABLE();
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

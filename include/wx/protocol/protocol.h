@@ -56,7 +56,7 @@ class WXDLLIMPEXP_NET wxProtocol
 {
 public:
     wxProtocol();
-    virtual ~wxProtocol();
+    ~wxProtocol() override;
 
 	wxProtocol(const wxProtocol&) = delete;
 	wxProtocol& operator=(const wxProtocol&) = delete;
@@ -132,7 +132,7 @@ private:
     wxProtocolLog *m_log;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

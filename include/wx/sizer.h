@@ -326,7 +326,7 @@ public:
     }
 
     wxSizerItem();
-    virtual ~wxSizerItem();
+    ~wxSizerItem() override;
 
     virtual void DeleteWindows();
 
@@ -513,7 +513,7 @@ class WXDLLIMPEXP_CORE wxSizer: public wxObject, public wxClientDataContainer
 {
 public:
     wxSizer() { m_containingWindow = nullptr; }
-    virtual ~wxSizer();
+    ~wxSizer() override;
 
     // methods for adding elements to the sizer: there are Add/Insert/Prepend
     // overloads for each of window/sizer/spacer/wxSizerItem
@@ -889,7 +889,7 @@ public:
     wxFlexGridSizer( int rows, int cols, const wxSize& gap );
 
     // dtor
-    virtual ~wxFlexGridSizer();
+    ~wxFlexGridSizer() override;
 
     // set the rows/columns which will grow (the others will remain of the
     // constant initial size)
@@ -977,7 +977,7 @@ public:
     wxSize CalcMin() override;
     void RepositionChildren(const wxSize& minSize) override;
 
-    virtual bool InformFirstDirection(int direction,
+    bool InformFirstDirection(int direction,
                                       int size,
                                       int availableOtherDir) override;
 
@@ -1054,7 +1054,7 @@ class WXDLLIMPEXP_CORE wxStaticBoxSizer: public wxBoxSizer
 public:
     wxStaticBoxSizer(wxStaticBox *box, int orient);
     wxStaticBoxSizer(int orient, wxWindow *win, const wxString& label = wxEmptyString);
-    virtual ~wxStaticBoxSizer();
+    ~wxStaticBoxSizer() override;
 
     wxSize CalcMin() override;
     void RepositionChildren(const wxSize& minSize) override;

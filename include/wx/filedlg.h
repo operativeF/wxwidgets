@@ -93,7 +93,7 @@ public:
         Create(parent, message, defaultDir, defaultFile, wildCard, style, pos, sz, name);
     }
 
-    virtual ~wxFileDialogBase() = default;
+    ~wxFileDialogBase() override = default;
 
 
     bool Create(wxWindow *parent,

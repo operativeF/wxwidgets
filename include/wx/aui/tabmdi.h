@@ -48,7 +48,7 @@ public:
                         long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                         const wxString& name = wxASCII_STR(wxFrameNameStr));
 
-    ~wxAuiMDIParentFrame();
+    ~wxAuiMDIParentFrame() override;
 
     bool Create(wxWindow *parent,
                 wxWindowID winid,
@@ -133,7 +133,7 @@ public:
                        long style = wxDEFAULT_FRAME_STYLE,
                        const wxString& name = wxASCII_STR(wxFrameNameStr));
 
-    virtual ~wxAuiMDIChildFrame();
+    ~wxAuiMDIChildFrame() override;
     bool Create(wxAuiMDIParentFrame *parent,
                 wxWindowID winid,
                 const wxString& title,

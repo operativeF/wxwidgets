@@ -35,7 +35,7 @@ public:
         InitFromStream(stream, wxInvalidOffset);
     }
 
-    virtual ~wxMemoryInputStream();
+    ~wxMemoryInputStream() override;
     wxFileOffset GetLength() const override { return m_length; }
     bool IsSeekable() const override { return true; }
 
@@ -67,7 +67,7 @@ class WXDLLIMPEXP_BASE wxMemoryOutputStream : public wxOutputStream
 public:
     // if data is !NULL it must be allocated with malloc()
     wxMemoryOutputStream(void *data = nullptr, size_t length = 0);
-    virtual ~wxMemoryOutputStream();
+    ~wxMemoryOutputStream() override;
     wxFileOffset GetLength() const override { return m_o_streambuf->GetLastAccess(); }
     bool IsSeekable() const override { return true; }
 

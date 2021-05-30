@@ -132,7 +132,7 @@ public:
     wxDataViewRendererBase( const wxString &varianttype,
                             wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                             int alignment = wxDVR_DEFAULT_ALIGNMENT );
-    virtual ~wxDataViewRendererBase();
+    ~wxDataViewRendererBase() override;
 
     wxDataViewRendererBase(const wxDataViewRendererBase&) = delete;
 	wxDataViewRendererBase& operator=(const wxDataViewRendererBase&) = delete;
@@ -266,7 +266,7 @@ private:
     void DestroyEditControl();
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -578,7 +578,7 @@ public:
 
     wxSize GetSize() const override;
     bool Render(wxRect cell, wxDC* dc, int state) override;
-    virtual bool ActivateCell(const wxRect& cell,
+    bool ActivateCell(const wxRect& cell,
                               wxDataViewModel *model,
                               const wxDataViewItem & item,
                               unsigned int col,
@@ -599,7 +599,7 @@ private:
     bool m_allow3rdStateForUser;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

@@ -50,7 +50,7 @@ public:
     // doesn't happen by default)
     explicit wxCursorRefData(HCURSOR hcursor = nullptr, bool takeOwnership = false);
 
-    virtual ~wxCursorRefData() { Free(); }
+    ~wxCursorRefData() override { Free(); }
 
     void Free() override;
 

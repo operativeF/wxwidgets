@@ -41,7 +41,7 @@ public:
                 long style = wxTB_DEFAULT_STYLE,
                 const wxString& name = wxASCII_STR(wxToolBarNameStr));
 
-    virtual ~wxToolBar();
+    ~wxToolBar() override;
 
     // override/implement base class virtuals
     wxToolBarToolBase *FindToolForPosition(wxCoord x, wxCoord y) const override;
@@ -87,7 +87,7 @@ public:
     WXHBRUSH MSWGetBgBrushForChild(WXHDC hDC, wxWindowMSW *child) override;
 #endif // wxHAS_MSW_BACKGROUND_ERASE_HOOK
 
-    virtual wxToolBarToolBase *CreateTool(int id,
+    wxToolBarToolBase *CreateTool(int id,
                                           const wxString& label,
                                           const wxBitmap& bmpNormal,
                                           const wxBitmap& bmpDisabled = wxNullBitmap,
@@ -96,7 +96,7 @@ public:
                                           const wxString& shortHelp = wxEmptyString,
                                           const wxString& longHelp = wxEmptyString) override;
 
-    virtual wxToolBarToolBase *CreateTool(wxControl *control,
+    wxToolBarToolBase *CreateTool(wxControl *control,
                                           const wxString& label) override;
 protected:
     // common part of all ctors

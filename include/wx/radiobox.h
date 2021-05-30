@@ -38,7 +38,7 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxRadioBoxNameStr[];
 class WXDLLIMPEXP_CORE wxRadioBoxBase : public wxItemContainerImmutable
 {
 public:
-    virtual ~wxRadioBoxBase();
+    ~wxRadioBoxBase() override;
 
     // change/query the individual radio button state
     virtual bool Enable(unsigned int n, bool enable = true) = 0;

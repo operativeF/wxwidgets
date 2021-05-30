@@ -39,7 +39,7 @@ class WXDLLIMPEXP_CORE wxListBoxBase : public wxControlWithItems
 {
 public:
     wxListBoxBase() = default;
-    virtual ~wxListBoxBase();
+    ~wxListBoxBase() override;
 
     void InsertItems(unsigned int nItems, const wxString *items, unsigned int pos)
         { Insert(nItems, items, pos); }

@@ -27,16 +27,16 @@ class WXDLLIMPEXP_BASE wxStdInputStreamBuffer : public std::streambuf
 {
 public:
     wxStdInputStreamBuffer(wxInputStream& stream);
-    virtual ~wxStdInputStreamBuffer() = default;
+    ~wxStdInputStreamBuffer() override = default;
 
 protected:
     std::streambuf *setbuf(char *s, std::streamsize n) override;
-    virtual std::streampos seekoff(std::streamoff off,
+    std::streampos seekoff(std::streamoff off,
                                    std::ios_base::seekdir way,
                                    std::ios_base::openmode which =
                                        std::ios_base::in |
                                        std::ios_base::out) override;
-    virtual std::streampos seekpos(std::streampos sp,
+    std::streampos seekpos(std::streampos sp,
                                    std::ios_base::openmode which =
                                        std::ios_base::in |
                                        std::ios_base::out) override;
@@ -58,7 +58,7 @@ class WXDLLIMPEXP_BASE wxStdInputStream : public std::istream
 {
 public:
     wxStdInputStream(wxInputStream& stream);
-    virtual ~wxStdInputStream() = default;
+    ~wxStdInputStream() override = default;
 
 protected:
     wxStdInputStreamBuffer m_streamBuffer;
@@ -72,16 +72,16 @@ class WXDLLIMPEXP_BASE wxStdOutputStreamBuffer : public std::streambuf
 {
 public:
     wxStdOutputStreamBuffer(wxOutputStream& stream);
-    virtual ~wxStdOutputStreamBuffer() = default;
+    ~wxStdOutputStreamBuffer() override = default;
 
 protected:
     std::streambuf *setbuf(char *s, std::streamsize n) override;
-    virtual std::streampos seekoff(std::streamoff off,
+    std::streampos seekoff(std::streamoff off,
                                    std::ios_base::seekdir way,
                                    std::ios_base::openmode which =
                                        std::ios_base::in |
                                        std::ios_base::out) override;
-    virtual std::streampos seekpos(std::streampos sp,
+    std::streampos seekpos(std::streampos sp,
                                    std::ios_base::openmode which =
                                        std::ios_base::in |
                                        std::ios_base::out) override;
@@ -99,7 +99,7 @@ class WXDLLIMPEXP_BASE wxStdOutputStream : public std::ostream
 {
 public:
     wxStdOutputStream(wxOutputStream& stream);
-    virtual ~wxStdOutputStream() = default;
+    ~wxStdOutputStream() override = default;
 
 protected:
     wxStdOutputStreamBuffer m_streamBuffer;

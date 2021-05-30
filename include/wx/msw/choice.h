@@ -22,7 +22,7 @@ class WXDLLIMPEXP_CORE wxChoice : public wxChoiceBase
 public:
     // ctors
     wxChoice() { Init(); }
-    virtual ~wxChoice();
+    ~wxChoice() override;
 
     wxChoice(wxWindow *parent,
              wxWindowID id,
@@ -116,7 +116,7 @@ protected:
     void DoDeleteOneItem(unsigned int n) override;
     void DoClear() override;
 
-    virtual int DoInsertItems(const wxArrayStringsAdapter& items,
+    int DoInsertItems(const wxArrayStringsAdapter& items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
 
@@ -127,7 +127,7 @@ protected:
     // MSW implementation
     wxSize DoGetBestSize() const override;
     void DoGetSize(int *w, int *h) const override;
-    virtual void DoSetSize(int x, int y,
+    void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
     wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
@@ -174,7 +174,7 @@ protected:
     int m_heightOwn;
 
 public:
-    wxClassInfo *GetClassInfo() const;
+    wxClassInfo *GetClassInfo() const override;
     static wxClassInfo ms_classInfo;
     static wxObject* wxCreateObject();
 };

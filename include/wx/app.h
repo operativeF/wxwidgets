@@ -76,7 +76,7 @@ class WXDLLIMPEXP_BASE wxAppConsoleBase : public wxEvtHandler,
 public:
     // ctor and dtor
     wxAppConsoleBase();
-    virtual ~wxAppConsoleBase();
+    ~wxAppConsoleBase() override;
 
 
     // the virtual functions which may/must be overridden in the derived class
@@ -549,7 +549,7 @@ class WXDLLIMPEXP_CORE wxAppBase : public wxAppConsole
 {
 public:
     wxAppBase();
-    virtual ~wxAppBase();
+    ~wxAppBase() override;
 
     // the virtual functions which may/must be overridden in the derived class
     // -----------------------------------------------------------------------

@@ -84,7 +84,7 @@ protected:
     // Protected dtor should make some incompatible code
     // break more louder. That is, they should do data->DecRef()
     // instead of delete data.
-    virtual ~wxVariantData() = default;
+    ~wxVariantData() override = default;
 };
 
 /*
@@ -106,7 +106,7 @@ public:
 #if wxUSE_ANY
     wxVariant(const wxAny& any);
 #endif
-    virtual ~wxVariant();
+    ~wxVariant() override;
 
     // generic assignment
     void operator= (const wxVariant& variant);

@@ -72,7 +72,7 @@ public:
         m_ttiIcon = TTI_NONE;
     }
 
-    virtual void SetBackgroundColour(const wxColour& col,
+    void SetBackgroundColour(const wxColour& col,
                                      const wxColour& colEnd) override
     {
         // Setting background colour is not supported neither.
@@ -119,7 +119,7 @@ public:
         }
     }
 
-    virtual void SetTimeout(unsigned millisecondsTimeout,
+    void SetTimeout(unsigned millisecondsTimeout,
                             unsigned millisecondsDelay) override
     {
         // We don't support changing the timeout or the delay

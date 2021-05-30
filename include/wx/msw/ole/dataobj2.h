@@ -39,10 +39,10 @@ public:
 
     size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
         { return GetDataSize(); }
-    virtual bool GetDataHere(const wxDataFormat& WXUNUSED(format),
+    bool GetDataHere(const wxDataFormat& WXUNUSED(format),
                              void *buf) const override
         { return GetDataHere(buf); }
-    virtual bool SetData(const wxDataFormat& WXUNUSED(format),
+    bool SetData(const wxDataFormat& WXUNUSED(format),
                          size_t len, const void *buf) override
         { return SetData(len, buf); }
 
@@ -76,10 +76,10 @@ public:
 
     size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
         { return GetDataSize(); }
-    virtual bool GetDataHere(const wxDataFormat& WXUNUSED(format),
+    bool GetDataHere(const wxDataFormat& WXUNUSED(format),
                              void *buf) const override
         { return GetDataHere(buf); }
-    virtual bool SetData(const wxDataFormat& WXUNUSED(format),
+    bool SetData(const wxDataFormat& WXUNUSED(format),
                          size_t len, const void *buf) override
         { return SetData(len, buf); }
 
@@ -105,10 +105,10 @@ public:
 
     size_t GetDataSize(const wxDataFormat& WXUNUSED(format)) const override
         { return GetDataSize(); }
-    virtual bool GetDataHere(const wxDataFormat& WXUNUSED(format),
+    bool GetDataHere(const wxDataFormat& WXUNUSED(format),
                              void *buf) const override
         { return GetDataHere(buf); }
-    virtual bool SetData(const wxDataFormat& WXUNUSED(format),
+    bool SetData(const wxDataFormat& WXUNUSED(format),
                          size_t len, const void *buf) override
         { return SetData(len, buf); }
 
@@ -134,7 +134,7 @@ public:
     void SetURL(const wxString& url);
 
     // override to set m_textFormat
-    virtual bool SetData(const wxDataFormat& format,
+    bool SetData(const wxDataFormat& format,
                          size_t len,
                          const void *buf) override;
 

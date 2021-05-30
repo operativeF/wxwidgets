@@ -741,7 +741,7 @@ class WXDLLIMPEXP_BASE wxLogChain : public wxLog
 {
 public:
     wxLogChain(wxLog *logger);
-    virtual ~wxLogChain();
+    ~wxLogChain() override;
 
     // change the new log target
     void SetLog(wxLog *logger);
@@ -764,7 +764,7 @@ public:
 
 protected:
     // pass the record to the old logger if needed
-    virtual void DoLogRecord(wxLogLevel level,
+    void DoLogRecord(wxLogLevel level,
                              const wxString& msg,
                              const wxLogRecordInfo& info) override;
 

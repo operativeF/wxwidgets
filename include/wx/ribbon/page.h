@@ -33,7 +33,7 @@ public:
                  const wxBitmap& icon = wxNullBitmap,
                  long style = 0);
 
-    virtual ~wxRibbonPage();
+    ~wxRibbonPage() override;
 
     bool Create(wxRibbonBar* parent,
                 wxWindowID id = wxID_ANY,

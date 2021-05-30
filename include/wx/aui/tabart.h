@@ -121,7 +121,7 @@ class WXDLLIMPEXP_AUI wxAuiGenericTabArt : public wxAuiTabArt
 public:
 
     wxAuiGenericTabArt();
-    virtual ~wxAuiGenericTabArt();
+    ~wxAuiGenericTabArt() override;
 
     wxAuiTabArt* Clone() override;
     void SetFlags(unsigned int flags) override;
@@ -222,7 +222,7 @@ class WXDLLIMPEXP_AUI wxAuiSimpleTabArt : public wxAuiTabArt
 public:
 
     wxAuiSimpleTabArt();
-    virtual ~wxAuiSimpleTabArt();
+    ~wxAuiSimpleTabArt() override;
 
     wxAuiTabArt* Clone() override;
     void SetFlags(unsigned int flags) override;

@@ -17,57 +17,57 @@ public:
 
     wxAuiToolBarArt* Clone() override;
 
-    virtual void DrawBackground(
+    void DrawBackground(
         wxDC& dc,
         wxWindow* wnd,
         const wxRect& rect) override;
 
-    virtual void DrawLabel(
-        wxDC& dc,
-        wxWindow* wnd,
-        const wxAuiToolBarItem& item,
-        const wxRect& rect) override;
-
-    virtual void DrawButton(
+    void DrawLabel(
         wxDC& dc,
         wxWindow* wnd,
         const wxAuiToolBarItem& item,
         const wxRect& rect) override;
 
-    virtual void DrawDropDownButton(
+    void DrawButton(
         wxDC& dc,
         wxWindow* wnd,
         const wxAuiToolBarItem& item,
         const wxRect& rect) override;
 
-    virtual void DrawControlLabel(
+    void DrawDropDownButton(
         wxDC& dc,
         wxWindow* wnd,
         const wxAuiToolBarItem& item,
         const wxRect& rect) override;
 
-    virtual void DrawSeparator(
+    void DrawControlLabel(
+        wxDC& dc,
+        wxWindow* wnd,
+        const wxAuiToolBarItem& item,
+        const wxRect& rect) override;
+
+    void DrawSeparator(
         wxDC& dc,
         wxWindow* wnd,
         const wxRect& rect) override;
 
-    virtual void DrawGripper(
+    void DrawGripper(
         wxDC& dc,
         wxWindow* wnd,
         const wxRect& rect) override;
 
-    virtual void DrawOverflowButton(
+    void DrawOverflowButton(
         wxDC& dc,
         wxWindow* wnd,
         const wxRect& rect,
         int state) override;
 
-    virtual wxSize GetLabelSize(
+    wxSize GetLabelSize(
         wxDC& dc,
         wxWindow* wnd,
         const wxAuiToolBarItem& item) override;
 
-    virtual wxSize GetToolSize(
+    wxSize GetToolSize(
         wxDC& dc,
         wxWindow* wnd,
         const wxAuiToolBarItem& item) override;
@@ -75,7 +75,7 @@ public:
     int GetElementSize(int element) override;
     void SetElementSize(int elementId, int size) override;
 
-    virtual int ShowDropDown(wxWindow* wnd,
+    int ShowDropDown(wxWindow* wnd,
         const wxAuiToolBarItemArray& items) override;
 
 private:

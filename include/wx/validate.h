@@ -41,7 +41,7 @@ public:
          m_validatorWindow(other.m_validatorWindow)
     {
     }
-    virtual ~wxValidator();
+    ~wxValidator() override;
 
     // Make a clone of this validator (or return NULL) - currently necessary
     // if you're passing a reference to a validator.

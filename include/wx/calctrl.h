@@ -174,7 +174,7 @@ private:
 
     public:
 	wxCalendarEvent& operator=(const wxCalendarEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

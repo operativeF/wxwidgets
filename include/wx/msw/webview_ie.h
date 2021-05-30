@@ -60,7 +60,7 @@ public:
        Create(parent, id, url, pos, size, style, name);
    }
 
-    ~wxWebViewIE();
+    ~wxWebViewIE() override;
 
     bool Create(wxWindow* parent,
            wxWindowID id,
@@ -184,7 +184,7 @@ class WXDLLIMPEXP_WEBVIEW wxWebViewFactoryIE : public wxWebViewFactory
 {
 public:
     wxWebView* Create() override { return new wxWebViewIE; }
-    virtual wxWebView* Create(wxWindow* parent,
+    wxWebView* Create(wxWindow* parent,
                               wxWindowID id,
                               const wxString& url = wxWebViewDefaultURLStr,
                               const wxPoint& pos = wxDefaultPosition,

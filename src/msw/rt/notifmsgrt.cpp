@@ -95,7 +95,7 @@ public:
 
     }
 
-    virtual ~wxToastNotifMsgImpl()
+    ~wxToastNotifMsgImpl() override
     {
         if ( m_toastEventHandler )
             m_toastEventHandler->Detach();

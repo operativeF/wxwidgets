@@ -25,7 +25,7 @@ private:
 
 public:
     ListBoxImpl();
-    ~ListBoxImpl();
+    ~ListBoxImpl() override;
     static ListBox *Allocate();
 
     void SetFont(Font &font) override;
@@ -102,7 +102,7 @@ public:
             virtual ~wxSTCPopupBase();
         #elif defined(__WXMSW__)
             bool Show(bool show=true) override;
-            virtual bool MSWHandleMessage(WXLRESULT *result, WXUINT message,
+            bool MSWHandleMessage(WXLRESULT *result, WXUINT message,
                                           WXWPARAM wParam, WXLPARAM lParam)
                                           override;
         #endif
@@ -134,12 +134,12 @@ class wxSTCPopupWindow:public wxSTCPopupBase
 {
 public:
     wxSTCPopupWindow(wxWindow*);
-    virtual ~wxSTCPopupWindow();
+    ~wxSTCPopupWindow() override;
     bool Destroy() override;
     bool AcceptsFocus() const override;
 
 protected:
-    virtual void DoSetSize(int x, int y, int width, int height,
+    void DoSetSize(int x, int y, int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
     void OnParentMove(wxMoveEvent& event);
     #if defined(__WXOSX_COCOA__) || (defined(__WXGTK__)&&!wxSTC_POPUP_IS_FRAME)

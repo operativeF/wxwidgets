@@ -111,7 +111,7 @@ public:
         return *this;
     }
 
-    virtual ~wxBitmap();
+    ~wxBitmap() override;
 
 #if wxUSE_IMAGE
     wxImage ConvertToImage() const;
@@ -252,7 +252,7 @@ public:
     // construct a mask from the givne bitmap handle
     wxMask(WXHBITMAP hbmp) { m_maskBitmap = hbmp; }
 
-    virtual ~wxMask();
+    ~wxMask() override;
 
     bool Create(const wxBitmap& bitmap, const wxColour& colour);
     bool Create(const wxBitmap& bitmap, int paletteIndex);
@@ -285,15 +285,15 @@ public:
 
     // implement wxGDIImageHandler's pure virtuals:
 
-    virtual bool Create(wxGDIImage *image,
+    bool Create(wxGDIImage *image,
                         const void* data,
                         wxBitmapType type,
                         int width, int height, int depth = 1) override;
-    virtual bool Load(wxGDIImage *image,
+    bool Load(wxGDIImage *image,
                       const wxString& name,
                       wxBitmapType type,
                       int desiredWidth, int desiredHeight) override;
-    virtual bool Save(const wxGDIImage *image,
+    bool Save(const wxGDIImage *image,
                       const wxString& name,
                       wxBitmapType type) const override;
 

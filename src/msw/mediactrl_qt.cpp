@@ -345,9 +345,9 @@ class WXDLLIMPEXP_MEDIA wxQTMediaBackend : public wxMediaBackendCommonBase
 {
 public:
     wxQTMediaBackend();
-    virtual ~wxQTMediaBackend();
+    ~wxQTMediaBackend() override;
 
-    virtual bool CreateControl(wxControl* ctrl, wxWindow* parent,
+    bool CreateControl(wxControl* ctrl, wxWindow* parent,
                                      wxWindowID id,
                                      const wxPoint& pos,
                                      const wxSize& size,
@@ -359,7 +359,7 @@ public:
     bool Pause() override;
     bool Stop() override;
 
-    virtual bool Load(const wxURI& location,
+    bool Load(const wxURI& location,
                       const wxURI& proxy) override
     { return wxMediaBackend::Load(location, proxy); }
 

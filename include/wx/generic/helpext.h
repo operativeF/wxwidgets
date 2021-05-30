@@ -29,10 +29,10 @@ class WXDLLIMPEXP_ADV wxExtHelpController : public wxHelpControllerBase
 {
 public:
     wxExtHelpController(wxWindow* parentWindow = nullptr);
-    virtual ~wxExtHelpController();
+    ~wxExtHelpController() override;
 
     // Set viewer: new name for SetBrowser
-    virtual void SetViewer(const wxString& viewer = wxEmptyString,
+    void SetViewer(const wxString& viewer = wxEmptyString,
                             long flags = wxHELP_NETSCAPE) override;
 
     bool Initialize(const wxString& dir, int WXUNUSED(server)) override
@@ -44,7 +44,7 @@ public:
     bool DisplaySection(int sectionNo) override;
     bool DisplaySection(const wxString& section) override;
     bool DisplayBlock(long blockNo) override;
-    virtual bool KeywordSearch(const wxString& k,
+    bool KeywordSearch(const wxString& k,
                                 wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override;
 
     bool Quit() override;
@@ -52,7 +52,7 @@ public:
 
     virtual bool DisplayHelp(const wxString &) ;
 
-    virtual void SetFrameParameters(const wxString& WXUNUSED(title),
+    void SetFrameParameters(const wxString& WXUNUSED(title),
                                     const wxSize& WXUNUSED(size),
                                     const wxPoint& WXUNUSED(pos) = wxDefaultPosition,
                                     bool WXUNUSED(newFrameEachTime) = false) override
@@ -60,7 +60,7 @@ public:
             // does nothing by default
         }
 
-    virtual wxFrame *GetFrameParameters(wxSize *WXUNUSED(size) = nullptr,
+    wxFrame *GetFrameParameters(wxSize *WXUNUSED(size) = nullptr,
                                     wxPoint *WXUNUSED(pos) = nullptr,
                                     bool *WXUNUSED(newFrameEachTime) = nullptr) override
         {

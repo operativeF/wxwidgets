@@ -25,7 +25,7 @@ class WXDLLIMPEXP_CORE wxCommand : public wxObject
 {
 public:
     wxCommand(bool canUndoIt = false, const wxString& name = wxEmptyString);
-    virtual ~wxCommand()= default;
+    ~wxCommand() override = default;
 
     // Override this to perform a command
     virtual bool Do() = 0;
@@ -53,7 +53,7 @@ class WXDLLIMPEXP_CORE wxCommandProcessor : public wxObject
 public:
     // if max number of commands is -1, it is unlimited
     wxCommandProcessor(int maxCommands = -1);
-    virtual ~wxCommandProcessor();
+    ~wxCommandProcessor() override;
 
     // Pass a command to the processor. The processor calls Do(); if
     // successful, is appended to the command history unless storeIt is false.

@@ -96,7 +96,7 @@ public:
                 const wxArrayLong& timess,
                 const wxString& caption,
                 long style);
-    virtual ~wxLogDialog();
+    ~wxLogDialog() override;
 
     // event handlers
     void OnOk(wxCommandEvent& event);
@@ -437,7 +437,7 @@ class wxLogFrame : public wxFrame
 public:
     // ctor & dtor
     wxLogFrame(wxWindow *pParent, wxLogWindow *log, const wxString& szTitle);
-    virtual ~wxLogFrame();
+    ~wxLogFrame() override;
 
     // Don't prevent the application from exiting if just this frame remains.
     bool ShouldPreventAppExit() const override { return false; }

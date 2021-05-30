@@ -89,7 +89,7 @@ public:
     typedef unsigned char ChannelType;
 
     wxColourBase() = default;
-    virtual ~wxColourBase() = default;
+    ~wxColourBase() override = default;
 
 
     // Set() functions

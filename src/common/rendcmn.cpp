@@ -109,7 +109,7 @@ public:
         {
         }
 
-    virtual ~wxRendererFromDynLib()
+    ~wxRendererFromDynLib() override
     {
         delete m_renderer;
         wxDynamicLibrary::Unload(m_dllHandle);

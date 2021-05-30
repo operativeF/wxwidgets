@@ -21,7 +21,7 @@ public:
     wxDataViewRenderer( const wxString &varianttype,
                         wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                         int align = wxDVR_DEFAULT_ALIGNMENT );
-    virtual ~wxDataViewRenderer();
+    ~wxDataViewRenderer() override;
 
     wxDataViewRenderer(const wxDataViewRenderer&) = delete;
 	wxDataViewRenderer& operator=(const wxDataViewRenderer&) = delete;
@@ -72,7 +72,7 @@ private:
     int m_state;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

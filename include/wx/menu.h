@@ -53,7 +53,7 @@ public:
         { Init(style); }
 
     // dtor deletes all the menu items we own
-    virtual ~wxMenuBase();
+    ~wxMenuBase() override;
 
     // menu construction
     // -----------------
@@ -455,7 +455,7 @@ public:
     wxMenuBarBase();
 
     // dtor will delete all menus we own
-    virtual ~wxMenuBarBase();
+    ~wxMenuBarBase() override;
 
     // menu bar construction
     // ---------------------

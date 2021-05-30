@@ -32,7 +32,7 @@ class WXDLLEXPORT wxWrapSizer : public wxBoxSizer
 {
 public:
     wxWrapSizer(int orient = wxHORIZONTAL, int flags = wxWRAPSIZER_DEFAULT_FLAGS);
-    virtual ~wxWrapSizer();
+    ~wxWrapSizer() override;
 
 	wxWrapSizer(const wxWrapSizer&) = delete;
 	wxWrapSizer& operator=(const wxWrapSizer&) = delete;
@@ -100,7 +100,7 @@ protected:
     wxBoxSizer m_rows;       // Sizer containing multiple rows of our items
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

@@ -232,7 +232,7 @@ public:
                   const wxString& encoding = wxT("UTF-8"));
     wxXmlDocument(wxInputStream& stream,
                   const wxString& encoding = wxT("UTF-8"));
-    virtual ~wxXmlDocument() { wxDELETE(m_docNode); }
+    ~wxXmlDocument() override { wxDELETE(m_docNode); }
 
     wxXmlDocument(const wxXmlDocument& doc);
     wxXmlDocument& operator=(const wxXmlDocument& doc);

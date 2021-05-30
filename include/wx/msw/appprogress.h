@@ -19,7 +19,7 @@ class WXDLLIMPEXP_CORE wxAppProgressIndicator
 {
 public:
     wxAppProgressIndicator(wxWindow* parent = nullptr, int maxValue = 100);
-    virtual ~wxAppProgressIndicator();
+    ~wxAppProgressIndicator() override;
 
     bool IsAvailable() const override;
 

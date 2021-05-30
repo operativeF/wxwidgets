@@ -120,7 +120,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    virtual ~wxSashWindow();
+    ~wxSashWindow() override;
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, long style = wxSW_3D|wxCLIP_CHILDREN, const wxString& name = wxT("sashWindow"));
@@ -273,7 +273,7 @@ private:
 private:
     public:
 	wxSashEvent& operator=(const wxSashEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

@@ -35,7 +35,7 @@ class WXDLLIMPEXP_CORE wxChoiceBase : public wxControlWithItems
 {
 public:
     wxChoiceBase() = default;
-    virtual ~wxChoiceBase();
+    ~wxChoiceBase() override;
 
     // all generic methods are in wxControlWithItems
 

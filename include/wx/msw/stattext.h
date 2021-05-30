@@ -46,7 +46,7 @@ public:
 
 protected:
     // implement/override some base class virtuals
-    virtual void DoSetSize(int x, int y, int w, int h,
+    void DoSetSize(int x, int y, int w, int h,
                            int sizeFlags = wxSIZE_AUTO) override;
     wxSize DoGetBestClientSize() const override;
 
@@ -54,7 +54,7 @@ protected:
     void WXSetVisibleLabel(const wxString& str) override;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

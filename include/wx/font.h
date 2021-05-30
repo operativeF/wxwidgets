@@ -351,7 +351,7 @@ public:
     */
 
     // creator function
-    virtual ~wxFontBase();
+    ~wxFontBase() override;
 
 
     // from the font components

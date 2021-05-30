@@ -30,7 +30,7 @@ public:
                 const wxString &title,
                 int style = 0);
 
-    virtual ~wxFindReplaceDialog();
+    ~wxFindReplaceDialog() override;
 
     // implementation only from now on
 
@@ -44,7 +44,7 @@ public:
 protected:
     void DoGetSize(int *width, int *height) const override;
     void DoGetClientSize(int *width, int *height) const override;
-    virtual void DoSetSize(int x, int y,
+    void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
 

@@ -57,7 +57,7 @@ private:
 class wxSecretStoreMSWImpl : public wxSecretStoreImpl
 {
 public:
-    virtual bool Save(const wxString& service,
+    bool Save(const wxString& service,
                       const wxString& user,
                       const wxSecretValueImpl& secret,
                       wxString& errmsg) override
@@ -87,7 +87,7 @@ public:
         return true;
     }
 
-    virtual bool Load(const wxString& service,
+    bool Load(const wxString& service,
                       wxString* user,
                       wxSecretValueImpl** secret,
                       wxString& errmsg) const override
@@ -112,7 +112,7 @@ public:
         return true;
     }
 
-    virtual bool Delete(const wxString& service,
+    bool Delete(const wxString& service,
                         wxString& errmsg) override
     {
         if ( !::CredDelete(service.t_str(), CRED_TYPE_GENERIC, 0) )

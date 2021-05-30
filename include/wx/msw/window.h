@@ -79,7 +79,7 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    virtual ~wxWindowMSW();
+    ~wxWindowMSW() override;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -117,12 +117,12 @@ public:
 #endif // wxUSE_DEFERRED_SIZING
 
     bool Show(bool show = true) override;
-    virtual bool ShowWithEffect(wxShowEffect effect,
+    bool ShowWithEffect(wxShowEffect effect,
                                 unsigned timeout = 0) override
     {
         return MSWShowWithEffect(true, effect, timeout);
     }
-    virtual bool HideWithEffect(wxShowEffect effect,
+    bool HideWithEffect(wxShowEffect effect,
                                 unsigned timeout = 0) override
     {
         return MSWShowWithEffect(false, effect, timeout);
@@ -140,7 +140,7 @@ public:
     void WarpPointer(int x, int y) override;
     bool EnableTouchEvents(int eventsMask) override;
 
-    virtual void Refresh( bool eraseBackground = true,
+    void Refresh( bool eraseBackground = true,
                           const wxRect *rect = (const wxRect *) nullptr ) override;
     void Update() override;
 
@@ -152,13 +152,13 @@ public:
     int GetCharHeight() const override;
     int GetCharWidth() const override;
 
-    virtual void SetScrollbar( int orient, int pos, int thumbVisible,
+    void SetScrollbar( int orient, int pos, int thumbVisible,
                                int range, bool refresh = true ) override;
     void SetScrollPos( int orient, int pos, bool refresh = true ) override;
     int GetScrollPos( int orient ) const override;
     int GetScrollThumb( int orient ) const override;
     int GetScrollRange( int orient ) const override;
-    virtual void ScrollWindow( int dx, int dy,
+    void ScrollWindow( int dx, int dy,
                                const wxRect* rect = nullptr ) override;
 
     bool ScrollLines(int lines) override;
@@ -166,7 +166,7 @@ public:
 
     void SetLayoutDirection(wxLayoutDirection dir) override;
     wxLayoutDirection GetLayoutDirection() const override;
-    virtual wxCoord AdjustForLayoutDirection(wxCoord x,
+    wxCoord AdjustForLayoutDirection(wxCoord x,
                                              wxCoord width,
                                              wxCoord widthTotal) const override;
 
@@ -671,7 +671,7 @@ protected:
     int                   m_yThumbSize;
 
     // implement the base class pure virtuals
-    virtual void DoGetTextExtent(const wxString& string,
+    void DoGetTextExtent(const wxString& string,
                                  int *x, int *y,
                                  int *descent = nullptr,
                                  int *externalLeading = nullptr,
@@ -683,7 +683,7 @@ protected:
     void DoGetPosition( int *x, int *y ) const override;
     void DoGetSize( int *width, int *height ) const override;
     void DoGetClientSize( int *width, int *height ) const override;
-    virtual void DoSetSize(int x, int y,
+    void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
     void DoSetClientSize(int width, int height) override;

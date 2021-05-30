@@ -25,7 +25,7 @@ class WXDLLIMPEXP_BASE wxModule : public wxObject
 {
 public:
     wxModule() = default;
-    virtual ~wxModule() = default;
+    ~wxModule() override = default;
 
     // if module init routine returns false the application
     // will fail to startup

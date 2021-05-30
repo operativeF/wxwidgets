@@ -37,9 +37,9 @@ public:
     wxRect GetPaperRect() const override;
 
 protected:
-    virtual void DoDrawBitmap(const wxBitmap &bmp, wxCoord x, wxCoord y,
+    void DoDrawBitmap(const wxBitmap &bmp, wxCoord x, wxCoord y,
                               bool useMask = false) override;
-    virtual bool DoBlit(wxCoord xdest, wxCoord ydest,
+    bool DoBlit(wxCoord xdest, wxCoord ydest,
                         wxCoord width, wxCoord height,
                         wxDC *source, wxCoord xsrc, wxCoord ysrc,
                         wxRasterOperationMode rop = wxCOPY, bool useMask = false,

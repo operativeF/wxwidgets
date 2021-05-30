@@ -16,7 +16,7 @@ class WXDLLIMPEXP_AUI wxAuiMSWTabArt : public wxAuiGenericTabArt
 public:
 
     wxAuiMSWTabArt();
-    virtual ~wxAuiMSWTabArt();
+    ~wxAuiMSWTabArt() override;
 
     wxAuiTabArt* Clone() override;
     void SetSizingInfo(const wxSize& tabCtrlSize,

@@ -63,7 +63,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxComboBoxNameStr));
 
-    virtual ~wxComboCtrl();
+    ~wxComboCtrl() override;
 
     void PrepareBackground( wxDC& dc, const wxRect& rect, int flags ) const override;
     bool IsKeyPopupToggle(const wxKeyEvent& event) const override;

@@ -43,7 +43,7 @@ public:
         Create(title, message, parent, flags);
     }
 
-    virtual ~wxNotificationMessageBase();
+    ~wxNotificationMessageBase() override;
 
     // note that the setters must be called before Show()
 

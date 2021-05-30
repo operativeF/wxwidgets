@@ -72,7 +72,7 @@ public:
     }
  }
 
-    virtual ~wxMenu();
+    ~wxMenu() override;
 
 	wxMenu(const wxMenu&) = delete;
 	wxMenu& operator=(const wxMenu&) = delete;
@@ -197,7 +197,7 @@ private:
 #endif // wxUSE_OWNER_DRAWN
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };
@@ -216,7 +216,7 @@ public:
     wxMenuBar(long style);
         // menubar takes ownership of the menus arrays but copies the titles
     wxMenuBar(size_t n, wxMenu *menus[], const wxString titles[], long style = 0);
-    virtual ~wxMenuBar();
+    ~wxMenuBar() override;
 
 	wxMenuBar(const wxMenuBar&) = delete;
 	wxMenuBar& operator=(const wxMenuBar&) = delete;
@@ -270,7 +270,7 @@ protected:
     int MSWPositionForWxMenu(wxMenu *menu, int wxpos);
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

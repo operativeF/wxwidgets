@@ -91,7 +91,7 @@ protected:
 private:
     public:
 	wxSpinDoubleEvent& operator=(const wxSpinDoubleEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

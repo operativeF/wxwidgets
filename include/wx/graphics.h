@@ -128,7 +128,7 @@ class WXDLLIMPEXP_CORE wxGraphicsObject : public wxObject
 public:
     wxGraphicsObject();
     wxGraphicsObject( wxGraphicsRenderer* renderer );
-    virtual ~wxGraphicsObject();
+    ~wxGraphicsObject() override;
 
     bool IsNull() const;
 
@@ -148,7 +148,7 @@ class WXDLLIMPEXP_CORE wxGraphicsPen : public wxGraphicsObject
 {
 public:
     wxGraphicsPen() = default;
-    virtual ~wxGraphicsPen() = default;
+    ~wxGraphicsPen() override = default;
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsPen);
 };
@@ -159,7 +159,7 @@ class WXDLLIMPEXP_CORE wxGraphicsBrush : public wxGraphicsObject
 {
 public:
     wxGraphicsBrush() = default;
-    virtual ~wxGraphicsBrush() = default;
+    ~wxGraphicsBrush() override = default;
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsBrush);
 };
@@ -170,7 +170,7 @@ class WXDLLIMPEXP_CORE wxGraphicsFont : public wxGraphicsObject
 {
 public:
     wxGraphicsFont() = default;
-    virtual ~wxGraphicsFont() = default;
+    ~wxGraphicsFont() override = default;
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGraphicsFont);
 };
@@ -181,7 +181,7 @@ class WXDLLIMPEXP_CORE wxGraphicsBitmap : public wxGraphicsObject
 {
 public:
     wxGraphicsBitmap() = default;
-    virtual ~wxGraphicsBitmap() = default;
+    ~wxGraphicsBitmap() override = default;
 
     // Convert bitmap to wxImage: this is more efficient than converting to
     // wxBitmap first and then to wxImage and also works without X server
@@ -208,7 +208,7 @@ class WXDLLIMPEXP_CORE wxGraphicsMatrix : public wxGraphicsObject
 public:
     wxGraphicsMatrix() = default;
 
-    virtual ~wxGraphicsMatrix() = default;
+    ~wxGraphicsMatrix() override = default;
 
     // concatenates the matrix
     virtual void Concat( const wxGraphicsMatrix *t );
@@ -478,7 +478,7 @@ class WXDLLIMPEXP_CORE wxGraphicsPath : public wxGraphicsObject
 {
 public:
     wxGraphicsPath()  = default;
-    virtual ~wxGraphicsPath() = default;
+    ~wxGraphicsPath() override = default;
 
     //
     // These are the path primitives from which everything else can be constructed
@@ -566,7 +566,7 @@ class WXDLLIMPEXP_CORE wxGraphicsContext : public wxGraphicsObject
 public:
     wxGraphicsContext(wxGraphicsRenderer* renderer, wxWindow* window = nullptr);
 
-    virtual ~wxGraphicsContext();
+    ~wxGraphicsContext() override;
 
     static wxGraphicsContext* Create( const wxWindowDC& dc);
     static wxGraphicsContext * Create( const wxMemoryDC& dc);
@@ -968,7 +968,7 @@ class WXDLLIMPEXP_CORE wxGraphicsRenderer : public wxObject
 public:
     wxGraphicsRenderer() = default;
 
-    virtual ~wxGraphicsRenderer() = default;
+    ~wxGraphicsRenderer() override = default;
 
     static wxGraphicsRenderer* GetDefaultRenderer();
 

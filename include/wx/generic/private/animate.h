@@ -21,7 +21,7 @@ class WXDLLIMPEXP_ADV wxAnimationGenericImpl : public wxAnimationImpl
 {
 public:
     wxAnimationGenericImpl()  = default;
-    virtual ~wxAnimationGenericImpl() { UnRef(); }
+    ~wxAnimationGenericImpl() override { UnRef(); }
 
     bool IsOk() const override
         { return m_decoder != nullptr; }
@@ -32,9 +32,9 @@ public:
     wxImage GetFrame(unsigned int i) const override;
     wxSize GetSize() const override;
 
-    virtual bool LoadFile(const wxString& filename,
+    bool LoadFile(const wxString& filename,
                           wxAnimationType type = wxANIMATION_TYPE_ANY) override;
-    virtual bool Load(wxInputStream& stream,
+    bool Load(wxInputStream& stream,
                       wxAnimationType type = wxANIMATION_TYPE_ANY) override;
 
     // extended interface used only by the generic implementation of wxAnimationCtrl

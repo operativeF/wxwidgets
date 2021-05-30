@@ -48,7 +48,7 @@ public:
 
     void Init();
 
-    virtual ~wxPostScriptDCImpl();
+    ~wxPostScriptDCImpl() override;
 
     virtual bool Ok() const { return IsOk(); }
     bool IsOk() const override;

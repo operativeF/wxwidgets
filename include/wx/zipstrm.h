@@ -153,7 +153,7 @@ public:
     wxZipEntry(const wxString& name = wxEmptyString,
                const wxDateTime& dt = wxDateTime::Now(),
                wxFileOffset size = wxInvalidOffset);
-    virtual ~wxZipEntry();
+    ~wxZipEntry() override;
 
     wxZipEntry(const wxZipEntry& entry);
     wxZipEntry& operator=(const wxZipEntry& entry);
@@ -304,7 +304,7 @@ public:
     wxZipOutputStream(wxOutputStream *stream,
                       int level = -1,
                       wxMBConv& conv = wxConvUTF8);
-    virtual WXZIPFIX ~wxZipOutputStream();
+    WXZIPFIX ~wxZipOutputStream() override;
 
     bool PutNextEntry(wxZipEntry *entry)        { return DoCreate(entry); }
 
@@ -392,7 +392,7 @@ public:
     wxZipInputStream(wxInputStream& stream, wxMBConv& conv = wxConvLocal);
     wxZipInputStream(wxInputStream *stream, wxMBConv& conv = wxConvLocal);
 
-    virtual WXZIPFIX ~wxZipInputStream();
+    WXZIPFIX ~wxZipInputStream() override;
 
     bool OpenEntry(wxZipEntry& entry)   { return DoOpen(&entry); }
     bool WXZIPFIX CloseEntry() override;

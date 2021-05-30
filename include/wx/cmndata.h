@@ -30,7 +30,7 @@ class WXDLLIMPEXP_CORE wxPrintData: public wxObject
 public:
     wxPrintData();
     wxPrintData(const wxPrintData& printData);
-    virtual ~wxPrintData();
+    ~wxPrintData() override;
 
     int GetNoCopies() const { return m_printNoCopies; }
     bool GetCollate() const { return m_printCollate; }
@@ -127,7 +127,7 @@ public:
     wxPrintDialogData();
     wxPrintDialogData(const wxPrintDialogData& dialogData);
     wxPrintDialogData(const wxPrintData& printData);
-    virtual ~wxPrintDialogData();
+    ~wxPrintDialogData() override;
 
     int GetFromPage() const { return m_printFromPage; }
     int GetToPage() const { return m_printToPage; }
@@ -202,7 +202,7 @@ public:
     wxPageSetupDialogData();
     wxPageSetupDialogData(const wxPageSetupDialogData& dialogData);
     wxPageSetupDialogData(const wxPrintData& printData);
-    virtual ~wxPageSetupDialogData();
+    ~wxPageSetupDialogData() override;
 
     wxSize GetPaperSize() const { return m_paperSize; }
     wxPaperSize GetPaperId() const { return m_printData.GetPaperId(); }

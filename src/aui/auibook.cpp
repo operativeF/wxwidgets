@@ -1512,7 +1512,7 @@ public:
         m_tabCtrlHeight = FromDIP(20);
     }
 
-    ~wxTabFrame()
+    ~wxTabFrame() override
     {
         wxDELETE(m_tabs);
     }

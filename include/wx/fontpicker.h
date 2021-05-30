@@ -106,7 +106,7 @@ public:
          
     = default;
 
-    virtual ~wxFontPickerCtrl() = default;
+    ~wxFontPickerCtrl() override = default;
 
 
     wxFontPickerCtrl(wxWindow *parent,
@@ -219,7 +219,7 @@ private:
 
     public:
 	wxFontPickerEvent& operator=(const wxFontPickerEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

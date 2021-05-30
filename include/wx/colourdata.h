@@ -22,7 +22,7 @@ public:
     wxColourData();
     wxColourData(const wxColourData& data);
     wxColourData& operator=(const wxColourData& data);
-    virtual ~wxColourData();
+    ~wxColourData() override;
 
     void SetChooseFull(bool flag) { m_chooseFull = flag; }
     bool GetChooseFull() const { return m_chooseFull; }

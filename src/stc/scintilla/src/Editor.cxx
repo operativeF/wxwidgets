@@ -3929,7 +3929,7 @@ public:
 	CaseFolderASCII() {
 		StandardASCII();
 	}
-	~CaseFolderASCII() = default;
+	~CaseFolderASCII() override = default;
 };
 
 

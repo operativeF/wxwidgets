@@ -115,7 +115,7 @@ public:
         m_btnRemove = nullptr;
     }
 
-    virtual void SetButtonsToolTips(const wxString& addtip,
+    void SetButtonsToolTips(const wxString& addtip,
                                     const wxString& removetip) override
     {
         m_btnAdd->SetToolTip(addtip);

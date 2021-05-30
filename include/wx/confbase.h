@@ -120,7 +120,7 @@ public:
                long style = 0);
 
     // empty but ensures that dtor of all derived classes is virtual
-  virtual ~wxConfigBase();
+  ~wxConfigBase() override;
 
   // path management
     // set current path: if the first character is '/', it's the absolute path,

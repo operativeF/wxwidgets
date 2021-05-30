@@ -34,7 +34,7 @@ class WXDLLIMPEXP_CORE wxControlBase : public wxWindow
 public:
     wxControlBase() = default;
 
-    virtual ~wxControlBase();
+    ~wxControlBase() override;
 
     // Create() function adds the validator parameter
     bool Create(wxWindow *parent, wxWindowID id,

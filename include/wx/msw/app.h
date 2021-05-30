@@ -26,7 +26,7 @@ class WXDLLIMPEXP_CORE wxApp : public wxAppBase
 {
 public:
     wxApp();
-    virtual ~wxApp();
+    ~wxApp() override;
 
     // override base class (pure) virtuals
     bool Initialize(int& argc, wxChar **argv) override;

@@ -1846,8 +1846,8 @@ public:
     wxPGDialogAdapter()  
     = default;
 
-    virtual ~wxPGDialogAdapter()
-    = default;
+    ~wxPGDialogAdapter()
+    override = default;
 
     bool DoShowDialog(wxPropertyGrid* pg, wxPGProperty* prop) override
     {

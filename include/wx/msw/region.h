@@ -32,7 +32,7 @@ public:
     }
 #endif // wxUSE_IMAGE
 
-    virtual ~wxRegion();
+    ~wxRegion() override;
 
     // wxRegionBase methods
     void Clear() override;
@@ -67,7 +67,7 @@ public:
 
     wxRegionIterator& operator=(const wxRegionIterator& ri);
 
-    virtual ~wxRegionIterator();
+    ~wxRegionIterator() override;
 
     void Reset() { m_current = 0; }
     void Reset(const wxRegion& region);

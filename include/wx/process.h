@@ -59,7 +59,7 @@ public:
 
     wxProcess(int flags) { Init(nullptr, wxID_ANY, flags); }
 
-    virtual ~wxProcess();
+    ~wxProcess() override;
 
     // get the process ID of the process executed by Open()
     long GetPid() const { return m_pid; }
@@ -182,7 +182,7 @@ public:
 
     public:
 	wxProcessEvent& operator=(const wxProcessEvent&) = delete;
-	wxClassInfo *GetClassInfo() const ;
+	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

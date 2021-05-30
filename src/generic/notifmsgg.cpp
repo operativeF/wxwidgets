@@ -54,7 +54,7 @@ class wxNotificationMessageWindow : public wxFrame
 public:
     explicit wxNotificationMessageWindow(wxGenericNotificationMessageImpl* notificationImpl);
 
-    virtual ~wxNotificationMessageWindow();
+    ~wxNotificationMessageWindow() override;
 
     void Set(int timeout);
 

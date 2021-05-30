@@ -37,7 +37,7 @@ public:
 class WXDLLIMPEXP_BASE wxArchiveEntry : public wxObject
 {
 public:
-    virtual ~wxArchiveEntry() = default;
+    ~wxArchiveEntry() override = default;
 
     virtual wxDateTime   GetDateTime() const = 0;
     virtual wxFileOffset GetSize() const = 0;
@@ -92,7 +92,7 @@ class WXDLLIMPEXP_BASE wxArchiveInputStream : public wxFilterInputStream
 public:
     typedef wxArchiveEntry entry_type;
 
-    virtual ~wxArchiveInputStream() = default;
+    ~wxArchiveInputStream() override = default;
 
     virtual bool OpenEntry(wxArchiveEntry& entry) = 0;
     virtual bool CloseEntry() = 0;
@@ -129,7 +129,7 @@ private:
 class WXDLLIMPEXP_BASE wxArchiveOutputStream : public wxFilterOutputStream
 {
 public:
-    virtual ~wxArchiveOutputStream() = default;
+    ~wxArchiveOutputStream() override = default;
 
     virtual bool PutNextEntry(wxArchiveEntry *entry) = 0;
 
@@ -319,7 +319,7 @@ public:
     typedef wxArchivePairIter     pairiter_type;
 #endif
 
-    virtual ~wxArchiveClassFactory() = default;
+    ~wxArchiveClassFactory() override = default;
 
     wxArchiveEntry *NewEntry() const
         { return DoNewEntry(); }

@@ -182,7 +182,7 @@ public:
         // Create()
     wxWindowBase() ;
 
-    virtual ~wxWindowBase();
+    ~wxWindowBase() override;
 
     // deleting the window
     // -------------------
@@ -2057,7 +2057,7 @@ class WXDLLIMPEXP_CORE wxWindowAccessible: public wxAccessible
 {
 public:
     wxWindowAccessible(wxWindow* win): wxAccessible(win) { if (win) win->SetAccessible(this); }
-    virtual ~wxWindowAccessible() = default;
+    ~wxWindowAccessible() override = default;
 
 // Overridables
 
@@ -2069,7 +2069,7 @@ public:
     wxAccStatus GetLocation(wxRect& rect, int elementId) override;
 
         // Navigates from fromId to toId/toObject.
-    virtual wxAccStatus Navigate(wxNavDir navDir, int fromId,
+    wxAccStatus Navigate(wxNavDir navDir, int fromId,
                 int* toId, wxAccessible** toObject) override;
 
         // Gets the name of the specified object.

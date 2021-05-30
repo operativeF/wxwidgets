@@ -72,9 +72,9 @@ public:
     {
         return new wxSocketImplMSW(wxsocket);
     }
-    virtual void Install_Callback(wxSocketImpl *socket,
+    void Install_Callback(wxSocketImpl *socket,
                                   wxSocketNotify event = wxSOCKET_LOST) override;
-    virtual void Uninstall_Callback(wxSocketImpl *socket,
+    void Uninstall_Callback(wxSocketImpl *socket,
                                     wxSocketNotify event = wxSOCKET_LOST) override;
 };
 

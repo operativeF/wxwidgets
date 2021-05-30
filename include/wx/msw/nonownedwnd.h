@@ -20,7 +20,7 @@ class WXDLLIMPEXP_CORE wxNonOwnedWindow : public wxNonOwnedWindowBase
 {
 public:
     wxNonOwnedWindow();
-    virtual ~wxNonOwnedWindow();
+    ~wxNonOwnedWindow() override;
 
     bool Reparent(wxWindowBase* newParent) override;
     void InheritAttributes() override;

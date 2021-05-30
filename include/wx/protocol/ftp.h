@@ -31,7 +31,7 @@ public:
     };
 
     wxFTP();
-    virtual ~wxFTP();
+    ~wxFTP() override;
 
 	wxFTP(const wxFTP&) = delete;
 	wxFTP& operator=(const wxFTP&) = delete;
@@ -167,7 +167,7 @@ protected:
     friend class wxOutputFTPStream;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
     DECLARE_PROTOCOL(wxFTP)

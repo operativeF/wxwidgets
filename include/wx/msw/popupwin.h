@@ -28,7 +28,7 @@ public:
 
     bool Create(wxWindow *parent, int flags = wxBORDER_NONE);
 
-    virtual ~wxPopupWindow();
+    ~wxPopupWindow() override;
 
     void SetFocus() override;
     bool Show(bool show = true) override;
@@ -53,7 +53,7 @@ private:
     wxWindow* m_owner;
 
 public:
-	wxClassInfo *GetClassInfo() const;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
 	static wxObject* wxCreateObject();
 };

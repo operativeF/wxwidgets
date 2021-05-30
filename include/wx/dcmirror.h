@@ -99,7 +99,7 @@ protected:
     }
 
     // wxDCBase functions
-    virtual bool DoFloodFill(wxCoord x, wxCoord y, const wxColour& col,
+    bool DoFloodFill(wxCoord x, wxCoord y, const wxColour& col,
                              wxFloodFillStyle style = wxFLOOD_SURFACE) override
     {
         return m_dc.DoFloodFill(GetX(x, y), GetY(x, y), col, style);
@@ -121,7 +121,7 @@ protected:
         m_dc.DoDrawLine(GetX(x1, y1), GetY(x1, y1), GetX(x2, y2), GetY(x2, y2));
     }
 
-    virtual void DoDrawArc(wxCoord x1, wxCoord y1,
+    void DoDrawArc(wxCoord x1, wxCoord y1,
                            wxCoord x2, wxCoord y2,
                            wxCoord xc, wxCoord yc) override
     {
@@ -132,14 +132,14 @@ protected:
                        xc, yc);
     }
 
-    virtual void DoDrawCheckMark(wxCoord x, wxCoord y,
+    void DoDrawCheckMark(wxCoord x, wxCoord y,
                                  wxCoord w, wxCoord h) override
     {
         m_dc.DoDrawCheckMark(GetX(x, y), GetY(x, y),
                              GetX(w, h), GetY(w, h));
     }
 
-    virtual void DoDrawEllipticArc(wxCoord x, wxCoord y, wxCoord w, wxCoord h,
+    void DoDrawEllipticArc(wxCoord x, wxCoord y, wxCoord w, wxCoord h,
                                    double sa, double ea) override
     {
         wxFAIL_MSG( wxT("this is probably wrong") );
@@ -154,7 +154,7 @@ protected:
         m_dc.DoDrawRectangle(GetX(x, y), GetY(x, y), GetX(w, h), GetY(w, h));
     }
 
-    virtual void DoDrawRoundedRectangle(wxCoord x, wxCoord y,
+    void DoDrawRoundedRectangle(wxCoord x, wxCoord y,
                                         wxCoord w, wxCoord h,
                                         double radius) override
     {
@@ -178,7 +178,7 @@ protected:
         m_dc.DoDrawIcon(icon, GetX(x, y), GetY(x, y));
     }
 
-    virtual void DoDrawBitmap(const wxBitmap &bmp, wxCoord x, wxCoord y,
+    void DoDrawBitmap(const wxBitmap &bmp, wxCoord x, wxCoord y,
                               bool useMask = false) override
     {
         m_dc.DoDrawBitmap(bmp, GetX(x, y), GetY(x, y), useMask);
@@ -190,14 +190,14 @@ protected:
         m_dc.DoDrawText(text, x, y);
     }
 
-    virtual void DoDrawRotatedText(const wxString& text,
+    void DoDrawRotatedText(const wxString& text,
                                    wxCoord x, wxCoord y, double angle) override
     {
         // this is never mirrored
         m_dc.DoDrawRotatedText(text, x, y, angle);
     }
 
-    virtual bool DoBlit(wxCoord xdest, wxCoord ydest,
+    bool DoBlit(wxCoord xdest, wxCoord ydest,
                         wxCoord w, wxCoord h,
                         wxDC *source, wxCoord xsrc, wxCoord ysrc,
                         wxRasterOperationMode rop = wxCOPY,
@@ -221,7 +221,7 @@ protected:
         m_dc.DoGetSizeMM(GetX(w, h), GetY(w, h));
     }
 
-    virtual void DoDrawLines(int n, const wxPoint points[],
+    void DoDrawLines(int n, const wxPoint points[],
                              wxCoord xoffset, wxCoord yoffset) override
     {
         wxPoint* points_alloc = Mirror(n, points);
@@ -232,7 +232,7 @@ protected:
         delete[] points_alloc;
     }
 
-    virtual void DoDrawPolygon(int n, const wxPoint points[],
+    void DoDrawPolygon(int n, const wxPoint points[],
                                wxCoord xoffset, wxCoord yoffset,
                                wxPolygonFillMode fillStyle = wxODDEVEN_RULE) override
     {
@@ -250,13 +250,13 @@ protected:
         wxFAIL_MSG( wxT("not implemented") );
     }
 
-    virtual void DoSetClippingRegion(wxCoord x, wxCoord y,
+    void DoSetClippingRegion(wxCoord x, wxCoord y,
                                      wxCoord w, wxCoord h) override
     {
         m_dc.DoSetClippingRegion(GetX(x, y), GetY(x, y), GetX(w, h), GetY(w, h));
     }
 
-    virtual void DoGetTextExtent(const wxString& string,
+    void DoGetTextExtent(const wxString& string,
                                  wxCoord *x, wxCoord *y,
                                  wxCoord *descent = nullptr,
                                  wxCoord *externalLeading = nullptr,

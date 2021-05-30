@@ -57,7 +57,7 @@ public:
 #endif
         m_appProgressIndicator(nullptr) { }
 
-    virtual ~wxGaugeBase();
+    ~wxGaugeBase() override;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
