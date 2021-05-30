@@ -34,7 +34,7 @@
 class wxTreeItemId : public wxItemId<void*>
 {
 public:
-    wxTreeItemId() : wxItemId<void*>() { }
+    wxTreeItemId()  { }
     wxTreeItemId(void* pItem) : wxItemId<void*>(pItem) { }
 };
 

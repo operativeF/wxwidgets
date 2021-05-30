@@ -706,7 +706,7 @@ public:
 
     // default ctor, you must call Create() later
     wxHVScrolledWindow()
-        : wxPanel(),
+        : 
           wxVarHVScrollHelper(this) { }
 
     // normal ctor, no need to call Create() after this one
@@ -719,7 +719,7 @@ public:
                        const wxSize& size = wxDefaultSize,
                        long style = 0,
                        const wxString& name = wxASCII_STR(wxPanelNameStr))
-        : wxPanel(),
+        : 
           wxVarHVScrollHelper(this)
     {
         (void)Create(parent, id, pos, size, style, name);

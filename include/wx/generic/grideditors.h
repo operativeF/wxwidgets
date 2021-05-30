@@ -381,7 +381,7 @@ private:
 class WXDLLIMPEXP_ADV wxGridCellAutoWrapStringEditor : public wxGridCellTextEditor
 {
 public:
-    wxGridCellAutoWrapStringEditor() : wxGridCellTextEditor() { }
+    wxGridCellAutoWrapStringEditor()  { }
     virtual void Create(wxWindow* parent,
                         wxWindowID id,
                         wxEvtHandler* evtHandler) override;

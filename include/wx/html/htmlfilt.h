@@ -29,7 +29,7 @@ class WXDLLIMPEXP_HTML wxHtmlFilter : public wxObject
     wxDECLARE_ABSTRACT_CLASS(wxHtmlFilter);
 
 public:
-    wxHtmlFilter() : wxObject() {}
+    wxHtmlFilter()  {}
     virtual ~wxHtmlFilter() {}
 
     // returns true if this filter is able to open&read given file

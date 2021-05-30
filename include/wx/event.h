@@ -1256,7 +1256,7 @@ protected:
 class WXDLLIMPEXP_BASE wxEventAnyPayloadMixin : public wxEventBasicPayloadMixin
 {
 public:
-    wxEventAnyPayloadMixin() : wxEventBasicPayloadMixin() {}
+    wxEventAnyPayloadMixin()  {}
 
 #if wxUSE_ANY
     template<typename T>
@@ -1932,7 +1932,7 @@ class WXDLLIMPEXP_CORE wxSetCursorEvent : public wxEvent
 public:
     wxSetCursorEvent(wxCoord x = 0, wxCoord y = 0)
         : wxEvent(0, wxEVT_SET_CURSOR),
-          m_x(x), m_y(y), m_cursor()
+          m_x(x), m_y(y) 
         { }
 
     wxSetCursorEvent(const wxSetCursorEvent& event)
@@ -2886,7 +2886,7 @@ public:
                     int joystick = wxJOYSTICK1,
                     int change = 0)
         : wxEvent(0, type),
-          m_pos(),
+          
           
           m_buttonChange(change),
           m_buttonState(state),
@@ -2967,7 +2967,7 @@ public:
                      wxString *files = nullptr)
         : wxEvent(0, type),
           m_noFiles(noFiles),
-          m_pos(),
+          
           m_files(files)
         { }
 

@@ -115,7 +115,7 @@ class WXDLLIMPEXP_CORE wxImageHandler: public wxObject
 {
 public:
     wxImageHandler()
-        : m_name(wxEmptyString), m_extension(wxEmptyString), m_mime() 
+        : m_name(wxEmptyString), m_extension(wxEmptyString) 
         { }
 
 #if wxUSE_STREAMS

@@ -29,7 +29,7 @@
 class WXDLLIMPEXP_ADV wxCommandLinkButtonBase : public wxButton
 {
 public:
-    wxCommandLinkButtonBase() : wxButton() { }
+    wxCommandLinkButtonBase()  { }
 
     wxCommandLinkButtonBase(wxWindow *parent,
                             wxWindowID id,
@@ -93,7 +93,7 @@ class WXDLLIMPEXP_ADV wxGenericCommandLinkButton
                       : public wxCommandLinkButtonBase
 {
 public:
-    wxGenericCommandLinkButton() : wxCommandLinkButtonBase() { }
+    wxGenericCommandLinkButton()  { }
 
 
     wxGenericCommandLinkButton(wxWindow *parent,
@@ -105,7 +105,7 @@ public:
                                long style = 0,
                                const wxValidator& validator = wxDefaultValidator,
                                const wxString& name = wxASCII_STR(wxButtonNameStr))
-        : wxCommandLinkButtonBase()
+         
     {
         Create(parent, id, mainLabel, note, pos, size, style, validator, name);
     }

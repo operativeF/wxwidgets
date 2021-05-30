@@ -546,7 +546,7 @@ class AutoHFONT : private AutoGDIObject
 private:
 public:
     AutoHFONT()
-        : AutoGDIObject() { }
+         { }
 
     AutoHFONT(const LOGFONT& lf)
         : AutoGDIObject(::CreateFontIndirect(&lf)) { }
@@ -571,7 +571,7 @@ class AutoHBITMAP : private AutoGDIObject
 {
 public:
     AutoHBITMAP()
-        : AutoGDIObject() { }
+         { }
 
     AutoHBITMAP(HBITMAP hbmp) : AutoGDIObject(hbmp) { }
 

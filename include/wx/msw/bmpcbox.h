@@ -24,7 +24,7 @@ class WXDLLIMPEXP_ADV wxBitmapComboBox : public wxComboBox,
 {
 public:
     // ctors and such
-    wxBitmapComboBox() : wxComboBox(), wxBitmapComboBoxBase()
+    wxBitmapComboBox()  
     {
     }
 
@@ -38,8 +38,8 @@ public:
                      long style = 0,
                      const wxValidator& validator = wxDefaultValidator,
                      const wxString& name = wxASCII_STR(wxBitmapComboBoxNameStr))
-        : wxComboBox(),
-          wxBitmapComboBoxBase()
+        
+          
     {
         (void)Create(parent, id, value, pos, size, n,
                      choices, style, validator, name);

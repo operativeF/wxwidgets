@@ -108,7 +108,7 @@ private:
 class WXDLLIMPEXP_BASE wxFileSystemHandler : public wxObject
 {
 public:
-    wxFileSystemHandler() : wxObject() {}
+    wxFileSystemHandler()  {}
 
     // returns true if this handler is able to open given location
     virtual bool CanOpen(const wxString& location) = 0;
@@ -171,7 +171,7 @@ WX_DECLARE_VOIDPTR_HASH_MAP_WITH_DECL(wxFileSystemHandler*, wxFSHandlerHash, cla
 class WXDLLIMPEXP_BASE wxFileSystem : public wxObject
 {
 public:
-    wxFileSystem() : wxObject() { m_FindFileHandler = nullptr;}
+    wxFileSystem()  { m_FindFileHandler = nullptr;}
     virtual ~wxFileSystem();
 
     // sets the current location. Every call to OpenFile is

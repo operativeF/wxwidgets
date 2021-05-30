@@ -60,7 +60,7 @@ class WXDLLIMPEXP_PROPGRID wxPGCellRenderer : public wxObjectRefData
 public:
 
     wxPGCellRenderer()
-        : wxObjectRefData() { }
+         { }
     virtual ~wxPGCellRenderer() { }
 
     // Render flags
@@ -625,7 +625,7 @@ public:
     }
     wxPGChoiceEntry( const wxString& label,
                      int value = wxPG_INVALID_VALUE )
-        : wxPGCell(), m_value(value)
+        :  m_value(value)
     {
         SetText(label);
     }

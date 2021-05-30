@@ -184,7 +184,7 @@ public:
 public:
     wxHashTable( wxKeyType keyType = wxKEY_INTEGER,
                  size_t size = wxHASH_SIZE_DEFAULT )
-        : wxHashTableBase() { Create( keyType, size ); BeginFind(); }
+         { Create( keyType, size ); BeginFind(); }
     wxHashTable( const wxHashTable& table );
 
     virtual ~wxHashTable() { Destroy(); }

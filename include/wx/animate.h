@@ -161,7 +161,7 @@ protected:
     {
     public:
         wxAnimationCtrl()
-            : wxGenericAnimationCtrl()
+             
             {}
         wxAnimationCtrl(wxWindow *parent,
                         wxWindowID id,

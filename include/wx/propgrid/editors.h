@@ -66,7 +66,7 @@ public:
 
     // Constructor.
     wxPGEditor()
-        : wxObject()
+         
     {
         m_clientData = nullptr;
     }
@@ -417,7 +417,7 @@ class WXDLLIMPEXP_PROPGRID wxPGEditorDialogAdapter : public wxObject
     wxDECLARE_ABSTRACT_CLASS(wxPGEditorDialogAdapter);
 public:
     wxPGEditorDialogAdapter()
-        : wxObject()
+         
     {
         m_clientData = nullptr;
     }

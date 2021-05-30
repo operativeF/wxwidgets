@@ -41,7 +41,7 @@ public:
     // creation
     // --------
 
-    wxGenericTreeCtrl() : wxTreeCtrlBase(), wxScrollHelper(this) { Init(); }
+    wxGenericTreeCtrl() :  wxScrollHelper(this) { Init(); }
 
     wxGenericTreeCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
@@ -49,7 +49,7 @@ public:
                long style = wxTR_DEFAULT_STYLE,
                const wxValidator &validator = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxTreeCtrlNameStr))
-        : wxTreeCtrlBase(),
+        : 
           wxScrollHelper(this)
     {
         Init();

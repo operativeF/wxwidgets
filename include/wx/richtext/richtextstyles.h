@@ -50,7 +50,7 @@ public:
 
     /// Copy constructors
     wxRichTextStyleDefinition(const wxRichTextStyleDefinition& def)
-    : wxObject()
+     
     {
         Init();
         Copy(def);
@@ -297,7 +297,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextStyleSheet: public wxObject
 public:
     /// Constructors
     wxRichTextStyleSheet(const wxRichTextStyleSheet& sheet)
-    : wxObject()
+     
     {
         Init();
         Copy(sheet);

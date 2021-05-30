@@ -37,8 +37,8 @@ class WXDLLIMPEXP_CORE wxValidator : public wxEvtHandler
 public:
     wxValidator();
     wxValidator(const wxValidator& other)
-        : wxEvtHandler()
-        , m_validatorWindow(other.m_validatorWindow)
+        : 
+         m_validatorWindow(other.m_validatorWindow)
     {
     }
     virtual ~wxValidator();

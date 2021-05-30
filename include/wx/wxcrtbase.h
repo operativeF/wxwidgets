@@ -31,6 +31,12 @@
 
  */
 
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <wctype.h>
+#include <time.h>
+
 #if defined(__WINDOWS__)
     #include <io.h>
 #endif
@@ -633,7 +639,7 @@ WXDLLIMPEXP_BASE size_t wxCRT_StrftimeW(wchar_t *s, size_t max,
  *     string.h, which is required by wxcrt.h) to have them here: */
 
 /* safe version of strlen() (returns 0 if passed NULL pointer) */
-inline size_t wxStrlen(const char *s) { return s ? _tclen(s) : 0; }
+inline size_t wxStrlen(const char *s) { return s ? wxCRT_StrlenA(s) : 0; }
 inline size_t wxStrlen(const wchar_t *s) { return s ? wxCRT_StrlenW(s) : 0; }
 #ifndef wxWCHAR_T_IS_WXCHAR16
        WXDLLIMPEXP_BASE size_t wxStrlen(const wxChar16 *s );

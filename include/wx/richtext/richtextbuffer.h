@@ -1758,7 +1758,7 @@ public:
     /**
         Copy constructor.
     */
-    wxRichTextAttr(const wxRichTextAttr& attr): wxTextAttr() { Copy(attr); }
+    wxRichTextAttr(const wxRichTextAttr& attr) { Copy(attr); }
 
     /**
         Default constructor.
@@ -1860,7 +1860,7 @@ public:
     /**
         Copy constructor.
     */
-    wxRichTextProperties(const wxRichTextProperties& props): wxObject() { Copy(props); }
+    wxRichTextProperties(const wxRichTextProperties& props) { Copy(props); }
 
     /**
         Assignment operator.
@@ -3234,7 +3234,7 @@ public:
 // Constructors
 
     wxRichTextParagraphLayoutBox(wxRichTextObject* parent = nullptr);
-    wxRichTextParagraphLayoutBox(const wxRichTextParagraphLayoutBox& obj): wxRichTextCompositeObject() { Init(); Copy(obj); }
+    wxRichTextParagraphLayoutBox(const wxRichTextParagraphLayoutBox& obj) { Init(); Copy(obj); }
     ~wxRichTextParagraphLayoutBox();
 
 // Overridables
@@ -3848,7 +3848,7 @@ public:
         Copy constructor.
     */
 
-    wxRichTextBox(const wxRichTextBox& obj): wxRichTextParagraphLayoutBox() { Copy(obj); }
+    wxRichTextBox(const wxRichTextBox& obj) { Copy(obj); }
 
 // Overridables
 
@@ -3930,7 +3930,7 @@ public:
         Copy constructor.
     */
 
-    wxRichTextField(const wxRichTextField& obj): wxRichTextParagraphLayoutBox() { Copy(obj); }
+    wxRichTextField(const wxRichTextField& obj) { Copy(obj); }
 
 // Overridables
 
@@ -4503,7 +4503,7 @@ public:
     */
     wxRichTextParagraph(const wxString& text, wxRichTextObject* parent = nullptr, wxRichTextAttr* paraStyle = nullptr, wxRichTextAttr* charStyle = nullptr);
     virtual ~wxRichTextParagraph();
-    wxRichTextParagraph(const wxRichTextParagraph& obj): wxRichTextCompositeObject() { Copy(obj); }
+    wxRichTextParagraph(const wxRichTextParagraph& obj) { Copy(obj); }
 
     void Init();
 
@@ -4689,7 +4689,7 @@ public:
     /**
         Copy constructor.
     */
-    wxRichTextPlainText(const wxRichTextPlainText& obj): wxRichTextObject() { Copy(obj); }
+    wxRichTextPlainText(const wxRichTextPlainText& obj) { Copy(obj); }
 
 // Overridables
 
@@ -5124,7 +5124,7 @@ public:
     /**
         Copy constructor.
     */
-    wxRichTextBuffer(const wxRichTextBuffer& obj): wxRichTextParagraphLayoutBox() { Init(); Copy(obj); }
+    wxRichTextBuffer(const wxRichTextBuffer& obj) { Init(); Copy(obj); }
 
     virtual ~wxRichTextBuffer() ;
 
@@ -5938,7 +5938,7 @@ public:
         Copy constructor.
     */
 
-    wxRichTextCell(const wxRichTextCell& obj): wxRichTextBox() { Copy(obj); }
+    wxRichTextCell(const wxRichTextCell& obj) { Copy(obj); }
 
 // Overridables
 
@@ -6016,7 +6016,7 @@ public:
         Copy constructor.
     */
 
-    wxRichTextTable(const wxRichTextTable& obj): wxRichTextBox() { Copy(obj); }
+    wxRichTextTable(const wxRichTextTable& obj) { Copy(obj); }
 
 // Overridables
 

@@ -299,7 +299,7 @@ protected:
 class WXDLLIMPEXP_GL wxGLAppBase : public wxApp
 {
 public:
-    wxGLAppBase() : wxApp() { }
+    wxGLAppBase()  { }
 
     // use this in the constructor of the user-derived wxGLApp class to
     // determine if an OpenGL rendering context with these attributes
@@ -329,7 +329,7 @@ public:
 class WXDLLIMPEXP_GL wxGLApp : public wxGLAppBase
 {
 public:
-    wxGLApp() : wxGLAppBase() { }
+    wxGLApp()  { }
 
     bool InitGLVisual(const int *attribList) override;
 

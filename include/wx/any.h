@@ -417,8 +417,8 @@ class WXDLLIMPEXP_BASE wxAnyValueTypeImplInt :
 {
     WX_DECLARE_ANY_VALUE_TYPE(wxAnyValueTypeImplInt)
 public:
-    wxAnyValueTypeImplInt() :
-        wxAnyValueTypeImplBase<wxAnyBaseIntType>() { }
+    wxAnyValueTypeImplInt() 
+        { }
     virtual ~wxAnyValueTypeImplInt() { }
 
     bool ConvertValue(const wxAnyValueBuffer& src,
@@ -432,8 +432,8 @@ class WXDLLIMPEXP_BASE wxAnyValueTypeImplUint :
 {
     WX_DECLARE_ANY_VALUE_TYPE(wxAnyValueTypeImplUint)
 public:
-    wxAnyValueTypeImplUint() :
-        wxAnyValueTypeImplBase<wxAnyBaseUintType>() { }
+    wxAnyValueTypeImplUint() 
+        { }
     virtual ~wxAnyValueTypeImplUint() { }
 
     bool ConvertValue(const wxAnyValueBuffer& src,
@@ -521,8 +521,8 @@ class WXDLLIMPEXP_BASE wxAnyValueTypeImpl<bool> :
 {
     WX_DECLARE_ANY_VALUE_TYPE(wxAnyValueTypeImpl<bool>)
 public:
-    wxAnyValueTypeImpl() :
-        wxAnyValueTypeImplBase<bool>() { }
+    wxAnyValueTypeImpl() 
+        { }
     virtual ~wxAnyValueTypeImpl() { }
 
     bool ConvertValue(const wxAnyValueBuffer& src,
@@ -538,8 +538,8 @@ class WXDLLIMPEXP_BASE wxAnyValueTypeImplDouble :
 {
     WX_DECLARE_ANY_VALUE_TYPE(wxAnyValueTypeImplDouble)
 public:
-    wxAnyValueTypeImplDouble() :
-        wxAnyValueTypeImplBase<double>() { }
+    wxAnyValueTypeImplDouble() 
+        { }
     virtual ~wxAnyValueTypeImplDouble() { }
 
     bool ConvertValue(const wxAnyValueBuffer& src,
@@ -617,8 +617,8 @@ class WXDLLIMPEXP_BASE wxAnyValueTypeImplVariantData :
 {
     WX_DECLARE_ANY_VALUE_TYPE(wxAnyValueTypeImplVariantData)
 public:
-    wxAnyValueTypeImplVariantData() :
-        wxAnyValueTypeImplBase<wxVariantData*>() { }
+    wxAnyValueTypeImplVariantData() 
+        { }
     virtual ~wxAnyValueTypeImplVariantData() { }
 
     void DeleteValue(wxAnyValueBuffer& buf) const override
@@ -665,7 +665,7 @@ class wxAnyValueTypeImpl<wxVariantData*> :
     public wxAnyValueTypeImplVariantData
 {
 public:
-    wxAnyValueTypeImpl() : wxAnyValueTypeImplVariantData() { }
+    wxAnyValueTypeImpl()  { }
     virtual ~wxAnyValueTypeImpl() { }
 };
 

@@ -21,7 +21,7 @@
 class WXDLLIMPEXP_ADV wxCommandLinkButton : public wxGenericCommandLinkButton
 {
 public:
-    wxCommandLinkButton () : wxGenericCommandLinkButton() { }
+    wxCommandLinkButton ()  { }
 
     wxCommandLinkButton(wxWindow *parent,
                         wxWindowID id,
@@ -32,7 +32,7 @@ public:
                         long style = 0,
                         const wxValidator& validator = wxDefaultValidator,
                         const wxString& name = wxASCII_STR(wxButtonNameStr))
-        : wxGenericCommandLinkButton()
+         
     {
         Create(parent, id, mainLabel, note, pos, size, style, validator, name);
     }

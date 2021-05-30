@@ -22,7 +22,7 @@
 class WXDLLIMPEXP_BASE wxFilterFSHandler : public wxFileSystemHandler
 {
 public:
-    wxFilterFSHandler() : wxFileSystemHandler() { }
+    wxFilterFSHandler()  { }
     virtual ~wxFilterFSHandler() { }
 
     bool CanOpen(const wxString& location) override;

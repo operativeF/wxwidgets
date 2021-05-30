@@ -49,7 +49,7 @@
         #endif
     #endif /* Cygwin */
 
-    #include <cwchar>
+    #include <wchar.h>
 
     #if defined(__CYGWIN__) && defined(__cplusplus)
         }

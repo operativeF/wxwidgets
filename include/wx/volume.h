@@ -121,7 +121,7 @@ enum wxFSIconType
 class WXDLLIMPEXP_CORE wxFSVolume : public wxFSVolumeBase
 {
 public:
-    wxFSVolume() : wxFSVolumeBase() { InitIcons(); }
+    wxFSVolume()  { InitIcons(); }
     wxFSVolume(const wxString& name) : wxFSVolumeBase(name) { InitIcons(); }
 
     wxIcon GetIcon(wxFSIconType type) const;

@@ -1103,7 +1103,7 @@ public:
         typedef const value_type& reference;
         typedef const value_type* pointer;
 
-        iterator() : m_it() { }
+        iterator()  { }
 
         reference operator*() const { return *m_it; }
         pointer operator->() const { return &*m_it; }
@@ -3021,7 +3021,7 @@ class WXDLLIMPEXP_CORE wxGridEvent : public wxNotifyEvent,
 {
 public:
     wxGridEvent()
-        : wxNotifyEvent()
+         
     {
         Init(-1, -1, -1, -1, false);
     }
@@ -3088,7 +3088,7 @@ class WXDLLIMPEXP_CORE wxGridSizeEvent : public wxNotifyEvent,
 {
 public:
     wxGridSizeEvent()
-        : wxNotifyEvent()
+         
     {
         Init(-1, -1, -1);
     }
@@ -3149,7 +3149,7 @@ class WXDLLIMPEXP_CORE wxGridRangeSelectEvent : public wxNotifyEvent,
 {
 public:
     wxGridRangeSelectEvent()
-        : wxNotifyEvent()
+         
     {
         Init(wxGridNoCellCoords, wxGridNoCellCoords, false);
     }
@@ -3217,7 +3217,7 @@ class WXDLLIMPEXP_CORE wxGridEditorCreatedEvent : public wxCommandEvent
 {
 public:
     wxGridEditorCreatedEvent()
-        : wxCommandEvent()
+         
         {
             m_row  = 0;
             m_col  = 0;

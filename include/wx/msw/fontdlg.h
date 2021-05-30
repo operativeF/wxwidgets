@@ -18,7 +18,7 @@
 class WXDLLIMPEXP_CORE wxFontDialog : public wxFontDialogBase
 {
 public:
-    wxFontDialog() : wxFontDialogBase() { /* must be Create()d later */ }
+    wxFontDialog()  { /* must be Create()d later */ }
     wxFontDialog(wxWindow *parent)
         : wxFontDialogBase(parent) { Create(parent); }
     wxFontDialog(wxWindow *parent, const wxFontData& data)

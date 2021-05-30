@@ -490,7 +490,7 @@ private:
 class WXDLLIMPEXP_CORE wxScrolledWindow : public wxScrolled<wxPanel>
 {
 public:
-    wxScrolledWindow() : wxScrolled<wxPanel>() {}
+    wxScrolledWindow()  {}
     wxScrolledWindow(wxWindow *parent,
                      wxWindowID winid = wxID_ANY,
                      const wxPoint& pos = wxDefaultPosition,

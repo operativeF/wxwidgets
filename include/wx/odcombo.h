@@ -73,7 +73,7 @@ class WXDLLIMPEXP_ADV wxVListBoxComboPopup : public wxVListBox,
 public:
 
     // init and dtor
-    wxVListBoxComboPopup() : wxVListBox(), wxComboPopup() { }
+    wxVListBoxComboPopup()  { }
     virtual ~wxVListBoxComboPopup();
 
     // required virtuals

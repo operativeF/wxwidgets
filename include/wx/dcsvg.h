@@ -55,7 +55,7 @@ class WXDLLIMPEXP_CORE wxSVGBitmapFileHandler : public wxSVGBitmapHandler
 {
 public:
     wxSVGBitmapFileHandler()
-        : m_path()
+         
     {
     }
 

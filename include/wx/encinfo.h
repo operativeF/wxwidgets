@@ -41,7 +41,7 @@ struct WXDLLIMPEXP_CORE wxNativeEncodingInfo
     defined(__WXQT__)
 
     wxNativeEncodingInfo()
-        : facename()
+         
         
     { }
 

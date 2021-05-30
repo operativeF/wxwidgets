@@ -70,7 +70,7 @@ public:
     wxColour    m_colour;
 
     wxColourPropertyValue()
-        : wxObject()
+         
     {
         m_type = 0;
     }
@@ -80,8 +80,8 @@ public:
     }
 
     wxColourPropertyValue( const wxColourPropertyValue& v )
-        : wxObject()
-        , m_colour(v.m_colour)
+        : 
+         m_colour(v.m_colour)
     {
         m_type = v.m_type;
     }
@@ -93,20 +93,20 @@ public:
     }
 
     wxColourPropertyValue( const wxColour& colour )
-        : wxObject()
-        , m_colour(colour)
+        : 
+         m_colour(colour)
     {
         m_type = wxPG_COLOUR_CUSTOM;
     }
 
     wxColourPropertyValue( wxUint32 type )
-        : wxObject()
+         
     {
         m_type = type;
     }
 
     wxColourPropertyValue( wxUint32 type, const wxColour& colour )
-        : wxObject()
+         
     {
         Init( type, colour );
     }

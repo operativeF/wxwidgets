@@ -173,7 +173,7 @@ class WXDLLIMPEXP_CORE wxListItem : public wxObject
 public:
     wxListItem() { Init(); m_attr = nullptr; }
     wxListItem(const wxListItem& item)
-        : wxObject(),
+        : 
           m_mask(item.m_mask),
           m_itemId(item.m_itemId),
           m_col(item.m_col),
@@ -480,9 +480,7 @@ class WXDLLIMPEXP_CORE wxListEvent : public wxNotifyEvent
 public:
     wxListEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
         : wxNotifyEvent(commandType, winid)
-        , 
-         m_pointDrag()
-        , m_item()
+         
          
         { }
 

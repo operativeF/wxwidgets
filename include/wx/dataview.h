@@ -94,7 +94,7 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxDataViewCtrlNameStr[];
 class wxDataViewItem : public wxItemId<void*>
 {
 public:
-    wxDataViewItem() : wxItemId<void*>() { }
+    wxDataViewItem()  { }
     explicit wxDataViewItem(void* pItem) : wxItemId<void*>(pItem) { }
 };
 
@@ -827,7 +827,7 @@ public:
     // Default ctor, normally shouldn't be used and mostly exists only for
     // backwards compatibility.
     wxDataViewEvent()
-        : wxNotifyEvent()
+         
     {
         Init(nullptr, nullptr, wxDataViewItem());
     }

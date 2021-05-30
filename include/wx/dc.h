@@ -1269,7 +1269,7 @@ private:
 class WXDLLIMPEXP_CORE wxDCTextColourChanger
 {
 public:
-    wxDCTextColourChanger(wxDC& dc) : m_dc(dc), m_colFgOld() { }
+    wxDCTextColourChanger(wxDC& dc) : m_dc(dc) { }
 
     wxDCTextColourChanger(wxDC& dc, const wxColour& col) : m_dc(dc)
     {
@@ -1481,7 +1481,7 @@ class WXDLLIMPEXP_CORE wxDCFontChanger
 {
 public:
     wxDCFontChanger(wxDC& dc)
-        : m_dc(dc), m_fontOld()
+        : m_dc(dc) 
     {
     }
 

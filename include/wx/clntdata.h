@@ -104,7 +104,7 @@ public:
 class WXDLLIMPEXP_BASE wxStringClientData : public wxClientData
 {
 public:
-    wxStringClientData() : m_data() { }
+    wxStringClientData()  { }
     wxStringClientData( const wxString &data ) : m_data(data) { }
     void SetData( const wxString &data ) { m_data = data; }
     const wxString& GetData() const { return m_data; }

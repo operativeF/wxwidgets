@@ -33,7 +33,7 @@ class WXDLLIMPEXP_HTML wxHtmlProcessor : public wxObject
     wxDECLARE_ABSTRACT_CLASS(wxHtmlProcessor);
 
 public:
-    wxHtmlProcessor() : wxObject() {}
+    wxHtmlProcessor()  {}
     virtual ~wxHtmlProcessor() {}
 
     // Process input text and return processed result

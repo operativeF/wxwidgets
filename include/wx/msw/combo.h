@@ -36,7 +36,7 @@ class WXDLLIMPEXP_CORE wxComboCtrl : public wxComboCtrlBase
 {
 public:
     // ctors and such
-    wxComboCtrl() : wxComboCtrlBase() { 
+    wxComboCtrl()  { 
  }
 
     wxComboCtrl(wxWindow *parent,
@@ -47,7 +47,7 @@ public:
                    long style = 0,
                    const wxValidator& validator = wxDefaultValidator,
                    const wxString& name = wxASCII_STR(wxComboBoxNameStr))
-        : wxComboCtrlBase()
+         
     {
         
 

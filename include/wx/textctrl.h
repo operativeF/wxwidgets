@@ -854,7 +854,7 @@ private:
 
 public:
     // for wxWin RTTI only, don't use
-    wxTextUrlEvent() : m_evtMouse() { }
+    wxTextUrlEvent()  { }
 };
 
 typedef void (wxEvtHandler::*wxTextUrlEventFunction)(wxTextUrlEvent&);

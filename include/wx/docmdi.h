@@ -32,7 +32,7 @@ typedef
 class WXDLLIMPEXP_CORE wxDocMDIParentFrame : public wxDocMDIParentFrameBase
 {
 public:
-    wxDocMDIParentFrame() : wxDocMDIParentFrameBase() { }
+    wxDocMDIParentFrame()  { }
 
     wxDocMDIParentFrame(wxDocManager *manager,
                         wxFrame *parent,

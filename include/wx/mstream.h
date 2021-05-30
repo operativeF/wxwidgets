@@ -30,7 +30,7 @@ public:
         InitFromStream(stream, lenFile);
     }
     wxMemoryInputStream(wxMemoryInputStream& stream)
-        : wxInputStream()
+         
     {
         InitFromStream(stream, wxInvalidOffset);
     }

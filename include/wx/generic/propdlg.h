@@ -76,7 +76,7 @@ enum wxPropertySheetDialogFlags
 class WXDLLIMPEXP_ADV wxPropertySheetDialog : public wxDialog
 {
 public:
-    wxPropertySheetDialog() : wxDialog() { 
+    wxPropertySheetDialog()  { 
     m_sheetStyle = wxPROPSHEET_DEFAULT;
     m_innerSizer = nullptr;
     m_bookCtrl = nullptr;

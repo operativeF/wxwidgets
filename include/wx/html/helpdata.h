@@ -106,7 +106,7 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxHtmlHelpDataItem, wxHtmlHelpDataItems,
 class WXDLLIMPEXP_HTML wxHtmlSearchEngine : public wxObject
 {
 public:
-    wxHtmlSearchEngine() : wxObject() {}
+    wxHtmlSearchEngine()  {}
     virtual ~wxHtmlSearchEngine() {}
 
     // Sets the keyword we will be searching for

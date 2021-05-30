@@ -896,7 +896,7 @@ typedef wxDocParentFrameAny<wxFrame> wxDocParentFrameBase;
 class WXDLLIMPEXP_CORE wxDocParentFrame : public wxDocParentFrameBase
 {
 public:
-    wxDocParentFrame() : wxDocParentFrameBase() { }
+    wxDocParentFrame()  { }
 
     wxDocParentFrame(wxDocManager *manager,
                      wxFrame *parent,

@@ -18,7 +18,7 @@ class WXDLLIMPEXP_CORE wxStaticBox : public wxCompositeWindowSettersOnly<wxStati
 {
 public:
     wxStaticBox()
-        : wxCompositeWindowSettersOnly<wxStaticBoxBase>()
+         
     {
     }
 
@@ -28,7 +28,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxStaticBoxNameStr))
-        : wxCompositeWindowSettersOnly<wxStaticBoxBase>()
+         
     {
         Create(parent, id, label, pos, size, style, name);
     }
@@ -39,7 +39,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
                 const wxString &name = wxASCII_STR(wxStaticBoxNameStr))
-        : wxCompositeWindowSettersOnly<wxStaticBoxBase>()
+         
     {
         Create(parent, id, label, pos, size, style, name);
     }

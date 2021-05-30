@@ -60,7 +60,7 @@ class DpiDependentValue
 public:
     // Explicit initialization is needed if T is a primitive type.
     DpiDependentValue()
-        : m_value(), m_dpi()
+        : m_value() 
     { }
 
     bool HasChanged(const wxWindowBase* win)

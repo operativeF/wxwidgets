@@ -43,7 +43,7 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextHeaderFooterData: public wxObject
 {
 public:
     wxRichTextHeaderFooterData() { Init(); }
-    wxRichTextHeaderFooterData(const wxRichTextHeaderFooterData& data): wxObject() { Copy(data); }
+    wxRichTextHeaderFooterData(const wxRichTextHeaderFooterData& data) { Copy(data); }
 
     /// Initialise
     void Init() { m_headerMargin = 20; m_footerMargin = 20; m_showOnFirstPage = true; }
