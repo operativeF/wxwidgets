@@ -97,8 +97,8 @@ public:
     virtual HRESULT wxSTDCALL Continue(wxPROTOCOLDATA *pProtocolData) = 0;
     virtual HRESULT wxSTDCALL Abort(HRESULT hrReason, DWORD dwOptions) = 0;
     virtual HRESULT wxSTDCALL Terminate(DWORD dwOptions) = 0;
-    virtual HRESULT wxSTDCALL Suspend(void) = 0;
-    virtual HRESULT wxSTDCALL Resume(void) = 0;
+    virtual HRESULT wxSTDCALL Suspend() = 0;
+    virtual HRESULT wxSTDCALL Resume() = 0;
 };
 
 
@@ -109,7 +109,7 @@ public:
     virtual HRESULT wxSTDCALL Seek(LARGE_INTEGER dlibMove, DWORD dwOrigin,
                                    ULARGE_INTEGER *plibNewPosition) = 0;
     virtual HRESULT wxSTDCALL LockRequest(DWORD dwOptions) = 0;
-    virtual HRESULT wxSTDCALL UnlockRequest(void) = 0;
+    virtual HRESULT wxSTDCALL UnlockRequest() = 0;
 };
 
 
@@ -245,9 +245,9 @@ public:
                                      IOleInPlaceFrame *pFrame,
                                      IOleInPlaceUIWindow *pDoc) = 0;
 
-    virtual HRESULT wxSTDCALL HideUI(void) = 0;
+    virtual HRESULT wxSTDCALL HideUI() = 0;
 
-    virtual HRESULT wxSTDCALL UpdateUI(void) = 0;
+    virtual HRESULT wxSTDCALL UpdateUI() = 0;
 
     virtual HRESULT wxSTDCALL EnableModeless(BOOL fEnable) = 0;
 
@@ -709,7 +709,7 @@ struct wxIHTMLElement2 : public IDispatch
 public:
     virtual HRESULT wxSTDCALL get_scopeName(BSTR *p) = 0;
     virtual HRESULT wxSTDCALL setCapture(VARIANT_BOOL containerCapture = -1) = 0;
-    virtual HRESULT wxSTDCALL releaseCapture(void) = 0;
+    virtual HRESULT wxSTDCALL releaseCapture() = 0;
     virtual HRESULT wxSTDCALL put_onlosecapture(VARIANT v) = 0;
     virtual HRESULT wxSTDCALL get_onlosecapture(VARIANT *p) = 0;
     virtual HRESULT wxSTDCALL componentFromPoint(long x, long y, BSTR *component) = 0;
@@ -750,7 +750,7 @@ public:
     virtual HRESULT wxSTDCALL removeExpression(BSTR propname, VARIANT_BOOL *pfSuccess) = 0;
     virtual HRESULT wxSTDCALL put_tabIndex(short v) = 0;
     virtual HRESULT wxSTDCALL get_tabIndex(short *p) = 0;
-    virtual HRESULT wxSTDCALL focus(void) = 0;
+    virtual HRESULT wxSTDCALL focus() = 0;
     virtual HRESULT wxSTDCALL put_accessKey(BSTR v) = 0;
     virtual HRESULT wxSTDCALL get_accessKey(BSTR *p) = 0;
     virtual HRESULT wxSTDCALL put_onblur(VARIANT v) = 0;
@@ -759,7 +759,7 @@ public:
     virtual HRESULT wxSTDCALL get_onfocus(VARIANT *p) = 0;
     virtual HRESULT wxSTDCALL put_onresize(VARIANT v) = 0;
     virtual HRESULT wxSTDCALL get_onresize(VARIANT *p) = 0;
-    virtual HRESULT wxSTDCALL blur(void) = 0;
+    virtual HRESULT wxSTDCALL blur() = 0;
     virtual HRESULT wxSTDCALL addFilter(IUnknown *pUnk) = 0;
     virtual HRESULT wxSTDCALL removeFilter(IUnknown *pUnk) = 0;
     virtual HRESULT wxSTDCALL get_clientHeight(long *p) = 0;
@@ -786,7 +786,7 @@ public:
     virtual HRESULT wxSTDCALL get_scrollTop(long *p) = 0;
     virtual HRESULT wxSTDCALL put_scrollLeft(long v) = 0;
     virtual HRESULT wxSTDCALL get_scrollLeft(long *p) = 0;
-    virtual HRESULT wxSTDCALL clearAttributes(void) = 0;
+    virtual HRESULT wxSTDCALL clearAttributes() = 0;
     virtual HRESULT wxSTDCALL mergeAttributes(IHTMLElement *mergeThis) = 0;
     virtual HRESULT wxSTDCALL put_oncontextmenu(VARIANT v) = 0;
     virtual HRESULT wxSTDCALL get_oncontextmenu(VARIANT *p) = 0;
@@ -824,7 +824,7 @@ public:
     virtual HRESULT wxSTDCALL move(BSTR Unit, long Count, long *ActualCount) = 0;
     virtual HRESULT wxSTDCALL moveStart(BSTR Unit, long Count, long *ActualCount) = 0;
     virtual HRESULT wxSTDCALL moveEnd(BSTR Unit, long Count, long *ActualCount) = 0;
-    virtual HRESULT wxSTDCALL select(void) = 0;
+    virtual HRESULT wxSTDCALL select() = 0;
     virtual HRESULT wxSTDCALL pasteHTML(BSTR html) = 0;
     virtual HRESULT wxSTDCALL moveToElementText(IHTMLElement *element) = 0;
     virtual HRESULT wxSTDCALL setEndPoint(BSTR how, wxIHTMLTxtRange *SourceRange) = 0;
@@ -857,7 +857,7 @@ public:
     virtual HRESULT wxSTDCALL SetGravity(wxPOINTER_GRAVITY Gravity) = 0;
     virtual HRESULT wxSTDCALL Cling(BOOL *pfCling) = 0;
     virtual HRESULT wxSTDCALL SetCling(BOOL fCLing) = 0;
-    virtual HRESULT wxSTDCALL Unposition(void) = 0;
+    virtual HRESULT wxSTDCALL Unposition() = 0;
     virtual HRESULT wxSTDCALL IsPositioned(BOOL *pfPositioned) = 0;
     virtual HRESULT wxSTDCALL GetContainer(wxIMarkupContainer **ppContainer) = 0;
     virtual HRESULT wxSTDCALL MoveAdjacentToElement(IHTMLElement *pElement, wxELEMENT_ADJACENCY eAdj) = 0;
@@ -897,7 +897,7 @@ public:
     virtual HRESULT wxSTDCALL MovePointersToRange(wxIHTMLTxtRange *pIRange, wxIMarkupPointer *pPointerStart, wxIMarkupPointer *pPointerFinish) = 0;
     virtual HRESULT wxSTDCALL MoveRangeToPointers(wxIMarkupPointer *pPointerStart, wxIMarkupPointer *pPointerFinish, wxIHTMLTxtRange *pIRange) = 0;
     virtual HRESULT wxSTDCALL BeginUndoUnit(OLECHAR *pchTitle) = 0;
-    virtual HRESULT wxSTDCALL EndUndoUnit(void) = 0;
+    virtual HRESULT wxSTDCALL EndUndoUnit() = 0;
 };
 
 /* end of mshtml.h */

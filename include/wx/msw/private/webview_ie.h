@@ -187,9 +187,9 @@ public:
                                      IOleInPlaceFrame *pFrame,
                                      IOleInPlaceUIWindow *pDoc) override;
 
-    HRESULT wxSTDCALL HideUI(void) override;
+    HRESULT wxSTDCALL HideUI() override;
 
-    HRESULT wxSTDCALL UpdateUI(void) override;
+    HRESULT wxSTDCALL UpdateUI() override;
 
     HRESULT wxSTDCALL EnableModeless(BOOL fEnable) override;
 

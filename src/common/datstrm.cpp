@@ -366,7 +366,7 @@ void wxDataInputStream::ReadLL(wxLongLong *buffer, size_t size)
     DoReadLL(buffer, size, m_input, m_be_order);
 }
 
-wxLongLong wxDataInputStream::ReadLL(void)
+wxLongLong wxDataInputStream::ReadLL()
 {
     wxLongLong ll;
     DoReadLL(&ll, (size_t)1, m_input, m_be_order);

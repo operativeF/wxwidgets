@@ -224,15 +224,15 @@ public:
         /* [in] */ BSTR bstrItem,
         /* [retval][out] */ VARIANT_BOOL __RPC_FAR *pIsAvailable) = 0;
 
-    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE play( void) = 0;
+    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE play( ) = 0;
 
-    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE stop( void) = 0;
+    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE stop( ) = 0;
 
-    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE pause( void) = 0;
+    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE pause( ) = 0;
 
-    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE fastForward( void) = 0;
+    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE fastForward( ) = 0;
 
-    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE fastReverse( void) = 0;
+    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE fastReverse( ) = 0;
 
     virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_currentPosition(
         /* [retval][out] */ double __RPC_FAR *pdCurrentPosition) = 0;
@@ -243,9 +243,9 @@ public:
     virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_currentPositionString(
         /* [retval][out] */ BSTR __RPC_FAR *pbstrCurrentPosition) = 0;
 
-    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE next( void) = 0;
+    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE next( ) = 0;
 
-    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE previous( void) = 0;
+    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE previous( ) = 0;
 
     virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_currentItem(
         /* [retval][out] */ IWMPMedia __RPC_FAR *__RPC_FAR *ppIWMPMedia) = 0;
@@ -450,7 +450,7 @@ public:
 struct IWMPCore : public IDispatch
 {
 public:
-    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE close( void) = 0;
+    virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE close( ) = 0;
 
     virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_URL(
         /* [retval][out] */ BSTR __RPC_FAR *pbstrURL) = 0;

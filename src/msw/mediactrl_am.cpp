@@ -116,7 +116,7 @@ wxCLANG_WARNING_RESTORE(unused-const-variable)
 struct IAMOpenProgress : public IUnknown
 {
     STDMETHOD(QueryProgress)(LONGLONG *pllTotal, LONGLONG *pllCurrent) PURE;
-    STDMETHOD(AbortOperation)(void) PURE;
+    STDMETHOD(AbortOperation)() PURE;
 };
 
 struct IMediaEvent : public IDispatch
@@ -178,10 +178,10 @@ enum BorderStyleConstants
 
 struct IActiveMovie : public IDispatch
 {
-    STDMETHOD(AboutBox)( void) PURE;
-    STDMETHOD(Run)( void) PURE;
-    STDMETHOD(Pause)( void) PURE;
-    STDMETHOD(Stop)( void) PURE;
+    STDMETHOD(AboutBox)( ) PURE;
+    STDMETHOD(Run)( ) PURE;
+    STDMETHOD(Pause)( ) PURE;
+    STDMETHOD(Stop)( ) PURE;
     STDMETHOD(get_ImageSourceWidth)(long __RPC_FAR *pWidth) PURE;
     STDMETHOD(get_ImageSourceHeight)(long __RPC_FAR *pHeight) PURE;
     STDMETHOD(get_Author)(BSTR __RPC_FAR *pbstrAuthor) PURE;
@@ -520,14 +520,14 @@ struct IMediaPlayer : public IDispatch
     STDMETHOD(get_NSPlay)(IDispatch __RPC_FAR *__RPC_FAR *ppdispatch) PURE;
     STDMETHOD(get_WindowlessVideo)(VARIANT_BOOL __RPC_FAR *pbool) PURE;
     STDMETHOD(put_WindowlessVideo)(VARIANT_BOOL pbool) PURE;
-    STDMETHOD(Play)(void) PURE;
-    STDMETHOD(Stop)(void) PURE;
-    STDMETHOD(Pause)(void) PURE;
+    STDMETHOD(Play)() PURE;
+    STDMETHOD(Stop)() PURE;
+    STDMETHOD(Pause)() PURE;
     STDMETHOD(GetMarkerTime)(long MarkerNum,
                              double __RPC_FAR *pMarkerTime) PURE;
     STDMETHOD(GetMarkerName)(long MarkerNum,
                              BSTR __RPC_FAR *pbstrMarkerName) PURE;
-    STDMETHOD(AboutBox)(void) PURE;
+    STDMETHOD(AboutBox)() PURE;
     STDMETHOD(GetCodecInstalled)(long CodecNum,
                               VARIANT_BOOL __RPC_FAR *pCodecInstalled) PURE;
     STDMETHOD(GetCodecDescription)(long CodecNum,
@@ -538,14 +538,14 @@ struct IMediaPlayer : public IDispatch
                               BSTR __RPC_FAR *pbstrMoreInfoURL) PURE;
     STDMETHOD(GetMediaInfoString)(MPMediaInfoType MediaInfoType,
                                   BSTR __RPC_FAR *pbstrMediaInfo) PURE;
-    STDMETHOD(Cancel)(void) PURE;
+    STDMETHOD(Cancel)() PURE;
     STDMETHOD(Open)(BSTR bstrFileName) PURE;
     STDMETHOD(IsSoundCardEnabled)(VARIANT_BOOL __RPC_FAR *pbSoundCard) PURE;
-    STDMETHOD(Next)(void) PURE;
-    STDMETHOD(Previous)(void) PURE;
+    STDMETHOD(Next)() PURE;
+    STDMETHOD(Previous)() PURE;
     STDMETHOD(StreamSelect)(long StreamNum) PURE;
-    STDMETHOD(FastForward)(void) PURE;
-    STDMETHOD(FastReverse)(void) PURE;
+    STDMETHOD(FastForward)() PURE;
+    STDMETHOD(FastReverse)() PURE;
     STDMETHOD(GetStreamName)(long StreamNum,
                              BSTR __RPC_FAR *pbstrStreamName) PURE;
     STDMETHOD(GetStreamGroup)(long StreamNum,
@@ -639,9 +639,9 @@ struct INSOPlay : public IDispatch
     STDMETHOD(put_AnimationAtStart)(VARIANT_BOOL pAnimationAtStart) PURE;
     STDMETHOD(get_AnimationOnStop)(VARIANT_BOOL __RPC_FAR *pAnimationOnStop) PURE;
     STDMETHOD(put_AnimationOnStop)(VARIANT_BOOL pAnimationOnStop) PURE;
-    STDMETHOD(Play)(void) PURE;
-    STDMETHOD(Pause)(void) PURE;
-    STDMETHOD(Stop)(void) PURE;
+    STDMETHOD(Play)() PURE;
+    STDMETHOD(Pause)() PURE;
+    STDMETHOD(Stop)() PURE;
     STDMETHOD(GetMarkerTime)(long MarkerNum, double __RPC_FAR *pMarkerTime) PURE;
     STDMETHOD(GetMarkerName)(long MarkerNum, BSTR __RPC_FAR *pbstrMarkerName) PURE;
 };
@@ -700,8 +700,8 @@ struct INSPlay : public INSOPlay
     STDMETHOD(put_BaseURL)(BSTR pbstrBaseURL) PURE;
     STDMETHOD(get_DefaultFrame)(BSTR __RPC_FAR *pbstrDefaultFrame) PURE;
     STDMETHOD(put_DefaultFrame)(BSTR pbstrDefaultFrame) PURE;
-    STDMETHOD(AboutBox)(void) PURE;
-    STDMETHOD(Cancel)(void) PURE;
+    STDMETHOD(AboutBox)() PURE;
+    STDMETHOD(Cancel)() PURE;
     STDMETHOD(GetCodecInstalled)(long CodecNum, VARIANT_BOOL __RPC_FAR *pCodecInstalled) PURE;
     STDMETHOD(GetCodecDescription)(long CodecNum, BSTR __RPC_FAR *pbstrCodecDescription) PURE;
     STDMETHOD(GetCodecURL)(long CodecNum, BSTR __RPC_FAR *pbstrCodecURL) PURE;
@@ -782,8 +782,8 @@ struct IEnumPins;
 #define REFERENCE_TIME LONGLONG
 struct IMediaFilter : public IPersist
 {
-    STDMETHOD(Stop)( void) PURE;
-    STDMETHOD(Pause)( void) PURE;
+    STDMETHOD(Stop)( ) PURE;
+    STDMETHOD(Pause)( ) PURE;
     STDMETHOD(Run)(REFERENCE_TIME tStart) PURE;
     STDMETHOD(GetState)(DWORD dwMilliSecsTimeout,
                        FILTER_STATE *State) PURE;

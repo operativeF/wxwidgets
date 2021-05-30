@@ -36,7 +36,7 @@ class WXDLLIMPEXP_FWD_BASE wxHashTable_Node;
 // wxClassInfo
 // ----------------------------------------------------------------------------
 
-typedef wxObject *(*wxObjectConstructorFn)(void);
+typedef wxObject *(*wxObjectConstructorFn)();
 
 class WXDLLIMPEXP_BASE wxClassInfo
 {

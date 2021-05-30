@@ -1916,12 +1916,12 @@ HRESULT wxSTDCALL DocHostUIHandler::ShowUI(DWORD dwID,
     return S_FALSE;
 }
 
-HRESULT wxSTDCALL DocHostUIHandler::HideUI(void)
+HRESULT wxSTDCALL DocHostUIHandler::HideUI()
 {
     return E_NOTIMPL;
 }
 
-HRESULT wxSTDCALL DocHostUIHandler::UpdateUI(void)
+HRESULT wxSTDCALL DocHostUIHandler::UpdateUI()
 {
     return E_NOTIMPL;
 }

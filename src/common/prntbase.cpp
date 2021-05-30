@@ -1321,7 +1321,7 @@ void wxPreviewControlBar::OnWindowClose(wxCommandEvent& WXUNUSED(event))
     frame->Close(true);
 }
 
-void wxPreviewControlBar::OnPrint(void)
+void wxPreviewControlBar::OnPrint()
 {
     wxPrintPreviewBase *preview = GetPrintPreview();
     preview->Print(true);

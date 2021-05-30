@@ -1823,7 +1823,7 @@ struct SendNotification
         : eventType(eventType_), hwnd(hwnd_), idObject(idObject_), idChild(idChild_)
     {}
 
-    void operator()(void)
+    void operator()()
     {
         ::NotifyWinEvent(eventType, hwnd, idObject, idChild);
     }

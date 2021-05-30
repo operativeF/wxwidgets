@@ -702,7 +702,7 @@ wxWindowID wxNewId()
 }
 
 wxWindowID
-wxGetCurrentId(void) { return wxCurrentId; }
+wxGetCurrentId() { return wxCurrentId; }
 
 void
 wxRegisterId (wxWindowID id)

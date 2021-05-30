@@ -35,8 +35,8 @@ union wxAnyValueBuffer
         wxInt64 m_int64;
     #endif
         long double m_longDouble;
-        void ( *m_funcPtr )(void);
-        void ( wxAnyValueBuffer::*m_mFuncPtr )(void);
+        void ( *m_funcPtr )();
+        void ( wxAnyValueBuffer::*m_mFuncPtr )();
     } m_alignment;
 
     void*   m_ptr;

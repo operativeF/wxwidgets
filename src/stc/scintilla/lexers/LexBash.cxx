@@ -211,7 +211,7 @@ static void ColouriseBashDoc(Sci_PositionU startPos, Sci_Position length, int in
 			Down  = opposite(Up);
 			Style = s;
 		}
-		void Pop(void) {
+		void Pop() {
 			if (Depth <= 0)
 				return;
 			Depth--;

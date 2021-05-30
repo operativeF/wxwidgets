@@ -311,7 +311,7 @@ wxBEGIN_EVENT_TABLE(wxGenericDirCtrl, wxControl)
   EVT_SIZE                    (wxGenericDirCtrl::OnSize)
 wxEND_EVENT_TABLE()
 
-wxGenericDirCtrl::wxGenericDirCtrl(void)
+wxGenericDirCtrl::wxGenericDirCtrl()
 {
     Init();
 }

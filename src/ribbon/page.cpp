@@ -616,7 +616,7 @@ bool wxRibbonPage::Realize()
     return DoActualLayout() && status;
 }
 
-void wxRibbonPage::PopulateSizeCalcArray(wxSize (wxWindow::*get_size)(void) const)
+void wxRibbonPage::PopulateSizeCalcArray(wxSize (wxWindow::*get_size)() const)
 {
     wxSize parentSize = GetSize();
     parentSize.x -= m_art->GetMetric(wxRIBBON_ART_PAGE_BORDER_LEFT_SIZE);

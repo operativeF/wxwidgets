@@ -79,7 +79,7 @@ protected:
     void HideScrollButtons();
 
     void CommonInit(const wxString& label, const wxBitmap& icon);
-    void PopulateSizeCalcArray(wxSize (wxWindow::*get_size)(void) const);
+    void PopulateSizeCalcArray(wxSize (wxWindow::*get_size)() const);
 
     wxArrayRibbonControl m_collapse_stack;
     wxBitmap m_icon;
