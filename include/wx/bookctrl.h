@@ -59,19 +59,7 @@ public:
     // construction
     // ------------
 
-    wxBookCtrlBase()
-    {
-        
-    m_selection = wxNOT_FOUND;
-    m_bookctrl = nullptr;
-    m_fitToCurrentPage = false;
-
-    m_internalBorder = 5;
-
-    m_controlMargin = 0;
-    m_controlSizer = nullptr;
-
-    }
+    wxBookCtrlBase() = default;
 
     wxBookCtrlBase(wxWindow *parent,
                    wxWindowID winid,
@@ -80,17 +68,6 @@ public:
                    long style = 0,
                    const wxString& name = wxEmptyString)
     {
-        
-    m_selection = wxNOT_FOUND;
-    m_bookctrl = nullptr;
-    m_fitToCurrentPage = false;
-
-    m_internalBorder = 5;
-
-    m_controlMargin = 0;
-    m_controlSizer = nullptr;
-
-
         (void)Create(parent, winid, pos, size, style, name);
     }
 
@@ -357,29 +334,26 @@ protected:
     void OnSize(wxSizeEvent& event);
 
     // controller buddy if available, NULL otherwise (usually for native book controls like wxNotebook)
-    wxWindow *m_bookctrl;
+    wxWindow *m_bookctrl{nullptr};
 
     // Whether to shrink to fit current page
-    bool m_fitToCurrentPage;
+    bool m_fitToCurrentPage{false};
 
     // the sizer containing the choice control
-    wxSizer *m_controlSizer;
+    wxSizer *m_controlSizer{nullptr};
 
     // the margin around the choice control
-    int m_controlMargin;
+    int m_controlMargin{0};
 
     // The currently selected page (in range 0..m_pages.size()-1 inclusive) or
     // wxNOT_FOUND if none (this can normally only be the case for an empty
     // control without any pages).
-    int m_selection;
+    int m_selection{wxNOT_FOUND};
 
 private:
-
-    // common part of all ctors
-    
-
     // internal border
-    unsigned int m_internalBorder;
+    // FIXME: Magic number
+    unsigned int m_internalBorder{5};
 
     wxDECLARE_ABSTRACT_CLASS(wxBookCtrlBase);
     wxBookCtrlBase(const wxBookCtrlBase&) = delete;

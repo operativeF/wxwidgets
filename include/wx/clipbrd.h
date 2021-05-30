@@ -108,10 +108,9 @@ public:
     {
     }
 
-    wxClipboardEvent(const wxClipboardEvent& event)
-        
-          
-    = default;
+    wxClipboardEvent(const wxClipboardEvent& event) = default;
+
+	wxClipboardEvent& operator=(const wxClipboardEvent&) = delete;
 
     bool SupportsFormat(const wxDataFormat& format) const;
     void AddFormat(const wxDataFormat& format);
@@ -125,9 +124,8 @@ public:
 protected:
     std::vector<wxDataFormat> m_formats;
 
-    public:
-	wxClipboardEvent& operator=(const wxClipboardEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
+public:
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

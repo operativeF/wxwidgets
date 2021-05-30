@@ -37,6 +37,9 @@ public:
     wxChoiceBase() = default;
     ~wxChoiceBase() override;
 
+    wxChoiceBase(const wxChoiceBase&) = delete;
+	wxChoiceBase& operator=(const wxChoiceBase&) = delete;
+    
     // all generic methods are in wxControlWithItems
 
     // get the current selection: this can only be different from the normal
@@ -63,10 +66,6 @@ protected:
     // the string widths, so the derived classes should override it and set the
     // height and add the arrow width to the size returned by this version.
     wxSize DoGetBestSize() const override;
-
-private:
-    wxChoiceBase(const wxChoiceBase&) = delete;
-	wxChoiceBase& operator=(const wxChoiceBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

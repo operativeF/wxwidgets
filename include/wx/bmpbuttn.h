@@ -34,14 +34,11 @@ class WXDLLIMPEXP_FWD_CORE wxBitmapButton;
 class WXDLLIMPEXP_CORE wxBitmapButtonBase : public wxButton
 {
 public:
-    wxBitmapButtonBase()
-    {
-#ifndef wxHAS_BUTTON_BITMAP
-        m_marginX =
-        m_marginY = 0;
-#endif // wxHAS_BUTTON_BITMAP
-    }
+    wxBitmapButtonBase() = default;
 
+    wxBitmapButtonBase(const wxBitmapButtonBase&) = delete;
+	wxBitmapButtonBase& operator=(const wxBitmapButtonBase&) = delete;
+    
     bool Create(wxWindow *parent,
                 wxWindowID winid,
                 const wxPoint& pos,
@@ -118,12 +115,9 @@ protected:
     wxBitmap m_bitmaps[State_Max];
 
     // the margins around the bitmap
-    int m_marginX,
-        m_marginY;
+    int m_marginX{0};
+    int m_marginY{0};
 #endif // !wxHAS_BUTTON_BITMAP
-
-    wxBitmapButtonBase(const wxBitmapButtonBase&) = delete;
-	wxBitmapButtonBase& operator=(const wxBitmapButtonBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

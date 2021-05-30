@@ -29,11 +29,7 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 class wxBusyInfoFlags
 {
 public:
-    wxBusyInfoFlags()
-    {
-        m_parent = nullptr;
-        m_alpha = wxALPHA_OPAQUE;
-    }
+    wxBusyInfoFlags() = default;
 
     wxBusyInfoFlags& Parent(wxWindow* parent)
         { m_parent = parent; return *this; }
@@ -56,7 +52,7 @@ public:
         { m_alpha = alpha; return *this; }
 
 private:
-    wxWindow* m_parent;
+    wxWindow* m_parent{nullptr};
 
     wxIcon m_icon;
     wxString m_title,
@@ -66,7 +62,7 @@ private:
     wxColour m_foreground,
              m_background;
 
-    wxByte m_alpha;
+    wxByte m_alpha{wxALPHA_OPAQUE};
 
     friend class wxBusyInfo;
 };

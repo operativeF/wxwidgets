@@ -119,9 +119,6 @@ public:
            const wxValidator& validator = wxDefaultValidator,
            const wxString& name = wxASCII_STR(wxColourPickerCtrlNameStr));
 
-
-public:         // public API
-
     // get the colour chosen
     wxColour GetColour() const
         { return ((wxColourPickerWidget *)m_picker)->GetColour(); }
@@ -132,9 +129,6 @@ public:         // public API
     // set colour using RGB(r,g,b) syntax or considering given text as a colour name;
     // returns true if the given text was successfully recognized.
     bool SetColour(const wxString& text);
-
-
-public:        // internal functions
 
     // update the button colour to match the text control contents
     void UpdatePickerFromTextCtrl() override;
@@ -173,6 +167,8 @@ public:
         SetEventObject(generator);
     }
 
+    wxColourPickerEvent& operator=(const wxColourPickerEvent&) = delete;
+
     wxColour GetColour() const { return m_colour; }
     void SetColour(const wxColour &c) { m_colour = c; }
 
@@ -183,8 +179,7 @@ public:
 private:
     wxColour m_colour;
 
-    public:
-	wxColourPickerEvent& operator=(const wxColourPickerEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

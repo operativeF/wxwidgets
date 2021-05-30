@@ -37,13 +37,7 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxBitmapComboBoxNameStr[];
 class WXDLLIMPEXP_CORE wxBitmapComboBoxBase
 {
 public:
-    // ctors and such
-    wxBitmapComboBoxBase() { 
-    m_fontHeight = 0;
-    m_imgAreaWidth = 0;
-    m_indent = 0;
-    m_usedImgSize = wxSize(-1, -1);
- }
+    wxBitmapComboBoxBase() = default;
 
     virtual ~wxBitmapComboBoxBase() = default;
 
@@ -59,8 +53,6 @@ public:
     virtual wxSize GetBitmapSize() const = 0;
 
 private:
-    void Init() {}
-
 #else // wxBITMAPCOMBOBOX_OWNERDRAWN_BASED
 
     // Returns the image of the item with the given index.
@@ -103,14 +95,12 @@ protected:
     void UpdateInternals();
 
     wxArrayPtrVoid      m_bitmaps;  // Images associated with items
-    wxSize              m_usedImgSize;  // Size of bitmaps
+    wxSize              m_usedImgSize{-1, -1};  // Size of bitmaps
 
-    int                 m_imgAreaWidth;  // Width and height of area next to text field
-    int                 m_fontHeight;
-    int                 m_indent;
+    int                 m_imgAreaWidth{0};  // Width and height of area next to text field
+    int                 m_fontHeight{0};
+    int                 m_indent{0};
 
-private:
-    
 #endif // !wxBITMAPCOMBOBOX_OWNERDRAWN_BASED/wxBITMAPCOMBOBOX_OWNERDRAWN_BASED
 };
 

@@ -28,6 +28,9 @@ class WXDLLIMPEXP_CORE wxButtonBase : public wxAnyButton
 public:
     wxButtonBase() = default;
 
+    wxButtonBase(const wxButtonBase&) = delete;
+	wxButtonBase& operator=(const wxButtonBase&) = delete;
+    
     // show the authentication needed symbol on the button: this is currently
     // only implemented on Windows Vista and newer (on which it shows the UAC
     // shield symbol)
@@ -42,10 +45,6 @@ public:
     // returns the default button size for this platform, and optionally for a
     // specific window when the platform supports per-monitor DPI
     static wxSize GetDefaultSize(wxWindow* win = nullptr);
-
-protected:
-    wxButtonBase(const wxButtonBase&) = delete;
-	wxButtonBase& operator=(const wxButtonBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

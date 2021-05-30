@@ -131,6 +131,7 @@ public:
     static void SetMark(wxCalendarDateAttr const& m) { m_mark = m; }
 
 protected:
+    // FIXME: Protected Init with params
     void Init(wxCalendarDateBorder border = wxCAL_BORDER_NONE)
     {
         m_border = border;

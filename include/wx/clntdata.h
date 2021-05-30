@@ -94,6 +94,7 @@ enum class wxClientDataType
     Void     // client data is untyped and we don't own it
 };
 
+// TODO: What's the purpose of this?
 class WXDLLIMPEXP_BASE wxClientData
 {
 public:

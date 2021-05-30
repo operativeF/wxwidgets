@@ -56,6 +56,9 @@ public:
         (void)Create(window, size);
     }
 
+    wxCaretBase(const wxCaretBase&) = delete;
+	wxCaretBase& operator=(const wxCaretBase&) = delete;
+
     // a virtual dtor has been provided since this class has virtual members
     virtual ~wxCaretBase() = default;
 
@@ -164,7 +167,7 @@ protected:
     virtual void DoMove() = 0;
     virtual void DoSize() { }
 
-    // the common initialization
+    // FIXME: Protected Init
     void Init()
     {
         m_window = nullptr;
@@ -184,10 +187,6 @@ protected:
 
     // visibility count: the caret is visible only if it's positive
     int m_countVisible;
-
-private:
-    wxCaretBase(const wxCaretBase&) = delete;
-	wxCaretBase& operator=(const wxCaretBase&) = delete;
 };
 
 // ---------------------------------------------------------------------------

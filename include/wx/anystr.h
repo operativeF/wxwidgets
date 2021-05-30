@@ -34,9 +34,7 @@ public:
     // immutable after creation.
 
     // ctor for invalid pointer
-    wxAnyStrPtr()
-         
-    = default;
+    wxAnyStrPtr() = default;
 
     // ctor for valid pointer into the given string (whose lifetime must be
     // greater than ours and which should remain constant while we're used)

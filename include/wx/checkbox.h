@@ -51,6 +51,9 @@ class WXDLLIMPEXP_CORE wxCheckBoxBase : public wxControl
 public:
     wxCheckBoxBase() = default;
 
+    wxCheckBoxBase(const wxCheckBoxBase&) = delete;
+	wxCheckBoxBase& operator=(const wxCheckBoxBase&) = delete;
+    
     // set/get the checked status of the listbox
     virtual void SetValue(bool value) = 0;
     virtual bool GetValue() const = 0;
@@ -162,10 +165,6 @@ protected:
             }
         }
     }
-
-private:
-    wxCheckBoxBase(const wxCheckBoxBase&) = delete;
-	wxCheckBoxBase& operator=(const wxCheckBoxBase&) = delete;
 };
 
 // Most ports support 3 state checkboxes so define this by default.
