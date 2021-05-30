@@ -18,9 +18,9 @@
 #include "wx/colour.h"
 #include "wx/hashset.h"
 
-class WXDLLIMPEXP_FWD_CORE wxPoint;
-class WXDLLIMPEXP_FWD_CORE wxSize;
-class WXDLLIMPEXP_FWD_CORE wxFont;
+struct WXDLLIMPEXP_FWD_CORE wxPoint;
+struct WXDLLIMPEXP_FWD_CORE wxSize;
+class  WXDLLIMPEXP_FWD_CORE wxFont;
 
 #include <numeric>
 

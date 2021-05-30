@@ -224,10 +224,11 @@ enum wxAccSelectionFlags
 // All functions return an indication of success, failure, or not implemented.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_CORE wxAccessible;
-class WXDLLIMPEXP_FWD_CORE wxWindow;
-class WXDLLIMPEXP_FWD_CORE wxPoint;
-class WXDLLIMPEXP_FWD_CORE wxRect;
+class  WXDLLIMPEXP_FWD_CORE wxAccessible;
+class  WXDLLIMPEXP_FWD_CORE wxWindow;
+struct WXDLLIMPEXP_FWD_CORE wxPoint;
+class  WXDLLIMPEXP_FWD_CORE wxRect;
+
 class WXDLLIMPEXP_CORE wxAccessibleBase : public wxObject
 {
     wxAccessibleBase(const wxAccessibleBase&) = delete;

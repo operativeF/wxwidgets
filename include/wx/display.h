@@ -27,10 +27,10 @@
     extern WXDLLIMPEXP_DATA_CORE(const wxVideoMode) wxDefaultVideoMode;
 #endif // wxUSE_DISPLAY
 
-class WXDLLIMPEXP_FWD_CORE wxWindow;
-class WXDLLIMPEXP_FWD_CORE wxPoint;
-class WXDLLIMPEXP_FWD_CORE wxRect;
-class WXDLLIMPEXP_FWD_BASE wxString;
+class  WXDLLIMPEXP_FWD_CORE wxWindow;
+struct WXDLLIMPEXP_FWD_CORE wxPoint;
+class  WXDLLIMPEXP_FWD_CORE wxRect;
+class  WXDLLIMPEXP_FWD_BASE wxString;
 
 class WXDLLIMPEXP_FWD_CORE wxDisplayFactory;
 class WXDLLIMPEXP_FWD_CORE wxDisplayImpl;
