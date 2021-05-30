@@ -196,7 +196,7 @@ public:
     // switching.
     wxPropertyGridPage* AddPage( const wxString& label = wxEmptyString,
                                  const wxBitmap& bmp = wxNullBitmap,
-                                 wxPropertyGridPage* pageObj = NULL )
+                                 wxPropertyGridPage* pageObj = nullptr )
     {
         return InsertPage(-1, label, bmp, pageObj);
     }
@@ -266,7 +266,7 @@ public:
     // failure. Please only iterate through individual pages or use
     // CreateVIterator().
     wxPropertyGridIterator GetIterator( int flags = wxPG_ITERATE_DEFAULT,
-                                        wxPGProperty* firstProp = NULL )
+                                        wxPGProperty* firstProp = nullptr )
     {
         wxFAIL_MSG( wxS("Please only iterate through individual pages ")
                     wxS("or use CreateVIterator()") );
@@ -275,7 +275,7 @@ public:
 
     wxPropertyGridConstIterator
     GetIterator(int flags = wxPG_ITERATE_DEFAULT,
-                wxPGProperty* firstProp = NULL) const
+                wxPGProperty* firstProp = nullptr) const
     {
         wxFAIL_MSG( wxS("Please only iterate through individual pages ")
                     wxS("or use CreateVIterator()") );
@@ -380,7 +380,7 @@ public:
     virtual wxPropertyGridPage* InsertPage( int index,
                                             const wxString& label,
                                             const wxBitmap& bmp = wxNullBitmap,
-                                            wxPropertyGridPage* pageObj = NULL );
+                                            wxPropertyGridPage* pageObj = nullptr );
 
     // Returns true if any property on any page has been modified by the user.
     bool IsAnyModified() const;
@@ -394,7 +394,7 @@ public:
     virtual bool IsPropertySelected( wxPGPropArg id ) const;
 
     virtual void Refresh( bool eraseBackground = true,
-                          const wxRect* rect = (const wxRect*) NULL ) override;
+                          const wxRect* rect = (const wxRect*) nullptr ) override;
 
     // Removes a page.
     // Returns false if it was not possible to remove page in question.

@@ -219,8 +219,8 @@ public:
         double tx=0.0, double ty=0.0);
 
     // gets the component values of the matrix
-    virtual void Get(double* a=NULL, double* b=NULL,  double* c=NULL,
-                     double* d=NULL, double* tx=NULL, double* ty=NULL) const;
+    virtual void Get(double* a=nullptr, double* b=nullptr,  double* c=nullptr,
+                     double* d=nullptr, double* tx=nullptr, double* ty=nullptr) const;
 
     // makes this the inverse matrix
     virtual void Invert();
@@ -564,7 +564,7 @@ extern WXDLLIMPEXP_DATA_CORE(wxGraphicsPath) wxNullGraphicsPath;
 class WXDLLIMPEXP_CORE wxGraphicsContext : public wxGraphicsObject
 {
 public:
-    wxGraphicsContext(wxGraphicsRenderer* renderer, wxWindow* window = NULL);
+    wxGraphicsContext(wxGraphicsRenderer* renderer, wxWindow* window = nullptr);
 
     virtual ~wxGraphicsContext();
 
@@ -827,7 +827,7 @@ public:
 
 
     virtual void GetTextExtent( const wxString &text, double *width, double *height,
-        double *descent = NULL, double *externalLeading = NULL ) const  = 0;
+        double *descent = nullptr, double *externalLeading = nullptr ) const  = 0;
 
     virtual void GetPartialTextExtents(const wxString& text, wxArrayDouble& widths) const = 0;
 
@@ -1072,7 +1072,7 @@ public:
 
     virtual wxString GetName() const = 0;
     virtual void
-    GetVersion(int* major, int* minor = NULL, int* micro = NULL) const = 0;
+    GetVersion(int* major, int* minor = nullptr, int* micro = nullptr) const = 0;
 
 private:
     wxGraphicsRenderer(const wxGraphicsRenderer&) = delete;

@@ -137,7 +137,7 @@ public:
                    size_t *pnValues,       // number of values
                    size_t *pnMaxValueLen) const;
     // return true if the key is opened
-  bool  IsOpened() const { return m_hKey != NULL; }
+  bool  IsOpened() const { return m_hKey != nullptr; }
     // for "if ( !key ) wxLogError(...)" kind of expressions
   operator bool()  const { return m_dwLastError == 0; }
 

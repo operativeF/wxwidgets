@@ -53,7 +53,7 @@ public:
         return true;
     }
 
-    void AddField( const wxString &name, void* initialValue = NULL )
+    void AddField( const wxString &name, void* initialValue = nullptr )
     {
         wxShadowObjectFields::iterator it = m_fields.find( name );
         if (it == m_fields.end())
@@ -70,7 +70,7 @@ public:
         it->second = value;
     }
 
-    void* GetField( const wxString &name, void *defaultValue = NULL )
+    void* GetField( const wxString &name, void *defaultValue = nullptr )
     {
         wxShadowObjectFields::iterator it = m_fields.find( name );
         if (it == m_fields.end())

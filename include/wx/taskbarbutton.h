@@ -98,7 +98,7 @@ private:
     bool m_hasBackground;
     bool m_shown;
     bool m_interactive;
-    wxTaskBarButton *m_taskBarButtonParent{NULL};
+    wxTaskBarButton *m_taskBarButtonParent{nullptr};
 
     wxDECLARE_DYNAMIC_CLASS(wxThumbBarButton);
 };
@@ -149,7 +149,7 @@ enum class wxTaskBarJumpListItemType
 class WXDLLIMPEXP_CORE wxTaskBarJumpListItem
 {
 public:
-    wxTaskBarJumpListItem(wxTaskBarJumpListCategory *parentCategory = NULL,
+    wxTaskBarJumpListItem(wxTaskBarJumpListCategory *parentCategory = nullptr,
         wxTaskBarJumpListItemType type = wxTaskBarJumpListItemType::Separator,
         const wxString& title = wxEmptyString,
         const wxString& filePath = wxEmptyString,
@@ -194,7 +194,7 @@ typedef std::vector<wxTaskBarJumpListItem*> wxTaskBarJumpListItems;
 class WXDLLIMPEXP_CORE wxTaskBarJumpListCategory
 {
 public:
-    wxTaskBarJumpListCategory(wxTaskBarJumpList *parent = NULL,
+    wxTaskBarJumpListCategory(wxTaskBarJumpList *parent = nullptr,
                               const wxString& title = wxEmptyString);
     virtual ~wxTaskBarJumpListCategory();
 

@@ -127,13 +127,13 @@ class WXDLLIMPEXP_CORE wxWizardPageSimple : public wxWizardPage
 {
 public:
     wxWizardPageSimple() { 
-        m_prev = m_next = NULL;
+        m_prev = m_next = nullptr;
      }
 
     // ctor takes the previous and next pages
     wxWizardPageSimple(wxWizard *parent,
-                       wxWizardPage *prev = NULL,
-                       wxWizardPage *next = NULL,
+                       wxWizardPage *prev = nullptr,
+                       wxWizardPage *next = nullptr,
                        const wxBitmap& bitmap = wxNullBitmap)
     {
         Create(parent, prev, next, bitmap);
@@ -142,9 +142,9 @@ public:
     wxWizardPageSimple(const wxWizardPageSimple&) = delete;
 	wxWizardPageSimple& operator=(const wxWizardPageSimple&) = delete;
 
-    bool Create(wxWizard *parent = NULL, // let it be default ctor too
-                wxWizardPage *prev = NULL,
-                wxWizardPage *next = NULL,
+    bool Create(wxWizard *parent = nullptr, // let it be default ctor too
+                wxWizardPage *prev = nullptr,
+                wxWizardPage *next = nullptr,
                 const wxBitmap& bitmap = wxNullBitmap)
     {
         m_prev = prev;
@@ -248,10 +248,10 @@ public:
     // custom logic for determining the pages order
 
     virtual bool HasNextPage(wxWizardPage *page)
-        { return page->GetNext() != NULL; }
+        { return page->GetNext() != nullptr; }
 
     virtual bool HasPrevPage(wxWizardPage *page)
-        { return page->GetPrev() != NULL; }
+        { return page->GetPrev() != nullptr; }
 
     /// Override these functions to stop InitDialog from calling TransferDataToWindow
     /// for _all_ pages when the wizard starts. Instead 'ShowPage' will call
@@ -280,7 +280,7 @@ public:
     wxWizardEvent(wxEventType type = wxEVT_NULL,
                   int id = wxID_ANY,
                   bool direction = true,
-                  wxWizardPage* page = NULL);
+                  wxWizardPage* page = nullptr);
 
     // for EVT_WIZARD_PAGE_CHANGING, return true if we're going forward or
     // false otherwise and for EVT_WIZARD_PAGE_CHANGED return true if we came

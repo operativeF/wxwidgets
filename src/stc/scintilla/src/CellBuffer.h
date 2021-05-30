@@ -64,7 +64,7 @@ public:
 
 	Action();
 	~Action();
-	void Create(actionType at_, int position_=0, const char *data_=0, int lenData_=0, bool mayCoalesce_=true);
+	void Create(actionType at_, int position_=0, const char *data_=nullptr, int lenData_=0, bool mayCoalesce_=true);
 	void Destroy();
 	void Grab(Action *source);
 };

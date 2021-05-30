@@ -58,11 +58,11 @@ public:
     wxArchiveEntry *Clone() const { return DoClone(); }
 
     void SetNotifier(wxArchiveNotifier& notifier);
-    virtual void UnsetNotifier() { m_notifier = NULL; }
+    virtual void UnsetNotifier() { m_notifier = nullptr; }
 
 protected:
     wxArchiveEntry()  { }
-    wxArchiveEntry(const wxArchiveEntry& e) : wxObject(e), m_notifier(NULL) { }
+    wxArchiveEntry(const wxArchiveEntry& e) : wxObject(e), m_notifier(nullptr) { }
 
     virtual void SetOffset(wxFileOffset offset) = 0;
     virtual wxArchiveEntry* DoClone() const = 0;
@@ -71,7 +71,7 @@ protected:
     wxArchiveEntry& operator=(const wxArchiveEntry& entry);
 
 private:
-    wxArchiveNotifier *m_notifier{NULL};
+    wxArchiveNotifier *m_notifier{nullptr};
 
     wxDECLARE_ABSTRACT_CLASS(wxArchiveEntry);
 };
@@ -366,7 +366,7 @@ protected:
         { return *this; }
 
 private:
-    wxMBConv *m_pConv{NULL};
+    wxMBConv *m_pConv{nullptr};
     static wxArchiveClassFactory *sm_first;
     wxArchiveClassFactory *m_next;
 

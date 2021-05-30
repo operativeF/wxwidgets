@@ -2839,7 +2839,7 @@ public:
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize, long style = 0,
                      const wxString& name = wxSTCNameStr);
-    wxStyledTextCtrl() { m_swx = NULL; }
+    wxStyledTextCtrl() { m_swx = nullptr; }
     ~wxStyledTextCtrl();
 
 #endif
@@ -2954,7 +2954,7 @@ public:
     #ifdef SWIG
     wxString GetCurLine(int* OUTPUT);
 #else
-    wxString GetCurLine(int* linePos=NULL);
+    wxString GetCurLine(int* linePos=nullptr);
 #endif
 
     // Retrieve the position of the last correctly styled character.
@@ -3513,7 +3513,7 @@ public:
 
     // Find some text in the document.
     int FindText(int minPos, int maxPos, const wxString& text, int flags=0,
-                 int* findEnd=NULL);
+                 int* findEnd=nullptr);
 
     // On Windows, will draw the document into a display context such as a printer.
     int FormatRange(bool   doDraw,
@@ -5161,7 +5161,7 @@ public:
 #ifdef SWIG
     wxCharBuffer GetCurLineRaw(int* OUTPUT);
 #else
-    wxCharBuffer GetCurLineRaw(int* linePos=NULL);
+    wxCharBuffer GetCurLineRaw(int* linePos=nullptr);
 #endif
 
     // Retrieve the contents of a line.

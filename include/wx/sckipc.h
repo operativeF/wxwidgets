@@ -66,7 +66,7 @@ public:
 
     // implement base class pure virtual methods
     virtual const void *Request(const wxString& item,
-                                size_t *size = NULL,
+                                size_t *size = nullptr,
                                 wxIPCFormat format = wxIPC_TEXT) override;
     bool StartAdvise(const wxString& item) override;
     bool StopAdvise(const wxString& item) override;

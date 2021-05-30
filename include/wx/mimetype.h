@@ -99,7 +99,7 @@ public:
         { return m_verbs.Index(verb) != wxNOT_FOUND; }
 
     // returns empty string and wxNOT_FOUND in idx if no such verb
-    wxString GetCommandForVerb(const wxString& verb, size_t *idx = NULL) const;
+    wxString GetCommandForVerb(const wxString& verb, size_t *idx = nullptr) const;
 
     // get a "verb=command" string
     wxString GetVerbCmd(size_t n) const;

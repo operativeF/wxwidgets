@@ -69,11 +69,11 @@ public:
     // What type is it? Return a string name.
     virtual wxString GetType() const = 0;
     // If it based on wxObject return the ClassInfo.
-    virtual wxClassInfo* GetValueClassInfo() { return NULL; }
+    virtual wxClassInfo* GetValueClassInfo() { return nullptr; }
 
     // Implement this to make wxVariant::UnShare work. Returns
     // a copy of the data.
-    virtual wxVariantData* Clone() const { return NULL; }
+    virtual wxVariantData* Clone() const { return nullptr; }
 
 #if wxUSE_ANY
     // Converts value to wxAny, if possible. Return true if successful.

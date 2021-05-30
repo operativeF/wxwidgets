@@ -60,13 +60,13 @@ public:
     // ------------
 
     // generic ctor for any kind of tool
-    wxToolBarToolBase(wxToolBarBase *tbar = NULL,
+    wxToolBarToolBase(wxToolBarBase *tbar = nullptr,
                       int toolid = wxID_SEPARATOR,
                       const wxString& label = wxEmptyString,
                       const wxBitmap& bmpNormal = wxNullBitmap,
                       const wxBitmap& bmpDisabled = wxNullBitmap,
                       wxItemKind kind = wxITEM_NORMAL,
-                      wxObject *clientData = NULL,
+                      wxObject *clientData = nullptr,
                       const wxString& shortHelpString = wxEmptyString,
                       const wxString& longHelpString = wxEmptyString)
         : m_label(label),
@@ -198,7 +198,7 @@ public:
     }
 
     // add tool to/remove it from a toolbar
-    virtual void Detach() { m_tbar = NULL; }
+    virtual void Detach() { m_tbar = nullptr; }
     virtual void Attach(wxToolBarBase *tbar) { m_tbar = tbar; }
 
 #if wxUSE_MENUS
@@ -220,14 +220,14 @@ protected:
         m_id = toolid;
         m_kind = kind;
 
-        m_clientData = NULL;
+        m_clientData = nullptr;
 
         m_stretchable = false;
         m_toggled = false;
         m_enabled = true;
 
 #if wxUSE_MENUS
-        m_dropdownMenu = NULL;
+        m_dropdownMenu = nullptr;
 #endif
 
     }
@@ -301,7 +301,7 @@ public:
                                wxItemKind kind = wxITEM_NORMAL,
                                const wxString& shortHelp = wxEmptyString,
                                const wxString& longHelp = wxEmptyString,
-                               wxObject *clientData = NULL)
+                               wxObject *clientData = nullptr)
     {
         return DoAddTool(toolid, label, bitmap, bmpDisabled, kind,
                          shortHelp, longHelp, clientData);
@@ -324,7 +324,7 @@ public:
                                     const wxBitmap& bmpDisabled = wxNullBitmap,
                                     const wxString& shortHelp = wxEmptyString,
                                     const wxString& longHelp = wxEmptyString,
-                                    wxObject *clientData = NULL)
+                                    wxObject *clientData = nullptr)
     {
         return AddTool(toolid, label, bitmap, bmpDisabled, wxITEM_CHECK,
                        shortHelp, longHelp, clientData);
@@ -338,7 +338,7 @@ public:
                                     const wxBitmap& bmpDisabled = wxNullBitmap,
                                     const wxString& shortHelp = wxEmptyString,
                                     const wxString& longHelp = wxEmptyString,
-                                    wxObject *clientData = NULL)
+                                    wxObject *clientData = nullptr)
     {
         return AddTool(toolid, label, bitmap, bmpDisabled, wxITEM_RADIO,
                        shortHelp, longHelp, clientData);
@@ -357,7 +357,7 @@ public:
                                     wxItemKind kind = wxITEM_NORMAL,
                                     const wxString& shortHelp = wxEmptyString,
                                     const wxString& longHelp = wxEmptyString,
-                                    wxObject *clientData = NULL
+                                    wxObject *clientData = nullptr
                                );
 
     virtual wxToolBarToolBase *AddTool (wxToolBarToolBase *tool);
@@ -526,7 +526,7 @@ public:
                                           const wxBitmap& bmpNormal,
                                           const wxBitmap& bmpDisabled = wxNullBitmap,
                                           wxItemKind kind = wxITEM_NORMAL,
-                                          wxObject *clientData = NULL,
+                                          wxObject *clientData = nullptr,
                                           const wxString& shortHelp = wxEmptyString,
                                           const wxString& longHelp = wxEmptyString) = 0;
 
@@ -540,7 +540,7 @@ public:
         return CreateTool(wxID_SEPARATOR,
                           wxEmptyString,
                           wxNullBitmap, wxNullBitmap,
-                          wxITEM_SEPARATOR, NULL,
+                          wxITEM_SEPARATOR, nullptr,
                           wxEmptyString, wxEmptyString);
     }
 
@@ -577,7 +577,7 @@ protected:
                                    wxItemKind kind,
                                    const wxString& shortHelp = wxEmptyString,
                                    const wxString& longHelp = wxEmptyString,
-                                   wxObject *clientData = NULL,
+                                   wxObject *clientData = nullptr,
                                    wxCoord xPos = wxDefaultCoord,
                                    wxCoord yPos = wxDefaultCoord
                                );
@@ -622,7 +622,7 @@ protected:
         if ( !InsertTool(pos, tool) )
         {
             delete tool;
-            return NULL;
+            return nullptr;
         }
 
         return tool;

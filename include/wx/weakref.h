@@ -31,11 +31,11 @@ public:
     typedef T element_type;
 
     // Default ctor
-    wxWeakRef() : m_pobj(NULL) { }
+    wxWeakRef() : m_pobj(nullptr) { }
 
     // Ctor from the object of this type: this is needed as the template ctor
     // below is not used by at least g++4 when a literal NULL is used
-    wxWeakRef(T *pobj) : m_pobj(NULL), m_ptbase(NULL)
+    wxWeakRef(T *pobj) : m_pobj(nullptr), m_ptbase(nullptr)
     {
         this->Assign(pobj);
     }
@@ -78,17 +78,17 @@ public:
         {
             // Remove ourselves from object tracker list
             m_ptbase->RemoveNode(this);
-            m_pobj = NULL;
-            m_ptbase = NULL;
+            m_pobj = nullptr;
+            m_ptbase = nullptr;
         }
     }
 
     void OnObjectDestroy() override
     {
         // Tracked object itself removes us from list of trackers
-        wxASSERT(m_pobj != NULL);
-        m_pobj = NULL;
-        m_ptbase = NULL;
+        wxASSERT(m_pobj != nullptr);
+        m_pobj = nullptr;
+        m_ptbase = nullptr;
     }
 
 protected:
@@ -125,7 +125,7 @@ protected:
     }
 
     T *m_pobj;
-    wxTrackable *m_ptbase{NULL};
+    wxTrackable *m_ptbase{nullptr};
 };
 
 

@@ -94,7 +94,7 @@ public:
     // Accessors
     const int* GetGLAttrs() const
     {
-        return (m_GLValues.empty() || !m_GLValues[0]) ? NULL : &*m_GLValues.begin();
+        return (m_GLValues.empty() || !m_GLValues[0]) ? nullptr : &*m_GLValues.begin();
     }
 
     int GetSize() const { return (int)(m_GLValues.size()); }
@@ -280,7 +280,7 @@ protected:
     // Return false if an unknown attribute is found.
     static bool ParseAttribList(const int* attribList,
                                 wxGLAttributes& dispAttrs,
-                                wxGLContextAttrs* ctxAttrs = NULL);
+                                wxGLContextAttrs* ctxAttrs = nullptr);
 
 #if wxUSE_PALETTE
     // create default palette if we're not using RGBA mode

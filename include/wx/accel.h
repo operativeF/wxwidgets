@@ -48,7 +48,7 @@ class WXDLLIMPEXP_CORE wxAcceleratorEntry
 {
 public:
     wxAcceleratorEntry(int flags = 0, int keyCode = 0, int cmd = 0,
-                       wxMenuItem *item = NULL)
+                       wxMenuItem *item = nullptr)
         : m_flags(flags)
         , m_keyCode(keyCode)
         , m_command(cmd)
@@ -59,7 +59,7 @@ public:
     // string couldn't be parsed or a pointer to be deleted by the caller
     static wxAcceleratorEntry *Create(const wxString& str);
 
-    void Set(int flags, int keyCode, int cmd, wxMenuItem *item = NULL)
+    void Set(int flags, int keyCode, int cmd, wxMenuItem *item = nullptr)
     {
         m_flags = flags;
         m_keyCode = keyCode;

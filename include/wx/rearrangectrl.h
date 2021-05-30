@@ -191,7 +191,7 @@ class WXDLLIMPEXP_CORE wxRearrangeDialog : public wxDialog
 {
 public:
     // default ctor, use Create() later
-    wxRearrangeDialog() {  m_ctrl = NULL;  }
+    wxRearrangeDialog() {  m_ctrl = nullptr;  }
 
     // ctor for the dialog: message is shown inside the dialog itself, order
     // and items are passed to wxRearrangeList used internally
@@ -203,7 +203,7 @@ public:
                       const wxPoint& pos = wxDefaultPosition,
                       const wxString& name = wxASCII_STR(wxRearrangeDialogNameStr))
     {
-         m_ctrl = NULL; 
+         m_ctrl = nullptr; 
 
         Create(parent, message, title, order, items, pos, name);
     }

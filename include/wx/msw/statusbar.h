@@ -28,7 +28,7 @@ public:
                 long style = wxSTB_DEFAULT_STYLE,
                 const wxString& name = wxASCII_STR(wxStatusBarNameStr))
     {
-        m_pDC = NULL;
+        m_pDC = nullptr;
         (void)Create(parent, id, style, name);
     }
 
@@ -43,7 +43,7 @@ public:
 	wxStatusBar& operator=(const wxStatusBar&) = delete;
 
     // implement base class methods
-    void SetFieldsCount(int number = 1, const int *widths = NULL) override;
+    void SetFieldsCount(int number = 1, const int *widths = nullptr) override;
     void SetStatusWidths(int n, const int widths_field[]) override;
     void SetStatusStyles(int n, const int styles[]) override;
     void SetMinHeight(int height) override;
@@ -64,7 +64,7 @@ protected:
     void DoUpdateStatusText(int number) override;
 
     // override some base class virtuals
-    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
+    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
     wxSize DoGetBestSize() const override;
     void DoMoveWindow(int x, int y, int width, int height) override;
 #if wxUSE_TOOLTIPS

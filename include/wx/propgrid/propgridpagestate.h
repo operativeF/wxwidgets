@@ -27,7 +27,7 @@ class WXDLLIMPEXP_PROPGRID wxPropertyGridHitTestResult
 public:
     wxPropertyGridHitTestResult()
     {
-        m_property = NULL;
+        m_property = nullptr;
         m_column = -1;
         m_splitter = -1;
         m_splitterHitOffset = 0;
@@ -169,7 +169,7 @@ public:
 
     void Assign( const wxPropertyGridIteratorBase& it );
 
-    bool AtEnd() const { return m_property == NULL; }
+    bool AtEnd() const { return m_property == nullptr; }
 
     // Get current property.
     wxPGProperty* GetProperty() const { return m_property; }
@@ -214,7 +214,7 @@ class wxPGIterator : public wxPropertyGridIteratorBase
 {
 public:
     wxPGIterator(STATE* state, int flags = wxPG_ITERATE_DEFAULT,
-                 PROPERTY* property = NULL, int dir = 1)
+                 PROPERTY* property = nullptr, int dir = 1)
         : wxPropertyGridIteratorBase()
     {
         Init(const_cast<wxPropertyGridPageState*>(state), flags, const_cast<wxPGProperty*>(property), dir);
@@ -227,7 +227,7 @@ public:
     wxPGIterator()
         : wxPropertyGridIteratorBase()
     {
-        m_property = NULL;
+        m_property = nullptr;
     }
     wxPGIterator(const wxPGIterator& it)
         : wxPropertyGridIteratorBase()
@@ -292,7 +292,7 @@ protected:
 class WXDLLIMPEXP_PROPGRID wxPGVIterator
 {
 public:
-    wxPGVIterator() { m_pIt = NULL; }
+    wxPGVIterator() { m_pIt = nullptr; }
     wxPGVIterator( wxPGVIteratorBase* obj ) { m_pIt = obj; }
     ~wxPGVIterator() { UnRef(); }
     void UnRef() { if (m_pIt) m_pIt->DecRef(); }
@@ -430,7 +430,7 @@ public:
 
     bool DoClearSelection()
     {
-        return DoSelectProperty(NULL);
+        return DoSelectProperty(nullptr);
     }
 
     void DoRemoveFromSelection( wxPGProperty* prop );
@@ -565,7 +565,7 @@ protected:
 
     // Returns property by its label.
     wxPGProperty* BaseGetPropertyByLabel( const wxString& label,
-                                      const wxPGProperty* parent = NULL ) const;
+                                      const wxPGProperty* parent = nullptr ) const;
 
     // Unselect sub-properties.
     void DoRemoveChildrenFromSelection(wxPGProperty* p, bool recursive,

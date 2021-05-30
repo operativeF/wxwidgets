@@ -215,7 +215,7 @@ wxRegKey::wxRegKey(WOW64ViewMode viewMode) : m_viewMode(viewMode)
   m_hRootKey = (WXHKEY) aStdKeys[HKCR].hkey;
 
   
-    m_hKey = (WXHKEY) NULL;
+    m_hKey = (WXHKEY) nullptr;
     m_dwLastError = 0;
   
 }
@@ -226,7 +226,7 @@ wxRegKey::wxRegKey(const wxString& strKey, WOW64ViewMode viewMode)
   m_hRootKey  = (WXHKEY) aStdKeys[ExtractKeyName(m_strKey)].hkey;
 
   
-    m_hKey = (WXHKEY) NULL;
+    m_hKey = (WXHKEY) nullptr;
     m_dwLastError = 0;
   
 }
@@ -241,7 +241,7 @@ wxRegKey::wxRegKey(StdKey keyParent,
   m_hRootKey  = (WXHKEY) aStdKeys[keyParent].hkey;
 
   
-    m_hKey = (WXHKEY) NULL;
+    m_hKey = (WXHKEY) nullptr;
     m_dwLastError = 0;
   
 }
@@ -262,7 +262,7 @@ wxRegKey::wxRegKey(const wxRegKey& keyParent, const wxString& strKey)
   m_hRootKey  = keyParent.m_hRootKey;
 
   
-    m_hKey = (WXHKEY) NULL;
+    m_hKey = (WXHKEY) nullptr;
     m_dwLastError = 0;
   
 }

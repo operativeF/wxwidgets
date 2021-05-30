@@ -476,7 +476,7 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	virtual int KeyCommand(unsigned int iMessage);
 	virtual int KeyDefault(int /* key */, int /*modifiers*/);
 	int KeyDownWithModifiers(int key, int modifiers, bool *consumed);
-	int KeyDown(int key, bool shift, bool ctrl, bool alt, bool *consumed=0);
+	int KeyDown(int key, bool shift, bool ctrl, bool alt, bool *consumed=nullptr);
 
 	void Indent(bool forwards);
 
@@ -604,7 +604,7 @@ class AutoSurface {
 private:
 	Surface *surf;
 public:
-	AutoSurface(Editor *ed, int technology = -1) : surf(0) {
+	AutoSurface(Editor *ed, int technology = -1) : surf(nullptr) {
 		if (ed->wMain.GetID()) {
 			surf = Surface::Allocate(technology != -1 ? technology : ed->technology);
 			if (surf) {
@@ -614,7 +614,7 @@ public:
 			}
 		}
 	}
-	AutoSurface(SurfaceID sid, Editor *ed, int technology = -1) : surf(0) {
+	AutoSurface(SurfaceID sid, Editor *ed, int technology = -1) : surf(nullptr) {
 		if (ed->wMain.GetID()) {
 			surf = Surface::Allocate(technology != -1 ? technology : ed->technology);
 			if (surf) {

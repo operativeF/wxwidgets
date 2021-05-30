@@ -65,7 +65,7 @@ enum
 class wxTreeListItem : public wxItemId<wxTreeListModelNode*>
 {
 public:
-    wxTreeListItem(wxTreeListModelNode* item = NULL)
+    wxTreeListItem(wxTreeListModelNode* item = nullptr)
         : wxItemId<wxTreeListModelNode*>(item)
     {
     }
@@ -211,7 +211,7 @@ public:
                               const wxString& text,
                               int imageClosed = NO_IMAGE,
                               int imageOpened = NO_IMAGE,
-                              wxClientData* data = NULL)
+                              wxClientData* data = nullptr)
     {
         return DoInsertItem(parent, wxTLI_LAST, text,
                             imageClosed, imageOpened, data);
@@ -222,7 +222,7 @@ public:
                               const wxString& text,
                               int imageClosed = NO_IMAGE,
                               int imageOpened = NO_IMAGE,
-                              wxClientData* data = NULL)
+                              wxClientData* data = nullptr)
     {
         return DoInsertItem(parent, previous, text,
                             imageClosed, imageOpened, data);
@@ -232,7 +232,7 @@ public:
                                const wxString& text,
                                int imageClosed = NO_IMAGE,
                                int imageOpened = NO_IMAGE,
-                               wxClientData* data = NULL)
+                               wxClientData* data = nullptr)
     {
         return DoInsertItem(parent, wxTLI_FIRST, text,
                             imageClosed, imageOpened, data);
@@ -376,7 +376,7 @@ public:
     // parameters with the column which is currently used for sorting and
     // whether we sort using ascending or descending order. Otherwise, i.e. if
     // the control contents is unsorted, simply return false.
-    bool GetSortColumn(unsigned* col, bool* ascendingOrder = NULL);
+    bool GetSortColumn(unsigned* col, bool* ascendingOrder = nullptr);
 
     // Set the object to use for comparing the items. It will be called when
     // the control is being sorted because the user clicked on a sortable

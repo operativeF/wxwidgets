@@ -63,7 +63,7 @@ typedef std::vector<wxDocTemplate*> wxDocTemplateVector;
 class WXDLLIMPEXP_CORE wxDocument : public wxEvtHandler
 {
 public:
-    wxDocument(wxDocument *parent = NULL);
+    wxDocument(wxDocument *parent = nullptr);
     virtual ~wxDocument();
 
     // accessors
@@ -146,7 +146,7 @@ public:
 
     wxView *GetFirstView() const;
 
-    virtual void UpdateAllViews(wxView *sender = NULL, wxObject *hint = NULL);
+    virtual void UpdateAllViews(wxView *sender = nullptr, wxObject *hint = nullptr);
     virtual void NotifyClosing();
 
     // Remove all views (because we're closing the document)
@@ -170,7 +170,7 @@ public:
 
     // Returns true if this document is a child document corresponding to a
     // part of the parent document and not a disk file as usual.
-    bool IsChildDocument() const { return m_documentParent != NULL; }
+    bool IsChildDocument() const { return m_documentParent != nullptr; }
 
 protected:
     wxList                m_documentViews;
@@ -227,7 +227,7 @@ public:
                                 wxView *deactiveView);
     virtual void OnDraw(wxDC *dc) = 0;
     virtual void OnPrint(wxDC *dc, wxObject *info);
-    virtual void OnUpdate(wxView *sender, wxObject *hint = NULL);
+    virtual void OnUpdate(wxView *sender, wxObject *hint = nullptr);
     virtual void OnClosingDocument() {}
     virtual void OnChangeFilename();
 
@@ -297,8 +297,8 @@ public:
                   const wxString& ext,
                   const wxString& docTypeName,
                   const wxString& viewTypeName,
-                  wxClassInfo *docClassInfo = NULL,
-                  wxClassInfo *viewClassInfo = NULL,
+                  wxClassInfo *docClassInfo = nullptr,
+                  wxClassInfo *viewClassInfo = nullptr,
                   long flags = wxDEFAULT_TEMPLATE_FLAGS);
 
     virtual ~wxDocTemplate();
@@ -561,10 +561,10 @@ public:
     // default ctor, use Create() after it
     wxDocChildFrameAnyBase()
     {
-        m_childDocument = NULL;
-        m_childView = NULL;
-        m_win = NULL;
-        m_lastEvent = NULL;
+        m_childDocument = nullptr;
+        m_childView = nullptr;
+        m_win = nullptr;
+        m_lastEvent = nullptr;
     }
 
     // full ctor equivalent to using the default one and Create()
@@ -596,7 +596,7 @@ public:
         // prevent the view from deleting us if we're being deleted directly
         // (and not via Close() + Destroy())
         if ( m_childView )
-            m_childView->SetDocChildFrame(NULL);
+            m_childView->SetDocChildFrame(nullptr);
     }
 
     wxDocument *GetDocument() const { return m_childDocument; }
@@ -795,7 +795,7 @@ public:
     wxDocParentFrameAnyBase(wxWindow* frame)
         : m_frame(frame)
     {
-        m_docManager = NULL;
+        m_docManager = nullptr;
     }
 
     wxDocManager *GetDocumentManager() const { return m_docManager; }
@@ -939,7 +939,7 @@ private:
 class WXDLLIMPEXP_CORE wxDocPrintout : public wxPrintout
 {
 public:
-    wxDocPrintout(wxView *view = NULL, const wxString& title = wxString());
+    wxDocPrintout(wxView *view = nullptr, const wxString& title = wxString());
 
     // implement wxPrintout methods
     bool OnPrintPage(int page) override;

@@ -222,7 +222,7 @@ public:
 
     // search
     virtual int FindItem(const wxString& item) const;
-    wxMenuItem* FindItem(int itemid, wxMenu **menu = NULL) const;
+    wxMenuItem* FindItem(int itemid, wxMenu **menu = nullptr) const;
 
     // find by position
     wxMenuItem* FindItemByPosition(size_t position) const;
@@ -280,7 +280,7 @@ public:
     //
     // Do not use the "source" argument, it allows to override the event
     // handler to use for these events, but this should never be needed.
-    void UpdateUI(wxEvtHandler* source = NULL);
+    void UpdateUI(wxEvtHandler* source = nullptr);
 
 #if wxUSE_MENUBAR
     // get the menu bar this menu is attached to (may be NULL, always NULL for
@@ -292,7 +292,7 @@ public:
     virtual void Detach();
 
     // is the menu attached to a menu bar (or is it a popup one)?
-    bool IsAttached() const { return GetMenuBar() != NULL; }
+    bool IsAttached() const { return GetMenuBar() != nullptr; }
 #endif
 
     // set/get the parent of this menu
@@ -305,7 +305,7 @@ public:
     // unlike FindItem(), this function doesn't recurse but only looks through
     // our direct children and also may return the index of the found child if
     // pos != NULL
-    wxMenuItem *FindChildItem(int itemid, size_t *pos = NULL) const;
+    wxMenuItem *FindChildItem(int itemid, size_t *pos = nullptr) const;
 
     // called to generate a wxCommandEvent, return true if it was processed,
     // false otherwise
@@ -507,7 +507,7 @@ public:
     // find item by id (in any menu), returns NULL if not found
     //
     // if menu is !NULL, it will be filled with wxMenu this item belongs to
-    virtual wxMenuItem* FindItem(int itemid, wxMenu **menu = NULL) const;
+    virtual wxMenuItem* FindItem(int itemid, wxMenu **menu = nullptr) const;
 
     // find menu by its caption, return wxNOT_FOUND on failure
     int FindMenu(const wxString& title) const;
@@ -539,7 +539,7 @@ public:
     wxFrame *GetFrame() const { return m_menuBarFrame; }
 
     // returns true if we're attached to a frame
-    bool IsAttached() const { return GetFrame() != NULL; }
+    bool IsAttached() const { return GetFrame() != nullptr; }
 
     // associate the menubar with the frame
     virtual void Attach(wxFrame *frame);
@@ -628,7 +628,7 @@ public:
     // Dtor resets the invoking window.
     ~wxMenuInvokingWindowSetter()
     {
-        m_menu.SetInvokingWindow(NULL);
+        m_menu.SetInvokingWindow(nullptr);
     }
 
 private:

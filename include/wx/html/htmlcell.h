@@ -68,7 +68,7 @@ public:
 private:
     wxPoint m_fromPos, m_toPos;
     wxCoord m_fromCharacterPos{-1}, m_toCharacterPos{-1};
-    const wxHtmlCell *m_fromCell{NULL}, *m_toCell{NULL};
+    const wxHtmlCell *m_fromCell{nullptr}, *m_toCell{nullptr};
 
     // Extent of the text before selection start.
     unsigned m_extBeforeSel{0};
@@ -124,7 +124,7 @@ public:
 class WXDLLIMPEXP_HTML wxDefaultHtmlRenderingStyle : public wxHtmlRenderingStyle
 {
 public:
-    explicit wxDefaultHtmlRenderingStyle(const wxWindowBase* wnd = NULL)
+    explicit wxDefaultHtmlRenderingStyle(const wxWindowBase* wnd = nullptr)
         : m_wnd(wnd)
     {}
 
@@ -163,8 +163,8 @@ public:
     wxHtmlRenderingState& GetState() { return m_state; }
 
 protected:
-    wxHtmlSelection      *m_selection{NULL};
-    wxHtmlRenderingStyle *m_style{NULL};
+    wxHtmlSelection      *m_selection{nullptr};
+    wxHtmlRenderingStyle *m_style{nullptr};
     wxHtmlRenderingState m_state;
     bool m_prevUnderlined{false};
 };
@@ -248,7 +248,7 @@ public:
     // return next cell among parent's cells
     wxHtmlCell *GetNext() const {return m_Next;}
     // returns first child cell (if there are any, i.e. if this is container):
-    virtual wxHtmlCell* GetFirstChild() const { return NULL; }
+    virtual wxHtmlCell* GetFirstChild() const { return nullptr; }
 
     // members writing methods
     virtual void SetPos(int x, int y) {m_PosX = x; m_PosY = y;}
@@ -338,12 +338,12 @@ public:
     // Returns absolute position of the cell on HTML canvas.
     // If rootCell is provided, then it's considered to be the root of the
     // hierarchy and the returned value is relative to it.
-    wxPoint GetAbsPos(const wxHtmlCell *rootCell = NULL) const;
+    wxPoint GetAbsPos(const wxHtmlCell *rootCell = nullptr) const;
 
     // Returns minimum bounding rectangle of this cell in coordinates, relative
     // to the rootCell, if it is provided, or relative to the result of
     // GetRootCell() if the rootCell is NULL.
-    wxRect GetRect(const wxHtmlCell *rootCell = NULL) const;
+    wxRect GetRect(const wxHtmlCell *rootCell = nullptr) const;
 
     // Returns root cell of the hierarchy (i.e. grand-grand-...-parent that
     // doesn't have a parent itself)
@@ -702,11 +702,11 @@ class WXDLLIMPEXP_HTML wxHtmlLinkInfo : public wxObject
 {
 public:
     wxHtmlLinkInfo()
-        { m_Event = NULL; m_Cell = NULL; }
+        { m_Event = nullptr; m_Cell = nullptr; }
     wxHtmlLinkInfo(const wxString& href, const wxString& target = wxString())
         : m_Href(href)
         , m_Target(target)
-        { m_Event = NULL; m_Cell = NULL; }
+        { m_Event = nullptr; m_Cell = nullptr; }
 
     void SetEvent(const wxMouseEvent *e) { m_Event = e; }
     void SetHtmlCell(const wxHtmlCell *e) { m_Cell = e; }
@@ -734,7 +734,7 @@ public:
     wxHtmlTerminalCellsInterator(const wxHtmlCell *from, const wxHtmlCell *to)
         : m_to(to), m_pos(from) {}
 
-    operator bool() const { return m_pos != NULL; }
+    operator bool() const { return m_pos != nullptr; }
     const wxHtmlCell* operator++();
     const wxHtmlCell* operator->() const { return m_pos; }
     const wxHtmlCell* operator*() const { return m_pos; }

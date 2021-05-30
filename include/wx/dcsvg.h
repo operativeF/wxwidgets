@@ -151,7 +151,7 @@ public:
     void SetFont(const wxFont& font) override;
     void SetPen(const wxPen& pen) override;
 
-    void* GetHandle() const override { return NULL; }
+    void* GetHandle() const override { return nullptr; }
 
     void SetBitmapHandler(wxSVGBitmapHandler* handler);
 
@@ -248,9 +248,9 @@ private:
 
     virtual void DoGetTextExtent(const wxString& string,
                                  wxCoord* x, wxCoord* y,
-                                 wxCoord* descent = NULL,
-                                 wxCoord* externalLeading = NULL,
-                                 const wxFont* theFont = NULL) const override;
+                                 wxCoord* descent = nullptr,
+                                 wxCoord* externalLeading = nullptr,
+                                 const wxFont* theFont = nullptr) const override;
 
     void DoSetDeviceClippingRegion(const wxRegion& region) override
     {

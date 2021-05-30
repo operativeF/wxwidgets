@@ -39,7 +39,7 @@
 inline bool wxOleInitialize()
 {
     const HRESULT
-    hr = ::OleInitialize(NULL);
+    hr = ::OleInitialize(nullptr);
 
     // RPC_E_CHANGED_MODE indicates that OLE had been already initialized
     // before, albeit with different mode. Don't consider it to be an error as
@@ -105,7 +105,7 @@ public:
     BSTR Get() const { return Copy(); }
 private:
     // actual string
-    BSTR m_bstrBuf{NULL};
+    BSTR m_bstrBuf{nullptr};
 };
 
 #if wxUSE_VARIANT
@@ -164,7 +164,7 @@ private:
 class WXDLLIMPEXP_CORE wxVariantDataSafeArray : public wxVariantData
 {
 public:
-    explicit wxVariantDataSafeArray(SAFEARRAY* value = NULL)
+    explicit wxVariantDataSafeArray(SAFEARRAY* value = nullptr)
     {
         m_value = value;
     }

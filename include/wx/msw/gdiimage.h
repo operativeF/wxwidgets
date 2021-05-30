@@ -36,7 +36,7 @@ public:
     {
         m_width = m_height = m_depth = 0;
 
-        m_handle = NULL;
+        m_handle = nullptr;
     }
 
     wxGDIImageRefData(const wxGDIImageRefData& data) : wxGDIRefData()
@@ -46,11 +46,11 @@ public:
         m_depth = data.m_depth;
 
         // can't copy handles like this, derived class copy ctor must do it!
-        m_handle = NULL;
+        m_handle = nullptr;
     }
 
     // accessors
-    bool IsOk() const override { return m_handle != NULL; }
+    bool IsOk() const override { return m_handle != nullptr; }
 
     void SetSize(int w, int h) { m_width = w; m_height = h; }
 
@@ -104,7 +104,7 @@ public:
 
     // accessors
     WXHANDLE GetHandle() const
-        { return IsNull() ? NULL : GetGDIImageData()->m_handle; }
+        { return IsNull() ? nullptr : GetGDIImageData()->m_handle; }
     void SetHandle(WXHANDLE handle)
         { AllocExclusive(); GetGDIImageData()->m_handle = handle; }
 
@@ -135,7 +135,7 @@ protected:
     {
         wxFAIL_MSG( wxT("must be implemented if used") );
 
-        return NULL;
+        return nullptr;
     }
 
     static wxGDIImageHandlerList ms_handlers;

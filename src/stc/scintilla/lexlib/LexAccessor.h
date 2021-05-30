@@ -83,7 +83,7 @@ public:
 		if (documentVersion >= dvLineEnd) {
 			return static_cast<IDocumentWithLineEnd *>(pAccess);
 		}
-		return 0;
+		return nullptr;
 	}
 	/** Safe version of operator[], returning a defined value for invalid position. */
 	char SafeGetCharAt(Sci_Position position, char chDefault=' ') {

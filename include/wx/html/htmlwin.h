@@ -302,7 +302,7 @@ public:
 
     // Sets fonts to be used when displaying HTML page.
     void SetFonts(const wxString& normal_face, const wxString& fixed_face,
-                  const int *sizes = NULL);
+                  const int *sizes = nullptr);
 
     // Sets font sizes to be relative to the given size or the system
     // default size; use either specified or default font

@@ -134,7 +134,7 @@ public:
                 const wxString& szBackend = wxEmptyString,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxT("mediaCtrl"))
-                : m_imp(NULL), m_bLoaded(false)
+                : m_imp(nullptr), m_bLoaded(false)
     {   Create(parent, winid, fileName, pos, size, style,
                szBackend, validator, name);                             }
 
@@ -146,7 +146,7 @@ public:
                 const wxString& szBackend = wxEmptyString,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxT("mediaCtrl"))
-                : m_imp(NULL), m_bLoaded(false)
+                : m_imp(nullptr), m_bLoaded(false)
     {   Create(parent, winid, location, pos, size, style,
                szBackend, validator, name);                             }
 
@@ -218,7 +218,7 @@ protected:
     void DoMoveWindow(int x, int y, int w, int h) override;
     wxSize DoGetBestSize() const override;
 
-    class wxMediaBackend* m_imp{NULL};
+    class wxMediaBackend* m_imp{nullptr};
     bool m_bLoaded{false};
 
     wxDECLARE_DYNAMIC_CLASS(wxMediaCtrl);

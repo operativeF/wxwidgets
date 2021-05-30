@@ -13,7 +13,7 @@ namespace Scintilla {
 #endif
 
 struct FontSpecification {
-	const char *fontName{0};
+	const char *fontName{nullptr};
 	int weight{SC_WEIGHT_NORMAL};
 	bool italic{false};
 	int size;

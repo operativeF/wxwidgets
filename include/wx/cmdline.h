@@ -161,7 +161,7 @@ public:
             : m_parser(&parser), m_index(index) {
         }
 
-        const wxCmdLineParser* m_parser{NULL};
+        const wxCmdLineParser* m_parser{nullptr};
         size_t m_index{0};
 
         friend class wxCmdLineArgs;

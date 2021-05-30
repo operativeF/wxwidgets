@@ -76,7 +76,7 @@ class WXDLLIMPEXP_BASE wxXLocale
 {
 public:
     // Construct an uninitialized locale
-    wxXLocale() { m_locale = NULL; }
+    wxXLocale() { m_locale = nullptr; }
 
 #if wxUSE_INTL
     // Construct from a symbolic language constant
@@ -95,7 +95,7 @@ public:
 
     // Check if the object represents a valid locale (notice that without
     // wxHAS_XLOCALE_SUPPORT the only valid locale is the "C" one)
-    bool IsOk() const { return m_locale != NULL; }
+    bool IsOk() const { return m_locale != nullptr; }
 
     // Get the type
     wxXLocale_t Get() const { return m_locale; }

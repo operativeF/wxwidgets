@@ -33,7 +33,7 @@ private:
         { return const_cast<wxStackFrameBase *>(this); }
 
 public:
-    wxStackFrameBase(size_t level, void *address = NULL)
+    wxStackFrameBase(size_t level, void *address = nullptr)
     {
         m_level = level;
 

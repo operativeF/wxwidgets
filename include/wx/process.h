@@ -54,10 +54,10 @@ public:
 
 
     // ctors
-    wxProcess(wxEvtHandler *parent = NULL, int nId = wxID_ANY)
+    wxProcess(wxEvtHandler *parent = nullptr, int nId = wxID_ANY)
         { Init(parent, nId, wxPROCESS_DEFAULT); }
 
-    wxProcess(int flags) { Init(NULL, wxID_ANY, flags); }
+    wxProcess(int flags) { Init(nullptr, wxID_ANY, flags); }
 
     virtual ~wxProcess();
 
@@ -90,7 +90,7 @@ public:
     wxOutputStream *GetOutputStream() const { return m_outputStream; }
 
     // close the output stream indicating that nothing more will be written
-    void CloseOutput() { delete m_outputStream; m_outputStream = NULL; }
+    void CloseOutput() { delete m_outputStream; m_outputStream = nullptr; }
 
     // return true if the child process stdout is not closed
     bool IsInputOpened() const;

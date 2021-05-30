@@ -24,7 +24,7 @@
 // release the interface pointer (if !NULL)
 inline void ReleaseInterface(IUnknown *pIUnk)
 {
-  if ( pIUnk != NULL )
+  if ( pIUnk != nullptr )
     pIUnk->Release();
 }
 

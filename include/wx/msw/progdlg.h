@@ -18,7 +18,7 @@ class WXDLLIMPEXP_CORE wxProgressDialog : public wxGenericProgressDialog
 public:
     wxProgressDialog(const wxString& title, const wxString& message,
                      int maximum = 100,
-                     wxWindow *parent = NULL,
+                     wxWindow *parent = nullptr,
                      int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 
     virtual ~wxProgressDialog();
@@ -26,8 +26,8 @@ public:
 	wxProgressDialog(const wxProgressDialog&) = delete;
 	wxProgressDialog& operator=(const wxProgressDialog&) = delete;
 
-    bool Update(int value, const wxString& newmsg = wxEmptyString, bool *skip = NULL) override;
-    bool Pulse(const wxString& newmsg = wxEmptyString, bool *skip = NULL) override;
+    bool Update(int value, const wxString& newmsg = wxEmptyString, bool *skip = nullptr) override;
+    bool Pulse(const wxString& newmsg = wxEmptyString, bool *skip = nullptr) override;
 
     void Resume() override;
 

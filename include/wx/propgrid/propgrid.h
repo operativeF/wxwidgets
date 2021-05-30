@@ -800,7 +800,7 @@ public:
 
     // Returns size of the custom paint image in front of property.
     // If no argument is given (p is NULL), returns preferred size.
-    wxSize GetImageSize( wxPGProperty* p = NULL, int item = -1 ) const;
+    wxSize GetImageSize( wxPGProperty* p = nullptr, int item = -1 ) const;
 
     // Returns last item which could be iterated using given flags.
     wxPGProperty* GetLastItem( int flags = wxPG_ITERATE_DEFAULT )
@@ -1125,7 +1125,7 @@ public:
 
     const wxPGCommonValue* GetCommonValue( unsigned int i ) const
     {
-        wxCHECK_MSG( i < m_commonValues.size(), NULL, "Invalid item index" );
+        wxCHECK_MSG( i < m_commonValues.size(), nullptr, "Invalid item index" );
         return m_commonValues[i];
     }
 
@@ -1406,7 +1406,7 @@ public:
     wxPGProperty* GetItemAtY( int y ) const { return DoGetItemAtY(y); }
 
     virtual void Refresh( bool eraseBackground = true,
-                          const wxRect *rect = (const wxRect *) NULL ) override;
+                          const wxRect *rect = (const wxRect *) nullptr ) override;
     bool SetFont( const wxFont& font ) override;
     void SetExtraStyle( long exStyle ) override;
     bool Reparent( wxWindowBase *newParent ) override;
@@ -1712,7 +1712,7 @@ protected:
 
     bool AddToSelectionFromInputEvent( wxPGProperty* prop,
                                        unsigned int colIndex,
-                                       wxMouseEvent* event = NULL,
+                                       wxMouseEvent* event = nullptr,
                                        int selFlags = 0 );
 
     // Adjust the centering of the bitmap icons (collapse / expand) when the
@@ -1741,14 +1741,14 @@ protected:
     void DrawItems( wxDC& dc,
                     unsigned int topItemY,
                     unsigned int bottomItemY,
-                    const wxRect* itemsRect = NULL );
+                    const wxRect* itemsRect = nullptr );
 
     // Translate wxKeyEvent to wxPG_ACTION_XXX
     int KeyEventToActions(wxKeyEvent &event, int* pSecond) const;
 
     int KeyEventToAction(wxKeyEvent &event) const
     {
-        return KeyEventToActions(event, NULL);
+        return KeyEventToActions(event, nullptr);
     }
 
     void ImprovedClientToScreen( int* px, int* py );
@@ -1827,7 +1827,7 @@ protected:
     // Send event from the property grid.
     // Omit the wxPG_SEL_NOVALIDATE flag to allow vetoing the event
     bool SendEvent( wxEventType eventType, wxPGProperty* p,
-                    wxVariant* pValue = NULL,
+                    wxVariant* pValue = nullptr,
                     unsigned int selFlags = wxPG_SEL_NOVALIDATE,
                     unsigned int column = 1 );
 
@@ -2108,7 +2108,7 @@ public:
                        const wxString& propLabel,
                        const wxString& propName,
                        const wxString* propValue,
-                       wxPGChoices* pChoices = NULL );
+                       wxPGChoices* pChoices = nullptr );
 
     // Pushes property to the back of parent array (ie it becomes bottommost
     // parent), and starts scanning/adding children for it.

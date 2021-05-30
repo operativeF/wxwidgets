@@ -527,7 +527,7 @@ public:
         // does it!
         //
         // will fill the rc pointer with the thread exit code if it's !NULL
-    wxThreadError Delete(ExitCode *rc = NULL,
+    wxThreadError Delete(ExitCode *rc = nullptr,
                          wxThreadWait waitMode = wxTHREAD_WAIT_DEFAULT);
 
         // waits for a joinable thread to finish and returns its exit code
@@ -595,7 +595,7 @@ public:
 
 protected:
     // exits from the current thread - can be called only from this thread
-    void Exit(ExitCode exitcode = NULL);
+    void Exit(ExitCode exitcode = nullptr);
 
     // entry point for the thread - called by Run() and executes in the context
     // of this thread.
@@ -692,7 +692,7 @@ private:
             if ( m_kind == wxTHREAD_JOINABLE )
               delete m_thread;
 
-            m_thread = NULL;
+            m_thread = nullptr;
         }
     }
 
@@ -732,7 +732,7 @@ public:
     }
 
 protected:
-    wxThread *m_thread{NULL};
+    wxThread *m_thread{nullptr};
     wxThreadKind m_kind;
     mutable wxCriticalSection m_critSection; // To guard the m_thread variable
 
@@ -751,7 +751,7 @@ inline void *wxThreadHelperThread::Entry()
     // And that wxThreadHelper::KillThread will not try to kill
     // an already deleted thread
     if ( m_owner.m_kind == wxTHREAD_DETACHED )
-        m_owner.m_thread = NULL;
+        m_owner.m_thread = nullptr;
 
     return result;
 }

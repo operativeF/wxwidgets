@@ -232,15 +232,15 @@ public:
 
 #if wxUSE_MDI_ARCHITECTURE
     // The MDI client window is sized to whatever's left over.
-    bool LayoutMDIFrame(wxMDIParentFrame* frame, wxRect* rect = NULL);
+    bool LayoutMDIFrame(wxMDIParentFrame* frame, wxRect* rect = nullptr);
 #endif // wxUSE_MDI_ARCHITECTURE
 
     // mainWindow is sized to whatever's left over. This function for backward
     // compatibility; use LayoutWindow.
-    bool LayoutFrame(wxFrame* frame, wxWindow* mainWindow = NULL);
+    bool LayoutFrame(wxFrame* frame, wxWindow* mainWindow = nullptr);
 
     // mainWindow is sized to whatever's left over.
-    bool LayoutWindow(wxWindow* frame, wxWindow* mainWindow = NULL);
+    bool LayoutWindow(wxWindow* frame, wxWindow* mainWindow = nullptr);
 };
 
 #endif

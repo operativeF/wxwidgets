@@ -46,7 +46,7 @@ public:
     virtual ~wxDialog();
 
     // return true if we're showing the dialog modally
-    bool IsModal() const override { return m_modalData != NULL; }
+    bool IsModal() const override { return m_modalData != nullptr; }
 
     // show the dialog modally and return the value passed to EndModal()
     int ShowModal() override;

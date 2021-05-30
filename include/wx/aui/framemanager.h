@@ -152,8 +152,8 @@ public:
         , floating_pos(wxDefaultPosition)
         , floating_size(wxDefaultSize)
     {
-        window = NULL;
-        frame = NULL;
+        window = nullptr;
+        frame = nullptr;
         state = 0;
         dock_direction = wxAUI_DOCK_LEFT;
         dock_layer = 0;
@@ -180,7 +180,7 @@ public:
         *this = source;
     }
 
-    bool IsOk() const { return window != NULL; }
+    bool IsOk() const { return window != nullptr; }
     bool IsFixed() const { return !HasFlag(optionResizable); }
     bool IsResizable() const { return HasFlag(optionResizable); }
     bool IsShown() const { return !HasFlag(optionHidden); }
@@ -405,7 +405,7 @@ class WXDLLIMPEXP_AUI wxAuiManager : public wxEvtHandler
 
 public:
 
-    wxAuiManager(wxWindow* managedWnd = NULL,
+    wxAuiManager(wxWindow* managedWnd = nullptr,
                    unsigned int flags = wxAUI_MGR_DEFAULT);
     virtual ~wxAuiManager();
     void UnInit();
@@ -533,7 +533,7 @@ protected:
     void OnFloatingPaneClosed(wxWindow* window, wxCloseEvent& evt);
     void OnFloatingPaneResized(wxWindow* window, const wxRect& rect);
     void Render(wxDC* dc);
-    void Repaint(wxDC* dc = NULL);
+    void Repaint(wxDC* dc = nullptr);
     void ProcessMgrEvent(wxAuiManagerEvent& event);
     void UpdateButtonOnScreen(wxAuiDockUIPart* buttonUiPart,
                               const wxMouseEvent& event);
@@ -631,12 +631,12 @@ class WXDLLIMPEXP_AUI wxAuiManagerEvent : public wxEvent
 public:
     wxAuiManagerEvent(wxEventType type=wxEVT_NULL) : wxEvent(0, type)
     {
-        manager = NULL;
-        pane = NULL;
+        manager = nullptr;
+        pane = nullptr;
         button = 0;
         veto_flag = false;
         canveto_flag = true;
-        dc = NULL;
+        dc = nullptr;
     }
     wxEvent *Clone() const override { return new wxAuiManagerEvent(*this); }
 

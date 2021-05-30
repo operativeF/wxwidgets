@@ -68,7 +68,7 @@ public:
                        int winId = 0)
           : wxBookCtrlEvent(commandType, winId)
     {
-        m_dragSource = NULL;
+        m_dragSource = nullptr;
     }
     wxEvent *Clone() const override { return new wxAuiNotebookEvent(*this); }
 
@@ -342,7 +342,7 @@ public:
     //wxBookCtrlBase functions
 
     void SetPageSize (const wxSize &size) override;
-    int  HitTest (const wxPoint &pt, long *flags=NULL) const override;
+    int  HitTest (const wxPoint &pt, long *flags=nullptr) const override;
 
     int GetPageImage(size_t n) const override;
     bool SetPageImage(size_t n, int imageId) override;
@@ -381,7 +381,7 @@ protected:
     virtual wxSize CalculateNewSplitSize();
 
     // remove the page and return a pointer to it
-    wxWindow *DoRemovePage(size_t WXUNUSED(page)) override { return NULL; }
+    wxWindow *DoRemovePage(size_t WXUNUSED(page)) override { return nullptr; }
 
     //A general selection function
     virtual int DoModifySelection(size_t n, bool events);

@@ -427,8 +427,8 @@ private:
 class ScreenHDC
 {
 public:
-    ScreenHDC() { m_hdc = ::GetDC(NULL);    }
-   ~ScreenHDC() { ::ReleaseDC(NULL, m_hdc); }
+    ScreenHDC() { m_hdc = ::GetDC(nullptr);    }
+   ~ScreenHDC() { ::ReleaseDC(nullptr, m_hdc); }
 
     operator HDC() const { return m_hdc; }
 
@@ -450,8 +450,8 @@ public:
     operator HDC() const { return m_hdc; }
 
 private:
-   HWND m_hwnd{NULL};
-   HDC m_hdc{NULL};
+   HWND m_hwnd{nullptr};
+   HDC m_hdc{nullptr};
 
    WindowHDC(const WindowHDC&) = delete;
 	WindowHDC& operator=(const WindowHDC&) = delete;
@@ -462,7 +462,7 @@ private:
 class MemoryHDC
 {
 public:
-    MemoryHDC(HDC hdc = NULL) { m_hdc = ::CreateCompatibleDC(hdc); }
+    MemoryHDC(HDC hdc = nullptr) { m_hdc = ::CreateCompatibleDC(hdc); }
    ~MemoryHDC() { ::DeleteDC(m_hdc); }
 
     operator HDC() const { return m_hdc; }
@@ -497,11 +497,11 @@ public:
     ~SelectInHDC() { if ( m_hdc ) ::SelectObject(m_hdc, m_hgdiobj); }
 
     // return true if the object was successfully selected
-    operator bool() const { return m_hgdiobj != NULL; }
+    operator bool() const { return m_hgdiobj != nullptr; }
 
 private:
-    HDC m_hdc{NULL};
-    HGDIOBJ m_hgdiobj{NULL};
+    HDC m_hdc{nullptr};
+    HGDIOBJ m_hgdiobj{nullptr};
 
     SelectInHDC(const SelectInHDC&) = delete;
 	SelectInHDC& operator=(const SelectInHDC&) = delete;
@@ -511,7 +511,7 @@ private:
 class AutoGDIObject
 {
 protected:
-    AutoGDIObject() { m_gdiobj = NULL; }
+    AutoGDIObject() { m_gdiobj = nullptr; }
     AutoGDIObject(HGDIOBJ gdiobj) : m_gdiobj(gdiobj) { }
     ~AutoGDIObject() { if ( m_gdiobj ) ::DeleteObject(m_gdiobj); }
 
@@ -593,7 +593,7 @@ class MonoBitmap : public AutoHBITMAP
 {
 public:
     MonoBitmap(int w, int h)
-        : AutoHBITMAP(::CreateBitmap(w, h, 1, 1, NULL))
+        : AutoHBITMAP(::CreateBitmap(w, h, 1, 1, nullptr))
     {
     }
 };
@@ -649,7 +649,7 @@ public:
 
     ~HDCClipper()
     {
-        ::SelectClipRgn(m_hdc, NULL);
+        ::SelectClipRgn(m_hdc, nullptr);
     }
 
 private:
@@ -697,7 +697,7 @@ public:
     // default ctor, call Init() later
     GlobalPtr()
     {
-        m_hGlobal = NULL;
+        m_hGlobal = nullptr;
     }
 
     // allocates a block of given size
@@ -743,8 +743,8 @@ public:
     // be NULL (in which case Init() shouldn't be called)
     GlobalPtrLock()
     {
-        m_hGlobal = NULL;
-        m_ptr = NULL;
+        m_hGlobal = nullptr;
+        m_ptr = nullptr;
     }
 
     // initialize the object, may be only called if we were created using the
@@ -987,7 +987,7 @@ WXDLLIMPEXP_BASE wxWinVersion wxGetWinVersion();
 
 // This is similar to wxSysErrorMsgStr(), but takes an extra HMODULE parameter
 // specific to wxMSW.
-WXDLLIMPEXP_BASE wxString wxMSWFormatMessage(DWORD nErrCode, HMODULE hModule = 0);
+WXDLLIMPEXP_BASE wxString wxMSWFormatMessage(DWORD nErrCode, HMODULE hModule = nullptr);
 
 #if wxUSE_GUI && defined(__WXMSW__)
 
@@ -1028,7 +1028,7 @@ extern WXDLLIMPEXP_CORE int wxGetWindowId(WXHWND hWnd);
 //
 // wndProc parameter is unused and only kept for compatibility
 extern WXDLLIMPEXP_CORE
-bool wxCheckWindowWndProc(WXHWND hWnd, WXWNDPROC wndProc = NULL);
+bool wxCheckWindowWndProc(WXHWND hWnd, WXWNDPROC wndProc = nullptr);
 
 // Does this window style specify any border?
 inline bool wxStyleHasBorder(long style)

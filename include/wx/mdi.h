@@ -33,10 +33,10 @@ class WXDLLIMPEXP_CORE wxMDIParentFrameBase : public wxFrame
 public:
     wxMDIParentFrameBase()
     {
-        m_clientWindow = NULL;
-        m_currentChild = NULL;
+        m_clientWindow = nullptr;
+        m_currentChild = nullptr;
 #if wxUSE_MENUS
-        m_windowMenu = NULL;
+        m_windowMenu = nullptr;
 #endif // wxUSE_MENUS
     }
 
@@ -146,7 +146,7 @@ protected:
 class WXDLLIMPEXP_CORE wxMDIChildFrameBase : public wxFrame
 {
 public:
-    wxMDIChildFrameBase() { m_mdiParent = NULL; }
+    wxMDIChildFrameBase() { m_mdiParent = nullptr; }
 
     /*
         Derived classes should provide Create() with the following signature:
@@ -225,10 +225,10 @@ public:
                                  wxWindowID WXUNUSED(id) = 1,
                                  const wxString& WXUNUSED(name)
                                     = wxEmptyString) override
-      { return NULL; }
+      { return nullptr; }
 
     wxStatusBar *GetStatusBar() const override
-        { return NULL; }
+        { return nullptr; }
     void SetStatusText(const wxString &WXUNUSED(text),
                        int WXUNUSED(number)=0) override
         { }
@@ -244,8 +244,8 @@ public:
     wxToolBar *CreateToolBar(long WXUNUSED(style),
                              wxWindowID WXUNUSED(id),
                              const wxString& WXUNUSED(name)) override
-        { return NULL; }
-    wxToolBar *GetToolBar() const override { return NULL; }
+        { return nullptr; }
+    wxToolBar *GetToolBar() const override { return nullptr; }
 #endif // wxUSE_TOOLBAR
 
     // no icon
@@ -279,7 +279,7 @@ public:
 
     // extra platform-specific hacks
 #ifdef __WXMSW__
-    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override
+    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override
     {
         return wxWindow::MSWGetStyle(flags, exstyle);
     }

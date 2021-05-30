@@ -94,7 +94,7 @@ public:
 
 	~Partitioning() {
 		delete body;
-		body = 0;
+		body = nullptr;
 	}
 
 	int Partitions() const {

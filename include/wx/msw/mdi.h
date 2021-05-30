@@ -79,7 +79,7 @@ public:
 #if wxUSE_MENUS
     void SetWindowMenu(wxMenu* menu) override;
 
-    void DoMenuUpdates(wxMenu* menu = NULL) override;
+    void DoMenuUpdates(wxMenu* menu = nullptr) override;
 
     // return the active child menu, if any
     WXHMENU MSWGetActiveMenu() const override;

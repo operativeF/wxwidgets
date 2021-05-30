@@ -263,7 +263,7 @@ public:
     // flags defines what kind of conditions we're interested in, the return
     // value is composed of a (possibly empty) subset of the bits set in flags
     wxSocketEventFlags Select(wxSocketEventFlags flags,
-                              wxTimeVal_t *timeout = NULL);
+                              wxTimeVal_t *timeout = nullptr);
 
     // convenient wrapper calling Select() with our default timeout
     wxSocketEventFlags SelectWithTimeout(wxSocketEventFlags flags)

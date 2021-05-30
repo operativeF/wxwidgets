@@ -101,7 +101,7 @@ public:
     // Notice that this normally should not be used for the child windows as
     // they already inherit, just dialogs such as wxMessageDialog may want to
     // use it.
-    static wxLayoutDirection MSWGetDefaultLayout(wxWindow* parent = NULL);
+    static wxLayoutDirection MSWGetDefaultLayout(wxWindow* parent = nullptr);
 
     // Call ProcessPendingEvents() but only if we need to do it, i.e. there was
     // a recent call to WakeUpIdle().

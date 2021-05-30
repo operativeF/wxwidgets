@@ -159,7 +159,7 @@ public:
 	AutoLineLayout(LineLayoutCache &llc_, LineLayout *ll_) : llc(llc_), ll(ll_) {}
 	~AutoLineLayout() {
 		llc.Dispose(ll);
-		ll = 0;
+		ll = nullptr;
 	}
 	LineLayout *operator->() const {
 		return ll;

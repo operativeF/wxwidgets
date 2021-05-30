@@ -48,7 +48,7 @@ public:
     // Another possibility is to always pass a pointer to a new validator
     // (so the calling code can use a copy constructor of the relevant class).
     virtual wxObject *Clone() const
-        { return NULL; }
+        { return nullptr; }
     bool Copy(const wxValidator& val)
         { m_validatorWindow = val.m_validatorWindow; return true; }
 

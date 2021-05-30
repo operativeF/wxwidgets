@@ -222,7 +222,7 @@ public:
     void DoPrepareDC(wxDC& dc) override;
 
     // are we generating the autoscroll events?
-    bool IsAutoScrolling() const { return m_timerAutoScroll != NULL; }
+    bool IsAutoScrolling() const { return m_timerAutoScroll != nullptr; }
 
     // stop generating the scroll events when mouse is held outside the window
     void StopAutoScrolling();
@@ -249,7 +249,7 @@ protected:
     // get pointer to our scroll rect if we use it or NULL
     const wxRect *GetScrollRect() const
     {
-        return m_rectToScroll.width != 0 ? &m_rectToScroll : NULL;
+        return m_rectToScroll.width != 0 ? &m_rectToScroll : nullptr;
     }
 
     // get the size of the target window

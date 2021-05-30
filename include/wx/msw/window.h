@@ -141,7 +141,7 @@ public:
     bool EnableTouchEvents(int eventsMask) override;
 
     virtual void Refresh( bool eraseBackground = true,
-                          const wxRect *rect = (const wxRect *) NULL ) override;
+                          const wxRect *rect = (const wxRect *) nullptr ) override;
     void Update() override;
 
     void SetWindowStyleFlag(long style) override;
@@ -159,7 +159,7 @@ public:
     int GetScrollThumb( int orient ) const override;
     int GetScrollRange( int orient ) const override;
     virtual void ScrollWindow( int dx, int dy,
-                               const wxRect* rect = NULL ) override;
+                               const wxRect* rect = nullptr ) override;
 
     bool ScrollLines(int lines) override;
     bool ScrollPages(int pages) override;
@@ -256,9 +256,9 @@ public:
     // return true if the window is of a standard (i.e. not wxWidgets') class
     //
     // to understand why does it work, look at SubclassWin() code and comments
-    bool IsOfStandardClass() const { return m_oldWndProc != NULL; }
+    bool IsOfStandardClass() const { return m_oldWndProc != nullptr; }
 
-    wxWindow *FindItem(long id, WXHWND hWnd = NULL) const;
+    wxWindow *FindItem(long id, WXHWND hWnd = nullptr) const;
     wxWindow *FindItemByHWND(WXHWND hWnd, bool controlOnly = false) const;
 
     // MSW only: true if this control is part of the main control
@@ -266,7 +266,7 @@ public:
 
 #if wxUSE_TOOLTIPS
     // MSW only: true if this window or any of its children have a tooltip
-    virtual bool HasToolTips() const { return GetToolTip() != NULL; }
+    virtual bool HasToolTips() const { return GetToolTip() != nullptr; }
 #endif // wxUSE_TOOLTIPS
 
     // translate wxWidgets style flags for this control into the Windows style
@@ -274,13 +274,13 @@ public:
     //
     // this is the function that should be overridden in the derived classes,
     // but you will mostly use MSWGetCreateWindowFlags() below
-    virtual WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const ;
+    virtual WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const ;
 
     // get the MSW window flags corresponding to wxWidgets ones
     //
     // the functions returns the flags (WS_XXX) directly and puts the ext
     // (WS_EX_XXX) flags into the provided pointer if not NULL
-    WXDWORD MSWGetCreateWindowFlags(WXDWORD *exflags = NULL) const
+    WXDWORD MSWGetCreateWindowFlags(WXDWORD *exflags = nullptr) const
         { return MSWGetStyle(GetWindowStyle(), exflags); }
 
     // update the real underlying window style flags to correspond to the
@@ -302,7 +302,7 @@ public:
     //
     // returns true if the window has been created, false if creation failed
     bool MSWCreate(const wxChar *wclass,
-                   const wxChar *title = NULL,
+                   const wxChar *title = nullptr,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    WXDWORD style = 0,
@@ -489,7 +489,7 @@ public:
     // The brush returned from here must remain valid at least until the next
     // event loop iteration. Returning 0, as is done by default, indicates
     // there is no custom background brush.
-    virtual WXHBRUSH MSWGetCustomBgBrush() { return NULL; }
+    virtual WXHBRUSH MSWGetCustomBgBrush() { return nullptr; }
 
     // this function should return the brush to paint the children controls
     // background or 0 if this window doesn't impose any particular background
@@ -673,9 +673,9 @@ protected:
     // implement the base class pure virtuals
     virtual void DoGetTextExtent(const wxString& string,
                                  int *x, int *y,
-                                 int *descent = NULL,
-                                 int *externalLeading = NULL,
-                                 const wxFont *font = NULL) const override;
+                                 int *descent = nullptr,
+                                 int *externalLeading = nullptr,
+                                 const wxFont *font = nullptr) const override;
     static void MSWDoClientToScreen( WXHWND hWnd, int *x, int *y );
     static void MSWDoScreenToClient( WXHWND hWnd, int *x, int *y );
     void DoClientToScreen( int *x, int *y ) const override;
@@ -774,7 +774,7 @@ protected:
     // This is used by FindItem() and is overridden in wxControl, see there.
     virtual wxWindow* MSWFindItem(long WXUNUSED(id), WXHWND WXUNUSED(hWnd)) const
     {
-        return NULL;
+        return nullptr;
     }
 
 private:

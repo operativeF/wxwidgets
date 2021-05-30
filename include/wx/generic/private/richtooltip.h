@@ -41,7 +41,7 @@ public:
     void SetTipKind(wxTipKind tipKind) override;
     void SetTitleFont(const wxFont& font) override;
 
-    void ShowFor(wxWindow* win, const wxRect* rect = NULL) override;
+    void ShowFor(wxWindow* win, const wxRect* rect = nullptr) override;
 
 protected:
     wxString m_title,

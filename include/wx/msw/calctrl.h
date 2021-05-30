@@ -45,8 +45,8 @@ public:
     void SetHoliday(size_t day) override;
 
     virtual wxCalendarHitTestResult HitTest(const wxPoint& pos,
-                                            wxDateTime *date = NULL,
-                                            wxDateTime::WeekDay *wd = NULL) override;
+                                            wxDateTime *date = nullptr,
+                                            wxDateTime::WeekDay *wd = nullptr) override;
 
     void SetWindowStyleFlag(long style) override;
 

@@ -105,7 +105,7 @@ public:
   void SetTabSize(const wxSize& sz) override;
 
     // hit test
-  int HitTest(const wxPoint& pt, long *flags = NULL) const override;
+  int HitTest(const wxPoint& pt, long *flags = nullptr) const override;
 
     // calculate the size of the notebook from the size of its page
   wxSize CalcSizeFromPage(const wxSize& sizePage) const override;
@@ -151,7 +151,7 @@ public:
 #endif // wxUSE_UXTHEME
 
   // translate wxWin styles to the Windows ones
-  WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
+  WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
 
 protected:
   // common part of all ctors

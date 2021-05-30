@@ -30,7 +30,7 @@ public:
 #endif // wxUSE_THREADS
     bool CanUseStderr() override { return true; }
     bool WriteToStderr(const wxString& text) override;
-    WXHWND GetMainHWND() const override { return NULL; }
+    WXHWND GetMainHWND() const override { return nullptr; }
 };
 
 #if wxUSE_GUI
@@ -50,9 +50,9 @@ public:
     bool DoMessageFromThreadWait() override;
     WXDWORD WaitForThread(WXHANDLE hThread, int flags) override;
 #endif // wxUSE_THREADS
-    wxPortId GetToolkitVersion(int *majVer = NULL,
-                               int *minVer = NULL,
-                               int *microVer = NULL) const override;
+    wxPortId GetToolkitVersion(int *majVer = nullptr,
+                               int *minVer = nullptr,
+                               int *microVer = nullptr) const override;
 
     bool CanUseStderr() override;
     bool WriteToStderr(const wxString& text) override;

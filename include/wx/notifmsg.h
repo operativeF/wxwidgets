@@ -36,7 +36,7 @@ public:
     // latter may be empty in which case only the title will be shown)
     wxNotificationMessageBase(const wxString& title,
                               const wxString& message = wxEmptyString,
-                              wxWindow *parent = NULL,
+                              wxWindow *parent = nullptr,
                               int flags = wxICON_INFORMATION)
     {
         Init();
@@ -96,7 +96,7 @@ protected:
     // Common part of all ctors.
     void Create(const wxString& title = wxEmptyString,
         const wxString& message = wxEmptyString,
-        wxWindow *parent = NULL,
+        wxWindow *parent = nullptr,
         int flags = wxICON_INFORMATION)
     {
         SetTitle(title);
@@ -111,7 +111,7 @@ private:
 
     void Init()
     {
-        m_impl = NULL;
+        m_impl = nullptr;
     }
 
     wxNotificationMessageBase(const wxNotificationMessageBase&) = delete;
@@ -153,7 +153,7 @@ public:
     wxNotificationMessage() { Init(); }
     wxNotificationMessage(const wxString& title,
                           const wxString& message = wxString(),
-                          wxWindow *parent = NULL,
+                          wxWindow *parent = nullptr,
                           int flags = wxICON_INFORMATION)
     {
         Init();

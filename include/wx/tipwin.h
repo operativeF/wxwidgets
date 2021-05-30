@@ -36,8 +36,8 @@ public:
     wxTipWindow(wxWindow *parent,
                 const wxString& text,
                 wxCoord maxLength = 100,
-                wxTipWindow** windowPtr = NULL,
-                wxRect *rectBound = NULL);
+                wxTipWindow** windowPtr = nullptr,
+                wxRect *rectBound = nullptr);
 
     virtual ~wxTipWindow();
 

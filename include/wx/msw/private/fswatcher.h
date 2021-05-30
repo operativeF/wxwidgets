@@ -82,11 +82,11 @@ private:
                                    FILE_SHARE_READ |
                                    FILE_SHARE_WRITE |
                                    FILE_SHARE_DELETE,
-                                   NULL,
+                                   nullptr,
                                    OPEN_EXISTING,
                                    FILE_FLAG_BACKUP_SEMANTICS |
                                    FILE_FLAG_OVERLAPPED,
-                                   NULL);
+                                   nullptr);
         if (handle == INVALID_HANDLE_VALUE)
         {
             wxLogSysError(_("Failed to open directory \"%s\" for monitoring."),
@@ -138,7 +138,7 @@ public:
         // associate with IOCP
         HANDLE ret = CreateIoCompletionPort(watch->GetHandle(), m_iocp,
                                             (ULONG_PTR)watch.get(), 0);
-        if (ret == NULL)
+        if (ret == nullptr)
         {
             wxLogSysError(_("Unable to associate handle with "
                             "I/O completion port"));
@@ -208,7 +208,7 @@ public:
         wxCHECK_MSG( m_iocp != INVALID_HANDLE_VALUE, false, "IOCP not init" );
 
         // The special values of 0 will make GetStatus() return Status_Exit.
-        const int ret = PostQueuedCompletionStatus(m_iocp, 0, 0, NULL);
+        const int ret = PostQueuedCompletionStatus(m_iocp, 0, 0, nullptr);
         if (!ret)
         {
             wxLogSysError(_("Unable to post completion status"));
@@ -268,12 +268,12 @@ public:
 protected:
     bool Init()
     {
-        m_iocp = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, 0);
-        if (m_iocp == NULL)
+        m_iocp = CreateIoCompletionPort(INVALID_HANDLE_VALUE, nullptr, 0, 0);
+        if (m_iocp == nullptr)
         {
             wxLogSysError(_("Unable to create I/O completion port"));
         }
-        return m_iocp != NULL;
+        return m_iocp != nullptr;
     }
 
     HANDLE m_iocp;

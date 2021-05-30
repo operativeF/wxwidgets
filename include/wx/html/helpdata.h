@@ -80,11 +80,11 @@ struct WXDLLIMPEXP_HTML wxHtmlHelpDataItem
     wxHtmlHelpDataItem()  {}
 
     int level{0};
-    wxHtmlHelpDataItem *parent{NULL};
+    wxHtmlHelpDataItem *parent{nullptr};
     int id{wxID_ANY};
     wxString name;
     wxString page;
-    wxHtmlBookRecord *book{NULL};
+    wxHtmlBookRecord *book{nullptr};
 
     // returns full filename of m_Page, i.e. with book's basePath prepended
     wxString GetFullPath() const { return book->GetFullPath(page); }

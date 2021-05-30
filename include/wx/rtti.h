@@ -62,14 +62,14 @@ public:
     ~wxClassInfo();
 
     wxObject *CreateObject() const
-        { return m_objectConstructor ? (*m_objectConstructor)() : NULL; }
-    bool IsDynamic() const { return (NULL != m_objectConstructor); }
+        { return m_objectConstructor ? (*m_objectConstructor)() : nullptr; }
+    bool IsDynamic() const { return (nullptr != m_objectConstructor); }
 
     const wxChar       *GetClassName() const { return m_className; }
     const wxChar       *GetBaseClassName1() const
-        { return m_baseInfo1 ? m_baseInfo1->GetClassName() : NULL; }
+        { return m_baseInfo1 ? m_baseInfo1->GetClassName() : nullptr; }
     const wxChar       *GetBaseClassName2() const
-        { return m_baseInfo2 ? m_baseInfo2->GetClassName() : NULL; }
+        { return m_baseInfo2 ? m_baseInfo2->GetClassName() : nullptr; }
     const wxClassInfo  *GetBaseClass1() const { return m_baseInfo1; }
     const wxClassInfo  *GetBaseClass2() const { return m_baseInfo2; }
     int                 GetSize() const { return m_objectSize; }

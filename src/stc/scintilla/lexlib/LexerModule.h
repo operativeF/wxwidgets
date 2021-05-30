@@ -36,13 +36,13 @@ public:
 	const char *languageName;
 	LexerModule(int language_,
 		LexerFunction fnLexer_,
-		const char *languageName_=0,
-		LexerFunction fnFolder_=0,
-		const char * const wordListDescriptions_[] = NULL);
+		const char *languageName_=nullptr,
+		LexerFunction fnFolder_=nullptr,
+		const char * const wordListDescriptions_[] = nullptr);
 	LexerModule(int language_,
 		LexerFactoryFunction fnFactory_,
 		const char *languageName_,
-		const char * const wordListDescriptions_[] = NULL);
+		const char * const wordListDescriptions_[] = nullptr);
 	virtual ~LexerModule() {
 	}
 	int GetLanguage() const { return language; }

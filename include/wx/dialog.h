@@ -158,7 +158,7 @@ public:
 
     // Returns a content window if there is one. This can be used by the layout adapter, for
     // example to make the pages of a book control into scrolling windows
-    virtual wxWindow* GetContentWindow() const { return NULL; }
+    virtual wxWindow* GetContentWindow() const { return nullptr; }
 
     // Add an id to the list of main button identifiers that should be in the button sizer
     void AddMainButtonId(wxWindowID id) { m_mainButtonIds.Add((int) id); }
@@ -331,8 +331,8 @@ public:
 #endif // wxUSE_BUTTON
 
     // Reparent the controls to the scrolled window, except those in buttonSizer
-    virtual void ReparentControls(wxWindow* parent, wxWindow* reparentTo, wxSizer* buttonSizer = NULL);
-    static void DoReparentControls(wxWindow* parent, wxWindow* reparentTo, wxSizer* buttonSizer = NULL);
+    virtual void ReparentControls(wxWindow* parent, wxWindow* reparentTo, wxSizer* buttonSizer = nullptr);
+    static void DoReparentControls(wxWindow* parent, wxWindow* reparentTo, wxSizer* buttonSizer = nullptr);
 
     // A function to fit the dialog around its contents, and then adjust for screen size.
     // If scrolled windows are passed, scrolling is enabled in the required orientation(s).

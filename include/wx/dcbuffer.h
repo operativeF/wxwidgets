@@ -54,7 +54,7 @@ public:
     wxBufferedDC(wxDC *dc,
                  wxBitmap& buffer = wxNullBitmap,
                  int style = wxBUFFER_CLIENT_AREA)
-        : m_dc(NULL), m_buffer(NULL)
+        : m_dc(nullptr), m_buffer(nullptr)
     {
         Init(dc, buffer, style);
     }
@@ -63,7 +63,7 @@ public:
     // (where area is usually something like the size of the window
     // being buffered)
     wxBufferedDC(wxDC *dc, const wxSize& area, int style = wxBUFFER_CLIENT_AREA)
-        : m_dc(NULL), m_buffer(NULL)
+        : m_dc(nullptr), m_buffer(nullptr)
     {
         Init(dc, area, style);
     }
@@ -124,10 +124,10 @@ private:
     //
     // NB: Without the existence of a wxNullDC, this must be a pointer, else it
     //     could probably be a reference.
-    wxDC *m_dc{NULL};
+    wxDC *m_dc{nullptr};
 
     // the buffer (selected in this DC), initially invalid
-    wxBitmap *m_buffer{NULL};
+    wxBitmap *m_buffer{nullptr};
 
     // the buffering style
     int m_style{0};

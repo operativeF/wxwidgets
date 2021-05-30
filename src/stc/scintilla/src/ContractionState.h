@@ -31,7 +31,7 @@ class ContractionState {
 	bool OneToOne() const {
 		// True when each document line is exactly one display line so need for
 		// complex data structures.
-		return visible == 0;
+		return visible == nullptr;
 	}
 
 public:

@@ -77,7 +77,7 @@ public:
     size_t GetItemCount() const { return GetRowCount(); }
 
     // does this control use multiple selection?
-    bool HasMultipleSelection() const { return m_selStore != NULL; }
+    bool HasMultipleSelection() const { return m_selStore != nullptr; }
 
     // get the currently selected item or wxNOT_FOUND if there is no selection
     //

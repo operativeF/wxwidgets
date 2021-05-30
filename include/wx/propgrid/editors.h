@@ -27,7 +27,7 @@ class WXDLLIMPEXP_FWD_PROPGRID wxPropertyGrid;
 class wxPGWindowList
 {
 public:
-    wxPGWindowList(wxWindow* primary, wxWindow* secondary = NULL)
+    wxPGWindowList(wxWindow* primary, wxWindow* secondary = nullptr)
         : m_primary(primary)
         , m_secondary(secondary)
     {
@@ -68,7 +68,7 @@ public:
     wxPGEditor()
         : wxObject()
     {
-        m_clientData = NULL;
+        m_clientData = nullptr;
     }
 
     // Destructor.
@@ -419,7 +419,7 @@ public:
     wxPGEditorDialogAdapter()
         : wxObject()
     {
-        m_clientData = NULL;
+        m_clientData = nullptr;
     }
 
     virtual ~wxPGEditorDialogAdapter() { }

@@ -44,7 +44,7 @@ union wxAnyValueBuffer
 
     wxAnyValueBuffer()
     {
-        m_ptr = NULL;
+        m_ptr = nullptr;
     }
 };
 
@@ -966,7 +966,7 @@ public:
                  const char* and const wchar_t*) has been assigned to wxAny.
     */
     template <typename T>
-    T As(T* = NULL) const
+    T As(T* = nullptr) const
     {
         return wxPrivate::wxAnyAsImpl<T>::DoAs(*this);
     }

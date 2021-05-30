@@ -74,11 +74,11 @@ class wxAutoOleInterface
 public:
     typedef I Interface;
 
-    explicit wxAutoOleInterface(I *pInterface = NULL) : m_interface(pInterface)
+    explicit wxAutoOleInterface(I *pInterface = nullptr) : m_interface(pInterface)
         {}
-    wxAutoOleInterface(REFIID riid, IUnknown *pUnk) : m_interface(NULL)
+    wxAutoOleInterface(REFIID riid, IUnknown *pUnk) : m_interface(nullptr)
         { QueryInterface(riid, pUnk); }
-    wxAutoOleInterface(REFIID riid, IDispatch *pDispatch) : m_interface(NULL)
+    wxAutoOleInterface(REFIID riid, IDispatch *pDispatch) : m_interface(nullptr)
         { QueryInterface(riid, pDispatch); }
     wxAutoOleInterface(REFCLSID clsid, REFIID riid) : m_interface(NULL)
         { CreateInstance(clsid, riid); }
@@ -107,13 +107,13 @@ public:
     {
         if ( m_interface )
             m_interface->Release();
-        m_interface = NULL;
+        m_interface = nullptr;
     }
 
     HRESULT QueryInterface(REFIID riid, IUnknown *pUnk)
     {
         Free();
-        wxASSERT(pUnk != NULL);
+        wxASSERT(pUnk != nullptr);
         return pUnk->QueryInterface(riid, (void **)&m_interface);
     }
 
@@ -134,7 +134,7 @@ public:
     I* operator->() {return m_interface; }
     I** GetRef() {return &m_interface; }
     bool Ok() const { return IsOk(); }
-    bool IsOk() const { return m_interface != NULL; }
+    bool IsOk() const { return m_interface != nullptr; }
 
 protected:
     I *m_interface;

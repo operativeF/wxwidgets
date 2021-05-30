@@ -92,7 +92,7 @@ class WXDLLIMPEXP_CORE wxPopupTransientWindowBase : public wxPopupWindow
 public:
     // popup the window (this will show it too) and keep focus at winFocus
     // (or itself if it's NULL), dismiss the popup if we lose focus
-    virtual void Popup(wxWindow *focus = NULL) = 0;
+    virtual void Popup(wxWindow *focus = nullptr) = 0;
 
     // hide the window
     virtual void Dismiss() = 0;
@@ -136,7 +136,7 @@ public:
         { Create(parent, style); }
 
     // Implement base class pure virtuals.
-    void Popup(wxWindow *focus = NULL) override;
+    void Popup(wxWindow *focus = nullptr) override;
     void Dismiss() override;
 
     // Override to handle WM_NCACTIVATE.

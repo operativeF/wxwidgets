@@ -23,8 +23,8 @@ class wxSharedPtr
 public:
     typedef T element_type;
 
-    explicit wxSharedPtr( T* ptr = NULL )
-        : m_ref(NULL)
+    explicit wxSharedPtr( T* ptr = nullptr )
+        : m_ref(nullptr)
     {
         if (ptr)
             m_ref = new reftype(ptr);
@@ -75,21 +75,21 @@ public:
 
     T& operator*() const
     {
-        wxASSERT(m_ref != NULL);
-        wxASSERT(m_ref->m_ptr != NULL);
+        wxASSERT(m_ref != nullptr);
+        wxASSERT(m_ref->m_ptr != nullptr);
         return *(m_ref->m_ptr);
     }
 
     T* operator->() const
     {
-        wxASSERT(m_ref != NULL);
-        wxASSERT(m_ref->m_ptr != NULL);
+        wxASSERT(m_ref != nullptr);
+        wxASSERT(m_ref->m_ptr != nullptr);
         return m_ref->m_ptr;
     }
 
     T* get() const
     {
-        return m_ref ? m_ref->m_ptr : NULL;
+        return m_ref ? m_ref->m_ptr : nullptr;
     }
 
     void reset( T* ptr = NULL )
@@ -149,7 +149,7 @@ private:
                 m_ref->delete_ptr();
                 delete m_ref;
             }
-            m_ref = NULL;
+            m_ref = nullptr;
         }
     }
 };

@@ -117,7 +117,7 @@ private:
 
     int AppendItems(const wxArrayStringsAdapter& items)
     {
-        return AppendItems(items, NULL, wxClientDataType::None);
+        return AppendItems(items, nullptr, wxClientDataType::None);
     }
 
     int AppendItems(const wxArrayStringsAdapter& items, void **clientData)
@@ -160,7 +160,7 @@ private:
 
     int InsertItems(const wxArrayStringsAdapter& items, unsigned int pos)
     {
-        return InsertItems(items, pos, NULL, wxClientDataType::None);
+        return InsertItems(items, pos, nullptr, wxClientDataType::None);
     }
 
     int InsertItems(const wxArrayStringsAdapter& items,

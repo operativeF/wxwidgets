@@ -60,7 +60,7 @@ public:
     bool CanApplyThemeBorder() const override { return false; }
 
     // implementation only from now on
-    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
+    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
 
 protected:
     wxSize DoGetBestClientSize() const override;

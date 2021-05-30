@@ -241,14 +241,14 @@ public:
     // If the functor holds an wxEvtHandler, then get access to it and track
     // its lifetime with wxEventConnectionRef:
     virtual wxEvtHandler *GetEvtHandler() const
-        { return NULL; }
+        { return nullptr; }
 
     // This is only used to maintain backward compatibility in
     // wxAppConsoleBase::CallEventHandler and ensures that an overwritten
     // wxAppConsoleBase::HandleEvent is still called for functors which hold an
     // wxEventFunction:
     virtual wxEventFunction GetEvtMethod() const
-        { return NULL; }
+        { return nullptr; }
 
 private:
     WX_DECLARE_ABSTRACT_TYPEINFO(wxEventFunctor)
@@ -285,8 +285,8 @@ public:
         { return m_method; }
 
 private:
-    wxEvtHandler *m_handler{NULL};
-    wxEventFunction m_method{NULL};
+    wxEvtHandler *m_handler{nullptr};
+    wxEventFunction m_method{nullptr};
 
     // Provide a dummy default ctor for type info purposes
     wxObjectEventFunctor()  { }
@@ -308,7 +308,7 @@ inline wxObjectEventFunctor *
 wxNewEventTableFunctor(const wxEventType& WXUNUSED(evtType),
                        wxObjectEventFunction method)
 {
-    return new wxObjectEventFunctor(method, NULL);
+    return new wxObjectEventFunctor(method, nullptr);
 }
 
 inline wxObjectEventFunctor
@@ -369,11 +369,11 @@ struct HandlerImpl<T, A, false>
     static bool IsEvtHandler()
         { return false; }
     static T *ConvertFromEvtHandler(wxEvtHandler *)
-        { return NULL; }
+        { return nullptr; }
     static wxEvtHandler *ConvertToEvtHandler(T *)
-        { return NULL; }
+        { return nullptr; }
     static wxEventFunction ConvertToEvtMethod(void (T::*)(A&))
-        { return NULL; }
+        { return nullptr; }
 };
 
 } // namespace wxPrivate
@@ -416,7 +416,7 @@ public:
         // if you get an error here it means that the signature of the handler
         // you're trying to use is not compatible with (i.e. is not the same as
         // or a base class of) the real event class used for this event type
-        CheckHandlerArgument(static_cast<EventClass *>(NULL));
+        CheckHandlerArgument(static_cast<EventClass *>(nullptr));
     }
 
     void operator()(wxEvtHandler *handler, wxEvent& event) override
@@ -447,8 +447,8 @@ public:
         // the cast is valid because wxTypeId()s matched above
         const ThisFunctor& other = static_cast<const ThisFunctor &>(functor);
 
-        return (m_method == other.m_method || other.m_method == NULL) &&
-               (m_handler == other.m_handler || other.m_handler == NULL);
+        return (m_method == other.m_method || other.m_method == nullptr) &&
+               (m_handler == other.m_handler || other.m_handler == nullptr);
     }
 
     wxEvtHandler *GetEvtHandler() const override
@@ -643,7 +643,7 @@ inline wxEventFunctorMethod<EventTag, Class, EventArg, Class> *
 wxNewEventTableFunctor(const EventTag&, void (Class::*method)(EventArg&))
 {
     return new wxEventFunctorMethod<EventTag, Class, EventArg, Class>(
-                    method, NULL);
+                    method, nullptr);
 }
 
 
@@ -1085,7 +1085,7 @@ public:
     // never be used anywhere else.
     void DidntHonourProcessOnlyIn()
     {
-        m_handlerToProcessOnlyIn = NULL;
+        m_handlerToProcessOnlyIn = nullptr;
     }
 
 protected:
@@ -1174,7 +1174,7 @@ public:
     // The handler argument should normally be non-NULL to allow the parent
     // event handler to know that it's being used to process an event coming
     // from the child, it's only NULL by default for backwards compatibility.
-    wxPropagateOnce(wxEvent& event, wxEvtHandler* handler = NULL)
+    wxPropagateOnce(wxEvent& event, wxEvtHandler* handler = nullptr)
         : m_event(event),
           m_propagatedFromOld(event.m_propagatedFrom)
     {
@@ -1589,8 +1589,8 @@ public:
     wxCommandEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
         : wxEvent(winid, commandType)
     {
-        m_clientData = NULL;
-        m_clientObject = NULL;
+        m_clientData = nullptr;
+        m_clientObject = nullptr;
         m_isCommandEvent = true;
 
         // the command events are propagated upwards by default
@@ -2445,7 +2445,7 @@ class WXDLLIMPEXP_CORE wxPaintEvent : public wxEvent
 #ifdef WXBUILDING
 public:
 #endif // WXBUILDING
-    explicit wxPaintEvent(wxWindowBase* window = NULL);
+    explicit wxPaintEvent(wxWindowBase* window = nullptr);
 
 public:
     // default copy ctor and dtor are fine
@@ -2467,7 +2467,7 @@ class WXDLLIMPEXP_CORE wxNcPaintEvent : public wxEvent
 #ifdef WXBUILDING
 public:
 #endif // WXBUILDING
-    explicit wxNcPaintEvent(wxWindowBase* window = NULL);
+    explicit wxNcPaintEvent(wxWindowBase* window = nullptr);
 
 public:
     wxEvent *Clone() const override { return new wxNcPaintEvent(*this); }
@@ -2488,7 +2488,7 @@ private:
 class WXDLLIMPEXP_CORE wxEraseEvent : public wxEvent
 {
 public:
-    wxEraseEvent(int Id = 0, wxDC *dc = NULL)
+    wxEraseEvent(int Id = 0, wxDC *dc = nullptr)
         : wxEvent(Id, wxEVT_ERASE_BACKGROUND),
           m_dc(dc)
         { }
@@ -2524,7 +2524,7 @@ class WXDLLIMPEXP_CORE wxFocusEvent : public wxEvent
 public:
     wxFocusEvent(wxEventType type = wxEVT_NULL, int winid = 0)
         : wxEvent(winid, type)
-        { m_win = NULL; }
+        { m_win = nullptr; }
 
     wxFocusEvent(const wxFocusEvent& event)
         : wxEvent(event)
@@ -2554,7 +2554,7 @@ private:
 class WXDLLIMPEXP_CORE wxChildFocusEvent : public wxCommandEvent
 {
 public:
-    wxChildFocusEvent(wxWindow *win = NULL);
+    wxChildFocusEvent(wxWindow *win = nullptr);
 
     wxWindow *GetWindow() const { return (wxWindow *)GetEventObject(); }
 
@@ -2649,7 +2649,7 @@ private:
 class WXDLLIMPEXP_CORE wxMenuEvent : public wxEvent
 {
 public:
-    wxMenuEvent(wxEventType type = wxEVT_NULL, int winid = 0, wxMenu* menu = NULL)
+    wxMenuEvent(wxEventType type = wxEVT_NULL, int winid = 0, wxMenu* menu = nullptr)
         : wxEvent(winid, type)
         { m_menuId = winid; m_menu = menu; }
     wxMenuEvent(const wxMenuEvent& event)
@@ -2964,7 +2964,7 @@ public:
 
     wxDropFilesEvent(wxEventType type = wxEVT_NULL,
                      int noFiles = 0,
-                     wxString *files = NULL)
+                     wxString *files = nullptr)
         : wxEvent(0, type),
           m_noFiles(noFiles),
           m_pos(),
@@ -2976,7 +2976,7 @@ public:
         : wxEvent(other),
           m_noFiles(other.m_noFiles),
           m_pos(other.m_pos),
-          m_files(NULL)
+          m_files(nullptr)
     {
         m_files = new wxString[m_noFiles];
         for ( int n = 0; n < m_noFiles; n++ )
@@ -3148,7 +3148,7 @@ private:
 class WXDLLIMPEXP_CORE wxMouseCaptureChangedEvent : public wxEvent
 {
 public:
-    wxMouseCaptureChangedEvent(wxWindowID winid = 0, wxWindow* gainedCapture = NULL)
+    wxMouseCaptureChangedEvent(wxWindowID winid = 0, wxWindow* gainedCapture = nullptr)
         : wxEvent(winid, wxEVT_MOUSE_CAPTURE_CHANGED),
           m_gainedCapture(gainedCapture)
         { }
@@ -3272,7 +3272,7 @@ public:
     wxEvent *Clone() const override { return new wxPaletteChangedEvent(*this); }
 
 protected:
-    wxWindow*     m_changedWindow{NULL};
+    wxWindow*     m_changedWindow{nullptr};
 
 private:
     public:
@@ -3377,7 +3377,7 @@ public:
     };
 
     long m_flags;
-    wxWindow *m_focus{NULL};
+    wxWindow *m_focus{nullptr};
 
 private:
     public:
@@ -3400,7 +3400,7 @@ private:
 class WXDLLIMPEXP_CORE wxWindowCreateEvent : public wxCommandEvent
 {
 public:
-    wxWindowCreateEvent(wxWindow *win = NULL);
+    wxWindowCreateEvent(wxWindow *win = nullptr);
 
     wxWindow *GetWindow() const { return (wxWindow *)GetEventObject(); }
 
@@ -3417,7 +3417,7 @@ private:
 class WXDLLIMPEXP_CORE wxWindowDestroyEvent : public wxCommandEvent
 {
 public:
-    wxWindowDestroyEvent(wxWindow *win = NULL);
+    wxWindowDestroyEvent(wxWindow *win = nullptr);
 
     wxWindow *GetWindow() const { return (wxWindow *)GetEventObject(); }
 
@@ -3616,7 +3616,7 @@ struct WXDLLIMPEXP_BASE wxEventTableEntryBase
         // being initialized (a temporary instance is created and then this
         // constructor is called).
 
-        const_cast<wxEventTableEntryBase&>( entry ).m_fn = NULL;
+        const_cast<wxEventTableEntryBase&>( entry ).m_fn = nullptr;
     }
 
     ~wxEventTableEntryBase()
@@ -3930,8 +3930,8 @@ public:
                  int lastId,
                  wxEventType eventType,
                  wxObjectEventFunction func,
-                 wxObject *userData = NULL,
-                 wxEvtHandler *eventSink = NULL)
+                 wxObject *userData = nullptr,
+                 wxEvtHandler *eventSink = nullptr)
     {
         DoBind(winid, lastId, eventType,
                   wxNewEventFunctor(eventType, func, eventSink),
@@ -3942,23 +3942,23 @@ public:
     void Connect(int winid,
                  wxEventType eventType,
                  wxObjectEventFunction func,
-                 wxObject *userData = NULL,
-                 wxEvtHandler *eventSink = NULL)
+                 wxObject *userData = nullptr,
+                 wxEvtHandler *eventSink = nullptr)
         { Connect(winid, wxID_ANY, eventType, func, userData, eventSink); }
 
     // Even more convenient: without id (same as using id of wxID_ANY)
     void Connect(wxEventType eventType,
                  wxObjectEventFunction func,
-                 wxObject *userData = NULL,
-                 wxEvtHandler *eventSink = NULL)
+                 wxObject *userData = nullptr,
+                 wxEvtHandler *eventSink = nullptr)
         { Connect(wxID_ANY, wxID_ANY, eventType, func, userData, eventSink); }
 
     bool Disconnect(int winid,
                     int lastId,
                     wxEventType eventType,
-                    wxObjectEventFunction func = NULL,
-                    wxObject *userData = NULL,
-                    wxEvtHandler *eventSink = NULL)
+                    wxObjectEventFunction func = nullptr,
+                    wxObject *userData = nullptr,
+                    wxEvtHandler *eventSink = nullptr)
     {
         return DoUnbind(winid, lastId, eventType,
                             wxMakeEventFunctor(eventType, func, eventSink),
@@ -3967,15 +3967,15 @@ public:
 
     bool Disconnect(int winid = wxID_ANY,
                     wxEventType eventType = wxEVT_NULL,
-                    wxObjectEventFunction func = NULL,
-                    wxObject *userData = NULL,
-                    wxEvtHandler *eventSink = NULL)
+                    wxObjectEventFunction func = nullptr,
+                    wxObject *userData = nullptr,
+                    wxEvtHandler *eventSink = nullptr)
         { return Disconnect(winid, wxID_ANY, eventType, func, userData, eventSink); }
 
     bool Disconnect(wxEventType eventType,
                     wxObjectEventFunction func,
-                    wxObject *userData = NULL,
-                    wxEvtHandler *eventSink = NULL)
+                    wxObject *userData = nullptr,
+                    wxEvtHandler *eventSink = nullptr)
         { return Disconnect(wxID_ANY, eventType, func, userData, eventSink); }
 
     // Bind functions to an event:
@@ -3984,7 +3984,7 @@ public:
               void (*function)(EventArg &),
               int winid = wxID_ANY,
               int lastId = wxID_ANY,
-              wxObject *userData = NULL)
+              wxObject *userData = nullptr)
     {
         DoBind(winid, lastId, eventType,
                   wxNewEventFunctor(eventType, function),
@@ -3997,7 +3997,7 @@ public:
                 void (*function)(EventArg &),
                 int winid = wxID_ANY,
                 int lastId = wxID_ANY,
-                wxObject *userData = NULL)
+                wxObject *userData = nullptr)
     {
         return DoUnbind(winid, lastId, eventType,
                             wxMakeEventFunctor(eventType, function),
@@ -4010,7 +4010,7 @@ public:
               const Functor &functor,
               int winid = wxID_ANY,
               int lastId = wxID_ANY,
-              wxObject *userData = NULL)
+              wxObject *userData = nullptr)
     {
         DoBind(winid, lastId, eventType,
                   wxNewEventFunctor(eventType, functor),
@@ -4023,7 +4023,7 @@ public:
                 const Functor &functor,
                 int winid = wxID_ANY,
                 int lastId = wxID_ANY,
-                wxObject *userData = NULL)
+                wxObject *userData = nullptr)
     {
         return DoUnbind(winid, lastId, eventType,
                             wxMakeEventFunctor(eventType, functor),
@@ -4040,7 +4040,7 @@ public:
               EventHandler *handler,
               int winid = wxID_ANY,
               int lastId = wxID_ANY,
-              wxObject *userData = NULL)
+              wxObject *userData = nullptr)
     {
         DoBind(winid, lastId, eventType,
                   wxNewEventFunctor(eventType, method, handler),
@@ -4053,7 +4053,7 @@ public:
                 EventHandler *handler,
                 int winid = wxID_ANY,
                 int lastId = wxID_ANY,
-                wxObject *userData = NULL )
+                wxObject *userData = nullptr )
     {
         return DoUnbind(winid, lastId, eventType,
                             wxMakeEventFunctor(eventType, method, handler),
@@ -4102,13 +4102,13 @@ private:
                    int lastId,
                    wxEventType eventType,
                    wxEventFunctor *func,
-                   wxObject* userData = NULL);
+                   wxObject* userData = nullptr);
 
     bool DoUnbind(int winid,
                       int lastId,
                       wxEventType eventType,
                       const wxEventFunctor& func,
-                      wxObject *userData = NULL);
+                      wxObject *userData = nullptr);
 
     static const wxEventTableEntry sm_eventTableEntries[];
 
@@ -4267,8 +4267,8 @@ public:
     }
 
 private:
-    wxEvtHandler *m_src{NULL},
-                 *m_sink{NULL};
+    wxEvtHandler *m_src{nullptr},
+                 *m_sink{nullptr};
     int m_refCount{0};
 
     friend class wxEvtHandler;

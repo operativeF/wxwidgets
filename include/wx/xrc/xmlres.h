@@ -171,7 +171,7 @@ public:
     wxMenuBar *LoadMenuBar(wxWindow *parent, const wxString& name);
 
     // Loads menubar from resource. Returns NULL on failure.
-    wxMenuBar *LoadMenuBar(const wxString& name) { return LoadMenuBar(NULL, name); }
+    wxMenuBar *LoadMenuBar(const wxString& name) { return LoadMenuBar(nullptr, name); }
 
 #if wxUSE_TOOLBAR
     // Loads a toolbar.
@@ -248,7 +248,7 @@ public:
     // Attaches an unknown control to the given panel/window/dialog.
     // Unknown controls are used in conjunction with <object class="unknown">.
     bool AttachUnknownControl(const wxString& name, wxWindow *control,
-                              wxWindow *parent = NULL);
+                              wxWindow *parent = nullptr);
 
     // Returns a numeric ID that is equivalent to the string ID used in an XML
     // resource. If an unknown str_id is requested (i.e. other than wxID_XXX
@@ -342,7 +342,7 @@ protected:
     wxXmlNode *GetResourceNodeAndLocation(const wxString& name,
                                           const wxString& classname,
                                           bool recursive = false,
-                                          wxString *path = NULL) const;
+                                          wxString *path = nullptr) const;
 
 
     // Note that these functions are used outside of wxWidgets itself, e.g.
@@ -366,11 +366,11 @@ protected:
     // Creates a resource from information in the given node
     // (Uses only 'handlerToUse' if != NULL)
     wxObject *CreateResFromNode(wxXmlNode *node, wxObject *parent,
-                                wxObject *instance = NULL,
-                                wxXmlResourceHandler *handlerToUse = NULL)
+                                wxObject *instance = nullptr,
+                                wxXmlResourceHandler *handlerToUse = nullptr)
     {
         return node ? DoCreateResFromNode(*node, parent, instance, handlerToUse)
-                    : NULL;
+                    : nullptr;
     }
 
     // Helper of Load() and Unload(): returns the URL corresponding to the
@@ -393,7 +393,7 @@ private:
     wxObject *DoCreateResFromNode(wxXmlNode& node,
                                   wxObject *parent,
                                   wxObject *instance,
-                                  wxXmlResourceHandler *handlerToUse = NULL);
+                                  wxXmlResourceHandler *handlerToUse = nullptr);
 
     // common part of LoadObject() and LoadObjectRecursively()
     wxObject *DoLoadObject(wxWindow *parent,
@@ -558,14 +558,14 @@ public:
 
     // Gets the size (may be in dialog units).
     wxSize GetSize(const wxString& param = wxT("size"),
-                   wxWindow *windowToUse = NULL) override;
+                   wxWindow *windowToUse = nullptr) override;
 
     // Gets the position (may be in dialog units).
     wxPoint GetPosition(const wxString& param = wxT("pos")) override;
 
     // Gets a dimension (may be in dialog units).
     wxCoord GetDimension(const wxString& param, wxCoord defaultv = 0,
-                         wxWindow *windowToUse = NULL) override;
+                         wxWindow *windowToUse = nullptr) override;
 
     // Gets a size which is not expressed in pixels, so not in dialog units.
     wxSize GetPairInts(const wxString& param) override;
@@ -604,11 +604,11 @@ public:
     // Gets an animation creating it using the provided control (so that it
     // will be compatible with it) if any.
     wxAnimation* GetAnimation(const wxString& param = wxT("animation"),
-                              wxAnimationCtrlBase* ctrl = NULL) override;
+                              wxAnimationCtrlBase* ctrl = nullptr) override;
 #endif
 
     // Gets a font.
-    wxFont GetFont(const wxString& param = wxT("font"), wxWindow* parent = NULL) override;
+    wxFont GetFont(const wxString& param = wxT("font"), wxWindow* parent = nullptr) override;
 
     // Gets the value of a boolean attribute (only "0" and "1" are valid values)
     bool GetBoolAttr(const wxString& attr, bool defaultv) override;
@@ -627,11 +627,11 @@ public:
     void CreateChildren(wxObject *parent, bool this_hnd_only = false) override;
 
     // Helper function.
-    void CreateChildrenPrivately(wxObject *parent, wxXmlNode *rootnode = NULL) override;
+    void CreateChildrenPrivately(wxObject *parent, wxXmlNode *rootnode = nullptr) override;
 
     // Creates a resource from a node.
     wxObject *CreateResFromNode(wxXmlNode *node,
-                                wxObject *parent, wxObject *instance = NULL) override;
+                                wxObject *parent, wxObject *instance = nullptr) override;
 
     // helper
 #if wxUSE_FILESYSTEM

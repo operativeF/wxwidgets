@@ -58,7 +58,7 @@ public:
     // e.g. "if ( FuncReturningAnyStrPtr() && ... )" (unfortunately using
     // unspecified_bool_type here wouldn't help with ambiguity between all the
     // different conversions to pointers)
-    operator bool() const { return m_str != NULL; }
+    operator bool() const { return m_str != nullptr; }
 
     // at least VC7 also needs this one or it complains about ambiguity
     // for !anystr expressions
@@ -71,7 +71,7 @@ public:
     operator const char *() const
     {
         if ( !m_str )
-            return NULL;
+            return nullptr;
 
         // check if the string is convertible to char at all
         //
@@ -100,7 +100,7 @@ public:
     operator const wchar_t *() const
     {
         if ( !m_str )
-            return NULL;
+            return nullptr;
 
         // no complications with wide strings (as long as we discount
         // surrogates as we do for now)
@@ -131,7 +131,7 @@ public:
 private:
     // the original string and the position in it we correspond to, if the
     // string is NULL this object is NULL pointer-like
-    const wxString * const m_str{NULL};
+    const wxString * const m_str{nullptr};
     const wxString::const_iterator m_iter;
 
     wxAnyStrPtr& operator=(const wxAnyStrPtr&) = delete;

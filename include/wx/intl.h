@@ -213,7 +213,7 @@ public:
                               wxLocaleCategory cat = wxLOCALE_CAT_DEFAULT);
 
     // return true if the locale was set successfully
-    bool IsOk() const { return m_pszOldLocale != NULL; }
+    bool IsOk() const { return m_pszOldLocale != nullptr; }
 
     // returns locale name
     const wxString& GetLocale() const { return m_strLocale; }

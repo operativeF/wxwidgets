@@ -270,7 +270,7 @@ public:
     // to have default values when attached to a grid.
     bool IsInvalid() const
     {
-        return ( m_refData == NULL );
+        return ( m_refData == nullptr );
     }
 
 private:
@@ -731,7 +731,7 @@ public:
     // count - Number of labels.
     // labels - Labels themselves.
     // values - Values for choices. If NULL, indexes are used.
-    wxPGChoices(size_t count, const wxString* labels, const long* values = NULL)
+    wxPGChoices(size_t count, const wxString* labels, const long* values = nullptr)
     {
         Init();
         Add(count, labels, values);
@@ -741,7 +741,7 @@ public:
     // compatibility.
     // labels - Labels for choices, NULL-terminated.
     // values - Values for choices. If NULL, indexes are used.
-    wxPGChoices( const wxChar* const* labels, const long* values = NULL )
+    wxPGChoices( const wxChar* const* labels, const long* values = nullptr )
     {
         Init();
         Add(labels,values);
@@ -774,12 +774,12 @@ public:
     // Adds to current.
     // If did not have own copies, creates them now. If was empty, identical
     // to set except that creates copies.
-    void Add(size_t count, const wxString* labels, const long* values = NULL);
+    void Add(size_t count, const wxString* labels, const long* values = nullptr);
 
     // Overload taking wxChar strings, provided mostly for compatibility.
     // labels - Labels for added choices, NULL-terminated.
     // values - Values for added choices. If empty, relevant entry indexes are used.
-    void Add( const wxChar* const* labels, const ValArrItem* values = NULL );
+    void Add( const wxChar* const* labels, const ValArrItem* values = nullptr );
 
     // Version that works with wxArrayString and wxArrayInt.
     void Add( const wxArrayString& arr, const wxArrayInt& arrint = wxArrayInt() );
@@ -861,7 +861,7 @@ public:
     // Returns array of indices matching given strings. Unmatching strings
     // are added to 'unmatched', if not NULL.
     wxArrayInt GetIndicesForStrings( const wxArrayString& strings,
-                                     wxArrayString* unmatched = NULL ) const;
+                                     wxArrayString* unmatched = nullptr ) const;
 
     // Returns index of item with given label.
     int Index( const wxString& str ) const;
@@ -902,13 +902,13 @@ public:
     // Sets contents from lists of strings and values.
     // Does not create copies for itself.
     // TODO: Deprecate.
-    void Set(size_t count, const wxString* labels, const long* values = NULL)
+    void Set(size_t count, const wxString* labels, const long* values = nullptr)
     {
         Free();
         Add(count, labels, values);
     }
 
-    void Set( const wxChar* const* labels, const long* values = NULL )
+    void Set( const wxChar* const* labels, const long* values = nullptr )
     {
         Free();
         Add(labels,values);
@@ -1428,7 +1428,7 @@ public:
         if ( column == 1 )
             return GetEditorClass();
 
-        return NULL;
+        return nullptr;
     }
 
     // Returns common value selected for this property. -1 for none.
@@ -1453,7 +1453,7 @@ public:
     bool IsCategory() const { return (m_flags & wxPG_PROP_CATEGORY) != 0; }
 
     // Returns true if this property is actually a wxRootProperty.
-    bool IsRoot() const { return (m_parent == NULL); }
+    bool IsRoot() const { return (m_parent == nullptr); }
 
     // Returns true if this is a sub-property.
     bool IsSubProperty() const
@@ -1482,7 +1482,7 @@ public:
     // Determines, recursively, if all children are not unspecified.
     // pendingList - Assumes members in this wxVariant list as pending
     //   replacement values.
-    bool AreAllChildrenSpecified( wxVariant* pendingList = NULL ) const;
+    bool AreAllChildrenSpecified( wxVariant* pendingList = nullptr ) const;
 
     // Updates composed values of parent non-category properties, recursively.
     // Returns topmost property updated.
@@ -1649,7 +1649,7 @@ public:
     //   indicate which children should be marked as modified.
     // flags - Various flags (for instance, wxPG_SETVAL_REFRESH_EDITOR, which
     //   is enabled by default).
-    void SetValue( wxVariant value, wxVariant* pList = NULL,
+    void SetValue( wxVariant value, wxVariant* pList = nullptr,
                    int flags = wxPG_SETVAL_REFRESH_EDITOR );
 
     // Set wxBitmap in front of the value. This bitmap may be ignored
@@ -1714,7 +1714,7 @@ public:
     void SetValueToUnspecified()
     {
         wxVariant val;  // Create NULL variant
-        SetValue(val, NULL, wxPG_SETVAL_REFRESH_EDITOR);
+        SetValue(val, nullptr, wxPG_SETVAL_REFRESH_EDITOR);
     }
 
     // Helper function (for wxPython bindings and such) for settings protected
@@ -1920,8 +1920,8 @@ protected:
 
     void DoGenerateComposedValue( wxString& text,
                                   int argFlags = wxPG_VALUE_IS_CURRENT,
-                                  const wxVariantList* valueOverrides = NULL,
-                                  wxPGHashMapS2S* childResults = NULL ) const;
+                                  const wxVariantList* valueOverrides = nullptr,
+                                  wxPGHashMapS2S* childResults = nullptr ) const;
 
     bool DoHide( bool hide, int flags );
 

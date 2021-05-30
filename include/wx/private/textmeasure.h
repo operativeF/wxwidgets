@@ -36,14 +36,14 @@ public:
     void GetTextExtent(const wxString& string,
                        wxCoord *width,
                        wxCoord *height,
-                       wxCoord *descent = NULL,
-                       wxCoord *externalLeading = NULL);
+                       wxCoord *descent = nullptr,
+                       wxCoord *externalLeading = nullptr);
 
     // The same for a multiline (with '\n') string.
     void GetMultiLineTextExtent(const wxString& text,
                                 wxCoord *width,
                                 wxCoord *height,
-                                wxCoord *heightOneLine = NULL);
+                                wxCoord *heightOneLine = nullptr);
 
     // Find the dimensions of the largest string.
     wxSize GetLargestStringExtent(size_t n, const wxString* strings);
@@ -107,8 +107,8 @@ protected:
     virtual void DoGetTextExtent(const wxString& string,
                                  wxCoord *width,
                                  wxCoord *height,
-                                 wxCoord *descent = NULL,
-                                 wxCoord *externalLeading = NULL) = 0;
+                                 wxCoord *descent = nullptr,
+                                 wxCoord *externalLeading = nullptr) = 0;
 
     // The real implementation of GetPartialTextExtents().
     //
@@ -125,8 +125,8 @@ protected:
     void CallGetTextExtent(const wxString& string,
                            wxCoord *width,
                            wxCoord *height,
-                           wxCoord *descent = NULL,
-                           wxCoord *externalLeading = NULL);
+                           wxCoord *descent = nullptr,
+                           wxCoord *externalLeading = nullptr);
 
     // Get line height: used when the line is empty because CallGetTextExtent()
     // would just return (0, 0) in this case.

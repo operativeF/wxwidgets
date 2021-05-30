@@ -252,7 +252,7 @@ protected:
 public:
     typedef T CharType;
 
-    wxCharTypeBuffer(const CharType *str = NULL, size_t len = wxNO_LEN)
+    wxCharTypeBuffer(const CharType *str = nullptr, size_t len = wxNO_LEN)
     {
         if ( str )
         {
@@ -365,7 +365,7 @@ public:
     wxCharBuffer(const wxScopedCharTypeBufferBase& buf)
         : wxCharTypeBufferBase(buf) {}
 
-    wxCharBuffer(const CharType *str = NULL) : wxCharTypeBufferBase(str) {}
+    wxCharBuffer(const CharType *str = nullptr) : wxCharTypeBufferBase(str) {}
     wxCharBuffer(size_t len) : wxCharTypeBufferBase(len) {}
 
     wxCharBuffer(const wxCStrData& cstr);
@@ -382,7 +382,7 @@ public:
     wxWCharBuffer(const wxScopedCharTypeBufferBase& buf)
         : wxCharTypeBufferBase(buf) {}
 
-    wxWCharBuffer(const CharType *str = NULL) : wxCharTypeBufferBase(str) {}
+    wxWCharBuffer(const CharType *str = nullptr) : wxCharTypeBufferBase(str) {}
     wxWCharBuffer(size_t len) : wxCharTypeBufferBase(len) {}
 
     wxWCharBuffer(const wxCStrData& cstr);
@@ -439,7 +439,7 @@ public:
     // everything is private as it can only be used by wxMemoryBuffer
 private:
     wxMemoryBufferData(size_t size = wxMemoryBufferData::DefBufSize)
-        : m_data(size ? malloc(size) : NULL), m_size(size) 
+        : m_data(size ? malloc(size) : nullptr), m_size(size) 
     {
     }
     ~wxMemoryBufferData() { free(m_data); }
@@ -474,13 +474,13 @@ private:
 
     void *release()
     {
-        if ( m_data == NULL )
-            return NULL;
+        if ( m_data == nullptr )
+            return nullptr;
 
         wxASSERT_MSG( m_ref == 1, "can't release shared buffer" );
 
         void *p = m_data;
-        m_data = NULL;
+        m_data = nullptr;
         m_len =
         m_size = 0;
 

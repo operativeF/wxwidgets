@@ -140,7 +140,7 @@ inline void wxSetDefaultAssertHandler() { }
 #endif // wxDEBUG_LEVEL/!wxDEBUG_LEVEL
 
 // simply a synonym for wxSetAssertHandler(NULL)
-inline void wxDisableAsserts() { wxSetAssertHandler(NULL); }
+inline void wxDisableAsserts() { wxSetAssertHandler(nullptr); }
 
 /*
     A macro which disables asserts for applications compiled in release build.
@@ -197,7 +197,7 @@ extern WXDLLIMPEXP_BASE void wxOnAssert(const wxChar *file,
                                         int line,
                                         const char *func,
                                         const wxChar *cond,
-                                        const wxChar *msg = NULL);
+                                        const wxChar *msg = nullptr);
 
 // these overloads work when msg passed to debug macro is a string and we
 // also have to provide wxCStrData overload to resolve ambiguity which would

@@ -94,7 +94,7 @@ protected:
         m_majorDim = 0;
 
 #if wxUSE_TOOLTIPS
-        m_itemsTooltips = NULL;
+        m_itemsTooltips = nullptr;
 #endif // wxUSE_TOOLTIPS
     }
 
@@ -119,7 +119,7 @@ protected:
     virtual void DoSetItemToolTip(unsigned int item, wxToolTip *tooltip);
 
     // returns true if we have any item tooltips
-    bool HasItemToolTips() const { return m_itemsTooltips != NULL; }
+    bool HasItemToolTips() const { return m_itemsTooltips != nullptr; }
 #endif // wxUSE_TOOLTIPS
 
 #if wxUSE_HELP

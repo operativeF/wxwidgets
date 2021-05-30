@@ -195,7 +195,7 @@ class wxObjectDataPtr
 public:
     typedef T element_type;
 
-    explicit wxObjectDataPtr(T *ptr = NULL) : m_ptr(ptr) {}
+    explicit wxObjectDataPtr(T *ptr = nullptr) : m_ptr(ptr) {}
 
     // copy ctor
     wxObjectDataPtr(const wxObjectDataPtr<T> &tocopy)
@@ -227,18 +227,18 @@ public:
     typedef T *(wxObjectDataPtr<T>::*unspecified_bool_type)() const;
     operator unspecified_bool_type() const
     {
-        return m_ptr ? &wxObjectDataPtr<T>::get : NULL;
+        return m_ptr ? &wxObjectDataPtr<T>::get : nullptr;
     }
 
     T& operator*() const
     {
-        wxASSERT(m_ptr != NULL);
+        wxASSERT(m_ptr != nullptr);
         return *(m_ptr);
     }
 
     T *operator->() const
     {
-        wxASSERT(m_ptr != NULL);
+        wxASSERT(m_ptr != nullptr);
         return get();
     }
 
@@ -296,7 +296,7 @@ private:
 class WXDLLIMPEXP_BASE wxObject
 {
 public:
-    wxObject() { m_refData = NULL; }
+    wxObject() { m_refData = nullptr; }
     virtual ~wxObject() { UnRef(); }
 
     wxObject(const wxObject& other)
@@ -388,7 +388,7 @@ protected:
 
 inline wxObject *wxCheckDynamicCast(wxObject *obj, wxClassInfo *classInfo)
 {
-    return obj && obj->GetClassInfo()->IsKindOf(classInfo) ? obj : NULL;
+    return obj && obj->GetClassInfo()->IsKindOf(classInfo) ? obj : nullptr;
 }
 
 #include "wx/xti2.h"

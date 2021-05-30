@@ -42,12 +42,12 @@ class WXDLLIMPEXP_CORE wxMenuItemBase : public wxObject
 {
 public:
     // creation
-    static wxMenuItem *New(wxMenu *parentMenu = NULL,
+    static wxMenuItem *New(wxMenu *parentMenu = nullptr,
                            int itemid = wxID_SEPARATOR,
                            const wxString& text = wxEmptyString,
                            const wxString& help = wxEmptyString,
                            wxItemKind kind = wxITEM_NORMAL,
-                           wxMenu *subMenu = NULL);
+                           wxMenu *subMenu = nullptr);
 
     // destruction: wxMenuItem will delete its submenu
     virtual ~wxMenuItemBase();
@@ -95,7 +95,7 @@ public:
     bool IsCheckable() const
         { return m_kind == wxITEM_CHECK || m_kind == wxITEM_RADIO; }
 
-    bool IsSubMenu() const { return m_subMenu != NULL; }
+    bool IsSubMenu() const { return m_subMenu != nullptr; }
     void SetSubMenu(wxMenu *menu) { m_subMenu = menu; }
     wxMenu *GetSubMenu() const { return m_subMenu; }
 
@@ -129,7 +129,7 @@ public:
                            const wxString& text,
                            const wxString& help,
                            bool isCheckable,
-                           wxMenu *subMenu = NULL)
+                           wxMenu *subMenu = nullptr)
     {
         return New(parentMenu, itemid, text, help,
                    isCheckable ? wxITEM_CHECK : wxITEM_NORMAL, subMenu);
@@ -146,12 +146,12 @@ protected:
     bool          m_isEnabled;      // is enabled?
 
     // this ctor is for the derived classes only, we're never created directly
-    wxMenuItemBase(wxMenu *parentMenu = NULL,
+    wxMenuItemBase(wxMenu *parentMenu = nullptr,
                    int itemid = wxID_SEPARATOR,
                    const wxString& text = wxEmptyString,
                    const wxString& help = wxEmptyString,
                    wxItemKind kind = wxITEM_NORMAL,
-                   wxMenu *subMenu = NULL);
+                   wxMenu *subMenu = nullptr);
 
 private:
     // and, if we have one ctor, compiler won't generate a default copy one, so

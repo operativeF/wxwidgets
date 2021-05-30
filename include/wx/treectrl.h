@@ -250,13 +250,13 @@ public:
         // add the root node to the tree
     virtual wxTreeItemId AddRoot(const wxString& text,
                                  int image = -1, int selImage = -1,
-                                 wxTreeItemData *data = NULL) = 0;
+                                 wxTreeItemData *data = nullptr) = 0;
 
         // insert a new item in as the first child of the parent
     wxTreeItemId PrependItem(const wxTreeItemId& parent,
                              const wxString& text,
                              int image = -1, int selImage = -1,
-                             wxTreeItemData *data = NULL)
+                             wxTreeItemData *data = nullptr)
     {
         return DoInsertItem(parent, 0u, text, image, selImage, data);
     }
@@ -266,7 +266,7 @@ public:
                             const wxTreeItemId& idPrevious,
                             const wxString& text,
                             int image = -1, int selImage = -1,
-                            wxTreeItemData *data = NULL)
+                            wxTreeItemData *data = nullptr)
     {
         return DoInsertAfter(parent, idPrevious, text, image, selImage, data);
     }
@@ -276,7 +276,7 @@ public:
                             size_t pos,
                             const wxString& text,
                             int image = -1, int selImage = -1,
-                            wxTreeItemData *data = NULL)
+                            wxTreeItemData *data = nullptr)
     {
         return DoInsertItem(parent, pos, text, image, selImage, data);
     }
@@ -285,7 +285,7 @@ public:
     wxTreeItemId AppendItem(const wxTreeItemId& parent,
                             const wxString& text,
                             int image = -1, int selImage = -1,
-                            wxTreeItemData *data = NULL)
+                            wxTreeItemData *data = nullptr)
     {
         return DoInsertItem(parent, (size_t)-1, text, image, selImage, data);
     }
@@ -426,7 +426,7 @@ protected:
                                        const wxTreeItemId& idPrevious,
                                        const wxString& text,
                                        int image = -1, int selImage = -1,
-                                       wxTreeItemData *data = NULL) = 0;
+                                       wxTreeItemData *data = nullptr) = 0;
 
     // real HitTest() implementation: again, can't be called just HitTest()
     // because it's overloaded and so the non-virtual overload would be hidden

@@ -66,7 +66,7 @@ class WXDLLIMPEXP_BASE wxMemoryOutputStream : public wxOutputStream
 {
 public:
     // if data is !NULL it must be allocated with malloc()
-    wxMemoryOutputStream(void *data = NULL, size_t length = 0);
+    wxMemoryOutputStream(void *data = nullptr, size_t length = 0);
     virtual ~wxMemoryOutputStream();
     wxFileOffset GetLength() const override { return m_o_streambuf->GetLastAccess(); }
     bool IsSeekable() const override { return true; }

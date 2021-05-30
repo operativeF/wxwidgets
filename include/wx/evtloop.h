@@ -383,7 +383,7 @@ protected:
     void OnExit() override
     {
         delete m_windowDisabler;
-        m_windowDisabler = NULL;
+        m_windowDisabler = nullptr;
 
         wxGUIEventLoop::OnExit();
     }
@@ -427,7 +427,7 @@ class wxEventLoopGuarantor
 public:
     wxEventLoopGuarantor()
     {
-        m_evtLoopNew = NULL;
+        m_evtLoopNew = nullptr;
         if (!wxEventLoop::GetActive())
         {
             m_evtLoopNew = new wxEventLoop;
@@ -439,7 +439,7 @@ public:
     {
         if (m_evtLoopNew)
         {
-            wxEventLoop::SetActive(NULL);
+            wxEventLoop::SetActive(nullptr);
             delete m_evtLoopNew;
         }
     }

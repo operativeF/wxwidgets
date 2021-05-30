@@ -28,7 +28,7 @@ public:
 
     wxWithImages()
     {
-        m_imageList = NULL;
+        m_imageList = nullptr;
         m_ownsImageList = false;
     }
 
@@ -56,7 +56,7 @@ public:
 
 protected:
     // Return true if we have a valid image list.
-    bool HasImageList() const { return m_imageList != NULL; }
+    bool HasImageList() const { return m_imageList != nullptr; }
 
     // Return the image with the given index from the image list.
     //
@@ -76,7 +76,7 @@ private:
         if ( m_ownsImageList )
         {
             delete m_imageList;
-            m_imageList = NULL;
+            m_imageList = nullptr;
 
             // We don't own it any more.
             m_ownsImageList = false;

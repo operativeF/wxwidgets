@@ -44,7 +44,7 @@ public:
     }
 
 private:
-    wxWindow *m_win{NULL};
+    wxWindow *m_win{nullptr};
 
     wxWindowUpdateLocker(const wxWindowUpdateLocker&) = delete;
 	wxWindowUpdateLocker& operator=(const wxWindowUpdateLocker&) = delete;

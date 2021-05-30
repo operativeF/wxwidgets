@@ -666,10 +666,10 @@
     {
         typedef char TypeIsCompleteCheck[sizeof(T)] WX_ATTRIBUTE_UNUSED;
 
-        if ( ptr != NULL )
+        if ( ptr != nullptr )
         {
             delete ptr;
-            ptr = NULL;
+            ptr = nullptr;
         }
     }
 
@@ -679,10 +679,10 @@
     {
         typedef char TypeIsCompleteCheck[sizeof(T)] WX_ATTRIBUTE_UNUSED;
 
-        if ( ptr != NULL )
+        if ( ptr != nullptr )
         {
             delete [] ptr;
-            ptr = NULL;
+            ptr = nullptr;
         }
     }
 

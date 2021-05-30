@@ -354,7 +354,7 @@ typedef void (*CallBackAction)(void*);
  */
 class Window {
 protected:
-	WindowID wid{0};
+	WindowID wid{nullptr};
 public:
 	Window()  {
 	}
@@ -366,7 +366,7 @@ public:
 		return *this;
 	}
 	WindowID GetID() const { return wid; }
-	bool Created() const { return wid != 0; }
+	bool Created() const { return wid != nullptr; }
 	void Destroy();
 	bool HasFocus();
 	PRectangle GetPosition();
@@ -488,7 +488,7 @@ public:
 	static long SendScintilla(
 		WindowID w, unsigned int msg, unsigned long wParam=0, long lParam=0);
 	static long SendScintillaPointer(
-		WindowID w, unsigned int msg, unsigned long wParam=0, void *lParam=0);
+		WindowID w, unsigned int msg, unsigned long wParam=0, void *lParam=nullptr);
 	static bool IsDBCSLeadByte(int codePage, char ch);
 	static int DBCSCharLength(int codePage, const char *s);
 	static int DBCSCharMaxLength();

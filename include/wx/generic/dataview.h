@@ -250,11 +250,11 @@ public:
     void UnselectAll() override;
 
     virtual void EnsureVisible( const wxDataViewItem & item,
-                                const wxDataViewColumn *column = NULL ) override;
+                                const wxDataViewColumn *column = nullptr ) override;
     virtual void HitTest( const wxPoint & point, wxDataViewItem & item,
                           wxDataViewColumn* &column ) const override;
     virtual wxRect GetItemRect( const wxDataViewItem & item,
-                                const wxDataViewColumn *column = NULL ) const override;
+                                const wxDataViewColumn *column = nullptr ) const override;
 
     bool SetRowHeight( int rowHeight ) override;
 

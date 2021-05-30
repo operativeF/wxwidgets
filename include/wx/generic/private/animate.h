@@ -24,7 +24,7 @@ public:
     virtual ~wxAnimationGenericImpl() { UnRef(); }
 
     bool IsOk() const override
-        { return m_decoder != NULL; }
+        { return m_decoder != nullptr; }
     bool IsCompatibleWith(wxClassInfo* ci) const override;
 
     unsigned int GetFrameCount() const override;
@@ -47,7 +47,7 @@ public:
 private:
     void UnRef();
 
-    wxAnimationDecoder* m_decoder{NULL};
+    wxAnimationDecoder* m_decoder{nullptr};
 
     wxAnimationGenericImpl(const wxAnimationGenericImpl&) = delete;
 	wxAnimationGenericImpl& operator=(const wxAnimationGenericImpl&) = delete;

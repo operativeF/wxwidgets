@@ -20,7 +20,7 @@
 class WXDLLIMPEXP_HTML wxBestHelpController: public wxHelpControllerBase
 {
 public:
-    wxBestHelpController(wxWindow* parentWindow = NULL,
+    wxBestHelpController(wxWindow* parentWindow = nullptr,
                          int style = wxHF_DEFAULT_STYLE)
         : wxHelpControllerBase(parentWindow),
           
@@ -92,9 +92,9 @@ public:
     }
 
     // Obtains the latest settings used by the help frame and the help frame.
-    virtual wxFrame *GetFrameParameters(wxSize *size = NULL,
-                                        wxPoint *pos = NULL,
-                                        bool *newFrameEachTime = NULL) override
+    virtual wxFrame *GetFrameParameters(wxSize *size = nullptr,
+                                        wxPoint *pos = nullptr,
+                                        bool *newFrameEachTime = nullptr) override
     {
         return m_helpController->GetFrameParameters( size, pos,
                                                      newFrameEachTime );
@@ -114,7 +114,7 @@ protected:
     enum HelpControllerType { wxUseNone, wxUseHtmlHelp, wxUseChmHelp };
 
     HelpControllerType m_helpControllerType{wxUseNone};
-    wxHelpControllerBase* m_helpController{NULL};
+    wxHelpControllerBase* m_helpController{nullptr};
     int m_style;
 
     wxDECLARE_DYNAMIC_CLASS(wxBestHelpController);

@@ -90,7 +90,7 @@ public:
 
     // Detaches HMENU so that it isn't deleted when this object is destroyed.
     // Don't use this object after calling this method.
-    WXHMENU MSWDetachHMENU() { WXHMENU m = m_hMenu; m_hMenu = NULL; return m; }
+    WXHMENU MSWDetachHMENU() { WXHMENU m = m_hMenu; m_hMenu = nullptr; return m; }
 
     // Process WM_COMMAND.
     virtual bool MSWCommand(WXUINT param, WXWORD id);
@@ -251,7 +251,7 @@ public:
 
     // To avoid compile warning
     void Refresh( bool eraseBackground,
-                          const wxRect *rect = (const wxRect *) NULL ) override { wxWindow::Refresh(eraseBackground, rect); }
+                          const wxRect *rect = (const wxRect *) nullptr ) override { wxWindow::Refresh(eraseBackground, rect); }
 
     // Get a top level menu position or wxNOT_FOUND from its handle.
     int MSWGetTopMenuPos(WXHMENU hMenu) const;

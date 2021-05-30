@@ -38,9 +38,9 @@ public:
 		back = ColourDesired(0xff,0xff,0xff);
 		backSelected = ColourDesired(0xff,0x00,0x00);
 		alpha = SC_ALPHA_NOALPHA;
-		pxpm = NULL;
-		image = NULL;
-		customDraw = NULL;
+		pxpm = nullptr;
+		image = nullptr;
+		customDraw = nullptr;
 	}
 	LineMarker(const LineMarker &) {
 		// Defined to avoid pxpm being blindly copied, not as a complete copy constructor
@@ -49,9 +49,9 @@ public:
 		back = ColourDesired(0xff,0xff,0xff);
 		backSelected = ColourDesired(0xff,0x00,0x00);
 		alpha = SC_ALPHA_NOALPHA;
-		pxpm = NULL;
-		image = NULL;
-		customDraw = NULL;
+		pxpm = nullptr;
+		image = nullptr;
+		customDraw = nullptr;
 	}
 	~LineMarker() {
 		delete pxpm;
@@ -66,10 +66,10 @@ public:
 			backSelected = ColourDesired(0xff,0x00,0x00);
 			alpha = SC_ALPHA_NOALPHA;
 			delete pxpm;
-			pxpm = NULL;
+			pxpm = nullptr;
 			delete image;
-			image = NULL;
-			customDraw = NULL;
+			image = nullptr;
+			customDraw = nullptr;
 		}
 		return *this;
 	}

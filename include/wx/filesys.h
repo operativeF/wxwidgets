@@ -57,7 +57,7 @@ public:
     wxInputStream *DetachStream()
     {
         wxInputStream *stream = m_Stream;
-        m_Stream = NULL;
+        m_Stream = nullptr;
         return stream;
     }
 
@@ -171,7 +171,7 @@ WX_DECLARE_VOIDPTR_HASH_MAP_WITH_DECL(wxFileSystemHandler*, wxFSHandlerHash, cla
 class WXDLLIMPEXP_BASE wxFileSystem : public wxObject
 {
 public:
-    wxFileSystem() : wxObject() { m_FindFileHandler = NULL;}
+    wxFileSystem() : wxObject() { m_FindFileHandler = nullptr;}
     virtual ~wxFileSystem();
 
     // sets the current location. Every call to OpenFile is

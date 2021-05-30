@@ -555,7 +555,7 @@ struct wxPixelDataOut<wxBitmap>
             }
 
             // return true if this iterator is valid
-            bool IsOk() const { return m_ptr != NULL; }
+            bool IsOk() const { return m_ptr != nullptr; }
 
 
             // navigation
@@ -776,12 +776,12 @@ struct wxPixelDataOut<wxBitmap>
                 // default constructor
                 Iterator()
                 {
-                    m_ptr = NULL;
+                    m_ptr = nullptr;
                     // m_bit doesn't need to be set until m_ptr != NULL
                 }
 
                 // return true if this iterator is valid
-                bool IsOk() const { return m_ptr != NULL; }
+                bool IsOk() const { return m_ptr != nullptr; }
 
 
                 // navigation

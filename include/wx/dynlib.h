@@ -162,7 +162,7 @@ class WXDLLIMPEXP_BASE wxDynamicLibraryDetails
 public:
     // ctor, normally never used as these objects are only created by
     // wxDynamicLibrary::ListLoaded()
-    wxDynamicLibraryDetails() { m_address = NULL; m_length = 0; }
+    wxDynamicLibraryDetails() { m_address = nullptr; m_length = 0; }
 
     // get the (base) name
     wxString GetName() const { return m_name; }
@@ -222,7 +222,7 @@ public:
 
     wxDynamicLibrary()  { }
     wxDynamicLibrary(const wxString& libname, int flags = wxDL_DEFAULT)
-        : m_handle(NULL)
+        : m_handle(nullptr)
     {
         Load(libname, flags);
     }
@@ -232,7 +232,7 @@ public:
     ~wxDynamicLibrary() { Unload(); }
 
     // return true if the library was loaded successfully
-    bool IsLoaded() const { return m_handle != NULL; }
+    bool IsLoaded() const { return m_handle != nullptr; }
 
     // load the library with the given name (full or not), return true if ok
     bool Load(const wxString& libname, int flags = wxDL_DEFAULT);
@@ -248,13 +248,13 @@ public:
     // detach the library object from its handle, i.e. prevent the object from
     // unloading the library in its dtor -- the caller is now responsible for
     // doing this
-    wxDllType Detach() { wxDllType h = m_handle; m_handle = NULL; return h; }
+    wxDllType Detach() { wxDllType h = m_handle; m_handle = nullptr; return h; }
 
     // unload the given library handle (presumably returned by Detach() before)
     static void Unload(wxDllType handle);
 
     // unload the library, also done automatically in dtor
-    void Unload() { if ( IsLoaded() ) { Unload(m_handle); m_handle = NULL; } }
+    void Unload() { if ( IsLoaded() ) { Unload(m_handle); m_handle = nullptr; } }
 
     // Return the raw handle from dlopen and friends.
     wxDllType GetLibHandle() const { return m_handle; }
@@ -280,7 +280,7 @@ public:
     //
     // Returns a pointer to the symbol on success, or NULL if an error occurred
     // or the symbol wasn't found.
-    void *GetSymbol(const wxString& name, bool *success = NULL) const;
+    void *GetSymbol(const wxString& name, bool *success = nullptr) const;
 
     // low-level version of GetSymbol()
     static void *RawGetSymbol(wxDllType handle, const wxString& name);
@@ -334,7 +334,7 @@ public:
     //
     // If path output parameter is non-NULL, fill it with the full path to this
     // module disk file on success.
-    static void* GetModuleFromAddress(const void* addr, wxString* path = NULL);
+    static void* GetModuleFromAddress(const void* addr, wxString* path = nullptr);
 
 #ifdef __WINDOWS__
     // return the handle (HMODULE/HINSTANCE) of the DLL with the given name
@@ -351,14 +351,14 @@ public:
 
 protected:
     // common part of GetSymbol() and HasSymbol()
-    void* DoGetSymbol(const wxString& name, bool* success = NULL) const;
+    void* DoGetSymbol(const wxString& name, bool* success = nullptr) const;
 
     // log the error after an OS dynamic library function failure
     static void ReportError(const wxString& msg,
                             const wxString& name = wxString());
 
     // the handle to DLL or NULL
-    wxDllType m_handle{NULL};
+    wxDllType m_handle{nullptr};
 
     // no copy ctor/assignment operators (or we'd try to unload the library
     // twice)

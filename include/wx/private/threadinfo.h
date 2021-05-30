@@ -37,7 +37,7 @@ public:
     // the thread-specific logger or NULL if the thread is using the global one
     // (this is not used for the main thread which always uses the global
     // logger)
-    wxLog *logger{NULL};
+    wxLog *logger{nullptr};
 
     // true if logging is currently disabled for this thread (this is also not
     // used for the main thread which uses wxLog::ms_doLog)

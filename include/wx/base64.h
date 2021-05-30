@@ -88,13 +88,13 @@ WXDLLIMPEXP_BASE size_t
 wxBase64Decode(void *dst, size_t dstLen,
                const char *src, size_t srcLen = wxNO_LEN,
                wxBase64DecodeMode mode = wxBase64DecodeMode_Strict,
-               size_t *posErr = NULL);
+               size_t *posErr = nullptr);
 
 inline size_t
 wxBase64Decode(void *dst, size_t dstLen,
                const wxString& src,
                wxBase64DecodeMode mode = wxBase64DecodeMode_Strict,
-               size_t *posErr = NULL)
+               size_t *posErr = nullptr)
 {
     // don't use str.length() here as the ASCII buffer is shorter than it for
     // strings with embedded NULs
@@ -106,12 +106,12 @@ wxBase64Decode(void *dst, size_t dstLen,
 WXDLLIMPEXP_BASE wxMemoryBuffer
 wxBase64Decode(const char *src, size_t srcLen = wxNO_LEN,
                wxBase64DecodeMode mode = wxBase64DecodeMode_Strict,
-               size_t *posErr = NULL);
+               size_t *posErr = nullptr);
 
 inline wxMemoryBuffer
 wxBase64Decode(const wxString& src,
                wxBase64DecodeMode mode = wxBase64DecodeMode_Strict,
-               size_t *posErr = NULL)
+               size_t *posErr = nullptr)
 {
     // don't use str.length() here as the ASCII buffer is shorter than it for
     // strings with embedded NULs

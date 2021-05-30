@@ -171,7 +171,7 @@ typedef wxItemAttr wxListItemAttr;
 class WXDLLIMPEXP_CORE wxListItem : public wxObject
 {
 public:
-    wxListItem() { Init(); m_attr = NULL; }
+    wxListItem() { Init(); m_attr = nullptr; }
     wxListItem(const wxListItem& item)
         : wxObject(),
           m_mask(item.m_mask),
@@ -184,7 +184,7 @@ public:
           m_data(item.m_data),
           m_format(item.m_format),
           m_width(item.m_width),
-          m_attr(NULL)
+          m_attr(nullptr)
     {
         // copy list item attributes
         if ( item.HasAttributes() )
@@ -205,7 +205,7 @@ public:
             m_data = item.m_data;
             m_format = item.m_format;
             m_width = item.m_width;
-            m_attr = item.m_attr ? new wxItemAttr(*item.m_attr) : NULL;
+            m_attr = item.m_attr ? new wxItemAttr(*item.m_attr) : nullptr;
         }
 
         return *this;
@@ -215,7 +215,7 @@ public:
 
     // resetting
     void Clear() { Init(); m_text.clear(); ClearAttributes(); }
-    void ClearAttributes() { if ( m_attr ) { delete m_attr; m_attr = NULL; } }
+    void ClearAttributes() { if ( m_attr ) { delete m_attr; m_attr = nullptr; } }
 
     // setters
     void SetMask(long mask)
@@ -262,7 +262,7 @@ public:
     wxListColumnFormat GetAlign() const { return (wxListColumnFormat)m_format; }
 
     wxItemAttr *GetAttributes() const { return m_attr; }
-    bool HasAttributes() const { return m_attr != NULL; }
+    bool HasAttributes() const { return m_attr != nullptr; }
 
     wxColour GetTextColour() const
         { return HasAttributes() ? m_attr->GetTextColour() : wxNullColour; }

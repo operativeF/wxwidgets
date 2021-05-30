@@ -57,7 +57,7 @@ public:
     ~wxSecretValue();
 
     // Check if a secret is not empty.
-    bool IsOk() const { return m_impl != NULL; }
+    bool IsOk() const { return m_impl != nullptr; }
 
     // Compare with another secret.
     bool operator==(const wxSecretValue& other) const;
@@ -96,7 +96,7 @@ private:
     // provided existing impl pointer.
     explicit wxSecretValue(wxSecretValueImpl* impl) : m_impl(impl) { }
 
-    wxSecretValueImpl* m_impl{NULL};
+    wxSecretValueImpl* m_impl{nullptr};
 
     friend class wxSecretStore;
 };
@@ -128,7 +128,7 @@ public:
 
     // Check if this object is valid, i.e. can be used, and optionally fill in
     // the provided error message string if it isn't.
-    bool IsOk(wxString* errmsg = NULL) const;
+    bool IsOk(wxString* errmsg = nullptr) const;
 
 
     // Store a username/password combination.

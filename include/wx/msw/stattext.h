@@ -42,7 +42,7 @@ public:
     void SetLabel(const wxString& label) override;
     bool SetFont( const wxFont &font ) override;
 
-    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
+    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
 
 protected:
     // implement/override some base class virtuals

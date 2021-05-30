@@ -25,7 +25,7 @@ public:
 	PropSetSimple *pprops;
 	Accessor(IDocument *pAccess_, PropSetSimple *pprops_);
 	int GetPropertyInt(const char *, int defaultValue=0) const;
-	int IndentAmount(Sci_Position line, int *flags, PFNIsCommentLeader pfnIsCommentLeader = 0);
+	int IndentAmount(Sci_Position line, int *flags, PFNIsCommentLeader pfnIsCommentLeader = nullptr);
 };
 
 #ifdef SCI_NAMESPACE

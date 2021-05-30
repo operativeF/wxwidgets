@@ -150,7 +150,7 @@ class WXDLLIMPEXP_BASE wxCArrayString
 {
 public:
     wxCArrayString( const wxArrayString& array )
-        : m_array( array ), m_strings( NULL )
+        : m_array( array ), m_strings( nullptr )
     { }
     ~wxCArrayString() { delete[] m_strings; }
 
@@ -168,7 +168,7 @@ public:
     wxString* Release()
     {
         wxString *r = GetStrings();
-        m_strings = NULL;
+        m_strings = nullptr;
         return r;
     }
 
@@ -230,7 +230,7 @@ public:
     wxArrayStringsAdapter(const std::vector<wxString>& strings)
         : m_type(wxSTRING_POINTER), m_size(strings.size())
     {
-        m_data.ptr = m_size == 0 ? NULL : &strings[0];
+        m_data.ptr = m_size == 0 ? nullptr : &strings[0];
     }
 
     // construct an adapter from a single wxString

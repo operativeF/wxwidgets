@@ -24,10 +24,10 @@ public:
 
     virtual void OnObjectDestroy() = 0;
 
-    virtual wxEventConnectionRef *ToEventConnection() { return NULL; }
+    virtual wxEventConnectionRef *ToEventConnection() { return nullptr; }
 
 private:
-    wxTrackerNode *m_nxt{NULL};
+    wxTrackerNode *m_nxt{nullptr};
 
     friend class wxTrackable;        // For list access
     friend class wxEvtHandler;       // For list access
@@ -67,7 +67,7 @@ protected:
 
     // copy ctor and assignment operator intentionally do not copy m_first: the
     // objects which track the original trackable shouldn't track the new copy
-    wxTrackable(const wxTrackable& WXUNUSED(other)) : m_first(NULL) { }
+    wxTrackable(const wxTrackable& WXUNUSED(other)) : m_first(nullptr) { }
     wxTrackable& operator=(const wxTrackable& WXUNUSED(other)) { return *this; }
 
     // dtor is not virtual: this class is not supposed to be used
@@ -84,7 +84,7 @@ protected:
         }
     }
 
-    wxTrackerNode *m_first{NULL};
+    wxTrackerNode *m_first{nullptr};
 };
 
 #endif // _WX_TRACKER_H_

@@ -62,7 +62,7 @@ public:
     // -------------------------------
 
     // is the wizard running?
-    bool IsRunning() const { return m_page != NULL; }
+    bool IsRunning() const { return m_page != nullptr; }
 
     // show the prev/next page, but call TransferDataFromWindow on the current
     // page first and return false without changing the page if
@@ -102,7 +102,7 @@ protected:
     virtual bool ResizeBitmap(wxBitmap& bmp);
 
     // was the dialog really created?
-    bool WasCreated() const { return m_btnPrev != NULL; }
+    bool WasCreated() const { return m_btnPrev != nullptr; }
 
     // event handlers
     void OnCancel(wxCommandEvent& event);

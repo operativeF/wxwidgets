@@ -152,7 +152,7 @@ public:
         threadId = wxThread::GetCurrentId();
 #endif // wxUSE_THREADS
 
-        m_data = NULL;
+        m_data = nullptr;
     }
 
     // we need to define copy ctor and assignment operator because of m_data
@@ -540,7 +540,7 @@ public:
     // a helper calling the above overload with current time
     static void OnLog(wxLogLevel level, const wxString& msg)
     {
-        OnLog(level, msg, time(NULL));
+        OnLog(level, msg, time(nullptr));
     }
 
 
@@ -667,7 +667,7 @@ class WXDLLIMPEXP_BASE wxLogStderr : public wxLog,
 {
 public:
     // redirect log output to a FILE
-    wxLogStderr(FILE *fp = NULL,
+    wxLogStderr(FILE *fp = nullptr,
                 const wxMBConv &conv = wxConvWhateverWorks);
 
 protected:
@@ -684,7 +684,7 @@ class WXDLLIMPEXP_BASE wxLogStream : public wxLog,
 {
 public:
     // redirect log output to an ostream
-    wxLogStream(std::ostream *ostr = (std::ostream *) NULL,
+    wxLogStream(std::ostream *ostr = (std::ostream *) nullptr,
                 const wxMBConv& conv = wxConvWhateverWorks);
 
 protected:
@@ -760,7 +760,7 @@ public:
     void Flush() override;
 
     // call to avoid destroying the old log target
-    void DetachOldLog() { m_logOld = NULL; }
+    void DetachOldLog() { m_logOld = nullptr; }
 
 protected:
     // pass the record to the old logger if needed

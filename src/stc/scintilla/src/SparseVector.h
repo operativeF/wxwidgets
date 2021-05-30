@@ -60,13 +60,13 @@ public:
 	}
 	~SparseVector() {
 		delete starts;
-		starts = NULL;
+		starts = nullptr;
 		// starts dead here but not used by ClearValue.
 		for (int part = 0; part < values->Length(); part++) {
 			ClearValue(part);
 		}
 		delete values;
-		values = NULL;
+		values = nullptr;
 	}
 	int Length() const {
 		return starts->PositionFromPartition(starts->Partitions());

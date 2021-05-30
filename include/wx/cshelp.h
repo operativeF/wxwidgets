@@ -38,7 +38,7 @@
 class WXDLLIMPEXP_CORE wxContextHelp : public wxObject
 {
 public:
-    wxContextHelp(wxWindow* win = NULL, bool beginHelp = true);
+    wxContextHelp(wxWindow* win = nullptr, bool beginHelp = true);
     virtual ~wxContextHelp();
 
     bool BeginContextHelp(wxWindow* win);
@@ -235,7 +235,7 @@ class WXDLLIMPEXP_CORE wxHelpControllerHelpProvider : public wxSimpleHelpProvide
 public:
     // Note that it doesn't own the help controller. The help controller
     // should be deleted separately.
-    wxHelpControllerHelpProvider(wxHelpControllerBase* hc = NULL);
+    wxHelpControllerHelpProvider(wxHelpControllerBase* hc = nullptr);
 
     // implement wxHelpProvider methods
 

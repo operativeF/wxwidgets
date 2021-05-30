@@ -40,7 +40,7 @@ namespace wxMSWMessageDialog
         wxMSWTaskDialogConfig(const wxMessageDialogBase& dlg);
 
         wxScopedArray<TASKDIALOG_BUTTON> buttons;
-        wxWindow *parent{NULL};
+        wxWindow *parent{nullptr};
         wxString caption;
         wxString message;
         wxString extendedMessage;

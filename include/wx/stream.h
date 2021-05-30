@@ -562,7 +562,7 @@ public:
     // if a non NULL buffer is given to the stream, it will be deleted by it,
     // otherwise a default 1KB buffer will be used
     wxBufferedInputStream(wxInputStream& stream,
-                          wxStreamBuffer *buffer = NULL);
+                          wxStreamBuffer *buffer = nullptr);
 
     // ctor allowing to specify the buffer size, it's just a more convenient
     // alternative to creating wxStreamBuffer, calling its SetBufferIO(bufsize)
@@ -607,7 +607,7 @@ public:
     // if a non NULL buffer is given to the stream, it will be deleted by it,
     // otherwise a default 1KB buffer will be used
     wxBufferedOutputStream(wxOutputStream& stream,
-                           wxStreamBuffer *buffer = NULL);
+                           wxStreamBuffer *buffer = nullptr);
 
     // ctor allowing to specify the buffer size, it's just a more convenient
     // alternative to creating wxStreamBuffer, calling its SetBufferIO(bufsize)

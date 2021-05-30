@@ -383,7 +383,7 @@ public:
     // Rotates the image about the given point, 'angle' radians.
     // Returns the rotated image, leaving this image intact.
     wxImage Rotate(double angle, const wxPoint & centre_of_rotation,
-                   bool interpolating = true, wxPoint * offset_after_rotation = NULL) const;
+                   bool interpolating = true, wxPoint * offset_after_rotation = nullptr) const;
 
     wxImage Rotate90( bool clockwise = true ) const;
     wxImage Rotate180() const;
@@ -507,8 +507,8 @@ public:
     void SetData( unsigned char *data, int new_width, int new_height, bool static_data=false );
 
     unsigned char *GetAlpha() const;    // may return NULL!
-    bool HasAlpha() const { return GetAlpha() != NULL; }
-    void SetAlpha(unsigned char *alpha = NULL, bool static_data=false);
+    bool HasAlpha() const { return GetAlpha() != nullptr; }
+    void SetAlpha(unsigned char *alpha = nullptr, bool static_data=false);
     void InitAlpha();
     void ClearAlpha();
 

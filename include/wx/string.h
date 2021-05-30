@@ -1011,7 +1011,7 @@ public:
       // This is logically equivalent to strlen(str.mb_str()) but avoids
       // actually converting the string to multibyte and just computes the
       // length that it would have after conversion.
-      const size_t ofs = wxConvLibc.FromWChar(NULL, 0, str.wc_str(), str.length());
+      const size_t ofs = wxConvLibc.FromWChar(nullptr, 0, str.wc_str(), str.length());
       return ofs == wxCONV_FAILED ? 0 : static_cast<ptrdiff_t>(ofs);
   }
 
@@ -1577,7 +1577,7 @@ public:
     //
     // this is mostly/only useful for the template functions
     template <typename T>
-    wxCharTypeBuffer<T> tchar_str(size_t *len = NULL) const
+    wxCharTypeBuffer<T> tchar_str(size_t *len = nullptr) const
     {
         // we need a helper dispatcher depending on type
         return wxPrivate::wxStringAsBufHelper<T>::Get(*this, len);
@@ -2113,11 +2113,11 @@ public:
       // check if the string starts with the given prefix and return the rest
       // of the string in the provided pointer if it is not NULL; otherwise
       // return false
-  bool StartsWith(const wxString& prefix, wxString *rest = NULL) const;
+  bool StartsWith(const wxString& prefix, wxString *rest = nullptr) const;
       // check if the string ends with the given suffix and return the
       // beginning of the string before the suffix in the provided pointer if
       // it is not NULL; otherwise return false
-  bool EndsWith(const wxString& suffix, wxString *rest = NULL) const;
+  bool EndsWith(const wxString& suffix, wxString *rest = nullptr) const;
 
       // get first nCount characters
   wxString Left(size_t nCount) const;
@@ -2126,11 +2126,11 @@ public:
       // get all characters before the first occurrence of ch
       // (returns the whole string if ch not found) and also put everything
       // following the first occurrence of ch into rest if it's non-NULL
-  wxString BeforeFirst(wxUniChar ch, wxString *rest = NULL) const;
+  wxString BeforeFirst(wxUniChar ch, wxString *rest = nullptr) const;
       // get all characters before the last occurrence of ch
       // (returns empty string if ch not found) and also put everything
       // following the last occurrence of ch into rest if it's non-NULL
-  wxString BeforeLast(wxUniChar ch, wxString *rest = NULL) const;
+  wxString BeforeLast(wxUniChar ch, wxString *rest = nullptr) const;
       // get all characters after the first occurrence of ch
       // (returns empty string if ch not found)
   wxString AfterFirst(wxUniChar ch) const;
@@ -3479,7 +3479,7 @@ private:
   {
       // notice that there is no need to initialize m_len here as it's unused
       // as long as m_str is NULL
-      ConvertedBuffer() : m_str(NULL) {}
+      ConvertedBuffer() : m_str(nullptr) {}
       ~ConvertedBuffer()
           { free(m_str); }
 
@@ -3931,7 +3931,7 @@ public:
     ~wxUTF8StringBuffer()
     {
         wxMBConvStrictUTF8 conv;
-        size_t wlen = conv.ToWChar(NULL, 0, m_buf);
+        size_t wlen = conv.ToWChar(nullptr, 0, m_buf);
         wxCHECK_RET( wlen != wxCONV_FAILED, "invalid UTF-8 data in string buffer?" );
 
         wxStringInternalBuffer wbuf(m_str, wlen);
@@ -3952,7 +3952,7 @@ public:
         wxCHECK_RET(m_lenSet, "length not set");
 
         wxMBConvStrictUTF8 conv;
-        size_t wlen = conv.ToWChar(NULL, 0, m_buf, m_len);
+        size_t wlen = conv.ToWChar(nullptr, 0, m_buf, m_len);
         wxCHECK_RET( wlen != wxCONV_FAILED, "invalid UTF-8 data in string buffer?" );
 
         wxStringInternalBufferLength wbuf(m_str, wlen);

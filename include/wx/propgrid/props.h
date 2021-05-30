@@ -59,7 +59,7 @@ class WXDLLIMPEXP_PROPGRID wxPGInDialogValidator
 public:
     wxPGInDialogValidator()
     {
-        m_textCtrl = NULL;
+        m_textCtrl = nullptr;
     }
 
     ~wxPGInDialogValidator()
@@ -360,8 +360,8 @@ public:
 #ifndef SWIG
     wxEnumProperty( const wxString& label = wxPG_LABEL,
                     const wxString& name = wxPG_LABEL,
-                    const wxChar* const* labels = NULL,
-                    const long* values = NULL,
+                    const wxChar* const* labels = nullptr,
+                    const long* values = nullptr,
                     int value = 0 );
     wxEnumProperty( const wxString& label,
                     const wxString& name,
@@ -500,7 +500,7 @@ public:
     wxFlagsProperty( const wxString& label,
                      const wxString& name,
                      const wxChar* const* labels,
-                     const long* values = NULL,
+                     const long* values = nullptr,
                      long value = 0 );
     wxFlagsProperty( const wxString& label,
                      const wxString& name,
@@ -833,7 +833,7 @@ public:
     // Note: Dialog frees the validator.
     virtual wxValidator* GetTextCtrlValidator() const
     {
-        return NULL;
+        return nullptr;
     }
 
     // Returns true if array was actually modified

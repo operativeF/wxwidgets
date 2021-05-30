@@ -87,7 +87,7 @@ public:     // public API
     }
 
     bool HasTextCtrl() const
-        { return m_text != NULL; }
+        { return m_text != nullptr; }
     wxTextCtrl *GetTextCtrl()
         { return m_text; }
     wxControl *GetPickerCtrl()
@@ -140,9 +140,9 @@ protected:
     void PostCreation();
 
 protected:
-    wxTextCtrl *m_text{NULL};     // can be NULL
-    wxControl *m_picker{NULL};
-    wxBoxSizer *m_sizer{NULL};
+    wxTextCtrl *m_text{nullptr};     // can be NULL
+    wxControl *m_picker{nullptr};
+    wxBoxSizer *m_sizer{nullptr};
 
 private:
     // Common implementation of Set{Text,Picker}CtrlGrowable().

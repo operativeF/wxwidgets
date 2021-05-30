@@ -55,9 +55,9 @@ private:
 
 public:
   // ctors & dtor
-  Uuid()                 {  m_pszUuid = NULL; m_pszCForm = NULL;             }
-  Uuid(const wxChar *pc) {  m_pszUuid = NULL; m_pszCForm = NULL;  Set(pc);   }
-  Uuid(const UUID &uuid) {  m_pszUuid = NULL; m_pszCForm = NULL;  Set(uuid); }
+  Uuid()                 {  m_pszUuid = nullptr; m_pszCForm = nullptr;             }
+  Uuid(const wxChar *pc) {  m_pszUuid = nullptr; m_pszCForm = nullptr;  Set(pc);   }
+  Uuid(const UUID &uuid) {  m_pszUuid = nullptr; m_pszCForm = nullptr;  Set(uuid); }
  ~Uuid();
 
   // copy ctor and assignment operator needed for this class

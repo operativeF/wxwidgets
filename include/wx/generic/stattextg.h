@@ -23,7 +23,7 @@ class WXDLLIMPEXP_CORE wxGenericStaticText : public wxStaticTextBase
 public:
     wxGenericStaticText() { 
 #if wxUSE_MARKUP
-        m_markupText = NULL;
+        m_markupText = nullptr;
 #endif // wxUSE_MARKUP
      }
 
@@ -37,7 +37,7 @@ public:
     {
         
 #if wxUSE_MARKUP
-        m_markupText = NULL;
+        m_markupText = nullptr;
 #endif // wxUSE_MARKUP
     
 

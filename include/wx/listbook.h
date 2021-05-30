@@ -75,7 +75,7 @@ public:
                             int imageId = NO_IMAGE) override;
     int SetSelection(size_t n) override { return DoSetSelection(n, SetSelection_SendEvent); }
     int ChangeSelection(size_t n) override { return DoSetSelection(n); }
-    int HitTest(const wxPoint& pt, long *flags = NULL) const override;
+    int HitTest(const wxPoint& pt, long *flags = nullptr) const override;
     void SetImageList(wxImageList *imageList) override;
 
     bool DeleteAllPages() override;

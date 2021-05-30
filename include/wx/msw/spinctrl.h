@@ -77,7 +77,7 @@ public:
     virtual bool SetBase(int base);
 
     virtual void Refresh( bool eraseBackground = true,
-                          const wxRect *rect = (const wxRect *) NULL ) override;
+                          const wxRect *rect = (const wxRect *) nullptr ) override;
 
     // implementation only from now on
     // -------------------------------

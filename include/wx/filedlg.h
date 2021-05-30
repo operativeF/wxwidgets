@@ -190,7 +190,7 @@ protected:
     bool CreateExtraControl();
     // return true if SetExtraControlCreator() was called
     bool HasExtraControlCreator() const
-        { return m_extraControlCreator != NULL; }
+        { return m_extraControlCreator != nullptr; }
     // get the size of the extra control by creating and deleting it
     wxSize GetExtraControlSize();
     // Helper function for native file dialog usage where no wx events
@@ -219,7 +219,7 @@ wxFileSelector(const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
                const wxString& default_extension = wxEmptyString,
                const wxString& wildcard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
                int flags = 0,
-               wxWindow *parent = NULL,
+               wxWindow *parent = nullptr,
                int x = wxDefaultCoord, int y = wxDefaultCoord);
 
 // An extended version of wxFileSelector
@@ -227,10 +227,10 @@ WXDLLIMPEXP_CORE wxString
 wxFileSelectorEx(const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
                  const wxString& default_path = wxEmptyString,
                  const wxString& default_filename = wxEmptyString,
-                 int *indexDefaultExtension = NULL,
+                 int *indexDefaultExtension = nullptr,
                  const wxString& wildcard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
                  int flags = 0,
-                 wxWindow *parent = NULL,
+                 wxWindow *parent = nullptr,
                  int x = wxDefaultCoord, int y = wxDefaultCoord);
 
 // Ask for filename to load
@@ -238,14 +238,14 @@ WXDLLIMPEXP_CORE wxString
 wxLoadFileSelector(const wxString& what,
                    const wxString& extension,
                    const wxString& default_name = wxEmptyString,
-                   wxWindow *parent = NULL);
+                   wxWindow *parent = nullptr);
 
 // Ask for filename to save
 WXDLLIMPEXP_CORE wxString
 wxSaveFileSelector(const wxString& what,
                    const wxString& extension,
                    const wxString& default_name = wxEmptyString,
-                   wxWindow *parent = NULL);
+                   wxWindow *parent = nullptr);
 
 
 #if defined (__WXUNIVERSAL__)

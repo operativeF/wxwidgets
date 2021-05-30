@@ -42,8 +42,8 @@ class wxStreamTempInputBuffer
 public:
     wxStreamTempInputBuffer()
     {
-        m_stream = NULL;
-        m_buffer = NULL;
+        m_stream = nullptr;
+        m_buffer = nullptr;
         m_size = 0;
     }
 

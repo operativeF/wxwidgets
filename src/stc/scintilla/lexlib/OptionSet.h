@@ -29,7 +29,7 @@ class OptionSet {
 		};
 		std::string description;
 		Option() :
-			 pb(0), description("") {
+			 pb(nullptr), description("") {
 		}
 		Option(plcob pb_, std::string description_="") :
 			opType(SC_TYPE_BOOLEAN), pb(pb_), description(description_) {

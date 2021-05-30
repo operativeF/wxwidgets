@@ -98,7 +98,7 @@ public:
 
 protected:
     wxMsgCatalog(const wxString& domain)
-        : m_pNext(NULL), m_domain(domain)
+        : m_pNext(nullptr), m_domain(domain)
     {}
 
 private:
@@ -239,7 +239,7 @@ protected:
     virtual wxString GetResourceType() const { return wxASCII_STR("MOFILE"); }
 
     // returns module to load resources from
-    virtual WXHINSTANCE GetModule() const { return NULL; }
+    virtual WXHINSTANCE GetModule() const { return nullptr; }
 };
 #endif // __WINDOWS__
 
@@ -255,7 +255,7 @@ inline const wxString& wxGetTranslation(const wxString& str,
 {
     wxTranslations *trans = wxTranslations::Get();
     const wxString *transStr = trans ? trans->GetTranslatedString(str, domain, context)
-                                     : NULL;
+                                     : nullptr;
     if ( transStr )
         return *transStr;
     else
@@ -272,7 +272,7 @@ inline const wxString& wxGetTranslation(const wxString& str1,
 {
     wxTranslations *trans = wxTranslations::Get();
     const wxString *transStr = trans ? trans->GetTranslatedString(str1, n, domain, context)
-                                     : NULL;
+                                     : nullptr;
     if ( transStr )
         return *transStr;
     else

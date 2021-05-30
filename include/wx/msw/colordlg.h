@@ -21,7 +21,7 @@ class WXDLLIMPEXP_CORE wxColourDialog : public wxDialog
 {
 public:
     wxColourDialog() { Init(); }
-    wxColourDialog(wxWindow *parent, const wxColourData *data = NULL)
+    wxColourDialog(wxWindow *parent, const wxColourData *data = nullptr)
     {
         Init();
 
@@ -31,7 +31,7 @@ public:
 	wxColourDialog(const wxColourDialog&) = delete;
 	wxColourDialog& operator=(const wxColourDialog&) = delete;
 
-    bool Create(wxWindow *parent, const wxColourData *data = NULL);
+    bool Create(wxWindow *parent, const wxColourData *data = nullptr);
 
     wxColourData& GetColourData() { return m_colourData; }
 

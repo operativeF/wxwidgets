@@ -285,7 +285,7 @@ public:
     wxDateTime GetModificationTime() const
     {
         wxDateTime dtMod;
-        (void)GetTimes(NULL, &dtMod, NULL);
+        (void)GetTimes(nullptr, &dtMod, nullptr);
         return dtMod;
     }
 #endif // wxUSE_DATETIME
@@ -397,7 +397,7 @@ public:
         // the arguments
     bool GetShortcutTarget(const wxString& shortcutPath,
                            wxString& targetFilename,
-                           wxString* arguments = NULL) const;
+                           wxString* arguments = nullptr) const;
 #endif
 
         // if the path contains the value of the environment variable named envname
@@ -535,7 +535,7 @@ public:
                           wxString *path,
                           wxString *name,
                           wxString *ext,
-                          bool *hasExt = NULL,
+                          bool *hasExt = nullptr,
                           wxPathFormat format = wxPATH_NATIVE);
 
     static void SplitPath(const wxString& fullpath,
@@ -545,7 +545,7 @@ public:
                           wxString *ext,
                           wxPathFormat format)
     {
-        SplitPath(fullpath, volume, path, name, ext, NULL, format);
+        SplitPath(fullpath, volume, path, name, ext, nullptr, format);
     }
 
         // compatibility version: volume is part of path

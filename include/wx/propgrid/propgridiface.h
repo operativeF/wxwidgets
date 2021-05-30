@@ -53,7 +53,7 @@ public:
     }
     wxPGProperty* GetPtr() const
     {
-        wxCHECK( m_flags == IsProperty, NULL );
+        wxCHECK( m_flags == IsProperty, nullptr );
         return m_ptr.property;
     }
     wxPGPropArgCls( const char* str )
@@ -69,7 +69,7 @@ public:
     // This constructor is required for NULL.
     wxPGPropArgCls( int )
     {
-        m_ptr.property = NULL;
+        m_ptr.property = nullptr;
         m_flags = IsProperty;
     }
     wxPGProperty* GetPtr( wxPropertyGridInterface* iface ) const;
@@ -268,14 +268,14 @@ public:
     // firstProp - Property to start iteration from. If NULL, then first
     //   child of root is used.
     wxPropertyGridIterator GetIterator( int flags = wxPG_ITERATE_DEFAULT,
-                                        wxPGProperty* firstProp = NULL )
+                                        wxPGProperty* firstProp = nullptr )
     {
         return wxPropertyGridIterator( m_pState, flags, firstProp );
     }
 
     wxPropertyGridConstIterator
     GetIterator( int flags = wxPG_ITERATE_DEFAULT,
-                 wxPGProperty* firstProp = NULL ) const
+                 wxPGProperty* firstProp = nullptr ) const
     {
         return wxPropertyGridConstIterator( m_pState, flags, firstProp );
     }
@@ -354,14 +354,14 @@ public:
     // found, returns NULL.
     wxPropertyCategory* GetPropertyCategory( wxPGPropArg id ) const
     {
-        wxPG_PROP_ID_CONST_CALL_PROLOG_RETVAL(NULL)
+        wxPG_PROP_ID_CONST_CALL_PROLOG_RETVAL(nullptr)
         return m_pState->GetPropertyCategory(p);
     }
 
     // Returns client data (void*) of a property.
     void* GetPropertyClientData( wxPGPropArg id ) const
     {
-        wxPG_PROP_ARG_CALL_PROLOG_RETVAL(NULL)
+        wxPG_PROP_ARG_CALL_PROLOG_RETVAL(nullptr)
         return p->GetClientData();
     }
 
@@ -382,7 +382,7 @@ public:
     // Returns property's editor.
     const wxPGEditor* GetPropertyEditor( wxPGPropArg id ) const
     {
-        wxPG_PROP_ARG_CALL_PROLOG_RETVAL(NULL)
+        wxPG_PROP_ARG_CALL_PROLOG_RETVAL(nullptr)
         return p->GetEditorClass();
     }
 
@@ -396,7 +396,7 @@ public:
     // Returns property's custom value image (NULL of none).
     wxBitmap* GetPropertyImage( wxPGPropArg id ) const
     {
-        wxPG_PROP_ARG_CALL_PROLOG_RETVAL(NULL)
+        wxPG_PROP_ARG_CALL_PROLOG_RETVAL(nullptr)
         return p->GetValueImage();
     }
 
@@ -425,7 +425,7 @@ public:
     // can pass to any number of SetPropertyValidator.
     wxValidator* GetPropertyValidator( wxPGPropArg id )
     {
-        wxPG_PROP_ARG_CALL_PROLOG_RETVAL(NULL)
+        wxPG_PROP_ARG_CALL_PROLOG_RETVAL(nullptr)
         return p->GetValidator();
     }
 #endif
@@ -512,7 +512,7 @@ public:
     // Each attribute will be stored as list variant named
     // "@<propname>@attr."
     wxVariant GetPropertyValues( const wxString& listname = wxEmptyString,
-        wxPGProperty* baseparent = NULL, long flags = 0 ) const
+        wxPGProperty* baseparent = nullptr, long flags = 0 ) const
     {
         return m_pState->DoGetPropertyValues(listname, baseparent, flags);
     }
@@ -649,7 +649,7 @@ public:
     void LimitPropertyEditing( wxPGPropArg id, bool limit = true );
 
     // If state is shown in it's grid, refresh it now.
-    virtual void RefreshGrid( wxPropertyGridPageState* state = NULL );
+    virtual void RefreshGrid( wxPropertyGridPageState* state = nullptr );
 
 #if wxPG_INCLUDE_ADVPROPS
     // Initializes additional property editors (SpinCtrl etc.). Causes
@@ -1114,7 +1114,7 @@ protected:
     {
         if ( pageIndex <= 0 )
             return m_pState;
-        return NULL;
+        return nullptr;
     }
 
     virtual bool DoSelectPage( int WXUNUSED(index) ) { return true; }
@@ -1139,7 +1139,7 @@ private:
     wxPropertyGrid* GetPropertyGrid()
     {
         if ( !m_pState )
-            return NULL;
+            return nullptr;
         return m_pState->GetGrid();
     }
 
@@ -1147,7 +1147,7 @@ private:
     const wxPropertyGrid* GetPropertyGrid() const
     {
         if ( !m_pState )
-            return NULL;
+            return nullptr;
 
         return m_pState->GetGrid();
     }

@@ -116,7 +116,7 @@ public:
     wxWindow *GetCurrentPage() const
     {
         const int n = GetSelection();
-        return n == wxNOT_FOUND ? NULL : GetPage(n);
+        return n == wxNOT_FOUND ? nullptr : GetPage(n);
     }
 
     // get the currently selected page or wxNOT_FOUND if none
@@ -180,7 +180,7 @@ public:
     virtual bool RemovePage(size_t n)
     {
         DoInvalidateBestSize();
-        return DoRemovePage(n) != NULL;
+        return DoRemovePage(n) != nullptr;
     }
 
     // remove all pages and delete them
@@ -235,7 +235,7 @@ public:
 
     // hit test: returns which page is hit and, optionally, where (icon, label)
     virtual int HitTest(const wxPoint& WXUNUSED(pt),
-                        long * WXUNUSED(flags) = NULL) const
+                        long * WXUNUSED(flags) = nullptr) const
     {
         return wxNOT_FOUND;
     }
@@ -288,7 +288,7 @@ protected:
 
     // create a new "page changing" event
     virtual wxBookCtrlEvent* CreatePageChangingEvent() const
-        { wxFAIL_MSG(wxT("Override this function!")); return NULL; }
+        { wxFAIL_MSG(wxT("Override this function!")); return nullptr; }
 
     // modify the event created by CreatePageChangingEvent() to "page changed"
     // event, usually by just calling SetEventType() on it

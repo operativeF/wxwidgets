@@ -18,7 +18,7 @@
 class WXDLLIMPEXP_CORE wxCHMHelpController : public wxHelpControllerBase
 {
 public:
-    wxCHMHelpController(wxWindow* parentWindow = NULL): wxHelpControllerBase(parentWindow) { }
+    wxCHMHelpController(wxWindow* parentWindow = nullptr): wxHelpControllerBase(parentWindow) { }
 
     // Must call this to set the filename
     bool Initialize(const wxString& file) override;
@@ -53,7 +53,7 @@ protected:
     static bool CallHtmlHelp(wxWindow *win, const wxChar *str,
                              unsigned cmd, WXWPARAM param);
     static bool CallHtmlHelp(wxWindow *win, const wxChar *str,
-                             unsigned cmd, const void *param = NULL)
+                             unsigned cmd, const void *param = nullptr)
     {
         return CallHtmlHelp(win, str, cmd, reinterpret_cast<WXWPARAM>(param));
     }
@@ -66,7 +66,7 @@ protected:
                             cmd, param);
     }
 
-    bool CallHtmlHelp(unsigned cmd, const void *param = NULL)
+    bool CallHtmlHelp(unsigned cmd, const void *param = nullptr)
     {
         return CallHtmlHelp(cmd, reinterpret_cast<WXWPARAM>(param));
     }

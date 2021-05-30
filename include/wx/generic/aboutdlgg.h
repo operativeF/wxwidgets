@@ -41,18 +41,18 @@ public:
     // --------------------------------
 
     // default ctor, you must use Create() to really initialize the dialog
-    wxGenericAboutDialog() {  m_sizerText = NULL;  }
+    wxGenericAboutDialog() {  m_sizerText = nullptr;  }
 
     // ctor which fully initializes the object
-    wxGenericAboutDialog(const wxAboutDialogInfo& info, wxWindow* parent = NULL)
+    wxGenericAboutDialog(const wxAboutDialogInfo& info, wxWindow* parent = nullptr)
     {
-         m_sizerText = NULL; 
+         m_sizerText = nullptr; 
 
         (void)Create(info, parent);
     }
 
     // this method must be called if and only if the default ctor was used
-    bool Create(const wxAboutDialogInfo& info, wxWindow* parent = NULL);
+    bool Create(const wxAboutDialogInfo& info, wxWindow* parent = nullptr);
 
 protected:
     // this virtual method may be overridden to add some more controls to the
@@ -94,7 +94,7 @@ private:
 
 // unlike wxAboutBox which can show either the native or generic about dialog,
 // this function always shows the generic one
-WXDLLIMPEXP_CORE void wxGenericAboutBox(const wxAboutDialogInfo& info, wxWindow* parent = NULL);
+WXDLLIMPEXP_CORE void wxGenericAboutBox(const wxAboutDialogInfo& info, wxWindow* parent = nullptr);
 
 #endif // wxUSE_ABOUTDLG
 

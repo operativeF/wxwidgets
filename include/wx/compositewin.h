@@ -166,7 +166,7 @@ class wxCompositeWindow : public wxCompositeWindowSettersOnly<W>
 public:
     void SetFocus() override
     {
-        wxSetFocusToChild(this, NULL);
+        wxSetFocusToChild(this, nullptr);
     }
 
 protected:

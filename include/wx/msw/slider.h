@@ -97,7 +97,7 @@ public:
     bool SetForegroundColour(const wxColour& colour) override;
     bool SetBackgroundColour(const wxColour& colour) override;
 
-    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
+    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
 
 protected:
     // common part of all ctors
@@ -114,7 +114,7 @@ protected:
     // Notice that the return value will be 0 if we don't have wxSL_LABELS
     // style but we do fill widthMin and widthMax even if we don't have
     // wxSL_MIN_MAX_LABELS style set so the caller should account for it.
-    int GetLabelsSize(int *widthMin = NULL, int *widthMax = NULL) const;
+    int GetLabelsSize(int *widthMin = nullptr, int *widthMax = nullptr) const;
 
 
     // overridden base class virtuals

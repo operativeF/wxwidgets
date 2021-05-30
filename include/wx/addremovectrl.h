@@ -60,7 +60,7 @@ public:
     wxAddRemoveCtrl()
     {
         
-        m_impl = NULL;
+        m_impl = nullptr;
     
     }
 
@@ -72,7 +72,7 @@ public:
                     const wxString& name = wxASCII_STR(wxAddRemoveCtrlNameStr))
     {
         
-        m_impl = NULL;
+        m_impl = nullptr;
     
 
         Create(parent, winid, pos, size, style, name);

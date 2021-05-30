@@ -77,7 +77,7 @@ public:
     // errors.
     static wxGBSpan Invalid()
     {
-        return wxGBSpan(NULL);
+        return wxGBSpan(nullptr);
     }
 
     int GetRowspan() const { return m_rowspan; }
@@ -134,7 +134,7 @@ public:
                    const wxGBSpan& span=wxDefaultSpan,
                    int flag=0,
                    int border=0,
-                   wxObject* userData=NULL);
+                   wxObject* userData=nullptr);
 
     // window
     wxGBSizerItem( wxWindow *window,
@@ -142,7 +142,7 @@ public:
                    const wxGBSpan& span=wxDefaultSpan,
                    int flag=0,
                    int border=0,
-                   wxObject* userData=NULL );
+                   wxObject* userData=nullptr );
 
     // subsizer
     wxGBSizerItem( wxSizer *sizer,
@@ -150,7 +150,7 @@ public:
                    const wxGBSpan& span=wxDefaultSpan,
                    int flag=0,
                    int border=0,
-                   wxObject* userData=NULL );
+                   wxObject* userData=nullptr );
 
     // default ctor
     wxGBSizerItem();
@@ -220,20 +220,20 @@ public:
                       const wxGBSpan& span = wxDefaultSpan,
                       int flag = 0,
                       int border = 0,
-                      wxObject* userData = NULL );
+                      wxObject* userData = nullptr );
     wxSizerItem* Add( wxSizer *sizer,
                       const wxGBPosition& pos,
                       const wxGBSpan& span = wxDefaultSpan,
                       int flag = 0,
                       int border = 0,
-                      wxObject* userData = NULL );
+                      wxObject* userData = nullptr );
     wxSizerItem* Add( int width,
                       int height,
                       const wxGBPosition& pos,
                       const wxGBSpan& span = wxDefaultSpan,
                       int flag = 0,
                       int border = 0,
-                      wxObject* userData = NULL );
+                      wxObject* userData = nullptr );
     wxSizerItem* Add( wxGBSizerItem *item );
 
 
@@ -302,28 +302,28 @@ public:
     // item.  Returns true if so, false if there would be no overlap.  If an
     // excludeItem is given then it will not be checked for intersection, for
     // example it may be the item we are checking the position of.
-    bool CheckForIntersection(wxGBSizerItem* item, wxGBSizerItem* excludeItem = NULL);
-    bool CheckForIntersection(const wxGBPosition& pos, const wxGBSpan& span, wxGBSizerItem* excludeItem = NULL);
+    bool CheckForIntersection(wxGBSizerItem* item, wxGBSizerItem* excludeItem = nullptr);
+    bool CheckForIntersection(const wxGBPosition& pos, const wxGBSpan& span, wxGBSizerItem* excludeItem = nullptr);
 
 
     // The Add base class virtuals should not be used with this class, but
     // we'll try to make them automatically select a location for the item
     // anyway.
-    virtual wxSizerItem* Add( wxWindow *window, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = NULL );
-    virtual wxSizerItem* Add( wxSizer *sizer, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = NULL );
-    virtual wxSizerItem* Add( int width, int height, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = NULL );
+    virtual wxSizerItem* Add( wxWindow *window, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = nullptr );
+    virtual wxSizerItem* Add( wxSizer *sizer, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = nullptr );
+    virtual wxSizerItem* Add( int width, int height, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = nullptr );
 
     // The Insert and Prepend base class virtuals that are not appropriate for
     // this class and should not be used.  Their implementation in this class
     // simply fails.
     virtual wxSizerItem* Add( wxSizerItem *item );
-    virtual wxSizerItem* Insert( size_t index, wxWindow *window, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = NULL );
-    virtual wxSizerItem* Insert( size_t index, wxSizer *sizer, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = NULL );
-    virtual wxSizerItem* Insert( size_t index, int width, int height, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = NULL );
+    virtual wxSizerItem* Insert( size_t index, wxWindow *window, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = nullptr );
+    virtual wxSizerItem* Insert( size_t index, wxSizer *sizer, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = nullptr );
+    virtual wxSizerItem* Insert( size_t index, int width, int height, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = nullptr );
     wxSizerItem* Insert( size_t index, wxSizerItem *item ) override;
-    virtual wxSizerItem* Prepend( wxWindow *window, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = NULL );
-    virtual wxSizerItem* Prepend( wxSizer *sizer, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = NULL );
-    virtual wxSizerItem* Prepend( int width,  int height,  int proportion = 0,  int flag = 0,  int border = 0,  wxObject* userData = NULL );
+    virtual wxSizerItem* Prepend( wxWindow *window, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = nullptr );
+    virtual wxSizerItem* Prepend( wxSizer *sizer, int proportion = 0, int flag = 0, int border = 0, wxObject* userData = nullptr );
+    virtual wxSizerItem* Prepend( int width,  int height,  int proportion = 0,  int flag = 0,  int border = 0,  wxObject* userData = nullptr );
     virtual wxSizerItem* Prepend( wxSizerItem *item );
 
 

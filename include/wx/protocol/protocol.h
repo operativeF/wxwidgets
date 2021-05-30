@@ -109,7 +109,7 @@ public:
     wxProtocolLog *DetachLog()
     {
         wxProtocolLog * const log = m_log;
-        m_log = NULL;
+        m_log = nullptr;
         return log;
     }
 

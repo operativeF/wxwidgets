@@ -824,11 +824,11 @@ public:
     wxWindow *FindWindow(const wxString& name) const;
 
         // Find a window among any window (all return NULL if not found)
-    static wxWindow *FindWindowById( long winid, const wxWindow *parent = NULL );
+    static wxWindow *FindWindowById( long winid, const wxWindow *parent = nullptr );
     static wxWindow *FindWindowByName( const wxString& name,
-                                       const wxWindow *parent = NULL );
+                                       const wxWindow *parent = nullptr );
     static wxWindow *FindWindowByLabel( const wxString& label,
-                                        const wxWindow *parent = NULL );
+                                        const wxWindow *parent = nullptr );
 
     // event handler stuff
     // -------------------
@@ -1050,7 +1050,7 @@ public:
         // mark the specified rectangle (or the whole window) as "dirty" so it
         // will be repainted
     virtual void Refresh( bool eraseBackground = true,
-                          const wxRect *rect = (const wxRect *) NULL ) = 0;
+                          const wxRect *rect = (const wxRect *) nullptr ) = 0;
 
         // a less awkward wrapper for Refresh
     void RefreshRect(const wxRect& rect, bool eraseBackground = true)
@@ -1177,7 +1177,7 @@ public:
         // has a chance of succeeding. If reason argument is non-NULL, returns a
         // user-readable explanation of why it isn't supported if the return
         // value is false.
-    virtual bool IsTransparentBackgroundSupported(wxString* reason = NULL) const;
+    virtual bool IsTransparentBackgroundSupported(wxString* reason = nullptr) const;
 
         // set/retrieve the font for the window (SetFont() returns true if the
         // font really changed)
@@ -1209,9 +1209,9 @@ public:
         // font
     void GetTextExtent(const wxString& string,
                        int *x, int *y,
-                       int *descent = NULL,
-                       int *externalLeading = NULL,
-                       const wxFont *font = NULL) const
+                       int *descent = nullptr,
+                       int *externalLeading = nullptr,
+                       const wxFont *font = nullptr) const
     {
         DoGetTextExtent(string, x, y, descent, externalLeading, font);
     }
@@ -1315,7 +1315,7 @@ public:
 
         // scroll window to the specified position
     virtual void ScrollWindow( int dx, int dy,
-                               const wxRect* rect = NULL ) = 0;
+                               const wxRect* rect = nullptr ) = 0;
 
         // scrolls window by line/page: note that not all controls support this
         //
@@ -1380,7 +1380,7 @@ public:
         // existing tooltip
     void SetToolTip( wxToolTip *tip ) { DoSetToolTip(tip); }
         // more readable synonym for SetToolTip(NULL)
-    void UnsetToolTip() { SetToolTip(NULL); }
+    void UnsetToolTip() { SetToolTip(nullptr); }
         // get the associated tooltip or NULL if none
     wxToolTip* GetToolTip() const { return m_tooltip; }
     wxString GetToolTipText() const;
@@ -1473,7 +1473,7 @@ public:
     // ----------------------
 #if wxUSE_ACCESSIBILITY
     // Override to create a specific accessible object.
-    virtual wxAccessible* CreateAccessible() { return NULL; }
+    virtual wxAccessible* CreateAccessible() { return nullptr; }
 
     // Sets the accessible object.
     void SetAccessible(wxAccessible* accessible) ;
@@ -1594,7 +1594,7 @@ public:
     }
 
     // This is an internal helper function implemented by text-like controls.
-    virtual const wxTextEntry* WXGetTextEntry() const { return NULL; }
+    virtual const wxTextEntry* WXGetTextEntry() const { return nullptr; }
 
 protected:
     // helper for the derived class Create() methods: the first overload, with
@@ -1795,9 +1795,9 @@ protected:
     // text extent
     virtual void DoGetTextExtent(const wxString& string,
                                  int *x, int *y,
-                                 int *descent = NULL,
-                                 int *externalLeading = NULL,
-                                 const wxFont *font = NULL) const = 0;
+                                 int *descent = nullptr,
+                                 int *externalLeading = nullptr,
+                                 const wxFont *font = nullptr) const = 0;
 
     // coordinates translation
     virtual void DoClientToScreen( int *x, int *y ) const = 0;
@@ -2007,7 +2007,7 @@ private:
 
 inline wxWindow *wxWindowBase::GetGrandParent() const
 {
-    return m_parent ? m_parent->GetParent() : NULL;
+    return m_parent ? m_parent->GetParent() : nullptr;
 }
 
 #ifdef wxHAVE_DPI_INDEPENDENT_PIXELS

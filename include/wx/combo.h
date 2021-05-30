@@ -791,7 +791,7 @@ class WXDLLIMPEXP_CORE wxComboPopup
 public:
     wxComboPopup()
     {
-        m_combo = NULL;
+        m_combo = nullptr;
         m_iFlags = 0;
     }
 
@@ -835,7 +835,7 @@ public:
     // implementation. If the found item matched the string, but is
     // different, it should be written back to pItem. Default implementation
     // always return true and does not alter trueItem.
-    virtual bool FindItem(const wxString& item, wxString* trueItem=NULL);
+    virtual bool FindItem(const wxString& item, wxString* trueItem=nullptr);
 
     // This is called to custom paint in the combo control itself (ie. not the popup).
     // Default implementation draws value as string.

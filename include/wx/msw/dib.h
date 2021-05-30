@@ -38,10 +38,10 @@ public:
     // returns true
     wxDIB(int width, int height, int depth)
         { 
-    m_handle = NULL;
+    m_handle = nullptr;
     m_ownsHandle = true;
 
-    m_data = NULL;
+    m_data = nullptr;
 
     m_width =
     m_height =
@@ -52,10 +52,10 @@ public:
     // create a DIB from the DDB
     wxDIB(const wxBitmap& bmp, int depth = -1)
         { 
-    m_handle = NULL;
+    m_handle = nullptr;
     m_ownsHandle = true;
 
-    m_data = NULL;
+    m_data = nullptr;
 
     m_width =
     m_height =
@@ -66,10 +66,10 @@ public:
     // create a DIB from the Windows DDB
     wxDIB(HBITMAP hbmp)
         { 
-    m_handle = NULL;
+    m_handle = nullptr;
     m_ownsHandle = true;
 
-    m_data = NULL;
+    m_data = nullptr;
 
     m_width =
     m_height =
@@ -81,10 +81,10 @@ public:
     // as above, use IsOk() to see if the bitmap was loaded successfully
     wxDIB(const wxString& filename)
         { 
-    m_handle = NULL;
+    m_handle = nullptr;
     m_ownsHandle = true;
 
-    m_data = NULL;
+    m_data = nullptr;
 
     m_width =
     m_height =
@@ -109,11 +109,11 @@ public:
     // create a bitmap compatible with the given HDC (or screen by default) and
     // return its handle, the caller is responsible for freeing it (using
     // DeleteObject())
-    HBITMAP CreateDDB(HDC hdc = NULL) const;
+    HBITMAP CreateDDB(HDC hdc = nullptr) const;
 
     // get the handle from the DIB and reset it, i.e. this object won't destroy
     // the DIB after this (but the caller should do it)
-    HBITMAP Detach() { HBITMAP hbmp = m_handle; m_handle = NULL; return hbmp; }
+    HBITMAP Detach() { HBITMAP hbmp = m_handle; m_handle = nullptr; return hbmp; }
 
 #if defined(__WXMSW__) && wxUSE_PALETTE
     // create a palette for this DIB (always a trivial/default one for 24bpp)
@@ -128,7 +128,7 @@ public:
     // ---------
 
     // return true if DIB was successfully created, false otherwise
-    bool IsOk() const { return m_handle != NULL; }
+    bool IsOk() const { return m_handle != nullptr; }
 
     // get the bitmap size
     wxSize GetSize() const { DoGetObject(); return wxSize(m_width, m_height); }
@@ -157,8 +157,8 @@ public:
     // a plain DIB or a DIB section (in which case the last parameter must be
     // non NULL)
     static HBITMAP ConvertToBitmap(const BITMAPINFO *pbi,
-                                   HDC hdc = NULL,
-                                   const void *bits = NULL);
+                                   HDC hdc = nullptr,
+                                   const void *bits = nullptr);
 
     // create a plain DIB (not a DIB section) from a DDB, the caller is
     // responsible for freeing it using ::GlobalFree()
@@ -193,10 +193,10 @@ public:
     wxDIB(const wxImage& image, PixelFormat pf = PixelFormat_PreMultiplied, int depth = -1)
     {
         
-    m_handle = NULL;
+    m_handle = nullptr;
     m_ownsHandle = true;
 
-    m_data = NULL;
+    m_data = nullptr;
 
     m_width =
     m_height =
@@ -296,10 +296,10 @@ void wxDIB::Free()
             wxLogLastError(wxT("DeleteObject(hDIB)"));
         }
 
-        m_handle = NULL;
+        m_handle = nullptr;
         m_ownsHandle = true;
 
-        m_data = NULL;
+        m_data = nullptr;
 
         m_width =
         m_height =

@@ -56,7 +56,7 @@ protected:
 	}
 
 	void Init() {
-		body = NULL;
+		body = nullptr;
 		growSize = 8;
 		size = 0;
 		lengthBody = 0;
@@ -72,7 +72,7 @@ public:
 
 	~SplitVector() {
 		delete []body;
-		body = 0;
+		body = nullptr;
 	}
 
 	int GetGrowSize() const {
@@ -94,7 +94,7 @@ public:
 			// Move the gap to the end
 			GapTo(lengthBody);
 			T *newBody = new T[newSize];
-			if ((size != 0) && (body != 0)) {
+			if ((size != 0) && (body != nullptr)) {
 				std::copy(body, body + lengthBody, newBody);
 				delete []body;
 			}

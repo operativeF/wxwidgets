@@ -55,7 +55,7 @@ public:
 protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
-    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = NULL) const override;
+    WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
 
     bool MSWIsPushed() const override;
 

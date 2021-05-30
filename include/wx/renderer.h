@@ -185,7 +185,7 @@ public:
                                   const wxRect& rect,
                                   int flags = 0,
                                   wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
-                                  wxHeaderButtonParams* params=NULL) = 0;
+                                  wxHeaderButtonParams* params=nullptr) = 0;
 
 
     // Draw the contents of a header control button (label, sort arrows, etc.)
@@ -195,7 +195,7 @@ public:
                                           const wxRect& rect,
                                           int flags = 0,
                                           wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
-                                          wxHeaderButtonParams* params=NULL) = 0;
+                                          wxHeaderButtonParams* params=nullptr) = 0;
 
     // Returns the default height of a header button, either a fixed platform
     // height if available, or a generic height based on the window's font.
@@ -434,7 +434,7 @@ public:
                           const wxRect& rect,
                           int flags = 0,
                           wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
-                          wxHeaderButtonParams* params = NULL) override
+                          wxHeaderButtonParams* params = nullptr) override
         { return m_rendererNative.DrawHeaderButton(win, dc, rect, flags, sortArrow, params); }
 
     int  DrawHeaderButtonContents(wxWindow *win,
@@ -442,7 +442,7 @@ public:
                                   const wxRect& rect,
                                   int flags = 0,
                                   wxHeaderSortIconType sortArrow = wxHeaderSortIconType::None,
-                                  wxHeaderButtonParams* params = NULL) override
+                                  wxHeaderButtonParams* params = nullptr) override
         { return m_rendererNative.DrawHeaderButtonContents(win, dc, rect, flags, sortArrow, params); }
 
     int GetHeaderButtonHeight(wxWindow *win) override

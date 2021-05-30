@@ -19,9 +19,9 @@ class WXDLLIMPEXP_CORE wxAnyButton : public wxAnyButtonBase
 public:
     wxAnyButton()
     {
-        m_imageData = NULL;
+        m_imageData = nullptr;
 #if wxUSE_MARKUP
-        m_markupText = NULL;
+        m_markupText = nullptr;
 #endif // wxUSE_MARKUP
     }
 

@@ -86,7 +86,7 @@ public:
     void SetImageList(wxImageList *imageList) override;
 
     bool DeleteAllPages() override;
-    int HitTest(const wxPoint& pt, long *flags = NULL) const override;
+    int HitTest(const wxPoint& pt, long *flags = nullptr) const override;
 
 
     // methods which are not part of base wxBookctrl API

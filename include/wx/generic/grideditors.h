@@ -254,7 +254,7 @@ public:
                         wxEvtHandler* evtHandler) override;
 
     void SetSize(const wxRect& rect) override;
-    void Show(bool show, wxGridCellAttr *attr = NULL) override;
+    void Show(bool show, wxGridCellAttr *attr = nullptr) override;
 
     bool IsAcceptedKey(wxKeyEvent& event) override;
     void BeginEdit(int row, int col, wxGrid* grid) override;
@@ -313,7 +313,7 @@ class WXDLLIMPEXP_ADV wxGridCellChoiceEditor : public wxGridCellEditor
 public:
     // if !allowOthers, user can't type a string not in choices array
     wxGridCellChoiceEditor(size_t count = 0,
-                           const wxString choices[] = NULL,
+                           const wxString choices[] = nullptr,
                            bool allowOthers = false);
     wxGridCellChoiceEditor(const wxArrayString& choices,
                            bool allowOthers = false);

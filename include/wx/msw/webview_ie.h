@@ -131,7 +131,7 @@ public:
     wxString GetSelectedSource() const override;
     void ClearSelection() override;
 
-    bool RunScript(const wxString& javascript, wxString* output = NULL) const override;
+    bool RunScript(const wxString& javascript, wxString* output = nullptr) const override;
 
     //Virtual Filesystem Support
     void RegisterHandler(wxSharedPtr<wxWebViewHandler> handler) override;

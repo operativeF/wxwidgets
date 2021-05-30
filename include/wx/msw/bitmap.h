@@ -150,7 +150,7 @@ public:
         { return Create(wxRound(w*logicalScale), wxRound(h*logicalScale), d); }
 
     virtual bool LoadFile(const wxString& name, wxBitmapType type = wxBITMAP_DEFAULT_TYPE);
-    virtual bool SaveFile(const wxString& name, wxBitmapType type, const wxPalette *cmap = NULL) const;
+    virtual bool SaveFile(const wxString& name, wxBitmapType type, const wxPalette *cmap = nullptr) const;
 
     wxBitmapRefData *GetBitmapData() const
         { return (wxBitmapRefData *)m_refData; }
@@ -193,7 +193,7 @@ public:
 public:
     WXHBITMAP GetHBITMAP() const { return (WXHBITMAP)GetHandle(); }
     bool InitFromHBITMAP(WXHBITMAP bmp, int width, int height, int depth);
-    void ResetHBITMAP() { InitFromHBITMAP(NULL, 0, 0, 0); }
+    void ResetHBITMAP() { InitFromHBITMAP(nullptr, 0, 0, 0); }
 
     void SetSelectedInto(wxDC *dc);
     wxDC *GetSelectedInto() const;
@@ -312,7 +312,7 @@ public:
     virtual bool SaveFile(const wxBitmap *bitmap,
                           const wxString& name,
                           wxBitmapType type,
-                          const wxPalette *palette = NULL) const;
+                          const wxPalette *palette = nullptr) const;
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxBitmapHandler);

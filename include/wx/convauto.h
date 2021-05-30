@@ -38,7 +38,7 @@ public:
         
         // We don't initialize m_encDefault here as different ctors do it
         // differently.
-        m_conv = NULL;
+        m_conv = nullptr;
         m_bomType = wxBOM_Unknown;
         m_ownsConv = false;
         m_consumedBOM = false;
@@ -54,7 +54,7 @@ public:
         
         // We don't initialize m_encDefault here as different ctors do it
         // differently.
-        m_conv = NULL;
+        m_conv = nullptr;
         m_bomType = wxBOM_Unknown;
         m_ownsConv = false;
         m_consumedBOM = false;

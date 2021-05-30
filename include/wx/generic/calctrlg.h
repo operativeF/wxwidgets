@@ -148,7 +148,7 @@ public:
 
     wxCalendarDateAttr *GetAttr(size_t day) const override
     {
-        wxCHECK_MSG( day > 0 && day < 32, NULL, wxT("invalid day") );
+        wxCHECK_MSG( day > 0 && day < 32, nullptr, wxT("invalid day") );
 
         return m_attrs[day - 1];
     }
@@ -161,13 +161,13 @@ public:
         m_attrs[day - 1] = attr;
     }
 
-    void ResetAttr(size_t day) override { SetAttr(day, NULL); }
+    void ResetAttr(size_t day) override { SetAttr(day, nullptr); }
 
     void SetHoliday(size_t day) override;
 
     virtual wxCalendarHitTestResult HitTest(const wxPoint& pos,
-                                            wxDateTime *date = NULL,
-                                            wxDateTime::WeekDay *wd = NULL) override;
+                                            wxDateTime *date = nullptr,
+                                            wxDateTime::WeekDay *wd = nullptr) override;
 
     // implementation only from now on
     // -------------------------------

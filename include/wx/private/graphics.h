@@ -55,8 +55,8 @@ public :
            double tx=0.0, double ty=0.0) = 0;
 
        // gets the component values of the matrix
-       virtual void Get(double* a=NULL, double* b=NULL,  double* c=NULL,
-                        double* d=NULL, double* tx=NULL, double* ty=NULL) const = 0;
+       virtual void Get(double* a=nullptr, double* b=nullptr,  double* c=nullptr,
+                        double* d=nullptr, double* tx=nullptr, double* ty=nullptr) const = 0;
 
        // makes this the inverse matrix
        virtual void Invert() = 0;

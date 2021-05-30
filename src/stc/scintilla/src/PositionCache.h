@@ -164,7 +164,7 @@ struct TextSegment {
 	int start;
 	int length;
 	const Representation *representation;
-	TextSegment(int start_=0, int length_=0, const Representation *representation_=0) :
+	TextSegment(int start_=0, int length_=0, const Representation *representation_=nullptr) :
 		start(start_), length(length_), representation(representation_) {
 	}
 	int end() const {

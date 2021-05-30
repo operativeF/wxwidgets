@@ -227,8 +227,8 @@ public:
     // notice that this is not implemented in all versions
     virtual wxCalendarHitTestResult
     HitTest(const wxPoint& WXUNUSED(pos),
-            wxDateTime* WXUNUSED(date) = NULL,
-            wxDateTime::WeekDay* WXUNUSED(wd) = NULL)
+            wxDateTime* WXUNUSED(date) = nullptr,
+            wxDateTime::WeekDay* WXUNUSED(wd) = nullptr)
     {
         return wxCAL_HITTEST_NOWHERE;
     }
@@ -257,7 +257,7 @@ public:
     virtual void Mark(size_t day, bool mark) = 0;
 
     virtual wxCalendarDateAttr *GetAttr(size_t WXUNUSED(day)) const
-        { return NULL; }
+        { return nullptr; }
     virtual void SetAttr(size_t WXUNUSED(day), wxCalendarDateAttr *attr)
         { delete attr; }
     virtual void ResetAttr(size_t WXUNUSED(day)) { }

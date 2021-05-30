@@ -143,7 +143,7 @@ public:
 
     virtual wxTreeItemId AddRoot(const wxString& text,
                          int image = -1, int selectedImage = -1,
-                         wxTreeItemData *data = NULL) override;
+                         wxTreeItemData *data = nullptr) override;
 
     void Delete(const wxTreeItemId& item) override;
     void DeleteChildren(const wxTreeItemId& item) override;
@@ -198,7 +198,7 @@ public:
     bool SetBackgroundColour(const wxColour& colour) override;
     bool SetForegroundColour(const wxColour& colour) override;
 
-    void Refresh(bool eraseBackground = true, const wxRect *rect = NULL) override;
+    void Refresh(bool eraseBackground = true, const wxRect *rect = nullptr) override;
 
     bool SetFont( const wxFont &font ) override;
     void SetWindowStyleFlag(long styles) override;
@@ -308,7 +308,7 @@ protected:
                                        const wxTreeItemId& idPrevious,
                                        const wxString& text,
                                        int image = -1, int selImage = -1,
-                                       wxTreeItemData *data = NULL) override;
+                                       wxTreeItemData *data = nullptr) override;
     wxTreeItemId DoTreeHitTest(const wxPoint& point, int& flags) const override;
 
     // called by wxTextTreeCtrl when it marks itself for deletion
