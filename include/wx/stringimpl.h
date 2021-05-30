@@ -25,7 +25,7 @@
 #include "wx/chartype.h"    // for wxChar
 #include "wx/wxcrtbase.h"   // for wxStrlen() etc.
 
-#include <stdlib.h>
+#include <cstdlib>
 
 // ---------------------------------------------------------------------------
 // macros

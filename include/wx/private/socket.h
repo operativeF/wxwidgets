@@ -43,7 +43,7 @@
 #include "wx/socket.h"
 #include "wx/private/sckaddr.h"
 
-#include <stddef.h>
+#include <cstddef>
 
 /*
    Including sys/types.h under Cygwin results in the warnings about "fd_set

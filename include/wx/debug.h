@@ -10,9 +10,9 @@
 #ifndef _WX_DEBUG_H_
 #define _WX_DEBUG_H_
 
-#include  <assert.h>
+#include  <cassert>
 
-#include <limits.h>          // for CHAR_BIT used below
+#include <climits>          // for CHAR_BIT used below
 
 #include "wx/chartype.h"     // for __TFILE__ and wxChar
 #include "wx/cpp.h"          // for __WXFUNCTION__

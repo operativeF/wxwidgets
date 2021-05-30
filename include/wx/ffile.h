@@ -19,7 +19,7 @@
 #include  "wx/filefn.h"
 #include  "wx/convauto.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 // ----------------------------------------------------------------------------
 // class wxFFile: standard C stream library IO

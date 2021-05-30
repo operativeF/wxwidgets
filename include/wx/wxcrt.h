@@ -54,7 +54,7 @@ WXDLLIMPEXP_BASE size_t wxWC2MB(char *buf, const wchar_t *psz, size_t n);
 //  (including even MSC) inline them just like we do right in their
 //  headers.
 //
-#include <string.h>
+#include <cstring>
 
 //implement our own wmem variants
 inline wxChar* wxTmemchr(const wxChar* s, wxChar c, size_t l)

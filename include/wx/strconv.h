@@ -16,7 +16,7 @@
 #include "wx/chartype.h"
 #include "wx/buffer.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 
 class WXDLLIMPEXP_FWD_BASE wxString;
 

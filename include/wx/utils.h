@@ -43,7 +43,7 @@ class WXDLLIMPEXP_FWD_BASE wxArrayInt;
     #include <unistd.h>
 #endif
 
-#include <stdio.h>
+#include <cstdio>
 
 // ----------------------------------------------------------------------------
 // Forward declaration

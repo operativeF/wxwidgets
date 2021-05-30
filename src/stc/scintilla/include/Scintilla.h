@@ -29,7 +29,7 @@ int Scintilla_LinkLexers(void);
 // Include header that defines basic numeric types.
 #if defined(_MSC_VER)
 // Older releases of MSVC did not have stdint.h.
-#include <stddef.h>
+#include <cstddef>
 #elif defined( __VMS )
 #include <inttypes.h>
 #else

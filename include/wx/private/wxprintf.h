@@ -19,8 +19,8 @@
 #include "wx/log.h"
 #include "wx/utils.h"
 
-#include <limits.h>
-#include <string.h>
+#include <climits>
+#include <cstring>
 
 // prefer snprintf over sprintf
 #if defined(__VISUALC__)

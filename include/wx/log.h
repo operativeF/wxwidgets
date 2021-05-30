@@ -42,7 +42,7 @@ class WXDLLIMPEXP_FWD_BASE wxObject;
 
 #include "wx/arrstr.h"
 
-#include <time.h>   // for time_t
+#include <ctime>   // for time_t
 
 #include "wx/dynarray.h"
 #include "wx/hashmap.h"

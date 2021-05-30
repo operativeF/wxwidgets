@@ -22,7 +22,7 @@
 #include "wx/printdlg.h"
 #include <vector>
 
-#include <limits.h> // INT_MAX
+#include <climits> // INT_MAX
 
 //--------------------------------------------------------------------------------
 // wxHtmlDCRenderer

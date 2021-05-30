@@ -19,14 +19,14 @@
 
 //----------------------------------------------------------------------
 
-#include <ctype.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <vector>
-#include <map>
 #include <algorithm>
+#include <cctype>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <map>
 #include <stdexcept>
+#include <vector>
 
 // These are all Scintilla headers
 #include "Platform.h"

@@ -16,9 +16,9 @@
 
 #if wxUSE_DATETIME
 
-#include <time.h>
+#include <ctime>
 
-#include <limits.h>             // for INT_MIN
+#include <climits>             // for INT_MIN
 
 #include "wx/longlong.h"
 #include "wx/anystr.h"

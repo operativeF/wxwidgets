@@ -37,8 +37,8 @@
     #define wxTRUST_CPP_RTTI    0
 #endif
 
+#include <cstring>
 #include <typeinfo>
-#include <string.h>
 
 #define _WX_DECLARE_TYPEINFO_CUSTOM(CLS, IDENTFUNC)
 #define WX_DECLARE_TYPEINFO_INLINE(CLS)

@@ -33,7 +33,7 @@
     #include <sys/un.h>
 #endif // platform
 
-#include <stdlib.h> // for calloc()
+#include <cstdlib> // for calloc()
 
 // this is a wrapper for sockaddr_storage if it's available or just sockaddr
 // otherwise

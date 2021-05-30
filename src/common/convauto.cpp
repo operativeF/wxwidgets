@@ -255,7 +255,7 @@ void wxConvAuto::SkipBOM(const char **src, size_t *len) const
 
 bool wxConvAuto::InitFromInput(const char *src, size_t len)
 {
-    m_bomType = DetectBOM(src, len == wxNO_LEN ? strlen(src) : len);
+    m_bomType = DetectBOM(src, len == wxNO_LEN ? _tclen(src) : len);
     if ( m_bomType == wxBOM_Unknown )
         return false;
 

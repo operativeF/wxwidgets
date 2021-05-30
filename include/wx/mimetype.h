@@ -25,7 +25,7 @@
 #include "wx/dynarray.h"
 #include "wx/arrstr.h"
 
-#include <stdarg.h>
+#include <cstdarg>
 
 // fwd decls
 class WXDLLIMPEXP_FWD_BASE wxIconLocation;

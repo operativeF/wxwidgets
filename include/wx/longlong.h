@@ -18,7 +18,7 @@
 
 #include "wx/string.h"
 
-#include <limits.h>     // for LONG_MAX
+#include <climits>     // for LONG_MAX
 
 // define this to compile wxLongLongWx in "test" mode: the results of all
 // calculations will be compared with the real results taken from
