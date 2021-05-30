@@ -63,18 +63,7 @@ class WXDLLEXPORT wxBitmapRefData : public wxGDIImageRefData
 {
 public:
     wxBitmapRefData() { 
-#if wxDEBUG_LEVEL
-    m_selectedInto = nullptr;
-#endif
-    m_bitmapMask = nullptr;
-
     m_hBitmap = (WXHBITMAP) nullptr;
-#if wxUSE_WXDIB
-    m_dib = nullptr;
-#endif
-
-    m_isDIB =
-    m_hasAlpha = false;
  }
     wxBitmapRefData(const wxBitmapRefData& data);
     ~wxBitmapRefData() override { Free(); }
@@ -123,22 +112,22 @@ public:
     // this field is solely for error checking: we detect selecting a bitmap
     // into more than one DC at once or deleting a bitmap still selected into a
     // DC (both are serious programming errors under Windows)
-    wxDC         *m_selectedInto;
+    wxDC         *m_selectedInto{nullptr};
 #endif // wxDEBUG_LEVEL
 
 #if wxUSE_WXDIB
     // when GetRawData() is called for a DDB we need to convert it to a DIB
     // first to be able to provide direct access to it and we cache that DIB
     // here and convert it back to DDB when UngetRawData() is called
-    wxDIB *m_dib;
+    wxDIB *m_dib{nullptr};
 #endif
 
     // true if we have alpha transparency info and can be drawn using
     // AlphaBlend()
-    bool m_hasAlpha;
+    bool m_hasAlpha{false};
 
     // true if our HBITMAP is a DIB section, false if it is a DDB
-    bool m_isDIB;
+    bool m_isDIB{false};
 
 private:
     
@@ -153,7 +142,7 @@ private:
 #endif // wxUSE_WXDIB
 
     // optional mask for transparent drawing
-    wxMask       *m_bitmapMask;
+    wxMask       *m_bitmapMask{nullptr};
 
 
     // not implemented

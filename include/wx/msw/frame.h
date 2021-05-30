@@ -127,7 +127,7 @@ public:
 #endif // wxUSE_TASKBARBUTTON
 
 protected:
-    // common part of all ctors
+    // FIXME: Protected Init
     void Init();
 
     // override base class virtuals

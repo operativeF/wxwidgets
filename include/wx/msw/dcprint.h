@@ -28,6 +28,9 @@ public:
     wxPrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data );
     wxPrinterDCImpl( wxPrinterDC *owner, WXHDC theDC );
 
+    wxPrinterDCImpl(const wxPrinterDCImpl&) = delete;
+	wxPrinterDCImpl& operator=(const wxPrinterDCImpl&) = delete;
+
     // override some base class virtuals
     bool StartDoc(const wxString& message) override;
     void EndDoc() override;
@@ -51,14 +54,13 @@ protected:
 
 
     // init the dc
+    // FIXME: Protected Init
     void Init();
 
     wxPrintData m_printData;
 
 private:
     wxDECLARE_CLASS(wxPrinterDCImpl);
-    wxPrinterDCImpl(const wxPrinterDCImpl&) = delete;
-	wxPrinterDCImpl& operator=(const wxPrinterDCImpl&) = delete;
 };
 
 // Gets an HDC for the specified printer configuration

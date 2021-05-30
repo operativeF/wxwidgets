@@ -52,7 +52,7 @@ public:
     WXCOLORREF m_pixel;
 
 protected:
-    // Helper function
+    // FIXME: Protected Init
     void Init();
 
     void

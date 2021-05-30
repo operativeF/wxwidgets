@@ -50,6 +50,9 @@ public:
     const wxString& localFilename = wxEmptyString, const wxString& globalFilename = wxEmptyString, long style = wxCONFIG_USE_LOCAL_FILE);
   ~wxIniConfig() override;
 
+  wxIniConfig(const wxIniConfig&) = delete;
+	wxIniConfig& operator=(const wxIniConfig&) = delete;
+
   // implement inherited pure virtual functions
   void SetPath(const wxString& strPath) override;
   const wxString& GetPath() const override;
@@ -96,8 +99,6 @@ private:
   wxString m_strGroup,    // current group in appname.ini file
            m_strPath;     // the rest of the path (no trailing '_'!)
 
-  wxIniConfig(const wxIniConfig&) = delete;
-	wxIniConfig& operator=(const wxIniConfig&) = delete;
   wxDECLARE_ABSTRACT_CLASS(wxIniConfig);
 };
 

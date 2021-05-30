@@ -379,7 +379,7 @@ public:
                                     WXLPARAM lParam) override;
 
 protected:
-    // common part of all ctors
+    // FIXME: Protected Init
     void Init();
 
     bool MSWShouldSetDefaultFont() const override { return false; }

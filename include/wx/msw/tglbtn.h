@@ -59,6 +59,7 @@ protected:
 
     bool MSWIsPushed() const override;
 
+    // FIXME: Protected Init
     void Init();
 
     // current state of the button (when owner-drawn)

@@ -50,6 +50,9 @@ public:
     {
     }
 
+    wxPaintDCInfo(const wxPaintDCInfo&) = delete;
+	wxPaintDCInfo& operator=(const wxPaintDCInfo&) = delete;
+    
     // The derived class must perform some cleanup.
     virtual ~wxPaintDCInfo() = 0;
 
@@ -57,9 +60,6 @@ public:
 
 protected:
     const HDC m_hdc;
-
-    wxPaintDCInfo(const wxPaintDCInfo&) = delete;
-	wxPaintDCInfo& operator=(const wxPaintDCInfo&) = delete;
 };
 
 namespace

@@ -51,7 +51,7 @@ public:
     void MSWCheckIfCurrentChanged(WXCOLORREF currentCol);
 
 protected:
-    // common part of all ctors
+    // FIXME: Protected Init()
     void Init();
 
     void DoGetPosition( int *x, int *y ) const override;

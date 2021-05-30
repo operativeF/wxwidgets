@@ -22,12 +22,14 @@ class WXDLLIMPEXP_CORE wxSubwindows
 public:
     // the number of subwindows can be specified either as parameter to ctor or
     // later in Create()
-    wxSubwindows(size_t n = 0) { 
-        m_count = 0;
-        m_hwnds = nullptr;
-        m_ids = nullptr;
-     if ( n ) Create(n); }
+    wxSubwindows(size_t n = 0)
+    { 
+     if ( n ) Create(n);
+    }
 
+    wxSubwindows(const wxSubwindows&) = delete;
+	wxSubwindows& operator=(const wxSubwindows&) = delete;
+    
     // allocate enough space for the given number of windows
     void Create(size_t n)
     {
@@ -161,20 +163,14 @@ public:
     }
 
 private:
-    
-
     // number of elements in m_hwnds array
-    size_t m_count;
+    size_t m_count{0};
 
     // the HWNDs we contain
-    HWND *m_hwnds;
+    HWND *m_hwnds{nullptr};
 
     // the IDs of the windows
-    wxWindowIDRef *m_ids;
-
-
-    wxSubwindows(const wxSubwindows&) = delete;
-	wxSubwindows& operator=(const wxSubwindows&) = delete;
+    wxWindowIDRef *m_ids{nullptr};
 };
 
 // convenient macro to forward a few methods which are usually propagated to

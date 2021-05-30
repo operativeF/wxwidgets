@@ -24,9 +24,12 @@ class wxCustomBackgroundWindow : public W,
 public:
     typedef W BaseWindowClass;
 
-    wxCustomBackgroundWindow() { m_backgroundBrush = nullptr; }
+    wxCustomBackgroundWindow() = default;
 
     ~wxCustomBackgroundWindow() override { delete m_backgroundBrush; }
+
+    wxCustomBackgroundWindow(const wxCustomBackgroundWindow<W>&)  = delete;
+	wxCustomBackgroundWindow& operator=(const wxCustomBackgroundWindow<W>&) = delete;
 
 protected:
     void DoSetBackgroundBitmap(const wxBitmap& bmp) override
@@ -49,10 +52,7 @@ protected:
         return BaseWindowClass::MSWGetCustomBgBrush();
     }
 
-    wxBrush *m_backgroundBrush;
-
-    wxCustomBackgroundWindow(const wxCustomBackgroundWindow<W>&)  = delete;
-	wxCustomBackgroundWindow& operator=(const wxCustomBackgroundWindow<W>&) = delete;
+    wxBrush *m_backgroundBrush{nullptr};
 };
 
 #endif // _WX_MSW_CUSTOMBGWIN_H_

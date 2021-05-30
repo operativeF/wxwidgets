@@ -24,16 +24,15 @@ class WXDLLIMPEXP_CORE wxWindowsPrinter : public wxPrinterBase
 public:
     wxWindowsPrinter(wxPrintDialogData *data = nullptr);
 
+    wxWindowsPrinter(const wxWindowsPrinter&) = delete;
+	wxWindowsPrinter& operator=(const wxWindowsPrinter&) = delete;
+
     bool Print(wxWindow *parent,
                        wxPrintout *printout,
                        bool prompt = true) override;
 
     wxDC *PrintDialog(wxWindow *parent) override;
     bool Setup(wxWindow *parent) override;
-
-private:
-    wxWindowsPrinter(const wxWindowsPrinter&) = delete;
-	wxWindowsPrinter& operator=(const wxWindowsPrinter&) = delete;
 };
 
 // ---------------------------------------------------------------------------

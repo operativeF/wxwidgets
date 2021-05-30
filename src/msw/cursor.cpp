@@ -147,8 +147,7 @@ void wxCursorRefData::Free()
 // Cursors
 // ----------------------------------------------------------------------------
 
-wxCursor::wxCursor()
-= default;
+wxCursor::wxCursor() = default;
 
 #if wxUSE_IMAGE
 wxCursor::wxCursor(const wxImage& image)

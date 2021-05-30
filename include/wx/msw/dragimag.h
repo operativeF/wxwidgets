@@ -147,6 +147,9 @@ public:
 
     ~wxDragImage() override;
 
+    wxDragImage(const wxDragImage&) = delete;
+	wxDragImage& operator=(const wxDragImage&) = delete;
+    
     // Attributes
     ////////////////////////////////////////////////////////////////////////////
 
@@ -226,8 +229,6 @@ protected:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxDragImage);
-    wxDragImage(const wxDragImage&) = delete;
-	wxDragImage& operator=(const wxDragImage&) = delete;
 };
 
 #endif // wxUSE_DRAGIMAGE

@@ -34,6 +34,8 @@ public:
 	wxButton(const wxButton&) = delete;
 	wxButton& operator=(const wxButton&) = delete;
 
+    ~wxButton() override;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& label = wxEmptyString,
@@ -42,8 +44,6 @@ public:
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxButtonNameStr));
-
-    ~wxButton() override;
 
     wxWindow *SetDefault() override;
 

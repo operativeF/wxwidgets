@@ -39,8 +39,6 @@ public:
 class WXDLLIMPEXP_CORE wxIcon : public wxGDIImage
 {
 public:
-    // ctors
-        // default
     wxIcon() = default;
 
         // from raw data

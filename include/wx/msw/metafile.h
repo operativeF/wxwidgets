@@ -125,6 +125,9 @@ public:
         : wxDC(new wxMetafileDCImpl( this, file, xext, yext, xorg, yorg ))
         { }
 
+    wxMetafileDC(const wxMetafileDC&) = delete;
+	wxMetafileDC& operator=(const wxMetafileDC&) = delete;
+
     wxMetafile *GetMetafile() const
        { return ((wxMetafileDCImpl*)m_pimpl)->GetMetaFile(); }
 
@@ -133,8 +136,6 @@ public:
 
 private:
     wxDECLARE_CLASS(wxMetafileDC);
-    wxMetafileDC(const wxMetafileDC&) = delete;
-	wxMetafileDC& operator=(const wxMetafileDC&) = delete;
 };
 
 

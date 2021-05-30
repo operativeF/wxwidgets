@@ -30,6 +30,7 @@ class WXDLLIMPEXP_FWD_CORE wxWindowBase;
 // ---------------------------------------------------------------------------
 
 // 260 was taken from windef.h
+// FIXME: This is no longer true for all windows systems.
 #ifndef MAX_PATH
     #define MAX_PATH  260
 #endif

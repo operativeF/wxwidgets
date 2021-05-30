@@ -95,7 +95,6 @@ protected:
     bool HasTransparentBackground() override { return IsDoubleBuffered(); }
 
 private:
-    
 
 #if wxUSE_COMBOCTRL_POPUP_ANIMATION
     // Popup animation related

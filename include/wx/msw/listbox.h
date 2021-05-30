@@ -36,11 +36,8 @@ class WXDLLIMPEXP_FWD_BASE wxArrayInt;
 class WXDLLIMPEXP_CORE wxListBox : public wxListBoxBase
 {
 public:
-    // ctors and such
-    wxListBox() { 
-    m_noItems = 0;
-    m_updateHorizontalExtent = false;
- }
+    wxListBox() = default;
+
     wxListBox(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
@@ -49,13 +46,9 @@ public:
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxListBoxNameStr))
     {
-        
-    m_noItems = 0;
-    m_updateHorizontalExtent = false;
-
-
         Create(parent, id, pos, size, n, choices, style, validator, name);
     }
+    
     wxListBox(wxWindow *parent, wxWindowID id,
             const wxPoint& pos,
             const wxSize& size,
@@ -64,11 +57,6 @@ public:
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxListBoxNameStr))
     {
-        
-    m_noItems = 0;
-    m_updateHorizontalExtent = false;
-
-
         Create(parent, id, pos, size, choices, style, validator, name);
     }
 
@@ -202,7 +190,7 @@ protected:
     // free memory (common part of Clear() and dtor)
     void Free();
 
-    unsigned int m_noItems;
+    unsigned int m_noItems{0};
 
 #if wxUSE_OWNER_DRAWN
     // control items
@@ -219,7 +207,7 @@ private:
 
     // flag indicating whether the max horizontal extent should be updated,
     // i.e. if we need to call SetHorizontalExtent() from OnInternalIdle()
-    bool m_updateHorizontalExtent;
+    bool m_updateHorizontalExtent{false};
 
 
 public:

@@ -100,7 +100,7 @@ public:
     WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
 
 protected:
-    // common part of all ctors
+    // FIXME: Protected Init
     void Init();
 
     // format an integer value as string

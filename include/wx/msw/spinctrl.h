@@ -29,12 +29,7 @@ WX_DEFINE_EXPORTED_ARRAY_PTR(wxSpinCtrl *, wxArraySpins);
 class WXDLLIMPEXP_CORE wxSpinCtrl : public wxSpinButton
 {
 public:
-    wxSpinCtrl() { 
-    m_blockEvent = false;
-    m_hwndBuddy = nullptr;
-    m_wndProcBuddy = nullptr;
-    m_oldValue = INT_MIN;
- }
+    wxSpinCtrl() = default;
 
     wxSpinCtrl(wxWindow *parent,
                wxWindowID id = wxID_ANY,
@@ -45,13 +40,6 @@ public:
                int min = 0, int max = 100, int initial = 0,
                const wxString& name = wxT("wxSpinCtrl"))
     {
-        
-    m_blockEvent = false;
-    m_hwndBuddy = nullptr;
-    m_wndProcBuddy = nullptr;
-    m_oldValue = INT_MIN;
-
-
         Create(parent, id, value, pos, size, style, min, max, initial, name);
     }
 
@@ -158,19 +146,16 @@ protected:
 
     // the value of the control before the latest change (which might not have
     // changed anything in fact -- this is why we need this field)
-    int m_oldValue;
+    int m_oldValue{INT_MIN};
 
     // the data for the "buddy" text ctrl
-    WXHWND     m_hwndBuddy;
-    WXWNDPROC  m_wndProcBuddy;
+    WXHWND     m_hwndBuddy{nullptr};
+    WXWNDPROC  m_wndProcBuddy{nullptr};
 
     // Block text update event after SetValue()
-    bool m_blockEvent;
+    bool m_blockEvent{false};
 
 private:
-    // Common part of all ctors.
-    
-
     // Adjust the text control style depending on whether we need to enter only
     // digits or may need to enter something else (e.g. "-" sign, "x"
     // hexadecimal prefix, ...) in it.

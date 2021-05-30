@@ -108,6 +108,9 @@ public:
 
     ~wxTreeCtrl() override;
 
+    wxTreeCtrl(const wxTreeCtrl&) = delete;
+	wxTreeCtrl& operator=(const wxTreeCtrl&) = delete;
+    
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
@@ -391,8 +394,6 @@ private:
     friend class wxTreeSortHelper;
 
     wxDECLARE_DYNAMIC_CLASS(wxTreeCtrl);
-    wxTreeCtrl(const wxTreeCtrl&) = delete;
-	wxTreeCtrl& operator=(const wxTreeCtrl&) = delete;
 };
 
 #endif // wxUSE_TREECTRL

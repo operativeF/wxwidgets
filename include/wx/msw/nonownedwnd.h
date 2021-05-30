@@ -22,6 +22,9 @@ public:
     wxNonOwnedWindow();
     ~wxNonOwnedWindow() override;
 
+    wxNonOwnedWindow(const wxNonOwnedWindow&) = delete;
+	wxNonOwnedWindow& operator=(const wxNonOwnedWindow&) = delete;
+    
     bool Reparent(wxWindowBase* newParent) override;
     void InheritAttributes() override;
     bool IsThisEnabled() const override;
@@ -50,9 +53,6 @@ private:
     // This window supports handling per-monitor DPI awareness when the
     // application manifest contains <dpiAwareness>PerMonitorV2</dpiAwareness>.
     bool m_perMonitorDPIaware;
-
-    wxNonOwnedWindow(const wxNonOwnedWindow&) = delete;
-	wxNonOwnedWindow& operator=(const wxNonOwnedWindow&) = delete;
 };
 
 #endif // _WX_MSW_NONOWNEDWND_H_

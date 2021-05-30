@@ -99,7 +99,7 @@ public:
     wxToolBarToolBase *CreateTool(wxControl *control,
                                           const wxString& label) override;
 protected:
-    // common part of all ctors
+    // FIXME: Protected Init
     void Init();
 
     // create the native toolbar control

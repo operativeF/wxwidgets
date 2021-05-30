@@ -59,7 +59,7 @@ public:
 protected:
     wxSize DoGetBestClientSize() const override;
 
-    // ctor/dtor helpers
+    // FIXME: Protected Init
     void Init();
     void Free();
 

@@ -20,7 +20,6 @@ class wxToolTipOtherWindows;
 class WXDLLIMPEXP_CORE wxToolTip : public wxObject
 {
 public:
-    // ctor & dtor
     wxToolTip(const wxString &tip);
     ~wxToolTip() override;
 

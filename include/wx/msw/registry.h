@@ -96,7 +96,6 @@ public:
   // leaves only the part after it (i.e. modifies the string passed!)
   static StdKey ExtractKeyName(wxString& str);
 
-  // ctors
     // root key is set to HKCR (the only root key under Win16)
     wxRegKey(WOW64ViewMode viewMode = WOW64ViewMode_Default);
 
@@ -112,7 +111,10 @@ public:
     // strKey is the name of key under (previously created) keyParent
   wxRegKey(const wxRegKey& keyParent, const wxString& strKey);
     // dtor closes the key
- ~wxRegKey();
+  ~wxRegKey();
+
+  wxRegKey(const wxRegKey&) = delete;
+	wxRegKey& operator=(const wxRegKey&) = delete;
 
   // change key (closes the previously opened key if any)
     // the name is absolute, i.e. should start with HKEY_xxx
@@ -245,9 +247,6 @@ public:
   void ReserveMemoryForName(size_t bytes) { m_strKey.reserve(bytes); }
 
 private:
-  // common part of all ctors
-  
-
   // recursive helper for Export()
   bool DoExport(wxOutputStream& ostr) const;
 
@@ -265,10 +264,6 @@ private:
   WOW64ViewMode m_viewMode;      // which view to select under WOW64
   AccessMode    m_mode;          // valid only if key is opened
   mutable long  m_dwLastError;   // last error (0 if none)
-
-
-  wxRegKey(const wxRegKey&) = delete;
-	wxRegKey& operator=(const wxRegKey&) = delete;
 };
 
 #endif // wxUSE_REGKEY

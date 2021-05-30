@@ -21,7 +21,6 @@ public:
                     const wxPoint& WXUNUSED(pos) = wxDefaultPosition)
         : wxMessageDialogBase(parent, message, caption, style)
     {
-        m_hook = nullptr;
     }
 
 	wxMessageDialog(const wxMessageDialog&) = delete;
@@ -68,7 +67,7 @@ private:
     int ShowMessageBox();
 
 
-    WXHANDLE m_hook; // HHOOK used to position the message box
+    WXHANDLE m_hook{nullptr}; // HHOOK used to position the message box
 
 public:
 	wxClassInfo *GetClassInfo() const override;

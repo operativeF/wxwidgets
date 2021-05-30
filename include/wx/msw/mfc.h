@@ -26,10 +26,7 @@
 class wxMFCWnd : public CWnd
 {
 public:
-    // If default ctor is used, Attach() must be called later.
-    wxMFCWnd()
-    {
-    }
+    wxMFCWnd() = default;
 
     // Combines default ctor and Attach().
     explicit wxMFCWnd(wxWindow* w)
@@ -162,7 +159,7 @@ private:
     }
 };
 
-typedef wxMFCApp<CWinApp> wxMFCWinApp;
+using wxMFCWinApp = wxMFCApp<CWinApp>;
 
 // ----------------------------------------------------------------------------
 // wxWidgets application class to be used in MFC applications

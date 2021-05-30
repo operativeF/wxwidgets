@@ -205,6 +205,10 @@ public:
         (void)Create(image, pf, depth);
     }
 
+    // DIBs can't be copied
+    wxDIB(const wxDIB&) = delete;
+    wxDIB& operator=(const wxDIB&) = delete;
+    
     // same as the above ctor but with the return code
     bool Create(const wxImage& image, PixelFormat pf = PixelFormat_PreMultiplied, int depth = -1);
 
@@ -273,11 +277,6 @@ private:
     // this case we shouldn't free it neither -- this flag tell us if this is
     // the case
     bool m_ownsHandle;
-
-
-    // DIBs can't be copied
-    wxDIB(const wxDIB&);
-    wxDIB& operator=(const wxDIB&);
 };
 
 // ----------------------------------------------------------------------------

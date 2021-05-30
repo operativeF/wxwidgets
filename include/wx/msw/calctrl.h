@@ -24,6 +24,9 @@ public:
         Create(parent, id, date, pos, size, style, name);
     }
 
+    wxCalendarCtrl(const wxCalendarCtrl&) = delete;
+	wxCalendarCtrl& operator=(const wxCalendarCtrl&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxDateTime& date = wxDefaultDateTime,
@@ -88,8 +91,6 @@ private:
 
 
     wxDECLARE_DYNAMIC_CLASS(wxCalendarCtrl);
-    wxCalendarCtrl(const wxCalendarCtrl&) = delete;
-	wxCalendarCtrl& operator=(const wxCalendarCtrl&) = delete;
 };
 
 #endif // _WX_MSW_CALCTRL_H_

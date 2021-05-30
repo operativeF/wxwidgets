@@ -41,16 +41,16 @@ class WXDLLEXPORT wxAcceleratorRefData: public wxObjectRefData
 {
     friend class WXDLLIMPEXP_FWD_CORE wxAcceleratorTable;
 public:
-    wxAcceleratorRefData();
+    wxAcceleratorRefData() = default;
     ~wxAcceleratorRefData() override;
-
-    inline HACCEL GetHACCEL() const { return m_hAccel; }
-protected:
-    HACCEL      m_hAccel;
-    bool        m_ok;
-
     wxAcceleratorRefData(const wxAcceleratorRefData&) = delete;
 	wxAcceleratorRefData& operator=(const wxAcceleratorRefData&) = delete;
+
+    inline HACCEL GetHACCEL() const { return m_hAccel; }
+
+protected:
+    HACCEL      m_hAccel{nullptr};
+    bool        m_ok{false};
 };
 
 // ============================================================================
@@ -62,12 +62,6 @@ protected:
 // ----------------------------------------------------------------------------
 
 #define M_ACCELDATA ((wxAcceleratorRefData *)m_refData)
-
-wxAcceleratorRefData::wxAcceleratorRefData()
-{
-    m_ok = false;
-    m_hAccel = nullptr;
-}
 
 wxAcceleratorRefData::~wxAcceleratorRefData()
 {

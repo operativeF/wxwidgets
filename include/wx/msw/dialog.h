@@ -66,7 +66,7 @@ public:
     WXLRESULT MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lParam) override;
 
 protected:
-    // common part of all ctors
+    // FIXME: Protected Init
     void Init();
 
 private:

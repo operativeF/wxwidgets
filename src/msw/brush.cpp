@@ -62,7 +62,7 @@ private:
     wxBrushStyle  m_style;
     wxBitmap      m_stipple;
     wxColour      m_colour;
-    HBRUSH        m_hBrush;
+    HBRUSH        m_hBrush{nullptr};
 
     // no assignment operator, the objects of this class are shared and never
     // assigned after being created once
@@ -82,18 +82,13 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxBrush, wxGDIObject);
 // ----------------------------------------------------------------------------
 
 wxBrushRefData::wxBrushRefData(const wxColour& colour, wxBrushStyle style)
-              : m_colour(colour)
+              : m_colour(colour), m_style(style)
 {
-    m_style = style;
-
-    m_hBrush = nullptr;
 }
 
 wxBrushRefData::wxBrushRefData(const wxBitmap& stipple)
 {
     DoSetStipple(stipple);
-
-    m_hBrush = nullptr;
 }
 
 wxBrushRefData::wxBrushRefData(const wxBrushRefData& data)
@@ -212,8 +207,7 @@ HBRUSH wxBrushRefData::GetHBRUSH()
 // wxBrush ctors/dtor
 // ----------------------------------------------------------------------------
 
-wxBrush::wxBrush()
-= default;
+wxBrush::wxBrush() = default;
 
 wxBrush::wxBrush(const wxColour& col, wxBrushStyle style)
 {
@@ -230,8 +224,7 @@ wxBrush::wxBrush(const wxBitmap& stipple)
     m_refData = new wxBrushRefData(stipple);
 }
 
-wxBrush::~wxBrush()
-= default;
+wxBrush::~wxBrush() = default;
 
 // ----------------------------------------------------------------------------
 // wxBrush house keeping stuff

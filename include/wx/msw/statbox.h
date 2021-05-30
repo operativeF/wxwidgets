@@ -17,9 +17,7 @@
 class WXDLLIMPEXP_CORE wxStaticBox : public wxCompositeWindowSettersOnly<wxStaticBoxBase>
 {
 public:
-    wxStaticBox()
-         
-    = default;
+    wxStaticBox() = default;
 
     wxStaticBox(wxWindow *parent, wxWindowID id,
                 const wxString& label,

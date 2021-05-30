@@ -104,6 +104,9 @@ public:
     wxButtonImageData() = default;
     ~wxButtonImageData() override = default;
 
+    wxButtonImageData(const wxButtonImageData&) = delete;
+	wxButtonImageData& operator=(const wxButtonImageData&) = delete;
+
     virtual wxBitmap GetBitmap(wxAnyButton::State which) const = 0;
     virtual void SetBitmap(const wxBitmap& bitmap, wxAnyButton::State which) = 0;
 
@@ -112,10 +115,6 @@ public:
 
     virtual wxDirection GetBitmapPosition() const = 0;
     virtual void SetBitmapPosition(wxDirection dir) = 0;
-
-private:
-    wxButtonImageData(const wxButtonImageData&) = delete;
-	wxButtonImageData& operator=(const wxButtonImageData&) = delete;
 };
 
 namespace
@@ -144,6 +143,9 @@ public:
             m_margin.y = btn->GetCharHeight() / 2;
         }
     }
+
+    wxODButtonImageData(const wxODButtonImageData&) = delete;
+	wxODButtonImageData& operator=(const wxODButtonImageData&) = delete;
 
     wxBitmap GetBitmap(wxAnyButton::State which) const override
     {
@@ -182,8 +184,6 @@ private:
     wxSize m_margin;
     wxDirection m_dir;
 
-    wxODButtonImageData(const wxODButtonImageData&) = delete;
-	wxODButtonImageData& operator=(const wxODButtonImageData&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxODButtonImageData);
 };
 
@@ -193,7 +193,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxODButtonImageData, wxButtonImageData);
 
 // somehow the margin is one pixel greater than the value returned by
 // GetThemeMargins() call
-const int XP_BUTTON_EXTRA_MARGIN = 1;
+constexpr int XP_BUTTON_EXTRA_MARGIN = 1;
 
 class wxXPButtonImageData : public wxButtonImageData
 {

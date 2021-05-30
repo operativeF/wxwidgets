@@ -31,6 +31,9 @@ public:
         (void)Create(window, size);
     }
 
+    wxCaret(const wxCaret&) = delete;
+	wxCaret& operator=(const wxCaret&) = delete;
+
     // process wxWindow notifications
     void OnSetFocus() override;
     void OnKillFocus() override;
@@ -54,9 +57,6 @@ protected:
 
 private:
     bool m_hasCaret;
-
-    wxCaret(const wxCaret&) = delete;
-	wxCaret& operator=(const wxCaret&) = delete;
 };
 
 #endif // _WX_CARET_H_

@@ -29,6 +29,7 @@ public:
                          const wxString& filter = wxEmptyString) override;
 
 protected:
+    // FIXME: Protected Init, returns bool
     bool Init();
 };
 

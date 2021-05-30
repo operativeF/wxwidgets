@@ -23,14 +23,8 @@ class WXDLLIMPEXP_FWD_CORE wxAcceleratorTable;
 class WXDLLIMPEXP_CORE wxMDIParentFrame : public wxMDIParentFrameBase
 {
 public:
-    wxMDIParentFrame() { 
-#if wxUSE_MENUS && wxUSE_ACCEL
-  // the default menu doesn't have any accelerators (even if we have it)
-  m_accelWindowMenu = nullptr;
-#endif // wxUSE_MENUS && wxUSE_ACCEL
+    wxMDIParentFrame() = default;
 
-  m_activationNotHandled = false;
- }
     wxMDIParentFrame(wxWindow *parent,
                      wxWindowID id,
                      const wxString& title,
@@ -39,15 +33,6 @@ public:
                      long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
                      const wxString& name = wxASCII_STR(wxFrameNameStr))
     {
-        
-#if wxUSE_MENUS && wxUSE_ACCEL
-  // the default menu doesn't have any accelerators (even if we have it)
-  m_accelWindowMenu = nullptr;
-#endif // wxUSE_MENUS && wxUSE_ACCEL
-
-  m_activationNotHandled = false;
-
-
         Create(parent, id, title, pos, size, style, name);
     }
 
@@ -160,7 +145,7 @@ private:
     void UpdateWindowMenu(bool enable);
 
 #if wxUSE_ACCEL
-    wxAcceleratorTable *m_accelWindowMenu;
+    wxAcceleratorTable *m_accelWindowMenu{nullptr};
 #endif // wxUSE_ACCEL
 #endif // wxUSE_MENUS
 
@@ -169,7 +154,7 @@ private:
 
     // if true, indicates whether the event wasn't really processed even though
     // it was "handled", see OnActivate() and HandleActivate()
-    bool m_activationNotHandled;
+    bool m_activationNotHandled{false};
 
     // holds the current translation for the window menu label
     wxString m_currentWindowMenuLabel;

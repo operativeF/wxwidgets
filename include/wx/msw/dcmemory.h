@@ -21,6 +21,9 @@ public:
     wxMemoryDCImpl( wxMemoryDC *owner, wxBitmap& bitmap );
     wxMemoryDCImpl( wxMemoryDC *owner, wxDC *dc ); // Create compatible DC
 
+    wxMemoryDCImpl(const wxMemoryDCImpl&) = delete;
+	wxMemoryDCImpl& operator=(const wxMemoryDCImpl&) = delete;
+
     // override some base class virtuals
     void DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height) override;
     void DoGetSize(int* width, int* height) const override;
@@ -34,11 +37,10 @@ protected:
     bool CreateCompatible(wxDC *dc);
 
     // initialize the newly created DC
+    // FIXME: Protected Init
     void Init();
 
     wxDECLARE_CLASS(wxMemoryDCImpl);
-    wxMemoryDCImpl(const wxMemoryDCImpl&) = delete;
-	wxMemoryDCImpl& operator=(const wxMemoryDCImpl&) = delete;
 };
 
 #endif

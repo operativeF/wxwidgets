@@ -106,6 +106,7 @@ protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     // common part of all ctors
+    // FIXME: Protected Init()
     void Init()
     {
         m_lastAcceptedSelection =

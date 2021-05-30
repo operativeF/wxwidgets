@@ -32,6 +32,7 @@ public:
     static void Stop();
 
 protected:
+    // FIXME: Protected Init
     void Init() { m_data = nullptr; }
     bool CheckCreatedOk();
     void Free();

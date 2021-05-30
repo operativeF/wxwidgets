@@ -21,6 +21,9 @@ public:
     wxAppProgressIndicator(wxWindow* parent = nullptr, int maxValue = 100);
     ~wxAppProgressIndicator() override;
 
+    wxAppProgressIndicator(const wxAppProgressIndicator&) = delete;
+	wxAppProgressIndicator& operator=(const wxAppProgressIndicator&) = delete;
+    
     bool IsAvailable() const override;
 
     void SetValue(int value) override;
@@ -32,9 +35,6 @@ private:
     int m_maxValue;
 
     std::vector<wxTaskBarButton*> m_taskBarButtons;
-
-    wxAppProgressIndicator(const wxAppProgressIndicator&) = delete;
-	wxAppProgressIndicator& operator=(const wxAppProgressIndicator&) = delete;
 };
 
 #endif  // _WX_MSW_APPPROG_H_

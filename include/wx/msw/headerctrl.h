@@ -21,12 +21,7 @@ class wxMSWHeaderCtrl;
 class WXDLLIMPEXP_CORE wxHeaderCtrl : public wxCompositeWindow<wxHeaderCtrlBase>
 {
 public:
-    wxHeaderCtrl()
-    {
-        
-    m_nativeControl = nullptr;
-
-    }
+    wxHeaderCtrl() = default;
 
     wxHeaderCtrl(wxWindow *parent,
                  wxWindowID id = wxID_ANY,
@@ -35,12 +30,11 @@ public:
                  long style = wxHD_DEFAULT_STYLE,
                  const wxString& name = wxASCII_STR(wxHeaderCtrlNameStr))
     {
-        
-    m_nativeControl = nullptr;
-
-
         Create(parent, id, pos, size, style, name);
     }
+
+    wxHeaderCtrl(const wxHeaderCtrl&) = delete;
+	wxHeaderCtrl& operator=(const wxHeaderCtrl&) = delete;
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
@@ -68,20 +62,14 @@ private:
     wxArrayInt DoGetColumnsOrder() const override;
 
     // Pure virtual method inherited from wxCompositeWindow.
-    wxWindowList GetCompositeWindowParts() const override;
-
-    // Common part of all ctors.
-    
+    wxWindowList GetCompositeWindowParts() const override;    
 
     // Events.
     void OnSize(wxSizeEvent& event);
 
     // The native header control.
-    wxMSWHeaderCtrl* m_nativeControl;
+    wxMSWHeaderCtrl* m_nativeControl{nullptr};
     friend class wxMSWHeaderCtrl;
-
-    wxHeaderCtrl(const wxHeaderCtrl&) = delete;
-	wxHeaderCtrl& operator=(const wxHeaderCtrl&) = delete;
 };
 
 #endif // _WX_MSW_HEADERCTRL_H_

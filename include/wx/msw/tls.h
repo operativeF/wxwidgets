@@ -28,6 +28,9 @@ public:
         m_slot = ::TlsAlloc();
     }
 
+    wxTlsKey(const wxTlsKey&) = delete;
+	wxTlsKey& operator=(const wxTlsKey&) = delete;
+
     // return true if the key was successfully allocated
     bool IsOk() const { return m_slot != TLS_OUT_OF_INDEXES; }
 
@@ -115,9 +118,6 @@ private:
 
     std::vector<void*> m_allValues;
     wxCriticalSection m_csAllValues;
-
-    wxTlsKey(const wxTlsKey&) = delete;
-	wxTlsKey& operator=(const wxTlsKey&) = delete;
 };
 
 #endif // _WX_MSW_TLS_H_

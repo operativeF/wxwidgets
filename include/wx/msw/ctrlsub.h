@@ -18,7 +18,9 @@ class WXDLLIMPEXP_CORE wxControlWithItems : public wxControlWithItemsBase
 {
 public:
     wxControlWithItems() = default;
-
+    wxControlWithItems(const wxControlWithItems&) = delete;
+	wxControlWithItems& operator=(const wxControlWithItems&) = delete;
+    
 protected:
     // preallocate memory for inserting the given new items into the control
     // using the wm message (normally either LB_INITSTORAGE or CB_INITSTORAGE)
@@ -35,8 +37,6 @@ protected:
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxControlWithItems);
-    wxControlWithItems(const wxControlWithItems&) = delete;
-	wxControlWithItems& operator=(const wxControlWithItems&) = delete;
 };
 
 #endif // _WX_MSW_CTRLSUB_H_

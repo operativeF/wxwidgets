@@ -24,6 +24,9 @@ class WXDLLIMPEXP_CORE wxTaskBarButtonImpl : public wxTaskBarButton
 public:
     ~wxTaskBarButtonImpl() override;
 
+    wxTaskBarButtonImpl(const wxTaskBarButtonImpl&) = delete;
+	wxTaskBarButtonImpl& operator=(const wxTaskBarButtonImpl&) = delete;
+    
     void SetProgressRange(int range) override;
     void SetProgressValue(int value) override;
     void PulseProgress() override;
@@ -66,9 +69,6 @@ private:
     bool m_hasInitThumbnailToolbar;
 
     friend wxTaskBarButton* wxTaskBarButton::New(wxWindow*);
-
-    wxTaskBarButtonImpl(const wxTaskBarButtonImpl&) = delete;
-	wxTaskBarButtonImpl& operator=(const wxTaskBarButtonImpl&) = delete;
 };
 
 #endif // wxUSE_TASKBARBUTTON

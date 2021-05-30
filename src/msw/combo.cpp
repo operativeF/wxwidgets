@@ -127,8 +127,7 @@ bool wxComboCtrl::Create(wxWindow *parent,
     return true;
 }
 
-wxComboCtrl::~wxComboCtrl()
-= default;
+wxComboCtrl::~wxComboCtrl() = default;
 
 void wxComboCtrl::OnResize()
 {

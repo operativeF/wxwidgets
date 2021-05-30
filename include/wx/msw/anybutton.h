@@ -17,15 +17,11 @@
 class WXDLLIMPEXP_CORE wxAnyButton : public wxAnyButtonBase
 {
 public:
-    wxAnyButton()
-    {
-        m_imageData = nullptr;
-#if wxUSE_MARKUP
-        m_markupText = nullptr;
-#endif // wxUSE_MARKUP
-    }
-
+    wxAnyButton() = default;
     ~wxAnyButton() override;
+    
+    wxAnyButton(const wxAnyButton&) = delete;
+	wxAnyButton& operator=(const wxAnyButton&) = delete;
 
     // overridden base class methods
     void SetLabel(const wxString& label) override;
@@ -61,10 +57,10 @@ protected:
     void AdjustForBitmapSize(wxSize& size) const;
     void AdjustForBitmapMargins(wxSize& size) const;
 
-    class wxButtonImageData *m_imageData;
+    class wxButtonImageData *m_imageData{nullptr};
 
 #if wxUSE_MARKUP
-    class wxMarkupText *m_markupText;
+    class wxMarkupText *m_markupText{nullptr};
 #endif // wxUSE_MARKUP
 
     // Switches button into owner-drawn mode: this is used if we need to draw
@@ -74,10 +70,6 @@ protected:
     bool IsOwnerDrawn() const;
 
     virtual bool MSWIsPushed() const;
-
-private:
-    wxAnyButton(const wxAnyButton&) = delete;
-	wxAnyButton& operator=(const wxAnyButton&) = delete;
 };
 
 #endif // _WX_MSW_ANYBUTTON_H_

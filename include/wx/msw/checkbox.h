@@ -75,10 +75,7 @@ protected:
     void
         MSWDrawButtonBitmap(wxDC& dc, const wxRect& rect, int flags) override;
 
-private:
-    // common part of all ctors
-    
-
+private:    
     // current state of the checkbox
     wxCheckBoxState m_state{wxCHK_UNCHECKED};
 
