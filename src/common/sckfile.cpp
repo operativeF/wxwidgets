@@ -31,8 +31,7 @@ IMPLEMENT_PROTOCOL(wxFileProto, wxT("file"), NULL, false)
 
 wxFileProto::wxFileProto()
             
-{
-}
+= default;
 
 wxFileProto::~wxFileProto()
 = default;

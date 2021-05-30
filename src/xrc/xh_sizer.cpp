@@ -934,8 +934,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxStdDialogButtonSizerXmlHandler, wxXmlResourceHandler
 
 wxStdDialogButtonSizerXmlHandler::wxStdDialogButtonSizerXmlHandler()
      
-{
-}
+= default;
 
 wxObject *wxStdDialogButtonSizerXmlHandler::DoCreateResource()
 {

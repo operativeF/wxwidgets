@@ -230,8 +230,7 @@ class wxFSWatchInfo
 {
 public:
     wxFSWatchInfo()  
-    {
-    }
+    = default;
 
     wxFSWatchInfo(const wxString& path,
                   int events,

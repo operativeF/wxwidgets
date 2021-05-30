@@ -237,8 +237,7 @@ void RGBAImage::SetPixel(int x, int y, ColourDesired colour, int alpha) {
 	pixel[3] = static_cast<unsigned char>(alpha);
 }
 
-RGBAImageSet::RGBAImageSet()  {
-}
+RGBAImageSet::RGBAImageSet()  = default;
 
 RGBAImageSet::~RGBAImageSet() {
 	Clear();

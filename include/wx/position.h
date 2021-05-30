@@ -15,7 +15,7 @@
 class WXDLLIMPEXP_CORE wxPosition
 {
 public:
-    wxPosition()  {}
+    wxPosition()  = default;
     wxPosition(int row, int col) : m_row(row), m_column(col) {}
 
     // default copy ctor and assignment operator are okay.

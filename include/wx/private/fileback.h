@@ -34,7 +34,7 @@ public:
                   size_t bufsize = DefaultBufSize,
                   const wxString& prefix = wxT("wxbf"));
 
-    wxBackingFile()  { }
+    wxBackingFile()  = default;
     ~wxBackingFile();
 
     wxBackingFile(const wxBackingFile& backer);

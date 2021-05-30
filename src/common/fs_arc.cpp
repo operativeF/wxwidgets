@@ -190,7 +190,7 @@ wxArchiveFSEntry *wxArchiveFSCacheDataImpl::GetNext(wxArchiveFSEntry *fse)
 class wxArchiveFSCacheData
 {
 public:
-    wxArchiveFSCacheData()  { }
+    wxArchiveFSCacheData()  = default;
     wxArchiveFSCacheData(const wxArchiveClassFactory& factory,
                          const wxBackingFile& backer);
     wxArchiveFSCacheData(const wxArchiveClassFactory& factory,

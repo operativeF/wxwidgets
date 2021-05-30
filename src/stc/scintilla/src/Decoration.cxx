@@ -34,8 +34,7 @@ bool Decoration::Empty() const {
 	return (rs.Runs() == 1) && (rs.AllSameAs(0));
 }
 
-DecorationList::DecorationList()  {
-}
+DecorationList::DecorationList()  = default;
 
 DecorationList::~DecorationList() {
 	Decoration *deco = root;

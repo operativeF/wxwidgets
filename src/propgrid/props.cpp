@@ -1844,8 +1844,7 @@ class WXDLLIMPEXP_PROPGRID wxPGDialogAdapter : public wxPGEditorDialogAdapter
 {
 public:
     wxPGDialogAdapter()  
-    {
-    }
+    = default;
 
     virtual ~wxPGDialogAdapter()
     = default;

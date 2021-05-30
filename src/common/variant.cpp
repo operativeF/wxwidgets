@@ -48,8 +48,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxVariant, wxObject);
 
 wxVariant::wxVariant()
      
-{
-}
+= default;
 
 bool wxVariant::IsNull() const
 {

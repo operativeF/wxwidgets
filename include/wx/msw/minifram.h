@@ -16,7 +16,7 @@
 class WXDLLIMPEXP_CORE wxMiniFrame : public wxFrame
 {
 public:
-  wxMiniFrame() { }
+  wxMiniFrame() = default;
 
 	wxMiniFrame(const wxMiniFrame&) = delete;
 	wxMiniFrame& operator=(const wxMiniFrame&) = delete;

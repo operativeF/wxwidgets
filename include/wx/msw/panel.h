@@ -19,7 +19,7 @@ class WXDLLIMPEXP_FWD_CORE wxBrush;
 class WXDLLIMPEXP_CORE wxPanel : public wxPanelBase
 {
 public:
-    wxPanel() { }
+    wxPanel() = default;
 
     wxPanel(wxWindow *parent,
             wxWindowID winid = wxID_ANY,

@@ -22,8 +22,7 @@ class WXDLLIMPEXP_CORE wxAffineMatrix2D : public wxAffineMatrix2DBase
 {
 public:
     wxAffineMatrix2D()  
-    {
-    }
+    = default;
 
     // Implement base class pure virtual methods.
     void Set(const wxMatrix2D& mat2D, const wxPoint2DDouble& tr) override;

@@ -56,7 +56,7 @@ class wxIPCSocketStreams;
 class WXDLLIMPEXP_NET wxTCPConnection : public wxConnectionBase
 {
 public:
-    wxTCPConnection() { }
+    wxTCPConnection() = default;
     wxTCPConnection(void *buffer, size_t size)
         : wxConnectionBase(buffer, size)
     {

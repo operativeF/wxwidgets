@@ -29,8 +29,7 @@
 using namespace Scintilla;
 #endif
 
-MarginStyle::MarginStyle()  {
-}
+MarginStyle::MarginStyle()  = default;
 
 // A list of the fontnames - avoids wasting space in each style
 FontNames::FontNames() = default;

@@ -157,12 +157,12 @@ class WXDLLIMPEXP_FWD_CORE wxCalendarCtrl;
 class WXDLLIMPEXP_CORE wxCalendarEvent : public wxDateEvent
 {
 public:
-    wxCalendarEvent()   { }
+    wxCalendarEvent()   = default;
     wxCalendarEvent(wxWindow *win, const wxDateTime& dt, wxEventType type)
         : wxDateEvent(win, dt, type),
           m_wday(wxDateTime::Inv_WeekDay) { }
     wxCalendarEvent(const wxCalendarEvent& event)
-        : wxDateEvent(event), m_wday(event.m_wday) { }
+         = default;
 
     void SetWeekDay(wxDateTime::WeekDay wd) { m_wday = wd; }
     wxDateTime::WeekDay GetWeekDay() const { return m_wday; }

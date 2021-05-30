@@ -1185,8 +1185,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxFilterInputStream, wxInputStream);
 wxFilterInputStream::wxFilterInputStream()
  
     
-{
-}
+= default;
 
 wxFilterInputStream::wxFilterInputStream(wxInputStream& stream)
  :  m_parent_i_stream(&stream),
@@ -1215,8 +1214,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxFilterOutputStream, wxOutputStream);
 wxFilterOutputStream::wxFilterOutputStream()
  
     
-{
-}
+= default;
 
 wxFilterOutputStream::wxFilterOutputStream(wxOutputStream& stream)
  :  m_parent_o_stream(&stream),

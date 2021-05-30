@@ -94,7 +94,7 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxDataViewCtrlNameStr[];
 class wxDataViewItem : public wxItemId<void*>
 {
 public:
-    wxDataViewItem()  { }
+    wxDataViewItem()  = default;
     explicit wxDataViewItem(void* pItem) : wxItemId<void*>(pItem) { }
 };
 
@@ -851,27 +851,7 @@ public:
         Init(dvc, nullptr, item);
     }
 
-    wxDataViewEvent(const wxDataViewEvent& event)
-        : wxNotifyEvent(event),
-        m_item(event.m_item),
-        m_col(event.m_col),
-        m_model(event.m_model),
-        m_value(event.m_value),
-        m_column(event.m_column),
-        m_pos(event.m_pos),
-        m_cacheFrom(event.m_cacheFrom),
-        m_cacheTo(event.m_cacheTo),
-        m_editCancelled(event.m_editCancelled)
-#if wxUSE_DRAG_AND_DROP
-        , m_dataObject(event.m_dataObject),
-        m_dataFormat(event.m_dataFormat),
-        m_dataBuffer(event.m_dataBuffer),
-        m_dataSize(event.m_dataSize),
-        m_dragFlags(event.m_dragFlags),
-        m_dropEffect(event.m_dropEffect),
-        m_proposedDropIndex(event.m_proposedDropIndex)
-#endif
-        { }
+    wxDataViewEvent(const wxDataViewEvent& event) = default;
 
     wxDataViewItem GetItem() const { return m_item; }
     int GetColumn() const { return m_col; }
@@ -1355,7 +1335,7 @@ class WXDLLIMPEXP_CORE wxDataViewTreeCtrl: public wxDataViewCtrl,
                                           public wxWithImages
 {
 public:
-    wxDataViewTreeCtrl() { }
+    wxDataViewTreeCtrl() = default;
     wxDataViewTreeCtrl(wxWindow *parent,
                        wxWindowID id,
                        const wxPoint& pos = wxDefaultPosition,

@@ -647,7 +647,7 @@ struct wxXmlParsingContext
     wxXmlParsingContext()
         
           
-    {}
+    = default;
 
     XML_Parser parser;
     wxMBConv  *conv{nullptr};

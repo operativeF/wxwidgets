@@ -26,13 +26,11 @@ class CustomDraw
 public:
     // Trivial default ctor needed for non-copyable class.
     CustomDraw()
-    {
-    }
+    = default;
 
     // Virtual dtor for the base class.
     virtual ~CustomDraw()
-    {
-    }
+    = default;
 
     // Implementation of NM_CUSTOMDRAW handler, returns one of CDRF_XXX
     // constants, possibly CDRF_DODEFAULT if custom drawing is not necessary.

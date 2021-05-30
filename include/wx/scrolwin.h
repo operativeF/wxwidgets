@@ -70,7 +70,7 @@ class WXDLLIMPEXP_CORE wxAnyScrollHelperBase
 {
 public:
     explicit wxAnyScrollHelperBase(wxWindow* win);
-    virtual ~wxAnyScrollHelperBase() {}
+    virtual ~wxAnyScrollHelperBase() = default;
 
     // Disable use of keyboard keys for scrolling. By default cursor movement
     // keys (including Home, End, Page Up and Down) are used to scroll the
@@ -490,7 +490,7 @@ private:
 class WXDLLIMPEXP_CORE wxScrolledWindow : public wxScrolled<wxPanel>
 {
 public:
-    wxScrolledWindow()  {}
+    wxScrolledWindow()  = default;
     wxScrolledWindow(wxWindow *parent,
                      wxWindowID winid = wxID_ANY,
                      const wxPoint& pos = wxDefaultPosition,

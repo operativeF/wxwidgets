@@ -34,7 +34,7 @@ public:
     //     (e.g. on Win32 where wchar_t* is encoded in UTF-16)
     typedef wxUint32 value_type;
 
-    wxUniChar()  {}
+    wxUniChar()  = default;
 
     // Create the character from 8bit character value encoded in the current
     // locale's charset.

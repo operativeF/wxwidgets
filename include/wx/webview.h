@@ -98,7 +98,7 @@ class WXDLLIMPEXP_WEBVIEW wxWebViewHandler
 public:
     wxWebViewHandler(const wxString& scheme)
         : m_scheme(scheme) {}
-    virtual ~wxWebViewHandler() {}
+    virtual ~wxWebViewHandler() = default;
     virtual wxString GetName() const { return m_scheme; }
     virtual wxFSFile* GetFile(const wxString &uri) = 0;
     virtual void SetSecurityURL(const wxString& url) { m_securityURL = url; }
@@ -141,7 +141,7 @@ public:
         m_runScriptCount = 0;
     }
 
-    virtual ~wxWebView() {}
+    virtual ~wxWebView() = default;
 
     virtual bool Create(wxWindow* parent,
            wxWindowID id,
@@ -285,7 +285,7 @@ private:
 class WXDLLIMPEXP_WEBVIEW wxWebViewEvent : public wxNotifyEvent
 {
 public:
-    wxWebViewEvent() {}
+    wxWebViewEvent() = default;
     wxWebViewEvent(wxEventType type, int id, const wxString& url,
                    const wxString target,
                    wxWebViewNavigationActionFlags flags = wxWEBVIEW_NAV_ACTION_NONE,

@@ -102,7 +102,7 @@ struct wxCmdLineEntryDesc
 class WXDLLIMPEXP_BASE wxCmdLineArg
 {
 public:
-    virtual ~wxCmdLineArg() {}
+    virtual ~wxCmdLineArg() = default;
 
     virtual double GetDoubleVal() const = 0;
     virtual long GetLongVal() const = 0;
@@ -141,7 +141,7 @@ public:
         typedef std::bidirectional_iterator_tag iterator_category;
 #endif // wx_USE_STD_STRING
 
-        const_iterator()  {}
+        const_iterator()  = default;
         reference operator *() const;
         pointer operator ->() const;
         const_iterator &operator ++ ();

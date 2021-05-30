@@ -294,11 +294,11 @@ public:
 class Surface {
 private:
 	// Private so Surface objects can not be copied
-	Surface(const Surface &) {}
-	Surface &operator=(const Surface &) { return *this; }
+	Surface(const Surface &) = default;
+	Surface &operator=(const Surface &) = default;
 public:
-	Surface() {}
-	virtual ~Surface() {}
+	Surface() = default;
+	virtual ~Surface() = default;
 	static Surface *Allocate(int technology);
 
 	virtual void Init(WindowID wid)=0;
@@ -356,8 +356,7 @@ class Window {
 protected:
 	WindowID wid{nullptr};
 public:
-	Window()  {
-	}
+	Window()  = default;
 	Window(const Window &source) : wid(source.wid), cursorLast(cursorInvalid) {
 	}
 	virtual ~Window();
@@ -442,7 +441,7 @@ public:
  */
 class DynamicLibrary {
 public:
-	virtual ~DynamicLibrary() {}
+	virtual ~DynamicLibrary() = default;
 
 	/// @return Pointer to function "name", or NULL on failure.
 	virtual Function FindFunction(const char *name) = 0;
@@ -470,13 +469,13 @@ public:
  */
 class Platform {
 	// Private so Platform objects can not be copied
-	Platform(const Platform &) {}
-	Platform &operator=(const Platform &) { return *this; }
+	Platform(const Platform &) = default;
+	Platform &operator=(const Platform &) = default;
 public:
 	// Should be private because no new Platforms are ever created
 	// but gcc warns about this
-	Platform() {}
-	~Platform() {}
+	Platform() = default;
+	~Platform() = default;
 	static ColourDesired Chrome();
 	static ColourDesired ChromeHighlight();
 	static const char *DefaultFont();

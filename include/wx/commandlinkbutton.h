@@ -29,7 +29,7 @@
 class WXDLLIMPEXP_ADV wxCommandLinkButtonBase : public wxButton
 {
 public:
-    wxCommandLinkButtonBase()  { }
+    wxCommandLinkButtonBase()  = default;
 
     wxCommandLinkButtonBase(wxWindow *parent,
                             wxWindowID id,
@@ -93,7 +93,7 @@ class WXDLLIMPEXP_ADV wxGenericCommandLinkButton
                       : public wxCommandLinkButtonBase
 {
 public:
-    wxGenericCommandLinkButton()  { }
+    wxGenericCommandLinkButton()  = default;
 
 
     wxGenericCommandLinkButton(wxWindow *parent,

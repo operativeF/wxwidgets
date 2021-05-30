@@ -343,8 +343,7 @@ wxPGCellData::wxPGCellData()
 
 wxPGCell::wxPGCell()
      
-{
-}
+= default;
 
 wxPGCell::wxPGCell( const wxString& text,
                     const wxBitmap& bitmap,

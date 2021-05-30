@@ -113,7 +113,7 @@ public:
 
         // Instance methods.
 
-    wxPluginManager()  {}
+    wxPluginManager()  = default;
     wxPluginManager(const wxString &libname, int flags = wxDL_DEFAULT)
     {
         Load(libname, flags);

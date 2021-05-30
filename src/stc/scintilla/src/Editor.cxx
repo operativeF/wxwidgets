@@ -85,9 +85,9 @@ static bool IsLastStep(const DocModification &mh) {
 	    && (mh.modificationType & SC_MULTILINEUNDOREDO) != 0;
 }
 
-Timer::Timer()  {}
+Timer::Timer()  = default;
 
-Idler::Idler()  {}
+Idler::Idler()  = default;
 
 static inline bool IsAllSpacesOrTabs(const char *s, unsigned int len) {
 	for (unsigned int i = 0; i < len; i++) {

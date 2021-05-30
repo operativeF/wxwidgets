@@ -21,7 +21,7 @@
 class wxDisplayFactory
 {
 public:
-    wxDisplayFactory() { }
+    wxDisplayFactory() = default;
     virtual ~wxDisplayFactory() { ClearImpls(); }
 
     // Create the display if necessary using CreateDisplay(), otherwise just
@@ -101,7 +101,7 @@ class wxDisplayImpl
 {
 public:
     // virtual dtor for this base class
-    virtual ~wxDisplayImpl() { }
+    virtual ~wxDisplayImpl() = default;
 
 
     // return the full area of this display

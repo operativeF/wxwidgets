@@ -161,7 +161,7 @@ private:
 class SurfaceData
 {
 public:
-    virtual ~SurfaceData(){}
+    virtual ~SurfaceData()= default;
 };
 
 #if wxUSE_GRAPHICS_DIRECT2D

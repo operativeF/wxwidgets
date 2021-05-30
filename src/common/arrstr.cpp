@@ -260,7 +260,7 @@ struct wxStringFragment
         LetterOrSymbol // letters and symbols, i.e., anything not covered by the above types
     };
 
-    wxStringFragment()  {}
+    wxStringFragment()  = default;
 
     Type     type{Empty};
     wxString text;

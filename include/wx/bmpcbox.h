@@ -45,7 +45,7 @@ public:
     m_usedImgSize = wxSize(-1, -1);
  }
 
-    virtual ~wxBitmapComboBoxBase() { }
+    virtual ~wxBitmapComboBoxBase() = default;
 
     // Sets the image for the given item.
     virtual void SetItemBitmap(unsigned int n, const wxBitmap& bitmap) = 0;

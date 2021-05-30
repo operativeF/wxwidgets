@@ -30,7 +30,7 @@ WX_DECLARE_STRING_HASH_MAP_WITH_DECL(
 class WXDLLIMPEXP_BASE wxShadowObject
 {
 public:
-    wxShadowObject() { }
+    wxShadowObject() = default;
 
     void AddMethod( const wxString &name, wxShadowObjectMethod method )
     {
@@ -97,14 +97,14 @@ enum class wxClientDataType
 class WXDLLIMPEXP_BASE wxClientData
 {
 public:
-    wxClientData() { }
-    virtual ~wxClientData() { }
+    wxClientData() = default;
+    virtual ~wxClientData() = default;
 };
 
 class WXDLLIMPEXP_BASE wxStringClientData : public wxClientData
 {
 public:
-    wxStringClientData()  { }
+    wxStringClientData()  = default;
     wxStringClientData( const wxString &data ) : m_data(data) { }
     void SetData( const wxString &data ) { m_data = data; }
     const wxString& GetData() const { return m_data; }

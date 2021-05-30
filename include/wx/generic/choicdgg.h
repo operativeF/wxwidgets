@@ -33,7 +33,7 @@ class WXDLLIMPEXP_FWD_CORE wxListBoxBase;
 class WXDLLIMPEXP_CORE wxAnyChoiceDialog : public wxDialog
 {
 public:
-    wxAnyChoiceDialog()  { }
+    wxAnyChoiceDialog()  = default;
 
     wxAnyChoiceDialog(wxWindow *parent,
                       const wxString& message,
@@ -167,7 +167,7 @@ public:
 class WXDLLIMPEXP_CORE wxMultiChoiceDialog : public wxAnyChoiceDialog
 {
 public:
-    wxMultiChoiceDialog() { }
+    wxMultiChoiceDialog() = default;
 
     wxMultiChoiceDialog(wxWindow *parent,
                         const wxString& message,

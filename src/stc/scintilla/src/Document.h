@@ -95,7 +95,7 @@ class Document;
  */
 class RegexSearchBase {
 public:
-	virtual ~RegexSearchBase() {}
+	virtual ~RegexSearchBase() = default;
 
 	virtual long FindText(Document *doc, int minPos, int maxPos, const char *s,
                         bool caseSensitive, bool word, bool wordStart, int flags, int *length) = 0;
@@ -183,8 +183,7 @@ protected:
 public:
 	explicit LexInterface(Document *pdoc_) : pdoc(pdoc_), instance(nullptr), performingStyle(false) {
 	}
-	virtual ~LexInterface() {
-	}
+	virtual ~LexInterface() = default;
 	void Colourise(int start, int end);
 	int LineEndTypesSupported();
 	bool UseContainerLexing() const {
@@ -536,7 +535,7 @@ public:
  */
 class DocWatcher {
 public:
-	virtual ~DocWatcher() {}
+	virtual ~DocWatcher() = default;
 
 	virtual void NotifyModifyAttempt(Document *doc, void *userData) = 0;
 	virtual void NotifySavePoint(Document *doc, void *userData, bool atSavePoint) = 0;

@@ -29,8 +29,8 @@ class WXDLLIMPEXP_HTML wxHtmlFilter : public wxObject
     wxDECLARE_ABSTRACT_CLASS(wxHtmlFilter);
 
 public:
-    wxHtmlFilter()  {}
-    virtual ~wxHtmlFilter() {}
+    wxHtmlFilter()  = default;
+    virtual ~wxHtmlFilter() = default;
 
     // returns true if this filter is able to open&read given file
     virtual bool CanRead(const wxFSFile& file) const = 0;

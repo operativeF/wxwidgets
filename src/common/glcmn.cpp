@@ -116,8 +116,7 @@ bool wxGLCanvasBase::SetColour(const wxString& colour)
 }
 
 wxGLCanvasBase::~wxGLCanvasBase()
-{
-}
+= default;
 
 /* static */
 bool wxGLCanvasBase::IsExtensionInList(const char *list, const char *extension)

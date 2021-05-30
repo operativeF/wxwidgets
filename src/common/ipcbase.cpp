@@ -37,8 +37,7 @@ wxConnectionBase::wxConnectionBase(void *buffer, size_t bytes)
 wxConnectionBase::wxConnectionBase()
     
       
-{
-}
+= default;
 
 wxConnectionBase::wxConnectionBase(const wxConnectionBase& copy)
     : 

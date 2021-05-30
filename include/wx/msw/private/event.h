@@ -31,8 +31,7 @@ public:
     };
 
     Event()
-    {
-    }
+    = default;
 
     // Wrappers around {Create,Set,Reset}Event() Windows API functions, with
     // the same semantics.

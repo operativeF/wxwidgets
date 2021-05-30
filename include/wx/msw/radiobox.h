@@ -22,7 +22,7 @@ class WXDLLIMPEXP_FWD_CORE wxSubwindows;
 class WXDLLIMPEXP_CORE wxRadioBox : public wxStaticBox, public wxRadioBoxBase
 {
 public:
-    wxRadioBox() { }
+    wxRadioBox() = default;
 
     wxRadioBox(wxWindow *parent,
                wxWindowID id,

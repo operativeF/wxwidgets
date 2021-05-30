@@ -36,8 +36,7 @@ class WXDLLIMPEXP_CORE wxComboCtrl : public wxComboCtrlBase
 {
 public:
     // ctors and such
-    wxComboCtrl()  { 
- }
+    wxComboCtrl()  = default;
 
     wxComboCtrl(wxWindow *parent,
                    wxWindowID id = wxID_ANY,

@@ -88,7 +88,7 @@ public:
     };
 
 public:
-    wxDList()  {}
+    wxDList()  = default;
 
     ~wxDList() { Clear(); }
 

@@ -289,7 +289,7 @@ private:
     wxEventFunction m_method{nullptr};
 
     // Provide a dummy default ctor for type info purposes
-    wxObjectEventFunctor()  { }
+    wxObjectEventFunctor()  = default;
 
     WX_DECLARE_TYPEINFO_INLINE(wxObjectEventFunctor)
 };
@@ -1231,8 +1231,7 @@ public:
     wxEventBasicPayloadMixin()
         
           
-    {
-    }
+    = default;
 
     void SetString(const wxString& s) { m_cmdString = s; }
     const wxString& GetString() const { return m_cmdString; }
@@ -1256,7 +1255,7 @@ protected:
 class WXDLLIMPEXP_BASE wxEventAnyPayloadMixin : public wxEventBasicPayloadMixin
 {
 public:
-    wxEventAnyPayloadMixin()  {}
+    wxEventAnyPayloadMixin()  = default;
 
 #if wxUSE_ANY
     template<typename T>
@@ -1306,9 +1305,9 @@ public:
           
         { }
     wxIdleEvent(const wxIdleEvent& event)
-        : wxEvent(event),
-          m_requestMore(event.m_requestMore)
-    { }
+        
+          
+    = default;
 
     void RequestMore(bool needMore = true) { m_requestMore = needMore; }
     bool MoreRequested() const { return m_requestMore; }
@@ -1391,9 +1390,8 @@ public:
     }
 
     wxAsyncMethodCallEvent(const wxAsyncMethodCallEvent& other)
-        : wxEvent(other)
-    {
-    }
+         
+    = default;
 
     virtual void Execute() = 0;
 };
@@ -1936,11 +1934,9 @@ public:
         { }
 
     wxSetCursorEvent(const wxSetCursorEvent& event)
-        : wxEvent(event),
-          m_x(event.m_x),
-          m_y(event.m_y),
-          m_cursor(event.m_cursor)
-        { }
+        
+          
+        = default;
 
     wxCoord GetX() const { return m_x; }
     wxCoord GetY() const { return m_y; }
@@ -2020,10 +2016,9 @@ public:
     }
 
     wxPanGestureEvent(const wxPanGestureEvent& event)
-        : wxGestureEvent(event),
-          m_delta(event.m_delta)
-    {
-    }
+        
+          
+    = default;
 
     wxPoint GetDelta() const { return m_delta; }
     void SetDelta(const wxPoint& delta) { m_delta = delta; }
@@ -2119,8 +2114,8 @@ public:
         : wxGestureEvent(winid, wxEVT_TWO_FINGER_TAP)
         { }
 
-    wxTwoFingerTapEvent(const wxTwoFingerTapEvent& event) : wxGestureEvent(event)
-    { }
+    wxTwoFingerTapEvent(const wxTwoFingerTapEvent& event)  
+    = default;
 
     wxEvent *Clone() const override { return new wxTwoFingerTapEvent(*this); }
 
@@ -2145,8 +2140,8 @@ public:
         : wxGestureEvent(winid, wxEVT_LONG_PRESS)
         { }
 
-    wxLongPressEvent(const wxLongPressEvent& event) : wxGestureEvent(event)
-    { }
+    wxLongPressEvent(const wxLongPressEvent& event)  
+    = default;
 
     wxEvent *Clone() const override { return new wxLongPressEvent(*this); }
 private:
@@ -2170,8 +2165,8 @@ public:
         : wxGestureEvent(winid, wxEVT_PRESS_AND_TAP)
         { }
 
-    wxPressAndTapEvent(const wxPressAndTapEvent& event) : wxGestureEvent(event)
-    { }
+    wxPressAndTapEvent(const wxPressAndTapEvent& event)  
+    = default;
 
     wxEvent *Clone() const override { return new wxPressAndTapEvent(*this); }
 private:
@@ -2362,9 +2357,8 @@ public:
           m_size(sz)
         { }
     wxSizeEvent(const wxSizeEvent& event)
-        : wxEvent(event),
-          m_size(event.m_size), m_rect(event.m_rect)
-        { }
+         
+        = default;
     wxSizeEvent(const wxRect& rect, int id = 0)
         : m_size(rect.GetSize()), m_rect(rect)
         { m_eventType = wxEVT_SIZING; m_id = id; }
@@ -2494,9 +2488,9 @@ public:
         { }
 
     wxEraseEvent(const wxEraseEvent& event)
-        : wxEvent(event),
-          m_dc(event.m_dc)
-        { }
+        
+          
+        = default;
 
     wxDC *GetDC() const { return m_dc; }
 
@@ -2693,10 +2687,8 @@ public:
           {}
 
     wxCloseEvent(const wxCloseEvent& event)
-        : wxEvent(event),
-        m_loggingOff(event.m_loggingOff),
-        m_veto(event.m_veto),
-        m_canVeto(event.m_canVeto) {}
+        
+        = default;
 
     void SetLoggingOff(bool logOff) { m_loggingOff = logOff; }
     bool GetLoggingOff() const
@@ -2894,13 +2886,9 @@ public:
     {
     }
     wxJoystickEvent(const wxJoystickEvent& event)
-        : wxEvent(event),
-          m_pos(event.m_pos),
-          m_zPosition(event.m_zPosition),
-          m_buttonChange(event.m_buttonChange),
-          m_buttonState(event.m_buttonState),
-          m_joyStick(event.m_joyStick)
-    { }
+        
+          
+    = default;
 
     wxPoint GetPosition() const { return m_pos; }
     int GetZPosition() const { return m_zPosition; }
@@ -3039,17 +3027,9 @@ public:
         m_isCheckable = true;
     }
     wxUpdateUIEvent(const wxUpdateUIEvent& event)
-        : wxCommandEvent(event),
-          m_checked(event.m_checked),
-          m_enabled(event.m_enabled),
-          m_shown(event.m_shown),
-          m_setEnabled(event.m_setEnabled),
-          m_setShown(event.m_setShown),
-          m_setText(event.m_setText),
-          m_setChecked(event.m_setChecked),
-          m_isCheckable(event.m_isCheckable),
-          m_text(event.m_text)
-    { }
+        
+          
+    = default;
 
     bool GetChecked() const { return m_checked; }
     bool GetEnabled() const { return m_enabled; }
@@ -3154,9 +3134,9 @@ public:
         { }
 
     wxMouseCaptureChangedEvent(const wxMouseCaptureChangedEvent& event)
-        : wxEvent(event),
-          m_gainedCapture(event.m_gainedCapture)
-        { }
+        
+          
+        = default;
 
     wxEvent *Clone() const override { return new wxMouseCaptureChangedEvent(*this); }
 
@@ -3187,8 +3167,8 @@ public:
     {}
 
     wxMouseCaptureLostEvent(const wxMouseCaptureLostEvent& event)
-        : wxEvent(event)
-    {}
+         
+    = default;
 
     wxEvent *Clone() const override { return new wxMouseCaptureLostEvent(*this); }
 
@@ -3262,9 +3242,9 @@ public:
         { }
 
     wxPaletteChangedEvent(const wxPaletteChangedEvent& event)
-        : wxEvent(event),
-          m_changedWindow(event.m_changedWindow)
-        { }
+        
+          
+        = default;
 
     void SetChangedWindow(wxWindow* win) { m_changedWindow = win; }
     wxWindow* GetChangedWindow() const { return m_changedWindow; }
@@ -3295,9 +3275,9 @@ public:
           
         { }
     wxQueryNewPaletteEvent(const wxQueryNewPaletteEvent& event)
-        : wxEvent(event),
-        m_paletteRealized(event.m_paletteRealized)
-    { }
+        
+        
+    = default;
 
     // App sets this if it changes the palette.
     void SetPaletteRealized(bool realized) { m_paletteRealized = realized; }
@@ -3333,10 +3313,9 @@ public:
         }
 
     wxNavigationKeyEvent(const wxNavigationKeyEvent& event)
-        : wxEvent(event),
-          m_flags(event.m_flags),
-          m_focus(event.m_focus)
-        { }
+        
+          
+        = default;
 
     // direction: forward (true) or backward (false)
     bool GetDirection() const
@@ -3457,12 +3436,9 @@ public:
           m_origin(GuessOrigin(origin))
     { }
     wxHelpEvent(const wxHelpEvent& event)
-        : wxCommandEvent(event),
-          m_pos(event.m_pos),
-          m_target(event.m_target),
-          m_link(event.m_link),
-          m_origin(event.m_origin)
-    { }
+        
+          
+    = default;
 
     // Position of event (in screen coordinates)
     const wxPoint& GetPosition() const { return m_pos; }
@@ -3519,8 +3495,8 @@ public:
         : wxCommandEvent(type, winid)
     { }
     wxClipboardTextEvent(const wxClipboardTextEvent& event)
-        : wxCommandEvent(event)
-    { }
+         
+    = default;
 
     wxEvent *Clone() const override { return new wxClipboardTextEvent(*this); }
 
@@ -3550,9 +3526,9 @@ public:
           m_pos(pt)
     { }
     wxContextMenuEvent(const wxContextMenuEvent& event)
-        : wxCommandEvent(event),
-        m_pos(event.m_pos)
-    { }
+        
+        
+    = default;
 
     // Position of event (in screen coordinates)
     const wxPoint& GetPosition() const { return m_pos; }
@@ -4237,7 +4213,7 @@ inline void wxObjectEventFunctor::operator()(wxEvtHandler *handler, wxEvent& eve
 class wxEventConnectionRef : public wxTrackerNode
 {
 public:
-    wxEventConnectionRef()  { }
+    wxEventConnectionRef()  = default;
     wxEventConnectionRef(wxEvtHandler *src, wxEvtHandler *sink)
         : m_src(src), m_sink(sink), m_refCount(1)
     {

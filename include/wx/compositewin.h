@@ -128,8 +128,7 @@ public:
 protected:
     // Trivial but necessary default ctor.
     wxCompositeWindowSettersOnly()
-    {
-    }
+    = default;
 
 private:
     // Must be implemented by the derived class to return all children to which

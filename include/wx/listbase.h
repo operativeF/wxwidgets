@@ -332,7 +332,7 @@ private:
 class WXDLLIMPEXP_CORE wxListCtrlBase : public wxSystemThemedControl<wxControl>
 {
 public:
-    wxListCtrlBase() { }
+    wxListCtrlBase() = default;
 
     // Image list methods.
     // -------------------
@@ -485,15 +485,8 @@ public:
         { }
 
     wxListEvent(const wxListEvent& event)
-        : wxNotifyEvent(event)
-        , m_code(event.m_code)
-        , m_oldItemIndex(event.m_oldItemIndex)
-        , m_itemIndex(event.m_itemIndex)
-        , m_col(event.m_col)
-        , m_pointDrag(event.m_pointDrag)
-        , m_item(event.m_item)
-        , m_editCancelled(event.m_editCancelled)
-        { }
+         
+        = default;
 
     int GetKeyCode() const { return m_code; }
     long GetIndex() const { return m_itemIndex; }

@@ -163,7 +163,7 @@ public:
     virtual wxMBConv *Clone() const = 0;
 
     // virtual dtor for any base class
-    virtual ~wxMBConv() { }
+    virtual ~wxMBConv() = default;
 
 private:
     // Common part of single argument cWC2MB() and cMB2WC() overloads above.
@@ -243,7 +243,7 @@ private:
 class WXDLLIMPEXP_BASE wxMBConvUTF7 : public wxMBConv
 {
 public:
-    wxMBConvUTF7() { }
+    wxMBConvUTF7() = default;
 
     // compiler-generated copy ctor, assignment operator and dtor are ok
     // (assuming it's ok to copy the shift state -- not really sure about it)
@@ -555,8 +555,7 @@ class WXDLLIMPEXP_BASE wxWhateverWorksConv : public wxMBConv
 {
 public:
     wxWhateverWorksConv()
-    {
-    }
+    = default;
 
     // Try to interpret the string as UTF-8, if it fails fall back to the
     // current locale encoding (wxConvLibc) and if this fails as well,

@@ -927,7 +927,7 @@ public:
       WX_STR_ITERATOR_IMPL(iterator, wxChar*, wxUniCharRef);
 
   public:
-      iterator() {}
+      iterator() = default;
       reference operator*()
         { return wxUniCharRef::CreateForString(m_cur); }
 
@@ -960,7 +960,7 @@ public:
       WX_STR_ITERATOR_IMPL(const_iterator, const wxChar*, wxUniChar);
 
   public:
-      const_iterator() {}
+      const_iterator() = default;
       const_iterator(const iterator& i) : m_cur(i.m_cur) {}
 
       const_reference operator*() const
@@ -1113,7 +1113,7 @@ private:
 public:
   // constructors and destructor
     // ctor for an empty string
-  wxString() {}
+  wxString() = default;
 
     // copy ctor
   wxString(const wxString& stringSrc) : m_impl(stringSrc.m_impl) { }

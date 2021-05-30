@@ -674,8 +674,7 @@ private:
         BranchNodeData()
             
               
-        {
-        }
+        = default;
 
         void InsertChild(wxDataViewTreeNode* node, unsigned index)
         {

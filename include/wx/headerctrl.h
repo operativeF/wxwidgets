@@ -409,12 +409,9 @@ public:
     }
 
     wxHeaderCtrlEvent(const wxHeaderCtrlEvent& event)
-        : wxNotifyEvent(event),
-          m_col(event.m_col),
-          m_width(event.m_width),
-          m_order(event.m_order)
-    {
-    }
+        
+          
+    = default;
 
     // the column which this event pertains to: valid for all header events
     int GetColumn() const { return m_col; }

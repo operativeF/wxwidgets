@@ -598,7 +598,7 @@ bool wxZlibInputStream2::Open(wxInputStream& stream)
 class wxZipMemory
 {
 public:
-    wxZipMemory()  { }
+    wxZipMemory()  = default;
 
     wxZipMemory *AddRef() { m_ref++; return this; }
     void Release() { if (--m_ref == 0) delete this; }
@@ -678,7 +678,7 @@ WX_DECLARE_HASH_MAP(long, wxZipEntry*, wxIntegerHash,
 class wxZipWeakLinks
 {
 public:
-    wxZipWeakLinks()  { }
+    wxZipWeakLinks()  = default;
 
     void Release(const wxZipInputStream* WXUNUSED(x))
         { if (--m_ref == 0) delete this; }
@@ -1417,8 +1417,7 @@ private:
 wxZipEndRec::wxZipEndRec()
   
     
-{
-}
+= default;
 
 bool wxZipEndRec::Write(wxOutputStream& stream, wxMBConv& conv) const
 {

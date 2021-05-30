@@ -92,7 +92,7 @@ private:
 class WXDLLIMPEXP_CORE wxAnimationCtrlBase : public wxControl
 {
 public:
-    wxAnimationCtrlBase() { }
+    wxAnimationCtrlBase() = default;
 
     // public API
     virtual bool LoadFile(const wxString& filename,
@@ -162,7 +162,7 @@ protected:
     public:
         wxAnimationCtrl()
              
-            {}
+            = default;
         wxAnimationCtrl(wxWindow *parent,
                         wxWindowID id,
                         const wxAnimation& anim = wxNullAnimation,

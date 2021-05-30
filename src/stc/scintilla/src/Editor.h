@@ -49,7 +49,7 @@ public:
 	enum workItems items{workNone};
 	Position upTo{0};
 
-	WorkNeeded()  {}
+	WorkNeeded()  = default;
 	void Reset() {
 		items = workNone;
 		upTo = 0;
@@ -71,9 +71,8 @@ public:
 	bool lineCopy{false};
 	int codePage{0};
 	int characterSet{0};
-	SelectionText()  {}
-	~SelectionText() {
-	}
+	SelectionText()  = default;
+	~SelectionText() = default;
 	void Clear() {
 		s.clear();
 		rectangular = false;

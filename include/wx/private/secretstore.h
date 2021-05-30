@@ -26,8 +26,7 @@ class wxSecretValueImpl : public wxRefCounter
 {
 public:
     wxSecretValueImpl()
-    {
-    }
+    = default;
 
     virtual size_t GetSize() const = 0;
     virtual const void *GetData() const = 0;

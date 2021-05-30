@@ -49,8 +49,7 @@ wxHashTableBase_Node::~wxHashTableBase_Node()
 wxHashTableBase::wxHashTableBase()
     
       
-{
-}
+= default;
 
 void wxHashTableBase::Create( wxKeyType keyType, size_t size )
 {

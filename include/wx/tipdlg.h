@@ -45,7 +45,7 @@ public:
     size_t GetCurrentTip() const { return m_currentTip; }
 
     // virtual dtor for the base class
-    virtual ~wxTipProvider() { }
+    virtual ~wxTipProvider() = default;
 
 protected:
     size_t m_currentTip;

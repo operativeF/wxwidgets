@@ -22,7 +22,7 @@
 class WXDLLIMPEXP_CORE wxGDIRefData : public wxObjectRefData
 {
 public:
-    wxGDIRefData() { }
+    wxGDIRefData() = default;
 
     // override this in the derived classes to check if this data object is
     // really fully initialized

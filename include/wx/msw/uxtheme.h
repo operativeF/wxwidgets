@@ -174,7 +174,7 @@ class wxUxThemeFont
 {
 public:
     // Trivial default ctor.
-    wxUxThemeFont() { }
+    wxUxThemeFont() = default;
 
     // In Unicode build we always use LOGFONT anyhow so this class is
     // completely trivial.

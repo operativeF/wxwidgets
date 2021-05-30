@@ -39,7 +39,7 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_CHOICEBOOK_PAGE_CHANGING, wxBo
 class WXDLLIMPEXP_CORE wxChoicebook : public wxNavigationEnabled<wxBookCtrlBase>
 {
 public:
-    wxChoicebook() { }
+    wxChoicebook() = default;
 
     wxChoicebook(wxWindow *parent,
                  wxWindowID id,

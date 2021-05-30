@@ -242,7 +242,7 @@ private:
 class WXDLLIMPEXP_ADV wxGridCellBoolEditor : public wxGridCellEditor
 {
 public:
-    wxGridCellBoolEditor() { }
+    wxGridCellBoolEditor() = default;
 
     virtual wxGridActivationResult
     TryActivate(int row, int col, wxGrid* grid,
@@ -360,7 +360,7 @@ class WXDLLIMPEXP_ADV wxGridCellEnumEditor : public wxGridCellChoiceEditor
 {
 public:
     wxGridCellEnumEditor( const wxString& choices = wxEmptyString );
-    virtual ~wxGridCellEnumEditor() {}
+    virtual ~wxGridCellEnumEditor() = default;
 
     wxGridCellEditor*  Clone() const override;
 
@@ -381,7 +381,7 @@ private:
 class WXDLLIMPEXP_ADV wxGridCellAutoWrapStringEditor : public wxGridCellTextEditor
 {
 public:
-    wxGridCellAutoWrapStringEditor()  { }
+    wxGridCellAutoWrapStringEditor()  = default;
     virtual void Create(wxWindow* parent,
                         wxWindowID id,
                         wxEvtHandler* evtHandler) override;

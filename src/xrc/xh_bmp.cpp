@@ -23,8 +23,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapXmlHandler, wxXmlResourceHandler);
 
 wxBitmapXmlHandler::wxBitmapXmlHandler()
                    
-{
-}
+= default;
 
 wxObject *wxBitmapXmlHandler::DoCreateResource()
 {
@@ -40,8 +39,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxIconXmlHandler, wxXmlResourceHandler);
 
 wxIconXmlHandler::wxIconXmlHandler()
  
-{
-}
+= default;
 
 wxObject *wxIconXmlHandler::DoCreateResource()
 {

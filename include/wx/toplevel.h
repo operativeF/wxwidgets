@@ -242,7 +242,7 @@ public:
     class GeometrySerializer
     {
     public:
-        virtual ~GeometrySerializer() {}
+        virtual ~GeometrySerializer() = default;
 
         // If saving a field returns false, it's fatal error and SaveGeometry()
         // will return false.
@@ -381,7 +381,7 @@ protected:
     {
     public:
         // construction
-        wxTopLevelWindow() { }
+        wxTopLevelWindow() = default;
         wxTopLevelWindow(wxWindow *parent,
                    wxWindowID winid,
                    const wxString& title,

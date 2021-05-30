@@ -21,7 +21,7 @@ class WXDLLIMPEXP_CORE wxTopLevelWindowMSW : public wxTopLevelWindowBase
 {
 public:
     // constructors and such
-    wxTopLevelWindowMSW() { }
+    wxTopLevelWindowMSW() = default;
 
     wxTopLevelWindowMSW(wxWindow *parent,
                         wxWindowID id,

@@ -77,7 +77,7 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxHtmlBookRecord, wxHtmlBookRecArray,
 
 struct WXDLLIMPEXP_HTML wxHtmlHelpDataItem
 {
-    wxHtmlHelpDataItem()  {}
+    wxHtmlHelpDataItem()  = default;
 
     int level{0};
     wxHtmlHelpDataItem *parent{nullptr};
@@ -106,8 +106,8 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxHtmlHelpDataItem, wxHtmlHelpDataItems,
 class WXDLLIMPEXP_HTML wxHtmlSearchEngine : public wxObject
 {
 public:
-    wxHtmlSearchEngine()  {}
-    virtual ~wxHtmlSearchEngine() {}
+    wxHtmlSearchEngine()  = default;
+    virtual ~wxHtmlSearchEngine() = default;
 
     // Sets the keyword we will be searching for
     virtual void LookFor(const wxString& keyword, bool case_sensitive, bool whole_words_only);

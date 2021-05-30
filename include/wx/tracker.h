@@ -19,8 +19,8 @@ class wxEventConnectionRef;
 class WXDLLIMPEXP_BASE wxTrackerNode
 {
 public:
-    wxTrackerNode()  { }
-    virtual ~wxTrackerNode() { }
+    wxTrackerNode()  = default;
+    virtual ~wxTrackerNode() = default;
 
     virtual void OnObjectDestroy() = 0;
 
@@ -63,7 +63,7 @@ protected:
     // this class is only supposed to be used as a base class but never be
     // created nor destroyed directly so all ctors and dtor are protected
 
-    wxTrackable()  { }
+    wxTrackable()  = default;
 
     // copy ctor and assignment operator intentionally do not copy m_first: the
     // objects which track the original trackable shouldn't track the new copy

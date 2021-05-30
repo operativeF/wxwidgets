@@ -393,8 +393,7 @@ public:
     }
 
     ~wxPGValidationInfo()
-    {
-    }
+    = default;
 
     // Returns failure behaviour which is a combination of
     // wxPG_VFB_XXX flags.

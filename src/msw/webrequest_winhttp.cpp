@@ -649,8 +649,7 @@ wxWebAuthChallengeWinHTTP::SetCredentials(const wxWebCredentials& cred)
 
 wxWebSessionWinHTTP::wxWebSessionWinHTTP()
     
-{
-}
+= default;
 
 wxWebSessionWinHTTP::~wxWebSessionWinHTTP()
 {

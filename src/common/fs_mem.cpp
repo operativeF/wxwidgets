@@ -82,8 +82,7 @@ wxMemoryFSHash wxMemoryFSHandlerBase::m_Hash;
 
 
 wxMemoryFSHandlerBase::wxMemoryFSHandlerBase()  
-{
-}
+= default;
 
 wxMemoryFSHandlerBase::~wxMemoryFSHandlerBase()
 {

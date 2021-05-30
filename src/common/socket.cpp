@@ -154,7 +154,7 @@ public:
     void                    *m_clientData;
 
 public:
-    wxSocketState()  {}
+    wxSocketState()  = default;
 
     wxSocketState(const wxSocketState&) = delete;
 	wxSocketState& operator=(const wxSocketState&) = delete;

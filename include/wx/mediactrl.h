@@ -97,8 +97,8 @@ public:
     // Normal copy constructor, much the same as wxNotifyEvent
     // ------------------------------------------------------------------------
     wxMediaEvent(const wxMediaEvent &clone)
-            : wxNotifyEvent(clone)
-    {                                       }
+             
+    = default;
 
     // ------------------------------------------------------------------------
     // wxMediaEvent::Clone
@@ -124,7 +124,7 @@ class WXDLLIMPEXP_MEDIA wxMediaCtrl : public wxControl
 {
 public:
     wxMediaCtrl()  
-    {                                                                   }
+    = default;
 
     wxMediaCtrl(wxWindow* parent, wxWindowID winid,
                 const wxString& fileName = wxEmptyString,
@@ -242,7 +242,7 @@ class WXDLLIMPEXP_MEDIA wxMediaBackend : public wxObject
 {
 public:
     wxMediaBackend()
-    {                                   }
+    = default;
 
     virtual ~wxMediaBackend();
 

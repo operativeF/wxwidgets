@@ -109,10 +109,9 @@ public:
     }
 
     wxClipboardEvent(const wxClipboardEvent& event)
-        : wxEvent(event),
-          m_formats(event.m_formats)
-    {
-    }
+        
+          
+    = default;
 
     bool SupportsFormat(const wxDataFormat& format) const;
     void AddFormat(const wxDataFormat& format);

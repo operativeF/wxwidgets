@@ -76,8 +76,7 @@ public:
     }
 
     virtual ~wxColourPropertyValue()
-    {
-    }
+    = default;
 
     wxColourPropertyValue( const wxColourPropertyValue& v )
         : 

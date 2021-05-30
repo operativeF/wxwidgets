@@ -139,7 +139,7 @@ public:
     };
 
     wxNumericPropertyValidator( NumericType numericType, int base = 10 );
-    virtual ~wxNumericPropertyValidator() { }
+    virtual ~wxNumericPropertyValidator() = default;
     bool Validate(wxWindow* parent) override;
 };
 
@@ -785,7 +785,7 @@ class WXDLLIMPEXP_PROPGRID wxPGArrayEditorDialog : public wxDialog
 {
 public:
     wxPGArrayEditorDialog();
-    virtual ~wxPGArrayEditorDialog() { }
+    virtual ~wxPGArrayEditorDialog() = default;
 
 	wxPGArrayEditorDialog(const wxPGArrayEditorDialog&) = delete;
 	wxPGArrayEditorDialog& operator=(const wxPGArrayEditorDialog&) = delete;
@@ -896,7 +896,7 @@ class WXDLLIMPEXP_PROPGRID
 {
 public:
     wxPGArrayStringEditorDialog();
-    virtual ~wxPGArrayStringEditorDialog() { }
+    virtual ~wxPGArrayStringEditorDialog() = default;
 
 	wxPGArrayStringEditorDialog(const wxPGArrayStringEditorDialog&) = delete;
 	wxPGArrayStringEditorDialog& operator=(const wxPGArrayStringEditorDialog&) = delete;

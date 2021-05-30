@@ -60,8 +60,7 @@ public:
 struct SelectionSegment {
 	SelectionPosition start;
 	SelectionPosition end;
-	SelectionSegment()  {
-	}
+	SelectionSegment()  = default;
 	SelectionSegment(SelectionPosition a, SelectionPosition b) {
 		if (a < b) {
 			start = a;
@@ -86,8 +85,7 @@ struct SelectionRange {
 	SelectionPosition caret;
 	SelectionPosition anchor;
 
-	SelectionRange()  {
-	}
+	SelectionRange()  = default;
 	explicit SelectionRange(SelectionPosition single) : caret(single), anchor(single) {
 	}
 	explicit SelectionRange(int single) : caret(single), anchor(single) {

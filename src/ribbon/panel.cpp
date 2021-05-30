@@ -46,8 +46,7 @@ wxBEGIN_EVENT_TABLE(wxRibbonPanel, wxRibbonControl)
 wxEND_EVENT_TABLE()
 
 wxRibbonPanel::wxRibbonPanel()  
-{
-}
+= default;
 
 wxRibbonPanel::wxRibbonPanel(wxWindow* parent,
                   wxWindowID id,

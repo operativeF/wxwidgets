@@ -211,7 +211,7 @@ public:
                style, pos, size, name );
     }
 
-    virtual ~wxGenericFileCtrl() {}
+    virtual ~wxGenericFileCtrl() = default;
 
     bool Create( wxWindow *parent,
                  wxWindowID id,

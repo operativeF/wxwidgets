@@ -138,7 +138,7 @@ class wxGridDirectionOperations;
 class WXDLLIMPEXP_CORE wxGridCellWorker : public wxClientDataContainer, public wxRefCounter
 {
 public:
-    wxGridCellWorker() { }
+    wxGridCellWorker() = default;
 
     // interpret renderer parameters: arbitrary string whose interpretation is
     // left to the derived classes
@@ -565,7 +565,7 @@ public:
 class WXDLLIMPEXP_CORE wxGridHeaderLabelsRenderer
 {
 public:
-    virtual ~wxGridHeaderLabelsRenderer() {}
+    virtual ~wxGridHeaderLabelsRenderer() = default;
 
     // Draw the border around cell window.
     virtual void DrawBorder(const wxGrid& grid,
@@ -641,7 +641,7 @@ class wxGridFitMode
 {
 public:
     // Default ctor creates an object not specifying any particular behaviour.
-    wxGridFitMode()  {}
+    wxGridFitMode()  = default;
 
     // Static methods allowing to create objects actually specifying behaviour.
     static wxGridFitMode Clip() { return wxGridFitMode(Mode_Clip); }
@@ -973,8 +973,7 @@ class WXDLLIMPEXP_CORE wxGridBlockCoords
 public:
     wxGridBlockCoords() 
         
-    {
-    }
+    = default;
 
     wxGridBlockCoords(int topRow, int leftCol, int bottomRow, int rightCol) :
         m_topRow(topRow),
@@ -1103,7 +1102,7 @@ public:
         typedef const value_type& reference;
         typedef const value_type* pointer;
 
-        iterator()  { }
+        iterator()  = default;
 
         reference operator*() const { return *m_it; }
         pointer operator->() const { return &*m_it; }
@@ -1433,7 +1432,7 @@ WX_DECLARE_HASH_MAP_WITH_DECL( unsigned, int, wxIntegerHash, wxIntegerEqual,
 struct WXDLLIMPEXP_CORE wxGridSizesInfo
 {
     // default ctor, initialize m_sizeDefault and m_customSizes later
-    wxGridSizesInfo() { }
+    wxGridSizesInfo() = default;
 
     // ctor used by wxGrid::Get{Col,Row}Sizes()
     wxGridSizesInfo(int defSize, const wxArrayInt& allSizes);

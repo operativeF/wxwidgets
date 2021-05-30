@@ -434,8 +434,7 @@ wxHtmlEntitiesParser::wxHtmlEntitiesParser()
 = default;
 
 wxHtmlEntitiesParser::~wxHtmlEntitiesParser()
-{
-}
+= default;
 
 wxString wxHtmlEntitiesParser::Parse(const wxString& input) const
 {

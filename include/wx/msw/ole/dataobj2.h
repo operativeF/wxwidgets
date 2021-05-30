@@ -95,7 +95,7 @@ private:
 class WXDLLIMPEXP_CORE wxFileDataObject : public wxFileDataObjectBase
 {
 public:
-    wxFileDataObject() { }
+    wxFileDataObject() = default;
 
     // implement base class pure virtuals
     bool SetData(size_t len, const void *buf) override;

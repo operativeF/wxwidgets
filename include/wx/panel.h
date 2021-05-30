@@ -30,7 +30,7 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxPanelNameStr[];
 class WXDLLIMPEXP_CORE wxPanelBase : public wxNavigationEnabled<wxWindow>
 {
 public:
-    wxPanelBase() { }
+    wxPanelBase() = default;
 
     // Derived classes should also provide this constructor:
     /*

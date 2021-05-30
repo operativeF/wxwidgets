@@ -725,8 +725,7 @@ class wxD2DResourceHolder: public wxManagedResourceHolder
 {
 public:
     wxD2DResourceHolder()  
-    {
-    }
+    = default;
 
     virtual ~wxD2DResourceHolder()
     {

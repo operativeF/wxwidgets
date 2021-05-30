@@ -45,8 +45,7 @@ class LineMarkers : public PerLine {
 	/// Handles are allocated sequentially and should never have to be reused as 32 bit ints are very big.
 	int handleCurrent{0};
 public:
-	LineMarkers()  {
-	}
+	LineMarkers()  = default;
 	virtual ~LineMarkers();
 	virtual void Init();
 	virtual void InsertLine(int line);
@@ -78,8 +77,7 @@ public:
 class LineState : public PerLine {
 	SplitVector<int> lineStates;
 public:
-	LineState() {
-	}
+	LineState() = default;
 	virtual ~LineState();
 	virtual void Init();
 	virtual void InsertLine(int line);
@@ -93,8 +91,7 @@ public:
 class LineAnnotation : public PerLine {
 	SplitVector<char *> annotations;
 public:
-	LineAnnotation() {
-	}
+	LineAnnotation() = default;
 	virtual ~LineAnnotation();
 	virtual void Init();
 	virtual void InsertLine(int line);
@@ -117,8 +114,7 @@ typedef std::vector<int> TabstopList;
 class LineTabstops : public PerLine {
 	SplitVector<TabstopList *> tabstops;
 public:
-	LineTabstops() {
-	}
+	LineTabstops() = default;
 	virtual ~LineTabstops();
 	virtual void Init();
 	virtual void InsertLine(int line);

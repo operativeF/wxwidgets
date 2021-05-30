@@ -261,7 +261,7 @@ public:
 
 
 SurfaceImpl::SurfaceImpl()  
-{}
+= default;
 
 SurfaceImpl::~SurfaceImpl() {
     Release();
@@ -3385,8 +3385,7 @@ ListBox *ListBox::Allocate() {
 
 //----------------------------------------------------------------------
 
-Menu::Menu()  {
-}
+Menu::Menu()  = default;
 
 void Menu::CreatePopUp() {
     Destroy();

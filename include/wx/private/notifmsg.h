@@ -20,7 +20,7 @@ public:
 
     }
 
-    virtual ~wxNotificationMessageImpl() { }
+    virtual ~wxNotificationMessageImpl() = default;
 
     virtual bool Show(int timeout) = 0;
 

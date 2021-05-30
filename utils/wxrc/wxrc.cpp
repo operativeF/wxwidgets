@@ -197,7 +197,7 @@ WX_DEFINE_OBJARRAY(ArrayOfXRCWndClassData)
 
 struct ExtractedString
 {
-    ExtractedString()  {}
+    ExtractedString()  = default;
     ExtractedString(const wxString& str_,
                     const wxString& filename_, int lineNo_)
         : str(str_), filename(filename_), lineNo(lineNo_)

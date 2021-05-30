@@ -941,7 +941,7 @@ void wxComboPopupEvtHandler::OnMouseEvent( wxMouseEvent& event )
 class wxComboCtrlTextCtrl : public wxTextCtrl
 {
 public:
-    wxComboCtrlTextCtrl()  { }
+    wxComboCtrlTextCtrl()  = default;
     virtual ~wxComboCtrlTextCtrl() = default;
 
     wxWindow *GetMainWindowOfCompositeControl() override

@@ -46,7 +46,7 @@ public:
                                wxCoord x, wxCoord y,
                                wxOutputStream& stream) const = 0;
 
-    virtual ~wxSVGBitmapHandler() {}
+    virtual ~wxSVGBitmapHandler() = default;
 };
 
 // Predefined standard bitmap handler: creates a file, stores the bitmap in
@@ -56,8 +56,7 @@ class WXDLLIMPEXP_CORE wxSVGBitmapFileHandler : public wxSVGBitmapHandler
 public:
     wxSVGBitmapFileHandler()
          
-    {
-    }
+    = default;
 
     explicit wxSVGBitmapFileHandler(const wxFileName& path)
         : m_path(path)

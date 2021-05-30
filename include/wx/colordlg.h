@@ -40,8 +40,7 @@ class WXDLLIMPEXP_CORE wxColourDialogEvent : public wxCommandEvent
 {
 public:
     wxColourDialogEvent()
-    {
-    }
+    = default;
 
     wxColourDialogEvent(wxEventType evtType,
                         wxColourDialog* dialog,

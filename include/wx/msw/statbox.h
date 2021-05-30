@@ -19,8 +19,7 @@ class WXDLLIMPEXP_CORE wxStaticBox : public wxCompositeWindowSettersOnly<wxStati
 public:
     wxStaticBox()
          
-    {
-    }
+    = default;
 
     wxStaticBox(wxWindow *parent, wxWindowID id,
                 const wxString& label,

@@ -220,7 +220,7 @@ public:
     // return the platform standard DLL extension (with leading dot)
     static wxString GetDllExt(wxDynamicLibraryCategory cat = wxDL_LIBRARY);
 
-    wxDynamicLibrary()  { }
+    wxDynamicLibrary()  = default;
     wxDynamicLibrary(const wxString& libname, int flags = wxDL_DEFAULT)
         : m_handle(nullptr)
     {

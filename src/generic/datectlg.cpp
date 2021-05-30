@@ -57,8 +57,7 @@ public:
 
     wxCalendarComboPopup() 
                              
-    {
-    }
+    = default;
 
     void Init() override
     {

@@ -221,10 +221,9 @@ public:
                                const wxString& informat = wxASCII_STR(wxDefaultDateTimeFormat));
 
     wxGridCellDateTimeRenderer(const wxGridCellDateTimeRenderer& other)
-        : wxGridCellDateRenderer(other),
-          m_iformat(other.m_iformat)
-    {
-    }
+        
+          
+    = default;
 
     wxGridCellRenderer *Clone() const override;
 
@@ -242,7 +241,7 @@ protected:
 class WXDLLIMPEXP_ADV wxGridCellChoiceRenderer : public wxGridCellStringRenderer
 {
 public:
-    wxGridCellChoiceRenderer() { }
+    wxGridCellChoiceRenderer() = default;
 
     virtual wxSize GetMaxBestSize(wxGrid& grid,
                                   wxGridCellAttr& attr,

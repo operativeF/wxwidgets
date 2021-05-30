@@ -25,8 +25,7 @@ class WXDLLIMPEXP_ADV wxBitmapComboBox : public wxComboBox,
 public:
     // ctors and such
     wxBitmapComboBox()  
-    {
-    }
+    = default;
 
     wxBitmapComboBox(wxWindow *parent,
                      wxWindowID id = wxID_ANY,

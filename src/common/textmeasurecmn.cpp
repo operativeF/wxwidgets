@@ -238,7 +238,7 @@ bool wxTextMeasureBase::GetPartialTextExtents(const wxString& text,
 class FontWidthCache
 {
 public:
-    FontWidthCache()  { }
+    FontWidthCache()  = default;
     ~FontWidthCache() { delete []m_widths; }
 
     void Reset()

@@ -34,7 +34,7 @@
 class wxTreeItemId : public wxItemId<void*>
 {
 public:
-    wxTreeItemId()  { }
+    wxTreeItemId()  = default;
     wxTreeItemId(void* pItem) : wxItemId<void*>(pItem) { }
 };
 
@@ -60,7 +60,7 @@ public:
     // creation/destruction
     // --------------------
         // default ctor
-    wxTreeItemData() { }
+    wxTreeItemData() = default;
 
         // default copy ctor/assignment operator are ok
 

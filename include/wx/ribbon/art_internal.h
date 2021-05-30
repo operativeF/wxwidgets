@@ -56,7 +56,7 @@ class WXDLLIMPEXP_RIBBON wxRibbonHSLColour
 {
 public:
    wxRibbonHSLColour()
-        {}
+        = default;
    wxRibbonHSLColour(float H, float S, float L)
        : hue(H), saturation(S), luminance(L) { }
    wxRibbonHSLColour(const wxColour& C);

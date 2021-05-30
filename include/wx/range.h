@@ -16,7 +16,7 @@
 class wxRange
 {
 public :
-    wxRange() {}
+    wxRange() = default;
     wxRange( int minVal, int maxVal) : m_minVal(minVal), m_maxVal(maxVal) {}
     int GetMin() const { return m_minVal; }
     int GetMax() const { return m_maxVal; }

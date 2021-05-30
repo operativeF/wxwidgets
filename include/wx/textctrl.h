@@ -537,8 +537,8 @@ private:
 class WXDLLIMPEXP_CORE wxTextAreaBase
 {
 public:
-    wxTextAreaBase() { }
-    virtual ~wxTextAreaBase() { }
+    wxTextAreaBase() = default;
+    virtual ~wxTextAreaBase() = default;
 
     // lines access
     // ------------
@@ -644,7 +644,7 @@ class WXDLLIMPEXP_CORE wxTextCtrlIface : public wxTextAreaBase,
                                          public wxTextEntryBase
 {
 public:
-    wxTextCtrlIface() { }
+    wxTextCtrlIface() = default;
 
     // wxTextAreaBase overrides
     wxString GetValue() const override
@@ -682,8 +682,8 @@ public:
     // creation
     // --------
 
-    wxTextCtrlBase() { }
-    virtual ~wxTextCtrlBase() { }
+    wxTextCtrlBase() = default;
+    virtual ~wxTextCtrlBase() = default;
 
 
     // more readable flag testing methods
@@ -821,10 +821,8 @@ public:
           m_evtMouse(evtMouse), m_start(start), m_end(end)
         { }
     wxTextUrlEvent(const wxTextUrlEvent& event)
-        : wxCommandEvent(event),
-          m_evtMouse(event.m_evtMouse),
-          m_start(event.m_start),
-          m_end(event.m_end) { }
+        
+          = default;
 
     // get the mouse event which happened over the URL
     const wxMouseEvent& GetMouseEvent() const { return m_evtMouse; }
@@ -854,7 +852,7 @@ private:
 
 public:
     // for wxWin RTTI only, don't use
-    wxTextUrlEvent()  { }
+    wxTextUrlEvent()  = default;
 };
 
 typedef void (wxEvtHandler::*wxTextUrlEventFunction)(wxTextUrlEvent&);

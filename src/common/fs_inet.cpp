@@ -144,8 +144,7 @@ class wxFileSystemInternetModule : public wxModule
         wxFileSystemInternetModule() 
            
            
-        {
-        }
+        = default;
 
         bool OnInit() override
         {

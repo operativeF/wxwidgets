@@ -20,7 +20,7 @@
 class WXDLLIMPEXP_ADV wxAnimationGenericImpl : public wxAnimationImpl
 {
 public:
-    wxAnimationGenericImpl()  {}
+    wxAnimationGenericImpl()  = default;
     virtual ~wxAnimationGenericImpl() { UnRef(); }
 
     bool IsOk() const override

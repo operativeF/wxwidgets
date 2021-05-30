@@ -215,7 +215,7 @@ private:
 class wxMSWListItemData
 {
 public:
-   wxMSWListItemData()  {}
+   wxMSWListItemData()  = default;
    ~wxMSWListItemData() { delete attr; }
 
     wxItemAttr *attr{nullptr};

@@ -36,7 +36,7 @@ class WXDLLIMPEXP_BASE wxSecretValue
 {
 public:
     // Creates an empty secret value (not the same as an empty password).
-    wxSecretValue()  { }
+    wxSecretValue()  = default;
 
     // Creates a secret value from the given data.
     wxSecretValue(size_t size, const void *data)
@@ -237,8 +237,7 @@ class wxSecretString : public wxString
 {
 public:
     wxSecretString()
-    {
-    }
+    = default;
 
     wxSecretString(const wxString& value)
         : wxString(value)

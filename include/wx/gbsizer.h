@@ -30,7 +30,7 @@
 class WXDLLIMPEXP_CORE wxGBPosition
 {
 public:
-    wxGBPosition()  {}
+    wxGBPosition()  = default;
     wxGBPosition(int row, int col) : m_row(row), m_col(col) {}
 
     // default copy ctor and assignment operator are okay.

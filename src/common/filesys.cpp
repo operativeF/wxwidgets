@@ -665,8 +665,7 @@ class wxFileSystemModule : public wxModule
         wxFileSystemModule() 
             
             
-        {
-        }
+        = default;
 
         bool OnInit() override
         {

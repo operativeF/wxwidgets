@@ -720,7 +720,7 @@ class WXDLLIMPEXP_CORE wxRect
 public:
     wxRect()
          
-        { }
+        = default;
     wxRect(int xx, int yy, int ww, int hh)
         : x(xx), y(yy), width(ww), height(hh)
         { }
@@ -922,7 +922,7 @@ private:
 class WXDLLIMPEXP_CORE wxResourceCache: public wxList
 {
 public:
-    wxResourceCache() { }
+    wxResourceCache() = default;
     virtual ~wxResourceCache();
 };
 

@@ -283,8 +283,7 @@ public:
     typedef int (wxCMPFUNC_CONV *CMPFUNC)(T **pItem1, T **pItem2);
 
     wxBaseObjectArray()
-    {
-    }
+    = default;
 
     wxBaseObjectArray(const wxBaseObjectArray& src) : base()
     {

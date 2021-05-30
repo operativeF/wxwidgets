@@ -118,7 +118,7 @@ struct WXDLLIMPEXP_CORE wxHeaderButtonParams
 {
     wxHeaderButtonParams()
          
-    { }
+    = default;
 
     wxColour    m_arrowColour;
     wxColour    m_selectionColour;

@@ -25,7 +25,7 @@ class WXDLLIMPEXP_CORE wxGenericColourButton : public wxBitmapButton,
                                                public wxColourPickerWidgetBase
 {
 public:
-    wxGenericColourButton() {}
+    wxGenericColourButton() = default;
     wxGenericColourButton(wxWindow *parent,
                           wxWindowID id,
                           const wxColour& col = *wxBLACK,
@@ -38,7 +38,7 @@ public:
         Create(parent, id, col, pos, size, style, validator, name);
     }
 
-    virtual ~wxGenericColourButton() {}
+    virtual ~wxGenericColourButton() = default;
 
 
 public:     // API extensions specific for wxGenericColourButton

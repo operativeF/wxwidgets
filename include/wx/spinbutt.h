@@ -103,7 +103,7 @@ public:
     {
     }
 
-    wxSpinEvent(const wxSpinEvent& event) : wxNotifyEvent(event) {}
+    wxSpinEvent(const wxSpinEvent& event)  = default;
 
     // get the current value of the control
     int GetValue() const { return m_commandInt; }

@@ -443,7 +443,7 @@ private:
 class WindowHDC
 {
 public:
-    WindowHDC()  { }
+    WindowHDC()  = default;
     WindowHDC(HWND hwnd) { m_hdc = ::GetDC(m_hwnd = hwnd); }
    ~WindowHDC() { if ( m_hwnd && m_hdc ) { ::ReleaseDC(m_hwnd, m_hdc); } }
 
@@ -482,7 +482,7 @@ private:
     void DoInit(HGDIOBJ hgdiobj) { m_hgdiobj = ::SelectObject(m_hdc, hgdiobj); }
 
 public:
-    SelectInHDC()  { }
+    SelectInHDC()  = default;
     SelectInHDC(HDC hdc, HGDIOBJ hgdiobj) : m_hdc(hdc) { DoInit(hgdiobj); }
 
     void Init(HDC hdc, HGDIOBJ hgdiobj)
@@ -546,7 +546,7 @@ class AutoHFONT : private AutoGDIObject
 private:
 public:
     AutoHFONT()
-         { }
+         = default;
 
     AutoHFONT(const LOGFONT& lf)
         : AutoGDIObject(::CreateFontIndirect(&lf)) { }
@@ -571,7 +571,7 @@ class AutoHBITMAP : private AutoGDIObject
 {
 public:
     AutoHBITMAP()
-         { }
+         = default;
 
     AutoHBITMAP(HBITMAP hbmp) : AutoGDIObject(hbmp) { }
 

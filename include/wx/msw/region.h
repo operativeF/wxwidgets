@@ -61,7 +61,7 @@ protected:
 class WXDLLIMPEXP_CORE wxRegionIterator : public wxObject
 {
 public:
-    wxRegionIterator() { }
+    wxRegionIterator() = default;
     wxRegionIterator(const wxRegion& region);
     wxRegionIterator(const wxRegionIterator& ri) : wxObject(ri) { *this = ri; }
 

@@ -21,7 +21,7 @@
 class WXDLLIMPEXP_ADV wxCommandLinkButton : public wxGenericCommandLinkButton
 {
 public:
-    wxCommandLinkButton ()  { }
+    wxCommandLinkButton ()  = default;
 
     wxCommandLinkButton(wxWindow *parent,
                         wxWindowID id,

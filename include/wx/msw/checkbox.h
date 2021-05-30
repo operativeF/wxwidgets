@@ -17,7 +17,7 @@
 class WXDLLIMPEXP_CORE wxCheckBox : public wxMSWOwnerDrawnButton<wxCheckBoxBase>
 {
 public:
-    wxCheckBox()  { }
+    wxCheckBox()  = default;
     wxCheckBox(wxWindow *parent,
                wxWindowID id,
                const wxString& label,

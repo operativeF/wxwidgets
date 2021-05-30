@@ -49,7 +49,7 @@ class WXDLLIMPEXP_BASE wxPowerEvent : public wxEvent
 {
 public:
     wxPowerEvent()            // just for use by wxRTTI
-         { }
+         = default;
 
     wxPowerEvent(wxEventType evtType) : wxEvent(wxID_NONE, evtType)
     {

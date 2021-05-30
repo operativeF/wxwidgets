@@ -61,8 +61,7 @@ class LinePPState {
 		return 1 << level;
 	}
 public:
-	LinePPState()  {
-	}
+	LinePPState()  = default;
 	bool IsInactive() const {
 		return state != 0;
 	}

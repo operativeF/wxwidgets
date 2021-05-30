@@ -67,7 +67,7 @@ public:
     unsigned char *p{nullptr};               /* bitmap */
     unsigned char *pal{nullptr};             /* palette */
 
-    IFFImage()  {}
+    IFFImage()  = default;
     ~IFFImage() { delete [] p; delete [] pal; }
 };
 

@@ -108,7 +108,7 @@ private:
 class WXDLLIMPEXP_BASE wxFileSystemHandler : public wxObject
 {
 public:
-    wxFileSystemHandler()  {}
+    wxFileSystemHandler()  = default;
 
     // returns true if this handler is able to open given location
     virtual bool CanOpen(const wxString& location) = 0;

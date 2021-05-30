@@ -73,7 +73,7 @@ class WXDLLIMPEXP_ADV wxVListBoxComboPopup : public wxVListBox,
 public:
 
     // init and dtor
-    wxVListBoxComboPopup()  { }
+    wxVListBoxComboPopup()  = default;
     virtual ~wxVListBoxComboPopup();
 
     // required virtuals
@@ -241,8 +241,7 @@ class WXDLLIMPEXP_ADV wxOwnerDrawnComboBox :
 public:
 
     // ctors and such
-    wxOwnerDrawnComboBox() { 
- }
+    wxOwnerDrawnComboBox() = default;
 
     wxOwnerDrawnComboBox(wxWindow *parent,
                          wxWindowID id,

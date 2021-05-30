@@ -203,7 +203,7 @@ class WXDLLIMPEXP_PROPGRID wxPGTextCtrlEditor : public wxPGEditor
 {
     wxDECLARE_DYNAMIC_CLASS(wxPGTextCtrlEditor);
 public:
-    wxPGTextCtrlEditor() {}
+    wxPGTextCtrlEditor() = default;
     virtual ~wxPGTextCtrlEditor();
 
     virtual wxPGWindowList CreateControls(wxPropertyGrid* propgrid,
@@ -246,7 +246,7 @@ class WXDLLIMPEXP_PROPGRID wxPGChoiceEditor : public wxPGEditor
 {
     wxDECLARE_DYNAMIC_CLASS(wxPGChoiceEditor);
 public:
-    wxPGChoiceEditor() {}
+    wxPGChoiceEditor() = default;
     virtual ~wxPGChoiceEditor();
 
     virtual wxPGWindowList CreateControls(wxPropertyGrid* propgrid,
@@ -295,7 +295,7 @@ class WXDLLIMPEXP_PROPGRID wxPGComboBoxEditor : public wxPGChoiceEditor
 {
     wxDECLARE_DYNAMIC_CLASS(wxPGComboBoxEditor);
 public:
-    wxPGComboBoxEditor() {}
+    wxPGComboBoxEditor() = default;
     virtual ~wxPGComboBoxEditor();
 
     virtual wxPGWindowList CreateControls(wxPropertyGrid* propgrid,
@@ -322,7 +322,7 @@ public:
 class WXDLLIMPEXP_PROPGRID wxPGChoiceAndButtonEditor : public wxPGChoiceEditor
 {
 public:
-    wxPGChoiceAndButtonEditor() {}
+    wxPGChoiceAndButtonEditor() = default;
     virtual ~wxPGChoiceAndButtonEditor();
     wxString GetName() const override;
 
@@ -338,7 +338,7 @@ class WXDLLIMPEXP_PROPGRID
 wxPGTextCtrlAndButtonEditor : public wxPGTextCtrlEditor
 {
 public:
-    wxPGTextCtrlAndButtonEditor() {}
+    wxPGTextCtrlAndButtonEditor() = default;
     virtual ~wxPGTextCtrlAndButtonEditor();
     wxString GetName() const override;
 
@@ -361,7 +361,7 @@ class WXDLLIMPEXP_PROPGRID wxPGCheckBoxEditor : public wxPGEditor
 {
     wxDECLARE_DYNAMIC_CLASS(wxPGCheckBoxEditor);
 public:
-    wxPGCheckBoxEditor() {}
+    wxPGCheckBoxEditor() = default;
     virtual ~wxPGCheckBoxEditor();
 
     wxString GetName() const override;
@@ -422,7 +422,7 @@ public:
         m_clientData = nullptr;
     }
 
-    virtual ~wxPGEditorDialogAdapter() { }
+    virtual ~wxPGEditorDialogAdapter() = default;
 
     bool ShowDialog( wxPropertyGrid* propGrid, wxPGProperty* property );
 
@@ -457,7 +457,7 @@ class WXDLLIMPEXP_PROPGRID wxPGMultiButton : public wxWindow
 {
 public:
     wxPGMultiButton( wxPropertyGrid* pg, const wxSize& sz );
-    virtual ~wxPGMultiButton() {}
+    virtual ~wxPGMultiButton() = default;
 
     wxWindow* GetButton( unsigned int i ) { return m_buttons[i]; }
     const wxWindow* GetButton( unsigned int i ) const

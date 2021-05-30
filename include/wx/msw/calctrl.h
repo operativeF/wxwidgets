@@ -12,7 +12,7 @@
 class WXDLLIMPEXP_ADV wxCalendarCtrl : public wxCalendarCtrlBase
 {
 public:
-    wxCalendarCtrl() { }
+    wxCalendarCtrl() = default;
     wxCalendarCtrl(wxWindow *parent,
                    wxWindowID id,
                    const wxDateTime& date = wxDefaultDateTime,

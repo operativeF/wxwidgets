@@ -54,7 +54,7 @@ public:
     {}
 
     // Destructor.
-    virtual ~wxXmlResourceHandlerImplBase() {}
+    virtual ~wxXmlResourceHandlerImplBase() = default;
 
     virtual wxObject *CreateResource(wxXmlNode *node, wxObject *parent,
                                      wxObject *instance) = 0;

@@ -47,8 +47,7 @@ public:
     wxBufferedDC()
         
           
-    {
-    }
+    = default;
 
     // Construct a wxBufferedDC using a user supplied buffer.
     wxBufferedDC(wxDC *dc,
@@ -231,7 +230,7 @@ public:
         );
     }
 
-    virtual ~wxAutoBufferedPaintDC() { }
+    virtual ~wxAutoBufferedPaintDC() = default;
 
 private:
     wxAutoBufferedPaintDC(const wxAutoBufferedPaintDC&) = delete;

@@ -248,10 +248,8 @@ public:
     }
 
     wxSashEvent(const wxSashEvent& event)
-        : wxCommandEvent(event),
-          m_edge(event.m_edge),
-          m_dragRect(event.m_dragRect),
-          m_dragStatus(event.m_dragStatus) { }
+        
+          = default;
 
     void SetEdge(wxSashEdgePosition edge) { m_edge = edge; }
     wxSashEdgePosition GetEdge() const { return m_edge; }

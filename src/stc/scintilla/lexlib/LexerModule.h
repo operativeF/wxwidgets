@@ -43,8 +43,7 @@ public:
 		LexerFactoryFunction fnFactory_,
 		const char *languageName_,
 		const char * const wordListDescriptions_[] = nullptr);
-	virtual ~LexerModule() {
-	}
+	virtual ~LexerModule() = default;
 	int GetLanguage() const { return language; }
 
 	// -1 is returned if no WordList information is available

@@ -44,8 +44,7 @@ wxIMPLEMENT_CLASS(wxURI, wxObject);
 wxURI::wxURI()
      
        
-{
-}
+= default;
 
 wxURI::wxURI(const wxString& uri)
      : m_hostType(wxURI_REGNAME),

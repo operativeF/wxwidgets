@@ -106,7 +106,7 @@ public:
     // ctors
     // -----
 
-    wxNotebookBase() { }
+    wxNotebookBase() = default;
 
     // wxNotebook-specific additions to wxBookCtrlBase interface
     // ---------------------------------------------------------

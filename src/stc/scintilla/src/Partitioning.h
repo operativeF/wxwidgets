@@ -22,8 +22,7 @@ public:
 		SetGrowSize(growSize_);
 		ReAllocate(growSize_);
 	}
-	~SplitVectorWithRangeAdd() {
-	}
+	~SplitVectorWithRangeAdd() = default;
 	void RangeAddDelta(int start, int end, int delta) {
 		// end is 1 past end, so end-start is number of elements to change
 		int i = 0;

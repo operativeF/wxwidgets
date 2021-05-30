@@ -6177,8 +6177,7 @@ wxString wxPGStringTokenizer::GetNextToken()
 
 wxPGChoiceEntry::wxPGChoiceEntry()
       
-{
-}
+= default;
 
 // -----------------------------------------------------------------------
 // wxPGChoicesData

@@ -62,7 +62,7 @@ enum wxFindReplaceDialogStyles
 class WXDLLIMPEXP_CORE wxFindReplaceData : public wxObject
 {
 public:
-    wxFindReplaceData() { }
+    wxFindReplaceData() = default;
     wxFindReplaceData(wxUint32 flags) { SetFlags(flags); }
 
     // accessors
@@ -141,7 +141,7 @@ public:
     wxFindDialogEvent(wxEventType commandType = wxEVT_NULL, int id = 0)
         : wxCommandEvent(commandType, id) { }
     wxFindDialogEvent(const wxFindDialogEvent& event)
-        : wxCommandEvent(event), m_strReplace(event.m_strReplace) { }
+         = default;
 
     int GetFlags() const { return GetInt(); }
     wxString GetFindString() const { return GetString(); }

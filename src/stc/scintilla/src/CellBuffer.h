@@ -15,7 +15,7 @@ namespace Scintilla {
 // Interface to per-line data that wants to see each line insertion and deletion
 class PerLine {
 public:
-	virtual ~PerLine() {}
+	virtual ~PerLine() = default;
 	virtual void Init()=0;
 	virtual void InsertLine(int line)=0;
 	virtual void RemoveLine(int line)=0;

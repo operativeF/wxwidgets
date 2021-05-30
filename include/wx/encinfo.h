@@ -43,7 +43,7 @@ struct WXDLLIMPEXP_CORE wxNativeEncodingInfo
     wxNativeEncodingInfo()
          
         
-    { }
+    = default;
 
     int      charset{0};
 #elif defined(_WX_X_FONTLIKE)

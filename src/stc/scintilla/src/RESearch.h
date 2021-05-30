@@ -24,8 +24,7 @@ namespace Scintilla {
 class CharacterIndexer {
 public:
 	virtual char CharAt(int index)=0;
-	virtual ~CharacterIndexer() {
-	}
+	virtual ~CharacterIndexer() = default;
 };
 
 class RESearch {

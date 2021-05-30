@@ -129,7 +129,7 @@ class WXDLLIMPEXP_CORE wxEnhMetaFileDataObject : public wxDataObject
 {
 public:
     // ctors
-    wxEnhMetaFileDataObject() { }
+    wxEnhMetaFileDataObject() = default;
     wxEnhMetaFileDataObject(const wxEnhMetaFile& metafile)
         : m_metafile(metafile) { }
 

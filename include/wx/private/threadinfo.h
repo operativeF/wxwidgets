@@ -60,7 +60,7 @@ public:
 #endif
 
 private:
-    wxThreadSpecificInfo()  {}
+    wxThreadSpecificInfo()  = default;
 };
 
 #define wxThreadInfo wxThreadSpecificInfo::Get()

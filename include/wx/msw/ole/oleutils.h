@@ -67,7 +67,7 @@ class WXDLLIMPEXP_CORE wxBasicString
 {
 public:
     // Constructs with the owned BSTR set to NULL
-    wxBasicString()  {}
+    wxBasicString()  = default;
 
     // Constructs with the owned BSTR created from a wxString
     wxBasicString(const wxString& str)

@@ -326,7 +326,7 @@ class WXDLLIMPEXP_BASE wxList : public wxObjectList
 {
 public:
     // this destructor is required for Darwin
-   ~wxList() { }
+   ~wxList() = default;
 
     template<typename T>
     std::vector<T> AsVector() const
