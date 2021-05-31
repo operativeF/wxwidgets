@@ -48,16 +48,16 @@ CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( DynamicLibraryTestCase, "DynamicLibraryTe
 void DynamicLibraryTestCase::Load()
 {
 #if defined(__WINDOWS__)
-    static const wxChar *LIB_NAME = wxT("kernel32.dll");
-    static const wxChar *FUNC_NAME = wxT("lstrlenA");
+    static constexpr wxChar LIB_NAME[] = wxT("kernel32.dll");
+    static constexpr wxChar FUNC_NAME[] = wxT("lstrlenA");
 #elif defined(__UNIX__)
 #ifdef __DARWIN__
-    static const wxChar *LIB_NAME = wxT("/usr/lib/libc.dylib");
+    static constexpr wxChar LIB_NAME[] = wxT("/usr/lib/libc.dylib");
 #else
     // weird: using just libc.so does *not* work!
-    static const wxChar *LIB_NAME = wxT("/lib/libc.so.6");
+    static constexpr wxChar LIB_NAME[] = wxT("/lib/libc.so.6");
 #endif
-    static const wxChar *FUNC_NAME = wxT("strlen");
+    static constexpr wxChar FUNC_NAME[] = wxT("strlen");
 
     if ( !wxFileName::Exists(LIB_NAME) )
     {
@@ -83,7 +83,7 @@ void DynamicLibraryTestCase::Load()
     CPPUNIT_ASSERT( pfnStrlen("foo") == 3 );
 
 #ifdef __WINDOWS__
-    static const wxChar *FUNC_NAME_AW = wxT("lstrlen");
+    static constexpr wxChar FUNC_NAME_AW[] = wxT("lstrlen");
 
     typedef int (wxSTDCALL *wxStrlenTypeAorW)(const wxChar *);
     wxStrlenTypeAorW

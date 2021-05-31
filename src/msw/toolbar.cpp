@@ -823,7 +823,7 @@ bool wxToolBar::Realize()
     // the user-specified option overrides anything, but if it wasn't set, only
     // remap the buttons on 8bpp displays as otherwise the bitmaps usually look
     // much worse after remapping
-    static const wxChar *remapOption = wxT("msw.remap");
+    static constexpr wxChar remapOption[] = wxT("msw.remap");
     int remapValue = wxSystemOptions::HasOption(remapOption)
                           ? wxSystemOptions::GetOptionInt(remapOption)
                           : wxDisplayDepth() <= 8 ? Remap_Buttons

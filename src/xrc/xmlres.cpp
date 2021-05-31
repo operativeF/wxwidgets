@@ -1001,7 +1001,7 @@ static void MergeNodesOver(wxXmlNode& dest, wxXmlNode& overwriteWith,
             // remember referenced object's file, see GetFileNameFromNode()
             copyOfNode->AddAttribute(ATTR_INPUT_FILENAME, overwriteFilename);
 
-            static const wxChar *AT_END = wxT("end");
+            static constexpr wxChar AT_END[] = wxT("end");
             wxString insert_pos = node->GetAttribute(wxT("insert_at"), AT_END);
             if ( insert_pos == AT_END )
             {

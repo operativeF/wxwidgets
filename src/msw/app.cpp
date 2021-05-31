@@ -496,7 +496,7 @@ bool wxConsoleStderr::DoInit()
 int wxConsoleStderr::GetCommandHistory(wxWxCharBuffer& buf) const
 {
     // these functions are internal and may only be called by cmd.exe
-    static const wxChar *CMD_EXE = wxT("cmd.exe");
+    static constexpr wxChar CMD_EXE[] = wxT("cmd.exe");
 
     const int len = m_pfnGetConsoleCommandHistoryLength(CMD_EXE);
     if ( len )

@@ -280,7 +280,7 @@ bool wxApp::Initialize(int& argc, wxChar **argv)
      */
     for(int i=1; i < argc; ++i)
     {
-        static const wxChar *ARG_NS = wxT("-NS");
+        static constexpr wxChar ARG_NS[] = wxT("-NS");
         if( wxStrncmp(argv[i], ARG_NS, wxStrlen(ARG_NS)) == 0 )
         {
             // Only eat this option if it has an argument

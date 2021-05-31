@@ -114,8 +114,8 @@ wxEND_ENUM( wxFontEncoding )
 // the config paths we use
 #if wxUSE_CONFIG
 
-static const wxChar* FONTMAPPER_FONT_FROM_ENCODING_PATH = wxT("Encodings");
-static const wxChar* FONTMAPPER_FONT_DONT_ASK = wxT("none");
+static constexpr wxChar FONTMAPPER_FONT_FROM_ENCODING_PATH[] = wxT("Encodings");
+static constexpr wxChar FONTMAPPER_FONT_DONT_ASK[] = wxT("none");
 
 #endif // wxUSE_CONFIG
 

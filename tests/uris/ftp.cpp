@@ -129,7 +129,7 @@ TEST_CASE("FTP", "[net][.]")
         }
 
         // upload a file
-        static const wxChar *file1 = wxT("test1");
+        static constexpr wxChar file1[] = wxT("test1");
         wxOutputStream *out = ftp.GetOutputStream(file1);
         CPPUNIT_ASSERT( out != NULL );
         CPPUNIT_ASSERT( out->Write("First hello", 11).GetLastError() == wxSTREAM_NO_ERROR );

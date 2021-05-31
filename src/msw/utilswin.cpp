@@ -82,7 +82,7 @@ bool wxDoLaunchDefaultBrowser(const wxLaunchBrowserParams& params)
                 // we only know the syntax of WWW_OpenURL DDE request for IE,
                 // optimistically assume that all other browsers are compatible
                 // with it
-                static const wxChar *TOPIC_OPEN_URL = wxT("WWW_OpenURL");
+                static constexpr wxChar TOPIC_OPEN_URL[] = wxT("WWW_OpenURL");
                 wxString ddeCmd;
                 wxRegKey keyTopic(keyDDE, wxT("topic"));
                 bool ok = keyTopic.Exists() &&

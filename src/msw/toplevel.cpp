@@ -1355,7 +1355,7 @@ HWND wxTLWHiddenParentModule::GetHWND()
     {
         if ( !ms_className )
         {
-            static const wxChar *HIDDEN_PARENT_CLASS = wxT("wxTLWHiddenParent");
+            static constexpr wxChar HIDDEN_PARENT_CLASS[] = wxT("wxTLWHiddenParent");
 
             WNDCLASS wndclass;
             wxZeroMemory(wndclass);

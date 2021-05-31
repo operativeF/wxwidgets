@@ -93,7 +93,7 @@ bool wxAppBase::Initialize(int& argcOrig, wxChar **argvOrig)
     // not in a port-specific file.
     if ( argcOrig > 1 )
     {
-        static const wxChar *ARG_PSN = wxT("-psn_");
+        static constexpr wxChar ARG_PSN[] = wxT("-psn_");
         if ( wxStrncmp(argvOrig[1], ARG_PSN, wxStrlen(ARG_PSN)) == 0 )
         {
             // remove this argument

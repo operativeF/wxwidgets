@@ -985,7 +985,7 @@ wxString wxWebViewIE::GetPageText() const
 bool wxWebViewIE::MSWSetEmulationLevel(wxWebViewIE_EmulationLevel level)
 {
     // Registry key where emulation level for programs are set
-    static const wxChar* IE_EMULATION_KEY =
+    static constexpr wxChar IE_EMULATION_KEY[] =
         wxT("SOFTWARE\\Microsoft\\Internet Explorer\\Main")
         wxT("\\FeatureControl\\FEATURE_BROWSER_EMULATION");
 
