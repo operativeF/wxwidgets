@@ -247,9 +247,9 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxAnyValueTypeGlobalsManager, wxModule);
 //
 // Define integer minimum and maximum as helpers
 #ifdef wxLongLong_t
-    #define UseIntMin  (wxINT64_MIN)
-    #define UseIntMax  (wxINT64_MAX)
-    #define UseUintMax (wxUINT64_MAX)
+    static constexpr int UseIntMin  = wxINT64_MIN;
+    static constexpr int UseIntMax  = wxINT64_MAX;
+    static constexpr unsigned int UseUintMax = wxUINT64_MAX;
 #else
     #define UseIntMin  (LONG_MIN)
     #define UseIntMax  (LONG_MAX)

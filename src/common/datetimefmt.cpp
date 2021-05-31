@@ -892,7 +892,7 @@ wxDateTime::ParseRfc822Date(const wxString& date, wxString::const_iterator *end)
         if ( !*(p + 1) )
         {
             // military: Z = UTC, J unused, A = -1, ..., Y = +12
-            static const int offsets[26] =
+            static constexpr int offsets[26] =
             {
                 //A  B   C   D   E   F   G   H   I    J    K    L    M
                 -1, -2, -3, -4, -5, -6, -7, -8, -9,   0, -10, -11, -12,
