@@ -41,9 +41,6 @@ class WXDLLIMPEXP_HTML wxHtmlListBox : public wxVListBox,
 {
     wxDECLARE_ABSTRACT_CLASS(wxHtmlListBox);
 public:
-    // constructors and such
-    // ---------------------
-
     // default constructor, you must call Create() later
     wxHtmlListBox();
 
@@ -54,6 +51,9 @@ public:
                   const wxSize& size = wxDefaultSize,
                   long style = 0,
                   const wxString& name = wxASCII_STR(wxHtmlListBoxNameStr));
+
+    wxHtmlListBox(const wxHtmlListBox&) = delete;
+	wxHtmlListBox& operator=(const wxHtmlListBox&) = delete;
 
     // really creates the control and sets the initial number of items in it
     // (which may be changed later with SetItemCount())
@@ -126,10 +126,6 @@ protected:
     void OnMouseMove(wxMouseEvent& event);
     void OnLeftDown(wxMouseEvent& event);
 
-
-    // common part of all ctors
-    void Init();
-
     // ensure that the given item is cached
     void CacheItem(size_t n) const;
 
@@ -174,7 +170,7 @@ private:
     wxHtmlListBoxCache *m_cache;
 
     // HTML parser we use
-    wxHtmlWinParser *m_htmlParser;
+    wxHtmlWinParser *m_htmlParser{nullptr};
 
 #if wxUSE_FILESYSTEM
     // file system used by m_htmlParser
@@ -191,8 +187,6 @@ private:
 
 
     wxDECLARE_EVENT_TABLE();
-    wxHtmlListBox(const wxHtmlListBox&) = delete;
-	wxHtmlListBox& operator=(const wxHtmlListBox&) = delete;
 };
 
 

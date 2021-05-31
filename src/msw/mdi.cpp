@@ -801,11 +801,6 @@ bool wxMDIParentFrame::MSWTranslateMessage(WXMSG* msg)
 // wxMDIChildFrame
 // ===========================================================================
 
-void wxMDIChildFrame::Init()
-{
-    m_needsResize = true;
-}
-
 bool wxMDIChildFrame::Create(wxMDIParentFrame *parent,
                              wxWindowID id,
                              const wxString& title,

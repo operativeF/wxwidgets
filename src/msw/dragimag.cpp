@@ -60,13 +60,8 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxDragImage, wxObject);
 // ============================================================================
 
 // ----------------------------------------------------------------------------
-// wxDragImage ctors/dtor
+// wxDragImage dtor
 // ----------------------------------------------------------------------------
-
-wxDragImage::wxDragImage()
-{
-    Init();
-}
 
 wxDragImage::~wxDragImage()
 {
@@ -76,16 +71,6 @@ wxDragImage::~wxDragImage()
     if ( m_hCursorImageList )
         ImageList_Destroy((HIMAGELIST) m_hCursorImageList);
 #endif
-}
-
-void wxDragImage::Init()
-{
-    m_hImageList = nullptr;
-#if !wxUSE_SIMPLER_DRAGIMAGE
-    m_hCursorImageList = nullptr;
-#endif
-    m_window = nullptr;
-    m_fullScreen = false;
 }
 
 // Attributes

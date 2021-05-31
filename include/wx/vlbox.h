@@ -34,11 +34,8 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxVListBoxNameStr[];
 class WXDLLIMPEXP_CORE wxVListBox : public wxVScrolledWindow
 {
 public:
-    // constructors and such
-    // ---------------------
-
     // default constructor, you must call Create() later
-    wxVListBox() { Init(); }
+    wxVListBox() = default;
 
     // normal constructor which calls Create() internally
     wxVListBox(wxWindow *parent,
@@ -48,10 +45,11 @@ public:
                long style = 0,
                const wxString& name = wxASCII_STR(wxVListBoxNameStr))
     {
-        Init();
-
         (void)Create(parent, id, pos, size, style, name);
     }
+
+    wxVListBox(const wxVListBox&) = delete;
+	wxVListBox& operator=(const wxVListBox&) = delete;
 
     // really creates the control and sets the initial number of items in it
     // (which may be changed later with SetItemCount())
@@ -244,9 +242,6 @@ protected:
     void OnSetOrKillFocus(wxFocusEvent& event);
     void OnSize(wxSizeEvent& event);
 
-    // common part of all ctors
-    void Init();
-
     // send the wxEVT_LISTBOX event
     void SendSelectedEvent();
     virtual void InitEvent(wxCommandEvent& event, int n);
@@ -285,17 +280,17 @@ private:
     //
     // if m_selStore == NULL this is also the selected item, otherwise the
     // selections are managed by m_selStore
-    int m_current;
+    int m_current{wxNOT_FOUND};
 
     // the anchor of the selection for the multiselection listboxes:
     // shift-clicking an item extends the selection from m_anchor to the item
     // clicked, for example
     //
     // always wxNOT_FOUND for single selection listboxes
-    int m_anchor;
+    int m_anchor{wxNOT_FOUND};
 
     // the object managing our selected items if not NULL
-    wxSelectionStore *m_selStore;
+    wxSelectionStore *m_selStore{nullptr};
 
     // margins
     wxPoint m_ptMargins;
@@ -304,8 +299,6 @@ private:
     wxColour m_colBgSel;
 
     wxDECLARE_EVENT_TABLE();
-    wxVListBox(const wxVListBox&) = delete;
-	wxVListBox& operator=(const wxVListBox&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxVListBox);
 };
 

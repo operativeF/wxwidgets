@@ -19,11 +19,14 @@ class WXDLLIMPEXP_CORE wxFindReplaceDialog : public wxFindReplaceDialogBase
 {
 public:
     // ctors and such
-    wxFindReplaceDialog() { Init(); }
+    wxFindReplaceDialog() = default;
     wxFindReplaceDialog(wxWindow *parent,
                         wxFindReplaceData *data,
                         const wxString &title,
                         int style = 0);
+
+    wxFindReplaceDialog(const wxFindReplaceDialog&) = delete;
+	wxFindReplaceDialog& operator=(const wxFindReplaceDialog&) = delete;
 
     bool Create(wxWindow *parent,
                 wxFindReplaceData *data,
@@ -53,8 +56,6 @@ protected:
     wxFindReplaceDialogImpl *m_impl {nullptr};
 
     wxDECLARE_DYNAMIC_CLASS(wxFindReplaceDialog);
-    wxFindReplaceDialog(const wxFindReplaceDialog&) = delete;
-	wxFindReplaceDialog& operator=(const wxFindReplaceDialog&) = delete;
 };
 
 #endif // _WX_MSW_FDREPDLG_H_

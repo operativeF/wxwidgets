@@ -34,7 +34,7 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxEditableListBoxNameStr[];
 class WXDLLIMPEXP_CORE wxEditableListBox : public wxPanel
 {
 public:
-    wxEditableListBox() { Init(); }
+    wxEditableListBox() = default;
 
     wxEditableListBox(wxWindow *parent, wxWindowID id,
                       const wxString& label,
@@ -43,7 +43,6 @@ public:
                       long style = wxEL_DEFAULT_STYLE,
                       const wxString& name = wxASCII_STR(wxEditableListBoxNameStr))
     {
-        Init();
         Create(parent, id, label, pos, size, style, name);
     }
 
@@ -65,18 +64,14 @@ public:
     wxBitmapButton* GetEditButton() { return m_bEdit; }
 
 protected:
-    wxBitmapButton *m_bDel, *m_bNew, *m_bUp, *m_bDown, *m_bEdit;
-    wxListCtrl *m_listCtrl;
-    int m_selection;
-    long m_style;
-
-    void Init()
-    {
-        m_style = 0;
-        m_selection = 0;
-        m_bEdit = m_bNew = m_bDel = m_bUp = m_bDown = nullptr;
-        m_listCtrl = nullptr;
-    }
+    wxBitmapButton *m_bDel{nullptr};
+    wxBitmapButton *m_bNew{nullptr};
+    wxBitmapButton *m_bUp{nullptr};
+    wxBitmapButton *m_bDown{nullptr};
+    wxBitmapButton *m_bEdit{nullptr};
+    wxListCtrl *m_listCtrl{nullptr};
+    int m_selection{0};
+    long m_style{0};
 
     void OnItemSelected(wxListEvent& event);
     void OnEndLabelEdit(wxListEvent& event);

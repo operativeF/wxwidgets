@@ -54,20 +54,6 @@ wxBEGIN_EVENT_TABLE(wxVListBoxComboPopup, wxVListBox)
     EVT_LEFT_UP(wxVListBoxComboPopup::OnLeftClick)
 wxEND_EVENT_TABLE()
 
-
-void wxVListBoxComboPopup::Init()
-{
-    m_widestWidth = 0;
-    m_widestItem = -1;
-    m_widthsDirty = false;
-    m_findWidest = false;
-    m_itemHeight = 0;
-    m_value = -1;
-    m_itemHover = -1;
-    m_clientDataItemsType = wxClientDataType::None;
-    m_partialCompletionString.clear();
-}
-
 bool wxVListBoxComboPopup::Create(wxWindow* parent)
 {
     if ( !wxVListBox::Create(parent,

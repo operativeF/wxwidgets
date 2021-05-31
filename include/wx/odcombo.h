@@ -76,8 +76,6 @@ public:
     wxVListBoxComboPopup()  = default;
     ~wxVListBoxComboPopup() override;
 
-    // required virtuals
-    void Init() override;
     bool Create(wxWindow* parent) override;
     void SetFocus() override;
     wxWindow *GetControl() override { return this; }
@@ -184,11 +182,11 @@ protected:
     wxFont                  m_useFont;
 
     //wxString                m_stringValue; // displayed text (may be different from m_strings[m_value])
-    int                     m_value; // selection
-    int                     m_itemHover; // on which item the cursor is
-    int                     m_itemHeight; // default item height (calculate from font size
+    int                     m_value{-1}; // selection
+    int                     m_itemHover{-1}; // on which item the cursor is
+    int                     m_itemHeight{0}; // default item height (calculate from font size
                                           // and used in the absence of callback)
-    wxClientDataType        m_clientDataItemsType;
+    wxClientDataType        m_clientDataItemsType{wxClientDataType::None};
 
 private:
 
@@ -196,16 +194,16 @@ private:
     std::vector<int>           m_widths;
 
     // Width of currently widest item.
-    int                     m_widestWidth;
+    int                     m_widestWidth{0};
 
     // Index of currently widest item.
-    int                     m_widestItem;
+    int                     m_widestItem{-1};
 
     // Measure some items in next GetAdjustedSize?
-    bool                    m_widthsDirty;
+    bool                    m_widthsDirty{false};
 
     // Find widest item in next GetAdjustedSize?
-    bool                    m_findWidest;
+    bool                    m_findWidest{false};
 
     // has the mouse been released on this control?
     bool                    m_clicked;

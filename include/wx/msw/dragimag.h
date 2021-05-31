@@ -101,37 +101,25 @@
 class WXDLLIMPEXP_CORE wxDragImage: public wxObject
 {
 public:
-
-    // Ctors & dtor
-    ////////////////////////////////////////////////////////////////////////////
-
-    wxDragImage();
+    wxDragImage() = default;
     wxDragImage(const wxBitmap& image, const wxCursor& cursor = wxNullCursor)
     {
-        Init();
-
         Create(image, cursor);
     }
 
     wxDragImage(const wxIcon& image, const wxCursor& cursor = wxNullCursor)
     {
-        Init();
-
         Create(image, cursor);
     }
 
     wxDragImage(const wxString& str, const wxCursor& cursor = wxNullCursor)
     {
-        Init();
-
         Create(str, cursor);
     }
 
 #if wxUSE_TREECTRL
     wxDragImage(const wxTreeCtrl& treeCtrl, wxTreeItemId& id)
     {
-        Init();
-
         Create(treeCtrl, id);
     }
 #endif
@@ -139,8 +127,6 @@ public:
 #if wxUSE_LISTCTRL
     wxDragImage(const wxListCtrl& listCtrl, long id)
     {
-        Init();
-
         Create(listCtrl, id);
     }
 #endif
@@ -200,9 +186,6 @@ public:
     // Implementation
     ////////////////////////////////////////////////////////////////////////////
 
-    // Initialize variables
-    void Init();
-
     // Returns the native image list handle
     WXHIMAGELIST GetHIMAGELIST() const { return m_hImageList; }
 
@@ -212,20 +195,20 @@ public:
 #endif
 
 protected:
-    WXHIMAGELIST    m_hImageList;
+    WXHIMAGELIST    m_hImageList{nullptr};
 
 #if wxUSE_SIMPLER_DRAGIMAGE
     wxCursor        m_oldCursor;
 #else
-    WXHIMAGELIST    m_hCursorImageList;
+    WXHIMAGELIST    m_hCursorImageList{nullptr};
 #endif
 
     wxCursor        m_cursor;
 //    wxPoint         m_cursorHotspot; // Obsolete
     wxPoint         m_position;
-    wxWindow*       m_window;
+    wxWindow*       m_window{nullptr};
     wxRect          m_boundingRect;
-    bool            m_fullScreen;
+    bool            m_fullScreen{false};
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxDragImage);

@@ -62,13 +62,6 @@ const char wxVListBoxNameStr[] = "wxVListBox";
 // wxVListBox creation
 // ----------------------------------------------------------------------------
 
-void wxVListBox::Init()
-{
-    m_current =
-    m_anchor = wxNOT_FOUND;
-    m_selStore = nullptr;
-}
-
 bool wxVListBox::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxPoint& pos,

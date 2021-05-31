@@ -183,14 +183,6 @@ wxBitmap wxStaticBitmap::GetBitmap() const
     }
 }
 
-void wxStaticBitmap::Init()
-{
-    m_isIcon = true;
-    m_image = nullptr;
-    m_currentHandle = nullptr;
-    m_ownsCurrentHandle = false;
-}
-
 void wxStaticBitmap::DeleteCurrentHandleIfNeeded()
 {
     if ( m_ownsCurrentHandle )

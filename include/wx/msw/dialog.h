@@ -21,7 +21,7 @@ class WXDLLIMPEXP_FWD_CORE wxDialogModalData;
 class WXDLLIMPEXP_CORE wxDialog : public wxDialogBase
 {
 public:
-    wxDialog() { Init(); }
+    wxDialog() = default;
 
     // full ctor
     wxDialog(wxWindow *parent, wxWindowID id,
@@ -31,10 +31,13 @@ public:
              long style = wxDEFAULT_DIALOG_STYLE,
              const wxString& name = wxASCII_STR(wxDialogNameStr))
     {
-        Init();
-
         (void)Create(parent, id, title, pos, size, style, name);
     }
+
+    ~wxDialog() override;
+
+    wxDialog(const wxDialog&) = delete;
+	wxDialog& operator=(const wxDialog&) = delete;
 
     bool Create(wxWindow *parent, wxWindowID id,
                 const wxString& title,
@@ -42,8 +45,6 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_DIALOG_STYLE,
                 const wxString& name = wxASCII_STR(wxDialogNameStr));
-
-    ~wxDialog() override;
 
     // return true if we're showing the dialog modally
     bool IsModal() const override { return m_modalData != nullptr; }
@@ -65,10 +66,6 @@ public:
     // Windows callbacks
     WXLRESULT MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lParam) override;
 
-protected:
-    // FIXME: Protected Init
-    void Init();
-
 private:
     // these functions deal with the gripper window shown in the corner of
     // resizable dialogs
@@ -82,14 +79,12 @@ private:
     void OnWindowCreate(wxWindowCreateEvent& event);
 
     // gripper window for a resizable dialog, NULL if we're not resizable
-    WXHWND m_hGripper;
+    WXHWND m_hGripper{nullptr};
 
     // this pointer is non-NULL only while the modal event loop is running
-    wxDialogModalData *m_modalData;
+    wxDialogModalData *m_modalData{nullptr};
 
     wxDECLARE_DYNAMIC_CLASS(wxDialog);
-    wxDialog(const wxDialog&) = delete;
-	wxDialog& operator=(const wxDialog&) = delete;
 };
 
 #endif

@@ -21,7 +21,7 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxStaticBitmapNameStr[];
 class WXDLLIMPEXP_CORE wxStaticBitmap : public wxStaticBitmapBase
 {
 public:
-    wxStaticBitmap() { Init(); }
+    wxStaticBitmap() = default;
 
     wxStaticBitmap(wxWindow *parent,
                    wxWindowID id,
@@ -31,10 +31,11 @@ public:
                    long style = 0,
                    const wxString& name = wxASCII_STR(wxStaticBitmapNameStr))
     {
-        Init();
-
         Create(parent, id, label, pos, size, style, name);
     }
+
+    wxStaticBitmap(const wxStaticBitmap&) = delete;
+	wxStaticBitmap& operator=(const wxStaticBitmap&) = delete;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -59,8 +60,6 @@ public:
 protected:
     wxSize DoGetBestClientSize() const override;
 
-    // FIXME: Protected Init
-    void Init();
     void Free();
 
     // true if icon/bitmap is valid
@@ -76,15 +75,15 @@ protected:
     void WXHandleSize(wxSizeEvent& event);
 
     // we can have either an icon or a bitmap
-    bool m_isIcon;
-    wxGDIImage *m_image;
+    bool m_isIcon{true};
+    wxGDIImage *m_image{nullptr};
 
     // handle used in last call to STM_SETIMAGE
-    WXHANDLE m_currentHandle;
+    WXHANDLE m_currentHandle{nullptr};
 
 private:
     // Flag indicating whether we own m_currentHandle, i.e. should delete it.
-    bool m_ownsCurrentHandle;
+    bool m_ownsCurrentHandle{false};
 
     // Replace the image at the native control level with the given HBITMAP or
     // HICON (which can be 0) and destroy the previous image if necessary.
@@ -96,8 +95,6 @@ private:
 
     wxDECLARE_DYNAMIC_CLASS(wxStaticBitmap);
     wxDECLARE_EVENT_TABLE();
-    wxStaticBitmap(const wxStaticBitmap&) = delete;
-	wxStaticBitmap& operator=(const wxStaticBitmap&) = delete;
 };
 
 #endif

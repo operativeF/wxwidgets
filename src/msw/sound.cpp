@@ -118,20 +118,13 @@ wxSoundDataFile::wxSoundDataFile(const wxString& filename, bool isResource)
 // wxSound
 // ----------------------------------------------------------------------------
 
-wxSound::wxSound()
-{
-    Init();
-}
-
 wxSound::wxSound(const wxString& filename, bool isResource)
 {
-    Init();
     Create(filename, isResource);
 }
 
 wxSound::wxSound(size_t size, const void* data)
 {
-    Init();
     Create(size, data);
 }
 

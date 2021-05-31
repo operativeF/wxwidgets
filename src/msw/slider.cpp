@@ -64,21 +64,6 @@ const int TICK = 8;
 // construction
 // ----------------------------------------------------------------------------
 
-void wxSlider::Init()
-{
-    m_labels = nullptr;
-
-    m_hBrushBg = nullptr;
-
-    m_pageSize = 1;
-    m_lineSize = 1;
-    m_rangeMax = 0;
-    m_rangeMin = 0;
-    m_tickFreq = 0;
-
-    m_isDragging = false;
-}
-
 bool wxSlider::Create(wxWindow *parent,
                       wxWindowID id,
                       int value,

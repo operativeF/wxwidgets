@@ -789,11 +789,7 @@ class WXDLLIMPEXP_CORE wxComboPopup
 {
     friend class wxComboCtrlBase;
 public:
-    wxComboPopup()
-    {
-        m_combo = nullptr;
-        m_iFlags = 0;
-    }
+    wxComboPopup() = default;
 
     // This is called immediately after construction finishes. m_combo member
     // variable has been initialized before the call.
@@ -888,8 +884,8 @@ public:
                                           const wxRect& rect );
 
 protected:
-    wxComboCtrlBase* m_combo;
-    wxUint32            m_iFlags;
+    wxComboCtrlBase* m_combo{nullptr};
+    wxUint32            m_iFlags{0};
 
 private:
     // Called in wxComboCtrlBase::SetPopupControl

@@ -718,9 +718,7 @@ WX_DECLARE_LIST_WITH_DECL(wxPoint, wxPointList, class WXDLLIMPEXP_CORE);
 class WXDLLIMPEXP_CORE wxRect
 {
 public:
-    wxRect()
-         
-        = default;
+    wxRect() = default;
     wxRect(int xx, int yy, int ww, int hh)
         : x(xx), y(yy), width(ww), height(hh)
         { }

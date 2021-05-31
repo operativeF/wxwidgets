@@ -78,13 +78,6 @@ wxDEFINE_TIED_SCOPED_PTR_TYPE(wxDialogModalData)
 // wxDialog construction
 // ----------------------------------------------------------------------------
 
-void wxDialog::Init()
-{
-    m_isShown = false;
-    m_modalData = nullptr;
-    m_hGripper = nullptr;
-}
-
 bool wxDialog::Create(wxWindow *parent,
                       wxWindowID id,
                       const wxString& title,

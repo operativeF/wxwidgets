@@ -17,7 +17,7 @@ class WXDLLIMPEXP_FWD_CORE wxSubwindows;
 class WXDLLIMPEXP_CORE wxSlider : public wxSliderBase
 {
 public:
-    wxSlider() { Init(); }
+    wxSlider() = default;
 
     wxSlider(wxWindow *parent,
              wxWindowID id,
@@ -30,8 +30,6 @@ public:
              const wxValidator& validator = wxDefaultValidator,
              const wxString& name = wxASCII_STR(wxSliderNameStr))
     {
-        Init();
-
         (void)Create(parent, id, value, minValue, maxValue,
                      pos, size, style, validator, name);
     }
@@ -100,9 +98,6 @@ public:
     WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
 
 protected:
-    // FIXME: Protected Init
-    void Init();
-
     // format an integer value as string
     static wxString Format(int n) { return wxString::Format(wxT("%d"), n); }
 
@@ -130,20 +125,20 @@ protected:
     void OnDPIChanged(wxDPIChangedEvent& event);
 
     // the labels windows, if any
-    wxSubwindows  *m_labels;
+    wxSubwindows  *m_labels{nullptr};
 
     // Last background brush we returned from DoMSWControlColor(), see there.
-    WXHBRUSH m_hBrushBg;
+    WXHBRUSH m_hBrushBg{nullptr};
 
-    int           m_rangeMin;
-    int           m_rangeMax;
-    int           m_pageSize;
-    int           m_lineSize;
-    int           m_tickFreq;
+    int           m_rangeMin{0};
+    int           m_rangeMax{0};
+    int           m_pageSize{1};
+    int           m_lineSize{1};
+    int           m_tickFreq{0};
 
     // flag needed to detect whether we're getting THUMBRELEASE event because
     // of dragging the thumb or scrolling the mouse wheel
-    bool m_isDragging;
+    bool m_isDragging{false};
 
     // Platform-specific implementation of SetTickFreq
     void DoSetTickFreq(int freq) override;

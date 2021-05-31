@@ -16,10 +16,12 @@
 class WXDLLIMPEXP_ADV wxSound : public wxSoundBase
 {
 public:
-    wxSound();
+    wxSound() = default;
     wxSound(const wxString& fileName, bool isResource = false);
     wxSound(size_t size, const void* data);
     ~wxSound() override;
+    wxSound(const wxSound&) = delete;
+	wxSound& operator=(const wxSound&) = delete;
 
     // Create from resource or file
     bool Create(const wxString& fileName, bool isResource = false);
@@ -32,8 +34,6 @@ public:
     static void Stop();
 
 protected:
-    // FIXME: Protected Init
-    void Init() { m_data = nullptr; }
     bool CheckCreatedOk();
     void Free();
 
@@ -41,10 +41,7 @@ protected:
 
 private:
     // data of this object
-    class wxSoundData *m_data;
-
-    wxSound(const wxSound&) = delete;
-	wxSound& operator=(const wxSound&) = delete;
+    class wxSoundData *m_data{nullptr};
 };
 
 #endif // wxUSE_SOUND

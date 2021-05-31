@@ -175,7 +175,7 @@ private:
 class WXDLLIMPEXP_CORE wxMDIChildFrame : public wxMDIChildFrameBase
 {
 public:
-    wxMDIChildFrame() { Init(); }
+    wxMDIChildFrame() = default;
     wxMDIChildFrame(wxMDIParentFrame *parent,
                     wxWindowID id,
                     const wxString& title,
@@ -184,8 +184,6 @@ public:
                     long style = wxDEFAULT_FRAME_STYLE,
                     const wxString& name = wxASCII_STR(wxFrameNameStr))
     {
-        Init();
-
         Create(parent, id, title, pos, size, style, name);
     }
 
@@ -240,11 +238,8 @@ protected:
 
     WXHICON GetDefaultIcon() const override;
 
-    // common part of all ctors
-    void Init();
-
 private:
-    bool m_needsResize; // flag which tells us to artificially resize the frame
+    bool m_needsResize{true}; // flag which tells us to artificially resize the frame
 
     wxDECLARE_EVENT_TABLE();
 
@@ -261,7 +256,7 @@ public:
 class WXDLLIMPEXP_CORE wxMDIClientWindow : public wxMDIClientWindowBase
 {
 public:
-    wxMDIClientWindow() { Init(); }
+    wxMDIClientWindow() = default;
 
 	wxMDIClientWindow(const wxMDIClientWindow&) = delete;
 	wxMDIClientWindow& operator=(const wxMDIClientWindow&) = delete;
@@ -278,9 +273,8 @@ protected:
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;
 
-    void Init() { m_scrollX = m_scrollY = 0; }
-
-    int m_scrollX, m_scrollY;
+    int m_scrollX{0};
+    int m_scrollY{0};
 
 private:
     wxDECLARE_EVENT_TABLE();

@@ -220,8 +220,7 @@ wxPrintDialogData::wxPrintDialogData(const wxPrintData& printData)
     m_printEnableHelp = false;
 }
 
-wxPrintDialogData::~wxPrintDialogData()
-= default;
+wxPrintDialogData::~wxPrintDialogData() = default;
 
 void wxPrintDialogData::operator=(const wxPrintDialogData& data)
 {
@@ -253,20 +252,6 @@ void wxPrintDialogData::operator=(const wxPrintData& data)
 wxPageSetupDialogData::wxPageSetupDialogData()
 {
     CalculatePaperSizeFromId();
-
-    m_minMarginTopLeft =
-    m_minMarginBottomRight =
-    m_marginTopLeft =
-    m_marginBottomRight = wxPoint(0,0);
-
-    // Flags
-    m_defaultMinMargins = false;
-    m_enableMargins = true;
-    m_enableOrientation = true;
-    m_enablePaper = true;
-    m_enablePrinter = true;
-    m_enableHelp = false;
-    m_getDefaultInfo = false;
 }
 
 wxPageSetupDialogData::wxPageSetupDialogData(const wxPageSetupDialogData& dialogData)
@@ -278,22 +263,12 @@ wxPageSetupDialogData::wxPageSetupDialogData(const wxPageSetupDialogData& dialog
 wxPageSetupDialogData::wxPageSetupDialogData(const wxPrintData& printData)
     : m_printData(printData)
 {
-    // Flags
-    m_defaultMinMargins = false;
-    m_enableMargins = true;
-    m_enableOrientation = true;
-    m_enablePaper = true;
-    m_enablePrinter = true;
-    m_enableHelp = false;
-    m_getDefaultInfo = false;
-
     // The wxPrintData paper size overrides these values, unless the size cannot
     // be found.
     CalculatePaperSizeFromId();
 }
 
-wxPageSetupDialogData::~wxPageSetupDialogData()
-= default;
+wxPageSetupDialogData::~wxPageSetupDialogData() = default;
 
 wxPageSetupDialogData& wxPageSetupDialogData::operator=(const wxPageSetupDialogData& data)
 {
@@ -362,6 +337,7 @@ void wxPageSetupDialogData::CalculateIdFromPaperSize()
     }
 }
 
+// FIXME: Make constexpr
 // Use paper id in wxPrintData to set this object's paper size
 void wxPageSetupDialogData::CalculatePaperSizeFromId()
 {
