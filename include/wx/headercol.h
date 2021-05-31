@@ -272,9 +272,6 @@ public:
     bool IsSortOrderAscending() const override { return m_sortAscending; }
 
 private:
-    // common part of all ctors
-    
-
     wxString m_title;
     wxBitmap m_bitmap;
     int m_width,

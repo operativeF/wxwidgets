@@ -153,8 +153,8 @@ void wxAuiGenericToolBarArt::UpdateColoursFromSystem()
     // Note: update the bitmaps here as they depend on the system colours too.
 
     // TODO: Provide x1.5 and x2.0 versions or migrate to SVG.
-    static const unsigned char buttonDropdownBits[] = { 0xe0, 0xf1, 0xfb };
-    static const unsigned char overflowBits[] = { 0x80, 0xff, 0x80, 0xc1, 0xe3, 0xf7 };
+    static constexpr unsigned char buttonDropdownBits[] = { 0xe0, 0xf1, 0xfb };
+    static constexpr unsigned char overflowBits[] = { 0x80, 0xff, 0x80, 0xc1, 0xe3, 0xf7 };
 
     m_buttonDropDownBmp = wxAuiBitmapFromBits(buttonDropdownBits, 5, 3,
                                               wxSystemSettings::GetColour(wxSYS_COLOUR_BTNTEXT));

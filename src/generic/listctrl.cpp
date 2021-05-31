@@ -55,58 +55,58 @@
 // constants
 // ----------------------------------------------------------------------------
 
-static const int SCROLL_UNIT_X = 15;
+static constexpr int SCROLL_UNIT_X = 15;
 
 // the spacing between the lines (in report mode)
-static const int LINE_SPACING = 0;
+static constexpr int LINE_SPACING = 0;
 
 // extra margins around the text label
 #ifdef __WXGTK__
-static const int EXTRA_WIDTH = 6;
+static constexpr int EXTRA_WIDTH = 6;
 #else
-static const int EXTRA_WIDTH = 4;
+static constexpr int EXTRA_WIDTH = 4;
 #endif
 
 #ifdef __WXGTK__
-static const int EXTRA_HEIGHT = 6;
+static constexpr int EXTRA_HEIGHT = 6;
 #else
-static const int EXTRA_HEIGHT = 4;
+static constexpr int EXTRA_HEIGHT = 4;
 #endif
 
 // margin between the window and the items
-static const int EXTRA_BORDER_X = 2;
-static const int EXTRA_BORDER_Y = 2;
+static constexpr int EXTRA_BORDER_X = 2;
+static constexpr int EXTRA_BORDER_Y = 2;
 
 #ifdef __WXGTK__
     // This probably needs to be done
     // on all platforms as the icons
     // otherwise nearly touch the border
-    static const int ICON_OFFSET_X = 2;
+    static constexpr int ICON_OFFSET_X = 2;
 #else
-    static const int ICON_OFFSET_X = 0;
+    static constexpr int ICON_OFFSET_X = 0;
 #endif
 
 // offset for the header window
-static const int HEADER_OFFSET_X = 0;
-static const int HEADER_OFFSET_Y = 0;
+static constexpr int HEADER_OFFSET_X = 0;
+static constexpr int HEADER_OFFSET_Y = 0;
 
 // margin between rows of icons in [small] icon view
-static const int MARGIN_BETWEEN_ROWS = 6;
+static constexpr int MARGIN_BETWEEN_ROWS = 6;
 
 // when autosizing the columns, add some slack
-static const int AUTOSIZE_COL_MARGIN = 10;
+static constexpr int AUTOSIZE_COL_MARGIN = 10;
 
 // default width for the header columns
-static const int WIDTH_COL_DEFAULT = 80;
+static constexpr int WIDTH_COL_DEFAULT = 80;
 
 // the space between the image and the text in the report mode
-static const int IMAGE_MARGIN_IN_REPORT_MODE = 5;
+static constexpr int IMAGE_MARGIN_IN_REPORT_MODE = 5;
 
 // the space between the image and the text in the report mode in header
-static const int HEADER_IMAGE_MARGIN_IN_REPORT_MODE = 2;
+static constexpr int HEADER_IMAGE_MARGIN_IN_REPORT_MODE = 2;
 
 // space after a checkbox
-static const int MARGIN_AROUND_CHECKBOX = 5;
+static constexpr int MARGIN_AROUND_CHECKBOX = 5;
 
 
 // ----------------------------------------------------------------------------

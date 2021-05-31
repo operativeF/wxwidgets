@@ -764,7 +764,7 @@ MyFrame::MyFrame(const wxString& title)
         // The ids of the menu commands in MSW system menu must be multiple of
         // 16 so we can't use DIALOGS_ABOUTDLG_SIMPLE here because it might not
         // satisfy this condition and need to define and connect a separate id.
-        static const int DIALOGS_SYSTEM_ABOUT = 0x4010;
+        static constexpr int DIALOGS_SYSTEM_ABOUT = 0x4010;
 
         menu->Append(DIALOGS_SYSTEM_ABOUT, "&About");
         Bind(wxEVT_MENU, &MyFrame::ShowSimpleAboutDialog, this,

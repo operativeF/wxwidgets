@@ -80,7 +80,7 @@ bool wxSelectionStore::SelectRange(unsigned itemFrom, unsigned itemTo,
     // 100 is hardcoded but it shouldn't matter much: the important thing is
     // that we don't refresh everything when really few (e.g. 1 or 2) items
     // change state
-    static const unsigned MANY_ITEMS = 100;
+    static constexpr unsigned MANY_ITEMS = 100;
 
     wxASSERT_MSG( itemFrom <= itemTo, wxT("should be in order") );
 

@@ -20,7 +20,7 @@ wxBase64Encode(char *dst, size_t dstLen, const void *src_, size_t srcLen)
 
     const unsigned char *src = static_cast<const unsigned char *>(src_);
 
-    static const char b64[] =
+    static constexpr char b64[] =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 
@@ -88,7 +88,7 @@ wxBase64Decode(void *dst_, size_t dstLen,
         PAD
     };
 
-    static const unsigned char decode[256] =
+    static constexpr unsigned char decode[256] =
     {
         WSP,INV,INV,INV,INV,INV,INV,INV,INV,WSP,WSP,INV,WSP,WSP,INV,INV,
         INV,INV,INV,INV,INV,INV,INV,INV,INV,INV,INV,INV,INV,INV,INV,INV,

@@ -301,8 +301,8 @@ bool wxIniConfig::DoReadLong(const wxString& szKey, long *pl) const
   // hack: we have no mean to know if it really found the default value or
   // didn't find anything, so we call it twice
 
-  static const int nMagic  = 17; // 17 is some "rare" number
-  static const int nMagic2 = 28; // arbitrary number != nMagic
+  static constexpr int nMagic  = 17; // 17 is some "rare" number
+  static constexpr int nMagic2 = 28; // arbitrary number != nMagic
   long lVal = GetPrivateProfileInt(m_strGroup.t_str(), strKey.t_str(),
                                    nMagic, m_strLocalFilename.t_str());
   if ( lVal != nMagic ) {

@@ -601,7 +601,7 @@ long wxExecute(const wxString& cmd, int flags, wxProcess *handler,
     // of command: WX_DDE#<command>#DDE_SERVER#DDE_TOPIC#DDE_COMMAND in which
     // case we execute just <command> and process the rest below
     wxString ddeServer, ddeTopic, ddeCommand;
-    static const size_t lenDdePrefix = 7;   // strlen("WX_DDE:")
+    static constexpr size_t lenDdePrefix = 7;   // strlen("WX_DDE:")
     if ( cmd.Left(lenDdePrefix) == wxT("WX_DDE#") )
     {
         // speed up the concatenations below

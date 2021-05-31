@@ -1079,7 +1079,7 @@ static HSZ DDEAtomFromString(const wxString& s)
 static wxString DDEStringFromAtom(HSZ hsz)
 {
     // all DDE strings are normally limited to 255 bytes
-    static const size_t len = 256;
+    static constexpr size_t len = 256;
 
     wxString s;
     (void)DdeQueryString(DDEIdInst, hsz, wxStringBuffer(s, len), len, DDE_CP);

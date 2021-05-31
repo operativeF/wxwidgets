@@ -124,7 +124,7 @@
 // ============================================================================
 
 // Array used in DecToHex conversion routine.
-static const char hexArray[] = "0123456789ABCDEF";
+static constexpr char hexArray[] = "0123456789ABCDEF";
 
 // Convert 2-digit hex number to decimal
 int wxHexToDec(const wxString& str)
@@ -418,7 +418,7 @@ wxString wxGetEmailAddress()
 
 wxString wxGetUserId()
 {
-    static const int maxLoginLen = 256; // FIXME arbitrary number
+    static constexpr int maxLoginLen = 256; // FIXME arbitrary number
 
     wxString buf;
     bool ok = wxGetUserId(wxStringBuffer(buf, maxLoginLen), maxLoginLen);
@@ -431,7 +431,7 @@ wxString wxGetUserId()
 
 wxString wxGetUserName()
 {
-    static const int maxUserNameLen = 1024; // FIXME arbitrary number
+    static constexpr int maxUserNameLen = 1024; // FIXME arbitrary number
 
     wxString buf;
     bool ok = wxGetUserName(wxStringBuffer(buf, maxUserNameLen), maxUserNameLen);
@@ -444,7 +444,7 @@ wxString wxGetUserName()
 
 wxString wxGetHostName()
 {
-    static const size_t hostnameSize = 257;
+    static constexpr size_t hostnameSize = 257;
 
     wxString buf;
     bool ok = wxGetHostName(wxStringBuffer(buf, hostnameSize), hostnameSize);
@@ -457,7 +457,7 @@ wxString wxGetHostName()
 
 wxString wxGetFullHostName()
 {
-    static const size_t hostnameSize = 257;
+    static constexpr size_t hostnameSize = 257;
 
     wxString buf;
     bool ok = wxGetFullHostName(wxStringBuffer(buf, hostnameSize), hostnameSize);

@@ -503,7 +503,7 @@ BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lp, LPARAM pData)
                     //     anyhow (see the comment above) no harm in doing it
 
                     // need to truncate or it displays incorrectly
-                    static const size_t maxChars = 37;
+                    static constexpr size_t maxChars = 37;
                     if ( strDir.length() > maxChars )
                     {
                         strDir = strDir.Right(maxChars);

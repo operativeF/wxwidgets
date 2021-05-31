@@ -565,7 +565,7 @@ wxConvBrokenFileNames::wxConvBrokenFileNames(const wxString& charset)
 //
 // BASE64 decoding table
 //
-static const unsigned char utf7unb64[] =
+static constexpr unsigned char utf7unb64[] =
 {
     0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
     0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
@@ -755,7 +755,7 @@ size_t wxMBConvUTF7::ToWChar(wchar_t *dst, size_t dstLen,
 //
 // BASE64 encoding table
 //
-static const unsigned char utf7enb64[] =
+static constexpr unsigned char utf7enb64[] =
 {
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
     'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
@@ -775,7 +775,7 @@ static const unsigned char utf7enb64[] =
 // 2 - whitespace characters (optional)
 // 3 - special characters
 //
-static const unsigned char utf7encode[128] =
+static constexpr unsigned char utf7encode[128] =
 {
     0, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 3, 3, 2, 3, 3,
     3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
@@ -909,7 +909,7 @@ size_t wxMBConvUTF7::FromWChar(char *dst, size_t dstLen,
 // UTF-8
 // ----------------------------------------------------------------------------
 
-static const wxUint32 utf8_max[]=
+static constexpr wxUint32 utf8_max[]=
     { 0x7f, 0x7ff, 0xffff, 0x1fffff, 0x3ffffff, 0x7fffffff, 0xffffffff };
 
 // boundaries of the private use area we use to (temporarily) remap invalid
@@ -1026,7 +1026,7 @@ wxMBConvStrictUTF8::ToWChar(wchar_t *dst, size_t dstLen,
 
             // mask to extract lead byte's value ('x' bits above), by sequence
             // length:
-            static const unsigned char leadValueMask[] = { 0x7F, 0x1F, 0x0F, 0x07 };
+            static constexpr unsigned char leadValueMask[] = { 0x7F, 0x1F, 0x0F, 0x07 };
 
             len--; // it's more convenient to work with 0-based length here
 

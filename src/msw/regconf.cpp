@@ -131,7 +131,7 @@ wxRegConfig::wxRegConfig(const wxString& appName, const wxString& vendorName,
   // there are only few of wxRegConfig objects (usually 1), we can allow
   // ourselves to be generous and spend some memory to significantly improve
   // performance of SetPath()
-  static const size_t MEMORY_PREALLOC = 512;
+  static constexpr size_t MEMORY_PREALLOC = 512;
 
   m_keyLocalRoot.ReserveMemoryForName(MEMORY_PREALLOC);
   m_keyLocal.ReserveMemoryForName(MEMORY_PREALLOC);

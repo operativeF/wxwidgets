@@ -898,15 +898,15 @@ wxCairoPenData::wxCairoPenData( wxGraphicsRenderer* renderer, const wxGraphicsPe
     {
         dashUnit , dashUnit + 2.0
     };
-    static const double short_dashed[] =
+    static constexpr double short_dashed[] =
     {
         9.0 , 6.0
     };
-    static const double dashed[] =
+    static constexpr double dashed[] =
     {
         19.0 , 9.0
     };
-    static const double dotted_dashed[] =
+    static constexpr double dotted_dashed[] =
     {
         9.0 , 6.0 , 3.0 , 3.0
     };

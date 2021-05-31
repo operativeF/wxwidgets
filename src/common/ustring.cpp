@@ -112,11 +112,11 @@ wxUString &wxUString::assignFromUTF8( const char *str )
 
             // mask to extract lead byte's value ('x' bits above), by sequence
             // length:
-            static const unsigned char leadValueMask[] = { 0x7F, 0x1F, 0x0F, 0x07 };
+            static constexpr unsigned char leadValueMask[] = { 0x7F, 0x1F, 0x0F, 0x07 };
 
             // mask and value of lead byte's most significant bits, by length:
-            static const unsigned char leadMarkerMask[] = { 0x80, 0xE0, 0xF0, 0xF8 };
-            static const unsigned char leadMarkerVal[] = { 0x00, 0xC0, 0xE0, 0xF0 };
+            static constexpr unsigned char leadMarkerMask[] = { 0x80, 0xE0, 0xF0, 0xF8 };
+            static constexpr unsigned char leadMarkerVal[] = { 0x00, 0xC0, 0xE0, 0xF0 };
 
             len--; // it's more convenient to work with 0-based length here
 
@@ -206,11 +206,11 @@ wxUString &wxUString::assignFromUTF8( const char *str, size_type n )
 
             // mask to extract lead byte's value ('x' bits above), by sequence
             // length:
-            static const unsigned char leadValueMask[] = { 0x7F, 0x1F, 0x0F, 0x07 };
+            static constexpr unsigned char leadValueMask[] = { 0x7F, 0x1F, 0x0F, 0x07 };
 
             // mask and value of lead byte's most significant bits, by length:
-            static const unsigned char leadMarkerMask[] = { 0x80, 0xE0, 0xF0, 0xF8 };
-            static const unsigned char leadMarkerVal[] = { 0x00, 0xC0, 0xE0, 0xF0 };
+            static constexpr unsigned char leadMarkerMask[] = { 0x80, 0xE0, 0xF0, 0xF8 };
+            static constexpr unsigned char leadMarkerVal[] = { 0x00, 0xC0, 0xE0, 0xF0 };
 
             len--; // it's more convenient to work with 0-based length here
 

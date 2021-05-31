@@ -120,7 +120,7 @@ wxUniCharRef& wxUniCharRef::operator=(const wxUniChar& c)
         // replacement is done (there is only a small number of iterators at
         // any time, so we use an array on the stack to avoid unneeded
         // allocation):
-        static const size_t STATIC_SIZE = 32;
+        static constexpr size_t STATIC_SIZE = 32;
         size_t indexes_a[STATIC_SIZE];
         size_t *indexes = indexes_a;
         size_t iterNum = 0;

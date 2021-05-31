@@ -408,7 +408,7 @@ wxFileConfig::wxFileConfig(wxInputStream &inStream, const wxMBConv& conv)
 
     // read the entire stream contents in memory
     wxWxCharBuffer cbuf;
-    static const size_t chunkLen = 1024;
+    static constexpr size_t chunkLen = 1024;
 
     wxMemoryBuffer buf(chunkLen);
     do

@@ -858,7 +858,7 @@ wxTopLevelWindowMSW::MSWGetCreateWindowCoords(const wxPoint& pos,
         // neither because it is not handled as a special value by Windows then
         // and so we have to choose some default value for it, even if a
         // completely arbitrary one
-        static const int DEFAULT_Y = 200;
+        static constexpr int DEFAULT_Y = 200;
 
         x = pos.x;
         y = pos.y == wxDefaultCoord ? DEFAULT_Y : pos.y;

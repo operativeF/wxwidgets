@@ -275,7 +275,7 @@ wxStringFragment GetFragment(wxString& text)
 
     // the maximum length of a sequence of digits that
     // can fit into wxUint64 when converted to a number
-    static const ptrdiff_t maxDigitSequenceLength = 19;
+    static constexpr ptrdiff_t maxDigitSequenceLength = 19;
 
     wxStringFragment         fragment;
     wxString::const_iterator it;

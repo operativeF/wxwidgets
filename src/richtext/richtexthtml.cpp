@@ -618,7 +618,7 @@ wxChar* wxRichTextHTMLHandler::b64enc( unsigned char* input, size_t in_len )
     // otherwise encoder will fail
     // hmmm.. Does wxT macro define a char as 16 bit value
     // when compiling with UNICODE option?
-    static const wxChar enc64[] = wxT("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/");
+    static constexpr wxChar enc64[] = wxT("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/");
     wxChar* output = new wxChar[4*((in_len+2)/3)+1];
     wxChar* p = output;
 

@@ -362,7 +362,7 @@ void SetScaledScreenDCFont(wxScreenDC& sDC, const wxFont& font)
     // When using DPI-independent pixels, the results of GetTextExtent() and
     // similar don't depend on DPI anyhow.
 #ifndef wxHAVE_DPI_INDEPENDENT_PIXELS
-    static const int SVG_DPI = 96;
+    static constexpr int SVG_DPI = 96;
 
     const double screenDPI = sDC.GetPPI().y;
     const double scale = screenDPI / SVG_DPI;

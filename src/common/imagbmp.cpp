@@ -1641,11 +1641,11 @@ bool wxICOHandler::DoLoadFile(wxImage *image, wxInputStream& stream,
         {
             // Check for the PNG signature first to avoid wasting time on
             // trying to load typical ICO files which are not PNGs at all.
-            static const unsigned char signaturePNG[] =
+            static constexpr unsigned char signaturePNG[] =
             {
                 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A
             };
-            static const int signatureLen = WXSIZEOF(signaturePNG);
+            static constexpr int signatureLen = WXSIZEOF(signaturePNG);
 
             unsigned char signature[signatureLen];
             if ( !stream.ReadAll(signature, signatureLen) )

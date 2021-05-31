@@ -1168,7 +1168,7 @@ int  ScintillaWX::DoKeyDown(const wxKeyEvent& evt, bool* consumed)
             {
                 // There may be no keyboard layouts with Latin keys available,
                 // fall back to a hard-coded mapping for the common pc105
-                static const char keycodeToKeyval[] = {
+                static constexpr char keycodeToKeyval[] = {
                       0,   0,   0,   0,   0,   0,   0,   0,
                       0,   0,   0,   0,   0,   0,   0,   0,
                       0,   0,   0,   0,   0,   0,   0,   0,

@@ -230,7 +230,7 @@ wxCoord wxVarScrollHelperBase::DoEstimateTotalSize() const
     // OnGetUnitSize() for every unit because there may be too many of
     // them, so we just make a guess using some units in the beginning,
     // some in the end and some in the middle
-    static const size_t NUM_UNITS_TO_SAMPLE = 10;
+    static constexpr size_t NUM_UNITS_TO_SAMPLE = 10;
 
     wxCoord sizeTotal;
     if ( m_unitMax < 3*NUM_UNITS_TO_SAMPLE )

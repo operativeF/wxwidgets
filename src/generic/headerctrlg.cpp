@@ -391,7 +391,7 @@ void wxHeaderCtrl::UpdateReorderingMarker(int xPhysical)
     unsigned int col = FindColumnClosestToPoint(xPhysical);
     if ( col != COL_NONE )
     {
-        static const int DROP_MARKER_WIDTH = 4;
+        static constexpr int DROP_MARKER_WIDTH = 4;
 
         dc.SetBrush(*wxBLUE);
         dc.DrawRectangle(GetColEnd(col) - DROP_MARKER_WIDTH/2, 0,

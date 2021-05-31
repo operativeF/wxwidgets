@@ -613,7 +613,7 @@ bool wxToolTip::AdjustMaxWidth()
     if ( ms_maxWidth == 0 )
     {
         // this is more or less arbitrary but seems to work well
-        static const int DEFAULT_MAX_WIDTH = 400;
+        static constexpr int DEFAULT_MAX_WIDTH = 400;
 
         ms_maxWidth = wxGetClientDisplayRect().width / 2;
 

@@ -608,7 +608,7 @@ int wxFontBase::AdjustToSymbolicSize(wxFontSymbolicSize size, int base)
     // http://www.w3.org/TR/CSS21/fonts.html#font-size-props so use the values
     // from http://style.cleverchimp.com/font_size_intervals/altintervals.html
     // instead.
-    static const float factors[] = { 0.60f, 0.75f, 0.89f, 1.f, 1.2f, 1.5f, 2.f };
+    static constexpr float factors[] = { 0.60f, 0.75f, 0.89f, 1.f, 1.2f, 1.5f, 2.f };
 
     wxCOMPILE_TIME_ASSERT
     (

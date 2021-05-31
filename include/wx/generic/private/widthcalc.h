@@ -59,9 +59,9 @@ public:
 
 #if wxUSE_STOPWATCH
         size_t top_part_end = count;
-        static const long CALC_TIMEOUT = 20/*ms*/;
+        static constexpr long CALC_TIMEOUT = 20/*ms*/;
         // don't call wxStopWatch::Time() too often
-        static const unsigned CALC_CHECK_FREQ = 100;
+        static constexpr unsigned CALC_CHECK_FREQ = 100;
         wxStopWatch timer;
 #else
         // use some hard-coded limit, that's the best we can do without timer

@@ -975,10 +975,10 @@ wxImage wxBitmap::ConvertToImage() const
         // effort (and waste time) to choose a colour not present in the
         // image already to avoid having to fudge the pixels below --
         // whether it's worth to do it is unclear however
-        static const int MASK_RED = 1;
-        static const int MASK_GREEN = 2;
-        static const int MASK_BLUE = 3;
-        static const int MASK_BLUE_REPLACEMENT = 2;
+        static constexpr int MASK_RED = 1;
+        static constexpr int MASK_GREEN = 2;
+        static constexpr int MASK_BLUE = 3;
+        static constexpr int MASK_BLUE_REPLACEMENT = 2;
 
         wxBitmap bmpMask(GetMask()->GetBitmap());
         wxMonoPixelData dataMask(bmpMask);

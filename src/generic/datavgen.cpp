@@ -2208,7 +2208,7 @@ wxDataViewMainWindow::DropItemInfo wxDataViewMainWindow::GetDropItemInfo(const w
 
         // 15% is an arbitrarily chosen threshold here, which could be changed
         // or made configurable if really needed.
-        static const double UPPER_ITEM_PART = 0.15;
+        static constexpr double UPPER_ITEM_PART = 0.15;
 
         bool insertAbove = yy - itemStart < itemHeight*UPPER_ITEM_PART;
         if (insertAbove)

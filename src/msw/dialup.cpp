@@ -93,7 +93,7 @@ static const wxChar *gs_classForDialUpWindow = nullptr;
     typedef DWORD (APIENTRY * RASVALIDATEENTRYNAME)( LPCSTR, LPCSTR );
     typedef DWORD (APIENTRY * RASCONNECTIONNOTIFICATION)( HRASCONN, HANDLE, DWORD );
 
-    static const wxChar gs_funcSuffix = wxT('A');
+    static constexpr wxChar gs_funcSuffix = wxT('A');
 #else // Unicode
     typedef DWORD (APIENTRY * RASDIAL)( LPRASDIALEXTENSIONS, LPCWSTR, LPRASDIALPARAMSW, DWORD, LPVOID, LPHRASCONN );
     typedef DWORD (APIENTRY * RASENUMCONNECTIONS)( LPRASCONNW, LPDWORD, LPDWORD );
@@ -115,7 +115,7 @@ static const wxChar *gs_classForDialUpWindow = nullptr;
     typedef DWORD (APIENTRY * RASVALIDATEENTRYNAME)( LPCWSTR, LPCWSTR );
     typedef DWORD (APIENTRY * RASCONNECTIONNOTIFICATION)( HRASCONN, HANDLE, DWORD );
 
-    static const wxChar gs_funcSuffix = wxT('W');
+    static constexpr wxChar gs_funcSuffix = wxT('W');
 #endif // ASCII/Unicode
 
 // structure passed to the secondary thread

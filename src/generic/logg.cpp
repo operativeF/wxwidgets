@@ -800,7 +800,7 @@ void wxLogDialog::CreateDetailsControls(wxWindow *parent)
         m_listctrl->InsertColumn(1, wxT("Time"));
 
     // prepare the imagelist
-    static const int ICON_SIZE = 16;
+    static constexpr int ICON_SIZE = 16;
     wxImageList *imageList = new wxImageList(ICON_SIZE, ICON_SIZE);
 
     // order should be the same as in the switch below!

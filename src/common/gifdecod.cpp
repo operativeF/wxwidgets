@@ -350,7 +350,7 @@ int wxGIFDecoder::getcode(wxInputStream& stream, int bits, int ab_fin)
 wxGIFErrorCode
 wxGIFDecoder::dgif(wxInputStream& stream, GIFImage *img, int interl, int bits)
 {
-    static const int allocSize = 4096 + 1;
+    static constexpr int allocSize = 4096 + 1;
 
     wxScopedArray<int> ab_prefix(allocSize); // alphabet (prefixes)
     if ( !ab_prefix )
@@ -635,7 +635,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
 
     // check for animated GIF support (ver. >= 89a)
 
-    static const unsigned int headerSize = (3 + 3);
+    static constexpr unsigned int headerSize = (3 + 3);
     stream.Read(buf, headerSize);
     if (stream.LastRead() != headerSize)
     {
@@ -648,7 +648,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
     }
 
     // read logical screen descriptor block (LSDB)
-    static const unsigned int lsdbSize = (2 + 2 + 1 + 1 + 1);
+    static constexpr unsigned int lsdbSize = (2 + 2 + 1 + 1 + 1);
     stream.Read(buf, lsdbSize);
     if (stream.LastRead() != lsdbSize)
     {
@@ -721,7 +721,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                     {
                         // graphics control extension, parse it
 
-                        static const unsigned int gceSize = 6;
+                        static constexpr unsigned int gceSize = 6;
                         stream.Read(buf, gceSize);
                         if (stream.LastRead() != gceSize)
                         {
@@ -790,7 +790,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                     return wxGIF_MEMERR;
 
                 // fill in the data
-                static const unsigned int idbSize = (2 + 2 + 2 + 2 + 1);
+                static constexpr unsigned int idbSize = (2 + 2 + 2 + 2 + 1);
                 stream.Read(buf, idbSize);
                 if (stream.LastRead() != idbSize)
                     return wxGIF_INVFORMAT;
@@ -919,7 +919,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
             case GIF_MARKER_SEP:
             {
                 // image descriptor block
-                static const unsigned int idbSize = (2 + 2 + 2 + 2 + 1);
+                static constexpr unsigned int idbSize = (2 + 2 + 2 + 2 + 1);
                 stream.Read(buf, idbSize);
                 if (stream.LastRead() != idbSize)
                 {

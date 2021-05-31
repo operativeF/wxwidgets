@@ -255,7 +255,7 @@ CopyBits(int width,
          const unsigned char *src,
          const wxIDirectFBSurface::Locked locked)
 {
-    static const int BITS_PER_BYTE = 8;
+    static constexpr int BITS_PER_BYTE = 8;
 
     // extra padding to add to dst at the end of each row: this works on the
     // assumption that all rows are aligned at multiples of T (and usually 4

@@ -143,7 +143,7 @@ bool wxXPMHandler::SaveFile(wxImage * image,
 {
     // 1. count colours:
     #define MaxCixels  92
-    static const char Cixel[MaxCixels+1] =
+    static constexpr char Cixel[MaxCixels+1] =
                          " .XoO+@#$%&*=-;:>,<1234567890qwertyuipasdfghjk"
                          "lzxcvbnmMNBVCZASDFGHJKLPIUYTREWQ!~^/()_`'][{}|";
     int i, j, k;

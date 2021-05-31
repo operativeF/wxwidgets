@@ -258,7 +258,7 @@ bool wxFile::ReadAll(wxString *str, const wxMBConv& conv)
 {
     wxCHECK_MSG( str, false, wxS("Output string must be non-NULL") );
 
-    static const ssize_t READSIZE = 4096;
+    static constexpr ssize_t READSIZE = 4096;
 
     wxCharBuffer buf;
 

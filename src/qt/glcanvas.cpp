@@ -356,7 +356,7 @@ bool wxGLContext::SetCurrent(const wxGLCanvas&) const
 class PanGestureRecognizer : public QGestureRecognizer
 {
 private:
-    static const int MINIMUM_DISTANCE = 10;
+    static constexpr int MINIMUM_DISTANCE = 10;
 
     typedef QGestureRecognizer parent;
 

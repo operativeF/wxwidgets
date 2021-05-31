@@ -319,7 +319,7 @@ wxDbgHelpDLL::DumpBaseType(BasicType bt, DWORD64 length, PVOID pAddress)
         else if ( bt == BASICTYPE_CHAR )
         {
             // don't take more than 32 characters of a string
-            static const size_t NUM_CHARS = 64;
+            static constexpr size_t NUM_CHARS = 64;
 
             const char *pc = *(PSTR *)pAddress;
             if ( ::IsBadStringPtrA(pc, NUM_CHARS) == 0 )

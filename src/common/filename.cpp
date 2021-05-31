@@ -1004,7 +1004,7 @@ static wxString wxCreateTempImpl(
 
     wxString pathTry;
 
-    static const size_t numTries = 1000;
+    static constexpr size_t numTries = 1000;
     for ( size_t n = 0; n < numTries; n++ )
     {
         // 3 hex digits is enough for numTries == 1000 < 4096

@@ -1295,8 +1295,8 @@ wxDateTime& wxDateTime::Set(wxDateTime_t day,
                       wxT("Invalid date in wxDateTime::Set()") );
 
     // the range of time_t type (inclusive)
-    static const int yearMinInRange = 1970;
-    static const int yearMaxInRange = 2037;
+    static constexpr int yearMinInRange = 1970;
+    static constexpr int yearMaxInRange = 2037;
 
     // test only the year instead of testing for the exact end of the Unix
     // time_t range - it doesn't bring anything to do more precise checks

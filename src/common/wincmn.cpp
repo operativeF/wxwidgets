@@ -2538,7 +2538,7 @@ bool wxWindowBase::DoPhase(int phase)
 
     // the max number of iterations we loop before concluding that we can't set
     // the constraints
-    static const int maxIterations = 500;
+    static constexpr int maxIterations = 500;
 
     for ( int noIterations = 0; noIterations < maxIterations; noIterations++ )
     {

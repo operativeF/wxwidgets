@@ -390,7 +390,7 @@ void wxDataFormat::SetId(const wxString& format)
 
 wxString wxDataFormat::GetId() const
 {
-    static const int max = 256;
+    static constexpr int max = 256;
 
     wxString s;
 
@@ -1314,7 +1314,7 @@ size_t wxFileDataObject::GetDataSize() const
     if ( m_filenames.empty() )
         return 0;
 
-    static const size_t sizeOfChar = sizeof(wxChar);
+    static constexpr size_t sizeOfChar = sizeof(wxChar);
 
     // initial size of DROPFILES struct + null byte
     size_t sz = sizeof(DROPFILES) + sizeOfChar;

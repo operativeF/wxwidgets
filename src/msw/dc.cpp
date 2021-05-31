@@ -1934,7 +1934,7 @@ void ApplyEffectiveScale(double scale, int sign, int *device, int *logical)
     // overflowing the int range i.e. ensure that logical extents are less than
     // 2^31 in magnitude. So the minimal scale we can use is 1/16 as for
     // anything smaller VIEWPORT_EXTENT/scale would overflow the int range.
-    static const double MIN_LOGICAL_SCALE = 1./16;
+    static constexpr double MIN_LOGICAL_SCALE = 1./16;
 
     double physExtent = VIEWPORT_EXTENT;
     if ( scale < MIN_LOGICAL_SCALE )

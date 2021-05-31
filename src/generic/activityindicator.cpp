@@ -132,7 +132,7 @@ private:
         // Radius of 1/10th allows to have reasonably sized dots with a bit of
         // separation between them and so subjectively looks a bit nicer than
         // perhaps more natural 1/8th.
-        static const double RADIUS_FACTOR = 10;
+        static constexpr double RADIUS_FACTOR = 10;
 
         const double r = wxMin(size.x, size.y) / RADIUS_FACTOR;
 
