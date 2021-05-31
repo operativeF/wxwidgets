@@ -55,7 +55,7 @@
 // start and end of document/page
 //-----------------------------------------------------------------------------
 
-static const char *wxPostScriptHeaderConicTo = "\
+static constexpr char wxPostScriptHeaderConicTo[] = "\
 /conicto {\n\
     /to_y exch def\n\
     /to_x exch def\n\
@@ -72,7 +72,7 @@ static const char *wxPostScriptHeaderConicTo = "\
 }  bind def\n\
 ";
 
-static const char *wxPostScriptHeaderEllipse =
+static constexpr char wxPostScriptHeaderEllipse[] =
 "/ellipse {\n"             // x y xrad yrad startangle endangle
 "  matrix currentmatrix\n" // x y xrad yrad startangle endangle CTM
 "  0 0 1\n"                // x y xrad yrad startangle endangle CTM 0 0 1
@@ -85,7 +85,7 @@ static const char *wxPostScriptHeaderEllipse =
 "  setmatrix\n"            // -> restore transformation matrix
 "} def\n";
 
-static const char *wxPostScriptHeaderEllipticArc=
+static constexpr char wxPostScriptHeaderEllipticArc[] =
 "/ellipticarc {\n"         // x y xrad yrad startangle endangle do_fill
 "  dup\n"                  // x y xrad yrad startangle endangle do_fill do_fill
 "  8 1 roll\n"             // do_fill x y xrad yrad startangle endangle do_fill
@@ -102,7 +102,7 @@ static const char *wxPostScriptHeaderEllipticArc=
 "  { fill }{ stroke } ifelse\n" // -> fill or stroke
 "} def\n";
 
-static const char *wxPostScriptHeaderSpline = "\
+static constexpr char wxPostScriptHeaderSpline[] = "\
 /DrawSplineSection {\n\
     /y3 exch def\n\
     /x3 exch def\n\
@@ -119,7 +119,7 @@ static const char *wxPostScriptHeaderSpline = "\
     } def\n\
 ";
 
-static const char *wxPostScriptHeaderColourImage = "\
+static constexpr char wxPostScriptHeaderColourImage[] = "\
 % define 'colorimage' if it isn't defined\n\
 %   ('colortogray' and 'mergeprocs' come from xwd2ps\n\
 %     via xgrab)\n\
@@ -174,7 +174,7 @@ static const char *wxPostScriptHeaderColourImage = "\
   } ifelse          % end of 'false' case\n\
 ";
 
-static const char wxPostScriptHeaderReencodeISO1[] =
+static constexpr char wxPostScriptHeaderReencodeISO1[] =
     "\n/reencodeISO {\n"
 "dup dup findfont dup length dict begin\n"
 "{ 1 index /FID ne { def }{ pop pop } ifelse } forall\n"
@@ -198,7 +198,7 @@ static const char wxPostScriptHeaderReencodeISO1[] =
 "/.notdef/dotlessi/grave/acute/circumflex/tilde/macron/breve\n"
 "/dotaccent/dieresis/.notdef/ring/cedilla/.notdef/hungarumlaut\n";
 
-static const char wxPostScriptHeaderReencodeISO2[] =
+static constexpr char wxPostScriptHeaderReencodeISO2[] =
 "/ogonek/caron/space/exclamdown/cent/sterling/currency/yen/brokenbar\n"
 "/section/dieresis/copyright/ordfeminine/guillemotleft/logicalnot\n"
 "/hyphen/registered/macron/degree/plusminus/twosuperior/threesuperior\n"
@@ -216,7 +216,7 @@ static const char wxPostScriptHeaderReencodeISO2[] =
         "] def\n\n";
 
 // Split multiline string and store each line in the array.
-static const char *wxPostScriptHeaderStrSplit =
+static constexpr char wxPostScriptHeaderStrSplit[] =
 "/strsplit {\n"      // str delim
 "  [ 3 1 roll\n"     // [ str delim
 "    {\n"            // [ str-items str delim
@@ -1213,10 +1213,10 @@ void wxPostScriptDCImpl::SetPen( const wxPen& pen )
      pattern of *3* units black, 4 units space will be repeated.
 */
 
-    static const char *dotted = "[2 5] 2";
-    static const char *short_dashed = "[4 4] 2";
-    static const char *wxCoord_dashed = "[4 8] 2";
-    static const char *dotted_dashed = "[6 6 2 6] 4";
+    static constexpr char dotted[] = "[2 5] 2";
+    static constexpr char short_dashed[] = "[4 4] 2";
+    static constexpr char wxCoord_dashed[] = "[4 8] 2";
+    static constexpr char dotted_dashed[] = "[6 6 2 6] 4";
 
     const char *psdash;
 

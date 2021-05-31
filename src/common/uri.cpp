@@ -145,7 +145,7 @@ void wxURI::AppendNextEscaped(wxString& s, const char *& p)
     }
     else // really needs escaping
     {
-        static const char* hexDigits = "0123456789abcdef";
+        static constexpr char hexDigits[] = "0123456789abcdef";
 
         const char c = *p++;
 

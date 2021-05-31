@@ -221,7 +221,7 @@ TEST_CASE("XRC::PathWithFragment", "[xrc][uri]")
     TempFile xpmFile(filename);
 
     // Simplest possible XPM, just to have something to create a bitmap from.
-    static const char* xpm =
+    static constexpr char xpm[] =
         "/* XPM */\n"
         "static const char *const xpm[] = {\n"
         "/* columns rows colors chars-per-pixel */\n"

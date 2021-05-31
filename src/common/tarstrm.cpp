@@ -75,10 +75,10 @@ enum {
 };
 
 // signatures
-static const char *USTAR_MAGIC   = "ustar";
-static const char *USTAR_VERSION = "00";
-static const char *GNU_MAGIC     = "ustar ";
-static const char *GNU_VERION    = " ";
+static constexpr char USTAR_MAGIC[]   = "ustar";
+static constexpr char USTAR_VERSION[] = "00";
+static constexpr char GNU_MAGIC[]     = "ustar ";
+static constexpr char GNU_VERION[]    = " ";
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxTarEntry, wxArchiveEntry);
 wxIMPLEMENT_DYNAMIC_CLASS(wxTarClassFactory, wxArchiveClassFactory);

@@ -1844,8 +1844,8 @@ wxString GetDateFormatFromLangInfo(wxLocaleInfo index)
     // under POSIX systems is a combination of a long date format with time one
     // so we should be able to get just the long date format by removing all
     // time-specific format specifiers
-    static const char *timeFmtSpecs = "HIklMpPrRsSTXzZ";
-    static const char *timeSep = " :./-";
+    static constexpr char timeFmtSpecs[] = "HIklMpPrRsSTXzZ";
+    static constexpr char timeSep[] = " :./-";
 
     wxString fmtDateOnly;
     const wxString::const_iterator end = fmt.end();
