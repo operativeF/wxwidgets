@@ -118,6 +118,9 @@ class wxRendererMSW : public wxRendererMSWBase
 public:
     wxRendererMSW() = default;
 
+    wxRendererMSW(const wxRendererMSW&) = delete;
+	wxRendererMSW& operator=(const wxRendererMSW&) = delete;
+    
     static wxRendererNative& Get();
 
     void DrawComboBoxDropButton(wxWindow *win,
@@ -185,9 +188,6 @@ private:
     {
         DoDrawFrameControl(DFC_BUTTON, kind, win, dc, rect, flags);
     }
-
-    wxRendererMSW(const wxRendererMSW&) = delete;
-	wxRendererMSW& operator=(const wxRendererMSW&) = delete;
 };
 
 // ----------------------------------------------------------------------------

@@ -48,8 +48,7 @@ WX_DECLARE_HASH_MAP(wxAnyValueType*,
 class wxAnyValueTypeGlobals
 {
 public:
-    wxAnyValueTypeGlobals()
-    = default;
+    wxAnyValueTypeGlobals() = default;
     ~wxAnyValueTypeGlobals()
     {
         m_anyToVariant.clear();

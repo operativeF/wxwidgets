@@ -57,12 +57,7 @@ private:
 class WXDLLIMPEXP_CORE wxAddRemoveCtrl : public wxPanel
 {
 public:
-    wxAddRemoveCtrl()
-    {
-        
-        m_impl = nullptr;
-    
-    }
+    wxAddRemoveCtrl() = default;
 
     wxAddRemoveCtrl(wxWindow* parent,
                     wxWindowID winid = wxID_ANY,
@@ -71,12 +66,11 @@ public:
                     long style = 0,
                     const wxString& name = wxASCII_STR(wxAddRemoveCtrlNameStr))
     {
-        
-        m_impl = nullptr;
-    
-
         Create(parent, winid, pos, size, style, name);
     }
+
+    wxAddRemoveCtrl(const wxAddRemoveCtrl&) = delete;
+	wxAddRemoveCtrl& operator=(const wxAddRemoveCtrl&) = delete;
 
     bool Create(wxWindow* parent,
                 wxWindowID winid = wxID_ANY,
@@ -101,10 +95,7 @@ private:
     // Common part of all ctors.
     
 
-    class wxAddRemoveImpl* m_impl;
-
-    wxAddRemoveCtrl(const wxAddRemoveCtrl&) = delete;
-	wxAddRemoveCtrl& operator=(const wxAddRemoveCtrl&) = delete;
+    class wxAddRemoveImpl* m_impl{nullptr};
 };
 
 #endif // wxUSE_ADDREMOVECTRL

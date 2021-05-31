@@ -38,10 +38,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRegionIterator, wxObject);
 class WXDLLEXPORT wxRegionRefData : public wxGDIRefData
 {
 public:
-    wxRegionRefData()
-    {
-        m_region = nullptr;
-    }
+    wxRegionRefData() = default;
 
     wxRegionRefData(const wxRegionRefData& data)  
     {
@@ -60,7 +57,7 @@ public:
         m_region = nullptr;
     }
 
-    HRGN m_region;
+    HRGN m_region{nullptr};
 };
 
 #define M_REGION (((wxRegionRefData*)m_refData)->m_region)
@@ -73,11 +70,6 @@ public:
 // ----------------------------------------------------------------------------
 // ctors and dtor
 // ----------------------------------------------------------------------------
-
-wxRegion::wxRegion()
-{
-    m_refData = nullptr;
-}
 
 wxRegion::wxRegion(WXHRGN hRegion)
 {
@@ -130,11 +122,6 @@ wxRegion::wxRegion(size_t n, const wxPoint *points, wxPolygonFillMode fillStyle)
                     n,
                     fillStyle == wxODDEVEN_RULE ? ALTERNATE : WINDING
                );
-}
-
-wxRegion::~wxRegion()
-{
-    // m_refData unrefed in ~wxObject
 }
 
 wxGDIRefData *wxRegion::CreateGDIRefData() const

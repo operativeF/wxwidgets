@@ -296,7 +296,7 @@ private:
 class WXDLLIMPEXP_BASE wxObject
 {
 public:
-    wxObject() { m_refData = nullptr; }
+    wxObject() = default;
     virtual ~wxObject() { UnRef(); }
 
     wxObject(const wxObject& other)
@@ -383,7 +383,7 @@ protected:
     // create a new m_refData initialized with the given one
     virtual wxObjectRefData *CloneRefData(const wxObjectRefData *data) const;
 
-    wxObjectRefData *m_refData;
+    wxObjectRefData *m_refData{nullptr};
 };
 
 inline wxObject *wxCheckDynamicCast(wxObject *obj, wxClassInfo *classInfo)

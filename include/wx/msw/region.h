@@ -14,7 +14,7 @@
 class WXDLLIMPEXP_CORE wxRegion : public wxRegionWithCombine
 {
 public:
-    wxRegion();
+    wxRegion() = default;
     wxRegion(wxCoord x, wxCoord y, wxCoord w, wxCoord h);
     wxRegion(const wxPoint& topLeft, const wxPoint& bottomRight);
     wxRegion(const wxRect& rect);
@@ -32,7 +32,8 @@ public:
     }
 #endif // wxUSE_IMAGE
 
-    ~wxRegion() override;
+    // m_refData unrefed in ~wxObject
+    ~wxRegion() override = default;
 
     // wxRegionBase methods
     void Clear() override;

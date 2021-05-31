@@ -261,17 +261,17 @@ public:
 
 private:
     wxSize          m_paperSize; // The dimensions selected by the user (on return, same as in wxPrintData?)
-    wxPoint         m_minMarginTopLeft;
-    wxPoint         m_minMarginBottomRight;
-    wxPoint         m_marginTopLeft;
-    wxPoint         m_marginBottomRight;
-    bool            m_defaultMinMargins;
-    bool            m_enableMargins;
-    bool            m_enableOrientation;
-    bool            m_enablePaper;
-    bool            m_enablePrinter;
-    bool            m_getDefaultInfo; // Equiv. to PSD_RETURNDEFAULT
-    bool            m_enableHelp;
+    wxPoint         m_minMarginTopLeft{0, 0};
+    wxPoint         m_minMarginBottomRight{0, 0};
+    wxPoint         m_marginTopLeft{0, 0};
+    wxPoint         m_marginBottomRight{0, 0};
+    bool            m_defaultMinMargins{false};
+    bool            m_enableMargins{true};
+    bool            m_enableOrientation{true};
+    bool            m_enablePaper{true};
+    bool            m_enablePrinter{true};
+    bool            m_getDefaultInfo{false}; // Equiv. to PSD_RETURNDEFAULT
+    bool            m_enableHelp{false};
     wxPrintData     m_printData;
 
 private:
