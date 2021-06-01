@@ -209,10 +209,8 @@ public:
 class WXDLLIMPEXP_CORE wxMenuBar : public wxMenuBarBase
 {
 public:
-    // ctors & dtor
-        // default constructor
     wxMenuBar();
-        // unused under MSW
+        // FIXME: Unused under MSW
     wxMenuBar(long style);
         // menubar takes ownership of the menus arrays but copies the titles
     wxMenuBar(size_t n, wxMenu *menus[], const wxString titles[], long style = 0);
@@ -263,7 +261,7 @@ protected:
     // common part of all ctors
     void Init();
 
-    WXHMENU       m_hMenu;
+    WXHMENU       m_hMenu{nullptr};
 
     // Return the MSW position for a wxMenu which is sometimes different from
     // the wxWidgets position.

@@ -36,9 +36,6 @@
 
 void wxTextMeasure::Init()
 {
-    m_hdc = nullptr;
-    m_hfontOld = nullptr;
-
     if ( m_dc )
     {
         wxClassInfo* const ci = m_dc->GetImpl()->GetClassInfo();

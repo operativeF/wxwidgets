@@ -244,9 +244,6 @@ public:
     static void ClearPlatforms();
 
 private:
-
-    
-
     long                m_longValue;
     double              m_doubleValue;
     wxString            m_stringValue;

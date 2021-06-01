@@ -29,6 +29,9 @@ class WXDLLIMPEXP_CORE wxStaticBoxBase : public wxNavigationEnabled<wxControl>
 public:
     wxStaticBoxBase();
 
+    wxStaticBoxBase(const wxStaticBoxBase&) = delete;
+	wxStaticBoxBase& operator=(const wxStaticBoxBase&) = delete;
+
     // overridden base class virtuals
     bool HasTransparentBackground() override { return true; }
     bool Enable(bool enable = true) override;
@@ -60,9 +63,6 @@ protected:
     // this case (see comments in Enable() implementation), and m_isEnabled
     // must correspond to its real state.
     bool m_areChildrenEnabled;
-
-    wxStaticBoxBase(const wxStaticBoxBase&) = delete;
-	wxStaticBoxBase& operator=(const wxStaticBoxBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

@@ -69,9 +69,9 @@ public:
 
     ~wxGCDCImpl() override;
 
+    wxGCDCImpl(const wxGCDCImpl&) = delete;
+	wxGCDCImpl& operator=(const wxGCDCImpl&) = delete;
     
-    // ----------------------------------
-
     void Clear() override;
 
     bool StartDoc( const wxString& message ) override;
@@ -259,8 +259,6 @@ private:
     bool DoInitContext(wxGraphicsContext* ctx);
 
     wxDECLARE_CLASS(wxGCDCImpl);
-    wxGCDCImpl(const wxGCDCImpl&) = delete;
-	wxGCDCImpl& operator=(const wxGCDCImpl&) = delete;
 };
 
 #endif // wxUSE_GRAPHICS_CONTEXT

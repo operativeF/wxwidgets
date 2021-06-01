@@ -80,6 +80,8 @@ public:
     {
     }
 
+	wxSpinDoubleEvent& operator=(const wxSpinDoubleEvent&) = delete;
+
     double GetValue() const       { return m_value; }
     void   SetValue(double value) { m_value = value; }
 
@@ -88,9 +90,7 @@ public:
 protected:
     double m_value;
 
-private:
-    public:
-	wxSpinDoubleEvent& operator=(const wxSpinDoubleEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

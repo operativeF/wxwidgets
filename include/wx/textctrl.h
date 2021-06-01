@@ -540,6 +540,9 @@ public:
     wxTextAreaBase() = default;
     virtual ~wxTextAreaBase() = default;
 
+    wxTextAreaBase(const wxTextAreaBase&) = delete;
+	wxTextAreaBase& operator=(const wxTextAreaBase&) = delete;
+
     // lines access
     // ------------
 
@@ -629,10 +632,6 @@ protected:
 
     // the text style which will be used for any new text added to the control
     wxTextAttr m_defaultStyle;
-
-
-    wxTextAreaBase(const wxTextAreaBase&) = delete;
-	wxTextAreaBase& operator=(const wxTextAreaBase&) = delete;
 };
 
 // this class defines wxTextCtrl interface, wxTextCtrlBase actually implements

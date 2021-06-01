@@ -36,6 +36,9 @@ class WXDLLIMPEXP_CORE wxStaticTextBase : public wxControl
 public:
     wxStaticTextBase() = default;
 
+    wxStaticTextBase(const wxStaticTextBase&) = delete;
+	wxStaticTextBase& operator=(const wxStaticTextBase&) = delete;
+
     // wrap the text of the control so that no line is longer than the given
     // width (if possible: this function won't break words)
     // This function will modify the value returned by GetLabel()!
@@ -88,10 +91,6 @@ protected:      // functions required for wxST_ELLIPSIZE_* support
     // Update the current size to match the best size unless wxST_NO_AUTORESIZE
     // style is explicitly used.
     void AutoResizeIfNecessary();
-
-private:
-    wxStaticTextBase(const wxStaticTextBase&) = delete;
-	wxStaticTextBase& operator=(const wxStaticTextBase&) = delete;
 };
 
 // see wx/generic/stattextg.h for the explanation

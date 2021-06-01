@@ -17,7 +17,7 @@ public:
     // creation
     // --------
 
-    wxTextCtrl() { Init(); }
+    wxTextCtrl() = default;
     wxTextCtrl(wxWindow *parent, wxWindowID id,
                const wxString& value = wxEmptyString,
                const wxPoint& pos = wxDefaultPosition,
@@ -26,8 +26,6 @@ public:
                const wxValidator& validator = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxTextCtrlNameStr))
     {
-        Init();
-
         Create(parent, id, value, pos, size, style, validator, name);
     }
     ~wxTextCtrl() override;
@@ -197,9 +195,6 @@ public:
     WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
 
 protected:
-    // common part of all ctors
-    void Init();
-
     // creates the control of appropriate class (plain or rich edit) with the
     // styles corresponding to m_windowStyle
     //
@@ -263,16 +258,16 @@ protected:
     // 0, it also gives the version of the RICHEDIT control being used
     // (although not directly: 1 is for 1.0, 2 is for either 2.0 or 3.0 as we
     // can't nor really need to distinguish between them and 4 is for 4.1)
-    int m_verRichEdit;
+    int m_verRichEdit{0};
 
     // Rich text controls need temporary scaling when they are created on a
     // display with non-system DPI.
-    float m_richDPIscale;
+    float m_richDPIscale{1.0};
 #endif // wxUSE_RICHEDIT
 
     // number of EN_UPDATE events sent by Windows when we change the controls
     // text ourselves: we want this to be exactly 1
-    int m_updatesCount;
+    int m_updatesCount{-1};
 
 private:
     void EnableTextChangedEvents(bool enable) override
@@ -309,12 +304,12 @@ private:
     void AdjustMaxLengthBeforePaste();
 
 
-    wxMenu* m_privateContextMenu;
+    wxMenu* m_privateContextMenu{nullptr};
 
-    bool m_isNativeCaretShown;
+    bool m_isNativeCaretShown{true};
 
 #if wxUSE_INKEDIT && wxUSE_RICHEDIT
-    int  m_isInkEdit;
+    int  m_isInkEdit{0};
 #endif
 
     wxDECLARE_EVENT_TABLE();

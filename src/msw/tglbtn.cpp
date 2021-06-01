@@ -82,11 +82,6 @@ bool wxBitmapToggleButton::Create( wxWindow *parent, wxWindowID id,
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxToggleButton, wxControl);
 
-void wxToggleButton::Init()
-{
-    m_state = false;
-}
-
 // Single check box item
 bool wxToggleButton::Create(wxWindow *parent,
                             wxWindowID id,
@@ -96,8 +91,6 @@ bool wxToggleButton::Create(wxWindow *parent,
                             const wxValidator& validator,
                             const wxString& name)
 {
-    Init();
-
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;
 

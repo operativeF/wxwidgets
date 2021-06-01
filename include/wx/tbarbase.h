@@ -287,8 +287,8 @@ public:
     wxToolBarBase();
     ~wxToolBarBase() override;
 
-    // toolbar construction
-    // --------------------
+    wxToolBarBase(const wxToolBarBase&) = delete;
+	wxToolBarBase& operator=(const wxToolBarBase&) = delete;
 
     // the full AddTool() function
     //
@@ -648,8 +648,6 @@ protected:
 
 private:
     wxDECLARE_EVENT_TABLE();
-    wxToolBarBase(const wxToolBarBase&) = delete;
-	wxToolBarBase& operator=(const wxToolBarBase&) = delete;
 };
 
 #endif // wxUSE_TOOLBAR

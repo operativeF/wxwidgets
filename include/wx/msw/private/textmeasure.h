@@ -31,6 +31,9 @@ public:
         Init();
     }
 
+    wxTextMeasure(const wxTextMeasure&) = delete;
+	wxTextMeasure& operator=(const wxTextMeasure&) = delete;
+
 protected:
     void Init();
 
@@ -51,14 +54,11 @@ protected:
 
     // We use either the HDC of the provided wxDC or an HDC created for our
     // window.
-    HDC m_hdc;
+    HDC m_hdc{nullptr};
 
     // If we change the font in BeginMeasuring(), we restore it to the old one
     // in EndMeasuring().
-    HFONT m_hfontOld;
-
-    wxTextMeasure(const wxTextMeasure&) = delete;
-	wxTextMeasure& operator=(const wxTextMeasure&) = delete;
+    HFONT m_hfontOld{nullptr};
 };
 
 #endif // _WX_MSW_PRIVATE_TEXTMEASURE_H_

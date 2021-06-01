@@ -35,9 +35,13 @@ enum wxZLibFlags {
 
 class WXDLLIMPEXP_BASE wxZlibInputStream: public wxFilterInputStream {
  public:
+ // FIXME: Redundant construction via ptr / ref?
   wxZlibInputStream(wxInputStream& stream, int flags = wxZLIB_AUTO);
   wxZlibInputStream(wxInputStream *stream, int flags = wxZLIB_AUTO);
   ~wxZlibInputStream() override;
+
+  wxZlibInputStream(const wxZlibInputStream&) = delete;
+  wxZlibInputStream& operator=(const wxZlibInputStream&) = delete;
 
   char Peek() override { return wxInputStream::Peek(); }
   wxFileOffset GetLength() const override { return wxInputStream::GetLength(); }
@@ -59,9 +63,6 @@ class WXDLLIMPEXP_BASE wxZlibInputStream: public wxFilterInputStream {
   unsigned char *m_z_buffer;
   struct z_stream_s *m_inflate;
   wxFileOffset m_pos;
-
-  wxZlibInputStream(const wxZlibInputStream&) = delete;
-	wxZlibInputStream& operator=(const wxZlibInputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxZlibOutputStream: public wxFilterOutputStream {

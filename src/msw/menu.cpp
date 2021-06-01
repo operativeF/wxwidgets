@@ -821,7 +821,6 @@ wxMenu* wxMenu::MSWGetMenu(WXHMENU hMenu)
 void wxMenuBar::Init()
 {
     m_eventHandler = this;
-    m_hMenu = nullptr;
 }
 
 wxMenuBar::wxMenuBar()

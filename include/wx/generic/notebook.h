@@ -146,7 +146,7 @@ protected:
   // helper functions
   void ChangePage(int nOldSel, int nSel); // change pages
 
-  wxTabView*   m_tabView;
+  wxTabView*   m_tabView{nullptr};
 
   wxDECLARE_DYNAMIC_CLASS(wxNotebook);
   wxDECLARE_EVENT_TABLE();

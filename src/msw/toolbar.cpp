@@ -362,29 +362,6 @@ wxToolBar::CreateTool(wxControl *control, const wxString& label)
     return new wxToolBarTool(this, control, label);
 }
 
-// ----------------------------------------------------------------------------
-// wxToolBar construction
-// ----------------------------------------------------------------------------
-
-void wxToolBar::Init()
-{
-    m_hBitmap = nullptr;
-    m_disabledImgList = nullptr;
-
-    m_nButtons = 0;
-    m_totalFixedSize = 0;
-
-    // even though modern Windows applications typically use 24*24 (or even
-    // 32*32) size for their bitmaps, the native control itself still uses the
-    // old 16*15 default size (see TB_SETBITMAPSIZE documentation in MSDN), so
-    // default to it so that we don't call SetToolBitmapSize() unnecessarily in
-    // wxToolBarBase::AdjustToolBitmapSize()
-    m_defaultWidth = 16;
-    m_defaultHeight = 15;
-
-    m_pInTool = nullptr;
-}
-
 bool wxToolBar::Create(wxWindow *parent,
                        wxWindowID id,
                        const wxPoint& pos,

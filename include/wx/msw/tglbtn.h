@@ -18,7 +18,7 @@
 class WXDLLIMPEXP_CORE wxToggleButton : public wxToggleButtonBase
 {
 public:
-    wxToggleButton() { Init(); }
+    wxToggleButton() = default;
     wxToggleButton(wxWindow *parent,
                    wxWindowID id,
                    const wxString& label,
@@ -59,11 +59,8 @@ protected:
 
     bool MSWIsPushed() const override;
 
-    // FIXME: Protected Init
-    void Init();
-
     // current state of the button (when owner-drawn)
-    bool m_state;
+    bool m_state{false};
 
 public:
 	wxClassInfo *GetClassInfo() const override;

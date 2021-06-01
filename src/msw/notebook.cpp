@@ -49,11 +49,6 @@
 // check that the page index is valid
 #define IS_VALID_PAGE(nPage) ((nPage) < GetPageCount())
 
-// you can set USE_NOTEBOOK_ANTIFLICKER to 0 for desktop Windows versions too
-// to disable code whih results in flicker-less notebook redrawing at the
-// expense of some extra GDI resource consumption
-#define USE_NOTEBOOK_ANTIFLICKER    1
-
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -120,28 +115,6 @@ wxEND_EVENT_TABLE()
 // implementation
 // ============================================================================
 
-// ----------------------------------------------------------------------------
-// wxNotebook construction
-// ----------------------------------------------------------------------------
-
-// common part of all ctors
-void wxNotebook::Init()
-{
-#if wxUSE_UXTHEME
-    m_hbrBackground = nullptr;
-#endif // wxUSE_UXTHEME
-
-#if USE_NOTEBOOK_ANTIFLICKER
-    m_hasSubclassedUpdown = false;
-#endif // USE_NOTEBOOK_ANTIFLICKER
-}
-
-// default for dynamic class
-wxNotebook::wxNotebook()
-{
-  Init();
-}
-
 // the same arguments as for wxControl
 wxNotebook::wxNotebook(wxWindow *parent,
                        wxWindowID id,
@@ -150,8 +123,6 @@ wxNotebook::wxNotebook(wxWindow *parent,
                        long style,
                        const wxString& name)
 {
-  Init();
-
   Create(parent, id, pos, size, style, name);
 }
 

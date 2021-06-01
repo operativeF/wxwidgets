@@ -19,8 +19,17 @@
 class WXDLLIMPEXP_CORE wxToolBar : public wxToolBarBase
 {
 public:
-    // ctors and dtor
-    wxToolBar() { Init(); }
+    wxToolBar() 
+    {
+        // FIXME: Should we still do it like this?
+        // even though modern Windows applications typically use 24*24 (or even
+        // 32*32) size for their bitmaps, the native control itself still uses the
+        // old 16*15 default size (see TB_SETBITMAPSIZE documentation in MSDN), so
+        // default to it so that we don't call SetToolBitmapSize() unnecessarily in
+        // wxToolBarBase::AdjustToolBitmapSize()
+        m_defaultWidth = 16;
+        m_defaultHeight = 15;
+    }
 
     wxToolBar(wxWindow *parent,
                 wxWindowID id,
@@ -29,10 +38,14 @@ public:
                 long style = wxTB_DEFAULT_STYLE,
                 const wxString& name = wxASCII_STR(wxToolBarNameStr))
     {
-        Init();
+        m_defaultWidth = 16;
+        m_defaultHeight = 15;
 
         Create(parent, id, pos, size, style, name);
     }
+
+    wxToolBar(const wxToolBar&) = delete;
+	wxToolBar& operator=(const wxToolBar&) = delete;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -99,16 +112,12 @@ public:
     wxToolBarToolBase *CreateTool(wxControl *control,
                                           const wxString& label) override;
 protected:
-    // FIXME: Protected Init
-    void Init();
-
     // create the native toolbar control
     bool MSWCreateToolbar(const wxPoint& pos, const wxSize& size);
 
     // recreate the control completely
     void Recreate();
 
-    
     bool DoInsertTool(size_t pos, wxToolBarToolBase *tool) override;
     bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool) override;
 
@@ -143,21 +152,21 @@ protected:
     void OnDPIChanged(wxDPIChangedEvent& event);
 
     // the big bitmap containing all bitmaps of the toolbar buttons
-    WXHBITMAP m_hBitmap;
+    WXHBITMAP m_hBitmap{nullptr};
 
     // the image list with disabled images, may be NULL if we use
     // system-provided versions of them
-    wxImageList *m_disabledImgList;
+    wxImageList *m_disabledImgList{nullptr};
 
     // the total number of toolbar elements
-    size_t m_nButtons;
+    size_t m_nButtons{0};
 
     // the sum of the sizes of the fixed items (i.e. excluding stretchable
     // spaces) in the toolbar direction
-    int m_totalFixedSize;
+    int m_totalFixedSize{0};
 
     // the tool the cursor is in
-    wxToolBarToolBase *m_pInTool;
+    wxToolBarToolBase *m_pInTool{nullptr};
 
 private:
     // makes sure tool bitmap size is sufficient for all tools
@@ -190,11 +199,8 @@ private:
     // "control" type.
     wxSize MSWGetFittingtSizeForControl(class wxToolBarTool* tool) const;
 
-
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxToolBar);
-    wxToolBar(const wxToolBar&) = delete;
-	wxToolBar& operator=(const wxToolBar&) = delete;
 };
 
 #endif // wxUSE_TOOLBAR

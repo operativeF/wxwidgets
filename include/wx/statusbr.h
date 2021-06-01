@@ -113,6 +113,9 @@ public:
 
     ~wxStatusBarBase() override;
 
+    wxStatusBarBase(const wxStatusBarBase&) = delete;
+	wxStatusBarBase& operator=(const wxStatusBarBase&) = delete;
+
     // field count
     // -----------
 
@@ -220,9 +223,6 @@ protected:
 
     // if true overrides the width info of the wxStatusBarPanes
     bool m_bSameWidthForAllPanes;
-
-    wxStatusBarBase(const wxStatusBarBase&) = delete;
-	wxStatusBarBase& operator=(const wxStatusBarBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

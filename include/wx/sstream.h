@@ -26,6 +26,9 @@ public:
     // it
     wxStringInputStream(const wxString& s);
 
+    wxStringInputStream(const wxStringInputStream&) = delete;
+	wxStringInputStream& operator=(const wxStringInputStream&) = delete;
+
     wxFileOffset GetLength() const override;
     bool IsSeekable() const override { return true; }
 
@@ -46,9 +49,6 @@ private:
 
     // position in the stream in bytes, *not* in chars
     size_t m_pos;
-
-    wxStringInputStream(const wxStringInputStream&) = delete;
-	wxStringInputStream& operator=(const wxStringInputStream&) = delete;
 };
 
 // ----------------------------------------------------------------------------

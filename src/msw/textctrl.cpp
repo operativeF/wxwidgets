@@ -351,30 +351,6 @@ wxBEGIN_EVENT_TABLE(wxTextCtrl, wxTextCtrlBase)
     EVT_SET_FOCUS(wxTextCtrl::OnSetFocus)
 wxEND_EVENT_TABLE()
 
-// ============================================================================
-// implementation
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// creation
-// ----------------------------------------------------------------------------
-
-void wxTextCtrl::Init()
-{
-#if wxUSE_RICHEDIT
-    m_verRichEdit = 0;
-    m_richDPIscale = 1;
-#endif // wxUSE_RICHEDIT
-
-#if wxUSE_INKEDIT && wxUSE_RICHEDIT
-    m_isInkEdit = 0;
-#endif
-
-    m_privateContextMenu = nullptr;
-    m_updatesCount = -1;
-    m_isNativeCaretShown = true;
-}
-
 wxTextCtrl::~wxTextCtrl()
 {
 #if wxUSE_DRAG_AND_DROP && wxUSE_RICHEDIT

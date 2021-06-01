@@ -36,8 +36,10 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxStaticLineNameStr[];
 class WXDLLIMPEXP_CORE wxStaticLineBase : public wxControl
 {
 public:
-    // constructor
     wxStaticLineBase() = default;
+
+    wxStaticLineBase(const wxStaticLineBase&) = delete;
+	wxStaticLineBase& operator=(const wxStaticLineBase&) = delete;
 
     // is the line vertical?
     bool IsVertical() const { return (GetWindowStyle() & wxLI_VERTICAL) != 0; }
@@ -74,9 +76,6 @@ protected:
     {
         return AdjustSize(wxDefaultSize);
     }
-
-    wxStaticLineBase(const wxStaticLineBase&) = delete;
-	wxStaticLineBase& operator=(const wxStaticLineBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

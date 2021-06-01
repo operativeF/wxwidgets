@@ -392,6 +392,9 @@ public:
 
     WXZIPFIX ~wxZipInputStream() override;
 
+    wxZipInputStream(const wxZipInputStream&) = delete;
+	wxZipInputStream& operator=(const wxZipInputStream&) = delete;
+
     bool OpenEntry(wxZipEntry& entry)   { return DoOpen(&entry); }
     bool WXZIPFIX CloseEntry() override;
 
@@ -455,9 +458,6 @@ private:
                     wxZipEntry *entry, wxZipInputStream& inputStream);
     friend bool wxZipOutputStream::CopyArchiveMetaData(
                     wxZipInputStream& inputStream);
-
-    wxZipInputStream(const wxZipInputStream&) = delete;
-	wxZipInputStream& operator=(const wxZipInputStream&) = delete;
 };
 
 

@@ -39,8 +39,11 @@
 class WXDLLIMPEXP_CORE wxSpinButtonBase : public wxControl
 {
 public:
-    // ctor initializes the range with the default (0..100) values
-    wxSpinButtonBase() { m_min = 0; m_max = 100; }
+    // range has by default (0..100) values
+    wxSpinButtonBase() = default;
+
+    wxSpinButtonBase(const wxSpinButtonBase&) = delete;
+	wxSpinButtonBase& operator=(const wxSpinButtonBase&) = delete;
 
     // accessors
     virtual int GetValue() const = 0;
@@ -64,11 +67,8 @@ public:
 
 protected:
     // the range value
-    int   m_min;
-    int   m_max;
-
-    wxSpinButtonBase(const wxSpinButtonBase&) = delete;
-	wxSpinButtonBase& operator=(const wxSpinButtonBase&) = delete;
+    int   m_min{0};
+    int   m_max{100};
 };
 
 // ----------------------------------------------------------------------------
@@ -105,6 +105,8 @@ public:
 
     wxSpinEvent(const wxSpinEvent& event)  = default;
 
+	wxSpinEvent& operator=(const wxSpinEvent&) = delete;
+
     // get the current value of the control
     int GetValue() const { return m_commandInt; }
     void SetValue(int value) { m_commandInt = value; }
@@ -114,10 +116,7 @@ public:
 
     wxEvent *Clone() const override { return new wxSpinEvent(*this); }
 
-private:
-    public:
-	wxSpinEvent& operator=(const wxSpinEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
+	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
 };

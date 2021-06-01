@@ -31,6 +31,8 @@ public:
     // it a virtual dtor to avoid compiler warnings.
     virtual ~wxTextMeasureBase() = default;
 
+    wxTextMeasureBase(const wxTextMeasureBase&) = delete;
+	wxTextMeasureBase& operator=(const wxTextMeasureBase&) = delete;
 
     // Return the extent of a single line string.
     void GetTextExtent(const wxString& string,
@@ -154,9 +156,6 @@ protected:
 
     // This one can be NULL or not.
     const wxFont* const m_font;
-
-    wxTextMeasureBase(const wxTextMeasureBase&) = delete;
-	wxTextMeasureBase& operator=(const wxTextMeasureBase&) = delete;
 };
 
 // Include the platform dependent class declaration, if any.

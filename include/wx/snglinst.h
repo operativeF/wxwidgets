@@ -35,6 +35,9 @@ public:
         Create(name, path);
     }
 
+    wxSingleInstanceChecker(const wxSingleInstanceChecker&) = delete;
+	wxSingleInstanceChecker& operator=(const wxSingleInstanceChecker&) = delete;
+
     // notice that calling Create() is optional now, if you don't do it before
     // calling IsAnotherRunning(), CreateDefault() is used automatically
     //
@@ -78,18 +81,12 @@ public:
     // dtor is not virtual, this class is not meant to be used polymorphically
     ~wxSingleInstanceChecker();
 
-private:
-    // common part of all ctors
-    
-
+private:    
     // do check if another instance is running, called only if m_impl != NULL
     bool DoIsAnotherRunning() const;
 
     // the implementation details (platform specific)
     class WXDLLIMPEXP_FWD_BASE wxSingleInstanceCheckerImpl *m_impl;
-
-    wxSingleInstanceChecker(const wxSingleInstanceChecker&) = delete;
-	wxSingleInstanceChecker& operator=(const wxSingleInstanceChecker&) = delete;
 };
 
 #endif // wxUSE_SNGLINST_CHECKER

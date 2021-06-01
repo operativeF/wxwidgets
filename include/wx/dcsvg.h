@@ -54,9 +54,7 @@ public:
 class WXDLLIMPEXP_CORE wxSVGBitmapFileHandler : public wxSVGBitmapHandler
 {
 public:
-    wxSVGBitmapFileHandler()
-         
-    = default;
+    wxSVGBitmapFileHandler() = default;
 
     explicit wxSVGBitmapFileHandler(const wxFileName& path)
         : m_path(path)

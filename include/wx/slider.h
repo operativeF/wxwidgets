@@ -63,6 +63,9 @@ public:
     */
     wxSliderBase() = default;
 
+    wxSliderBase(const wxSliderBase&) = delete;
+	wxSliderBase& operator=(const wxSliderBase&) = delete;
+
     // get/set the current slider value (should be in range)
     virtual int GetValue() const = 0;
     virtual void SetValue(int value) = 0;
@@ -114,10 +117,6 @@ protected:
         else
             return value;
     }
-
-private:
-    wxSliderBase(const wxSliderBase&) = delete;
-	wxSliderBase& operator=(const wxSliderBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

@@ -36,7 +36,9 @@ public:
     wxStaticBitmapBase() = default;
     ~wxStaticBitmapBase() override;
 
-    // our interface
+    wxStaticBitmapBase(const wxStaticBitmapBase&) = delete;
+	wxStaticBitmapBase& operator=(const wxStaticBitmapBase&) = delete;
+
     virtual void SetIcon(const wxIcon& icon) = 0;
     virtual void SetBitmap(const wxBitmap& bitmap) = 0;
     virtual wxBitmap GetBitmap() const = 0;
@@ -58,9 +60,6 @@ protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
     wxSize DoGetBestSize() const override;
-
-    wxStaticBitmapBase(const wxStaticBitmapBase&) = delete;
-	wxStaticBitmapBase& operator=(const wxStaticBitmapBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

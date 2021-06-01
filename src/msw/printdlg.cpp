@@ -43,16 +43,15 @@
 class WinPrinter
 {
 public:
-    // default ctor
-    WinPrinter()
-    {
-        m_hPrinter = (HANDLE)nullptr;
-    }
+    WinPrinter() = default;
 
     WinPrinter( const wxString& printerName )
     {
         Open( printerName );
     }
+
+    WinPrinter(const WinPrinter&) = delete;
+	WinPrinter& operator=(const WinPrinter&) = delete;
 
     ~WinPrinter()
     {
@@ -80,10 +79,7 @@ public:
     operator bool() { return m_hPrinter != (HANDLE)nullptr; }
 
 private:
-    HANDLE m_hPrinter;
-
-    WinPrinter(const WinPrinter&) = delete;
-	WinPrinter& operator=(const WinPrinter&) = delete;
+    HANDLE m_hPrinter{nullptr};
 };
 
 

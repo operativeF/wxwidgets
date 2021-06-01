@@ -12,23 +12,18 @@
 
 #if wxUSE_NOTEBOOK
 
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
-
 #include "wx/control.h"
 
-// ----------------------------------------------------------------------------
-// wxNotebook
-// ----------------------------------------------------------------------------
+// you can set USE_NOTEBOOK_ANTIFLICKER to 0 for desktop Windows versions too
+// to disable code whih results in flicker-less notebook redrawing at the
+// expense of some extra GDI resource consumption
+#define USE_NOTEBOOK_ANTIFLICKER    1
 
 class WXDLLIMPEXP_CORE wxNotebook : public wxNotebookBase
 {
 public:
-  // ctors
-  // -----
-    // default for dynamic class
-  wxNotebook();
+  wxNotebook() = default;
+
     // the same arguments as for wxControl (@@@ any special styles?)
   wxNotebook(wxWindow *parent,
              wxWindowID id,
@@ -154,9 +149,6 @@ public:
   WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;
 
 protected:
-  // common part of all ctors
-  void Init();
-
   // hides the currently shown page and shows the given one (if not -1) and
   // updates m_selection accordingly
   void UpdateSelection(int selNew);
@@ -194,12 +186,14 @@ protected:
   void OnEraseBackground(wxEraseEvent& event);
   void OnPaint(wxPaintEvent& event);
 
-  // true if we have already subclassed our updown control
-  bool m_hasSubclassedUpdown;
+#if USE_NOTEBOOK_ANTIFLICKER
+    // true if we have already subclassed our updown control
+    bool m_hasSubclassedUpdown{false};
+#endif // USE_NOTEBOOK_ANTIFLICKER
 
 #if wxUSE_UXTHEME
   // background brush used to paint the tab control
-  WXHBRUSH m_hbrBackground;
+  WXHBRUSH m_hbrBackground{nullptr};
 
   // offset for MSWAdjustBrushOrg()
   wxPoint m_bgBrushAdj;

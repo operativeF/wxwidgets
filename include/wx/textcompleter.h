@@ -44,6 +44,9 @@ class WXDLLIMPEXP_CORE wxTextCompleterSimple : public wxTextCompleter
 public:
     wxTextCompleterSimple() = default;
 
+    wxTextCompleterSimple(const wxTextCompleterSimple&) = delete;
+	wxTextCompleterSimple& operator=(const wxTextCompleterSimple&) = delete;
+
     // Must be implemented to return all the completions for the given prefix.
     virtual void GetCompletions(const wxString& prefix, wxArrayString& res) = 0;
 
@@ -53,9 +56,6 @@ public:
 private:
     wxArrayString m_completions;
     unsigned m_index;
-
-    wxTextCompleterSimple(const wxTextCompleterSimple&) = delete;
-	wxTextCompleterSimple& operator=(const wxTextCompleterSimple&) = delete;
 };
 
 // ----------------------------------------------------------------------------
