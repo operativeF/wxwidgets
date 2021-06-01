@@ -1442,6 +1442,9 @@ public:
             ::ImmReleaseContext(hwnd, hIMC);
     }
 
+    IMContext(const IMContext&) = delete;
+    IMContext& operator=(const IMContext&) = delete;
+
     unsigned int GetImeCaretPos() const noexcept {
         return ImmGetCompositionStringW(hIMC, GCS_CURSORPOS, wxNullPtr, 0);
     }
@@ -1459,10 +1462,6 @@ public:
         ::ImmGetCompositionStringW(hIMC, dwIndex, &wcs[0], byteLen);
         return wcs;
     }
-private:
-    // Private so IMContext objects can not be copied.
-    IMContext(const IMContext&) = delete;
-    IMContext& operator=(const IMContext&) = delete;
 };
 
 }

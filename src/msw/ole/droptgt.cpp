@@ -75,6 +75,9 @@ public:
     explicit wxIDropTarget(wxDropTarget *p);
     virtual ~wxIDropTarget();
 
+    wxIDropTarget(const wxIDropTarget&) = delete;
+	wxIDropTarget& operator=(const wxIDropTarget&) = delete;
+
     // accessors for wxDropTarget
     HWND GetHWND() const { return m_hwnd; }
     void SetHwnd(HWND hwnd) { m_hwnd = hwnd; }
@@ -112,9 +115,6 @@ protected:
         return E_UNEXPECTED;
     }
 #endif // wxUSE_EXCEPTIONS
-
-    wxIDropTarget(const wxIDropTarget&) = delete;
-	wxIDropTarget& operator=(const wxIDropTarget&) = delete;
 };
 
 // ----------------------------------------------------------------------------

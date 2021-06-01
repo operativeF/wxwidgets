@@ -172,8 +172,8 @@ void wxMenu::Break()
 
 int wxMenu::FindAccel(int id) const
 {
-    size_t n, count = m_accels.GetCount();
-    for ( n = 0; n < count; n++ )
+    size_t count = m_accels.GetCount();
+    for ( size_t n = 0; n < count; n++ )
     {
         if ( m_accels[n]->m_command == id )
             return n;

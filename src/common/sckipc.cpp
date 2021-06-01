@@ -117,6 +117,9 @@ class wxTCPEventHandler : public wxEvtHandler
 public:
     wxTCPEventHandler()  = default;
 
+    wxTCPEventHandler(const wxTCPEventHandler&) = delete;
+	wxTCPEventHandler& operator=(const wxTCPEventHandler&) = delete;
+
     void Client_OnRequest(wxSocketEvent& event);
     void Server_OnRequest(wxSocketEvent& event);
 
@@ -124,8 +127,6 @@ private:
     void HandleDisconnect(wxTCPConnection *connection);
 
     wxDECLARE_EVENT_TABLE();
-    wxTCPEventHandler(const wxTCPEventHandler&) = delete;
-	wxTCPEventHandler& operator=(const wxTCPEventHandler&) = delete;
 };
 
 enum
@@ -196,6 +197,9 @@ public:
           m_dataOut(m_bufferedOut)
     {
     }
+
+    wxIPCSocketStreams(const wxIPCSocketStreams&) = delete;
+	wxIPCSocketStreams& operator=(const wxIPCSocketStreams&) = delete;
 
     // expose the IO methods needed by IPC code (notice that writing is only
     // done via IPCOutput)
@@ -281,9 +285,6 @@ private:
     // the above streams easily
     wxDataInputStream  m_dataIn;
     wxDataOutputStream m_dataOut;
-
-    wxIPCSocketStreams(const wxIPCSocketStreams&) = delete;
-	wxIPCSocketStreams& operator=(const wxIPCSocketStreams&) = delete;
 };
 
 namespace
@@ -308,6 +309,8 @@ public:
     // dtor calls Flush() really sending the IPC data to the network
     ~IPCOutput() { m_streams.Flush(); }
 
+    IPCOutput(const IPCOutput&) = delete;
+	IPCOutput& operator=(const IPCOutput&) = delete;
 
     // write a byte
     void Write8(wxUint8 i)
@@ -339,9 +342,6 @@ public:
 
 private:
     wxIPCSocketStreams& m_streams;
-
-    IPCOutput(const IPCOutput&) = delete;
-	IPCOutput& operator=(const IPCOutput&) = delete;
 };
 
 } // anonymous namespace

@@ -43,6 +43,7 @@
 #include "wx/msw/private.h"
 #include "wx/msw/private/winstyle.h"
 
+#include <algorithm>
 #include <cstring>
 
 // ---------------------------------------------------------------------------
@@ -255,16 +256,8 @@ wxMDIChildFrame *wxMDIParentFrame::GetActiveChild() const
 
 int wxMDIParentFrame::GetChildFramesCount() const
 {
-    int count = 0;
-    for ( wxWindowList::const_iterator i = GetChildren().begin();
-          i != GetChildren().end();
-          ++i )
-    {
-        if ( wxDynamicCast(*i, wxMDIChildFrame) )
-            count++;
-    }
-
-    return count;
+    return std::count_if(GetChildren().begin(), GetChildren().end(),
+        [](const auto i){ return wxDynamicCast(i, wxMDIChildFrame) != nullptr; });
 }
 
 #if wxUSE_MENUS

@@ -81,7 +81,6 @@ public:
 bool wxSocketMSWManager::OnInit()
 {
   LPCTSTR pclassname = nullptr;
-  int i;
 
   /* Create internal window for event notifications */
   hWin = wxCreateHiddenWindow(&pclassname, CLASSNAME, wxSocket_Internal_WinProc);
@@ -89,10 +88,11 @@ bool wxSocketMSWManager::OnInit()
       return false;
 
   /* Initialize socket list */
-  for (i = 0; i < MAXSOCKETS; i++)
+  for (int i = 0; i < MAXSOCKETS; i++)
   {
     socketList[i] = nullptr;
   }
+  
   firstAvailable = 0;
 
   // finally initialize WinSock

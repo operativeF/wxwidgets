@@ -49,6 +49,9 @@ public:
         Free();
     }
 
+    LocaleId(const LocaleId&) = delete;
+	LocaleId& operator=(const LocaleId&) = delete;
+
 #if wxUSE_INTL
     // Return true if this is the first time this function is called for this
     // object or if the program locale has changed since the last time it was
@@ -89,9 +92,6 @@ private:
 
     // Owned pointer to the C locale string.
     char *m_cloc;
-
-    LocaleId(const LocaleId&) = delete;
-	LocaleId& operator=(const LocaleId&) = delete;
 };
 
 } // anonymous namespace

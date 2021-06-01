@@ -693,13 +693,13 @@ public:
             m_amb->m_pAX->GetId());
     }
 
+    wxWMP10MediaEvtHandler(const wxWMP10MediaEvtHandler&) = delete;
+	wxWMP10MediaEvtHandler& operator=(const wxWMP10MediaEvtHandler&) = delete;
+
     void OnActiveX(wxActiveXEvent& event);
 
 private:
     wxWMP10MediaBackend *m_amb;
-
-    wxWMP10MediaEvtHandler(const wxWMP10MediaEvtHandler&) = delete;
-	wxWMP10MediaEvtHandler& operator=(const wxWMP10MediaEvtHandler&) = delete;
 };
 #endif
 

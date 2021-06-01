@@ -60,12 +60,12 @@ public:
                      const wxString& title,
                      const wxString& text);
 
+    wxDumpPreviewDlg(const wxDumpPreviewDlg&) = delete;
+	wxDumpPreviewDlg& operator=(const wxDumpPreviewDlg&) = delete;
+
 private:
     // the text we show
     wxTextCtrl *m_text;
-
-    wxDumpPreviewDlg(const wxDumpPreviewDlg&) = delete;
-	wxDumpPreviewDlg& operator=(const wxDumpPreviewDlg&) = delete;
 };
 
 wxDumpPreviewDlg::wxDumpPreviewDlg(wxWindow *parent,
@@ -128,6 +128,9 @@ class wxDumpOpenExternalDlg : public wxDialog
 public:
     wxDumpOpenExternalDlg(wxWindow *parent, const wxFileName& filename);
 
+    wxDumpOpenExternalDlg(const wxDumpOpenExternalDlg&) = delete;
+	wxDumpOpenExternalDlg& operator=(const wxDumpOpenExternalDlg&) = delete;
+
     // return the command chosed by user to open this file
     const wxString& GetCommand() const { return m_command; }
 
@@ -140,8 +143,6 @@ private:
 #endif // wxUSE_FILEDLG
 
     wxDECLARE_EVENT_TABLE();
-    wxDumpOpenExternalDlg(const wxDumpOpenExternalDlg&) = delete;
-	wxDumpOpenExternalDlg& operator=(const wxDumpOpenExternalDlg&) = delete;
 };
 
 wxBEGIN_EVENT_TABLE(wxDumpOpenExternalDlg, wxDialog)
@@ -251,6 +252,9 @@ class wxDebugReportDialog : public wxDialog
 public:
     explicit wxDebugReportDialog(wxDebugReport& dbgrpt);
 
+    wxDebugReportDialog(const wxDebugReportDialog&) = delete;
+	wxDebugReportDialog& operator=(const wxDebugReportDialog&) = delete;
+
     bool TransferDataToWindow() override;
     bool TransferDataFromWindow() override;
 
@@ -279,8 +283,6 @@ private:
     wxArrayString m_files;
 
     wxDECLARE_EVENT_TABLE();
-    wxDebugReportDialog(const wxDebugReportDialog&) = delete;
-	wxDebugReportDialog& operator=(const wxDebugReportDialog&) = delete;
 };
 
 // ============================================================================

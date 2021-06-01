@@ -35,6 +35,8 @@
 
 #include <windowsx.h> // needed by GET_X_LPARAM and GET_Y_LPARAM macros
 
+#include <array>
+
 #include "wx/msw/private.h"
 #include "wx/msw/winundef.h"
 #include "wx/msw/private/winstyle.h"
@@ -420,18 +422,13 @@ struct wxTreeViewItem : public TV_ITEM
 class wxTreeItemParam
 {
 public:
-    wxTreeItemParam()
-    {
-        m_data = nullptr;
-
-        for ( size_t n = 0; n < WXSIZEOF(m_images); n++ )
-        {
-            m_images[n] = -1;
-        }
-    }
+    wxTreeItemParam() = default;
 
     // dtor deletes the associated data as well
     virtual ~wxTreeItemParam() { delete m_data; }
+
+    wxTreeItemParam(const wxTreeItemParam&) = delete;
+	wxTreeItemParam& operator=(const wxTreeItemParam&) = delete;
 
     // accessors
         // get the real data associated with the item
@@ -487,16 +484,13 @@ public:
 
 protected:
     // all the images associated with the item
-    int m_images[wxTreeItemIcon_Max];
+    std::array<int, wxTreeItemIcon_Max> m_images{-1, -1, -1, -1};
 
     // item for sort callbacks
     wxTreeItemId m_item;
 
     // the real client data
-    wxTreeItemData *m_data;
-
-    wxTreeItemParam(const wxTreeItemParam&) = delete;
-	wxTreeItemParam& operator=(const wxTreeItemParam&) = delete;
+    wxTreeItemData *m_data{nullptr};
 };
 
 // wxVirutalNode is used in place of a single root when 'hidden' root is
@@ -505,9 +499,9 @@ class wxVirtualNode : public wxTreeViewItem
 {
 public:
     explicit wxVirtualNode(wxTreeItemParam *param)
-        : wxTreeViewItem(TVI_ROOT, 0)
+        : wxTreeViewItem(TVI_ROOT, 0),
+          m_param(param)
     {
-        m_param = param;
     }
 
     ~wxVirtualNode()
@@ -515,14 +509,14 @@ public:
         delete m_param;
     }
 
+    wxVirtualNode(const wxVirtualNode&) = delete;
+	wxVirtualNode& operator=(const wxVirtualNode&) = delete;
+
     wxTreeItemParam *GetParam() const { return m_param; }
     void SetParam(wxTreeItemParam *param) { delete m_param; m_param = param; }
 
 private:
     wxTreeItemParam *m_param;
-
-    wxVirtualNode(const wxVirtualNode&) = delete;
-	wxVirtualNode& operator=(const wxVirtualNode&) = delete;
 };
 
 #ifdef __VISUALC__
@@ -545,6 +539,9 @@ public:
         m_tree = tree;
     }
 
+    wxTreeTraversal(const wxTreeTraversal&) = delete;
+	wxTreeTraversal& operator=(const wxTreeTraversal&) = delete;
+
     // give it a virtual dtor: not really needed as the class is never used
     // polymorphically and not even allocated on heap at all, but this is safer
     // (in case it ever is) and silences the compiler warnings for now
@@ -566,9 +563,6 @@ private:
     bool Traverse(const wxTreeItemId& root, bool recursively);
 
     const wxTreeCtrl *m_tree;
-
-    wxTreeTraversal(const wxTreeTraversal&) = delete;
-	wxTreeTraversal& operator=(const wxTreeTraversal&) = delete;
 };
 
 // internal class for getting the selected items
@@ -584,6 +578,9 @@ public:
             if (tree->GetCount() > 0)
                 DoTraverse(tree->GetRootItem());
         }
+
+    TraverseSelections(const TraverseSelections&) = delete;
+	TraverseSelections& operator=(const TraverseSelections&) = delete;
 
     bool OnVisit(const wxTreeItemId& item) override
     {
@@ -607,9 +604,6 @@ public:
 
 private:
     wxArrayTreeItemIds& m_selections;
-
-    TraverseSelections(const TraverseSelections&) = delete;
-	TraverseSelections& operator=(const TraverseSelections&) = delete;
 };
 
 // internal class for counting tree items
@@ -625,6 +619,9 @@ public:
 
             DoTraverse(root, recursively);
         }
+    
+    TraverseCounter(const TraverseCounter&) = delete;
+	TraverseCounter& operator=(const TraverseCounter&) = delete;
 
     bool OnVisit(const wxTreeItemId& WXUNUSED(item)) override
     {
@@ -637,9 +634,6 @@ public:
 
 private:
     size_t m_count;
-
-    TraverseCounter(const TraverseCounter&) = delete;
-	TraverseCounter& operator=(const TraverseCounter&) = delete;
 };
 
 // ----------------------------------------------------------------------------

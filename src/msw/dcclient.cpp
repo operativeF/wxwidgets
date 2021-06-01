@@ -81,6 +81,9 @@ public:
         ::EndPaint(m_hwnd, &m_ps);
     }
 
+    wxPaintDCInfoOur(const wxPaintDCInfoOur&) = delete;
+	wxPaintDCInfoOur& operator=(const wxPaintDCInfoOur&) = delete;
+
 private:
     // This helper is only needed in order to call it from the ctor initializer
     // list.
@@ -92,9 +95,6 @@ private:
 
     const HWND m_hwnd;
     PAINTSTRUCT m_ps;
-
-    wxPaintDCInfoOur(const wxPaintDCInfoOur&) = delete;
-	wxPaintDCInfoOur& operator=(const wxPaintDCInfoOur&) = delete;
 };
 
 // This subclass contains information for the HDCs we receive from outside, as
@@ -113,11 +113,11 @@ public:
         ::RestoreDC(m_hdc, m_state);
     }
 
-private:
-    const int m_state;
-
     wxPaintDCInfoExternal(const wxPaintDCInfoExternal&) = delete;
 	wxPaintDCInfoExternal& operator=(const wxPaintDCInfoExternal&) = delete;
+
+private:
+    const int m_state;
 };
 
 // The global map containing HDC to use for the given window. The entries in

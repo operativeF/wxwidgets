@@ -112,6 +112,9 @@ public:
         SetStandardFonts();
     }
 
+    wxHtmlHelpHtmlWindow(const wxHtmlHelpHtmlWindow&) = delete;
+	wxHtmlHelpHtmlWindow& operator=(const wxHtmlHelpHtmlWindow&) = delete;
+
     bool LoadPage(const wxString& location) override
     {
         if ( !wxHtmlWindow::LoadPage(location) )
@@ -138,9 +141,6 @@ public:
 
 private:
     wxHtmlHelpWindow *m_Window;
-
-    wxHtmlHelpHtmlWindow(const wxHtmlHelpHtmlWindow&) = delete;
-	wxHtmlHelpHtmlWindow& operator=(const wxHtmlHelpHtmlWindow&) = delete;
 };
 
 
@@ -1239,6 +1239,8 @@ public:
         Centre(wxBOTH);
     }
 
+    wxHtmlHelpWindowOptionsDialog(const wxHtmlHelpWindowOptionsDialog&) = delete;
+	wxHtmlHelpWindowOptionsDialog& operator=(const wxHtmlHelpWindowOptionsDialog&) = delete;
 
     void UpdateTestWin()
     {
@@ -1283,8 +1285,6 @@ public:
     }
 
     wxDECLARE_EVENT_TABLE();
-    wxHtmlHelpWindowOptionsDialog(const wxHtmlHelpWindowOptionsDialog&) = delete;
-	wxHtmlHelpWindowOptionsDialog& operator=(const wxHtmlHelpWindowOptionsDialog&) = delete;
 };
 
 wxBEGIN_EVENT_TABLE(wxHtmlHelpWindowOptionsDialog, wxDialog)

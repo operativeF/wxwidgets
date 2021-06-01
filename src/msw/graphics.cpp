@@ -415,6 +415,9 @@ public:
 
     ~wxGDIPlusContext() override;
 
+    wxGDIPlusContext(const wxGDIPlusContext&) = delete;
+	wxGDIPlusContext& operator=(const wxGDIPlusContext&) = delete;
+
     void Clip( const wxRegion &region ) override;
     // clips drawings to the rect
     void Clip( double x, double y, double w, double h ) override;
@@ -495,9 +498,6 @@ private:
     wxStack<GraphicsState> m_stateStack;
     GraphicsState m_state1;
     GraphicsState m_state2;
-
-    wxGDIPlusContext(const wxGDIPlusContext&) = delete;
-	wxGDIPlusContext& operator=(const wxGDIPlusContext&) = delete;
 };
 
 #if wxUSE_IMAGE
@@ -523,6 +523,9 @@ public:
         Flush();
     }
 
+    wxGDIPlusImageContext(const wxGDIPlusImageContext&) = delete;
+	wxGDIPlusImageContext& operator=(const wxGDIPlusImageContext&) = delete;
+
     void Flush() override
     {
         m_image = m_bitmap.ConvertToImage();
@@ -531,9 +534,6 @@ public:
 private:
     wxImage& m_image;
     wxGDIPlusBitmapData m_bitmap;
-
-    wxGDIPlusImageContext(const wxGDIPlusImageContext&) = delete;
-	wxGDIPlusImageContext& operator=(const wxGDIPlusImageContext&) = delete;
 };
 
 #endif // wxUSE_IMAGE

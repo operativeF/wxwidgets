@@ -33,6 +33,10 @@ class wxHtmlLineCell : public wxHtmlCell
 {
     public:
         wxHtmlLineCell(int size, bool shading)  {m_Height = size; m_HasShading = shading;}
+
+        wxHtmlLineCell(const wxHtmlLineCell&) = delete;
+	    wxHtmlLineCell& operator=(const wxHtmlLineCell&) = delete;
+
         void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
                   wxHtmlRenderingInfo& info) override;
         void Layout(int w) override
@@ -41,9 +45,6 @@ class wxHtmlLineCell : public wxHtmlCell
     private:
         // Should we draw 3-D shading or not
       bool m_HasShading;
-
-      wxHtmlLineCell(const wxHtmlLineCell&) = delete;
-	wxHtmlLineCell& operator=(const wxHtmlLineCell&) = delete;
 };
 
 

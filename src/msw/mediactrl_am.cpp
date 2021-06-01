@@ -898,15 +898,15 @@ public:
                               );
     }
 
+    wxAMMediaEvtHandler(const wxAMMediaEvtHandler&) = delete;
+	wxAMMediaEvtHandler& operator=(const wxAMMediaEvtHandler&) = delete;
+
     void OnActiveX(wxActiveXEvent& event);
 
 private:
     wxAMMediaBackend *m_amb;
     bool m_bLoadEventSent; // Whether or not FinishLoaded was already called
                            // prevents it being called multiple times
-
-    wxAMMediaEvtHandler(const wxAMMediaEvtHandler&) = delete;
-	wxAMMediaEvtHandler& operator=(const wxAMMediaEvtHandler&) = delete;
 };
 
 //===========================================================================

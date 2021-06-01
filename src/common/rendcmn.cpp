@@ -43,6 +43,9 @@ using wxRendererPtrBase = wxScopedPtr<wxRendererNative>;
 class wxRendererPtr : public wxRendererPtrBase
 {
 public:
+    wxRendererPtr(const wxRendererPtr&) = delete;
+	wxRendererPtr& operator=(const wxRendererPtr&) = delete;
+
     // return true if we have a renderer, false otherwise
     bool IsOk()
     {
@@ -76,9 +79,6 @@ private:
 
     // just to suppress a gcc warning
     friend class wxRendererPtrDummyFriend;
-
-    wxRendererPtr(const wxRendererPtr&) = delete;
-	wxRendererPtr& operator=(const wxRendererPtr&) = delete;
 };
 
 // return the global and unique wxRendererPtr

@@ -65,6 +65,9 @@ public:
         m_win->PopEventHandler();
     }
 
+    wxTextEntryHintData(const wxTextEntryHintData&) = delete;
+	wxTextEntryHintData& operator=(const wxTextEntryHintData&) = delete;
+
     // Get the real text of the control such as it was before we replaced it
     // with the hint.
     const wxString& GetText() const { return m_text; }
@@ -178,9 +181,6 @@ private:
     // The real text of the window.
     wxString m_text;
 
-
-    wxTextEntryHintData(const wxTextEntryHintData&) = delete;
-	wxTextEntryHintData& operator=(const wxTextEntryHintData&) = delete;
 };
 
 // ============================================================================

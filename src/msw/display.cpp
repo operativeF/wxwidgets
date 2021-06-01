@@ -127,6 +127,9 @@ public:
     {
     }
 
+    wxDisplayMSW(const wxDisplayMSW&) = delete;
+	wxDisplayMSW& operator=(const wxDisplayMSW&) = delete;
+
     wxRect GetGeometry() const override;
     wxRect GetClientArea() const override;
     int GetDepth() const override;
@@ -154,10 +157,6 @@ protected:
     }
 
     wxDisplayInfo m_info;
-
-private:
-    wxDisplayMSW(const wxDisplayMSW&) = delete;
-	wxDisplayMSW& operator=(const wxDisplayMSW&) = delete;
 };
 
 
@@ -175,6 +174,9 @@ public:
 
     // Dtor destroys the hidden window we use for getting WM_SETTINGCHANGE.
     ~wxDisplayFactoryMSW() override;
+
+    wxDisplayFactoryMSW(const wxDisplayFactoryMSW&) = delete;
+	wxDisplayFactoryMSW& operator=(const wxDisplayFactoryMSW&) = delete;
 
     bool IsOk() const { return !m_displays.empty(); }
 
@@ -262,9 +264,6 @@ private:
     // name.
     HWND m_hiddenHwnd;
     const wxChar* m_hiddenClass;
-
-    wxDisplayFactoryMSW(const wxDisplayFactoryMSW&) = delete;
-	wxDisplayFactoryMSW& operator=(const wxDisplayFactoryMSW&) = delete;
 };
 
 wxDisplayFactoryMSW::GetDpiForMonitorData

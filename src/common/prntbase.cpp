@@ -1111,6 +1111,9 @@ public:
     {
     }
 
+    wxPrintPageMaxCtrl(const wxPrintPageMaxCtrl&) = delete;
+	wxPrintPageMaxCtrl& operator=(const wxPrintPageMaxCtrl&) = delete;
+
     // Set the maximal page to display once we really know what it is.
     void SetMaxPage(int maxPage)
     {
@@ -1122,9 +1125,6 @@ private:
     {
         return wxString::Format("/ %d", maxPage);
     }
-
-    wxPrintPageMaxCtrl(const wxPrintPageMaxCtrl&) = delete;
-	wxPrintPageMaxCtrl& operator=(const wxPrintPageMaxCtrl&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1167,6 +1167,9 @@ public:
         Bind(wxEVT_KILL_FOCUS, &wxPrintPageTextCtrl::OnKillFocus, this);
         Bind(wxEVT_TEXT_ENTER, &wxPrintPageTextCtrl::OnTextEnter, this);
     }
+
+    wxPrintPageTextCtrl(const wxPrintPageTextCtrl&) = delete;
+	wxPrintPageTextCtrl& operator=(const wxPrintPageTextCtrl&) = delete;
 
     // Update the pages range, must be called after OnPreparePrinting() as
     // these values are not known before.
@@ -1255,9 +1258,6 @@ private:
     // This is the last valid page value that we had, we revert to it if an
     // invalid page is entered.
     int m_page;
-
-    wxPrintPageTextCtrl(const wxPrintPageTextCtrl&) = delete;
-	wxPrintPageTextCtrl& operator=(const wxPrintPageTextCtrl&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -1485,6 +1485,8 @@ public:
         m_sizer->Fit(m_parent);
     }
 
+    SizerWithButtons(const SizerWithButtons&) = delete;
+	SizerWithButtons& operator=(const SizerWithButtons&) = delete;
 
     // Add an arbitrary window to the sizer.
     void Add(wxWindow *win)
@@ -1548,9 +1550,6 @@ private:
 
     // If true, a separator should be inserted before adding the next button.
     bool m_needsSeparator;
-
-    SizerWithButtons(const SizerWithButtons&) = delete;
-	SizerWithButtons& operator=(const SizerWithButtons&) = delete;
 };
 
 } // anonymous namespace

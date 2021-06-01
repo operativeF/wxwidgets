@@ -399,7 +399,6 @@ class wxBrushAttrsSetter : private wxBkModeChanger,
 public:
     explicit wxBrushAttrsSetter(wxMSWDCImpl& dc);
 
-private:
     wxBrushAttrsSetter(const wxBrushAttrsSetter&) = delete;
 	wxBrushAttrsSetter& operator=(const wxBrushAttrsSetter&) = delete;
 };
@@ -426,13 +425,13 @@ public:
         }
     }
 
+    StretchBltModeChanger(const StretchBltModeChanger&) = delete;
+	StretchBltModeChanger& operator=(const StretchBltModeChanger&) = delete;
+
 private:
     const HDC m_hdc;
 
     int m_modeOld;
-
-    StretchBltModeChanger(const StretchBltModeChanger&) = delete;
-	StretchBltModeChanger& operator=(const StretchBltModeChanger&) = delete;
 };
 
 // ===========================================================================
@@ -969,8 +968,7 @@ void wxMSWDCImpl::DoDrawPolygon(int n,
     if (xoffset != 0 || yoffset != 0)
     {
         POINT *cpoints = new POINT[n];
-        int i;
-        for (i = 0; i < n; i++)
+        for (int i = 0; i < n; i++)
         {
             cpoints[i].x = (int)(points[i].x + xoffset);
             cpoints[i].y = (int)(points[i].y + yoffset);
@@ -984,8 +982,7 @@ void wxMSWDCImpl::DoDrawPolygon(int n,
     }
     else
     {
-        int i;
-        for (i = 0; i < n; i++)
+        for (int i = 0; i < n; i++)
             CalcBoundingBox(points[i].x, points[i].y);
 
         int prev = SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);

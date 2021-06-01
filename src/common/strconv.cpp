@@ -2735,6 +2735,9 @@ public:
     
     }
 
+    wxMBConv_wxwin(const wxMBConv_wxwin&) = delete;
+	wxMBConv_wxwin& operator=(const wxMBConv_wxwin&) = delete;
+
     size_t MB2WC(wchar_t *buf, const char *psz, size_t WXUNUSED(n)) const override
     {
         size_t inbuf = strlen(psz);
@@ -2786,9 +2789,6 @@ public:
 private:
     // were we initialized successfully?
     bool m_ok;
-
-    wxMBConv_wxwin(const wxMBConv_wxwin&) = delete;
-	wxMBConv_wxwin& operator=(const wxMBConv_wxwin&) = delete;
 };
 
 // make the constructors available for unit testing

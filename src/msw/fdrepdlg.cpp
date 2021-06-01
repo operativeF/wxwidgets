@@ -55,6 +55,9 @@ public:
     wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog, int flagsWX);
     ~wxFindReplaceDialogImpl();
 
+    wxFindReplaceDialogImpl(const wxFindReplaceDialogImpl&) = delete;
+	wxFindReplaceDialogImpl& operator=(const wxFindReplaceDialogImpl&) = delete;
+
     void InitFindWhat(const wxString& str);
     void InitReplaceWith(const wxString& str);
 
@@ -84,9 +87,6 @@ private:
 
     // registered Message for Dialog
     static UINT ms_msgFindDialog;
-
-    wxFindReplaceDialogImpl(const wxFindReplaceDialogImpl&) = delete;
-	wxFindReplaceDialogImpl& operator=(const wxFindReplaceDialogImpl&) = delete;
 };
 
 UINT wxFindReplaceDialogImpl::ms_msgFindDialog = 0;

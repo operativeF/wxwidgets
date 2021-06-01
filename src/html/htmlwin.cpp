@@ -63,6 +63,9 @@ public:
         m_orient = orient;
     }
 
+    wxHtmlWinAutoScrollTimer(const wxHtmlWinAutoScrollTimer&) = delete;
+	wxHtmlWinAutoScrollTimer& operator=(const wxHtmlWinAutoScrollTimer&) = delete;
+
     void Notify() override;
 
 private:
@@ -70,9 +73,6 @@ private:
     wxEventType m_eventType;
     int m_pos,
         m_orient;
-
-    wxHtmlWinAutoScrollTimer(const wxHtmlWinAutoScrollTimer&) = delete;
-	wxHtmlWinAutoScrollTimer& operator=(const wxHtmlWinAutoScrollTimer&) = delete;
 };
 
 void wxHtmlWinAutoScrollTimer::Notify()

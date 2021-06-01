@@ -213,6 +213,9 @@ public:
     explicit wxTextCtrlOleCallback(wxTextCtrl *text) : m_textCtrl(text), m_menu(nullptr) {}
     virtual ~wxTextCtrlOleCallback() { DeleteContextMenuObject(); }
 
+    wxTextCtrlOleCallback(const wxTextCtrlOleCallback&) = delete;
+	wxTextCtrlOleCallback& operator=(const wxTextCtrlOleCallback&) = delete;
+
     wxSTDMETHODIMP ContextSensitiveHelp(BOOL WXUNUSED(enterMode)) override { return E_NOTIMPL; }
     wxSTDMETHODIMP DeleteObject(LPOLEOBJECT WXUNUSED(oleobj)) override { return E_NOTIMPL; }
     wxSTDMETHODIMP GetClipboardData(CHARRANGE* WXUNUSED(chrg), DWORD WXUNUSED(reco), LPDATAOBJECT* WXUNUSED(dataobj)) override { return E_NOTIMPL; }
@@ -257,9 +260,6 @@ private:
 
     wxTextCtrl *m_textCtrl;
     wxMenu *m_menu;
-
-    wxTextCtrlOleCallback(const wxTextCtrlOleCallback&) = delete;
-	wxTextCtrlOleCallback& operator=(const wxTextCtrlOleCallback&) = delete;
 };
 
 BEGIN_IID_TABLE(wxTextCtrlOleCallback)
@@ -295,6 +295,9 @@ public:
         m_count = -1;
     }
 
+    UpdatesCountFilter(const UpdatesCountFilter&) = delete;
+	UpdatesCountFilter& operator=(const UpdatesCountFilter&) = delete;
+
     // return true if an event has been received
     bool GotUpdate() const
     {
@@ -303,9 +306,6 @@ public:
 
 private:
     int& m_count;
-
-    UpdatesCountFilter(const UpdatesCountFilter&) = delete;
-	UpdatesCountFilter& operator=(const UpdatesCountFilter&) = delete;
 };
 
 namespace

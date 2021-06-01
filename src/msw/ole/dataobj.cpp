@@ -172,6 +172,9 @@ public:
     wxIEnumFORMATETC(const wxDataFormat* formats, ULONG nCount);
     virtual ~wxIEnumFORMATETC() { delete [] m_formats; }
 
+    wxIEnumFORMATETC(const wxIEnumFORMATETC&) = delete;
+	wxIEnumFORMATETC& operator=(const wxIEnumFORMATETC&) = delete;
+
     // IEnumFORMATETC
     STDMETHODIMP Next(ULONG celt, FORMATETC *rgelt, ULONG *pceltFetched) override;
     STDMETHODIMP Skip(ULONG celt) override;
@@ -184,9 +187,6 @@ private:
     CLIPFORMAT *m_formats;  // formats we can provide data in
     ULONG       m_nCount,   // number of formats we support
                 m_nCurrent; // current enum position
-
-    wxIEnumFORMATETC(const wxIEnumFORMATETC&) = delete;
-	wxIEnumFORMATETC& operator=(const wxIEnumFORMATETC&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -198,6 +198,9 @@ class wxIDataObject : public IDataObject
 public:
     explicit wxIDataObject(wxDataObject *pDataObject);
     virtual ~wxIDataObject();
+
+    wxIDataObject(const wxIDataObject&) = delete;
+	wxIDataObject& operator=(const wxIDataObject&) = delete;
 
     // normally, wxDataObject controls our lifetime (i.e. we're deleted when it
     // is), but in some cases, the situation is reversed, that is we delete it
@@ -221,9 +224,6 @@ private:
     wxDataObject *m_pDataObject;      // pointer to C++ class we belong to
 
     bool m_mustDelete;
-
-    wxIDataObject(const wxIDataObject&) = delete;
-	wxIDataObject& operator=(const wxIDataObject&) = delete;
 
     // The following code is need to be able to store system data the operating
     // system is using for it own purposes, e.g. drag images.

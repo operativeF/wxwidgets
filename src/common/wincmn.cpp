@@ -2016,6 +2016,9 @@ public:
     {
     }
 
+    ValidationTraverserBase(const ValidationTraverserBase&) = delete;
+	ValidationTraverserBase& operator=(const ValidationTraverserBase&) = delete;
+
     // Traverse all the direct children calling OnDo() on them and also all
     // grandchildren, calling OnRecurse() for them.
     bool DoForSelfAndChildren()
@@ -2060,9 +2063,6 @@ protected:
 
     // The window whose children we're traversing.
     wxWindow* const m_win;
-
-    ValidationTraverserBase(const ValidationTraverserBase&) = delete;
-	ValidationTraverserBase& operator=(const ValidationTraverserBase&) = delete;
 };
 
 } // anonymous namespace

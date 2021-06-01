@@ -96,6 +96,9 @@ public:
     wxHtmlTableCell(wxHtmlContainerCell *parent, const wxHtmlTag& tag, double pixel_scale = 1.0);
     ~wxHtmlTableCell() override;
 
+    wxHtmlTableCell(const wxHtmlTableCell&) = delete;
+	wxHtmlTableCell& operator=(const wxHtmlTableCell&) = delete;
+
     void RemoveExtraSpacing(bool top, bool bottom) override;
 
     void Layout(int w) override;
@@ -115,9 +118,6 @@ private:
     // Computes minimal and maximal widths of columns. Needs to be called
     // only once, before first Layout().
     void ComputeMinMaxWidths();
-
-    wxHtmlTableCell(const wxHtmlTableCell&) = delete;
-	wxHtmlTableCell& operator=(const wxHtmlTableCell&) = delete;
 };
 
 

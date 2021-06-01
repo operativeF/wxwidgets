@@ -161,6 +161,9 @@ public:
     explicit wxMutexInternal(wxMutexType mutexType);
     ~wxMutexInternal();
 
+    wxMutexInternal(const wxMutexInternal&) = delete;
+	wxMutexInternal& operator=(const wxMutexInternal&) = delete;
+
     bool IsOk() const { return m_mutex != nullptr; }
 
     wxMutexError Lock() { return LockTimeout(INFINITE); }
@@ -175,9 +178,6 @@ private:
 
     unsigned long m_owningThread;
     wxMutexType m_type;
-
-    wxMutexInternal(const wxMutexInternal&) = delete;
-	wxMutexInternal& operator=(const wxMutexInternal&) = delete;
 };
 
 // all mutexes are recursive under Win32 so we don't use mutexType
@@ -292,6 +292,9 @@ public:
     wxSemaphoreInternal(int initialcount, int maxcount);
     ~wxSemaphoreInternal();
 
+    wxSemaphoreInternal(const wxSemaphoreInternal&) = delete;
+	wxSemaphoreInternal& operator=(const wxSemaphoreInternal&) = delete;
+
     bool IsOk() const { return m_semaphore != nullptr; }
 
     wxSemaError Wait() { return WaitTimeout(INFINITE); }
@@ -311,9 +314,6 @@ public:
 
 private:
     HANDLE m_semaphore;
-
-    wxSemaphoreInternal(const wxSemaphoreInternal&) = delete;
-	wxSemaphoreInternal& operator=(const wxSemaphoreInternal&) = delete;
 };
 
 wxSemaphoreInternal::wxSemaphoreInternal(int initialcount, int maxcount)
@@ -409,6 +409,9 @@ public:
         Free();
     }
 
+    wxThreadInternal(const wxThreadInternal&) = delete;
+	wxThreadInternal& operator=(const wxThreadInternal&) = delete;
+
     void Free()
     {
         if ( m_hThread )
@@ -486,9 +489,6 @@ private:
     // number of threads which need this thread to remain alive, when the count
     // reaches 0 we kill the owning wxThread -- and die ourselves with it
     LONG m_nRef;
-
-    wxThreadInternal(const wxThreadInternal&) = delete;
-	wxThreadInternal& operator=(const wxThreadInternal&) = delete;
 };
 
 // small class which keeps a thread alive during its lifetime

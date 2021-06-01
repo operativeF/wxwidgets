@@ -110,6 +110,9 @@ public:
         m_win->Unbind(wxEVT_PAINT, &wxNonOwnedWindowShapeImpl::OnPaint, this);
     }
 
+    wxNonOwnedWindowShapeImpl(const wxNonOwnedWindowShapeImpl&) = delete;
+	wxNonOwnedWindowShapeImpl& operator=(const wxNonOwnedWindowShapeImpl&) = delete;
+
 private:
     void OnPaint(wxPaintEvent& event)
     {
@@ -123,9 +126,6 @@ private:
 
     wxNonOwnedWindow* const m_win;
     wxGraphicsPath m_path;
-
-    wxNonOwnedWindowShapeImpl(const wxNonOwnedWindowShapeImpl&) = delete;
-	wxNonOwnedWindowShapeImpl& operator=(const wxNonOwnedWindowShapeImpl&) = delete;
 };
 
 bool wxNonOwnedWindow::DoSetPathShape(const wxGraphicsPath& path)

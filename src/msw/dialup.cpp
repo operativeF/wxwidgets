@@ -147,10 +147,11 @@ struct WXDLLEXPORT wxRasThreadData
 class WXDLLEXPORT wxDialUpManagerMSW : public wxDialUpManager
 {
 public:
-    // ctor & dtor
     wxDialUpManagerMSW();
     ~wxDialUpManagerMSW() override;
 
+    wxDialUpManagerMSW(const wxDialUpManagerMSW&) = delete;
+	wxDialUpManagerMSW& operator=(const wxDialUpManagerMSW&) = delete;
     
     bool IsOk() const override;
     size_t GetISPNames(wxArrayString& names) const override;
@@ -206,13 +207,13 @@ private:
         explicit RasTimer(wxDialUpManagerMSW *dialUpManager)
             { m_dialUpManager = dialUpManager; }
 
+        RasTimer(const RasTimer&) = delete;
+	    RasTimer& operator=(const RasTimer&) = delete;
+
         void Notify() override { m_dialUpManager->CheckRasStatus(); }
 
     private:
         wxDialUpManagerMSW *m_dialUpManager;
-
-        RasTimer(const RasTimer&) = delete;
-	RasTimer& operator=(const RasTimer&) = delete;
     } m_timerStatusPolling;
 
     // thread handle for the thread sitting on connection change event
@@ -260,9 +261,6 @@ private:
 
     // this flag tells us whether a call to RasDial() is in progress
     static wxDialUpManagerMSW *ms_dialer;
-
-    wxDialUpManagerMSW(const wxDialUpManagerMSW&) = delete;
-	wxDialUpManagerMSW& operator=(const wxDialUpManagerMSW&) = delete;
 };
 
 // module to destroy helper window created by wxDialUpManagerMSW

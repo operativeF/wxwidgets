@@ -266,6 +266,9 @@ class wxStoredInputStream : public wxFilterInputStream
 public:
     explicit wxStoredInputStream(wxInputStream& stream);
 
+    wxStoredInputStream(const wxStoredInputStream&) = delete;
+	wxStoredInputStream& operator=(const wxStoredInputStream&) = delete;
+
     void Open(wxFileOffset len) { Close(); m_len = len; }
     void Close() { m_pos = 0; m_lasterror = wxSTREAM_NO_ERROR; }
 
@@ -279,9 +282,6 @@ protected:
 private:
     wxFileOffset m_pos;
     wxFileOffset m_len;
-
-    wxStoredInputStream(const wxStoredInputStream&) = delete;
-	wxStoredInputStream& operator=(const wxStoredInputStream&) = delete;
 };
 
 wxStoredInputStream::wxStoredInputStream(wxInputStream& stream)
@@ -315,6 +315,9 @@ public:
     explicit wxStoredOutputStream(wxOutputStream& stream) :
         wxFilterOutputStream(stream), m_pos(0) { }
 
+    wxStoredOutputStream(const wxStoredOutputStream&) = delete;
+	wxStoredOutputStream& operator=(const wxStoredOutputStream&) = delete;
+
     bool Close() override {
         m_pos = 0;
         m_lasterror = wxSTREAM_NO_ERROR;
@@ -327,8 +330,6 @@ protected:
 
 private:
     wxFileOffset m_pos;
-    wxStoredOutputStream(const wxStoredOutputStream&) = delete;
-	wxStoredOutputStream& operator=(const wxStoredOutputStream&) = delete;
 };
 
 size_t wxStoredOutputStream::OnSysWrite(const void *buffer, size_t size)
@@ -372,6 +373,9 @@ class wxTeeInputStream : public wxFilterInputStream
 public:
     explicit wxTeeInputStream(wxInputStream& stream);
 
+    wxTeeInputStream(const wxTeeInputStream&) = delete;
+	wxTeeInputStream& operator=(const wxTeeInputStream&) = delete;
+
     size_t GetCount() const { return m_end - m_start; }
     size_t GetData(char *buffer, size_t size);
 
@@ -389,9 +393,6 @@ private:
     wxMemoryBuffer m_buf;
     size_t m_start;
     size_t m_end;
-
-    wxTeeInputStream(const wxTeeInputStream&) = delete;
-	wxTeeInputStream& operator=(const wxTeeInputStream&) = delete;
 };
 
 wxTeeInputStream::wxTeeInputStream(wxInputStream& stream)
@@ -473,6 +474,9 @@ public:
     explicit wxRawInputStream(wxInputStream& stream);
     ~wxRawInputStream() override { delete m_tee; }
 
+    wxRawInputStream(const wxRawInputStream&) = delete;
+	wxRawInputStream& operator=(const wxRawInputStream&) = delete;
+
     wxInputStream* Open(wxInputStream *decomp);
     wxInputStream& GetTee() const { return *m_tee; }
 
@@ -486,9 +490,6 @@ private:
 
     enum { BUFSIZE = 8192 };
     wxCharBuffer m_dummy;
-
-    wxRawInputStream(const wxRawInputStream&) = delete;
-	wxRawInputStream& operator=(const wxRawInputStream&) = delete;
 };
 
 wxRawInputStream::wxRawInputStream(wxInputStream& stream)

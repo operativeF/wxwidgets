@@ -47,6 +47,9 @@ class wxFontEnumeratorHelper
 public:
     explicit wxFontEnumeratorHelper(wxFontEnumerator *fontEnum);
 
+    wxFontEnumeratorHelper(const wxFontEnumeratorHelper&) = delete;
+	wxFontEnumeratorHelper& operator=(const wxFontEnumeratorHelper&) = delete;
+
     // control what exactly are we enumerating
         // we enumerate fonts with the given encoding
     bool SetEncoding(wxFontEncoding encoding);
@@ -82,9 +85,6 @@ private:
 
     // the list of facenames we already found while enumerating facenames
     wxArrayString m_facenames;
-
-    wxFontEnumeratorHelper(const wxFontEnumeratorHelper&) = delete;
-	wxFontEnumeratorHelper& operator=(const wxFontEnumeratorHelper&) = delete;
 };
 
 // ----------------------------------------------------------------------------

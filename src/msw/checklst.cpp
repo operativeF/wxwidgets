@@ -74,8 +74,10 @@ namespace
 class wxCheckListBoxItem : public wxOwnerDrawn
 {
 public:
-    // ctor
     explicit wxCheckListBoxItem(wxCheckListBox *parent);
+
+    wxCheckListBoxItem(const wxCheckListBoxItem&) = delete;
+	wxCheckListBoxItem& operator=(const wxCheckListBoxItem&) = delete;
 
     // drawing functions
     bool OnDrawItem(wxDC& dc, const wxRect& rc, wxODAction act, wxODStatus stat) override;
@@ -103,9 +105,6 @@ public:
 private:
     wxCheckListBox *m_parent;
     bool m_checked;
-
-    wxCheckListBoxItem(const wxCheckListBoxItem&) = delete;
-	wxCheckListBoxItem& operator=(const wxCheckListBoxItem&) = delete;
 };
 
 wxCheckListBoxItem::wxCheckListBoxItem(wxCheckListBox *parent)

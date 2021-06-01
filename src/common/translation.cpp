@@ -1010,9 +1010,11 @@ class wxMsgCatalogFile
 public:
     using DataBuffer = wxScopedCharBuffer;
 
-    // ctor & dtor
-    wxMsgCatalogFile();
-    ~wxMsgCatalogFile();
+    wxMsgCatalogFile() = default;
+    ~wxMsgCatalogFile() = default;
+
+    wxMsgCatalogFile(const wxMsgCatalogFile&) = delete;
+	wxMsgCatalogFile& operator=(const wxMsgCatalogFile&) = delete;
 
     // load the catalog from disk
     bool LoadFile(const wxString& filename,
@@ -1084,20 +1086,11 @@ private:
     }
 
     bool m_bSwapped;   // wrong endianness?
-
-    wxMsgCatalogFile(const wxMsgCatalogFile&) = delete;
-	wxMsgCatalogFile& operator=(const wxMsgCatalogFile&) = delete;
 };
 
 // ----------------------------------------------------------------------------
 // wxMsgCatalogFile class
 // ----------------------------------------------------------------------------
-
-wxMsgCatalogFile::wxMsgCatalogFile()
-= default;
-
-wxMsgCatalogFile::~wxMsgCatalogFile()
-= default;
 
 // open disk file and read in it's contents
 bool wxMsgCatalogFile::LoadFile(const wxString& filename,

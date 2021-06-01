@@ -46,6 +46,8 @@ public:
     explicit wxPenRefData(const wxPenInfo& info);
     ~wxPenRefData() override;
 
+    wxPenRefData& operator=(const wxPenRefData&) = delete;
+
     bool operator==(const wxPenRefData& data) const
     {
         // we intentionally don't compare m_hPen fields here
@@ -130,8 +132,6 @@ private:
     wxDash *      m_dash;
     wxColour      m_colour;
     HPEN          m_hPen;
-
-    wxPenRefData& operator=(const wxPenRefData&) = delete;
 };
 
 // ============================================================================

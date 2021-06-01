@@ -51,6 +51,9 @@ public:
         delete[] m_Data;
     }
 
+    wxMemoryFSFile(const wxMemoryFSFile&) = delete;
+	wxMemoryFSFile& operator=(const wxMemoryFSFile&) = delete;
+
     char *m_Data;
     size_t m_Len;
     wxString m_MimeType;
@@ -65,9 +68,6 @@ private:
         m_Time = wxDateTime::Now();
 #endif // wxUSE_DATETIME
     }
-
-    wxMemoryFSFile(const wxMemoryFSFile&) = delete;
-	wxMemoryFSFile& operator=(const wxMemoryFSFile&) = delete;
 };
 
 #if wxUSE_BASE

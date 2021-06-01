@@ -118,13 +118,13 @@ public:
         GetEntitiesParser()->SetEncoding(wxFONTENCODING_ISO8859_1);
     }
 
+    HP_Parser(const HP_Parser&) = delete;
+	HP_Parser& operator=(const HP_Parser&) = delete;
+
     wxObject* GetProduct() override { return nullptr; }
 
 protected:
     void AddText(const wxString& WXUNUSED(txt)) override {}
-
-    HP_Parser(const HP_Parser&) = delete;
-	HP_Parser& operator=(const HP_Parser&) = delete;
 };
 
 

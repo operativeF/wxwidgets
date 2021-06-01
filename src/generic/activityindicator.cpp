@@ -64,6 +64,10 @@ public:
         win->Bind(wxEVT_PAINT, &wxActivityIndicatorImpl::OnPaint, this);
     }
 
+
+    wxActivityIndicatorImpl(const wxActivityIndicatorImpl&) = delete;
+	wxActivityIndicatorImpl& operator=(const wxActivityIndicatorImpl&) = delete;
+
     void Start()
     {
         // Avoid restarting the timer if it's already running, this could
@@ -105,6 +109,9 @@ private:
         {
         }
 
+        AdvanceTimer(const AdvanceTimer&) = delete;
+	    AdvanceTimer& operator=(const AdvanceTimer&) = delete;
+
         void Notify() override
         {
             m_owner->Advance();
@@ -112,9 +119,6 @@ private:
 
     private:
         wxActivityIndicatorImpl* const m_owner;
-
-        AdvanceTimer(const AdvanceTimer&) = delete;
-	AdvanceTimer& operator=(const AdvanceTimer&) = delete;
     };
 
     void OnPaint(wxPaintEvent& WXUNUSED(event))
@@ -171,9 +175,6 @@ private:
     wxWindow* const m_win;
 
     int m_frame;
-
-    wxActivityIndicatorImpl(const wxActivityIndicatorImpl&) = delete;
-	wxActivityIndicatorImpl& operator=(const wxActivityIndicatorImpl&) = delete;
 };
 
 // ============================================================================

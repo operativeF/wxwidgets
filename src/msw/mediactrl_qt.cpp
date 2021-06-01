@@ -422,14 +422,14 @@ public:
             &wxQTMediaEvtHandler::OnEraseBackground, this);
     }
 
+    wxQTMediaEvtHandler(const wxQTMediaEvtHandler&) = delete;
+	wxQTMediaEvtHandler& operator=(const wxQTMediaEvtHandler&) = delete;
+
     void OnEraseBackground(wxEraseEvent& event);
 
 private:
     wxQTMediaBackend *m_qtb;
     WXHWND m_hwnd;
-
-    wxQTMediaEvtHandler(const wxQTMediaEvtHandler&) = delete;
-	wxQTMediaEvtHandler& operator=(const wxQTMediaEvtHandler&) = delete;
 };
 
 

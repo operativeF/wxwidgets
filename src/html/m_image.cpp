@@ -293,6 +293,10 @@ public:
                     double scale = 1.0, int align = wxHTML_ALIGN_BOTTOM,
                     const wxString& mapname = wxEmptyString);
     ~wxHtmlImageCell() override;
+
+    wxHtmlImageCell(const wxHtmlImageCell&) = delete;
+	wxHtmlImageCell& operator=(const wxHtmlImageCell&) = delete;
+
     void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
               wxHtmlRenderingInfo& info) override;
     wxHtmlLinkInfo *GetLink(int x = 0, int y = 0) const override;
@@ -333,9 +337,6 @@ private:
     mutable const wxHtmlImageMapCell* m_imageMap;
     mutable wxString    m_mapName;
     wxString            m_alt;
-
-    wxHtmlImageCell(const wxHtmlImageCell&) = delete;
-	wxHtmlImageCell& operator=(const wxHtmlImageCell&) = delete;
 };
 
 #if wxUSE_GIF && wxUSE_TIMER
@@ -348,11 +349,11 @@ class wxGIFTimer : public wxTimer
             m_cell->AdvanceAnimation(this);
         }
 
+        wxGIFTimer(const wxGIFTimer&) = delete;
+        wxGIFTimer& operator=(const wxGIFTimer&) = delete;
+
     private:
         wxHtmlImageCell *m_cell;
-
-    wxGIFTimer(const wxGIFTimer&) = delete;
-	wxGIFTimer& operator=(const wxGIFTimer&) = delete;
 };
 #endif
 

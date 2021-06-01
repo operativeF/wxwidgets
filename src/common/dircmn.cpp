@@ -219,6 +219,9 @@ class wxDirTraverserSimple : public wxDirTraverser
 public:
     explicit wxDirTraverserSimple(wxArrayString& files) : m_files(files) { }
 
+    wxDirTraverserSimple(const wxDirTraverserSimple&) = delete;
+	wxDirTraverserSimple& operator=(const wxDirTraverserSimple&) = delete;
+
     wxDirTraverseResult OnFile(const wxString& filename) override
     {
         m_files.push_back(filename);
@@ -232,9 +235,6 @@ public:
 
 private:
     wxArrayString& m_files;
-
-    wxDirTraverserSimple(const wxDirTraverserSimple&) = delete;
-	wxDirTraverserSimple& operator=(const wxDirTraverserSimple&) = delete;
 };
 
 /* static */
@@ -267,6 +267,9 @@ class wxDirTraverserFindFirst : public wxDirTraverser
 public:
     wxDirTraverserFindFirst() = default;
 
+    wxDirTraverserFindFirst(const wxDirTraverserFindFirst&) = delete;
+	wxDirTraverserFindFirst& operator=(const wxDirTraverserFindFirst&) = delete;
+
     wxDirTraverseResult OnFile(const wxString& filename) override
     {
         m_file = filename;
@@ -285,9 +288,6 @@ public:
 
 private:
     wxString m_file;
-
-    wxDirTraverserFindFirst(const wxDirTraverserFindFirst&) = delete;
-	wxDirTraverserFindFirst& operator=(const wxDirTraverserFindFirst&) = delete;
 };
 
 /* static */

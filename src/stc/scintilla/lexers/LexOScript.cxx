@@ -118,15 +118,15 @@ class IdentifierClassifier {
 	WordList &functions; // Passed from keywords5 property.
 	WordList &objects;   // Passed from keywords6 property.
 
-	IdentifierClassifier(IdentifierClassifier const&) = delete;
-	IdentifierClassifier& operator=(IdentifierClassifier const&) = delete;
-
 public:
 	explicit IdentifierClassifier(WordList *keywordlists[]) :
 		keywords(*keywordlists[0]), constants(*keywordlists[1]),
 		operators(*keywordlists[2]), types(*keywordlists[3]),
 		functions(*keywordlists[4]), objects(*keywordlists[5])
 	{}
+
+	IdentifierClassifier(IdentifierClassifier const&) = delete;
+	IdentifierClassifier& operator=(IdentifierClassifier const&) = delete;
 
 	void ClassifyIdentifier(StyleContext &sc) {
 		// Opening parenthesis following an identifier makes it a possible

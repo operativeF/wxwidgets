@@ -445,14 +445,14 @@ public:
         m_read_bytes = 0;
     }
 
+    wxHTTPStream(const wxHTTPStream&) = delete;
+	wxHTTPStream& operator=(const wxHTTPStream&) = delete;
+
     size_t GetSize() const override { return m_httpsize; }
     ~wxHTTPStream() override { m_http->Abort(); }
 
 protected:
     size_t OnSysRead(void *buffer, size_t bufsize) override;
-
-    wxHTTPStream(const wxHTTPStream&) = delete;
-	wxHTTPStream& operator=(const wxHTTPStream&) = delete;
 };
 
 size_t wxHTTPStream::OnSysRead(void *buffer, size_t bufsize)

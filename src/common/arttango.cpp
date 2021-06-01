@@ -86,6 +86,9 @@ public:
         m_imageHandledAdded = false;
     }
 
+    wxTangoArtProvider(const wxTangoArtProvider&) = delete;
+	wxTangoArtProvider& operator=(const wxTangoArtProvider&) = delete;
+
 protected:
     wxBitmap CreateBitmap(const wxArtID& id,
                                   const wxArtClient& client,
@@ -93,9 +96,6 @@ protected:
 
 private:
     bool m_imageHandledAdded;
-
-    wxTangoArtProvider(const wxTangoArtProvider&) = delete;
-	wxTangoArtProvider& operator=(const wxTangoArtProvider&) = delete;
 };
 
 } // anonymous namespace

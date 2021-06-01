@@ -47,11 +47,11 @@ public:
     explicit CredentialPtr(CREDENTIAL* cred) : m_cred(cred) { }
     ~CredentialPtr() { ::CredFree(m_cred); }
 
-private:
-    CREDENTIAL* const m_cred;
-
     CredentialPtr(const CredentialPtr&) = delete;
 	CredentialPtr& operator=(const CredentialPtr&) = delete;
+
+private:
+    CREDENTIAL* const m_cred;
 };
 
 class wxSecretStoreMSWImpl : public wxSecretStoreImpl

@@ -387,8 +387,10 @@ public:
     {
     }
 
-    virtual ~wxDirect2DFontFileEnumerator()
-    = default;
+    virtual ~wxDirect2DFontFileEnumerator() = default;
+
+    wxDirect2DFontFileEnumerator(const wxDirect2DFontFileEnumerator&) = delete;
+	wxDirect2DFontFileEnumerator& operator=(const wxDirect2DFontFileEnumerator&) = delete;
 
     // IDWriteFontFileEnumerator methods
     wxSTDMETHODIMP MoveNext(BOOL* pHasCurrentFile) override
@@ -430,9 +432,6 @@ private:
     wxCOMPtr<IDWriteFontFile> m_currentFile;
     wxArrayString m_filePaths;
     size_t m_nextIndex;
-
-    wxDirect2DFontFileEnumerator(const wxDirect2DFontFileEnumerator&) = delete;
-	wxDirect2DFontFileEnumerator& operator=(const wxDirect2DFontFileEnumerator&) = delete;
 };
 
 BEGIN_IID_TABLE(wxDirect2DFontFileEnumerator)
@@ -450,8 +449,10 @@ public:
         ms_isInitialized = true;
     }
 
-    virtual ~wxDirect2DFontCollectionLoader()
-    = default;
+    virtual ~wxDirect2DFontCollectionLoader() = default;
+
+    wxDirect2DFontCollectionLoader(const wxDirect2DFontCollectionLoader&) = delete;
+	wxDirect2DFontCollectionLoader& operator=(const wxDirect2DFontCollectionLoader&) = delete;
 
     // IDWriteFontCollectionLoader methods
     wxSTDMETHODIMP CreateEnumeratorFromKey(IDWriteFactory* pFactory,
@@ -515,9 +516,6 @@ private:
     static bool ms_isInitialized;
     static wxArrayString ms_fontList;
     static wxDirect2DFontKey ms_key;
-
-    wxDirect2DFontCollectionLoader(const wxDirect2DFontCollectionLoader&) = delete;
-	wxDirect2DFontCollectionLoader& operator=(const wxDirect2DFontCollectionLoader&) = delete;
 };
 
 BEGIN_IID_TABLE(wxDirect2DFontCollectionLoader)
@@ -3916,6 +3914,9 @@ public:
 
     ~wxD2DContext() override;
 
+    wxD2DContext(const wxD2DContext&) = delete;
+	wxD2DContext& operator=(const wxD2DContext&) = delete;
+
     void Clip(const wxRegion& region) override;
 
     void Clip(double x, double y, double w, double h) override;
@@ -4044,10 +4045,6 @@ private:
     // Clipping box
     bool m_isClipBoxValid;
     double m_clipX1, m_clipY1, m_clipX2, m_clipY2;
-
-private:
-    wxD2DContext(const wxD2DContext&) = delete;
-	wxD2DContext& operator=(const wxD2DContext&) = delete;
 };
 
 //-----------------------------------------------------------------------------

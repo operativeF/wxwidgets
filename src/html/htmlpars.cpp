@@ -839,27 +839,28 @@ class wxMetaTagParser : public wxHtmlParser
 public:
     wxMetaTagParser() = default;
 
+    wxMetaTagParser(const wxMetaTagParser&) = delete;
+	wxMetaTagParser& operator=(const wxMetaTagParser&) = delete;
+
     wxObject* GetProduct() override { return nullptr; }
 
 protected:
     void AddText(const wxString& WXUNUSED(txt)) override {}
-
-    wxMetaTagParser(const wxMetaTagParser&) = delete;
-	wxMetaTagParser& operator=(const wxMetaTagParser&) = delete;
 };
 
 class wxMetaTagHandler : public wxHtmlTagHandler
 {
 public:
     explicit wxMetaTagHandler(wxString *retval) :  m_retval(retval) {}
+
+    wxMetaTagHandler(const wxMetaTagHandler&) = delete;
+	wxMetaTagHandler& operator=(const wxMetaTagHandler&) = delete;
+
     wxString GetSupportedTags() override { return wxT("META,BODY"); }
     bool HandleTag(const wxHtmlTag& tag) override;
 
 private:
     wxString *m_retval;
-
-    wxMetaTagHandler(const wxMetaTagHandler&) = delete;
-	wxMetaTagHandler& operator=(const wxMetaTagHandler&) = delete;
 };
 
 bool wxMetaTagHandler::HandleTag(const wxHtmlTag& tag)

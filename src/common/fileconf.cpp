@@ -99,10 +99,12 @@ public:
   void SetNext(wxFileConfigLineList *pNext)  { m_pNext = pNext; }
   void SetPrev(wxFileConfigLineList *pPrev)  { m_pPrev = pPrev; }
 
-  // ctor
   explicit wxFileConfigLineList(const wxString& str,
                        wxFileConfigLineList *pNext = nullptr) : m_strLine(str)
     { SetNext(pNext); SetPrev(nullptr); }
+
+  wxFileConfigLineList(const wxFileConfigLineList&) = delete;
+  wxFileConfigLineList& operator=(const wxFileConfigLineList&) = delete;
 
   // next/prev nodes in the linked list
   wxFileConfigLineList *Next() const { return m_pNext;  }
@@ -116,9 +118,6 @@ private:
   wxString  m_strLine;                  // line contents
   wxFileConfigLineList *m_pNext,        // next node
                        *m_pPrev;        // previous one
-
-    wxFileConfigLineList(const wxFileConfigLineList&) = delete;
-	wxFileConfigLineList& operator=(const wxFileConfigLineList&) = delete;
 };
 
 // ----------------------------------------------------------------------------
