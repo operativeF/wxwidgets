@@ -467,36 +467,30 @@ wxString wxFontBase::GetFamilyString() const
 {
     wxCHECK_MSG( IsOk(), "wxFONTFAMILY_DEFAULT", "invalid font" );
 
-    return [=]()
+    switch ( GetFamily() )
     {
-        switch ( GetFamily() )
-        {
-            case wxFONTFAMILY_DECORATIVE:   return "wxFONTFAMILY_DECORATIVE";
-            case wxFONTFAMILY_ROMAN:        return "wxFONTFAMILY_ROMAN";
-            case wxFONTFAMILY_SCRIPT:       return "wxFONTFAMILY_SCRIPT";
-            case wxFONTFAMILY_SWISS:        return "wxFONTFAMILY_SWISS";
-            case wxFONTFAMILY_MODERN:       return "wxFONTFAMILY_MODERN";
-            case wxFONTFAMILY_TELETYPE:     return "wxFONTFAMILY_TELETYPE";
-            case wxFONTFAMILY_UNKNOWN:      return "wxFONTFAMILY_UNKNOWN";
-            default:                        return "wxFONTFAMILY_DEFAULT";
-        }
-    }();
+        case wxFONTFAMILY_DECORATIVE:   return "wxFONTFAMILY_DECORATIVE";
+        case wxFONTFAMILY_ROMAN:        return "wxFONTFAMILY_ROMAN";
+        case wxFONTFAMILY_SCRIPT:       return "wxFONTFAMILY_SCRIPT";
+        case wxFONTFAMILY_SWISS:        return "wxFONTFAMILY_SWISS";
+        case wxFONTFAMILY_MODERN:       return "wxFONTFAMILY_MODERN";
+        case wxFONTFAMILY_TELETYPE:     return "wxFONTFAMILY_TELETYPE";
+        case wxFONTFAMILY_UNKNOWN:      return "wxFONTFAMILY_UNKNOWN";
+        default:                        return "wxFONTFAMILY_DEFAULT";
+    }
 }
 
 wxString wxFontBase::GetStyleString() const
 {
     wxCHECK_MSG( IsOk(), "wxFONTSTYLE_DEFAULT", "invalid font" );
 
-    return [=]()
+    switch ( GetStyle() )
     {
-        switch ( GetStyle() )
-        {
-            case wxFONTSTYLE_NORMAL:   return "wxFONTSTYLE_NORMAL";
-            case wxFONTSTYLE_SLANT:    return "wxFONTSTYLE_SLANT";
-            case wxFONTSTYLE_ITALIC:   return "wxFONTSTYLE_ITALIC";
-            default:                   return "wxFONTSTYLE_DEFAULT";
-        }
-    }();
+        case wxFONTSTYLE_NORMAL:   return "wxFONTSTYLE_NORMAL";
+        case wxFONTSTYLE_SLANT:    return "wxFONTSTYLE_SLANT";
+        case wxFONTSTYLE_ITALIC:   return "wxFONTSTYLE_ITALIC";
+        default:                   return "wxFONTSTYLE_DEFAULT";
+    }
 }
 
 wxString wxFontBase::GetWeightString() const
@@ -1029,35 +1023,40 @@ wxString wxNativeFontInfo::ToUserString() const
     else // no face name specified
     {
         // use the family
-        wxString familyStr = [=]()
+        wxString familyStr;
+        switch ( GetFamily() )
         {
-            switch ( GetFamily() )
-            {
-                case wxFONTFAMILY_DECORATIVE:
-                    return "decorative";
+            case wxFONTFAMILY_DECORATIVE:
+                familyStr = "decorative";
+                break;
 
-                case wxFONTFAMILY_ROMAN:
-                    return "roman";
+            case wxFONTFAMILY_ROMAN:
+                familyStr = "roman";
+                break;
 
-                case wxFONTFAMILY_SCRIPT:
-                    return "script";
+            case wxFONTFAMILY_SCRIPT:
+                familyStr = "script";
+                break;
 
-                case wxFONTFAMILY_SWISS:
-                    return "swiss";
+            case wxFONTFAMILY_SWISS:
+                familyStr = "swiss";
+                break;
 
-                case wxFONTFAMILY_MODERN:
-                    return "modern";
+            case wxFONTFAMILY_MODERN:
+                familyStr = "modern";
+                break;
 
-                case wxFONTFAMILY_TELETYPE:
-                    return "teletype";
+            case wxFONTFAMILY_TELETYPE:
+                familyStr = "teletype";
+                break;
 
-                case wxFONTFAMILY_DEFAULT:
-                case wxFONTFAMILY_UNKNOWN:
-                default:
-                    wxFAIL_MSG( "unknown font family" );
-                    return "";
-            }
-        }();
+            case wxFONTFAMILY_DEFAULT:
+            case wxFONTFAMILY_UNKNOWN:
+                break;
+
+            default:
+                wxFAIL_MSG( "unknown font family" );
+        }
 
         if ( !familyStr.empty() )
             desc << " '" << familyStr << " family'";
