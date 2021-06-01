@@ -71,13 +71,13 @@ public:
         m_scrollHelper = scrollHelper;
     }
 
+    wxScrollHelperEvtHandler(const wxScrollHelperEvtHandler&) = delete;
+	wxScrollHelperEvtHandler& operator=(const wxScrollHelperEvtHandler&) = delete;
+
     bool ProcessEvent(wxEvent& event) override;
 
 private:
     wxScrollHelperBase *m_scrollHelper;
-
-    wxScrollHelperEvtHandler(const wxScrollHelperEvtHandler&) = delete;
-	wxScrollHelperEvtHandler& operator=(const wxScrollHelperEvtHandler&) = delete;
 };
 
 #if wxUSE_TIMER
@@ -94,6 +94,9 @@ public:
                       wxEventType eventTypeToSend,
                       int pos, int orient);
 
+    wxAutoScrollTimer(const wxAutoScrollTimer&) = delete;
+	wxAutoScrollTimer& operator=(const wxAutoScrollTimer&) = delete;
+
     void Notify() override;
 
 private:
@@ -102,9 +105,6 @@ private:
     wxEventType m_eventType;
     int m_pos,
         m_orient;
-
-    wxAutoScrollTimer(const wxAutoScrollTimer&) = delete;
-	wxAutoScrollTimer& operator=(const wxAutoScrollTimer&) = delete;
 };
 
 // ============================================================================

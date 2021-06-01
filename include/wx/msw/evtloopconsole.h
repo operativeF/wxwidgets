@@ -17,7 +17,6 @@ public:
     wxMSWEventLoopBase();
     ~wxMSWEventLoopBase() override;
 
-    
     bool Pending() const override;
     void WakeUp() override;
 

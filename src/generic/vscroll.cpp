@@ -45,13 +45,13 @@ public:
         m_scrollHelper = scrollHelper;
     }
 
+    wxVarScrollHelperEvtHandler(const wxVarScrollHelperEvtHandler&) = delete;
+	wxVarScrollHelperEvtHandler& operator=(const wxVarScrollHelperEvtHandler&) = delete;
+
     bool ProcessEvent(wxEvent& event) override;
 
 private:
     wxVarScrollHelperBase *m_scrollHelper;
-
-    wxVarScrollHelperEvtHandler(const wxVarScrollHelperEvtHandler&) = delete;
-	wxVarScrollHelperEvtHandler& operator=(const wxVarScrollHelperEvtHandler&) = delete;
 };
 
 // ============================================================================

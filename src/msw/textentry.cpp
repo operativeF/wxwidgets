@@ -120,11 +120,11 @@ public:
         ::LeaveCriticalSection(m_cs);
     }
 
-private:
-    CRITICAL_SECTION * const m_cs;
-
     CSLock(const CSLock&) = delete;
 	CSLock& operator=(const CSLock&) = delete;
+
+private:
+    CRITICAL_SECTION * const m_cs;
 };
 
 } // anonymity namespace
@@ -147,6 +147,9 @@ public:
         m_restart = FALSE;
     
     }
+
+    wxIEnumString(const wxIEnumString&) = delete;
+	wxIEnumString& operator=(const wxIEnumString&) = delete;    
 
     void ChangeCompleter(wxTextCompleter *completer)
     {
@@ -287,9 +290,6 @@ private:
         ::DeleteCriticalSection(&m_csCompleter);
     }
 
-    // Common part of all ctors.
-    
-
     // Restart completions generation if needed. Should be only called from
     // inside m_csCompleter.
     //
@@ -346,10 +346,6 @@ private:
     // value is atomic (32 bit reads are atomic operations under all Windows
     // versions but reading bool isn't necessarily).
     LONG m_restart;
-
-
-    wxIEnumString(const wxIEnumString&) = delete;
-	wxIEnumString& operator=(const wxIEnumString&) = delete;
 };
 
 BEGIN_IID_TABLE(wxIEnumString)
@@ -458,6 +454,9 @@ public:
         if ( m_autoComplete )
             m_autoComplete->Release();
     }
+
+    wxTextAutoCompleteData(const wxTextAutoCompleteData&) = delete;
+	wxTextAutoCompleteData& operator=(const wxTextAutoCompleteData&) = delete;
 
     // Must be called after creating this object to verify if initializing it
     // succeeded.
@@ -655,10 +654,6 @@ private:
 
     // Initially false, set to true after connecting OnTextChanged() handler.
     bool m_connectedCharEvent;
-
-
-    wxTextAutoCompleteData(const wxTextAutoCompleteData&) = delete;
-	wxTextAutoCompleteData& operator=(const wxTextAutoCompleteData&) = delete;
 };
 
 // Special pointer value which indicates that we're using SHAutoComplete().

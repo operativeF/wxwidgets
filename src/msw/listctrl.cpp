@@ -177,6 +177,9 @@ public:
 
     ~wxLV_ITEM() { delete m_buf; }
 
+    wxLV_ITEM(const wxLV_ITEM&) = delete;
+	wxLV_ITEM& operator=(const wxLV_ITEM&) = delete;
+
     // conversion to the real LV_ITEM
     operator LV_ITEM_NATIVE&() const { return *m_pItem; }
 
@@ -185,9 +188,6 @@ private:
 
     LV_ITEM_NATIVE *m_pItem;
     LV_ITEM_NATIVE m_item;
-
-    wxLV_ITEM(const wxLV_ITEM&) = delete;
-	wxLV_ITEM& operator=(const wxLV_ITEM&) = delete;
 };
 
 ///////////////////////////////////////////////////////

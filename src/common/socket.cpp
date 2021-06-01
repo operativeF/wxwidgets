@@ -191,12 +191,12 @@ public:
         m_socket->SetFlags(m_oldflags);
     }
 
+    wxSocketWaitModeChanger(const wxSocketWaitModeChanger&) = delete;
+	wxSocketWaitModeChanger& operator=(const wxSocketWaitModeChanger&) = delete;
+
 private:
     wxSocketBase * const m_socket;
     const int m_oldflags;
-
-    wxSocketWaitModeChanger(const wxSocketWaitModeChanger&) = delete;
-	wxSocketWaitModeChanger& operator=(const wxSocketWaitModeChanger&) = delete;
 };
 
 // wxSocketRead/WriteGuard are instantiated before starting reading
@@ -223,11 +223,11 @@ public:
             impl->ReenableEvents(wxSOCKET_INPUT_FLAG);
     }
 
-private:
-    wxSocketBase * const m_socket;
-
     wxSocketReadGuard(const wxSocketReadGuard&) = delete;
 	wxSocketReadGuard& operator=(const wxSocketReadGuard&) = delete;
+
+private:
+    wxSocketBase * const m_socket;
 };
 
 class wxSocketWriteGuard
@@ -250,11 +250,11 @@ public:
             impl->ReenableEvents(wxSOCKET_OUTPUT_FLAG);
     }
 
-private:
-    wxSocketBase * const m_socket;
-
     wxSocketWriteGuard(const wxSocketWriteGuard&) = delete;
 	wxSocketWriteGuard& operator=(const wxSocketWriteGuard&) = delete;
+
+private:
+    wxSocketBase * const m_socket;
 };
 
 // ============================================================================
@@ -808,10 +808,6 @@ void wxSocketBase::Shutdown()
         manager->OnExit();
     }
 }
-
-// --------------------------------------------------------------------------
-// Ctor and dtor
-// --------------------------------------------------------------------------
 
 void wxSocketBase::Init()
 {

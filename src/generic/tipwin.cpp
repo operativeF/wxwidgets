@@ -50,6 +50,9 @@ class WXDLLEXPORT wxTipWindowView : public wxWindow
 public:
     explicit wxTipWindowView(wxWindow *parent);
 
+    wxTipWindowView(const wxTipWindowView&) = delete;
+	wxTipWindowView& operator=(const wxTipWindowView&) = delete;
+
     // event handlers
     void OnPaint(wxPaintEvent& event);
     void OnMouseClick(wxMouseEvent& event);
@@ -66,8 +69,6 @@ private:
 
 
     wxDECLARE_EVENT_TABLE();
-    wxTipWindowView(const wxTipWindowView&) = delete;
-	wxTipWindowView& operator=(const wxTipWindowView&) = delete;
 };
 
 // ============================================================================

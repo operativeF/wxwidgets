@@ -78,13 +78,13 @@ public:
 
     explicit wxTreeRenameTimer( wxGenericTreeCtrl *owner );
 
+    wxTreeRenameTimer(const wxTreeRenameTimer&) = delete;
+	wxTreeRenameTimer& operator=(const wxTreeRenameTimer&) = delete;
+
     void Notify() override;
 
 private:
     wxGenericTreeCtrl *m_owner;
-
-    wxTreeRenameTimer(const wxTreeRenameTimer&) = delete;
-	wxTreeRenameTimer& operator=(const wxTreeRenameTimer&) = delete;
 };
 
 // control used for in-place edit
@@ -92,6 +92,9 @@ class WXDLLEXPORT wxTreeTextCtrl: public wxTextCtrl
 {
 public:
     wxTreeTextCtrl(wxGenericTreeCtrl *owner, wxGenericTreeItem *item);
+
+    wxTreeTextCtrl(const wxTreeTextCtrl&) = delete;
+	wxTreeTextCtrl& operator=(const wxTreeTextCtrl&) = delete;
 
     void EndEdit( bool discardChanges );
 
@@ -112,8 +115,6 @@ private:
     bool                m_aboutToFinish;
 
     wxDECLARE_EVENT_TABLE();
-    wxTreeTextCtrl(const wxTreeTextCtrl&) = delete;
-	wxTreeTextCtrl& operator=(const wxTreeTextCtrl&) = delete;
 };
 
 // timer used to clear wxGenericTreeCtrl::m_findPrefix if no key was pressed
@@ -126,20 +127,19 @@ public:
 
     explicit wxTreeFindTimer( wxGenericTreeCtrl *owner ) { m_owner = owner; }
 
+    wxTreeFindTimer(const wxTreeFindTimer&) = delete;
+	wxTreeFindTimer& operator=(const wxTreeFindTimer&) = delete;
+
     void Notify() override { m_owner->ResetFindState(); }
 
 private:
     wxGenericTreeCtrl *m_owner;
-
-    wxTreeFindTimer(const wxTreeFindTimer&) = delete;
-	wxTreeFindTimer& operator=(const wxTreeFindTimer&) = delete;
 };
 
 // a tree item
 class WXDLLEXPORT wxGenericTreeItem
 {
 public:
-    // ctors & dtor
     wxGenericTreeItem()
     {
         m_data = nullptr;
@@ -154,6 +154,9 @@ public:
                        wxTreeItemData *data );
 
     ~wxGenericTreeItem();
+
+    wxGenericTreeItem(const wxGenericTreeItem&) = delete;
+	wxGenericTreeItem& operator=(const wxGenericTreeItem&) = delete;
 
     // trivial accessors
     wxArrayGenericTreeItems& GetChildren() { return m_children; }
@@ -353,9 +356,6 @@ private:
                                    // children but has a [+] button
     unsigned int        m_isBold; // render the label in bold font
     unsigned int        m_ownsAttr; // delete attribute when done
-
-    wxGenericTreeItem(const wxGenericTreeItem&) = delete;
-	wxGenericTreeItem& operator=(const wxGenericTreeItem&) = delete;
 };
 
 // =============================================================================

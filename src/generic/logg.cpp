@@ -98,6 +98,9 @@ public:
                 long style);
     ~wxLogDialog() override;
 
+    wxLogDialog(const wxLogDialog&) = delete;
+	wxLogDialog& operator=(const wxLogDialog&) = delete;
+
     // event handlers
     void OnOk(wxCommandEvent& event);
 #if wxUSE_CLIPBOARD
@@ -149,8 +152,6 @@ private:
     static size_t ms_maxLength;
 
     wxDECLARE_EVENT_TABLE();
-    wxLogDialog(const wxLogDialog&) = delete;
-	wxLogDialog& operator=(const wxLogDialog&) = delete;
 };
 
 wxBEGIN_EVENT_TABLE(wxLogDialog, wxDialog)
@@ -435,9 +436,11 @@ void wxLogGui::DoLogRecord(wxLogLevel level,
 class wxLogFrame : public wxFrame
 {
 public:
-    // ctor & dtor
     wxLogFrame(wxWindow *pParent, wxLogWindow *log, const wxString& szTitle);
     ~wxLogFrame() override;
+
+    wxLogFrame(const wxLogFrame&) = delete;
+	wxLogFrame& operator=(const wxLogFrame&) = delete;
 
     // Don't prevent the application from exiting if just this frame remains.
     bool ShouldPreventAppExit() const override { return false; }
@@ -472,8 +475,6 @@ private:
     wxLogWindow *m_log;
 
     wxDECLARE_EVENT_TABLE();
-    wxLogFrame(const wxLogFrame&) = delete;
-	wxLogFrame& operator=(const wxLogFrame&) = delete;
 };
 
 wxBEGIN_EVENT_TABLE(wxLogFrame, wxFrame)

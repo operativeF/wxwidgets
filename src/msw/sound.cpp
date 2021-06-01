@@ -56,6 +56,9 @@ public:
     // we copy the data
     wxSoundDataMemory(size_t size, const void* buf);
 
+    wxSoundDataMemory(const wxSoundDataMemory&) = delete;
+	wxSoundDataMemory& operator=(const wxSoundDataMemory&) = delete;
+
     void *GetPtr() const { return m_waveDataPtr; }
 
     bool IsOk() const override { return GetPtr() != nullptr; }
@@ -65,9 +68,6 @@ public:
 private:
     GlobalPtr m_waveData;
     GlobalPtrLock m_waveDataPtr;
-
-    wxSoundDataMemory(const wxSoundDataMemory&) = delete;
-	wxSoundDataMemory& operator=(const wxSoundDataMemory&) = delete;
 };
 
 // class for sound files and resources
@@ -75,6 +75,9 @@ class wxSoundDataFile : public wxSoundData
 {
 public:
     wxSoundDataFile(const wxString& filename, bool isResource);
+
+    wxSoundDataFile(const wxSoundDataFile&) = delete;
+	wxSoundDataFile& operator=(const wxSoundDataFile&) = delete;
 
     bool IsOk() const override { return !m_name.empty(); }
     DWORD GetSoundFlag() const override
@@ -86,9 +89,6 @@ public:
 private:
     const wxString m_name;
     const bool m_isResource;
-
-    wxSoundDataFile(const wxSoundDataFile&) = delete;
-	wxSoundDataFile& operator=(const wxSoundDataFile&) = delete;
 };
 
 // ============================================================================

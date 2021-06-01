@@ -242,6 +242,9 @@ public:
         UpdateImageInfo();
     }
 
+    wxXPButtonImageData(const wxXPButtonImageData&) = delete;
+	wxXPButtonImageData& operator=(const wxXPButtonImageData&) = delete;
+
     wxBitmap GetBitmap(wxAnyButton::State which) const override
     {
         return m_iml.GetBitmap(which);
@@ -345,9 +348,6 @@ private:
     // the button we're associated with
     const HWND m_hwndBtn;
 
-
-    wxXPButtonImageData(const wxXPButtonImageData&) = delete;
-	wxXPButtonImageData& operator=(const wxXPButtonImageData&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxXPButtonImageData);
 };
 

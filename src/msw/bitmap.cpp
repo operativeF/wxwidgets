@@ -68,6 +68,8 @@ public:
     wxBitmapRefData(const wxBitmapRefData& data);
     ~wxBitmapRefData() override { Free(); }
 
+    wxBitmapRefData& operator=(const wxBitmapRefData&) = delete;
+
     void Free() override;
 
 #if wxUSE_WXDIB
@@ -143,10 +145,6 @@ private:
 
     // optional mask for transparent drawing
     wxMask       *m_bitmapMask{nullptr};
-
-
-    // not implemented
-    wxBitmapRefData& operator=(const wxBitmapRefData&) = delete;
 };
 
 // ----------------------------------------------------------------------------

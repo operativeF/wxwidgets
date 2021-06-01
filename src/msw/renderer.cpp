@@ -201,6 +201,9 @@ class wxRendererXP : public wxRendererMSWBase
 public:
     wxRendererXP() : wxRendererMSWBase(wxRendererMSW::Get()) { }
 
+    wxRendererXP(const wxRendererXP&) = delete;
+	wxRendererXP& operator=(const wxRendererXP&) = delete;
+
     static wxRendererNative& Get();
 
     int DrawHeaderButton(wxWindow *win,
@@ -332,9 +335,6 @@ private:
                          wxDC& dc,
                          const wxRect& rect,
                          int flags);
-
-    wxRendererXP(const wxRendererXP&) = delete;
-	wxRendererXP& operator=(const wxRendererXP&) = delete;
 };
 
 #endif // wxUSE_UXTHEME

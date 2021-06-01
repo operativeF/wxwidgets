@@ -59,13 +59,13 @@ class WXDLLIMPEXP_ADV wxFileTipProvider : public wxTipProvider
 public:
     wxFileTipProvider(const wxString& filename, size_t currentTip);
 
+    wxFileTipProvider(const wxFileTipProvider&) = delete;
+	wxFileTipProvider& operator=(const wxFileTipProvider&) = delete;
+
     wxString GetTip() override;
 
 private:
     wxTextFile m_textfile;
-
-    wxFileTipProvider(const wxFileTipProvider&) = delete;
-	wxFileTipProvider& operator=(const wxFileTipProvider&) = delete;
 };
 #endif // wxUSE_TEXTFILE
 
@@ -95,6 +95,9 @@ public:
                 wxTipProvider *tipProvider,
                 bool showAtStartup);
 
+    wxTipDialog(const wxTipDialog&) = delete;
+	wxTipDialog& operator=(const wxTipDialog&) = delete;
+
     // the tip dialog has "Show tips on startup" checkbox - return true if it
     // was checked (or wasn't unchecked)
     bool ShowTipsOnStartup() const { return m_checkbox->GetValue(); }
@@ -112,8 +115,6 @@ private:
     wxCheckBox *m_checkbox;
 
     wxDECLARE_EVENT_TABLE();
-    wxTipDialog(const wxTipDialog&) = delete;
-	wxTipDialog& operator=(const wxTipDialog&) = delete;
 };
 
 // ============================================================================

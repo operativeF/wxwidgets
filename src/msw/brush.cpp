@@ -43,6 +43,10 @@ public:
     wxBrushRefData(const wxBrushRefData& data);
     ~wxBrushRefData() override;
 
+    // no assignment operator, the objects of this class are shared and never
+    // assigned after being created once
+    wxBrushRefData& operator=(const wxBrushRefData&) = delete;
+
     bool operator==(const wxBrushRefData& data) const;
 
     HBRUSH GetHBRUSH();
@@ -63,10 +67,6 @@ private:
     wxBitmap      m_stipple;
     wxColour      m_colour;
     HBRUSH        m_hBrush{nullptr};
-
-    // no assignment operator, the objects of this class are shared and never
-    // assigned after being created once
-    wxBrushRefData& operator=(const wxBrushRefData&) = delete;
 };
 
 #define M_BRUSHDATA ((wxBrushRefData *)m_refData)

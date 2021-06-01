@@ -358,6 +358,9 @@ public:
         }
     }
 
+    wxConsoleStderr(const wxConsoleStderr&) = delete;
+	wxConsoleStderr& operator=(const wxConsoleStderr&) = delete;
+
     // return true if we were successfully initialized and there had been no
     // console activity which would interfere with our output since then
     bool IsOkToUse() const
@@ -411,9 +414,6 @@ private:
 
     GetConsoleCommandHistory_t m_pfnGetConsoleCommandHistory;
     GetConsoleCommandHistoryLength_t m_pfnGetConsoleCommandHistoryLength;
-
-    wxConsoleStderr(const wxConsoleStderr&) = delete;
-	wxConsoleStderr& operator=(const wxConsoleStderr&) = delete;
 };
 
 bool wxConsoleStderr::DoInit()

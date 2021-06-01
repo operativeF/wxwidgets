@@ -201,6 +201,9 @@ public:
         m_currentPage = -1;
     }
 
+    wxModalPreferencesEditorImpl(const wxModalPreferencesEditorImpl&) = delete;
+	wxModalPreferencesEditorImpl& operator=(const wxModalPreferencesEditorImpl&) = delete;
+
     void Show(wxWindow* parent) override
     {
         wxScopedPtr<wxGenericPrefsDialog> dlg(CreateDialog(parent));
@@ -231,9 +234,6 @@ public:
 private:
     wxGenericPrefsDialog* m_dlg;
     int m_currentPage;
-
-    wxModalPreferencesEditorImpl(const wxModalPreferencesEditorImpl&) = delete;
-	wxModalPreferencesEditorImpl& operator=(const wxModalPreferencesEditorImpl&) = delete;
 };
 
 inline

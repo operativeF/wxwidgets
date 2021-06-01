@@ -56,6 +56,9 @@ public:
 
     ~wxNotificationMessageWindow() override;
 
+    wxNotificationMessageWindow(const wxNotificationMessageWindow&) = delete;
+	wxNotificationMessageWindow& operator=(const wxNotificationMessageWindow&) = delete;
+
     void Set(int timeout);
 
     bool Hide();
@@ -107,8 +110,6 @@ private:
     static void ResizeAndFitVisibleNotifications();
 
     wxDECLARE_EVENT_TABLE();
-    wxNotificationMessageWindow(const wxNotificationMessageWindow&) = delete;
-	wxNotificationMessageWindow& operator=(const wxNotificationMessageWindow&) = delete;
 };
 
 int wxNotificationMessageWindow::ms_presentationDirection = 0;

@@ -298,6 +298,9 @@ public:
     {
     }
 
+    wxDataViewHeaderWindow(const wxDataViewHeaderWindow&) = delete;
+	wxDataViewHeaderWindow& operator=(const wxDataViewHeaderWindow&) = delete;
+
     wxDataViewCtrl *GetOwner() const
         { return static_cast<wxDataViewCtrl *>(GetParent()); }
 
@@ -442,8 +445,6 @@ private:
     }
 
     wxDECLARE_EVENT_TABLE();
-    wxDataViewHeaderWindow(const wxDataViewHeaderWindow&) = delete;
-	wxDataViewHeaderWindow& operator=(const wxDataViewHeaderWindow&) = delete;
 };
 
 wxBEGIN_EVENT_TABLE(wxDataViewHeaderWindow, wxHeaderCtrl)

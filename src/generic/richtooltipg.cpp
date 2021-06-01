@@ -162,6 +162,9 @@ public:
         Layout();
     }
 
+    wxRichToolTipPopup(const wxRichToolTipPopup&) = delete;
+	wxRichToolTipPopup& operator=(const wxRichToolTipPopup&) = delete;
+
     void SetBackgroundColours(wxColour colStart, wxColour colEnd)
     {
         if ( !colStart.IsOk() )
@@ -597,9 +600,6 @@ private:
 
     // If true, delay showing the tooltip.
     bool m_delayShow;
-
-    wxRichToolTipPopup(const wxRichToolTipPopup&) = delete;
-	wxRichToolTipPopup& operator=(const wxRichToolTipPopup&) = delete;
 };
 
 // ----------------------------------------------------------------------------

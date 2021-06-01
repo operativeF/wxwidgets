@@ -96,6 +96,9 @@ public:
 
     ~wxListCtrl() override;
 
+    wxListCtrl(const wxListCtrl&) = delete;
+	wxListCtrl& operator=(const wxListCtrl&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
@@ -455,8 +458,6 @@ private:
 
     wxDECLARE_DYNAMIC_CLASS(wxListCtrl);
     wxDECLARE_EVENT_TABLE();
-    wxListCtrl(const wxListCtrl&) = delete;
-	wxListCtrl& operator=(const wxListCtrl&) = delete;
 };
 
 #endif // _WX_LISTCTRL_H_

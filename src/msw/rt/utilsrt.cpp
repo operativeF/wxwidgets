@@ -57,6 +57,9 @@ namespace wxWinRT
 class RTCore
 {
 public:
+    RTCore(const RTCore&) = delete;
+	RTCore& operator=(const RTCore&) = delete;
+    
     static RTCore& Get()
     {
         if ( ms_isAvailable == -1 )
@@ -141,17 +144,13 @@ public:
     }
 
 private:
-    RTCore()
-    = default;
+    RTCore() = default;
 
     wxDynamicLibrary m_dllCore;
     wxDynamicLibrary m_dllString;
 
     static RTCore ms_rtcore;
     static int ms_isAvailable;
-
-    RTCore(const RTCore&) = delete;
-	RTCore& operator=(const RTCore&) = delete;
 };
 
 RTCore RTCore::ms_rtcore;
