@@ -41,27 +41,22 @@ using namespace wxMSWMessageDialog;
 // Constants
 // ----------------------------------------------------------------------------
 
-namespace
-{
-
 // Notification values of wxProgressDialogSharedData::m_notifications
-const int wxSPDD_VALUE_CHANGED     = 0x0001;
-const int wxSPDD_RANGE_CHANGED     = 0x0002;
-const int wxSPDD_PBMARQUEE_CHANGED = 0x0004;
-const int wxSPDD_TITLE_CHANGED     = 0x0008;
-const int wxSPDD_MESSAGE_CHANGED   = 0x0010;
-const int wxSPDD_EXPINFO_CHANGED   = 0x0020;
-const int wxSPDD_ENABLE_SKIP       = 0x0040;
-const int wxSPDD_ENABLE_ABORT      = 0x0080;
-const int wxSPDD_DISABLE_SKIP      = 0x0100;
-const int wxSPDD_FINISHED          = 0x0400;
-const int wxSPDD_DESTROYED         = 0x0800;
-const int wxSPDD_ICON_CHANGED      = 0x1000;
-const int wxSPDD_WINDOW_MOVED      = 0x2000;
+static constexpr int wxSPDD_VALUE_CHANGED     = 0x0001;
+static constexpr int wxSPDD_RANGE_CHANGED     = 0x0002;
+static constexpr int wxSPDD_PBMARQUEE_CHANGED = 0x0004;
+static constexpr int wxSPDD_TITLE_CHANGED     = 0x0008;
+static constexpr int wxSPDD_MESSAGE_CHANGED   = 0x0010;
+static constexpr int wxSPDD_EXPINFO_CHANGED   = 0x0020;
+static constexpr int wxSPDD_ENABLE_SKIP       = 0x0040;
+static constexpr int wxSPDD_ENABLE_ABORT      = 0x0080;
+static constexpr int wxSPDD_DISABLE_SKIP      = 0x0100;
+static constexpr int wxSPDD_FINISHED          = 0x0400;
+static constexpr int wxSPDD_DESTROYED         = 0x0800;
+static constexpr int wxSPDD_ICON_CHANGED      = 0x1000;
+static constexpr int wxSPDD_WINDOW_MOVED      = 0x2000;
 
-const int Id_SkipBtn = wxID_HIGHEST + 1;
-
-} // anonymous namespace
+static constexpr int Id_SkipBtn = wxID_HIGHEST + 1;
 
 // ============================================================================
 // Helper classes
@@ -71,23 +66,14 @@ const int Id_SkipBtn = wxID_HIGHEST + 1;
 class wxProgressDialogSharedData
 {
 public:
-    wxProgressDialogSharedData()
-    {
-        m_hwnd = nullptr;
-        m_value = 0;
-        m_progressBarMarquee = false;
-        m_skipped = false;
-        m_msgChangeElementText = TDM_UPDATE_ELEMENT_TEXT;
-        m_notifications = 0;
-        m_parent = nullptr;
-    }
+    wxProgressDialogSharedData() = default;
 
     wxCriticalSection m_cs;
 
-    wxWindow *m_parent;     // Parent window only used to center us over it.
-    HWND m_hwnd;            // Task dialog handler
+    wxWindow *m_parent{nullptr};     // Parent window only used to center us over it.
+    HWND m_hwnd{nullptr};            // Task dialog handler
     long m_style;           // wxProgressDialog style
-    int m_value;
+    int m_value{0};
     int m_range;
     wxString m_title;
     wxString m_message;
@@ -99,8 +85,8 @@ public:
     wxPoint m_winPosition;
 
     wxProgressDialog::State m_state;
-    bool m_progressBarMarquee;
-    bool m_skipped;
+    bool m_progressBarMarquee{false};
+    bool m_skipped{false};
 
     // The task dialog message to use for changing the text of its elements:
     // it is set to TDM_SET_ELEMENT_TEXT by Fit() to let the dialog adjust
@@ -108,11 +94,11 @@ public:
     // TDM_UPDATE_ELEMENT_TEXT is used in order to prevent the dialog from
     // performing a layout on each update, which is annoying as it can result
     // in its size constantly changing.
-    int m_msgChangeElementText;
+    int m_msgChangeElementText{TDM_UPDATE_ELEMENT_TEXT};
 
     // Bit field that indicates fields that have been modified by the
     // main thread so the task dialog runner knows what to update.
-    int m_notifications;
+    int m_notifications{0};
 
 
     // Helper function to split a single message, passed via our public API,
@@ -183,6 +169,9 @@ public:
     {
     }
 
+    wxProgressDialogModalLoop(const wxProgressDialogModalLoop&) = delete;
+	wxProgressDialogModalLoop& operator=(const wxProgressDialogModalLoop&) = delete;
+
 protected:
     void OnNextIteration() override
     {
@@ -193,9 +182,6 @@ protected:
     }
 
     wxProgressDialogSharedData& m_data;
-
-    wxProgressDialogModalLoop(const wxProgressDialogModalLoop&) = delete;
-	wxProgressDialogModalLoop& operator=(const wxProgressDialogModalLoop&) = delete;
 };
 
 // ============================================================================
