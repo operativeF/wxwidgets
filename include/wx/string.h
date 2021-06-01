@@ -106,18 +106,6 @@ namespace wxPrivate
 // Shorthand for instantiating ASCII strings
 #define wxASCII_STR(s) wxString::FromAscii(s)
 
-// These macros are not used by wxWidgets itself any longer and are only
-// preserved for compatibility with the user code that might be still using
-// them. Do _not_ use them in the new code, just use const_cast<> instead.
-#define   WXSTRINGCAST (wxChar *)(const wxChar *)
-#define   wxCSTRINGCAST (wxChar *)(const wxChar *)
-#define   wxMBSTRINGCAST (char *)(const char *)
-#define   wxWCSTRINGCAST (wchar_t *)(const wchar_t *)
-
-// ----------------------------------------------------------------------------
-// constants
-// ----------------------------------------------------------------------------
-
 // ----------------------------------------------------------------------------
 // wxCStrData
 // ----------------------------------------------------------------------------
