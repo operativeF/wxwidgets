@@ -31,7 +31,7 @@ class WXDLLIMPEXP_FWD_CORE wxImageArray; // anidecod.h
 class WXDLLIMPEXP_CORE wxGIFHandler : public wxImageHandler
 {
 public:
-    inline wxGIFHandler()
+    wxGIFHandler()
     {
         m_name = wxT("GIF file");
         m_extension = wxT("gif");

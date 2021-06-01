@@ -20,7 +20,7 @@
 class WXDLLIMPEXP_CORE wxPCXHandler : public wxImageHandler
 {
 public:
-    inline wxPCXHandler()
+    wxPCXHandler()
     {
         m_name = wxT("PCX file");
         m_extension = wxT("pcx");

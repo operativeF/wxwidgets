@@ -20,7 +20,7 @@
 class WXDLLIMPEXP_CORE wxXPMHandler : public wxImageHandler
 {
 public:
-    inline wxXPMHandler()
+    wxXPMHandler()
     {
         m_name = wxT("XPM file");
         m_extension = wxT("xpm");

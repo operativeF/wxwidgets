@@ -23,7 +23,7 @@
 class WXDLLIMPEXP_CORE wxJPEGHandler: public wxImageHandler
 {
 public:
-    inline wxJPEGHandler()
+    wxJPEGHandler()
     {
         m_name = wxT("JPEG file");
         m_extension = wxT("jpg");

@@ -39,7 +39,7 @@ enum
 class WXDLLIMPEXP_CORE wxPNGHandler: public wxImageHandler
 {
 public:
-    inline wxPNGHandler()
+    wxPNGHandler()
     {
         m_name = wxT("PNG file");
         m_extension = wxT("png");

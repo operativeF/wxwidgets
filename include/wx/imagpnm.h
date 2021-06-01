@@ -19,7 +19,7 @@
 class WXDLLIMPEXP_CORE wxPNMHandler : public wxImageHandler
 {
 public:
-    inline wxPNMHandler()
+    wxPNMHandler()
     {
         m_name = wxT("PNM file");
         m_extension = wxT("pnm");
