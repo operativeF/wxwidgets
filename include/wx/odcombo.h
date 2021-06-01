@@ -238,7 +238,7 @@ class WXDLLIMPEXP_ADV wxOwnerDrawnComboBox :
     friend class wxVListBoxComboPopup;
 public:
 
-    // ctors and such
+    
     wxOwnerDrawnComboBox() = default;
 
     wxOwnerDrawnComboBox(wxWindow *parent,

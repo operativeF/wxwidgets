@@ -65,7 +65,7 @@ public:
 
     virtual ~wxGenericMDIParentFrame();
 
-    // implement base class pure virtuals
+    
     static bool IsTDI() { return true; }
 
     virtual void ActivateNext() { AdvanceActive(true); }

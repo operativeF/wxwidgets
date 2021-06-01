@@ -26,7 +26,7 @@ class WXDLLIMPEXP_ADV wxBitmapComboBox : public wxOwnerDrawnComboBox,
 {
 public:
 
-    // ctors and such
+    
     wxBitmapComboBox() : wxOwnerDrawnComboBox(), wxBitmapComboBoxBase()
     {
         Init();

@@ -141,7 +141,7 @@ public:
     virtual wxEnhMetaFile GetMetafile() const
         { return m_metafile; }
 
-    // implement base class pure virtuals
+    
     wxDataFormat GetPreferredFormat(Direction dir) const override;
     size_t GetFormatCount(Direction dir) const override;
     void GetAllFormats(wxDataFormat *formats, Direction dir) const override;
@@ -180,7 +180,7 @@ public:
     virtual wxEnhMetaFile GetEnhMetafile() const
         { return m_metafile; }
 
-    // implement base class pure virtuals
+    
     size_t GetDataSize() const override;
     bool GetDataHere(void *buf) const override;
     bool SetData(size_t len, const void *buf) override;

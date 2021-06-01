@@ -111,7 +111,7 @@ public:
 
     virtual void PrepareDC(wxDC& dc) { DoPrepareDC(dc); }
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
 
     virtual void ChangeValue(const wxString &value);

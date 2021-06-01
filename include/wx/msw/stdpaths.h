@@ -20,7 +20,7 @@ struct _GUID;
 class WXDLLIMPEXP_BASE wxStandardPaths : public wxStandardPathsBase
 {
 public:
-    // implement base class pure virtuals
+    
     wxString GetExecutablePath() const override;
     wxString GetConfigDir() const override;
     wxString GetUserConfigDir() const override;

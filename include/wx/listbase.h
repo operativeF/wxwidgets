@@ -171,7 +171,7 @@ using wxListItemAttr = wxItemAttr;
 class WXDLLIMPEXP_CORE wxListItem : public wxObject
 {
 public:
-    wxListItem() { Init(); m_attr = nullptr; }
+    wxListItem() = default;
     wxListItem(const wxListItem& item)
         : 
           m_mask(item.m_mask),
@@ -278,18 +278,18 @@ public:
 
     // these members are public for compatibility
 
-    long            m_mask;     // Indicates what fields are valid
-    long            m_itemId;   // The zero-based item position
-    int             m_col;      // Zero-based column, if in report mode
-    long            m_state;    // The state of the item
-    long            m_stateMask;// Which flags of m_state are valid (uses same flags)
+    long            m_mask{0};     // Indicates what fields are valid
+    long            m_itemId{-1};   // The zero-based item position
+    int             m_col{0};      // Zero-based column, if in report mode
+    long            m_state{0};    // The state of the item
+    long            m_stateMask{0};// Which flags of m_state are valid (uses same flags)
     wxString        m_text;     // The label/header text
-    int             m_image;    // The zero-based index into an image list
-    wxUIntPtr       m_data;     // App-defined data
+    int             m_image{-1};    // The zero-based index into an image list
+    wxUIntPtr       m_data{0};     // App-defined data
 
     // For columns only
-    int             m_format;   // left, right, centre
-    int             m_width;    // width of column
+    int             m_format{wxLIST_FORMAT_CENTRE};   // left, right, centre
+    int             m_width{0};    // width of column
 
 protected:
     // creates m_attr if we don't have it yet
@@ -315,7 +315,7 @@ protected:
         m_width = 0;
     }
 
-    wxItemAttr *m_attr;     // optional pointer to the items style
+    wxItemAttr *m_attr{nullptr};     // optional pointer to the items style
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxListItem);

@@ -54,7 +54,7 @@ public:
 
     virtual ~wxNonOwnedWindow();
 
-    // implement base class pure virtuals
+    
     virtual bool Show(bool show = true);
 
     virtual void Update();

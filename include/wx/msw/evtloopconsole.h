@@ -17,7 +17,7 @@ public:
     wxMSWEventLoopBase();
     ~wxMSWEventLoopBase() override;
 
-    // implement base class pure virtuals
+    
     bool Pending() const override;
     void WakeUp() override;
 

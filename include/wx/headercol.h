@@ -241,7 +241,7 @@ public:
     
     }
 
-    // implement base class pure virtuals
+    
     void SetTitle(const wxString& title) override { m_title = title; }
     wxString GetTitle() const override { return m_title; }
 

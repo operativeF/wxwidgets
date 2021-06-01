@@ -72,7 +72,7 @@ public:
     long GetInsertionPoint() const override;
     wxTextPos GetLastPosition() const override;
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
 
     bool IsModified() const override;

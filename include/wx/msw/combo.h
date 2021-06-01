@@ -35,7 +35,7 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxComboBoxNameStr[];
 class WXDLLIMPEXP_CORE wxComboCtrl : public wxComboCtrlBase
 {
 public:
-    // ctors and such
+    
     wxComboCtrl()  = default;
 
     wxComboCtrl(wxWindow *parent,

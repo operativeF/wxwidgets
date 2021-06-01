@@ -38,7 +38,7 @@ class WXDLLIMPEXP_FWD_CORE wxListWidgetCellValue;
 class WXDLLIMPEXP_CORE wxListBox : public wxListBoxBase
 {
 public:
-    // ctors and such
+    
     wxListBox();
 
     wxListBox(
@@ -90,7 +90,7 @@ public:
 
     virtual ~wxListBox();
 
-    // implement base class pure virtuals
+    
     unsigned int GetCount() const override;
     wxString GetString(unsigned int n) const override;
     void SetString(unsigned int n, const wxString& s) override;

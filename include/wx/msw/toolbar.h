@@ -108,7 +108,7 @@ protected:
     // recreate the control completely
     void Recreate();
 
-    // implement base class pure virtuals
+    
     bool DoInsertTool(size_t pos, wxToolBarToolBase *tool) override;
     bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool) override;
 

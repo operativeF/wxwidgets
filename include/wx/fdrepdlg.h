@@ -93,7 +93,7 @@ private:
 class WXDLLIMPEXP_CORE wxFindReplaceDialogBase : public wxDialog
 {
 public:
-    // ctors and such
+    
     wxFindReplaceDialogBase() { m_FindReplaceData = nullptr; }
     wxFindReplaceDialogBase(wxWindow * WXUNUSED(parent),
                             wxFindReplaceData *data,
@@ -140,8 +140,9 @@ class WXDLLIMPEXP_CORE wxFindDialogEvent : public wxCommandEvent
 public:
     wxFindDialogEvent(wxEventType commandType = wxEVT_NULL, int id = 0)
         : wxCommandEvent(commandType, id) { }
-    wxFindDialogEvent(const wxFindDialogEvent& event)
-         = default;
+    wxFindDialogEvent(const wxFindDialogEvent& event) = default;
+
+	wxFindDialogEvent& operator=(const wxFindDialogEvent&) = delete;
 
     int GetFlags() const { return GetInt(); }
     wxString GetFindString() const { return GetString(); }
@@ -160,8 +161,7 @@ public:
 private:
     wxString m_strReplace;
 
-    public:
-	wxFindDialogEvent& operator=(const wxFindDialogEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

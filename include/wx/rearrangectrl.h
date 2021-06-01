@@ -42,7 +42,7 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxRearrangeDialogNameStr[];
 class WXDLLIMPEXP_CORE wxRearrangeList : public wxCheckListBox
 {
 public:
-    // ctors and such
+    
     // --------------
 
     // default ctor, call Create() later

@@ -100,7 +100,7 @@ public:
 
     virtual ~wxTextCtrl();
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
 
     int GetLineLength(wxTextCoord lineNo) const override;

@@ -150,7 +150,7 @@ public:
     virtual wxMetafile GetMetafile() const
         { return m_metafile; }
 
-    // implement base class pure virtuals
+    
     size_t GetDataSize() const override;
     bool GetDataHere(void *buf) const override;
     bool SetData(size_t len, const void *buf) override;

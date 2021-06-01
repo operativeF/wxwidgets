@@ -37,7 +37,7 @@ class WXDLLIMPEXP_CORE wxComboBox :
     public wxWindowWithItems<wxComboCtrl, wxItemContainer>
 {
 public:
-    // ctors and such
+    
     wxComboBox() { Init(); }
 
     wxComboBox(wxWindow *parent,

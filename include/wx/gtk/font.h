@@ -63,7 +63,7 @@ public:
 
     virtual ~wxFont();
 
-    // implement base class pure virtuals
+    
     double GetFractionalPointSize() const override;
     wxFontStyle GetStyle() const override;
     int GetNumericWeight() const override;

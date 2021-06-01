@@ -22,7 +22,7 @@ class WXDLLIMPEXP_FWD_BASE wxSortedArrayString;
 class WXDLLIMPEXP_CORE wxListBox : public wxListBoxBase
 {
 public:
-    // ctors and such
+    
     wxListBox();
     wxListBox( wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
@@ -67,7 +67,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
-    // implement base class pure virtuals
+    
     virtual void DoClear();
     virtual void DoDeleteOneItem(unsigned int n);
 

@@ -69,7 +69,7 @@ public:
 
     ~wxGCDCImpl() override;
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
 
     void Clear() override;

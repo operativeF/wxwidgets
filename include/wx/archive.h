@@ -61,7 +61,7 @@ public:
     virtual void UnsetNotifier() { m_notifier = nullptr; }
 
 protected:
-    wxArchiveEntry()  = default;
+    wxArchiveEntry() = default;
     wxArchiveEntry(const wxArchiveEntry& e) : wxObject(e), m_notifier(nullptr) { }
 
     virtual void SetOffset(wxFileOffset offset) = 0;

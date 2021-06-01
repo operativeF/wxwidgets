@@ -154,7 +154,7 @@ class WXDLLIMPEXP_CORE wxComboCtrlBase : public wxControl,
     friend class wxComboPopup;
     friend class wxComboPopupEvtHandler;
 public:
-    // ctors and such
+    
     wxComboCtrlBase()  { 
     m_winPopup = nullptr;
     m_popup = nullptr;

@@ -56,7 +56,7 @@ protected:
     // common part of all ctors
     void Init();
 
-    // implement base class pure virtuals
+    
     bool DoInsertTool(size_t pos, wxToolBarToolBase *tool) override;
     bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool) override;
 

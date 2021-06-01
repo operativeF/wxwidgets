@@ -39,13 +39,8 @@ union wxAnyValueBuffer
         void ( wxAnyValueBuffer::*m_mFuncPtr )();
     } m_alignment;
 
-    void*   m_ptr;
+    void*   m_ptr{nullptr};
     wxByte  m_buffer[WX_ANY_VALUE_BUFFER_SIZE];
-
-    wxAnyValueBuffer()
-    {
-        m_ptr = nullptr;
-    }
 };
 
 //
@@ -60,8 +55,7 @@ public:
     /**
         Default constructor.
     */
-    wxAnyValueType()
-    = default;
+    wxAnyValueType() = default;
 
     /**
         Destructor.

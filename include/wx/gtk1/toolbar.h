@@ -73,7 +73,7 @@ protected:
     // set the GTK toolbar style and orientation
     void GtkSetStyle();
 
-    // implement base class pure virtuals
+    
     virtual bool DoInsertTool(size_t pos, wxToolBarToolBase *tool);
     virtual bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool);
 

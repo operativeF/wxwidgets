@@ -31,7 +31,7 @@ class WXDLLIMPEXP_FWD_CORE wxSpinButton;
 class WXDLLIMPEXP_CORE wxNotebook : public wxNotebookBase
 {
 public:
-    // ctors and such
+    
     // --------------
 
     wxNotebook() { Init(); }

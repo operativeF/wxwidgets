@@ -23,14 +23,7 @@
 class WXDLLIMPEXP_CORE wxNotificationMessageBase : public wxEvtHandler
 {
 public:
-    // ctors and initializers
-    // ----------------------
-
-    // default ctor, use setters below to initialize it later
-    wxNotificationMessageBase()
-    {
-        Init();
-    }
+    wxNotificationMessageBase() = default;
 
     // create a notification object with the given title and message (the
     // latter may be empty in which case only the title will be shown)
@@ -39,11 +32,13 @@ public:
                               wxWindow *parent = nullptr,
                               int flags = wxICON_INFORMATION)
     {
-        Init();
         Create(title, message, parent, flags);
     }
 
     ~wxNotificationMessageBase() override;
+
+    wxNotificationMessageBase(const wxNotificationMessageBase&) = delete;
+	wxNotificationMessageBase& operator=(const wxNotificationMessageBase&) = delete;
 
     // note that the setters must be called before Show()
 
@@ -105,17 +100,7 @@ protected:
         SetFlags(flags);
     }
 
-    class wxNotificationMessageImpl* m_impl;
-
-private:
-
-    void Init()
-    {
-        m_impl = nullptr;
-    }
-
-    wxNotificationMessageBase(const wxNotificationMessageBase&) = delete;
-	wxNotificationMessageBase& operator=(const wxNotificationMessageBase&) = delete;
+    class wxNotificationMessageImpl* m_impl{nullptr};
 };
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_NOTIFICATION_MESSAGE_CLICK, wxCommandEvent );
@@ -160,6 +145,9 @@ public:
         Create(title, message, parent, flags);
     }
 
+    wxNotificationMessage(const wxNotificationMessage&) = delete;
+	wxNotificationMessage& operator=(const wxNotificationMessage&) = delete;
+
 #if defined(__WXMSW__) && defined(wxHAS_NATIVE_NOTIFICATION_MESSAGE)
     static bool MSWUseToasts(
         const wxString& shortcutPath = wxString(),
@@ -173,9 +161,6 @@ public:
 private:
     // common part of all ctors
     void Init();
-
-    wxNotificationMessage(const wxNotificationMessage&) = delete;
-	wxNotificationMessage& operator=(const wxNotificationMessage&) = delete;
 };
 
 #endif // wxUSE_NOTIFICATION_MESSAGE

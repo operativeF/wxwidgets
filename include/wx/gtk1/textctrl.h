@@ -38,7 +38,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString &name = wxASCII_STR(wxTextCtrlNameStr));
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
 
     virtual int GetLineLength(long lineNo) const;

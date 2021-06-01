@@ -32,7 +32,7 @@ public:
     wxConsoleEventLoop();
     virtual ~wxConsoleEventLoop();
 
-    // implement base class pure virtuals
+    
     bool Pending() const override;
     bool Dispatch() override;
     int DispatchTimeout(unsigned long timeout) override;

@@ -30,7 +30,7 @@ public:
     // TODO this function is Motif-only for now - should it go into base class?
     void Clear(const wxRect& rect);
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
 
     virtual void Clear();

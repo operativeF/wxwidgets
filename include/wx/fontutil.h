@@ -220,7 +220,6 @@ public :
     wxFontEncoding encoding;
 #endif // platforms
 
-    // default ctor (default copy ctor is ok)
     wxNativeFontInfo() { Init(); }
 
 #if wxUSE_PANGO

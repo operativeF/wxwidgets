@@ -34,7 +34,7 @@ class WXDLLIMPEXP_FWD_CORE wxClipboard;
 class WXDLLIMPEXP_CORE wxClipboardBase : public wxObject
 {
 public:
-    wxClipboardBase() { m_usePrimary = false; }
+    wxClipboardBase() = default;
 
     // open the clipboard before Add/SetData() and GetData()
     virtual bool Open() = 0;
@@ -93,7 +93,7 @@ public:
 
     // don't use this directly, it is public for compatibility with some ports
     // (wxX11, wxMotif, ...) only
-    bool m_usePrimary;
+    bool m_usePrimary{false};
 };
 
 // ----------------------------------------------------------------------------

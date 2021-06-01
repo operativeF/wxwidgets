@@ -38,7 +38,7 @@ class WXDLLIMPEXP_CORE wxGenericComboCtrl
     : public wxNavigationEnabled<wxComboCtrlBase>
 {
 public:
-    // ctors and such
+    
     wxGenericComboCtrl() { Init(); }
 
     wxGenericComboCtrl(wxWindow *parent,

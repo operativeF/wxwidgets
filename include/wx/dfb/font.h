@@ -73,7 +73,7 @@ public:
                 wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
     bool Create(const wxNativeFontInfo& fontinfo);
 
-    // implement base class pure virtuals
+    
     virtual double GetFractionalPointSize() const;
     virtual wxFontStyle GetStyle() const;
     virtual int GetNumericWeight() const;

@@ -48,7 +48,7 @@ public:
     wxMSWDCImpl(wxDC *owner, WXHDC hDC);
     ~wxMSWDCImpl() override;
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
 
     void Clear() override;

@@ -50,7 +50,7 @@
 class WXDLLIMPEXP_CORE wxListBox : public wxListBoxBase, public wxScrollHelper
 {
 public:
-    // ctors and such
+    
     wxListBox() : wxScrollHelper(this) { Init(); }
     wxListBox(wxWindow *parent,
               wxWindowID id,

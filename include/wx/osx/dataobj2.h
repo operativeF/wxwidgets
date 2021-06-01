@@ -28,7 +28,7 @@ public:
     // override base class virtual to update PNG data too
     void SetBitmap(const wxBitmap& bitmap) override;
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
 
     size_t GetDataSize() const override;
@@ -62,7 +62,7 @@ protected :
 class WXDLLIMPEXP_CORE wxFileDataObject : public wxFileDataObjectBase
 {
 public:
-    // implement base class pure virtuals
+    
     // ----------------------------------
 
     void AddFile( const wxString &filename );

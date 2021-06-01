@@ -28,7 +28,7 @@ class WXDLLIMPEXP_FWD_CORE wxPalette;
 class WXDLLIMPEXP_CORE wxDIB
 {
 public:
-    // ctors and such
+    
     // --------------
 
     // create an uninitialized DIB with the given width, height and depth (only

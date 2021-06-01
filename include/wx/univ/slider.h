@@ -39,7 +39,7 @@ class WXDLLIMPEXP_CORE wxSlider : public wxSliderBase,
                              public wxControlWithThumb
 {
 public:
-    // ctors and such
+    
     wxSlider();
 
     wxSlider(wxWindow *parent,
@@ -60,7 +60,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxSliderNameStr));
 
-    // implement base class pure virtuals
+    
     int GetValue() const override;
     void SetValue(int value) override;
 

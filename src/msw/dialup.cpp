@@ -151,7 +151,7 @@ public:
     wxDialUpManagerMSW();
     ~wxDialUpManagerMSW() override;
 
-    // implement base class pure virtuals
+    
     bool IsOk() const override;
     size_t GetISPNames(wxArrayString& names) const override;
     bool Dial(const wxString& nameOfISP,

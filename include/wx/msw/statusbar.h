@@ -21,7 +21,7 @@ class WXDLLIMPEXP_FWD_CORE wxClientDC;
 class WXDLLIMPEXP_CORE wxStatusBar : public wxStatusBarBase
 {
 public:
-    // ctors and such
+    
     wxStatusBar();
     wxStatusBar(wxWindow *parent,
                 wxWindowID id = wxID_ANY,

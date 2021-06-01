@@ -74,7 +74,7 @@ public:
 
     virtual ~wxScrollBar();
 
-    // implement base class pure virtuals
+    
     int GetThumbPosition() const override;
     int GetThumbSize() const override;
     int GetPageSize() const override;

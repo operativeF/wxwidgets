@@ -53,7 +53,7 @@ public:
 
     void SendSizeEvent(int flags = 0) override;
 
-    // implement base class pure virtuals
+    
     void SetLabel( const wxString& label ) override;
     wxString GetLabel() const override;
 

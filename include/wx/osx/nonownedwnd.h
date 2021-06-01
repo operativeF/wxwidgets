@@ -65,7 +65,7 @@ public:
 
     wxPoint GetClientAreaOrigin() const override;
 
-    // implement base class pure virtuals
+    
 
     bool SetTransparent(wxByte alpha) override;
     bool CanSetTransparent() override;

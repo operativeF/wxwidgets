@@ -34,7 +34,7 @@ enum wxOSXSystemFont
 class WXDLLIMPEXP_CORE wxFont : public wxFontBase
 {
 public:
-    // ctors and such
+    
     wxFont() { }
 
     wxFont(const wxFontInfo& info);
@@ -88,7 +88,7 @@ public:
 
     virtual ~wxFont();
 
-    // implement base class pure virtuals
+    
     double GetFractionalPointSize() const override;
     wxSize GetPixelSize() const override;
     wxFontStyle GetStyle() const override;

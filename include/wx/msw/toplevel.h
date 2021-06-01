@@ -44,7 +44,7 @@ public:
 
     ~wxTopLevelWindowMSW() override;
 
-    // implement base class pure virtuals
+    
     void SetTitle( const wxString& title) override;
     wxString GetTitle() const override;
     void Maximize(bool maximize = true) override;

@@ -41,7 +41,7 @@ public:
 
     virtual ~wxTopLevelWindowGTK();
 
-    // implement base class pure virtuals
+    
     virtual void Maximize(bool maximize = true);
     virtual bool IsMaximized() const;
     virtual void Iconize(bool iconize = true);

@@ -45,7 +45,7 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxPanelNameStr));
 
-    // implement base class pure virtuals
+    
     virtual void SetLabel(const wxString& label);
     virtual wxString GetLabel() const;
 

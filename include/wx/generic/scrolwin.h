@@ -21,7 +21,7 @@ class WXDLLIMPEXP_CORE wxScrollHelper : public wxScrollHelperBase
 public:
     wxScrollHelper(wxWindow *winToScroll);
 
-    // implement base class pure virtuals
+    
     void AdjustScrollbars() override;
     bool IsScrollbarShown(int orient) const override;
 

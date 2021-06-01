@@ -221,7 +221,7 @@ public:
     virtual bool SetData(size_t WXUNUSED(len), const void *WXUNUSED(buf))
         { return false; }
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
     wxDataFormat GetPreferredFormat(wxDataObjectBase::Direction WXUNUSED(dir) = Get) const override
         { return m_format; }
@@ -283,7 +283,7 @@ public:
     wxDataObjectSimple *GetObject(const wxDataFormat& format,
                                   wxDataObjectBase::Direction dir = Get) const;
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
     wxDataFormat GetPreferredFormat(wxDataObjectBase::Direction dir = Get) const override;
     size_t GetFormatCount(wxDataObjectBase::Direction dir = Get) const override;
@@ -387,7 +387,7 @@ public:
     virtual wxString GetText() const { return m_text; }
     virtual void SetText(const wxString& text) { m_text = text; }
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
 
     // some platforms have 2 and not 1 format for text data
@@ -518,7 +518,7 @@ public:
     virtual size_t GetSize() const { return m_size; }
     virtual void *GetData() const { return m_data; }
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
     size_t GetDataSize() const override;
     bool GetDataHere(void *buf) const override;

@@ -45,7 +45,7 @@ public:
                 const wxString& name = wxASCII_STR(wxFrameNameStr));
     ~wxFrame() override;
 
-    // implement base class pure virtuals
+    
     bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
 
     // implementation only from now on

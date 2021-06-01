@@ -36,7 +36,7 @@ public:
     wxString GetInstallPrefix() const;
 
 
-    // implement base class pure virtuals
+    
     wxString GetExecutablePath() const override;
     wxString GetConfigDir() const override;
     wxString GetUserConfigDir() const override;

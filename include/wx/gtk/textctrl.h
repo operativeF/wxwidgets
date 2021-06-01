@@ -40,7 +40,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString &name = wxASCII_STR(wxTextCtrlNameStr));
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
 
     void WriteText(const wxString& text) override;

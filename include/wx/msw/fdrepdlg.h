@@ -18,7 +18,7 @@
 class WXDLLIMPEXP_CORE wxFindReplaceDialog : public wxFindReplaceDialogBase
 {
 public:
-    // ctors and such
+    
     wxFindReplaceDialog() = default;
     wxFindReplaceDialog(wxWindow *parent,
                         wxFindReplaceData *data,

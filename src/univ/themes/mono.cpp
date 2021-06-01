@@ -465,7 +465,7 @@ public:
     wxColour GetFg() const { return wxMONO_FG_COL; }
     wxColour GetBg() const { return wxMONO_BG_COL; }
 
-    // implement base class pure virtuals
+    
     virtual wxColour Get(StdColour col) const;
     virtual wxColour GetBackground(wxWindow *win) const;
 };

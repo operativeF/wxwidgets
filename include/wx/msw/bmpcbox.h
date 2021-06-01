@@ -23,7 +23,7 @@ class WXDLLIMPEXP_ADV wxBitmapComboBox : public wxComboBox,
                                          public wxBitmapComboBoxBase
 {
 public:
-    // ctors and such
+    
     wxBitmapComboBox()  
     = default;
 

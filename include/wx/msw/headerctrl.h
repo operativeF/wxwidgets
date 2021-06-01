@@ -51,7 +51,6 @@ protected:
     wxSize DoGetBestSize() const override;
 
 private:
-    // Implement base class pure virtuals.
     void DoSetCount(unsigned int count) override;
     unsigned int DoGetCount() const override;
     void DoUpdate(unsigned int idx) override;

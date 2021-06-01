@@ -34,7 +34,7 @@ public:
 
     bool IsOk() const { return m_surface != NULL; }
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
 
     virtual void Clear();

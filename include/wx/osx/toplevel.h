@@ -54,7 +54,7 @@ public:
     // inactive (should be called when a background event occurs)
     void RequestUserAttention(int flags = wxUSER_ATTENTION_INFO) override;
 
-    // implement base class pure virtuals
+    
     void Maximize(bool maximize = true) override;
     bool IsMaximized() const override;
     void Iconize(bool iconize = true) override;

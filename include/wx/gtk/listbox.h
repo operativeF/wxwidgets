@@ -19,7 +19,7 @@ struct _GtkTreeIter;
 class WXDLLIMPEXP_CORE wxListBox : public wxListBoxBase
 {
 public:
-    // ctors and such
+    
     wxListBox()
     {
         Init();

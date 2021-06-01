@@ -51,7 +51,7 @@ public:
     // version so override this method to find it dynamically
     wxMDIChildFrame *GetActiveChild() const override;
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
 
     void ActivateNext() override;

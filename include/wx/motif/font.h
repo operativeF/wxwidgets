@@ -24,7 +24,7 @@ class wxXFont;
 class WXDLLIMPEXP_CORE wxFont : public wxFontBase
 {
 public:
-    // ctors and such
+    
     wxFont() { }
 
     wxFont(const wxFontInfo& info);
@@ -71,7 +71,7 @@ public:
 
     virtual ~wxFont();
 
-    // implement base class pure virtuals
+    
     virtual double GetFractionalPointSize() const;
     virtual wxFontStyle GetStyle() const;
     virtual int GetNumericWeight() const;

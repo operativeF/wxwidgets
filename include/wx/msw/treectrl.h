@@ -118,7 +118,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxTreeCtrlNameStr));
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
 
     unsigned int GetCount() const override;

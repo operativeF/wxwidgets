@@ -24,7 +24,6 @@ class WXDLLIMPEXP_FWD_CORE wxWizardSizer;
 class WXDLLIMPEXP_CORE wxWizard : public wxWizardBase
 {
 public:
-    // ctor
     wxWizard() { Init(); }
     wxWizard(wxWindow *parent,
              int id = wxID_ANY,
@@ -36,6 +35,10 @@ public:
         Init();
         Create(parent, id, title, bitmap, pos, style);
     }
+
+    wxWizard(const wxWizard&) = delete;
+	wxWizard& operator=(const wxWizard&) = delete;
+
     bool Create(wxWindow *parent,
              int id = wxID_ANY,
              const wxString& title = wxEmptyString,
@@ -45,7 +48,6 @@ public:
     void Init();
     ~wxWizard() override;
 
-    // implement base class pure virtuals
     bool RunWizard(wxWizardPage *firstPage) override;
     wxWizardPage *GetCurrentPage() const override;
     void SetPageSize(const wxSize& size) override;
@@ -54,7 +56,6 @@ public:
     wxSizer *GetPageAreaSizer() const override;
     void SetBorder(int border) override;
 
-    /// set/get bitmap
     const wxBitmap& GetBitmap() const { return m_bitmap; }
     void SetBitmap(const wxBitmap& bitmap);
 
@@ -167,8 +168,6 @@ protected:
 
     wxDECLARE_DYNAMIC_CLASS(wxWizard);
     wxDECLARE_EVENT_TABLE();
-    wxWizard(const wxWizard&) = delete;
-	wxWizard& operator=(const wxWizard&) = delete;
 };
 
 #endif // _WX_GENERIC_WIZARD_H_

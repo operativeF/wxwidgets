@@ -32,7 +32,7 @@ public:
             m_data = nullptr;
         }
 
-    // implement base class pure virtuals
+    
     size_t GetDataSize() const override;
     bool GetDataHere(void *buf) const override;
     bool SetData(size_t len, const void *buf) override;
@@ -69,7 +69,7 @@ public:
         {
         }
 
-    // implement base class pure virtuals
+    
     size_t GetDataSize() const override;
     bool GetDataHere(void *buf) const override;
     bool SetData(size_t len, const void *buf) override;
@@ -97,7 +97,7 @@ class WXDLLIMPEXP_CORE wxFileDataObject : public wxFileDataObjectBase
 public:
     wxFileDataObject() = default;
 
-    // implement base class pure virtuals
+    
     bool SetData(size_t len, const void *buf) override;
     size_t GetDataSize() const override;
     bool GetDataHere(void *pData) const override;

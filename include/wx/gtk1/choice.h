@@ -28,8 +28,6 @@ public:
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxChoiceNameStr) )
     {
-        m_strings = NULL;
-
         Create(parent, id, pos, size, n, choices, style, validator, name);
     }
     wxChoice( wxWindow *parent, wxWindowID id,
@@ -40,8 +38,6 @@ public:
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxChoiceNameStr) )
     {
-        m_strings = NULL;
-
         Create(parent, id, pos, size, choices, style, validator, name);
     }
     virtual ~wxChoice();
@@ -60,7 +56,7 @@ public:
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxChoiceNameStr) );
 
-    // implement base class pure virtuals
+    
     void DoDeleteOneItem(unsigned int n);
     void DoClear();
 
@@ -96,7 +92,7 @@ private:
 
     // this array is only used for controls with wxCB_SORT style, so only
     // allocate it if it's needed (hence using pointer)
-    wxSortedArrayString *m_strings;
+    wxSortedArrayString *m_strings{nullptr};
 
 public:
     // this circumvents a GTK+ 2.0 bug so that the selection is

@@ -126,7 +126,7 @@ public:
     bool IsUsingNativeDecorations() const;
 
 
-    // implement base class pure virtuals
+    
     bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
     wxPoint GetClientAreaOrigin() const override;
     void SetIcons(const wxIconBundle& icons) override;

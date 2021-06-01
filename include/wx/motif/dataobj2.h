@@ -23,7 +23,7 @@ public:
     wxBitmapDataObject(const wxBitmap& bitmap)
         : wxBitmapDataObjectBase(bitmap) { }
 
-    // implement base class pure virtuals
+    
     // ----------------------------------
     virtual size_t GetDataSize() const;
     virtual bool GetDataHere(void *buf) const;
