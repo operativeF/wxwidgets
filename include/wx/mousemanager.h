@@ -49,6 +49,9 @@ public:
 
     ~wxMouseEventsManager() override;
 
+    wxMouseEventsManager(const wxMouseEventsManager&) = delete;
+	wxMouseEventsManager& operator=(const wxMouseEventsManager&) = delete;
+
 protected:
     // called to find the item at the given position: return wxNOT_FOUND (-1)
     // if there is no item here
@@ -153,9 +156,6 @@ private:
 
 
     wxDECLARE_EVENT_TABLE();
-
-    wxMouseEventsManager(const wxMouseEventsManager&) = delete;
-	wxMouseEventsManager& operator=(const wxMouseEventsManager&) = delete;
 };
 
 #endif // _WX_MOUSEMANAGER_H_

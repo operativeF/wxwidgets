@@ -67,6 +67,9 @@ public:
     wxDialogBase();
     ~wxDialogBase() override = default;
 
+    wxDialogBase(const wxDialogBase&) = delete;
+	wxDialogBase& operator=(const wxDialogBase&) = delete;
+
     // define public wxDialog methods to be implemented by the derived classes
     virtual int ShowModal() = 0;
     virtual void EndModal(int retCode) = 0;
@@ -266,9 +269,6 @@ private:
     // update the background colour
     void OnSysColourChanged(wxSysColourChangedEvent& event);
 
-
-    wxDialogBase(const wxDialogBase&) = delete;
-	wxDialogBase& operator=(const wxDialogBase&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 
@@ -370,6 +370,8 @@ public:
     wxWindowModalDialogEvent (wxEventType commandType = wxEVT_NULL, int id = 0)
         : wxCommandEvent(commandType, id) { }
 
+	wxWindowModalDialogEvent& operator=(const wxWindowModalDialogEvent&) = delete;
+
     wxDialog *GetDialog() const
         { return wxStaticCast(GetEventObject(), wxDialog); }
 
@@ -378,9 +380,7 @@ public:
 
     wxEvent *Clone() const override { return new wxWindowModalDialogEvent (*this); }
 
-private:
-    public:
-	wxWindowModalDialogEvent& operator=(const wxWindowModalDialogEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

@@ -146,6 +146,8 @@ public:
     wxFormatString(const wxScopedWCharBuffer& str)
         : m_wchar(str), m_str(nullptr), m_cstr(nullptr) {}
 
+    wxFormatString& operator=(const wxFormatString&) = delete;
+
     // Possible argument types. These are or-combinable for wxASSERT_ARG_TYPE
     // convenience. Some of the values are or-combined with another value, this
     // expresses "supertypes" for use with wxASSERT_ARG_TYPE masks. For example,
@@ -233,8 +235,6 @@ private:
     //     passed to the ctor
     const wxString * const m_str;
     const wxCStrData * const m_cstr;
-
-    wxFormatString& operator=(const wxFormatString&) = delete;
 };
 
 // these two helper classes are used to find wxFormatString argument among fixed
@@ -286,7 +286,6 @@ template<>
 struct wxFormatStringArgumentFinder<wxScopedCharBuffer>
     : public wxFormatStringArgumentFinder<const wxScopedCharBuffer&> {
 #ifdef wxNO_IMPLICIT_WXSTRING_ENCODING
-private:
     wxFormatStringArgumentFinder() = delete;
 #endif // wxNO_IMPLICIT_WXSTRING_ENCODING
 };

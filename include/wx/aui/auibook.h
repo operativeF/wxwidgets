@@ -70,6 +70,9 @@ public:
     {
         m_dragSource = nullptr;
     }
+
+	wxAuiNotebookEvent& operator=(const wxAuiNotebookEvent&) = delete;
+
     wxEvent *Clone() const override { return new wxAuiNotebookEvent(*this); }
 
     void SetDragSource(wxAuiNotebook* s) { m_dragSource = s; }
@@ -79,9 +82,7 @@ private:
     wxAuiNotebook* m_dragSource;
 
 #ifndef SWIG
-private:
-    public:
-	wxAuiNotebookEvent& operator=(const wxAuiNotebookEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

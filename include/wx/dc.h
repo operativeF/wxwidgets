@@ -666,6 +666,9 @@ public:
 
     ~wxDC() override { delete m_pimpl; }
 
+    wxDC(const wxDC&) = delete;
+	wxDC& operator=(const wxDC&) = delete;
+
     wxDCImpl *GetImpl()
         { return m_pimpl; }
     const wxDCImpl *GetImpl() const
@@ -1222,13 +1225,13 @@ public:
                 m_dc.ReleaseHDC(m_hdc);
         }
 
+        TempHDC& operator=(const TempHDC&) = delete;
+
         WXHDC GetHDC() const { return m_hdc; }
 
     private:
         wxDC& m_dc;
         WXHDC m_hdc;
-
-        TempHDC& operator=(const TempHDC&) = delete;
     };
 
     // GetTempHDC() also works for wxGCDC (but still not for wxPostScriptDC &c)
@@ -1257,8 +1260,6 @@ protected:
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxDC);
-    wxDC(const wxDC&) = delete;
-	wxDC& operator=(const wxDC&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1282,6 +1283,9 @@ public:
             m_dc.SetTextForeground(m_colFgOld);
     }
 
+    wxDCTextColourChanger(const wxDCTextColourChanger&) = delete;
+	wxDCTextColourChanger& operator=(const wxDCTextColourChanger&) = delete;
+
     void Set(const wxColour& col)
     {
         if ( !m_colFgOld.IsOk() )
@@ -1293,9 +1297,6 @@ private:
     wxDC& m_dc;
 
     wxColour m_colFgOld;
-
-    wxDCTextColourChanger(const wxDCTextColourChanger&) = delete;
-	wxDCTextColourChanger& operator=(const wxDCTextColourChanger&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1319,6 +1320,9 @@ public:
             m_dc.SetTextBackground(m_colBgOld);
     }
 
+    wxDCTextBgColourChanger(const wxDCTextBgColourChanger&) = delete;
+	wxDCTextBgColourChanger& operator=(const wxDCTextBgColourChanger&) = delete;
+
     void Set(const wxColour& col)
     {
         if ( !m_colBgOld.IsOk() )
@@ -1330,9 +1334,6 @@ private:
     wxDC& m_dc;
 
     wxColour m_colBgOld;
-
-    wxDCTextBgColourChanger(const wxDCTextBgColourChanger&) = delete;
-	wxDCTextBgColourChanger& operator=(const wxDCTextBgColourChanger&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1356,6 +1357,9 @@ public:
             m_dc.SetBackgroundMode(m_modeOld);
     }
 
+    wxDCTextBgModeChanger(const wxDCTextBgModeChanger&) = delete;
+	wxDCTextBgModeChanger& operator=(const wxDCTextBgModeChanger&) = delete;
+
     void Set(int mode)
     {
         if ( m_modeOld == wxBRUSHSTYLE_INVALID )
@@ -1367,9 +1371,6 @@ private:
     wxDC& m_dc;
 
     int m_modeOld;
-
-    wxDCTextBgModeChanger(const wxDCTextBgModeChanger&) = delete;
-	wxDCTextBgModeChanger& operator=(const wxDCTextBgModeChanger&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1391,13 +1392,13 @@ public:
             m_dc.SetPen(m_penOld);
     }
 
+    wxDCPenChanger(const wxDCPenChanger&) = delete;
+	wxDCPenChanger& operator=(const wxDCPenChanger&) = delete;
+
 private:
     wxDC& m_dc;
 
     wxPen m_penOld;
-
-    wxDCPenChanger(const wxDCPenChanger&) = delete;
-	wxDCPenChanger& operator=(const wxDCPenChanger&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1419,13 +1420,13 @@ public:
             m_dc.SetBrush(m_brushOld);
     }
 
+    wxDCBrushChanger(const wxDCBrushChanger&) = delete;
+	wxDCBrushChanger& operator=(const wxDCBrushChanger&) = delete;
+
 private:
     wxDC& m_dc;
 
     wxBrush m_brushOld;
-
-    wxDCBrushChanger(const wxDCBrushChanger&) = delete;
-	wxDCBrushChanger& operator=(const wxDCBrushChanger&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1456,6 +1457,9 @@ public:
             m_dc.SetClippingRegion(m_oldClipRect);
     }
 
+    wxDCClipper(const wxDCClipper&) = delete;
+	wxDCClipper& operator=(const wxDCClipper&) = delete;
+
 private:
     // Common part of all ctors.
     void Init(const wxRect& r)
@@ -1467,9 +1471,6 @@ private:
     wxDC& m_dc;
     wxRect m_oldClipRect;
     bool m_restoreOld;
-
-    wxDCClipper(const wxDCClipper&) = delete;
-	wxDCClipper& operator=(const wxDCClipper&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -1504,13 +1505,13 @@ public:
             m_dc.SetFont(m_fontOld);
     }
 
+    wxDCFontChanger(const wxDCFontChanger&) = delete;
+	wxDCFontChanger& operator=(const wxDCFontChanger&) = delete;
+
 private:
     wxDC& m_dc;
 
     wxFont m_fontOld;
-
-    wxDCFontChanger(const wxDCFontChanger&) = delete;
-	wxDCFontChanger& operator=(const wxDCFontChanger&) = delete;
 };
 
 

@@ -82,6 +82,9 @@ class wxConditionInternal
 public:
     wxConditionInternal(wxMutex& mutex);
 
+    wxConditionInternal(const wxConditionInternal&) = delete;
+	wxConditionInternal& operator=(const wxConditionInternal&) = delete;
+
     bool IsOk() const { return m_mutex.IsOk() && m_semaphore.IsOk(); }
 
     wxCondError Wait();
@@ -99,9 +102,6 @@ private:
 
     wxMutex& m_mutex;
     wxSemaphore m_semaphore;
-
-    wxConditionInternal(const wxConditionInternal&) = delete;
-	wxConditionInternal& operator=(const wxConditionInternal&) = delete;
 };
 
 wxConditionInternal::wxConditionInternal(wxMutex& mutex)

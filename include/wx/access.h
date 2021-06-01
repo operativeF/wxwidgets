@@ -231,14 +231,12 @@ class  WXDLLIMPEXP_FWD_CORE wxRect;
 
 class WXDLLIMPEXP_CORE wxAccessibleBase : public wxObject
 {
-    wxAccessibleBase(const wxAccessibleBase&) = delete;
-	wxAccessibleBase& operator=(const wxAccessibleBase&) = delete;
-
 public:
     wxAccessibleBase(wxWindow* win): m_window(win) {}
     ~wxAccessibleBase() override = default;
 
-// Overridables
+    wxAccessibleBase(const wxAccessibleBase&) = delete;
+	wxAccessibleBase& operator=(const wxAccessibleBase&) = delete;
 
         // Can return either a child object, or an integer
         // representing the child element, starting from 1.

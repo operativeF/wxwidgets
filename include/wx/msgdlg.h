@@ -85,7 +85,6 @@ public:
         const int m_stockId;
     };
 
-    // ctors
     wxMessageDialogBase() { m_dialogStyle = 0; }
     wxMessageDialogBase(wxWindow *parent,
                         const wxString& message,
@@ -98,8 +97,10 @@ public:
         SetMessageDialogStyle(style);
     }
 
-    // virtual dtor for the base class
     ~wxMessageDialogBase() override = default;
+
+    wxMessageDialogBase(const wxMessageDialogBase&) = delete;
+	wxMessageDialogBase& operator=(const wxMessageDialogBase&) = delete;
 
     wxString GetCaption() const { return m_caption; }
 
@@ -288,9 +289,6 @@ private:
              m_ok,
              m_cancel,
              m_help;
-
-    wxMessageDialogBase(const wxMessageDialogBase&) = delete;
-	wxMessageDialogBase& operator=(const wxMessageDialogBase&) = delete;
 };
 
 #include "wx/generic/msgdlgg.h"

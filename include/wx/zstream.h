@@ -71,6 +71,9 @@ class WXDLLIMPEXP_BASE wxZlibOutputStream: public wxFilterOutputStream {
   wxZlibOutputStream(wxOutputStream *stream, int level = -1, int flags = wxZLIB_ZLIB);
   ~wxZlibOutputStream() override { Close(); }
 
+  wxZlibOutputStream(const wxZlibOutputStream&) = delete;
+  wxZlibOutputStream& operator=(const wxZlibOutputStream&) = delete;
+
   void Sync() override { DoFlush(false); }
   bool Close() override;
   wxFileOffset GetLength() const override { return m_pos; }
@@ -94,9 +97,6 @@ class WXDLLIMPEXP_BASE wxZlibOutputStream: public wxFilterOutputStream {
   unsigned char *m_z_buffer;
   struct z_stream_s *m_deflate;
   wxFileOffset m_pos;
-
-  wxZlibOutputStream(const wxZlibOutputStream&) = delete;
-	wxZlibOutputStream& operator=(const wxZlibOutputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxZlibClassFactory: public wxFilterClassFactory

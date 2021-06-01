@@ -428,6 +428,8 @@ public:
     wxDelegateRendererNative(wxRendererNative& rendererNative)
         : m_rendererNative(rendererNative) { }
 
+    wxDelegateRendererNative(const wxDelegateRendererNative&) = delete;
+	wxDelegateRendererNative& operator=(const wxDelegateRendererNative&) = delete;
 
     int  DrawHeaderButton(wxWindow *win,
                           wxDC& dc,
@@ -590,9 +592,6 @@ public:
 
 protected:
     wxRendererNative& m_rendererNative;
-
-    wxDelegateRendererNative(const wxDelegateRendererNative&) = delete;
-	wxDelegateRendererNative& operator=(const wxDelegateRendererNative&) = delete;
 };
 
 // ----------------------------------------------------------------------------

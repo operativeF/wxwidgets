@@ -74,10 +74,11 @@ class WXDLLIMPEXP_BASE wxAppConsoleBase : public wxEvtHandler,
                                           public wxEventFilter
 {
 public:
-    // ctor and dtor
     wxAppConsoleBase();
     ~wxAppConsoleBase() override;
 
+    wxAppConsoleBase(const wxAppConsoleBase&) = delete;
+	wxAppConsoleBase& operator=(const wxAppConsoleBase&) = delete;
 
     // the virtual functions which may/must be overridden in the derived class
     // -----------------------------------------------------------------------
@@ -525,11 +526,6 @@ protected:
     bool m_bDoPendingEventProcessing;
 
     friend class WXDLLIMPEXP_FWD_BASE wxEvtHandler;
-
-    // the application object is a singleton anyhow, there is no sense in
-    // copying it
-    wxAppConsoleBase(const wxAppConsoleBase&) = delete;
-	wxAppConsoleBase& operator=(const wxAppConsoleBase&) = delete;
 };
 
 #if defined(__UNIX__) && !defined(__WINDOWS__)

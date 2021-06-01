@@ -638,6 +638,9 @@ public:
         canveto_flag = true;
         dc = nullptr;
     }
+
+	wxAuiManagerEvent& operator=(const wxAuiManagerEvent&) = delete;
+
     wxEvent *Clone() const override { return new wxAuiManagerEvent(*this); }
 
     void SetManager(wxAuiManager* mgr) { manager = mgr; }
@@ -664,9 +667,7 @@ public:
     wxDC* dc;
 
 #ifndef SWIG
-private:
-    public:
-	wxAuiManagerEvent& operator=(const wxAuiManagerEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

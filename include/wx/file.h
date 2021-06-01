@@ -50,9 +50,6 @@ public:
     // (only read and write make sense here)
   static bool Access(const wxString& name, OpenMode mode);
 
-  // ctors
-  // -----
-    // def ctor
   wxFile() { m_fd = fd_invalid; m_lasterror = 0; }
     // open specified file (may fail, use IsOpened())
   wxFile(const wxString& fileName, OpenMode mode = read);

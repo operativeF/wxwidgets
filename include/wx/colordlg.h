@@ -39,8 +39,7 @@
 class WXDLLIMPEXP_CORE wxColourDialogEvent : public wxCommandEvent
 {
 public:
-    wxColourDialogEvent()
-    = default;
+    wxColourDialogEvent() = default;
 
     wxColourDialogEvent(wxEventType evtType,
                         wxColourDialog* dialog,
@@ -50,6 +49,8 @@ public:
     {
         SetEventObject(dialog);
     }
+
+	wxColourDialogEvent& operator=(const wxColourDialogEvent&) = delete;
 
     // default copy ctor and dtor are ok
 
@@ -64,8 +65,7 @@ public:
 private:
     wxColour m_colour;
 
-    public:
-	wxColourDialogEvent& operator=(const wxColourDialogEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

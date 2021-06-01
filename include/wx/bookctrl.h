@@ -71,6 +71,9 @@ public:
         (void)Create(parent, winid, pos, size, style, name);
     }
 
+    wxBookCtrlBase(const wxBookCtrlBase&) = delete;
+	wxBookCtrlBase& operator=(const wxBookCtrlBase&) = delete;
+
     // quasi ctor
     bool Create(wxWindow *parent,
                 wxWindowID winid,
@@ -356,9 +359,6 @@ private:
     unsigned int m_internalBorder{5};
 
     wxDECLARE_ABSTRACT_CLASS(wxBookCtrlBase);
-    wxBookCtrlBase(const wxBookCtrlBase&) = delete;
-	wxBookCtrlBase& operator=(const wxBookCtrlBase&) = delete;
-
     wxDECLARE_EVENT_TABLE();
 };
 

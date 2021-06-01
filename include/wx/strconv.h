@@ -205,7 +205,10 @@ public:
           m_conv(conv.m_conv ? conv.m_conv->Clone() : NULL)
     {
     }
+    
     virtual ~wxConvBrokenFileNames() { delete m_conv; }
+
+    wxConvBrokenFileNames& operator=(const wxConvBrokenFileNames&) = delete;
 
     size_t MB2WC(wchar_t *out, const char *in, size_t outLen) const override
     {
@@ -230,8 +233,6 @@ public:
 private:
     // the conversion object we forward to
     wxMBConv *m_conv;
-
-    wxConvBrokenFileNames& operator=(const wxConvBrokenFileNames&) = delete;
 };
 
 #endif // __UNIX__

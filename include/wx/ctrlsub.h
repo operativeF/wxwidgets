@@ -446,6 +446,9 @@ class WXDLLIMPEXP_CORE wxControlWithItemsBase :
 public:
     wxControlWithItemsBase() = default;
 
+    wxControlWithItemsBase(const wxControlWithItemsBase&) = delete;
+	wxControlWithItemsBase& operator=(const wxControlWithItemsBase&) = delete;
+    
     // usually the controls like list/combo boxes have their own background
     // colour
     bool ShouldInheritColours() const override { return false; }
@@ -462,10 +465,6 @@ protected:
     // calls InitCommandEvent() and, if n != wxNOT_FOUND, also sets the per
     // item client data
     void InitCommandEventWithItems(wxCommandEvent& event, int n);
-
-private:
-    wxControlWithItemsBase(const wxControlWithItemsBase&) = delete;
-	wxControlWithItemsBase& operator=(const wxControlWithItemsBase&) = delete;
 };
 
 // define the platform-specific wxControlWithItems class

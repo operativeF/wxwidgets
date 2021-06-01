@@ -117,6 +117,8 @@ public:
     {
     }
 
+	wxFileSystemWatcherEvent& operator=(const wxFileSystemWatcherEvent&) = delete;
+
     /**
      * Returns the path at which the event occurred.
      */
@@ -204,9 +206,8 @@ protected:
     wxFileName m_path;
     wxFileName m_newPath;
     wxString m_errorMsg;
-private:
-    public:
-	wxFileSystemWatcherEvent& operator=(const wxFileSystemWatcherEvent&) = delete;
+
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

@@ -156,6 +156,13 @@ class WXDLLIMPEXP_BASE wxRefCounter
 public:
     wxRefCounter() { m_count = 1; }
 
+    // It doesn't make sense to copy the reference counted objects, a new ref
+    // counter should be created for a new object instead and compilation
+    // errors in the code using wxRefCounter due to the lack of copy ctor often
+    // indicate a problem, e.g. a forgotten copy ctor implementation somewhere.
+    wxRefCounter(const wxRefCounter&) = delete;
+	wxRefCounter& operator=(const wxRefCounter&) = delete;
+
     int GetRefCount() const { return m_count; }
 
     void IncRef() { m_count++; }
@@ -169,13 +176,6 @@ protected:
 private:
     // our refcount:
     int m_count;
-
-    // It doesn't make sense to copy the reference counted objects, a new ref
-    // counter should be created for a new object instead and compilation
-    // errors in the code using wxRefCounter due to the lack of copy ctor often
-    // indicate a problem, e.g. a forgotten copy ctor implementation somewhere.
-    wxRefCounter(const wxRefCounter&) = delete;
-	wxRefCounter& operator=(const wxRefCounter&) = delete;
 };
 
 // ----------------------------------------------------------------------------

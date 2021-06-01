@@ -30,6 +30,8 @@ public:
         SetEventObject(win);
     }
 
+	wxDateEvent& operator=(const wxDateEvent&) = delete;
+
     const wxDateTime& GetDate() const { return m_date; }
     void SetDate(const wxDateTime &date) { m_date = date; }
 
@@ -39,8 +41,7 @@ public:
 private:
     wxDateTime m_date;
 
-    public:
-	wxDateEvent& operator=(const wxDateEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

@@ -197,6 +197,9 @@ public:
     // virtual dtor for a base class
     ~wxFontMapper() override;
 
+    wxFontMapper(const wxFontMapper&) = delete;
+	wxFontMapper& operator=(const wxFontMapper&) = delete;
+
     // working with the encodings
     // --------------------------
 
@@ -262,10 +265,6 @@ protected:
 
     // the parent window for our dialogs
     wxWindow *m_windowParent;
-
-private:
-    wxFontMapper(const wxFontMapper&) = delete;
-	wxFontMapper& operator=(const wxFontMapper&) = delete;
 };
 
 #endif // wxUSE_GUI

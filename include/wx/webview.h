@@ -294,6 +294,7 @@ public:
           m_actionFlags(flags), m_messageHandler(messageHandler)
     {}
 
+	wxWebViewEvent& operator=(const wxWebViewEvent&) = delete;
 
     const wxString& GetURL() const { return m_url; }
     const wxString& GetTarget() const { return m_target; }
@@ -308,8 +309,7 @@ private:
     wxWebViewNavigationActionFlags m_actionFlags;
     wxString m_messageHandler;
 
-    public:
-	wxWebViewEvent& operator=(const wxWebViewEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

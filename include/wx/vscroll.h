@@ -592,6 +592,9 @@ public:
         (void)Create(parent, id, pos, size, style, name);
     }
 
+    wxVScrolledWindow(const wxVScrolledWindow&) = delete;
+	wxVScrolledWindow& operator=(const wxVScrolledWindow&) = delete;
+
     // same as the previous ctor but returns status code: true if ok
     //
     // just as with the ctor above, wxVSCROLL style is always used, there is no
@@ -614,8 +617,6 @@ protected:
 #endif // __WXMAC__
 
 private:
-    wxVScrolledWindow(const wxVScrolledWindow&) = delete;
-	wxVScrolledWindow& operator=(const wxVScrolledWindow&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxVScrolledWindow);
 };
 
@@ -660,6 +661,9 @@ public:
         (void)Create(parent, id, pos, size, style, name);
     }
 
+    wxHScrolledWindow(const wxHScrolledWindow&) = delete;
+	wxHScrolledWindow& operator=(const wxHScrolledWindow&) = delete;
+
     // same as the previous ctor but returns status code: true if ok
     //
     // just as with the ctor above, wxHSCROLL style is always used, there is no
@@ -682,8 +686,6 @@ protected:
 #endif // __WXMAC__
 
 private:
-    wxHScrolledWindow(const wxHScrolledWindow&) = delete;
-	wxHScrolledWindow& operator=(const wxHScrolledWindow&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxHScrolledWindow);
 };
 
@@ -725,6 +727,9 @@ public:
         (void)Create(parent, id, pos, size, style, name);
     }
 
+    wxHVScrolledWindow(const wxHVScrolledWindow&) = delete;
+	wxHVScrolledWindow& operator=(const wxHVScrolledWindow&) = delete;
+
     // same as the previous ctor but returns status code: true if ok
     //
     // just as with the ctor above, wxVSCROLL and wxHSCROLL styles are always
@@ -748,8 +753,6 @@ protected:
 #endif // __WXMAC__
 
 private:
-    wxHVScrolledWindow(const wxHVScrolledWindow&) = delete;
-	wxHVScrolledWindow& operator=(const wxHVScrolledWindow&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxHVScrolledWindow);
 };
 

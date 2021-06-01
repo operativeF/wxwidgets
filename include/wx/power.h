@@ -48,13 +48,14 @@ enum wxBatteryState
 class WXDLLIMPEXP_BASE wxPowerEvent : public wxEvent
 {
 public:
-    wxPowerEvent()            // just for use by wxRTTI
-         = default;
+    wxPowerEvent() = default;
 
     wxPowerEvent(wxEventType evtType) : wxEvent(wxID_NONE, evtType)
     {
         m_veto = false;
     }
+
+	wxPowerEvent& operator=(const wxPowerEvent&) = delete;
 
     // Veto the operation (only makes sense with EVT_POWER_SUSPENDING)
     void Veto() { m_veto = true; }
@@ -69,8 +70,7 @@ public:
 private:
     bool m_veto{false};
 
-    public:
-	wxPowerEvent& operator=(const wxPowerEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -135,12 +135,12 @@ public:
             wxPowerResource::Release(m_kind);
     }
 
+    wxPowerResourceBlocker(const wxPowerResourceBlocker&) = delete;
+	wxPowerResourceBlocker& operator=(const wxPowerResourceBlocker&) = delete;
+
 private:
     const wxPowerResourceKind m_kind;
     const bool m_acquired;
-
-    wxPowerResourceBlocker(const wxPowerResourceBlocker&) = delete;
-	wxPowerResourceBlocker& operator=(const wxPowerResourceBlocker&) = delete;
 };
 
 // ----------------------------------------------------------------------------

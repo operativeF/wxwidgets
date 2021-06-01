@@ -53,6 +53,9 @@ public:
             m_fontMapper->RestorePath(m_pathOld);
     }
 
+    wxFontMapperPathChanger(const wxFontMapperPathChanger&) = delete;
+	wxFontMapperPathChanger& operator=(const wxFontMapperPathChanger&) = delete;
+
 private:
     // the fontmapper object we're working with
     wxFontMapperBase *m_fontMapper;
@@ -62,10 +65,6 @@ private:
 
     // have we changed the path successfully?
     bool m_ok;
-
-
-    wxFontMapperPathChanger(const wxFontMapperPathChanger&) = delete;
-	wxFontMapperPathChanger& operator=(const wxFontMapperPathChanger&) = delete;
 };
 
 #endif // wxUSE_CONFIG

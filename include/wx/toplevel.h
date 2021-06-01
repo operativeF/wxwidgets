@@ -119,9 +119,11 @@ enum
 class WXDLLIMPEXP_CORE wxTopLevelWindowBase : public wxNonOwnedWindow
 {
 public:
-    // construction
     wxTopLevelWindowBase();
     ~wxTopLevelWindowBase() override;
+
+    wxTopLevelWindowBase(const wxTopLevelWindowBase&) = delete;
+	wxTopLevelWindowBase& operator=(const wxTopLevelWindowBase&) = delete;
 
     // top level wnd state
     // --------------------
@@ -341,8 +343,6 @@ protected:
 
     bool m_modified;
 
-    wxTopLevelWindowBase(const wxTopLevelWindowBase&) = delete;
-	wxTopLevelWindowBase& operator=(const wxTopLevelWindowBase&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 
@@ -380,7 +380,6 @@ protected:
     class WXDLLIMPEXP_CORE wxTopLevelWindow : public wxTopLevelWindowNative
     {
     public:
-        // construction
         wxTopLevelWindow() = default;
         wxTopLevelWindow(wxWindow *parent,
                    wxWindowID winid,

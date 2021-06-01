@@ -446,6 +446,9 @@ public:
   wxConfigPathChanger(const wxConfigBase *pContainer, const wxString& strEntry);
  ~wxConfigPathChanger();
 
+  wxConfigPathChanger(const wxConfigPathChanger&) = delete;
+	wxConfigPathChanger& operator=(const wxConfigPathChanger&) = delete;
+
   // get the key name
   const wxString& Name() const { return m_strName; }
 
@@ -462,9 +465,6 @@ private:
   wxString      m_strName,      // name of entry (i.e. name only)
                 m_strOldPath;   // saved path
   bool          m_bChanged;     // was the path changed?
-
-  wxConfigPathChanger(const wxConfigPathChanger&) = delete;
-	wxConfigPathChanger& operator=(const wxConfigPathChanger&) = delete;
 };
 
 

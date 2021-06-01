@@ -32,6 +32,9 @@ public:
           m_footerIcon( 0 )
         { }
 
+    wxRichMessageDialogBase(const wxRichMessageDialogBase&) = delete;
+	wxRichMessageDialogBase& operator=(const wxRichMessageDialogBase&) = delete;
+
     void ShowCheckBox(const wxString& checkBoxText, bool checked = false)
     {
         m_checkBoxText = checkBoxText;
@@ -69,9 +72,6 @@ protected:
 
 private:
     void ShowDetails(bool shown);
-
-    wxRichMessageDialogBase(const wxRichMessageDialogBase&) = delete;
-	wxRichMessageDialogBase& operator=(const wxRichMessageDialogBase&) = delete;
 };
 
 // Always include the generic version as it's currently used as the base class

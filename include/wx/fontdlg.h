@@ -31,6 +31,9 @@ public:
     wxFontDialogBase(wxWindow *parent, const wxFontData& data)
         { m_parent = parent; InitFontData(&data); }
 
+    wxFontDialogBase(const wxFontDialogBase&) = delete;
+	wxFontDialogBase& operator=(const wxFontDialogBase&) = delete;
+    
     bool Create(wxWindow *parent)
         { return DoCreate(parent); }
     bool Create(wxWindow *parent, const wxFontData& data)
@@ -47,9 +50,6 @@ protected:
         { if ( data ) m_fontData = *data; }
 
     wxFontData m_fontData;
-
-    wxFontDialogBase(const wxFontDialogBase&) = delete;
-	wxFontDialogBase& operator=(const wxFontDialogBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

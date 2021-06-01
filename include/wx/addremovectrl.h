@@ -27,6 +27,9 @@ public:
     wxAddRemoveAdaptor() = default;
     virtual ~wxAddRemoveAdaptor() = default;
 
+    wxAddRemoveAdaptor(const wxAddRemoveAdaptor&) = delete;
+	wxAddRemoveAdaptor& operator=(const wxAddRemoveAdaptor&) = delete;
+
     // Override to return the associated control.
     virtual wxWindow* GetItemsCtrl() const = 0;
 
@@ -44,10 +47,6 @@ public:
     // Called when the current item should be removed, can only be called if
     // CanRemove() currently returns true.
     virtual void OnRemove() = 0;
-
-private:
-    wxAddRemoveAdaptor(const wxAddRemoveAdaptor&) = delete;
-	wxAddRemoveAdaptor& operator=(const wxAddRemoveAdaptor&) = delete;
 };
 
 // ----------------------------------------------------------------------------

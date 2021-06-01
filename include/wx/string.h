@@ -251,6 +251,11 @@ public:
     ~wxStringIteratorNode()
         { clear(); }
 
+    // the node belongs to a particular iterator instance, it's not copied
+    // when a copy of the iterator is made
+    wxStringIteratorNode(const wxStringIteratorNode&) = delete;
+	  wxStringIteratorNode& operator=(const wxStringIteratorNode&) = delete;
+
     inline void set(const wxString *str, wxStringImpl::const_iterator *citer)
         { clear(); DoSet(str, citer, NULL); }
     inline void set(const wxString *str, wxStringImpl::iterator *iter)
@@ -266,11 +271,6 @@ private:
     inline void DoSet(const wxString *str,
                       wxStringImpl::const_iterator *citer,
                       wxStringImpl::iterator *iter);
-
-    // the node belongs to a particular iterator instance, it's not copied
-    // when a copy of the iterator is made
-    wxStringIteratorNode(const wxStringIteratorNode&) = delete;
-	wxStringIteratorNode& operator=(const wxStringIteratorNode&) = delete;
 };
 #endif // wxUSE_UNICODE_UTF8
 
@@ -3581,13 +3581,13 @@ private:
   //             keep track of all iterators and update them as necessary:
   struct wxStringIteratorNodeHead
   {
-      wxStringIteratorNodeHead() : ptr(NULL) {}
-      wxStringIteratorNode *ptr;
+      wxStringIteratorNodeHead() = default;
+      wxStringIteratorNode *ptr{nullptr};
 
       // copying is disallowed as it would result in more than one pointer into
       // the same linked list
       wxStringIteratorNodeHead(const wxStringIteratorNodeHead&) = delete;
-	wxStringIteratorNodeHead& operator=(const wxStringIteratorNodeHead&) = delete;
+    	wxStringIteratorNodeHead& operator=(const wxStringIteratorNodeHead&) = delete;
   };
 
   wxStringIteratorNodeHead m_iterators;
@@ -3726,14 +3726,14 @@ public:
 
     ~wxStringInternalBuffer() { m_str.DoUngetWriteBuf(); }
 
+    wxStringInternalBuffer(const wxStringInternalBuffer&) = delete;
+  	wxStringInternalBuffer& operator=(const wxStringInternalBuffer&) = delete;
+
     operator wxStringCharType*() const { return m_buf; }
 
 private:
     wxString&         m_str;
     wxStringCharType *m_buf;
-
-    wxStringInternalBuffer(const wxStringInternalBuffer&) = delete;
-	wxStringInternalBuffer& operator=(const wxStringInternalBuffer&) = delete;
 };
 
 class wxStringInternalBufferLength
@@ -3754,6 +3754,9 @@ public:
         m_str.DoUngetWriteBuf(m_len);
     }
 
+    wxStringInternalBufferLength(const wxStringInternalBufferLength&) = delete;
+	  wxStringInternalBufferLength& operator=(const wxStringInternalBufferLength&) = delete;
+
     operator wxStringCharType*() const { return m_buf; }
     void SetLength(size_t length) { m_len = length; m_lenSet = true; }
 
@@ -3762,9 +3765,6 @@ private:
     wxStringCharType *m_buf;
     size_t            m_len;
     bool              m_lenSet;
-
-    wxStringInternalBufferLength(const wxStringInternalBufferLength&) = delete;
-	wxStringInternalBufferLength& operator=(const wxStringInternalBufferLength&) = delete;
 };
 
 #endif // !wxUSE_STL_BASED_WXSTRING
@@ -3843,7 +3843,7 @@ public:
     }
 
     wxStringTypeBuffer(const wxStringTypeBuffer&) = delete;
-	wxStringTypeBuffer& operator=(const wxStringTypeBuffer&) = delete;
+	  wxStringTypeBuffer& operator=(const wxStringTypeBuffer&) = delete;
 };
 
 template<typename T>
@@ -3860,7 +3860,7 @@ public:
     }
 
     wxStringTypeBufferLength(const wxStringTypeBufferLength&) = delete;
-	wxStringTypeBufferLength& operator=(const wxStringTypeBufferLength&) = delete;
+	  wxStringTypeBufferLength& operator=(const wxStringTypeBufferLength&) = delete;
 };
 
 #if wxUSE_STL_BASED_WXSTRING
@@ -3874,7 +3874,7 @@ public:
         { m_str.m_impl.assign(m_buf.data()); }
 
     wxStringInternalBuffer(const wxStringInternalBuffer&) = delete;
-	wxStringInternalBuffer& operator=(const wxStringInternalBuffer&) = delete;
+	  wxStringInternalBuffer& operator=(const wxStringInternalBuffer&) = delete;
 };
 
 class wxStringInternalBufferLength
@@ -3890,7 +3890,7 @@ public:
     }
 
     wxStringInternalBufferLength(const wxStringInternalBufferLength&) = delete;
-	wxStringInternalBufferLength& operator=(const wxStringInternalBufferLength&) = delete;
+	  wxStringInternalBufferLength& operator=(const wxStringInternalBufferLength&) = delete;
 };
 
 #endif // wxUSE_STL_BASED_WXSTRING
@@ -3939,7 +3939,7 @@ public:
     }
 
     wxUTF8StringBuffer(const wxUTF8StringBuffer&) = delete;
-	wxUTF8StringBuffer& operator=(const wxUTF8StringBuffer&) = delete;
+	  wxUTF8StringBuffer& operator=(const wxUTF8StringBuffer&) = delete;
 };
 
 class wxUTF8StringBufferLength : public wxStringTypeBufferLengthBase<char>
@@ -3961,7 +3961,7 @@ public:
     }
 
     wxUTF8StringBufferLength(const wxUTF8StringBufferLength&) = delete;
-	wxUTF8StringBufferLength& operator=(const wxUTF8StringBufferLength&) = delete;
+	  wxUTF8StringBufferLength& operator=(const wxUTF8StringBufferLength&) = delete;
 };
 #endif // wxUSE_UNICODE_UTF8/wxUSE_UNICODE_WCHAR
 

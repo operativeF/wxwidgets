@@ -146,11 +146,11 @@ public:
         }
     }
 
-private:
-    wxTimer& m_timer;
-
     wxTimerRunner(const wxTimerRunner&) = delete;
 	wxTimerRunner& operator=(const wxTimerRunner&) = delete;
+
+private:
+    wxTimer& m_timer;
 };
 
 // ----------------------------------------------------------------------------
@@ -167,6 +167,8 @@ public:
         SetEventObject(timer.GetOwner());
     }
 
+	wxTimerEvent& operator=(const wxTimerEvent&) = delete;
+
     // accessors
     int GetInterval() const { return m_timer->GetInterval(); }
     wxTimer& GetTimer() const { return *m_timer; }
@@ -178,8 +180,7 @@ public:
 private:
     wxTimer* m_timer;
 
-    public:
-	wxTimerEvent& operator=(const wxTimerEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

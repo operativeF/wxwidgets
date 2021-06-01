@@ -97,6 +97,9 @@ public:
     // Ctor creates an empty editor, use AddPage() to add controls to it.
     wxPreferencesEditor(const wxString& title = wxString());
 
+    wxPreferencesEditor(const wxPreferencesEditor&) = delete;
+	wxPreferencesEditor& operator=(const wxPreferencesEditor&) = delete;
+    
     // Dtor destroys the dialog if still shown.
     virtual ~wxPreferencesEditor();
 
@@ -137,9 +140,6 @@ public:
 
 private:
     wxPreferencesEditorImpl* m_impl;
-
-    wxPreferencesEditor(const wxPreferencesEditor&) = delete;
-	wxPreferencesEditor& operator=(const wxPreferencesEditor&) = delete;
 };
 
 #endif // wxUSE_PREFERENCES_EDITOR

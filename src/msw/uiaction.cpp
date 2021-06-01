@@ -33,6 +33,9 @@ namespace
 class wxUIActionSimulatorMSWImpl : public wxUIActionSimulatorImpl
 {
 public:
+    wxUIActionSimulatorMSWImpl(const wxUIActionSimulatorMSWImpl&) = delete;
+	wxUIActionSimulatorMSWImpl& operator=(const wxUIActionSimulatorMSWImpl&) = delete;
+    
     // Returns a pointer to the global simulator object: as it's stateless, we
     // can reuse the same one without having to allocate it on the heap all the
     // time.
@@ -51,9 +54,6 @@ public:
 private:
     // This class has no public ctors, use Get() instead.
     wxUIActionSimulatorMSWImpl() = default;
-
-    wxUIActionSimulatorMSWImpl(const wxUIActionSimulatorMSWImpl&) = delete;
-	wxUIActionSimulatorMSWImpl& operator=(const wxUIActionSimulatorMSWImpl&) = delete;
 };
 
 DWORD EventTypeForMouseButton(int button, bool isDown)

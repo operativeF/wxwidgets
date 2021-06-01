@@ -497,6 +497,8 @@ private:
     
     }
 
+    wxTreeListEvent& operator=(const wxTreeListEvent&) = delete;
+
     // Set the checkbox state before this event for ITEM_CHECKED events.
     void SetOldCheckedState(wxCheckBoxState state)
     {
@@ -518,8 +520,7 @@ private:
 
     friend class wxTreeListCtrl;
 
-    public:
-	wxTreeListEvent& operator=(const wxTreeListEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

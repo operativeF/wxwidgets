@@ -847,6 +847,9 @@ public:
 
     wxDataViewEvent(const wxDataViewEvent& event) = default;
 
+	wxDataViewEvent& operator=(const wxDataViewEvent&) = delete;
+
+
     wxDataViewItem GetItem() const { return m_item; }
     int GetColumn() const { return m_col; }
     wxDataViewModel* GetModel() const { return m_model; }
@@ -926,8 +929,7 @@ private:
               wxDataViewColumn* column,
               const wxDataViewItem& item);
 
-    public:
-	wxDataViewEvent& operator=(const wxDataViewEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -1081,6 +1083,8 @@ public:
            const wxValidator& validator = wxDefaultValidator );
     ~wxDataViewListCtrl() override;
 
+	wxDataViewListCtrl& operator=(const wxDataViewListCtrl&) = delete;
+
     bool Create( wxWindow *parent, wxWindowID id,
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize, long style = wxDV_ROW_LINES,
@@ -1169,8 +1173,8 @@ public:
 
 private:
     wxDECLARE_EVENT_TABLE();
-    public:
-	wxDataViewListCtrl& operator=(const wxDataViewListCtrl&) = delete;
+
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -1340,6 +1344,8 @@ public:
         Create(parent, id, pos, size, style, validator);
     }
 
+	wxDataViewTreeCtrl& operator=(const wxDataViewTreeCtrl&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
@@ -1401,8 +1407,8 @@ public:
 
 private:
     wxDECLARE_EVENT_TABLE();
-    public:
-	wxDataViewTreeCtrl& operator=(const wxDataViewTreeCtrl&) = delete;
+
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

@@ -45,6 +45,9 @@ public:
     // default ctor creates the object corresponding to the primary display
     wxDisplay();
 
+    wxDisplay(const wxDisplay&) = delete;
+	wxDisplay& operator=(const wxDisplay&) = delete;
+
     // initialize the object containing all information about the given
     // display
     //
@@ -153,13 +156,7 @@ private:
     // wxUSE_DISPLAY == 1 (if it is 0 we provide the stub in common code)
     static wxDisplayFactory *CreateFactory();
 
-
-    // the real implementation
     wxDisplayImpl *m_impl;
-
-
-    wxDisplay(const wxDisplay&) = delete;
-	wxDisplay& operator=(const wxDisplay&) = delete;
 };
 
 #endif // _WX_DISPLAY_H_BASE_

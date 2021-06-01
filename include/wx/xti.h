@@ -195,6 +195,9 @@ public:
 
     virtual ~wxClassInfo();
 
+    wxClassInfo(const wxClassInfo&) = delete;
+	wxClassInfo& operator=(const wxClassInfo&) = delete;
+
     // allocates an instance of this class, this object does not have to be
     // initialized or fully constructed as this call will be followed by a call to Create
     virtual wxObject *AllocateObject() const
@@ -368,9 +371,6 @@ protected:
     // registers the class
     void Register();
     void Unregister();
-
-    wxClassInfo(const wxClassInfo&) = delete;
-	wxClassInfo& operator=(const wxClassInfo&) = delete;
 };
 
 WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);

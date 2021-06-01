@@ -76,6 +76,9 @@ public:
         Create(parent, winid, dir, pos, size, style, name);
     }
 
+    wxBannerWindow(const wxBannerWindow&) = delete;
+	wxBannerWindow& operator=(const wxBannerWindow&) = delete;
+
     // Can be only called on objects created with the default constructor.
     bool Create(wxWindow* parent,
                 wxWindowID winid,
@@ -150,9 +153,6 @@ private:
              m_colEnd;
 
     wxDECLARE_EVENT_TABLE();
-
-    wxBannerWindow(const wxBannerWindow&) = delete;
-	wxBannerWindow& operator=(const wxBannerWindow&) = delete;
 };
 
 #endif // wxUSE_BANNERWINDOW

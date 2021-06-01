@@ -330,12 +330,12 @@ protected:
 class WXDLLIMPEXP_BASE wxLog
 {
 public:
-    // ctor
     wxLog() : m_formatter(new wxLogFormatter) { }
 
-    // make dtor virtual for all derived classes
     virtual ~wxLog();
 
+    wxLog(const wxLog&) = delete;
+	wxLog& operator=(const wxLog&) = delete;
 
     // log messages selection
     // ----------------------
@@ -627,9 +627,6 @@ private:
     // format string for strftime(), if empty, time stamping log messages is
     // disabled
     static wxString    ms_timestamp;
-
-    wxLog(const wxLog&) = delete;
-	wxLog& operator=(const wxLog&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -643,6 +640,9 @@ class WXDLLIMPEXP_BASE wxLogBuffer : public wxLog
 public:
     wxLogBuffer() = default;
 
+    wxLogBuffer(const wxLogBuffer&) = delete;
+	wxLogBuffer& operator=(const wxLogBuffer&) = delete;
+
     // get the string contents with all messages logged
     const wxString& GetBuffer() const { return m_str; }
 
@@ -655,9 +655,6 @@ protected:
 
 private:
     wxString m_str;
-
-    wxLogBuffer(const wxLogBuffer&) = delete;
-	wxLogBuffer& operator=(const wxLogBuffer&) = delete;
 };
 
 
@@ -670,12 +667,12 @@ public:
     wxLogStderr(FILE *fp = nullptr,
                 const wxMBConv &conv = wxConvWhateverWorks);
 
+    wxLogStderr(const wxLogStderr&) = delete;
+	wxLogStderr& operator=(const wxLogStderr&) = delete;
+
 protected:
     // implement sink function
     void DoLogText(const wxString& msg) override;
-
-    wxLogStderr(const wxLogStderr&) = delete;
-	wxLogStderr& operator=(const wxLogStderr&) = delete;
 };
 
 // log everything to an "ostream", cerr by default
@@ -687,15 +684,15 @@ public:
     wxLogStream(std::ostream *ostr = (std::ostream *) nullptr,
                 const wxMBConv& conv = wxConvWhateverWorks);
 
+    wxLogStream(const wxLogStream&) = delete;
+	wxLogStream& operator=(const wxLogStream&) = delete;
+
 protected:
     // implement sink function
     void DoLogText(const wxString& msg) override;
 
     // using ptr here to avoid including <iostream.h> from this file
     std::ostream *m_ostr;
-
-    wxLogStream(const wxLogStream&) = delete;
-	wxLogStream& operator=(const wxLogStream&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -743,6 +740,9 @@ public:
     wxLogChain(wxLog *logger);
     ~wxLogChain() override;
 
+    wxLogChain(const wxLogChain&) = delete;
+	wxLogChain& operator=(const wxLogChain&) = delete;
+
     // change the new log target
     void SetLog(wxLog *logger);
 
@@ -777,9 +777,6 @@ private:
 
     // do we pass the messages to the old logger?
     bool m_bPassMessages;
-
-    wxLogChain(const wxLogChain&) = delete;
-	wxLogChain& operator=(const wxLogChain&) = delete;
 };
 
 // a chain log target which uses itself as the new logger
@@ -791,7 +788,6 @@ class WXDLLIMPEXP_BASE wxLogInterposer : public wxLogChain
 public:
     wxLogInterposer();
 
-private:
     wxLogInterposer(const wxLogInterposer&) = delete;
 	wxLogInterposer& operator=(const wxLogInterposer&) = delete;
 };
@@ -804,7 +800,6 @@ class WXDLLIMPEXP_BASE wxLogInterposerTemp : public wxLogChain
 public:
     wxLogInterposerTemp();
 
-private:
     wxLogInterposerTemp(const wxLogInterposerTemp&) = delete;
 	wxLogInterposerTemp& operator=(const wxLogInterposerTemp&) = delete;
 };
@@ -838,6 +833,9 @@ public:
           m_info(filename, line, func, component)
     {
     }
+
+    wxLogger(const wxLogger&) = delete;
+	wxLogger& operator=(const wxLogger&) = delete;
 
     // store extra data in our log record and return this object itself (so
     // that further calls to its functions could be chained)
@@ -1089,9 +1087,6 @@ private:
     wxLogRecordInfo m_info;
 
     wxString m_optKey;
-
-    wxLogger(const wxLogger&) = delete;
-	wxLogger& operator=(const wxLogger&) = delete;
 };
 
 // ============================================================================

@@ -202,6 +202,8 @@ public:
         SetEventObject(generator);
     }
 
+	wxFontPickerEvent& operator=(const wxFontPickerEvent&) = delete;
+
     wxFont GetFont() const { return m_font; }
     void SetFont(const wxFont &c) { m_font = c; }
 
@@ -211,8 +213,7 @@ public:
 private:
     wxFont m_font;
 
-    public:
-	wxFontPickerEvent& operator=(const wxFontPickerEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

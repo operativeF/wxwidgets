@@ -237,6 +237,9 @@ public:
     // should be deleted separately.
     wxHelpControllerHelpProvider(wxHelpControllerBase* hc = nullptr);
 
+    wxHelpControllerHelpProvider(const wxHelpControllerHelpProvider&) = delete;
+	wxHelpControllerHelpProvider& operator=(const wxHelpControllerHelpProvider&) = delete;
+    
     // implement wxHelpProvider methods
 
     // again (see above): this should be ShowHelpAtPoint() but we need to
@@ -249,9 +252,6 @@ public:
 
 protected:
     wxHelpControllerBase*   m_helpController;
-
-    wxHelpControllerHelpProvider(const wxHelpControllerHelpProvider&) = delete;
-	wxHelpControllerHelpProvider& operator=(const wxHelpControllerHelpProvider&) = delete;
 };
 
 // Convenience function for turning context id into wxString

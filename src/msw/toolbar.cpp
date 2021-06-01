@@ -184,6 +184,9 @@ public:
         delete m_staticText;
     }
 
+    wxToolBarTool(const wxToolBarTool&) = delete;
+	wxToolBarTool& operator=(const wxToolBarTool&) = delete;
+
     void SetLabel(const wxString& label) override
     {
         wxASSERT_MSG( IsControl() || IsButton(),
@@ -263,9 +266,6 @@ public:
 private:
     wxStaticText *m_staticText;
     bool m_toBeDeleted;
-
-    wxToolBarTool(const wxToolBarTool&) = delete;
-	wxToolBarTool& operator=(const wxToolBarTool&) = delete;
 };
 
 // ----------------------------------------------------------------------------

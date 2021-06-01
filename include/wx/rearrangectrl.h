@@ -65,6 +65,9 @@ public:
         Create(parent, id, pos, size, order, items, style, validator, name);
     }
 
+    wxRearrangeList(const wxRearrangeList&) = delete;
+	wxRearrangeList& operator=(const wxRearrangeList&) = delete;
+
     // Create() function takes the same parameters as the base class one and
     // the order array determining the initial display order
     bool Create(wxWindow *parent,
@@ -115,10 +118,7 @@ private:
     // the current order array
     wxArrayInt m_order;
 
-
     wxDECLARE_EVENT_TABLE();
-    wxRearrangeList(const wxRearrangeList&) = delete;
-	wxRearrangeList& operator=(const wxRearrangeList&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -129,12 +129,7 @@ class WXDLLIMPEXP_CORE wxRearrangeCtrl : public wxPanel
 {
 public:
     // ctors/Create function are the same as for wxRearrangeList
-    wxRearrangeCtrl()
-    {
-        
-    m_list = nullptr;
-
-    }
+    wxRearrangeCtrl() = default;
 
     wxRearrangeCtrl(wxWindow *parent,
                     wxWindowID id,
@@ -146,12 +141,11 @@ public:
                     const wxValidator& validator = wxDefaultValidator,
                     const wxString& name = wxASCII_STR(wxRearrangeListNameStr))
     {
-        
-    m_list = nullptr;
-
-
         Create(parent, id, pos, size, order, items, style, validator, name);
     }
+
+    wxRearrangeCtrl(const wxRearrangeCtrl&) = delete;
+	wxRearrangeCtrl& operator=(const wxRearrangeCtrl&) = delete;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -167,20 +161,13 @@ public:
     wxRearrangeList *GetList() const { return m_list; }
 
 private:
-    // common part of all ctors
-    
-
     // event handlers for the buttons
     void OnUpdateButtonUI(wxUpdateUIEvent& event);
     void OnButton(wxCommandEvent& event);
 
-
-    wxRearrangeList *m_list;
-
+    wxRearrangeList *m_list{nullptr};
 
     wxDECLARE_EVENT_TABLE();
-    wxRearrangeCtrl(const wxRearrangeCtrl&) = delete;
-	wxRearrangeCtrl& operator=(const wxRearrangeCtrl&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -191,7 +178,7 @@ class WXDLLIMPEXP_CORE wxRearrangeDialog : public wxDialog
 {
 public:
     // default ctor, use Create() later
-    wxRearrangeDialog() {  m_ctrl = nullptr;  }
+    wxRearrangeDialog() = default;
 
     // ctor for the dialog: message is shown inside the dialog itself, order
     // and items are passed to wxRearrangeList used internally
@@ -203,10 +190,11 @@ public:
                       const wxPoint& pos = wxDefaultPosition,
                       const wxString& name = wxASCII_STR(wxRearrangeDialogNameStr))
     {
-         m_ctrl = nullptr; 
-
         Create(parent, message, title, order, items, pos, name);
     }
+
+    wxRearrangeDialog(const wxRearrangeDialog&) = delete;
+	wxRearrangeDialog& operator=(const wxRearrangeDialog&) = delete;
 
     bool Create(wxWindow *parent,
                 const wxString& message,
@@ -233,13 +221,7 @@ public:
     wxArrayInt GetOrder() const;
 
 private:
-    // common part of all ctors
-    
-
-    wxRearrangeCtrl *m_ctrl;
-
-    wxRearrangeDialog(const wxRearrangeDialog&) = delete;
-	wxRearrangeDialog& operator=(const wxRearrangeDialog&) = delete;
+    wxRearrangeCtrl *m_ctrl{nullptr};
 };
 
 #endif // wxUSE_REARRANGECTRL

@@ -22,9 +22,11 @@
 class WXDLLIMPEXP_BASE wxMemoryText : public wxTextBuffer
 {
 public:
-    // Constructors.
     wxMemoryText() = default;
     wxMemoryText(const wxString& name) : wxTextBuffer(name) { }
+
+    wxMemoryText(const wxMemoryText&) = delete;
+	wxMemoryText& operator=(const wxMemoryText&) = delete;
 
 protected:
     bool OnExists() const override
@@ -43,10 +45,6 @@ protected:
     bool OnWrite(wxTextFileType WXUNUSED(typeNew),
                          const wxMBConv& WXUNUSED(conv) = wxMBConvUTF8()) override
         { return true; }
-
-private:
-    wxMemoryText(const wxMemoryText&) = delete;
-	wxMemoryText& operator=(const wxMemoryText&) = delete;
 };
 
 #endif // wxUSE_TEXTBUFFER

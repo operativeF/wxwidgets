@@ -52,6 +52,9 @@ public:
     wxPluginLibrary( const wxString &libname, int flags = wxDL_DEFAULT );
     ~wxPluginLibrary();
 
+    wxPluginLibrary(const wxPluginLibrary&) = delete;
+	wxPluginLibrary& operator=(const wxPluginLibrary&) = delete;
+
     wxPluginLibrary  *RefLib();
     bool              UnrefLib();
 
@@ -95,9 +98,6 @@ private:
     void    RestoreClasses();       // Removes this library from ms_classes
     void    RegisterModules();      // Init any wxModules in the lib.
     void    UnregisterModules();    // Cleanup any wxModules we installed.
-
-    wxPluginLibrary(const wxPluginLibrary&) = delete;
-	wxPluginLibrary& operator=(const wxPluginLibrary&) = delete;
 };
 
 
@@ -119,6 +119,11 @@ public:
         Load(libname, flags);
     }
     ~wxPluginManager() { if ( IsLoaded() ) Unload(); }
+
+    // We could allow this class to be copied if we really
+    // wanted to, but not without modification.
+    wxPluginManager(const wxPluginManager&) = delete;
+	wxPluginManager& operator=(const wxPluginManager&) = delete;
 
     bool   Load(const wxString &libname, int flags = wxDL_DEFAULT);
     void   Unload();
@@ -144,11 +149,6 @@ private:
 
     static wxDLManifest* ms_manifest;  // Static hash of loaded libs.
     wxPluginLibrary*     m_entry{nullptr};      // Cache our entry in the manifest.
-
-    // We could allow this class to be copied if we really
-    // wanted to, but not without modification.
-    wxPluginManager(const wxPluginManager&) = delete;
-	wxPluginManager& operator=(const wxPluginManager&) = delete;
 };
 
 

@@ -1154,12 +1154,12 @@ public:
         m_event.ResumePropagation(m_propagationLevelOld);
     }
 
+    wxPropagationDisabler(const wxPropagationDisabler&) = delete;
+	wxPropagationDisabler& operator=(const wxPropagationDisabler&) = delete;
+
 private:
     wxEvent& m_event;
     int m_propagationLevelOld;
-
-    wxPropagationDisabler(const wxPropagationDisabler&) = delete;
-	wxPropagationDisabler& operator=(const wxPropagationDisabler&) = delete;
 };
 
 /*
@@ -1189,12 +1189,12 @@ public:
         m_event.m_propagationLevel++;
     }
 
+    wxPropagateOnce(const wxPropagateOnce&) = delete;
+	wxPropagateOnce& operator=(const wxPropagateOnce&) = delete;
+
 private:
     wxEvent& m_event;
     wxEvtHandler* const m_propagatedFromOld;
-
-    wxPropagateOnce(const wxPropagateOnce&) = delete;
-	wxPropagateOnce& operator=(const wxPropagateOnce&) = delete;
 };
 
 // A helper object used to temporarily make wxEvent::ShouldProcessOnlyIn()
@@ -1214,22 +1214,21 @@ public:
         m_event.m_handlerToProcessOnlyIn = m_handlerToProcessOnlyInOld;
     }
 
+    wxEventProcessInHandlerOnly(const wxEventProcessInHandlerOnly&) = delete;
+	wxEventProcessInHandlerOnly& operator=(const wxEventProcessInHandlerOnly&) = delete;
+
 private:
     wxEvent& m_event;
     wxEvtHandler * const m_handlerToProcessOnlyInOld;
-
-    wxEventProcessInHandlerOnly(const wxEventProcessInHandlerOnly&) = delete;
-	wxEventProcessInHandlerOnly& operator=(const wxEventProcessInHandlerOnly&) = delete;
 };
 
 
 class WXDLLIMPEXP_BASE wxEventBasicPayloadMixin
 {
 public:
-    wxEventBasicPayloadMixin()
-        
-          
-    = default;
+    wxEventBasicPayloadMixin() = default;
+
+    wxEventBasicPayloadMixin& operator=(const wxEventBasicPayloadMixin&) = delete;
 
     void SetString(const wxString& s) { m_cmdString = s; }
     const wxString& GetString() const { return m_cmdString; }
@@ -1246,14 +1245,14 @@ protected:
     wxString          m_cmdString;     // String event argument
     int               m_commandInt{0};
     long              m_extraLong{0};     // Additional information (e.g. select/deselect)
-
-    wxEventBasicPayloadMixin& operator=(const wxEventBasicPayloadMixin&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxEventAnyPayloadMixin : public wxEventBasicPayloadMixin
 {
 public:
     wxEventAnyPayloadMixin()  = default;
+
+    wxEventBasicPayloadMixin& operator=(const wxEventBasicPayloadMixin&) = delete;
 
 #if wxUSE_ANY
     template<typename T>
@@ -1271,8 +1270,6 @@ public:
 protected:
     wxAny m_payload;
 #endif // wxUSE_ANY
-
-    wxEventBasicPayloadMixin& operator=(const wxEventBasicPayloadMixin&) = delete;
 };
 
 
@@ -1302,10 +1299,9 @@ public:
         : wxEvent(0, wxEVT_IDLE)
           
         { }
-    wxIdleEvent(const wxIdleEvent& event)
-        
-          
-    = default;
+    wxIdleEvent(const wxIdleEvent& event) = default;
+
+	wxIdleEvent& operator=(const wxIdleEvent&) = delete;
 
     void RequestMore(bool needMore = true) { m_requestMore = needMore; }
     bool MoreRequested() const { return m_requestMore; }
@@ -1324,9 +1320,7 @@ protected:
     bool m_requestMore{false};
     static wxIdleMode sm_idleMode;
 
-private:
-    public:
-	wxIdleEvent& operator=(const wxIdleEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -1352,6 +1346,8 @@ public:
         SetString(GetString().Clone());
     }
 
+	wxThreadEvent& operator=(const wxThreadEvent&) = delete;
+
     wxEvent *Clone() const override
     {
         return new wxThreadEvent(*this);
@@ -1362,9 +1358,7 @@ public:
     wxEventCategory GetEventCategory() const override
         { return wxEVT_CATEGORY_THREAD; }
 
-private:
-    public:
-	wxThreadEvent& operator=(const wxThreadEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -1605,6 +1599,8 @@ public:
             m_cmdString = event.GetString();
     }
 
+	wxCommandEvent& operator=(const wxCommandEvent&) = delete;
+
     // Set/Get client data from controls
     void SetClientData(void* clientData) { m_clientData = clientData; }
     void *GetClientData() const { return m_clientData; }
@@ -1633,10 +1629,7 @@ protected:
     void*             m_clientData;    // Arbitrary client data
     wxClientData*     m_clientObject;  // Arbitrary client object
 
-private:
-
-    public:
-	wxCommandEvent& operator=(const wxCommandEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -1655,6 +1648,8 @@ public:
         : wxCommandEvent(event)
         { m_bAllow = event.m_bAllow; }
 
+	wxNotifyEvent& operator=(const wxNotifyEvent&) = delete;
+
     // veto the operation (usually it's allowed by default)
     void Veto() { m_bAllow = false; }
 
@@ -1669,9 +1664,7 @@ public:
 private:
     bool m_bAllow;
 
-private:
-    public:
-	wxNotifyEvent& operator=(const wxNotifyEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -1698,6 +1691,8 @@ public:
     wxScrollEvent(wxEventType commandType = wxEVT_NULL,
                   int winid = 0, int pos = 0, int orient = 0);
 
+	wxScrollEvent& operator=(const wxScrollEvent&) = delete;
+
     int GetOrientation() const { return (int) m_extraLong; }
     int GetPosition() const { return m_commandInt; }
     void SetOrientation(int orient) { m_extraLong = (long) orient; }
@@ -1705,9 +1700,7 @@ public:
 
     wxEvent *Clone() const override { return new wxScrollEvent(*this); }
 
-private:
-    public:
-	wxScrollEvent& operator=(const wxScrollEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -1735,6 +1728,8 @@ public:
         {    m_commandInt = event.m_commandInt;
             m_extraLong = event.m_extraLong;    }
 
+	wxScrollWinEvent& operator=(const wxScrollWinEvent&) = delete;
+
     int GetOrientation() const { return (int) m_extraLong; }
     int GetPosition() const { return m_commandInt; }
     void SetOrientation(int orient) { m_extraLong = (long) orient; }
@@ -1746,9 +1741,7 @@ protected:
     int               m_commandInt;
     long              m_extraLong;
 
-private:
-    public:
-	wxScrollWinEvent& operator=(const wxScrollWinEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -1931,10 +1924,9 @@ public:
           m_x(x), m_y(y) 
         { }
 
-    wxSetCursorEvent(const wxSetCursorEvent& event)
-        
-          
-        = default;
+    wxSetCursorEvent(const wxSetCursorEvent& event) = default;
+
+	wxSetCursorEvent& operator=(const wxSetCursorEvent&) = delete;
 
     wxCoord GetX() const { return m_x; }
     wxCoord GetY() const { return m_y; }
@@ -1949,9 +1941,7 @@ private:
     wxCoord  m_x, m_y;
     wxCursor m_cursor;
 
-private:
-    public:
-	wxSetCursorEvent& operator=(const wxSetCursorEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -1978,6 +1968,8 @@ public:
         m_isEnd = event.m_isEnd;
     }
 
+	wxGestureEvent& operator=(const wxGestureEvent&) = delete;
+
     const wxPoint& GetPosition() const { return m_pos; }
     void SetPosition(const wxPoint& pos) { m_pos = pos; }
     bool IsGestureStart() const { return m_isStart; }
@@ -1991,8 +1983,7 @@ protected:
     wxPoint m_pos;
     bool m_isStart, m_isEnd;
 
-    public:
-	wxGestureEvent& operator=(const wxGestureEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2013,10 +2004,9 @@ public:
     {
     }
 
-    wxPanGestureEvent(const wxPanGestureEvent& event)
-        
-          
-    = default;
+    wxPanGestureEvent(const wxPanGestureEvent& event) = default;
+
+	wxPanGestureEvent& operator=(const wxPanGestureEvent&) = delete;
 
     wxPoint GetDelta() const { return m_delta; }
     void SetDelta(const wxPoint& delta) { m_delta = delta; }
@@ -2026,8 +2016,7 @@ public:
 private:
     wxPoint m_delta;
 
-    public:
-	wxPanGestureEvent& operator=(const wxPanGestureEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2051,6 +2040,8 @@ public:
         m_zoomFactor = event.m_zoomFactor;
     }
 
+	wxZoomGestureEvent& operator=(const wxZoomGestureEvent&) = delete;
+
     double GetZoomFactor() const { return m_zoomFactor; }
     void SetZoomFactor(double zoomFactor) { m_zoomFactor = zoomFactor; }
 
@@ -2059,8 +2050,7 @@ public:
 private:
     double m_zoomFactor;
 
-    public:
-	wxZoomGestureEvent& operator=(const wxZoomGestureEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2084,6 +2074,8 @@ public:
         m_rotationAngle = event.m_rotationAngle;
     }
 
+	wxRotateGestureEvent& operator=(const wxRotateGestureEvent&) = delete;
+
     double GetRotationAngle() const { return m_rotationAngle; }
     void SetRotationAngle(double rotationAngle) { m_rotationAngle = rotationAngle; }
 
@@ -2092,8 +2084,7 @@ public:
 private:
     double m_rotationAngle;
 
-    public:
-	wxRotateGestureEvent& operator=(const wxRotateGestureEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2112,14 +2103,13 @@ public:
         : wxGestureEvent(winid, wxEVT_TWO_FINGER_TAP)
         { }
 
-    wxTwoFingerTapEvent(const wxTwoFingerTapEvent& event)  
-    = default;
+    wxTwoFingerTapEvent(const wxTwoFingerTapEvent& event) = default;
+
+	wxTwoFingerTapEvent& operator=(const wxTwoFingerTapEvent&) = delete;
 
     wxEvent *Clone() const override { return new wxTwoFingerTapEvent(*this); }
 
-private:
-    public:
-	wxTwoFingerTapEvent& operator=(const wxTwoFingerTapEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2138,13 +2128,13 @@ public:
         : wxGestureEvent(winid, wxEVT_LONG_PRESS)
         { }
 
-    wxLongPressEvent(const wxLongPressEvent& event)  
-    = default;
+    wxLongPressEvent(const wxLongPressEvent& event) = default;
+
+	wxLongPressEvent& operator=(const wxLongPressEvent&) = delete;
 
     wxEvent *Clone() const override { return new wxLongPressEvent(*this); }
-private:
-    public:
-	wxLongPressEvent& operator=(const wxLongPressEvent&) = delete;
+
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2163,13 +2153,13 @@ public:
         : wxGestureEvent(winid, wxEVT_PRESS_AND_TAP)
         { }
 
-    wxPressAndTapEvent(const wxPressAndTapEvent& event)  
-    = default;
+    wxPressAndTapEvent(const wxPressAndTapEvent& event) = default;
+
+	wxPressAndTapEvent& operator=(const wxPressAndTapEvent&) = delete;
 
     wxEvent *Clone() const override { return new wxPressAndTapEvent(*this); }
-private:
-    public:
-	wxPressAndTapEvent& operator=(const wxPressAndTapEvent&) = delete;
+
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2354,12 +2344,12 @@ public:
         : wxEvent(winid, wxEVT_SIZE),
           m_size(sz)
         { }
-    wxSizeEvent(const wxSizeEvent& event)
-         
-        = default;
+    wxSizeEvent(const wxSizeEvent& event) = default;
     wxSizeEvent(const wxRect& rect, int id = 0)
         : m_size(rect.GetSize()), m_rect(rect)
         { m_eventType = wxEVT_SIZING; m_id = id; }
+
+	wxSizeEvent& operator=(const wxSizeEvent&) = delete;
 
     wxSize GetSize() const { return m_size; }
     void SetSize(wxSize size) { m_size = size; }
@@ -2368,14 +2358,12 @@ public:
 
     wxEvent *Clone() const override { return new wxSizeEvent(*this); }
 
-public:
+private:
     // For internal usage only. Will be converted to protected members.
     wxSize m_size;
     wxRect m_rect; // Used for wxEVT_SIZING
 
-private:
-    public:
-	wxSizeEvent& operator=(const wxSizeEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2405,6 +2393,8 @@ public:
         : m_pos(rect.GetPosition()), m_rect(rect)
         { m_eventType = wxEVT_MOVING; m_id = id; }
 
+	wxMoveEvent& operator=(const wxMoveEvent&) = delete;
+
     wxPoint GetPosition() const { return m_pos; }
     void SetPosition(const wxPoint& pos) { m_pos = pos; }
     wxRect GetRect() const { return m_rect; }
@@ -2416,9 +2406,7 @@ protected:
     wxPoint m_pos;
     wxRect m_rect;
 
-private:
-    public:
-	wxMoveEvent& operator=(const wxMoveEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2438,15 +2426,11 @@ class WXDLLIMPEXP_CORE wxPaintEvent : public wxEvent
 public:
 #endif // WXBUILDING
     explicit wxPaintEvent(wxWindowBase* window = nullptr);
-
-public:
-    // default copy ctor and dtor are fine
+	
+    wxPaintEvent& operator=(const wxPaintEvent&) = delete;
 
     wxEvent *Clone() const override { return new wxPaintEvent(*this); }
 
-private:
-    public:
-	wxPaintEvent& operator=(const wxPaintEvent&) = delete;
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2461,12 +2445,10 @@ public:
 #endif // WXBUILDING
     explicit wxNcPaintEvent(wxWindowBase* window = nullptr);
 
-public:
+	wxNcPaintEvent& operator=(const wxNcPaintEvent&) = delete;
+
     wxEvent *Clone() const override { return new wxNcPaintEvent(*this); }
 
-private:
-    public:
-	wxNcPaintEvent& operator=(const wxNcPaintEvent&) = delete;
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2485,10 +2467,9 @@ public:
           m_dc(dc)
         { }
 
-    wxEraseEvent(const wxEraseEvent& event)
-        
-          
-        = default;
+    wxEraseEvent(const wxEraseEvent& event) = default;
+
+	wxEraseEvent& operator=(const wxEraseEvent&) = delete;
 
     wxDC *GetDC() const { return m_dc; }
 
@@ -2497,9 +2478,7 @@ public:
 protected:
     wxDC *m_dc;
 
-private:
-    public:
-	wxEraseEvent& operator=(const wxEraseEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2522,6 +2501,8 @@ public:
         : wxEvent(event)
         { m_win = event.m_win; }
 
+	wxFocusEvent& operator=(const wxFocusEvent&) = delete;
+
     // The window associated with this event is the window which had focus
     // before for SET event and the window which will have focus for the KILL
     // one. NB: it may be NULL in both cases!
@@ -2533,9 +2514,7 @@ public:
 private:
     wxWindow *m_win;
 
-private:
-    public:
-	wxFocusEvent& operator=(const wxFocusEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2548,13 +2527,13 @@ class WXDLLIMPEXP_CORE wxChildFocusEvent : public wxCommandEvent
 public:
     wxChildFocusEvent(wxWindow *win = nullptr);
 
+	wxChildFocusEvent& operator=(const wxChildFocusEvent&) = delete;
+
     wxWindow *GetWindow() const { return (wxWindow *)GetEventObject(); }
 
     wxEvent *Clone() const override { return new wxChildFocusEvent(*this); }
 
-private:
-    public:
-	wxChildFocusEvent& operator=(const wxChildFocusEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2592,6 +2571,8 @@ public:
         m_activationReason = event.m_activationReason;
     }
 
+	wxActivateEvent& operator=(const wxActivateEvent&) = delete;
+
     bool GetActive() const { return m_active; }
     Reason GetActivationReason() const { return m_activationReason;}
 
@@ -2601,9 +2582,7 @@ private:
     bool m_active;
     Reason m_activationReason;
 
-private:
-    public:
-	wxActivateEvent& operator=(const wxActivateEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2621,11 +2600,11 @@ public:
         : wxEvent(Id, wxEVT_INIT_DIALOG)
         { }
 
+	wxInitDialogEvent& operator=(const wxInitDialogEvent&) = delete;
+
     wxEvent *Clone() const override { return new wxInitDialogEvent(*this); }
 
-private:
-    public:
-	wxInitDialogEvent& operator=(const wxInitDialogEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2648,6 +2627,8 @@ public:
         : wxEvent(event)
     { m_menuId = event.m_menuId; m_menu = event.m_menu; }
 
+	wxMenuEvent& operator=(const wxMenuEvent&) = delete;
+
     // only for wxEVT_MENU_HIGHLIGHT
     int GetMenuId() const { return m_menuId; }
 
@@ -2663,8 +2644,7 @@ private:
     int     m_menuId;
     wxMenu* m_menu;
 
-    public:
-	wxMenuEvent& operator=(const wxMenuEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2684,9 +2664,9 @@ public:
         : wxEvent(winid, type)
           {}
 
-    wxCloseEvent(const wxCloseEvent& event)
-        
-        = default;
+    wxCloseEvent(const wxCloseEvent& event) = default;
+
+	wxCloseEvent& operator=(const wxCloseEvent&) = delete;
 
     void SetLoggingOff(bool logOff) { m_loggingOff = logOff; }
     bool GetLoggingOff() const
@@ -2718,9 +2698,7 @@ protected:
          m_veto{false},
          m_canVeto{true};
 
-private:
-    public:
-	wxCloseEvent& operator=(const wxCloseEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2740,6 +2718,8 @@ public:
         : wxEvent(event)
     { m_show = event.m_show; }
 
+	wxShowEvent& operator=(const wxShowEvent&) = delete;
+
     void SetShow(bool show) { m_show = show; }
 
     // return true if the window was shown, false if hidden
@@ -2750,9 +2730,7 @@ public:
 protected:
     bool m_show;
 
-private:
-    public:
-	wxShowEvent& operator=(const wxShowEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2772,6 +2750,8 @@ public:
         : wxEvent(event)
     { m_iconized = event.m_iconized; }
 
+	wxIconizeEvent& operator=(const wxIconizeEvent&) = delete;
+
     // return true if the frame was iconized, false if restored
     bool IsIconized() const { return m_iconized; }
 
@@ -2780,9 +2760,7 @@ public:
 protected:
     bool m_iconized;
 
-private:
-    public:
-	wxIconizeEvent& operator=(const wxIconizeEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2798,11 +2776,11 @@ public:
         : wxEvent(winid, wxEVT_MAXIMIZE)
         { }
 
+	wxMaximizeEvent& operator=(const wxMaximizeEvent&) = delete;
+
     wxEvent *Clone() const override { return new wxMaximizeEvent(*this); }
 
-private:
-    public:
-	wxMaximizeEvent& operator=(const wxMaximizeEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2821,6 +2799,8 @@ public:
         : wxEvent(event)
         { m_fullscreen = event.m_fullscreen; }
 
+	wxFullScreenEvent& operator=(const wxFullScreenEvent&) = delete;
+
     bool IsFullScreen() const { return m_fullscreen; }
 
     wxEvent *Clone() const override { return new wxFullScreenEvent(*this); }
@@ -2828,9 +2808,7 @@ public:
 protected:
     bool m_fullscreen;
 
-private:
-    public:
-	wxFullScreenEvent& operator=(const wxFullScreenEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2883,10 +2861,10 @@ public:
           m_joyStick(joystick)
     {
     }
-    wxJoystickEvent(const wxJoystickEvent& event)
-        
-          
-    = default;
+
+    wxJoystickEvent(const wxJoystickEvent& event) = default;
+
+	wxJoystickEvent& operator=(const wxJoystickEvent&) = delete;
 
     wxPoint GetPosition() const { return m_pos; }
     int GetZPosition() const { return m_zPosition; }
@@ -2928,9 +2906,7 @@ public:
 
     wxEvent *Clone() const override { return new wxJoystickEvent(*this); }
 
-private:
-    public:
-	wxJoystickEvent& operator=(const wxJoystickEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -2976,15 +2952,15 @@ public:
         delete [] m_files;
     }
 
+	wxDropFilesEvent& operator=(const wxDropFilesEvent&) = delete;
+
     wxPoint GetPosition() const { return m_pos; }
     int GetNumberOfFiles() const { return m_noFiles; }
     wxString *GetFiles() const { return m_files; }
 
     wxEvent *Clone() const override { return new wxDropFilesEvent(*this); }
 
-private:
-    public:
-	wxDropFilesEvent& operator=(const wxDropFilesEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -3024,10 +3000,10 @@ public:
         m_setChecked = false;
         m_isCheckable = true;
     }
-    wxUpdateUIEvent(const wxUpdateUIEvent& event)
-        
-          
-    = default;
+
+    wxUpdateUIEvent(const wxUpdateUIEvent& event) = default;
+
+	wxUpdateUIEvent& operator=(const wxUpdateUIEvent&) = delete;
 
     bool GetChecked() const { return m_checked; }
     bool GetEnabled() const { return m_enabled; }
@@ -3087,9 +3063,7 @@ protected:
     static long             sm_updateInterval;
     static wxUpdateUIMode   sm_updateMode;
 
-private:
-    public:
-	wxUpdateUIEvent& operator=(const wxUpdateUIEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -3107,11 +3081,11 @@ public:
         : wxEvent(0, wxEVT_SYS_COLOUR_CHANGED)
         { }
 
+	wxSysColourChangedEvent& operator=(const wxSysColourChangedEvent&) = delete;
+
     wxEvent *Clone() const override { return new wxSysColourChangedEvent(*this); }
 
-private:
-    public:
-	wxSysColourChangedEvent& operator=(const wxSysColourChangedEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -3131,10 +3105,9 @@ public:
           m_gainedCapture(gainedCapture)
         { }
 
-    wxMouseCaptureChangedEvent(const wxMouseCaptureChangedEvent& event)
-        
-          
-        = default;
+    wxMouseCaptureChangedEvent(const wxMouseCaptureChangedEvent& event) = default;
+
+	wxMouseCaptureChangedEvent& operator=(const wxMouseCaptureChangedEvent&) = delete;
 
     wxEvent *Clone() const override { return new wxMouseCaptureChangedEvent(*this); }
 
@@ -3143,8 +3116,7 @@ public:
 private:
     wxWindow* m_gainedCapture;
 
-    public:
-	wxMouseCaptureChangedEvent& operator=(const wxMouseCaptureChangedEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -3164,14 +3136,13 @@ public:
         : wxEvent(winid, wxEVT_MOUSE_CAPTURE_LOST)
     {}
 
-    wxMouseCaptureLostEvent(const wxMouseCaptureLostEvent& event)
-         
-    = default;
+    wxMouseCaptureLostEvent(const wxMouseCaptureLostEvent& event) = default;
+
+	wxMouseCaptureLostEvent& operator=(const wxMouseCaptureLostEvent&) = delete;
 
     wxEvent *Clone() const override { return new wxMouseCaptureLostEvent(*this); }
 
-    public:
-	wxMouseCaptureLostEvent& operator=(const wxMouseCaptureLostEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -3182,19 +3153,19 @@ public:
  */
 class WXDLLIMPEXP_CORE wxDisplayChangedEvent : public wxEvent
 {
-private:
-    public:
-	wxDisplayChangedEvent& operator=(const wxDisplayChangedEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
-
 public:
     wxDisplayChangedEvent()
         : wxEvent(0, wxEVT_DISPLAY_CHANGED)
         { }
 
+	wxDisplayChangedEvent& operator=(const wxDisplayChangedEvent&) = delete;
+
     wxEvent *Clone() const override { return new wxDisplayChangedEvent(*this); }
+
+	wxClassInfo *GetClassInfo() const override ;
+	static wxClassInfo ms_classInfo; 
+	static wxObject* wxCreateObject();
+
 };
 
 /*
@@ -3211,6 +3182,8 @@ public:
           m_newDPI(newDPI)
         { }
 
+	wxDPIChangedEvent& operator=(const wxDPIChangedEvent&) = delete;
+
     wxSize GetOldDPI() const { return m_oldDPI; }
     wxSize GetNewDPI() const { return m_newDPI; }
 
@@ -3220,8 +3193,7 @@ private:
     wxSize m_oldDPI;
     wxSize m_newDPI;
 
-    public:
-	wxDPIChangedEvent& operator=(const wxDPIChangedEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -3239,10 +3211,9 @@ public:
           
         { }
 
-    wxPaletteChangedEvent(const wxPaletteChangedEvent& event)
-        
-          
-        = default;
+    wxPaletteChangedEvent(const wxPaletteChangedEvent& event) = default;
+
+	wxPaletteChangedEvent& operator=(const wxPaletteChangedEvent&) = delete;
 
     void SetChangedWindow(wxWindow* win) { m_changedWindow = win; }
     wxWindow* GetChangedWindow() const { return m_changedWindow; }
@@ -3252,9 +3223,7 @@ public:
 protected:
     wxWindow*     m_changedWindow{nullptr};
 
-private:
-    public:
-	wxPaletteChangedEvent& operator=(const wxPaletteChangedEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -3272,10 +3241,9 @@ public:
         : wxEvent(winid, wxEVT_QUERY_NEW_PALETTE)
           
         { }
-    wxQueryNewPaletteEvent(const wxQueryNewPaletteEvent& event)
-        
-        
-    = default;
+    wxQueryNewPaletteEvent(const wxQueryNewPaletteEvent& event) = default;
+
+	wxQueryNewPaletteEvent& operator=(const wxQueryNewPaletteEvent&) = delete;
 
     // App sets this if it changes the palette.
     void SetPaletteRealized(bool realized) { m_paletteRealized = realized; }
@@ -3286,9 +3254,7 @@ public:
 protected:
     bool m_paletteRealized{false};
 
-private:
-    public:
-	wxQueryNewPaletteEvent& operator=(const wxQueryNewPaletteEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -3304,16 +3270,14 @@ class WXDLLIMPEXP_CORE wxNavigationKeyEvent : public wxEvent
 public:
     wxNavigationKeyEvent()
         : wxEvent(0, wxEVT_NAVIGATION_KEY),
-          m_flags(IsForward | FromTab)
-          
-        {
-            m_propagationLevel = wxEVENT_PROPAGATE_NONE;
-        }
+          m_flags(IsForward | FromTab)  
+    {
+        m_propagationLevel = wxEVENT_PROPAGATE_NONE;
+    }
 
-    wxNavigationKeyEvent(const wxNavigationKeyEvent& event)
-        
-          
-        = default;
+    wxNavigationKeyEvent(const wxNavigationKeyEvent& event) = default;
+
+	wxNavigationKeyEvent& operator=(const wxNavigationKeyEvent&) = delete;
 
     // direction: forward (true) or backward (false)
     bool GetDirection() const
@@ -3356,9 +3320,7 @@ public:
     long m_flags;
     wxWindow *m_focus{nullptr};
 
-private:
-    public:
-	wxNavigationKeyEvent& operator=(const wxNavigationKeyEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -3379,13 +3341,12 @@ class WXDLLIMPEXP_CORE wxWindowCreateEvent : public wxCommandEvent
 public:
     wxWindowCreateEvent(wxWindow *win = nullptr);
 
+	wxWindowCreateEvent& operator=(const wxWindowCreateEvent&) = delete;
+
     wxWindow *GetWindow() const { return (wxWindow *)GetEventObject(); }
 
     wxEvent *Clone() const override { return new wxWindowCreateEvent(*this); }
 
-private:
-    public:
-	wxWindowCreateEvent& operator=(const wxWindowCreateEvent&) = delete;
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -3396,13 +3357,12 @@ class WXDLLIMPEXP_CORE wxWindowDestroyEvent : public wxCommandEvent
 public:
     wxWindowDestroyEvent(wxWindow *win = nullptr);
 
+	wxWindowDestroyEvent& operator=(const wxWindowDestroyEvent&) = delete;
+
     wxWindow *GetWindow() const { return (wxWindow *)GetEventObject(); }
 
     wxEvent *Clone() const override { return new wxWindowDestroyEvent(*this); }
 
-private:
-    public:
-	wxWindowDestroyEvent& operator=(const wxWindowDestroyEvent&) = delete;
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -3433,10 +3393,10 @@ public:
           m_pos(pt),
           m_origin(GuessOrigin(origin))
     { }
-    wxHelpEvent(const wxHelpEvent& event)
-        
-          
-    = default;
+
+    wxHelpEvent(const wxHelpEvent& event) = default;
+
+	wxHelpEvent& operator=(const wxHelpEvent&) = delete;
 
     // Position of event (in screen coordinates)
     const wxPoint& GetPosition() const { return m_pos; }
@@ -3466,9 +3426,7 @@ protected:
     // specified in the ctor
     static Origin GuessOrigin(Origin origin);
 
-private:
-    public:
-	wxHelpEvent& operator=(const wxHelpEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -3492,15 +3450,14 @@ public:
                      wxWindowID winid = 0)
         : wxCommandEvent(type, winid)
     { }
-    wxClipboardTextEvent(const wxClipboardTextEvent& event)
-         
-    = default;
+
+    wxClipboardTextEvent(const wxClipboardTextEvent& event) = default;
+
+	wxClipboardTextEvent& operator=(const wxClipboardTextEvent&) = delete;
 
     wxEvent *Clone() const override { return new wxClipboardTextEvent(*this); }
 
-private:
-    public:
-	wxClipboardTextEvent& operator=(const wxClipboardTextEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -3523,10 +3480,10 @@ public:
         : wxCommandEvent(type, winid),
           m_pos(pt)
     { }
-    wxContextMenuEvent(const wxContextMenuEvent& event)
-        
-        
-    = default;
+
+    wxContextMenuEvent(const wxContextMenuEvent& event) = default;
+
+	wxContextMenuEvent& operator=(const wxContextMenuEvent&) = delete;
 
     // Position of event (in screen coordinates)
     const wxPoint& GetPosition() const { return m_pos; }
@@ -3537,9 +3494,7 @@ public:
 protected:
     wxPoint   m_pos;
 
-private:
-    public:
-	wxContextMenuEvent& operator=(const wxContextMenuEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();
@@ -3598,6 +3553,8 @@ struct WXDLLIMPEXP_BASE wxEventTableEntryBase
         delete m_fn;
     }
 
+    wxEventTableEntryBase& operator=(const wxEventTableEntryBase&) = delete;
+
     // the range of ids for this entry: if m_lastId == wxID_ANY, the range
     // consists only of m_id, otherwise it is m_id..m_lastId inclusive
     int m_id,
@@ -3608,9 +3565,6 @@ struct WXDLLIMPEXP_BASE wxEventTableEntryBase
 
     // arbitrary user data associated with the callback
     wxObject* m_callbackUserData;
-
-private:
-    wxEventTableEntryBase& operator=(const wxEventTableEntryBase&) = delete;
 };
 
 // an entry from a static event table
@@ -3622,6 +3576,8 @@ struct WXDLLIMPEXP_BASE wxEventTableEntry : public wxEventTableEntryBase
         m_eventType(evType)
     { }
 
+    wxEventTableEntry& operator=(const wxEventTableEntry&) = delete;
+
     // the reference to event type: this allows us to not care about the
     // (undefined) order in which the event table entries and the event types
     // are initialized: initially the value of this reference might be
@@ -3629,9 +3585,6 @@ struct WXDLLIMPEXP_BASE wxEventTableEntry : public wxEventTableEntryBase
     // objects will have been initialized (including the event type constants)
     // and so it will have the correct value when it is needed
     const int& m_eventType;
-
-private:
-    wxEventTableEntry& operator=(const wxEventTableEntry&) = delete;
 };
 
 // an entry used in dynamic event table managed by wxEvtHandler::Connect()
@@ -3643,13 +3596,12 @@ struct WXDLLIMPEXP_BASE wxDynamicEventTableEntry : public wxEventTableEntryBase
           m_eventType(evType)
     { }
 
+    wxDynamicEventTableEntry& operator=(const wxDynamicEventTableEntry&) = delete;
+
     // not a reference here as we can't keep a reference to a temporary int
     // created to wrap the constant value typically passed to Connect() - nor
     // do we need it
     int m_eventType;
-
-private:
-    wxDynamicEventTableEntry& operator=(const wxDynamicEventTableEntry&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -3685,8 +3637,10 @@ public:
     //       can be that the event table is not yet full initialize, the hash
     //       will gets initialized when handling the first event look-up request.
     wxEventHashTable(const wxEventTable &table);
-    // Destructor.
     ~wxEventHashTable();
+
+    wxEventHashTable(const wxEventHashTable&) = delete;
+	wxEventHashTable& operator=(const wxEventHashTable&) = delete;
 
     // Handle the given event, in other words search the event table hash
     // and call self->ProcessEvent() if a match was found.
@@ -3722,9 +3676,6 @@ protected:
     static wxEventHashTable* sm_first;
     wxEventHashTable* m_previous;
     wxEventHashTable* m_next;
-
-    wxEventHashTable(const wxEventHashTable&) = delete;
-	wxEventHashTable& operator=(const wxEventHashTable&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -4218,6 +4169,8 @@ public:
         m_sink->AddNode(this);
     }
 
+    wxEventConnectionRef& operator=(const wxEventConnectionRef&) = delete;
+
     // The sink is being destroyed
     void OnObjectDestroy( ) override
     {
@@ -4246,8 +4199,6 @@ private:
     int m_refCount{0};
 
     friend class wxEvtHandler;
-
-    wxEventConnectionRef& operator=(const wxEventConnectionRef&) = delete;
 };
 
 // Post a message to the given event handler which will be processed during the
@@ -4294,6 +4245,9 @@ public:
     wxEventBlocker(wxWindow *win, wxEventType type = wxEVT_ANY);
     ~wxEventBlocker() override;
 
+    wxEventBlocker(const wxEventBlocker&) = delete;
+	wxEventBlocker& operator=(const wxEventBlocker&) = delete;
+
     void Block(wxEventType type)
     {
         m_eventsToBlock.push_back(static_cast<int>(type));
@@ -4304,9 +4258,6 @@ public:
 protected:
     std::vector<int> m_eventsToBlock;
     wxWindow *m_window;
-
-    wxEventBlocker(const wxEventBlocker&) = delete;
-	wxEventBlocker& operator=(const wxEventBlocker&) = delete;
 };
 
 typedef void (wxEvtHandler::*wxCommandEventFunction)(wxCommandEvent&);

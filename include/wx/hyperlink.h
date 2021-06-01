@@ -107,6 +107,8 @@ public:
         SetEventObject(generator);
     }
 
+	wxHyperlinkEvent& operator=(const wxHyperlinkEvent&) = delete;
+
     // Returns the URL associated with the hyperlink control
     // that the user clicked on.
     wxString GetURL() const { return m_url; }
@@ -120,8 +122,7 @@ private:
     // URL associated with the hyperlink control that the used clicked on.
     wxString m_url;
 
-    public:
-	wxHyperlinkEvent& operator=(const wxHyperlinkEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

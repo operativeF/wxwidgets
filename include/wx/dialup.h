@@ -166,6 +166,8 @@ public:
                                  : wxEVT_DIALUP_DISCONNECTED);
     }
 
+    wxDialUpEvent& operator=(const wxDialUpEvent&) = delete;
+
     // is this a CONNECTED or DISCONNECTED event?
     bool IsConnectedEvent() const
         { return GetEventType() == wxEVT_DIALUP_CONNECTED; }
@@ -177,9 +179,6 @@ public:
 
     // implement the base class pure virtual
     wxEvent *Clone() const override { return new wxDialUpEvent(*this); }
-
-private:
-    wxDialUpEvent& operator=(const wxDialUpEvent&) = delete;
 };
 
 // the type of dialup event handler function

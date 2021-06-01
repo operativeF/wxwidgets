@@ -44,6 +44,8 @@ public:
     {
     }
 
+    wxAnyStrPtr& operator=(const wxAnyStrPtr&) = delete;
+
     // default copy ctor is ok and so is default dtor, in particular we do not
     // free the string
 
@@ -130,8 +132,6 @@ private:
     // string is NULL this object is NULL pointer-like
     const wxString * const m_str{nullptr};
     const wxString::const_iterator m_iter;
-
-    wxAnyStrPtr& operator=(const wxAnyStrPtr&) = delete;
 };
 
 #endif // _WX_ANYSTR_H_

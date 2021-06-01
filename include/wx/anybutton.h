@@ -53,6 +53,9 @@ class WXDLLIMPEXP_CORE wxAnyButtonBase : public wxControl
 public:
     wxAnyButtonBase() = default;
 
+    wxAnyButtonBase(const wxAnyButtonBase&) = delete;
+	wxAnyButtonBase& operator=(const wxAnyButtonBase&) = delete;
+    
     // show the image in the button in addition to the label: this method is
     // supported on all (major) platforms
     void SetBitmap(const wxBitmap& bitmap, wxDirection dir = wxLEFT)
@@ -170,10 +173,6 @@ protected:
 
     virtual bool DoGetAuthNeeded() const { return false; }
     virtual void DoSetAuthNeeded(bool WXUNUSED(show)) { }
-
-
-    wxAnyButtonBase(const wxAnyButtonBase&) = delete;
-	wxAnyButtonBase& operator=(const wxAnyButtonBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

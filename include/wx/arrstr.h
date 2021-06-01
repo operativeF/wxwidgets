@@ -240,6 +240,8 @@ public:
         m_data.ptr = &s;
     }
 
+    wxArrayStringsAdapter& operator=(const wxArrayStringsAdapter&) = delete;
+
     // default copy constructor is ok
 
     // iteration interface
@@ -274,8 +276,6 @@ private:
         const wxString *      ptr;
         const wxArrayString * array;
     } m_data;
-
-    wxArrayStringsAdapter& operator=(const wxArrayStringsAdapter&) = delete;
 };
 
 #endif // _WX_ARRSTR_H

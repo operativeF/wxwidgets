@@ -159,6 +159,9 @@ public:
     // default ctor, SetContainerWindow() must be called later
     wxControlContainer();
 
+    wxControlContainer(const wxControlContainer&) = delete;
+	wxControlContainer& operator=(const wxControlContainer&) = delete;
+
     // the methods to be called from the window event handlers
     void HandleOnNavigationKey(wxNavigationKeyEvent& event);
     void HandleOnFocus(wxFocusEvent& event);
@@ -167,11 +170,6 @@ public:
     // called from OnChildFocus() handler, i.e. when one of our (grand)
     // children gets the focus
     void SetLastFocus(wxWindow *win);
-
-protected:
-
-    wxControlContainer(const wxControlContainer&) = delete;
-	wxControlContainer& operator=(const wxControlContainer&) = delete;
 };
 
 #endif // wxHAS_NATIVE_TAB_TRAVERSAL/!wxHAS_NATIVE_TAB_TRAVERSAL
@@ -206,6 +204,9 @@ public:
                               &wxNavigationEnabled::OnChildFocus, this);
 #endif // !wxHAS_NATIVE_TAB_TRAVERSAL
     }
+
+    wxNavigationEnabled(const wxNavigationEnabled<W>&)  = delete;
+	wxNavigationEnabled& operator=(const wxNavigationEnabled<W>&) = delete;
 
     WXDLLIMPEXP_INLINE_CORE bool AcceptsFocus() const override
     {
@@ -292,10 +293,6 @@ protected:
 #endif // !wxHAS_NATIVE_TAB_TRAVERSAL
 
     wxControlContainer m_container;
-
-
-    wxNavigationEnabled(const wxNavigationEnabled<W>&)  = delete;
-	wxNavigationEnabled& operator=(const wxNavigationEnabled<W>&) = delete;
 };
 
 #endif // _WX_CONTAINR_H_

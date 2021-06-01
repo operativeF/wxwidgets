@@ -48,6 +48,9 @@ public:
         wxASSERT_MSG( !m_next, "Forgot to call wxEvtHandler::RemoveFilter()?" );
     }
 
+    wxEventFilter(const wxEventFilter&) = delete;
+	wxEventFilter& operator=(const wxEventFilter&) = delete;
+    
     // This method allows to filter all the events processed by the program, so
     // you should try to return quickly from it to avoid slowing down the
     // program to a crawl.
@@ -64,9 +67,6 @@ private:
 
     // And provide access to it for wxEvtHandler [only].
     friend class wxEvtHandler;
-
-    wxEventFilter(const wxEventFilter&) = delete;
-	wxEventFilter& operator=(const wxEventFilter&) = delete;
 };
 
 #endif // _WX_EVENTFILTER_H_

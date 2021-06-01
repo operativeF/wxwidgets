@@ -170,6 +170,9 @@ public:
             Init(language, flags);
         }
 
+    wxLocale(const wxLocale&) = delete;
+	wxLocale& operator=(const wxLocale&) = delete;
+
         // the same as a function (returns true on success)
     bool Init(const wxString& name,
               const wxString& shortName = wxEmptyString,
@@ -359,9 +362,6 @@ private:
     wxTranslations m_translations;
 
     static wxLanguageInfoArray *ms_languagesDB;
-
-    wxLocale(const wxLocale&) = delete;
-	wxLocale& operator=(const wxLocale&) = delete;
 };
 
 // ----------------------------------------------------------------------------

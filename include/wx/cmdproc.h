@@ -55,6 +55,9 @@ public:
     wxCommandProcessor(int maxCommands = -1);
     ~wxCommandProcessor() override;
 
+    wxCommandProcessor(const wxCommandProcessor&) = delete;
+	wxCommandProcessor& operator=(const wxCommandProcessor&) = delete;
+
     // Pass a command to the processor. The processor calls Do(); if
     // successful, is appended to the command history unless storeIt is false.
     virtual bool Submit(wxCommand *command, bool storeIt = true);
@@ -133,8 +136,6 @@ protected:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxCommandProcessor);
-    wxCommandProcessor(const wxCommandProcessor&) = delete;
-	wxCommandProcessor& operator=(const wxCommandProcessor&) = delete;
 };
 
 #endif // _WX_CMDPROC_H_

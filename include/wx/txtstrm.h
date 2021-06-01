@@ -134,6 +134,9 @@ public:
 
     virtual ~wxTextOutputStream();
 
+    wxTextOutputStream(const wxTextOutputStream&) = delete;
+	wxTextOutputStream& operator=(const wxTextOutputStream&) = delete;
+
     const wxOutputStream& GetOutputStream() const { return m_output; }
 
     void SetMode( wxEOL mode = wxEOL_NATIVE );
@@ -186,9 +189,6 @@ protected:
     // and couldn't be output when it was called the last time.
     wchar_t m_lastWChar;
 #endif // SIZEOF_WCHAR_T == 2
-
-    wxTextOutputStream(const wxTextOutputStream&) = delete;
-	wxTextOutputStream& operator=(const wxTextOutputStream&) = delete;
 };
 
 #endif

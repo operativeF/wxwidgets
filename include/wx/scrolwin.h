@@ -115,6 +115,9 @@ public:
     wxScrollHelperBase(wxWindow *winToScroll);
     ~wxScrollHelperBase() override;
 
+    wxScrollHelperBase(const wxScrollHelperBase&) = delete;
+	wxScrollHelperBase& operator=(const wxScrollHelperBase&) = delete;
+
     // configure the scrolling
     virtual void SetScrollbars(int pixelsPerUnitX, int pixelsPerUnitY,
                                int noUnitsX, int noUnitsY,
@@ -347,9 +350,6 @@ protected:
 #endif // wxUSE_MOUSEWHEEL
 
     wxScrollHelperEvtHandler *m_handler;
-
-    wxScrollHelperBase(const wxScrollHelperBase&) = delete;
-	wxScrollHelperBase& operator=(const wxScrollHelperBase&) = delete;
 };
 
 // this macro can be used in a wxScrollHelper-derived class to forward wxWindow
@@ -433,6 +433,9 @@ public:
         Create(parent, winid, pos, size, style, name);
     }
 
+    wxScrolled(const wxScrolled&) = delete;
+	wxScrolled& operator=(const wxScrolled&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID winid,
                 const wxPoint& pos = wxDefaultPosition,
@@ -477,10 +480,6 @@ protected:
     {
         return FilterBestSize(this, this, T::DoGetBestSize());
     }
-
-private:
-    wxScrolled(const wxScrolled&) = delete;
-	wxScrolled& operator=(const wxScrolled&) = delete;
 };
 
 // for compatibility with existing code, we provide wxScrolledWindow

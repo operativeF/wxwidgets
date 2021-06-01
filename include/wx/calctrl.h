@@ -162,8 +162,9 @@ public:
     wxCalendarEvent(wxWindow *win, const wxDateTime& dt, wxEventType type)
         : wxDateEvent(win, dt, type),
           m_wday(wxDateTime::Inv_WeekDay) { }
-    wxCalendarEvent(const wxCalendarEvent& event)
-         = default;
+    wxCalendarEvent(const wxCalendarEvent& event) = default;
+
+	wxCalendarEvent& operator=(const wxCalendarEvent&) = delete;
 
     void SetWeekDay(wxDateTime::WeekDay wd) { m_wday = wd; }
     wxDateTime::WeekDay GetWeekDay() const { return m_wday; }
@@ -173,8 +174,7 @@ public:
 private:
     wxDateTime::WeekDay m_wday{wxDateTime::Inv_WeekDay};
 
-    public:
-	wxCalendarEvent& operator=(const wxCalendarEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

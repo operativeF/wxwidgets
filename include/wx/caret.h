@@ -228,12 +228,12 @@ public:
             m_caret->Show();
     }
 
+    wxCaretSuspend(const wxCaretSuspend&) = delete;
+	wxCaretSuspend& operator=(const wxCaretSuspend&) = delete;
+
 private:
     wxCaret *m_caret;
     bool     m_show;
-
-    wxCaretSuspend(const wxCaretSuspend&) = delete;
-	wxCaretSuspend& operator=(const wxCaretSuspend&) = delete;
 };
 
 #endif // wxHAS_CARET_USING_OVERLAYS/!wxHAS_CARET_USING_OVERLAYS

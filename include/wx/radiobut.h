@@ -36,6 +36,9 @@ class WXDLLIMPEXP_CORE wxRadioButtonBase : public wxRadioButtonBaseBase
 public:
     wxRadioButtonBase() = default;
 
+    wxRadioButtonBase(const wxRadioButtonBase&) = delete;
+	wxRadioButtonBase& operator=(const wxRadioButtonBase&) = delete;
+
     // Methods to be implemented by the derived classes:
     virtual void SetValue(bool value) = 0;
     virtual bool GetValue() const = 0;
@@ -46,10 +49,6 @@ public:
     wxRadioButton* GetLastInGroup() const;
     wxRadioButton* GetPreviousInGroup() const;
     wxRadioButton* GetNextInGroup() const;
-
-private:
-    wxRadioButtonBase(const wxRadioButtonBase&) = delete;
-	wxRadioButtonBase& operator=(const wxRadioButtonBase&) = delete;
 };
 
 extern WXDLLIMPEXP_DATA_CORE(const char) wxRadioButtonNameStr[];

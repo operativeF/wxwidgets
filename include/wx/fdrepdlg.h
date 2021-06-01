@@ -105,6 +105,9 @@ public:
 
     ~wxFindReplaceDialogBase() override;
 
+    wxFindReplaceDialogBase(const wxFindReplaceDialogBase&) = delete;
+	wxFindReplaceDialogBase& operator=(const wxFindReplaceDialogBase&) = delete;
+    
     // find dialog data access
     const wxFindReplaceData *GetData() const { return m_FindReplaceData; }
     void SetData(wxFindReplaceData *data) { m_FindReplaceData = data; }
@@ -117,9 +120,6 @@ protected:
 
     // the last string we searched for
     wxString m_lastSearch;
-
-    wxFindReplaceDialogBase(const wxFindReplaceDialogBase&) = delete;
-	wxFindReplaceDialogBase& operator=(const wxFindReplaceDialogBase&) = delete;
 };
 
 // include wxFindReplaceDialog declaration

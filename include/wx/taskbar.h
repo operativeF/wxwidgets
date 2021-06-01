@@ -109,10 +109,9 @@ public:
         SetEventObject(tbIcon);
     }
 
-    wxEvent *Clone() const override { return new wxTaskBarIconEvent(*this); }
-
-private:
     wxTaskBarIconEvent& operator=(const wxTaskBarIconEvent&) = delete;
+
+    wxEvent *Clone() const override { return new wxTaskBarIconEvent(*this); }
 };
 
 typedef void (wxEvtHandler::*wxTaskBarIconEventFunction)(wxTaskBarIconEvent&);

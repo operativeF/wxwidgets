@@ -53,6 +53,8 @@ public:
 
     ~wxTextValidator() override = default;
 
+    wxTextValidator& operator=(const wxTextValidator&) = delete;
+
     // Make a clone of this validator (or return NULL) - currently necessary
     // if you're passing a reference to a validator.
     // Another possibility is to always pass a pointer to a new validator
@@ -155,7 +157,6 @@ protected:
     wxArrayString        m_excludes;
 
 private:
-    wxTextValidator& operator=(const wxTextValidator&) = delete;
     wxDECLARE_DYNAMIC_CLASS(wxTextValidator);
     wxDECLARE_EVENT_TABLE();
 };

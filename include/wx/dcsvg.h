@@ -88,6 +88,9 @@ public:
 
     ~wxSVGFileDCImpl() override;
 
+    wxSVGFileDCImpl(const wxSVGFileDCImpl&) = delete;
+	wxSVGFileDCImpl& operator=(const wxSVGFileDCImpl&) = delete;
+
     bool IsOk() const override { return m_OK; }
 
     bool CanDrawBitmap() const override { return true; }
@@ -297,8 +300,6 @@ private:
     size_t m_gradientUniqueId;
 
     wxDECLARE_ABSTRACT_CLASS(wxSVGFileDCImpl);
-    wxSVGFileDCImpl(const wxSVGFileDCImpl&) = delete;
-	wxSVGFileDCImpl& operator=(const wxSVGFileDCImpl&) = delete;
 };
 
 

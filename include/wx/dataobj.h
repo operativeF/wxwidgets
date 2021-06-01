@@ -201,6 +201,9 @@ public:
         {
         }
 
+    wxDataObjectSimple(const wxDataObjectSimple&) = delete;
+	wxDataObjectSimple& operator=(const wxDataObjectSimple&) = delete;
+
     // get/set the format we support
     const wxDataFormat& GetFormat() const { return m_format; }
     void SetFormat(const wxDataFormat& format) { m_format = format; }
@@ -242,9 +245,6 @@ public:
 private:
     // the one and only format we support
     wxDataFormat m_format;
-
-    wxDataObjectSimple(const wxDataObjectSimple&) = delete;
-	wxDataObjectSimple& operator=(const wxDataObjectSimple&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -262,9 +262,11 @@ WX_DECLARE_EXPORTED_LIST(wxDataObjectSimple, wxSimpleDataObjectList);
 class WXDLLIMPEXP_CORE wxDataObjectComposite : public wxDataObject
 {
 public:
-    // ctor
     wxDataObjectComposite();
     ~wxDataObjectComposite() override;
+
+    wxDataObjectComposite(const wxDataObjectComposite&) = delete;
+	wxDataObjectComposite& operator=(const wxDataObjectComposite&) = delete;
 
     // add data object (it will be deleted by wxDataObjectComposite, hence it
     // must be allocated on the heap) whose format will become the preferred
@@ -308,9 +310,6 @@ private:
     size_t m_preferred;
 
     wxDataFormat m_receivedFormat;
-
-    wxDataObjectComposite(const wxDataObjectComposite&) = delete;
-	wxDataObjectComposite& operator=(const wxDataObjectComposite&) = delete;
 };
 
 // ============================================================================
@@ -381,6 +380,9 @@ public:
         {
         }
 
+    wxTextDataObject(const wxTextDataObject&) = delete;
+	wxTextDataObject& operator=(const wxTextDataObject&) = delete;
+
     // functions which you may override if you want to provide text on
     // demand only - otherwise, the trivial default versions will be used
     virtual size_t GetTextLength() const { return m_text.Len() + 1; }
@@ -429,9 +431,6 @@ private:
 #endif
 
     wxString m_text;
-
-    wxTextDataObject(const wxTextDataObject&) = delete;
-	wxTextDataObject& operator=(const wxTextDataObject&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -448,6 +447,9 @@ public:
         {
         }
 
+    wxBitmapDataObjectBase(const wxBitmapDataObjectBase&) = delete;
+	wxBitmapDataObjectBase& operator=(const wxBitmapDataObjectBase&) = delete;
+
     // functions which you may override if you want to provide data on
     // demand only - otherwise, the trivial default versions will be used
     virtual wxBitmap GetBitmap() const { return m_bitmap; }
@@ -455,9 +457,6 @@ public:
 
 protected:
     wxBitmap m_bitmap;
-
-    wxBitmapDataObjectBase(const wxBitmapDataObjectBase&) = delete;
-	wxBitmapDataObjectBase& operator=(const wxBitmapDataObjectBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -473,14 +472,14 @@ public:
     // ctor: use AddFile() later to fill the array
     wxFileDataObjectBase() : wxDataObjectSimple(wxDF_FILENAME) { }
 
+    wxFileDataObjectBase(const wxFileDataObjectBase&) = delete;
+	wxFileDataObjectBase& operator=(const wxFileDataObjectBase&) = delete;
+
     // get a reference to our array
     const wxArrayString& GetFilenames() const { return m_filenames; }
 
 protected:
     wxArrayString m_filenames;
-
-    wxFileDataObjectBase(const wxFileDataObjectBase&) = delete;
-	wxFileDataObjectBase& operator=(const wxFileDataObjectBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -498,6 +497,9 @@ public:
 
     // the dtor calls Free()
     ~wxCustomDataObject() override;
+
+    wxCustomDataObject(const wxCustomDataObject&) = delete;
+	wxCustomDataObject& operator=(const wxCustomDataObject&) = delete;
 
     // you can call SetData() to set m_data: it will make a copy of the data
     // you pass - or you can use TakeData() which won't copy anything, but
@@ -540,9 +542,6 @@ public:
 private:
     size_t m_size;
     void  *m_data;
-
-    wxCustomDataObject(const wxCustomDataObject&) = delete;
-	wxCustomDataObject& operator=(const wxCustomDataObject&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -554,12 +553,11 @@ class WXDLLIMPEXP_CORE wxImageDataObject : public wxCustomDataObject
 public:
     explicit wxImageDataObject(const wxImage& image = wxNullImage);
 
-    void SetImage(const wxImage& image);
-    wxImage GetImage() const;
-
-private:
     wxImageDataObject(const wxImageDataObject&) = delete;
 	wxImageDataObject& operator=(const wxImageDataObject&) = delete;
+
+    void SetImage(const wxImage& image);
+    wxImage GetImage() const;
 };
 
 // ----------------------------------------------------------------------------

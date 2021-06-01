@@ -65,6 +65,8 @@ protected:
         m_style = other.m_style;
     }
 
+    wxNumValidatorBase& operator=(const wxNumValidatorBase&) = delete;
+
     bool HasFlag(wxNumValidatorStyle style) const
     {
         return (m_style & style) != 0;
@@ -125,8 +127,6 @@ private:
 
 
     wxDECLARE_EVENT_TABLE();
-
-    wxNumValidatorBase& operator=(const wxNumValidatorBase&) = delete;
 };
 
 namespace wxPrivate
@@ -150,6 +150,8 @@ public:
     using ValueType = T;
 
     using LongestValueType = typename BaseValidator::LongestValueType;
+
+    wxNumValidator& operator=(const wxNumValidator&) = delete;
 
     wxCOMPILE_TIME_ASSERT
     (
@@ -271,8 +273,6 @@ private:
 
     // Minimal and maximal values accepted (inclusive).
     ValueType m_min, m_max;
-
-    wxNumValidator& operator=(const wxNumValidator&) = delete;
 };
 
 } // namespace wxPrivate
@@ -306,7 +306,7 @@ protected:
                       "This style doesn't make sense for integers." );
     }
 
-    // Default copy ctor is ok.
+    wxIntegerValidatorBase& operator=(const wxIntegerValidatorBase&) = delete;
 
     // Provide methods for wxNumValidator use.
     wxString ToString(LongestValueType value) const;
@@ -316,9 +316,6 @@ protected:
 
     // Implement wxNumValidatorBase pure virtual method.
     bool IsCharOk(const wxString& val, int pos, wxChar ch) const override;
-
-private:
-    wxIntegerValidatorBase& operator=(const wxIntegerValidatorBase&) = delete;
 };
 
 // Validator for integer numbers. It can actually work with any integer type
@@ -345,6 +342,8 @@ public:
         this->SetMax(std::numeric_limits<ValueType>::max());
     }
 
+    wxIntegerValidator& operator=(const wxIntegerValidator&) = delete;
+
     wxObject *Clone() const override { return new wxIntegerValidator(*this); }
 
     bool IsInRange(LongestValueType value) const override
@@ -364,9 +363,6 @@ public:
 
         return this->GetMin() <= valueT && valueT <= this->GetMax();
     }
-
-private:
-    wxIntegerValidator& operator=(const wxIntegerValidator&) = delete;
 };
 
 // Helper function for creating integer validators which allows to avoid
@@ -409,7 +405,7 @@ protected:
         m_factor = 1.0;
     }
 
-    // Default copy ctor is ok.
+    wxFloatingPointValidatorBase& operator=(const wxFloatingPointValidatorBase&) = delete;
 
     // Provide methods for wxNumValidator use.
     wxString ToString(LongestValueType value) const;
@@ -426,8 +422,6 @@ private:
 
     // Factor applied for the displayed the value.
     double m_factor;
-
-    wxFloatingPointValidatorBase& operator=(const wxFloatingPointValidatorBase&) = delete;
 };
 
 // Validator for floating point numbers. It can be used with float, double or

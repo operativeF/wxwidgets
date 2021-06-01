@@ -74,6 +74,9 @@ public:
     
     }
 
+    wxNativeWindow(const wxNativeWindow&) = delete;
+	wxNativeWindow& operator=(const wxNativeWindow&) = delete;
+
     // Create a window from an existing native window handle.
     //
     // Notice that this ctor doesn't take the usual pos and size parameters,
@@ -114,16 +117,11 @@ public:
 #endif // __WXMSW__
 
 private:
-    
-
     // This is implemented in platform-specific code.
     void DoDisown();
 
     // If the native widget owned by the user code.
     bool m_ownedByUser;
-
-    wxNativeWindow(const wxNativeWindow&) = delete;
-	wxNativeWindow& operator=(const wxNativeWindow&) = delete;
 };
 
 #endif // wxHAS_NATIVE_WINDOW
@@ -168,6 +166,8 @@ public:
     // as it normally doesn't belong to us
     ~wxNativeContainerWindow() override;
 
+    wxNativeContainerWindow(const wxNativeContainerWindow&) = delete;
+	wxNativeContainerWindow& operator=(const wxNativeContainerWindow&) = delete;
 
     // provide (trivial) implementation of the base class pure virtuals
     void SetTitle(const wxString& WXUNUSED(title)) override
@@ -240,10 +240,6 @@ protected:
     WXLRESULT
     MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam) override;
 #endif // __WXMSW__
-
-private:
-    wxNativeContainerWindow(const wxNativeContainerWindow&) = delete;
-	wxNativeContainerWindow& operator=(const wxNativeContainerWindow&) = delete;
 };
 
 #endif // wxHAS_NATIVE_CONTAINER_WINDOW

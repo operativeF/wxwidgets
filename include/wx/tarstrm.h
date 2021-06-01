@@ -160,6 +160,9 @@ public:
     wxTarInputStream(wxInputStream *stream, wxMBConv& conv = wxConvLocal);
     ~wxTarInputStream() override;
 
+    wxTarInputStream(const wxTarInputStream&) = delete;
+	wxTarInputStream& operator=(const wxTarInputStream&) = delete;
+
     bool OpenEntry(wxTarEntry& entry);
     bool CloseEntry() override;
 
@@ -174,8 +177,6 @@ protected:
     wxFileOffset OnSysSeek(wxFileOffset seek, wxSeekMode mode) override;
 
 private:
-    
-
     wxArchiveEntry *DoGetNextEntry() override    { return GetNextEntry(); }
     bool OpenEntry(wxArchiveEntry& entry) override;
     bool IsOpened() const               { return m_pos != wxInvalidOffset; }
@@ -198,9 +199,6 @@ private:
     class wxTarHeaderBlock *m_hdr;
     wxTarHeaderRecords *m_HeaderRecs;
     wxTarHeaderRecords *m_GlobalHeaderRecs;
-
-    wxTarInputStream(const wxTarInputStream&) = delete;
-	wxTarInputStream& operator=(const wxTarInputStream&) = delete;
 };
 
 
@@ -217,6 +215,9 @@ public:
                       wxTarFormat format = wxTAR_PAX,
                       wxMBConv& conv = wxConvLocal);
     ~wxTarOutputStream() override;
+
+    wxTarOutputStream(const wxTarOutputStream&) = delete;
+	wxTarOutputStream& operator=(const wxTarOutputStream&) = delete;
 
     bool PutNextEntry(wxTarEntry *entry);
 
@@ -282,9 +283,6 @@ private:
     size_t m_extendedSize;
     wxString m_badfit;
     bool m_endrecWritten;
-
-    wxTarOutputStream(const wxTarOutputStream&) = delete;
-	wxTarOutputStream& operator=(const wxTarOutputStream&) = delete;
 };
 
 

@@ -100,6 +100,8 @@ public:
     // lock everything back
     ~TreeItemUnlocker() { ms_unlockedItem = m_oldUnlockedItem; }
 
+    TreeItemUnlocker(const TreeItemUnlocker&) = delete;
+	TreeItemUnlocker& operator=(const TreeItemUnlocker&) = delete;
 
     // check if the item state is currently locked
     static bool IsLocked(HTREEITEM item)
@@ -108,9 +110,6 @@ public:
 private:
     static HTREEITEM ms_unlockedItem;
     HTREEITEM m_oldUnlockedItem;
-
-    TreeItemUnlocker(const TreeItemUnlocker&) = delete;
-	TreeItemUnlocker& operator=(const TreeItemUnlocker&) = delete;
 };
 
 HTREEITEM TreeItemUnlocker::ms_unlockedItem = nullptr;
@@ -133,11 +132,11 @@ public:
         m_var = false;
     }
 
-private:
-    bool& m_var;
-
     TempSetter(const TempSetter&) = delete;
 	TempSetter& operator=(const TempSetter&) = delete;
+
+private:
+    bool& m_var;
 };
 
 // ----------------------------------------------------------------------------

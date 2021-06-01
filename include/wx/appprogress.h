@@ -18,16 +18,15 @@ public:
     wxAppProgressIndicatorBase() = default;
     virtual ~wxAppProgressIndicatorBase() = default;
 
+    wxAppProgressIndicatorBase(const wxAppProgressIndicatorBase&) = delete;
+	wxAppProgressIndicatorBase& operator=(const wxAppProgressIndicatorBase&) = delete;
+    
     virtual bool IsAvailable() const = 0;
 
     virtual void SetValue(int value) = 0;
     virtual void SetRange(int range) = 0;
     virtual void Pulse() = 0;
     virtual void Reset() = 0;
-
-private:
-    wxAppProgressIndicatorBase(const wxAppProgressIndicatorBase&) = delete;
-	wxAppProgressIndicatorBase& operator=(const wxAppProgressIndicatorBase&) = delete;
 };
 
 #if defined(__WXMSW__) && wxUSE_TASKBARBUTTON

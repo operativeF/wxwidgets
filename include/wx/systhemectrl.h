@@ -68,6 +68,9 @@ class wxSystemThemedControl : public C,
 public:
     wxSystemThemedControl() = default;
 
+    wxSystemThemedControl(const wxSystemThemedControl<C>&)  = delete;
+	wxSystemThemedControl& operator=(const wxSystemThemedControl<C>&) = delete;
+
     void EnableSystemTheme(bool enable = true)
     {
         DoEnableSystemTheme(enable, this);
@@ -81,9 +84,6 @@ protected:
         if ( !this->IsSystemThemeDisabled() )
             DoEnableSystemTheme(true, this);
     }
-
-    wxSystemThemedControl(const wxSystemThemedControl<C>&)  = delete;
-	wxSystemThemedControl& operator=(const wxSystemThemedControl<C>&) = delete;
 };
 
 #endif // _WX_SYSTHEMECTRL_H

@@ -152,6 +152,9 @@ public:
         }
     }
 
+    TestSuite(const TestSuite&) = delete;
+	TestSuite& operator=(const TestSuite&) = delete;
+
     void addTest(Test* test) { m_tests.push_back(test); }
     size_t getChildTestCount() const { return m_tests.size(); }
 
@@ -165,9 +168,6 @@ public:
 
 private:
     std::vector<Test*> m_tests;
-
-    TestSuite(const TestSuite&) = delete;
-	TestSuite& operator=(const TestSuite&) = delete;
 };
 
 } // namespace CppUnit
@@ -196,12 +196,12 @@ public:
         m_str = m_orig;
     }
 
+    TempStringAssign(const TempStringAssign&) = delete;
+	TempStringAssign& operator=(const TempStringAssign&) = delete;
+
 private:
     std::string& m_str;
     const std::string m_orig;
-
-    TempStringAssign(const TempStringAssign&) = delete;
-	TempStringAssign& operator=(const TempStringAssign&) = delete;
 };
 
 // These two strings are used to implement wxGetCurrentTestName() and must be

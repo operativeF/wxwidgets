@@ -175,6 +175,9 @@ public:
     wxFileSystem()  { m_FindFileHandler = nullptr;}
     ~wxFileSystem() override;
 
+    wxFileSystem(const wxFileSystem&) = delete;
+	wxFileSystem& operator=(const wxFileSystem&) = delete;
+
     // sets the current location. Every call to OpenFile is
     // relative to this location.
     // NOTE !!
@@ -240,8 +243,6 @@ protected:
             // Handlers local to this instance
 
     wxDECLARE_DYNAMIC_CLASS(wxFileSystem);
-    wxFileSystem(const wxFileSystem&) = delete;
-	wxFileSystem& operator=(const wxFileSystem&) = delete;
 };
 
 
@@ -296,11 +297,11 @@ public:
     wxFSInputStream(const wxString& filename, int flags = 0);
     ~wxFSInputStream() override;
 
-private:
-    wxFSFile* m_file;
-
     wxFSInputStream(const wxFSInputStream&) = delete;
 	wxFSInputStream& operator=(const wxFSInputStream&) = delete;
+
+private:
+    wxFSFile* m_file;
 };
 
 #endif

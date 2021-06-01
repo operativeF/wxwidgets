@@ -66,6 +66,9 @@ public:
     wxDocument(wxDocument *parent = nullptr);
     ~wxDocument() override;
 
+    wxDocument(const wxDocument&) = delete;
+	wxDocument& operator=(const wxDocument&) = delete;
+
     // accessors
     void SetFilename(const wxString& filename, bool notifyViews = false);
     wxString GetFilename() const { return m_documentFile; }
@@ -203,8 +206,6 @@ private:
     DocsList m_childDocuments;
 
     wxDECLARE_ABSTRACT_CLASS(wxDocument);
-    wxDocument(const wxDocument&) = delete;
-	wxDocument& operator=(const wxDocument&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxView: public wxEvtHandler
@@ -212,6 +213,9 @@ class WXDLLIMPEXP_CORE wxView: public wxEvtHandler
 public:
     wxView();
     ~wxView() override;
+
+    wxView(const wxView&) = delete;
+	wxView& operator=(const wxView&) = delete;
 
     wxDocument *GetDocument() const { return m_viewDocument; }
     virtual void SetDocument(wxDocument *doc);
@@ -277,8 +281,6 @@ protected:
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxView);
-    wxView(const wxView&) = delete;
-	wxView& operator=(const wxView&) = delete;
 };
 
 // Represents user interface (and other) properties of documents and views
@@ -302,6 +304,9 @@ public:
                   long flags = wxDEFAULT_TEMPLATE_FLAGS);
 
     ~wxDocTemplate() override;
+
+    wxDocTemplate(const wxDocTemplate&) = delete;
+	wxDocTemplate& operator=(const wxDocTemplate&) = delete;
 
     // By default, these two member functions dynamically creates document and
     // view using dynamic instance construction. Override these if you need a
@@ -363,8 +368,6 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxDocTemplate);
-    wxDocTemplate(const wxDocTemplate&) = delete;
-	wxDocTemplate& operator=(const wxDocTemplate&) = delete;
 };
 
 // One object of this class may be created in an application, to manage all
@@ -375,6 +378,9 @@ public:
     // NB: flags are unused, don't pass wxDOC_XXX to this ctor
     wxDocManager(long flags = 0, bool initialize = true);
     ~wxDocManager() override;
+
+    wxDocManager(const wxDocManager&) = delete;
+	wxDocManager& operator=(const wxDocManager&) = delete;
 
     virtual bool Initialize();
 
@@ -544,8 +550,6 @@ protected:
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxDocManager);
-    wxDocManager(const wxDocManager&) = delete;
-	wxDocManager& operator=(const wxDocManager&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -599,6 +603,9 @@ public:
             m_childView->SetDocChildFrame(nullptr);
     }
 
+    wxDocChildFrameAnyBase(const wxDocChildFrameAnyBase&) = delete;
+	wxDocChildFrameAnyBase& operator=(const wxDocChildFrameAnyBase&) = delete;
+
     wxDocument *GetDocument() const { return m_childDocument; }
     wxView *GetView() const { return m_childView; }
     void SetDocument(wxDocument *doc) { m_childDocument = doc; }
@@ -636,9 +643,6 @@ private:
     // Pointer to the last processed event used to avoid sending the same event
     // twice to wxDocManager, from here and from wxDocParentFrameAnyBase.
     wxEvent* m_lastEvent;
-
-    wxDocChildFrameAnyBase(const wxDocChildFrameAnyBase&) = delete;
-	wxDocChildFrameAnyBase& operator=(const wxDocChildFrameAnyBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -677,6 +681,9 @@ public:
     {
         Create(doc, view, parent, id, title, pos, size, style, name);
     }
+
+    wxDocChildFrameAny(const wxDocChildFrameAny<ChildFrame, ParentFrame>&) = delete;
+    wxDocChildFrameAny& operator=(const wxDocChildFrameAny<ChildFrame, ParentFrame>&) = delete;
 
     bool Create(wxDocument *doc,
                 wxView *view,
@@ -722,9 +729,6 @@ private:
             this->Destroy();
         //else: vetoed
     }
-
-    wxDocChildFrameAny(const wxDocChildFrameAny<ChildFrame, ParentFrame>&) = delete;
-    wxDocChildFrameAny& operator=(const wxDocChildFrameAny<ChildFrame, ParentFrame>&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -754,6 +758,9 @@ public:
     {
     }
 
+    wxDocChildFrame(const wxDocChildFrame&) = delete;
+	wxDocChildFrame& operator=(const wxDocChildFrame&) = delete;
+
     bool Create(wxDocument *doc,
                 wxView *view,
                 wxFrame *parent,
@@ -773,8 +780,6 @@ public:
 
 private:
     wxDECLARE_CLASS(wxDocChildFrame);
-    wxDocChildFrame(const wxDocChildFrame&) = delete;
-	wxDocChildFrame& operator=(const wxDocChildFrame&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -797,6 +802,9 @@ public:
         m_docManager = nullptr;
     }
 
+    wxDocParentFrameAnyBase(const wxDocParentFrameAnyBase&) = delete;
+	wxDocParentFrameAnyBase& operator=(const wxDocParentFrameAnyBase&) = delete;
+
     wxDocManager *GetDocumentManager() const { return m_docManager; }
 
 protected:
@@ -808,9 +816,6 @@ protected:
 
     wxWindow* const m_frame;
     wxDocManager *m_docManager;
-
-    wxDocParentFrameAnyBase(const wxDocParentFrameAnyBase&) = delete;
-	wxDocParentFrameAnyBase& operator=(const wxDocParentFrameAnyBase&) = delete;
 };
 
 // This is similar to wxDocChildFrameAny and is used to provide common
@@ -833,6 +838,9 @@ public:
     {
         Create(manager, frame, id, title, pos, size, style, name);
     }
+
+    wxDocParentFrameAny(const wxDocParentFrameAny&) = delete;
+	wxDocParentFrameAny& operator=(const wxDocParentFrameAny&) = delete;
 
     bool Create(wxDocManager *manager,
                 wxFrame *frame,
@@ -884,10 +892,6 @@ private:
             event.Skip();
         }
     }
-
-
-    wxDocParentFrameAny(const wxDocParentFrameAny&) = delete;
-	wxDocParentFrameAny& operator=(const wxDocParentFrameAny&) = delete;
 };
 
 using wxDocParentFrameBase = wxDocParentFrameAny<wxFrame>;
@@ -910,6 +914,9 @@ public:
     {
     }
 
+    wxDocParentFrame(const wxDocParentFrame&) = delete;
+	wxDocParentFrame& operator=(const wxDocParentFrame&) = delete;
+
     bool Create(wxDocManager *manager,
                 wxFrame *parent,
                 wxWindowID id,
@@ -926,8 +933,6 @@ public:
 
 private:
     wxDECLARE_CLASS(wxDocParentFrame);
-    wxDocParentFrame(const wxDocParentFrame&) = delete;
-	wxDocParentFrame& operator=(const wxDocParentFrame&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -939,6 +944,9 @@ class WXDLLIMPEXP_CORE wxDocPrintout : public wxPrintout
 {
 public:
     wxDocPrintout(wxView *view = nullptr, const wxString& title = wxString());
+
+    wxDocPrintout(const wxDocPrintout&) = delete;
+	wxDocPrintout& operator=(const wxDocPrintout&) = delete;
 
     // implement wxPrintout methods
     bool OnPrintPage(int page) override;
@@ -954,8 +962,6 @@ protected:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxDocPrintout);
-    wxDocPrintout(const wxDocPrintout&) = delete;
-	wxDocPrintout& operator=(const wxDocPrintout&) = delete;
 };
 #endif // wxUSE_PRINTING_ARCHITECTURE
 

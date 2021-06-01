@@ -986,6 +986,10 @@ public:
 
     wxStockGDI();
     virtual ~wxStockGDI();
+
+    wxStockGDI(const wxStockGDI&) = delete;
+	wxStockGDI& operator=(const wxStockGDI&) = delete;
+
     static void DeleteAll();
 
     static wxStockGDI& instance() { return *ms_instance; }
@@ -1001,9 +1005,6 @@ protected:
     static wxStockGDI* ms_instance;
 
     static wxObject* ms_stockObject[ITEMCOUNT];
-
-    wxStockGDI(const wxStockGDI&) = delete;
-	wxStockGDI& operator=(const wxStockGDI&) = delete;
 };
 
 #define wxITALIC_FONT  wxStockGDI::instance().GetFont(wxStockGDI::FONT_ITALIC)

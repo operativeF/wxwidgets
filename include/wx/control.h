@@ -36,6 +36,9 @@ public:
 
     ~wxControlBase() override;
 
+    wxControlBase(const wxControlBase&) = delete;
+	wxControlBase& operator=(const wxControlBase&) = delete;
+
     // Create() function adds the validator parameter
     bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
@@ -193,9 +196,6 @@ protected:
     // this field contains the label in wx format, i.e. with '&' mnemonics,
     // as it was passed to the last SetLabel() call
     wxString m_labelOrig;
-
-    wxControlBase(const wxControlBase&) = delete;
-	wxControlBase& operator=(const wxControlBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

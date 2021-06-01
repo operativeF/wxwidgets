@@ -31,10 +31,11 @@ WX_DECLARE_EXPORTED_OBJARRAY(wxImage, wxImageArray);
 class WXDLLIMPEXP_CORE wxANIDecoder : public wxAnimationDecoder
 {
 public:
-    // constructor, destructor, etc.
     wxANIDecoder();
     ~wxANIDecoder() override;
 
+    wxANIDecoder(const wxANIDecoder&) = delete;
+	wxANIDecoder& operator=(const wxANIDecoder&) = delete;
 
     wxSize GetFrameSize(unsigned int frame) const override;
     wxPoint GetFramePosition(unsigned int frame) const override;
@@ -70,10 +71,6 @@ private:
 
     // this is the wxCURHandler used to load the ICON chunk of the ANI files
     static wxCURHandler sm_handler;
-
-
-    wxANIDecoder(const wxANIDecoder&) = delete;
-	wxANIDecoder& operator=(const wxANIDecoder&) = delete;
 };
 
 

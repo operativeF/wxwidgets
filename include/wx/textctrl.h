@@ -645,6 +645,9 @@ class WXDLLIMPEXP_CORE wxTextCtrlIface : public wxTextAreaBase,
 public:
     wxTextCtrlIface() = default;
 
+    wxTextCtrlIface(const wxTextCtrlIface&) = delete;
+	wxTextCtrlIface& operator=(const wxTextCtrlIface&) = delete;
+
     // wxTextAreaBase overrides
     wxString GetValue() const override
     {
@@ -660,10 +663,6 @@ protected:
     {
         return pos >= 0 && pos <= GetLastPosition();
     }
-
-private:
-    wxTextCtrlIface(const wxTextCtrlIface&) = delete;
-	wxTextCtrlIface& operator=(const wxTextCtrlIface&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -678,12 +677,11 @@ class WXDLLIMPEXP_CORE wxTextCtrlBase : public wxControl,
                                    public wxTextEntry
 {
 public:
-    // creation
-    // --------
-
     wxTextCtrlBase() = default;
     ~wxTextCtrlBase() override = default;
 
+    wxTextCtrlBase(const wxTextCtrlBase&) = delete;
+	wxTextCtrlBase& operator=(const wxTextCtrlBase&) = delete;
 
     // more readable flag testing methods
     bool IsSingleLine() const { return !HasFlag(wxTE_MULTILINE); }
@@ -773,8 +771,6 @@ protected:
     // implement the wxTextEntry pure virtual method
     wxWindow *GetEditableWindow() override { return this; }
 
-    wxTextCtrlBase(const wxTextCtrlBase&) = delete;
-	wxTextCtrlBase& operator=(const wxTextCtrlBase&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxTextCtrlBase);
 };
 
@@ -819,9 +815,9 @@ public:
         : wxCommandEvent(wxEVT_TEXT_URL, winid),
           m_evtMouse(evtMouse), m_start(start), m_end(end)
         { }
-    wxTextUrlEvent(const wxTextUrlEvent& event)
-        
-          = default;
+    wxTextUrlEvent(const wxTextUrlEvent& event) = default;
+
+	wxTextUrlEvent& operator=(const wxTextUrlEvent&) = delete;
 
     // get the mouse event which happened over the URL
     const wxMouseEvent& GetMouseEvent() const { return m_evtMouse; }
@@ -842,9 +838,7 @@ protected:
     long m_start{0},
          m_end{0};
 
-private:
-    public:
-	wxTextUrlEvent& operator=(const wxTextUrlEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

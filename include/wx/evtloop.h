@@ -66,6 +66,9 @@ public:
     wxEventLoopBase();
     virtual ~wxEventLoopBase();
 
+    wxEventLoopBase(const wxEventLoopBase&) = delete;
+	wxEventLoopBase& operator=(const wxEventLoopBase&) = delete;
+
     // use this to check whether the event loop was successfully created before
     // using it
     virtual bool IsOk() const { return true; }
@@ -221,9 +224,6 @@ protected:
 private:
     // this flag is set on entry into Run() and reset before leaving it
     bool m_isInsideRun;
-
-    wxEventLoopBase(const wxEventLoopBase&) = delete;
-	wxEventLoopBase& operator=(const wxEventLoopBase&) = delete;
 };
 
 #if defined(__WINDOWS__) || defined(__WXMAC__) || defined(__WXDFB__) || (defined(__UNIX__) && !defined(__WXOSX__))
@@ -236,6 +236,9 @@ class WXDLLIMPEXP_BASE wxEventLoopManual : public wxEventLoopBase
 {
 public:
     wxEventLoopManual();
+
+    wxEventLoopManual(const wxEventLoopManual&) = delete;
+	wxEventLoopManual& operator=(const wxEventLoopManual&) = delete;
 
     // sets the "should exit" flag and wakes up the loop so that it terminates
     // soon
@@ -260,9 +263,6 @@ private:
     //
     // returns the return value of Dispatch()
     bool ProcessEvents();
-
-    wxEventLoopManual(const wxEventLoopManual&) = delete;
-	wxEventLoopManual& operator=(const wxEventLoopManual&) = delete;
 };
 
 #endif // platforms using "manual" loop
@@ -312,6 +312,9 @@ public:
     wxGUIEventLoop() { m_impl = NULL; }
     virtual ~wxGUIEventLoop();
 
+    wxGUIEventLoop(const wxGUIEventLoop&) = delete;
+	wxGUIEventLoop& operator=(const wxGUIEventLoop&) = delete;
+
     virtual void ScheduleExit(int rc = 0);
     virtual bool Pending() const;
     virtual bool Dispatch();
@@ -337,9 +340,6 @@ protected:
 
     // the pointer to the port specific implementation class
     wxEventLoopImpl *m_impl;
-
-    wxGUIEventLoop(const wxGUIEventLoop&) = delete;
-	wxGUIEventLoop& operator=(const wxGUIEventLoop&) = delete;
 };
 
 #endif // platforms

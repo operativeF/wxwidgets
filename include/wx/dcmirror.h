@@ -32,6 +32,9 @@ public:
         m_mirror = mirror;
     }
 
+    wxMirrorDCImpl(const wxMirrorDCImpl&) = delete;
+	wxMirrorDCImpl& operator=(const wxMirrorDCImpl&) = delete;
+
     // wxDCBase operations
     void Clear() override { m_dc.Clear(); }
     void SetFont(const wxFont& font) override { m_dc.SetFont(font); }
@@ -270,9 +273,6 @@ private:
     wxDCImpl& m_dc;
 
     bool m_mirror;
-
-    wxMirrorDCImpl(const wxMirrorDCImpl&) = delete;
-	wxMirrorDCImpl& operator=(const wxMirrorDCImpl&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxMirrorDC : public wxDC
@@ -284,6 +284,9 @@ public:
         m_mirror = mirror;
     }
 
+    wxMirrorDC(const wxMirrorDC&) = delete;
+	wxMirrorDC& operator=(const wxMirrorDC&) = delete;
+
     // helper functions which may be useful for the users of this class
     wxSize Reflect(const wxSize& sizeOrig)
     {
@@ -292,9 +295,6 @@ public:
 
 private:
     bool m_mirror;
-
-    wxMirrorDC(const wxMirrorDC&) = delete;
-	wxMirrorDC& operator=(const wxMirrorDC&) = delete;
 };
 
 #endif // _WX_DCMIRROR_H_

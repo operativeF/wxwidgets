@@ -48,9 +48,11 @@ enum wxGIFErrorCode
 class WXDLLIMPEXP_CORE wxGIFDecoder : public wxAnimationDecoder
 {
 public:
-    // constructor, destructor, etc.
     wxGIFDecoder();
     ~wxGIFDecoder() override;
+
+    wxGIFDecoder(const wxGIFDecoder&) = delete;
+	wxGIFDecoder& operator=(const wxGIFDecoder&) = delete;
 
     // get data of current frame
     unsigned char* GetData(unsigned int frame) const;
@@ -95,7 +97,6 @@ private:
     wxGIFErrorCode dgif(wxInputStream& stream,
                         GIFImage *img, int interl, int bits);
 
-
     // array of all frames
     wxArrayPtrVoid m_frames;
 
@@ -105,9 +106,6 @@ private:
     unsigned int  m_lastbyte;       // last byte read
     unsigned char m_buffer[256];    // buffer for reading
     unsigned char *m_bufp;          // pointer to next byte in buffer
-
-    wxGIFDecoder(const wxGIFDecoder&) = delete;
-	wxGIFDecoder& operator=(const wxGIFDecoder&) = delete;
 };
 
 #endif // wxUSE_STREAMS && wxUSE_GIF

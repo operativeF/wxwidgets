@@ -40,6 +40,9 @@ class WXDLLIMPEXP_CORE wxFileHistoryBase : public wxObject
 public:
     wxFileHistoryBase(size_t maxFiles = 9, wxWindowID idBase = wxID_FILE1);
 
+    wxFileHistoryBase(const wxFileHistoryBase&) = delete;
+	wxFileHistoryBase& operator=(const wxFileHistoryBase&) = delete;
+
     // Operations
     virtual void AddFileToHistory(const wxString& file);
     virtual void RemoveFileFromHistory(size_t i);
@@ -86,7 +89,6 @@ protected:
 private:
     void DoRefreshLabels();
 
-
     // The ID of the first history menu item (Doesn't have to be wxID_FILE1)
     wxWindowID m_idBase;
 
@@ -96,9 +98,6 @@ private:
 
     // Remove any existing entries from the associated menus.
     void RemoveExistingHistory();
-
-    wxFileHistoryBase(const wxFileHistoryBase&) = delete;
-	wxFileHistoryBase& operator=(const wxFileHistoryBase&) = delete;
 };
 
 #if defined(__WXGTK20__)

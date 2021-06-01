@@ -248,6 +248,9 @@ public:
 
     ~wxSimpleHtmlListBox() override;
 
+    wxSimpleHtmlListBox(const wxSimpleHtmlListBox&) = delete;
+	wxSimpleHtmlListBox& operator=(const wxSimpleHtmlListBox&) = delete;
+
     // these must be overloaded otherwise the compiler will complain
     // about  wxItemContainerImmutable::[G|S]etSelection being pure virtuals...
     void SetSelection(int n) override
@@ -315,9 +318,6 @@ protected:
     // Note: For the benefit of old compilers (like gcc-2.8) this should
     // not be named m_clientdata as that clashes with the name of an
     // anonymous struct member in wxEvtHandler, which we derive from.
-
-    wxSimpleHtmlListBox(const wxSimpleHtmlListBox&) = delete;
-	wxSimpleHtmlListBox& operator=(const wxSimpleHtmlListBox&) = delete;
 };
 
 #endif // wxUSE_HTML

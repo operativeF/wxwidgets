@@ -91,10 +91,6 @@ class WXDLLIMPEXP_FWD_BASE wxDirData;
 class WXDLLIMPEXP_BASE wxDir
 {
 public:
-
-    // ctors
-    // -----
-
     // default, use Open()
     wxDir() { m_data = nullptr; }
 
@@ -103,6 +99,9 @@ public:
 
     // dtor calls Close() automatically
     ~wxDir() { Close(); }
+
+    wxDir(const wxDir&) = delete;
+	wxDir& operator=(const wxDir&) = delete;
 
     // open the directory for enumerating
     bool Open(const wxString& dir);
@@ -183,9 +182,6 @@ private:
     friend class wxDirData;
 
     wxDirData *m_data;
-
-    wxDir(const wxDir&) = delete;
-	wxDir& operator=(const wxDir&) = delete;
 };
 
 #endif // _WX_DIR_H_

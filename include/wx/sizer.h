@@ -328,6 +328,9 @@ public:
     wxSizerItem();
     ~wxSizerItem() override;
 
+    wxSizerItem(const wxSizerItem&) = delete;
+	wxSizerItem& operator=(const wxSizerItem&) = delete;
+
     virtual void DeleteWindows();
 
     // Enable deleting the SizerItem without destroying the contained sizer.
@@ -498,8 +501,6 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxSizerItem);
-    wxSizerItem(const wxSizerItem&) = delete;
-	wxSizerItem& operator=(const wxSizerItem&) = delete;
 };
 
 WX_DECLARE_EXPORTED_LIST( wxSizerItem, wxSizerItemList );
@@ -884,12 +885,13 @@ public:
     wxFlexGridSizer( int cols, int vgap, int hgap );
     wxFlexGridSizer( int cols, const wxSize& gap = wxSize(0, 0) );
 
-    // ctors specifying the number of rows and columns
     wxFlexGridSizer( int rows, int cols, int vgap, int hgap );
     wxFlexGridSizer( int rows, int cols, const wxSize& gap );
 
-    // dtor
     ~wxFlexGridSizer() override;
+
+    wxFlexGridSizer(const wxFlexGridSizer&) = delete;
+	wxFlexGridSizer& operator=(const wxFlexGridSizer&) = delete;
 
     // set the rows/columns which will grow (the others will remain of the
     // constant initial size)
@@ -945,8 +947,6 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxFlexGridSizer);
-    wxFlexGridSizer(const wxFlexGridSizer&) = delete;
-	wxFlexGridSizer& operator=(const wxFlexGridSizer&) = delete;
 };
 
 //---------------------------------------------------------------------------
@@ -1056,6 +1056,9 @@ public:
     wxStaticBoxSizer(int orient, wxWindow *win, const wxString& label = wxEmptyString);
     ~wxStaticBoxSizer() override;
 
+    wxStaticBoxSizer(const wxStaticBoxSizer&) = delete;
+	wxStaticBoxSizer& operator=(const wxStaticBoxSizer&) = delete;
+
     wxSize CalcMin() override;
     void RepositionChildren(const wxSize& minSize) override;
 
@@ -1075,8 +1078,6 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxStaticBoxSizer);
-    wxStaticBoxSizer(const wxStaticBoxSizer&) = delete;
-	wxStaticBoxSizer& operator=(const wxStaticBoxSizer&) = delete;
 };
 
 #endif // wxUSE_STATBOX
@@ -1094,6 +1095,9 @@ public:
     // Box sizer orientation is automatically determined here:
     // vertical for PDAs, horizontal for everything else?
     wxStdDialogButtonSizer();
+
+    wxStdDialogButtonSizer(const wxStdDialogButtonSizer&) = delete;
+	wxStdDialogButtonSizer& operator=(const wxStdDialogButtonSizer&) = delete;
 
     // Checks button ID against system IDs and sets one of the pointers below
     // to this button. Does not do any sizer-related things here.
@@ -1128,8 +1132,6 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxStdDialogButtonSizer);
-    wxStdDialogButtonSizer(const wxStdDialogButtonSizer&) = delete;
-	wxStdDialogButtonSizer& operator=(const wxStdDialogButtonSizer&) = delete;
 };
 
 #endif // wxUSE_BUTTON

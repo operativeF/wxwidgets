@@ -180,9 +180,11 @@ public:
 
         // default ctor, initializes everything which can be initialized before
         // Create()
-    wxWindowBase() ;
-
+    wxWindowBase();
     ~wxWindowBase() override;
+
+    wxWindowBase(const wxWindowBase&) = delete;
+	wxWindowBase& operator=(const wxWindowBase&) = delete;
 
     // deleting the window
     // -------------------
@@ -589,12 +591,12 @@ public:
                 m_win->EndRepositioningChildren();
         }
 
+        ChildrenRepositioningGuard(const ChildrenRepositioningGuard&) = delete;
+	    ChildrenRepositioningGuard& operator=(const ChildrenRepositioningGuard&) = delete;
+
     private:
         wxWindowBase* const m_win;
         const bool m_callEnd;
-
-        ChildrenRepositioningGuard(const ChildrenRepositioningGuard&) = delete;
-	ChildrenRepositioningGuard& operator=(const ChildrenRepositioningGuard&) = delete;
     };
 
 
@@ -1927,8 +1929,6 @@ private:
     unsigned int m_freezeCount;
 
     wxDECLARE_ABSTRACT_CLASS(wxWindowBase);
-    wxWindowBase(const wxWindowBase&) = delete;
-	wxWindowBase& operator=(const wxWindowBase&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

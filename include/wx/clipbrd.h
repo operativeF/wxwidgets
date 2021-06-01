@@ -192,11 +192,11 @@ public:
         }
     }
 
-private:
-    wxClipboard *m_clipboard;
-
     wxClipboardLocker(const wxClipboardLocker&) = delete;
 	wxClipboardLocker& operator=(const wxClipboardLocker&) = delete;
+
+private:
+    wxClipboard *m_clipboard;
 };
 
 #endif // wxUSE_CLIPBOARD

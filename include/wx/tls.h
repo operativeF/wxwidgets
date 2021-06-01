@@ -96,6 +96,9 @@
                 m_key.Set(NULL); // this deletes the value
         }
 
+        wxTlsValue(const wxTlsValue<T>&)  = delete;
+	    wxTlsValue& operator=(const wxTlsValue<T>&) = delete;
+
         // access the object creating it on demand
         ValueType *Get()
         {
@@ -129,9 +132,6 @@
 
     private:
         wxTlsKey m_key;
-
-        wxTlsValue(const wxTlsValue<T>&)  = delete;
-	wxTlsValue& operator=(const wxTlsValue<T>&) = delete;
     };
 
     #define wxTLS_TYPE(T) wxTlsValue<T>

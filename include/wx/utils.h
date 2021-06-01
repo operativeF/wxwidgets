@@ -680,6 +680,9 @@ public:
     // dtor enables back all windows disabled by the ctor
     ~wxWindowDisabler();
 
+    wxWindowDisabler(const wxWindowDisabler&) = delete;
+	wxWindowDisabler& operator=(const wxWindowDisabler&) = delete;
+
 private:
     // disable all windows except the given one (used by both ctors)
     void DoDisable(wxWindow *winToSkip = nullptr);
@@ -692,9 +695,6 @@ private:
 #endif
     std::vector<wxWindow*> m_winDisabled;
     bool m_disabled;
-
-    wxWindowDisabler(const wxWindowDisabler&) = delete;
-	wxWindowDisabler& operator=(const wxWindowDisabler&) = delete;
 };
 
 // ----------------------------------------------------------------------------

@@ -57,6 +57,8 @@ public:
     // trivial but virtual dtor
     virtual ~wxPersistenceManager();
 
+    wxPersistenceManager(const wxPersistenceManager&) = delete;
+	wxPersistenceManager& operator=(const wxPersistenceManager&) = delete;
 
     // globally disable restoring or saving the persistent properties (both are
     // enabled by default)
@@ -168,9 +170,6 @@ private:
     // false may make sense in some situations)
     bool m_doSave,
          m_doRestore;
-
-    wxPersistenceManager(const wxPersistenceManager&) = delete;
-	wxPersistenceManager& operator=(const wxPersistenceManager&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -186,6 +185,8 @@ public:
     // trivial but virtual dtor
     virtual ~wxPersistentObject() = default;
 
+    wxPersistentObject(const wxPersistentObject&) = delete;
+	wxPersistentObject& operator=(const wxPersistentObject&) = delete;
 
     // methods used by wxPersistenceManager
     // ------------------------------------
@@ -226,9 +227,6 @@ protected:
 
 private:
     void * const m_obj;
-
-    wxPersistentObject(const wxPersistentObject&) = delete;
-	wxPersistentObject& operator=(const wxPersistentObject&) = delete;
 };
 
 // Helper function calling RegisterAndRestore() on the global persistence

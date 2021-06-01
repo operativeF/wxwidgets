@@ -43,11 +43,11 @@ public:
             m_win->Thaw();
     }
 
-private:
-    wxWindow *m_win{nullptr};
-
     wxWindowUpdateLocker(const wxWindowUpdateLocker&) = delete;
 	wxWindowUpdateLocker& operator=(const wxWindowUpdateLocker&) = delete;
+
+private:
+    wxWindow *m_win{nullptr};
 };
 
 #endif // _WX_WUPDLOCK_H_

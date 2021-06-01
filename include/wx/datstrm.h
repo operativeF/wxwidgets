@@ -21,6 +21,9 @@
 class WXDLLIMPEXP_BASE wxDataStreamBase
 {
 public:
+    wxDataStreamBase(const wxDataStreamBase&) = delete;
+	wxDataStreamBase& operator=(const wxDataStreamBase&) = delete;
+
     void BigEndianOrdered(bool be_order) { m_be_order = be_order; }
 
     // By default we use extended precision (80 bit) format for both float and
@@ -54,7 +57,6 @@ protected:
     wxDataStreamBase(const wxMBConv& conv);
     ~wxDataStreamBase();
 
-
     bool m_be_order;
 
 #if wxUSE_APPLE_IEEE
@@ -62,9 +64,6 @@ protected:
 #endif // wxUSE_APPLE_IEEE
 
     wxMBConv *m_conv;
-
-    wxDataStreamBase(const wxDataStreamBase&) = delete;
-	wxDataStreamBase& operator=(const wxDataStreamBase&) = delete;
 };
 
 
@@ -72,6 +71,9 @@ class WXDLLIMPEXP_BASE wxDataInputStream : public wxDataStreamBase
 {
 public:
     wxDataInputStream(wxInputStream& s, const wxMBConv& conv = wxConvUTF8);
+
+    wxDataInputStream(const wxDataInputStream&) = delete;
+	wxDataInputStream& operator=(const wxDataInputStream&) = delete;
 
     bool IsOk() { return m_input->IsOk(); }
 
@@ -126,15 +128,15 @@ public:
 
 protected:
     wxInputStream *m_input;
-
-    wxDataInputStream(const wxDataInputStream&) = delete;
-	wxDataInputStream& operator=(const wxDataInputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxDataOutputStream : public wxDataStreamBase
 {
 public:
     wxDataOutputStream(wxOutputStream& s, const wxMBConv& conv = wxConvUTF8);
+
+    wxDataOutputStream(const wxDataOutputStream&) = delete;
+	wxDataOutputStream& operator=(const wxDataOutputStream&) = delete;
 
     bool IsOk() { return m_output->IsOk(); }
 
@@ -191,9 +193,6 @@ public:
 
 protected:
     wxOutputStream *m_output;
-
-    wxDataOutputStream(const wxDataOutputStream&) = delete;
-	wxDataOutputStream& operator=(const wxDataOutputStream&) = delete;
 };
 
 #endif

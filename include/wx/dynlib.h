@@ -231,6 +231,11 @@ public:
     //       to use it polymorphically.
     ~wxDynamicLibrary() { Unload(); }
 
+    // no copy ctor/assignment operators (or we'd try to unload the library
+    // twice)
+    wxDynamicLibrary(const wxDynamicLibrary&) = delete;
+	wxDynamicLibrary& operator=(const wxDynamicLibrary&) = delete;
+
     // return true if the library was loaded successfully
     bool IsLoaded() const { return m_handle != nullptr; }
 
@@ -359,11 +364,6 @@ protected:
 
     // the handle to DLL or NULL
     wxDllType m_handle{nullptr};
-
-    // no copy ctor/assignment operators (or we'd try to unload the library
-    // twice)
-    wxDynamicLibrary(const wxDynamicLibrary&) = delete;
-	wxDynamicLibrary& operator=(const wxDynamicLibrary&) = delete;
 };
 
 #ifdef __WINDOWS__

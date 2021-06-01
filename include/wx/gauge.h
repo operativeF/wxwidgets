@@ -59,6 +59,9 @@ public:
 
     ~wxGaugeBase() override;
 
+    wxGaugeBase(const wxGaugeBase&) = delete;
+	wxGaugeBase& operator=(const wxGaugeBase&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 int range,
@@ -120,9 +123,6 @@ protected:
 #endif
 
     wxAppProgressIndicator *m_appProgressIndicator;
-
-    wxGaugeBase(const wxGaugeBase&) = delete;
-	wxGaugeBase& operator=(const wxGaugeBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

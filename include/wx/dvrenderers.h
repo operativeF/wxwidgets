@@ -313,6 +313,8 @@ public:
     {
     }
 
+    wxDataViewCustomRendererBase(const wxDataViewCustomRendererBase&) = delete;
+	wxDataViewCustomRendererBase& operator=(const wxDataViewCustomRendererBase&) = delete;
 
     // Render the item using the current value (returned by GetValue()).
     virtual bool Render(wxRect cell, wxDC *dc, int state) = 0;
@@ -397,9 +399,6 @@ protected:
 private:
     wxDataViewItemAttr m_attr;
     bool m_enabled;
-
-    wxDataViewCustomRendererBase(const wxDataViewCustomRendererBase&) = delete;
-	wxDataViewCustomRendererBase& operator=(const wxDataViewCustomRendererBase&) = delete;
 };
 
 // include the declaration of all the other renderers to get the real

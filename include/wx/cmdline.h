@@ -169,6 +169,8 @@ public:
 
     wxCmdLineArgs (const wxCmdLineParser& parser) : m_parser(parser) {}
 
+    wxCmdLineArgs& operator=(const wxCmdLineArgs&) = delete;
+
     const_iterator begin() const { return const_iterator(m_parser, 0); }
     const_iterator end() const { return const_iterator(m_parser, size()); }
 
@@ -176,7 +178,6 @@ public:
 
 private:
     const wxCmdLineParser& m_parser;
-    wxCmdLineArgs& operator=(const wxCmdLineArgs&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -234,6 +235,9 @@ public:
 
     // not virtual, don't use this class polymorphically
     ~wxCmdLineParser();
+
+    wxCmdLineParser(const wxCmdLineParser&) = delete;
+	wxCmdLineParser& operator=(const wxCmdLineParser&) = delete;
 
     // set different parser options
     // ----------------------------
@@ -362,8 +366,6 @@ private:
 
     friend class wxCmdLineArgs;
     friend class wxCmdLineArgs::const_iterator;
-    wxCmdLineParser(const wxCmdLineParser&) = delete;
-	wxCmdLineParser& operator=(const wxCmdLineParser&) = delete;
 };
 
 #else // !wxUSE_CMDLINE_PARSER

@@ -27,6 +27,10 @@ struct wxLZMAStream;
 // detail and is not part of the public API.
 class WXDLLIMPEXP_BASE wxLZMAData
 {
+public:
+    wxLZMAData(const wxLZMAData&) = delete;
+	wxLZMAData& operator=(const wxLZMAData&) = delete;
+
 protected:
     wxLZMAData();
     ~wxLZMAData();
@@ -34,9 +38,6 @@ protected:
     wxLZMAStream* m_stream;
     wxUint8* m_streamBuf;
     wxFileOffset m_pos;
-
-    wxLZMAData(const wxLZMAData&) = delete;
-	wxLZMAData& operator=(const wxLZMAData&) = delete;
 };
 
 } // namespace wxPrivate

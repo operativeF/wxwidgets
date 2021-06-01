@@ -35,6 +35,9 @@ public:
     wxFileInputStream(int fd);
     ~wxFileInputStream() override;
 
+    wxFileInputStream(const wxFileInputStream&) = delete;
+	wxFileInputStream& operator=(const wxFileInputStream&) = delete;
+
     wxFileOffset GetLength() const override;
 
     bool Ok() const { return IsOk(); }
@@ -53,9 +56,6 @@ protected:
 protected:
     wxFile *m_file;
     bool m_file_destroy;
-
-    wxFileInputStream(const wxFileInputStream&) = delete;
-	wxFileInputStream& operator=(const wxFileInputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxFileOutputStream : public wxOutputStream
@@ -65,6 +65,9 @@ public:
     wxFileOutputStream(wxFile& file);
     wxFileOutputStream(int fd);
     ~wxFileOutputStream() override;
+
+    wxFileOutputStream(const wxFileOutputStream&) = delete;
+	wxFileOutputStream& operator=(const wxFileOutputStream&) = delete;
 
     void Sync() override;
     bool Close() override { return m_file_destroy ? m_file->Close() : true; }
@@ -86,9 +89,6 @@ protected:
 protected:
     wxFile *m_file;
     bool m_file_destroy;
-
-    wxFileOutputStream(const wxFileOutputStream&) = delete;
-	wxFileOutputStream& operator=(const wxFileOutputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxTempFileOutputStream : public wxOutputStream
@@ -96,6 +96,9 @@ class WXDLLIMPEXP_BASE wxTempFileOutputStream : public wxOutputStream
 public:
     wxTempFileOutputStream(const wxString& fileName);
     ~wxTempFileOutputStream() override;
+
+    wxTempFileOutputStream(const wxTempFileOutputStream&) = delete;
+	wxTempFileOutputStream& operator=(const wxTempFileOutputStream&) = delete;
 
     bool Close() override { return Commit(); }
     WXDLLIMPEXP_INLINE_BASE virtual bool Commit() { return m_file->Commit(); }
@@ -112,9 +115,6 @@ protected:
 
 private:
     wxTempFile *m_file;
-
-    wxTempFileOutputStream(const wxTempFileOutputStream&) = delete;
-	wxTempFileOutputStream& operator=(const wxTempFileOutputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxTempFFileOutputStream : public wxOutputStream
@@ -122,6 +122,9 @@ class WXDLLIMPEXP_BASE wxTempFFileOutputStream : public wxOutputStream
 public:
     wxTempFFileOutputStream(const wxString& fileName);
     ~wxTempFFileOutputStream() override;
+
+    wxTempFFileOutputStream(const wxTempFFileOutputStream&) = delete;
+	wxTempFFileOutputStream& operator=(const wxTempFFileOutputStream&) = delete;
 
     bool Close() override { return Commit(); }
     WXDLLIMPEXP_INLINE_BASE virtual bool Commit() { return m_file->Commit(); }
@@ -138,9 +141,6 @@ protected:
 
 private:
     wxTempFFile *m_file;
-
-    wxTempFFileOutputStream(const wxTempFFileOutputStream&) = delete;
-	wxTempFFileOutputStream& operator=(const wxTempFFileOutputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxFileStream : public wxFileInputStream,
@@ -148,6 +148,10 @@ class WXDLLIMPEXP_BASE wxFileStream : public wxFileInputStream,
 {
 public:
     wxFileStream(const wxString& fileName);
+
+    wxFileStream(const wxFileStream&) = delete;
+	wxFileStream& operator=(const wxFileStream&) = delete;
+
     bool IsOk() const override;
 
     // override (some) virtual functions inherited from both classes to resolve
@@ -174,10 +178,6 @@ protected:
     {
         return wxFileInputStream::OnSysTell();
     }
-
-private:
-    wxFileStream(const wxFileStream&) = delete;
-	wxFileStream& operator=(const wxFileStream&) = delete;
 };
 
 #endif //wxUSE_FILE
@@ -195,6 +195,9 @@ public:
     wxFFileInputStream(wxFFile& file);
     wxFFileInputStream(FILE *file);
     ~wxFFileInputStream() override;
+
+    wxFFileInputStream(const wxFFileInputStream&) = delete;
+	wxFFileInputStream& operator=(const wxFFileInputStream&) = delete;
 
     wxFileOffset GetLength() const override;
 
@@ -214,9 +217,6 @@ protected:
 protected:
     wxFFile *m_file;
     bool m_file_destroy;
-
-    wxFFileInputStream(const wxFFileInputStream&) = delete;
-	wxFFileInputStream& operator=(const wxFFileInputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxFFileOutputStream : public wxOutputStream
@@ -226,6 +226,9 @@ public:
     wxFFileOutputStream(wxFFile& file);
     wxFFileOutputStream(FILE *file);
     ~wxFFileOutputStream() override;
+
+    wxFFileOutputStream(const wxFFileOutputStream&) = delete;
+	wxFFileOutputStream& operator=(const wxFFileOutputStream&) = delete;
 
     void Sync() override;
     bool Close() override { return m_file_destroy ? m_file->Close() : true; }
@@ -247,9 +250,6 @@ protected:
 protected:
     wxFFile *m_file;
     bool m_file_destroy;
-
-    wxFFileOutputStream(const wxFFileOutputStream&) = delete;
-	wxFFileOutputStream& operator=(const wxFFileOutputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxFFileStream : public wxFFileInputStream,
@@ -257,6 +257,9 @@ class WXDLLIMPEXP_BASE wxFFileStream : public wxFFileInputStream,
 {
 public:
     wxFFileStream(const wxString& fileName, const wxString& mode = wxASCII_STR("w+b"));
+
+    wxFFileStream(const wxFFileStream&) = delete;
+	wxFFileStream& operator=(const wxFFileStream&) = delete;
 
     // override some virtual functions to resolve ambiguities, just as in
     // wxFileStream
@@ -283,10 +286,6 @@ protected:
     {
         return wxFFileInputStream::OnSysTell();
     }
-
-private:
-    wxFFileStream(const wxFFileStream&) = delete;
-	wxFFileStream& operator=(const wxFFileStream&) = delete;
 };
 
 #endif //wxUSE_FFILE

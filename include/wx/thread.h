@@ -138,6 +138,9 @@ public:
     // destroys the mutex kernel object
     ~wxMutex();
 
+    wxMutex(const wxMutex&) = delete;
+	wxMutex& operator=(const wxMutex&) = delete;
+
     // test if the mutex has been created successfully
     bool IsOk() const;
 
@@ -166,9 +169,6 @@ protected:
     wxMutexInternal *m_internal;
 
     friend class wxConditionInternal;
-
-    wxMutex(const wxMutex&) = delete;
-	wxMutex& operator=(const wxMutex&) = delete;
 };
 
 // a helper class which locks the mutex in the ctor and unlocks it in the dtor:
@@ -238,6 +238,10 @@ public:
     // ctor & dtor
     wxCRITSECT_INLINE wxCriticalSection( wxCriticalSectionType critSecType = wxCRITSEC_DEFAULT );
     wxCRITSECT_INLINE ~wxCriticalSection();
+
+    wxCriticalSection(const wxCriticalSection&) = delete;
+	wxCriticalSection& operator=(const wxCriticalSection&) = delete;
+
     // enter the section (the same as locking a mutex)
     wxCRITSECT_INLINE void Enter();
 
@@ -271,9 +275,6 @@ private:
         wxCritSectBuffer m_buffer;
     };
 #endif // Unix/Win32
-
-    wxCriticalSection(const wxCriticalSection&) = delete;
-	wxCriticalSection& operator=(const wxCriticalSection&) = delete;
 };
 
 #if wxCRITSECT_IS_MUTEX
@@ -306,11 +307,11 @@ public:
         m_critsect.Leave();
     }
 
-private:
-    wxCriticalSection& m_critsect;
-
     wxCriticalSectionLocker(const wxCriticalSectionLocker&) = delete;
 	wxCriticalSectionLocker& operator=(const wxCriticalSectionLocker&) = delete;
+
+private:
+    wxCriticalSection& m_critsect;
 };
 
 // ----------------------------------------------------------------------------
@@ -325,8 +326,10 @@ public:
     // The mutex object MUST be locked before calling Wait()
     wxCondition(wxMutex& mutex);
 
-    // dtor is not virtual, don't use this class polymorphically
     ~wxCondition();
+
+    wxCondition(const wxCondition&) = delete;
+	wxCondition& operator=(const wxCondition&) = delete;
 
     // return true if the condition has been created successfully
     bool IsOk() const;
@@ -379,9 +382,6 @@ public:
 
 private:
     wxConditionInternal *m_internal;
-
-    wxCondition(const wxCondition&) = delete;
-	wxCondition& operator=(const wxCondition&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -398,6 +398,9 @@ public:
 
     // dtor is not virtual, don't use this class polymorphically
     ~wxSemaphore();
+
+    wxSemaphore(const wxSemaphore&) = delete;
+	wxSemaphore& operator=(const wxSemaphore&) = delete;
 
     // return true if the semaphore has been created successfully
     bool IsOk() const;
@@ -420,9 +423,6 @@ public:
 
 private:
     wxSemaphoreInternal *m_internal;
-
-    wxSemaphore(const wxSemaphore&) = delete;
-	wxSemaphore& operator=(const wxSemaphore&) = delete;
 };
 
 // ----------------------------------------------------------------------------

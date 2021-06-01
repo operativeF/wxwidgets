@@ -124,6 +124,10 @@ public:
     wxSocketBase();
     wxSocketBase(wxSocketFlags flags, wxSocketType type);
     ~wxSocketBase() override;
+
+    wxSocketBase(const wxSocketBase&) = delete;
+	wxSocketBase& operator=(const wxSocketBase&) = delete;
+
     void Init();
     bool Destroy();
 
@@ -311,8 +315,6 @@ private:
     friend class wxSocketWriteGuard;
 
     wxDECLARE_CLASS(wxSocketBase);
-    wxSocketBase(const wxSocketBase&) = delete;
-	wxSocketBase& operator=(const wxSocketBase&) = delete;
 };
 
 
@@ -326,14 +328,15 @@ public:
     wxSocketServer(const wxSockAddress& addr,
                    wxSocketFlags flags = wxSOCKET_NONE);
 
+    wxSocketServer(const wxSocketServer&) = delete;
+	wxSocketServer& operator=(const wxSocketServer&) = delete;
+
     wxSocketBase* Accept(bool wait = true);
     bool AcceptWith(wxSocketBase& socket, bool wait = true);
 
     bool WaitForAccept(long seconds = -1, long milliseconds = 0);
 
     wxDECLARE_CLASS(wxSocketServer);
-    wxSocketServer(const wxSocketServer&) = delete;
-	wxSocketServer& operator=(const wxSocketServer&) = delete;
 };
 
 
@@ -345,6 +348,9 @@ class WXDLLIMPEXP_NET wxSocketClient : public wxSocketBase
 {
 public:
     wxSocketClient(wxSocketFlags flags = wxSOCKET_NONE);
+
+    wxSocketClient(const wxSocketClient&) = delete;
+	wxSocketClient& operator=(const wxSocketClient&) = delete;
 
     virtual bool Connect(const wxSockAddress& addr, bool wait = true);
     bool Connect(const wxSockAddress& addr,
@@ -372,8 +378,6 @@ private:
     int m_initialSendBufferSize;
 
     wxDECLARE_CLASS(wxSocketClient);
-    wxSocketClient(const wxSocketClient&) = delete;
-	wxSocketClient& operator=(const wxSocketClient&) = delete;
 };
 
 
@@ -389,6 +393,9 @@ public:
     wxDatagramSocket(const wxSockAddress& addr,
                      wxSocketFlags flags = wxSOCKET_NONE);
 
+    wxDatagramSocket(const wxDatagramSocket&) = delete;
+	wxDatagramSocket& operator=(const wxDatagramSocket&) = delete;
+
     wxDatagramSocket& RecvFrom(wxSockAddress& addr,
                                void *buf,
                                wxUint32 nBytes);
@@ -402,8 +409,6 @@ public:
 
 private:
     wxDECLARE_CLASS(wxDatagramSocket);
-    wxDatagramSocket(const wxDatagramSocket&) = delete;
-	wxDatagramSocket& operator=(const wxDatagramSocket&) = delete;
 };
 
 

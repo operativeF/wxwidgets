@@ -568,6 +568,9 @@ public:
 
     ~wxGraphicsContext() override;
 
+    wxGraphicsContext(const wxGraphicsContext&) = delete;
+	wxGraphicsContext& operator=(const wxGraphicsContext&) = delete;
+
     static wxGraphicsContext* Create( const wxWindowDC& dc);
     static wxGraphicsContext * Create( const wxMemoryDC& dc);
 #if wxUSE_PRINTING_ARCHITECTURE
@@ -917,8 +920,6 @@ private:
     wxWindow* const m_window;
     double m_contentScaleFactor;
 
-    wxGraphicsContext(const wxGraphicsContext&) = delete;
-	wxGraphicsContext& operator=(const wxGraphicsContext&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxGraphicsContext);
 };
 
@@ -967,8 +968,10 @@ class WXDLLIMPEXP_CORE wxGraphicsRenderer : public wxObject
 {
 public:
     wxGraphicsRenderer() = default;
-
     ~wxGraphicsRenderer() override = default;
+
+    wxGraphicsRenderer(const wxGraphicsRenderer&) = delete;
+	wxGraphicsRenderer& operator=(const wxGraphicsRenderer&) = delete;
 
     static wxGraphicsRenderer* GetDefaultRenderer();
 
@@ -1075,8 +1078,6 @@ public:
     GetVersion(int* major, int* minor = nullptr, int* micro = nullptr) const = 0;
 
 private:
-    wxGraphicsRenderer(const wxGraphicsRenderer&) = delete;
-	wxGraphicsRenderer& operator=(const wxGraphicsRenderer&) = delete;
     wxDECLARE_ABSTRACT_CLASS(wxGraphicsRenderer);
 };
 

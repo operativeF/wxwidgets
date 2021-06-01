@@ -103,10 +103,10 @@ WX_DECLARE_EXPORTED_LIST(wxNotebookPageInfo, wxNotebookPageInfoList );
 class WXDLLIMPEXP_CORE wxNotebookBase : public wxBookCtrlBase
 {
 public:
-    // ctors
-    // -----
-
     wxNotebookBase() = default;
+
+    wxNotebookBase(const wxNotebookBase&) = delete;
+	wxNotebookBase& operator=(const wxNotebookBase&) = delete;
 
     // wxNotebook-specific additions to wxBookCtrlBase interface
     // ---------------------------------------------------------
@@ -149,8 +149,6 @@ protected:
 #if wxUSE_EXTENDED_RTTI
     wxNotebookPageInfoList m_pageInfos;
 #endif
-    wxNotebookBase(const wxNotebookBase&) = delete;
-	wxNotebookBase& operator=(const wxNotebookBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

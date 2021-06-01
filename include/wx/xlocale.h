@@ -89,6 +89,12 @@ public:
     // Destroy the locale
     ~wxXLocale() { Free(); }
 
+    // POSIX xlocale API provides a duplocale() function but MSVC locale API
+    // doesn't give us any means to copy a _locale_t object so we reduce the
+    // functionality to least common denominator here -- it shouldn't be a
+    // problem as copying the locale objects shouldn't be often needed
+    wxXLocale(const wxXLocale&) = delete;
+	wxXLocale& operator=(const wxXLocale&) = delete;
 
     // Get the global "C" locale object
     static wxXLocale& GetCLocale();
@@ -114,17 +120,8 @@ private:
     // Free the locale if it's non-NULL
     void Free();
 
-
     // The corresponding locale handle, NULL if invalid
     wxXLocale_t m_locale;
-
-
-    // POSIX xlocale API provides a duplocale() function but MSVC locale API
-    // doesn't give us any means to copy a _locale_t object so we reduce the
-    // functionality to least common denominator here -- it shouldn't be a
-    // problem as copying the locale objects shouldn't be often needed
-    wxXLocale(const wxXLocale&) = delete;
-	wxXLocale& operator=(const wxXLocale&) = delete;
 };
 
 #else // !wxHAS_XLOCALE_SUPPORT
@@ -152,6 +149,12 @@ public:
         m_isC = loc && (strcmp(loc, "C") == 0 || strcmp(loc, "POSIX") == 0);
     }
 
+    // although it's not a problem to copy the objects of this class, we use
+    // this macro in this implementation for consistency with the xlocale-based
+    // one which can't be copied when using MSVC locale API
+    wxXLocale(const wxXLocale&) = delete;
+	wxXLocale& operator=(const wxXLocale&) = delete;
+
     // Default copy ctor, assignment operator and dtor are ok (or would be if
     // we didn't use (const &) = delete;
 	// & operator=(const &) = delete for consistency with the
@@ -173,13 +176,6 @@ private:
     // Without xlocale support this class can only represent "C" locale, if
     // this is false the object is invalid
     bool m_isC;
-
-
-    // although it's not a problem to copy the objects of this class, we use
-    // this macro in this implementation for consistency with the xlocale-based
-    // one which can't be copied when using MSVC locale API
-    wxXLocale(const wxXLocale&) = delete;
-	wxXLocale& operator=(const wxXLocale&) = delete;
 };
 
 #endif // wxHAS_XLOCALE_SUPPORT/!wxHAS_XLOCALE_SUPPORT

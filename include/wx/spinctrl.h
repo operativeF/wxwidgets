@@ -34,6 +34,9 @@ class WXDLLIMPEXP_CORE wxSpinCtrlBase : public wxControl
 public:
     wxSpinCtrlBase() = default;
 
+    wxSpinCtrlBase(const wxSpinCtrlBase&) = delete;
+	wxSpinCtrlBase& operator=(const wxSpinCtrlBase&) = delete;
+
     // accessor functions that derived classes are expected to have
     virtual wxString GetTextValue() const = 0;
     // T GetValue() const
@@ -56,10 +59,6 @@ public:
     virtual bool SetBase(int base) = 0;
     // Select text in the textctrl
     virtual void SetSelection(long from, long to) = 0;
-
-private:
-    wxSpinCtrlBase(const wxSpinCtrlBase&) = delete;
-	wxSpinCtrlBase& operator=(const wxSpinCtrlBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

@@ -38,6 +38,9 @@ class wxCompositeWindowSettersOnly : public W
 public:
     using BaseWindowClass = W;
 
+    wxCompositeWindowSettersOnly(const wxCompositeWindowSettersOnly<W>&)  = delete;
+	wxCompositeWindowSettersOnly& operator=(const wxCompositeWindowSettersOnly<W>&) = delete;
+
     // Override all wxWindow methods which must be forwarded to the composite
     // window parts.
 
@@ -127,8 +130,7 @@ public:
 
 protected:
     // Trivial but necessary default ctor.
-    wxCompositeWindowSettersOnly()
-    = default;
+    wxCompositeWindowSettersOnly() = default;
 
 private:
     // Must be implemented by the derived class to return all children to which
@@ -153,9 +155,6 @@ private:
                 (child->*func)(arg);
         }
     }
-
-    wxCompositeWindowSettersOnly(const wxCompositeWindowSettersOnly<W>&)  = delete;
-	wxCompositeWindowSettersOnly& operator=(const wxCompositeWindowSettersOnly<W>&) = delete;
 };
 
 // The real wxCompositeWindow itself, inheriting all the setters defined above.
@@ -167,6 +166,9 @@ public:
     {
         wxSetFocusToChild(this, nullptr);
     }
+
+    wxCompositeWindow(const wxCompositeWindow<W>&)  = delete;
+	wxCompositeWindow& operator=(const wxCompositeWindow<W>&) = delete;
 
 protected:
     // Default ctor sets things up for handling children events correctly.
@@ -271,9 +273,6 @@ private:
         if ( !this->ProcessWindowEvent(event) )
             event.Skip();
     }
-
-    wxCompositeWindow(const wxCompositeWindow<W>&)  = delete;
-	wxCompositeWindow& operator=(const wxCompositeWindow<W>&) = delete;
 };
 
 #endif // _WX_COMPOSITEWIN_H_

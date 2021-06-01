@@ -86,6 +86,9 @@ public:
     wxHashTableBase();
     virtual ~wxHashTableBase() = default;
 
+    wxHashTableBase(const wxHashTableBase&) = delete;
+	wxHashTableBase& operator=(const wxHashTableBase&) = delete;
+
     void Create( wxKeyType keyType = wxKEY_INTEGER,
                  size_t size = wxHASH_SIZE_DEFAULT );
     void Clear();
@@ -143,10 +146,6 @@ protected:
 
     // delete contents when hash is cleared
     bool m_deleteContents{ false };
-
-private:
-    wxHashTableBase(const wxHashTableBase&) = delete;
-	wxHashTableBase& operator=(const wxHashTableBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

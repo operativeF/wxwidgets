@@ -52,14 +52,15 @@ public:
     // deleted by the caller
     static wxProcess *Open(const wxString& cmd, int flags = wxEXEC_ASYNC);
 
-
-    // ctors
     wxProcess(wxEvtHandler *parent = nullptr, int nId = wxID_ANY)
         { Init(parent, nId, wxPROCESS_DEFAULT); }
 
     wxProcess(int flags) { Init(nullptr, wxID_ANY, flags); }
 
     ~wxProcess() override;
+
+    wxProcess(const wxProcess&) = delete;
+	wxProcess& operator=(const wxProcess&) = delete;
 
     // get the process ID of the process executed by Open()
     long GetPid() const { return m_pid; }
@@ -144,8 +145,6 @@ protected:
     bool m_redirect;
 
     wxDECLARE_DYNAMIC_CLASS(wxProcess);
-    wxProcess(const wxProcess&) = delete;
-	wxProcess& operator=(const wxProcess&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -166,6 +165,8 @@ public:
         m_exitcode = exitcode;
     }
 
+	wxProcessEvent& operator=(const wxProcessEvent&) = delete;
+
     // accessors
         // PID of process which terminated
     int GetPid() const { return m_pid; }
@@ -176,12 +177,9 @@ public:
     // implement the base class pure virtual
     wxEvent *Clone() const override { return new wxProcessEvent(*this); }
 
-public:
     int m_pid,
         m_exitcode;
 
-    public:
-	wxProcessEvent& operator=(const wxProcessEvent&) = delete;
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

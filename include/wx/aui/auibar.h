@@ -75,6 +75,9 @@ public:
         m_isDropdownClicked = false;
         m_toolId = -1;
     }
+
+	wxAuiToolBarEvent& operator=(const wxAuiToolBarEvent&) = delete;
+
     wxEvent *Clone() const override { return new wxAuiToolBarEvent(*this); }
 
     bool IsDropDownClicked() const  { return m_isDropdownClicked; }
@@ -90,15 +93,12 @@ public:
     void SetToolId(int toolId) { m_toolId = toolId; }
 
 private:
-
     bool m_isDropdownClicked;
     wxPoint m_clickPt;
     wxRect m_rect;
     int m_toolId;
 
-private:
-    public:
-	wxAuiToolBarEvent& operator=(const wxAuiToolBarEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

@@ -53,6 +53,8 @@ public:
 
     ~wxGenericValidator() override = default;
 
+    wxGenericValidator& operator=(const wxGenericValidator&) = delete;
+
     // Make a clone of this validator (or return NULL) - currently necessary
     // if you're passing a reference to a validator.
     // Another possibility is to always pass a pointer to a new validator
@@ -86,7 +88,6 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxGenericValidator);
-    wxGenericValidator& operator=(const wxGenericValidator&) = delete;
 };
 
 #endif // wxUSE_VALIDATORS

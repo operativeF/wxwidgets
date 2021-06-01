@@ -479,14 +479,11 @@ class WXDLLIMPEXP_CORE wxListEvent : public wxNotifyEvent
 {
 public:
     wxListEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
-        : wxNotifyEvent(commandType, winid)
-         
-         
-        { }
+        : wxNotifyEvent(commandType, winid) { }
 
-    wxListEvent(const wxListEvent& event)
-         
-        = default;
+    wxListEvent(const wxListEvent& event) = default;
+
+	wxListEvent& operator=(const wxListEvent&) = delete;
 
     int GetKeyCode() const { return m_code; }
     long GetIndex() const { return m_itemIndex; }
@@ -529,9 +526,7 @@ public:
 protected:
     bool          m_editCancelled{false};
 
-private:
-    public:
-	wxListEvent& operator=(const wxListEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

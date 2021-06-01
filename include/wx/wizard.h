@@ -213,6 +213,9 @@ public:
     */
     wxWizardBase() = default;
 
+    wxWizardBase(const wxWizardBase&) = delete;
+	wxWizardBase& operator=(const wxWizardBase&) = delete;
+
     // executes the wizard starting from the given page, returns true if it was
     // successfully finished, false if user cancelled it
     virtual bool RunWizard(wxWizardPage *firstPage) = 0;
@@ -259,10 +262,6 @@ public:
     bool TransferDataToWindow() override { return true; }
     bool TransferDataFromWindow() override { return true; }
     bool Validate() override { return true; }
-
-private:
-    wxWizardBase(const wxWizardBase&) = delete;
-	wxWizardBase& operator=(const wxWizardBase&) = delete;
 };
 
 // include the real class declaration
@@ -282,6 +281,8 @@ public:
                   bool direction = true,
                   wxWizardPage* page = nullptr);
 
+	wxWizardEvent& operator=(const wxWizardEvent&) = delete;
+
     // for EVT_WIZARD_PAGE_CHANGING, return true if we're going forward or
     // false otherwise and for EVT_WIZARD_PAGE_CHANGED return true if we came
     // from the previous page and false if we returned from the next one
@@ -296,8 +297,7 @@ private:
     bool m_direction;
     wxWizardPage*    m_page;
 
-    public:
-	wxWizardEvent& operator=(const wxWizardEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

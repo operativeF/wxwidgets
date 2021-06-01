@@ -44,6 +44,9 @@ public:
 
     ~wxScopedPtr() { wxCHECKED_DELETE(m_ptr); }
 
+    wxScopedPtr(const wxScopedPtr<T>&)  = delete;
+	wxScopedPtr& operator=(const wxScopedPtr<T>&) = delete;
+
     // test for pointer validity: defining conversion to unspecified_bool_type
     // and not more obvious bool to avoid implicit conversions to integer types
     typedef T *(wxScopedPtr<T>::*unspecified_bool_type)() const;
@@ -95,9 +98,6 @@ public:
 
 private:
     T * m_ptr;
-
-    wxScopedPtr(const wxScopedPtr<T>&)  = delete;
-	wxScopedPtr& operator=(const wxScopedPtr<T>&) = delete;
 };
 
 // ----------------------------------------------------------------------------

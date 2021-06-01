@@ -97,6 +97,8 @@ public:
         SetEventObject( evtObject );
     }
 
+	wxFileCtrlEvent& operator=(const wxFileCtrlEvent&) = delete;
+
     // no need for the copy constructor as the default one will be fine.
     wxEvent *Clone() const override { return new wxFileCtrlEvent( *this ); }
 
@@ -115,8 +117,7 @@ protected:
     wxString m_directory;
     wxArrayString m_files;
 
-    public:
-	wxFileCtrlEvent& operator=(const wxFileCtrlEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

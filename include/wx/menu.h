@@ -46,7 +46,6 @@ public:
     // create a menu
     static wxMenu *New(const wxString& title = wxEmptyString, long style = 0);
 
-    // ctors
     wxMenuBase(const wxString& title, long style = 0) : m_title(title)
         { Init(style); }
     wxMenuBase(long style = 0)
@@ -54,6 +53,9 @@ public:
 
     // dtor deletes all the menu items we own
     ~wxMenuBase() override;
+
+    wxMenuBase(const wxMenuBase&) = delete;
+	wxMenuBase& operator=(const wxMenuBase&) = delete;
 
     // menu construction
     // -----------------
@@ -404,9 +406,6 @@ protected:
     // Common part of SendEvent() and ProcessMenuEvent(): sends the event to
     // its intended recipients, returns true if it was processed.
     static bool DoProcessEvent(wxMenuBase* menu, wxEvent& event, wxWindow* win);
-
-    wxMenuBase(const wxMenuBase&) = delete;
-	wxMenuBase& operator=(const wxMenuBase&) = delete;
 };
 
 #if wxUSE_EXTENDED_RTTI
@@ -451,11 +450,13 @@ WX_DECLARE_EXPORTED_LIST(wxMenuInfoHelper, wxMenuInfoHelperList );
 class WXDLLIMPEXP_CORE wxMenuBarBase : public wxWindow
 {
 public:
-    // default ctor
     wxMenuBarBase();
 
     // dtor will delete all menus we own
     ~wxMenuBarBase() override;
+
+    wxMenuBarBase(const wxMenuBarBase&) = delete;
+	wxMenuBarBase& operator=(const wxMenuBarBase&) = delete;
 
     // menu bar construction
     // ---------------------
@@ -578,9 +579,6 @@ protected:
 
     // the frame we are attached to (may be NULL)
     wxFrame *m_menuBarFrame;
-
-    wxMenuBarBase(const wxMenuBarBase&) = delete;
-	wxMenuBarBase& operator=(const wxMenuBarBase&) = delete;
 };
 #endif
 
@@ -631,11 +629,11 @@ public:
         m_menu.SetInvokingWindow(nullptr);
     }
 
-private:
-    wxMenu& m_menu;
-
     wxMenuInvokingWindowSetter(const wxMenuInvokingWindowSetter&) = delete;
 	wxMenuInvokingWindowSetter& operator=(const wxMenuInvokingWindowSetter&) = delete;
+
+private:
+    wxMenu& m_menu;
 };
 
 #endif // wxUSE_MENUS

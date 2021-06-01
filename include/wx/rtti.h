@@ -61,6 +61,9 @@ public:
 
     ~wxClassInfo();
 
+    wxClassInfo(const wxClassInfo&) = delete;
+	wxClassInfo& operator=(const wxClassInfo&) = delete;
+
     wxObject *CreateObject() const
         { return m_objectConstructor ? (*m_objectConstructor)() : nullptr; }
     bool IsDynamic() const { return (nullptr != m_objectConstructor); }
@@ -127,9 +130,6 @@ protected:
     // registers the class
     void Register();
     void Unregister();
-
-    wxClassInfo(const wxClassInfo&) = delete;
-	wxClassInfo& operator=(const wxClassInfo&) = delete;
 };
 
 WXDLLIMPEXP_BASE wxObject *wxCreateDynamicObject(const wxString& name);

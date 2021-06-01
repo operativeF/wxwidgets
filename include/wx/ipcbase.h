@@ -57,6 +57,8 @@ public:
   wxConnectionBase(const wxConnectionBase& copy);
   ~wxConnectionBase() override;
 
+  wxConnectionBase& operator=(const wxConnectionBase&) = delete;
+
   void SetConnected( bool c ) { m_connected = c; }
   bool GetConnected() const { return m_connected; }
 
@@ -221,7 +223,6 @@ private:
 protected:
   bool          m_connected{true};
 
-  wxConnectionBase& operator=(const wxConnectionBase&) = delete;
   wxDECLARE_CLASS(wxConnectionBase);
 };
 

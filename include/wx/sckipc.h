@@ -116,6 +116,9 @@ public:
     wxTCPServer();
     ~wxTCPServer() override;
 
+    wxTCPServer(const wxTCPServer&) = delete;
+	wxTCPServer& operator=(const wxTCPServer&) = delete;
+
     // Returns false on error (e.g. port number is already in use)
     bool Create(const wxString& serverName) override;
 
@@ -129,8 +132,6 @@ protected:
     wxString m_filename;
 #endif // __UNIX_LIKE__
 
-    wxTCPServer(const wxTCPServer&) = delete;
-	wxTCPServer& operator=(const wxTCPServer&) = delete;
     wxDECLARE_DYNAMIC_CLASS(wxTCPServer);
 };
 

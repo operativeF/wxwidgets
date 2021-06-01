@@ -41,6 +41,9 @@ public:
     wxListBoxBase() = default;
     ~wxListBoxBase() override;
 
+    wxListBoxBase(const wxListBoxBase&) = delete;
+	wxListBoxBase& operator=(const wxListBoxBase&) = delete;
+
     void InsertItems(unsigned int nItems, const wxString *items, unsigned int pos)
         { Insert(nItems, items, pos); }
     void InsertItems(const wxArrayString& items, unsigned int pos)
@@ -135,10 +138,6 @@ protected:
     // Update m_oldSelections with currently selected items (does nothing in
     // single selection mode on platforms other than MSW).
     void UpdateOldSelections();
-
-private:
-    wxListBoxBase(const wxListBoxBase&) = delete;
-	wxListBoxBase& operator=(const wxListBoxBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

@@ -36,14 +36,15 @@ public:
                       const wxSize &size = wxDefaultSize,
                       long style = wxDEFAULT_DIALOG_STYLE);
 
+    wxPrintDialogBase(const wxPrintDialogBase&) = delete;
+	wxPrintDialogBase& operator=(const wxPrintDialogBase&) = delete;
+
     virtual wxPrintDialogData& GetPrintDialogData() = 0;
     virtual wxPrintData& GetPrintData() = 0;
     virtual wxDC *GetPrintDC() = 0;
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxPrintDialogBase);
-    wxPrintDialogBase(const wxPrintDialogBase&) = delete;
-	wxPrintDialogBase& operator=(const wxPrintDialogBase&) = delete;
 };
 
 // ---------------------------------------------------------------------------
@@ -57,6 +58,9 @@ public:
     wxPrintDialog(wxWindow *parent, wxPrintData* data);
     ~wxPrintDialog() override;
 
+    wxPrintDialog(const wxPrintDialog&) = delete;
+	wxPrintDialog& operator=(const wxPrintDialog&) = delete;
+
     virtual int ShowModal();
 
     virtual wxPrintDialogData& GetPrintDialogData();
@@ -68,8 +72,6 @@ private:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxPrintDialog);
-    wxPrintDialog(const wxPrintDialog&) = delete;
-	wxPrintDialog& operator=(const wxPrintDialog&) = delete;
 };
 
 // ---------------------------------------------------------------------------
@@ -87,12 +89,13 @@ public:
                       const wxSize &size = wxDefaultSize,
                       long style = wxDEFAULT_DIALOG_STYLE);
 
+    wxPageSetupDialogBase(const wxPageSetupDialogBase&) = delete;
+	wxPageSetupDialogBase& operator=(const wxPageSetupDialogBase&) = delete;
+
     virtual wxPageSetupDialogData& GetPageSetupDialogData() = 0;
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxPageSetupDialogBase);
-    wxPageSetupDialogBase(const wxPageSetupDialogBase&) = delete;
-	wxPageSetupDialogBase& operator=(const wxPageSetupDialogBase&) = delete;
 };
 
 // ---------------------------------------------------------------------------
@@ -105,6 +108,9 @@ public:
     wxPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data = nullptr);
     ~wxPageSetupDialog() override;
 
+    wxPageSetupDialog(const wxPageSetupDialog&) = delete;
+	wxPageSetupDialog& operator=(const wxPageSetupDialog&) = delete;
+
     int ShowModal();
     wxPageSetupDialogData& GetPageSetupDialogData();
     // old name
@@ -115,8 +121,6 @@ private:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxPageSetupDialog);
-    wxPageSetupDialog(const wxPageSetupDialog&) = delete;
-	wxPageSetupDialog& operator=(const wxPageSetupDialog&) = delete;
 };
 
 #endif

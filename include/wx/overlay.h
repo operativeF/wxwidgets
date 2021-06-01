@@ -36,6 +36,9 @@ public:
     wxOverlay();
     ~wxOverlay();
 
+    wxOverlay(const wxOverlay&) = delete;
+	wxOverlay& operator=(const wxOverlay&) = delete;
+
     // clears the overlay without restoring the former state
     // to be done eg when the window content has been changed and repainted
     void Reset();
@@ -60,10 +63,6 @@ private:
     wxOverlayImpl* m_impl;
 
     bool m_inDrawing;
-
-
-    wxOverlay(const wxOverlay&) = delete;
-	wxOverlay& operator=(const wxOverlay&) = delete;
 };
 
 
@@ -80,6 +79,9 @@ public:
     // removes the connection between the overlay and the dc
     virtual ~wxDCOverlay();
 
+    wxDCOverlay(const wxDCOverlay&) = delete;
+	wxDCOverlay& operator=(const wxDCOverlay&) = delete;
+
     // clears the layer, restoring the state at the last init
     void Clear();
 
@@ -89,10 +91,6 @@ private:
     wxOverlay& m_overlay;
 
     wxDC* m_dc;
-
-
-    wxDCOverlay(const wxDCOverlay&) = delete;
-	wxDCOverlay& operator=(const wxDCOverlay&) = delete;
 };
 
 #endif // _WX_OVERLAY_H_

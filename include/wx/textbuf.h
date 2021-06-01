@@ -49,7 +49,6 @@ WX_DEFINE_USER_EXPORTED_ARRAY_INT(wxTextFileType,
 class WXDLLIMPEXP_BASE wxTextBuffer
 {
 public:
-
     wxTextBuffer(const wxTextBuffer&) = delete;
     wxTextBuffer& operator=(const wxTextBuffer&) = delete;
 

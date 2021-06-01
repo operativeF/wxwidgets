@@ -18,6 +18,7 @@ class WXDLLIMPEXP_CORE wxControlWithItems : public wxControlWithItemsBase
 {
 public:
     wxControlWithItems() = default;
+
     wxControlWithItems(const wxControlWithItems&) = delete;
 	wxControlWithItems& operator=(const wxControlWithItems&) = delete;
     

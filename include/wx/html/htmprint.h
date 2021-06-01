@@ -36,6 +36,9 @@ public:
     wxHtmlDCRenderer();
     ~wxHtmlDCRenderer() override;
 
+    wxHtmlDCRenderer(const wxHtmlDCRenderer&) = delete;
+    wxHtmlDCRenderer& operator=(const wxHtmlDCRenderer&) = delete;
+
     // Following 3 methods *must* be called before any call to Render:
 
     // Assign DC to this render
@@ -92,14 +95,7 @@ private:
     wxHtmlContainerCell *m_Cells;
     int m_Width, m_Height;
     bool m_ownsCells;
-
-    wxHtmlDCRenderer(const wxHtmlDCRenderer&) = delete;
-	wxHtmlDCRenderer& operator=(const wxHtmlDCRenderer&) = delete;
 };
-
-
-
-
 
 enum {
     wxPAGE_ODD,
@@ -120,6 +116,9 @@ class WXDLLIMPEXP_HTML wxHtmlPrintout : public wxPrintout
 {
 public:
     wxHtmlPrintout(const wxString& title = wxT("Printout"));
+
+    wxHtmlPrintout(const wxHtmlPrintout&) = delete;
+    wxHtmlPrintout& operator=(const wxHtmlPrintout&) = delete;
 
     void SetHtmlText(const wxString& html, const wxString &basepath = wxEmptyString, bool isdir = true);
             // prepares the class for printing this html document.
@@ -209,9 +208,6 @@ private:
 
     // list of HTML filters
     static std::vector<wxHtmlFilter*> m_Filters;
-
-    wxHtmlPrintout(const wxHtmlPrintout&) = delete;
-	wxHtmlPrintout& operator=(const wxHtmlPrintout&) = delete;
 };
 
 
@@ -235,6 +231,9 @@ class WXDLLIMPEXP_HTML wxHtmlEasyPrinting : public wxObject
 public:
     wxHtmlEasyPrinting(const wxString& name = wxT("Printing"), wxWindow *parentWindow = nullptr);
     ~wxHtmlEasyPrinting() override;
+
+    wxHtmlEasyPrinting(const wxHtmlEasyPrinting&) = delete;
+    wxHtmlEasyPrinting& operator=(const wxHtmlEasyPrinting&) = delete;
 
     bool PreviewFile(const wxString &htmlfile);
     bool PreviewText(const wxString &htmltext, const wxString& basepath = wxEmptyString);
@@ -317,9 +316,6 @@ private:
     wxWindow *m_ParentWindow;
 
     PromptMode m_promptMode;
-
-    wxHtmlEasyPrinting(const wxHtmlEasyPrinting&) = delete;
-	wxHtmlEasyPrinting& operator=(const wxHtmlEasyPrinting&) = delete;
 };
 
 

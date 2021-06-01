@@ -51,6 +51,9 @@ public:
                    name)
         { }
 
+    wxCommandLinkButtonBase(const wxCommandLinkButtonBase&) = delete;
+	wxCommandLinkButtonBase& operator=(const wxCommandLinkButtonBase&) = delete;
+
     virtual void SetMainLabelAndNote(const wxString& mainLabel,
                                      const wxString& note) = 0;
 
@@ -76,10 +79,6 @@ public:
 
 protected:
     virtual bool HasNativeBitmap() const { return false; }
-
-private:
-    wxCommandLinkButtonBase(const wxCommandLinkButtonBase&) = delete;
-	wxCommandLinkButtonBase& operator=(const wxCommandLinkButtonBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -110,6 +109,9 @@ public:
         Create(parent, id, mainLabel, note, pos, size, style, validator, name);
     }
 
+    wxGenericCommandLinkButton(const wxGenericCommandLinkButton&) = delete;
+	wxGenericCommandLinkButton& operator=(const wxGenericCommandLinkButton&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& mainLabel = wxEmptyString,
@@ -128,9 +130,6 @@ public:
 
 private:
     void SetDefaultBitmap();
-
-    wxGenericCommandLinkButton(const wxGenericCommandLinkButton&) = delete;
-	wxGenericCommandLinkButton& operator=(const wxGenericCommandLinkButton&) = delete;
 };
 
 #if defined(__WXMSW__) && !defined(__WXUNIVERSAL__)

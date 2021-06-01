@@ -444,6 +444,8 @@ private:
     }
     ~wxMemoryBufferData() { free(m_data); }
 
+    wxMemoryBufferData(const wxMemoryBufferData&) = delete;
+	wxMemoryBufferData& operator=(const wxMemoryBufferData&) = delete;
 
     void ResizeIfNeeded(size_t newSize)
     {
@@ -499,9 +501,6 @@ private:
 
     // the reference count
     size_t m_ref{0};
-
-    wxMemoryBufferData(const wxMemoryBufferData&) = delete;
-	wxMemoryBufferData& operator=(const wxMemoryBufferData&) = delete;
 };
 
 

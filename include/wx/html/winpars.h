@@ -42,6 +42,9 @@ public:
 
     ~wxHtmlWinParser() override;
 
+    wxHtmlWinParser(const wxHtmlWinParser&) = delete;
+	wxHtmlWinParser& operator=(const wxHtmlWinParser&) = delete;
+
     void InitParser(const wxString& source) override;
     void DoneParser() override;
     wxObject* GetProduct() override;
@@ -221,9 +224,6 @@ private:
     // current position on line, in num. of characters; used to properly
     // expand TABs; only updated while inside <pre>
     int m_posColumn;
-
-    wxHtmlWinParser(const wxHtmlWinParser&) = delete;
-	wxHtmlWinParser& operator=(const wxHtmlWinParser&) = delete;
 };
 
 
@@ -247,15 +247,15 @@ class WXDLLIMPEXP_HTML wxHtmlWinTagHandler : public wxHtmlTagHandler
 public:
     wxHtmlWinTagHandler()  = default;
 
+    wxHtmlWinTagHandler(const wxHtmlWinTagHandler&) = delete;
+	wxHtmlWinTagHandler& operator=(const wxHtmlWinTagHandler&) = delete;
+
     void SetParser(wxHtmlParser *parser) override {wxHtmlTagHandler::SetParser(parser); m_WParser = (wxHtmlWinParser*) parser;}
 
 protected:
     wxHtmlWinParser *m_WParser; // same as m_Parser, but overcasted
 
     void ApplyStyle(const wxHtmlStyleParams &styleParams);
-
-    wxHtmlWinTagHandler(const wxHtmlWinTagHandler&) = delete;
-	wxHtmlWinTagHandler& operator=(const wxHtmlWinTagHandler&) = delete;
 };
 
 

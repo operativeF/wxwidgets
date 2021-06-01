@@ -63,6 +63,9 @@ public:
     
     }
 
+    wxSimplebook(const wxSimplebook&) = delete;
+	wxSimplebook& operator=(const wxSimplebook&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID winid = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
@@ -223,8 +226,6 @@ protected:
     }
 
 private:
-    
-
     std::vector<wxString> m_pageTexts;
 
     wxShowEffect m_showEffect,
@@ -232,9 +233,6 @@ private:
 
     unsigned m_showTimeout,
              m_hideTimeout;
-
-    wxSimplebook(const wxSimplebook&) = delete;
-	wxSimplebook& operator=(const wxSimplebook&) = delete;
 };
 
 #endif // wxUSE_BOOKCTRL

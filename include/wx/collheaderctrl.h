@@ -40,6 +40,9 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
+    wxCollapsibleHeaderCtrlBase(const wxCollapsibleHeaderCtrlBase&) = delete;
+	wxCollapsibleHeaderCtrlBase& operator=(const wxCollapsibleHeaderCtrlBase&) = delete;
+
     bool Create(wxWindow *parent,
         wxWindowID id,
         const wxString& label,
@@ -60,11 +63,6 @@ public:
     virtual void SetCollapsed(bool collapsed = true) = 0;
 
     virtual bool IsCollapsed() const = 0;
-
-private:
-
-    wxCollapsibleHeaderCtrlBase(const wxCollapsibleHeaderCtrlBase&) = delete;
-	wxCollapsibleHeaderCtrlBase& operator=(const wxCollapsibleHeaderCtrlBase&) = delete;
 };
 
 wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_COLLAPSIBLEHEADER_CHANGED, wxCommandEvent);
@@ -96,8 +94,6 @@ public:
     {
         Create(parent, id, label, pos, size, style, validator, name);
     }
-
-private:
 
     wxCollapsibleHeaderCtrl(const wxCollapsibleHeaderCtrl&) = delete;
 	wxCollapsibleHeaderCtrl& operator=(const wxCollapsibleHeaderCtrl&) = delete;

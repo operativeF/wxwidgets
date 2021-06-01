@@ -31,6 +31,9 @@ public:
     // Dtor unregisters the hook if it had been registered.
     virtual ~wxModalDialogHook() { DoUnregister(); }
 
+    wxModalDialogHook(const wxModalDialogHook&) = delete;
+	wxModalDialogHook& operator=(const wxModalDialogHook&) = delete;
+
     // Register this hook as being active, i.e. its Enter() and Exit() methods
     // will be called.
     //
@@ -68,9 +71,6 @@ private:
     // All the hooks in reverse registration order (i.e. in call order).
     using Hooks = std::vector<wxModalDialogHook *>;
     static Hooks ms_hooks;
-
-    wxModalDialogHook(const wxModalDialogHook&) = delete;
-	wxModalDialogHook& operator=(const wxModalDialogHook&) = delete;
 };
 
 // Helper object used by WX_MODAL_DIALOG_HOOK below to ensure that CallExit()
@@ -88,11 +88,11 @@ public:
         wxModalDialogHook::CallExit(m_dialog);
     }
 
-private:
-    wxDialog* const m_dialog;
-
     wxModalDialogHookExitGuard(const wxModalDialogHookExitGuard&) = delete;
 	wxModalDialogHookExitGuard& operator=(const wxModalDialogHookExitGuard&) = delete;
+    
+private:
+    wxDialog* const m_dialog;
 };
 
 // This macro needs to be used at the top of every implementation of

@@ -97,13 +97,13 @@ public:
     wxMessageOutputStderr(FILE *fp = stderr,
                           const wxMBConv &conv = wxConvWhateverWorks);
 
+    wxMessageOutputStderr(const wxMessageOutputStderr&) = delete;
+	wxMessageOutputStderr& operator=(const wxMessageOutputStderr&) = delete;
+
     void Output(const wxString& str) override;
 
 protected:
     FILE *m_fp;
-
-    wxMessageOutputStderr(const wxMessageOutputStderr&) = delete;
-	wxMessageOutputStderr& operator=(const wxMessageOutputStderr&) = delete;
 };
 
 // ----------------------------------------------------------------------------

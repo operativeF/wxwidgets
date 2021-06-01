@@ -274,9 +274,11 @@ public:
     // control creation
     // ----------------
 
-    wxHeaderCtrlSimple() { 
-    m_sortKey = wxNO_COLUMN;
- }
+    wxHeaderCtrlSimple()
+    { 
+        m_sortKey = wxNO_COLUMN;
+    }
+
     wxHeaderCtrlSimple(wxWindow *parent,
                        wxWindowID winid = wxID_ANY,
                        const wxPoint& pos = wxDefaultPosition,
@@ -285,11 +287,12 @@ public:
                        const wxString& name = wxASCII_STR(wxHeaderCtrlNameStr))
     {
         
-    m_sortKey = wxNO_COLUMN;
-
-
+        m_sortKey = wxNO_COLUMN;
         Create(parent, winid, pos, size, style, name);
     }
+
+    wxHeaderCtrlSimple(const wxHeaderCtrlSimple&) = delete;
+	wxHeaderCtrlSimple& operator=(const wxHeaderCtrlSimple&) = delete;
 
     // managing the columns
     // --------------------
@@ -388,9 +391,6 @@ private:
     // the column currently used for sorting or -1 if none
     unsigned int m_sortKey;
 
-
-    wxHeaderCtrlSimple(const wxHeaderCtrlSimple&) = delete;
-	wxHeaderCtrlSimple& operator=(const wxHeaderCtrlSimple&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 
@@ -408,10 +408,9 @@ public:
     {
     }
 
-    wxHeaderCtrlEvent(const wxHeaderCtrlEvent& event)
-        
-          
-    = default;
+    wxHeaderCtrlEvent(const wxHeaderCtrlEvent& event) = default;
+
+	wxHeaderCtrlEvent& operator=(const wxHeaderCtrlEvent&) = delete;
 
     // the column which this event pertains to: valid for all header events
     int GetColumn() const { return m_col; }
@@ -437,9 +436,7 @@ protected:
     // the new column position for end reorder event
     unsigned int m_order;
 
-private:
-    public:
-	wxHeaderCtrlEvent& operator=(const wxHeaderCtrlEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

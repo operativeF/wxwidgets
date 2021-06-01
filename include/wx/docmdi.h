@@ -46,10 +46,11 @@ public:
     {
     }
 
-private:
-    wxDECLARE_CLASS(wxDocMDIParentFrame);
     wxDocMDIParentFrame(const wxDocMDIParentFrame&) = delete;
 	wxDocMDIParentFrame& operator=(const wxDocMDIParentFrame&) = delete;
+
+private:
+    wxDECLARE_CLASS(wxDocMDIParentFrame);
 };
 
 // ----------------------------------------------------------------------------
@@ -77,10 +78,11 @@ public:
     {
     }
 
-private:
-    wxDECLARE_CLASS(wxDocMDIChildFrame);
     wxDocMDIChildFrame(const wxDocMDIChildFrame&) = delete;
 	wxDocMDIChildFrame& operator=(const wxDocMDIChildFrame&) = delete;
+
+private:
+    wxDECLARE_CLASS(wxDocMDIChildFrame);
 };
 
 #endif // wxUSE_MDI_ARCHITECTURE

@@ -162,6 +162,9 @@ public:
     wxPrintNativeDataBase();
     ~wxPrintNativeDataBase() override = default;
 
+    wxPrintNativeDataBase(const wxPrintNativeDataBase&) = delete;
+	wxPrintNativeDataBase& operator=(const wxPrintNativeDataBase&) = delete;
+
     virtual bool TransferTo( wxPrintData &data ) = 0;
     virtual bool TransferFrom( const wxPrintData &data ) = 0;
 #ifdef __WXOSX__
@@ -176,8 +179,6 @@ public:
 
 private:
     wxDECLARE_CLASS(wxPrintNativeDataBase);
-    wxPrintNativeDataBase(const wxPrintNativeDataBase&) = delete;
-	wxPrintNativeDataBase& operator=(const wxPrintNativeDataBase&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -193,6 +194,9 @@ class WXDLLIMPEXP_CORE wxPrinterBase: public wxObject
 public:
     wxPrinterBase(wxPrintDialogData *data = nullptr);
     ~wxPrinterBase() override;
+
+    wxPrinterBase(const wxPrinterBase&) = delete;
+	wxPrinterBase& operator=(const wxPrinterBase&) = delete;
 
     virtual wxPrintAbortDialog *CreateAbortWindow(wxWindow *parent, wxPrintout *printout);
     virtual void ReportError(wxWindow *parent, wxPrintout *printout, const wxString& message);
@@ -221,8 +225,6 @@ public:
 
 private:
     wxDECLARE_CLASS(wxPrinterBase);
-    wxPrinterBase(const wxPrinterBase&) = delete;
-	wxPrinterBase& operator=(const wxPrinterBase&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -234,6 +236,9 @@ class WXDLLIMPEXP_CORE wxPrinter: public wxPrinterBase
 public:
     wxPrinter(wxPrintDialogData *data = nullptr);
     ~wxPrinter() override;
+
+    wxPrinter(const wxPrinter&) = delete;
+	wxPrinter& operator=(const wxPrinter&) = delete;
 
     wxPrintAbortDialog *CreateAbortWindow(wxWindow *parent, wxPrintout *printout) override;
     void ReportError(wxWindow *parent, wxPrintout *printout, const wxString& message) override;
@@ -249,8 +254,6 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxPrinter);
-    wxPrinter(const wxPrinter&) = delete;
-	wxPrinter& operator=(const wxPrinter&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -269,6 +272,9 @@ class WXDLLIMPEXP_CORE wxPrintout: public wxObject
 public:
     wxPrintout(const wxString& title = wxGetTranslation("Printout"));
     ~wxPrintout() override;
+
+    wxPrintout(const wxPrintout&) = delete;
+	wxPrintout& operator=(const wxPrintout&) = delete;
 
     virtual bool OnBeginDocument(int startPage, int endPage);
     virtual void OnEndDocument();
@@ -348,8 +354,6 @@ private:
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxPrintout);
-    wxPrintout(const wxPrintout&) = delete;
-	wxPrintout& operator=(const wxPrintout&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -371,6 +375,9 @@ public:
                     const wxString& name = wxT("canvas"));
     ~wxPreviewCanvas() override;
 
+    wxPreviewCanvas(const wxPreviewCanvas&) = delete;
+	wxPreviewCanvas& operator=(const wxPreviewCanvas&) = delete;
+
     void SetPreview(wxPrintPreviewBase *preview) { m_printPreview = preview; }
 
     void OnPaint(wxPaintEvent& event);
@@ -388,8 +395,6 @@ private:
 
     wxDECLARE_CLASS(wxPreviewCanvas);
     wxDECLARE_EVENT_TABLE();
-    wxPreviewCanvas(const wxPreviewCanvas&) = delete;
-	wxPreviewCanvas& operator=(const wxPreviewCanvas&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -411,6 +416,9 @@ public:
                    long style = wxDEFAULT_FRAME_STYLE | wxFRAME_FLOAT_ON_PARENT,
                    const wxString& name = wxASCII_STR(wxFrameNameStr));
     ~wxPreviewFrame() override;
+
+    wxPreviewFrame(const wxPreviewFrame&) = delete;
+	wxPreviewFrame& operator=(const wxPreviewFrame&) = delete;
 
     // Either Initialize() or InitializeWithModality() must be called before
     // showing the preview frame, the former being just a particular case of
@@ -451,8 +459,6 @@ private:
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_CLASS(wxPreviewFrame);
-    wxPreviewFrame(const wxPreviewFrame&) = delete;
-	wxPreviewFrame& operator=(const wxPreviewFrame&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -501,6 +507,9 @@ public:
                         long style = wxTAB_TRAVERSAL,
                         const wxString& name = wxT("panel"));
     ~wxPreviewControlBar() override;
+
+    wxPreviewControlBar(const wxPreviewControlBar&) = delete;
+	wxPreviewControlBar& operator=(const wxPreviewControlBar&) = delete;
 
     virtual void CreateButtons();
     virtual void SetPageInfo(int minPage, int maxPage);
@@ -569,8 +578,6 @@ private:
     void OnZoomChoice(wxCommandEvent& WXUNUSED(event)) { DoZoom(); }
 
     wxDECLARE_EVENT_TABLE();
-    wxPreviewControlBar(const wxPreviewControlBar&) = delete;
-	wxPreviewControlBar& operator=(const wxPreviewControlBar&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -591,6 +598,9 @@ public:
                        wxPrintout *printoutForPrinting,
                        wxPrintData *data);
     ~wxPrintPreviewBase() override;
+
+    wxPrintPreviewBase(const wxPrintPreviewBase&) = delete;
+	wxPrintPreviewBase& operator=(const wxPrintPreviewBase&) = delete;
 
     virtual bool SetCurrentPage(int pageNum);
     virtual int GetCurrentPage() const;
@@ -684,8 +694,6 @@ protected:
 private:
     void Init(wxPrintout *printout, wxPrintout *printoutForPrinting);
 
-    wxPrintPreviewBase(const wxPrintPreviewBase&) = delete;
-	wxPrintPreviewBase& operator=(const wxPrintPreviewBase&) = delete;
     wxDECLARE_CLASS(wxPrintPreviewBase);
 };
 
@@ -703,6 +711,9 @@ public:
                    wxPrintout *printoutForPrinting,
                    wxPrintData *data);
     ~wxPrintPreview() override;
+
+    wxPrintPreview(const wxPrintPreview&) = delete;
+	wxPrintPreview& operator=(const wxPrintPreview&) = delete;
 
     bool SetCurrentPage(int pageNum) override;
     int GetCurrentPage() const override;
@@ -739,8 +750,6 @@ private:
 
 private:
     wxDECLARE_CLASS(wxPrintPreview);
-    wxPrintPreview(const wxPrintPreview&) = delete;
-	wxPrintPreview& operator=(const wxPrintPreview&) = delete;
 };
 
 //----------------------------------------------------------------------------
@@ -757,6 +766,9 @@ public:
                        long style = wxDEFAULT_DIALOG_STYLE,
                        const wxString& name = wxT("dialog"));
 
+    wxPrintAbortDialog(const wxPrintAbortDialog&) = delete;
+	wxPrintAbortDialog& operator=(const wxPrintAbortDialog&) = delete;
+
     void SetProgress(int currentPage, int totalPages,
                      int currentCopy, int totalCopies);
 
@@ -766,8 +778,6 @@ private:
     wxStaticText *m_progress;
 
     wxDECLARE_EVENT_TABLE();
-    wxPrintAbortDialog(const wxPrintAbortDialog&) = delete;
-	wxPrintAbortDialog& operator=(const wxPrintAbortDialog&) = delete;
 };
 
 #endif // wxUSE_PRINTING_ARCHITECTURE

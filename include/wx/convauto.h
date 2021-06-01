@@ -69,6 +69,8 @@ public:
             delete m_conv;
     }
 
+    wxConvAuto& operator=(const wxConvAuto&) = delete;
+
     // get/set the fall-back encoding used when the input text doesn't have BOM
     // and isn't UTF-8
     //
@@ -115,10 +117,7 @@ public:
         return m_ownsConv && m_bomType == wxBOM_None;
     }
 
-private:
-    // common part of all ctors
-    
-
+private:    
     // initialize m_conv with the UTF-8 conversion
     void InitWithUTF8()
     {
@@ -162,9 +161,6 @@ private:
     // true if we already skipped BOM when converting (and not just calculating
     // the size)
     bool m_consumedBOM;
-
-
-    wxConvAuto& operator=(const wxConvAuto&) = delete;
 };
 
 #endif // _WX_CONVAUTO_H_

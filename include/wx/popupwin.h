@@ -37,6 +37,9 @@ public:
     wxPopupWindowBase() = default;
     ~wxPopupWindowBase() override;
 
+    wxPopupWindowBase(const wxPopupWindowBase&) = delete;
+	wxPopupWindowBase& operator=(const wxPopupWindowBase&) = delete;
+
     // create the popup window
     //
     // style may only contain border flags
@@ -54,9 +57,6 @@ public:
                           const wxSize& size);
 
     bool IsTopLevel() const override { return true; }
-
-    wxPopupWindowBase(const wxPopupWindowBase&) = delete;
-	wxPopupWindowBase& operator=(const wxPopupWindowBase&) = delete;
 };
 
 
@@ -130,10 +130,12 @@ protected:
 class WXDLLIMPEXP_CORE wxPopupTransientWindow : public wxPopupTransientWindowBase
 {
 public:
-    // ctors
     wxPopupTransientWindow() = default;
     wxPopupTransientWindow(wxWindow *parent, int style = wxBORDER_NONE)
         { Create(parent, style); }
+
+    wxPopupTransientWindow(const wxPopupTransientWindow&) = delete;
+	wxPopupTransientWindow& operator=(const wxPopupTransientWindow&) = delete;
 
     void Popup(wxWindow *focus = nullptr) override;
     void Dismiss() override;
@@ -151,8 +153,6 @@ private:
     void DismissOnDeactivate();
 
     wxDECLARE_DYNAMIC_CLASS(wxPopupTransientWindow);
-    wxPopupTransientWindow(const wxPopupTransientWindow&) = delete;
-	wxPopupTransientWindow& operator=(const wxPopupTransientWindow&) = delete;
 };
 
 #else // !__WXMSW__
@@ -169,7 +169,9 @@ public:
 
     virtual ~wxPopupTransientWindow();
 
-    .
+    wxPopupTransientWindow(const wxPopupTransientWindow&) = delete;
+	wxPopupTransientWindow& operator=(const wxPopupTransientWindow&) = delete;
+
     void Popup(wxWindow *focus = NULL) override;
     void Dismiss() override;
 
@@ -208,8 +210,6 @@ protected:
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxPopupTransientWindow);
-    wxPopupTransientWindow(const wxPopupTransientWindow&) = delete;
-	wxPopupTransientWindow& operator=(const wxPopupTransientWindow&) = delete;
 };
 
 #endif // __WXMSW__/!__WXMSW__

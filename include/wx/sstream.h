@@ -66,6 +66,9 @@ public:
     explicit wxStringOutputStream(wxString *pString = nullptr,
                                   wxMBConv& conv = wxConvUTF8);
 
+    wxStringOutputStream(const wxStringOutputStream&) = delete;
+	wxStringOutputStream& operator=(const wxStringOutputStream&) = delete;
+
     // get the string containing current output
     const wxString& GetString() const { return *m_str; }
 
@@ -92,9 +95,6 @@ private:
 
     // unconverted data from the last call to OnSysWrite()
     wxMemoryBuffer m_unconv;
-
-    wxStringOutputStream(const wxStringOutputStream&) = delete;
-	wxStringOutputStream& operator=(const wxStringOutputStream&) = delete;
 };
 
 #endif // wxUSE_STREAMS

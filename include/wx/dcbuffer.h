@@ -74,6 +74,9 @@ public:
             UnMask();
     }
 
+    wxBufferedDC(const wxBufferedDC&) = delete;
+	wxBufferedDC& operator=(const wxBufferedDC&) = delete;
+
     // These reimplement the actions of the ctors for two stage creation
     void Init(wxDC *dc,
               wxBitmap& buffer = wxNullBitmap,
@@ -134,8 +137,6 @@ private:
     wxSize m_area;
 
     wxDECLARE_DYNAMIC_CLASS(wxBufferedDC);
-    wxBufferedDC(const wxBufferedDC&) = delete;
-	wxBufferedDC& operator=(const wxBufferedDC&) = delete;
 };
 
 
@@ -186,6 +187,9 @@ public:
         UnMask();
     }
 
+    wxBufferedPaintDC(const wxBufferedPaintDC&) = delete;
+	wxBufferedPaintDC& operator=(const wxBufferedPaintDC&) = delete;
+
 protected:
     // return the size needed by the buffer: this depends on whether we're
     // buffering just the currently shown part or the total (scrolled) window
@@ -199,8 +203,6 @@ private:
     wxPaintDC m_paintdc;
 
     wxDECLARE_ABSTRACT_CLASS(wxBufferedPaintDC);
-    wxBufferedPaintDC(const wxBufferedPaintDC&) = delete;
-	wxBufferedPaintDC& operator=(const wxBufferedPaintDC&) = delete;
 };
 
 
@@ -232,7 +234,6 @@ public:
 
     ~wxAutoBufferedPaintDC() override = default;
 
-private:
     wxAutoBufferedPaintDC(const wxAutoBufferedPaintDC&) = delete;
 	wxAutoBufferedPaintDC& operator=(const wxAutoBufferedPaintDC&) = delete;
 };

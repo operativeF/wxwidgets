@@ -233,10 +233,10 @@ public:
         }
         virtual ~DataHolder() = default;
 
-        T2   m_value;
-    private:
         DataHolder(const DataHolder&) = delete;
-	DataHolder& operator=(const DataHolder&) = delete;
+	    DataHolder& operator=(const DataHolder&) = delete;
+        
+        T2   m_value;
     };
 
     static void DeleteValue(wxAnyValueBuffer& buf)

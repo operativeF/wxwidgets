@@ -36,6 +36,9 @@ public:
     wxGCDC();
     ~wxGCDC() override;
 
+    wxGCDC(const wxGCDC&) = delete;
+	wxGCDC& operator=(const wxGCDC&) = delete;
+
 #ifdef __WXMSW__
     // override wxDC virtual functions to provide access to HDC associated with
     // this Graphics object (implemented in src/msw/graphics.cpp)
@@ -45,8 +48,6 @@ public:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxGCDC);
-    wxGCDC(const wxGCDC&) = delete;
-	wxGCDC& operator=(const wxGCDC&) = delete;
 };
 
 

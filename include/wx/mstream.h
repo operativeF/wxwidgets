@@ -36,6 +36,9 @@ public:
     }
 
     ~wxMemoryInputStream() override;
+
+    wxMemoryInputStream& operator=(const wxMemoryInputStream&) = delete;
+
     wxFileOffset GetLength() const override { return m_length; }
     bool IsSeekable() const override { return true; }
 
@@ -59,7 +62,6 @@ private:
 
     // copy ctor is implemented above: it copies the other stream in this one
     wxDECLARE_ABSTRACT_CLASS(wxMemoryInputStream);
-    wxMemoryInputStream& operator=(const wxMemoryInputStream&) = delete;
 };
 
 class WXDLLIMPEXP_BASE wxMemoryOutputStream : public wxOutputStream
@@ -68,6 +70,10 @@ public:
     // if data is !NULL it must be allocated with malloc()
     wxMemoryOutputStream(void *data = nullptr, size_t length = 0);
     ~wxMemoryOutputStream() override;
+
+    wxMemoryOutputStream(const wxMemoryOutputStream&) = delete;
+	wxMemoryOutputStream& operator=(const wxMemoryOutputStream&) = delete;
+
     wxFileOffset GetLength() const override { return m_o_streambuf->GetLastAccess(); }
     bool IsSeekable() const override { return true; }
 
@@ -84,8 +90,6 @@ protected:
     wxFileOffset OnSysTell() const override;
 
     wxDECLARE_DYNAMIC_CLASS(wxMemoryOutputStream);
-    wxMemoryOutputStream(const wxMemoryOutputStream&) = delete;
-	wxMemoryOutputStream& operator=(const wxMemoryOutputStream&) = delete;
 };
 
 #endif

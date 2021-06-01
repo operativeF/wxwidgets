@@ -28,6 +28,9 @@ class WXDLLIMPEXP_CORE wxScrollBarBase : public wxControl
 public:
     wxScrollBarBase() = default;
 
+    wxScrollBarBase(const wxScrollBarBase&) = delete;
+	wxScrollBarBase& operator=(const wxScrollBarBase&) = delete;
+
     /*
         Derived classes should provide the following method and ctor with the
         same parameters:
@@ -57,10 +60,6 @@ public:
 
     // implementation-only
     bool IsNeeded() const { return GetRange() > GetThumbSize(); }
-
-private:
-    wxScrollBarBase(const wxScrollBarBase&) = delete;
-	wxScrollBarBase& operator=(const wxScrollBarBase&) = delete;
 };
 
 #if defined(__WXUNIVERSAL__)

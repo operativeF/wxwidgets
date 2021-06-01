@@ -28,6 +28,9 @@ class WXDLLIMPEXP_BASE wxCmdLineArgsArray
 public:
     wxCmdLineArgsArray() { m_argsA = nullptr; m_argsW = nullptr; }
 
+    wxCmdLineArgsArray(const wxCmdLineArgsArray&) = delete;
+	wxCmdLineArgsArray& operator=(const wxCmdLineArgsArray&) = delete;
+
     template <typename T>
     void Init(int argc, T **argv)
     {
@@ -135,9 +138,6 @@ private:
     wxArrayString m_args;
     mutable char **m_argsA;
     mutable wchar_t **m_argsW;
-
-    wxCmdLineArgsArray(const wxCmdLineArgsArray&) = delete;
-	wxCmdLineArgsArray& operator=(const wxCmdLineArgsArray&) = delete;
 };
 
 // provide global operator overload for compatibility with the existing code

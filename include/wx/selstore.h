@@ -41,6 +41,9 @@ class WXDLLIMPEXP_CORE wxSelectionStore
 public:
     wxSelectionStore() : m_itemsSel(wxUIntCmp) {  m_count = 0; m_defaultState = false;  }
 
+    wxSelectionStore(const wxSelectionStore&) = delete;
+	wxSelectionStore& operator=(const wxSelectionStore&) = delete;
+
     // set the total number of items we handle
     void SetItemCount(unsigned count);
 
@@ -103,9 +106,6 @@ public:
     unsigned GetNextSelectedItem(IterationState& cookie) const;
 
 private:
-    // (re)init
-    
-
     // the total number of items we handle
     unsigned m_count;
 
@@ -116,9 +116,6 @@ private:
 
     // the array of items whose selection state is different from default
     wxSelectedIndices m_itemsSel;
-
-    wxSelectionStore(const wxSelectionStore&) = delete;
-	wxSelectionStore& operator=(const wxSelectionStore&) = delete;
 };
 
 #endif // _WX_SELSTORE_H_

@@ -319,6 +319,9 @@ public:
         Register();
     }
 
+    wxTestingModalHook(const wxTestingModalHook&) = delete;
+	wxTestingModalHook& operator=(const wxTestingModalHook&) = delete;
+
     // Called to verify that all expectations were met. This cannot be done in
     // the destructor, because ReportFailure() may throw (either because it's
     // overridden or because wx's assertions handling is, globally). And
@@ -433,9 +436,6 @@ private:
     const char* const m_func;
 
     std::queue<const wxModalExpectation*> m_expectations;
-
-    wxTestingModalHook(const wxTestingModalHook&) = delete;
-	wxTestingModalHook& operator=(const wxTestingModalHook&) = delete;
 };
 
 
