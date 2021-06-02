@@ -106,7 +106,7 @@ bool TestExec(const std::vector<wxFileName>& programs, long timeout)
     std::vector<MonitorData*> data;
 
     // run all programs specified as command line parameters
-    wxArrayLong procID;
+    std::vector<long> procID;
     for (i=0; i<programs.size(); i++)
     {
         MonitorData *dt = new MonitorData(programs[i].GetFullPath());

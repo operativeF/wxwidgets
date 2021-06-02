@@ -384,8 +384,10 @@ WXHBRUSH wxControl::MSWControlColorDisabled(WXHDC pDC)
 
 wxWindow* wxControl::MSWFindItem(long id, WXHWND hWnd) const
 {
+    const auto& sub_controls = GetSubcontrols();
+
     // is it us or one of our "internal" children?
-    if ( id == GetId() || (GetSubcontrols().Index(id) != wxNOT_FOUND) )
+    if ( id == GetId() || (std::find(sub_controls.begin(), sub_controls.end(), id) != std::end(sub_controls)))
         return const_cast<wxControl *>(this);
 
     return wxControlBase::MSWFindItem(id, hWnd);

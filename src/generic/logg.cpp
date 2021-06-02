@@ -93,7 +93,7 @@ public:
     wxLogDialog(wxWindow *parent,
                 const wxArrayString& messages,
                 const wxArrayInt& severity,
-                const wxArrayLong& timess,
+                const std::vector<long>& timess,
                 const wxString& caption,
                 long style);
     ~wxLogDialog() override;
@@ -139,7 +139,7 @@ private:
     // the data for the listctrl
     wxArrayString m_messages;
     wxArrayInt m_severity;
-    wxArrayLong m_times;
+    std::vector<long> m_times;
 
     // the controls which are not shown initially (but only when details
     // button is pressed)
@@ -204,7 +204,7 @@ void wxLogGui::Clear()
 
     m_aMessages.Empty();
     m_aSeverity.Empty();
-    m_aTimes.Empty();
+    m_aTimes.empty();
 }
 
 int wxLogGui::GetSeverityIcon() const
@@ -249,7 +249,7 @@ wxLogGui::DoShowSingleLogMessage(const wxString& message,
 void
 wxLogGui::DoShowMultipleLogMessages(const wxArrayString& messages,
                                     const wxArrayInt& severities,
-                                    const wxArrayLong& times,
+                                    const std::vector<long>& times,
                                     const wxString& title,
                                     int style)
 {
@@ -320,7 +320,7 @@ void wxLogGui::Flush()
     {
         wxArrayString messages;
         wxArrayInt severities;
-        wxArrayLong times;
+        std::vector<long> times;
 
         messages.swap(m_aMessages);
         severities.swap(m_aSeverity);
@@ -344,7 +344,7 @@ void wxLogGui::DoLogRecord(wxLogLevel level,
             {
                 m_aMessages.Add(msg);
                 m_aSeverity.Add(wxLOG_Message);
-                m_aTimes.Add((long)(info.timestampMS / 1000));
+                m_aTimes.push_back((long)(info.timestampMS / 1000));
                 m_bHasMessages = true;
             }
             break;
@@ -397,7 +397,7 @@ void wxLogGui::DoLogRecord(wxLogLevel level,
 
             m_aMessages.Add(msg);
             m_aSeverity.Add((int)level);
-            m_aTimes.Add((long)(info.timestampMS / 1000));
+            m_aTimes.push_back((long)(info.timestampMS / 1000));
             m_bHasMessages = true;
             break;
 
@@ -663,7 +663,7 @@ size_t wxLogDialog::ms_maxLength = 0;
 wxLogDialog::wxLogDialog(wxWindow *parent,
                          const wxArrayString& messages,
                          const wxArrayInt& severity,
-                         const wxArrayLong& times,
+                         const std::vector<long>& times,
                          const wxString& caption,
                          long style)
            : wxDialog(parent, wxID_ANY, caption,
@@ -688,13 +688,13 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
     size_t count = messages.GetCount();
     m_messages.Alloc(count);
     m_severity.Alloc(count);
-    m_times.Alloc(count);
+    m_times.reserve(count);
 
     for ( size_t n = 0; n < count; n++ )
     {
         m_messages.Add(messages[n]);
         m_severity.Add(severity[n]);
-        m_times.Add(times[n]);
+        m_times.push_back(times[n]);
     }
 
     m_listctrl = nullptr;

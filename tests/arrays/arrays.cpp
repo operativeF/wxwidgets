@@ -692,7 +692,7 @@ TEST_CASE("wxDynArray::Swap", "[dynarray]")
     DoTestSwap<wxArrayString>("Foo", "Bar", "Baz");
 
     DoTestSwap<wxArrayInt>(1, 10, 100);
-    DoTestSwap<wxArrayLong>(6, 28, 496);
+    DoTestSwap<std::vector<long>>(6, 28, 496);
 }
 
 TEST_CASE("wxDynArray::TestSTL", "[dynarray]")

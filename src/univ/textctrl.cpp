@@ -435,7 +435,7 @@ private:
     // for each line we remember the starting columns of all its rows after the
     // first one (which always starts at 0), i.e. if a line is wrapped twice
     // (== takes 3 rows) its m_rowsStart[0] may be 10 and m_rowsStart[1] == 15
-    wxArrayLong m_rowsStart;
+    std::vector<long> m_rowsStart;
 
     // and the width of each row in pixels (this array starts from 0, as usual)
     wxArrayInt m_rowsWidth;

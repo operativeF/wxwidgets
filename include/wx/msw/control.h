@@ -63,7 +63,7 @@ public:
     virtual bool MSWOnDraw(WXDRAWITEMSTRUCT *WXUNUSED(item)) { return false; }
     virtual bool MSWOnMeasure(WXMEASUREITEMSTRUCT *WXUNUSED(item)) { return false; }
 
-    const wxArrayLong& GetSubcontrols() const { return m_subControls; }
+    const std::vector<long>& GetSubcontrols() const { return m_subControls; }
 
     // default handling of WM_CTLCOLORxxx: this is public so that wxWindow
     // could call it
@@ -130,7 +130,7 @@ protected:
 
     // for controls like radiobuttons which are really composite this array
     // holds the ids (not HWNDs!) of the sub controls
-    wxArrayLong m_subControls;
+    std::vector<long> m_subControls;
 
 public:
 	wxClassInfo *GetClassInfo() const override;

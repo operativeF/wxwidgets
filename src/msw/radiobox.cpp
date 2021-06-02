@@ -204,7 +204,7 @@ bool wxRadioBox::Create(wxWindow *parent,
         SubclassRadioButton((WXHWND)hwndBtn);
 
         // Also, make it a subcontrol of this control
-        m_subControls.Add(subid);
+        m_subControls.push_back(subid);
     }
 
     // Create a dummy radio control to end the group.
