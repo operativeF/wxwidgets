@@ -259,7 +259,7 @@ protected:
     wxArrayInt m_selections;
 
     // and this one the client data (either void or wxClientData)
-    wxArrayPtrVoid m_itemsClientData;
+    std::vector<void*> m_itemsClientData;
 
     // this is hold the input handler type. the input handler is different
     // between ListBox and its subclass--CheckListbox

@@ -94,7 +94,7 @@ protected:
 
     void UpdateInternals();
 
-    wxArrayPtrVoid      m_bitmaps;  // Images associated with items
+    std::vector<void*>  m_bitmaps;  // Images associated with items
     wxSize              m_usedImgSize{-1, -1};  // Size of bitmaps
 
     int                 m_imgAreaWidth{0};  // Width and height of area next to text field

@@ -39,7 +39,7 @@ private:
     int m_exitcode;
 
     // used to temporarily store events in DoYield()
-    wxArrayPtrVoid m_arrGdkEvents;
+    std::vector<void*> m_arrGdkEvents;
 
     wxGUIEventLoop(const wxGUIEventLoop&) = delete;
 	wxGUIEventLoop& operator=(const wxGUIEventLoop&) = delete;

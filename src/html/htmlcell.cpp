@@ -1446,11 +1446,11 @@ void wxHtmlContainerCell::RemoveExtraSpacing(bool top, bool bottom)
 
         if ( bottom )
         {
-            wxArrayPtrVoid arr;
+            std::vector<void*> arr;
             for ( c = m_Cells; c; c = c->GetNext() )
-                arr.Add((void*)c);
+                arr.push_back((void*)c);
 
-            for ( int i = arr.GetCount() - 1; i >= 0; i--)
+            for ( int i = arr.size() - 1; i >= 0; i--)
             {
                 c = (wxHtmlCell*)arr[i];
                 if ( c->IsTerminalCell() )

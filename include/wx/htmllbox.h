@@ -313,7 +313,7 @@ protected:
         }
 
     wxArrayString   m_items;
-    wxArrayPtrVoid  m_HTMLclientData;
+    std::vector<void*>  m_HTMLclientData;
 
     // Note: For the benefit of old compilers (like gcc-2.8) this should
     // not be named m_clientdata as that clashes with the name of an

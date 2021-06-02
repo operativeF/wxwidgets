@@ -246,7 +246,7 @@ void wxChoice::DoDeleteOneItem(unsigned int n)
     wxList::compatibility_iterator node = m_clientList.GetFirst();
 
     wxArrayString items;
-    wxArrayPtrVoid itemsData;
+    std::vector<void*> itemsData;
     items.Alloc(count);
     for ( unsigned i = 0; i < count; i++, node = node->GetNext() )
     {

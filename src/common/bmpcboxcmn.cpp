@@ -62,8 +62,8 @@ void wxBitmapComboBoxBase::UpdateInternals()
     m_fontHeight = GetControl()->GetCharHeight()
         + GetControl()->FromDIP(EXTRA_FONT_HEIGHT);
 
-    while ( m_bitmaps.GetCount() < GetItemContainer()->GetCount() )
-        m_bitmaps.Add( new wxBitmap() );
+    while ( m_bitmaps.size() < GetItemContainer()->GetCount() )
+        m_bitmaps.push_back( new wxBitmap() );
 }
 
 // ----------------------------------------------------------------------------
@@ -91,7 +91,7 @@ void wxBitmapComboBoxBase::BCBDoClear()
     for ( unsigned i = 0; i < m_bitmaps.size(); i++ )
         delete GetBitmapPtr(i);
 
-    m_bitmaps.Empty();
+    m_bitmaps.clear();
 
     m_usedImgSize.x = -1;
     m_usedImgSize.y = -1;
@@ -102,7 +102,7 @@ void wxBitmapComboBoxBase::BCBDoClear()
 void wxBitmapComboBoxBase::BCBDoDeleteOneItem(unsigned int n)
 {
     delete GetBitmapPtr(n);
-    m_bitmaps.RemoveAt(n);
+    m_bitmaps.erase(std::begin(m_bitmaps) + n);
 }
 
 // ----------------------------------------------------------------------------

@@ -647,10 +647,10 @@ wxSimpleHtmlListBox::~wxSimpleHtmlListBox()
 
 void wxSimpleHtmlListBox::DoClear()
 {
-    wxASSERT(m_items.GetCount() == m_HTMLclientData.GetCount());
+    wxASSERT(m_items.GetCount() == m_HTMLclientData.size());
 
     m_items.Clear();
-    m_HTMLclientData.Clear();
+    m_HTMLclientData.clear();
 
     UpdateCount();
 }
@@ -676,7 +676,7 @@ void wxSimpleHtmlListBox::DoDeleteOneItem(unsigned int n)
 
     m_items.RemoveAt(n);
 
-    m_HTMLclientData.RemoveAt(n);
+    m_HTMLclientData.erase(std::begin(m_HTMLclientData) + n);
 
     UpdateCount();
 }
@@ -689,7 +689,7 @@ int wxSimpleHtmlListBox::DoInsertItems(const wxArrayStringsAdapter& items,
     const unsigned int count = items.GetCount();
 
     m_items.Insert(wxEmptyString, pos, count);
-    m_HTMLclientData.Insert(NULL, pos, count);
+    m_HTMLclientData.insert(std::begin(m_HTMLclientData) + pos, count, nullptr);
 
     for ( unsigned int i = 0; i < count; ++i, ++pos )
     {
@@ -721,7 +721,7 @@ wxString wxSimpleHtmlListBox::GetString(unsigned int n) const
 
 void wxSimpleHtmlListBox::UpdateCount()
 {
-    wxASSERT(m_items.GetCount() == m_HTMLclientData.GetCount());
+    wxASSERT(m_items.GetCount() == m_HTMLclientData.size());
     wxHtmlListBox::SetItemCount(m_items.GetCount());
 
     // very small optimization: if you need to add lot of items to

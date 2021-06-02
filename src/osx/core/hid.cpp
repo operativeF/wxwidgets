@@ -641,7 +641,7 @@ class wxHIDModule : public wxModule
     wxDECLARE_DYNAMIC_CLASS(wxHIDModule);
 
 public:
-        static wxArrayPtrVoid sm_keyboards;
+        static std::vector<void*> sm_keyboards;
         bool OnInit() override
         {
             return true;
@@ -656,7 +656,7 @@ public:
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxHIDModule, wxModule);
 
-wxArrayPtrVoid wxHIDModule::sm_keyboards;
+std::vector<void*> wxHIDModule::sm_keyboards;
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //

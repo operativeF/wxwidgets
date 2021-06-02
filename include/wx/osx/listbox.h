@@ -167,7 +167,7 @@ protected:
     } m_strings;
 
     // and this one the client data (either void or wxClientData)
-    wxArrayPtrVoid m_itemsClientData;
+    std::vector<void*> m_itemsClientData;
 
 private:
     // Mostly the same as DoSetSelection() but doesn't call EnsureVisible().

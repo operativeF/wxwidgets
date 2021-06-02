@@ -98,7 +98,7 @@ private:
                         GIFImage *img, int interl, int bits);
 
     // array of all frames
-    wxArrayPtrVoid m_frames;
+    std::vector<void*> m_frames;
 
     // decoder state vars
     int           m_restbits;       // remaining valid bits

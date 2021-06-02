@@ -86,7 +86,7 @@ protected:
     wxGtkCollatedArrayString *m_strings;
 
     // contains the client data for the items
-    wxArrayPtrVoid m_clientData;
+    std::vector<void*> m_clientData;
 
     // index to GtkListStore cell which displays the item text
     int m_stringCellIndex;

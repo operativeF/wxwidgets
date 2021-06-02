@@ -101,7 +101,7 @@ wxGIFDecoder::~wxGIFDecoder()
 
 void wxGIFDecoder::Destroy()
 {
-    wxASSERT(m_nFrames==m_frames.GetCount());
+    wxASSERT(m_nFrames==m_frames.size());
     for (unsigned int i=0; i<m_nFrames; i++)
     {
         GIFImage *f = (GIFImage*)m_frames[i];
@@ -110,7 +110,7 @@ void wxGIFDecoder::Destroy()
         delete f;
     }
 
-    m_frames.Clear();
+    m_frames.clear();
     m_nFrames = 0;
 }
 
@@ -874,7 +874,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 guardDestroy.Dismiss();
 
                 // add the image to our frame array
-                m_frames.Add(pimg.release());
+                m_frames.push_back(pimg.release());
                 m_nFrames++;
 
                 // if this is not an animated GIF, exit after first image

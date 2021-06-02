@@ -90,7 +90,7 @@ protected:
     // vector containing the client data pointers: it is either empty (if
     // client data is not used) or has the same number of elements as the
     // control
-    wxArrayPtrVoid m_itemsClientData;
+    std::vector<void*> m_itemsClientData;
 
 private:
     // initialize client data if needed, return false if we don't have any

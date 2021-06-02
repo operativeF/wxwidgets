@@ -204,7 +204,7 @@ void wxLogGui::Clear()
 
     m_aMessages.Empty();
     m_aSeverity.Empty();
-    m_aTimes.empty();
+    m_aTimes.clear();
 }
 
 int wxLogGui::GetSeverityIcon() const
