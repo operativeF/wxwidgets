@@ -1280,7 +1280,7 @@ bool wxGCDCImpl::DoGetPartialTextExtents(const wxString& text, wxArrayInt& width
     if ( text.IsEmpty() )
         return true;
 
-    wxArrayDouble widthsD;
+    std::vector<double> widthsD;
 
     m_graphicContext->GetPartialTextExtents( text, widthsD );
     for ( size_t i = 0; i < widths.GetCount(); ++i )

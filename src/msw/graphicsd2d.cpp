@@ -3808,7 +3808,7 @@ class wxNullContext : public wxGraphicsContext
 public:
     explicit wxNullContext(wxGraphicsRenderer* renderer) : wxGraphicsContext(renderer) {}
     void GetTextExtent(const wxString&, double*, double*, double*, double*) const override {}
-    void GetPartialTextExtents(const wxString&, wxArrayDouble&) const override {}
+    void GetPartialTextExtents(const wxString&, std::vector<double>&) const override {}
     void Clip(const wxRegion&) override {}
     void Clip(double, double, double, double) override {}
     void ResetClip() override {}
@@ -3848,12 +3848,12 @@ public:
         GetTextExtent(wxGetD2DFontData(m_font), str, width, height, descent, externalLeading);
     }
 
-    void GetPartialTextExtents(const wxString& text, wxArrayDouble& widths) const override
+    void GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const override
     {
         GetPartialTextExtents(wxGetD2DFontData(m_font), text, widths);
     }
 
-    static void GetPartialTextExtents(wxD2DFontData* fontData, const wxString& text, wxArrayDouble& widths)
+    static void GetPartialTextExtents(wxD2DFontData* fontData, const wxString& text, std::vector<double>& widths)
     {
         for (unsigned int i = 0; i < text.Length(); ++i)
         {
@@ -3977,7 +3977,7 @@ public:
         double* descent,
         double* externalLeading) const override;
 
-    void GetPartialTextExtents(const wxString& text, wxArrayDouble& widths) const override;
+    void GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const override;
 
     bool ShouldOffset() const override;
 
@@ -4725,7 +4725,7 @@ void wxD2DContext::GetTextExtent(
         wxGetD2DFontData(m_font), str, width, height, descent, externalLeading);
 }
 
-void wxD2DContext::GetPartialTextExtents(const wxString& text, wxArrayDouble& widths) const
+void wxD2DContext::GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const
 {
     wxCHECK_RET(!m_font.IsNull(),
         wxS("wxD2DContext::GetPartialTextExtents - no valid font set"));

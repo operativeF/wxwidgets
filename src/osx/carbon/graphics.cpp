@@ -1506,7 +1506,7 @@ public:
     virtual void GetTextExtent( const wxString &text, double *width, double *height,
         double *descent, double *externalLeading ) const override;
 
-    void GetPartialTextExtents(const wxString& text, wxArrayDouble& widths) const override;
+    void GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const override;
 
     //
     // image support
@@ -2634,7 +2634,7 @@ void wxMacCoreGraphicsContext::GetTextExtent( const wxString &str, double *width
     CheckInvariants();
 }
 
-void wxMacCoreGraphicsContext::GetPartialTextExtents(const wxString& text, wxArrayDouble& widths) const
+void wxMacCoreGraphicsContext::GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const
 {
     widths.clear();
 

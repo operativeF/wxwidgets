@@ -987,7 +987,7 @@ public:
 
     virtual void
     GetPartialTextExtents(const wxString& text,
-                          wxArrayDouble& widths) const override
+                          std::vector<double>& widths) const override
     {
         wxCHECK_RET( !m_font.IsNull(),
                      "wxQtContext::GetPartialTextExtents - no valid font set" );

@@ -832,7 +832,7 @@ public:
     virtual void GetTextExtent( const wxString &text, double *width, double *height,
         double *descent = nullptr, double *externalLeading = nullptr ) const  = 0;
 
-    virtual void GetPartialTextExtents(const wxString& text, wxArrayDouble& widths) const = 0;
+    virtual void GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const = 0;
 
     //
     // image support

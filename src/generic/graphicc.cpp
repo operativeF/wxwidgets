@@ -512,7 +512,7 @@ public:
 
     virtual void GetTextExtent( const wxString &str, double *width, double *height,
                                 double *descent, double *externalLeading ) const override;
-    void GetPartialTextExtents(const wxString& text, wxArrayDouble& widths) const override;
+    void GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const override;
 
 protected:
     void DoDrawText( const wxString &str, double x, double y ) override;
@@ -2928,7 +2928,7 @@ void wxCairoContext::GetTextExtent( const wxString &str, double *width, double *
     }
 }
 
-void wxCairoContext::GetPartialTextExtents(const wxString& text, wxArrayDouble& widths) const
+void wxCairoContext::GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const
 {
     widths.Empty();
     wxCHECK_RET( !m_font.IsNull(), wxT("wxCairoContext::GetPartialTextExtents - no valid font set") );

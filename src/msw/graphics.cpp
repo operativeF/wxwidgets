@@ -479,7 +479,7 @@ public:
 
     void GetTextExtent( const wxString &str, double *width, double *height,
         double *descent, double *externalLeading ) const override;
-    void GetPartialTextExtents(const wxString& text, wxArrayDouble& widths) const override;
+    void GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const override;
     bool ShouldOffset() const override;
     virtual void GetSize( double* width, double *height );
     void GetDPI(double* dpiX, double* dpiY) const override;
@@ -2390,10 +2390,10 @@ void wxGDIPlusContext::GetTextExtent( const wxString &str, double *width, double
     }
 }
 
-void wxGDIPlusContext::GetPartialTextExtents(const wxString& text, wxArrayDouble& widths) const
+void wxGDIPlusContext::GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const
 {
-    widths.Empty();
-    widths.Add(0, text.length());
+    widths.clear();
+    widths.insert(widths.end(), text.length(), 0.0);
 
     wxCHECK_RET( !m_font.IsNull(), wxT("wxGDIPlusContext::GetPartialTextExtents - no valid font set") );
 
