@@ -18,8 +18,7 @@ class WXDLLIMPEXP_FWD_CORE wxTaskBarButton;
 class WXDLLIMPEXP_CORE wxFrame : public wxFrameBase
 {
 public:
-    // construction
-    wxFrame() { Init(); }
+    wxFrame() = default;
     wxFrame(wxWindow *parent,
             wxWindowID id,
             const wxString& title,
@@ -28,8 +27,6 @@ public:
             long style = wxDEFAULT_FRAME_STYLE,
             const wxString& name = wxASCII_STR(wxFrameNameStr))
     {
-        Init();
-
         Create(parent, id, title, pos, size, style, name);
     }
 
@@ -127,9 +124,6 @@ public:
 #endif // wxUSE_TASKBARBUTTON
 
 protected:
-    // FIXME: Protected Init
-    void Init();
-
     // override base class virtuals
     void DoGetClientSize(int *width, int *height) const override;
     void DoSetClientSize(int width, int height) override;
@@ -167,23 +161,23 @@ protected:
 
 #if wxUSE_MENUS
     // frame menu, NULL if none
-    WXHMENU m_hMenu;
+    WXHMENU m_hMenu{nullptr};
 
     // The number of currently opened menus: 0 initially, 1 when a top level
     // menu is opened, 2 when its submenu is opened and so on.
-    int m_menuDepth;
+    int m_menuDepth{0};
 #endif // wxUSE_MENUS
 
 private:
 #if wxUSE_TOOLTIPS
-    WXHWND                m_hwndToolTip;
+    WXHWND                m_hwndToolTip{nullptr};
 #endif // tooltips
 
     // used by IconizeChildFrames(), see comments there
-    bool m_wasMinimized;
+    bool m_wasMinimized{false};
 
 #if wxUSE_TASKBARBUTTON
-    wxTaskBarButton* m_taskBarButton;
+    wxTaskBarButton* m_taskBarButton{nullptr};
 #endif
 
     wxDECLARE_EVENT_TABLE();

@@ -276,16 +276,12 @@ enum wxTextAttrUnderlineType
 class WXDLLIMPEXP_CORE wxTextAttr
 {
 public:
-    // ctors
-    wxTextAttr() { Init(); }
-    wxTextAttr(const wxTextAttr& attr) { Init(); Copy(attr); }
+    wxTextAttr() : m_colUnderline(wxNullColour) {}
+    wxTextAttr(const wxTextAttr& attr) : m_colUnderline(wxNullColour) { Copy(attr); }
     wxTextAttr(const wxColour& colText,
                const wxColour& colBack = wxNullColour,
                const wxFont& font = wxNullFont,
                wxTextAttrAlignment alignment = wxTEXT_ALIGNMENT_DEFAULT);
-
-    // Initialise this object.
-    void Init();
 
     // Copy
     void Copy(const wxTextAttr& attr);
@@ -483,41 +479,41 @@ public:
     static bool SplitParaCharStyles(const wxTextAttr& style, wxTextAttr& parStyle, wxTextAttr& charStyle);
 
 private:
-    long                m_flags;
+    long                m_flags{0};
 
     // Paragraph styles
-    std::vector<int>          m_tabs; // array of int: tab stops in 1/10 mm
-    int                 m_leftIndent; // left indent in 1/10 mm
-    int                 m_leftSubIndent; // left indent for all but the first
+    std::vector<int>    m_tabs; // array of int: tab stops in 1/10 mm
+    int                 m_leftIndent{0}; // left indent in 1/10 mm
+    int                 m_leftSubIndent{0}; // left indent for all but the first
                                          // line in a paragraph relative to the
                                          // first line, in 1/10 mm
-    int                 m_rightIndent; // right indent in 1/10 mm
-    wxTextAttrAlignment m_textAlignment;
+    int                 m_rightIndent{0}; // right indent in 1/10 mm
+    wxTextAttrAlignment m_textAlignment{wxTEXT_ALIGNMENT_DEFAULT};
 
-    int                 m_paragraphSpacingAfter;
-    int                 m_paragraphSpacingBefore;
-    int                 m_lineSpacing;
-    int                 m_bulletStyle;
-    int                 m_bulletNumber;
-    int                 m_textEffects;
-    int                 m_textEffectFlags;
-    int                 m_outlineLevel;
+    int                 m_paragraphSpacingAfter{0};
+    int                 m_paragraphSpacingBefore{0};
+    int                 m_lineSpacing{0};
+    int                 m_bulletStyle{wxTEXT_ATTR_BULLET_STYLE_NONE};
+    int                 m_bulletNumber{0};
+    int                 m_textEffects{wxTEXT_ATTR_EFFECT_NONE};
+    int                 m_textEffectFlags{wxTEXT_ATTR_EFFECT_NONE};
+    int                 m_outlineLevel{0};
     wxString            m_bulletText;
     wxString            m_bulletFont;
     wxString            m_bulletName;
     wxString            m_urlTarget;
-    wxFontEncoding      m_fontEncoding;
+    wxFontEncoding      m_fontEncoding{wxFONTENCODING_DEFAULT};
 
     // Character styles
-    wxColour            m_colText,
-                        m_colBack;
-    int                 m_fontSize;
-    wxFontStyle         m_fontStyle;
-    wxFontWeight        m_fontWeight;
-    wxFontFamily        m_fontFamily;
-    wxTextAttrUnderlineType m_fontUnderlineType;
+    wxColour            m_colText;
+    wxColour            m_colBack;
+    int                 m_fontSize{12};
+    wxFontStyle         m_fontStyle{wxFONTSTYLE_NORMAL};
+    wxFontWeight        m_fontWeight{wxFONTWEIGHT_NORMAL};
+    wxFontFamily        m_fontFamily{wxFONTFAMILY_DEFAULT};
+    wxTextAttrUnderlineType m_fontUnderlineType{wxTEXT_ATTR_UNDERLINE_NONE};
     wxColour            m_colUnderline;
-    bool                m_fontStrikethrough;
+    bool                m_fontStrikethrough{false};
     wxString            m_fontFaceName;
 
     // Character style

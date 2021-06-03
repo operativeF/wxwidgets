@@ -28,7 +28,7 @@ class WinPrinter;
 class WXDLLIMPEXP_CORE wxWindowsPrintNativeData: public wxPrintNativeDataBase
 {
 public:
-    wxWindowsPrintNativeData();
+    wxWindowsPrintNativeData() = default;
     ~wxWindowsPrintNativeData() override;
 
     bool TransferTo( wxPrintData &data ) override;
@@ -44,10 +44,10 @@ public:
     void SetDevNames(void* data) { m_devNames = data; }
 
 private:
-    void* m_devMode;
-    void* m_devNames;
+    void* m_devMode{nullptr};
+    void* m_devNames{nullptr};
 
-    short m_customWindowsPaperId;
+    short m_customWindowsPaperId{0};
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxWindowsPrintNativeData);

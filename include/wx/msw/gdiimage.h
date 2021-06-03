@@ -34,8 +34,6 @@ class WXDLLIMPEXP_CORE wxGDIImageRefData : public wxGDIRefData
 public:
     wxGDIImageRefData()
     {
-        m_width = m_height = m_depth = 0;
-
         m_handle = nullptr;
     }
 
@@ -60,10 +58,11 @@ public:
     // for compatibility, the member fields are public
 
     // the size of the image
-    int m_width, m_height;
+    int m_width{0};
+    int m_height{0};
 
     // the depth of the image
-    int m_depth;
+    int m_depth{0};
 
     // the handle to it
     union

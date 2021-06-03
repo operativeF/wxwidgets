@@ -19,6 +19,7 @@
 #include "wx/sizer.h"
 #include "wx/pen.h"
 
+
 class WXDLLIMPEXP_FWD_CORE wxClientDC;
 class WXDLLIMPEXP_FWD_AUI wxAuiPaneInfo;
 
@@ -449,13 +450,30 @@ protected:
     int m_dropdownSize;
 };
 
+// FIXME: Change how this is defined and where it's defined.
+// Right now, we have to include it here to make sure things compile
+// correctly. We should probably split this file up.
+#if defined(__WXMSW__) && wxUSE_UXTHEME
+#define wxHAS_NATIVE_TOOLBAR_ART
+#include "wx/aui/barartmsw.h"
+#define wxAuiDefaultToolBarArt wxAuiMSWToolBarArt
+#endif
 
+#ifndef wxHAS_NATIVE_TOOLBAR_ART
+#define wxAuiDefaultToolBarArt wxAuiGenericToolBarArt
+#endif
 
 
 class WXDLLIMPEXP_AUI wxAuiToolBar : public wxControl
 {
 public:
-    wxAuiToolBar() { Init(); }
+    wxAuiToolBar()
+    {
+        m_sizer = new wxBoxSizer(wxHORIZONTAL);
+        m_art = new wxAuiDefaultToolBarArt;
+        m_toolPacking = FromDIP(2);
+        m_toolBorderPadding = FromDIP(3);
+    }
 
     wxAuiToolBar(wxWindow* parent,
                  wxWindowID id = wxID_ANY,
@@ -463,7 +481,11 @@ public:
                  const wxSize& size = wxDefaultSize,
                  long style = wxAUI_TB_DEFAULT_STYLE)
     {
-        Init();
+        m_sizer = new wxBoxSizer(wxHORIZONTAL);
+        m_art = new wxAuiDefaultToolBarArt;
+        m_toolPacking = FromDIP(2);
+        m_toolBorderPadding = FromDIP(3);
+        
         Create(parent, id, pos, size, style);
     }
 
@@ -614,8 +636,6 @@ public:
     void UpdateWindowUI(long flags = wxUPDATE_UI_NONE) override;
 
 protected:
-    void Init();
-
     virtual void OnCustomRender(wxDC& WXUNUSED(dc),
                                 const wxAuiToolBarItem& WXUNUSED(item),
                                 const wxRect& WXUNUSED(rect)) { }
@@ -656,36 +676,36 @@ protected:
     wxAuiToolBarItemArray m_items;      // array of toolbar items
     wxAuiToolBarArt* m_art;             // art provider
     wxBoxSizer* m_sizer;                // main sizer for toolbar
-    wxAuiToolBarItem* m_actionItem;    // item that's being acted upon (pressed)
-    wxAuiToolBarItem* m_tipItem;       // item that has its tooltip shown
+    wxAuiToolBarItem* m_actionItem{nullptr};    // item that's being acted upon (pressed)
+    wxAuiToolBarItem* m_tipItem{nullptr};       // item that has its tooltip shown
     wxBitmap m_bitmap;                  // double-buffer bitmap
-    wxSizerItem* m_gripperSizerItem;
-    wxSizerItem* m_overflowSizerItem;
+    wxSizerItem* m_gripperSizerItem{nullptr};
+    wxSizerItem* m_overflowSizerItem{nullptr};
     wxSize m_absoluteMinSize;
-    wxPoint m_actionPos;               // position of left-mouse down
+    wxPoint m_actionPos{wxDefaultPosition}; // position of left-mouse down
     wxAuiToolBarItemArray m_customOverflowPrepend;
     wxAuiToolBarItemArray m_customOverflowAppend;
 
-    int m_buttonWidth;
-    int m_buttonHeight;
-    int m_sizerElementCount;
-    int m_leftPadding;
-    int m_rightPadding;
-    int m_topPadding;
-    int m_bottomPadding;
-    int m_toolPacking;
-    int m_toolBorderPadding;
-    int m_toolTextOrientation;
-    int m_overflowState;
-    bool m_dragging;
-    bool m_gripperVisible;
-    bool m_overflowVisible;
+    int m_buttonWidth{-1};
+    int m_buttonHeight{-1};
+    int m_sizerElementCount{0};
+    int m_leftPadding{0};
+    int m_rightPadding{0};
+    int m_topPadding{0};
+    int m_bottomPadding{0};
+    int m_toolPacking{0};
+    int m_toolBorderPadding{0};
+    int m_toolTextOrientation{wxAUI_TBTOOL_TEXT_BOTTOM};
+    int m_overflowState{0};
+    bool m_dragging{false};
+    bool m_gripperVisible{false};
+    bool m_overflowVisible{false};
 
     bool RealizeHelper(wxClientDC& dc, bool horizontal);
     static bool IsPaneValid(long style, const wxAuiPaneInfo& pane);
     bool IsPaneValid(long style) const;
     void SetArtFlags() const;
-    wxOrientation m_orientation;
+    wxOrientation m_orientation{wxHORIZONTAL};
     wxSize m_horzHintSize;
     wxSize m_vertHintSize;
 
@@ -750,16 +770,6 @@ typedef void (wxEvtHandler::*wxAuiToolBarEventFunction)(wxAuiToolBarEvent&);
 #define wxEVT_COMMAND_AUITOOLBAR_RIGHT_CLICK      wxEVT_AUITOOLBAR_RIGHT_CLICK
 #define wxEVT_COMMAND_AUITOOLBAR_MIDDLE_CLICK     wxEVT_AUITOOLBAR_MIDDLE_CLICK
 #define wxEVT_COMMAND_AUITOOLBAR_BEGIN_DRAG       wxEVT_AUITOOLBAR_BEGIN_DRAG
-
-#if defined(__WXMSW__) && wxUSE_UXTHEME
-    #define wxHAS_NATIVE_TOOLBAR_ART
-    #include "wx/aui/barartmsw.h"
-    #define wxAuiDefaultToolBarArt wxAuiMSWToolBarArt
-#endif
-
-#ifndef wxHAS_NATIVE_TOOLBAR_ART
-    #define wxAuiDefaultToolBarArt wxAuiGenericToolBarArt
-#endif
 
 #endif  // wxUSE_AUI
 #endif  // _WX_AUIBAR_H_

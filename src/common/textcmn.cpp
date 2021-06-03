@@ -135,44 +135,18 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxTextCtrlBase, wxControl);
 wxTextAttr::wxTextAttr(const wxColour& colText,
                const wxColour& colBack,
                const wxFont& font,
-               wxTextAttrAlignment alignment): m_textAlignment(alignment), m_colText(colText), m_colBack(colBack)
+               wxTextAttrAlignment alignment):
+    m_textAlignment(alignment),
+    m_colText(colText),
+    m_colBack(colBack),
+    m_colUnderline(wxNullColour)
 {
-    Init();
-
     if (m_colText.IsOk()) m_flags |= wxTEXT_ATTR_TEXT_COLOUR;
     if (m_colBack.IsOk()) m_flags |= wxTEXT_ATTR_BACKGROUND_COLOUR;
     if (alignment != wxTEXT_ALIGNMENT_DEFAULT)
         m_flags |= wxTEXT_ATTR_ALIGNMENT;
 
     GetFontAttributes(font);
-}
-
-// Initialisation
-void wxTextAttr::Init()
-{
-    m_textAlignment = wxTEXT_ALIGNMENT_DEFAULT;
-    m_flags = 0;
-    m_leftIndent = 0;
-    m_leftSubIndent = 0;
-    m_rightIndent = 0;
-
-    m_fontSize = 12;
-    m_fontStyle = wxFONTSTYLE_NORMAL;
-    m_fontWeight = wxFONTWEIGHT_NORMAL;
-    m_fontUnderlineType = wxTEXT_ATTR_UNDERLINE_NONE;
-    m_fontStrikethrough = false;
-    m_fontEncoding = wxFONTENCODING_DEFAULT;
-    m_fontFamily = wxFONTFAMILY_DEFAULT;
-
-    m_paragraphSpacingAfter = 0;
-    m_paragraphSpacingBefore = 0;
-    m_lineSpacing = 0;
-    m_bulletStyle = wxTEXT_ATTR_BULLET_STYLE_NONE;
-    m_textEffects = wxTEXT_ATTR_EFFECT_NONE;
-    m_textEffectFlags = wxTEXT_ATTR_EFFECT_NONE;
-    m_outlineLevel = 0;
-    m_bulletNumber = 0;
-    m_colUnderline = wxNullColour;
 }
 
 // Copy

@@ -89,28 +89,6 @@ wxEND_EVENT_TABLE()
     #endif
 #endif // wxUSE_NATIVE_STATUSBAR
 
-// ----------------------------------------------------------------------------
-// creation/destruction
-// ----------------------------------------------------------------------------
-
-void wxFrame::Init()
-{
-#if wxUSE_MENUS
-    m_hMenu = nullptr;
-    m_menuDepth = 0;
-#endif // wxUSE_MENUS
-
-#if wxUSE_TOOLTIPS
-    m_hwndToolTip = nullptr;
-#endif
-
-    m_wasMinimized = false;
-
-#if wxUSE_TASKBARBUTTON
-    m_taskBarButton = nullptr;
-#endif
-}
-
 bool wxFrame::Create(wxWindow *parent,
                      wxWindowID id,
                      const wxString& title,

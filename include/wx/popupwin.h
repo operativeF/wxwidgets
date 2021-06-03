@@ -163,7 +163,6 @@ class WXDLLIMPEXP_FWD_CORE wxPopupFocusHandler;
 class WXDLLIMPEXP_CORE wxPopupTransientWindow : public wxPopupTransientWindowBase
 {
 public:
-    // ctors
     wxPopupTransientWindow() { Init(); }
     wxPopupTransientWindow(wxWindow *parent, int style = wxBORDER_NONE);
 

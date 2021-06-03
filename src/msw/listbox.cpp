@@ -43,10 +43,6 @@
     } // anonymous namespace
 #endif // wxUSE_OWNER_DRAWN
 
-// ============================================================================
-// list box item declaration and implementation
-// ============================================================================
-
 #if wxUSE_OWNER_DRAWN
 
 class wxListBoxItem : public wxOwnerDrawn
@@ -75,16 +71,6 @@ wxOwnerDrawn *wxListBox::CreateLboxItem(size_t WXUNUSED(n))
 }
 
 #endif  //USE_OWNER_DRAWN
-
-// ============================================================================
-// list box control implementation
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// creation
-// ----------------------------------------------------------------------------
-
-
 
 bool wxListBox::Create(wxWindow *parent,
                        wxWindowID id,
@@ -221,10 +207,6 @@ void wxListBox::MSWOnItemsChanged()
 
     InvalidateBestSize();
 }
-
-// ----------------------------------------------------------------------------
-// implementation of wxListBoxBase methods
-// ----------------------------------------------------------------------------
 
 void wxListBox::EnsureVisible(int n)
 {
@@ -555,10 +537,6 @@ unsigned int wxListBox::GetCount() const
     return m_noItems;
 }
 
-// ----------------------------------------------------------------------------
-// size-related stuff
-// ----------------------------------------------------------------------------
-
 void wxListBox::SetHorizontalExtent(const wxString& s)
 {
     // the rest is only necessary if we want a horizontal scrollbar
@@ -646,10 +624,6 @@ wxSize wxListBox::DoGetBestClientSize() const
     return wxSize(wListbox, hListbox);
 }
 
-// ----------------------------------------------------------------------------
-// callbacks
-// ----------------------------------------------------------------------------
-
 bool wxListBox::MSWCommand(WXUINT param, WXWORD WXUNUSED(id))
 {
     wxEventType evtType;
@@ -695,14 +669,7 @@ bool wxListBox::MSWCommand(WXUINT param, WXWORD WXUNUSED(id))
     return SendEvent(evtType, n, true /* selection */);
 }
 
-// ----------------------------------------------------------------------------
-// owner-drawn list boxes support
-// ----------------------------------------------------------------------------
-
 #if wxUSE_OWNER_DRAWN
-
-// misc overloaded methods
-// -----------------------
 
 bool wxListBox::SetFont(const wxFont &font)
 {
@@ -755,10 +722,6 @@ bool wxListBox::RefreshItem(size_t n)
 
     return ::InvalidateRect((HWND)GetHWND(), &rc, FALSE) == TRUE;
 }
-
-
-// drawing
-// -------
 
 // the height is the same for all items
 // TODO should be changed for LBS_OWNERDRAWVARIABLE style listboxes

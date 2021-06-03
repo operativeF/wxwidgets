@@ -163,13 +163,6 @@ wxCreateDevNames(const wxString& driverName,
 
 wxIMPLEMENT_CLASS(wxWindowsPrintNativeData, wxPrintNativeDataBase);
 
-wxWindowsPrintNativeData::wxWindowsPrintNativeData()
-{
-    m_devMode = nullptr;
-    m_devNames = nullptr;
-    m_customWindowsPaperId = 0;
-}
-
 wxWindowsPrintNativeData::~wxWindowsPrintNativeData()
 {
     if ( m_devMode )

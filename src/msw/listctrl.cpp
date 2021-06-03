@@ -68,10 +68,6 @@
     #define LVM_ISITEMVISIBLE (LVM_FIRST + 182)
 #endif
 
-// ----------------------------------------------------------------------------
-// private functions
-// ----------------------------------------------------------------------------
-
 // convert our state and mask flags to LV_ITEM constants
 static void wxConvertToMSWFlags(long state, long mask, LV_ITEM& lvItem);
 
@@ -116,10 +112,6 @@ wxGetListCtrlItemRect(HWND hwnd, int item, int flags, RECT& rect)
 }
 
 } // anonymous namespace
-
-// ----------------------------------------------------------------------------
-// private helper classes
-// ----------------------------------------------------------------------------
 
 // We have to handle both fooW and fooA notifications in several cases
 // because of broken comctl32.dll and/or unicows.dll. This class is used to
@@ -257,31 +249,6 @@ wxBEGIN_EVENT_TABLE(wxListCtrl, wxListCtrlBase)
     EVT_CHAR_HOOK(wxListCtrl::OnCharHook)
     EVT_DPI_CHANGED(wxListCtrl::OnDPIChanged)
 wxEND_EVENT_TABLE()
-
-// ============================================================================
-// implementation
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// wxListCtrl construction
-// ----------------------------------------------------------------------------
-
-void wxListCtrl::Init()
-{
-    m_imageListNormal =
-    m_imageListSmall =
-    m_imageListState = nullptr;
-    m_ownsImageListNormal =
-    m_ownsImageListSmall =
-    m_ownsImageListState = false;
-
-    m_colCount = 0;
-    m_textCtrl = nullptr;
-
-    m_hasAnyAttr = false;
-
-    m_headerCustomDraw = nullptr;
-}
 
 bool wxListCtrl::Create(wxWindow *parent,
                         wxWindowID id,

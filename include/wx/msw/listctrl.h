@@ -75,11 +75,7 @@ class wxMSWListHeaderCustomDraw;
 class WXDLLIMPEXP_CORE wxListCtrl: public wxListCtrlBase
 {
 public:
-    /*
-     * Public interface
-     */
-
-    wxListCtrl() { Init(); }
+    wxListCtrl() = default;
 
     wxListCtrl(wxWindow *parent,
                wxWindowID id = wxID_ANY,
@@ -89,8 +85,6 @@ public:
                const wxValidator& validator = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxListCtrlNameStr))
     {
-        Init();
-
         Create(parent, id, pos, size, style, validator, name);
     }
 
@@ -382,9 +376,6 @@ public:
                                     WXLPARAM lParam) override;
 
 protected:
-    // FIXME: Protected Init
-    void Init();
-
     bool MSWShouldSetDefaultFont() const override { return false; }
 
     // Implement constrained best size calculation.
@@ -416,22 +407,22 @@ protected:
     wxItemAttr *DoGetItemColumnAttr(long item, long column) const;
 
 
-    wxTextCtrl*       m_textCtrl;        // The control used for editing a label
-    wxImageList *     m_imageListNormal; // The image list for normal icons
-    wxImageList *     m_imageListSmall;  // The image list for small icons
-    wxImageList *     m_imageListState;  // The image list state icons (not implemented yet)
-    bool              m_ownsImageListNormal,
-                      m_ownsImageListSmall,
-                      m_ownsImageListState;
+    wxTextCtrl*       m_textCtrl{nullptr};        // The control used for editing a label
+    wxImageList *     m_imageListNormal{nullptr}; // The image list for normal icons
+    wxImageList *     m_imageListSmall{nullptr};  // The image list for small icons
+    wxImageList *     m_imageListState{nullptr};  // The image list state icons (not implemented yet)
+    bool              m_ownsImageListNormal{false};
+    bool              m_ownsImageListSmall{false};
+    bool              m_ownsImageListState{false};
 
-    int               m_colCount;   // Windows doesn't have GetColumnCount so must
+    int               m_colCount{0};   // Windows doesn't have GetColumnCount so must
                                     // keep track of inserted/deleted columns
 
     // all wxMSWListItemData objects we use
     std::vector<wxMSWListItemData *> m_internalData;
 
     // true if we have any items with custom attributes
-    bool m_hasAnyAttr;
+    bool m_hasAnyAttr{false};
 
 private:
     // process NM_CUSTOMDRAW notification message
@@ -453,7 +444,7 @@ private:
 
 
     // Object using for header custom drawing if necessary, may be NULL.
-    wxMSWListHeaderCustomDraw* m_headerCustomDraw;
+    wxMSWListHeaderCustomDraw* m_headerCustomDraw{nullptr};
 
 
     wxDECLARE_DYNAMIC_CLASS(wxListCtrl);

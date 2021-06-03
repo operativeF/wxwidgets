@@ -48,9 +48,6 @@ public:
                    const wxString& name = wxASCII_STR(wxComboBoxNameStr))
          
     {
-        
-
-
         (void)Create(parent, id, value, pos, size, style, validator, name);
     }
 

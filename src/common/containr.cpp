@@ -39,14 +39,6 @@ static constexpr wxChar TRACE_FOCUS[] = wxT("focus");
 #define USE_RADIOBTN_NAV
 #endif
 
-// ============================================================================
-// implementation
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// wxControlContainerBase
-// ----------------------------------------------------------------------------
-
 void wxControlContainerBase::UpdateParentCanFocus(bool acceptsFocusChildren)
 {
     // In the ports where it does something non trivial, the parent window

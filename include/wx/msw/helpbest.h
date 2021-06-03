@@ -29,6 +29,9 @@ public:
 
     ~wxBestHelpController() override { delete m_helpController; }
 
+    wxBestHelpController(const wxBestHelpController&) = delete;
+	wxBestHelpController& operator=(const wxBestHelpController&) = delete;
+
     // Must call this to set the filename
     bool Initialize(const wxString& file) override;
     bool Initialize(const wxString& file, int WXUNUSED(server) ) override { return Initialize( file ); }
@@ -117,8 +120,6 @@ protected:
     int m_style;
 
     wxDECLARE_DYNAMIC_CLASS(wxBestHelpController);
-    wxBestHelpController(const wxBestHelpController&) = delete;
-	wxBestHelpController& operator=(const wxBestHelpController&) = delete;
 };
 
 #endif // wxUSE_HELP && wxUSE_MS_HTML_HELP && wxUSE_WXHTML_HELP

@@ -448,7 +448,6 @@ public:
     void AssignSpacer(int w, int h) { AssignSpacer(wxSize(w, h)); }
 
 protected:
-    // common part of several ctors
     void Init() { m_userData = nullptr; m_kind = Item_None; }
 
     // common part of ctors taking wxSizerFlags

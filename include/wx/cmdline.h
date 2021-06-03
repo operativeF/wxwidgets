@@ -30,10 +30,6 @@ enum wxCmdLineSplitType
 class WXDLLIMPEXP_FWD_BASE wxCmdLineParser;
 class WXDLLIMPEXP_FWD_BASE wxDateTime;
 
-// ----------------------------------------------------------------------------
-// constants
-// ----------------------------------------------------------------------------
-
 // by default, options are optional (sic) and each call to AddParam() allows
 // one more parameter - this may be changed by giving non-default flags to it
 enum wxCmdLineEntryFlags

@@ -214,7 +214,21 @@ public:
     ~wxListItem() override { delete m_attr; }
 
     // resetting
-    void Clear() { Init(); m_text.clear(); ClearAttributes(); }
+    void Clear()
+    {
+        m_mask = 0;
+        m_itemId = -1;
+        m_col = 0;
+        m_state = 0;
+        m_stateMask = 0;
+        m_image = -1;
+        m_data = 0;
+
+        m_format = wxLIST_FORMAT_CENTRE;
+        m_width = 0;
+        m_text.clear();
+        ClearAttributes();
+    }
     void ClearAttributes() { if ( m_attr ) { delete m_attr; m_attr = nullptr; } }
 
     // setters
@@ -299,20 +313,6 @@ protected:
             m_attr = new wxItemAttr;
 
         return *m_attr;
-    }
-
-    void Init()
-    {
-        m_mask = 0;
-        m_itemId = -1;
-        m_col = 0;
-        m_state = 0;
-        m_stateMask = 0;
-        m_image = -1;
-        m_data = 0;
-
-        m_format = wxLIST_FORMAT_CENTRE;
-        m_width = 0;
     }
 
     wxItemAttr *m_attr{nullptr};     // optional pointer to the items style

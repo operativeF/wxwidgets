@@ -828,28 +828,6 @@ wxBEGIN_EVENT_TABLE(wxAuiToolBar, wxControl)
     EVT_SYS_COLOUR_CHANGED(wxAuiToolBar::OnSysColourChanged)
 wxEND_EVENT_TABLE()
 
-void wxAuiToolBar::Init()
-{
-    m_sizer = new wxBoxSizer(wxHORIZONTAL);
-    m_buttonWidth = -1;
-    m_buttonHeight = -1;
-    m_sizerElementCount = 0;
-    m_actionPos = wxDefaultPosition;
-    m_actionItem = nullptr;
-    m_tipItem = nullptr;
-    m_art = new wxAuiDefaultToolBarArt;
-    m_toolPacking = FromDIP(2);
-    m_toolBorderPadding = FromDIP(3);
-    m_toolTextOrientation = wxAUI_TBTOOL_TEXT_BOTTOM;
-    m_gripperSizerItem = nullptr;
-    m_overflowSizerItem = nullptr;
-    m_dragging = false;
-    m_gripperVisible = false;
-    m_overflowVisible = false;
-    m_overflowState = 0;
-    m_orientation = wxHORIZONTAL;
-}
-
 bool wxAuiToolBar::Create(wxWindow* parent,
                            wxWindowID id,
                            const wxPoint& pos,

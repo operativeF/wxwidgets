@@ -20,10 +20,6 @@
 #include "wx/msw/private.h"
 #include "wx/private/fswatcher.h"
 
-// ============================================================================
-// wxFSWatcherImplMSW implementation
-// ============================================================================
-
 class wxFSWatcherImplMSW : public wxFSWatcherImpl
 {
 public:
