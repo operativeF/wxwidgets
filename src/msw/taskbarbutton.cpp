@@ -48,7 +48,7 @@ WINOLEAPI PropVariantClear(PROPVARIANT* pvar);
 #endif
 
 #ifndef INFOTIPSIZE
-#define INFOTIPSIZE 1024
+static constexpr int INFOTIPSIZE = 1024;
 #endif
 
 namespace {

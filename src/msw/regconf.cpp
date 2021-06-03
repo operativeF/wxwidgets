@@ -416,6 +416,7 @@ void wxRegConfig::SetPath(const wxString& strPath)
   We use the 15th bit of lIndex for distinction between global and local.
  */
 
+// FIXME: Use bit classes
 #define LOCAL_MASK        0x8000
 #define IS_LOCAL_INDEX(l) (((l) & LOCAL_MASK) != 0)
 

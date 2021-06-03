@@ -71,10 +71,10 @@ using size_t32 = wxUint32;
 // ----------------------------------------------------------------------------
 
 // magic number identifying the .mo format file
-const size_t32 MSGCATALOG_MAGIC    = 0x950412de;
-const size_t32 MSGCATALOG_MAGIC_SW = 0xde120495;
+static constexpr size_t32 MSGCATALOG_MAGIC    = 0x950412de;
+static constexpr size_t32 MSGCATALOG_MAGIC_SW = 0xde120495;
 
-#define TRACE_I18N wxS("i18n")
+static constexpr wxChar TRACE_I18N[] = wxS("i18n");
 
 // ============================================================================
 // implementation

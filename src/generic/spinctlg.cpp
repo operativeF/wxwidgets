@@ -55,7 +55,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxSpinDoubleEvent, wxNotifyEvent);
 // determine it dynamically?).
 static constexpr wxCoord MARGIN = 1;
 
-#define SPINCTRLBUT_MAX 32000 // large to avoid wrap around trouble
+static constexpr int SPINCTRLBUT_MAX = 32000; // large to avoid wrap around trouble
 
 // ----------------------------------------------------------------------------
 // wxSpinCtrlTextGeneric: text control used by spin control
@@ -712,7 +712,7 @@ void wxSpinCtrl::ResetTextValidator()
 // wxSpinCtrlDouble
 //-----------------------------------------------------------------------------
 
-#define SPINCTRLDBL_MAX_DIGITS 20
+static constexpr int SPINCTRLDBL_MAX_DIGITS = 20;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxSpinCtrlDouble, wxSpinCtrlGenericBase);
 

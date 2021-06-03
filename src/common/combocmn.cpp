@@ -114,15 +114,15 @@ wxCONSTRUCTOR_5( wxComboBox, wxWindow*, Parent, wxWindowID, Id, \
 // constants
 // ----------------------------------------------------------------------------
 
-#define DEFAULT_DROPBUTTON_WIDTH                19
+static constexpr int DEFAULT_DROPBUTTON_WIDTH = 19;
 
-#define BMP_BUTTON_MARGIN                       4
+static constexpr int BMP_BUTTON_MARGIN = 4;
 
-#define DEFAULT_POPUP_HEIGHT                    400
+static constexpr int DEFAULT_POPUP_HEIGHT = 400;
 
-#define DEFAULT_TEXT_INDENT                     3
+static constexpr int DEFAULT_TEXT_INDENT = 3;
 
-#define COMBO_MARGIN                            2 // spacing right of wxTextCtrl
+static constexpr int COMBO_MARGIN = 2; // spacing right of wxTextCtrl
 
 
 #if defined(__WXMSW__)
@@ -130,7 +130,7 @@ wxCONSTRUCTOR_5( wxComboBox, wxWindow*, Parent, wxWindowID, Id, \
 // Let's use wxFrame as a fall-back solution until wxMSW gets wxNonOwnedWindow
 #include "wx/frame.h"
 #define wxCC_GENERIC_TLW_IS_FRAME
-#define wxComboCtrlGenericTLW   wxFrame
+using wxComboCtrlGenericTLW =   wxFrame;
 
 #define USE_TRANSIENT_POPUP           1 // Use wxPopupWindowTransient (preferred, if it works properly on platform)
 #define TRANSIENT_POPUPWIN_IS_PERFECT 0 // wxPopupTransientWindow works, its child can have focus, and common

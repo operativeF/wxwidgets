@@ -47,7 +47,7 @@ typedef HRESULT (WINAPI *SHGetKnownFolderPath_t)(const GUID&, DWORD, HANDLE, PWS
 // ----------------------------------------------------------------------------
 
 // used in our wxLogTrace messages
-#define TRACE_MASK wxT("stdpaths")
+static constexpr wxChar TRACE_MASK[] = wxT("stdpaths");
 
 #ifndef CSIDL_PERSONAL
     #define CSIDL_PERSONAL        0x0005

@@ -37,13 +37,13 @@
 
 #include "wx/msw/private/hiddenwin.h"
 
-#define CLASSNAME  TEXT("_wxSocket_Internal_Window_Class")
+static constexpr wxChar CLASSNAME[] = TEXT("_wxSocket_Internal_Window_Class");
 
 /* Maximum number of different wxSocket objects at a given time.
  * This value can be modified at will, but it CANNOT be greater
  * than (0x7FFF - WM_USER + 1)
  */
-#define MAXSOCKETS 1024
+static constexpr int MAXSOCKETS = 1024;
 
 #if (MAXSOCKETS > (0x7FFF - WM_USER + 1))
 #error "MAXSOCKETS is too big!"

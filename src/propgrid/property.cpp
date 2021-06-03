@@ -31,10 +31,10 @@
 #include "wx/renderer.h"
 #endif
 
-#define PWC_CHILD_SUMMARY_LIMIT         16 // Maximum number of children summarized in a parent property's
+static constexpr int PWC_CHILD_SUMMARY_LIMIT =         16; // Maximum number of children summarized in a parent property's
                                            // value field.
 
-#define PWC_CHILD_SUMMARY_CHAR_LIMIT    64 // Character limit of summary field when not editing
+static constexpr int PWC_CHILD_SUMMARY_CHAR_LIMIT =    64; // Character limit of summary field when not editing
 
 #if wxPG_COMPATIBILITY_1_4
 

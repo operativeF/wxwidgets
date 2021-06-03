@@ -43,12 +43,12 @@
 // macros and constants
 // ----------------------------------------------------------------------------
 
-#define DDE_CP      CP_WINUNICODE
+static constexpr int DDE_CP =      CP_WINUNICODE;
 
 #define GetHConv()       ((HCONV)m_hConv)
 
 // default timeout for DDE operations (5sec)
-#define DDE_TIMEOUT     5000
+static constexpr int DDE_TIMEOUT =     5000;
 
 // ----------------------------------------------------------------------------
 // private functions
@@ -761,7 +761,7 @@ bool wxDDEConnection::DoAdvise(const wxString& item,
 // _DDECallback
 // ----------------------------------------------------------------------------
 
-#define DDERETURN HDDEDATA
+using DDERETURN = HDDEDATA;
 
 HDDEDATA EXPENTRY
 _DDECallback(UINT wType,

@@ -60,8 +60,8 @@ static const wxChar *gs_classForDialUpWindow = nullptr;
 // ----------------------------------------------------------------------------
 
 // this message is sent by the secondary thread when RAS status changes
-#define wxWM_RAS_STATUS_CHANGED (WM_USER + 10010)
-#define wxWM_RAS_DIALING_PROGRESS (WM_USER + 10011)
+static constexpr int wxWM_RAS_STATUS_CHANGED = (WM_USER + 10010);
+static constexpr int wxWM_RAS_DIALING_PROGRESS = (WM_USER + 10011);
 
 // ----------------------------------------------------------------------------
 // types

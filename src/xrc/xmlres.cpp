@@ -2721,7 +2721,7 @@ void wxXmlResource::DoReportError(const wxString& xrcFile, const wxXmlNode *posi
 // XRCID implementation
 //-----------------------------------------------------------------------------
 
-#define XRCID_TABLE_SIZE     1024
+static constexpr int XRCID_TABLE_SIZE = 1024;
 
 
 struct XRCID_record

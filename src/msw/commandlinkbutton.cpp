@@ -29,11 +29,11 @@
 #include "wx/private/window.h"
 
 #ifndef BCM_SETNOTE
-    #define BCM_SETNOTE 0x1609
+static constexpr int BCM_SETNOTE = 0x1609;
 #endif
 
 #ifndef BS_COMMANDLINK
-    #define BS_COMMANDLINK 0xE
+static constexpr int BS_COMMANDLINK = 0xE;
 #endif
 
 // ----------------------------------------------------------------------------

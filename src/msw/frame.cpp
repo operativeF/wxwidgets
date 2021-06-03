@@ -52,8 +52,8 @@
     #include "wx/dynlib.h"
 
     WXUINT wxMsgTaskbarButtonCreated = 0;
-    #define wxTHBN_CLICKED 0x1800
-    #define wxMSGFLT_ADD   0x01
+    static constexpr int wxTHBN_CLICKED = 0x1800;
+    static constexpr int wxMSGFLT_ADD =   0x01;
 #endif  // wxUSE_TASKBARBUTTON
 
 

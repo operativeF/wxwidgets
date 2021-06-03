@@ -51,11 +51,9 @@
 // constants
 // ----------------------------------------------------------------------------
 
-# define wxMAXPATH   65534
-
-# define wxMAXFILE   1024
-
-# define wxMAXEXT    5
+static constexpr int wxMAXPATH =   65534;
+static constexpr int wxMAXFILE =   1024;
+static constexpr int wxMAXEXT =    5;
 
 // ----------------------------------------------------------------------------
 // globals

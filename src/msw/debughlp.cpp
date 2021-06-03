@@ -646,7 +646,7 @@ public:
 
     #define wxMODULE_NAMEA PSTR
 #else
-    #define wxMODULE_NAMEA PCSTR
+    using wxMODULE_NAMEA = PCSTR;
 #endif
 
 #if defined(UNICODE) && defined(wxHAS_NON_CONST_MODULE_NAME)

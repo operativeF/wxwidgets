@@ -779,7 +779,7 @@ struct IGraphBuilder : public IFilterGraph
 
 struct IReferenceClock;
 struct IEnumPins;
-#define REFERENCE_TIME LONGLONG
+using REFERENCE_TIME = LONGLONG;
 struct IMediaFilter : public IPersist
 {
     STDMETHOD(Stop)( ) PURE;
@@ -925,7 +925,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxAMMediaBackend, wxMediaBackend);
 // Usual debugging macros
 //---------------------------------------------------------------------------
 #if wxDEBUG_LEVEL
-#define MAX_ERROR_TEXT_LEN 160
+static constexpr int MAX_ERROR_TEXT_LEN = 160;
 
 // Get the error string for Active Movie
 wxString wxAMMediaBackend::GetErrorString(HRESULT hrdsv)

@@ -49,7 +49,7 @@
 #endif //def __DARWIN__
 
 
-#define TRACE_STRCONV wxT("strconv")
+static constexpr wxChar TRACE_STRCONV[] = wxT("strconv");
 
 // WC_UTF16 is defined only if sizeof(wchar_t) == 2, otherwise it's supposed to
 // be 4 bytes
@@ -1448,11 +1448,11 @@ size_t wxMBConvUTF8::FromWChar(char *buf, size_t n,
 // ============================================================================
 
 #ifdef WORDS_BIGENDIAN
-    #define wxMBConvUTF16straight wxMBConvUTF16BE
-    #define wxMBConvUTF16swap     wxMBConvUTF16LE
+    using wxMBConvUTF16straight = wxMBConvUTF16BE;
+    using wxMBConvUTF16swap =     wxMBConvUTF16LE;
 #else
-    #define wxMBConvUTF16swap     wxMBConvUTF16BE
-    #define wxMBConvUTF16straight wxMBConvUTF16LE
+    using wxMBConvUTF16swap =     wxMBConvUTF16BE;
+    using wxMBConvUTF16straight = wxMBConvUTF16LE;
 #endif
 
 /* static */
@@ -1746,11 +1746,11 @@ wxMBConvUTF16swap::FromWChar(char *dst, size_t dstLen,
 // ============================================================================
 
 #ifdef WORDS_BIGENDIAN
-    #define wxMBConvUTF32straight  wxMBConvUTF32BE
-    #define wxMBConvUTF32swap      wxMBConvUTF32LE
+    using wxMBConvUTF32straight =  wxMBConvUTF32BE;
+    using wxMBConvUTF32swap =      wxMBConvUTF32LE;
 #else
-    #define wxMBConvUTF32swap      wxMBConvUTF32BE
-    #define wxMBConvUTF32straight  wxMBConvUTF32LE
+    using wxMBConvUTF32swap =      wxMBConvUTF32BE;
+    using wxMBConvUTF32straight =  wxMBConvUTF32LE;
 #endif
 
 
