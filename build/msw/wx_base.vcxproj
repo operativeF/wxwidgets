@@ -480,8 +480,7 @@
     <ClCompile Include="..\..\src\common\dynload.cpp" />
     <ClCompile Include="..\..\src\common\encconv.cpp" />
     <ClCompile Include="..\..\src\common\event.cpp" />
-    <ClCompile Include="..\..\src\common\evtloopcmn.cpp" />
-    <ClCompile Include="..\..\src\common\extended.c">
+    <ClCompile Include="..\..\src\common\evtloopcmn.cpp" >
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Debug|Win32'">
       </PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Debug|x64'">

@@ -49,12 +49,6 @@ wxDataStreamBase::wxDataStreamBase(const wxMBConv& conv)
     wxUnusedVar(conv);
 
     m_be_order = false;
-
-    // For compatibility with the existing data files, we use extended
-    // precision if it is available, i.e. if wxUSE_APPLE_IEEE is on.
-#if wxUSE_APPLE_IEEE
-    m_useExtendedPrecision = true;
-#endif // wxUSE_APPLE_IEEE
 }
 
 void wxDataStreamBase::SetConv( const wxMBConv &conv )
@@ -121,49 +115,28 @@ wxUint8 wxDataInputStream::Read8()
 
 double wxDataInputStream::ReadDouble()
 {
-#if wxUSE_APPLE_IEEE
-    if ( m_useExtendedPrecision )
-    {
-        char buf[10];
+    Float64Data floatData;
 
-        m_input->Read(buf, 10);
-        return wxConvertFromIeeeExtended((const wxInt8 *)buf);
+    if ( m_be_order == (wxBYTE_ORDER == wxBIG_ENDIAN) )
+    {
+        floatData.i[0] = Read32();
+        floatData.i[1] = Read32();
     }
     else
-#endif // wxUSE_APPLE_IEEE
     {
-        Float64Data floatData;
-
-        if ( m_be_order == (wxBYTE_ORDER == wxBIG_ENDIAN) )
-        {
-            floatData.i[0] = Read32();
-            floatData.i[1] = Read32();
-        }
-        else
-        {
-            floatData.i[1] = Read32();
-            floatData.i[0] = Read32();
-        }
-
-        return static_cast<double>(floatData.f);
+        floatData.i[1] = Read32();
+        floatData.i[0] = Read32();
     }
+
+    return static_cast<double>(floatData.f);
 }
 
 float wxDataInputStream::ReadFloat()
 {
-#if wxUSE_APPLE_IEEE
-    if ( m_useExtendedPrecision )
-    {
-        return (float)ReadDouble();
-    }
-    else
-#endif // wxUSE_APPLE_IEEE
-    {
-        Float32Data floatData;
+  Float32Data floatData;
 
-        floatData.i = Read32();
-        return static_cast<float>(floatData.f);
-    }
+  floatData.i = Read32();
+  return static_cast<float>(floatData.f);
 }
 
 wxString wxDataInputStream::ReadString()
@@ -583,49 +556,29 @@ void wxDataOutputStream::WriteString(const wxString& string)
 
 void wxDataOutputStream::WriteDouble(double d)
 {
-#if wxUSE_APPLE_IEEE
-    if ( m_useExtendedPrecision )
-    {
-        char buf[10];
 
-        wxConvertToIeeeExtended(d, (wxInt8 *)buf);
-        m_output->Write(buf, 10);
+    Float64Data floatData;
+
+    floatData.f = d;
+
+    if ( m_be_order == (wxBYTE_ORDER == wxBIG_ENDIAN) )
+    {
+        Write32(floatData.i[0]);
+        Write32(floatData.i[1]);
     }
     else
-#endif // wxUSE_APPLE_IEEE
     {
-        Float64Data floatData;
-
-        floatData.f = d;
-
-        if ( m_be_order == (wxBYTE_ORDER == wxBIG_ENDIAN) )
-        {
-            Write32(floatData.i[0]);
-            Write32(floatData.i[1]);
-        }
-        else
-        {
-            Write32(floatData.i[1]);
-            Write32(floatData.i[0]);
-        }
+        Write32(floatData.i[1]);
+        Write32(floatData.i[0]);
     }
 }
 
 void wxDataOutputStream::WriteFloat(float f)
 {
-#if wxUSE_APPLE_IEEE
-    if ( m_useExtendedPrecision )
-    {
-        WriteDouble((double)f);
-    }
-    else
-#endif // wxUSE_APPLE_IEEE
-    {
-        Float32Data floatData;
+    Float32Data floatData;
 
-        floatData.f = f;
-        Write32(floatData.i);
-    }
+    floatData.f = f;
+    Write32(floatData.i);
 }
 
 #if wxHAS_INT64

@@ -150,8 +150,9 @@ public:
         m_flags = wxFONTFLAG_DEFAULT;
         m_weight = wxFONTWEIGHT_NORMAL;
         m_encoding = wxFONTENCODING_DEFAULT;
-    
-        if (!wxIsSameDouble(m_pointSize, pointSize))
+
+        // FIXME: Double equality
+        if (!(m_pointSize == pointSize))
         {
             wxFAIL_MSG("Invalid font point size");
         }

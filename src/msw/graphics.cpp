@@ -2455,11 +2455,13 @@ bool wxGDIPlusContext::ShouldOffset() const
     const wxGraphicsMatrix matrix(GetTransform());
     double x = GetContentScaleFactor(), y = x;
     matrix.TransformDistance(&x, &y);
-    if (!wxIsSameDouble(fmod(wxMin(fabs(x), fabs(y)), 2.0), 1.0))
+    // FIXME: Double equality
+    if (!(fmod(wxMin(fabs(x), fabs(y)), 2.0) == 1.0))
         return false;
 
     // offset if pen width is odd integer
-    return wxIsSameDouble(fmod(width, 2.0), 1.0);
+    // FIXME: Double equality
+    return fmod(width, 2.0) == 1.0;
 }
 
 void* wxGDIPlusContext::GetNativeContext()

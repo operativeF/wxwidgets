@@ -140,7 +140,6 @@ wx_option(wxUSE_CONSOLE_EVENTLOOP "use event loop in console programs too")
 
 # please keep the settings below in alphabetical order
 wx_option(wxUSE_ANY "use wxAny class")
-wx_option(wxUSE_APPLE_IEEE "use the Apple IEEE codec")
 wx_option(wxUSE_ARCHIVE_STREAMS "use wxArchive streams")
 wx_option(wxUSE_BASE64 "use base64 encoding/decoding functions")
 wx_option(wxUSE_STACKWALKER "use wxStackWalker class for getting backtraces")

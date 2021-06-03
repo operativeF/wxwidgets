@@ -87,9 +87,6 @@
     <ClCompile Include="..\..\src\common\evtloopcmn.cpp">
       <Filter>Common Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\common\extended.c">
-      <Filter>Common Sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\common\ffile.cpp">
       <Filter>Common Sources</Filter>
     </ClCompile>

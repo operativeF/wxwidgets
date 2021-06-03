@@ -17,7 +17,7 @@
 
 #if wxUSE_MEMORY_TRACING || wxUSE_DEBUG_CONTEXT
 
-#include <stddef.h>
+#include <cstddef>
 
 WXDLLIMPEXP_BASE void * wxDebugAlloc(size_t size, wxChar * fileName, int lineNum, bool isObject, bool isVect = false);
 WXDLLIMPEXP_BASE void wxDebugFree(void * buf, bool isVect = false);

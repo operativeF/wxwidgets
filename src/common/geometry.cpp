@@ -188,14 +188,16 @@ void wxPoint2DInt::SetVectorAngle( double degrees )
 
 double wxPoint2DDouble::GetVectorAngle() const
 {
-    if ( wxIsNullDouble(m_x) )
+    // FIXME: Double equality
+    if ( m_x == 0.0 )
     {
         if ( m_y >= 0 )
             return 90;
         else
             return 270;
     }
-    if ( wxIsNullDouble(m_y) )
+    // FIXME: Double equality
+    if ( m_y == 0.0 )
     {
         if ( m_x >= 0 )
             return 0;

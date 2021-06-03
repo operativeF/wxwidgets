@@ -417,9 +417,10 @@ inline wxPoint2DDouble& wxPoint2DDouble::operator/=(const wxPoint2DDouble& pt)
     return *this;
 }
 
+// FIXME: Double equality
 inline bool wxPoint2DDouble::operator==(const wxPoint2DDouble& pt) const
 {
-    return wxIsSameDouble(m_x, pt.m_x) && wxIsSameDouble(m_y, pt.m_y);
+    return (m_x == pt.m_x) && (m_y == pt.m_y);
 }
 
 inline bool wxPoint2DDouble::operator!=(const wxPoint2DDouble& pt) const
@@ -561,8 +562,9 @@ public:
                 ( ( m_y <= rect.m_y ) && ( rect.m_y + rect.m_height <= m_y + m_height ) ) ); }
     inline bool IsEmpty() const
         { return m_width <= 0 || m_height <= 0; }
+    // FIXME: Double equality
     inline bool HaveEqualSize( const wxRect2DDouble &rect ) const
-        { return wxIsSameDouble(rect.m_width, m_width) && wxIsSameDouble(rect.m_height, m_height); }
+        { return (rect.m_width == m_width) && (rect.m_height == m_height); }
 
     inline void Inset( double x , double y )
         { m_x += x; m_y += y; m_width -= 2 * x; m_height -= 2 * y; }
@@ -596,8 +598,9 @@ public:
         { m_x *= ((double)num)/((double)denum); m_y *= ((double)num)/((double)denum);
                 m_width *= ((double)num)/((double)denum); m_height *= ((double)num)/((double)denum);}
 
+    // FIXME: Double equality
     inline bool operator == (const wxRect2DDouble& rect) const
-        { return wxIsSameDouble(m_x, rect.m_x) && wxIsSameDouble(m_y, rect.m_y) && HaveEqualSize(rect); }
+        { return (m_x == rect.m_x) && (m_y == rect.m_y) && HaveEqualSize(rect); }
     inline bool operator != (const wxRect2DDouble& rect) const
         { return !(*this == rect); }
 

@@ -1024,7 +1024,8 @@ bool wxGridCellFloatEditor::EndEdit(int WXUNUSED(row),
 
     // the test for empty strings ensures that we don't skip the value setting
     // when "" is replaced by "0" or vice versa as "" numeric value is also 0.
-    if ( wxIsSameDouble(value, m_value) && !text.empty() && !oldval.empty() )
+    // FIXME: Double equality
+    if ( (value == m_value) && !text.empty() && !oldval.empty() )
         return false;           // nothing changed
 
     m_value = value;

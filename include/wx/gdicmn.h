@@ -463,7 +463,7 @@ struct WXDLLIMPEXP_CORE wxRealPoint
 // FIXME: This is incorrect, and probably shouldn't be implemented at all.
 inline bool operator==(const wxRealPoint& p1, const wxRealPoint& p2)
 {
-    return wxIsSameDouble(p1.x, p2.x) && wxIsSameDouble(p1.y, p2.y);
+    return (p1.x == p2.x) && (p1.y == p2.y);
 }
 
 // FIXME: This is incorrect, and probably shouldn't be implemented at all.

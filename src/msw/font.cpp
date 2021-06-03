@@ -687,7 +687,8 @@ bool wxNativeFontInfo::FromString(const wxString& s)
 
                 // If the size is present but 0, ignore it and still use
                 // lfHeight, as with v0 strings.
-                if ( !wxIsNullDouble(d) )
+                // FIXME: Double equality
+                if ( !(d == 0.0) )
                 {
                     pointSize = d;
                     setPointSizeFromHeight = false;

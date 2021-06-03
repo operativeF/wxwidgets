@@ -530,7 +530,8 @@ bool wxSpinCtrlGenericBase::DoSetValue(double val, SendEvent sendEvent)
     {
         double snap_value = val / m_increment;
 
-        if (wxFinite(snap_value)) // FIXME what to do about a failure?
+        // FIXME: what to do about a failure?
+        if (std::isfinite(snap_value))
         {
             if ((snap_value - floor(snap_value)) < (ceil(snap_value) - snap_value))
                 val = floor(snap_value) * m_increment;

@@ -420,7 +420,8 @@ bool wxVariantDoubleData::Eq(wxVariantData& data) const
 
     wxVariantDoubleData& otherData = (wxVariantDoubleData&) data;
 
-    return wxIsSameDouble(otherData.m_value, m_value);
+    // FIXME: Don't do this, it's wrong.
+    return otherData.m_value == m_value;
 }
 
 bool wxVariantDoubleData::Write(std::ostream& str) const
@@ -478,8 +479,8 @@ bool wxVariant::operator== (double value) const
     double thisValue;
     if (!Convert(&thisValue))
         return false;
-
-    return wxIsSameDouble(value, thisValue);
+    // FIXME: Double equality
+    return value == thisValue;
 }
 
 bool wxVariant::operator!= (double value) const

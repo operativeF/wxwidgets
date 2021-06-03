@@ -6826,9 +6826,6 @@ $(OBJS)\monodll_encconv.o: ../../src/common/encconv.cpp
 $(OBJS)\monodll_evtloopcmn.o: ../../src/common/evtloopcmn.cpp
 	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
 
-$(OBJS)\monodll_extended.o: ../../src/common/extended.c
-	$(CC) -c -o $@ $(MONODLL_CFLAGS) $(CPPDEPS) $<
-
 $(OBJS)\monodll_ffile.o: ../../src/common/ffile.cpp
 	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
 
@@ -9383,9 +9380,6 @@ $(OBJS)\monolib_encconv.o: ../../src/common/encconv.cpp
 
 $(OBJS)\monolib_evtloopcmn.o: ../../src/common/evtloopcmn.cpp
 	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
-
-$(OBJS)\monolib_extended.o: ../../src/common/extended.c
-	$(CC) -c -o $@ $(MONOLIB_CFLAGS) $(CPPDEPS) $<
 
 $(OBJS)\monolib_ffile.o: ../../src/common/ffile.cpp
 	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
@@ -11942,9 +11936,6 @@ $(OBJS)\basedll_encconv.o: ../../src/common/encconv.cpp
 $(OBJS)\basedll_evtloopcmn.o: ../../src/common/evtloopcmn.cpp
 	$(CXX) -c -o $@ $(BASEDLL_CXXFLAGS) $(CPPDEPS) $<
 
-$(OBJS)\basedll_extended.o: ../../src/common/extended.c
-	$(CC) -c -o $@ $(BASEDLL_CFLAGS) $(CPPDEPS) $<
-
 $(OBJS)\basedll_ffile.o: ../../src/common/ffile.cpp
 	$(CXX) -c -o $@ $(BASEDLL_CXXFLAGS) $(CPPDEPS) $<
 
@@ -12286,9 +12277,6 @@ $(OBJS)\baselib_encconv.o: ../../src/common/encconv.cpp
 
 $(OBJS)\baselib_evtloopcmn.o: ../../src/common/evtloopcmn.cpp
 	$(CXX) -c -o $@ $(BASELIB_CXXFLAGS) $(CPPDEPS) $<
-
-$(OBJS)\baselib_extended.o: ../../src/common/extended.c
-	$(CC) -c -o $@ $(BASELIB_CFLAGS) $(CPPDEPS) $<
 
 $(OBJS)\baselib_ffile.o: ../../src/common/ffile.cpp
 	$(CXX) -c -o $@ $(BASELIB_CXXFLAGS) $(CPPDEPS) $<

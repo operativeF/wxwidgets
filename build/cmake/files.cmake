@@ -406,7 +406,6 @@ set(BASE_CMN_SRC
     src/common/dynload.cpp
     src/common/encconv.cpp
     src/common/evtloopcmn.cpp
-    src/common/extended.c
     src/common/ffile.cpp
     src/common/file.cpp
     src/common/fileback.cpp

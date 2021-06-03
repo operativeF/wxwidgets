@@ -51,15 +51,7 @@ private:
         CPPUNIT_TEST( DoubleRW );
         // Only test standard IEEE 754 formats if we're using IEEE extended
         // format by default, otherwise the tests above already covered them.
-#if wxUSE_APPLE_IEEE
-        CPPUNIT_TEST( PseudoTest_UseIEEE754 );
-        CPPUNIT_TEST( FloatRW );
-        CPPUNIT_TEST( DoubleRW );
-        // Also retest little endian version with standard formats.
-        CPPUNIT_TEST( PseudoTest_UseLittleEndian );
-        CPPUNIT_TEST( FloatRW );
-        CPPUNIT_TEST( DoubleRW );
-#endif // wxUSE_APPLE_IEEE
+
     CPPUNIT_TEST_SUITE_END();
 
     double TestFloatRW(double fValue);
@@ -77,14 +69,8 @@ private:
 
     void PseudoTest_UseBigEndian() { ms_useBigEndianFormat = true; }
     void PseudoTest_UseLittleEndian() { ms_useBigEndianFormat = false; }
-#if wxUSE_APPLE_IEEE
-    void PseudoTest_UseIEEE754() { ms_useIEEE754 = true; }
-#endif // wxUSE_APPLE_IEEE
 
     static bool ms_useBigEndianFormat;
-#if wxUSE_APPLE_IEEE
-    static bool ms_useIEEE754;
-#endif // wxUSE_APPLE_IEEE
 
     DataStreamTestCase(const DataStreamTestCase&) = delete;
 	DataStreamTestCase& operator=(const DataStreamTestCase&) = delete;
@@ -97,9 +83,6 @@ CPPUNIT_TEST_SUITE_REGISTRATION( DataStreamTestCase );
 CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( DataStreamTestCase, "DataStreamTestCase" );
 
 bool DataStreamTestCase::ms_useBigEndianFormat = false;
-#if wxUSE_APPLE_IEEE
-bool DataStreamTestCase::ms_useIEEE754 = false;
-#endif // wxUSE_APPLE_IEEE
 
 DataStreamTestCase::DataStreamTestCase()
 {
@@ -115,11 +98,6 @@ double DataStreamTestCase::TestFloatRW(double fValue)
         if ( ms_useBigEndianFormat )
             pDataOutput.BigEndianOrdered(true);
 
-#if wxUSE_APPLE_IEEE
-        if ( ms_useIEEE754 )
-            pDataOutput.UseBasicPrecisions();
-#endif // wxUSE_APPLE_IEEE
-
         pDataOutput << fValue;
     }
 
@@ -127,11 +105,6 @@ double DataStreamTestCase::TestFloatRW(double fValue)
     wxDataInputStream pDataInput( pFileInput );
     if ( ms_useBigEndianFormat )
         pDataInput.BigEndianOrdered(true);
-
-#if wxUSE_APPLE_IEEE
-    if ( ms_useIEEE754 )
-        pDataInput.UseBasicPrecisions();
-#endif // wxUSE_APPLE_IEEE
 
     double fInFloat;
 

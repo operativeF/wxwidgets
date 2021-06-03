@@ -1011,6 +1011,7 @@ unsigned int wxGCD(unsigned int u, unsigned int v)
 unsigned int wxCTZ(wxUint32 x)
 {
     wxCHECK_MSG(x > 0, 0, "Undefined for x == 0.");
+    // FIXME: Check for header on other compilers.
 #ifdef __GNUC__
    return __builtin_ctz(x);
 #else

@@ -32,21 +32,7 @@ public:
     // precision (64 bits) is used for doubles.
     void UseBasicPrecisions()
     {
-#if wxUSE_APPLE_IEEE
-        m_useExtendedPrecision = false;
-#endif // wxUSE_APPLE_IEEE
     }
-
-    // UseExtendedPrecision() is not very useful as it corresponds to the
-    // default value, only call it in your code if you want the compilation
-    // fail with the error when using wxWidgets library compiled without
-    // extended precision support.
-#if wxUSE_APPLE_IEEE
-    void UseExtendedPrecision()
-    {
-        m_useExtendedPrecision = true;
-    }
-#endif // wxUSE_APPLE_IEEE
 
     void SetConv( const wxMBConv &conv );
     wxMBConv *GetConv() const { return m_conv; }
@@ -58,10 +44,6 @@ protected:
     ~wxDataStreamBase();
 
     bool m_be_order;
-
-#if wxUSE_APPLE_IEEE
-    bool m_useExtendedPrecision;
-#endif // wxUSE_APPLE_IEEE
 
     wxMBConv *m_conv;
 };

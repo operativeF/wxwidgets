@@ -3202,7 +3202,8 @@ wxImage::HSVValue wxImage::RGBtoHSV(const RGBValue& rgb)
 
     double hue = 0.0, saturation;
     const double deltaRGB = maximumRGB - minimumRGB;
-    if ( wxIsNullDouble(deltaRGB) )
+    // FIXME: Double equality
+    if ( deltaRGB == 0.0 )
     {
         // Gray has no color
         hue = 0.0;
@@ -3240,7 +3241,8 @@ wxImage::RGBValue wxImage::HSVtoRGB(const HSVValue& hsv)
 {
     double red, green, blue;
 
-    if ( wxIsNullDouble(hsv.saturation) )
+    // FIXME: Double equality
+    if ( hsv.saturation == 0.0 )
     {
         // Grey
         red = hsv.value;
@@ -3323,7 +3325,8 @@ static void DoRotateHue(wxImage *WXUNUSED(image), unsigned char *rgb, double ang
 // to +360 degrees.
 void wxImage::RotateHue(double angle)
 {
-    if ( wxIsNullDouble(angle) )
+    // FIXME: Double equality
+    if ( angle == 0.0 )
         return;
 
     wxASSERT(angle >= -1.0 && angle <= 1.0);
@@ -3354,7 +3357,8 @@ static void DoChangeSaturation(wxImage *WXUNUSED(image), unsigned char *rgb, dou
 // to +100 percent.
 void wxImage::ChangeSaturation(double factor)
 {
-    if ( wxIsNullDouble(factor) )
+    // FIXME: Double equality.
+    if ( factor == 0.0 )
         return;
 
     wxASSERT(factor >= -1.0 && factor <= 1.0);
@@ -3385,7 +3389,8 @@ static void DoChangeBrightness(wxImage *WXUNUSED(image), unsigned char *rgb, dou
 // corresponds to +100 percent.
 void wxImage::ChangeBrightness(double factor)
 {
-    if ( wxIsNullDouble(factor) )
+    // FIXME: Double equality
+    if (factor == 0.0)
         return;
 
     wxASSERT(factor >= -1.0 && factor <= 1.0);
@@ -3395,13 +3400,16 @@ void wxImage::ChangeBrightness(double factor)
 // TODO-C++11: Replace with a lambda function.
 static void DoChangeHSV(wxImage *image, unsigned char *rgb, wxImage::HSVValue hsvValue)
 {
-    if ( !wxIsNullDouble(hsvValue.hue) )
+    // FIXME: Double equality
+    if ( !(hsvValue.hue == 0.0) )
         DoRotateHue(image, rgb, hsvValue.hue);
 
-    if ( !wxIsNullDouble(hsvValue.saturation) )
+    // FIXME: Double equality
+    if ( !(hsvValue.saturation == 0.0) )
         DoChangeSaturation(image, rgb, hsvValue.saturation);
 
-    if ( !wxIsNullDouble(hsvValue.value) )
+    // FIXME: Double equality
+    if ( !(hsvValue.value == 0.0) )
         DoChangeBrightness(image, rgb, hsvValue.value);
 }
 
@@ -3413,7 +3421,8 @@ static void DoChangeHSV(wxImage *image, unsigned char *rgb, wxImage::HSVValue hs
 // where -1.0 corresponds to -100 percent and +1.0 corresponds to +100 percent.
 void wxImage::ChangeHSV(double angleH, double factorS, double factorV)
 {
-    if ( wxIsNullDouble(angleH) && wxIsNullDouble(factorS) && wxIsNullDouble(factorV) )
+    // FIXME: Double equality
+    if ( (angleH == 0.0) && (factorS == 0.0) && (factorV == 0.0) )
         return;
 
     wxASSERT(angleH >= -1.0 && angleH <= 1.0 && factorS >= -1.0 &&

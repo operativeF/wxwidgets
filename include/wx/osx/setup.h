@@ -543,15 +543,6 @@
 // Recommended setting: 1 if you need LZMA compression.
 #define wxUSE_LIBLZMA       0
 
-// If enabled, the code written by Apple will be used to write, in a portable
-// way, float on the disk. See extended.c for the license which is different
-// from wxWidgets one.
-//
-// Default is 1.
-//
-// Recommended setting: 1 unless you don't like the license terms (unlikely)
-#define wxUSE_APPLE_IEEE          1
-
 // Joystick support class
 #define wxUSE_JOYSTICK            1
 

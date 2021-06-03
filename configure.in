@@ -734,7 +734,6 @@ WX_ARG_FEATURE(selectloop,    [  --enable-selectloop     use wxSelectDispatcher 
 
 dnl please keep the settings below in alphabetical order
 WX_ARG_FEATURE(any,           [  --enable-any            use wxAny class], wxUSE_ANY)
-WX_ARG_FEATURE(apple_ieee,    [  --enable-apple_ieee     use the Apple IEEE codec], wxUSE_APPLE_IEEE)
 WX_ARG_FEATURE(arcstream,     [  --enable-arcstream      use wxArchive streams], wxUSE_ARCHIVE_STREAMS)
 WX_ARG_FEATURE(base64,        [  --enable-base64         use base64 encoding/decoding functions], wxUSE_BASE64)
 WX_ARG_FEATURE(backtrace,     [  --enable-backtrace      use wxStackWalker class for getting backtraces], wxUSE_STACKWALKER)

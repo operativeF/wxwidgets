@@ -1357,7 +1357,8 @@ float wxDCImpl::GetFontPointSizeAdjustment(float dpi)
 
 double wxDCImpl::GetMMToPXx() const
 {
-    if ( wxIsNullDouble(m_mm_to_pix_x) )
+    // FIXME: Double equality
+    if ( m_mm_to_pix_x == 0.0 )
     {
         m_mm_to_pix_x = (double)wxGetDisplaySize().x /
                         (double)wxGetDisplaySizeMM().x;
@@ -1368,7 +1369,8 @@ double wxDCImpl::GetMMToPXx() const
 
 double wxDCImpl::GetMMToPXy() const
 {
-    if ( wxIsNullDouble(m_mm_to_pix_y) )
+    // FIXME: Double equality
+    if ( m_mm_to_pix_y == 0.0 )
     {
         m_mm_to_pix_y = (double)wxGetDisplaySize().y /
                         (double)wxGetDisplaySizeMM().y;

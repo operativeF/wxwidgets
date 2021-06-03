@@ -731,7 +731,6 @@ $(TAB)cl /EP /nologo "$(DOLLAR)(InputPath)" > "$(SETUPHDIR)\wx\msw\rcdefs.h"
             <precomp-headers>on</precomp-headers>
             <precomp-headers-file>wxprec_$(id)</precomp-headers-file>
             <precomp-headers-exclude>
-                src/common/extended.c
                 src/gtk/eggtrayicon.c
                 src/gtk/treeentry_gtk.c
             </precomp-headers-exclude>
