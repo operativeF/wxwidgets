@@ -37,15 +37,6 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxHTTP, wxProtocol);
 IMPLEMENT_PROTOCOL(wxHTTP, wxT("http"), wxT("80"), true)
 
-wxHTTP::wxHTTP()
-   
-{
-    m_addr = nullptr;
-    m_read = false;
-    m_proxy_mode = false;
-    m_http_response = 0;
-}
-
 wxHTTP::~wxHTTP()
 {
     ClearHeaders();

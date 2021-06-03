@@ -62,8 +62,7 @@ wxDEFINE_EVENT( wxEVT_MEDIA_STOP, wxMediaEvent );
 // This is here because the DARWIN gcc compiler badly screwed up and
 // needs the destructor implementation in the source
 //---------------------------------------------------------------------------
-wxMediaBackend::~wxMediaBackend()
-= default;
+wxMediaBackend::~wxMediaBackend() = default;
 
 //---------------------------------------------------------------------------
 // wxMediaCtrl::Create (file version)

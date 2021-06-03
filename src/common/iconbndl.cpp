@@ -68,8 +68,7 @@ public:
 // wxIconBundle implementation
 // ============================================================================
 
-wxIconBundle::wxIconBundle()
-= default;
+wxIconBundle::wxIconBundle() = default;
 
 #if wxUSE_STREAMS && wxUSE_IMAGE
 

@@ -47,19 +47,18 @@ enum
 class GIFImage
 {
 public:
-    // def ctor
-    GIFImage();
+    GIFImage() = default;
 
-    unsigned int w;                 // width
-    unsigned int h;                 // height
-    unsigned int left;              // x coord (in logical screen)
-    unsigned int top;               // y coord (in logical screen)
-    int transparent;                // transparent color index (-1 = none)
-    wxAnimationDisposal disposal;   // disposal method
-    long delay;                     // delay in ms (-1 = unused)
-    unsigned char *p;               // bitmap
-    unsigned char *pal;             // palette
-    unsigned int ncolours;          // number of colours
+    unsigned int w{0};                 // width
+    unsigned int h{0};                 // height
+    unsigned int left{0};              // x coord (in logical screen)
+    unsigned int top{0};               // y coord (in logical screen)
+    int transparent{0};                // transparent color index (-1 = none)
+    wxAnimationDisposal disposal{wxANIM_DONOTREMOVE};   // disposal method
+    long delay{-1};                 // delay in ms (-1 = unused)
+    unsigned char *p{nullptr};      // bitmap
+    unsigned char *pal{nullptr};    // palette
+    unsigned int ncolours{0};       // number of colours
     wxString comment;
 
     GIFImage(const GIFImage&) = delete;
@@ -69,30 +68,7 @@ public:
 wxDECLARE_SCOPED_PTR(GIFImage, GIFImagePtr)
 wxDEFINE_SCOPED_PTR(GIFImage, GIFImagePtr)
 
-
-//---------------------------------------------------------------------------
-// GIFImage constructor
-//---------------------------------------------------------------------------
-GIFImage::GIFImage()
-{
-    w = 0;
-    h = 0;
-    left = 0;
-    top = 0;
-    transparent = 0;
-    disposal = wxANIM_DONOTREMOVE;
-    delay = -1;
-    p = (unsigned char *) nullptr;
-    pal = (unsigned char *) nullptr;
-    ncolours = 0;
-}
-
-//---------------------------------------------------------------------------
-// wxGIFDecoder constructor and destructor
-//---------------------------------------------------------------------------
-
-wxGIFDecoder::wxGIFDecoder()
-= default;
+wxGIFDecoder::wxGIFDecoder() = default;
 
 wxGIFDecoder::~wxGIFDecoder()
 {

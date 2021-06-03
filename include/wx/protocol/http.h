@@ -21,8 +21,11 @@
 class WXDLLIMPEXP_NET wxHTTP : public wxProtocol
 {
 public:
-    wxHTTP();
+    wxHTTP() = default;
     ~wxHTTP() override;
+
+    wxHTTP(const wxHTTP&) = delete;
+	wxHTTP& operator=(const wxHTTP&) = delete;
 
     virtual bool Connect(const wxString& host, unsigned short port);
     bool Connect(const wxString& host) override { return Connect(host, 0); }
@@ -78,17 +81,15 @@ protected:
     wxStringToStringHashMap m_cookies;
 
     wxStringToStringHashMap m_headers;
-    bool m_read,
-         m_proxy_mode;
-    wxSockAddress *m_addr;
+    bool m_read{false};
+    bool m_proxy_mode{false};
+    wxSockAddress *m_addr{nullptr};
     wxMemoryBuffer m_postBuffer;
     wxString       m_contentType;
-    int m_http_response;
+    int m_http_response{0};
 
     wxDECLARE_DYNAMIC_CLASS(wxHTTP);
     DECLARE_PROTOCOL(wxHTTP)
-    wxHTTP(const wxHTTP&) = delete;
-	wxHTTP& operator=(const wxHTTP&) = delete;
 };
 
 #endif // wxUSE_PROTOCOL_HTTP

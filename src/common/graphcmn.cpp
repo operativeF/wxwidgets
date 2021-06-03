@@ -44,9 +44,10 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxGraphicsObject, wxObject);
 
 wxGraphicsObjectRefData::wxGraphicsObjectRefData( wxGraphicsRenderer* renderer )
+    : m_renderer(renderer)
 {
-    m_renderer = renderer;
 }
+
 wxGraphicsObjectRefData::wxGraphicsObjectRefData( const wxGraphicsObjectRefData* data )
 {
     m_renderer = data->m_renderer;
@@ -61,16 +62,14 @@ wxGraphicsObjectRefData* wxGraphicsObjectRefData::Clone() const
     return new wxGraphicsObjectRefData(this);
 }
 
-wxGraphicsObject::wxGraphicsObject()
-= default;
+wxGraphicsObject::wxGraphicsObject() = default;
 
 wxGraphicsObject::wxGraphicsObject( wxGraphicsRenderer* renderer )
 {
     SetRefData( new wxGraphicsObjectRefData(renderer));
 }
 
-wxGraphicsObject::~wxGraphicsObject()
-= default;
+wxGraphicsObject::~wxGraphicsObject() = default;
 
 bool wxGraphicsObject::IsNull() const
 {

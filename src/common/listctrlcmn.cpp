@@ -28,7 +28,7 @@
     #include "wx/dcclient.h"
 #endif
 
-const char wxListCtrlNameStr[] = "listCtrl";
+static constexpr char wxListCtrlNameStr[] = "listCtrl";
 
 // ListCtrl events
 wxDEFINE_EVENT( wxEVT_LIST_BEGIN_DRAG, wxListEvent );

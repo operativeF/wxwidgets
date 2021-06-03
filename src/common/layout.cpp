@@ -40,6 +40,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxLayoutConstraints, wxObject);
 inline void wxGetAsIs(wxWindowBase* win, int* w, int* h)
 {
 #if 1
+    // FIXME: Works for me (TM).
     // The old way.  Works for me.
     win->GetSize(w, h);
 #endif

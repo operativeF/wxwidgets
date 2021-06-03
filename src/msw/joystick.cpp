@@ -65,21 +65,16 @@ public:
 private:
     void      SendEvent(wxEventType type, long ts, int change = 0);
     int       m_joystick;
-    int       m_buttons;
-    wxWindow* m_catchwin;
-    int       m_polling;
+    int       m_buttons{0};
+    wxWindow* m_catchwin{nullptr};
+    int       m_polling{0};
     JOYINFO   m_joyInfo;
     JOYINFO   m_lastJoyInfo;
 };
 
 
 wxJoystickThread::wxJoystickThread(int joystick)
-    : m_joystick(joystick),
-      m_buttons(0),
-      m_catchwin(nullptr),
-      m_polling(0),
-      m_joyInfo(),
-      m_lastJoyInfo()
+    : m_joystick(joystick)
 {
 }
 

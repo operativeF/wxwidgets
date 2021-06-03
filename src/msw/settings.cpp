@@ -87,14 +87,6 @@ void wxSystemSettingsModule::OnExit()
     wxDELETE(gs_fontDefault);
 }
 
-// ----------------------------------------------------------------------------
-// wxSystemSettingsNative
-// ----------------------------------------------------------------------------
-
-// ----------------------------------------------------------------------------
-// colours
-// ----------------------------------------------------------------------------
-
 wxColour wxSystemSettingsNative::GetColour(wxSystemColour index)
 {
     if ( index == wxSYS_COLOUR_LISTBOXTEXT)

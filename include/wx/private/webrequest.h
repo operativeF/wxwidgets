@@ -57,6 +57,9 @@ class wxWebRequestImpl : public wxRefCounterMT
 public:
     ~wxWebRequestImpl() override = default;
 
+    wxWebRequestImpl(const wxWebRequestImpl&) = delete;
+	wxWebRequestImpl& operator=(const wxWebRequestImpl&) = delete;
+
     void SetHeader(const wxString& name, const wxString& value)
     { m_headers[name] = value; }
 
@@ -118,11 +121,11 @@ public:
 
 protected:
     wxString m_method;
-    wxWebRequest::Storage m_storage;
+    wxWebRequest::Storage m_storage{wxWebRequest::Storage_Memory};
     wxWebRequestHeaderMap m_headers;
-    wxFileOffset m_dataSize;
+    wxFileOffset m_dataSize{0};
     wxScopedPtr<wxInputStream> m_dataStream;
-    bool m_peerVerifyDisabled;
+    bool m_peerVerifyDisabled{false};
 
     wxWebRequestImpl(wxWebSession& session,
                      wxWebSessionImpl& sessionImpl,
@@ -142,15 +145,12 @@ private:
     wxWebSession& m_session;
     wxEvtHandler* const m_handler;
     const int m_id;
-    wxWebRequest::State m_state;
-    wxFileOffset m_bytesReceived;
+    wxWebRequest::State m_state{wxWebRequest::State_Idle};
+    wxFileOffset m_bytesReceived{0};
     wxCharBuffer m_dataText;
 
     // Initially false, set to true after the first call to Cancel().
-    bool m_cancelled;
-
-    wxWebRequestImpl(const wxWebRequestImpl&) = delete;
-	wxWebRequestImpl& operator=(const wxWebRequestImpl&) = delete;
+    bool m_cancelled{false};
 };
 
 // ----------------------------------------------------------------------------

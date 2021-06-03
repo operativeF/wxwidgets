@@ -56,7 +56,7 @@ class WXDLLIMPEXP_FWD_CORE wxToolBar;
 class WXDLLIMPEXP_CORE wxFrameBase : public wxTopLevelWindow
 {
 public:
-    wxFrameBase();
+    wxFrameBase() = default;
     ~wxFrameBase() override;
 
     wxFrameBase(const wxFrameBase&) = delete;
@@ -215,7 +215,7 @@ protected:
     static bool ShouldUpdateMenuFromIdle();
 
 #if wxUSE_MENUBAR
-    wxMenuBar *m_frameMenuBar;
+    wxMenuBar *m_frameMenuBar{nullptr};
 #endif // wxUSE_MENUBAR
 
 #if wxUSE_STATUSBAR && (wxUSE_MENUS || wxUSE_TOOLBAR)
@@ -236,18 +236,18 @@ protected:
     // return false if there is no help for such item
     bool ShowMenuHelp(int helpid);
 
-    wxStatusBar *m_frameStatusBar;
+    wxStatusBar *m_frameStatusBar{nullptr};
 #endif // wxUSE_STATUSBAR
 
 
-    int m_statusBarPane;
+    int m_statusBarPane{0};
 
 #if wxUSE_TOOLBAR
     // override to update status bar position (or anything else) when
     // something changes
     virtual void PositionToolBar() { }
 
-    wxToolBar *m_frameToolBar;
+    wxToolBar *m_frameToolBar{nullptr};
 #endif // wxUSE_TOOLBAR
 
 #if wxUSE_MENUS

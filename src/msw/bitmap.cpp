@@ -62,9 +62,11 @@
 class WXDLLEXPORT wxBitmapRefData : public wxGDIImageRefData
 {
 public:
-    wxBitmapRefData() { 
-    m_hBitmap = (WXHBITMAP) nullptr;
- }
+    wxBitmapRefData() 
+    { 
+        m_hBitmap = (WXHBITMAP) nullptr;
+    }
+    
     wxBitmapRefData(const wxBitmapRefData& data);
     ~wxBitmapRefData() override { Free(); }
 

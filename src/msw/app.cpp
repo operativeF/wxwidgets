@@ -149,8 +149,7 @@ LRESULT WXDLLEXPORT APIENTRY wxWndProc(HWND, UINT, WPARAM, LPARAM);
 class wxOleInitModule : public wxModule
 {
 public:
-    wxOleInitModule()
-    = default;
+    wxOleInitModule() = default;
 
     bool OnInit() override
     {
@@ -177,10 +176,10 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxOleInitModule, wxModule);
 struct ChildWaitLoopData
 {
     ChildWaitLoopData(wxWindowDisabler *wd_, wxWindow *focused_, wxWindow *winActive_)
+        : wd(wd_),
+          focused(focused_),
+          winActive(winActive_)
     {
-        wd = wd_;
-        focused = focused_;
-        winActive = winActive_;
     }
 
     wxWindowDisabler *wd;
@@ -336,16 +335,7 @@ namespace
 class wxConsoleStderr
 {
 public:
-    // default ctor does nothing, call Init() before using this class
-    wxConsoleStderr()
-    {
-        m_hStderr = INVALID_HANDLE_VALUE;
-        m_historyLen =
-        m_dataLen =
-        m_dataLine = 0;
-
-        m_ok = -1;
-    }
+    wxConsoleStderr() = default;
 
     ~wxConsoleStderr()
     {
@@ -393,19 +383,19 @@ private:
     // check if the console history has changed
     bool IsHistoryUnchanged() const;
 
-    int m_ok;                   // initially -1, set to true or false by Init()
+    int m_ok{-1};                   // initially -1, set to true or false by Init()
 
     wxDynamicLibrary m_dllKernel32;
 
-    HANDLE m_hStderr;           // console handle, if it's valid we must call
-                                // FreeConsole() (even if m_ok != 1)
+    HANDLE m_hStderr{INVALID_HANDLE_VALUE}; // console handle, if it's valid we must call
+                                            // FreeConsole() (even if m_ok != 1)
 
-    wxWxCharBuffer m_history;   // command history on startup
-    int m_historyLen;           // length command history buffer
+    wxWxCharBuffer m_history;      // command history on startup
+    int m_historyLen{0};           // length command history buffer
 
     wxCharBuffer m_data;        // data between empty line and cursor position
-    int m_dataLen;              // length data buffer
-    int m_dataLine;             // line offset
+    int m_dataLen{0};              // length data buffer
+    int m_dataLine{0};             // line offset
 
     typedef DWORD (WINAPI *GetConsoleCommandHistory_t)(LPTSTR sCommands,
                                                        DWORD nBufferLength,

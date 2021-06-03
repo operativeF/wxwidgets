@@ -39,6 +39,7 @@ extern WXDLLEXPORT_DATA(const char) wxListBoxNameStr[] = "listBox";
 
 wxListBoxBase::~wxListBoxBase()
 {
+    // FIXME: Why?
     // this destructor is required for Darwin
 }
 

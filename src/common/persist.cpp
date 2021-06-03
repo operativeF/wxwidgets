@@ -56,8 +56,7 @@ wxPersistenceManager& wxPersistenceManager::Get()
     return *gs_manager;
 }
 
-wxPersistenceManager::~wxPersistenceManager()
-= default;
+wxPersistenceManager::~wxPersistenceManager() = default;
 
 wxString
 wxPersistenceManager::GetKey(const wxPersistentObject& who,

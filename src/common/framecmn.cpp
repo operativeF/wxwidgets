@@ -139,27 +139,6 @@ wxEMPTY_HANDLERS_TABLE(wxFrame)
 wxCONSTRUCTOR_6( wxFrame, wxWindow*, Parent, wxWindowID, Id, wxString, Title, \
                 wxPoint, Position, wxSize, Size, long, WindowStyle)
 
-// ----------------------------------------------------------------------------
-// construction/destruction
-// ----------------------------------------------------------------------------
-
-wxFrameBase::wxFrameBase()
-{
-#if wxUSE_MENUBAR
-    m_frameMenuBar = nullptr;
-#endif // wxUSE_MENUS
-
-#if wxUSE_TOOLBAR
-    m_frameToolBar = nullptr;
-#endif // wxUSE_TOOLBAR
-
-#if wxUSE_STATUSBAR
-    m_frameStatusBar = nullptr;
-#endif // wxUSE_STATUSBAR
-
-    m_statusBarPane = 0;
-}
-
 wxFrameBase::~wxFrameBase()
 {
     SendDestroyEvent();

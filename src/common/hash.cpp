@@ -44,12 +44,7 @@ wxHashTableBase_Node::~wxHashTableBase_Node()
     if( m_hashPtr ) m_hashPtr->DoRemoveNode( this );
 }
 
-//
-
-wxHashTableBase::wxHashTableBase()
-    
-      
-= default;
+wxHashTableBase::wxHashTableBase() = default;
 
 void wxHashTableBase::Create( wxKeyType keyType, size_t size )
 {

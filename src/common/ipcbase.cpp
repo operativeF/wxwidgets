@@ -34,11 +34,9 @@ wxConnectionBase::wxConnectionBase(void *buffer, size_t bytes)
   }
 }
 
-wxConnectionBase::wxConnectionBase()
-    
-      
-= default;
+wxConnectionBase::wxConnectionBase() = default;
 
+// FIXME: How feasible would it be to implement this?
 wxConnectionBase::wxConnectionBase(const wxConnectionBase& copy)
     : 
       m_buffer(copy.m_buffer),
