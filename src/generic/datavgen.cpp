@@ -835,7 +835,7 @@ public:
 
     const wxSelectionStore& GetSelections() const { return m_selection; }
     void ClearSelection() { m_selection.SelectRange(0, GetRowCount() - 1, false); }
-    void Select( const wxArrayInt& aSelections );
+    void Select( const std::vector<int>& aSelections );
 
     void SelectAllRows()
     {
@@ -3581,7 +3581,7 @@ void wxDataViewMainWindow::SelectRow( unsigned int row, bool on )
 
 void wxDataViewMainWindow::SelectRows( unsigned int from, unsigned int to )
 {
-    wxArrayInt changed;
+    std::vector<int> changed;
     if ( m_selection.SelectRange(from, to, true, &changed) )
     {
         for (unsigned i = 0; i < changed.size(); i++)
@@ -3593,9 +3593,9 @@ void wxDataViewMainWindow::SelectRows( unsigned int from, unsigned int to )
     }
 }
 
-void wxDataViewMainWindow::Select( const wxArrayInt& aSelections )
+void wxDataViewMainWindow::Select( const std::vector<int>& aSelections )
 {
-    for (size_t i=0; i < aSelections.GetCount(); i++)
+    for (size_t i=0; i < aSelections.size(); i++)
     {
         int n = aSelections[i];
 

@@ -472,13 +472,13 @@ bool wxHeaderCtrl::EndReordering(int xPhysical)
 // wxHeaderCtrl column reordering
 // ----------------------------------------------------------------------------
 
-void wxHeaderCtrl::DoSetColumnsOrder(const wxArrayInt& order)
+void wxHeaderCtrl::DoSetColumnsOrder(const std::vector<int>& order)
 {
     m_colIndices = order;
     Refresh();
 }
 
-wxArrayInt wxHeaderCtrl::DoGetColumnsOrder() const
+std::vector<int> wxHeaderCtrl::DoGetColumnsOrder() const
 {
     return m_colIndices;
 }

@@ -538,8 +538,8 @@ protected:
     void UpdateButtonOnScreen(wxAuiDockUIPart* buttonUiPart,
                               const wxMouseEvent& event);
     void GetPanePositionsAndSizes(wxAuiDockInfo& dock,
-                              wxArrayInt& positions,
-                              wxArrayInt& sizes);
+                              std::vector<int>& positions,
+                              std::vector<int>& sizes);
 
     /// Ends a resize action, or for live update, resizes the sash
     bool DoEndResizeAction(wxMouseEvent& event);

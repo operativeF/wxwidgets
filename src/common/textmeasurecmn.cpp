@@ -209,16 +209,17 @@ wxSize wxTextMeasureBase::GetLargestStringExtent(size_t n,
 }
 
 bool wxTextMeasureBase::GetPartialTextExtents(const wxString& text,
-                                              wxArrayInt& widths,
+                                              std::vector<int>& widths,
                                               double scaleX)
 {
-    widths.Empty();
+    widths.clear();
     if ( text.empty() )
         return true;
 
     MeasuringGuard guard(*this);
 
-    widths.Add(0, text.length());
+    // FIXME: Necessary?
+    widths.insert(std::end(widths), text.length(), 0);
 
     return DoGetPartialTextExtents(text, widths, scaleX);
 }
@@ -257,7 +258,7 @@ public:
 static FontWidthCache s_fontWidthCache;
 
 bool wxTextMeasureBase::DoGetPartialTextExtents(const wxString& text,
-                                                wxArrayInt& widths,
+                                                std::vector<int>& widths,
                                                 double scaleX)
 {
     int totalWidth = 0;

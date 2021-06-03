@@ -387,9 +387,9 @@ void wxListBox::DoSetItemClientData(unsigned int n, void *clientData)
 }
 
 // Return number of selections and an array of selected integers
-int wxListBox::GetSelections(wxArrayInt& aSelections) const
+int wxListBox::GetSelections(std::vector<int>& aSelections) const
 {
-    aSelections.Empty();
+    aSelections.clear();
 
     if ( HasMultipleSelection() )
     {
@@ -410,9 +410,9 @@ int wxListBox::GetSelections(wxArrayInt& aSelections) const
             }
             else
             {
-                aSelections.Alloc(countSel);
+                aSelections.reserve(countSel);
                 for ( int n = 0; n < countSel; n++ )
-                    aSelections.Add(selections[n]);
+                    aSelections.push_back(selections[n]);
             }
 
             delete [] selections;
@@ -423,9 +423,9 @@ int wxListBox::GetSelections(wxArrayInt& aSelections) const
     else  // single-selection listbox
     {
         if (ListBox_GetCurSel(GetHwnd()) > -1)
-            aSelections.Add(ListBox_GetCurSel(GetHwnd()));
+            aSelections.push_back(ListBox_GetCurSel(GetHwnd()));
 
-        return aSelections.Count();
+        return aSelections.size();
     }
 }
 

@@ -172,7 +172,7 @@ private:
 
     // overridden to react to the columns order changes in the customization
     // dialog
-    void UpdateColumnsOrder(const wxArrayInt& order) override
+    void UpdateColumnsOrder(const std::vector<int>& order) override
     {
         GetOwner()->SetColumnsOrder(order);
     }
@@ -455,7 +455,7 @@ public:
     void UpdateAttrRowsOrCols( size_t pos, int numRowsOrCols );
 
 private:
-    wxArrayInt m_rowsOrCols;
+    std::vector<int> m_rowsOrCols;
     wxArrayAttrs m_attrs;
 };
 
@@ -558,7 +558,7 @@ public:
     virtual int GetLineSize(const wxGrid *grid, int line) const = 0;
 
     // Get wxGrid::m_rowBottoms/m_colRights array
-    virtual const wxArrayInt& GetLineEnds(const wxGrid *grid) const = 0;
+    virtual const std::vector<int>& GetLineEnds(const wxGrid *grid) const = 0;
 
     // Get default height row height or column width
     virtual int GetDefaultLineSize(const wxGrid *grid) const = 0;
@@ -655,7 +655,7 @@ public:
         { return grid->GetRowBottom(line); }
     int GetLineSize(const wxGrid *grid, int line) const override
         { return grid->GetRowHeight(line); }
-    const wxArrayInt& GetLineEnds(const wxGrid *grid) const override
+    const std::vector<int>& GetLineEnds(const wxGrid *grid) const override
         { return grid->m_rowBottoms; }
     int GetDefaultLineSize(const wxGrid *grid) const override
         { return grid->GetDefaultRowSize(); }
@@ -736,7 +736,7 @@ public:
         { return grid->GetColRight(line); }
     int GetLineSize(const wxGrid *grid, int line) const override
         { return grid->GetColWidth(line); }
-    const wxArrayInt& GetLineEnds(const wxGrid *grid) const override
+    const std::vector<int>& GetLineEnds(const wxGrid *grid) const override
         { return grid->m_colRights; }
     int GetDefaultLineSize(const wxGrid *grid) const override
         { return grid->GetDefaultColSize(); }

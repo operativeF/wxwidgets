@@ -93,9 +93,9 @@ wxDEFINE_EVENT( wxEVT_DIRCTRL_FILEACTIVATED, wxTreeEvent );
 
 // since the macOS implementation needs objective-C this is dirdlg.mm
 #ifdef __WXOSX__
-extern size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, wxArrayInt &icon_ids);
+extern size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vector<int> &icon_ids);
 #else
-size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, wxArrayInt &icon_ids)
+size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vector<int> &icon_ids)
 {
 #ifdef wxHAS_FILESYSTEM_VOLUMES
 
@@ -134,7 +134,7 @@ size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, wxArrayI
         }
         paths.Add(path);
         names.Add(vol.GetDisplayName());
-        icon_ids.Add(imageId);
+        icon_ids.push_back(imageId);
     }
 #else // !__WIN32__
     /* If we can switch to the drive, it exists. */
@@ -161,7 +161,7 @@ size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, wxArrayI
     #error "Unsupported platform in wxGenericDirCtrl!"
 #endif
     wxASSERT_MSG( (paths.GetCount() == names.GetCount()), wxT("The number of paths and their human readable names should be equal in number."));
-    wxASSERT_MSG( (paths.GetCount() == icon_ids.GetCount()), wxT("Wrong number of icons for available drives."));
+    wxASSERT_MSG( (paths.GetCount() == icon_ids.size()), wxT("Wrong number of icons for available drives."));
     return paths.GetCount();
 }
 #endif
@@ -463,7 +463,7 @@ wxGenericDirCtrl::AddSection(const wxString& path, const wxString& name, int ima
 void wxGenericDirCtrl::SetupSections()
 {
     wxArrayString paths, names;
-    wxArrayInt icons;
+    std::vector<int> icons;
 
     size_t n, count = wxGetAvailableDrives(paths, names, icons);
 

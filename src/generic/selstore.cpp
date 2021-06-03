@@ -75,7 +75,7 @@ bool wxSelectionStore::SelectItem(unsigned item, bool select)
 
 bool wxSelectionStore::SelectRange(unsigned itemFrom, unsigned itemTo,
                                    bool select,
-                                   wxArrayInt *itemsChanged)
+                                   std::vector<int> *itemsChanged)
 {
     // 100 is hardcoded but it shouldn't matter much: the important thing is
     // that we don't refresh everything when really few (e.g. 1 or 2) items
@@ -140,14 +140,14 @@ bool wxSelectionStore::SelectRange(unsigned itemFrom, unsigned itemTo,
                 {
                     if ( itemsChanged )
                     {
-                        if ( itemsChanged->GetCount() > MANY_ITEMS )
+                        if ( itemsChanged->size() > MANY_ITEMS )
                         {
                             // stop counting (see comment below)
                             itemsChanged = nullptr;
                         }
                         else
                         {
-                            itemsChanged->Add(m_itemsSel[i]);
+                            itemsChanged->push_back(m_itemsSel[i]);
                         }
                     }
 
@@ -160,7 +160,7 @@ bool wxSelectionStore::SelectRange(unsigned itemFrom, unsigned itemTo,
     {
         if ( itemsChanged )
         {
-            itemsChanged->Empty();
+            itemsChanged->clear();
         }
 
         // just add the items to the selection
@@ -168,9 +168,9 @@ bool wxSelectionStore::SelectRange(unsigned itemFrom, unsigned itemTo,
         {
             if ( SelectItem(item, select) && itemsChanged )
             {
-                itemsChanged->Add(item);
+                itemsChanged->push_back(item);
 
-                if ( itemsChanged->GetCount() > MANY_ITEMS )
+                if ( itemsChanged->size() > MANY_ITEMS )
                 {
                     // stop counting them, we'll just eat gobs of memory
                     // for nothing at all - faster to refresh everything in

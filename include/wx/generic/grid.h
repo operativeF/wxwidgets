@@ -1435,7 +1435,7 @@ struct WXDLLIMPEXP_CORE wxGridSizesInfo
     wxGridSizesInfo() = default;
 
     // ctor used by wxGrid::Get{Col,Row}Sizes()
-    wxGridSizesInfo(int defSize, const wxArrayInt& allSizes);
+    wxGridSizesInfo(int defSize, const std::vector<int>& allSizes);
 
     // default copy ctor, assignment operator and dtor are ok
 
@@ -1539,9 +1539,9 @@ public:
 
     // ------ display update functions
     //
-    wxArrayInt CalcRowLabelsExposed( const wxRegion& reg,
+    std::vector<int> CalcRowLabelsExposed( const wxRegion& reg,
                                      wxGridWindow *gridWindow = nullptr) const;
-    wxArrayInt CalcColLabelsExposed( const wxRegion& reg,
+    std::vector<int> CalcColLabelsExposed( const wxRegion& reg,
                                      wxGridWindow *gridWindow = nullptr) const;
     wxGridCellCoordsArray CalcCellsExposed( const wxRegion& reg,
                                             wxGridWindow *gridWindow = nullptr) const;
@@ -1606,10 +1606,10 @@ public:
     // and may be overridden by the user
     virtual void DrawCellHighlight( wxDC& dc, const wxGridCellAttr *attr );
 
-    virtual void DrawRowLabels( wxDC& dc, const wxArrayInt& rows );
+    virtual void DrawRowLabels( wxDC& dc, const std::vector<int>& rows );
     virtual void DrawRowLabel( wxDC& dc, int row );
 
-    virtual void DrawColLabels( wxDC& dc, const wxArrayInt& cols );
+    virtual void DrawColLabels( wxDC& dc, const std::vector<int>& cols );
     virtual void DrawColLabel( wxDC& dc, int col );
 
     virtual void DrawCornerLabel(wxDC& dc);
@@ -2067,7 +2067,7 @@ public:
 
     // set the positions of all columns at once (this method uses the same
     // conventions as wxHeaderCtrl::SetColumnsOrder() for the order array)
-    void SetColumnsOrder(const wxArrayInt& order);
+    void SetColumnsOrder(const std::vector<int>& order);
 
     // return the column index corresponding to the given (valid) position
     int GetColAt(int pos) const
@@ -2086,13 +2086,13 @@ public:
     {
         wxASSERT_MSG( idx >= 0 && idx < m_numCols, "invalid column index" );
 
-        if ( m_colAt.IsEmpty() )
+        if ( m_colAt.empty() )
             return idx;
 
-        int pos = m_colAt.Index(idx);
-        wxASSERT_MSG( pos != wxNOT_FOUND, "invalid column index" );
+        auto pos = std::find(m_colAt.begin(), m_colAt.end(), idx);
+        wxASSERT_MSG( pos != std::end(m_colAt), "invalid column index" );
 
-        return pos;
+        return std::distance(std::begin(m_colAt), pos);
     }
 
     // reset the columns positions to the default order
@@ -2245,8 +2245,8 @@ public:
     wxGridCellCoordsArray GetSelectedCells() const;
     wxGridCellCoordsArray GetSelectionBlockTopLeft() const;
     wxGridCellCoordsArray GetSelectionBlockBottomRight() const;
-    wxArrayInt GetSelectedRows() const;
-    wxArrayInt GetSelectedCols() const;
+    std::vector<int> GetSelectedRows() const;
+    std::vector<int> GetSelectedCols() const;
 
     // This function returns the rectangle that encloses the block of cells
     // limited by TopLeft and BottomRight cell in device coords and clipped
@@ -2421,16 +2421,16 @@ protected:
 
     int        m_defaultRowHeight;
     int        m_minAcceptableRowHeight;
-    wxArrayInt m_rowHeights;
-    wxArrayInt m_rowBottoms;
+    std::vector<int> m_rowHeights;
+    std::vector<int> m_rowBottoms;
 
     // init the m_colWidths/Rights arrays
     void InitColWidths();
 
     int        m_defaultColWidth;
     int        m_minAcceptableColWidth;
-    wxArrayInt m_colWidths;
-    wxArrayInt m_colRights;
+    std::vector<int> m_colWidths;
+    std::vector<int> m_colRights;
 
     int m_sortCol;
     bool m_sortIsAscending;
@@ -2578,7 +2578,7 @@ protected:
 
 
     //Column positions
-    wxArrayInt m_colAt;
+    std::vector<int> m_colAt;
 
     bool    m_canDragRowSize;
     bool    m_canDragColSize;
@@ -2887,7 +2887,7 @@ private:
                          const wxGridCellCoords& bottomRight,
                          wxPoint& pointOffSet, wxSize& sizeGrid,
                          wxGridCellCoordsArray& renderCells,
-                         wxArrayInt& arrayCols, wxArrayInt& arrayRows ) const;
+                         std::vector<int>& arrayCols, std::vector<int>& arrayRows ) const;
 
     // Helper of Render(): set the scale to draw the cells at the right size.
     void SetRenderScale( wxDC& dc, const wxPoint& pos, const wxSize& size,

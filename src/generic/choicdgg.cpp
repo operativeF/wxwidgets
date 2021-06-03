@@ -229,7 +229,7 @@ void* wxGetSingleChoiceData( const wxString& message,
 }
 
 
-int wxGetSelectedChoices(wxArrayInt& selections,
+int wxGetSelectedChoices(std::vector<int>& selections,
                          const wxString& message,
                          const wxString& caption,
                          int n, const wxString *choices,
@@ -253,10 +253,10 @@ int wxGetSelectedChoices(wxArrayInt& selections,
     }
 
     selections = dialog.GetSelections();
-    return static_cast<int>(selections.GetCount());
+    return static_cast<int>(selections.size());
 }
 
-int wxGetSelectedChoices(wxArrayInt& selections,
+int wxGetSelectedChoices(std::vector<int>& selections,
                          const wxString& message,
                          const wxString& caption,
                          const wxArrayString& choices,
@@ -280,7 +280,7 @@ int wxGetSelectedChoices(wxArrayInt& selections,
     }
 
     selections = dialog.GetSelections();
-    return static_cast<int>(selections.GetCount());
+    return static_cast<int>(selections.size());
 }
 
 // ----------------------------------------------------------------------------
@@ -478,7 +478,7 @@ bool wxMultiChoiceDialog::Create( wxWindow *parent,
                    chs.GetStrings(), style, pos );
 }
 
-void wxMultiChoiceDialog::SetSelections(const wxArrayInt& selections)
+void wxMultiChoiceDialog::SetSelections(const std::vector<int>& selections)
 {
 #if wxUSE_CHECKLISTBOX
     wxCheckListBox* checkListBox = wxDynamicCast(m_listbox, wxCheckListBox);
@@ -494,7 +494,7 @@ void wxMultiChoiceDialog::SetSelections(const wxArrayInt& selections)
         }
 
         // now select the ones which should be selected
-        count = selections.GetCount();
+        count = selections.size();
         for ( n = 0; n < count; n++ )
         {
             checkListBox->Check(selections[n]);
@@ -513,7 +513,7 @@ void wxMultiChoiceDialog::SetSelections(const wxArrayInt& selections)
     }
 
     // now select the ones which should be selected
-    count = selections.GetCount();
+    count = selections.size();
     for ( n = 0; n < count; n++ )
     {
         m_listbox->Select(selections[n]);
@@ -522,7 +522,7 @@ void wxMultiChoiceDialog::SetSelections(const wxArrayInt& selections)
 
 bool wxMultiChoiceDialog::TransferDataFromWindow()
 {
-    m_selections.Empty();
+    m_selections.clear();
 
 #if wxUSE_CHECKLISTBOX
     wxCheckListBox* checkListBox = wxDynamicCast(m_listbox, wxCheckListBox);
@@ -532,7 +532,7 @@ bool wxMultiChoiceDialog::TransferDataFromWindow()
         for ( size_t n = 0; n < count; n++ )
         {
             if ( checkListBox->IsChecked(n) )
-                m_selections.Add(n);
+                m_selections.push_back(n);
         }
         return true;
     }
@@ -542,7 +542,7 @@ bool wxMultiChoiceDialog::TransferDataFromWindow()
     for ( size_t n = 0; n < count; n++ )
     {
         if ( m_listbox->IsSelected(n) )
-            m_selections.Add(n);
+            m_selections.push_back(n);
     }
 
     return true;

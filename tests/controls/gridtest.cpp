@@ -874,8 +874,8 @@ TEST_CASE_METHOD(GridTestCase, "Grid::SelectEmptyGrid", "[grid]")
     CHECK( m_grid->GetSelectedCells().Count() == 0 );
     CHECK( m_grid->GetSelectionBlockTopLeft().Count() == 0 );
     CHECK( m_grid->GetSelectionBlockBottomRight().Count() == 0 );
-    CHECK( m_grid->GetSelectedRows().Count() == 0 );
-    CHECK( m_grid->GetSelectedCols().Count() == 0 );
+    CHECK( m_grid->GetSelectedRows().size() == 0 );
+    CHECK( m_grid->GetSelectedCols().size() == 0 );
 }
 
 TEST_CASE_METHOD(GridTestCase, "Grid::ScrollWhenSelect", "[grid]")
@@ -1155,8 +1155,8 @@ TEST_CASE_METHOD(GridTestCase, "Grid::SelectionMode", "[grid]")
     m_grid->ClearSelection();
     m_grid->SelectBlock(3, 1, 3, 1);
 
-    wxArrayInt selectedRows = m_grid->GetSelectedRows();
-    CHECK(selectedRows.Count() == 1);
+    auto selectedRows = m_grid->GetSelectedRows();
+    CHECK(selectedRows.size() == 1);
     CHECK(selectedRows[0] == 3);
 
     // Check that overlapping selection blocks are handled correctly.
@@ -1210,8 +1210,8 @@ TEST_CASE_METHOD(GridTestCase, "Grid::SelectionMode", "[grid]")
 
     CHECK( m_grid->GetSelectedRowBlocks().empty() );
 
-    wxArrayInt selectedCols = m_grid->GetSelectedCols();
-    CHECK(selectedCols.Count() == 1);
+    auto selectedCols = m_grid->GetSelectedCols();
+    CHECK(selectedCols.size() == 1);
     CHECK(selectedCols[0] == 1);
 
     wxGridBlockCoordsVector colBlocks = m_grid->GetSelectedColBlocks();

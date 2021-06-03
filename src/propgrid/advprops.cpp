@@ -2056,7 +2056,7 @@ bool wxMultiChoiceProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& v
 
     if ( dlg.ShowModal() == wxID_OK && choiceCount )
     {
-        wxArrayInt arrInt = dlg.GetSelections();
+        auto arrInt = dlg.GetSelections();
 
         // Strings that were not in list of choices
         wxArrayString newValue;

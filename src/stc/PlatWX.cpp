@@ -609,7 +609,7 @@ void SurfaceImpl::DrawTextTransparent(PRectangle rc, Font &font, XYPOSITION ybas
 void SurfaceImpl::MeasureWidths(Font &font, const char *s, int len, XYPOSITION *positions) {
 
     wxString   str = stc2wx(s, len);
-    wxArrayInt tpos;
+    std::vector<int> tpos;
 
     SetFont(font);
 

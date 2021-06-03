@@ -203,8 +203,8 @@ public:
                 long style = wxCHOICEDLG_STYLE,
                 const wxPoint& pos = wxDefaultPosition);
 
-    void SetSelections(const wxArrayInt& selections);
-    wxArrayInt GetSelections() const { return m_selections; }
+    void SetSelections(const std::vector<int>& selections);
+    std::vector<int> GetSelections() const { return m_selections; }
 
     // implementation from now on
     bool TransferDataFromWindow() override;
@@ -216,7 +216,7 @@ protected:
                                       long styleLbox) override;
 #endif // wxUSE_CHECKLISTBOX
 
-    wxArrayInt m_selections;
+    std::vector<int> m_selections;
 
 private:
 public:
@@ -346,7 +346,7 @@ WXDLLIMPEXP_CORE void* wxGetSingleChoiceData(const wxString& message,
 // fill the array with the indices of the chosen items, it will be empty
 // if no items were selected or Cancel was pressed - return the number of
 // selections or -1 if cancelled
-WXDLLIMPEXP_CORE int wxGetSelectedChoices(wxArrayInt& selections,
+WXDLLIMPEXP_CORE int wxGetSelectedChoices(std::vector<int>& selections,
                                         const wxString& message,
                                         const wxString& caption,
                                         int n, const wxString *choices,
@@ -357,7 +357,7 @@ WXDLLIMPEXP_CORE int wxGetSelectedChoices(wxArrayInt& selections,
                                         int width = wxCHOICE_WIDTH,
                                         int height = wxCHOICE_HEIGHT);
 
-WXDLLIMPEXP_CORE int wxGetSelectedChoices(wxArrayInt& selections,
+WXDLLIMPEXP_CORE int wxGetSelectedChoices(std::vector<int>& selections,
                                         const wxString& message,
                                         const wxString& caption,
                                         const wxArrayString& choices,

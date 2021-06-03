@@ -145,7 +145,7 @@ void wxTextMeasure::DoGetTextExtent(const wxString& string,
 }
 
 bool wxTextMeasure::DoGetPartialTextExtents(const wxString& text,
-                                            wxArrayInt& widths,
+                                            std::vector<int>& widths,
                                             double scaleX)
 {
     if ( !m_hdc )

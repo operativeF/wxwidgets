@@ -67,8 +67,8 @@ public:
     /// Set and get mapping from point size to HTML font size. There should be 7 elements,
     /// one for each HTML font size, each element specifying the maximum point size for that
     /// HTML font size. E.g. 8, 10, 13, 17, 22, 29, 100
-    void SetFontSizeMapping(const wxArrayInt& fontSizeMapping) { m_fontSizeMapping = fontSizeMapping; }
-    wxArrayInt GetFontSizeMapping() const { return m_fontSizeMapping; }
+    void SetFontSizeMapping(const std::vector<int>& fontSizeMapping) { m_fontSizeMapping = fontSizeMapping; }
+    std::vector<int> GetFontSizeMapping() const { return m_fontSizeMapping; }
 
 protected:
 
@@ -119,10 +119,10 @@ protected:
     wxRichTextBuffer* m_buffer{nullptr};
 
     /// Indentation values of the table tags
-    wxArrayInt      m_indents;
+    std::vector<int>      m_indents;
 
     /// Stack of list types: 0 = ol, 1 = ul
-    wxArrayInt      m_listTypes;
+    std::vector<int>      m_listTypes;
 
     /// Is there any opened font tag?
     bool            m_font{false};
@@ -137,7 +137,7 @@ protected:
     wxString        m_tempDir;
 
     /// A mapping from point size to HTML font size
-    wxArrayInt      m_fontSizeMapping;
+    std::vector<int>      m_fontSizeMapping;
 
     /// A counter for generating filenames
     static int      sm_fileCounter;

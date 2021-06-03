@@ -164,11 +164,15 @@ public:
     virtual wxWindow* GetContentWindow() const { return nullptr; }
 
     // Add an id to the list of main button identifiers that should be in the button sizer
-    void AddMainButtonId(wxWindowID id) { m_mainButtonIds.Add((int) id); }
-    wxArrayInt& GetMainButtonIds() { return m_mainButtonIds; }
+    void AddMainButtonId(wxWindowID id) { m_mainButtonIds.push_back((int) id); }
+    std::vector<int>& GetMainButtonIds() { return m_mainButtonIds; }
 
     // Is this id in the main button id array?
-    bool IsMainButtonId(wxWindowID id) const { return (m_mainButtonIds.Index((int) id) != wxNOT_FOUND); }
+    bool IsMainButtonId(wxWindowID id) const
+    {
+        return std::find(m_mainButtonIds.begin(), m_mainButtonIds.end(),
+            ((int) id)) != std::end(m_mainButtonIds);
+    }
 
     // Level of adaptation, from none (Level 0) to full (Level 3). To disable adaptation,
     // set level 0, for example in your dialog constructor. You might
@@ -231,7 +235,7 @@ protected:
 
     // Extra button identifiers to be taken as 'main' button identifiers
     // to be placed in the non-scrolling area
-    wxArrayInt                          m_mainButtonIds;
+    std::vector<int>                          m_mainButtonIds;
 
     // Adaptation level
     int                                 m_layoutAdaptationLevel;

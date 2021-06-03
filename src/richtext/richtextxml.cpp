@@ -1534,12 +1534,12 @@ bool wxRichTextXMLHelper::ImportStyle(wxRichTextAttr& attr, wxXmlNode* node, boo
             {
                 if (!value.empty())
                 {
-                    wxArrayInt tabs;
+                    std::vector<int> tabs;
                     wxStringTokenizer tkz(value, wxT(","));
                     while (tkz.HasMoreTokens())
                     {
                         wxString token = tkz.GetNextToken();
-                        tabs.Add(wxAtoi(token));
+                        tabs.push_back(wxAtoi(token));
                     }
                     attr.SetTabs(tabs);
                 }
@@ -2141,7 +2141,7 @@ wxString wxRichTextXMLHelper::AddAttributes(const wxRichTextAttr& attr, bool isP
         {
             wxString strTabs;
             size_t i;
-            for (i = 0; i < attr.GetTabs().GetCount(); i++)
+            for (i = 0; i < attr.GetTabs().size(); i++)
             {
                 if (i > 0) strTabs << wxT(",");
                 strTabs << attr.GetTabs()[i];
@@ -2631,7 +2631,7 @@ bool wxRichTextXMLHelper::AddAttributes(wxXmlNode* node, wxRichTextAttr& attr, b
         {
             wxString tabs;
             size_t i;
-            for (i = 0; i < attr.GetTabs().GetCount(); i++)
+            for (i = 0; i < attr.GetTabs().size(); i++)
             {
                 if (i > 0)
                     tabs << wxT(",");

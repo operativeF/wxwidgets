@@ -73,8 +73,8 @@ public:
     int GetColumnOrder(int col) const override;
     int GetColumnIndexFromOrder(int order) const override;
 
-    wxArrayInt GetColumnsOrder() const override;
-    bool SetColumnsOrder(const wxArrayInt& orders) override;
+    std::vector<int> GetColumnsOrder() const override;
+    bool SetColumnsOrder(const std::vector<int>& orders) override;
 
     int GetCountPerPage() const; // not the same in wxGLC as in Windows, I think
     wxRect GetViewRect() const;

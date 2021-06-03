@@ -106,8 +106,8 @@ public:
     wxGridCellCoordsArray GetCellSelection() const;
     wxGridCellCoordsArray GetBlockSelectionTopLeft() const;
     wxGridCellCoordsArray GetBlockSelectionBottomRight() const;
-    wxArrayInt GetRowSelection() const;
-    wxArrayInt GetColSelection() const;
+    std::vector<int> GetRowSelection() const;
+    std::vector<int> GetColSelection() const;
 
     wxVectorGridBlockCoords& GetBlocks() { return m_selection; }
 

@@ -417,7 +417,7 @@ protected:
 
 
     wxArrayString m_styleNames;
-    wxArrayInt m_styleValues;
+    std::vector<int> m_styleValues;
 
     friend class wxXmlResourceHandlerImpl;
 

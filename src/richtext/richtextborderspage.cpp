@@ -606,16 +606,16 @@ void wxRichTextBordersPage::CreateControls()
     itemBoxSizer3->Add(m_borderPreviewCtrl, 1, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
 
 ////@end wxRichTextBordersPage content construction
-
-    m_borderStyles.Add(wxTEXT_BOX_ATTR_BORDER_NONE); m_borderStyleNames.Add(_("None"));
-    m_borderStyles.Add(wxTEXT_BOX_ATTR_BORDER_SOLID); m_borderStyleNames.Add(_("Solid"));
-    m_borderStyles.Add(wxTEXT_BOX_ATTR_BORDER_DOTTED); m_borderStyleNames.Add(_("Dotted"));
-    m_borderStyles.Add(wxTEXT_BOX_ATTR_BORDER_DASHED); m_borderStyleNames.Add(_("Dashed"));
-    m_borderStyles.Add(wxTEXT_BOX_ATTR_BORDER_DOUBLE); m_borderStyleNames.Add(_("Double"));
-    m_borderStyles.Add(wxTEXT_BOX_ATTR_BORDER_GROOVE); m_borderStyleNames.Add(_("Groove"));
-    m_borderStyles.Add(wxTEXT_BOX_ATTR_BORDER_RIDGE); m_borderStyleNames.Add(_("Ridge"));
-    m_borderStyles.Add(wxTEXT_BOX_ATTR_BORDER_INSET); m_borderStyleNames.Add(_("Inset"));
-    m_borderStyles.Add(wxTEXT_BOX_ATTR_BORDER_OUTSET); m_borderStyleNames.Add(_("Outset"));
+    // FIXME: Use ref emplace_back
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_NONE); m_borderStyleNames.Add(_("None"));
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_SOLID); m_borderStyleNames.Add(_("Solid"));
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_DOTTED); m_borderStyleNames.Add(_("Dotted"));
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_DASHED); m_borderStyleNames.Add(_("Dashed"));
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_DOUBLE); m_borderStyleNames.Add(_("Double"));
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_GROOVE); m_borderStyleNames.Add(_("Groove"));
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_RIDGE); m_borderStyleNames.Add(_("Ridge"));
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_INSET); m_borderStyleNames.Add(_("Inset"));
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_OUTSET); m_borderStyleNames.Add(_("Outset"));
 
     m_ignoreUpdates = true;
 
@@ -751,10 +751,11 @@ bool wxRichTextBordersPage::TransferDataToWindow()
     }
     else
     {
-        wxArrayInt units;
-        units.Add(wxTEXT_ATTR_UNITS_PIXELS);
-        units.Add(wxTEXT_ATTR_UNITS_TENTHS_MM);
-        units.Add(wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT);
+        // FIXME: Use ref emplace_back
+        std::vector<int> units;
+        units.push_back(wxTEXT_ATTR_UNITS_PIXELS);
+        units.push_back(wxTEXT_ATTR_UNITS_TENTHS_MM);
+        units.push_back(wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT);
         
         wxRichTextFormattingDialog::SetDimensionValue(GetAttributes()->GetTextBoxAttr().GetCornerRadius(), m_cornerRadiusText, m_cornerRadiusUnits, nullptr,
             & units);
@@ -788,10 +789,11 @@ bool wxRichTextBordersPage::TransferDataFromWindow()
 
     // Corner radius
     {
-        wxArrayInt units;
-        units.Add(wxTEXT_ATTR_UNITS_PIXELS);
-        units.Add(wxTEXT_ATTR_UNITS_TENTHS_MM);
-        units.Add(wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT);
+        // FIXME: Use ref emplace_back
+        std::vector<int> units;
+        units.push_back(wxTEXT_ATTR_UNITS_PIXELS);
+        units.push_back(wxTEXT_ATTR_UNITS_TENTHS_MM);
+        units.push_back(wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT);
             
         wxRichTextFormattingDialog::GetDimensionValue(GetAttributes()->GetTextBoxAttr().GetCornerRadius(), m_cornerRadiusText, m_cornerRadiusUnits, nullptr,
             & units);
@@ -818,7 +820,7 @@ bool wxRichTextBordersPage::TransferDataFromWindow()
 
 // Set the border controls
 void wxRichTextBordersPage::SetBorderValue(wxTextAttrBorder& border, wxTextCtrl* widthValueCtrl, wxComboBox* widthUnitsCtrl, wxCheckBox* checkBox,
-        wxComboBox* styleCtrl, wxRichTextColourSwatchCtrl* colourCtrl, const wxArrayInt& borderStyles)
+        wxComboBox* styleCtrl, wxRichTextColourSwatchCtrl* colourCtrl, const std::vector<int>& borderStyles)
 {
     if (!border.IsValid())
     {
@@ -830,21 +832,26 @@ void wxRichTextBordersPage::SetBorderValue(wxTextAttrBorder& border, wxTextCtrl*
     }
     else
     {
-        wxArrayInt units;
-        units.Add(wxTEXT_ATTR_UNITS_PIXELS);
-        units.Add(wxTEXT_ATTR_UNITS_TENTHS_MM);
-        units.Add(wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT);
+        // FIXME: Use reference emplace_back
+        std::vector<int> units;
+        units.push_back(wxTEXT_ATTR_UNITS_PIXELS);
+        units.push_back(wxTEXT_ATTR_UNITS_TENTHS_MM);
+        units.push_back(wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT);
         
         wxRichTextFormattingDialog::SetDimensionValue(border.GetWidth(), widthValueCtrl, widthUnitsCtrl, nullptr,
             & units);
 
-        int sel = borderStyles.Index(border.GetStyle());
-        if (sel == -1)
-            sel = 1;
-        styleCtrl->SetSelection(sel);        
+        // FIXME: Improve this.
+        auto sel = std::find(borderStyles.begin(), borderStyles.end(), border.GetStyle());
+
+        if (sel == std::end(borderStyles))
+            sel = std::begin(borderStyles) + 1;
+
+        styleCtrl->SetSelection(std::distance(std::begin(borderStyles), sel));        
+
         colourCtrl->SetColour(border.GetColour());
         
-        if (sel == 0)
+        if (sel == std::begin(borderStyles))
             checkBox->Set3StateValue(wxCHK_UNCHECKED);
         else
             checkBox->Set3StateValue(wxCHK_CHECKED);
@@ -853,12 +860,13 @@ void wxRichTextBordersPage::SetBorderValue(wxTextAttrBorder& border, wxTextCtrl*
 
 // Get data from the border controls
 void wxRichTextBordersPage::GetBorderValue(wxTextAttrBorder& border, wxTextCtrl* widthValueCtrl, wxComboBox* widthUnitsCtrl, wxCheckBox* checkBox,
-        wxComboBox* styleCtrl, wxRichTextColourSwatchCtrl* colourCtrl, const wxArrayInt& borderStyles)
+        wxComboBox* styleCtrl, wxRichTextColourSwatchCtrl* colourCtrl, const std::vector<int>& borderStyles)
 {
-    wxArrayInt units;
-    units.Add(wxTEXT_ATTR_UNITS_PIXELS);
-    units.Add(wxTEXT_ATTR_UNITS_TENTHS_MM);
-    units.Add(wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT);
+    // FIXME: Use ref emplace_back
+    std::vector<int> units;
+    units.push_back(wxTEXT_ATTR_UNITS_PIXELS);
+    units.push_back(wxTEXT_ATTR_UNITS_TENTHS_MM);
+    units.push_back(wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT);
         
     wxRichTextFormattingDialog::GetDimensionValue(border.GetWidth(), widthValueCtrl, widthUnitsCtrl, nullptr,
         & units);

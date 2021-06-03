@@ -1079,7 +1079,7 @@ bool wxToolBar::Realize()
     wxScopedArray<TBBUTTON> buttons(nTools);
 
     // this array will hold the indices of all controls in the toolbar
-    wxArrayInt controlIds;
+    std::vector<int> controlIds;
 
     bool lastWasRadio = false;
     int i = 0;

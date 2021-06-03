@@ -141,10 +141,10 @@ void wxListBoxBase::DeselectAll(int itemToLeaveSelected)
 {
     if ( HasMultipleSelection() )
     {
-        wxArrayInt selections;
+        std::vector<int> selections;
         GetSelections(selections);
 
-        size_t count = selections.GetCount();
+        size_t count = selections.size();
         for ( size_t n = 0; n < count; n++ )
         {
             int item = selections[n];
@@ -220,7 +220,7 @@ bool wxListBoxBase::DoChangeSingleSelection(int item)
 
 bool wxListBoxBase::CalcAndSendEvent()
 {
-    wxArrayInt selections;
+    std::vector<int> selections;
     GetSelections(selections);
     bool selected = true;
 
@@ -262,7 +262,8 @@ bool wxListBoxBase::CalcAndSendEvent()
         for ( size_t idx = 0; idx < countSel; idx++ )
         {
             item = selections[idx];
-            if ( m_oldSelections.Index(item) == wxNOT_FOUND )
+            // FIXME: Improve this.
+            if (std::find(m_oldSelections.begin(), m_oldSelections.end(), item) == std::end(m_oldSelections))
             {
                 any_new_selected = true;
                 break;
@@ -276,7 +277,7 @@ bool wxListBoxBase::CalcAndSendEvent()
             for ( size_t idx = 0; idx < countSelOld; idx++ )
             {
                 item = m_oldSelections[idx];
-                if ( selections.Index(item) == wxNOT_FOUND )
+                if (std::find(selections.begin(), selections.end(), item) == std::end(selections))
                 {
                     any_new_deselected = true;
                     break;

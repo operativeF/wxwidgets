@@ -42,7 +42,7 @@ class wxHeaderColumnsRearrangeDialog : public wxRearrangeDialog
 {
 public:
     wxHeaderColumnsRearrangeDialog(wxWindow *parent,
-                                   const wxArrayInt& order,
+                                   const std::vector<int>& order,
                                    const wxArrayString& items)
         : wxRearrangeDialog
           (
@@ -155,13 +155,13 @@ void wxHeaderCtrlBase::OnRClick(wxHeaderCtrlEvent& event)
 // wxHeaderCtrlBase column reordering
 // ----------------------------------------------------------------------------
 
-void wxHeaderCtrlBase::SetColumnsOrder(const wxArrayInt& order)
+void wxHeaderCtrlBase::SetColumnsOrder(const std::vector<int>& order)
 {
     const unsigned count = GetColumnCount();
     wxCHECK_RET( order.size() == count, "wrong number of columns" );
 
     // check the array validity
-    wxArrayInt seen(count, 0);
+    std::vector<int> seen(count, 0);
     for ( unsigned n = 0; n < count; n++ )
     {
         const unsigned idx = order[n];
@@ -179,16 +179,16 @@ void wxHeaderCtrlBase::SetColumnsOrder(const wxArrayInt& order)
 void wxHeaderCtrlBase::ResetColumnsOrder()
 {
     const unsigned count = GetColumnCount();
-    wxArrayInt order(count);
+    std::vector<int> order(count);
     for ( unsigned n = 0; n < count; n++ )
         order[n] = n;
 
     DoSetColumnsOrder(order);
 }
 
-wxArrayInt wxHeaderCtrlBase::GetColumnsOrder() const
+std::vector<int> wxHeaderCtrlBase::GetColumnsOrder() const
 {
-    const wxArrayInt order = DoGetColumnsOrder();
+    const std::vector<int> order = DoGetColumnsOrder();
 
     wxASSERT_MSG( order.size() == GetColumnCount(), "invalid order array" );
 
@@ -208,44 +208,44 @@ unsigned int wxHeaderCtrlBase::GetColumnPos(unsigned int idx) const
 
     wxCHECK_MSG( idx < count, wxNO_COLUMN, "invalid index" );
 
-    const wxArrayInt order = GetColumnsOrder();
-    int pos = order.Index(idx);
-    wxCHECK_MSG( pos != wxNOT_FOUND, wxNO_COLUMN, "column unexpectedly not displayed at all" );
+    const std::vector<int> order = GetColumnsOrder();
+    const auto pos = std::find(order.begin(), order.end(), idx);
+    wxCHECK_MSG( pos != std::end(order), wxNO_COLUMN, "column unexpectedly not displayed at all" );
 
-    return (unsigned int)pos;
+    return std::distance(std::cbegin(order), pos);
 }
 
 /* static */
-void wxHeaderCtrlBase::MoveColumnInOrderArray(wxArrayInt& order,
+void wxHeaderCtrlBase::MoveColumnInOrderArray(std::vector<int>& order,
                                               unsigned int idx,
                                               unsigned int pos)
 {
-    int posOld = order.Index(idx);
-    wxASSERT_MSG( posOld != wxNOT_FOUND, "invalid index" );
+    auto posOld = std::find(order.begin(), order.end(), idx);
+    wxASSERT_MSG( posOld != std::end(order), "invalid index" );
 
-    if ( pos != (unsigned int)posOld )
+    if ( pos != std::distance(std::begin(order), posOld) )
     {
-        order.RemoveAt(posOld);
-        order.Insert(idx, pos);
+        order.erase(posOld);
+        order.insert(std::begin(order) + pos, idx);
     }
 }
 
 void
-wxHeaderCtrlBase::DoResizeColumnIndices(wxArrayInt& colIndices, unsigned int count)
+wxHeaderCtrlBase::DoResizeColumnIndices(std::vector<int>& colIndices, unsigned int count)
 {
     // update the column indices array if necessary
-    const unsigned countOld = colIndices.size();
+    const auto countOld = colIndices.size();
     if ( count > countOld )
     {
         // all new columns have default positions equal to their indices
-        for ( unsigned n = countOld; n < count; n++ )
+        for ( auto n = countOld; n < count; n++ )
             colIndices.push_back(n);
     }
     else if ( count < countOld )
     {
         // filter out all the positions which are invalid now while keeping the
         // order of the remaining ones
-        wxArrayInt colIndicesNew;
+        std::vector<int> colIndicesNew;
         colIndicesNew.reserve(count);
         for ( unsigned n = 0; n < countOld; n++ )
         {
@@ -321,7 +321,7 @@ bool wxHeaderCtrlBase::ShowCustomizeDialog()
 {
 #if wxUSE_REARRANGECTRL
     // prepare the data for showing the dialog
-    wxArrayInt order = GetColumnsOrder();
+    std::vector<int> order = GetColumnsOrder();
 
     const unsigned count = GetColumnCount();
 

@@ -87,11 +87,11 @@ public:
 
     /// Set the border controls
     static void SetBorderValue(wxTextAttrBorder& border, wxTextCtrl* widthValueCtrl, wxComboBox* widthUnitsCtrl, wxCheckBox* checkBox,
-        wxComboBox* styleCtrl, wxRichTextColourSwatchCtrl* colourCtrl, const wxArrayInt& borderStyles);
+        wxComboBox* styleCtrl, wxRichTextColourSwatchCtrl* colourCtrl, const std::vector<int>& borderStyles);
 
     /// Get data from the border controls
     static void GetBorderValue(wxTextAttrBorder& border, wxTextCtrl* widthValueCtrl, wxComboBox* widthUnitsCtrl, wxCheckBox* checkBox,
-        wxComboBox* styleCtrl, wxRichTextColourSwatchCtrl* colourCtrl, const wxArrayInt& borderStyles);
+        wxComboBox* styleCtrl, wxRichTextColourSwatchCtrl* colourCtrl, const std::vector<int>& borderStyles);
 
 ////@begin wxRichTextBordersPage event handler declarations
 
@@ -278,7 +278,7 @@ public:
     };
 ////@end wxRichTextBordersPage member variables
 
-    wxArrayInt m_borderStyles;
+    std::vector<int> m_borderStyles;
     wxArrayString m_borderStyleNames;
     bool m_ignoreUpdates;
 };

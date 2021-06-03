@@ -220,7 +220,7 @@ void wxStatusBar::MSWUpdateFieldsWidths()
 
     // distribute the available space (client width) among the various fields:
 
-    wxArrayInt widthsAbs = CalculateAbsWidths(widthAvailable);
+    std::vector<int> widthsAbs = CalculateAbsWidths(widthAvailable);
 
 
     // update the field widths in the native control:

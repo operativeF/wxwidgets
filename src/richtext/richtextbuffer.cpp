@@ -1769,15 +1769,15 @@ void wxRichTextCompositeObject::Dump(wxTextOutputStream& stream)
 
 /// Get/set the object size for the given range. Returns false if the range
 /// is invalid for this object.
-bool wxRichTextCompositeObject::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, wxArrayInt* partialExtents) const
+bool wxRichTextCompositeObject::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     if (!range.IsWithin(GetRange()))
         return false;
 
     wxSize sz;
 
-    wxArrayInt childExtents;
-    wxArrayInt* p;
+    std::vector<int> childExtents;
+    std::vector<int>* p;
     if (partialExtents)
         p = & childExtents;
     else
@@ -1795,12 +1795,12 @@ bool wxRichTextCompositeObject::GetRangeSize(const wxRichTextRange& range, wxSiz
                 if (partialExtents)
                 {
                     int lastSize;
-                    if (partialExtents->GetCount() > 0)
-                        lastSize = (*partialExtents)[partialExtents->GetCount()-1];
+                    if (partialExtents->size() > 0)
+                        lastSize = (*partialExtents)[partialExtents->size()-1];
                     else
                         lastSize = 0;
 
-                    partialExtents->Add(0 /* zero size */ + lastSize);
+                    partialExtents->push_back(0 /* zero size */ + lastSize);
                 }
             }
             else
@@ -1840,22 +1840,22 @@ bool wxRichTextCompositeObject::GetRangeSize(const wxRichTextRange& range, wxSiz
                     if (partialExtents)
                     {
                         int lastSize;
-                        if (partialExtents->GetCount() > 0)
-                            lastSize = (*partialExtents)[partialExtents->GetCount()-1];
+                        if (partialExtents->size() > 0)
+                            lastSize = (*partialExtents)[partialExtents->size()-1];
                         else
                             lastSize = 0;
 
                         size_t i;
-                        for (i = 0; i < childExtents.GetCount(); i++)
+                        for (i = 0; i < childExtents.size(); i++)
                         {
-                            partialExtents->Add(childExtents[i] + lastSize);
+                            partialExtents->push_back(childExtents[i] + lastSize);
                         }
                     }
                 }
             }
 
             if (p)
-                p->Clear();
+                p->clear();
         }
 
         node = node->GetNext();
@@ -2494,7 +2494,7 @@ bool wxRichTextParagraphLayoutBox::Layout(wxDC& dc, wxRichTextDrawingContext& co
 }
 
 /// Get/set the size for the given range.
-bool wxRichTextParagraphLayoutBox::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, wxArrayInt* WXUNUSED(partialExtents)) const
+bool wxRichTextParagraphLayoutBox::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* WXUNUSED(partialExtents)) const
 {
     wxSize sz;
 
@@ -4777,7 +4777,7 @@ bool wxRichTextParagraphLayoutBox::FindNextParagraphNumber(wxRichTextParagraph* 
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextParagraph, wxRichTextCompositeObject);
 
-wxArrayInt wxRichTextParagraph::sm_defaultTabs;
+std::vector<int> wxRichTextParagraph::sm_defaultTabs;
 
 wxRichTextParagraph::wxRichTextParagraph(wxRichTextObject* parent, wxRichTextAttr* style):
     wxRichTextCompositeObject(parent)
@@ -4956,11 +4956,11 @@ bool wxRichTextParagraph::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
 }
 
 // Get the range width using partial extents calculated for the whole paragraph.
-static int wxRichTextGetRangeWidth(const wxRichTextParagraph& para, const wxRichTextRange& range, const wxArrayInt& partialExtents)
+static int wxRichTextGetRangeWidth(const wxRichTextParagraph& para, const wxRichTextRange& range, const std::vector<int>& partialExtents)
 {
-    wxASSERT(partialExtents.GetCount() >= (size_t) range.GetLength());
+    wxASSERT(partialExtents.size() >= (size_t) range.GetLength());
 
-    if (partialExtents.GetCount() < (size_t) range.GetLength())
+    if (partialExtents.size() < (size_t) range.GetLength())
         return 0;
 
     int leftMostPos = 0;
@@ -5068,7 +5068,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
 
 #if wxRICHTEXT_USE_PARTIAL_TEXT_EXTENTS
     wxUnusedVar(style);
-    wxArrayInt partialExtents;
+    std::vector<int> partialExtents;
 
     wxSize paraSize;
     int paraDescent = 0;
@@ -5155,7 +5155,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
 
             if (oldSize != child->GetCachedSize())
             {
-                partialExtents.Clear();
+                partialExtents.clear();
 
                 // Recalculate the partial text extents since the child object changed size
                 GetRangeSize(GetRange(), paraSize, paraDescent, dc, context, wxRICHTEXT_UNFORMATTED|wxRICHTEXT_CACHE_SIZE, wxPoint(0,0), parentRect.GetSize(), & partialExtents);
@@ -5246,7 +5246,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
 
                     if (oldSize != child->GetCachedSize())
                     {
-                        partialExtents.Clear();
+                        partialExtents.clear();
 
                         // Recalculate the partial text extents since the child object changed size
                         GetRangeSize(GetRange(), paraSize, paraDescent, dc, context, wxRICHTEXT_UNFORMATTED|wxRICHTEXT_CACHE_SIZE, wxPoint(0,0), parentRect.GetSize(), & partialExtents);
@@ -5700,7 +5700,7 @@ void wxRichTextParagraph::ClearLines()
 
 /// Get/set the object size for the given range. Returns false if the range
 /// is invalid for this object.
-bool wxRichTextParagraph::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, wxArrayInt* partialExtents) const
+bool wxRichTextParagraph::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     if (!range.IsWithin(GetRange()))
         return false;
@@ -5710,8 +5710,8 @@ bool wxRichTextParagraph::GetRangeSize(const wxRichTextRange& range, wxSize& siz
         // Just use unformatted data, assume no line breaks
         wxSize sz;
 
-        wxArrayInt childExtents;
-        wxArrayInt* p;
+        std::vector<int> childExtents;
+        std::vector<int>* p;
         if (partialExtents)
             p = & childExtents;
         else
@@ -5733,12 +5733,12 @@ bool wxRichTextParagraph::GetRangeSize(const wxRichTextRange& range, wxSize& siz
                     if (partialExtents)
                     {
                         int lastSize;
-                        if (partialExtents->GetCount() > 0)
-                            lastSize = (*partialExtents)[partialExtents->GetCount()-1];
+                        if (partialExtents->size() > 0)
+                            lastSize = (*partialExtents)[partialExtents->size()-1];
                         else
                             lastSize = 0;
 
-                        partialExtents->Add(0 /* zero size */ + lastSize);
+                        partialExtents->push_back(0 /* zero size */ + lastSize);
                     }
                 }
                 else
@@ -5806,12 +5806,12 @@ bool wxRichTextParagraph::GetRangeSize(const wxRichTextRange& range, wxSize& siz
                         if (partialExtents)
                         {
                             int lastSize;
-                            if (partialExtents->GetCount() > 0)
-                                lastSize = (*partialExtents)[partialExtents->GetCount()-1];
+                            if (partialExtents->size() > 0)
+                                lastSize = (*partialExtents)[partialExtents->size()-1];
                             else
                                 lastSize = 0;
 
-                            partialExtents->Add(childSize.x + lastSize);
+                            partialExtents->push_back(childSize.x + lastSize);
                         }
                     }
                     else if (child->GetRangeSize(rangeToUse, childSize, childDescent, dc, context, flags, wxPoint(position.x + sz.x, position.y), parentSize, p))
@@ -5841,22 +5841,22 @@ bool wxRichTextParagraph::GetRangeSize(const wxRichTextRange& range, wxSize& siz
                         if (partialExtents)
                         {
                             int lastSize;
-                            if (partialExtents->GetCount() > 0)
-                                lastSize = (*partialExtents)[partialExtents->GetCount()-1];
+                            if (partialExtents->size() > 0)
+                                lastSize = (*partialExtents)[partialExtents->size()-1];
                             else
                                 lastSize = 0;
 
                             size_t i;
-                            for (i = 0; i < childExtents.GetCount(); i++)
+                            for (i = 0; i < childExtents.size(); i++)
                             {
-                                partialExtents->Add(childExtents[i] + lastSize);
+                                partialExtents->push_back(childExtents[i] + lastSize);
                             }
                         }
                     }
                 }
 
                 if (p)
-                    p->Clear();
+                    p->clear();
             }
 
             node = node->GetNext();
@@ -6101,7 +6101,7 @@ int wxRichTextParagraph::HitTest(wxDC& dc, wxRichTextDrawingContext& context, co
             else
             {
 #if wxRICHTEXT_USE_PARTIAL_TEXT_EXTENTS
-                wxArrayInt partialExtents;
+                std::vector<int> partialExtents;
 
                 wxSize paraSize;
                 int paraDescent;
@@ -6111,7 +6111,7 @@ int wxRichTextParagraph::HitTest(wxDC& dc, wxRichTextDrawingContext& context, co
 
                 int lastX = linePos.x;
                 size_t i;
-                for (i = 0; i < partialExtents.GetCount(); i++)
+                for (i = 0; i < partialExtents.size(); i++)
                 {
                     int nextX = partialExtents[i] + linePos.x;
 
@@ -6347,7 +6347,7 @@ bool wxRichTextParagraph::GetContiguousPlainText(wxString& text, const wxRichTex
 }
 
 /// Find a suitable wrap position.
-bool wxRichTextParagraph::FindWrapPosition(const wxRichTextRange& range, wxDC& dc, wxRichTextDrawingContext& context, int availableSpace, long& wrapPosition, wxArrayInt* partialExtents)
+bool wxRichTextParagraph::FindWrapPosition(const wxRichTextRange& range, wxDC& dc, wxRichTextDrawingContext& context, int availableSpace, long& wrapPosition, std::vector<int>* partialExtents)
 {
     if (range.GetLength() <= 0)
         return false;
@@ -6357,7 +6357,7 @@ bool wxRichTextParagraph::FindWrapPosition(const wxRichTextRange& range, wxDC& d
     long breakPosition = range.GetEnd();
 
 #if wxRICHTEXT_USE_PARTIAL_TEXT_EXTENTS
-    if (partialExtents && partialExtents->GetCount() >= (size_t) (GetRange().GetLength()-1)) // the final position in a paragraph is the newline
+    if (partialExtents && partialExtents->size() >= (size_t) (GetRange().GetLength()-1)) // the final position in a paragraph is the newline
     {
         int widthBefore;
 
@@ -6619,14 +6619,14 @@ void wxRichTextParagraph::InitDefaultTabs()
     // create a default tab list at 10 mm each.
     for (int i = 0; i < 20; ++i)
     {
-        sm_defaultTabs.Add(i*100);
+        sm_defaultTabs.push_back(i*100);
     }
 }
 
 // Clear default tabstop array
 void wxRichTextParagraph::ClearDefaultTabs()
 {
-    sm_defaultTabs.Clear();
+    sm_defaultTabs.clear();
 }
 
 void wxRichTextParagraph::LayoutFloat(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style, wxRichTextFloatCollector* floatCollector)
@@ -7004,15 +7004,15 @@ bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr,
 {
     bool hasTabs = (str.Find(wxT('\t')) != wxNOT_FOUND);
 
-    wxArrayInt tabArray;
+    std::vector<int> tabArray;
     int tabCount;
     if (hasTabs)
     {
-        if (attr.GetTabs().IsEmpty())
+        if (attr.GetTabs().empty())
             tabArray = wxRichTextParagraph::GetDefaultTabs();
         else
             tabArray = attr.GetTabs();
-        tabCount = tabArray.GetCount();
+        tabCount = tabArray.size();
 
         for (int i = 0; i < tabCount; ++i)
         {
@@ -7063,7 +7063,7 @@ bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr,
         for (int i = 0; i < tabCount && not_found; ++i)
         {
             int nextTabPos;
-            nextTabPos = tabArray.Item(i) + x_orig;
+            nextTabPos = tabArray[i] + x_orig;
 
             // Find the next tab position.
             // Even if we're at the end of the tab array, we must still draw the chunk.
@@ -7162,7 +7162,7 @@ void wxRichTextPlainText::Copy(const wxRichTextPlainText& obj)
 
 /// Get/set the object size for the given range. Returns false if the range
 /// is invalid for this object.
-bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int WXUNUSED(flags), const wxPoint& position, const wxSize& WXUNUSED(parentSize), wxArrayInt* partialExtents) const
+bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int WXUNUSED(flags), const wxPoint& position, const wxSize& WXUNUSED(parentSize), std::vector<int>* partialExtents) const
 {
     if (!range.IsWithin(GetRange()))
         return false;
@@ -7236,13 +7236,13 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
     if (stringChunk.Find(wxT('\t')) != wxNOT_FOUND)
     {
         // the string has a tab
-        wxArrayInt tabArray;
-        if (textAttr.GetTabs().IsEmpty())
+        std::vector<int> tabArray;
+        if (textAttr.GetTabs().empty())
             tabArray = wxRichTextParagraph::GetDefaultTabs();
         else
             tabArray = textAttr.GetTabs();
 
-        int tabCount = tabArray.GetCount();
+        int tabCount = tabArray.size();
 
         for (int i = 0; i < tabCount; ++i)
         {
@@ -7263,20 +7263,20 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
             if (partialExtents)
             {
                 int oldWidth;
-                if (partialExtents->GetCount() > 0)
-                    oldWidth = (*partialExtents)[partialExtents->GetCount()-1];
+                if (partialExtents->size() > 0)
+                    oldWidth = (*partialExtents)[partialExtents->size()-1];
                 else
                     oldWidth = 0;
 
                 // Add these partial extents
-                wxArrayInt p;
+                std::vector<int> p;
                 dc.GetPartialTextExtents(stringFragment, p);
                 size_t j;
-                for (j = 0; j < p.GetCount(); j++)
-                    partialExtents->Add(oldWidth + p[j]);
+                for (j = 0; j < p.size(); j++)
+                    partialExtents->push_back(oldWidth + p[j]);
 
-                if (partialExtents->GetCount() > 0)
-                    absoluteWidth = (*partialExtents)[(*partialExtents).GetCount()-1] + relativeX;
+                if (partialExtents->size() > 0)
+                    absoluteWidth = (*partialExtents)[(*partialExtents).size()-1] + relativeX;
                 else
                     absoluteWidth = relativeX;
             }
@@ -7292,7 +7292,7 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
             for (int i = 0; i < tabCount && notFound; ++i)
             {
                 int nextTabPos;
-                nextTabPos = tabArray.Item(i);
+                nextTabPos = tabArray[i];
 
                 // Find the next tab position.
                 // Even if we're at the end of the tab array, we must still process the chunk.
@@ -7309,7 +7309,7 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
                     width = nextTabPos - relativeX;
 
                     if (partialExtents)
-                        partialExtents->Add(width);
+                        partialExtents->push_back(width);
                 }
             }
         }
@@ -7320,17 +7320,17 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
         if (partialExtents)
         {
             int oldWidth;
-            if (partialExtents->GetCount() > 0)
-                oldWidth = (*partialExtents)[partialExtents->GetCount()-1];
+            if (partialExtents->size() > 0)
+                oldWidth = (*partialExtents)[partialExtents->size()-1];
             else
                 oldWidth = 0;
 
             // Add these partial extents
-            wxArrayInt p;
+            std::vector<int> p;
             dc.GetPartialTextExtents(stringChunk, p);
             size_t j;
-            for (j = 0; j < p.GetCount(); j++)
-                partialExtents->Add(oldWidth + p[j]);
+            for (j = 0; j < p.size(); j++)
+                partialExtents->push_back(oldWidth + p[j]);
         }
         else
         {
@@ -7343,8 +7343,8 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
     if (partialExtents)
     {
         int charHeight = dc.GetCharHeight();
-        if ((*partialExtents).GetCount() > 0)
-            w = (*partialExtents)[partialExtents->GetCount()-1];
+        if ((*partialExtents).size() > 0)
+            w = (*partialExtents)[partialExtents->size()-1];
         else
             w = 0;
         size = wxSize(w, charHeight);
@@ -7500,11 +7500,11 @@ wxRichTextObject* wxRichTextPlainText::Split(wxRichTextDrawingContext& context)
             const wxRichTextAttr emptyAttr;
             wxRichTextObjectList::compatibility_iterator next = node->GetNext();
 
-            wxArrayInt positions;
+            std::vector<int> positions;
             wxRichTextAttrArray attributes;
-            if (context.GetVirtualSubobjectAttributes(this, positions, attributes) && positions.GetCount() > 0)
+            if (context.GetVirtualSubobjectAttributes(this, positions, attributes) && positions.size() > 0)
             {
-                wxASSERT(positions.GetCount() == attributes.GetCount());
+                wxASSERT(positions.size() == attributes.GetCount());
 
                 // We will gather up runs of text with the same virtual attributes
 
@@ -7519,7 +7519,7 @@ wxRichTextObject* wxRichTextPlainText::Split(wxRichTextDrawingContext& context)
                 wxString text = m_text;
                 wxRichTextPlainText* lastPlainText = this;
 
-                for (i = 0; i < (int) positions.GetCount(); i++)
+                for (i = 0; i < (int) positions.size(); i++)
                 {
                     int pos = positions[i];
                     wxASSERT(pos >= 0 && pos < len);
@@ -8706,10 +8706,10 @@ void wxRichTextBuffer::CleanUpHandlers()
     sm_handlers.Clear();
 }
 
-wxString wxRichTextBuffer::GetExtWildcard(bool combine, bool save, wxArrayInt* types)
+wxString wxRichTextBuffer::GetExtWildcard(bool combine, bool save, std::vector<int>* types)
 {
     if (types)
-        types->Clear();
+        types->clear();
 
     wxString wildcard;
 
@@ -8738,7 +8738,7 @@ wxString wxRichTextBuffer::GetExtWildcard(bool combine, bool save, wxArrayInt* t
                 wildcard += wxT(")|*.");
                 wildcard += handler->GetExtension();
                 if (types)
-                    types->Add(handler->GetType());
+                    types->push_back(handler->GetType());
             }
             count ++;
         }
@@ -9428,7 +9428,7 @@ bool wxRichTextField::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
     return defaultFieldType.Layout(this, dc, context, rect, parentRect, style);
 }
 
-bool wxRichTextField::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, wxArrayInt* partialExtents) const
+bool wxRichTextField::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     wxRichTextFieldType* fieldType = wxRichTextBuffer::FindFieldType(GetFieldType());
     if (fieldType)
@@ -9675,7 +9675,7 @@ bool wxRichTextFieldTypeStandard::Layout(wxRichTextField* obj, wxDC& dc, wxRichT
     return true;
 }
 
-bool wxRichTextFieldTypeStandard::GetRangeSize(wxRichTextField* obj, const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, wxArrayInt* partialExtents) const
+bool wxRichTextFieldTypeStandard::GetRangeSize(wxRichTextField* obj, const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     if (IsTopLevel(obj))
         return obj->wxRichTextParagraphLayoutBox::GetRangeSize(range, size, descent, dc, context, flags, position, parentSize);
@@ -9685,11 +9685,11 @@ bool wxRichTextFieldTypeStandard::GetRangeSize(wxRichTextField* obj, const wxRic
         if (partialExtents)
         {
             int lastSize;
-            if (partialExtents->GetCount() > 0)
-                lastSize = (*partialExtents)[partialExtents->GetCount()-1];
+            if (partialExtents->size() > 0)
+                lastSize = (*partialExtents)[partialExtents->size()-1];
             else
                 lastSize = 0;
-            partialExtents->Add(lastSize + sz.x);
+            partialExtents->push_back(lastSize + sz.x);
         }
         size = sz;
        return true;
@@ -10098,7 +10098,7 @@ bool wxRichTextTable::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wx
 
     // Helper function for Layout() that clears the space needed by a cell with rowspan > 1
 static
-int GetRowspanDisplacement(const wxRichTextTable* table, int row, int col, int paddingX, const wxArrayInt& colWidths)
+int GetRowspanDisplacement(const wxRichTextTable* table, int row, int col, int paddingX, const std::vector<int>& colWidths)
 {
     // If one or more cells above-left of this one has rowspan > 1, the affected cells below it
     // will have been hidden and have width 0. As a result they are ignored by the layout algorithm,
@@ -10147,12 +10147,13 @@ void ExpandCellsWithRowspan(const wxRichTextTable* table, int paddingY, int& bot
 
     // Start by finding the current 'y' of the top of each row, plus the bottom of the available area for cells.
     // Deduce this from the top of a visible cell in the row below. (If none are visible, the row will be invisible anyway and can be ignored.)
+
+    // FIXME: This is asinine and needlessly complicated.
     const int rowCount = table->GetRowCount();
     const int colCount = table->GetColumnCount();
-    wxArrayInt rowTops;
-    rowTops.Add(0, rowCount+1);
-    int row;
-    for (row = 0; row < rowCount; ++row)
+    std::vector<int> rowTops(rowCount + 1, 0);
+
+    for (int row = 0; row < rowCount; ++row)
     {
         for (int column = 0; column < colCount; ++column)
         {
@@ -10164,11 +10165,12 @@ void ExpandCellsWithRowspan(const wxRichTextTable* table, int paddingY, int& bot
             }
         }
     }
+
     rowTops[rowCount] = bottomY + paddingY;  // The table bottom, which was passed to us
 
     bool needsRelay = false;
 
-    for (row = 0; row < rowCount-1; ++row) // -1 as the bottom row can't rowspan
+    for (int row = 0; row < rowCount-1; ++row) // -1 as the bottom row can't rowspan
     {
         for (int col = 0; col < colCount; ++col)
         {
@@ -10224,7 +10226,7 @@ void ExpandCellsWithRowspan(const wxRichTextTable* table, int paddingY, int& bot
         return;
 
     // There were overflowing rowspanning cells, so layout yet again to make the increased row depths show
-    for (row = 0; row < rowCount; ++row)
+    for (int row = 0; row < rowCount; ++row)
     {
         for (int col = 0; col < colCount; ++col)
         {
@@ -10246,142 +10248,13 @@ void ExpandCellsWithRowspan(const wxRichTextTable* table, int paddingY, int& bot
     }
 }
 
-// Lays the object out. rect is the space available for layout. Often it will
-// be the specified overall space for this object, if trying to constrain
-// layout to a particular size, or it could be the total space available in the
-// parent. rect is the overall size, so we must subtract margins and padding.
-// to get the actual available space.
-bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& WXUNUSED(parentRect), int style)
+wxRichTextRectArray wxRichTextTable::getSpanningCells()
 {
-    SetPosition(rect.GetPosition());
-
-    // The meaty bit. Calculate sizes of all cells and rows. Try to use
-    // minimum size if within alloted size, then divide up remaining size
-    // between rows/cols.
-
-    double scale = 1.0;
-    wxRichTextBuffer* buffer = GetBuffer();
-    if (buffer) scale = buffer->GetScale();
-
-    wxRect availableSpace = GetAvailableContentArea(dc, context, rect);
-    wxTextAttrDimensionConverter converter(dc, scale, availableSpace.GetSize());
-
-    wxRichTextAttr attr(GetAttributes());
-    AdjustAttributes(attr, context);
-
-    bool tableHasPercentWidth = (attr.GetTextBoxAttr().GetWidth().GetUnits() == wxTEXT_ATTR_UNITS_PERCENTAGE);
-    // If we have no fixed table size, and assuming we're not pushed for
-    // space, then we don't have to try to stretch the table to fit the contents.
-    bool stretchToFitTableWidth = tableHasPercentWidth;
-
-    int tableWidth = rect.width;
-    if (attr.GetTextBoxAttr().GetWidth().IsValid() && !tableHasPercentWidth)
-    {
-        tableWidth = converter.GetPixels(attr.GetTextBoxAttr().GetWidth(), wxHORIZONTAL);
-
-        // Fixed table width, so we do want to stretch columns out if necessary.
-        stretchToFitTableWidth = true;
-
-        // Shouldn't be able to exceed the size passed to this function
-        tableWidth = wxMin(rect.width, tableWidth);
-    }
-
-    // Get internal padding
-    int paddingLeft = 0, paddingTop = 0;
-    if (attr.GetTextBoxAttr().GetPadding().GetLeft().IsValid())
-        paddingLeft = converter.GetPixels(attr.GetTextBoxAttr().GetPadding().GetLeft(), wxHORIZONTAL);
-    if (attr.GetTextBoxAttr().GetPadding().GetTop().IsValid())
-        paddingTop = converter.GetPixels(attr.GetTextBoxAttr().GetPadding().GetTop(), wxVERTICAL);
-
-    // Assume that left and top padding are also used for inter-cell padding.
-    int paddingX = paddingLeft;
-    int paddingY = paddingTop;
-
-    int totalLeftMargin = 0, totalRightMargin = 0, totalTopMargin = 0, totalBottomMargin = 0;
-    GetTotalMargin(dc, buffer, attr, totalLeftMargin, totalRightMargin, totalTopMargin, totalBottomMargin);
-
-    // Internal table width - the area for content
-    int internalTableWidth = tableWidth - totalLeftMargin - totalRightMargin;
-
-    int rowCount = m_cells.GetCount();
-    if (m_colCount == 0 || rowCount == 0)
-    {
-        wxRect overallRect(rect.x, rect.y, totalLeftMargin + totalRightMargin, totalTopMargin + totalBottomMargin);
-        SetCachedSize(overallRect.GetSize());
-
-        // Zero content size
-        SetMinSize(overallRect.GetSize());
-        SetMaxSize(GetMinSize());
-        return true;
-    }
-
-    // The final calculated widths
-    wxArrayInt colWidths;
-    colWidths.Add(0, m_colCount);
-
-    wxArrayInt absoluteColWidths;
-    absoluteColWidths.Add(0, m_colCount);
-
-    wxArrayInt percentageColWidths;
-    percentageColWidths.Add(0, m_colCount);
-
-    // The required width of a column calculated from the content, in case we don't specify any widths
-    wxArrayInt maxUnspecifiedColumnWidths;
-    maxUnspecifiedColumnWidths.Add(0, m_colCount);
-
-    wxArrayInt maxColWidths;
-    maxColWidths.Add(0, m_colCount);
-
-    wxArrayInt minColWidths;
-    minColWidths.Add(0, m_colCount);
-
-    // Separately record the minimum width of columns with
-    // nowrap cells
-    wxArrayInt minColWidthsNoWrap;
-    minColWidthsNoWrap.Add(0, m_colCount);
-
-    // Record the maximum spanning widths
-    wxArrayInt spanningWidths, spanningWidthsSpanLengths;
-    spanningWidths.Add(0, m_colCount);
-    spanningWidthsSpanLengths.Add(0, m_colCount);
-
-    wxSize tableSize(tableWidth, 0);
-
-    int i, j, k;
-
-    for (i = 0; i < m_colCount; i++)
-    {
-        absoluteColWidths[i] = 0;
-        percentageColWidths[i] = -1;
-        colWidths[i] = 0;
-        maxColWidths[i] = 0;
-        minColWidths[i] = 0;
-        minColWidthsNoWrap[i] = 0;
-    }
-
-    // (0) Determine which cells are visible according to spans
-    //   1  2   3  4   5
-    //  __________________
-    // |  |   |      |    | 1
-    // |------|      |----|
-    // |------|      |    | 2
-    // |------|      |    | 3
-    // |------------------|
-    // |__________________| 4
-
-    // To calculate cell visibility:
-    // First find all spanning cells. Build an array of span records with start x, y and end x, y.
-    // Then for each cell, test whether we're within one of those cells, and unless we're at the start of
-    // that cell, hide the cell.
-
-    // We can also use this array to match the size of spanning cells to the grid. Or just do
-    // this when we iterate through all cells.
-
-    // 0.1: add spanning cells to an array
     wxRichTextRectArray rectArray;
-    for (j = 0; j < m_rowCount; j++)
+
+    for (int j = 0; j < m_rowCount; j++)
     {
-        for (i = 0; i < m_colCount; i++)
+        for (int i = 0; i < m_colCount; i++)
         {
             wxRichTextCell* cell = GetCell(j, i);
             int colSpan = cell->GetColSpan();
@@ -10392,10 +10265,15 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
             }
         }
     }
-    // 0.2: find which cells are subsumed by a spanning cell
-    for (j = 0; j < m_rowCount; j++)
+
+    return rectArray;
+}
+
+void wxRichTextTable::subsumedBySpanningCell(const wxRichTextRectArray& rectArray)
+{
+    for (int j = 0; j < m_rowCount; j++)
     {
-        for (i = 0; i < m_colCount; i++)
+        for (int i = 0; i < m_colCount; i++)
         {
             wxRichTextCell* cell = GetCell(j, i);
             if (rectArray.GetCount() == 0)
@@ -10415,7 +10293,7 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
                 else
                 {
                     bool shown = true;
-                    for (k = 0; k < (int) rectArray.GetCount(); k++)
+                    for (int k = 0; k < (int)rectArray.GetCount(); k++)
                     {
                         if (rectArray[k].Contains(wxPoint(i, j)))
                         {
@@ -10428,36 +10306,42 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
             }
         }
     }
+}
 
-    // Find the first spanned cell in each row that spans the most columns and doesn't
-    // overlap with a spanned cell starting at a previous column position.
-    // This means we need to keep an array of rects so we can check. However
-    // it does also mean that some spans simply may not be taken into account
-    // where there are different spans happening on different rows. In these cases,
-    // they will simply be as wide as their constituent columns.
-
-    // (1) Do an initial layout for all cells to get minimum and maximum size, and get
-    // the absolute or percentage width of each column.
-
-    for (j = 0; j < m_rowCount; j++)
+void wxRichTextTable::getInitialLayoutAndWidths(
+    std::vector<int>& maxUnspecifiedColumnWidths,
+    std::vector<int>& absoluteColWidths,
+    std::vector<int>& minColWidths,
+    std::vector<int>& percentageColWidths,
+    std::vector<int>& minColWidthsNoWrap,
+    std::vector<int>& maxColWidths,
+    int paddingX,
+    int internalTableWidth,
+    double scale,
+    wxRect availableSpace,
+    wxRichTextDrawingContext& context,
+    wxDC& dc,
+    int style)
+{
+    for (int j = 0; j < m_rowCount; j++)
     {
         int visibleCellCount = 0;
 
-        for (i = 0; i < m_colCount; i++)
+        for (int i = 0; i < m_colCount; i++)
         {
             wxRichTextBox* cell = GetCell(j, i);
             if (cell->IsShown())
             {
-                visibleCellCount ++;
+                ++visibleCellCount;
             }
         }
 
         // Cell width percentages are for the overall cell width, so ignore margins and
         // only take into account table margins and inter-cell padding.
-        int availableWidthForPercentageCellWidths = internalTableWidth - ((visibleCellCount-1) * paddingX);
+        int availableWidthForPercentageCellWidths = internalTableWidth - ((visibleCellCount - 1) * paddingX);
         wxTextAttrDimensionConverter cellConverter(dc, scale, wxSize(availableWidthForPercentageCellWidths, 0));
 
-        for (i = 0; i < m_colCount; i++)
+        for (int i = 0; i < m_colCount; i++)
         {
             wxRichTextCell* cell = GetCell(j, i);
             if (cell->IsShown())
@@ -10519,29 +10403,285 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
             }
         }
     }
+}
 
-    // (2) Allocate initial column widths from absolute values and proportions
-    for (i = 0; i < m_colCount; i++)
+void wxRichTextTable::getInitialColWidths(const std::vector<int>& abs_widths,
+    const std::vector<int>& percentage_widths,
+    std::vector<int>& col_widths)
+{
+    for (int i = 0; i < m_colCount; i++)
     {
-        if (absoluteColWidths[i] > 0)
+        if (abs_widths[i] > 0)
         {
-            colWidths[i] = absoluteColWidths[i];
+            col_widths[i] = abs_widths[i];
         }
-        else if (percentageColWidths[i] > 0)
+        else if (percentage_widths[i] > 0)
         {
-            colWidths[i] = percentageColWidths[i];
+            col_widths[i] = percentage_widths[i];
         }
     }
+}
+
+void wxRichTextTable::adjustColumns(const std::vector<int>& minColWidths,
+    const std::vector<int>& minColWidthsNoWrap,
+    const std::vector<int>& maxUnspecifiedColumnWidths,
+    std::vector<int>& colWidths,
+    bool stretchToFitTableWidth,
+    int tableWidth,
+    bool relaxConstraints,
+    int widthLeft,
+    bool shareEqually,
+    int colShare,
+    int colShareRemainder)
+{
+    for (int i = 0; i < m_colCount; i++)
+    {
+        if (colWidths[i] <= 0) // absolute or proportional width has not been specified
+        {
+            if (widthLeft < 0 || stretchToFitTableWidth)
+            {
+                int minColWidth = wxMax(minColWidths[i], minColWidthsNoWrap[i]);
+
+                // Don't use a value for unspecified widths if we have insufficient space,
+                // unless it's a nowrap cell which is likely to be small.
+                // Actually this code is useless because if minColWidthsNoWrap exists,
+                // it'll be the same value as maxUnspecifiedColumnWidths.
+                if (!relaxConstraints)
+                    minColWidth = wxMax(minColWidth, maxUnspecifiedColumnWidths[i]);
+
+                if (minColWidth > 0 && !shareEqually)
+                    colWidths[i] = minColWidth;
+
+                // Don't allocate extra space if not wrapping since we assume a tight fit.
+                // Unless shareEqually forces us to distribute space because we didn't have any
+                // stretchable columns.
+                if ((minColWidthsNoWrap[i] == 0) || shareEqually)
+                    colWidths[i] += colShare;
+
+                if (i == (m_colCount - 1))
+                    colWidths[i] += colShareRemainder; // ensure all pixels are filled
+            }
+            else
+            {
+                // We're not stretching or shrinking, so calculate the column width
+                // consistent with how we calculated the remaining table width previously.
+                int minColWidth = wxMax(minColWidths[i], minColWidthsNoWrap[i]);
+                minColWidth = wxMax(minColWidth, maxUnspecifiedColumnWidths[i]);
+                colWidths[i] = minColWidth;
+            }
+        }
+    }
+}
+
+void wxRichTextTable::completeSpanningWidth(
+    const std::vector<int>& spanningWidths,
+    const std::vector<int>& spanningWidthsSpanLengths,
+    const std::vector<int>& minColWidthsNoWrap,
+    std::vector<int>& minColWidths,
+    std::vector<int>& colWidths)
+{
+    for (int i = 0; i < m_colCount; i++)
+    {
+        int spanningWidth = spanningWidths[i];
+        int spans = spanningWidthsSpanLengths[i];
+        if (spanningWidth > 0)
+        {
+            // Now share the spanning width between columns within that span
+            int spanningWidthLeft = spanningWidth;
+            int stretchColCount = 0;
+            for (int k = i; k < (i + spans); k++)
+            {
+                int minColWidth = wxMax(minColWidths[k], minColWidthsNoWrap[k]);
+
+                if (colWidths[k] > 0) // absolute or proportional width has been specified
+                    spanningWidthLeft -= colWidths[k];
+                else if (minColWidth > 0)
+                {
+                    spanningWidthLeft -= minColWidth;
+                    // Allow this to stretch, otherwise we're likely to not allow
+                    // any stretching and the spanned column will end up tiny.
+                    stretchColCount++;
+                }
+                else
+                    stretchColCount++;
+            }
+            // Now divide what's left between the remaining columns
+            int colShare = 0;
+            if (stretchColCount > 0)
+                colShare = spanningWidthLeft / stretchColCount;
+            int colShareRemainder = spanningWidthLeft - (colShare * stretchColCount);
+
+            // If fixed-width columns are currently too big, then we'll later
+            // stretch the spanned cell to fit.
+            if (spanningWidthLeft > 0)
+            {
+                for (int k = i; k < (i + spans); k++)
+                {
+                    int minColWidth = wxMax(minColWidths[k], minColWidthsNoWrap[k]);
+                    if (colWidths[k] <= 0) // absolute or proportional width has not been specified
+                    {
+                        int newWidth = colShare;
+                        if (minColWidth > 0)
+                            newWidth += minColWidth;
+
+                        if (k == (i + spans - 1))
+                            newWidth += colShareRemainder; // ensure all pixels are filled
+                        minColWidths[k] = newWidth;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Lays the object out. rect is the space available for layout. Often it will
+// be the specified overall space for this object, if trying to constrain
+// layout to a particular size, or it could be the total space available in the
+// parent. rect is the overall size, so we must subtract margins and padding.
+// to get the actual available space.
+bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& WXUNUSED(parentRect), int style)
+{
+    SetPosition(rect.GetPosition());
+
+    // The meaty bit. Calculate sizes of all cells and rows. Try to use
+    // minimum size if within alloted size, then divide up remaining size
+    // between rows/cols.
+
+    double scale = 1.0;
+    wxRichTextBuffer* buffer = GetBuffer();
+    if (buffer) scale = buffer->GetScale();
+
+    wxRect availableSpace = GetAvailableContentArea(dc, context, rect);
+    wxTextAttrDimensionConverter converter(dc, scale, availableSpace.GetSize());
+
+    wxRichTextAttr attr(GetAttributes());
+    AdjustAttributes(attr, context);
+
+    bool tableHasPercentWidth = (attr.GetTextBoxAttr().GetWidth().GetUnits() == wxTEXT_ATTR_UNITS_PERCENTAGE);
+    // If we have no fixed table size, and assuming we're not pushed for
+    // space, then we don't have to try to stretch the table to fit the contents.
+    bool stretchToFitTableWidth = tableHasPercentWidth;
+
+    int tableWidth = rect.width;
+    if (attr.GetTextBoxAttr().GetWidth().IsValid() && !tableHasPercentWidth)
+    {
+        tableWidth = converter.GetPixels(attr.GetTextBoxAttr().GetWidth(), wxHORIZONTAL);
+
+        // Fixed table width, so we do want to stretch columns out if necessary.
+        stretchToFitTableWidth = true;
+
+        // Shouldn't be able to exceed the size passed to this function
+        tableWidth = wxMin(rect.width, tableWidth);
+    }
+
+    // Get internal padding
+    int paddingLeft = 0;
+    int paddingTop = 0;
+    if (attr.GetTextBoxAttr().GetPadding().GetLeft().IsValid())
+        paddingLeft = converter.GetPixels(attr.GetTextBoxAttr().GetPadding().GetLeft(), wxHORIZONTAL);
+    if (attr.GetTextBoxAttr().GetPadding().GetTop().IsValid())
+        paddingTop = converter.GetPixels(attr.GetTextBoxAttr().GetPadding().GetTop(), wxVERTICAL);
+
+    // Assume that left and top padding are also used for inter-cell padding.
+    int paddingX = paddingLeft;
+    int paddingY = paddingTop;
+
+    int totalLeftMargin = 0;
+    int totalRightMargin = 0;
+    int totalTopMargin = 0;
+    int totalBottomMargin = 0;
+
+    GetTotalMargin(dc, buffer, attr, totalLeftMargin, totalRightMargin, totalTopMargin, totalBottomMargin);
+
+    // Internal table width - the area for content
+    int internalTableWidth = tableWidth - totalLeftMargin - totalRightMargin;
+
+    int rowCount = m_cells.GetCount();
+
+    if (m_colCount == 0 || rowCount == 0)
+    {
+        wxRect overallRect(rect.x, rect.y, totalLeftMargin + totalRightMargin, totalTopMargin + totalBottomMargin);
+        SetCachedSize(overallRect.GetSize());
+
+        // Zero content size
+        SetMinSize(overallRect.GetSize());
+        SetMaxSize(GetMinSize());
+        return true;
+    }
+
+    // The final calculated widths
+    std::vector<int> colWidths(m_colCount, 0);
+
+    std::vector<int> absoluteColWidths(m_colCount, 0);
+
+    std::vector<int> percentageColWidths(m_colCount, -1);
+
+    // The required width of a column calculated from the content, in case we don't specify any widths
+    std::vector<int> maxUnspecifiedColumnWidths(m_colCount, 0);
+
+    std::vector<int> maxColWidths(m_colCount, 0);
+
+    std::vector<int> minColWidths(m_colCount, 0);
+
+    // Separately record the minimum width of columns with
+    // nowrap cells
+    std::vector<int> minColWidthsNoWrap(m_colCount, 0);
+
+    // Record the maximum spanning widths
+    std::vector<int> spanningWidths(m_colCount, 0);
+    std::vector<int> spanningWidthsSpanLengths(m_colCount, 0);
+
+    wxSize tableSize(tableWidth, 0);
+
+    // (0) Determine which cells are visible according to spans
+    //   1  2   3  4   5
+    //  __________________
+    // |  |   |      |    | 1
+    // |------|      |----|
+    // |------|      |    | 2
+    // |------|      |    | 3
+    // |------------------|
+    // |__________________| 4
+
+    // To calculate cell visibility:
+    // First find all spanning cells. Build an array of span records with start x, y and end x, y.
+    // Then for each cell, test whether we're within one of those cells, and unless we're at the start of
+    // that cell, hide the cell.
+
+    // We can also use this array to match the size of spanning cells to the grid. Or just do
+    // this when we iterate through all cells.
+
+    // 0.1: add spanning cells to an array
+    wxRichTextRectArray rectArray = getSpanningCells();
+
+    // 0.2: find which cells are subsumed by a spanning cell
+    subsumedBySpanningCell(rectArray);
+
+    // Find the first spanned cell in each row that spans the most columns and doesn't
+    // overlap with a spanned cell starting at a previous column position.
+    // This means we need to keep an array of rects so we can check. However
+    // it does also mean that some spans simply may not be taken into account
+    // where there are different spans happening on different rows. In these cases,
+    // they will simply be as wide as their constituent columns.
+
+    // (1) Do an initial layout for all cells to get minimum and maximum size, and get
+    // the absolute or percentage width of each column.
+    getInitialLayoutAndWidths(maxUnspecifiedColumnWidths, absoluteColWidths, minColWidths,
+        percentageColWidths, minColWidthsNoWrap, maxColWidths, paddingX,
+        internalTableWidth, scale, availableSpace, context, dc, style);
+  
+    // (2) Allocate initial column widths from absolute values and proportions
+    getInitialColWidths(absoluteColWidths, percentageColWidths, colWidths);
 
     // (3) Process absolute or proportional widths of spanning columns,
     // now that we know what our fixed column widths are going to be.
     // Spanned cells will try to adjust columns so the span will fit.
     // Currently fixed columns widths aren't adjusted.
-    for (j = 0; j < m_rowCount; j++)
+    for (int j = 0; j < m_rowCount; j++)
     {
         int visibleCellCount = 0;
 
-        for (i = 0; i < m_colCount; i++)
+        for (int i = 0; i < m_colCount; i++)
         {
             wxRichTextBox* cell = GetCell(j, i);
             if (cell->IsShown())
@@ -10555,7 +10695,7 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
         int availableWidthForPercentageCellWidths = internalTableWidth - ((visibleCellCount-1) * paddingX);
         wxTextAttrDimensionConverter cellConverter(dc, scale, wxSize(availableWidthForPercentageCellWidths, 0));
 
-        for (i = 0; i < m_colCount; i++)
+        for (int i = 0; i < m_colCount; i++)
         {
             wxRichTextCell* cell = GetCell(j, i);
             if (cell->IsShown())
@@ -10604,58 +10744,7 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
 
     // Complete the spanning width calculation, now we have the maximum spanning size
     // for each spanning cell
-    for (i = 0; i < m_colCount; i++)
-    {
-        int spanningWidth = spanningWidths[i];
-        int spans = spanningWidthsSpanLengths[i];
-        if (spanningWidth > 0)
-        {
-            // Now share the spanning width between columns within that span
-            int spanningWidthLeft = spanningWidth;
-            int stretchColCount = 0;
-            for (k = i; k < (i+spans); k++)
-            {
-                int minColWidth = wxMax(minColWidths[k], minColWidthsNoWrap[k]);
-
-                if (colWidths[k] > 0) // absolute or proportional width has been specified
-                    spanningWidthLeft -= colWidths[k];
-                else if (minColWidth > 0)
-                {
-                    spanningWidthLeft -= minColWidth;
-                    // Allow this to stretch, otherwise we're likely to not allow
-                    // any stretching and the spanned column will end up tiny.
-                    stretchColCount ++;
-                }
-                else
-                    stretchColCount ++;
-            }
-            // Now divide what's left between the remaining columns
-            int colShare = 0;
-            if (stretchColCount > 0)
-                colShare = spanningWidthLeft / stretchColCount;
-            int colShareRemainder = spanningWidthLeft - (colShare * stretchColCount);
-
-            // If fixed-width columns are currently too big, then we'll later
-            // stretch the spanned cell to fit.
-            if (spanningWidthLeft > 0)
-            {
-                for (k = i; k < (i+spans); k++)
-                {
-                    int minColWidth = wxMax(minColWidths[k], minColWidthsNoWrap[k]);
-                    if (colWidths[k] <= 0) // absolute or proportional width has not been specified
-                    {
-                        int newWidth = colShare;
-                        if (minColWidth > 0)
-                            newWidth += minColWidth;
-
-                        if (k == (i+spans-1))
-                            newWidth += colShareRemainder; // ensure all pixels are filled
-                        minColWidths[k] = newWidth;
-                    }
-                }
-            }
-        }
-    }
+    completeSpanningWidth(spanningWidths, spanningWidthsSpanLengths, minColWidthsNoWrap, minColWidths, colWidths);
 
     // (4) Next, share any remaining space out between columns that have not yet been calculated.
     // TODO: take into account min widths of columns within the span
@@ -10664,12 +10753,11 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
     int stretchColCount = 0;
     bool relaxConstraints = false;
 
-    size_t phase;
-    for (phase = 0; phase < 2; phase ++)
+    for (std::size_t phase = 0; phase < 2; phase ++)
     {
         widthLeft = tableWidthMinusPadding;
         stretchColCount = 0;
-        for (i = 0; i < m_colCount; i++)
+        for (int i = 0; i < m_colCount; i++)
         {
             // Subtract min width from width left, then
             // add the colShare to the min width
@@ -10714,7 +10802,7 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
     // up and size columns equally to avoid rendering problems.
     if (colShare < 0)
     {
-        for (i = 0; i < m_colCount; i++)
+        for (int i = 0; i < m_colCount; i++)
         {
             int w = colWidths[i];
             if (w == 0)
@@ -10745,52 +10833,15 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
             shareEqually = true;
         }
 
-        for (i = 0; i < m_colCount; i++)
-        {
-            colWidths[i] = 0;
-        }
+        std::fill(colWidths.begin(), colWidths.end(), 0);
     }
 
     // We have to adjust the columns if either we need to shrink the
     // table to fit the parent/table width, or we explicitly set the
     // table width and need to stretch out the table.
-    for (i = 0; i < m_colCount; i++)
-    {
-        if (colWidths[i] <= 0) // absolute or proportional width has not been specified
-        {
-            if (widthLeft < 0 || stretchToFitTableWidth)
-            {
-                int minColWidth = wxMax(minColWidths[i], minColWidthsNoWrap[i]);
-
-                // Don't use a value for unspecified widths if we have insufficient space,
-                // unless it's a nowrap cell which is likely to be small.
-                // Actually this code is useless because if minColWidthsNoWrap exists,
-                // it'll be the same value as maxUnspecifiedColumnWidths.
-                if (!relaxConstraints)
-                    minColWidth = wxMax(minColWidth, maxUnspecifiedColumnWidths[i]);
-
-                if (minColWidth > 0 && !shareEqually)
-                    colWidths[i] = minColWidth;
-
-                // Don't allocate extra space if not wrapping since we assume a tight fit.
-                // Unless shareEqually forces us to distribute space because we didn't have any
-                // stretchable columns.
-                if ((minColWidthsNoWrap[i] == 0) || shareEqually)
-                    colWidths[i] += colShare;
-
-                if (i == (m_colCount-1))
-                    colWidths[i] += colShareRemainder; // ensure all pixels are filled
-            }
-            else
-            {
-                // We're not stretching or shrinking, so calculate the column width
-                // consistent with how we calculated the remaining table width previously.
-                int minColWidth = wxMax(minColWidths[i], minColWidthsNoWrap[i]);
-                minColWidth = wxMax(minColWidth, maxUnspecifiedColumnWidths[i]);
-                colWidths[i] = minColWidth;
-            }
-        }
-    }
+    adjustColumns(minColWidths, minColWidthsNoWrap, maxUnspecifiedColumnWidths, colWidths,
+        stretchToFitTableWidth, tableWidth, relaxConstraints, widthLeft, shareEqually, colShare, colShareRemainder);
+    
 
 /*
     So, now we've laid out the table to fit into the given space
@@ -10806,17 +10857,16 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
 
     int maxRight = 0;
     int y = availableSpace.y;
-    for (j = 0; j < m_rowCount; j++)
+    for (int j = 0; j < m_rowCount; j++)
     {
         int x = availableSpace.x; // TODO: take into account centering etc.
         int maxCellHeight = 0;
         int maxSpecifiedCellHeight = 0;
 
-        wxArrayInt actualWidths;
-        actualWidths.Add(0, m_colCount);
+        std::vector<int> actualWidths(m_colCount, 0);
 
         wxTextAttrDimensionConverter cellConverter(dc, scale);
-        for (i = 0; i < m_colCount; i++)
+        for (int i = 0; i < m_colCount; i++)
         {
             wxRichTextCell* cell = GetCell(j, i);
             if (cell->IsShown())
@@ -10841,7 +10891,7 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
                         // Calculate the size of this spanning cell from its constituent columns
                         int xx = 0;
                         int spans = wxMin(colSpan, m_colCount - i);
-                        for (k = i; k < (i+spans); k++)
+                        for (int k = i; k < (i+spans); k++)
                         {
                             if (k != i)
                                 xx += paddingX;
@@ -10874,7 +10924,7 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
 
         maxCellHeight = wxMax(maxCellHeight, maxSpecifiedCellHeight);
 
-        for (i = 0; i < m_colCount; i++)
+        for (int i = 0; i < m_colCount; i++)
         {
             wxRichTextCell* cell = GetCell(j, i);
             if (cell->IsShown())
@@ -11016,7 +11066,7 @@ void wxRichTextTable::CalculateRange(long start, long& end)
 }
 
 // Gets the range size.
-bool wxRichTextTable::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, wxArrayInt* partialExtents) const
+bool wxRichTextTable::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position, const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     return wxRichTextBox::GetRangeSize(range, size, descent, dc, context, flags, position, parentSize, partialExtents);
 }
@@ -11746,7 +11796,7 @@ wxRichTextParagraphLayoutBox* wxRichTextAction::GetContainer() const
 }
 
 
-void wxRichTextAction::CalculateRefreshOptimizations(wxArrayInt& optimizationLineCharPositions, wxArrayInt& optimizationLineYPositions,
+void wxRichTextAction::CalculateRefreshOptimizations(std::vector<int>& optimizationLineCharPositions, std::vector<int>& optimizationLineYPositions,
     wxRect& oldFloatRect)
 {
     // Store a list of line start character and y positions so we can figure out which area
@@ -11794,8 +11844,8 @@ void wxRichTextAction::CalculateRefreshOptimizations(wxArrayInt& optimizationLin
                 }
                 else if (range.GetStart() > GetPosition() && pt.y >= firstVisiblePt.y)
                 {
-                    optimizationLineCharPositions.Add(range.GetStart());
-                    optimizationLineYPositions.Add(pt.y);
+                    optimizationLineCharPositions.push_back(range.GetStart());
+                    optimizationLineYPositions.push_back(pt.y);
                 }
 
                 if (node2)
@@ -11844,8 +11894,8 @@ bool wxRichTextAction::Do()
         {
             // Store a list of line start character and y positions so we can figure out which area
             // we need to refresh
-            wxArrayInt optimizationLineCharPositions;
-            wxArrayInt optimizationLineYPositions;
+            std::vector<int> optimizationLineCharPositions;
+            std::vector<int> optimizationLineYPositions;
             wxRect oldFloatRect;
 
 #if wxRICHTEXT_USE_OPTIMIZED_DRAWING
@@ -11893,8 +11943,8 @@ bool wxRichTextAction::Do()
         }
     case wxRICHTEXT_DELETE:
         {
-            wxArrayInt optimizationLineCharPositions;
-            wxArrayInt optimizationLineYPositions;
+            std::vector<int> optimizationLineCharPositions;
+            std::vector<int> optimizationLineYPositions;
             wxRect oldFloatRect;
 
 #if wxRICHTEXT_USE_OPTIMIZED_DRAWING
@@ -12074,8 +12124,8 @@ bool wxRichTextAction::Undo()
     {
     case wxRICHTEXT_INSERT:
         {
-            wxArrayInt optimizationLineCharPositions;
-            wxArrayInt optimizationLineYPositions;
+            std::vector<int> optimizationLineCharPositions;
+            std::vector<int> optimizationLineYPositions;
             wxRect oldFloatRect;
 
 #if wxRICHTEXT_USE_OPTIMIZED_DRAWING
@@ -12122,8 +12172,8 @@ bool wxRichTextAction::Undo()
         }
     case wxRICHTEXT_DELETE:
         {
-            wxArrayInt optimizationLineCharPositions;
-            wxArrayInt optimizationLineYPositions;
+            std::vector<int> optimizationLineCharPositions;
+            std::vector<int> optimizationLineYPositions;
             wxRect oldFloatRect;
 
 #if wxRICHTEXT_USE_OPTIMIZED_DRAWING
@@ -12186,7 +12236,7 @@ bool wxRichTextAction::Undo()
 }
 
 /// Update the control appearance
-void wxRichTextAction::UpdateAppearance(long caretPosition, bool sendUpdateEvent, const wxRect& oldFloatRect, wxArrayInt* optimizationLineCharPositions, wxArrayInt* optimizationLineYPositions, bool isDoCmd)
+void wxRichTextAction::UpdateAppearance(long caretPosition, bool sendUpdateEvent, const wxRect& oldFloatRect, std::vector<int>* optimizationLineCharPositions, std::vector<int>* optimizationLineYPositions, bool isDoCmd)
 {
     wxRichTextParagraphLayoutBox* container = GetContainer();
     wxASSERT(container != nullptr);
@@ -12292,7 +12342,7 @@ void wxRichTextAction::UpdateAppearance(long caretPosition, bool sendUpdateEvent
                         else
                         {
                             // search for this line being at the same position as before
-                            for (i = 0; i < optimizationLineCharPositions->GetCount(); i++)
+                            for (i = 0; i < optimizationLineCharPositions->size(); i++)
                             {
                                 if (((*optimizationLineCharPositions)[i] + positionOffset == range.GetStart()) &&
                                     ((*optimizationLineYPositions)[i] == pt.y))
@@ -12794,7 +12844,7 @@ bool wxRichTextImage::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
 
 /// Get/set the object size for the given range. Returns false if the range
 /// is invalid for this object.
-bool wxRichTextImage::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& WXUNUSED(descent), wxDC& dc, wxRichTextDrawingContext& context, int WXUNUSED(flags), const wxPoint& WXUNUSED(position), const wxSize& parentSize, wxArrayInt* partialExtents) const
+bool wxRichTextImage::GetRangeSize(const wxRichTextRange& range, wxSize& size, int& WXUNUSED(descent), wxDC& dc, wxRichTextDrawingContext& context, int WXUNUSED(flags), const wxPoint& WXUNUSED(position), const wxSize& parentSize, std::vector<int>* partialExtents) const
 {
     if (!range.IsWithin(GetRange()))
         return false;
@@ -12804,7 +12854,7 @@ bool wxRichTextImage::GetRangeSize(const wxRichTextRange& range, wxSize& size, i
     {
         size.x = 0; size.y = 0;
         if (partialExtents)
-            partialExtents->Add(0);
+            partialExtents->push_back(0);
         return true;
     }
 
@@ -12818,7 +12868,7 @@ bool wxRichTextImage::GetRangeSize(const wxRichTextRange& range, wxSize& size, i
     wxSize overallSize = marginRect.GetSize();
 
     if (partialExtents)
-        partialExtents->Add(overallSize.x);
+        partialExtents->push_back(overallSize.x);
 
     size = overallSize;
 
@@ -12877,13 +12927,13 @@ bool wxTextAttrEq(const wxRichTextAttr& attr1, const wxRichTextAttr& attr2)
 }
 
 /// Compare tabs
-bool wxRichTextTabsEq(const wxArrayInt& tabs1, const wxArrayInt& tabs2)
+bool wxRichTextTabsEq(const std::vector<int>& tabs1, const std::vector<int>& tabs2)
 {
-    if (tabs1.GetCount() != tabs2.GetCount())
+    if (tabs1.size() != tabs2.size())
         return false;
 
     size_t i;
-    for (i = 0; i < tabs1.GetCount(); i++)
+    for (i = 0; i < tabs1.size(); i++)
     {
         if (tabs1[i] != tabs2[i])
             return false;
@@ -12923,20 +12973,20 @@ bool wxRichTextSplitParaCharStyles(const wxRichTextAttr& style, wxRichTextAttr& 
 /// Convert a decimal to Roman numerals
 wxString wxRichTextDecimalToRoman(long n)
 {
-    static wxArrayInt decimalNumbers;
+    static std::vector<int> decimalNumbers;
     static wxArrayString romanNumbers;
 
     // Clean up arrays
     if (n == -1)
     {
-        decimalNumbers.Clear();
+        decimalNumbers.clear();
         romanNumbers.Clear();
         return wxEmptyString;
     }
 
-    if (decimalNumbers.GetCount() == 0)
+    if (decimalNumbers.size() == 0)
     {
-        #define wxRichTextAddDecRom(n, r) decimalNumbers.Add(n); romanNumbers.Add(r);
+        #define wxRichTextAddDecRom(n, r) decimalNumbers.push_back(n); romanNumbers.Add(r);
 
         wxRichTextAddDecRom(1000, wxT("M"));
         wxRichTextAddDecRom(900, wxT("CM"));
@@ -13501,9 +13551,10 @@ wxFont wxRichTextFontTableData::FindFont(const wxRichTextAttr& fontSpec, double 
         units = wxT("px");
     else
         units = wxT("pt");
+    // FIXME: Get rid of this, or at least simplify it.
     wxString spec = wxString::Format(wxT("%d-%s-%d-%d-%d-%d-%s-%d"),
-        fontSize, units.c_str(), fontSpec.GetFontStyle(), fontSpec.GetFontWeight(), (int) fontSpec.GetFontUnderlined(), (int) fontSpec.GetFontStrikethrough(),
-        facename.c_str(), (int) fontSpec.GetFontEncoding());
+         fontSize, units.c_str(), fontSpec.GetFontStyle(), fontSpec.GetFontWeight(), (int) fontSpec.GetFontUnderlined(), (int) fontSpec.GetFontStrikethrough(),
+         facename.c_str(), (int) fontSpec.GetFontEncoding());
 
     wxRichTextFontTableHashMap::iterator entry = m_hashMap.find(spec);
     if ( entry == m_hashMap.end() )
@@ -15261,12 +15312,12 @@ void wxRichTextProperties::MergeProperties(const wxRichTextProperties& propertie
 
 wxRichTextObject* wxRichTextObjectAddress::GetObject(wxRichTextParagraphLayoutBox* topLevelContainer) const
 {
-    if (m_address.GetCount() == 0)
+    if (m_address.size() == 0)
         return topLevelContainer;
 
     wxRichTextCompositeObject* p = topLevelContainer;
     size_t i = 0;
-    while (p && i < m_address.GetCount())
+    while (p && i < m_address.size())
     {
         int pos = m_address[i];
         wxASSERT(pos >= 0 && pos < (int) p->GetChildren().GetCount());
@@ -15274,7 +15325,7 @@ wxRichTextObject* wxRichTextObjectAddress::GetObject(wxRichTextParagraphLayoutBo
             return nullptr;
 
         wxRichTextObject* p1 = p->GetChild(pos);
-        if (i == (m_address.GetCount()-1))
+        if (i == (m_address.size()-1))
             return p1;
 
         p = wxDynamicCast(p1, wxRichTextCompositeObject);
@@ -15285,7 +15336,7 @@ wxRichTextObject* wxRichTextObjectAddress::GetObject(wxRichTextParagraphLayoutBo
 
 bool wxRichTextObjectAddress::Create(wxRichTextParagraphLayoutBox* topLevelContainer, wxRichTextObject* obj)
 {
-    m_address.Clear();
+    m_address.clear();
 
     if (topLevelContainer == obj)
         return true;
@@ -15301,7 +15352,7 @@ bool wxRichTextObjectAddress::Create(wxRichTextParagraphLayoutBox* topLevelConta
         if (pos == -1)
             return false;
 
-        m_address.Insert(pos, 0);
+        m_address.insert(m_address.begin(), pos);
 
         if (p == topLevelContainer)
             return true;
@@ -15493,7 +15544,7 @@ int wxRichTextDrawingContext::GetVirtualSubobjectAttributesCount(wxRichTextObjec
     return 0;
 }
 
-int wxRichTextDrawingContext::GetVirtualSubobjectAttributes(wxRichTextObject* obj, wxArrayInt& positions, wxRichTextAttrArray& attributes) const
+int wxRichTextDrawingContext::GetVirtualSubobjectAttributes(wxRichTextObject* obj, std::vector<int>& positions, wxRichTextAttrArray& attributes) const
 {
     if (!GetVirtualAttributesEnabled())
         return 0;
@@ -15503,7 +15554,7 @@ int wxRichTextDrawingContext::GetVirtualSubobjectAttributes(wxRichTextObject* ob
     {
         wxRichTextDrawingHandler *handler = (wxRichTextDrawingHandler*)node->GetData();
         if (handler->GetVirtualSubobjectAttributes(obj, positions, attributes))
-            return positions.GetCount();
+            return positions.size();
 
         node = node->GetNext();
     }

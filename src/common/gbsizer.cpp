@@ -444,8 +444,8 @@ wxSize wxGridBagSizer::CalcMin()
     if (m_children.GetCount() == 0)
         return m_emptyCellSize;
 
-    m_rowHeights.Empty();
-    m_colWidths.Empty();
+    m_rowHeights.clear();
+    m_colWidths.clear();
 
     wxSizerItemList::compatibility_iterator node = m_children.GetFirst();
     while (node)
@@ -459,10 +459,10 @@ wxSize wxGridBagSizer::CalcMin()
             item->GetEndPos(endrow, endcol);
 
             // fill heights and widths up to this item if needed
-            while ( (int)m_rowHeights.GetCount() <= endrow )
-                m_rowHeights.Add(m_emptyCellSize.y);
-            while ( (int)m_colWidths.GetCount() <= endcol )
-                m_colWidths.Add(m_emptyCellSize.x);
+            while ( (int)m_rowHeights.size() <= endrow )
+                m_rowHeights.push_back(m_emptyCellSize.y);
+            while ( (int)m_colWidths.size() <= endcol )
+                m_colWidths.push_back(m_emptyCellSize.x);
 
             // See if this item increases the size of its row(s) or col(s)
             wxSize size(item->CalcMin());
@@ -479,12 +479,12 @@ wxSize wxGridBagSizer::CalcMin()
 
     // Now traverse the heights and widths arrays calcing the totals, including gaps
     int width = 0;
-    m_cols = m_colWidths.GetCount();
+    m_cols = m_colWidths.size();
     for (idx=0; idx < m_cols; idx++)
         width += m_colWidths[idx] + ( idx == m_cols-1 ? 0 : m_hgap );
 
     int height = 0;
-    m_rows = m_rowHeights.GetCount();
+    m_rows = m_rowHeights.size();
     for (idx=0; idx < m_rows; idx++)
         height += m_rowHeights[idx] + ( idx == m_rows-1 ? 0 : m_vgap );
 
@@ -505,15 +505,15 @@ void wxGridBagSizer::RepositionChildren(const wxSize& minSize)
     wxPoint pt( GetPosition() );
     wxSize  sz( GetSize() );
 
-    m_rows = m_rowHeights.GetCount();
-    m_cols = m_colWidths.GetCount();
+    m_rows = m_rowHeights.size();
+    m_cols = m_colWidths.size();
     int idx, width, height;
 
     AdjustForGrowables(sz, minSize);
 
     // Find the start positions on the window of the rows and columns
-    wxArrayInt rowpos;
-    rowpos.Add(0, m_rows);
+    std::vector<int> rowpos(m_rows, 0);
+
     int y = pt.y;
     for (idx=0; idx < m_rows; idx++)
     {
@@ -522,8 +522,8 @@ void wxGridBagSizer::RepositionChildren(const wxSize& minSize)
         y += height;
     }
 
-    wxArrayInt colpos;
-    colpos.Add(0, m_cols);
+    std::vector<int> colpos(m_cols, 0);
+
     int x = pt.x;
     for (idx=0; idx < m_cols; idx++)
     {
@@ -573,11 +573,11 @@ void wxGridBagSizer::AdjustForOverflow()
 {
     int row, col;
 
-    for (row=0; row<(int)m_rowHeights.GetCount(); row++)
+    for (row=0; row<(int)m_rowHeights.size(); row++)
     {
         int rowExtra=INT_MAX;
         int rowHeight = m_rowHeights[row];
-        for (col=0; col<(int)m_colWidths.GetCount(); col++)
+        for (col=0; col<(int)m_colWidths.size(); col++)
         {
             wxGBPosition pos(row,col);
             wxGBSizerItem* item = FindItemAtPosition(pos);
@@ -616,11 +616,11 @@ void wxGridBagSizer::AdjustForOverflow()
     }
 
     // Now do the same thing for columns
-    for (col=0; col<(int)m_colWidths.GetCount(); col++)
+    for (col=0; col<(int)m_colWidths.size(); col++)
     {
         int colExtra=INT_MAX;
         int colWidth = m_colWidths[col];
-        for (row=0; row<(int)m_rowHeights.GetCount(); row++)
+        for (row=0; row<(int)m_rowHeights.size(); row++)
         {
             wxGBPosition pos(row,col);
             wxGBSizerItem* item = FindItemAtPosition(pos);

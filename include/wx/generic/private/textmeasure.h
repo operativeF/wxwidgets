@@ -30,7 +30,7 @@ protected:
                                wxCoord *externalLeading = NULL) override;
 
     virtual bool DoGetPartialTextExtents(const wxString& text,
-                                         wxArrayInt& widths,
+                                         std::vector<int>& widths,
                                          double scaleX) override;
 
     wxTextMeasure(const wxTextMeasure&) = delete;

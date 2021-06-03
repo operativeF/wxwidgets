@@ -44,7 +44,7 @@ bool wxRearrangeList::Create(wxWindow *parent,
                              wxWindowID id,
                              const wxPoint& pos,
                              const wxSize& size,
-                             const wxArrayInt& order,
+                             const std::vector<int>& order,
                              const wxArrayString& items,
                              long style,
                              const wxValidator& validator,
@@ -194,7 +194,7 @@ int wxRearrangeList::DoInsertItems(const wxArrayStringsAdapter& items, unsigned 
     {
         // Item is not checked initially.
         const int idx = ~m_order.size();
-        m_order.Insert(idx, pos+i);
+        m_order.insert(std::begin(m_order) + pos + i, idx);
     }
     return ret;
 }
@@ -205,7 +205,7 @@ void wxRearrangeList::DoDeleteOneItem(unsigned int n)
     int idxDeleted = m_order[n];
     if ( idxDeleted < 0 )
         idxDeleted = ~idxDeleted;
-    m_order.RemoveAt(n);
+    m_order.erase(std::begin(m_order) + n);
     // Remaining items have to be reindexed.
     for( size_t i = 0; i < m_order.size(); i++ )
     {
@@ -227,7 +227,7 @@ void wxRearrangeList::DoDeleteOneItem(unsigned int n)
 void wxRearrangeList::DoClear()
 {
     wxCheckListBox::DoClear();
-    m_order.Clear();
+    m_order.clear();
 }
 
 // ============================================================================
@@ -249,7 +249,7 @@ wxRearrangeCtrl::Create(wxWindow *parent,
                         wxWindowID id,
                         const wxPoint& pos,
                         const wxSize& size,
-                        const wxArrayInt& order,
+                        const std::vector<int>& order,
                         const wxArrayString& items,
                         long style,
                         const wxValidator& validator,
@@ -318,7 +318,7 @@ enum wxRearrangeDialogSizerPositions
 bool wxRearrangeDialog::Create(wxWindow *parent,
                                const wxString& message,
                                const wxString& title,
-                               const wxArrayInt& order,
+                               const std::vector<int>& order,
                                const wxArrayString& items,
                                const wxPoint& pos,
                                const wxString& name)
@@ -380,9 +380,9 @@ wxRearrangeList *wxRearrangeDialog::GetList() const
     return m_ctrl->GetList();
 }
 
-wxArrayInt wxRearrangeDialog::GetOrder() const
+std::vector<int> wxRearrangeDialog::GetOrder() const
 {
-    wxCHECK_MSG( m_ctrl, wxArrayInt(), "the dialog must be created first" );
+    wxCHECK_MSG( m_ctrl, std::vector<int>(), "the dialog must be created first" );
 
     return m_ctrl->GetList()->GetCurrentOrder();
 }

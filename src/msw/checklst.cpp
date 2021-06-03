@@ -327,7 +327,7 @@ void wxCheckListBox::OnKeyDown(wxKeyEvent& event)
 
     if ( oper != NONE )
     {
-        wxArrayInt selections;
+        std::vector<int> selections;
         int count = 0;
         if ( HasMultipleSelection() )
         {
@@ -339,7 +339,7 @@ void wxCheckListBox::OnKeyDown(wxKeyEvent& event)
             if (sel != -1)
             {
                 count = 1;
-                selections.Add(sel);
+                selections.push_back(sel);
             }
         }
 

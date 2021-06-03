@@ -47,7 +47,7 @@ protected:
                                wxCoord *externalLeading = nullptr) override;
 
     bool DoGetPartialTextExtents(const wxString& text,
-                                         wxArrayInt& widths,
+                                         std::vector<int>& widths,
                                          double scaleX) override;
 
 

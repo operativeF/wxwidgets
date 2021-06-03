@@ -820,13 +820,13 @@ wxTextAttr wxTextAttr::Combine(const wxTextAttr& attr,
 }
 
 /// Compare tabs
-bool wxTextAttr::TabsEq(const wxArrayInt& tabs1, const wxArrayInt& tabs2)
+bool wxTextAttr::TabsEq(const std::vector<int>& tabs1, const std::vector<int>& tabs2)
 {
-    if (tabs1.GetCount() != tabs2.GetCount())
+    if (tabs1.size() != tabs2.size())
         return false;
 
     size_t i;
-    for (i = 0; i < tabs1.GetCount(); i++)
+    for (i = 0; i < tabs1.size(); i++)
     {
         if (tabs1[i] != tabs2[i])
             return false;

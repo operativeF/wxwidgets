@@ -21,7 +21,6 @@
 
 #include "wx/control.h"         // the base class
 #include "wx/textentry.h"       // single-line text entry interface
-#include "wx/dynarray.h"        // wxArrayInt
 #include "wx/gdicmn.h"          // wxPoint
 
 #include "wx/ioswrap.h"
@@ -309,7 +308,7 @@ public:
     void SetTextColour(const wxColour& colText) { m_colText = colText; m_flags |= wxTEXT_ATTR_TEXT_COLOUR; }
     void SetBackgroundColour(const wxColour& colBack) { m_colBack = colBack; m_flags |= wxTEXT_ATTR_BACKGROUND_COLOUR; }
     void SetAlignment(wxTextAttrAlignment alignment) { m_textAlignment = alignment; m_flags |= wxTEXT_ATTR_ALIGNMENT; }
-    void SetTabs(const wxArrayInt& tabs) { m_tabs = tabs; m_flags |= wxTEXT_ATTR_TABS; }
+    void SetTabs(const std::vector<int>& tabs) { m_tabs = tabs; m_flags |= wxTEXT_ATTR_TABS; }
     void SetLeftIndent(int indent, int subIndent = 0) { m_leftIndent = indent; m_leftSubIndent = subIndent; m_flags |= wxTEXT_ATTR_LEFT_INDENT; }
     void SetRightIndent(int indent) { m_rightIndent = indent; m_flags |= wxTEXT_ATTR_RIGHT_INDENT; }
 
@@ -355,7 +354,7 @@ public:
     const wxColour& GetTextColour() const { return m_colText; }
     const wxColour& GetBackgroundColour() const { return m_colBack; }
     wxTextAttrAlignment GetAlignment() const { return m_textAlignment; }
-    const wxArrayInt& GetTabs() const { return m_tabs; }
+    const std::vector<int>& GetTabs() const { return m_tabs; }
     long GetLeftIndent() const { return m_leftIndent; }
     long GetLeftSubIndent() const { return m_leftSubIndent; }
     long GetRightIndent() const { return m_rightIndent; }
@@ -468,7 +467,7 @@ public:
                               const wxTextCtrlBase *text);
 
     // Compare tabs
-    static bool TabsEq(const wxArrayInt& tabs1, const wxArrayInt& tabs2);
+    static bool TabsEq(const std::vector<int>& tabs1, const std::vector<int>& tabs2);
 
     // Remove attributes
     static bool RemoveStyle(wxTextAttr& destStyle, const wxTextAttr& style);
@@ -486,7 +485,7 @@ private:
     long                m_flags;
 
     // Paragraph styles
-    wxArrayInt          m_tabs; // array of int: tab stops in 1/10 mm
+    std::vector<int>          m_tabs; // array of int: tab stops in 1/10 mm
     int                 m_leftIndent; // left indent in 1/10 mm
     int                 m_leftSubIndent; // left indent for all but the first
                                          // line in a paragraph relative to the

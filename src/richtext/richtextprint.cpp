@@ -47,9 +47,9 @@ void wxRichTextPrintout::OnPreparePrinting()
 
     m_numPages = 1;
 
-    m_pageBreaksStart.Clear();
-    m_pageBreaksEnd.Clear();
-    m_pageYOffsets.Clear();
+    m_pageBreaksStart.clear();
+    m_pageBreaksEnd.clear();
+    m_pageYOffsets.clear();
 
     int lastStartPos = 0;
 
@@ -106,9 +106,9 @@ void wxRichTextPrintout::OnPreparePrinting()
                             int increaseOffsetBy = lineY - newY;
                             yOffset += increaseOffsetBy;
 
-                            m_pageBreaksStart.Add(lastStartPos);
-                            m_pageBreaksEnd.Add(lastLine->GetAbsoluteRange().GetEnd());
-                            m_pageYOffsets.Add(yOffset);
+                            m_pageBreaksStart.push_back(lastStartPos);
+                            m_pageBreaksEnd.push_back(lastLine->GetAbsoluteRange().GetEnd());
+                            m_pageYOffsets.push_back(yOffset);
 
                             lastStartPos = line->GetAbsoluteRange().GetStart();
                             m_numPages ++;
@@ -123,9 +123,9 @@ void wxRichTextPrintout::OnPreparePrinting()
                             yOffset += rect.GetHeight();
                             contentLeft -= rect.GetHeight();
 
-                            m_pageBreaksStart.Add(lastStartPos);
-                            m_pageBreaksEnd.Add(lastLine->GetAbsoluteRange().GetEnd());
-                            m_pageYOffsets.Add(yOffset);
+                            m_pageBreaksStart.push_back(lastStartPos);
+                            m_pageBreaksEnd.push_back(lastLine->GetAbsoluteRange().GetEnd());
+                            m_pageYOffsets.push_back(yOffset);
 
                             m_numPages ++;
                         }
@@ -141,9 +141,9 @@ void wxRichTextPrintout::OnPreparePrinting()
         }
 
         // Closing page break
-        m_pageBreaksStart.Add(lastStartPos);
-        m_pageBreaksEnd.Add(GetRichTextBuffer()->GetOwnRange().GetEnd());
-        m_pageYOffsets.Add(yOffset);
+        m_pageBreaksStart.push_back(lastStartPos);
+        m_pageBreaksEnd.push_back(GetRichTextBuffer()->GetOwnRange().GetEnd());
+        m_pageYOffsets.push_back(yOffset);
     }
 }
 

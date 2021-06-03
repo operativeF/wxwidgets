@@ -127,7 +127,7 @@ void wxTextWrapper::Wrap(wxWindow *win, const wxString& text, int widthMax)
             if ( newLine )
                 OnNewLine();
 
-            wxArrayInt widths;
+            std::vector<int> widths;
             dc.GetPartialTextExtents(line, widths);
 
             const size_t posEnd = std::lower_bound(widths.begin(),

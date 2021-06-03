@@ -329,7 +329,7 @@ bool wxStatusBarGeneric::GetFieldRect(int n, wxRect& rect) const
         const_cast<wxStatusBarGeneric*>(this)->DoUpdateFieldWidths();
     }
 
-    if (m_widthsAbs.IsEmpty())
+    if (m_widthsAbs.empty())
         return false;
 
     rect.x = 0;
@@ -346,7 +346,7 @@ bool wxStatusBarGeneric::GetFieldRect(int n, wxRect& rect) const
 
 int wxStatusBarGeneric::GetFieldFromPoint(const wxPoint& pt) const
 {
-    if (m_widthsAbs.IsEmpty())
+    if (m_widthsAbs.empty())
         return wxNOT_FOUND;
 
     // NOTE: we explicitly don't take in count the borders since they are only

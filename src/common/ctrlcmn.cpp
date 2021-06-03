@@ -319,7 +319,7 @@ struct EllipsizeCalculator
                     if ( (it + 1) != s.end() )
                     {
                         int w = m_charOffsetsPx[n];
-                        m_charOffsetsPx.Insert(w, n);
+                        m_charOffsetsPx.insert(std::begin(m_charOffsetsPx) + n, w);
                         lastWasMnemonic = true;
                     }
                     else // Last character is an ampersand.
@@ -345,7 +345,7 @@ struct EllipsizeCalculator
 
         // Either way, we should end up with the same number of offsets as
         // characters in the original string.
-        wxASSERT( m_charOffsetsPx.GetCount() == expectedOffsetsCount );
+        wxASSERT( m_charOffsetsPx.size() == expectedOffsetsCount );
     }
 
     bool IsOk() const { return m_isOk; }
@@ -354,7 +354,7 @@ struct EllipsizeCalculator
     {
         // NOTE: charOffsetsPx[n] is the width in pixels of the first n characters (with the last one INCLUDED)
         //       thus charOffsetsPx[len-1] is the total width of the string
-        return m_charOffsetsPx.Last() <= m_maxFinalWidthPx;
+        return m_charOffsetsPx.back() <= m_maxFinalWidthPx;
     }
 
     void Init(size_t initialCharToRemove, size_t nCharsToRemove)
@@ -421,7 +421,7 @@ struct EllipsizeCalculator
         // length of text after the removed part:
 
         if ( GetLastRemoved() < m_str.length() )
-           estimatedWidth += m_charOffsetsPx.Last() - m_charOffsetsPx[GetLastRemoved()];
+           estimatedWidth += m_charOffsetsPx.back() - m_charOffsetsPx[GetLastRemoved()];
 
         if ( estimatedWidth > m_maxFinalWidthPx )
             return false;
@@ -450,7 +450,7 @@ struct EllipsizeCalculator
     const wxDC& m_dc;
     int m_maxFinalWidthPx;
     int m_replacementWidthPx;
-    wxArrayInt m_charOffsetsPx;
+    std::vector<int> m_charOffsetsPx;
 
     bool m_isOk;
 };

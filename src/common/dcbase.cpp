@@ -559,7 +559,7 @@ void wxDCImpl::SetAxisOrientation( bool xLeftRight, bool yBottomUp )
     ComputeScaleAndOrigin();
 }
 
-bool wxDCImpl::DoGetPartialTextExtents(const wxString& text, wxArrayInt& widths) const
+bool wxDCImpl::DoGetPartialTextExtents(const wxString& text, std::vector<int>& widths) const
 {
     wxTextMeasure tm(GetOwner(), &m_font);
     return tm.GetPartialTextExtents(text, widths, m_scaleX);

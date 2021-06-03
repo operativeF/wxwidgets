@@ -118,8 +118,8 @@ public:
 
     void ScrollHorz(int dx);
 
-    void SetColumnsOrder(const wxArrayInt& order);
-    wxArrayInt GetColumnsOrder() const;
+    void SetColumnsOrder(const std::vector<int>& order);
+    std::vector<int> GetColumnsOrder() const;
 
 protected:
     // override wxWindow methods which must be implemented by a new control
@@ -184,14 +184,14 @@ private:
     // fact we need this array precisely because it will be different from it
     // in DoUpdate() when the column hidden flag gets toggled and we need it to
     // handle this transition correctly
-    wxArrayInt m_isHidden;
+    std::vector<int> m_isHidden;
 
     // the order of our columns: this array contains the index of the column
     // shown at the position n as the n-th element
     //
     // this is necessary only to handle the hidden columns: the native control
     // doesn't know about them and so we can't use Header_GetOrderArray()
-    wxArrayInt m_colIndices;
+    std::vector<int> m_colIndices;
 
     // the image list: initially NULL, created on demand
     wxImageList *m_imageList;
@@ -507,10 +507,11 @@ void wxMSWHeaderCtrl::DoInsertItem(const wxHeaderColumn& col, unsigned int idx)
     }
 
     hdi.mask |= HDI_ORDER;
-    hdi.iOrder = MSWToNativeOrder(m_colIndices.Index(idx));
+    // FIXME: This needs to be checked for accuracy.
+    hdi.iOrder = MSWToNativeOrder(std::distance(std::begin(m_colIndices), std::find(m_colIndices.begin(), m_colIndices.end(), idx)));
 
     if ( ::SendMessage(GetHwnd(), HDM_INSERTITEM,
-                       MSWToNativeIdx(idx), (LPARAM)&hdi) == -1 )
+                       MSWToNativeIdx(idx), (LPARAM)&hdi) == -1)
     {
         wxLogLastError(wxT("Header_InsertItem()"));
     }
@@ -533,7 +534,7 @@ void wxMSWHeaderCtrl::DoInsertItem(const wxHeaderColumn& col, unsigned int idx)
         .TurnOnOrOff(!hasResizableColumns, HDS_NOSIZING);
 }
 
-void wxMSWHeaderCtrl::SetColumnsOrder(const wxArrayInt& order)
+void wxMSWHeaderCtrl::SetColumnsOrder(const std::vector<int>& order)
 {
     // This can happen if we don't have any columns at all and "order" is empty
     // anyhow in this case, so we don't have anything to do (note that we
@@ -542,7 +543,7 @@ void wxMSWHeaderCtrl::SetColumnsOrder(const wxArrayInt& order)
     if ( !m_numColumns )
         return;
 
-    wxArrayInt orderShown;
+    std::vector<int> orderShown;
     orderShown.reserve(m_numColumns);
 
     for ( unsigned n = 0; n < m_numColumns; n++ )
@@ -560,7 +561,7 @@ void wxMSWHeaderCtrl::SetColumnsOrder(const wxArrayInt& order)
     m_colIndices = order;
 }
 
-wxArrayInt wxMSWHeaderCtrl::GetColumnsOrder() const
+std::vector<int> wxMSWHeaderCtrl::GetColumnsOrder() const
 {
     // we don't use Header_GetOrderArray() here because it doesn't return
     // information about the hidden columns, instead we just save the columns
@@ -1103,12 +1104,12 @@ void wxHeaderCtrl::DoUpdate(unsigned int idx)
     m_nativeControl->UpdateHeader(idx);
 }
 
-void wxHeaderCtrl::DoSetColumnsOrder(const wxArrayInt& order)
+void wxHeaderCtrl::DoSetColumnsOrder(const std::vector<int>& order)
 {
     m_nativeControl->SetColumnsOrder(order);
 }
 
-wxArrayInt wxHeaderCtrl::DoGetColumnsOrder() const
+std::vector<int> wxHeaderCtrl::DoGetColumnsOrder() const
 {
     return m_nativeControl->GetColumnsOrder();
 }

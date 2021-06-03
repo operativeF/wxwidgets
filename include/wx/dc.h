@@ -337,7 +337,7 @@ public:
                                         wxCoord *height,
                                         wxCoord *heightLine = nullptr,
                                         const wxFont *font = nullptr) const;
-    virtual bool DoGetPartialTextExtents(const wxString& text, wxArrayInt& widths) const;
+    virtual bool DoGetPartialTextExtents(const wxString& text, std::vector<int>& widths) const;
 
     // clearing
 
@@ -845,7 +845,7 @@ public:
         return wxSize(w, h);
     }
 
-    bool GetPartialTextExtents(const wxString& text, wxArrayInt& widths) const
+    bool GetPartialTextExtents(const wxString& text, std::vector<int>& widths) const
         { return m_pimpl->DoGetPartialTextExtents(text, widths); }
 
     // clearing

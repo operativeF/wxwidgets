@@ -36,12 +36,12 @@ private:
 
     // the item help text
     wxArrayString m_helptexts;
-    wxArrayInt    m_helptextSpecified;
+    std::vector<int>    m_helptextSpecified;
 
     // if the corresponding array element is 1, the radiobox item is
     // disabled/hidden
-    wxArrayInt m_isEnabled,
-               m_isShown;
+    std::vector<int> m_isEnabled;
+    std::vector<int> m_isShown;
 };
 
 #endif // wxUSE_XRC && wxUSE_RADIOBOX

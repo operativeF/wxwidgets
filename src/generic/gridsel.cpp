@@ -782,11 +782,11 @@ wxGridCellCoordsArray wxGridSelection::GetBlockSelectionBottomRight() const
 // efficiently determine that a line is selected because all of its cells
 // were selected one by one. But this should work well enough in practice and
 // is, anyhow, the best we can do.
-wxArrayInt wxGridSelection::GetRowSelection() const
+std::vector<int> wxGridSelection::GetRowSelection() const
 {
     if ( m_selectionMode == wxGrid::wxGridSelectColumns ||
             m_selectionMode == wxGrid::wxGridSelectNone )
-        return wxArrayInt();
+        return std::vector<int>();
 
     wxIntSortedArray uniqueRows;
     const size_t count = m_selection.size();
@@ -804,7 +804,7 @@ wxArrayInt wxGridSelection::GetRowSelection() const
         }
     }
 
-    wxArrayInt result;
+    std::vector<int> result;
     result.reserve(uniqueRows.size());
     for( size_t i = 0; i < uniqueRows.size(); ++i )
     {
@@ -814,11 +814,11 @@ wxArrayInt wxGridSelection::GetRowSelection() const
 }
 
 // See comments for GetRowSelection().
-wxArrayInt wxGridSelection::GetColSelection() const
+std::vector<int> wxGridSelection::GetColSelection() const
 {
     if ( m_selectionMode == wxGrid::wxGridSelectRows ||
             m_selectionMode == wxGrid::wxGridSelectNone )
-        return wxArrayInt();
+        return std::vector<int>();
 
     wxIntSortedArray uniqueCols;
     const size_t count = m_selection.size();
@@ -836,7 +836,7 @@ wxArrayInt wxGridSelection::GetColSelection() const
         }
     }
 
-    wxArrayInt result;
+    std::vector<int> result;
     result.reserve(uniqueCols.size());
     for( size_t i = 0; i < uniqueCols.size(); ++i )
     {

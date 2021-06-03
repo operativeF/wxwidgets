@@ -1051,10 +1051,11 @@ wxGridCellAttr *wxGridRowOrColAttrData::GetAttr(int rowOrCol) const
 {
     wxGridCellAttr *attr = nullptr;
 
-    int n = m_rowsOrCols.Index(rowOrCol);
-    if ( n != wxNOT_FOUND )
+    // FIXME: Improve this.
+    auto n = std::find(m_rowsOrCols.cbegin(), m_rowsOrCols.cend(), rowOrCol);
+    if ( n != std::cend(m_rowsOrCols) )
     {
-        attr = m_attrs[(size_t)n];
+        attr = m_attrs[(size_t)std::distance(std::begin(m_rowsOrCols), n)];
         attr->IncRef();
     }
 
@@ -1063,20 +1064,21 @@ wxGridCellAttr *wxGridRowOrColAttrData::GetAttr(int rowOrCol) const
 
 void wxGridRowOrColAttrData::SetAttr(wxGridCellAttr *attr, int rowOrCol)
 {
-    int i = m_rowsOrCols.Index(rowOrCol);
-    if ( i == wxNOT_FOUND )
+    const auto i = std::find(m_rowsOrCols.cbegin(), m_rowsOrCols.cend(), rowOrCol);
+
+    if ( i == m_rowsOrCols.cend() )
     {
         if ( attr )
         {
             // store the new attribute, taking its ownership
-            m_rowsOrCols.Add(rowOrCol);
+            m_rowsOrCols.push_back(rowOrCol);
             m_attrs.Add(attr);
         }
         // nothing to remove
     }
     else // we have an attribute for this row or column
     {
-        size_t n = (size_t)i;
+        size_t n = (size_t)std::distance(std::cbegin(m_rowsOrCols), i);
 
         // notice that this code works correctly even when the old attribute is
         // the same as the new one: as we own of it, we must call DecRef() on
@@ -1092,15 +1094,15 @@ void wxGridRowOrColAttrData::SetAttr(wxGridCellAttr *attr, int rowOrCol)
         }
         else // remove the attribute
         {
-            m_rowsOrCols.RemoveAt(n);
-            m_attrs.RemoveAt(n);
+            m_rowsOrCols.erase(std::begin(m_rowsOrCols) + n);
+            m_attrs.erase(std::begin(m_attrs) + n);
         }
     }
 }
 
 void wxGridRowOrColAttrData::UpdateAttrRowsOrCols( size_t pos, int numRowsOrCols )
 {
-    size_t count = m_attrs.GetCount();
+    size_t count = m_attrs.size();
     for ( size_t n = 0; n < count; n++ )
     {
         int & rowOrCol = m_rowsOrCols[n];
@@ -1118,7 +1120,7 @@ void wxGridRowOrColAttrData::UpdateAttrRowsOrCols( size_t pos, int numRowsOrCols
                     rowOrCol += numRowsOrCols;
                 else
                 {
-                    m_rowsOrCols.RemoveAt(n);
+                    m_rowsOrCols.erase(std::begin(m_rowsOrCols) + n);
                     m_attrs[n]->DecRef();
                     m_attrs.RemoveAt(n);
                     n--;
@@ -2159,7 +2161,7 @@ void wxGridRowLabelWindow::OnPaint( wxPaintEvent& WXUNUSED(event) )
     wxPoint pt = dc.GetDeviceOrigin();
     dc.SetDeviceOrigin( pt.x, pt.y-y );
 
-    wxArrayInt rows = m_owner->CalcRowLabelsExposed( GetUpdateRegion(), gridWindow);
+    std::vector<int> rows = m_owner->CalcRowLabelsExposed( GetUpdateRegion(), gridWindow);
     m_owner->DrawRowLabels( dc, rows );
 
     if ( IsFrozen() )
@@ -2208,7 +2210,7 @@ void wxGridColLabelWindow::OnPaint( wxPaintEvent& WXUNUSED(event) )
     wxPoint pt = dc.GetDeviceOrigin();
     dc.SetDeviceOrigin( pt.x-x, pt.y );
 
-    wxArrayInt cols = m_owner->CalcColLabelsExposed( GetUpdateRegion(), gridWindow );
+    std::vector<int> cols = m_owner->CalcColLabelsExposed( GetUpdateRegion(), gridWindow );
     m_owner->DrawColLabels( dc, cols );
 
     if ( IsFrozen() )
@@ -2336,8 +2338,8 @@ void wxGrid::Render( wxDC& dc,
     wxPoint pointOffSet;
     wxSize sizeGrid;
     wxGridCellCoordsArray renderCells;
-    wxArrayInt arrayCols;
-    wxArrayInt arrayRows;
+    std::vector<int> arrayCols;
+    std::vector<int> arrayRows;
 
     GetRenderSizes( leftTop, rightBottom,
                     pointOffSet, sizeGrid,
@@ -2474,7 +2476,7 @@ void wxGrid::GetRenderSizes( const wxGridCellCoords& topLeft,
                              const wxGridCellCoords& bottomRight,
                              wxPoint& pointOffSet, wxSize& sizeGrid,
                              wxGridCellCoordsArray& renderCells,
-                             wxArrayInt& arrayCols, wxArrayInt& arrayRows ) const
+                             std::vector<int>& arrayCols, std::vector<int>& arrayRows ) const
 {
     pointOffSet.x = 0;
     pointOffSet.y = 0;
@@ -2495,9 +2497,9 @@ void wxGrid::GetRenderSizes( const wxGridCellCoords& topLeft,
             for ( row = topLeft.GetRow(); row <= bottomRight.GetRow(); row++ )
             {
                 renderCells.Add( wxGridCellCoords( row, col ));
-                arrayRows.Add( row ); // column labels rendered in DrawColLabels
+                arrayRows.push_back( row ); // column labels rendered in DrawColLabels
             }
-            arrayCols.Add( col ); // row labels rendered in DrawRowLabels
+            arrayCols.push_back( col ); // row labels rendered in DrawRowLabels
             sizeGrid.x += sizeinfo.GetSize( col );
         }
     }
@@ -2913,10 +2915,10 @@ wxGrid::SetTable(wxGridTableBase *table,
         m_numFrozenCols = 0;
 
         // kill row and column size arrays
-        m_colWidths.Empty();
-        m_colRights.Empty();
-        m_rowHeights.Empty();
-        m_rowBottoms.Empty();
+        m_colWidths.clear();
+        m_colRights.clear();
+        m_rowHeights.clear();
+        m_rowBottoms.clear();
     }
 
     if (table)
@@ -3079,42 +3081,42 @@ void wxGrid::Init()
 
 void wxGrid::InitRowHeights()
 {
-    m_rowHeights.Empty();
-    m_rowBottoms.Empty();
+    m_rowHeights.clear();
+    m_rowBottoms.clear();
 
-    m_rowHeights.Alloc( m_numRows );
-    m_rowBottoms.Alloc( m_numRows );
+    m_rowHeights.reserve( m_numRows );
+    m_rowBottoms.reserve( m_numRows );
 
-    m_rowHeights.Add( m_defaultRowHeight, m_numRows );
+    m_rowHeights.insert(std::end(m_rowHeights), m_numRows, m_defaultRowHeight );
 
     int rowBottom = 0;
     for ( int i = 0; i < m_numRows; i++ )
     {
         rowBottom += m_defaultRowHeight;
-        m_rowBottoms.Add( rowBottom );
+        m_rowBottoms.push_back( rowBottom );
     }
 }
 
 void wxGrid::InitColWidths()
 {
-    m_colWidths.Empty();
-    m_colRights.Empty();
+    m_colWidths.clear();
+    m_colRights.clear();
 
-    m_colWidths.Alloc( m_numCols );
-    m_colRights.Alloc( m_numCols );
+    m_colWidths.reserve( m_numCols );
+    m_colRights.reserve( m_numCols );
 
-    m_colWidths.Add( m_defaultColWidth, m_numCols );
+    m_colWidths.insert(std::end(m_colWidths), m_numCols, m_defaultColWidth );
 
     for ( int i = 0; i < m_numCols; i++ )
     {
         int colRight = ( GetColPos( i ) + 1 ) * m_defaultColWidth;
-        m_colRights.Add( colRight );
+        m_colRights.push_back( colRight );
     }
 }
 
 int wxGrid::GetColWidth(int col) const
 {
-    if ( m_colWidths.IsEmpty() )
+    if ( m_colWidths.empty() )
         return m_defaultColWidth;
 
     // a negative width indicates a hidden column
@@ -3123,7 +3125,7 @@ int wxGrid::GetColWidth(int col) const
 
 int wxGrid::GetColLeft(int col) const
 {
-    if ( m_colRights.IsEmpty() )
+    if ( m_colRights.empty() )
         return GetColPos( col ) * m_defaultColWidth;
 
     return m_colRights[col] - GetColWidth(col);
@@ -3131,14 +3133,14 @@ int wxGrid::GetColLeft(int col) const
 
 int wxGrid::GetColRight(int col) const
 {
-    return m_colRights.IsEmpty() ? (GetColPos( col ) + 1) * m_defaultColWidth
+    return m_colRights.empty() ? (GetColPos( col ) + 1) * m_defaultColWidth
                                  : m_colRights[col];
 }
 
 int wxGrid::GetRowHeight(int row) const
 {
     // no custom heights / hidden rows
-    if ( m_rowHeights.IsEmpty() )
+    if ( m_rowHeights.empty() )
         return m_defaultRowHeight;
 
     // a negative height indicates a hidden row
@@ -3147,7 +3149,7 @@ int wxGrid::GetRowHeight(int row) const
 
 int wxGrid::GetRowTop(int row) const
 {
-    if ( m_rowBottoms.IsEmpty() )
+    if ( m_rowBottoms.empty() )
         return row * m_defaultRowHeight;
 
     return m_rowBottoms[row] - GetRowHeight(row);
@@ -3155,7 +3157,7 @@ int wxGrid::GetRowTop(int row) const
 
 int wxGrid::GetRowBottom(int row) const
 {
-    return m_rowBottoms.IsEmpty() ? (row + 1) * m_defaultRowHeight
+    return m_rowBottoms.empty() ? (row + 1) * m_defaultRowHeight
                                   : m_rowBottoms[row];
 }
 
@@ -3300,10 +3302,10 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
 
             m_numRows += numRows;
 
-            if ( !m_rowHeights.IsEmpty() )
+            if ( !m_rowHeights.empty() )
             {
-                m_rowHeights.Insert( m_defaultRowHeight, pos, numRows );
-                m_rowBottoms.Insert( 0, pos, numRows );
+                m_rowHeights.insert(std::begin(m_rowHeights) + pos, numRows, m_defaultRowHeight);
+                m_rowBottoms.insert(std::begin(m_rowBottoms) + pos, numRows, 0 );
 
                 int bottom = 0;
                 if ( pos > 0 )
@@ -3338,10 +3340,10 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
             int oldNumRows = m_numRows;
             m_numRows += numRows;
 
-            if ( !m_rowHeights.IsEmpty() )
+            if ( !m_rowHeights.empty() )
             {
-                m_rowHeights.Add( m_defaultRowHeight, numRows );
-                m_rowBottoms.Add( 0, numRows );
+                m_rowHeights.insert( std::end(m_rowHeights), numRows, m_defaultRowHeight );
+                m_rowBottoms.insert( std::end(m_rowBottoms), numRows, 0 );
 
                 int bottom = 0;
                 if ( oldNumRows > 0 )
@@ -3370,10 +3372,10 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
             int numRows = msg.GetCommandInt2();
             m_numRows -= numRows;
 
-            if ( !m_rowHeights.IsEmpty() )
+            if ( !m_rowHeights.empty() )
             {
-                m_rowHeights.RemoveAt( pos, numRows );
-                m_rowBottoms.RemoveAt( pos, numRows );
+                m_rowHeights.erase(std::begin(m_rowHeights) + pos, std::begin(m_rowHeights) + pos + numRows);
+                m_rowBottoms.erase(std::begin(m_rowBottoms) + pos, std::begin(m_rowBottoms) + pos + numRows );
 
                 int h = 0;
                 for ( i = 0; i < m_numRows; i++ )
@@ -3421,7 +3423,7 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
             if ( m_useNativeHeader )
                 GetGridColHeader()->SetColumnCount(m_numCols);
 
-            if ( !m_colAt.IsEmpty() )
+            if ( !m_colAt.empty() )
             {
                 //Shift the column IDs
                 for ( i = 0; i < m_numCols - numCols; i++ )
@@ -3430,7 +3432,7 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
                         m_colAt[i] += numCols;
                 }
 
-                m_colAt.Insert( pos, pos, numCols );
+                m_colAt.insert(std::begin(m_colAt) + pos, numCols, pos );
 
                 //Set the new columns' positions
                 for ( i = pos + 1; i < (int)pos + numCols; i++ )
@@ -3439,10 +3441,10 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
                 }
             }
 
-            if ( !m_colWidths.IsEmpty() )
+            if ( !m_colWidths.empty() )
             {
-                m_colWidths.Insert( m_defaultColWidth, pos, numCols );
-                m_colRights.Insert( 0, pos, numCols );
+                m_colWidths.insert(std::begin(m_colWidths) + pos, numCols, m_defaultColWidth);
+                m_colRights.insert(std::begin(m_colRights) + pos, numCols, 0 );
 
                 int right = 0;
                 if ( pos > 0 )
@@ -3480,9 +3482,9 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
             int oldNumCols = m_numCols;
             m_numCols += numCols;
 
-            if ( !m_colAt.IsEmpty() )
+            if ( !m_colAt.empty() )
             {
-                m_colAt.Add( 0, numCols );
+                m_colAt.insert(std::end(m_colAt), numCols, 0);
 
                 //Set the new columns' positions
                 for ( i = oldNumCols; i < m_numCols; i++ )
@@ -3491,10 +3493,10 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
                 }
             }
 
-            if ( !m_colWidths.IsEmpty() )
+            if ( !m_colWidths.empty() )
             {
-                m_colWidths.Add( m_defaultColWidth, numCols );
-                m_colRights.Add( 0, numCols );
+                m_colWidths.insert( std::end(m_colWidths), numCols, m_defaultColWidth );
+                m_colRights.insert( std::end(m_colRights), numCols, 0 );
 
                 int right = 0;
                 if ( oldNumCols > 0 )
@@ -3534,11 +3536,11 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
             if ( m_useNativeHeader )
                 GetGridColHeader()->SetColumnCount(m_numCols);
 
-            if ( !m_colAt.IsEmpty() )
+            if ( !m_colAt.empty() )
             {
                 int colID = GetColAt( pos );
 
-                m_colAt.RemoveAt( pos, numCols );
+                m_colAt.erase( std::begin(m_colAt) + pos, std::begin(m_colAt) + pos + numCols );
 
                 //Shift the column IDs
                 int colPos;
@@ -3549,10 +3551,10 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
                 }
             }
 
-            if ( !m_colWidths.IsEmpty() )
+            if ( !m_colWidths.empty() )
             {
-                m_colWidths.RemoveAt( pos, numCols );
-                m_colRights.RemoveAt( pos, numCols );
+                m_colWidths.erase(std::begin(m_colWidths) + pos, std::begin(m_colWidths) + pos + numCols);
+                m_colRights.erase(std::begin(m_colRights) + pos, std::begin(m_colRights) + pos + numCols);
 
                 int w = 0;
                 int colPos;
@@ -3603,12 +3605,12 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
     return result;
 }
 
-wxArrayInt wxGrid::CalcRowLabelsExposed( const wxRegion& reg, wxGridWindow *gridWindow ) const
+std::vector<int> wxGrid::CalcRowLabelsExposed( const wxRegion& reg, wxGridWindow *gridWindow ) const
 {
     wxRegionIterator iter( reg );
     wxRect r;
 
-    wxArrayInt  rowlabels;
+    std::vector<int>  rowlabels;
 
     int top, bottom;
     while ( iter )
@@ -3646,7 +3648,7 @@ wxArrayInt wxGrid::CalcRowLabelsExposed( const wxRegion& reg, wxGridWindow *grid
             if ( GetRowTop(row) > bottom )
                 break;
 
-            rowlabels.Add( row );
+            rowlabels.push_back( row );
         }
 
         ++iter;
@@ -3655,12 +3657,12 @@ wxArrayInt wxGrid::CalcRowLabelsExposed( const wxRegion& reg, wxGridWindow *grid
     return rowlabels;
 }
 
-wxArrayInt wxGrid::CalcColLabelsExposed( const wxRegion& reg, wxGridWindow *gridWindow ) const
+std::vector<int> wxGrid::CalcColLabelsExposed( const wxRegion& reg, wxGridWindow *gridWindow ) const
 {
     wxRegionIterator iter( reg );
     wxRect r;
 
-    wxArrayInt colLabels;
+    std::vector<int> colLabels;
 
     int left, right;
     while ( iter )
@@ -3701,7 +3703,7 @@ wxArrayInt wxGrid::CalcColLabelsExposed( const wxRegion& reg, wxGridWindow *grid
             if ( GetColLeft(col) > right )
                 break;
 
-            colLabels.Add( col );
+            colLabels.push_back( col );
         }
 
         ++iter;
@@ -3751,7 +3753,7 @@ wxGridCellCoordsArray wxGrid::CalcCellsExposed( const wxRegion& reg,
         CalcGridWindowUnscrolledPosition( r.GetRight(), r.GetBottom(), &right, &bottom, gridWindow );
 
         // find the cells within these bounds
-        wxArrayInt cols;
+        std::vector<int> cols;
         for ( int row = internalYToRow(top, gridWindow); row < m_numRows; row++ )
         {
             if ( GetRowBottom(row) <= top )
@@ -5177,7 +5179,7 @@ void wxGrid::RefreshAfterColPosChange()
     m_gridWin->Refresh();
 }
 
-void wxGrid::SetColumnsOrder(const wxArrayInt& order)
+void wxGrid::SetColumnsOrder(const std::vector<int>& order)
 {
     m_colAt = order;
 
@@ -6908,12 +6910,12 @@ wxGrid::DoDrawGridLines(wxDC& dc,
     }
 }
 
-void wxGrid::DrawRowLabels( wxDC& dc, const wxArrayInt& rows)
+void wxGrid::DrawRowLabels( wxDC& dc, const std::vector<int>& rows)
 {
     if ( !m_numRows )
         return;
 
-    const size_t numLabels = rows.GetCount();
+    const size_t numLabels = rows.size();
     for ( size_t i = 0; i < numLabels; i++ )
     {
         DrawRowLabel( dc, rows[i] );
@@ -6991,12 +6993,12 @@ void wxGrid::SetUseNativeColLabels( bool native )
     m_cornerLabelWin->Refresh();
 }
 
-void wxGrid::DrawColLabels( wxDC& dc,const wxArrayInt& cols )
+void wxGrid::DrawColLabels( wxDC& dc,const std::vector<int>& cols )
 {
     if ( !m_numCols )
         return;
 
-    const size_t numLabels = cols.GetCount();
+    const size_t numLabels = cols.size();
     for ( size_t i = 0; i < numLabels; i++ )
     {
         DrawColLabel( dc, cols[i] );
@@ -7778,7 +7780,7 @@ int wxGrid::PosToLinePos(int coord,
 
     // check for the simplest case: if we have no explicit line sizes
     // configured, then we already know the line this position falls in
-    const wxArrayInt& lineEnds = oper.GetLineEnds(this);
+    const std::vector<int>& lineEnds = oper.GetLineEnds(this);
     if ( lineEnds.empty() )
     {
         if ( maxPos < (numLines + minPos) )
@@ -9746,8 +9748,8 @@ void wxGrid::SetDefaultRowSize( int height, bool resizeExistingRows )
         // we can simply clear the row heights and row bottoms
         // arrays (which also allows us to take advantage of
         // some speed optimisations)
-        m_rowHeights.Empty();
-        m_rowBottoms.Empty();
+        m_rowHeights.clear();
+        m_rowBottoms.clear();
         CalcDimensions();
     }
 }
@@ -9838,7 +9840,7 @@ void wxGrid::DoSetRowSize( int row, int height )
 {
     wxCHECK_RET( row >= 0 && row < m_numRows, wxT("invalid row index") );
 
-    if ( m_rowHeights.IsEmpty() )
+    if ( m_rowHeights.empty() )
     {
         // need to really create the array
         InitRowHeights();
@@ -9956,8 +9958,8 @@ void wxGrid::SetDefaultColSize( int width, bool resizeExistingCols )
         // we can simply clear the col widths and col rights
         // arrays (which also allows us to take advantage of
         // some speed optimisations)
-        m_colWidths.Empty();
-        m_colRights.Empty();
+        m_colWidths.clear();
+        m_colRights.clear();
 
         CalcDimensions();
     }
@@ -10015,7 +10017,7 @@ void wxGrid::DoSetColSize( int col, int width )
 {
     wxCHECK_RET( col >= 0 && col < m_numCols, wxT("invalid column index") );
 
-    if ( m_colWidths.IsEmpty() )
+    if ( m_colWidths.empty() )
     {
         // need to really create the array
         InitColWidths();
@@ -10908,22 +10910,22 @@ wxGridCellCoordsArray wxGrid::GetSelectionBlockBottomRight() const
     return m_selection->GetBlockSelectionBottomRight();
 }
 
-wxArrayInt wxGrid::GetSelectedRows() const
+std::vector<int> wxGrid::GetSelectedRows() const
 {
     if (!m_selection)
     {
-        wxArrayInt a;
+        std::vector<int> a;
         return a;
     }
 
     return m_selection->GetRowSelection();
 }
 
-wxArrayInt wxGrid::GetSelectedCols() const
+std::vector<int> wxGrid::GetSelectedCols() const
 {
     if (!m_selection)
     {
-        wxArrayInt a;
+        std::vector<int> a;
         return a;
     }
 
@@ -11095,7 +11097,7 @@ void wxGrid::SetRowSizes(const wxGridSizesInfo& sizeInfo)
     DoSetSizes(sizeInfo, wxGridRowOperations());
 }
 
-wxGridSizesInfo::wxGridSizesInfo(int defSize, const wxArrayInt& allSizes)
+wxGridSizesInfo::wxGridSizesInfo(int defSize, const std::vector<int>& allSizes)
 {
     m_sizeDefault = defSize;
     for ( size_t i = 0; i < allSizes.size(); i++ )

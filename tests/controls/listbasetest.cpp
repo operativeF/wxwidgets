@@ -50,7 +50,7 @@ void ListBaseTestCase::ColumnsOrder()
 
 
     // check that the order is natural in the beginning
-    const wxArrayInt orderOrig = list->GetColumnsOrder();
+    const auto orderOrig = list->GetColumnsOrder();
     for ( n = 0; n < NUM_COLS; n++ )
         CPPUNIT_ASSERT_EQUAL( n, orderOrig[n] );
 
@@ -63,7 +63,7 @@ void ListBaseTestCase::ColumnsOrder()
     list->SetColumnsOrder(order);
 
     // check that we get back the same order as we set
-    const wxArrayInt orderNew = list->GetColumnsOrder();
+    const auto orderNew = list->GetColumnsOrder();
     for ( n = 0; n < NUM_COLS; n++ )
         CPPUNIT_ASSERT_EQUAL( order[n], orderNew[n] );
 

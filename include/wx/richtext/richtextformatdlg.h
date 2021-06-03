@@ -227,17 +227,17 @@ public:
 
     /// Set the dimension into the value and units controls. Optionally pass units to
     /// specify the ordering of units in the combobox.
-    static void SetDimensionValue(wxTextAttrDimension& dim, wxTextCtrl* valueCtrl, wxComboBox* unitsCtrl, wxCheckBox* checkBox, wxArrayInt* units = nullptr);
+    static void SetDimensionValue(wxTextAttrDimension& dim, wxTextCtrl* valueCtrl, wxComboBox* unitsCtrl, wxCheckBox* checkBox, std::vector<int>* units = nullptr);
 
     /// Get the dimension from the value and units controls Optionally pass units to
     /// specify the ordering of units in the combobox.
-    static void GetDimensionValue(wxTextAttrDimension& dim, wxTextCtrl* valueCtrl, wxComboBox* unitsCtrl, wxCheckBox* checkBox, wxArrayInt* units = nullptr);
+    static void GetDimensionValue(wxTextAttrDimension& dim, wxTextCtrl* valueCtrl, wxComboBox* unitsCtrl, wxCheckBox* checkBox, std::vector<int>* units = nullptr);
 
     /// Convert from a string to a dimension integer.
     static bool ConvertFromString(const wxString& str, int& ret, int unit);
 
     /// Map book control page index to our page id
-    void AddPageId(int id) { m_pageIds.Add(id); }
+    void AddPageId(int id) { m_pageIds.push_back(id); }
 
     /// Find a page by class
     wxWindow* FindPage(wxClassInfo* info) const;
@@ -262,7 +262,7 @@ protected:
     wxRichTextStyleDefinition*                  m_styleDefinition;
     wxRichTextStyleSheet*                       m_styleSheet;
     wxRichTextObject*                           m_object;
-    wxArrayInt                                  m_pageIds; // mapping of book control indexes to page ids
+    std::vector<int>                                  m_pageIds; // mapping of book control indexes to page ids
     int                                         m_options; // UI options
     bool                                        m_ignoreUpdates;
     static wxColourData                         sm_colourData;

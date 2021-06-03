@@ -438,10 +438,7 @@ void TextCtrlTestCase::ProcessEnter()
 
 void TextCtrlTestCase::Url()
 {
-#if wxUSE_UIACTIONSIMULATOR && defined(__WXMSW__)
-    // For some unfathomable reason, this test consistently fails when run in
-    // AppVeyor CI environment, even though it passes locally, so skip it
-    // there.
+    // FIXME: There's probably a good reason this fails on MSVC. Find it.
     if ( wxGetEnv("APPVEYOR", NULL) )
         return;
 
@@ -458,7 +455,6 @@ void TextCtrlTestCase::Url()
     wxYield();
 
     CPPUNIT_ASSERT_EQUAL(1, url.GetCount());
-#endif
 }
 
 void TextCtrlTestCase::Style()

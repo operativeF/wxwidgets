@@ -26,8 +26,6 @@
   WX_DEFINE_EXPORTED_ARRAY_PTR(wxOwnerDrawn *, wxListBoxItemsArray);
 #endif // wxUSE_OWNER_DRAWN
 
-// forward declaration for GetSelections()
-class WXDLLIMPEXP_FWD_BASE wxArrayInt;
 
 // ----------------------------------------------------------------------------
 // List box control
@@ -87,7 +85,7 @@ public:
 
     bool IsSelected(int n) const override;
     int GetSelection() const override;
-    int GetSelections(wxArrayInt& aSelections) const override;
+    int GetSelections(std::vector<int>& aSelections) const override;
 
     // return the index of the item at this position or wxNOT_FOUND
     int HitTest(const wxPoint& pt) const { return DoHitTestList(pt); }

@@ -794,10 +794,10 @@ wxString wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) cons
     if (stdFontSize == 0)
     {
         // Look at sizes up to 20 points, and see which is the most common
-        wxArrayInt sizes;
+        std::vector<int> sizes;
         size_t maxSize = 20;
         for (i = 0; i <= maxSize; i++)
-            sizes.Add(0);
+            sizes.push_back(0);
         for (i = 0; i < m_styleNames.GetCount(); i++)
         {
             wxRichTextStyleDefinition* d = GetStyle(i);

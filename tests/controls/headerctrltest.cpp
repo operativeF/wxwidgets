@@ -113,7 +113,7 @@ void HeaderCtrlTestCase::Reorder()
     for ( n = 0; n < COL_COUNT; n++ )
         m_header->AppendColumn(wxHeaderColumnSimple(wxString::Format("%d", n)));
 
-    wxArrayInt order = m_header->GetColumnsOrder(); // initial order: [0 1 2 3]
+    auto order = m_header->GetColumnsOrder(); // initial order: [0 1 2 3]
     for ( n = 0; n < COL_COUNT; n++ )
         CPPUNIT_ASSERT_EQUAL( n, order[n] );
 

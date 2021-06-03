@@ -1655,15 +1655,15 @@ bool wxAuiManager::LoadPerspective(const wxString& layout, bool update)
 }
 
 void wxAuiManager::GetPanePositionsAndSizes(wxAuiDockInfo& dock,
-                                            wxArrayInt& positions,
-                                            wxArrayInt& sizes)
+                                            std::vector<int>& positions,
+                                            std::vector<int>& sizes)
 {
     int caption_size = m_art->GetMetric(wxAUI_DOCKART_CAPTION_SIZE);
     int pane_borderSize = m_art->GetMetric(wxAUI_DOCKART_PANE_BORDER_SIZE);
     int gripperSize = m_art->GetMetric(wxAUI_DOCKART_GRIPPER_SIZE);
 
-    positions.Empty();
-    sizes.Empty();
+    positions.clear();
+    sizes.clear();
 
     int action_pane = -1;
     int pane_i, pane_count = dock.panes.GetCount();
@@ -1686,7 +1686,7 @@ void wxAuiManager::GetPanePositionsAndSizes(wxAuiDockInfo& dock,
     for (pane_i = 0; pane_i < pane_count; ++pane_i)
     {
         wxAuiPaneInfo& pane = *(dock.panes.Item(pane_i));
-        positions.Add(pane.dock_pos);
+        positions.push_back(pane.dock_pos);
         int size = 0;
 
         if (pane.HasBorder())
@@ -1708,7 +1708,7 @@ void wxAuiManager::GetPanePositionsAndSizes(wxAuiDockInfo& dock,
             size += pane.best_size.y;
         }
 
-        sizes.Add(size);
+        sizes.push_back(size);
     }
 
     // if there is no action pane, just return the default
@@ -1961,7 +1961,8 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
 
     if (dock.fixed)
     {
-        wxArrayInt pane_positions, pane_sizes;
+        std::vector<int> pane_positions;
+        std::vector<int> pane_sizes;
 
         // figure out the real pane positions we will
         // use, without modifying the each pane's pane_pos member
@@ -1971,7 +1972,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
         for (pane_i = 0; pane_i < pane_count; ++pane_i)
         {
             wxAuiPaneInfo& pane = *(dock.panes.Item(pane_i));
-            int pane_pos = pane_positions.Item(pane_i);
+            int pane_pos = pane_positions[pane_i];
 
             if (pane.IsMaximized())
                 has_maximized_pane = true;
@@ -1999,7 +2000,7 @@ void wxAuiManager::LayoutAddDock(wxSizer* cont,
 
             LayoutAddPane(dock_sizer, dock, pane, uiparts, spacer_only);
 
-            offset += pane_sizes.Item(pane_i);
+            offset += pane_sizes[pane_i];
         }
 
         // at the end add a very small stretchable background area
@@ -2317,7 +2318,7 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
         // adjust the positions of the panes
         if (dock.fixed && !action_pane_marked)
         {
-            wxArrayInt pane_positions, pane_sizes;
+            std::vector<int> pane_positions, pane_sizes;
             GetPanePositionsAndSizes(dock, pane_positions, pane_sizes);
 
             int offset = 0;
@@ -4531,7 +4532,7 @@ void wxAuiManager::OnLeftUp(wxMouseEvent& event)
         {
             wxAuiDockInfo& dock = *docks.Item(0);
 
-            wxArrayInt pane_positions, pane_sizes;
+            std::vector<int> pane_positions, pane_sizes;
             GetPanePositionsAndSizes(dock, pane_positions, pane_sizes);
 
             int i, dock_pane_count = dock.panes.GetCount();

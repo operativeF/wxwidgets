@@ -369,14 +369,15 @@ bool wxRichTextBackgroundPage::TransferDataToWindow()
     }
 
     m_useShadow->SetValue(attr->GetTextBoxAttr().GetShadow().IsValid());
-    
-    wxArrayInt units;
-    units.Add(wxTEXT_ATTR_UNITS_PIXELS);
-    units.Add(wxTEXT_ATTR_UNITS_TENTHS_MM);
-    units.Add(wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT);
 
-    wxArrayInt percentUnits;
-    percentUnits.Add(wxTEXT_ATTR_UNITS_PERCENTAGE);
+    // FIXME: Use ref emplace_back
+    std::vector<int> units;
+    units.push_back(wxTEXT_ATTR_UNITS_PIXELS);
+    units.push_back(wxTEXT_ATTR_UNITS_TENTHS_MM);
+    units.push_back(wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT);
+
+    std::vector<int> percentUnits;
+    percentUnits.push_back(wxTEXT_ATTR_UNITS_PERCENTAGE);
 
     if (!attr->GetTextBoxAttr().GetShadow().GetOffsetX().IsValid())
         attr->GetTextBoxAttr().GetShadow().GetOffsetX().SetValue(0, wxTEXT_ATTR_UNITS_PIXELS);
@@ -426,13 +427,14 @@ bool wxRichTextBackgroundPage::TransferDataFromWindow()
     {
         attr->GetTextBoxAttr().GetShadow().SetValid(true);
 
-        wxArrayInt units;
-        units.Add(wxTEXT_ATTR_UNITS_PIXELS);
-        units.Add(wxTEXT_ATTR_UNITS_TENTHS_MM);
-        units.Add(wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT);
+        // FIXME: Use ref emplace_back
+        std::vector<int> units;
+        units.push_back(wxTEXT_ATTR_UNITS_PIXELS);
+        units.push_back(wxTEXT_ATTR_UNITS_TENTHS_MM);
+        units.push_back(wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT);
 
-        wxArrayInt percentUnits;
-        percentUnits.Add(wxTEXT_ATTR_UNITS_PERCENTAGE);
+        std::vector<int> percentUnits;
+        percentUnits.push_back(wxTEXT_ATTR_UNITS_PERCENTAGE);
 
         wxRichTextFormattingDialog::GetDimensionValue(attr->GetTextBoxAttr().GetShadow().GetOffsetX(), m_offsetX, m_unitsHorizontalOffset, nullptr,
             & units);

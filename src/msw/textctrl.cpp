@@ -3098,9 +3098,9 @@ bool wxTextCtrl::MSWSetParaFormat(const wxTextAttr& style, long start, long end)
     {
         pf.dwMask |= PFM_TABSTOPS;
 
-        const wxArrayInt& tabs = style.GetTabs();
+        const std::vector<int>& tabs = style.GetTabs();
 
-        pf.cTabCount = (SHORT)wxMin(tabs.GetCount(), MAX_TAB_STOPS);
+        pf.cTabCount = (SHORT)wxMin(tabs.size(), MAX_TAB_STOPS);
         size_t i;
         for (i = 0; i < (size_t) pf.cTabCount; i++)
         {
@@ -3377,11 +3377,11 @@ bool wxTextCtrl::GetStyle(long position, wxTextAttr& style)
     else
         style.SetAlignment(wxTEXT_ALIGNMENT_LEFT);
 
-    wxArrayInt tabStops;
+    std::vector<int> tabStops;
     size_t i;
     for (i = 0; i < (size_t) pf.cTabCount; i++)
     {
-        tabStops.Add( (int) ((double) (pf.rgxTabs[i] & 0xFFFF) * twips2mm * 10.0) );
+        tabStops.push_back( (int) ((double) (pf.rgxTabs[i] & 0xFFFF) * twips2mm * 10.0) );
     }
 
     if ( changeSel )

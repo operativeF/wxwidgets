@@ -37,7 +37,7 @@ public:
         // wxComboBox, wxTextCtrl, wxButton, wxStaticText (read-only)
     wxGenericValidator(wxString* val);
         // wxListBox, wxCheckListBox
-    wxGenericValidator(wxArrayInt* val);
+    wxGenericValidator(std::vector<int>* val);
 #if wxUSE_DATETIME
         // wxDatePickerCtrl
     wxGenericValidator(wxDateTime* val);
@@ -78,7 +78,7 @@ protected:
     bool*       m_pBool;
     int*        m_pInt;
     wxString*   m_pString;
-    wxArrayInt* m_pArrayInt;
+    std::vector<int>* m_pArrayInt;
 #if wxUSE_DATETIME
     wxDateTime* m_pDateTime;
 #endif // wxUSE_DATETIME

@@ -57,8 +57,8 @@ private:
 
     void DoScrollHorz(int dx) override;
 
-    void DoSetColumnsOrder(const wxArrayInt& order) override;
-    wxArrayInt DoGetColumnsOrder() const override;
+    void DoSetColumnsOrder(const std::vector<int>& order) override;
+    std::vector<int> DoGetColumnsOrder() const override;
 
     // Pure virtual method inherited from wxCompositeWindow.
     wxWindowList GetCompositeWindowParts() const override;    

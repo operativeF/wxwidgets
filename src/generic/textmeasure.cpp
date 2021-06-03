@@ -56,7 +56,7 @@ void wxTextMeasure::DoGetTextExtent(const wxString& string,
 }
 
 bool wxTextMeasure::DoGetPartialTextExtents(const wxString& text,
-                                            wxArrayInt& widths,
+                                            std::vector<int>& widths,
                                             double scaleX)
 {
     return wxTextMeasureBase::DoGetPartialTextExtents(text, widths, scaleX);

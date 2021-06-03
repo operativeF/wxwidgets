@@ -36,13 +36,13 @@ int wxRichTextHTMLHandler::sm_fileCounter = 1;
 wxRichTextHTMLHandler::wxRichTextHTMLHandler(const wxString& name, const wxString& ext, int type)
     : wxRichTextFileHandler(name, ext, type) 
 {
-    m_fontSizeMapping.Add(8);
-    m_fontSizeMapping.Add(10);
-    m_fontSizeMapping.Add(13);
-    m_fontSizeMapping.Add(17);
-    m_fontSizeMapping.Add(22);
-    m_fontSizeMapping.Add(30);
-    m_fontSizeMapping.Add(100);
+    m_fontSizeMapping.push_back(8);
+    m_fontSizeMapping.push_back(10);
+    m_fontSizeMapping.push_back(13);
+    m_fontSizeMapping.push_back(17);
+    m_fontSizeMapping.push_back(22);
+    m_fontSizeMapping.push_back(30);
+    m_fontSizeMapping.push_back(100);
 }
 
 /// Can we handle this filename (if using files)? By default, checks the extension.
@@ -103,8 +103,8 @@ bool wxRichTextHTMLHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputStream&
         m_font = false;
         m_inTable = false;
 
-        m_indents.Clear();
-        m_listTypes.Clear();
+        m_indents.clear();
+        m_listTypes.clear();
 
         wxRichTextObjectList::compatibility_iterator node = buffer->GetChildren().GetFirst();
         while (node)
@@ -282,17 +282,17 @@ void wxRichTextHTMLHandler::BeginParagraphFormatting(const wxRichTextAttr& WXUNU
             // Close levels high than this
             CloseLists(indent, str);
 
-            if (m_indents.GetCount() > 0 && indent == m_indents.Last())
+            if (m_indents.size() > 0 && indent == m_indents.back())
             {
                 // Same level, no need to start a new list
             }
-            else if (m_indents.GetCount() == 0 || indent > m_indents.Last())
+            else if (m_indents.size() == 0 || indent > m_indents.back())
             {
-                m_indents.Add(indent);
+                m_indents.push_back(indent);
 
                 wxString tag;
                 int listType = TypeOfList(thisStyle, tag);
-                m_listTypes.Add(listType);
+                m_listTypes.push_back(listType);
 
                 // wxHTML needs an extra <p> before a list when using <p> ... </p> in previous paragraphs.
                 // TODO: pass a flag that indicates we're using wxHTML.
@@ -412,7 +412,7 @@ void wxRichTextHTMLHandler::EndParagraphFormatting(const wxRichTextAttr& WXUNUSE
 void wxRichTextHTMLHandler::CloseLists(int level, wxTextOutputStream& str)
 {
     // Close levels high than this
-    int i = m_indents.GetCount()-1;
+    int i = m_indents.size()-1;
     while (i >= 0)
     {
         int l = m_indents[i];
@@ -422,8 +422,8 @@ void wxRichTextHTMLHandler::CloseLists(int level, wxTextOutputStream& str)
                 str << wxT("</ol>");
             else
                 str << wxT("</ul>");
-            m_indents.RemoveAt(i);
-            m_listTypes.RemoveAt(i);
+            m_indents.erase(std::begin(m_indents) + i);
+            m_listTypes.erase(std::begin(m_listTypes) + i);
         }
         else
             break;
@@ -577,7 +577,7 @@ void wxRichTextHTMLHandler::WriteImage(wxRichTextImage* image, wxOutputStream& s
 long wxRichTextHTMLHandler::PtToSize(long size)
 {
     int i;
-    int len = m_fontSizeMapping.GetCount();
+    int len = m_fontSizeMapping.size();
     for (i = 0; i < len; i++)
         if (size <= m_fontSizeMapping[i])
             return i+1;

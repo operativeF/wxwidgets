@@ -501,21 +501,23 @@ void wxDataViewIndexListModel::RowDeleted( unsigned int row )
     /* wxDataViewModel:: */ ItemDeleted( wxDataViewItem(nullptr), item );
 }
 
-void wxDataViewIndexListModel::RowsDeleted( const wxArrayInt &rows )
+void wxDataViewIndexListModel::RowsDeleted( const std::vector<int> &rows )
 {
     m_ordered = false;
 
     wxDataViewItemArray array;
     unsigned int i;
-    for (i = 0; i < rows.GetCount(); i++)
+    for (i = 0; i < rows.size(); i++)
     {
             wxDataViewItem item( m_hash[rows[i]] );
             array.Add( item );
     }
 
-    wxArrayInt sorted = rows;
-    sorted.Sort( my_sort );
-    for (i = 0; i < sorted.GetCount(); i++)
+    std::vector<int> sorted = rows;
+
+    std::sort(sorted.begin(), sorted.end());
+
+    for (i = 0; i < sorted.size(); i++)
            m_hash.RemoveAt( sorted[i] );
 
     /* wxDataViewModel:: */ ItemsDeleted( wxDataViewItem(nullptr), array );
@@ -604,16 +606,16 @@ void wxDataViewVirtualListModel::RowDeleted( unsigned int row )
     /* wxDataViewModel:: */ ItemDeleted( wxDataViewItem(nullptr), item );
 }
 
-void wxDataViewVirtualListModel::RowsDeleted( const wxArrayInt &rows )
+void wxDataViewVirtualListModel::RowsDeleted( const std::vector<int> &rows )
 {
-    m_size -= rows.GetCount();
+    m_size -= rows.size();
 
-    wxArrayInt sorted = rows;
-    sorted.Sort( my_sort );
+    std::vector<int> sorted = rows;
+    std::sort(sorted.begin(), sorted.end());
 
     wxDataViewItemArray array;
     unsigned int i;
-    for (i = 0; i < sorted.GetCount(); i++)
+    for (i = 0; i < sorted.size(); i++)
     {
         wxDataViewItem item( wxUIntToPtr(sorted[i]+1) );
         array.Add( item );

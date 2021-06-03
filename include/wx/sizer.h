@@ -916,8 +916,8 @@ public:
     wxFlexSizerGrowMode GetNonFlexibleGrowMode() const { return m_growMode; }
 
     // Read-only access to the row heights and col widths arrays
-    const wxArrayInt& GetRowHeights() const { return m_rowHeights; }
-    const wxArrayInt& GetColWidths() const  { return m_colWidths; }
+    const std::vector<int>& GetRowHeights() const { return m_rowHeights; }
+    const std::vector<int>& GetColWidths() const  { return m_colWidths; }
 
     // implementation
     void RepositionChildren(const wxSize& minSize) override;
@@ -929,15 +929,15 @@ protected:
     wxSize FindWidthsAndHeights(int nrows, int ncols);
 
     // the heights/widths of all rows/columns
-    wxArrayInt  m_rowHeights,
+    std::vector<int>  m_rowHeights,
                 m_colWidths;
 
     // indices of the growable columns and rows
-    wxArrayInt  m_growableRows,
+    std::vector<int>  m_growableRows,
                 m_growableCols;
 
     // proportion values of the corresponding growable rows and columns
-    wxArrayInt  m_growableRowsProportions,
+    std::vector<int>  m_growableRowsProportions,
                 m_growableColsProportions;
 
     // parameters describing whether the growable cells should be resized in

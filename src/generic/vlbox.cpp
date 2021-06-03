@@ -155,7 +155,7 @@ bool wxVListBox::SelectRange(size_t from, size_t to)
     wxCHECK_MSG( to < GetItemCount(), false,
                     wxT("SelectRange(): invalid item index") );
 
-    wxArrayInt changed;
+    std::vector<int> changed;
     if ( !m_selStore->SelectRange(from, to, true, &changed) )
     {
         // too many items have changed, we didn't record them in changed array
@@ -164,7 +164,7 @@ bool wxVListBox::SelectRange(size_t from, size_t to)
     }
     else // we've got the indices of the changed items
     {
-        const size_t count = changed.GetCount();
+        const size_t count = changed.size();
         if ( !count )
         {
             // nothing changed
@@ -190,9 +190,9 @@ bool wxVListBox::DoSelectAll(bool select)
     size_t count = GetItemCount();
     if ( count )
     {
-        wxArrayInt changed;
+        std::vector<int> changed;
         if ( !m_selStore->SelectRange(0, count - 1, select) ||
-                !changed.IsEmpty() )
+                !changed.empty() )
         {
             Refresh();
 

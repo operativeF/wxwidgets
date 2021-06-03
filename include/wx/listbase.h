@@ -403,8 +403,8 @@ public:
     virtual int GetColumnOrder(int col) const = 0;
     virtual int GetColumnIndexFromOrder(int order) const = 0;
 
-    virtual wxArrayInt GetColumnsOrder() const = 0;
-    virtual bool SetColumnsOrder(const wxArrayInt& orders) = 0;
+    virtual std::vector<int> GetColumnsOrder() const = 0;
+    virtual bool SetColumnsOrder(const std::vector<int>& orders) = 0;
 
 
     // Other miscellaneous accessors.

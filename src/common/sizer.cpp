@@ -1715,7 +1715,7 @@ void wxFlexGridSizer::RepositionChildren(const wxSize& minSize)
 }
 
 // helper function used in CalcMin() to sum up the sizes of non-hidden items
-static int SumArraySizes(const wxArrayInt& sizes, int gap)
+static int SumArraySizes(const std::vector<int>& sizes, int gap)
 {
     // Sum total minimum size, including gaps between rows/columns.
     // -1 is used as a magic number meaning empty row/column.
@@ -1807,10 +1807,10 @@ void wxFlexGridSizer::AdjustForFlexDirection()
     {
         // select the array corresponding to the direction in which we do *not*
         // resize flexibly
-        wxArrayInt& array = m_flexDirection == wxVERTICAL ? m_colWidths
+        std::vector<int>& array = m_flexDirection == wxVERTICAL ? m_colWidths
                                                           : m_rowHeights;
 
-        const size_t count = array.GetCount();
+        const size_t count = array.size();
 
         // find the largest value in this array
         size_t n;
@@ -1842,9 +1842,9 @@ void wxFlexGridSizer::AdjustForFlexDirection()
 //                   should be assumed to have proportion of 1
 static void
 DoAdjustForGrowables(int delta,
-                     const wxArrayInt& growable,
-                     wxArrayInt& sizes,
-                     const wxArrayInt *proportions)
+                     const std::vector<int>& growable,
+                     std::vector<int>& sizes,
+                     const std::vector<int> *proportions)
 {
     if ( delta <= 0 )
         return;
@@ -2002,12 +2002,12 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
 
 bool wxFlexGridSizer::IsRowGrowable( size_t idx )
 {
-    return m_growableRows.Index( idx ) != wxNOT_FOUND;
+    return std::find(m_growableRows.cbegin(), m_growableRows.cend(), idx) != std::cend(m_growableRows);
 }
 
 bool wxFlexGridSizer::IsColGrowable( size_t idx )
 {
-    return m_growableCols.Index( idx ) != wxNOT_FOUND;
+    return std::find(m_growableCols.cbegin(), m_growableCols.cend(), idx) != std::cend(m_growableCols);
 }
 
 void wxFlexGridSizer::AddGrowableRow( size_t idx, int proportion )
@@ -2021,8 +2021,8 @@ void wxFlexGridSizer::AddGrowableRow( size_t idx, int proportion )
     // the sizer, and the check will be done in AdjustForGrowables()
     wxCHECK_RET( !m_rows || idx < (size_t)m_rows, "invalid row index" );
 
-    m_growableRows.Add( idx );
-    m_growableRowsProportions.Add( proportion );
+    m_growableRows.push_back( idx );
+    m_growableRowsProportions.push_back( proportion );
 }
 
 void wxFlexGridSizer::AddGrowableCol( size_t idx, int proportion )
@@ -2034,21 +2034,21 @@ void wxFlexGridSizer::AddGrowableCol( size_t idx, int proportion )
     // specification of the number of columns, it still can also happen
     wxCHECK_RET( !m_cols || idx < (size_t)m_cols, "invalid column index" );
 
-    m_growableCols.Add( idx );
-    m_growableColsProportions.Add( proportion );
+    m_growableCols.push_back( idx );
+    m_growableColsProportions.push_back( proportion );
 }
 
 // helper function for RemoveGrowableCol/Row()
 static void
-DoRemoveFromArrays(size_t idx, wxArrayInt& items, wxArrayInt& proportions)
+DoRemoveFromArrays(size_t idx, std::vector<int>& items, std::vector<int>& proportions)
 {
     const size_t count = items.size();
     for ( size_t n = 0; n < count; n++ )
     {
         if ( (size_t)items[n] == idx )
         {
-            items.RemoveAt(n);
-            proportions.RemoveAt(n);
+            items.erase(std::begin(items) + n);
+            proportions.erase(std::begin(proportions) + n);
             return;
         }
     }

@@ -211,7 +211,7 @@ protected:
     // internal helpers & data:
 
     // calculate the real field widths for the given total available size
-    wxArrayInt CalculateAbsWidths(wxCoord widthTotal) const;
+    std::vector<int> CalculateAbsWidths(wxCoord widthTotal) const;
 
     // should be called to remember if the pane text is currently being show
     // ellipsized or not

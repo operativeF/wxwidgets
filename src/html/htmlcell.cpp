@@ -371,7 +371,7 @@ void wxHtmlWordCell::Split(const wxDC& dc,
 
     // before selection:
     // (include character under caret only if in first half of width)
-    wxArrayInt widths ;
+    std::vector<int> widths ;
     dc.GetPartialTextExtents(m_Word,widths) ;
     while( i < len && pt1.x >= widths[i] )
         i++ ;
@@ -399,8 +399,8 @@ void wxHtmlWordCell::Split(const wxDC& dc,
 
     wxASSERT( pos2 >= pos1 );
 
-    ext1 = pos1 == 0 ? 0 : (pos1 < widths.size() ? widths[pos1-1] : widths.Last());
-    ext2 = pos2 == 0 ? 0 : (pos2 < widths.size() ? widths[pos2-1] : widths.Last());
+    ext1 = pos1 == 0 ? 0 : (pos1 < widths.size() ? widths[pos1-1] : widths.back());
+    ext2 = pos2 == 0 ? 0 : (pos2 < widths.size() ? widths[pos2-1] : widths.back());
 }
 
 void wxHtmlWordCell::SetSelectionPrivPos(const wxDC& dc, wxHtmlSelection *s) const

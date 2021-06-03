@@ -66,7 +66,7 @@ wxGenericValidator::wxGenericValidator(wxString *val)
     m_pString = val;
 }
 
-wxGenericValidator::wxGenericValidator(wxArrayInt *val)
+wxGenericValidator::wxGenericValidator(std::vector<int> *val)
 {
     Initialize();
     m_pArrayInt = val;
@@ -372,9 +372,9 @@ bool wxGenericValidator::TransferToWindow()
                 pControl->Check(i, false);
 
             // select each item in our array
-            count = m_pArrayInt->GetCount();
+            count = m_pArrayInt->size();
             for ( i = 0 ; i < count; i++ )
-                pControl->Check(m_pArrayInt->Item(i));
+                pControl->Check(m_pArrayInt->at(i));
 
             return true;
         }
@@ -395,9 +395,9 @@ bool wxGenericValidator::TransferToWindow()
                 pControl->Deselect(i);
 
             // select each item in our array
-            count = m_pArrayInt->GetCount();
+            count = m_pArrayInt->size();
             for ( i = 0 ; i < count; i++ )
-                pControl->SetSelection(m_pArrayInt->Item(i));
+                pControl->SetSelection(m_pArrayInt->at(i));
 
             return true;
         }
@@ -642,7 +642,7 @@ bool wxGenericValidator::TransferFromWindow()
         if (m_pArrayInt)
         {
             // clear our array
-            m_pArrayInt->Clear();
+            m_pArrayInt->clear();
 
             // add each selected item to our array
             size_t i,
@@ -650,7 +650,7 @@ bool wxGenericValidator::TransferFromWindow()
             for ( i = 0; i < count; i++ )
             {
                 if (pControl->IsChecked(i))
-                    m_pArrayInt->Add(i);
+                    m_pArrayInt->push_back(i);
             }
 
             return true;
@@ -666,7 +666,7 @@ bool wxGenericValidator::TransferFromWindow()
         if (m_pArrayInt)
         {
             // clear our array
-            m_pArrayInt->Clear();
+            m_pArrayInt->clear();
 
             // add each selected item to our array
             size_t i,
@@ -674,7 +674,7 @@ bool wxGenericValidator::TransferFromWindow()
             for ( i = 0; i < count; i++ )
             {
                 if (pControl->IsSelected(i))
-                    m_pArrayInt->Add(i);
+                    m_pArrayInt->push_back(i);
             }
 
             return true;

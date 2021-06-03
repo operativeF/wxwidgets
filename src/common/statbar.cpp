@@ -191,9 +191,9 @@ void wxStatusBarBase::SetStatusStyles(int WXUNUSED_UNLESS_DEBUG(n),
     Refresh();
 }
 
-wxArrayInt wxStatusBarBase::CalculateAbsWidths(wxCoord widthTotal) const
+std::vector<int> wxStatusBarBase::CalculateAbsWidths(wxCoord widthTotal) const
 {
-    wxArrayInt widths;
+    std::vector<int> widths;
 
     if ( m_bSameWidthForAllPanes )
     {
@@ -208,7 +208,7 @@ wxArrayInt wxStatusBarBase::CalculateAbsWidths(wxCoord widthTotal) const
             // divide the unassigned width evently between the
             // not yet processed fields:
             int w = widthToUse / i;
-            widths.Add(w);
+            widths.push_back(w);
             widthToUse -= w;
         }
     }
@@ -235,13 +235,13 @@ wxArrayInt wxStatusBarBase::CalculateAbsWidths(wxCoord widthTotal) const
         for ( i = 0; i < m_panes.GetCount(); i++ )
         {
             if ( m_panes[i].GetWidth() >= 0 )
-                widths.Add(m_panes[i].GetWidth());
+                widths.push_back(m_panes[i].GetWidth());
             else
             {
                 int nVarWidth = widthExtra > 0 ? (widthExtra * (-m_panes[i].GetWidth())) / nVarCount : 0;
                 nVarCount += m_panes[i].GetWidth();
                 widthExtra -= nVarWidth;
-                widths.Add(nVarWidth);
+                widths.push_back(nVarWidth);
             }
         }
     }

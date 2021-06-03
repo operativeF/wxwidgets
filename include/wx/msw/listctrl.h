@@ -136,10 +136,10 @@ public:
     int GetColumnIndexFromOrder(int order) const override;
 
     // Gets the column order for all columns
-    wxArrayInt GetColumnsOrder() const override;
+    std::vector<int> GetColumnsOrder() const override;
 
     // Sets the column order for all columns
-    bool SetColumnsOrder(const wxArrayInt& orders) override;
+    bool SetColumnsOrder(const std::vector<int>& orders) override;
 
 
     // Gets the number of items that can fit vertically in the

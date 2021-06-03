@@ -104,7 +104,7 @@ void RearrangeListTestCase::Move()
     m_rearrange->SetSelection(0);
     m_rearrange->MoveCurrentDown();
 
-    wxArrayInt neworder = m_rearrange->GetCurrentOrder();
+    auto neworder = m_rearrange->GetCurrentOrder();
 
     CPPUNIT_ASSERT_EQUAL(neworder[0], 0);
     CPPUNIT_ASSERT_EQUAL(neworder[1], 1);

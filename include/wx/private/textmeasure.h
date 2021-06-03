@@ -60,7 +60,7 @@ public:
     // The scaleX argument is the horizontal scale used by wxDC and is only
     // used in the generic implementation.
     bool GetPartialTextExtents(const wxString& text,
-                               wxArrayInt& widths,
+                               std::vector<int>& widths,
                                double scaleX);
 
 
@@ -117,7 +117,7 @@ protected:
     // On input, widths array contains text.length() zero elements and the text
     // is guaranteed to be non-empty.
     virtual bool DoGetPartialTextExtents(const wxString& text,
-                                         wxArrayInt& widths,
+                                         std::vector<int>& widths,
                                          double scaleX) = 0;
 
     // Call either DoGetTextExtent() or wxDC::GetTextExtent() depending on the

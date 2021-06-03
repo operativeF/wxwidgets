@@ -1875,7 +1875,7 @@ void wxListMainWindow::HighlightLines( size_t lineFrom,
 
     if ( IsVirtual() )
     {
-        wxArrayInt linesChanged;
+        std::vector<int> linesChanged;
         if ( !m_selStore.SelectRange(lineFrom, lineTo, highlight,
                                      &linesChanged) )
         {
@@ -5175,13 +5175,13 @@ int wxGenericListCtrl::GetColumnIndexFromOrder(int order) const
     return order;
 }
 
-wxArrayInt wxGenericListCtrl::GetColumnsOrder() const
+std::vector<int> wxGenericListCtrl::GetColumnsOrder() const
 {
     // TODO: Implement this on generic port
-    return wxArrayInt();
+    return std::vector<int>();
 }
 
-bool wxGenericListCtrl::SetColumnsOrder(const wxArrayInt& WXUNUSED(orders))
+bool wxGenericListCtrl::SetColumnsOrder(const std::vector<int>& WXUNUSED(orders))
 {
     // TODO: Implement this on generic port
     return false;

@@ -98,7 +98,7 @@ protected:
     wxSize m_lastClientSize;
 
     // the absolute widths of the status bar panes in pixels
-    wxArrayInt        m_widthsAbs;
+    std::vector<int>        m_widthsAbs;
 
     int               m_borderX;
     int               m_borderY;

@@ -73,7 +73,7 @@ public:
     // individually)
     bool SelectRange(unsigned itemFrom, unsigned itemTo,
                      bool select = true,
-                     wxArrayInt *itemsChanged = nullptr);
+                     std::vector<int> *itemsChanged = nullptr);
 
     // return true if the given item is selected
     bool IsSelected(unsigned item) const;

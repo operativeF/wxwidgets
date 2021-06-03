@@ -2434,7 +2434,7 @@ public:
         For example, individual characters within a text object may require special highlighting.
         The function is passed the count returned by GetVirtualSubobjectAttributesCount.
     */
-    int GetVirtualSubobjectAttributes(wxRichTextObject* obj, wxArrayInt& positions, wxRichTextAttrArray& attributes) const;
+    int GetVirtualSubobjectAttributes(wxRichTextObject* obj, std::vector<int>& positions, wxRichTextAttrArray& attributes) const;
 
     /**
         Do we have virtual text for this object? Virtual text allows an application
@@ -2583,7 +2583,7 @@ public:
         is invalid for this object.
     */
 
-    virtual bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, wxArrayInt* partialExtents = nullptr) const  = 0;
+    virtual bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const  = 0;
 
     /**
         Do a split from @a pos, returning an object containing the second part, and setting
@@ -3128,7 +3128,7 @@ public:
 
     wxString GetTextForRange(const wxRichTextRange& range) const override;
 
-    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, wxArrayInt* partialExtents = nullptr) const override;
+    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     void Dump(wxTextOutputStream& stream) override;
 
@@ -3245,7 +3245,7 @@ public:
 
     bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style) override;
 
-    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, wxArrayInt* partialExtents = nullptr) const override;
+    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     bool DeleteRange(const wxRichTextRange& range) override;
 
@@ -3938,7 +3938,7 @@ public:
 
     bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style) override;
 
-    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, wxArrayInt* partialExtents = nullptr) const override;
+    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     wxString GetXMLNodeName() const override { return wxT("field"); }
 
@@ -4036,7 +4036,7 @@ public:
         Returns the object size for the given range. Returns @false if the range
         is invalid for this object.
     */
-    virtual bool GetRangeSize(wxRichTextField* obj, const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, wxArrayInt* partialExtents = nullptr) const = 0;
+    virtual bool GetRangeSize(wxRichTextField* obj, const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const = 0;
 
     /**
         Returns @true if we can edit the object's properties via a GUI.
@@ -4204,7 +4204,7 @@ public:
         Returns the object size for the given range. Returns @false if the range
         is invalid for this object.
     */
-    bool GetRangeSize(wxRichTextField* obj, const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, wxArrayInt* partialExtents = nullptr) const override;
+    bool GetRangeSize(wxRichTextField* obj, const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     /**
         Get the size of the field, given the label, font size, and so on.
@@ -4436,8 +4436,8 @@ public:
     int GetDescent() const { return m_descent; }
 
 #if wxRICHTEXT_USE_OPTIMIZED_LINE_DRAWING
-    wxArrayInt& GetObjectSizes() { return m_objectSizes; }
-    const wxArrayInt& GetObjectSizes() const { return m_objectSizes; }
+    std::vector<int>& GetObjectSizes() { return m_objectSizes; }
+    const std::vector<int>& GetObjectSizes() const { return m_objectSizes; }
 #endif
 
 // Operations
@@ -4471,7 +4471,7 @@ protected:
     wxRichTextParagraph* m_parent;
 
 #if wxRICHTEXT_USE_OPTIMIZED_LINE_DRAWING
-    wxArrayInt          m_objectSizes;
+    std::vector<int>          m_objectSizes;
 #endif
 };
 
@@ -4513,7 +4513,7 @@ public:
 
     bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style) override;
 
-    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, wxArrayInt* partialExtents = nullptr) const override;
+    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     bool FindPosition(wxDC& dc, wxRichTextDrawingContext& context, long index, wxPoint& pt, int* height, bool forceLineStart) override;
 
@@ -4582,7 +4582,7 @@ public:
         Finds a suitable wrap position. @a wrapPosition is the last position in the line to the left
         of the split.
     */
-    bool FindWrapPosition(const wxRichTextRange& range, wxDC& dc, wxRichTextDrawingContext& context, int availableSpace, long& wrapPosition, wxArrayInt* partialExtents);
+    bool FindWrapPosition(const wxRichTextRange& range, wxDC& dc, wxRichTextDrawingContext& context, int availableSpace, long& wrapPosition, std::vector<int>* partialExtents);
 
     /**
         Finds the object at the given position.
@@ -4633,7 +4633,7 @@ public:
     /**
         Returns the default tabstop array.
     */
-    static const wxArrayInt& GetDefaultTabs() { return sm_defaultTabs; }
+    static const std::vector<int>& GetDefaultTabs() { return sm_defaultTabs; }
 
     /**
         Lays out the floating objects.
@@ -4659,7 +4659,7 @@ protected:
     int                 m_impactedByFloatingObjects;
 
     // Default tabstops
-    static wxArrayInt  sm_defaultTabs;
+    static std::vector<int>  sm_defaultTabs;
 
 friend class wxRichTextFloatCollector;
 };
@@ -4699,7 +4699,7 @@ public:
 
     bool AdjustAttributes(wxRichTextAttr& attr, wxRichTextDrawingContext& context) override;
 
-    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, wxArrayInt* partialExtents = nullptr) const override;
+    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     wxString GetTextForRange(const wxRichTextRange& range) const override;
 
@@ -4991,7 +4991,7 @@ public:
 
     bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style) override;
 
-    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, wxArrayInt* partialExtents = nullptr) const override;
+    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     /**
         Returns the 'natural' size for this object - the image size.
@@ -5717,7 +5717,7 @@ public:
         it will be filled with the file type corresponding to each filter. This can be
         used to determine the type to pass to LoadFile given a selected filter.
     */
-    static wxString GetExtWildcard(bool combine = false, bool save = false, wxArrayInt* types = nullptr);
+    static wxString GetExtWildcard(bool combine = false, bool save = false, std::vector<int>* types = nullptr);
 
     /**
         Clean up file handlers.
@@ -6030,7 +6030,7 @@ public:
 
     bool Layout(wxDC& dc, wxRichTextDrawingContext& context, const wxRect& rect, const wxRect& parentRect, int style) override;
 
-    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, wxArrayInt* partialExtents = nullptr) const override;
+    bool GetRangeSize(const wxRichTextRange& range, wxSize& size, int& descent, wxDC& dc, wxRichTextDrawingContext& context, int flags, const wxPoint& position = wxPoint(0,0), const wxSize& parentSize = wxDefaultSize, std::vector<int>* partialExtents = nullptr) const override;
 
     bool DeleteRange(const wxRichTextRange& range) override;
 
@@ -6187,6 +6187,49 @@ protected:
     // may not be such a problem. Perhaps the table should derive from a different
     // class?
     wxRichTextObjectPtrArrayArray   m_cells;
+
+private:
+    wxRichTextRectArray getSpanningCells();
+
+    void subsumedBySpanningCell(const wxRichTextRectArray& rectArray);
+
+    void getInitialLayoutAndWidths();
+
+    void getInitialColWidths(const std::vector<int>& abs_widths, const std::vector<int>& percentage_widths, std::vector<int>& col_widths);
+
+    void wxRichTextTable::adjustColumns(const std::vector<int>& minColWidths,
+        const std::vector<int>& minColWidthsNoWrap,
+        const std::vector<int>& maxUnspecifiedColumnWidths,
+        std::vector<int>& colWidths,
+        bool stretchToFitTableWidth,
+        int tableWidth,
+        bool relaxConstraints,
+        int widthLeft,
+        bool shareEqually,
+        int colShare,
+        int colShareRemainder);
+
+    void completeSpanningWidth(
+        const std::vector<int>& spanningWidths,
+        const std::vector<int>& spanningWidthsSpanLengths,
+        const std::vector<int>& minColWidthsNoWrap,
+        std::vector<int>& minColWidths,
+        std::vector<int>& colWidths);
+
+    void getInitialLayoutAndWidths(
+        std::vector<int>& maxUnspecifiedColumnWidths,
+        std::vector<int>& absoluteColWidths,
+        std::vector<int>& minColWidths,
+        std::vector<int>& percentageColWidths,
+        std::vector<int>& minColWidthsNoWrap,
+        std::vector<int>& maxColWidths,
+        int paddingX,
+        int internalTableWidth,
+        double scale,
+        wxRect availableSpace,
+        wxRichTextDrawingContext& context,
+        wxDC& dc,
+        int style);
 };
 
 /** @class wxRichTextTableBlock
@@ -6306,21 +6349,21 @@ public:
     /**
         Returns the array of integers representing the object address.
     */
-    wxArrayInt& GetAddress() { return m_address; }
+    std::vector<int>& GetAddress() { return m_address; }
 
     /**
         Returns the array of integers representing the object address.
     */
-    const wxArrayInt& GetAddress() const { return m_address; }
+    const std::vector<int>& GetAddress() const { return m_address; }
 
     /**
         Sets the address from an array of integers.
     */
-    void SetAddress(const wxArrayInt& address) { m_address = address; }
+    void SetAddress(const std::vector<int>& address) { m_address = address; }
 
 protected:
 
-    wxArrayInt  m_address;
+    std::vector<int>  m_address;
 };
 
 class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextAction;
@@ -6429,7 +6472,7 @@ public:
     */
     void UpdateAppearance(long caretPosition, bool sendUpdateEvent = false,
                           const wxRect& oldFloatRect = wxRect(),
-                          wxArrayInt* optimizationLineCharPositions = nullptr, wxArrayInt* optimizationLineYPositions = nullptr,
+                          std::vector<int>* optimizationLineCharPositions = nullptr, std::vector<int>* optimizationLineYPositions = nullptr,
                           bool isDoCmd = true);
 
     /**
@@ -6488,7 +6531,7 @@ public:
     /**
         Calculate arrays for refresh optimization.
     */
-    void CalculateRefreshOptimizations(wxArrayInt& optimizationLineCharPositions, wxArrayInt& optimizationLineYPositions,
+    void CalculateRefreshOptimizations(std::vector<int>& optimizationLineCharPositions, std::vector<int>& optimizationLineYPositions,
                                        wxRect& oldFloatRect);
 
     /**
@@ -6857,7 +6900,7 @@ public:
         For example, individual characters within a text object may require special highlighting.
         Returns the number of virtual attributes found.
     */
-    virtual int GetVirtualSubobjectAttributes(wxRichTextObject* obj, wxArrayInt& positions, wxRichTextAttrArray& attributes) const = 0;
+    virtual int GetVirtualSubobjectAttributes(wxRichTextObject* obj, std::vector<int>& positions, wxRichTextAttrArray& attributes) const = 0;
 
     /**
         Do we have virtual text for this object? Virtual text allows an application
@@ -7055,7 +7098,7 @@ WXDLLIMPEXP_RICHTEXT bool wxRichTextBitlistsEqPartial(int valueA, int valueB, in
 WXDLLIMPEXP_RICHTEXT bool wxRichTextSplitParaCharStyles(const wxRichTextAttr& style, wxRichTextAttr& parStyle, wxRichTextAttr& charStyle);
 
 /// Compare tabs
-WXDLLIMPEXP_RICHTEXT bool wxRichTextTabsEq(const wxArrayInt& tabs1, const wxArrayInt& tabs2);
+WXDLLIMPEXP_RICHTEXT bool wxRichTextTabsEq(const std::vector<int>& tabs1, const std::vector<int>& tabs2);
 
 /// Convert a decimal to Roman numerals
 WXDLLIMPEXP_RICHTEXT wxString wxRichTextDecimalToRoman(long n);

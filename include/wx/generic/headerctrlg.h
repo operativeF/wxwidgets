@@ -59,8 +59,8 @@ private:
 
     void DoScrollHorz(int dx) override;
 
-    void DoSetColumnsOrder(const wxArrayInt& order) override;
-    wxArrayInt DoGetColumnsOrder() const override;
+    void DoSetColumnsOrder(const std::vector<int>& order) override;
+    std::vector<int> DoGetColumnsOrder() const override;
 
     // common part of all ctors
     void Init();
@@ -174,7 +174,7 @@ private:
 
     // the indices of the column appearing at the given position on the display
     // (its size is always m_numColumns)
-    wxArrayInt m_colIndices;
+    std::vector<int> m_colIndices;
 
     bool m_wasSeparatorDClick;
 

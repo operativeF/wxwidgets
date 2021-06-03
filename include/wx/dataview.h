@@ -385,7 +385,7 @@ public:
     void RowInserted( unsigned int before );
     void RowAppended();
     void RowDeleted( unsigned int row );
-    void RowsDeleted( const wxArrayInt &rows );
+    void RowsDeleted( const std::vector<int> &rows );
     void RowChanged( unsigned int row );
     void RowValueChanged( unsigned int row, unsigned int col );
     void Reset( unsigned int new_size );
@@ -424,7 +424,7 @@ public:
     void RowInserted( unsigned int before );
     void RowAppended();
     void RowDeleted( unsigned int row );
-    void RowsDeleted( const wxArrayInt &rows );
+    void RowsDeleted( const std::vector<int> &rows );
     void RowChanged( unsigned int row );
     void RowValueChanged( unsigned int row, unsigned int col );
     void Reset( unsigned int new_size );

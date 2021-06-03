@@ -22,7 +22,6 @@
 #include "wx/ctrlsub.h"         // base class
 
 // forward declarations are enough here
-class WXDLLIMPEXP_FWD_BASE wxArrayInt;
 class WXDLLIMPEXP_FWD_BASE wxArrayString;
 
 // ----------------------------------------------------------------------------
@@ -64,7 +63,7 @@ public:
 
     // works for single as well as multiple selection listboxes (unlike
     // GetSelection which only works for listboxes with single selection)
-    virtual int GetSelections(wxArrayInt& aSelections) const = 0;
+    virtual int GetSelections(std::vector<int>& aSelections) const = 0;
 
     // set the specified item at the first visible item or scroll to max
     // range.
@@ -133,7 +132,7 @@ protected:
     // currently selected item, this is used by DoChangeSingleSelection().
     //
     // TODO-OPT: wxSelectionStore would be more efficient for big list boxes.
-    wxArrayInt m_oldSelections;
+    std::vector<int> m_oldSelections;
 
     // Update m_oldSelections with currently selected items (does nothing in
     // single selection mode on platforms other than MSW).

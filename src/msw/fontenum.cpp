@@ -81,7 +81,7 @@ private:
     bool m_enumEncodings;
 
     // the list of charsets we already found while enumerating charsets
-    wxArrayInt m_charsets;
+    std::vector<int> m_charsets;
 
     // the list of facenames we already found while enumerating facenames
     wxArrayString m_facenames;
@@ -160,9 +160,9 @@ bool wxFontEnumeratorHelper::OnFont(const LPLOGFONT lf,
     {
         // is this a new charset?
         int cs = lf->lfCharSet;
-        if ( m_charsets.Index(cs) == wxNOT_FOUND )
+        if (std::find(m_charsets.begin(), m_charsets.end(), cs) == std::end(m_charsets))
         {
-            const_cast<wxFontEnumeratorHelper *>(this)->m_charsets.Add(cs);
+            const_cast<wxFontEnumeratorHelper *>(this)->m_charsets.push_back(cs);
 
 #if wxUSE_FONTMAP
             wxFontEncoding enc = wxGetFontEncFromCharSet(cs);

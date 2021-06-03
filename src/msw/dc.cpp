@@ -1915,7 +1915,7 @@ void wxMSWDCImpl::DoGetTextExtent(const wxString& string, wxCoord *x, wxCoord *y
 }
 
 
-bool wxMSWDCImpl::DoGetPartialTextExtents(const wxString& text, wxArrayInt& widths) const
+bool wxMSWDCImpl::DoGetPartialTextExtents(const wxString& text, std::vector<int>& widths) const
 {
     wxTextMeasure txm(GetOwner(), nullptr); // don't change the font
     return txm.GetPartialTextExtents(text, widths, 1.0);

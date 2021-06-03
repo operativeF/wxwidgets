@@ -101,8 +101,8 @@ public:
     // set the columns order: the array defines the column index which appears
     // the given position, it must have GetColumnCount() elements and contain
     // all indices exactly once
-    void SetColumnsOrder(const wxArrayInt& order);
-    wxArrayInt GetColumnsOrder() const;
+    void SetColumnsOrder(const std::vector<int>& order);
+    std::vector<int> GetColumnsOrder() const;
 
     // get the index of the column at the given display position
     unsigned int GetColumnAt(unsigned int pos) const;
@@ -117,7 +117,7 @@ public:
     // wxGrid: reshuffles the array of column indices indexed by positions
     // (i.e. using the same convention as for SetColumnsOrder()) so that the
     // column with the given index is found at the specified position
-    static void MoveColumnInOrderArray(wxArrayInt& order,
+    static void MoveColumnInOrderArray(std::vector<int>& order,
                                        unsigned int idx,
                                        unsigned int pos);
 
@@ -203,7 +203,7 @@ protected:
     // at once and should be implemented for controls using wxHD_ALLOW_REORDER
     // style (there is no need to call SetColumnsOrder() from here, this is
     // done by the control itself)
-    virtual void UpdateColumnsOrder(const wxArrayInt& WXUNUSED(order))
+    virtual void UpdateColumnsOrder(const std::vector<int>& WXUNUSED(order))
     {
         wxFAIL_MSG( "must be overridden if called" );
     }
@@ -216,7 +216,7 @@ protected:
 
     // helper function for the derived classes: update the array of column
     // indices after the number of columns changed
-    void DoResizeColumnIndices(wxArrayInt& colIndices, unsigned int count);
+    void DoResizeColumnIndices(std::vector<int>& colIndices, unsigned int count);
 
 protected:
     // this window doesn't look nice with the border so don't use it by default
@@ -231,8 +231,8 @@ private:
 
     virtual void DoScrollHorz(int dx) = 0;
 
-    virtual void DoSetColumnsOrder(const wxArrayInt& order) = 0;
-    virtual wxArrayInt DoGetColumnsOrder() const = 0;
+    virtual void DoSetColumnsOrder(const std::vector<int>& order) = 0;
+    virtual std::vector<int> DoGetColumnsOrder() const = 0;
 
 
     // event handlers

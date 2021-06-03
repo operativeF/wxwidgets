@@ -56,7 +56,7 @@ public:
                     wxWindowID id,
                     const wxPoint& pos,
                     const wxSize& size,
-                    const wxArrayInt& order,
+                    const std::vector<int>& order,
                     const wxArrayString& items,
                     long style = 0,
                     const wxValidator& validator = wxDefaultValidator,
@@ -74,7 +74,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos,
                 const wxSize& size,
-                const wxArrayInt& order,
+                const std::vector<int>& order,
                 const wxArrayString& items,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
@@ -86,7 +86,7 @@ public:
 
     // get the current items order; the returned array uses the same convention
     // as the one passed to the ctor
-    const wxArrayInt& GetCurrentOrder() const { return m_order; }
+    const std::vector<int>& GetCurrentOrder() const { return m_order; }
 
     // return true if the current item can be moved up or down (i.e. just that
     // it's not the first or the last one)
@@ -116,7 +116,7 @@ private:
 
 
     // the current order array
-    wxArrayInt m_order;
+    std::vector<int> m_order;
 
     wxDECLARE_EVENT_TABLE();
 };
@@ -135,7 +135,7 @@ public:
                     wxWindowID id,
                     const wxPoint& pos,
                     const wxSize& size,
-                    const wxArrayInt& order,
+                    const std::vector<int>& order,
                     const wxArrayString& items,
                     long style = 0,
                     const wxValidator& validator = wxDefaultValidator,
@@ -151,7 +151,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos,
                 const wxSize& size,
-                const wxArrayInt& order,
+                const std::vector<int>& order,
                 const wxArrayString& items,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
@@ -185,7 +185,7 @@ public:
     wxRearrangeDialog(wxWindow *parent,
                       const wxString& message,
                       const wxString& title,
-                      const wxArrayInt& order,
+                      const std::vector<int>& order,
                       const wxArrayString& items,
                       const wxPoint& pos = wxDefaultPosition,
                       const wxString& name = wxASCII_STR(wxRearrangeDialogNameStr))
@@ -199,7 +199,7 @@ public:
     bool Create(wxWindow *parent,
                 const wxString& message,
                 const wxString& title,
-                const wxArrayInt& order,
+                const std::vector<int>& order,
                 const wxArrayString& items,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxString& name = wxASCII_STR(wxRearrangeDialogNameStr));
@@ -218,7 +218,7 @@ public:
 
 
     // get the order of items after it was modified by the user
-    wxArrayInt GetOrder() const;
+    std::vector<int> GetOrder() const;
 
 private:
     wxRearrangeCtrl *m_ctrl{nullptr};

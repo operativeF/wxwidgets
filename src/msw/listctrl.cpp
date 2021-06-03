@@ -765,7 +765,7 @@ int wxListCtrl::GetColumnIndexFromOrder(int order) const
     wxCHECK_MSG( order >= 0 && order < numCols, -1,
                 wxT("Column position out of bounds") );
 
-    wxArrayInt indexArray(numCols);
+    std::vector<int> indexArray(numCols);
     if ( !ListView_GetColumnOrderArray(GetHwnd(), numCols, &indexArray[0]) )
         return -1;
 
@@ -777,7 +777,7 @@ int wxListCtrl::GetColumnOrder(int col) const
     const int numCols = GetColumnCount();
     wxASSERT_MSG( col >= 0 && col < numCols, wxT("Column index out of bounds") );
 
-    wxArrayInt indexArray(numCols);
+    std::vector<int> indexArray(numCols);
     if ( !ListView_GetColumnOrderArray(GetHwnd(), numCols, &indexArray[0]) )
         return -1;
 
@@ -793,11 +793,11 @@ int wxListCtrl::GetColumnOrder(int col) const
 }
 
 // Gets the column order for all columns
-wxArrayInt wxListCtrl::GetColumnsOrder() const
+std::vector<int> wxListCtrl::GetColumnsOrder() const
 {
     const int numCols = GetColumnCount();
 
-    wxArrayInt orders(numCols);
+    std::vector<int> orders(numCols);
     if ( !ListView_GetColumnOrderArray(GetHwnd(), numCols, &orders[0]) )
         orders.clear();
 
@@ -805,7 +805,7 @@ wxArrayInt wxListCtrl::GetColumnsOrder() const
 }
 
 // Sets the column order for all columns
-bool wxListCtrl::SetColumnsOrder(const wxArrayInt& orders)
+bool wxListCtrl::SetColumnsOrder(const std::vector<int>& orders)
 {
     const int numCols = GetColumnCount();
 

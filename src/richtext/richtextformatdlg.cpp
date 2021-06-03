@@ -103,7 +103,7 @@ void wxRichTextFormattingDialog::Init()
 wxRichTextFormattingDialog::~wxRichTextFormattingDialog()
 {
     int sel = GetBookCtrl()->GetSelection();
-    if (sel != -1 && sel < (int) m_pageIds.GetCount())
+    if (sel != -1 && sel < (int) m_pageIds.size())
         sm_lastPage = m_pageIds[sel];
 
     delete m_styleDefinition;
@@ -128,11 +128,12 @@ bool wxRichTextFormattingDialog::Create(long flags, wxWindow* parent, const wxSt
 
     if (sm_restoreLastPage && sm_lastPage != -1)
     {
-        int idx = m_pageIds.Index(sm_lastPage);
-        if (idx != -1)
+        // FIXME: Improve this.
+        auto idx = std::find(m_pageIds.begin(), m_pageIds.end(), sm_lastPage);
+        if (idx != std::end(m_pageIds))
         {
             m_ignoreUpdates = true;
-            GetBookCtrl()->SetSelection(idx);
+            GetBookCtrl()->SetSelection(std::distance(std::begin(m_pageIds), idx));
             m_ignoreUpdates = false;
         }
     }
@@ -250,7 +251,7 @@ void wxRichTextFormattingDialog::OnHelp(wxCommandEvent& event)
     if (selPage != wxNOT_FOUND)
     {
         int pageId = -1;
-        if (selPage < (int) m_pageIds.GetCount())
+        if (selPage < (int) m_pageIds.size())
             pageId = m_pageIds[selPage];
         if (!GetFormattingDialogFactory()->ShowHelp(pageId, this))
             event.Skip();
@@ -570,7 +571,7 @@ wxRichTextAttr* wxRichTextFormattingDialog::GetDialogResetAttributes(wxWindow* w
     if (dialog)
         return & dialog->GetResetAttributes();
     else
-        return NULL;
+        return nullptr;
 }
 #endif
 
@@ -584,10 +585,8 @@ wxRichTextStyleDefinition* wxRichTextFormattingDialog::GetDialogStyleDefinition(
         return nullptr;
 }
 
-void wxRichTextFormattingDialog::SetDimensionValue(wxTextAttrDimension& dim, wxTextCtrl* valueCtrl, wxComboBox* unitsCtrl, wxCheckBox* checkBox, wxArrayInt* units)
+void wxRichTextFormattingDialog::SetDimensionValue(wxTextAttrDimension& dim, wxTextCtrl* valueCtrl, wxComboBox* unitsCtrl, wxCheckBox* checkBox, std::vector<int>* units)
 {
-    int unitsIdx = 0;
-
     if (!dim.IsValid())
     {
         if (checkBox)
@@ -598,50 +597,52 @@ void wxRichTextFormattingDialog::SetDimensionValue(wxTextAttrDimension& dim, wxT
     }
     else
     {
+        auto unitsIdx = units->begin();
+
         if (checkBox)
             checkBox->SetValue(true);
         
         if (dim.GetUnits() == wxTEXT_ATTR_UNITS_PIXELS)
         {
-            unitsIdx = 0;  // By default, the 1st in the list.
+            // By default, the 1st in the list.
             valueCtrl->SetValue(wxString::Format(wxT("%d"), (int) dim.GetValue()));
         }
         else if (dim.GetUnits() == wxTEXT_ATTR_UNITS_TENTHS_MM)
         {
-            unitsIdx = 1; // By default, the 2nd in the list.
+            unitsIdx += 1; // By default, the 2nd in the list.
             double value = dim.GetValue() / 100.0;
             valueCtrl->SetValue(wxString::Format(wxT("%.2f"), value));
         }
         else if (dim.GetUnits() == wxTEXT_ATTR_UNITS_PERCENTAGE)
         {
-            unitsIdx = 2; // By default, the 3rd in the list.
+            unitsIdx += 2; // By default, the 3rd in the list.
             valueCtrl->SetValue(wxString::Format(wxT("%d"), (int) dim.GetValue()));
         }
         else if (dim.GetUnits() == wxTEXT_ATTR_UNITS_HUNDREDTHS_POINT)
         {
-            unitsIdx = 3; // By default, the 4th in the list.
+            unitsIdx += 3; // By default, the 4th in the list.
             double value = dim.GetValue() / 100.0;
             valueCtrl->SetValue(wxString::Format(wxT("%.2f"), value));
         }
         else if (dim.GetUnits() == wxTEXT_ATTR_UNITS_POINTS)
         {
-            unitsIdx = 3; // By default, the 4th in the list (we don't have points and hundredths of points in the same list)
+            unitsIdx += 3; // By default, the 4th in the list (we don't have points and hundredths of points in the same list)
             valueCtrl->SetValue(wxString::Format(wxT("%d"), (int) dim.GetValue()));
         }
         
         if (units)
         {
-            unitsIdx = units->Index(dim.GetUnits());
-            if (unitsIdx == -1)
-                unitsIdx = 0;
+            unitsIdx = std::find(units->begin(), units->end(), dim.GetUnits());
+            if (unitsIdx == std::end(*units))
+                unitsIdx = std::begin(*units);
         }
 
         if (unitsCtrl)
-            unitsCtrl->SetSelection(unitsIdx);
+            unitsCtrl->SetSelection(std::distance(std::begin(*units), unitsIdx));
     }
 }
 
-void wxRichTextFormattingDialog::GetDimensionValue(wxTextAttrDimension& dim, wxTextCtrl* valueCtrl, wxComboBox* unitsCtrl, wxCheckBox* checkBox, wxArrayInt* units)
+void wxRichTextFormattingDialog::GetDimensionValue(wxTextAttrDimension& dim, wxTextCtrl* valueCtrl, wxComboBox* unitsCtrl, wxCheckBox* checkBox, std::vector<int>* units)
 {
     int unitsSel = 0;
     if (unitsCtrl)
