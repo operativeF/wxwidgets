@@ -4124,8 +4124,6 @@ namespace std
 // Implementation only from here until the end of file
 // ---------------------------------------------------------------------------
 
-#include "wx/iosfwrap.h"
-
 WXDLLIMPEXP_BASE std::ostream& operator<<(std::ostream&, const wxString&);
 WXDLLIMPEXP_BASE std::ostream& operator<<(std::ostream&, const wxCStrData&);
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING

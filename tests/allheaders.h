@@ -195,8 +195,6 @@
 #include <wx/infobar.h>
 #include <wx/init.h>
 #include <wx/intl.h>
-#include <wx/iosfwrap.h>
-#include <wx/ioswrap.h>
 #include <wx/ipcbase.h>
 #include <wx/ipc.h>
 #include <wx/itemattr.h>

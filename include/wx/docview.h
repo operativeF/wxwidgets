@@ -37,8 +37,6 @@ class WXDLLIMPEXP_FWD_BASE wxConfigBase;
 
 class wxDocChildFrameAnyBase;
 
-#include "wx/iosfwrap.h"
-
 // Flags for wxDocManager (can be combined).
 enum
 {

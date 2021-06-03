@@ -117,8 +117,6 @@ enum wxLogLevelValues
     #define wxTRACE_OleCalls wxT("ole")  // OLE interface calls
 #endif
 
-#include "wx/iosfwrap.h"
-
 // ----------------------------------------------------------------------------
 // information about a log record, i.e. unit of log output
 // ----------------------------------------------------------------------------

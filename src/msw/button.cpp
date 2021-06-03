@@ -423,7 +423,7 @@ bool wxButton::MSWCommand(WXUINT param, WXWORD WXUNUSED(id))
         //       in order to not get 3 EVT_BUTTON events.  If this is a problem
         //       then we need to figure out which version of the comctl32 changed
         //       this behaviour and test for it.
-
+        // FIXME: Well, here's the URL test problem.
         case 1:                     // message came from an accelerator
         case BN_CLICKED:            // normal buttons send this
             processed = SendClickEvent();

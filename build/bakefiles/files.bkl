@@ -632,8 +632,6 @@ IMPORTANT: please read docs/tech/tn0016.txt before modifying this file!
     wx/iconloc.h
     wx/init.h
     wx/intl.h
-    wx/iosfwrap.h
-    wx/ioswrap.h
     wx/ipc.h
     wx/ipcbase.h
     wx/kbdstate.h

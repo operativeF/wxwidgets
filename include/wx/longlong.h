@@ -98,9 +98,6 @@
 // choose the appropriate class
 // ----------------------------------------------------------------------------
 
-// we use iostream for wxLongLong output
-#include "wx/iosfwrap.h"
-
 #if wxUSE_LONGLONG_NATIVE
 
 class WXDLLIMPEXP_BASE wxLongLongNative

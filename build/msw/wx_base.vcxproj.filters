@@ -571,12 +571,6 @@
     <ClInclude Include="..\..\include\wx\intl.h">
       <Filter>Common Headers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\wx\iosfwrap.h">
-      <Filter>Common Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\wx\ioswrap.h">
-      <Filter>Common Headers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\wx\ipc.h">
       <Filter>Common Headers</Filter>
     </ClInclude>

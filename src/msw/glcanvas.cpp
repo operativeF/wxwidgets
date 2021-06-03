@@ -169,6 +169,7 @@ inline T wxWGLProcCast(PROC proc)
 
 // For MSVC we can link in the required library explicitly, for the other
 // compilers (e.g. MinGW) this needs to be done at makefiles level.
+// FIXME: will be done when the full port over to CMake is done.
 #ifdef _MSC_VER
 #  pragma comment( lib, "opengl32" )
 #  pragma comment( lib, "glu32" )

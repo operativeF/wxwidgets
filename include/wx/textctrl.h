@@ -23,7 +23,8 @@
 #include "wx/textentry.h"       // single-line text entry interface
 #include "wx/gdicmn.h"          // wxPoint
 
-#include "wx/ioswrap.h"
+#include <iostream>
+
 #define wxHAS_TEXT_WINDOW_STREAM 1
 
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;

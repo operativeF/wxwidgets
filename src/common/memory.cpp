@@ -33,8 +33,6 @@
 
 #include <stdlib.h>
 
-#include "wx/ioswrap.h"
-
 #if !(defined(__VMS__) && ( __VMS_VER < 70000000 ) )
 #include <memory.h>
 #endif

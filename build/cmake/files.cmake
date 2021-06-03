@@ -548,8 +548,6 @@ set(BASE_CMN_HDR
     wx/iconloc.h
     wx/init.h
     wx/intl.h
-    wx/iosfwrap.h
-    wx/ioswrap.h
     wx/ipc.h
     wx/ipcbase.h
     wx/kbdstate.h

@@ -24,8 +24,6 @@
     #include "wx/datetime.h"
 #endif // wxUSE_DATETIME
 
-#include "wx/iosfwrap.h"
-
 class wxTypeInfo;
 class wxObject;
 class wxClassInfo;

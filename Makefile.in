@@ -452,8 +452,6 @@ ALL_BASE_HEADERS =  \
 	wx/iconloc.h \
 	wx/init.h \
 	wx/intl.h \
-	wx/iosfwrap.h \
-	wx/ioswrap.h \
 	wx/ipc.h \
 	wx/ipcbase.h \
 	wx/kbdstate.h \
@@ -637,8 +635,6 @@ ALL_PORTS_BASE_HEADERS =  \
 	wx/iconloc.h \
 	wx/init.h \
 	wx/intl.h \
-	wx/iosfwrap.h \
-	wx/ioswrap.h \
 	wx/ipc.h \
 	wx/ipcbase.h \
 	wx/kbdstate.h \

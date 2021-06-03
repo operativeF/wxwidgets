@@ -2072,14 +2072,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\wx\iosfwrap.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\include\wx\ioswrap.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\include\wx\ipc.h"
 				>
 			</File>

@@ -17,8 +17,6 @@
     #include "wx/gdicmn.h"
 #endif // WX_PRECOMP
 
-#include "wx/iosfwrap.h"
-
 #include "asserthelper.h"
 
 // ----------------------------------------------------------------------------

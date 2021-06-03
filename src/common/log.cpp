@@ -45,6 +45,7 @@
 #include <cerrno>
 #include <cstring>
 #include <cstdlib>
+#include <iostream>
 #include <vector>
 
 #if defined(__WINDOWS__)
@@ -850,8 +851,6 @@ void wxLogStderr::DoLogText(const wxString& msg)
 // ----------------------------------------------------------------------------
 // wxLogStream implementation
 // ----------------------------------------------------------------------------
-
-#include "wx/ioswrap.h"
 
 wxLogStream::wxLogStream(std::ostream *ostr, const wxMBConv& conv)
     : wxMessageOutputWithConv(conv)

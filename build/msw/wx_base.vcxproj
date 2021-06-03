@@ -728,8 +728,6 @@
     <ClInclude Include="..\..\include\wx\init.h" />
     <ClInclude Include="..\..\include\wx\meta\int2type.h" />
     <ClInclude Include="..\..\include\wx\intl.h" />
-    <ClInclude Include="..\..\include\wx\iosfwrap.h" />
-    <ClInclude Include="..\..\include\wx\ioswrap.h" />
     <ClInclude Include="..\..\include\wx\ipc.h" />
     <ClInclude Include="..\..\include\wx\ipcbase.h" />
     <ClInclude Include="..\..\include\wx\kbdstate.h" />

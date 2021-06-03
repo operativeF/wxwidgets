@@ -566,7 +566,6 @@ BASE_CMN_HDR =
     wx/init.h
     wx/intl.h
     wx/iosfwrap.h
-    wx/ioswrap.h
     wx/ipc.h
     wx/ipcbase.h
     wx/kbdstate.h

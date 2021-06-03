@@ -17,7 +17,8 @@
 
 #include "wx/defs.h"
 #include "wx/stream.h"
-#include "wx/ioswrap.h"
+
+#include <iostream>
 
 // ==========================================================================
 // wxStdInputStreamBuffer
