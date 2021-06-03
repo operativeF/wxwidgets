@@ -123,10 +123,6 @@ public:
     // save the DIB as a .BMP file to the file with the given name
     bool Save(const wxString& filename);
 
-
-    // accessors
-    // ---------
-
     // return true if DIB was successfully created, false otherwise
     bool IsOk() const { return m_handle != nullptr; }
 

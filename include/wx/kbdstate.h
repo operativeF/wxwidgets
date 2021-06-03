@@ -34,9 +34,6 @@ public:
     {
     }
 
-    // default copy ctor, assignment operator and dtor are ok
-
-
     // accessors for the various modifier keys
     // ---------------------------------------
 

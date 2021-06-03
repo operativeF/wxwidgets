@@ -152,9 +152,6 @@ public:
     wxLongLongNative& Assign(double d)
         { m_ll = (wxLongLong_t)d; return *this; }
 
-    // assignment operators from wxLongLongNative is ok
-
-    // accessors
         // get high part
     wxInt32 GetHi() const
         { return wx_truncate_cast(wxInt32, m_ll >> 32); }
@@ -386,9 +383,6 @@ public:
     wxULongLongNative& operator=(const class wxULongLongWx &ll);
 #endif
 
-    // assignment operators from wxULongLongNative is ok
-
-    // accessors
         // get high part
     wxUint32 GetHi() const
         { return wx_truncate_cast(wxUint32, m_ll >> 32); }
@@ -648,7 +642,6 @@ public:
     wxLongLongWx& Assign(double d);
         // can't have assignment operator from 2 longs
 
-    // accessors
         // get high part
     long GetHi() const { return m_hi; }
         // get low part
@@ -888,7 +881,6 @@ public:
 
     // can't have assignment operator from 2 longs
 
-    // accessors
         // get high part
     unsigned long GetHi() const { return m_hi; }
         // get low part

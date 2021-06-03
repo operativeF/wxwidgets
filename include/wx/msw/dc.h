@@ -14,10 +14,6 @@
 #include "wx/defs.h"
 #include "wx/dc.h"
 
-// ---------------------------------------------------------------------------
-// macros
-// ---------------------------------------------------------------------------
-
 #if wxUSE_DC_CACHEING
 /*
  * Cached blitting, maintaining a cache
@@ -48,8 +44,8 @@ public:
     wxMSWDCImpl(wxDC *owner, WXHDC hDC);
     ~wxMSWDCImpl() override;
 
-    
-    // ----------------------------------
+    wxMSWDCImpl(const wxMSWDCImpl&) = delete;
+	wxMSWDCImpl& operator=(const wxMSWDCImpl&) = delete;
 
     void Clear() override;
 
@@ -99,9 +95,6 @@ public:
 #endif // wxUSE_DC_TRANSFORM_MATRIX
 
     void SetLogicalFunction(wxRasterOperationMode function) override;
-
-    // implementation from now on
-    // --------------------------
 
     virtual void SetRop(WXHDC cdc);
     virtual void SelectOldObjects(WXHDC dc);
@@ -325,8 +318,6 @@ protected:
     bool m_isClipBoxValid;
 
     wxDECLARE_CLASS(wxMSWDCImpl);
-    wxMSWDCImpl(const wxMSWDCImpl&) = delete;
-	wxMSWDCImpl& operator=(const wxMSWDCImpl&) = delete;
 };
 
 // ----------------------------------------------------------------------------

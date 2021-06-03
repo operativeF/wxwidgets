@@ -265,7 +265,6 @@ public:
     // gtk_tree_view_set_model() that this function wraps.
     void UseModel(bool use);
 
-    // accessors
     wxDataViewModel* GetDataViewModel() { return m_wx_model; }
     const wxDataViewModel* GetDataViewModel() const { return m_wx_model; }
     wxDataViewCtrl* GetOwner()          { return m_owner; }

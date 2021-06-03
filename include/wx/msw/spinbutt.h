@@ -19,7 +19,6 @@
 class WXDLLIMPEXP_CORE wxSpinButton : public wxSpinButtonBase
 {
 public:
-    // construction
     wxSpinButton() = default;
 
     wxSpinButton(wxWindow *parent,
@@ -45,12 +44,10 @@ public:
                 const wxString& name = wxSPIN_BUTTON_NAME);
 
 
-    // accessors
     int GetValue() const override;
     void SetValue(int val) override;
     void SetRange(int minVal, int maxVal) override;
 
-    // implementation
     bool MSWCommand(WXUINT param, WXWORD id) override;
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
     bool MSWOnScroll(int orientation, WXWORD wParam,

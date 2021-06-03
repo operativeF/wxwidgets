@@ -90,12 +90,6 @@ public:
     // Get the unique identifier of a window
     virtual WXWidget GetHandle() const { return GetMainWidget(); }
 
-    // implementation from now on
-    // --------------------------
-
-    // accessors
-    // ---------
-
     // Get main widget for this window, e.g. a text widget
     virtual WXWidget GetMainWidget() const;
     // Get the widget that corresponds to the label (for font setting,

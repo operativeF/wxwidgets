@@ -11,10 +11,6 @@
 #ifndef _WX_MSW_DATECTRL_H_
 #define _WX_MSW_DATECTRL_H_
 
-// ----------------------------------------------------------------------------
-// wxDatePickerCtrl
-// ----------------------------------------------------------------------------
-
 class WXDLLIMPEXP_ADV wxDatePickerCtrl : public wxDatePickerCtrlBase
 {
 public:

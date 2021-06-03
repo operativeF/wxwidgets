@@ -105,9 +105,6 @@ public:
 	wxToolBarToolBase(const wxToolBarToolBase&) = delete;
 	wxToolBarToolBase& operator=(const wxToolBarToolBase&) = delete;
 
-    // accessors
-    // ---------
-
     // general
     int GetId() const { return m_id; }
 

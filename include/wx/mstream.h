@@ -92,8 +92,6 @@ protected:
     wxDECLARE_DYNAMIC_CLASS(wxMemoryOutputStream);
 };
 
-#endif
-  // wxUSE_STREAMS
+#endif // wxUSE_STREAMS
 
-#endif
-  // _WX_WXMMSTREAM_H__
+#endif // _WX_WXMMSTREAM_H__

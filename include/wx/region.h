@@ -71,15 +71,8 @@ public:
     wxRegion(const wxBitmap& bmp, const wxColour& transp, int tolerance = 0);
 #endif // 0
 
-    // operators
-    // ---------
-
     bool operator==(const wxRegion& region) const { return IsEqual(region); }
     bool operator!=(const wxRegion& region) const { return !(*this == region); }
-
-
-    // accessors
-    // ---------
 
     // Is region empty?
     virtual bool IsEmpty() const = 0;

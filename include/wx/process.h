@@ -167,7 +167,6 @@ public:
 
 	wxProcessEvent& operator=(const wxProcessEvent&) = delete;
 
-    // accessors
         // PID of process which terminated
     int GetPid() const { return m_pid; }
 

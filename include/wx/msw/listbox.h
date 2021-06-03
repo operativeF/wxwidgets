@@ -13,10 +13,6 @@
 
 #if wxUSE_LISTBOX
 
-// ----------------------------------------------------------------------------
-// simple types
-// ----------------------------------------------------------------------------
-
 #if wxUSE_OWNER_DRAWN
   class WXDLLIMPEXP_FWD_CORE wxOwnerDrawn;
 
@@ -25,11 +21,6 @@
 
   WX_DEFINE_EXPORTED_ARRAY_PTR(wxOwnerDrawn *, wxListBoxItemsArray);
 #endif // wxUSE_OWNER_DRAWN
-
-
-// ----------------------------------------------------------------------------
-// List box control
-// ----------------------------------------------------------------------------
 
 class WXDLLIMPEXP_CORE wxListBox : public wxListBoxBase
 {
@@ -196,9 +187,6 @@ protected:
 #endif
 
 private:
-    // common part of all ctors
-    
-
     // call this when items are added to or deleted from the listbox or an
     // items text changes
     void MSWOnItemsChanged();
@@ -216,5 +204,4 @@ public:
 
 #endif // wxUSE_LISTBOX
 
-#endif
-    // _WX_LISTBOX_H_
+#endif // _WX_LISTBOX_H_

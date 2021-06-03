@@ -84,12 +84,6 @@ public:
     // Get the unique identifier of a window
     virtual WXWindow GetHandle() const { return X11GetMainWindow(); }
 
-    // implementation from now on
-    // --------------------------
-
-    // accessors
-    // ---------
-
     // Get main X11 window
     virtual WXWindow X11GetMainWindow() const;
 

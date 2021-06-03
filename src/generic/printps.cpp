@@ -11,15 +11,6 @@
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
-
-// ============================================================================
-// declarations
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
-
 #if wxUSE_PRINTING_ARCHITECTURE && wxUSE_POSTSCRIPT && (!defined(__WXMSW__) || wxUSE_POSTSCRIPT_ARCHITECTURE_IN_MSW)
 
 #ifndef WX_PRECOMP
@@ -41,28 +32,15 @@
 
 #include <cstdlib>
 
-// ----------------------------------------------------------------------------
-// wxWin macros
-// ----------------------------------------------------------------------------
-
     wxIMPLEMENT_DYNAMIC_CLASS(wxPostScriptPrinter, wxPrinterBase);
     wxIMPLEMENT_CLASS(wxPostScriptPrintPreview, wxPrintPreviewBase);
-
-// ============================================================================
-// implementation
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// Printer
-// ----------------------------------------------------------------------------
 
 wxPostScriptPrinter::wxPostScriptPrinter(wxPrintDialogData *data)
                    : wxPrinterBase(data)
 {
 }
 
-wxPostScriptPrinter::~wxPostScriptPrinter()
-= default;
+wxPostScriptPrinter::~wxPostScriptPrinter() = default;
 
 bool wxPostScriptPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt)
 {

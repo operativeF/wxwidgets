@@ -145,14 +145,12 @@ class WXDLLIMPEXP_CORE wxDataViewItemAttr
 public:
     wxDataViewItemAttr() = default;
 
-    // setters
     void SetColour(const wxColour& colour) { m_colour = colour; }
     void SetBold( bool set ) { m_bold = set; }
     void SetItalic( bool set ) { m_italic = set; }
     void SetStrikethrough( bool set ) { m_strikethrough = set; }
     void SetBackgroundColour(const wxColour& colour)  { m_bgColour = colour; }
 
-    // accessors
     bool HasColour() const { return m_colour.IsOk(); }
     const wxColour& GetColour() const { return m_colour; }
 

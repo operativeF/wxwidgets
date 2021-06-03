@@ -38,16 +38,11 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxTextCtrlNameStr));
 
-    // accessors
-    // ---------
     virtual wxString GetValue() const;
 
     virtual int GetLineLength(long lineNo) const;
     virtual wxString GetLineText(long lineNo) const;
     virtual int GetNumberOfLines() const;
-
-    // operations
-    // ----------
 
     virtual void MarkDirty();
     virtual void DiscardEdits();

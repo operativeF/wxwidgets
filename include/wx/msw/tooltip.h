@@ -28,8 +28,7 @@ public:
     wxToolTip(wxWindow* win, unsigned int id,
               const wxString &tip, const wxRect& rc);
 
-    // accessors
-        // tip text
+    // tip text
     void SetTip(const wxString& tip);
     const wxString& GetTip() const { return m_text; }
 

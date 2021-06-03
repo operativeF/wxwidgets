@@ -13,11 +13,9 @@
 
 class WXDLLIMPEXP_FWD_CORE wxImage;
 
-// Cursor
 class WXDLLIMPEXP_CORE wxCursor : public wxCursorBase
 {
 public:
-    // constructors
     wxCursor();
 #if wxUSE_IMAGE
     wxCursor(const wxImage& image);
@@ -32,7 +30,6 @@ public:
 
     ~wxCursor() override;
 
-    // implementation only
     void SetHCURSOR(WXHCURSOR cursor) { SetHandle((WXHANDLE)cursor); }
     WXHCURSOR GetHCURSOR() const { return (WXHCURSOR)GetHandle(); }
 
@@ -49,5 +46,4 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxCursor);
 };
 
-#endif
-    // _WX_CURSOR_H_
+#endif // _WX_CURSOR_H_

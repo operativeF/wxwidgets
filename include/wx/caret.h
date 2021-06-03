@@ -68,9 +68,6 @@ public:
     bool Create(wxWindowBase *window, const wxSize& size)
         { return DoCreate(window, size.x, size.y); }
 
-    // accessors
-    // ---------
-
         // is the caret valid?
     bool IsOk() const { return m_width != 0 && m_height != 0; }
 

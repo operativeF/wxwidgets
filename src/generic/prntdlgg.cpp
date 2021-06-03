@@ -8,17 +8,8 @@
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
 
-// ============================================================================
-// declarations
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
-
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
-
 
 #if wxUSE_PRINTING_ARCHITECTURE && (!defined(__WXMSW__) || wxUSE_POSTSCRIPT_ARCHITECTURE_IN_MSW)
 
@@ -104,8 +95,7 @@ wxPostScriptPrintNativeData::wxPostScriptPrintNativeData()
     m_printerTranslateY = 0;
 }
 
-wxPostScriptPrintNativeData::~wxPostScriptPrintNativeData()
-= default;
+wxPostScriptPrintNativeData::~wxPostScriptPrintNativeData() = default;
 
 bool wxPostScriptPrintNativeData::TransferTo( wxPrintData &WXUNUSED(data) )
 {
@@ -264,8 +254,7 @@ int wxGenericPrintDialog::ShowModal()
     return wxDialog::ShowModal();
 }
 
-wxGenericPrintDialog::~wxGenericPrintDialog()
-= default;
+wxGenericPrintDialog::~wxGenericPrintDialog() = default;
 
 void wxGenericPrintDialog::OnOK(wxCommandEvent& WXUNUSED(event))
 {

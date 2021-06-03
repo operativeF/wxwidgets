@@ -65,7 +65,6 @@ public:
     wxFindReplaceData() = default;
     wxFindReplaceData(wxUint32 flags) { SetFlags(flags); }
 
-    // accessors
     const wxString& GetFindString() const { return m_FindWhat; }
     const wxString& GetReplaceString() const { return m_ReplaceWith; }
 

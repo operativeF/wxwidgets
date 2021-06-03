@@ -47,12 +47,10 @@ public:
         m_handle = nullptr;
     }
 
-    // accessors
     bool IsOk() const override { return m_handle != nullptr; }
 
     void SetSize(int w, int h) { m_width = w; m_height = h; }
 
-    // free the resources we allocated
     virtual void Free() = 0;
 
     // for compatibility, the member fields are public
@@ -101,7 +99,6 @@ public:
     wxGDIImageRefData *GetGDIImageData() const
         { return (wxGDIImageRefData *)m_refData; }
 
-    // accessors
     WXHANDLE GetHandle() const
         { return IsNull() ? nullptr : GetGDIImageData()->m_handle; }
     void SetHandle(WXHANDLE handle)
@@ -147,14 +144,12 @@ protected:
 class WXDLLIMPEXP_CORE wxGDIImageHandler : public wxObject
 {
 public:
-    // ctor
     wxGDIImageHandler() { m_type = wxBITMAP_TYPE_INVALID; }
     wxGDIImageHandler(const wxString& name,
                       const wxString& ext,
                       wxBitmapType type)
         : m_name(name), m_extension(ext), m_type(type) { }
 
-    // accessors
     void SetName(const wxString& name) { m_name = name; }
     void SetExtension(const wxString& ext) { m_extension = ext; }
     void SetType(wxBitmapType type) { m_type = type; }

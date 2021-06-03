@@ -43,8 +43,6 @@ public:
     wxTreeCtrlBase(const wxTreeCtrlBase&) = delete;
 	wxTreeCtrlBase& operator=(const wxTreeCtrlBase&) = delete;
 
-    // accessors
-    // ---------
 
         // get the total number of items in the control
     virtual unsigned int GetCount() const = 0;
@@ -91,9 +89,6 @@ public:
     // member functions of wxTreeItem because they must know the tree the item
     // belongs to for Windows implementation and storing the pointer to
     // wxTreeCtrl in each wxTreeItem is just too much waste.
-
-    // accessors
-    // ---------
 
         // retrieve items label
     virtual wxString GetItemText(const wxTreeItemId& item) const = 0;

@@ -38,10 +38,6 @@ WXDLLIMPEXP_CORE bool wxGetClipboardFormatName(wxDataFormat dataFormat,
                                           wxChar *formatName,
                                           int maxCount);
 
-//-----------------------------------------------------------------------------
-// wxClipboard
-//-----------------------------------------------------------------------------
-
 class WXDLLIMPEXP_CORE wxClipboard : public wxClipboardBase
 {
 public:

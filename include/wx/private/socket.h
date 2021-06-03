@@ -193,9 +193,6 @@ public:
     wxSocketError SetLocal(const wxSockAddressImpl& address);
     wxSocketError SetPeer(const wxSockAddressImpl& address);
 
-    // accessors
-    // ---------
-
     bool IsServer() const { return m_server; }
 
     const wxSockAddressImpl& GetLocal(); // non const as may update m_local

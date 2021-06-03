@@ -233,7 +233,6 @@ public:
         return *this;
     }
 
-    // accessors for wxSizer only
     int GetProportion() const { return m_proportion; }
     int GetFlags() const { return m_flags; }
     int GetBorderInPixels() const { return m_borderInPixels; }

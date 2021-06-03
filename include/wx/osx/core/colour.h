@@ -22,13 +22,8 @@ struct RGBColor;
 class WXDLLIMPEXP_CORE wxColour: public wxColourBase
 {
 public:
-    // constructors
-    // ------------
     DEFINE_STD_WXCOLOUR_CONSTRUCTORS
 
-    // default copy ctor and dtor are ok
-
-    // accessors
     ChannelType Red() const override;
     ChannelType Green() const override;
     ChannelType Blue() const override;
@@ -36,7 +31,6 @@ public:
 
     bool IsSolid() const override;
 
-    // comparison
     bool operator == (const wxColour& colour) const;
     bool operator != (const wxColour& colour) const { return !(*this == colour); }
 

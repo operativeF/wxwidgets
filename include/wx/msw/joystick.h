@@ -19,15 +19,8 @@ class WXDLLIMPEXP_ADV wxJoystick: public wxObject
 {
   wxDECLARE_DYNAMIC_CLASS(wxJoystick);
 public:
-  /*
-   * Public interface
-   */
-
   wxJoystick(int joystick = wxJOYSTICK1);
   ~wxJoystick() override;
-
-  // Attributes
-  ////////////////////////////////////////////////////////////////////////////
 
   wxPoint GetPosition() const;
   int GetPosition(unsigned axis) const;
@@ -41,9 +34,6 @@ public:
   int GetVPosition() const;
   int GetMovementThreshold() const;
   void SetMovementThreshold(int threshold) ;
-
-  // Capabilities
-  ////////////////////////////////////////////////////////////////////////////
 
   static int GetNumberJoysticks();
 
@@ -78,9 +68,6 @@ public:
   bool HasPOV4Dir() const;
   bool HasPOVCTS() const;
 
-  // Operations
-  ////////////////////////////////////////////////////////////////////////////
-
   // pollingFreq = 0 means that movement events are sent when above the threshold.
   // If pollingFreq > 0, events are received every this many milliseconds.
   bool SetCapture(wxWindow* win, int pollingFreq = 0);
@@ -91,5 +78,4 @@ protected:
   wxJoystickThread*     m_thread;
 };
 
-#endif
-    // _WX_JOYSTICK_H_
+#endif // _WX_JOYSTICK_H_

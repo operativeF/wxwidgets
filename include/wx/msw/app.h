@@ -28,7 +28,9 @@ public:
     wxApp();
     ~wxApp() override;
 
-    // override base class (pure) virtuals
+    wxApp(const wxApp&) = delete;
+	wxApp& operator=(const wxApp&) = delete;
+
     bool Initialize(int& argc, wxChar **argv) override;
     void CleanUp() override;
 
@@ -37,7 +39,6 @@ public:
     void SetPrintMode(int mode) override { m_printMode = mode; }
     virtual int GetPrintMode() const { return m_printMode; }
 
-    // implementation only
     void OnIdle(wxIdleEvent& event);
     void OnEndSession(wxCloseEvent& event);
     void OnQueryEndSession(wxCloseEvent& event);
@@ -130,8 +131,6 @@ public:
 
 protected:
     wxDECLARE_EVENT_TABLE();
-    wxApp(const wxApp&) = delete;
-	wxApp& operator=(const wxApp&) = delete;
     wxDECLARE_DYNAMIC_CLASS(wxApp);
 };
 

@@ -279,7 +279,6 @@ public:
 #endif // !wxUSE_PANGO
     }
 
-    // accessors and modifiers for the font elements
     int GetPointSize() const;
     double GetFractionalPointSize() const;
     wxSize GetPixelSize() const;

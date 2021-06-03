@@ -13,10 +13,6 @@
 #include "wx/bitmap.h"
 #include "wx/brush.h"
 
-// ----------------------------------------------------------------------------
-// wxCustomBackgroundWindow
-// ----------------------------------------------------------------------------
-
 template <class W>
 class wxCustomBackgroundWindow : public W,
                                  public wxCustomBackgroundWindowBase

@@ -52,14 +52,12 @@ class BenchApp : public BenchAppBase
 public:
     BenchApp();
 
-    // standard overrides
     virtual void OnInitCmdLine(wxCmdLineParser& parser);
     virtual bool OnCmdLineParsed(wxCmdLineParser& parser);
     virtual bool OnInit();
     virtual int  OnRun();
     virtual int  OnExit();
 
-    // accessors
     int GetNumericParameter() const { return m_numParam; }
     const wxString& GetStringParameter() const { return m_strParam; }
 

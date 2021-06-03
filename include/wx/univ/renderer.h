@@ -891,7 +891,6 @@ public:
     void DrawProgressBar(const wxGauge *gauge);
 #endif // wxUSE_GAUGE
 
-    // accessors
     wxWindow *GetWindow() const { return m_window; }
     wxRenderer *GetRenderer() const { return m_renderer; }
 

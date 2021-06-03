@@ -114,11 +114,6 @@ public:
             (ChannelType)(0xFF & (colRGB >> 16)));
     }
 
-
-
-    // accessors
-    // ---------
-
     virtual ChannelType Red() const = 0;
     virtual ChannelType Green() const = 0;
     virtual ChannelType Blue() const = 0;

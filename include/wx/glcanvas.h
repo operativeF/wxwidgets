@@ -198,11 +198,8 @@ protected:
 class WXDLLIMPEXP_GL wxGLCanvasBase : public wxWindow
 {
 public:
-    // default ctor doesn't initialize the window, use Create() later
     wxGLCanvasBase();
-
     ~wxGLCanvasBase() override;
-
 
     /*
        The derived class should provide a ctor with this signature:
@@ -217,18 +214,11 @@ public:
                const wxPalette& palette = wxNullPalette);
      */
 
-    // operations
-    // ----------
-
     // set the given context associated with this window as the current one
     bool SetCurrent(const wxGLContext& context) const;
 
     // flush the back buffer (if we have it)
     virtual bool SwapBuffers() = 0;
-
-
-    // accessors
-    // ---------
 
     // check if the given attributes are supported without creating a canvas
     static bool IsDisplaySupported(const wxGLAttributes& dispAttrs);

@@ -196,7 +196,6 @@ public:
 
     wxEvent *Clone() const override { return new wxTreeEvent(*this); }
 
-    // accessors
         // get the item on which the operation was performed or the newly
         // selected item for wxEVT_TREE_SEL_CHANGED/ING events
     wxTreeItemId GetItem() const { return m_item; }

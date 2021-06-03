@@ -88,9 +88,6 @@ public:
     // recalculate all our parameters and redisplay all units
     virtual void RefreshAll();
 
-    // accessors
-    // ---------
-
     // get the first currently visible unit
     size_t GetVisibleBegin() const { return m_unitFirst; }
 
@@ -319,8 +316,6 @@ public:
     virtual void RefreshRows(size_t from, size_t to)
         { RefreshUnits(from, to); }
 
-    // accessors
-
     size_t GetRowCount() const                  { return GetUnitCount(); }
     size_t GetVisibleRowsBegin() const          { return GetVisibleBegin(); }
     size_t GetVisibleRowsEnd() const            { return GetVisibleEnd(); }
@@ -393,8 +388,6 @@ public:
         { RefreshUnit(column); }
     virtual void RefreshColumns(size_t from, size_t to)
         { RefreshUnits(from, to); }
-
-    // accessors
 
     size_t GetColumnCount() const
         { return GetUnitCount(); }
@@ -520,9 +513,6 @@ public:
     // WX_FORWARD_TO_SCROLL_HELPER() derived class. We use this version to
     // call both base classes' ScrollLayout()
     bool ScrollLayout();
-
-    // accessors
-    // ---------
 
     // get the number of units this window contains (previously set by
     // Set[Column/Row/RowColumn/Unit]Count())

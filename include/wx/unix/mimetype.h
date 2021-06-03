@@ -23,7 +23,6 @@ WX_DEFINE_ARRAY_PTR(wxMimeTypeCommands *, wxMimeCommandsArray);
 class WXDLLIMPEXP_BASE wxMimeTypesManagerImpl
 {
 public:
-    // ctor and dtor
     wxMimeTypesManagerImpl();
     virtual ~wxMimeTypesManagerImpl();
 
@@ -57,7 +56,6 @@ public:
     // remove association
     bool Unassociate(wxFileType *ft);
 
-    // accessors
         // get the string containing space separated extensions for the given
         // file type
     wxString GetExtension(size_t index) { return m_aExtensions[index]; }
@@ -118,7 +116,6 @@ public:
     void Init(wxMimeTypesManagerImpl *manager, size_t index)
         { m_manager = manager; m_index.Add(index); }
 
-    // accessors
     bool GetExtensions(wxArrayString& extensions);
     bool GetMimeType(wxString *mimeType) const
         { *mimeType = m_manager->m_aTypes[m_index[0]]; return true; }

@@ -13,7 +13,6 @@
 
 class WXDLLIMPEXP_FWD_CORE wxSubwindows;
 
-// Slider
 class WXDLLIMPEXP_CORE wxSlider : public wxSliderBase
 {
 public:

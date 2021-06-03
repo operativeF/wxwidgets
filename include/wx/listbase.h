@@ -263,7 +263,6 @@ public:
     void SetFont(const wxFont& font)
         { Attributes().SetFont(font); }
 
-    // accessors
     long GetMask() const { return m_mask; }
     long GetId() const { return m_itemId; }
     int GetColumn() const { return m_col; }

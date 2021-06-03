@@ -95,9 +95,6 @@ public:
     // is buffer currently opened?
     bool IsOpened() const { return m_isOpened; }
 
-    // accessors
-    // ---------
-
     // get the number of lines in the buffer
     size_t GetLineCount() const { return m_aLines.size(); }
 

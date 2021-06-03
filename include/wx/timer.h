@@ -93,10 +93,6 @@ public:
     // messages in it, use non default ctor or SetOwner() otherwise
     virtual void Notify();
 
-
-    // accessors
-    // ---------
-
     // get the object notified about the timer events
     wxEvtHandler *GetOwner() const;
 
@@ -169,7 +165,6 @@ public:
 
 	wxTimerEvent& operator=(const wxTimerEvent&) = delete;
 
-    // accessors
     int GetInterval() const { return m_timer->GetInterval(); }
     wxTimer& GetTimer() const { return *m_timer; }
 

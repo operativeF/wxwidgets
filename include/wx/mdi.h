@@ -60,9 +60,6 @@ public:
     }
 #endif // wxUSE_MENUS
 
-    // accessors
-    // ---------
-
     // Get or change the active MDI child window
     virtual wxMDIChildFrame *GetActiveChild() const
         { return m_currentChild; }

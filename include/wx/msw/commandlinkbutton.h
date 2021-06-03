@@ -10,10 +10,6 @@
 #ifndef _WX_MSW_COMMANDLINKBUTTON_H_
 #define _WX_MSW_COMMANDLINKBUTTON_H_
 
-// ----------------------------------------------------------------------------
-// Command link button for wxMSW
-// ----------------------------------------------------------------------------
-
 // Derive from the generic version to be able to fall back to it during
 // run-time if the command link buttons are not supported by the system we're
 // running under.
@@ -49,9 +45,6 @@ public:
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxButtonNameStr));
-
-    // overridden base class methods
-    // -----------------------------
 
     // do the same thing as in the generic case here
     void SetLabel(const wxString& label) override

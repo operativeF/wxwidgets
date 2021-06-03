@@ -83,9 +83,6 @@ public:
                 const wxString& name = wxEmptyString);
 
 
-    // accessors
-    // ---------
-
     // get number of pages in the dialog
     virtual size_t GetPageCount() const { return m_pages.size(); }
 
@@ -386,7 +383,6 @@ public:
 
     wxEvent *Clone() const override { return new wxBookCtrlEvent(*this); }
 
-    // accessors
         // the currently selected page (wxNOT_FOUND if none)
     int GetSelection() const { return m_nSel; }
     void SetSelection(int nSel) { m_nSel = nSel; }

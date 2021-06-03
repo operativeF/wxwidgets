@@ -16,10 +16,6 @@
 
 #if wxUSE_COMBOBOX
 
-// ----------------------------------------------------------------------------
-// Combobox control
-// ----------------------------------------------------------------------------
-
 class WXDLLIMPEXP_CORE wxComboBox : public wxChoice,
                                     public wxTextEntry
 {

@@ -23,12 +23,10 @@ public:
     wxAnyButton(const wxAnyButton&) = delete;
 	wxAnyButton& operator=(const wxAnyButton&) = delete;
 
-    // overridden base class methods
     void SetLabel(const wxString& label) override;
     bool SetBackgroundColour(const wxColour &colour) override;
     bool SetForegroundColour(const wxColour &colour) override;
 
-    // implementation from now on
     WXLRESULT MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam) override;
 
     bool MSWOnDraw(WXDRAWITEMSTRUCT *item) override;
@@ -37,7 +35,6 @@ public:
     bool CanApplyThemeBorder() const override { return false; }
 
 protected:
-    // usually overridden base class virtuals
     wxSize DoGetBestSize() const override;
 
     wxBitmap DoGetBitmap(State which) const override;

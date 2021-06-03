@@ -744,7 +744,6 @@ public:
         // resume the thread
     void Resume();
 
-    // accessors
         // priority
     int GetPriority() const { return m_prio; }
     void SetPriority(int prio) { m_prio = prio; }

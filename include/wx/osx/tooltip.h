@@ -17,12 +17,10 @@
 class WXDLLIMPEXP_CORE wxToolTip : public wxObject
 {
 public:
-    // ctor & dtor
     wxToolTip(const wxString &tip);
     virtual ~wxToolTip();
 
-    // accessors
-        // tip text
+    // tip text
     void SetTip(const wxString& tip);
     const wxString& GetTip() const { return m_text; }
 

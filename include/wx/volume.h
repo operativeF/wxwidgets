@@ -70,9 +70,6 @@ public:
     wxFSVolumeBase(const wxString& name);
     bool Create(const wxString& name);
 
-    // accessors
-    // ---------
-
     // is this a valid volume?
     bool IsOk() const;
 

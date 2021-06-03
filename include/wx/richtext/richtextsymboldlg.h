@@ -191,13 +191,8 @@ public:
 class WXDLLIMPEXP_RICHTEXT wxSymbolListCtrl : public wxVScrolledWindow
 {
 public:
-    // constructors and such
-    // ---------------------
-
-    // default constructor, you must call Create() later
     wxSymbolListCtrl() { Init(); }
 
-    // normal constructor which calls Create() internally
     wxSymbolListCtrl(wxWindow *parent,
                wxWindowID id = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
@@ -221,12 +216,7 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxPanelNameStr));
 
-    // dtor does some internal cleanup
     ~wxSymbolListCtrl() override;
-
-
-    // accessors
-    // ---------
 
     // set the current font
     bool SetFont(const wxFont& font) override;

@@ -63,10 +63,6 @@ public:
                     memcmp(m_dash, data.m_dash, m_nbDash*sizeof(wxDash)) == 0));
     }
 
-
-    // accessors and setters
-    // ---------------------
-
     wxColour& GetColour() const { return const_cast<wxColour&>(m_colour); }
     int GetWidth() const { return m_width; }
     wxPenStyle GetStyle() const { return m_style; }

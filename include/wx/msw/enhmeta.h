@@ -42,7 +42,6 @@ public:
     // display the picture stored in the metafile on the given DC
     bool Play(wxDC *dc, wxRect *rectBound = nullptr);
 
-    // accessors
     bool IsOk() const override { return m_hMF != nullptr; }
 
     wxSize GetSize() const;

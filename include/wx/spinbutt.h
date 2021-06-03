@@ -45,13 +45,11 @@ public:
     wxSpinButtonBase(const wxSpinButtonBase&) = delete;
 	wxSpinButtonBase& operator=(const wxSpinButtonBase&) = delete;
 
-    // accessors
     virtual int GetValue() const = 0;
     virtual int GetMin() const { return m_min; }
     virtual int GetMax() const { return m_max; }
     wxRange GetRange() const { return wxRange( GetMin(), GetMax() );}
 
-    // operations
     virtual void SetValue(int val) = 0;
     virtual void SetMin(int minVal) { SetRange ( minVal , m_max ) ; }
     virtual void SetMax(int maxVal) { SetRange ( m_min , maxVal ) ; }

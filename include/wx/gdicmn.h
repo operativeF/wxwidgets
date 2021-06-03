@@ -320,7 +320,6 @@ struct WXDLLIMPEXP_CORE wxSize
     wxSize& Scale(double xscale, double yscale)
         { x = wxRound(x*xscale); y = wxRound(y*yscale); return *this; }
 
-    // accessors
     void Set(int xx, int yy) { x = xx; y = yy; }
     void SetWidth(int w) { x = w; }
     void SetHeight(int h) { y = h; }

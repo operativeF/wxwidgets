@@ -44,7 +44,6 @@ public:
                 const wxString& name = wxASCII_STR(wxScrollBarNameStr));
     */
 
-    // accessors
     virtual int GetThumbPosition() const = 0;
     virtual int GetThumbSize() const = 0;
     virtual int GetPageSize() const = 0;

@@ -18,10 +18,6 @@
     #include "wx/dataobj.h"
 #endif
 
-// ----------------------------------------------------------------------------
-// Metafile and metafile device context classes
-// ----------------------------------------------------------------------------
-
 class WXDLLIMPEXP_FWD_CORE wxMetafile;
 
 class WXDLLIMPEXP_CORE wxMetafileRefData: public wxGDIRefData

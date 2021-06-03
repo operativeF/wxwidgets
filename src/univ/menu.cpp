@@ -52,14 +52,11 @@ typedef wxMenuItemList::compatibility_iterator wxMenuItemIter;
 class WXDLLEXPORT wxMenuInfo
 {
 public:
-    // ctor
     wxMenuInfo(const wxString& text)
     {
         SetLabel(text);
         SetEnabled();
     }
-
-    // modifiers
 
     void SetLabel(const wxString& text)
     {
@@ -73,8 +70,6 @@ public:
     }
 
     void SetEnabled(bool enabled = true) { m_isEnabled = enabled; }
-
-    // accessors
 
     const wxString& GetLabel() const { return m_label; }
     const wxString& GetOriginalLabel() const { return m_originalLabel; }

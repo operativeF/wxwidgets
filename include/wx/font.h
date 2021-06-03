@@ -404,11 +404,9 @@ public:
     static bool AddPrivateFont(const wxString& filename);
 #endif // wxUSE_PRIVATE_FONTS
 
-    // comparison
     bool operator==(const wxFontBase& font) const;
     bool operator!=(const wxFontBase& font) const { return !(*this == font); }
 
-    // accessors: get the font characteristics
     virtual int GetPointSize() const;
     virtual double GetFractionalPointSize() const = 0;
     virtual wxSize GetPixelSize() const;

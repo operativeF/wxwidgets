@@ -50,12 +50,9 @@ public:
                 const wxString& name = wxT("wxSpinButton"));
 
 
-    // accessors
     void SetRange(int minVal, int maxVal) override;
     int GetValue() const override;
     void SetValue(int val) override;
-
-    // implementation
 
     void TriggerScrollEvent( wxEventType scrollEvent ) override;
 

@@ -211,7 +211,6 @@ public:
         // set the short desc
     void SetShortDesc(const wxString& shortDesc) { m_shortDesc = shortDesc; }
 
-    // accessors
         // get the MIME type
     const wxString& GetMimeType() const { return m_mimeType; }
         // get the open command
@@ -276,7 +275,6 @@ public:
     class MessageParameters
     {
     public:
-        // ctors
         MessageParameters() = default;
         MessageParameters(const wxString& filename,
                           const wxString& mimetype = wxEmptyString)

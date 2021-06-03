@@ -45,9 +45,6 @@ public:
     
     bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
 
-    // implementation only from now on
-    // -------------------------------
-
     // event handlers
     void OnSysColourChanged(wxSysColourChangedEvent& event);
 

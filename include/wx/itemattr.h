@@ -40,12 +40,10 @@ public:
         return !(*this == other);
     }
 
-    // setters
     void SetTextColour(const wxColour& colText) { m_colText = colText; }
     void SetBackgroundColour(const wxColour& colBack) { m_colBack = colBack; }
     void SetFont(const wxFont& font) { m_font = font; }
 
-    // accessors
     bool HasTextColour() const { return m_colText.IsOk(); }
     bool HasBackgroundColour() const { return m_colBack.IsOk(); }
     bool HasFont() const { return m_font.IsOk(); }

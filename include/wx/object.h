@@ -12,10 +12,6 @@
 #ifndef _WX_OBJECTH__
 #define _WX_OBJECTH__
 
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
-
 #include "wx/memory.h"
 
 #define wxDECLARE_CLASS_INFO_ITERATORS()                                     \

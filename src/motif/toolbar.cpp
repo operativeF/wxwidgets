@@ -100,7 +100,6 @@ public:
 
     virtual ~wxToolBarTool();
 
-    // accessors
     void SetWidget(Widget widget) { m_widget = widget; }
     Widget GetButtonWidget() const { return m_widget; }
 

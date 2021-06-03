@@ -57,18 +57,11 @@ public:
         const wxValidator& validator = wxDefaultValidator,
         const wxString& name = wxASCII_STR(wxTextCtrlNameStr));
 
-    // accessors
-    // ---------
-
     int GetLineLength(long lineNo) const override;
     wxString GetLineText(long lineNo) const override;
     int GetNumberOfLines() const override;
 
     bool IsModified() const override;
-
-    // operations
-    // ----------
-
 
     // sets/clears the dirty flag
     void MarkDirty() override;

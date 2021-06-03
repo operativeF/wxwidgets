@@ -15,10 +15,6 @@
 // there is no separate setting for wxMemoryText, it's smallish anyhow
 #if wxUSE_TEXTBUFFER
 
-// ----------------------------------------------------------------------------
-// wxMemoryText
-// ----------------------------------------------------------------------------
-
 class WXDLLIMPEXP_BASE wxMemoryText : public wxTextBuffer
 {
 public:

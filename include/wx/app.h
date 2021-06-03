@@ -447,9 +447,6 @@ public:
     static bool CheckBuildOptions(const char *optionsSignature,
                                   const char *componentName);
 
-    // implementation only from now on
-    // -------------------------------
-
     // helpers for dynamic wxApp construction
     static void SetInitializerFunction(wxAppInitializerFunction fn)
         { ms_appInitFn = fn; }

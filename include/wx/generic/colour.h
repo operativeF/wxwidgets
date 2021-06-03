@@ -17,8 +17,6 @@
 class WXDLLIMPEXP_CORE wxColour: public wxColourBase
 {
 public:
-    // constructors
-    // ------------
     DEFINE_STD_WXCOLOUR_CONSTRUCTORS
 
     // copy ctors and assignment operators
@@ -29,7 +27,6 @@ public:
 
     wxColour& operator=(const wxColour& col);
 
-    // accessors
     virtual bool IsOk() const { return m_isInit; }
 
     unsigned char Red() const { return m_red; }

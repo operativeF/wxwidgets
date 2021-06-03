@@ -102,7 +102,6 @@ public:
         Init(border);
     }
 
-    // setters
     void SetTextColour(const wxColour& colText) { m_colText = colText; }
     void SetBackgroundColour(const wxColour& colBack) { m_colBack = colBack; }
     void SetBorderColour(const wxColour& col) { m_colBorder = col; }
@@ -110,7 +109,6 @@ public:
     void SetBorder(wxCalendarDateBorder border) { m_border = border; }
     void SetHoliday(bool holiday) { m_holiday = holiday; }
 
-    // accessors
     bool HasTextColour() const { return m_colText.IsOk(); }
     bool HasBackgroundColour() const { return m_colBack.IsOk(); }
     bool HasBorderColour() const { return m_colBorder.IsOk(); }

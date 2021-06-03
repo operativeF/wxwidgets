@@ -13,19 +13,10 @@
 
 #include "wx/object.h"
 
-// ----------------------------------------------------------------------------
-// Colour
-// ----------------------------------------------------------------------------
-
 class WXDLLIMPEXP_CORE wxColour : public wxColourBase
 {
 public:
-    // constructors
-    // ------------
     DEFINE_STD_WXCOLOUR_CONSTRUCTORS
-
-    // accessors
-    // ---------
 
     bool IsOk() const override { return m_isInit; }
 
@@ -34,7 +25,6 @@ public:
     unsigned char Blue() const override { return m_blue; }
     unsigned char Alpha() const override { return m_alpha ; }
 
-    // comparison
     bool operator==(const wxColour& colour) const
     {
         return m_isInit == colour.m_isInit

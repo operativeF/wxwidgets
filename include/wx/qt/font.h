@@ -49,7 +49,6 @@ public:
                 const wxString& face = wxEmptyString,
                 wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
 
-    // accessors: get the font characteristics
     int GetPointSize() const override;
     double GetFractionalPointSize() const override;
     wxSize GetPixelSize() const override;
@@ -61,7 +60,6 @@ public:
     const wxNativeFontInfo *GetNativeFontInfo() const override;
     bool GetStrikethrough() const override;
 
-    // change the font characteristics
     void SetFractionalPointSize(double pointSize) override;
     void SetPixelSize(const wxSize& pixelSize) override;
     void SetFamily( wxFontFamily family ) override;

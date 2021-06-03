@@ -67,7 +67,6 @@ public:
     wxDocument(const wxDocument&) = delete;
 	wxDocument& operator=(const wxDocument&) = delete;
 
-    // accessors
     void SetFilename(const wxString& filename, bool notifyViews = false);
     wxString GetFilename() const { return m_documentFile; }
 

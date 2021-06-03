@@ -11,7 +11,6 @@
 #ifndef _WX_FONTENC_H_
 #define _WX_FONTENC_H_
 
-// font encodings
 enum wxFontEncoding
 {
     wxFONTENCODING_SYSTEM = -1,     // system default

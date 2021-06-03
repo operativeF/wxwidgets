@@ -113,15 +113,12 @@ public:
     // allocated in your wxTreeItemData-derived class
     virtual ~wxTreeItemData() { }
 
-    // accessors: set/get the item associated with this node
     void SetId(const wxTreeItemId& id) { m_itemId = id; }
     const wxTreeItemId& GetId() const { return (wxTreeItemId&) m_itemId; }
 };
 
 class WXDLLIMPEXP_CORE wxTreeCtrl: public wxControl {
 public:
-  // creation
-  // --------
   wxTreeCtrl() { Init(); }
 
   wxTreeCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
@@ -141,9 +138,6 @@ public:
                 long style = wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR("wxTreeCtrl"));
-
-    // accessors
-    // ---------
 
         // get the total number of items in the control
     virtual unsigned int GetCount() const;
@@ -174,9 +168,6 @@ public:
     // member functions of wxTreeItem because they must know the tree the item
     // belongs to for Windows implementation and storing the pointer to
     // wxTreeCtrl in each wxTreeItem is just too much waste.
-
-    // accessors
-    // ---------
 
         // retrieve items label
     wxString GetItemText(const wxTreeItemId& item) const;

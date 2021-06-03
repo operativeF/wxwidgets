@@ -68,7 +68,6 @@ public:
     // override if it needs to somehow initialize the window.
     virtual void SetWindow(wxWindow *win) { m_validatorWindow = win; }
 
-    // accessors
     wxWindow *GetWindow() const { return m_validatorWindow; }
 
     // validators beep by default if invalid key is pressed, this function

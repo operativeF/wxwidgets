@@ -8,44 +8,15 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-// ============================================================================
-// Definitions
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// Header guard
-// ----------------------------------------------------------------------------
 #ifndef _WX_MEDIACTRL_H_
 #define _WX_MEDIACTRL_H_
 
-// ----------------------------------------------------------------------------
-// Pre-compiled header stuff
-// ----------------------------------------------------------------------------
-
 #include "wx/defs.h"
-
-// ----------------------------------------------------------------------------
-// Compilation guard
-// ----------------------------------------------------------------------------
 
 #if wxUSE_MEDIACTRL
 
-// ----------------------------------------------------------------------------
-// Includes
-// ----------------------------------------------------------------------------
-
 #include "wx/control.h"
 #include "wx/uri.h"
-
-// ============================================================================
-// Declarations
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-//
-// Enumerations
-//
-// ----------------------------------------------------------------------------
 
 enum wxMediaState
 {
@@ -73,32 +44,14 @@ enum wxMediaCtrlPlayerControls
 #define wxMEDIABACKEND_REALPLAYER   wxT("wxRealPlayerMediaBackend")
 #define wxMEDIABACKEND_WMP10        wxT("wxWMP10MediaBackend")
 
-// ----------------------------------------------------------------------------
-//
-// wxMediaEvent
-//
-// ----------------------------------------------------------------------------
-
 class WXDLLIMPEXP_MEDIA wxMediaEvent : public wxNotifyEvent
 {
 public:
-    // ------------------------------------------------------------------------
-    // wxMediaEvent Constructor
-    //
-    // Normal constructor, much the same as wxNotifyEvent
-    // ------------------------------------------------------------------------
     wxMediaEvent(wxEventType commandType = wxEVT_NULL, int winid = 0)
         : wxNotifyEvent(commandType, winid)
-    {                                       }
+    {}
 
-    // ------------------------------------------------------------------------
-    // wxMediaEvent Copy Constructor
-    //
-    // Normal copy constructor, much the same as wxNotifyEvent
-    // ------------------------------------------------------------------------
-    wxMediaEvent(const wxMediaEvent &clone)
-             
-    = default;
+    wxMediaEvent(const wxMediaEvent &clone) = default;
 
     // ------------------------------------------------------------------------
     // wxMediaEvent::Clone
@@ -114,17 +67,10 @@ public:
     wxDECLARE_DYNAMIC_CLASS(wxMediaEvent);
 };
 
-// ----------------------------------------------------------------------------
-//
-// wxMediaCtrl
-//
-// ----------------------------------------------------------------------------
-
 class WXDLLIMPEXP_MEDIA wxMediaCtrl : public wxControl
 {
 public:
-    wxMediaCtrl()  
-    = default;
+    wxMediaCtrl() = default;
 
     wxMediaCtrl(wxWindow* parent, wxWindowID winid,
                 const wxString& fileName = wxEmptyString,
@@ -241,8 +187,7 @@ protected:
 class WXDLLIMPEXP_MEDIA wxMediaBackend : public wxObject
 {
 public:
-    wxMediaBackend()
-    = default;
+    wxMediaBackend() = default;
 
     ~wxMediaBackend() override;
 
@@ -341,10 +286,6 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_MEDIA, wxEVT_MEDIA_PAUSE, wxMediaEvent );
 #define EVT_MEDIA_PLAY(winid, fn)           wxDECLARE_EVENT_TABLE_ENTRY( wxEVT_MEDIA_PLAY, winid, wxID_ANY, wxMediaEventHandler(fn), NULL ),
 #define EVT_MEDIA_PAUSE(winid, fn)          wxDECLARE_EVENT_TABLE_ENTRY( wxEVT_MEDIA_PAUSE, winid, wxID_ANY, wxMediaEventHandler(fn), NULL ),
 
-// ----------------------------------------------------------------------------
-// common backend base class used by many other backends
-// ----------------------------------------------------------------------------
-
 class WXDLLIMPEXP_MEDIA wxMediaBackendCommonBase : public wxMediaBackend
 {
 public:
@@ -382,14 +323,6 @@ protected:
     wxMediaCtrl *m_ctrl;      // parent control
 };
 
-// ----------------------------------------------------------------------------
-// End compilation guard
-// ----------------------------------------------------------------------------
 #endif // wxUSE_MEDIACTRL
 
-// ----------------------------------------------------------------------------
-// End header guard and header itself
-// ----------------------------------------------------------------------------
 #endif // _WX_MEDIACTRL_H_
-
-

@@ -53,8 +53,6 @@ public:
     wxMenu* GetMenu() override;
 #endif // wxUSE_MENUS
 
-    // get/set search options
-    // ----------------------
     void ShowSearchButton( bool show ) override;
     bool IsSearchButtonVisible() const override;
 
@@ -63,9 +61,6 @@ public:
 
     void SetDescriptiveText(const wxString& text) override;
     wxString GetDescriptiveText() const override;
-
-    // accessors
-    // ---------
 
     wxString GetRange(long from, long to) const override;
 
@@ -84,9 +79,6 @@ public:
     void GetSelection(long* from, long* to) const override;
 
     wxString GetStringSelection() const override;
-
-    // operations
-    // ----------
 
     void ChangeValue(const wxString& value) override;
 

@@ -49,8 +49,6 @@ public:
     // the default implementation of wxTimer::Notify(): generate a wxEVT_TIMER
     void SendEvent();
 
-
-    // accessors for wxTimer:
     wxEvtHandler *GetOwner() const { return m_owner; }
     int GetId() const { return m_idTimer; }
     int GetInterval() const { return m_milli; }

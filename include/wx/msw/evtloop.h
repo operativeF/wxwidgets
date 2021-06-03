@@ -16,10 +16,6 @@
 #include "wx/window.h"
 #include "wx/msw/evtloopconsole.h" // for wxMSWEventLoopBase
 
-// ----------------------------------------------------------------------------
-// wxEventLoop
-// ----------------------------------------------------------------------------
-
 WX_DECLARE_EXPORTED_OBJARRAY(MSG, wxMSGArray);
 
 class WXDLLIMPEXP_CORE wxGUIEventLoop : public wxMSWEventLoopBase

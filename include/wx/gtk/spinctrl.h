@@ -34,7 +34,6 @@ public:
 
     // wxSpinCtrl(Double) methods call DoXXX functions of the same name
 
-    // accessors
     wxString GetTextValue() const override;
     // T GetValue() const
     // T GetMin() const
@@ -162,13 +161,11 @@ public:
                                          style, min, max, initial, 1, name);
     }
 
-    // accessors
     int GetValue() const { return int(DoGetValue()); }
     int GetMin() const { return int(DoGetMin()); }
     int GetMax() const { return int(DoGetMax()); }
     int GetIncrement() const { return int(DoGetIncrement()); }
 
-    // operations
     void SetValue(const wxString& value) override    { wxSpinCtrlGTKBase::SetValue(value); } // visibility problem w/ gcc
     void SetValue( int value )              { DoSetValue(value); }
     void SetRange( int minVal, int maxVal ) { DoSetRange(minVal, maxVal); }
@@ -232,14 +229,12 @@ public:
                                          style, min, max, initial, inc, name);
     }
 
-    // accessors
     double GetValue() const     { return DoGetValue(); }
     double GetMin() const       { return DoGetMin(); }
     double GetMax() const       { return DoGetMax(); }
     double GetIncrement() const { return DoGetIncrement(); }
     unsigned GetDigits() const;
 
-    // operations
     void SetValue(const wxString& value) override        { wxSpinCtrlGTKBase::SetValue(value); } // visibility problem w/ gcc
     void SetValue(double value)                 { DoSetValue(value); }
     void SetRange(double minVal, double maxVal) { DoSetRange(minVal, maxVal); }

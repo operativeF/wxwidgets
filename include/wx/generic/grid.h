@@ -764,7 +764,6 @@ public:
 
     void SetKind(wxAttrKind kind) { m_attrkind = kind; }
 
-    // accessors
     bool HasTextColour() const { return m_colText.IsOk(); }
     bool HasBackgroundColour() const { return m_colBack.IsOk(); }
     bool HasFont() const { return m_font.IsOk(); }

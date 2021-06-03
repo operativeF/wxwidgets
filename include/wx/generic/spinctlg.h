@@ -70,7 +70,6 @@ public:
 
     ~wxSpinCtrlGenericBase() override;
 
-    // accessors
     wxString GetTextValue() const override;
     // T GetValue() const
     // T GetMin() const
@@ -223,7 +222,6 @@ public:
         return ok;
     }
 
-    // accessors
     // T GetValue() const
     // T GetMin() const
     // T GetMax() const
@@ -324,13 +322,11 @@ public:
                                              style, min, max, initial, 1, name);
     }
 
-    // accessors
     int GetValue(wxSPINCTRL_GETVALUE_FIX) const { return int(DoGetValue()); }
     int GetMin() const { return int(m_min); }
     int GetMax() const { return int(m_max); }
     int GetIncrement() const { return int(m_increment); }
 
-    // operations
     void SetValue(const wxString& value) override
         { wxSpinCtrlGenericBase::SetValue(value); }
     void SetValue( int value )              { DoSetValue(value, SendEvent_None); }
@@ -407,7 +403,6 @@ public:
                                              inc, name);
     }
 
-    // accessors
     double GetValue(wxSPINCTRL_GETVALUE_FIX) const { return DoGetValue(); }
     double GetMin() const { return m_min; }
     double GetMax() const { return m_max; }

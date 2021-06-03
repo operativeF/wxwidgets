@@ -17,13 +17,11 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxDialogNameStr[];
 
 class WXDLLIMPEXP_FWD_CORE wxDialogModalData;
 
-// Dialog boxes
 class WXDLLIMPEXP_CORE wxDialog : public wxDialogBase
 {
 public:
     wxDialog() = default;
 
-    // full ctor
     wxDialog(wxWindow *parent, wxWindowID id,
              const wxString& title,
              const wxPoint& pos = wxDefaultPosition,
@@ -55,11 +53,6 @@ public:
     // may be called to terminate the dialog with the given return code
     void EndModal(int retCode) override;
 
-
-    // implementation only from now on
-    // -------------------------------
-
-    // override some base class virtuals
     bool Show(bool show = true) override;
     void SetWindowStyleFlag(long style) override;
 

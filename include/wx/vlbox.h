@@ -34,7 +34,6 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxVListBoxNameStr[];
 class WXDLLIMPEXP_CORE wxVListBox : public wxVScrolledWindow
 {
 public:
-    // default constructor, you must call Create() later
     wxVListBox() = default;
 
     // normal constructor which calls Create() internally
@@ -64,12 +63,7 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxVListBoxNameStr));
 
-    // dtor does some internal cleanup (deletes m_selStore if any)
     ~wxVListBox() override;
-
-
-    // accessors
-    // ---------
 
     // get the number of items in the control
     size_t GetItemCount() const { return GetRowCount(); }

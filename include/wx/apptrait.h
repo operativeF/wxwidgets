@@ -194,14 +194,6 @@ private:
     };
 #endif // platform
 
-// ============================================================================
-// standard traits for console and GUI applications
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// wxConsoleAppTraitsBase: wxAppTraits implementation for the console apps
-// ----------------------------------------------------------------------------
-
 class WXDLLIMPEXP_BASE wxConsoleAppTraitsBase : public wxAppTraits
 {
 public:
@@ -240,10 +232,6 @@ public:
     bool IsUsingUniversalWidgets() const override { return false; }
     wxString GetDesktopEnvironment() const override { return wxEmptyString; }
 };
-
-// ----------------------------------------------------------------------------
-// wxGUIAppTraitsBase: wxAppTraits implementation for the GUI apps
-// ----------------------------------------------------------------------------
 
 #if wxUSE_GUI
 

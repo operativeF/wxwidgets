@@ -15,10 +15,6 @@
 
 #if wxUSE_MENUS
 
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
-
 #include "wx/list.h"        // for "template" list classes
 #include "wx/window.h"      // base class for wxMenuBar
 
@@ -36,10 +32,6 @@ class WXDLLIMPEXP_FWD_CORE wxMenuItem;
 WX_DECLARE_EXPORTED_LIST(wxMenu, wxMenuList);
 WX_DECLARE_EXPORTED_LIST(wxMenuItem, wxMenuItemList);
 
-// ----------------------------------------------------------------------------
-// wxMenu
-// ----------------------------------------------------------------------------
-
 class WXDLLIMPEXP_CORE wxMenuBase : public wxEvtHandler
 {
 public:
@@ -56,9 +48,6 @@ public:
 
     wxMenuBase(const wxMenuBase&) = delete;
 	wxMenuBase& operator=(const wxMenuBase&) = delete;
-
-    // menu construction
-    // -----------------
 
     // append any kind of item (normal/check/radio/separator)
     wxMenuItem* Append(int itemid,

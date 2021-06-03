@@ -41,10 +41,6 @@ public:
     // Simulates an event
     void Command(wxCommandEvent& event) override { ProcessCommand(event); }
 
-
-    // implementation from now on
-    // --------------------------
-
     wxVisualAttributes GetDefaultAttributes() const override
     {
         return GetClassDefaultAttributes(GetWindowVariant());

@@ -41,16 +41,13 @@ public:
         long style = wxSP_VERTICAL,
         const wxString& name = wxASCII_STR("wxSpinButton"));
 
-    // accessors
     int GetValue() const;
     int GetMin() const { return m_min; }
     int GetMax() const { return m_max; }
 
-    // operations
     void SetValue(int val);
     void SetRange(int minVal, int maxVal);
 
-    // Implementation
     virtual void Command(wxCommandEvent& event)
         { (void)ProcessCommand(event); }
     virtual void ChangeFont(bool keepOriginalSize = true);

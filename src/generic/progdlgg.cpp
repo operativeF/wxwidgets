@@ -59,17 +59,7 @@ wxBEGIN_EVENT_TABLE(wxGenericProgressDialog, wxDialog)
     EVT_CLOSE(wxGenericProgressDialog::OnClose)
 wxEND_EVENT_TABLE()
 
-// ============================================================================
-// wxGenericProgressDialog implementation
-// ============================================================================
-
 wxIMPLEMENT_CLASS(wxProgressDialog, wxDialog)
-
-// ----------------------------------------------------------------------------
-// wxGenericProgressDialog creation
-// ----------------------------------------------------------------------------
-
-
 
 wxGenericProgressDialog::wxGenericProgressDialog()
                         
@@ -425,10 +415,6 @@ wxGenericProgressDialog::CreateLabel(const wxString& text, wxSizer *sizer)
 
     return value;
 }
-
-// ----------------------------------------------------------------------------
-// wxGenericProgressDialog operations
-// ----------------------------------------------------------------------------
 
 bool
 wxGenericProgressDialog::Update(int value, const wxString& newmsg, bool *skip)

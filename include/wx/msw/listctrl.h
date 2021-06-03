@@ -101,10 +101,6 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxListCtrlNameStr));
 
-
-    // Attributes
-    ////////////////////////////////////////////////////////////////////////////
-
     // Set the control colours
     bool SetForegroundColour(const wxColour& col) override;
     bool SetBackgroundColour(const wxColour& col) override;
@@ -258,9 +254,6 @@ public:
     void RefreshItem(long item);
     void RefreshItems(long itemFrom, long itemTo);
 
-    // Operations
-    ////////////////////////////////////////////////////////////////////////////
-
     // Arranges the items
     bool Arrange(int flag = wxLIST_ALIGN_DEFAULT);
 
@@ -346,8 +339,6 @@ public:
     bool MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result) override;
     bool MSWShouldPreProcessMessage(WXMSG* msg) override;
 
-    // Event handlers
-    ////////////////////////////////////////////////////////////////////////////
     // Necessary for drawing hrules and vrules, if specified
     void OnPaint(wxPaintEvent& event);
 
@@ -445,7 +436,6 @@ private:
 
     // Object using for header custom drawing if necessary, may be NULL.
     wxMSWListHeaderCustomDraw* m_headerCustomDraw{nullptr};
-
 
     wxDECLARE_DYNAMIC_CLASS(wxListCtrl);
     wxDECLARE_EVENT_TABLE();

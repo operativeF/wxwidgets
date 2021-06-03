@@ -16,10 +16,6 @@
 #include "wx/stream.h"
 #include "wx/filename.h"
 
-
-/////////////////////////////////////////////////////////////////////////////
-// wxArchiveNotifier
-
 class WXDLLIMPEXP_BASE wxArchiveNotifier
 {
 public:

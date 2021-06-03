@@ -422,7 +422,6 @@ public:
     wxTreeItemParam(const wxTreeItemParam&) = delete;
 	wxTreeItemParam& operator=(const wxTreeItemParam&) = delete;
 
-    // accessors
         // get the real data associated with the item
     wxTreeItemData *GetData() const { return m_data; }
         // change it

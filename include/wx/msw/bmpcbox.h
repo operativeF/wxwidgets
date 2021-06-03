@@ -24,8 +24,7 @@ class WXDLLIMPEXP_ADV wxBitmapComboBox : public wxComboBox,
 {
 public:
     
-    wxBitmapComboBox()  
-    = default;
+    wxBitmapComboBox() = default;
 
     wxBitmapComboBox(wxWindow *parent,
                      wxWindowID id = wxID_ANY,

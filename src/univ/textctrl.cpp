@@ -596,7 +596,6 @@ public:
     // stop compressing insert commands when this is called
     void StopCompressing() { m_compressInserts = false; }
 
-    // accessors
     wxTextCtrl *GetTextCtrl() const { return m_text; }
     bool IsCompressing() const { return m_compressInserts; }
 
