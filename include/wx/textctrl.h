@@ -42,7 +42,7 @@ using wxTextCoord = long;
 // constants
 // ----------------------------------------------------------------------------
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxTextCtrlNameStr[];
+inline constexpr char wxTextCtrlNameStr[] = "text";
 
 // this is intentionally not enum to avoid warning fixes with
 // typecasting from enum type to wxTextCoord

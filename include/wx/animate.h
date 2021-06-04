@@ -23,8 +23,7 @@
 class WXDLLIMPEXP_FWD_CORE wxAnimation;
 class wxAnimationImpl;
 
-extern WXDLLIMPEXP_DATA_CORE(wxAnimation) wxNullAnimation;
-extern WXDLLIMPEXP_DATA_CORE(const char) wxAnimationCtrlNameStr[];
+inline constexpr char wxAnimationCtrlNameStr[] = "animationctrl";
 
 WX_DECLARE_LIST_WITH_DECL(wxAnimationDecoder, wxAnimationDecoderList, class WXDLLIMPEXP_CORE);
 
@@ -77,6 +76,7 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxAnimation);
 };
 
+inline wxAnimation wxNullAnimation;
 
 // ----------------------------------------------------------------------------
 // wxAnimationCtrlBase

@@ -27,12 +27,8 @@
 #define wxHL_ALIGN_CENTRE       0x0008
 #define wxHL_DEFAULT_STYLE      (wxHL_CONTEXTMENU|wxNO_BORDER|wxHL_ALIGN_CENTRE)
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxHyperlinkCtrlNameStr[];
+inline constexpr char wxHyperlinkCtrlNameStr[] = "hyperlink";
 
-
-// ----------------------------------------------------------------------------
-// wxHyperlinkCtrl
-// ----------------------------------------------------------------------------
 
 // A static text control that emulates a hyperlink. The link is displayed
 // in an appropriate text style, derived from the control's normal font.

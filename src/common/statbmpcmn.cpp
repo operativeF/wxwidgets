@@ -24,12 +24,6 @@
 
 #include "wx/statbmp.h"
 
-extern WXDLLEXPORT_DATA(const char) wxStaticBitmapNameStr[] = "staticBitmap";
-
-// ---------------------------------------------------------------------------
-// XTI
-// ---------------------------------------------------------------------------
-
 wxDEFINE_FLAGS( wxStaticBitmapStyle )
 wxBEGIN_FLAGS( wxStaticBitmapStyle )
     // new style border flags, we put them first to

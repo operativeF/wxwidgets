@@ -23,7 +23,7 @@
 
 class WXDLLIMPEXP_FWD_CORE wxPrintNativeDataBase;
 
-const int wxPRINTMEDIA_DEFAULT = 0;
+inline constexpr int wxPRINTMEDIA_DEFAULT = 0;
 
 class WXDLLIMPEXP_CORE wxPrintData: public wxObject
 {

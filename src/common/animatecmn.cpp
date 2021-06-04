@@ -32,10 +32,6 @@
 
 #include "wx/private/animate.h"
 
-// global objects
-const char wxAnimationCtrlNameStr[] = "animationctrl";
-wxAnimation wxNullAnimation;
-
 wxIMPLEMENT_DYNAMIC_CLASS(wxAnimation, wxObject);
 
 #if !defined(wxHAS_NATIVE_ANIMATIONCTRL)

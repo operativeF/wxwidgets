@@ -29,7 +29,6 @@
     #include "wx/dcscreen.h"
 #endif
 
-extern WXDLLEXPORT_DATA(const char) wxRadioButtonNameStr[] = "radioButton";
 extern WXDLLEXPORT_DATA(const char) wxBitmapRadioButtonNameStr[] = "radioButton";
 
 // ----------------------------------------------------------------------------

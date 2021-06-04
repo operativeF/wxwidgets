@@ -70,8 +70,6 @@ public:
 	wxSocketStream& operator=(const wxSocketStream&) = delete;
 };
 
-#endif
-  // wxUSE_SOCKETS && wxUSE_STREAMS
+#endif // wxUSE_SOCKETS && wxUSE_STREAMS
 
-#endif
-  // __SCK_STREAM_H__
+#endif // __SCK_STREAM_H__

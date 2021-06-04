@@ -33,15 +33,7 @@
 // if we have another implementation of this class we should extract
 // the lines below to a common file
 
-const char wxCollapsibleHeaderCtrlNameStr[] = "collapsibleHeader";
-
 wxDEFINE_EVENT(wxEVT_COLLAPSIBLEHEADER_CHANGED, wxCommandEvent);
-
-// ============================================================================
-// implementation
-// ============================================================================
-
-
 
 bool wxGenericCollapsibleHeaderCtrl::Create(wxWindow *parent,
     wxWindowID id,

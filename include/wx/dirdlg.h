@@ -17,15 +17,6 @@
 
 #include "wx/dialog.h"
 
-// ----------------------------------------------------------------------------
-// constants
-// ----------------------------------------------------------------------------
-
-extern WXDLLIMPEXP_DATA_CORE(const char) wxDirDialogNameStr[];
-extern WXDLLIMPEXP_DATA_CORE(const char) wxDirDialogDefaultFolderStr[];
-extern WXDLLIMPEXP_DATA_CORE(const char) wxDirSelectorPromptStr[];
-
-
 /*
     The flags below must coexist with the following flags in m_windowStyle
     #define wxCAPTION               0x20000000

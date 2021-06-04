@@ -22,12 +22,7 @@
 // the base class declaration
 #include "wx/control.h"
 
-// ----------------------------------------------------------------------------
-// global variables
-// ----------------------------------------------------------------------------
-
-// the default name for objects of class wxStaticLine
-extern WXDLLIMPEXP_DATA_CORE(const char) wxStaticLineNameStr[];
+inline constexpr char wxStaticLineNameStr[] = "staticLine";
 
 // ----------------------------------------------------------------------------
 // wxStaticLine - a line in a dialog

@@ -287,6 +287,8 @@ protected:
     #include "wx/qt/bitmap.h"
 #endif
 
+inline wxBitmap wxNullBitmap;
+
 #if wxUSE_IMAGE
 inline
 wxBitmap

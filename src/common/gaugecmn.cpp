@@ -28,12 +28,6 @@
 #include "wx/gauge.h"
 #include "wx/appprogress.h"
 
-const char wxGaugeNameStr[] = "gauge";
-
-// ============================================================================
-// implementation
-// ============================================================================
-
 wxGaugeBase::~wxGaugeBase()
 {
     // this destructor is required for Darwin

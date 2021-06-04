@@ -36,12 +36,6 @@
 
 #include "wx/private/markupparser.h"
 
-const char wxControlNameStr[] = "control";
-
-// ============================================================================
-// implementation
-// ============================================================================
-
 wxControlBase::~wxControlBase()
 {
     // this destructor is required for Darwin

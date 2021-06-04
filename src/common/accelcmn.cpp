@@ -29,8 +29,6 @@
     #include "wx/crt.h"
 #endif //WX_PRECOMP
 
-wxAcceleratorTable wxNullAcceleratorTable;
-
 // ============================================================================
 // wxAcceleratorEntry implementation
 // ============================================================================

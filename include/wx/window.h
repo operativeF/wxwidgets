@@ -69,6 +69,8 @@ class WXDLLIMPEXP_FWD_CORE wxScrollHelper;
 class WXDLLIMPEXP_FWD_CORE wxAccessible;
 #endif
 
+inline constexpr char wxPanelNameStr[] = "panel";
+
 // ----------------------------------------------------------------------------
 // helper stuff used by wxWindow
 // ----------------------------------------------------------------------------

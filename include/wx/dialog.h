@@ -59,7 +59,10 @@ enum class wxDialogModality
     AppModal
 };
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxDialogNameStr[];
+inline constexpr char wxDialogNameStr[] = "dialog";
+inline constexpr char wxDirDialogNameStr[] = "wxDirCtrl";
+inline constexpr char wxDirDialogDefaultFolderStr[] = "/";
+inline constexpr char wxDirSelectorPromptStr[] = "Select a directory";
 
 class WXDLLIMPEXP_CORE wxDialogBase : public wxNavigationEnabled<wxTopLevelWindow>
 {

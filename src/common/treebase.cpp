@@ -25,12 +25,6 @@
 #include "wx/treectrl.h"
 #include "wx/imaglist.h"
 
-extern WXDLLEXPORT_DATA(const char) wxTreeCtrlNameStr[] = "treeCtrl";
-
-// ----------------------------------------------------------------------------
-// events
-// ----------------------------------------------------------------------------
-
 wxDEFINE_EVENT( wxEVT_TREE_BEGIN_DRAG, wxTreeEvent );
 wxDEFINE_EVENT( wxEVT_TREE_BEGIN_RDRAG, wxTreeEvent );
 wxDEFINE_EVENT( wxEVT_TREE_BEGIN_LABEL_EDIT, wxTreeEvent );

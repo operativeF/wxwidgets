@@ -17,11 +17,7 @@
 
 #include "wx/listbase.h"
 
-// ----------------------------------------------------------------------------
-// constants
-// ----------------------------------------------------------------------------
-
-extern WXDLLIMPEXP_DATA_CORE(const char) wxListCtrlNameStr[];
+inline constexpr char wxListCtrlNameStr[] = "listCtrl";
 
 // ----------------------------------------------------------------------------
 // include the wxListCtrl class declaration

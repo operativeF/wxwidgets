@@ -58,6 +58,8 @@
   #include "wx/generic/icon.h"
 #endif
 
+inline wxIcon wxNullIcon;
+
 //-----------------------------------------------------------------------------
 // wxVariant support
 //-----------------------------------------------------------------------------
@@ -68,5 +70,4 @@ DECLARE_VARIANT_OBJECT_EXPORTED(wxIcon,WXDLLIMPEXP_CORE)
 #endif
 
 
-#endif
-    // _WX_ICON_H_BASE_
+#endif // _WX_ICON_H_BASE_

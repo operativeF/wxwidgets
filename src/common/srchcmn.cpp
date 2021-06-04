@@ -27,10 +27,6 @@
 #ifndef WX_PRECOMP
 #endif
 
-// ----------------------------------------------------------------------------
-
-const char wxSearchCtrlNameStr[] = "searchCtrl";
-
 wxDEFINE_EVENT(wxEVT_SEARCH_CANCEL, wxCommandEvent);
 wxDEFINE_EVENT(wxEVT_SEARCH, wxCommandEvent);
 

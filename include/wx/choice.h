@@ -21,11 +21,7 @@
 
 #include "wx/ctrlsub.h"     // the base class
 
-// ----------------------------------------------------------------------------
-// global data
-// ----------------------------------------------------------------------------
-
-extern WXDLLIMPEXP_DATA_CORE(const char) wxChoiceNameStr[];
+inline constexpr char wxChoiceNameStr[] = "choice";
 
 // ----------------------------------------------------------------------------
 // wxChoice allows to select one of a non-modifiable list of strings

@@ -94,13 +94,6 @@ wxEMPTY_HANDLERS_TABLE(wxHyperlinkCtrl)
 wxCONSTRUCTOR_7( wxHyperlinkCtrl, wxWindow*, Parent, wxWindowID, Id, wxString, \
                 Label, wxString, URL, wxPoint, Position, wxSize, Size, long, WindowStyle )
 
-
-const char wxHyperlinkCtrlNameStr[] = "hyperlink";
-
-// ----------------------------------------------------------------------------
-// wxHyperlinkCtrlBase
-// ----------------------------------------------------------------------------
-
 void
 wxHyperlinkCtrlBase::CheckParams(const wxString& label,
                                  const wxString& url,

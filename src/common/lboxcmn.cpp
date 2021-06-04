@@ -31,8 +31,6 @@
     #include "wx/dcclient.h"
 #endif
 
-extern WXDLLEXPORT_DATA(const char) wxListBoxNameStr[] = "listBox";
-
 // ============================================================================
 // implementation
 // ============================================================================

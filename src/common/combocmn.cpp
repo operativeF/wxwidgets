@@ -28,7 +28,6 @@
 
 #if wxUSE_COMBOBOX
 #include "wx/combobox.h"
-extern WXDLLEXPORT_DATA(const char) wxComboBoxNameStr[] = "comboBox";
 
 // ----------------------------------------------------------------------------
 // XTI

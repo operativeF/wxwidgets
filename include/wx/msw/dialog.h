@@ -13,8 +13,6 @@
 
 #include "wx/panel.h"
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxDialogNameStr[];
-
 class WXDLLIMPEXP_FWD_CORE wxDialogModalData;
 
 class WXDLLIMPEXP_CORE wxDialog : public wxDialogBase

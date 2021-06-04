@@ -643,6 +643,8 @@ WXDLLIMPEXP_CORE bool wxFromString(const wxString& str, wxFontBase* font);
     #include "wx/qt/font.h"
 #endif
 
+inline wxFont wxNullFont;
+
 class WXDLLIMPEXP_CORE wxFontList: public wxGDIObjListBase
 {
 public:
