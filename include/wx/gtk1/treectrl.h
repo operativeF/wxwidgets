@@ -36,29 +36,29 @@ typedef int (*wxTreeItemCmpFunc)(wxTreeItemData *item1, wxTreeItemData *item2);
 // values for the `flags' parameter of wxTreeCtrl::HitTest() which determine
 // where exactly the specified point is situated:
     // above the client area.
-static constexpr int wxTREE_HITTEST_ABOVE            = 0x0001;
+inline constexpr int wxTREE_HITTEST_ABOVE            = 0x0001;
     // below the client area.
-static constexpr int wxTREE_HITTEST_BELOW            = 0x0002;
+inline constexpr int wxTREE_HITTEST_BELOW            = 0x0002;
     // in the client area but below the last item.
-static constexpr int wxTREE_HITTEST_NOWHERE          = 0x0004;
+inline constexpr int wxTREE_HITTEST_NOWHERE          = 0x0004;
     // on the button associated with an item.
-static constexpr int wxTREE_HITTEST_ONITEMBUTTON     = 0x0010;
+inline constexpr int wxTREE_HITTEST_ONITEMBUTTON     = 0x0010;
     // on the bitmap associated with an item.
-static constexpr int wxTREE_HITTEST_ONITEMICON       = 0x0020;
+inline constexpr int wxTREE_HITTEST_ONITEMICON       = 0x0020;
     // in the indentation associated with an item.
-static constexpr int wxTREE_HITTEST_ONITEMINDENT     = 0x0040;
+inline constexpr int wxTREE_HITTEST_ONITEMINDENT     = 0x0040;
     // on the label (string) associated with an item.
-static constexpr int wxTREE_HITTEST_ONITEMLABEL      = 0x0080;
+inline constexpr int wxTREE_HITTEST_ONITEMLABEL      = 0x0080;
     // in the area to the right of an item.
-static constexpr int wxTREE_HITTEST_ONITEMRIGHT      = 0x0100;
+inline constexpr int wxTREE_HITTEST_ONITEMRIGHT      = 0x0100;
     // on the state icon for a tree view item that is in a user-defined state.
-static constexpr int wxTREE_HITTEST_ONITEMSTATEICON  = 0x0200;
+inline constexpr int wxTREE_HITTEST_ONITEMSTATEICON  = 0x0200;
     // to the right of the client area.
-static constexpr int wxTREE_HITTEST_TOLEFT           = 0x0400;
+inline constexpr int wxTREE_HITTEST_TOLEFT           = 0x0400;
     // to the left of the client area.
-static constexpr int wxTREE_HITTEST_TORIGHT          = 0x0800;
+inline constexpr int wxTREE_HITTEST_TORIGHT          = 0x0800;
     // anywhere on the item
-static constexpr int wxTREE_HITTEST_ONITEM  = wxTREE_HITTEST_ONITEMICON |
+inline constexpr int wxTREE_HITTEST_ONITEM  = wxTREE_HITTEST_ONITEMICON |
                                           wxTREE_HITTEST_ONITEMLABEL |
                                           wxTREE_HITTEST_ONITEMSTATEICON;
 

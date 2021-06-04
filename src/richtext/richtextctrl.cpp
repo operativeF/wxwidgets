@@ -2873,7 +2873,7 @@ void wxRichTextCtrl::OnIdle(wxIdleEvent& event)
     }
 #endif
 
-    const int layoutInterval = wxRICHTEXT_DEFAULT_LAYOUT_INTERVAL;
+    static constexpr int layoutInterval = wxRICHTEXT_DEFAULT_LAYOUT_INTERVAL;
 
     if (m_fullLayoutRequired && (wxGetLocalTimeMillis() > (m_fullLayoutTime + layoutInterval)))
     {
@@ -2884,7 +2884,7 @@ void wxRichTextCtrl::OnIdle(wxIdleEvent& event)
         Refresh(false);
     }
 
-    const int imageProcessingInterval = wxRICHTEXT_DEFAULT_DELAYED_IMAGE_PROCESSING_INTERVAL;
+    static constexpr int imageProcessingInterval = wxRICHTEXT_DEFAULT_DELAYED_IMAGE_PROCESSING_INTERVAL;
 
     if (m_enableDelayedImageLoading && m_delayedImageProcessingRequired && (wxGetLocalTimeMillis() > (m_delayedImageProcessingTime + imageProcessingInterval)))
     {

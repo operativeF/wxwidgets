@@ -43,12 +43,12 @@
 // macros and constants
 // ----------------------------------------------------------------------------
 
-static constexpr int DDE_CP =      CP_WINUNICODE;
+constexpr int DDE_CP =      CP_WINUNICODE;
 
 #define GetHConv()       ((HCONV)m_hConv)
 
 // default timeout for DDE operations (5sec)
-static constexpr int DDE_TIMEOUT =     5000;
+constexpr int DDE_TIMEOUT =     5000;
 
 // ----------------------------------------------------------------------------
 // private functions

@@ -53,7 +53,7 @@
 #endif // no CLR_INVALID
 
 // ROP which doesn't have standard name
-static constexpr int DSTERASE = 0x00220326;     // dest = (NOT src) AND dest
+constexpr int DSTERASE = 0x00220326;     // dest = (NOT src) AND dest
 
 // ----------------------------------------------------------------------------
 // wxBitmapRefData

@@ -33,6 +33,8 @@
 using namespace Scintilla;
 #endif
 
+constexpr int indicatorWhitespace = 1;
+
 namespace {
 	// Use an unnamed namespace to protect the functions and classes from name conflicts
 
@@ -40,8 +42,6 @@ namespace {
 enum kwType { kwOther, kwClass, kwDef, kwImport, kwCDef, kwCTypeName, kwCPDef };
 
 enum literalsAllowed { litNone = 0, litU = 1, litB = 2 };
-
-const int indicatorWhitespace = 1;
 
 bool IsPyComment(Accessor &styler, Sci_Position pos, Sci_Position len) {
 	return len > 0 && styler[pos] == '#';

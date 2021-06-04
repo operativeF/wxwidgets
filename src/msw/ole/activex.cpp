@@ -152,7 +152,7 @@ wxDEFINE_EVENT( wxEVT_ACTIVEX, wxActiveXEvent );
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-static constexpr int HIMETRIC_PER_INCH =   2540;
+constexpr int HIMETRIC_PER_INCH =   2540;
 #define MAP_PIX_TO_LOGHIM(x,ppli)   MulDiv(HIMETRIC_PER_INCH, (x), (ppli))
 
 static void PixelsToHimetric(SIZEL &sz)
@@ -169,7 +169,7 @@ static void PixelsToHimetric(SIZEL &sz)
         ReleaseDC(nullptr, dc);
     }
 
-static constexpr int HIMETRIC_INCH =   2540;
+constexpr int HIMETRIC_INCH =   2540;
 #define CONVERT(x, logpixels)   wxMulDivInt32(HIMETRIC_INCH, (x), (logpixels))
 
     sz.cx = CONVERT(sz.cx, logX);
@@ -758,11 +758,8 @@ public:
     }
 };
 
-namespace
-{
-// just a unique global variable
-const int invalid_entry_marker = 0;
-}
+
+constexpr int invalid_entry_marker = 0;
 
 wxVariant wxActiveXEvents::ms_invalidEntryMarker(const_cast<void*>(static_cast<const void*>(&invalid_entry_marker)));
 

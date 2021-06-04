@@ -2884,10 +2884,10 @@ bool wxAuiManager::ProcessDockResult(wxAuiPaneInfo& target,
 // If, however, wxAuiManager:m_docks and wxAuiManager::m_panes are specified
 // as parameters, the changes will be made to the main state arrays
 
-const int auiInsertRowPixels = 10;
-const int auiNewRowPixels = 40;
-const int auiLayerInsertPixels = 40;
-const int auiLayerInsertOffset = 5;
+constexpr int auiInsertRowPixels = 10;
+constexpr int auiNewRowPixels = 40;
+constexpr int auiLayerInsertPixels = 40;
+constexpr int auiLayerInsertOffset = 5;
 
 bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
                           wxAuiPaneInfoArray& panes,

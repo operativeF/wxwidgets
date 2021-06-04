@@ -35,7 +35,7 @@
 //
 // This variable can also be set to a special value "0" to disable running the
 // test entirely.
-static constexpr char WX_TEST_WEBREQUEST_URL_DEFAULT[] = "https://nghttp2.org/httpbin";
+constexpr char WX_TEST_WEBREQUEST_URL_DEFAULT[] = "https://nghttp2.org/httpbin";
 
 class RequestFixture : public wxTimer
 {

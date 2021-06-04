@@ -417,7 +417,7 @@ wxSVGBitmapEmbedHandler::ProcessBitmap(const wxBitmap& bmp,
                           sub_images++);
 
     // Wrap Base64 encoded data on 76 columns boundary (same as Inkscape).
-    const unsigned WRAP = 76;
+    static constexpr unsigned WRAP = 76;
     for ( size_t i = 0; i < data.size(); i += WRAP )
     {
         if (i < data.size() - WRAP)

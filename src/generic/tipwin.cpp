@@ -37,8 +37,8 @@
 // constants
 // ----------------------------------------------------------------------------
 
-static constexpr wxCoord TEXT_MARGIN_X = 3;
-static constexpr wxCoord TEXT_MARGIN_Y = 3;
+constexpr wxCoord TEXT_MARGIN_X = 3;
+constexpr wxCoord TEXT_MARGIN_Y = 3;
 
 // ----------------------------------------------------------------------------
 // wxTipWindowView

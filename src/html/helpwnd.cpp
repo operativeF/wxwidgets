@@ -55,12 +55,12 @@
 #include "wx/wupdlock.h"
 
 // what is considered "small index"?
-static constexpr int INDEX_IS_SMALL = 1000;
+constexpr int INDEX_IS_SMALL = 1000;
 
 // minimum width for content tree and index
 // (we cannot let minimum size be determined from content, else long titles
 //  make the help frame unusable)
-static constexpr wxCoord CONTENT_TREE_INDEX_MIN_WIDTH = 150;
+constexpr wxCoord CONTENT_TREE_INDEX_MIN_WIDTH = 150;
 
 /* Motif defines this as a macro */
 #ifdef Below

@@ -39,7 +39,7 @@
 // ============================================================================
 
 // time in milliseconds before partial completion buffer drops
-static constexpr int wxODCB_PARTIAL_COMPLETION_TIME = 1000;
+constexpr int wxODCB_PARTIAL_COMPLETION_TIME = 1000;
 
 // ----------------------------------------------------------------------------
 // wxVListBoxComboPopup is a wxVListBox customized to act as a popup control

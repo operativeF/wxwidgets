@@ -42,21 +42,21 @@ using namespace wxMSWMessageDialog;
 // ----------------------------------------------------------------------------
 
 // Notification values of wxProgressDialogSharedData::m_notifications
-static constexpr int wxSPDD_VALUE_CHANGED     = 0x0001;
-static constexpr int wxSPDD_RANGE_CHANGED     = 0x0002;
-static constexpr int wxSPDD_PBMARQUEE_CHANGED = 0x0004;
-static constexpr int wxSPDD_TITLE_CHANGED     = 0x0008;
-static constexpr int wxSPDD_MESSAGE_CHANGED   = 0x0010;
-static constexpr int wxSPDD_EXPINFO_CHANGED   = 0x0020;
-static constexpr int wxSPDD_ENABLE_SKIP       = 0x0040;
-static constexpr int wxSPDD_ENABLE_ABORT      = 0x0080;
-static constexpr int wxSPDD_DISABLE_SKIP      = 0x0100;
-static constexpr int wxSPDD_FINISHED          = 0x0400;
-static constexpr int wxSPDD_DESTROYED         = 0x0800;
-static constexpr int wxSPDD_ICON_CHANGED      = 0x1000;
-static constexpr int wxSPDD_WINDOW_MOVED      = 0x2000;
+constexpr int wxSPDD_VALUE_CHANGED     = 0x0001;
+constexpr int wxSPDD_RANGE_CHANGED     = 0x0002;
+constexpr int wxSPDD_PBMARQUEE_CHANGED = 0x0004;
+constexpr int wxSPDD_TITLE_CHANGED     = 0x0008;
+constexpr int wxSPDD_MESSAGE_CHANGED   = 0x0010;
+constexpr int wxSPDD_EXPINFO_CHANGED   = 0x0020;
+constexpr int wxSPDD_ENABLE_SKIP       = 0x0040;
+constexpr int wxSPDD_ENABLE_ABORT      = 0x0080;
+constexpr int wxSPDD_DISABLE_SKIP      = 0x0100;
+constexpr int wxSPDD_FINISHED          = 0x0400;
+constexpr int wxSPDD_DESTROYED         = 0x0800;
+constexpr int wxSPDD_ICON_CHANGED      = 0x1000;
+constexpr int wxSPDD_WINDOW_MOVED      = 0x2000;
 
-static constexpr int Id_SkipBtn = wxID_HIGHEST + 1;
+constexpr int Id_SkipBtn = wxID_HIGHEST + 1;
 
 // ============================================================================
 // Helper classes

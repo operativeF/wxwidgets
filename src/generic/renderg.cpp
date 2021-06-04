@@ -506,8 +506,8 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
 int wxRendererGeneric::GetHeaderButtonHeight(wxWindow *win)
 {
     // Copied and adapted from src/generic/listctrl.cpp
-    const int HEADER_OFFSET_Y = 1;
-    const int EXTRA_HEIGHT = 4;
+    static constexpr int HEADER_OFFSET_Y = 1;
+    static constexpr int EXTRA_HEIGHT = 4;
 
     int w=0, h=14, d=0;
     if (win)

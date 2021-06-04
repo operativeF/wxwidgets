@@ -2089,12 +2089,12 @@ void Document::EnsureStyledTo(int pos) {
 void Document::StyleToAdjustingLineDuration(int pos) {
 	// Place bounds on the duration used to avoid glitches spiking it
 	// and so causing slow styling or non-responsive scrolling
-	const double minDurationOneLine = 0.000001;
-	const double maxDurationOneLine = 0.0001;
+	static constexpr double minDurationOneLine = 0.000001;
+	static constexpr double maxDurationOneLine = 0.0001;
 
 	// Alpha value for exponential smoothing.
 	// Most recent value contributes 25% to smoothed value.
-	const double alpha = 0.25;
+	static constexpr double alpha = 0.25;
 
 	const Sci_Position lineFirst = LineFromPosition(GetEndStyled());
 	ElapsedTime etStyling;

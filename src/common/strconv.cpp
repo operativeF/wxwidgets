@@ -49,7 +49,7 @@
 #endif //def __DARWIN__
 
 
-static constexpr wxChar TRACE_STRCONV[] = wxT("strconv");
+constexpr wxChar TRACE_STRCONV[] = wxT("strconv");
 
 // WC_UTF16 is defined only if sizeof(wchar_t) == 2, otherwise it's supposed to
 // be 4 bytes
@@ -565,7 +565,7 @@ wxConvBrokenFileNames::wxConvBrokenFileNames(const wxString& charset)
 //
 // BASE64 decoding table
 //
-static constexpr unsigned char utf7unb64[] =
+constexpr unsigned char utf7unb64[] =
 {
     0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
     0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
@@ -755,7 +755,7 @@ size_t wxMBConvUTF7::ToWChar(wchar_t *dst, size_t dstLen,
 //
 // BASE64 encoding table
 //
-static constexpr unsigned char utf7enb64[] =
+constexpr unsigned char utf7enb64[] =
 {
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
     'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
@@ -775,7 +775,7 @@ static constexpr unsigned char utf7enb64[] =
 // 2 - whitespace characters (optional)
 // 3 - special characters
 //
-static constexpr unsigned char utf7encode[128] =
+constexpr unsigned char utf7encode[128] =
 {
     0, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 3, 3, 2, 3, 3,
     3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
@@ -909,13 +909,13 @@ size_t wxMBConvUTF7::FromWChar(char *dst, size_t dstLen,
 // UTF-8
 // ----------------------------------------------------------------------------
 
-static constexpr wxUint32 utf8_max[]=
+constexpr wxUint32 utf8_max[]=
     { 0x7f, 0x7ff, 0xffff, 0x1fffff, 0x3ffffff, 0x7fffffff, 0xffffffff };
 
 // boundaries of the private use area we use to (temporarily) remap invalid
 // characters invalid in a UTF-8 encoded string
-const wxUint32 wxUnicodePUA = 0x100000;
-const wxUint32 wxUnicodePUAEnd = wxUnicodePUA + 256;
+constexpr wxUint32 wxUnicodePUA = 0x100000;
+constexpr wxUint32 wxUnicodePUAEnd = wxUnicodePUA + 256;
 
 // this table gives the length of the UTF-8 encoding from its first character:
 extern const unsigned char tableUtf8Lengths[256] = {

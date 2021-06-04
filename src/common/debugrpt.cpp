@@ -641,7 +641,7 @@ wxFileName wxDebugReportCompress::GetSaveLocation() const
 
 bool wxDebugReportCompress::DoProcess()
 {
-static constexpr bool HAS_FILE_STREAMS = (wxUSE_STREAMS && (wxUSE_FILE || wxUSE_FFILE));
+constexpr bool HAS_FILE_STREAMS = (wxUSE_STREAMS && (wxUSE_FILE || wxUSE_FFILE));
 #if HAS_FILE_STREAMS
     const size_t count = GetFilesCount();
     if ( !count )

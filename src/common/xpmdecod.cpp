@@ -499,7 +499,8 @@ static const rgbRecord theRGBRecords[] =
     {"yellowgreen", myRGB(50, 216, 56)},
     {nullptr, myRGB(0, 0, 0)}
 };
-static constexpr int numTheRGBRecords = 235;
+
+constexpr int numTheRGBRecords = 235;
 
 static unsigned char ParseHexadecimal(char digit1, char digit2)
 {

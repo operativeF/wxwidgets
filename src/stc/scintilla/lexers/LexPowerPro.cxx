@@ -405,7 +405,7 @@ static void FoldPowerProDoc(Sci_PositionU startPos, Sci_Position length, int, Wo
 	bool isFirstWordStarted = false;
 	bool isFirstWordEnded = false;
 
-	const unsigned int FIRST_WORD_MAX_LEN = 10;
+	static constexpr unsigned int FIRST_WORD_MAX_LEN = 10;
 	char szFirstWord[FIRST_WORD_MAX_LEN] = "";
 	unsigned int firstWordLen = 0;
 

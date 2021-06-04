@@ -925,7 +925,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxAMMediaBackend, wxMediaBackend);
 // Usual debugging macros
 //---------------------------------------------------------------------------
 #if wxDEBUG_LEVEL
-static constexpr int MAX_ERROR_TEXT_LEN = 160;
+constexpr int MAX_ERROR_TEXT_LEN = 160;
 
 // Get the error string for Active Movie
 wxString wxAMMediaBackend::GetErrorString(HRESULT hrdsv)

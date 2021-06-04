@@ -55,7 +55,7 @@
 // start and end of document/page
 //-----------------------------------------------------------------------------
 
-static constexpr char wxPostScriptHeaderConicTo[] = "\
+constexpr char wxPostScriptHeaderConicTo[] = "\
 /conicto {\n\
     /to_y exch def\n\
     /to_x exch def\n\
@@ -72,7 +72,7 @@ static constexpr char wxPostScriptHeaderConicTo[] = "\
 }  bind def\n\
 ";
 
-static constexpr char wxPostScriptHeaderEllipse[] =
+constexpr char wxPostScriptHeaderEllipse[] =
 "/ellipse {\n"             // x y xrad yrad startangle endangle
 "  matrix currentmatrix\n" // x y xrad yrad startangle endangle CTM
 "  0 0 1\n"                // x y xrad yrad startangle endangle CTM 0 0 1
@@ -85,7 +85,7 @@ static constexpr char wxPostScriptHeaderEllipse[] =
 "  setmatrix\n"            // -> restore transformation matrix
 "} def\n";
 
-static constexpr char wxPostScriptHeaderEllipticArc[] =
+constexpr char wxPostScriptHeaderEllipticArc[] =
 "/ellipticarc {\n"         // x y xrad yrad startangle endangle do_fill
 "  dup\n"                  // x y xrad yrad startangle endangle do_fill do_fill
 "  8 1 roll\n"             // do_fill x y xrad yrad startangle endangle do_fill
@@ -102,7 +102,7 @@ static constexpr char wxPostScriptHeaderEllipticArc[] =
 "  { fill }{ stroke } ifelse\n" // -> fill or stroke
 "} def\n";
 
-static constexpr char wxPostScriptHeaderSpline[] = "\
+constexpr char wxPostScriptHeaderSpline[] = "\
 /DrawSplineSection {\n\
     /y3 exch def\n\
     /x3 exch def\n\
@@ -119,7 +119,7 @@ static constexpr char wxPostScriptHeaderSpline[] = "\
     } def\n\
 ";
 
-static constexpr char wxPostScriptHeaderColourImage[] = "\
+constexpr char wxPostScriptHeaderColourImage[] = "\
 % define 'colorimage' if it isn't defined\n\
 %   ('colortogray' and 'mergeprocs' come from xwd2ps\n\
 %     via xgrab)\n\
@@ -174,7 +174,7 @@ static constexpr char wxPostScriptHeaderColourImage[] = "\
   } ifelse          % end of 'false' case\n\
 ";
 
-static constexpr char wxPostScriptHeaderReencodeISO1[] =
+constexpr char wxPostScriptHeaderReencodeISO1[] =
     "\n/reencodeISO {\n"
 "dup dup findfont dup length dict begin\n"
 "{ 1 index /FID ne { def }{ pop pop } ifelse } forall\n"
@@ -198,7 +198,7 @@ static constexpr char wxPostScriptHeaderReencodeISO1[] =
 "/.notdef/dotlessi/grave/acute/circumflex/tilde/macron/breve\n"
 "/dotaccent/dieresis/.notdef/ring/cedilla/.notdef/hungarumlaut\n";
 
-static constexpr char wxPostScriptHeaderReencodeISO2[] =
+constexpr char wxPostScriptHeaderReencodeISO2[] =
 "/ogonek/caron/space/exclamdown/cent/sterling/currency/yen/brokenbar\n"
 "/section/dieresis/copyright/ordfeminine/guillemotleft/logicalnot\n"
 "/hyphen/registered/macron/degree/plusminus/twosuperior/threesuperior\n"
@@ -216,7 +216,7 @@ static constexpr char wxPostScriptHeaderReencodeISO2[] =
         "] def\n\n";
 
 // Split multiline string and store each line in the array.
-static constexpr char wxPostScriptHeaderStrSplit[] =
+constexpr char wxPostScriptHeaderStrSplit[] =
 "/strsplit {\n"      // str delim
 "  [ 3 1 roll\n"     // [ str delim
 "    {\n"            // [ str-items str delim
@@ -246,9 +246,9 @@ wxPostScriptDC::wxPostScriptDC(const wxPrintData& printData)
 }
 
 // we don't want to use only 72 dpi from PS print
-static constexpr int DPI = 600;
-static constexpr double PS2DEV = 600.0 / 72.0;
-static constexpr double DEV2PS = 72.0 / 600.0;
+constexpr int DPI = 600;
+constexpr double PS2DEV = 600.0 / 72.0;
+constexpr double DEV2PS = 72.0 / 600.0;
 
 #define XLOG2DEV(x)     ((double)(LogicalToDeviceX(x)) * DEV2PS)
 #define XLOG2DEVREL(x)  ((double)(LogicalToDeviceXRel(x)) * DEV2PS)

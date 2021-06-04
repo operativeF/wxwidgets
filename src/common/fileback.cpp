@@ -25,10 +25,10 @@
 //
 #if wxUSE_FFILE && (defined wxHAS_LARGE_FFILES || !defined wxHAS_LARGE_FILES)
 using wxBFFile = wxFFile;
-static const bool wxBadSeek = false;
+constexpr bool wxBadSeek = false;
 #else
 typedef wxFile wxBFFile;
-static const wxFileOffset wxBadSeek = wxInvalidOffset;
+constexpr wxFileOffset wxBadSeek = wxInvalidOffset;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

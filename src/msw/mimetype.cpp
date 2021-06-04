@@ -88,11 +88,11 @@ class WXDLLIMPEXP_FWD_CORE wxIcon;
 // permissions. So the right thing to do is to use HKCR when reading, to
 // respect both per-user and machine-global associations, but only write under
 // HKCU.
-static const wxStringCharType *CLASSES_ROOT_KEY = wxS("Software\\Classes\\");
+constexpr wxStringCharType CLASSES_ROOT_KEY[] = wxS("Software\\Classes\\");
 
 // although I don't know of any official documentation which mentions this
 // location, uses it, so it isn't likely to change
-static constexpr wxChar MIME_DATABASE_KEY[] = wxT("MIME\\Database\\Content Type\\");
+constexpr wxChar MIME_DATABASE_KEY[] = wxT("MIME\\Database\\Content Type\\");
 
 // this function replaces Microsoft %1 with Unix-like %s
 static bool CanonicalizeParams(wxString& command)

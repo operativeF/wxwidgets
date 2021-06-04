@@ -71,13 +71,10 @@ extern wxString wxCallStrftime(const wxString& format, const tm* tm);
 // ----------------------------------------------------------------------------
 
 // FIXME: Aren't these already defined?
-static constexpr int DAYS_PER_WEEK = 7;
-
-static constexpr int HOURS_PER_DAY = 24;
-
-static constexpr int SEC_PER_MIN = 60;
-
-static constexpr int MIN_PER_HOUR = 60;
+constexpr int DAYS_PER_WEEK = 7;
+constexpr int HOURS_PER_DAY = 24;
+constexpr int SEC_PER_MIN = 60;
+constexpr int MIN_PER_HOUR = 60;
 
 // ----------------------------------------------------------------------------
 // parsing helpers
