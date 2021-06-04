@@ -38,8 +38,12 @@ class WXDLLIMPEXP_CORE wxQuantize: public wxObject
 public:
     wxDECLARE_DYNAMIC_CLASS(wxQuantize);
 
+//// Constructor
+
     wxQuantize() = default;
     ~wxQuantize() override = default;
+
+//// Operations
 
     // Reduce the colours in the source image and put the result into the
     // destination image. Both images may be the same, to overwrite the source image.
@@ -56,6 +60,8 @@ public:
     static bool Quantize(const wxImage& src, wxImage& dest, int desiredNoColours = 236,
         unsigned char** eightBitData = nullptr, int flags = wxQUANTIZE_INCLUDE_WINDOWS_COLOURS|wxQUANTIZE_FILL_DESTINATION_IMAGE|wxQUANTIZE_RETURN_8BIT_DATA);
 
+//// Helpers
+
     // Converts input bitmap(s) into 8bit representation with custom palette
 
     // in_rows and out_rows are arrays [0..h-1] of pointer to rows
@@ -65,4 +71,5 @@ public:
 
 };
 
-#endif // _WX_QUANTIZE_H_
+#endif
+    // _WX_QUANTIZE_H_
