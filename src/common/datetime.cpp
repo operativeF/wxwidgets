@@ -531,7 +531,7 @@ struct tm *wxDateTime::GetTmNow(struct tm *tmstruct)
 }
 
 /* static */
-constexpr bool wxDateTime::IsLeapYear(int year, wxDateTime::Calendar cal)
+bool wxDateTime::IsLeapYear(int year, wxDateTime::Calendar cal)
 {
     if ( year == Inv_Year )
         year = GetCurrentYear();

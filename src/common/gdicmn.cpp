@@ -42,6 +42,18 @@ WXDLLIMPEXP_DATA_CORE(wxPenList*)   wxThePenList;
 
 WXDLLIMPEXP_DATA_CORE(wxColourDatabase*) wxTheColourDatabase;
 
+WXDLLIMPEXP_DATA_CORE(wxBitmap)  wxNullBitmap;
+WXDLLIMPEXP_DATA_CORE(wxBrush)   wxNullBrush;
+WXDLLIMPEXP_DATA_CORE(wxColour)  wxNullColour;
+WXDLLIMPEXP_DATA_CORE(wxCursor)  wxNullCursor;
+WXDLLIMPEXP_DATA_CORE(wxFont)    wxNullFont;
+WXDLLIMPEXP_DATA_CORE(wxIcon)    wxNullIcon;
+WXDLLIMPEXP_DATA_CORE(wxPen)     wxNullPen;
+#if wxUSE_PALETTE
+WXDLLIMPEXP_DATA_CORE(wxPalette) wxNullPalette;
+#endif
+WXDLLIMPEXP_DATA_CORE(wxIconBundle) wxNullIconBundle;
+
 const wxSize wxDefaultSize(wxDefaultCoord, wxDefaultCoord);
 const wxPoint wxDefaultPosition(wxDefaultCoord, wxDefaultCoord);
 

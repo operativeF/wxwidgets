@@ -21,8 +21,9 @@
 
 class WXDLLIMPEXP_FWD_CORE wxFontPickerEvent;
 
-inline constexpr char wxFontPickerCtrlNameStr[] = "fontpicker";
-inline constexpr char wxFontPickerWidgetNameStr[] = "fontpickerwidget";
+extern WXDLLIMPEXP_DATA_CORE(const char) wxFontPickerWidgetNameStr[];
+extern WXDLLIMPEXP_DATA_CORE(const char) wxFontPickerCtrlNameStr[];
+
 
 // ----------------------------------------------------------------------------
 // wxFontPickerWidgetBase: a generic abstract interface which must be

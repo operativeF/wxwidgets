@@ -14,7 +14,9 @@
 
 class wxMSWHeaderCtrl;
 
-inline constexpr char wxMSWHeaderCtrlNameStr[] = "wxMSWHeaderCtrl";
+// ----------------------------------------------------------------------------
+// wxHeaderCtrl
+// ----------------------------------------------------------------------------
 
 class WXDLLIMPEXP_CORE wxHeaderCtrl : public wxCompositeWindow<wxHeaderCtrlBase>
 {

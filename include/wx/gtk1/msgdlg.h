@@ -17,6 +17,8 @@
 // type is an 'or' (|) of wxOK, wxCANCEL, wxYES_NO
 // Returns wxYES/NO/OK/CANCEL
 
+extern WXDLLIMPEXP_DATA_CORE(const wxChar) wxMessageBoxCaptionStr[];
+
 class WXDLLIMPEXP_CORE wxMessageDialog: public wxDialog, public wxMessageDialogBase
 {
 public:

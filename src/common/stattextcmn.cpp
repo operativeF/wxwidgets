@@ -39,6 +39,12 @@
 
 #include <algorithm>
 
+extern WXDLLEXPORT_DATA(const char) wxStaticTextNameStr[] = "staticText";
+
+// ----------------------------------------------------------------------------
+// XTI
+// ----------------------------------------------------------------------------
+
 wxDEFINE_FLAGS( wxStaticTextStyle )
 wxBEGIN_FLAGS( wxStaticTextStyle )
 // new style border flags, we put them first to

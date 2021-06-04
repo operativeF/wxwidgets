@@ -23,6 +23,12 @@
 
 #if wxUSE_STATLINE
 
+extern WXDLLEXPORT_DATA(const char) wxStaticLineNameStr[] = "staticLine";
+
+// ----------------------------------------------------------------------------
+// XTI
+// ----------------------------------------------------------------------------
+
 wxDEFINE_FLAGS( wxStaticLineStyle )
 wxBEGIN_FLAGS( wxStaticLineStyle )
     // new style border flags, we put them first to

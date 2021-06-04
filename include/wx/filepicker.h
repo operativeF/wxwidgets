@@ -21,12 +21,15 @@
 class WXDLLIMPEXP_FWD_CORE wxDialog;
 class WXDLLIMPEXP_FWD_CORE wxFileDirPickerEvent;
 
-inline constexpr char wxFilePickerCtrlNameStr[] = "filepicker";
-inline constexpr char wxFilePickerWidgetNameStr[] = "filepickerwidget";
-inline constexpr char wxDirPickerCtrlNameStr[] = "dirpicker";
-inline constexpr char wxDirPickerWidgetNameStr[] = "dirpickerwidget";
-inline constexpr char wxFilePickerWidgetLabel[] = wxTRANSLATE("Browse");
-inline constexpr char wxDirPickerWidgetLabel[] = wxTRANSLATE("Browse");
+extern WXDLLIMPEXP_DATA_CORE(const char) wxFilePickerWidgetLabel[];
+extern WXDLLIMPEXP_DATA_CORE(const char) wxFilePickerWidgetNameStr[];
+extern WXDLLIMPEXP_DATA_CORE(const char) wxFilePickerCtrlNameStr[];
+extern WXDLLIMPEXP_DATA_CORE(const char) wxFileSelectorPromptStr[];
+
+extern WXDLLIMPEXP_DATA_CORE(const char) wxDirPickerWidgetLabel[];
+extern WXDLLIMPEXP_DATA_CORE(const char) wxDirPickerWidgetNameStr[];
+extern WXDLLIMPEXP_DATA_CORE(const char) wxDirPickerCtrlNameStr[];
+extern WXDLLIMPEXP_DATA_CORE(const char) wxDirSelectorPromptStr[];
 
 // ----------------------------------------------------------------------------
 // wxFileDirPickerEvent: used by wxFilePickerCtrl and wxDirPickerCtrl only

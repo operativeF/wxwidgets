@@ -19,7 +19,7 @@
 #include "wx/list.h"
 #include "wx/dynarray.h"
 
-inline constexpr char wxStatusBarNameStr[] = "statusBar";
+extern WXDLLIMPEXP_DATA_CORE(const char) wxStatusBarNameStr[];
 
 // ----------------------------------------------------------------------------
 // wxStatusBar constants

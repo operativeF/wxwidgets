@@ -33,6 +33,9 @@
 // For wxODCB_XXX flags
 #include "wx/odcombo.h"
 
+
+const char wxBitmapComboBoxNameStr[] = "bitmapComboBox";
+
 #if defined(wxBITMAPCOMBOBOX_OWNERDRAWN_BASED)
 
 constexpr int IMAGE_SPACING_RIGHT =         4;  // Space left of image

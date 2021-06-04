@@ -21,7 +21,11 @@
 
 #include <iterator>
 
-inline constexpr char wxGridNameStr[] = "grid";
+// ----------------------------------------------------------------------------
+// constants
+// ----------------------------------------------------------------------------
+
+extern WXDLLIMPEXP_DATA_CORE(const char) wxGridNameStr[];
 
 // Obsolete constants not used by wxWidgets itself any longer, preserved only
 // for compatibility.

@@ -16,7 +16,7 @@
 
 class WXDLLIMPEXP_FWD_CORE wxSelectionStore;
 
-inline constexpr char wxVListBoxNameStr[] = "wxVListBox";
+extern WXDLLIMPEXP_DATA_CORE(const char) wxVListBoxNameStr[];
 
 // ----------------------------------------------------------------------------
 // wxVListBox

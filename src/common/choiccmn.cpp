@@ -29,6 +29,9 @@
 #ifndef WX_PRECOMP
 #endif
 
+const char wxChoiceNameStr[] = "choice";
+
+
 wxDEFINE_FLAGS( wxChoiceStyle )
 wxBEGIN_FLAGS( wxChoiceStyle )
 // new style border flags, we put them first to

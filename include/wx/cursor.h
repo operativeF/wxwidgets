@@ -72,8 +72,6 @@ public:
     #include "wx/qt/cursor.h"
 #endif
 
-inline wxCursor wxNullCursor;
-
 #include "wx/utils.h"
 
 /* This is a small class which can be used by all ports

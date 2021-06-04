@@ -28,6 +28,17 @@
 
 #include "wx/private/addremovectrl.h"
 
+// ============================================================================
+// wxAddRemoveCtrl implementation
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+// common part
+// ----------------------------------------------------------------------------
+
+extern
+WXDLLIMPEXP_DATA_CORE(const char) wxAddRemoveCtrlNameStr[] = "wxAddRemoveCtrl";
+
 bool
 wxAddRemoveCtrl::Create(wxWindow* parent,
                         wxWindowID winid,

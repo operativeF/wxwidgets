@@ -30,6 +30,9 @@
     #include "wx/statusbr.h"
 #endif // WX_PRECOMP
 
+extern WXDLLEXPORT_DATA(const char) wxFrameNameStr[] = "frame";
+extern WXDLLEXPORT_DATA(const char) wxStatusLineNameStr[] = "status_line";
+
 // ----------------------------------------------------------------------------
 // event table
 // ----------------------------------------------------------------------------

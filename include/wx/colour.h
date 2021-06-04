@@ -211,6 +211,8 @@ protected:
 WXDLLIMPEXP_CORE wxString wxToString(const wxColourBase& col);
 WXDLLIMPEXP_CORE bool wxFromString(const wxString& str, wxColourBase* col);
 
+
+
 #if defined(__WXMSW__)
     #include "wx/msw/colour.h"
 #elif defined(__WXMOTIF__)
@@ -228,8 +230,6 @@ WXDLLIMPEXP_CORE bool wxFromString(const wxString& str, wxColourBase* col);
 #elif defined(__WXQT__)
     #include "wx/qt/colour.h"
 #endif
-
-inline wxColour wxNullColour;
 
 #define wxColor wxColour
 

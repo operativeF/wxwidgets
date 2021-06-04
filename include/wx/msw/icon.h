@@ -87,4 +87,5 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxIcon);
 };
 
-#endif // _WX_ICON_H_
+#endif
+    // _WX_ICON_H_

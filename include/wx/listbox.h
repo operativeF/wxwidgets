@@ -24,7 +24,11 @@
 // forward declarations are enough here
 class WXDLLIMPEXP_FWD_BASE wxArrayString;
 
-inline constexpr char wxListBoxNameStr[] = "listBox";
+// ----------------------------------------------------------------------------
+// global data
+// ----------------------------------------------------------------------------
+
+extern WXDLLIMPEXP_DATA_CORE(const char) wxListBoxNameStr[];
 
 // ----------------------------------------------------------------------------
 // wxListBox interface is defined by the class wxListBoxBase

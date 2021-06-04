@@ -22,7 +22,8 @@
 #include "wx/window.h"      // base class
 #include "wx/gdicmn.h"      // wxEllipsize...
 
-inline constexpr char wxControlNameStr[] = "control";
+extern WXDLLIMPEXP_DATA_CORE(const char) wxControlNameStr[];
+
 
 // ----------------------------------------------------------------------------
 // wxControl is the base class for all controls

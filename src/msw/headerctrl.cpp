@@ -210,6 +210,18 @@ private:
     wxMSWHeaderCtrlCustomDraw *m_customDraw;
 };
 
+// ============================================================================
+// wxMSWHeaderCtrl implementation
+// ============================================================================
+
+extern WXDLLIMPEXP_DATA_CORE(const char) wxMSWHeaderCtrlNameStr[] = "wxMSWHeaderCtrl";
+
+// ----------------------------------------------------------------------------
+// wxMSWHeaderCtrl construction/destruction
+// ----------------------------------------------------------------------------
+
+
+
 bool wxMSWHeaderCtrl::Create(wxWindow *parent,
                              wxWindowID id,
                              const wxPoint& pos,

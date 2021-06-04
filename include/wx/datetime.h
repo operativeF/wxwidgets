@@ -393,7 +393,7 @@ public:
     static Month GetCurrentMonth(Calendar cal = Gregorian);
 
         // returns true if the given year is a leap year in the given calendar
-    static constexpr bool IsLeapYear(int year = Inv_Year, Calendar cal = Gregorian);
+    static bool IsLeapYear(int year = Inv_Year, Calendar cal = Gregorian);
 
         // acquires the first day of week based on locale and/or OS settings
     static bool GetFirstWeekDay(WeekDay *firstDay);

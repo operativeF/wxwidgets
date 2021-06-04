@@ -121,6 +121,4 @@ private:
     wxDECLARE_DYNAMIC_CLASS(wxIconBundle);
 };
 
-inline wxIconBundle wxNullIconBundle;
-
 #endif // _WX_ICONBNDL_H_

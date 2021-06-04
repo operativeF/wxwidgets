@@ -21,6 +21,9 @@
 #include "wx/iconbndl.h"
 #include "wx/weakref.h"
 
+// the default names for various classes
+extern WXDLLIMPEXP_DATA_CORE(const char) wxFrameNameStr[];
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -57,8 +60,6 @@
     hence shouldn't overlap with any styles which can be used for the dialogs.
     Additionally, wxCENTRE can be used with frames also.
  */
-
-inline constexpr char wxFrameNameStr[] = "frame";
 
 // style common to both wxFrame and wxDialog
 #define wxSTAY_ON_TOP           0x8000

@@ -85,8 +85,6 @@ public:
     #include "wx/qt/brush.h"
 #endif
 
-inline wxBrush wxNullBrush;
-
 class WXDLLIMPEXP_CORE wxBrushList: public wxGDIObjListBase
 {
 public:

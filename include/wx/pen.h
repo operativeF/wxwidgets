@@ -115,8 +115,6 @@ public:
     #include "wx/qt/pen.h"
 #endif
 
-inline wxPen wxNullPen;
-
 class WXDLLIMPEXP_CORE wxPenList: public wxGDIObjListBase
 {
 public:

@@ -51,7 +51,12 @@ wxBEGIN_EVENT_TABLE(wxVListBox, wxVScrolledWindow)
     EVT_SIZE(wxVListBox::OnSize)
 wxEND_EVENT_TABLE()
 
+// ============================================================================
+// implementation
+// ============================================================================
+
 wxIMPLEMENT_ABSTRACT_CLASS(wxVListBox, wxVScrolledWindow);
+const char wxVListBoxNameStr[] = "wxVListBox";
 
 // ----------------------------------------------------------------------------
 // wxVListBox creation

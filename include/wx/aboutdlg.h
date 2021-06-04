@@ -24,7 +24,11 @@
 class WXDLLIMPEXP_ADV wxAboutDialogInfo
 {
 public:
+    // all fields are initially uninitialized
     wxAboutDialogInfo() = default;
+
+    // accessors for various simply fields
+    // -----------------------------------
 
     // name of the program, if not used defaults to wxApp::GetAppDisplayName()
     void SetName(const wxString& name) { m_name = name; }
@@ -79,6 +83,9 @@ public:
 
     const wxString& GetWebSiteURL() const { return m_url; }
     const wxString& GetWebSiteDescription() const { return m_urlDesc; }
+
+    // accessors for the arrays
+    // ------------------------
 
     // the list of developers of the program
     void SetDevelopers(const wxArrayString& developers)

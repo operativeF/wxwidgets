@@ -28,6 +28,12 @@
     #include "wx/frame.h"
 #endif //WX_PRECOMP
 
+const char wxStatusBarNameStr[] = "statusBar";
+
+// ============================================================================
+// wxStatusBarPane implementation
+// ============================================================================
+
 bool wxStatusBarPane::SetText(const wxString& text)
 {
     if ( text == m_text )

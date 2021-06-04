@@ -13,6 +13,8 @@
 
 #if wxUSE_GAUGE
 
+extern WXDLLIMPEXP_DATA_CORE(const char) wxGaugeNameStr[];
+
 // Group box
 class WXDLLIMPEXP_CORE wxGauge : public wxGaugeBase
 {

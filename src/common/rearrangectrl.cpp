@@ -29,6 +29,13 @@
 
 #include "wx/rearrangectrl.h"
 
+// ============================================================================
+// wxRearrangeList implementation
+// ============================================================================
+
+extern
+WXDLLIMPEXP_DATA_CORE(const char) wxRearrangeListNameStr[] = "wxRearrangeList";
+
 wxBEGIN_EVENT_TABLE(wxRearrangeList, wxCheckListBox)
     EVT_CHECKLISTBOX(wxID_ANY, wxRearrangeList::OnCheck)
 wxEND_EVENT_TABLE()
@@ -287,6 +294,13 @@ void wxRearrangeCtrl::OnButton(wxCommandEvent& event)
     else
         m_list->MoveCurrentDown();
 }
+
+// ============================================================================
+// wxRearrangeDialog implementation
+// ============================================================================
+
+extern
+WXDLLIMPEXP_DATA_CORE(const char) wxRearrangeDialogNameStr[] = "wxRearrangeDlg";
 
 namespace
 {

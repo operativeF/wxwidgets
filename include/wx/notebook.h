@@ -52,7 +52,7 @@ enum
 
 using wxNotebookPage = wxWindow;  // so far, any window can be a page
 
-inline constexpr char wxNotebookNameStr[] = "notebook";
+extern WXDLLIMPEXP_DATA_CORE(const char) wxNotebookNameStr[];
 
 #if wxUSE_EXTENDED_RTTI
 

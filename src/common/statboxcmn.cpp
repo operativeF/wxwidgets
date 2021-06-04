@@ -24,6 +24,8 @@
 
 #include "wx/statbox.h"
 
+extern WXDLLEXPORT_DATA(const char) wxStaticBoxNameStr[] = "groupBox";
+
 wxStaticBoxBase::wxStaticBoxBase()
 {
     m_labelWin = nullptr;
