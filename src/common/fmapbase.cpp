@@ -816,7 +816,7 @@ wxString wxFontMapperBase::GetEncodingName(wxFontEncoding encoding)
         return _("default");
     }
 
-    static constexpr size_t count = WXSIZEOF(gs_encodingNames);
+    const size_t count = WXSIZEOF(gs_encodingNames);
 
     for ( size_t i = 0; i < count; i++ )
     {
@@ -851,7 +851,7 @@ const wxChar** wxFontMapperBase::GetAllEncodingNames(wxFontEncoding encoding)
 /* static */
 wxFontEncoding wxFontMapperBase::GetEncodingFromName(const wxString& name)
 {
-    static constexpr size_t count = WXSIZEOF(gs_encodingNames);
+    const size_t count = WXSIZEOF(gs_encodingNames);
 
     for ( size_t i = 0; i < count; i++ )
     {

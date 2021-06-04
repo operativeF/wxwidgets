@@ -19,19 +19,19 @@
 
 /* Scaling factors for various unit conversions: 1 inch = 2.54 cm */
 // FIXME: Problematic, as double aren't commutative.
-inline constexpr double METRIC_CONVERSION_CONSTANT = 1 / 25.4;
+static constexpr double METRIC_CONVERSION_CONSTANT = 1 / 25.4;
 
-inline constexpr double mm2inches = METRIC_CONVERSION_CONSTANT;
+static constexpr double mm2inches = METRIC_CONVERSION_CONSTANT;
 
-inline constexpr double inches2mm = 1 / mm2inches;
+static constexpr double inches2mm = 1 / mm2inches;
 
-inline constexpr double mm2twips = METRIC_CONVERSION_CONSTANT * 1440;
+static constexpr double mm2twips = METRIC_CONVERSION_CONSTANT * 1440;
 
-inline constexpr double twips2mm = 1 / mm2twips;
+static constexpr double twips2mm = 1 / mm2twips;
 
-inline constexpr double mm2pt = METRIC_CONVERSION_CONSTANT * 72;
+static constexpr double mm2pt = METRIC_CONVERSION_CONSTANT * 72;
 
-inline constexpr double pt2mm = 1 / mm2pt;
+static constexpr double pt2mm = 1 / mm2pt;
 
 inline int wxRound(double x)
 {
@@ -52,8 +52,8 @@ inline int wxRound(float x)
 inline int wxRound(long double x) { return wxRound(double(x)); }
 
 // Convert between degrees and radians.
-inline constexpr double wxDegToRad(double deg) { return (deg * M_PI) / 180.0; }
-inline constexpr double wxRadToDeg(double rad) { return (rad * 180.0) / M_PI; }
+static constexpr double wxDegToRad(double deg) { return (deg * M_PI) / 180.0; }
+static constexpr double wxRadToDeg(double rad) { return (rad * 180.0) / M_PI; }
 
 // Count trailing zeros.
 WXDLLIMPEXP_BASE unsigned int wxCTZ(wxUint32 x);

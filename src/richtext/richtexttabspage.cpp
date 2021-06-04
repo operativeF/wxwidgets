@@ -193,7 +193,7 @@ bool wxRichTextTabsPage::TransferDataToWindow()
     return true;
 }
 
-static constexpr int wxTabSortFunc(int* a, int* b)
+static int wxTabSortFunc(int* a, int* b)
 {
     if ((*a) < (*b))
         return -1;

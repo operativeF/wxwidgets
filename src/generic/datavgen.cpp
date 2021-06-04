@@ -69,7 +69,7 @@ class wxDataViewCtrl;
 //-----------------------------------------------------------------------------
 
 // the cell padding on the left/right
-constexpr int PADDING_RIGHTLEFT = 3;
+static constexpr int PADDING_RIGHTLEFT = 3;
 
 namespace
 {
@@ -2926,7 +2926,7 @@ void wxDataViewMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
 #if wxUSE_DRAG_AND_DROP
     if (m_dropItemInfo.m_hint == DropHint_Below || m_dropItemInfo.m_hint == DropHint_Above)
     {
-        static constexpr int insertLineHeight = 2;     // TODO: setup (should be even)
+        const int insertLineHeight = 2;     // TODO: setup (should be even)
 
         int rect_y = dropItemRect.y - insertLineHeight/2;     // top insert
         if (m_dropItemInfo.m_hint == DropHint_Below)

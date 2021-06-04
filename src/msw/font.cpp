@@ -45,7 +45,7 @@
 // ----------------------------------------------------------------------------
 
 // the mask used to extract the pitch from LOGFONT::lfPitchAndFamily field
-constexpr int PITCH_MASK = FIXED_PITCH | VARIABLE_PITCH;
+static constexpr int PITCH_MASK = FIXED_PITCH | VARIABLE_PITCH;
 
 // ----------------------------------------------------------------------------
 // wxFontRefData - the internal description of the font

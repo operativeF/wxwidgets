@@ -35,7 +35,7 @@
 // ----------------------------------------------------------------------------
 
 // we replace all path separators with this character
-constexpr char PATH_SEP_REPLACE =  '_';
+static constexpr char PATH_SEP_REPLACE =  '_';
 
 // ============================================================================
 // implementation

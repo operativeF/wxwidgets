@@ -28,8 +28,8 @@ class WXDLLIMPEXP_FWD_HTML wxHtmlWinParser;
 class WXDLLIMPEXP_FWD_HTML wxHtmlListBoxCache;
 class WXDLLIMPEXP_FWD_HTML wxHtmlListBoxStyle;
 
-inline constexpr char wxHtmlListBoxNameStr[] = "htmlListBox";
-inline constexpr char wxSimpleHtmlListBoxNameStr[] = "simpleHtmlListBox";
+extern WXDLLIMPEXP_DATA_HTML(const char) wxHtmlListBoxNameStr[];
+extern WXDLLIMPEXP_DATA_HTML(const char) wxSimpleHtmlListBoxNameStr[];
 
 // ----------------------------------------------------------------------------
 // wxHtmlListBox
@@ -184,6 +184,7 @@ private:
     // it calls our GetSelectedTextColour() and GetSelectedTextBgColour()
     friend class wxHtmlListBoxStyle;
     friend class wxHtmlListBoxWinInterface;
+
 
     wxDECLARE_EVENT_TABLE();
 };

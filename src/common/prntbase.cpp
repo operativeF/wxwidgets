@@ -72,7 +72,7 @@
 // The value traditionally used as the default max page number and meaning
 // "infinitely many". It should probably be documented and exposed, but for now
 // at least use it here instead of hardcoding the number.
-constexpr int DEFAULT_MAX_PAGES = 32000;
+static constexpr int DEFAULT_MAX_PAGES = 32000;
 
 //----------------------------------------------------------------------------
 // wxPrintFactory

@@ -1949,7 +1949,7 @@ public:
 
  // Gesture Event
 
-inline constexpr unsigned int wxTwoFingerTimeInterval = 200;
+static constexpr unsigned int wxTwoFingerTimeInterval = 200;
 
 class WXDLLIMPEXP_CORE wxGestureEvent : public wxEvent
 {

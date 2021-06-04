@@ -60,8 +60,8 @@ static const wxChar *gs_classForDialUpWindow = nullptr;
 // ----------------------------------------------------------------------------
 
 // this message is sent by the secondary thread when RAS status changes
-constexpr int wxWM_RAS_STATUS_CHANGED = (WM_USER + 10010);
-constexpr int wxWM_RAS_DIALING_PROGRESS = (WM_USER + 10011);
+static constexpr int wxWM_RAS_STATUS_CHANGED = (WM_USER + 10010);
+static constexpr int wxWM_RAS_DIALING_PROGRESS = (WM_USER + 10011);
 
 // ----------------------------------------------------------------------------
 // types
@@ -93,7 +93,7 @@ constexpr int wxWM_RAS_DIALING_PROGRESS = (WM_USER + 10011);
     typedef DWORD (APIENTRY * RASVALIDATEENTRYNAME)( LPCSTR, LPCSTR );
     typedef DWORD (APIENTRY * RASCONNECTIONNOTIFICATION)( HRASCONN, HANDLE, DWORD );
 
-    constexpr wxChar gs_funcSuffix = wxT('A');
+    static constexpr wxChar gs_funcSuffix = wxT('A');
 #else // Unicode
     typedef DWORD (APIENTRY * RASDIAL)( LPRASDIALEXTENSIONS, LPCWSTR, LPRASDIALPARAMSW, DWORD, LPVOID, LPHRASCONN );
     typedef DWORD (APIENTRY * RASENUMCONNECTIONS)( LPRASCONNW, LPDWORD, LPDWORD );
@@ -115,7 +115,7 @@ constexpr int wxWM_RAS_DIALING_PROGRESS = (WM_USER + 10011);
     typedef DWORD (APIENTRY * RASVALIDATEENTRYNAME)( LPCWSTR, LPCWSTR );
     typedef DWORD (APIENTRY * RASCONNECTIONNOTIFICATION)( HRASCONN, HANDLE, DWORD );
 
-    constexpr wxChar gs_funcSuffix = wxT('W');
+    static constexpr wxChar gs_funcSuffix = wxT('W');
 #endif // ASCII/Unicode
 
 // structure passed to the secondary thread

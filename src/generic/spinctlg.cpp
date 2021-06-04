@@ -53,9 +53,9 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxSpinDoubleEvent, wxNotifyEvent);
 // so the generic control looks similarly to the native one there, we might
 // need to use different value for the other platforms (and maybe even
 // determine it dynamically?).
-constexpr wxCoord MARGIN = 1;
+static constexpr wxCoord MARGIN = 1;
 
-constexpr int SPINCTRLBUT_MAX = 32000; // large to avoid wrap around trouble
+static constexpr int SPINCTRLBUT_MAX = 32000; // large to avoid wrap around trouble
 
 // ----------------------------------------------------------------------------
 // wxSpinCtrlTextGeneric: text control used by spin control
@@ -712,7 +712,7 @@ void wxSpinCtrl::ResetTextValidator()
 // wxSpinCtrlDouble
 //-----------------------------------------------------------------------------
 
-constexpr int SPINCTRLDBL_MAX_DIGITS = 20;
+static constexpr int SPINCTRLDBL_MAX_DIGITS = 20;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxSpinCtrlDouble, wxSpinCtrlGenericBase);
 

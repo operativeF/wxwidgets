@@ -195,9 +195,9 @@ void InteractiveInputTestCase::TestRegExInteractive()
 
 #define FTP_ANONYMOUS
 #ifdef FTP_ANONYMOUS
-    constexpr wxChar hostname[] = wxT("ftp.wxwidgets.org");
+    static constexpr wxChar hostname[] = wxT("ftp.wxwidgets.org");
 #else
-    constexpr wxChar hostname[] = "localhost";
+    static constexpr wxChar hostname[] = "localhost";
 #endif
 
 void InteractiveInputTestCase::TestFtpInteractive()

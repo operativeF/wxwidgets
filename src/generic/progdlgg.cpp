@@ -44,9 +44,9 @@
 // constants
 // ----------------------------------------------------------------------------
 
-constexpr int LAYOUT_MARGIN = 8;
+static constexpr int LAYOUT_MARGIN = 8;
 
-constexpr int wxID_SKIP = 32000;  // whatever
+static constexpr int wxID_SKIP = 32000;  // whatever
 
 // ----------------------------------------------------------------------------
 // event tables

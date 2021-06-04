@@ -53,7 +53,7 @@
 // constants
 // ----------------------------------------------------------------------------
 
-constexpr wxChar FILECONF_TRACE_MASK[] = wxT("fileconf");
+static constexpr wxChar FILECONF_TRACE_MASK[] = wxT("fileconf");
 
 // ----------------------------------------------------------------------------
 // global functions declarations

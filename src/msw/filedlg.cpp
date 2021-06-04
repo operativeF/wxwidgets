@@ -51,9 +51,9 @@
 // constants
 // ----------------------------------------------------------------------------
 
-constexpr int wxMAXPATH =   65534;
-constexpr int wxMAXFILE =   1024;
-constexpr int wxMAXEXT =    5;
+static constexpr int wxMAXPATH =   65534;
+static constexpr int wxMAXFILE =   1024;
+static constexpr int wxMAXEXT =    5;
 
 // ----------------------------------------------------------------------------
 // globals

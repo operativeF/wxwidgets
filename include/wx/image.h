@@ -86,9 +86,9 @@ enum wxImageAlphaBlendMode
 // alpha channel values: fully transparent, default threshold separating
 // transparent pixels from opaque for a few functions dealing with alpha and
 // fully opaque
-inline constexpr unsigned char wxIMAGE_ALPHA_TRANSPARENT = 0;
-inline constexpr unsigned char wxIMAGE_ALPHA_THRESHOLD = 0x80;
-inline constexpr unsigned char wxIMAGE_ALPHA_OPAQUE = 0xff;
+static constexpr unsigned char wxIMAGE_ALPHA_TRANSPARENT = 0;
+static constexpr unsigned char wxIMAGE_ALPHA_THRESHOLD = 0x80;
+static constexpr unsigned char wxIMAGE_ALPHA_OPAQUE = 0xff;
 
 //-----------------------------------------------------------------------------
 // classes

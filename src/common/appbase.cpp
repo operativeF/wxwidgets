@@ -748,7 +748,7 @@ void wxAppConsoleBase::RethrowStoredException()
 
 #if wxUSE_CMDLINE_PARSER
 
-constexpr char OPTION_VERBOSE[] = "verbose";
+static constexpr char OPTION_VERBOSE[] = "verbose";
 
 void wxAppConsoleBase::OnInitCmdLine(wxCmdLineParser& parser)
 {

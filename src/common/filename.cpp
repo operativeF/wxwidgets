@@ -353,11 +353,15 @@ bool StatAny(wxStructStat& st, const wxFileName& fn)
 
 #endif // wxHAVE_LSTAT
 
-} // anonymous namespace
+// ----------------------------------------------------------------------------
+// private constants
+// ----------------------------------------------------------------------------
 
 // length of \\?\Volume{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\ string
 // FIXME: calculate from actual string
-constexpr size_t wxMSWUniqueVolumePrefixLength = 49;
+static constexpr size_t wxMSWUniqueVolumePrefixLength = 49;
+
+} // anonymous namespace
 
 // ============================================================================
 // implementation

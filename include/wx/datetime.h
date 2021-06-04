@@ -102,9 +102,8 @@ struct _SYSTEMTIME;
 // wxInvalidDateTime)
 class WXDLLIMPEXP_FWD_BASE wxDateTime;
 
-inline constexpr char wxDefaultDateTimeFormat[] = "%c";
-inline constexpr char wxDefaultTimeSpanFormat[] = "%H:%M:%S";
-
+extern WXDLLIMPEXP_DATA_BASE(const char) wxDefaultDateTimeFormat[];
+extern WXDLLIMPEXP_DATA_BASE(const char) wxDefaultTimeSpanFormat[];
 extern WXDLLIMPEXP_DATA_BASE(const wxDateTime) wxDefaultDateTime;
 
 #define wxInvalidDateTime wxDefaultDateTime
@@ -1142,7 +1141,7 @@ private:
     // this constant is used to transform a time_t value to the internal
     // representation, as time_t is in seconds and we use milliseconds it's
     // fixed to 1000
-    static constexpr long TIME_T_FACTOR{1000l};
+    static const long TIME_T_FACTOR;
 
     // returns true if we fall in range in which we can use standard ANSI C
     // functions

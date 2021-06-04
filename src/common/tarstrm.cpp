@@ -58,7 +58,7 @@ enum {
     TAR_NUMFIELDS
 };
 
-constexpr int TAR_BLOCKSIZE = 512;
+static constexpr int TAR_BLOCKSIZE = 512;
 
 // checksum type
 enum {
@@ -75,10 +75,10 @@ enum {
 };
 
 // signatures
-constexpr char USTAR_MAGIC[]   = "ustar";
-constexpr char USTAR_VERSION[] = "00";
-constexpr char GNU_MAGIC[]     = "ustar ";
-constexpr char GNU_VERION[]    = " ";
+static constexpr char USTAR_MAGIC[]   = "ustar";
+static constexpr char USTAR_VERSION[] = "00";
+static constexpr char GNU_MAGIC[]     = "ustar ";
+static constexpr char GNU_VERION[]    = " ";
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxTarEntry, wxArchiveEntry);
 wxIMPLEMENT_DYNAMIC_CLASS(wxTarClassFactory, wxArchiveClassFactory);

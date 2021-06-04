@@ -85,10 +85,10 @@
 #endif
 
 
-constexpr int wxPG_GUTTER_DIV =                 3; // gutter is max(iconwidth/gutter_div,gutter_min)
-constexpr int wxPG_GUTTER_MIN =                 3; // gutter before and after image of [+] or [-]
-constexpr int wxPG_YSPACING_MIN =               1;
-constexpr int wxPG_DEFAULT_VSPACING =           2; // This matches .NET propertygrid's value,
+static constexpr int wxPG_GUTTER_DIV =                 3; // gutter is max(iconwidth/gutter_div,gutter_min)
+static constexpr int wxPG_GUTTER_MIN =                 3; // gutter before and after image of [+] or [-]
+static constexpr int wxPG_YSPACING_MIN =               1;
+static constexpr int wxPG_DEFAULT_VSPACING =           2; // This matches .NET propertygrid's value,
                                           // but causes normal combobox to spill out under MSW
 #define wxPG_DEFAULT_CURSOR             wxNullCursor
 #define wxPG_PIXELS_PER_UNIT            m_lineHeight
@@ -102,7 +102,7 @@ constexpr int wxPG_DEFAULT_VSPACING =           2; // This matches .NET property
 // This is the number of pixels the expander button inside
 // property cells (i.e. not in the grey margin area are
 // adjusted.
-constexpr int IN_CELL_EXPANDER_BUTTON_X_ADJUST =    2;
+static constexpr int IN_CELL_EXPANDER_BUTTON_X_ADJUST =    2;
 
 // -----------------------------------------------------------------------
 

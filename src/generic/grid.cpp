@@ -98,23 +98,28 @@ wxGridCellCoords wxGridNoCellCoords( -1, -1 );
 wxGridBlockCoords wxGridNoBlockCoords( -1, -1, -1, -1 );
 wxRect wxGridNoCellRect( -1, -1, -1, -1 );
 
+namespace
+{
+
 // scroll line size
-constexpr size_t GRID_SCROLL_LINE_X = 15;
-constexpr size_t GRID_SCROLL_LINE_Y = GRID_SCROLL_LINE_X;
+const size_t GRID_SCROLL_LINE_X = 15;
+const size_t GRID_SCROLL_LINE_Y = GRID_SCROLL_LINE_X;
 
 // the size of hash tables used a bit everywhere (the max number of elements
 // in these hash tables is the number of rows/columns)
-constexpr int GRID_HASH_SIZE = 100;
+const int GRID_HASH_SIZE = 100;
 
 // the minimal distance in pixels the mouse needs to move to start a drag
 // operation
-constexpr int DRAG_SENSITIVITY = 3;
+const int DRAG_SENSITIVITY = 3;
 
 // the space between the cell edge and the checkbox mark
-constexpr int GRID_CELL_CHECKBOX_MARGIN = 2;
+const int GRID_CELL_CHECKBOX_MARGIN = 2;
 
 // the margin between a cell vertical line and a cell text
-constexpr int GRID_TEXT_MARGIN = 1;
+const int GRID_TEXT_MARGIN = 1;
+
+} // anonymous namespace
 
 #include "wx/arrimpl.cpp"
 

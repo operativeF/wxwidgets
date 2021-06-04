@@ -44,9 +44,6 @@
 // wxStopWatch
 // ----------------------------------------------------------------------------
 
-constexpr int MILLISECONDS_PER_SECOND = 1000;
-constexpr int MICROSECONDS_PER_SECOND = 1000 * 1000;
-
 namespace
 {
 
@@ -77,6 +74,9 @@ PerfCounter& GetPerfCounterState()
 }
 
 #endif // __WINDOWS__
+
+const int MILLISECONDS_PER_SECOND = 1000;
+const int MICROSECONDS_PER_SECOND = 1000*1000;
 
 } // anonymous namespace
 

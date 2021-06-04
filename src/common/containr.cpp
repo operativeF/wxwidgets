@@ -33,7 +33,7 @@
 #endif //WX_PRECOMP
 
 // trace mask for focus messages
-constexpr wxChar TRACE_FOCUS[] = wxT("focus");
+static constexpr wxChar TRACE_FOCUS[] = wxT("focus");
 
 #if (defined(__WXMSW__) || defined(__WXMAC__)) && wxUSE_RADIOBTN
 #define USE_RADIOBTN_NAV

@@ -187,7 +187,7 @@ const char * SCI_METHOD LexerDMIS::DescribeWordListSets()
 
 void SCI_METHOD LexerDMIS::Lex(Sci_PositionU startPos, Sci_Position lengthDoc, int initStyle, IDocument *pAccess)
 {
-	static constexpr Sci_PositionU MAX_STR_LEN = 100;
+	const Sci_PositionU MAX_STR_LEN = 100;
 
 	LexAccessor styler(pAccess);
 	StyleContext scCTX(startPos, lengthDoc, initStyle, styler);

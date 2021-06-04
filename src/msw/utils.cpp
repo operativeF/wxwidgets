@@ -101,11 +101,11 @@
 
 // In the WIN.INI file
 #if !defined(USE_NET_API)
-constexpr wxChar WX_SECTION[] = wxT("wxWindows");
+static constexpr wxChar WX_SECTION[] = wxT("wxWindows");
 #endif
 
 #if !defined(USE_NET_API)
-constexpr wxChar eUSERNAME[]  = wxT("UserName");
+static constexpr wxChar eUSERNAME[]  = wxT("UserName");
 #endif
 
 WXDLLIMPEXP_DATA_BASE(const wxChar *) wxUserResourceStr = wxT("TEXT");

@@ -53,12 +53,12 @@
 using namespace Scintilla;
 #endif
 
-constexpr int T3_SINGLE_QUOTE = 1;
-constexpr int T3_INT_EXPRESSION = 2;
-constexpr int T3_INT_EXPRESSION_IN_TAG = 4;
-constexpr int T3_HTML_SQUOTE = 8;
+static const int T3_SINGLE_QUOTE = 1;
+static const int T3_INT_EXPRESSION = 2;
+static const int T3_INT_EXPRESSION_IN_TAG = 4;
+static const int T3_HTML_SQUOTE = 8;
 
-constexpr bool IsEOL(const int ch, const int chNext) {
+static inline bool IsEOL(const int ch, const int chNext) {
         return (ch == '\r' && chNext != '\n') || (ch == '\n');
 }
 

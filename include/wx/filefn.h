@@ -421,7 +421,7 @@ inline int wxMkDir(const wxString& path, mode_t mode)
     #define wxO_BINARY 0
 #endif
 
-inline constexpr int wxInvalidOffset = -1;
+static constexpr int wxInvalidOffset = -1;
 
 // ----------------------------------------------------------------------------
 // functions

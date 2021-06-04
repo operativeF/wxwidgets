@@ -37,12 +37,12 @@
 #include "wx/msw/uxtheme.h"
 #include "wx/msw/dc.h"
 
-constexpr int NATIVE_TEXT_INDENT_XP = 4;
-constexpr int NATIVE_TEXT_INDENT_CLASSIC = 2;
+static constexpr int NATIVE_TEXT_INDENT_XP = 4;
+static constexpr int NATIVE_TEXT_INDENT_CLASSIC = 2;
 
-constexpr int COMBOBOX_ANIMATION_RESOLUTION = 10;
+static constexpr int COMBOBOX_ANIMATION_RESOLUTION = 10;
 
-constexpr int COMBOBOX_ANIMATION_DURATION = 200;  // In milliseconds
+static constexpr int COMBOBOX_ANIMATION_DURATION = 200;  // In milliseconds
 
 #define wxMSW_DESKTOP_USERPREFERENCESMASK_COMBOBOXANIM    (1<<2)
 

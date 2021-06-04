@@ -38,10 +38,10 @@ const char wxBitmapComboBoxNameStr[] = "bitmapComboBox";
 
 #if defined(wxBITMAPCOMBOBOX_OWNERDRAWN_BASED)
 
-constexpr int IMAGE_SPACING_RIGHT =         4;  // Space left of image
-constexpr int IMAGE_SPACING_LEFT =          4;  // Space right of image, left of text
-constexpr int EXTRA_FONT_HEIGHT =           0;  // Add to increase min. height of list items
-constexpr int wxBCB_DEFAULT_ITEM_HEIGHT =  13;
+static constexpr int IMAGE_SPACING_RIGHT =         4;  // Space left of image
+static constexpr int IMAGE_SPACING_LEFT =          4;  // Space right of image, left of text
+static constexpr int EXTRA_FONT_HEIGHT =           0;  // Add to increase min. height of list items
+static constexpr int wxBCB_DEFAULT_ITEM_HEIGHT =  13;
 
 
 // This macros allows wxArrayPtrVoid to be used in more convenient manner

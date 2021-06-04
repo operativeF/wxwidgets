@@ -65,7 +65,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxColourDialog, wxDialog);
 // ============================================================================
 
 #ifndef COLORBOXES
-constexpr int COLORBOXES = 64;
+static constexpr int COLORBOXES = 64;
 #endif
 
 // Undocumented property storing the COLORINFO struct in the standard dialog.

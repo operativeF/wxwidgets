@@ -124,7 +124,7 @@
 // ============================================================================
 
 // Array used in DecToHex conversion routine.
-constexpr char hexArray[] = "0123456789ABCDEF";
+static constexpr char hexArray[] = "0123456789ABCDEF";
 
 // Convert 2-digit hex number to decimal
 int wxHexToDec(const wxString& str)
@@ -756,7 +756,7 @@ Thanks,
 
 /* Discontinue quicksort algorithm when partition gets below this size.
    This particular magic number was chosen to work best on a Sun 4/260. */
-constexpr int MAX_THRESH = 4;
+static constexpr int MAX_THRESH = 4;
 
 /* Stack node declarations used to store unfulfilled partition obligations. */
 typedef struct
@@ -766,7 +766,7 @@ typedef struct
   } stack_node;
 
 /* The next 4 #defines implement a very fast in-line stack abstraction. */
-constexpr int STACK_SIZE = (8 * sizeof(unsigned long int));
+static constexpr int STACK_SIZE = (8 * sizeof(unsigned long int));
 #define PUSH(low, high)   ((void) ((top->lo = (low)), (top->hi = (high)), ++top))
 #define POP(low, high)    ((void) (--top, (low = top->lo), (high = top->hi)))
 #define STACK_NOT_EMPTY   (stack < top)

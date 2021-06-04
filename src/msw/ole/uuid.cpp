@@ -32,7 +32,7 @@
 // ============================================================================
 
 // length of UUID in C format
-constexpr int   UUID_CSTRLEN =  100;     // real length is 66
+static constexpr int   UUID_CSTRLEN =  100;     // real length is 66
 
 // copy ctor
 Uuid::Uuid(const Uuid& uuid)

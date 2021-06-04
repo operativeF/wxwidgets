@@ -51,7 +51,7 @@
 // ----------------------------------------------------------------------------
 
 // the length of FTP status code (3 digits)
-constexpr size_t LEN_CODE = 3;
+static constexpr size_t LEN_CODE = 3;
 
 // ----------------------------------------------------------------------------
 // macros

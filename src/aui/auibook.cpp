@@ -1627,7 +1627,7 @@ public:
 };
 
 
-constexpr int wxAuiBaseTabCtrlId = 5380;
+const int wxAuiBaseTabCtrlId = 5380;
 
 
 // -- wxAuiNotebook class implementation --

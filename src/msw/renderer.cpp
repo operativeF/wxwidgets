@@ -1235,7 +1235,7 @@ void wxRendererXP::DrawGauge(wxWindow* win,
 // ----------------------------------------------------------------------------
 
 // the width of the sash: this is the same as used by Explorer...
-constexpr wxCoord SASH_WIDTH = 4;
+static constexpr wxCoord SASH_WIDTH = 4;
 
 wxSplitterRenderParams
 wxRendererXP::GetSplitterParams(const wxWindow * win)

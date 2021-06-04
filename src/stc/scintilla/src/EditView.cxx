@@ -171,7 +171,7 @@ void DrawStyledText(Surface *surface, const ViewStyle &vs, int styleOffset, PRec
 }
 #endif
 
-constexpr XYPOSITION epsilon = 0.0001f;	// A small nudge to avoid floating point precision issues
+const XYPOSITION epsilon = 0.0001f;	// A small nudge to avoid floating point precision issues
 
 EditView::EditView() {
 	ldTabstops = nullptr;

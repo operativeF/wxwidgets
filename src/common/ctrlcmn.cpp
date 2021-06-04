@@ -271,7 +271,7 @@ bool wxControlBase::DoSetLabelMarkup(const wxString& markup)
 // wxControlBase - ellipsization code
 // ----------------------------------------------------------------------------
 
-constexpr wxChar wxELLIPSE_REPLACEMENT[] = wxS("...");
+static constexpr wxChar wxELLIPSE_REPLACEMENT[] = wxS("...");
 
 namespace
 {

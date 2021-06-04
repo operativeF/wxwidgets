@@ -54,15 +54,15 @@ WX_DEFINE_ARRAY_PTR(wxGenericTreeItem *, wxArrayGenericTreeItems);
 // constants
 // ----------------------------------------------------------------------------
 
-constexpr int NO_IMAGE = -1;
+static constexpr int NO_IMAGE = -1;
 
-constexpr int PIXELS_PER_UNIT = 10;
+static constexpr int PIXELS_PER_UNIT = 10;
 
 // the margin between the item state image and the item normal image
-constexpr int MARGIN_BETWEEN_STATE_AND_IMAGE = 2;
+static constexpr int MARGIN_BETWEEN_STATE_AND_IMAGE = 2;
 
 // the margin between the item image and the item text
-constexpr int MARGIN_BETWEEN_IMAGE_AND_TEXT = 4;
+static constexpr int MARGIN_BETWEEN_IMAGE_AND_TEXT = 4;
 
 // -----------------------------------------------------------------------------
 // private classes

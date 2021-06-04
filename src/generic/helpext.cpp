@@ -45,19 +45,19 @@
 // ----------------------------------------------------------------------------
 
 // Name for map file.
-constexpr wxChar WXEXTHELP_MAPFILE[] = wxT("wxhelp.map");
+static constexpr wxChar WXEXTHELP_MAPFILE[] = wxT("wxhelp.map");
 
 // Character introducing comments/documentation field in map file.
-constexpr char WXEXTHELP_COMMENTCHAR = ';';
+static constexpr char WXEXTHELP_COMMENTCHAR = ';';
 
 // The ID of the Contents section
-constexpr int WXEXTHELP_CONTENTS_ID = 0;
+static constexpr int WXEXTHELP_CONTENTS_ID = 0;
 
 // Name of environment variable to set help browser.
-constexpr wxChar WXEXTHELP_ENVVAR_BROWSER[] = wxT("WX_HELPBROWSER");
+static constexpr wxChar WXEXTHELP_ENVVAR_BROWSER[] = wxT("WX_HELPBROWSER");
 
 // Is browser a netscape browser?
-constexpr wxChar WXEXTHELP_ENVVAR_BROWSERISNETSCAPE[] =  wxT("WX_HELPBROWSER_NS");
+static constexpr wxChar WXEXTHELP_ENVVAR_BROWSERISNETSCAPE[] =  wxT("WX_HELPBROWSER_NS");
 
 wxIMPLEMENT_CLASS(wxExtHelpController, wxHelpControllerBase);
 
