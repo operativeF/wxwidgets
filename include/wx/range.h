@@ -20,6 +20,7 @@ public :
     wxRange( int minVal, int maxVal) : m_minVal(minVal), m_maxVal(maxVal) {}
     int GetMin() const { return m_minVal; }
     int GetMax() const { return m_maxVal; }
+
 private :
     int m_minVal{0};
     int m_maxVal{0};

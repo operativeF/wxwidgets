@@ -23,12 +23,6 @@
 #include "wx/listctrl.h"
 #include "wx/artprov.h"
 
-// ============================================================================
-// implementation
-// ============================================================================
-
-const char wxEditableListBoxNameStr[] = "editableListBox";
-
 // list control with auto-resizable column:
 class CleverListCtrl : public wxListCtrl
 {
