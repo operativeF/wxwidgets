@@ -22,7 +22,7 @@
 class WXDLLIMPEXP_ADV wxActivityIndicatorGeneric : public wxActivityIndicatorBase
 {
 public:
-    wxActivityIndicatorGeneric() = nullptr
+    wxActivityIndicatorGeneric() = default;
 
     explicit
     wxActivityIndicatorGeneric(wxWindow* parent,
