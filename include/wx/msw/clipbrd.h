@@ -41,7 +41,7 @@ WXDLLIMPEXP_CORE bool wxGetClipboardFormatName(wxDataFormat dataFormat,
 class WXDLLIMPEXP_CORE wxClipboard : public wxClipboardBase
 {
 public:
-    wxClipboard();
+    wxClipboard() = default;
     ~wxClipboard() override;
 
     // open the clipboard before SetData() and GetData()
@@ -74,8 +74,8 @@ public:
     bool Flush() override;
 
 private:
-    IDataObject *m_lastDataObject;
-    bool m_isOpened;
+    IDataObject *m_lastDataObject{nullptr};
+    bool m_isOpened{false};
 
     wxDECLARE_DYNAMIC_CLASS(wxClipboard);
 };

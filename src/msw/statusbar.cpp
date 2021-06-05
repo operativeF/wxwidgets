@@ -64,20 +64,11 @@ static constexpr int DEFAULT_FIELD_WIDTH = 25;
 #define StatusBar_GetTextLen(h, n)  LOWORD(SendMessage(h, SB_GETTEXTLENGTH, (WPARAM)n, 0))
 #define StatusBar_GetText(h, n, s)  LOWORD(SendMessage(h, SB_GETTEXT, (WPARAM)n, (LPARAM)(LPTSTR)s))
 
-// ============================================================================
-// implementation
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// wxStatusBar class
-// ----------------------------------------------------------------------------
-
 wxStatusBar::wxStatusBar()
 {
     SetParent(nullptr);
     m_hWnd = nullptr;
     m_windowId = 0;
-    m_pDC = nullptr;
 }
 
 WXDWORD wxStatusBar::MSWGetStyle(long style, WXDWORD *exstyle) const

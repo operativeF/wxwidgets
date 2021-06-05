@@ -21,7 +21,7 @@
 class WXDLLIMPEXP_CORE wxTextWrapper
 {
 public:
-    wxTextWrapper() { m_eol = false; }
+    wxTextWrapper() = default;
 
     wxTextWrapper(const wxTextWrapper&) = delete;
 	wxTextWrapper& operator=(const wxTextWrapper&) = delete;
@@ -63,7 +63,7 @@ private:
     }
 
 
-    bool m_eol;
+    bool m_eol{false};
 };
 
 #if wxUSE_STATTEXT
@@ -77,13 +77,13 @@ private:
 //
 // This class is currently private to wxWidgets and used only by wxDialog
 // itself. We may make it public later if there is sufficient interest.
+// FIXME: Nullptr deref.
 class wxTextSizerWrapper : public wxTextWrapper
 {
 public:
     wxTextSizerWrapper(wxWindow *win)
     {
         m_win = win;
-        m_hLine = 0;
     }
 
     wxSizer *CreateSizer(const wxString& text, int widthMax)
@@ -120,7 +120,7 @@ protected:
 private:
     wxWindow *m_win;
     wxSizer *m_sizer;
-    int m_hLine;
+    int m_hLine{0};
 };
 
 #endif // wxUSE_STATTEXT

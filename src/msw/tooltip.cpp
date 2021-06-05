@@ -374,15 +374,9 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxToolTip, wxObject);
 wxToolTip::wxToolTip(const wxString &tip)
          : m_text(tip)
 {
-    m_window = nullptr;
-    m_others = nullptr;
-
     // make sure m_rect.IsEmpty() == true
     m_rect.SetWidth(0);
     m_rect.SetHeight(0);
-
-    // since m_rect is not valid, m_id is ignored by wxToolInfo ctor...
-    m_id = 0;
 }
 
 wxToolTip::wxToolTip(wxWindow* win, unsigned int id, const wxString &tip, const wxRect& rc)

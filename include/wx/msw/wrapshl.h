@@ -45,6 +45,9 @@ public:
         m_pidl = pidl;
     }
 
+    wxItemIdList(const wxItemIdList&) = delete;
+	wxItemIdList& operator=(const wxItemIdList&) = delete;
+
     static void Free(LPITEMIDLIST pidl)
     {
         if ( pidl )
@@ -85,9 +88,6 @@ public:
 
 private:
     LPITEMIDLIST m_pidl;
-
-    wxItemIdList(const wxItemIdList&) = delete;
-	wxItemIdList& operator=(const wxItemIdList&) = delete;
 };
 
 // enable autocompleting filenames in the text control with given HWND

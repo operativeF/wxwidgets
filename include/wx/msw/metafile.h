@@ -29,9 +29,10 @@ public:
     bool IsOk() const override { return m_metafile != 0; }
 
 public:
-    WXHANDLE m_metafile;
-    int m_windowsMappingMode;
-    int m_width, m_height;
+    WXHANDLE m_metafile{nullptr};
+    int m_windowsMappingMode{MM_ANISOTROPIC};
+    int m_width{0};
+    int m_height{0};
 
     friend class WXDLLIMPEXP_FWD_CORE wxMetafile;
 };

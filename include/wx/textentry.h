@@ -29,7 +29,7 @@ class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_CORE wxTextEntryBase
 {
 public:
-    wxTextEntryBase() { m_eventsBlock = 0; m_hintData = nullptr; }
+    wxTextEntryBase() = default;
     virtual ~wxTextEntryBase();
 
     // accessing the value
@@ -304,10 +304,10 @@ private:
 
 
     // if this counter is non-null, events are blocked
-    unsigned m_eventsBlock;
+    unsigned m_eventsBlock{0};
 
     // hint-related stuff, only allocated if/when SetHint() is used
-    wxTextEntryHintData *m_hintData;
+    wxTextEntryHintData *m_hintData{nullptr};
 
     // It needs to call our Do{Get,Set}Value() to work with the real control
     // contents.

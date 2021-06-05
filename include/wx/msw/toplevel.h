@@ -20,7 +20,6 @@
 class WXDLLIMPEXP_CORE wxTopLevelWindowMSW : public wxTopLevelWindowBase
 {
 public:
-    // constructors and such
     wxTopLevelWindowMSW() = default;
 
     wxTopLevelWindowMSW(wxWindow *parent,
@@ -44,6 +43,8 @@ public:
 
     ~wxTopLevelWindowMSW() override;
 
+    wxTopLevelWindowMSW(const wxTopLevelWindowMSW&) = delete;
+	wxTopLevelWindowMSW& operator=(const wxTopLevelWindowMSW&) = delete;
     
     void SetTitle( const wxString& title) override;
     wxString GetTitle() const override;
@@ -192,8 +193,6 @@ private:
     wxMenu *m_menuSystem {nullptr};
 
     wxDECLARE_EVENT_TABLE();
-    wxTopLevelWindowMSW(const wxTopLevelWindowMSW&) = delete;
-	wxTopLevelWindowMSW& operator=(const wxTopLevelWindowMSW&) = delete;
 };
 
 #endif // _WX_MSW_TOPLEVEL_H_

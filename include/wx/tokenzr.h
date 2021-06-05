@@ -42,7 +42,7 @@ class WXDLLIMPEXP_BASE wxStringTokenizer : public wxObject
 public:
     // ctors and initializers
         // default ctor, call SetString() later
-    wxStringTokenizer() { m_mode = wxTOKEN_INVALID; }
+    wxStringTokenizer() = default;
         // ctor which gives us the string
     wxStringTokenizer(const wxString& str,
                       const wxString& delims = wxDEFAULT_DELIMITERS,
@@ -134,7 +134,7 @@ protected:
 
     wxString::const_iterator m_pos; // the current position in m_string
 
-    wxStringTokenizerMode m_mode;   // see wxTOKEN_XXX values
+    wxStringTokenizerMode m_mode{wxTOKEN_INVALID}; // see wxTOKEN_XXX values
 
     wxChar   m_lastDelim;           // delimiter after last token or '\0'
 };

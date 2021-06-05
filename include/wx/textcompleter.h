@@ -55,7 +55,7 @@ public:
 
 private:
     wxArrayString m_completions;
-    unsigned m_index;
+    unsigned m_index{0};
 };
 
 // ----------------------------------------------------------------------------

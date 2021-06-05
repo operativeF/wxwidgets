@@ -162,17 +162,6 @@ wxTreeEvent::wxTreeEvent(const wxTreeEvent & event)
 
 wxTreeCtrlBase::wxTreeCtrlBase()
 {
-    m_imageListNormal =
-    m_imageListState = nullptr;
-    m_ownsImageListNormal =
-    m_ownsImageListState = false;
-
-    // arbitrary default
-    m_spacing = 18;
-
-    // quick DoGetBestSize calculation
-    m_quickBestSize = true;
-
     Bind(wxEVT_CHAR_HOOK, &wxTreeCtrlBase::OnCharHook, this);
 }
 

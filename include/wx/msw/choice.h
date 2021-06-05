@@ -21,7 +21,7 @@ class WXDLLIMPEXP_CORE wxChoice : public wxChoiceBase
 {
 public:
     // ctors
-    wxChoice() { Init(); }
+    wxChoice() = default;
     ~wxChoice() override;
 
     wxChoice(wxWindow *parent,
@@ -33,7 +33,6 @@ public:
              const wxValidator& validator = wxDefaultValidator,
              const wxString& name = wxASCII_STR(wxChoiceNameStr))
     {
-        Init();
         Create(parent, id, pos, size, n, choices, style, validator, name);
     }
 
@@ -46,7 +45,6 @@ public:
              const wxValidator& validator = wxDefaultValidator,
              const wxString& name = wxASCII_STR(wxChoiceNameStr))
     {
-        Init();
         Create(parent, id, pos, size, choices, style, validator, name);
     }
 
@@ -105,15 +103,6 @@ protected:
     // choose the default border for this window
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
-    // common part of all ctors
-    // FIXME: Protected Init()
-    void Init()
-    {
-        m_lastAcceptedSelection =
-        m_pendingSelection = wxID_NONE;
-        m_heightOwn = wxDefaultCoord;
-    }
-
     void DoDeleteOneItem(unsigned int n) override;
     void DoClear() override;
 
@@ -167,12 +156,12 @@ protected:
     // The first one contains the item that had been originally selected before
     // the drop down was opened and the second one the item we should select
     // when the drop down is closed again.
-    int m_lastAcceptedSelection,
-        m_pendingSelection;
+    int m_lastAcceptedSelection{wxID_NONE};
+    int m_pendingSelection{wxID_NONE};
 
     // the height of the control itself if it was set explicitly or
     // wxDefaultCoord if it hadn't
-    int m_heightOwn;
+    int m_heightOwn{wxDefaultCoord};
 
 public:
     wxClassInfo *GetClassInfo() const override;

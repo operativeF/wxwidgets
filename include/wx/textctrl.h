@@ -830,8 +830,8 @@ protected:
     wxMouseEvent m_evtMouse;
 
     // the start and end indices of the URL in the text control
-    long m_start{0},
-         m_end{0};
+    long m_start{0};
+    long m_end{0};
 
 public:
 	wxClassInfo *GetClassInfo() const override ;

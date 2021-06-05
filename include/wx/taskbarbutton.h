@@ -89,14 +89,14 @@ public:
 private:
     bool UpdateParentTaskBarButton();
 
-    int m_id;
+    int m_id{0};
     wxIcon m_icon;
     wxString m_tooltip;
-    bool m_enable;
-    bool m_dismissOnClick;
-    bool m_hasBackground;
-    bool m_shown;
-    bool m_interactive;
+    bool m_enable{true};
+    bool m_dismissOnClick{false};
+    bool m_hasBackground{true};
+    bool m_shown{true};
+    bool m_interactive{true};
     wxTaskBarButton *m_taskBarButtonParent{nullptr};
 
     wxDECLARE_DYNAMIC_CLASS(wxThumbBarButton);
@@ -185,7 +185,7 @@ private:
     wxString m_arguments;
     wxString m_tooltip;
     wxString m_iconPath;
-    int      m_iconIndex;
+    int      m_iconIndex{0};
 };
 
 using wxTaskBarJumpListItems = std::vector<wxTaskBarJumpListItem *>;

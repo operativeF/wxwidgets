@@ -179,8 +179,11 @@ class WXDLLIMPEXP_BASE wxMutexLocker
 public:
     // lock the mutex in the ctor
     wxMutexLocker(wxMutex& mutex)
-        : m_isOk(false), m_mutex(mutex)
+        : m_mutex(mutex)
         { m_isOk = ( m_mutex.Lock() == wxMUTEX_NO_ERROR ); }
+
+    wxMutexLocker(const wxMutexLocker&) = delete;
+    wxMutexLocker& operator=(const wxMutexLocker&) = delete;
 
     // returns true if mutex was successfully locked in ctor
     bool IsOk() const
@@ -191,11 +194,7 @@ public:
         { if ( IsOk() ) m_mutex.Unlock(); }
 
 private:
-    // no assignment operator nor copy ctor
-    wxMutexLocker(const wxMutexLocker&);
-    wxMutexLocker& operator=(const wxMutexLocker&);
-
-    bool     m_isOk;
+    bool     m_isOk{false};
     wxMutex& m_mutex;
 };
 

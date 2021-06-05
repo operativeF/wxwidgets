@@ -23,6 +23,9 @@ public:
     wxToolTip(const wxString &tip);
     ~wxToolTip() override;
 
+    wxToolTip(const wxToolTip&) = delete;
+	wxToolTip& operator=(const wxToolTip&) = delete;
+
     // ctor used by wxStatusBar to associate a tooltip to a portion of
     // the status bar window:
     wxToolTip(wxWindow* win, unsigned int id,
@@ -106,15 +109,13 @@ private:
     bool AdjustMaxWidth();
 
     wxString  m_text;           // tooltip text
-    wxWindow* m_window;         // main window we're associated with
-    wxToolTipOtherWindows *m_others; // other windows associated with it or NULL
+    wxWindow* m_window{nullptr};         // main window we're associated with
+    wxToolTipOtherWindows *m_others{nullptr}; // other windows associated with it or NULL
     wxRect    m_rect;           // the rect of the window for which this tooltip is shown
                                 // (or a rect with width/height == 0 to show it for the entire window)
-    unsigned int m_id;          // the id of this tooltip (ignored when m_rect width/height is 0)
+    unsigned int m_id{0};          // the id of this tooltip (ignored when m_rect width/height is 0)
 
     wxDECLARE_ABSTRACT_CLASS(wxToolTip);
-    wxToolTip(const wxToolTip&) = delete;
-	wxToolTip& operator=(const wxToolTip&) = delete;
 };
 
 #endif // _WX_MSW_TOOLTIP_H_

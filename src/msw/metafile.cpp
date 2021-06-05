@@ -57,13 +57,6 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxMetafileDC, wxDC);
  * it on the clipboard.
  */
 
-wxMetafileRefData::wxMetafileRefData()
-{
-    m_metafile = 0;
-    m_windowsMappingMode = MM_ANISOTROPIC;
-    m_width = m_height = 0;
-}
-
 wxMetafileRefData::~wxMetafileRefData()
 {
     if (m_metafile)

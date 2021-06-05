@@ -22,10 +22,7 @@
 class WXDLLIMPEXP_ADV wxActivityIndicatorGeneric : public wxActivityIndicatorBase
 {
 public:
-    wxActivityIndicatorGeneric()
-    {
-        m_impl = nullptr;
-    }
+    wxActivityIndicatorGeneric() = nullptr
 
     explicit
     wxActivityIndicatorGeneric(wxWindow* parent,
@@ -35,8 +32,6 @@ public:
                                long style = 0,
                                const wxString& name = wxActivityIndicatorNameStr)
     {
-        m_impl = nullptr;
-
         Create(parent, winid, pos, size, style, name);
     }
 
@@ -57,7 +52,7 @@ protected:
     wxSize DoGetBestClientSize() const override;
 
 private:
-    class wxActivityIndicatorImpl *m_impl;
+    class wxActivityIndicatorImpl *m_impl{nullptr};
 
 #ifndef wxHAS_NATIVE_ACTIVITYINDICATOR
     wxDECLARE_DYNAMIC_CLASS(wxActivityIndicator);

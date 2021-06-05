@@ -41,7 +41,7 @@ public:
     // --------------------------------
 
     // default ctor, you must use Create() to really initialize the dialog
-    wxGenericAboutDialog() {  m_sizerText = nullptr;  }
+    wxGenericAboutDialog() = default;
 
     // ctor which fully initializes the object
     wxGenericAboutDialog(const wxAboutDialogInfo& info, wxWindow* parent = nullptr)
@@ -78,9 +78,7 @@ protected:
     void AddCollapsiblePane(const wxString& title, const wxString& text);
 #endif // wxUSE_COLLPANE
 
-private:
-    // common part of all ctors
-    
+private:    
 
 #if !wxUSE_MODAL_ABOUT_DIALOG
     // An explicit handler for deleting the dialog when it's closed is needed
@@ -89,7 +87,7 @@ private:
     void OnOK(wxCommandEvent& event);
 #endif // !wxUSE_MODAL_ABOUT_DIALOG
 
-    wxSizer *m_sizerText;
+    wxSizer *m_sizerText{nullptr};
 };
 
 // unlike wxAboutBox which can show either the native or generic about dialog,

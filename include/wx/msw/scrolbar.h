@@ -15,7 +15,7 @@
 class WXDLLIMPEXP_CORE wxScrollBar: public wxScrollBarBase
 {
 public:
-    wxScrollBar() { m_pageSize = 0; m_viewSize = 0; m_objectSize = 0; }
+    wxScrollBar() = default;
     ~wxScrollBar() override;
 
     wxScrollBar(wxWindow *parent, wxWindowID id,
@@ -67,9 +67,9 @@ public:
 protected:
     wxSize DoGetBestSize() const override;
 
-    int m_pageSize;
-    int m_viewSize;
-    int m_objectSize;
+    int m_pageSize{0};
+    int m_viewSize{0};
+    int m_objectSize{0};
 
 public:
 	wxClassInfo *GetClassInfo() const override;

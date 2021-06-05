@@ -28,7 +28,6 @@ public:
                 long style = wxSTB_DEFAULT_STYLE,
                 const wxString& name = wxASCII_STR(wxStatusBarNameStr))
     {
-        m_pDC = nullptr;
         (void)Create(parent, id, style, name);
     }
 
@@ -78,7 +77,7 @@ protected:
     void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
 
     // used by DoUpdateStatusText()
-    wxClientDC *m_pDC;
+    wxClientDC *m_pDC{nullptr};
 
 #if wxUSE_TOOLTIPS
     // the tooltips used when wxSTB_SHOW_TIPS is given

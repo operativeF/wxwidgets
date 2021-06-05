@@ -472,12 +472,6 @@ bool wxGetClipboardFormatName(wxDataFormat dataFormat,
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxClipboard, wxObject);
 
-wxClipboard::wxClipboard()
-{
-    m_lastDataObject = nullptr;
-    m_isOpened = false;
-}
-
 wxClipboard::~wxClipboard()
 {
     if ( m_lastDataObject )
