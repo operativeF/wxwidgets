@@ -17,9 +17,6 @@ public:
 
     wxPen( const wxColour &colour, int width = 1, wxPenStyle style = wxPENSTYLE_SOLID );
 
-    wxDEPRECATED_MSG("use wxPENSTYLE_XXX constants")
-    wxPen(const wxColour& col, int width, int style);
-
     bool operator==(const wxPen& pen) const;
     bool operator!=(const wxPen& pen) const;
 
@@ -40,9 +37,6 @@ public:
     wxPenCap GetCap() const override;
     int GetWidth() const override;
     int GetDashes(wxDash **ptr) const override;
-
-    wxDEPRECATED_MSG("use wxPENSTYLE_XXX constants")
-    void SetStyle(int style) { SetStyle((wxPenStyle)style); }
 
     QPen GetHandle() const;
 

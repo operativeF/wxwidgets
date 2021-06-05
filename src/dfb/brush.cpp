@@ -65,11 +65,6 @@ wxBrush::wxBrush(const wxColour &colour, wxBrushStyle style)
     m_refData = new wxBrushRefData(colour, style);
 }
 
-wxBrush::wxBrush(const wxColour& col, int style)
-{
-    m_refData = new wxBrushRefData(col, (wxBrushStyle)style);
-}
-
 wxBrush::wxBrush(const wxBitmap &stippleBitmap)
 {
     wxFAIL_MSG( wxT("brushes with stipple bitmaps not implemented") );

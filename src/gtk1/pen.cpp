@@ -104,14 +104,6 @@ wxPen::wxPen( const wxColour &colour, int width, wxPenStyle style )
     m_refData = new wxPenRefData(wxPenInfo(colour, width).Style(style));
 }
 
-wxPen::wxPen(const wxColour& colour, int width, int style)
-{
-    m_refData = new wxPenRefData
-                    (
-                        wxPenInfo(colour, width).Style((wxPenStyle)style)
-                    );
-}
-
 wxPen::wxPen(const wxPenInfo& info)
 {
     m_refData = new wxPenRefData(info);

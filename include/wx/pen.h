@@ -121,31 +121,8 @@ public:
     wxPen *FindOrCreatePen(const wxColour& colour,
                            int width = 1,
                            wxPenStyle style = wxPENSTYLE_SOLID);
-
-    wxDEPRECATED_MSG("use wxPENSTYLE_XXX constants")
-    wxPen *FindOrCreatePen(const wxColour& colour, int width, int style)
-        { return FindOrCreatePen(colour, width, (wxPenStyle)style); }
 };
 
 extern WXDLLIMPEXP_DATA_CORE(wxPenList*)   wxThePenList;
-
-// provide comparison operators to allow code such as
-//
-//      if ( pen.GetStyle() == wxTRANSPARENT )
-//
-// to compile without warnings which it would otherwise provoke from some
-// compilers as it compares elements of different enums
-
-wxDEPRECATED_MSG("use wxPENSTYLE_XXX constants")
-inline bool operator==(wxPenStyle s, wxDeprecatedGUIConstants t)
-{
-    return static_cast<int>(s) == static_cast<int>(t);
-}
-
-wxDEPRECATED_MSG("use wxPENSTYLE_XXX constants")
-inline bool operator!=(wxPenStyle s, wxDeprecatedGUIConstants t)
-{
-    return static_cast<int>(s) != static_cast<int>(t);
-}
 
 #endif // _WX_PEN_H_BASE_

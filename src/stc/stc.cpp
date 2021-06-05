@@ -1250,20 +1250,6 @@ int wxStyledTextCtrl::GetWhitespaceSize() const
     return SendMsg(SCI_GETWHITESPACESIZE, 0, 0);
 }
 
-// Divide each styling byte into lexical class bits (default: 5) and indicator
-// bits (default: 3). If a lexer requires more than 32 lexical states, then this
-// is used to expand the possible states.
-void wxStyledTextCtrl::SetStyleBits(int bits)
-{
-    SendMsg(SCI_SETSTYLEBITS, bits, 0);
-}
-
-// Retrieve number of bits in style bytes used to hold the lexical state.
-int wxStyledTextCtrl::GetStyleBits() const
-{
-    return SendMsg(SCI_GETSTYLEBITS, 0, 0);
-}
-
 // Used to hold extra styling information for each line.
 void wxStyledTextCtrl::SetLineState(int line, int state)
 {
@@ -4615,12 +4601,6 @@ wxString wxStyledTextCtrl::GetPropertyExpanded(const wxString& key) {
 // interpreted as an int AFTER any "$()" variable replacement.
 int wxStyledTextCtrl::GetPropertyInt(const wxString &key, int defaultValue) const {
         return SendMsg(SCI_GETPROPERTYINT, (uptr_t)(const char*)wx2stc(key), defaultValue);
-}
-
-// Retrieve the number of bits the current lexer needs for styling.
-int wxStyledTextCtrl::GetStyleBitsNeeded() const
-{
-    return SendMsg(SCI_GETSTYLEBITSNEEDED, 0, 0);
 }
 
 // Retrieve the lexing language of the document.

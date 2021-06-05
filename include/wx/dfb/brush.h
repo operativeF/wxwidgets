@@ -46,13 +46,6 @@ public:
     void SetStyle(wxBrushStyle style);
     void SetStipple(const wxBitmap& stipple);
 
-
-    wxDEPRECATED_MSG("use wxBRUSHSTYLE_XXX constants")
-    wxBrush(const wxColour& col, int style);
-
-    wxDEPRECATED_MSG("use wxBRUSHSTYLE_XXX constants")
-    void SetStyle(int style) { SetStyle((wxBrushStyle)style); }
-
 protected:
     virtual wxGDIRefData *CreateGDIRefData() const;
     virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;

@@ -252,15 +252,6 @@ wxPen::wxPen( const wxColour &colour, int width, wxPenStyle style)
     M_PENDATA.setColor(colour.GetQColor());
 }
 
-wxPen::wxPen(const wxColour& col, int width, int style)
-{
-    m_refData = new wxPenRefData();
-    M_PENDATA.setWidth(width);
-    M_PENDATA.setStyle(ConvertPenStyle((wxPenStyle)style));
-    M_PENDATA.setColor(col.GetQColor());
-}
-
-
 bool wxPen::operator==(const wxPen& pen) const
 {
     if (m_refData == pen.m_refData) return true;

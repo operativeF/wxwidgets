@@ -90,10 +90,6 @@ class WXDLLIMPEXP_CORE wxBrushList: public wxGDIObjListBase
 public:
     wxBrush *FindOrCreateBrush(const wxColour& colour,
                                wxBrushStyle style = wxBRUSHSTYLE_SOLID);
-
-    wxDEPRECATED_MSG("use wxBRUSHSTYLE_XXX constants")
-    wxBrush *FindOrCreateBrush(const wxColour& colour, int style)
-        { return FindOrCreateBrush(colour, (wxBrushStyle)style); }
 };
 
 extern WXDLLIMPEXP_DATA_CORE(wxBrushList*)   wxTheBrushList;
@@ -104,17 +100,5 @@ extern WXDLLIMPEXP_DATA_CORE(wxBrushList*)   wxTheBrushList;
 //
 // to compile without warnings which it would otherwise provoke from some
 // compilers as it compares elements of different enums
-
-wxDEPRECATED_MSG("use wxBRUSHSTYLE_XXX constants only")
-inline bool operator==(wxBrushStyle s, wxDeprecatedGUIConstants t)
-{
-    return static_cast<int>(s) == static_cast<int>(t);
-}
-
-wxDEPRECATED_MSG("use wxBRUSHSTYLE_XXX constants only")
-inline bool operator!=(wxBrushStyle s, wxDeprecatedGUIConstants t)
-{
-    return static_cast<int>(s) != static_cast<int>(t);
-}
 
 #endif // _WX_BRUSH_H_BASE_

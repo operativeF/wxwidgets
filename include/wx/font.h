@@ -484,41 +484,6 @@ public:
     // account as well.
     static int GetNumericWeightOf(wxFontWeight weight);
 
-    wxDEPRECATED_MSG("use wxFONTWEIGHT_XXX constants instead of raw values")
-    void SetWeight(int weight)
-        { SetWeight(static_cast<wxFontWeight>(weight)); }
-
-    wxDEPRECATED_MSG("use wxFONTWEIGHT_XXX constants instead of wxLIGHT/wxNORMAL/wxBOLD")
-    void SetWeight(wxDeprecatedGUIConstants weight)
-        { SetWeight(static_cast<wxFontWeight>(weight)); }
-
-    // from the font components
-    wxDEPRECATED_MSG("use wxFONT{FAMILY,STYLE,WEIGHT}_XXX constants")
-    static wxFont *New(
-        int pointSize,              // size of the font in points
-        int family,                 // see wxFontFamily enum
-        int style,                  // see wxFontStyle enum
-        int weight,                 // see wxFontWeight enum
-        bool underlined = false,    // not underlined by default
-        const wxString& face = wxEmptyString,              // facename
-        wxFontEncoding encoding = wxFONTENCODING_DEFAULT)  // ISO8859-X, ...
-        { return New(pointSize, (wxFontFamily)family, (wxFontStyle)style,
-                     (wxFontWeight)weight, underlined, face, encoding); }
-
-    // from the font components
-    wxDEPRECATED_MSG("use wxFONT{FAMILY,STYLE,WEIGHT}_XXX constants")
-    static wxFont *New(
-        const wxSize& pixelSize,    // size of the font in pixels
-        int family,                 // see wxFontFamily enum
-        int style,                  // see wxFontStyle enum
-        int weight,                 // see wxFontWeight enum
-        bool underlined = false,    // not underlined by default
-        const wxString& face = wxEmptyString,              // facename
-        wxFontEncoding encoding = wxFONTENCODING_DEFAULT)  // ISO8859-X, ...
-        { return New(pixelSize, (wxFontFamily)family, (wxFontStyle)style,
-                     (wxFontWeight)weight, underlined, face, encoding); }
-
-
 protected:
     // the function called by both overloads of SetNativeFontInfo()
     virtual void DoSetNativeFontInfo(const wxNativeFontInfo& info);
@@ -593,19 +558,6 @@ WXDLLIMPEXP_CORE bool wxFromString(const wxString& str, wxFontBase* font);
 
 // this macro must be used in all derived wxFont classes declarations
 #define wxDECLARE_COMMON_FONT_METHODS() \
-    wxDEPRECATED_MSG("use wxFONTFAMILY_XXX constants") \
-    void SetFamily(int family) \
-        { SetFamily((wxFontFamily)family); } \
-    wxDEPRECATED_MSG("use wxFONTSTYLE_XXX constants") \
-    void SetStyle(int style) \
-        { SetStyle((wxFontStyle)style); } \
-    wxDEPRECATED_MSG("use wxFONTFAMILY_XXX constants") \
-    void SetFamily(wxDeprecatedGUIConstants family) \
-        { SetFamily((wxFontFamily)family); } \
-    wxDEPRECATED_MSG("use wxFONTSTYLE_XXX constants") \
-    void SetStyle(wxDeprecatedGUIConstants style) \
-        { SetStyle((wxFontStyle)style); } \
- \
     /* functions for modifying font in place */ \
     wxFont& MakeBold(); \
     wxFont& MakeItalic(); \
@@ -654,14 +606,6 @@ public:
                              const wxString& face = wxEmptyString,
                              wxFontEncoding encoding = wxFONTENCODING_DEFAULT);
 
-    wxDEPRECATED_MSG("use wxFONT{FAMILY,STYLE,WEIGHT}_XXX constants")
-    wxFont *FindOrCreateFont(int pointSize, int family, int style, int weight,
-                              bool underline = false,
-                              const wxString& face = wxEmptyString,
-                              wxFontEncoding encoding = wxFONTENCODING_DEFAULT)
-        { return FindOrCreateFont(pointSize, (wxFontFamily)family, (wxFontStyle)style,
-                                  (wxFontWeight)weight, underline, face, encoding); }
-
     wxFont *FindOrCreateFont(const wxFontInfo& fontInfo)
         { return FindOrCreateFont(fontInfo.GetPointSize(), fontInfo.GetFamily(),
                                   fontInfo.GetStyle(), fontInfo.GetWeight(),
@@ -670,32 +614,5 @@ public:
 };
 
 extern WXDLLIMPEXP_DATA_CORE(wxFontList*)    wxTheFontList;
-
-
-// provide comparison operators to allow code such as
-//
-//      if ( font.GetStyle() == wxFONTSTYLE_SLANT )
-//
-// to compile without warnings which it would otherwise provoke from some
-// compilers as it compares elements of different enums
-
-wxDEPRECATED_MSG("use wxFONTFAMILY_XXX constants") \
-inline bool operator==(wxFontFamily s, wxDeprecatedGUIConstants t)
-    { return static_cast<int>(s) == static_cast<int>(t); }
-wxDEPRECATED_MSG("use wxFONTFAMILY_XXX constants") \
-inline bool operator!=(wxFontFamily s, wxDeprecatedGUIConstants t)
-    { return static_cast<int>(s) != static_cast<int>(t); }
-wxDEPRECATED_MSG("use wxFONTSTYLE_XXX constants") \
-inline bool operator==(wxFontStyle s, wxDeprecatedGUIConstants t)
-    { return static_cast<int>(s) == static_cast<int>(t); }
-wxDEPRECATED_MSG("use wxFONTSTYLE_XXX constants") \
-inline bool operator!=(wxFontStyle s, wxDeprecatedGUIConstants t)
-    { return static_cast<int>(s) != static_cast<int>(t); }
-wxDEPRECATED_MSG("use wxFONTWEIGHT_XXX constants") \
-inline bool operator==(wxFontWeight s, wxDeprecatedGUIConstants t)
-    { return static_cast<int>(s) == static_cast<int>(t); }
-wxDEPRECATED_MSG("use wxFONTWEIGHT_XXX constants") \
-inline bool operator!=(wxFontWeight s, wxDeprecatedGUIConstants t)
-    { return static_cast<int>(s) != static_cast<int>(t); }
 
 #endif // _WX_FONT_H_BASE_

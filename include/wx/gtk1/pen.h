@@ -62,13 +62,6 @@ public:
     wxDash* GetDash() const;
     wxBitmap *GetStipple() const;
 
-
-    wxDEPRECATED_MSG("use wxPENSTYLE_XXX constants")
-    wxPen(const wxColour& col, int width, int style);
-
-    wxDEPRECATED_MSG("use wxPENSTYLE_XXX constants")
-    void SetStyle(int style) { SetStyle((wxPenStyle)style); }
-
 private:
     virtual wxGDIRefData *CreateGDIRefData() const;
     virtual wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const;

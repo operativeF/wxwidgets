@@ -62,13 +62,6 @@ wxBrush::wxBrush( const wxColour &colour, wxBrushStyle style )
     M_BRUSHDATA->m_colour = colour;
 }
 
-wxBrush::wxBrush(const wxColour& col, int style)
-{
-    m_refData = new wxBrushRefData;
-    M_BRUSHDATA->m_style = (wxBrushStyle)style;
-    M_BRUSHDATA->m_colour = col;
-}
-
 wxBrush::wxBrush( const wxBitmap &stippleBitmap )
 {
     m_refData = new wxBrushRefData();

@@ -38,13 +38,6 @@ public:
     wxBrushStyle GetStyle() const override;
     wxBitmap *GetStipple() const override;
 
-
-    wxDEPRECATED_MSG("use wxBRUSHSTYLE_XXX constants")
-    wxBrush(const wxColour& col, int style);
-
-    wxDEPRECATED_MSG("use wxBRUSHSTYLE_XXX constants")
-    void SetStyle(int style) { SetStyle((wxBrushStyle)style); }
-
 protected:
     wxGDIRefData *CreateGDIRefData() const override;
     wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;

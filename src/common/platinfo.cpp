@@ -351,17 +351,6 @@ wxPortId wxPlatformInfo::GetPortId(const wxString &str)
     return wxPORT_UNKNOWN;
 }
 
-wxArchitecture wxPlatformInfo::GetArch(const wxString &arch)
-{
-    if ( arch.Contains(wxT("32")) )
-        return wxARCH_32;
-
-    if ( arch.Contains(wxT("64")) )
-        return wxARCH_64;
-
-    return wxARCH_INVALID;
-}
-
 wxEndianness wxPlatformInfo::GetEndianness(const wxString& end)
 {
     const wxString endl(end.Lower());

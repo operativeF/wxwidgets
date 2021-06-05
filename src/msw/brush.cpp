@@ -214,11 +214,6 @@ wxBrush::wxBrush(const wxColour& col, wxBrushStyle style)
     m_refData = new wxBrushRefData(col, style);
 }
 
-wxBrush::wxBrush(const wxColour& col, int style)
-{
-    m_refData = new wxBrushRefData(col, (wxBrushStyle)style);
-}
-
 wxBrush::wxBrush(const wxBitmap& stipple)
 {
     m_refData = new wxBrushRefData(stipple);

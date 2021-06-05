@@ -64,11 +64,6 @@ wxPen::wxPen(const wxColour &colour, int width, wxPenStyle style)
     m_refData = new wxPenRefData(colour, style);
 }
 
-wxPen::wxPen(const wxColour& col, int width, int style)
-{
-    m_refData = new wxPenRefData(col, (wxPenStyle)style);
-}
-
 wxPen::wxPen(const wxBitmap& WXUNUSED(stipple), int WXUNUSED(width))
 {
     wxFAIL_MSG( "stipple pens not supported" );

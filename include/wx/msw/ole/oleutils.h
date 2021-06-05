@@ -100,9 +100,6 @@ public:
     /// Returns the owned BSTR while keeping its ownership
     operator BSTR() const { return m_bstrBuf; }
 
-    // retrieve a copy of our string - caller must SysFreeString() it later!
-    wxDEPRECATED_MSG("use Copy() instead")
-    BSTR Get() const { return Copy(); }
 private:
     // actual string
     BSTR m_bstrBuf{nullptr};

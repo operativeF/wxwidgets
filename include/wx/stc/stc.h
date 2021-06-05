@@ -3290,16 +3290,6 @@ public:
     // Get the size of the dots used to mark space characters.
     int GetWhitespaceSize() const;
 
-    // Divide each styling byte into lexical class bits (default: 5) and indicator
-    // bits (default: 3). If a lexer requires more than 32 lexical states, then this
-    // is used to expand the possible states.
-    wxDEPRECATED_MSG( "This method uses a function deprecated in the Scintilla library." )
-    void SetStyleBits(int bits);
-
-    // Retrieve number of bits in style bytes used to hold the lexical state.
-    wxDEPRECATED_MSG( "This method uses a function deprecated in the Scintilla library." )
-    int GetStyleBits() const;
-
     // Used to hold extra styling information for each line.
     void SetLineState(int line, int state);
 
@@ -4967,10 +4957,6 @@ public:
     // Retrieve a "property" value previously set with SetProperty,
     // interpreted as an int AFTER any "$()" variable replacement.
     int GetPropertyInt(const wxString &key, int defaultValue=0) const;
-
-    // Retrieve the number of bits the current lexer needs for styling.
-    wxDEPRECATED_MSG( "This method uses a function deprecated in the Scintilla library." )
-    int GetStyleBitsNeeded() const;
 
     // Retrieve the lexing language of the document.
     wxString GetLexerLanguage() const;

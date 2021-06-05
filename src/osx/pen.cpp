@@ -114,13 +114,6 @@ wxPen::wxPen(const wxColour& col, int Width, wxPenStyle Style)
     RealizeResource();
 }
 
-wxPen::wxPen(const wxColour& col, int Width, int Style)
-{
-    m_refData = new wxPenRefData(wxPenInfo(col, Width).Style((wxPenStyle)Style));
-
-    RealizeResource();
-}
-
 wxPen::wxPen(const wxBitmap& stipple, int width)
 {
     m_refData = new wxPenRefData(wxPenInfo().Stipple(stipple).Width(width));

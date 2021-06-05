@@ -102,14 +102,6 @@ wxBrush::wxBrush(const wxColour& col, wxBrushStyle style )
     M_STYLEDATA = style;
 }
 
-wxBrush::wxBrush(const wxColour& col, int style)
-{
-    m_refData = new wxBrushRefData();
-    M_BRUSHDATA.setColor(col.GetQColor());
-    M_BRUSHDATA.setStyle(ConvertBrushStyle((wxBrushStyle)style));
-    M_STYLEDATA = (wxBrushStyle)style;
-}
-
 wxBrush::wxBrush(const wxBitmap& stipple)
 {
     m_refData = new wxBrushRefData();

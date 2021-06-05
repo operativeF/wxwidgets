@@ -89,19 +89,6 @@ public:
     // overridden base class virtuals
     bool AcceptsFocus() const override { return false; }
 
-    // Deprecated methods not doing anything since a long time.
-    wxDEPRECATED_MSG("Remove calls to this method, it doesn't do anything")
-    void SetShadowWidth(int WXUNUSED(w)) { }
-
-    wxDEPRECATED_MSG("Remove calls to this method, it always returns 0")
-    int GetShadowWidth() const { return 0; }
-
-    wxDEPRECATED_MSG("Remove calls to this method, it doesn't do anything")
-    void SetBezelFace(int WXUNUSED(w)) { }
-
-    wxDEPRECATED_MSG("Remove calls to this method, it always returns 0")
-    int GetBezelFace() const { return 0; }
-
 protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 

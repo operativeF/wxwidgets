@@ -210,8 +210,6 @@ public:
     static wxPortId GetPortId(const wxString &portname);
 
     static wxBitness GetBitness(const wxString &bitness);
-    wxDEPRECATED_MSG("Use GetBitness() instead")
-    static wxArchitecture GetArch(const wxString &arch);
     static wxEndianness GetEndianness(const wxString &end);
 
     // enum -> string conversions
@@ -223,8 +221,6 @@ public:
     static wxString GetPortIdShortName(wxPortId port, bool usingUniversal);
 
     static wxString GetBitnessName(wxBitness bitness);
-    wxDEPRECATED_MSG("Use GetBitnessName() instead")
-    static wxString GetArchName(wxArchitecture arch);
     static wxString GetEndiannessName(wxEndianness end);
 
 
@@ -269,9 +265,6 @@ public:
         { return m_port; }
     wxBitness GetBitness() const
         { return m_bitness; }
-    wxDEPRECATED_MSG("Use GetBitness() instead")
-    wxArchitecture GetArchitecture() const
-        { return GetBitness(); }
     wxEndianness GetEndianness() const
         { return m_endian; }
 
@@ -289,9 +282,6 @@ public:
         { return GetPortIdShortName(m_port, m_usingUniversal); }
     wxString GetBitnessName() const
         { return GetBitnessName(m_bitness); }
-    wxDEPRECATED_MSG("Use GetBitnessName() instead")
-    wxString GetArchName() const
-        { return GetBitnessName(); }
     wxString GetEndiannessName() const
         { return GetEndiannessName(m_endian); }
     wxString GetCpuArchitectureName() const
@@ -332,9 +322,6 @@ public:
         { m_port = n; }
     void SetBitness(wxBitness n)
         { m_bitness = n; }
-    wxDEPRECATED_MSG("Use SetBitness() instead")
-    void SetArchitecture(wxBitness n)
-        { SetBitness(n); }
     void SetEndianness(wxEndianness n)
         { m_endian = n; }
     void SetCpuArchitectureName(const wxString& cpuArch)
