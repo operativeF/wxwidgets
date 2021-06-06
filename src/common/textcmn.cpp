@@ -796,16 +796,7 @@ wxTextAttr wxTextAttr::Combine(const wxTextAttr& attr,
 /// Compare tabs
 bool wxTextAttr::TabsEq(const std::vector<int>& tabs1, const std::vector<int>& tabs2)
 {
-    if (tabs1.size() != tabs2.size())
-        return false;
-
-    size_t i;
-    for (i = 0; i < tabs1.size(); i++)
-    {
-        if (tabs1[i] != tabs2[i])
-            return false;
-    }
-    return true;
+    return std::equal(tabs1.begin(), tabs1.end(), tabs2.begin(), tabs2.end());
 }
 
 // Remove attributes

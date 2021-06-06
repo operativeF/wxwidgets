@@ -51,9 +51,9 @@ wxAppProgressIndicator::~wxAppProgressIndicator()
 {
     Reset();
 
-    for ( size_t i = 0; i < m_taskBarButtons.size(); ++i )
+    for ( auto* button : m_taskBarButtons )
     {
-        delete m_taskBarButtons[i];
+        delete button;
     }
 }
 
@@ -66,9 +66,9 @@ void wxAppProgressIndicator::SetValue(int value)
 {
     wxASSERT_MSG( value <= m_maxValue, wxT("invalid progress value") );
 
-    for ( size_t i = 0; i < m_taskBarButtons.size(); ++i )
+    for ( auto* button : m_taskBarButtons )
     {
-        m_taskBarButtons[i]->SetProgressValue(value);
+        button->SetProgressValue(value);
     }
 }
 
@@ -76,25 +76,25 @@ void wxAppProgressIndicator::SetRange(int range)
 {
     m_maxValue = range;
 
-    for ( size_t i = 0; i < m_taskBarButtons.size(); ++i )
+    for ( auto* button : m_taskBarButtons )
     {
-        m_taskBarButtons[i]->SetProgressRange(range);
+        button->SetProgressRange(range);
     }
 }
 
 void wxAppProgressIndicator::Pulse()
 {
-    for ( size_t i = 0; i < m_taskBarButtons.size(); ++i )
+    for ( auto* button : m_taskBarButtons )
     {
-        m_taskBarButtons[i]->PulseProgress();
+        button->PulseProgress();
     }
 }
 
 void wxAppProgressIndicator::Reset()
 {
-    for ( size_t i = 0; i < m_taskBarButtons.size(); ++i )
+    for ( auto* button : m_taskBarButtons )
     {
-        m_taskBarButtons[i]->SetProgressState(wxTaskBarButtonState::NoProgress);
+        button->SetProgressState(wxTaskBarButtonState::NoProgress);
     }
 }
 
