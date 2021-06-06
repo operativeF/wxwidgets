@@ -290,12 +290,13 @@ void wxColourDatabase::Initialize()
 
     m_map = new wxStringToColourHashMap;
 
-    static const struct wxColourDesc
+    struct wxColourDesc
     {
         const wxChar *name;
         unsigned char r,g,b;
-    }
-    wxColourTable[] =
+    };
+
+    static constexpr wxColourDesc wxColourTable[] =
     {
         {wxT("AQUAMARINE"),112, 219, 147},
         {wxT("BLACK"),0, 0, 0},
@@ -370,11 +371,8 @@ void wxColourDatabase::Initialize()
         {wxT("YELLOW GREEN"), 153, 204, 50}
     };
 
-    size_t n;
-
-    for ( n = 0; n < WXSIZEOF(wxColourTable); n++ )
+    for ( const auto& cc : wxColourTable )
     {
-        const wxColourDesc& cc = wxColourTable[n];
         (*m_map)[cc.name] = new wxColour(cc.r, cc.g, cc.b);
     }
 }
