@@ -79,19 +79,6 @@ wxGBSizerItem::wxGBSizerItem()
 //---------------------------------------------------------------------------
 
 
-void wxGBSizerItem::GetPos(int& row, int& col) const
-{
-    row = m_pos.GetRow();
-    col = m_pos.GetCol();
-}
-
-void wxGBSizerItem::GetSpan(int& rowspan, int& colspan) const
-{
-    rowspan = m_span.GetRowspan();
-    colspan = m_span.GetColspan();
-}
-
-
 bool wxGBSizerItem::SetPos( const wxGBPosition& pos )
 {
     if (m_gbsizer)
@@ -128,10 +115,10 @@ bool wxGBSizerItem::Intersects(const wxGBSizerItem& other)
 bool wxGBSizerItem::Intersects(const wxGBPosition& pos, const wxGBSpan& span)
 {
 
-    int row, col, endrow, endcol;
+    int endrow, endcol;
     int otherrow, othercol, otherendrow, otherendcol;
 
-    GetPos(row, col);
+    auto tpos = GetPos();
     GetEndPos(endrow, endcol);
 
     otherrow = pos.GetRow();
@@ -140,12 +127,12 @@ bool wxGBSizerItem::Intersects(const wxGBPosition& pos, const wxGBSpan& span)
     otherendcol = othercol + span.GetColspan() - 1;
 
     // is the other item's start or end in the range of this one?
-    if (( InRange(otherrow, row, endrow) && InRange(othercol, col, endcol) ) ||
-        ( InRange(otherendrow, row, endrow) && InRange(otherendcol, col, endcol) ))
+    if (( InRange(otherrow, tpos.GetRow(), endrow) && InRange(othercol, tpos.GetCol(), endcol) ) ||
+        ( InRange(otherendrow, tpos.GetRow(), endrow) && InRange(otherendcol, tpos.GetCol(), endcol) ))
         return true;
 
     // is this item's start or end in the range of the other one?
-    if (( InRange(row, otherrow, otherendrow) && InRange(col, othercol, otherendcol) ) ||
+    if (( InRange(tpos.GetRow(), otherrow, otherendrow) && InRange(tpos.GetCol(), othercol, otherendcol) ) ||
         ( InRange(endrow, otherrow, otherendrow) && InRange(endcol, othercol, otherendcol) ))
         return true;
 
@@ -453,9 +440,9 @@ wxSize wxGridBagSizer::CalcMin()
         wxGBSizerItem* item = (wxGBSizerItem*)node->GetData();
         if ( item->IsShown() )
         {
-            int row, col, endrow, endcol;
+            int endrow, endcol;
 
-            item->GetPos(row, col);
+            auto pos = item->GetPos();
             item->GetEndPos(endrow, endcol);
 
             // fill heights and widths up to this item if needed
@@ -466,10 +453,10 @@ wxSize wxGridBagSizer::CalcMin()
 
             // See if this item increases the size of its row(s) or col(s)
             wxSize size(item->CalcMin());
-            for (idx=row; idx <= endrow; idx++)
-                m_rowHeights[idx] = wxMax(m_rowHeights[idx], size.y / (endrow-row+1));
-            for (idx=col; idx <= endcol; idx++)
-                m_colWidths[idx] = wxMax(m_colWidths[idx], size.x / (endcol-col+1));
+            for (idx=pos.GetRow(); idx <= endrow; idx++)
+                m_rowHeights[idx] = wxMax(m_rowHeights[idx], size.y / (endrow-pos.GetRow()+1));
+            for (idx=pos.GetCol(); idx <= endcol; idx++)
+                m_colWidths[idx] = wxMax(m_colWidths[idx], size.x / (endcol-pos.GetCol()+1));
         }
         node = node->GetNext();
     }
@@ -541,21 +528,21 @@ void wxGridBagSizer::RepositionChildren(const wxSize& minSize)
 
         if ( item->IsShown() )
         {
-            int row, col, endrow, endcol;
-            item->GetPos(row, col);
+            int endrow, endcol;
+            auto pos = item->GetPos();
             item->GetEndPos(endrow, endcol);
 
             height = 0;
-            for(idx=row; idx <= endrow; idx++)
+            for(idx=pos.GetRow(); idx <= endrow; idx++)
                 height += m_rowHeights[idx];
-            height += (endrow - row) * m_vgap; // add a vgap for every row spanned
+            height += (endrow - pos.GetRow()) * m_vgap; // add a vgap for every row spanned
 
             width = 0;
-            for (idx=col; idx <= endcol; idx++)
+            for (idx=pos.GetCol(); idx <= endcol; idx++)
                 width += m_colWidths[idx];
-            width += (endcol - col) * m_hgap; // add a hgap for every col spanned
+            width += (endcol - pos.GetCol()) * m_hgap; // add a hgap for every col spanned
 
-            SetItemBounds(item, colpos[col], rowpos[row], width, height);
+            SetItemBounds(item, colpos[pos.GetCol()], rowpos[pos.GetRow()], width, height);
         }
 
         node = node->GetNext();

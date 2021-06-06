@@ -159,11 +159,9 @@ public:
 
     // Get the grid position of the item
     wxGBPosition GetPos() const { return m_pos; }
-    void GetPos(int& row, int& col) const;
 
     // Get the row and column spanning of the item
     wxGBSpan GetSpan() const { return m_span; }
-    void GetSpan(int& rowspan, int& colspan) const;
 
     // If the item is already a member of a sizer then first ensure that there
     // is no other item that would intersect with this one at the new

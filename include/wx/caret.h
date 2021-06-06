@@ -75,19 +75,9 @@ public:
     bool IsVisible() const { return m_countVisible > 0; }
 
         // get the caret position
-    void GetPosition(int *x, int *y) const
-    {
-        if ( x ) *x = m_x;
-        if ( y ) *y = m_y;
-    }
     wxPoint GetPosition() const { return wxPoint(m_x, m_y); }
 
         // get the caret size
-    void GetSize(int *width, int *height) const
-    {
-        if ( width ) *width = m_width;
-        if ( height ) *height = m_height;
-    }
     wxSize GetSize() const { return wxSize(m_width, m_height); }
 
         // get the window we're associated with

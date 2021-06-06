@@ -70,10 +70,9 @@ void wxSashWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
 
 void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
 {
-    wxCoord x = 0, y = 0;
-    event.GetPosition(&x, &y);
+    auto pos = event.GetPosition();
 
-    wxSashEdgePosition sashHit = SashHitTest(x, y);
+    wxSashEdgePosition sashHit = SashHitTest(pos.x, pos.y);
 
     if (event.LeftDown())
     {
@@ -101,8 +100,8 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
             // the user has dragged a little bit.
             m_dragMode = wxSASH_DRAG_LEFT_DOWN;
             m_draggingEdge = sashHit;
-            m_firstX = x;
-            m_firstY = y;
+            m_firstX = pos.x;
+            m_firstY = pos.y;
 
             if ( (sashHit == wxSASH_LEFT) || (sashHit == wxSASH_RIGHT) )
             {
@@ -166,49 +165,49 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
         //     upper left corner, while xp and yp are expressed in the parent
         //     window system of coordinates, so adjust them! After this
         //     adjustment, all coordinates are relative to the parent window.
-        y += pt.y;
-        x += pt.x;
+        pos.y += pt.y;
+        pos.x += pt.x;
 
         switch (edge)
         {
             case wxSASH_TOP:
-                if ( y > pt.y + sz.y )
+                if ( pos.y > pt.y + sz.y )
                 {
                     // top sash shouldn't get below the bottom one
                     status = wxSASH_STATUS_OUT_OF_RANGE;
                 }
                 else
                 {
-                    newHeight = sz.y - (y - pt.y);
+                    newHeight = sz.y - (pos.y - pt.y);
                 }
                 break;
 
             case wxSASH_BOTTOM:
-                if ( y < pt.y )
+                if ( pos.y < pt.y )
                 {
                     // bottom sash shouldn't get above the top one
                     status = wxSASH_STATUS_OUT_OF_RANGE;
                 }
                 else
                 {
-                    newHeight = y - pt.y;
+                    newHeight = pos.y - pt.y;
                 }
                 break;
 
             case wxSASH_LEFT:
-                if ( x > pt.x + sz.x )
+                if ( pos.x > pt.x + sz.x )
                 {
                     // left sash shouldn't get beyond the right one
                     status = wxSASH_STATUS_OUT_OF_RANGE;
                 }
                 else
                 {
-                    newWidth = sz.x - (x - pt.x);
+                    newWidth = sz.x - (pos.x - pt.x);
                 }
                 break;
 
             case wxSASH_RIGHT:
-                if ( x < pt.x )
+                if ( pos.x < pt.x )
                 {
                     // and the right sash, finally, shouldn't be beyond the
                     // left one
@@ -216,7 +215,7 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
                 }
                 else
                 {
-                    newWidth = x - pt.x;
+                    newWidth = pos.x - pt.x;
                 }
                 break;
 
@@ -249,7 +248,7 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
             newWidth = wxMin(newWidth, m_maximumPaneSizeX);
         }
 
-        dragRect = wxRect(x, y, newWidth, newHeight);
+        dragRect = wxRect(pos.x, pos.y, newWidth, newHeight);
 
         wxSashEvent eventSash(GetId(), edge);
         eventSash.SetEventObject(this);
@@ -315,7 +314,7 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
         if (m_dragMode == wxSASH_DRAG_LEFT_DOWN)
         {
             m_dragMode = wxSASH_DRAG_DRAGGING;
-            DrawSashTracker(m_draggingEdge, x, y);
+            DrawSashTracker(m_draggingEdge, pos.x, pos.y);
         }
         else
         {
@@ -325,11 +324,11 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
                 DrawSashTracker(m_draggingEdge, m_oldX, m_oldY);
 
                 // Draw new one
-                DrawSashTracker(m_draggingEdge, x, y);
+                DrawSashTracker(m_draggingEdge, pos.x, pos.y);
             }
         }
-        m_oldX = x;
-        m_oldY = y;
+        m_oldX = pos.x;
+        m_oldY = pos.y;
     }
     else if ( event.LeftDClick() )
     {

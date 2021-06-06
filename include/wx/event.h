@@ -2230,25 +2230,8 @@ public:
     wxUint32 GetRawKeyFlags() const { return m_rawFlags; }
 
     // Find the position of the event
-    void GetPosition(wxCoord *xpos, wxCoord *ypos) const
-    {
-        if (xpos)
-            *xpos = GetX();
-        if (ypos)
-            *ypos = GetY();
-    }
-
-    // This version if provided only for backwards compatibility, don't use.
-    void GetPosition(long *xpos, long *ypos) const
-    {
-        if (xpos)
-            *xpos = GetX();
-        if (ypos)
-            *ypos = GetY();
-    }
-
     wxPoint GetPosition() const
-        { return wxPoint(GetX(), GetY()); }
+        { return wxPoint(m_x, m_y); }
 
     // Get X position
     wxCoord GetX() const;

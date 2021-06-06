@@ -49,22 +49,6 @@ public:
     wxCoord GetX() const { return m_x; }
     wxCoord GetY() const { return m_y; }
     wxPoint GetPosition() const { return wxPoint(m_x, m_y); }
-    void GetPosition(wxCoord *x, wxCoord *y) const
-    {
-        if ( x )
-            *x = m_x;
-        if ( y )
-            *y = m_y;
-    }
-
-    // this overload is for compatibility only
-    void GetPosition(long *x, long *y) const
-    {
-        if ( x )
-            *x = m_x;
-        if ( y )
-            *y = m_y;
-    }
 
     // accessors for the pressed buttons
     bool LeftIsDown()    const { return m_leftDown; }
