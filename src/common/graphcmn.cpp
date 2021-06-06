@@ -658,7 +658,7 @@ void wxGraphicsContext::SetBrush( const wxGraphicsBrush& brush )
 
 void wxGraphicsContext::SetBrush( const wxBrush& brush )
 {
-    if ( !brush.IsOk() || brush.GetStyle() == wxBRUSHSTYLE_TRANSPARENT )
+    if ( !brush.IsOk() || brush.GetStyle() == wxBrushStyle::Transparent )
         SetBrush( wxNullGraphicsBrush );
     else
         SetBrush( CreateBrush( brush ) );

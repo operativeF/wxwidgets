@@ -25,7 +25,7 @@
 class wxBrushRefData : public wxGDIRefData
 {
 public:
-    wxBrushRefData(const wxColour& clr = wxNullColour, wxBrushStyle style = wxBRUSHSTYLE_SOLID)
+    wxBrushRefData(const wxColour& clr = wxNullColour, wxBrushStyle style = wxBrushStyle::Solid)
     {
         m_colour = clr;
         SetStyle(style);
@@ -41,10 +41,10 @@ public:
 
     void SetStyle(wxBrushStyle style)
     {
-        if ( style != wxBRUSHSTYLE_SOLID && style != wxBRUSHSTYLE_TRANSPARENT )
+        if ( style != wxBrushStyle::Solid && style != wxBrushStyle::Transparent )
         {
-            wxFAIL_MSG( wxT("only wxBRUSHSTYLE_SOLID and wxBRUSHSTYLE_TRANSPARENT styles are supported") );
-            style = wxBRUSHSTYLE_SOLID;
+            wxFAIL_MSG( wxT("only wxBrushStyle::Solid and wxBrushStyle::Transparent styles are supported") );
+            style = wxBrushStyle::Solid;
         }
 
         m_style = style;
@@ -80,7 +80,7 @@ bool wxBrush::operator==(const wxBrush& brush) const
 
 wxBrushStyle wxBrush::GetStyle() const
 {
-    wxCHECK_MSG( IsOk(), wxBRUSHSTYLE_INVALID, wxT("invalid brush") );
+    wxCHECK_MSG( IsOk(), wxBrushStyle::Invalid, wxT("invalid brush") );
 
     return M_BRUSHDATA->m_style;
 }

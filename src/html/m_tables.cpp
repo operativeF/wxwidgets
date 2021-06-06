@@ -683,11 +683,11 @@ TAG_HANDLER_BEGIN(TABLE, "TABLE,TR,TD,TH")
         void CallParseInnerWithBg(const wxHtmlTag& tag, const wxColour& colBg)
         {
             const wxColour oldbackclr = m_WParser->GetActualBackgroundColor();
-            const int oldbackmode = m_WParser->GetActualBackgroundMode();
+            const wxBrushStyle oldbackmode = m_WParser->GetActualBackgroundMode();
             if ( colBg.IsOk() )
             {
                 m_WParser->SetActualBackgroundColor(colBg);
-                m_WParser->SetActualBackgroundMode(wxBRUSHSTYLE_SOLID);
+                m_WParser->SetActualBackgroundMode(wxBrushStyle::Solid);
                 m_WParser->GetContainer()->InsertCell(
                         new wxHtmlColourCell(colBg, wxHTML_CLR_BACKGROUND)
                     );
@@ -702,7 +702,7 @@ TAG_HANDLER_BEGIN(TABLE, "TABLE,TR,TD,TH")
                m_WParser->SetActualBackgroundColor(oldbackclr);
                m_WParser->GetContainer()->InsertCell(
                       new wxHtmlColourCell(oldbackclr,
-                                        oldbackmode == wxBRUSHSTYLE_TRANSPARENT
+                                        oldbackmode == wxBrushStyle::Transparent
                                             ? wxHTML_CLR_TRANSPARENT_BACKGROUND
                                             : wxHTML_CLR_BACKGROUND)
                 );

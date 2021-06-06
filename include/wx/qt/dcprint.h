@@ -28,7 +28,7 @@ public:
     void SetPen(const wxPen& pen) override;
     void SetBrush(const wxBrush& brush) override;
     void SetBackground(const wxBrush& brush) override;
-    void SetBackgroundMode(int mode) override;
+    void SetBackgroundMode(wxBrushStyle mode) override;
 
 #if wxUSE_PALETTE
     void SetPalette(const wxPalette& palette) override;

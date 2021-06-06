@@ -1056,13 +1056,13 @@ wxCairoBrushData::wxCairoBrushData( wxGraphicsRenderer* renderer,
 
     switch ( brush.GetStyle() )
     {
-        case wxBRUSHSTYLE_STIPPLE:
-        case wxBRUSHSTYLE_STIPPLE_MASK:
-        case wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE:
+        case wxBrushStyle::Stipple:
+        case wxBrushStyle::StippleMask:
+        case wxBrushStyle::StippleMaskOpaque:
             InitStipple(brush.GetStipple());
             break;
 
-        case wxBRUSHSTYLE_SOLID:
+        case wxBrushStyle::Solid:
             // Non-RGB colours, which may e.g. appear under wxOSX for wxColours
             // with NSColor backend, are not supported by Cairo and have to be
             // handled in a special way.
@@ -1071,7 +1071,7 @@ wxCairoBrushData::wxCairoBrushData( wxGraphicsRenderer* renderer,
 #if defined(__WXOSX_COCOA__)
                 // Under wxOSX, non-solid NSColors are actually represented
                 // by pattern images and therefore a wxBrush with non-solid
-                // colour and wxBRUSHSTYLE_SOLID style can be converted
+                // colour and wxBrushStyle::Solid style can be converted
                 // to a stiple (a surface pattern).
 
                 // Create a stiple bitmap from NSColor's pattern image
@@ -3329,7 +3329,7 @@ wxGraphicsBrush wxCairoRenderer::CreateBrush(const wxBrush& brush )
 {
     wxGraphicsBrush p;
     ENSURE_LOADED_OR_RETURN(p);
-    if (brush.IsOk() && brush.GetStyle() != wxBRUSHSTYLE_TRANSPARENT)
+    if (brush.IsOk() && brush.GetStyle() != wxBrushStyle::Transparent)
     {
         p.SetRefData(new wxCairoBrushData( this, brush ));
     }

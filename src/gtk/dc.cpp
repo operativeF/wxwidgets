@@ -116,7 +116,7 @@ void wxGTKCairoDCImpl::DoDrawText(const wxString& text, int x, int y)
     wxCompositionMode curMode = m_graphicContext->GetCompositionMode();
     m_graphicContext->SetCompositionMode(wxCOMPOSITION_OVER);
 
-    if (m_backgroundMode == wxBRUSHSTYLE_TRANSPARENT)
+    if (m_backgroundMode == wxBrushStyle::Transparent)
         m_graphicContext->DrawText(text, x, y);
     else
         m_graphicContext->DrawText(text, x, y, m_graphicContext->CreateBrush(m_textBackgroundColour));

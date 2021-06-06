@@ -446,7 +446,7 @@ void wxStatusBarGeneric::OnPaint(wxPaintEvent& WXUNUSED(event) )
     // compute char height only once for all panes:
     int textHeight = dc.GetCharHeight();
 
-    dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+    dc.SetBackgroundMode(wxBrushStyle::Transparent);
     for (size_t i = 0; i < m_panes.GetCount(); i ++)
         DrawField(dc, i, textHeight);
 }

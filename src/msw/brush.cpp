@@ -38,7 +38,7 @@
 class WXDLLEXPORT wxBrushRefData: public wxGDIRefData
 {
 public:
-    explicit wxBrushRefData(const wxColour& colour = wxNullColour, wxBrushStyle style = wxBRUSHSTYLE_SOLID);
+    explicit wxBrushRefData(const wxColour& colour = wxNullColour, wxBrushStyle style = wxBrushStyle::Solid);
     explicit wxBrushRefData(const wxBitmap& stipple);
     wxBrushRefData(const wxBrushRefData& data);
     ~wxBrushRefData() override;
@@ -122,8 +122,8 @@ bool wxBrushRefData::operator==(const wxBrushRefData& data) const
 void wxBrushRefData::DoSetStipple(const wxBitmap& stipple)
 {
     m_stipple = stipple;
-    m_style = stipple.GetMask() ? wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE
-                                : wxBRUSHSTYLE_STIPPLE;
+    m_style = stipple.GetMask() ? wxBrushStyle::StippleMaskOpaque
+                                : wxBrushStyle::Stipple;
 }
 
 // ----------------------------------------------------------------------------
@@ -140,16 +140,16 @@ void wxBrushRefData::Free()
     }
 }
 
-static int TranslateHatchStyle(int style)
+static int TranslateHatchStyle(wxBrushStyle style)
 {
     switch ( style )
     {
-        case wxBRUSHSTYLE_BDIAGONAL_HATCH: return HS_BDIAGONAL;
-        case wxBRUSHSTYLE_CROSSDIAG_HATCH: return HS_DIAGCROSS;
-        case wxBRUSHSTYLE_FDIAGONAL_HATCH: return HS_FDIAGONAL;
-        case wxBRUSHSTYLE_CROSS_HATCH:     return HS_CROSS;
-        case wxBRUSHSTYLE_HORIZONTAL_HATCH:return HS_HORIZONTAL;
-        case wxBRUSHSTYLE_VERTICAL_HATCH:  return HS_VERTICAL;
+        case wxBrushStyle::BDiagonalHatch: return HS_BDIAGONAL;
+        case wxBrushStyle::CrossDiagHatch: return HS_DIAGCROSS;
+        case wxBrushStyle::FDiagonalHatch: return HS_FDIAGONAL;
+        case wxBrushStyle::CrossHatch:     return HS_CROSS;
+        case wxBrushStyle::HorizontalHatch:return HS_HORIZONTAL;
+        case wxBrushStyle::VerticalHatch:  return HS_VERTICAL;
         default:                return -1;
     }
 }
@@ -163,15 +163,15 @@ HBRUSH wxBrushRefData::GetHBRUSH()
         {
             switch ( m_style )
             {
-                case wxBRUSHSTYLE_TRANSPARENT:
+                case wxBrushStyle::Transparent:
                     m_hBrush = (HBRUSH)::GetStockObject(NULL_BRUSH);
                     break;
 
-                case wxBRUSHSTYLE_STIPPLE:
+                case wxBrushStyle::Stipple:
                     m_hBrush = ::CreatePatternBrush(GetHbitmapOf(m_stipple));
                     break;
 
-                case wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE:
+                case wxBrushStyle::StippleMaskOpaque:
                     m_hBrush = ::CreatePatternBrush((HBITMAP)m_stipple.GetMask()
                                                         ->GetMaskBitmap());
                     break;
@@ -180,7 +180,7 @@ HBRUSH wxBrushRefData::GetHBRUSH()
                     wxFAIL_MSG( wxT("unknown brush style") );
                     [[fallthrough]];
 
-                case wxBRUSHSTYLE_SOLID:
+                case wxBrushStyle::Solid:
                     m_hBrush = ::CreateSolidBrush(m_colour.GetPixel());
                     break;
             }
@@ -256,7 +256,7 @@ wxColour wxBrush::GetColour() const
 
 wxBrushStyle wxBrush::GetStyle() const
 {
-    wxCHECK_MSG( IsOk(), wxBRUSHSTYLE_INVALID, wxT("invalid brush") );
+    wxCHECK_MSG( IsOk(), wxBrushStyle::Invalid, wxT("invalid brush") );
 
     return M_BRUSHDATA->GetStyle();
 }

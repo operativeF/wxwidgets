@@ -808,9 +808,9 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
     {
         // draw the sequential month-selector
 
-        dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+        dc.SetBackgroundMode(wxBrushStyle::Transparent);
         dc.SetTextForeground(*wxBLACK);
-        dc.SetBrush(wxBrush(m_colHeaderBg, wxBRUSHSTYLE_SOLID));
+        dc.SetBrush(wxBrush(m_colHeaderBg, wxBrushStyle::Solid));
         dc.SetPen(wxPen(m_colHeaderBg, 1, wxPENSTYLE_SOLID));
         dc.DrawRectangle(0, y, GetClientSize().x, m_heightRow);
 
@@ -880,9 +880,9 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         wxLogDebug("painting the header");
 #endif
 
-        dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+        dc.SetBackgroundMode(wxBrushStyle::Transparent);
         dc.SetTextForeground(m_colHeaderFg);
-        dc.SetBrush(wxBrush(m_colHeaderBg, wxBRUSHSTYLE_SOLID));
+        dc.SetBrush(wxBrush(m_colHeaderBg, wxBrushStyle::Solid));
         dc.SetPen(wxPen(m_colHeaderBg, 1, wxPENSTYLE_SOLID));
         dc.DrawRectangle(0, y, GetClientSize().x, m_heightRow);
 
@@ -909,8 +909,8 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
     // draw column with calendar week nr
     if ( HasFlag( wxCAL_SHOW_WEEK_NUMBERS ) && IsExposed( 0, y, m_calendarWeekWidth, m_heightRow * 6 ))
     {
-        dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
-        dc.SetBrush(wxBrush(m_colHeaderBg, wxBRUSHSTYLE_SOLID));
+        dc.SetBackgroundMode(wxBrushStyle::Transparent);
+        dc.SetBrush(wxBrush(m_colHeaderBg, wxBrushStyle::Solid));
         dc.SetPen(wxPen(m_colHeaderBg, 1, wxPENSTYLE_SOLID));
         dc.DrawRectangle( 0, y, m_calendarWeekWidth, m_heightRow * 6 );
         wxDateTime date = GetStartDate();
@@ -930,7 +930,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
             date.Format("%a %d-%m-%Y %H:%M:%S").c_str());
 #endif
 
-    dc.SetBackgroundMode(wxBRUSHSTYLE_SOLID);
+    dc.SetBackgroundMode(wxBrushStyle::Solid);
     for ( size_t nWeek = 1; nWeek <= 6; nWeek++, y += m_heightRow )
     {
         // if the update region doesn't intersect this row, don't paint it
@@ -1077,7 +1077,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         wxDateTime firstOOR = GetLowerDateLimit() - wxDateSpan::Day(); // first out-of-range
 
         wxBrush oorbrush = *wxLIGHT_GREY_BRUSH;
-        oorbrush.SetStyle(wxBRUSHSTYLE_FDIAGONAL_HATCH);
+        oorbrush.SetStyle(wxBrushStyle::FDiagonalHatch);
 
         HighlightRange(&dc, date, firstOOR, wxTRANSPARENT_PEN, &oorbrush);
     }
@@ -1088,7 +1088,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         wxDateTime firstOOR = GetUpperDateLimit() + wxDateSpan::Day(); // first out-of-range
 
         wxBrush oorbrush = *wxLIGHT_GREY_BRUSH;
-        oorbrush.SetStyle(wxBRUSHSTYLE_FDIAGONAL_HATCH);
+        oorbrush.SetStyle(wxBrushStyle::FDiagonalHatch);
 
         HighlightRange(&dc, firstOOR, date, wxTRANSPARENT_PEN, &oorbrush);
     }

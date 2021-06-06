@@ -48,7 +48,7 @@
 #include "verti.xbm"
 #include "cross.xbm"
 
-static GdkPixmap* hatches[wxBRUSHSTYLE_LAST_HATCH - wxBRUSHSTYLE_FIRST_HATCH + 1];
+static GdkPixmap* hatches[wxBrushStyle::LastHatch - wxBrushStyle::FirstHatch + 1];
 
 //-----------------------------------------------------------------------------
 // constants
@@ -65,8 +65,8 @@ static inline double dmin(double a, double b) { return a < b ? a : b; }
 
 static GdkPixmap* GetHatch(int style)
 {
-    wxASSERT(style >= wxBRUSHSTYLE_FIRST_HATCH && style <= wxBRUSHSTYLE_LAST_HATCH);
-    const int i = style - wxBRUSHSTYLE_FIRST_HATCH;
+    wxASSERT(style >= wxBrushStyle::FirstHatch && style <= wxBrushStyle::LastHatch);
+    const int i = style - wxBrushStyle::FirstHatch;
     if (hatches[i] == NULL)
     {
         // This macro creates a bitmap from an XBM file included above. Notice
@@ -84,22 +84,22 @@ static GdkPixmap* GetHatch(int style)
 
         switch (style)
         {
-        case wxBRUSHSTYLE_BDIAGONAL_HATCH:
+        case wxBrushStyle::BDiagonalHatch:
             hatches[i] = CREATE_FROM_XBM_DATA(bdiag);
             break;
-        case wxBRUSHSTYLE_CROSSDIAG_HATCH:
+        case wxBrushStyle::CrossDiagHatch:
             hatches[i] = CREATE_FROM_XBM_DATA(cdiag);
             break;
-        case wxBRUSHSTYLE_CROSS_HATCH:
+        case wxBrushStyle::CrossHatch:
             hatches[i] = CREATE_FROM_XBM_DATA(cross);
             break;
-        case wxBRUSHSTYLE_FDIAGONAL_HATCH:
+        case wxBrushStyle::FDiagonalHatch:
             hatches[i] = CREATE_FROM_XBM_DATA(fdiag);
             break;
-        case wxBRUSHSTYLE_HORIZONTAL_HATCH:
+        case wxBrushStyle::HorizontalHatch:
             hatches[i] = CREATE_FROM_XBM_DATA(horiz);
             break;
-        case wxBRUSHSTYLE_VERTICAL_HATCH:
+        case wxBrushStyle::VerticalHatch:
             hatches[i] = CREATE_FROM_XBM_DATA(verti);
             break;
         }
@@ -548,12 +548,12 @@ void wxWindowDCImpl::DrawingSetup(GdkGC*& gc, bool& originChanged)
     GdkPixmap* pixmap = NULL;
     const int style = m_brush.GetStyle();
 
-    if (style == wxBRUSHSTYLE_STIPPLE || style == wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE)
+    if (style == wxBrushStyle::Stipple || style == wxBrushStyle::StippleMaskOpaque)
     {
         const wxBitmap* stipple = m_brush.GetStipple();
         if (stipple->IsOk())
         {
-            if (style == wxBRUSHSTYLE_STIPPLE)
+            if (style == wxBrushStyle::Stipple)
                 pixmap = stipple->GetPixmap();
             else if (stipple->GetMask())
             {
@@ -1402,7 +1402,7 @@ void wxWindowDCImpl::DoDrawRotatedText(const wxString& text, int xLogical, int y
     const bool setAttrs = m_font.GTKSetPangoAttrs(m_layout);
 
     const GdkColor* bg_col = NULL;
-    if (m_backgroundMode == wxBRUSHSTYLE_SOLID)
+    if (m_backgroundMode == wxBrushStyle::Solid)
         bg_col = m_textBackgroundColour.GetColor();
 
     PangoMatrix matrix = PANGO_MATRIX_INIT;
@@ -1709,7 +1709,7 @@ void wxWindowDCImpl::SetBrush( const wxBrush &brush )
 
     gdk_gc_set_fill( m_brushGC, GDK_SOLID );
 
-    if ((m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE) && (m_brush.GetStipple()->IsOk()))
+    if ((m_brush.GetStyle() == wxBrushStyle::Stipple) && (m_brush.GetStipple()->IsOk()))
     {
         if (m_brush.GetStipple()->GetDepth() != 1)
         {
@@ -1723,7 +1723,7 @@ void wxWindowDCImpl::SetBrush( const wxBrush &brush )
         }
     }
 
-    if ((m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE) && (m_brush.GetStipple()->GetMask()))
+    if ((m_brush.GetStyle() == wxBrushStyle::StippleMaskOpaque) && (m_brush.GetStipple()->GetMask()))
     {
         gdk_gc_set_fill( m_textGC, GDK_OPAQUE_STIPPLED);
         gdk_gc_set_stipple( m_textGC, *m_brush.GetStipple()->GetMask() );
@@ -1763,7 +1763,7 @@ void wxWindowDCImpl::SetBackground( const wxBrush &brush )
 
     gdk_gc_set_fill( m_bgGC, GDK_SOLID );
 
-    if (m_backgroundBrush.GetStyle() == wxBRUSHSTYLE_STIPPLE)
+    if (m_backgroundBrush.GetStyle() == wxBrushStyle::Stipple)
     {
         const wxBitmap* stipple = m_backgroundBrush.GetStipple();
         if (stipple->IsOk())
@@ -1869,7 +1869,7 @@ void wxWindowDCImpl::SetTextBackground( const wxColour &col )
     }
 }
 
-void wxWindowDCImpl::SetBackgroundMode( int mode )
+void wxWindowDCImpl::SetBackgroundMode( wxBrushStyle mode )
 {
     wxCHECK_RET( IsOk(), wxT("invalid window dc") );
 
@@ -2209,7 +2209,7 @@ void wxDCModule::OnExit()
 {
     wxCleanUpGCPool();
 
-    for (int i = wxBRUSHSTYLE_LAST_HATCH - wxBRUSHSTYLE_FIRST_HATCH; i--; )
+    for (int i = wxBrushStyle::LastHatch - wxBrushStyle::FirstHatch; i--; )
     {
         if (hatches[i])
             g_object_unref(hatches[i]);

@@ -1823,7 +1823,7 @@ void wxWindowBase::ClearBackground()
     // wxGTK uses its own version, no need to add never used code
 #ifndef __WXGTK__
     wxClientDC dc((wxWindow *)this);
-    wxBrush brush(GetBackgroundColour(), wxBRUSHSTYLE_SOLID);
+    wxBrush brush(GetBackgroundColour(), wxBrushStyle::Solid);
     dc.SetBackground(brush);
     dc.Clear();
 #endif // __WXGTK__
@@ -3063,7 +3063,7 @@ static void DrawBorder(wxWindowBase *win, const wxRect& rect, bool fill, const w
 {
     wxClientDC dc((wxWindow *)win);
     dc.SetPen(*pen);
-    dc.SetBrush(fill ? wxBrush(pen->GetColour(), wxBRUSHSTYLE_CROSSDIAG_HATCH) :
+    dc.SetBrush(fill ? wxBrush(pen->GetColour(), wxBrushStyle::CrossDiagHatch) :
                        *wxTRANSPARENT_BRUSH);
     dc.DrawRectangle(rect.Deflate(1, 1));
 }

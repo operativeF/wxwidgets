@@ -1711,7 +1711,7 @@ void wxTextCtrl::OnPaint( wxPaintEvent &event )
     GetClientSize( &size_x, &size_y );
 
     dc.SetPen( *wxTRANSPARENT_PEN );
-    dc.SetBrush( wxBrush( wxTHEME_COLOUR(HIGHLIGHT), wxBRUSHSTYLE_SOLID ) );
+    dc.SetBrush( wxBrush( wxTHEME_COLOUR(HIGHLIGHT), wxBrushStyle::Solid ) );
     int upper = wxMin( (int)m_lines.GetCount(), scroll_y+(size_y/m_lineHeight)+2 );
     for (int i = scroll_y; i < upper; i++)
     {

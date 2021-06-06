@@ -1057,7 +1057,7 @@ void wxMonoRenderer::DrawScrollbarThumb(wxDC& dc,
 {
     DrawSolidRect(dc, wxMONO_BG_COL, rect);
 
-    // manually draw stipple pattern (wxDFB doesn't implement the wxBRUSHSTYLE_STIPPLE
+    // manually draw stipple pattern (wxDFB doesn't implement the wxBrushStyle::Stipple
     // brush style):
     dc.SetPen(m_penFg);
     for ( wxCoord y = rect.GetTop(); y <= rect.GetBottom(); y++ )

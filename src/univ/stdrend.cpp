@@ -771,13 +771,13 @@ void wxStdRenderer::DrawTextLine(wxDC& dc,
                      colBg = dc.GetTextBackground();
             dc.SetTextForeground(wxSCHEME_COLOUR(m_scheme, HIGHLIGHT_TEXT));
             dc.SetTextBackground(wxSCHEME_COLOUR(m_scheme, HIGHLIGHT));
-            dc.SetBackgroundMode(wxBRUSHSTYLE_SOLID);
+            dc.SetBackgroundMode(wxBrushStyle::Solid);
 
             dc.DrawText(s, x, rect.y);
             dc.GetTextExtent(s, &width, NULL);
             x += width;
 
-            dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+            dc.SetBackgroundMode(wxBrushStyle::Transparent);
             dc.SetTextBackground(colBg);
             dc.SetTextForeground(colFg);
         }

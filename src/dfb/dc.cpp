@@ -127,7 +127,7 @@ void wxDFBDCImpl::Clear()
 {
     wxCHECK_RET( IsOk(), wxT("invalid dc") );
 
-    if ( m_backgroundBrush.GetStyle() == wxBRUSHSTYLE_TRANSPARENT )
+    if ( m_backgroundBrush.GetStyle() == wxBrushStyle::Transparent )
         return;
 
     wxColour clr = m_backgroundBrush.GetColour();
@@ -270,7 +270,7 @@ void wxDFBDCImpl::DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord h
         yy = yy - hh;
     }
 
-    if ( m_brush.GetStyle() != wxBRUSHSTYLE_TRANSPARENT )
+    if ( m_brush.GetStyle() != wxBrushStyle::Transparent )
     {
         SelectColour(m_brush.GetColour());
         m_surface->FillRectangle(xx, yy, ww, hh);
@@ -335,7 +335,7 @@ void wxDFBDCImpl::DoDrawText(const wxString& text, wxCoord x, wxCoord y)
     CalcBoundingBox(x + w, y + h);
 
     // if background mode is solid, DrawText must paint text's background:
-    if ( m_backgroundMode == wxBRUSHSTYLE_SOLID )
+    if ( m_backgroundMode == wxBrushStyle::Solid )
     {
         wxCHECK_RET( m_textBackgroundColour.IsOk(),
                      wxT("invalid background color") );
@@ -427,7 +427,7 @@ void wxDFBDCImpl::SetBackground(const wxBrush& brush)
     m_backgroundBrush = brush;
 }
 
-void wxDFBDCImpl::SetBackgroundMode(int mode)
+void wxDFBDCImpl::SetBackgroundMode(wxBrushStyle mode)
 {
     m_backgroundMode = mode;
 }

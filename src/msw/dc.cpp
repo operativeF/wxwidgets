@@ -388,7 +388,7 @@ HDC CreateCompatibleDCWithLayout(HDC hdc);
 // ----------------------------------------------------------------------------
 
 // instead of duplicating the same code which sets and then restores text
-// colours in each wxDC method working with wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE brushes,
+// colours in each wxDC method working with wxBrushStyle::StippleMaskOpaque brushes,
 // encapsulate this in a small helper class
 
 // wxBrushAttrsSetter: changes the text colours in the ctor if required and
@@ -447,7 +447,7 @@ wxBrushAttrsSetter::wxBrushAttrsSetter(wxMSWDCImpl& dc)
                     wxTextColoursChanger(GetHdcOf(dc))
 {
     const wxBrush& brush = dc.GetBrush();
-    if ( brush.IsOk() && brush.GetStyle() == wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE )
+    if ( brush.IsOk() && brush.GetStyle() == wxBrushStyle::StippleMaskOpaque )
     {
         // note that Windows convention is opposite to wxWidgets one, this is
         // why text colour becomes the background one and vice versa
@@ -901,7 +901,7 @@ void wxMSWDCImpl::DoDrawArc(wxCoord x1, wxCoord y1,
     wxCoord r = (wxCoord)sqrt(dx*dx + dy*dy);
 
 
-    wxBrushAttrsSetter cc(*this); // needed for wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE handling
+    wxBrushAttrsSetter cc(*this); // needed for wxBrushStyle::StippleMaskOpaque handling
 
     // treat the special case of full circle separately
     if ( x1 == x2 && y1 == y2 )
@@ -962,7 +962,7 @@ void wxMSWDCImpl::DoDrawPolygon(int n,
                          wxCoord yoffset,
                          wxPolygonFillMode fillStyle)
 {
-    wxBrushAttrsSetter cc(*this); // needed for wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE handling
+    wxBrushAttrsSetter cc(*this); // needed for wxBrushStyle::StippleMaskOpaque handling
 
     // Do things less efficiently if we have offsets
     if (xoffset != 0 || yoffset != 0)
@@ -999,7 +999,7 @@ wxMSWDCImpl::DoDrawPolyPolygon(int n,
                         wxCoord yoffset,
                         wxPolygonFillMode fillStyle)
 {
-    wxBrushAttrsSetter cc(*this); // needed for wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE handling
+    wxBrushAttrsSetter cc(*this); // needed for wxBrushStyle::StippleMaskOpaque handling
     int i, cnt;
     for (i = cnt = 0; i < n; i++)
         cnt += count[i];
@@ -1060,7 +1060,7 @@ void wxMSWDCImpl::DoDrawLines(int n, const wxPoint points[], wxCoord xoffset, wx
 
 void wxMSWDCImpl::DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height)
 {
-    wxBrushAttrsSetter cc(*this); // needed for wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE handling
+    wxBrushAttrsSetter cc(*this); // needed for wxBrushStyle::StippleMaskOpaque handling
 
     wxCoord x2 = x + width;
     wxCoord y2 = y + height;
@@ -1093,7 +1093,7 @@ void wxMSWDCImpl::DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord h
 
 void wxMSWDCImpl::DoDrawRoundedRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height, double radius)
 {
-    wxBrushAttrsSetter cc(*this); // needed for wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE handling
+    wxBrushAttrsSetter cc(*this); // needed for wxBrushStyle::StippleMaskOpaque handling
 
     // Now, a negative radius value is interpreted to mean
     // 'the proportion of the smallest X or Y dimension'
@@ -1125,7 +1125,7 @@ void wxMSWDCImpl::DoDrawRoundedRectangle(wxCoord x, wxCoord y, wxCoord width, wx
 
 void wxMSWDCImpl::DoDrawEllipse(wxCoord x, wxCoord y, wxCoord width, wxCoord height)
 {
-    wxBrushAttrsSetter cc(*this); // needed for wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE handling
+    wxBrushAttrsSetter cc(*this); // needed for wxBrushStyle::StippleMaskOpaque handling
 
     // +1 below makes the ellipse more similar to other platforms.
     // In particular, DoDrawEllipse(x,y,1,1) should draw one point.
@@ -1237,7 +1237,7 @@ void wxMSWDCImpl::DoDrawSpline(const wxPointList *points)
 // Chris Breeze 20/5/98: first implementation of DrawEllipticArc on Windows
 void wxMSWDCImpl::DoDrawEllipticArc(wxCoord x,wxCoord y,wxCoord w,wxCoord h,double sa,double ea)
 {
-    wxBrushAttrsSetter cc(*this); // needed for wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE handling
+    wxBrushAttrsSetter cc(*this); // needed for wxBrushStyle::StippleMaskOpaque handling
 
     wxCoord x2 = x + w;
     wxCoord y2 = y + h;
@@ -1791,7 +1791,7 @@ void wxMSWDCImpl::SetBackground(const wxBrush& brush)
     }
 }
 
-void wxMSWDCImpl::SetBackgroundMode(int mode)
+void wxMSWDCImpl::SetBackgroundMode(wxBrushStyle mode)
 {
     m_backgroundMode = mode;
 

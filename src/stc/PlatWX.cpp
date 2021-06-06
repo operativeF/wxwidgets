@@ -596,13 +596,13 @@ void SurfaceImpl::DrawTextTransparent(PRectangle rc, Font &font, XYPOSITION ybas
 
     SetFont(font);
     hdc->SetTextForeground(wxColourFromCD(fore));
-    hdc->SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+    hdc->SetBackgroundMode(wxBrushStyle::Transparent);
 
     // ybase is where the baseline should be, but wxWin uses the upper left
     // corner, so I need to calculate the real position for the text...
     hdc->DrawText(stc2wx(s, len), wxRound(rc.left), wxRound(ybase - GetAscent(font)));
 
-    hdc->SetBackgroundMode(wxBRUSHSTYLE_SOLID);
+    hdc->SetBackgroundMode(wxBrushStyle::Solid);
 }
 
 

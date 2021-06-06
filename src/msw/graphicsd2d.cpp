@@ -2394,22 +2394,22 @@ public:
 
         switch (m_brushStyle)
         {
-            case wxBRUSHSTYLE_BDIAGONAL_HATCH:
+            case wxBrushStyle::BDiagonalHatch:
                 CopyPattern(buffer, BDIAGONAL_PATTERN);
                 break;
-            case wxBRUSHSTYLE_CROSSDIAG_HATCH:
+            case wxBrushStyle::CrossDiagHatch:
                 CopyPattern(buffer, CROSSDIAG_PATTERN);
                 break;
-            case wxBRUSHSTYLE_FDIAGONAL_HATCH:
+            case wxBrushStyle::FDiagonalHatch:
                 CopyPattern(buffer, FDIAGONAL_PATTERN);
                 break;
-            case wxBRUSHSTYLE_CROSS_HATCH:
+            case wxBrushStyle::CrossHatch:
                 CopyPattern(buffer, CROSS_PATTERN);
                 break;
-            case wxBRUSHSTYLE_HORIZONTAL_HATCH:
+            case wxBrushStyle::HorizontalHatch:
                 CopyPattern(buffer, HORIZONTAL_PATTERN);
                 break;
-            case wxBRUSHSTYLE_VERTICAL_HATCH:
+            case wxBrushStyle::VerticalHatch:
                 CopyPattern(buffer, VERTICAL_PATTERN);
                 break;
             default:
@@ -2948,7 +2948,7 @@ private:
 wxD2DBrushData::wxD2DBrushData(wxGraphicsRenderer* renderer, const wxBrush brush)
     : wxGraphicsObjectRefData(renderer), m_brushResourceHolder(nullptr)
 {
-    if (brush.GetStyle() == wxBRUSHSTYLE_SOLID)
+    if (brush.GetStyle() == wxBrushStyle::Solid)
     {
         m_brushResourceHolder = new wxD2DSolidBrushResourceHolder(brush);
     }
@@ -3003,22 +3003,22 @@ wxBrushStyle wxConvertPenStyleToBrushStyle(wxPenStyle penStyle)
     switch(penStyle)
     {
     case wxPENSTYLE_BDIAGONAL_HATCH:
-        return wxBRUSHSTYLE_BDIAGONAL_HATCH;
+        return wxBrushStyle::BDiagonalHatch;
     case wxPENSTYLE_CROSSDIAG_HATCH:
-        return wxBRUSHSTYLE_CROSSDIAG_HATCH;
+        return wxBrushStyle::CrossDiagHatch;
     case wxPENSTYLE_FDIAGONAL_HATCH:
-        return wxBRUSHSTYLE_FDIAGONAL_HATCH;
+        return wxBrushStyle::FDiagonalHatch;
     case wxPENSTYLE_CROSS_HATCH:
-        return wxBRUSHSTYLE_CROSS_HATCH;
+        return wxBrushStyle::CrossHatch;
     case wxPENSTYLE_HORIZONTAL_HATCH:
-        return wxBRUSHSTYLE_HORIZONTAL_HATCH;
+        return wxBrushStyle::HorizontalHatch;
     case wxPENSTYLE_VERTICAL_HATCH:
-        return wxBRUSHSTYLE_VERTICAL_HATCH;
+        return wxBrushStyle::VerticalHatch;
     default:
         break;
     }
 
-    return wxBRUSHSTYLE_SOLID;
+    return wxBrushStyle::Solid;
 }
 
 //-----------------------------------------------------------------------------
@@ -3082,7 +3082,7 @@ wxD2DPenData::wxD2DPenData(
     if (m_penInfo.GetStyle() == wxPENSTYLE_STIPPLE)
     {
         strokeBrush.SetStipple(m_penInfo.GetStipple());
-        strokeBrush.SetStyle(wxBRUSHSTYLE_STIPPLE);
+        strokeBrush.SetStyle(wxBrushStyle::Stipple);
     }
     else if(wxIsHatchPenStyle(m_penInfo.GetStyle()))
     {
@@ -3092,7 +3092,7 @@ wxD2DPenData::wxD2DPenData(
     else
     {
         strokeBrush.SetColour(m_penInfo.GetColour());
-        strokeBrush.SetStyle(wxBRUSHSTYLE_SOLID);
+        strokeBrush.SetStyle(wxBrushStyle::Solid);
     }
 
     switch ( m_penInfo.GetGradientType() )
@@ -5224,7 +5224,7 @@ wxGraphicsPen wxD2DRenderer::CreatePen(const wxGraphicsPenInfo& info)
 
 wxGraphicsBrush wxD2DRenderer::CreateBrush(const wxBrush& brush)
 {
-    if ( !brush.IsOk() || brush.GetStyle() == wxBRUSHSTYLE_TRANSPARENT )
+    if ( !brush.IsOk() || brush.GetStyle() == wxBrushStyle::Transparent )
     {
         return wxNullGraphicsBrush;
     }

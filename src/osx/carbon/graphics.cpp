@@ -994,7 +994,7 @@ wxMacCoreGraphicsColour::wxMacCoreGraphicsColour()
 wxMacCoreGraphicsColour::wxMacCoreGraphicsColour( const wxBrush &brush )
 {
     Init();
-    if ( brush.GetStyle() == wxBRUSHSTYLE_SOLID )
+    if ( brush.GetStyle() == wxBrushStyle::Solid )
     {
         m_color.reset( wxMacCreateCGColor( brush.GetColour() ));
     }
@@ -3010,7 +3010,7 @@ wxGraphicsPen wxMacCoreGraphicsRenderer::CreatePen(const wxGraphicsPenInfo& info
 
 wxGraphicsBrush wxMacCoreGraphicsRenderer::CreateBrush(const wxBrush& brush )
 {
-    if ( !brush.IsOk() || brush.GetStyle() == wxBRUSHSTYLE_TRANSPARENT )
+    if ( !brush.IsOk() || brush.GetStyle() == wxBrushStyle::Transparent )
         return wxNullGraphicsBrush;
     else
     {

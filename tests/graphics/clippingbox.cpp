@@ -192,7 +192,7 @@ public:
     void setUp() override
     {
         m_mdc.DestroyClippingRegion();
-        wxBrush bgBrush(s_bgColour, wxBRUSHSTYLE_SOLID);
+        wxBrush bgBrush(s_bgColour, wxBrushStyle::Solid);
         m_mdc.SetBackground(bgBrush);
         m_mdc.Clear();
     }
@@ -276,7 +276,7 @@ public:
         ctx->SetAntialiasMode(wxANTIALIAS_NONE);
         ctx->DisableOffset();
         m_gcdc->DestroyClippingRegion();
-        wxBrush bgBrush(s_bgColour, wxBRUSHSTYLE_SOLID);
+        wxBrush bgBrush(s_bgColour, wxBrushStyle::Solid);
         m_gcdc->SetBackground(bgBrush);
         m_gcdc->Clear();
     }
@@ -755,7 +755,7 @@ void ClippingBoxTestCaseDCBase::CheckClipShape(const wxBitmap& bmpRef, int posTo
 void ClippingBoxTestCaseDCBase::InitialState()
 {
     // Initial clipping box should be the same as the entire DC surface.
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(0, 0, s_dcSize.GetWidth(), s_dcSize.GetHeight(),
                  0, 0, s_dcSize.GetWidth(), s_dcSize.GetHeight());
@@ -768,7 +768,7 @@ void ClippingBoxTestCaseDCBase::InitialStateWithTransformedDC()
     m_dc->SetUserScale(0.5, 1.5);
     m_dc->SetLogicalScale(4.0, 2.0);
     m_dc->SetLogicalOrigin(-15, -20);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(m_dc->DeviceToLogicalX(0), m_dc->DeviceToLogicalY(0),
              m_dc->DeviceToLogicalXRel(s_dcSize.GetWidth()),
@@ -837,7 +837,7 @@ void ClippingBoxTestCaseDCBase::InitialStateWithRotatedDC()
         clipW = s_dcSize.GetWidth();
         clipH = s_dcSize.GetHeight();
     }
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(clipX, clipY, clipW, clipH,
                  0, 0, s_dcSize.GetWidth(), s_dcSize.GetHeight());
@@ -853,7 +853,7 @@ void ClippingBoxTestCaseDCBase::OneRegion()
     const int h = 75;
 
     m_dc->SetClippingRegion(x, y, w, h);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(x, y, w, h,
                  x, y, w, h);
@@ -865,7 +865,7 @@ void ClippingBoxTestCaseDCBase::OneLargeRegion()
     // Final clipping box should be limited to the DC extents.
     m_dc->SetClippingRegion(-10, -20,
                          s_dcSize.GetWidth()+30, s_dcSize.GetHeight()+50);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(0, 0, s_dcSize.GetWidth(), s_dcSize.GetHeight(),
                  0, 0, s_dcSize.GetWidth(), s_dcSize.GetHeight());
@@ -876,7 +876,7 @@ void ClippingBoxTestCaseDCBase::OneOuterRegion()
     // Setting one clipping region entirely outside DC surface.
     // Final clipping box should be empty.
     m_dc->SetClippingRegion(-100, -80, 20, 40);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(0, 0, 0, 0,
                  0, 0, 0, 0);
@@ -896,7 +896,7 @@ void ClippingBoxTestCaseDCBase::OneRegionNegDim()
     wxASSERT( !r.IsEmpty() );
 
     m_dc->SetClippingRegion(x, y, w, h);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(r.GetLeft(), r.GetTop(),
                  r.GetWidth(), r.GetHeight(),
@@ -910,7 +910,7 @@ void ClippingBoxTestCaseDCBase::OneRegionAndReset()
     // Final clipping box should be the same as DC surface.
     m_dc->SetClippingRegion(10, 20, 80, 75);
     m_dc->DestroyClippingRegion();
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(0, 0, s_dcSize.GetWidth(), s_dcSize.GetHeight(),
                  0, 0, s_dcSize.GetWidth(), s_dcSize.GetHeight());
@@ -922,7 +922,7 @@ void ClippingBoxTestCaseDCBase::OneRegionAndEmpty()
     // Final clipping box should empty.
     m_dc->SetClippingRegion(10, 20, 80, 75);
     m_dc->SetClippingRegion(0, 0, 0, 0);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(0, 0, 0, 0,
                  0, 0, 0, 0);
@@ -939,7 +939,7 @@ void ClippingBoxTestCaseDCBase::OneRegionOverTransformedDC()
     m_dc->SetLogicalScale(4.0, 2.0);
     m_dc->SetLogicalOrigin(-15, -20);
     m_dc->SetClippingRegion(r1);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     wxRect r2(m_dc->DeviceToLogicalX(0),
               m_dc->DeviceToLogicalY(0),
@@ -967,7 +967,7 @@ void ClippingBoxTestCaseDCBase::OneRegionAndDCTransformation()
     m_dc->SetLogicalOrigin(-16, -21);
 
     m_dc->SetClippingRegion(r);
-    m_dc->SetBackground(wxBrush(s_tmpColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_tmpColour, wxBrushStyle::Solid));
     m_dc->Clear();
 
     m_dc->SetDeviceOrigin(16, 24);
@@ -976,7 +976,7 @@ void ClippingBoxTestCaseDCBase::OneRegionAndDCTransformation()
     wxCoord x, y, w, h;
     m_dc->GetClippingBox(&x, &y, &w, &h);
     m_dc->SetClippingRegion(x, y, w, h);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     const int clipX = -13;
     const int clipY = -24;
@@ -1000,7 +1000,7 @@ void ClippingBoxTestCaseDCBase::TwoRegionsOverlapping()
 
     m_dc->SetClippingRegion(r1);
     m_dc->SetClippingRegion(r2);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(r.GetLeft(), r.GetTop(),
                  r.GetWidth(), r.GetHeight(),
@@ -1029,7 +1029,7 @@ void ClippingBoxTestCaseDCBase::TwoRegionsOverlappingNegDim()
 
     m_dc->SetClippingRegion(x1, y1, w1, h1);
     m_dc->SetClippingRegion(x2, y2, w2, h2);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(r.GetLeft(), r.GetTop(),
                  r.GetWidth(), r.GetHeight(),
@@ -1047,7 +1047,7 @@ void ClippingBoxTestCaseDCBase::TwoRegionsNonOverlapping()
 
     m_dc->SetClippingRegion(r1);
     m_dc->SetClippingRegion(r2);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(0, 0, 0, 0,
                  0, 0, 0, 0);
@@ -1073,7 +1073,7 @@ void ClippingBoxTestCaseDCBase::TwoRegionsNonOverlappingNegDim()
 
     m_dc->SetClippingRegion(x1, y1, w1, h1);
     m_dc->SetClippingRegion(x2, y2, w2, h2);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(0, 0, 0, 0,
                  0, 0, 0, 0);
@@ -1094,7 +1094,7 @@ void ClippingBoxTestCaseDCBase::OneDevRegion()
     m_dc->SetLogicalOrigin(-15, -20);
     wxRegion reg(x, y, w, h);
     m_dc->SetDeviceClippingRegion(reg);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(m_dc->DeviceToLogicalX(x),
                  m_dc->DeviceToLogicalY(y),
@@ -1114,7 +1114,7 @@ void ClippingBoxTestCaseDCBase::OneLargeDevRegion()
     m_dc->SetLogicalOrigin(-15, -20);
     wxRegion reg(-10, -20, s_dcSize.GetWidth()+30, s_dcSize.GetHeight()+50);
     m_dc->SetDeviceClippingRegion(reg);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(m_dc->DeviceToLogicalX(0),
                  m_dc->DeviceToLogicalY(0),
@@ -1134,7 +1134,7 @@ void ClippingBoxTestCaseDCBase::OneOuterDevRegion()
     m_dc->SetLogicalOrigin(-15, -20);
     wxRegion reg(200, 80, 20, 40);
     m_dc->SetDeviceClippingRegion(reg);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(0, 0, 0, 0,
                  0, 0, 0, 0);
@@ -1160,7 +1160,7 @@ void ClippingBoxTestCaseDCBase::OneDevRegionNegDim()
     m_dc->SetLogicalOrigin(-15, -20);
     wxRegion reg(x, y, w, h);
     m_dc->SetDeviceClippingRegion(reg);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(m_dc->DeviceToLogicalX(r.GetLeft()),
                  m_dc->DeviceToLogicalY(r.GetTop()),
@@ -1188,9 +1188,9 @@ void ClippingBoxTestCaseDCBase::OneDevRegionNonRect()
     wxBitmap bmpRef(s_dcSize);
     wxMemoryDC memDC(bmpRef);
     wxDC* dcRef = GetDC(&memDC);
-    dcRef->SetBackground(wxBrush(s_bgColour, wxBRUSHSTYLE_SOLID));
+    dcRef->SetBackground(wxBrush(s_bgColour, wxBrushStyle::Solid));
     dcRef->Clear();
-    dcRef->SetBrush(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    dcRef->SetBrush(wxBrush(s_fgColour, wxBrushStyle::Solid));
     dcRef->SetPen(wxPen(s_fgColour));
     dcRef->DrawPolygon(WXSIZEOF(poly), poly);
     if ( dcRef != &memDC )
@@ -1202,7 +1202,7 @@ void ClippingBoxTestCaseDCBase::OneDevRegionNonRect()
     m_dc->SetLogicalOrigin(-15, -20);
     wxRegion r(WXSIZEOF(poly), poly);
     m_dc->SetDeviceClippingRegion(r);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     // Check clipping box parameters and compare
     // filled in clipping region with reference triangle.
@@ -1230,7 +1230,7 @@ void ClippingBoxTestCaseDCBase::OneDevRegionAndReset()
     wxRegion reg(10, 20, 80, 75);
     m_dc->SetDeviceClippingRegion(reg);
     m_dc->DestroyClippingRegion();
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(m_dc->DeviceToLogicalX(0),
                  m_dc->DeviceToLogicalY(0),
@@ -1252,7 +1252,7 @@ void ClippingBoxTestCaseDCBase::OneDevRegionAndEmpty()
     m_dc->SetDeviceClippingRegion(reg1);
     wxRegion reg2(0, 0, 0, 0);
     m_dc->SetDeviceClippingRegion(reg2);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(0, 0, 0, 0,
                  0, 0, 0, 0);
@@ -1270,7 +1270,7 @@ void ClippingBoxTestCaseDCBase::OneDevRegionOverTransformedDC()
     m_dc->SetLogicalOrigin(-15, -20);
     wxRegion reg(r1);
     m_dc->SetDeviceClippingRegion(reg);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     wxRect r2(0, 0, s_dcSize.GetWidth(), s_dcSize.GetHeight());
     wxRect r = r1.Intersect(r2);
@@ -1296,7 +1296,7 @@ void ClippingBoxTestCaseDCBase::OneDevRegionAndDCTransformation()
 
     wxRegion reg(r1);
     m_dc->SetDeviceClippingRegion(reg);
-    m_dc->SetBackground(wxBrush(s_tmpColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_tmpColour, wxBrushStyle::Solid));
     m_dc->Clear();
 
     m_dc->SetDeviceOrigin(16, 24);
@@ -1305,7 +1305,7 @@ void ClippingBoxTestCaseDCBase::OneDevRegionAndDCTransformation()
     wxCoord x, y, w, h;
     m_dc->GetClippingBox(&x, &y, &w, &h);
     m_dc->SetClippingRegion(x, y, w, h);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     wxRect r2(0, 0, s_dcSize.GetWidth(), s_dcSize.GetHeight());
     wxRect r = r1.Intersect(r2);
@@ -1336,7 +1336,7 @@ void ClippingBoxTestCaseDCBase::TwoDevRegionsOverlapping()
     m_dc->SetDeviceClippingRegion(reg1);
     wxRegion reg2(r2);
     m_dc->SetDeviceClippingRegion(reg2);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(m_dc->DeviceToLogicalX(r.GetLeft()),
                  m_dc->DeviceToLogicalY(r.GetTop()),
@@ -1373,7 +1373,7 @@ void ClippingBoxTestCaseDCBase::TwoDevRegionsOverlappingNegDim()
     m_dc->SetDeviceClippingRegion(reg1);
     wxRegion reg2(x2, y2, w2, h2);
     m_dc->SetDeviceClippingRegion(reg2);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(m_dc->DeviceToLogicalX(r.GetLeft()),
                  m_dc->DeviceToLogicalY(r.GetTop()),
@@ -1399,7 +1399,7 @@ void ClippingBoxTestCaseDCBase::TwoDevRegionsNonOverlapping()
     m_dc->SetDeviceClippingRegion(reg1);
     wxRegion reg2(r2);
     m_dc->SetDeviceClippingRegion(reg2);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(0, 0, 0, 0,
                  0, 0, 0, 0);
@@ -1431,7 +1431,7 @@ void ClippingBoxTestCaseDCBase::TwoDevRegionsNonOverlappingNegDim()
     m_dc->SetDeviceClippingRegion(reg1);
     wxRegion reg2(x2, y2, w2, h2);
     m_dc->SetDeviceClippingRegion(reg2);
-    m_dc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(0, 0, 0, 0,
                  0, 0, 0, 0);
@@ -1445,7 +1445,7 @@ void ClippingBoxTestCaseGCDC::InitialStateWithRotatedGCForDC()
     wxGraphicsContext* gc = m_gcdc->GetGraphicsContext();
     gc->Rotate(6*M_PI/180.0);
 
-    m_gcdc->SetBackground(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_gcdc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_gcdc->Clear();
 
     // Calculate expected clipping box.
@@ -1521,7 +1521,7 @@ public:
     void setUp() override
     {
         m_mdc.DestroyClippingRegion();
-        wxBrush bgBrush(s_bgColour, wxBRUSHSTYLE_SOLID);
+        wxBrush bgBrush(s_bgColour, wxBrushStyle::Solid);
         m_mdc.SetBackground(bgBrush);
         m_mdc.Clear();
 
@@ -1801,7 +1801,7 @@ void ClippingBoxTestCaseGCBase::Clear()
 {
     double x, y, w, h;
     m_gc->GetClipBox(&x, &y, &w, &h);
-    m_gc->SetBrush(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_gc->SetBrush(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_gc->SetPen(*wxTRANSPARENT_PEN);
     m_gc->SetCompositionMode(wxCOMPOSITION_SOURCE);
     m_gc->DrawRectangle(x, y, w, h);
@@ -1956,11 +1956,11 @@ void ClippingBoxTestCaseGCBase::OneRegionWithRotatedGC()
         wxGraphicsContext* gcRef = m_rend->CreateContext(memDC);
         gcRef->SetAntialiasMode(wxANTIALIAS_NONE);
         gcRef->DisableOffset();
-        gcRef->SetBrush(wxBrush(s_bgColour, wxBRUSHSTYLE_SOLID));
+        gcRef->SetBrush(wxBrush(s_bgColour, wxBrushStyle::Solid));
         gcRef->SetPen(*wxTRANSPARENT_PEN);
         gcRef->DrawRectangle(0, 0, s_dcSize.GetWidth(), s_dcSize.GetHeight());
         gcRef->Rotate(rotAngle);
-        gcRef->SetBrush(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+        gcRef->SetBrush(wxBrush(s_fgColour, wxBrushStyle::Solid));
         gcRef->SetPen(wxPen(s_fgColour));
         gcRef->DrawRectangle(rectX, rectY, rectW, rectH);
         delete gcRef;
@@ -2065,7 +2065,7 @@ void ClippingBoxTestCaseGCBase::RegionsAndPushPopState()
     m_gc->GetClipBox(&x, &y, &w, &h);
 
     // Set clipping regions and store/restore them.
-    m_gc->SetBrush(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+    m_gc->SetBrush(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_gc->SetPen(wxPen(s_fgColour));
 
     m_gc->Translate(5, 5);
@@ -2097,11 +2097,11 @@ void ClippingBoxTestCaseGCBase::RegionsAndPushPopState()
         wxGraphicsContext* gcRef = m_rend->CreateContext(memDC);
         gcRef->SetAntialiasMode(wxANTIALIAS_NONE);
         gcRef->DisableOffset();
-        gcRef->SetBrush(wxBrush(s_bgColour, wxBRUSHSTYLE_SOLID));
+        gcRef->SetBrush(wxBrush(s_bgColour, wxBrushStyle::Solid));
         gcRef->SetPen(*wxTRANSPARENT_PEN);
         gcRef->DrawRectangle(0, 0, s_dcSize.GetWidth(), s_dcSize.GetHeight());
 
-        gcRef->SetBrush(wxBrush(s_fgColour, wxBRUSHSTYLE_SOLID));
+        gcRef->SetBrush(wxBrush(s_fgColour, wxBrushStyle::Solid));
         gcRef->SetPen(wxPen(s_fgColour));
 
         gcRef->Translate(5, 5);

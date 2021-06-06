@@ -1069,7 +1069,7 @@ void wxListHeaderWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
     GetClientSize( &w, &h );
     parent->CalcUnscrolledPosition(w, 0, &w, NULL);
 
-    dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+    dc.SetBackgroundMode(wxBrushStyle::Transparent);
     dc.SetTextForeground(GetForegroundColour());
 
     int x = HEADER_OFFSET_X;
@@ -1626,7 +1626,7 @@ wxListMainWindow::wxListMainWindow( wxWindow *parent,
                             (
                                 wxSYS_COLOUR_HIGHLIGHT
                             ),
-                            wxBRUSHSTYLE_SOLID
+                            wxBrushStyle::Solid
                          );
 
     m_highlightUnfocusedBrush = new wxBrush
@@ -1635,7 +1635,7 @@ wxListMainWindow::wxListMainWindow( wxWindow *parent,
                                  (
                                      wxSYS_COLOUR_BTNSHADOW
                                  ),
-                                 wxBRUSHSTYLE_SOLID
+                                 wxBrushStyle::Solid
                               );
 
     wxVisualAttributes attr = wxGenericListCtrl::GetClassDefaultAttributes();

@@ -275,8 +275,8 @@ public:
     virtual void SetBackground(const wxBrush& brush) = 0;
     virtual const wxBrush& GetBackground() const { return m_backgroundBrush; }
 
-    virtual void SetBackgroundMode(int mode) = 0;
-    virtual int GetBackgroundMode() const { return m_backgroundMode; }
+    virtual void SetBackgroundMode(wxBrushStyle mode) = 0;
+    virtual wxBrushStyle GetBackgroundMode() const { return m_backgroundMode; }
 
     virtual void SetTextForeground(const wxColour& colour)
         { m_textForegroundColour = colour; }
@@ -629,7 +629,7 @@ protected:
     wxCoord m_clipX1, m_clipY1, m_clipX2, m_clipY2;  // Clipping box is stored in logical units.
 
     wxRasterOperationMode m_logicalFunction;
-    int m_backgroundMode;
+    wxBrushStyle m_backgroundMode;
     wxMappingMode m_mappingMode;
 
     wxPen             m_pen;
@@ -766,9 +766,9 @@ public:
     const wxBrush&  GetBackground() const
         { return m_pimpl->GetBackground(); }
 
-    void SetBackgroundMode(int mode)
+    void SetBackgroundMode(wxBrushStyle mode)
         { m_pimpl->SetBackgroundMode( mode ); }
-    int GetBackgroundMode() const
+    wxBrushStyle GetBackgroundMode() const
         { return m_pimpl->GetBackgroundMode(); }
 
     void SetTextForeground(const wxColour& colour)
@@ -1336,25 +1336,25 @@ private:
 class WXDLLIMPEXP_CORE wxDCTextBgModeChanger
 {
 public:
-    wxDCTextBgModeChanger(wxDC& dc) : m_dc(dc), m_modeOld(wxBRUSHSTYLE_INVALID) { }
+    wxDCTextBgModeChanger(wxDC& dc) : m_dc(dc), m_modeOld(wxBrushStyle::Invalid) { }
 
-    wxDCTextBgModeChanger(wxDC& dc, int mode) : m_dc(dc)
+    wxDCTextBgModeChanger(wxDC& dc, wxBrushStyle mode) : m_dc(dc)
     {
         Set(mode);
     }
 
     ~wxDCTextBgModeChanger()
     {
-        if ( m_modeOld != wxBRUSHSTYLE_INVALID )
+        if ( m_modeOld != wxBrushStyle::Invalid )
             m_dc.SetBackgroundMode(m_modeOld);
     }
 
     wxDCTextBgModeChanger(const wxDCTextBgModeChanger&) = delete;
 	wxDCTextBgModeChanger& operator=(const wxDCTextBgModeChanger&) = delete;
 
-    void Set(int mode)
+    void Set(wxBrushStyle mode)
     {
-        if ( m_modeOld == wxBRUSHSTYLE_INVALID )
+        if ( m_modeOld == wxBrushStyle::Invalid )
             m_modeOld = m_dc.GetBackgroundMode();
         m_dc.SetBackgroundMode(mode);
     }
@@ -1362,7 +1362,7 @@ public:
 private:
     wxDC& m_dc;
 
-    int m_modeOld;
+    wxBrushStyle m_modeOld;
 };
 
 // ----------------------------------------------------------------------------

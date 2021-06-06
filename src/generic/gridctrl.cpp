@@ -42,7 +42,7 @@ void wxGridCellRenderer::Draw(wxGrid& grid,
                               int WXUNUSED(row), int WXUNUSED(col),
                               bool isSelected)
 {
-    dc.SetBackgroundMode( wxBRUSHSTYLE_SOLID );
+    dc.SetBackgroundMode( wxBrushStyle::Solid );
 
     wxColour clr;
     if ( grid.IsThisEnabled() )
@@ -74,7 +74,7 @@ void wxGridCellRenderer::SetTextColoursAndFont(const wxGrid& grid,
                                                wxDC& dc,
                                                bool isSelected)
 {
-    dc.SetBackgroundMode( wxBRUSHSTYLE_TRANSPARENT );
+    dc.SetBackgroundMode( wxBrushStyle::Transparent );
 
     // TODO some special colours for attr.IsReadOnly() case?
 

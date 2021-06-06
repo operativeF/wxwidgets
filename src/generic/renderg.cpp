@@ -455,7 +455,7 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
 
         dc.SetFont(font);
         dc.SetTextForeground(clr);
-        dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+        dc.SetBackgroundMode(wxBrushStyle::Transparent);
 
         int tw, th, td;
         dc.GetTextExtent( label, &tw, &th, &td);

@@ -992,7 +992,7 @@ void wxSymbolListCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
 
     dc.SetPen(wxPen(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT)));
     dc.SetTextForeground(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
-    dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+    dc.SetBackgroundMode(wxBrushStyle::Transparent);
 
     // iterate over all visible lines
     const size_t lineMax = GetVisibleEnd();

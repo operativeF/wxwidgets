@@ -35,7 +35,7 @@ TAG_HANDLER_BEGIN(FONT, "FONT" )
     {
         wxColour oldclr = m_WParser->GetActualColor();
         wxColour oldbackclr = m_WParser->GetActualBackgroundColor();
-        int oldbackmode = m_WParser->GetActualBackgroundMode();
+        wxBrushStyle oldbackmode = m_WParser->GetActualBackgroundMode();
         int oldsize = m_WParser->GetFontSize();
         int oldbold = m_WParser->GetFontBold();
         int olditalic = m_WParser->GetFontItalic();
@@ -138,7 +138,7 @@ TAG_HANDLER_BEGIN(FONT, "FONT" )
             m_WParser->SetActualBackgroundMode(oldbackmode);
             m_WParser->SetActualBackgroundColor(oldbackclr);
             m_WParser->GetContainer()->InsertCell(
-                new wxHtmlColourCell(oldbackclr, oldbackmode == wxBRUSHSTYLE_TRANSPARENT ? wxHTML_CLR_TRANSPARENT_BACKGROUND : wxHTML_CLR_BACKGROUND));
+                new wxHtmlColourCell(oldbackclr, oldbackmode == wxBrushStyle::Transparent ? wxHTML_CLR_TRANSPARENT_BACKGROUND : wxHTML_CLR_BACKGROUND));
         }
 
         return true;

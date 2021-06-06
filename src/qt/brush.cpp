@@ -21,34 +21,34 @@ static Qt::BrushStyle ConvertBrushStyle(wxBrushStyle style)
 {
     switch (style)
     {
-        case wxBRUSHSTYLE_INVALID:
-        case wxBRUSHSTYLE_SOLID:
+        case wxBrushStyle::Invalid:
+        case wxBrushStyle::Solid:
             return Qt::SolidPattern;
 
-        case wxBRUSHSTYLE_TRANSPARENT:
+        case wxBrushStyle::Transparent:
             return Qt::NoBrush;
 
-        case wxBRUSHSTYLE_BDIAGONAL_HATCH:
+        case wxBrushStyle::BDiagonalHatch:
             return Qt::BDiagPattern;
 
-        case wxBRUSHSTYLE_CROSSDIAG_HATCH:
+        case wxBrushStyle::CrossDiagHatch:
             return Qt::DiagCrossPattern;
 
-        case wxBRUSHSTYLE_FDIAGONAL_HATCH:
+        case wxBrushStyle::FDiagonalHatch:
             return Qt::FDiagPattern;
 
-        case wxBRUSHSTYLE_CROSS_HATCH:
+        case wxBrushStyle::CrossHatch:
             return Qt::CrossPattern;
 
-        case wxBRUSHSTYLE_HORIZONTAL_HATCH:
+        case wxBrushStyle::HorizontalHatch:
             return Qt::HorPattern;
 
-        case wxBRUSHSTYLE_VERTICAL_HATCH:
+        case wxBrushStyle::VerticalHatch:
             return Qt::VerPattern;
 
-        case wxBRUSHSTYLE_STIPPLE:
-        case wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE:
-        case wxBRUSHSTYLE_STIPPLE_MASK:
+        case wxBrushStyle::Stipple:
+        case wxBrushStyle::StippleMaskOpaque:
+        case wxBrushStyle::StippleMask:
             return Qt::TexturePattern;
             break;
     }
@@ -63,7 +63,7 @@ class wxBrushRefData: public wxGDIRefData
 {
     public:
         wxBrushRefData() :
-            m_style(wxBRUSHSTYLE_INVALID)
+            m_style(wxBrushStyle::Invalid)
         {
         }
 
@@ -107,9 +107,9 @@ wxBrush::wxBrush(const wxBitmap& stipple)
     m_refData = new wxBrushRefData();
     M_BRUSHDATA.setTexture(*stipple.GetHandle());
     if (stipple.GetMask() != NULL)
-        M_STYLEDATA = wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE;
+        M_STYLEDATA = wxBrushStyle::StippleMaskOpaque;
     else
-        M_STYLEDATA = wxBRUSHSTYLE_STIPPLE;
+        M_STYLEDATA = wxBrushStyle::Stipple;
 }
 
 
@@ -138,9 +138,9 @@ void wxBrush::SetStipple(const wxBitmap& stipple)
     M_BRUSHDATA.setTexture(*stipple.GetHandle());
 
     if (stipple.GetMask() != NULL)
-        M_STYLEDATA = wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE;
+        M_STYLEDATA = wxBrushStyle::StippleMaskOpaque;
     else
-        M_STYLEDATA = wxBRUSHSTYLE_STIPPLE;
+        M_STYLEDATA = wxBrushStyle::Stipple;
 }
 
 

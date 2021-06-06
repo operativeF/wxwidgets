@@ -195,7 +195,7 @@ void wxQtDCImpl::SetBrush(const wxBrush& brush)
 {
     m_brush = brush;
 
-    if (brush.GetStyle() == wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE)
+    if (brush.GetStyle() == wxBrushStyle::StippleMaskOpaque)
     {
         // Use a monochrome mask: use foreground color for the mask
         QBrush b(brush.GetHandle());
@@ -203,7 +203,7 @@ void wxQtDCImpl::SetBrush(const wxBrush& brush)
         b.setTexture(b.texture().mask());
         m_qtPainter->setBrush(b);
     }
-    else if (brush.GetStyle() == wxBRUSHSTYLE_STIPPLE)
+    else if (brush.GetStyle() == wxBrushStyle::Stipple)
     {
         //Don't use the mask
         QBrush b(brush.GetHandle());
@@ -230,7 +230,7 @@ void wxQtDCImpl::SetBackground(const wxBrush& brush)
         m_qtPainter->setBackground(brush.GetHandle());
 }
 
-void wxQtDCImpl::SetBackgroundMode(int mode)
+void wxQtDCImpl::SetBackgroundMode(wxBrushStyle mode)
 {
     /* Do not change QPainter, as wx uses this background mode
      * only for drawing text, where Qt uses it for everything.
@@ -695,7 +695,7 @@ void wxQtDCImpl::DoDrawText(const wxString& text, wxCoord x, wxCoord y)
     QPainter::CompositionMode savedOp = m_qtPainter->compositionMode();
     m_qtPainter->setCompositionMode( QPainter::CompositionMode_SourceOver );
 
-    if (m_backgroundMode == wxBRUSHSTYLE_SOLID)
+    if (m_backgroundMode == wxBrushStyle::Solid)
     {
         m_qtPainter->setBackgroundMode(Qt::OpaqueMode);
 
@@ -724,7 +724,7 @@ void wxQtDCImpl::DoDrawText(const wxString& text, wxCoord x, wxCoord y)
 void wxQtDCImpl::DoDrawRotatedText(const wxString& text,
                                wxCoord x, wxCoord y, double angle)
 {
-    if (m_backgroundMode == wxBRUSHSTYLE_SOLID)
+    if (m_backgroundMode == wxBrushStyle::Solid)
         m_qtPainter->setBackgroundMode(Qt::OpaqueMode);
 
     //Move and rotate (reverse angle direction in Qt and wx)
@@ -738,7 +738,7 @@ void wxQtDCImpl::DoDrawRotatedText(const wxString& text,
     QPainter::CompositionMode savedOp = m_qtPainter->compositionMode();
     m_qtPainter->setCompositionMode( QPainter::CompositionMode_SourceOver );
 
-    if (m_backgroundMode == wxBRUSHSTYLE_SOLID)
+    if (m_backgroundMode == wxBrushStyle::Solid)
     {
         m_qtPainter->setBackgroundMode(Qt::OpaqueMode);
 

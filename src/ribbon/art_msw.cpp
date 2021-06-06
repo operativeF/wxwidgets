@@ -1468,7 +1468,7 @@ void wxRibbonMSWArtProvider::DrawTab(
                 dc.SetTextForeground(m_tab_label_colour);
             }
 
-            dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+            dc.SetBackgroundMode(wxBrushStyle::Transparent);
 
             int text_height;
             int text_width;

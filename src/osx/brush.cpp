@@ -23,7 +23,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxBrush, wxGDIObject);
 class WXDLLEXPORT wxBrushRefData: public wxGDIRefData
 {
 public:
-    wxBrushRefData(const wxColour& colour = wxNullColour, wxBrushStyle style = wxBRUSHSTYLE_SOLID);
+    wxBrushRefData(const wxColour& colour = wxNullColour, wxBrushStyle style = wxBrushStyle::Solid);
     wxBrushRefData(const wxBitmap& stipple);
     wxBrushRefData(const wxBrushRefData& data);
     virtual ~wxBrushRefData();
@@ -80,7 +80,7 @@ bool wxBrushRefData::operator==(const wxBrushRefData& data) const
 void wxBrushRefData::DoSetStipple(const wxBitmap& stipple)
 {
     m_stipple = stipple;
-    m_style = stipple.GetMask() ? wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE : wxBRUSHSTYLE_STIPPLE;
+    m_style = stipple.GetMask() ? wxBrushStyle::StippleMaskOpaque : wxBrushStyle::Stipple;
 }
 //
 //
@@ -139,7 +139,7 @@ wxColour wxBrush::GetColour() const
 
 wxBrushStyle wxBrush::GetStyle() const
 {
-    wxCHECK_MSG( IsOk(), wxBRUSHSTYLE_INVALID, wxT("invalid brush") );
+    wxCHECK_MSG( IsOk(), wxBrushStyle::Invalid, wxT("invalid brush") );
 
     return M_BRUSHDATA->GetStyle();
 }

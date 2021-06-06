@@ -106,8 +106,8 @@ private:
 class wxBkModeChanger
 {
 public:
-    // set background mode to opaque if mode != wxBRUSHSTYLE_TRANSPARENT
-    wxBkModeChanger(HDC hdc, int mode)
+    // set background mode to opaque if mode != wxBrushStyle::Transparent
+    wxBkModeChanger(HDC hdc, wxBrushStyle mode)
         : m_hdc(hdc)
     {
         Change(mode);
@@ -124,9 +124,9 @@ protected:
     // only if needed
     wxBkModeChanger(HDC hdc) : m_hdc(hdc) { m_oldMode = 0; }
 
-    void Change(int mode)
+    void Change(wxBrushStyle mode)
     {
-        m_oldMode = ::SetBkMode(m_hdc, mode == wxBRUSHSTYLE_TRANSPARENT
+        m_oldMode = ::SetBkMode(m_hdc, mode == wxBrushStyle::Transparent
                                         ? TRANSPARENT
                                         : OPAQUE);
         if ( !m_oldMode )

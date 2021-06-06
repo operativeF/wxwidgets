@@ -1020,7 +1020,7 @@ wxGDIPlusBrushData::wxGDIPlusBrushData( wxGraphicsRenderer* renderer , const wxB
 : wxGDIPlusPenBrushBaseData(renderer)
 {
     Init();
-    if ( brush.GetStyle() == wxBRUSHSTYLE_SOLID)
+    if ( brush.GetStyle() == wxBrushStyle::Solid)
     {
         m_brush = new SolidBrush(wxColourToColor( brush.GetColour()));
     }
@@ -1029,22 +1029,22 @@ wxGDIPlusBrushData::wxGDIPlusBrushData( wxGraphicsRenderer* renderer , const wxB
         HatchStyle style;
         switch( brush.GetStyle() )
         {
-        case wxBRUSHSTYLE_BDIAGONAL_HATCH :
+        case wxBrushStyle::BDiagonalHatch :
             style = HatchStyleBackwardDiagonal;
             break ;
-        case wxBRUSHSTYLE_CROSSDIAG_HATCH :
+        case wxBrushStyle::CrossDiagHatch :
             style = HatchStyleDiagonalCross;
             break ;
-        case wxBRUSHSTYLE_FDIAGONAL_HATCH :
+        case wxBrushStyle::FDiagonalHatch :
             style = HatchStyleForwardDiagonal;
             break ;
-        case wxBRUSHSTYLE_CROSS_HATCH :
+        case wxBrushStyle::CrossHatch :
             style = HatchStyleCross;
             break ;
-        case wxBRUSHSTYLE_HORIZONTAL_HATCH :
+        case wxBrushStyle::HorizontalHatch :
             style = HatchStyleHorizontal;
             break ;
-        case wxBRUSHSTYLE_VERTICAL_HATCH :
+        case wxBrushStyle::VerticalHatch :
             style = HatchStyleVertical;
             break ;
         default:
@@ -2811,7 +2811,7 @@ wxGraphicsPen wxGDIPlusRenderer::CreatePen(const wxGraphicsPenInfo& info)
 wxGraphicsBrush wxGDIPlusRenderer::CreateBrush(const wxBrush& brush )
 {
     ENSURE_LOADED_OR_RETURN(wxNullGraphicsBrush);
-    if ( !brush.IsOk() || brush.GetStyle() == wxBRUSHSTYLE_TRANSPARENT )
+    if ( !brush.IsOk() || brush.GetStyle() == wxBrushStyle::Transparent )
         return wxNullGraphicsBrush;
     else
     {

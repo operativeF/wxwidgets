@@ -41,7 +41,7 @@ class wxHtmlListmarkCell : public wxHtmlCell
 	wxHtmlListmarkCell& operator=(const wxHtmlListmarkCell&) = delete;
 };
 
-wxHtmlListmarkCell::wxHtmlListmarkCell(wxDC* dc, const wxColour& clr) :  m_Brush(clr, wxBRUSHSTYLE_SOLID)
+wxHtmlListmarkCell::wxHtmlListmarkCell(wxDC* dc, const wxColour& clr) :  m_Brush(clr, wxBrushStyle::Solid)
 {
     m_Width =  dc->GetCharHeight();
     m_Height = dc->GetCharHeight();

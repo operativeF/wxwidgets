@@ -33,7 +33,7 @@ wxX11DCImpl::wxX11DCImpl( wxDC *owner ) :
     m_font = *wxNORMAL_FONT;
     m_brush = *wxWHITE_BRUSH;
 
-    m_backgroundMode = wxBRUSHSTYLE_TRANSPARENT;
+    m_backgroundMode = wxBrushStyle::Transparent;
 }
 
 void wxX11DCImpl::DoSetClippingRegion( wxCoord x, wxCoord y, wxCoord width, wxCoord height )

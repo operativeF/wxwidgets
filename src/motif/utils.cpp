@@ -630,7 +630,7 @@ wxBitmap wxCreateMaskedBitmap(const wxBitmap& bitmap, const wxColour& colour)
     srcDC.SelectObjectAsSource(bitmap);
     destDC.SelectObject(newBitmap);
 
-    wxBrush brush(colour, wxBRUSHSTYLE_SOLID);
+    wxBrush brush(colour, wxBrushStyle::Solid);
     destDC.SetBackground(brush);
     destDC.Clear();
     destDC.Blit(0, 0, bitmap.GetWidth(), bitmap.GetHeight(),

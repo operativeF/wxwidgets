@@ -6913,7 +6913,7 @@ bool wxRichTextPlainText::Draw(wxDC& dc, wxRichTextDrawingContext& context, cons
         // (c) Part selected, part not
         // Let's draw unselected chunk, selected chunk, then unselected chunk.
 
-        dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+        dc.SetBackgroundMode(wxBrushStyle::Transparent);
 
         // 1. Initial unselected chunk, if any, up until start of selection.
         if (selectionRange.GetStart() > range.GetStart() && selectionRange.GetStart() <= range.GetEnd())
@@ -7034,7 +7034,7 @@ bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr,
         wxCheckSetBrush(dc, wxBrush(highlightColour));
         wxCheckSetPen(dc, wxPen(highlightColour));
         dc.SetTextForeground(highlightTextColour);
-        dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+        dc.SetBackgroundMode(wxBrushStyle::Transparent);
     }
     else
     {
@@ -7042,11 +7042,11 @@ bool wxRichTextPlainText::DrawTabbedString(wxDC& dc, const wxRichTextAttr& attr,
 
         if (attr.HasFlag(wxTEXT_ATTR_BACKGROUND_COLOUR) && attr.GetBackgroundColour().IsOk())
         {
-            dc.SetBackgroundMode(wxBRUSHSTYLE_SOLID);
+            dc.SetBackgroundMode(wxBrushStyle::Solid);
             dc.SetTextBackground(attr.GetBackgroundColour());
         }
         else
-            dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+            dc.SetBackgroundMode(wxBrushStyle::Transparent);
     }
 
     wxCoord x_orig = GetParent()->GetPosition().x;
@@ -9194,7 +9194,7 @@ bool wxRichTextStdRenderer::DrawTextBullet(wxRichTextParagraph* paragraph, wxDC&
         if (attr.GetTextColour().IsOk())
             dc.SetTextForeground(attr.GetTextColour());
 
-        dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+        dc.SetBackgroundMode(wxBrushStyle::Transparent);
 
         int charHeight = dc.GetCharHeight();
         wxCoord tw, th;
@@ -9651,7 +9651,7 @@ bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTex
             int w, h, maxDescent;
             dc.SetFont(m_font);
             dc.GetTextExtent(label, &w, &h, &maxDescent);
-            dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+            dc.SetBackgroundMode(wxBrushStyle::Transparent);
             dc.SetTextForeground(textColour);
 
             int x = clientArea.x + (clientArea.width - w)/2;

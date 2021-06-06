@@ -301,7 +301,7 @@ void wxTipWindowView::OnPaint(wxPaintEvent& WXUNUSED(event))
     rect.height = size.y;
 
     // first filll the background
-    dc.SetBrush(wxBrush(GetBackgroundColour(), wxBRUSHSTYLE_SOLID));
+    dc.SetBrush(wxBrush(GetBackgroundColour(), wxBrushStyle::Solid));
     dc.SetPen(wxPen(GetForegroundColour(), 1, wxPENSTYLE_SOLID));
     dc.DrawRectangle(rect);
 

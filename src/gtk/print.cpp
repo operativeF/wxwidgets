@@ -1874,7 +1874,7 @@ void wxGtkPrinterDCImpl::DoDrawRotatedText(const wxString& text, wxCoord x, wxCo
     int w,h;
     pango_layout_get_pixel_size( m_layout, &w, &h );
 
-    if ( m_backgroundMode == wxBRUSHSTYLE_SOLID )
+    if ( m_backgroundMode == wxBrushStyle::Solid )
     {
         unsigned char red = m_textBackgroundColour.Red();
         unsigned char blue = m_textBackgroundColour.Blue();
@@ -2026,7 +2026,7 @@ void wxGtkPrinterDCImpl::SetBrush( const wxBrush& brush )
 
     m_brush = brush;
 
-    if (m_brush.GetStyle() == wxBRUSHSTYLE_TRANSPARENT)
+    if (m_brush.GetStyle() == wxBrushStyle::Transparent)
     {
         cairo_set_source_rgba( m_cairo, 0, 0, 0, 0 );
         m_currentRed = 0;
@@ -2069,31 +2069,31 @@ void wxGtkPrinterDCImpl::SetBrush( const wxBrush& brush )
 
         switch (m_brush.GetStyle())
         {
-            case wxBRUSHSTYLE_CROSS_HATCH:
+            case wxBrushStyle::CrossHatch:
                 cairo_move_to(cr, 5, 0);
                 cairo_line_to(cr, 5, 10);
                 cairo_move_to(cr, 0, 5);
                 cairo_line_to(cr, 10, 5);
                 break;
-            case wxBRUSHSTYLE_BDIAGONAL_HATCH:
+            case wxBrushStyle::BDiagonalHatch:
                 cairo_move_to(cr, 0, 10);
                 cairo_line_to(cr, 10, 0);
                 break;
-            case wxBRUSHSTYLE_FDIAGONAL_HATCH:
+            case wxBrushStyle::FDiagonalHatch:
                 cairo_move_to(cr, 0, 0);
                 cairo_line_to(cr, 10, 10);
                 break;
-            case wxBRUSHSTYLE_CROSSDIAG_HATCH:
+            case wxBrushStyle::CrossDiagHatch:
                 cairo_move_to(cr, 0, 0);
                 cairo_line_to(cr, 10, 10);
                 cairo_move_to(cr, 10, 0);
                 cairo_line_to(cr, 0, 10);
                 break;
-            case wxBRUSHSTYLE_HORIZONTAL_HATCH:
+            case wxBrushStyle::HorizontalHatch:
                 cairo_move_to(cr, 0, 5);
                 cairo_line_to(cr, 10, 5);
                 break;
-            case wxBRUSHSTYLE_VERTICAL_HATCH:
+            case wxBrushStyle::VerticalHatch:
                 cairo_move_to(cr, 5, 0);
                 cairo_line_to(cr, 5, 10);
                 break;
@@ -2142,12 +2142,12 @@ void wxGtkPrinterDCImpl::SetBackground( const wxBrush& brush )
     cairo_restore(m_cairo);
 }
 
-void wxGtkPrinterDCImpl::SetBackgroundMode(int mode)
+void wxGtkPrinterDCImpl::SetBackgroundMode(wxBrushStyle mode)
 {
-    if (mode == wxBRUSHSTYLE_SOLID)
-        m_backgroundMode = wxBRUSHSTYLE_SOLID;
+    if (mode == wxBrushStyle::Solid)
+        m_backgroundMode = wxBrushStyle::Solid;
     else
-        m_backgroundMode = wxBRUSHSTYLE_TRANSPARENT;
+        m_backgroundMode = wxBrushStyle::Transparent;
 }
 
 void wxGtkPrinterDCImpl::DoSetClippingRegion(wxCoord x, wxCoord y, wxCoord width, wxCoord height)

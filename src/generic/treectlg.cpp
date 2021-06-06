@@ -2579,7 +2579,7 @@ void wxGenericTreeCtrl::PaintItem(wxGenericTreeItem *item, wxDC& dc)
         {
             colBg = GetBackgroundColour();
         }
-        dc.SetBrush(wxBrush(colBg, wxBRUSHSTYLE_SOLID));
+        dc.SetBrush(wxBrush(colBg, wxBrushStyle::Solid));
     }
 
     int offset = HasFlag(wxTR_ROW_LINES) ? 1 : 0;
@@ -2687,7 +2687,7 @@ void wxGenericTreeCtrl::PaintItem(wxGenericTreeItem *item, wxDC& dc)
         dc.DestroyClippingRegion();
     }
 
-    dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+    dc.SetBackgroundMode(wxBrushStyle::Transparent);
     int extraH = (total_h > text_h) ? (total_h - text_h)/2 : 0;
     dc.DrawText( item->GetText(),
                  (wxCoord)(state_w + image_w + item->GetX()),

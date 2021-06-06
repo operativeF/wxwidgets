@@ -273,7 +273,7 @@ void wxGridHeaderLabelsRenderer::DrawLabel(const wxGrid& grid,
                                          int vertAlign,
                                          int textOrientation) const
 {
-    dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+    dc.SetBackgroundMode(wxBrushStyle::Transparent);
     dc.SetFont(grid.GetLabelFont());
 
     // Draw text in a different colour and with a shadow when the control

@@ -363,7 +363,7 @@ void wxPrinterDCImpl::StartPage()
 
     m_logicalFunction = wxCOPY;
     //  m_textAlignment = wxALIGN_TOP_LEFT;
-    m_backgroundMode = wxBRUSHSTYLE_TRANSPARENT;
+    m_backgroundMode = wxBrushStyle::Transparent;
 
     m_textForegroundColour = *wxBLACK;
     m_textBackgroundColour = *wxWHITE;

@@ -145,7 +145,7 @@ public:
     }
 
     void SetBackground(const wxBrush& brush) override;
-    void SetBackgroundMode(int mode) override;
+    void SetBackgroundMode(wxBrushStyle mode) override;
     void SetBrush(const wxBrush& brush) override;
     void SetFont(const wxFont& font) override;
     void SetPen(const wxPen& pen) override;

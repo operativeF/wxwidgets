@@ -502,7 +502,7 @@ void wxGCDCImpl::SetPalette( const wxPalette& WXUNUSED(palette) )
 }
 #endif
 
-void wxGCDCImpl::SetBackgroundMode( int mode )
+void wxGCDCImpl::SetBackgroundMode( wxBrushStyle mode )
 {
     m_backgroundMode = mode;
 }
@@ -696,7 +696,7 @@ void wxGCDCImpl::DoDrawArc( wxCoord x1, wxCoord y1,
              -atan2(double(y2 - yc), double(x2 - xc));
     }
 
-    bool fill = m_brush.GetStyle() != wxBRUSHSTYLE_TRANSPARENT;
+    bool fill = m_brush.GetStyle() != wxBrushStyle::Transparent;
 
     wxGraphicsPath path = m_graphicContext->CreatePath();
     if ( fill && ((x1!=x2)||(y1!=y2)) )
@@ -737,7 +737,7 @@ void wxGCDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord w, wxCoord h,
     }
     // since these angles (ea,sa) are measured counter-clockwise, we invert them to
     // get clockwise angles
-    if ( m_brush.GetStyle() != wxBRUSHSTYLE_TRANSPARENT )
+    if ( m_brush.GetStyle() != wxBrushStyle::Transparent )
     {
         path.MoveToPoint( 0, 0 );
         path.AddArc( 0, 0, h/2.0, wxDegToRad(-sa), wxDegToRad(-ea), false );
@@ -880,7 +880,7 @@ void wxGCDCImpl::DoDrawPolygon( int n, const wxPoint points[],
     wxCHECK_RET( IsOk(), wxT("wxGCDC(cg)::DoDrawPolygon - invalid DC") );
 
     if ( n <= 0 ||
-            (m_brush.GetStyle() == wxBRUSHSTYLE_TRANSPARENT &&
+            (m_brush.GetStyle() == wxBrushStyle::Transparent &&
                 m_pen.GetStyle() == wxPENSTYLE_TRANSPARENT) )
         return;
     if ( !m_logicalFunctionSupported )
@@ -1162,7 +1162,7 @@ void wxGCDCImpl::DoDrawRotatedText(const wxString& text, wxCoord x, wxCoord y,
     {
         // Calculate origin for each line to avoid accumulation of
         // rounding errors.
-        if ( m_backgroundMode == wxBRUSHSTYLE_TRANSPARENT )
+        if ( m_backgroundMode == wxBrushStyle::Transparent )
             m_graphicContext->DrawText( lines[lineNum], x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ));
         else
             m_graphicContext->DrawText( lines[lineNum], x + wxRound(lineNum*dx), y + wxRound(lineNum*dy), wxDegToRad(angle ), m_graphicContext->CreateBrush(m_textBackgroundColour) );
@@ -1209,7 +1209,7 @@ void wxGCDCImpl::DoDrawText(const wxString& str, wxCoord x, wxCoord y)
     wxCompositionMode curMode = m_graphicContext->GetCompositionMode();
     m_graphicContext->SetCompositionMode(wxCOMPOSITION_OVER);
 
-    if ( m_backgroundMode == wxBRUSHSTYLE_TRANSPARENT )
+    if ( m_backgroundMode == wxBrushStyle::Transparent )
         m_graphicContext->DrawText( str, x ,y);
     else
         m_graphicContext->DrawText( str, x ,y , m_graphicContext->CreateBrush(m_textBackgroundColour) );

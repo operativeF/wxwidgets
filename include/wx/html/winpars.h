@@ -132,8 +132,8 @@ public:
     void SetActualColor(const wxColour& clr) { m_ActualColor = clr ;}
     const wxColour& GetActualBackgroundColor() const { return m_ActualBackgroundColor; }
     void SetActualBackgroundColor(const wxColour& clr) { m_ActualBackgroundColor = clr;}
-    int GetActualBackgroundMode() const { return m_ActualBackgroundMode; }
-    void SetActualBackgroundMode(int mode) { m_ActualBackgroundMode = mode;}
+    wxBrushStyle GetActualBackgroundMode() const { return m_ActualBackgroundMode; }
+    void SetActualBackgroundMode(wxBrushStyle mode) { m_ActualBackgroundMode = mode;}
     const wxHtmlLinkInfo& GetLink() const { return m_Link; }
     void SetLink(const wxHtmlLinkInfo& link);
 
@@ -189,7 +189,7 @@ private:
     wxColour m_LinkColor;
     wxColour m_ActualColor;
     wxColour m_ActualBackgroundColor;
-    int m_ActualBackgroundMode;
+    wxBrushStyle m_ActualBackgroundMode;
             // basic font parameters.
     wxHtmlLinkInfo m_Link;
             // actual hypertext link or empty string

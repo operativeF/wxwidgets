@@ -17,23 +17,22 @@
 #include "wx/gdicmn.h"      // for wxGDIObjListBase
 
 // NOTE: these values cannot be combined together!
-enum wxBrushStyle
+enum class wxBrushStyle
 {
-    wxBRUSHSTYLE_INVALID = -1,
-
-    wxBRUSHSTYLE_SOLID = wxSOLID,
-    wxBRUSHSTYLE_TRANSPARENT = wxTRANSPARENT,
-    wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE = wxSTIPPLE_MASK_OPAQUE,
-    wxBRUSHSTYLE_STIPPLE_MASK = wxSTIPPLE_MASK,
-    wxBRUSHSTYLE_STIPPLE = wxSTIPPLE,
-    wxBRUSHSTYLE_BDIAGONAL_HATCH = wxHATCHSTYLE_BDIAGONAL,
-    wxBRUSHSTYLE_CROSSDIAG_HATCH = wxHATCHSTYLE_CROSSDIAG,
-    wxBRUSHSTYLE_FDIAGONAL_HATCH = wxHATCHSTYLE_FDIAGONAL,
-    wxBRUSHSTYLE_CROSS_HATCH = wxHATCHSTYLE_CROSS,
-    wxBRUSHSTYLE_HORIZONTAL_HATCH = wxHATCHSTYLE_HORIZONTAL,
-    wxBRUSHSTYLE_VERTICAL_HATCH = wxHATCHSTYLE_VERTICAL,
-    wxBRUSHSTYLE_FIRST_HATCH = wxHATCHSTYLE_FIRST,
-    wxBRUSHSTYLE_LAST_HATCH = wxHATCHSTYLE_LAST
+    Invalid = -1,
+    Solid = wxSOLID,
+    Transparent = wxTRANSPARENT,
+    StippleMaskOpaque = wxSTIPPLE_MASK_OPAQUE,
+    StippleMask = wxSTIPPLE_MASK,
+    Stipple = wxSTIPPLE,
+    BDiagonalHatch = wxHATCHSTYLE_BDIAGONAL,
+    CrossDiagHatch = wxHATCHSTYLE_CROSSDIAG,
+    FDiagonalHatch = wxHATCHSTYLE_FDIAGONAL,
+    CrossHatch = wxHATCHSTYLE_CROSS,
+    HorizontalHatch = wxHATCHSTYLE_HORIZONTAL,
+    VerticalHatch = wxHATCHSTYLE_VERTICAL,
+    FirstHatch = wxHATCHSTYLE_FIRST,
+    LastHatch = wxHATCHSTYLE_LAST
 };
 
 
@@ -53,19 +52,19 @@ public:
     virtual wxBitmap *GetStipple() const = 0;
 
     virtual bool IsHatch() const
-        { return (GetStyle()>=wxBRUSHSTYLE_FIRST_HATCH) && (GetStyle()<=wxBRUSHSTYLE_LAST_HATCH); }
+        { return (GetStyle()>=wxBrushStyle::FirstHatch) && (GetStyle()<=wxBrushStyle::LastHatch); }
 
     // Convenient helpers for testing whether the brush is a transparent one:
-    // unlike GetStyle() == wxBRUSHSTYLE_TRANSPARENT, they work correctly even
+    // unlike GetStyle() == wxBrushStyle::Transparent, they work correctly even
     // if the brush is invalid (they both return false in this case).
     bool IsTransparent() const
     {
-        return IsOk() && GetStyle() == wxBRUSHSTYLE_TRANSPARENT;
+        return IsOk() && GetStyle() == wxBrushStyle::Transparent;
     }
 
     bool IsNonTransparent() const
     {
-        return IsOk() && GetStyle() != wxBRUSHSTYLE_TRANSPARENT;
+        return IsOk() && GetStyle() != wxBrushStyle::Transparent;
     }
 };
 
@@ -89,7 +88,7 @@ class WXDLLIMPEXP_CORE wxBrushList: public wxGDIObjListBase
 {
 public:
     wxBrush *FindOrCreateBrush(const wxColour& colour,
-                               wxBrushStyle style = wxBRUSHSTYLE_SOLID);
+                               wxBrushStyle style = wxBrushStyle::Solid);
 };
 
 extern WXDLLIMPEXP_DATA_CORE(wxBrushList*)   wxTheBrushList;

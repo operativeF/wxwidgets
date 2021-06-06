@@ -49,7 +49,7 @@ bool wxOwnerDrawn::OnDrawItem(wxDC& dc, const wxRect& rc,
         SelectInHDC selFont(hdc, GetHfontOf(font));
 
         wxMSWImpl::wxTextColoursChanger textCol(hdc, colText, colBack);
-        wxMSWImpl::wxBkModeChanger bkMode(hdc, wxBRUSHSTYLE_TRANSPARENT);
+        wxMSWImpl::wxBkModeChanger bkMode(hdc, wxBrushStyle::Transparent);
 
 
         AutoHBRUSH hbr(wxColourToPalRGB(colBack));

@@ -525,9 +525,9 @@ void wxWindowDCImpl::DoDrawArc( wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2,
 
     if (m_window)
     {
-        if (m_brush.GetStyle() != wxBRUSHSTYLE_TRANSPARENT)
+        if (m_brush.GetStyle() != wxBrushStyle::Transparent)
         {
-            if ((m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE) && (m_brush.GetStipple()->GetMask()))
+            if ((m_brush.GetStyle() == wxBrushStyle::StippleMaskOpaque) && (m_brush.GetStipple()->GetMask()))
             {
                 gdk_gc_set_ts_origin( m_textGC,
                                       m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
@@ -547,7 +547,7 @@ void wxWindowDCImpl::DoDrawArc( wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2,
                 gdk_draw_arc( m_window, m_brushGC, TRUE, xxc-r, yyc-r, 2*r,2*r, alpha1, alpha2 );
                 gdk_gc_set_ts_origin( m_brushGC, 0, 0 );
             } else
-            if (m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE)
+            if (m_brush.GetStyle() == wxBrushStyle::Stipple)
             {
                 gdk_gc_set_ts_origin( m_brushGC,
                                       m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
@@ -592,9 +592,9 @@ void wxWindowDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord width, wxC
         wxCoord start = wxCoord(sa * 64.0);
         wxCoord end = wxCoord((ea-sa) * 64.0);
 
-        if (m_brush.GetStyle() != wxBRUSHSTYLE_TRANSPARENT)
+        if (m_brush.GetStyle() != wxBrushStyle::Transparent)
         {
-            if ((m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE) && (m_brush.GetStipple()->GetMask()))
+            if ((m_brush.GetStyle() == wxBrushStyle::StippleMaskOpaque) && (m_brush.GetStipple()->GetMask()))
             {
                 gdk_gc_set_ts_origin( m_textGC,
                                       m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
@@ -614,7 +614,7 @@ void wxWindowDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord width, wxC
                 gdk_draw_arc( m_window, m_brushGC, TRUE, xx, yy, ww, hh, start, end );
                 gdk_gc_set_ts_origin( m_brushGC, 0, 0 );
             } else
-            if (m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE)
+            if (m_brush.GetStyle() == wxBrushStyle::Stipple)
             {
                 gdk_gc_set_ts_origin( m_brushGC,
                                       m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
@@ -696,13 +696,13 @@ void wxWindowDCImpl::DoDrawPolygon( int n, const wxPoint points[], wxCoord xoffs
         gpts[i].y = YLOG2DEV(y);
     }
 
-    if (m_brush.GetStyle() == wxBRUSHSTYLE_SOLID)
+    if (m_brush.GetStyle() == wxBrushStyle::Solid)
     {
         gdk_draw_polygon( m_window, m_brushGC, TRUE, gpts, n );
     }
-    else if (m_brush.GetStyle() != wxBRUSHSTYLE_TRANSPARENT)
+    else if (m_brush.GetStyle() != wxBrushStyle::Transparent)
     {
-        if ((m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE) && (m_brush.GetStipple()->GetMask()))
+        if ((m_brush.GetStyle() == wxBrushStyle::StippleMaskOpaque) && (m_brush.GetStipple()->GetMask()))
         {
             gdk_gc_set_ts_origin( m_textGC,
                                   m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
@@ -722,7 +722,7 @@ void wxWindowDCImpl::DoDrawPolygon( int n, const wxPoint points[], wxCoord xoffs
             gdk_draw_polygon( m_window, m_brushGC, TRUE, gpts, n );
             gdk_gc_set_ts_origin( m_brushGC, 0, 0 );
         } else
-        if (m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE)
+        if (m_brush.GetStyle() == wxBrushStyle::Stipple)
         {
             gdk_gc_set_ts_origin( m_brushGC,
                                   m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
@@ -763,9 +763,9 @@ void wxWindowDCImpl::DoDrawRectangle( wxCoord x, wxCoord y, wxCoord width, wxCoo
 
     if (m_window)
     {
-        if (m_brush.GetStyle() != wxBRUSHSTYLE_TRANSPARENT)
+        if (m_brush.GetStyle() != wxBrushStyle::Transparent)
         {
-            if ((m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE) && (m_brush.GetStipple()->GetMask()))
+            if ((m_brush.GetStyle() == wxBrushStyle::StippleMaskOpaque) && (m_brush.GetStipple()->GetMask()))
             {
                 gdk_gc_set_ts_origin( m_textGC,
                                       m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
@@ -785,7 +785,7 @@ void wxWindowDCImpl::DoDrawRectangle( wxCoord x, wxCoord y, wxCoord width, wxCoo
                 gdk_draw_rectangle( m_window, m_brushGC, TRUE, xx, yy, ww, hh );
                 gdk_gc_set_ts_origin( m_brushGC, 0, 0 );
             } else
-            if (m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE)
+            if (m_brush.GetStyle() == wxBrushStyle::Stipple)
             {
                 gdk_gc_set_ts_origin( m_brushGC,
                                       m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
@@ -851,9 +851,9 @@ void wxWindowDCImpl::DoDrawRoundedRectangle( wxCoord x, wxCoord y, wxCoord width
         if (dd > hh) dd = hh;
         rr = dd / 2;
 
-        if (m_brush.GetStyle() != wxBRUSHSTYLE_TRANSPARENT)
+        if (m_brush.GetStyle() != wxBrushStyle::Transparent)
         {
-            if ((m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE) && (m_brush.GetStipple()->GetMask()))
+            if ((m_brush.GetStyle() == wxBrushStyle::StippleMaskOpaque) && (m_brush.GetStipple()->GetMask()))
             {
                 gdk_gc_set_ts_origin( m_textGC,
                                       m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
@@ -888,7 +888,7 @@ void wxWindowDCImpl::DoDrawRoundedRectangle( wxCoord x, wxCoord y, wxCoord width
                 gdk_draw_arc( m_window, m_brushGC, TRUE, xx, yy+hh-dd, dd, dd, 180*64, 90*64 );
                 gdk_gc_set_ts_origin( m_brushGC, 0, 0 );
             } else
-            if (m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE)
+            if (m_brush.GetStyle() == wxBrushStyle::Stipple)
             {
                 gdk_gc_set_ts_origin( m_brushGC,
                                       m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
@@ -945,9 +945,9 @@ void wxWindowDCImpl::DoDrawEllipse( wxCoord x, wxCoord y, wxCoord width, wxCoord
 
     if (m_window)
     {
-        if (m_brush.GetStyle() != wxBRUSHSTYLE_TRANSPARENT)
+        if (m_brush.GetStyle() != wxBrushStyle::Transparent)
         {
-            if ((m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE) && (m_brush.GetStipple()->GetMask()))
+            if ((m_brush.GetStyle() == wxBrushStyle::StippleMaskOpaque) && (m_brush.GetStipple()->GetMask()))
             {
                 gdk_gc_set_ts_origin( m_textGC,
                                       m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
@@ -967,7 +967,7 @@ void wxWindowDCImpl::DoDrawEllipse( wxCoord x, wxCoord y, wxCoord width, wxCoord
                 gdk_draw_arc( m_window, m_brushGC, TRUE, xx, yy, ww, hh, 0, 360*64 );
                 gdk_gc_set_ts_origin( m_brushGC, 0, 0 );
             } else
-            if (m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE)
+            if (m_brush.GetStyle() == wxBrushStyle::Stipple)
             {
                 gdk_gc_set_ts_origin( m_brushGC,
                                       m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
@@ -1410,7 +1410,7 @@ void wxWindowDCImpl::DoDrawText( const wxString &text, wxCoord x, wxCoord y )
     wxCoord width = gdk_string_width( font, text.mbc_str() );
     wxCoord height = font->ascent + font->descent;
 
-    if ( m_backgroundMode == wxBRUSHSTYLE_SOLID )
+    if ( m_backgroundMode == wxBrushStyle::Solid )
     {
         gdk_gc_set_foreground( m_textGC, m_textBackgroundColour.GetColor() );
         gdk_draw_rectangle( m_window, m_textGC, TRUE, x, y, width, height );
@@ -1806,7 +1806,7 @@ void wxWindowDCImpl::SetBrush( const wxBrush &brush )
 
     gdk_gc_set_fill( m_brushGC, GDK_SOLID );
 
-    if ((m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE) && (m_brush.GetStipple()->IsOk()))
+    if ((m_brush.GetStyle() == wxBrushStyle::Stipple) && (m_brush.GetStipple()->IsOk()))
     {
         if (m_brush.GetStipple()->GetPixmap())
         {
@@ -1820,7 +1820,7 @@ void wxWindowDCImpl::SetBrush( const wxBrush &brush )
         }
     }
 
-    if ((m_brush.GetStyle() == wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE) && (m_brush.GetStipple()->GetMask()))
+    if ((m_brush.GetStyle() == wxBrushStyle::StippleMaskOpaque) && (m_brush.GetStipple()->GetMask()))
     {
         gdk_gc_set_fill( m_textGC, GDK_OPAQUE_STIPPLED);
         gdk_gc_set_stipple( m_textGC, m_brush.GetStipple()->GetMask()->m_bitmap );
@@ -1829,7 +1829,7 @@ void wxWindowDCImpl::SetBrush( const wxBrush &brush )
     if (m_brush.IsHatch())
     {
         gdk_gc_set_fill( m_brushGC, GDK_STIPPLED );
-        int num = m_brush.GetStyle() - wxBRUSHSTYLE_BDIAGONAL_HATCH;
+        int num = m_brush.GetStyle() - wxBrushStyle::BDiagonalHatch;
         gdk_gc_set_stipple( m_brushGC, hatches[num] );
     }
 }
@@ -1857,7 +1857,7 @@ void wxWindowDCImpl::SetBackground( const wxBrush &brush )
 
     gdk_gc_set_fill( m_bgGC, GDK_SOLID );
 
-    if ((m_backgroundBrush.GetStyle() == wxBRUSHSTYLE_STIPPLE) && (m_backgroundBrush.GetStipple()->IsOk()))
+    if ((m_backgroundBrush.GetStyle() == wxBrushStyle::Stipple) && (m_backgroundBrush.GetStipple()->IsOk()))
     {
         if (m_backgroundBrush.GetStipple()->GetPixmap())
         {
@@ -1874,7 +1874,7 @@ void wxWindowDCImpl::SetBackground( const wxBrush &brush )
     if (m_backgroundBrush.IsHatch())
     {
         gdk_gc_set_fill( m_bgGC, GDK_STIPPLED );
-        int num = m_backgroundBrush.GetStyle() - wxBRUSHSTYLE_BDIAGONAL_HATCH;
+        int num = m_backgroundBrush.GetStyle() - wxBrushStyle::BDiagonalHatch;
         gdk_gc_set_stipple( m_bgGC, hatches[num] );
     }
 }
@@ -1963,7 +1963,7 @@ void wxWindowDCImpl::SetTextBackground( const wxColour &col )
     }
 }
 
-void wxWindowDCImpl::SetBackgroundMode( int mode )
+void wxWindowDCImpl::SetBackgroundMode( wxBrushStyle mode )
 {
     wxCHECK_RET( IsOk(), wxT("invalid window dc") );
 
@@ -1974,10 +1974,10 @@ void wxWindowDCImpl::SetBackgroundMode( int mode )
     // CMB 21/7/98: fill style of cross-hatch brushes is affected by
     // transparent/solid background mode
 
-    if (m_brush.GetStyle() != wxBRUSHSTYLE_SOLID && m_brush.GetStyle() != wxBRUSHSTYLE_TRANSPARENT)
+    if (m_brush.GetStyle() != wxBrushStyle::Solid && m_brush.GetStyle() != wxBrushStyle::Transparent)
     {
         gdk_gc_set_fill( m_brushGC,
-          (m_backgroundMode == wxBRUSHSTYLE_TRANSPARENT) ? GDK_STIPPLED : GDK_OPAQUE_STIPPLED);
+          (m_backgroundMode == wxBrushStyle::Transparent) ? GDK_STIPPLED : GDK_OPAQUE_STIPPLED);
     }
 }
 

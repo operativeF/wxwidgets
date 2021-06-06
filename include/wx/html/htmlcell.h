@@ -91,7 +91,7 @@ enum wxHtmlSelectionState
 class WXDLLIMPEXP_HTML wxHtmlRenderingState
 {
 public:
-    wxHtmlRenderingState()  { m_bgMode = wxBRUSHSTYLE_SOLID; }
+    wxHtmlRenderingState()  { m_bgMode = wxBrushStyle::Solid; }
 
     void SetSelectionState(wxHtmlSelectionState s) { m_selState = s; }
     wxHtmlSelectionState GetSelectionState() const { return m_selState; }
@@ -100,13 +100,14 @@ public:
     const wxColour& GetFgColour() const { return m_fgColour; }
     void SetBgColour(const wxColour& c) { m_bgColour = c; }
     const wxColour& GetBgColour() const { return m_bgColour; }
-    void SetBgMode(int m) { m_bgMode = m; }
-    int GetBgMode() const { return m_bgMode; }
+    void SetBgMode(wxBrushStyle m) { m_bgMode = m; }
+    wxBrushStyle GetBgMode() const { return m_bgMode; }
 
 private:
     wxHtmlSelectionState  m_selState{wxHTML_SEL_OUT};
-    wxColour              m_fgColour, m_bgColour;
-    int                   m_bgMode;
+    wxColour              m_fgColour;
+    wxColour              m_bgColour;
+    wxBrushStyle          m_bgMode;
 };
 
 

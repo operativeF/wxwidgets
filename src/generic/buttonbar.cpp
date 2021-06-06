@@ -497,7 +497,7 @@ void wxButtonToolBar::OnPaint(wxPaintEvent& WXUNUSED(event))
     wxPaintDC dc(this);
 
     dc.SetFont(GetFont());
-    dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+    dc.SetBackgroundMode(wxBrushStyle::Transparent);
 
     for ( wxToolBarToolsList::compatibility_iterator node = m_tools.GetFirst();
           node;

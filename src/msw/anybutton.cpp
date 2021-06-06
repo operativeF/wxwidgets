@@ -1448,7 +1448,7 @@ bool wxAnyButton::MSWOnDraw(WXDRAWITEMSTRUCT *wxdis)
                             : wxColourToRGB(GetForegroundColour());
 
         wxTextColoursChanger changeFg(hdc, colFg, CLR_INVALID);
-        wxBkModeChanger changeBkMode(hdc, wxBRUSHSTYLE_TRANSPARENT);
+        wxBkModeChanger changeBkMode(hdc, wxBrushStyle::Transparent);
 
 #if wxUSE_MARKUP
         if ( m_markupText )

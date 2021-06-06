@@ -31,7 +31,7 @@ class WXDLLIMPEXP_CORE wxBrush: public wxBrushBase
 public:
     wxBrush() { }
 
-    wxBrush( const wxColour &colour, wxBrushStyle style = wxBRUSHSTYLE_SOLID );
+    wxBrush( const wxColour &colour, wxBrushStyle style = wxBrushStyle::Solid );
     wxBrush( const wxBitmap &stippleBitmap );
     virtual ~wxBrush();
 

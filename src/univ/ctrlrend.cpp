@@ -65,7 +65,7 @@ wxControlRenderer::wxControlRenderer(wxWindow *window,
 
 void wxControlRenderer::DrawLabel()
 {
-    m_dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+    m_dc.SetBackgroundMode(wxBrushStyle::Transparent);
     m_dc.SetFont(m_window->GetFont());
     m_dc.SetTextForeground(m_window->GetForegroundColour());
 
@@ -86,7 +86,7 @@ void wxControlRenderer::DrawLabel()
 void wxControlRenderer::DrawButtonLabel(const wxBitmap& bitmap,
                                         wxCoord marginX, wxCoord marginY)
 {
-    m_dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+    m_dc.SetBackgroundMode(wxBrushStyle::Transparent);
     m_dc.SetFont(m_window->GetFont());
     m_dc.SetTextForeground(m_window->GetForegroundColour());
 

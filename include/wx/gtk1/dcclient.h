@@ -89,7 +89,7 @@ public:
     virtual void SetLogicalFunction( wxRasterOperationMode function );
     virtual void SetTextForeground( const wxColour &col );
     virtual void SetTextBackground( const wxColour &col );
-    virtual void SetBackgroundMode( int mode );
+    virtual void SetBackgroundMode( wxBrushStyle mode );
     virtual void SetPalette( const wxPalette& palette );
 
     virtual void DoSetClippingRegion( wxCoord x, wxCoord y, wxCoord width, wxCoord height );

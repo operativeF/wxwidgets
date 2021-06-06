@@ -485,37 +485,37 @@ const wxBrush* wxStockGDI::GetBrush(Item item)
         switch (item)
         {
         case BRUSH_BLACK:
-            brush = new wxBrush(*GetColour(COLOUR_BLACK), wxBRUSHSTYLE_SOLID);
+            brush = new wxBrush(*GetColour(COLOUR_BLACK), wxBrushStyle::Solid);
             break;
         case BRUSH_BLUE:
-            brush = new wxBrush(*GetColour(COLOUR_BLUE), wxBRUSHSTYLE_SOLID);
+            brush = new wxBrush(*GetColour(COLOUR_BLUE), wxBrushStyle::Solid);
             break;
         case BRUSH_CYAN:
-            brush = new wxBrush(*GetColour(COLOUR_CYAN), wxBRUSHSTYLE_SOLID);
+            brush = new wxBrush(*GetColour(COLOUR_CYAN), wxBrushStyle::Solid);
             break;
         case BRUSH_GREEN:
-            brush = new wxBrush(*GetColour(COLOUR_GREEN), wxBRUSHSTYLE_SOLID);
+            brush = new wxBrush(*GetColour(COLOUR_GREEN), wxBrushStyle::Solid);
             break;
         case BRUSH_YELLOW:
-            brush = new wxBrush(*GetColour(COLOUR_YELLOW), wxBRUSHSTYLE_SOLID);
+            brush = new wxBrush(*GetColour(COLOUR_YELLOW), wxBrushStyle::Solid);
             break;
         case BRUSH_GREY:
-            brush = new wxBrush(wxColour(wxT("GREY")), wxBRUSHSTYLE_SOLID);
+            brush = new wxBrush(wxColour(wxT("GREY")), wxBrushStyle::Solid);
             break;
         case BRUSH_LIGHTGREY:
-            brush = new wxBrush(*GetColour(COLOUR_LIGHTGREY), wxBRUSHSTYLE_SOLID);
+            brush = new wxBrush(*GetColour(COLOUR_LIGHTGREY), wxBrushStyle::Solid);
             break;
         case BRUSH_MEDIUMGREY:
-            brush = new wxBrush(wxColour(wxT("MEDIUM GREY")), wxBRUSHSTYLE_SOLID);
+            brush = new wxBrush(wxColour(wxT("MEDIUM GREY")), wxBrushStyle::Solid);
             break;
         case BRUSH_RED:
-            brush = new wxBrush(*GetColour(COLOUR_RED), wxBRUSHSTYLE_SOLID);
+            brush = new wxBrush(*GetColour(COLOUR_RED), wxBrushStyle::Solid);
             break;
         case BRUSH_TRANSPARENT:
-            brush = new wxBrush(*GetColour(COLOUR_BLACK), wxBRUSHSTYLE_TRANSPARENT);
+            brush = new wxBrush(*GetColour(COLOUR_BLACK), wxBrushStyle::Transparent);
             break;
         case BRUSH_WHITE:
-            brush = new wxBrush(*GetColour(COLOUR_WHITE), wxBRUSHSTYLE_SOLID);
+            brush = new wxBrush(*GetColour(COLOUR_WHITE), wxBrushStyle::Solid);
             break;
         default:
             wxFAIL;

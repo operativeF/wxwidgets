@@ -90,7 +90,7 @@ public:
     virtual void SetPen(const wxPen& pen);
     virtual void SetBrush(const wxBrush& brush);
     virtual void SetBackground(const wxBrush& brush);
-    virtual void SetBackgroundMode(int mode);
+    virtual void SetBackgroundMode(wxBrushStyle mode);
     virtual void SetPalette(const wxPalette& palette);
     virtual void SetLogicalFunction( wxRasterOperationMode function );
 

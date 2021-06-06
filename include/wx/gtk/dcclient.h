@@ -85,7 +85,7 @@ public:
     void SetLogicalFunction( wxRasterOperationMode function ) override;
     void SetTextForeground( const wxColour &col ) override;
     void SetTextBackground( const wxColour &col ) override;
-    void SetBackgroundMode( int mode ) override;
+    void SetBackgroundMode( wxBrushStyle mode ) override;
 
 #if wxUSE_PALETTE
     void SetPalette( const wxPalette& palette ) override;

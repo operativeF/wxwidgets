@@ -2098,7 +2098,7 @@ int wxPropertyGrid::DoDrawItems( wxDC& dc,
 
     wxBrush marginBrush(m_colMargin);
     wxPen marginPen(m_colMargin);
-    wxBrush capbgbrush(m_colCapBack,wxBRUSHSTYLE_SOLID);
+    wxBrush capbgbrush(m_colCapBack,wxBrushStyle::Solid);
     wxPen linepen(m_colLine,1,wxPENSTYLE_SOLID);
 
     // pen that has same colour as text

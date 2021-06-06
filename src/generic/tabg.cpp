@@ -200,7 +200,7 @@ void wxTabControl::OnDraw(wxDC& dc, bool lastInRow)
 
   wxColour col(m_view->GetTextColour());
   dc.SetTextForeground(col);
-  dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+  dc.SetBackgroundMode(wxBrushStyle::Transparent);
   wxCoord textWidth, textHeight;
   dc.GetTextExtent(GetLabel(), &textWidth, &textHeight);
 
@@ -471,7 +471,7 @@ void wxTabControl::OnDraw(wxDC& dc, bool lastInRow)
 
     wxColour col(m_view->GetTextColour());
     dc.SetTextForeground(col);
-    dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+    dc.SetBackgroundMode(wxBrushStyle::Transparent);
     long textWidth, textHeight;
     dc.GetTextExtent(GetLabel(), &textWidth, &textHeight);
 

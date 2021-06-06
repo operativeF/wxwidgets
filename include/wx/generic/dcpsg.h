@@ -78,7 +78,7 @@ public:
 
     void ComputeScaleAndOrigin() override;
 
-    void SetBackgroundMode(int WXUNUSED(mode)) override { }
+    void SetBackgroundMode(wxBrushStyle WXUNUSED(mode)) override { }
 #if wxUSE_PALETTE
     void SetPalette(const wxPalette& WXUNUSED(palette)) override { }
 #endif

@@ -145,7 +145,7 @@ public:
         {
             // Setting the background colour is not enough, we must also change
             // the mode to ensure that it is actually used.
-            m_dc.SetBackgroundMode(wxBRUSHSTYLE_SOLID);
+            m_dc.SetBackgroundMode(wxBrushStyle::Solid);
             m_dc.SetTextBackground(attr.background);
         }
     }
@@ -168,7 +168,7 @@ public:
                 // should actually be made transparent and in this case the
                 // actual value of background colour doesn't matter but we also
                 // restore it just in case, see comment in the ctor.
-                m_dc.SetBackgroundMode(wxBRUSHSTYLE_TRANSPARENT);
+                m_dc.SetBackgroundMode(wxBrushStyle::Transparent);
                 background = m_origTextBackground;
             }
 
@@ -259,7 +259,7 @@ public:
         const wxSize extent = m_dc.GetTextExtent(text);
 
         // DrawItemText() ignores background color, so render it ourselves
-        if ( m_dc.GetBackgroundMode() == wxBRUSHSTYLE_SOLID)
+        if ( m_dc.GetBackgroundMode() == wxBrushStyle::Solid)
         {
 #if wxUSE_GRAPHICS_CONTEXT
             // Prefer to use wxGraphicsContext because it supports alpha channel; fall back to wxDC

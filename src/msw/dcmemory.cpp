@@ -158,7 +158,7 @@ static void wxDrawRectangle(wxDC& dc, wxCoord x, wxCoord y, wxCoord width, wxCoo
 {
     wxBrush brush(dc.GetBrush());
     wxPen pen(dc.GetPen());
-    if (brush.IsOk() && brush.GetStyle() != wxBRUSHSTYLE_TRANSPARENT)
+    if (brush.IsOk() && brush.GetStyle() != wxBrushStyle::Transparent)
     {
         HBRUSH hBrush = (HBRUSH) brush.GetResourceHandle() ;
         if (hBrush)
@@ -188,7 +188,7 @@ void wxMemoryDCImpl::DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoor
     // (visible with e.g. 70x70 rectangle on a memory DC; see Drawing sample)
 #if wxUSE_MEMORY_DC_DRAW_RECTANGLE
     if (m_brush.IsOk() && m_pen.IsOk() &&
-        (m_brush.GetStyle() == wxBRUSHSTYLE_SOLID || m_brush.GetStyle() == wxBRUSHSTYLE_TRANSPARENT) &&
+        (m_brush.GetStyle() == wxBrushStyle::Solid || m_brush.GetStyle() == wxBrushStyle::Transparent) &&
         (m_pen.GetStyle() == wxPENSTYLE_SOLID || m_pen.GetStyle() == wxPENSTYLE_TRANSPARENT) &&
         (GetLogicalFunction() == wxCOPY))
     {

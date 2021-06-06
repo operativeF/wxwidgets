@@ -63,7 +63,7 @@ void wxPrinterDCImpl::SetBackground(const wxBrush& WXUNUSED(brush))
 {
 }
 
-void wxPrinterDCImpl::SetBackgroundMode(int WXUNUSED(mode))
+void wxPrinterDCImpl::SetBackgroundMode(wxBrushStyle WXUNUSED(mode))
 {
 }
 

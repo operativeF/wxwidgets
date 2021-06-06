@@ -52,7 +52,7 @@ void wxHtmlLineCell::Draw(wxDC& dc, int x, int y,
                           int WXUNUSED(view_y1), int WXUNUSED(view_y2),
                           wxHtmlRenderingInfo& WXUNUSED(info))
 {
-    wxBrush mybrush(wxT("GREY"), (m_HasShading) ? wxBRUSHSTYLE_TRANSPARENT : wxBRUSHSTYLE_SOLID);
+    wxBrush mybrush(wxT("GREY"), (m_HasShading) ? wxBrushStyle::Transparent : wxBrushStyle::Solid);
     wxPen mypen(wxT("GREY"), 1, wxPENSTYLE_SOLID);
     dc.SetBrush(mybrush);
     dc.SetPen(mypen);

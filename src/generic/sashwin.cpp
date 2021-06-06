@@ -446,7 +446,7 @@ void wxSashWindow::DrawSash(wxSashEdgePosition edge, wxDC& dc)
     wxSize client_size = GetClientSize();
 
     wxPen facePen(m_faceColour, 1, wxPENSTYLE_SOLID);
-    wxBrush faceBrush(m_faceColour, wxBRUSHSTYLE_SOLID);
+    wxBrush faceBrush(m_faceColour, wxBrushStyle::Solid);
     wxPen mediumShadowPen(m_mediumShadowColour, 1, wxPENSTYLE_SOLID);
     wxPen darkShadowPen(m_darkShadowColour, 1, wxPENSTYLE_SOLID);
     wxPen lightShadowPen(m_lightShadowColour, 1, wxPENSTYLE_SOLID);

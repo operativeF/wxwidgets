@@ -1280,7 +1280,7 @@ wxGraphicsPen wxQtGraphicsRenderer::CreatePen(const wxGraphicsPenInfo& info)
 wxGraphicsBrush wxQtGraphicsRenderer::CreateBrush(const wxBrush& brush)
 {
     wxGraphicsBrush p;
-    if ( brush.IsOk() && brush.GetStyle() != wxBRUSHSTYLE_TRANSPARENT )
+    if ( brush.IsOk() && brush.GetStyle() != wxBrushStyle::Transparent )
     {
         p.SetRefData(new wxQtBrushData(this, brush));
     }

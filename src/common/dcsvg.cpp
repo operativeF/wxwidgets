@@ -106,23 +106,23 @@ wxString GetPenStroke(const wxColour& c, int style = wxPENSTYLE_SOLID)
     return s;
 }
 
-wxString GetBrushFill(const wxColour& c, int style = wxBRUSHSTYLE_SOLID)
+wxString GetBrushFill(const wxColour& c, wxBrushStyle style = wxBrushStyle::Solid)
 {
     float opacity;
     wxString s = wxS("fill:") + Col2SVG(c, &opacity) + wxS(";");
 
     switch ( style )
     {
-        case wxBRUSHSTYLE_SOLID:
-        case wxBRUSHSTYLE_BDIAGONAL_HATCH:
-        case wxBRUSHSTYLE_FDIAGONAL_HATCH:
-        case wxBRUSHSTYLE_CROSSDIAG_HATCH:
-        case wxBRUSHSTYLE_CROSS_HATCH:
-        case wxBRUSHSTYLE_VERTICAL_HATCH:
-        case wxBRUSHSTYLE_HORIZONTAL_HATCH:
+        case wxBrushStyle::Solid:
+        case wxBrushStyle::BDiagonalHatch:
+        case wxBrushStyle::FDiagonalHatch:
+        case wxBrushStyle::CrossDiagHatch:
+        case wxBrushStyle::CrossHatch:
+        case wxBrushStyle::VerticalHatch:
+        case wxBrushStyle::HorizontalHatch:
             s += wxString::Format(wxS(" fill-opacity:%s;"), NumStr(opacity));
             break;
-        case wxBRUSHSTYLE_TRANSPARENT:
+        case wxBrushStyle::Transparent:
             s += wxS(" fill-opacity:0.0;");
             break;
         default:
@@ -241,32 +241,32 @@ wxString GetBrushStyleName(const wxBrush& brush)
 
     switch (brush.GetStyle())
     {
-        case wxBRUSHSTYLE_BDIAGONAL_HATCH:
+        case wxBrushStyle::BDiagonalHatch:
             brushStyle = wxS("BdiagonalHatch");
             break;
-        case wxBRUSHSTYLE_FDIAGONAL_HATCH:
+        case wxBrushStyle::FDiagonalHatch:
             brushStyle = wxS("FdiagonalHatch");
             break;
-        case wxBRUSHSTYLE_CROSSDIAG_HATCH:
+        case wxBrushStyle::CrossDiagHatch:
             brushStyle = wxS("CrossDiagHatch");
             break;
-        case wxBRUSHSTYLE_CROSS_HATCH:
+        case wxBrushStyle::CrossHatch:
             brushStyle = wxS("CrossHatch");
             break;
-        case wxBRUSHSTYLE_VERTICAL_HATCH:
+        case wxBrushStyle::VerticalHatch:
             brushStyle = wxS("VerticalHatch");
             break;
-        case wxBRUSHSTYLE_HORIZONTAL_HATCH:
+        case wxBrushStyle::HorizontalHatch:
             brushStyle = wxS("HorizontalHatch");
             break;
-        case wxBRUSHSTYLE_STIPPLE_MASK_OPAQUE:
-        case wxBRUSHSTYLE_STIPPLE_MASK:
-        case wxBRUSHSTYLE_STIPPLE:
+        case wxBrushStyle::StippleMaskOpaque:
+        case wxBrushStyle::StippleMask:
+        case wxBrushStyle::Stipple:
             wxASSERT_MSG(false, wxS("wxSVGFileDC::Requested Brush Fill not available"));
             break;
-        case wxBRUSHSTYLE_SOLID:
-        case wxBRUSHSTYLE_TRANSPARENT:
-        case wxBRUSHSTYLE_INVALID:
+        case wxBrushStyle::Solid:
+        case wxBrushStyle::Transparent:
+        case wxBrushStyle::Invalid:
             // these brushstyles do not need a fill.
             break;
     }
@@ -321,22 +321,22 @@ wxString CreateBrushFill(const wxBrush& brush, wxSVGShapeRenderingMode mode)
         wxString pattern;
         switch (brush.GetStyle())
         {
-            case wxBRUSHSTYLE_BDIAGONAL_HATCH:
+            case wxBrushStyle::BDiagonalHatch:
                 pattern = wxS("d=\"M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2\"");
                 break;
-            case wxBRUSHSTYLE_FDIAGONAL_HATCH:
+            case wxBrushStyle::FDiagonalHatch:
                 pattern = wxS("d=\"M7,-1 l2,2 M0,0 l8,8 M-1,7 l2,2\"");
                 break;
-            case wxBRUSHSTYLE_CROSSDIAG_HATCH:
+            case wxBrushStyle::CrossDiagHatch:
                 pattern = wxS("d=\"M7,-1 l2,2 M0,0 l8,8 M-1,7 l2,2 M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2\"");
                 break;
-            case wxBRUSHSTYLE_CROSS_HATCH:
+            case wxBrushStyle::CrossHatch:
                 pattern = wxS("d=\"M4,0 l0,8 M0,4 l8,0\"");
                 break;
-            case wxBRUSHSTYLE_VERTICAL_HATCH:
+            case wxBrushStyle::VerticalHatch:
                 pattern = wxS("d=\"M4,0 l0,8\"");
                 break;
-            case wxBRUSHSTYLE_HORIZONTAL_HATCH:
+            case wxBrushStyle::HorizontalHatch:
                 pattern = wxS("d=\"M0,4 l8,0\"");
                 break;
             default:
@@ -727,7 +727,7 @@ void wxSVGFileDCImpl::DoDrawRotatedText(const wxString& sText, wxCoord x, wxCoor
         const double xText = xRect + (hh - desc) * sin(rad);
         const double yText = yRect + (hh - desc) * cos(rad);
 
-        if (m_backgroundMode == wxBRUSHSTYLE_SOLID)
+        if (m_backgroundMode == wxBrushStyle::Solid)
         {
             // draw text background
             const wxString rectStyle = wxString::Format(
@@ -921,7 +921,7 @@ void wxSVGFileDCImpl::DoDrawArc(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, 
     {
         // comply to wxDC specs by drawing closing line if brush is not transparent
         wxString line;
-        if (GetBrush().GetStyle() != wxBRUSHSTYLE_TRANSPARENT)
+        if (GetBrush().GetStyle() != wxBrushStyle::Transparent)
             line = wxString::Format(wxS("L%d %d z"), xc, yc);
 
         s = wxString::Format(wxS("  <path d=\"M%d %d A%s %s 0 %d %d %d %d %s"),
@@ -1008,7 +1008,7 @@ void wxSVGFileDCImpl::DoDrawEllipticArc(wxCoord x, wxCoord y, wxCoord w, wxCoord
     // to the start point of the arc.
     // First draw the arc with the current brush, without a border,
     // then draw the border without filling the arc.
-    if (GetBrush().GetStyle() != wxBRUSHSTYLE_TRANSPARENT)
+    if (GetBrush().GetStyle() != wxBrushStyle::Transparent)
     {
         wxDCPenChanger setTransp(*GetOwner(), *wxTRANSPARENT_PEN);
         NewGraphicsIfNeeded();
@@ -1206,7 +1206,7 @@ void wxSVGFileDCImpl::SetBackground(const wxBrush& brush)
     m_backgroundBrush = brush;
 }
 
-void wxSVGFileDCImpl::SetBackgroundMode(int mode)
+void wxSVGFileDCImpl::SetBackgroundMode(wxBrushStyle mode)
 {
     m_backgroundMode = mode;
 }

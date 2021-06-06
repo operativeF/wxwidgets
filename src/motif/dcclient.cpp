@@ -197,7 +197,7 @@ wxWindowDCImpl::wxWindowDCImpl(wxDC *owner, wxWindow *window)
 
     m_backgroundPixel = gcvalues.background;
 
-    SetBackground(wxBrush(m_window->GetBackgroundColour(), wxBRUSHSTYLE_SOLID));
+    SetBackground(wxBrush(m_window->GetBackgroundColour(), wxBrushStyle::Solid));
 }
 
 wxWindowDCImpl::~wxWindowDCImpl()
@@ -346,7 +346,7 @@ void wxWindowDCImpl::DoDrawArc( wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, 
     while (alpha2 > 360 * 64)
         alpha2 -= 360 * 64;
 
-    if (m_brush.IsOk() && m_brush.GetStyle () != wxBRUSHSTYLE_TRANSPARENT)
+    if (m_brush.IsOk() && m_brush.GetStyle () != wxBrushStyle::Transparent)
     {
         SetBrush (m_brush);
         XFillArc ((Display*) m_display, (Pixmap) m_pixmap, (GC) (GC) m_gc,
@@ -393,7 +393,7 @@ void wxWindowDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord width, wxC
     if (end>start) end-=start;
     else end+=360*64-start;
 
-    if (m_brush.IsOk() && m_brush.GetStyle () != wxBRUSHSTYLE_TRANSPARENT)
+    if (m_brush.IsOk() && m_brush.GetStyle () != wxBrushStyle::Transparent)
     {
         m_autoSetting = true;    // must be reset
 
@@ -487,7 +487,7 @@ void wxWindowDCImpl::DoDrawPolygon( int n, const wxPoint points[],
     xpoints2[i].x = xpoints2[0].x;
     xpoints2[i].y = xpoints2[0].y;
 
-    if (m_brush.IsOk() && m_brush.GetStyle () != wxBRUSHSTYLE_TRANSPARENT)
+    if (m_brush.IsOk() && m_brush.GetStyle () != wxBrushStyle::Transparent)
     {
         SetBrush (m_brush);
         XSetFillRule ((Display*) m_display, (GC) m_gc, fillStyle == wxODDEVEN_RULE ? EvenOddRule : WindingRule);
@@ -533,7 +533,7 @@ void wxWindowDCImpl::DoDrawRectangle( wxCoord x, wxCoord y, wxCoord width, wxCoo
     if (wd < 0) { wd = - wd; xd = xd - wd; }
     if (hd < 0) { hd = - hd; yd = yd - hd; }
 
-    if (m_brush.IsOk() && m_brush.GetStyle () != wxBRUSHSTYLE_TRANSPARENT)
+    if (m_brush.IsOk() && m_brush.GetStyle () != wxBrushStyle::Transparent)
     {
         SetBrush (m_brush);
         XFillRectangle ((Display*) m_display, (Pixmap) m_pixmap, (GC) m_gc, xd, yd, wfd, hfd);
@@ -611,7 +611,7 @@ void wxWindowDCImpl::DoDrawRoundedRectangle( wxCoord x, wxCoord y, wxCoord width
     int rw_d2 = rd2 * 2;
     int rh_d2 = rw_d2;
 
-    if (m_brush.IsOk() && m_brush.GetStyle () != wxBRUSHSTYLE_TRANSPARENT)
+    if (m_brush.IsOk() && m_brush.GetStyle () != wxBrushStyle::Transparent)
     {
         SetBrush (m_brush);
 
@@ -745,7 +745,7 @@ void wxWindowDCImpl::DoDrawEllipse( wxCoord x, wxCoord y, wxCoord width, wxCoord
     wd = XLOG2DEVREL(width) ;
     hd = YLOG2DEVREL(height) ;
 
-    if (m_brush.IsOk() && m_brush.GetStyle () != wxBRUSHSTYLE_TRANSPARENT)
+    if (m_brush.IsOk() && m_brush.GetStyle () != wxBrushStyle::Transparent)
     {
         SetBrush (m_brush);
         XFillArc ((Display*) m_display, (Pixmap) m_pixmap, (GC) m_gc, xd, yd, wd, hd, 0, angle);
@@ -1048,7 +1048,7 @@ void wxWindowDCImpl::DoDrawText( const wxString &text, wxCoord x, wxCoord y )
 
     // First draw a rectangle representing the text background, if a text
     // background is specified
-    if (m_textBackgroundColour.IsOk () && (m_backgroundMode != wxBRUSHSTYLE_TRANSPARENT))
+    if (m_textBackgroundColour.IsOk () && (m_backgroundMode != wxBrushStyle::Transparent))
     {
         wxColour oldPenColour = m_currentColour;
         m_currentColour = m_textBackgroundColour;
@@ -1243,7 +1243,7 @@ void wxWindowDCImpl::DoDrawRotatedText( const wxString &text, wxCoord x, wxCoord
             {
                 bool textPixel = image.GetRed(sx, sy) == 0;
 
-                if (!textPixel && m_backgroundMode != wxBRUSHSTYLE_SOLID)
+                if (!textPixel && m_backgroundMode != wxBrushStyle::Solid)
                     continue;
 
                 wxCoord ox = (wxCoord) (x1 + rx),
@@ -1710,7 +1710,7 @@ void wxWindowDCImpl::SetPen( const wxPen &pen )
     {
         int fill_style;
 
-        if (m_currentFill == wxBRUSHSTYLE_STIPPLE)
+        if (m_currentFill == wxBrushStyle::Stipple)
             fill_style = FillStippled;
         else if (IS_HATCH (m_currentFill))
             fill_style = FillStippled;
@@ -1751,7 +1751,7 @@ void wxWindowDCImpl::SetBrush( const wxBrush &brush )
 
     m_brush = brush;
 
-    if (!m_brush.IsOk() || m_brush.GetStyle () == wxBRUSHSTYLE_TRANSPARENT)
+    if (!m_brush.IsOk() || m_brush.GetStyle () == wxBrushStyle::Transparent)
         return;
 
     int oldFill = m_currentFill;
@@ -1760,7 +1760,7 @@ void wxWindowDCImpl::SetBrush( const wxBrush &brush )
     m_autoSetting |= 0x1;
 
     m_currentFill = m_brush.GetStyle ();
-    if (m_currentFill == wxBRUSHSTYLE_STIPPLE)
+    if (m_currentFill == wxBrushStyle::Stipple)
         m_currentStipple = * m_brush.GetStipple ();
 
     wxColour oldBrushColour(m_currentColour);
@@ -1778,17 +1778,17 @@ void wxWindowDCImpl::SetBrush( const wxBrush &brush )
     {
         switch (brush.GetStyle ())
         {
-        case wxBRUSHSTYLE_TRANSPARENT:
+        case wxBrushStyle::Transparent:
             break;
-        case wxBRUSHSTYLE_STIPPLE:
+        case wxBrushStyle::Stipple:
             stippleDepth = m_currentStipple.GetDepth();
             // fall through!
-        case wxBRUSHSTYLE_BDIAGONAL_HATCH:
-        case wxBRUSHSTYLE_CROSSDIAG_HATCH:
-        case wxBRUSHSTYLE_FDIAGONAL_HATCH:
-        case wxBRUSHSTYLE_CROSS_HATCH:
-        case wxBRUSHSTYLE_HORIZONTAL_HATCH:
-        case wxBRUSHSTYLE_VERTICAL_HATCH:
+        case wxBrushStyle::BDiagonalHatch:
+        case wxBrushStyle::CrossDiagHatch:
+        case wxBrushStyle::FDiagonalHatch:
+        case wxBrushStyle::CrossHatch:
+        case wxBrushStyle::HorizontalHatch:
+        case wxBrushStyle::VerticalHatch:
             {
                 if (stippleDepth == -1) stippleDepth = 1;
 
@@ -1796,7 +1796,7 @@ void wxWindowDCImpl::SetBrush( const wxBrush &brush )
                 // determine whether fill style should be solid or
                 // transparent
                 int style = stippleDepth == 1 ?
-                    (m_backgroundMode == wxBRUSHSTYLE_SOLID ?
+                    (m_backgroundMode == wxBrushStyle::Solid ?
                      FillOpaqueStippled : FillStippled) :
                     FillTiled;
                 XSetFillStyle ((Display*) m_display, (GC) m_gc, style);
@@ -1804,7 +1804,7 @@ void wxWindowDCImpl::SetBrush( const wxBrush &brush )
                     XSetFillStyle ((Display*) m_display,(GC) m_gcBacking, style);
             }
             break;
-        case wxBRUSHSTYLE_SOLID:
+        case wxBrushStyle::Solid:
         default:
             XSetFillStyle ((Display*) m_display, (GC) m_gc, FillSolid);
             if (m_window && m_window->GetBackingPixmap())
@@ -1870,7 +1870,7 @@ void wxWindowDCImpl::SetBrush( const wxBrush &brush )
     }
     // X can forget the stipple value when resizing a window (apparently)
     // so always set the stipple.
-    else if (m_currentFill != wxBRUSHSTYLE_SOLID && m_currentFill != wxBRUSHSTYLE_TRANSPARENT &&
+    else if (m_currentFill != wxBrushStyle::Solid && m_currentFill != wxBrushStyle::Transparent &&
              m_currentStipple.IsOk()) // && m_currentStipple != oldStipple)
     {
         if (m_currentStipple.GetDepth() == 1)
@@ -2013,7 +2013,7 @@ void wxWindowDCImpl::SetTextBackground( const wxColour &col )
     m_textBackgroundColour = col;
 }
 
-void wxWindowDCImpl::SetBackgroundMode( int mode )
+void wxWindowDCImpl::SetBackgroundMode( wxBrushStyle mode )
 {
     m_backgroundMode = mode;
 }

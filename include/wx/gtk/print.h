@@ -245,7 +245,7 @@ public:
     bool CanGetTextExtent() const override { return true; }
     wxSize GetPPI() const override;
     int GetDepth() const override { return 24; }
-    void SetBackgroundMode(int mode) override;
+    void SetBackgroundMode(wxBrushStyle mode) override;
 #if wxUSE_PALETTE
     void SetPalette(const wxPalette& WXUNUSED(palette)) override { }
 #endif

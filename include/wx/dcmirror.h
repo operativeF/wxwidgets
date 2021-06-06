@@ -42,7 +42,7 @@ public:
     void SetBrush(const wxBrush& brush) override { m_dc.SetBrush(brush); }
     void SetBackground(const wxBrush& brush) override
         { m_dc.SetBackground(brush); }
-    void SetBackgroundMode(int mode) override { m_dc.SetBackgroundMode(mode); }
+    void SetBackgroundMode(wxBrushStyle mode) override { m_dc.SetBackgroundMode(mode); }
 #if wxUSE_PALETTE
     void SetPalette(const wxPalette& palette) override
         { m_dc.SetPalette(palette); }
