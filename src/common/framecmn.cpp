@@ -209,16 +209,15 @@ wxPoint wxFrameBase::GetClientAreaOrigin() const
     wxToolBar *toolbar = GetToolBar();
     if ( toolbar && toolbar->IsShown() )
     {
-        int w, h;
-        toolbar->GetSize(&w, &h);
+        wxSize toolbarSize = toolbar->GetSize();
 
         if ( toolbar->GetWindowStyleFlag() & wxTB_VERTICAL )
         {
-            pt.x += w;
+            pt.x += toolbarSize.x;
         }
         else
         {
-            pt.y += h;
+            pt.y += toolbarSize.y;
         }
     }
 #endif // wxUSE_TOOLBAR

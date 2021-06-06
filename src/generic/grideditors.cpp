@@ -119,11 +119,11 @@ void wxGridCellEditorEvtHandler::OnChar(wxKeyEvent& event)
     int row = m_grid->GetGridCursorRow();
     int col = m_grid->GetGridCursorCol();
     wxRect rect = m_grid->CellToRect( row, col );
-    int cw, ch;
-    m_grid->GetGridWindow()->GetClientSize( &cw, &ch );
+
+    wxSize client_size = m_grid->GetGridWindow()->GetClientSize();
 
     // if cell width is smaller than grid client area, cell is wholly visible
-    bool wholeCellVisible = (rect.GetWidth() < cw);
+    bool wholeCellVisible = (rect.GetWidth() < client_size.x);
 
     switch ( event.GetKeyCode() )
     {

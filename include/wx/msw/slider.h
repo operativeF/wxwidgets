@@ -112,8 +112,8 @@ protected:
 
 
     // overridden base class virtuals
-    void DoGetPosition(int *x, int *y) const override;
-    void DoGetSize(int *width, int *height) const override;
+    wxPoint DoGetPosition() const override;
+    wxSize DoGetSize() const override;
     void DoMoveWindow(int x, int y, int width, int height) override;
     wxSize DoGetBestSize() const override;
 

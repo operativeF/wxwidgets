@@ -309,9 +309,9 @@ protected:
 
     // no need to do client to screen translation to get our position in screen
     // coordinates: this is already the case
-    void DoGetScreenPosition(int *x, int *y) const override
+    wxPoint DoGetScreenPosition() const override
     {
-        DoGetPosition(x, y);
+        return DoGetPosition();
     }
 
     // test whether this window makes part of the frame

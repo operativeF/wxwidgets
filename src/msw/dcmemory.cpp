@@ -133,17 +133,15 @@ void wxMemoryDCImpl::DoSelect( const wxBitmap& bitmap )
     }
 }
 
-void wxMemoryDCImpl::DoGetSize(int *width, int *height) const
+wxSize wxMemoryDCImpl::DoGetSize() const
 {
     if ( m_selectedBitmap.IsOk() )
     {
-        *width = m_selectedBitmap.GetWidth();
-        *height = m_selectedBitmap.GetHeight();
+        return { m_selectedBitmap.GetWidth() , m_selectedBitmap.GetHeight() };
     }
     else
     {
-        *width = 0;
-        *height = 0;
+        return { 0, 0 };
     }
 }
 

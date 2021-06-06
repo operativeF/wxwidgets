@@ -1531,10 +1531,9 @@ protected:
         DoSizing();
     }
 
-    void DoGetClientSize(int* x, int* y) const override
+    wxSize DoGetClientSize() const override
     {
-        *x = m_rect.width;
-        *y = m_rect.height;
+        return {m_rect.width, m_rect.height};
     }
 
 public:
@@ -1606,12 +1605,9 @@ public:
     }
 
 protected:
-    void DoGetSize(int* x, int* y) const override
+    wxSize DoGetSize() const override
     {
-        if (x)
-            *x = m_rect.GetWidth();
-        if (y)
-            *y = m_rect.GetHeight();
+        return {m_rect.GetWidth(), m_rect.GetHeight()};
     }
 
 public:

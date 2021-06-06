@@ -569,7 +569,7 @@ void wxTopLevelWindowX11::DoSetSize(int x, int y, int width, int height, int siz
 #endif
 }
 
-void wxTopLevelWindowX11::DoGetPosition(int *x, int *y) const
+wxPoint wxTopLevelWindowX11::DoGetPosition() const
 {
     XSync(wxGlobalDisplay(), False);
     Window window = (Window) m_mainWindow;
@@ -606,13 +606,11 @@ void wxTopLevelWindowX11::DoGetPosition(int *x, int *y) const
     Status status = XGetWindowAttributes( wxGlobalDisplay(), parent_window, & attr);
     if (status)
     {
-        if (x) *x = attr.x;
-        if (y) *y = attr.y;
+        return {attr.x, attr.y};
     }
     else
     {
-        if (x) *x = 0;
-        if (y) *y = 0;
+        return {0, 0};
     }
 #endif
 }

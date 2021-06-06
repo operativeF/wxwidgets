@@ -138,18 +138,18 @@ bool wxStatusBarGeneric::Create(wxWindow *parent,
 
 wxSize wxStatusBarGeneric::DoGetBestSize() const
 {
-    int width, height;
+    wxSize best_size;
 
     // best width is the width of the parent
     if (GetParent())
-        GetParent()->GetClientSize(&width, nullptr);
+        best_size.x = GetParent()->GetClientSize().x;
     else
-        width = 80;     // a dummy value
+        best_size.x = 80;     // a dummy value
 
     // best height is as calculated above in Create()
-    height = (int)((11*GetCharHeight())/10 + 2*GetBorderY());
+    best_size.y = (int)((11*GetCharHeight())/10 + 2*GetBorderY());
 
-    return wxSize(width, height);
+    return best_size;
 }
 
 void wxStatusBarGeneric::DoUpdateStatusText(int number)
@@ -385,15 +385,14 @@ void wxStatusBarGeneric::SetMinHeight(int height)
 
 wxRect wxStatusBarGeneric::GetSizeGripRect() const
 {
-    int width, height;
-    wxWindow::DoGetClientSize(&width, &height);
+    wxSize client_size = wxWindow::DoGetClientSize();
 
 #ifndef __WXGTK3__
     if (GetLayoutDirection() == wxLayout_RightToLeft)
-        return wxRect(2, 2, height-2, height-4);
+        return wxRect(2, 2, client_size.y - 2, client_size.y - 4);
 #endif
 
-        return wxRect(width-height-2, 2, height-2, height-4);
+        return wxRect(client_size.x - client_size.y - 2, 2, client_size.y - 2, client_size.y - 4);
 }
 
 // ----------------------------------------------------------------------------

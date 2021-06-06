@@ -4022,21 +4022,24 @@ wxSize wxWindowGTK::DoGetBorderSize() const
     return wxSize(border.left + border.right, border.top + border.bottom);
 }
 
-void wxWindowGTK::DoGetPosition( int *x, int *y ) const
+wxPoint wxWindowGTK::DoGetPosition() const
 {
     int dx = 0;
     int dy = 0;
-    GtkWidget* parent = NULL;
+
+    GtkWidget* parent = nullptr;
+
     if (m_widget)
         parent = gtk_widget_get_parent(m_widget);
+
     if (WX_IS_PIZZA(parent))
     {
         wxPizza* pizza = WX_PIZZA(parent);
         dx = pizza->m_scroll_x;
         dy = pizza->m_scroll_y;
     }
-    if (x) (*x) = m_x - dx;
-    if (y) (*y) = m_y - dy;
+
+    return {m_x - dx, m_y - dy};
 }
 
 void wxWindowGTK::DoClientToScreen( int *x, int *y ) const
@@ -4051,20 +4054,22 @@ void wxWindowGTK::DoClientToScreen( int *x, int *y ) const
     if ((!m_isGtkPositionValid || source == NULL) && !IsTopLevel() && m_parent)
     {
         m_parent->DoClientToScreen(x, y);
-        int xx, yy;
-        DoGetPosition(&xx, &yy);
+
+        wxPoint pos = DoGetPosition();
+
         if (m_wxwindow)
         {
             GtkBorder border;
             WX_PIZZA(m_wxwindow)->get_border(border);
-            xx += border.left;
-            yy += border.top;
+            pos.x += border.left;
+            pos.y += border.top;
         }
-        if (y) *y += yy;
+
+        if (y) *y += pos.y;
         if (x)
         {
             if (GetLayoutDirection() != wxLayout_RightToLeft)
-                *x += xx;
+                *x += pos.x;
             else
             {
                 int w;
@@ -4073,7 +4078,7 @@ void wxWindowGTK::DoClientToScreen( int *x, int *y ) const
                 *x = w - *x;
 
                 DoGetClientSize(&w, NULL);
-                *x += xx;
+                *x += pos.x;
                 *x = w - *x;
             }
         }
@@ -4125,29 +4130,29 @@ void wxWindowGTK::DoScreenToClient( int *x, int *y ) const
     if ((!m_isGtkPositionValid || source == NULL) && !IsTopLevel() && m_parent)
     {
         m_parent->DoScreenToClient(x, y);
-        int xx, yy;
-        DoGetPosition(&xx, &yy);
+
+        wxPoint pos = DoGetPosition();
+
         if (m_wxwindow)
         {
             GtkBorder border;
             WX_PIZZA(m_wxwindow)->get_border(border);
-            xx += border.left;
-            yy += border.top;
+            pos.x += border.left;
+            pos.y += border.top;
         }
-        if (y) *y -= yy;
+        if (y) *y -= pos.y;
         if (x)
         {
             if (GetLayoutDirection() != wxLayout_RightToLeft)
-                *x -= xx;
+                *x -= pos.x;
             else
             {
-                int w;
                 // undo RTL conversion done by parent
-                static_cast<wxWindowGTK*>(m_parent)->DoGetClientSize(&w, NULL);
+                int w = static_cast<wxWindowGTK*>(m_parent)->DoGetClientSize().x;
                 *x = w - *x;
 
-                DoGetClientSize(&w, NULL);
-                *x -= xx;
+                wxSize client_size = DoGetClientSize().x;
+                *x -= pos.x;
                 *x = w - *x;
             }
         }

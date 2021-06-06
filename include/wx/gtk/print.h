@@ -293,7 +293,7 @@ protected:
                      wxCoord *externalLeading = NULL,
                      const wxFont *theFont = NULL ) const override;
     bool DoGetPartialTextExtents(const wxString& text, wxArrayInt& widths) const override;
-    void DoGetSize(int* width, int* height) const override;
+    wxSize DoGetSize() const override;
     void DoGetSizeMM(int *width, int *height) const override;
 
     wxPrintData& GetPrintData() { return m_printData; }

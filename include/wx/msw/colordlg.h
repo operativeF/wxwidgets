@@ -54,9 +54,9 @@ protected:
     // FIXME: Protected Init()
     void Init();
 
-    void DoGetPosition( int *x, int *y ) const override;
-    void DoGetSize(int *width, int *height) const override;
-    void DoGetClientSize(int *width, int *height) const override;
+    wxPoint DoGetPosition() const override;
+    wxSize DoGetSize() const override;
+    wxSize DoGetClientSize() const override;
     void DoMoveWindow(int x, int y, int width, int height) override;
     void DoCentre(int dir) override;
 

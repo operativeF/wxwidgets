@@ -26,7 +26,7 @@ public:
 
     // override some base class virtuals
     void DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord height) override;
-    void DoGetSize(int* width, int* height) const override;
+    wxSize DoGetSize() const override;
     void DoSelect(const wxBitmap& bitmap) override;
 
     wxBitmap DoGetAsBitmap(const wxRect* subrect) const override

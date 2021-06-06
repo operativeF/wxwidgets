@@ -145,7 +145,7 @@ public:
                               long style = wxVSCROLL | wxHSCROLL) override;
 
 protected:
-    void DoGetClientSize(int *width, int *height) const override;
+    wxSize DoGetClientSize() const override;
 
     wxDECLARE_DYNAMIC_CLASS(wxMDIClientWindow);
 };

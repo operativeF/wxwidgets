@@ -165,7 +165,7 @@ protected:
                            int sizeFlags = wxSIZE_AUTO) override;
 
     void DoSetClientSize(int width, int height) override;
-    void DoGetClientSize(int *width, int *height) const override;
+    wxSize DoGetClientSize() const override;
 
     // string shown in the title bar
     wxString m_title;

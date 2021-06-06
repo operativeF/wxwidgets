@@ -1684,11 +1684,9 @@ void wxPropertyGridManager::RecreateControls()
         m_pTxtHelpContent = nullptr;
     }
 
-    int width, height;
+    wxSize client_size = GetClientSize();
 
-    GetClientSize(&width,&height);
-
-    RecalculatePositions(width,height);
+    RecalculatePositions(client_size.x, client_size.y);
 
     if ( was_shown )
         Show ( true );
@@ -1971,19 +1969,16 @@ void wxPropertyGridManager::OnColWidthsChanged(wxPropertyGridEvent& WXUNUSED(evt
 
 void wxPropertyGridManager::OnResize( wxSizeEvent& WXUNUSED(event) )
 {
-    int width, height;
-
-    GetClientSize(&width, &height);
+    wxSize client_size = GetClientSize();
 
     if ( m_width == -12345 )
         RecreateControls();
 
-    RecalculatePositions(width, height);
+    RecalculatePositions(client_size.x, client_size.y);
 
     if ( m_pPropGrid && m_pPropGrid->GetParent() )
     {
-        int pgWidth, pgHeight;
-        m_pPropGrid->GetClientSize(&pgWidth, &pgHeight);
+        int pgWidth = m_pPropGrid->GetClientSize().x;
 
         // Regenerate splitter positions for non-current pages
         for ( unsigned int i=0; i<GetPageCount(); i++ )

@@ -2530,12 +2530,9 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
     return success;
 }
 
-void wxMSWDCImpl::GetDeviceSize(int *width, int *height) const
+wxSize wxMSWDCImpl::GetDeviceSize() const
 {
-    if ( width )
-        *width = ::GetDeviceCaps(GetHdc(), HORZRES);
-    if ( height )
-        *height = ::GetDeviceCaps(GetHdc(), VERTRES);
+    return {::GetDeviceCaps(GetHdc(), HORZRES), ::GetDeviceCaps(GetHdc(), VERTRES)};
 }
 
 void wxMSWDCImpl::DoGetSizeMM(int *w, int *h) const
@@ -2544,8 +2541,7 @@ void wxMSWDCImpl::DoGetSizeMM(int *w, int *h) const
     // results returned by GetDeviceCaps(HORZ/VERTSIZE) as was done before, it
     // will also work for wxWindowDC and wxClientDC even though their size is
     // not the same as the total size of the screen
-    int wPixels, hPixels;
-    DoGetSize(&wPixels, &hPixels);
+    wxSize px_sz = DoGetSize();
 
     if ( w )
     {
@@ -2553,7 +2549,7 @@ void wxMSWDCImpl::DoGetSizeMM(int *w, int *h) const
 
         wxCHECK_RET( wTotal, wxT("0 width device?") );
 
-        *w = (wPixels * ::GetDeviceCaps(GetHdc(), HORZSIZE)) / wTotal;
+        *w = (px_sz.x * ::GetDeviceCaps(GetHdc(), HORZSIZE)) / wTotal;
     }
 
     if ( h )
@@ -2562,7 +2558,7 @@ void wxMSWDCImpl::DoGetSizeMM(int *w, int *h) const
 
         wxCHECK_RET( hTotal, wxT("0 height device?") );
 
-        *h = (hPixels * ::GetDeviceCaps(GetHdc(), VERTSIZE)) / hTotal;
+        *h = (px_sz.y * ::GetDeviceCaps(GetHdc(), VERTSIZE)) / hTotal;
     }
 }
 

@@ -60,7 +60,7 @@ protected:
     // common part of wxDialog/wxFrame destructors
     void PreDestroy();
 
-    virtual void DoGetPosition(int* x, int* y) const;
+    virtual wxPoint DoGetPosition() const;
     virtual void DoSetSizeHints(int minW, int minH,
                                 int maxW, int maxH,
                                 int incW, int incH);

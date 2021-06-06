@@ -265,12 +265,9 @@ wxString wxColourDialog::GetTitle() const
 // position/size
 // ----------------------------------------------------------------------------
 
-void wxColourDialog::DoGetPosition(int *x, int *y) const
+wxPoint wxColourDialog::DoGetPosition() const
 {
-    if ( x )
-        *x = gs_rectDialog.x;
-    if ( y )
-        *y = gs_rectDialog.y;
+    return {gs_rectDialog.x, gs_rectDialog.y};
 }
 
 void wxColourDialog::DoCentre(int dir)
@@ -305,20 +302,14 @@ void wxColourDialog::DoMoveWindow(int x, int y, int WXUNUSED(w), int WXUNUSED(h)
     }
 }
 
-void wxColourDialog::DoGetSize(int *width, int *height) const
+wxSize wxColourDialog::DoGetSize() const
 {
-    if ( width )
-        *width = gs_rectDialog.width;
-    if ( height )
-        *height = gs_rectDialog.height;
+    return {gs_rectDialog.width, gs_rectDialog.height};
 }
 
-void wxColourDialog::DoGetClientSize(int *width, int *height) const
+wxSize wxColourDialog::DoGetClientSize() const
 {
-    if ( width )
-        *width = gs_rectDialog.width;
-    if ( height )
-        *height = gs_rectDialog.height;
+    return {gs_rectDialog.width, gs_rectDialog.height};
 }
 
 void wxColourDialog::MSWOnInitDone(WXHWND hDlg)

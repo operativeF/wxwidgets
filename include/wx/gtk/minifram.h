@@ -48,7 +48,7 @@ protected:
     virtual void DoSetSizeHints( int minW, int minH,
                                  int maxW, int maxH,
                                  int incW, int incH ) override;
-    void DoGetClientSize(int* width, int* height) const override;
+    wxSize DoGetClientSize() const override;
 
  // implementation
 public:

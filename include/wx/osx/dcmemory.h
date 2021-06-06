@@ -22,7 +22,7 @@ public:
 
     virtual ~wxMemoryDCImpl();
 
-    void DoGetSize( int *width, int *height ) const override;
+    wxSize DoGetSize() const override;
     wxBitmap DoGetAsBitmap(const wxRect *subrect) const override
        { return subrect == NULL ? GetSelectedBitmap() : GetSelectedBitmap().GetSubBitmap(*subrect); }
     void DoSelect(const wxBitmap& bitmap) override;

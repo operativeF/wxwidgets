@@ -182,17 +182,15 @@ void wxFrame::DoSetClientSize(int width, int height)
 }
 
 // Get size *available for subwindows* i.e. excluding menu bar, toolbar etc.
-void wxFrame::DoGetClientSize(int *x, int *y) const
+wxSize wxFrame::DoGetClientSize() const
 {
-    wxTopLevelWindow::DoGetClientSize(x, y);
+    wxSize client_size = wxTopLevelWindow::DoGetClientSize();
 
     // account for the possible toolbar
     wxPoint pt = GetClientAreaOrigin();
-    if ( x )
-        *x -= pt.x;
 
-    if ( y )
-        *y -= pt.y;
+    client_size.x -= pt.x;
+    client_size.y -= pt.y;
 
 #if wxUSE_TOOLBAR
     wxToolBar * const toolbar = GetToolBar();
@@ -203,13 +201,11 @@ void wxFrame::DoGetClientSize(int *x, int *y) const
             const wxSize sizeTB = toolbar->GetSize();
             if ( toolbar->HasFlag(wxTB_RIGHT) )
             {
-                if ( x )
-                    *x -= sizeTB.x;
+                client_size.x -= sizeTB.x;
             }
             else // wxTB_BOTTOM
             {
-                if ( y )
-                    *y -= sizeTB.y;
+                client_size.y -= sizeTB.y;
             }
         }
         //else: toolbar already taken into account by GetClientAreaOrigin()
@@ -218,15 +214,15 @@ void wxFrame::DoGetClientSize(int *x, int *y) const
 
 #if wxUSE_STATUSBAR
     // adjust client area height to take the status bar into account
-    if ( y )
+
+    wxStatusBar *statbar = GetStatusBar();
+    if ( statbar && statbar->IsShown() )
     {
-        wxStatusBar *statbar = GetStatusBar();
-        if ( statbar && statbar->IsShown() )
-        {
-            *y -= statbar->GetSize().y;
-        }
+        client_size.y -= statbar->GetSize().y;
     }
 #endif // wxUSE_STATUSBAR
+
+    return client_size;
 }
 
 // ----------------------------------------------------------------------------
@@ -284,8 +280,7 @@ void wxFrame::PositionStatusBar()
     if ( !m_frameStatusBar || !m_frameStatusBar->IsShown() )
         return;
 
-    int w, h;
-    GetClientSize(&w, &h);
+    wxSize client_size = GetClientSize();
 
     int x = 0;
 #if wxUSE_TOOLBAR
@@ -300,12 +295,12 @@ void wxFrame::PositionStatusBar()
             if ( directionTB == wxTB_LEFT )
                 x -= sizeTB.x;
 
-            w += sizeTB.x;
+            client_size.x += sizeTB.x;
         }
         else if ( directionTB == wxTB_BOTTOM )
         {
             // we need to position the status bar below the toolbar
-            h += sizeTB.y;
+            client_size.y += sizeTB.y;
         }
         //else: no adjustments necessary for the toolbar on top
     }
@@ -316,23 +311,21 @@ void wxFrame::PositionStatusBar()
     // window changes, the statusbar height will likely change so we need to
     // account for this difference. If not, the statusbar will be positioned
     // too high or low.
-    int shOld;
-    m_frameStatusBar->GetSize(nullptr, &shOld);
+    int shOld = m_frameStatusBar->GetSize().y;
 
     // Resize the status bar to its default height, as it could have been set
     // to a wrong value before by WM_SIZE sent during the frame creation and
     // our status bars preserve their programmatically set size to avoid being
     // resized by DefWindowProc() to the full window width, so if we didn't do
     // this here, the status bar would retain the possibly wrong current height.
-    m_frameStatusBar->SetSize(x, h, w, wxDefaultCoord, wxSIZE_AUTO_HEIGHT);
+    m_frameStatusBar->SetSize(x, client_size.y, client_size.x, wxDefaultCoord, wxSIZE_AUTO_HEIGHT);
 
-    int sh;
-    m_frameStatusBar->GetSize(nullptr, &sh);
-    h += shOld - sh;
+    int sh = m_frameStatusBar->GetSize().y;
+    client_size.y += shOld - sh;
 
     // Since we wish the status bar to be directly under the client area,
     // we use the adjusted sizes without using wxSIZE_NO_ADJUSTMENTS.
-    m_frameStatusBar->SetSize(x, h, w, sh);
+    m_frameStatusBar->SetSize(x, client_size.y, client_size.x, sh);
 }
 
 #endif // wxUSE_STATUSBAR
@@ -566,30 +559,28 @@ void wxFrame::PositionToolBar()
     {
         // don't call our (or even wxTopLevelWindow) version because we want
         // the real (full) client area size, not excluding the tool/status bar
-        int width, height;
-        wxWindow::DoGetClientSize(&width, &height);
+        wxSize client_size = wxWindow::DoGetClientSize();
 
 #if wxUSE_STATUSBAR
         wxStatusBar *statbar = GetStatusBar();
         if ( statbar && statbar->IsShown() )
         {
-            height -= statbar->GetClientSize().y;
+            client_size.y -= statbar->GetClientSize().y;
         }
 #endif // wxUSE_STATUSBAR
 
-        int tx, ty, tw, th;
-        toolbar->GetPosition( &tx, &ty );
-        toolbar->GetBestSize( &tw, &th );
+        wxPoint toolbarPos = toolbar->GetPosition();
+        wxSize toolbarSize = toolbar->GetBestSize();
 
         int x, y;
         if ( toolbar->HasFlag(wxTB_BOTTOM) )
         {
             x = 0;
-            y = height - th;
+            y = client_size.y - toolbarSize.y;
         }
         else if ( toolbar->HasFlag(wxTB_RIGHT) )
         {
-            x = width - tw;
+            x = client_size.x - toolbarSize.x;
             y = 0;
         }
         else // left or top
@@ -600,24 +591,24 @@ void wxFrame::PositionToolBar()
 
         if ( toolbar->HasFlag(wxTB_BOTTOM) )
         {
-            if ( ty < 0 && ( -ty == th ) )
-                ty = height - th;
-            if ( tx < 0 && (-tx == tw ) )
-                tx = 0;
+            if ( toolbarPos.y < 0 && ( -toolbarPos.y == toolbarSize.y ) )
+                toolbarPos.y = client_size.y - toolbarSize.y;
+            if ( toolbarPos.x < 0 && (-toolbarPos.x == toolbarSize.x ) )
+                toolbarPos.x = 0;
         }
         else if ( toolbar->HasFlag(wxTB_RIGHT) )
         {
-            if( ty < 0 && ( -ty == th ) )
-                ty = 0;
-            if( tx < 0 && ( -tx == tw ) )
-                tx = width - tw;
+            if( toolbarPos.y < 0 && ( -toolbarPos.y == toolbarSize.y ) )
+                toolbarPos.y = 0;
+            if( toolbarPos.x < 0 && ( -toolbarPos.x == toolbarSize.x ) )
+                toolbarPos.x = client_size.x - toolbarSize.x;
         }
         else // left or top
         {
-            if (ty < 0 && (-ty == th))
-                ty = 0;
-            if (tx < 0 && (-tx == tw))
-                tx = 0;
+            if (toolbarPos.y < 0 && (-toolbarPos.y == toolbarSize.y))
+                toolbarPos.y = 0;
+            if (toolbarPos.x < 0 && (-toolbarPos.x == toolbarSize.x))
+                toolbarPos.x = 0;
         }
 
         int desiredW,
@@ -625,13 +616,13 @@ void wxFrame::PositionToolBar()
 
         if ( toolbar->IsVertical() )
         {
-            desiredW = tw;
-            desiredH = height;
+            desiredW = toolbarSize.x;
+            desiredH = client_size.y;
         }
         else
         {
-            desiredW = width;
-            desiredH = th;
+            desiredW = client_size.x;
+            desiredH = toolbarSize.y;
         }
 
         // use the 'real' MSW position here, don't offset relatively to the

@@ -192,7 +192,7 @@ public:
                                wxRasterOperationMode = wxCOPY, bool useMask = false,
                                wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) override;
 
-    void DoGetSize(int *,int *) const override;
+    wxSize DoGetSize() const override;
     void DoGetSizeMM(int* width, int* height) const override;
 
     void DoDrawLines(int n, const wxPoint points[],

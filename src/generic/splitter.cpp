@@ -566,8 +566,7 @@ void wxSplitterWindow::DrawSash(wxDC& dc)
 // Draw the sash tracker (for whilst moving the sash)
 void wxSplitterWindow::DrawSashTracker(int x, int y)
 {
-    int w, h;
-    GetClientSize(&w, &h);
+    wxSize client_size = GetClientSize();
 
     wxScreenDC screenDC;
     int x1, y1;
@@ -575,15 +574,15 @@ void wxSplitterWindow::DrawSashTracker(int x, int y)
 
     if ( m_splitMode == wxSPLIT_VERTICAL )
     {
-        x1 = x2 = wxClip(x, 0, w) + m_sashTrackerPen->GetWidth()/2;
+        x1 = x2 = wxClip(x, 0, client_size.x) + m_sashTrackerPen->GetWidth()/2;
         y1 = 2;
-        y2 = h-2;
+        y2 = client_size.y - 2;
     }
     else
     {
-        y1 = y2 = wxClip(y, 0, h) + m_sashTrackerPen->GetWidth()/2;
+        y1 = y2 = wxClip(y, 0, client_size.y) + m_sashTrackerPen->GetWidth()/2;
         x1 = 2;
-        x2 = w-2;
+        x2 = client_size.x-2;
     }
 
     ClientToScreen(&x1, &y1);
@@ -696,13 +695,12 @@ void wxSplitterWindow::SizeWindows()
         }
     }
 
-    int w, h;
-    GetClientSize(&w, &h);
+    wxSize client_size = GetClientSize();
 
     if ( GetWindow1() && !GetWindow2() )
     {
         GetWindow1()->SetSize(GetBorderSize(), GetBorderSize(),
-                              w - 2*GetBorderSize(), h - 2*GetBorderSize());
+                              client_size.x - 2*GetBorderSize(), client_size.y - 2*GetBorderSize());
     }
     else if ( GetWindow1() && GetWindow2() )
     {
@@ -716,10 +714,10 @@ void wxSplitterWindow::SizeWindows()
         if ( GetSplitMode() == wxSPLIT_VERTICAL )
         {
             w1 = size1;
-            w2 = w - 2*border - sash - w1;
+            w2 = client_size.x - 2*border - sash - w1;
             if (w2 < 0)
                 w2 = 0;
-            h2 = h - 2*border;
+            h2 = client_size.y - 2*border;
             if (h2 < 0)
                 h2 = 0;
             h1 = h2;
@@ -728,12 +726,12 @@ void wxSplitterWindow::SizeWindows()
         }
         else // horz splitter
         {
-            w2 = w - 2*border;
+            w2 = client_size.x - 2*border;
             if (w2 < 0)
                 w2 = 0;
             w1 = w2;
             h1 = size1;
-            h2 = h - 2*border - sash - h1;
+            h2 = client_size.y - 2*border - sash - h1;
             if (h2 < 0)
                 h2 = 0;
             x2 = border;

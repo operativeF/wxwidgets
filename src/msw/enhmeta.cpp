@@ -227,7 +227,7 @@ public:
     wxEnhMetaFile *Close();
 
 protected:
-    void DoGetSize(int *width, int *height) const override;
+    wxSize DoGetSize() const override;
 
 private:
     void Create(HDC hdcRef,
@@ -295,12 +295,9 @@ void wxEnhMetaFileDCImpl::Create(HDC hdcRef,
     }
 }
 
-void wxEnhMetaFileDCImpl::DoGetSize(int *width, int *height) const
+wxSize wxEnhMetaFileDCImpl::DoGetSize() const
 {
-    if ( width )
-        *width = m_width;
-    if ( height )
-        *height = m_height;
+    return {m_width, m_height};
 }
 
 wxEnhMetaFile *wxEnhMetaFileDCImpl::Close()

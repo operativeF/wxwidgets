@@ -67,7 +67,8 @@ bool wxHtmlHelpDialog::Create(wxWindow* parent, wxWindowID id,
     m_HtmlHelpWin->Create(this, wxID_ANY, wxDefaultPosition, GetClientSize(),
         wxTAB_TRAVERSAL|wxNO_BORDER, style);
 
-    GetPosition(& (m_HtmlHelpWin->GetCfgData().x), & (m_HtmlHelpWin->GetCfgData()).y);
+    m_HtmlHelpWin->GetCfgData().x = GetPosition().x;
+    m_HtmlHelpWin->GetCfgData().y = GetPosition().y;
 
     SetIcon(wxArtProvider::GetIcon(wxART_HELP, wxART_HELP_BROWSER));
 
@@ -109,8 +110,10 @@ void wxHtmlHelpDialog::OnCloseWindow(wxCloseEvent& evt)
 {
     if (!IsIconized())
     {
-        GetSize(& (m_HtmlHelpWin->GetCfgData().w), &(m_HtmlHelpWin->GetCfgData().h));
-        GetPosition(& (m_HtmlHelpWin->GetCfgData().x), & (m_HtmlHelpWin->GetCfgData().y));
+        m_HtmlHelpWin->GetCfgData().w = GetSize().x;
+        m_HtmlHelpWin->GetCfgData().h = GetSize().y;
+        m_HtmlHelpWin->GetCfgData().x = GetPosition().x;
+        m_HtmlHelpWin->GetCfgData().y = GetPosition().y;
     }
 
     if (m_HtmlHelpWin->GetSplitterWindow() && m_HtmlHelpWin->GetCfgData().navig_on)

@@ -28,7 +28,7 @@ public:
     static int         sm_overlayWindowY;
 
 protected:
-    virtual void DoGetSize(int *width, int *height) const;
+    virtual wxSize DoGetSize() const;
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxScreenDCImpl);

@@ -737,9 +737,9 @@ void wxGenericCalendarCtrl::DoMoveWindow(int x, int y, int width, int height)
     wxControl::DoMoveWindow(x, y + yDiff, width, height - yDiff);
 }
 
-void wxGenericCalendarCtrl::DoGetSize(int *width, int *height) const
+wxSize wxGenericCalendarCtrl::DoGetSize() const
 {
-    wxControl::DoGetSize( width, height );
+    return wxControl::DoGetSize();
 }
 
 void wxGenericCalendarCtrl::RecalcGeometry()

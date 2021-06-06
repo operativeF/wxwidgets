@@ -305,7 +305,7 @@ wxHtmlPrintout::CheckFit(const wxSize& pageArea, const wxSize& docArea) const
 
 void wxHtmlPrintout::OnPreparePrinting()
 {
-    int pageWidth, pageHeight, mm_w, mm_h, dc_w, dc_h;
+    int pageWidth, pageHeight, mm_w, mm_h;
     float ppmm_h, ppmm_v;
 
     GetPageSizePixels(&pageWidth, &pageHeight);
@@ -320,10 +320,10 @@ void wxHtmlPrintout::OnPreparePrinting()
     GetPPIScreen(&ppiScreenX, &ppiScreenY);
     wxUnusedVar(ppiScreenX);
 
-    GetDC()->GetSize(&dc_w, &dc_h);
+    wxSize dcSize = GetDC()->GetSize();
 
-    GetDC()->SetUserScale((double)dc_w / (double)pageWidth,
-                          (double)dc_h / (double)pageHeight);
+    GetDC()->SetUserScale((double)dcSize.x / (double)pageWidth,
+                          (double)dcSize.y / (double)pageHeight);
 
     /* prepare headers/footers renderer: */
 
@@ -505,14 +505,15 @@ void wxHtmlPrintout::RenderPage(wxDC *dc, int page)
 {
     wxBusyCursor wait;
 
-    int pageWidth, pageHeight, mm_w, mm_h, dc_w, dc_h;
+    int pageWidth, pageHeight, mm_w, mm_h;
     float ppmm_h, ppmm_v;
 
     GetPageSizePixels(&pageWidth, &pageHeight);
     GetPageSizeMM(&mm_w, &mm_h);
     ppmm_h = (float)pageWidth / mm_w;
     ppmm_v = (float)pageHeight / mm_h;
-    dc->GetSize(&dc_w, &dc_h);
+
+    wxSize dcSize = dc->GetSize();
 
     int ppiPrinterX, ppiPrinterY;
     GetPPIPrinter(&ppiPrinterX, &ppiPrinterY);
@@ -521,8 +522,8 @@ void wxHtmlPrintout::RenderPage(wxDC *dc, int page)
     GetPPIScreen(&ppiScreenX, &ppiScreenY);
     wxUnusedVar(ppiScreenX);
 
-    dc->SetUserScale((double)dc_w / (double)pageWidth,
-                     (double)dc_h / (double)pageHeight);
+    dc->SetUserScale((double)dcSize.x / (double)pageWidth,
+                     (double)dcSize.y / (double)pageHeight);
 
     m_Renderer.SetDC(dc,
                       (double)ppiPrinterY / TYPICAL_SCREEN_DPI,

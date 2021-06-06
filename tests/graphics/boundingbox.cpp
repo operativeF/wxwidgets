@@ -179,11 +179,10 @@ void GCDCBoundingBoxTestCase::DrawLine()
 
 void GCDCBoundingBoxTestCase::CrossHair()
 {
-    int w, h;
-    m_gcdc->GetSize(&w, &h);
+    wxSize gcdcSize = m_gcdc->GetSize();
 
     m_gcdc->CrossHair(33, 33);
-    AssertBox(0, 0, w, h);
+    AssertBox(0, 0, gcdcSize.x, gcdcSize.y);
 }
 
 void GCDCBoundingBoxTestCase::DrawArc()

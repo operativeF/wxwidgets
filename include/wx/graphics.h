@@ -731,12 +731,10 @@ public:
     virtual bool SetCompositionMode(wxCompositionMode op) = 0;
 
     // returns the size of the graphics context in device coordinates
-    void GetSize(double* width, double* height) const
+    // FIXME: Point returned for size.
+    wxRealPoint GetSize() const
     {
-        if ( width )
-            *width = m_width;
-        if ( height )
-            *height = m_height;
+        return {m_width, m_height};
     }
 
     // returns the resolution of the graphics context in device points per inch

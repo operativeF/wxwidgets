@@ -740,21 +740,20 @@ wxSize wxWindowBase::DoGetBestSize() const
                 continue;
             }
 
-            int wx, wy, ww, wh;
-            win->GetPosition(&wx, &wy);
+            wxPoint wxpt = win->GetPosition();
 
             // if the window hadn't been positioned yet, assume that it is in
             // the origin
-            if ( wx == wxDefaultCoord )
-                wx = 0;
-            if ( wy == wxDefaultCoord )
-                wy = 0;
+            if ( wxpt.x == wxDefaultCoord )
+                wxpt.x = 0;
+            if ( wxpt.y == wxDefaultCoord )
+                wxpt.y = 0;
 
-            win->GetSize(&ww, &wh);
-            if ( wx + ww > maxX )
-                maxX = wx + ww;
-            if ( wy + wh > maxY )
-                maxY = wy + wh;
+            wxSize wxsz = win->GetSize();
+            if ( wxpt.x + wxsz.x > maxX )
+                maxX = wxsz.x + wxsz.x;
+            if ( wxpt.y + wxsz.y > maxY )
+                maxY = wxsz.y + wxsz.y;
         }
 
         best = wxSize(maxX, maxY);
@@ -1097,16 +1096,13 @@ wxSize wxWindowBase::DoGetVirtualSize() const
     return size;
 }
 
-void wxWindowBase::DoGetScreenPosition(int *x, int *y) const
+wxPoint wxWindowBase::DoGetScreenPosition() const
 {
     // screen position is the same as (0, 0) in client coords for non TLWs (and
     // TLWs override this method)
-    if ( x )
-        *x = 0;
-    if ( y )
-        *y = 0;
+    wxPoint pt;
 
-    ClientToScreen(x, y);
+    return ClientToScreen(pt);
 }
 
 void wxWindowBase::SendSizeEvent(int flags)
@@ -2702,40 +2698,38 @@ void wxWindowBase::MoveConstraint(int x, int y)
     }
 }
 
-void wxWindowBase::GetSizeConstraint(int *w, int *h) const
+wxSize wxWindowBase::GetSizeConstraint() const
 {
     wxLayoutConstraints *constr = GetConstraints();
     if ( constr )
     {
-        *w = constr->width.GetValue();
-        *h = constr->height.GetValue();
+        return { constr->width.GetValue(), constr->height.GetValue() };
     }
     else
-        GetSize(w, h);
+        return GetSize();
 }
 
-void wxWindowBase::GetClientSizeConstraint(int *w, int *h) const
+wxSize wxWindowBase::GetClientSizeConstraint() const
 {
     wxLayoutConstraints *constr = GetConstraints();
     if ( constr )
     {
-        *w = constr->width.GetValue();
-        *h = constr->height.GetValue();
+        return { constr->width.GetValue(), constr->height.GetValue() };
     }
     else
-        GetClientSize(w, h);
+        return GetClientSize();
 }
 
-void wxWindowBase::GetPositionConstraint(int *x, int *y) const
+wxPoint wxWindowBase::GetPositionConstraint() const
 {
     wxLayoutConstraints *constr = GetConstraints();
+
     if ( constr )
     {
-        *x = constr->left.GetValue();
-        *y = constr->top.GetValue();
+        return { constr->left.GetValue(), constr->top.GetValue() };
     }
     else
-        GetPosition(x, y);
+        return GetPosition();
 }
 
 #endif // wxUSE_CONSTRAINTS

@@ -885,12 +885,15 @@ void wxNotebook::OnSize(wxSizeEvent& event)
     // fit all the notebook pages to the tab control's display area
 
     RECT rc;
-    rc.left = rc.top = 0;
-    GetSize((int *)&rc.right, (int *)&rc.bottom);
+
+    rc.left = 0;
+    rc.top = 0;
+    rc.right = GetSize().x;
+    rc.bottom = GetSize().y;
 
     // save the total size, we'll use it below
-    int widthNbook = rc.right - rc.left,
-        heightNbook = rc.bottom - rc.top;
+    int widthNbook = rc.right - rc.left;
+    int heightNbook = rc.bottom - rc.top;
 
     // there seems to be a bug in the implementation of TabCtrl_AdjustRect(): it
     // returns completely false values for multiline tab controls after the tabs
@@ -926,9 +929,11 @@ void wxNotebook::OnSize(wxSizeEvent& event)
 
     (void)TabCtrl_AdjustRect(GetHwnd(), false, &rc);
 
-    int width = rc.right - rc.left,
-        height = rc.bottom - rc.top;
+    int width = rc.right - rc.left;
+    int height = rc.bottom - rc.top;
+
     size_t nCount = m_pages.size();
+
     for ( size_t nPage = 0; nPage < nCount; nPage++ ) {
         wxNotebookPage *pPage = m_pages[nPage];
         pPage->SetSize(rc.left, rc.top, width, height);

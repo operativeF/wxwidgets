@@ -105,7 +105,7 @@ protected:
 
     bool ProcessEvent(wxEvent& event) override;
 
-    void DoGetClientSize(int *width, int *height) const override;
+    wxSize DoGetClientSize() const override;
 
 private:
     void OnClose(wxCloseEvent& event);

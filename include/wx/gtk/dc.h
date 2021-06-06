@@ -30,7 +30,7 @@ public:
 #endif
     wxBitmap DoGetAsBitmap(const wxRect* subrect) const override;
     bool DoGetPixel(int x, int y, wxColour* col) const override;
-    void DoGetSize(int* width, int* height) const override;
+    wxSize DoGetSize() const override;
     bool DoStretchBlit(int xdest, int ydest, int dstWidth, int dstHeight, wxDC* source, int xsrc, int ysrc, int srcWidth, int srcHeight, wxRasterOperationMode rop, bool useMask, int xsrcMask, int ysrcMask) override;
     void* GetCairoContext() const override;
 

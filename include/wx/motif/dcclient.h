@@ -126,7 +126,7 @@ protected:
         wxCoord xoffset, wxCoord yoffset,
         wxPolygonFillMode fillStyle = wxODDEVEN_RULE);
 
-    void DoGetSize( int *width, int *height ) const;
+    wxSize DoGetSize() const;
 
     // common part of constructors
     void Init();

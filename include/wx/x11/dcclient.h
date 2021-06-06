@@ -38,7 +38,7 @@ public:
     virtual bool CanGetTextExtent() const { return true; }
 
 protected:
-    virtual void DoGetSize(int *width, int *height) const;
+    virtual wxSize DoGetSize() const;
     virtual bool DoFloodFill( wxCoord x, wxCoord y, const wxColour& col,
                               wxFloodFillStyle style = wxFLOOD_SURFACE );
     virtual bool DoGetPixel( wxCoord x, wxCoord y, wxColour *col ) const;
@@ -155,7 +155,7 @@ public:
     wxClientDCImpl( wxDC *owner, wxWindow *win );
 
 protected:
-    virtual void DoGetSize(int *width, int *height) const;
+    virtual wxSize DoGetSize() const;
 
 private:
     wxDECLARE_CLASS(wxClientDCImpl);

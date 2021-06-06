@@ -18,7 +18,7 @@ public:
     ~wxScreenDCImpl();
 
 protected:
-    void DoGetSize(int *width, int *height) const override;
+    wxSize DoGetSize() const override;
     QPixmap *GetQPixmap() override;
 
     wxDECLARE_ABSTRACT_CLASS(wxScreenDCImpl);

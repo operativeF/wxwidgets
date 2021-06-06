@@ -1760,8 +1760,7 @@ bool wxAuiToolBar::GetToolFitsByIndex(int tool_idx) const
     if (!m_items[tool_idx].m_sizerItem)
         return false;
 
-    int cli_w, cli_h;
-    GetClientSize(&cli_w, &cli_h);
+    wxSize client_size = GetClientSize();
 
     wxRect rect = m_items[tool_idx].m_sizerItem->GetRect();
 
@@ -1769,18 +1768,18 @@ bool wxAuiToolBar::GetToolFitsByIndex(int tool_idx) const
     {
         // take the dropdown size into account
         if (m_overflowVisible && m_overflowSizerItem)
-            cli_h -= m_overflowSizerItem->GetMinSize().y;
+            client_size.y -= m_overflowSizerItem->GetMinSize().y;
 
-        if (rect.y+rect.height < cli_h)
+        if (rect.y+rect.height < client_size.y)
             return true;
     }
     else
     {
         // take the dropdown size into account
         if (m_overflowVisible && m_overflowSizerItem)
-            cli_w -= m_overflowSizerItem->GetMinSize().x;
+            client_size.x -= m_overflowSizerItem->GetMinSize().x;
 
-        if (rect.x+rect.width < cli_w)
+        if (rect.x+rect.width < client_size.x)
             return true;
     }
 
@@ -2228,15 +2227,13 @@ void wxAuiToolBar::DoIdleUpdate()
 
 void wxAuiToolBar::OnSize(wxSizeEvent& WXUNUSED(evt))
 {
-    int x, y;
-    GetClientSize(&x, &y);
+    wxSize client_size = GetClientSize();
 
-    if (((x >= y) && m_absoluteMinSize.x > x) ||
-        ((y > x) && m_absoluteMinSize.y > y))
+    if (((client_size.x >= client_size.y) && m_absoluteMinSize.x > client_size.x) ||
+        ((client_size.y > client_size.x) && m_absoluteMinSize.y > client_size.y))
     {
         // hide all flexible items
-        size_t i, count;
-        for (i = 0, count = m_items.GetCount(); i < count; ++i)
+        for (int i = 0; i < m_items.GetCount(); ++i)
         {
             wxAuiToolBarItem& item = m_items.Item(i);
             if (item.m_sizerItem && item.m_proportion > 0 && item.m_sizerItem->IsShown())
@@ -2249,8 +2246,7 @@ void wxAuiToolBar::OnSize(wxSizeEvent& WXUNUSED(evt))
     else
     {
         // show all flexible items
-        size_t i, count;
-        for (i = 0, count = m_items.GetCount(); i < count; ++i)
+        for (int i = 0; i < m_items.GetCount(); ++i)
         {
             wxAuiToolBarItem& item = m_items.Item(i);
             if (item.m_sizerItem && item.m_proportion > 0 && !item.m_sizerItem->IsShown())
@@ -2261,7 +2257,7 @@ void wxAuiToolBar::OnSize(wxSizeEvent& WXUNUSED(evt))
         }
     }
 
-    m_sizer->SetDimension(0, 0, x, y);
+    m_sizer->SetDimension(0, 0, client_size.x, client_size.y);
 
     Refresh(false);
     Update();
@@ -2309,10 +2305,9 @@ void wxAuiToolBar::OnIdle(wxIdleEvent& evt)
                     GetOrientation(m_windowStyle) == wxBOTH)
             {
                 // changing orientation in OnSize causes havoc
-                int x, y;
-                GetClientSize(&x, &y);
+                wxSize client_size = GetClientSize();
 
-                if (x > y)
+                if (client_size.x > client_size.y)
                 {
                     newOrientation = wxHORIZONTAL;
                 }

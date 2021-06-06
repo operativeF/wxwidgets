@@ -128,7 +128,7 @@ protected:
                                      wxCoord width, wxCoord height);
     virtual void DoSetDeviceClippingRegion(const wxRegion& region);
 
-    virtual void DoGetSize(int *width, int *height) const;
+    virtual wxSize DoGetSize() const;
     virtual void DoGetSizeMM(int* width, int* height) const;
 
     virtual void DoDrawLines(int n, const wxPoint points[],

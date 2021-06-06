@@ -324,11 +324,9 @@ void wxSlider::Command (wxCommandEvent & event)
 wxRect wxSlider::GetBoundingBox() const
 {
     // take care not to call our own functions which would call us recursively
-    int x, y, w, h;
-    wxSliderBase::DoGetPosition(&x, &y);
-    wxSliderBase::DoGetSize(&w, &h);
 
-    wxRect rect(x, y, w, h);
+    wxRect rect(wxSliderBase::DoGetPosition(), wxSliderBase::DoGetSize());
+
     if ( m_labels )
     {
         wxRect lrect = m_labels->GetBoundingBox();
@@ -339,24 +337,18 @@ wxRect wxSlider::GetBoundingBox() const
     return rect;
 }
 
-void wxSlider::DoGetSize(int *width, int *height) const
+wxSize wxSlider::DoGetSize() const
 {
     wxRect rect = GetBoundingBox();
 
-    if ( width )
-        *width = rect.width;
-    if ( height )
-        *height = rect.height;
+    return {rect.width, rect.height};
 }
 
-void wxSlider::DoGetPosition(int *x, int *y) const
+wxPoint wxSlider::DoGetPosition() const
 {
     wxRect rect = GetBoundingBox();
 
-    if ( x )
-        *x = rect.x;
-    if ( y )
-        *y = rect.y;
+    return {rect.x, rect.y};
 }
 
 int wxSlider::GetLabelsSize(int *widthMin, int *widthMax) const

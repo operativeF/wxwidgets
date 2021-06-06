@@ -422,18 +422,12 @@ void wxNonOwnedWindow::DoMoveWindow(int x, int y, int width, int height)
     wxWindowMac::MacSuperChangedPosition() ; // like this only children will be notified
 }
 
-void wxNonOwnedWindow::DoGetPosition( int *x, int *y ) const
+wxPoint wxNonOwnedWindow::DoGetPosition() const
 {
     if ( m_nowpeer == NULL )
-        return;
+        return {0, 0};
 
-    int x1,y1 ;
-    m_nowpeer->GetPosition(x1, y1);
-
-    if (x)
-       *x = x1 ;
-    if (y)
-       *y = y1 ;
+    return m_nowpeer->GetPosition();
 }
 
 void wxNonOwnedWindow::DoGetSize( int *width, int *height ) const

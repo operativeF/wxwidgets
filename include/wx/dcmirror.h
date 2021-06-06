@@ -214,9 +214,9 @@ protected:
                            GetX(xsrcMask, ysrcMask), GetX(xsrcMask, ysrcMask));
     }
 
-    void DoGetSize(int *w, int *h) const override
+    wxSize DoGetSize() const override
     {
-        m_dc.DoGetSize(GetX(w, h), GetY(w, h));
+        return m_dc.DoGetSize();
     }
 
     void DoGetSizeMM(int *w, int *h) const override

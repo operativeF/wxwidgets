@@ -207,7 +207,7 @@ protected:
 
     // we deal with the scrollbars in these functions
     void DoSetClientSize(int width, int height) override;
-    void DoGetClientSize(int *width, int *height) const override;
+    wxSize DoGetClientSize() const override;
     wxHitTest DoHitTest(wxCoord x, wxCoord y) const override;
 
     // event handlers

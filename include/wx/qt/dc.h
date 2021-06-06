@@ -22,7 +22,7 @@ public:
     bool CanDrawBitmap() const override;
     bool CanGetTextExtent() const override;
 
-    void DoGetSize(int *width, int *height) const override;
+    wxSize DoGetSize() const override;
     void DoGetSizeMM(int* width, int* height) const override;
 
     int GetDepth() const override;

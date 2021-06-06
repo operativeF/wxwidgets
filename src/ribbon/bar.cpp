@@ -971,9 +971,8 @@ void wxRibbonBar::OnSize(wxSizeEvent& evt)
 
 void wxRibbonBar::RepositionPage(wxRibbonPage *page)
 {
-    int w, h;
-    GetSize(&w, &h);
-    page->SetSizeWithScrollButtonAdjustment(0, m_tab_height, w, h - m_tab_height);
+    wxSize sz = GetSize();
+    page->SetSizeWithScrollButtonAdjustment(0, m_tab_height, sz.x, sz.y - m_tab_height);
 }
 
 wxRibbonPageTabInfo* wxRibbonBar::HitTestTabs(wxPoint position, int* index)

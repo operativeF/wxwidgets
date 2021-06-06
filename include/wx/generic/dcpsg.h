@@ -136,7 +136,7 @@ protected:
                          wxCoord *descent = nullptr,
                          wxCoord *externalLeading = nullptr,
                          const wxFont *theFont = nullptr) const override;
-    void DoGetSize(int* width, int* height) const override;
+    wxSize DoGetSize() const override;
     void DoGetSizeMM(int *width, int *height) const override;
 
     // Common part of DoDrawText() and DoDrawRotatedText()

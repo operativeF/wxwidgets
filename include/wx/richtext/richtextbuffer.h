@@ -6202,7 +6202,6 @@ private:
         const std::vector<int>& maxUnspecifiedColumnWidths,
         std::vector<int>& colWidths,
         bool stretchToFitTableWidth,
-        int tableWidth,
         bool relaxConstraints,
         int widthLeft,
         bool shareEqually,

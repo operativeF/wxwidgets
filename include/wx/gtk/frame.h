@@ -57,7 +57,7 @@ public:
 
 protected:
     // override wxWindow methods to take into account tool/menu/statusbars
-    void DoGetClientSize( int *width, int *height ) const override;
+    wxSize DoGetClientSize() const override;
 
 #if wxUSE_MENUS_NATIVE
     void DetachMenuBar() override;

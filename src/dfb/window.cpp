@@ -369,16 +369,14 @@ bool wxWindowDFB::Reparent(wxWindowBase *parent)
 // ---------------------------------------------------------------------------
 
 // Get total size
-void wxWindowDFB::DoGetSize(int *x, int *y) const
+wxSize wxWindowDFB::DoGetSize() const
 {
-    if (x) *x = m_rect.width;
-    if (y) *y = m_rect.height;
+    return {m_rect.width, m_rect.height};
 }
 
-void wxWindowDFB::DoGetPosition(int *x, int *y) const
+wxPoint wxWindowDFB::DoGetPosition() const
 {
-    if (x) *x = m_rect.x;
-    if (y) *y = m_rect.y;
+    return {m_rect.x, m_rect.y};
 }
 
 static wxPoint GetScreenPosOfClientOrigin(const wxWindowDFB *win)

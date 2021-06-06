@@ -179,11 +179,12 @@ void wxWindowDCImpl::InitDC()
 #endif
 }
 
-void wxWindowDCImpl::DoGetSize(int *width, int *height) const
+wxSize wxWindowDCImpl::DoGetSize() const
 {
-    wxCHECK_RET( m_window, wxT("wxWindowDCImpl without a window?") );
+    // FIXME: Return value?
+    //wxCHECK_RET( m_window, wxT("wxWindowDCImpl without a window?") );
 
-    m_window->GetSize(width, height);
+    return m_window->GetSize();
 }
 
 // ----------------------------------------------------------------------------
@@ -231,14 +232,14 @@ void wxClientDCImpl::InitDC()
 #endif // __WXUNIVERSAL__
 }
 
-wxClientDCImpl::~wxClientDCImpl()
-= default;
+wxClientDCImpl::~wxClientDCImpl() = default;
 
-void wxClientDCImpl::DoGetSize(int *width, int *height) const
+wxSize wxClientDCImpl::DoGetSize() const
 {
-    wxCHECK_RET( m_window, wxT("wxClientDCImpl without a window?") );
+    // FIXME: Not sure about this.
+    //wxCHECK_RET( m_window, wxT("wxClientDCImpl without a window?") );
 
-    m_window->GetClientSize(width, height);
+    return m_window->GetClientSize();
 }
 
 // ----------------------------------------------------------------------------

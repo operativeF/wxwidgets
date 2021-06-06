@@ -143,8 +143,8 @@ protected:
 
     // override those to return the normal window coordinates even when the
     // window is minimized
-    void DoGetPosition(int *x, int *y) const override;
-    void DoGetSize(int *width, int *height) const override;
+    wxPoint DoGetPosition() const override;
+    wxSize DoGetSize() const override;
 
     // Top level windows have different freeze semantics on Windows
     void DoFreeze() override;

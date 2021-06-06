@@ -330,13 +330,14 @@ void wxRichTextPrintout::CalculateScaling(wxDC* dc, wxRect& textRect, wxRect& he
     // Now we have to check in case our real page size is reduced
     // (e.g. because we're drawing to a print preview memory DC)
     int pageWidth, pageHeight;
-    int w, h;
-    dc->GetSize(&w, &h);
+
+    int dc_w = dc->GetSize().x;
+
     GetPageSizePixels(&pageWidth, &pageHeight);
 
     // If printer pageWidth == current DC width, then this doesn't
     // change. But w might be the preview bitmap width, so scale down.
-    const double previewScale = double(w) / pageWidth;
+    const double previewScale = double(dc_w) / pageWidth;
     const double overallScale = scale * previewScale;
 
     // The dimensions used for indentation etc. have to be unscaled

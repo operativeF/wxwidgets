@@ -166,9 +166,9 @@ public:
 
     static WXHMENU MacGetWindowMenuHMenu() { return s_macWindowMenuHandle ; }
 
-    void DoGetPosition(int *x, int *y) const override;
-    void DoGetSize(int *width, int *height) const override;
-    void DoGetClientSize(int *width, int *height) const override;
+    wxPoint DoGetPosition() const override;
+    wxSize DoGetSize() const override;
+    wxSize DoGetClientSize() const override;
 
 protected:
     // common part of all ctors

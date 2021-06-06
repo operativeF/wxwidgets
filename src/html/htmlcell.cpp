@@ -1585,10 +1585,9 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlWidgetCell, wxHtmlCell);
 
 wxHtmlWidgetCell::wxHtmlWidgetCell(wxWindow *wnd, int w)
 {
-    int sx, sy;
     m_Wnd = wnd;
-    m_Wnd->GetSize(&sx, &sy);
-    m_Width = sx, m_Height = sy;
+    m_Width = m_Wnd->GetSize().x;
+    m_Height = m_Wnd->GetSize().y;
     m_WidthFloat = w;
 }
 

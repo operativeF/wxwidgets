@@ -803,7 +803,7 @@ bool wxWindowX11::PreResize()
 }
 
 // Get total size
-void wxWindowX11::DoGetSize(int *x, int *y) const
+wxSize wxWindowX11::DoGetSize() const
 {
     Window xwindow = (Window) m_mainWindow;
 
@@ -817,13 +817,16 @@ void wxWindowX11::DoGetSize(int *x, int *y) const
 
     if (status)
     {
-        *x = attr.width /* + 2*m_borderSize */ ;
-        *y = attr.height /* + 2*m_borderSize */ ;
+        return { attr.width /* + 2*m_borderSize */, attr.height /* + 2*m_borderSize */ };
     }
+
+    return {0, 0};
 }
 
-void wxWindowX11::DoGetPosition(int *x, int *y) const
+wxPoint wxWindowX11::DoGetPosition() const
 {
+    wxPoint pt;
+
     Window window = (Window) m_mainWindow;
     if (window)
     {
@@ -834,19 +837,20 @@ void wxWindowX11::DoGetPosition(int *x, int *y) const
 
         if (status)
         {
-            *x = attr.x;
-            *y = attr.y;
+            pt = {attr.x, attr.y};
 
             // We may be faking the client origin. So a window that's really at (0, 30)
             // may appear (to wxWin apps) to be at (0, 0).
             if (GetParent())
             {
-                wxPoint pt(GetParent()->GetClientAreaOrigin());
-                *x -= pt.x;
-                *y -= pt.y;
+                wxPoint parent_pt(GetParent()->GetClientAreaOrigin());
+                pt.x -= parent_pt.x;
+                pt.y -= parent_pt.y;
             }
         }
     }
+
+    return pt;
 }
 
 void wxWindowX11::DoScreenToClient(int *x, int *y) const

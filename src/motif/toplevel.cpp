@@ -185,7 +185,7 @@ bool wxTopLevelWindowMotif::Create( wxWindow *parent, wxWindowID id,
     return retval;
 }
 
-void wxTopLevelWindowMotif::DoGetPosition(int *x, int *y) const
+wxPoint wxTopLevelWindowMotif::DoGetPosition() const
 {
     Widget top = (Widget) GetTopWidget();
     Window parent_window = XtWindow((Widget) top),
@@ -204,8 +204,8 @@ void wxTopLevelWindowMotif::DoGetPosition(int *x, int *y) const
     int xx, yy; unsigned int dummy;
     XGetGeometry(XtDisplay((Widget) top), parent_window, &root,
         &xx, &yy, &dummy, &dummy, &dummy, &dummy);
-    if (x) *x = xx;
-    if (y) *y = yy;
+
+    return {xx, yy};
 }
 
 void wxTopLevelWindowMotif::Raise()

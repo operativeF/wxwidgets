@@ -148,10 +148,9 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
         // over the screen)
         wxScreenDC::EndDrawingOnTop();
 
-        int w, h;
-        GetSize(&w, &h);
-        int xp, yp;
-        GetPosition(&xp, &yp);
+        wxSize sz = GetSize();
+
+        wxPoint pt = GetPosition();
 
         wxSashEdgePosition edge = m_draggingEdge;
         m_draggingEdge = wxSASH_NONE;
@@ -167,49 +166,49 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
         //     upper left corner, while xp and yp are expressed in the parent
         //     window system of coordinates, so adjust them! After this
         //     adjustment, all coordinates are relative to the parent window.
-        y += yp;
-        x += xp;
+        y += pt.y;
+        x += pt.x;
 
         switch (edge)
         {
             case wxSASH_TOP:
-                if ( y > yp + h )
+                if ( y > pt.y + sz.y )
                 {
                     // top sash shouldn't get below the bottom one
                     status = wxSASH_STATUS_OUT_OF_RANGE;
                 }
                 else
                 {
-                    newHeight = h - (y - yp);
+                    newHeight = sz.y - (y - pt.y);
                 }
                 break;
 
             case wxSASH_BOTTOM:
-                if ( y < yp )
+                if ( y < pt.y )
                 {
                     // bottom sash shouldn't get above the top one
                     status = wxSASH_STATUS_OUT_OF_RANGE;
                 }
                 else
                 {
-                    newHeight = y - yp;
+                    newHeight = y - pt.y;
                 }
                 break;
 
             case wxSASH_LEFT:
-                if ( x > xp + w )
+                if ( x > pt.x + sz.x )
                 {
                     // left sash shouldn't get beyond the right one
                     status = wxSASH_STATUS_OUT_OF_RANGE;
                 }
                 else
                 {
-                    newWidth = w - (x - xp);
+                    newWidth = sz.x - (x - pt.x);
                 }
                 break;
 
             case wxSASH_RIGHT:
-                if ( x < xp )
+                if ( x < pt.x )
                 {
                     // and the right sash, finally, shouldn't be beyond the
                     // left one
@@ -217,7 +216,7 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
                 }
                 else
                 {
-                    newWidth = x - xp;
+                    newWidth = x - pt.x;
                 }
                 break;
 
@@ -229,7 +228,7 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
         if ( newHeight == wxDefaultCoord )
         {
             // didn't change
-            newHeight = h;
+            newHeight = sz.y;
         }
         else
         {
@@ -241,7 +240,7 @@ void wxSashWindow::OnMouseEvent(wxMouseEvent& event)
         if ( newWidth == wxDefaultCoord )
         {
             // didn't change
-            newWidth = w;
+            newWidth = sz.x;
         }
         else
         {
@@ -348,11 +347,9 @@ void wxSashWindow::OnSize(wxSizeEvent& WXUNUSED(event))
 
 wxSashEdgePosition wxSashWindow::SashHitTest(int x, int y, int WXUNUSED(tolerance))
 {
-    int cx, cy;
-    GetClientSize(& cx, & cy);
+    wxSize client_size = GetClientSize();
 
-    int i;
-    for (i = 0; i < 4; i++)
+    for (int i = 0; i < 4; i++)
     {
         wxSashEdge& edge = m_sashes[i];
         wxSashEdgePosition position = (wxSashEdgePosition) i ;
@@ -369,13 +366,13 @@ wxSashEdgePosition wxSashWindow::SashHitTest(int x, int y, int WXUNUSED(toleranc
                 }
                 case wxSASH_RIGHT:
                 {
-                    if ((x >= cx - GetEdgeMargin(position)) && (x <= cx))
+                    if ((x >= client_size.x - GetEdgeMargin(position)) && (x <= client_size.x))
                         return wxSASH_RIGHT;
                     break;
                 }
                 case wxSASH_BOTTOM:
                 {
-                    if ((y >= cy - GetEdgeMargin(position)) && (y <= cy))
+                    if ((y >= client_size.y - GetEdgeMargin(position)) && (y <= client_size.y))
                         return wxSASH_BOTTOM;
                     break;
                 }
@@ -398,8 +395,7 @@ wxSashEdgePosition wxSashWindow::SashHitTest(int x, int y, int WXUNUSED(toleranc
 // Draw 3D effect borders
 void wxSashWindow::DrawBorders(wxDC& dc)
 {
-    int w, h;
-    GetClientSize(&w, &h);
+    wxSize client_size = GetClientSize();
 
     wxPen mediumShadowPen(m_mediumShadowColour, 1, wxPENSTYLE_SOLID);
     wxPen darkShadowPen(m_darkShadowColour, 1, wxPENSTYLE_SOLID);
@@ -409,27 +405,28 @@ void wxSashWindow::DrawBorders(wxDC& dc)
     if ( GetWindowStyleFlag() & wxSW_3DBORDER )
     {
         dc.SetPen(mediumShadowPen);
-        dc.DrawLine(0, 0, w-1, 0);
-        dc.DrawLine(0, 0, 0, h - 1);
+        dc.DrawLine(0, 0, client_size.x - 1, 0);
+        dc.DrawLine(0, 0, 0, client_size.y - 1);
 
         dc.SetPen(darkShadowPen);
-        dc.DrawLine(1, 1, w-2, 1);
-        dc.DrawLine(1, 1, 1, h-2);
+        dc.DrawLine(1, 1, client_size.x - 2, 1);
+        dc.DrawLine(1, 1, 1, client_size.y - 2);
 
         dc.SetPen(hilightPen);
-        dc.DrawLine(0, h-1, w-1, h-1);
-        dc.DrawLine(w-1, 0, w-1, h); // Surely the maximum y pos. should be h - 1.
-                                     /// Anyway, h is required for MSW.
+        dc.DrawLine(0, client_size.y - 1, client_size.x - 1, client_size.y - 1);
+        dc.DrawLine(client_size.x - 1, 0, client_size.x - 1, client_size.y);
+        // Surely the maximum y pos. should be h - 1.
+        // Anyway, h is required for MSW.
 
         dc.SetPen(lightShadowPen);
-        dc.DrawLine(w-2, 1, w-2, h-2); // Right hand side
-        dc.DrawLine(1, h-2, w-1, h-2);     // Bottom
+        dc.DrawLine(client_size.x - 2, 1, client_size.x - 2, client_size.y - 2); // Right hand side
+        dc.DrawLine(1, client_size.y - 2, client_size.x - 1, client_size.y - 2);     // Bottom
     }
     else if ( GetWindowStyleFlag() & wxSW_BORDER )
     {
         dc.SetBrush(*wxTRANSPARENT_BRUSH);
         dc.SetPen(*wxBLACK_PEN);
-        dc.DrawRectangle(0, 0, w-1, h-1);
+        dc.DrawRectangle(0, 0, client_size.x - 1, client_size.y - 1);
     }
 
     dc.SetPen(wxNullPen);
@@ -438,8 +435,7 @@ void wxSashWindow::DrawBorders(wxDC& dc)
 
 void wxSashWindow::DrawSashes(wxDC& dc)
 {
-    int i;
-    for (i = 0; i < 4; i++)
+    for (int i = 0; i < 4; i++)
         if (m_sashes[i].m_show)
             DrawSash((wxSashEdgePosition) i, dc);
 }
@@ -447,8 +443,7 @@ void wxSashWindow::DrawSashes(wxDC& dc)
 // Draw the sash
 void wxSashWindow::DrawSash(wxSashEdgePosition edge, wxDC& dc)
 {
-    int w, h;
-    GetClientSize(&w, &h);
+    wxSize client_size = GetClientSize();
 
     wxPen facePen(m_faceColour, 1, wxPENSTYLE_SOLID);
     wxBrush faceBrush(m_faceColour, wxBRUSHSTYLE_SOLID);
@@ -463,11 +458,11 @@ void wxSashWindow::DrawSash(wxSashEdgePosition edge, wxDC& dc)
 
     if ( edge == wxSASH_LEFT || edge == wxSASH_RIGHT )
     {
-        int sashPosition = (edge == wxSASH_LEFT) ? 0 : ( w - GetEdgeMargin(edge) );
+        int sashPosition = (edge == wxSASH_LEFT) ? 0 : ( client_size.x - GetEdgeMargin(edge) );
 
         dc.SetPen(facePen);
         dc.SetBrush(faceBrush);
-        dc.DrawRectangle(sashPosition, 0, GetEdgeMargin(edge), h);
+        dc.DrawRectangle(sashPosition, 0, GetEdgeMargin(edge), client_size.y);
 
         if (GetWindowStyleFlag() & wxSW_3DSASH)
         {
@@ -476,24 +471,24 @@ void wxSashWindow::DrawSash(wxSashEdgePosition edge, wxDC& dc)
                 // Draw a dark grey line on the left to indicate that the
                 // sash is raised
                 dc.SetPen(mediumShadowPen);
-                dc.DrawLine(GetEdgeMargin(edge), 0, GetEdgeMargin(edge), h);
+                dc.DrawLine(GetEdgeMargin(edge), 0, GetEdgeMargin(edge), client_size.y);
             }
             else
             {
                 // Draw a highlight line on the right to indicate that the
                 // sash is raised
                 dc.SetPen(hilightPen);
-                dc.DrawLine(w - GetEdgeMargin(edge), 0, w - GetEdgeMargin(edge), h);
+                dc.DrawLine(client_size.x - GetEdgeMargin(edge), 0, client_size.x - GetEdgeMargin(edge), client_size.y);
             }
         }
     }
     else // top or bottom
     {
-        int sashPosition = (edge == wxSASH_TOP) ? 0 : ( h - GetEdgeMargin(edge) );
+        int sashPosition = (edge == wxSASH_TOP) ? 0 : ( client_size.y - GetEdgeMargin(edge) );
 
         dc.SetPen(facePen);
         dc.SetBrush(faceBrush);
-        dc.DrawRectangle(0, sashPosition, w, GetEdgeMargin(edge));
+        dc.DrawRectangle(0, sashPosition, client_size.x, GetEdgeMargin(edge));
 
         if (GetWindowStyleFlag() & wxSW_3DSASH)
         {
@@ -502,14 +497,14 @@ void wxSashWindow::DrawSash(wxSashEdgePosition edge, wxDC& dc)
                 // Draw a highlight line on the bottom to indicate that the
                 // sash is raised
                 dc.SetPen(hilightPen);
-                dc.DrawLine(0, h - GetEdgeMargin(edge), w, h - GetEdgeMargin(edge));
+                dc.DrawLine(0, client_size.y - GetEdgeMargin(edge), client_size.x, client_size.y - GetEdgeMargin(edge));
             }
             else
             {
                 // Draw a drak grey line on the top to indicate that the
                 // sash is raised
                 dc.SetPen(mediumShadowPen);
-                dc.DrawLine(1, GetEdgeMargin(edge), w-1, GetEdgeMargin(edge));
+                dc.DrawLine(1, GetEdgeMargin(edge), client_size.x - 1, GetEdgeMargin(edge));
             }
         }
     }
@@ -521,8 +516,7 @@ void wxSashWindow::DrawSash(wxSashEdgePosition edge, wxDC& dc)
 // Draw the sash tracker (for whilst moving the sash)
 void wxSashWindow::DrawSashTracker(wxSashEdgePosition edge, int x, int y)
 {
-    int w, h;
-    GetClientSize(&w, &h);
+    wxSize client_size = GetClientSize();
 
     wxScreenDC screenDC;
     int x1, y1;
@@ -530,27 +524,33 @@ void wxSashWindow::DrawSashTracker(wxSashEdgePosition edge, int x, int y)
 
     if ( edge == wxSASH_LEFT || edge == wxSASH_RIGHT )
     {
-        x1 = x; y1 = 2;
-        x2 = x; y2 = h-2;
+        x1 = x;
+        y1 = 2;
+        x2 = x;
+        y2 = client_size.y - 2;
 
-        if ( (edge == wxSASH_LEFT) && (x1 > w) )
+        if ( (edge == wxSASH_LEFT) && (x1 > client_size.x) )
         {
-            x1 = w; x2 = w;
+            x1 = client_size.x;
+            x2 = client_size.x;
         }
         else if ( (edge == wxSASH_RIGHT) && (x1 < 0) )
         {
-            x1 = 0; x2 = 0;
+            x1 = 0;
+            x2 = 0;
         }
     }
     else
     {
-        x1 = 2; y1 = y;
-        x2 = w-2; y2 = y;
+        x1 = 2;
+        y1 = y;
+        x2 = client_size.x - 2;
+        y2 = y;
 
-        if ( (edge == wxSASH_TOP) && (y1 > h) )
+        if ( (edge == wxSASH_TOP) && (y1 > client_size.y) )
         {
-            y1 = h;
-            y2 = h;
+            y1 = client_size.y;
+            y2 = client_size.y;
         }
         else if ( (edge == wxSASH_BOTTOM) && (y1 < 0) )
         {
@@ -581,8 +581,7 @@ void wxSashWindow::DrawSashTracker(wxSashEdgePosition edge, int x, int y)
 // including the edges next to the sash.
 void wxSashWindow::SizeWindows()
 {
-    int cw, ch;
-    GetClientSize(&cw, &ch);
+    wxSize client_size = GetClientSize();
 
     if (GetChildren().GetCount() == 1)
     {
@@ -590,8 +589,8 @@ void wxSashWindow::SizeWindows()
 
         int x = 0;
         int y = 0;
-        int width = cw;
-        int height = ch;
+        int width = client_size.x;
+        int height = client_size.y;
 
         // Top
         if (m_sashes[0].m_show)

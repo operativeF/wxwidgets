@@ -42,7 +42,11 @@ inline void wxGetAsIs(wxWindowBase* win, int* w, int* h)
 #if 1
     // FIXME: Works for me (TM).
     // The old way.  Works for me.
-    win->GetSize(w, h);
+    wxSize sz = win->GetSize();
+    if (w)
+        *w = sz.x;
+    if (h)
+        *h = sz.y;
 #endif
 
 #if 0
@@ -238,8 +242,7 @@ bool wxIndividualLayoutConstraint::SatisfyConstraint(wxLayoutConstraints *constr
                 }
                 case wxAsIs:
                 {
-                    int y;
-                    win->GetPosition(&value, &y);
+                    value = win->GetPosition().x;
                     done = true;
                     return true;
                 }
@@ -313,11 +316,10 @@ bool wxIndividualLayoutConstraint::SatisfyConstraint(wxLayoutConstraints *constr
                 }
                 case wxAsIs:
                 {
-                    int x, y;
                     int w, h;
                     wxGetAsIs(win, &w, &h);
-                    win->GetPosition(&x, &y);
-                    value = x + w;
+                    int x_pos = win->GetPosition().x;
+                    value = x_pos + w;
                     done = true;
                     return true;
                 }
@@ -391,8 +393,7 @@ bool wxIndividualLayoutConstraint::SatisfyConstraint(wxLayoutConstraints *constr
                 }
                 case wxAsIs:
                 {
-                    int x;
-                    win->GetPosition(&x, &value);
+                    value = win->GetPosition().y;
                     done = true;
                     return true;
                 }
@@ -466,11 +467,10 @@ bool wxIndividualLayoutConstraint::SatisfyConstraint(wxLayoutConstraints *constr
                 }
                 case wxAsIs:
                 {
-                    int x, y;
                     int w, h;
                     wxGetAsIs(win, &w, &h);
-                    win->GetPosition(&x, &y);
-                    value = h + y;
+                    int y_pos = win->GetPosition().y;
+                    value = h + y_pos;
                     done = true;
                     return true;
                 }
@@ -759,37 +759,29 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                 }
             case wxRight:
                 {
-                    int w, h;
-                    other->GetClientSizeConstraint(&w, &h);
-                    return w;
+                    return other->GetClientSizeConstraint().x;
                 }
             case wxBottom:
                 {
-                    int w, h;
-                    other->GetClientSizeConstraint(&w, &h);
-                    return h;
+                    return other->GetClientSizeConstraint().y;
                 }
             case wxWidth:
                 {
-                    int w, h;
-                    other->GetClientSizeConstraint(&w, &h);
-                    return w;
+                    return other->GetClientSizeConstraint().x;
                 }
             case wxHeight:
                 {
-                    int w, h;
-                    other->GetClientSizeConstraint(&w, &h);
-                    return h;
+                    return other->GetClientSizeConstraint().y;
                 }
             case wxCentreX:
             case wxCentreY:
                 {
-                    int w, h;
-                    other->GetClientSizeConstraint(&w, &h);
+                    wxSize sz_constraint = other->GetClientSizeConstraint();
+                    // FIXME: rounding?
                     if (which == wxCentreX)
-                        return (int)(w/2);
+                        return static_cast<int>(sz_constraint.x / 2);
                     else
-                        return (int)(h/2);
+                        return static_cast<int>(sz_constraint.y / 2);
                 }
             default:
                 return -1;
@@ -811,9 +803,7 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                 }
                 else
                 {
-                    int x, y;
-                    other->GetPosition(&x, &y);
-                    return x;
+                    return other->GetPosition().x;
                 }
             }
         case wxTop:
@@ -830,9 +820,7 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                 }
                 else
                 {
-                    int x, y;
-                    other->GetPosition(&x, &y);
-                    return y;
+                    return other->GetPosition().y;
                 }
             }
         case wxRight:
@@ -849,10 +837,9 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                 }
                 else
                 {
-                    int x, y, w, h;
-                    other->GetPosition(&x, &y);
-                    other->GetSize(&w, &h);
-                    return (int)(x + w);
+                    int x_pos = other->GetPosition().x;
+                    int w = other->GetSize().x;
+                    return x_pos + w;
                 }
             }
         case wxBottom:
@@ -869,10 +856,9 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                 }
                 else
                 {
-                    int x, y, w, h;
-                    other->GetPosition(&x, &y);
-                    other->GetSize(&w, &h);
-                    return (int)(y + h);
+                    auto y_pos = other->GetPosition().y;
+                    auto h_size = other->GetSize().y;
+                    return y_pos + h_size;
                 }
             }
         case wxWidth:
@@ -889,9 +875,7 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                 }
                 else
                 {
-                    int w, h;
-                    other->GetSize(&w, &h);
-                    return w;
+                    return other->GetSize().x;
                 }
             }
         case wxHeight:
@@ -908,9 +892,7 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                 }
                 else
                 {
-                    int w, h;
-                    other->GetSize(&w, &h);
-                    return h;
+                    return other->GetSize().y;
                 }
             }
         case wxCentreX:
@@ -927,10 +909,9 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                 }
                 else
                 {
-                    int x, y, w, h;
-                    other->GetPosition(&x, &y);
-                    other->GetSize(&w, &h);
-                    return (int)(x + (w/2));
+                    int x_pos = other->GetPosition().x;
+                    int w = other->GetSize().x;
+                    return x_pos + (w/2);
                 }
             }
         case wxCentreY:
@@ -947,10 +928,9 @@ int wxIndividualLayoutConstraint::GetEdge(wxEdge which,
                 }
                 else
                 {
-                    int x, y, w, h;
-                    other->GetPosition(&x, &y);
-                    other->GetSize(&w, &h);
-                    return (int)(y + (h/2));
+                    int y_pos = other->GetPosition().y;
+                    int h = other->GetSize().y;
+                    return y_pos + (h/2);
                 }
             }
         default:

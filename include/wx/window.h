@@ -304,60 +304,36 @@ public:
         // client coordinates for child windows and screen coordinates for the
         // top level ones, use GetScreenPosition() if you need screen
         // coordinates for all kinds of windows
-    void GetPosition( int *x, int *y ) const { DoGetPosition(x, y); }
     wxPoint GetPosition() const
     {
-        int x, y;
-        DoGetPosition(&x, &y);
-
-        return wxPoint(x, y);
+        return DoGetPosition();
     }
 
-        // get the window position in screen coordinates
-    void GetScreenPosition(int *x, int *y) const { DoGetScreenPosition(x, y); }
+    // get the window position in screen coordinates
     wxPoint GetScreenPosition() const
     {
-        int x, y;
-        DoGetScreenPosition(&x, &y);
-
-        return wxPoint(x, y);
+        return DoGetScreenPosition();
     }
 
-        // get the window size (pointers may be NULL)
-    void GetSize( int *w, int *h ) const { DoGetSize(w, h); }
     wxSize GetSize() const
     {
-        int w, h;
-        DoGetSize(& w, & h);
-        return wxSize(w, h);
+        return DoGetSize();
     }
 
-    void GetClientSize( int *w, int *h ) const { DoGetClientSize(w, h); }
     wxSize GetClientSize() const
     {
-        int w, h;
-        DoGetClientSize(&w, &h);
-
-        return wxSize(w, h);
+        return DoGetClientSize();
     }
 
-        // get the position and size at once
+    // get the position and size at once
     wxRect GetRect() const
     {
-        int x, y, w, h;
-        GetPosition(&x, &y);
-        GetSize(&w, &h);
-
-        return wxRect(x, y, w, h);
+        return wxRect(GetPosition(), GetSize());
     }
 
     wxRect GetScreenRect() const
     {
-        int x, y, w, h;
-        GetScreenPosition(&x, &y);
-        GetSize(&w, &h);
-
-        return wxRect(x, y, w, h);
+        return wxRect(GetScreenPosition(), GetSize());
     }
 
         // get the origin of the client area of the window relative to the
@@ -1446,9 +1422,9 @@ public:
         // these methods are virtual but normally won't be overridden
     virtual void SetSizeConstraint(int x, int y, int w, int h);
     virtual void MoveConstraint(int x, int y);
-    virtual void GetSizeConstraint(int *w, int *h) const ;
-    virtual void GetClientSizeConstraint(int *w, int *h) const ;
-    virtual void GetPositionConstraint(int *x, int *y) const ;
+    virtual wxSize GetSizeConstraint() const ;
+    virtual wxSize GetClientSizeConstraint() const ;
+    virtual wxPoint GetPositionConstraint() const ;
 
 #endif // wxUSE_CONSTRAINTS
 
@@ -1812,10 +1788,10 @@ protected:
     virtual void DoReleaseMouse() = 0;
 
     // retrieve the position/size of the window
-    virtual void DoGetPosition(int *x, int *y) const = 0;
-    virtual void DoGetScreenPosition(int *x, int *y) const;
-    virtual void DoGetSize(int *width, int *height) const = 0;
-    virtual void DoGetClientSize(int *width, int *height) const = 0;
+    virtual wxPoint DoGetPosition() const = 0;
+    virtual wxPoint DoGetScreenPosition() const;
+    virtual wxSize DoGetSize() const = 0;
+    virtual wxSize DoGetClientSize() const = 0;
 
     // get the size which best suits the window: for a control, it would be
     // the minimal size which doesn't truncate the control, for a panel - the
@@ -1843,7 +1819,7 @@ protected:
                            int sizeFlags = wxSIZE_AUTO) = 0;
 
     // same as DoSetSize() for the client size
-    virtual void DoSetClientSize(int width, int height) = 0;
+    virtual void DoSetClientSize(int x, int y) = 0;
 
     virtual void DoSetSizeHints( int minW, int minH,
                                  int maxW, int maxH,

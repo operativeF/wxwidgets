@@ -293,9 +293,9 @@ public:
 #endif // __WXMSW__
 
 protected:
-    void DoGetSize(int *width, int *height) const override
+    wxSize DoGetSize() const override
     {
-        wxWindow::DoGetSize(width, height);
+        return wxWindow::DoGetSize();
     }
 
     void DoSetSize(int x, int y, int width, int height, int sizeFlags) override
@@ -303,9 +303,9 @@ protected:
         wxWindow::DoSetSize(x, y, width, height, sizeFlags);
     }
 
-    void DoGetClientSize(int *width, int *height) const override
+    wxSize DoGetClientSize() const override
     {
-        wxWindow::DoGetClientSize(width, height);
+        return wxWindow::DoGetClientSize();
     }
 
     void DoSetClientSize(int width, int height) override
@@ -318,9 +318,9 @@ protected:
         wxWindow::DoMoveWindow(x, y, width, height);
     }
 
-    void DoGetScreenPosition(int *x, int *y) const override
+    wxPoint DoGetScreenPosition() const override
     {
-        wxWindow::DoGetScreenPosition(x, y);
+        return wxWindow::DoGetScreenPosition();
     }
 
     // no size hints

@@ -571,17 +571,17 @@ wxStatusBar::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
     if ( nMsg == WM_WINDOWPOSCHANGING )
     {
         WINDOWPOS *lpPos = (WINDOWPOS *)lParam;
-        int x, y, w, h;
-        GetPosition(&x, &y);
-        GetSize(&w, &h);
+        wxPoint pos = GetPosition();
+        wxSize sz = GetSize();
 
+        // FIXME: Return a size instead of out variables.
         // we need real window coords and not wx client coords
-        AdjustForParentClientOrigin(x, y);
+        AdjustForParentClientOrigin(sz.x, sz.y);
 
-        lpPos->x  = x;
-        lpPos->y  = y;
-        lpPos->cx = w;
-        lpPos->cy = h;
+        lpPos->x  = pos.x;
+        lpPos->y  = pos.y;
+        lpPos->cx = sz.x;
+        lpPos->cy = sz.y;
 
         return 0;
     }

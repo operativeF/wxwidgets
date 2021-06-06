@@ -474,17 +474,16 @@ WXHMENU wxMDIParentFrame::MSWGetActiveMenu() const
 
 void wxMDIParentFrame::UpdateClientSize()
 {
-    int width, height;
-    GetClientSize(&width, &height);
+    wxSize sz = GetClientSize();
 
     if ( wxSizer* sizer = GetSizer() )
     {
-        sizer->SetDimension(0, 0, width, height);
+        sizer->SetDimension(0, 0, sz.x, sz.y);
     }
     else
     {
         if ( GetClientWindow() )
-            GetClientWindow()->SetSize(0, 0, width, height);
+            GetClientWindow()->SetSize(0, 0, sz.x, sz.y);
     }
 }
 
@@ -970,9 +969,8 @@ void wxMDIChildFrame::DoSetClientSize(int width, int height)
 #if wxUSE_STATUSBAR
   if (GetStatusBar() && GetStatusBar()->IsShown())
   {
-    int sx, sy;
-    GetStatusBar()->GetSize(&sx, &sy);
-    actual_height += sy;
+    wxSize s = GetStatusBar()->GetSize();
+    actual_height += s.y;
   }
 #endif // wxUSE_STATUSBAR
 
@@ -995,20 +993,18 @@ void wxMDIChildFrame::DoSetClientSize(int width, int height)
 
 // Unlike other wxTopLevelWindowBase, the mdi child's "GetPosition" is not the
 //  same as its GetScreenPosition
-void wxMDIChildFrame::DoGetScreenPosition(int *x, int *y) const
+wxPoint wxMDIChildFrame::DoGetScreenPosition() const
 {
   HWND hWnd = GetHwnd();
 
   RECT rect;
   ::GetWindowRect(hWnd, &rect);
-  if (x)
-     *x = rect.left;
-  if (y)
-     *y = rect.top;
+
+  return {rect.left, rect.top};
 }
 
 
-void wxMDIChildFrame::DoGetPosition(int *x, int *y) const
+wxPoint wxMDIChildFrame::DoGetPosition() const
 {
   RECT rect;
   GetWindowRect(GetHwnd(), &rect);
@@ -1021,10 +1017,7 @@ void wxMDIChildFrame::DoGetPosition(int *x, int *y) const
   wxMDIParentFrame * const mdiParent = GetMDIParent();
   ::ScreenToClient(GetHwndOf(mdiParent->GetClientWindow()), &point);
 
-  if (x)
-      *x = point.x;
-  if (y)
-      *y = point.y;
+  return {point.x, point.y};
 }
 
 void wxMDIChildFrame::InternalSetMenuBar()

@@ -1170,7 +1170,7 @@ void wxWindow::DoGetSize(int *x, int *y) const
     if(y) *y = widget ? yy : -1;
 }
 
-void wxWindow::DoGetPosition(int *x, int *y) const
+wxPoint wxWindow::DoGetPosition() const
 {
     Widget widget = (Widget)
         ( m_drawingArea ?
@@ -1189,8 +1189,7 @@ void wxWindow::DoGetPosition(int *x, int *y) const
         yy = (Position)(yy - pt.y);
     }
 
-    if(x) *x = xx;
-    if(y) *y = yy;
+    return {xx, yy};
 }
 
 void wxWindow::DoScreenToClient(int *x, int *y) const

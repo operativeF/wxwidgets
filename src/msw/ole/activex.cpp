@@ -1141,23 +1141,22 @@ void wxActiveXContainer::CreateActiveX(REFIID iid, IUnknown* pUnk)
 //---------------------------------------------------------------------------
 void wxActiveXContainer::OnSize(wxSizeEvent& event)
 {
-    int w, h;
-    GetParent()->GetClientSize(&w, &h);
+    wxSize parent_sz = GetParent()->GetClientSize();
 
     RECT posRect;
     posRect.left = 0;
     posRect.top = 0;
-    posRect.right = w;
-    posRect.bottom = h;
+    posRect.right = parent_sz.x;
+    posRect.bottom = parent_sz.y;
 
-    if (w <= 0 || h <= 0)
+    if (parent_sz.x <= 0 || parent_sz.y <= 0)
         return;
 
     // extents are in HIMETRIC units
     if (m_oleObject.IsOk())
     {
 
-        SIZEL sz = {w, h};
+        SIZEL sz = {parent_sz.x, parent_sz.y};
         PixelsToHimetric(sz);
 
         SIZEL sz2;
@@ -1185,13 +1184,12 @@ void wxActiveXContainer::OnPaint(wxPaintEvent& WXUNUSED(event))
     // Draw only when control is windowless or deactivated
     if (m_viewObject)
     {
-        int w, h;
-        GetParent()->GetSize(&w, &h);
+        wxSize parent_sz = GetParent()->GetSize();
         RECT posRect;
         posRect.left = 0;
         posRect.top = 0;
-        posRect.right = w;
-        posRect.bottom = h;
+        posRect.right = parent_sz.x;
+        posRect.bottom = parent_sz.y;
 
         ::RedrawWindow(m_oleObjectHWND, nullptr, nullptr, RDW_INTERNALPAINT);
         RECTL *prcBounds = (RECTL *) &posRect;

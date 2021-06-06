@@ -271,9 +271,9 @@ protected:
                                  const wxFont *font = NULL) const;
     virtual void DoClientToScreen( int *x, int *y ) const;
     virtual void DoScreenToClient( int *x, int *y ) const;
-    virtual void DoGetPosition( int *x, int *y ) const;
-    virtual void DoGetSize( int *width, int *height ) const;
-    virtual void DoGetClientSize( int *width, int *height ) const;
+    virtual wxPoint DoGetPosition() const;
+    virtual wxSize DoGetSize() const;
+    virtual wxSize DoGetClientSize() const;
     virtual void DoSetSize(int x, int y,
         int width, int height,
         int sizeFlags = wxSIZE_AUTO);

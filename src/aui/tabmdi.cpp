@@ -408,9 +408,9 @@ void wxAuiMDIParentFrame::DoHandleUpdateUI(wxUpdateUIEvent& event)
 }
 #endif // wxUSE_MENUS
 
-void wxAuiMDIParentFrame::DoGetClientSize(int* width, int* height) const
+wxSize wxAuiMDIParentFrame::DoGetClientSize() const
 {
-    wxFrame::DoGetClientSize(width, height);
+    return wxFrame::DoGetClientSize();
 }
 
 void wxAuiMDIParentFrame::Tile(wxOrientation orient)

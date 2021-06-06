@@ -189,17 +189,11 @@ public:
 
     // query dimension, colour deps, resolution
 
-    virtual void DoGetSize(int *width, int *height) const = 0;
-    void GetSize(int *width, int *height) const
-    {
-        DoGetSize(width, height);
-    }
+    virtual wxSize DoGetSize() const = 0;
 
     wxSize GetSize() const
     {
-        int w, h;
-        DoGetSize(&w, &h);
-        return wxSize(w, h);
+        return DoGetSize();
     }
 
     virtual void DoGetSizeMM(int* width, int* height) const = 0;
@@ -552,7 +546,7 @@ public:
     // wxPrinterDC Impl API
 
     virtual wxRect GetPaperRect() const
-        { int w = 0; int h = 0; DoGetSize( &w, &h ); return wxRect(0,0,w,h); }
+        { wxSize sz = DoGetSize(); return wxRect(0,0, sz.x, sz.y); }
 
     virtual int GetResolution() const
         { return -1; }
@@ -692,10 +686,8 @@ public:
 
     // query dimension, colour deps, resolution
 
-    void GetSize(int *width, int *height) const
-        { m_pimpl->DoGetSize(width, height); }
     wxSize GetSize() const
-        { return m_pimpl->GetSize(); }
+        { return m_pimpl->DoGetSize(); }
 
     void GetSizeMM(int* width, int* height) const
         { m_pimpl->DoGetSizeMM(width, height); }

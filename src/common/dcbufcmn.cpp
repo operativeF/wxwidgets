@@ -110,8 +110,12 @@ void wxBufferedDC::UseBuffer(wxCoord w, wxCoord h)
 
     if ( !m_buffer || !m_buffer->IsOk() )
     {
-        if ( w == -1 || h == -1 )
-            m_dc->GetSize(&w, &h);
+        if (w == -1 || h == -1)
+        {
+            // FIXME: Have this function just accept a size instead of two coords.
+            w = m_dc->GetSize().x;
+            h = m_dc->GetSize().y;
+        }
 
         m_buffer = wxSharedDCBufferManager::GetBuffer(m_dc, w, h);
         m_style |= wxBUFFER_USES_SHARED_BUFFER;
@@ -152,11 +156,9 @@ void wxBufferedDC::UnMask()
 
     if (!(m_style & wxBUFFER_VIRTUAL_AREA))
     {
-        int widthDC,
-            heightDC;
-        m_dc->GetSize(&widthDC, &heightDC);
-        width = wxMin(width, widthDC);
-        height = wxMin(height, heightDC);
+        wxSize dcSize = m_dc->GetSize();
+        width = wxMin(width, dcSize.x);
+        height = wxMin(height, dcSize.y);
     }
 
     const wxPoint origin = GetLogicalOrigin();

@@ -51,8 +51,8 @@ protected:
 
     void DoMoveWindow(int x, int y, int width, int height) override;
     void DoCentre(int dir) override;
-    void DoGetSize( int *width, int *height ) const override;
-    void DoGetPosition( int *x, int *y ) const override;
+    wxSize DoGetSize() const override;
+    wxPoint DoGetPosition() const override;
 
 private:
     wxArrayString m_fileNames;

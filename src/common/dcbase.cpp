@@ -369,10 +369,9 @@ void wxDCImpl::DoSetClippingRegion(wxCoord x, wxCoord y, wxCoord w, wxCoord h)
     {
         // Effective clipping box is an intersection
         // of required clipping box and DC surface.
-        int dcWidth, dcHeight;
-        DoGetSize(&dcWidth, &dcHeight);
+        wxSize dcSize = DoGetSize();
         wxRect dcRect(DeviceToLogicalX(0), DeviceToLogicalY(0),
-                      DeviceToLogicalXRel(dcWidth), DeviceToLogicalYRel(dcHeight));
+                      DeviceToLogicalXRel(dcSize.x), DeviceToLogicalYRel(dcSize.y));
         clipRegion.Intersect(dcRect);
 
         m_clipping = true;

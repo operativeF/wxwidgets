@@ -36,7 +36,7 @@ public:
     void SetTextBackground( const wxColour &col ) override;
 
     // overridden from wxDCImpl
-    void DoGetSize( int *width, int *height ) const override;
+    wxSize DoGetSize() const override;
     wxBitmap DoGetAsBitmap(const wxRect *subrect) const override;
     void* GetHandle() const override;
 

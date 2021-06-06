@@ -200,14 +200,14 @@ protected:
     void DoReleaseMouse() override;
 
     // retrieve the position/size of the window
-    void DoGetPosition(int *x, int *y) const override;
+    wxPoint DoGetPosition() const override;
 
     void DoSetSize(int x, int y, int width, int height, int sizeFlags = wxSIZE_AUTO) override;
-    void DoGetSize(int *width, int *height) const override;
+    wxSize DoGetSize() const override;
 
     // same as DoSetSize() for the client size
     void DoSetClientSize(int width, int height) override;
-    void DoGetClientSize(int *width, int *height) const override;
+    wxSize DoGetClientSize() const override;
 
     void DoMoveWindow(int x, int y, int width, int height) override;
 

@@ -178,10 +178,9 @@ void wxSashLayoutWindow::OnCalculateLayout(wxCalculateLayoutEvent& event)
 // over.
 bool wxLayoutAlgorithm::LayoutMDIFrame(wxMDIParentFrame* frame, wxRect* r)
 {
-    int cw, ch;
-    frame->GetClientSize(& cw, & ch);
+    wxSize client_size = frame->GetClientSize();
 
-    wxRect rect(0, 0, cw, ch);
+    wxRect rect(0, 0, client_size.x, client_size.y);
     if (r)
         rect = * r;
 
@@ -246,10 +245,9 @@ bool wxLayoutAlgorithm::LayoutWindow(wxWindow* parent, wxWindow* mainWindow)
     }
 #endif // wxUSE_SASH
 
-    int cw, ch;
-    parent->GetClientSize(& cw, & ch);
+    wxSize client_size = parent->GetClientSize();
 
-    wxRect rect(leftMargin, topMargin, cw - leftMargin - rightMargin, ch - topMargin - bottomMargin);
+    wxRect rect(leftMargin, topMargin, client_size.x - leftMargin - rightMargin, client_size.y - topMargin - bottomMargin);
 
     wxCalculateLayoutEvent event;
     event.SetRect(rect);

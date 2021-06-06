@@ -520,16 +520,19 @@ void wxChoice::DoMoveWindow(int x, int y, int width, int height)
     wxControl::DoMoveWindow(x, y, width, heightWithItems);
 }
 
-void wxChoice::DoGetSize(int *w, int *h) const
+wxSize wxChoice::DoGetSize() const
 {
-    wxControl::DoGetSize(w, h);
+    wxSize ctrl_sz = wxControl::DoGetSize();
 
+    // FIXME: Find out why this occurs.
     // this is weird: sometimes, the height returned by Windows is clearly the
     // total height of the control including the drop down list -- but only
     // sometimes, and sometimes it isn't so work around this here by using our
     // own stored value if we have it
-    if ( h && m_heightOwn != wxDefaultCoord )
-        *h = m_heightOwn;
+    if ( ctrl_sz.y && m_heightOwn != wxDefaultCoord )
+        ctrl_sz.y = m_heightOwn;
+
+    return ctrl_sz;
 }
 
 void wxChoice::DoSetSize(int x, int y,

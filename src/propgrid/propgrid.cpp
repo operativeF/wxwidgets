@@ -414,7 +414,8 @@ void wxPropertyGrid::Init2()
         m_pState->m_properties = m_pState->m_abcArray;
     }
 
-    GetClientSize(&m_width,&m_height);
+    m_width = GetClientSize().x;
+    m_height = GetClientSize().y;
 
 #ifndef wxPG_ICON_WIDTH
     // create two bitmap nodes for drawing
@@ -4529,7 +4530,8 @@ void wxPropertyGrid::RecalculateVirtualSize( int forceXPos )
     }
 
     // Must re-get size now
-    GetClientSize(&m_width, &m_height);
+    m_width = GetClientSize().x;
+    m_height = GetClientSize().y;
 
     if ( !HasVirtualWidth() )
     {
@@ -4552,11 +4554,10 @@ void wxPropertyGrid::OnResize( wxSizeEvent& event )
     if ( !(m_iFlags & wxPG_FL_INITIALIZED) )
         return;
 
-    int width, height;
-    GetClientSize(&width, &height);
+    wxSize client_size = GetClientSize();
 
-    m_width = width;
-    m_height = height;
+    m_width = client_size.x;
+    m_height = client_size.y;
 
     if ( !HasExtraStyle(wxPG_EX_NATIVE_DOUBLE_BUFFERING) )
     {
@@ -4565,8 +4566,8 @@ void wxPropertyGrid::OnResize( wxSizeEvent& event )
         if ( !m_doubleBuffer )
         {
             // Create double buffer bitmap to draw on, if none
-            int w = wxMax(width, 250);
-            int h = wxMax(height + dblh, 400);
+            int w = wxMax(client_size.x, 250);
+            int h = wxMax(client_size.y + dblh, 400);
             m_doubleBuffer = new wxBitmap;
             m_doubleBuffer->CreateScaled( w, h, wxBITMAP_SCREEN_DEPTH, scaleFactor );
         }
@@ -4576,10 +4577,10 @@ void wxPropertyGrid::OnResize( wxSizeEvent& event )
             int h = m_doubleBuffer->GetScaledHeight();
 
             // Double buffer must be large enough
-            if ( w < width || h < (height+dblh) )
+            if ( w < client_size.x || h < (client_size.y + dblh) )
             {
-                if ( w < width ) w = width;
-                if ( h < (height+dblh) ) h = height + dblh;
+                if ( w < client_size.x ) w = client_size.x;
+                if ( h < (client_size.y + dblh ) ) h = client_size.y + dblh;
                 delete m_doubleBuffer;
                 m_doubleBuffer = new wxBitmap;
                 m_doubleBuffer->CreateScaled( w, h, wxBITMAP_SCREEN_DEPTH, scaleFactor );
@@ -4587,7 +4588,7 @@ void wxPropertyGrid::OnResize( wxSizeEvent& event )
         }
     }
 
-    m_pState->OnClientWidthChange( width, event.GetSize().x - m_ncWidth, true );
+    m_pState->OnClientWidthChange( client_size.x, event.GetSize().x - m_ncWidth, true );
     m_ncWidth = event.GetSize().x;
 
     if ( !IsFrozen() )

@@ -46,8 +46,8 @@ public:
 
     void SetIcons(const wxIconBundle& icons) override;
     void DoMoveWindow(int x, int y, int width, int height) override;
-    void DoGetPosition(int *x, int *y) const override;
-    void DoGetSize(int *width, int *height) const override;
+    wxPoint DoGetPosition() const override;
+    wxSize DoGetSize() const override;
     void Fit() override;
 
     bool Show( bool show = true ) override;

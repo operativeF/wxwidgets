@@ -66,7 +66,7 @@ public:
     void OnInternalIdle() override;
 
 protected:
-    void DoGetClientSize(int* width, int* height) const override;
+    wxSize DoGetClientSize() const override;
 
 private:
     friend class wxMDIChildFrame;
@@ -123,7 +123,7 @@ public:
     bool               m_justInserted;
 
 protected:
-    void DoGetPosition(int *x, int *y) const override;
+    wxPoint DoGetPosition() const override;
 
 private:
     void Init();

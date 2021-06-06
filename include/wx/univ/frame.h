@@ -61,7 +61,7 @@ protected:
     void OnSize(wxSizeEvent& event);
     void OnSysColourChanged(wxSysColourChangedEvent& event);
 
-    void DoGetClientSize(int *width, int *height) const override;
+    wxSize DoGetClientSize() const override;
     void DoSetClientSize(int width, int height) override;
 
 #if wxUSE_MENUS

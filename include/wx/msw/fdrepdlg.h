@@ -45,8 +45,8 @@ public:
     wxString GetTitle() const override;
 
 protected:
-    void DoGetSize(int *width, int *height) const override;
-    void DoGetClientSize(int *width, int *height) const override;
+    wxSize DoGetSize() const override;
+    wxSize DoGetClientSize() const override;
     void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;

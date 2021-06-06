@@ -406,8 +406,8 @@ void wxCheckListBox::OnLeftClick(wxMouseEvent& event)
 
                 // scroll one item down if the item is the last one
                 // and isn't visible at all
-                int h;
-                GetClientSize(nullptr, &h);
+                int h = GetClientSize().y;
+
                 if ( rect.GetBottom() > h )
                     ScrollLines(1);
             }

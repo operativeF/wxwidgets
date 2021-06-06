@@ -55,7 +55,7 @@ public:
     QScrollArea *QtGetScrollBarsContainer() const override;
 
 protected:
-    void DoGetClientSize(int *width, int *height) const override;
+    wxSize DoGetClientSize() const override;
     void DoSetClientSize(int width, int height) override;
 
     QWidget* QtGetParentWidget() const override;

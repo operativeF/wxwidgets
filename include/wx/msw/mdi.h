@@ -228,8 +228,8 @@ public:
     void OnIdle(wxIdleEvent& event);
 
 protected:
-    void DoGetScreenPosition(int *x, int *y) const override;
-    void DoGetPosition(int *x, int *y) const override;
+    wxPoint DoGetScreenPosition() const override;
+    wxPoint DoGetPosition() const override;
     void DoSetSize(int x, int y, int width, int height, int sizeFlags) override;
     void DoSetClientSize(int width, int height) override;
     void InternalSetMenuBar() override;

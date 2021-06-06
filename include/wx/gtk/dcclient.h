@@ -26,7 +26,7 @@ public:
     bool CanDrawBitmap() const override { return true; }
     bool CanGetTextExtent() const override { return true; }
 
-    void DoGetSize(int *width, int *height) const override;
+    wxSize DoGetSize() const override;
     virtual bool DoFloodFill( wxCoord x, wxCoord y, const wxColour& col,
                               wxFloodFillStyle style=wxFLOOD_SURFACE ) override;
     bool DoGetPixel( wxCoord x1, wxCoord y1, wxColour *col ) const override;
@@ -148,7 +148,7 @@ public:
     wxClientDCImpl( wxDC *owner );
     wxClientDCImpl( wxDC *owner, wxWindow *win );
 
-    void DoGetSize(int *width, int *height) const override;
+    wxSize DoGetSize() const override;
 
     wxDECLARE_ABSTRACT_CLASS(wxClientDCImpl);
 };

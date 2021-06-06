@@ -394,13 +394,12 @@ void wxGCDCImpl::DestroyClippingRegion()
     m_graphicContext->ResetClip();
     // currently the clip eg of a window extends to the area between the scrollbars
     // so we must explicitly make sure it only covers the area we want it to draw
-    int width, height ;
-    GetOwner()->GetSize( &width , &height ) ;
+    wxSize sz = GetOwner()->GetSize() ;
     wxPoint origin;
 #ifdef __WXOSX__
     origin = OSXGetOrigin();
 #endif
-    m_graphicContext->Clip( DeviceToLogicalX(origin.x) , DeviceToLogicalY(origin.y) , DeviceToLogicalXRel(width), DeviceToLogicalYRel(height) );
+    m_graphicContext->Clip( DeviceToLogicalX(origin.x) , DeviceToLogicalY(origin.y) , DeviceToLogicalXRel(sz.x), DeviceToLogicalYRel(sz.y) );
 
     m_graphicContext->SetPen( m_pen );
     m_graphicContext->SetBrush( m_brush );
@@ -411,13 +410,12 @@ void wxGCDCImpl::DestroyClippingRegion()
 
 void wxGCDCImpl::DoGetSizeMM( int* width, int* height ) const
 {
-    int w = 0, h = 0;
+    wxSize sz = GetOwner()->GetSize();
 
-    GetOwner()->GetSize( &w, &h );
     if (width)
-        *width = long( double(w) / (m_scaleX * GetMMToPXx()) );
+        *width = long( double(sz.x) / (m_scaleX * GetMMToPXx()) );
     if (height)
-        *height = long( double(h) / (m_scaleY * GetMMToPXy()) );
+        *height = long( double(sz.y) / (m_scaleY * GetMMToPXy()) );
 }
 
 void wxGCDCImpl::SetTextForeground( const wxColour &col )
@@ -656,15 +654,13 @@ void wxGCDCImpl::DoCrossHair( wxCoord x, wxCoord y )
     if ( !m_logicalFunctionSupported )
         return;
 
-    int w = 0, h = 0;
+    wxSize sz = GetOwner()->GetSize();
 
-    GetOwner()->GetSize( &w, &h );
-
-    m_graphicContext->StrokeLine(0,y,w,y);
-    m_graphicContext->StrokeLine(x,0,x,h);
+    m_graphicContext->StrokeLine(0,y,sz.x,y);
+    m_graphicContext->StrokeLine(x,0,x,sz.y);
 
     CalcBoundingBox(0, 0);
-    CalcBoundingBox(w, h);
+    CalcBoundingBox(sz.x, sz.y);
 }
 
 void wxGCDCImpl::DoDrawArc( wxCoord x1, wxCoord y1,
@@ -1062,8 +1058,11 @@ bool wxGCDCImpl::DoStretchBlit(
                    source->LogicalToDeviceYRel(srcHeight));
     const wxRect subrectOrig = subrect;
     // clip the subrect down to the size of the source DC
+    // FIXME: Directly initialize wxRect clip with a size instead.
     wxRect clip;
-    source->GetSize(&clip.width, &clip.height);
+    clip.width = source->GetSize().x;
+    clip.height = source->GetSize().y;
+
     subrect.Intersect(clip);
     if (subrect.width == 0)
         return true;
@@ -1328,15 +1327,13 @@ void wxGCDCImpl::Clear()
     m_graphicContext->SetBrush( m_brush );
 }
 
-void wxGCDCImpl::DoGetSize(int *width, int *height) const
+wxSize wxGCDCImpl::DoGetSize() const
 {
-    wxCHECK_RET( IsOk(), wxT("wxGCDC(cg)::DoGetSize - invalid DC") );
-    double w,h;
-    m_graphicContext->GetSize( &w, &h );
-    if ( height )
-        *height = wxRound(h);
-    if ( width )
-        *width = wxRound(w);
+    // FIXME: Return value?
+    //wxCHECK_RET( IsOk(), wxT("wxGCDC(cg)::DoGetSize - invalid DC") );
+    wxRealPoint sz = m_graphicContext->GetSize();
+
+    return {wxRound(sz.x), wxRound(sz.y)};
 }
 
 void wxGCDCImpl::DoGradientFillLinear(const wxRect& rect,

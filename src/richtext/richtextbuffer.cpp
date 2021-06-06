@@ -10427,7 +10427,6 @@ void wxRichTextTable::adjustColumns(const std::vector<int>& minColWidths,
     const std::vector<int>& maxUnspecifiedColumnWidths,
     std::vector<int>& colWidths,
     bool stretchToFitTableWidth,
-    int tableWidth,
     bool relaxConstraints,
     int widthLeft,
     bool shareEqually,
@@ -10840,7 +10839,7 @@ bool wxRichTextTable::Layout(wxDC& dc, wxRichTextDrawingContext& context, const 
     // table to fit the parent/table width, or we explicitly set the
     // table width and need to stretch out the table.
     adjustColumns(minColWidths, minColWidthsNoWrap, maxUnspecifiedColumnWidths, colWidths,
-        stretchToFitTableWidth, tableWidth, relaxConstraints, widthLeft, shareEqually, colShare, colShareRemainder);
+        stretchToFitTableWidth, relaxConstraints, widthLeft, shareEqually, colShare, colShareRemainder);
     
 
 /*

@@ -3924,8 +3924,6 @@ void wxAuiManager::Repaint(wxDC* dc)
         return ;
     }
 #endif
-    int w, h;
-    m_frame->GetClientSize(&w, &h);
 
     // figure out which dc to use; if one
     // has been specified, use it, otherwise

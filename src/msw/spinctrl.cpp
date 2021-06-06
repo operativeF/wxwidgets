@@ -811,33 +811,27 @@ void wxSpinCtrl::DoMoveWindow(int x, int y, int width, int height)
 }
 
 // get total size of the control
-void wxSpinCtrl::DoGetSize(int *x, int *y) const
+wxSize wxSpinCtrl::DoGetSize() const
 {
     RECT spinrect, textrect, ctrlrect;
     GetWindowRect(GetHwnd(), &spinrect);
     GetWindowRect(GetBuddyHwnd(), &textrect);
     UnionRect(&ctrlrect,&textrect, &spinrect);
 
-    if ( x )
-        *x = ctrlrect.right - ctrlrect.left;
-    if ( y )
-        *y = ctrlrect.bottom - ctrlrect.top;
+    return {ctrlrect.right - ctrlrect.left, ctrlrect.bottom - ctrlrect.top};
 }
 
-void wxSpinCtrl::DoGetClientSize(int *x, int *y) const
+wxSize wxSpinCtrl::DoGetClientSize() const
 {
     RECT spinrect = wxGetClientRect(GetHwnd());
     RECT textrect = wxGetClientRect(GetBuddyHwnd());
     RECT ctrlrect;
     UnionRect(&ctrlrect,&textrect, &spinrect);
 
-    if ( x )
-        *x = ctrlrect.right - ctrlrect.left;
-    if ( y )
-        *y = ctrlrect.bottom - ctrlrect.top;
+    return {ctrlrect.right - ctrlrect.left, ctrlrect.bottom - ctrlrect.top};
 }
 
-void wxSpinCtrl::DoGetPosition(int *x, int *y) const
+wxPoint wxSpinCtrl::DoGetPosition() const
 {
     // Because both subcontrols are mirrored manually
     // (for layout direction purposes, see note)
@@ -850,16 +844,14 @@ void wxSpinCtrl::DoGetPosition(int *x, int *y) const
     // our layout != parent layout  =>  x(Button) < x(Text)
 
     // hack: pretend that our HWND is the text control just for a moment
-    int xBuddy;
     WXHWND hWnd = GetHWND();
     const_cast<wxSpinCtrl *>(this)->m_hWnd = m_hwndBuddy;
-    wxSpinButton::DoGetPosition(&xBuddy, y);
+    wxPoint xBuddy = wxSpinButton::DoGetPosition();
 
-    int xText;
     const_cast<wxSpinCtrl *>(this)->m_hWnd = hWnd;
-    wxSpinButton::DoGetPosition(&xText, y);
+    wxPoint xText = wxSpinButton::DoGetPosition();
 
-    *x = wxMin(xBuddy, xText);
+    return {wxMin(xBuddy.x, xText.x), xText.y};
 }
 
 void wxSpinCtrl::DoScreenToClient(int *x, int *y) const

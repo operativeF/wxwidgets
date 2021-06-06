@@ -320,7 +320,8 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
 
     SetHelpText(_("Displays help as you browse the books on the left."));
 
-    GetPosition(&m_Cfg.x, &m_Cfg.y);
+    m_Cfg.x = GetPosition().x;
+    m_Cfg.y = GetPosition().y;
 
     int notebook_page = 0;
 

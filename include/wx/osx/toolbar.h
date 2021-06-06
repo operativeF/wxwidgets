@@ -101,11 +101,11 @@ protected:
     void DoSetSize(int x, int y, int width, int height, int sizeFlags) override;
 
 #ifndef __WXOSX_IPHONE__
-    void DoGetSize(int *width, int *height) const override;
+    wxSize DoGetSize() const override;
     wxSize DoGetBestSize() const override;
 #endif
 #ifdef __WXOSX_COCOA__
-    void DoGetPosition(int*x, int *y) const override;
+    wxPoint DoGetPosition() const override;
 #endif
     bool DoInsertTool(size_t pos, wxToolBarToolBase *tool) override;
     bool DoDeleteTool(size_t pos, wxToolBarToolBase *tool) override;

@@ -80,8 +80,8 @@ protected:
     virtual wxIDirectFBSurfacePtr ObtainDfbSurface() const;
 
     // overridden wxWindow methods
-    virtual void DoGetPosition(int *x, int *y) const;
-    virtual void DoGetSize(int *width, int *height) const;
+    wxPoint DoGetPosition() const override;
+    wxSize DoGetSize() const override;
     virtual void DoMoveWindow(int x, int y, int width, int height);
 
     virtual void DoRefreshRect(const wxRect& rect);

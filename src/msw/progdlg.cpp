@@ -844,40 +844,32 @@ wxRect wxProgressDialog::GetTaskDialogRect() const
     return r;
 }
 
-void wxProgressDialog::DoGetPosition(int *x, int *y) const
+wxPoint wxProgressDialog::DoGetPosition() const
 {
 #ifdef wxHAS_MSW_TASKDIALOG
     if ( HasNativeTaskDialog() )
     {
         const wxRect r = GetTaskDialogRect();
-        if (x)
-            *x = r.x;
-        if (y)
-            *y = r.y;
 
-        return;
+        return {r.x, r.y};
     }
 #endif // wxHAS_MSW_TASKDIALOG
 
-    wxGenericProgressDialog::DoGetPosition(x, y);
+    return wxGenericProgressDialog::DoGetPosition();
 }
 
-void wxProgressDialog::DoGetSize(int *width, int *height) const
+wxSize wxProgressDialog::DoGetSize() const
 {
 #ifdef wxHAS_MSW_TASKDIALOG
     if ( HasNativeTaskDialog() )
     {
         const wxRect r = GetTaskDialogRect();
-        if ( width )
-            *width = r.width;
-        if ( height )
-            *height = r.height;
 
-        return;
+        return {r.width, r.height};
     }
 #endif // wxHAS_MSW_TASKDIALOG
 
-    wxGenericProgressDialog::DoGetSize(width, height);
+    return wxGenericProgressDialog::DoGetSize();
 }
 
 void wxProgressDialog::Fit()

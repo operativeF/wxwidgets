@@ -116,7 +116,7 @@ protected:
 
     // MSW implementation
     wxSize DoGetBestSize() const override;
-    void DoGetSize(int *w, int *h) const override;
+    wxSize DoGetSize() const override;
     void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;

@@ -956,11 +956,10 @@ wxWindowQt *wxWindowBase::GetCapture()
 }
 
 
-void wxWindowQt::DoGetPosition(int *x, int *y) const
+wxPoint wxWindowQt::DoGetPosition() const
 {
     QWidget *qtWidget = GetHandle();
-    *x = qtWidget->x();
-    *y = qtWidget->y();
+    return {qtWidget->x(), qtWidget->y()};
 }
 
 

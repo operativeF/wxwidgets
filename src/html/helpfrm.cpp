@@ -115,7 +115,8 @@ bool wxHtmlHelpFrame::Create(wxWindow* parent, wxWindowID id,
     m_HtmlHelpWin->Create(this, wxID_ANY, wxDefaultPosition, wxDefaultSize,
         wxTAB_TRAVERSAL|wxNO_BORDER, style);
 
-    GetPosition(& (m_HtmlHelpWin->GetCfgData().x), & (m_HtmlHelpWin->GetCfgData()).y);
+    m_HtmlHelpWin->GetCfgData().x = GetPosition().x;
+    m_HtmlHelpWin->GetCfgData().y = GetPosition().y;
 
     SetIcons(wxArtProvider::GetIconBundle(wxART_HELP, wxART_FRAME_ICON));
 
@@ -159,8 +160,10 @@ void wxHtmlHelpFrame::OnCloseWindow(wxCloseEvent& evt)
 {
     if (!IsIconized())
     {
-        GetSize(& (m_HtmlHelpWin->GetCfgData().w), &(m_HtmlHelpWin->GetCfgData().h));
-        GetPosition(& (m_HtmlHelpWin->GetCfgData().x), & (m_HtmlHelpWin->GetCfgData().y));
+        m_HtmlHelpWin->GetCfgData().x = GetPosition().x;
+        m_HtmlHelpWin->GetCfgData().y = GetPosition().y;
+        m_HtmlHelpWin->GetCfgData().w = GetSize().x;
+        m_HtmlHelpWin->GetCfgData().h = GetSize().y;
     }
 
 #ifdef __WXGTK__

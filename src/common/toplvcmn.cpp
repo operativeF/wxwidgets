@@ -203,10 +203,21 @@ void wxTopLevelWindowBase::SetMaxSize(const wxSize& maxSize)
     SetSizeHints(GetMinSize(), maxSize);
 }
 
-void wxTopLevelWindowBase::GetRectForTopLevelChildren(int *x, int *y, int *w, int *h)
+void wxTopLevelWindowBase::GetRectForTopLevelChildren(int* x, int* y, int* w, int* h)
 {
-    GetPosition(x,y);
-    GetSize(w,h);
+    // FIXME: Return wxRect instead.
+    wxPoint pos = GetPosition();
+    wxSize sz = GetSize();
+
+    if (x)
+        *x = pos.x;
+    if (y)
+        *y = pos.y;
+
+    if (w)
+        *w = sz.x;
+    if (h)
+        *h = sz.y;
 }
 
 /* static */
@@ -456,10 +467,9 @@ bool wxTopLevelWindowBase::Layout()
         if ( child && child->IsShown() )
         {
             // exactly one child - set it's size to fill the whole frame
-            int clientW, clientH;
-            DoGetClientSize(&clientW, &clientH);
+            wxSize client_size = DoGetClientSize();
 
-            child->SetSize(0, 0, clientW, clientH);
+            child->SetSize(0, 0, client_size.x, client_size.y);
 
             return true;
         }

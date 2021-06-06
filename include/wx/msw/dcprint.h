@@ -47,9 +47,9 @@ protected:
                         wxDC *source, wxCoord xsrc, wxCoord ysrc,
                         wxRasterOperationMode rop = wxCOPY, bool useMask = false,
                         wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) override;
-    void DoGetSize(int *w, int *h) const override
+    wxSize DoGetSize() const override
     {
-        GetDeviceSize(w, h);
+        return GetDeviceSize();
     }
 
 

@@ -774,7 +774,7 @@ void wxTopLevelWindowMSW::SetLayoutDirection(wxLayoutDirection dir)
 // wxTopLevelWindowMSW geometry
 // ----------------------------------------------------------------------------
 
-void wxTopLevelWindowMSW::DoGetPosition(int *x, int *y) const
+wxPoint wxTopLevelWindowMSW::DoGetPosition() const
 {
     if ( IsIconized() )
     {
@@ -798,22 +798,17 @@ void wxTopLevelWindowMSW::DoGetPosition(int *x, int *y) const
                 rc.top += ptOfs.y;
             }
 
-            if ( x )
-                *x = rc.left;
-            if ( y )
-                *y = rc.top;
-
-            return;
+            return {rc.left, rc.top};
         }
 
         wxLogLastError(wxT("GetWindowPlacement"));
     }
     //else: normal case
 
-    wxTopLevelWindowBase::DoGetPosition(x, y);
+    return wxTopLevelWindowBase::DoGetPosition();
 }
 
-void wxTopLevelWindowMSW::DoGetSize(int *width, int *height) const
+wxSize wxTopLevelWindowMSW::DoGetSize() const
 {
     if ( IsIconized() )
     {
@@ -823,19 +818,14 @@ void wxTopLevelWindowMSW::DoGetSize(int *width, int *height) const
         {
             const RECT& rc = wp.rcNormalPosition;
 
-            if ( width )
-                *width = rc.right - rc.left;
-            if ( height )
-                *height = rc.bottom - rc.top;
-
-            return;
+            return {rc.right - rc.left, rc.bottom - rc.top};
         }
 
         wxLogLastError(wxT("GetWindowPlacement"));
     }
     //else: normal case
 
-    wxTopLevelWindowBase::DoGetSize(width, height);
+    return wxTopLevelWindowBase::DoGetSize();
 }
 
 void

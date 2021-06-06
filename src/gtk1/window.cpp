@@ -3093,9 +3093,9 @@ void wxWindowGTK::DoGetClientSize( int *width, int *height ) const
 */
 }
 
-void wxWindowGTK::DoGetPosition( int *x, int *y ) const
+wxPoint wxWindowGTK::DoGetPosition() const
 {
-    wxCHECK_RET( (m_widget != NULL), wxT("invalid window") );
+    wxCHECK_RET( (m_widget != nullptr), wxT("invalid window") );
 
     int dx = 0;
     int dy = 0;
@@ -3106,8 +3106,7 @@ void wxWindowGTK::DoGetPosition( int *x, int *y ) const
         dy = pizza->yoffset;
     }
 
-    if (x) (*x) = m_x - dx;
-    if (y) (*y) = m_y - dy;
+    return {m_x - dx, m_y - dy};
 }
 
 void wxWindowGTK::DoClientToScreen( int *x, int *y ) const

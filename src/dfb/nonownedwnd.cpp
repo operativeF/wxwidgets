@@ -177,14 +177,14 @@ wxNonOwnedWindow::~wxNonOwnedWindow()
 // window size & position
 // ----------------------------------------------------------------------------
 
-void wxNonOwnedWindow::DoGetPosition(int *x, int *y) const
+wxPoint wxNonOwnedWindow::DoGetPosition() const
 {
-    m_dfbwin->GetPosition(x, y);
+    return m_dfbwin->GetPosition();
 }
 
-void wxNonOwnedWindow::DoGetSize(int *width, int *height) const
+wxSize wxNonOwnedWindow::DoGetSize() const
 {
-    m_dfbwin->GetSize(width, height);
+    return m_dfbwin->GetSize();
 }
 
 void wxNonOwnedWindow::DoMoveWindow(int x, int y, int width, int height)

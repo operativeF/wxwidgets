@@ -2909,16 +2909,17 @@ wxGenericTreeCtrl::PaintLevel(wxGenericTreeItem *item,
 
                 // Only draw the portion of the line that is visible, in case
                 // it is huge
-                wxCoord xOrigin=0, yOrigin=0, width, height;
+                wxCoord xOrigin=0, yOrigin=0;
                 dc.GetDeviceOrigin(&xOrigin, &yOrigin);
                 yOrigin = abs(yOrigin);
-                GetClientSize(&width, &height);
+
+                int cli_h = GetClientSize().y;
 
                 // Move end points to the beginning/end of the view?
                 if (y_mid < yOrigin)
                     y_mid = yOrigin;
-                if (oldY > yOrigin + height)
-                    oldY = yOrigin + height;
+                if (oldY > yOrigin + cli_h)
+                    oldY = yOrigin + cli_h;
 
                 // after the adjustments if y_mid is larger than oldY then the
                 // line isn't visible at all so don't draw anything
@@ -3424,13 +3425,14 @@ void wxGenericTreeCtrl::OnChar( wxKeyEvent &event )
 wxTreeItemId
 wxGenericTreeCtrl::DoTreeHitTest(const wxPoint& point, int& flags) const
 {
-    int w, h;
-    GetSize(&w, &h);
+    wxSize sz = GetSize();
+
     flags=0;
-    if (point.x<0) flags |= wxTREE_HITTEST_TOLEFT;
-    if (point.x>w) flags |= wxTREE_HITTEST_TORIGHT;
-    if (point.y<0) flags |= wxTREE_HITTEST_ABOVE;
-    if (point.y>h) flags |= wxTREE_HITTEST_BELOW;
+
+    if (point.x < 0) flags |= wxTREE_HITTEST_TOLEFT;
+    if (point.x > sz.x) flags |= wxTREE_HITTEST_TORIGHT;
+    if (point.y < 0) flags |= wxTREE_HITTEST_ABOVE;
+    if (point.y > sz.y) flags |= wxTREE_HITTEST_BELOW;
     if (flags) return wxTreeItemId();
 
     if (m_anchor == nullptr)

@@ -115,7 +115,7 @@ protected:
                            int sizeFlags = wxSIZE_AUTO);
 
     virtual void DoSetClientSize(int width, int height);
-    virtual void DoGetClientSize( int *width, int *height ) const;
+    virtual wxSize DoGetClientSize() const;
 
     wxString      m_title;
 

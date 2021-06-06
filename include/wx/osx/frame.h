@@ -89,7 +89,7 @@ protected:
 #endif
 
     // override base class virtuals
-    void DoGetClientSize(int *width, int *height) const override;
+    wxSize DoGetClientSize() const override;
     void DoSetClientSize(int width, int height) override;
 
 #if wxUSE_MENUBAR

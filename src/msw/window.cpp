@@ -1800,7 +1800,7 @@ bool wxWindowMSW::IsSizeDeferred() const
 }
 
 // Get total size
-void wxWindowMSW::DoGetSize(int *x, int *y) const
+wxSize wxWindowMSW::DoGetSize() const
 {
 #if wxUSE_DEFERRED_SIZING
     // if SetSize() had been called at wx level but not realized at Windows
@@ -1808,26 +1808,22 @@ void wxWindowMSW::DoGetSize(int *x, int *y) const
     // the new and not the old position to the other wx code
     if ( m_pendingSize != wxDefaultSize )
     {
-        if ( x )
-            *x = m_pendingSize.x;
-        if ( y )
-            *y = m_pendingSize.y;
+        return {m_pendingSize.x, m_pendingSize.y};
     }
     else // use current size
 #endif // wxUSE_DEFERRED_SIZING
     {
         RECT rect = wxGetWindowRect(GetHwnd());
 
-        if ( x )
-            *x = rect.right - rect.left;
-        if ( y )
-            *y = rect.bottom - rect.top;
+        return {rect.right - rect.left, rect.bottom - rect.top};
     }
 }
 
 // Get size *available for subwindows* i.e. excluding menu bar etc.
-void wxWindowMSW::DoGetClientSize(int *x, int *y) const
+wxSize wxWindowMSW::DoGetClientSize() const
 {
+    wxSize client_size;
+
 #if wxUSE_DEFERRED_SIZING
     if ( m_pendingSize != wxDefaultSize )
     {
@@ -1852,33 +1848,29 @@ void wxWindowMSW::DoGetClientSize(int *x, int *y) const
 
         ::SendMessage(GetHwnd(), WM_NCCALCSIZE, FALSE, (LPARAM)&rect);
 
-        if ( x )
-            *x = rect.right - rect.left;
-        if ( y )
-            *y = rect.bottom - rect.top;
+        client_size = {rect.right - rect.left, rect.bottom - rect.top};
     }
     else
 #endif // wxUSE_DEFERRED_SIZING
     {
         RECT rect = wxGetClientRect(GetHwnd());
-
-        if ( x )
-            *x = rect.right;
-        if ( y )
-            *y = rect.bottom;
+        
+        client_size = {rect.right, rect.bottom};
     }
 
     // The size of the client window can't be negative but ::GetClientRect()
     // can return negative size for an extremely small (1x1) window with
     // borders so ensure that we correct it here as having negative sizes is
     // completely unexpected.
-    if ( x && *x < 0 )
-        *x = 0;
-    if ( y && *y < 0 )
-        *y = 0;
+    if ( client_size.x < 0 )
+        client_size.x = 0;
+    if ( client_size.y < 0 )
+        client_size.y = 0;
+
+    return client_size;
 }
 
-void wxWindowMSW::DoGetPosition(int *x, int *y) const
+wxPoint wxWindowMSW::DoGetPosition() const
 {
     wxWindow * const parent = GetParent();
 
@@ -1916,10 +1908,7 @@ void wxWindowMSW::DoGetPosition(int *x, int *y) const
         pos.y -= pt.y;
     }
 
-    if ( x )
-        *x = pos.x;
-    if ( y )
-        *y = pos.y;
+    return {pos.x, pos.y};
 }
 
 /* static */
@@ -2085,17 +2074,13 @@ void wxWindowMSW::DoMoveWindow(int x, int y, int width, int height)
 // width/height
 void wxWindowMSW::DoSetSize(int x, int y, int width, int height, int sizeFlags)
 {
-    // get the current size and position...
-    int currentX, currentY;
-    int currentW, currentH;
-
-    GetPosition(&currentX, &currentY);
-    GetSize(&currentW, &currentH);
+    wxPoint currentPos = GetPosition();
+    wxSize currentSz = GetSize();
 
     if ( x == wxDefaultCoord && !(sizeFlags & wxSIZE_ALLOW_MINUS_ONE) )
-        x = currentX;
+        x = currentPos.x;
     if ( y == wxDefaultCoord && !(sizeFlags & wxSIZE_ALLOW_MINUS_ONE) )
-        y = currentY;
+        y = currentPos.y;
 
     wxSize size = wxDefaultSize;
     if ( width == wxDefaultCoord )
@@ -2108,7 +2093,7 @@ void wxWindowMSW::DoSetSize(int x, int y, int width, int height, int sizeFlags)
         else
         {
             // just take the current one
-            width = currentW;
+            width = currentSz.x;
         }
     }
 
@@ -2127,7 +2112,7 @@ void wxWindowMSW::DoSetSize(int x, int y, int width, int height, int sizeFlags)
         else
         {
             // just take the current one
-            height = currentH;
+            height = currentSz.y;
         }
     }
 
@@ -2135,7 +2120,7 @@ void wxWindowMSW::DoSetSize(int x, int y, int width, int height, int sizeFlags)
     // we're forced to resize the window
     if ( !(sizeFlags & wxSIZE_FORCE) )
     {
-        if ( width == currentW && height == currentH )
+        if ( width == currentSz.x && height == currentSz.y )
         {
             // We need to send wxSizeEvent ourselves because Windows won't do
             // it if the size doesn't change.
@@ -2148,7 +2133,7 @@ void wxWindowMSW::DoSetSize(int x, int y, int width, int height, int sizeFlags)
 
             // Still call DoMoveWindow() below if we need to change the
             // position, otherwise we're done.
-            if ( x == currentX && y == currentY )
+            if ( x == currentSz.x && y == currentSz.y )
                 return;
         }
     }

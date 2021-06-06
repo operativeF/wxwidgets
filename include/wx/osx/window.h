@@ -364,9 +364,9 @@ protected:
     virtual wxSize DoGetSizeFromClientSize( const wxSize & size ) const;
     void DoClientToScreen( int *x, int *y ) const override;
     void DoScreenToClient( int *x, int *y ) const override;
-    void DoGetPosition( int *x, int *y ) const override;
-    void DoGetSize( int *width, int *height ) const override;
-    void DoGetClientSize( int *width, int *height ) const override;
+    wxPoint DoGetPosition() const override;
+    wxSize DoGetSize() const override;
+    wxSize DoGetClientSize() const override;
     virtual void DoSetSize(int x, int y,
                            int width, int height,
                            int sizeFlags = wxSIZE_AUTO) override;

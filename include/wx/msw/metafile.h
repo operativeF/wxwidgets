@@ -96,7 +96,7 @@ public:
     void SetWindowsMappingMode(int mm) { m_windowsMappingMode = mm; }
 
 protected:
-    void DoGetSize(int *width, int *height) const override;
+    wxSize DoGetSize() const override;
 
     int           m_windowsMappingMode;
     wxMetafile*   m_metaFile;

@@ -292,16 +292,16 @@ TEST_CASE_METHOD(WindowTestCase, "Window::Focus", "[window]")
 TEST_CASE_METHOD(WindowTestCase, "Window::Positioning", "[window]")
 {
     //Some basic tests for consistency
-    int x, y;
-    m_window->GetPosition(&x, &y);
+    wxPoint winPos = m_window->GetPosition();
 
-    CHECK( m_window->GetPosition().x == x );
-    CHECK( m_window->GetPosition().y == y );
+    CHECK( m_window->GetPosition().x == winPos.x );
+    CHECK( m_window->GetPosition().y == winPos.y );
     CHECK( m_window->GetRect().GetTopLeft() == m_window->GetPosition() );
 
-    m_window->GetScreenPosition(&x, &y);
-    CHECK( m_window->GetScreenPosition().x == x );
-    CHECK( m_window->GetScreenPosition().y == y );
+    wxPoint scrPos = m_window->GetScreenPosition();
+
+    CHECK( m_window->GetScreenPosition().x == scrPos.x );
+    CHECK( m_window->GetScreenPosition().y == scrPos.y );
     CHECK( m_window->GetScreenRect().GetTopLeft() == m_window->GetScreenPosition() );
 }
 

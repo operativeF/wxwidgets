@@ -284,7 +284,7 @@ protected:
     // because each derived class should take care to define it as needed (this
     // implementation is not at all always appropriate) and because we want
     // wxDC to be an ABC to prevent it from being created directly
-    void GetDeviceSize(int *width, int *height) const;
+    wxSize GetDeviceSize() const;
 
 
     // MSW-specific member variables
@@ -342,15 +342,12 @@ public:
         SetHDC((WXHDC)nullptr);
     }
 
-    void DoGetSize(int *w, int *h) const override
+    wxSize DoGetSize() const override
     {
         wxASSERT_MSG( m_size.IsFullySpecified(),
                       wxT("size of this DC hadn't been set and is unknown") );
 
-        if ( w )
-            *w = m_size.x;
-        if ( h )
-            *h = m_size.y;
+        return {m_size.x, m_size.y};
     }
 
 private:

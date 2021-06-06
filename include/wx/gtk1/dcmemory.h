@@ -43,7 +43,7 @@ public:
     virtual ~wxMemoryDCImpl();
 
     virtual void DoSelect(const wxBitmap& bitmap);
-    virtual void DoGetSize( int *width, int *height ) const;
+    virtual wxSize DoGetSize() const;
 
     // these get reimplemented for mono-bitmaps to behave
     // more like their Win32 couterparts. They now interpret

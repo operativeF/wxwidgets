@@ -57,6 +57,7 @@ class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;
 #define wxHF_FLATTOOLBAR             wxHF_FLAT_TOOLBAR
 #define wxHF_DEFAULTSTYLE            wxHF_DEFAULT_STYLE
 
+// FIXME: Accept sizes and positions instead.
 struct wxHtmlHelpFrameCfg
 {
     int x, y, w, h;

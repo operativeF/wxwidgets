@@ -27,7 +27,7 @@ public:
     wxMemoryDCImpl(wxMemoryDC *owner, wxDC *dc);
     virtual ~wxMemoryDCImpl();
 
-    virtual void DoGetSize( int *width, int *height ) const;
+    virtual wxSize DoGetSize() const;
     virtual void DoSelect(const wxBitmap& bitmap);
 
 private:

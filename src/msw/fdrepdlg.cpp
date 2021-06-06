@@ -440,22 +440,17 @@ void wxFindReplaceDialog::DoSetSize(int WXUNUSED(x), int WXUNUSED(y),
 
 // NB: of course, both of these functions are completely bogus, but it's better
 //     than nothing
-void wxFindReplaceDialog::DoGetSize(int *width, int *height) const
+wxSize wxFindReplaceDialog::DoGetSize() const
 {
+    // FIXME: Magic values.
     // the standard dialog size
-    if ( width )
-        *width = 225;
-    if ( height )
-        *height = 324;
+    return { 225, 324 };
 }
 
-void wxFindReplaceDialog::DoGetClientSize(int *width, int *height) const
+wxSize wxFindReplaceDialog::DoGetClientSize() const
 {
-    // the standard dialog size
-    if ( width )
-        *width = 219;
-    if ( height )
-        *height = 299;
+    // FIXME: Magic values.
+    return { 219, 299 };
 }
 
 #endif // wxUSE_FINDREPLDLG

@@ -2106,14 +2106,15 @@ bool wxDocPrintout::OnPrintPage(int WXUNUSED(page))
     // Now we have to check in case our real page size is reduced
     // (e.g. because we're drawing to a print preview memory DC)
     int pageWidth, pageHeight;
-    int w, h;
-    dc->GetSize(&w, &h);
+
+    int dcWidth = dc->GetSize().x;
+
     GetPageSizePixels(&pageWidth, &pageHeight);
     wxUnusedVar(pageHeight);
 
     // If printer pageWidth == current DC width, then this doesn't
     // change. But w might be the preview bitmap width, so scale down.
-    double overallScale = scale * w / pageWidth;
+    double overallScale = scale * dcWidth / pageWidth;
     dc->SetUserScale(overallScale, overallScale);
 
     if (m_printoutView)

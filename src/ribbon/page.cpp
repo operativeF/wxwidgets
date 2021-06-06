@@ -326,13 +326,14 @@ bool wxRibbonPage::ScrollPixels(int pixels)
               node = node->GetNext() )
     {
         wxWindow* child = node->GetData();
-        int x, y;
-        child->GetPosition(&x, &y);
+
+        wxPoint child_pos = child->GetPosition();
+
         if(GetMajorAxis() == wxHORIZONTAL)
-            x -= pixels;
+            child_pos.x -= pixels;
         else
-            y -= pixels;
-        child->SetPosition(wxPoint(x, y));
+            child_pos.y -= pixels;
+        child->SetPosition(child_pos);
     }
 
     if (ShowScrollButtons())
@@ -365,18 +366,15 @@ bool wxRibbonPage::ScrollSections(int sections)
     wxOrientation major_axis = GetMajorAxis();
     int gap = 0;
 
-    int width = 0;
-    int height = 0;
-    int x = 0;
-    int y = 0;
-    GetSize(&width, &height);
-    GetPosition(&x, &y);
+    wxSize sz = GetSize();
+    wxPoint pt = GetPosition();
+
     if(major_axis == wxHORIZONTAL)
     {
         gap = m_art->GetMetric(wxRIBBON_ART_PANEL_X_SEPARATION_SIZE);
         if (scrollForward)
         {
-            scrollpos = width - m_art->GetMetric(wxRIBBON_ART_PAGE_BORDER_RIGHT_SIZE);
+            scrollpos = sz.x - m_art->GetMetric(wxRIBBON_ART_PAGE_BORDER_RIGHT_SIZE);
         }
         else
         {
@@ -388,7 +386,7 @@ bool wxRibbonPage::ScrollSections(int sections)
         gap = m_art->GetMetric(wxRIBBON_ART_PANEL_Y_SEPARATION_SIZE);
         if (scrollForward)
         {
-            scrollpos = width - m_art->GetMetric(wxRIBBON_ART_PAGE_BORDER_BOTTOM_SIZE);
+            scrollpos = sz.x - m_art->GetMetric(wxRIBBON_ART_PAGE_BORDER_BOTTOM_SIZE);
         }
         else
         {
@@ -405,19 +403,21 @@ bool wxRibbonPage::ScrollSections(int sections)
                              : node->GetPrevious())
     {
         wxWindow* child = node->GetData();
-        child->GetSize(&width, &height);
-        child->GetPosition(&x, &y);
+        wxSize child_size = child->GetSize();
+        wxPoint child_pos = child->GetPosition();
+
         int pos0 = 0;
         int pos1 = 0;
+
         if (major_axis == wxHORIZONTAL)
         {
-            pos0 = x;
-            pos1 = x + width + gap;
+            pos0 = child_pos.x;
+            pos1 = child_pos.x + child_size.x + gap;
         }
         else
         {
-            pos0 = y;
-            pos1 = y + height + gap;
+            pos0 = child_pos.y;
+            pos1 = child_pos.y + child_size.y + gap;
         }
         if (scrollpos >= pos0 && scrollpos <= pos1)
         {

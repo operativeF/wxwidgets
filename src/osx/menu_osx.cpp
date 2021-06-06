@@ -675,16 +675,16 @@ bool wxMenuBar::Append(wxMenu *menu, const wxString& title)
     return true;
 }
 
-void wxMenuBar::DoGetPosition(int *x, int *y) const
+wxPoint wxMenuBar::DoGetPosition() const
 {
-    int _x,_y,_width,_height;
+    int _x{0};
+    int _y{0};
+    int _width{0};
+    int _height{0};
     
     m_rootMenu->GetPeer()->GetMenuBarDimensions(_x, _y, _width, _height);
 
-    if (x)
-        *x = _x;
-    if (y)
-        *y = _y;
+    return {_x, _y};
 }
 
 void wxMenuBar::DoGetSize(int *width, int *height) const

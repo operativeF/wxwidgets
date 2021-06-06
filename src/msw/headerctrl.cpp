@@ -1060,10 +1060,9 @@ void wxHeaderCtrl::OnSize(wxSizeEvent& WXUNUSED(event))
 {
     if (m_nativeControl != nullptr) // check whether initialisation has been done
     {
-        int cw, ch;
-        GetClientSize(&cw, &ch);
+        wxSize client_size = GetClientSize();
 
-        m_nativeControl->SetSize(0, 0, cw, ch);
+        m_nativeControl->SetSize(0, 0, client_size.x, client_size.y);
     }
 }
 

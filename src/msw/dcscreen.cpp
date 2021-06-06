@@ -35,10 +35,7 @@ wxScreenDCImpl::wxScreenDCImpl( wxScreenDC *owner ) :
 }
 
 // Return the size of the whole virtual screen (all monitors)
-void wxScreenDCImpl::DoGetSize(int *width, int *height) const
+wxSize wxScreenDCImpl::DoGetSize() const
 {
-    if ( width )
-        *width = ::GetSystemMetrics(SM_CXVIRTUALSCREEN);
-    if ( height )
-        *height = ::GetSystemMetrics(SM_CYVIRTUALSCREEN);
+    return {::GetSystemMetrics(SM_CXVIRTUALSCREEN), ::GetSystemMetrics(SM_CYVIRTUALSCREEN)};
 }

@@ -116,12 +116,12 @@ public:
     WXHWND MSWGetFocusHWND() const override;
 
 protected:
-    void DoGetPosition(int *x, int *y) const override;
+    wxPoint DoGetPosition() const override;
     void DoMoveWindow(int x, int y, int width, int height) override;
     wxSize DoGetBestSize() const override;
     wxSize DoGetSizeFromTextSize(int xlen, int ylen = -1) const override;
-    void DoGetSize(int *width, int *height) const override;
-    void DoGetClientSize(int *x, int *y) const override;
+    wxSize DoGetSize() const override;
+    wxSize DoGetClientSize() const override;
     void DoClientToScreen(int *x, int *y) const override;
     void DoScreenToClient(int *x, int *y) const override;
 #if wxUSE_TOOLTIPS

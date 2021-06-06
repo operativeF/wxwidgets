@@ -676,15 +676,13 @@ void wxWindowMac::DoGetSize(int *x, int *y) const
 }
 
 // get the position of the bounds of this window in client coordinates of its parent
-void wxWindowMac::DoGetPosition(int *x, int *y) const
+wxPoint wxWindowMac::DoGetPosition() const
 {
-    int x1, y1;
-
-    GetPeer()->GetPosition( x1, y1 ) ;
+    wxPoint pos = GetPeer()->GetPosition();
 
     // get the wx window position from the native one
-    x1 -= MacGetLeftBorderSize() ;
-    y1 -= MacGetTopBorderSize() ;
+    pos.x -= MacGetLeftBorderSize();
+    pos.y -= MacGetTopBorderSize();
 
     if ( !IsTopLevel() )
     {
@@ -693,20 +691,17 @@ void wxWindowMac::DoGetPosition(int *x, int *y) const
         {
             // we must first adjust it to be in window coordinates of the parent,
             // as otherwise it gets lost by the ClientAreaOrigin fix
-            x1 += parent->MacGetLeftBorderSize() ;
-            y1 += parent->MacGetTopBorderSize() ;
+            pos.x += parent->MacGetLeftBorderSize() ;
+            pos.y += parent->MacGetTopBorderSize() ;
 
             // and now to client coordinates
             wxPoint pt(parent->GetClientAreaOrigin());
-            x1 -= pt.x ;
-            y1 -= pt.y ;
+            pos.x -= pt.x ;
+            pos.y -= pt.y ;
         }
     }
 
-    if (x)
-       *x = x1 ;
-    if (y)
-       *y = y1 ;
+    return pos;
 }
 
 void wxWindowMac::DoScreenToClient(int *x, int *y) const

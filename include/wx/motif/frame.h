@@ -87,7 +87,7 @@ public:
     bool PreResize();
 
     // for generic/mdig.h
-    virtual void DoGetClientSize(int *width, int *height) const;
+    virtual wxSize DoGetClientSize() const;
 
 private:
     // common part of all ctors
@@ -103,7 +103,7 @@ private:
     bool                  m_visibleStatus;
     bool                  m_iconized;
 
-    virtual void DoGetSize(int *width, int *height) const;
+    virtual wxSize DoGetSize() const;
     virtual void DoSetSize(int x, int y,
         int width, int height,
         int sizeFlags = wxSIZE_AUTO);
