@@ -343,19 +343,17 @@ void wxCheckListBox::OnKeyDown(wxKeyEvent& event)
             }
         }
 
-        for ( int i = 0; i < count; i++ )
+        for ( const auto selection : selections )
         {
-            int nItem = selections[i];
-
             switch ( oper )
             {
                 case TOGGLE:
-                    Toggle(nItem);
+                    Toggle(selection);
                     break;
 
                 case SET:
                 case CLEAR:
-                    Check(nItem, oper == SET);
+                    Check(selection, oper == SET);
                     break;
 
                 default:
@@ -364,7 +362,7 @@ void wxCheckListBox::OnKeyDown(wxKeyEvent& event)
 
             // we should send an event as this has been done by the user and
             // not by the program
-            SendEvent(nItem);
+            SendEvent(selection);
         }
     }
     else // nothing to do

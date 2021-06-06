@@ -122,10 +122,8 @@ wxSize wxBookCtrlBase::DoGetBestSize() const
     else
     {
         // iterate over all pages, get the largest width and height
-        const size_t nCount = m_pages.size();
-        for ( size_t nPage = 0; nPage < nCount; nPage++ )
+        for ( const auto* pPage : m_pages )
         {
-            const wxWindow * const pPage = m_pages[nPage];
             if ( pPage )
                 bestSize.IncTo(pPage->GetBestSize());
         }
@@ -228,10 +226,9 @@ void wxBookCtrlBase::DoSize()
 
     // resize all pages to fit the new control size
     const wxRect pageRect = GetPageRect();
-    const size_t pagesCount = m_pages.size();
-    for ( size_t i = 0; i < pagesCount; ++i )
+
+    for ( auto* page : m_pages )
     {
-        wxWindow * const page = m_pages[i];
         if ( !page )
         {
             wxASSERT_MSG( AllowNullPage(),
@@ -414,6 +411,7 @@ int wxBookCtrlBase::GetNextPage(bool forward) const
 int wxBookCtrlBase::FindPage(const wxWindow* page) const
 {
     const size_t nCount = m_pages.size();
+    
     for ( size_t nPage = 0; nPage < nCount; nPage++ )
     {
         if ( m_pages[nPage] == page )
