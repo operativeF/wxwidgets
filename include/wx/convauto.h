@@ -18,15 +18,15 @@
 // ----------------------------------------------------------------------------
 
 // All currently recognized BOM values.
-enum wxBOM
+enum class wxBOM
 {
-    wxBOM_Unknown = -1,
-    wxBOM_None,
-    wxBOM_UTF32BE,
-    wxBOM_UTF32LE,
-    wxBOM_UTF16BE,
-    wxBOM_UTF16LE,
-    wxBOM_UTF8
+    Unknown = -1,
+    None,
+    UTF32BE,
+    UTF32LE,
+    UTF16BE,
+    UTF16LE,
+    UTF8
 };
 
 class WXDLLIMPEXP_BASE wxConvAuto : public wxMBConv
@@ -39,7 +39,7 @@ public:
         // We don't initialize m_encDefault here as different ctors do it
         // differently.
         m_conv = nullptr;
-        m_bomType = wxBOM_Unknown;
+        m_bomType = wxBOM::Unknown;
         m_ownsConv = false;
         m_consumedBOM = false;
     
@@ -55,7 +55,7 @@ public:
         // We don't initialize m_encDefault here as different ctors do it
         // differently.
         m_conv = nullptr;
-        m_bomType = wxBOM_Unknown;
+        m_bomType = wxBOM::Unknown;
         m_ownsConv = false;
         m_consumedBOM = false;
     
@@ -114,7 +114,7 @@ public:
     // Return true if the fall-back encoding is used
     bool IsUsingFallbackEncoding() const
     {
-        return m_ownsConv && m_bomType == wxBOM_None;
+        return m_ownsConv && m_bomType == wxBOM::None;
     }
 
 private:    

@@ -55,7 +55,7 @@ private:
     // expected converter state, UTF-8 without BOM by default
     struct ConvState
     {
-        ConvState( wxBOM bom = wxBOM_None,
+        ConvState( wxBOM bom = wxBOM::None,
                    wxFontEncoding enc = wxFONTENCODING_UTF8,
                    bool fallback = false )
             : m_bom(bom), m_enc(enc), m_fallback(fallback) {}
@@ -136,14 +136,14 @@ void ConvAutoTestCase::TestFirstChar(const char *src, wchar_t wch, size_t len,
 
 void ConvAutoTestCase::Init()
 {
-    ConvState(wxBOM_Unknown, wxFONTENCODING_MAX).Check(wxConvAuto());
+    ConvState(wxBOM::Unknown, wxFONTENCODING_MAX).Check(wxConvAuto());
 }
 
 void ConvAutoTestCase::Empty()
 {
     wxConvAuto conv;
     CPPUNIT_ASSERT( !conv.cMB2WC("") );
-    ConvState(wxBOM_Unknown, wxFONTENCODING_MAX).Check(conv);
+    ConvState(wxBOM::Unknown, wxFONTENCODING_MAX).Check(conv);
 }
 
 void ConvAutoTestCase::Encode()
@@ -153,7 +153,7 @@ void ConvAutoTestCase::Encode()
     wxCharBuffer buf = conv.cWC2MB(str.wc_str());
     CPPUNIT_ASSERT( buf );
     CPPUNIT_ASSERT_EQUAL( str, wxString::FromUTF8(buf) );
-    ConvState(wxBOM_Unknown, wxFONTENCODING_UTF8).Check(conv);
+    ConvState(wxBOM::Unknown, wxFONTENCODING_UTF8).Check(conv);
 }
 
 void ConvAutoTestCase::Short()
@@ -168,35 +168,35 @@ void ConvAutoTestCase::None()
 
 void ConvAutoTestCase::UTF32LE()
 {
-    TestFirstChar("\xff\xfe\0\0A\0\0\0", wxT('A'), 8, ConvState(wxBOM_UTF32LE, wxFONTENCODING_UTF32LE));
+    TestFirstChar("\xff\xfe\0\0A\0\0\0", wxT('A'), 8, ConvState(wxBOM::UTF32LE, wxFONTENCODING_UTF32LE));
 }
 
 void ConvAutoTestCase::UTF32BE()
 {
-    TestFirstChar("\0\0\xfe\xff\0\0\0B", wxT('B'), 8, ConvState(wxBOM_UTF32BE, wxFONTENCODING_UTF32BE));
+    TestFirstChar("\0\0\xfe\xff\0\0\0B", wxT('B'), 8, ConvState(wxBOM::UTF32BE, wxFONTENCODING_UTF32BE));
 }
 
 void ConvAutoTestCase::UTF16LE()
 {
-    TestFirstChar("\xff\xfeZ\0", wxT('Z'), 4, ConvState(wxBOM_UTF16LE, wxFONTENCODING_UTF16LE));
+    TestFirstChar("\xff\xfeZ\0", wxT('Z'), 4, ConvState(wxBOM::UTF16LE, wxFONTENCODING_UTF16LE));
 }
 
 void ConvAutoTestCase::UTF16BE()
 {
-    TestFirstChar("\xfe\xff\0Y", wxT('Y'), 4, ConvState(wxBOM_UTF16BE, wxFONTENCODING_UTF16BE));
+    TestFirstChar("\xfe\xff\0Y", wxT('Y'), 4, ConvState(wxBOM::UTF16BE, wxFONTENCODING_UTF16BE));
 }
 
 void ConvAutoTestCase::UTF8()
 {
 #ifdef wxHAVE_U_ESCAPE
-    TestFirstChar("\xef\xbb\xbf\xd0\x9f", L'\u041f', wxNO_LEN, ConvState(wxBOM_UTF8, wxFONTENCODING_UTF8));
+    TestFirstChar("\xef\xbb\xbf\xd0\x9f", L'\u041f', wxNO_LEN, ConvState(wxBOM::UTF8, wxFONTENCODING_UTF8));
 #endif
 }
 
 void ConvAutoTestCase::UTF8NoBom()
 {
 #ifdef wxHAVE_U_ESCAPE
-    TestFirstChar("\xd0\x9f\xe3\x81\x82", L'\u041f', wxNO_LEN, ConvState(wxBOM_None, wxFONTENCODING_UTF8));
+    TestFirstChar("\xd0\x9f\xe3\x81\x82", L'\u041f', wxNO_LEN, ConvState(wxBOM::None, wxFONTENCODING_UTF8));
 #endif
 }
 
@@ -204,7 +204,7 @@ void ConvAutoTestCase::Fallback()
 {
 #ifdef wxHAVE_U_ESCAPE
     TestFirstChar("\xbf", L'\u041f', wxNO_LEN,
-                  ConvState(wxBOM_None, wxFONTENCODING_ISO8859_5, true),
+                  ConvState(wxBOM::None, wxFONTENCODING_ISO8859_5, true),
                   wxFONTENCODING_ISO8859_5);
 #endif
 }
@@ -213,7 +213,7 @@ void ConvAutoTestCase::FallbackMultibyte()
 {
 #ifdef wxHAVE_U_ESCAPE
     TestFirstChar("\x84\x50", L'\u041f', wxNO_LEN,
-                  ConvState(wxBOM_None, wxFONTENCODING_CP932, true),
+                  ConvState(wxBOM::None, wxFONTENCODING_CP932, true),
                   wxFONTENCODING_CP932);
 #endif
 }
@@ -221,7 +221,7 @@ void ConvAutoTestCase::FallbackMultibyte()
 void ConvAutoTestCase::FallbackShort()
 {
     TestFirstChar("\x61\xc4", 'a', 2,
-                  ConvState(wxBOM_None, wxFONTENCODING_ISO8859_5, true),
+                  ConvState(wxBOM::None, wxFONTENCODING_ISO8859_5, true),
                   wxFONTENCODING_ISO8859_5);
 }
 
