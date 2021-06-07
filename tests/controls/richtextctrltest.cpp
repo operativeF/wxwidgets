@@ -464,17 +464,17 @@ void RichTextCtrlTestCase::Alignment()
     m_rich->SetValue("text to align");
     m_rich->SelectAll();
 
-    m_rich->ApplyAlignmentToSelection(wxTEXT_ALIGNMENT_RIGHT);
+    m_rich->ApplyAlignmentToSelection(wxTextAttrAlignment::Right);
 
-    CPPUNIT_ASSERT(m_rich->IsSelectionAligned(wxTEXT_ALIGNMENT_RIGHT));
+    CPPUNIT_ASSERT(m_rich->IsSelectionAligned(wxTextAttrAlignment::Right));
 
-    m_rich->BeginAlignment(wxTEXT_ALIGNMENT_CENTRE);
+    m_rich->BeginAlignment(wxTextAttrAlignment::Centre);
     m_rich->AddParagraph("middle aligned");
     m_rich->EndAlignment();
 
     m_rich->SetSelection(20, 25);
 
-    CPPUNIT_ASSERT(m_rich->IsSelectionAligned(wxTEXT_ALIGNMENT_CENTRE));
+    CPPUNIT_ASSERT(m_rich->IsSelectionAligned(wxTextAttrAlignment::Centre));
 }
 
 void RichTextCtrlTestCase::Bold()

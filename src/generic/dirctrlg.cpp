@@ -1540,7 +1540,7 @@ int wxFileIconsTable::GetIconID(const wxString& extension, const wxString& mime)
 #if defined(__WXOSX_COCOA__)
             if (wxOSXGetMainScreenContentScaleFactor() > 1.0)
             {
-                img.Rescale(2*size, 2*size, wxIMAGE_QUALITY_HIGH);
+                img.Rescale(2*size, 2*size, wxImageResizeQuality::High);
                 bmp2 = wxBitmap(img, -1, 2.0);
             }
             else
@@ -1552,7 +1552,7 @@ int wxFileIconsTable::GetIconID(const wxString& extension, const wxString& mime)
                 // Then scale to the desired size. This gives the best quality,
                 // and better than CreateAntialiasedBitmap.
                 if ((img.GetWidth() != size) || (img.GetHeight() != size))
-                    img.Rescale(size, size, wxIMAGE_QUALITY_HIGH);
+                    img.Rescale(size, size, wxImageResizeQuality::High);
 
                 bmp2 = wxBitmap(img);
             }

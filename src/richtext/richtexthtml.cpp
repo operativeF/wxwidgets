@@ -475,13 +475,13 @@ wxString wxRichTextHTMLHandler::GetAlignment( const wxRichTextAttr& thisStyle )
 {
     switch( thisStyle.GetAlignment() )
     {
-    case wxTEXT_ALIGNMENT_LEFT:
+    case wxTextAttrAlignment::Left:
         return  wxT("left");
-    case wxTEXT_ALIGNMENT_RIGHT:
+    case wxTextAttrAlignment::Right:
         return wxT("right");
-    case wxTEXT_ALIGNMENT_CENTER:
+    case wxTextAttrAlignment::Center:
         return wxT("center");
-    case wxTEXT_ALIGNMENT_JUSTIFIED:
+    case wxTextAttrAlignment::Justified:
         return wxT("justify");
     default:
         return wxT("left");

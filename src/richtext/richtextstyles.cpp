@@ -732,7 +732,7 @@ wxString wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) cons
 
     wxRichTextAttr attr(def->GetStyleMergedWithBase(GetStyleSheet()));
 
-    if (attr.HasAlignment() && attr.GetAlignment() == wxTEXT_ALIGNMENT_CENTRE)
+    if (attr.HasAlignment() && attr.GetAlignment() == wxTextAttrAlignment::Centre)
         isCentred = true;
 
     str << wxT("<html><head></head>");

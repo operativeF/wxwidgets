@@ -3067,11 +3067,11 @@ bool wxTextCtrl::MSWSetParaFormat(const wxTextAttr& style, long start, long end)
     if (style.HasAlignment())
     {
         pf.dwMask |= PFM_ALIGNMENT;
-        if (style.GetAlignment() == wxTEXT_ALIGNMENT_RIGHT)
+        if (style.GetAlignment() == wxTextAttrAlignment::Right)
             pf.wAlignment = PFA_RIGHT;
-        else if (style.GetAlignment() == wxTEXT_ALIGNMENT_CENTRE)
+        else if (style.GetAlignment() == wxTextAttrAlignment::Centre)
             pf.wAlignment = PFA_CENTER;
-        else if (style.GetAlignment() == wxTEXT_ALIGNMENT_JUSTIFIED)
+        else if (style.GetAlignment() == wxTextAttrAlignment::Justified)
             pf.wAlignment = PFA_JUSTIFY;
         else
             pf.wAlignment = PFA_LEFT;
@@ -3369,13 +3369,13 @@ bool wxTextCtrl::GetStyle(long position, wxTextAttr& style)
     style.SetRightIndent( (int) ((double) pf.dxRightIndent * twips2mm * 10.0) );
 
     if (pf.wAlignment == PFA_CENTER)
-        style.SetAlignment(wxTEXT_ALIGNMENT_CENTRE);
+        style.SetAlignment(wxTextAttrAlignment::Centre);
     else if (pf.wAlignment == PFA_RIGHT)
-        style.SetAlignment(wxTEXT_ALIGNMENT_RIGHT);
+        style.SetAlignment(wxTextAttrAlignment::Right);
     else if (pf.wAlignment == PFA_JUSTIFY)
-        style.SetAlignment(wxTEXT_ALIGNMENT_JUSTIFIED);
+        style.SetAlignment(wxTextAttrAlignment::Justified);
     else
-        style.SetAlignment(wxTEXT_ALIGNMENT_LEFT);
+        style.SetAlignment(wxTextAttrAlignment::Left);
 
     std::vector<int> tabStops;
     size_t i;

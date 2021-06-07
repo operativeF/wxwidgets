@@ -71,7 +71,7 @@ wxBitmap MakeResizedBitmap(const wxBitmap& original, wxSize size)
         scale = 2.0;
 
     wxImage img(original.ConvertToImage());
-    img.Rescale(scale * size.x, scale * size.y, wxIMAGE_QUALITY_HIGH);
+    img.Rescale(scale * size.x, scale * size.y, wxImageResizeQuality::High);
     return wxBitmap(img, -1, scale);
 }
 

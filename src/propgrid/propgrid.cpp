@@ -1824,7 +1824,7 @@ wxBitmap wxPropertyGrid::RescaleBitmap(const wxBitmap& srcBmp,
 #if wxUSE_IMAGE
     // Here we use high-quality wxImage scaling functions available
     wxImage img = srcBmp.ConvertToImage();
-    img.Rescale(w, h, wxIMAGE_QUALITY_HIGH);
+    img.Rescale(w, h, wxImageResizeQuality::High);
     wxBitmap dstBmp(img);
 #else // !wxUSE_IMAGE
     wxBitmap dstBmp(w, h, srcBmp.GetDepth());

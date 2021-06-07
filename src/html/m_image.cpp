@@ -623,7 +623,7 @@ void wxHtmlImageCell::Draw(wxDC& dc, int x, int y,
                 // Convert the mask to an alpha channel or scaling won't work correctly
                 image.InitAlpha();
             }
-            image.Rescale(m_Width, m_Height, wxIMAGE_QUALITY_HIGH);
+            image.Rescale(m_Width, m_Height, wxImageResizeQuality::High);
             (*m_bitmap) = wxBitmap(image);
         }
 #endif 

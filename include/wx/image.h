@@ -58,19 +58,19 @@ enum wxImageResolution
 };
 
 // Constants for wxImage::Scale() for determining the level of quality
-enum wxImageResizeQuality
+enum class wxImageResizeQuality
 {
     // different image resizing algorithms used by Scale() and Rescale()
-    wxIMAGE_QUALITY_NEAREST = 0,
-    wxIMAGE_QUALITY_BILINEAR = 1,
-    wxIMAGE_QUALITY_BICUBIC = 2,
-    wxIMAGE_QUALITY_BOX_AVERAGE = 3,
+    Nearest = 0,
+    Bilinear = 1,
+    Bicubic = 2,
+    BoxAverage = 3,
 
     // default quality is low (but fast)
-    wxIMAGE_QUALITY_NORMAL = wxIMAGE_QUALITY_NEAREST,
+    Normal = Nearest,
 
     // highest (but best) quality
-    wxIMAGE_QUALITY_HIGH = 4
+    High = 4
 };
 
 // Constants for wxImage::Paste() for specifying alpha blending option.
@@ -86,9 +86,10 @@ enum wxImageAlphaBlendMode
 // alpha channel values: fully transparent, default threshold separating
 // transparent pixels from opaque for a few functions dealing with alpha and
 // fully opaque
-static constexpr unsigned char wxIMAGE_ALPHA_TRANSPARENT = 0;
-static constexpr unsigned char wxIMAGE_ALPHA_THRESHOLD = 0x80;
-static constexpr unsigned char wxIMAGE_ALPHA_OPAQUE = 0xff;
+
+inline constexpr unsigned char wxIMAGE_ALPHA_TRANSPARENT = 0;
+inline constexpr unsigned char wxIMAGE_ALPHA_THRESHOLD = 0x80;
+inline constexpr unsigned char wxIMAGE_ALPHA_OPAQUE = 0xff;
 
 //-----------------------------------------------------------------------------
 // classes
@@ -356,7 +357,7 @@ public:
 
     // return the new image with size width*height
     wxImage Scale( int width, int height,
-                   wxImageResizeQuality quality = wxIMAGE_QUALITY_NORMAL ) const;
+                   wxImageResizeQuality quality = wxImageResizeQuality::Normal ) const;
 
     // box averager and bicubic filters for up/down sampling
     wxImage ResampleNearest(int width, int height) const;
@@ -373,7 +374,7 @@ public:
 
     // rescales the image in place
     wxImage& Rescale( int width, int height,
-                      wxImageResizeQuality quality = wxIMAGE_QUALITY_NORMAL )
+                      wxImageResizeQuality quality = wxImageResizeQuality::Normal )
         { return *this = Scale(width, height, quality); }
 
     // resizes the image in place

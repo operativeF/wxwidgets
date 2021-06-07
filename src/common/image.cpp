@@ -452,7 +452,7 @@ wxImage::Scale( int width, int height, wxImageResizeQuality quality ) const
     // Resample the image using the method as specified.
     switch ( quality )
     {
-        case wxIMAGE_QUALITY_NEAREST:
+        case wxImageResizeQuality::Nearest:
             if ( old_width % width == 0 && old_width >= width &&
                 old_height % height == 0 && old_height >= height )
             {
@@ -462,19 +462,19 @@ wxImage::Scale( int width, int height, wxImageResizeQuality quality ) const
             image = ResampleNearest(width, height);
             break;
 
-        case wxIMAGE_QUALITY_BILINEAR:
+        case wxImageResizeQuality::Bilinear:
             image = ResampleBilinear(width, height);
             break;
 
-        case wxIMAGE_QUALITY_BICUBIC:
+        case wxImageResizeQuality::Bicubic:
             image = ResampleBicubic(width, height);
             break;
 
-        case wxIMAGE_QUALITY_BOX_AVERAGE:
+        case wxImageResizeQuality::BoxAverage:
             image = ResampleBox(width, height);
             break;
 
-        case wxIMAGE_QUALITY_HIGH:
+        case wxImageResizeQuality::High:
             image = width < old_width && height < old_height
                         ? ResampleBox(width, height)
                         : ResampleBicubic(width, height);
@@ -2871,7 +2871,7 @@ bool wxImage::DoLoad(wxImageHandler& handler, wxInputStream& stream, int index)
             int widthOrigOption = GetOptionInt(wxIMAGE_OPTION_ORIGINAL_WIDTH),
                 heightOrigOption = GetOptionInt(wxIMAGE_OPTION_ORIGINAL_HEIGHT);
 
-            Rescale(width, height, wxIMAGE_QUALITY_HIGH);
+            Rescale(width, height, wxImageResizeQuality::High);
 
             SetOption(wxIMAGE_OPTION_ORIGINAL_WIDTH, widthOrigOption ? widthOrigOption : widthOrig);
             SetOption(wxIMAGE_OPTION_ORIGINAL_HEIGHT, heightOrigOption ? heightOrigOption : heightOrig);

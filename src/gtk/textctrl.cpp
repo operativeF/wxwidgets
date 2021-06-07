@@ -218,13 +218,13 @@ static void wxGtkTextApplyTagsFromAttr(GtkWidget *text,
         GtkJustification align;
         switch (attr.GetAlignment())
         {
-            case wxTEXT_ALIGNMENT_RIGHT:
+            case wxTextAttrAlignment::Right:
                 align = GTK_JUSTIFY_RIGHT;
                 break;
-            case wxTEXT_ALIGNMENT_CENTER:
+            case wxTextAttrAlignment::Center:
                 align = GTK_JUSTIFY_CENTER;
                 break;
-            case wxTEXT_ALIGNMENT_JUSTIFIED:
+            case wxTextAttrAlignment::Justified:
 #ifdef __WXGTK3__
                 align = GTK_JUSTIFY_FILL;
                 break;

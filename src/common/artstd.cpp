@@ -240,7 +240,7 @@ wxBitmap wxDefaultArtProvider::CreateBitmap(const wxArtID& id,
                     bmp = wxBitmap
                           (
                               img.Scale(bestSize.x, bestSize.y,
-                                        wxIMAGE_QUALITY_HIGH)
+                                        wxImageResizeQuality::High)
                           );
                 }
             }

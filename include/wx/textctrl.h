@@ -128,14 +128,14 @@ enum wxTextCtrlHitTestResult
 
 // Alignment
 
-enum wxTextAttrAlignment
+enum class wxTextAttrAlignment
 {
-    wxTEXT_ALIGNMENT_DEFAULT,
-    wxTEXT_ALIGNMENT_LEFT,
-    wxTEXT_ALIGNMENT_CENTRE,
-    wxTEXT_ALIGNMENT_CENTER = wxTEXT_ALIGNMENT_CENTRE,
-    wxTEXT_ALIGNMENT_RIGHT,
-    wxTEXT_ALIGNMENT_JUSTIFIED
+    Default,
+    Left,
+    Centre,
+    Center = Centre,
+    Right,
+    Justified
 };
 
 // Flags to indicate which attributes are being applied
@@ -281,7 +281,7 @@ public:
     wxTextAttr(const wxColour& colText,
                const wxColour& colBack = wxNullColour,
                const wxFont& font = wxNullFont,
-               wxTextAttrAlignment alignment = wxTEXT_ALIGNMENT_DEFAULT);
+               wxTextAttrAlignment alignment = wxTextAttrAlignment::Default);
 
     // Copy
     void Copy(const wxTextAttr& attr);
@@ -389,7 +389,7 @@ public:
 
     bool HasTextColour() const { return m_colText.IsOk() && HasFlag(wxTEXT_ATTR_TEXT_COLOUR) ; }
     bool HasBackgroundColour() const { return m_colBack.IsOk() && HasFlag(wxTEXT_ATTR_BACKGROUND_COLOUR) ; }
-    bool HasAlignment() const { return (m_textAlignment != wxTEXT_ALIGNMENT_DEFAULT) && HasFlag(wxTEXT_ATTR_ALIGNMENT) ; }
+    bool HasAlignment() const { return (m_textAlignment != wxTextAttrAlignment::Default) && HasFlag(wxTEXT_ATTR_ALIGNMENT) ; }
     bool HasTabs() const { return HasFlag(wxTEXT_ATTR_TABS) ; }
     bool HasLeftIndent() const { return HasFlag(wxTEXT_ATTR_LEFT_INDENT); }
     bool HasRightIndent() const { return HasFlag(wxTEXT_ATTR_RIGHT_INDENT); }
@@ -487,7 +487,7 @@ private:
                                          // line in a paragraph relative to the
                                          // first line, in 1/10 mm
     int                 m_rightIndent{0}; // right indent in 1/10 mm
-    wxTextAttrAlignment m_textAlignment{wxTEXT_ALIGNMENT_DEFAULT};
+    wxTextAttrAlignment m_textAlignment{wxTextAttrAlignment::Default};
 
     int                 m_paragraphSpacingAfter{0};
     int                 m_paragraphSpacingBefore{0};

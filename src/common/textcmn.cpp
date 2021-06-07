@@ -143,7 +143,7 @@ wxTextAttr::wxTextAttr(const wxColour& colText,
 {
     if (m_colText.IsOk()) m_flags |= wxTEXT_ATTR_TEXT_COLOUR;
     if (m_colBack.IsOk()) m_flags |= wxTEXT_ATTR_BACKGROUND_COLOUR;
-    if (alignment != wxTEXT_ALIGNMENT_DEFAULT)
+    if (alignment != wxTextAttrAlignment::Default)
         m_flags |= wxTEXT_ATTR_ALIGNMENT;
 
     GetFontAttributes(font);

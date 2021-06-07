@@ -90,7 +90,7 @@ void wxGenericStaticBitmap::OnPaint(wxPaintEvent& WXUNUSED(event))
     gc->DrawBitmap(m_bitmap, x, y, w, h);
 #else
     wxImage img = m_bitmap.ConvertToImage();
-    img.Rescale(wxRound(w), wxRound(h), wxIMAGE_QUALITY_HIGH);
+    img.Rescale(wxRound(w), wxRound(h), wxImageResizeQuality::High);
     dc.DrawBitmap(wxBitmap(img), wxRound(x), wxRound(y), true);
 #endif
 }

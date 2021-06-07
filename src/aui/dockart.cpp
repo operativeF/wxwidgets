@@ -139,7 +139,7 @@ void wxAuiScaleBitmap(wxBitmap& bmp, double scale)
     {
         wxImage img = bmp.ConvertToImage();
         img.Rescale(bmp.GetWidth()*scale, bmp.GetHeight()*scale,
-            wxIMAGE_QUALITY_BOX_AVERAGE);
+            wxImageResizeQuality::BoxAverage);
         bmp = wxBitmap(img);
     }
 #else

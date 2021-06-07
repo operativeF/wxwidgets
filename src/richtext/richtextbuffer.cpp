@@ -1270,7 +1270,7 @@ bool wxRichTextObject::LayoutToBestSize(wxDC& dc, wxRichTextDrawingContext& cont
     // on this basis
     if (!attr.GetTextBoxAttr().GetWidth().IsValid() && maxSize.x < availableChildRect.width)
     {
-        if (!attr.HasAlignment() || attr.GetAlignment() == wxTEXT_ALIGNMENT_LEFT)
+        if (!attr.HasAlignment() || attr.GetAlignment() == wxTextAttrAlignment::Left)
         {
             // Redo the layout with a fixed, minimum size this time.
             Invalidate(wxRICHTEXT_ALL);
@@ -1299,11 +1299,11 @@ bool wxRichTextObject::LayoutToBestSize(wxDC& dc, wxRichTextDrawingContext& cont
         if (attr.HasAlignment() && (!wxRichTextBuffer::GetFloatingLayoutMode() || (GetContainer()->GetFloatCollector() && !GetContainer()->GetFloatCollector()->HasFloats())))
         {
             // centering, right-justification
-            if (attr.GetAlignment() == wxTEXT_ALIGNMENT_CENTRE)
+            if (attr.GetAlignment() == wxTextAttrAlignment::Centre)
             {
                 availableChildRect.x = (originalAvailableRect.GetWidth() - availableChildRect.GetWidth())/2 + availableChildRect.x;
             }
-            else if (attr.GetAlignment() == wxTEXT_ALIGNMENT_RIGHT)
+            else if (attr.GetAlignment() == wxTextAttrAlignment::Right)
             {
                 availableChildRect.x = availableChildRect.x + originalAvailableRect.GetWidth() - availableChildRect.GetWidth();
             }
@@ -5588,12 +5588,12 @@ void wxRichTextParagraph::ApplyParagraphStyle(wxRichTextLine* line, const wxRich
     wxSize size = line->GetSize();
 
     // centering, right-justification
-    if (attr.HasAlignment() && attr.GetAlignment() == wxTEXT_ALIGNMENT_CENTRE)
+    if (attr.HasAlignment() && attr.GetAlignment() == wxTextAttrAlignment::Centre)
     {
         pos.x = (rect.GetWidth() - size.x)/2 + pos.x;
         line->SetPosition(pos);
     }
-    else if (attr.HasAlignment() && attr.GetAlignment() == wxTEXT_ALIGNMENT_RIGHT)
+    else if (attr.HasAlignment() && attr.GetAlignment() == wxTextAttrAlignment::Right)
     {
         pos.x = pos.x + rect.GetWidth() - size.x;
         line->SetPosition(pos);
@@ -12735,10 +12735,10 @@ bool wxRichTextImage::LoadAndScaleImageCache(wxImage& image, const wxSize& sz, w
             if (image.GetWidth() <= upscaleThreshold || image.GetHeight() <= upscaleThreshold)
             {
                 img = image.Scale(image.GetWidth()*2, image.GetHeight()*2);
-                img.Rescale(width*scaleFactor, height*scaleFactor, wxIMAGE_QUALITY_HIGH);
+                img.Rescale(width*scaleFactor, height*scaleFactor, wxImageResizeQuality::High);
             }
             else
-                img = image.Scale(width*scaleFactor, height*scaleFactor, wxIMAGE_QUALITY_HIGH);
+                img = image.Scale(width*scaleFactor, height*scaleFactor, wxImageResizeQuality::High);
 
             // On Mac, this will create a bitmap that is twice as big as the required dimensions,
             // with a scale factor that indicates that the extra detail should be used on HiDPI displays.

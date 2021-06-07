@@ -384,16 +384,16 @@ bool wxRichTextIndentsSpacingPage::TransferDataFromWindow()
     wxRichTextAttr* attr = GetAttributes();
 
     if (m_alignmentLeft->GetValue())
-        attr->SetAlignment(wxTEXT_ALIGNMENT_LEFT);
+        attr->SetAlignment(wxTextAttrAlignment::Left);
     else if (m_alignmentCentred->GetValue())
-        attr->SetAlignment(wxTEXT_ALIGNMENT_CENTRE);
+        attr->SetAlignment(wxTextAttrAlignment::Centre);
     else if (m_alignmentRight->GetValue())
-        attr->SetAlignment(wxTEXT_ALIGNMENT_RIGHT);
+        attr->SetAlignment(wxTextAttrAlignment::Right);
     else if (m_alignmentJustified->GetValue())
-        attr->SetAlignment(wxTEXT_ALIGNMENT_JUSTIFIED);
+        attr->SetAlignment(wxTextAttrAlignment::Justified);
     else
     {
-        attr->SetAlignment(wxTEXT_ALIGNMENT_DEFAULT);
+        attr->SetAlignment(wxTextAttrAlignment::Default);
         attr->SetFlags(attr->GetFlags() & (~wxTEXT_ATTR_ALIGNMENT));
     }
 
@@ -466,13 +466,13 @@ bool wxRichTextIndentsSpacingPage::TransferDataToWindow()
 
     if (attr->HasAlignment())
     {
-        if (attr->GetAlignment() == wxTEXT_ALIGNMENT_LEFT)
+        if (attr->GetAlignment() == wxTextAttrAlignment::Left)
             m_alignmentLeft->SetValue(true);
-        else if (attr->GetAlignment() == wxTEXT_ALIGNMENT_RIGHT)
+        else if (attr->GetAlignment() == wxTextAttrAlignment::Right)
             m_alignmentRight->SetValue(true);
-        else if (attr->GetAlignment() == wxTEXT_ALIGNMENT_CENTRE)
+        else if (attr->GetAlignment() == wxTextAttrAlignment::Centre)
             m_alignmentCentred->SetValue(true);
-        else if (attr->GetAlignment() == wxTEXT_ALIGNMENT_JUSTIFIED)
+        else if (attr->GetAlignment() == wxTextAttrAlignment::Justified)
             m_alignmentJustified->SetValue(true);
         else
             m_alignmentIndeterminate->SetValue(true);
