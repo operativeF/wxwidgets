@@ -143,7 +143,7 @@ wxPenRefData::wxPenRefData()
     
         m_join = wxJOIN_ROUND;
         m_cap = wxCAP_ROUND;
-        m_quality = wxPEN_QUALITY_DEFAULT;
+        m_quality = wxPenQuality::Default;
         m_nbDash = 0;
         m_dash = nullptr;
         m_hPen = nullptr;
@@ -174,7 +174,7 @@ wxPenRefData::wxPenRefData(const wxPenInfo& info)
     
         m_join = wxJOIN_ROUND;
         m_cap = wxCAP_ROUND;
-        m_quality = wxPEN_QUALITY_DEFAULT;
+        m_quality = wxPenQuality::Default;
         m_nbDash = 0;
         m_dash = nullptr;
         m_hPen = nullptr;
@@ -292,7 +292,7 @@ bool wxPenRefData::Alloc()
    // rather than real dots), but much, much faster than geometric pens created
    // by ExtCreatePen(), see #18875, so we still prefer to use them if possible
    // unless it's explicitly disabled by setting the quality to "high"
-   bool useCreatePen = m_quality != wxPEN_QUALITY_HIGH;
+   bool useCreatePen = m_quality != wxPenQuality::High;
 
    if ( useCreatePen )
    {
@@ -319,7 +319,7 @@ bool wxPenRefData::Alloc()
                    // they look ugly, so we prefer to not do it by default,
                    // however this can be explicitly requested if speed is more
                    // important than the exact appearance.
-                   useCreatePen = m_quality == wxPEN_QUALITY_LOW;
+                   useCreatePen = m_quality == wxPenQuality::Low;
                }
                break;
 
@@ -594,7 +594,7 @@ wxPenCap wxPen::GetCap() const
 
 wxPenQuality wxPen::GetQuality() const
 {
-    wxCHECK_MSG( IsOk(), wxPEN_QUALITY_DEFAULT, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), wxPenQuality::Default, wxT("invalid pen") );
 
     return M_PENDATA->GetQuality();
 }

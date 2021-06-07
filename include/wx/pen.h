@@ -15,11 +15,11 @@
 #include "wx/peninfobase.h"
 
 // Possible values for pen quality.
-enum wxPenQuality
+enum class wxPenQuality
 {
-    wxPEN_QUALITY_DEFAULT,  // Select the appropriate quality automatically.
-    wxPEN_QUALITY_LOW,      // Less good looking but faster.
-    wxPEN_QUALITY_HIGH      // Best looking, at the expense of speed.
+    Default,  // Select the appropriate quality automatically.
+    Low,      // Less good looking but faster.
+    High      // Best looking, at the expense of speed.
 };
 
 // ----------------------------------------------------------------------------
@@ -35,7 +35,7 @@ public:
         : wxPenInfoBase<wxPenInfo>(colour, style)
     {
         m_width = width;
-        m_quality = wxPEN_QUALITY_DEFAULT;
+        m_quality = wxPenQuality::Default;
     }
 
     // Setters
@@ -45,8 +45,8 @@ public:
 
     wxPenInfo& Quality(wxPenQuality quality)
         { m_quality = quality; return *this; }
-    wxPenInfo& LowQuality() { return Quality(wxPEN_QUALITY_LOW); }
-    wxPenInfo& HighQuality() { return Quality(wxPEN_QUALITY_HIGH); }
+    wxPenInfo& LowQuality() { return Quality(wxPenQuality::Low); }
+    wxPenInfo& HighQuality() { return Quality(wxPenQuality::High); }
 
     // Accessors
 
@@ -81,7 +81,7 @@ public:
     virtual wxPenStyle GetStyle() const = 0;
     virtual wxPenJoin GetJoin() const = 0;
     virtual wxPenCap GetCap() const = 0;
-    virtual wxPenQuality GetQuality() const { return wxPEN_QUALITY_DEFAULT; }
+    virtual wxPenQuality GetQuality() const { return wxPenQuality::Default; }
     virtual int GetWidth() const = 0;
     virtual int GetDashes(wxDash **ptr) const = 0;
 

@@ -52,7 +52,7 @@ struct GraphicsBenchmarkOptions
         mapMode = 0;
         penWidth = 0;
         penStyle = wxPENSTYLE_INVALID;
-        penQuality = wxPEN_QUALITY_DEFAULT;
+        penQuality = wxPenQuality::Default;
 
         width = 800;
         height = 600;
@@ -427,7 +427,7 @@ private:
             setPen = true;
         }
 
-        if ( opts.penQuality != wxPEN_QUALITY_DEFAULT )
+        if ( opts.penQuality != wxPenQuality::Default )
         {
             penInfo.Quality(opts.penQuality);
             setPen = true;
@@ -933,9 +933,9 @@ public:
         if ( parser.Found("pen-quality", &penQuality) )
         {
             if ( penQuality == "low" )
-                opts.penQuality = wxPEN_QUALITY_LOW;
+                opts.penQuality = wxPenQuality::Low;
             else if ( penQuality == "high" )
-                opts.penQuality = wxPEN_QUALITY_HIGH;
+                opts.penQuality = wxPenQuality::High;
             else if ( penQuality != "default" )
             {
                 wxLogError("Unsupported pen quality.");
