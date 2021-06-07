@@ -59,12 +59,12 @@ enum wxSeekMode
   wxFromEnd
 };
 
-enum wxFileKind
+enum class wxFileKind
 {
-  wxFILE_KIND_UNKNOWN,
-  wxFILE_KIND_DISK,     // a file supporting seeking to arbitrary offsets
-  wxFILE_KIND_TERMINAL, // a tty
-  wxFILE_KIND_PIPE      // a pipe
+  Unknown,
+  Disk,     // a file supporting seeking to arbitrary offsets
+  Terminal, // a tty
+  Pipe      // a pipe
 };
 
 // we redefine these constants here because S_IREAD &c are _not_ standard

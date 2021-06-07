@@ -470,12 +470,12 @@ void wxSizerXmlHandler::SetFlexibleMode(wxFlexGridSizer* fsizer)
     {
         wxString mode = GetParamValue(wxT("nonflexiblegrowmode"));
 
-        if (mode == wxT("wxFLEX_GROWMODE_NONE"))
-            fsizer->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_NONE);
-        else if (mode == wxT("wxFLEX_GROWMODE_SPECIFIED"))
-            fsizer->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
-        else if (mode == wxT("wxFLEX_GROWMODE_ALL"))
-            fsizer->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_ALL);
+        if (mode == wxT("wxFlexSizerGrowMode::None"))
+            fsizer->SetNonFlexibleGrowMode(wxFlexSizerGrowMode::None);
+        else if (mode == wxT("wxFlexSizerGrowMode::Specified"))
+            fsizer->SetNonFlexibleGrowMode(wxFlexSizerGrowMode::Specified);
+        else if (mode == wxT("wxFlexSizerGrowMode::All"))
+            fsizer->SetNonFlexibleGrowMode(wxFlexSizerGrowMode::All);
         else
         {
             ReportParamError

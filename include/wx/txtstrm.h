@@ -117,19 +117,19 @@ protected:
     wxChar NextNonSeparators();
 };
 
-enum wxEOL
+enum class wxEOL
 {
-  wxEOL_NATIVE,
-  wxEOL_UNIX,
-  wxEOL_MAC,
-  wxEOL_DOS
+  Native,
+  Unix,
+  Mac,
+  Dos
 };
 
 class WXDLLIMPEXP_BASE wxTextOutputStream
 {
 public:
     wxTextOutputStream(wxOutputStream& s,
-                       wxEOL mode = wxEOL_NATIVE,
+                       wxEOL mode = wxEOL::Native,
                        const wxMBConv& conv = wxConvAuto());
 
     virtual ~wxTextOutputStream();
@@ -139,7 +139,7 @@ public:
 
     const wxOutputStream& GetOutputStream() const { return m_output; }
 
-    void SetMode( wxEOL mode = wxEOL_NATIVE );
+    void SetMode( wxEOL mode = wxEOL::Native );
     wxEOL GetMode() { return m_mode; }
 
     template<typename T>

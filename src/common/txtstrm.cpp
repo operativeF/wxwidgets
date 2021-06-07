@@ -410,12 +410,12 @@ wxTextOutputStream::wxTextOutputStream(wxOutputStream& s,
   : m_output(s), m_conv(conv.Clone())
 {
     m_mode = mode;
-    if (m_mode == wxEOL_NATIVE)
+    if (m_mode == wxEOL::Native)
     {
 #if defined(__WINDOWS__)
-        m_mode = wxEOL_DOS;
+        m_mode = wxEOL::Dos;
 #else
-        m_mode = wxEOL_UNIX;
+        m_mode = wxEOL::Unix;
 #endif
     }
 
@@ -432,12 +432,12 @@ wxTextOutputStream::~wxTextOutputStream()
 void wxTextOutputStream::SetMode(wxEOL mode)
 {
     m_mode = mode;
-    if (m_mode == wxEOL_NATIVE)
+    if (m_mode == wxEOL::Native)
     {
 #if defined(__WINDOWS__)
-        m_mode = wxEOL_DOS;
+        m_mode = wxEOL::Dos;
 #else
-        m_mode = wxEOL_UNIX;
+        m_mode = wxEOL::Unix;
 #endif
     }
 }
@@ -493,11 +493,11 @@ void wxTextOutputStream::WriteString(const wxString& string)
         {
             switch ( m_mode )
             {
-                case wxEOL_DOS:
+                case wxEOL::Dos:
                     out << wxT("\r\n");
                     continue;
 
-                case wxEOL_MAC:
+                case wxEOL::Mac:
                     out << wxT('\r');
                     continue;
 
@@ -505,7 +505,7 @@ void wxTextOutputStream::WriteString(const wxString& string)
                     wxFAIL_MSG( wxT("unknown EOL mode in wxTextOutputStream") );
                     [[fallthrough]];
 
-                case wxEOL_UNIX:
+                case wxEOL::Unix:
                     // don't treat '\n' specially
                     ;
             }
@@ -557,11 +557,11 @@ wxTextOutputStream& wxTextOutputStream::PutChar(wxChar c)
             {
                 switch ( m_mode )
                 {
-                    case wxEOL_DOS:
+                    case wxEOL::Dos:
                         m_output.Write("\r\n", 2);
                         continue;
 
-                    case wxEOL_MAC:
+                    case wxEOL::Mac:
                         m_output.Write("\r", 1);
                         continue;
 
@@ -569,7 +569,7 @@ wxTextOutputStream& wxTextOutputStream::PutChar(wxChar c)
                         wxFAIL_MSG( wxT("unknown EOL mode in wxTextOutputStream") );
                         [[fallthrough]];
 
-                    case wxEOL_UNIX:
+                    case wxEOL::Unix:
                         // don't treat '\n' specially
                         ;
                 }

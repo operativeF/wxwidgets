@@ -396,7 +396,7 @@ bool wxFile::Flush()
 #ifdef HAVE_FSYNC
     // fsync() only works on disk files and returns errors for pipes, don't
     // call it then
-    if ( IsOpened() && GetKind() == wxFILE_KIND_DISK )
+    if ( IsOpened() && GetKind() == wxFileKind::Disk )
     {
         if ( CheckForError(wxFsync(m_fd)) )
         {

@@ -42,7 +42,7 @@ public:
 
     bool Ok() const { return IsOk(); }
     bool IsOk() const override;
-    bool IsSeekable() const override { return m_file->GetKind() == wxFILE_KIND_DISK; }
+    bool IsSeekable() const override { return m_file->GetKind() == wxFileKind::Disk; }
 
     wxFile* GetFile() const { return m_file; }
 
@@ -75,7 +75,7 @@ public:
 
     bool Ok() const { return IsOk(); }
     bool IsOk() const override;
-    bool IsSeekable() const override { return m_file->GetKind() == wxFILE_KIND_DISK; }
+    bool IsSeekable() const override { return m_file->GetKind() == wxFileKind::Disk; }
 
     wxFile* GetFile() const { return m_file; }
 
@@ -203,7 +203,7 @@ public:
 
     bool Ok() const { return IsOk(); }
     bool IsOk() const override;
-    bool IsSeekable() const override { return m_file->GetKind() == wxFILE_KIND_DISK; }
+    bool IsSeekable() const override { return m_file->GetKind() == wxFileKind::Disk; }
 
     wxFFile* GetFile() const { return m_file; }
 
@@ -236,7 +236,7 @@ public:
 
     bool Ok() const { return IsOk(); }
     bool IsOk() const override;
-    bool IsSeekable() const override { return m_file->GetKind() == wxFILE_KIND_DISK; }
+    bool IsSeekable() const override { return m_file->GetKind() == wxFileKind::Disk; }
 
     wxFFile* GetFile() const { return m_file; }
 

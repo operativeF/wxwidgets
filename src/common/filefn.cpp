@@ -1059,13 +1059,13 @@ bool wxIsExecutable(const wxString &path)
 //
 // Some file types on some platforms seem seekable but in fact are not.
 // The main use of this function is to allow such cases to be detected
-// (IsSeekable() is implemented as wxGetFileKind() == wxFILE_KIND_DISK).
+// (IsSeekable() is implemented as wxGetFileKind() == wxFileKind::Disk).
 //
 // This is important for the archive streams, which benefit greatly from
 // being able to seek on a stream, but which will produce corrupt archives
 // if they unknowingly seek on a non-seekable stream.
 //
-// wxFILE_KIND_DISK is a good catch all return value, since other values
+// wxFileKind::Disk is a good catch all return value, since other values
 // disable features of the archive streams. Some other value must be returned
 // for a file type that appears seekable but isn't.
 //
@@ -1079,38 +1079,38 @@ wxFileKind wxGetFileKind(int fd)
     switch (::GetFileType(wxGetOSFHandle(fd)) & ~FILE_TYPE_REMOTE)
     {
         case FILE_TYPE_CHAR:
-            return wxFILE_KIND_TERMINAL;
+            return wxFileKind::Terminal;
         case FILE_TYPE_DISK:
-            return wxFILE_KIND_DISK;
+            return wxFileKind::Disk;
         case FILE_TYPE_PIPE:
-            return wxFILE_KIND_PIPE;
+            return wxFileKind::Pipe;
     }
 
-    return wxFILE_KIND_UNKNOWN;
+    return wxFileKind::Unknown;
 
 #elif defined(__UNIX__)
     if (isatty(fd))
-        return wxFILE_KIND_TERMINAL;
+        return wxFileKind::Terminal;
 
     struct stat st;
     fstat(fd, &st);
 
     if (S_ISFIFO(st.st_mode))
-        return wxFILE_KIND_PIPE;
+        return wxFileKind::Pipe;
     if (!S_ISREG(st.st_mode))
-        return wxFILE_KIND_UNKNOWN;
+        return wxFileKind::Unknown;
 
     #if defined(__VMS__)
         if (st.st_fab_rfm != FAB$C_STMLF)
-            return wxFILE_KIND_UNKNOWN;
+            return wxFileKind::Unknown;
     #endif
 
-    return wxFILE_KIND_DISK;
+    return wxFileKind::Disk;
 
 #else
     #define wxFILEKIND_STUB
     (void)fd;
-    return wxFILE_KIND_DISK;
+    return wxFileKind::Disk;
 #endif
 }
 
@@ -1118,11 +1118,11 @@ wxFileKind wxGetFileKind(FILE *fp)
 {
 #if defined(wxFILEKIND_STUB)
     (void)fp;
-    return wxFILE_KIND_DISK;
+    return wxFileKind::Disk;
 #elif defined(__WINDOWS__) && !defined(__CYGWIN__) && !defined(__WINE__)
-    return fp ? wxGetFileKind(_fileno(fp)) : wxFILE_KIND_UNKNOWN;
+    return fp ? wxGetFileKind(_fileno(fp)) : wxFileKind::Unknown;
 #else
-    return fp ? wxGetFileKind(fileno(fp)) : wxFILE_KIND_UNKNOWN;
+    return fp ? wxGetFileKind(fileno(fp)) : wxFileKind::Unknown;
 #endif
 }
 

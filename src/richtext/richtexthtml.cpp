@@ -90,7 +90,7 @@ bool wxRichTextHTMLHandler::DoSaveFile(wxRichTextBuffer *buffer, wxOutputStream&
         conv = & wxConvUTF8;
 
     {
-        wxTextOutputStream str(stream, wxEOL_NATIVE, *conv);
+        wxTextOutputStream str(stream, wxEOL::Native, *conv);
 
         wxRichTextAttr currentParaStyle = buffer->GetAttributes();
         wxRichTextAttr currentCharStyle = buffer->GetAttributes();

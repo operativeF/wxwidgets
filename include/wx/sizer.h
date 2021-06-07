@@ -863,16 +863,16 @@ private:
 
 // values which define the behaviour for resizing wxFlexGridSizer cells in the
 // "non-flexible" direction
-enum wxFlexSizerGrowMode
+enum class wxFlexSizerGrowMode
 {
     // don't resize the cells in non-flexible direction at all
-    wxFLEX_GROWMODE_NONE,
+    None,
 
     // uniformly resize only the specified ones (default)
-    wxFLEX_GROWMODE_SPECIFIED,
+    Specified,
 
     // uniformly resize all cells
-    wxFLEX_GROWMODE_ALL
+    All
 };
 
 class WXDLLIMPEXP_CORE wxFlexGridSizer: public wxGridSizer

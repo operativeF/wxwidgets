@@ -1626,28 +1626,28 @@ void wxGridSizer::SetItemBounds( wxSizerItem *item, int x, int y, int w, int h )
 wxFlexGridSizer::wxFlexGridSizer( int cols, int vgap, int hgap )
                : wxGridSizer( cols, vgap, hgap ),
                  m_flexDirection(wxBOTH),
-                 m_growMode(wxFLEX_GROWMODE_SPECIFIED)
+                 m_growMode(wxFlexSizerGrowMode::Specified)
 {
 }
 
 wxFlexGridSizer::wxFlexGridSizer( int cols, const wxSize& gap )
                : wxGridSizer( cols, gap ),
                  m_flexDirection(wxBOTH),
-                 m_growMode(wxFLEX_GROWMODE_SPECIFIED)
+                 m_growMode(wxFlexSizerGrowMode::Specified)
 {
 }
 
 wxFlexGridSizer::wxFlexGridSizer( int rows, int cols, int vgap, int hgap )
                : wxGridSizer( rows, cols, vgap, hgap ),
                  m_flexDirection(wxBOTH),
-                 m_growMode(wxFLEX_GROWMODE_SPECIFIED)
+                 m_growMode(wxFlexSizerGrowMode::Specified)
 {
 }
 
 wxFlexGridSizer::wxFlexGridSizer( int rows, int cols, const wxSize& gap )
                : wxGridSizer( rows, cols, gap ),
                  m_flexDirection(wxBOTH),
-                 m_growMode(wxFLEX_GROWMODE_SPECIFIED)
+                 m_growMode(wxFlexSizerGrowMode::Specified)
 {
 }
 
@@ -1944,14 +1944,14 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
 #endif // wxDEBUG_LEVEL
 
 
-    if ( (m_flexDirection & wxHORIZONTAL) || (m_growMode != wxFLEX_GROWMODE_NONE) )
+    if ( (m_flexDirection & wxHORIZONTAL) || (m_growMode != wxFlexSizerGrowMode::None) )
     {
         DoAdjustForGrowables
         (
             sz.x - minSize.x,
             m_growableCols,
             m_colWidths,
-            m_growMode == wxFLEX_GROWMODE_SPECIFIED ? &m_growableColsProportions
+            m_growMode == wxFlexSizerGrowMode::Specified ? &m_growableColsProportions
                                                     : nullptr
         );
 
@@ -1979,13 +1979,13 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
                 sz.x - minSize.x,
                 m_growableCols,
                 m_colWidths,
-                m_growMode == wxFLEX_GROWMODE_SPECIFIED ? &m_growableColsProportions
+                m_growMode == wxFlexSizerGrowMode::Specified ? &m_growableColsProportions
                                                         : nullptr
             );
         }
     }
 
-    if ( (m_flexDirection & wxVERTICAL) || (m_growMode != wxFLEX_GROWMODE_NONE) )
+    if ( (m_flexDirection & wxVERTICAL) || (m_growMode != wxFlexSizerGrowMode::None) )
     {
         // pass NULL instead of proportions if the grow mode is ALL as we
         // should treat all rows as having proportion of 1 then
@@ -1994,7 +1994,7 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
             sz.y - minSize.y,
             m_growableRows,
             m_rowHeights,
-            m_growMode == wxFLEX_GROWMODE_SPECIFIED ? &m_growableRowsProportions
+            m_growMode == wxFlexSizerGrowMode::Specified ? &m_growableRowsProportions
                                                     : nullptr
         );
     }
