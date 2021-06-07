@@ -685,12 +685,12 @@ bool wxBMPHandler::DoLoadDib(wxImage * image, int width, int height,
      */
     if ( IsBmp )
     {
-        // NOTE: seeking a positive amount in wxFromCurrent mode allows us to
+        // NOTE: seeking a positive amount in wxSeekMode::FromCurrent mode allows us to
         //       load even non-seekable streams (see wxInputStream::SeekI docs)!
         const wxFileOffset pos = stream.TellI();
         if ( pos == wxInvalidOffset ||
              (bmpOffset > pos &&
-              stream.SeekI(bmpOffset - pos, wxFromCurrent) == wxInvalidOffset) )
+              stream.SeekI(bmpOffset - pos, wxSeekMode::FromCurrent) == wxInvalidOffset) )
             return false;
         //else: icon, just carry on
     }
@@ -1165,7 +1165,7 @@ bool wxBMPHandler::LoadDib(wxImage *image, wxInputStream& stream,
         const wxInt32 sizeBITMAPINFOHEADER = 40;
         if ( hdrSize > sizeBITMAPINFOHEADER )
         {
-            if ( stream.SeekI(hdrSize - sizeBITMAPINFOHEADER, wxFromCurrent) == wxInvalidOffset )
+            if ( stream.SeekI(hdrSize - sizeBITMAPINFOHEADER, wxSeekMode::FromCurrent) == wxInvalidOffset )
                 return false;
         }
     }
@@ -1620,10 +1620,10 @@ bool wxICOHandler::DoLoadFile(wxImage *image, wxInputStream& stream,
         // seek to selected icon:
         pCurrentEntry = pIconDirEntry.get() + iSel;
 
-        // NOTE: seeking a positive amount in wxFromCurrent mode allows us to
+        // NOTE: seeking a positive amount in wxSeekMode::FromCurrent mode allows us to
         //       load even non-seekable streams (see wxInputStream::SeekI docs)!
         wxFileOffset offset = wxUINT32_SWAP_ON_BE(pCurrentEntry->dwImageOffset) - alreadySeeked;
-        if (offset != 0 && stream.SeekI(offset, wxFromCurrent) == wxInvalidOffset)
+        if (offset != 0 && stream.SeekI(offset, wxSeekMode::FromCurrent) == wxInvalidOffset)
             return false;
 
 #if wxUSE_LIBPNG
@@ -1654,7 +1654,7 @@ bool wxICOHandler::DoLoadFile(wxImage *image, wxInputStream& stream,
             isPNG = memcmp(signature, signaturePNG, signatureLen) == 0;
 
             // Rewind to the beginning of the image in any case.
-            if ( stream.SeekI(-signatureLen, wxFromCurrent) == wxInvalidOffset )
+            if ( stream.SeekI(-signatureLen, wxSeekMode::FromCurrent) == wxInvalidOffset )
                 return false;
         }
         else // Not seekable stream

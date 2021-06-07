@@ -299,12 +299,12 @@ size_t wxBackedInputStream::OnSysRead(void *buffer, size_t size)
 wxFileOffset wxBackedInputStream::OnSysSeek(wxFileOffset pos, wxSeekMode mode)
 {
     switch (mode) {
-        case wxFromCurrent:
+        case wxSeekMode::FromCurrent:
         {
             m_pos += pos;
             break;
         }
-        case wxFromEnd:
+        case wxSeekMode::FromEnd:
         {
             wxFileOffset len = GetLength();
             if (len == wxInvalidOffset)

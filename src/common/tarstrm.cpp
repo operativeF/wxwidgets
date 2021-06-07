@@ -755,7 +755,7 @@ bool wxTarInputStream::CloseEntry()
 
     if (remainder && m_parent_i_stream->IsSeekable()) {
         wxLogNull nolog;
-        if (m_parent_i_stream->SeekI(remainder, wxFromCurrent)
+        if (m_parent_i_stream->SeekI(remainder, wxSeekMode::FromCurrent)
                 != wxInvalidOffset)
             remainder = 0;
     }
@@ -1001,9 +1001,9 @@ wxFileOffset wxTarInputStream::OnSysSeek(wxFileOffset pos, wxSeekMode mode)
         return wxInvalidOffset;
 
     switch (mode) {
-        case wxFromStart:   break;
-        case wxFromCurrent: pos += m_pos; break;
-        case wxFromEnd:     pos += m_size; break;
+        case wxSeekMode::FromStart:   break;
+        case wxSeekMode::FromCurrent: pos += m_pos; break;
+        case wxSeekMode::FromEnd:     pos += m_size; break;
     }
 
     if (pos < 0 || m_parent_i_stream->SeekI(m_offset + pos) == wxInvalidOffset)
@@ -1497,9 +1497,9 @@ wxFileOffset wxTarOutputStream::OnSysSeek(wxFileOffset pos, wxSeekMode mode)
         return wxInvalidOffset;
 
     switch (mode) {
-        case wxFromStart:   break;
-        case wxFromCurrent: pos += m_pos; break;
-        case wxFromEnd:     pos += m_maxpos; break;
+        case wxSeekMode::FromStart:   break;
+        case wxSeekMode::FromCurrent: pos += m_pos; break;
+        case wxSeekMode::FromEnd:     pos += m_maxpos; break;
     }
 
     if (pos < 0 || m_parent_o_stream->SeekO(m_datapos + pos) == wxInvalidOffset)

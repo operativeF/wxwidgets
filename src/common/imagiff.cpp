@@ -327,13 +327,13 @@ int wxIFFDecoder::ReadIFF()
 
     // compute file length
     wxFileOffset currentPos = m_f->TellI();
-    if (m_f->SeekI(0, wxFromEnd) == wxInvalidOffset) {
+    if (m_f->SeekI(0, wxSeekMode::FromEnd) == wxInvalidOffset) {
         Destroy();
         return wxIFF_MEMERR;
     }
 
     long filesize = m_f->TellI();
-    if (m_f->SeekI(currentPos, wxFromStart) == wxInvalidOffset) {
+    if (m_f->SeekI(currentPos, wxSeekMode::FromStart) == wxInvalidOffset) {
         Destroy();
         return wxIFF_MEMERR;
     }

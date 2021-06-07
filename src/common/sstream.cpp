@@ -59,15 +59,15 @@ wxFileOffset wxStringInputStream::OnSysSeek(wxFileOffset ofs, wxSeekMode mode)
 {
     switch ( mode )
     {
-        case wxFromStart:
+        case wxSeekMode::FromStart:
             // nothing to do, ofs already ok
             break;
 
-        case wxFromEnd:
+        case wxSeekMode::FromEnd:
             ofs += m_len;
             break;
 
-        case wxFromCurrent:
+        case wxSeekMode::FromCurrent:
             ofs += m_pos;
             break;
 

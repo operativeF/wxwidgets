@@ -202,7 +202,7 @@ int ReadPCX(wxImage *image, wxInputStream& stream)
     // If the image is of type wxPCX_8BIT, then there is
     // a palette at the end of the image data. If we were
     // working with a file, we could seek at the end to the
-    // end (SeekI(-769, wxFromEnd) and read the palette
+    // end (SeekI(-769, wxSeekMode::FromEnd) and read the palette
     // before proceeding. Unfortunately, this would prevent
     // loading several PCXs in a single stream, so we can't
     // do it. Thus, 8-bit images will have to be decoded in

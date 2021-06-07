@@ -88,9 +88,9 @@ wxFileOffset TestOutputStream::OnSysSeek(wxFileOffset pos, wxSeekMode mode)
 {
     if ((m_options & PipeOut) == 0) {
         switch (mode) {
-            case wxFromStart:   break;
-            case wxFromCurrent: pos += m_pos; break;
-            case wxFromEnd:     pos += m_size; break;
+            case wxSeekMode::FromStart:   break;
+            case wxSeekMode::FromCurrent: pos += m_pos; break;
+            case wxSeekMode::FromEnd:     pos += m_size; break;
         }
         if (pos < 0 || pos > SEEK_LIMIT)
             return wxInvalidOffset;
@@ -210,9 +210,9 @@ wxFileOffset TestInputStream::OnSysSeek(wxFileOffset pos, wxSeekMode mode)
 {
     if ((m_options & PipeIn) == 0) {
         switch (mode) {
-            case wxFromStart:   break;
-            case wxFromCurrent: pos += m_pos; break;
-            case wxFromEnd:     pos += m_size; break;
+            case wxSeekMode::FromStart:   break;
+            case wxSeekMode::FromCurrent: pos += m_pos; break;
+            case wxSeekMode::FromEnd:     pos += m_size; break;
         }
         if (pos < 0 || pos > SEEK_LIMIT)
             return wxInvalidOffset;

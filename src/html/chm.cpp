@@ -522,13 +522,13 @@ wxFileOffset wxChmInputStream::OnSysSeek(wxFileOffset seek, wxSeekMode mode)
 
     switch ( mode )
     {
-        case wxFromCurrent:
+        case wxSeekMode::FromCurrent:
             nextpos = seek + m_pos;
             break;
-        case wxFromStart:
+        case wxSeekMode::FromStart:
             nextpos = seek;
             break;
-        case wxFromEnd:
+        case wxSeekMode::FromEnd:
             nextpos = m_size - 1 + seek;
             break;
         default:
@@ -683,9 +683,9 @@ wxChmInputStream::CreateHHPStream()
         }
 
         // Now copy the Data from the memory
-        out->SeekO(0, wxFromEnd);
+        out->SeekO(0, wxSeekMode::FromEnd);
         m_size = out->TellO();
-        out->SeekO(0, wxFromStart);
+        out->SeekO(0, wxSeekMode::FromStart);
         m_content = (char *) malloc (m_size+1);
         out->CopyTo(m_content, m_size);
         m_content[m_size]='\0';

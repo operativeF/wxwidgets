@@ -87,9 +87,9 @@ public:
 
   // file pointer operations (return wxInvalidOffset on failure)
     // move ptr ofs bytes related to start/current offset/end of file
-  wxFileOffset Seek(wxFileOffset ofs, wxSeekMode mode = wxFromStart);
+  wxFileOffset Seek(wxFileOffset ofs, wxSeekMode mode = wxSeekMode::FromStart);
     // move ptr to ofs bytes before the end
-  wxFileOffset SeekEnd(wxFileOffset ofs = 0) { return Seek(ofs, wxFromEnd); }
+  wxFileOffset SeekEnd(wxFileOffset ofs = 0) { return Seek(ofs, wxSeekMode::FromEnd); }
     // get current offset
   wxFileOffset Tell() const;
     // get current file length
@@ -151,7 +151,7 @@ public:
     // get current file length
   wxFileOffset Length() const { return m_file.Length(); }
     // move ptr ofs bytes related to start/current offset/end of file
-  wxFileOffset Seek(wxFileOffset ofs, wxSeekMode mode = wxFromStart)
+  wxFileOffset Seek(wxFileOffset ofs, wxSeekMode mode = wxSeekMode::FromStart)
     { return m_file.Seek(ofs, mode); }
     // get current offset
   wxFileOffset Tell() const { return m_file.Tell(); }

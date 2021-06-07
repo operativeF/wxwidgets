@@ -121,7 +121,7 @@ void memStream::Ctor_InFromIn()
 
     wxFileOffset len2 = len / 2;
     CPPUNIT_ASSERT(len2);
-    CPPUNIT_ASSERT(pMemInStream1->SeekI(-len2, wxFromCurrent) != wxInvalidOffset);
+    CPPUNIT_ASSERT(pMemInStream1->SeekI(-len2, wxSeekMode::FromCurrent) != wxInvalidOffset);
     pIn = buf->GetBufferPos();
     pMemInStream2 = new wxMemoryInputStream(*pMemInStream1, len2);
     CPPUNIT_ASSERT(pMemInStream2->IsOk());

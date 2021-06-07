@@ -360,13 +360,13 @@ wxFileOffset wxMediaCtrl::Seek(wxFileOffset where, wxSeekMode mode)
 
     switch (mode)
     {
-    case wxFromStart:
+    case wxSeekMode::FromStart:
         offset = where;
         break;
-    case wxFromEnd:
+    case wxSeekMode::FromEnd:
         offset = Length() - where;
         break;
-//    case wxFromCurrent:
+//    case wxSeekMode::FromCurrent:
     default:
         offset = Tell() + where;
         break;

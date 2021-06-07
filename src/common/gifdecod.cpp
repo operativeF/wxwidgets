@@ -746,7 +746,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                         while ((i = stream.GetC()) != 0)
                         {
                             if (stream.Eof() || (stream.LastRead() == 0) ||
-                                stream.SeekI(i, wxFromCurrent) == wxInvalidOffset)
+                                stream.SeekI(i, wxSeekMode::FromCurrent) == wxInvalidOffset)
                             {
                                 done = true;
                                 break;
@@ -885,7 +885,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 while ((i = stream.GetC()) != 0)
                 {
                     if (stream.Eof() || (stream.LastRead() == 0) ||
-                        stream.SeekI(i, wxFromCurrent) == wxInvalidOffset)
+                        stream.SeekI(i, wxSeekMode::FromCurrent) == wxInvalidOffset)
                     {
                         Destroy();
                         return wxGIF_INVFORMAT;
@@ -908,7 +908,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 {
                     unsigned int local_ncolors = 2 << (buf[8] & 0x07);
                     wxFileOffset numBytes = 3 * local_ncolors;
-                    if (stream.SeekI(numBytes, wxFromCurrent) == wxInvalidOffset)
+                    if (stream.SeekI(numBytes, wxSeekMode::FromCurrent) == wxInvalidOffset)
                     {
                         Destroy();
                         return wxGIF_INVFORMAT;
@@ -927,7 +927,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 while ((i = stream.GetC()) != 0)
                 {
                     if (stream.Eof() || (stream.LastRead() == 0) ||
-                        stream.SeekI(i, wxFromCurrent) == wxInvalidOffset)
+                        stream.SeekI(i, wxSeekMode::FromCurrent) == wxInvalidOffset)
                     {
                         Destroy();
                         return wxGIF_INVFORMAT;

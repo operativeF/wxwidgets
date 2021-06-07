@@ -286,7 +286,7 @@ int ReadTGA(wxImage* image, wxInputStream& stream)
     }
 
     // Seek from the offset we got from the TGA header.
-    if (stream.SeekI(offset, wxFromStart) == wxInvalidOffset)
+    if (stream.SeekI(offset, wxSeekMode::FromStart) == wxInvalidOffset)
         return wxTGA_INVFORMAT;
 
 

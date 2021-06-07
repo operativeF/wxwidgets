@@ -201,13 +201,13 @@ protected:
         CPPUNIT_ASSERT(!stream_in.Eof());
 
         // Try to Seek in the stream...
-        CPPUNIT_ASSERT_EQUAL(2, stream_in.SeekI(2, wxFromStart));
-        CPPUNIT_ASSERT_EQUAL(4, stream_in.SeekI(2, wxFromCurrent));
+        CPPUNIT_ASSERT_EQUAL(2, stream_in.SeekI(2, wxSeekMode::FromStart));
+        CPPUNIT_ASSERT_EQUAL(4, stream_in.SeekI(2, wxSeekMode::FromCurrent));
         // Not sure the following line is correct, so test it differently.
-        //CPPUNIT_ASSERT_EQUAL(stream_in.GetSize()-2, stream_in.SeekI(-2, wxFromEnd));
-        CPPUNIT_ASSERT(stream_in.SeekI(-2, wxFromEnd) != wxInvalidOffset);
+        //CPPUNIT_ASSERT_EQUAL(stream_in.GetSize()-2, stream_in.SeekI(-2, wxSeekMode::FromEnd));
+        CPPUNIT_ASSERT(stream_in.SeekI(-2, wxSeekMode::FromEnd) != wxInvalidOffset);
         // Go beyond the stream size.
-        CPPUNIT_ASSERT((stream_in.SeekI(10, wxFromCurrent) == wxInvalidOffset) == m_bSeekInvalidBeyondEnd);
+        CPPUNIT_ASSERT((stream_in.SeekI(10, wxSeekMode::FromCurrent) == wxInvalidOffset) == m_bSeekInvalidBeyondEnd);
     }
 
     void Input_SeekIFail()
@@ -232,13 +232,13 @@ protected:
         CPPUNIT_ASSERT_EQUAL(1, stream_in.TellI());
         if (!m_bSimpleTellITest)
         {
-            wxFileOffset pos = stream_in.SeekI(5, wxFromStart);
+            wxFileOffset pos = stream_in.SeekI(5, wxSeekMode::FromStart);
             CPPUNIT_ASSERT_EQUAL(pos, stream_in.TellI());
             (void)stream_in.GetC();
             CPPUNIT_ASSERT_EQUAL(6, stream_in.TellI());
-            pos = stream_in.SeekI(2, wxFromCurrent);
+            pos = stream_in.SeekI(2, wxSeekMode::FromCurrent);
             CPPUNIT_ASSERT_EQUAL(pos, stream_in.TellI());
-            pos = stream_in.SeekI(5, wxFromStart);
+            pos = stream_in.SeekI(5, wxSeekMode::FromStart);
             CPPUNIT_ASSERT_EQUAL(pos, stream_in.TellI());
         }
     }
@@ -348,13 +348,13 @@ protected:
         (void)stream_out.Write(buf, 10);
 
         // Try to Seek in the stream...
-        CPPUNIT_ASSERT_EQUAL(2, stream_out.SeekO(2, wxFromStart));
-        CPPUNIT_ASSERT_EQUAL(4, stream_out.SeekO(2, wxFromCurrent));
+        CPPUNIT_ASSERT_EQUAL(2, stream_out.SeekO(2, wxSeekMode::FromStart));
+        CPPUNIT_ASSERT_EQUAL(4, stream_out.SeekO(2, wxSeekMode::FromCurrent));
         // Not sure the following line is correct, so test it differently.
-        //CPPUNIT_ASSERT_EQUAL(stream_in.GetSize()-2, stream_out.SeekO(-2, wxFromEnd));
-        CPPUNIT_ASSERT(stream_out.SeekO(-2, wxFromEnd) != wxInvalidOffset);
+        //CPPUNIT_ASSERT_EQUAL(stream_in.GetSize()-2, stream_out.SeekO(-2, wxSeekMode::FromEnd));
+        CPPUNIT_ASSERT(stream_out.SeekO(-2, wxSeekMode::FromEnd) != wxInvalidOffset);
         // Go beyond the stream size.
-        CPPUNIT_ASSERT((stream_out.SeekO(10, wxFromCurrent) == wxInvalidOffset) == m_bSeekInvalidBeyondEnd);
+        CPPUNIT_ASSERT((stream_out.SeekO(10, wxSeekMode::FromCurrent) == wxInvalidOffset) == m_bSeekInvalidBeyondEnd);
     }
 
     void Output_SeekOFail()
@@ -381,13 +381,13 @@ protected:
             const char *buf = "1234567890";
             (void)stream_out.Write(buf, 10);
 
-            wxFileOffset pos = stream_out.SeekO(5, wxFromStart);
+            wxFileOffset pos = stream_out.SeekO(5, wxSeekMode::FromStart);
             CPPUNIT_ASSERT_EQUAL(pos, stream_out.TellO());
             (void)stream_out.PutC('1');
             CPPUNIT_ASSERT_EQUAL(6, stream_out.TellO());
-            pos = stream_out.SeekO(2, wxFromCurrent);
+            pos = stream_out.SeekO(2, wxSeekMode::FromCurrent);
             CPPUNIT_ASSERT_EQUAL(pos, stream_out.TellO());
-            pos = stream_out.SeekO(5, wxFromStart);
+            pos = stream_out.SeekO(5, wxSeekMode::FromStart);
             CPPUNIT_ASSERT_EQUAL(pos, stream_out.TellO());
         }
     }

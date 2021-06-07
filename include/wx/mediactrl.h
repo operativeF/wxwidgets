@@ -132,7 +132,7 @@ public:
 
     wxMediaState GetState();
 
-    wxFileOffset Seek(wxFileOffset where, wxSeekMode mode = wxFromStart);
+    wxFileOffset Seek(wxFileOffset where, wxSeekMode mode = wxSeekMode::FromStart);
     wxFileOffset Tell(); //FIXME: This should be const
     wxFileOffset Length(); //FIXME: This should be const
 

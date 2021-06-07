@@ -52,11 +52,11 @@
     using off_t = _off_t;
 #endif
 
-enum wxSeekMode
+enum class wxSeekMode
 {
-  wxFromStart,
-  wxFromCurrent,
-  wxFromEnd
+  FromStart,
+  FromCurrent,
+  FromEnd
 };
 
 enum class wxFileKind

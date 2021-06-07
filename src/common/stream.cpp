@@ -583,15 +583,15 @@ wxFileOffset wxStreamBuffer::Seek(wxFileOffset pos, wxSeekMode mode)
     {
         switch (mode)
         {
-            case wxFromStart:
+            case wxSeekMode::FromStart:
                 diff = pos;
                 break;
 
-            case wxFromCurrent:
+            case wxSeekMode::FromCurrent:
                 diff = pos + GetIntPosition();
                 break;
 
-            case wxFromEnd:
+            case wxSeekMode::FromEnd:
                 diff = pos + last_access;
                 break;
 
@@ -610,20 +610,20 @@ wxFileOffset wxStreamBuffer::Seek(wxFileOffset pos, wxSeekMode mode)
 
     switch ( mode )
     {
-        case wxFromStart:
+        case wxSeekMode::FromStart:
             // We'll try to compute an internal position later ...
-            ret_off = m_stream->OnSysSeek(pos, wxFromStart);
+            ret_off = m_stream->OnSysSeek(pos, wxSeekMode::FromStart);
             ResetBuffer();
             return ret_off;
 
-        case wxFromCurrent:
+        case wxSeekMode::FromCurrent:
             diff = pos + GetIntPosition();
 
             if ( (diff > last_access) || (diff < 0) )
             {
                 // We must take into account the fact that we have read
                 // something previously.
-                ret_off = m_stream->OnSysSeek(diff-last_access, wxFromCurrent);
+                ret_off = m_stream->OnSysSeek(diff-last_access, wxSeekMode::FromCurrent);
                 ResetBuffer();
                 return ret_off;
             }
@@ -635,9 +635,9 @@ wxFileOffset wxStreamBuffer::Seek(wxFileOffset pos, wxSeekMode mode)
                 return diff;
             }
 
-        case wxFromEnd:
+        case wxSeekMode::FromEnd:
             // Hard to compute: always seek to the requested position.
-            ret_off = m_stream->OnSysSeek(pos, wxFromEnd);
+            ret_off = m_stream->OnSysSeek(pos, wxSeekMode::FromEnd);
             ResetBuffer();
             return ret_off;
     }
@@ -962,12 +962,12 @@ wxFileOffset wxInputStream::SeekI(wxFileOffset pos, wxSeekMode mode)
 
     // avoid unnecessary seek operations (optimization)
     wxFileOffset currentPos = TellI(), size = GetLength();
-    if ((mode == wxFromStart && currentPos == pos) ||
-        (mode == wxFromCurrent && pos == 0) ||
-        (mode == wxFromEnd && size != wxInvalidOffset && currentPos == size-pos))
+    if ((mode == wxSeekMode::FromStart && currentPos == pos) ||
+        (mode == wxSeekMode::FromCurrent && pos == 0) ||
+        (mode == wxSeekMode::FromEnd && size != wxInvalidOffset && currentPos == size-pos))
         return currentPos;
 
-    if (!IsSeekable() && mode == wxFromCurrent && pos > 0)
+    if (!IsSeekable() && mode == wxSeekMode::FromCurrent && pos > 0)
     {
         // rather than seeking, we can just read data and discard it;
         // this allows to forward-seek also non-seekable streams!
@@ -1002,7 +1002,7 @@ wxFileOffset wxInputStream::SeekI(wxFileOffset pos, wxSeekMode mode)
 
        GRG: Could add code here to try to navigate within the wback
        buffer if possible, but is it really needed? It would only work
-       when seeking in wxFromCurrent mode, else it would invalidate
+       when seeking in wxSeekMode::FromCurrent mode, else it would invalidate
        anyway... */
 
     if (m_wback)
@@ -1144,16 +1144,16 @@ wxFileOffset wxCountingOutputStream::OnSysSeek(wxFileOffset pos, wxSeekMode mode
 
     switch ( mode )
     {
-        case wxFromStart:
+        case wxSeekMode::FromStart:
             wxCHECK_MSG( (wxFileOffset)new_pos == pos, wxInvalidOffset, wxT("huge position not supported") );
             break;
 
-        case wxFromEnd:
+        case wxSeekMode::FromEnd:
             new_pos += m_lastPos;
             wxCHECK_MSG( (wxFileOffset)new_pos == (wxFileOffset)(m_lastPos + pos), wxInvalidOffset, wxT("huge position not supported") );
             break;
 
-        case wxFromCurrent:
+        case wxSeekMode::FromCurrent:
             new_pos += m_currentPos;
             wxCHECK_MSG( (wxFileOffset)new_pos == (wxFileOffset)(m_currentPos + pos), wxInvalidOffset, wxT("huge position not supported") );
             break;
@@ -1337,7 +1337,7 @@ wxBufferedInputStream::wxBufferedInputStream(wxInputStream& stream,
 wxBufferedInputStream::~wxBufferedInputStream()
 {
     m_parent_i_stream->SeekI(-(wxFileOffset)m_i_streambuf->GetBytesLeft(),
-                             wxFromCurrent);
+                             wxSeekMode::FromCurrent);
 
     delete m_i_streambuf;
 }

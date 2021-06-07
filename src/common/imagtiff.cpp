@@ -127,16 +127,16 @@ static wxSeekMode wxSeekModeFromTIFF(int whence)
     switch ( whence )
     {
         case SEEK_SET:
-            return wxFromStart;
+            return wxSeekMode::FromStart;
 
         case SEEK_CUR:
-            return wxFromCurrent;
+            return wxSeekMode::FromCurrent;
 
         case SEEK_END:
-            return wxFromEnd;
+            return wxSeekMode::FromEnd;
 
         default:
-            return wxFromCurrent;
+            return wxSeekMode::FromCurrent;
     }
 }
 
@@ -205,7 +205,7 @@ wxTIFFSeekOProc(thandle_t handle, toff_t off, int whence)
     wxFileOffset streamLength = stream->GetLength();
     if (streamLength != wxInvalidOffset && (wxFileOffset) off > streamLength)
     {
-       if (stream->SeekO(streamLength, wxFromStart) == wxInvalidOffset)
+       if (stream->SeekO(streamLength, wxSeekMode::FromStart) == wxInvalidOffset)
        {
            return (toff_t) -1;
        }

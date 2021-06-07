@@ -42,13 +42,13 @@ IosSeekDirToWxSeekMode(std::ios_base::seekdir way,
     switch ( way )
     {
         case std::ios_base::beg:
-            seekMode = wxFromStart;
+            seekMode = wxSeekMode::FromStart;
             break;
         case std::ios_base::cur:
-            seekMode = wxFromCurrent;
+            seekMode = wxSeekMode::FromCurrent;
             break;
         case std::ios_base::end:
-            seekMode = wxFromEnd;
+            seekMode = wxSeekMode::FromEnd;
             break;
         default:
             return false;

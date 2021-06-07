@@ -183,7 +183,7 @@ public:
     // it)
     //
     // returns wxInvalidOffset on error
-    virtual wxFileOffset SeekI(wxFileOffset pos, wxSeekMode mode = wxFromStart);
+    virtual wxFileOffset SeekI(wxFileOffset pos, wxSeekMode mode = wxSeekMode::FromStart);
 
     // return the current position of the stream pointer or wxInvalidOffset
     virtual wxFileOffset TellI() const;
@@ -250,7 +250,7 @@ public:
 
     wxOutputStream& Write(wxInputStream& stream_in);
 
-    virtual wxFileOffset SeekO(wxFileOffset pos, wxSeekMode mode = wxFromStart);
+    virtual wxFileOffset SeekO(wxFileOffset pos, wxSeekMode mode = wxSeekMode::FromStart);
     virtual wxFileOffset TellO() const;
 
     virtual size_t LastWrite() const { return wxStreamBase::m_lastcount; }
@@ -581,7 +581,7 @@ public:
     wxInputStream& Read(void *buffer, size_t size) override;
 
     // Position functions
-    wxFileOffset SeekI(wxFileOffset pos, wxSeekMode mode = wxFromStart) override;
+    wxFileOffset SeekI(wxFileOffset pos, wxSeekMode mode = wxSeekMode::FromStart) override;
     wxFileOffset TellI() const override;
     bool IsSeekable() const override { return m_parent_i_stream->IsSeekable(); }
 
@@ -624,7 +624,7 @@ public:
     wxOutputStream& Write(const void *buffer, size_t size) override;
 
     // Position functions
-    wxFileOffset SeekO(wxFileOffset pos, wxSeekMode mode = wxFromStart) override;
+    wxFileOffset SeekO(wxFileOffset pos, wxSeekMode mode = wxSeekMode::FromStart) override;
     wxFileOffset TellO() const override;
     bool IsSeekable() const override { return m_parent_o_stream->IsSeekable(); }
 

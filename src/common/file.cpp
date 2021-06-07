@@ -417,7 +417,7 @@ bool wxFile::Flush()
 wxFileOffset wxFile::Seek(wxFileOffset ofs, wxSeekMode mode)
 {
     wxASSERT_MSG( IsOpened(), wxT("can't seek on closed file") );
-    wxCHECK_MSG( ofs != wxInvalidOffset || mode != wxFromStart,
+    wxCHECK_MSG( ofs != wxInvalidOffset || mode != wxSeekMode::FromStart,
                  wxInvalidOffset,
                  wxT("invalid absolute file offset") );
 
@@ -426,15 +426,15 @@ wxFileOffset wxFile::Seek(wxFileOffset ofs, wxSeekMode mode)
         default:
             wxFAIL_MSG(wxT("unknown seek origin"));
             [[fallthrough]];
-        case wxFromStart:
+        case wxSeekMode::FromStart:
             origin = SEEK_SET;
             break;
 
-        case wxFromCurrent:
+        case wxSeekMode::FromCurrent:
             origin = SEEK_CUR;
             break;
 
-        case wxFromEnd:
+        case wxSeekMode::FromEnd:
             origin = SEEK_END;
             break;
     }

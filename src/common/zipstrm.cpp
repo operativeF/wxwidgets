@@ -1499,7 +1499,7 @@ bool wxZipEndRec::Read(wxInputStream& stream, wxMBConv& conv)
     }
 
     // Look for zip64 end record
-    stream.SeekI(-(END_SIZE+Z64_LOC_SIZE), wxFromCurrent);
+    stream.SeekI(-(END_SIZE+Z64_LOC_SIZE), wxSeekMode::FromCurrent);
     wxZipHeader dsLoc(stream, Z64_LOC_SIZE);
     if ( dsLoc && dsLoc.Read32() == Z64_LOC_MAGIC )
     {
@@ -1750,7 +1750,7 @@ bool wxZipInputStream::FindEndRecord()
     // usually it's 22 bytes in size and the last thing in the file
     {
         wxLogNull nolog;
-        if (m_parent_i_stream->SeekI(-END_SIZE, wxFromEnd) == wxInvalidOffset)
+        if (m_parent_i_stream->SeekI(-END_SIZE, wxSeekMode::FromEnd) == wxInvalidOffset)
             return false;
     }
 
@@ -1780,7 +1780,7 @@ bool wxZipInputStream::FindEndRecord()
         memcpy(buf.data() + len, buf, 3);
         pos -= len;
 
-        if (m_parent_i_stream->SeekI(pos, wxFromStart) == wxInvalidOffset ||
+        if (m_parent_i_stream->SeekI(pos, wxSeekMode::FromStart) == wxInvalidOffset ||
                 m_parent_i_stream->Read(buf.data(), len).LastRead() != len)
             return false;
 

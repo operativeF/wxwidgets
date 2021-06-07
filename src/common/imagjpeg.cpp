@@ -128,7 +128,7 @@ CPP_METHODDEF(void) wx_term_source ( j_decompress_ptr cinfo )
     wx_src_ptr src = (wx_src_ptr) cinfo->src;
 
     if (src->pub.bytes_in_buffer > 0)
-        src->stream->SeekI(-(long)src->pub.bytes_in_buffer, wxFromCurrent);
+        src->stream->SeekI(-(long)src->pub.bytes_in_buffer, wxSeekMode::FromCurrent);
     delete[] src->buffer;
 }
 

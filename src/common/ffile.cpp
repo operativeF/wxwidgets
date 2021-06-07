@@ -204,15 +204,15 @@ bool wxFFile::Seek(wxFileOffset ofs, wxSeekMode mode)
             wxFAIL_MSG(wxT("unknown seek mode"));
             [[fallthrough]];
 
-        case wxFromStart:
+        case wxSeekMode::FromStart:
             origin = SEEK_SET;
             break;
 
-        case wxFromCurrent:
+        case wxSeekMode::FromCurrent:
             origin = SEEK_CUR;
             break;
 
-        case wxFromEnd:
+        case wxSeekMode::FromEnd:
             origin = SEEK_END;
             break;
     }

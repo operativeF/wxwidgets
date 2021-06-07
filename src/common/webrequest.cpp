@@ -126,7 +126,7 @@ wxWebRequestImpl::SetData(wxScopedPtr<wxInputStream>& dataStream,
         if ( dataSize == wxInvalidOffset )
         {
             // Determine data size
-            m_dataSize = m_dataStream->SeekI(0, wxFromEnd);
+            m_dataSize = m_dataStream->SeekI(0, wxSeekMode::FromEnd);
             if ( m_dataSize == wxInvalidOffset )
                 return false;
 
