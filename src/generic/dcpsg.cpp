@@ -339,10 +339,8 @@ bool wxPostScriptDCImpl::IsOk() const
 
 wxRect wxPostScriptDCImpl::GetPaperRect() const
 {
-    int w = 0;
-    int h = 0;
-    DoGetSize( &w, &h );
-    return wxRect(0,0,w,h);
+    wxSize sz = DoGetSize();
+    return wxRect(0,0,sz.x,sz.y);
 }
 
 int wxPostScriptDCImpl::GetResolution() const
@@ -455,7 +453,8 @@ void wxPostScriptDCImpl::DoDrawArc (wxCoord x1, wxCoord y1, wxCoord x2, wxCoord 
         alpha1 = 0.0;
         alpha2 = 360.0;
     }
-    else if ( wxIsNullDouble(radius) )
+    // FIXME: Double equality.
+    else if ( radius == 0.0 )
     {
         alpha1 =
         alpha2 = 0.0;
@@ -534,7 +533,8 @@ void wxPostScriptDCImpl::DoDrawEllipticArc(wxCoord x,wxCoord y,wxCoord w,wxCoord
     if ( ea < 0 )
         ea += 360;
 
-    if ( wxIsSameDouble(sa, ea) )
+    // FIXME: Double equality.
+    if ( sa == ea )
     {
         DoDrawEllipse(x,y,w,h);
         return;
@@ -1181,7 +1181,7 @@ void wxPostScriptDCImpl::SetPen( const wxPen& pen )
 
     if (!pen.IsOk()) return;
 
-    int oldStyle = m_pen.IsOk() ? m_pen.GetStyle() : wxPenStyle::Invalid;
+    auto oldStyle = m_pen.IsOk() ? m_pen.GetStyle() : wxPenStyle::Invalid;
     wxPenCap oldCap = m_pen.IsOk() ? m_pen.GetCap() : wxCAP_INVALID;
     wxPenJoin oldJoin = m_pen.IsOk() ? m_pen.GetJoin() : wxJOIN_INVALID;
 
@@ -1400,7 +1400,8 @@ void wxPostScriptDCImpl::DoDrawText( const wxString& text, wxCoord x, wxCoord y 
 
 void wxPostScriptDCImpl::DoDrawRotatedText( const wxString& text, wxCoord x, wxCoord y, double angle )
 {
-    if ( wxIsNullDouble(angle) )
+    // FIXME: Double equality
+    if ( angle == 0.0 )
     {
         DoDrawText(text, x, y);
         return;
@@ -1586,7 +1587,7 @@ void wxPostScriptDCImpl::ComputeScaleAndOrigin()
     }
 }
 
-void wxPostScriptDCImpl::DoGetSize(int* width, int* height) const
+wxSize wxPostScriptDCImpl::DoGetSize() const
 {
     wxPaperSize id = m_printData.GetPaperId();
 
@@ -1607,11 +1608,7 @@ void wxPostScriptDCImpl::DoGetSize(int* width, int* height) const
         wxSwap(w, h);
     }
 
-    if (width)
-        *width = wxRound( w * PS2DEV );
-
-    if (height)
-        *height = wxRound( h * PS2DEV );
+    return { wxRound(w * PS2DEV), wxRound(h * PS2DEV) };
 }
 
 void wxPostScriptDCImpl::DoGetSizeMM(int *width, int *height) const

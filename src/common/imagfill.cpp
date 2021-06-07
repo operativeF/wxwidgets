@@ -274,22 +274,20 @@ bool wxDoFloodFill(wxDC *dc, wxCoord x, wxCoord y,
     if (dc->GetBrush().IsTransparent())
         return true;
 
-    int height = 0;
-    int width  = 0;
-    dc->GetSize(&width, &height);
+    wxSize dcSize = dc->GetSize();
 
     //it would be nice to fail if we don't get a sensible size...
-    wxCHECK_MSG(width >= 1 && height >= 1, false,
+    wxCHECK_MSG(dcSize.x >= 1 && dcSize.y >= 1, false,
                 wxT("In FloodFill, dc.GetSize routine failed, method not supported by this DC"));
 
     const int x_dev = dc->LogicalToDeviceX(x);
     const int y_dev = dc->LogicalToDeviceY(y);
 
     // if start point is outside dc, can't do anything
-    if (!wxRect(0, 0, width, height).Contains(x_dev, y_dev))
+    if (!wxRect(0, 0, dcSize.x, dcSize.y).Contains(x_dev, y_dev))
         return false;
 
-    wxBitmap bitmap(width, height);
+    wxBitmap bitmap(dcSize.x, dcSize.y);
     wxMemoryDC memdc(bitmap);
     // match dc scales
     double sx, sy;
@@ -299,8 +297,8 @@ bool wxDoFloodFill(wxDC *dc, wxCoord x, wxCoord y,
     memdc.SetLogicalScale(sx, sy);
 
     // get logical size and origin
-    const int w_log = dc->DeviceToLogicalXRel(width);
-    const int h_log = dc->DeviceToLogicalYRel(height);
+    const int w_log = dc->DeviceToLogicalXRel(dcSize.x);
+    const int h_log = dc->DeviceToLogicalYRel(dcSize.y);
     const int x0_log = dc->DeviceToLogicalX(0);
     const int y0_log = dc->DeviceToLogicalY(0);
 

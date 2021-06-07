@@ -218,12 +218,9 @@ bool wxGTKCairoDCImpl::DoGetPixel(int x, int y, wxColour* col) const
     return false;
 }
 
-void wxGTKCairoDCImpl::DoGetSize(int* width, int* height) const
+wxSize wxGTKCairoDCImpl::DoGetSize() const
 {
-    if (width)
-        *width = m_size.x;
-    if (height)
-        *height = m_size.y;
+    return m_size;
 }
 
 bool wxGTKCairoDCImpl::DoStretchBlit(int xdest, int ydest, int dstWidth, int dstHeight, wxDC* source, int xsrc, int ysrc, int srcWidth, int srcHeight, wxRasterOperationMode rop, bool useMask, int xsrcMask, int ysrcMask)
@@ -445,7 +442,7 @@ wxClientDCImpl::wxClientDCImpl(wxClientDC* owner, wxWindow* window)
     GdkWindow* gdkWindow = NULL;
     if (widget)
     {
-        window->GetClientSize(&m_size.x, &m_size.y);
+        m_size = window->GetClientSize();
         gdkWindow = gtk_widget_get_window(widget);
         m_ok = true;
     }

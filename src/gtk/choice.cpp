@@ -159,7 +159,7 @@ int wxChoice::DoInsertItems(const wxArrayStringsAdapter & items,
 
         GTKInsertComboBoxTextItem( n, items[i] );
 
-        m_clientData.Insert( NULL, n );
+        m_clientData.insert( std::begin(m_clientData) + n, nullptr );
         AssignNewItemClientData(n, clientData, i, type);
     }
 
@@ -189,7 +189,7 @@ void wxChoice::DoClear()
     if (model)
         gtk_list_store_clear(GTK_LIST_STORE(model));
 
-    m_clientData.Clear();
+    m_clientData.clear();
 
     if (m_strings)
         m_strings->Clear();
@@ -214,7 +214,7 @@ void wxChoice::DoDeleteOneItem(unsigned int n)
     }
     gtk_list_store_remove( store, &iter );
 
-    m_clientData.RemoveAt( n );
+    m_clientData.erase( std::begin(m_clientData) + n );
     if ( m_strings )
         m_strings->RemoveAt( n );
 

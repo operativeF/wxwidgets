@@ -367,7 +367,6 @@ bool wxRibbonPage::ScrollSections(int sections)
     int gap = 0;
 
     wxSize sz = GetSize();
-    wxPoint pt = GetPosition();
 
     if(major_axis == wxHORIZONTAL)
     {

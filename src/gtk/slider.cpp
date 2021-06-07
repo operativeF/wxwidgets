@@ -158,11 +158,13 @@ gtk_value_changed(GtkRange* range, wxSlider* win)
         {
             eventType = isDown ? wxEVT_SCROLL_PAGEDOWN : wxEVT_SCROLL_PAGEUP;
         }
-        else if (wxIsSameDouble(value, 0))
+        // FIXME: Double equality
+        else if (value == 0)
         {
             eventType = wxEVT_SCROLL_PAGEUP;
         }
-        else if (wxIsSameDouble(value, gtk_adjustment_get_upper(adj)))
+        // FIXME: Double equality.
+        else if (value == gtk_adjustment_get_upper(adj))
         {
             eventType = wxEVT_SCROLL_PAGEDOWN;
         }

@@ -6197,7 +6197,7 @@ private:
 
     void getInitialColWidths(const std::vector<int>& abs_widths, const std::vector<int>& percentage_widths, std::vector<int>& col_widths);
 
-    void wxRichTextTable::adjustColumns(const std::vector<int>& minColWidths,
+    void adjustColumns(const std::vector<int>& minColWidths,
         const std::vector<int>& minColWidthsNoWrap,
         const std::vector<int>& maxUnspecifiedColumnWidths,
         std::vector<int>& colWidths,

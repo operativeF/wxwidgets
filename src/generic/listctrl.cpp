@@ -1065,9 +1065,8 @@ void wxListHeaderWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
     dc.SetFont( GetFont() );
 
     // width and height of the entire header window
-    int w, h;
-    GetClientSize( &w, &h );
-    parent->CalcUnscrolledPosition(w, 0, &w, NULL);
+    wxSize cliSize = GetClientSize();
+    parent->CalcUnscrolledPosition(cliSize.x, 0, &cliSize.x, NULL);
 
     dc.SetBackgroundMode(wxBrushStyle::Transparent);
     dc.SetTextForeground(GetForegroundColour());
@@ -1075,13 +1074,13 @@ void wxListHeaderWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
     int x = HEADER_OFFSET_X;
     int numColumns = m_owner->GetColumnCount();
     wxListItem item;
-    for ( int i = 0; i < numColumns && x < w; i++ )
+    for ( int i = 0; i < numColumns && x < cliSize.x; i++ )
     {
         m_owner->GetColumn( i, item );
         int wCol = item.m_width;
 
         int cw = wCol;
-        int ch = h;
+        int ch = cliSize.y;
 
         int flags = 0;
         if (!m_parent->IsEnabled())
@@ -1157,7 +1156,7 @@ void wxListHeaderWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
 
         // draw the text and image clipping them so that they
         // don't overwrite the column boundary
-        wxDCClipper clipper(dc, x, HEADER_OFFSET_Y, cw, h);
+        wxDCClipper clipper(dc, x, HEADER_OFFSET_Y, cw, cliSize.y);
 
         // if we have an image, draw it on the right of the label
         if ( imageList )
@@ -1167,26 +1166,26 @@ void wxListHeaderWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
                         image,
                         dc,
                         xAligned + wLabel - ix - HEADER_IMAGE_MARGIN_IN_REPORT_MODE,
-                        HEADER_OFFSET_Y + (h - iy)/2,
+                        HEADER_OFFSET_Y + (cliSize.y - iy)/2,
                         wxIMAGELIST_DRAW_TRANSPARENT
                        );
         }
 
         dc.DrawText( item.GetText(),
-                     xAligned + EXTRA_WIDTH, (h - hLabel) / 2 );
+                     xAligned + EXTRA_WIDTH, (cliSize.y - hLabel) / 2 );
 
         x += wCol;
     }
 
     // Fill in what's missing to the right of the columns, otherwise we will
     // leave an unpainted area when columns are removed (and it looks better)
-    if ( x < w )
+    if ( x < cliSize.x )
     {
         wxRendererNative::Get().DrawHeaderButton
                                 (
                                     this,
                                     dc,
-                                    wxRect(x, HEADER_OFFSET_Y, w - x, h),
+                                    wxRect(x, HEADER_OFFSET_Y, cliSize.x - x, cliSize.y),
                                     wxCONTROL_DIRTY // mark as last column
                                 );
     }
@@ -1224,8 +1223,7 @@ void wxListHeaderWindow::OnMouse( wxMouseEvent &event )
 
         // we don't draw the line beyond our window, but we allow dragging it
         // there
-        int w = 0;
-        GetClientSize( &w, NULL );
+        int w = GetClientSize().x;
         parent->CalcUnscrolledPosition(w, 0, &w, NULL);
         w -= 6;
 
@@ -1703,7 +1701,7 @@ wxListLineData *wxListMainWindow::GetDummyLine() const
     if ( !m_lines.empty() &&
             m_lines[0]->m_items.GetCount() != (size_t)GetColumnCount() )
     {
-        self->m_lines.Clear();
+        self->m_lines.clear();
     }
 
     if ( m_lines.empty() )
@@ -1713,7 +1711,7 @@ wxListLineData *wxListMainWindow::GetDummyLine() const
 
         // don't waste extra memory -- there never going to be anything
         // else/more in this array
-        wxShrinkToFit(self->m_lines);
+        self->m_lines.shrink_to_fit();
     }
 
     return m_lines[0];
@@ -1884,7 +1882,7 @@ void wxListMainWindow::HighlightLines( size_t lineFrom,
         }
         else // only a few items changed state, refresh only them
         {
-            size_t count = linesChanged.GetCount();
+            size_t count = linesChanged.size();
             for ( size_t n = 0; n < count; n++ )
             {
                 RefreshLine(linesChanged[n]);
@@ -2177,8 +2175,7 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
             dc.SetPen(pen);
             dc.SetBrush(* wxTRANSPARENT_BRUSH);
 
-            int clientHeight, clientWidth;
-            GetSize( &clientWidth, &clientHeight );
+            wxSize cli_size = GetSize();
 
             for (int col = 0; col < GetColumnCount(); col++)
             {
@@ -2188,7 +2185,7 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
                 if (col < GetColumnCount()-1) x_pos -= 2;
 
                 int ruleHeight = m_extendRulesAndAlternateColour && visibleEnd > visibleTo
-                                    ? clientHeight
+                                    ? cli_size.y
                                     : lastItemRect.GetBottom() + 1 - dev_y;
 
                 dc.DrawLine(x_pos, firstItemRect.GetY() - 1 - dev_y,
@@ -2770,8 +2767,7 @@ void wxListMainWindow::MoveToItem(size_t item)
 
     wxRect rect = GetLineRect(item);
 
-    int client_w, client_h;
-    GetClientSize( &client_w, &client_h );
+    wxSize cli_size = GetClientSize();
 
     const int hLine = GetLineHeight();
 
@@ -2786,8 +2782,8 @@ void wxListMainWindow::MoveToItem(size_t item)
 
         if (rect.y < view_y)
             GetListCtrl()->Scroll( -1, rect.y / hLine );
-        if (rect.y + rect.height + 5 > view_y + client_h)
-            GetListCtrl()->Scroll( -1, (rect.y + rect.height - client_h + hLine) / hLine );
+        if (rect.y + rect.height + 5 > view_y + cli_size.y)
+            GetListCtrl()->Scroll( -1, (rect.y + rect.height - cli_size.y + hLine) / hLine );
 
 #if defined(__WXMAC__) || defined(__WXUNIVERSAL__)
         // At least on Mac the visible lines value will get reset inside of
@@ -2808,13 +2804,13 @@ void wxListMainWindow::MoveToItem(size_t item)
 
         if (rect.x-view_x < 5)
             sx = (rect.x - 5) / SCROLL_UNIT_X;
-        if (rect.x + rect.width - 5 > view_x + client_w)
-            sx = (rect.x + rect.width - client_w + SCROLL_UNIT_X) / SCROLL_UNIT_X;
+        if (rect.x + rect.width - 5 > view_x + cli_size.x)
+            sx = (rect.x + rect.width - cli_size.x + SCROLL_UNIT_X) / SCROLL_UNIT_X;
 
         if (rect.y-view_y < 5)
             sy = (rect.y - 5) / hLine;
-        if (rect.y + rect.height - 5 > view_y + client_h)
-            sy = (rect.y + rect.height - client_h + hLine) / hLine;
+        if (rect.y + rect.height - 5 > view_y + cli_size.y)
+            sy = (rect.y + rect.height - cli_size.y + hLine) / hLine;
 
         GetListCtrl()->Scroll(sx, sy);
     }
@@ -4030,16 +4026,14 @@ void wxListMainWindow::RecalculatePositions(bool noRefresh)
     // width as 2 pixels is just the extra space which we
     // need around the actual content in the window. Other-
     // wise the text would e.g. touch the upper border. RR.
-    int clientWidth,
-        clientHeight;
-    GetSize( &clientWidth, &clientHeight );
+    wxSize cli_size = GetSize();
 
     if ( InReportView() )
     {
         // all lines have the same height and we scroll one line per step
         int entireHeight = count * lineHeight + LINE_SPACING;
 
-        m_linesPerPage = clientHeight / lineHeight;
+        m_linesPerPage = cli_size.y / lineHeight;
 
         ResetVisibleLinesRange();
 
@@ -4155,7 +4149,7 @@ void wxListMainWindow::RecalculatePositions(bool noRefresh)
                     // Have we reached the end of the row either because no
                     // more items would fit or because there are simply no more
                     // items?
-                    if ( y + sizeLine.y >= clientHeight
+                    if ( y + sizeLine.y >= cli_size.y
                             || i == count - 1)
                     {
                         // Adjust all items in this row to have the same
@@ -4179,9 +4173,9 @@ void wxListMainWindow::RecalculatePositions(bool noRefresh)
                     }
 
                     if ( (tries == 0) &&
-                            (entireWidth + SCROLL_UNIT_X > clientWidth) )
+                            (entireWidth + SCROLL_UNIT_X > cli_size.x) )
                     {
-                        clientHeight -= wxSystemSettings::
+                        cli_size.y -= wxSystemSettings::
                                             GetMetric(wxSYS_HSCROLL_Y);
                         m_linesPerPage = 0;
                         break;
@@ -5865,9 +5859,8 @@ void wxGenericListCtrl::Refresh(bool eraseBackground, const wxRect *rect)
             rectHeader.Intersect(*rect);
             if (rectHeader.GetWidth() && rectHeader.GetHeight())
             {
-                int x, y;
-                m_headerWin->GetPosition(&x, &y);
-                rectHeader.Offset(-x, -y);
+                wxPoint hpos = m_headerWin->GetPosition();
+                rectHeader.Offset(-hpos.x, -hpos.y);
                 m_headerWin->Refresh(eraseBackground, &rectHeader);
             }
         }
@@ -5879,9 +5872,8 @@ void wxGenericListCtrl::Refresh(bool eraseBackground, const wxRect *rect)
             rectMain.Intersect(*rect);
             if (rectMain.GetWidth() && rectMain.GetHeight())
             {
-                int x, y;
-                m_mainWin->GetPosition(&x, &y);
-                rectMain.Offset(-x, -y);
+                wxPoint mpos = m_mainWin->GetPosition();
+                rectMain.Offset(-mpos.x, -mpos.y);
                 m_mainWin->Refresh(eraseBackground, &rectMain);
             }
         }

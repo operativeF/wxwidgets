@@ -156,7 +156,7 @@ size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vec
 #elif defined(__UNIX__)
     paths.Add(wxT("/"));
     names.Add(wxT("/"));
-    icon_ids.Add(wxFileIconsTable::computer);
+    icon_ids.push_back(wxFileIconsTable::computer);
 #else
     #error "Unsupported platform in wxGenericDirCtrl!"
 #endif

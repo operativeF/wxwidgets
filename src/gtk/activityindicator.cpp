@@ -157,7 +157,8 @@ wxSize wxActivityIndicator::DoGetBestClientSize() const
             break;
     }
 
-    wxASSERT_MSG( !wxIsSameDouble(factor, 0), wxS("Unknown window variant") );
+    // FIXME: Double equality.
+    wxASSERT_MSG( factor != 0.0, wxS("Unknown window variant") );
 
     return wxSize(wxRound(w*factor), wxRound(h*factor));
 }

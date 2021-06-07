@@ -961,8 +961,7 @@ bool wxTopLevelWindowGTK::ShowFullScreen(bool show, long)
 
         if (show)
         {
-            GetPosition( &m_fsSaveFrame.x, &m_fsSaveFrame.y );
-            GetSize( &m_fsSaveFrame.width, &m_fsSaveFrame.height );
+            m_fsSaveFrame = {GetPosition(), GetSize()};
 
             wxGCC_WARNING_SUPPRESS(deprecated-declarations)
             const int screen_width = gdk_screen_get_width(screen);
@@ -1295,7 +1294,8 @@ void wxTopLevelWindowGTK::DoSetSize( int x, int y, int width, int height, int si
         if (!gtk_window_get_resizable(GTK_WINDOW(m_widget)))
             gtk_widget_set_size_request(GTK_WIDGET(m_widget), w, h);
 
-        DoGetClientSize(&m_clientWidth, &m_clientHeight);
+        m_clientWidth = DoGetClientSize().x;
+        m_clientHeight = DoGetClientSize().y;
         wxSizeEvent event(GetSize(), GetId());
         event.SetEventObject(this);
         HandleWindowEvent(event);
@@ -1341,29 +1341,29 @@ void wxTopLevelWindowGTK::DoSetClientSize(int width, int height)
     }
 }
 
-void wxTopLevelWindowGTK::DoGetClientSize( int *width, int *height ) const
+wxSize wxTopLevelWindowGTK::DoGetClientSize() const
 {
-    wxCHECK_RET(m_widget, "invalid frame");
+    // FIXME: Check doesn't work right now.
+    //wxCHECK_RET(m_widget, "invalid frame");
 
     if ( IsIconized() )
     {
         // for consistency with wxMSW, client area is supposed to be empty for
         // the iconized windows
-        if ( width )
-            *width = 0;
-        if ( height )
-            *height = 0;
+        return { 0, 0 };
     }
     else if (m_useCachedClientSize)
-        base_type::DoGetClientSize(width, height);
+    {
+        return base_type::DoGetClientSize();
+    }
     else
     {
         int w = m_width - (m_decorSize.left + m_decorSize.right);
         int h = m_height - (m_decorSize.top + m_decorSize.bottom);
         if (w < 0) w = 0;
         if (h < 0) h = 0;
-        if (width) *width = w;
-        if (height) *height = h;
+
+        return { w, h };
     }
 }
 
@@ -1498,7 +1498,8 @@ void wxTopLevelWindowGTK::GTKUpdateDecorSize(const DecorSize& decorSize)
     {
         // gtk_widget_show() was deferred, do it now
         m_deferShow = false;
-        DoGetClientSize(&m_clientWidth, &m_clientHeight);
+        m_clientWidth = DoGetClientSize().x;
+        m_clientHeight = DoGetClientSize().y;
         SendSizeEvent();
 
 #ifdef __WXGTK3__

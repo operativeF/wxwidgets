@@ -385,10 +385,10 @@ void wxGUIEventLoop::DoYieldFor(long eventsToProcess)
     wxEventLoopBase::DoYieldFor(eventsToProcess);
 
     // put any unprocessed GDK events back in the queue
-    if ( !m_arrGdkEvents.IsEmpty() )
+    if ( !m_arrGdkEvents.empty() )
     {
         GdkDisplay* disp = gdk_window_get_display(wxGetTopLevelGDK());
-        for (size_t i=0; i<m_arrGdkEvents.GetCount(); i++)
+        for (size_t i=0; i<m_arrGdkEvents.size(); i++)
         {
             GdkEvent* ev = (GdkEvent*)m_arrGdkEvents[i];
 
@@ -397,6 +397,6 @@ void wxGUIEventLoop::DoYieldFor(long eventsToProcess)
             gdk_event_free(ev);
         }
 
-        m_arrGdkEvents.Clear();
+        m_arrGdkEvents.clear();
     }
 }

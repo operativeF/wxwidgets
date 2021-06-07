@@ -506,8 +506,7 @@ wxEND_EVENT_TABLE()
 
 void wxHeaderCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
 {
-    int w, h;
-    GetClientSize(&w, &h);
+    wxSize cli_size = GetClientSize();
 
     wxAutoBufferedPaintDC dc(this);
     dc.Clear();
@@ -557,7 +556,7 @@ void wxHeaderCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         params.m_labelAlignment = col.GetAlignment();
 
 #ifdef __WXGTK__
-        if (i == count-1 && xpos + colWidth >= w)
+        if (i == count-1 && xpos + colWidth >= cli_size.x)
         {
             state |= wxCONTROL_DIRTY;
         }
@@ -567,7 +566,7 @@ void wxHeaderCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
                                 (
                                     this,
                                     dc,
-                                    wxRect(xpos, 0, colWidth, h),
+                                    wxRect(xpos, 0, colWidth, cli_size.y),
                                     state,
                                     sortArrow,
                                     &params
@@ -575,13 +574,13 @@ void wxHeaderCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
 
         xpos += colWidth;
     }
-    if (xpos < w)
+    if (xpos < cli_size.x)
     {
         int state = wxCONTROL_DIRTY;
         if (!IsEnabled())
             state |= wxCONTROL_DISABLED;
         wxRendererNative::Get().DrawHeaderButton(
-            this, dc, wxRect(xpos, 0, w - xpos, h), state);
+            this, dc, wxRect(xpos, 0, cli_size.x - xpos, cli_size.y), state);
     }
 }
 

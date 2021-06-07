@@ -455,11 +455,11 @@ public:
         // no offset if overall scale is not odd integer
         double x = GetContentScaleFactor(), y = x;
         cairo_user_to_device_distance(m_context, &x, &y);
-        if (!wxIsSameDouble(fmod(wxMin(fabs(x), fabs(y)), 2.0), 1.0))
+        if (fmod(wxMin(fabs(x), fabs(y)), 2.0) != 1.0)
             return false;
 
         // offset if pen width is odd integer
-        return wxIsSameDouble(fmod(width, 2.0), 1.0);
+        return fmod(width, 2.0) == 1.0;
     }
 
     void Clip( const wxRegion &region ) override;
@@ -1991,10 +1991,9 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxPrinterDC&
 wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxWindowDC& dc )
 : wxGraphicsContext(renderer, dc.GetWindow())
 {
-    int width, height;
-    dc.GetSize( &width, &height );
-    m_width = width;
-    m_height = height;
+    wxSize dcSize = dc.GetSize();
+    m_width = dcSize.x;
+    m_height = dcSize.y;
 
     EnableOffset();
 
@@ -2022,7 +2021,7 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxWindowDC& 
         Init(cairo_reference(cr));
 #elif defined(__WXMAC__)
     CGContextRef cgcontext = (CGContextRef)dc.GetWindow()->MacGetCGContextRef();
-    cairo_surface_t* surface = cairo_quartz_surface_create_for_cg_context(cgcontext, width, height);
+    cairo_surface_t* surface = cairo_quartz_surface_create_for_cg_context(cgcontext, dcSize.x, dcSize.y);
     Init( cairo_create( surface ) );
     cairo_surface_destroy( surface );
 #endif
@@ -2030,12 +2029,12 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxWindowDC& 
 #ifdef __WXQT__
     m_qtPainter = static_cast<QPainter*>(dc.GetHandle());
     // create a internal buffer (fallback if cairo_qt_surface is missing)
-    m_qtImage = new QImage(width, height, QImage::Format_ARGB32_Premultiplied);
+    m_qtImage = new QImage(dcSize.x, dcSize.y, QImage::Format_ARGB32_Premultiplied);
     // clear the buffer to be painted over the current contents
     m_qtImage->fill(Qt::transparent);
     m_qtSurface = cairo_image_surface_create_for_data(m_qtImage->bits(),
                                                       CAIRO_FORMAT_ARGB32,
-                                                      width, height,
+                                                      dcSize.x, dcSize.y,
                                                       m_qtImage->bytesPerLine());
     Init( cairo_create( m_qtSurface ) );
 #endif
@@ -2044,10 +2043,9 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxWindowDC& 
 wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxMemoryDC& dc )
 : wxGraphicsContext(renderer)
 {
-    int width, height;
-    dc.GetSize( &width, &height );
-    m_width = width;
-    m_height = height;
+    wxSize dcSize = dc.GetSize();
+    m_width = dcSize.x;
+    m_height = dcSize.x;
 
     SetContentScaleFactor(dc.GetContentScaleFactor());
 
@@ -2210,7 +2208,7 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxMemoryDC& 
         // so that all drawing will appear right side up.
         // We have to remember these operations as an internal transformation
         // which is not going to be exposed through e.g. GetTransform().
-        cairo_matrix_init(&m_internalTransform, 1.0, 0.0, 0.0, -1.0, 0.0, height);
+        cairo_matrix_init(&m_internalTransform, 1.0, 0.0, 0.0, -1.0, 0.0, dcSize.y);
     }
     // Transfer transformation settings from source wxDC
     // to Cairo context on our own, if required.
@@ -2237,7 +2235,7 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxMemoryDC& 
 
 #ifdef __WXMAC__
     CGContextRef cgcontext = (CGContextRef)dc.GetWindow()->MacGetCGContextRef();
-    cairo_surface_t* surface = cairo_quartz_surface_create_for_cg_context(cgcontext, width, height);
+    cairo_surface_t* surface = cairo_quartz_surface_create_for_cg_context(cgcontext, dcSize.x, dcSize.y);
     Init( cairo_create( surface ) );
     cairo_surface_destroy( surface );
 #endif
@@ -2245,12 +2243,12 @@ wxCairoContext::wxCairoContext( wxGraphicsRenderer* renderer, const wxMemoryDC& 
 #ifdef __WXQT__
     m_qtPainter = static_cast<QPainter*>(dc.GetHandle());
     // create a internal buffer (fallback if cairo_qt_surface is missing)
-    m_qtImage = new QImage(width, height, QImage::Format_ARGB32_Premultiplied);
+    m_qtImage = new QImage(dcSize.x, dcSize.y, QImage::Format_ARGB32_Premultiplied);
     // clear the buffer to be painted over the current contents
     m_qtImage->fill(Qt::transparent);
     m_qtSurface = cairo_image_surface_create_for_data(m_qtImage->bits(),
                                                       CAIRO_FORMAT_ARGB32,
-                                                      width, height,
+                                                      dcSize.x, dcSize.y,
                                                       m_qtImage->bytesPerLine());
     Init( cairo_create( m_qtSurface ) );
 #endif
@@ -2930,7 +2928,7 @@ void wxCairoContext::GetTextExtent( const wxString &str, double *width, double *
 
 void wxCairoContext::GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const
 {
-    widths.Empty();
+    widths.clear();
     wxCHECK_RET( !m_font.IsNull(), wxT("wxCairoContext::GetPartialTextExtents - no valid font set") );
 #ifdef __WXGTK__
     const wxCharBuffer data = text.utf8_str();
@@ -2947,14 +2945,14 @@ void wxCairoContext::GetPartialTextExtents(const wxString& text, std::vector<dou
         do {
             pango_layout_iter_get_cluster_extents(iter, NULL, &rect);
             w += rect.width;
-            widths.Add(PANGO_PIXELS(w));
+            widths.push_back(PANGO_PIXELS(w));
         } while (pango_layout_iter_next_cluster(iter));
         pango_layout_iter_free(iter);
     }
-    size_t i = widths.GetCount();
+    size_t i = widths.size();
     const size_t len = text.length();
     while (i++ < len)
-        widths.Add(PANGO_PIXELS(w));
+        widths.push_back(PANGO_PIXELS(w));
 #else
     for (size_t i = 0; i < text.Length(); i++)
     {

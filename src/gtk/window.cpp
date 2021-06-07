@@ -3846,7 +3846,8 @@ void wxWindowGTK::DoSetSize( int x, int y, int width, int height, int sizeFlags 
 #endif
         // update these variables to keep size_allocate handler
         // from sending another size event for this change
-        DoGetClientSize(&m_clientWidth, &m_clientHeight);
+        m_clientWidth = DoGetClientSize().x;
+        m_clientHeight = DoGetClientSize().y;
 
         wxSizeEvent event( wxSize(m_width,m_height), GetId() );
         event.SetEventObject( this );
@@ -3892,10 +3893,9 @@ void wxWindowGTK::OnInternalIdle()
     wxWindowBase::OnInternalIdle();
 }
 
-void wxWindowGTK::DoGetSize( int *width, int *height ) const
+wxSize wxWindowGTK::DoGetSize() const
 {
-    if (width) (*width) = m_width;
-    if (height) (*height) = m_height;
+    return { m_width, m_height };
 }
 
 void wxWindowGTK::DoSetClientSize( int width, int height )
@@ -3907,15 +3907,14 @@ void wxWindowGTK::DoSetClientSize( int width, int height )
     SetSize(width + (size.x - clientSize.x), height + (size.y - clientSize.y));
 }
 
-void wxWindowGTK::DoGetClientSize( int *width, int *height ) const
+wxSize wxWindowGTK::DoGetClientSize() const
 {
-    wxCHECK_RET( (m_widget != NULL), wxT("invalid window") );
+    // FIXME: This check doesn't work.
+    //wxCHECK_RET( (m_widget != nullptr), wxT("invalid window") );
 
     if (m_useCachedClientSize)
     {
-        if (width)  *width  = m_clientWidth;
-        if (height) *height = m_clientHeight;
-        return;
+        return { m_clientWidth, m_clientHeight };
     }
 
     int w = m_width;
@@ -3974,19 +3973,13 @@ void wxWindowGTK::DoGetClientSize( int *width, int *height ) const
                 GtkWidget* widget = GTK_WIDGET(range);
                 if (i == ScrollDir_Horz)
                 {
-                    if (height)
-                    {
-                        gtk_widget_get_preferred_height(widget, NULL, &req.height);
-                        h -= req.height + scrollbar_spacing;
-                    }
+                    gtk_widget_get_preferred_height(widget, NULL, &req.height);
+                    h -= req.height + scrollbar_spacing;
                 }
                 else
                 {
-                    if (width)
-                    {
-                        gtk_widget_get_preferred_width(widget, NULL, &req.width);
-                        w -= req.width + scrollbar_spacing;
-                    }
+                    gtk_widget_get_preferred_width(widget, NULL, &req.width);
+                    w -= req.width + scrollbar_spacing;
                 }
 #else // !__WXGTK3__
                 gtk_widget_size_request(GTK_WIDGET(range), &req);
@@ -4008,8 +4001,7 @@ void wxWindowGTK::DoGetClientSize( int *width, int *height ) const
             h = 0;
     }
 
-    if (width) *width = w;
-    if (height) *height = h;
+    return { w, h };
 }
 
 wxSize wxWindowGTK::DoGetBorderSize() const
@@ -4072,14 +4064,13 @@ void wxWindowGTK::DoClientToScreen( int *x, int *y ) const
                 *x += pos.x;
             else
             {
-                int w;
                 // undo RTL conversion done by parent
-                static_cast<wxWindowGTK*>(m_parent)->DoGetClientSize(&w, NULL);
-                *x = w - *x;
+                int w1 = static_cast<wxWindowGTK*>(m_parent)->DoGetClientSize().x;
+                *x = w1 - *x;
 
-                DoGetClientSize(&w, NULL);
+                int w2 = DoGetClientSize().x;
                 *x += pos.x;
-                *x = w - *x;
+                *x = w2 - *x;
             }
         }
         return;
@@ -4148,12 +4139,12 @@ void wxWindowGTK::DoScreenToClient( int *x, int *y ) const
             else
             {
                 // undo RTL conversion done by parent
-                int w = static_cast<wxWindowGTK*>(m_parent)->DoGetClientSize().x;
-                *x = w - *x;
+                int w1 = static_cast<wxWindowGTK*>(m_parent)->DoGetClientSize().x;
+                *x = w1 - *x;
 
-                wxSize client_size = DoGetClientSize().x;
+                int w2 = DoGetClientSize().x;
                 *x -= pos.x;
-                *x = w - *x;
+                *x = w2 - *x;
             }
         }
         return;

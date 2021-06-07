@@ -186,11 +186,11 @@ void wxMDIParentFrame::OnInternalIdle()
     }
 }
 
-void wxMDIParentFrame::DoGetClientSize(int* width, int* height) const
+wxSize wxMDIParentFrame::DoGetClientSize() const
 {
-    wxFrame::DoGetClientSize(width, height);
+    wxSize cli_size = wxFrame::DoGetClientSize();
 
-    if (!m_useCachedClientSize && height)
+    if (!m_useCachedClientSize)
     {
         wxMDIChildFrame* active_child_frame = GetActiveChild();
         if (active_child_frame)
@@ -200,11 +200,13 @@ void wxMDIParentFrame::DoGetClientSize(int* width, int* height) const
             {
                 GtkRequisition req;
                 gtk_widget_get_preferred_height(menubar->m_widget, NULL, &req.height);
-                *height -= req.height;
-                if (*height < 0) *height = 0;
+                cli_size.y -= req.height;
+                if (cli_size.y < 0) cli_size.y = 0;
             }
         }
     }
+
+    return cli_size;
 }
 
 wxMDIChildFrame *wxMDIParentFrame::GetActiveChild() const

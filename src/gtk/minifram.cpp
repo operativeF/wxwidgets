@@ -413,23 +413,20 @@ bool wxMiniFrame::Create( wxWindow *parent, wxWindowID id, const wxString &title
     return true;
 }
 
-void wxMiniFrame::DoGetClientSize(int* width, int* height) const
+wxSize wxMiniFrame::DoGetClientSize() const
 {
-    wxFrame::DoGetClientSize(width, height);
+    wxSize cli_size = wxFrame::DoGetClientSize();
 
     if (m_useCachedClientSize)
-        return;
+        return cli_size;
 
-    if (width)
-    {
-        *width -= 2 * m_miniEdge;
-        if (*width < 0) *width = 0;
-    }
-    if (height)
-    {
-        *height -= m_miniTitle + 2 * m_miniEdge;
-        if (*height < 0) *height = 0;
-    }
+    cli_size.x -= 2 * m_miniEdge;
+    if (cli_size.x < 0) cli_size.x = 0;
+
+    cli_size.y -= m_miniTitle + 2 * m_miniEdge;
+    if (cli_size.y < 0) cli_size.y = 0;
+
+    return cli_size;
 }
 
 // Keep min size at least as large as decorations

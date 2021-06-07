@@ -102,13 +102,12 @@ void wxScrollHelper::AdjustScrollbars()
     }
 #endif
 
-    int w, h;
     const wxSize availSize = GetSizeAvailableForScrollTarget(
         m_win->GetSize() - m_win->GetWindowBorderSize());
     if ( availSize.x >= vw && availSize.y >= vh )
     {
-        w = availSize.x;
-        h = availSize.y;
+        int w = availSize.x;
+        int h = availSize.y;
 
         // we know that the scrollbars will be removed
         DoAdjustHScrollbar(w, vw);
@@ -117,14 +116,15 @@ void wxScrollHelper::AdjustScrollbars()
         return;
     }
 
-    m_targetWindow->GetClientSize(&w, NULL);
+    int w = m_targetWindow->GetClientSize().x;
     DoAdjustHScrollbar(w, vw);
 
-    m_targetWindow->GetClientSize(NULL, &h);
+    int h = m_targetWindow->GetClientSize().y;
     DoAdjustVScrollbar(h, vh);
 
     const int w_old = w;
-    m_targetWindow->GetClientSize(&w, NULL);
+    w = m_targetWindow->GetClientSize().x;
+
     if ( w != w_old )
     {
         // It is necessary to repeat the calculations in this case to avoid an
@@ -136,7 +136,7 @@ void wxScrollHelper::AdjustScrollbars()
         // leading to an unending series if the sizes are just right.
         DoAdjustHScrollbar(w, vw);
 
-        m_targetWindow->GetClientSize(NULL, &h);
+        h = m_targetWindow->GetClientSize().y;
         DoAdjustVScrollbar(h, vh);
     }
 }

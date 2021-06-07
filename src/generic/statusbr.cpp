@@ -462,8 +462,7 @@ void wxStatusBarGeneric::OnSysColourChanged(wxSysColourChangedEvent& event)
 #ifdef __WXGTK20__
 void wxStatusBarGeneric::OnLeftDown(wxMouseEvent& event)
 {
-    int width, height;
-    GetClientSize(&width, &height);
+    wxSize cli_size = GetClientSize();
 
     GtkWidget* ancestor = gtk_widget_get_toplevel(m_widget);
 #ifdef __WXGTK3__
@@ -477,7 +476,7 @@ void wxStatusBarGeneric::OnLeftDown(wxMouseEvent& event)
     }
 #endif
 
-    if (ancestor && ShowsSizeGrip() && event.GetX() > width - height)
+    if (ancestor && ShowsSizeGrip() && event.GetX() > cli_size.x - cli_size.y)
     {
         GdkWindow *source = GTKGetDrawingWindow();
 
@@ -512,8 +511,7 @@ void wxStatusBarGeneric::OnLeftDown(wxMouseEvent& event)
 
 void wxStatusBarGeneric::OnRightDown(wxMouseEvent& event)
 {
-    int width, height;
-    GetClientSize(&width, &height);
+    wxSize cli_size = GetClientSize();
 
     GtkWidget* ancestor = gtk_widget_get_toplevel(m_widget);
 #ifdef __WXGTK3__
@@ -527,7 +525,7 @@ void wxStatusBarGeneric::OnRightDown(wxMouseEvent& event)
     }
 #endif
 
-    if (ancestor && ShowsSizeGrip() && event.GetX() > width - height)
+    if (ancestor && ShowsSizeGrip() && event.GetX() > cli_size.x - cli_size.y)
     {
         GdkWindow *source = GTKGetDrawingWindow();
 

@@ -1346,7 +1346,8 @@ cairo_t* wxBitmap::CairoCreate() const
         bmpData->m_pixbufMask = NULL;
     }
     wxASSERT(cr && cairo_status(cr) == 0);
-    if (!wxIsSameDouble(bmpData->m_scaleFactor, 1))
+    // FIXME: Double equality.
+    if (bmpData->m_scaleFactor != 1)
         cairo_scale(cr, bmpData->m_scaleFactor, bmpData->m_scaleFactor);
     return cr;
 }
@@ -1356,7 +1357,7 @@ void wxBitmap::Draw(cairo_t* cr, int x, int y, bool useMask, const wxColour* fg,
     wxCHECK_RET(IsOk(), "invalid bitmap");
 
     wxBitmapRefData* bmpData = M_BMPDATA;
-    if (!wxIsSameDouble(bmpData->m_scaleFactor, 1))
+    if (bmpData->m_scaleFactor != 1)
     {
         cairo_translate(cr, x, y);
         const double scale = 1 / bmpData->m_scaleFactor;

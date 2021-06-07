@@ -51,33 +51,31 @@ bool wxFrame::Create( wxWindow *parent,
 // overridden wxWindow methods
 // ----------------------------------------------------------------------------
 
-void wxFrame::DoGetClientSize( int *width, int *height ) const
+wxSize wxFrame::DoGetClientSize() const
 {
     wxASSERT_MSG( (m_widget != NULL), wxT("invalid frame") );
 
-    wxFrameBase::DoGetClientSize(width, height);
+    wxSize cli_size = wxFrameBase::DoGetClientSize();
 
+    // TODO: Not sure if this is correct to return cli_size here.
     if (m_useCachedClientSize)
-        return;
+        return cli_size;
 
-    if (height)
-    {
 #if wxUSE_MENUS_NATIVE
         // menu bar
-        if (m_frameMenuBar && m_frameMenuBar->IsShown())
-        {
-            int h;
-            gtk_widget_get_preferred_height(m_frameMenuBar->m_widget, NULL, &h);
-            *height -= h;
-        }
+    if (m_frameMenuBar && m_frameMenuBar->IsShown())
+    {
+        int h;
+        gtk_widget_get_preferred_height(m_frameMenuBar->m_widget, NULL, &h);
+        cli_size.y -= h;
+    }
 #endif // wxUSE_MENUS_NATIVE
 
 #if wxUSE_STATUSBAR
-        // status bar
-        if (m_frameStatusBar && m_frameStatusBar->IsShown())
-            *height -= m_frameStatusBar->m_height;
+    // status bar
+    if (m_frameStatusBar && m_frameStatusBar->IsShown())
+        cli_size.y -= m_frameStatusBar->m_height;
 #endif // wxUSE_STATUSBAR
-    }
 
 #if wxUSE_TOOLBAR
     // tool bar
@@ -85,29 +83,25 @@ void wxFrame::DoGetClientSize( int *width, int *height ) const
     {
         if (m_frameToolBar->IsVertical())
         {
-            if (width)
-            {
-                int w;
-                gtk_widget_get_preferred_width(m_frameToolBar->m_widget, NULL, &w);
-                *width -= w;
-            }
+            int w;
+            gtk_widget_get_preferred_width(m_frameToolBar->m_widget, NULL, &w);
+            cli_size.x -= w;
         }
         else
         {
-            if (height)
-            {
-                int h;
-                gtk_widget_get_preferred_height(m_frameToolBar->m_widget, NULL, &h);
-                *height -= h;
-            }
+            int h;
+            gtk_widget_get_preferred_height(m_frameToolBar->m_widget, NULL, &h);
+            cli_size.y -= h;
         }
     }
 #endif // wxUSE_TOOLBAR
 
-    if (width != NULL && *width < 0)
-        *width = 0;
-    if (height != NULL && *height < 0)
-        *height = 0;
+    if (cli_size.x < 0)
+        cli_size.x = 0;
+    if (cli_size.y < 0)
+        cli_size.y = 0;
+
+    return cli_size;
 }
 
 bool wxFrame::ShowFullScreen(bool show, long style)

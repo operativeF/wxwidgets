@@ -1208,7 +1208,8 @@ void wxTextCtrl::WriteText( const wxString &text )
         const double value = gtk_adjustment_get_value(adj);
         const double upper = gtk_adjustment_get_upper(adj);
         const double page_size = gtk_adjustment_get_page_size(adj);
-        if (wxIsSameDouble(value, upper - page_size))
+        // FIXME: Double equality.
+        if (value ==  (upper - page_size))
         {
             if (!IsFrozen())
                 gtk_text_view_scroll_mark_onscreen(GTK_TEXT_VIEW(m_text), insertMark);

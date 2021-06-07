@@ -28,7 +28,7 @@
 #include "wx/mimetype.h"
 #include <vector>
 
-WX_DECLARE_HASH_SET(wxString, wxStringHash, wxStringEqual, explicit StringSet);
+WX_DECLARE_HASH_SET(wxString, wxStringHash, wxStringEqual, StringSet);
 
 class XRCWidgetData
 {
