@@ -34,14 +34,14 @@ enum
 };
 
 // result of wxDropSource::DoDragDrop() call
-enum wxDragResult
+enum class wxDragResult
 {
-    wxDragError,    // error prevented the d&d operation from completing
-    wxDragNone,     // drag target didn't accept the data
-    wxDragCopy,     // the data was successfully copied
-    wxDragMove,     // the data was successfully moved (MSW only)
-    wxDragLink,     // operation is a drag-link
-    wxDragCancel    // the operation was cancelled by user (not an error)
+    Error,    // error prevented the d&d operation from completing
+    None,     // drag target didn't accept the data
+    Copy,     // the data was successfully copied
+    Move,     // the data was successfully moved (MSW only)
+    Link,     // operation is a drag-link
+    Cancel    // the operation was cancelled by user (not an error)
 };
 
 // return true if res indicates that something was done during a dnd operation,
@@ -78,9 +78,9 @@ public:
     // set the icon corresponding to given drag result
     void SetCursor(wxDragResult res, const wxCursor& cursor)
     {
-        if ( res == wxDragCopy )
+        if ( res == wxDragResult::Copy )
             m_cursorCopy = cursor;
-        else if ( res == wxDragMove )
+        else if ( res == wxDragResult::Move )
             m_cursorMove = cursor;
         else
             m_cursorStop = cursor;
@@ -101,9 +101,9 @@ public:
 protected:
     const wxCursor& GetCursor(wxDragResult res) const
     {
-        if ( res == wxDragCopy )
+        if ( res == wxDragResult::Copy )
             return m_cursorCopy;
-        else if ( res == wxDragMove )
+        else if ( res == wxDragResult::Move )
             return m_cursorMove;
         else
             return m_cursorStop;
@@ -136,7 +136,7 @@ public:
     // by wxDropTarget and deleted by it automatically. If you don't give it
     // here, you can use SetDataObject() later.
     wxDropTargetBase(wxDataObject *dataObject = nullptr)
-        { m_dataObject = dataObject; m_defaultAction = wxDragNone; }
+        { m_dataObject = dataObject; m_defaultAction = wxDragResult::None; }
     // dtor deletes our data object
     virtual ~wxDropTargetBase()
         { delete m_dataObject; }
@@ -152,13 +152,13 @@ public:
     m_dataObject = dataObject; }
 
     // these functions are called when data is moved over position (x, y) and
-    // may return either wxDragCopy, wxDragMove or wxDragNone depending on
+    // may return either wxDragResult::Copy, wxDragResult::Move or wxDragResult::None depending on
     // what would happen if the data were dropped here.
     //
     // the last parameter is what would happen by default and is determined by
-    // the platform-specific logic (for example, under Windows it's wxDragCopy
-    // if Ctrl key is pressed and wxDragMove otherwise) except that it will
-    // always be wxDragNone if the carried data is in an unsupported format.
+    // the platform-specific logic (for example, under Windows it's wxDragResult::Copy
+    // if Ctrl key is pressed and wxDragResult::Move otherwise) except that it will
+    // always be wxDragResult::None if the carried data is in an unsupported format.
 
     // called when the mouse enters the window (only once until OnLeave())
     virtual wxDragResult OnEnter(wxCoord x, wxCoord y, wxDragResult def)
@@ -182,7 +182,7 @@ public:
     // called after OnDrop() returns TRUE: you will usually just call
     // GetData() from here and, probably, also refresh something to update the
     // new data and, finally, return the code indicating how did the operation
-    // complete (returning default value in case of success and wxDragError on
+    // complete (returning default value in case of success and wxDragResult::Error on
     // failure is usually ok)
     virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) = 0;
 
@@ -191,14 +191,14 @@ public:
     virtual bool GetData() = 0;
 
     // sets the default action for drag and drop:
-    // use wxDragMove or wxDragCopy to set default action to move or copy
-    // and use wxDragNone (default) to set default action specified by
+    // use wxDragResult::Move or wxDragResult::Copy to set default action to move or copy
+    // and use wxDragResult::None (default) to set default action specified by
     // initialization of dragging (see wxDropSourceBase::DoDragDrop())
     void SetDefaultAction(wxDragResult action)
         { m_defaultAction = action; }
 
     // returns default action for drag and drop or
-    // wxDragNone if this not specified
+    // wxDragResult::None if this not specified
     wxDragResult GetDefaultAction()
         { return m_defaultAction; }
 

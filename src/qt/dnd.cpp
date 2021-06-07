@@ -29,35 +29,35 @@ wxDragResult DropActionToDragResult(Qt::DropAction action)
     switch ( action )
     {
         case Qt::IgnoreAction:
-            return wxDragCancel;
+            return wxDragResult::Cancel;
         case Qt::CopyAction:
-            return wxDragCopy;
+            return wxDragResult::Copy;
         case Qt::MoveAction:
         case Qt::TargetMoveAction:
-            return wxDragMove;
+            return wxDragResult::Move;
         case Qt::LinkAction:
-            return wxDragLink;
+            return wxDragResult::Link;
         default:
             break;
     }
 
     wxFAIL_MSG("Illegal drop action");
-    return wxDragNone;
+    return wxDragResult::None;
 }
 
 Qt::DropAction DragResultToDropAction(wxDragResult result)
 {
     switch ( result )
     {
-        case wxDragCopy:
+        case wxDragResult::Copy:
             return Qt::CopyAction;
-        case wxDragMove:
+        case wxDragResult::Move:
             return Qt::MoveAction;
-        case wxDragLink:
+        case wxDragResult::Link:
             return Qt::LinkAction;
-        case wxDragError:
-        case wxDragNone:
-        case wxDragCancel:
+        case wxDragResult::Error:
+        case wxDragResult::None:
+        case wxDragResult::Cancel:
             return Qt::IgnoreAction;
     }
 
@@ -293,7 +293,7 @@ wxDragResult wxDropTarget::OnData(wxCoord WXUNUSED(x),
                                   wxCoord WXUNUSED(y),
                                   wxDragResult def)
 {
-    return GetData() ? def : wxDragNone;
+    return GetData() ? def : wxDragResult::None;
 }
 
 bool wxDropTarget::GetData()
@@ -363,10 +363,10 @@ wxDropSource::wxDropSource(wxDataObject& data,
 
 wxDragResult wxDropSource::DoDragDrop(int flags /*=wxDrag_CopyOnly*/)
 {
-    wxCHECK_MSG(m_data != NULL, wxDragNone,
+    wxCHECK_MSG(m_data != NULL, wxDragResult::None,
                 wxT("No data in wxDropSource!"));
 
-    wxCHECK_MSG(m_parentWindow != NULL, wxDragNone,
+    wxCHECK_MSG(m_parentWindow != NULL, wxDragResult::None,
                 wxT("NULL parent window in wxDropSource!"));
 
     QDrag drag(m_parentWindow->GetHandle());

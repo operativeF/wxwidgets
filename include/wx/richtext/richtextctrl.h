@@ -2444,7 +2444,7 @@ public:
     wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override
     {
         if ( !GetData() )
-            return wxDragNone;
+            return wxDragResult::None;
         m_rtc->OnDrop(x, y, def, m_dataObject);
         return def;
     }

@@ -139,16 +139,16 @@ static wxDragResult ConvertFromGTK(long action)
     switch ( action )
     {
         case GDK_ACTION_COPY:
-            return wxDragCopy;
+            return wxDragResult::Copy;
 
         case GDK_ACTION_LINK:
-            return wxDragLink;
+            return wxDragResult::Link;
 
         case GDK_ACTION_MOVE:
-            return wxDragMove;
+            return wxDragResult::Move;
     }
 
-    return wxDragNone;
+    return wxDragResult::None;
 }
 
 // ----------------------------------------------------------------------------
@@ -216,7 +216,7 @@ static gboolean target_drag_motion( GtkWidget *WXUNUSED(widget),
 
     wxDragResult suggested_action = drop_target->GTKFigureOutSuggestedAction();
 
-    wxDragResult result = wxDragNone;
+    wxDragResult result = wxDragResult::None;
 
     if (drop_target->m_firstMotion)
     {
@@ -230,9 +230,9 @@ static gboolean target_drag_motion( GtkWidget *WXUNUSED(widget),
     }
 
     GdkDragAction result_action = GDK_ACTION_DEFAULT;
-    if (result == wxDragCopy)
+    if (result == wxDragResult::Copy)
         result_action = GDK_ACTION_COPY;
-    else if (result == wxDragLink)
+    else if (result == wxDragResult::Link)
         result_action = GDK_ACTION_LINK;
     else
         result_action = GDK_ACTION_MOVE;
@@ -428,29 +428,29 @@ bool wxDropTarget::OnDrop( wxCoord WXUNUSED(x), wxCoord WXUNUSED(y) )
 wxDragResult wxDropTarget::OnData( wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
                                    wxDragResult def )
 {
-    return GetData() ? def : wxDragNone;
+    return GetData() ? def : wxDragResult::None;
 }
 
 wxDragResult wxDropTarget::GTKFigureOutSuggestedAction()
 {
     if (!m_dragContext)
-        return wxDragError;
+        return wxDragResult::Error;
 
     // GTK+ always supposes that we want to copy the data by default while we
     // might want to move it, so examine not only suggested_action - which is
     // only good if we don't have our own preferences - but also the actions
     // field
-    wxDragResult suggested_action = wxDragNone;
+    wxDragResult suggested_action = wxDragResult::None;
     const GdkDragAction actions = gdk_drag_context_get_actions(m_dragContext);
-    if (GetDefaultAction() == wxDragNone)
+    if (GetDefaultAction() == wxDragResult::None)
     {
         // use default action set by wxDropSource::DoDragDrop()
         if ( (gs_flagsForDrag & wxDrag_DefaultMove) == wxDrag_DefaultMove &&
             (actions & GDK_ACTION_MOVE))
         {
             // move is requested by the program and allowed by GTK+ - do it, even
-            // though suggested_action may be currently wxDragCopy
-            suggested_action = wxDragMove;
+            // though suggested_action may be currently wxDragResult::Copy
+            suggested_action = wxDragResult::Move;
         }
         else // use whatever GTK+ says we should
         {
@@ -462,30 +462,30 @@ wxDragResult wxDropTarget::GTKFigureOutSuggestedAction()
             //     comes from the same wx app, then GTK+ hopefully won't
             //     suggest something we didn't allow in the frist place
             //     in DoDrop()
-            if ( (suggested_action == wxDragMove) && !(gs_flagsForDrag & wxDrag_AllowMove) )
+            if ( (suggested_action == wxDragResult::Move) && !(gs_flagsForDrag & wxDrag_AllowMove) )
             {
                 // we're requested to move but we can't
-                suggested_action = wxDragCopy;
+                suggested_action = wxDragResult::Copy;
             }
 #endif
         }
     }
-    else if (GetDefaultAction() == wxDragMove &&
+    else if (GetDefaultAction() == wxDragResult::Move &&
             (actions & GDK_ACTION_MOVE))
     {
 
-        suggested_action = wxDragMove;
+        suggested_action = wxDragResult::Move;
     }
     else
     {
         if (actions & GDK_ACTION_COPY)
-            suggested_action = wxDragCopy;
+            suggested_action = wxDragResult::Copy;
         else if (actions & GDK_ACTION_MOVE)
-            suggested_action = wxDragMove;
+            suggested_action = wxDragResult::Move;
         else if (actions & GDK_ACTION_LINK)
-            suggested_action = wxDragLink;
+            suggested_action = wxDragResult::Link;
         else
-            suggested_action = wxDragNone;
+            suggested_action = wxDragResult::None;
     }
 
     return suggested_action;
@@ -612,7 +612,7 @@ source_drag_data_get  (GtkWidget          *WXUNUSED(widget),
     wxLogTrace(TRACE_DND, wxT("Drop source: format requested: %s"),
                format.GetId().c_str());
 
-    drop_source->m_retValue = wxDragError;
+    drop_source->m_retValue = wxDragResult::Error;
 
     wxDataObject *data = drop_source->GetDataObject();
 
@@ -702,7 +702,7 @@ wxDropSource::wxDropSource(wxWindow *win,
     m_widget = win->m_widget;
     if (win->m_wxwindow) m_widget = win->m_wxwindow;
 
-    m_retValue = wxDragNone;
+    m_retValue = wxDragResult::None;
 
     SetIcons(iconCopy, iconMove, iconNone);
 }
@@ -723,7 +723,7 @@ wxDropSource::wxDropSource(wxDataObject& data,
     m_widget = win->m_widget;
     if (win->m_wxwindow) m_widget = win->m_wxwindow;
 
-    m_retValue = wxDragNone;
+    m_retValue = wxDragResult::None;
 
     SetIcons(iconCopy, iconMove, iconNone);
 }
@@ -815,20 +815,20 @@ void wxDropSource::PrepareIcon( int action, GdkDragContext *context )
 
 wxDragResult wxDropSource::DoDragDrop(int flags)
 {
-    wxCHECK_MSG( m_data && m_data->GetFormatCount(), wxDragNone,
+    wxCHECK_MSG( m_data && m_data->GetFormatCount(), wxDragResult::None,
                  wxT("Drop source: no data") );
 
     // still in drag
     if (g_blockEventsOnDrag)
-        return wxDragNone;
+        return wxDragResult::None;
 
     // don't start dragging if no button is down
     if (g_lastButtonNumber == 0)
-        return wxDragNone;
+        return wxDragResult::None;
 
     // we can only start a drag after a mouse event
     if (g_lastMouseEvent == NULL)
-        return wxDragNone;
+        return wxDragResult::None;
 
     GTKConnectDragSignals();
     wxON_BLOCK_EXIT_OBJ0(*this, wxDropSource::GTKDisconnectDragSignals);
@@ -858,7 +858,7 @@ wxDragResult wxDropSource::DoDragDrop(int flags)
     //     surely prefer a better way to do it
     gs_flagsForDrag = flags;
 
-    m_retValue = wxDragCancel;
+    m_retValue = wxDragResult::Cancel;
 
     GdkDragContext *context = gtk_drag_begin( m_widget,
                 target_list,
@@ -869,7 +869,7 @@ wxDragResult wxDropSource::DoDragDrop(int flags)
     if ( !context )
     {
         // this can happen e.g. if gdk_pointer_grab() failed
-        return wxDragError;
+        return wxDragResult::Error;
     }
 
     m_dragContext = context;

@@ -128,11 +128,11 @@ protected:
 
 enum wxDragResult
 {
-    wxDragError,    // error prevented the d&d operation from completing
-        wxDragNone,     // drag target didn't accept the data
-        wxDragCopy,     // the data was successfully copied
-        wxDragMove,     // the data was successfully moved
-        wxDragCancel    // the operation was cancelled by user (not an error)
+    wxDragResult::Error,    // error prevented the d&d operation from completing
+        wxDragResult::None,     // drag target didn't accept the data
+        wxDragResult::Copy,     // the data was successfully copied
+        wxDragResult::Move,     // the data was successfully moved
+        wxDragResult::Cancel    // the operation was cancelled by user (not an error)
 };
 
 class WXDLLIMPEXP_CORE wxDropSource: public wxObject

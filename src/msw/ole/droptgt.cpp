@@ -144,7 +144,7 @@ DWORD wxIDropTarget::GetDropEffect(DWORD flags,
                                    DWORD pdwEffect)
 {
     DWORD effectiveAction;
-    if ( defaultAction == wxDragCopy )
+    if ( defaultAction == wxDragResult::Copy )
         effectiveAction = flags & MK_SHIFT ? DROPEFFECT_MOVE : DROPEFFECT_COPY;
     else
         effectiveAction = flags & MK_CONTROL ? DROPEFFECT_COPY : DROPEFFECT_MOVE;
@@ -289,10 +289,10 @@ STDMETHODIMP wxIDropTarget::DragOver(DWORD   grfKeyState,
         }
         else {
             // can't accept data anyhow normally
-            result = wxDragNone;
+            result = wxDragResult::None;
         }
 
-        if ( result != wxDragNone ) {
+        if ( result != wxDragResult::None ) {
             // we need client coordinates to pass to wxWin functions
             if ( !ScreenToClient(m_hwnd, (POINT *)&pt) )
             {
@@ -695,40 +695,40 @@ static wxDragResult ConvertDragEffectToResult(DWORD dwEffect)
 {
     switch ( dwEffect ) {
         case DROPEFFECT_COPY:
-            return wxDragCopy;
+            return wxDragResult::Copy;
 
         case DROPEFFECT_LINK:
-            return wxDragLink;
+            return wxDragResult::Link;
 
         case DROPEFFECT_MOVE:
-            return wxDragMove;
+            return wxDragResult::Move;
 
         default:
             wxFAIL_MSG(wxT("invalid value in ConvertDragEffectToResult"));
             [[fallthrough]];
 
         case DROPEFFECT_NONE:
-            return wxDragNone;
+            return wxDragResult::None;
     }
 }
 
 static DWORD ConvertDragResultToEffect(wxDragResult result)
 {
     switch ( result ) {
-        case wxDragCopy:
+        case wxDragResult::Copy:
             return DROPEFFECT_COPY;
 
-        case wxDragLink:
+        case wxDragResult::Link:
             return DROPEFFECT_LINK;
 
-        case wxDragMove:
+        case wxDragResult::Move:
             return DROPEFFECT_MOVE;
 
         default:
             wxFAIL_MSG(wxT("invalid value in ConvertDragResultToEffect"));
             [[fallthrough]];
 
-        case wxDragNone:
+        case wxDragResult::None:
             return DROPEFFECT_NONE;
     }
 }

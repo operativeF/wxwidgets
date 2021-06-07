@@ -20,7 +20,7 @@
 
 bool wxIsDragResultOk(wxDragResult res)
 {
-    return res == wxDragCopy || res == wxDragMove || res == wxDragLink;
+    return res == wxDragResult::Copy || res == wxDragResult::Move || res == wxDragResult::Link;
 }
 
 #endif

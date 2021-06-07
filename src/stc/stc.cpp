@@ -5668,7 +5668,7 @@ wxStyledTextEvent::wxStyledTextEvent(wxEventType commandType, int id)
 
 #if wxUSE_DRAG_AND_DROP
     m_dragFlags = wxDrag_CopyOnly;
-    m_dragResult = wxDragNone;
+    m_dragResult = wxDragResult::None;
 #endif
 }
 

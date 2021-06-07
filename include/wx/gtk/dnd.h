@@ -83,9 +83,9 @@ public:
     // set the icon corresponding to given drag result
     void SetIcon(wxDragResult res, const wxIcon& icon)
     {
-        if ( res == wxDragCopy )
+        if ( res == wxDragResult::Copy )
             m_iconCopy = icon;
-        else if ( res == wxDragMove )
+        else if ( res == wxDragResult::Move )
             m_iconMove = icon;
         else
             m_iconNone = icon;

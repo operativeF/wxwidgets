@@ -1714,7 +1714,7 @@ public:
     {
         wxDataFormat format = GetMatchingPair();
         if (format == wxDF_INVALID)
-            return wxDragNone;
+            return wxDragResult::None;
         return m_win->OnDragOver( format, x, y, def);
     }
 
@@ -1730,9 +1730,9 @@ public:
     {
         wxDataFormat format = GetMatchingPair();
         if (format == wxDF_INVALID)
-            return wxDragNone;
+            return wxDragResult::None;
         if (!GetData())
-            return wxDragNone;
+            return wxDragResult::None;
         return m_win->OnData( format, x, y, def );
     }
 
@@ -2331,14 +2331,14 @@ wxDragResult wxDataViewMainWindow::OnDragOver( wxDataFormat format, wxCoord x,
         result = event.GetDropEffect();
         switch (result)
         {
-            case wxDragCopy:
-            case wxDragMove:
-            case wxDragLink:
+            case wxDragResult::Copy:
+            case wxDragResult::Move:
+            case wxDragResult::Link:
                 break;
 
-            case wxDragNone:
-            case wxDragCancel:
-            case wxDragError:
+            case wxDragResult::None:
+            case wxDragResult::Cancel:
+            case wxDragResult::Error:
             {
                 RemoveDropHint();
                 return result;
@@ -2348,7 +2348,7 @@ wxDragResult wxDataViewMainWindow::OnDragOver( wxDataFormat format, wxCoord x,
     else
     {
         RemoveDropHint();
-        return wxDragNone;
+        return wxDragResult::None;
     }
 
     if (nextDropItemInfo.m_hint != DropHint_None)
@@ -2400,7 +2400,7 @@ wxDragResult wxDataViewMainWindow::OnData( wxDataFormat format, wxCoord x, wxCoo
     event.SetDataBuffer( obj->GetData() );
     event.SetDropEffect( def );
     if ( !m_owner->HandleWindowEvent( event ) || !event.IsAllowed() )
-        return wxDragNone;
+        return wxDragResult::None;
 
     return def;
 }

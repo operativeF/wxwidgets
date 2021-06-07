@@ -321,7 +321,7 @@ void ScintillaWX::StartDrag() {
         dropWentOutside = true;
         inDragDrop = ddDragging;
         result = source.DoDragDrop(evt.GetDragFlags());
-        if (result == wxDragMove && dropWentOutside)
+        if (result == wxDragResult::Move && dropWentOutside)
             ClearSelection();
         inDragDrop = ddNone;
         SetDragPosition(SelectionPosition(invalidPosition));
@@ -1277,10 +1277,10 @@ bool ScintillaWX::DoDropText(long x, long y, const wxString& data) {
     stc->GetEventHandler()->ProcessEvent(evt);
 
     dragResult = evt.GetDragResult();
-    if (dragResult == wxDragMove || dragResult == wxDragCopy) {
+    if (dragResult == wxDragResult::Move || dragResult == wxDragResult::Copy) {
         DropAt(SelectionPosition(evt.GetPosition()),
                wx2stc(evt.GetString()),
-               dragResult == wxDragMove,
+               dragResult == wxDragResult::Move,
                false); // TODO: rectangular?
         return true;
     }

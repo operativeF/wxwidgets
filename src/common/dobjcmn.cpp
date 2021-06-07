@@ -697,10 +697,10 @@ wxTextDropTarget::wxTextDropTarget()
 wxDragResult wxTextDropTarget::OnData(wxCoord x, wxCoord y, wxDragResult def)
 {
     if ( !GetData() )
-        return wxDragNone;
+        return wxDragResult::None;
 
     wxTextDataObject *dobj = (wxTextDataObject *)m_dataObject;
-    return OnDropText( x, y, dobj->GetText() ) ? def : wxDragNone;
+    return OnDropText( x, y, dobj->GetText() ) ? def : wxDragResult::None;
 }
 
 // ----------------------------------------------------------------------------
@@ -715,10 +715,10 @@ wxFileDropTarget::wxFileDropTarget()
 wxDragResult wxFileDropTarget::OnData(wxCoord x, wxCoord y, wxDragResult def)
 {
     if ( !GetData() )
-        return wxDragNone;
+        return wxDragResult::None;
 
     wxFileDataObject *dobj = (wxFileDataObject *)m_dataObject;
-    return OnDropFiles( x, y, dobj->GetFilenames() ) ? def : wxDragNone;
+    return OnDropFiles( x, y, dobj->GetFilenames() ) ? def : wxDragResult::None;
 }
 
 #endif // wxUSE_DRAG_AND_DROP

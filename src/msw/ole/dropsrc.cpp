@@ -119,11 +119,11 @@ STDMETHODIMP wxIDropSource::GiveFeedback(DWORD dwEffect)
 {
   wxDragResult effect;
   if ( dwEffect & DROPEFFECT_COPY )
-    effect = wxDragCopy;
+    effect = wxDragResult::Copy;
   else if ( dwEffect & DROPEFFECT_MOVE )
-    effect = wxDragMove;
+    effect = wxDragResult::Move;
   else
-    effect = wxDragNone;
+    effect = wxDragResult::None;
 
   if ( m_pDropSource->GiveFeedback(effect) )
     return S_OK;
@@ -176,7 +176,7 @@ wxDropSource::~wxDropSource()
 // Notes   : you must call SetData() before if you had used def ctor
 wxDragResult wxDropSource::DoDragDrop(int flags)
 {
-  wxCHECK_MSG( m_data != nullptr, wxDragNone, wxT("No data in wxDropSource!") );
+  wxCHECK_MSG( m_data != nullptr, wxDragResult::None, wxT("No data in wxDropSource!") );
 
   DWORD dwEffect;
   HRESULT hr = ::DoDragDrop(m_data->GetInterface(),
@@ -187,20 +187,20 @@ wxDragResult wxDropSource::DoDragDrop(int flags)
                             &dwEffect);
 
   if ( hr == DRAGDROP_S_CANCEL ) {
-    return wxDragCancel;
+    return wxDragResult::Cancel;
   }
   else if ( hr == DRAGDROP_S_DROP ) {
     if ( dwEffect & DROPEFFECT_COPY ) {
-      return wxDragCopy;
+      return wxDragResult::Copy;
     }
     else if ( dwEffect & DROPEFFECT_MOVE ) {
       // consistency check: normally, we shouldn't get "move" at all
       // here if we don't allow it, but in practice it does happen quite often
-      return (flags & wxDrag_AllowMove) ? wxDragMove : wxDragCopy;
+      return (flags & wxDrag_AllowMove) ? wxDragResult::Move : wxDragResult::Copy;
     }
     else {
       // not copy or move
-      return wxDragNone;
+      return wxDragResult::None;
     }
   }
   else {
@@ -213,7 +213,7 @@ wxDragResult wxDropSource::DoDragDrop(int flags)
                  hr);
     }
 
-    return wxDragError;
+    return wxDragResult::Error;
   }
 }
 

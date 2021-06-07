@@ -864,14 +864,14 @@ void wxRichTextCtrl::OnMoveMouse(wxMouseEvent& event)
             BeginBatchUndo(_("Drag"));
             switch (source.DoDragDrop(wxDrag_AllowMove | wxDrag_DefaultMove))
             {
-                case wxDragMove:
-                case wxDragCopy:  break;
+                case wxDragResult::Move:
+                case wxDragResult::Copy:  break;
 
-                case wxDragError:
+                case wxDragResult::Error:
                     wxLogError(wxT("An error occurred during drag and drop operation"));
                     [[fallthrough]];
-                case wxDragNone:
-                case wxDragCancel:
+                case wxDragResult::None:
+                case wxDragResult::Cancel:
                     Refresh(); // This is needed in wxMSW, otherwise resetting the position doesn't 'take'
                     SetCaretPosition(oldPos);
                     SetFocusObject(oldFocus, false);
@@ -5031,7 +5031,7 @@ void wxRichTextCtrl::OnDrop(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), wxDragResu
 {
     m_preDrag = false;
 
-    if ((def != wxDragCopy) && (def != wxDragMove))
+    if ((def != wxDragResult::Copy) && (def != wxDragResult::Move))
     {
         return;
     }
@@ -5050,7 +5050,7 @@ void wxRichTextCtrl::OnDrop(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), wxDragResu
         long position = GetCaretPosition();
         long positionRelativeToSource = position;
         wxRichTextRange selectionrange = GetInternalSelectionRange();
-        if (def == wxDragMove)
+        if (def == wxDragResult::Move)
         {
             // Are the containers the same, or is one contained within the other?
             if (((originContainer == destContainer) ||
@@ -5064,8 +5064,8 @@ void wxRichTextCtrl::OnDrop(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), wxDragResu
 
         // If we're moving, and the data is being moved forward, we need to drop first, then delete the selection
         // If moving backwards, we need to delete then drop. If we're copying (or doing nothing) we don't delete anyway
-        bool DeleteAfter = (def == wxDragMove) && (positionRelativeToSource > selectionrange.GetEnd());
-        if ((def == wxDragMove) && !DeleteAfter)
+        bool DeleteAfter = (def == wxDragResult::Move) && (positionRelativeToSource > selectionrange.GetEnd());
+        if ((def == wxDragResult::Move) && !DeleteAfter)
         {
             // We can't use e.g. DeleteSelectedContent() as it uses the focus container
             originContainer->DeleteRangeWithUndo(selectionrange, this, &GetBuffer());

@@ -31,7 +31,7 @@ wxDragResult wxDropTarget::OnDragOver(
     wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),
     wxDragResult def )
 {
-    return CurrentDragHasSupportedFormat() ? def : wxDragNone;
+    return CurrentDragHasSupportedFormat() ? def : wxDragResult::None;
 }
 
 wxDataFormat wxDropTarget::GetMatchingPair()
@@ -67,12 +67,12 @@ wxDragResult wxDropTarget::OnData(
     wxDragResult def )
 {
     if (m_dataObject == NULL)
-        return wxDragNone;
+        return wxDragResult::None;
 
     if (!CurrentDragHasSupportedFormat())
-        return wxDragNone;
+        return wxDragResult::None;
 
-    return GetData() ? def : wxDragNone;
+    return GetData() ? def : wxDragResult::None;
 }
 
 bool wxDropTarget::CurrentDragHasSupportedFormat()

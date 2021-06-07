@@ -129,7 +129,7 @@ wxDropSource::wxDropSource( wxWindow *win )
 #if 0
   m_window = win;
   m_data = NULL;
-  m_retValue = wxDragCancel;
+  m_retValue = wxDragResult::Cancel;
 
   m_defaultCursor = wxCursor( wxCURSOR_NO_ENTRY );
   m_goaheadCursor = wxCursor( wxCURSOR_HAND );
@@ -144,7 +144,7 @@ wxDropSource::wxDropSource( wxDataObject &data, wxWindow *win )
   m_window = win;
   m_widget = win->m_widget;
   if (win->m_wxwindow) m_widget = win->m_wxwindow;
-  m_retValue = wxDragCancel;
+  m_retValue = wxDragResult::Cancel;
 
   m_data = &data;
 
@@ -167,10 +167,10 @@ wxDragResult wxDropSource::DoDragDrop( int WXUNUSED(flags) )
 {
   //  wxASSERT_MSG( m_data, "wxDragSource: no data" );
 
-  return wxDragNone;
+  return wxDragResult::None;
 #if 0
-  if (!m_data) return (wxDragResult) wxDragNone;
-  if (m_data->GetDataSize() == 0) return (wxDragResult) wxDragNone;
+  if (!m_data) return (wxDragResult) wxDragResult::None;
+  if (m_data->GetDataSize() == 0) return (wxDragResult) wxDragResult::None;
 
   RegisterWindow();
 
