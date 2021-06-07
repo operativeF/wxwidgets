@@ -13,6 +13,7 @@
 
 #include "wx/defs.h"
 
+#include <algorithm>
 #include <vector>
 
 /*
