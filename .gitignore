@@ -11,7 +11,10 @@
 /*tags
 /autom4te.cache
 /out
+/.vs
+/tests/.vs
 # /build/
+/build/.ninja*
 
 # /build/autoconf_prepend-include/autoconf/
 /build/autoconf_prepend-include/autoconf/autoconf.m4f
