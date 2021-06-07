@@ -276,10 +276,8 @@ struct WXDLLIMPEXP_CORE wxSize
     int y {0};
 
     // constructors
-    constexpr wxSize() = default;
+    constexpr wxSize() {};
     constexpr wxSize(int xx, int yy) : x(xx), y(yy) { }
-
-    // no copy ctor or assignment operator - the defaults are ok
 
     constexpr wxSize& operator+=(const wxSize& sz) { x += sz.x; y += sz.y; return *this; }
     constexpr wxSize& operator-=(const wxSize& sz) { x -= sz.x; y -= sz.y; return *this; }
@@ -445,7 +443,7 @@ struct WXDLLIMPEXP_CORE wxRealPoint
     double x {0.0};
     double y {0.0};
 
-    constexpr wxRealPoint() = default;
+    constexpr wxRealPoint() {};
     constexpr wxRealPoint(double xx, double yy) : x(xx), y(yy) { }
     constexpr wxRealPoint(const wxPoint& pt);
 
@@ -563,7 +561,7 @@ struct WXDLLIMPEXP_CORE wxPoint
     int x {0};
     int y {0};
 
-    constexpr wxPoint() = default;
+    constexpr wxPoint() {};
     constexpr wxPoint(int xx, int yy) : x(xx), y(yy) { }
     constexpr wxPoint(const wxRealPoint& pt);
 
