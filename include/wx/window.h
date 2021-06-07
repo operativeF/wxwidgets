@@ -226,9 +226,9 @@ public:
 
 
         // get or change the layout direction (LTR or RTL) for this window,
-        // wxLayout_Default is returned if layout direction is not supported
+        // wxLayoutDirection::Default is returned if layout direction is not supported
     virtual wxLayoutDirection GetLayoutDirection() const
-        { return wxLayout_Default; }
+        { return wxLayoutDirection::Default; }
     virtual void SetLayoutDirection(wxLayoutDirection WXUNUSED(dir))
         { }
 

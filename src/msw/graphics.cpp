@@ -982,10 +982,10 @@ wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
 
     switch (info.GetGradientType() )
     {
-    case wxGRADIENT_NONE:
+    case wxGradientType::None:
         break;
 
-    case wxGRADIENT_LINEAR:
+    case wxGradientType::Linear:
         if (m_brush)
             delete m_brush;
         CreateLinearGradientBrush(info.GetX1(), info.GetY1(),
@@ -994,7 +994,7 @@ wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
         m_pen->SetBrush(m_brush);
         break;
 
-    case wxGRADIENT_RADIAL:
+    case wxGradientType::Radial:
         if (m_brush)
             delete m_brush;
         CreateRadialGradientBrush(info.GetStartX(), info.GetStartY(),
@@ -2110,23 +2110,23 @@ bool wxGDIPlusContext::SetInterpolationQuality(wxInterpolationQuality interpolat
     InterpolationMode interpolationMode = wxInterpolationModeInvalid;
     switch (interpolation)
     {
-        case wxINTERPOLATION_DEFAULT:
+        case wxInterpolationQuality::Default:
             interpolationMode = InterpolationModeDefault;
             break;
 
-        case wxINTERPOLATION_NONE:
+        case wxInterpolationQuality::None:
             interpolationMode = InterpolationModeNearestNeighbor;
             break;
 
-        case wxINTERPOLATION_FAST:
+        case wxInterpolationQuality::Fast:
             interpolationMode = InterpolationModeLowQuality;
             break;
 
-        case wxINTERPOLATION_GOOD:
+        case wxInterpolationQuality::Good:
             interpolationMode = InterpolationModeHighQuality;
             break;
 
-        case wxINTERPOLATION_BEST:
+        case wxInterpolationQuality::Best:
             interpolationMode = InterpolationModeHighQualityBicubic;
             break;
     }

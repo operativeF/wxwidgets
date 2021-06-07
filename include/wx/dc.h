@@ -204,7 +204,7 @@ public:
     // Right-To-Left (RTL) modes
 
     virtual void SetLayoutDirection(wxLayoutDirection WXUNUSED(dir)) { }
-    virtual wxLayoutDirection GetLayoutDirection() const  { return wxLayout_Default; }
+    virtual wxLayoutDirection GetLayoutDirection() const  { return wxLayoutDirection::Default; }
 
     // page and document
 

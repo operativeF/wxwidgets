@@ -220,8 +220,8 @@ void wxStatusBarGeneric::DrawFieldText(wxDC& dc, const wxRect& rect, int i, int 
         //       work because the adjustment needs to be done only when drawing
         //       the field text and not also when drawing the background, the
         //       size grip itself, etc
-        if ((GetLayoutDirection() == wxLayout_RightToLeft && i == 0) ||
-            (GetLayoutDirection() != wxLayout_RightToLeft &&
+        if ((GetLayoutDirection() == wxLayoutDirection::RightToLeft && i == 0) ||
+            (GetLayoutDirection() != wxLayoutDirection::RightToLeft &&
                  i == (int)m_panes.GetCount()-1))
         {
             const wxRect& gripRc = GetSizeGripRect();
@@ -388,7 +388,7 @@ wxRect wxStatusBarGeneric::GetSizeGripRect() const
     wxSize client_size = wxWindow::DoGetClientSize();
 
 #ifndef __WXGTK3__
-    if (GetLayoutDirection() == wxLayout_RightToLeft)
+    if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
         return wxRect(2, 2, client_size.y - 2, client_size.y - 4);
 #endif
 
@@ -426,7 +426,7 @@ void wxStatusBarGeneric::OnPaint(wxPaintEvent& WXUNUSED(event) )
         }
 #else
         GdkWindowEdge edge =
-            GetLayoutDirection() == wxLayout_RightToLeft ? GDK_WINDOW_EDGE_SOUTH_WEST :
+            GetLayoutDirection() == wxLayoutDirection::RightToLeft ? GDK_WINDOW_EDGE_SOUTH_WEST :
                                                            GDK_WINDOW_EDGE_SOUTH_EAST;
         gtk_paint_resize_grip(gtk_widget_get_style(m_widget),
                             GTKGetDrawingWindow(),
@@ -485,7 +485,7 @@ void wxStatusBarGeneric::OnLeftDown(wxMouseEvent& event)
         int org_y = 0;
         gdk_window_get_origin( source, &org_x, &org_y );
 
-        if (GetLayoutDirection() == wxLayout_RightToLeft)
+        if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
         {
             gtk_window_begin_resize_drag (GTK_WINDOW (ancestor),
                                   GDK_WINDOW_EDGE_SOUTH_WEST,

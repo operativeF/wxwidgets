@@ -777,7 +777,7 @@ public:
     SetInterpolationQuality(wxInterpolationQuality interpolation) override
     {
         m_qtPainter->setRenderHint(QPainter::SmoothPixmapTransform,
-                                   interpolation == wxINTERPOLATION_BEST);
+                                   interpolation == wxInterpolationQuality::Best);
         m_interpolation = interpolation;
         return true;
     }

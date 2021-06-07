@@ -370,7 +370,7 @@ void wxStaticBox::MSWGetRegionWithoutSelf(WXHRGN hRgn, int w, int h)
 namespace {
 RECT AdjustRectForRtl(wxLayoutDirection dir, RECT const& childRect, RECT const& boxRect) {
     RECT ret = childRect;
-    if( dir == wxLayout_RightToLeft ) {
+    if( dir == wxLayoutDirection::RightToLeft ) {
         // The clipping region too is mirrored in RTL layout.
         // We need to mirror screen coordinates relative to static box window priot to
         // intersecting with region.

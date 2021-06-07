@@ -1000,17 +1000,17 @@ wxCairoPenData::wxCairoPenData( wxGraphicsRenderer* renderer, const wxGraphicsPe
 
     switch ( info.GetGradientType() )
     {
-    case wxGRADIENT_NONE:
+    case wxGradientType::None:
         break;
 
-    case wxGRADIENT_LINEAR:
+    case wxGradientType::Linear:
         CreateLinearGradientPattern(info.GetX1(), info.GetY1(),
                                     info.GetX2(), info.GetY2(),
                                     info.GetStops(),
                                     info.GetMatrix());
         break;
 
-    case wxGRADIENT_RADIAL:
+    case wxGradientType::Radial:
         CreateRadialGradientPattern(info.GetStartX(), info.GetStartY(),
                                     info.GetEndX(), info.GetEndY(),
                                     info.GetRadius(),

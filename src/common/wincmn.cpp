@@ -4034,7 +4034,7 @@ wxWindowBase::AdjustForLayoutDirection(wxCoord x,
                                        wxCoord width,
                                        wxCoord widthTotal) const
 {
-    if ( GetLayoutDirection() == wxLayout_RightToLeft )
+    if ( GetLayoutDirection() == wxLayoutDirection::RightToLeft )
     {
         x = widthTotal - x - width;
     }

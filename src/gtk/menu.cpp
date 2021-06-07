@@ -227,7 +227,7 @@ AttachToFrame(wxMenu* menu, wxFrame* frame)
 
 void wxMenuBar::SetLayoutDirection(wxLayoutDirection dir)
 {
-    if ( dir == wxLayout_Default )
+    if ( dir == wxLayoutDirection::Default )
     {
         const wxWindow *const frame = GetFrame();
         if ( frame )
@@ -241,7 +241,7 @@ void wxMenuBar::SetLayoutDirection(wxLayoutDirection dir)
         }
     }
 
-    if ( dir == wxLayout_Default )
+    if ( dir == wxLayoutDirection::Default )
         return;
 
     GTKSetLayout(m_menubar, dir);
@@ -274,7 +274,7 @@ void wxMenuBar::Attach(wxFrame *frame)
         node = node->GetNext();
     }
 
-    SetLayoutDirection(wxLayout_Default);
+    SetLayoutDirection(wxLayoutDirection::Default);
 }
 
 void wxMenuBar::Detach()

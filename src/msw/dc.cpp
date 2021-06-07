@@ -1078,7 +1078,7 @@ void wxMSWDCImpl::DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord h
         // Right edge to be extended is "displayed right edge"
         // and hence its device coordinates depend
         // on layout direction and can be either x1 or x2.
-        if ( GetLayoutDirection() == wxLayout_RightToLeft )
+        if ( GetLayoutDirection() == wxLayoutDirection::RightToLeft )
             x1dev--;
         else
             x2dev++;
@@ -2895,17 +2895,17 @@ wxLayoutDirection wxMSWDCImpl::GetLayoutDirection() const
     DWORD layout = wxDynLoadWrappers::GetLayout(GetHdc());
 
     if ( layout == GDI_ERROR )
-        return wxLayout_Default;
+        return wxLayoutDirection::Default;
 
-    return layout & LAYOUT_RTL ? wxLayout_RightToLeft : wxLayout_LeftToRight;
+    return layout & LAYOUT_RTL ? wxLayoutDirection::RightToLeft : wxLayoutDirection::LeftToRight;
 }
 
 void wxMSWDCImpl::SetLayoutDirection(wxLayoutDirection dir)
 {
-    if ( dir == wxLayout_Default )
+    if ( dir == wxLayoutDirection::Default )
     {
         dir = wxApp::MSWGetDefaultLayout(GetWindow());
-        if ( dir == wxLayout_Default )
+        if ( dir == wxLayoutDirection::Default )
             return;
     }
 
@@ -2913,7 +2913,7 @@ void wxMSWDCImpl::SetLayoutDirection(wxLayoutDirection dir)
     if ( layout == GDI_ERROR )
         return;
 
-    if ( dir == wxLayout_RightToLeft )
+    if ( dir == wxLayoutDirection::RightToLeft )
         layout |= LAYOUT_RTL;
     else
         layout &= ~LAYOUT_RTL;

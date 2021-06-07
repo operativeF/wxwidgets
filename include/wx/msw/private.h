@@ -1059,15 +1059,15 @@ wxUpdateExStyleForLayoutDirection(WXHWND hWnd,
     LONG_PTR styleNew = styleOld;
     switch ( dir )
     {
-        case wxLayout_LeftToRight:
+        case wxLayoutDirection::LeftToRight:
             styleNew &= ~flagsForRTL;
             break;
 
-        case wxLayout_RightToLeft:
+        case wxLayoutDirection::RightToLeft:
             styleNew |= flagsForRTL;
             break;
 
-        case wxLayout_Default:
+        case wxLayoutDirection::Default:
             wxFAIL_MSG(wxS("Invalid layout direction"));
     }
 
@@ -1092,7 +1092,7 @@ inline bool wxUpdateLayoutDirection(WXHWND hWnd, wxLayoutDirection dir)
 // Update layout direction flag for an EDIT control.
 //
 // Returns true if anything changed or false if the direction flag was already
-// set to the desired direction (which can't be wxLayout_Default).
+// set to the desired direction (which can't be wxLayoutDirection::Default).
 inline bool wxUpdateEditLayoutDirection(WXHWND hWnd, wxLayoutDirection dir)
 {
     return wxUpdateExStyleForLayoutDirection(hWnd, dir,
@@ -1104,7 +1104,7 @@ inline bool wxUpdateEditLayoutDirection(WXHWND hWnd, wxLayoutDirection dir)
 // Companion of the above function checking if an EDIT control uses RTL.
 inline wxLayoutDirection wxGetEditLayoutDirection(WXHWND hWnd)
 {
-    wxCHECK_MSG( hWnd, wxLayout_Default, wxS("invalid window") );
+    wxCHECK_MSG( hWnd, wxLayoutDirection::Default, wxS("invalid window") );
 
     // While we set 3 style bits above, we're only really interested in one of
     // them here. In particularly, don't check for WS_EX_RIGHT as it can be set
@@ -1112,8 +1112,8 @@ inline wxLayoutDirection wxGetEditLayoutDirection(WXHWND hWnd)
     // could test WS_EX_LEFTSCROLLBAR, this doesn't really seem useful.
     const LONG_PTR style = ::GetWindowLongPtr(hWnd, GWL_EXSTYLE);
 
-    return style & WS_EX_RTLREADING ? wxLayout_RightToLeft
-                                    : wxLayout_LeftToRight;
+    return style & WS_EX_RTLREADING ? wxLayoutDirection::RightToLeft
+                                    : wxLayoutDirection::LeftToRight;
 }
 
 // ----------------------------------------------------------------------------

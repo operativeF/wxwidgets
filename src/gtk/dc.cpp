@@ -25,7 +25,7 @@
 wxGTKCairoDCImpl::wxGTKCairoDCImpl(wxDC* owner)
     : wxGCDCImpl(owner)
 {
-    m_layoutDir = wxLayout_Default;
+    m_layoutDir = wxLayoutDirection::Default;
 }
 
 wxGTKCairoDCImpl::wxGTKCairoDCImpl(wxDC* owner, wxWindow* window, wxLayoutDirection dir, int width)
@@ -59,7 +59,7 @@ void wxGTKCairoDCImpl::DoDrawBitmap(const wxBitmap& bitmap, int x, int y, bool u
     if (cr)
     {
         cairo_save(cr);
-        if (m_layoutDir == wxLayout_RightToLeft)
+        if (m_layoutDir == wxLayoutDirection::RightToLeft)
         {
             // bitmap is not mirrored
             cairo_scale(cr, -1, 1);
@@ -91,7 +91,7 @@ void wxGTKCairoDCImpl::DoDrawText(const wxString& text, int x, int y)
     if (text.empty())
         return;
 
-    if (m_layoutDir == wxLayout_RightToLeft && text.find('\n') != wxString::npos)
+    if (m_layoutDir == wxLayoutDirection::RightToLeft && text.find('\n') != wxString::npos)
     {
         // RTL needs each line separately to position text properly.
         // DrawLabel() will split the text and call back for each line.
@@ -105,7 +105,7 @@ void wxGTKCairoDCImpl::DoDrawText(const wxString& text, int x, int y)
     CalcBoundingBox(x, y);
     CalcBoundingBox(x + w, y + h);
 
-    if (m_layoutDir == wxLayout_RightToLeft)
+    if (m_layoutDir == wxLayoutDirection::RightToLeft)
     {
         m_graphicContext->PushState();
         // text is not mirrored
@@ -123,7 +123,7 @@ void wxGTKCairoDCImpl::DoDrawText(const wxString& text, int x, int y)
 
     m_graphicContext->SetCompositionMode(curMode);
 
-    if (m_layoutDir == wxLayout_RightToLeft)
+    if (m_layoutDir == wxLayoutDirection::RightToLeft)
         m_graphicContext->PopState();
 }
 
@@ -172,7 +172,7 @@ void wxGTKCairoDCImpl::DoDrawRotatedText(const wxString& text, int x, int y, dou
 
 void wxGTKCairoDCImpl::DoDrawCheckMark(int x, int y, int width, int height)
 {
-    if (m_layoutDir == wxLayout_RightToLeft)
+    if (m_layoutDir == wxLayoutDirection::RightToLeft)
     {
         wxCHECK_RET(IsOk(), "invalid DC");
 
@@ -288,7 +288,7 @@ bool wxGTKCairoDCImpl::DoStretchBlit(int xdest, int ydest, int dstWidth, int dst
         }
     }
     cairo_save(cr);
-    if (m_layoutDir == wxLayout_RightToLeft)
+    if (m_layoutDir == wxLayoutDirection::RightToLeft)
     {
         // blit is not mirrored
         cairo_scale(cr, -1, 1);
@@ -363,7 +363,7 @@ wxSize wxGTKCairoDCImpl::GetPPI() const
 
 void wxGTKCairoDCImpl::SetLayoutDirection(wxLayoutDirection dir)
 {
-    if (dir == wxLayout_Default && m_window)
+    if (dir == wxLayoutDirection::Default && m_window)
         dir = m_window->GetLayoutDirection();
 
     m_layoutDir = dir;
@@ -373,14 +373,14 @@ wxLayoutDirection wxGTKCairoDCImpl::GetLayoutDirection() const
 {
     // LTR unless explicitly RTL
     return
-        m_layoutDir == wxLayout_RightToLeft
-            ? wxLayout_RightToLeft
-            : wxLayout_LeftToRight;
+        m_layoutDir == wxLayoutDirection::RightToLeft
+            ? wxLayoutDirection::RightToLeft
+            : wxLayoutDirection::LeftToRight;
 }
 
 void wxGTKCairoDCImpl::AdjustForRTL(cairo_t* cr)
 {
-    if (m_layoutDir == wxLayout_RightToLeft)
+    if (m_layoutDir == wxLayoutDirection::RightToLeft)
     {
         cairo_translate(cr, m_size.x, 0);
         cairo_scale(cr, -1, 1);
@@ -403,7 +403,7 @@ wxWindowDCImpl::wxWindowDCImpl(wxWindowDC* owner, wxWindow* window)
     if (gdkWindow)
     {
         cairo_t* cr = gdk_cairo_create(gdkWindow);
-        SetLayoutDirection(wxLayout_Default);
+        SetLayoutDirection(wxLayoutDirection::Default);
         AdjustForRTL(cr);
         wxGraphicsContext* gc = wxGraphicsContext::CreateFromNative(cr);
         cairo_destroy(cr);
@@ -452,7 +452,7 @@ wxClientDCImpl::wxClientDCImpl(wxClientDC* owner, wxWindow* window)
     if (gdkWindow)
     {
         cairo_t* cr = gdk_cairo_create(gdkWindow);
-        SetLayoutDirection(wxLayout_Default);
+        SetLayoutDirection(wxLayoutDirection::Default);
         AdjustForRTL(cr);
         wxGraphicsContext* gc = wxGraphicsContext::CreateFromNative(cr);
         cairo_destroy(cr);
@@ -585,7 +585,7 @@ wxGTKCairoDC::wxGTKCairoDC(cairo_t* cr, wxWindow* window, wxLayoutDirection dir,
     wxGraphicsContext* gc = wxGraphicsContext::CreateFromNative(cr);
     gc->SetContentScaleFactor(window->GetContentScaleFactor());
     SetGraphicsContext(gc);
-    if (dir == wxLayout_Default)
+    if (dir == wxLayoutDirection::Default)
         SetLayoutDirection(window->GetLayoutDirection());
     // else context is already adjusted for RTL
 }

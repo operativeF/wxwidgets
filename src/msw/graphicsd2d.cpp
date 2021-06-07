@@ -989,15 +989,15 @@ D2D1_INTERPOLATION_MODE wxD2DConvertInterpolationMode(wxInterpolationQuality int
 {
     switch (interpolationQuality)
     {
-    case wxINTERPOLATION_DEFAULT:
+    case wxInterpolationQuality::Default:
         [[fallthrough]];
-    case wxINTERPOLATION_NONE:
+    case wxInterpolationQuality::None:
         [[fallthrough]];
-    case wxINTERPOLATION_FAST:
+    case wxInterpolationQuality::Fast:
         return D2D1_INTERPOLATION_MODE_NEAREST_NEIGHBOR;
-    case wxINTERPOLATION_GOOD:
+    case wxInterpolationQuality::Good:
         return D2D1_INTERPOLATION_MODE_LINEAR;
-    case wxINTERPOLATION_BEST:
+    case wxInterpolationQuality::Best:
         return D2D1_INTERPOLATION_MODE_CUBIC;
     }
 
@@ -1010,15 +1010,15 @@ D2D1_BITMAP_INTERPOLATION_MODE wxD2DConvertBitmapInterpolationMode(wxInterpolati
 {
     switch (interpolationQuality)
     {
-    case wxINTERPOLATION_DEFAULT:
+    case wxInterpolationQuality::Default:
         [[fallthrough]];
-    case wxINTERPOLATION_NONE:
+    case wxInterpolationQuality::None:
         [[fallthrough]];
-    case wxINTERPOLATION_FAST:
+    case wxInterpolationQuality::Fast:
         [[fallthrough]];
-    case wxINTERPOLATION_GOOD:
+    case wxInterpolationQuality::Good:
         return D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR;
-    case wxINTERPOLATION_BEST:
+    case wxInterpolationQuality::Best:
         return D2D1_BITMAP_INTERPOLATION_MODE_LINEAR;
     }
 
@@ -3097,11 +3097,11 @@ wxD2DPenData::wxD2DPenData(
 
     switch ( m_penInfo.GetGradientType() )
     {
-    case wxGRADIENT_NONE:
+    case wxGradientType::None:
         m_stippleBrush = new wxD2DBrushData(renderer, strokeBrush);
         break;
 
-    case wxGRADIENT_LINEAR:
+    case wxGradientType::Linear:
         m_stippleBrush = new wxD2DBrushData(renderer);
         m_stippleBrush->CreateLinearGradientBrush(
                                 m_penInfo.GetX1(), m_penInfo.GetY1(),
@@ -3110,7 +3110,7 @@ wxD2DPenData::wxD2DPenData(
                                 m_penInfo.GetMatrix());
         break;
 
-    case wxGRADIENT_RADIAL:
+    case wxGradientType::Radial:
         m_stippleBrush = new wxD2DBrushData(renderer);
         m_stippleBrush->CreateRadialGradientBrush(
                                 m_penInfo.GetStartX(), m_penInfo.GetStartY(),

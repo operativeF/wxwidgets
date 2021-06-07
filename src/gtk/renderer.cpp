@@ -263,7 +263,7 @@ wxRendererGTK::DrawHeaderButton(wxWindow *win,
     }
 #else
     int x_diff = 0;
-    if (win->GetLayoutDirection() == wxLayout_RightToLeft)
+    if (win->GetLayoutDirection() == wxLayoutDirection::RightToLeft)
         x_diff = rect.width;
 
     GdkWindow* gdk_window = wxGetGTKDrawable(dc);
@@ -340,7 +340,7 @@ wxRendererGTK::DrawTreeItemButton(wxWindow* WXUNUSED_IN_GTK3(win),
     gtk_style_context_restore(sc);
 #else
     int x_diff = 0;
-    if (win->GetLayoutDirection() == wxLayout_RightToLeft)
+    if (win->GetLayoutDirection() == wxLayoutDirection::RightToLeft)
         x_diff = rect.width;
 
     GtkStateType state;
@@ -458,7 +458,7 @@ wxRendererGTK::DrawSplitterSash(wxWindow* win,
     gtk_render_handle(sc, drawable, rect.x, rect.y, rect.width, rect.height);
 #else
     int x_diff = 0;
-    if (win->GetLayoutDirection() == wxLayout_RightToLeft)
+    if (win->GetLayoutDirection() == wxLayoutDirection::RightToLeft)
         x_diff = rect.width;
 
     GdkWindow* gdk_window = wxGetGTKDrawable(dc);
@@ -734,7 +734,7 @@ wxRendererGTK::DrawCheckBox(wxWindow*,
     int x = rect.x + (rect.width  - w) / 2;
     int y = rect.y + (rect.height - h) / 2;
 
-    const bool isRTL = dc.GetLayoutDirection() == wxLayout_RightToLeft;
+    const bool isRTL = dc.GetLayoutDirection() == wxLayoutDirection::RightToLeft;
     if (isRTL)
     {
         // checkbox is not mirrored
@@ -893,7 +893,7 @@ wxRendererGTK::DrawItemSelectionRect(wxWindow* win,
         gtk_style_context_restore(sc);
 #else
         int x_diff = 0;
-        if (win->GetLayoutDirection() == wxLayout_RightToLeft)
+        if (win->GetLayoutDirection() == wxLayoutDirection::RightToLeft)
             x_diff = rect.width;
 
         // the wxCONTROL_FOCUSED state is deduced

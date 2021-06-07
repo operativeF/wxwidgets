@@ -2315,7 +2315,7 @@ void wxComboCtrlBase::ShowPopup()
     int rightX = scrPos.x + ctrlSz.x + m_extRight - szp.x;
     int leftX = scrPos.x - m_extLeft;
 
-    if ( wxTheApp->GetLayoutDirection() == wxLayout_RightToLeft )
+    if ( wxTheApp->GetLayoutDirection() == wxLayoutDirection::RightToLeft )
         leftX -= ctrlSz.x;
 
     int screenWidth = displayRect.GetWidth();

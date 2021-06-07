@@ -2796,7 +2796,7 @@ void wxWindowGTK::PostCreation()
 {
     wxASSERT_MSG( (m_widget != NULL), wxT("invalid window") );
 
-    SetLayoutDirection(wxLayout_Default);
+    SetLayoutDirection(wxLayoutDirection::Default);
 
     GTKConnectFreezeWidget(m_widget);
     if (m_wxwindow && m_wxwindow != m_widget)
@@ -2831,7 +2831,7 @@ void wxWindowGTK::PostCreation()
             g_signal_connect(m_wxwindow, "expose_event", G_CALLBACK(expose_event), this);
 #endif
 
-            if (GetLayoutDirection() == wxLayout_LeftToRight)
+            if (GetLayoutDirection() == wxLayoutDirection::LeftToRight)
                 gtk_widget_set_redraw_on_allocate(m_wxwindow, HasFlag(wxFULL_REPAINT_ON_RESIZE));
         }
     }
@@ -4068,7 +4068,7 @@ void wxWindowGTK::DoClientToScreen( int *x, int *y ) const
         if (y) *y += pos.y;
         if (x)
         {
-            if (GetLayoutDirection() != wxLayout_RightToLeft)
+            if (GetLayoutDirection() != wxLayoutDirection::RightToLeft)
                 *x += pos.x;
             else
             {
@@ -4109,7 +4109,7 @@ void wxWindowGTK::DoClientToScreen( int *x, int *y ) const
 
     if (x)
     {
-        if (GetLayoutDirection() == wxLayout_RightToLeft)
+        if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
             *x = (GetClientSize().x - *x) + org_x;
         else
             *x += org_x;
@@ -4143,7 +4143,7 @@ void wxWindowGTK::DoScreenToClient( int *x, int *y ) const
         if (y) *y -= pos.y;
         if (x)
         {
-            if (GetLayoutDirection() != wxLayout_RightToLeft)
+            if (GetLayoutDirection() != wxLayoutDirection::RightToLeft)
                 *x -= pos.x;
             else
             {
@@ -4182,7 +4182,7 @@ void wxWindowGTK::DoScreenToClient( int *x, int *y ) const
 
     if (x)
     {
-        if (GetLayoutDirection() == wxLayout_RightToLeft)
+        if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
             *x = (GetClientSize().x - *x) - org_x;
         else
             *x -= org_x;
@@ -4643,7 +4643,7 @@ bool wxWindowGTK::Reparent( wxWindowBase *newParentBase )
         newParent->AddChildGTK(this);
     }
 
-    SetLayoutDirection(wxLayout_Default);
+    SetLayoutDirection(wxLayoutDirection::Default);
 
     return true;
 }
@@ -4678,17 +4678,17 @@ void wxWindowGTK::RemoveChild(wxWindowBase *child)
 wxLayoutDirection wxWindowGTK::GTKGetLayout(GtkWidget *widget)
 {
     return gtk_widget_get_direction(widget) == GTK_TEXT_DIR_RTL
-                ? wxLayout_RightToLeft
-                : wxLayout_LeftToRight;
+                ? wxLayoutDirection::RightToLeft
+                : wxLayoutDirection::LeftToRight;
 }
 
 /* static */
 void wxWindowGTK::GTKSetLayout(GtkWidget *widget, wxLayoutDirection dir)
 {
-    wxASSERT_MSG( dir != wxLayout_Default, wxT("invalid layout direction") );
+    wxASSERT_MSG( dir != wxLayoutDirection::Default, wxT("invalid layout direction") );
 
     gtk_widget_set_direction(widget,
-                             dir == wxLayout_RightToLeft ? GTK_TEXT_DIR_RTL
+                             dir == wxLayoutDirection::RightToLeft ? GTK_TEXT_DIR_RTL
                                                          : GTK_TEXT_DIR_LTR);
 }
 
@@ -4699,7 +4699,7 @@ wxLayoutDirection wxWindowGTK::GetLayoutDirection() const
 
 void wxWindowGTK::SetLayoutDirection(wxLayoutDirection dir)
 {
-    if ( dir == wxLayout_Default )
+    if ( dir == wxLayoutDirection::Default )
     {
         const wxWindow *const parent = GetParent();
         if ( parent )
@@ -4713,13 +4713,13 @@ void wxWindowGTK::SetLayoutDirection(wxLayoutDirection dir)
         }
     }
 
-    if ( dir == wxLayout_Default )
+    if ( dir == wxLayoutDirection::Default )
         return;
 
     GTKSetLayout(m_widget, dir);
 
     if (GtkRange* range = m_scrollBar[ScrollDir_Horz])
-        gtk_range_set_inverted(range, dir == wxLayout_RightToLeft);
+        gtk_range_set_inverted(range, dir == wxLayoutDirection::RightToLeft);
 
     if (m_wxwindow && (m_wxwindow != m_widget))
         GTKSetLayout(m_wxwindow, dir);
@@ -5019,7 +5019,7 @@ void wxWindowGTK::Refresh(bool WXUNUSED(eraseBackground),
             if (rect)
             {
                 GdkRectangle r = { rect->x, rect->y, rect->width, rect->height };
-                if (GetLayoutDirection() == wxLayout_RightToLeft)
+                if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
                     r.x = gdk_window_get_width(window) - r.x - rect->width;
                 gdk_window_invalidate_rect(window, &r, true);
             }
@@ -5066,7 +5066,7 @@ bool wxWindowGTK::DoIsExposed( int x, int y ) const
 bool wxWindowGTK::DoIsExposed( int x, int y, int w, int h ) const
 {
 #ifndef __WXGTK3__
-    if (GetLayoutDirection() == wxLayout_RightToLeft)
+    if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
         return m_updateRegion.Contains(x-w, y, w, h) != wxOutRegion;
 #endif
 
@@ -5088,7 +5088,7 @@ void wxWindowGTK::GTKSendPaintEvents(const GdkRegion* region)
         cairo_rectangle(cr, rect.x, rect.y, rect.width, rect.height);
         cairo_clip(cr);
     }
-    if (GetLayoutDirection() == wxLayout_RightToLeft)
+    if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
     {
         // wxDC is mirrored for RTL
         const int w = gdk_window_get_width(gtk_widget_get_window(m_wxwindow));
@@ -5115,7 +5115,7 @@ void wxWindowGTK::GTKSendPaintEvents(const GdkRegion* region)
     m_nativeUpdateRegion = m_updateRegion;
 
 #ifndef __WXGTK3__
-    if (GetLayoutDirection() == wxLayout_RightToLeft)
+    if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
     {
         // Transform m_updateRegion under RTL
         m_updateRegion.Clear();

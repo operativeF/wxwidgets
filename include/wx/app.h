@@ -646,7 +646,7 @@ public:
     virtual void SetPrintMode(int WXUNUSED(mode)) { }
     int GetPrintMode() const { return wxPRINT_POSTSCRIPT; }
 
-    // Return the layout direction for the current locale or wxLayout_Default
+    // Return the layout direction for the current locale or wxLayoutDirection::Default
     // if it's unknown
     virtual wxLayoutDirection GetLayoutDirection() const;
 

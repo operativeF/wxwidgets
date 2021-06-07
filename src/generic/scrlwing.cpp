@@ -661,7 +661,7 @@ void wxScrollHelperBase::DoPrepareDC(wxDC& dc)
     // It may actually be correct to always query
     // the m_sign from the DC here, but I leave the
     // #ifdef GTK for now.
-    if (m_win->GetLayoutDirection() == wxLayout_RightToLeft)
+    if (m_win->GetLayoutDirection() == wxLayoutDirection::RightToLeft)
         dc.SetDeviceOrigin( pt.x + m_xScrollPosition * m_xScrollPixelsPerLine,
                             pt.y - m_yScrollPosition * m_yScrollPixelsPerLine );
     else

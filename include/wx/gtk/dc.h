@@ -18,7 +18,7 @@ class wxGTKCairoDCImpl: public wxGCDCImpl
     typedef wxGCDCImpl BaseType;
 public:
     wxGTKCairoDCImpl(wxDC* owner);
-    wxGTKCairoDCImpl(wxDC* owner, wxWindow* window, wxLayoutDirection dir = wxLayout_Default, int width = 0);
+    wxGTKCairoDCImpl(wxDC* owner, wxWindow* window, wxLayoutDirection dir = wxLayoutDirection::Default, int width = 0);
 
     void DoDrawBitmap(const wxBitmap& bitmap, int x, int y, bool useMask) override;
     void DoDrawCheckMark(int x, int y, int width, int height) override;
@@ -121,7 +121,7 @@ private:
 class WXDLLIMPEXP_CORE wxGTKCairoDC: public wxDC
 {
 public:
-    wxGTKCairoDC(cairo_t* cr, wxWindow* window, wxLayoutDirection dir = wxLayout_LeftToRight, int width = 0);
+    wxGTKCairoDC(cairo_t* cr, wxWindow* window, wxLayoutDirection dir = wxLayoutDirection::LeftToRight, int width = 0);
 
     wxGTKCairoDC(const wxGTKCairoDC&) = delete;
 	wxGTKCairoDC& operator=(const wxGTKCairoDC&) = delete;

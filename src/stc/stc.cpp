@@ -221,7 +221,7 @@ bool wxStyledTextCtrl::Create(wxWindow *parent,
     SetCanFocus(true);
 
     // STC doesn't support RTL languages at all
-    SetLayoutDirection(wxLayout_LeftToRight);
+    SetLayoutDirection(wxLayoutDirection::LeftToRight);
 
     // Rely on native double buffering by default, except under Mac where it
     // doesn't work for some reason, see #18085.

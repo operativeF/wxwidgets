@@ -1439,7 +1439,7 @@ void wxAuiTabCtrl::OnChar(wxKeyEvent& event)
     int newPage = -1;
 
     int forwardKey, backwardKey;
-    if (GetLayoutDirection() == wxLayout_RightToLeft)
+    if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
     {
         forwardKey = WXK_LEFT;
         backwardKey = WXK_RIGHT;

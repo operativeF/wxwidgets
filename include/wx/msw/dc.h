@@ -143,7 +143,7 @@ public:
     // ---------------------
 
     // get or change the layout direction (LTR or RTL) for this dc,
-    // wxLayout_Default is returned if layout direction is not supported
+    // wxLayoutDirection::Default is returned if layout direction is not supported
     wxLayoutDirection GetLayoutDirection() const override;
     void SetLayoutDirection(wxLayoutDirection dir) override;
 

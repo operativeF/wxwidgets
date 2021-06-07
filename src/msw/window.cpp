@@ -1237,10 +1237,10 @@ void wxWindowMSW::SetLayoutDirection(wxLayoutDirection dir)
 
 wxLayoutDirection wxWindowMSW::GetLayoutDirection() const
 {
-    wxCHECK_MSG( GetHwnd(), wxLayout_Default, wxT("invalid window") );
+    wxCHECK_MSG( GetHwnd(), wxLayoutDirection::Default, wxT("invalid window") );
 
-    return wxHasWindowExStyle(this, WS_EX_LAYOUTRTL) ? wxLayout_RightToLeft
-                                                     : wxLayout_LeftToRight;
+    return wxHasWindowExStyle(this, WS_EX_LAYOUTRTL) ? wxLayoutDirection::RightToLeft
+                                                     : wxLayoutDirection::LeftToRight;
 }
 
 wxCoord

@@ -3079,7 +3079,7 @@ void wxGenericTreeCtrl::OnChar( wxKeyEvent &event )
                         event.CmdDown(),
                         is_multiple, extended_select, unselect_others);
 
-    if (GetLayoutDirection() == wxLayout_RightToLeft)
+    if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
     {
         if (event.GetKeyCode() == WXK_RIGHT)
             event.m_keyCode = WXK_LEFT;

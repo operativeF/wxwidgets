@@ -394,7 +394,7 @@ bool wxTopLevelWindowMSW::CreateFrame(const wxString& title,
 
     const wxSize sz = IsAlwaysMaximized() ? wxDefaultSize : size;
 
-    if ( wxApp::MSWGetDefaultLayout(m_parent) == wxLayout_RightToLeft )
+    if ( wxApp::MSWGetDefaultLayout(m_parent) == wxLayoutDirection::RightToLeft )
         exflags |= WS_EX_LAYOUTRTL;
 
     return MSWCreate(GetMSWClassName(GetWindowStyle()), title.t_str(), pos, sz, flags, exflags);
@@ -460,7 +460,7 @@ bool wxTopLevelWindowMSW::Create(wxWindow *parent,
         // all dialogs are popups
         dlgTemplate->style |= WS_POPUP;
 
-        if ( wxApp::MSWGetDefaultLayout(m_parent) == wxLayout_RightToLeft )
+        if ( wxApp::MSWGetDefaultLayout(m_parent) == wxLayoutDirection::RightToLeft )
         {
             dlgTemplate->dwExtendedStyle |= WS_EX_LAYOUTRTL;
         }
@@ -763,10 +763,10 @@ bool wxTopLevelWindowMSW::Destroy()
 
 void wxTopLevelWindowMSW::SetLayoutDirection(wxLayoutDirection dir)
 {
-    if ( dir == wxLayout_Default )
+    if ( dir == wxLayoutDirection::Default )
         dir = wxApp::MSWGetDefaultLayout(m_parent);
 
-    if ( dir != wxLayout_Default )
+    if ( dir != wxLayoutDirection::Default )
         wxTopLevelWindowBase::SetLayoutDirection(dir);
 }
 

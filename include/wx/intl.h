@@ -19,11 +19,11 @@
 // Make wxLayoutDirection enum available without need for wxUSE_INTL so wxWindow, wxApp
 // and other classes are not distrubed by wxUSE_INTL
 
-enum wxLayoutDirection
+enum class wxLayoutDirection
 {
-    wxLayout_Default,
-    wxLayout_LeftToRight,
-    wxLayout_RightToLeft
+    Default,
+    LeftToRight,
+    RightToLeft
 };
 
 #if wxUSE_INTL

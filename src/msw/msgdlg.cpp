@@ -507,7 +507,7 @@ int wxMessageDialog::ShowMessageBox()
     if ( wxStyle & wxSTAY_ON_TOP )
         msStyle |= MB_TOPMOST;
 
-    if ( wxApp::MSWGetDefaultLayout(m_parent) == wxLayout_RightToLeft )
+    if ( wxApp::MSWGetDefaultLayout(m_parent) == wxLayoutDirection::RightToLeft )
         msStyle |= MB_RTLREADING | MB_RIGHT;
 
     if (hWnd)
@@ -661,7 +661,7 @@ void wxMSWTaskDialogConfig::MSWCommonTaskDialogInit(TASKDIALOGCONFIG &tdc)
     // use the top level window as parent if none specified
     tdc.hwndParent = parent ? GetHwndOf(parent) : nullptr;
 
-    if ( wxApp::MSWGetDefaultLayout(parent) == wxLayout_RightToLeft )
+    if ( wxApp::MSWGetDefaultLayout(parent) == wxLayoutDirection::RightToLeft )
         tdc.dwFlags |= TDF_RTL_LAYOUT;
 
     // If we have both the main and extended messages, just use them as

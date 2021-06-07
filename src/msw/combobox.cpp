@@ -738,7 +738,7 @@ void wxComboBox::SetLayoutDirection(wxLayoutDirection dir)
     // alignment flags.
     if ( !HasFlag(wxCB_READONLY) )
     {
-        if ( dir == wxLayout_RightToLeft )
+        if ( dir == wxLayoutDirection::RightToLeft )
         {
             wxUpdateLayoutDirection(GetEditHWND(), dir);
         }

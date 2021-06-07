@@ -30,18 +30,13 @@ enum wxAntialiasMode
     wxANTIALIAS_DEFAULT
 };
 
-enum wxInterpolationQuality
+enum class wxInterpolationQuality
 {
-    // default interpolation
-    wxINTERPOLATION_DEFAULT,
-    // no interpolation
-    wxINTERPOLATION_NONE,
-    // fast interpolation, suited for interactivity
-    wxINTERPOLATION_FAST,
-    // better quality
-    wxINTERPOLATION_GOOD,
-    // best quality, not suited for interactivity
-    wxINTERPOLATION_BEST
+    Default,  // default interpolation
+    None,     // no interpolation
+    Fast,     // fast interpolation, suited for interactivity
+    Good,     // better quality
+    Best      // best quality, not suited for interactivity
 };
 
 enum wxCompositionMode
@@ -71,11 +66,11 @@ enum wxCompositionMode
     wxCOMPOSITION_ADD /* R = S + D */
 };
 
-enum wxGradientType
+enum class wxGradientType
 {
-    wxGRADIENT_NONE,
-    wxGRADIENT_LINEAR,
-    wxGRADIENT_RADIAL
+    None,
+    Linear,
+    Radial
 };
 
 
@@ -373,7 +368,7 @@ public:
         : wxPenInfoBase<wxGraphicsPenInfo>(colour, style)
     {
         m_width = width;
-        m_gradientType = wxGRADIENT_NONE;
+        m_gradientType = wxGradientType::None;
     }
 
     // Setters
@@ -386,7 +381,7 @@ public:
                    const wxColour& c1, const wxColour& c2,
                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix)
     {
-        m_gradientType = wxGRADIENT_LINEAR;
+        m_gradientType = wxGradientType::Linear;
         m_x1 = x1;
         m_y1 = y1;
         m_x2 = x2;
@@ -402,7 +397,7 @@ public:
                    const wxGraphicsGradientStops& stops,
                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix)
     {
-        m_gradientType = wxGRADIENT_LINEAR;
+        m_gradientType = wxGradientType::Linear;
         m_x1 = x1;
         m_y1 = y1;
         m_x2 = x2;
@@ -418,7 +413,7 @@ public:
                    const wxColour& oColor, const wxColour& cColor,
                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix)
     {
-        m_gradientType = wxGRADIENT_RADIAL;
+        m_gradientType = wxGradientType::Radial;
         m_x1 = startX;
         m_y1 = startY;
         m_x2 = endX;
@@ -436,7 +431,7 @@ public:
                    double radius, const wxGraphicsGradientStops& stops,
                    const wxGraphicsMatrix& matrix = wxNullGraphicsMatrix)
     {
-        m_gradientType = wxGRADIENT_RADIAL;
+        m_gradientType = wxGradientType::Radial;
         m_x1 = startX;
         m_y1 = startY;
         m_x2 = endX;

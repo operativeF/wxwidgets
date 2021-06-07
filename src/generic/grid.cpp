@@ -5828,7 +5828,7 @@ void wxGrid::OnKeyDown( wxKeyEvent& event )
 
     if ( !parent->ProcessWindowEvent( keyEvt ) )
     {
-        if (GetLayoutDirection() == wxLayout_RightToLeft)
+        if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
         {
             if (event.GetKeyCode() == WXK_RIGHT)
                 event.m_keyCode = WXK_LEFT;
@@ -6891,7 +6891,7 @@ wxGrid::DoDrawGridLines(wxDC& dc,
 
         int colRight = GetColRight(i);
 #if defined(__WXGTK__) || defined(__WXQT__)
-        if (GetLayoutDirection() != wxLayout_RightToLeft)
+        if (GetLayoutDirection() != wxLayoutDirection::RightToLeft)
 #endif
             colRight--;
 

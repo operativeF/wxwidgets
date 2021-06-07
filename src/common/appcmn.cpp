@@ -215,7 +215,7 @@ wxLayoutDirection wxAppBase::GetLayoutDirection() const
 #endif // wxUSE_INTL
 
     // we don't know
-    return wxLayout_Default;
+    return wxLayoutDirection::Default;
 }
 
 #if wxUSE_CMDLINE_PARSER

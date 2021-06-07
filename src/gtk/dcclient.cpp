@@ -333,7 +333,7 @@ wxWindowDCImpl::wxWindowDCImpl( wxDC *owner, wxWindow *window ) :
     m_window = window;
 
     if (m_window && m_window->m_wxwindow &&
-        (m_window->GetLayoutDirection() == wxLayout_RightToLeft))
+        (m_window->GetLayoutDirection() == wxLayoutDirection::RightToLeft))
     {
         // reverse sense
         m_signX = -1;
@@ -1096,7 +1096,7 @@ void wxWindowDCImpl::DoDrawBitmap( const wxBitmap &bitmap,
     const int ww = LogicalToDeviceXRel(w);
     const int hh = LogicalToDeviceYRel(h);
 
-    if (m_window && m_window->GetLayoutDirection() == wxLayout_RightToLeft)
+    if (m_window && m_window->GetLayoutDirection() == wxLayoutDirection::RightToLeft)
         xx -= ww;
 
     GdkRegion* const clipRegion = m_currentClippingRegion.GetRegion();
@@ -1419,7 +1419,7 @@ void wxWindowDCImpl::DoDrawRotatedText(const wxString& text, int xLogical, int y
 
     int x = LogicalToDeviceX(xLogical);
     int y = LogicalToDeviceY(yLogical);
-    if (m_window && m_window->GetLayoutDirection() == wxLayout_RightToLeft)
+    if (m_window && m_window->GetLayoutDirection() == wxLayoutDirection::RightToLeft)
         x -= LogicalToDeviceXRel(w);
 
     if (wxIsNullDouble(angle))
@@ -1971,7 +1971,7 @@ void wxWindowDCImpl::DoSetClippingRegion( wxCoord x, wxCoord y, wxCoord width, w
     rect.height = YLOG2DEVREL(height);
 
     if (m_window && m_window->m_wxwindow &&
-        (m_window->GetLayoutDirection() == wxLayout_RightToLeft))
+        (m_window->GetLayoutDirection() == wxLayoutDirection::RightToLeft))
     {
         rect.x -= rect.width;
     }
@@ -2057,7 +2057,7 @@ void wxWindowDCImpl::SetAxisOrientation( bool xLeftRight, bool yBottomUp )
     m_signY = (yBottomUp  ? -1 :  1);
 
     if (m_window && m_window->m_wxwindow &&
-        (m_window->GetLayoutDirection() == wxLayout_RightToLeft))
+        (m_window->GetLayoutDirection() == wxLayoutDirection::RightToLeft))
         m_signX = -m_signX;
 
     ComputeScaleAndOrigin();

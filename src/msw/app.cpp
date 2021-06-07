@@ -1006,24 +1006,24 @@ terminate the program,\r\n\
 /* static */
 wxLayoutDirection wxApp::MSWGetDefaultLayout(wxWindow* parent)
 {
-    wxLayoutDirection dir = wxLayout_Default;
+    wxLayoutDirection dir = wxLayoutDirection::Default;
 
     if ( parent )
         dir = parent->GetLayoutDirection();
 
-    if ( dir == wxLayout_Default )
+    if ( dir == wxLayoutDirection::Default )
     {
         if ( wxTheApp )
             dir = wxTheApp->GetLayoutDirection();
     }
 
-    if ( dir == wxLayout_Default )
+    if ( dir == wxLayoutDirection::Default )
     {
         DWORD dwLayout;
         if ( ::GetProcessDefaultLayout(&dwLayout) )
         {
-            dir = dwLayout == LAYOUT_RTL ? wxLayout_RightToLeft
-                                         : wxLayout_LeftToRight;
+            dir = dwLayout == LAYOUT_RTL ? wxLayoutDirection::RightToLeft
+                                         : wxLayoutDirection::LeftToRight;
         }
     }
 

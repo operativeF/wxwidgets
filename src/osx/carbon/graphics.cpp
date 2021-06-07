@@ -870,17 +870,17 @@ wxMacCoreGraphicsPenData::wxMacCoreGraphicsPenData( wxGraphicsRenderer* renderer
 
     switch ( info.GetGradientType() )
     {
-    case wxGRADIENT_NONE:
+    case wxGradientType::None:
         break;
 
-    case wxGRADIENT_LINEAR:
+    case wxGradientType::Linear:
         CreateLinearGradientShading(info.GetX1(), info.GetY1(),
                                     info.GetX2(), info.GetY2(),
                                     info.GetStops(),
                                     info.GetMatrix());
         break;
 
-    case wxGRADIENT_RADIAL:
+    case wxGradientType::Radial:
         CreateRadialGradientShading(info.GetStartX(), info.GetStartY(),
                                     info.GetEndX(), info.GetEndY(),
                                     info.GetRadius(),
@@ -1607,7 +1607,7 @@ void wxMacCoreGraphicsContext::Init()
 #endif
     m_invisible = false;
     m_antialias = wxANTIALIAS_DEFAULT;
-    m_interpolation = wxINTERPOLATION_DEFAULT;
+    m_interpolation = wxInterpolationQuality::Default;
 }
 
 wxMacCoreGraphicsContext::wxMacCoreGraphicsContext( wxGraphicsRenderer* renderer,
@@ -1902,19 +1902,19 @@ bool wxMacCoreGraphicsContext::DoSetInterpolationQuality(wxInterpolationQuality 
 
     switch (interpolation)
     {
-        case wxINTERPOLATION_DEFAULT:
+        case wxInterpolationQuality::Default:
             quality = kCGInterpolationDefault;
             break;
-        case wxINTERPOLATION_NONE:
+        case wxInterpolationQuality::None:
             quality = kCGInterpolationNone;
             break;
-        case wxINTERPOLATION_FAST:
+        case wxInterpolationQuality::Fast:
             quality = kCGInterpolationLow;
             break;
-        case wxINTERPOLATION_GOOD:
+        case wxInterpolationQuality::Good:
             quality = kCGInterpolationMedium;
             break;
-        case wxINTERPOLATION_BEST:
+        case wxInterpolationQuality::Best:
             quality = kCGInterpolationHigh;
             break;
         default:

@@ -1042,7 +1042,7 @@ void wxListHeaderWindow::AdjustDC(wxDC& dc)
 
     // account for the horz scrollbar offset
 #if defined(__WXGTK__) && !defined(__WXGTK3__)
-    if (GetLayoutDirection() == wxLayout_RightToLeft)
+    if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
     {
         // Maybe we just have to check for m_signX
         // in the DC, but I leave the #ifdef __WXGTK__
@@ -3046,7 +3046,7 @@ void wxListMainWindow::OnChar( wxKeyEvent &event )
     const int pageSize = GetCountPerPage();
     wxCHECK_RET( pageSize, wxT("should have non zero page size") );
 
-    if (GetLayoutDirection() == wxLayout_RightToLeft)
+    if (GetLayoutDirection() == wxLayoutDirection::RightToLeft)
     {
         if (event.GetKeyCode() == WXK_RIGHT)
             event.m_keyCode = WXK_LEFT;

@@ -3561,7 +3561,7 @@ wxRect wxAuiManager::CalculateHintRect(wxWindow* pane_window,
     // actually show the hint rectangle on the screen
     m_frame->ClientToScreen(&rect.x, &rect.y);
 
-    if ( m_frame->GetLayoutDirection() == wxLayout_RightToLeft )
+    if ( m_frame->GetLayoutDirection() == wxLayoutDirection::RightToLeft )
     {
         // Mirror rectangle in RTL mode
         rect.x -= rect.GetWidth();
