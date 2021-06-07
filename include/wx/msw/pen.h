@@ -22,7 +22,7 @@ class WXDLLIMPEXP_CORE wxPen : public wxPenBase
 {
 public:
     wxPen() = default;
-    wxPen(const wxColour& col, int width = 1, wxPenStyle style = wxPENSTYLE_SOLID);
+    wxPen(const wxColour& col, int width = 1, wxPenStyle style = wxPenStyle::Solid);
 
     wxPen(const wxBitmap& stipple, int width);
 

@@ -80,22 +80,22 @@ wxString Col2SVG(wxColour c, float* opacity = nullptr)
     return c.GetAsString(wxC2S_HTML_SYNTAX);
 }
 
-wxString GetPenStroke(const wxColour& c, int style = wxPENSTYLE_SOLID)
+wxString GetPenStroke(const wxColour& c, wxPenStyle style = wxPenStyle::Solid)
 {
     float opacity;
     wxString s = wxS("stroke:") + Col2SVG(c, &opacity) + wxS(";");
 
     switch ( style )
     {
-        case wxPENSTYLE_SOLID:
-        case wxPENSTYLE_DOT:
-        case wxPENSTYLE_SHORT_DASH:
-        case wxPENSTYLE_LONG_DASH:
-        case wxPENSTYLE_DOT_DASH:
-        case wxPENSTYLE_USER_DASH:
+        case wxPenStyle::Solid:
+        case wxPenStyle::Dot:
+        case wxPenStyle::ShortDash:
+        case wxPenStyle::LongDash:
+        case wxPenStyle::DotDash:
+        case wxPenStyle::UserDash:
             s += wxString::Format(wxS(" stroke-opacity:%s;"), NumStr(opacity));
             break;
-        case wxPENSTYLE_TRANSPARENT:
+        case wxPenStyle::Transparent:
             s += wxS(" stroke-opacity:0.0;");
             break;
         default:
@@ -149,19 +149,19 @@ wxString GetPenPattern(const wxPen& pen)
 
     switch (pen.GetStyle())
     {
-        case wxPENSTYLE_DOT:
+        case wxPenStyle::Dot:
             s = wxString::Format(wxS("stroke-dasharray=\"%f,%f\""), w * 2, w * 5);
             break;
-        case wxPENSTYLE_SHORT_DASH:
+        case wxPenStyle::ShortDash:
             s = wxString::Format(wxS("stroke-dasharray=\"%f,%f\""), w * 10, w * 8);
             break;
-        case wxPENSTYLE_LONG_DASH:
+        case wxPenStyle::LongDash:
             s = wxString::Format(wxS("stroke-dasharray=\"%f,%f\""), w * 15, w * 8);
             break;
-        case wxPENSTYLE_DOT_DASH:
+        case wxPenStyle::DotDash:
             s = wxString::Format(wxS("stroke-dasharray=\"%f,%f,%f,%f\""), w * 8, w * 8, w * 2, w * 8);
             break;
-        case wxPENSTYLE_USER_DASH:
+        case wxPenStyle::UserDash:
         {
             s = wxS("stroke-dasharray=\"");
             wxDash* dashes;
@@ -178,20 +178,20 @@ wxString GetPenPattern(const wxPen& pen)
             s += wxS("\"");
             break;
         }
-        case wxPENSTYLE_STIPPLE_MASK_OPAQUE:
-        case wxPENSTYLE_STIPPLE_MASK:
-        case wxPENSTYLE_STIPPLE:
-        case wxPENSTYLE_BDIAGONAL_HATCH:
-        case wxPENSTYLE_CROSSDIAG_HATCH:
-        case wxPENSTYLE_FDIAGONAL_HATCH:
-        case wxPENSTYLE_CROSS_HATCH:
-        case wxPENSTYLE_HORIZONTAL_HATCH:
-        case wxPENSTYLE_VERTICAL_HATCH:
+        case wxPenStyle::StippleMaskOpaque:
+        case wxPenStyle::StippleMask:
+        case wxPenStyle::Stipple:
+        case wxPenStyle::BDiagonalHatch:
+        case wxPenStyle::CrossDiagHatch:
+        case wxPenStyle::FDiagonalHatch:
+        case wxPenStyle::CrossHatch:
+        case wxPenStyle::HorizontalHatch:
+        case wxPenStyle::VerticalHatch:
             wxASSERT_MSG(false, wxS("wxSVGFileDC::Requested Pen Pattern not available"));
             break;
-        case wxPENSTYLE_SOLID:
-        case wxPENSTYLE_TRANSPARENT:
-        case wxPENSTYLE_INVALID:
+        case wxPenStyle::Solid:
+        case wxPenStyle::Transparent:
+        case wxPenStyle::Invalid:
             // these penstyles do not need a pattern.
             break;
     }

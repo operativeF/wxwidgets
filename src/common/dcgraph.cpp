@@ -881,7 +881,7 @@ void wxGCDCImpl::DoDrawPolygon( int n, const wxPoint points[],
 
     if ( n <= 0 ||
             (m_brush.GetStyle() == wxBrushStyle::Transparent &&
-                m_pen.GetStyle() == wxPENSTYLE_TRANSPARENT) )
+                m_pen.GetStyle() == wxPenStyle::Transparent) )
         return;
     if ( !m_logicalFunctionSupported )
         return;
@@ -965,7 +965,7 @@ void wxGCDCImpl::DoDrawRectangle(wxCoord x, wxCoord y, wxCoord w, wxCoord h)
     CalcBoundingBox(x, y);
     CalcBoundingBox(x + w, y + h);
 
-    if (m_pen.IsOk() && m_pen.GetStyle() != wxPENSTYLE_TRANSPARENT && m_pen.GetWidth() > 0)
+    if (m_pen.IsOk() && m_pen.GetStyle() != wxPenStyle::Transparent && m_pen.GetWidth() > 0)
     {
         // outline is one pixel larger than what raster-based wxDC implementations draw
         w -= 1;
@@ -993,7 +993,7 @@ void wxGCDCImpl::DoDrawRoundedRectangle(wxCoord x, wxCoord y,
     CalcBoundingBox(x, y);
     CalcBoundingBox(x + w, y + h);
 
-    if (m_pen.IsOk() && m_pen.GetStyle() != wxPENSTYLE_TRANSPARENT && m_pen.GetWidth() > 0)
+    if (m_pen.IsOk() && m_pen.GetStyle() != wxPenStyle::Transparent && m_pen.GetWidth() > 0)
     {
         // outline is one pixel larger than what raster-based wxDC implementations draw
         w -= 1;

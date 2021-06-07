@@ -886,25 +886,25 @@ wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
     DashStyle dashStyle = DashStyleSolid;
     switch ( info.GetStyle() )
     {
-    case wxPENSTYLE_SOLID :
+    case wxPenStyle::Solid :
         break;
 
-    case wxPENSTYLE_DOT :
+    case wxPenStyle::Dot :
         dashStyle = DashStyleDot;
         break;
 
-    case wxPENSTYLE_LONG_DASH :
+    case wxPenStyle::LongDash :
         dashStyle = DashStyleDash; // TODO verify
         break;
 
-    case wxPENSTYLE_SHORT_DASH :
+    case wxPenStyle::ShortDash :
         dashStyle = DashStyleDash;
         break;
 
-    case wxPENSTYLE_DOT_DASH :
+    case wxPenStyle::DotDash :
         dashStyle = DashStyleDashDot;
         break;
-    case wxPENSTYLE_USER_DASH :
+    case wxPenStyle::UserDash :
         {
             dashStyle = DashStyleCustom;
             wxDash *dashes;
@@ -921,7 +921,7 @@ wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
             }
         }
         break;
-    case wxPENSTYLE_STIPPLE :
+    case wxPenStyle::Stipple :
         {
             wxBitmap bmp = info.GetStipple();
             if ( bmp.IsOk() )
@@ -940,28 +940,28 @@ wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
         }
         break;
     default :
-        if ( info.GetStyle() >= wxPENSTYLE_FIRST_HATCH &&
-             info.GetStyle() <= wxPENSTYLE_LAST_HATCH )
+        if ( info.GetStyle() >= wxPenStyle::FirstHatch &&
+             info.GetStyle() <= wxPenStyle::LastHatch )
         {
             HatchStyle style;
             switch( info.GetStyle() )
             {
-            case wxPENSTYLE_BDIAGONAL_HATCH :
+            case wxPenStyle::BDiagonalHatch :
                 style = HatchStyleBackwardDiagonal;
                 break ;
-            case wxPENSTYLE_CROSSDIAG_HATCH :
+            case wxPenStyle::CrossDiagHatch :
                 style = HatchStyleDiagonalCross;
                 break ;
-            case wxPENSTYLE_FDIAGONAL_HATCH :
+            case wxPenStyle::FDiagonalHatch :
                 style = HatchStyleForwardDiagonal;
                 break ;
-            case wxPENSTYLE_CROSS_HATCH :
+            case wxPenStyle::CrossHatch :
                 style = HatchStyleCross;
                 break ;
-            case wxPENSTYLE_HORIZONTAL_HATCH :
+            case wxPenStyle::HorizontalHatch :
                 style = HatchStyleHorizontal;
                 break ;
-            case wxPENSTYLE_VERTICAL_HATCH :
+            case wxPenStyle::VerticalHatch :
                 style = HatchStyleVertical;
                 break ;
             default:
@@ -2798,7 +2798,7 @@ wxGraphicsMatrix wxGDIPlusRenderer::CreateMatrix( double a, double b, double c, 
 wxGraphicsPen wxGDIPlusRenderer::CreatePen(const wxGraphicsPenInfo& info)
 {
     ENSURE_LOADED_OR_RETURN(wxNullGraphicsPen);
-    if ( info.GetStyle() == wxPENSTYLE_TRANSPARENT )
+    if ( info.GetStyle() == wxPenStyle::Transparent )
         return wxNullGraphicsPen;
     else
     {

@@ -1451,7 +1451,7 @@ static void DrawSimpleCheckBox(wxWindow* win, wxDC& dc, const wxRect& rect, int 
     else
     {
         // Pen for bold rectangle.
-        wxPen linepen(useCol,2,wxPENSTYLE_SOLID);
+        wxPen linepen(useCol,2,wxPenStyle::Solid);
         linepen.SetJoin(wxJOIN_MITER); // This prevents round edges.
         dc.SetPen(linepen);
         r.x++;

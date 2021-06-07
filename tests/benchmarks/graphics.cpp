@@ -51,7 +51,7 @@ struct GraphicsBenchmarkOptions
     {
         mapMode = 0;
         penWidth = 0;
-        penStyle = wxPENSTYLE_INVALID;
+        penStyle = wxPenStyle::Invalid;
         penQuality = wxPenQuality::Default;
 
         width = 800;
@@ -421,7 +421,7 @@ private:
             setPen = true;
         }
 
-        if ( opts.penStyle != wxPENSTYLE_INVALID )
+        if ( opts.penStyle != wxPenStyle::Invalid )
         {
             penInfo.Style(opts.penStyle);
             setPen = true;
@@ -908,19 +908,19 @@ public:
             {
                 if ( penStyle == wxS("solid") )
                 {
-                    opts.penStyle = wxPENSTYLE_SOLID;
+                    opts.penStyle = wxPenStyle::Solid;
                 }
                 else if ( penStyle == wxS("dot") )
                 {
-                    opts.penStyle = wxPENSTYLE_DOT;
+                    opts.penStyle = wxPenStyle::Dot;
                 }
                 else if ( penStyle == wxS("long_dash") )
                 {
-                    opts.penStyle = wxPENSTYLE_LONG_DASH;
+                    opts.penStyle = wxPenStyle::LongDash;
                 }
                 else if ( penStyle == wxS("short_dash") )
                 {
-                    opts.penStyle = wxPENSTYLE_SHORT_DASH;
+                    opts.penStyle = wxPenStyle::ShortDash;
                 }
                 else
                 {

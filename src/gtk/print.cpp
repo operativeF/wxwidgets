@@ -1962,11 +1962,11 @@ void wxGtkPrinterDCImpl::SetPen( const wxPen& pen )
 
     switch (m_pen.GetStyle())
     {
-        case wxPENSTYLE_DOT:        cairo_set_dash( m_cairo, dotted, 2, 0 ); break;
-        case wxPENSTYLE_SHORT_DASH: cairo_set_dash( m_cairo, short_dashed, 2, 0 ); break;
-        case wxPENSTYLE_LONG_DASH:  cairo_set_dash( m_cairo, long_dashed, 2, 0 ); break;
-        case wxPENSTYLE_DOT_DASH:   cairo_set_dash( m_cairo, dotted_dashed, 4, 0 );  break;
-        case wxPENSTYLE_USER_DASH:
+        case wxPenStyle::Dot:        cairo_set_dash( m_cairo, dotted, 2, 0 ); break;
+        case wxPenStyle::ShortDash: cairo_set_dash( m_cairo, short_dashed, 2, 0 ); break;
+        case wxPenStyle::LongDash:  cairo_set_dash( m_cairo, long_dashed, 2, 0 ); break;
+        case wxPenStyle::DotDash:   cairo_set_dash( m_cairo, dotted_dashed, 4, 0 );  break;
+        case wxPenStyle::UserDash:
         {
             wxDash *wx_dashes;
             int num = m_pen.GetDashes (&wx_dashes);
@@ -1978,8 +1978,8 @@ void wxGtkPrinterDCImpl::SetPen( const wxPen& pen )
             g_free( g_dashes );
         }
         break;
-        case wxPENSTYLE_SOLID:
-        case wxPENSTYLE_TRANSPARENT:
+        case wxPenStyle::Solid:
+        case wxPenStyle::Transparent:
         default:              cairo_set_dash( m_cairo, NULL, 0, 0 );   break;
     }
 

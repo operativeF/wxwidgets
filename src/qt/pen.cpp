@@ -19,62 +19,62 @@ static Qt::PenStyle ConvertPenStyle(wxPenStyle style)
 {
     switch(style)
     {
-        case wxPENSTYLE_SOLID:
+        case wxPenStyle::Solid:
             return Qt::SolidLine;
 
-        case wxPENSTYLE_TRANSPARENT:
+        case wxPenStyle::Transparent:
             return Qt::NoPen;
 
-        case wxPENSTYLE_DOT:
+        case wxPenStyle::Dot:
             return Qt::DotLine;
 
-        case wxPENSTYLE_LONG_DASH:
-        case wxPENSTYLE_SHORT_DASH:
+        case wxPenStyle::LongDash:
+        case wxPenStyle::ShortDash:
             return Qt::DashLine;
 
-        case wxPENSTYLE_DOT_DASH:
+        case wxPenStyle::DotDash:
             return Qt::DotLine;
 
-        case wxPENSTYLE_USER_DASH:
+        case wxPenStyle::UserDash:
             return Qt::CustomDashLine;
 
-        case wxPENSTYLE_STIPPLE:
-            wxMISSING_IMPLEMENTATION( "wxPENSTYLE_STIPPLE" );
+        case wxPenStyle::Stipple:
+            wxMISSING_IMPLEMENTATION( "wxPenStyle::Stipple" );
             break;
 
-        case wxPENSTYLE_BDIAGONAL_HATCH:
-            wxMISSING_IMPLEMENTATION( "wxPENSTYLE_BDIAGONAL_HATCH" );
+        case wxPenStyle::BDiagonalHatch:
+            wxMISSING_IMPLEMENTATION( "wxPenStyle::BDiagonalHatch" );
             break;
 
-        case wxPENSTYLE_CROSSDIAG_HATCH:
-            wxMISSING_IMPLEMENTATION( "wxPENSTYLE_CROSSDIAG_HATCH" );
+        case wxPenStyle::CrossDiagHatch:
+            wxMISSING_IMPLEMENTATION( "wxPenStyle::CrossDiagHatch" );
             break;
 
-        case wxPENSTYLE_FDIAGONAL_HATCH:
-            wxMISSING_IMPLEMENTATION( "wxPENSTYLE_FDIAGONAL_HATCH" );
+        case wxPenStyle::FDiagonalHatch:
+            wxMISSING_IMPLEMENTATION( "wxPenStyle::FDiagonalHatch" );
             break;
 
-        case wxPENSTYLE_CROSS_HATCH:
-            wxMISSING_IMPLEMENTATION( "wxPENSTYLE_CROSS_HATCH" );
+        case wxPenStyle::CrossHatch:
+            wxMISSING_IMPLEMENTATION( "wxPenStyle::CrossHatch" );
             break;
 
-        case wxPENSTYLE_HORIZONTAL_HATCH:
-            wxMISSING_IMPLEMENTATION( "wxPENSTYLE_HORIZONTAL_HATCH" );
+        case wxPenStyle::HorizontalHatch:
+            wxMISSING_IMPLEMENTATION( "wxPenStyle::HorizontalHatch" );
             break;
 
-        case wxPENSTYLE_VERTICAL_HATCH:
-            wxMISSING_IMPLEMENTATION( "wxPENSTYLE_VERTICAL_HATCH" );
+        case wxPenStyle::VerticalHatch:
+            wxMISSING_IMPLEMENTATION( "wxPenStyle::VerticalHatch" );
             break;
 
-        case wxPENSTYLE_STIPPLE_MASK:
-            wxMISSING_IMPLEMENTATION( "wxPENSTYLE_STIPPLE_MASK" );
+        case wxPenStyle::StippleMask:
+            wxMISSING_IMPLEMENTATION( "wxPenStyle::StippleMask" );
             break;
 
-        case wxPENSTYLE_STIPPLE_MASK_OPAQUE:
-            wxMISSING_IMPLEMENTATION( "wxPENSTYLE_STIPPLE_MASK_OPAQUE" );
+        case wxPenStyle::StippleMaskOpaque:
+            wxMISSING_IMPLEMENTATION( "wxPenStyle::StippleMaskOpaque" );
             break;
 
-        case wxPENSTYLE_INVALID:
+        case wxPenStyle::Invalid:
             wxFAIL_MSG( "Invalid pen style value" );
             break;
     }
@@ -86,32 +86,32 @@ static wxPenStyle ConvertPenStyle(Qt::PenStyle style)
     switch (style)
     {
         case Qt::SolidLine:
-            return wxPENSTYLE_SOLID;
+            return wxPenStyle::Solid;
 
         case Qt::NoPen:
-            return wxPENSTYLE_TRANSPARENT;
+            return wxPenStyle::Transparent;
 
         case Qt::DotLine:
-            return wxPENSTYLE_DOT;
+            return wxPenStyle::Dot;
 
         case Qt::DashLine:
-            return wxPENSTYLE_SHORT_DASH;
+            return wxPenStyle::ShortDash;
 
         case Qt::DashDotLine:
-            return wxPENSTYLE_DOT_DASH;
+            return wxPenStyle::DotDash;
 
         case Qt::DashDotDotLine:
             wxMISSING_IMPLEMENTATION( "Qt::DashDotDotLine" );
-            return wxPENSTYLE_DOT_DASH;
+            return wxPenStyle::DotDash;
 
         case Qt::CustomDashLine:
-            return wxPENSTYLE_USER_DASH;
+            return wxPenStyle::UserDash;
 
         case Qt::MPenStyle:
             wxMISSING_IMPLEMENTATION( "Qt::MPenStyle" );
             break;
     }
-    return wxPENSTYLE_SOLID;
+    return wxPenStyle::Solid;
 }
 
 static Qt::PenCapStyle ConvertPenCapStyle(wxPenCap style)

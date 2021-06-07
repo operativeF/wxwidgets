@@ -256,11 +256,11 @@ void wxGenericComboCtrl::OnPaintEvent( wxPaintEvent& WXUNUSED(event) )
 #ifdef __WXMAC__
         wxPen pen1( wxColour(133,133,133),
                     customBorder,
-                    wxPENSTYLE_SOLID );
+                    wxPenStyle::Solid );
 #else
         wxPen pen1( wxSystemSettings::GetColour(wxSYS_COLOUR_GRAYTEXT),
                     customBorder,
-                    wxPENSTYLE_SOLID);
+                    wxPenStyle::Solid);
 #endif
         dc.SetPen( pen1 );
 

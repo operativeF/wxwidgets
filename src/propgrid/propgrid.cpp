@@ -2099,10 +2099,10 @@ int wxPropertyGrid::DoDrawItems( wxDC& dc,
     wxBrush marginBrush(m_colMargin);
     wxPen marginPen(m_colMargin);
     wxBrush capbgbrush(m_colCapBack,wxBrushStyle::Solid);
-    wxPen linepen(m_colLine,1,wxPENSTYLE_SOLID);
+    wxPen linepen(m_colLine,1,wxPenStyle::Solid);
 
     // pen that has same colour as text
-    wxPen outlinepen(m_colPropFore,1,wxPENSTYLE_SOLID);
+    wxPen outlinepen(m_colPropFore,1,wxPenStyle::Solid);
 
     //
     // Clear margin with background colour

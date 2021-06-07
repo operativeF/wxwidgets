@@ -878,42 +878,42 @@ D2D1_DASH_STYLE wxD2DConvertPenStyle(wxPenStyle dashStyle)
 {
     switch (dashStyle)
     {
-    case wxPENSTYLE_SOLID:
+    case wxPenStyle::Solid:
         return D2D1_DASH_STYLE_SOLID;
-    case wxPENSTYLE_DOT:
+    case wxPenStyle::Dot:
         return D2D1_DASH_STYLE_DOT;
-    case wxPENSTYLE_LONG_DASH:
+    case wxPenStyle::LongDash:
         return D2D1_DASH_STYLE_DASH;
-    case wxPENSTYLE_SHORT_DASH:
+    case wxPenStyle::ShortDash:
         return D2D1_DASH_STYLE_DASH;
-    case wxPENSTYLE_DOT_DASH:
+    case wxPenStyle::DotDash:
         return D2D1_DASH_STYLE_DASH_DOT;
-    case wxPENSTYLE_USER_DASH:
+    case wxPenStyle::UserDash:
         return D2D1_DASH_STYLE_CUSTOM;
 
     // NB: These styles cannot be converted to a D2D1_DASH_STYLE
     // and must be handled separately.
-    case wxPENSTYLE_TRANSPARENT:
+    case wxPenStyle::Transparent:
         [[fallthrough]];
-    case wxPENSTYLE_INVALID:
+    case wxPenStyle::Invalid:
         [[fallthrough]];
-    case wxPENSTYLE_STIPPLE_MASK_OPAQUE:
+    case wxPenStyle::StippleMaskOpaque:
         [[fallthrough]];
-    case wxPENSTYLE_STIPPLE_MASK:
+    case wxPenStyle::StippleMask:
         [[fallthrough]];
-    case wxPENSTYLE_STIPPLE:
+    case wxPenStyle::Stipple:
         [[fallthrough]];
-    case wxPENSTYLE_BDIAGONAL_HATCH:
+    case wxPenStyle::BDiagonalHatch:
         [[fallthrough]];
-    case wxPENSTYLE_CROSSDIAG_HATCH:
+    case wxPenStyle::CrossDiagHatch:
         [[fallthrough]];
-    case wxPENSTYLE_FDIAGONAL_HATCH:
+    case wxPenStyle::FDiagonalHatch:
         [[fallthrough]];
-    case wxPENSTYLE_CROSS_HATCH:
+    case wxPenStyle::CrossHatch:
         [[fallthrough]];
-    case wxPENSTYLE_HORIZONTAL_HATCH:
+    case wxPenStyle::HorizontalHatch:
         [[fallthrough]];
-    case wxPENSTYLE_VERTICAL_HATCH:
+    case wxPenStyle::VerticalHatch:
         return D2D1_DASH_STYLE_SOLID;
     }
 
@@ -2995,24 +2995,24 @@ wxD2DBrushData* wxGetD2DBrushData(const wxGraphicsBrush& brush)
 
 bool wxIsHatchPenStyle(wxPenStyle penStyle)
 {
-    return penStyle >= wxPENSTYLE_FIRST_HATCH && penStyle <= wxPENSTYLE_LAST_HATCH;
+    return penStyle >= wxPenStyle::FirstHatch && penStyle <= wxPenStyle::LastHatch;
 }
 
 wxBrushStyle wxConvertPenStyleToBrushStyle(wxPenStyle penStyle)
 {
     switch(penStyle)
     {
-    case wxPENSTYLE_BDIAGONAL_HATCH:
+    case wxPenStyle::BDiagonalHatch:
         return wxBrushStyle::BDiagonalHatch;
-    case wxPENSTYLE_CROSSDIAG_HATCH:
+    case wxPenStyle::CrossDiagHatch:
         return wxBrushStyle::CrossDiagHatch;
-    case wxPENSTYLE_FDIAGONAL_HATCH:
+    case wxPenStyle::FDiagonalHatch:
         return wxBrushStyle::FDiagonalHatch;
-    case wxPENSTYLE_CROSS_HATCH:
+    case wxPenStyle::CrossHatch:
         return wxBrushStyle::CrossHatch;
-    case wxPENSTYLE_HORIZONTAL_HATCH:
+    case wxPenStyle::HorizontalHatch:
         return wxBrushStyle::HorizontalHatch;
-    case wxPENSTYLE_VERTICAL_HATCH:
+    case wxPenStyle::VerticalHatch:
         return wxBrushStyle::VerticalHatch;
     default:
         break;
@@ -3079,7 +3079,7 @@ wxD2DPenData::wxD2DPenData(
 
     wxBrush strokeBrush;
 
-    if (m_penInfo.GetStyle() == wxPENSTYLE_STIPPLE)
+    if (m_penInfo.GetStyle() == wxPenStyle::Stipple)
     {
         strokeBrush.SetStipple(m_penInfo.GetStipple());
         strokeBrush.SetStyle(wxBrushStyle::Stipple);
@@ -5209,7 +5209,7 @@ wxGraphicsMatrix wxD2DRenderer::CreateMatrix(
 
 wxGraphicsPen wxD2DRenderer::CreatePen(const wxGraphicsPenInfo& info)
 {
-    if ( info.GetStyle() == wxPENSTYLE_TRANSPARENT )
+    if ( info.GetStyle() == wxPenStyle::Transparent )
     {
         return wxNullGraphicsPen;
     }

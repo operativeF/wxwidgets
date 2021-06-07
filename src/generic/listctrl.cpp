@@ -2141,7 +2141,7 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
 
         if ( HasFlag(wxLC_HRULES) )
         {
-            wxPen pen(GetRuleColour(), 1, wxPENSTYLE_SOLID);
+            wxPen pen(GetRuleColour(), 1, wxPenStyle::Solid);
             wxSize clientSize = GetClientSize();
 
             size_t i = visibleFrom;
@@ -2168,7 +2168,7 @@ void wxListMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
         if ( HasFlag(wxLC_VRULES) &&
                 (m_extendRulesAndAlternateColour || !IsEmpty()) )
         {
-            wxPen pen(GetRuleColour(), 1, wxPENSTYLE_SOLID);
+            wxPen pen(GetRuleColour(), 1, wxPenStyle::Solid);
             wxRect firstItemRect, lastItemRect;
 
             GetItemRect(visibleFrom, firstItemRect);

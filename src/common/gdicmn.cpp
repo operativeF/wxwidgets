@@ -635,40 +635,40 @@ const wxPen* wxStockGDI::GetPen(Item item)
         switch (item)
         {
         case PEN_BLACK:
-            pen = new wxPen(*GetColour(COLOUR_BLACK), 1, wxPENSTYLE_SOLID);
+            pen = new wxPen(*GetColour(COLOUR_BLACK), 1, wxPenStyle::Solid);
             break;
         case PEN_BLACKDASHED:
-            pen = new wxPen(*GetColour(COLOUR_BLACK), 1, wxPENSTYLE_SHORT_DASH);
+            pen = new wxPen(*GetColour(COLOUR_BLACK), 1, wxPenStyle::ShortDash);
             break;
         case PEN_BLUE:
-            pen = new wxPen(*GetColour(COLOUR_BLUE), 1, wxPENSTYLE_SOLID);
+            pen = new wxPen(*GetColour(COLOUR_BLUE), 1, wxPenStyle::Solid);
             break;
         case PEN_CYAN:
-            pen = new wxPen(*GetColour(COLOUR_CYAN), 1, wxPENSTYLE_SOLID);
+            pen = new wxPen(*GetColour(COLOUR_CYAN), 1, wxPenStyle::Solid);
             break;
         case PEN_GREEN:
-            pen = new wxPen(*GetColour(COLOUR_GREEN), 1, wxPENSTYLE_SOLID);
+            pen = new wxPen(*GetColour(COLOUR_GREEN), 1, wxPenStyle::Solid);
             break;
         case PEN_YELLOW:
-            pen = new wxPen(*GetColour(COLOUR_YELLOW), 1, wxPENSTYLE_SOLID);
+            pen = new wxPen(*GetColour(COLOUR_YELLOW), 1, wxPenStyle::Solid);
             break;
         case PEN_GREY:
-            pen = new wxPen(wxColour(wxT("GREY")), 1, wxPENSTYLE_SOLID);
+            pen = new wxPen(wxColour(wxT("GREY")), 1, wxPenStyle::Solid);
             break;
         case PEN_LIGHTGREY:
-            pen = new wxPen(*GetColour(COLOUR_LIGHTGREY), 1, wxPENSTYLE_SOLID);
+            pen = new wxPen(*GetColour(COLOUR_LIGHTGREY), 1, wxPenStyle::Solid);
             break;
         case PEN_MEDIUMGREY:
-            pen = new wxPen(wxColour(wxT("MEDIUM GREY")), 1, wxPENSTYLE_SOLID);
+            pen = new wxPen(wxColour(wxT("MEDIUM GREY")), 1, wxPenStyle::Solid);
             break;
         case PEN_RED:
-            pen = new wxPen(*GetColour(COLOUR_RED), 1, wxPENSTYLE_SOLID);
+            pen = new wxPen(*GetColour(COLOUR_RED), 1, wxPenStyle::Solid);
             break;
         case PEN_TRANSPARENT:
-            pen = new wxPen(*GetColour(COLOUR_BLACK), 1, wxPENSTYLE_TRANSPARENT);
+            pen = new wxPen(*GetColour(COLOUR_BLACK), 1, wxPenStyle::Transparent);
             break;
         case PEN_WHITE:
-            pen = new wxPen(*GetColour(COLOUR_WHITE), 1, wxPENSTYLE_SOLID);
+            pen = new wxPen(*GetColour(COLOUR_WHITE), 1, wxPenStyle::Solid);
             break;
         default:
             wxFAIL;

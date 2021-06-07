@@ -19,20 +19,20 @@
 // NOTE: these values cannot be combined together!
 enum class wxBrushStyle
 {
-    Invalid = -1,
-    Solid = wxSOLID,
-    Transparent = wxTRANSPARENT,
-    StippleMaskOpaque = wxSTIPPLE_MASK_OPAQUE,
-    StippleMask = wxSTIPPLE_MASK,
-    Stipple = wxSTIPPLE,
-    BDiagonalHatch = wxHATCHSTYLE_BDIAGONAL,
-    CrossDiagHatch = wxHATCHSTYLE_CROSSDIAG,
-    FDiagonalHatch = wxHATCHSTYLE_FDIAGONAL,
-    CrossHatch = wxHATCHSTYLE_CROSS,
-    HorizontalHatch = wxHATCHSTYLE_HORIZONTAL,
-    VerticalHatch = wxHATCHSTYLE_VERTICAL,
-    FirstHatch = wxHATCHSTYLE_FIRST,
-    LastHatch = wxHATCHSTYLE_LAST
+    Invalid,
+    Solid,
+    Transparent,
+    StippleMaskOpaque,
+    StippleMask,
+    Stipple,
+    BDiagonalHatch,
+    CrossDiagHatch,
+    FDiagonalHatch,
+    CrossHatch,
+    HorizontalHatch,
+    VerticalHatch,
+    FirstHatch,
+    LastHatch
 };
 
 

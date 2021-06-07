@@ -31,7 +31,7 @@ class wxPenInfo : public wxPenInfoBase<wxPenInfo>
 public:
     explicit wxPenInfo(const wxColour& colour = wxColour(),
                        int width = 1,
-                       wxPenStyle style = wxPENSTYLE_SOLID)
+                       wxPenStyle style = wxPenStyle::Solid)
         : wxPenInfoBase<wxPenInfo>(colour, style)
     {
         m_width = width;
@@ -86,16 +86,16 @@ public:
     virtual int GetDashes(wxDash **ptr) const = 0;
 
     // Convenient helpers for testing whether the pen is a transparent one:
-    // unlike GetStyle() == wxPENSTYLE_TRANSPARENT, they work correctly even if
+    // unlike GetStyle() == wxPenStyle::Transparent, they work correctly even if
     // the pen is invalid (they both return false in this case).
     bool IsTransparent() const
     {
-        return IsOk() && GetStyle() == wxPENSTYLE_TRANSPARENT;
+        return IsOk() && GetStyle() == wxPenStyle::Transparent;
     }
 
     bool IsNonTransparent() const
     {
-        return IsOk() && GetStyle() != wxPENSTYLE_TRANSPARENT;
+        return IsOk() && GetStyle() != wxPenStyle::Transparent;
     }
 };
 
@@ -120,7 +120,7 @@ class WXDLLIMPEXP_CORE wxPenList: public wxGDIObjListBase
 public:
     wxPen *FindOrCreatePen(const wxColour& colour,
                            int width = 1,
-                           wxPenStyle style = wxPENSTYLE_SOLID);
+                           wxPenStyle style = wxPenStyle::Solid);
 };
 
 extern WXDLLIMPEXP_DATA_CORE(wxPenList*)   wxThePenList;

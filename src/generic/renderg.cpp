@@ -200,7 +200,7 @@ static void DrawSelectedCellFocusRect(wxDC& dc, const wxRect& rect)
 {
     // (This code is based on wxRendererGeneric::DrawFocusRect and modified.)
 
-    // draw the pixels manually because the "dots" in wxPen with wxPENSTYLE_DOT style
+    // draw the pixels manually because the "dots" in wxPen with wxPenStyle::Dot style
     // may be short traits and not really dots
     //
     // note that to behave in the same manner as DrawRect(), we must exclude
@@ -844,7 +844,7 @@ wxRendererGeneric::DrawItemSelectionRect(wxWindow * WXUNUSED(win),
 void
 wxRendererGeneric::DrawFocusRect(wxWindow* WXUNUSED(win), wxDC& dc, const wxRect& rect, int WXUNUSED(flags))
 {
-    // draw the pixels manually because the "dots" in wxPen with wxPENSTYLE_DOT style
+    // draw the pixels manually because the "dots" in wxPen with wxPenStyle::Dot style
     // may be short traits and not really dots
     //
     // note that to behave in the same manner as DrawRect(), we must exclude

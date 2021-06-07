@@ -135,7 +135,7 @@ void wxSplitterWindow::Init()
     m_minimumPaneSize = 0;
     m_sashCursorWE = wxCursor(wxCURSOR_SIZEWE);
     m_sashCursorNS = wxCursor(wxCURSOR_SIZENS);
-    m_sashTrackerPen = new wxPen(*wxBLACK, 2, wxPENSTYLE_SOLID);
+    m_sashTrackerPen = new wxPen(*wxBLACK, 2, wxPenStyle::Solid);
 
     m_needUpdating = false;
     m_isHot = false;

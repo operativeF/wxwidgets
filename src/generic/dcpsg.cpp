@@ -1181,7 +1181,7 @@ void wxPostScriptDCImpl::SetPen( const wxPen& pen )
 
     if (!pen.IsOk()) return;
 
-    int oldStyle = m_pen.IsOk() ? m_pen.GetStyle() : wxPENSTYLE_INVALID;
+    int oldStyle = m_pen.IsOk() ? m_pen.GetStyle() : wxPenStyle::Invalid;
     wxPenCap oldCap = m_pen.IsOk() ? m_pen.GetCap() : wxCAP_INVALID;
     wxPenJoin oldJoin = m_pen.IsOk() ? m_pen.GetJoin() : wxJOIN_INVALID;
 
@@ -1222,11 +1222,11 @@ void wxPostScriptDCImpl::SetPen( const wxPen& pen )
 
     switch (m_pen.GetStyle())
     {
-        case wxPENSTYLE_DOT:        psdash = dotted;         break;
-        case wxPENSTYLE_SHORT_DASH: psdash = short_dashed;   break;
-        case wxPENSTYLE_LONG_DASH:  psdash = wxCoord_dashed; break;
-        case wxPENSTYLE_DOT_DASH:   psdash = dotted_dashed;  break;
-        case wxPENSTYLE_USER_DASH:
+        case wxPenStyle::Dot:        psdash = dotted;         break;
+        case wxPenStyle::ShortDash: psdash = short_dashed;   break;
+        case wxPenStyle::LongDash:  psdash = wxCoord_dashed; break;
+        case wxPenStyle::DotDash:   psdash = dotted_dashed;  break;
+        case wxPenStyle::UserDash:
         {
             wxDash *dashes;
             int nDashes = m_pen.GetDashes (&dashes);
@@ -1240,8 +1240,8 @@ void wxPostScriptDCImpl::SetPen( const wxPen& pen )
             psdash = nullptr;
         }
         break;
-        case wxPENSTYLE_SOLID:
-        case wxPENSTYLE_TRANSPARENT:
+        case wxPenStyle::Solid:
+        case wxPenStyle::Transparent:
         default:              psdash = "[] 0";         break;
     }
 

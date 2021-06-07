@@ -811,7 +811,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         dc.SetBackgroundMode(wxBrushStyle::Transparent);
         dc.SetTextForeground(*wxBLACK);
         dc.SetBrush(wxBrush(m_colHeaderBg, wxBrushStyle::Solid));
-        dc.SetPen(wxPen(m_colHeaderBg, 1, wxPENSTYLE_SOLID));
+        dc.SetPen(wxPen(m_colHeaderBg, 1, wxPenStyle::Solid));
         dc.DrawRectangle(0, y, GetClientSize().x, m_heightRow);
 
         // Get extent of month-name + year
@@ -883,7 +883,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         dc.SetBackgroundMode(wxBrushStyle::Transparent);
         dc.SetTextForeground(m_colHeaderFg);
         dc.SetBrush(wxBrush(m_colHeaderBg, wxBrushStyle::Solid));
-        dc.SetPen(wxPen(m_colHeaderBg, 1, wxPENSTYLE_SOLID));
+        dc.SetPen(wxPen(m_colHeaderBg, 1, wxPenStyle::Solid));
         dc.DrawRectangle(0, y, GetClientSize().x, m_heightRow);
 
         bool startOnMonday = WeekStartsOnMonday();
@@ -911,7 +911,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
     {
         dc.SetBackgroundMode(wxBrushStyle::Transparent);
         dc.SetBrush(wxBrush(m_colHeaderBg, wxBrushStyle::Solid));
-        dc.SetPen(wxPen(m_colHeaderBg, 1, wxPENSTYLE_SOLID));
+        dc.SetPen(wxPen(m_colHeaderBg, 1, wxPenStyle::Solid));
         dc.DrawRectangle( 0, y, m_calendarWeekWidth, m_heightRow * 6 );
         wxDateTime date = GetStartDate();
         for ( size_t i = 0; i < 6; ++i )
@@ -1030,7 +1030,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
                         colBorder = GetForegroundColour();
                     }
 
-                    wxPen pen(colBorder, 1, wxPENSTYLE_SOLID);
+                    wxPen pen(colBorder, 1, wxPenStyle::Solid);
                     dc.SetPen(pen);
                     dc.SetBrush(*wxTRANSPARENT_BRUSH);
 

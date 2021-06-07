@@ -854,11 +854,11 @@ bool wxRichTextObject::DrawBorder(wxDC& dc, wxRichTextBuffer* buffer, const wxRi
             }
 
             wxColour col(borders.GetLeft().GetColour());
-            wxPenStyle penStyle = wxPENSTYLE_SOLID;
+            wxPenStyle penStyle = wxPenStyle::Solid;
             if (borders.GetLeft().GetStyle() == wxTEXT_BOX_ATTR_BORDER_DOTTED)
-                penStyle = wxPENSTYLE_DOT;
+                penStyle = wxPenStyle::Dot;
             else if (borders.GetLeft().GetStyle() == wxTEXT_BOX_ATTR_BORDER_DASHED)
-                penStyle = wxPENSTYLE_LONG_DASH;
+                penStyle = wxPenStyle::LongDash;
             wxPen pen(col, borderLeft, penStyle);
             dc.SetPen(pen);
             dc.SetBrush(*wxTRANSPARENT_BRUSH);
@@ -888,11 +888,11 @@ bool wxRichTextObject::DrawBorder(wxDC& dc, wxRichTextBuffer* buffer, const wxRi
         }
 
         wxColour col(borders.GetLeft().GetColour());
-        wxPenStyle penStyle = wxPENSTYLE_SOLID;
+        wxPenStyle penStyle = wxPenStyle::Solid;
         if (borders.GetLeft().GetStyle() == wxTEXT_BOX_ATTR_BORDER_DOTTED)
-            penStyle = wxPENSTYLE_DOT;
+            penStyle = wxPenStyle::Dot;
         else if (borders.GetLeft().GetStyle() == wxTEXT_BOX_ATTR_BORDER_DASHED)
-            penStyle = wxPENSTYLE_LONG_DASH;
+            penStyle = wxPenStyle::LongDash;
         wxPen pen(col, borderLeft, penStyle);
         pen.SetJoin(wxJOIN_MITER);
         dc.SetPen(pen);
@@ -906,13 +906,13 @@ bool wxRichTextObject::DrawBorder(wxDC& dc, wxRichTextBuffer* buffer, const wxRi
     {
         borderLeft = converter.GetPixels(borders.GetLeft().GetWidth());
         wxColour col(borders.GetLeft().GetColour());
-        wxPenStyle penStyle = wxPENSTYLE_SOLID;
+        wxPenStyle penStyle = wxPenStyle::Solid;
         if (borders.GetLeft().GetStyle() == wxTEXT_BOX_ATTR_BORDER_DOTTED)
-            penStyle = wxPENSTYLE_DOT;
+            penStyle = wxPenStyle::Dot;
         else if (borders.GetLeft().GetStyle() == wxTEXT_BOX_ATTR_BORDER_DASHED)
-            penStyle = wxPENSTYLE_LONG_DASH;
+            penStyle = wxPenStyle::LongDash;
 
-        if (borderLeft == 1 || penStyle != wxPENSTYLE_SOLID)
+        if (borderLeft == 1 || penStyle != wxPenStyle::Solid)
         {
             wxPen pen(col, borderLeft, penStyle);
             dc.SetPen(pen);
@@ -941,13 +941,13 @@ bool wxRichTextObject::DrawBorder(wxDC& dc, wxRichTextBuffer* buffer, const wxRi
         borderRight = converter.GetPixels(borders.GetRight().GetWidth());
 
         wxColour col(borders.GetRight().GetColour());
-        wxPenStyle penStyle = wxPENSTYLE_SOLID;
+        wxPenStyle penStyle = wxPenStyle::Solid;
         if (borders.GetRight().GetStyle() == wxTEXT_BOX_ATTR_BORDER_DOTTED)
-            penStyle = wxPENSTYLE_DOT;
+            penStyle = wxPenStyle::Dot;
         else if (borders.GetRight().GetStyle() == wxTEXT_BOX_ATTR_BORDER_DASHED)
-            penStyle = wxPENSTYLE_LONG_DASH;
+            penStyle = wxPenStyle::LongDash;
 
-        if (borderRight == 1 || penStyle != wxPENSTYLE_SOLID)
+        if (borderRight == 1 || penStyle != wxPenStyle::Solid)
         {
             wxPen pen(col, borderRight, penStyle);
             dc.SetPen(pen);
@@ -974,13 +974,13 @@ bool wxRichTextObject::DrawBorder(wxDC& dc, wxRichTextBuffer* buffer, const wxRi
         borderTop = converter.GetPixels(borders.GetTop().GetWidth());
 
         wxColour col(borders.GetTop().GetColour());
-        wxPenStyle penStyle = wxPENSTYLE_SOLID;
+        wxPenStyle penStyle = wxPenStyle::Solid;
         if (borders.GetTop().GetStyle() == wxTEXT_BOX_ATTR_BORDER_DOTTED)
-            penStyle = wxPENSTYLE_DOT;
+            penStyle = wxPenStyle::Dot;
         else if (borders.GetTop().GetStyle() == wxTEXT_BOX_ATTR_BORDER_DASHED)
-            penStyle = wxPENSTYLE_LONG_DASH;
+            penStyle = wxPenStyle::LongDash;
 
-        if (borderTop == 1 || penStyle != wxPENSTYLE_SOLID)
+        if (borderTop == 1 || penStyle != wxPenStyle::Solid)
         {
             wxPen pen(col, borderTop, penStyle);
             dc.SetPen(pen);
@@ -1006,13 +1006,13 @@ bool wxRichTextObject::DrawBorder(wxDC& dc, wxRichTextBuffer* buffer, const wxRi
     {
         borderBottom = converter.GetPixels(borders.GetBottom().GetWidth());
         wxColour col(borders.GetBottom().GetColour());
-        wxPenStyle penStyle = wxPENSTYLE_SOLID;
+        wxPenStyle penStyle = wxPenStyle::Solid;
         if (borders.GetBottom().GetStyle() == wxTEXT_BOX_ATTR_BORDER_DOTTED)
-            penStyle = wxPENSTYLE_DOT;
+            penStyle = wxPenStyle::Dot;
         else if (borders.GetBottom().GetStyle() == wxTEXT_BOX_ATTR_BORDER_DASHED)
-            penStyle = wxPENSTYLE_LONG_DASH;
+            penStyle = wxPenStyle::LongDash;
 
-        if (borderBottom == 1 || penStyle != wxPENSTYLE_SOLID)
+        if (borderBottom == 1 || penStyle != wxPenStyle::Solid)
         {
             wxPen pen(col, borderBottom, penStyle);
             dc.SetPen(pen);
@@ -9563,7 +9563,7 @@ bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTex
     {
         int borderSize = 1;
 
-        wxPen borderPen(m_borderColour, 1, wxPENSTYLE_SOLID);
+        wxPen borderPen(m_borderColour, 1, wxPenStyle::Solid);
         wxBrush backgroundBrush(m_backgroundColour);
         wxColour textColour(m_textColour);
 
@@ -9572,11 +9572,11 @@ bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTex
             wxColour highlightColour(wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHT));
             wxColour highlightTextColour(wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHTTEXT));
 
-            borderPen = wxPen(highlightTextColour, 1, wxPENSTYLE_SOLID);
+            borderPen = wxPen(highlightTextColour, 1, wxPenStyle::Solid);
             backgroundBrush = wxBrush(highlightColour);
 
             wxCheckSetBrush(dc, backgroundBrush);
-            wxCheckSetPen(dc, wxPen(highlightColour, 1, wxPENSTYLE_SOLID));
+            wxCheckSetPen(dc, wxPen(highlightColour, 1, wxPenStyle::Solid));
             dc.DrawRectangle(rect);
         }
 

@@ -33,7 +33,7 @@ class WXDLLIMPEXP_CORE wxPen: public wxPenBase
 public:
     wxPen() { }
 
-    wxPen( const wxColour &colour, int width = 1, wxPenStyle style = wxPENSTYLE_SOLID );
+    wxPen( const wxColour &colour, int width = 1, wxPenStyle style = wxPenStyle::Solid );
 
     wxPen( const wxBitmap &stipple, int width );
 

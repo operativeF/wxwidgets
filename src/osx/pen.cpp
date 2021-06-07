@@ -36,8 +36,8 @@ public:
             m_join == data.m_join &&
             m_cap == data.m_cap &&
             m_colour == data.m_colour &&
-            (m_style != wxPENSTYLE_STIPPLE || m_stipple.IsSameAs(data.m_stipple)) &&
-            (m_style != wxPENSTYLE_USER_DASH ||
+            (m_style != wxPenStyle::Stipple || m_stipple.IsSameAs(data.m_stipple)) &&
+            (m_style != wxPenStyle::UserDash ||
              (m_nbDash == data.m_nbDash &&
               memcmp(m_dash, data.m_dash, m_nbDash*sizeof(wxDash)) == 0));
     }
@@ -60,7 +60,7 @@ protected:
 
 wxPenRefData::wxPenRefData()
 {
-    m_style = wxPENSTYLE_SOLID;
+    m_style = wxPenStyle::Solid;
     m_width = 1;
     m_join = wxJOIN_ROUND ;
     m_cap = wxCAP_ROUND ;
@@ -162,7 +162,7 @@ int wxPen::GetWidth() const
 
 wxPenStyle wxPen::GetStyle() const
 {
-    wxCHECK_MSG( IsOk(), wxPENSTYLE_INVALID, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), wxPenStyle::Invalid, wxT("invalid pen") );
 
     return M_PENDATA->m_style;
 }
@@ -257,7 +257,7 @@ void wxPen::SetStipple(const wxBitmap& Stipple)
     Unshare();
 
     M_PENDATA->m_stipple = Stipple;
-    M_PENDATA->m_style = wxPENSTYLE_STIPPLE;
+    M_PENDATA->m_style = wxPenStyle::Stipple;
 
     RealizeResource();
 }

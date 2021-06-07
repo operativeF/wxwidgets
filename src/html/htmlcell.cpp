@@ -1062,8 +1062,8 @@ void wxHtmlContainerCell::Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
     if (m_Border == 1)
     {
         // draw thin border using lines
-        wxPen mypen1(m_BorderColour1, 1, wxPENSTYLE_SOLID);
-        wxPen mypen2(m_BorderColour2, 1, wxPENSTYLE_SOLID);
+        wxPen mypen1(m_BorderColour1, 1, wxPenStyle::Solid);
+        wxPen mypen2(m_BorderColour2, 1, wxPenStyle::Solid);
 
         dc.SetPen(mypen1);
         dc.DrawLine(xlocal, ylocal, xlocal, ylocal + m_Height - 1);
@@ -1117,7 +1117,7 @@ void wxHtmlContainerCell::Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
             (m_BorderColour1.Green() + m_BorderColour2.Green()) /2 ,
             (m_BorderColour1.Blue() + m_BorderColour2.Blue()) /2
             );
-        wxPen mypen3(borderMediumColour, 1, wxPENSTYLE_SOLID);
+        wxPen mypen3(borderMediumColour, 1, wxPenStyle::Solid);
         dc.SetPen(mypen3);
         dc.DrawLines(2, &poly[1], x, y - 1); // between 1 and 2
         dc.DrawLines(2, &poly[4], x, y - 1); // between 4 and 5

@@ -913,7 +913,7 @@ wxCairoPenData::wxCairoPenData( wxGraphicsRenderer* renderer, const wxGraphicsPe
 
     switch ( info.GetStyle() )
     {
-    case wxPENSTYLE_SOLID :
+    case wxPenStyle::Solid :
         // Non-RGB colours, which may e.g. appear under wxOSX for wxColours
         // with NSColor backend, are not supported by Cairo and have to be
         // handled in a special way.
@@ -922,7 +922,7 @@ wxCairoPenData::wxCairoPenData( wxGraphicsRenderer* renderer, const wxGraphicsPe
 #if defined(__WXOSX_COCOA__)
             // Under wxOSX, non-solid NSColors are actually represented
             // by pattern images and therefore a wxPen with non-solid
-            // colour and wxPENSTYLE_SOLID style can be converted
+            // colour and wxPenStyle::Solid style can be converted
             // to a stiple (a surface pattern).
 
             // Create a stiple bitmap from NSColor's pattern image
@@ -935,29 +935,29 @@ wxCairoPenData::wxCairoPenData( wxGraphicsRenderer* renderer, const wxGraphicsPe
 
         break;
 
-    case wxPENSTYLE_DOT :
+    case wxPenStyle::Dot :
         m_count = WXSIZEOF(dotted);
         m_userLengths = new double[ m_count ] ;
         memcpy( m_userLengths, dotted, sizeof(dotted) );
         m_lengths = m_userLengths;
         break;
 
-    case wxPENSTYLE_LONG_DASH :
+    case wxPenStyle::LongDash :
         m_lengths = dashed ;
         m_count = WXSIZEOF(dashed);
         break;
 
-    case wxPENSTYLE_SHORT_DASH :
+    case wxPenStyle::ShortDash :
         m_lengths = short_dashed ;
         m_count = WXSIZEOF(short_dashed);
         break;
 
-    case wxPENSTYLE_DOT_DASH :
+    case wxPenStyle::DotDash :
         m_lengths = dotted_dashed ;
         m_count = WXSIZEOF(dotted_dashed);
         break;
 
-    case wxPENSTYLE_USER_DASH :
+    case wxPenStyle::UserDash :
         {
             wxDash *wxdashes ;
             m_count = info.GetDashes( &wxdashes ) ;
@@ -978,9 +978,9 @@ wxCairoPenData::wxCairoPenData( wxGraphicsRenderer* renderer, const wxGraphicsPe
         }
         break;
 
-    case wxPENSTYLE_STIPPLE :
-    case wxPENSTYLE_STIPPLE_MASK :
-    case wxPENSTYLE_STIPPLE_MASK_OPAQUE :
+    case wxPenStyle::Stipple :
+    case wxPenStyle::StippleMask :
+    case wxPenStyle::StippleMaskOpaque :
         {
             wxBitmap stipple = info.GetStipple();
             InitStipple(&stipple);
@@ -988,8 +988,8 @@ wxCairoPenData::wxCairoPenData( wxGraphicsRenderer* renderer, const wxGraphicsPe
         break;
 
     default :
-        if ( info.GetStyle() >= wxPENSTYLE_FIRST_HATCH
-            && info.GetStyle() <= wxPENSTYLE_LAST_HATCH )
+        if ( info.GetStyle() >= wxPenStyle::FirstHatch
+            && info.GetStyle() <= wxPenStyle::LastHatch )
         {
             wxASSERT_MSG( info.GetColour().IsSolid(),
                           "Pen with non-solid colour is not supported." );
@@ -3318,7 +3318,7 @@ wxGraphicsPen wxCairoRenderer::CreatePen(const wxGraphicsPenInfo& info)
 {
     wxGraphicsPen p;
     ENSURE_LOADED_OR_RETURN(p);
-    if (info.GetStyle() != wxPENSTYLE_TRANSPARENT)
+    if (info.GetStyle() != wxPenStyle::Transparent)
     {
         p.SetRefData(new wxCairoPenData( this, info ));
     }

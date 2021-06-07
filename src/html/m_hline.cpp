@@ -53,7 +53,7 @@ void wxHtmlLineCell::Draw(wxDC& dc, int x, int y,
                           wxHtmlRenderingInfo& WXUNUSED(info))
 {
     wxBrush mybrush(wxT("GREY"), (m_HasShading) ? wxBrushStyle::Transparent : wxBrushStyle::Solid);
-    wxPen mypen(wxT("GREY"), 1, wxPENSTYLE_SOLID);
+    wxPen mypen(wxT("GREY"), 1, wxPenStyle::Solid);
     dc.SetBrush(mybrush);
     dc.SetPen(mypen);
     dc.DrawRectangle(x + m_PosX, y + m_PosY, m_Width, m_Height);

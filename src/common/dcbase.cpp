@@ -968,7 +968,7 @@ void wxDCImpl::DoGradientFillLinear(const wxRect& rect,
                 nB = nB1 + (nB2-nB1)*(w-x)/w;
 
             wxColour colour(nR,nG,nB);
-            SetPen(wxPen(colour, 1, wxPENSTYLE_SOLID));
+            SetPen(wxPen(colour, 1, wxPenStyle::Solid));
             SetBrush(wxBrush(colour));
             if(nDirection == wxEAST)
                 DoDrawRectangle(rect.GetRight()-x-xDelta+1, rect.GetTop(),
@@ -1005,7 +1005,7 @@ void wxDCImpl::DoGradientFillLinear(const wxRect& rect,
                 nB = nB1 + (nB2-nB1)*(w-y)/w;
 
             wxColour colour(nR,nG,nB);
-            SetPen(wxPen(colour, 1, wxPENSTYLE_SOLID));
+            SetPen(wxPen(colour, 1, wxPenStyle::Solid));
             SetBrush(wxBrush(colour));
             if(nDirection == wxNORTH)
                 DoDrawRectangle(rect.GetLeft(), rect.GetTop()+y,
@@ -1279,7 +1279,7 @@ void wxDC::DrawLabel(const wxString& text,
     if ( startUnderscore != endUnderscore )
     {
         // it should be of the same colour as text
-        SetPen(wxPen(GetTextForeground(), 0, wxPENSTYLE_SOLID));
+        SetPen(wxPen(GetTextForeground(), 0, wxPenStyle::Solid));
 
         // This adjustment is relatively arbitrary: we need to draw the
         // underline slightly higher to avoid overflowing the character cell

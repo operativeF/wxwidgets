@@ -29,7 +29,7 @@ public:
     wxPenRefData()
     {
         m_width = 1;
-        m_style = wxPENSTYLE_SOLID;
+        m_style = wxPenStyle::Solid;
         m_joinStyle = wxJOIN_ROUND;
         m_capStyle = wxCAP_ROUND;
         m_dash = NULL;
@@ -214,7 +214,7 @@ wxPenJoin wxPen::GetJoin() const
 
 wxPenStyle wxPen::GetStyle() const
 {
-    wxCHECK_MSG( IsOk(), wxPENSTYLE_INVALID, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), wxPenStyle::Invalid, wxT("invalid pen") );
 
     return M_PENDATA->m_style;
 }

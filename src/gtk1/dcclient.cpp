@@ -453,7 +453,7 @@ void wxWindowDCImpl::DoDrawLine( wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2 
 {
     wxCHECK_RET( IsOk(), wxT("invalid window dc") );
 
-    if (m_pen.GetStyle() != wxPENSTYLE_TRANSPARENT)
+    if (m_pen.GetStyle() != wxPenStyle::Transparent)
     {
         if (m_window)
             gdk_draw_line( m_window, m_penGC, XLOG2DEV(x1), YLOG2DEV(y1), XLOG2DEV(x2), YLOG2DEV(y2) );
@@ -467,7 +467,7 @@ void wxWindowDCImpl::DoCrossHair( wxCoord x, wxCoord y )
 {
     wxCHECK_RET( IsOk(), wxT("invalid window dc") );
 
-    if (m_pen.GetStyle() != wxPENSTYLE_TRANSPARENT)
+    if (m_pen.GetStyle() != wxPenStyle::Transparent)
     {
         int w = 0;
         int h = 0;
@@ -561,7 +561,7 @@ void wxWindowDCImpl::DoDrawArc( wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2,
             }
         }
 
-        if (m_pen.GetStyle() != wxPENSTYLE_TRANSPARENT)
+        if (m_pen.GetStyle() != wxPenStyle::Transparent)
         {
             gdk_draw_arc( m_window, m_penGC, FALSE, xxc-r, yyc-r, 2*r,2*r, alpha1, alpha2 );
 
@@ -628,7 +628,7 @@ void wxWindowDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord width, wxC
             }
         }
 
-        if (m_pen.GetStyle() != wxPENSTYLE_TRANSPARENT)
+        if (m_pen.GetStyle() != wxPenStyle::Transparent)
             gdk_draw_arc( m_window, m_penGC, FALSE, xx, yy, ww, hh, start, end );
     }
 
@@ -640,7 +640,7 @@ void wxWindowDCImpl::DoDrawPoint( wxCoord x, wxCoord y )
 {
     wxCHECK_RET( IsOk(), wxT("invalid window dc") );
 
-    if ((m_pen.GetStyle() != wxPENSTYLE_TRANSPARENT) && m_window)
+    if ((m_pen.GetStyle() != wxPenStyle::Transparent) && m_window)
         gdk_draw_point( m_window, m_penGC, XLOG2DEV(x), YLOG2DEV(y) );
 
     CalcBoundingBox (x, y);
@@ -650,7 +650,7 @@ void wxWindowDCImpl::DoDrawLines( int n, const wxPoint points[], wxCoord xoffset
 {
     wxCHECK_RET( IsOk(), wxT("invalid window dc") );
 
-    if (m_pen.GetStyle() == wxPENSTYLE_TRANSPARENT) return;
+    if (m_pen.GetStyle() == wxPenStyle::Transparent) return;
     if (n <= 0) return;
 
 
@@ -736,7 +736,7 @@ void wxWindowDCImpl::DoDrawPolygon( int n, const wxPoint points[], wxCoord xoffs
         }
     }
 
-    if (m_pen.GetStyle() != wxPENSTYLE_TRANSPARENT)
+    if (m_pen.GetStyle() != wxPenStyle::Transparent)
     {
         gdk_draw_polygon( m_window, m_penGC, FALSE, gpts, n );
 
@@ -799,7 +799,7 @@ void wxWindowDCImpl::DoDrawRectangle( wxCoord x, wxCoord y, wxCoord width, wxCoo
             }
         }
 
-        if (m_pen.GetStyle() != wxPENSTYLE_TRANSPARENT)
+        if (m_pen.GetStyle() != wxPenStyle::Transparent)
             gdk_draw_rectangle( m_window, m_penGC, FALSE, xx, yy, ww-1, hh-1 );
     }
 
@@ -836,7 +836,7 @@ void wxWindowDCImpl::DoDrawRoundedRectangle( wxCoord x, wxCoord y, wxCoord width
 
     // CMB: adjust size if outline is drawn otherwise the result is
     // 1 pixel too wide and high
-    if (m_pen.GetStyle() != wxPENSTYLE_TRANSPARENT)
+    if (m_pen.GetStyle() != wxPenStyle::Transparent)
     {
         ww--;
         hh--;
@@ -912,7 +912,7 @@ void wxWindowDCImpl::DoDrawRoundedRectangle( wxCoord x, wxCoord y, wxCoord width
             }
         }
 
-        if (m_pen.GetStyle() != wxPENSTYLE_TRANSPARENT)
+        if (m_pen.GetStyle() != wxPenStyle::Transparent)
         {
             gdk_draw_line( m_window, m_penGC, xx+rr+1, yy, xx+ww-rr, yy );
             gdk_draw_line( m_window, m_penGC, xx+rr+1, yy+hh, xx+ww-rr, yy+hh );
@@ -981,7 +981,7 @@ void wxWindowDCImpl::DoDrawEllipse( wxCoord x, wxCoord y, wxCoord width, wxCoord
             }
         }
 
-        if (m_pen.GetStyle() != wxPENSTYLE_TRANSPARENT)
+        if (m_pen.GetStyle() != wxPenStyle::Transparent)
             gdk_draw_arc( m_window, m_penGC, FALSE, xx, yy, ww, hh, 0, 360*64 );
     }
 
@@ -1686,35 +1686,35 @@ void wxWindowDCImpl::SetPen( const wxPen &pen )
     GdkLineStyle lineStyle = GDK_LINE_SOLID;
     switch (m_pen.GetStyle())
     {
-        case wxPENSTYLE_USER_DASH:
+        case wxPenStyle::UserDash:
         {
             lineStyle = GDK_LINE_ON_OFF_DASH;
             req_nb_dash = m_pen.GetDashCount();
             req_dash = (wxGTKDash*)m_pen.GetDash();
             break;
         }
-        case wxPENSTYLE_DOT:
+        case wxPenStyle::Dot:
         {
             lineStyle = GDK_LINE_ON_OFF_DASH;
             req_nb_dash = 2;
             req_dash = dotted;
             break;
         }
-        case wxPENSTYLE_LONG_DASH:
+        case wxPenStyle::LongDash:
         {
             lineStyle = GDK_LINE_ON_OFF_DASH;
             req_nb_dash = 2;
             req_dash = wxCoord_dashed;
             break;
         }
-        case wxPENSTYLE_SHORT_DASH:
+        case wxPenStyle::ShortDash:
         {
             lineStyle = GDK_LINE_ON_OFF_DASH;
             req_nb_dash = 2;
             req_dash = short_dashed;
             break;
         }
-        case wxPENSTYLE_DOT_DASH:
+        case wxPenStyle::DotDash:
         {
 //            lineStyle = GDK_LINE_DOUBLE_DASH;
             lineStyle = GDK_LINE_ON_OFF_DASH;
@@ -1723,10 +1723,10 @@ void wxWindowDCImpl::SetPen( const wxPen &pen )
             break;
         }
 
-        case wxPENSTYLE_TRANSPARENT:
-        case wxPENSTYLE_STIPPLE_MASK_OPAQUE:
-        case wxPENSTYLE_STIPPLE:
-        case wxPENSTYLE_SOLID:
+        case wxPenStyle::Transparent:
+        case wxPenStyle::StippleMaskOpaque:
+        case wxPenStyle::Stipple:
+        case wxPenStyle::Solid:
         default:
         {
             lineStyle = GDK_LINE_SOLID;

@@ -149,9 +149,9 @@ private:
         wxpen.SetCap(info.GetCap());
         switch ( info.GetStyle() )
         {
-            case wxPENSTYLE_STIPPLE:
-            case wxPENSTYLE_STIPPLE_MASK:
-            case wxPENSTYLE_STIPPLE_MASK_OPAQUE:
+            case wxPenStyle::Stipple:
+            case wxPenStyle::StippleMask:
+            case wxPenStyle::StippleMaskOpaque:
             {
                 wxpen.SetStipple(info.GetStipple());
                 break;
@@ -1270,7 +1270,7 @@ wxGraphicsMatrix wxQtGraphicsRenderer::CreateMatrix(double a, double b,
 wxGraphicsPen wxQtGraphicsRenderer::CreatePen(const wxGraphicsPenInfo& info)
 {
     wxGraphicsPen p;
-    if ( info.GetStyle() != wxPENSTYLE_TRANSPARENT )
+    if ( info.GetStyle() != wxPenStyle::Transparent )
     {
         p.SetRefData(new wxQtPenData(this, info));
     }

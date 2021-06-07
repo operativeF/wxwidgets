@@ -57,8 +57,8 @@ public:
                m_cap == data.m_cap &&
                m_quality == data.m_quality &&
                m_colour == data.m_colour &&
-               (m_style != wxPENSTYLE_STIPPLE || m_stipple.IsSameAs(data.m_stipple)) &&
-               (m_style != wxPENSTYLE_USER_DASH ||
+               (m_style != wxPenStyle::Stipple || m_stipple.IsSameAs(data.m_stipple)) &&
+               (m_style != wxPenStyle::UserDash ||
                 (m_nbDash == data.m_nbDash &&
                     memcmp(m_dash, data.m_dash, m_nbDash*sizeof(wxDash)) == 0));
     }
@@ -80,7 +80,7 @@ public:
     {
         Free();
 
-        m_style = wxPENSTYLE_STIPPLE;
+        m_style = wxPenStyle::Stipple;
         m_stipple = stipple;
     }
 
@@ -149,7 +149,7 @@ wxPenRefData::wxPenRefData()
         m_hPen = nullptr;
     
 
-    m_style = wxPENSTYLE_SOLID;
+    m_style = wxPenStyle::Solid;
     m_width = 1;
 }
 
@@ -202,34 +202,34 @@ static int ConvertPenStyle(wxPenStyle style)
 {
     switch ( style )
     {
-        case wxPENSTYLE_SHORT_DASH:
-        case wxPENSTYLE_LONG_DASH:
+        case wxPenStyle::ShortDash:
+        case wxPenStyle::LongDash:
             return PS_DASH;
 
-        case wxPENSTYLE_TRANSPARENT:
+        case wxPenStyle::Transparent:
             return PS_NULL;
 
         default:
             wxFAIL_MSG( wxT("unknown pen style") );
             [[fallthrough]];
 
-        case wxPENSTYLE_DOT:
+        case wxPenStyle::Dot:
             return PS_DOT;
 
-        case wxPENSTYLE_DOT_DASH:
+        case wxPenStyle::DotDash:
             return PS_DASHDOT;
 
-        case wxPENSTYLE_USER_DASH:
+        case wxPenStyle::UserDash:
             return PS_USERSTYLE;
 
-        case wxPENSTYLE_STIPPLE:
-        case wxPENSTYLE_BDIAGONAL_HATCH:
-        case wxPENSTYLE_CROSSDIAG_HATCH:
-        case wxPENSTYLE_FDIAGONAL_HATCH:
-        case wxPENSTYLE_CROSS_HATCH:
-        case wxPENSTYLE_HORIZONTAL_HATCH:
-        case wxPENSTYLE_VERTICAL_HATCH:
-        case wxPENSTYLE_SOLID:
+        case wxPenStyle::Stipple:
+        case wxPenStyle::BDiagonalHatch:
+        case wxPenStyle::CrossDiagHatch:
+        case wxPenStyle::FDiagonalHatch:
+        case wxPenStyle::CrossHatch:
+        case wxPenStyle::HorizontalHatch:
+        case wxPenStyle::VerticalHatch:
+        case wxPenStyle::Solid:
 
             return PS_SOLID;
     }
@@ -278,7 +278,7 @@ bool wxPenRefData::Alloc()
    if ( m_hPen )
        return false;
 
-   if ( m_style == wxPENSTYLE_TRANSPARENT )
+   if ( m_style == wxPenStyle::Transparent )
    {
        m_hPen = (HPEN)::GetStockObject(NULL_PEN);
        return true;
@@ -298,14 +298,14 @@ bool wxPenRefData::Alloc()
    {
        switch ( m_style )
        {
-           case wxPENSTYLE_SOLID:
+           case wxPenStyle::Solid:
                // No problem with using cosmetic pens for solid lines.
                break;
 
-           case wxPENSTYLE_DOT:
-           case wxPENSTYLE_LONG_DASH:
-           case wxPENSTYLE_SHORT_DASH:
-           case wxPENSTYLE_DOT_DASH:
+           case wxPenStyle::Dot:
+           case wxPenStyle::LongDash:
+           case wxPenStyle::ShortDash:
+           case wxPenStyle::DotDash:
                if ( m_width > 1 )
                {
                    // Cosmetic pens with these styles would result in solid
@@ -348,37 +348,37 @@ bool wxPenRefData::Alloc()
        LOGBRUSH lb;
        switch( m_style )
        {
-           case wxPENSTYLE_STIPPLE:
+           case wxPenStyle::Stipple:
                lb.lbStyle = BS_PATTERN;
                lb.lbHatch = wxPtrToUInt(m_stipple.GetHBITMAP());
                break;
 
-           case wxPENSTYLE_BDIAGONAL_HATCH:
+           case wxPenStyle::BDiagonalHatch:
                lb.lbStyle = BS_HATCHED;
                lb.lbHatch = HS_BDIAGONAL;
                break;
 
-           case wxPENSTYLE_CROSSDIAG_HATCH:
+           case wxPenStyle::CrossDiagHatch:
                lb.lbStyle = BS_HATCHED;
                lb.lbHatch = HS_DIAGCROSS;
                break;
 
-           case wxPENSTYLE_FDIAGONAL_HATCH:
+           case wxPenStyle::FDiagonalHatch:
                lb.lbStyle = BS_HATCHED;
                lb.lbHatch = HS_FDIAGONAL;
                break;
 
-           case wxPENSTYLE_CROSS_HATCH:
+           case wxPenStyle::CrossHatch:
                lb.lbStyle = BS_HATCHED;
                lb.lbHatch = HS_CROSS;
                break;
 
-           case wxPENSTYLE_HORIZONTAL_HATCH:
+           case wxPenStyle::HorizontalHatch:
                lb.lbStyle = BS_HATCHED;
                lb.lbHatch = HS_HORIZONTAL;
                break;
 
-           case wxPENSTYLE_VERTICAL_HATCH:
+           case wxPenStyle::VerticalHatch:
                lb.lbStyle = BS_HATCHED;
                lb.lbHatch = HS_VERTICAL;
                break;
@@ -394,7 +394,7 @@ bool wxPenRefData::Alloc()
        lb.lbColor = col;
 
        DWORD *dash;
-       if ( m_style == wxPENSTYLE_USER_DASH && m_nbDash && m_dash )
+       if ( m_style == wxPenStyle::UserDash && m_nbDash && m_dash )
        {
            dash = new DWORD[m_nbDash];
            int rw = m_width > 1 ? m_width : 1;
@@ -573,7 +573,7 @@ int wxPen::GetWidth() const
 
 wxPenStyle wxPen::GetStyle() const
 {
-    wxCHECK_MSG( IsOk(), wxPENSTYLE_INVALID, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), wxPenStyle::Invalid, wxT("invalid pen") );
 
     return M_PENDATA->GetStyle();
 }

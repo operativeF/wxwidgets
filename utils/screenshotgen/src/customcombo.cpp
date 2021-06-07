@@ -55,29 +55,29 @@ void PenStyleComboBox::OnDrawItem( wxDC& dc,
     r.Deflate(3);
     r.height -= 2;
 
-    wxPenStyle penStyle = wxPENSTYLE_SOLID;
+    wxPenStyle penStyle = wxPenStyle::Solid;
 //    if ( item == 1 )
-//        penStyle = wxPENSTYLE_TRANSPARENT;
+//        penStyle = wxPenStyle::Transparent;
 //    else if ( item == 2 )
-//        penStyle = wxPENSTYLE_DOT;
+//        penStyle = wxPenStyle::Dot;
 //    else if ( item == 3 )
-//        penStyle = wxPENSTYLE_LONG_DASH;
+//        penStyle = wxPenStyle::LongDash;
 //    else if ( item == 4 )
-//        penStyle = wxPENSTYLE_SHORT_DASH;
+//        penStyle = wxPenStyle::ShortDash;
     if ( item == 0 )
-        penStyle = wxPENSTYLE_DOT_DASH;
+        penStyle = wxPenStyle::DotDash;
     else if ( item == 1 )
-        penStyle = wxPENSTYLE_BDIAGONAL_HATCH;
+        penStyle = wxPenStyle::BDiagonalHatch;
     else if ( item == 2 )
-        penStyle = wxPENSTYLE_CROSSDIAG_HATCH;
+        penStyle = wxPenStyle::CrossDiagHatch;
 //    else if ( item == 8 )
-//        penStyle = wxPENSTYLE_FDIAGONAL_HATCH;
+//        penStyle = wxPenStyle::FDiagonalHatch;
 //    else if ( item == 9 )
-//        penStyle = wxPENSTYLE_CROSS_HATCH;
+//        penStyle = wxPenStyle::CrossHatch;
 //    else if ( item == 10 )
-//        penStyle = wxPENSTYLE_HORIZONTAL_HATCH;
+//        penStyle = wxPenStyle::HorizontalHatch;
 //    else if ( item == 11 )
-//        penStyle = wxPENSTYLE_VERTICAL_HATCH;
+//        penStyle = wxPenStyle::VerticalHatch;
 
     wxPen pen( dc.GetTextForeground(), 3, penStyle );
 

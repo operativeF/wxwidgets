@@ -539,10 +539,11 @@ void InitInfoWithLegacyParams(wxFontInfo& info,
                               const wxString& face,
                               wxFontEncoding encoding)
 {
-    if ( static_cast<int>(style) == wxDEFAULT )
+    // FIXME: Superfluous now.
+    if ( static_cast<int>(style) == wxFONTSTYLE_NORMAL )
         style = wxFONTSTYLE_NORMAL;
 
-    if ( static_cast<int>(weight) == wxDEFAULT )
+    if ( static_cast<int>(weight) == wxFONTWEIGHT_NORMAL)
         weight = wxFONTWEIGHT_NORMAL;
 
     info
@@ -568,8 +569,9 @@ wxFontInfo wxFontBase::InfoFromLegacyParams(int pointSize,
     // Old code specifies wxDEFAULT instead of -1 or wxNORMAL instead of the
     // new type-safe wxFONTSTYLE_NORMAL or wxFONTWEIGHT_NORMAL, continue
     // handling this for compatibility.
-    if ( pointSize == wxDEFAULT )
-        pointSize = -1;
+    // FIXME: What is a pointSize?
+    //    if ( pointSize == wxDEFAULT )
+    //        pointSize = -1;
 
     wxFontInfo info(pointSize);
 

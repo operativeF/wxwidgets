@@ -834,7 +834,7 @@ void wxMSWDCImpl::DoCrossHair(wxCoord x, wxCoord y)
     if ( IsNonTransformedDC(GetHdc()) &&
          m_logicalFunction == wxCOPY &&
          m_pen.IsNonTransparent() && // this calls IsOk() too
-         m_pen.GetStyle() == wxPENSTYLE_SOLID
+         m_pen.GetStyle() == wxPenStyle::Solid
        )
     {
         // Since we are drawing on a non-scaled DC, a 0-pixel width line
@@ -871,7 +871,7 @@ void wxMSWDCImpl::DoDrawLine(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2)
          m_logicalFunction == wxCOPY &&
          IsNonTransformedDC(GetHdc()) &&
          m_pen.IsNonTransparent() && // this calls IsOk() too
-         m_pen.GetStyle() == wxPENSTYLE_SOLID &&
+         m_pen.GetStyle() == wxPenStyle::Solid &&
          (m_pen.GetWidth() <= 1 || m_pen.GetCap() == wxCAP_BUTT)
        )
     {

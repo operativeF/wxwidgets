@@ -358,7 +358,7 @@ void wxWindowDCImpl::DoDrawArc( wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, 
 
     }
 
-    if (m_pen.IsOk() && m_pen.GetStyle () != wxPENSTYLE_TRANSPARENT)
+    if (m_pen.IsOk() && m_pen.GetStyle () != wxPenStyle::Transparent)
     {
         if (m_autoSetting)
             SetPen (m_pen);
@@ -405,7 +405,7 @@ void wxWindowDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord width, wxC
             XLOG2DEV_2 (x), YLOG2DEV_2 (y),wd,hd,start,end);
     }
 
-    if (m_pen.IsOk() && m_pen.GetStyle () != wxPENSTYLE_TRANSPARENT)
+    if (m_pen.IsOk() && m_pen.GetStyle () != wxPenStyle::Transparent)
     {
         if (m_autoSetting)
             SetPen (m_pen);
@@ -436,7 +436,7 @@ void wxWindowDCImpl::DoDrawLines( int n, const wxPoint points[], wxCoord xoffset
 {
     wxCHECK_RET( IsOk(), "invalid dc" );
 
-    if (m_pen.IsOk() && m_pen.GetStyle () != wxPENSTYLE_TRANSPARENT)
+    if (m_pen.IsOk() && m_pen.GetStyle () != wxPenStyle::Transparent)
     {
         if (m_autoSetting)
             SetPen (m_pen);
@@ -502,7 +502,7 @@ void wxWindowDCImpl::DoDrawPolygon( int n, const wxPoint points[],
         }
     }
 
-    if (m_pen.IsOk() && m_pen.GetStyle () != wxPENSTYLE_TRANSPARENT)
+    if (m_pen.IsOk() && m_pen.GetStyle () != wxPenStyle::Transparent)
     {
         if (m_autoSetting)
             SetPen (m_pen);
@@ -544,7 +544,7 @@ void wxWindowDCImpl::DoDrawRectangle( wxCoord x, wxCoord y, wxCoord width, wxCoo
             wfd, hfd);
     }
 
-    if (m_pen.IsOk() && m_pen.GetStyle () != wxPENSTYLE_TRANSPARENT)
+    if (m_pen.IsOk() && m_pen.GetStyle () != wxPenStyle::Transparent)
     {
         if (m_autoSetting)
             SetPen (m_pen);
@@ -589,7 +589,7 @@ void wxWindowDCImpl::DoDrawRoundedRectangle( wxCoord x, wxCoord y, wxCoord width
 
     // CMB: adjust size if outline is drawn otherwise the result is
     // 1 pixel too wide and high
-    if (m_pen.GetStyle() != wxPENSTYLE_TRANSPARENT)
+    if (m_pen.GetStyle() != wxPenStyle::Transparent)
     {
         wd--;
         hd--;
@@ -661,7 +661,7 @@ void wxWindowDCImpl::DoDrawRoundedRectangle( wxCoord x, wxCoord y, wxCoord width
         }
     }
 
-    if (m_pen.IsOk() && m_pen.GetStyle () != wxPENSTYLE_TRANSPARENT)
+    if (m_pen.IsOk() && m_pen.GetStyle () != wxPenStyle::Transparent)
     {
         SetPen (m_pen);
         XDrawLine ((Display*) m_display, (Pixmap) m_pixmap, (GC) m_gc, xd + rd, yd,
@@ -756,7 +756,7 @@ void wxWindowDCImpl::DoDrawEllipse( wxCoord x, wxCoord y, wxCoord width, wxCoord
             YLOG2DEVREL (height) - WX_GC_CF, 0, angle);
     }
 
-    if (m_pen.IsOk() && m_pen.GetStyle () != wxPENSTYLE_TRANSPARENT)
+    if (m_pen.IsOk() && m_pen.GetStyle () != wxPenStyle::Transparent)
     {
         if (m_autoSetting)
             SetPen (m_pen);
@@ -1510,7 +1510,7 @@ void wxWindowDCImpl::SetPen( const wxPen &pen )
     m_currentPenDashCount = m_pen.GetDashCount();
     m_currentPenDash = (wxX11Dash*)m_pen.GetDash();
 
-    if (m_currentStyle == wxPENSTYLE_STIPPLE)
+    if (m_currentStyle == wxPenStyle::Stipple)
         m_currentStipple = * m_pen.GetStipple ();
 
     bool sameStyle = (oldStyle == m_currentStyle &&
@@ -1548,34 +1548,34 @@ void wxWindowDCImpl::SetPen( const wxPen &pen )
 
         switch (m_pen.GetStyle ())
         {
-        case wxPENSTYLE_USER_DASH:
+        case wxPenStyle::UserDash:
             req_nb_dash = m_currentPenDashCount;
             req_dash = m_currentPenDash;
             style = LineOnOffDash;
             break;
-        case wxPENSTYLE_DOT:
+        case wxPenStyle::Dot:
             req_nb_dash = 2;
             req_dash = dotted;
             style = LineOnOffDash;
             break;
-        case wxPENSTYLE_SHORT_DASH:
+        case wxPenStyle::ShortDash:
             req_nb_dash = 2;
             req_dash = short_dashed;
             style = LineOnOffDash;
             break;
-        case wxPENSTYLE_LONG_DASH:
+        case wxPenStyle::LongDash:
             req_nb_dash = 2;
             req_dash = long_dashed;
             style = LineOnOffDash;
             break;
-        case wxPENSTYLE_DOT_DASH:
+        case wxPenStyle::DotDash:
             req_nb_dash = 4;
             req_dash = dotted_dashed;
             style = LineOnOffDash;
             break;
-        case wxPENSTYLE_STIPPLE:
-        case wxPENSTYLE_SOLID:
-        case wxPENSTYLE_TRANSPARENT:
+        case wxPenStyle::Stipple:
+        case wxPenStyle::Solid:
+        case wxPenStyle::Transparent:
         default:
             style = LineSolid;
             req_dash = NULL;
@@ -1697,7 +1697,7 @@ void wxWindowDCImpl::SetPen( const wxPen &pen )
         if (m_window && m_window->GetBackingPixmap())
             XSetStipple ((Display*) m_display,(GC) m_gcBacking, myStipple);
     }
-    else if (m_currentStyle == wxPENSTYLE_STIPPLE && m_currentStipple.IsOk()
+    else if (m_currentStyle == wxPenStyle::Stipple && m_currentStipple.IsOk()
         && ((!m_currentStipple.IsSameAs(oldStipple)) || !GET_OPTIMIZATION))
     {
         XSetStipple ((Display*) m_display, (GC) m_gc, (Pixmap) m_currentStipple.GetDrawable());
@@ -1726,7 +1726,7 @@ void wxWindowDCImpl::SetPen( const wxPen &pen )
         || ((m_logicalFunction == wxXOR) || (m_autoSetting & 0x2)))
     {
         WXPixel pixel = -1;
-        if (m_pen.GetStyle () == wxPENSTYLE_TRANSPARENT)
+        if (m_pen.GetStyle () == wxPenStyle::Transparent)
             pixel = m_backgroundPixel;
         else
         {

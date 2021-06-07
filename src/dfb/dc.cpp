@@ -173,7 +173,7 @@ void wxDFBDCImpl::DoDrawLine(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2)
 {
     wxCHECK_RET( IsOk(), wxT("invalid dc") );
 
-    if ( m_pen.GetStyle() == wxPENSTYLE_TRANSPARENT )
+    if ( m_pen.GetStyle() == wxPenStyle::Transparent )
         return;
 
     wxCoord xx1 = XLOG2DEV(x1);
@@ -279,7 +279,7 @@ void wxDFBDCImpl::DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord h
         SelectColour(m_pen.GetColour());
     }
 
-    if ( m_pen.GetStyle() != wxPENSTYLE_TRANSPARENT )
+    if ( m_pen.GetStyle() != wxPenStyle::Transparent )
     {
         m_surface->DrawRectangle(xx, yy, ww, hh);
     }

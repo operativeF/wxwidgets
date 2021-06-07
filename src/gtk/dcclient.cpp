@@ -1563,7 +1563,7 @@ void wxWindowDCImpl::SetPen( const wxPen &pen )
 {
     wxCHECK_RET( IsOk(), wxT("invalid window dc") );
 
-    if (m_pen == pen && (!pen.IsOk() || pen.GetStyle() != wxPENSTYLE_USER_DASH))
+    if (m_pen == pen && (!pen.IsOk() || pen.GetStyle() != wxPenStyle::UserDash))
         return;
 
     m_pen = pen;
@@ -1607,31 +1607,31 @@ void wxWindowDCImpl::SetPen( const wxPen &pen )
     GdkLineStyle lineStyle = GDK_LINE_ON_OFF_DASH;
     switch (m_pen.GetStyle())
     {
-        case wxPENSTYLE_USER_DASH:
+        case wxPenStyle::UserDash:
             req_nb_dash = m_pen.GetDashCount();
             req_dash = m_pen.GetDash();
             break;
-        case wxPENSTYLE_DOT:
+        case wxPenStyle::Dot:
             req_nb_dash = 2;
             req_dash = dotted;
             break;
-        case wxPENSTYLE_LONG_DASH:
+        case wxPenStyle::LongDash:
             req_nb_dash = 2;
             req_dash = wxCoord_dashed;
             break;
-        case wxPENSTYLE_SHORT_DASH:
+        case wxPenStyle::ShortDash:
             req_nb_dash = 2;
             req_dash = short_dashed;
             break;
-        case wxPENSTYLE_DOT_DASH:
+        case wxPenStyle::DotDash:
             req_nb_dash = 4;
             req_dash = dotted_dashed;
             break;
 
-        case wxPENSTYLE_TRANSPARENT:
-        case wxPENSTYLE_STIPPLE_MASK_OPAQUE:
-        case wxPENSTYLE_STIPPLE:
-        case wxPENSTYLE_SOLID:
+        case wxPenStyle::Transparent:
+        case wxPenStyle::StippleMaskOpaque:
+        case wxPenStyle::Stipple:
+        case wxPenStyle::Solid:
         default:
             lineStyle = GDK_LINE_SOLID;
             req_dash = NULL;

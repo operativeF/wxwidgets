@@ -396,10 +396,10 @@ void wxSashWindow::DrawBorders(wxDC& dc)
 {
     wxSize client_size = GetClientSize();
 
-    wxPen mediumShadowPen(m_mediumShadowColour, 1, wxPENSTYLE_SOLID);
-    wxPen darkShadowPen(m_darkShadowColour, 1, wxPENSTYLE_SOLID);
-    wxPen lightShadowPen(m_lightShadowColour, 1, wxPENSTYLE_SOLID);
-    wxPen hilightPen(m_hilightColour, 1, wxPENSTYLE_SOLID);
+    wxPen mediumShadowPen(m_mediumShadowColour, 1, wxPenStyle::Solid);
+    wxPen darkShadowPen(m_darkShadowColour, 1, wxPenStyle::Solid);
+    wxPen lightShadowPen(m_lightShadowColour, 1, wxPenStyle::Solid);
+    wxPen hilightPen(m_hilightColour, 1, wxPenStyle::Solid);
 
     if ( GetWindowStyleFlag() & wxSW_3DBORDER )
     {
@@ -444,16 +444,16 @@ void wxSashWindow::DrawSash(wxSashEdgePosition edge, wxDC& dc)
 {
     wxSize client_size = GetClientSize();
 
-    wxPen facePen(m_faceColour, 1, wxPENSTYLE_SOLID);
+    wxPen facePen(m_faceColour, 1, wxPenStyle::Solid);
     wxBrush faceBrush(m_faceColour, wxBrushStyle::Solid);
-    wxPen mediumShadowPen(m_mediumShadowColour, 1, wxPENSTYLE_SOLID);
-    wxPen darkShadowPen(m_darkShadowColour, 1, wxPENSTYLE_SOLID);
-    wxPen lightShadowPen(m_lightShadowColour, 1, wxPENSTYLE_SOLID);
-    wxPen hilightPen(m_hilightColour, 1, wxPENSTYLE_SOLID);
+    wxPen mediumShadowPen(m_mediumShadowColour, 1, wxPenStyle::Solid);
+    wxPen darkShadowPen(m_darkShadowColour, 1, wxPenStyle::Solid);
+    wxPen lightShadowPen(m_lightShadowColour, 1, wxPenStyle::Solid);
+    wxPen hilightPen(m_hilightColour, 1, wxPenStyle::Solid);
     wxColour blackClr(0, 0, 0);
     wxColour whiteClr(255, 255, 255);
-    wxPen blackPen(blackClr, 1, wxPENSTYLE_SOLID);
-    wxPen whitePen(whiteClr, 1, wxPENSTYLE_SOLID);
+    wxPen blackPen(blackClr, 1, wxPenStyle::Solid);
+    wxPen whitePen(whiteClr, 1, wxPenStyle::Solid);
 
     if ( edge == wxSASH_LEFT || edge == wxSASH_RIGHT )
     {
@@ -561,7 +561,7 @@ void wxSashWindow::DrawSashTracker(wxSashEdgePosition edge, int x, int y)
     ClientToScreen(&x1, &y1);
     ClientToScreen(&x2, &y2);
 
-    wxPen sashTrackerPen(*wxBLACK, 2, wxPENSTYLE_SOLID);
+    wxPen sashTrackerPen(*wxBLACK, 2, wxPenStyle::Solid);
 
     screenDC.SetLogicalFunction(wxINVERT);
     screenDC.SetPen(sashTrackerPen);

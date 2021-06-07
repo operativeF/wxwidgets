@@ -171,7 +171,7 @@ static void wxDrawRectangle(wxDC& dc, wxCoord x, wxCoord y, wxCoord width, wxCoo
         }
     }
     width --; height --;
-    if (pen.IsOk() && pen.GetStyle() != wxPENSTYLE_TRANSPARENT)
+    if (pen.IsOk() && pen.GetStyle() != wxPenStyle::Transparent)
     {
         dc.DrawLine(x, y, x + width, y);
         dc.DrawLine(x, y, x, y + height);
@@ -189,7 +189,7 @@ void wxMemoryDCImpl::DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoor
 #if wxUSE_MEMORY_DC_DRAW_RECTANGLE
     if (m_brush.IsOk() && m_pen.IsOk() &&
         (m_brush.GetStyle() == wxBrushStyle::Solid || m_brush.GetStyle() == wxBrushStyle::Transparent) &&
-        (m_pen.GetStyle() == wxPENSTYLE_SOLID || m_pen.GetStyle() == wxPENSTYLE_TRANSPARENT) &&
+        (m_pen.GetStyle() == wxPenStyle::Solid || m_pen.GetStyle() == wxPenStyle::Transparent) &&
         (GetLogicalFunction() == wxCOPY))
     {
         wxDrawRectangle(* this, x, y, width, height);

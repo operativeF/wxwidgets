@@ -791,32 +791,32 @@ wxMacCoreGraphicsPenData::wxMacCoreGraphicsPenData( wxGraphicsRenderer* renderer
 
     switch ( info.GetStyle() )
     {
-        case wxPENSTYLE_SOLID:
+        case wxPenStyle::Solid:
             break;
 
-        case wxPENSTYLE_DOT:
+        case wxPenStyle::Dot:
             m_count = WXSIZEOF(dotted);
             m_userLengths = new CGFloat[ m_count ] ;
             memcpy( m_userLengths, dotted, sizeof(dotted) );
             m_lengths = m_userLengths;
             break;
 
-        case wxPENSTYLE_LONG_DASH:
+        case wxPenStyle::LongDash:
             m_count = WXSIZEOF(dashed);
             m_lengths = dashed;
             break;
 
-        case wxPENSTYLE_SHORT_DASH:
+        case wxPenStyle::ShortDash:
             m_count = WXSIZEOF(short_dashed);
             m_lengths = short_dashed;
             break;
 
-        case wxPENSTYLE_DOT_DASH:
+        case wxPenStyle::DotDash:
             m_count = WXSIZEOF(dotted_dashed);
             m_lengths = dotted_dashed;
             break;
 
-        case wxPENSTYLE_USER_DASH:
+        case wxPenStyle::UserDash:
             wxDash *dashes;
             m_count = info.GetDashes( &dashes );
             if ((dashes != NULL) && (m_count > 0))
@@ -835,7 +835,7 @@ wxMacCoreGraphicsPenData::wxMacCoreGraphicsPenData( wxGraphicsRenderer* renderer
             m_lengths = m_userLengths;
             break;
 
-        case wxPENSTYLE_STIPPLE:
+        case wxPenStyle::Stipple:
             {
                 wxBitmap bmp = info.GetStipple();
                 if ( bmp.IsOk() )

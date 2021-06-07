@@ -14,31 +14,31 @@
 #include "wx/colour.h"
 #include "wx/gdicmn.h"  // for wxDash
 
-enum wxPenStyle
+enum class wxPenStyle
 {
-    wxPENSTYLE_INVALID = -1,
+    Invalid,
 
-    wxPENSTYLE_SOLID = wxSOLID,
-    wxPENSTYLE_DOT = wxDOT,
-    wxPENSTYLE_LONG_DASH = wxLONG_DASH,
-    wxPENSTYLE_SHORT_DASH = wxSHORT_DASH,
-    wxPENSTYLE_DOT_DASH = wxDOT_DASH,
-    wxPENSTYLE_USER_DASH = wxUSER_DASH,
+    Solid,
+    Dot,
+    LongDash,
+    ShortDash,
+    DotDash,
+    UserDash,
 
-    wxPENSTYLE_TRANSPARENT = wxTRANSPARENT,
+    Transparent,
 
-    wxPENSTYLE_STIPPLE_MASK_OPAQUE = wxSTIPPLE_MASK_OPAQUE,
-    wxPENSTYLE_STIPPLE_MASK = wxSTIPPLE_MASK,
-    wxPENSTYLE_STIPPLE = wxSTIPPLE,
+    StippleMaskOpaque,
+    StippleMask,
+    Stipple,
 
-    wxPENSTYLE_BDIAGONAL_HATCH = wxHATCHSTYLE_BDIAGONAL,
-    wxPENSTYLE_CROSSDIAG_HATCH = wxHATCHSTYLE_CROSSDIAG,
-    wxPENSTYLE_FDIAGONAL_HATCH = wxHATCHSTYLE_FDIAGONAL,
-    wxPENSTYLE_CROSS_HATCH = wxHATCHSTYLE_CROSS,
-    wxPENSTYLE_HORIZONTAL_HATCH = wxHATCHSTYLE_HORIZONTAL,
-    wxPENSTYLE_VERTICAL_HATCH = wxHATCHSTYLE_VERTICAL,
-    wxPENSTYLE_FIRST_HATCH = wxHATCHSTYLE_FIRST,
-    wxPENSTYLE_LAST_HATCH = wxHATCHSTYLE_LAST
+    BDiagonalHatch,
+    CrossDiagHatch,
+    FDiagonalHatch,
+    CrossHatch,
+    HorizontalHatch,
+    VerticalHatch,
+    FirstHatch,
+    LastHatch
 };
 
 enum wxPenJoin
@@ -77,7 +77,7 @@ public:
     T& Style(wxPenStyle style)
         { m_style = style; return This(); }
     T& Stipple(const wxBitmap& stipple)
-        { m_stipple = stipple; m_style = wxPENSTYLE_STIPPLE; return This(); }
+        { m_stipple = stipple; m_style = wxPenStyle::Stipple; return This(); }
     T& Dashes(int nb_dashes, const wxDash *dash)
         { m_nb_dashes = nb_dashes; m_dash = const_cast<wxDash*>(dash); return This(); }
     T& Join(wxPenJoin join)
@@ -99,7 +99,7 @@ public:
 
     // Convenience
 
-    bool IsTransparent() const { return m_style == wxPENSTYLE_TRANSPARENT; }
+    bool IsTransparent() const { return m_style == wxPenStyle::Transparent; }
 
 protected:
     wxPenInfoBase(const wxColour& colour, wxPenStyle style)

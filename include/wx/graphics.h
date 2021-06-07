@@ -364,7 +364,7 @@ class wxGraphicsPenInfo : public wxPenInfoBase<wxGraphicsPenInfo>
 public:
     explicit wxGraphicsPenInfo(const wxColour& colour = wxColour(),
                                double width = 1.0,
-                               wxPenStyle style = wxPENSTYLE_SOLID)
+                               wxPenStyle style = wxPenStyle::Solid)
         : wxPenInfoBase<wxGraphicsPenInfo>(colour, style)
     {
         m_width = width;

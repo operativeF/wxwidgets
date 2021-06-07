@@ -644,7 +644,7 @@ void wxGraphicsContext::SetPen( const wxGraphicsPen& pen )
 
 void wxGraphicsContext::SetPen( const wxPen& pen )
 {
-    if ( !pen.IsOk() || pen.GetStyle() == wxPENSTYLE_TRANSPARENT )
+    if ( !pen.IsOk() || pen.GetStyle() == wxPenStyle::Transparent )
         SetPen( wxNullGraphicsPen );
     else
         SetPen( CreatePen( pen ) );
@@ -852,14 +852,14 @@ wxGraphicsPen wxGraphicsContext::CreatePen(const wxPen& pen) const
                                 .Cap(pen.GetCap())
                                 ;
 
-    if ( info.GetStyle() == wxPENSTYLE_USER_DASH )
+    if ( info.GetStyle() == wxPenStyle::UserDash )
     {
         wxDash *dashes;
         if ( int nb_dashes = pen.GetDashes(&dashes) )
             info.Dashes(nb_dashes, dashes);
     }
 
-    if ( info.GetStyle() == wxPENSTYLE_STIPPLE )
+    if ( info.GetStyle() == wxPenStyle::Stipple )
     {
         if ( wxBitmap* const stipple = pen.GetStipple() )
             info.Stipple(*stipple);

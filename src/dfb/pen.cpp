@@ -25,7 +25,7 @@
 class wxPenRefData : public wxGDIRefData
 {
 public:
-    wxPenRefData(const wxColour& clr = wxNullColour, wxPenStyle style = wxPENSTYLE_SOLID)
+    wxPenRefData(const wxColour& clr = wxNullColour, wxPenStyle style = wxPenStyle::Solid)
     {
         m_colour = clr;
         SetStyle(style);
@@ -38,10 +38,10 @@ public:
 
     void SetStyle(wxPenStyle style)
     {
-        if ( style != wxPENSTYLE_SOLID && style != wxPENSTYLE_TRANSPARENT )
+        if ( style != wxPenStyle::Solid && style != wxPenStyle::Transparent )
         {
-            wxFAIL_MSG( "only wxPENSTYLE_SOLID and wxPENSTYLE_TRANSPARENT styles are supported" );
-            style = wxPENSTYLE_SOLID;
+            wxFAIL_MSG( "only wxPenStyle::Solid and wxPenStyle::Transparent styles are supported" );
+            style = wxPenStyle::Solid;
         }
 
         m_style = style;
@@ -165,7 +165,7 @@ wxPenJoin wxPen::GetJoin() const
 
 wxPenStyle wxPen::GetStyle() const
 {
-    wxCHECK_MSG( IsOk(), wxPENSTYLE_INVALID, wxT("invalid pen") );
+    wxCHECK_MSG( IsOk(), wxPenStyle::Invalid, wxT("invalid pen") );
 
     return M_PENDATA->m_style;
 }
