@@ -324,7 +324,7 @@ public:
         // wxFileName::GetSize won't use this class again as
         // we're passing it a file and not a directory;
         // thus we are sure to avoid an endless loop
-        wxULongLong sz = wxFileName::GetSize(filename);
+        const wxULongLong sz = wxFileName::GetSize(filename);
 
         if (sz == wxInvalidSize)
         {

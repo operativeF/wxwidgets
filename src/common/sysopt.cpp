@@ -45,7 +45,7 @@ static wxArrayString gs_optionNames,
 // Option functions (arbitrary name/value mapping)
 void wxSystemOptions::SetOption(const wxString& name, const wxString& value)
 {
-    int idx = gs_optionNames.Index(name, false);
+    const int idx = gs_optionNames.Index(name, false);
     if (idx == wxNOT_FOUND)
     {
         gs_optionNames.Add(name);
@@ -67,7 +67,7 @@ wxString wxSystemOptions::GetOption(const wxString& name)
 {
     wxString val;
 
-    int idx = gs_optionNames.Index(name, false);
+    const int idx = gs_optionNames.Index(name, false);
     if ( idx != wxNOT_FOUND )
     {
         val = gs_optionValues[idx];

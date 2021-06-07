@@ -391,7 +391,7 @@ wxFFileOutputStream::~wxFFileOutputStream()
 
 size_t wxFFileOutputStream::OnSysWrite(const void *buffer, size_t size)
 {
-    size_t ret = m_file->Write(buffer, size);
+    const size_t ret = m_file->Write(buffer, size);
     // It is not safe to call Error() if the file is not opened.
     if (!m_file->IsOpened() || m_file->Error())
         m_lasterror = wxSTREAM_WRITE_ERROR;

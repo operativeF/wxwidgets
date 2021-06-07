@@ -106,7 +106,7 @@ int wxMSWEventLoopBase::GetNextMessageTimeout(WXMSG *msg, unsigned long timeout)
     // so we need to remove any immediately messages manually
     while ( !::PeekMessage(msg, nullptr, 0, 0, PM_REMOVE) )
     {
-        DWORD rc = ::MsgWaitForMultipleObjects
+        const DWORD rc = ::MsgWaitForMultipleObjects
                      (
                         1, &m_heventWake,
                         FALSE,
@@ -168,7 +168,7 @@ bool wxConsoleEventLoop::Dispatch()
 int wxConsoleEventLoop::DispatchTimeout(unsigned long timeout)
 {
     MSG msg;
-    int rc = GetNextMessageTimeout(&msg, timeout);
+    const int rc = GetNextMessageTimeout(&msg, timeout);
     if ( rc != 1 )
         return rc;
 

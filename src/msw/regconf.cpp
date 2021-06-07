@@ -360,7 +360,7 @@ void wxRegConfig::SetPath(const wxString& strPath)
     wxString strRegPath;
     if ( !m_strPath.empty() )
     {
-        size_t len = m_strPath.length();
+        const size_t len = m_strPath.length();
 
         const wxChar *src = m_strPath.c_str();
         wxStringBufferLength buf(strRegPath, len);
@@ -449,7 +449,7 @@ bool wxRegConfig::GetNextGroup(wxString& str, long& lIndex) const
   // much easier with local entries: get the next one we find
   // (don't forget to clear our flag bit and set it again later)
   lIndex &= ~LOCAL_MASK;
-  bool bOk = LocalKey().GetNextKey(str, lIndex);
+  const bool bOk = LocalKey().GetNextKey(str, lIndex);
   lIndex |= LOCAL_MASK;
 
   return bOk;

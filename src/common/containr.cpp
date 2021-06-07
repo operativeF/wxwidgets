@@ -275,7 +275,7 @@ void wxControlContainer::HandleOnNavigationKey( wxNavigationKeyEvent& event )
                                                  : m_winParent->GetParent();
 
     // the event is propagated downwards if the event emitter was our parent
-    bool goingDown = event.GetEventObject() == parent;
+    const bool goingDown = event.GetEventObject() == parent;
 
     const wxWindowList& children = m_winParent->GetChildren();
 

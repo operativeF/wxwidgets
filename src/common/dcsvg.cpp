@@ -884,8 +884,8 @@ void wxSVGFileDCImpl::DoDrawArc(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, 
     wxString s;
 
     // we need the radius of the circle which has two estimates
-    double r1 = sqrt( double( (x1 - xc)*(x1 - xc) ) + double( (y1 - yc)*(y1 - yc) ) );
-    double r2 = sqrt( double( (x2 - xc)*(x2 - xc) ) + double( (y2 - yc)*(y2 - yc) ) );
+    const double r1 = sqrt( double( (x1 - xc)*(x1 - xc) ) + double( (y1 - yc)*(y1 - yc) ) );
+    const double r2 = sqrt( double( (x2 - xc)*(x2 - xc) ) + double( (y2 - yc)*(y2 - yc) ) );
 
     wxASSERT_MSG((fabs( r2 - r1 ) <= 3), wxS("wxSVGFileDC::DoDrawArc Error in getting radii of circle"));
     if ( fabs( r2 - r1 ) > 3 )    //pixels
@@ -953,18 +953,17 @@ void wxSVGFileDCImpl::DoDrawEllipticArc(wxCoord x, wxCoord y, wxCoord w, wxCoord
     will be drawn. */
 
     //radius
-    double rx = w / 2.0;
-    double ry = h / 2.0;
+    const double rx = w / 2.0;
+    const double ry = h / 2.0;
     // center
-    double xc = x + rx;
-    double yc = y + ry;
+    const double xc = x + rx;
+    const double yc = y + ry;
 
     // start and end coords
-    double xs, ys, xe, ye;
-    xs = xc + rx * cos(wxDegToRad(sa));
-    xe = xc + rx * cos(wxDegToRad(ea));
-    ys = yc - ry * sin(wxDegToRad(sa));
-    ye = yc - ry * sin(wxDegToRad(ea));
+    const double xs = xc + rx * cos(wxDegToRad(sa));
+    const double xe = xc + rx * cos(wxDegToRad(ea));
+    const double ys = yc - ry * sin(wxDegToRad(sa));
+    const double ye = yc - ry * sin(wxDegToRad(ea));
 
     // svg arcs have 0 degrees at 12-o'clock instead of 3-o'clock
     double start = (sa - 90);
@@ -985,7 +984,7 @@ void wxSVGFileDCImpl::DoDrawEllipticArc(wxCoord x, wxCoord y, wxCoord w, wxCoord
         angle += 360;
 
     int fArc = angle > 180 ? 1 : 0; // flag for large or small arc
-    int fSweep = 0;                 // flag for sweep always 0
+    const int fSweep = 0;                 // flag for sweep always 0
 
     wxString arcPath;
     if (angle == 360)

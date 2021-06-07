@@ -450,7 +450,7 @@ void wxFileName::SetPath( const wxString& pathOrig, wxPathFormat format )
         return;
     }
 
-    wxChar leadingChar = path[0u];
+    const wxChar leadingChar = path[0u];
 
     switch (format)
     {
@@ -624,7 +624,7 @@ void RemoveTrailingSeparatorsFromPath(wxString& strPath)
     // windows unique volume names ("\\?\Volume{GUID}\")
     while ( wxEndsWithPathSeparator( strPath ) )
     {
-        size_t len = strPath.length();
+        const size_t len = strPath.length();
         if ( len == 1 || (len == 3 && strPath[len - 2] == wxT(':')) ||
                 (len == wxMSWUniqueVolumePrefixLength &&
                  wxFileName::IsMSWUniqueVolumeNamePath(strPath)))
@@ -659,7 +659,7 @@ wxFileSystemObjectExists(const wxString& path, int flags)
 
     // we must use GetFileAttributes() instead of the ANSI C functions because
     // it can cope with network (UNC) paths unlike them
-    DWORD ret = ::GetFileAttributes(strPath.t_str());
+    const DWORD ret = ::GetFileAttributes(strPath.t_str());
 
     if ( ret == INVALID_FILE_ATTRIBUTES )
         return false;
@@ -827,11 +827,11 @@ wxString wxFileName::GetHomeDir()
 //
 static int wxOpenWithDeleteOnClose(const wxString& filename)
 {
-    DWORD access = GENERIC_READ | GENERIC_WRITE;
+    static constexpr DWORD access = GENERIC_READ | GENERIC_WRITE;
 
-    DWORD disposition = OPEN_ALWAYS;
+    static constexpr DWORD disposition = OPEN_ALWAYS;
 
-    DWORD attributes = FILE_ATTRIBUTE_TEMPORARY |
+    static constexpr DWORD attributes = FILE_ATTRIBUTE_TEMPORARY |
                        FILE_FLAG_DELETE_ON_CLOSE;
 
     HANDLE h = ::CreateFile(filename.t_str(), access, 0, nullptr,
@@ -866,7 +866,7 @@ static bool wxTempOpen(wxFFile *file, const wxString& path, bool *deleteOnClose)
     *deleteOnClose = false;
     return file->Open(path, wxT("w+b"));
 #else // wx_fdopen
-    int fd = wxTempOpen(path, deleteOnClose);
+    const int fd = wxTempOpen(path, deleteOnClose);
     if (fd == -1)
         return false;
     file->Attach(wx_fdopen(fd, "w+b"), path);
@@ -1082,7 +1082,7 @@ static bool wxCreateTempImpl(
                              WXFILEARGS(fileTemp, ffileTemp),
                              &deleteOnClose);
 
-    bool ok = !name->empty();
+    const bool ok = !name->empty();
 
     if (deleteOnClose)
         name->clear();
@@ -1329,7 +1329,7 @@ bool wxFileName::Rmdir(const wxString& dir, int flags)
         fileop.fFlags = FOF_SILENT | FOF_NOCONFIRMATION;
         fileop.fFlags |= FOF_NOERRORUI;
 
-        int ret = SHFileOperation(&fileop);
+        const int ret = SHFileOperation(&fileop);
         if ( ret != 0 )
         {
             // SHFileOperation may return non-Win32 error codes, so the error
@@ -1775,7 +1775,7 @@ bool wxFileName::MakeRelativeTo(const wxString& pathBase, wxPathFormat format)
     Normalize(normFlags, cwd, format);
     fnBase.Normalize(normFlags, cwd, format);
 
-    bool withCase = IsCaseSensitive(format);
+    const bool withCase = IsCaseSensitive(format);
 
     // we can't do anything if the files live on different volumes
     if ( !GetVolume().IsSameAs(fnBase.GetVolume(), withCase) )

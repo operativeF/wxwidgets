@@ -1260,7 +1260,7 @@ WXDLLIMPEXP_BASE class wxTextInputStream &operator>>(class wxTextInputStream &o,
     wxString s = o.ReadWord();
 
     ll = wxULongLong(0l, 0l);
-    size_t length = s.length();
+    const size_t length = s.length();
     size_t idx = 0;
 
     wxChar ch = READ_STRING_CHAR(s, idx, length);
@@ -1270,9 +1270,9 @@ WXDLLIMPEXP_BASE class wxTextInputStream &operator>>(class wxTextInputStream &o,
         ch = READ_STRING_CHAR(s, idx, length);
 
     // Read number
-    wxULongLong multiplier(0l, 10l);
+    const wxULongLong multiplier(0l, 10l);
     while (ch>=wxT('0') && ch<=wxT('9')) {
-        long lValue = (unsigned) (ch - wxT('0'));
+        const long lValue = (unsigned) (ch - wxT('0'));
         ll = ll * multiplier + wxULongLong(0l, lValue);
         ch = READ_STRING_CHAR(s, idx, length);
     }
@@ -1285,7 +1285,7 @@ WXDLLIMPEXP_BASE class wxTextInputStream &operator>>(class wxTextInputStream &o,
     wxString s = o.ReadWord();
 
     ll = wxLongLong(0l, 0l);
-    size_t length = s.length();
+    const size_t length = s.length();
     size_t idx = 0;
 
     wxChar ch = READ_STRING_CHAR(s, idx, length);
@@ -1302,9 +1302,9 @@ WXDLLIMPEXP_BASE class wxTextInputStream &operator>>(class wxTextInputStream &o,
     }
 
     // Read number
-    wxLongLong multiplier(0l, 10l);
+    const wxLongLong multiplier(0l, 10l);
     while (ch>=wxT('0') && ch<=wxT('9')) {
-        long lValue = (unsigned) (ch - wxT('0'));
+        const long lValue = (unsigned) (ch - wxT('0'));
         ll = ll * multiplier + wxLongLong(0l, lValue);
         ch = READ_STRING_CHAR(s, idx, length);
     }

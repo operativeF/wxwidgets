@@ -629,9 +629,8 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
 {
     CreateLanguagesDB();
 
-    // init i to avoid compiler warning
-    size_t i = 0,
-        count = ms_languagesDB->GetCount();
+    size_t i = 0;
+    const size_t count = ms_languagesDB->GetCount();
 
 #if defined(__UNIX__)
     // first get the string identifying the language from the environment
@@ -794,8 +793,8 @@ inline bool wxGetNonEmptyEnvVar(const wxString& name, wxString* value)
     const LANGID langid = ::GetUserDefaultUILanguage();
     if ( langid != LOCALE_CUSTOM_UI_DEFAULT )
     {
-        wxUint32 lang = PRIMARYLANGID(langid);
-        wxUint32 sublang = SUBLANGID(langid);
+        const wxUint32 lang = PRIMARYLANGID(langid);
+        const wxUint32 sublang = SUBLANGID(langid);
 
         for ( i = 0; i < count; i++ )
         {

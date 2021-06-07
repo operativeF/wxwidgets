@@ -131,7 +131,7 @@ inline double wxPoint2DInt::GetVectorLength() const
 
 inline void wxPoint2DInt::SetVectorLength( double length )
 {
-    double before = GetVectorLength();
+    const double before = GetVectorLength();
     m_x = (wxInt32)(m_x * length / before);
     m_y = (wxInt32)(m_y * length / before);
 }
@@ -354,7 +354,7 @@ inline double wxPoint2DDouble::GetVectorLength() const
 
 inline void wxPoint2DDouble::SetVectorLength( double length )
 {
-    double before = GetVectorLength() ;
+    const double before = GetVectorLength() ;
     m_x = (m_x * length / before) ;
     m_y = (m_y * length / before) ;
 }

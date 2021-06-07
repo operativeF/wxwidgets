@@ -389,8 +389,8 @@ void wxGraphicsPathData::AddQuadCurveToPoint( double cx, double cy, double x, do
 
     wxPoint2DDouble start;
     GetCurrentPoint(&start.m_x,&start.m_y);
-    wxPoint2DDouble end(x,y);
-    wxPoint2DDouble c(cx,cy);
+    const wxPoint2DDouble end(x,y);
+    const wxPoint2DDouble c(cx,cy);
     c1 = double(1/3.0) * start + double(2/3.0) * c;
     c2 = double(2/3.0) * c + double(1/3.0) * end;
     AddCurveToPoint(c1.m_x,c1.m_y,c2.m_x,c2.m_y,x,y);
@@ -417,10 +417,10 @@ void wxGraphicsPathData::AddEllipse( double x, double y, double w, double h)
     if (w <= 0. || h <= 0.)
       return;
 
-    double rw = w/2;
-    double rh = h/2;
-    double xc = x + rw;
-    double yc = y + rh;
+    const double rw = w/2;
+    const double rh = h/2;
+    const double xc = x + rw;
+    const double yc = y + rh;
     wxGraphicsMatrix m = GetRenderer()->CreateMatrix();
     m.Translate(xc,yc);
     m.Scale(rw/rh,1.0);
@@ -456,13 +456,14 @@ void wxGraphicsPathData::AddArcToPoint( double x1, double y1 , double x2, double
         // so we should reposition it to (0, 0) to be sure that a last point is initially set.
         MoveToPoint(0, 0);
     }
-    wxPoint2DDouble p1(x1, y1);
-    wxPoint2DDouble p2(x2, y2);
+
+    const wxPoint2DDouble p1(x1, y1);
+    const wxPoint2DDouble p2(x2, y2);
 
     wxPoint2DDouble v1 = current - p1;
-    double v1Length = v1.GetVectorLength();
+    const double v1Length = v1.GetVectorLength();
     wxPoint2DDouble v2 = p2 - p1;
-    double v2Length = v2.GetVectorLength();
+    const double v2Length = v2.GetVectorLength();
 
     double alpha = v1.GetVectorAngle() - v2.GetVectorAngle();
     // Reduce angle value to the range [0..180] degrees.
@@ -487,27 +488,27 @@ void wxGraphicsPathData::AddArcToPoint( double x1, double y1 , double x2, double
     bool drawClockwiseArc = v1.GetCrossProduct(v2) < 0;
 
     alpha = wxDegToRad(alpha);
-    double distT = r / sin(alpha) * (1.0 + cos(alpha)); // = r / tan(a/2) =  r / sin(a/2) * cos(a/2)
-    double distC = r / sin(alpha / 2.0);
+    const double distT = r / sin(alpha) * (1.0 + cos(alpha)); // = r / tan(a/2) =  r / sin(a/2) * cos(a/2)
+    const double distC = r / sin(alpha / 2.0);
     // Calculate tangential points
     v1.Normalize();
     v2.Normalize();
-    wxPoint2DDouble t1 = distT*v1 + p1;
-    wxPoint2DDouble t2 = distT*v2 + p1;
+    const wxPoint2DDouble t1 = distT*v1 + p1;
+    const wxPoint2DDouble t2 = distT*v2 + p1;
     // Calculate the angle bisector vector
     // (because central point is located on the bisector).
     wxPoint2DDouble v = v1 + v2;
     if ( v.GetVectorLength() > 0 )
         v.Normalize();
     // Calculate center of the arc
-    wxPoint2DDouble c = distC*v + p1;
+    const wxPoint2DDouble c = distC*v + p1;
     // Calculate normal vectors at tangential points
     // (with inverted directions to make angle calculations easier).
-    wxPoint2DDouble nv1 = t1 - c;
-    wxPoint2DDouble nv2 = t2 - c;
+    const wxPoint2DDouble nv1 = t1 - c;
+    const wxPoint2DDouble nv2 = t2 - c;
     // Calculate start and end angle of the arc.
-    double a1 = nv1.GetVectorAngle();
-    double a2 = nv2.GetVectorAngle();
+    const double a1 = nv1.GetVectorAngle();
+    const double a2 = nv2.GetVectorAngle();
 
     AddLineToPoint(t1.m_x, t1.m_y);
     AddArc(c.m_x, c.m_y, r, wxDegToRad(a1), wxDegToRad(a2), drawClockwiseArc);
@@ -855,7 +856,7 @@ wxGraphicsPen wxGraphicsContext::CreatePen(const wxPen& pen) const
     if ( info.GetStyle() == wxPenStyle::UserDash )
     {
         wxDash *dashes;
-        if ( int nb_dashes = pen.GetDashes(&dashes) )
+        if ( const int nb_dashes = pen.GetDashes(&dashes) )
             info.Dashes(nb_dashes, dashes);
     }
 

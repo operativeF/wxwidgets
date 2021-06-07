@@ -1351,9 +1351,9 @@ wxGDIPlusBitmapData::wxGDIPlusBitmapData(wxGraphicsRenderer* renderer, const wxI
    // fully transparent or retain original value
     if ( img.HasMask() )
     {
-        unsigned char mr = img.GetMaskRed();
-        unsigned char mg = img.GetMaskGreen();
-        unsigned char mb = img.GetMaskBlue();
+        const unsigned char mr = img.GetMaskRed();
+        const unsigned char mg = img.GetMaskGreen();
+        const unsigned char mb = img.GetMaskBlue();
         imgRGB = img.GetData();
         pPixLine = static_cast<BYTE*>(bmpData.Scan0);
         for ( UINT y = 0; y < h; y++ )
@@ -1361,9 +1361,9 @@ wxGDIPlusBitmapData::wxGDIPlusBitmapData(wxGraphicsRenderer* renderer, const wxI
             BYTE* pPixByte = pPixLine;
             for ( UINT x = 0; x < w; x++ )
             {
-                unsigned char r = *imgRGB++;
-                unsigned char g = *imgRGB++;
-                unsigned char b = *imgRGB++;
+                const unsigned char r = *imgRGB++;
+                const unsigned char g = *imgRGB++;
+                const unsigned char b = *imgRGB++;
                 if ( r == mr && g == mg && b == mb )
                     pPixByte[0] = pPixByte[1] = pPixByte[2] = pPixByte[3] = 0;
 
@@ -1604,9 +1604,9 @@ void wxGDIPlusPathData::AddArc( double x, double y, double r, double startAngle,
         return;
     }
 
-    REAL x0 = (REAL)(x-r);
-    REAL y0 = (REAL)(y-r);
-    REAL dim = (REAL)(2*r);
+    const REAL x0 = (REAL)(x-r);
+    const REAL y0 = (REAL)(y-r);
+    const REAL dim = (REAL)(2*r);
     if ( angle >= 2.0*M_PI )
     {
         // In addition to arc we need to draw full circle(s).

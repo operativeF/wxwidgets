@@ -580,7 +580,7 @@ bool wxRegKey::Rename(const wxString& szNewName)
     }
 
     // do we stay in the same hive?
-    bool inSameHive = !wxStrchr(szNewName, REG_SEPARATOR);
+    const bool inSameHive = !wxStrchr(szNewName, REG_SEPARATOR);
 
     // construct the full new name of the key
     wxRegKey keyDst;
@@ -803,7 +803,7 @@ bool wxRegKey::HasValue(const wxString& szValue) const
     if ( !CONST_CAST Open(Read) )
         return false;
 
-    LONG dwRet = ::RegQueryValueEx((HKEY) m_hKey,
+    const LONG dwRet = ::RegQueryValueEx((HKEY) m_hKey,
                                    RegValueStr(szValue),
                                    wxRESERVED_PARAM,
                                    nullptr, nullptr, nullptr);
@@ -1065,7 +1065,7 @@ bool wxRegKey::QueryValue(const wxString& szValue,
                 // expand the var expansions in the string unless disabled
                 if ( (dwType == REG_EXPAND_SZ) && !raw )
                 {
-                    DWORD dwExpSize = ::ExpandEnvironmentStrings(strValue.t_str(), nullptr, 0);
+                    const DWORD dwExpSize = ::ExpandEnvironmentStrings(strValue.t_str(), nullptr, 0);
                     bool ok = dwExpSize != 0;
                     if ( ok )
                     {

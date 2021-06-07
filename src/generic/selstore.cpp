@@ -33,7 +33,7 @@ const unsigned wxSelectionStore::NO_SELECTION = static_cast<unsigned>(-1);
 
 bool wxSelectionStore::IsSelected(unsigned item) const
 {
-    bool isSel = m_itemsSel.Index(item) != wxNOT_FOUND;
+    const bool isSel = m_itemsSel.Index(item) != wxNOT_FOUND;
 
     // if the default state is to be selected, being in m_itemsSel means that
     // the item is not selected, so we have to inverse the logic
@@ -49,8 +49,8 @@ bool wxSelectionStore::SelectItem(unsigned item, bool select)
     // search for the item ourselves as like this we get the index where to
     // insert it later if needed, so we do only one search in the array instead
     // of two (adding item to a sorted array requires a search)
-    size_t index = m_itemsSel.IndexForInsert(item);
-    bool isSel = index < m_itemsSel.GetCount() && m_itemsSel[index] == item;
+    const size_t index = m_itemsSel.IndexForInsert(item);
+    const bool isSel = index < m_itemsSel.GetCount() && m_itemsSel[index] == item;
 
     if ( select != m_defaultState )
     {

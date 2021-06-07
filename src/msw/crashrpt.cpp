@@ -156,7 +156,7 @@ bool wxCrashReportImpl::Generate(int flags, EXCEPTION_POINTERS *ep)
     // user-specified crash report flags override those specified by the
     // programmer
     TCHAR envFlags[64];
-    DWORD dwLen = ::GetEnvironmentVariable
+    const DWORD dwLen = ::GetEnvironmentVariable
                     (
                         wxT("WX_CRASH_FLAGS"),
                         envFlags,

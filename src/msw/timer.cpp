@@ -118,7 +118,7 @@ bool wxMSWTimerImpl::Start(int milliseconds, bool oneShot)
     m_id = GetNewTimerId(this);
     // SetTimer() normally returns just idTimer but this might change in the
     // future so use its return value to be safe
-    UINT_PTR ret = ::SetTimer
+    const UINT_PTR ret = ::SetTimer
              (
               wxTimerHiddenWindowModule::GetHWND(),  // window for WM_TIMER
               m_id,                                  // timer ID to create

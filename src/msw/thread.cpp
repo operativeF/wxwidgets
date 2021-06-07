@@ -890,7 +890,7 @@ bool wxThreadInternal::Suspend()
 
 bool wxThreadInternal::Resume()
 {
-    DWORD nSuspendCount = ::ResumeThread(m_hThread);
+    const DWORD nSuspendCount = ::ResumeThread(m_hThread);
     if ( nSuspendCount == (DWORD)-1 )
     {
         wxLogSysError(_("Cannot resume thread %lx"),
@@ -1108,7 +1108,7 @@ wxThreadError wxThread::Kill()
     if ( !IsRunning() )
         return wxTHREAD_NOT_RUNNING;
 
-    wxThreadError rc = m_internal->Kill();
+    const wxThreadError rc = m_internal->Kill();
 
     if ( IsDetached() )
     {

@@ -524,7 +524,7 @@ void wxUpdateUIEvent::ResetUpdateTime()
 #if wxUSE_STOPWATCH && wxUSE_LONGLONG
     if (sm_updateInterval > 0)
     {
-        wxLongLong now = wxGetLocalTimeMillis();
+        const wxLongLong now = wxGetLocalTimeMillis();
         if (now > (sm_lastUpdate + sm_updateInterval))
         {
             sm_lastUpdate = now;
@@ -1386,8 +1386,8 @@ bool wxEvtHandler::ProcessEventIfMatchesId(const wxEventTableEntryBase& entry,
                                            wxEvtHandler *handler,
                                            wxEvent& event)
 {
-    int tableId1 = entry.m_id,
-        tableId2 = entry.m_lastId;
+    const int tableId1 = entry.m_id;
+    const int tableId2 = entry.m_lastId;
 
     // match only if the event type is the same and the id is either -1 in
     // the event table (meaning "any") or the event id matches the id
@@ -2036,7 +2036,7 @@ bool wxEventBlocker::ProcessEvent(wxEvent& event)
     // should this event be blocked?
     for ( size_t i = 0; i < m_eventsToBlock.size(); i++ )
     {
-        wxEventType t = static_cast<wxEventType>(m_eventsToBlock[i]);
+        const wxEventType t = static_cast<wxEventType>(m_eventsToBlock[i]);
         if ( t == wxEVT_ANY || t == event.GetEventType() )
             return true;   // yes, it should: mark this event as processed
     }

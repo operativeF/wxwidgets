@@ -321,8 +321,8 @@ wxString wxHelpProvider::GetHelpTextMaybeAtPoint(wxWindowBase *window)
     {
         wxCHECK_MSG( window, wxEmptyString, wxT("window must not be NULL") );
 
-        wxPoint pt = m_helptextAtPoint;
-        wxHelpEvent::Origin origin = m_helptextOrigin;
+        const wxPoint pt = m_helptextAtPoint;
+        const wxHelpEvent::Origin origin = m_helptextOrigin;
 
         m_helptextAtPoint = wxDefaultPosition;
         m_helptextOrigin = wxHelpEvent::Origin_Unknown;

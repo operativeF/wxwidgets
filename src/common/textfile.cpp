@@ -164,11 +164,11 @@ bool wxTextFile::OnWrite(wxTextFileType typeNew, const wxMBConv& conv)
 
     // Writing to wxTempFile in reasonably-sized chunks is much faster than
     // doing it line by line.
-    const size_t chunk_size = 16384;
+    static constexpr size_t chunk_size = 16384;
     wxString chunk;
     chunk.reserve(chunk_size);
 
-    size_t nCount = GetLineCount();
+    const size_t nCount = GetLineCount();
     for ( size_t n = 0; n < nCount; n++ )
     {
         chunk += GetLine(n) +

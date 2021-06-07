@@ -297,16 +297,16 @@ void wxTopLevelWindowBase::DoCentre(int dir)
     if ( !rectDisplay.Contains(rect.GetTopLeft()) )
     {
         // move the window just enough to make the corner visible
-        int dx = rectDisplay.GetLeft() - rect.GetLeft();
-        int dy = rectDisplay.GetTop() - rect.GetTop();
+        const int dx = rectDisplay.GetLeft() - rect.GetLeft();
+        const int dy = rectDisplay.GetTop() - rect.GetTop();
         rect.Offset(dx > 0 ? dx : 0, dy > 0 ? dy : 0);
     }
 
     if ( !rectDisplay.Contains(rect.GetBottomRight()) )
     {
         // do the same for this corner too
-        int dx = rectDisplay.GetRight() - rect.GetRight();
-        int dy = rectDisplay.GetBottom() - rect.GetBottom();
+        const int dx = rectDisplay.GetRight() - rect.GetRight();
+        const int dy = rectDisplay.GetBottom() - rect.GetBottom();
         rect.Offset(dx < 0 ? dx : 0, dy < 0 ? dy : 0);
     }
 
@@ -467,7 +467,7 @@ bool wxTopLevelWindowBase::Layout()
         if ( child && child->IsShown() )
         {
             // exactly one child - set it's size to fill the whole frame
-            wxSize client_size = DoGetClientSize();
+            const wxSize client_size = DoGetClientSize();
 
             child->SetSize(0, 0, client_size.x, client_size.y);
 

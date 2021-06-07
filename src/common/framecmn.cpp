@@ -206,10 +206,10 @@ wxPoint wxFrameBase::GetClientAreaOrigin() const
     wxPoint pt = wxTopLevelWindow::GetClientAreaOrigin();
 
 #if wxUSE_TOOLBAR && !defined(__WXUNIVERSAL__)
-    wxToolBar *toolbar = GetToolBar();
+    const wxToolBar *toolbar = GetToolBar();
     if ( toolbar && toolbar->IsShown() )
     {
-        wxSize toolbarSize = toolbar->GetSize();
+        const wxSize toolbarSize = toolbar->GetSize();
 
         if ( toolbar->GetWindowStyleFlag() & wxTB_VERTICAL )
         {
@@ -437,7 +437,7 @@ bool wxFrameBase::ShowMenuHelp(int menuId)
 
 void wxFrameBase::SetStatusBar(wxStatusBar *statBar)
 {
-    bool hadBar = m_frameStatusBar != nullptr;
+    const bool hadBar = m_frameStatusBar != nullptr;
     m_frameStatusBar = statBar;
 
     if ( (m_frameStatusBar != nullptr) != hadBar )

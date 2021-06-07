@@ -1086,7 +1086,7 @@ bool wxBMPHandler::LoadDib(wxImage *image, wxInputStream& stream,
     if ( !stream.ReadAll(&aWord, 2) )
         return false;
 
-    int bpp = wxUINT16_SWAP_ON_BE((int)aWord);
+    const int bpp = wxUINT16_SWAP_ON_BE((int)aWord);
     if ( bpp != 1 && bpp != 4 && bpp != 8 && bpp != 16 && bpp != 24 && bpp != 32 )
     {
         if (verbose)
@@ -1106,7 +1106,7 @@ bool wxBMPHandler::LoadDib(wxImage *image, wxInputStream& stream,
             // Still initialize them as some compilers are smart enough to
             // give "use of possibly uninitialized variable" for them (but not
             // smart enough to see that this is not really the case).
-            m_x =
+            m_x = 0;
             m_y = 0;
         }
 
@@ -1283,7 +1283,7 @@ bool wxICOHandler::SaveFile(wxImage *image,
     //     identical, we have all the meat in wxICOHandler and check for
     //     the actual (handler) type when the code has to distinguish between
     //     the two formats
-    int type = (this->GetType() == wxBITMAP_TYPE_CUR) ? 2 : 1;
+    const int type = (this->GetType() == wxBITMAP_TYPE_CUR) ? 2 : 1;
 
     // write a header, (ICONDIR)
     // Calculate the header size

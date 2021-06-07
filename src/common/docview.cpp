@@ -222,7 +222,7 @@ bool wxDocument::DeleteAllViews()
         {
             wxView *view = (wxView *)*m_documentViews.begin();
 
-            bool isLastOne = m_documentViews.size() == 1;
+            const bool isLastOne = m_documentViews.size() == 1;
 
             // this always deletes the node implicitly and if this is the last
             // view also deletes this object itself (also implicitly, great),
@@ -2101,20 +2101,20 @@ bool wxDocPrintout::OnPrintPage(int WXUNUSED(page))
     // but in fact is too small for some reason. This is a detail that will
     // need to be addressed at some point but can be fudged for the
     // moment.
-    double scale = double(ppiPrinterX) / ppiScreenX;
+    const double scale = double(ppiPrinterX) / ppiScreenX;
 
     // Now we have to check in case our real page size is reduced
     // (e.g. because we're drawing to a print preview memory DC)
     int pageWidth, pageHeight;
 
-    int dcWidth = dc->GetSize().x;
+    const int dcWidth = dc->GetSize().x;
 
     GetPageSizePixels(&pageWidth, &pageHeight);
     wxUnusedVar(pageHeight);
 
     // If printer pageWidth == current DC width, then this doesn't
     // change. But w might be the preview bitmap width, so scale down.
-    double overallScale = scale * dcWidth / pageWidth;
+    const double overallScale = scale * dcWidth / pageWidth;
     dc->SetUserScale(overallScale, overallScale);
 
     if (m_printoutView)

@@ -396,7 +396,7 @@ bool wxDragImage::Move(const wxPoint& pt)
         pt2 = m_window->ClientToScreen(pt2);
     }
 
-    bool ret = (ImageList_DragMove( pt2.x, pt2.y ) != 0);
+    const bool ret = (ImageList_DragMove( pt2.x, pt2.y ) != 0);
 
     m_position = pt2;
 
@@ -424,9 +424,7 @@ bool wxDragImage::Hide()
     if (m_window && !m_fullScreen)
         hWnd = (HWND) m_window->GetHWND();
 
-    bool ret = (ImageList_DragLeave( hWnd ) != 0);
-
-    return ret;
+    return (ImageList_DragLeave(hWnd) != 0);
 }
 
 #endif // wxUSE_DRAGIMAGE

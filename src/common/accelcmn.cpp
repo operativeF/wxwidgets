@@ -340,7 +340,7 @@ wxString wxAcceleratorEntry::AsPossiblyLocalizedString(bool localized) const
 {
     wxString text;
 
-    int flags = GetFlags();
+    const int flags = GetFlags();
     if ( flags & wxACCEL_ALT )
         text += PossiblyLocalize(wxTRANSLATE("Alt+"), localized);
     if ( flags & wxACCEL_CTRL )

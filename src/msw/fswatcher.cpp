@@ -315,8 +315,8 @@ void wxIOCPThread::ProcessNativeEvents(std::vector<wxEventProcessingData>& event
         wxLogTrace( wxTRACE_FSWATCHER, "[iocp] %s",
                     FileNotifyInformationToString(e));
 
-        int nativeFlags = e.Action;
-        int flags = Native2WatcherFlags(nativeFlags);
+        const int nativeFlags = e.Action;
+        const int flags = Native2WatcherFlags(nativeFlags);
         if (flags & wxFSW_EVENT_WARNING || flags & wxFSW_EVENT_ERROR)
         {
             wxFileSystemWatcherEvent
@@ -411,7 +411,7 @@ wxFileName wxIOCPThread::GetEventPath(const wxFSWatchEntryMSW& watch,
     if (path.IsDir())
     {
         wxString rel(e.FileName, e.FileNameLength / sizeof(e.FileName[0]));
-        int pathFlags = wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR;
+        const int pathFlags = wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR;
         path = wxFileName(path.GetPath(pathFlags) + rel);
     }
     return path;
@@ -441,7 +441,7 @@ wxMSWFileSystemWatcher::wxMSWFileSystemWatcher(const wxFileName& path,
 bool wxMSWFileSystemWatcher::Init()
 {
     m_service = new wxFSWatcherImplMSW(this);
-    bool ret = m_service->Init();
+    const bool ret = m_service->Init();
     if (!ret)
     {
         delete m_service;

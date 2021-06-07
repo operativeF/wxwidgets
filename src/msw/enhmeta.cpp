@@ -144,7 +144,7 @@ bool wxEnhMetaFile::Play(wxDC *dc, wxRect *rectBound)
     }
     else
     {
-        wxSize size = GetSize();
+        const wxSize size = GetSize();
 
         rect.top =
         rect.left = 0;
@@ -427,7 +427,7 @@ bool wxEnhMetaFileDataObject::GetDataHere(const wxDataFormat& format, void *buf)
         ScreenHDC hdc;
 
         // first get the buffer size and alloc memory
-        size_t size = ::GetWinMetaFileBits(hEMF, 0, nullptr, MM_ANISOTROPIC, hdc);
+        const size_t size = ::GetWinMetaFileBits(hEMF, 0, nullptr, MM_ANISOTROPIC, hdc);
         wxCHECK_MSG( size, false, wxT("GetWinMetaFileBits() failed") );
 
         BYTE *bits = (BYTE *)malloc(size);
@@ -454,7 +454,7 @@ bool wxEnhMetaFileDataObject::GetDataHere(const wxDataFormat& format, void *buf)
 
         METAFILEPICT *mfpict = (METAFILEPICT *)buf;
 
-        wxSize sizeMF = m_metafile.GetSize();
+        const wxSize sizeMF = m_metafile.GetSize();
         mfpict->hMF  = hMF;
         mfpict->mm   = MM_ANISOTROPIC;
         mfpict->xExt = sizeMF.x;

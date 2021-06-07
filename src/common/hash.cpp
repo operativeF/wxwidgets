@@ -152,7 +152,7 @@ void wxHashTableBase::DoPut( long key, long hash, void* data )
 {
     wxASSERT( m_keyType == wxKEY_INTEGER );
 
-    size_t bucket = size_t(hash) % m_size;
+    const size_t bucket = size_t(hash) % m_size;
     Node* node = new wxHashTableBase_Node( key, data, this );
 
     DoInsertNode( bucket, node );
@@ -162,7 +162,7 @@ void wxHashTableBase::DoPut( const wxString& key, long hash, void* data )
 {
     wxASSERT( m_keyType == wxKEY_STRING );
 
-    size_t bucket = size_t(hash) % m_size;
+    const size_t bucket = size_t(hash) % m_size;
     Node* node = new wxHashTableBase_Node( key, data, this );
 
     DoInsertNode( bucket, node );
@@ -172,7 +172,7 @@ void* wxHashTableBase::DoGet( long key, long hash ) const
 {
     wxASSERT( m_keyType == wxKEY_INTEGER );
 
-    size_t bucket = size_t(hash) % m_size;
+    const size_t bucket = size_t(hash) % m_size;
 
     if( m_table[bucket] == nullptr )
         return nullptr;
@@ -196,7 +196,7 @@ void* wxHashTableBase::DoGet( const wxString& key, long hash ) const
 {
     wxASSERT( m_keyType == wxKEY_STRING );
 
-    size_t bucket = size_t(hash) % m_size;
+    const size_t bucket = size_t(hash) % m_size;
 
     if( m_table[bucket] == nullptr )
         return nullptr;

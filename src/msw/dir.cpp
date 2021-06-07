@@ -254,7 +254,7 @@ bool wxDirData::Read(wxString *filename)
 
     if ( !IsFindDataOk(m_finddata) )
     {
-        DWORD err = ::GetLastError();
+        const DWORD err = ::GetLastError();
 
         if ( err != ERROR_FILE_NOT_FOUND && err != ERROR_NO_MORE_FILES )
         {
@@ -279,7 +279,7 @@ bool wxDirData::Read(wxString *filename)
         {
             if ( !FindNext(m_finddata, m_filespec, PTR_TO_FINDDATA) )
             {
-                DWORD err = ::GetLastError();
+                const DWORD err = ::GetLastError();
 
                 if ( err != ERROR_NO_MORE_FILES )
                 {

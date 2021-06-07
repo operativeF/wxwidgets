@@ -927,11 +927,11 @@ bool wxTarInputStream::ReadExtendedHeader(wxTarHeaderRecords*& recs)
 
     // round length up to a whole number of blocks
     size_t len = m_hdr->GetOctal(TAR_SIZE);
-    size_t size = RoundUpSize(len);
+    const size_t size = RoundUpSize(len);
 
     // read in the whole header since it should be small
     wxCharBuffer buf(size);
-    size_t lastread = m_parent_i_stream->Read(buf.data(), size).LastRead();
+    const size_t lastread = m_parent_i_stream->Read(buf.data(), size).LastRead();
     if (lastread < len)
         len = lastread;
     buf.data()[len] = 0;
@@ -1414,8 +1414,8 @@ void wxTarOutputStream::SetHeaderString(int id, const wxString& str)
 void wxTarOutputStream::SetHeaderDate(const wxString& key,
                                       const wxDateTime& datetime)
 {
-    wxLongLong ll = datetime.IsValid() ? datetime.GetValue() : wxLongLong(0);
-    wxLongLong secs = ll / 1000L;
+    const wxLongLong ll = datetime.IsValid() ? datetime.GetValue() : wxLongLong(0);
+    const wxLongLong secs = ll / 1000L;
 
     if (key != wxT("mtime")
         || !m_hdr->SetOctal(TAR_MTIME, wxTarNumber(secs.GetValue()))
@@ -1455,7 +1455,7 @@ void wxTarOutputStream::SetExtendedHeader(const wxString& key,
 
         // reallocate m_extendedHdr if it's not big enough
         if (m_extendedSize < length) {
-            size_t rounded = RoundUpSize(length);
+            const size_t rounded = RoundUpSize(length);
             m_extendedSize <<= 1;
             if (rounded > m_extendedSize)
                 m_extendedSize = rounded;

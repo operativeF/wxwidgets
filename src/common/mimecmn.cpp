@@ -57,7 +57,7 @@
 void
 wxMimeTypeCommands::AddOrReplaceVerb(const wxString& verb, const wxString& cmd)
 {
-    int n = m_verbs.Index(verb, false /* ignore case */);
+    const int n = m_verbs.Index(verb, false /* ignore case */);
     if ( n == wxNOT_FOUND )
     {
         m_verbs.Add(verb);
@@ -118,7 +118,7 @@ void wxFileTypeInfo::DoVarArgInit(const wxString& mimeType,
     #pragma warning(disable: 1684)
 #endif
 
-        wxArgNormalizedString ext(WX_VA_ARG_STRING(argptr));
+        const wxArgNormalizedString ext(WX_VA_ARG_STRING(argptr));
 
 #ifdef __INTELC__
     #pragma warning(pop)
@@ -154,7 +154,7 @@ wxFileTypeInfo::wxFileTypeInfo(const wxArrayString& sArray)
     , m_printCmd(sArray[2u])
     , m_desc(    sArray[3u])
 {
-    size_t count = sArray.GetCount();
+    const size_t count = sArray.GetCount();
     for ( size_t i = 4; i < count; i++ )
     {
         m_exts.Add(sArray[i]);
@@ -632,7 +632,7 @@ wxMimeTypesManager::GetFileTypeFromExtension(const wxString& ext)
         //
         // TODO linear search is potentially slow, perhaps we should use a
         //       sorted array?
-        size_t count = m_fallbacks.GetCount();
+        const size_t count = m_fallbacks.GetCount();
         for ( size_t n = 0; n < count; n++ ) {
             if ( m_fallbacks[n].GetExtensions().Index(ext) != wxNOT_FOUND ) {
                 ft = new wxFileType(m_fallbacks[n]);
@@ -656,7 +656,7 @@ wxMimeTypesManager::GetFileTypeFromMimeType(const wxString& mimeType)
         //
         // TODO linear search is potentially slow, perhaps we should use a
         //      sorted array?
-        size_t count = m_fallbacks.GetCount();
+        const size_t count = m_fallbacks.GetCount();
         for ( size_t n = 0; n < count; n++ ) {
             if ( wxMimeTypesManager::IsOfType(mimeType,
                                               m_fallbacks[n].GetMimeType()) ) {
@@ -684,7 +684,7 @@ size_t wxMimeTypesManager::EnumAllFileTypes(wxArrayString& mimetypes)
     size_t countAll = m_impl->EnumAllFileTypes(mimetypes);
 
     // add the fallback filetypes
-    size_t count = m_fallbacks.GetCount();
+    const size_t count = m_fallbacks.GetCount();
     for ( size_t n = 0; n < count; n++ ) {
         if ( mimetypes.Index(m_fallbacks[n].GetMimeType()) == wxNOT_FOUND ) {
             mimetypes.Add(m_fallbacks[n].GetMimeType());

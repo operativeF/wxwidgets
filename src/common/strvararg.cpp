@@ -376,7 +376,7 @@ private:
         // of "%s" repeated and is expanded to "%ls" on Unix), so we can
         // allocate the buffer now and not worry about running out of space if
         // we over-allocate a bit:
-        size_t fmtLen = wxStrlen(m_fmtOrig);
+        const size_t fmtLen = wxStrlen(m_fmtOrig);
         // worst case is of even length, so there's no rounding error in *3/2:
         m_fmt.extend(fmtLen * 3 / 2);
 
@@ -661,7 +661,7 @@ wxFormatString::ArgumentType DoGetArgumentType(const CharType *format,
     wxCHECK_MSG( format, wxFormatString::Arg_Unknown,
                  "empty format string not allowed here" );
 
-    wxPrintfConvSpecParser<CharType> parser(format);
+    const wxPrintfConvSpecParser<CharType> parser(format);
 
     if ( n > parser.nargs )
     {

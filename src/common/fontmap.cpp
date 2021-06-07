@@ -215,7 +215,7 @@ wxFontMapper::CharsetToEncoding(const wxString& charset, bool interactive)
             parent = wxTheApp->GetTopWindow();
 
         // do ask the user and get back the index in encodings table
-        int n = wxGetSingleChoiceIndex(msg, title,
+        const int n = wxGetSingleChoiceIndex(msg, title,
                                        count,
                                        encodingNamesTranslated,
                                        parent);
@@ -236,7 +236,7 @@ wxFontMapper::CharsetToEncoding(const wxString& charset, bool interactive)
 
             // remember the alt encoding for this charset -- or remember that
             // we don't know it
-            long value = n == -1 ? (long)wxFONTENCODING_UNKNOWN : (long)encoding;
+            const long value = n == -1 ? (long)wxFONTENCODING_UNKNOWN : (long)encoding;
             if ( !config->Write(charset, value) )
             {
                 wxLogError(_("Failed to remember the encoding for the charset '%s'."), charset);
@@ -381,7 +381,7 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
     // now try to map this encoding to a compatible one which we have on this
     // system
     wxFontEncodingArray equiv = wxEncodingConverter::GetAllEquivalents(encoding);
-    size_t count = equiv.GetCount();
+    const size_t count = equiv.GetCount();
     bool foundEquivEncoding = false;
     wxFontEncoding equivEncoding = wxFONTENCODING_SYSTEM;
     if ( count )
@@ -426,7 +426,7 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
 
         // the question is different in 2 cases so the answer has to be
         // interpreted differently as well
-        int answer = foundEquivEncoding ? wxNO : wxYES;
+        const int answer = foundEquivEncoding ? wxNO : wxYES;
 
         if ( wxMessageBox(msg, title,
                           wxICON_QUESTION | wxYES_NO,

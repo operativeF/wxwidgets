@@ -317,7 +317,7 @@ void wxFileHistoryBase::AddFilesToMenu(wxMenu* menu)
 
 void wxFileHistoryBase::RemoveExistingHistory()
 {
-    size_t count = m_fileHistory.GetCount();
+    const size_t count = m_fileHistory.GetCount();
     if ( !count )
         return;
 

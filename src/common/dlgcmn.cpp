@@ -473,13 +473,12 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxWindowModalDialogEvent, wxCommandEvent);
 
 void wxDialogBase::ShowWindowModal ()
 {
-    int retval = ShowModal();
     // wxWindowModalDialogEvent relies on GetReturnCode() returning correct
     // code. Rather than doing it manually in all ShowModal() overrides for
     // native dialogs (and getting accidentally broken again), set it here.
     // The worst that can happen is that it will be set twice to the same
     // value.
-    SetReturnCode(retval);
+    SetReturnCode(ShowModal());
     SendWindowModalDialogEvent ( wxEVT_WINDOW_MODAL_DIALOG_CLOSED  );
 }
 
@@ -577,7 +576,7 @@ bool wxDialogBase::DoLayoutAdaptation()
 bool wxDialogBase::CanDoLayoutAdaptation()
 {
     // Check if local setting overrides the global setting
-    bool layoutEnabled = (GetLayoutAdaptationMode() == wxDialogLayoutAdaptationMode::Enabled) || (IsLayoutAdaptationEnabled() && (GetLayoutAdaptationMode() != wxDialogLayoutAdaptationMode::Disabled));
+    const bool layoutEnabled = (GetLayoutAdaptationMode() == wxDialogLayoutAdaptationMode::Enabled) || (IsLayoutAdaptationEnabled() && (GetLayoutAdaptationMode() != wxDialogLayoutAdaptationMode::Disabled));
 
     return (layoutEnabled && !m_layoutAdaptationDone && GetLayoutAdaptationLevel() != 0 && GetLayoutAdapter() != nullptr && GetLayoutAdapter()->CanDoLayoutAdaptation((wxDialog*) this));
 }
@@ -729,7 +728,7 @@ wxSizer* wxStandardDialogLayoutAdapter::FindButtonSizer(bool stdButtonSizer, wxD
     for ( wxSizerItemList::compatibility_iterator node = sizer->GetChildren().GetFirst();
           node; node = node->GetNext() )
     {
-        wxSizerItem *item = node->GetData();
+        const wxSizerItem *item = node->GetData();
         wxSizer *childSizer = item->GetSizer();
 
         if ( childSizer )
@@ -907,18 +906,19 @@ bool wxStandardDialogLayoutAdapter::DoFitWithScrolling(wxDialog* dialog, wxWindo
     sizer->SetSizeHints(dialog);
 
     wxSize windowSize, displaySize;
-    int scrollFlags = DoMustScroll(dialog, windowSize, displaySize);
+    const int scrollFlags = DoMustScroll(dialog, windowSize, displaySize);
 
     if (scrollFlags)
     {
-        int scrollBarExtraX = 0, scrollBarExtraY = 0;
-        bool resizeHorizontally = (scrollFlags & wxHORIZONTAL) != 0;
-        bool resizeVertically = (scrollFlags & wxVERTICAL) != 0;
+        int scrollBarExtraX = 0;
+        int scrollBarExtraY = 0;
+        const bool resizeHorizontally = (scrollFlags & wxHORIZONTAL) != 0;
+        const bool resizeVertically = (scrollFlags & wxVERTICAL) != 0;
 
         if (windows.GetCount() != 0)
         {
             // Allow extra for a scrollbar, assuming we resizing in one direction only.
-            int scrollBarSize = 20;
+            const int scrollBarSize = 20;
             if ((resizeVertically && !resizeHorizontally) && (windowSize.x < (displaySize.x - scrollBarSize)))
                 scrollBarExtraX = scrollBarSize;
             if ((resizeHorizontally && !resizeVertically) && (windowSize.y < (displaySize.y - scrollBarSize)))

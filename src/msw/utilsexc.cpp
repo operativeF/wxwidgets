@@ -810,7 +810,7 @@ long wxExecute(const wxString& cmd, int flags, wxProcess *handler,
     // Translate wxWidgets priority to Windows conventions.
     if ( handler )
     {
-        unsigned prio = handler->GetPriority();
+        const unsigned prio = handler->GetPriority();
         if ( prio <= 20 )
             dwFlags |= IDLE_PRIORITY_CLASS;
         else if ( prio <= 40 )
@@ -830,7 +830,7 @@ long wxExecute(const wxString& cmd, int flags, wxProcess *handler,
         }
     }
 
-    bool ok = ::CreateProcess
+    const bool ok = ::CreateProcess
                 (
                  nullptr,               // application name (use only cmd line)
                  wxMSW_CONV_LPTSTR(command), // full command line
@@ -1059,7 +1059,7 @@ long wxExecute(const wxString& cmd, int flags, wxProcess *handler,
         traits->AfterChildWaitLoop(cookie);
     }
 
-    DWORD dwExitCode = data->dwExitCode;
+    const DWORD dwExitCode = data->dwExitCode;
     delete data;
 
     // return the exit code

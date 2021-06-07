@@ -706,8 +706,8 @@ bool wxTextAttr::Apply(const wxTextAttr& style, const wxTextAttr* compareWith)
             int destBits = destStyle.GetTextEffects();
             int destFlags = destStyle.GetTextEffectFlags();
 
-            int srcBits = style.GetTextEffects();
-            int srcFlags = style.GetTextEffectFlags();
+            const int srcBits = style.GetTextEffects();
+            const int srcFlags = style.GetTextEffectFlags();
 
             // Reset incompatible bits in the destination
             wxResetIncompatibleBits((wxTEXT_ATTR_EFFECT_SUPERSCRIPT|wxTEXT_ATTR_EFFECT_SUBSCRIPT), srcFlags, destFlags, destBits);
@@ -803,13 +803,13 @@ bool wxTextAttr::TabsEq(const std::vector<int>& tabs1, const std::vector<int>& t
 bool wxTextAttr::RemoveStyle(wxTextAttr& destStyle, const wxTextAttr& style)
 {
     int flags = style.GetFlags();
-    int destFlags = destStyle.GetFlags();
+    const int destFlags = destStyle.GetFlags();
 
     // We must treat text effects specially, since we must remove only some.
     if (style.HasTextEffects() && (style.GetTextEffectFlags() != 0))
     {
-        int newTextEffectFlags = destStyle.GetTextEffectFlags() & ~style.GetTextEffectFlags();
-        int newTextEffects = destStyle.GetTextEffects() & ~style.GetTextEffectFlags();
+        const int newTextEffectFlags = destStyle.GetTextEffectFlags() & ~style.GetTextEffectFlags();
+        const int newTextEffects = destStyle.GetTextEffects() & ~style.GetTextEffectFlags();
         destStyle.SetTextEffects(newTextEffects);
         destStyle.SetTextEffectFlags(newTextEffectFlags);
 
@@ -832,10 +832,10 @@ bool wxTextAttr::CombineBitlists(int& valueA, int valueB, int& flagsA, int flags
 
     // First, reset the 0 bits from B. We make a mask so we're only dealing with B's zero
     // bits at this point, ignoring any 1 bits in B or 0 bits in B that are not relevant.
-    int valueA2 = ~(~valueB & flagsB) & valueA;
+    const int valueA2 = ~(~valueB & flagsB) & valueA;
 
     // Now combine the 1 bits.
-    int valueA3 = (valueB & flagsB) | valueA2;
+    const int valueA3 = (valueB & flagsB) | valueA2;
 
     valueA = valueA3;
     flagsA = (flagsA | flagsB);
@@ -846,9 +846,7 @@ bool wxTextAttr::CombineBitlists(int& valueA, int valueB, int& flagsA, int flags
 /// Compare two bitlists
 bool wxTextAttr::BitlistsEqPartial(int valueA, int valueB, int flags)
 {
-    int relevantBitsA = valueA & flags;
-    int relevantBitsB = valueB & flags;
-    return relevantBitsA == relevantBitsB;
+    return (valueA & flags) == (valueB & flags);
 }
 
 /// Split into paragraph and character styles

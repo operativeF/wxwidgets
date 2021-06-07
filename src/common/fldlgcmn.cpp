@@ -129,7 +129,7 @@ wxString wxFileDialogBase::AppendExtension(const wxString &filePath,
     wxString fileName = filePath.AfterLast(wxFILE_SEP_PATH);
 
     // if fileName is of form "foo.bar" it's ok, return it
-    int idx_dot = fileName.Find(wxT('.'), true);
+    const int idx_dot = fileName.Find(wxT('.'), true);
     if ((idx_dot != wxNOT_FOUND) && (idx_dot < (int)fileName.length() - 1))
         return filePath;
 
@@ -137,7 +137,7 @@ wxString wxFileDialogBase::AppendExtension(const wxString &filePath,
     wxString ext = extensionList.BeforeFirst(wxT(';'));
 
     // if ext == "foo" or "foo." there's no extension
-    int idx_ext_dot = ext.Find(wxT('.'), true);
+    const int idx_ext_dot = ext.Find(wxT('.'), true);
     if ((idx_ext_dot == wxNOT_FOUND) || (idx_ext_dot == (int)ext.length() - 1))
         return filePath;
     else

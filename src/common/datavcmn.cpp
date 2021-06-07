@@ -349,14 +349,14 @@ int wxDataViewModel::Compare( const wxDataViewItem &item1, const wxDataViewItem 
     {
         wxString str1 = value1.GetString();
         wxString str2 = value2.GetString();
-        int res = str1.Cmp( str2 );
+        const int res = str1.Cmp( str2 );
         if (res)
             return res;
     }
     else if (value1.GetType() == wxT("long"))
     {
-        long l1 = value1.GetLong();
-        long l2 = value2.GetLong();
+        const long l1 = value1.GetLong();
+        const long l2 = value2.GetLong();
         if (l1 < l2)
             return -1;
         else if (l1 > l2)
@@ -364,8 +364,8 @@ int wxDataViewModel::Compare( const wxDataViewItem &item1, const wxDataViewItem 
     }
     else if (value1.GetType() == wxT("double"))
     {
-        double d1 = value1.GetDouble();
-        double d2 = value2.GetDouble();
+        const double d1 = value1.GetDouble();
+        const double d2 = value2.GetDouble();
         if (d1 < d2)
             return -1;
         else if (d1 > d2)
@@ -374,8 +374,8 @@ int wxDataViewModel::Compare( const wxDataViewItem &item1, const wxDataViewItem 
 #if wxUSE_DATETIME
     else if (value1.GetType() == wxT("datetime"))
     {
-        wxDateTime dt1 = value1.GetDateTime();
-        wxDateTime dt2 = value2.GetDateTime();
+        const wxDateTime dt1 = value1.GetDateTime();
+        const wxDateTime dt2 = value2.GetDateTime();
         if (dt1.IsEarlierThan(dt2))
             return -1;
         if (dt2.IsEarlierThan(dt1))
@@ -384,8 +384,8 @@ int wxDataViewModel::Compare( const wxDataViewItem &item1, const wxDataViewItem 
 #endif // wxUSE_DATETIME
     else if (value1.GetType() == wxT("bool"))
     {
-        bool b1 = value1.GetBool();
-        bool b2 = value2.GetBool();
+        const bool b1 = value1.GetBool();
+        const bool b2 = value2.GetBool();
 
         if (b1 != b2)
             return b1 ? 1 : -1;
@@ -403,15 +403,15 @@ int wxDataViewModel::Compare( const wxDataViewItem &item1, const wxDataViewItem 
     }
     else
     {
-        int res = DoCompareValues(value1, value2);
+        const int res = DoCompareValues(value1, value2);
         if (res != 0)
             return res;
     }
 
 
     // items must be different
-    wxUIntPtr id1 = wxPtrToUInt(item1.GetID()),
-              id2 = wxPtrToUInt(item2.GetID());
+    const wxUIntPtr id1 = wxPtrToUInt(item1.GetID());
+    const wxUIntPtr id2 = wxPtrToUInt(item2.GetID());
 
     return ascending ? id1 - id2 : id2 - id1;
 }
@@ -461,10 +461,10 @@ void wxDataViewIndexListModel::RowPrepended()
 {
     m_ordered = false;
 
-    unsigned int id = m_nextFreeID;
+    const unsigned int id = m_nextFreeID;
     m_nextFreeID++;
 
-    wxDataViewItem item( wxUIntToPtr(id) );
+    const wxDataViewItem item( wxUIntToPtr(id) );
     m_hash.Insert( item, 0 );
     ItemAdded( wxDataViewItem(nullptr), item );
 
@@ -474,20 +474,20 @@ void wxDataViewIndexListModel::RowInserted( unsigned int before )
 {
     m_ordered = false;
 
-    unsigned int id = m_nextFreeID;
+    const unsigned int id = m_nextFreeID;
     m_nextFreeID++;
 
-    wxDataViewItem item( wxUIntToPtr(id) );
+    const wxDataViewItem item( wxUIntToPtr(id) );
     m_hash.Insert( item, before );
     ItemAdded( wxDataViewItem(nullptr), item );
 }
 
 void wxDataViewIndexListModel::RowAppended()
 {
-    unsigned int id = m_nextFreeID;
+    const unsigned int id = m_nextFreeID;
     m_nextFreeID++;
 
-    wxDataViewItem item( wxUIntToPtr(id) );
+    const wxDataViewItem item( wxUIntToPtr(id) );
     m_hash.Add( item );
     ItemAdded( wxDataViewItem(nullptr), item );
 }
@@ -496,7 +496,7 @@ void wxDataViewIndexListModel::RowDeleted( unsigned int row )
 {
     m_ordered = false;
 
-    wxDataViewItem item( m_hash[row] );
+    const wxDataViewItem item( m_hash[row] );
     m_hash.RemoveAt( row );
     /* wxDataViewModel:: */ ItemDeleted( wxDataViewItem(nullptr), item );
 }
@@ -506,10 +506,9 @@ void wxDataViewIndexListModel::RowsDeleted( const std::vector<int> &rows )
     m_ordered = false;
 
     wxDataViewItemArray array;
-    unsigned int i;
-    for (i = 0; i < rows.size(); i++)
+    for (int i = 0; i < rows.size(); i++)
     {
-            wxDataViewItem item( m_hash[rows[i]] );
+            const wxDataViewItem item( m_hash[rows[i]] );
             array.Add( item );
     }
 
@@ -517,7 +516,7 @@ void wxDataViewIndexListModel::RowsDeleted( const std::vector<int> &rows )
 
     std::sort(sorted.begin(), sorted.end());
 
-    for (i = 0; i < sorted.size(); i++)
+    for (int i = 0; i < sorted.size(); i++)
            m_hash.RemoveAt( sorted[i] );
 
     /* wxDataViewModel:: */ ItemsDeleted( wxDataViewItem(nullptr), array );
@@ -653,8 +652,8 @@ int wxDataViewVirtualListModel::Compare(const wxDataViewItem& item1,
                                       unsigned int WXUNUSED(column),
                                       bool ascending) const
 {
-    unsigned int pos1 = wxPtrToUInt(item1.GetID());  // -1 not needed here
-    unsigned int pos2 = wxPtrToUInt(item2.GetID());  // -1 not needed here
+    const unsigned int pos1 = wxPtrToUInt(item1.GetID());  // -1 not needed here
+    const unsigned int pos2 = wxPtrToUInt(item2.GetID());  // -1 not needed here
 
     if (ascending)
        return pos1 - pos2;

@@ -218,7 +218,7 @@ public:
     virtual void CalcBoundingBox(wxCoord x, wxCoord y)
     {
       // Bounding box is internally stored in device units.
-      wxPoint ptDev = LogicalToDevice(x, y);
+      const wxPoint ptDev = LogicalToDevice(x, y);
       x = ptDev.x;
       y = ptDev.y;
       if ( m_isBBoxValid )
@@ -536,7 +536,7 @@ public:
     // wxPrinterDC Impl API
 
     virtual wxRect GetPaperRect() const
-        { wxSize sz = DoGetSize(); return wxRect(0,0, sz.x, sz.y); }
+        { const wxSize sz = DoGetSize(); return wxRect(0,0, sz.x, sz.y); }
 
     virtual int GetResolution() const
         { return -1; }

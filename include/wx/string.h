@@ -3940,7 +3940,7 @@ public:
         wxCHECK_RET(m_lenSet, "length not set");
 
         wxMBConvStrictUTF8 conv;
-        size_t wlen = conv.ToWChar(nullptr, 0, m_buf, m_len);
+        const size_t wlen = conv.ToWChar(nullptr, 0, m_buf, m_len);
         wxCHECK_RET( wlen != wxCONV_FAILED, "invalid UTF-8 data in string buffer?" );
 
         wxStringInternalBufferLength wbuf(m_str, wlen);

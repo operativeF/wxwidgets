@@ -5853,7 +5853,7 @@ void wxDataViewCtrl::DoSetExpanderColumn()
     wxDataViewColumn* column = GetExpanderColumn();
     if ( column )
     {
-        int index = GetColumnIndex(column);
+        const int index = GetColumnIndex(column);
         if ( index != wxNOT_FOUND )
             InvalidateColBestWidth(index);
     }
@@ -6244,7 +6244,7 @@ void wxDataViewCtrl::Select( const wxDataViewItem & item )
 {
     ExpandAncestors( item );
 
-    int row = m_clientArea->GetRowByItem( item );
+    const int row = m_clientArea->GetRowByItem( item );
     if( row >= 0 )
     {
         // Unselect all rows before select another in the single select mode

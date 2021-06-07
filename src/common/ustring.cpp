@@ -75,7 +75,7 @@ wxUString &wxUString::assignFromUTF8( const char *str )
     while (*p)
     {
         unsigned char c = *p;
-        size_type len = tableUtf8Lengths[c];
+        const size_type len = tableUtf8Lengths[c];
         if (!len)
            return assign( wxUString() );  // don't try to convert invalid UTF-8
         ucs4_len++;
@@ -157,7 +157,7 @@ wxUString &wxUString::assignFromUTF8( const char *str, size_type n )
     const char *p = str;
     while (*p)
     {
-        unsigned char c = *p;
+        const unsigned char c = *p;
         size_type len = tableUtf8Lengths[c];
         if (!len)
            return assign( wxUString() );  // don't try to convert invalid UTF-8
@@ -460,7 +460,7 @@ wxScopedU16CharBuffer wxUString::utf16_str() const
 
     while (*ptr)
     {
-        wxChar32 code = *ptr;
+        const wxChar32 code = *ptr;
         ptr++;
 
         // TODO: error range checks
@@ -478,7 +478,7 @@ wxScopedU16CharBuffer wxUString::utf16_str() const
 
     while (*ptr)
     {
-        wxChar32 code = *ptr;
+        const wxChar32 code = *ptr;
         ptr++;
 
         // TODO: error range checks

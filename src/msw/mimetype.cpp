@@ -104,7 +104,7 @@ static bool CanonicalizeParams(wxString& command)
     //     doesn't contain %2, or second %1 or .... But we do make sure that we
     //     return a string with _exactly_ one '%s'!
     bool foundFilename = false;
-    size_t len = command.length();
+    const size_t len = command.length();
     for ( size_t n = 0; (n < len) && !foundFilename; n++ )
     {
         if ( command[n] == wxT('%') &&
@@ -297,7 +297,7 @@ wxString wxAssocQueryString(ASSOCSTR assoc,
 wxString wxFileTypeImpl::GetCommand(const wxString& verb) const
 {
     wxString command = wxAssocQueryString(ASSOCSTR_COMMAND, m_ext, verb);
-    bool foundFilename = CanonicalizeParams(command);
+    const bool foundFilename = CanonicalizeParams(command);
 
 #if wxUSE_IPC
     wxString ddeCommand = wxAssocQueryString(ASSOCSTR_DDECOMMAND, m_ext);
@@ -783,7 +783,7 @@ bool wxFileTypeImpl::RemoveCommand(const wxString& verb)
     wxRegKey rkey(wxRegKey::HKCU, CLASSES_ROOT_KEY + GetVerbPath(verb));
 
     // if the key already doesn't exist, it's a success
-    bool result = !rkey.Exists() || rkey.DeleteSelf();
+    const bool result = !rkey.Exists() || rkey.DeleteSelf();
 
     if ( result )
         MSWNotifyShell();
@@ -806,7 +806,7 @@ bool wxFileTypeImpl::RemoveDefaultIcon()
 
     wxRegKey rkey (wxRegKey::HKCU,
                    CLASSES_ROOT_KEY + m_strFileType  + wxT("\\DefaultIcon"));
-    bool result = !rkey.Exists() || rkey.DeleteSelf();
+    const bool result = !rkey.Exists() || rkey.DeleteSelf();
 
     if ( result )
         MSWNotifyShell();

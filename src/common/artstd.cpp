@@ -213,11 +213,11 @@ wxBitmap wxDefaultArtProvider::CreateBitmap(const wxArtID& id,
         if (reqSize == wxDefaultSize)
         {
             // find out if there is a desired size for this client
-            wxSize bestSize = GetSizeHint(client);
+            const wxSize bestSize = GetSizeHint(client);
             if (bestSize != wxDefaultSize)
             {
-                int bmp_w = bmp.GetWidth();
-                int bmp_h = bmp.GetHeight();
+                const int bmp_w = bmp.GetWidth();
+                const int bmp_h = bmp.GetHeight();
 
                 if (bmp_w == 16 && bmp_h == 15 && bestSize == wxSize(16, 16))
                 {
@@ -229,7 +229,7 @@ wxBitmap wxDefaultArtProvider::CreateBitmap(const wxArtID& id,
                     // the caller wants default size, which is larger than
                     // the image we have; to avoid degrading it visually by
                     // scaling it up, paste it into transparent image instead:
-                    wxPoint offset((bestSize.x - bmp_w)/2, (bestSize.y - bmp_h)/2);
+                    const wxPoint offset((bestSize.x - bmp_w)/2, (bestSize.y - bmp_h)/2);
                     wxImage img = bmp.ConvertToImage();
                     img.Resize(bestSize, offset);
                     bmp = wxBitmap(img);

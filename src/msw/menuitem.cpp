@@ -246,7 +246,7 @@ public:
         }
 
     #if wxUSE_UXTHEME
-        bool theme = MenuLayout() == FullTheme;
+        const bool theme = MenuLayout() == FullTheme;
         if ( ms_instance->Theme != theme )
         {
             ms_instance->Init(window);
@@ -385,7 +385,7 @@ void MenuDrawData::Init(wxWindow const* window)
         ArrowSize = CheckSize;
 
         // separator height with margins
-        int sepFullSize = metrics.iMenuHeight / 2;
+        const int sepFullSize = metrics.iMenuHeight / 2;
 
         SeparatorMargin.cxLeftWidth =
         SeparatorMargin.cxRightWidth = 1;
@@ -1192,8 +1192,8 @@ void wxMenuItem::DrawStdCheckMark(WXHDC hdc_, const RECT* rc, wxODStatus stat)
     else
 #endif // wxUSE_UXTHEME
     {
-        int cx = rc->right - rc->left;
-        int cy = rc->bottom - rc->top;
+        const int cx = rc->right - rc->left;
+        const int cy = rc->bottom - rc->top;
 
         // first create mask of check mark
         MemoryHDC hdcMask(hdc);
@@ -1201,7 +1201,7 @@ void wxMenuItem::DrawStdCheckMark(WXHDC hdc_, const RECT* rc, wxODStatus stat)
         SelectInHDC selMask(hdcMask,hbmpMask);
 
         // then draw a check mark into it
-        UINT stateCheck = (GetKind() == wxITEM_CHECK) ? DFCS_MENUCHECK
+        const UINT stateCheck = (GetKind() == wxITEM_CHECK) ? DFCS_MENUCHECK
                                                       : DFCS_MENUBULLET;
         RECT rect = { 0, 0, cx, cy };
         ::DrawFrameControl(hdcMask, &rect, DFC_MENU, stateCheck);
@@ -1323,8 +1323,7 @@ HBITMAP wxMenuItem::GetHBitmapForMenu(BitmapKind kind) const
 #if wxUSE_IMAGE
     if ( wxGetWinVersion() >= wxWinVersion_Vista )
     {
-        bool checked = (kind != Unchecked);
-        wxBitmap bmp = GetBitmap(checked);
+        wxBitmap bmp = GetBitmap(kind != Unchecked);
         if ( bmp.IsOk() )
         {
             return GetHbitmapOf(bmp);

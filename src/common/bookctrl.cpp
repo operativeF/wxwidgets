@@ -191,10 +191,10 @@ void wxBookCtrlBase::DoSize()
 
         m_bookctrl->SetClientSize( sizeCtrl.x - sizeBorder.x, sizeCtrl.y - sizeBorder.y );
         // if this changes the visibility of the scrollbars the best size changes, relayout in this case
-        wxSize sizeCtrl2 = GetControllerSize();
+        const wxSize sizeCtrl2 = GetControllerSize();
         if ( sizeCtrl != sizeCtrl2 )
         {
-            wxSize sizeBorder2 = m_bookctrl->GetSize() - m_bookctrl->GetClientSize();
+            const wxSize sizeBorder2 = m_bookctrl->GetSize() - m_bookctrl->GetClientSize();
             m_bookctrl->SetClientSize( sizeCtrl2.x - sizeBorder2.x, sizeCtrl2.y - sizeBorder2.y );
         }
 
@@ -392,7 +392,7 @@ int wxBookCtrlBase::GetNextPage(bool forward) const
     int nMax = GetPageCount();
     if ( nMax-- ) // decrement it to get the last valid index
     {
-        int nSel = GetSelection();
+        const int nSel = GetSelection();
 
         // change selection wrapping if it becomes invalid
         nPage = forward ? nSel == nMax ? 0

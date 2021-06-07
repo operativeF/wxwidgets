@@ -1483,7 +1483,7 @@ wxDateTime::Tm wxDateTime::GetTm(const TimeZone& tz) const
 {
     wxASSERT_MSG( IsValid(), wxT("invalid wxDateTime") );
 
-    time_t time = GetTicks();
+    const time_t time = GetTicks();
     if ( time != (time_t)-1 )
     {
         // Try to use the RTL.
@@ -1492,7 +1492,7 @@ wxDateTime::Tm wxDateTime::GetTm(const TimeZone& tz) const
         {
             // adjust the milliseconds
             Tm tm2(*tm, tz);
-            long timeOnly = (m_time % MILLISECONDS_PER_DAY).ToLong();
+            const long timeOnly = (m_time % MILLISECONDS_PER_DAY).ToLong();
             tm2.msec = (wxDateTime_t)(timeOnly % 1000);
             return tm2;
         }
@@ -1537,17 +1537,17 @@ wxDateTime::Tm wxDateTime::GetTm(const TimeZone& tz) const
 
     // calculate the century
     long temp = (jdn + JDN_OFFSET) * 4 - 1;
-    long century = temp / DAYS_PER_400_YEARS;
+    const long century = temp / DAYS_PER_400_YEARS;
 
     // then the year and day of year (1 <= dayOfYear <= 366)
     temp = ((temp % DAYS_PER_400_YEARS) / 4) * 4 + 3;
     long year = (century * 100) + (temp / DAYS_PER_4_YEARS);
-    long dayOfYear = (temp % DAYS_PER_4_YEARS) / 4 + 1;
+    const long dayOfYear = (temp % DAYS_PER_4_YEARS) / 4 + 1;
 
     // and finally the month and day of the month
     temp = dayOfYear * 5 - 3;
     long month = temp / DAYS_PER_5_MONTHS;
-    long day = (temp % DAYS_PER_5_MONTHS) / 5 + 1;
+    const long day = (temp % DAYS_PER_5_MONTHS) / 5 + 1;
 
     // month is counted from March - convert to normal
     if ( month < 10 )
@@ -1741,7 +1741,7 @@ wxDateSpan wxDateTime::DiffAsDateSpan(const wxDateTime& dt) const
         m -= inv;
     }
 
-    int w =  d / DAYS_PER_WEEK;
+    const int w =  d / DAYS_PER_WEEK;
 
     // Remove weeks from d, since wxDateSpan only keep days as the ones
     // not in complete weeks
@@ -1829,7 +1829,7 @@ wxDateTime& wxDateTime::SetToNextWeekDay(WeekDay weekday)
     wxDATETIME_CHECK( weekday != Inv_WeekDay, wxT("invalid weekday") );
 
     int diff;
-    WeekDay wdayThis = GetWeekDay();
+    const WeekDay wdayThis = GetWeekDay();
     if ( weekday == wdayThis )
     {
         // nothing to do
@@ -1853,7 +1853,7 @@ wxDateTime& wxDateTime::SetToPrevWeekDay(WeekDay weekday)
     wxDATETIME_CHECK( weekday != Inv_WeekDay, wxT("invalid weekday") );
 
     int diff;
-    WeekDay wdayThis = GetWeekDay();
+    const WeekDay wdayThis = GetWeekDay();
     if ( weekday == wdayThis )
     {
         // nothing to do
@@ -1895,7 +1895,7 @@ bool wxDateTime::SetToWeekDay(WeekDay weekday,
         dt.Set(1, month, year);
 
         // get its wday
-        WeekDay wdayFirst = dt.GetWeekDay();
+        const WeekDay wdayFirst = dt.GetWeekDay();
 
         // go to the first weekday of the month
         int diff = weekday - wdayFirst;
@@ -1913,7 +1913,7 @@ bool wxDateTime::SetToWeekDay(WeekDay weekday,
         dt.SetToLastMonthDay(month, year);
 
         // get its wday
-        WeekDay wdayLast = dt.GetWeekDay();
+        const WeekDay wdayLast = dt.GetWeekDay();
 
         // go to the last weekday of the month
         int diff = wdayLast - weekday;
@@ -1956,10 +1956,10 @@ wxDateTime::GetWeekOfYear(wxDateTime::WeekFlags flags, const TimeZone& tz) const
 {
     UseEffectiveWeekDayFlags(flags);
 
-    Tm tm(GetTm(tz));
+    const Tm tm(GetTm(tz));
     wxDateTime_t nDayInYear = GetDayOfYearFromTm(tm);
 
-    int wdTarget = GetWeekDay(tz);
+    const int wdTarget = GetWeekDay(tz);
     int wdYearStart = wxDateTime(1, Jan, GetYear()).GetWeekDay();
     int week;
     if ( flags == Sunday_First )
@@ -1988,7 +1988,7 @@ wxDateTime::GetWeekOfYear(wxDateTime::WeekFlags flags, const TimeZone& tz) const
         //
 
         // if Jan 1 is Thursday or less, it is in the first week of this year
-        int dayCountFix = wdYearStart < 4 ? 6 : -1;
+        const int dayCountFix = wdYearStart < 4 ? 6 : -1;
 
         // count the number of week
         week = (nDayInYear + wdYearStart + dayCountFix) / DAYS_PER_WEEK;
@@ -2000,7 +2000,7 @@ wxDateTime::GetWeekOfYear(wxDateTime::WeekFlags flags, const TimeZone& tz) const
         }
         else if ( week == 53 )
         {
-            int wdYearEnd = (wdYearStart + 364 + IsLeapYear(GetYear()))
+            const int wdYearEnd = (wdYearStart + 364 + IsLeapYear(GetYear()))
                                 % DAYS_PER_WEEK;
 
             // Week 53 only if last day of year is Thursday or later.
@@ -2037,7 +2037,7 @@ int wxDateTime::GetWeekBasedYear(const TimeZone& tz) const
 wxDateTime::wxDateTime_t wxDateTime::GetWeekOfMonth(wxDateTime::WeekFlags flags,
                                                     const TimeZone& tz) const
 {
-    Tm tm = GetTm(tz);
+    const Tm tm = GetTm(tz);
     const wxDateTime dateFirst = wxDateTime(1, tm.mon, tm.year);
     const wxDateTime::WeekDay wdFirst = dateFirst.GetWeekDay();
 
@@ -2055,11 +2055,11 @@ wxDateTime::wxDateTime_t wxDateTime::GetWeekOfMonth(wxDateTime::WeekFlags flags,
 
 wxDateTime& wxDateTime::SetToYearDay(wxDateTime::wxDateTime_t yday)
 {
-    int year = GetYear();
+    const int year = GetYear();
     wxDATETIME_CHECK( (0 < yday) && (yday <= GetNumberOfDays(year)),
                       wxT("invalid year day") );
 
-    bool isLeap = IsLeapYear(year);
+    const bool isLeap = IsLeapYear(year);
     for ( Month mon = Jan; mon < Inv_Month; wxNextMonth(mon) )
     {
         // for Dec, we can't compare with gs_cumulatedDays[mon + 1], but we
@@ -2101,11 +2101,11 @@ int wxDateTime::IsDST(wxDateTime::Country country) const
                  wxT("country support not implemented") );
 
     // use the C RTL for the dates in the standard range
-    time_t timet = GetTicks();
+    const time_t timet = GetTicks();
     if ( timet != (time_t)-1 )
     {
         struct tm tmstruct;
-        tm *tm = wxLocaltime_r(&timet, &tmstruct);
+        const tm *tm = wxLocaltime_r(&timet, &tmstruct);
 
         wxCHECK_MSG( tm, -1, wxT("wxLocaltime_r() failed") );
 
@@ -2113,7 +2113,7 @@ int wxDateTime::IsDST(wxDateTime::Country country) const
     }
     else
     {
-        int year = GetYear();
+        const int year = GetYear();
 
         country = GetCountry();
         switch ( country )
@@ -2193,8 +2193,8 @@ WX_DEFINE_OBJARRAY(wxDateTimeArray)
 static int wxCMPFUNC_CONV
 wxDateTimeCompareFunc(wxDateTime **first, wxDateTime **second)
 {
-    wxDateTime dt1 = **first,
-               dt2 = **second;
+    const wxDateTime dt1 = **first;
+    const wxDateTime dt2 = **second;
 
     return dt1 == dt2 ? 0 : dt1 < dt2 ? -1 : +1;
 }
@@ -2208,7 +2208,7 @@ wxHolidayAuthoritiesArray wxDateTimeHolidayAuthority::ms_authorities;
 /* static */
 bool wxDateTimeHolidayAuthority::IsHoliday(const wxDateTime& dt)
 {
-    size_t count = ms_authorities.size();
+    const size_t count = ms_authorities.size();
     for ( size_t n = 0; n < count; n++ )
     {
         if ( ms_authorities[n]->DoIsHoliday(dt) )
@@ -2266,7 +2266,7 @@ wxDateTimeHolidayAuthority::~wxDateTimeHolidayAuthority()
 
 bool wxDateTimeWorkDays::DoIsHoliday(const wxDateTime& dt) const
 {
-    wxDateTime::WeekDay wd = dt.GetWeekDay();
+    const wxDateTime::WeekDay wd = dt.GetWeekDay();
 
     return (wd == wxDateTime::Sun) || (wd == wxDateTime::Sat);
 }

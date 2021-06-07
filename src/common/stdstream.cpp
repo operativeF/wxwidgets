@@ -87,7 +87,7 @@ wxStdInputStreamBuffer::seekoff(std::streamoff off,
     if ( !(which & std::ios_base::in) )
         return -1;
 
-    off_t newPos = m_stream.SeekI((off_t) off, seekMode);
+    const off_t newPos = m_stream.SeekI((off_t) off, seekMode);
 
     if ( newPos != wxInvalidOffset )
         return (std::streampos) newPos;
@@ -102,7 +102,7 @@ wxStdInputStreamBuffer::seekpos(std::streampos sp,
     if ( !(which & std::ios_base::in) )
         return -1;
 
-    off_t newPos = m_stream.SeekI((off_t) sp);
+    const off_t newPos = m_stream.SeekI((off_t) sp);
 
     if ( newPos != wxInvalidOffset )
         return (std::streampos) newPos;
@@ -151,7 +151,7 @@ wxStdInputStreamBuffer::underflow()
 int
 wxStdInputStreamBuffer::uflow()
 {
-    int ch = m_stream.GetC();
+    const int ch = m_stream.GetC();
 
     if ( m_stream.LastRead() == 1 )
     {
@@ -207,7 +207,7 @@ wxStdOutputStreamBuffer::seekoff(std::streamoff off,
     if ( !(which & std::ios_base::out) )
         return -1;
 
-    off_t newPos = m_stream.SeekO((off_t) off, seekMode);
+    const off_t newPos = m_stream.SeekO((off_t) off, seekMode);
 
     if ( newPos != wxInvalidOffset )
         return (std::streampos) newPos;

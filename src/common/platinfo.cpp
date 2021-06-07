@@ -340,7 +340,7 @@ wxPortId wxPlatformInfo::GetPortId(const wxString &str)
     // recognize both short and long port names
     for ( size_t i = 0; i < WXSIZEOF(wxPortIdNames); i++ )
     {
-        wxPortId current = (wxPortId)(1 << i);
+        const wxPortId current = (wxPortId)(1 << i);
 
         if ( wxString(wxPortIdNames[i]).CmpNoCase(str) == 0 ||
              GetPortIdShortName(current, true).CmpNoCase(str) == 0 ||

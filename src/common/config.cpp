@@ -162,7 +162,7 @@ IMPLEMENT_READ_FOR_TYPE(Bool, bool, bool, bool)
 bool wxConfigBase::Read(const wxString& key, int *pi) const
 {
     long l = *pi;
-    bool r = Read(key, &l);
+    const bool r = Read(key, &l);
     wxASSERT_MSG( l < INT_MAX, wxT("int overflow in wxConfig::Read") );
     *pi = (int)l;
     return r;
@@ -171,7 +171,7 @@ bool wxConfigBase::Read(const wxString& key, int *pi) const
 bool wxConfigBase::Read(const wxString& key, int *pi, int defVal) const
 {
     long l = *pi;
-    bool r = Read(key, &l, defVal);
+    const bool r = Read(key, &l, defVal);
     wxASSERT_MSG( l < INT_MAX, wxT("int overflow in wxConfig::Read") );
     *pi = (int)l;
     return r;

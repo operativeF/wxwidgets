@@ -510,7 +510,7 @@ bool wxAppConsoleBase::HasPendingEvents() const
 {
     wxENTER_CRIT_SECT(const_cast<wxAppConsoleBase*>(this)->m_handlersWithPendingEventsLocker);
 
-    bool has = !m_handlersWithPendingEvents.IsEmpty();
+    const bool has = !m_handlersWithPendingEvents.IsEmpty();
 
     wxLEAVE_CRIT_SECT(const_cast<wxAppConsoleBase*>(this)->m_handlersWithPendingEventsLocker);
 
@@ -648,7 +648,7 @@ void wxAppConsoleBase::CallEventHandler(wxEvtHandler *handler,
 {
     // If the functor holds a method then, for backward compatibility, call
     // HandleEvent():
-    wxEventFunction eventFunction = functor.GetEvtMethod();
+    const wxEventFunction eventFunction = functor.GetEvtMethod();
 
     if ( eventFunction )
         HandleEvent(handler, eventFunction, event);

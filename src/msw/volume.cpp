@@ -192,7 +192,7 @@ static bool FilteredAdd(wxArrayString& list, const wxChar* filename,
                         unsigned flagsSet, unsigned flagsUnset)
 {
     bool accept = true;
-    unsigned flags = GetBasicFlags(filename);
+    const unsigned flags = GetBasicFlags(filename);
 
     if (flagsSet & wxFS_VOL_MOUNTED && !(flags & wxFS_VOL_MOUNTED))
         accept = false;
@@ -505,7 +505,7 @@ bool wxFSVolumeBase::Create(const wxString& name)
 
     // Display name.
     SHFILEINFO fi;
-    long rc = SHGetFileInfo(m_volName.t_str(), 0, &fi, sizeof(fi), SHGFI_DISPLAYNAME);
+    const long rc = SHGetFileInfo(m_volName.t_str(), 0, &fi, sizeof(fi), SHGFI_DISPLAYNAME);
     if (!rc)
     {
         wxLogError(_("Cannot read typename from '%s'!"), m_volName.c_str());

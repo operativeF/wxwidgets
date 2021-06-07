@@ -63,14 +63,14 @@ void wxSettableHeaderColumn::ChangeFlag(int flag, bool set)
 
 void wxSettableHeaderColumn::SetFlag(int flag)
 {
-    int flags = GetFlags();
+    const int flags = GetFlags();
     if ( !(flags & flag) )
         SetFlags(flags | flag);
 }
 
 void wxSettableHeaderColumn::ClearFlag(int flag)
 {
-    int flags = GetFlags();
+    const int flags = GetFlags();
     if ( flags & flag )
         SetFlags(flags & ~flag);
 }

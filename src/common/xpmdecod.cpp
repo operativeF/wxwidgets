@@ -169,7 +169,7 @@ wxImage wxXPMDecoder::ReadFile(wxInputStream& stream)
         }
 
         // memmove allows overlaps (unlike strcpy):
-        size_t cpylen = strlen(q + 2) + 1;
+        const size_t cpylen = strlen(q + 2) + 1;
         memmove(p, q + 2, cpylen);
     }
 
@@ -527,10 +527,10 @@ static bool GetRGBFromName(const char *inname, bool *isNone,
     char *grey, *p;
 
     // Neither #rrggbb nor #rrrrggggbbbb are in database, we parse them directly
-    size_t inname_len = strlen(inname);
+    const size_t inname_len = strlen(inname);
     if ( *inname == '#' && (inname_len == 7 || inname_len == 13))
     {
-        size_t ofs = (inname_len == 7) ? 2 : 4;
+        const size_t ofs = (inname_len == 7) ? 2 : 4;
         *r = ParseHexadecimal(inname[1], inname[2]);
         *g = ParseHexadecimal(inname[1*ofs+1], inname[1*ofs+2]);
         *b = ParseHexadecimal(inname[2*ofs+1], inname[2*ofs+2]);

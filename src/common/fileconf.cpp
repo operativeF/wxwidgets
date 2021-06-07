@@ -252,7 +252,7 @@ wxString wxFileConfig::GetLocalDir(int style)
 {
     wxUnusedVar(style);
 
-    wxStandardPathsBase& stdp = wxStandardPaths::Get();
+    const wxStandardPathsBase& stdp = wxStandardPaths::Get();
 
     // it so happens that user data directory is a subdirectory of user config
     // directory on all supported platforms, which explains why we use it here
@@ -262,14 +262,14 @@ wxString wxFileConfig::GetLocalDir(int style)
 
 wxFileName wxFileConfig::GetGlobalFile(const wxString& szFile)
 {
-    wxStandardPathsBase& stdp = wxStandardPaths::Get();
+    const wxStandardPathsBase& stdp = wxStandardPaths::Get();
 
     return wxFileName(GetGlobalDir(), stdp.MakeConfigFileName(szFile));
 }
 
 wxFileName wxFileConfig::GetLocalFile(const wxString& szFile, int style)
 {
-    wxStandardPathsBase& stdp = wxStandardPaths::Get();
+    const wxStandardPathsBase& stdp = wxStandardPaths::Get();
 
     // If the config file is located in a subdirectory, we always use an
     // extension for it, but we use just the leading dot if it is located
@@ -497,7 +497,7 @@ wxFileConfig::~wxFileConfig()
 void wxFileConfig::Parse(const wxTextBuffer& buffer, bool bLocal)
 {
 
-  size_t nLineCount = buffer.GetLineCount();
+  const size_t nLineCount = buffer.GetLineCount();
 
   for ( size_t n = 0; n < nLineCount; n++ )
   {
@@ -756,7 +756,7 @@ size_t wxFileConfig::GetNumberOfEntries(bool bRecursive) const
         wxFileConfig * const self = const_cast<wxFileConfig *>(this);
 
         wxFileConfigGroup *pOldCurrentGroup = m_pCurrentGroup;
-        size_t nSubgroups = m_pCurrentGroup->Groups().GetCount();
+        const size_t nSubgroups = m_pCurrentGroup->Groups().GetCount();
         for ( size_t nGroup = 0; nGroup < nSubgroups; nGroup++ ) {
             self->m_pCurrentGroup = m_pCurrentGroup->Groups()[nGroup];
             n += GetNumberOfEntries(true);
@@ -774,7 +774,7 @@ size_t wxFileConfig::GetNumberOfGroups(bool bRecursive) const
         wxFileConfig * const self = const_cast<wxFileConfig *>(this);
 
         wxFileConfigGroup *pOldCurrentGroup = m_pCurrentGroup;
-        size_t nSubgroups = m_pCurrentGroup->Groups().GetCount();
+        const size_t nSubgroups = m_pCurrentGroup->Groups().GetCount();
         for ( size_t nGroup = 0; nGroup < nSubgroups; nGroup++ ) {
             self->m_pCurrentGroup = m_pCurrentGroup->Groups()[nGroup];
             n += GetNumberOfGroups(true);
@@ -2045,7 +2045,7 @@ static wxString FilterOutValue(const wxString& str)
   strResult.Alloc(str.Len());
 
   // quoting is necessary to preserve spaces in the beginning of the string
-  bool bQuote = wxIsspace(str[0]) || str[0] == wxT('"');
+  const bool bQuote = wxIsspace(str[0]) || str[0] == wxT('"');
 
   if ( bQuote )
     strResult += wxT('"');

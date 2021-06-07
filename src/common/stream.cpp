@@ -238,8 +238,8 @@ bool wxStreamBuffer::FlushBuffer()
 
     wxCHECK_MSG( outStream, false, wxT("should have a stream in wxStreamBuffer") );
 
-    size_t current = m_buffer_pos - m_buffer_start;
-    size_t count = outStream->OnSysWrite(m_buffer_start, current);
+    const size_t current = m_buffer_pos - m_buffer_start;
+    const size_t count = outStream->OnSysWrite(m_buffer_start, current);
     if ( count != current )
         return false;
 
@@ -261,7 +261,7 @@ size_t wxStreamBuffer::GetDataLeft()
 void wxStreamBuffer::GetFromBuffer(void *buffer, size_t size)
 {
     // don't get more bytes than left in the buffer
-    size_t left = GetBytesLeft();
+    const size_t left = GetBytesLeft();
 
     if ( size > left )
         size = left;
@@ -273,7 +273,7 @@ void wxStreamBuffer::GetFromBuffer(void *buffer, size_t size)
 // copy the contents of the provided buffer into this one
 void wxStreamBuffer::PutToBuffer(const void *buffer, size_t size)
 {
-    size_t left = GetBytesLeft();
+    const size_t left = GetBytesLeft();
 
     if ( size > left )
     {
@@ -407,7 +407,7 @@ size_t wxStreamBuffer::Read(void *buffer, size_t size)
     }
     else // we have a buffer, use it
     {
-        size_t orig_size = size;
+        const size_t orig_size = size;
 
         while ( size > 0 )
         {
@@ -449,8 +449,8 @@ size_t wxStreamBuffer::Read(wxStreamBuffer *dbuf)
     wxCHECK_MSG( m_mode != write, 0, wxT("can't read from this buffer") );
 
     char buf[BUF_TEMP_SIZE];
-    size_t nRead,
-           total = 0;
+    size_t nRead;
+    size_t total = 0;
 
     do
     {
@@ -489,7 +489,7 @@ size_t wxStreamBuffer::Write(const void *buffer, size_t size)
     }
     else // we [may] have a buffer, use it
     {
-        size_t orig_size = size;
+        const size_t orig_size = size;
 
         while ( size > 0 )
         {
@@ -602,7 +602,7 @@ wxFileOffset wxStreamBuffer::Seek(wxFileOffset pos, wxSeekMode mode)
         }
         if (diff < 0 || diff > last_access)
             return wxInvalidOffset;
-        size_t int_diff = wx_truncate_cast(size_t, diff);
+        const size_t int_diff = wx_truncate_cast(size_t, diff);
         wxCHECK_MSG( (wxFileOffset)int_diff == diff, wxInvalidOffset, wxT("huge file not supported") );
         SetIntPosition(int_diff);
         return diff;

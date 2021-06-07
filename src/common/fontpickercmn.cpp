@@ -82,7 +82,7 @@ wxString wxFontPickerCtrl::Font2String(const wxFont &f)
 #ifdef __WXMSW__
     // on wxMSW the encoding of the font is appended at the end of the string;
     // since encoding is not very user-friendly we remove it.
-    wxFontEncoding enc = f.GetEncoding();
+    const wxFontEncoding enc = f.GetEncoding();
     if ( enc != wxFONTENCODING_DEFAULT && enc != wxFONTENCODING_SYSTEM )
         ret = ret.BeforeLast(wxT(' '));
 #endif

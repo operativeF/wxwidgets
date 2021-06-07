@@ -172,7 +172,7 @@ bool wxStringTokenizer::HasMoreTokens() const
     // We optimize this case by caching HasMoreTokens() return value here:
     if ( m_hasMoreTokens == MoreTokens_Unknown )
     {
-        bool r = DoHasMoreTokens();
+        const bool r = DoHasMoreTokens();
         const_cast<wxStringTokenizer *>(this)->m_hasMoreTokens =
             r ? MoreTokens_Yes : MoreTokens_No;
         return r;

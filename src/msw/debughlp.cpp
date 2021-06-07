@@ -609,7 +609,7 @@ wxDbgHelpDLL::DumpSymbol(wxPSYMBOL_INFO pSym, void *pVariable)
 
         case SYMBOL_TAG_BASE_TYPE:
             // variable of simple type, show directly
-            BasicType bt = GetBasicType(&symDeref);
+            const BasicType bt = GetBasicType(&symDeref);
             if ( bt )
             {
                 s = DumpBaseType(bt, pSym->Size, pVariable);

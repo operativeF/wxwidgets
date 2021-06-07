@@ -398,11 +398,11 @@ bool wxRegExImpl::Matches(const wxRegChar *str,
 
     // do match it
 #if defined WXREGEX_USING_BUILTIN
-    int rc = wx_re_exec(&self->m_RegEx, str, len, nullptr, m_nMatches, matches, flagsRE);
+    const int rc = wx_re_exec(&self->m_RegEx, str, len, nullptr, m_nMatches, matches, flagsRE);
 #elif defined WXREGEX_USING_RE_SEARCH
-    int rc = str ? ReSearch(&self->m_RegEx, str, len, matches, flagsRE) : REG_BADPAT;
+    const int rc = str ? ReSearch(&self->m_RegEx, str, len, matches, flagsRE) : REG_BADPAT;
 #else
-    int rc = str ? regexec(&self->m_RegEx, str, m_nMatches, matches, flagsRE) : REG_BADPAT;
+    const int rc = str ? regexec(&self->m_RegEx, str, m_nMatches, matches, flagsRE) : REG_BADPAT;
 #endif
 
     switch ( rc )
@@ -456,7 +456,7 @@ int wxRegExImpl::Replace(wxString *text,
     // the input string
 #ifndef WXREGEX_CONVERT_TO_MB
     const wxChar *textstr = text->c_str();
-    size_t textlen = text->length();
+    const size_t textlen = text->length();
 #else
     const wxWX2MBbuf textstr = WXREGEX_CHAR(*text);
     if (!textstr)

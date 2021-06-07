@@ -108,7 +108,7 @@ wxMemoryInputStream::~wxMemoryInputStream()
 char wxMemoryInputStream::Peek()
 {
     char *buf = (char *)m_i_streambuf->GetBufferStart();
-    size_t pos = m_i_streambuf->GetIntPosition();
+    const size_t pos = m_i_streambuf->GetIntPosition();
     if ( pos == m_length )
     {
         m_lasterror = wxSTREAM_READ_ERROR;
@@ -121,7 +121,7 @@ char wxMemoryInputStream::Peek()
 
 size_t wxMemoryInputStream::OnSysRead(void *buffer, size_t nbytes)
 {
-    size_t pos = m_i_streambuf->GetIntPosition();
+    const size_t pos = m_i_streambuf->GetIntPosition();
     if ( pos == m_length )
     {
         m_lasterror = wxSTREAM_EOF;
@@ -167,7 +167,7 @@ wxMemoryOutputStream::~wxMemoryOutputStream()
 
 size_t wxMemoryOutputStream::OnSysWrite(const void *buffer, size_t nbytes)
 {
-    size_t oldpos = m_o_streambuf->GetIntPosition();
+    const size_t oldpos = m_o_streambuf->GetIntPosition();
     m_o_streambuf->Write(buffer, nbytes);
     size_t newpos = m_o_streambuf->GetIntPosition();
 

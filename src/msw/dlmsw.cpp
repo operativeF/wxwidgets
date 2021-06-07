@@ -58,10 +58,10 @@ public:
 static wxString GetFileVersion(const wxString& filename)
 {
     wxString ver;
-    wxChar *pc = const_cast<wxChar *>((const wxChar*) filename.t_str());
+    const wxChar *pc = const_cast<wxChar *>((const wxChar*) filename.t_str());
 
     DWORD dummy;
-    DWORD sizeVerInfo = ::GetFileVersionInfoSize(pc, &dummy);
+    const DWORD sizeVerInfo = ::GetFileVersionInfoSize(pc, &dummy);
     if ( sizeVerInfo )
     {
         wxCharBuffer buf(sizeVerInfo);

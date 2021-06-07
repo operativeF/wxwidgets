@@ -551,7 +551,7 @@ bool wxVariantDataBool::Eq(wxVariantData& data) const
 {
     wxASSERT_MSG( (data.GetType() == wxT("bool")), wxT("wxVariantDataBool::Eq: argument mismatch") );
 
-    wxVariantDataBool& otherData = (wxVariantDataBool&) data;
+    const wxVariantDataBool& otherData = (wxVariantDataBool&) data;
 
     return (otherData.m_value == m_value);
 }
@@ -852,7 +852,7 @@ bool wxVariantDataString::Eq(wxVariantData& data) const
 {
     wxASSERT_MSG( (data.GetType() == wxT("string")), wxT("wxVariantDataString::Eq: argument mismatch") );
 
-    wxVariantDataString& otherData = (wxVariantDataString&) data;
+    const wxVariantDataString& otherData = (wxVariantDataString&) data;
 
     return (otherData.m_value == m_value);
 }
@@ -1019,7 +1019,7 @@ bool wxVariantDataWxObjectPtr::Eq(wxVariantData& data) const
 {
     wxASSERT_MSG( data.GetType() == GetType(), wxT("wxVariantDataWxObjectPtr::Eq: argument mismatch") );
 
-    wxVariantDataWxObjectPtr& otherData = (wxVariantDataWxObjectPtr&) data;
+    const wxVariantDataWxObjectPtr& otherData = (wxVariantDataWxObjectPtr&) data;
 
     return (otherData.m_value == m_value);
 }
@@ -1378,7 +1378,7 @@ bool wxVariantDataArrayString::Write(std::ostream& WXUNUSED(str)) const
 
 bool wxVariantDataArrayString::Write(wxString& str) const
 {
-    size_t count = m_value.GetCount();
+    const size_t count = m_value.GetCount();
     for ( size_t n = 0; n < count; n++ )
     {
         if ( n )

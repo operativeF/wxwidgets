@@ -258,7 +258,7 @@ wxString wxStaticTextBase::GetEllipsizedLabel() const
 
 wxString wxStaticTextBase::Ellipsize(const wxString& label) const
 {
-    wxSize sz(GetClientSize());
+    const wxSize sz(GetClientSize());
     if (sz.x < 2 || sz.y < 2)
     {
         // the size of this window is not valid (yet)

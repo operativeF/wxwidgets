@@ -185,8 +185,7 @@ bool wxCommandProcessor::Redo()
 
     if (redoCommand)
     {
-        bool success = DoCommand(*redoCommand);
-        if (success)
+        if (DoCommand(*redoCommand))
         {
             m_currentCommand = redoNode;
             SetMenuStrings();
@@ -246,10 +245,10 @@ wxString wxCommandProcessor::GetUndoMenuLabel() const
     wxString buf;
     if (m_currentCommand)
     {
-        wxCommand *command = (wxCommand *)m_currentCommand->GetData();
+        const wxCommand *command = (wxCommand *)m_currentCommand->GetData();
         wxString commandName(command->GetName());
         if (commandName.empty()) commandName = _("Unnamed command");
-        bool canUndo = command->CanUndo();
+        const bool canUndo = command->CanUndo();
         if (canUndo)
             buf = wxString(_("&Undo ")) + commandName + m_undoAccelerator;
         else

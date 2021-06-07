@@ -52,7 +52,7 @@ public:
     // supported search type
     virtual int FindString(const wxString& s, bool bCase = false) const
     {
-        unsigned int count = GetCount();
+        const unsigned int count = GetCount();
 
         for ( unsigned int i = 0; i < count ; ++i )
         {

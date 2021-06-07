@@ -174,7 +174,7 @@ bool wxTextInputStream::EatEOL(const wxChar &c)
 
     if (c == wxT('\r')) // eat on both Mac and DOS
     {
-        wxChar c2 = GetChar();
+        const wxChar c2 = GetChar();
         if (!c2) return true; // end of stream reached, had enough :-)
 
         if (c2 != wxT('\n')) UngetLast(); // Don't eat on Mac
@@ -271,7 +271,7 @@ wxString wxTextInputStream::ReadLine()
 
     for ( ;; )
     {
-        wxChar c = GetChar();
+        const wxChar c = GetChar();
         if ( m_input.Eof() )
             break;
 

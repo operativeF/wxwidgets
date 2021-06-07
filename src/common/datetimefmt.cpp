@@ -330,7 +330,7 @@ wxString wxDateTime::Format(const wxString& formatp, const TimeZone& tz) const
     // we have to use our own implementation if the date is out of range of
     // strftime()
 #ifdef wxHAS_STRFTIME
-    time_t time = GetTicks();
+    const time_t time = GetTicks();
 
     bool canUseStrftime = time != (time_t)-1;
     bool isPercent = false;
@@ -483,8 +483,8 @@ wxString wxDateTime::Format(const wxString& formatp, const TimeZone& tz) const
                         // divisible by 4 but not leap (i.e. divisible by 100 but
                         // not 400), hence the correction.
 
-                        int yearReal = GetYear(tz);
-                        int mod28 = yearReal % 28;
+                        const int yearReal = GetYear(tz);
+                        const int mod28 = yearReal % 28;
 
                         // be careful to not go too far - we risk to leave the
                         // supported range
@@ -498,8 +498,8 @@ wxString wxDateTime::Format(const wxString& formatp, const TimeZone& tz) const
                             year = 1970 + mod28 - 10; // 1970 == 10 (mod 28)
                         }
 
-                        int nCentury = year / 100,
-                            nCenturyReal = yearReal / 100;
+                        const int nCentury = year / 100;
+                        const int nCenturyReal = yearReal / 100;
 
                         // need to adjust for the years divisble by 400 which are
                         // not leap but are counted like leap ones if we just take
@@ -1608,7 +1608,7 @@ wxDateTime::ParseFormat(const wxString& date,
         if ( yday > GetNumberOfDays(tm.year) )
             return false;
 
-        Tm tm2 = wxDateTime(1, Jan, tm.year).SetToYearDay(yday).GetTm();
+        const Tm tm2 = wxDateTime(1, Jan, tm.year).SetToYearDay(yday).GetTm();
 
         tm.mon = tm2.mon;
         tm.mday = tm2.mday;
@@ -1786,7 +1786,7 @@ wxDateTime::ParseDate(const wxString& date, wxString::const_iterator *end)
     for ( size_t n = 0; n < WXSIZEOF(literalDates); n++ )
     {
         const wxString dateStr = wxGetTranslation(literalDates[n].str);
-        size_t len = dateStr.length();
+        const size_t len = dateStr.length();
 
         if ( len > lenRest )
             continue;
@@ -1798,7 +1798,7 @@ wxDateTime::ParseDate(const wxString& date, wxString::const_iterator *end)
 
             p = pEndStr;
 
-            int dayDiffFromToday = literalDates[n].dayDiffFromToday;
+            const int dayDiffFromToday = literalDates[n].dayDiffFromToday;
             *this = Today();
             if ( dayDiffFromToday )
             {
@@ -1871,7 +1871,7 @@ wxDateTime::ParseDate(const wxString& date, wxString::const_iterator *end)
                 {
                     // use a leap year if we don't have the year yet to allow
                     // dates like 2/29/1976 which would be rejected otherwise
-                    wxDateTime_t max_days = (wxDateTime_t)(
+                    const wxDateTime_t max_days = (wxDateTime_t)(
                         haveMon
                         ? GetNumberOfDays(mon, haveYear ? year : 1976)
                         : 31

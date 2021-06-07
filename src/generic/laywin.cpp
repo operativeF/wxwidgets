@@ -71,7 +71,7 @@ void wxSashLayoutWindow::OnCalculateLayout(wxCalculateLayoutEvent& event)
 {
     wxRect clientSize(event.GetRect());
 
-    int flags = event.GetFlags();
+    const int flags = event.GetFlags();
 
     if (!IsShown())
         return;
@@ -86,13 +86,13 @@ void wxSashLayoutWindow::OnCalculateLayout(wxCalculateLayoutEvent& event)
     wxRect thisRect;
 
     // Try to stretch
-    int length = (GetOrientation() == wxLAYOUT_HORIZONTAL) ? clientSize.width : clientSize.height;
+    const int length = (GetOrientation() == wxLAYOUT_HORIZONTAL) ? clientSize.width : clientSize.height;
     wxLayoutOrientation orient = GetOrientation();
 
     // We assume that a window that says it's horizontal, wants to be stretched in that
     // direction. Is this distinction too fine? Do we assume that any horizontal
     // window needs to be stretched in that direction? Possibly.
-    int whichDimension = (GetOrientation() == wxLAYOUT_HORIZONTAL) ? wxLAYOUT_LENGTH_X : wxLAYOUT_LENGTH_Y;
+    const int whichDimension = (GetOrientation() == wxLAYOUT_HORIZONTAL) ? wxLAYOUT_LENGTH_X : wxLAYOUT_LENGTH_Y;
 
     wxQueryLayoutInfoEvent infoEvent(GetId());
     infoEvent.SetEventObject(this);
@@ -102,7 +102,7 @@ void wxSashLayoutWindow::OnCalculateLayout(wxCalculateLayoutEvent& event)
     if (!GetEventHandler()->ProcessEvent(infoEvent))
         return;
 
-    wxSize sz = infoEvent.GetSize();
+    const wxSize sz = infoEvent.GetSize();
 
     if (sz.x == 0 && sz.y == 0) // Assume it's invisible
         return;
@@ -178,7 +178,7 @@ void wxSashLayoutWindow::OnCalculateLayout(wxCalculateLayoutEvent& event)
 // over.
 bool wxLayoutAlgorithm::LayoutMDIFrame(wxMDIParentFrame* frame, wxRect* r)
 {
-    wxSize client_size = frame->GetClientSize();
+    const wxSize client_size = frame->GetClientSize();
 
     wxRect rect(0, 0, client_size.x, client_size.y);
     if (r)
@@ -227,7 +227,7 @@ bool wxLayoutAlgorithm::LayoutWindow(wxWindow* parent, wxWindow* mainWindow)
 #if wxUSE_SASH
     if (wxDynamicCast(parent, wxSashWindow))
     {
-        wxSashWindow* sashWindow = (wxSashWindow*) parent;
+        const wxSashWindow* sashWindow = (wxSashWindow*) parent;
 
         leftMargin = sashWindow->GetExtraBorderSize();
         rightMargin = sashWindow->GetExtraBorderSize();
@@ -245,7 +245,7 @@ bool wxLayoutAlgorithm::LayoutWindow(wxWindow* parent, wxWindow* mainWindow)
     }
 #endif // wxUSE_SASH
 
-    wxSize client_size = parent->GetClientSize();
+    const wxSize client_size = parent->GetClientSize();
 
     wxRect rect(leftMargin, topMargin, client_size.x - leftMargin - rightMargin, client_size.y - topMargin - bottomMargin);
 

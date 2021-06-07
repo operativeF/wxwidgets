@@ -46,7 +46,7 @@ wxString wxItemContainerImmutable::GetStringSelection() const
 {
     wxString s;
 
-    int sel = GetSelection();
+    const int sel = GetSelection();
     if ( sel != wxNOT_FOUND )
         s = GetString((unsigned int)sel);
 

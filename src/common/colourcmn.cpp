@@ -158,12 +158,11 @@ bool wxColourBase::FromString(const wxString& str)
     {
         // hexadecimal prefixed with # ("HTML syntax")
         // see https://drafts.csswg.org/css-color/#hex-notation
-        size_t len = wxStrlen(str) - 1;
         unsigned long tmp;
         if (wxSscanf(str.wx_str() + 1, wxT("%lx"), &tmp) != 1)
             return false;
 
-        switch ( len )
+        switch (wxStrlen(str) - 1)
         {
             case 6: // #rrggbb
                 tmp = (tmp << 8) + wxALPHA_OPAQUE;

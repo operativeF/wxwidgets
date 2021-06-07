@@ -802,7 +802,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
 #endif
 
     wxCoord y = 0;
-    wxCoord x0 = m_calendarWeekWidth;
+    const wxCoord x0 = m_calendarWeekWidth;
 
     if ( HasFlag(wxCAL_SEQUENTIAL_MONTH_SELECTION) )
     {
@@ -820,15 +820,15 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         dc.GetTextExtent(headertext, &monthw, &monthh);
 
         // draw month-name centered above weekdays
-        wxCoord monthx = ((m_widthCol * 7) - monthw) / 2 + x0;
-        wxCoord monthy = ((m_heightRow - monthh) / 2) + y;
+        const wxCoord monthx = ((m_widthCol * 7) - monthw) / 2 + x0;
+        const wxCoord monthy = ((m_heightRow - monthh) / 2) + y;
         dc.DrawText(headertext, monthx,  monthy);
 
         // calculate the "month-arrows"
         wxPoint leftarrow[3];
         wxPoint rightarrow[3];
 
-        int arrowheight = monthh / 2;
+        const int arrowheight = monthh / 2;
 
         leftarrow[0] = wxPoint(0, arrowheight / 2);
         leftarrow[1] = wxPoint(arrowheight / 2, 0);
@@ -840,14 +840,14 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
 
         // draw the "month-arrows"
 
-        wxCoord arrowy = (m_heightRow - arrowheight) / 2;
-        wxCoord larrowx = (m_widthCol - (arrowheight / 2)) / 2 + x0;
-        wxCoord rarrowx = ((m_widthCol - (arrowheight / 2)) / 2) + m_widthCol*6 + x0;
+        const wxCoord arrowy = (m_heightRow - arrowheight) / 2;
+        const wxCoord larrowx = (m_widthCol - (arrowheight / 2)) / 2 + x0;
+        const wxCoord rarrowx = ((m_widthCol - (arrowheight / 2)) / 2) + m_widthCol*6 + x0;
         m_leftArrowRect = m_rightArrowRect = wxRect(0,0,0,0);
 
         if ( AllowMonthChange() )
         {
-            wxDateTime ldpm = wxDateTime(1,m_date.GetMonth(), m_date.GetYear()) - wxDateSpan::Day(); // last day prev month
+            const wxDateTime ldpm = wxDateTime(1,m_date.GetMonth(), m_date.GetYear()) - wxDateSpan::Day(); // last day prev month
             // Check if range permits change
             if ( IsDateInRange(ldpm) && ( ( ldpm.GetYear() == m_date.GetYear() ) ? true : AllowYearChange() ) )
             {
@@ -858,7 +858,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
                 dc.SetBrush(*wxTRANSPARENT_BRUSH);
                 dc.DrawRectangle(m_leftArrowRect);
             }
-            wxDateTime fdnm = wxDateTime(1,m_date.GetMonth(), m_date.GetYear()) + wxDateSpan::Month(); // first day next month
+            const wxDateTime fdnm = wxDateTime(1,m_date.GetMonth(), m_date.GetYear()) + wxDateSpan::Month(); // first day next month
             if ( IsDateInRange(fdnm) && ( ( fdnm.GetYear() == m_date.GetYear() ) ? true : AllowYearChange() ) )
             {
                 m_rightArrowRect = wxRect(rarrowx - 4, arrowy - 3, (arrowheight / 2) + 8, (arrowheight + 6));
@@ -886,7 +886,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         dc.SetPen(wxPen(m_colHeaderBg, 1, wxPenStyle::Solid));
         dc.DrawRectangle(0, y, GetClientSize().x, m_heightRow);
 
-        bool startOnMonday = WeekStartsOnMonday();
+        const bool startOnMonday = WeekStartsOnMonday();
         for ( int wd = 0; wd < 7; wd++ )
         {
             size_t n;
@@ -1015,7 +1015,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
                     }
                 }
 
-                wxCoord x = wd*m_widthCol + (m_widthCol - width) / 2 + x0;
+                const wxCoord x = wd*m_widthCol + (m_widthCol - width) / 2 + x0;
                 dc.DrawText(dayStr, x, y + 1);
 
                 if ( !isSel && attr && attr->HasBorder() )
@@ -1074,7 +1074,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
     date = ( showSurrounding ) ? GetStartDate() : wxDateTime(1, m_date.GetMonth(), m_date.GetYear());
     if ( !IsDateInRange(date) )
     {
-        wxDateTime firstOOR = GetLowerDateLimit() - wxDateSpan::Day(); // first out-of-range
+        const wxDateTime firstOOR = GetLowerDateLimit() - wxDateSpan::Day(); // first out-of-range
 
         wxBrush oorbrush = *wxLIGHT_GREY_BRUSH;
         oorbrush.SetStyle(wxBrushStyle::FDiagonalHatch);
@@ -1085,7 +1085,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
     date = ( showSurrounding ) ? GetStartDate() + wxDateSpan::Weeks(6) - wxDateSpan::Day() : wxDateTime().SetToLastMonthDay(m_date.GetMonth(), m_date.GetYear());
     if ( !IsDateInRange(date) )
     {
-        wxDateTime firstOOR = GetUpperDateLimit() + wxDateSpan::Day(); // first out-of-range
+        const wxDateTime firstOOR = GetUpperDateLimit() + wxDateSpan::Day(); // first out-of-range
 
         wxBrush oorbrush = *wxLIGHT_GREY_BRUSH;
         oorbrush.SetStyle(wxBrushStyle::FDiagonalHatch);
@@ -1160,8 +1160,8 @@ void wxGenericCalendarCtrl::HighlightRange(wxPaintDC* pDC, const wxDateTime& fro
             {
                 // special case: interval 7 days or less not in same week
                 // split in two separate intervals
-                wxDateTime tfd = fromdate + wxDateSpan::Days(7-fd);
-                wxDateTime ftd = tfd + wxDateSpan::Day();
+                const wxDateTime tfd = fromdate + wxDateSpan::Days(7-fd);
+                const wxDateTime ftd = tfd + wxDateSpan::Day();
 #if DEBUG_PAINT
                 wxLogDebug("Highlight: Separate segments");
 #endif
@@ -1173,7 +1173,7 @@ void wxGenericCalendarCtrl::HighlightRange(wxPaintDC* pDC, const wxDateTime& fro
             {
                 int numpoints;
                 wxPoint corners[8]; // potentially 8 corners in polygon
-                wxCoord x0 = m_calendarWeekWidth;
+                const wxCoord x0 = m_calendarWeekWidth;
 
                 if ( fw == tw )
                 {
@@ -1233,7 +1233,7 @@ bool wxGenericCalendarCtrl::GetDateCoord(const wxDateTime& date, int *day, int *
 
     if ( IsDateShown(date) )
     {
-        bool startOnMonday = WeekStartsOnMonday();
+        const bool startOnMonday = WeekStartsOnMonday();
 
         // Find day
         *day = date.GetWeekDay();
@@ -1247,8 +1247,8 @@ bool wxGenericCalendarCtrl::GetDateCoord(const wxDateTime& date, int *day, int *
             *day += ( startOnMonday ) ? 0 : 1;
         }
 
-        int targetmonth = date.GetMonth() + (12 * date.GetYear());
-        int thismonth = m_date.GetMonth() + (12 * m_date.GetYear());
+        const int targetmonth = date.GetMonth() + (12 * date.GetYear());
+        const int thismonth = m_date.GetMonth() + (12 * m_date.GetYear());
 
         // Find week
         if ( targetmonth == thismonth )
@@ -1276,9 +1276,9 @@ bool wxGenericCalendarCtrl::GetDateCoord(const wxDateTime& date, int *day, int *
                 wxLogDebug("     --- LDOM ---");
 #endif
 
-                wxTimeSpan span = date - ldcm;
+                const wxTimeSpan span = date - ldcm;
 
-                int daysfromlast = span.GetDays();
+                const int daysfromlast = span.GetDays();
 #if DEBUG_PAINT
                 wxLogDebug("daysfromlast: %i", daysfromlast);
 #endif
@@ -1552,7 +1552,7 @@ void wxGenericCalendarCtrl::OnMonthChange(wxCommandEvent& event)
 {
     wxDateTime::Tm tm = m_date.GetTm();
 
-    wxDateTime::Month mon = (wxDateTime::Month)event.GetInt();
+    const wxDateTime::Month mon = (wxDateTime::Month)event.GetInt();
     if ( tm.mday > wxDateTime::GetNumberOfDays(mon, tm.year) )
     {
         tm.mday = wxDateTime::GetNumberOfDays(mon, tm.year);
@@ -1571,7 +1571,7 @@ void wxGenericCalendarCtrl::OnMonthChange(wxCommandEvent& event)
 
 void wxGenericCalendarCtrl::HandleYearChange(wxCommandEvent& event)
 {
-    int year = (int)event.GetInt();
+    const int year = (int)event.GetInt();
     if ( year == INT_MIN )
     {
         // invalid year in the spin control, ignore it

@@ -579,15 +579,15 @@ void wxDCImpl::DoDrawCheckMark(wxCoord x1, wxCoord y1,
 {
     wxCHECK_RET( IsOk(), wxT("invalid window dc") );
 
-    wxCoord x2 = x1 + width,
-            y2 = y1 + height;
+    const wxCoord x2 = x1 + width;
+    const wxCoord y2 = y1 + height;
 
     // the pen width is calibrated to give 3 for width == height == 10
     wxDCPenChanger pen( *m_owner, wxPen(GetTextForeground(), (width + height + 1)/7));
 
     // we're drawing a scaled version of wx/generic/tick.xpm here
-    wxCoord x3 = x1 + (4*width) / 10,   // x of the tick bottom
-            y3 = y1 + height / 2;       // y of the left tick branch
+    const wxCoord x3 = x1 + (4 * width) / 10;   // x of the tick bottom
+    const wxCoord y3 = y1 + height / 2;       // y of the left tick branch
     DoDrawLine(x1, y3, x3, y2);
     DoDrawLine(x3, y2, x2, y1);
 
@@ -610,8 +610,8 @@ wxDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
                  wxT("invalid blit size") );
 
     // emulate the stretching by modifying the DC scale
-    double xscale = (double)srcWidth/dstWidth,
-           yscale = (double)srcHeight/dstHeight;
+    const double xscale = (double)srcWidth / dstWidth;
+    const double yscale = (double)srcHeight/dstHeight;
 
     // Shift origin to avoid imprecision of integer destination coordinates
     const int deviceOriginX = m_deviceOriginX;
@@ -631,7 +631,7 @@ wxDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
     GetUserScale(&xscaleOld, &yscaleOld);
     SetUserScale(xscaleOld/xscale, yscaleOld/yscale);
 
-    bool rc = DoBlit(0, 0, srcWidth, srcHeight,
+    const bool rc = DoBlit(0, 0, srcWidth, srcHeight,
                      source,
                      xsrc, ysrc, rop, useMask, xsrcMask, ysrcMask);
 
@@ -668,7 +668,7 @@ void wxDCImpl::DrawPolygon(const wxPointList *list,
                            wxCoord xoffset, wxCoord yoffset,
                            wxPolygonFillMode fillStyle)
 {
-    int n = list->GetCount();
+    const int n = list->GetCount();
     wxPoint *points = new wxPoint[n];
 
     int i = 0;
@@ -1029,18 +1029,17 @@ void wxDCImpl::DoGradientFillConcentric(const wxRect& rect,
     const wxPen penOrig = m_pen;
     wxON_BLOCK_EXIT_SET(m_pen, penOrig);
 
-    wxUint8 nR1 = destColour.Red();
-    wxUint8 nG1 = destColour.Green();
-    wxUint8 nB1 = destColour.Blue();
-    wxUint8 nR2 = initialColour.Red();
-    wxUint8 nG2 = initialColour.Green();
-    wxUint8 nB2 = initialColour.Blue();
-    wxUint8 nR, nG, nB;
-
+    const wxUint8 nR1 = destColour.Red();
+    const wxUint8 nG1 = destColour.Green();
+    const wxUint8 nB1 = destColour.Blue();
+    const wxUint8 nR2 = initialColour.Red();
+    const wxUint8 nG2 = initialColour.Green();
+    const wxUint8 nB2 = initialColour.Blue();
 
     //Radius
     double cx = rect.GetWidth() / 2;
     double cy = rect.GetHeight() / 2;
+
     double dRadius;
     if (cx < cy)
         dRadius = cx;
@@ -1048,24 +1047,20 @@ void wxDCImpl::DoGradientFillConcentric(const wxRect& rect,
         dRadius = cy;
 
     //Offset of circle
-    double ptX, ptY;
-    ptX = circleCenter.x;
-    ptY = circleCenter.y;
-    double nCircleOffX = ptX - cx;
-    double nCircleOffY = ptY - cy;
-
-    double dGradient;
-    double dx, dy;
+    const double ptX = circleCenter.x;
+    const double ptY = circleCenter.y;
+    const double nCircleOffX = ptX - cx;
+    const double nCircleOffY = ptY - cy;
 
     for ( wxInt32 x = 0; x < rect.GetWidth(); x++ )
     {
         for ( wxInt32 y = 0; y < rect.GetHeight(); y++ )
         {
             //get color difference
-            dx = x;
-            dy = y;
+            const double dx = x;
+            const double dy = y;
 
-            dGradient = ((dRadius - sqrt(  (dx - cx - nCircleOffX) * (dx - cx - nCircleOffX)
+            double dGradient = ((dRadius - sqrt(  (dx - cx - nCircleOffX) * (dx - cx - nCircleOffX)
                                           +(dy - cy - nCircleOffY) * (dy - cy - nCircleOffY)
                                          )
                          ) * 100
@@ -1076,9 +1071,9 @@ void wxDCImpl::DoGradientFillConcentric(const wxRect& rect,
                 dGradient = 0.0;
 
             //get dest colors
-            nR = (wxUint8)(nR1 + ((nR2 - nR1) * dGradient / 100));
-            nG = (wxUint8)(nG1 + ((nG2 - nG1) * dGradient / 100));
-            nB = (wxUint8)(nB1 + ((nB2 - nB1) * dGradient / 100));
+            const wxUint8 nR = (wxUint8)(nR1 + ((nR2 - nR1) * dGradient / 100));
+            const wxUint8 nG = (wxUint8)(nG1 + ((nG2 - nG1) * dGradient / 100));
+            const wxUint8 nB = (wxUint8)(nB1 + ((nB2 - nB1) * dGradient / 100));
 
             //set the pixel
             SetPen(wxColour(nR,nG,nB));
@@ -1185,14 +1180,15 @@ void wxDC::DrawLabel(const wxString& text,
     }
 
     // draw the bitmap first
-    wxCoord x0 = x,
-            y0 = y,
-            width0 = width;
+    const wxCoord x0 = x;
+    const wxCoord y0 = y;
+    const wxCoord width0 = width;
+
     if ( bitmap.IsOk() )
     {
         DrawBitmap(bitmap, x, y, true /* use mask */);
 
-        wxCoord offset = bitmap.GetWidth() + 4;
+        const wxCoord offset = bitmap.GetWidth() + 4;
         x += offset;
         width -= offset;
 

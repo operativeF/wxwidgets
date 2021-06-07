@@ -487,8 +487,8 @@ public:
 
     virtual wxSize GetBestVirtualSize() const
     {
-        wxSize  client( GetClientSize() );
-        wxSize  best( GetBestSize() );
+        const wxSize  client( GetClientSize() );
+        const wxSize  best( GetBestSize() );
 
         return wxSize( wxMax( client.x, best.x ), wxMax( client.y, best.y ) );
     }
@@ -983,14 +983,14 @@ public:
     wxPoint ConvertDialogToPixels( const wxPoint& pt ) const;
     wxSize ConvertPixelsToDialog( const wxSize& sz ) const
     {
-        wxPoint pt(ConvertPixelsToDialog(wxPoint(sz.x, sz.y)));
+        const wxPoint pt(ConvertPixelsToDialog(wxPoint(sz.x, sz.y)));
 
         return wxSize(pt.x, pt.y);
     }
 
     wxSize ConvertDialogToPixels( const wxSize& sz ) const
     {
-        wxPoint pt(ConvertDialogToPixels(wxPoint(sz.x, sz.y)));
+        const wxPoint pt(ConvertDialogToPixels(wxPoint(sz.x, sz.y)));
 
         return wxSize(pt.x, pt.y);
     }

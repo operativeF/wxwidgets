@@ -1817,8 +1817,8 @@ inline bool wxDateTime::IsBetween(const wxDateTime& t1,
 
 inline bool wxDateTime::IsSameDate(const wxDateTime& dt) const
 {
-    Tm tm1 = GetTm(),
-       tm2 = dt.GetTm();
+    const Tm tm1 = GetTm();
+    const Tm tm2 = dt.GetTm();
 
     return tm1.year == tm2.year &&
            tm1.mon == tm2.mon &&
@@ -1832,8 +1832,8 @@ inline bool wxDateTime::IsSameTime(const wxDateTime& dt) const
     //    m_time % MILLISECONDS_PER_DAY == dt.m_time % MILLISECONDS_PER_DAY
     //
     // because we have also to deal with (possibly) different DST settings!
-    Tm tm1 = GetTm(),
-       tm2 = dt.GetTm();
+    const Tm tm1 = GetTm();
+    const Tm tm2 = dt.GetTm();
 
     return tm1.hour == tm2.hour &&
            tm1.min == tm2.min &&

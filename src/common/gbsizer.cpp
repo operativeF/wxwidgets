@@ -116,15 +116,14 @@ bool wxGBSizerItem::Intersects(const wxGBPosition& pos, const wxGBSpan& span)
 {
 
     int endrow, endcol;
-    int otherrow, othercol, otherendrow, otherendcol;
 
-    auto tpos = GetPos();
+    const auto tpos = GetPos();
     GetEndPos(endrow, endcol);
 
-    otherrow = pos.GetRow();
-    othercol = pos.GetCol();
-    otherendrow = otherrow + span.GetRowspan() - 1;
-    otherendcol = othercol + span.GetColspan() - 1;
+    const int otherrow = pos.GetRow();
+    const int othercol = pos.GetCol();
+    const int otherendrow = otherrow + span.GetRowspan() - 1;
+    const int otherendcol = othercol + span.GetColspan() - 1;
 
     // is the other item's start or end in the range of this one?
     if (( InRange(otherrow, tpos.GetRow(), endrow) && InRange(othercol, tpos.GetCol(), endcol) ) ||
@@ -442,7 +441,7 @@ wxSize wxGridBagSizer::CalcMin()
         {
             int endrow, endcol;
 
-            auto pos = item->GetPos();
+            const auto pos = item->GetPos();
             item->GetEndPos(endrow, endcol);
 
             // fill heights and widths up to this item if needed
@@ -452,7 +451,7 @@ wxSize wxGridBagSizer::CalcMin()
                 m_colWidths.push_back(m_emptyCellSize.x);
 
             // See if this item increases the size of its row(s) or col(s)
-            wxSize size(item->CalcMin());
+            const wxSize size(item->CalcMin());
             for (idx=pos.GetRow(); idx <= endrow; idx++)
                 m_rowHeights[idx] = wxMax(m_rowHeights[idx], size.y / (endrow-pos.GetRow()+1));
             for (idx=pos.GetCol(); idx <= endcol; idx++)
@@ -489,8 +488,8 @@ void wxGridBagSizer::RepositionChildren(const wxSize& minSize)
     if ( m_rowHeights.empty() || m_colWidths.empty() )
         return;
 
-    wxPoint pt( GetPosition() );
-    wxSize  sz( GetSize() );
+    const wxPoint pt( GetPosition() );
+    const wxSize  sz( GetSize() );
 
     m_rows = m_rowHeights.size();
     m_cols = m_colWidths.size();
@@ -529,7 +528,7 @@ void wxGridBagSizer::RepositionChildren(const wxSize& minSize)
         if ( item->IsShown() )
         {
             int endrow, endcol;
-            auto pos = item->GetPos();
+            const auto pos = item->GetPos();
             item->GetEndPos(endrow, endcol);
 
             height = 0;
@@ -563,10 +562,10 @@ void wxGridBagSizer::AdjustForOverflow()
     for (row=0; row<(int)m_rowHeights.size(); row++)
     {
         int rowExtra=INT_MAX;
-        int rowHeight = m_rowHeights[row];
+        const int rowHeight = m_rowHeights[row];
         for (col=0; col<(int)m_colWidths.size(); col++)
         {
-            wxGBPosition pos(row,col);
+            const wxGBPosition pos(row,col);
             wxGBSizerItem* item = FindItemAtPosition(pos);
             if ( !item || !item->IsShown() )
                 continue;
@@ -578,7 +577,7 @@ void wxGridBagSizer::AdjustForOverflow()
             // just look at the whole item height
             if ( item->GetPos() == pos && endrow == row )
             {
-                int itemHeight = item->CalcMin().y;
+                const int itemHeight = item->CalcMin().y;
                 rowExtra = wxMin(rowExtra, rowHeight - itemHeight);
                 continue;
             }
@@ -606,10 +605,10 @@ void wxGridBagSizer::AdjustForOverflow()
     for (col=0; col<(int)m_colWidths.size(); col++)
     {
         int colExtra=INT_MAX;
-        int colWidth = m_colWidths[col];
+        const int colWidth = m_colWidths[col];
         for (row=0; row<(int)m_rowHeights.size(); row++)
         {
-            wxGBPosition pos(row,col);
+            const wxGBPosition pos(row,col);
             wxGBSizerItem* item = FindItemAtPosition(pos);
             if ( !item || !item->IsShown() )
                 continue;
@@ -619,7 +618,7 @@ void wxGridBagSizer::AdjustForOverflow()
 
             if ( item->GetPos() == pos && endcol == col )
             {
-                int itemWidth = item->CalcMin().x;
+                const int itemWidth = item->CalcMin().x;
                 colExtra = wxMin(colExtra, colWidth - itemWidth);
                 continue;
             }

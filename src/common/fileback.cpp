@@ -76,7 +76,7 @@ wxBackingFileImpl::wxBackingFileImpl(wxInputStream *stream,
     m_prefix(prefix),
     m_filelen(0)
 {
-    wxFileOffset len = m_stream->GetLength();
+    const wxFileOffset len = m_stream->GetLength();
 
     if (len >= 0 && len + size_t(1) < m_bufsize)
         m_bufsize = size_t(len + 1);
@@ -98,7 +98,7 @@ wxStreamError wxBackingFileImpl::ReadAt(wxFileOffset pos,
                                         void *buffer,
                                         size_t *size)
 {
-    size_t reqestedSize = *size;
+    const size_t reqestedSize = *size;
     *size = 0;
 
     // size1 is the number of bytes it will read directly from the backing
@@ -160,7 +160,7 @@ wxStreamError wxBackingFileImpl::ReadAt(wxFileOffset pos,
                     if (m_file.Seek(m_filelen) == wxBadSeek)
                         return wxSTREAM_READ_ERROR;
 
-                    size_t count = m_file.Write(m_buf, m_buflen);
+                    const size_t count = m_file.Write(m_buf, m_buflen);
                     m_filelen += count;
 
                     if (count < m_buflen) {
@@ -195,7 +195,7 @@ wxStreamError wxBackingFileImpl::ReadAt(wxFileOffset pos,
             }
 
             // copy to the user's buffer
-            size_t start = size_t(pos - m_filelen);
+            const size_t start = size_t(pos - m_filelen);
             size_t len = wxMin(m_buflen - start, reqestedSize - *size);
 
             memcpy((char*)buffer + *size, m_buf + start, len);
@@ -306,7 +306,7 @@ wxFileOffset wxBackedInputStream::OnSysSeek(wxFileOffset pos, wxSeekMode mode)
         }
         case wxSeekMode::FromEnd:
         {
-            wxFileOffset len = GetLength();
+            const wxFileOffset len = GetLength();
             if (len == wxInvalidOffset)
                 return wxInvalidOffset;
             m_pos = len + pos;

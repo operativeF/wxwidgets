@@ -116,14 +116,14 @@ void wxGridCellEditorEvtHandler::OnKeyDown(wxKeyEvent& event)
 
 void wxGridCellEditorEvtHandler::OnChar(wxKeyEvent& event)
 {
-    int row = m_grid->GetGridCursorRow();
-    int col = m_grid->GetGridCursorCol();
-    wxRect rect = m_grid->CellToRect( row, col );
+    const int row = m_grid->GetGridCursorRow();
+    const int col = m_grid->GetGridCursorCol();
+    const wxRect rect = m_grid->CellToRect( row, col );
 
-    wxSize client_size = m_grid->GetGridWindow()->GetClientSize();
+    const wxSize client_size = m_grid->GetGridWindow()->GetClientSize();
 
     // if cell width is smaller than grid client area, cell is wholly visible
-    bool wholeCellVisible = (rect.GetWidth() < client_size.x);
+    const bool wholeCellVisible = (rect.GetWidth() < client_size.x);
 
     switch ( event.GetKeyCode() )
     {
@@ -186,7 +186,7 @@ void wxGridCellEditorEvtHandler::OnChar(wxKeyEvent& event)
                 m_grid->GetTextExtent(value, &textWidth, &y, nullptr, nullptr, &font);
 
                 // try to RIGHT align the text by scrolling
-                int client_right = m_grid->GetGridWindow()->GetClientSize().x;
+                const int client_right = m_grid->GetGridWindow()->GetClientSize().x;
 
                 // (m_grid->GetScrollLineX()*2) is a factor for not scrolling to far,
                 // otherwise the last part of the cell content might be hidden below the scroll bar
@@ -389,7 +389,7 @@ void wxGridCellEditor::HandleReturn(wxKeyEvent& event)
 
 bool wxGridCellEditor::IsAcceptedKey(wxKeyEvent& event)
 {
-    bool ctrl = event.ControlDown();
+    const bool ctrl = event.ControlDown();
     bool alt;
 
 #ifdef __WXMAC__
@@ -695,9 +695,9 @@ void wxGridCellNumberEditor::Create(wxWindow* parent,
 #if wxUSE_SPINCTRL
     if ( HasRange() )
     {
-        long style = wxSP_ARROW_KEYS |
-                     wxTE_PROCESS_ENTER |
-                     wxTE_PROCESS_TAB;
+        static constexpr long style = wxSP_ARROW_KEYS |
+                                      wxTE_PROCESS_ENTER |
+                                      wxTE_PROCESS_TAB;
 
         // create a spin ctrl
         m_control = new wxSpinCtrl(parent, wxID_ANY, wxEmptyString,
@@ -854,7 +854,7 @@ bool wxGridCellNumberEditor::IsAcceptedKey(wxKeyEvent& event)
 {
     if ( wxGridCellEditor::IsAcceptedKey(event) )
     {
-        int keycode = event.GetKeyCode();
+        const int keycode = event.GetKeyCode();
         switch ( keycode )
         {
             // Accept +/- because they can be part of the number and space just

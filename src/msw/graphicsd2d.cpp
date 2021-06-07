@@ -2248,9 +2248,9 @@ void CreateWICBitmapFromImage(const wxImage& img, bool forceAlpha, IWICBitmap** 
     // fully transparent or retain original value
     if ( img.HasMask() )
     {
-        unsigned char mr = img.GetMaskRed();
-        unsigned char mg = img.GetMaskGreen();
-        unsigned char mb = img.GetMaskBlue();
+        const unsigned char mr = img.GetMaskRed();
+        const unsigned char mg = img.GetMaskGreen();
+        const unsigned char mb = img.GetMaskBlue();
 
         imgRGB = img.GetData();
         pBmpBuffer = pBuffer;
@@ -2472,7 +2472,7 @@ private:
         {
             for (int j = 7; j >= 0; --j)
             {
-                bool isColorBit = (pattern[i] & (1 << j)) > 0;
+                const bool isColorBit = (pattern[i] & (1 << j)) > 0;
                 (isColorBit ? m_color : transparent).Write(buffer + k);
                 k += 4;
             }

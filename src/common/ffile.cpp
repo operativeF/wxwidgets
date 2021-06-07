@@ -126,7 +126,7 @@ size_t wxFFile::Read(void *pBuf, size_t nCount)
     wxCHECK_MSG( pBuf, 0, wxT("invalid parameter") );
     wxCHECK_MSG( IsOpened(), 0, wxT("can't read from closed file") );
 
-    size_t nRead = fread(pBuf, 1, nCount, m_fp);
+    const size_t nRead = fread(pBuf, 1, nCount, m_fp);
     if ( (nRead < nCount) && Error() )
     {
         wxLogSysError(_("Read error on file '%s'"), m_name.c_str());
@@ -243,7 +243,7 @@ wxFileOffset wxFFile::Tell() const
     wxCHECK_MSG( IsOpened(), wxInvalidOffset,
                  wxT("wxFFile::Tell(): file is closed!") );
 
-    wxFileOffset rc = wxFtell(m_fp);
+    const wxFileOffset rc = wxFtell(m_fp);
     if ( rc == wxInvalidOffset )
     {
         wxLogSysError(_("Can't find current position in file '%s'"),
@@ -258,14 +258,14 @@ wxFileOffset wxFFile::Length() const
     wxCHECK_MSG( IsOpened(), wxInvalidOffset,
                  wxT("wxFFile::Length(): file is closed!") );
 
-    wxFileOffset posOld = Tell();
+    const wxFileOffset posOld = Tell();
     if ( posOld != wxInvalidOffset )
     {
         wxFFile& self = *const_cast<wxFFile*>(this);
 
         if ( self.SeekEnd() )
         {
-            wxFileOffset len = Tell();
+            const wxFileOffset len = Tell();
 
             (void)self.Seek(posOld);
 

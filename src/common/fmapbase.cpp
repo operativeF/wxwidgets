@@ -585,7 +585,7 @@ wxFontMapperBase::NonInteractiveCharsetToEncoding(const wxString& charset)
         wxConfigBase *config = GetConfig();
 
         // do we have an encoding for this charset?
-        long value = config->Read(charset, -1l);
+        const long value = config->Read(charset, -1l);
         if ( value != -1 )
         {
             if ( value == wxFONTENCODING_UNKNOWN )

@@ -1224,7 +1224,7 @@ size_t wxMBConvUTF8::ToWChar(wchar_t *buf, size_t n,
             }
             else
             {
-                unsigned ocnt = cnt - 1;
+                const unsigned ocnt = cnt - 1;
                 wxUint32 res = cc & (0x3f >> cnt);
                 while (cnt--)
                 {
@@ -2641,7 +2641,7 @@ public:
     {
         if ( m_minMBCharWidth == 0 )
         {
-            int len = ::WideCharToMultiByte
+            const int len = ::WideCharToMultiByte
                         (
                             m_CodePage,     // code page
                             0,              // no flags
@@ -2740,7 +2740,7 @@ public:
 
     size_t MB2WC(wchar_t *buf, const char *psz, size_t WXUNUSED(n)) const override
     {
-        size_t inbuf = strlen(psz);
+        const size_t inbuf = strlen(psz);
         if (buf)
         {
             if (!m2w.Convert(psz, buf))

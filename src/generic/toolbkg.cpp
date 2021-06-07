@@ -128,7 +128,7 @@ void wxToolbook::OnSize(wxSizeEvent& event)
 
 bool wxToolbook::SetPageText(size_t n, const wxString& strText)
 {
-    int toolId = PageToToolId(n);
+    const int toolId = PageToToolId(n);
     wxToolBarToolBase* tool = GetToolBar()->FindById(toolId);
     if (tool)
     {
@@ -141,7 +141,7 @@ bool wxToolbook::SetPageText(size_t n, const wxString& strText)
 
 wxString wxToolbook::GetPageText(size_t n) const
 {
-    int toolId = PageToToolId(n);
+    const int toolId = PageToToolId(n);
     wxToolBarToolBase* tool = GetToolBar()->FindById(toolId);
     if (tool)
         return tool->GetLabel();
@@ -162,7 +162,7 @@ bool wxToolbook::SetPageImage(size_t n, int imageId)
     if (!GetImageList())
         return false;
 
-    int toolId = PageToToolId(n);
+    const int toolId = PageToToolId(n);
     wxBitmap bmp = GetImageList()->GetBitmap(imageId);
     GetToolBar()->SetToolNormalBitmap(toolId, bmp);
     GetToolBar()->SetToolDisabledBitmap(toolId, bmp.ConvertToDisabled());
@@ -396,7 +396,7 @@ int wxToolbook::ToolIdToPage(int toolId) const
 void wxToolbook::OnToolSelected(wxCommandEvent& event)
 {
     // find page for the tool
-    int page = ToolIdToPage(event.GetId());
+    const int page = ToolIdToPage(event.GetId());
     if (page == wxNOT_FOUND)
     {
         // this happens only of page id has changed afterwards

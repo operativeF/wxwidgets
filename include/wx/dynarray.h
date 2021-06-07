@@ -172,7 +172,7 @@ public:
 
     size_t Add(T lItem, SCMPFUNC fnCompare)
     {
-        size_t n = IndexForInsert(lItem, fnCompare);
+        const size_t n = IndexForInsert(lItem, fnCompare);
         Insert(lItem, n);
         return n;
     }

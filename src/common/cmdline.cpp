@@ -475,7 +475,7 @@ int wxCmdLineParserData::FindOption(const wxString& name)
 {
     if ( !name.empty() )
     {
-        size_t count = m_options.GetCount();
+        const size_t count = m_options.GetCount();
         for ( size_t n = 0; n < count; n++ )
         {
             if ( m_options[n].shortName == name )
@@ -491,7 +491,7 @@ int wxCmdLineParserData::FindOption(const wxString& name)
 
 int wxCmdLineParserData::FindOptionByLongName(const wxString& name)
 {
-    size_t count = m_options.GetCount();
+    const size_t count = m_options.GetCount();
     for ( size_t n = 0; n < count; n++ )
     {
         if ( m_options[n].longName == name )

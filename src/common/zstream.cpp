@@ -258,8 +258,8 @@ size_t wxZlibInputStream::OnSysRead(void *buffer, size_t size)
 /* static */ bool wxZlibInputStream::CanHandleGZip()
 {
   const char *dot = strchr(zlibVersion(), '.');
-  int major = atoi(zlibVersion());
-  int minor = dot ? atoi(dot + 1) : 0;
+  const int major = atoi(zlibVersion());
+  const int minor = dot ? atoi(dot + 1) : 0;
   return major > 1 || (major == 1 && minor >= 2);
 }
 

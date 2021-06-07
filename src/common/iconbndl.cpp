@@ -302,8 +302,8 @@ wxIcon wxIconBundle::GetIcon(const wxSize& size, int flags) const
         const wxIcon& icon = iconArray[i];
         if ( !icon.IsOk() )
             continue;
-        wxCoord sx = icon.GetWidth(),
-                sy = icon.GetHeight();
+        const wxCoord sx = icon.GetWidth();
+        const wxCoord sy = icon.GetHeight();
 
         // Exact match ends search immediately in any case.
         if ( sx == sizeX && sy == sizeY )
@@ -324,8 +324,8 @@ wxIcon wxIconBundle::GetIcon(const wxSize& size, int flags) const
 
         if ( !bestIsSystem && (flags & FALLBACK_NEAREST_LARGER) )
         {
-            bool iconLarger = (sx >= sizeX) && (sy >= sizeY);
-            int iconDiff = abs(sx - sizeX) + abs(sy - sizeY);
+            const bool iconLarger = (sx >= sizeX) && (sy >= sizeY);
+            const int iconDiff = abs(sx - sizeX) + abs(sy - sizeY);
 
             // Use current icon as candidate for the best icon, if either:
             // - we have no candidate yet

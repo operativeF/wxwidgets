@@ -832,10 +832,10 @@ wxEND_EVENT_TABLE()
 
 void wxComboPopupEvtHandler::OnMouseEvent( wxMouseEvent& event )
 {
-    wxPoint pt = event.GetPosition();
-    wxSize sz = m_combo->GetPopupControl()->GetControl()->GetClientSize();
-    int evtType = event.GetEventType();
-    bool isInside = pt.x >= 0 && pt.y >= 0 && pt.x < sz.x && pt.y < sz.y;
+    const wxPoint pt = event.GetPosition();
+    const wxSize sz = m_combo->GetPopupControl()->GetControl()->GetClientSize();
+    const int evtType = event.GetEventType();
+    const bool isInside = pt.x >= 0 && pt.y >= 0 && pt.x < sz.x && pt.y < sz.y;
     bool relayToButton = false;
 
     event.Skip();
@@ -1171,8 +1171,8 @@ void wxComboCtrlBase::CalculateAreas( int btnWidth )
     {
         // Adjust button width to match aspect ratio
         // (but only if control is smaller than best size).
-        int bestHeight = GetBestSize().y;
-        int height = GetSize().y;
+        const int bestHeight = GetBestSize().y;
+        const int height = GetSize().y;
 
         if ( height < bestHeight )
         {
@@ -1214,7 +1214,7 @@ void wxComboCtrlBase::CalculateAreas( int btnWidth )
         // Need to fix height?
         if ( (sz.y-(customBorder*2)) < butHeight && btnWidth == 0 )
         {
-            int newY = butHeight+(customBorder*2);
+            const int newY = butHeight+(customBorder*2);
             SetClientSize(wxDefaultCoord,newY);
             if ( m_bmpNormal.IsOk() || m_btnArea.width != butWidth || m_btnArea.height != butHeight )
                 m_iFlags |= wxCC_IFLAG_HAS_NONSTANDARD_BUTTON;
@@ -1225,7 +1225,7 @@ void wxComboCtrlBase::CalculateAreas( int btnWidth )
         }
     }
 
-    int butAreaWid = butWidth + (m_btnSpacingX*2);
+    const int butAreaWid = butWidth + (m_btnSpacingX*2);
 
     m_btnSize.x = butWidth;
     m_btnSize.y = butHeight;
@@ -1874,8 +1874,8 @@ bool wxComboCtrlBase::HandleButtonMouseEvent( wxMouseEvent& event,
 bool wxComboCtrlBase::PreprocessMouseEvent( wxMouseEvent& event,
                                             int WXUNUSED(flags) )
 {
-    wxMilliClock_t t = ::wxGetLocalTimeMillis();
-    int evtType = event.GetEventType();
+    const wxMilliClock_t t = ::wxGetLocalTimeMillis();
+    const int evtType = event.GetEventType();
 
 #if USES_WXPOPUPWINDOW || USES_GENERICTLW
     if ( m_popupWinType != POPUPWIN_WXPOPUPTRANSIENTWINDOW )
@@ -1901,7 +1901,7 @@ bool wxComboCtrlBase::PreprocessMouseEvent( wxMouseEvent& event,
 
 void wxComboCtrlBase::HandleNormalMouseEvent( wxMouseEvent& event )
 {
-    int evtType = event.GetEventType();
+    const int evtType = event.GetEventType();
 
     if ( (evtType == wxEVT_LEFT_DOWN || evtType == wxEVT_LEFT_DCLICK) &&
          (m_windowStyle & wxCB_READONLY) )
@@ -1987,7 +1987,6 @@ void wxComboCtrlBase::OnKeyEvent(wxKeyEvent& event)
             return;
         }
 
-        int comboStyle = GetWindowStyle();
         wxComboPopup* popupInterface = GetPopupControl();
 
         if ( !popupInterface )
@@ -1996,9 +1995,9 @@ void wxComboCtrlBase::OnKeyEvent(wxKeyEvent& event)
             return;
         }
 
-        int keycode = event.GetKeyCode();
+        const int keycode = event.GetKeyCode();
 
-        if ( (comboStyle & wxCB_READONLY) ||
+        if ( (GetWindowStyle() & wxCB_READONLY) ||
              (keycode != WXK_RIGHT && keycode != WXK_LEFT) )
         {
             popupInterface->OnComboKeyEvent(event);
@@ -2237,9 +2236,9 @@ void wxComboCtrlBase::ShowPopup()
     int spaceAbove;
     int spaceBelow;
     int maxHeightPopup;
-    wxSize ctrlSz = GetSize();
+    const wxSize ctrlSz = GetSize();
 
-    wxRect displayRect = wxDisplay(this).GetGeometry();
+    const wxRect displayRect = wxDisplay(this).GetGeometry();
     screenHeight = displayRect.GetHeight();
     scrPos = GetScreenPosition();
 
@@ -2266,9 +2265,9 @@ void wxComboCtrlBase::ShowPopup()
     //     that if transient popup is open, then tab traversal is to be ignored.
     //     However, I think this code would still be needed for cases where
     //     transient popup doesn't work yet.
-    wxWindow* mainCtrl = GetMainWindowOfCompositeControl();
+    const wxWindow* mainCtrl = GetMainWindowOfCompositeControl();
     wxWindow* parent = mainCtrl->GetParent();
-    int parentFlags = parent->GetWindowStyle();
+    const int parentFlags = parent->GetWindowStyle();
     if ( parentFlags & wxTAB_TRAVERSAL )
     {
         parent->SetWindowStyle( parentFlags & ~(wxTAB_TRAVERSAL) );
@@ -2290,7 +2289,7 @@ void wxComboCtrlBase::ShowPopup()
 
     wxASSERT( !m_popup || m_popup == popup ); // Consistency check.
 
-    wxSize adjustedSize = m_popupInterface->GetAdjustedSize(widthPopup,
+    const wxSize adjustedSize = m_popupInterface->GetAdjustedSize(widthPopup,
                                                             m_heightPopup<=0?DEFAULT_POPUP_HEIGHT:m_heightPopup,
                                                             maxHeightPopup);
 
@@ -2302,7 +2301,7 @@ void wxComboCtrlBase::ShowPopup()
     // Reposition and resize popup window
     //
 
-    wxSize szp = popup->GetSize();
+    const wxSize szp = popup->GetSize();
 
     int popupX;
     int popupY = scrPos.y + ctrlSz.y;
@@ -2312,13 +2311,13 @@ void wxComboCtrlBase::ShowPopup()
     if ( !anchorSide )
         anchorSide = wxLEFT;
 
-    int rightX = scrPos.x + ctrlSz.x + m_extRight - szp.x;
+    const int rightX = scrPos.x + ctrlSz.x + m_extRight - szp.x;
     int leftX = scrPos.x - m_extLeft;
 
     if ( wxTheApp->GetLayoutDirection() == wxLayoutDirection::RightToLeft )
         leftX -= ctrlSz.x;
 
-    int screenWidth = displayRect.GetWidth();
+    const int screenWidth = displayRect.GetWidth();
 
     // If there is not enough horizontal space, anchor on the other side.
     // If there is no space even then, place the popup at x 0.
@@ -2390,7 +2389,7 @@ void wxComboCtrlBase::ShowPopup()
     // This must be after SetStringValue
     m_popupWinState = Animating;
 
-    wxRect popupWinRect( popupX, popupY, szp.x, szp.y );
+    const wxRect popupWinRect( popupX, popupY, szp.x, szp.y );
 
     m_popup = popup;
     if ( (m_iFlags & wxCC_IFLAG_DISABLE_POPUP_ANIM) ||

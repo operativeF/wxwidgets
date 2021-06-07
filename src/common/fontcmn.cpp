@@ -326,7 +326,7 @@ void wxFontBase::SetPixelSize( const wxSize& pixelSize )
         }
         else
         {
-            int distance = smallestBad - largestGood;
+            const int distance = smallestBad - largestGood;
             if (distance == 1)
                 break;
 
@@ -1064,14 +1064,14 @@ wxString wxNativeFontInfo::ToUserString() const
             desc << " '" << familyStr << " family'";
     }
 
-    int size = GetPointSize();
+    const int size = GetPointSize();
     if ( size != wxNORMAL_FONT->GetPointSize() )
     {
         desc << wxT(' ') << size;
     }
 
 #if wxUSE_FONTMAP
-    wxFontEncoding enc = GetEncoding();
+    const wxFontEncoding enc = GetEncoding();
     if ( enc != wxFONTENCODING_DEFAULT && enc != wxFONTENCODING_SYSTEM )
     {
         desc << wxT(' ') << wxFontMapper::GetEncodingName(enc);
@@ -1240,7 +1240,7 @@ bool wxNativeFontInfo::FromUserString(const wxString& s)
         {
 #if wxUSE_FONTMAP
             // try to interpret this as an encoding
-            wxFontEncoding encoding = wxFontMapper::Get()->CharsetToEncoding(token, false);
+            const wxFontEncoding encoding = wxFontMapper::Get()->CharsetToEncoding(token, false);
             if ( encoding != wxFONTENCODING_DEFAULT &&
                  encoding != wxFONTENCODING_SYSTEM )    // returned when the recognition failed
         {

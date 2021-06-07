@@ -109,7 +109,7 @@ bool wxGIFDecoder::ConvertToImage(unsigned int frame, wxImage *image) const
         transparency = image->GetOption(wxIMAGE_OPTION_GIF_TRANSPARENCY);
 
     // create the image
-    wxSize sz = GetFrameSize(frame);
+    const wxSize sz = GetFrameSize(frame);
     image->Create(sz.x, sz.y);
     image->SetType(wxBITMAP_TYPE_GIF);
 
@@ -193,7 +193,7 @@ bool wxGIFDecoder::ConvertToImage(unsigned int frame, wxImage *image) const
 #endif // wxUSE_PALETTE
 
     // copy image data
-    unsigned long npixel = sz.x * sz.y;
+    const unsigned long npixel = sz.x * sz.y;
     for (i = 0; i < npixel; i++, src++)
     {
         *(dst++) = pal[3 * (*src) + 0];
@@ -240,7 +240,7 @@ long wxGIFDecoder::GetDelay(unsigned int frame) const
 wxColour wxGIFDecoder::GetTransparentColour(unsigned int frame) const
 {
     unsigned char *pal = GetFrame(frame)->pal;
-    int n = GetFrame(frame)->transparent;
+    const int n = GetFrame(frame)->transparent;
     if (n == -1)
         return wxNullColour;
 
@@ -642,10 +642,10 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
     // load global color map if available
     if ((buf[4] & 0x80) == 0x80)
     {
-        int backgroundColIndex = buf[5];
+        const int backgroundColIndex = buf[5];
 
         global_ncolors = 2 << (buf[4] & 0x07);
-        unsigned int numBytes = 3 * global_ncolors;
+        const unsigned int numBytes = 3 * global_ncolors;
         stream.Read(pal, numBytes);
         if (stream.LastRead() != numBytes)
         {
@@ -824,8 +824,8 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 // load local color map if available, else use global map
                 if ((buf[8] & 0x80) == 0x80)
                 {
-                    unsigned int local_ncolors = 2 << (buf[8] & 0x07);
-                    unsigned int numBytes = 3 * local_ncolors;
+                    const unsigned int local_ncolors = 2 << (buf[8] & 0x07);
+                    const unsigned int numBytes = 3 * local_ncolors;
                     stream.Read(pimg->pal, numBytes);
                     pimg->ncolours = local_ncolors;
                     if (stream.LastRead() != numBytes)
@@ -843,7 +843,7 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                     return wxGIF_INVFORMAT;
 
                 // decode image
-                wxGIFErrorCode result = dgif(stream, pimg.get(), interl, bits);
+                const wxGIFErrorCode result = dgif(stream, pimg.get(), interl, bits);
                 if (result != wxGIF_OK)
                     return result;
 

@@ -2627,7 +2627,7 @@ wxDCCacheEntry::~wxDCCacheEntry()
 
 wxDCCacheEntry* wxMSWDCImpl::FindBitmapInCache(WXHDC dc, int w, int h)
 {
-    int depth = ::GetDeviceCaps((HDC) dc, PLANES) * ::GetDeviceCaps((HDC) dc, BITSPIXEL);
+    const int depth = ::GetDeviceCaps((HDC) dc, PLANES) * ::GetDeviceCaps((HDC) dc, BITSPIXEL);
     wxList::compatibility_iterator node = sm_bitmapCache.GetFirst();
     while (node)
     {
@@ -2880,7 +2880,7 @@ HDC CreateCompatibleDCWithLayout(HDC hdc)
     HDC hdcNew = ::CreateCompatibleDC(hdc);
     if ( hdcNew )
     {
-        DWORD dwLayout = wxDynLoadWrappers::GetLayout(hdc);
+        const DWORD dwLayout = wxDynLoadWrappers::GetLayout(hdc);
         if ( dwLayout != GDI_ERROR )
             wxDynLoadWrappers::SetLayout(hdcNew, dwLayout);
     }

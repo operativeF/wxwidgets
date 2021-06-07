@@ -394,7 +394,7 @@ void wxGCDCImpl::DestroyClippingRegion()
     m_graphicContext->ResetClip();
     // currently the clip eg of a window extends to the area between the scrollbars
     // so we must explicitly make sure it only covers the area we want it to draw
-    wxSize sz = GetOwner()->GetSize() ;
+    const wxSize sz = GetOwner()->GetSize() ;
     wxPoint origin;
 #ifdef __WXOSX__
     origin = OSXGetOrigin();
@@ -672,11 +672,13 @@ void wxGCDCImpl::DoDrawArc( wxCoord x1, wxCoord y1,
     if ( !m_logicalFunctionSupported )
         return;
 
-    double dx = x1 - xc;
-    double dy = y1 - yc;
-    double radius = sqrt((double)(dx * dx + dy * dy));
-    wxCoord rad = (wxCoord)radius;
+    const double dx = x1 - xc;
+    const double dy = y1 - yc;
+    const double radius = sqrt((double)(dx * dx + dy * dy));
+    const wxCoord rad = (wxCoord)radius;
+
     double sa, ea; // In radians
+
     if (x1 == x2 && y1 == y2)
     {
         sa = 0.0;
@@ -696,7 +698,7 @@ void wxGCDCImpl::DoDrawArc( wxCoord x1, wxCoord y1,
              -atan2(double(y2 - yc), double(x2 - xc));
     }
 
-    bool fill = m_brush.GetStyle() != wxBrushStyle::Transparent;
+    const bool fill = m_brush.GetStyle() != wxBrushStyle::Transparent;
 
     wxGraphicsPath path = m_graphicContext->CreatePath();
     if ( fill && ((x1!=x2)||(y1!=y2)) )
@@ -708,7 +710,7 @@ void wxGCDCImpl::DoDrawArc( wxCoord x1, wxCoord y1,
         path.AddLineToPoint( xc, yc );
     m_graphicContext->DrawPath(path);
 
-    wxRect2DDouble box = path.GetBox();
+    const wxRect2DDouble box = path.GetBox();
     CalcBoundingBox(wxRound(box.m_x), wxRound(box.m_y));
     CalcBoundingBox(wxRound(box.m_x + box.m_width),
                     wxRound(box.m_y + box.m_height));
@@ -722,9 +724,9 @@ void wxGCDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord w, wxCoord h,
     if ( !m_logicalFunctionSupported )
         return;
 
-    wxCoord dx = x + w / 2.0;
-    wxCoord dy = y + h / 2.0;
-    double factor = ((double) w) / h;
+    const wxCoord dx = x + w / 2.0;
+    const wxCoord dy = y + h / 2.0;
+    const double factor = ((double) w) / h;
     m_graphicContext->PushState();
     m_graphicContext->Translate(dx, dy);
     m_graphicContext->Scale(factor, 1.0);
@@ -801,7 +803,7 @@ void wxGCDCImpl::DoDrawLines(int n, const wxPoint points[],
     wxPoint2DDouble* pointsD = new wxPoint2DDouble[n];
     for( int i = 0; i < n; ++i)
     {
-        wxPoint p = points[i];
+        const wxPoint p = points[i];
         pointsD[i].m_x = p.x + xoffset;
         pointsD[i].m_y = p.y + yoffset;
 
@@ -843,8 +845,8 @@ void wxGCDCImpl::DoDrawSpline(const wxPointList *points)
 
     wxCoord x2 = p->x;
     wxCoord y2 = p->y;
-    wxCoord cx1 = ( x1 + x2 ) / 2;
-    wxCoord cy1 = ( y1 + y2 ) / 2;
+    const wxCoord cx1 = ( x1 + x2 ) / 2;
+    const wxCoord cy1 = ( y1 + y2 ) / 2;
 
     path.MoveToPoint( x1 , y1 );
     path.AddLineToPoint( cx1 , cy1 );
@@ -856,8 +858,8 @@ void wxGCDCImpl::DoDrawSpline(const wxPointList *points)
         y1 = y2;
         x2 = p->x;
         y2 = p->y;
-        wxCoord cx4 = (x1 + x2) / 2;
-        wxCoord cy4 = (y1 + y2) / 2;
+        const wxCoord cx4 = (x1 + x2) / 2;
+        const wxCoord cy4 = (y1 + y2) / 2;
 
         path.AddQuadCurveToPoint(x1 , y1 ,cx4 , cy4 );
     }
@@ -866,7 +868,7 @@ void wxGCDCImpl::DoDrawSpline(const wxPointList *points)
 
     m_graphicContext->StrokePath( path );
 
-    wxRect2DDouble box = path.GetBox();
+    const wxRect2DDouble box = path.GetBox();
     CalcBoundingBox(wxRound(box.m_x), wxRound(box.m_y));
     CalcBoundingBox(wxRound(box.m_x + box.m_width),
                     wxRound(box.m_y + box.m_height));
@@ -1043,7 +1045,7 @@ bool wxGCDCImpl::DoStretchBlit(
     if ( logical_func == wxRasterOperationMode::NoOp )
         return true;
 
-    wxCompositionMode mode = TranslateRasterOp(logical_func);
+    const wxCompositionMode mode = TranslateRasterOp(logical_func);
     if ( mode == wxCOMPOSITION_INVALID )
     {
         // Do *not* assert here, this function is often call from wxEVT_PAINT
@@ -1069,10 +1071,10 @@ bool wxGCDCImpl::DoStretchBlit(
 
     bool retval = true;
 
-    wxCompositionMode formerMode = m_graphicContext->GetCompositionMode();
+    const wxCompositionMode formerMode = m_graphicContext->GetCompositionMode();
     if (m_graphicContext->SetCompositionMode(mode))
     {
-        wxAntialiasMode formerAa = m_graphicContext->GetAntialiasMode();
+        const wxAntialiasMode formerAa = m_graphicContext->GetAntialiasMode();
         if (mode == wxCOMPOSITION_XOR)
         {
             m_graphicContext->SetAntialiasMode(wxANTIALIAS_NONE);
@@ -1206,7 +1208,7 @@ void wxGCDCImpl::DoDrawText(const wxString& str, wxCoord x, wxCoord y)
     // mode set by SetLogicalFunction() and should be always done
     // in the default wxRasterOperationMode::Copy mode (which is wxCOMPOSITION_OVER
     // composition mode).
-    wxCompositionMode curMode = m_graphicContext->GetCompositionMode();
+    const wxCompositionMode curMode = m_graphicContext->GetCompositionMode();
     m_graphicContext->SetCompositionMode(wxCOMPOSITION_OVER);
 
     if ( m_backgroundMode == wxBrushStyle::Transparent )
@@ -1315,7 +1317,7 @@ void wxGCDCImpl::Clear()
                                                          : *wxWHITE_BRUSH );
     wxPen p = *wxTRANSPARENT_PEN;
     m_graphicContext->SetPen( p );
-    wxCompositionMode formerMode = m_graphicContext->GetCompositionMode();
+    const wxCompositionMode formerMode = m_graphicContext->GetCompositionMode();
     m_graphicContext->SetCompositionMode(wxCOMPOSITION_SOURCE);
 
     double x, y, w, h;
@@ -1331,7 +1333,7 @@ wxSize wxGCDCImpl::DoGetSize() const
 {
     // FIXME: Return value?
     //wxCHECK_RET( IsOk(), wxT("wxGCDC(cg)::DoGetSize - invalid DC") );
-    wxRealPoint sz = m_graphicContext->GetSize();
+    const wxRealPoint sz = m_graphicContext->GetSize();
 
     return {wxRound(sz.x), wxRound(sz.y)};
 }
@@ -1389,13 +1391,17 @@ void wxGCDCImpl::DoGradientFillConcentric(const wxRect& rect,
                                       const wxPoint& circleCenter)
 {
     //Radius
-    wxInt32 cx = rect.GetWidth() / 2;
-    wxInt32 cy = rect.GetHeight() / 2;
-    wxInt32 nRadius;
-    if (cx < cy)
-        nRadius = cx;
-    else
-        nRadius = cy;
+    const wxInt32 nRadius = [rect]()
+    {
+        if ((rect.GetWidth() / 2) < (rect.GetHeight() / 2))
+        {
+            return (rect.GetWidth() / 2);
+        }
+        else
+        {
+            return (rect.GetHeight() / 2);
+        }
+    }();
 
     // make sure the background is filled (todo move into specific platform implementation ?)
     m_graphicContext->SetPen(*wxTRANSPARENT_PEN);

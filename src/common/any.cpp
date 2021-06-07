@@ -268,11 +268,11 @@ bool wxAnyValueTypeImplInt::ConvertValue(const wxAnyValueBuffer& src,
                                          wxAnyValueType* dstType,
                                          wxAnyValueBuffer& dst) const
 {
-    wxAnyBaseIntType value = GetValue(src);
+    const wxAnyBaseIntType value = GetValue(src);
     if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, wxString) )
     {
 #if defined(wxLongLong_t) && wxUSE_LONGLONG
-        wxLongLong ll(value);
+        const wxLongLong ll(value);
         wxString s = ll.ToString();
 #else
         wxString s = wxString::Format(wxS("%ld"), (long)value);
@@ -283,17 +283,17 @@ bool wxAnyValueTypeImplInt::ConvertValue(const wxAnyValueBuffer& src,
     {
         if ( value < 0 )
             return false;
-        wxAnyBaseUintType ul = (wxAnyBaseUintType) value;
+        const wxAnyBaseUintType ul = (wxAnyBaseUintType) value;
         wxAnyValueTypeImplUint::SetValue(ul, dst);
     }
     else if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, double) )
     {
-        double value2 = static_cast<double>(value);
+        const double value2 = static_cast<double>(value);
         wxAnyValueTypeImplDouble::SetValue(value2, dst);
     }
     else if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, bool) )
     {
-        bool value2 = value != 0;
+        const bool value2 = value != 0;
         wxAnyValueTypeImpl<bool>::SetValue(value2, dst);
     }
     else
@@ -306,11 +306,11 @@ bool wxAnyValueTypeImplUint::ConvertValue(const wxAnyValueBuffer& src,
                                           wxAnyValueType* dstType,
                                           wxAnyValueBuffer& dst) const
 {
-    wxAnyBaseUintType value = GetValue(src);
+    const wxAnyBaseUintType value = GetValue(src);
     if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, wxString) )
     {
 #if defined(wxLongLong_t) && wxUSE_LONGLONG
-        wxULongLong ull(value);
+        const wxULongLong ull(value);
         wxString s = ull.ToString();
 #else
         wxString s = wxString::Format(wxS("%lu"), (long)value);
@@ -321,17 +321,17 @@ bool wxAnyValueTypeImplUint::ConvertValue(const wxAnyValueBuffer& src,
     {
         if ( value > UseIntMax )
             return false;
-        wxAnyBaseIntType l = (wxAnyBaseIntType) value;
+        const wxAnyBaseIntType l = (wxAnyBaseIntType) value;
         wxAnyValueTypeImplInt::SetValue(l, dst);
     }
     else if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, double) )
     {
-        double value2 = static_cast<double>(value);
+        const double value2 = static_cast<double>(value);
         wxAnyValueTypeImplDouble::SetValue(value2, dst);
     }
     else if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, bool) )
     {
-        bool value2 = value != 0;
+        const bool value2 = value != 0;
         wxAnyValueTypeImpl<bool>::SetValue(value2, dst);
     }
     else
@@ -406,15 +406,15 @@ bool wxAnyValueTypeImpl<bool>::ConvertValue(const wxAnyValueBuffer& src,
                                             wxAnyValueType* dstType,
                                             wxAnyValueBuffer& dst) const
 {
-    bool value = GetValue(src);
+    const bool value = GetValue(src);
     if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, wxAnyBaseIntType) )
     {
-        wxAnyBaseIntType value2 = static_cast<wxAnyBaseIntType>(value);
+        const wxAnyBaseIntType value2 = static_cast<wxAnyBaseIntType>(value);
         wxAnyValueTypeImplInt::SetValue(value2, dst);
     }
     else if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, wxAnyBaseUintType) )
     {
-        wxAnyBaseIntType value2 = static_cast<wxAnyBaseUintType>(value);
+        const wxAnyBaseIntType value2 = static_cast<wxAnyBaseUintType>(value);
         wxAnyValueTypeImplUint::SetValue(value2, dst);
     }
     else if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, wxString) )
@@ -436,19 +436,19 @@ bool wxAnyValueTypeImplDouble::ConvertValue(const wxAnyValueBuffer& src,
                                             wxAnyValueType* dstType,
                                             wxAnyValueBuffer& dst) const
 {
-    double value = GetValue(src);
+    const double value = GetValue(src);
     if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, wxAnyBaseIntType) )
     {
         if ( value < UseIntMinF || value > UseIntMaxF )
             return false;
-        wxAnyBaseUintType ul = static_cast<wxAnyBaseUintType>(value);
+        const wxAnyBaseUintType ul = static_cast<wxAnyBaseUintType>(value);
         wxAnyValueTypeImplUint::SetValue(ul, dst);
     }
     else if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, wxAnyBaseUintType) )
     {
         if ( value < 0.0 || value > UseUintMaxF )
             return false;
-        wxAnyBaseUintType ul = static_cast<wxAnyBaseUintType>(value);
+        const wxAnyBaseUintType ul = static_cast<wxAnyBaseUintType>(value);
         wxAnyValueTypeImplUint::SetValue(ul, dst);
     }
     else if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, wxString) )

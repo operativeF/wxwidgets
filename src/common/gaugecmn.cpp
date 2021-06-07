@@ -189,7 +189,8 @@ void wxGaugeBase::Pulse()
 {
 #if wxGAUGE_EMULATE_INDETERMINATE_MODE
     // simulate indeterminate mode
-    int curr = GetValue(), max = GetRange();
+    const int curr = GetValue();
+    const int max = GetRange();
 
     if (m_nDirection == wxRIGHT)
     {

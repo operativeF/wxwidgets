@@ -962,7 +962,7 @@ bool wxURI::ParseIPv6address(const char*& uri)
         }
     }
 
-    bool bAllowAltEnding = maxPostfix == 0;
+    const bool bAllowAltEnding = maxPostfix == 0;
 
     for(; maxPostfix != 0; --maxPostfix)
     {

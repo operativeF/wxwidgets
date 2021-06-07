@@ -177,7 +177,7 @@ void wxTreeCtrlBase::SetItemState(const wxTreeItemId& item, int state)
 {
     if ( state == wxTREE_ITEMSTATE_NEXT )
     {
-        int current = GetItemState(item);
+        const int current = GetItemState(item);
         if ( current == wxTREE_ITEMSTATE_NONE )
             return;
         state = current + 1;
@@ -186,7 +186,7 @@ void wxTreeCtrlBase::SetItemState(const wxTreeItemId& item, int state)
     }
     else if ( state == wxTREE_ITEMSTATE_PREV )
     {
-        int current = GetItemState(item);
+        const int current = GetItemState(item);
         if ( current == wxTREE_ITEMSTATE_NONE )
             return;
         state = current - 1;

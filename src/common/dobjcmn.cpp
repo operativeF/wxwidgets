@@ -532,13 +532,13 @@ bool wxHTMLDataObject::SetData(size_t WXUNUSED(len), const void *buf)
 #ifdef __WXMSW__
     // To be consistent with other platforms, we only add the Fragment part
     // of the Windows HTML clipboard format to the data object.
-    int fragmentStart = html.rfind("StartFragment");
-    int fragmentEnd = html.rfind("EndFragment");
+    const int fragmentStart = html.rfind("StartFragment");
+    const int fragmentEnd = html.rfind("EndFragment");
 
     if (fragmentStart != wxNOT_FOUND && fragmentEnd != wxNOT_FOUND)
     {
-        int startCommentEnd = html.find("-->", fragmentStart) + 3;
-        int endCommentStart = html.rfind("<!--", fragmentEnd);
+        const int startCommentEnd = html.find("-->", fragmentStart) + 3;
+        const int endCommentStart = html.rfind("<!--", fragmentEnd);
 
         if (startCommentEnd != wxNOT_FOUND && endCommentStart != wxNOT_FOUND)
             html = html.Mid(startCommentEnd, endCommentStart - startCommentEnd);

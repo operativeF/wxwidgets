@@ -847,7 +847,7 @@ STDMETHODIMP wxIAccessible::accDoDefaultAction(VARIANT varID)
         return E_INVALIDARG;
     }
 
-    wxAccStatus status = m_pAccessible->DoDefaultAction(varID.lVal);
+    const wxAccStatus status = m_pAccessible->DoDefaultAction(varID.lVal);
     if (status == wxACC_OK)
         return S_OK;
 

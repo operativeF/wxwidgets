@@ -1025,7 +1025,7 @@ wxString wxString::FromAscii(char ascii)
 {
     // What do we do with '\0' ?
 
-    unsigned char c = (unsigned char)ascii;
+    const unsigned char c = (unsigned char)ascii;
 
     wxASSERT_MSG( c < 0x80, wxT("Non-ASCII value passed to FromAscii().") );
 
@@ -1041,7 +1041,7 @@ const wxScopedCharBuffer wxString::ToAscii(char replaceWith) const
 
     for ( const_iterator i = begin(); i != end(); ++i )
     {
-        wxUniChar c(*i);
+        const wxUniChar c(*i);
         // FIXME-UTF8: unify substituted char ('_') with wxUniChar ('?')
         *dest++ = c.IsAscii() ? (char)c : replaceWith;
 
@@ -1108,7 +1108,7 @@ bool wxString::StartsWith(const wxString& prefix, wxString *rest) const
 // provided pointer if it is not NULL, otherwise return false
 bool wxString::EndsWith(const wxString& suffix, wxString *rest) const
 {
-    int start = length() - suffix.length();
+    const int start = length() - suffix.length();
 
     if ( start < 0 || compare(start, npos, suffix) != 0 )
         return false;

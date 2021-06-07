@@ -142,7 +142,7 @@ extern void wxDDEInitialize()
     if ( !DDEInitialized )
     {
         // Should insert filter flags
-        UINT rc = DdeInitialize(&DDEIdInst, _DDECallback, APPCLASS_STANDARD, 0L);
+        const UINT rc = DdeInitialize(&DDEIdInst, _DDECallback, APPCLASS_STANDARD, 0L);
         if ( rc != DMLERR_NO_ERROR )
         {
             DDELogError(wxT("Failed to initialize DDE"), rc);
@@ -271,7 +271,7 @@ bool wxDDEServer::Create(const wxString& server)
     }
 
 
-    bool success = (DdeNameService(DDEIdInst, hsz, (HSZ) nullptr, DNS_REGISTER)
+    const bool success = (DdeNameService(DDEIdInst, hsz, (HSZ) nullptr, DNS_REGISTER)
         != nullptr);
 
     if (!success)
@@ -649,12 +649,12 @@ bool wxDDEConnection::StartAdvise(const wxString& item)
     DWORD result;
     HSZ atom = DDEGetAtom(item);
 
-    bool ok = DdeClientTransaction(nullptr, 0,
-                                   GetHConv(),
-                                   atom, CF_TEXT,
-                                   XTYP_ADVSTART,
-                                   DDE_TIMEOUT,
-                                   &result) != nullptr;
+    const bool ok = DdeClientTransaction(nullptr, 0,
+                                         GetHConv(),
+                                         atom, CF_TEXT,
+                                         XTYP_ADVSTART,
+                                         DDE_TIMEOUT,
+                                         &result) != nullptr;
     if ( !ok )
     {
         DDELogError(_("Failed to establish an advise loop with DDE server"));
@@ -668,12 +668,12 @@ bool wxDDEConnection::StopAdvise(const wxString& item)
     DWORD result;
     HSZ atom = DDEGetAtom(item);
 
-    bool ok = DdeClientTransaction(nullptr, 0,
-                                   GetHConv(),
-                                   atom, CF_TEXT,
-                                   XTYP_ADVSTOP,
-                                   DDE_TIMEOUT,
-                                   &result) != nullptr;
+    const bool ok = DdeClientTransaction(nullptr, 0,
+                                         GetHConv(),
+                                         atom, CF_TEXT,
+                                         XTYP_ADVSTOP,
+                                         DDE_TIMEOUT,
+                                         &result) != nullptr;
     if ( !ok )
     {
         DDELogError(_("Failed to terminate the advise loop with DDE server"));
@@ -829,7 +829,7 @@ _DDECallback(UINT wType,
 
                 if (connection)
                 {
-                    DWORD len = DdeGetData(hData, nullptr, 0, 0);
+                    const DWORD len = DdeGetData(hData, nullptr, 0, 0);
 
                     void *data = connection->GetBufferAtLeast(len);
                     wxASSERT_MSG(data != nullptr,

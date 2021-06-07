@@ -756,7 +756,7 @@ public:
 
     int GetLineBefore(const wxGrid* grid, int line) const override
     {
-        int posBefore = grid->GetColPos(line) - 1;
+        const int posBefore = grid->GetColPos(line) - 1;
         return posBefore >= 0 ? grid->GetColAt(posBefore) : wxNOT_FOUND;
     }
 
@@ -886,7 +886,7 @@ public:
         while ( pos )
         {
             // Check the previous line.
-            int line = GetLineAt(--pos);
+            const int line = GetLineAt(--pos);
             if ( IsLineVisible(line) )
             {
                 // There is another visible line before this one, hence it's
@@ -907,7 +907,7 @@ public:
             // This is not supposed to happen if IsAtBoundary() returned false.
             wxCHECK_RET( pos, "can't advance when already at boundary" );
 
-            int line = GetLineAt(--pos);
+            const int line = GetLineAt(--pos);
             if ( IsLineVisible(line) )
             {
                 m_oper.Set(coords, line);
@@ -918,7 +918,7 @@ public:
 
     int MoveByPixelDistance(int line, int distance) const override
     {
-        int pos = m_oper.GetLineStartPos(m_grid, line);
+        const int pos = m_oper.GetLineStartPos(m_grid, line);
         return m_oper.PosToLine(m_grid, pos - distance + 1, nullptr, true);
     }
 };
@@ -941,8 +941,7 @@ public:
         int pos = GetLinePos(coords);
         while ( pos < m_numLines - 1 )
         {
-            int line = GetLineAt(++pos);
-            if ( IsLineVisible(line) )
+            if ( IsLineVisible(GetLineAt(++pos)) )
                 return false;
         }
 
@@ -957,7 +956,7 @@ public:
             wxCHECK_RET( pos < m_numLines - 1,
                          "can't advance when already at boundary" );
 
-            int line = GetLineAt(++pos);
+            const int line = GetLineAt(++pos);
             if ( IsLineVisible(line) )
             {
                 m_oper.Set(coords, line);
@@ -968,7 +967,7 @@ public:
 
     int MoveByPixelDistance(int line, int distance) const override
     {
-        int pos = m_oper.GetLineStartPos(m_grid, line);
+        const int pos = m_oper.GetLineStartPos(m_grid, line);
         return m_oper.PosToLine(m_grid, pos + distance, nullptr, true);
     }
 

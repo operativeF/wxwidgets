@@ -1500,7 +1500,7 @@ bool wxTranslations::LoadCatalog(const wxString& domain, const wxString& lang, c
     // notice that we don't use the system name for the locale as this would
     // force us to install catalogs in different locations depending on the
     // system but always use the canonical name
-    wxFontEncoding encSys = wxLocale::GetSystemEncoding();
+    const wxFontEncoding encSys = wxLocale::GetSystemEncoding();
     if ( encSys != wxFONTENCODING_SYSTEM )
     {
         wxString fullname(lang);

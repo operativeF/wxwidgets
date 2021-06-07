@@ -302,9 +302,9 @@ void wxSpinCtrlGenericBase::DoMoveWindow(int x, int y, int width, int height)
     // that the control should be. Normally, GetBestSize and GetSize should
     // always return the same value because the size of the spinButton never
     // changes.
-    wxSize sizeBtn = m_spinButton->GetBestSize();
+    const wxSize sizeBtn = m_spinButton->GetBestSize();
 
-    wxCoord wText = width - sizeBtn.x - MARGIN;
+    const wxCoord wText = width - sizeBtn.x - MARGIN;
     m_textCtrl->SetSize(0, 0, wText, height);
     m_spinButton->SetSize(0 + wText + MARGIN, 0, wxDefaultCoord, height);
 }
@@ -528,7 +528,7 @@ bool wxSpinCtrlGenericBase::DoSetValue(double val, SendEvent sendEvent)
     
     if ( m_snap_to_ticks && (m_increment != 0) )
     {
-        double snap_value = val / m_increment;
+        const double snap_value = val / m_increment;
 
         // FIXME: what to do about a failure?
         if (std::isfinite(snap_value))

@@ -296,7 +296,7 @@ void wxTipWindowView::OnPaint(wxPaintEvent& WXUNUSED(event))
     wxPaintDC dc(this);
 
     wxRect rect;
-    wxSize size = GetClientSize();
+    const wxSize size = GetClientSize();
     rect.width = size.x;
     rect.height = size.y;
 

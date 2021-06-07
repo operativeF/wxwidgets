@@ -547,7 +547,7 @@ void wxDataOutputStream::Write8(wxUint8 i)
 void wxDataOutputStream::WriteString(const wxString& string)
 {
   const wxWX2MBbuf buf = string.mb_str(*m_conv);
-  size_t len = buf.length();
+  const size_t len = buf.length();
 
   Write32(len);
   if (len > 0)
@@ -641,7 +641,7 @@ void wxDataOutputStream::Write32(const wxUint32 *buffer, size_t size)
   {
     for (wxUint32 i=0; i<size ;i++)
     {
-      wxUint32 i32 = wxUINT32_SWAP_ON_LE(*buffer);
+      const wxUint32 i32 = wxUINT32_SWAP_ON_LE(*buffer);
       buffer++;
       m_output->Write(&i32, 4);
     }
@@ -650,7 +650,7 @@ void wxDataOutputStream::Write32(const wxUint32 *buffer, size_t size)
   {
     for (wxUint32 i=0; i<size ;i++)
     {
-      wxUint32 i32 = wxUINT32_SWAP_ON_BE(*buffer);
+      const wxUint32 i32 = wxUINT32_SWAP_ON_BE(*buffer);
       buffer++;
       m_output->Write(&i32, 4);
     }
@@ -663,7 +663,7 @@ void wxDataOutputStream::Write16(const wxUint16 *buffer, size_t size)
   {
     for (wxUint32 i=0; i<size ;i++)
     {
-      wxUint16 i16 = wxUINT16_SWAP_ON_LE(*buffer);
+      const wxUint16 i16 = wxUINT16_SWAP_ON_LE(*buffer);
       buffer++;
       m_output->Write(&i16, 2);
     }
@@ -672,7 +672,7 @@ void wxDataOutputStream::Write16(const wxUint16 *buffer, size_t size)
   {
     for (wxUint32 i=0; i<size ;i++)
     {
-      wxUint16 i16 = wxUINT16_SWAP_ON_BE(*buffer);
+      const wxUint16 i16 = wxUINT16_SWAP_ON_BE(*buffer);
       buffer++;
       m_output->Write(&i16, 2);
     }

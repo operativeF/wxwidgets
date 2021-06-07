@@ -201,9 +201,9 @@ wxString wxFileSystemHandler::GetRightLocation(const wxString& location)
     if (i < (int)protocol.length() - 1 || location.compare(0, i + 1, protocol))
         return location.Mid(i + 1, len - i - 1);
 
-    int s = ++i; // Start position
+    const int s = ++i; // Start position
     // Check if there are three '/'s after "file:"
-    int end = wxMin(len, s + 3);
+    const int end = wxMin(len, s + 3);
     while (i < end && location[i] == wxT('/'))
         i++;
     if (i == s + 2) // Host is specified, e.g. "file://host/path"
@@ -230,7 +230,7 @@ wxString wxFileSystemHandler::GetRightLocation(const wxString& location)
 /* static */
 wxString wxFileSystemHandler::GetAnchor(const wxString& location)
 {
-    int l = location.length();
+    const int l = location.length();
 
     for (int i = l-1; i >= 0; i--) {
         wxChar c;

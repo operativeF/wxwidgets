@@ -320,14 +320,14 @@ wxImage wxImage::ShrinkBy( int xFactor , int yFactor ) const
     wxCHECK_MSG( (xFactor > 0) && (yFactor > 0), image,
                  wxT("invalid new image size") );
 
-    long old_height = M_IMGDATA->m_height,
-         old_width  = M_IMGDATA->m_width;
+    const long old_height = M_IMGDATA->m_height;
+    const long old_width  = M_IMGDATA->m_width;
 
     wxCHECK_MSG( (old_height > 0) && (old_width > 0), image,
                  wxT("invalid old image size") );
 
-    long width = old_width / xFactor ;
-    long height = old_height / yFactor ;
+    const long width = old_width / xFactor ;
+    const long height = old_height / yFactor ;
 
     image.Create( width, height, false );
 
@@ -377,13 +377,13 @@ wxImage wxImage::ShrinkBy( int xFactor , int yFactor ) const
             // determine average
             for ( int y1 = 0 ; y1 < yFactor ; ++y1 )
             {
-                long y_offset = (y * yFactor + y1) * old_width;
+                const long y_offset = (y * yFactor + y1) * old_width;
                 for ( int x1 = 0 ; x1 < xFactor ; ++x1 )
                 {
                     const unsigned char *pixel = source_data + 3 * ( y_offset + x * xFactor + x1 ) ;
-                    unsigned char red = pixel[0] ;
-                    unsigned char green = pixel[1] ;
-                    unsigned char blue = pixel[2] ;
+                    const unsigned char red = pixel[0] ;
+                    const unsigned char green = pixel[1] ;
+                    const unsigned char blue = pixel[2] ;
                     unsigned char alpha = 255  ;
                     if ( source_alpha )
                         alpha = *(source_alpha + y_offset + x * xFactor + x1) ;
@@ -439,8 +439,8 @@ wxImage::Scale( int width, int height, wxImageResizeQuality quality ) const
     wxCHECK_MSG( (width > 0) && (height > 0), image,
                  wxT("invalid new image size") );
 
-    long old_height = M_IMGDATA->m_height,
-         old_width  = M_IMGDATA->m_width;
+    const long old_height = M_IMGDATA->m_height;
+    const long old_width  = M_IMGDATA->m_width;
     wxCHECK_MSG( (old_height > 0) && (old_width > 0), image,
                  wxT("invalid old image size") );
 
@@ -729,8 +729,8 @@ struct BilinearPrecalc
 
 inline void DoCalc(BilinearPrecalc& precalc, double srcpix, int srcpixmax)
 {
-    int srcpix1 = int(srcpix);
-    int srcpix2 = srcpix1 == srcpixmax ? srcpix1 : srcpix1 + 1;
+    const int srcpix1 = int(srcpix);
+    const int srcpix2 = srcpix1 == srcpixmax ? srcpix1 : srcpix1 + 1;
 
     precalc.dd = srcpix - (int)srcpix;
     precalc.dd1 = 1.0 - precalc.dd;
@@ -760,7 +760,7 @@ void ResampleBilinearPrecalc(std::vector<BilinearPrecalc>& precalcs, int oldDim)
         for ( int dsty = 0; dsty < newDim; dsty++ )
         {
             // We need to calculate the source pixel to interpolate from - Y-axis
-            double srcpix = (double)dsty * scale_factor;
+            const double srcpix = (double)dsty * scale_factor;
 
             DoCalc(precalcs[dsty], srcpix, srcpixmax);
         }
@@ -768,7 +768,7 @@ void ResampleBilinearPrecalc(std::vector<BilinearPrecalc>& precalcs, int oldDim)
     else
     {
         // Let's take the pixel from the center of the source image.
-        double srcpix = (double)srcpixmax / 2.0;
+        const double srcpix = (double)srcpixmax / 2.0;
 
         DoCalc(precalcs[0], srcpix, srcpixmax);
     }
@@ -823,10 +823,10 @@ wxImage wxImage::ResampleBilinear(int width, int height) const
             const double dx = hPrecalc.dd;
             const double dx1 = hPrecalc.dd1;
 
-            int src_pixel_index00 = y_offset1 * M_IMGDATA->m_width + x_offset1;
-            int src_pixel_index01 = y_offset1 * M_IMGDATA->m_width + x_offset2;
-            int src_pixel_index10 = y_offset2 * M_IMGDATA->m_width + x_offset1;
-            int src_pixel_index11 = y_offset2 * M_IMGDATA->m_width + x_offset2;
+            const int src_pixel_index00 = y_offset1 * M_IMGDATA->m_width + x_offset1;
+            const int src_pixel_index01 = y_offset1 * M_IMGDATA->m_width + x_offset2;
+            const int src_pixel_index10 = y_offset2 * M_IMGDATA->m_width + x_offset1;
+            const int src_pixel_index11 = y_offset2 * M_IMGDATA->m_width + x_offset2;
 
             // first line
             r1 = src_data[src_pixel_index00 * 3 + 0] * dx1 + src_data[src_pixel_index01 * 3 + 0] * dx;
@@ -1008,7 +1008,7 @@ wxImage wxImage::ResampleBicubic(int width, int height) const
 
                     // Calculate the exact position where the source data
                     // should be pulled from based on the x_offset and y_offset
-                    int src_pixel_index = y_offset*M_IMGDATA->m_width + x_offset;
+                    const int src_pixel_index = y_offset*M_IMGDATA->m_width + x_offset;
 
                     // Calculate the weight for the specified pixel according
                     // to the bicubic b-spline kernel we're using for
@@ -1317,7 +1317,7 @@ wxImage wxImage::Rotate90( bool clockwise ) const
     //  our vertical strips will still generally straddle 64-byte cachelines)
     for (long ii = 0; ii < width; )
     {
-        long next_ii = wxMin(ii + 21, width);
+        const long next_ii = wxMin(ii + 21, width);
 
         for (long j = 0; j < height; j++)
         {
@@ -1350,7 +1350,7 @@ wxImage wxImage::Rotate90( bool clockwise ) const
 
         for (long ii = 0; ii < width; )
         {
-            long next_ii = wxMin(ii + 64, width);
+            const long next_ii = wxMin(ii + 64, width);
 
             for (long j = 0; j < height; j++)
             {
@@ -1569,7 +1569,8 @@ wxImage wxImage::Size( const wxSize& size, const wxPoint& pos,
     wxCHECK_MSG( IsOk(), image, wxT("invalid image") );
     wxCHECK_MSG( (size.x > 0) && (size.y > 0), image, wxT("invalid size") );
 
-    int width = GetWidth(), height = GetHeight();
+    const int width = GetWidth();
+    const int height = GetHeight();
     image.Create(size.x, size.y, false);
 
     unsigned char r = (unsigned char)r_;
@@ -1593,7 +1594,7 @@ wxImage wxImage::Size( const wxSize& size, const wxPoint& pos,
 
     // calculate the intersection using source coordinates:
     wxRect srcRect(0, 0, width, height);
-    wxRect dstRect(-pos, size);
+    const wxRect dstRect(-pos, size);
 
     srcRect.Intersect(dstRect);
 
@@ -1659,7 +1660,7 @@ wxImage::Paste(const wxImage & image, int x, int y,
          (GetMaskBlue()==image.GetMaskBlue())))) )
     {
         const unsigned char* source_data = image.GetData() + 3*(xx + yy*image.GetWidth());
-        int source_step = image.GetWidth()*3;
+        const int source_step = image.GetWidth()*3;
 
         unsigned char* target_data = GetData() + 3*((x+xx) + (y+yy)*M_IMGDATA->m_width);
         int target_step = M_IMGDATA->m_width*3;
@@ -1718,9 +1719,9 @@ wxImage::Paste(const wxImage & image, int x, int y,
                 {
                     for (int i = 0; i < width; i++)
                     {
-                        float source_alpha = alpha_source_data[i] / 255.0f;
-                        float light_left = (alpha_target_data[i] / 255.0f) * (1.0f - source_alpha);
-                        float result_alpha = source_alpha + light_left;
+                        const float source_alpha = alpha_source_data[i] / 255.0f;
+                        const float light_left = (alpha_target_data[i] / 255.0f) * (1.0f - source_alpha);
+                        const float result_alpha = source_alpha + light_left;
                         alpha_target_data[i] = (unsigned char)((result_alpha * 255) + 0.5f);
                         for (int c = 3 * i; c < 3 * (i + 1); c++)
                         {
@@ -1744,7 +1745,7 @@ wxImage::Paste(const wxImage & image, int x, int y,
     if (!copiedPixels)
     {
         const unsigned char* source_data = image.GetData() + 3 * (xx + yy * image.GetWidth());
-        int source_step = image.GetWidth() * 3;
+        const int source_step = image.GetWidth() * 3;
 
         unsigned char* target_data = GetData() + 3 * ((x + xx) + (y + yy) * M_IMGDATA->m_width);
         int target_step = M_IMGDATA->m_width * 3;
@@ -1776,9 +1777,9 @@ wxImage::Paste(const wxImage & image, int x, int y,
         else
         {
             // Copy all 'non masked' pixels
-            unsigned char r = image.GetMaskRed();
-            unsigned char g = image.GetMaskGreen();
-            unsigned char b = image.GetMaskBlue();
+            const unsigned char r = image.GetMaskRed();
+            const unsigned char g = image.GetMaskGreen();
+            const unsigned char b = image.GetMaskBlue();
 
             for (int j = 0; j < height; j++)
             {
@@ -1983,7 +1984,7 @@ void wxImage::SetRGB( const wxRect& rect_, unsigned char r, unsigned char g, uns
     AllocExclusive();
 
     wxRect rect(rect_);
-    wxRect imageRect(0, 0, GetWidth(), GetHeight());
+    const wxRect imageRect(0, 0, GetWidth(), GetHeight());
     if ( rect == wxRect() )
     {
         rect = imageRect;
@@ -1995,16 +1996,15 @@ void wxImage::SetRGB( const wxRect& rect_, unsigned char r, unsigned char g, uns
                      wxT("invalid bounding rectangle") );
     }
 
-    int x1 = rect.GetLeft(),
-        y1 = rect.GetTop(),
-        x2 = rect.GetRight() + 1,
-        y2 = rect.GetBottom() + 1;
+    const int x1 = rect.GetLeft();
+    const int y1 = rect.GetTop();
+    const int x2 = rect.GetRight() + 1;
+    const int y2 = rect.GetBottom() + 1;
 
     int x, y, width = GetWidth();
     for (y = y1; y < y2; y++)
     {
-        unsigned char* data;
-        data = M_IMGDATA->m_data + (y*width + x1)*3;
+        unsigned char* data = M_IMGDATA->m_data + (y*width + x1)*3;
         for (x = x1; x < x2; x++)
         {
             *data++ = r;
@@ -2048,7 +2048,7 @@ bool wxImage::IsOk() const
 {
     // image of 0 width or height can't be considered ok - at least because it
     // causes crashes in ConvertToBitmap() if we don't catch it in time
-    wxImageRefData *data = M_IMGDATA;
+    const wxImageRefData *data = M_IMGDATA;
     return data && data->m_ok && data->m_width && data->m_height;
 }
 
@@ -2129,7 +2129,7 @@ unsigned char wxImage::GetAlpha(int x, int y) const
 {
     wxCHECK_MSG( HasAlpha(), 0, wxT("no alpha channel") );
 
-    long pos = XYToIndex(x, y);
+    const long pos = XYToIndex(x, y);
     wxCHECK_MSG( pos != -1, 0, wxT("invalid image coordinates") );
 
     return M_IMGDATA->m_alpha[pos];
@@ -2307,7 +2307,7 @@ bool wxImage::HasMask() const
 
 bool wxImage::IsTransparent(int x, int y, unsigned char threshold) const
 {
-    long pos = XYToIndex(x, y);
+    const long pos = XYToIndex(x, y);
     wxCHECK_MSG( pos != -1, false, wxT("invalid image coordinates") );
 
     // check mask
@@ -2414,8 +2414,8 @@ bool wxImage::ConvertAlphaToMask(unsigned char mr,
     unsigned char *imgdata = GetData();
     unsigned char *alphadata = GetAlpha();
 
-    int w = GetWidth();
-    int h = GetHeight();
+    const int w = GetWidth();
+    const int h = GetHeight();
 
     for (int y = 0; y < h; y++)
     {

@@ -1108,12 +1108,12 @@ size_t wxZipEntry::WriteLocal(wxOutputStream& stream, wxMBConv& conv, wxZipArchi
     const wxWX2MBbuf name_buf = unixName.mb_str(conv);
     const char *name = name_buf;
     if (!name) name = "";
-    wxUint16 nameLen = wx_truncate_cast(wxUint16, strlen(name));
+    const wxUint16 nameLen = wx_truncate_cast(wxUint16, strlen(name));
 
     if ( (zipFormat == wxZIP_FORMAT_ZIP64) ||
         m_CompressedSize >= 0xffffffff || m_Size >= 0xffffffff )
         m_z64infoOffset = LOCAL_SIZE + nameLen;
-    wxUint16 versionNeeded =
+    const wxUint16 versionNeeded =
         (m_z64infoOffset > 0) ? Z64_VERSION_NEEDED_TO_EXTRACT : int(m_VersionNeeded);
 
     wxDataOutputStream ds(stream);
@@ -1290,8 +1290,8 @@ size_t wxZipEntry::ReadDescriptor(wxInputStream& stream)
     if (m_Crc == SUMS_MAGIC)
     {
         wxZipHeader buf(stream, 8);
-        wxUint32 u1 = buf.GetSize() >= 4 ? buf.Read32() : (wxUint32)LOCAL_MAGIC;
-        wxUint32 u2 = buf.GetSize() == 8 ? buf.Read32() : 0;
+        const wxUint32 u1 = buf.GetSize() >= 4 ? buf.Read32() : (wxUint32)LOCAL_MAGIC;
+        const wxUint32 u2 = buf.GetSize() == 8 ? buf.Read32() : 0;
 
         // look for the signature of the following record to decide which
         if ((u1 == LOCAL_MAGIC || u1 == CENTRAL_MAGIC) &&
@@ -1505,7 +1505,7 @@ bool wxZipEndRec::Read(wxInputStream& stream, wxMBConv& conv)
     {
         // Found zip64 locator, read z64 directory
         dsLoc.Read32(); // skip: disk with the start of the zip64
-        wxUint64 z64EndOffset = dsLoc.Read64();
+        const wxUint64 z64EndOffset = dsLoc.Read64();
 
         // Read zip64 end of central directory record
         if (stream.SeekI(z64EndOffset) == wxInvalidOffset)

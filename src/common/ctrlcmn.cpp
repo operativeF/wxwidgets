@@ -55,7 +55,7 @@ bool wxControlBase::Create(wxWindow *parent,
                            const wxValidator& wxVALIDATOR_PARAM(validator),
                            const wxString &name)
 {
-    bool ret = wxWindow::Create(parent, id, pos, size, style, name);
+    const bool ret = wxWindow::Create(parent, id, pos, size, style, name);
 
 #if wxUSE_VALIDATORS
     if ( ret )
@@ -318,7 +318,7 @@ struct EllipsizeCalculator
                 {
                     if ( (it + 1) != s.end() )
                     {
-                        int w = m_charOffsetsPx[n];
+                        const int w = m_charOffsetsPx[n];
                         m_charOffsetsPx.insert(std::begin(m_charOffsetsPx) + n, w);
                         lastWasMnemonic = true;
                     }
@@ -468,7 +468,7 @@ wxString DoEllipsizeSingleLine(const wxString& curLine, const wxDC& dc,
     if (maxFinalWidthPx <= 0)
         return wxEmptyString;
 
-    size_t len = curLine.length();
+    const size_t len = curLine.length();
     if (len <= 1 )
         return curLine;
 

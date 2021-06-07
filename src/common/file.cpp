@@ -221,7 +221,7 @@ bool wxFile::Open(const wxString& fileName, OpenMode mode, int accessMode)
     accessMode &= wxS_IRUSR | wxS_IWUSR;
 #endif // __WINDOWS__
 
-    int fildes = wxOpen( fileName, flags, accessMode);
+    const int fildes = wxOpen( fileName, flags, accessMode);
 
     if ( CheckForError(fildes) )
     {
@@ -312,7 +312,7 @@ bool wxFile::ReadAll(wxString *str, const wxMBConv& conv)
             if ( !buf.extend(len + READSIZE) )
                 return false;
 
-            ssize_t nread = Read(buf.data() + len, READSIZE);
+            const ssize_t nread = Read(buf.data() + len, READSIZE);
             if ( nread == wxInvalidOffset )
                 return false;
 
@@ -338,7 +338,7 @@ ssize_t wxFile::Read(void *pBuf, size_t nCount)
 
     wxCHECK( (pBuf != nullptr) && IsOpened(), 0 );
 
-    ssize_t iRc = wxRead(m_fd, pBuf, nCount);
+    const ssize_t iRc = wxRead(m_fd, pBuf, nCount);
 
     if ( CheckForError(iRc) )
     {
@@ -439,7 +439,7 @@ wxFileOffset wxFile::Seek(wxFileOffset ofs, wxSeekMode mode)
             break;
     }
 
-    wxFileOffset iRc = wxSeek(m_fd, ofs, origin);
+    const wxFileOffset iRc = wxSeek(m_fd, ofs, origin);
     if ( CheckForError(iRc) )
     {
         wxLogSysError(_("can't seek on file descriptor %d"), m_fd);
