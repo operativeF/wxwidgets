@@ -73,20 +73,20 @@ static const wxImage& GetTestImage()
 
 BENCHMARK_FUNC(EnlargeNormal)
 {
-    return GetTestImage().Scale(300, 300, wxIMAGE_QUALITY_NORMAL).IsOk();
+    return GetTestImage().Scale(300, 300, wxImageResizeQuality::Normal).IsOk();
 }
 
 BENCHMARK_FUNC(EnlargeHighQuality)
 {
-    return GetTestImage().Scale(300, 300, wxIMAGE_QUALITY_HIGH).IsOk();
+    return GetTestImage().Scale(300, 300, wxImageResizeQuality::High).IsOk();
 }
 
 BENCHMARK_FUNC(ShrinkNormal)
 {
-    return GetTestImage().Scale(50, 50, wxIMAGE_QUALITY_NORMAL).IsOk();
+    return GetTestImage().Scale(50, 50, wxImageResizeQuality::Normal).IsOk();
 }
 
 BENCHMARK_FUNC(ShrinkHighQuality)
 {
-    return GetTestImage().Scale(50, 50, wxIMAGE_QUALITY_HIGH).IsOk();
+    return GetTestImage().Scale(50, 50, wxImageResizeQuality::High).IsOk();
 }

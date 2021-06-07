@@ -1411,31 +1411,31 @@ void ImageTestCase::ScaleCompare()
     wxImage original;
     CPPUNIT_ASSERT(original.LoadFile("horse.bmp"));
 
-    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale( 50,  50, wxIMAGE_QUALITY_BICUBIC),
+    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale( 50,  50, wxImageResizeQuality::Bicubic),
                                "image/horse_bicubic_50x50.png");
-    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(100, 100, wxIMAGE_QUALITY_BICUBIC),
+    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(100, 100, wxImageResizeQuality::Bicubic),
                                "image/horse_bicubic_100x100.png");
-    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(150, 150, wxIMAGE_QUALITY_BICUBIC),
+    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(150, 150, wxImageResizeQuality::Bicubic),
                                "image/horse_bicubic_150x150.png");
-    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(300, 300, wxIMAGE_QUALITY_BICUBIC),
+    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(300, 300, wxImageResizeQuality::Bicubic),
                                "image/horse_bicubic_300x300.png");
 
-    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale( 50,  50, wxIMAGE_QUALITY_BOX_AVERAGE),
+    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale( 50,  50, wxImageResizeQuality::BoxAverage),
                                "image/horse_box_average_50x50.png");
-    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(100, 100, wxIMAGE_QUALITY_BOX_AVERAGE),
+    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(100, 100, wxImageResizeQuality::BoxAverage),
                                "image/horse_box_average_100x100.png");
-    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(150, 150, wxIMAGE_QUALITY_BOX_AVERAGE),
+    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(150, 150, wxImageResizeQuality::BoxAverage),
                                "image/horse_box_average_150x150.png");
-    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(300, 300, wxIMAGE_QUALITY_BOX_AVERAGE),
+    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(300, 300, wxImageResizeQuality::BoxAverage),
                                "image/horse_box_average_300x300.png");
 
-    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale( 50,  50, wxIMAGE_QUALITY_BILINEAR),
+    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale( 50,  50, wxImageResizeQuality::Bilinear),
                                "image/horse_bilinear_50x50.png");
-    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(100, 100, wxIMAGE_QUALITY_BILINEAR),
+    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(100, 100, wxImageResizeQuality::Bilinear),
                                "image/horse_bilinear_100x100.png");
-    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(150, 150, wxIMAGE_QUALITY_BILINEAR),
+    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(150, 150, wxImageResizeQuality::Bilinear),
                                "image/horse_bilinear_150x150.png");
-    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(300, 300, wxIMAGE_QUALITY_BILINEAR),
+    ASSERT_IMAGE_EQUAL_TO_FILE(original.Scale(300, 300, wxImageResizeQuality::Bilinear),
                                "image/horse_bilinear_300x300.png");
 
     // Test scaling symmetric image
@@ -1459,13 +1459,13 @@ void ImageTestCase::ScaleCompare()
     };
 
     wxImage imgCross(cross_xpm);
-    ASSERT_IMAGE_EQUAL_TO_FILE(imgCross.Scale(256, 256, wxIMAGE_QUALITY_BILINEAR),
+    ASSERT_IMAGE_EQUAL_TO_FILE(imgCross.Scale(256, 256, wxImageResizeQuality::Bilinear),
                                "image/cross_bilinear_256x256.png");
-    ASSERT_IMAGE_EQUAL_TO_FILE(imgCross.Scale(256, 256, wxIMAGE_QUALITY_BICUBIC),
+    ASSERT_IMAGE_EQUAL_TO_FILE(imgCross.Scale(256, 256, wxImageResizeQuality::Bicubic),
                                "image/cross_bicubic_256x256.png");
-    ASSERT_IMAGE_EQUAL_TO_FILE(imgCross.Scale(256, 256, wxIMAGE_QUALITY_BOX_AVERAGE),
+    ASSERT_IMAGE_EQUAL_TO_FILE(imgCross.Scale(256, 256, wxImageResizeQuality::BoxAverage),
                                "image/cross_box_average_256x256.png");
-    ASSERT_IMAGE_EQUAL_TO_FILE(imgCross.Scale(256, 256, wxIMAGE_QUALITY_NEAREST),
+    ASSERT_IMAGE_EQUAL_TO_FILE(imgCross.Scale(256, 256, wxImageResizeQuality::Nearest),
                                "image/cross_nearest_neighb_256x256.png");
 }
 
