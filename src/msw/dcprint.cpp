@@ -337,7 +337,7 @@ void wxPrinterDCImpl::DoDrawBitmap(const wxBitmap& bmp,
 
         memDC.SelectObjectAsSource(bmp);
 
-        GetOwner()->Blit(x, y, width, height, &memDC, 0, 0, wxCOPY, useMask);
+        GetOwner()->Blit(x, y, width, height, &memDC, 0, 0, wxRasterOperationMode::Copy, useMask);
 
         memDC.SelectObject(wxNullBitmap);
     }

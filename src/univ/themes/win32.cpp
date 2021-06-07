@@ -1524,7 +1524,7 @@ wxWin32Renderer::wxWin32Renderer(const wxColourScheme *scheme)
             dcInverse.Clear();
             dcInverse.Blit(0, 0, w, h,
                           &dcNormal, 0, 0,
-                          wxXOR);
+                          wxRasterOperationMode::Xor);
             dcInverse.SelectObject(wxNullBitmap);
 
             mask = new wxMask(m_bmpArrows[Arrow_Inverted][n], *wxBLACK);
@@ -1535,7 +1535,7 @@ wxWin32Renderer::wxWin32Renderer(const wxColourScheme *scheme)
             dcInverse.Clear();
             dcInverse.Blit(0, 0, w, h,
                           &dcDisabled, 0, 0,
-                          wxXOR);
+                          wxRasterOperationMode::Xor);
             dcInverse.SelectObject(wxNullBitmap);
 
             mask = new wxMask(m_bmpArrows[Arrow_InvertedDisabled][n], *wxBLACK);

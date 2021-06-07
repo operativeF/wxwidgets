@@ -563,13 +563,13 @@ void wxSashWindow::DrawSashTracker(wxSashEdgePosition edge, int x, int y)
 
     wxPen sashTrackerPen(*wxBLACK, 2, wxPenStyle::Solid);
 
-    screenDC.SetLogicalFunction(wxINVERT);
+    screenDC.SetLogicalFunction(wxRasterOperationMode::Invert);
     screenDC.SetPen(sashTrackerPen);
     screenDC.SetBrush(*wxTRANSPARENT_BRUSH);
 
     screenDC.DrawLine(x1, y1, x2, y2);
 
-    screenDC.SetLogicalFunction(wxCOPY);
+    screenDC.SetLogicalFunction(wxRasterOperationMode::Copy);
 
     screenDC.SetPen(wxNullPen);
     screenDC.SetBrush(wxNullBrush);

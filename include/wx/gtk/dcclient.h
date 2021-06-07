@@ -56,7 +56,7 @@ public:
     virtual bool DoBlit( wxCoord xdest, wxCoord ydest,
                          wxCoord width, wxCoord height,
                          wxDC *source, wxCoord xsrc, wxCoord ysrc,
-                         wxRasterOperationMode logical_func = wxCOPY,
+                         wxRasterOperationMode logical_func = wxRasterOperationMode::Copy,
                          bool useMask = false,
                          wxCoord xsrcMask = -1, wxCoord ysrcMask = -1 ) override;
 

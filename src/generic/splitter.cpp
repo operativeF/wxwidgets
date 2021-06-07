@@ -588,13 +588,13 @@ void wxSplitterWindow::DrawSashTracker(int x, int y)
     ClientToScreen(&x1, &y1);
     ClientToScreen(&x2, &y2);
 
-    screenDC.SetLogicalFunction(wxINVERT);
+    screenDC.SetLogicalFunction(wxRasterOperationMode::Invert);
     screenDC.SetPen(*m_sashTrackerPen);
     screenDC.SetBrush(*wxTRANSPARENT_BRUSH);
 
     screenDC.DrawLine(x1, y1, x2, y2);
 
-    screenDC.SetLogicalFunction(wxCOPY);
+    screenDC.SetLogicalFunction(wxRasterOperationMode::Copy);
 }
 
 int wxSplitterWindow::GetWindowSize() const

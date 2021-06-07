@@ -181,7 +181,7 @@ public:
 
     bool DoBlit(wxCoord xdest, wxCoord ydest, wxCoord width, wxCoord height,
                         wxDC *source, wxCoord xsrc, wxCoord ysrc,
-                        wxRasterOperationMode rop = wxCOPY, bool useMask = false,
+                        wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
                         wxCoord xsrcMask = -1, wxCoord ysrcMask = -1) override;
 
     bool DoStretchBlit(wxCoord xdest, wxCoord ydest,
@@ -189,7 +189,7 @@ public:
                                wxDC *source,
                                wxCoord xsrc, wxCoord ysrc,
                                wxCoord srcWidth, wxCoord srcHeight,
-                               wxRasterOperationMode = wxCOPY, bool useMask = false,
+                               wxRasterOperationMode = wxRasterOperationMode::Copy, bool useMask = false,
                                wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) override;
 
     wxSize DoGetSize() const override;

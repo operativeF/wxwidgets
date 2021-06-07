@@ -291,7 +291,7 @@ void wxCaret::DoDraw(wxDC *dc, wxWindow* win)
 
     // VZ: unfortunately, the rectangle comes out a pixel smaller when this is
     //     done under wxGTK - no idea why
-    //dc->SetLogicalFunction(wxINVERT);
+    //dc->SetLogicalFunction(wxRasterOperationMode::Invert);
 
     dc->DrawRectangle(m_x, m_y, m_width, m_height);
 }

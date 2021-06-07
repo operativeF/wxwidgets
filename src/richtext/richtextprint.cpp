@@ -204,9 +204,9 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
         // Draw header, if any
         wxRichTextOddEvenPage oddEven = ((page % 2) == 1) ? wxRICHTEXT_PAGE_ODD : wxRICHTEXT_PAGE_EVEN;
 
-        wxString headerTextCentre = m_headerFooterData.GetHeaderText(oddEven, wxRICHTEXT_PAGE_CENTRE);
-        wxString headerTextLeft = m_headerFooterData.GetHeaderText(oddEven, wxRICHTEXT_PAGE_LEFT);
-        wxString headerTextRight = m_headerFooterData.GetHeaderText(oddEven, wxRICHTEXT_PAGE_RIGHT);
+        wxString headerTextCentre = m_headerFooterData.GetHeaderText(oddEven, wxRichTextPageLocation::Centre);
+        wxString headerTextLeft = m_headerFooterData.GetHeaderText(oddEven, wxRichTextPageLocation::Left);
+        wxString headerTextRight = m_headerFooterData.GetHeaderText(oddEven, wxRichTextPageLocation::Right);
 
         if (!headerTextLeft.IsEmpty())
         {
@@ -243,9 +243,9 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
         }
 
         // Draw footer, if any
-        wxString footerTextCentre = m_headerFooterData.GetFooterText(oddEven, wxRICHTEXT_PAGE_CENTRE);
-        wxString footerTextLeft = m_headerFooterData.GetFooterText(oddEven, wxRICHTEXT_PAGE_LEFT);
-        wxString footerTextRight = m_headerFooterData.GetFooterText(oddEven, wxRICHTEXT_PAGE_RIGHT);
+        wxString footerTextCentre = m_headerFooterData.GetFooterText(oddEven, wxRichTextPageLocation::Centre);
+        wxString footerTextLeft = m_headerFooterData.GetFooterText(oddEven, wxRichTextPageLocation::Left);
+        wxString footerTextRight = m_headerFooterData.GetFooterText(oddEven, wxRichTextPageLocation::Right);
 
         if (!footerTextLeft.IsEmpty())
         {
@@ -362,13 +362,13 @@ void wxRichTextPrintout::CalculateScaling(wxDC* dc, wxRect& textRect, wxRect& he
 
     headerRect = wxRect(0, 0, 0, 0);
 
-    if (!m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_ODD, wxRICHTEXT_PAGE_LEFT).IsEmpty() ||
-        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_ODD, wxRICHTEXT_PAGE_CENTRE).IsEmpty() ||
-        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_ODD, wxRICHTEXT_PAGE_RIGHT).IsEmpty() ||
+    if (!m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left).IsEmpty() ||
+        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Centre).IsEmpty() ||
+        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Right).IsEmpty() ||
 
-        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_EVEN, wxRICHTEXT_PAGE_LEFT).IsEmpty() ||
-        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_EVEN, wxRICHTEXT_PAGE_CENTRE).IsEmpty() ||
-        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_EVEN, wxRICHTEXT_PAGE_RIGHT).IsEmpty())
+        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation::Left).IsEmpty() ||
+        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation::Centre).IsEmpty() ||
+        !m_headerFooterData.GetHeaderText(wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation::Right).IsEmpty())
     {
         if (m_headerFooterData.GetFont().IsOk())
             dc->SetFont(m_headerFooterData.GetFont());
@@ -387,13 +387,13 @@ void wxRichTextPrintout::CalculateScaling(wxDC* dc, wxRect& textRect, wxRect& he
 
     footerRect = wxRect(0, 0, 0, 0);
 
-    if (!m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_ODD, wxRICHTEXT_PAGE_LEFT).IsEmpty() ||
-        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_ODD, wxRICHTEXT_PAGE_CENTRE).IsEmpty() ||
-        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_ODD, wxRICHTEXT_PAGE_RIGHT).IsEmpty() ||
+    if (!m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left).IsEmpty() ||
+        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Centre).IsEmpty() ||
+        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Right).IsEmpty() ||
 
-        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_EVEN, wxRICHTEXT_PAGE_LEFT).IsEmpty() ||
-        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_EVEN, wxRICHTEXT_PAGE_CENTRE).IsEmpty() ||
-        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_EVEN, wxRICHTEXT_PAGE_RIGHT).IsEmpty())
+        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation::Left).IsEmpty() ||
+        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation::Centre).IsEmpty() ||
+        !m_headerFooterData.GetFooterText(wxRICHTEXT_PAGE_EVEN, wxRichTextPageLocation::Right).IsEmpty())
     {
         if (m_headerFooterData.GetFont().IsOk())
             dc->SetFont(m_headerFooterData.GetFont());
@@ -637,7 +637,7 @@ wxRichTextPrintout *wxRichTextPrinting::CreatePrintout()
     return p;
 }
 
-/// Set/get header text, e.g. wxRICHTEXT_PAGE_ODD, wxRICHTEXT_PAGE_LEFT
+/// Set/get header text, e.g. wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left
 void wxRichTextPrinting::SetHeaderText(const wxString& text, wxRichTextOddEvenPage page, wxRichTextPageLocation location)
 {
     m_headerFooterData.SetHeaderText(text, page, location);
@@ -648,7 +648,7 @@ wxString wxRichTextPrinting::GetHeaderText(wxRichTextOddEvenPage page, wxRichTex
     return m_headerFooterData.GetHeaderText(page, location);
 }
 
-/// Set/get footer text, e.g. wxRICHTEXT_PAGE_ODD, wxRICHTEXT_PAGE_LEFT
+/// Set/get footer text, e.g. wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left
 void wxRichTextPrinting::SetFooterText(const wxString& text, wxRichTextOddEvenPage page, wxRichTextPageLocation location)
 {
     m_headerFooterData.SetFooterText(text, page, location);
@@ -699,7 +699,7 @@ wxString wxRichTextHeaderFooterData::GetText(int headerFooter, wxRichTextOddEven
         return wxEmptyString;
 }
 
-/// Set/get header text, e.g. wxRICHTEXT_PAGE_ODD, wxRICHTEXT_PAGE_LEFT
+/// Set/get header text, e.g. wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left
 void wxRichTextHeaderFooterData::SetHeaderText(const wxString& text, wxRichTextOddEvenPage page, wxRichTextPageLocation location)
 {
     if (page == wxRICHTEXT_PAGE_ALL)
@@ -716,7 +716,7 @@ wxString wxRichTextHeaderFooterData::GetHeaderText(wxRichTextOddEvenPage page, w
     return GetText(0, page, location);
 }
 
-/// Set/get footer text, e.g. wxRICHTEXT_PAGE_ODD, wxRICHTEXT_PAGE_LEFT
+/// Set/get footer text, e.g. wxRICHTEXT_PAGE_ODD, wxRichTextPageLocation::Left
 void wxRichTextHeaderFooterData::SetFooterText(const wxString& text, wxRichTextOddEvenPage page, wxRichTextPageLocation location)
 {
     if (page == wxRICHTEXT_PAGE_ALL)

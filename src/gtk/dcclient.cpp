@@ -1801,22 +1801,22 @@ void wxWindowDCImpl::SetLogicalFunction( wxRasterOperationMode function )
     GdkFunction mode;
     switch (function)
     {
-        case wxXOR:          mode = GDK_XOR;           break;
-        case wxINVERT:       mode = GDK_INVERT;        break;
-        case wxOR_REVERSE:   mode = GDK_OR_REVERSE;    break;
-        case wxAND_REVERSE:  mode = GDK_AND_REVERSE;   break;
-        case wxCLEAR:        mode = GDK_CLEAR;         break;
-        case wxSET:          mode = GDK_SET;           break;
-        case wxOR_INVERT:    mode = GDK_OR_INVERT;     break;
-        case wxAND:          mode = GDK_AND;           break;
-        case wxOR:           mode = GDK_OR;            break;
-        case wxEQUIV:        mode = GDK_EQUIV;         break;
-        case wxNAND:         mode = GDK_NAND;          break;
-        case wxAND_INVERT:   mode = GDK_AND_INVERT;    break;
-        case wxCOPY:         mode = GDK_COPY;          break;
-        case wxNO_OP:        mode = GDK_NOOP;          break;
-        case wxSRC_INVERT:   mode = GDK_COPY_INVERT;   break;
-        case wxNOR:          mode = GDK_NOR;           break;
+        case wxRasterOperationMode::Xor:          mode = GDK_XOR;           break;
+        case wxRasterOperationMode::Invert:       mode = GDK_INVERT;        break;
+        case wxRasterOperationMode::OrReverse:   mode = GDK_OR_REVERSE;    break;
+        case wxRasterOperationMode::AndReverse:  mode = GDK_AND_REVERSE;   break;
+        case wxRasterOperationMode::Clear:        mode = GDK_CLEAR;         break;
+        case wxRasterOperationMode::Set:          mode = GDK_SET;           break;
+        case wxRasterOperationMode::OrInvert:    mode = GDK_OR_INVERT;     break;
+        case wxRasterOperationMode::And:          mode = GDK_AND;           break;
+        case wxRasterOperationMode::Or:           mode = GDK_OR;            break;
+        case wxRasterOperationMode::Equiv:        mode = GDK_EQUIV;         break;
+        case wxRasterOperationMode::Nand:         mode = GDK_NAND;          break;
+        case wxRasterOperationMode::AndInvert:   mode = GDK_AND_INVERT;    break;
+        case wxRasterOperationMode::Copy:         mode = GDK_COPY;          break;
+        case wxRasterOperationMode::NoOp:        mode = GDK_NOOP;          break;
+        case wxRasterOperationMode::SrcInvert:   mode = GDK_COPY_INVERT;   break;
+        case wxRasterOperationMode::Nor:          mode = GDK_NOR;           break;
         default:
             wxFAIL_MSG("unknown mode");
             return;

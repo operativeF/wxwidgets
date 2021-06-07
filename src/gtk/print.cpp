@@ -2115,19 +2115,19 @@ void wxGtkPrinterDCImpl::SetBrush( const wxBrush& brush )
 
 void wxGtkPrinterDCImpl::SetLogicalFunction( wxRasterOperationMode function )
 {
-    if (function == wxCLEAR)
+    if (function == wxRasterOperationMode::Clear)
         cairo_set_operator (m_cairo, CAIRO_OPERATOR_CLEAR);
-    else if (function == wxOR)
+    else if (function == wxRasterOperationMode::Or)
         cairo_set_operator (m_cairo, CAIRO_OPERATOR_OUT);
-    else if (function == wxNO_OP)
+    else if (function == wxRasterOperationMode::NoOp)
         cairo_set_operator (m_cairo, CAIRO_OPERATOR_DEST);
-    else if (function == wxAND)
+    else if (function == wxRasterOperationMode::And)
         cairo_set_operator (m_cairo, CAIRO_OPERATOR_ADD);
-    else if (function == wxSET)
+    else if (function == wxRasterOperationMode::Set)
         cairo_set_operator (m_cairo, CAIRO_OPERATOR_SATURATE);
-    else if (function == wxXOR)
+    else if (function == wxRasterOperationMode::Xor)
         cairo_set_operator (m_cairo, CAIRO_OPERATOR_XOR);
-    else // wxCOPY or anything else.
+    else // wxRasterOperationMode::Copy or anything else.
         cairo_set_operator (m_cairo, CAIRO_OPERATOR_SOURCE);
 }
 

@@ -311,7 +311,7 @@ static void DrawResizeHint(wxDC& dc, const wxRect& rect)
 #else
     dc.SetPen(*wxTRANSPARENT_PEN);
 
-    dc.SetLogicalFunction(wxXOR);
+    dc.SetLogicalFunction(wxRasterOperationMode::Xor);
     dc.DrawRectangle(rect);
 #endif
 }

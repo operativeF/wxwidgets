@@ -64,7 +64,7 @@ protected:
 
     virtual bool DoBlit( wxCoord xdest, wxCoord ydest, wxCoord width, wxCoord height,
                          wxDC *source, wxCoord xsrc, wxCoord ysrc,
-                         wxRasterOperationMode logical_func = wxCOPY, bool useMask = false,
+                         wxRasterOperationMode logical_func = wxRasterOperationMode::Copy, bool useMask = false,
                          wxCoord xsrcMask = -1, wxCoord ysrcMask = -1 );
 
     virtual void DoDrawText( const wxString &text, wxCoord x, wxCoord y );

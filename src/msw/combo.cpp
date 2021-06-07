@@ -160,7 +160,7 @@ static void wxMSWDrawFocusRect( wxDC& dc, const wxRect& rect )
     //   for caption focus but works ok for other stuff).
     //   Also, this code below may not work in future wx versions, since
     //   it employs wxCAP_BUTT hack to have line of width 1.
-    dc.SetLogicalFunction(wxINVERT);
+    dc.SetLogicalFunction(wxRasterOperationMode::Invert);
 
     wxPen pen(*wxBLACK, 1, wxPenStyle::Dot);
     pen.SetCap(wxCAP_BUTT);
@@ -169,7 +169,7 @@ static void wxMSWDrawFocusRect( wxDC& dc, const wxRect& rect )
 
     dc.DrawRectangle(rect);
 
-    dc.SetLogicalFunction(wxCOPY);
+    dc.SetLogicalFunction(wxRasterOperationMode::Copy);
 }
 
 // draw focus background on area in a way typical on platform

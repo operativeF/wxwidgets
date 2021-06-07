@@ -1424,7 +1424,7 @@ void wxWindowDCImpl::SetFont( const wxFont &font )
 
 void wxWindowDCImpl::SetForegroundPixelWithLogicalFunction(WXPixel pixel)
 {
-    if (m_logicalFunction == wxXOR)
+    if (m_logicalFunction == wxRasterOperationMode::Xor)
     {
         XGCValues values;
         XGetGCValues ((Display*) m_display, (GC) m_gc, GCBackground, &values);
@@ -1723,7 +1723,7 @@ void wxWindowDCImpl::SetPen( const wxPen &pen )
 
     // must test m_logicalFunction, because it involves background!
     if (!sameColour || !GET_OPTIMIZATION
-        || ((m_logicalFunction == wxXOR) || (m_autoSetting & 0x2)))
+        || ((m_logicalFunction == wxRasterOperationMode::Xor) || (m_autoSetting & 0x2)))
     {
         WXPixel pixel = -1;
         if (m_pen.GetStyle () == wxPenStyle::Transparent)
@@ -1892,7 +1892,7 @@ void wxWindowDCImpl::SetBrush( const wxBrush &brush )
     }
 
     // must test m_logicalFunction, because it involves background!
-    if (!sameColour || !GET_OPTIMIZATION || m_logicalFunction == wxXOR)
+    if (!sameColour || !GET_OPTIMIZATION || m_logicalFunction == wxRasterOperationMode::Xor)
     {
         wxColour brushClr = m_brush.GetColour();
         WXPixel pixel = CalculatePixel( brushClr, m_currentColour, true);
@@ -1936,52 +1936,52 @@ void wxWindowDCImpl::SetLogicalFunction( wxRasterOperationMode function )
 
     switch (function)
     {
-    case wxCLEAR:
+    case wxRasterOperationMode::Clear:
         x_function = GXclear;
         break;
-    case wxXOR:
+    case wxRasterOperationMode::Xor:
         x_function = GXxor;
         break;
-    case wxINVERT:
+    case wxRasterOperationMode::Invert:
         x_function = GXinvert;
         break;
-    case wxOR_REVERSE:
+    case wxRasterOperationMode::OrReverse:
         x_function = GXorReverse;
         break;
-    case wxAND_REVERSE:
+    case wxRasterOperationMode::AndReverse:
         x_function = GXandReverse;
         break;
-    case wxAND:
+    case wxRasterOperationMode::And:
         x_function = GXand;
         break;
-    case wxOR:
+    case wxRasterOperationMode::Or:
         x_function = GXor;
         break;
-    case wxAND_INVERT:
+    case wxRasterOperationMode::AndInvert:
         x_function = GXandInverted;
         break;
-    case wxNO_OP:
+    case wxRasterOperationMode::NoOp:
         x_function = GXnoop;
         break;
-    case wxNOR:
+    case wxRasterOperationMode::Nor:
         x_function = GXnor;
         break;
-    case wxEQUIV:
+    case wxRasterOperationMode::Equiv:
         x_function = GXequiv;
         break;
-    case wxSRC_INVERT:
+    case wxRasterOperationMode::SrcInvert:
         x_function = GXcopyInverted;
         break;
-    case wxOR_INVERT:
+    case wxRasterOperationMode::OrInvert:
         x_function = GXorInverted;
         break;
-    case wxNAND:
+    case wxRasterOperationMode::Nand:
         x_function = GXnand;
         break;
-    case wxSET:
+    case wxRasterOperationMode::Set:
         x_function = GXset;
         break;
-    case wxCOPY:
+    case wxRasterOperationMode::Copy:
     default:
         x_function = GXcopy;
         break;
@@ -1991,7 +1991,7 @@ void wxWindowDCImpl::SetLogicalFunction( wxRasterOperationMode function )
     if (m_window && m_window->GetBackingPixmap())
         XSetFunction((Display*) m_display, (GC) m_gcBacking, x_function);
 
-    if ((m_logicalFunction == wxXOR) != (function == wxXOR))
+    if ((m_logicalFunction == wxRasterOperationMode::Xor) != (function == wxRasterOperationMode::Xor))
         /* MATTHEW: [9] Need to redo pen simply */
         m_autoSetting |= 0x2;
 

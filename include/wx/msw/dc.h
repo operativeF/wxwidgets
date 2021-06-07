@@ -225,7 +225,7 @@ public:
 
     bool DoBlit(wxCoord xdest, wxCoord ydest, wxCoord width, wxCoord height,
                         wxDC *source, wxCoord xsrc, wxCoord ysrc,
-                        wxRasterOperationMode rop = wxCOPY, bool useMask = false,
+                        wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
                         wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) override;
 
     bool DoStretchBlit(wxCoord xdest, wxCoord ydest,
@@ -233,7 +233,7 @@ public:
                                wxDC *source,
                                wxCoord xsrc, wxCoord ysrc,
                                wxCoord srcWidth, wxCoord srcHeight,
-                               wxRasterOperationMode rop = wxCOPY, bool useMask = false,
+                               wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
                                wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) override;
 
     void DoSetClippingRegion(wxCoord x, wxCoord y,

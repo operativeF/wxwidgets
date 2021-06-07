@@ -1284,7 +1284,7 @@ bool wxSVGFileDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
                              bool useMask,
                              wxCoord WXUNUSED(xsrcMask), wxCoord WXUNUSED(ysrcMask))
 {
-    if (rop != wxCOPY)
+    if (rop != wxRasterOperationMode::Copy)
     {
         wxASSERT_MSG(false, wxS("wxSVGFileDC::DoBlit Call requested nonCopy mode; this is not possible"));
         return false;

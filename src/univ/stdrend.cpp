@@ -208,9 +208,9 @@ wxStdRenderer::DrawFocusRect(wxWindow* WXUNUSED(win), wxDC& dc, const wxRect& re
 
     dc.SetPen(m_penBlack);
 
-    // this seems to be closer than what Windows does than wxINVERT although
+    // this seems to be closer than what Windows does than wxRasterOperationMode::Invert although
     // I'm still not sure if it's correct
-    dc.SetLogicalFunction(wxAND_REVERSE);
+    dc.SetLogicalFunction(wxRasterOperationMode::AndReverse);
 
     wxCoord z;
     for ( z = x1 + 1; z < x2; z += 2 )
@@ -228,7 +228,7 @@ wxStdRenderer::DrawFocusRect(wxWindow* WXUNUSED(win), wxDC& dc, const wxRect& re
     for ( z = y2 - shift; z > y1; z -= 2 )
         dc.DrawPoint(x1, z);
 
-    dc.SetLogicalFunction(wxCOPY);
+    dc.SetLogicalFunction(wxRasterOperationMode::Copy);
 }
 
 void wxStdRenderer::DrawLabel(wxDC& dc,

@@ -634,7 +634,7 @@ wxBitmap wxCreateMaskedBitmap(const wxBitmap& bitmap, const wxColour& colour)
     destDC.SetBackground(brush);
     destDC.Clear();
     destDC.Blit(0, 0, bitmap.GetWidth(), bitmap.GetHeight(),
-                &srcDC, 0, 0, wxCOPY, true);
+                &srcDC, 0, 0, wxRasterOperationMode::Copy, true);
 
     return newBitmap;
 }

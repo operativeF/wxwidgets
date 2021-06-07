@@ -361,7 +361,7 @@ void wxPrinterDCImpl::StartPage()
     if ( !m_ok )
         return ;
 
-    m_logicalFunction = wxCOPY;
+    m_logicalFunction = wxRasterOperationMode::Copy;
     //  m_textAlignment = wxALIGN_TOP_LEFT;
     m_backgroundMode = wxBrushStyle::Transparent;
 

@@ -830,9 +830,9 @@ void wxMSWDCImpl::DoCrossHair(wxCoord x, wxCoord y)
     //   outside the view and visible line ends are always square.
     // - DC which coordinate system is not rotated (graphics mode
     //   of the DC != GM_ADVANCED) and not scaled.
-    // - wxCOPY raster operation mode becaue it is based on ExtTextOut() API.
+    // - wxRasterOperationMode::Copy raster operation mode becaue it is based on ExtTextOut() API.
     if ( IsNonTransformedDC(GetHdc()) &&
-         m_logicalFunction == wxCOPY &&
+         m_logicalFunction == wxRasterOperationMode::Copy &&
          m_pen.IsNonTransparent() && // this calls IsOk() too
          m_pen.GetStyle() == wxPenStyle::Solid
        )
@@ -861,14 +861,14 @@ void wxMSWDCImpl::DoDrawLine(wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2)
 {
     // We have optimized function to draw physical vertical or horizontal lines
     // with solid color and square ends. It is based on ExtTextOut() API
-    // so it can be used only with wxCOPY raster operation mode.
+    // so it can be used only with wxRasterOperationMode::Copy raster operation mode.
     // Because checking wheteher the line would be horizontal/vertical
     // in the device coordinate system is complex so we only check whether
     // the line is horizontal/vertical in the logical coordinates and use
     // optimized function only for DC which coordinate system is for sure
     // not rotated (graphics mode of the DC != GM_ADVANCED) and not scaled.
     if ( (x1 == x2 || y1 == y2) &&
-         m_logicalFunction == wxCOPY &&
+         m_logicalFunction == wxRasterOperationMode::Copy &&
          IsNonTransformedDC(GetHdc()) &&
          m_pen.IsNonTransparent() && // this calls IsOk() too
          m_pen.GetStyle() == wxPenStyle::Solid &&
@@ -1419,7 +1419,7 @@ void wxMSWDCImpl::DoDrawBitmap( const wxBitmap &bmp, wxCoord x, wxCoord y, bool 
             memDC.SetLayoutDirection(GetLayoutDirection());
             memDC.SelectObjectAsSource(bmp);
 
-            GetOwner()->Blit(x, y, width, height, &memDC, 0, 0, wxCOPY, useMask);
+            GetOwner()->Blit(x, y, width, height, &memDC, 0, 0, wxRasterOperationMode::Copy, useMask);
         }
     }
     else // no mask, just use BitBlt()
@@ -1815,22 +1815,22 @@ void wxMSWDCImpl::SetRop(WXHDC dc)
 
     switch (m_logicalFunction)
     {
-        case wxCLEAR:        rop = R2_BLACK;         break;
-        case wxXOR:          rop = R2_XORPEN;        break;
-        case wxINVERT:       rop = R2_NOT;           break;
-        case wxOR_REVERSE:   rop = R2_MERGEPENNOT;   break;
-        case wxAND_REVERSE:  rop = R2_MASKPENNOT;    break;
-        case wxCOPY:         rop = R2_COPYPEN;       break;
-        case wxAND:          rop = R2_MASKPEN;       break;
-        case wxAND_INVERT:   rop = R2_MASKNOTPEN;    break;
-        case wxNO_OP:        rop = R2_NOP;           break;
-        case wxNOR:          rop = R2_NOTMERGEPEN;   break;
-        case wxEQUIV:        rop = R2_NOTXORPEN;     break;
-        case wxSRC_INVERT:   rop = R2_NOTCOPYPEN;    break;
-        case wxOR_INVERT:    rop = R2_MERGENOTPEN;   break;
-        case wxNAND:         rop = R2_NOTMASKPEN;    break;
-        case wxOR:           rop = R2_MERGEPEN;      break;
-        case wxSET:          rop = R2_WHITE;         break;
+        case wxRasterOperationMode::Clear:        rop = R2_BLACK;         break;
+        case wxRasterOperationMode::Xor:          rop = R2_XORPEN;        break;
+        case wxRasterOperationMode::Invert:       rop = R2_NOT;           break;
+        case wxRasterOperationMode::OrReverse:   rop = R2_MERGEPENNOT;   break;
+        case wxRasterOperationMode::AndReverse:  rop = R2_MASKPENNOT;    break;
+        case wxRasterOperationMode::Copy:         rop = R2_COPYPEN;       break;
+        case wxRasterOperationMode::And:          rop = R2_MASKPEN;       break;
+        case wxRasterOperationMode::AndInvert:   rop = R2_MASKNOTPEN;    break;
+        case wxRasterOperationMode::NoOp:        rop = R2_NOP;           break;
+        case wxRasterOperationMode::Nor:          rop = R2_NOTMERGEPEN;   break;
+        case wxRasterOperationMode::Equiv:        rop = R2_NOTXORPEN;     break;
+        case wxRasterOperationMode::SrcInvert:   rop = R2_NOTCOPYPEN;    break;
+        case wxRasterOperationMode::OrInvert:    rop = R2_MERGENOTPEN;   break;
+        case wxRasterOperationMode::Nand:         rop = R2_NOTMASKPEN;    break;
+        case wxRasterOperationMode::Or:           rop = R2_MERGEPEN;      break;
+        case wxRasterOperationMode::Set:          rop = R2_WHITE;         break;
         default:
             wxFAIL_MSG( wxS("unknown logical function") );
             return;
@@ -2278,22 +2278,22 @@ bool wxMSWDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
     DWORD dwRop;
     switch (rop)
     {
-        case wxXOR:          dwRop = SRCINVERT;        break;
-        case wxINVERT:       dwRop = DSTINVERT;        break;
-        case wxOR_REVERSE:   dwRop = 0x00DD0228;       break;
-        case wxAND_REVERSE:  dwRop = SRCERASE;         break;
-        case wxCLEAR:        dwRop = BLACKNESS;        break;
-        case wxSET:          dwRop = WHITENESS;        break;
-        case wxOR_INVERT:    dwRop = MERGEPAINT;       break;
-        case wxAND:          dwRop = SRCAND;           break;
-        case wxOR:           dwRop = SRCPAINT;         break;
-        case wxEQUIV:        dwRop = 0x00990066;       break;
-        case wxNAND:         dwRop = 0x007700E6;       break;
-        case wxAND_INVERT:   dwRop = 0x00220326;       break;
-        case wxCOPY:         dwRop = SRCCOPY;          break;
-        case wxNO_OP:        dwRop = DSTCOPY;          break;
-        case wxSRC_INVERT:   dwRop = NOTSRCCOPY;       break;
-        case wxNOR:          dwRop = NOTSRCCOPY;       break;
+        case wxRasterOperationMode::Xor:          dwRop = SRCINVERT;        break;
+        case wxRasterOperationMode::Invert:       dwRop = DSTINVERT;        break;
+        case wxRasterOperationMode::OrReverse:   dwRop = 0x00DD0228;       break;
+        case wxRasterOperationMode::AndReverse:  dwRop = SRCERASE;         break;
+        case wxRasterOperationMode::Clear:        dwRop = BLACKNESS;        break;
+        case wxRasterOperationMode::Set:          dwRop = WHITENESS;        break;
+        case wxRasterOperationMode::OrInvert:    dwRop = MERGEPAINT;       break;
+        case wxRasterOperationMode::And:          dwRop = SRCAND;           break;
+        case wxRasterOperationMode::Or:           dwRop = SRCPAINT;         break;
+        case wxRasterOperationMode::Equiv:        dwRop = 0x00990066;       break;
+        case wxRasterOperationMode::Nand:         dwRop = 0x007700E6;       break;
+        case wxRasterOperationMode::AndInvert:   dwRop = 0x00220326;       break;
+        case wxRasterOperationMode::Copy:         dwRop = SRCCOPY;          break;
+        case wxRasterOperationMode::NoOp:        dwRop = DSTCOPY;          break;
+        case wxRasterOperationMode::SrcInvert:   dwRop = NOTSRCCOPY;       break;
+        case wxRasterOperationMode::Nor:          dwRop = NOTSRCCOPY;       break;
         default:
            wxFAIL_MSG( wxT("unsupported logical function") );
            return false;

@@ -59,7 +59,7 @@ void wxMotifDCImpl::DoDrawBitmap( const wxBitmap& bitmap, wxCoord x, wxCoord y, 
     }
 #endif // 0
 
-    DoBlit(x, y, bitmap.GetWidth(), bitmap.GetHeight(), &memDC, 0, 0, wxCOPY, useMask);
+    DoBlit(x, y, bitmap.GetWidth(), bitmap.GetHeight(), &memDC, 0, 0, wxRasterOperationMode::Copy, useMask);
 
     memDC.SelectObject(wxNullBitmap);
 }

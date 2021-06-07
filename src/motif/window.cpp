@@ -877,7 +877,7 @@ void wxWindow::ScrollWindow(int dx, int dy, const wxRect *rect)
         dcimpl = static_cast<wxClientDCImpl *>(dc.GetImpl());
     GC const gc = (GC) dcimpl->GetGC();
 
-    dc.SetLogicalFunction (wxCOPY);
+    dc.SetLogicalFunction (wxRasterOperationMode::Copy);
 
     Widget widget = (Widget) GetMainWidget();
     Window window = XtWindow(widget);

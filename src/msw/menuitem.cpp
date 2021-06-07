@@ -1102,7 +1102,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
 
             int x = rcImg.left + (imgWidth - nBmpWidth) / 2;
             int y = rcImg.top  + (rcImg.bottom - rcImg.top - nBmpHeight) / 2;
-            dc.Blit(x, y, nBmpWidth, nBmpHeight, &dcMem, 0, 0, wxCOPY, true);
+            dc.Blit(x, y, nBmpWidth, nBmpHeight, &dcMem, 0, 0, wxRasterOperationMode::Copy, true);
         }
     }
 

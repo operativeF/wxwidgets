@@ -190,7 +190,7 @@ void wxMemoryDCImpl::DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoor
     if (m_brush.IsOk() && m_pen.IsOk() &&
         (m_brush.GetStyle() == wxBrushStyle::Solid || m_brush.GetStyle() == wxBrushStyle::Transparent) &&
         (m_pen.GetStyle() == wxPenStyle::Solid || m_pen.GetStyle() == wxPenStyle::Transparent) &&
-        (GetLogicalFunction() == wxCOPY))
+        (GetLogicalFunction() == wxRasterOperationMode::Copy))
     {
         wxDrawRectangle(* this, x, y, width, height);
     }

@@ -123,7 +123,7 @@ public:
     wxRasterOperationMode GetLogicalFunction() const override
     {
         wxFAIL_MSG(wxT("wxSVGFILEDC::GetLogicalFunction() not implemented"));
-        return wxCOPY;
+        return wxRasterOperationMode::Copy;
     }
 
     void SetLogicalOrigin(wxCoord x, wxCoord y) override

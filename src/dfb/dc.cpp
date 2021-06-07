@@ -438,8 +438,8 @@ void wxDFBDCImpl::SetLogicalFunction(wxRasterOperationMode function)
 
     // NB: we could also support XOR, but for blitting only (via DSBLIT_XOR);
     //     and possibly others via SetSrc/DstBlendFunction()
-    wxASSERT_MSG( function == wxCOPY,
-                  "only wxCOPY logical function supported" );
+    wxASSERT_MSG( function == wxRasterOperationMode::Copy,
+                  "only wxRasterOperationMode::Copy logical function supported" );
 
     m_logicalFunction = function;
 }
@@ -582,7 +582,7 @@ bool wxDFBDCImpl::DoBlit(wxCoord xdest, wxCoord ydest,
 
     // NB: we could also support XOR here (via DSBLIT_XOR)
     //     and possibly others via SetSrc/DstBlendFunction()
-    wxCHECK_MSG( rop == wxCOPY, false, "only wxCOPY function supported" );
+    wxCHECK_MSG( rop == wxRasterOperationMode::Copy, false, "only wxRasterOperationMode::Copy function supported" );
 
     // transform the source DC coords to the device ones
     xsrc = source->LogicalToDeviceX(xsrc);
@@ -654,7 +654,7 @@ void wxDFBDCImpl::DoDrawSubBitmap(const wxBitmap &bmp,
 
     // NB: we could also support XOR here (via DSBLIT_XOR)
     //     and possibly others via SetSrc/DstBlendFunction()
-    wxCHECK_RET( rop == wxCOPY, "only wxCOPY function supported" );
+    wxCHECK_RET( rop == wxRasterOperationMode::Copy, "only wxRasterOperationMode::Copy function supported" );
 
     if ( bmp.GetDepth() == 1 )
     {

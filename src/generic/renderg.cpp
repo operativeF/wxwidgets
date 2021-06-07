@@ -857,11 +857,11 @@ wxRendererGeneric::DrawFocusRect(wxWindow* WXUNUSED(win), wxDC& dc, const wxRect
     dc.SetPen(m_penBlack);
 
 #ifdef __WXMAC__
-    dc.SetLogicalFunction(wxCOPY);
+    dc.SetLogicalFunction(wxRasterOperationMode::Copy);
 #else
-    // this seems to be closer than what Windows does than wxINVERT although
+    // this seems to be closer than what Windows does than wxRasterOperationMode::Invert although
     // I'm still not sure if it's correct
-    dc.SetLogicalFunction(wxAND_REVERSE);
+    dc.SetLogicalFunction(wxRasterOperationMode::AndReverse);
 #endif
 
     wxCoord z;
@@ -880,7 +880,7 @@ wxRendererGeneric::DrawFocusRect(wxWindow* WXUNUSED(win), wxDC& dc, const wxRect
     for ( z = y2 - shift; z > y1; z -= 2 )
         dc.DrawPoint(x1, z);
 
-    dc.SetLogicalFunction(wxCOPY);
+    dc.SetLogicalFunction(wxRasterOperationMode::Copy);
 }
 
 void wxRendererGeneric::DrawChoice(wxWindow* WXUNUSED(win), wxDC& WXUNUSED(dc),

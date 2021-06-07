@@ -9638,9 +9638,9 @@ bool wxRichTextFieldTypeStandard::Draw(wxRichTextField* obj, wxDC& dc, wxRichTex
             {
                 wxCheckSetBrush(dc, *wxBLACK_BRUSH);
                 wxCheckSetPen(dc, *wxBLACK_PEN);
-                dc.SetLogicalFunction(wxINVERT);
+                dc.SetLogicalFunction(wxRasterOperationMode::Invert);
                 dc.DrawRectangle(wxRect(x, y, m_bitmap.GetWidth(), m_bitmap.GetHeight()));
-                dc.SetLogicalFunction(wxCOPY);
+                dc.SetLogicalFunction(wxRasterOperationMode::Copy);
             }
         }
         else
@@ -12800,9 +12800,9 @@ bool wxRichTextImage::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wx
         wxCheckSetPen(dc, *wxBLACK_PEN);
 
 #if defined(__WXMAC__) && wxOSX_USE_COCOA
-        dc.SetLogicalFunction(wxXOR);
+        dc.SetLogicalFunction(wxRasterOperationMode::Xor);
 #else
-        dc.SetLogicalFunction(wxINVERT);
+        dc.SetLogicalFunction(wxRasterOperationMode::Invert);
 #endif
 
 #ifdef __WXMAC__
@@ -12810,7 +12810,7 @@ bool wxRichTextImage::Draw(wxDC& dc, wxRichTextDrawingContext& context, const wx
             dc.DrawBitmap(m_imageCache, contentRect.x, contentRect.y, true);
 #endif
         dc.DrawRectangle(contentRect);
-        dc.SetLogicalFunction(wxCOPY);
+        dc.SetLogicalFunction(wxRasterOperationMode::Copy);
     }
 
     return true;

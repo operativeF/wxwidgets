@@ -277,7 +277,7 @@ protected:
 #endif
     bool DoBlit(wxCoord xdest, wxCoord ydest, wxCoord width, wxCoord height,
             wxDC *source, wxCoord xsrc, wxCoord ysrc,
-            wxRasterOperationMode rop = wxCOPY, bool useMask = false,
+            wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
             wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord) override;
     void DoDrawIcon( const wxIcon& icon, wxCoord x, wxCoord y ) override;
     void DoDrawBitmap( const wxBitmap& bitmap, wxCoord x, wxCoord y, bool useMask = false  ) override;

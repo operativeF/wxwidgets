@@ -32,34 +32,34 @@ static wxCompositionMode TranslateRasterOp(wxRasterOperationMode function)
 {
     switch ( function )
     {
-        case wxCOPY: // src
+        case wxRasterOperationMode::Copy: // src
             // since we are supporting alpha, _OVER is closer to the intention than _SOURCE
             // since the latter would overwrite even when alpha is not set to opaque
             return wxCOMPOSITION_OVER;
 
-        case wxOR:         // src OR dst
+        case wxRasterOperationMode::Or:         // src OR dst
             return wxCOMPOSITION_ADD;
 
-        case wxNO_OP:      // dst
+        case wxRasterOperationMode::NoOp:      // dst
             return wxCOMPOSITION_DEST; // ignore the source
 
-        case wxCLEAR:      // 0
+        case wxRasterOperationMode::Clear:      // 0
             return wxCOMPOSITION_CLEAR;// clear dst
 
-        case wxXOR:        // src XOR dst
+        case wxRasterOperationMode::Xor:        // src XOR dst
             return wxCOMPOSITION_XOR;
 
-        case wxAND:        // src AND dst
-        case wxAND_INVERT: // (NOT src) AND dst
-        case wxAND_REVERSE:// src AND (NOT dst)
-        case wxEQUIV:      // (NOT src) XOR dst
-        case wxINVERT:     // NOT dst
-        case wxNAND:       // (NOT src) OR (NOT dst)
-        case wxNOR:        // (NOT src) AND (NOT dst)
-        case wxOR_INVERT:  // (NOT src) OR dst
-        case wxOR_REVERSE: // src OR (NOT dst)
-        case wxSET:        // 1
-        case wxSRC_INVERT: // NOT src
+        case wxRasterOperationMode::And:        // src AND dst
+        case wxRasterOperationMode::AndInvert: // (NOT src) AND dst
+        case wxRasterOperationMode::AndReverse:// src AND (NOT dst)
+        case wxRasterOperationMode::Equiv:      // (NOT src) XOR dst
+        case wxRasterOperationMode::Invert:     // NOT dst
+        case wxRasterOperationMode::Nand:       // (NOT src) OR (NOT dst)
+        case wxRasterOperationMode::Nor:        // (NOT src) AND (NOT dst)
+        case wxRasterOperationMode::OrInvert:  // (NOT src) OR dst
+        case wxRasterOperationMode::OrReverse: // src OR (NOT dst)
+        case wxRasterOperationMode::Set:        // 1
+        case wxRasterOperationMode::SrcInvert: // NOT src
             break;
     }
 
@@ -548,7 +548,7 @@ void wxGCDCImpl::SetLogicalFunction( wxRasterOperationMode function )
     if (m_logicalFunctionSupported)
         m_logicalFunctionSupported = m_graphicContext->SetCompositionMode(mode);
 
-    if ( function == wxXOR )
+    if ( function == wxRasterOperationMode::Xor )
         m_graphicContext->SetAntialiasMode(wxANTIALIAS_NONE);
     else
         m_graphicContext->SetAntialiasMode(wxANTIALIAS_DEFAULT);
@@ -1040,7 +1040,7 @@ bool wxGCDCImpl::DoStretchBlit(
     wxCHECK_MSG( IsOk(), false, wxT("wxGCDC(cg)::DoStretchBlit - invalid DC") );
     wxCHECK_MSG( source->IsOk(), false, wxT("wxGCDC(cg)::DoStretchBlit - invalid source DC") );
 
-    if ( logical_func == wxNO_OP )
+    if ( logical_func == wxRasterOperationMode::NoOp )
         return true;
 
     wxCompositionMode mode = TranslateRasterOp(logical_func);
@@ -1204,7 +1204,7 @@ void wxGCDCImpl::DoDrawText(const wxString& str, wxCoord x, wxCoord y)
 
     // Text drawing shouldn't be affected by the raster operation
     // mode set by SetLogicalFunction() and should be always done
-    // in the default wxCOPY mode (which is wxCOMPOSITION_OVER
+    // in the default wxRasterOperationMode::Copy mode (which is wxCOMPOSITION_OVER
     // composition mode).
     wxCompositionMode curMode = m_graphicContext->GetCompositionMode();
     m_graphicContext->SetCompositionMode(wxCOMPOSITION_OVER);

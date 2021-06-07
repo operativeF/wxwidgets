@@ -559,7 +559,7 @@ void SurfaceImpl::Copy(PRectangle rc, Point from, Surface &surfaceSource) {
     wxRect r = wxRectFromPRectangle(rc);
     hdc->Blit(r.x, r.y, r.width, r.height,
               ((SurfaceImpl&)surfaceSource).hdc,
-              wxRound(from.x), wxRound(from.y), wxCOPY);
+              wxRound(from.x), wxRound(from.y), wxRasterOperationMode::Copy);
 }
 
 void SurfaceImpl::DrawTextNoClip(PRectangle rc, Font &font, XYPOSITION ybase,

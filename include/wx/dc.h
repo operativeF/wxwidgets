@@ -47,24 +47,24 @@ class WXDLLIMPEXP_FWD_CORE wxGraphicsContext;
 #endif
 
 //  Logical ops
-enum wxRasterOperationMode
+enum class wxRasterOperationMode
 {
-    wxCLEAR,       // 0
-    wxXOR,         // src XOR dst
-    wxINVERT,      // NOT dst
-    wxOR_REVERSE,  // src OR (NOT dst)
-    wxAND_REVERSE, // src AND (NOT dst)
-    wxCOPY,        // src
-    wxAND,         // src AND dst
-    wxAND_INVERT,  // (NOT src) AND dst
-    wxNO_OP,       // dst
-    wxNOR,         // (NOT src) AND (NOT dst)
-    wxEQUIV,       // (NOT src) XOR dst
-    wxSRC_INVERT,  // (NOT src)
-    wxOR_INVERT,   // (NOT src) OR dst
-    wxNAND,        // (NOT src) OR (NOT dst)
-    wxOR,          // src OR dst
-    wxSET          // 1
+    Clear,       // 0
+    Xor,         // src XOR dst
+    Invert,      // NOT dst
+    OrReverse,  // src OR (NOT dst)
+    AndReverse, // src AND (NOT dst)
+    Copy,        // src
+    And,         // src AND dst
+    AndInvert,  // (NOT src) AND dst
+    NoOp,       // dst
+    Nor,         // (NOT src) AND (NOT dst)
+    Equiv,       // (NOT src) XOR dst
+    SrcInvert,  // (NOT src)
+    OrInvert,   // (NOT src) OR dst
+    Nand,        // (NOT src) OR (NOT dst)
+    Or,          // src OR dst
+    Set          // 1
 };
 
 //  Flood styles
@@ -87,22 +87,12 @@ enum wxMappingMode
 // Description of text characteristics.
 struct wxFontMetrics
 {
-    wxFontMetrics()
-    {
-        height =
-        ascent =
-        descent =
-        internalLeading =
-        externalLeading =
-        averageWidth = 0;
-    }
-
-    int height,             // Total character height.
-        ascent,             // Part of the height above the baseline.
-        descent,            // Part of the height below the baseline.
-        internalLeading,    // Intra-line spacing.
-        externalLeading,    // Inter-line spacing.
-        averageWidth;       // Average font width, a.k.a. "x-width".
+    int height{0};             // Total character height.
+    int ascent{0};             // Part of the height above the baseline.
+    int descent{0};            // Part of the height below the baseline.
+    int internalLeading{0};    // Intra-line spacing.
+    int externalLeading{0};    // Inter-line spacing.
+    int averageWidth{0};       // Average font width, a.k.a. "x-width".
 };
 
 //-----------------------------------------------------------------------------
@@ -486,7 +476,7 @@ public:
                         wxCoord width, wxCoord height,
                         wxDC *source,
                         wxCoord xsrc, wxCoord ysrc,
-                        wxRasterOperationMode rop = wxCOPY,
+                        wxRasterOperationMode rop = wxRasterOperationMode::Copy,
                         bool useMask = false,
                         wxCoord xsrcMask = wxDefaultCoord,
                         wxCoord ysrcMask = wxDefaultCoord) = 0;
@@ -496,7 +486,7 @@ public:
                                wxDC *source,
                                wxCoord xsrc, wxCoord ysrc,
                                wxCoord srcWidth, wxCoord srcHeight,
-                               wxRasterOperationMode rop = wxCOPY,
+                               wxRasterOperationMode rop = wxRasterOperationMode::Copy,
                                bool useMask = false,
                                wxCoord xsrcMask = wxDefaultCoord,
                                wxCoord ysrcMask = wxDefaultCoord);
@@ -1132,7 +1122,7 @@ public:
 
     bool Blit(wxCoord xdest, wxCoord ydest, wxCoord width, wxCoord height,
               wxDC *source, wxCoord xsrc, wxCoord ysrc,
-              wxRasterOperationMode rop = wxCOPY, bool useMask = false,
+              wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
               wxCoord xsrcMask = wxDefaultCoord, wxCoord ysrcMask = wxDefaultCoord)
     {
         return m_pimpl->DoBlit(xdest, ydest, width, height,
@@ -1140,7 +1130,7 @@ public:
     }
     bool Blit(const wxPoint& destPt, const wxSize& sz,
               wxDC *source, const wxPoint& srcPt,
-              wxRasterOperationMode rop = wxCOPY, bool useMask = false,
+              wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
               const wxPoint& srcPtMask = wxDefaultPosition)
     {
         return m_pimpl->DoBlit(destPt.x, destPt.y, sz.x, sz.y,
@@ -1152,7 +1142,7 @@ public:
                      wxDC *source,
                      wxCoord srcX, wxCoord srcY,
                      wxCoord srcWidth, wxCoord srcHeight,
-                     wxRasterOperationMode rop = wxCOPY, bool useMask = false,
+                     wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
                      wxCoord srcMaskX = wxDefaultCoord, wxCoord srcMaskY = wxDefaultCoord)
     {
         return m_pimpl->DoStretchBlit(dstX, dstY, dstWidth, dstHeight,
@@ -1160,7 +1150,7 @@ public:
     }
     bool StretchBlit(const wxPoint& dstPt, const wxSize& dstSize,
                      wxDC *source, const wxPoint& srcPt, const wxSize& srcSize,
-                     wxRasterOperationMode rop = wxCOPY, bool useMask = false,
+                     wxRasterOperationMode rop = wxRasterOperationMode::Copy, bool useMask = false,
                      const wxPoint& srcMaskPt = wxDefaultPosition)
     {
         return m_pimpl->DoStretchBlit(dstPt.x, dstPt.y, dstSize.x, dstSize.y,

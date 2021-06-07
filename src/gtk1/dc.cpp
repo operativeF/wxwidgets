@@ -25,7 +25,7 @@ wxGTKDCImpl::wxGTKDCImpl(wxDC *owner)
 {
     m_ok = FALSE;
 
-    m_logicalFunction = wxCOPY;
+    m_logicalFunction = wxRasterOperationMode::Copy;
 
     m_pen = *wxBLACK_PEN;
     m_font = *wxNORMAL_FONT;

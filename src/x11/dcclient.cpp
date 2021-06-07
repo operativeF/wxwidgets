@@ -1986,52 +1986,52 @@ void wxWindowDCImpl::SetLogicalFunction( wxRasterOperationMode function )
 
     switch (function)
     {
-    case wxCLEAR:
+    case wxRasterOperationMode::Clear:
         x_function = GXclear;
         break;
-    case wxXOR:
+    case wxRasterOperationMode::Xor:
         x_function = GXxor;
         break;
-    case wxINVERT:
+    case wxRasterOperationMode::Invert:
         x_function = GXinvert;
         break;
-    case wxOR_REVERSE:
+    case wxRasterOperationMode::OrReverse:
         x_function = GXorReverse;
         break;
-    case wxAND_REVERSE:
+    case wxRasterOperationMode::AndReverse:
         x_function = GXandReverse;
         break;
-    case wxAND:
+    case wxRasterOperationMode::And:
         x_function = GXand;
         break;
-    case wxOR:
+    case wxRasterOperationMode::Or:
         x_function = GXor;
         break;
-    case wxAND_INVERT:
+    case wxRasterOperationMode::AndInvert:
         x_function = GXandInverted;
         break;
-    case wxNO_OP:
+    case wxRasterOperationMode::NoOp:
         x_function = GXnoop;
         break;
-    case wxNOR:
+    case wxRasterOperationMode::Nor:
         x_function = GXnor;
         break;
-    case wxEQUIV:
+    case wxRasterOperationMode::Equiv:
         x_function = GXequiv;
         break;
-    case wxSRC_INVERT:
+    case wxRasterOperationMode::SrcInvert:
         x_function = GXcopyInverted;
         break;
-    case wxOR_INVERT:
+    case wxRasterOperationMode::OrInvert:
         x_function = GXorInverted;
         break;
-    case wxNAND:
+    case wxRasterOperationMode::Nand:
         x_function = GXnand;
         break;
-    case wxSET:
+    case wxRasterOperationMode::Set:
         x_function = GXset;
         break;
-    case wxCOPY:
+    case wxRasterOperationMode::Copy:
     default:
         x_function = GXcopy;
         break;
