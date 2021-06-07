@@ -256,7 +256,7 @@ bool wxIOCPThread::ReadEvents()
         if (watch->GetFlags() & wxFSW_EVENT_WARNING)
         {
             wxFileSystemWatcherEvent
-                overflowEvent(wxFSW_EVENT_WARNING, wxFSW_WARNING_OVERFLOW);
+                overflowEvent(wxFSW_EVENT_WARNING, wxFSWWarningType::Overflow);
             overflowEvent.SetPath(watch->GetPath());
             SendEvent(overflowEvent);
         }
@@ -321,8 +321,8 @@ void wxIOCPThread::ProcessNativeEvents(std::vector<wxEventProcessingData>& event
         {
             wxFileSystemWatcherEvent
                 event(flags,
-                      flags & wxFSW_EVENT_ERROR ? wxFSW_WARNING_NONE
-                                                : wxFSW_WARNING_GENERAL);
+                      flags & wxFSW_EVENT_ERROR ? wxFSWWarningType::None
+                                                : wxFSWWarningType::General);
             SendEvent(event);
         }
         // filter out ignored events and those not asked for.

@@ -56,16 +56,16 @@ inline wxString wxBase64Encode(const wxMemoryBuffer& buf)
 
 // elements of this enum specify the possible behaviours of wxBase64Decode()
 // when an invalid character is encountered
-enum wxBase64DecodeMode
+enum class wxBase64DecodeMode
 {
     // normal behaviour: stop at any invalid characters
-    wxBase64DecodeMode_Strict,
+    Strict,
 
     // skip whitespace characters
-    wxBase64DecodeMode_SkipWS,
+    SkipWS,
 
     // the most lenient behaviour: simply ignore all invalid characters
-    wxBase64DecodeMode_Relaxed
+    Relaxed
 };
 
 // return the buffer size necessary for decoding a base64 string of the given
@@ -87,13 +87,13 @@ inline size_t wxBase64DecodedSize(size_t srcLen) { return 3*srcLen/4; }
 WXDLLIMPEXP_BASE size_t
 wxBase64Decode(void *dst, size_t dstLen,
                const char *src, size_t srcLen = wxNO_LEN,
-               wxBase64DecodeMode mode = wxBase64DecodeMode_Strict,
+               wxBase64DecodeMode mode = wxBase64DecodeMode::Strict,
                size_t *posErr = nullptr);
 
 inline size_t
 wxBase64Decode(void *dst, size_t dstLen,
                const wxString& src,
-               wxBase64DecodeMode mode = wxBase64DecodeMode_Strict,
+               wxBase64DecodeMode mode = wxBase64DecodeMode::Strict,
                size_t *posErr = nullptr)
 {
     // don't use str.length() here as the ASCII buffer is shorter than it for
@@ -105,12 +105,12 @@ wxBase64Decode(void *dst, size_t dstLen,
 // error occurs during decoding
 WXDLLIMPEXP_BASE wxMemoryBuffer
 wxBase64Decode(const char *src, size_t srcLen = wxNO_LEN,
-               wxBase64DecodeMode mode = wxBase64DecodeMode_Strict,
+               wxBase64DecodeMode mode = wxBase64DecodeMode::Strict,
                size_t *posErr = nullptr);
 
 inline wxMemoryBuffer
 wxBase64Decode(const wxString& src,
-               wxBase64DecodeMode mode = wxBase64DecodeMode_Strict,
+               wxBase64DecodeMode mode = wxBase64DecodeMode::Strict,
                size_t *posErr = nullptr)
 {
     // don't use str.length() here as the ASCII buffer is shorter than it for

@@ -133,10 +133,10 @@ wxPowerType wxGetPowerType()
         switch ( sps.ACLineStatus )
         {
             case 0:
-                return wxPOWER_BATTERY;
+                return wxPowerType::Battery;
 
             case 1:
-                return wxPOWER_SOCKET;
+                return wxPowerType::Socket;
 
             default:
                 wxLogDebug(wxT("Unknown ACLineStatus=%u"), sps.ACLineStatus);
@@ -146,7 +146,7 @@ wxPowerType wxGetPowerType()
         }
     }
 
-    return wxPOWER_UNKNOWN;
+    return wxPowerType::Unknown;
 }
 
 wxBatteryState wxGetBatteryState()
@@ -159,15 +159,15 @@ wxBatteryState wxGetBatteryState()
         switch ( sps.BatteryFlag & 7 )
         {
             case 1:
-                return wxBATTERY_NORMAL_STATE;
+                return wxBatteryState::Normal;
 
             case 2:
-                return wxBATTERY_LOW_STATE;
+                return wxBatteryState::Low;
 
             case 3:
-                return wxBATTERY_CRITICAL_STATE;
+                return wxBatteryState::Critical;
         }
     }
 
-    return wxBATTERY_UNKNOWN_STATE;
+    return wxBatteryState::Unknown;
 }

@@ -111,23 +111,23 @@ size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vec
         int imageId;
         switch (vol.GetKind())
         {
-            case wxFS_VOL_FLOPPY:
+            case wxFSVolumeKind::Floppy:
                 if ( (path == wxT("a:\\")) || (path == wxT("b:\\")) )
                     imageId = wxFileIconsTable::floppy;
                 else
                     imageId = wxFileIconsTable::removeable;
                 break;
-            case wxFS_VOL_DVDROM:
-            case wxFS_VOL_CDROM:
+            case wxFSVolumeKind::DVDROM:
+            case wxFSVolumeKind::CDROM:
                 imageId = wxFileIconsTable::cdrom;
                 break;
-            case wxFS_VOL_NETWORK:
+            case wxFSVolumeKind::Network:
                 if (path[0] == wxT('\\'))
                     continue; // skip "\\computer\folder"
                 imageId = wxFileIconsTable::drive;
                 break;
-            case wxFS_VOL_DISK:
-            case wxFS_VOL_OTHER:
+            case wxFSVolumeKind::Disk:
+            case wxFSVolumeKind::Other:
             default:
                 imageId = wxFileIconsTable::drive;
                 break;

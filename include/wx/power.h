@@ -17,20 +17,20 @@
 // power management constants
 // ----------------------------------------------------------------------------
 
-enum wxPowerType
+enum class wxPowerType
 {
-    wxPOWER_SOCKET,
-    wxPOWER_BATTERY,
-    wxPOWER_UNKNOWN
+    Socket,
+    Battery,
+    Unknown
 };
 
-enum wxBatteryState
+enum class wxBatteryState
 {
-    wxBATTERY_NORMAL_STATE,    // system is fully usable
-    wxBATTERY_LOW_STATE,       // start to worry
-    wxBATTERY_CRITICAL_STATE,  // save quickly
-    wxBATTERY_SHUTDOWN_STATE,  // too late
-    wxBATTERY_UNKNOWN_STATE
+    Normal,    // system is fully usable
+    Low,       // start to worry
+    Critical,  // save quickly
+    Shutdown,  // too late
+    Unknown
 };
 
 // ----------------------------------------------------------------------------

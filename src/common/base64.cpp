@@ -122,12 +122,12 @@ wxBase64Decode(void *dst_, size_t dstLen,
         switch ( c )
         {
             case WSP:
-                if ( mode == wxBase64DecodeMode_SkipWS )
+                if ( mode == wxBase64DecodeMode::SkipWS )
                     continue;
                 [[fallthrough]];
 
             case INV:
-                if ( mode == wxBase64DecodeMode_Relaxed )
+                if ( mode == wxBase64DecodeMode::Relaxed )
                     continue;
 
                 // force the loop to stop and an error to be returned

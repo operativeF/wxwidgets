@@ -80,7 +80,7 @@ static wxInterlockedArg_t s_cancelSearch = FALSE;
 
 struct FileInfo
 {
-    explicit FileInfo(unsigned flag=0, wxFSVolumeKind type=wxFS_VOL_OTHER) :
+    explicit FileInfo(unsigned flag=0, wxFSVolumeKind type=wxFSVolumeKind::Other) :
         m_flags(flag), m_type(type) {}
 
     FileInfo(const FileInfo& other) { *this = other; }
@@ -124,31 +124,31 @@ static unsigned GetBasicFlags(const wxChar* filename)
     switch(GetDriveType(filename))
     {
     case DRIVE_FIXED:
-        type = wxFS_VOL_DISK;
+        type = wxFSVolumeKind::Disk;
         break;
 
     case DRIVE_REMOVABLE:
         flags |= wxFS_VOL_REMOVABLE;
-        type = wxFS_VOL_FLOPPY;
+        type = wxFSVolumeKind::Floppy;
         break;
 
     case DRIVE_CDROM:
         flags |= wxFS_VOL_REMOVABLE | wxFS_VOL_READONLY;
-        type = wxFS_VOL_CDROM;
+        type = wxFSVolumeKind::CDROM;
         break;
 
     case DRIVE_REMOTE:
         flags |= wxFS_VOL_REMOTE;
-        type = wxFS_VOL_NETWORK;
+        type = wxFSVolumeKind::Network;
         break;
 
     case DRIVE_NO_ROOT_DIR:
         flags &= ~wxFS_VOL_MOUNTED;
-        type = wxFS_VOL_OTHER;
+        type = wxFSVolumeKind::Other;
         break;
 
     default:
-        type = wxFS_VOL_OTHER;
+        type = wxFSVolumeKind::Other;
         break;
     }
 
@@ -536,11 +536,11 @@ bool wxFSVolumeBase::IsOk() const
 wxFSVolumeKind wxFSVolumeBase::GetKind() const
 {
     if (!m_isOk)
-        return wxFS_VOL_OTHER;
+        return wxFSVolumeKind::Other;
 
     FileInfoMap::iterator itr = s_fileInfo.find(m_volName);
     if (itr == s_fileInfo.end())
-        return wxFS_VOL_OTHER;
+        return wxFSVolumeKind::Other;
 
     return itr->second.m_type;
 }

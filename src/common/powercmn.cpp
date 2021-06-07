@@ -59,12 +59,12 @@ void wxPowerResource::Release(wxPowerResourceKind WXUNUSED(kind))
 
 wxPowerType wxGetPowerType()
 {
-    return wxPOWER_UNKNOWN;
+    return wxPowerType::Unknown;
 }
 
 wxBatteryState wxGetBatteryState()
 {
-    return wxBATTERY_UNKNOWN_STATE;
+    return wxBatteryState::Unknown;
 }
 
 #endif // systems without power management functions

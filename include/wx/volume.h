@@ -38,15 +38,15 @@ enum wxFSVolumeFlags
 };
 
 // the volume types
-enum wxFSVolumeKind
+enum class wxFSVolumeKind
 {
-    wxFS_VOL_FLOPPY,
-    wxFS_VOL_DISK,
-    wxFS_VOL_CDROM,
-    wxFS_VOL_DVDROM,
-    wxFS_VOL_NETWORK,
-    wxFS_VOL_OTHER,
-    wxFS_VOL_MAX
+    Floppy,
+    Disk,
+    CDROM,
+    DVDROM,
+    Network,
+    Other,
+    Max
 };
 
 class WXDLLIMPEXP_BASE wxFSVolumeBase

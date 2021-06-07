@@ -251,15 +251,15 @@ wxBitmap wxWindowsArtProvider::CreateBitmap(const wxArtID& id,
 
 #if wxUSE_FSVOLUME
     // now try SHGetFileInfo
-    wxFSVolumeKind volKind = wxFS_VOL_OTHER;
+    wxFSVolumeKind volKind = wxFSVolumeKind::Other;
     if ( id == wxART_HARDDISK )
-        volKind = wxFS_VOL_DISK;
+        volKind = wxFSVolumeKind::Disk;
     else if ( id == wxART_FLOPPY )
-        volKind = wxFS_VOL_FLOPPY;
+        volKind = wxFSVolumeKind::Floppy;
     else if ( id == wxART_CDROM )
-        volKind = wxFS_VOL_CDROM;
+        volKind = wxFSVolumeKind::CDROM;
 
-    if ( volKind != wxFS_VOL_OTHER )
+    if ( volKind != wxFSVolumeKind::Other )
     {
         bitmap = GetDriveBitmapForVolumeType(volKind, size);
         if ( bitmap.IsOk() )

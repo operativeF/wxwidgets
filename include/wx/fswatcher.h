@@ -67,11 +67,11 @@ enum class wxFSWPathType
 };
 
 // Type of the warning for the events notifying about them.
-enum wxFSWWarningType
+enum class wxFSWWarningType
 {
-    wxFSW_WARNING_NONE,
-    wxFSW_WARNING_GENERAL,
-    wxFSW_WARNING_OVERFLOW
+    None,
+    General,
+    Overflow
 };
 
 /**
@@ -110,7 +110,7 @@ public:
                              int watchid = wxID_ANY) :
          wxEvent(watchid, wxEVT_FSWATCHER),
          m_changeType(changeType),
-         m_warningType(wxFSW_WARNING_NONE),
+         m_warningType(wxFSWWarningType::None),
          m_path(path),
          m_newPath(newPath)
 
@@ -202,7 +202,7 @@ public:
 
 protected:
     int m_changeType;
-    wxFSWWarningType m_warningType{wxFSW_WARNING_NONE};
+    wxFSWWarningType m_warningType{wxFSWWarningType::None};
     wxFileName m_path;
     wxFileName m_newPath;
     wxString m_errorMsg;
