@@ -74,8 +74,8 @@ class FileKindTestCase : public CppUnit::TestCase
 void FileKindTestCase::TestFILE(wxFFile& file, bool expected)
 {
     CPPUNIT_ASSERT(file.IsOpened());
-    CPPUNIT_ASSERT((wxGetFileKind(file.fp()) == wxFILE_KIND_DISK) == expected);
-    CPPUNIT_ASSERT((file.GetKind() == wxFILE_KIND_DISK) == expected);
+    CPPUNIT_ASSERT((wxGetFileKind(file.fp()) == wxFileKind::Disk) == expected);
+    CPPUNIT_ASSERT((file.GetKind() == wxFileKind::Disk) == expected);
 
     wxFFileInputStream inStream(file);
     CPPUNIT_ASSERT(inStream.IsSeekable() == expected);
@@ -89,8 +89,8 @@ void FileKindTestCase::TestFILE(wxFFile& file, bool expected)
 void FileKindTestCase::TestFd(wxFile& file, bool expected)
 {
     CPPUNIT_ASSERT(file.IsOpened());
-    CPPUNIT_ASSERT((wxGetFileKind(file.fd()) == wxFILE_KIND_DISK) == expected);
-    CPPUNIT_ASSERT((file.GetKind() == wxFILE_KIND_DISK) == expected);
+    CPPUNIT_ASSERT((wxGetFileKind(file.fd()) == wxFileKind::Disk) == expected);
+    CPPUNIT_ASSERT((file.GetKind() == wxFileKind::Disk) == expected);
 
     wxFileInputStream inStream(file);
     CPPUNIT_ASSERT(inStream.IsSeekable() == expected);
@@ -192,9 +192,9 @@ void FileKindTestCase::MemoryStream()
 void FileKindTestCase::Stdin()
 {
     if (isatty(0))
-        CPPUNIT_ASSERT(wxGetFileKind(0) == wxFILE_KIND_TERMINAL);
+        CPPUNIT_ASSERT(wxGetFileKind(0) == wxFileKind::Terminal);
     if (isatty(fileno(stdin)))
-        CPPUNIT_ASSERT(wxGetFileKind(stdin) == wxFILE_KIND_TERMINAL);
+        CPPUNIT_ASSERT(wxGetFileKind(stdin) == wxFileKind::Terminal);
 }
 
 // register in the unnamed registry so that these tests are run by default

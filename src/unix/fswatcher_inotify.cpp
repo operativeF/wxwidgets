@@ -132,7 +132,7 @@ public:
             wxFileSystemWatcherEvent
                 event
                 (
-                    wxFSW_EVENT_WARNING, wxFSW_WARNING_GENERAL,
+                    wxFSW_EVENT_WARNING, wxFSWWarningType::General,
                     wxString::Format
                     (
                      _("Unable to remove inotify watch %i"),
@@ -265,7 +265,7 @@ protected:
                         event
                         (
                             wxFSW_EVENT_WARNING,
-                            wxFSW_WARNING_GENERAL,
+                            wxFSWWarningType::General,
                             wxString::Format
                             (
                              _("Unexpected event for \"%s\": no "
@@ -293,12 +293,12 @@ protected:
             if ( flags & wxFSW_EVENT_WARNING )
             {
                 warningType = nativeFlags & IN_Q_OVERFLOW
-                                ? wxFSW_WARNING_OVERFLOW
-                                : wxFSW_WARNING_GENERAL;
+                                ? wxFSWWarningType::Overflow
+                                : wxFSWWarningType::General;
             }
             else // It's an error, not a warning.
             {
-                warningType = wxFSW_WARNING_NONE;
+                warningType = wxFSWWarningType::None;
             }
 
             wxFileSystemWatcherEvent event(flags, warningType);
@@ -314,7 +314,7 @@ protected:
                 event
                 (
                     wxFSW_EVENT_WARNING,
-                    wxFSW_WARNING_GENERAL,
+                    wxFSWWarningType::General,
                     wxString::Format
                     (
                         _("Invalid inotify event for \"%s\""),

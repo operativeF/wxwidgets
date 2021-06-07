@@ -275,29 +275,29 @@ void Base64TestCase::DecodeInvalid()
 {
     size_t rc, posErr;
     rc = wxBase64Decode(NULL, 0, "one two!", wxNO_LEN,
-                        wxBase64DecodeMode_Strict, &posErr);
+                        wxBase64DecodeMode::Strict, &posErr);
     CPPUNIT_ASSERT_EQUAL( wxCONV_FAILED, rc);
     CPPUNIT_ASSERT_EQUAL( 3, posErr );
 
     rc = wxBase64Decode(NULL, 0, "one two!", wxNO_LEN,
-                        wxBase64DecodeMode_SkipWS, &posErr);
+                        wxBase64DecodeMode::SkipWS, &posErr);
     CPPUNIT_ASSERT_EQUAL( wxCONV_FAILED, rc);
     CPPUNIT_ASSERT_EQUAL( 7, posErr );
 
     rc = wxBase64Decode(NULL, 0, "? QQ==", wxNO_LEN,
-                        wxBase64DecodeMode_SkipWS, &posErr);
+                        wxBase64DecodeMode::SkipWS, &posErr);
     CPPUNIT_ASSERT_EQUAL( wxCONV_FAILED, rc);
     CPPUNIT_ASSERT_EQUAL( 0, posErr );
 
     const size_t POS_INVALID = (size_t)-1;
     posErr = POS_INVALID;
     rc = wxBase64Decode(NULL, 0, " QQ==", wxNO_LEN,
-                        wxBase64DecodeMode_SkipWS, &posErr);
+                        wxBase64DecodeMode::SkipWS, &posErr);
     CPPUNIT_ASSERT_EQUAL( 1, rc );
     CPPUNIT_ASSERT_EQUAL( POS_INVALID, posErr );
 
     rc = wxBase64Decode(NULL, 0, "? QQ==", wxNO_LEN,
-                        wxBase64DecodeMode_Relaxed, &posErr);
+                        wxBase64DecodeMode::Relaxed, &posErr);
     CPPUNIT_ASSERT_EQUAL( 1, rc );
     CPPUNIT_ASSERT_EQUAL( POS_INVALID, posErr );
 

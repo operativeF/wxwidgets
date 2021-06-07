@@ -88,7 +88,7 @@ static int wxFSEventsToWatcherFlags(FSEventStreamEventFlags flags,
 wxFSWWarningType& warning, wxString& msg)
 {
     msg.clear();
-    warning = wxFSW_WARNING_NONE;
+    warning = wxFSWWarningType::None;
 
     // see https://developer.apple.com/library/mac/documentation/Darwin/Reference/FSEvents_Ref/index.html
     // for event flag meanings
@@ -142,7 +142,7 @@ wxFSWWarningType& warning, wxString& msg)
     }
     if ( warnings & flags )
     {
-        warning = wxFSW_WARNING_GENERAL;
+        warning = wxFSWWarningType::General;
         ret |= wxFSW_EVENT_WARNING;
         if (flags & kFSEventStreamEventFlagMustScanSubDirs)
         {
@@ -151,12 +151,12 @@ wxFSWWarningType& warning, wxString& msg)
         if (flags & kFSEventStreamEventFlagUserDropped)
         {
             msg += "User dropped events";
-            warning = wxFSW_WARNING_OVERFLOW;
+            warning = wxFSWWarningType::Overflow;
         }
         if (flags & kFSEventStreamEventFlagKernelDropped)
         {
             msg += "Kernel dropped events";
-            warning = wxFSW_WARNING_OVERFLOW;
+            warning = wxFSWWarningType::Overflow;
         }
         if (flags & kFSEventStreamEventFlagMount)
         {
@@ -202,7 +202,7 @@ static void wxFSEventCallback(ConstFSEventStreamRef WXUNUSED(streamRef), void *c
     int lastWxEventFlags = 0;
     wxFileName lastEventFileName;
     wxString msg;
-    wxFSWWarningType warning = wxFSW_WARNING_NONE;
+    wxFSWWarningType warning = wxFSWWarningType::None;
     wxFileName eventFileName;
     for ( size_t i = 0; i < numEvents; i++ )
     {
@@ -485,7 +485,7 @@ void wxFsEventsFileSystemWatcher::PostWarning(wxFSWWarningType warning,
 void wxFsEventsFileSystemWatcher::PostError(const wxString& msg)
 {
     wxFileSystemWatcherEvent* evt = new wxFileSystemWatcherEvent(
-        wxFSW_EVENT_ERROR, wxFSW_WARNING_NONE, msg
+        wxFSW_EVENT_ERROR, wxFSWWarningType::None, msg
     );
     wxASSERT_MSG(this->GetOwner(), "owner must exist");
     if (this->GetOwner())
