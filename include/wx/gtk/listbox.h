@@ -70,7 +70,7 @@ public:
 
     bool IsSelected(int n) const override;
     int GetSelection() const override;
-    int GetSelections(wxArrayInt& aSelections) const override;
+    int GetSelections(std::vector<int>& aSelections) const override;
 
     void EnsureVisible(int n) override;
 

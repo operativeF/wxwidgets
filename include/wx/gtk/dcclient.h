@@ -68,7 +68,7 @@ public:
                                 wxCoord *descent = NULL,
                                 wxCoord *externalLeading = NULL,
                                 const wxFont *theFont = NULL) const override;
-    bool DoGetPartialTextExtents(const wxString& text, wxArrayInt& widths) const override;
+    bool DoGetPartialTextExtents(const wxString& text, std::vector<int>& widths) const override;
     void DoSetClippingRegion( wxCoord x, wxCoord y, wxCoord width, wxCoord height ) override;
     void DoSetDeviceClippingRegion( const wxRegion &region ) override;
     bool DoGetClippingRect(wxRect& rect) const override;

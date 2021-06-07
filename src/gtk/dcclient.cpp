@@ -1479,7 +1479,7 @@ void wxWindowDCImpl::DoGetTextExtent(const wxString &string,
 
 
 bool wxWindowDCImpl::DoGetPartialTextExtents(const wxString& text,
-                                         wxArrayInt& widths) const
+                                         std::vector<int>& widths) const
 {
     wxCHECK_MSG( m_font.IsOk(), false, wxT("Invalid font") );
 

@@ -45,7 +45,7 @@ protected:
                                  wxCoord *externalLeading = NULL) override;
 
     virtual bool DoGetPartialTextExtents(const wxString& text,
-                                         wxArrayInt& widths,
+                                         std::vector<int>& widths,
                                          double scaleX) override;
 
     // This class is only used for DC text measuring with GTK+ 2 as GTK+ 3 uses

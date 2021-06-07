@@ -319,11 +319,11 @@ static void wxGtkTextApplyTagsFromAttr(GtkWidget *text,
 
         wxGtkTextRemoveTagsWithPrefix(text_buffer, "WXTABS", &para_start, &para_end);
 
-        const wxArrayInt& tabs = attr.GetTabs();
+        const std::vector<int>& tabs = attr.GetTabs();
 
         wxString tagname = wxT("WXTABS");
         g_snprintf(buf, sizeof(buf), "WXTABS");
-        for (size_t i = 0; i < tabs.GetCount(); i++)
+        for (size_t i = 0; i < tabs.size(); i++)
             tagname += wxString::Format(wxT(" %d"), tabs[i]);
 
         const wxWX2MBbuf buftag = tagname.utf8_str();
@@ -346,8 +346,8 @@ static void wxGtkTextApplyTagsFromAttr(GtkWidget *text,
                           gdk_screen_get_width_mm(gtk_widget_get_screen(text)) / 10;
             wxGCC_WARNING_RESTORE()
 #endif
-            PangoTabArray* tabArray = pango_tab_array_new(tabs.GetCount(), TRUE);
-            for (size_t i = 0; i < tabs.GetCount(); i++)
+            PangoTabArray* tabArray = pango_tab_array_new(tabs.size(), TRUE);
+            for (size_t i = 0; i < tabs.size(); i++)
                 pango_tab_array_set_tab(tabArray, i, PANGO_TAB_LEFT, (gint)(tabs[i] * factor));
             tag = gtk_text_buffer_create_tag( text_buffer, buftag,
                                               "tabs", tabArray, NULL );

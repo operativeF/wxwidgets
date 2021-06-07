@@ -2286,9 +2286,9 @@ void wxGtkPrinterDCImpl::DoGetTextExtent(const wxString& string, wxCoord *width,
     cairo_restore( m_cairo );
 }
 
-bool wxGtkPrinterDCImpl::DoGetPartialTextExtents(const wxString& text, wxArrayInt& widths) const
+bool wxGtkPrinterDCImpl::DoGetPartialTextExtents(const wxString& text, std::vector<int>& widths) const
 {
-    widths.Empty();
+    widths.empty();
 
     const wxCharBuffer data = text.utf8_str();
     int w = 0;
@@ -2304,16 +2304,16 @@ bool wxGtkPrinterDCImpl::DoGetPartialTextExtents(const wxString& text, wxArrayIn
             PangoRectangle rect;
             pango_layout_iter_get_cluster_extents(iter, NULL, &rect);
             w += rect.width;
-            widths.Add(PANGO_PIXELS(w));
+            widths.push_back(PANGO_PIXELS(w));
         } while (pango_layout_iter_next_cluster(iter));
         pango_layout_iter_free(iter);
 
        cairo_restore(m_cairo);
     }
-    size_t i = widths.GetCount();
+    size_t i = widths.size();
     const size_t len = text.length();
     while (i++ < len)
-        widths.Add(PANGO_PIXELS(w));
+        widths.push_back(PANGO_PIXELS(w));
 
     return true;
 }
