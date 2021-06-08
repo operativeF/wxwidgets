@@ -933,7 +933,7 @@ void DrawButtonText(HDC hdc,
         else
             dsFlags |= DST_TEXT;
 
-        const wxArrayString lines = wxSplit(text, '\n', '\0');
+        const std::vector<wxString> lines = wxSplit(text, '\n', '\0');
         const int hLine = h / lines.size();
         for ( size_t lineNum = 0; lineNum < lines.size(); lineNum++ )
         {

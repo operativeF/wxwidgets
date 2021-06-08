@@ -1849,11 +1849,12 @@ wxMsgCatalog *wxFileTranslationsLoader::LoadCatalog(const wxString& domain,
 {
     wxString searchPath = GetFullSearchPath(lang);
 
-    LogTraceLargeArray
-    (
-        wxString::Format("looking for \"%s.mo\" in search path", domain),
-        wxSplit(searchPath, wxPATH_SEP[0])
-    );
+    //LogTraceLargeArray
+    //(
+        // FIXME: Add Format overload for std::vector<wxString>
+    //    wxString::Format("looking for \"%s.mo\" in search path", domain),
+    //    wxSplit(searchPath, wxPATH_SEP[0])
+    //);
 
     wxFileName fn(domain);
     fn.SetExt(wxS("mo"));

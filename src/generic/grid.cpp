@@ -7105,7 +7105,7 @@ void wxGrid::DrawTextRectangle( wxDC& dc,
 }
 
 void wxGrid::DrawTextRectangle(wxDC& dc,
-                               const wxArrayString& lines,
+                               const std::vector<wxString>& lines,
                                const wxRect& rect,
                                int horizAlign,
                                int vertAlign,
@@ -7152,7 +7152,7 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
     }
 
     // Align each line of a multi-line label
-    size_t nLines = lines.GetCount();
+    size_t nLines = lines.size();
     for ( size_t l = 0; l < nLines; l++ )
     {
         const wxString& line = lines[l];
@@ -7264,7 +7264,7 @@ void wxGrid::StringToLines( const wxString& value, wxArrayString& lines ) const
 }
 
 void wxGrid::GetTextBoxSize( const wxDC& dc,
-                             const wxArrayString& lines,
+                             const std::vector<wxString>& lines,
                              long *width, long *height ) const
 {
     wxCoord w = 0;
@@ -7272,7 +7272,7 @@ void wxGrid::GetTextBoxSize( const wxDC& dc,
     wxCoord lineW = 0, lineH = 0;
 
     size_t i;
-    for ( i = 0; i < lines.GetCount(); i++ )
+    for ( i = 0; i < lines.size(); i++ )
     {
         if ( lines[i].empty() )
         {

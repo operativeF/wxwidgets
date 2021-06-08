@@ -1399,7 +1399,7 @@ int GetAvailabilityFor(const wxXmlNode *node)
     if (!onlyfor)
         return wxPORT_UNKNOWN;
 
-    wxArrayString ports = wxSplit(onlyfor->GetNodeContent(), ',');
+    const std::vector<wxString> ports = wxSplit(onlyfor->GetNodeContent(), ',');
     int nAvail = wxPORT_UNKNOWN;
     for (unsigned int i=0; i < ports.GetCount(); i++)
     {

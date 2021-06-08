@@ -44,7 +44,7 @@ public:
     bool IsEmpty() const { return GetCount() == 0; }
 
     virtual wxString GetString(unsigned int n) const = 0;
-    wxArrayString GetStrings() const;
+    std::vector<wxString> GetStrings() const;
     virtual void SetString(unsigned int n, const wxString& s) = 0;
 
     // finding string natively is either case sensitive or insensitive

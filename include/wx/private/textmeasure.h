@@ -48,11 +48,7 @@ public:
                                 wxCoord *heightOneLine = nullptr);
 
     // Find the dimensions of the largest string.
-    wxSize GetLargestStringExtent(size_t n, const wxString* strings);
-    wxSize GetLargestStringExtent(const wxArrayString& strings)
-    {
-        return GetLargestStringExtent(strings.size(), &strings[0]);
-    }
+    wxSize GetLargestStringExtent(const std::vector<wxString>& strings);
 
     // Fill the array with the widths for each "0..N" substrings for N from 1
     // to text.length().

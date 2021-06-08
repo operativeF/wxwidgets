@@ -397,7 +397,7 @@ wxGridCellAutoWrapStringRenderer::Draw(wxGrid& grid,
 }
 
 
-wxArrayString
+std::vector<wxString>
 wxGridCellAutoWrapStringRenderer::GetTextLines(wxGrid& grid,
                                                wxDC& dc,
                                                const wxGridCellAttr& attr,
@@ -408,7 +408,7 @@ wxGridCellAutoWrapStringRenderer::GetTextLines(wxGrid& grid,
     const wxCoord maxWidth = rect.GetWidth();
 
     // Transform logical lines into physical ones, wrapping the longer ones.
-    const wxArrayString
+    const std::vector<wxString>
         logicalLines = wxSplit(grid.GetCellValue(row, col), '\n', '\0');
 
     // Trying to do anything if the column is hidden anyhow doesn't make sense
@@ -416,13 +416,9 @@ wxGridCellAutoWrapStringRenderer::GetTextLines(wxGrid& grid,
     if ( maxWidth <= 0 )
         return logicalLines;
 
-    wxArrayString physicalLines;
-    for ( wxArrayString::const_iterator it = logicalLines.begin();
-          it != logicalLines.end();
-          ++it )
+    std::vector<wxString> physicalLines;
+    for ( const auto& line : logicalLines )
     {
-        const wxString& line = *it;
-
         if ( dc.GetTextExtent(line).x > maxWidth )
         {
             // Line does not fit, break it up.
@@ -441,7 +437,7 @@ void
 wxGridCellAutoWrapStringRenderer::BreakLine(wxDC& dc,
                                             const wxString& logicalLine,
                                             wxCoord maxWidth,
-                                            wxArrayString& lines)
+                                            std::vector<wxString>& lines)
 {
     wxCoord lineWidth = 0;
     wxString line;
@@ -494,7 +490,7 @@ wxCoord
 wxGridCellAutoWrapStringRenderer::BreakWord(wxDC& dc,
                                             const wxString& word,
                                             wxCoord maxWidth,
-                                            wxArrayString& lines,
+                                            std::vector<wxString>& lines,
                                             wxString& line)
 {
     std::vector<int> widths;

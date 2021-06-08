@@ -151,7 +151,7 @@ protected:
 
     // split an URI path string in its component segments (including empty and
     // "." ones, no post-processing is done)
-    static wxArrayString SplitInSegments(const wxString& path);
+    static std::vector<wxString> SplitInSegments(const wxString& path);
 
     // various URI grammar helpers
     static bool IsUnreserved(char c);

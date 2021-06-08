@@ -649,7 +649,7 @@ const char* wxURI::ParseFragment(const char* uri)
 // ---------------------------------------------------------------------------
 
 /* static */
-wxArrayString wxURI::SplitInSegments(const wxString& path)
+std::vector<wxString> wxURI::SplitInSegments(const wxString& path)
 {
     return wxSplit(path, '/', '\0' /* no escape character */);
 }
@@ -742,7 +742,7 @@ void wxURI::Resolve(const wxURI& base, int flags)
         // So we don't do anything for absolute paths and implement merge for
         // the relative ones
 
-        wxArrayString our(SplitInSegments(m_path)),
+        std::vector<wxString> our(SplitInSegments(m_path)),
                       result(SplitInSegments(base.m_path));
 
         if ( !result.empty() )

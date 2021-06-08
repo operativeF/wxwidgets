@@ -714,7 +714,7 @@ void wxSVGFileDCImpl::DoDrawRotatedText(const wxString& sText, wxCoord x, wxCoor
     style += wxS(" xml:space=\"preserve\"");
 
     // Draw all text line by line
-    const wxArrayString lines = wxSplit(sText, '\n', '\0');
+    const std::vector<wxString> lines = wxSplit(sText, '\n', '\0');
     for (size_t lineNum = 0; lineNum < lines.size(); lineNum++)
     {
         const double xRect = x + lineNum * dx;

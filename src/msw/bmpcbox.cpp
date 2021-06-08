@@ -121,7 +121,7 @@ void wxBitmapComboBox::RecreateControl()
     wxPoint pos = GetPosition();
     wxSize size = GetSize();
     size.y = GetBestSize().y;
-    const wxArrayString strings = GetStrings();
+    const std::vector<wxString> strings = GetStrings();
     const unsigned numItems = strings.size();
     unsigned i;
 

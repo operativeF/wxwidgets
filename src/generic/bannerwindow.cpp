@@ -182,12 +182,9 @@ void wxBannerWindow::OnPaint(wxPaintEvent& WXUNUSED(event))
 
         dc.SetFont(GetFont());
 
-        wxArrayString lines = wxSplit(m_message, '\n', '\0');
-        const unsigned numLines = lines.size();
-        for ( unsigned n = 0; n < numLines; n++ )
+        std::vector<wxString> lines = wxSplit(m_message, '\n', '\0');
+        for ( const auto& line : lines )
         {
-            const wxString& line = lines[n];
-
             DrawBannerTextLine(dc, line, pos);
             pos.y += dc.GetTextExtent(line).y;
         }

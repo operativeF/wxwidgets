@@ -186,11 +186,11 @@ private:
 // separators occurring inside the string to be joined, this can be disabled by
 // passing '\0' as escape
 
-WXDLLIMPEXP_BASE wxString wxJoin(const wxArrayString& arr,
+WXDLLIMPEXP_BASE wxString wxJoin(const std::vector<wxString>& arr,
                                  const wxChar sep,
                                  const wxChar escape = wxT('\\'));
 
-WXDLLIMPEXP_BASE wxArrayString wxSplit(const wxString& str,
+WXDLLIMPEXP_BASE std::vector<wxString> wxSplit(const wxString& str,
                                        const wxChar sep,
                                        const wxChar escape = wxT('\\'));
 

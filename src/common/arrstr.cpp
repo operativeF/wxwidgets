@@ -127,7 +127,7 @@ int wxSortedArrayString::Index(const wxString& str,
 
 #include "wx/tokenzr.h"
 
-wxString wxJoin(const wxArrayString& arr, const wxChar sep, const wxChar escape)
+wxString wxJoin(const std::vector<wxString>& arr, const wxChar sep, const wxChar escape)
 {
     wxString str;
 
@@ -184,7 +184,7 @@ wxString wxJoin(const wxArrayString& arr, const wxChar sep, const wxChar escape)
     return str;
 }
 
-wxArrayString wxSplit(const wxString& str, const wxChar sep, const wxChar escape)
+std::vector<wxString> wxSplit(const wxString& str, const wxChar sep, const wxChar escape)
 {
     if ( escape == wxT('\0') )
     {
@@ -192,7 +192,7 @@ wxArrayString wxSplit(const wxString& str, const wxChar sep, const wxChar escape
         return wxStringTokenize(str, sep, wxTOKEN_RET_EMPTY_ALL);
     }
 
-    wxArrayString ret;
+    std::vector<wxString> ret;
     wxString curr;
 
     for ( wxString::const_iterator i = str.begin(),
@@ -237,7 +237,7 @@ wxArrayString wxSplit(const wxString& str, const wxChar sep, const wxChar escape
 
     // add the last token, which we always have unless the string is empty
     if ( !str.empty() )
-        ret.Add(curr);
+        ret.push_back(curr);
 
     return ret;
 }

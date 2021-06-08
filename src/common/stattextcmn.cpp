@@ -104,12 +104,12 @@ void wxTextWrapper::Wrap(wxWindow *win, const wxString& text, int widthMax)
 {
     const wxClientDC dc(win);
 
-    const wxArrayString ls = wxSplit(text, '\n', '\0');
-    for ( wxArrayString::const_iterator i = ls.begin(); i != ls.end(); ++i )
+    const std::vector<wxString> full_text = wxSplit(text, '\n', '\0');
+    for ( auto tline : full_text )
     {
-        wxString line = *i;
+        wxString line = tline;
 
-        if ( i != ls.begin() )
+        if ( tline != *full_text.begin() )
         {
             // Do this even if the line is empty, except if it's the first one.
             OnNewLine();

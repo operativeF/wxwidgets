@@ -1560,7 +1560,7 @@ void wxMSWDCImpl::DoDrawRotatedText(const wxString& text,
     const double dy = heightLine * cos(rad);
 
     // Draw all text line by line
-    const wxArrayString lines = wxSplit(text, '\n', '\0');
+    const std::vector<wxString> lines = wxSplit(text, '\n', '\0');
     for ( size_t lineNum = 0; lineNum < lines.size(); lineNum++ )
     {
         // Calculate origin for each line to avoid accumulation of

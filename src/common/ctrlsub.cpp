@@ -64,14 +64,14 @@ bool wxItemContainerImmutable::SetStringSelection(const wxString& s)
     return true;
 }
 
-wxArrayString wxItemContainerImmutable::GetStrings() const
+std::vector<wxString> wxItemContainerImmutable::GetStrings() const
 {
-    wxArrayString result;
+    std::vector<wxString> result;
 
     const unsigned int count = GetCount();
-    result.Alloc(count);
+    result.reserve(count);
     for ( unsigned int n = 0; n < count; n++ )
-        result.Add(GetString(n));
+        result.push_back(GetString(n));
 
     return result;
 }

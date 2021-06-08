@@ -322,7 +322,7 @@ void CmdLineTestCase::Usage()
     wxGCC_WARNING_RESTORE(missing-field-initializers)
 
     wxCmdLineParser p(desc);
-    const wxArrayString usageLines = wxSplit(p.GetUsageString(), '\n');
+    const std::vector<wxString> usageLines = wxSplit(p.GetUsageString(), '\n');
 
     enum
     {

@@ -379,8 +379,8 @@ TEST_CASE("Arrays::Split", "[dynarray]")
             { wxT(""), wxT(""), wxT(""), wxT(""), wxT("first"),
               wxT("second"), wxT("third"), wxT(""), wxT("") };
 
-        wxArrayString exparr(WXSIZEOF(expected), expected);
-        wxArrayString realarr(wxSplit(str, wxT(',')));
+        const auto exparr(WXSIZEOF(expected), expected);
+        const auto realarr(wxSplit(str, wxT(',')));
         CHECK( exparr == realarr );
     }
 
@@ -392,13 +392,13 @@ TEST_CASE("Arrays::Split", "[dynarray]")
             { wxT(""), wxT("\\"), wxT("first"), wxT("second"), wxT("third"), wxT("") };
 
         // escaping on:
-        wxArrayString exparr(WXSIZEOF(expected), expected);
-        wxArrayString realarr(wxSplit(str, wxT(','), wxT('\\')));
+        const std::vector<wxString> exparr(WXSIZEOF(expected), expected);
+        const std::vector<wxString> realarr(wxSplit(str, wxT(','), wxT('\\')));
         CHECK( exparr == realarr );
 
         // escaping turned off:
-        wxArrayString exparr2(WXSIZEOF(expected2), expected2);
-        wxArrayString realarr2(wxSplit(str, wxT(','), wxT('\0')));
+        const std::vector<wxString> exparr2(WXSIZEOF(expected2), expected2);
+        const std::vector<wxString> realarr2(wxSplit(str, wxT(','), wxT('\0')));
         CHECK( exparr2 == realarr2 );
     }
 
@@ -413,13 +413,13 @@ TEST_CASE("Arrays::Split", "[dynarray]")
               wxT(""), wxT("\\third") };
 
         // escaping on:
-        wxArrayString exparr(WXSIZEOF(expected), expected);
-        wxArrayString realarr(wxSplit(str, wxT(','), wxT('\\')));
+        std::vector<wxString> exparr(WXSIZEOF(expected), expected);
+        std::vector<wxString> realarr(wxSplit(str, wxT(','), wxT('\\')));
         CHECK( exparr == realarr );
 
         // escaping turned off:
-        wxArrayString exparr2(WXSIZEOF(expected2), expected2);
-        wxArrayString realarr2(wxSplit(str, wxT(','), wxT('\0')));
+        std::vector<wxString> exparr2(WXSIZEOF(expected2), expected2);
+        std::vector<wxString> realarr2(wxSplit(str, wxT(','), wxT('\0')));
         CHECK( exparr2 == realarr2 );
     }
 }
@@ -522,7 +522,7 @@ TEST_CASE("Arrays::SplitJoin", "[dynarray]")
         CHECK( theArr == wxSplit(string, separators[i]) );
     }
 
-    wxArrayString emptyArray;
+    std::vector<wxString> emptyArray;
     wxString string = wxJoin(emptyArray, wxT(';'));
     CHECK( string.empty() );
 
@@ -532,14 +532,14 @@ TEST_CASE("Arrays::SplitJoin", "[dynarray]")
 
     // Check for bug with escaping the escape character at the end (but not in
     // the middle).
-    wxArrayString withBackslashes;
+    std::vector<wxString> withBackslashes;
     withBackslashes.push_back("foo\\");
     withBackslashes.push_back("bar\\baz");
 
     string = wxJoin(withBackslashes, ':');
     CHECK( string == "foo\\\\:bar\\baz" );
 
-    const wxArrayString withBackslashes2 = wxSplit(string, ':');
+    const std::vector<wxString> withBackslashes2 = wxSplit(string, ':');
     REQUIRE( withBackslashes2.size() == 2 );
     CHECK( withBackslashes2[0] == withBackslashes[0] );
     CHECK( withBackslashes2[1] == withBackslashes[1] );

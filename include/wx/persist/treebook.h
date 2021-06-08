@@ -69,7 +69,7 @@ public:
         wxString expanded;
         if ( RestoreValue(wxPERSIST_TREEBOOK_EXPANDED_BRANCHES, &expanded) )
         {
-            const wxArrayString
+            const std::vector<wxString>
                 indices(wxSplit(expanded, wxPERSIST_TREEBOOK_EXPANDED_SEP));
 
             const size_t pageCount = book->GetPageCount();

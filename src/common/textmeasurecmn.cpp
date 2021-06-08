@@ -189,15 +189,15 @@ void wxTextMeasureBase::GetMultiLineTextExtent(const wxString& text,
         *heightOneLine = heightLine;
 }
 
-wxSize wxTextMeasureBase::GetLargestStringExtent(size_t n,
-                                                 const wxString* strings)
+wxSize wxTextMeasureBase::GetLargestStringExtent(const std::vector<wxString>& strings)
 {
     MeasuringGuard guard(*this);
 
     wxCoord w, h, widthMax = 0, heightMax = 0;
-    for ( size_t i = 0; i < n; ++i )
+
+    for ( const auto& str : strings )
     {
-        CallGetTextExtent(strings[i], &w, &h);
+        CallGetTextExtent(str, &w, &h);
 
         if ( w > widthMax )
             widthMax = w;
