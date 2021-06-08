@@ -555,9 +555,9 @@ wxFontProperty::wxFontProperty( const wxString& label, const wxString& name,
     // Initialize font family choices list
     if ( !wxPGGlobalVars->m_fontFamilyChoices )
     {
-        wxArrayString faceNames = wxFontEnumerator::GetFacenames();
+        std::vector<wxString> faceNames = wxFontEnumerator::GetFacenames();
 
-        faceNames.Sort();
+        std::sort(faceNames.begin(), faceNames.end());
 
         wxPGGlobalVars->m_fontFamilyChoices = new wxPGChoices(faceNames);
     }

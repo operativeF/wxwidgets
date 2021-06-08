@@ -476,10 +476,10 @@ public:
 	wxFileDataObjectBase& operator=(const wxFileDataObjectBase&) = delete;
 
     // get a reference to our array
-    const wxArrayString& GetFilenames() const { return m_filenames; }
+    const std::vector<wxString>& GetFilenames() const { return m_filenames; }
 
 protected:
-    wxArrayString m_filenames;
+    std::vector<wxString> m_filenames;
 };
 
 // ----------------------------------------------------------------------------

@@ -701,20 +701,20 @@ wxFont wxFont::Scaled(float x) const
 // ----------------------------------------------------------------------------
 
 // Up to now, there are no native implementations of this function:
-void wxNativeFontInfo::SetFaceName(const wxArrayString& facenames)
+void wxNativeFontInfo::SetFaceName(const std::vector<wxString>& facenames)
 {
 #if wxUSE_FONTENUM
-    for (size_t i=0; i < facenames.GetCount(); i++)
+    const auto possible_name = std::find_if(facenames.cbegin(), facenames.cend(),
+        [](const auto& face){ return wxFontEnumerator::IsValidFacename(face); });
+
+    if(possible_name != facenames.cend())
     {
-        if (wxFontEnumerator::IsValidFacename(facenames[i]))
-        {
-            SetFaceName(facenames[i]);
-            return;
-        }
+        SetFaceName(*possible_name);
+        return;
     }
 
     // set the first valid facename we can find on this system
-    wxString validfacename = wxFontEnumerator::GetFacenames().Item(0);
+    const wxString validfacename = *wxFontEnumerator::GetFacenames().cbegin();
     wxLogTrace(wxT("font"), wxT("Falling back to '%s'"), validfacename.c_str());
     SetFaceName(validfacename);
 #else // !wxUSE_FONTENUM

@@ -212,7 +212,7 @@ wxEND_EVENT_TABLE()
  * wxRichTextCtrl
  */
 
-wxArrayString wxRichTextCtrl::sm_availableFontNames;
+std::vector<wxString> wxRichTextCtrl::sm_availableFontNames;
 
 wxRichTextCtrl::wxRichTextCtrl()
               : wxScrollHelper(this)
@@ -4822,19 +4822,20 @@ bool wxRichTextCtrl::Delete(const wxRichTextRange& range)
     return GetFocusObject()->DeleteRangeWithUndo(range.ToInternal(), this, & GetBuffer());
 }
 
-const wxArrayString& wxRichTextCtrl::GetAvailableFontNames()
+const std::vector<wxString>& wxRichTextCtrl::GetAvailableFontNames()
 {
-    if (sm_availableFontNames.GetCount() == 0)
+    if (sm_availableFontNames.size() == 0)
     {
         sm_availableFontNames = wxFontEnumerator::GetFacenames();
-        sm_availableFontNames.Sort();
+
+        std::sort(sm_availableFontNames.begin(), sm_availableFontNames.end());
     }
     return sm_availableFontNames;
 }
 
 void wxRichTextCtrl::ClearAvailableFontNames()
 {
-    sm_availableFontNames.Clear();
+    sm_availableFontNames.clear();
 }
 
 void wxRichTextCtrl::OnSysColourChanged(wxSysColourChangedEvent& WXUNUSED(event))

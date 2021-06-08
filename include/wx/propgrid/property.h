@@ -749,7 +749,7 @@ public:
     // Constructor.
     // labels - Labels for choices.
     // values - Values for choices. If empty, indexes are used.
-    wxPGChoices( const wxArrayString& labels,
+    wxPGChoices( const std::vector<wxString>& labels,
                  const wxArrayInt& values = wxArrayInt() )
     {
         Init();
@@ -781,7 +781,7 @@ public:
     void Add( const wxChar* const* labels, const ValArrItem* values = nullptr );
 
     // Version that works with wxArrayString and wxArrayInt.
-    void Add( const wxArrayString& arr, const wxArrayInt& arrint = wxArrayInt() );
+    void Add( const std::vector<wxString>& arr, const wxArrayInt& arrint = wxArrayInt() );
 
     // Adds a single choice.
     // label - Label for added choice.

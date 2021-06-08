@@ -1263,7 +1263,7 @@ bool wxBitmapDataObject::SetData(const wxDataFormat& format,
 bool wxFileDataObject::SetData(size_t WXUNUSED(size),
                                const void *pData)
 {
-    m_filenames.Empty();
+    m_filenames.clear();
 
     // the documentation states that the first member of DROPFILES structure is
     // a "DWORD offset of double NUL terminated file list". What they mean by
@@ -1286,7 +1286,7 @@ bool wxFileDataObject::SetData(size_t WXUNUSED(size),
         len = ::DragQueryFile(hdrop, n, nullptr, 0) + 1;
 
         UINT len2 = ::DragQueryFile(hdrop, n, wxStringBuffer(str, len), len);
-        m_filenames.Add(str);
+        m_filenames.push_back(str);
 
         if ( len2 != len - 1 ) {
             wxLogDebug(wxT("In wxFileDropTarget::OnDrop DragQueryFile returned\
@@ -1302,7 +1302,7 @@ void wxFileDataObject::AddFile(const wxString& file)
     // just add file to filenames array
     // all useful data (such as DROPFILES struct) will be
     // created later as necessary
-    m_filenames.Add(file);
+    m_filenames.push_back(file);
 }
 
 size_t wxFileDataObject::GetDataSize() const

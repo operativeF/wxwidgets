@@ -497,10 +497,10 @@ bool wxSymbolPickerDialog::TransferDataToWindow()
 
     if (m_fontCtrl->GetCount() == 0)
     {
-        wxArrayString faceNames = wxRichTextCtrl::GetAvailableFontNames();
-        faceNames.Sort();
+        std::vector<wxString> faceNames = wxRichTextCtrl::GetAvailableFontNames();
+        std::sort(faceNames.begin(), faceNames.end());
 
-        faceNames.Insert(_("(Normal text)"), 0);
+        faceNames.insert(std::begin(faceNames), _("(Normal text)"));
         m_fontCtrl->Append(faceNames);
     }
 

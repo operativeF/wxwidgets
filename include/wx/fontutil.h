@@ -318,7 +318,7 @@ public:
     // to be valid. If no valid facename is given, sets the
     // first valid facename returned by wxFontEnumerator::GetFacenames().
     // Does not return a bool since it cannot fail.
-    void SetFaceName(const wxArrayString &facenames);
+    void SetFaceName(const std::vector<wxString>& facenames);
 
 
     // it is important to be able to serialize wxNativeFontInfo objects to be

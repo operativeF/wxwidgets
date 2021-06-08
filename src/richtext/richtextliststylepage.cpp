@@ -500,8 +500,8 @@ void wxRichTextListStylePage::CreateControls()
         wxRichTextBuffer::GetRenderer()->EnumerateStandardBulletNames(standardBulletNames);
 
     m_bulletNameCtrl->Append(standardBulletNames);
-    wxArrayString facenames = wxRichTextCtrl::GetAvailableFontNames();
-    facenames.Sort();
+    std::vector<wxString> facenames = wxRichTextCtrl::GetAvailableFontNames();
+    std::sort(facenames.begin(), facenames.end());
 
     m_symbolFontCtrl->Append(facenames);
 

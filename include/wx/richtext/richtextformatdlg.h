@@ -359,10 +359,13 @@ public:
     void UpdateFonts();
 
     /// Does this face name exist?
-    bool HasFaceName(const wxString& faceName) const { return m_faceNames.Index(faceName) != wxNOT_FOUND; }
+    bool HasFaceName(const wxString& faceName) const
+    {
+        return std::find(m_faceNames.cbegin(), m_faceNames.cend(), faceName) != m_faceNames.cend();
+    }
 
     /// Returns the array of face names
-    const wxArrayString& GetFaceNames() const { return m_faceNames; }
+    const std::vector<wxString>& GetFaceNames() const { return m_faceNames; }
 
 protected:
     /// Returns the HTML for this item
@@ -370,7 +373,7 @@ protected:
 
 private:
 
-    wxArrayString           m_faceNames;
+    std::vector<wxString> m_faceNames;
 };
 
 #endif

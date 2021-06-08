@@ -29,7 +29,7 @@ namespace
 {
 
 // Cached result of GetFacenames().
-wxArrayString gs_allFacenames;
+std::vector<wxString> gs_allFacenames;
 
 // Module used to ensure the cache is cleared on library shutdown and so is not
 // reused if it re-initialized again later.
@@ -63,7 +63,7 @@ public:
     // called by EnumerateFacenames
     bool OnFacename(const wxString& facename) override
     {
-        m_arrFacenames.Add(facename);
+        m_arrFacenames.push_back(facename);
         return true;
     }
 
@@ -71,17 +71,18 @@ public:
     bool OnFontEncoding(const wxString& WXUNUSED(facename),
                         const wxString& encoding) override
     {
-        m_arrEncodings.Add(encoding);
+        m_arrEncodings.push_back(encoding);
         return true;
     }
 
 public:
-    wxArrayString m_arrFacenames, m_arrEncodings;
+    std::vector<wxString> m_arrFacenames;
+    std::vector<wxString> m_arrEncodings;
 };
 
 
 /* static */
-wxArrayString wxFontEnumerator::GetFacenames(wxFontEncoding encoding, bool fixedWidthOnly)
+std::vector<wxString> wxFontEnumerator::GetFacenames(wxFontEncoding encoding, bool fixedWidthOnly)
 {
     wxSimpleFontEnumerator temp;
     temp.EnumerateFacenames(encoding, fixedWidthOnly);
@@ -89,7 +90,7 @@ wxArrayString wxFontEnumerator::GetFacenames(wxFontEncoding encoding, bool fixed
 }
 
 /* static */
-wxArrayString wxFontEnumerator::GetEncodings(const wxString& facename)
+std::vector<wxString> wxFontEnumerator::GetEncodings(const wxString& facename)
 {
     wxSimpleFontEnumerator temp;
     temp.EnumerateEncodings(facename);
@@ -118,7 +119,7 @@ bool wxFontEnumerator::IsValidFacename(const wxString &facename)
 #endif
 
     // is given font face name a valid one ?
-    return gs_allFacenames.Index(facename, false) != wxNOT_FOUND;
+    return gs_allFacenames.cend() != std::find(gs_allFacenames.cbegin(), gs_allFacenames.cend(), facename);
 }
 
 /* static */

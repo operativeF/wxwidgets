@@ -3010,7 +3010,7 @@ void wxPGChoices::Add( const wxChar* const* labels, const ValArrItem* values )
 
 // -----------------------------------------------------------------------
 
-void wxPGChoices::Add( const wxArrayString& arr, const wxArrayInt& arrint )
+void wxPGChoices::Add( const std::vector<wxString>& arr, const wxArrayInt& arrint )
 {
     AllocExclusive();
 

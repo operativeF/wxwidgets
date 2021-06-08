@@ -295,8 +295,8 @@ void wxRichTextBulletsPage::CreateControls()
     for (i = 0; i < standardBulletNames.GetCount(); i++)
         m_bulletNameCtrl->Append(wxGetTranslation(standardBulletNames[i]));
 
-    wxArrayString facenames = wxRichTextCtrl::GetAvailableFontNames();
-    facenames.Sort();
+    std::vector<wxString> facenames = wxRichTextCtrl::GetAvailableFontNames();
+    std::sort(facenames.begin(), facenames.end());
 
     m_symbolFontCtrl->Append(facenames);
 

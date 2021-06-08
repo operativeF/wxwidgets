@@ -143,7 +143,7 @@ void wxPathList::AddEnvList (const wxString& envVariable)
     if ( wxGetEnv(envVariable, &val) )
     {
         // split into an array of string the value of the env var
-        wxArrayString arr = wxStringTokenize(val, PATH_TOKS);
+        const std::vector<wxString> arr = wxStringTokenize(val, PATH_TOKS);
         WX_APPEND_ARRAY(*this, arr);
     }
 }

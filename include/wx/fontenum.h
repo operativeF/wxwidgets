@@ -66,12 +66,12 @@ public:
 
 
     // convenience function that returns array of facenames.
-    static wxArrayString
+    static std::vector<wxString>
     GetFacenames(wxFontEncoding encoding = wxFONTENCODING_SYSTEM, // all
                  bool fixedWidthOnly = false);
 
     // convenience function that returns array of all available encodings.
-    static wxArrayString GetEncodings(const wxString& facename = wxEmptyString);
+    static std::vector<wxString> GetEncodings(const wxString& facename = wxEmptyString);
 
     // convenience function that returns true if the given face name exist
     // in the user's system

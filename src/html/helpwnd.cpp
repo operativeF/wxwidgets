@@ -1299,15 +1299,15 @@ void wxHtmlHelpWindow::OptionsDialog()
 
     if (m_NormalFonts == nullptr)
     {
-        m_NormalFonts = new wxArrayString(wxFontEnumerator::GetFacenames());
-        m_NormalFonts->Sort(); // ascending sort
+        m_NormalFonts = new std::vector<wxString>(wxFontEnumerator::GetFacenames());
+        std::sort(m_NormalFonts->begin(), m_NormalFonts->end()); // ascending sort
     }
     if (m_FixedFonts == nullptr)
     {
-        m_FixedFonts = new wxArrayString(
+        m_FixedFonts = new std::vector<wxString>(
                     wxFontEnumerator::GetFacenames(wxFONTENCODING_SYSTEM,
                     true /*enum fixed width only*/));
-        m_FixedFonts->Sort(); // ascending sort
+        std::sort(m_FixedFonts->begin(), m_FixedFonts->end()); // ascending sort
     }
 
     // VS: We want to show the font that is actually used by wxHtmlWindow.
@@ -1330,14 +1330,15 @@ void wxHtmlHelpWindow::OptionsDialog()
     // Lock updates to the choice controls before inserting potentially many
     // items into them until the end of this block.
     {
-        unsigned i;
         wxWindowUpdateLocker lockNormalFont(dlg.NormalFont);
         wxWindowUpdateLocker lockFixedFont(dlg.FixedFont);
 
-        for (i = 0; i < m_NormalFonts->GetCount(); i++)
-            dlg.NormalFont->Append((*m_NormalFonts)[i]);
-        for (i = 0; i < m_FixedFonts->GetCount(); i++)
-            dlg.FixedFont->Append((*m_FixedFonts)[i]);
+        for (const auto& normalFont : *m_NormalFonts)
+            dlg.NormalFont->Append(normalFont);
+
+        for (const auto& fixedFont : *m_FixedFonts)
+            dlg.FixedFont->Append(fixedFont);
+
         if (!m_NormalFace.empty())
             dlg.NormalFont->SetStringSelection(m_NormalFace);
         else

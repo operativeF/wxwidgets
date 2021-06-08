@@ -27,7 +27,7 @@ FORCE_LINK_ME(m_fonts)
 TAG_HANDLER_BEGIN(FONT, "FONT" )
 
     TAG_HANDLER_VARS
-        wxArrayString m_Faces;
+        std::vector<wxString> m_Faces;
 
     TAG_HANDLER_CONSTR(FONT) { }
 
@@ -79,17 +79,17 @@ TAG_HANDLER_BEGIN(FONT, "FONT" )
         wxString faces;
         if (tag.GetParamAsString(wxT("FACE"), &faces))
         {
-            if (m_Faces.GetCount() == 0)
+            if (m_Faces.size() == 0)
                 m_Faces = wxFontEnumerator::GetFacenames();
 
             wxStringTokenizer tk(faces, wxT(","));
 
             while (tk.HasMoreTokens())
             {
-                int index;
-                if ((index = m_Faces.Index(tk.GetNextToken(), false)) != wxNOT_FOUND)
+                const auto possible_face = std::find(m_Faces.cbegin(), m_Faces.cend(), tk.GetNextToken());
+                if (possible_face != std::cend(m_Faces))
                 {
-                    m_WParser->SetFontFace(m_Faces[index]);
+                    m_WParser->SetFontFace(*possible_face);
                     m_WParser->GetContainer()->InsertCell(new wxHtmlFontCell(m_WParser->CreateCurrentFont()));
                     break;
                 }

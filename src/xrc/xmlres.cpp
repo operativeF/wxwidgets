@@ -2451,13 +2451,13 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
         wxString faces = GetParamValue(wxT("face"));
         wxStringTokenizer tk(faces, wxT(","));
 #if wxUSE_FONTENUM
-        wxArrayString facenames(wxFontEnumerator::GetFacenames());
+        std::vector<wxString> facenames(wxFontEnumerator::GetFacenames());
         while (tk.HasMoreTokens())
         {
-            int index = facenames.Index(tk.GetNextToken(), false);
-            if (index != wxNOT_FOUND)
+            const auto possible_face = std::find(facenames.cbegin(), facenames.cend(), tk.GetNextToken());
+            if (possible_face != std::cend(facenames))
             {
-                facename = facenames[index];
+                facename = *possible_face;
                 break;
             }
         }

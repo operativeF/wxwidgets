@@ -35,8 +35,8 @@
 // private globals
 // ----------------------------------------------------------------------------
 
-static wxArrayString gs_optionNames,
-                     gs_optionValues;
+static std::vector<wxString> gs_optionNames;
+static std::vector<wxString> gs_optionValues;
 
 // ============================================================================
 // wxSystemOptions implementation
@@ -45,14 +45,15 @@ static wxArrayString gs_optionNames,
 // Option functions (arbitrary name/value mapping)
 void wxSystemOptions::SetOption(const wxString& name, const wxString& value)
 {
-    const int idx = gs_optionNames.Index(name, false);
-    if (idx == wxNOT_FOUND)
+    const auto& possible_name = std::find(gs_optionNames.cbegin(), gs_optionNames.cend(), name);
+    if (possible_name == gs_optionNames.cend())
     {
-        gs_optionNames.Add(name);
-        gs_optionValues.Add(value);
+        gs_optionNames.push_back(name);
+        gs_optionValues.push_back(value);
     }
     else
     {
+        const auto idx = std::distance(std::cbegin(gs_optionNames), possible_name);
         gs_optionNames[idx] = name;
         gs_optionValues[idx] = value;
     }
@@ -67,10 +68,10 @@ wxString wxSystemOptions::GetOption(const wxString& name)
 {
     wxString val;
 
-    const int idx = gs_optionNames.Index(name, false);
-    if ( idx != wxNOT_FOUND )
+    const auto match_iter = std::find(gs_optionNames.cbegin(), gs_optionNames.cend(), name);
+    if ( match_iter != std::cend(gs_optionNames) )
     {
-        val = gs_optionValues[idx];
+        val = *match_iter;
     }
     else // not set explicitly
     {

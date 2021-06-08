@@ -924,9 +924,9 @@ void wxRichTextFontPage::OnFaceTextCtrlUpdated( wxCommandEvent& WXUNUSED(event) 
         else
         {
             // Try to find a partial match
-            const wxArrayString& arr = m_faceListBox->GetFaceNames();
+            const std::vector<wxString>& arr = m_faceListBox->GetFaceNames();
             size_t i;
-            for (i = 0; i < arr.GetCount(); i++)
+            for (i = 0; i < arr.size(); i++)
             {
                 if (arr[i].Mid(0, facename.Length()).Lower() == facename.Lower())
                 {

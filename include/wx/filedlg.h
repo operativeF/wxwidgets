@@ -117,14 +117,21 @@ public:
         return m_path;
     }
 
-    virtual void GetPaths(wxArrayString& paths) const { paths.Empty(); paths.Add(m_path); }
+    virtual std::vector<wxString> GetPaths() const
+    {
+        return {m_path};
+    }
+
     virtual wxString GetDirectory() const { return m_dir; }
     virtual wxString GetFilename() const
     {
         wxCHECK_MSG( !HasFlag(wxFD_MULTIPLE), wxString(), "When using wxFD_MULTIPLE, must call GetFilenames() instead" );
         return m_fileName;
     }
-    virtual void GetFilenames(wxArrayString& files) const { files.Empty(); files.Add(m_fileName); }
+    virtual std::vector<wxString> GetFilenames() const
+    {
+        return {m_fileName};
+    }
     virtual wxString GetWildcard() const { return m_wildCard; }
     virtual int GetFilterIndex() const { return m_filterIndex; }
 

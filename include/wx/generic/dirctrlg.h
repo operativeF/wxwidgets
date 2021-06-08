@@ -128,7 +128,7 @@ public:
 
     // Get dir or filename
     virtual wxString GetPath() const;
-    virtual void GetPaths(wxArrayString& paths) const;
+    virtual std::vector<wxString> GetPaths() const;
 
     // Get selected filename path only (else empty string).
     // I.e. don't count a directory as a selection

@@ -2256,7 +2256,7 @@ public:
     /**
         Font names take a long time to retrieve, so cache them (on demand).
     */
-    static const wxArrayString& GetAvailableFontNames();
+    static const std::vector<wxString>& GetAvailableFontNames();
 
     /**
         Clears the cache of available font names.
@@ -2394,7 +2394,7 @@ protected:
     wxCursor                m_textCursor;
     wxCursor                m_urlCursor;
 
-    static wxArrayString    sm_availableFontNames;
+    static std::vector<wxString>    sm_availableFontNames;
 
     wxRichTextContextMenuPropertiesInfo m_contextMenuPropertiesInfo;
 

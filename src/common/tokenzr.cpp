@@ -302,15 +302,15 @@ wxString wxStringTokenizer::GetNextToken()
 // public functions
 // ----------------------------------------------------------------------------
 
-wxArrayString wxStringTokenize(const wxString& str,
+std::vector<wxString> wxStringTokenize(const wxString& str,
                                const wxString& delims,
                                wxStringTokenizerMode mode)
 {
-    wxArrayString tokens;
+    std::vector<wxString> tokens;
     wxStringTokenizer tk(str, delims, mode);
     while ( tk.HasMoreTokens() )
     {
-        tokens.Add(tk.GetNextToken());
+        tokens.push_back(tk.GetNextToken());
     }
 
     return tokens;

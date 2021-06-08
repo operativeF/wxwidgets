@@ -238,27 +238,28 @@ wxFileDialog::wxFileDialog(wxWindow *parent,
     gs_rectDialog.y = 0;
 }
 
-void wxFileDialog::GetPaths(wxArrayString& paths) const
+std::vector<wxString> wxFileDialog::GetPaths() const
 {
-    paths.Empty();
+    std::vector<wxString> paths;
 
     wxString dir(m_dir);
     if ( m_dir.empty() || m_dir.Last() != wxT('\\') )
         dir += wxT('\\');
 
-    size_t count = m_fileNames.GetCount();
-    for ( size_t n = 0; n < count; n++ )
+    for ( const auto& filename : m_fileNames )
     {
-        if (wxFileName(m_fileNames[n]).IsAbsolute())
-            paths.Add(m_fileNames[n]);
+        if (wxFileName(filename).IsAbsolute())
+            paths.push_back(filename);
         else
-            paths.Add(dir + m_fileNames[n]);
+            paths.push_back(dir + filename);
     }
+
+    return paths;
 }
 
-void wxFileDialog::GetFilenames(wxArrayString& files) const
+std::vector<wxString> wxFileDialog::GetFilenames() const
 {
-    files = m_fileNames;
+    return m_fileNames;
 }
 
 wxPoint wxFileDialog::DoGetPosition() const
@@ -638,7 +639,7 @@ int wxFileDialog::ShowModal()
     if ( !ShowCommFileDialog(&of, m_windowStyle) )
         return wxID_CANCEL;
 
-    m_fileNames.Empty();
+    m_fileNames.clear();
 
     if ( ( HasFdFlag(wxFD_MULTIPLE) ) &&
          ( fileNameBuffer[of.nFileOffset-1] == wxT('\0') )
@@ -647,12 +648,12 @@ int wxFileDialog::ShowModal()
         m_dir = fileNameBuffer;
         i = of.nFileOffset;
         m_fileName = &fileNameBuffer[i];
-        m_fileNames.Add(m_fileName);
+        m_fileNames.push_back(m_fileName);
         i += m_fileName.length() + 1;
 
         while (fileNameBuffer[i] != wxT('\0'))
         {
-            m_fileNames.Add(&fileNameBuffer[i]);
+            m_fileNames.push_back(&fileNameBuffer[i]);
             i += wxStrlen(&fileNameBuffer[i]) + 1;
         }
 
@@ -684,7 +685,7 @@ int wxFileDialog::ShowModal()
 
         m_path = fileNameBuffer;
         m_fileName = wxFileNameFromPath(fileNameBuffer);
-        m_fileNames.Add(m_fileName);
+        m_fileNames.push_back(m_fileName);
         m_dir = wxPathOnly(fileNameBuffer);
     }
 

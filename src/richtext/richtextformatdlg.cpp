@@ -815,7 +815,7 @@ wxRichTextFontListBox::~wxRichTextFontListBox()
 /// Returns the HTML for this item
 wxString wxRichTextFontListBox::OnGetItem(size_t n) const
 {
-    if (m_faceNames.GetCount() == 0)
+    if (m_faceNames.size() == 0)
         return wxEmptyString;
 
     wxString str = CreateHTML(m_faceNames[n]);
@@ -831,7 +831,9 @@ wxString wxRichTextFontListBox::GetFaceName(size_t i) const
 /// Set selection for string, returning the index.
 int wxRichTextFontListBox::SetFaceNameSelection(const wxString& name)
 {
-    int i = m_faceNames.Index(name);
+    // FIXME: What if nothing is found?
+    int i = std::distance(std::cbegin(m_faceNames), std::find(m_faceNames.cbegin(), m_faceNames.cend(), name));
+
     SetSelection(i);
 
     return i;
@@ -840,11 +842,11 @@ int wxRichTextFontListBox::SetFaceNameSelection(const wxString& name)
 /// Updates the font list
 void wxRichTextFontListBox::UpdateFonts()
 {
-    wxArrayString facenames = wxRichTextCtrl::GetAvailableFontNames();
+    std::vector<wxString> facenames = wxRichTextCtrl::GetAvailableFontNames();
     m_faceNames = facenames;
-    m_faceNames.Sort();
+    std::sort(m_faceNames.begin(), m_faceNames.end());
 
-    SetItemCount(m_faceNames.GetCount());
+    SetItemCount(m_faceNames.size());
     Refresh();
 }
 

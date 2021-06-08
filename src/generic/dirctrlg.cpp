@@ -432,17 +432,16 @@ void wxGenericDirCtrl::ShowHidden( bool show )
 
     if ( HasFlag(wxDIRCTRL_MULTIPLE) )
     {
-        wxArrayString paths;
-        GetPaths(paths);
+        const std::vector<wxString> paths = GetPaths();
         ReCreateTree();
-        for ( unsigned n = 0; n < paths.size(); n++ )
+        for ( const auto& path : paths )
         {
-            ExpandPath(paths[n]);
+            ExpandPath(path);
         }
     }
     else
     {
-        wxString path = GetPath();
+        const wxString path = GetPath();
         ReCreateTree();
         SetPath(path);
     }
@@ -970,9 +969,9 @@ wxString wxGenericDirCtrl::GetPath() const
         return wxEmptyString;
 }
 
-void wxGenericDirCtrl::GetPaths(wxArrayString& paths) const
+std::vector<wxString> wxGenericDirCtrl::GetPaths() const
 {
-    paths.clear();
+    std::vector<wxString> paths;
 
     wxArrayTreeItemIds items;
     m_treeCtrl->GetSelections(items);
@@ -981,6 +980,8 @@ void wxGenericDirCtrl::GetPaths(wxArrayString& paths) const
         wxTreeItemId treeid = items[n];
         paths.push_back(GetPath(treeid));
     }
+
+    return paths;
 }
 
 wxString wxGenericDirCtrl::GetFilePath() const
@@ -1232,8 +1233,7 @@ void wxDirFilterListCtrl::OnSelFilter(wxCommandEvent& WXUNUSED(event))
 
     if (m_dirCtrl->HasFlag(wxDIRCTRL_MULTIPLE))
     {
-        wxArrayString paths;
-        m_dirCtrl->GetPaths(paths);
+        const std::vector<wxString> paths = m_dirCtrl->GetPaths();
 
         m_dirCtrl->SetFilterIndex(sel);
 
@@ -1242,9 +1242,9 @@ void wxDirFilterListCtrl::OnSelFilter(wxCommandEvent& WXUNUSED(event))
         m_dirCtrl->ReCreateTree();
 
         // Expand and select the previously selected paths
-        for (unsigned int i = 0; i < paths.GetCount(); i++)
+        for (const auto& path : paths)
         {
-            m_dirCtrl->ExpandPath(paths.Item(i));
+            m_dirCtrl->ExpandPath(path);
         }
     }
     else

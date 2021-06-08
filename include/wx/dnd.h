@@ -258,7 +258,7 @@ public:
 
     // parameters are the number of files and the array of file names
     virtual bool OnDropFiles(wxCoord x, wxCoord y,
-                             const wxArrayString& filenames) = 0;
+                             const std::vector<wxString>& filenames) = 0;
 
     wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def) override;
 };
