@@ -464,7 +464,7 @@ private:
 /////////////////////////////////////////////////////////////////////////////
 // Iterators
 
-#if wxUSE_STL || defined WX_TEST_ARCHIVE_ITERATOR
+#if defined WX_TEST_ARCHIVE_ITERATOR
 using wxZipIter = wxArchiveIterator<wxZipInputStream>;
 using wxZipPairIter = wxArchiveIterator<wxZipInputStream, std::pair<wxString, wxZipEntry *>>;
 #endif
@@ -480,7 +480,7 @@ public:
     using instream_type = wxZipInputStream;
     using outstream_type = wxZipOutputStream;
     using notifier_type = wxZipNotifier;
-#if wxUSE_STL || defined WX_TEST_ARCHIVE_ITERATOR
+#if defined WX_TEST_ARCHIVE_ITERATOR
     using iter_type = wxZipIter;
     using pairiter_type = wxZipPairIter;
 #endif

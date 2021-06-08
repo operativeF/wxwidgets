@@ -289,7 +289,7 @@ private:
 /////////////////////////////////////////////////////////////////////////////
 // Iterators
 
-#if wxUSE_STL || defined WX_TEST_ARCHIVE_ITERATOR
+#if defined WX_TEST_ARCHIVE_ITERATOR
 using wxTarIter = wxArchiveIterator<wxTarInputStream>;
 using wxTarPairIter = wxArchiveIterator<wxTarInputStream, std::pair<wxString, wxTarEntry *>>;
 #endif
@@ -305,7 +305,7 @@ public:
     using instream_type = wxTarInputStream;
     using outstream_type = wxTarOutputStream;
     using notifier_type = wxTarNotifier;
-#if wxUSE_STL || defined WX_TEST_ARCHIVE_ITERATOR
+#if defined WX_TEST_ARCHIVE_ITERATOR
     using iter_type = wxTarIter;
     using pairiter_type = wxTarPairIter;
 #endif

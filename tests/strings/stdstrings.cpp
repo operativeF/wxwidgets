@@ -520,7 +520,6 @@ TEST_CASE("StdString::Substr", "[stdstring]")
     CHECK( s1.substr( 17, 30 ) == wxT("") );
 }
 
-#if wxUSE_STD_STRING
 TEST_CASE("StdString::Conversion", "[stdstring]")
 {
     std::string strStd("std::string value");
@@ -543,18 +542,15 @@ TEST_CASE("StdString::Conversion", "[stdstring]")
     // notice that implicit wxString -> std::string conversion is only
     // available in wxUSE_STL case, because it conflicts with conversion to
     // const char*/wchar_t*
-#if wxUSE_STL && wxUSE_UNSAFE_WXSTRING_CONV
+#if wxUSE_UNSAFE_WXSTRING_CONV
     std::string s5 = s4;
 #else
     std::string s5 = s4.ToStdString();
 #endif
     CHECK( s5 == "hello" );
 
-#if wxUSE_STL
     wxStdWideString s6 = s4;
-#else
-    wxStdWideString s6 = s4.ToStdWstring();
-#endif
+
     CHECK( s6 == "hello" );
 
 #if wxUSE_UNSAFE_WXSTRING_CONV
@@ -575,7 +571,6 @@ TEST_CASE("StdString::Conversion", "[stdstring]")
 
     CHECK( wxString("bye").utf8_string() == std::string("bye") );
 }
-#endif // wxUSE_STD_STRING
 
 TEST_CASE("StdString::Algo", "[stdstring]")
 {

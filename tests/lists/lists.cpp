@@ -198,11 +198,7 @@ void ListsTestCase::wxListCtorTest()
         CPPUNIT_ASSERT( list2.GetCount() == 2 );
         CPPUNIT_ASSERT( Baz::GetNumber() == 2 );
 
-#if !wxUSE_STL
-        list1.DeleteContents(true);
-#else
         WX_CLEAR_LIST(wxListBazs, list1);
-#endif
     }
 
     CPPUNIT_ASSERT( Baz::GetNumber() == 0 );

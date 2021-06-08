@@ -225,7 +225,6 @@ public:
     inline operator wxString () const {  return MakeString(); }
     wxString GetString() const;
 
-#if wxUSE_STD_STRING
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
     wxVariant(const std::string& val, const wxString& name = wxEmptyString);
     bool operator==(const std::string& value) const
@@ -245,7 +244,6 @@ public:
     wxVariant& operator=(const wxStdWideString& value)
         { return operator=(wxString(value)); }
     operator wxStdWideString() const { return (operator wxString()).ToStdWstring(); }
-#endif // wxUSE_STD_STRING
 
     // wxUniChar
     wxVariant(const wxUniChar& val, const wxString& name = wxEmptyString);

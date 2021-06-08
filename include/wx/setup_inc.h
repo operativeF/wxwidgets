@@ -271,49 +271,6 @@
 // Interoperability with the standard library.
 // ----------------------------------------------------------------------------
 
-// Set wxUSE_STL to 1 to enable maximal interoperability with the standard
-// library, even at the cost of backwards compatibility.
-//
-// Default is 0
-//
-// Recommended setting: 0 as the options below already provide a relatively
-// good level of interoperability and changing this option arguably isn't worth
-// diverging from the official builds of the library.
-#define wxUSE_STL 0
-
-// This is not a real option but is used as the default value for
-// wxUSE_STD_STRING.
-//
-// Set it to 0 if you want to disable the use of all standard classes
-// completely for some reason.
-#define wxUSE_STD_DEFAULT  1
-
-// Enable minimal interoperability with the standard C++ string class if 1.
-// "Minimal" means that wxString can be constructed from std::string or
-// std::wstring but can't be implicitly converted to them. You need to enable
-// the option below for the latter.
-//
-// Default is 1 for most compilers.
-//
-// Recommended setting: 1 unless you want to ensure your program doesn't use
-//                      the standard C++ library at all.
-#define wxUSE_STD_STRING  wxUSE_STD_DEFAULT
-
-// Make wxString as much interchangeable with std::[w]string as possible, in
-// particular allow implicit conversion of wxString to either of these classes.
-// This comes at a price (or a benefit, depending on your point of view) of not
-// allowing implicit conversion to "const char *" and "const wchar_t *".
-//
-// Because a lot of existing code relies on these conversions, this option is
-// disabled by default but can be enabled for your build if you don't care
-// about compatibility.
-//
-// Default is 0 if wxUSE_STL has its default value or 1 if it is enabled.
-//
-// Recommended setting: 0 to remain compatible with the official builds of
-// wxWidgets.
-#define wxUSE_STD_STRING_CONV_IN_WXSTRING wxUSE_STL
-
 // ----------------------------------------------------------------------------
 // non GUI features selection
 // ----------------------------------------------------------------------------

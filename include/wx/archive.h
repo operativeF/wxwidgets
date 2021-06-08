@@ -160,7 +160,7 @@ private:
 // An input iterator that can be used to transfer an archive's catalog to
 // a container.
 
-#if wxUSE_STL || defined WX_TEST_ARCHIVE_ITERATOR
+#if defined WX_TEST_ARCHIVE_ITERATOR
 #include <iterator>
 #include <utility>
 
@@ -291,7 +291,7 @@ private:
 using wxArchiveIter = wxArchiveIterator<wxArchiveInputStream>;
 using wxArchivePairIter = wxArchiveIterator<wxArchiveInputStream, std::pair<wxString, wxArchiveEntry *>>;
 
-#endif // wxUSE_STL || defined WX_TEST_ARCHIVE_ITERATOR
+#endif // defined WX_TEST_ARCHIVE_ITERATOR
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -309,7 +309,7 @@ public:
     using instream_type = wxArchiveInputStream;
     using outstream_type = wxArchiveOutputStream;
     using notifier_type = wxArchiveNotifier;
-#if wxUSE_STL || defined WX_TEST_ARCHIVE_ITERATOR
+#if defined WX_TEST_ARCHIVE_ITERATOR
     using iter_type = wxArchiveIter;
     using pairiter_type = wxArchivePairIter;
 #endif

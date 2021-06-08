@@ -69,10 +69,8 @@
         #include <utility>          // for std::swap()
     #endif
 
-    #if wxUSE_STL
         #include <exception>
         #include <typeinfo>
-    #endif
 #endif // wxUSE_EXCEPTIONS
 
 #if !defined(__WINDOWS__)
@@ -665,7 +663,6 @@ void wxAppConsoleBase::OnUnhandledException()
     {
         throw;
     }
-#if wxUSE_STL
     catch ( std::exception& e )
     {
 #ifdef wxNO_RTTI
@@ -675,7 +672,6 @@ void wxAppConsoleBase::OnUnhandledException()
                     typeid(e).name(), e.what());
 #endif
     }
-#endif // wxUSE_STL
     catch ( ... )
     {
         what = "unknown exception";

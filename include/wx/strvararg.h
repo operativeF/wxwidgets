@@ -733,8 +733,6 @@ WX_ARG_NORMALIZER_FORWARD(wxWCharBuffer, const wchar_t*);
 WX_ARG_NORMALIZER_FORWARD(const wxWCharBuffer&, const wchar_t*);
 
 // versions for std::[w]string:
-#if wxUSE_STD_STRING
-
 #include "wx/stringimpl.h"
 
 #if !wxUSE_UTF8_LOCALE_ONLY
@@ -786,7 +784,6 @@ WX_ARG_NORMALIZER_FORWARD(std::string, const std::string&);
 #endif
 WX_ARG_NORMALIZER_FORWARD(wxStdWideString, const wxStdWideString&);
 
-#endif // wxUSE_STD_STRING
 
 
 // versions for wxUniChar, wxUniCharRef:

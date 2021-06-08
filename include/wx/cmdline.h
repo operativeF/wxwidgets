@@ -133,9 +133,7 @@ public:
 
 // We avoid dependency on standard library by default but if we do use
 // std::string, then it's ok to use iterator tags as well.
-#if wxUSE_STD_STRING
         using iterator_category = std::bidirectional_iterator_tag;
-#endif // wx_USE_STD_STRING
 
         const_iterator()  = default;
         reference operator *() const;

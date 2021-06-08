@@ -552,11 +552,6 @@ bool wxString::Shrink()
 
 wxString operator+(const wxString& str1, const wxString& str2)
 {
-#if !wxUSE_STL_BASED_WXSTRING
-    wxASSERT( str1.IsValid() );
-    wxASSERT( str2.IsValid() );
-#endif
-
     wxString s = str1;
     s += str2;
 
@@ -565,10 +560,6 @@ wxString operator+(const wxString& str1, const wxString& str2)
 
 wxString operator+(const wxString& str, wxUniChar ch)
 {
-#if !wxUSE_STL_BASED_WXSTRING
-    wxASSERT( str.IsValid() );
-#endif
-
     wxString s = str;
     s += ch;
 
@@ -577,10 +568,6 @@ wxString operator+(const wxString& str, wxUniChar ch)
 
 wxString operator+(wxUniChar ch, const wxString& str)
 {
-#if !wxUSE_STL_BASED_WXSTRING
-    wxASSERT( str.IsValid() );
-#endif
-
     wxString s = ch;
     s += str;
 
@@ -589,10 +576,6 @@ wxString operator+(wxUniChar ch, const wxString& str)
 
 wxString operator+(const wxString& str, const char *psz)
 {
-#if !wxUSE_STL_BASED_WXSTRING
-    wxASSERT( str.IsValid() );
-#endif
-
     wxString s;
     if ( !s.Alloc(strlen(psz) + str.length()) ) {
         wxFAIL_MSG( wxT("out of memory in wxString::operator+") );
@@ -605,10 +588,6 @@ wxString operator+(const wxString& str, const char *psz)
 
 wxString operator+(const wxString& str, const wchar_t *pwz)
 {
-#if !wxUSE_STL_BASED_WXSTRING
-    wxASSERT( str.IsValid() );
-#endif
-
     wxString s;
     if ( !s.Alloc(wxWcslen(pwz) + str.length()) ) {
         wxFAIL_MSG( wxT("out of memory in wxString::operator+") );
@@ -621,10 +600,6 @@ wxString operator+(const wxString& str, const wchar_t *pwz)
 
 wxString operator+(const char *psz, const wxString& str)
 {
-#if !wxUSE_STL_BASED_WXSTRING
-    wxASSERT( str.IsValid() );
-#endif
-
     wxString s;
     if ( !s.Alloc(strlen(psz) + str.length()) ) {
         wxFAIL_MSG( wxT("out of memory in wxString::operator+") );
@@ -637,10 +612,6 @@ wxString operator+(const char *psz, const wxString& str)
 
 wxString operator+(const wchar_t *pwz, const wxString& str)
 {
-#if !wxUSE_STL_BASED_WXSTRING
-    wxASSERT( str.IsValid() );
-#endif
-
     wxString s;
     if ( !s.Alloc(wxWcslen(pwz) + str.length()) ) {
         wxFAIL_MSG( wxT("out of memory in wxString::operator+") );
@@ -728,7 +699,7 @@ int wxString::compare(size_t nStart, size_t nLen,
 // find_{first,last}_[not]_of functions
 // ---------------------------------------------------------------------------
 
-#if !wxUSE_STL_BASED_WXSTRING || wxUSE_UNICODE_UTF8
+#if wxUSE_UNICODE_UTF8
 
 // NB: All these functions are implemented  with the argument being wxChar*,
 //     i.e. widechar string in any Unicode build, even though native string
@@ -901,7 +872,7 @@ size_t wxString::find_last_not_of(const wxOtherCharType* sz, size_t nStart,
 #undef wxOtherCharType
 #undef STRCONV
 
-#endif // !wxUSE_STL_BASED_WXSTRING || wxUSE_UNICODE_UTF8
+#endif // wxUSE_UNICODE_UTF8
 
 // ===========================================================================
 // other common string functions
@@ -1926,11 +1897,7 @@ static int DoStringPrintfV(wxString& str,
 int wxString::PrintfV(const wxString& format, va_list argptr)
 {
 #if wxUSE_UNICODE_UTF8
-    #if wxUSE_STL_BASED_WXSTRING
         typedef wxStringTypeBuffer<char> Utf8Buffer;
-    #else
-        typedef wxStringInternalBuffer Utf8Buffer;
-    #endif
 #endif
 
 #if wxUSE_UTF8_LOCALE_ONLY
