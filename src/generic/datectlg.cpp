@@ -292,7 +292,6 @@ private:
         return GetStringValueFor(GetDate());
     }
 
-private:
     // returns either the given date representation using the current format or
     // an empty string if it's invalid
     wxString GetStringValueFor(const wxDateTime& dt) const

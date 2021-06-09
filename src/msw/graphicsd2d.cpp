@@ -1401,7 +1401,6 @@ private:
     void SaveGeometryState(GeometryStateData& data) const;
     void RestoreGeometryState(const GeometryStateData& data);
 
-private :
     wxCOMPtr<ID2D1PathGeometry> m_pathGeometry;
 
     wxCOMPtr<ID2D1GeometrySink> m_geometrySink;
@@ -2479,7 +2478,6 @@ private:
         }
     }
 
-private:
     // The hatch style produced by this bitmap source
     const wxBrushStyle m_brushStyle;
 
@@ -3489,7 +3487,6 @@ private:
         CreateImageFromWICBitmap(m_wicBitmap, m_resultImage);
    }
 
-private:
     wxImage* m_resultImage;
     wxCOMPtr<IWICBitmap> m_wicBitmap;
 
@@ -3559,7 +3556,6 @@ private:
         return static_cast<ImplementationType>(GetD2DResource().get());
     }
 
-private:
     HWND m_hwnd;
     ID2D1Factory* m_factory;
 };
@@ -3993,8 +3989,6 @@ public:
     }
 
 private:
-    
-
     void DoDrawText(const wxString& str, double x, double y) override;
 
     void EnsureInitialized();
@@ -4009,7 +4003,6 @@ private:
 
     void SetClipLayer(ID2D1Geometry* clipGeometry);
 
-private:
     enum LayerType
     {
         CLIP_LAYER,
@@ -4035,7 +4028,6 @@ private:
         wxStack<LayerData> layers;
     };
 
-private:
     ID2D1Factory* m_direct2dFactory;
     wxSharedPtr<wxD2DRenderTargetResourceHolder> m_renderTargetHolder;
     wxStack<StateData> m_stateStack;

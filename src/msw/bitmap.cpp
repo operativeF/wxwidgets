@@ -104,7 +104,6 @@ public:
     // return the mask
     wxMask *GetMask() const { return m_bitmapMask; }
 
-public:
 #if wxUSE_PALETTE
     wxPalette     m_bitmapPalette;
 #endif // wxUSE_PALETTE

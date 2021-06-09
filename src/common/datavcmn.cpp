@@ -66,7 +66,6 @@ private:
     bool                    m_finished;
     bool                    m_focusOnIdle;
 
-private:
     wxDECLARE_EVENT_TABLE();
 };
 

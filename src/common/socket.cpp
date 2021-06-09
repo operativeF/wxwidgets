@@ -153,7 +153,6 @@ public:
     bool                     m_notify;
     void                    *m_clientData;
 
-public:
     wxSocketState()  = default;
 
     wxSocketState(const wxSocketState&) = delete;

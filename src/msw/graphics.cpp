@@ -1852,7 +1852,7 @@ public :
         if (m_offset > 0)
             m_gr->TranslateTransform(-m_offset, -m_offset);
     }
-public :
+    
     Graphics* m_gr;
     float m_offset;
 } ;

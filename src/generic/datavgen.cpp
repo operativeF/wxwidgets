@@ -1008,7 +1008,6 @@ private:
     // Helper of public Expand(), must be called with a valid node.
     void DoExpand(wxDataViewTreeNode* node, unsigned int row, bool expandChildren);
 
-private:
     wxDataViewCtrl             *m_owner;
     int                         m_lineHeight;
     bool                        m_dirty;
@@ -1058,7 +1057,6 @@ private:
     // Id m_editorCtrl is non-NULL, pointer to the associated renderer.
     wxDataViewRenderer* m_editorRenderer;
 
-private:
     wxDECLARE_DYNAMIC_CLASS(wxDataViewMainWindow);
     wxDECLARE_EVENT_TABLE();
 };

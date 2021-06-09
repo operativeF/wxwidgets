@@ -75,7 +75,6 @@ public:
         return true;
     }
 
-public:
     std::vector<wxString> m_arrFacenames;
     std::vector<wxString> m_arrEncodings;
 };

@@ -2700,9 +2700,6 @@ private:
 
 class wxMBConv_wxwin : public wxMBConv
 {
-private:
-    
-
 public:
     // temporarily just use wxEncodingConverter stuff,
     // so that it works while a better implementation is built
@@ -2782,7 +2779,6 @@ public:
 
     bool IsOk() const { return m_ok; }
 
-public:
     wxFontEncoding m_enc;
     wxEncodingConverter m2w, w2m;
 

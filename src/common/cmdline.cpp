@@ -89,7 +89,6 @@ public:
         m_isNegated = false;
     }
 
-public:
     wxCmdLineEntryType kind;
     wxString shortName,
              longName;
