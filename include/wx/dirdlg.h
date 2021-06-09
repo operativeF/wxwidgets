@@ -95,15 +95,15 @@ public:
         return m_path;
     }
 
-    virtual void GetPaths(wxArrayString& paths) const
+    virtual std::vector<wxString> GetPaths() const
     {
-        paths = m_paths;
+        return m_paths;
     }
 
 protected:
     wxString m_message;
     wxString m_path;
-    wxArrayString m_paths;
+    std::vector<wxString> m_paths;
 };
 
 

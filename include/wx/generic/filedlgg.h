@@ -77,8 +77,8 @@ public:
             wxCHECK_MSG( !HasFlag(wxFD_MULTIPLE), wxString(), "When using wxFD_MULTIPLE, must call GetPaths() instead" );
             return m_filectrl->GetPath();
         }
-    void GetPaths(wxArrayString& paths) const override
-        { m_filectrl->GetPaths(paths); }
+    std::vector<wxString> GetPaths() const override
+        { return m_filectrl->GetPaths(); }
     wxString GetDirectory() const override
         { return m_filectrl->GetDirectory(); }
     wxString GetFilename() const override

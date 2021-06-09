@@ -41,10 +41,10 @@ wxString wxGtkFileChooser::GetPath() const
     return string;
 }
 
-void wxGtkFileChooser::GetFilenames( wxArrayString& files ) const
+std::vector<wxString> wxGtkFileChooser::GetFilenames() const
 {
-    GetPaths( files );
-    for ( size_t n = 0; n < files.GetCount(); ++n )
+    std::vector<wxString> files = GetPaths();
+    for ( size_t n = 0; n < files.size(); ++n )
     {
         const wxFileName file( files[n] );
         files[n] = file.GetFullName();

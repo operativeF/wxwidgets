@@ -1059,14 +1059,14 @@ wxFileName wxGenericFileCtrl::DoGetFileName() const
     return fn;
 }
 
-void
-wxGenericFileCtrl::DoGetFilenames(wxArrayString& filenames, bool fullPath) const
+std::vector<wxString> wxGenericFileCtrl::DoGetFilenames(bool fullPath) const
 {
-    filenames.clear();
+    std::vector<wxString> filenames;
 
     const wxString dir = m_list->GetDir();
 
     const wxString value = m_text->GetValue();
+    
     if ( !value.empty() )
     {
         wxFileName fn(value);
@@ -1074,12 +1074,12 @@ wxGenericFileCtrl::DoGetFilenames(wxArrayString& filenames, bool fullPath) const
             fn.MakeAbsolute(dir);
 
         filenames.push_back(fullPath ? fn.GetFullPath() : fn.GetFullName());
-        return;
+        return filenames;
     }
 
     const int numSel = m_list->GetSelectedItemCount();
     if ( !numSel )
-        return;
+        return {};
 
     filenames.reserve(numSel);
 
@@ -1097,8 +1097,11 @@ wxGenericFileCtrl::DoGetFilenames(wxArrayString& filenames, bool fullPath) const
         m_list->GetItem(item);
 
         const wxFileName fn(dir, item.m_text);
+        // FIXME: We're checking this every time.
         filenames.push_back(fullPath ? fn.GetFullPath() : fn.GetFullName());
     }
+
+    return filenames;
 }
 
 bool wxGenericFileCtrl::SetDirectory( const wxString& dir )
@@ -1426,14 +1429,14 @@ bool wxGenericFileCtrl::SetPath( const wxString& path )
     return true;
 }
 
-void wxGenericFileCtrl::GetPaths( wxArrayString& paths ) const
+std::vector<wxString> wxGenericFileCtrl::GetPaths() const
 {
-    DoGetFilenames( paths, true );
+    return DoGetFilenames(true);
 }
 
-void wxGenericFileCtrl::GetFilenames( wxArrayString& files ) const
+std::vector<wxString> wxGenericFileCtrl::GetFilenames() const
 {
-    DoGetFilenames( files, false );
+    return DoGetFilenames( false );
 }
 
 void wxGenericFileCtrl::UpdateControls()

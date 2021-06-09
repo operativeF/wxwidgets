@@ -36,7 +36,7 @@ public:
     void SetWidget(GtkFileChooser *w);
 
     wxString GetPath() const;
-    void GetPaths( wxArrayString& paths ) const;
+    std::vector<wxString> GetPaths() const;
     wxString GetDirectory() const;
     wxString GetFilename() const;
     void GetFilenames( wxArrayString& files ) const;
@@ -109,7 +109,7 @@ public:
     wxString GetDirectory() const override;
     wxString GetWildcard() const override { return this->m_wildCard; }
     wxString GetPath() const override;
-    void GetPaths( wxArrayString& paths ) const override;
+    std::vector<wxString> GetPaths() const override;
     void GetFilenames( wxArrayString& files ) const override;
     int GetFilterIndex() const override { return m_fc.GetFilterIndex(); }
 

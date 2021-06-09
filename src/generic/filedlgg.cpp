@@ -319,15 +319,14 @@ bool wxGenericFileDialog::Show( bool show )
 
 void wxGenericFileDialog::OnOk( wxCommandEvent &WXUNUSED(event) )
 {
-    wxArrayString selectedFiles;
-    m_filectrl->GetPaths(selectedFiles);
+    std::vector<wxString> selectedFiles = m_filectrl->GetPaths();
 
-    if (selectedFiles.Count() == 0)
+    if (selectedFiles.empty())
         return;
 
     const wxString& path = selectedFiles[0];
 
-    if (selectedFiles.Count() == 1)
+    if (selectedFiles.size() == 1)
     {
         SetPath(path);
     }

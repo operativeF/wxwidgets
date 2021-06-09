@@ -242,8 +242,8 @@ public:
     wxString GetDirectory() const override;
     wxString GetWildcard() const override { return this->m_wildCard; }
     wxString GetPath() const override;
-    void GetPaths( wxArrayString& paths ) const override;
-    void GetFilenames( wxArrayString& files ) const override;
+    std::vector<wxString> GetPaths() const override;
+    std::vector<wxString> GetFilenames() const override;
     int GetFilterIndex() const override { return m_filterIndex; }
 
     bool HasMultipleFileSelection() const override
@@ -280,7 +280,7 @@ private:
     // the first of these methods can only be used for the controls with single
     // selection (i.e. without wxFC_MULTIPLE style), the second one in any case
     wxFileName DoGetFileName() const;
-    void DoGetFilenames( wxArrayString& filenames, bool fullPath ) const;
+    std::vector<wxString> DoGetFilenames(bool fullPath ) const;
 
     int m_style;
 

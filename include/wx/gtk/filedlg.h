@@ -41,7 +41,7 @@ public:
     virtual ~wxFileDialog();
 
     wxString GetPath() const override;
-    void GetPaths(wxArrayString& paths) const override;
+    std::vector<wxString> GetPaths() const override;
     wxString GetFilename() const override;
     void GetFilenames(wxArrayString& files) const override;
     int GetFilterIndex() const override;

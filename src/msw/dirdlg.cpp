@@ -92,7 +92,7 @@ wxIMPLEMENT_CLASS(wxDirDialog, wxDialog);
 bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
                          bool multipleSelection, bool showHidden, wxCOMPtr<IFileOpenDialog>& fileDialog);
 bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bool multipleSelection,
-                                 wxArrayString& paths);
+                                 std::vector<wxString>& paths);
 bool ConvertIShellItemToPath(const wxCOMPtr<IShellItem>& item, wxString& path);
 
 #endif // #if wxUSE_IFILEOPENDIALOG
@@ -277,7 +277,7 @@ int wxDirDialog::ShowIFileOpenDialog(WXHWND owner)
     {
         if ( !HasFlag(wxDD_MULTIPLE) )
         {
-            m_path = m_paths.Last();
+            m_path = m_paths.back();
         }
 
         return wxID_OK;
@@ -377,7 +377,7 @@ bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
 
 // helper function for wxDirDialog::ShowIFileOpenDialog()
 bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bool multipleSelection,
-                                 wxArrayString& paths)
+                                 std::vector<wxString>& paths)
 {
     HRESULT hr = S_OK;
     wxString path;

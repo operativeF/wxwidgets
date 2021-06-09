@@ -54,8 +54,8 @@ public:
     virtual wxString GetDirectory() const = 0;
     virtual wxString GetWildcard() const = 0;
     virtual wxString GetPath() const = 0;
-    virtual void GetPaths( wxArrayString& paths ) const = 0;
-    virtual void GetFilenames( wxArrayString& files ) const = 0;
+    virtual std::vector<wxString> GetPaths() const = 0;
+    virtual std::vector<wxString> GetFilenames() const = 0;
     virtual int GetFilterIndex() const = 0;
 
     virtual bool HasMultipleFileSelection() const = 0;
@@ -102,11 +102,11 @@ public:
     // no need for the copy constructor as the default one will be fine.
     wxEvent *Clone() const override { return new wxFileCtrlEvent( *this ); }
 
-    void SetFiles( const wxArrayString &files ) { m_files = files; }
+    void SetFiles( const std::vector<wxString>& files ) { m_files = files; }
     void SetDirectory( const wxString &directory ) { m_directory = directory; }
     void SetFilterIndex( int filterIndex ) { m_filterIndex = filterIndex; }
 
-    wxArrayString GetFiles() const { return m_files; }
+    std::vector<wxString> GetFiles() const { return m_files; }
     wxString GetDirectory() const { return m_directory; }
     int GetFilterIndex() const { return m_filterIndex; }
 
@@ -115,7 +115,7 @@ public:
 protected:
     int m_filterIndex;
     wxString m_directory;
-    wxArrayString m_files;
+    std::vector<wxString> m_files;
 
 public:
 	wxClassInfo *GetClassInfo() const override ;

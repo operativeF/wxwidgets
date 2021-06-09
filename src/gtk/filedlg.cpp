@@ -400,14 +400,14 @@ wxString wxFileDialog::GetPath() const
     return m_fc.GetPath();
 }
 
-void wxFileDialog::GetFilenames(wxArrayString& files) const
+std::vector<wxString> wxFileDialog::GetFilenames() const
 {
-    m_fc.GetFilenames( files );
+    return m_fc.GetFilenames();
 }
 
-void wxFileDialog::GetPaths(wxArrayString& paths) const
+std::vector<wxString> wxFileDialog::GetPaths() const
 {
-    m_fc.GetPaths( paths );
+    return m_fc.GetPaths();
 }
 
 void wxFileDialog::SetMessage(const wxString& message)

@@ -52,8 +52,7 @@ void wxGenerateSelectionChangedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd)
     wxFileCtrlEvent event( wxEVT_FILECTRL_SELECTIONCHANGED, wnd, wnd->GetId() );
     event.SetDirectory( fileCtrl->GetDirectory() );
 
-    wxArrayString filenames;
-    fileCtrl->GetFilenames( filenames );
+    std::vector<wxString> filenames = fileCtrl->GetFilenames();
     event.SetFiles( filenames );
 
     wnd->GetEventHandler()->ProcessEvent( event );
@@ -64,15 +63,15 @@ void wxGenerateFileActivatedEvent( wxFileCtrlBase *fileCtrl, wxWindow *wnd, cons
     wxFileCtrlEvent event( wxEVT_FILECTRL_FILEACTIVATED, wnd, wnd->GetId() );
     event.SetDirectory( fileCtrl->GetDirectory() );
 
-    wxArrayString filenames;
+    std::vector<wxString> filenames;
 
     if ( filename.empty() )
     {
-        fileCtrl->GetFilenames( filenames );
+        filenames = fileCtrl->GetFilenames();
     }
     else
     {
-        filenames.Add( filename );
+        filenames.push_back( filename );
     }
 
     event.SetFiles( filenames );
@@ -90,7 +89,7 @@ wxString wxFileCtrlEvent::GetFile() const
                   wxT( "Please use GetFiles() to get all files instead of this function" ) );
 
     wxString string;
-    if (m_files.Count() != 0)
+    if (m_files.size() != 0)
         string = m_files[0];
     return string;
 }

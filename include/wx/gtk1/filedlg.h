@@ -33,7 +33,7 @@ public:
     virtual ~wxFileDialog();
 
     virtual wxString GetPath() const;
-    virtual void GetPaths(wxArrayString& paths) const;
+    virtual std::vector<wxString> GetPaths() const;
     virtual wxString GetDirectory() const;
     virtual wxString GetFilename() const;
     virtual void GetFilenames(wxArrayString& files) const;

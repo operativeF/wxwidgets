@@ -60,8 +60,8 @@ public:
     ~wxFileDialog();
 #endif
 
-    void GetPaths(wxArrayString& paths) const override { paths = m_paths; }
-    void GetFilenames(wxArrayString& files) const override { files = m_fileNames ; }
+    std::vector<wxString> GetPaths() const override { return m_paths; }
+    void GetFilenames(wxArrayString& files) const override { files = m_fileNames; }
 
     int ShowModal() override;
 
