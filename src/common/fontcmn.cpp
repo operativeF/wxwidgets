@@ -701,6 +701,7 @@ wxFont wxFont::Scaled(float x) const
 // ----------------------------------------------------------------------------
 
 // Up to now, there are no native implementations of this function:
+// FIXME: Case sensitivity, does it matter here?
 void wxNativeFontInfo::SetFaceName(const std::vector<wxString>& facenames)
 {
 #if wxUSE_FONTENUM

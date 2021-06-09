@@ -2454,7 +2454,11 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
         std::vector<wxString> facenames(wxFontEnumerator::GetFacenames());
         while (tk.HasMoreTokens())
         {
-            const auto possible_face = std::find(facenames.cbegin(), facenames.cend(), tk.GetNextToken());
+            const auto possible_face = std::find_if(facenames.cbegin(), facenames.cend(),
+                [&tk](const auto& name)
+                {
+                    return name.IsSameAs(tk.GetNextToken(), false);
+                });
             if (possible_face != std::cend(facenames))
             {
                 facename = *possible_face;

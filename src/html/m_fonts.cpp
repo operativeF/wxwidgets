@@ -86,7 +86,11 @@ TAG_HANDLER_BEGIN(FONT, "FONT" )
 
             while (tk.HasMoreTokens())
             {
-                const auto possible_face = std::find(m_Faces.cbegin(), m_Faces.cend(), tk.GetNextToken());
+                const auto possible_face = std::find_if(m_Faces.cbegin(), m_Faces.cend(), 
+                    [&tk](const auto& face)
+                    {
+                        return face.IsSameAs(tk.GetNextToken());
+                    });
                 if (possible_face != std::cend(m_Faces))
                 {
                     m_WParser->SetFontFace(*possible_face);

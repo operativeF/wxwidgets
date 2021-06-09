@@ -832,6 +832,7 @@ wxString wxRichTextFontListBox::GetFaceName(size_t i) const
 int wxRichTextFontListBox::SetFaceNameSelection(const wxString& name)
 {
     // FIXME: What if nothing is found?
+    // FIXME: Case sensitivity, does it matter here?
     int i = std::distance(std::cbegin(m_faceNames), std::find(m_faceNames.cbegin(), m_faceNames.cend(), name));
 
     SetSelection(i);
