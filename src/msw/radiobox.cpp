@@ -115,9 +115,8 @@ WXWNDPROC s_wndprocRadioBtn = nullptr;
 // Hash allowing to find wxRadioBox containing the given radio button by its
 // HWND. This is used by (subclassed) radio button window proc to find the
 // radio box it belongs to.
-WX_DECLARE_HASH_MAP(HWND, wxRadioBox *,
-                    wxPointerHash, wxPointerEqual,
-                    RadioBoxFromButton);
+using RadioBoxFromButton = std::unordered_map< HWND, wxRadioBox *, wxPointerHash, wxPointerEqual >;
+
 
 RadioBoxFromButton gs_boxFromButton;
 

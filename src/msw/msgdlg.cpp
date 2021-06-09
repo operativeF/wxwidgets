@@ -47,9 +47,7 @@ wxIMPLEMENT_CLASS(wxMessageDialog, wxDialog);
 // with thread ids as keys and (currently shown) message boxes as values
 //
 // TODO: replace this with wxTLS once it's available
-WX_DECLARE_HASH_MAP(unsigned long, wxMessageDialog *,
-                    wxIntegerHash, wxIntegerEqual,
-                    wxMessageDialogMap);
+using wxMessageDialogMap = std::unordered_map< unsigned long, wxMessageDialog *, wxIntegerHash, wxIntegerEqual >;
 
 // the order in this array is the one in which buttons appear in the
 // message box

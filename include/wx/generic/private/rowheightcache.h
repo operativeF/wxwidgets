@@ -76,8 +76,7 @@ private:
     void CleanUp(unsigned int idx);
 };
 
-WX_DECLARE_HASH_MAP(unsigned int, RowRanges*, wxIntegerHash, wxIntegerEqual,
-    HeightToRowRangesMap);
+using HeightToRowRangesMap = std::unordered_map< unsigned int, RowRanges*, wxIntegerHash, wxIntegerEqual >;
 
 /**
     HeightCache implements a cache mechanism for wxDataViewCtrl.

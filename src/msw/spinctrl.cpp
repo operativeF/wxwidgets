@@ -67,9 +67,8 @@ namespace
 
 // Global hash used to find the spin control corresponding to the given buddy
 // text control HWND.
-WX_DECLARE_HASH_MAP(HWND, wxSpinCtrl *,
-                    wxPointerHash, wxPointerEqual,
-                    SpinForTextCtrl);
+using SpinForTextCtrl = std::unordered_map< HWND, wxSpinCtrl *, wxPointerHash, wxPointerEqual >;
+
 
 SpinForTextCtrl gs_spinForTextCtrl;
 

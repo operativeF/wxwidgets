@@ -261,55 +261,56 @@ WX_DECLARE_STRING_HASH_MAP_WITH_DECL(wxString,
                                      wxPGHashMapS2S,
                                      class WXDLLIMPEXP_PROPGRID);
 
-WX_DECLARE_VOIDPTR_HASH_MAP_WITH_DECL(void*,
-                                      wxPGHashMapP2P,
-                                      class WXDLLIMPEXP_PROPGRID);
+using wxPGHashMapP2P = std::unordered_map< void*, void*, wxPointerHash, wxPointerEqual >;
 
-WX_DECLARE_HASH_MAP_WITH_DECL(wxInt32,
-                              wxInt32,
-                              wxIntegerHash,
-                              wxIntegerEqual,
-                              wxPGHashMapI2I,
-                              class WXDLLIMPEXP_PROPGRID);
+using wxPGHashMapI2I = std::unordered_map< wxInt32, wxInt32, wxIntegerHash, wxIntegerEqual >;
 
-WX_DECLARE_HASH_SET_WITH_DECL(int,
-                              wxIntegerHash,
-                              wxIntegerEqual,
-                              wxPGHashSetInt,
-                              class WXDLLIMPEXP_PROPGRID);
+class wxPGHashSetInt : public std::unordered_set<int, wxIntegerHash, wxIntegerEqual> {
+public:
+    explicit wxPGHashSetInt(size_type n = 3, const hasher& h = hasher(), const key_equal& ke = key_equal(),
+        const allocator_type& a = allocator_type())
+        : std::unordered_set<int, wxIntegerHash, wxIntegerEqual>(n, h, ke, a) {}
+
+    template <class InputIterator>
+    wxPGHashSetInt(InputIterator f, InputIterator l, const hasher& h = hasher(), const key_equal& ke = key_equal(),
+        const allocator_type& a = allocator_type())
+        : std::unordered_set<int, wxIntegerHash, wxIntegerEqual>(f, l, h, ke, a) {}
+
+    wxPGHashSetInt(const std::unordered_set<int, wxIntegerHash, wxIntegerEqual>& s)
+        : std::unordered_set<int, wxIntegerHash, wxIntegerEqual>(s) {}
+};
 
 // -----------------------------------------------------------------------
 
-enum wxPG_PROPERTYVALUES_FLAGS
-{
-// Flag for wxPropertyGridInterface::SetProperty* functions,
-// wxPropertyGridInterface::HideProperty(), etc.
-// Apply changes only for the property in question.
-wxPG_DONT_RECURSE                 = 0x00000000,
+enum wxPG_PROPERTYVALUES_FLAGS {
+    // Flag for wxPropertyGridInterface::SetProperty* functions,
+    // wxPropertyGridInterface::HideProperty(), etc.
+    // Apply changes only for the property in question.
+    wxPG_DONT_RECURSE = 0x00000000,
 
-// Flag for wxPropertyGridInterface::GetPropertyValues().
-// Use this flag to retain category structure; each sub-category
-// will be its own wxVariantList of wxVariant.
-wxPG_KEEP_STRUCTURE               = 0x00000010,
+    // Flag for wxPropertyGridInterface::GetPropertyValues().
+    // Use this flag to retain category structure; each sub-category
+    // will be its own wxVariantList of wxVariant.
+    wxPG_KEEP_STRUCTURE = 0x00000010,
 
-// Flag for wxPropertyGridInterface::SetProperty* functions,
-// wxPropertyGridInterface::HideProperty(), etc.
-// Apply changes recursively for the property and all its children.
-wxPG_RECURSE                      = 0x00000020,
+    // Flag for wxPropertyGridInterface::SetProperty* functions,
+    // wxPropertyGridInterface::HideProperty(), etc.
+    // Apply changes recursively for the property and all its children.
+    wxPG_RECURSE = 0x00000020,
 
-// Flag for wxPropertyGridInterface::GetPropertyValues().
-// Use this flag to include property attributes as well.
-wxPG_INC_ATTRIBUTES               = 0x00000040,
+    // Flag for wxPropertyGridInterface::GetPropertyValues().
+    // Use this flag to include property attributes as well.
+    wxPG_INC_ATTRIBUTES = 0x00000040,
 
-// Used when first starting recursion.
-wxPG_RECURSE_STARTS               = 0x00000080,
+    // Used when first starting recursion.
+    wxPG_RECURSE_STARTS = 0x00000080,
 
-// Force value change.
-wxPG_FORCE                        = 0x00000100,
+    // Force value change.
+    wxPG_FORCE = 0x00000100,
 
-// Only sort categories and their immediate children.
-// Sorting done by wxPG_AUTO_SORT option uses this.
-wxPG_SORT_TOP_LEVEL_ONLY          = 0x00000200
+    // Only sort categories and their immediate children.
+    // Sorting done by wxPG_AUTO_SORT option uses this.
+    wxPG_SORT_TOP_LEVEL_ONLY = 0x00000200
 };
 
 // -----------------------------------------------------------------------

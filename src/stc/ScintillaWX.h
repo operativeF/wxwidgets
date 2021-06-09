@@ -207,7 +207,7 @@ private:
     bool                focusEvent;
     wxStyledTextCtrl*   stc;
 
-    WX_DECLARE_HASH_MAP(TickReason, wxSTCTimer*, wxIntegerHash, wxIntegerEqual, TimersHash);
+    using TimersHash = std::unordered_map< TickReason, wxSTCTimer*, wxIntegerHash, wxIntegerEqual >;
     TimersHash          timers;
 
 #if wxUSE_DRAG_AND_DROP

@@ -1425,8 +1425,8 @@ public:
 // ----------------------------------------------------------------------------
 
 // hash map to store positions as the keys and sizes as the values
-WX_DECLARE_HASH_MAP_WITH_DECL( unsigned, int, wxIntegerHash, wxIntegerEqual,
-                               wxUnsignedToIntHashMap, class WXDLLIMPEXP_CORE );
+using wxUnsignedToIntHashMap = std::unordered_map< unsigned, int, wxIntegerHash, wxIntegerEqual >;
+
 
 struct WXDLLIMPEXP_CORE wxGridSizesInfo
 {

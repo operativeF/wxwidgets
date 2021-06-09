@@ -190,7 +190,7 @@ private:
     // In addition to keeping all the catalogs in the linked list, we also
     // store them in a hash map indexed by the domain name to allow finding
     // them by name efficiently.
-    WX_DECLARE_HASH_MAP(wxString, wxMsgCatalog *, wxStringHash, wxStringEqual, wxMsgCatalogMap);
+    using wxMsgCatalogMap = std::unordered_map< wxString, wxMsgCatalog *, wxStringHash, wxStringEqual >;
     wxMsgCatalogMap m_catalogMap;
 };
 

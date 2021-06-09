@@ -163,16 +163,13 @@ struct MouseEventInfoDummy
 } gs_lastMouseEvent;
 
 // hash containing the registered handlers for the custom messages
-WX_DECLARE_HASH_MAP(int, wxWindow::MSWMessageHandler,
-                    wxIntegerHash, wxIntegerEqual,
-                    MSWMessageHandlers);
+using MSWMessageHandlers = std::unordered_map< int, wxWindow::MSWMessageHandler, wxIntegerHash, wxIntegerEqual >;
 
 MSWMessageHandlers gs_messageHandlers;
 
 // hash containing all our windows, it uses HWND keys and wxWindow* values
-WX_DECLARE_HASH_MAP(HWND, wxWindow *,
-                    wxPointerHash, wxPointerEqual,
-                    WindowHandles);
+using WindowHandles = std::unordered_map< HWND, wxWindow *, wxPointerHash, wxPointerEqual >;
+
 
 WindowHandles gs_windowHandles;
 
@@ -181,9 +178,8 @@ WindowHandles gs_windowHandles;
 // temporary override for WM_ERASEBKGND processing: we don't store this in
 // wxWindow itself as we don't need it during most of the time so don't
 // increase the size of all window objects unnecessarily
-WX_DECLARE_HASH_MAP(wxWindow *, wxWindow *,
-                    wxPointerHash, wxPointerEqual,
-                    EraseBgHooks);
+using EraseBgHooks = std::unordered_map< wxWindow *, wxWindow *, wxPointerHash, wxPointerEqual >;
+
 
 EraseBgHooks gs_eraseBgHooks;
 

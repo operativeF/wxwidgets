@@ -131,9 +131,7 @@ private:
 // all of them because we can't call BeginPaint() more than once. So we cache
 // the first HDC created for the window in this map and then reuse it later if
 // needed. And, of course, remove it from the map when the painting is done.
-WX_DECLARE_HASH_MAP(wxWindow *, wxPaintDCInfo *,
-                    wxPointerHash, wxPointerEqual,
-                    PaintDCInfos);
+using PaintDCInfos = std::unordered_map< wxWindow *, wxPaintDCInfo *, wxPointerHash, wxPointerEqual >;
 
 PaintDCInfos gs_PaintDCInfos;
 

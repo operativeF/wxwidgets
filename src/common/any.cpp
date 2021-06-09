@@ -35,12 +35,7 @@ using namespace wxPrivate;
 // wxAnyValueTypeGlobals
 //-------------------------------------------------------------------------
 
-WX_DECLARE_HASH_MAP(wxAnyValueType*,
-                    wxVariantDataFactory,
-                    wxPointerHash,
-                    wxPointerEqual,
-                    wxAnyTypeToVariantDataFactoryMap);
-
+using wxAnyTypeToVariantDataFactoryMap = std::unordered_map< wxAnyValueType*, wxVariantDataFactory, wxPointerHash, wxPointerEqual >;
 //
 // Helper class to manage global variables related to type conversion
 // between wxAny and wxVariant.

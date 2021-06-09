@@ -2934,8 +2934,7 @@ void wxCSConv::SetName(const char *charset)
 
 #if wxUSE_FONTMAP
 
-WX_DECLARE_HASH_MAP( wxFontEncoding, wxString, wxIntegerHash, wxIntegerEqual,
-                     wxEncodingNameCache );
+using wxEncodingNameCache = std::unordered_map< wxFontEncoding, wxString, wxIntegerHash, wxIntegerEqual >;
 
 static wxEncodingNameCache gs_nameCache;
 #endif
