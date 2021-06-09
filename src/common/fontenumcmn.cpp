@@ -119,7 +119,11 @@ bool wxFontEnumerator::IsValidFacename(const wxString &facename)
 #endif
 
     // is given font face name a valid one ?
-    return gs_allFacenames.cend() != std::find(gs_allFacenames.cbegin(), gs_allFacenames.cend(), facename);
+    return gs_allFacenames.cend() != std::find_if(gs_allFacenames.cbegin(), gs_allFacenames.cend(),
+        [=](const auto& other)
+        {
+            return facename.IsSameAs(other, false);
+        });
 }
 
 /* static */
