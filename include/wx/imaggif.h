@@ -18,11 +18,11 @@
 
 #if wxUSE_GIF
 
-#define wxIMAGE_OPTION_GIF_COMMENT wxT("GifComment")
+inline constexpr wxChar wxIMAGE_OPTION_GIF_COMMENT[] = wxT("GifComment");
 
-#define wxIMAGE_OPTION_GIF_TRANSPARENCY           wxS("Transparency")
-#define wxIMAGE_OPTION_GIF_TRANSPARENCY_HIGHLIGHT wxS("Highlight")
-#define wxIMAGE_OPTION_GIF_TRANSPARENCY_UNCHANGED wxS("Unchanged")
+inline constexpr wxChar wxIMAGE_OPTION_GIF_TRANSPARENCY[]           = wxS("Transparency");
+inline constexpr wxChar wxIMAGE_OPTION_GIF_TRANSPARENCY_HIGHLIGHT[] = wxS("Highlight");
+inline constexpr wxChar wxIMAGE_OPTION_GIF_TRANSPARENCY_UNCHANGED[] = wxS("Unchanged");
 
 struct wxRGB;
 struct GifHashTableType;

@@ -20,7 +20,7 @@ class WXDLLIMPEXP_FWD_CORE wxChoice;
 // set this system option to 1 in order to always show the filetypes popup in
 // file open dialogs if possible
 
-#define wxOSX_FILEDIALOG_ALWAYS_SHOW_TYPES wxT("osx.openfiledialog.always-show-types")
+inline constexpr wxChar wxOSX_FILEDIALOG_ALWAYS_SHOW_TYPES[] = wxT("osx.openfiledialog.always-show-types");
 
 class WXDLLIMPEXP_CORE wxFileDialog: public wxFileDialogBase
 {

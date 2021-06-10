@@ -15,8 +15,8 @@
 
 #if wxUSE_GRID
 
-#define wxGRID_VALUE_CHOICEINT    wxT("choiceint")
-#define wxGRID_VALUE_DATETIME     wxT("datetime")
+inline constexpr wxChar wxGRID_VALUE_CHOICEINT[]    = wxT("choiceint");
+inline constexpr wxChar wxGRID_VALUE_DATETIME[]     = wxT("datetime");
 
 
 // the default renderer for the cells containing string data

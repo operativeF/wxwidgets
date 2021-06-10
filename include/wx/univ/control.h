@@ -31,7 +31,7 @@ typedef wxString wxControlAction;
 // the list of actions which apply to all controls (other actions are defined
 // in the controls headers)
 
-#define wxACTION_NONE    wxT("")           // no action to perform
+inline constexpr wxChar wxACTION_NONE[]    = wxT("");           // no action to perform
 
 // ----------------------------------------------------------------------------
 // wxControl: the base class for all GUI controls

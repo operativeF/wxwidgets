@@ -345,7 +345,7 @@ enum wxPosixPermissions
             #define wxFtell ftello
         #endif
     #else
-        #define wxFileOffsetFmtSpec wxT("")
+        inline constexpr wxChar wxFileOffsetFmtSpec[] = wxT("");
     #endif
     // functions
     #define   wxClose      close
@@ -494,24 +494,24 @@ WXDLLIMPEXP_BASE bool wxIsExecutable(const wxString &path);
 // ----------------------------------------------------------------------------
 
 // between file name and extension
-#define wxFILE_SEP_EXT        wxT('.')
+inline constexpr wxChar wxFILE_SEP_EXT        = wxT('.');
 
 // between drive/volume name and the path
-#define wxFILE_SEP_DSK        wxT(':')
+inline constexpr wxChar wxFILE_SEP_DSK        = wxT(':');
 
 // between the path components
-#define wxFILE_SEP_PATH_DOS   wxT('\\')
-#define wxFILE_SEP_PATH_UNIX  wxT('/')
-#define wxFILE_SEP_PATH_MAC   wxT(':')
-#define wxFILE_SEP_PATH_VMS   wxT('.') // VMS also uses '[' and ']'
+inline constexpr wxChar wxFILE_SEP_PATH_DOS   = wxT('\\');
+inline constexpr wxChar wxFILE_SEP_PATH_UNIX  = wxT('/');
+inline constexpr wxChar wxFILE_SEP_PATH_MAC   = wxT(':');
+inline constexpr wxChar wxFILE_SEP_PATH_VMS   = wxT('.'); // VMS also uses '[' and ']'
 
 // separator in the path list (as in PATH environment variable)
 // there is no PATH variable in Classic Mac OS so just use the
 // semicolon (it must be different from the file name separator)
 // NB: these are strings and not characters on purpose!
-#define wxPATH_SEP_DOS        wxT(";")
-#define wxPATH_SEP_UNIX       wxT(":")
-#define wxPATH_SEP_MAC        wxT(";")
+inline constexpr wxChar wxPATH_SEP_DOS[]        = wxT(";");
+inline constexpr wxChar wxPATH_SEP_UNIX[]       = wxT(":");
+inline constexpr wxChar wxPATH_SEP_MAC[]        = wxT(";");
 
 // platform independent versions
 #if defined(__UNIX__)

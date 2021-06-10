@@ -15,7 +15,7 @@
 // actions
 // ----------------------------------------------------------------------------
 
-#define wxACTION_CHECKLISTBOX_TOGGLE wxT("toggle")
+inline constexpr wxChar wxACTION_CHECKLISTBOX_TOGGLE[] = wxT("toggle");
 
 // ----------------------------------------------------------------------------
 // wxCheckListBox

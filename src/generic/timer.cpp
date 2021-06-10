@@ -38,7 +38,7 @@ typedef wxLongLong wxTimerTick_t;
     #define wxTimerTickFmtSpec wxLongLongFmtSpec "d"
     #define wxTimerTickPrintfArg(tt) (tt.GetValue())
 #else // using native wxLongLong
-    #define wxTimerTickFmtSpec wxT("s")
+    static constexpr wxChar wxTimerTickFmtSpec[] = wxT("s");
     #define wxTimerTickPrintfArg(tt) (tt.ToString().c_str())
 #endif // wx/native long long
 

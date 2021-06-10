@@ -17,8 +17,8 @@
 
 // These two options are filled in upon reading CUR file and can (should) be
 // specified when saving a CUR file - they define the hotspot of the cursor:
-#define wxIMAGE_OPTION_CUR_HOTSPOT_X  wxT("HotSpotX")
-#define wxIMAGE_OPTION_CUR_HOTSPOT_Y  wxT("HotSpotY")
+inline constexpr wxChar wxIMAGE_OPTION_CUR_HOTSPOT_X[]  = wxT("HotSpotX");
+inline constexpr wxChar wxIMAGE_OPTION_CUR_HOTSPOT_Y[]  = wxT("HotSpotY");
 
 
 enum

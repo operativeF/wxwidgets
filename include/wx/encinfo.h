@@ -40,10 +40,7 @@ struct WXDLLIMPEXP_CORE wxNativeEncodingInfo
     defined(__WXMAC__) || \
     defined(__WXQT__)
 
-    wxNativeEncodingInfo()
-         
-        
-    = default;
+    wxNativeEncodingInfo() = default;
 
     int      charset{0};
 #elif defined(_WX_X_FONTLIKE)

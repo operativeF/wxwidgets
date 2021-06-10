@@ -32,7 +32,7 @@
 
 #include <errno.h>
 
-#define wxSelectDispatcher_Trace wxT("selectdispatcher")
+static constexpr wxChar wxSelectDispatcher_Trace[] = wxT("selectdispatcher");
 
 // ============================================================================
 // implementation

@@ -108,13 +108,13 @@ enum wxLogLevelValues
 // discarded unless the string "foo" has been added to the list of allowed
 // ones with AddTraceMask()
 
-#define wxTRACE_MemAlloc wxT("memalloc") // trace memory allocation (new/delete)
-#define wxTRACE_Messages wxT("messages") // trace window messages/X callbacks
-#define wxTRACE_ResAlloc wxT("resalloc") // trace GDI resource allocation
-#define wxTRACE_RefCount wxT("refcount") // trace various ref counting operations
+inline constexpr wxChar wxTRACE_MemAlloc[] = wxT("memalloc"); // trace memory allocation (new/delete)
+inline constexpr wxChar wxTRACE_Messages[] = wxT("messages"); // trace window messages/X callbacks
+inline constexpr wxChar wxTRACE_ResAlloc[] = wxT("resalloc"); // trace GDI resource allocation
+inline constexpr wxChar wxTRACE_RefCount[] = wxT("refcount"); // trace various ref counting operations
 
 #ifdef  __WINDOWS__
-    #define wxTRACE_OleCalls wxT("ole")  // OLE interface calls
+    inline constexpr wxChar wxTRACE_OleCalls[] = wxT("ole");  // OLE interface calls
 #endif
 
 // ----------------------------------------------------------------------------

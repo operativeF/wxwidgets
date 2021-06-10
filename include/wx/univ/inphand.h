@@ -19,21 +19,21 @@
 // wxTheme::GetInputHandler()
 // ----------------------------------------------------------------------------
 
-#define wxINP_HANDLER_DEFAULT           wxT("")
-#define wxINP_HANDLER_BUTTON            wxT("button")
-#define wxINP_HANDLER_CHECKBOX          wxT("checkbox")
-#define wxINP_HANDLER_CHECKLISTBOX      wxT("checklistbox")
-#define wxINP_HANDLER_COMBOBOX          wxT("combobox")
-#define wxINP_HANDLER_LISTBOX           wxT("listbox")
-#define wxINP_HANDLER_NOTEBOOK          wxT("notebook")
-#define wxINP_HANDLER_RADIOBTN          wxT("radiobtn")
-#define wxINP_HANDLER_SCROLLBAR         wxT("scrollbar")
-#define wxINP_HANDLER_SLIDER            wxT("slider")
-#define wxINP_HANDLER_SPINBTN           wxT("spinbtn")
-#define wxINP_HANDLER_STATUSBAR         wxT("statusbar")
-#define wxINP_HANDLER_TEXTCTRL          wxT("textctrl")
-#define wxINP_HANDLER_TOOLBAR           wxT("toolbar")
-#define wxINP_HANDLER_TOPLEVEL          wxT("toplevel")
+inline constexpr wxChar wxINP_HANDLER_DEFAULT[]           = wxT("");
+inline constexpr wxChar wxINP_HANDLER_BUTTON[]            = wxT("button");
+inline constexpr wxChar wxINP_HANDLER_CHECKBOX[]          = wxT("checkbox");
+inline constexpr wxChar wxINP_HANDLER_CHECKLISTBOX[]      = wxT("checklistbox");
+inline constexpr wxChar wxINP_HANDLER_COMBOBOX[]          = wxT("combobox");
+inline constexpr wxChar wxINP_HANDLER_LISTBOX[]           = wxT("listbox");
+inline constexpr wxChar wxINP_HANDLER_NOTEBOOK[]          = wxT("notebook");
+inline constexpr wxChar wxINP_HANDLER_RADIOBTN[]          = wxT("radiobtn");
+inline constexpr wxChar wxINP_HANDLER_SCROLLBAR[]         = wxT("scrollbar");
+inline constexpr wxChar wxINP_HANDLER_SLIDER[]            = wxT("slider");
+inline constexpr wxChar wxINP_HANDLER_SPINBTN[]           = wxT("spinbtn");
+inline constexpr wxChar wxINP_HANDLER_STATUSBAR[]         = wxT("statusbar");
+inline constexpr wxChar wxINP_HANDLER_TEXTCTRL[]          = wxT("textctrl");
+inline constexpr wxChar wxINP_HANDLER_TOOLBAR[]           = wxT("toolbar");
+inline constexpr wxChar wxINP_HANDLER_TOPLEVEL[]          = wxT("toplevel");
 
 // ----------------------------------------------------------------------------
 // wxInputHandler: maps the events to the actions

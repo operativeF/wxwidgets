@@ -17,10 +17,10 @@
 // there is no "right" choice of the checkbox indicators, so allow the user to
 // define them himself if he wants
 #ifndef wxCHECKLBOX_CHECKED
-    #define wxCHECKLBOX_CHECKED   wxT('x')
-    #define wxCHECKLBOX_UNCHECKED wxT(' ')
+    inline constexpr wxChar wxCHECKLBOX_CHECKED   = wxT('x');
+    inline constexpr wxChar wxCHECKLBOX_UNCHECKED = wxT(' ');
 
-    #define wxCHECKLBOX_STRING    wxT("[ ] ")
+    inline constexpr wxChar wxCHECKLBOX_STRING[] = wxT("[ ] ");
 #endif
 
 //-----------------------------------------------------------------------------

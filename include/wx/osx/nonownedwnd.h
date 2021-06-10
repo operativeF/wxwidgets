@@ -16,7 +16,7 @@
 #include "wx/graphics.h"
 
 #if wxUSE_SYSTEM_OPTIONS
-    #define wxMAC_WINDOW_PLAIN_TRANSITION wxT("mac.window-plain-transition")
+    inline constexpr wxChar wxMAC_WINDOW_PLAIN_TRANSITION[] = wxT("mac.window-plain-transition");
 #endif
 
 //-----------------------------------------------------------------------------

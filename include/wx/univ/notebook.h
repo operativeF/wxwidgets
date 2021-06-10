@@ -20,9 +20,9 @@ class WXDLLIMPEXP_FWD_CORE wxSpinButton;
 // ----------------------------------------------------------------------------
 
 // change the page: to the next/previous/given one
-#define wxACTION_NOTEBOOK_NEXT      wxT("nexttab")
-#define wxACTION_NOTEBOOK_PREV      wxT("prevtab")
-#define wxACTION_NOTEBOOK_GOTO      wxT("gototab")
+inline constexpr wxChar wxACTION_NOTEBOOK_NEXT[]      = wxT("nexttab");
+inline constexpr wxChar wxACTION_NOTEBOOK_PREV[]      = wxT("prevtab");
+inline constexpr wxChar wxACTION_NOTEBOOK_GOTO[]      = wxT("gototab");
 
 // ----------------------------------------------------------------------------
 // wxNotebook

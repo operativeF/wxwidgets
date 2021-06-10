@@ -33,7 +33,7 @@
 #include <errno.h>
 #include <unistd.h>
 
-#define wxEpollDispatcher_Trace wxT("epolldispatcher")
+static constexpr wxChar wxEpollDispatcher_Trace[] = wxT("epolldispatcher");
 
 // ============================================================================
 // implementation

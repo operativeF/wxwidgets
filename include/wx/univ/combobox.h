@@ -21,9 +21,9 @@ class WXDLLIMPEXP_FWD_CORE wxListBox;
 // ----------------------------------------------------------------------------
 
 // choose the next/prev/specified (by numArg) item
-#define wxACTION_COMBOBOX_SELECT_NEXT wxT("next")
-#define wxACTION_COMBOBOX_SELECT_PREV wxT("prev")
-#define wxACTION_COMBOBOX_SELECT      wxT("select")
+inline constexpr wxChar wxACTION_COMBOBOX_SELECT_NEXT[] = wxT("next");
+inline constexpr wxChar wxACTION_COMBOBOX_SELECT_PREV[] = wxT("prev");
+inline constexpr wxChar wxACTION_COMBOBOX_SELECT[]      = wxT("select");
 
 
 // ----------------------------------------------------------------------------

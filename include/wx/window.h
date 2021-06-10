@@ -99,7 +99,7 @@ enum wxWindowVariant
 };
 
 #if wxUSE_SYSTEM_OPTIONS
-    #define wxWINDOW_DEFAULT_VARIANT wxT("window-default-variant")
+    inline constexpr wxChar wxWINDOW_DEFAULT_VARIANT[] = wxT("window-default-variant");
 #endif
 
 // valid values for Show/HideWithEffect()

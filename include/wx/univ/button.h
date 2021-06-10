@@ -17,10 +17,10 @@
 // the actions supported by this control
 // ----------------------------------------------------------------------------
 //checkbox.cpp needed it, so not move it to anybutton.h
-#define wxACTION_BUTTON_TOGGLE  wxT("toggle")    // press/release the button
-#define wxACTION_BUTTON_PRESS   wxT("press")     // press the button
-#define wxACTION_BUTTON_RELEASE wxT("release")   // release the button
-#define wxACTION_BUTTON_CLICK   wxT("click")     // generate button click event
+inline constexpr wxChar wxACTION_BUTTON_TOGGLE[]  = wxT("toggle");    // press/release the button
+inline constexpr wxChar wxACTION_BUTTON_PRESS[]   = wxT("press");     // press the button
+inline constexpr wxChar wxACTION_BUTTON_RELEASE[] = wxT("release");   // release the button
+inline constexpr wxChar wxACTION_BUTTON_CLICK[]   = wxT("click");     // generate button click event
 
 // ----------------------------------------------------------------------------
 // wxButton: a push button

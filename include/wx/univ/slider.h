@@ -19,17 +19,17 @@
 
 // our actions are the same as scrollbars
 
-#define wxACTION_SLIDER_START       wxT("start")     // to the beginning
-#define wxACTION_SLIDER_END         wxT("end")       // to the end
-#define wxACTION_SLIDER_LINE_UP     wxT("lineup")    // one line up/left
-#define wxACTION_SLIDER_PAGE_UP     wxT("pageup")    // one page up/left
-#define wxACTION_SLIDER_LINE_DOWN   wxT("linedown")  // one line down/right
-#define wxACTION_SLIDER_PAGE_DOWN   wxT("pagedown")  // one page down/right
-#define wxACTION_SLIDER_PAGE_CHANGE wxT("pagechange")// change page by numArg
+inline constexpr wxChar wxACTION_SLIDER_START[]       = wxT("start");      // to the beginning
+inline constexpr wxChar wxACTION_SLIDER_END[]         = wxT("end");        // to the end
+inline constexpr wxChar wxACTION_SLIDER_LINE_UP[]     = wxT("lineup");     // one line up/left
+inline constexpr wxChar wxACTION_SLIDER_PAGE_UP[]     = wxT("pageup");     // one page up/left
+inline constexpr wxChar wxACTION_SLIDER_LINE_DOWN[]   = wxT("linedown");   // one line down/right
+inline constexpr wxChar wxACTION_SLIDER_PAGE_DOWN[]   = wxT("pagedown");   // one page down/right
+inline constexpr wxChar wxACTION_SLIDER_PAGE_CHANGE[] = wxT("pagechange"); // change page by numArg
 
-#define wxACTION_SLIDER_THUMB_DRAG      wxT("thumbdrag")
-#define wxACTION_SLIDER_THUMB_MOVE      wxT("thumbmove")
-#define wxACTION_SLIDER_THUMB_RELEASE   wxT("thumbrelease")
+inline constexpr wxChar wxACTION_SLIDER_THUMB_DRAG[]      = wxT("thumbdrag");
+inline constexpr wxChar wxACTION_SLIDER_THUMB_MOVE[]      = wxT("thumbmove");
+inline constexpr wxChar wxACTION_SLIDER_THUMB_RELEASE[]   = wxT("thumbrelease");
 
 // ----------------------------------------------------------------------------
 // wxSlider

@@ -24,10 +24,6 @@ typedef wxTextOutputStream& (*__wxTextOutputManip)(wxTextOutputStream&);
 
 WXDLLIMPEXP_BASE wxTextOutputStream &endl( wxTextOutputStream &stream );
 
-
-// Obsolete constant defined only for compatibility, not used.
-#define wxEOT wxT('\4')
-
 // If you're scanning through a file using wxTextInputStream, you should check for EOF _before_
 // reading the next item (word / number), because otherwise the last item may get lost.
 // You should however be prepared to receive an empty item (empty string / zero number) at the

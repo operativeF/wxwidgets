@@ -39,12 +39,12 @@ extern WXDLLIMPEXP_DATA_CORE(const char) wxGridNameStr[];
 #define WXGRID_MIN_COL_WIDTH                  15
 
 // type names for grid table values
-#define wxGRID_VALUE_STRING     wxT("string")
-#define wxGRID_VALUE_BOOL       wxT("bool")
-#define wxGRID_VALUE_NUMBER     wxT("long")
-#define wxGRID_VALUE_FLOAT      wxT("double")
-#define wxGRID_VALUE_CHOICE     wxT("choice")
-#define wxGRID_VALUE_DATE       wxT("date")
+inline constexpr wxChar wxGRID_VALUE_STRING[]     = wxT("string");
+inline constexpr wxChar wxGRID_VALUE_BOOL[]       = wxT("bool");
+inline constexpr wxChar wxGRID_VALUE_NUMBER[]     = wxT("long");
+inline constexpr wxChar wxGRID_VALUE_FLOAT[]      = wxT("double");
+inline constexpr wxChar wxGRID_VALUE_CHOICE[]     = wxT("choice");
+inline constexpr wxChar wxGRID_VALUE_DATE[]       = wxT("date");
 
 #define wxGRID_VALUE_TEXT wxGRID_VALUE_STRING
 #define wxGRID_VALUE_LONG wxGRID_VALUE_NUMBER

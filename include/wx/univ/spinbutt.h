@@ -18,8 +18,8 @@
 // ----------------------------------------------------------------------------
 
 // actions supported by this control
-#define wxACTION_SPIN_INC    wxT("inc")
-#define wxACTION_SPIN_DEC    wxT("dec")
+inline constexpr wxChar wxACTION_SPIN_INC[]    = wxT("inc");
+inline constexpr wxChar wxACTION_SPIN_DEC[]    = wxT("dec");
 
 class WXDLLIMPEXP_CORE wxSpinButton : public wxSpinButtonBase,
                                  public wxControlWithArrows

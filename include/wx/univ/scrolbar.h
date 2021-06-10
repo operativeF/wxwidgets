@@ -21,17 +21,17 @@ class WXDLLIMPEXP_FWD_CORE wxScrollTimer;
 // ----------------------------------------------------------------------------
 
 // scroll the bar
-#define wxACTION_SCROLL_START       wxT("start")     // to the beginning
-#define wxACTION_SCROLL_END         wxT("end")       // to the end
-#define wxACTION_SCROLL_LINE_UP     wxT("lineup")    // one line up/left
-#define wxACTION_SCROLL_PAGE_UP     wxT("pageup")    // one page up/left
-#define wxACTION_SCROLL_LINE_DOWN   wxT("linedown")  // one line down/right
-#define wxACTION_SCROLL_PAGE_DOWN   wxT("pagedown")  // one page down/right
+inline constexpr wxChar wxACTION_SCROLL_START[]       = wxT("start");     // to the beginning
+inline constexpr wxChar wxACTION_SCROLL_END[]         = wxT("end");       // to the end
+inline constexpr wxChar wxACTION_SCROLL_LINE_UP[]     = wxT("lineup");    // one line up/left
+inline constexpr wxChar wxACTION_SCROLL_PAGE_UP[]     = wxT("pageup");    // one page up/left
+inline constexpr wxChar wxACTION_SCROLL_LINE_DOWN[]   = wxT("linedown");  // one line down/right
+inline constexpr wxChar wxACTION_SCROLL_PAGE_DOWN[]   = wxT("pagedown");  // one page down/right
 
 // the scrollbar thumb may be dragged
-#define wxACTION_SCROLL_THUMB_DRAG      wxT("thumbdrag")
-#define wxACTION_SCROLL_THUMB_MOVE      wxT("thumbmove")
-#define wxACTION_SCROLL_THUMB_RELEASE   wxT("thumbrelease")
+inline constexpr wxChar wxACTION_SCROLL_THUMB_DRAG[]      = wxT("thumbdrag");
+inline constexpr wxChar wxACTION_SCROLL_THUMB_MOVE[]      = wxT("thumbmove");
+inline constexpr wxChar wxACTION_SCROLL_THUMB_RELEASE[]   = wxT("thumbrelease");
 
 // ----------------------------------------------------------------------------
 // wxScrollBar

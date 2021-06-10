@@ -316,43 +316,43 @@ private:
 //-----------------------------------------------------------------------------
 
 // cursor movement and also selection and delete operations
-#define wxACTION_TEXT_GOTO          wxT("goto")  // to pos in numArg
-#define wxACTION_TEXT_FIRST         wxT("first") // go to pos 0
-#define wxACTION_TEXT_LAST          wxT("last")  // go to last pos
-#define wxACTION_TEXT_HOME          wxT("home")
-#define wxACTION_TEXT_END           wxT("end")
-#define wxACTION_TEXT_LEFT          wxT("left")
-#define wxACTION_TEXT_RIGHT         wxT("right")
-#define wxACTION_TEXT_UP            wxT("up")
-#define wxACTION_TEXT_DOWN          wxT("down")
-#define wxACTION_TEXT_WORD_LEFT     wxT("wordleft")
-#define wxACTION_TEXT_WORD_RIGHT    wxT("wordright")
-#define wxACTION_TEXT_PAGE_UP       wxT("pageup")
-#define wxACTION_TEXT_PAGE_DOWN     wxT("pagedown")
+inline constexpr wxChar wxACTION_TEXT_GOTO[]          = wxT("goto");  // to pos in numArg
+inline constexpr wxChar wxACTION_TEXT_FIRST[]         = wxT("first"); // go to pos 0
+inline constexpr wxChar wxACTION_TEXT_LAST[]          = wxT("last");  // go to last pos
+inline constexpr wxChar wxACTION_TEXT_HOME[]          = wxT("home");
+inline constexpr wxChar wxACTION_TEXT_END[]           = wxT("end");
+inline constexpr wxChar wxACTION_TEXT_LEFT[]          = wxT("left");
+inline constexpr wxChar wxACTION_TEXT_RIGHT[]         = wxT("right");
+inline constexpr wxChar wxACTION_TEXT_UP[]            = wxT("up");
+inline constexpr wxChar wxACTION_TEXT_DOWN[]          = wxT("down");
+inline constexpr wxChar wxACTION_TEXT_WORD_LEFT[]     = wxT("wordleft");
+inline constexpr wxChar wxACTION_TEXT_WORD_RIGHT[]    = wxT("wordright");
+inline constexpr wxChar wxACTION_TEXT_PAGE_UP[]       = wxT("pageup");
+inline constexpr wxChar wxACTION_TEXT_PAGE_DOWN[]     = wxT("pagedown");
 
 // clipboard operations
-#define wxACTION_TEXT_COPY          wxT("copy")
-#define wxACTION_TEXT_CUT           wxT("cut")
-#define wxACTION_TEXT_PASTE         wxT("paste")
+inline constexpr wxChar wxACTION_TEXT_COPY[]          = wxT("copy");
+inline constexpr wxChar wxACTION_TEXT_CUT[]           = wxT("cut");
+inline constexpr wxChar wxACTION_TEXT_PASTE[]         = wxT("paste");
 
 // insert text at the cursor position: the text is in strArg of PerformAction
-#define wxACTION_TEXT_INSERT        wxT("insert")
+inline constexpr wxChar wxACTION_TEXT_INSERT[]        = wxT("insert");
 
 // if the action starts with either of these prefixes and the rest of the
 // string is one of the movement commands, it means to select/delete text from
 // the current cursor position to the new one
-#define wxACTION_TEXT_PREFIX_SEL    wxT("sel")
-#define wxACTION_TEXT_PREFIX_DEL    wxT("del")
+inline constexpr wxChar wxACTION_TEXT_PREFIX_SEL[]    = wxT("sel");
+inline constexpr wxChar wxACTION_TEXT_PREFIX_DEL[]    = wxT("del");
 
 // mouse selection
-#define wxACTION_TEXT_ANCHOR_SEL    wxT("anchorsel")
-#define wxACTION_TEXT_EXTEND_SEL    wxT("extendsel")
-#define wxACTION_TEXT_SEL_WORD      wxT("wordsel")
-#define wxACTION_TEXT_SEL_LINE      wxT("linesel")
+inline constexpr wxChar wxACTION_TEXT_ANCHOR_SEL[]    = wxT("anchorsel");
+inline constexpr wxChar wxACTION_TEXT_EXTEND_SEL[]    = wxT("extendsel");
+inline constexpr wxChar wxACTION_TEXT_SEL_WORD[]      = wxT("wordsel");
+inline constexpr wxChar wxACTION_TEXT_SEL_LINE[]      = wxT("linesel");
 
 // undo or redo
-#define wxACTION_TEXT_UNDO          wxT("undo")
-#define wxACTION_TEXT_REDO          wxT("redo")
+inline constexpr wxChar wxACTION_TEXT_UNDO[]          = wxT("undo");
+inline constexpr wxChar wxACTION_TEXT_REDO[]          = wxT("redo");
 
 // ----------------------------------------------------------------------------
 // wxTextCtrl types

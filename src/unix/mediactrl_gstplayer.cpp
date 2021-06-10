@@ -40,7 +40,7 @@ wxGCC_WARNING_RESTORE()
 //-----------------------------------------------------------------------------
 //  wxLogTrace mask string
 //-----------------------------------------------------------------------------
-#define wxTRACE_GStreamer wxT("GStreamer")
+static constexpr wxChar wxTRACE_GStreamer[] = wxT("GStreamer");
 
 //-----------------------------------------------------------------------------
 //

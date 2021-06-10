@@ -20,28 +20,28 @@
 // ----------------------------------------------------------------------------
 
 // change the current item
-#define wxACTION_LISTBOX_SETFOCUS   wxT("setfocus")  // select the item
-#define wxACTION_LISTBOX_MOVEDOWN   wxT("down")      // select item below
-#define wxACTION_LISTBOX_MOVEUP     wxT("up")        // select item above
-#define wxACTION_LISTBOX_PAGEDOWN   wxT("pagedown")  // go page down
-#define wxACTION_LISTBOX_PAGEUP     wxT("pageup")    // go page up
-#define wxACTION_LISTBOX_START      wxT("start")     // go to first item
-#define wxACTION_LISTBOX_END        wxT("end")       // go to last item
-#define wxACTION_LISTBOX_FIND       wxT("find")      // find item by 1st letter
+inline constexpr wxChar wxACTION_LISTBOX_SETFOCUS[]   = wxT("setfocus");  // select the item
+inline constexpr wxChar wxACTION_LISTBOX_MOVEDOWN[]   = wxT("down");      // select item below
+inline constexpr wxChar wxACTION_LISTBOX_MOVEUP[]     = wxT("up");        // select item above
+inline constexpr wxChar wxACTION_LISTBOX_PAGEDOWN[]   = wxT("pagedown");  // go page down
+inline constexpr wxChar wxACTION_LISTBOX_PAGEUP[]     = wxT("pageup");    // go page up
+inline constexpr wxChar wxACTION_LISTBOX_START[]      = wxT("start");     // go to first item
+inline constexpr wxChar wxACTION_LISTBOX_END[]        = wxT("end");       // go to last item
+inline constexpr wxChar wxACTION_LISTBOX_FIND[]       = wxT("find");      // find item by 1st letter
 
 // do something with the current item
-#define wxACTION_LISTBOX_ACTIVATE   wxT("activate")  // activate (choose)
-#define wxACTION_LISTBOX_TOGGLE     wxT("toggle")    // togglee selected state
-#define wxACTION_LISTBOX_SELECT     wxT("select")    // sel this, unsel others
-#define wxACTION_LISTBOX_SELECTADD  wxT("selectadd") // add to selection
-#define wxACTION_LISTBOX_UNSELECT   wxT("unselect")  // unselect
-#define wxACTION_LISTBOX_ANCHOR     wxT("selanchor") // anchor selection
+inline constexpr wxChar wxACTION_LISTBOX_ACTIVATE[]   = wxT("activate");  // activate (choose)
+inline constexpr wxChar wxACTION_LISTBOX_TOGGLE[]     = wxT("toggle");    // togglee selected state
+inline constexpr wxChar wxACTION_LISTBOX_SELECT[]     = wxT("select");    // sel this, unsel others
+inline constexpr wxChar wxACTION_LISTBOX_SELECTADD[]  = wxT("selectadd"); // add to selection
+inline constexpr wxChar wxACTION_LISTBOX_UNSELECT[]   = wxT("unselect");  // unselect
+inline constexpr wxChar wxACTION_LISTBOX_ANCHOR[]     = wxT("selanchor"); // anchor selection
 
 // do something with the selection globally (not for single selection ones)
-#define wxACTION_LISTBOX_SELECTALL   wxT("selectall")   // select all items
-#define wxACTION_LISTBOX_UNSELECTALL wxT("unselectall") // unselect all items
-#define wxACTION_LISTBOX_SELTOGGLE   wxT("togglesel")   // invert the selection
-#define wxACTION_LISTBOX_EXTENDSEL   wxT("extend")      // extend to item
+inline constexpr wxChar wxACTION_LISTBOX_SELECTALL[]   = wxT("selectall");   // select all items
+inline constexpr wxChar wxACTION_LISTBOX_UNSELECTALL[] = wxT("unselectall"); // unselect all items
+inline constexpr wxChar wxACTION_LISTBOX_SELTOGGLE[]   = wxT("togglesel");   // invert the selection
+inline constexpr wxChar wxACTION_LISTBOX_EXTENDSEL[]   = wxT("extend");      // extend to item
 
 // ----------------------------------------------------------------------------
 // wxListBox: a list of selectable items

@@ -18,7 +18,7 @@
 #include "wx/dc.h"
 #include "wx/scopedptr.h"
 
-#define wxSVGVersion wxT("v0101")
+inline constexpr wxChar wxSVGVersion[] = wxT("v0101");
 
 enum wxSVGShapeRenderingMode
 {
