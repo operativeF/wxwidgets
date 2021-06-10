@@ -75,7 +75,4 @@ wxSocketStream::wxSocketStream(wxSocketBase& s)
 {
 }
 
-wxSocketStream::~wxSocketStream()
-= default;
-
 #endif // wxUSE_STREAMS && wxUSE_SOCKETS

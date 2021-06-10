@@ -106,9 +106,6 @@ wxGCDC::wxGCDC() :
 {
 }
 
-wxGCDC::~wxGCDC()
-= default;
-
 wxIMPLEMENT_ABSTRACT_CLASS(wxGCDCImpl, wxDCImpl);
 
 wxGCDCImpl::wxGCDCImpl(wxDC *owner, wxGraphicsContext* context) :

@@ -541,7 +541,7 @@ private:
 class WXDLLIMPEXP_CORE wxDataViewCtrlBase: public wxSystemThemedControl<wxControl>
 {
 public:
-    wxDataViewCtrlBase();
+    wxDataViewCtrlBase() = default;
     ~wxDataViewCtrlBase() override;
 
 	wxDataViewCtrlBase(const wxDataViewCtrlBase&) = delete;

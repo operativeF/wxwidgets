@@ -286,10 +286,6 @@ wxPrintNativeDataBase *wxNativePrintFactory::CreatePrintNativeData()
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxPrintNativeDataBase, wxObject);
 
-wxPrintNativeDataBase::wxPrintNativeDataBase()
-{
-}
-
 //----------------------------------------------------------------------------
 // wxPrintFactoryModule
 //----------------------------------------------------------------------------

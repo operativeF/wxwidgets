@@ -208,7 +208,7 @@ private:
 class WXDLLIMPEXP_CORE wxView: public wxEvtHandler
 {
 public:
-    wxView();
+    wxView() = default;
     ~wxView() override;
 
     wxView(const wxView&) = delete;

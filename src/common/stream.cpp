@@ -675,13 +675,6 @@ wxFileOffset wxStreamBuffer::Tell() const
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxStreamBase, wxObject);
 
-wxStreamBase::wxStreamBase()
-{
-}
-
-wxStreamBase::~wxStreamBase()
-= default;
-
 size_t wxStreamBase::GetSize() const
 {
     wxFileOffset length = GetLength();

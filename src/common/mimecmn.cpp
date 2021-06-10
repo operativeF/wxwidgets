@@ -573,10 +573,6 @@ bool wxMimeTypesManager::IsOfType(const wxString& mimeType,
     return false;
 }
 
-wxMimeTypesManager::wxMimeTypesManager()
-{
-}
-
 wxMimeTypesManager::~wxMimeTypesManager()
 {
     delete m_impl;

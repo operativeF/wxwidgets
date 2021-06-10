@@ -230,9 +230,6 @@ public:
     // a given point
     static wxMemStruct *checkPoint;
 
-    wxDebugContext(void);
-    ~wxDebugContext(void);
-
     static int GetLevel(void) { return debugLevel; }
     static void SetLevel(int level) { debugLevel = level; }
 

@@ -62,7 +62,7 @@ wxImage wxNullImage;
 class wxImageRefData: public wxObjectRefData
 {
 public:
-    wxImageRefData();
+    wxImageRefData() = default;
     ~wxImageRefData() override;
 
     int             m_width{0};
@@ -102,10 +102,6 @@ public:
 
 // For compatibility, if nothing else, loading is verbose by default.
 int wxImageRefData::sm_defaultLoadFlags = wxImage::Load_Verbose;
-
-wxImageRefData::wxImageRefData()
-{
-}
 
 wxImageRefData::~wxImageRefData()
 {

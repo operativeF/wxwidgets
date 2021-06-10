@@ -177,7 +177,7 @@ public:
     virtual void RemoveHelp(wxWindowBase* window);
 
     // virtual dtor for any base class
-    virtual ~wxHelpProvider();
+    virtual ~wxHelpProvider() = default;
 
 protected:
     wxHelpProvider()

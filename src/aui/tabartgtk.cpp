@@ -44,11 +44,6 @@ static int s_CloseIconSize = 16; // default size
 
 }
 
-wxAuiGtkTabArt::wxAuiGtkTabArt()
-
-{
-}
-
 wxAuiTabArt* wxAuiGtkTabArt::Clone()
 {
     wxAuiGtkTabArt* clone = new wxAuiGtkTabArt();

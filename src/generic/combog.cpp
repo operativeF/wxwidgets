@@ -191,10 +191,6 @@ bool wxGenericComboCtrl::Create(wxWindow *parent,
     return true;
 }
 
-wxGenericComboCtrl::~wxGenericComboCtrl()
-{
-}
-
 bool wxGenericComboCtrl::HasTransparentBackground()
 {
 #if wxALWAYS_NATIVE_DOUBLE_BUFFER

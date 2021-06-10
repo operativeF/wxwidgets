@@ -120,27 +120,16 @@ wxGenericCalendarCtrl::wxGenericCalendarCtrl(wxWindow *parent,
                                              long style,
                                              const wxString& name)
 {
-    
-    m_comboMonth = nullptr;
-    m_spinYear = nullptr;
-    m_staticYear = nullptr;
-    m_staticMonth = nullptr;
-
-    m_userChangedYear = false;
-
-    m_widthCol =
-    m_heightRow =
-    m_calendarWeekWidth = 0;
-
-    wxDateTime::WeekDay wd;
-    for ( wd = wxDateTime::Sun; wd < wxDateTime::Inv_WeekDay; wxNextWDay(wd) )
+    // FIXME: Can be done at compile time.
+    for ( wxDateTime::WeekDay wd = wxDateTime::Sun; wd < wxDateTime::Inv_WeekDay; wxNextWDay(wd) )
     {
         m_weekdays[wd] = wxDateTime::GetWeekDayName(wd, wxDateTime::Name_Abbr);
     }
 
-    for ( size_t n = 0; n < WXSIZEOF(m_attrs); n++ )
+    // FIXME: Can be done at compile time.
+    for ( auto* attr : m_attrs )
     {
-        m_attrs[n] = nullptr;
+        attr = nullptr;
     }
 
     InitColours();

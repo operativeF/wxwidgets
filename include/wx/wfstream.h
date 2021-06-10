@@ -47,7 +47,7 @@ public:
     wxFile* GetFile() const { return m_file; }
 
 protected:
-    wxFileInputStream();
+    wxFileInputStream() = default;
 
     size_t OnSysRead(void *buffer, size_t size) override;
     wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) override;
@@ -80,7 +80,7 @@ public:
     wxFile* GetFile() const { return m_file; }
 
 protected:
-    wxFileOutputStream();
+    wxFileOutputStream() = default;
 
     size_t OnSysWrite(const void *buffer, size_t size) override;
     wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) override;
@@ -208,7 +208,7 @@ public:
     wxFFile* GetFile() const { return m_file; }
 
 protected:
-    wxFFileInputStream();
+    wxFFileInputStream() = default;
 
     size_t OnSysRead(void *buffer, size_t size) override;
     wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) override;
@@ -241,7 +241,7 @@ public:
     wxFFile* GetFile() const { return m_file; }
 
 protected:
-    wxFFileOutputStream();
+    wxFFileOutputStream() = default;
 
     size_t OnSysWrite(const void *buffer, size_t size) override;
     wxFileOffset OnSysSeek(wxFileOffset pos, wxSeekMode mode) override;

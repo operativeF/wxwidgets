@@ -201,10 +201,6 @@ wxEventLoopBase::AddSourceForFD(int fd,
 // wxEventLoopManual implementation
 // ============================================================================
 
-wxEventLoopManual::wxEventLoopManual()
-{
-}
-
 bool wxEventLoopManual::ProcessEvents()
 {
     // process pending wx events first as they correspond to low-level events

@@ -191,9 +191,9 @@ private:
     wxArrayLinesType m_aTypes;   // type of each line
     wxArrayString    m_aLines;   // lines of file
 
-    size_t        m_nCurLine; // number of current line in the buffer
+    size_t        m_nCurLine{0}; // number of current line in the buffer
 
-    bool          m_isOpened; // was the buffer successfully opened the last time?
+    bool          m_isOpened{false}; // was the buffer successfully opened the last time?
 #endif // wxUSE_TEXTBUFFER
 };
 

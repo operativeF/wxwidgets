@@ -309,9 +309,6 @@ void wxHelpProvider::RemoveHelp(wxWindowBase* WXUNUSED(window))
 {
 }
 
-wxHelpProvider::~wxHelpProvider()
-= default;
-
 wxString wxHelpProvider::GetHelpTextMaybeAtPoint(wxWindowBase *window)
 {
     if ( m_helptextAtPoint != wxDefaultPosition ||

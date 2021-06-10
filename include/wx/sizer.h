@@ -886,7 +886,7 @@ public:
     wxFlexGridSizer( int rows, int cols, int vgap, int hgap );
     wxFlexGridSizer( int rows, int cols, const wxSize& gap );
 
-    ~wxFlexGridSizer() override;
+    ~wxFlexGridSizer() override = default;
 
     wxFlexGridSizer(const wxFlexGridSizer&) = delete;
 	wxFlexGridSizer& operator=(const wxFlexGridSizer&) = delete;

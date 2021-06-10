@@ -31,7 +31,7 @@
 class WXDLLIMPEXP_CORE wxPrintPaperType: public wxObject
 {
 public:
-    wxPrintPaperType();
+    wxPrintPaperType() = default;
 
     // platformId is a platform-specific id, such as in Windows, DMPAPER_...
     wxPrintPaperType(wxPaperSize paperId, int platformId, const wxString& name, int w, int h);

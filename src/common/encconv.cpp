@@ -93,10 +93,6 @@ static CharsetItem* BuildReverseTable(const wxUint16 *tbl)
     return rev;
 }
 
-wxEncodingConverter::wxEncodingConverter()
-{
-}
-
 bool wxEncodingConverter::Init(wxFontEncoding input_enc, wxFontEncoding output_enc, int method)
 {
     unsigned i;

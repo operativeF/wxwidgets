@@ -635,10 +635,6 @@ bool wxDocument::DoOpenDocument(const wxString& file)
 // Document view
 // ----------------------------------------------------------------------------
 
-wxView::wxView()
-{
-}
-
 wxView::~wxView()
 {
     if (m_viewDocument && GetDocumentManager())

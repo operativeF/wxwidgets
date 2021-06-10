@@ -64,7 +64,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxComboBoxNameStr));
 
-    virtual ~wxGenericComboCtrl();
+    virtual ~wxGenericComboCtrl() = default;
 
     void SetCustomPaintWidth( int width );
 

@@ -407,9 +407,10 @@ wxTextInputStream& wxTextInputStream::operator>>(float& f)
 wxTextOutputStream::wxTextOutputStream(wxOutputStream& s,
                                        wxEOL mode,
                                        const wxMBConv& conv)
-  : m_output(s), m_conv(conv.Clone())
+  : m_output(s),
+    m_conv(conv.Clone()),
+    m_mode(mode)
 {
-    m_mode = mode;
     if (m_mode == wxEOL::Native)
     {
 #if defined(__WINDOWS__)

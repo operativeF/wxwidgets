@@ -27,31 +27,24 @@ class WXDLLIMPEXP_ADV wxGenericCalendarCtrl : public wxCalendarCtrlBase
 {
 public:
     // construction
-    wxGenericCalendarCtrl() { 
-    m_comboMonth = nullptr;
-    m_spinYear = nullptr;
-    m_staticYear = nullptr;
-    m_staticMonth = nullptr;
+    // FIXME: This is just the other constructor without creation. Necessary?
+    wxGenericCalendarCtrl()
+    { 
 
-    m_userChangedYear = false;
+        wxDateTime::WeekDay wd;
+        for ( wd = wxDateTime::Sun; wd < wxDateTime::Inv_WeekDay; wxNextWDay(wd) )
+        {
+            m_weekdays[wd] = wxDateTime::GetWeekDayName(wd, wxDateTime::Name_Abbr);
+        }
 
-    m_widthCol =
-    m_heightRow =
-    m_calendarWeekWidth = 0;
+        for ( auto* attr : m_attrs )
+        {
+            attr = nullptr;
+        }
 
-    wxDateTime::WeekDay wd;
-    for ( wd = wxDateTime::Sun; wd < wxDateTime::Inv_WeekDay; wxNextWDay(wd) )
-    {
-        m_weekdays[wd] = wxDateTime::GetWeekDayName(wd, wxDateTime::Name_Abbr);
+        InitColours();
     }
 
-    for ( size_t n = 0; n < WXSIZEOF(m_attrs); n++ )
-    {
-        m_attrs[n] = nullptr;
-    }
-
-    InitColours();
- }
     wxGenericCalendarCtrl(wxWindow *parent,
                           wxWindowID id,
                           const wxDateTime& date = wxDefaultDateTime,
@@ -291,11 +284,11 @@ private:
 
 
     // the subcontrols
-    wxStaticText *m_staticMonth;
-    wxComboBox *m_comboMonth;
+    wxStaticText *m_staticMonth{nullptr};
+    wxComboBox *m_comboMonth{nullptr};
 
-    wxStaticText *m_staticYear;
-    wxSpinCtrl *m_spinYear;
+    wxStaticText *m_staticYear{nullptr};
+    wxSpinCtrl *m_spinYear{nullptr};
 
     // the current selection
     wxDateTime m_date;
@@ -305,33 +298,33 @@ private:
     wxDateTime m_highdate;
 
     // default attributes
-    wxColour m_colHighlightFg,
-             m_colHighlightBg,
-             m_colHolidayFg,
-             m_colHolidayBg,
-             m_colHeaderFg,
-             m_colHeaderBg,
-             m_colBackground,
-             m_colSurrounding;
+    wxColour m_colHighlightFg;
+    wxColour m_colHighlightBg;
+    wxColour m_colHolidayFg;
+    wxColour m_colHolidayBg;
+    wxColour m_colHeaderFg;
+    wxColour m_colHeaderBg;
+    wxColour m_colBackground;
+    wxColour m_colSurrounding;
 
     // the attributes for each of the month days
     wxCalendarDateAttr *m_attrs[31];
 
     // the width and height of one column/row in the calendar
-    wxCoord m_widthCol,
-            m_heightRow,
-            m_rowOffset,
-            m_calendarWeekWidth;
+    wxCoord m_widthCol{0};
+    wxCoord m_heightRow{0};
+    wxCoord m_calendarWeekWidth{0};
+    wxCoord m_rowOffset;
 
-    wxRect m_leftArrowRect,
-           m_rightArrowRect;
+    wxRect m_leftArrowRect;
+    wxRect m_rightArrowRect;
 
     // the week day names
     wxString m_weekdays[7];
 
     // true if SetDate() is being called as the result of changing the year in
     // the year control
-    bool m_userChangedYear;
+    bool m_userChangedYear{false};
 
     wxDECLARE_DYNAMIC_CLASS(wxGenericCalendarCtrl);
     wxDECLARE_EVENT_TABLE();

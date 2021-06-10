@@ -43,10 +43,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPrintPaperType, wxObject);
  * Paper size database for all platforms
  */
 
-wxPrintPaperType::wxPrintPaperType()
-{
-}
-
 wxPrintPaperType::wxPrintPaperType(wxPaperSize paperId, int platformId, const wxString& name, int w, int h)
     : m_paperName(name)
 {

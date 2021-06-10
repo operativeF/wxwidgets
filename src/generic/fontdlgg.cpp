@@ -265,10 +265,6 @@ void wxGenericFontDialog::Init()
     Create( m_parent ) ;
 }
 
-wxGenericFontDialog::~wxGenericFontDialog()
-{
-}
-
 void wxGenericFontDialog::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 {
     EndModal(wxID_CANCEL);

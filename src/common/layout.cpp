@@ -66,11 +66,6 @@ inline void wxGetAsIs(wxWindowBase* win, int* w, int* h)
 #endif
 }
 
-
-wxIndividualLayoutConstraint::wxIndividualLayoutConstraint()
-{
-}
-
 void wxIndividualLayoutConstraint::Set(wxRelationship rel, wxWindowBase *otherW, wxEdge otherE, int val, int marg)
 {
     if (rel == wxSameAs)

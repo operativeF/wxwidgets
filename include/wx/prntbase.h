@@ -159,7 +159,7 @@ public:
 class WXDLLIMPEXP_CORE wxPrintNativeDataBase: public wxObject
 {
 public:
-    wxPrintNativeDataBase();
+    wxPrintNativeDataBase() = default;
     ~wxPrintNativeDataBase() override = default;
 
     wxPrintNativeDataBase(const wxPrintNativeDataBase&) = delete;

@@ -23,8 +23,8 @@ enum
 class WXDLLIMPEXP_CORE wxFontData : public wxObject
 {
 public:
-    wxFontData();
-    ~wxFontData() override;
+    wxFontData() = default;
+    ~wxFontData() override = default;
 
     wxFontData(const wxFontData& data);
     wxFontData& operator=(const wxFontData& data);

@@ -14,13 +14,6 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxFontData, wxObject);
 
-wxFontData::wxFontData()
-{
-}
-
-wxFontData::~wxFontData()
-= default;
-
 wxFontData::wxFontData(const wxFontData& data)
     : 
       m_fontColour(data.m_fontColour),

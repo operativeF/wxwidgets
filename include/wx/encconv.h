@@ -52,7 +52,7 @@ class WXDLLIMPEXP_BASE wxEncodingConverter : public wxObject
 {
     public:
 
-            wxEncodingConverter();
+            wxEncodingConverter() = default;
             ~wxEncodingConverter() override { delete[] m_Table; }
 
             wxEncodingConverter(const wxEncodingConverter&) = delete;

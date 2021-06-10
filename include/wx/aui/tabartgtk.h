@@ -29,7 +29,7 @@ class wxDC;
 class WXDLLIMPEXP_AUI wxAuiGtkTabArt : public wxAuiGenericTabArt
 {
 public:
-    wxAuiGtkTabArt();
+    wxAuiGtkTabArt() = default;
 
     wxAuiTabArt* Clone() override;
     void DrawBorder(wxDC& dc, wxWindow* wnd, const wxRect& rect) override;

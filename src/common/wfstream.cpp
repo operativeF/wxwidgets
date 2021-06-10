@@ -37,10 +37,6 @@ wxFileInputStream::wxFileInputStream(const wxString& fileName)
         m_lasterror = wxSTREAM_READ_ERROR;
 }
 
-wxFileInputStream::wxFileInputStream()
-{
-}
-
 wxFileInputStream::wxFileInputStream(wxFile& file)
 {
     m_file = &file;
@@ -122,10 +118,6 @@ wxFileOutputStream::wxFileOutputStream(wxFile& file)
 {
     m_file = &file;
     m_file_destroy = false;
-}
-
-wxFileOutputStream::wxFileOutputStream()
-{
 }
 
 wxFileOutputStream::wxFileOutputStream(int fd)
@@ -273,10 +265,6 @@ wxFFileInputStream::wxFFileInputStream(const wxString& fileName,
         m_lasterror = wxSTREAM_WRITE_ERROR;
 }
 
-wxFFileInputStream::wxFFileInputStream()          
-{
-}
-
 wxFFileInputStream::wxFFileInputStream(wxFFile& file)
 {
     m_file = &file;
@@ -356,10 +344,6 @@ wxFFileOutputStream::wxFFileOutputStream(wxFFile& file)
 {
     m_file = &file;
     m_file_destroy = false;
-}
-
-wxFFileOutputStream::wxFFileOutputStream()                   
-{
 }
 
 wxFFileOutputStream::wxFFileOutputStream(FILE *file)

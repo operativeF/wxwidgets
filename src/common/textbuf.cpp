@@ -129,8 +129,6 @@ wxString wxTextBuffer::ms_eof;
 wxTextBuffer::wxTextBuffer(const wxString& strBufferName)
             : m_strBufferName(strBufferName)
 {
-    m_nCurLine = 0;
-    m_isOpened = false;
 }
 
 wxTextBuffer::~wxTextBuffer()

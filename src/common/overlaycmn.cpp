@@ -130,12 +130,6 @@ void wxDCOverlay::Clear()
 
 #ifndef wxHAS_NATIVE_OVERLAY
 
-wxOverlayImpl::wxOverlayImpl()
-{
-}
-
-wxOverlayImpl::~wxOverlayImpl() = default;
-
 bool wxOverlayImpl::IsOk()
 {
     return m_bmpSaved.IsOk() ;

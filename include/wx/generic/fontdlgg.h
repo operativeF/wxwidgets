@@ -43,7 +43,7 @@ public:
         : wxFontDialogBase(parent) { Init(); }
     wxGenericFontDialog(wxWindow *parent, const wxFontData& data)
         : wxFontDialogBase(parent, data) { Init(); }
-    virtual ~wxGenericFontDialog();
+    virtual ~wxGenericFontDialog() = default;
 
     int ShowModal() override;
 

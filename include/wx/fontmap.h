@@ -53,7 +53,7 @@ public:
     // ---------------------
 
     // default ctor
-    wxFontMapperBase();
+    wxFontMapperBase() = default;
 
     // virtual dtor for any base class
     virtual ~wxFontMapperBase();
@@ -192,10 +192,10 @@ class WXDLLIMPEXP_CORE wxFontMapper : public wxFontMapperBase
 {
 public:
     // default ctor
-    wxFontMapper();
+    wxFontMapper() = default;
 
     // virtual dtor for a base class
-    ~wxFontMapper() override;
+    ~wxFontMapper() override = default;
 
     wxFontMapper(const wxFontMapper&) = delete;
 	wxFontMapper& operator=(const wxFontMapper&) = delete;

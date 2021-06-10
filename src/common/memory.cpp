@@ -450,14 +450,6 @@ int wxDebugContext::m_balignmask = (int)((char *)&markerCalc[1] - (char*)&marker
 // Pointer to global function to call at shutdown
 wxShutdownNotifyFunction wxDebugContext::sm_shutdownFn;
 
-wxDebugContext::wxDebugContext()
-{
-}
-
-wxDebugContext::~wxDebugContext()
-{
-}
-
 /*
   Work out the positions of the markers by creating an array of 2 markers
   and comparing the addresses of the 2 elements. Use this number as the

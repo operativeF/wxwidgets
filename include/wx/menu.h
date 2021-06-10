@@ -439,7 +439,7 @@ WX_DECLARE_EXPORTED_LIST(wxMenuInfoHelper, wxMenuInfoHelperList );
 class WXDLLIMPEXP_CORE wxMenuBarBase : public wxWindow
 {
 public:
-    wxMenuBarBase();
+    wxMenuBarBase() = default;
 
     // dtor will delete all menus we own
     ~wxMenuBarBase() override;

@@ -109,7 +109,7 @@ WX_DECLARE_EXPORTED_OBJARRAY(wxStatusBarPane, wxStatusBarPaneArray);
 class WXDLLIMPEXP_CORE wxStatusBarBase : public wxControl
 {
 public:
-    wxStatusBarBase();
+    wxStatusBarBase() = default;
 
     ~wxStatusBarBase() override;
 

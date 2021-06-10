@@ -64,7 +64,7 @@ class WXDLLIMPEXP_NET wxSocketStream : public wxSocketInputStream,
 {
 public:
     wxSocketStream(wxSocketBase& s);
-    ~wxSocketStream() override;
+    ~wxSocketStream() override = default;
 
     wxSocketStream(const wxSocketStream&) = delete;
 	wxSocketStream& operator=(const wxSocketStream&) = delete;

@@ -854,10 +854,6 @@ wxString wxMenuBase::GetHelpString( int itemid ) const
 // wxMenuBarBase ctor and dtor
 // ----------------------------------------------------------------------------
 
-wxMenuBarBase::wxMenuBarBase()
-{
-}
-
 wxMenuBarBase::~wxMenuBarBase()
 {
     WX_CLEAR_LIST(wxMenuList, m_menus);

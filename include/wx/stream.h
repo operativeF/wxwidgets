@@ -54,8 +54,8 @@ const int wxEOF = -1;
 class WXDLLIMPEXP_BASE wxStreamBase : public wxObject
 {
 public:
-    wxStreamBase();
-    ~wxStreamBase() override;
+    wxStreamBase() = default;
+    ~wxStreamBase() override = default;
 
     wxStreamBase(const wxStreamBase&) = delete;
 	wxStreamBase& operator=(const wxStreamBase&) = delete;

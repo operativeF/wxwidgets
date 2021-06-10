@@ -154,10 +154,6 @@ bool wxButtonToolBar::Create(wxWindow *parent,
     return true;
 }
 
-wxButtonToolBar::~wxButtonToolBar()
-{
-}
-
 // ----------------------------------------------------------------------------
 // wxButtonToolBar tool-related methods
 // ----------------------------------------------------------------------------

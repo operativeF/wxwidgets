@@ -113,7 +113,7 @@ private:
 class WXDLLIMPEXP_NET wxTCPServer : public wxServerBase
 {
 public:
-    wxTCPServer();
+    wxTCPServer() = default;
     ~wxTCPServer() override;
 
     wxTCPServer(const wxTCPServer&) = delete;

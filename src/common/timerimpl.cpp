@@ -28,12 +28,8 @@
 #include "wx/thread.h"
 
 wxTimerImpl::wxTimerImpl(wxTimer *timer)
+    : m_timer(timer)
 {
-    m_timer = timer;
-    m_owner = nullptr;
-    m_idTimer = wxID_ANY;
-    m_milli = 0;
-    m_oneShot = false;
 }
 
 void wxTimerImpl::SetOwner(wxEvtHandler *owner, int timerid)

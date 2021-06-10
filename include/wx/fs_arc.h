@@ -25,7 +25,7 @@ WX_DECLARE_STRING_HASH_MAP(int, wxArchiveFilenameHashMap);
 class WXDLLIMPEXP_BASE wxArchiveFSHandler : public wxFileSystemHandler
 {
 public:
-    wxArchiveFSHandler();
+    wxArchiveFSHandler() = default;
 
     wxArchiveFSHandler(const wxArchiveFSHandler&) = delete;
 	wxArchiveFSHandler& operator=(const wxArchiveFSHandler&) = delete;

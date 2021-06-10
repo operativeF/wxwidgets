@@ -24,6 +24,9 @@ public:
     // default ctor, SetOwner() must be called after it (wxTimer does it)
     wxTimerImpl(wxTimer *owner);
 
+    wxTimerImpl(const wxTimerImpl&) = delete;
+	wxTimerImpl& operator=(const wxTimerImpl&) = delete;
+
     // this must be called initially but may be also called later
     void SetOwner(wxEvtHandler *owner, int timerid);
 
@@ -57,15 +60,11 @@ public:
 protected:
     wxTimer *m_timer;
 
-    wxEvtHandler *m_owner;
+    wxEvtHandler *m_owner{nullptr};
 
-    int     m_idTimer;      // id passed to wxTimerEvent
-    int     m_milli;        // the timer interval
-    bool    m_oneShot;      // true if one shot
-
-
-    wxTimerImpl(const wxTimerImpl&) = delete;
-	wxTimerImpl& operator=(const wxTimerImpl&) = delete;
+    int     m_idTimer{wxID_ANY};      // id passed to wxTimerEvent
+    int     m_milli{0};        // the timer interval
+    bool    m_oneShot{false};      // true if one shot
 };
 
 #endif // _WX_TIMERIMPL_H_BASE_

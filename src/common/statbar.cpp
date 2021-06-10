@@ -113,10 +113,6 @@ WX_DEFINE_EXPORTED_OBJARRAY(wxStatusBarPaneArray)
 // ctor/dtor
 // ----------------------------------------------------------------------------
 
-wxStatusBarBase::wxStatusBarBase()
-{
-}
-
 wxStatusBarBase::~wxStatusBarBase()
 {
     // notify the frame that it doesn't have a status bar any longer to avoid

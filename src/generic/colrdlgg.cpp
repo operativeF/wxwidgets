@@ -141,10 +141,6 @@ wxGenericColourDialog::wxGenericColourDialog(wxWindow *parent,
     Create(parent, data);
 }
 
-wxGenericColourDialog::~wxGenericColourDialog()
-{
-}
-
 void wxGenericColourDialog::OnCloseWindow(wxCloseEvent& WXUNUSED(event))
 {
     EndModal(wxID_CANCEL);

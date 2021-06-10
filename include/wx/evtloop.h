@@ -235,7 +235,7 @@ private:
 class WXDLLIMPEXP_BASE wxEventLoopManual : public wxEventLoopBase
 {
 public:
-    wxEventLoopManual();
+    wxEventLoopManual() = default;
 
     wxEventLoopManual(const wxEventLoopManual&) = delete;
 	wxEventLoopManual& operator=(const wxEventLoopManual&) = delete;

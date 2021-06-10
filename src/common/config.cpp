@@ -341,7 +341,7 @@ bool wxConfigBase::DoWriteBool(const wxString& key, bool value)
 wxConfigPathChanger::wxConfigPathChanger(const wxConfigBase *pContainer,
                                          const wxString& strEntry)
 {
-  m_bChanged = false;
+  // FIXME: const_cast
   m_pContainer = const_cast<wxConfigBase *>(pContainer);
 
   // the path is everything which precedes the last slash and the name is

@@ -323,7 +323,7 @@ class wxComboFrameEventHandler : public wxEvtHandler
 {
 public:
     wxComboFrameEventHandler( wxComboCtrlBase* pCb );
-    virtual ~wxComboFrameEventHandler();
+    virtual ~wxComboFrameEventHandler() = default;
 
     void OnPopup();
 
@@ -359,10 +359,6 @@ wxComboFrameEventHandler::wxComboFrameEventHandler( wxComboCtrlBase* combo )
     : wxEvtHandler()
 {
     m_combo = combo;
-}
-
-wxComboFrameEventHandler::~wxComboFrameEventHandler()
-{
 }
 
 void wxComboFrameEventHandler::OnPopup()
@@ -601,9 +597,6 @@ void wxComboPopupWindowEvtHandler::HideOnDeactivate()
 // wxComboPopup
 //
 // ----------------------------------------------------------------------------
-
-wxComboPopup::~wxComboPopup()
-= default;
 
 void wxComboPopup::OnPopup()
 {

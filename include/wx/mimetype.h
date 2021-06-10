@@ -414,8 +414,7 @@ public:
         // returns true, otherwise it returns false
     static bool IsOfType(const wxString& mimeType, const wxString& wildcard);
 
-    // ctor
-    wxMimeTypesManager();
+    wxMimeTypesManager() = default;
 
     // NB: the following 2 functions are for Unix only and don't do anything
     //     elsewhere

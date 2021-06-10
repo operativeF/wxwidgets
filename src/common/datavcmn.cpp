@@ -1213,10 +1213,6 @@ wxDataViewColumnBase::~wxDataViewColumnBase()
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxDataViewCtrlBase, wxControl);
 
-wxDataViewCtrlBase::wxDataViewCtrlBase()
-{
-}
-
 wxDataViewCtrlBase::~wxDataViewCtrlBase()
 {
     if (m_model)

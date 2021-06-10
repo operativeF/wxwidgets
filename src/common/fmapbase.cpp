@@ -394,10 +394,6 @@ wxFontMapper *wxFontMapperBase::sm_instance = nullptr;
 // ctor and dtor
 // ----------------------------------------------------------------------------
 
-wxFontMapperBase::wxFontMapperBase()
-{
-}
-
 wxFontMapperBase::~wxFontMapperBase()
 {
 #if wxUSE_CONFIG && wxUSE_FILECONFIG

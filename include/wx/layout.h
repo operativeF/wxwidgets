@@ -66,7 +66,7 @@ enum wxRelationship
 class WXDLLIMPEXP_CORE wxIndividualLayoutConstraint : public wxObject
 {
 public:
-    wxIndividualLayoutConstraint();
+    wxIndividualLayoutConstraint() = default;
 
     // note that default copy ctor and assignment operators are ok
 
