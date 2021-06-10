@@ -35,18 +35,8 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlWinParser, wxHtmlParser);
 wxList wxHtmlWinParser::m_Modules;
 
 wxHtmlWinParser::wxHtmlWinParser(wxHtmlWindowInterface *wndIface)
+    : m_windowInterface(wndIface)
 {
-    m_tmpStrBuf = nullptr;
-    m_tmpStrBufSize = 0;
-    m_windowInterface = wndIface;
-    m_Container = nullptr;
-    m_DC = nullptr;
-    m_CharHeight = m_CharWidth = 0;
-    m_UseLink = false;
-    m_whitespaceMode = Whitespace_Normal;
-    m_lastWordCell = nullptr;
-    m_posColumn = 0;
-
     {
         int i, j, k, l, m;
         for (i = 0; i < 2; i++)

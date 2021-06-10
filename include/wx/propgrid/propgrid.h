@@ -65,7 +65,7 @@ public:
 
     wxPGHashMapS2P      m_dictPropertyClassInfo; // PropertyName -> ClassInfo
 
-    wxPGChoices*        m_fontFamilyChoices;
+    wxPGChoices*        m_fontFamilyChoices{nullptr};
 
     // Replace with your own to affect all properties using default renderer.
     wxPGCellRenderer*   m_defaultRenderer;
@@ -96,14 +96,12 @@ public:
 #endif
 
     // If true then some things are automatically translated
-    bool                m_autoGetTranslation;
+    bool                m_autoGetTranslation{false};
 
     // > 0 if errors cannot or should not be shown in statusbar etc.
-    int                 m_offline;
-
-    int                 m_extraStyle;  // global extra style
-
-    int                 m_warnings;
+    int                 m_offline{0};
+    int                 m_extraStyle{0};  // global extra style
+    int                 m_warnings{0};
 
     int HasExtraStyle( int style ) const { return (m_extraStyle & style); }
 };
@@ -2071,17 +2069,17 @@ private:
     void OnPropertyGridSet();
     wxDECLARE_DYNAMIC_CLASS(wxPropertyGridEvent);
 
-    wxPGProperty*       m_property;
-    wxPropertyGrid*     m_pg;
-    wxPGValidationInfo* m_validationInfo;
+    wxPGProperty*       m_property{nullptr};
+    wxPropertyGrid*     m_pg{nullptr};
+    wxPGValidationInfo* m_validationInfo{nullptr};
 
     wxString            m_propertyName;
     wxVariant           m_value;
 
-    unsigned int        m_column;
+    unsigned int        m_column{1};
 
-    bool                m_canVeto;
-    bool                m_wasVetoed;
+    bool                m_canVeto{false};
+    bool                m_wasVetoed{false};
 };
 
 
@@ -2151,10 +2149,10 @@ public:
 protected:
 
     // Used property grid.
-    wxPropertyGrid*         m_pg;
+    wxPropertyGrid*         m_pg{nullptr};
 
     // Used property grid state.
-    wxPropertyGridPageState*    m_state;
+    wxPropertyGridPageState*    m_state{nullptr};
 
     // Tree-hierarchy of added properties (that can have children).
     std::vector<wxPGProperty*> m_propHierarchy;

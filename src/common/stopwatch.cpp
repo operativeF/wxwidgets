@@ -51,14 +51,9 @@ namespace
 
 struct PerfCounter
 {
-    PerfCounter()
-    {
-        init = false;
-    }
-
     wxCRIT_SECT_DECLARE_MEMBER(cs);
     LARGE_INTEGER freq;
-    bool init;
+    bool init{false};
 };
 
 // Return the global perf counter state.

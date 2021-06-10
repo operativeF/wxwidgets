@@ -1099,17 +1099,6 @@ bool wxBMPHandler::LoadDib(wxImage *image, wxInputStream& stream,
     class Resolution
     {
     public:
-        Resolution()
-        {
-            m_valid = false;
-
-            // Still initialize them as some compilers are smart enough to
-            // give "use of possibly uninitialized variable" for them (but not
-            // smart enough to see that this is not really the case).
-            m_x = 0;
-            m_y = 0;
-        }
-
         void Init(int x, int y)
         {
             m_x = x;
@@ -1123,8 +1112,9 @@ bool wxBMPHandler::LoadDib(wxImage *image, wxInputStream& stream,
         int GetY() const { return m_y; }
 
     private:
-        int m_x, m_y;
-        bool m_valid;
+        int m_x{0};
+        int m_y{0};
+        bool m_valid{false};
     } res;
     int comp;
     int ncolors;

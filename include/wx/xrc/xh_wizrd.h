@@ -27,8 +27,8 @@ public:
     bool CanHandle(wxXmlNode *node) override;
 
 private:
-    wxWizard *m_wizard;
-    wxWizardPageSimple *m_lastSimplePage;
+    wxWizard *m_wizard{nullptr};
+    wxWizardPageSimple *m_lastSimplePage{nullptr};
 };
 
 #endif // wxUSE_XRC && wxUSE_WIZARDDLG

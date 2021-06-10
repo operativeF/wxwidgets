@@ -213,17 +213,17 @@ protected:
     static wxEventLoopBase *ms_activeLoop;
 
     // should we exit the loop?
-    bool m_shouldExit;
+    bool m_shouldExit{false};
 
     // incremented each time on entering Yield() and decremented on leaving it
-    int m_yieldLevel;
+    int m_yieldLevel{0};
 
     // the argument of the last call to YieldFor()
-    long m_eventsToProcessInsideYield;
+    long m_eventsToProcessInsideYield{wxEVT_CATEGORY_ALL};
 
 private:
     // this flag is set on entry into Run() and reset before leaving it
-    bool m_isInsideRun;
+    bool m_isInsideRun{false};
 };
 
 #if defined(__WINDOWS__) || defined(__WXMAC__) || defined(__WXDFB__) || (defined(__UNIX__) && !defined(__WXOSX__))
@@ -255,7 +255,7 @@ protected:
 
 
     // the loop exit code
-    int m_exitcode;
+    int m_exitcode{0};
 
 private:
     // process all already pending events and dispatch a new one (blocking

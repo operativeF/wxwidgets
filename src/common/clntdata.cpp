@@ -22,7 +22,6 @@ wxClientDataContainer::wxClientDataContainer()
 {
     // no client data (yet)
     m_clientData = nullptr;
-    m_clientDataType = wxClientDataType::None;
 }
 
 wxClientDataContainer::~wxClientDataContainer()

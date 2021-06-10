@@ -764,7 +764,6 @@ void wxApp::CleanUp()
 
 wxApp::wxApp()
 {
-    m_printMode = wxPRINT_WINDOWS;
 }
 
 wxApp::~wxApp()

@@ -79,8 +79,6 @@ wxConfigBase::wxConfigBase(const wxString& appName,
                            long style)
             : m_appName(appName), m_vendorName(vendorName), m_style(style)
 {
-    m_bExpandEnvVars = true;
-    m_bRecordDefaults = false;
 }
 
 wxConfigBase::~wxConfigBase()

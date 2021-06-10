@@ -50,8 +50,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxEditableListBoxXmlHandler, wxXmlResourceHandler);
 
 wxEditableListBoxXmlHandler::wxEditableListBoxXmlHandler()
 {
-    m_insideBox = false;
-
     XRC_ADD_STYLE(wxEL_ALLOW_NEW);
     XRC_ADD_STYLE(wxEL_ALLOW_EDIT);
     XRC_ADD_STYLE(wxEL_ALLOW_DELETE);

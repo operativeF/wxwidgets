@@ -569,9 +569,10 @@ wxFontInfo wxFontBase::InfoFromLegacyParams(int pointSize,
     // Old code specifies wxDEFAULT instead of -1 or wxNORMAL instead of the
     // new type-safe wxFONTSTYLE_NORMAL or wxFONTWEIGHT_NORMAL, continue
     // handling this for compatibility.
-    // FIXME: What is a pointSize?
-    //    if ( pointSize == wxDEFAULT )
-    //        pointSize = -1;
+    // FIXME: Deprecate and replace the Legacy Font functions.
+    // static constexpr int wxDEFAULT = 70; // Value taken from old gui macros.
+       if ( pointSize == 70 )
+           pointSize = -1;
 
     wxFontInfo info(pointSize);
 

@@ -155,7 +155,7 @@ protected:
     virtual void *DoGetClientData() const;
 
     // what kind of data do we have?
-    wxClientDataType m_clientDataType;
+    wxClientDataType m_clientDataType{wxClientDataType::None};
 
 };
 

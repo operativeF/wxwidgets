@@ -144,7 +144,6 @@ wxJoystick::wxJoystick(int joystick)
     JOYINFO joyInfo;
     int i, maxsticks;
 
-    m_thread = nullptr;
     maxsticks = joyGetNumDevs();
     for( i=0; i<maxsticks; i++ )
     {

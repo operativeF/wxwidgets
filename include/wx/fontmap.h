@@ -154,7 +154,7 @@ protected:
     void RestorePath(const wxString& pathOld);
 
     // config object and path (in it) to use
-    wxConfigBase *m_configDummy;
+    wxConfigBase *m_configDummy{nullptr};
 
     wxString m_configRootPath;
 #endif // wxUSE_CONFIG
@@ -264,7 +264,7 @@ protected:
     wxString m_titleDialog;
 
     // the parent window for our dialogs
-    wxWindow *m_windowParent;
+    wxWindow *m_windowParent{nullptr};
 };
 
 #endif // wxUSE_GUI

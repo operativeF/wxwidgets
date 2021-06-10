@@ -82,8 +82,6 @@ bool wxDataObjectBase::IsSupported(const wxDataFormat& format,
 
 wxDataObjectComposite::wxDataObjectComposite()
 {
-    m_preferred = 0;
-    m_receivedFormat = wxFormatInvalid;
 }
 
 wxDataObjectComposite::~wxDataObjectComposite()
@@ -558,8 +556,6 @@ bool wxHTMLDataObject::SetData(size_t WXUNUSED(len), const void *buf)
 wxCustomDataObject::wxCustomDataObject(const wxDataFormat& format)
     : wxDataObjectSimple(format)
 {
-    m_data = nullptr;
-    m_size = 0;
 }
 
 wxCustomDataObject::~wxCustomDataObject()

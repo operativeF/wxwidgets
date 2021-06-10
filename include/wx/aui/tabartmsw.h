@@ -78,9 +78,9 @@ public:
 
 private:
     bool m_themed;
-    wxSize m_closeBtnSize;
+    wxSize m_closeBtnSize{wxDefaultSize};
     wxSize m_tabSize;
-    int m_maxTabHeight;
+    int m_maxTabHeight{0};
 
     void InitSizes(wxWindow* wnd, wxDC& dc);
 

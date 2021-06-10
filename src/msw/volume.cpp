@@ -73,7 +73,7 @@ static WNetCloseEnumPtr s_pWNetCloseEnum;
     // bit-sized value, so use Cygwin-specific type with the right size.
     typedef __LONG32 wxInterlockedArg_t;
 #else
-    typedef long wxInterlockedArg_t;
+    using wxInterlockedArg_t = long;
 #endif
 
 static wxInterlockedArg_t s_cancelSearch = FALSE;
@@ -473,28 +473,15 @@ void wxFSVolumeBase::CancelSearch()
     ::InterlockedExchange(&s_cancelSearch, TRUE);
 } // CancelSearch
 
-//=============================================================================
-// Function: constructor
-// Purpose: default constructor
-//=============================================================================
 wxFSVolumeBase::wxFSVolumeBase()
 {
-    m_isOk = false;
 } // wxVolume
 
-//=============================================================================
-// Function: constructor
-// Purpose: constructor that calls Create
-//=============================================================================
 wxFSVolumeBase::wxFSVolumeBase(const wxString& name)
 {
     Create(name);
 } // wxVolume
 
-//=============================================================================
-// Function: Create
-// Purpose: Finds, logs in, etc. to the request volume.
-//=============================================================================
 bool wxFSVolumeBase::Create(const wxString& name)
 {
     // assume fail.

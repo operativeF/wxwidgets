@@ -89,12 +89,13 @@ public:
 private:
     void DoSetHtmlCell(wxHtmlContainerCell* cell);
 
-    wxDC *m_DC;
+    wxDC *m_DC{nullptr};
     wxFileSystem m_FS;
     wxHtmlWinParser m_Parser;
-    wxHtmlContainerCell *m_Cells;
-    int m_Width, m_Height;
-    bool m_ownsCells;
+    wxHtmlContainerCell *m_Cells{nullptr};
+    int m_Width{0};
+    int m_Height{0};
+    bool m_ownsCells{false};
 };
 
 enum {
@@ -199,19 +200,17 @@ private:
     std::vector<int> m_PageBreaks;
 
     wxString m_Document, m_BasePath;
-    bool m_BasePathIsDir;
+    bool m_BasePathIsDir{true};
     wxString m_Headers[2], m_Footers[2];
 
-    int m_HeaderHeight, m_FooterHeight;
+    int m_HeaderHeight{0};
+    int m_FooterHeight{0};
     wxHtmlDCRenderer m_Renderer, m_RendererHdr;
     float m_MarginTop, m_MarginBottom, m_MarginLeft, m_MarginRight, m_MarginSpace;
 
     // list of HTML filters
     static std::vector<wxHtmlFilter*> m_Filters;
 };
-
-
-
 
 
 //--------------------------------------------------------------------------------
@@ -298,7 +297,7 @@ protected:
     virtual bool DoPrint(wxHtmlPrintout *printout);
 
 private:
-    wxPrintData *m_PrintData;
+    wxPrintData *m_PrintData{nullptr};
     wxPageSetupDialogData *m_PageSetupData;
     wxString m_Name;
     int m_FontsSizesArr[7];
@@ -315,7 +314,7 @@ private:
     wxString m_Headers[2], m_Footers[2];
     wxWindow *m_ParentWindow;
 
-    PromptMode m_promptMode;
+    PromptMode m_promptMode{Prompt_Always};
 };
 
 

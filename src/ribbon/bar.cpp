@@ -721,21 +721,6 @@ void wxRibbonBar::RecalculateTabSizes()
 
 wxRibbonBar::wxRibbonBar()
 {
-    m_flags = 0;
-    m_tabs_total_width_ideal = 0;
-    m_tabs_total_width_minimum = 0;
-    m_tab_margin_left = 0;
-    m_tab_margin_right = 0;
-    m_tab_height = 0;
-    m_tab_scroll_amount = 0;
-    m_current_page = -1;
-    m_current_hovered_page = -1;
-    m_tab_scroll_left_button_state = wxRIBBON_SCROLL_BTN_NORMAL;
-    m_tab_scroll_right_button_state = wxRIBBON_SCROLL_BTN_NORMAL;
-    m_tab_scroll_buttons_shown = false;
-    m_arePanelsShown = true;
-    m_help_button_hovered = false;
-
 }
 
 wxRibbonBar::wxRibbonBar(wxWindow* parent,

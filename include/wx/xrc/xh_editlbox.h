@@ -27,7 +27,7 @@ public:
     bool CanHandle(wxXmlNode *node) override;
 
 private:
-    bool m_insideBox;
+    bool m_insideBox{nullptr};
     wxArrayString m_items;
 
     wxDECLARE_DYNAMIC_CLASS(wxEditableListBoxXmlHandler);

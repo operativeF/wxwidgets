@@ -137,15 +137,15 @@ protected:
     friend class wxIndividualLayoutConstraint_Serialize;
 
     // 'This' window is the parent or sibling of otherWin
-    wxWindowBase *otherWin;
+    wxWindowBase *otherWin{nullptr};
 
-    wxEdge myEdge;
-    wxRelationship relationship;
-    int margin;
-    int value;
-    int percent;
-    wxEdge otherEdge;
-    bool done;
+    wxEdge myEdge{wxTop};
+    wxRelationship relationship{wxUnconstrained};
+    int margin{0};
+    int value{0};
+    int percent{0};
+    wxEdge otherEdge{wxTop};
+    bool done{false};
 
     wxDECLARE_DYNAMIC_CLASS(wxIndividualLayoutConstraint);
 };

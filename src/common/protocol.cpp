@@ -65,8 +65,6 @@ wxProtocol::wxProtocol()
     : wxSocketClient(wxSocketClient::GetBlockingFlagIfNeeded() | wxSOCKET_WAITALL)
 #endif
 {
-    m_lastError = wxPROTO_NOERR;
-    m_log = nullptr;
     SetDefaultTimeout(60);      // default timeout is 60 seconds
 }
 

@@ -142,28 +142,6 @@ enum wxRibbonArtSetting
     wxRIBBON_ART_BUTTON_BAR_LABEL_HIGHLIGHT_GRADIENT_TOP_COLOUR
 };
 
-enum wxRibbonScrollButtonStyle
-{
-    wxRIBBON_SCROLL_BTN_LEFT = 0,
-    wxRIBBON_SCROLL_BTN_RIGHT = 1,
-    wxRIBBON_SCROLL_BTN_UP = 2,
-    wxRIBBON_SCROLL_BTN_DOWN = 3,
-
-    wxRIBBON_SCROLL_BTN_DIRECTION_MASK = 3,
-
-    wxRIBBON_SCROLL_BTN_NORMAL = 0,
-    wxRIBBON_SCROLL_BTN_HOVERED = 4,
-    wxRIBBON_SCROLL_BTN_ACTIVE = 8,
-
-    wxRIBBON_SCROLL_BTN_STATE_MASK = 12,
-
-    wxRIBBON_SCROLL_BTN_FOR_OTHER = 0,
-    wxRIBBON_SCROLL_BTN_FOR_TABS = 16,
-    wxRIBBON_SCROLL_BTN_FOR_PAGE = 32,
-
-    wxRIBBON_SCROLL_BTN_FOR_MASK = 48
-};
-
 enum wxRibbonButtonKind
 {
     wxRIBBON_BUTTON_NORMAL    = 1 << 0,
@@ -772,7 +750,7 @@ protected:
     wxPen m_ribbon_toggle_pen;
 
     double m_cached_tab_separator_visibility;
-    long m_flags;
+    long m_flags{0};
 
     int m_tab_separation_size;
     int m_page_border_left;

@@ -36,7 +36,6 @@
 wxOverlay::wxOverlay()
 {
     m_impl = new wxOverlayImpl();
-    m_inDrawing = false;
 }
 
 wxOverlay::~wxOverlay()
@@ -133,12 +132,9 @@ void wxDCOverlay::Clear()
 
 wxOverlayImpl::wxOverlayImpl()
 {
-     m_window = nullptr ;
-     m_x = m_y = m_width = m_height = 0 ;
 }
 
-wxOverlayImpl::~wxOverlayImpl()
-= default;
+wxOverlayImpl::~wxOverlayImpl() = default;
 
 bool wxOverlayImpl::IsOk()
 {

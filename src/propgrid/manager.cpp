@@ -153,8 +153,6 @@ wxPropertyGridPage::wxPropertyGridPage()
     :  wxPropertyGridInterface() 
 {
     m_pState = this; // wxPropertyGridInterface to point to State
-    m_manager = nullptr;
-    m_isDefault = false;
 }
 
 wxPropertyGridPage::~wxPropertyGridPage()

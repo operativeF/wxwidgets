@@ -2488,8 +2488,6 @@ class wxMBConv_win32 : public wxMBConv
 public:
     wxMBConv_win32()
     {
-        m_CodePage = CP_ACP;
-        m_minMBCharWidth = 0;
     }
 
     wxMBConv_win32(const wxMBConv_win32& conv)
@@ -2682,11 +2680,11 @@ public:
 
 private:
     // the code page we're working with
-    long m_CodePage;
+    long m_CodePage{CP_ACP};
 
     // cached result of GetMBNulLen(), set to 0 initially meaning
     // "unknown"
-    size_t m_minMBCharWidth;
+    size_t m_minMBCharWidth{0};
 };
 
 #endif // wxHAVE_WIN32_MB2WC

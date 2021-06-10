@@ -401,7 +401,9 @@ public:
 private:
     wxDataViewItemArray m_hash;
     unsigned int m_nextFreeID;
-    bool m_ordered;
+
+    // IDs are ordered until an item gets deleted or inserted
+    bool m_ordered{true};
 };
 
 // ---------------------------------------------------------
@@ -799,9 +801,9 @@ private:
     virtual wxDataViewItem DoGetCurrentItem() const = 0;
     virtual void DoSetCurrentItem(const wxDataViewItem& item) = 0;
 
-    wxDataViewModel        *m_model;
-    wxDataViewColumn       *m_expander_column;
-    int m_indent ;
+    wxDataViewModel        *m_model{nullptr};
+    wxDataViewColumn       *m_expander_column{nullptr};
+    int m_indent{8};
 
 public:
 	wxClassInfo *GetClassInfo() const override;

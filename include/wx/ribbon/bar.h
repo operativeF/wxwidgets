@@ -53,6 +53,28 @@ enum wxRibbonDisplayMode
     wxRIBBON_BAR_EXPANDED
 };
 
+enum wxRibbonScrollButtonStyle
+{
+    wxRIBBON_SCROLL_BTN_LEFT = 0,
+    wxRIBBON_SCROLL_BTN_RIGHT = 1,
+    wxRIBBON_SCROLL_BTN_UP = 2,
+    wxRIBBON_SCROLL_BTN_DOWN = 3,
+
+    wxRIBBON_SCROLL_BTN_DIRECTION_MASK = 3,
+
+    wxRIBBON_SCROLL_BTN_NORMAL = 0,
+    wxRIBBON_SCROLL_BTN_HOVERED = 4,
+    wxRIBBON_SCROLL_BTN_ACTIVE = 8,
+
+    wxRIBBON_SCROLL_BTN_STATE_MASK = 12,
+
+    wxRIBBON_SCROLL_BTN_FOR_OTHER = 0,
+    wxRIBBON_SCROLL_BTN_FOR_TABS = 16,
+    wxRIBBON_SCROLL_BTN_FOR_PAGE = 32,
+
+    wxRIBBON_SCROLL_BTN_FOR_MASK = 48
+};
+
 class WXDLLIMPEXP_RIBBON wxRibbonBarEvent : public wxNotifyEvent
 {
 public:
@@ -201,22 +223,22 @@ protected:
     wxRect m_tab_scroll_right_button_rect;
     wxRect m_toggle_button_rect;
     wxRect m_help_button_rect;
-    long m_flags;
-    int m_tabs_total_width_ideal;
-    int m_tabs_total_width_minimum;
-    int m_tab_margin_left;
-    int m_tab_margin_right;
-    int m_tab_height;
-    int m_tab_scroll_amount;
-    int m_current_page;
-    int m_current_hovered_page;
-    int m_tab_scroll_left_button_state;
-    int m_tab_scroll_right_button_state;
-    bool m_tab_scroll_buttons_shown;
-    bool m_arePanelsShown;
+    long m_flags{0};
+    int m_tabs_total_width_ideal{0};
+    int m_tabs_total_width_minimum{0};
+    int m_tab_margin_left{0};
+    int m_tab_margin_right{0};
+    int m_tab_height{0};
+    int m_tab_scroll_amount{0};
+    int m_current_page{-1};
+    int m_current_hovered_page{-1};
+    int m_tab_scroll_left_button_state{wxRIBBON_SCROLL_BTN_NORMAL};
+    int m_tab_scroll_right_button_state{wxRIBBON_SCROLL_BTN_NORMAL};
+    bool m_tab_scroll_buttons_shown{false};
+    bool m_arePanelsShown{true};
     bool m_bar_hovered;
     bool m_toggle_button_hovered;
-    bool m_help_button_hovered;
+    bool m_help_button_hovered{false};
 
     wxRibbonDisplayMode m_ribbon_state;
 

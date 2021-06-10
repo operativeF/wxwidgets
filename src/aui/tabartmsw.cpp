@@ -24,14 +24,10 @@
 
 wxAuiMSWTabArt::wxAuiMSWTabArt()
 {
-    m_closeBtnSize = wxDefaultSize;
-    m_maxTabHeight = 0;
-
     m_themed = wxUxThemeIsActive();
 }
 
-wxAuiMSWTabArt::~wxAuiMSWTabArt()
-= default;
+wxAuiMSWTabArt::~wxAuiMSWTabArt() = default;
 
 wxAuiTabArt* wxAuiMSWTabArt::Clone()
 {

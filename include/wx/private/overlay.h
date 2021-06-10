@@ -53,12 +53,12 @@ public:
     void Clear(wxDC* dc);
 
 private:
-    wxBitmap m_bmpSaved ;
-    int m_x ;
-    int m_y ;
-    int m_width ;
-    int m_height ;
-    wxWindow* m_window ;
+    wxBitmap m_bmpSaved;
+    int m_x{0};
+    int m_y{0};
+    int m_width{0};
+    int m_height{0};
+    wxWindow* m_window{nullptr};
 };
 
 #endif // wxHAS_NATIVE_OVERLAY/!wxHAS_NATIVE_OVERLAY

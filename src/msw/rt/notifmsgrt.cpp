@@ -39,9 +39,9 @@ using namespace ABI::Windows::Data::Xml::Dom;
 
 namespace rt = wxWinRT;
 
-typedef ABI::Windows::Foundation::ITypedEventHandler<ToastNotification *, ::IInspectable *> DesktopToastActivatedEventHandler;
-typedef ABI::Windows::Foundation::ITypedEventHandler<ToastNotification *, ToastDismissedEventArgs *> DesktopToastDismissedEventHandler;
-typedef ABI::Windows::Foundation::ITypedEventHandler<ToastNotification *, ToastFailedEventArgs *> DesktopToastFailedEventHandler;
+using DesktopToastActivatedEventHandler = ABI::Windows::Foundation::ITypedEventHandler<ToastNotification *, ::IInspectable *>;
+using DesktopToastDismissedEventHandler = ABI::Windows::Foundation::ITypedEventHandler<ToastNotification *, ToastDismissedEventArgs *>;
+using DesktopToastFailedEventHandler = ABI::Windows::Foundation::ITypedEventHandler<ToastNotification *, ToastFailedEventArgs *>;
 
 class wxToastNotifMsgImpl;
 

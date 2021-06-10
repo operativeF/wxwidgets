@@ -203,10 +203,10 @@ RGBAImage::RGBAImage(int width_, int height_, float scale_, const unsigned char 
 	}
 }
 
-RGBAImage::RGBAImage(const XPM &xpm) {
-	height = xpm.GetHeight();
-	width = xpm.GetWidth();
-	scale = 1;
+RGBAImage::RGBAImage(const XPM &xpm)
+	: height(xpm.GetHeight()),
+	  width(xpm.GetWidth())
+{
 	pixelBytes.resize(CountBytes());
 	for (int y=0; y<height; y++) {
 		for (int x=0; x<width; x++) {

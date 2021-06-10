@@ -192,7 +192,7 @@ struct wxCmdLineParserData
 {
     // options
     wxString m_switchChars;     // characters which may start an option
-    bool m_enableLongOptions;   // true if long options are enabled
+    bool m_enableLongOptions{true};   // true if long options are enabled
     wxString m_logo;            // some extra text to show in Usage()
 
     // cmd line data
@@ -394,7 +394,6 @@ wxCmdLineParserData::wxCmdLineParserData()
     : m_switchChars("/-")
 #endif
 {
-    m_enableLongOptions = true;
 }
 
 namespace

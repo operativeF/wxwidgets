@@ -269,7 +269,6 @@ wxXmlResource *wxXmlResource::ms_instance = nullptr;
 wxXmlResource::wxXmlResource(int flags, const wxString& domain)
 {
     m_flags = flags;
-    m_version = -1;
     m_data = new wxXmlResourceDataRecords;
     SetDomain(domain);
 }
@@ -277,7 +276,6 @@ wxXmlResource::wxXmlResource(int flags, const wxString& domain)
 wxXmlResource::wxXmlResource(const wxString& filemask, int flags, const wxString& domain)
 {
     m_flags = flags;
-    m_version = -1;
     m_data = new wxXmlResourceDataRecords;
     SetDomain(domain);
     Load(filemask);

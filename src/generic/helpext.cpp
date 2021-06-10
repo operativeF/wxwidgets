@@ -64,10 +64,6 @@ wxIMPLEMENT_CLASS(wxExtHelpController, wxHelpControllerBase);
 wxExtHelpController::wxExtHelpController(wxWindow* parentWindow)
                    : wxHelpControllerBase(parentWindow)
 {
-    m_MapList = nullptr;
-    m_NumOfEntries = 0;
-    m_BrowserIsNetscape = false;
-
     wxChar *browser = wxGetenv(WXEXTHELP_ENVVAR_BROWSER);
     if (browser)
     {

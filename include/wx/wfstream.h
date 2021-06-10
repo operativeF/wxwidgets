@@ -54,8 +54,8 @@ protected:
     wxFileOffset OnSysTell() const override;
 
 protected:
-    wxFile *m_file;
-    bool m_file_destroy;
+    wxFile *m_file{nullptr};
+    bool m_file_destroy{false};
 };
 
 class WXDLLIMPEXP_BASE wxFileOutputStream : public wxOutputStream
@@ -87,8 +87,8 @@ protected:
     wxFileOffset OnSysTell() const override;
 
 protected:
-    wxFile *m_file;
-    bool m_file_destroy;
+    wxFile *m_file{nullptr};
+    bool m_file_destroy{false};
 };
 
 class WXDLLIMPEXP_BASE wxTempFileOutputStream : public wxOutputStream
@@ -215,8 +215,8 @@ protected:
     wxFileOffset OnSysTell() const override;
 
 protected:
-    wxFFile *m_file;
-    bool m_file_destroy;
+    wxFFile *m_file{nullptr};
+    bool m_file_destroy{false};
 };
 
 class WXDLLIMPEXP_BASE wxFFileOutputStream : public wxOutputStream
@@ -248,8 +248,8 @@ protected:
     wxFileOffset OnSysTell() const override;
 
 protected:
-    wxFFile *m_file;
-    bool m_file_destroy;
+    wxFFile *m_file{nullptr};
+    bool m_file_destroy{false};
 };
 
 class WXDLLIMPEXP_BASE wxFFileStream : public wxFFileInputStream,

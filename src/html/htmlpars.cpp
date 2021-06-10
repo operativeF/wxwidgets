@@ -68,17 +68,9 @@ public:
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlParser,wxObject);
 
-wxHtmlParser::wxHtmlParser()
-     
-      
+wxHtmlParser::wxHtmlParser() 
 {
-    m_Source = nullptr;
     m_entitiesParser = new wxHtmlEntitiesParser;
-    m_Tags = nullptr;
-    m_CurTag = nullptr;
-    m_TextPieces = nullptr;
-    m_CurTextPiece = 0;
-    m_SavedStates = nullptr;
 }
 
 wxHtmlParser::~wxHtmlParser()

@@ -566,8 +566,8 @@ protected:
     wxMenuInfoHelperList m_menuInfos;
 #endif
 
-    // the frame we are attached to (may be NULL)
-    wxFrame *m_menuBarFrame;
+    // the frame we are attached to (may be nullptr)
+    wxFrame *m_menuBarFrame{nullptr};
 };
 #endif
 

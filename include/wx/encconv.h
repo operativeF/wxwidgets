@@ -145,9 +145,10 @@ class WXDLLIMPEXP_BASE wxEncodingConverter : public wxObject
             }
 
     private:
-            wchar_t *m_Table;
-            bool m_UnicodeInput, m_UnicodeOutput;
-            bool m_JustCopy;
+            wchar_t *m_Table{nullptr};
+            bool m_UnicodeInput{false};
+            bool m_UnicodeOutput{false};
+            bool m_JustCopy{false};
 };
 
 #endif  // _WX_ENCCONV_H_

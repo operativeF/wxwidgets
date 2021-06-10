@@ -38,10 +38,6 @@ class LocaleId
 public:
     LocaleId()
     {
-#if wxUSE_INTL
-        m_wxloc = nullptr;
-#endif // wxUSE_INTL
-        m_cloc = nullptr;
     }
 
     ~LocaleId()
@@ -87,11 +83,11 @@ private:
 
 #if wxUSE_INTL
     // Non-owned pointer to wxLocale which was used.
-    wxLocale *m_wxloc;
+    wxLocale *m_wxloc{nullptr};
 #endif // wxUSE_INTL
 
     // Owned pointer to the C locale string.
-    char *m_cloc;
+    char *m_cloc{nullptr};
 };
 
 } // anonymous namespace

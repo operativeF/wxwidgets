@@ -83,7 +83,6 @@ class wxTangoArtProvider : public wxArtProvider
 public:
     wxTangoArtProvider()
     {
-        m_imageHandledAdded = false;
     }
 
     wxTangoArtProvider(const wxTangoArtProvider&) = delete;
@@ -95,7 +94,7 @@ protected:
                                   const wxSize& size) override;
 
 private:
-    bool m_imageHandledAdded;
+    bool m_imageHandledAdded{false};
 };
 
 } // anonymous namespace

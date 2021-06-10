@@ -173,11 +173,6 @@ void wxSizerItem::Init(const wxSizerFlags& flags)
 wxSizerItem::wxSizerItem()
 {
     Init();
-
-    m_proportion = 0;
-    m_border = 0;
-    m_flag = 0;
-    m_id = wxID_NONE;
 }
 
 // window item

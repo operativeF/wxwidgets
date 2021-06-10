@@ -407,7 +407,7 @@ private:
                       bool recursive);
 
 private:
-    long m_version;
+    long m_version{-1};
 
     int m_flags;
     std::vector<wxXmlResourceHandler*> m_handlers;

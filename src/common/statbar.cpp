@@ -115,7 +115,6 @@ WX_DEFINE_EXPORTED_OBJARRAY(wxStatusBarPaneArray)
 
 wxStatusBarBase::wxStatusBarBase()
 {
-    m_bSameWidthForAllPanes = true;
 }
 
 wxStatusBarBase::~wxStatusBarBase()

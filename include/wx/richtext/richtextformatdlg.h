@@ -359,6 +359,7 @@ public:
     void UpdateFonts();
 
     /// Does this face name exist?
+    // FIXME: Case sensitivity; does it matter here?
     bool HasFaceName(const wxString& faceName) const
     {
         return std::find(m_faceNames.cbegin(), m_faceNames.cend(), faceName) != m_faceNames.cend();

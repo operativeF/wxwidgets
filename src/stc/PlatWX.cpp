@@ -146,8 +146,8 @@ int GetAscent(Font& f)
 
 } // anonymous namespace
 
-Font::Font() {
-    fid = nullptr;
+Font::Font()
+{
 }
 
 Font::~Font() = default;
@@ -992,17 +992,18 @@ public:
                         const char *s, int len, UINT fuOptions);
 
 private:
-    bool m_unicodeMode;
-    int m_x, m_y;
-    int m_logPixelsY;
+    bool m_unicodeMode{false};
+    int m_x{0};
+    int m_y{0};
+    int m_logPixelsY{72};
 
-    bool m_ownRenderTarget;
-    int m_clipsActive;
+    bool m_ownRenderTarget{false};
+    int m_clipsActive{0};
 
-    XYPOSITION m_yAscent;
-    XYPOSITION m_yDescent;
-    XYPOSITION m_yInternalLeading;
-    XYPOSITION m_averageCharWidth;
+    XYPOSITION m_yAscent{2};
+    XYPOSITION m_yDescent{1};
+    XYPOSITION m_yInternalLeading{0};
+    XYPOSITION m_averageCharWidth{1};
 
     wxCOMPtr<IDWriteFactory> m_pDWriteFactory;
     wxCOMPtr<ID2D1RenderTarget> m_pRenderTarget;
@@ -1010,28 +1011,13 @@ private:
     wxCOMPtr<ID2D1BitmapBrush> m_pPatternBrush;
     wxCOMPtr<IDWriteTextFormat> m_pTextFormat;
 
-    SurfaceDataD2D* m_surfaceData;
-    FontID m_curFontID;
+    SurfaceDataD2D* m_surfaceData{nullptr};
+    FontID m_curFontID{nullptr};
 };
 
 SurfaceD2D::SurfaceD2D()
     : m_pDWriteFactory(::wxDWriteFactory())
 {
-    m_unicodeMode = false;
-    m_x = 0;
-    m_y = 0;
-    m_logPixelsY = 72;
-
-    m_ownRenderTarget = false;
-    m_clipsActive = 0;
-
-    m_yAscent = 2;
-    m_yDescent = 1;
-    m_yInternalLeading = 0;
-    m_averageCharWidth = 1;
-
-    m_surfaceData = nullptr;
-    m_curFontID = nullptr;
 }
 
 SurfaceD2D::~SurfaceD2D()

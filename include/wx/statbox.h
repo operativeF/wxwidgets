@@ -55,14 +55,14 @@ protected:
 
     // If non-null, the window used as our label. This window is owned by the
     // static box and will be deleted when it is.
-    wxWindow* m_labelWin;
+    wxWindow* m_labelWin{nullptr};
 
     // For boxes with window label this member variable is used instead of
     // m_isEnabled to remember the last value passed to Enable(). It is
     // required because the box itself doesn't get disabled by Enable(false) in
     // this case (see comments in Enable() implementation), and m_isEnabled
     // must correspond to its real state.
-    bool m_areChildrenEnabled;
+    bool m_areChildrenEnabled{true};
 };
 
 #if defined(__WXUNIVERSAL__)

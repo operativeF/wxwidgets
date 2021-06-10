@@ -1087,41 +1087,41 @@ public:
     }
 
 protected:
-    wxObject*         m_eventObject;
+    wxObject*         m_eventObject{nullptr};
     wxEventType       m_eventType;
-    long              m_timeStamp;
+    long              m_timeStamp{0};
     int               m_id;
 
 public:
     // m_callbackUserData is for internal usage only
-    wxObject*         m_callbackUserData;
+    wxObject*         m_callbackUserData{nullptr};
 
 private:
     // If this handler
-    wxEvtHandler *m_handlerToProcessOnlyIn;
+    wxEvtHandler *m_handlerToProcessOnlyIn{nullptr};
 
 protected:
     // the propagation level: while it is positive, we propagate the event to
     // the parent window (if any)
-    int               m_propagationLevel;
+    int               m_propagationLevel{wxEVENT_PROPAGATE_NONE};
 
     // The object that the event is being propagated from, initially NULL and
     // only set by wxPropagateOnce.
-    wxEvtHandler*     m_propagatedFrom;
+    wxEvtHandler*     m_propagatedFrom{nullptr};
 
-    bool              m_skipped;
-    bool              m_isCommandEvent;
+    bool              m_skipped{false};
+    bool              m_isCommandEvent{false};
 
     // initially false but becomes true as soon as WasProcessed() is called for
     // the first time, as this is done only by ProcessEvent() it explains the
     // variable name: it becomes true after ProcessEvent() was called at least
     // once for this event
-    bool m_wasProcessed;
+    bool m_wasProcessed{false};
 
     // This one is initially false too, but can be set to true to indicate that
     // the event will be passed to another handler if it's not processed in
     // this one.
-    bool m_willBeProcessedAgain;
+    bool m_willBeProcessedAgain{false};
 
 protected:
     wxEvent(const wxEvent&);            // for implementing Clone()
@@ -4065,13 +4065,13 @@ protected:
     static wxEventHashTable   sm_eventHashTable;
     virtual wxEventHashTable& GetEventHashTable() const;
 
-    wxEvtHandler*       m_nextHandler;
-    wxEvtHandler*       m_previousHandler;
+    wxEvtHandler*       m_nextHandler{nullptr};
+    wxEvtHandler*       m_previousHandler{nullptr};
 
     using DynamicEvents = std::vector<wxDynamicEventTableEntry *>;
-    DynamicEvents* m_dynamicEvents;
+    DynamicEvents* m_dynamicEvents{nullptr};
 
-    wxList*             m_pendingEvents;
+    wxList*             m_pendingEvents{nullptr};
 
 #if wxUSE_THREADS
     // critical section protecting m_pendingEvents
@@ -4079,7 +4079,7 @@ protected:
 #endif // wxUSE_THREADS
 
     // Is event handler enabled?
-    bool                m_enabled;
+    bool                m_enabled{true};
 
 
     // The user data: either an object which will be deleted by the container
@@ -4094,7 +4094,7 @@ protected:
     };
 
     // what kind of data do we have?
-    wxClientDataType m_clientDataType;
+    wxClientDataType m_clientDataType{wxClientDataType::None};
 
     // client data accessors
     virtual void DoSetClientObject( wxClientData *data );

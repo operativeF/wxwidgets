@@ -48,7 +48,7 @@ class RGBAImage {
 	RGBAImage &operator=(const RGBAImage &);
 	int height;
 	int width;
-	float scale;
+	float scale{1};
 	std::vector<unsigned char> pixelBytes;
 public:
 	RGBAImage(int width_, int height_, float scale_, const unsigned char *pixels_);

@@ -898,8 +898,6 @@ wxIMPLEMENT_CLASS(wxWindowsPageSetupDialog, wxPageSetupDialogBase);
 
 wxWindowsPageSetupDialog::wxWindowsPageSetupDialog()
 {
-    m_dialogParent = nullptr;
-    m_pageDlg = nullptr;
 }
 
 wxWindowsPageSetupDialog::wxWindowsPageSetupDialog(wxWindow *p, wxPageSetupDialogData *data)

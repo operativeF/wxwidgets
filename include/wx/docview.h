@@ -270,11 +270,11 @@ protected:
     // hook the document into event handlers chain here
     bool TryBefore(wxEvent& event) override;
 
-    wxDocument*       m_viewDocument;
+    wxDocument*       m_viewDocument{nullptr};
     wxString          m_viewTypeName;
-    wxWindow*         m_viewFrame;
+    wxWindow*         m_viewFrame{nullptr};
 
-    wxDocChildFrameAnyBase *m_docChildFrame;
+    wxDocChildFrameAnyBase *m_docChildFrame{nullptr};
 
 private:
     wxDECLARE_ABSTRACT_CLASS(wxView);
@@ -532,12 +532,12 @@ protected:
     // return the command processor for the current document, if any
     wxCommandProcessor *GetCurrentCommandProcessor() const;
 
-    int               m_defaultDocumentNameCounter;
-    int               m_maxDocsOpen;
+    int               m_defaultDocumentNameCounter{1};
+    int               m_maxDocsOpen{INT_MAX};
     wxList            m_docs;
     wxList            m_templates;
-    wxView*           m_currentView;
-    wxFileHistory*    m_fileHistory;
+    wxView*           m_currentView{nullptr};
+    wxFileHistory*    m_fileHistory{nullptr};
     wxString          m_lastDirectory;
     static wxDocManager* sm_docManager;
 

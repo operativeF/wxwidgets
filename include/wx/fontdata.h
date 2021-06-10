@@ -60,21 +60,20 @@ public:
 
     wxNativeEncodingInfo& EncodingInfo() { return m_encodingInfo; }
 
-
     // public for backwards compatibility only: don't use directly
     wxColour        m_fontColour;
-    bool            m_showHelp;
-    bool            m_allowSymbols;
-    bool            m_enableEffects;
+    bool            m_showHelp{false};
+    bool            m_allowSymbols{true};
+    bool            m_enableEffects{true};
     wxFont          m_initialFont;
     wxFont          m_chosenFont;
-    int             m_minSize;
-    int             m_maxSize;
+    int             m_minSize{0};
+    int             m_maxSize{0};
 
 private:
-    wxFontEncoding       m_encoding;
+    wxFontEncoding       m_encoding{wxFONTENCODING_SYSTEM};
     wxNativeEncodingInfo m_encodingInfo;
-    int                  m_restrictSelection;
+    int                  m_restrictSelection{wxFONTRESTRICT_NONE};
 
     wxDECLARE_DYNAMIC_CLASS(wxFontData);
 };

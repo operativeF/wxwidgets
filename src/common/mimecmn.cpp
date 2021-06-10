@@ -277,7 +277,6 @@ wxFileType::wxFileType(const wxFileTypeInfo& info)
 
 wxFileType::wxFileType()
 {
-    m_info = nullptr;
     m_impl = new wxFileTypeImpl;
 }
 
@@ -576,7 +575,6 @@ bool wxMimeTypesManager::IsOfType(const wxString& mimeType,
 
 wxMimeTypesManager::wxMimeTypesManager()
 {
-    m_impl = nullptr;
 }
 
 wxMimeTypesManager::~wxMimeTypesManager()

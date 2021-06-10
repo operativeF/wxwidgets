@@ -571,8 +571,6 @@ class wxGDIPlusRenderer : public wxGraphicsRenderer
 public :
     wxGDIPlusRenderer()
     {
-        m_loaded = -1;
-        m_gditoken = 0;
     }
 
     ~wxGDIPlusRenderer() override
@@ -676,8 +674,8 @@ protected :
     friend class wxGDIPlusRendererModule;
 
 private :
-    int m_loaded;
-    ULONG_PTR m_gditoken;
+    int m_loaded{-1};
+    ULONG_PTR m_gditoken{0};
 
 public:
 	wxClassInfo *GetClassInfo() const override;

@@ -288,7 +288,6 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxPrintNativeDataBase, wxObject);
 
 wxPrintNativeDataBase::wxPrintNativeDataBase()
 {
-    m_ref = 1;
 }
 
 //----------------------------------------------------------------------------
@@ -316,20 +315,17 @@ wxIMPLEMENT_CLASS(wxPrinterBase, wxObject);
 
 wxPrinterBase::wxPrinterBase(wxPrintDialogData *data)
 {
-    m_currentPrintout = nullptr;
-    sm_abortWindow = nullptr;
-    sm_abortIt = false;
     if (data)
         m_printDialogData = (*data);
-    sm_lastError = wxPrinterError::NoError;
 }
 
 wxWindow *wxPrinterBase::sm_abortWindow = nullptr;
+
 bool wxPrinterBase::sm_abortIt = false;
+
 wxPrinterError wxPrinterBase::sm_lastError = wxPrinterError::NoError;
 
-wxPrinterBase::~wxPrinterBase()
-= default;
+wxPrinterBase::~wxPrinterBase() = default;
 
 wxPrintAbortDialog *wxPrinterBase::CreateAbortWindow(wxWindow *parent, wxPrintout * printout)
 {
@@ -585,20 +581,9 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxPrintout, wxObject);
 wxPrintout::wxPrintout(const wxString& title)
     : m_printoutTitle(title)
 {
-    m_printoutDC = nullptr;
-    m_pageWidthMM = 0;
-    m_pageHeightMM = 0;
-    m_pageWidthPixels = 0;
-    m_pageHeightPixels = 0;
-    m_PPIScreenX = 0;
-    m_PPIScreenY = 0;
-    m_PPIPrinterX = 0;
-    m_PPIPrinterY = 0;
-    m_preview = nullptr;
 }
 
-wxPrintout::~wxPrintout()
-= default;
+wxPrintout::~wxPrintout() = default;
 
 bool wxPrintout::OnBeginDocument(int WXUNUSED(startPage), int WXUNUSED(endPage))
 {

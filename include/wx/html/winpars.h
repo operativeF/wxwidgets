@@ -169,19 +169,19 @@ private:
     void AddPreBlock(const wxString& text);
 
     bool m_tmpLastWasSpace;
-    wxChar *m_tmpStrBuf;
-    size_t  m_tmpStrBufSize;
+    wxChar *m_tmpStrBuf{nullptr};
+    size_t  m_tmpStrBufSize{0};
         // temporary variables used by AddText
     wxHtmlWindowInterface *m_windowInterface;
             // window we're parsing for
     double m_PixelScale, m_FontScale;
-    wxDC *m_DC;
+    wxDC *m_DC{nullptr};
             // Device Context we're parsing for
     static wxList m_Modules;
             // list of tags modules (see wxHtmlTagsModule for details)
             // This list is used to initialize m_Handlers member.
 
-    wxHtmlContainerCell *m_Container;
+    wxHtmlContainerCell *m_Container{nullptr};
             // current container. See Open/CloseContainer for details.
 
     int m_FontBold, m_FontItalic, m_FontUnderlined, m_FontFixed; // this is not true,false but 1,0, we need it for indexing
@@ -193,9 +193,10 @@ private:
             // basic font parameters.
     wxHtmlLinkInfo m_Link;
             // actual hypertext link or empty string
-    bool m_UseLink;
+    bool m_UseLink{false};
             // true if m_Link is not empty
-    int m_CharHeight, m_CharWidth;
+    int m_CharHeight{0};
+    int m_CharWidth{0};
             // average height of normal-sized text
     int m_Align;
             // actual alignment
@@ -217,13 +218,13 @@ private:
             // html font sizes and faces of fixed and proportional fonts
 
     // current whitespace handling mode
-    WhitespaceMode m_whitespaceMode;
+    WhitespaceMode m_whitespaceMode{Whitespace_Normal};
 
-    wxHtmlWordCell *m_lastWordCell;
+    wxHtmlWordCell *m_lastWordCell{nullptr};
 
     // current position on line, in num. of characters; used to properly
     // expand TABs; only updated while inside <pre>
-    int m_posColumn;
+    int m_posColumn{0};
 };
 
 

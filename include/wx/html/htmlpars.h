@@ -169,14 +169,15 @@ protected:
 
 protected:
     // DOM tree:
-    wxHtmlTag *m_CurTag;
-    wxHtmlTag *m_Tags;
-    wxHtmlTextPieces *m_TextPieces;
-    size_t m_CurTextPiece;
+    wxHtmlTag *m_CurTag{nullptr};
+    wxHtmlTag *m_Tags{nullptr};
+    wxHtmlTextPieces *m_TextPieces{nullptr};
+    size_t m_CurTextPiece{0};
 
-    const wxString *m_Source;
+    // FIXME: const?
+    const wxString *m_Source{nullptr};
 
-    wxHtmlParserState *m_SavedStates;
+    wxHtmlParserState *m_SavedStates{nullptr};
 
     // handlers that handle particular tags. The table is accessed by
     // key = tag's name.

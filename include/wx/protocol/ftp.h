@@ -150,17 +150,17 @@ protected:
     wxString        m_lastResult;
 
     // true if there is an FTP transfer going on
-    bool            m_streaming;
+    bool            m_streaming{false};
 
     // although this should be set to ASCII by default according to STD9,
     // we will use BINARY transfer mode by default for backwards compatibility
-    TransferMode    m_currentTransfermode;
+    TransferMode    m_currentTransfermode{NONE};
 
-    bool            m_bPassive;
+    bool            m_bPassive{true};
 
     // following is true when  a read or write times out, we then assume
     // the connection is dead and abort. we avoid additional delays this way
-    bool            m_bEncounteredError;
+    bool            m_bEncounteredError{false};
 
 
     friend class wxInputFTPStream;

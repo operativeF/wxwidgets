@@ -45,10 +45,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPrintPaperType, wxObject);
 
 wxPrintPaperType::wxPrintPaperType()
 {
-    m_paperId = wxPaperSize::None;
-    m_platformId = 0;
-    m_width = 0;
-    m_height = 0;
 }
 
 wxPrintPaperType::wxPrintPaperType(wxPaperSize paperId, int platformId, const wxString& name, int w, int h)

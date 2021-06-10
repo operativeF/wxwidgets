@@ -154,10 +154,6 @@ wxDEFINE_TIED_SCOPED_PTR_TYPE(wxEventLoopBase)
 
 wxAppConsoleBase::wxAppConsoleBase()
 {
-    m_traits = nullptr;
-    m_mainLoop = nullptr;
-    m_bDoPendingEventProcessing = true;
-
     ms_appInstance = reinterpret_cast<wxAppConsole *>(this);
 
 #ifdef __WXDEBUG__
@@ -1008,8 +1004,6 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
     class StackDump : public wxStackWalker
     {
     public:
-        StackDump() { m_numFrames = 0; }
-
         const wxString& GetStackTrace() const { return m_stackTrace; }
 
     protected:
@@ -1058,7 +1052,7 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
 
     private:
         wxString m_stackTrace;
-        unsigned m_numFrames;
+        unsigned m_numFrames{0};
     };
 
     StackDump dump;

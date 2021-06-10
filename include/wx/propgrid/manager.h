@@ -132,14 +132,14 @@ protected:
 
     //virtual bool ProcessEvent( wxEvent& event );
 
-    wxPropertyGridManager*  m_manager;
+    wxPropertyGridManager*  m_manager{nullptr};
 
     // Toolbar tool id. Note that this is only valid when the tool bar
     // exists.
     int                     m_toolId;
 
 private:
-    bool                    m_isDefault; // is this base page object?
+    bool                    m_isDefault{false}; // is this base page object?
 
     wxDECLARE_EVENT_TABLE();
 };

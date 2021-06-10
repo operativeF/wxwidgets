@@ -38,15 +38,18 @@ public:
     ~wxArchiveFSHandler() override;
 
 private:
-    class wxArchiveFSCache *m_cache;
+    class wxArchiveFSCache *m_cache{nullptr};
     wxFileSystem m_fs;
 
     // these vars are used by FindFirst/Next:
-    class wxArchiveFSCacheData *m_Archive;
-    struct wxArchiveFSEntry *m_FindEntry;
-    wxString m_Pattern, m_BaseDir, m_ZipFile;
-    bool m_AllowDirs, m_AllowFiles;
-    wxArchiveFilenameHashMap *m_DirsFound;
+    class wxArchiveFSCacheData *m_Archive{nullptr};
+    struct wxArchiveFSEntry *m_FindEntry{nullptr};
+    wxString m_Pattern;
+    wxString m_BaseDir;
+    wxString m_ZipFile;
+    bool m_AllowDirs{true};
+    bool m_AllowFiles{true};
+    wxArchiveFilenameHashMap *m_DirsFound{nullptr};
 
     wxString DoFind();
 

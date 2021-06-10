@@ -677,8 +677,6 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxStreamBase, wxObject);
 
 wxStreamBase::wxStreamBase()
 {
-    m_lasterror = wxSTREAM_NO_ERROR;
-    m_lastcount = 0;
 }
 
 wxStreamBase::~wxStreamBase()
@@ -714,9 +712,6 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxInputStream, wxStreamBase);
 
 wxInputStream::wxInputStream()
 {
-    m_wback = nullptr;
-    m_wbacksize =
-    m_wbackcur = 0;
 }
 
 wxInputStream::~wxInputStream()

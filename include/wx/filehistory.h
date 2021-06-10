@@ -84,7 +84,7 @@ protected:
     size_t                      m_fileMaxFiles;
 
     // Style of the paths in the menu labels
-    wxFileHistoryMenuPathStyle m_menuPathStyle;
+    wxFileHistoryMenuPathStyle m_menuPathStyle{wxFH_PATH_SHOW_IF_DIFFERENT};
 
 private:
     void DoRefreshLabels();

@@ -72,10 +72,10 @@ protected:
     wxString         m_helpDir;
 
     // How many entries do we have in the map file?
-    int              m_NumOfEntries;
+    int              m_NumOfEntries{0};
 
     // A list containing all id,url,documentation triples.
-    wxList          *m_MapList;
+    wxList          *m_MapList{nullptr};
 
 private:
     // parse a single line of the map file (called by LoadFile())
@@ -91,7 +91,7 @@ private:
     wxString         m_BrowserName;
 
     // Is the viewer a variant of netscape?
-    bool             m_BrowserIsNetscape;
+    bool             m_BrowserIsNetscape{false};
 
     wxDECLARE_CLASS(wxExtHelpController);
 };

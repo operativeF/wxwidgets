@@ -104,14 +104,7 @@ static std::vector<HANDLE> gs_asyncThreads;
 struct wxExecuteData
 {
 public:
-    wxExecuteData()
-    {
-        // The rest is initialized in the code creating the objects of this
-        // class, but the thread handle can't be set until later, so initialize
-        // it here to ensure we never use an uninitialized value in our dtor.
-        hThread = nullptr;
-    }
-
+    wxExecuteData() = default;
     ~wxExecuteData()
     {
         if ( !::CloseHandle(hProcess) )
@@ -122,7 +115,11 @@ public:
 
     HWND       hWnd;          // window to send wxWM_PROC_TERMINATED to
     HANDLE     hProcess;      // handle of the process
-    HANDLE     hThread;       // handle of the thread monitoring its termination
+    
+    // The rest is initialized in the code creating the objects of this
+    // class, but the thread handle can't be set until later, so initialize
+    // it here to ensure we never use an uninitialized value in our dtor.
+    HANDLE     hThread{nullptr};       // handle of the thread monitoring its termination
     DWORD      dwProcessId;   // pid of the process
     wxProcess *handler;
     DWORD      dwExitCode;    // the exit code of the process

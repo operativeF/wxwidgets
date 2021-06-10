@@ -26,6 +26,19 @@ class WXDLLIMPEXP_FWD_PROPGRID wxPGArrayEditorDialog;
 #include "wx/textctrl.h"
 #include "wx/valtext.h"
 
+enum
+{
+    wxPG_UINT_HEX_LOWER,
+    wxPG_UINT_HEX_LOWER_PREFIX,
+    wxPG_UINT_HEX_LOWER_DOLLAR,
+    wxPG_UINT_HEX_UPPER,
+    wxPG_UINT_HEX_UPPER_PREFIX,
+    wxPG_UINT_HEX_UPPER_DOLLAR,
+    wxPG_UINT_DEC,
+    wxPG_UINT_OCT,
+    wxPG_UINT_TEMPLATE_MAX
+};
+
 // -----------------------------------------------------------------------
 
 //
@@ -258,9 +271,9 @@ public:
     wxVariant AddSpinStepValue(long stepScale) const override;
 
 protected:
-    wxByte      m_base;
-    wxByte      m_realBase; // translated to 8,16,etc.
-    wxByte      m_prefix;
+    wxByte      m_base{wxPG_UINT_DEC};
+    wxByte      m_realBase{10}; // translated to 8,16,etc.
+    wxByte      m_prefix{wxPG_PREFIX_NONE};
 private:
     
 
@@ -309,7 +322,7 @@ public:
     wxVariant AddSpinStepValue(long stepScale) const override;
 
 protected:
-    int m_precision;
+    int m_precision{-1};
 
 private:
     // Validation helper.
@@ -536,7 +549,7 @@ public:
 
 protected:
     // Used to detect if choices have been changed
-    wxPGChoicesData*        m_oldChoicesData;
+    wxPGChoicesData*        m_oldChoicesData{nullptr};
 
     // Needed to properly mark changed sub-properties
     long                    m_oldValue;
@@ -566,7 +579,7 @@ protected:
     virtual bool DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value) = 0;
 
     wxString  m_dlgTitle;  // Title for a dialog
-    long      m_dlgStyle;  // Dialog style
+    long      m_dlgStyle{wxCHOICEDLG_STYLE};  // Dialog style
 };
 
 // -----------------------------------------------------------------------
@@ -604,7 +617,7 @@ protected:
     wxString    m_wildcard;
     wxString    m_basePath; // If set, then show path relative to it
     wxString    m_initialPath; // If set, start the file dialog here
-    int         m_indFilter; // index to the selected filter
+    int         m_indFilter{-1}; // index to the selected filter
 };
 
 // -----------------------------------------------------------------------

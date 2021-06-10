@@ -126,10 +126,10 @@ protected:
     wxString        m_password;
 
     // this must be always updated by the derived classes!
-    wxProtocolError m_lastError;
+    wxProtocolError m_lastError{wxPROTO_NOERR};
 
 private:
-    wxProtocolLog *m_log;
+    wxProtocolLog *m_log{nullptr};
 
 public:
 	wxClassInfo *GetClassInfo() const override;

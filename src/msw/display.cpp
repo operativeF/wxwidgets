@@ -218,12 +218,6 @@ private:
     // keep loaded.
     struct GetDpiForMonitorData
     {
-        GetDpiForMonitorData()
-        {
-            m_pfnGetDpiForMonitor = nullptr;
-            m_initialized = false;
-        }
-
         bool TryLoad()
         {
             if ( !m_dllShcore.Load("shcore.dll", wxDL_VERBATIM | wxDL_QUIET) )
@@ -250,8 +244,8 @@ private:
         }
 
         wxDynamicLibrary m_dllShcore;
-        GetDpiForMonitor_t m_pfnGetDpiForMonitor;
-        bool m_initialized;
+        GetDpiForMonitor_t m_pfnGetDpiForMonitor{nullptr};
+        bool m_initialized{false};
     };
     static GetDpiForMonitorData ms_getDpiForMonitorData;
 
@@ -262,8 +256,8 @@ private:
 
     // The hidden window we use for receiving WM_SETTINGCHANGE and its class
     // name.
-    HWND m_hiddenHwnd;
-    const wxChar* m_hiddenClass;
+    HWND m_hiddenHwnd{nullptr};
+    const wxChar* m_hiddenClass{nullptr};
 };
 
 wxDisplayFactoryMSW::GetDpiForMonitorData
@@ -508,9 +502,6 @@ wxDisplayWndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 wxDisplayFactoryMSW::wxDisplayFactoryMSW()
 {
-    m_hiddenHwnd = nullptr;
-    m_hiddenClass = nullptr;
-
     DoRefreshMonitors();
 
     // Also create a hidden window to listen for WM_SETTINGCHANGE that we

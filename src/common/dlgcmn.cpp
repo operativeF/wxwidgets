@@ -115,13 +115,6 @@ bool wxDialogBase::sm_layoutAdaptation = false;
 
 wxDialogBase::wxDialogBase()
 {
-    m_returnCode = 0;
-    m_affirmativeId = wxID_OK;
-    m_escapeId = wxID_ANY;
-    m_layoutAdaptationLevel = 3;
-    m_layoutAdaptationDone = FALSE;
-    m_layoutAdaptationMode = wxDialogLayoutAdaptationMode::Default;
-
     // the dialogs have this flag on by default to prevent the events from the
     // dialog controls from reaching the parent frame which is usually
     // undesirable and can lead to unexpected and hard to find bugs

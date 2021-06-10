@@ -225,7 +225,7 @@ wxAny wxVariant::GetAny() const
 class WXDLLIMPEXP_BASE wxVariantDataLong: public wxVariantData
 {
 public:
-    wxVariantDataLong() { m_value = 0; }
+    wxVariantDataLong() = default;
     explicit wxVariantDataLong(long value) { m_value = value; }
 
     inline long GetValue() const { return m_value; }
@@ -262,7 +262,7 @@ public:
 #endif // wxUSE_ANY
 
 protected:
-    long m_value;
+    long m_value{0};
 };
 
 #ifndef wxLongLong_t
@@ -388,7 +388,7 @@ long wxVariant::GetLong() const
 class WXDLLIMPEXP_BASE wxVariantDoubleData: public wxVariantData
 {
 public:
-    wxVariantDoubleData() { m_value = 0.0; }
+    wxVariantDoubleData() = default;
     explicit wxVariantDoubleData(double value) { m_value = value; }
 
     inline double GetValue() const { return m_value; }
@@ -409,7 +409,7 @@ public:
 
     DECLARE_WXANY_CONVERSION()
 protected:
-    double m_value;
+    double m_value{0.0};
 };
 
 IMPLEMENT_TRIVIAL_WXANY_CONVERSION(double, wxVariantDoubleData)
@@ -521,7 +521,7 @@ double wxVariant::GetDouble() const
 class WXDLLIMPEXP_BASE wxVariantDataBool: public wxVariantData
 {
 public:
-    wxVariantDataBool() { m_value = false; }
+    wxVariantDataBool() = default;
     explicit wxVariantDataBool(bool value) { m_value = value; }
 
     inline bool GetValue() const { return m_value; }
@@ -542,7 +542,7 @@ public:
 
     DECLARE_WXANY_CONVERSION()
 protected:
-    bool m_value;
+    bool m_value{false};
 };
 
 IMPLEMENT_TRIVIAL_WXANY_CONVERSION(bool, wxVariantDataBool)

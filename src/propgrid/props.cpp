@@ -571,19 +571,6 @@ wxVariant wxIntProperty::AddSpinStepValue(long stepScale) const
 // wxUIntProperty
 // -----------------------------------------------------------------------
 
-enum
-{
-    wxPG_UINT_HEX_LOWER,
-    wxPG_UINT_HEX_LOWER_PREFIX,
-    wxPG_UINT_HEX_LOWER_DOLLAR,
-    wxPG_UINT_HEX_UPPER,
-    wxPG_UINT_HEX_UPPER_PREFIX,
-    wxPG_UINT_HEX_UPPER_DOLLAR,
-    wxPG_UINT_DEC,
-    wxPG_UINT_OCT,
-    wxPG_UINT_TEMPLATE_MAX
-};
-
 wxPG_IMPLEMENT_PROPERTY_CLASS(wxUIntProperty,wxNumericProperty,TextCtrl)
 
 
@@ -591,11 +578,6 @@ wxPG_IMPLEMENT_PROPERTY_CLASS(wxUIntProperty,wxNumericProperty,TextCtrl)
 wxUIntProperty::wxUIntProperty( const wxString& label, const wxString& name,
     unsigned long value ) : wxNumericProperty(label,name)
 {
-    
-    m_base = wxPG_UINT_DEC;
-    m_realBase = 10;
-    m_prefix = wxPG_PREFIX_NONE;
-
     SetValue((long)value);
 }
 
@@ -603,11 +585,6 @@ wxUIntProperty::wxUIntProperty( const wxString& label, const wxString& name,
 wxUIntProperty::wxUIntProperty( const wxString& label, const wxString& name,
     const wxULongLong& value ) : wxNumericProperty(label,name)
 {
-    
-    m_base = wxPG_UINT_DEC;
-    m_realBase = 10;
-    m_prefix = wxPG_PREFIX_NONE;
-
     SetValue(wxVariant(value));
 }
 #endif
@@ -880,7 +857,6 @@ wxFloatProperty::wxFloatProperty( const wxString& label,
                                             double value )
     : wxNumericProperty(label,name)
 {
-    m_precision = -1;
     SetValue(value);
 }
 
@@ -1536,7 +1512,6 @@ wxFlagsProperty::wxFlagsProperty( const wxString& label, const wxString& name,
         const wxArrayString& labels, const wxArrayInt& values, int value )
     : wxPGProperty(label,name)
 {
-    m_oldChoicesData = nullptr;
     m_flags |= wxPG_PROP_USE_DCC; // same default like wxBoolProperty
 
     if ( !labels.empty() )
@@ -1907,7 +1882,6 @@ wxFileProperty::wxFileProperty( const wxString& label, const wxString& name,
 {
     m_flags |= wxPG_PROP_SHOW_FULL_FILENAME;
     m_flags &= ~wxPG_PROP_ACTIVE_BTN; // Property button enabled only in not read-only mode.
-    m_indFilter = -1;
     m_wildcard = wxALL_FILES;
 
     SetValue(value);

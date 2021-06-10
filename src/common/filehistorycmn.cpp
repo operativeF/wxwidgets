@@ -67,10 +67,9 @@ wxString GetMRUEntryLabel(int n, const wxString& path)
 wxIMPLEMENT_DYNAMIC_CLASS(wxFileHistory, wxObject);
 
 wxFileHistoryBase::wxFileHistoryBase(size_t maxFiles, wxWindowID idBase)
+    : m_fileMaxFiles(maxFiles),
+      m_idBase(idBase)
 {
-    m_fileMaxFiles = maxFiles;
-    m_idBase = idBase;
-    m_menuPathStyle = wxFH_PATH_SHOW_IF_DIFFERENT;
 }
 
 /* static */

@@ -142,9 +142,6 @@ class WXDLLEXPORT wxGenericTreeItem
 public:
     wxGenericTreeItem()
     {
-        m_data = nullptr;
-        m_widthText =
-        m_heightText = -1;
     }
 
     wxGenericTreeItem( wxGenericTreeItem *parent,
@@ -329,10 +326,10 @@ private:
     // the smallest representation for the elements and by ordering
     // the members to avoid padding.
     wxString            m_text;         // label to be rendered for item
-    int                 m_widthText;
-    int                 m_heightText;
+    int                 m_widthText{-1};
+    int                 m_heightText{-1};
 
-    wxTreeItemData     *m_data;         // user-provided data
+    wxTreeItemData     *m_data{nullptr};         // user-provided data
 
     int                 m_state;        // item state
 

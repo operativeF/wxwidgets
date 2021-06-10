@@ -308,7 +308,7 @@ protected:
     bool             m_sizeUsingPixels;
 
     // Windows font handle, created on demand in GetHFONT()
-    HFONT            m_hFont;
+    HFONT            m_hFont{nullptr};
 
     // Native font info
     wxNativeFontInfo m_nativeFontInfo;
@@ -326,8 +326,6 @@ protected:
 
 wxFontRefData::wxFontRefData(const wxFontInfo& info)
 {
-    m_hFont = nullptr;
-
     m_sizeUsingPixels = info.IsUsingSizeInPixels();
     if ( m_sizeUsingPixels )
     {

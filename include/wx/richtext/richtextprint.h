@@ -142,7 +142,7 @@ private:
 private:
 
     wxRichTextBuffer*           m_richTextBuffer;
-    int                         m_numPages;
+    int                         m_numPages{wxRICHTEXT_PRINT_MAX_PAGES};
     std::vector<int>                  m_pageBreaksStart;
     std::vector<int>                  m_pageBreaksEnd;
     std::vector<int>                  m_pageYOffsets;
@@ -234,14 +234,14 @@ protected:
     virtual bool DoPrint(wxRichTextPrintout *printout, bool showPrintDialog);
 
 private:
-    wxPrintData*                m_printData;
+    wxPrintData*                m_printData{nullptr};
     wxPageSetupDialogData*      m_pageSetupData;
 
     wxRichTextHeaderFooterData  m_headerFooterData;
     wxString                    m_title;
     wxWindow*                   m_parentWindow;
-    wxRichTextBuffer*           m_richTextBufferPreview;
-    wxRichTextBuffer*           m_richTextBufferPrinting;
+    wxRichTextBuffer*           m_richTextBufferPreview{nullptr};
+    wxRichTextBuffer*           m_richTextBufferPrinting{nullptr};
     wxRect                      m_previewRect;
 
     wxRichTextPrinting(const wxRichTextPrinting&) = delete;

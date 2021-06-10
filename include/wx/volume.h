@@ -97,7 +97,7 @@ protected:
     wxString m_dispName;
 
     // have we been initialized correctly?
-    bool m_isOk;
+    bool m_isOk{false};
 };
 
 #if wxUSE_GUI

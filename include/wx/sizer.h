@@ -482,10 +482,10 @@ protected:
 
     wxPoint      m_pos;
     wxSize       m_minSize;
-    int          m_proportion;
-    int          m_border;
-    int          m_flag;
-    int          m_id;
+    int          m_proportion{0};
+    int          m_border{0};
+    int          m_flag{0};
+    int          m_id{wxID_NONE};
 
     // on screen rectangle of this item (not including borders)
     wxRect       m_rect;

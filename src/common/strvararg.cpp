@@ -141,13 +141,6 @@ class wxFormatConverterBase
 public:
     using CharType = T;
 
-    wxFormatConverterBase()
-    {
-        m_fmtOrig = nullptr;
-        m_fmtLast = nullptr;
-        m_nCopied = 0;
-    }
-
     wxScopedCharTypeBuffer<CharType> Convert(const CharType *format)
     {
         // this is reset to NULL if we modify the format string
@@ -403,14 +396,14 @@ private:
 
     // the translated format
     wxCharTypeBuffer<CharType> m_fmt;
-    CharType *m_fmtLast;
+    CharType *m_fmtLast{nullptr};
 
     // the original format
-    const CharType *m_fmtOrig;
+    const CharType *m_fmtOrig{nullptr};
 
     // the number of characters already copied (i.e. already parsed, but left
     // unmodified)
-    size_t m_nCopied;
+    size_t m_nCopied{0};
 };
 
 // Distinguish between the traditional Windows (and MSVC) behaviour and Cygwin

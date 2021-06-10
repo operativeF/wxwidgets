@@ -856,8 +856,6 @@ wxString wxMenuBase::GetHelpString( int itemid ) const
 
 wxMenuBarBase::wxMenuBarBase()
 {
-    // not attached yet
-    m_menuBarFrame = nullptr;
 }
 
 wxMenuBarBase::~wxMenuBarBase()

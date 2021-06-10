@@ -190,8 +190,6 @@ int wxEntry(int& argc, wxChar **argv)
 
 struct wxMSWCommandLineArguments
 {
-    wxMSWCommandLineArguments() { argc = 0; argv = nullptr; }
-
     // Initialize this object from the current process command line.
     //
     // In Unicode build prefer to use the standard function for tokenizing the
@@ -208,8 +206,8 @@ struct wxMSWCommandLineArguments
             ::LocalFree(argv);
     }
 
-    int argc;
-    wxChar **argv;
+    int argc{0};
+    wxChar **argv{nullptr};
 };
 
 static wxMSWCommandLineArguments wxArgs;

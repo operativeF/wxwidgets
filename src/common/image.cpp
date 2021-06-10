@@ -65,29 +65,30 @@ public:
     wxImageRefData();
     ~wxImageRefData() override;
 
-    int             m_width;
-    int             m_height;
-    wxBitmapType    m_type;
-    unsigned char  *m_data;
+    int             m_width{0};
+    int             m_height{0};
+    wxBitmapType    m_type{wxBITMAP_TYPE_INVALID};
+    unsigned char  *m_data{nullptr};
 
-    bool            m_hasMask;
-    unsigned char   m_maskRed,m_maskGreen,m_maskBlue;
+    bool            m_hasMask{false};
+    unsigned char   m_maskRed{0};
+    unsigned char   m_maskGreen{0};
+    unsigned char   m_maskBlue{0};
 
-    // alpha channel data, may be NULL for the formats without alpha support
-    unsigned char  *m_alpha;
+    // alpha channel data, may be nullptr for the formats without alpha support
+    unsigned char  *m_alpha{nullptr};
 
-    bool            m_ok;
+    bool            m_ok{false};
 
     // if true, m_data is pointer to static data and shouldn't be freed
-    bool            m_static;
+    bool            m_static{false};
 
     // same as m_static but for m_alpha
-    bool            m_staticAlpha;
+    bool            m_staticAlpha{false};
 
     // global and per-object flags determining LoadFile() behaviour
-    int             m_loadFlags;
     static int      sm_defaultLoadFlags;
-
+    int             m_loadFlags{sm_defaultLoadFlags};
 #if wxUSE_PALETTE
     wxPalette       m_palette;
 #endif // wxUSE_PALETTE
@@ -104,22 +105,6 @@ int wxImageRefData::sm_defaultLoadFlags = wxImage::Load_Verbose;
 
 wxImageRefData::wxImageRefData()
 {
-    m_width = 0;
-    m_height = 0;
-    m_type = wxBITMAP_TYPE_INVALID;
-    m_data =
-    m_alpha = (unsigned char *) nullptr;
-
-    m_maskRed = 0;
-    m_maskGreen = 0;
-    m_maskBlue = 0;
-    m_hasMask = false;
-
-    m_ok = false;
-    m_static =
-    m_staticAlpha = false;
-
-    m_loadFlags = sm_defaultLoadFlags;
 }
 
 wxImageRefData::~wxImageRefData()

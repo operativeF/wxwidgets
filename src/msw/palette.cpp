@@ -25,15 +25,13 @@
 class WXDLLEXPORT wxPaletteRefData: public wxGDIRefData
 {
 public:
-    wxPaletteRefData() {  m_hPalette = nullptr;  }
+    wxPaletteRefData() { }
 
     wxPaletteRefData(int n,
                      const unsigned char *red,
                      const unsigned char *green,
                      const unsigned char *blue)
     {
-         m_hPalette = nullptr; 
-
         LOGPALETTE *pPal = Alloc(n);
         if ( !pPal )
             return;
@@ -53,8 +51,6 @@ public:
     wxPaletteRefData(const wxPaletteRefData& data)
          
     {
-         m_hPalette = nullptr; 
-
         const UINT n = data.GetEntries();
         if ( !n )
             return;
@@ -99,7 +95,7 @@ private:
 
     
 
-    HPALETTE m_hPalette;
+    HPALETTE m_hPalette{nullptr};
 
     friend class WXDLLIMPEXP_FWD_CORE wxPalette;
 };

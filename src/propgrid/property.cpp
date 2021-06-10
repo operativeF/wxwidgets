@@ -456,28 +456,6 @@ void wxPGProperty::Init( const wxString& label, const wxString& name )
     else
         DoSetName( m_label );
 
-    
-    m_commonValue = -1;
-    m_arrIndex = 0xFFFF;
-    m_parent = nullptr;
-
-    m_parentState = nullptr;
-
-    m_clientData = nullptr;
-    m_clientObject = nullptr;
-
-    m_customEditor = nullptr;
-#if wxUSE_VALIDATORS
-    m_validator = nullptr;
-#endif
-    m_valueBitmap = nullptr;
-
-    m_maxLen = 0; // infinite maximum length
-
-    m_flags = wxPG_PROP_PROPERTY;
-
-    m_depth = 1;
-
     SetExpanded(true);
 
 }
@@ -647,33 +625,9 @@ void wxPGProperty::OnDetached(wxPropertyGridPageState* WXUNUSED(state),
     }
 }
 
-wxPGProperty::wxPGProperty()
-     
+wxPGProperty::wxPGProperty()    
 {
-    
-    m_commonValue = -1;
-    m_arrIndex = 0xFFFF;
-    m_parent = nullptr;
-
-    m_parentState = nullptr;
-
-    m_clientData = nullptr;
-    m_clientObject = nullptr;
-
-    m_customEditor = nullptr;
-#if wxUSE_VALIDATORS
-    m_validator = nullptr;
-#endif
-    m_valueBitmap = nullptr;
-
-    m_maxLen = 0; // infinite maximum length
-
-    m_flags = wxPG_PROP_PROPERTY;
-
-    m_depth = 1;
-
     SetExpanded(true);
-
 }
 
 
@@ -2831,8 +2785,7 @@ wxPGRootProperty::wxPGRootProperty( const wxString& name )
 }
 
 
-wxPGRootProperty::~wxPGRootProperty()
-= default;
+wxPGRootProperty::~wxPGRootProperty() = default;
 
 
 // -----------------------------------------------------------------------
@@ -2841,29 +2794,18 @@ wxPGRootProperty::~wxPGRootProperty()
 
 wxPG_IMPLEMENT_PROPERTY_CLASS(wxPropertyCategory, wxPGProperty, TextCtrl)
 
-
-
-wxPropertyCategory::wxPropertyCategory()
-     
+wxPropertyCategory::wxPropertyCategory()  
 {
-    
     // don't set colour - prepareadditem method should do this
     SetParentalType(wxPG_PROP_CATEGORY);
-    m_capFgColIndex = 1;
-    m_textExtent = -1;
-
 }
 
 
 wxPropertyCategory::wxPropertyCategory( const wxString &label, const wxString& name )
     : wxPGProperty(label,name)
 {
-    
     // don't set colour - prepareadditem method should do this
     SetParentalType(wxPG_PROP_CATEGORY);
-    m_capFgColIndex = 1;
-    m_textExtent = -1;
-
 }
 
 

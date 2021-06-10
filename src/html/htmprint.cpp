@@ -61,17 +61,11 @@
 // wxHtmlDCRenderer
 //--------------------------------------------------------------------------------
 
-
 wxHtmlDCRenderer::wxHtmlDCRenderer()  
 {
-    m_DC = nullptr;
-    m_Width = m_Height = 0;
-    m_Cells = nullptr;
-    m_ownsCells = false;
     m_Parser.SetFS(&m_FS);
     SetStandardFonts(DEFAULT_PRINT_FONT_SIZE);
 }
-
 
 
 wxHtmlDCRenderer::~wxHtmlDCRenderer()
@@ -81,13 +75,11 @@ wxHtmlDCRenderer::~wxHtmlDCRenderer()
 }
 
 
-
 void wxHtmlDCRenderer::SetDC(wxDC *dc, double pixel_scale, double font_scale)
 {
     m_DC = dc;
     m_Parser.SetDC(m_DC, pixel_scale, font_scale);
 }
-
 
 
 void wxHtmlDCRenderer::SetSize(int width, int height)
@@ -213,13 +205,9 @@ std::vector<wxHtmlFilter*> wxHtmlPrintout::m_Filters;
 
 wxHtmlPrintout::wxHtmlPrintout(const wxString& title) : wxPrintout(title)
 {
-    m_BasePathIsDir = true;
-    m_HeaderHeight = m_FooterHeight = 0;
     SetMargins(); // to default values
     SetStandardFonts(DEFAULT_PRINT_FONT_SIZE);
 }
-
-
 
 void wxHtmlPrintout::CleanUpStatics()
 {
@@ -620,10 +608,9 @@ void wxHtmlPrintout::SetStandardFonts(int size,
 
 
 wxHtmlEasyPrinting::wxHtmlEasyPrinting(const wxString& name, wxWindow *parentWindow)
+    : m_ParentWindow(parentWindow),
+      m_Name(name)
 {
-    m_ParentWindow = parentWindow;
-    m_Name = name;
-    m_PrintData = nullptr;
     m_PageSetupData = new wxPageSetupDialogData;
 
     m_PageSetupData->EnableMargins(true);
@@ -631,8 +618,6 @@ wxHtmlEasyPrinting::wxHtmlEasyPrinting(const wxString& name, wxWindow *parentWin
     m_PageSetupData->SetMarginBottomRight(wxPoint(25, 25));
 
     SetStandardFonts(DEFAULT_PRINT_FONT_SIZE);
-
-    m_promptMode = Prompt_Always;
 }
 
 

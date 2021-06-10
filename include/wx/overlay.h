@@ -62,7 +62,7 @@ private:
 
     wxOverlayImpl* m_impl;
 
-    bool m_inDrawing;
+    bool m_inDrawing{false};
 };
 
 

@@ -541,16 +541,15 @@ bool wxUnsetEnv(const wxString& variable)
 // structure used to pass parameters from wxKill() to wxEnumFindByPidProc()
 struct wxFindByPidParams
 {
-    wxFindByPidParams() { hwnd = nullptr; pid = 0; }
+    wxFindByPidParams() = default;
+    wxFindByPidParams(const wxFindByPidParams&) = delete;
+    wxFindByPidParams& operator=(const wxFindByPidParams&) = delete;
 
     // the HWND used to return the result
-    HWND hwnd;
+    HWND hwnd{nullptr};
 
     // the PID we're looking from
-    DWORD pid;
-
-    wxFindByPidParams(const wxFindByPidParams&) = delete;
-	wxFindByPidParams& operator=(const wxFindByPidParams&) = delete;
+    DWORD pid{0};
 };
 
 // wxKill helper: EnumWindows() callback which is used to find the first (top

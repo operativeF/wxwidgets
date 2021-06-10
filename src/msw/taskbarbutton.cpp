@@ -83,7 +83,7 @@ DEFINE_GUID(wxIID_IUnknown,
 DEFINE_GUID(wxIID_IShellItem,
     0x43826d1e, 0xe718, 0x42ee, 0xbc, 0x55, 0xa1, 0xe2, 0x61, 0xc3, 0x7b, 0xfe);
 
-typedef IUnknown *HIMAGELIST;
+using HIMAGELIST = IUnknown*;
 
 typedef enum THUMBBUTTONFLAGS
 {
@@ -171,8 +171,8 @@ enum _SICHINTF
     SICHINT_TEST_FILESYSPATH_IF_NOT_EQUAL = 0x20000000
 };
 
-typedef DWORD SICHINTF;
-typedef ULONG SFGAOF;
+using SICHINTF = DWORD;
+using SFGAOF = ULONG;
 
 typedef enum KNOWNDESTCATEGORY
 {

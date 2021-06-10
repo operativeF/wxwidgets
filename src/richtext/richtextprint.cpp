@@ -33,13 +33,10 @@
 
 wxRichTextPrintout::wxRichTextPrintout(const wxString& title) : wxPrintout(title)
 {
-    m_numPages = wxRICHTEXT_PRINT_MAX_PAGES;
-
     SetMargins(); // to default values
 }
 
-wxRichTextPrintout::~wxRichTextPrintout()
-= default;
+wxRichTextPrintout::~wxRichTextPrintout() = default;
 
 void wxRichTextPrintout::OnPreparePrinting()
 {
@@ -444,13 +441,8 @@ bool wxRichTextPrintout::SubstituteKeywords(wxString& str, const wxString& title
 wxRichTextPrinting::wxRichTextPrinting(const wxString& name, wxWindow *parentWindow)
     : m_title(name)
     , m_previewRect(100, 100, 800, 800)
+    , m_parentWindow(parentWindow)
 {
-    m_richTextBufferPrinting = nullptr;
-    m_richTextBufferPreview = nullptr;
-
-    m_parentWindow = parentWindow;
-    m_printData = nullptr;
-
     m_pageSetupData = new wxPageSetupDialogData;
     m_pageSetupData->EnableMargins(true);
     m_pageSetupData->SetMarginTopLeft(wxPoint(25, 25));

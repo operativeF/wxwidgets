@@ -38,8 +38,6 @@ class wxRibbonGalleryItem
 public:
     wxRibbonGalleryItem()
     {
-        m_id = 0;
-        m_is_visible = false;
     }
 
     void SetId(int id) {m_id = id;}
@@ -62,8 +60,8 @@ protected:
     wxBitmap m_bitmap;
     wxClientDataContainer m_client_data;
     wxRect m_position;
-    int m_id;
-    bool m_is_visible;
+    int m_id{0};
+    bool m_is_visible{false};
 };
 
 wxBEGIN_EVENT_TABLE(wxRibbonGallery, wxRibbonControl)

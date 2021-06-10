@@ -69,14 +69,6 @@ inline void wxGetAsIs(wxWindowBase* win, int* w, int* h)
 
 wxIndividualLayoutConstraint::wxIndividualLayoutConstraint()
 {
-    myEdge = wxTop;
-    relationship = wxUnconstrained;
-    margin = 0;
-    value = 0;
-    percent = 0;
-    otherEdge = wxTop;
-    done = false;
-    otherWin = nullptr;
 }
 
 void wxIndividualLayoutConstraint::Set(wxRelationship rel, wxWindowBase *otherW, wxEdge otherE, int val, int marg)

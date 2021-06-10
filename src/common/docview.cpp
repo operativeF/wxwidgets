@@ -637,11 +637,6 @@ bool wxDocument::DoOpenDocument(const wxString& file)
 
 wxView::wxView()
 {
-    m_viewDocument = nullptr;
-
-    m_viewFrame = nullptr;
-
-    m_docChildFrame = nullptr;
 }
 
 wxView::~wxView()
@@ -928,10 +923,6 @@ wxDocManager::wxDocManager(long WXUNUSED(flags), bool initialize)
 {
     sm_docManager = this;
 
-    m_defaultDocumentNameCounter = 1;
-    m_currentView = nullptr;
-    m_maxDocsOpen = INT_MAX;
-    m_fileHistory = nullptr;
     if ( initialize )
         Initialize();
 }

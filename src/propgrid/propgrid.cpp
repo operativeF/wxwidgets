@@ -177,17 +177,7 @@ wxPGGlobalVarsClass::wxPGGlobalVarsClass()
     /* TRANSLATORS: Name of Boolean true value */
     m_boolChoices.Add(_("True"));
 
-    m_fontFamilyChoices = nullptr;
-
     m_defaultRenderer = new wxPGDefaultRenderer();
-
-    m_autoGetTranslation = false;
-
-    m_offline = 0;
-
-    m_extraStyle = 0;
-
-    m_warnings = 0;
 }
 
 
@@ -6263,14 +6253,6 @@ wxDEFINE_EVENT( wxEVT_PG_COLS_RESIZED, wxPropertyGridEvent);
 wxPropertyGridEvent::wxPropertyGridEvent(wxEventType commandType, int id)
     : wxCommandEvent(commandType,id)
 {
-    m_property = nullptr;
-    
-    m_validationInfo = nullptr;
-    m_column = 1;
-    m_canVeto = false;
-    m_wasVetoed = false;
-    m_pg = nullptr;
-
 }
 
 // -----------------------------------------------------------------------
@@ -6339,8 +6321,6 @@ wxEvent* wxPropertyGridEvent::Clone() const
 
 wxPropertyGridPopulator::wxPropertyGridPopulator()
 {
-    m_state = nullptr;
-    m_pg = nullptr;
     wxPGGlobalVars->m_offline++;
 }
 

@@ -114,8 +114,6 @@ struct NotifyIconData : public NOTIFYICONDATA
 
 wxTaskBarIcon::wxTaskBarIcon(wxTaskBarIconType WXUNUSED(iconType))
 {
-    m_win = nullptr;
-    m_iconAdded = false;
     RegisterWindowMessages();
 }
 

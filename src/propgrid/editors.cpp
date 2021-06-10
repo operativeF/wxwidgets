@@ -572,10 +572,8 @@ class wxPGComboBox : public wxOwnerDrawnComboBox
 {
 public:
 
-    wxPGComboBox()
-         
+    wxPGComboBox()  
     {
-        m_dclickProcessor = nullptr;
     }
 
     ~wxPGComboBox() override
@@ -700,7 +698,7 @@ public:
     wxPGProperty* GetProperty() const { return m_selProp; }
 
 private:
-    wxPGDoubleClickProcessor*   m_dclickProcessor;
+    wxPGDoubleClickProcessor*   m_dclickProcessor{nullptr};
     wxPGProperty*               m_selProp;
 };
 

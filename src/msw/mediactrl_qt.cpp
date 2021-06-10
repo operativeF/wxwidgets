@@ -77,8 +77,8 @@ wxWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 //  QT Types
 //---------------------------------------------------------------------------
 typedef struct MovieRecord* Movie;
-typedef wxInt16 OSErr;
-typedef wxInt32 OSStatus;
+using OSErr = wxInt16;
+using OSStatus = wxInt32;
 #define noErr 0
 #define fsRdPerm 1
 typedef unsigned char                   Str255[256];
@@ -401,7 +401,7 @@ public:
     wxTimer* m_timer{nullptr};               // Load or Play timer
     wxQuickTimeLibrary m_lib;       // DLL to load functions from
     ComponentInstance m_pMC{nullptr};        // Movie Controller
-    wxEvtHandler* m_evthandler;
+    wxEvtHandler* m_evthandler{nullptr};
 
     friend class wxQTMediaEvtHandler;
 
@@ -575,10 +575,8 @@ LRESULT CALLBACK wxQTMediaBackend::QTWndProc(HWND hWnd, UINT nMsg,
 //
 // Sets m_timer to NULL signifying we havn't loaded anything yet
 //---------------------------------------------------------------------------
-wxQTMediaBackend::wxQTMediaBackend()
- 
+wxQTMediaBackend::wxQTMediaBackend() 
 {
-    m_evthandler = nullptr;
 }
 
 //---------------------------------------------------------------------------

@@ -885,7 +885,7 @@ int wxString::CmpNoCase(const wxString& s) const
     // do as many iterations as there are embedded NULs in the string, i.e.
     // usually we will run it just once.
 
-    typedef const wxStringImpl::value_type *pchar_type;
+    using pchar_type = const wxStringImpl::value_type*;
     const pchar_type thisBegin = m_impl.c_str();
     const pchar_type thatBegin = s.m_impl.c_str();
 

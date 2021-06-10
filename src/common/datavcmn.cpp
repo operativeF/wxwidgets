@@ -427,12 +427,8 @@ static int my_sort( int *v1, int *v2 )
 
 wxDataViewIndexListModel::wxDataViewIndexListModel( unsigned int initial_size )
 {
-    // IDs are ordered until an item gets deleted or inserted
-    m_ordered = true;
-
     // build initial index
-    unsigned int i;
-    for (i = 1; i < initial_size+1; i++)
+    for (unsigned int i = 1; i < initial_size+1; i++)
             m_hash.Add( wxDataViewItem(wxUIntToPtr(i)) );
     m_nextFreeID = initial_size + 1;
 }
@@ -1219,9 +1215,6 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxDataViewCtrlBase, wxControl);
 
 wxDataViewCtrlBase::wxDataViewCtrlBase()
 {
-    m_model = nullptr;
-    m_expander_column = nullptr;
-    m_indent = 8;
 }
 
 wxDataViewCtrlBase::~wxDataViewCtrlBase()
@@ -2027,7 +2020,6 @@ wxDataViewCheckIconTextRenderer::wxDataViewCheckIconTextRenderer
                                  )
     : wxDataViewCustomRenderer(GetDefaultType(), mode, align)
 {
-    m_allow3rdStateForUser = false;
 }
 
 void wxDataViewCheckIconTextRenderer::Allow3rdStateForUser(bool allow)

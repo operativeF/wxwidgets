@@ -48,7 +48,6 @@ wxDataStreamBase::wxDataStreamBase(const wxMBConv& conv)
     // It is unused in non-Unicode build, so suppress a warning there.
     wxUnusedVar(conv);
 
-    m_be_order = false;
 }
 
 void wxDataStreamBase::SetConv( const wxMBConv &conv )

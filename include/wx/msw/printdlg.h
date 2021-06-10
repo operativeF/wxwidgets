@@ -114,10 +114,10 @@ public:
 
 private:
     wxPageSetupDialogData   m_pageSetupData;
-    wxWindow*               m_dialogParent;
+    wxWindow*               m_dialogParent{nullptr};
 
     // holds MSW handle
-    void*                   m_pageDlg;
+    void*                   m_pageDlg{nullptr};
 
 public:
 	wxClassInfo *GetClassInfo() const override;

@@ -75,8 +75,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxContextHelp, wxObject);
 
 wxContextHelp::wxContextHelp(wxWindow* win, bool beginHelp)
 {
-    m_inHelp = false;
-
     if (beginHelp)
         BeginContextHelp(win);
 }

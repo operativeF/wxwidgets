@@ -175,7 +175,7 @@ public:
     virtual bool Ok() const { return IsOk(); }
     virtual bool IsOk() const = 0;
 
-    int  m_ref;
+    int  m_ref{1};
 
 private:
     wxDECLARE_CLASS(wxPrintNativeDataBase);
@@ -215,7 +215,7 @@ public:
 
 protected:
     wxPrintDialogData     m_printDialogData;
-    wxPrintout*           m_currentPrintout;
+    wxPrintout*           m_currentPrintout{nullptr};
 
     static wxPrinterError sm_lastError;
 
@@ -336,19 +336,19 @@ public:
 
 private:
     wxString         m_printoutTitle;
-    wxDC*            m_printoutDC;
-    wxPrintPreview  *m_preview;
+    wxDC*            m_printoutDC{nullptr};
+    wxPrintPreview  *m_preview{nullptr};
 
-    int              m_pageWidthPixels;
-    int              m_pageHeightPixels;
+    int              m_pageWidthPixels{0};
+    int              m_pageHeightPixels{0};
 
-    int              m_pageWidthMM;
-    int              m_pageHeightMM;
+    int              m_pageWidthMM{0};
+    int              m_pageHeightMM{0};
 
-    int              m_PPIScreenX;
-    int              m_PPIScreenY;
-    int              m_PPIPrinterX;
-    int              m_PPIPrinterY;
+    int              m_PPIScreenX{0};
+    int              m_PPIScreenY{0};
+    int              m_PPIPrinterX{0};
+    int              m_PPIPrinterY{0};
 
     wxRect           m_paperRectPixels;
 

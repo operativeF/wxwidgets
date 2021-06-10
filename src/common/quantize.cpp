@@ -62,10 +62,10 @@ namespace
 
 #define RIGHT_SHIFT(x,shft) ((x) >> (shft))
 
-typedef unsigned char JSAMPLE;
-typedef JSAMPLE *JSAMPROW;
-typedef JSAMPROW *JSAMPARRAY;
-typedef unsigned int JDIMENSION;
+using JSAMPLE = unsigned char;
+using JSAMPROW = JSAMPLE*;
+using JSAMPARRAY = JSAMPROW*;
+using JDIMENSION = unsigned int;
 
 typedef struct {
         void *cquantize;
@@ -82,7 +82,7 @@ typedef struct {
     #define JMETHOD(type,methodname,arglist)  type (methodname) arglist
 #endif
 
-typedef j_decompress *j_decompress_ptr;
+using j_decompress_ptr = j_decompress*;
 struct jpeg_color_quantizer {
   JMETHOD(void, start_pass, (j_decompress_ptr cinfo, bool is_pre_scan));
   JMETHOD(void, color_quantize, (j_decompress_ptr cinfo,
@@ -214,13 +214,13 @@ struct jpeg_color_quantizer {
 #define C2_SHIFT  (BITS_IN_JSAMPLE-HIST_C2_BITS)
 
 
-typedef wxUint16 histcell;    /* histogram cell; prefer an unsigned type */
+using histcell = wxUint16;    /* histogram cell; prefer an unsigned type */
 
-typedef histcell  * histptr;    /* for pointers to histogram cells */
+using histptr = histcell*;    /* for pointers to histogram cells */
 
 typedef histcell hist1d[HIST_C2_ELEMS]; /* typedefs for the array */
-typedef hist1d  * hist2d;   /* type for the 2nd-level pointers */
-typedef hist2d * hist3d;    /* type for top-level pointer */
+using hist2d = hist1d*;   /* type for the 2nd-level pointers */
+using hist3d = hist2d*;    /* type for top-level pointer */
 
 
 /* Declarations for Floyd-Steinberg dithering.
@@ -248,14 +248,14 @@ typedef hist2d * hist3d;    /* type for top-level pointer */
  */
 
 #if BITS_IN_JSAMPLE == 8
-typedef wxInt16 FSERROR;      /* 16 bits should be enough */
-typedef int LOCFSERROR;     /* use 'int' for calculation temps */
+using FSERROR = wxInt16;      /* 16 bits should be enough */
+using LOCFSERROR = int;     /* use 'int' for calculation temps */
 #else
-typedef wxInt32 FSERROR;      /* may need more than 16 bits */
-typedef wxInt32 LOCFSERROR;   /* be sure calculation temps are big enough */
+using FSERROR = wxInt32;      /* may need more than 16 bits */
+using LOCFSERROR = wxInt32;   /* be sure calculation temps are big enough */
 #endif
 
-typedef FSERROR  *FSERRPTR; /* pointer to error array (in  storage!) */
+using FSERRPTR = FSERROR*; /* pointer to error array (in  storage!) */
 
 
 /* Private subobject */
@@ -284,7 +284,7 @@ typedef struct {
   int * error_limiter;      /* table for clamping the applied error */
 } my_cquantizer;
 
-typedef my_cquantizer * my_cquantize_ptr;
+using my_cquantize_ptr = my_cquantizer*;
 
 
 /*
@@ -346,7 +346,7 @@ typedef struct {
   long colorcount;
 } box;
 
-typedef box * boxptr;
+using boxptr = box*;
 
 
 boxptr

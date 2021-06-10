@@ -17,6 +17,8 @@
 
 #include "wx/propgrid/property.h"
 
+inline constexpr int wxPG_DEFAULT_SPLITTERX = 110;
+
 // -----------------------------------------------------------------------
 
 // A return value from wxPropertyGrid::HitTest(),
@@ -585,7 +587,7 @@ protected:
 
     // If visible, then this is pointer to wxPropertyGrid.
     // This shall *never* be NULL to indicate that this state is not visible.
-    wxPropertyGrid*             m_pPropGrid;
+    wxPropertyGrid*             m_pPropGrid{nullptr};
 
     // Pointer to currently used array.
     wxPGProperty*               m_properties;
@@ -594,7 +596,7 @@ protected:
     wxPGRootProperty            m_regularArray;
 
     // Array for root of non-categoric mode.
-    wxPGRootProperty*           m_abcArray;
+    wxPGRootProperty*           m_abcArray{nullptr};
 
     // Dictionary for name-based access.
     wxPGHashMapS2P              m_dictName;
@@ -608,35 +610,35 @@ protected:
     // Column proportions.
     std::vector<int>               m_columnProportions;
 
-    double                      m_fSplitterX;
+    double                      m_fSplitterX{wxPG_DEFAULT_SPLITTERX};
 
     // Most recently added category.
-    wxPropertyCategory*         m_currentCategory;
+    wxPropertyCategory*         m_currentCategory{nullptr};
 
     // Array of selected property.
     wxArrayPGProperty           m_selection;
 
     // Virtual width.
-    int                         m_width;
+    int                         m_width{0};
 
     // Indicates total virtual height of visible properties.
-    unsigned int                m_virtualHeight;
+    unsigned int                m_virtualHeight{0};
 
     // True: items appended/inserted, so stuff needs to be done before drawing;
     // If m_virtualHeight == 0, then calcylatey's must be done.
     // Otherwise just sort.
-    bool                        m_itemsAdded;
+    bool                        m_itemsAdded{false};
 
     // True if any value is modified.
-    bool                        m_anyModified;
+    bool                        m_anyModified{false};
 
-    bool                        m_vhCalcPending;
+    bool                        m_vhCalcPending{false};
 
     // True if splitter has been pre-set by the application.
-    bool                        m_isSplitterPreSet;
+    bool                        m_isSplitterPreSet{false};
 
     // Used to (temporarily) disable splitter centering.
-    bool                        m_dontCenterSplitter;
+    bool                        m_dontCenterSplitter{false};
 
 private:
     // Only inits arrays, doesn't migrate things or such.

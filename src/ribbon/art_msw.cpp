@@ -269,7 +269,6 @@ wxRibbonMSWArtProvider::wxRibbonMSWArtProvider(bool set_colour_scheme)
     : m_tab_label_font(*wxNORMAL_FONT)
 #endif
 {
-    m_flags = 0;
     m_button_bar_label_font = m_tab_label_font;
     m_panel_label_font = m_tab_label_font;
 
@@ -298,8 +297,7 @@ wxRibbonMSWArtProvider::wxRibbonMSWArtProvider(bool set_colour_scheme)
     m_help_button_offset = 22;
 }
 
-wxRibbonMSWArtProvider::~wxRibbonMSWArtProvider()
-= default;
+wxRibbonMSWArtProvider::~wxRibbonMSWArtProvider() = default;
 
 void wxRibbonMSWArtProvider::GetColourScheme(
                          wxColour* primary,

@@ -79,13 +79,6 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlCell, wxObject);
 
 wxHtmlCell::wxHtmlCell()  
 {
-    m_Next = nullptr;
-    m_Parent = nullptr;
-    m_Width = m_Height = m_Descent = 0;
-    m_ScriptMode = wxHTML_SCRIPT_NORMAL;        // <sub> or <sup> mode
-    m_ScriptBaseline = 0;                       // <sub> or <sup> baseline
-    m_CanLiveOnPagebreak = true;
-    m_Link = nullptr;
 }
 
 wxHtmlCell::~wxHtmlCell()

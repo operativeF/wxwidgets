@@ -140,12 +140,6 @@ bool wxNonOwnedWindow::DoSetPathShape(const wxGraphicsPath& path)
 
 wxNonOwnedWindow::wxNonOwnedWindow()
 {
-#if wxUSE_GRAPHICS_CONTEXT
-    m_shapeImpl = nullptr;
-#endif // wxUSE_GRAPHICS_CONTEXT
-
-    m_activeDPI = wxDefaultSize;
-    m_perMonitorDPIaware = false;
 }
 
 wxNonOwnedWindow::~wxNonOwnedWindow()

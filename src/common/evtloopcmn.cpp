@@ -37,11 +37,6 @@ wxEventLoopBase *wxEventLoopBase::ms_activeLoop = nullptr;
 wxEventLoopBase::wxEventLoopBase()
 {
     gs_eventLoopCount++;
-
-    m_isInsideRun = false;
-    m_shouldExit = false;
-    m_yieldLevel = 0;
-    m_eventsToProcessInsideYield = wxEVT_CATEGORY_ALL;
 }
 
 wxEventLoopBase::~wxEventLoopBase()
@@ -208,7 +203,6 @@ wxEventLoopBase::AddSourceForFD(int fd,
 
 wxEventLoopManual::wxEventLoopManual()
 {
-    m_exitcode = 0;
 }
 
 bool wxEventLoopManual::ProcessEvents()

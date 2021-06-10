@@ -911,7 +911,7 @@ private:
     // first time, do nothing after this
     void Initialize();
 
-    wxStringToColourHashMap *m_map;
+    wxStringToColourHashMap *m_map{nullptr};
 };
 
 class WXDLLIMPEXP_CORE wxResourceCache: public wxList

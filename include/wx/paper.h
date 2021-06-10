@@ -54,10 +54,10 @@ public:
     wxSize GetSizeDeviceUnits() const ;
 
 public:
-    wxPaperSize m_paperId;
-    int         m_platformId;
-    int         m_width;  // In tenths of a millimetre
-    int         m_height; // In tenths of a millimetre
+    wxPaperSize m_paperId{wxPaperSize::None};
+    int         m_platformId{0};
+    int         m_width{0};  // In tenths of a millimetre
+    int         m_height{0}; // In tenths of a millimetre
     wxString    m_paperName;
 
 private:

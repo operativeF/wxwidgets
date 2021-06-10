@@ -123,8 +123,6 @@ struct WXDLLEXPORT wxRasThreadData
 {
     wxRasThreadData()
     {
-        hWnd = nullptr;
-        dialUpManager = nullptr;
     }
 
     ~wxRasThreadData()
@@ -133,11 +131,11 @@ struct WXDLLEXPORT wxRasThreadData
             DestroyWindow(hWnd);
     }
 
-    HWND    hWnd;       // window to send notifications to
+    HWND    hWnd{nullptr};       // window to send notifications to
     wxWinAPI::Event hEventRas,  // automatic event which RAS signals when status changes
                     hEventQuit; // manual event which we signal when we terminate
 
-    class WXDLLIMPEXP_FWD_CORE wxDialUpManagerMSW *dialUpManager;  // the owner
+    class WXDLLIMPEXP_FWD_CORE wxDialUpManagerMSW *dialUpManager{nullptr};  // the owner
 };
 
 // ----------------------------------------------------------------------------
@@ -198,7 +196,7 @@ private:
 
     // number of times EnableAutoCheckOnlineStatus() had been called minus the
     // number of times DisableAutoCheckOnlineStatus() had been called
-    int m_autoCheckLevel;
+    int m_autoCheckLevel{0};
 
     // timer used for polling RAS status
     class WXDLLEXPORT RasTimer : public wxTimer
@@ -217,7 +215,7 @@ private:
     } m_timerStatusPolling;
 
     // thread handle for the thread sitting on connection change event
-    HANDLE m_hThread;
+    HANDLE m_hThread{nullptr};
 
     // data used by this thread and our hidden window to send messages between
     // each other
@@ -358,9 +356,6 @@ wxDialUpManagerMSW::wxDialUpManagerMSW()
                   : m_timerStatusPolling(this),
                     m_dllRas(wxT("RASAPI32"))
 {
-    // initialize our data
-    m_autoCheckLevel = 0;
-    m_hThread = nullptr;
     m_data = new wxRasThreadData;
 
     if ( !m_dllRas.IsLoaded() )

@@ -55,10 +55,8 @@ ShowException(const wxString& member,
 // wxAutomationObject
 
 wxAutomationObject::wxAutomationObject(WXIDISPATCH* dispatchPtr)
+    : m_dispatchPtr(dispatchPtr)
 {
-    m_dispatchPtr = dispatchPtr;
-    m_lcid = LOCALE_SYSTEM_DEFAULT;
-    m_convertVariantFlags = wxOleConvertVariant_Default;
 }
 
 wxAutomationObject::~wxAutomationObject()

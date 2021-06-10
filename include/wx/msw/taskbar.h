@@ -63,8 +63,8 @@ protected:
     void RegisterWindowMessages();
 
 
-    wxTaskBarIconWindow *m_win;
-    bool                 m_iconAdded;
+    wxTaskBarIconWindow *m_win{nullptr};
+    bool                 m_iconAdded{false};
     wxIcon               m_icon;
     wxString             m_strTooltip;
 

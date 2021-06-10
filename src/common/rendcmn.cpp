@@ -64,7 +64,7 @@ public:
     static wxRendererPtr& Get();
 
 private:
-    wxRendererPtr() : wxRendererPtrBase(nullptr) { m_initialized = false; }
+    wxRendererPtr() : wxRendererPtrBase(nullptr) {}
 
     void DoInit()
     {
@@ -75,7 +75,7 @@ private:
         }
     }
 
-    bool m_initialized;
+    bool m_initialized{false};
 
     // just to suppress a gcc warning
     friend class wxRendererPtrDummyFriend;

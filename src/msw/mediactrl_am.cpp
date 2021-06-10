@@ -307,7 +307,7 @@ enum MPReadyStateConstants
     mpReadyStateComplete    = 4
 };
 
-typedef unsigned long VB_OLE_COLOR;
+using VB_OLE_COLOR = unsigned long;
 
 enum MPDisplayModeConstants
 {
@@ -879,7 +879,7 @@ public:
     LPAMGETERRORTEXT m_lpAMGetErrorText;
     wxString GetErrorString(HRESULT hrdsv);
 #endif // wxDEBUG_LEVEL
-    wxEvtHandler* m_evthandler;
+    wxEvtHandler* m_evthandler{nullptr};
 
     friend class wxAMMediaEvtHandler;
     wxDECLARE_DYNAMIC_CLASS(wxAMMediaBackend);
@@ -965,7 +965,6 @@ wxAMMediaBackend::wxAMMediaBackend()
                  :
                   m_bestSize(wxDefaultSize)
 {
-   m_evthandler = nullptr;
 }
 
 //---------------------------------------------------------------------------

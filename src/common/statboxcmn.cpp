@@ -28,9 +28,6 @@ extern WXDLLEXPORT_DATA(const char) wxStaticBoxNameStr[] = "groupBox";
 
 wxStaticBoxBase::wxStaticBoxBase()
 {
-    m_labelWin = nullptr;
-    m_areChildrenEnabled = true;
-
 #ifndef __WXGTK__
     m_container.DisableSelfFocus();
 #endif

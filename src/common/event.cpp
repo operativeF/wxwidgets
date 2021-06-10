@@ -372,19 +372,9 @@ wxEventFunctor::~wxEventFunctor()
  */
 
 wxEvent::wxEvent(int theId, wxEventType commandType)
-    : m_eventType(commandType)
+    : m_eventType(commandType),
+      m_id(theId)
 {
-    m_eventObject = nullptr;
-    m_timeStamp = 0;
-    m_id = theId;
-    m_skipped = false;
-    m_callbackUserData = nullptr;
-    m_handlerToProcessOnlyIn = nullptr;
-    m_isCommandEvent = false;
-    m_propagationLevel = wxEVENT_PROPAGATE_NONE;
-    m_propagatedFrom = nullptr;
-    m_wasProcessed = false;
-    m_willBeProcessedAgain = false;
 }
 
 wxEvent::wxEvent(const wxEvent& src)
@@ -1134,15 +1124,8 @@ void wxEventHashTable::GrowEventTypeTable()
 
 wxEvtHandler::wxEvtHandler()
 {
-    m_nextHandler = nullptr;
-    m_previousHandler = nullptr;
-    m_enabled = true;
-    m_dynamicEvents = nullptr;
-    m_pendingEvents = nullptr;
-
     // no client data (yet)
     m_clientData = nullptr;
-    m_clientDataType = wxClientDataType::None;
 }
 
 wxEvtHandler::~wxEvtHandler()

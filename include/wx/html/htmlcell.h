@@ -380,23 +380,26 @@ protected:
 
 
     // pointer to the next cell
-    wxHtmlCell *m_Next;
+    wxHtmlCell *m_Next{nullptr};
     // pointer to parent cell
-    wxHtmlContainerCell *m_Parent;
+    wxHtmlContainerCell *m_Parent{nullptr};
 
     // dimensions of fragment (m_Descent is used to position text & images)
-    int m_Width, m_Height, m_Descent;
+    int m_Width{0};
+    int m_Height{0};
+    int m_Descent{0};
     // position where the fragment is drawn:
-    int m_PosX, m_PosY;
+    int m_PosX;
+    int m_PosY;
 
     // superscript/subscript/normal:
-    wxHtmlScriptMode m_ScriptMode;
-    long m_ScriptBaseline;
+    wxHtmlScriptMode m_ScriptMode{wxHTML_SCRIPT_NORMAL};
+    long m_ScriptBaseline{0};
 
     // destination address if this fragment is hypertext link, NULL otherwise
-    wxHtmlLinkInfo *m_Link;
+    wxHtmlLinkInfo *m_Link{nullptr};
     // true if this cell can be placed on pagebreak, false otherwise
-    bool m_CanLiveOnPagebreak;
+    bool m_CanLiveOnPagebreak{true};
     // unique identifier of the cell, generated from "id" property of tags
     wxString m_id;
 

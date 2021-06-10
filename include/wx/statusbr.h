@@ -222,7 +222,7 @@ protected:
     wxStatusBarPaneArray m_panes;
 
     // if true overrides the width info of the wxStatusBarPanes
-    bool m_bSameWidthForAllPanes;
+    bool m_bSameWidthForAllPanes{true};
 };
 
 // ----------------------------------------------------------------------------

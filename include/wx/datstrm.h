@@ -43,7 +43,7 @@ protected:
     wxDataStreamBase(const wxMBConv& conv);
     ~wxDataStreamBase();
 
-    bool m_be_order;
+    bool m_be_order{false};
 
     wxMBConv *m_conv;
 };

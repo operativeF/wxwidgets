@@ -58,7 +58,6 @@ wxCommandProcessor::wxCommandProcessor(int maxCommands)
 {
     m_maxNoCommands = maxCommands;
 #if wxUSE_MENUS
-    m_commandEditMenu = nullptr;
 #endif // wxUSE_MENUS
 }
 

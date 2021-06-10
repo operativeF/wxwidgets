@@ -103,11 +103,6 @@ struct wxPNGImageData
 {
     wxPNGImageData()
     {
-        lines = nullptr;
-        m_buf = nullptr;
-        info_ptr = (png_infop) nullptr;
-        png_ptr = (png_structp) nullptr;
-        ok = false;
     }
 
     bool Alloc(png_uint_32 width, png_uint_32 height, unsigned char* buf)
@@ -153,11 +148,11 @@ struct wxPNGImageData
 
     void DoLoadPNGFile(wxImage* image, wxPNGInfoStruct& wxinfo);
 
-    unsigned char** lines;
-    unsigned char* m_buf;
-    png_infop info_ptr;
-    png_structp png_ptr;
-    bool ok;
+    unsigned char** lines{nullptr};
+    unsigned char* m_buf{nullptr};
+    png_infop info_ptr{nullptr};
+    png_structp png_ptr{nullptr};
+    bool ok{false};
 };
 
 } // anonymous namespace

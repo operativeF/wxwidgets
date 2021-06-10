@@ -295,8 +295,8 @@ public:
                                 const wxRect& rect, wxPGPaintData& paintdata ) override;
 
 protected:
-    wxBitmap*   m_pBitmap; // final thumbnail area
-    wxImage*    m_pImage; // intermediate thumbnail area
+    wxBitmap*   m_pBitmap{nullptr}; // final thumbnail area
+    wxImage*    m_pImage{nullptr}; // intermediate thumbnail area
 
 private:
     // Initialize m_pImage using the current file name.
@@ -355,7 +355,7 @@ protected:
     // Cache displayed text since generating it is relatively complicated.
     wxString            m_display;
     // How to handle user strings
-    int                 m_userStringMode;
+    int                 m_userStringMode{0};
 };
 
 #endif // wxUSE_CHOICEDLG

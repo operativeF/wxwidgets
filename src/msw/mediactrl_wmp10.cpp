@@ -675,7 +675,7 @@ public:
     wxSize m_bestSize;              // Actual movie size
 
     bool m_bWasStateChanged;        // See the "introduction"
-    wxEvtHandler* m_evthandler;
+    wxEvtHandler* m_evthandler{nullptr};
 
     friend class wxWMP10MediaEvtHandler;
     wxDECLARE_DYNAMIC_CLASS(wxWMP10MediaBackend);
@@ -719,11 +719,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxWMP10MediaBackend, wxMediaBackend);
 // wxWMP10MediaBackend Constructor
 //---------------------------------------------------------------------------
 wxWMP10MediaBackend::wxWMP10MediaBackend()
-                 
-                
-
 {
-    m_evthandler = nullptr;
 }
 
 //---------------------------------------------------------------------------

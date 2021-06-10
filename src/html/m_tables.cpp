@@ -662,10 +662,6 @@ void wxHtmlTableCell::Layout(int w)
 }
 
 
-
-
-
-
 //-----------------------------------------------------------------------------
 // The tables handler:
 //-----------------------------------------------------------------------------
@@ -674,9 +670,10 @@ void wxHtmlTableCell::Layout(int w)
 TAG_HANDLER_BEGIN(TABLE, "TABLE,TR,TD,TH")
 
     TAG_HANDLER_VARS
-        wxHtmlTableCell* m_Table;
-        wxString m_tAlign, m_rAlign;
-        wxHtmlContainerCell *m_enclosingContainer;
+        wxHtmlTableCell* m_Table{nullptr};
+        wxString m_tAlign;
+        wxString m_rAlign;
+        wxHtmlContainerCell *m_enclosingContainer{nullptr};
 
         // Call ParseInner() preserving background colour and mode after any
         // changes done by it.
@@ -711,8 +708,6 @@ TAG_HANDLER_BEGIN(TABLE, "TABLE,TR,TD,TH")
 
     TAG_HANDLER_CONSTR(TABLE)
     {
-        m_Table = nullptr;
-        m_enclosingContainer = nullptr;
         m_tAlign.clear();
         m_rAlign.clear();
     }

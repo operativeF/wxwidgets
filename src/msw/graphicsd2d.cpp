@@ -375,7 +375,7 @@ namespace
 {
 wxCOMPtr<IDWriteFontCollection> gs_pPrivateFontCollection;
 
-typedef unsigned int wxDirect2DFontKey;
+using wxDirect2DFontKey = unsigned int;
 
 class wxDirect2DFontFileEnumerator : public IDWriteFontFileEnumerator
 {
@@ -618,12 +618,12 @@ template <typename C>
 class wxContextSupplier
 {
 public:
-    typedef C ContextType;
+    using ContextType = C;
 
     virtual C GetContext() = 0;
 };
 
-typedef wxContextSupplier<ID2D1RenderTarget*> wxD2DContextSupplier;
+using wxD2DContextSupplier = wxContextSupplier<ID2D1RenderTarget*>;
 
 // A resource holder manages a generic resource by acquiring
 // and releasing it on demand.
@@ -2636,7 +2636,7 @@ private:
 class wxD2DBitmapData : public wxGraphicsBitmapData, public wxD2DManagedGraphicsData
 {
 public:
-    typedef wxD2DBitmapResourceHolder NativeType;
+    using NativeType = wxD2DBitmapResourceHolder;
 
     wxD2DBitmapData(wxGraphicsRenderer* renderer, const wxBitmap& bitmap) :
         wxGraphicsBitmapData(renderer)
@@ -3497,7 +3497,7 @@ private:
 class wxD2DHwndRenderTargetResourceHolder : public wxD2DRenderTargetResourceHolder
 {
 public:
-    typedef ID2D1HwndRenderTarget* ImplementationType;
+    using ImplementationType = ID2D1HwndRenderTarget*;
 
     wxD2DHwndRenderTargetResourceHolder(HWND hwnd, ID2D1Factory* factory) :
         m_hwnd(hwnd), m_factory(factory)
@@ -5342,7 +5342,7 @@ wxGraphicsFont wxD2DRenderer::CreateFontAtDPI(const wxFont& font,
 // create a sub-image from a native image representation
 wxGraphicsBitmap wxD2DRenderer::CreateSubBitmap(const wxGraphicsBitmap& bitmap, double x, double y, double w, double h)
 {
-    typedef wxD2DBitmapData::NativeType* NativeBitmap;
+    using NativeBitmap = wxD2DBitmapData::NativeType*;
 
     NativeBitmap natBmp = static_cast<NativeBitmap>(bitmap.GetNativeBitmap())->GetSubBitmap(x, y, w, h);
     wxGraphicsBitmap bmpRes;

@@ -50,7 +50,7 @@ public:
     void SetStatus(bool status) { m_status = status; }
 
 protected:
-    bool    m_inHelp;
+    bool    m_inHelp{false};
     bool    m_status; // true if the user left-clicked
 
 private:

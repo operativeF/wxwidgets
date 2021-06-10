@@ -219,14 +219,12 @@ public:
 TAG_HANDLER_BEGIN(OLULLI, "OL,UL,LI")
 
     TAG_HANDLER_VARS
-        wxHtmlListCell *m_List;
-        int m_Numbering;
+        wxHtmlListCell *m_List{nullptr};
+        int m_Numbering{0};
                 // this is number of actual item of list or 0 for dots
 
     TAG_HANDLER_CONSTR(OLULLI)
     {
-        m_List = nullptr;
-        m_Numbering = 0;
     }
 
     TAG_HANDLER_PROC(tag)

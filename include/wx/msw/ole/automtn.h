@@ -129,8 +129,8 @@ public: // public for compatibility only, don't use m_dispatchPtr directly.
     WXIDISPATCH*  m_dispatchPtr;
 
 private:
-    WXLCID m_lcid;
-    long   m_convertVariantFlags;
+    WXLCID m_lcid{LOCALE_SYSTEM_DEFAULT};
+    long   m_convertVariantFlags{wxOleConvertVariant_Default};
 
     wxAutomationObject(const wxAutomationObject&) = delete;
 	wxAutomationObject& operator=(const wxAutomationObject&) = delete;

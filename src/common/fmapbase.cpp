@@ -396,9 +396,6 @@ wxFontMapper *wxFontMapperBase::sm_instance = nullptr;
 
 wxFontMapperBase::wxFontMapperBase()
 {
-#if wxUSE_CONFIG && wxUSE_FILECONFIG
-    m_configDummy = nullptr;
-#endif // wxUSE_CONFIG
 }
 
 wxFontMapperBase::~wxFontMapperBase()

@@ -307,9 +307,9 @@ private:
 
     // the index of the preferred one (0 initially, so by default the first
     // one is the preferred)
-    size_t m_preferred;
+    size_t m_preferred{0};
 
-    wxDataFormat m_receivedFormat;
+    wxDataFormat m_receivedFormat{wxFormatInvalid};
 };
 
 // ============================================================================
@@ -540,8 +540,8 @@ public:
     }
 
 private:
-    size_t m_size;
-    void  *m_data;
+    size_t m_size{0};
+    void  *m_data{nullptr};
 };
 
 // ----------------------------------------------------------------------------

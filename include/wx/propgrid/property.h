@@ -189,7 +189,7 @@ protected:
     wxFont      m_font;
 
     // True if m_text is valid and specified
-    bool        m_hasValidText;
+    bool        m_hasValidText{false};
 };
 
 
@@ -1863,7 +1863,7 @@ public:
 
     // This member is public so scripting language bindings
     // wrapper code can access it freely.
-    void*                       m_clientData;
+    void*                       m_clientData{nullptr};
 
 protected:
 
@@ -1979,21 +1979,21 @@ protected:
 
     wxString                    m_label;
     wxString                    m_name;
-    wxPGProperty*               m_parent;
-    wxPropertyGridPageState*    m_parentState;
+    wxPGProperty*               m_parent{nullptr};
+    wxPropertyGridPageState*    m_parentState{nullptr};
 
-    wxClientData*               m_clientObject;
+    wxClientData*               m_clientObject{nullptr};
 
     // Overrides editor returned by property class
-    const wxPGEditor*           m_customEditor;
+    const wxPGEditor*           m_customEditor{nullptr};
 #if wxUSE_VALIDATORS
     // Editor is going to get this validator
-    wxValidator*                m_validator;
+    wxValidator*                m_validator{nullptr};
 #endif
     // Show this in front of the value
     //
     // TODO: Can bitmap be implemented with wxPGCell?
-    wxBitmap*                   m_valueBitmap;
+    wxBitmap*                   m_valueBitmap{nullptr};
 
     wxVariant                   m_value;
     wxPGAttributeStorage        m_attributes;
@@ -2009,20 +2009,20 @@ protected:
     wxString                    m_helpString;
 
     // Index in parent's property array.
-    unsigned int                m_arrIndex;
+    unsigned int                m_arrIndex{0xFFFF};
 
     // If not -1, then overrides m_value
-    int                         m_commonValue;
+    int                         m_commonValue{-1};
 
-    FlagType                    m_flags;
+    FlagType                    m_flags{wxPG_PROP_PROPERTY};
 
     // Maximum length (for string properties). Could be in some sort of
     // wxBaseStringProperty, but currently, for maximum flexibility and
     // compatibility, we'll stick it here.
-    int                         m_maxLen;
+    int                         m_maxLen{0};
 
     // Root has 0, categories etc. at that level 1, etc.
-    unsigned char               m_depth;
+    unsigned char               m_depth{1};
 
     // m_depthBgCol indicates width of background colour between margin and item
     // (essentially this is category's depth, if none then equals m_depth).
@@ -2111,8 +2111,8 @@ protected:
 
     void CalculateTextExtent(const wxWindow* wnd, const wxFont& font);
 
-    int     m_textExtent;  // pre-calculated length of text
-    wxByte  m_capFgColIndex;  // caption text colour index
+    int     m_textExtent{-1};  // pre-calculated length of text
+    wxByte  m_capFgColIndex{1};  // caption text colour index
 
 private:
     

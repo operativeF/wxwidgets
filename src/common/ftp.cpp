@@ -70,14 +70,8 @@ IMPLEMENT_PROTOCOL(wxFTP, wxT("ftp"), wxT("ftp"), true)
 
 wxFTP::wxFTP()
 {
-    m_streaming = false;
-    m_currentTransfermode = NONE;
-
     m_username = wxT("anonymous");
     m_password << wxGetUserId() << wxT('@') << wxGetFullHostName();
-
-    m_bPassive = true;
-    m_bEncounteredError = false;
 }
 
 wxFTP::~wxFTP()

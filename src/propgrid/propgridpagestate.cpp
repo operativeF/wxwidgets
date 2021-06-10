@@ -29,8 +29,6 @@
 #include "wx/propgrid/propgridpagestate.h"
 #include "wx/propgrid/propgrid.h"
 
-#define wxPG_DEFAULT_SPLITTERX      110
-
 // -----------------------------------------------------------------------
 // wxPropertyGridIterator
 // -----------------------------------------------------------------------
@@ -189,25 +187,14 @@ void wxPropertyGridIteratorBase::Next( bool iterateChildren )
 
 wxPropertyGridPageState::wxPropertyGridPageState()
 {
-    m_pPropGrid = nullptr;
     m_regularArray.SetParentState(this);
     m_properties = &m_regularArray;
-    m_abcArray = nullptr;
-    m_currentCategory = nullptr;
-    m_width = 0;
-    m_virtualHeight = 0;
-    m_itemsAdded = false;
-    m_anyModified = false;
-    m_vhCalcPending = false;
+
     m_colWidths.push_back( wxPG_DEFAULT_SPLITTERX );
     m_colWidths.push_back( wxPG_DEFAULT_SPLITTERX );
-    m_fSplitterX = wxPG_DEFAULT_SPLITTERX;
 
     m_columnProportions.push_back(1);
     m_columnProportions.push_back(1);
-
-    m_isSplitterPreSet = false;
-    m_dontCenterSplitter = false;
 
     // By default, we only have the 'value' column editable
     m_editableColumns.push_back(1);

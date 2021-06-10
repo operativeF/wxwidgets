@@ -203,7 +203,7 @@ protected:
     wxSize m_bitmap_size_large;
     wxSize m_bitmap_size_small;
     int m_current_layout;
-    bool m_layouts_valid;
+    bool m_layouts_valid{false};
     bool m_lock_active_state;
     bool m_show_tooltips_for_disabled;
 

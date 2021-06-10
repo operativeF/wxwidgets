@@ -42,17 +42,17 @@ private:
     bool HandleDPIChange(const wxSize& newDPI, const wxRect& newRect);
 
 #if wxUSE_GRAPHICS_CONTEXT
-    wxNonOwnedWindowShapeImpl* m_shapeImpl;
+    wxNonOwnedWindowShapeImpl* m_shapeImpl{nullptr};
 #endif // wxUSE_GRAPHICS_CONTEXT
 
     // Keep track of the DPI used in this window. So when per-monitor dpi
     // awareness is enabled, both old and new DPI are known for
     // wxDPIChangedEvent and wxWindow::MSWUpdateOnDPIChange.
-    wxSize m_activeDPI;
+    wxSize m_activeDPI{wxDefaultSize};
 
     // This window supports handling per-monitor DPI awareness when the
     // application manifest contains <dpiAwareness>PerMonitorV2</dpiAwareness>.
-    bool m_perMonitorDPIaware;
+    bool m_perMonitorDPIaware{false};
 };
 
 #endif // _WX_MSW_NONOWNEDWND_H_

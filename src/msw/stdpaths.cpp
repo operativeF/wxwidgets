@@ -65,15 +65,8 @@ DEFINE_GUID(wxFOLDERID_Downloads,
 
 struct ShellFunctions
 {
-    ShellFunctions()
-    {
-        pSHGetKnownFolderPath = nullptr;
-        initialized = false;
-    }
-
-    SHGetKnownFolderPath_t pSHGetKnownFolderPath;
-
-    bool initialized;
+    SHGetKnownFolderPath_t pSHGetKnownFolderPath{nullptr};
+    bool initialized{false};
 };
 
 // in spite of using a static variable, this is MT-safe as in the worst case it

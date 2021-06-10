@@ -296,7 +296,6 @@ public:
 
 wxRibbonButtonBar::wxRibbonButtonBar()
 {
-    m_layouts_valid = false;
     CommonInit (0);
 }
 
@@ -307,16 +306,14 @@ wxRibbonButtonBar::wxRibbonButtonBar(wxWindow* parent,
                   long style)
     : wxRibbonControl(parent, id, pos, size, wxBORDER_NONE)
 {
-    m_layouts_valid = false;
-
     CommonInit(style);
 }
 
 wxRibbonButtonBar::~wxRibbonButtonBar()
 {
     size_t count = m_buttons.GetCount();
-    size_t i;
-    for(i = 0; i < count; ++i)
+
+    for(size_t i = 0; i < count; ++i)
     {
         wxRibbonButtonBarButtonBase* button = m_buttons.Item(i);
         delete button;
@@ -324,7 +321,8 @@ wxRibbonButtonBar::~wxRibbonButtonBar()
     m_buttons.Clear();
 
     count = m_layouts.GetCount();
-    for(i = 0; i < count; ++i)
+    
+    for(size_t i = 0; i < count; ++i)
     {
         wxRibbonButtonBarLayout* layout = m_layouts.Item(i);
         delete layout;

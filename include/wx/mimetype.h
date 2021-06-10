@@ -368,7 +368,7 @@ private:
 
     // the static container of wxFileType data: if it's not NULL, it means that
     // this object is used as fallback only
-    const wxFileTypeInfo *m_info;
+    const wxFileTypeInfo *m_info{nullptr};
 
     // the object which implements the real stuff like reading and writing
     // to/from system MIME database
@@ -476,7 +476,7 @@ private:
     wxArrayFileTypeInfo m_fallbacks;
 
     // the object working with the system MIME database
-    wxMimeTypesManagerImpl *m_impl;
+    wxMimeTypesManagerImpl *m_impl{nullptr};
 
     // if m_impl is NULL, create one
     void EnsureImpl();

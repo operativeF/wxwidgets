@@ -109,7 +109,7 @@ public:
     void MSWProcessPendingEventsIfNeeded();
 
 protected:
-    int    m_printMode; // wxPRINT_WINDOWS, wxPRINT_POSTSCRIPT
+    int    m_printMode{wxPRINT_WINDOWS}; // wxPRINT_WINDOWS, wxPRINT_POSTSCRIPT
 
 public:
     // unregister any window classes registered by GetRegisteredClassName()

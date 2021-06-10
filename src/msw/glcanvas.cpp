@@ -838,7 +838,6 @@ class WXDLLIMPEXP_GL wxGLdummyWin : public wxWindow
 public:
     wxGLdummyWin()
     {
-        hdc = nullptr;
         CreateBase(nullptr, wxID_ANY);
         DWORD msflags = WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
         if( MSWCreate(wxApp::GetRegisteredClassName(wxT("wxGLCanvas"), -1, CS_OWNDC),
@@ -852,7 +851,7 @@ public:
         if ( hdc )
             ::ReleaseDC(GetHwnd(), hdc);
     }
-    HDC hdc;
+    HDC hdc{nullptr};
 };
 
 // Fills PIXELFORMATDESCRIPTOR struct

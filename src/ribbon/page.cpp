@@ -152,10 +152,6 @@ wxEND_EVENT_TABLE()
 
 wxRibbonPage::wxRibbonPage()
 {
-    m_scroll_left_btn = nullptr;
-    m_scroll_right_btn = nullptr;
-    m_scroll_amount = 0;
-    m_scroll_buttons_visible = false;
 }
 
 wxRibbonPage::wxRibbonPage(wxRibbonBar* parent,

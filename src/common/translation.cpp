@@ -1401,7 +1401,6 @@ void wxTranslations::SetNonOwned(wxTranslations *t)
 
 wxTranslations::wxTranslations()
 {
-    m_pMsgCat = nullptr;
     m_loader = new wxFileTranslationsLoader;
 }
 

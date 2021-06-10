@@ -112,9 +112,6 @@ class wxPGSpinButton : public wxSpinButton
 public:
     wxPGSpinButton()  
     {
-        m_hasCapture = false;
-        m_spins = 1;
-
         Bind(wxEVT_LEFT_DOWN, &wxPGSpinButton::OnMouseLeftDown, this);
         Bind(wxEVT_LEFT_UP, &wxPGSpinButton::OnMouseLeftUp, this);
         Bind(wxEVT_MOTION, &wxPGSpinButton::OnMouseMove, this);
@@ -134,11 +131,11 @@ private:
     // hundreds of 'spins' being done at once). Technically things like this
     // should be stored in event (wxSpinEvent in this case), but there probably
     // isn't anything there that can be reliably reused.
-    int     m_spins;
+    int     m_spins{1};
 
     // SpinButton seems to be a special for mouse capture, so we may need track
     // privately whether mouse is actually captured.
-    bool    m_hasCapture;
+    bool    m_hasCapture{false};
 
     void Capture()
     {
@@ -1833,9 +1830,6 @@ wxImageFileProperty::wxImageFileProperty( const wxString& label, const wxString&
 {
     m_wildcard = wxPGGetDefaultImageWildcard();
 
-    m_pImage = nullptr;
-    m_pBitmap = nullptr;
-
     LoadImageFromFile();
 }
 
@@ -1925,8 +1919,6 @@ wxMultiChoiceProperty::wxMultiChoiceProperty( const wxString& label,
                                               const wxArrayString& value)
     : wxEditorDialogProperty(label,name)
 {
-    m_dlgStyle = wxCHOICEDLG_STYLE;
-    m_userStringMode = 0;
     m_choices.Assign(choices);
     SetValue(value);
 }
@@ -1937,8 +1929,6 @@ wxMultiChoiceProperty::wxMultiChoiceProperty( const wxString& label,
                                               const wxArrayString& value)
     : wxEditorDialogProperty(label,name)
 {
-    m_dlgStyle = wxCHOICEDLG_STYLE;
-    m_userStringMode = 0;
     m_choices.Set(strings);
     SetValue(value);
 }
@@ -1948,15 +1938,12 @@ wxMultiChoiceProperty::wxMultiChoiceProperty( const wxString& label,
                                               const wxArrayString& value)
 : wxEditorDialogProperty(label,name)
 {
-    m_dlgStyle = wxCHOICEDLG_STYLE;
-    m_userStringMode = 0;
     wxArrayString strings;
     m_choices.Set(strings);
     SetValue(value);
 }
 
-wxMultiChoiceProperty::~wxMultiChoiceProperty()
-= default;
+wxMultiChoiceProperty::~wxMultiChoiceProperty() = default;
 
 void wxMultiChoiceProperty::OnSetValue()
 {

@@ -595,7 +595,7 @@ private:
 
     wxDataViewCheckIconText m_value;
 
-    bool m_allow3rdStateForUser;
+    bool m_allow3rdStateForUser{false};
 
 public:
 	wxClassInfo *GetClassInfo() const override;

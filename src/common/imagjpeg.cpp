@@ -81,7 +81,7 @@ typedef struct {
     wxInputStream *stream;
 } wx_source_mgr;
 
-typedef wx_source_mgr * wx_src_ptr;
+using wx_src_ptr = wx_source_mgr*;
 
 extern "C"
 {
@@ -355,7 +355,7 @@ typedef struct {
     JOCTET * buffer;
 } wx_destination_mgr;
 
-typedef wx_destination_mgr * wx_dest_ptr;
+using wx_dest_ptr = wx_destination_mgr*;
 
 #define OUTPUT_BUF_SIZE  4096    /* choose an efficiently fwrite'able size */
 

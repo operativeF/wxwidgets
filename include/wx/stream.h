@@ -79,8 +79,8 @@ protected:
     virtual wxFileOffset OnSysSeek(wxFileOffset seek, wxSeekMode mode);
     virtual wxFileOffset OnSysTell() const;
 
-    size_t m_lastcount;
-    wxStreamError m_lasterror;
+    size_t m_lastcount{0};
+    wxStreamError m_lasterror{wxSTREAM_NO_ERROR};
 
     friend class wxStreamBuffer;
 
@@ -213,14 +213,14 @@ protected:
     // bytes read
     size_t GetWBack(void *buf, size_t size);
 
-    // write back buffer or NULL if none
-    char *m_wback;
+    // write back buffer or nullptr if none
+    char *m_wback{nullptr};
 
     // the size of the buffer
-    size_t m_wbacksize;
+    size_t m_wbacksize{0};
 
     // the current position in the buffer
-    size_t m_wbackcur;
+    size_t m_wbackcur{0};
 
     friend class wxStreamBuffer;
 

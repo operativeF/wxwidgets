@@ -270,7 +270,7 @@ struct FontParameters {
 
 class Font {
 protected:
-	FontID fid;
+	FontID fid{nullptr};
 	// Private so Font objects can not be copied
 	Font(const Font &);
 	Font &operator=(const Font &);

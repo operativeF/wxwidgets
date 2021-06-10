@@ -16,14 +16,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFontData, wxObject);
 
 wxFontData::wxFontData()
 {
-    m_showHelp = false;
-    m_allowSymbols = true;
-    m_enableEffects = true;
-    m_minSize = 0;
-    m_maxSize = 0;
-
-    m_encoding = wxFONTENCODING_SYSTEM;
-    m_restrictSelection = wxFONTRESTRICT_NONE;
 }
 
 wxFontData::~wxFontData()

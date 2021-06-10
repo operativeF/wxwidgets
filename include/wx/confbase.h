@@ -416,9 +416,9 @@ protected:
 
 private:
   // are we doing automatic environment variable expansion?
-  bool m_bExpandEnvVars;
+  bool m_bExpandEnvVars{true};
   // do we record default values?
-  bool m_bRecordDefaults;
+  bool m_bRecordDefaults{false};
 
   // static variables
   static wxConfigBase *ms_pConfig;
@@ -464,7 +464,7 @@ private:
   wxConfigBase *m_pContainer;   // object we live in
   wxString      m_strName,      // name of entry (i.e. name only)
                 m_strOldPath;   // saved path
-  bool          m_bChanged;     // was the path changed?
+  bool          m_bChanged{false};     // was the path changed?
 };
 
 

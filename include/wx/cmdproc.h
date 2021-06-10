@@ -128,7 +128,7 @@ protected:
                                    m_lastSavedCommand;
 
 #if wxUSE_MENUS
-    wxMenu*       m_commandEditMenu;
+    wxMenu*       m_commandEditMenu{nullptr};
 #endif // wxUSE_MENUS
 
     wxString      m_undoAccelerator;

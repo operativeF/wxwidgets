@@ -75,7 +75,7 @@ public:
 
 protected:
   int                   m_joystick;
-  wxJoystickThread*     m_thread;
+  wxJoystickThread*     m_thread{nullptr};
 };
 
 #endif // _WX_JOYSTICK_H_

@@ -185,7 +185,7 @@ private:
     wxString m_lang;
     wxTranslationsLoader *m_loader;
 
-    wxMsgCatalog *m_pMsgCat; // pointer to linked list of catalogs
+    wxMsgCatalog *m_pMsgCat{nullptr}; // pointer to linked list of catalogs
 
     // In addition to keeping all the catalogs in the linked list, we also
     // store them in a hash map indexed by the domain name to allow finding

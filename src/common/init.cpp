@@ -131,37 +131,31 @@ static inline void Use(void *) { }
 
 static struct InitData
 {
-    InitData()
-    {
-        nInitCount = 0;
-
-        argc = argcOrig = 0;
-        // argv = argvOrig = NULL; -- not even really needed
-    }
+    InitData() = default;
+    InitData(const InitData&) = delete;
+    InitData& operator=(const InitData&) = delete;
 
     // critical section protecting this struct
     wxCRIT_SECT_DECLARE_MEMBER(csInit);
 
     // number of times wxInitialize() was called minus the number of times
     // wxUninitialize() was
-    size_t nInitCount;
+    size_t nInitCount{0};
 
-    int argc;
+    int argc{0};
 
     // if we receive the command line arguments as ASCII and have to convert
     // them to Unicode ourselves (this is the case under Unix but not Windows,
     // for example), we remember the converted argv here because we'll have to
     // free it when doing cleanup to avoid memory leaks
-    wchar_t **argv;
+    wchar_t **argv{nullptr};
 
     // we also need to keep two copies, one passed to other functions, and one
     // unmodified original; somebody may modify the former, so we need to have
     // the latter to be able to free everything correctly
-    int argcOrig;
-    wchar_t **argvOrig;
+    int argcOrig{0};
+    wchar_t **argvOrig{nullptr};
 
-    InitData(const InitData&) = delete;
-	InitData& operator=(const InitData&) = delete;
 } gs_initData;
 
 // ============================================================================
