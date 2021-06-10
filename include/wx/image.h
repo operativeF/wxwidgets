@@ -23,24 +23,16 @@
 #  include "wx/stream.h"
 #endif
 
-// on some systems (Unixware 7.x) index is defined as a macro in the headers
-// which breaks the compilation below
-#undef index
-
-#define wxIMAGE_OPTION_QUALITY               wxString(wxS("quality"))
-#define wxIMAGE_OPTION_FILENAME              wxString(wxS("FileName"))
-
-#define wxIMAGE_OPTION_RESOLUTION            wxString(wxS("Resolution"))
-#define wxIMAGE_OPTION_RESOLUTIONX           wxString(wxS("ResolutionX"))
-#define wxIMAGE_OPTION_RESOLUTIONY           wxString(wxS("ResolutionY"))
-
-#define wxIMAGE_OPTION_RESOLUTIONUNIT        wxString(wxS("ResolutionUnit"))
-
-#define wxIMAGE_OPTION_MAX_WIDTH             wxString(wxS("MaxWidth"))
-#define wxIMAGE_OPTION_MAX_HEIGHT            wxString(wxS("MaxHeight"))
-
-#define wxIMAGE_OPTION_ORIGINAL_WIDTH        wxString(wxS("OriginalWidth"))
-#define wxIMAGE_OPTION_ORIGINAL_HEIGHT       wxString(wxS("OriginalHeight"))
+inline constexpr wxChar wxIMAGE_OPTION_QUALITY[] =         wxT("quality");
+inline constexpr wxChar wxIMAGE_OPTION_FILENAME[] =        wxT("FileName");
+inline constexpr wxChar wxIMAGE_OPTION_RESOLUTION[] =      wxT("Resolution");
+inline constexpr wxChar wxIMAGE_OPTION_RESOLUTIONX[] =     wxT("ResolutionX");
+inline constexpr wxChar wxIMAGE_OPTION_RESOLUTIONY[] =     wxT("ResolutionY");
+inline constexpr wxChar wxIMAGE_OPTION_RESOLUTIONUNIT[] =  wxT("ResolutionUnit");
+inline constexpr wxChar wxIMAGE_OPTION_MAX_WIDTH[] =       wxT("MaxWidth");
+inline constexpr wxChar wxIMAGE_OPTION_MAX_HEIGHT[] =      wxT("MaxHeight");
+inline constexpr wxChar wxIMAGE_OPTION_ORIGINAL_WIDTH[] =  wxT("OriginalWidth");
+inline constexpr wxChar wxIMAGE_OPTION_ORIGINAL_HEIGHT[] = wxT("OriginalHeight");
 
 // constants used with wxIMAGE_OPTION_RESOLUTIONUNIT
 //

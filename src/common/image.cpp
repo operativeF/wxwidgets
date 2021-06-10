@@ -30,6 +30,7 @@
 
 // For memcpy
 #include <cstring>
+#include <algorithm>
 
 // make the code compile with either wxFile*Stream or wxFFile*Stream:
 #define HAS_FILE_STREAMS (wxUSE_STREAMS && (wxUSE_FILE || wxUSE_FFILE))
@@ -65,6 +66,9 @@ public:
     wxImageRefData() = default;
     ~wxImageRefData() override;
 
+    wxImageRefData(const wxImageRefData&) = delete;
+	wxImageRefData& operator=(const wxImageRefData&) = delete;
+
     int             m_width{0};
     int             m_height{0};
     wxBitmapType    m_type{wxBITMAP_TYPE_INVALID};
@@ -93,11 +97,8 @@ public:
     wxPalette       m_palette;
 #endif // wxUSE_PALETTE
 
-    wxArrayString   m_optionNames;
-    wxArrayString   m_optionValues;
-
-    wxImageRefData(const wxImageRefData&) = delete;
-	wxImageRefData& operator=(const wxImageRefData&) = delete;
+    std::vector<wxString>   m_optionNames;
+    std::vector<wxString>   m_optionValues;
 };
 
 // For compatibility, if nothing else, loading is verbose by default.
@@ -2460,14 +2461,19 @@ void wxImage::SetOption(const wxString& name, const wxString& value)
 {
     AllocExclusive();
 
-    int idx = M_IMGDATA->m_optionNames.Index(name, false);
-    if ( idx == wxNOT_FOUND )
+    const auto match = std::find_if(M_IMGDATA->m_optionNames.cbegin(), M_IMGDATA->m_optionNames.cend(),
+    [name](const auto& optname){
+        return name.IsSameAs(optname, false);
+    });
+
+    if ( match == M_IMGDATA->m_optionNames.cend() )
     {
-        M_IMGDATA->m_optionNames.Add(name);
-        M_IMGDATA->m_optionValues.Add(value);
+        M_IMGDATA->m_optionNames.push_back(name);
+        M_IMGDATA->m_optionValues.push_back(value);
     }
     else
     {
+        const auto idx = std::distance(std::cbegin(M_IMGDATA->m_optionNames), match);
         M_IMGDATA->m_optionNames[idx] = name;
         M_IMGDATA->m_optionValues[idx] = value;
     }
@@ -2483,13 +2489,17 @@ void wxImage::SetOption(const wxString& name, int value)
 wxString wxImage::GetOption(const wxString& name) const
 {
     if ( !M_IMGDATA )
-        return wxEmptyString;
+        return wxString();
 
-    int idx = M_IMGDATA->m_optionNames.Index(name, false);
-    if ( idx == wxNOT_FOUND )
-        return wxEmptyString;
+    const auto match = std::find_if(M_IMGDATA->m_optionNames.cbegin(), M_IMGDATA->m_optionNames.cend(),
+    [name](const auto& optname){
+        return name.IsSameAs(optname, false);
+    });
+
+    if ( match == M_IMGDATA->m_optionNames.cend() )
+        return wxString();
     else
-        return M_IMGDATA->m_optionValues[idx];
+        return *match;
 }
 
 int wxImage::GetOptionInt(const wxString& name) const
@@ -2499,8 +2509,15 @@ int wxImage::GetOptionInt(const wxString& name) const
 
 bool wxImage::HasOption(const wxString& name) const
 {
-    return M_IMGDATA ? M_IMGDATA->m_optionNames.Index(name, false) != wxNOT_FOUND
-                     : false;
+    if(M_IMGDATA)
+    {
+        return M_IMGDATA->m_optionNames.cend() != std::find_if(M_IMGDATA->m_optionNames.cbegin(), M_IMGDATA->m_optionNames.cend(), 
+        [name](const auto& optname){
+            return name.IsSameAs(optname, false);
+        });
+    }
+
+    return false;
 }
 
 // ----------------------------------------------------------------------------
