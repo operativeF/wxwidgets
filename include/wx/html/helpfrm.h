@@ -53,10 +53,6 @@ class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;
 #define wxHF_DEFAULT_STYLE          (wxHF_TOOLBAR | wxHF_CONTENTS | \
                                      wxHF_INDEX | wxHF_SEARCH | \
                                      wxHF_BOOKMARKS | wxHF_PRINT)
-//compatibility:
-#define wxHF_OPENFILES               wxHF_OPEN_FILES
-#define wxHF_FLATTOOLBAR             wxHF_FLAT_TOOLBAR
-#define wxHF_DEFAULTSTYLE            wxHF_DEFAULT_STYLE
 
 struct wxHtmlHelpMergedIndexItem;
 class wxHtmlHelpMergedIndex;

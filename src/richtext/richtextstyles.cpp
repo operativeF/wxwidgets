@@ -737,7 +737,7 @@ wxString wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) cons
 
     str << wxT("<html><head></head>");
     str << wxT("<body");
-    if (attr.GetBackgroundColour().Ok())
+    if (attr.GetBackgroundColour().IsOk())
         str << wxT(" bgcolor=\"#") << ColourToHexString(attr.GetBackgroundColour()) << wxT("\"");
     str << wxT(">");
 
@@ -745,7 +745,7 @@ wxString wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) cons
         str << wxT("<center>");
 
     str << wxT("<table");
-    if (attr.GetBackgroundColour().Ok())
+    if (attr.GetBackgroundColour().IsOk())
         str << wxT(" bgcolor=\"#") << ColourToHexString(attr.GetBackgroundColour()) << wxT("\"");
 
     str << wxT("><tr>");
@@ -841,7 +841,7 @@ wxString wxRichTextStyleListBox::CreateHTML(wxRichTextStyleDefinition* def) cons
     if (attr.GetTextColour().IsOk() && attr.GetTextColour() != attr.GetBackgroundColour() && !(!attr.HasBackgroundColour() && attr.GetTextColour() == *wxWHITE))
         str << wxT(" color=\"#") << ColourToHexString(attr.GetTextColour()) << wxT("\"");
 
-    if (attr.GetBackgroundColour().Ok())
+    if (attr.GetBackgroundColour().IsOk())
         str << wxT(" bgcolor=\"#") << ColourToHexString(attr.GetBackgroundColour()) << wxT("\"");
 
     str << wxT(">");

@@ -8,7 +8,7 @@
 #ifndef _WX_QT_DATAVIEW_H_
 #define _WX_QT_DATAVIEW_H_
 
-class WXDLLIMPEXP_ADV wxDataViewColumn: public wxDataViewColumnBase
+class WXDLLIMPEXP_CORE wxDataViewColumn: public wxDataViewColumnBase
 {
 public:
     wxDataViewColumn( const wxString &title, wxDataViewRenderer *renderer,
@@ -66,7 +66,7 @@ public:
 };
 
 
-class WXDLLIMPEXP_ADV wxDataViewCtrl: public wxDataViewCtrlBase
+class WXDLLIMPEXP_CORE wxDataViewCtrl: public wxDataViewCtrlBase
 {
 public:
     wxDataViewCtrl();

@@ -149,10 +149,6 @@ public:
 
 #if !wxCOLOUR_IS_GDIOBJECT
     virtual bool IsOk() const= 0;
-
-    // older version, for backwards compatibility only (but not deprecated
-    // because it's still widely used)
-    bool Ok() const { return IsOk(); }
 #endif
 
     // Return the perceived brightness of the colour, with 0 for black and 1

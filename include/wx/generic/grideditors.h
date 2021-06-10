@@ -53,7 +53,7 @@ private:
 #if wxUSE_TEXTCTRL
 
 // the editor for string/text data
-class WXDLLIMPEXP_ADV wxGridCellTextEditor : public wxGridCellEditor
+class WXDLLIMPEXP_CORE wxGridCellTextEditor : public wxGridCellEditor
 {
 public:
     explicit wxGridCellTextEditor(size_t maxChars = 0);
@@ -105,7 +105,7 @@ private:
 };
 
 // the editor for numeric (long) data
-class WXDLLIMPEXP_ADV wxGridCellNumberEditor : public wxGridCellTextEditor
+class WXDLLIMPEXP_CORE wxGridCellNumberEditor : public wxGridCellTextEditor
 {
 public:
     // allows to specify the range - if min == max == -1, no range checking is
@@ -191,7 +191,7 @@ enum wxGridCellFloatFormat
 };
 
 // the editor for floating point numbers (double) data
-class WXDLLIMPEXP_ADV wxGridCellFloatEditor : public wxGridCellTextEditor
+class WXDLLIMPEXP_CORE wxGridCellFloatEditor : public wxGridCellTextEditor
 {
 public:
     wxGridCellFloatEditor(int width = -1,
@@ -239,7 +239,7 @@ private:
 #if wxUSE_CHECKBOX
 
 // the editor for boolean data
-class WXDLLIMPEXP_ADV wxGridCellBoolEditor : public wxGridCellEditor
+class WXDLLIMPEXP_CORE wxGridCellBoolEditor : public wxGridCellEditor
 {
 public:
     wxGridCellBoolEditor() = default;
@@ -308,7 +308,7 @@ private:
 #if wxUSE_COMBOBOX
 
 // the editor for string data allowing to choose from the list of strings
-class WXDLLIMPEXP_ADV wxGridCellChoiceEditor : public wxGridCellEditor
+class WXDLLIMPEXP_CORE wxGridCellChoiceEditor : public wxGridCellEditor
 {
 public:
     // if !allowOthers, user can't type a string not in choices array
@@ -356,7 +356,7 @@ protected:
 
 #if wxUSE_COMBOBOX
 
-class WXDLLIMPEXP_ADV wxGridCellEnumEditor : public wxGridCellChoiceEditor
+class WXDLLIMPEXP_CORE wxGridCellEnumEditor : public wxGridCellChoiceEditor
 {
 public:
     wxGridCellEnumEditor( const wxString& choices = wxEmptyString );
@@ -378,7 +378,7 @@ private:
 
 #endif // wxUSE_COMBOBOX
 
-class WXDLLIMPEXP_ADV wxGridCellAutoWrapStringEditor : public wxGridCellTextEditor
+class WXDLLIMPEXP_CORE wxGridCellAutoWrapStringEditor : public wxGridCellTextEditor
 {
 public:
     wxGridCellAutoWrapStringEditor()  = default;
@@ -395,7 +395,7 @@ public:
 
 #if wxUSE_DATEPICKCTRL
 
-class WXDLLIMPEXP_ADV wxGridCellDateEditor : public wxGridCellEditor
+class WXDLLIMPEXP_CORE wxGridCellDateEditor : public wxGridCellEditor
 {
 public:
     explicit wxGridCellDateEditor(const wxString& format = wxString());

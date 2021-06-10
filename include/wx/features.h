@@ -95,17 +95,5 @@
     #endif
 #endif
 
-/* also define deprecated synonym which exists for compatibility only */
-#ifdef wxHAS_RAW_BITMAP
-    #define wxHAVE_RAW_BITMAP
-#endif
-
-
-// Previously this symbol wasn't defined for all compilers as Bind() couldn't
-// be implemented for some of them (notably MSVC 6), but this is not the case
-// any more and Bind() is always implemented when using any currently supported
-// compiler, so this symbol exists purely for compatibility.
-#define wxHAS_EVENT_BIND
-
 #endif /*  _WX_FEATURES_H_ */
 

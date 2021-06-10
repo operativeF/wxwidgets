@@ -13,7 +13,7 @@
 #include "wx/calctrl.h"
 class QCalendarWidget;
 
-class WXDLLIMPEXP_ADV wxCalendarCtrl : public wxCalendarCtrlBase
+class WXDLLIMPEXP_CORE wxCalendarCtrl : public wxCalendarCtrlBase
 {
 public:
     wxCalendarCtrl() { Init(); }

@@ -25,9 +25,4 @@ struct wxRemoveRef<T&>
     using type = T;
 };
 
-// Define this for compatibility with the previous versions in which
-// wxRemoveRef() wasn't always defined as we supported MSVC6 for which it
-// couldn't be implemented.
-#define wxHAS_REMOVEREF
-
 #endif // _WX_META_REMOVEREF_H_

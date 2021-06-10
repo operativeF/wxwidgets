@@ -12,7 +12,7 @@
 // wxDataViewTextRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewTextRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewTextRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("string"); }
@@ -31,7 +31,7 @@ public:
 // wxDataViewBitmapRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewBitmapRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewBitmapRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("wxBitmap"); }
@@ -48,7 +48,7 @@ public:
 // wxDataViewToggleRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewToggleRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewToggleRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("bool"); }
@@ -65,7 +65,7 @@ public:
 // wxDataViewCustomRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewCustomRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewCustomRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("string"); }
@@ -102,7 +102,7 @@ public:
 // wxDataViewProgressRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewProgressRenderer: public wxDataViewCustomRenderer
+class WXDLLIMPEXP_CORE wxDataViewProgressRenderer: public wxDataViewCustomRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("long"); }
@@ -124,7 +124,7 @@ public:
 // wxDataViewIconTextRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewIconTextRenderer: public wxDataViewCustomRenderer
+class WXDLLIMPEXP_CORE wxDataViewIconTextRenderer: public wxDataViewCustomRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("wxDataViewIconText"); }
@@ -149,7 +149,7 @@ public:
 // wxDataViewDateRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewDateRenderer: public wxDataViewCustomRenderer
+class WXDLLIMPEXP_CORE wxDataViewDateRenderer: public wxDataViewCustomRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("datetime"); }
@@ -172,7 +172,7 @@ public:
 // wxDataViewChoiceRenderer
 // -------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewChoiceRenderer: public wxDataViewCustomRenderer
+class WXDLLIMPEXP_CORE wxDataViewChoiceRenderer: public wxDataViewCustomRenderer
 {
 public:
     wxDataViewChoiceRenderer( const wxArrayString &choices,

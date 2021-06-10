@@ -31,7 +31,7 @@
 #define wxSOUND_LOOP  ((unsigned)2)
 
 // Base class for wxSound implementations
-class WXDLLIMPEXP_ADV wxSoundBase : public wxObject
+class WXDLLIMPEXP_CORE wxSoundBase : public wxObject
 {
 public:
     // Play the sound:

@@ -145,11 +145,6 @@
 #    define WXDLLIMPEXP_INLINE_CORE
 #endif
 
-/* Advanced library doesn't exist any longer, but its macros are preserved for
-   compatibility. Do not use them in the new code. */
-#define WXDLLIMPEXP_ADV WXDLLIMPEXP_CORE
-#define WXDLLIMPEXP_DATA_ADV(type) WXDLLIMPEXP_DATA_CORE(type)
-
 #ifdef WXMAKINGDLL_QA
 #    define WXDLLIMPEXP_QA WXEXPORT
 #    define WXDLLIMPEXP_DATA_QA(type) WXEXPORT type

@@ -16,7 +16,7 @@ class wxDateTimeWidgetImpl;
 // wxDateTimePickerCtrl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDateTimePickerCtrl : public wxDateTimePickerCtrlBase
+class WXDLLIMPEXP_CORE wxDateTimePickerCtrl : public wxDateTimePickerCtrlBase
 {
 public:
     // Implement the base class pure virtuals.

@@ -22,7 +22,7 @@
 // ----------------------------------------------------------------------------
 
 WX_DEFINE_ARRAY_WITH_DECL_PTR(wxGridCellAttr *, wxArrayAttrs,
-                                 class WXDLLIMPEXP_ADV);
+                                 class WXDLLIMPEXP_CORE);
 
 WX_DECLARE_HASH_MAP_WITH_DECL(wxLongLong_t, wxGridCellAttr*,
                               wxIntegerHash, wxIntegerEqual,
@@ -261,7 +261,7 @@ private:
 };
 
 // common base class for various grid subwindows
-class WXDLLIMPEXP_ADV wxGridSubwindow : public wxWindow
+class WXDLLIMPEXP_CORE wxGridSubwindow : public wxWindow
 {
 public:
     wxGridSubwindow(wxGrid *owner,
@@ -291,7 +291,7 @@ protected:
 	wxGridSubwindow& operator=(const wxGridSubwindow&) = delete;
 };
 
-class WXDLLIMPEXP_ADV wxGridRowLabelWindow : public wxGridSubwindow
+class WXDLLIMPEXP_CORE wxGridRowLabelWindow : public wxGridSubwindow
 {
 public:
     wxGridRowLabelWindow(wxGrid *parent)
@@ -324,7 +324,7 @@ public:
 };
 
 
-class WXDLLIMPEXP_ADV wxGridColLabelWindow : public wxGridSubwindow
+class WXDLLIMPEXP_CORE wxGridColLabelWindow : public wxGridSubwindow
 {
 public:
     wxGridColLabelWindow(wxGrid *parent)
@@ -357,7 +357,7 @@ public:
 };
 
 
-class WXDLLIMPEXP_ADV wxGridCornerLabelWindow : public wxGridSubwindow
+class WXDLLIMPEXP_CORE wxGridCornerLabelWindow : public wxGridSubwindow
 {
 public:
     wxGridCornerLabelWindow(wxGrid *parent)
@@ -375,7 +375,7 @@ private:
 	wxGridCornerLabelWindow& operator=(const wxGridCornerLabelWindow&) = delete;
 };
 
-class WXDLLIMPEXP_ADV wxGridWindow : public wxGridSubwindow
+class WXDLLIMPEXP_CORE wxGridWindow : public wxGridSubwindow
 {
 public:
     // grid window variants for scrolling possibilities
@@ -425,7 +425,7 @@ private:
 // ----------------------------------------------------------------------------
 
 // this class stores attributes set for cells
-class WXDLLIMPEXP_ADV wxGridCellAttrData
+class WXDLLIMPEXP_CORE wxGridCellAttrData
 {
 public:
     ~wxGridCellAttrData();
@@ -443,7 +443,7 @@ private:
 };
 
 // this class stores attributes set for rows or columns
-class WXDLLIMPEXP_ADV wxGridRowOrColAttrData
+class WXDLLIMPEXP_CORE wxGridRowOrColAttrData
 {
 public:
     // empty ctor to suppress warnings
@@ -461,7 +461,7 @@ private:
 
 // NB: this is just a wrapper around 3 objects: one which stores cell
 //     attributes, and 2 others for row/col ones
-class WXDLLIMPEXP_ADV wxGridCellAttrProviderData
+class WXDLLIMPEXP_CORE wxGridCellAttrProviderData
 {
 public:
     wxGridCellAttrData m_cellAttrs;
@@ -1003,10 +1003,10 @@ struct wxGridDataTypeInfo
 
 
 WX_DEFINE_ARRAY_WITH_DECL_PTR(wxGridDataTypeInfo*, wxGridDataTypeInfoArray,
-                                 class WXDLLIMPEXP_ADV);
+                                 class WXDLLIMPEXP_CORE);
 
 
-class WXDLLIMPEXP_ADV wxGridTypeRegistry
+class WXDLLIMPEXP_CORE wxGridTypeRegistry
 {
 public:
     wxGridTypeRegistry() = default;

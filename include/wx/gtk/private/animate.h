@@ -23,7 +23,7 @@ typedef struct _GdkPixbufAnimationIter GdkPixbufAnimationIter;
 // will automatically use the available handlers.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxAnimationGTKImpl : public wxAnimationImpl
+class WXDLLIMPEXP_CORE wxAnimationGTKImpl : public wxAnimationImpl
 {
 public:
     wxAnimationGTKImpl()

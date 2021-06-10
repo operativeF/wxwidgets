@@ -157,7 +157,7 @@ protected:
 #else
     #include "wx/generic/animate.h"
 
-    class WXDLLIMPEXP_ADV wxAnimationCtrl : public wxGenericAnimationCtrl
+    class WXDLLIMPEXP_CORE wxAnimationCtrl : public wxGenericAnimationCtrl
     {
     public:
         wxAnimationCtrl()

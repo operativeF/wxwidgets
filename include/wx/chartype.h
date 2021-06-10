@@ -21,10 +21,6 @@
  */
 #include "wx/types.h"
 
-/* This is kept only for backwards compatibility, in case some application code
-   checks for it. It's always 1 and can't be changed. */
-#define wxUSE_WCHAR_T 1
-
 /*
    non Unix compilers which do have wchar.h (but not tchar.h which is included
    below and which includes wchar.h anyhow).

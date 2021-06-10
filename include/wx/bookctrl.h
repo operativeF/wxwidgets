@@ -406,9 +406,6 @@ typedef void (wxEvtHandler::*wxBookCtrlEventFunction)(wxBookCtrlEvent&);
 #define wxBookCtrlEventHandler(func) \
     wxEVENT_HANDLER_CAST(wxBookCtrlEventFunction, func)
 
-// obsolete name, defined for compatibility only
-#define wxBookCtrlBaseEvent wxBookCtrlEvent
-
 // make a default book control for given platform
 #if wxUSE_NOTEBOOK
     // dedicated to majority of desktops

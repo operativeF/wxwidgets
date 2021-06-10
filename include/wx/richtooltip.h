@@ -51,7 +51,7 @@ enum wxTipKind
 // ----------------------------------------------------------------------------
 
 // Notice that this class does not inherit from wxWindow.
-class WXDLLIMPEXP_ADV wxRichToolTip
+class WXDLLIMPEXP_CORE wxRichToolTip
 {
 public:
     // Ctor must specify the tooltip title and main message, additional

@@ -14,7 +14,7 @@
 // wxDataViewCustomRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewCustomRenderer : public wxDataViewCustomRendererBase
+class WXDLLIMPEXP_CORE wxDataViewCustomRenderer : public wxDataViewCustomRendererBase
 {
 public:
     static wxString GetDefaultType() { return wxS("string"); }
@@ -74,7 +74,7 @@ protected:
 // wxDataViewTextRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewTextRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewTextRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("string"); }
@@ -112,7 +112,7 @@ public:
 // wxDataViewBitmapRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewBitmapRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewBitmapRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("wxBitmap"); }
@@ -135,7 +135,7 @@ public:
 // wxDataViewChoiceRenderer
 // -------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewChoiceRenderer
+class WXDLLIMPEXP_CORE wxDataViewChoiceRenderer
     : public wxOSXDataViewDisabledInertRenderer
 {
 public:
@@ -168,7 +168,7 @@ public:
 // wxDataViewChoiceByIndexRenderer
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewChoiceByIndexRenderer: public wxDataViewChoiceRenderer
+class WXDLLIMPEXP_CORE wxDataViewChoiceByIndexRenderer: public wxDataViewChoiceRenderer
 {
 public:
     wxDataViewChoiceByIndexRenderer(const wxArrayString& choices,
@@ -186,7 +186,7 @@ public:
 // ---------------------------------------------------------
 // wxDataViewIconTextRenderer
 // ---------------------------------------------------------
-class WXDLLIMPEXP_ADV wxDataViewIconTextRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewIconTextRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("wxDataViewIconText"); }
@@ -253,7 +253,7 @@ public:
 // wxDataViewToggleRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewToggleRenderer
+class WXDLLIMPEXP_CORE wxDataViewToggleRenderer
     : public wxOSXDataViewDisabledInertRenderer
 {
 public:
@@ -287,7 +287,7 @@ public:
 // wxDataViewProgressRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewProgressRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewProgressRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("long"); }
@@ -316,7 +316,7 @@ public:
 // wxDataViewDateRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewDateRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewDateRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("datetime"); }

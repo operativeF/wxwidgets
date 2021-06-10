@@ -225,12 +225,6 @@ public:
 // treebook event class and related stuff
 // ----------------------------------------------------------------------------
 
-// wxTreebookEvent is obsolete and defined for compatibility only
-#define wxTreebookEvent wxBookCtrlEvent
-using wxTreebookEventFunction = wxBookCtrlEventFunction;
-#define wxTreebookEventHandler(func) wxBookCtrlEventHandler(func)
-
-
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TREEBOOK_PAGE_CHANGED, wxBookCtrlEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TREEBOOK_PAGE_CHANGING, wxBookCtrlEvent );
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TREEBOOK_NODE_COLLAPSED, wxBookCtrlEvent );

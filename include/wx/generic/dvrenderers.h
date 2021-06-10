@@ -15,7 +15,7 @@
 // wxDataViewCustomRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewCustomRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewCustomRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("string"); }
@@ -54,7 +54,7 @@ public:
 // wxDataViewTextRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewTextRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewTextRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("string"); }
@@ -104,7 +104,7 @@ public:
 // wxDataViewBitmapRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewBitmapRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewBitmapRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("wxBitmap"); }
@@ -139,7 +139,7 @@ public:
 // wxDataViewToggleRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewToggleRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewToggleRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("bool"); }
@@ -182,7 +182,7 @@ public:
 // wxDataViewProgressRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewProgressRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewProgressRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("long"); }
@@ -218,7 +218,7 @@ public:
 // wxDataViewIconTextRenderer
 // ---------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDataViewIconTextRenderer: public wxDataViewRenderer
+class WXDLLIMPEXP_CORE wxDataViewIconTextRenderer: public wxDataViewRenderer
 {
 public:
     static wxString GetDefaultType() { return wxS("wxDataViewIconText"); }

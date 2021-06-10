@@ -58,15 +58,6 @@ enum
 };
 
 // ----------------------------------------------------------------------------
-// global variables
-// ----------------------------------------------------------------------------
-
-// use of this list is strongly deprecated, use wxApp ScheduleForDestruction()
-// and IsScheduledForDestruction()  methods instead of this list directly, it
-// is here for compatibility purposes only
-extern WXDLLIMPEXP_DATA_BASE(wxList) wxPendingDelete;
-
-// ----------------------------------------------------------------------------
 // wxAppConsoleBase: wxApp for non-GUI applications
 // ----------------------------------------------------------------------------
 
@@ -888,22 +879,5 @@ public:
 // harm
 extern wxAppConsole *wxCreateApp();
 extern wxAppInitializer wxTheAppInitializer;
-
-// ----------------------------------------------------------------------------
-// Compatibility macro aliases
-// ----------------------------------------------------------------------------
-
-// deprecated variants _not_ requiring a semicolon after them
-// (note that also some wx-prefixed macro do _not_ require a semicolon because
-// it's not always possible to force the compiler to require it)
-
-#define IMPLEMENT_WXWIN_MAIN_CONSOLE            wxIMPLEMENT_WXWIN_MAIN_CONSOLE
-#define IMPLEMENT_WXWIN_MAIN                    wxIMPLEMENT_WXWIN_MAIN
-#define IMPLEMENT_WX_THEME_SUPPORT              wxIMPLEMENT_WX_THEME_SUPPORT
-#define IMPLEMENT_APP_NO_MAIN(app)              wxIMPLEMENT_APP_NO_MAIN(app);
-#define IMPLEMENT_APP_NO_THEMES(app)            wxIMPLEMENT_APP_NO_THEMES(app);
-#define IMPLEMENT_APP(app)                      wxIMPLEMENT_APP(app);
-#define IMPLEMENT_APP_CONSOLE(app)              wxIMPLEMENT_APP_CONSOLE(app);
-#define DECLARE_APP(app)                        wxDECLARE_APP(app);
 
 #endif // _WX_APP_H_BASE_

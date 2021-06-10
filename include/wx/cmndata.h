@@ -193,9 +193,6 @@ private:
 * This is the data used (and returned) by the wxPageSetupDialog.
 */
 
-// Compatibility with old name
-#define wxPageSetupData wxPageSetupDialogData
-
 class WXDLLIMPEXP_CORE wxPageSetupDialogData: public wxObject
 {
 public:

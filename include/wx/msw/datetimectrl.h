@@ -19,7 +19,7 @@ struct tagNMDATETIMECHANGE;
 // wxDateTimePickerCtrl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDateTimePickerCtrl : public wxDateTimePickerCtrlBase
+class WXDLLIMPEXP_CORE wxDateTimePickerCtrl : public wxDateTimePickerCtrlBase
 {
 public:
     // set/get the date

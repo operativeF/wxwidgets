@@ -13,7 +13,7 @@
 
 #if wxUSE_SOUND
 
-class WXDLLIMPEXP_ADV wxSound : public wxSoundBase
+class WXDLLIMPEXP_CORE wxSound : public wxSoundBase
 {
 public:
     wxSound() = default;

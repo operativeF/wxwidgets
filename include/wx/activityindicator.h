@@ -22,7 +22,7 @@
 // wxActivityIndicator: small animated indicator of some application activity.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxActivityIndicatorBase : public wxControl
+class WXDLLIMPEXP_CORE wxActivityIndicatorBase : public wxControl
 {
 public:
     // Start or stop the activity animation (it is stopped initially).

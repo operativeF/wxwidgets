@@ -269,14 +269,6 @@ protected:
 
 #endif // wxUSE_GUI
 
-// ----------------------------------------------------------------------------
-// global variables
-// ----------------------------------------------------------------------------
-
-// the default font mapper for wxWidgets programs do NOT use! This is for
-// backward compatibility, use wxFontMapper::Get() instead
-#define wxTheFontMapper (wxFontMapper::Get())
-
 #else // !wxUSE_FONTMAP
 
 #if wxUSE_GUI

@@ -47,7 +47,7 @@ enum
 // The template argument must be a class deriving from wxDateTimePickerCtrlBase
 // (i.e. in practice either this class itself or wxDateTimePickerCtrl).
 template <typename Base>
-class WXDLLIMPEXP_ADV wxDatePickerCtrlCommonBase : public Base
+class WXDLLIMPEXP_CORE wxDatePickerCtrlCommonBase : public Base
 {
 public:
     /*
@@ -93,7 +93,7 @@ using wxDatePickerCtrlBase = wxDatePickerCtrlCommonBase<wxDateTimePickerCtrl>;
 #else
     #include "wx/generic/datectrl.h"
 
-    class WXDLLIMPEXP_ADV wxDatePickerCtrl : public wxDatePickerCtrlGeneric
+    class WXDLLIMPEXP_CORE wxDatePickerCtrl : public wxDatePickerCtrlGeneric
     {
     public:
         wxDatePickerCtrl() { }

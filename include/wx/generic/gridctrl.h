@@ -20,7 +20,7 @@
 
 
 // the default renderer for the cells containing string data
-class WXDLLIMPEXP_ADV wxGridCellStringRenderer : public wxGridCellRenderer
+class WXDLLIMPEXP_CORE wxGridCellStringRenderer : public wxGridCellRenderer
 {
 public:
     // draw the string
@@ -48,7 +48,7 @@ protected:
 };
 
 // the default renderer for the cells containing numeric (long) data
-class WXDLLIMPEXP_ADV wxGridCellNumberRenderer : public wxGridCellStringRenderer
+class WXDLLIMPEXP_CORE wxGridCellNumberRenderer : public wxGridCellStringRenderer
 {
 public:
     explicit wxGridCellNumberRenderer(long minValue = LONG_MIN,
@@ -88,7 +88,7 @@ protected:
          m_maxValue;
 };
 
-class WXDLLIMPEXP_ADV wxGridCellFloatRenderer : public wxGridCellStringRenderer
+class WXDLLIMPEXP_CORE wxGridCellFloatRenderer : public wxGridCellStringRenderer
 {
 public:
     wxGridCellFloatRenderer(int width = -1,
@@ -135,7 +135,7 @@ private:
 };
 
 // renderer for boolean fields
-class WXDLLIMPEXP_ADV wxGridCellBoolRenderer : public wxGridCellRenderer
+class WXDLLIMPEXP_CORE wxGridCellBoolRenderer : public wxGridCellRenderer
 {
 public:
     // draw a check mark or nothing
@@ -168,7 +168,7 @@ public:
 namespace wxGridPrivate { class DateParseParams; }
 
 // renderer for the cells containing dates only, without time component
-class WXDLLIMPEXP_ADV wxGridCellDateRenderer : public wxGridCellStringRenderer
+class WXDLLIMPEXP_CORE wxGridCellDateRenderer : public wxGridCellStringRenderer
 {
 public:
     explicit wxGridCellDateRenderer(const wxString& outformat = wxString());
@@ -214,7 +214,7 @@ protected:
 };
 
 // the default renderer for the cells containing times and dates
-class WXDLLIMPEXP_ADV wxGridCellDateTimeRenderer : public wxGridCellDateRenderer
+class WXDLLIMPEXP_CORE wxGridCellDateTimeRenderer : public wxGridCellDateRenderer
 {
 public:
     wxGridCellDateTimeRenderer(const wxString& outformat = wxASCII_STR(wxDefaultDateTimeFormat),
@@ -238,7 +238,7 @@ protected:
 
 // Renderer for fields taking one of a limited set of values: this is the same
 // as the renderer for strings, except that it can implement GetMaxBestSize().
-class WXDLLIMPEXP_ADV wxGridCellChoiceRenderer : public wxGridCellStringRenderer
+class WXDLLIMPEXP_CORE wxGridCellChoiceRenderer : public wxGridCellStringRenderer
 {
 public:
     wxGridCellChoiceRenderer() = default;
@@ -266,7 +266,7 @@ protected:
 
 
 // renders a number using the corresponding text string
-class WXDLLIMPEXP_ADV wxGridCellEnumRenderer : public wxGridCellChoiceRenderer
+class WXDLLIMPEXP_CORE wxGridCellEnumRenderer : public wxGridCellChoiceRenderer
 {
 public:
     wxGridCellEnumRenderer( const wxString& choices = wxEmptyString );
@@ -291,7 +291,7 @@ protected:
 };
 
 
-class WXDLLIMPEXP_ADV wxGridCellAutoWrapStringRenderer : public wxGridCellStringRenderer
+class WXDLLIMPEXP_CORE wxGridCellAutoWrapStringRenderer : public wxGridCellStringRenderer
 {
 public:
     wxGridCellAutoWrapStringRenderer() : wxGridCellStringRenderer() { }

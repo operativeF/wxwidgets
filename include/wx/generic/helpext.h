@@ -25,7 +25,7 @@
 // ----------------------------------------------------------------------------
 
 // This class implements help via an external browser.
-class WXDLLIMPEXP_ADV wxExtHelpController : public wxHelpControllerBase
+class WXDLLIMPEXP_CORE wxExtHelpController : public wxHelpControllerBase
 {
 public:
     wxExtHelpController(wxWindow* parentWindow = nullptr);

@@ -16,30 +16,5 @@
 #include <stack>
 #define wxStack std::stack
 
-// Deprecated macro-based class for compatibility only, don't use any more.
-#define WX_DECLARE_STACK(obj, cls) \
-class cls : public std::vector<obj> \
-{\
-public:\
-    void push(const obj& o)\
-    {\
-        push_back(o); \
-    };\
-\
-    void pop()\
-    {\
-        pop_back(); \
-    };\
-\
-    obj& top()\
-    {\
-        return at(size() - 1);\
-    };\
-    const obj& top() const\
-    {\
-        return at(size() - 1); \
-    };\
-}
-
 #endif // _WX_STACK_H_
 

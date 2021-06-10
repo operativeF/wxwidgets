@@ -19,7 +19,7 @@
 // wxDateEvent: used by wxCalendarCtrl, wxDatePickerCtrl and wxTimePickerCtrl.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxDateEvent : public wxCommandEvent
+class WXDLLIMPEXP_CORE wxDateEvent : public wxCommandEvent
 {
 public:
     wxDateEvent() = default;
@@ -51,8 +51,8 @@ public:
 // event types and macros for handling them
 // ----------------------------------------------------------------------------
 
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_ADV, wxEVT_DATE_CHANGED, wxDateEvent);
-wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_ADV, wxEVT_TIME_CHANGED, wxDateEvent);
+wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_DATE_CHANGED, wxDateEvent);
+wxDECLARE_EXPORTED_EVENT(WXDLLIMPEXP_CORE, wxEVT_TIME_CHANGED, wxDateEvent);
 
 typedef void (wxEvtHandler::*wxDateEventFunction)(wxDateEvent&);
 

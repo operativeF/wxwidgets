@@ -14,7 +14,7 @@
 // wxGenericNotificationMessage
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxGenericNotificationMessage : public wxNotificationMessageBase
+class WXDLLIMPEXP_CORE wxGenericNotificationMessage : public wxNotificationMessageBase
 {
 public:
     wxGenericNotificationMessage()

@@ -19,7 +19,7 @@
 // in front of string items.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxBitmapComboBox : public wxComboBox,
+class WXDLLIMPEXP_CORE wxBitmapComboBox : public wxComboBox,
                                          public wxBitmapComboBoxBase
 {
 public:

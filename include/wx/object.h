@@ -405,21 +405,6 @@ inline wxObject *wxCheckDynamicCast(wxObject *obj, wxClassInfo *classInfo)
     #endif
 #endif // wxUSE_DEBUG_NEW_ALWAYS
 
-// ----------------------------------------------------------------------------
-// Compatibility macro aliases IMPLEMENT group
-// ----------------------------------------------------------------------------
-
-// deprecated variants _not_ requiring a semicolon after them and without wx prefix.
-// (note that also some wx-prefixed macro do _not_ require a semicolon because
-// it's not always possible to force the compiler to require it)
-
-#define IMPLEMENT_DYNAMIC_CLASS(n,b)                                wxIMPLEMENT_DYNAMIC_CLASS(n,b)
-#define IMPLEMENT_DYNAMIC_CLASS2(n,b1,b2)                           wxIMPLEMENT_DYNAMIC_CLASS2(n,b1,b2)
-#define IMPLEMENT_ABSTRACT_CLASS(n,b)                               wxIMPLEMENT_ABSTRACT_CLASS(n,b)
-#define IMPLEMENT_ABSTRACT_CLASS2(n,b1,b2)                          wxIMPLEMENT_ABSTRACT_CLASS2(n,b1,b2)
-#define IMPLEMENT_CLASS(n,b)                                        wxIMPLEMENT_CLASS(n,b)
-#define IMPLEMENT_CLASS2(n,b1,b2)                                   wxIMPLEMENT_CLASS2(n,b1,b2)
-
 #define CLASSINFO(n)                                wxCLASSINFO(n)
 
 #endif // _WX_OBJECTH__

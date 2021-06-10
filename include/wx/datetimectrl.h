@@ -26,7 +26,7 @@
 
 // This class is an implementation detail and should not be used directly, only
 // use the documented API of wxDateTimePickerCtrl and wxTimePickerCtrl.
-class WXDLLIMPEXP_ADV wxDateTimePickerCtrlBase : public wxControl
+class WXDLLIMPEXP_CORE wxDateTimePickerCtrlBase : public wxControl
 {
 public:
     // Set/get the date or time (in the latter case, time part is ignored).

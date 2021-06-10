@@ -325,12 +325,8 @@ protected:
     // send the iconize event, return true if processed
     bool SendIconizeEvent(bool iconized = true);
 
-    // this method is only kept for compatibility, call Layout() instead.
-    void DoLayout() { Layout(); }
-
     static int WidthDefault(int w) { return w == wxDefaultCoord ? GetDefaultSize().x : w; }
     static int HeightDefault(int h) { return h == wxDefaultCoord ? GetDefaultSize().y : h; }
-
 
     // the frame icon
     wxIconBundle m_icons;

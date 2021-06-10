@@ -709,7 +709,7 @@ bool wxAuiMDIChildFrame::Show(bool show)
         // before its children were created. Do it now to allow the same code
         // that would work with a "real" wxMDIChildFrame to also work with this
         // class.
-        DoLayout();
+        Layout();
     }
 
     return true;

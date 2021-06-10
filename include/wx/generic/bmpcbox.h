@@ -21,7 +21,7 @@
 // in front of string items.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxBitmapComboBox : public wxOwnerDrawnComboBox,
+class WXDLLIMPEXP_CORE wxBitmapComboBox : public wxOwnerDrawnComboBox,
                                          public wxBitmapComboBoxBase
 {
 public:

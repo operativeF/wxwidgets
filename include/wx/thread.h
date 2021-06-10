@@ -77,14 +77,6 @@ enum wxThreadWait
     wxTHREAD_WAIT_DEFAULT = wxTHREAD_WAIT_BLOCK
 };
 
-// Obsolete synonyms for wxPRIORITY_XXX for backwards compatibility-only
-enum
-{
-    WXTHREAD_MIN_PRIORITY      = wxPRIORITY_MIN,
-    WXTHREAD_DEFAULT_PRIORITY  = wxPRIORITY_DEFAULT,
-    WXTHREAD_MAX_PRIORITY      = wxPRIORITY_MAX
-};
-
 // There are 2 types of mutexes: normal mutexes and recursive ones. The attempt
 // to lock a normal mutex by a thread which already owns it results in
 // undefined behaviour (it always works under Windows, it will almost always

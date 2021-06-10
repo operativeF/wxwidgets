@@ -15,7 +15,7 @@
 
 typedef wxTimePickerCtrlCommonBase<wxDateTimePickerCtrlBase> wxTimePickerCtrlGenericBase;
 
-class WXDLLIMPEXP_ADV wxTimePickerCtrlGeneric
+class WXDLLIMPEXP_CORE wxTimePickerCtrlGeneric
     : public wxCompositeWindow< wxNavigationEnabled<wxTimePickerCtrlGenericBase> >
 {
 public:

@@ -17,7 +17,7 @@
 // wxAnimationGenericImpl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxAnimationGenericImpl : public wxAnimationImpl
+class WXDLLIMPEXP_CORE wxAnimationGenericImpl : public wxAnimationImpl
 {
 public:
     wxAnimationGenericImpl()  = default;

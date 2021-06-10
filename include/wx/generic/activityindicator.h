@@ -19,7 +19,7 @@
 // wxActivityIndicatorGeneric: built-in generic implementation.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_ADV wxActivityIndicatorGeneric : public wxActivityIndicatorBase
+class WXDLLIMPEXP_CORE wxActivityIndicatorGeneric : public wxActivityIndicatorBase
 {
 public:
     wxActivityIndicatorGeneric() = default;

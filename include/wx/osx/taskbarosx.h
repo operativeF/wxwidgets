@@ -14,7 +14,7 @@
 class WXDLLIMPEXP_FWD_CORE wxIcon;
 class WXDLLIMPEXP_FWD_CORE wxMenu;
 
-class WXDLLIMPEXP_ADV wxTaskBarIcon : public wxTaskBarIconBase
+class WXDLLIMPEXP_CORE wxTaskBarIcon : public wxTaskBarIconBase
 {
 public:
 	wxTaskBarIcon(const wxTaskBarIcon&) = delete;
