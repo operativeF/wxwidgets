@@ -28,7 +28,8 @@ enum
 };
 
 #define wxFC_DEFAULT_STYLE wxFC_OPEN
-extern WXDLLIMPEXP_DATA_CORE(const char) wxFileCtrlNameStr[]; // in filectrlcmn.cpp
+
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxFileCtrlNameStr[] = "wxfilectrl";
 
 class WXDLLIMPEXP_CORE wxFileCtrlBase
 {

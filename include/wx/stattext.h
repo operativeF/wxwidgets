@@ -29,7 +29,7 @@
 #define wxST_ELLIPSIZE_MASK \
     (wxST_ELLIPSIZE_START | wxST_ELLIPSIZE_MIDDLE | wxST_ELLIPSIZE_END)
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxStaticTextNameStr[];
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxStaticTextNameStr[] = "staticText";
 
 class WXDLLIMPEXP_CORE wxStaticTextBase : public wxControl
 {

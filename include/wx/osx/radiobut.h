@@ -55,9 +55,9 @@ public:
 
 // Not implemented
 #if 0
-class WXDLLIMPEXP_FWD_CORE wxBitmap ;
+class WXDLLIMPEXP_FWD_CORE wxBitmap;
 
-WXDLLIMPEXP_DATA_CORE(extern const wxChar) wxBitmapRadioButtonNameStr[];
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxBitmapRadioButtonNameStr[] = "radioButton";
 
 class WXDLLIMPEXP_CORE wxBitmapRadioButton: public wxRadioButton
 {

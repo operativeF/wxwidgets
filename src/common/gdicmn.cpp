@@ -54,9 +54,6 @@ WXDLLIMPEXP_DATA_CORE(wxPalette) wxNullPalette;
 #endif
 WXDLLIMPEXP_DATA_CORE(wxIconBundle) wxNullIconBundle;
 
-const wxSize wxDefaultSize(wxDefaultCoord, wxDefaultCoord);
-const wxPoint wxDefaultPosition(wxDefaultCoord, wxDefaultCoord);
-
 #include "wx/listimpl.cpp"
 WX_DEFINE_LIST(wxPointList)
 

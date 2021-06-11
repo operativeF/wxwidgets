@@ -27,8 +27,6 @@
 // implementation
 // ============================================================================
 
-const char wxEditableListBoxNameStr[] = "editableListBox";
-
 // list control with auto-resizable column:
 class CleverListCtrl : public wxListCtrl
 {

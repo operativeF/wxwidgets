@@ -25,7 +25,7 @@
 // global data
 // ----------------------------------------------------------------------------
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxChoiceNameStr[];
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxChoiceNameStr[] = "choice";
 
 // ----------------------------------------------------------------------------
 // wxChoice allows to select one of a non-modifiable list of strings

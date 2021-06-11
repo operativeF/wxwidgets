@@ -44,7 +44,7 @@ enum
     wxHD_DEFAULT_STYLE = wxHD_ALLOW_REORDER
 };
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxHeaderCtrlNameStr[];
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxHeaderCtrlNameStr[] = "wxHeaderCtrl";
 
 // ----------------------------------------------------------------------------
 // wxHeaderCtrlBase defines the interface of a header control

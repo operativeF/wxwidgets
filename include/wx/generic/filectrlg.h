@@ -24,8 +24,6 @@ class WXDLLIMPEXP_FWD_CORE wxChoice;
 class WXDLLIMPEXP_FWD_CORE wxStaticText;
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxFileSelectorDefaultWildcardStr[];
-
 //-----------------------------------------------------------------------------
 //  wxFileData - a class to hold the file info for the wxFileListCtrl
 //-----------------------------------------------------------------------------

@@ -25,7 +25,7 @@
 // constants
 // ----------------------------------------------------------------------------
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxGridNameStr[];
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxGridNameStr[] = "grid";
 
 // Various constants used in wxGrid code.
 //

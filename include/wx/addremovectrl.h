@@ -14,7 +14,7 @@
 
 #if wxUSE_ADDREMOVECTRL
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxAddRemoveCtrlNameStr[];
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxAddRemoveCtrlNameStr[] = "wxAddRemoveCtrl";
 
 // ----------------------------------------------------------------------------
 // wxAddRemoveAdaptor: used by wxAddRemoveCtrl to work with the list control
@@ -90,10 +90,7 @@ public:
 protected:
     wxSize DoGetBestClientSize() const override;
 
-private:
-    // Common part of all ctors.
-    
-
+private:    
     class wxAddRemoveImpl* m_impl{nullptr};
 };
 

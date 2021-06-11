@@ -24,8 +24,6 @@
 
 #include "wx/statbmp.h"
 
-extern WXDLLEXPORT_DATA(const char) wxStaticBitmapNameStr[] = "staticBitmap";
-
 // ---------------------------------------------------------------------------
 // XTI
 // ---------------------------------------------------------------------------

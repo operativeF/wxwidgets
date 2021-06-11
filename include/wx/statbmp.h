@@ -19,7 +19,7 @@
 #include "wx/bitmap.h"
 #include "wx/icon.h"
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxStaticBitmapNameStr[];
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxStaticBitmapNameStr[] = "staticBitmap";
 
 // a control showing an icon or a bitmap
 class WXDLLIMPEXP_CORE wxStaticBitmapBase : public wxControl

@@ -64,8 +64,6 @@ public:
 // wxHeaderCtrlBase implementation
 // ============================================================================
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxHeaderCtrlNameStr[] = "wxHeaderCtrl";
-
 wxBEGIN_EVENT_TABLE(wxHeaderCtrlBase, wxControl)
     EVT_HEADER_SEPARATOR_DCLICK(wxID_ANY, wxHeaderCtrlBase::OnSeparatorDClick)
 #if wxUSE_MENUS

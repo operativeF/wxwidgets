@@ -31,10 +31,6 @@ class WXDLLIMPEXP_FWD_CORE wxImage;
 // constants
 // ----------------------------------------------------------------------------
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxToolBarNameStr[];
-extern WXDLLIMPEXP_DATA_CORE(const wxSize) wxDefaultSize;
-extern WXDLLIMPEXP_DATA_CORE(const wxPoint) wxDefaultPosition;
-
 enum wxToolBarToolStyle
 {
     wxTOOL_STYLE_BUTTON    = 1,

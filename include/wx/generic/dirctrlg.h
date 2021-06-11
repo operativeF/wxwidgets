@@ -28,8 +28,6 @@
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;
 class WXDLLIMPEXP_FWD_BASE wxHashTable;
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxDirDialogDefaultFolderStr[];
-
 //-----------------------------------------------------------------------------
 // Extra styles for wxGenericDirCtrl
 //-----------------------------------------------------------------------------

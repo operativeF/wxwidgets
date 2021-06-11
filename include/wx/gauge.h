@@ -40,7 +40,7 @@
     #define wxGAUGE_EMULATE_INDETERMINATE_MODE 0
 #endif
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxGaugeNameStr[];
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxGaugeNameStr[] = "gauge";
 
 class WXDLLIMPEXP_FWD_CORE wxAppProgressIndicator;
 

@@ -54,9 +54,16 @@ enum
 
 #define wxFD_DEFAULT_STYLE      wxFD_OPEN
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxFileDialogNameStr[];
-extern WXDLLIMPEXP_DATA_CORE(const char) wxFileSelectorPromptStr[];
-extern WXDLLIMPEXP_DATA_CORE(const char) wxFileSelectorDefaultWildcardStr[];
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxFileDialogNameStr[] = "filedlg";
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxFileSelectorPromptStr[] = "Select a file";
+
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxFileSelectorDefaultWildcardStr[] =
+#if defined(__WXMSW__)
+    "*.*"
+#else // Unix/Mac
+    "*"
+#endif
+    ;
 
 //----------------------------------------------------------------------------
 // wxFileDialogBase

@@ -27,8 +27,7 @@
 #define wxHL_ALIGN_CENTRE       0x0008
 #define wxHL_DEFAULT_STYLE      (wxHL_CONTEXTMENU|wxNO_BORDER|wxHL_ALIGN_CENTRE)
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxHyperlinkCtrlNameStr[];
-
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxHyperlinkCtrlNameStr[] = "hyperlink";
 
 // ----------------------------------------------------------------------------
 // wxHyperlinkCtrl

@@ -32,8 +32,6 @@ inline constexpr wxChar wxACTION_COMBOBOX_DISMISS[]   = wxT("dismiss");
 
 #endif
 
-extern WXDLLIMPEXP_DATA_CORE(const char) wxComboBoxNameStr[];
-
 class WXDLLIMPEXP_CORE wxGenericComboCtrl
     : public wxNavigationEnabled<wxComboCtrlBase>
 {
