@@ -2499,7 +2499,10 @@ wxString wxImage::GetOption(const wxString& name) const
     if ( match == M_IMGDATA->m_optionNames.cend() )
         return wxString();
     else
-        return *match;
+    {
+        const auto idx = std::distance(std::cbegin(M_IMGDATA->m_optionNames), match);
+        return M_IMGDATA->m_optionValues[idx];
+    }
 }
 
 int wxImage::GetOptionInt(const wxString& name) const

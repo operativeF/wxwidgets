@@ -31,6 +31,8 @@ class WXDLLIMPEXP_FWD_CORE wxImage;
 // constants
 // ----------------------------------------------------------------------------
 
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxToolBarNameStr[] = "toolbar";
+
 enum wxToolBarToolStyle
 {
     wxTOOL_STYLE_BUTTON    = 1,

@@ -250,7 +250,7 @@ public:
                          const wxString choices[],
                          long style = 0,
                          const wxValidator& validator = wxDefaultValidator,
-                         const wxString& name = wxASCII_STR(wxComboBoxNameStr))
+                         const wxString& name = wxASCII_STR(wxComboCtrlNameStr))
     {
         
 
@@ -266,7 +266,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxComboBoxNameStr));
+                const wxString& name = wxASCII_STR(wxComboCtrlNameStr));
 
     wxOwnerDrawnComboBox(wxWindow *parent,
                          wxWindowID id,
@@ -276,7 +276,7 @@ public:
                          const wxArrayString& choices = wxArrayString(),
                          long style = 0,
                          const wxValidator& validator = wxDefaultValidator,
-                         const wxString& name = wxASCII_STR(wxComboBoxNameStr));
+                         const wxString& name = wxASCII_STR(wxComboCtrlNameStr));
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -287,7 +287,7 @@ public:
                 const wxString choices[],
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxComboBoxNameStr));
+                const wxString& name = wxASCII_STR(wxComboCtrlNameStr));
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -297,7 +297,7 @@ public:
                 const wxArrayString& choices,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxComboBoxNameStr));
+                const wxString& name = wxASCII_STR(wxComboCtrlNameStr));
 
     ~wxOwnerDrawnComboBox() override;
 

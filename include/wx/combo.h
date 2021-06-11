@@ -147,6 +147,7 @@ struct wxComboCtrlFeatures
     };
 };
 
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxComboCtrlNameStr[] = "comboCtrl";
 
 class WXDLLIMPEXP_CORE wxComboCtrlBase : public wxControl,
                                          public wxTextEntry
@@ -797,7 +798,7 @@ public:
     //       a default constructor of its own.
     virtual void Init() { }
 
-    virtual ~wxComboPopup();
+    virtual ~wxComboPopup() = default;
 
     // Create the popup child control.
     // Return true for success.

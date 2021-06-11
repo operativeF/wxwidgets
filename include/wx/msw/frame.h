@@ -52,7 +52,7 @@ public:
 #if wxUSE_TOOLBAR
     wxToolBar* CreateToolBar(long style = -1,
                                      wxWindowID id = wxID_ANY,
-                                     const wxString& name = wxASCII_STR(wxToolBarNameStr)) override;
+                                     const wxString& name = wxASCII_STR("toolbar")) override;
 #endif // wxUSE_TOOLBAR
 
     // Status bar

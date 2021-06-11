@@ -20,7 +20,6 @@
 
 // the default names for various classes
 inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxStatusLineNameStr[] = "status_line";
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxToolBarNameStr[] = "toolbar";
 
 class WXDLLIMPEXP_FWD_CORE wxFrame;
 #if wxUSE_MENUBAR
@@ -141,7 +140,7 @@ public:
     // create main toolbar bycalling OnCreateToolBar()
     virtual wxToolBar* CreateToolBar(long style = -1,
                                      wxWindowID winid = wxID_ANY,
-                                     const wxString& name = wxASCII_STR(wxToolBarNameStr));
+                                     const wxString& name = wxASCII_STR("toolbar"));
     // return a new toolbar
     virtual wxToolBar *OnCreateToolBar(long style,
                                        wxWindowID winid,

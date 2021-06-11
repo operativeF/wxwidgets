@@ -23,7 +23,7 @@ public:
                     const wxSize& size = wxDefaultSize,
                     long style = 0,
                     const wxValidator& val = wxDefaultValidator,
-                    const wxString& name = wxASCII_STR(wxCheckBoxNameStr) )
+                    const wxString& name = wxASCII_STR(wxToggleButtonNameStr) )
     {
         Init();
 
@@ -35,7 +35,7 @@ public:
                  const wxSize& size = wxDefaultSize,
                  long style = 0,
                  const wxValidator& val = wxDefaultValidator,
-                 const wxString &name = wxASCII_STR(wxCheckBoxNameStr) );
+                 const wxString &name = wxASCII_STR(wxToggleButtonNameStr) );
 
 protected:
     virtual wxBorder GetDefaultBorder() const { return wxBORDER_NONE; }

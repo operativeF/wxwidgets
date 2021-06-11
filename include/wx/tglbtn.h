@@ -21,6 +21,9 @@
 
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_TOGGLEBUTTON, wxCommandEvent );
 
+inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxToggleButtonNameStr[] = "toggle";
+
+
 // ----------------------------------------------------------------------------
 // wxToggleButtonBase
 // ----------------------------------------------------------------------------

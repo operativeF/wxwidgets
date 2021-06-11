@@ -27,7 +27,7 @@ public:
              const wxSize& size = wxDefaultSize,
              long style = 0,
              const wxValidator& validator = wxDefaultValidator,
-             const wxString& name = wxASCII_STR(wxCheckBoxNameStr));
+             const wxString& name = wxASCII_STR(wxToggleButtonNameStr));
 
     // Create the control
     bool Create(wxWindow *parent,
@@ -37,7 +37,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxCheckBoxNameStr));
+                const wxString& name = wxASCII_STR(wxToggleButtonNameStr));
 
     bool IsPressed() const override { return m_isPressed || m_value; }
 
