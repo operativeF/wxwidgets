@@ -139,8 +139,8 @@ public:
 
 #if wxUSE_TOOLBAR
     // create main toolbar bycalling OnCreateToolBar()
-    virtual wxToolBar* CreateToolBar(long style,
-                                     wxWindowID winid,
+    virtual wxToolBar* CreateToolBar(long style = -1,
+                                     wxWindowID winid = wxID_ANY,
                                      const wxString& name = wxASCII_STR(wxToolBarNameStr));
     // return a new toolbar
     virtual wxToolBar *OnCreateToolBar(long style,

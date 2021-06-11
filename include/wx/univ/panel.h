@@ -20,7 +20,7 @@ public:
     wxPanel() { }
 
     wxPanel(wxWindow *parent,
-            wxWindowID winid,
+            wxWindowID winid = wxID_ANY,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             long style = wxTAB_TRAVERSAL | wxNO_BORDER,

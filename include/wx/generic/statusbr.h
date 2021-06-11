@@ -28,7 +28,7 @@ class WXDLLIMPEXP_CORE wxStatusBarGeneric : public wxStatusBarBase
 public:
     wxStatusBarGeneric() { Init(); }
     wxStatusBarGeneric(wxWindow *parent,
-                       wxWindowID winid,
+                       wxWindowID winid = wxID_ANY,
                        long style = wxSTB_DEFAULT_STYLE,
                        const wxString& name = wxASCII_STR(wxStatusBarNameStr))
     {
@@ -42,7 +42,7 @@ public:
 	wxStatusBarGeneric(const wxStatusBarGeneric&) = delete;
 	wxStatusBarGeneric& operator=(const wxStatusBarGeneric&) = delete;
 
-    bool Create(wxWindow *parent, wxWindowID winid,
+    bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY,
                 long style = wxSTB_DEFAULT_STYLE,
                 const wxString& name = wxASCII_STR(wxStatusBarNameStr));
 

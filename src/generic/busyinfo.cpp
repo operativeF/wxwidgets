@@ -41,7 +41,7 @@ void wxBusyInfo::Init(const wxBusyInfoFlags& flags)
                               wxFRAME_TOOL_WINDOW |
                               wxSTAY_ON_TOP);
 
-    wxPanel* const panel = new wxPanel(m_InfoFrame, wxID_ANY);
+    wxPanel* const panel = new wxPanel(m_InfoFrame);
 
     wxBoxSizer* const sizer = new wxBoxSizer(wxVERTICAL);
 

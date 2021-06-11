@@ -23,17 +23,35 @@ class WXDLLIMPEXP_CORE wxInfoBarGeneric : public wxInfoBarBase
 public:
     // the usual ctors and Create() but remember that info bar is created
     // hidden
-    wxInfoBarGeneric() = default;
+    wxInfoBarGeneric() { 
+    m_icon = nullptr;
+    m_text = nullptr;
+    m_button = nullptr;
 
-    wxInfoBarGeneric(wxWindow *parent, wxWindowID winid)
+    m_showEffect =
+    m_hideEffect = wxSHOW_EFFECT_MAX;
+
+    // use default effect duration
+    m_effectDuration = 0;
+ }
+
+    wxInfoBarGeneric(wxWindow *parent, wxWindowID winid = wxID_ANY)
     {
+        
+    m_icon = nullptr;
+    m_text = nullptr;
+    m_button = nullptr;
+
+    m_showEffect =
+    m_hideEffect = wxSHOW_EFFECT_MAX;
+
+    // use default effect duration
+    m_effectDuration = 0;
+
         Create(parent, winid);
     }
 
-    wxInfoBarGeneric(const wxInfoBarGeneric&) = delete;
-	wxInfoBarGeneric& operator=(const wxInfoBarGeneric&) = delete;
-
-    bool Create(wxWindow *parent, wxWindowID winid);
+    bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY);
 
 
     // implement base class methods
@@ -122,19 +140,20 @@ private:
 
 
     // different controls making up the bar
-    wxStaticBitmap* m_icon{nullptr};
-    wxStaticText*   m_text{nullptr};
-    wxBitmapButton* m_button{nullptr};
+    wxStaticBitmap *m_icon;
+    wxStaticText *m_text;
+    wxBitmapButton *m_button;
 
     // the effects to use when showing/hiding and duration for them: by default
     // the effect is determined by the info bar automatically depending on its
     // position and the default duration is used
-    wxShowEffect m_showEffect{wxSHOW_EFFECT_MAX};
-    wxShowEffect m_hideEffect{wxSHOW_EFFECT_MAX};
-
-    int m_effectDuration{0};
+    wxShowEffect m_showEffect,
+                 m_hideEffect;
+    int m_effectDuration;
 
     wxDECLARE_EVENT_TABLE();
+    wxInfoBarGeneric(const wxInfoBarGeneric&) = delete;
+	wxInfoBarGeneric& operator=(const wxInfoBarGeneric&) = delete;
 };
 
 #endif // _WX_GENERIC_INFOBAR_H_

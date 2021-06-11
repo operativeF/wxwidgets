@@ -34,7 +34,7 @@ public:
 
     wxWebViewWebKit() {}
     wxWebViewWebKit(wxWindow *parent,
-                    wxWindowID winid,
+                    wxWindowID winID = wxID_ANY,
                     const wxString& strURL = wxASCII_STR(wxWebViewDefaultURLStr),
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize, long style = 0,
@@ -43,7 +43,7 @@ public:
         Create(parent, winID, strURL, pos, size, style, name);
     }
     bool Create(wxWindow *parent,
-                wxWindowID winid,
+                wxWindowID winID = wxID_ANY,
                 const wxString& strURL = wxASCII_STR(wxWebViewDefaultURLStr),
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize, long style = 0,

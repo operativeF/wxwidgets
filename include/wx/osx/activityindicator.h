@@ -24,7 +24,7 @@ public:
 
     explicit
     wxActivityIndicator(wxWindow* parent,
-                        wxWindowID winid,
+                        wxWindowID winid = wxID_ANY,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         long style = 0,
@@ -36,7 +36,7 @@ public:
     }
 
     bool Create(wxWindow* parent,
-                wxWindowID winid,
+                wxWindowID winid = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,

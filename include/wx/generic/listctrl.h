@@ -41,7 +41,7 @@ public:
     }
 
     wxGenericListCtrl( wxWindow *parent,
-                wxWindowID winid,
+                wxWindowID winid = wxID_ANY,
                 const wxPoint &pos = wxDefaultPosition,
                 const wxSize &size = wxDefaultSize,
                 long style = wxLC_ICON,
@@ -57,7 +57,7 @@ public:
     void Init();
 
     bool Create( wxWindow *parent,
-                 wxWindowID winid,
+                 wxWindowID winid = wxID_ANY,
                  const wxPoint &pos = wxDefaultPosition,
                  const wxSize &size = wxDefaultSize,
                  long style = wxLC_ICON,
@@ -263,7 +263,7 @@ class WXDLLIMPEXP_CORE wxListCtrl: public wxGenericListCtrl
 public:
     wxListCtrl() {}
 
-    wxListCtrl(wxWindow *parent, wxWindowID winid,
+    wxListCtrl(wxWindow *parent, wxWindowID winid = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                long style = wxLC_ICON,

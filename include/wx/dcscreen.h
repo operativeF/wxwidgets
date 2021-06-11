@@ -31,4 +31,5 @@ private:
 };
 
 
-#endif // _WX_DCSCREEN_H_BASE_
+#endif
+    // _WX_DCSCREEN_H_BASE_

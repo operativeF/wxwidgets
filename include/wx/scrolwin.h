@@ -423,7 +423,7 @@ class wxScrolled : public T,
 public:
     wxScrolled() : wxScrollHelper(this) { }
     wxScrolled(wxWindow *parent,
-               wxWindowID winid,
+               wxWindowID winid = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                long style = wxScrolledWindowStyle,
@@ -491,7 +491,7 @@ class WXDLLIMPEXP_CORE wxScrolledWindow : public wxScrolled<wxPanel>
 public:
     wxScrolledWindow()  = default;
     wxScrolledWindow(wxWindow *parent,
-                     wxWindowID winid,
+                     wxWindowID winid = wxID_ANY,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      long style = wxScrolledWindowStyle,
