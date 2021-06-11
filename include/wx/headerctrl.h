@@ -280,7 +280,7 @@ public:
     }
 
     wxHeaderCtrlSimple(wxWindow *parent,
-                       wxWindowID winid = wxID_ANY,
+                       wxWindowID winid,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
                        long style = wxHD_DEFAULT_STYLE,

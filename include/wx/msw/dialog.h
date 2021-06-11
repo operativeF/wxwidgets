@@ -22,7 +22,8 @@ class WXDLLIMPEXP_CORE wxDialog : public wxDialogBase
 public:
     wxDialog() = default;
 
-    wxDialog(wxWindow *parent, wxWindowID id,
+    wxDialog(wxWindow *parent, 
+             wxWindowID id,
              const wxString& title,
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
@@ -37,7 +38,8 @@ public:
     wxDialog(const wxDialog&) = delete;
 	wxDialog& operator=(const wxDialog&) = delete;
 
-    bool Create(wxWindow *parent, wxWindowID id,
+    bool Create(wxWindow *parent, 
+                wxWindowID id,
                 const wxString& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,

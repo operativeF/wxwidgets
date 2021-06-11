@@ -243,7 +243,7 @@ wxHtmlPrintout::CheckFit(const wxSize& pageArea, const wxSize& docArea) const
         wxSizer * const sizer = parent->GetSizer();
         wxCHECK_MSG( sizer, false, "Preview frame should be using sizers" );
 
-        wxInfoBar * const bar = new wxInfoBar(parent);
+        wxInfoBar * const bar = new wxInfoBar(parent, wxID_ANY);
         sizer->Add(bar, wxSizerFlags().Expand());
 
         // Note that the message here is similar to the one below but not

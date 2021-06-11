@@ -59,7 +59,7 @@ public:
     wxAddRemoveCtrl() = default;
 
     wxAddRemoveCtrl(wxWindow* parent,
-                    wxWindowID winid = wxID_ANY,
+                    wxWindowID winid,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     long style = 0,
@@ -72,7 +72,7 @@ public:
 	wxAddRemoveCtrl& operator=(const wxAddRemoveCtrl&) = delete;
 
     bool Create(wxWindow* parent,
-                wxWindowID winid = wxID_ANY,
+                wxWindowID winid,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,

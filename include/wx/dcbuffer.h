@@ -44,10 +44,7 @@ class WXDLLIMPEXP_CORE wxBufferedDC : public wxMemoryDC
 {
 public:
     // Default ctor, must subsequently call Init for two stage construction.
-    wxBufferedDC()
-        
-          
-    = default;
+    wxBufferedDC() = default;
 
     // Construct a wxBufferedDC using a user supplied buffer.
     wxBufferedDC(wxDC *dc,

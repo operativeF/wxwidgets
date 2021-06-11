@@ -24,13 +24,13 @@ class WXDLLIMPEXP_CORE wxInfoBar : public wxInfoBarGeneric
 public:
     wxInfoBar() { Init(); }
 
-    wxInfoBar(wxWindow *parent, wxWindowID winid = wxID_ANY)
+    wxInfoBar(wxWindow *parent, wxWindowID winid)
     {
         Init();
         Create(parent, winid);
     }
 
-    bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY);
+    bool Create(wxWindow *parent, wxWindowID winid);
 
     virtual ~wxInfoBar();
 

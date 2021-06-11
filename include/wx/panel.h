@@ -47,7 +47,7 @@ public:
 
     // Pseudo ctor
     bool Create(wxWindow *parent,
-                wxWindowID winid = wxID_ANY,
+                wxWindowID winid,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxTAB_TRAVERSAL | wxNO_BORDER,

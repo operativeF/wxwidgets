@@ -849,7 +849,10 @@ public:
     }
 
 public:
-    int x{0}, y{0}, width{0}, height{0};
+    int x{0};
+    int y{0};
+    int width{0};
+    int height{0};
 };
 
 

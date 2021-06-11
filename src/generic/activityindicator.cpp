@@ -37,8 +37,6 @@
 
 // For now the appearance is fixed, we could make these constants customizable
 // later if really needed.
-namespace
-{
 
 // Total number of "running" dots.
 static constexpr int NUM_DOTS = 8;
@@ -46,7 +44,6 @@ static constexpr int NUM_DOTS = 8;
 // Delay between the consecutive updates in milliseconds.
 static constexpr int FRAME_DELAY = 150;
 
-} // anonymous namespace
 
 // ----------------------------------------------------------------------------
 // wxActivityIndicatorImpl: class containing the real implementation.
@@ -146,7 +143,7 @@ private:
 
         // Subsequent dots are rotated by this angle with respect to the
         // previous one.
-        const double angle = wxDegToRad(360. / NUM_DOTS);
+        static constexpr double angle = wxDegToRad(360. / NUM_DOTS);
 
         // And the animation effect is achieved just by starting to draw from
         // the next position every time.
