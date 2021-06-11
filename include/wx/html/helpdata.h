@@ -109,6 +109,9 @@ public:
     wxHtmlSearchEngine()  = default;
     ~wxHtmlSearchEngine() override = default;
 
+    wxHtmlSearchEngine(const wxHtmlSearchEngine&) = delete;
+	wxHtmlSearchEngine& operator=(const wxHtmlSearchEngine&) = delete;
+
     // Sets the keyword we will be searching for
     virtual void LookFor(const wxString& keyword, bool case_sensitive, bool whole_words_only);
 
@@ -120,9 +123,6 @@ private:
     wxString m_Keyword;
     bool m_CaseSensitive;
     bool m_WholeWords;
-
-    wxHtmlSearchEngine(const wxHtmlSearchEngine&) = delete;
-	wxHtmlSearchEngine& operator=(const wxHtmlSearchEngine&) = delete;
 };
 
 

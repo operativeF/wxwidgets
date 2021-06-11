@@ -55,6 +55,9 @@ public:
     wxHtmlParser();
     ~wxHtmlParser() override;
 
+    wxHtmlParser(const wxHtmlParser&) = delete;
+	wxHtmlParser& operator=(const wxHtmlParser&) = delete;
+
     // Sets the class which will be used for opening files
     void SetFS(wxFileSystem *fs) { m_FS = fs; }
 
@@ -191,9 +194,6 @@ protected:
     wxHtmlTagHandlersSet m_HandlersSet;
     wxHtmlTagHandlersHash m_HandlersHash;
 
-    wxHtmlParser(const wxHtmlParser&) = delete;
-	wxHtmlParser& operator=(const wxHtmlParser&) = delete;
-
     // class for opening files (file system)
     wxFileSystem *m_FS{nullptr};
     // handlers stack used by PushTagHandler and PopTagHandler
@@ -221,6 +221,9 @@ class WXDLLIMPEXP_HTML wxHtmlTagHandler : public wxObject
 
 public:
     wxHtmlTagHandler()  { m_Parser = nullptr; }
+
+    wxHtmlTagHandler(const wxHtmlTagHandler&) = delete;
+	wxHtmlTagHandler& operator=(const wxHtmlTagHandler&) = delete;
 
     // Sets the parser.
     // NOTE : each _instance_ of handler is guaranteed to be called
@@ -257,9 +260,6 @@ protected:
     void ParseInnerSource(const wxString& source);
 
     wxHtmlParser *m_Parser;
-
-    wxHtmlTagHandler(const wxHtmlTagHandler&) = delete;
-	wxHtmlTagHandler& operator=(const wxHtmlTagHandler&) = delete;
 };
 
 
@@ -272,6 +272,9 @@ class WXDLLIMPEXP_HTML wxHtmlEntitiesParser : public wxObject
 public:
     wxHtmlEntitiesParser();
     ~wxHtmlEntitiesParser() override;
+
+    wxHtmlEntitiesParser(const wxHtmlEntitiesParser&) = delete;
+	wxHtmlEntitiesParser& operator=(const wxHtmlEntitiesParser&) = delete;
 
     // Sets encoding of output string.
     // Has no effect.
@@ -286,10 +289,6 @@ public:
 
     // Returns character that represents given Unicode code
     wxChar GetCharForCode(unsigned code) const { return (wxChar)code; }
-
-protected:
-    wxHtmlEntitiesParser(const wxHtmlEntitiesParser&) = delete;
-	wxHtmlEntitiesParser& operator=(const wxHtmlEntitiesParser&) = delete;
 };
 
 

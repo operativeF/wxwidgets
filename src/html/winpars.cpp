@@ -38,12 +38,11 @@ wxHtmlWinParser::wxHtmlWinParser(wxHtmlWindowInterface *wndIface)
     : m_windowInterface(wndIface)
 {
     {
-        int i, j, k, l, m;
-        for (i = 0; i < 2; i++)
-            for (j = 0; j < 2; j++)
-                for (k = 0; k < 2; k++)
-                    for (l = 0; l < 2; l++)
-                        for (m = 0; m < 7; m++)
+        for (int i = 0; i < 2; i++)
+            for (int j = 0; j < 2; j++)
+                for (int k = 0; k < 2; k++)
+                    for (int l = 0; l < 2; l++)
+                        for (int m = 0; m < 7; m++)
                         {
                             m_FontsTable[i][j][k][l][m] = nullptr;
                         }
@@ -63,13 +62,11 @@ wxHtmlWinParser::wxHtmlWinParser(wxHtmlWindowInterface *wndIface)
 
 wxHtmlWinParser::~wxHtmlWinParser()
 {
-    int i, j, k, l, m;
-
-    for (i = 0; i < 2; i++)
-        for (j = 0; j < 2; j++)
-            for (k = 0; k < 2; k++)
-                for (l = 0; l < 2; l++)
-                    for (m = 0; m < 7; m++)
+    for (int i = 0; i < 2; i++)
+        for (int j = 0; j < 2; j++)
+            for (int k = 0; k < 2; k++)
+                for (int l = 0; l < 2; l++)
+                    for (int m = 0; m < 7; m++)
                     {
                         if (m_FontsTable[i][j][k][l][m] != nullptr)
                             delete m_FontsTable[i][j][k][l][m];
@@ -118,6 +115,7 @@ void wxHtmlWinParser::SetFonts(const wxString& normal_face,
                                const int *sizes)
 {
     static int default_sizes[7] = { 0 };
+
     if ( !sizes )
     {
         if ( !default_sizes[0] )
@@ -126,19 +124,17 @@ void wxHtmlWinParser::SetFonts(const wxString& normal_face,
         sizes = default_sizes;
     }
 
-    int i, j, k, l, m;
-
-    for (i = 0; i < 7; i++)
+    for (int i = 0; i < 7; i++)
         m_FontsSizes[i] = sizes[i];
 
     m_FontFaceFixed = fixed_face;
     m_FontFaceNormal = normal_face;
 
-    for (i = 0; i < 2; i++)
-        for (j = 0; j < 2; j++)
-            for (k = 0; k < 2; k++)
-                for (l = 0; l < 2; l++)
-                    for (m = 0; m < 7; m++) {
+    for (int i = 0; i < 2; i++)
+        for (int j = 0; j < 2; j++)
+            for (int k = 0; k < 2; k++)
+                for (int l = 0; l < 2; l++)
+                    for (int m = 0; m < 7; m++) {
                         if (m_FontsTable[i][j][k][l][m] != nullptr)
                         {
                             delete m_FontsTable[i][j][k][l][m];
@@ -190,7 +186,7 @@ void wxHtmlWinParser::InitParser(const wxString& source)
                             : windowColour;
     m_ActualBackgroundMode = wxBrushStyle::Transparent;
     m_Align = wxHTML_ALIGN_LEFT;
-    m_ScriptMode = wxHTML_SCRIPT_NORMAL;
+    m_ScriptMode = wxHtmlScriptMode::Normal;
     m_ScriptBaseline = 0;
     m_tmpLastWasSpace = false;
     m_lastWordCell = nullptr;

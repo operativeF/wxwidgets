@@ -66,9 +66,12 @@ public:
                  m_toPos == wxDefaultPosition; }
 
 private:
-    wxPoint m_fromPos, m_toPos;
-    wxCoord m_fromCharacterPos{-1}, m_toCharacterPos{-1};
-    const wxHtmlCell *m_fromCell{nullptr}, *m_toCell{nullptr};
+    wxPoint m_fromPos{wxDefaultPosition};
+    wxPoint m_toPos{wxDefaultPosition};
+    wxCoord m_fromCharacterPos{-1};
+    wxCoord m_toCharacterPos{-1};
+    const wxHtmlCell* m_fromCell{nullptr};
+    const wxHtmlCell* m_toCell{nullptr};
 
     // Extent of the text before selection start.
     unsigned m_extBeforeSel{0};
@@ -91,8 +94,6 @@ enum wxHtmlSelectionState
 class WXDLLIMPEXP_HTML wxHtmlRenderingState
 {
 public:
-    wxHtmlRenderingState()  { m_bgMode = wxBrushStyle::Solid; }
-
     void SetSelectionState(wxHtmlSelectionState s) { m_selState = s; }
     wxHtmlSelectionState GetSelectionState() const { return m_selState; }
 
@@ -107,7 +108,7 @@ private:
     wxHtmlSelectionState  m_selState{wxHTML_SEL_OUT};
     wxColour              m_fgColour;
     wxColour              m_bgColour;
-    wxBrushStyle          m_bgMode;
+    wxBrushStyle          m_bgMode{wxBrushStyle::Solid};
 };
 
 
@@ -129,14 +130,14 @@ public:
         : m_wnd(wnd)
     {}
 
+    wxDefaultHtmlRenderingStyle(const wxDefaultHtmlRenderingStyle&) = delete;
+	wxDefaultHtmlRenderingStyle& operator=(const wxDefaultHtmlRenderingStyle&) = delete;
+
     wxColour GetSelectedTextColour(const wxColour& clr) override;
     wxColour GetSelectedTextBgColour(const wxColour& clr) override;
 
 private:
     const wxWindowBase* const m_wnd;
-
-    wxDefaultHtmlRenderingStyle(const wxDefaultHtmlRenderingStyle&) = delete;
-	wxDefaultHtmlRenderingStyle& operator=(const wxDefaultHtmlRenderingStyle&) = delete;
 };
 
 
@@ -146,11 +147,6 @@ private:
 class WXDLLIMPEXP_HTML wxHtmlRenderingInfo
 {
 public:
-    wxHtmlRenderingInfo()
-        
-          
-    = default;
-
     void SetSelection(wxHtmlSelection *s) { m_selection = s; }
     wxHtmlSelection *GetSelection() const { return m_selection; }
 
@@ -163,9 +159,10 @@ public:
     wxHtmlRenderingState& GetState() { return m_state; }
 
 protected:
-    wxHtmlSelection      *m_selection{nullptr};
-    wxHtmlRenderingStyle *m_style{nullptr};
-    wxHtmlRenderingState m_state;
+    wxHtmlSelection*       m_selection{nullptr};
+    wxHtmlRenderingStyle*  m_style{nullptr};
+    wxHtmlRenderingState   m_state;
+
     bool m_prevUnderlined{false};
 };
 
@@ -180,11 +177,11 @@ enum
 
 
 // Superscript/subscript/normal script mode of a cell
-enum wxHtmlScriptMode
+enum class wxHtmlScriptMode
 {
-    wxHTML_SCRIPT_NORMAL,
-    wxHTML_SCRIPT_SUB,
-    wxHTML_SCRIPT_SUP
+    Normal,
+    Sub,
+    Super
 };
 
 
@@ -202,6 +199,9 @@ class WXDLLIMPEXP_HTML wxHtmlCell : public wxObject
 public:
     wxHtmlCell();
     ~wxHtmlCell() override;
+
+    wxHtmlCell(const wxHtmlCell&) = delete;
+	wxHtmlCell& operator=(const wxHtmlCell&) = delete;
 
     void SetParent(wxHtmlContainerCell *p) {m_Parent = p;}
     wxHtmlContainerCell *GetParent() const {return m_Parent;}
@@ -393,7 +393,7 @@ protected:
     int m_PosY;
 
     // superscript/subscript/normal:
-    wxHtmlScriptMode m_ScriptMode{wxHTML_SCRIPT_NORMAL};
+    wxHtmlScriptMode m_ScriptMode{wxHtmlScriptMode::Normal};
     long m_ScriptBaseline{0};
 
     // destination address if this fragment is hypertext link, NULL otherwise
@@ -404,12 +404,7 @@ protected:
     wxString m_id;
 
     wxDECLARE_ABSTRACT_CLASS(wxHtmlCell);
-    wxHtmlCell(const wxHtmlCell&) = delete;
-	wxHtmlCell& operator=(const wxHtmlCell&) = delete;
 };
-
-
-
 
 // ----------------------------------------------------------------------------
 // Inherited cells:
@@ -425,6 +420,10 @@ class WXDLLIMPEXP_HTML wxHtmlWordCell : public wxHtmlCell
 {
 public:
     wxHtmlWordCell(const wxString& word, const wxDC& dc);
+
+    wxHtmlWordCell(const wxHtmlWordCell&) = delete;
+	wxHtmlWordCell& operator=(const wxHtmlWordCell&) = delete;
+
     void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
               wxHtmlRenderingInfo& info) override;
     wxCursor GetMouseCursor(wxHtmlWindowInterface *window) const override;
@@ -451,8 +450,6 @@ protected:
     bool     m_allowLinebreak;
 
     wxDECLARE_ABSTRACT_CLASS(wxHtmlWordCell);
-    wxHtmlWordCell(const wxHtmlWordCell&) = delete;
-	wxHtmlWordCell& operator=(const wxHtmlWordCell&) = delete;
 };
 
 
@@ -487,6 +484,9 @@ class WXDLLIMPEXP_HTML wxHtmlContainerCell : public wxHtmlCell
 public:
     explicit wxHtmlContainerCell(wxHtmlContainerCell *parent);
     ~wxHtmlContainerCell() override;
+
+    wxHtmlContainerCell(const wxHtmlContainerCell&) = delete;
+	wxHtmlContainerCell& operator=(const wxHtmlContainerCell&) = delete;
 
     void Layout(int w) override;
     void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
@@ -532,7 +532,13 @@ public:
     // returns background colour (of wxNullColour if none set), so that widgets can
     // adapt to it:
     wxColour GetBackgroundColour();
-    void SetBorder(const wxColour& clr1, const wxColour& clr2, int border = 1) {m_Border = border; m_BorderColour1 = clr1; m_BorderColour2 = clr2;}
+    void SetBorder(const wxColour& clr1, const wxColour& clr2, int border = 1)
+    {
+        m_Border = border;
+        m_BorderColour1 = clr1;
+        m_BorderColour2 = clr2;
+    }
+
     wxHtmlLinkInfo* GetLink(int x = 0, int y = 0) const override;
     const wxHtmlCell* Find(int condition, const void* param) const override;
 
@@ -572,35 +578,43 @@ protected:
                                   wxHtmlCell *cell) const;
 
 protected:
-    int m_IndentLeft, m_IndentRight, m_IndentTop, m_IndentBottom;
-            // indentation of subcells. There is always m_Indent pixels
-            // big space between given border of the container and the subcells
-            // it m_Indent < 0 it is in PERCENTS, otherwise it is in pixels
-    int m_MinHeight, m_MinHeightAlign;
-        // minimal height.
-    wxHtmlCell *m_Cells, *m_LastCell;
-            // internal cells, m_Cells points to the first of them, m_LastCell to the last one.
-            // (LastCell is needed only to speed-up InsertCell)
-    int m_AlignHor, m_AlignVer;
-            // alignment horizontal and vertical (left, center, right)
-    int m_WidthFloat, m_WidthFloatUnits;
-            // width float is used in adjustWidth
-    wxColour m_BkColour;
-            // background color of this container
-    int m_Border;
-            // border size. Draw only if m_Border > 0
-    wxColour m_BorderColour1, m_BorderColour2;
-            // borders color of this container
-    int m_LastLayout;
-            // if != -1 then call to Layout may be no-op
-            // if previous call to Layout has same argument
-    int m_MaxTotalWidth;
-            // Maximum possible length if ignoring line wrap
+    int m_IndentLeft;
+    int m_IndentRight;
+    int m_IndentTop;
+    int m_IndentBottom;
 
+    // indentation of subcells. There is always m_Indent pixels
+    // big space between given border of the container and the subcells
+    // it m_Indent < 0 it is in PERCENTS, otherwise it is in pixels
+    int m_MinHeight;
+    int m_MinHeightAlign;
+    
+    // minimal height.
+    wxHtmlCell* m_Cells;
+    wxHtmlCell* m_LastCell;
+
+    // internal cells, m_Cells points to the first of them, m_LastCell to the last one.
+    // (LastCell is needed only to speed-up InsertCell)
+    int m_AlignHor;
+    int m_AlignVer;
+
+    // alignment horizontal and vertical (left, center, right)
+    int m_WidthFloat;
+    int m_WidthFloatUnits;
+    // width float is used in adjustWidth
+    wxColour m_BkColour;
+    // background color of this container
+    int m_Border;
+    // border size. Draw only if m_Border > 0
+    wxColour m_BorderColour1, m_BorderColour2;
+    // borders color of this container
+    int m_LastLayout;
+    // if != -1 then call to Layout may be no-op
+    // if previous call to Layout has same argument
+    int m_MaxTotalWidth;
+    // Maximum possible length if ignoring line wrap
 
     wxDECLARE_ABSTRACT_CLASS(wxHtmlContainerCell);
-    wxHtmlContainerCell(const wxHtmlContainerCell&) = delete;
-	wxHtmlContainerCell& operator=(const wxHtmlContainerCell&) = delete;
 };
 
 
@@ -613,7 +627,13 @@ protected:
 class WXDLLIMPEXP_HTML wxHtmlColourCell : public wxHtmlCell
 {
 public:
-    wxHtmlColourCell(const wxColour& clr, int flags = wxHTML_CLR_FOREGROUND) :  m_Colour(clr) { m_Flags = flags;}
+    wxHtmlColourCell(const wxColour& clr, int flags = wxHTML_CLR_FOREGROUND)
+        :  m_Colour(clr), m_Flags(flags)
+    {}
+
+    wxHtmlColourCell(const wxHtmlColourCell&) = delete;
+	wxHtmlColourCell& operator=(const wxHtmlColourCell&) = delete;
+
     void Draw(wxDC& dc, int x, int y, int view_y1, int view_y2,
                       wxHtmlRenderingInfo& info) override;
     void DrawInvisible(wxDC& dc, int x, int y,
@@ -626,8 +646,6 @@ protected:
     unsigned m_Flags;
 
     wxDECLARE_ABSTRACT_CLASS(wxHtmlColourCell);
-    wxHtmlColourCell(const wxHtmlColourCell&) = delete;
-	wxHtmlColourCell& operator=(const wxHtmlColourCell&) = delete;
 };
 
 

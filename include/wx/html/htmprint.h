@@ -199,14 +199,21 @@ private:
 private:
     std::vector<int> m_PageBreaks;
 
-    wxString m_Document, m_BasePath;
+    wxString m_Document;
+    wxString m_BasePath;
     bool m_BasePathIsDir{true};
-    wxString m_Headers[2], m_Footers[2];
+    wxString m_Headers[2];
+    wxString m_Footers[2];
 
     int m_HeaderHeight{0};
     int m_FooterHeight{0};
-    wxHtmlDCRenderer m_Renderer, m_RendererHdr;
-    float m_MarginTop, m_MarginBottom, m_MarginLeft, m_MarginRight, m_MarginSpace;
+    wxHtmlDCRenderer m_Renderer;
+    wxHtmlDCRenderer m_RendererHdr;
+    float m_MarginTop;
+    float m_MarginBottom;
+    float m_MarginLeft;
+    float m_MarginRight;
+    float m_MarginSpace;
 
     // list of HTML filters
     static std::vector<wxHtmlFilter*> m_Filters;
@@ -297,22 +304,25 @@ protected:
     virtual bool DoPrint(wxHtmlPrintout *printout);
 
 private:
-    wxPrintData *m_PrintData{nullptr};
-    wxPageSetupDialogData *m_PageSetupData;
+    wxPrintData* m_PrintData{nullptr};
+    wxPageSetupDialogData* m_PageSetupData;
     wxString m_Name;
     int m_FontsSizesArr[7];
-    int *m_FontsSizes;
-    wxString m_FontFaceFixed, m_FontFaceNormal;
+    int* m_FontsSizes;
+    wxString m_FontFaceFixed;
+    wxString m_FontFaceNormal;
 
     enum FontMode
     {
         FontMode_Explicit,
         FontMode_Standard
     };
+    
     FontMode m_fontMode;
 
-    wxString m_Headers[2], m_Footers[2];
-    wxWindow *m_ParentWindow;
+    wxString m_Headers[2];
+    wxString m_Footers[2];
+    wxWindow* m_ParentWindow;
 
     PromptMode m_promptMode{Prompt_Always};
 };

@@ -45,6 +45,9 @@ public:
                     int style = wxHF_DEFAULT_STYLE, wxHtmlHelpData* data = nullptr);
     ~wxHtmlHelpDialog() override;
 
+    wxHtmlHelpDialog(const wxHtmlHelpDialog&) = delete;
+	wxHtmlHelpDialog& operator=(const wxHtmlHelpDialog&) = delete;
+
     bool Create(wxWindow* parent, wxWindowID id, const wxString& title = wxEmptyString,
                 int style = wxHF_DEFAULT_STYLE);
 
@@ -80,8 +83,6 @@ protected:
     wxHtmlHelpController* m_helpController;
 
     wxDECLARE_EVENT_TABLE();
-    wxHtmlHelpDialog(const wxHtmlHelpDialog&) = delete;
-	wxHtmlHelpDialog& operator=(const wxHtmlHelpDialog&) = delete;
 };
 
 #endif

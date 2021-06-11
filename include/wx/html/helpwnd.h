@@ -60,8 +60,11 @@ class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;
 // FIXME: Accept sizes and positions instead.
 struct wxHtmlHelpFrameCfg
 {
-    int x, y, w, h;
     long sashpos;
+    int x;
+    int y;
+    int w;
+    int h;
     bool navig_on;
 };
 
@@ -93,6 +96,9 @@ public:
                 int style = wxTAB_TRAVERSAL|wxNO_BORDER,
                 int helpStyle = wxHF_DEFAULT_STYLE);
     ~wxHtmlHelpWindow() override;
+
+    wxHtmlHelpWindow(const wxHtmlHelpWindow&) = delete;
+	wxHtmlHelpWindow& operator=(const wxHtmlHelpWindow&) = delete;
 
     wxHtmlHelpData* GetData() { return m_Data; }
     wxHtmlHelpController* GetController() const { return m_helpController; }
@@ -265,8 +271,6 @@ private:
     wxHtmlHelpMergedIndex *m_mergedIndex;
 
     wxDECLARE_EVENT_TABLE();
-    wxHtmlHelpWindow(const wxHtmlHelpWindow&) = delete;
-	wxHtmlHelpWindow& operator=(const wxHtmlHelpWindow&) = delete;
 };
 
 /*!

@@ -82,6 +82,9 @@ public:
                 );
     ~wxHtmlHelpFrame() override;
 
+    wxHtmlHelpFrame(const wxHtmlHelpFrame&) = delete;
+	wxHtmlHelpFrame& operator=(const wxHtmlHelpFrame&) = delete;
+
     /// Returns the data associated with the window.
     wxHtmlHelpData* GetData() { return m_Data; }
 
@@ -138,10 +141,7 @@ protected:
     bool m_shouldPreventAppExit;
 
 private:
-
     wxDECLARE_EVENT_TABLE();
-    wxHtmlHelpFrame(const wxHtmlHelpFrame&) = delete;
-	wxHtmlHelpFrame& operator=(const wxHtmlHelpFrame&) = delete;
 };
 
 #endif // wxUSE_WXHTML_HELP

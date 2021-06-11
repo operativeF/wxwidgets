@@ -42,9 +42,8 @@ public:
 
 private:
     // Arrays if names and values of the parameters
-    wxArrayString
-        m_names,
-        m_values;
+    wxArrayString m_names;
+    wxArrayString m_values;
 };
 
 #endif // wxUSE_HTML

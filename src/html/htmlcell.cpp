@@ -92,9 +92,9 @@ void wxHtmlCell::SetScriptMode(wxHtmlScriptMode mode, long previousBase)
 {
     m_ScriptMode = mode;
 
-    if (mode == wxHTML_SCRIPT_SUP)
+    if (mode == wxHtmlScriptMode::Super)
         m_ScriptBaseline = previousBase - (m_Height + 1) / 2;
-    else if (mode == wxHTML_SCRIPT_SUB)
+    else if (mode == wxHtmlScriptMode::Sub)
         m_ScriptBaseline = previousBase + (m_Height + 1) / 6;
     else
         m_ScriptBaseline = 0;

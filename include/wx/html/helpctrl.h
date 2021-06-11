@@ -49,6 +49,9 @@ public:
 
     ~wxHtmlHelpController() override;
 
+    wxHtmlHelpController(const wxHtmlHelpController&) = delete;
+	wxHtmlHelpController& operator=(const wxHtmlHelpController&) = delete;
+
     void SetShouldPreventAppExit(bool enable);
 
     void SetTitleFormat(const wxString& format);
@@ -135,9 +138,6 @@ protected:
     wxHtmlHelpDialog*   m_helpDialog;
 
     bool                m_shouldPreventAppExit;
-
-    wxHtmlHelpController(const wxHtmlHelpController&) = delete;
-	wxHtmlHelpController& operator=(const wxHtmlHelpController&) = delete;
 };
 
 /*

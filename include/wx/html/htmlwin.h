@@ -252,6 +252,9 @@ public:
     }
     ~wxHtmlWindow() override;
 
+    wxHtmlWindow(const wxHtmlWindow&) = delete;
+	wxHtmlWindow& operator=(const wxHtmlWindow&) = delete;
+
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
@@ -558,8 +561,6 @@ private:
     static wxCursor *ms_cursorDefault;
 
     wxDECLARE_EVENT_TABLE();
-    wxHtmlWindow(const wxHtmlWindow&) = delete;
-	wxHtmlWindow& operator=(const wxHtmlWindow&) = delete;
 };
 
 class WXDLLIMPEXP_FWD_HTML wxHtmlCellEvent;
@@ -588,6 +589,8 @@ public:
         m_bLinkWasClicked = false;
     }
 
+	wxHtmlCellEvent& operator=(const wxHtmlCellEvent&) = delete;
+
     wxHtmlCell* GetCell() const { return m_cell; }
     wxPoint GetPoint() const { return m_pt; }
     wxMouseEvent GetMouseEvent() const { return m_mouseEvent; }
@@ -605,8 +608,7 @@ private:
 
     bool m_bLinkWasClicked;
 
-    public:
-	wxHtmlCellEvent& operator=(const wxHtmlCellEvent&) = delete;
+public:
 	wxClassInfo *GetClassInfo() const override ;
 	static wxClassInfo ms_classInfo; 
 	static wxObject* wxCreateObject();

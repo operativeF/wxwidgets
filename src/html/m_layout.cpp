@@ -385,7 +385,7 @@ TAG_HANDLER_BEGIN(SUBSUP, "SUB,SUP")
         wxHtmlContainerCell *cont = m_WParser->GetContainer();
         wxHtmlCell *c = cont->GetLastChild();
 
-        m_WParser->SetScriptMode(issub ? wxHTML_SCRIPT_SUB : wxHTML_SCRIPT_SUP);
+        m_WParser->SetScriptMode(issub ? wxHtmlScriptMode::Sub : wxHtmlScriptMode::Super);
         m_WParser->SetScriptBaseline(
                 oldbase + (c ? c->GetScriptBaseline() : 0));
 

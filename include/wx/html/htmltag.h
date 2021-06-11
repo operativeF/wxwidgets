@@ -39,15 +39,15 @@ public:
     wxHtmlTagsCache(const wxString& source);
     virtual ~wxHtmlTagsCache();
 
+    wxHtmlTagsCache(const wxHtmlTagsCache&) = delete;
+	wxHtmlTagsCache& operator=(const wxHtmlTagsCache&) = delete;
+
     // Finds parameters for tag starting at at and fills the variables
     void QueryTag(const wxString::const_iterator& at,
                   const wxString::const_iterator& inputEnd,
                   wxString::const_iterator *end1,
                   wxString::const_iterator *end2,
                   bool *hasEnding);
-
-    wxHtmlTagsCache(const wxHtmlTagsCache&) = delete;
-	wxHtmlTagsCache& operator=(const wxHtmlTagsCache&) = delete;
 };
 
 
