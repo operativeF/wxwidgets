@@ -548,7 +548,7 @@ private:
     // encoding, but may be changed by the application using
     // SetDefaultEncoding() to make all subsequent fonts created without
     // specifying encoding parameter using this encoding
-    static wxFontEncoding ms_encodingDefault;
+    inline static wxFontEncoding ms_encodingDefault{wxFONTENCODING_SYSTEM};
 };
 
 // wxFontBase <-> wxString utilities, used by wxConfig

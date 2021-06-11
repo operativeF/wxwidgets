@@ -46,8 +46,8 @@ enum {
     wxC2S_HTML_SYNTAX      = 4    // return colour in #rrggbb syntax
 };
 
-static constexpr unsigned char wxALPHA_TRANSPARENT = 0;
-static constexpr unsigned char wxALPHA_OPAQUE = 0xff;
+inline constexpr unsigned char wxALPHA_TRANSPARENT = 0;
+inline constexpr unsigned char wxALPHA_OPAQUE = 0xff;
 
 // a valid but fully transparent colour
 #define wxTransparentColour wxColour(0, 0, 0, wxALPHA_TRANSPARENT)

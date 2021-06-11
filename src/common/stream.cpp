@@ -1272,8 +1272,6 @@ bool wxFilterClassFactoryBase::CanHandle(const wxString& protocol,
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxFilterClassFactory, wxFilterClassFactoryBase);
 
-wxFilterClassFactory *wxFilterClassFactory::sm_first = nullptr;
-
 void wxFilterClassFactory::Remove()
 {
     if (m_next != this)

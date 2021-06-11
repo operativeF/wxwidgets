@@ -123,9 +123,6 @@ wxArtProviderCache::ConstructHashID(const wxArtID& id,
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxArtProvider, wxObject);
 
-wxArtProvidersList *wxArtProvider::sm_providers = nullptr;
-wxArtProviderCache *wxArtProvider::sm_cache = nullptr;
-
 // ----------------------------------------------------------------------------
 // wxArtProvider ctors/dtor
 // ----------------------------------------------------------------------------

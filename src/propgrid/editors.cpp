@@ -2176,13 +2176,9 @@ public:
 private:
 #ifndef __WXGTK3__
     // To mark if special GTK style was already defined.
-    static bool m_exactFitStyleDefined;
+    inline static bool m_exactFitStyleDefined{false};
 #endif // !__WXGTK3__
 };
-
-#ifndef __WXGTK3__
-bool wxPGEditorBitmapButton::m_exactFitStyleDefined = false;
-#endif // !__WXGTK3__
 
 #else // !__WXGTK__
 

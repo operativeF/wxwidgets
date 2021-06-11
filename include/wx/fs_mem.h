@@ -60,7 +60,7 @@ protected:
     static bool CheckDoesntExist(const wxString& filename);
 
     // the hash map indexed by the names of the files stored in the memory FS
-    static wxMemoryFSHash m_Hash;
+    inline static wxMemoryFSHash m_Hash{};
 
     // the file name currently being searched for, i.e. the argument of the
     // last FindFirst() call or empty string if FindFirst() hasn't been called

@@ -35,7 +35,6 @@ const wxSize defaultBitmapSize(60, 13);
 // implementation
 // ============================================================================
 
-wxColourData wxGenericColourButton::ms_data;
 wxIMPLEMENT_DYNAMIC_CLASS(wxGenericColourButton, wxBitmapButton);
 
 // ----------------------------------------------------------------------------

@@ -77,12 +77,7 @@ private:
 // wxMemoryFSHandler
 //--------------------------------------------------------------------------------
 
-
-wxMemoryFSHash wxMemoryFSHandlerBase::m_Hash;
-
-
-wxMemoryFSHandlerBase::wxMemoryFSHandlerBase()  
-= default;
+wxMemoryFSHandlerBase::wxMemoryFSHandlerBase() = default;
 
 wxMemoryFSHandlerBase::~wxMemoryFSHandlerBase()
 {

@@ -86,10 +86,8 @@ private:
     bool m_wasClosedByUser;
 
     // registered Message for Dialog
-    static UINT ms_msgFindDialog;
+    inline static UINT ms_msgFindDialog{0};
 };
-
-UINT wxFindReplaceDialogImpl::ms_msgFindDialog = 0;
 
 // ============================================================================
 // implementation

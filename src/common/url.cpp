@@ -34,13 +34,6 @@ wxProtoInfo *wxURL::ms_protocols = nullptr;
 // Enforce linking of protocol classes:
 USE_PROTOCOL(wxFileProto)
 
-#if wxUSE_PROTOCOL_HTTP
-USE_PROTOCOL(wxHTTP)
-
-    wxHTTP *wxURL::ms_proxyDefault = nullptr;
-    bool wxURL::ms_useDefaultProxy = false;
-#endif
-
 #if wxUSE_PROTOCOL_FTP
 USE_PROTOCOL(wxFTP)
 #endif

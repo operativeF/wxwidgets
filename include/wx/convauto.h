@@ -142,7 +142,12 @@ private:
 
     // fall-back multibyte encoding to use, may be wxFONTENCODING_SYSTEM or
     // wxFONTENCODING_MAX but not wxFONTENCODING_DEFAULT
-    static wxFontEncoding ms_defaultMBEncoding;
+
+    // we use latin1 by default as it seems the least bad choice: the files we need
+    // to detect input of don't always come from the user system (they are often
+    // received from other machines) and so using wxFONTENCODING_SYSTEM doesn't
+    // seem to be a good idea and there is no other reasonable alternative
+    inline static wxFontEncoding ms_defaultMBEncoding{wxFONTENCODING_ISO8859_1};
 
     // conversion object which we really use, NULL until the first call to
     // either ToWChar() or FromWChar()

@@ -1141,7 +1141,7 @@ private:
     // this constant is used to transform a time_t value to the internal
     // representation, as time_t is in seconds and we use milliseconds it's
     // fixed to 1000
-    static const long TIME_T_FACTOR;
+    static constexpr long TIME_T_FACTOR{1000l};
 
     // returns true if we fall in range in which we can use standard ANSI C
     // functions

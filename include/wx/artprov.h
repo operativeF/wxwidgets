@@ -231,9 +231,9 @@ private:
 
 private:
     // list of providers:
-    static wxArtProvidersList *sm_providers;
+    inline static wxArtProvidersList *sm_providers{nullptr};
     // art resources cache (so that CreateXXX is not called that often):
-    static wxArtProviderCache *sm_cache;
+    inline static wxArtProviderCache *sm_cache{nullptr};
 
     wxDECLARE_ABSTRACT_CLASS(wxArtProvider);
 };

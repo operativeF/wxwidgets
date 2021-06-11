@@ -76,7 +76,7 @@ protected:
     // the colour data shown in wxColourPickerCtrlGeneric
     // controls. This member is static so that all colour pickers
     // in the program share the same set of custom colours.
-    static wxColourData ms_data;
+    inline static wxColourData ms_data{};
 
 private:
     void OnColourChanged(wxColourDialogEvent& event);

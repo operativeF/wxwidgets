@@ -2116,10 +2116,6 @@ bool wxMultiChoiceProperty::DoSetAttribute( const wxString& name, wxVariant& val
 wxPG_IMPLEMENT_PROPERTY_CLASS(wxDateProperty,wxPGProperty,
                               dtCtrl)
 
-
-wxString wxDateProperty::ms_defaultDateFormat;
-
-
 wxDateProperty::wxDateProperty( const wxString& label,
                                 const wxString& name,
                                 const wxDateTime& value )

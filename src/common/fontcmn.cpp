@@ -128,8 +128,6 @@ wxEMPTY_HANDLERS_TABLE(wxFont)
 // wxFontBase
 // ----------------------------------------------------------------------------
 
-wxFontEncoding wxFontBase::ms_encodingDefault = wxFONTENCODING_SYSTEM;
-
 /* static */
 void wxFontBase::SetDefaultEncoding(wxFontEncoding encoding)
 {

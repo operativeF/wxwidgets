@@ -60,9 +60,6 @@
 // the tooltip parent window
 WXHWND wxToolTip::ms_hwndTT = (WXHWND)nullptr;
 
-// new tooltip maximum width, default value is set on first call to wxToolTip::Add()
-int wxToolTip::ms_maxWidth = 0;
-
 #if wxUSE_TTM_WINDOWFROMPOINT
 
 // the tooltip window proc

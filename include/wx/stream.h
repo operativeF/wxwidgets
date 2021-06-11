@@ -412,7 +412,7 @@ protected:
         { return *this; }
 
 private:
-    static wxFilterClassFactory *sm_first;
+    inline static wxFilterClassFactory *sm_first{nullptr};
     wxFilterClassFactory *m_next;
 
     wxDECLARE_ABSTRACT_CLASS(wxFilterClassFactory);

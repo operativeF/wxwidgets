@@ -421,8 +421,8 @@ private:
   bool m_bRecordDefaults{false};
 
   // static variables
-  static wxConfigBase *ms_pConfig;
-  static bool          ms_bAutoCreate;
+  inline static wxConfigBase *ms_pConfig{nullptr};
+  inline static bool          ms_bAutoCreate{true};
 
   // Application name and organisation name
   wxString          m_appName;

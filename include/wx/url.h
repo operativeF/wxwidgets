@@ -76,8 +76,8 @@ protected:
     static wxProtoInfo *ms_protocols;
 
 #if wxUSE_PROTOCOL_HTTP
-    static wxHTTP *ms_proxyDefault;
-    static bool ms_useDefaultProxy;
+    inline static wxHTTP *ms_proxyDefault{nullptr};
+    inline static bool ms_useDefaultProxy{false};
     wxHTTP *m_proxy;
     bool m_useProxy;
 #endif // wxUSE_PROTOCOL_HTTP

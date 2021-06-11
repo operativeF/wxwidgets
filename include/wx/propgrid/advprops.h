@@ -414,7 +414,7 @@ protected:
     wxString        m_format;
     long            m_dpStyle;  // DatePicker style
 
-    static wxString ms_defaultDateFormat;
+    inline static wxString ms_defaultDateFormat{};
     static wxString DetermineDefaultDateFormat( bool showCentury );
 };
 

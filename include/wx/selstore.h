@@ -97,7 +97,7 @@ public:
     using IterationState = size_t;
 
     // constant representing absence of selection and hence end of iteration
-    static const unsigned NO_SELECTION;
+    inline static const unsigned NO_SELECTION{static_cast<unsigned>(-1)};
 
     // get the first selected item in index order, return NO_SELECTION if none
     unsigned GetFirstSelectedItem(IterationState& cookie) const;

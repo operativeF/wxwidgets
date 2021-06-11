@@ -217,7 +217,7 @@ private:
 // the number of 100-nanosecond intervals since January 1, 1601 UTC.
 //
 // This is the offset between FILETIME epoch and the Unix/wxDateTime Epoch.
-static wxInt64 EPOCH_OFFSET_IN_MSEC = wxLL(11644473600000);
+static constexpr wxInt64 EPOCH_OFFSET_IN_MSEC = wxLL(11644473600000);
 
 static void ConvertFileTimeToWx(wxDateTime *dt, const FILETIME &ft)
 {

@@ -22,12 +22,6 @@
 #include "wx/convauto.h"
 #include "wx/private/unicode.h"
 
-// we use latin1 by default as it seems the least bad choice: the files we need
-// to detect input of don't always come from the user system (they are often
-// received from other machines) and so using wxFONTENCODING_SYSTEM doesn't
-// seem to be a good idea and there is no other reasonable alternative
-wxFontEncoding wxConvAuto::ms_defaultMBEncoding = wxFONTENCODING_ISO8859_1;
-
 namespace
 {
 

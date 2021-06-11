@@ -99,8 +99,8 @@ private:
     // to be used in wxModule for deleting tooltip ctrl window when exiting mainloop
     static void DeleteToolTipCtrl();
 
-    // new tooltip maximum width, defaults to min(display width, 400)
-    static int ms_maxWidth;
+    // new tooltip maximum width, default value is set on first call to wxToolTip::Add()
+    inline static int ms_maxWidth{0};
 
     // remove this tooltip from the tooltip control
     void Remove();
