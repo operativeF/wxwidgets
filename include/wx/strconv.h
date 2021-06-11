@@ -17,11 +17,12 @@
 #include "wx/buffer.h"
 
 #include <cstdlib>
+#include <limits>
 
 class WXDLLIMPEXP_FWD_BASE wxString;
 
 // the error value returned by wxMBConv methods
-inline constexpr size_t wxCONV_FAILED = -1;
+inline constexpr auto wxCONV_FAILED = std::numeric_limits<size_t>::max();
 
 // ----------------------------------------------------------------------------
 // wxMBConv (abstract base class for conversions)
