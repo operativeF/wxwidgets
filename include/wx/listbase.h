@@ -34,31 +34,31 @@ int (wxCALLBACK *wxListCtrlCompare)(wxIntPtr item1, wxIntPtr item2, wxIntPtr sor
 // ----------------------------------------------------------------------------
 
 // style flags
-#define wxLC_VRULES          0x0001
-#define wxLC_HRULES          0x0002
+inline constexpr int wxLC_VRULES          = 0x0001;
+inline constexpr int wxLC_HRULES          = 0x0002;
 
-#define wxLC_ICON            0x0004
-#define wxLC_SMALL_ICON      0x0008
-#define wxLC_LIST            0x0010
-#define wxLC_REPORT          0x0020
+inline constexpr int wxLC_ICON            = 0x0004;
+inline constexpr int wxLC_SMALL_ICON      = 0x0008;
+inline constexpr int wxLC_LIST            = 0x0010;
+inline constexpr int wxLC_REPORT          = 0x0020;
 
-#define wxLC_ALIGN_TOP       0x0040
-#define wxLC_ALIGN_LEFT      0x0080
-#define wxLC_AUTOARRANGE     0x0100
-#define wxLC_VIRTUAL         0x0200
-#define wxLC_EDIT_LABELS     0x0400
-#define wxLC_NO_HEADER       0x0800
-#define wxLC_NO_SORT_HEADER  0x1000
-#define wxLC_SINGLE_SEL      0x2000
-#define wxLC_SORT_ASCENDING  0x4000
-#define wxLC_SORT_DESCENDING 0x8000
+inline constexpr int wxLC_ALIGN_TOP       = 0x0040;
+inline constexpr int wxLC_ALIGN_LEFT      = 0x0080;
+inline constexpr int wxLC_AUTOARRANGE     = 0x0100;
+inline constexpr int wxLC_VIRTUAL         = 0x0200;
+inline constexpr int wxLC_EDIT_LABELS     = 0x0400;
+inline constexpr int wxLC_NO_HEADER       = 0x0800;
+inline constexpr int wxLC_NO_SORT_HEADER  = 0x1000;
+inline constexpr int wxLC_SINGLE_SEL      = 0x2000;
+inline constexpr int wxLC_SORT_ASCENDING  = 0x4000;
+inline constexpr int wxLC_SORT_DESCENDING = 0x8000;
 
-#define wxLC_MASK_TYPE       (wxLC_ICON | wxLC_SMALL_ICON | wxLC_LIST | wxLC_REPORT)
-#define wxLC_MASK_ALIGN      (wxLC_ALIGN_TOP | wxLC_ALIGN_LEFT)
-#define wxLC_MASK_SORT       (wxLC_SORT_ASCENDING | wxLC_SORT_DESCENDING)
+inline constexpr int wxLC_MASK_TYPE       = wxLC_ICON | wxLC_SMALL_ICON | wxLC_LIST | wxLC_REPORT;
+inline constexpr int wxLC_MASK_ALIGN      = wxLC_ALIGN_TOP | wxLC_ALIGN_LEFT;
+inline constexpr int wxLC_MASK_SORT       = wxLC_SORT_ASCENDING | wxLC_SORT_DESCENDING;
 
 // for compatibility only
-#define wxLC_USER_TEXT       wxLC_VIRTUAL
+inline constexpr int wxLC_USER_TEXT       = wxLC_VIRTUAL;
 
 // Omitted because
 //  (a) too much detail
@@ -71,41 +71,41 @@ int (wxCALLBACK *wxListCtrlCompare)(wxIntPtr item1, wxIntPtr item2, wxIntPtr sor
 // #define wxLC_SHOW_SEL_ALWAYS
 
 // Mask flags to tell app/GUI what fields of wxListItem are valid
-#define wxLIST_MASK_STATE           0x0001
-#define wxLIST_MASK_TEXT            0x0002
-#define wxLIST_MASK_IMAGE           0x0004
-#define wxLIST_MASK_DATA            0x0008
-#define wxLIST_SET_ITEM             0x0010
-#define wxLIST_MASK_WIDTH           0x0020
-#define wxLIST_MASK_FORMAT          0x0040
+inline constexpr int wxLIST_MASK_STATE           = 0x0001;
+inline constexpr int wxLIST_MASK_TEXT            = 0x0002;
+inline constexpr int wxLIST_MASK_IMAGE           = 0x0004;
+inline constexpr int wxLIST_MASK_DATA            = 0x0008;
+inline constexpr int wxLIST_SET_ITEM             = 0x0010;
+inline constexpr int wxLIST_MASK_WIDTH           = 0x0020;
+inline constexpr int wxLIST_MASK_FORMAT          = 0x0040;
 
 // State flags for indicating the state of an item
-#define wxLIST_STATE_DONTCARE       0x0000
-#define wxLIST_STATE_DROPHILITED    0x0001      // MSW only
-#define wxLIST_STATE_FOCUSED        0x0002
-#define wxLIST_STATE_SELECTED       0x0004
-#define wxLIST_STATE_CUT            0x0008      // MSW only
-#define wxLIST_STATE_DISABLED       0x0010      // Not used
-#define wxLIST_STATE_FILTERED       0x0020      // Not used
-#define wxLIST_STATE_INUSE          0x0040      // Not used
-#define wxLIST_STATE_PICKED         0x0080      // Not used
-#define wxLIST_STATE_SOURCE         0x0100      // Not used
+inline constexpr int wxLIST_STATE_DONTCARE       = 0x0000;
+inline constexpr int wxLIST_STATE_DROPHILITED    = 0x0001;      // MSW only
+inline constexpr int wxLIST_STATE_FOCUSED        = 0x0002;
+inline constexpr int wxLIST_STATE_SELECTED       = 0x0004;
+inline constexpr int wxLIST_STATE_CUT            = 0x0008;      // MSW only
+inline constexpr int wxLIST_STATE_DISABLED       = 0x0010;      // Not used
+inline constexpr int wxLIST_STATE_FILTERED       = 0x0020;      // Not used
+inline constexpr int wxLIST_STATE_INUSE          = 0x0040;      // Not used
+inline constexpr int wxLIST_STATE_PICKED         = 0x0080;      // Not used
+inline constexpr int wxLIST_STATE_SOURCE         = 0x0100;      // Not used
 
 // Hit test flags, used in HitTest
-#define wxLIST_HITTEST_ABOVE            0x0001  // Above the control's client area.
-#define wxLIST_HITTEST_BELOW            0x0002  // Below the control's client area.
-#define wxLIST_HITTEST_NOWHERE          0x0004  // Inside the control's client area but not over an item.
-#define wxLIST_HITTEST_ONITEMICON       0x0020  // Over an item's icon.
-#define wxLIST_HITTEST_ONITEMLABEL      0x0080  // Over an item's text.
-#define wxLIST_HITTEST_ONITEMRIGHT      0x0100  // Not used
-#define wxLIST_HITTEST_ONITEMSTATEICON  0x0200  // Over the checkbox of an item.
-#define wxLIST_HITTEST_TOLEFT           0x0400  // To the left of the control's client area.
-#define wxLIST_HITTEST_TORIGHT          0x0800  // To the right of the control's client area.
+inline constexpr int wxLIST_HITTEST_ABOVE            = 0x0001;  // Above the control's client area.
+inline constexpr int wxLIST_HITTEST_BELOW            = 0x0002;  // Below the control's client area.
+inline constexpr int wxLIST_HITTEST_NOWHERE          = 0x0004;  // Inside the control's client area but not over an item.
+inline constexpr int wxLIST_HITTEST_ONITEMICON       = 0x0020;  // Over an item's icon.
+inline constexpr int wxLIST_HITTEST_ONITEMLABEL      = 0x0080;  // Over an item's text.
+inline constexpr int wxLIST_HITTEST_ONITEMRIGHT      = 0x0100;  // Not used
+inline constexpr int wxLIST_HITTEST_ONITEMSTATEICON  = 0x0200;  // Over the checkbox of an item.
+inline constexpr int wxLIST_HITTEST_TOLEFT           = 0x0400;  // To the left of the control's client area.
+inline constexpr int wxLIST_HITTEST_TORIGHT          = 0x0800;  // To the right of the control's client area.
 
-#define wxLIST_HITTEST_ONITEM (wxLIST_HITTEST_ONITEMICON | wxLIST_HITTEST_ONITEMLABEL | wxLIST_HITTEST_ONITEMSTATEICON)
+inline constexpr int wxLIST_HITTEST_ONITEM = wxLIST_HITTEST_ONITEMICON | wxLIST_HITTEST_ONITEMLABEL | wxLIST_HITTEST_ONITEMSTATEICON;
 
 // GetSubItemRect constants
-#define wxLIST_GETSUBITEMRECT_WHOLEITEM -1l
+inline constexpr long wxLIST_GETSUBITEMRECT_WHOLEITEM = -1L;
 
 // Flags for GetNextItem (MSW only except wxLIST_NEXT_ALL)
 enum

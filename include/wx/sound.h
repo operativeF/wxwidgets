@@ -26,9 +26,9 @@
 // NB: We can't use enum with some compilers, because they keep reporting
 //     nonexistent ambiguities between Play(unsigned) and static Play(const
 //     wxString&, unsigned).
-#define wxSOUND_SYNC  ((unsigned)0)
-#define wxSOUND_ASYNC ((unsigned)1)
-#define wxSOUND_LOOP  ((unsigned)2)
+inline constexpr unsigned int wxSOUND_SYNC  = 0;
+inline constexpr unsigned int wxSOUND_ASYNC = 1;
+inline constexpr unsigned int wxSOUND_LOOP  = 2;
 
 // Base class for wxSound implementations
 class WXDLLIMPEXP_CORE wxSoundBase : public wxObject

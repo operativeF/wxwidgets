@@ -70,20 +70,20 @@ inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxDataViewCtrlNameStr[] = "dataview
 // ----------------------------------------------------------------------------
 
 // size of a wxDataViewRenderer without contents:
-#define wxDVC_DEFAULT_RENDERER_SIZE     20
+inline constexpr int wxDVC_DEFAULT_RENDERER_SIZE = 20;
 
 // the default width of new (text) columns:
-#define wxDVC_DEFAULT_WIDTH             80
+inline constexpr int wxDVC_DEFAULT_WIDTH = 80;
 
 // the default width of new toggle columns:
-#define wxDVC_TOGGLE_DEFAULT_WIDTH      30
+inline constexpr int wxDVC_TOGGLE_DEFAULT_WIDTH = 30;
 
 // the default minimal width of the columns:
-#define wxDVC_DEFAULT_MINWIDTH          30
+inline constexpr int wxDVC_DEFAULT_MINWIDTH = 30;
 
 // The default alignment of wxDataViewRenderers is to take
 // the alignment from the column it owns.
-#define wxDVR_DEFAULT_ALIGNMENT         -1
+inline constexpr int wxDVR_DEFAULT_ALIGNMENT = -1;
 
 
 // ---------------------------------------------------------

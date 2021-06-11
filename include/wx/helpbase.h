@@ -21,7 +21,7 @@
 #include "wx/frame.h"
 
 // Flags for SetViewer
-#define wxHELP_NETSCAPE     1
+inline constexpr int wxHELP_NETSCAPE = 1;
 
 // Search modes:
 enum wxHelpSearchMode

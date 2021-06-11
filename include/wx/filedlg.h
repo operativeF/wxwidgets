@@ -52,7 +52,7 @@ enum
     wxFD_SHOW_HIDDEN       = 0x0400
 };
 
-#define wxFD_DEFAULT_STYLE      wxFD_OPEN
+inline constexpr int wxFD_DEFAULT_STYLE = wxFD_OPEN;
 
 inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxFileDialogNameStr[] = "filedlg";
 inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxFileSelectorPromptStr[] = "Select a file";

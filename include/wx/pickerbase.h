@@ -29,8 +29,8 @@ inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxPickerNameStr[] = "picker";
 // its sizing and positioning.
 // ----------------------------------------------------------------------------
 
-#define wxPB_USE_TEXTCTRL           0x0002
-#define wxPB_SMALL                  0x8000
+inline constexpr int wxPB_USE_TEXTCTRL = 0x0002;
+inline constexpr int wxPB_SMALL        = 0x8000;
 
 class WXDLLIMPEXP_CORE wxPickerBase : public wxNavigationEnabled<wxControl>
 {

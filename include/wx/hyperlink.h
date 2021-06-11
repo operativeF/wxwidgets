@@ -21,11 +21,11 @@
 // constants
 // ----------------------------------------------------------------------------
 
-#define wxHL_CONTEXTMENU        0x0001
-#define wxHL_ALIGN_LEFT         0x0002
-#define wxHL_ALIGN_RIGHT        0x0004
-#define wxHL_ALIGN_CENTRE       0x0008
-#define wxHL_DEFAULT_STYLE      (wxHL_CONTEXTMENU|wxNO_BORDER|wxHL_ALIGN_CENTRE)
+inline constexpr int wxHL_CONTEXTMENU        = 0x0001;
+inline constexpr int wxHL_ALIGN_LEFT         = 0x0002;
+inline constexpr int wxHL_ALIGN_RIGHT        = 0x0004;
+inline constexpr int wxHL_ALIGN_CENTRE       = 0x0008;
+inline constexpr int wxHL_DEFAULT_STYLE      = wxHL_CONTEXTMENU | wxNO_BORDER | wxHL_ALIGN_CENTRE;
 
 inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxHyperlinkCtrlNameStr[] = "hyperlink";
 

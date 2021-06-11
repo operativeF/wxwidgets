@@ -41,12 +41,12 @@ enum
 };
 
 // wxBookCtrl flags (common for wxNotebook, wxListbook, wxChoicebook, wxTreebook)
-#define wxBK_DEFAULT          0x0000
-#define wxBK_TOP              0x0010
-#define wxBK_BOTTOM           0x0020
-#define wxBK_LEFT             0x0040
-#define wxBK_RIGHT            0x0080
-#define wxBK_ALIGN_MASK       (wxBK_TOP | wxBK_BOTTOM | wxBK_LEFT | wxBK_RIGHT)
+inline constexpr int wxBK_DEFAULT          = 0x0000;
+inline constexpr int wxBK_TOP              = 0x0010;
+inline constexpr int wxBK_BOTTOM           = 0x0020;
+inline constexpr int wxBK_LEFT             = 0x0040;
+inline constexpr int wxBK_RIGHT            = 0x0080;
+inline constexpr int wxBK_ALIGN_MASK       = wxBK_TOP | wxBK_BOTTOM | wxBK_LEFT | wxBK_RIGHT;
 
 // ----------------------------------------------------------------------------
 // wxBookCtrlBase

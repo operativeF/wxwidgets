@@ -39,15 +39,15 @@ enum
 // wxNotebook flags
 
 // use common book wxBK_* flags for describing alignment
-#define wxNB_DEFAULT          wxBK_DEFAULT
-#define wxNB_TOP              wxBK_TOP
-#define wxNB_BOTTOM           wxBK_BOTTOM
-#define wxNB_LEFT             wxBK_LEFT
-#define wxNB_RIGHT            wxBK_RIGHT
+inline constexpr int wxNB_DEFAULT = wxBK_DEFAULT;
+inline constexpr int wxNB_TOP     = wxBK_TOP;
+inline constexpr int wxNB_BOTTOM  = wxBK_BOTTOM;
+inline constexpr int wxNB_LEFT    = wxBK_LEFT;
+inline constexpr int wxNB_RIGHT   = wxBK_RIGHT;
 
-#define wxNB_FIXEDWIDTH       0x0100
-#define wxNB_MULTILINE        0x0200
-#define wxNB_NOPAGETHEME      0x0400
+inline constexpr int wxNB_FIXEDWIDTH  = 0x0100;
+inline constexpr int wxNB_MULTILINE   = 0x0200;
+inline constexpr int wxNB_NOPAGETHEME = 0x0400;
 
 
 using wxNotebookPage = wxWindow;  // so far, any window can be a page

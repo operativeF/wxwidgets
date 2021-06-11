@@ -29,8 +29,8 @@
  * is treated the same as wxCHK_2STATE for compatibility (but using explicit
  * flag is preferred).
  */
-#define wxCHK_2STATE           0x4000
-#define wxCHK_3STATE           0x1000
+inline constexpr int wxCHK_2STATE = 0x4000;
+inline constexpr int wxCHK_3STATE = 0x1000;
 
 /*
  * If this style is set the user can set the checkbox to the
@@ -38,7 +38,7 @@
  * be set programmatically.
  * This style can only be used with 3 state checkboxes.
  */
-#define wxCHK_ALLOW_3RD_STATE_FOR_USER 0x2000
+inline constexpr int wxCHK_ALLOW_3RD_STATE_FOR_USER = 0x2000;
 
 inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxCheckBoxNameStr[] = "check";
 

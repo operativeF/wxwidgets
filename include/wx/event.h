@@ -76,7 +76,7 @@ class wxEventConnectionRef;
 
 using wxEventType = int;
 
-#define wxEVT_ANY           ((wxEventType)-1)
+inline constexpr wxEventType wxEVT_ANY = -1;
 
 // This macro exists for compatibility only (even though it was never public,
 // it still appears in some code using wxWidgets), see public

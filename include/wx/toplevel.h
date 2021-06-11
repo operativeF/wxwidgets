@@ -62,32 +62,32 @@ inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxFrameNameStr[] = "frame";
  */
 
 // style common to both wxFrame and wxDialog
-#define wxSTAY_ON_TOP           0x8000
-#define wxICONIZE               0x4000
-#define wxMINIMIZE              wxICONIZE
-#define wxMAXIMIZE              0x2000
-#define wxCLOSE_BOX             0x1000  // == wxHELP so can't be used with it
+inline constexpr int wxSTAY_ON_TOP = 0x8000;
+inline constexpr int wxICONIZE     = 0x4000;
+inline constexpr int wxMINIMIZE    = wxICONIZE;
+inline constexpr int wxMAXIMIZE    = 0x2000;
+inline constexpr int wxCLOSE_BOX   = 0x1000;  // == wxHELP so can't be used with it
 
-#define wxSYSTEM_MENU           0x0800
-#define wxMINIMIZE_BOX          0x0400
-#define wxMAXIMIZE_BOX          0x0200
+inline constexpr int wxSYSTEM_MENU  = 0x0800;
+inline constexpr int wxMINIMIZE_BOX = 0x0400;
+inline constexpr int wxMAXIMIZE_BOX = 0x0200;
 
-#define wxTINY_CAPTION          0x0080  // clashes with wxNO_DEFAULT
-#define wxRESIZE_BORDER         0x0040  // == wxCLOSE
+inline constexpr int wxTINY_CAPTION  = 0x0080;  // clashes with wxNO_DEFAULT
+inline constexpr int wxRESIZE_BORDER = 0x0040;  // == wxCLOSE
 
 // default style
-#define wxDEFAULT_FRAME_STYLE \
-            (wxSYSTEM_MENU | \
-             wxRESIZE_BORDER | \
-             wxMINIMIZE_BOX | \
-             wxMAXIMIZE_BOX | \
-             wxCLOSE_BOX | \
-             wxCAPTION | \
-             wxCLIP_CHILDREN)
+inline constexpr int wxDEFAULT_FRAME_STYLE =
+             wxSYSTEM_MENU |
+             wxRESIZE_BORDER |
+             wxMINIMIZE_BOX |
+             wxMAXIMIZE_BOX |
+             wxCLOSE_BOX |
+             wxCAPTION |
+             wxCLIP_CHILDREN;
 
 
 // Dialogs are created in a special way
-#define wxTOPLEVEL_EX_DIALOG        0x00000008
+inline constexpr auto wxTOPLEVEL_EX_DIALOG = 0x00000008;
 
 // Styles for ShowFullScreen
 // (note that wxTopLevelWindow only handles wxFULLSCREEN_NOBORDER and

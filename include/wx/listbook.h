@@ -25,12 +25,12 @@ wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_LISTBOOK_PAGE_CHANGED,  wxBook
 wxDECLARE_EXPORTED_EVENT( WXDLLIMPEXP_CORE, wxEVT_LISTBOOK_PAGE_CHANGING, wxBookCtrlEvent );
 
 // wxListbook flags
-#define wxLB_DEFAULT          wxBK_DEFAULT
-#define wxLB_TOP              wxBK_TOP
-#define wxLB_BOTTOM           wxBK_BOTTOM
-#define wxLB_LEFT             wxBK_LEFT
-#define wxLB_RIGHT            wxBK_RIGHT
-#define wxLB_ALIGN_MASK       wxBK_ALIGN_MASK
+inline constexpr int wxLB_DEFAULT    = wxBK_DEFAULT;
+inline constexpr int wxLB_TOP        = wxBK_TOP;
+inline constexpr int wxLB_BOTTOM     = wxBK_BOTTOM;
+inline constexpr int wxLB_LEFT       = wxBK_LEFT;
+inline constexpr int wxLB_RIGHT      = wxBK_RIGHT;
+inline constexpr int wxLB_ALIGN_MASK = wxBK_ALIGN_MASK;
 
 // ----------------------------------------------------------------------------
 // wxListbook

@@ -117,8 +117,6 @@ enum
 extern WXDLLIMPEXP_DATA_BASE(const wxULongLong) wxInvalidSize;
 #endif // wxUSE_LONGLONG
 
-
-
 // ----------------------------------------------------------------------------
 // wxFileName: encapsulates a file path
 // ----------------------------------------------------------------------------

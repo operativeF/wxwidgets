@@ -41,7 +41,7 @@ enum wxStreamError
     wxSTREAM_READ_ERROR         // generic read error
 };
 
-const int wxEOF = -1;
+inline constexpr int wxEOF = -1;
 
 // ============================================================================
 // base stream classes: wxInputStream and wxOutputStream

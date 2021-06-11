@@ -27,7 +27,7 @@ enum
     wxFC_NOSHOWHIDDEN      = 0x0008
 };
 
-#define wxFC_DEFAULT_STYLE wxFC_OPEN
+inline constexpr int wxFC_DEFAULT_STYLE = wxFC_OPEN;
 
 inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxFileCtrlNameStr[] = "wxfilectrl";
 

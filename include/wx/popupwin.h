@@ -21,7 +21,7 @@
 
 // This flag can be used in MSW if some controls are not working with the
 // default popup style.
-#define wxPU_CONTAINS_CONTROLS     0x0001
+inline constexpr int wxPU_CONTAINS_CONTROLS = 0x0001;
 
 
 #include "wx/nonownedwnd.h"

@@ -26,23 +26,23 @@ class wxTextSizerWrapper;
 
 // Also see the bit summary table in wx/toplevel.h.
 
-#define wxDIALOG_NO_PARENT      0x00000020  // Don't make owned by apps top window
+inline constexpr int wxDIALOG_NO_PARENT = 0x00000020;  // Don't make owned by apps top window
 
-#define wxDEFAULT_DIALOG_STYLE  (wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX)
+inline constexpr int wxDEFAULT_DIALOG_STYLE = wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX;
 
 // Layout adaptation levels, for SetLayoutAdaptationLevel
 
 // Don't do any layout adaptation
-#define wxDIALOG_ADAPTATION_NONE             0
+inline constexpr int wxDIALOG_ADAPTATION_NONE = 0;
 
 // Only look for wxStdDialogButtonSizer for non-scrolling part
-#define wxDIALOG_ADAPTATION_STANDARD_SIZER   1
+inline constexpr int wxDIALOG_ADAPTATION_STANDARD_SIZER = 1;
 
 // Also look for any suitable sizer for non-scrolling part
-#define wxDIALOG_ADAPTATION_ANY_SIZER        2
+inline constexpr int wxDIALOG_ADAPTATION_ANY_SIZER = 2;
 
 // Also look for 'loose' standard buttons for non-scrolling part
-#define wxDIALOG_ADAPTATION_LOOSE_BUTTONS    3
+inline constexpr int wxDIALOG_ADAPTATION_LOOSE_BUTTONS = 3;
 
 // Layout adaptation mode, for SetLayoutAdaptationMode
 enum class wxDialogLayoutAdaptationMode

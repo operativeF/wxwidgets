@@ -30,24 +30,21 @@
 
 // Assumes the buffer bitmap covers the entire scrolled window,
 // and prepares the window DC accordingly
-#define wxBUFFER_VIRTUAL_AREA       0x01
+inline constexpr int wxBUFFER_VIRTUAL_AREA = 0x01;
 
 // Assumes the buffer bitmap only covers the client area;
 // does not prepare the window DC
-#define wxBUFFER_CLIENT_AREA        0x02
+inline constexpr int wxBUFFER_CLIENT_AREA = 0x02;
 
 // Set when not using specific buffer bitmap. Note that this
 // is private style and not returned by GetStyle.
-#define wxBUFFER_USES_SHARED_BUFFER 0x04
+inline constexpr int wxBUFFER_USES_SHARED_BUFFER = 0x04;
 
 class WXDLLIMPEXP_CORE wxBufferedDC : public wxMemoryDC
 {
 public:
     // Default ctor, must subsequently call Init for two stage construction.
-    wxBufferedDC()
-        
-          
-    = default;
+    wxBufferedDC() = default;
 
     // Construct a wxBufferedDC using a user supplied buffer.
     wxBufferedDC(wxDC *dc,

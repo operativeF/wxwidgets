@@ -21,7 +21,7 @@
 #include "wx/dir.h"
 #include "wx/hashmap.h"
 
-#define wxTRACE_FSWATCHER "fswatcher"
+inline constexpr char wxTRACE_FSWATCHER[] = "fswatcher";
 
 // ----------------------------------------------------------------------------
 // wxFileSystemWatcherEventType & wxFileSystemWatcherEvent

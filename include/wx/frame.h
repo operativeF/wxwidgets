@@ -37,9 +37,9 @@ class WXDLLIMPEXP_FWD_CORE wxToolBar;
 // wxFrame-specific (i.e. not for wxDialog) styles
 //
 // Also see the bit summary table in wx/toplevel.h.
-#define wxFRAME_NO_TASKBAR      0x0002  // No taskbar button (MSW only)
-#define wxFRAME_TOOL_WINDOW     0x0004  // No taskbar button, no system menu
-#define wxFRAME_FLOAT_ON_PARENT 0x0008  // Always above its parent
+inline constexpr int wxFRAME_NO_TASKBAR      = 0x0002;  // No taskbar button (MSW only)
+inline constexpr int wxFRAME_TOOL_WINDOW     = 0x0004;  // No taskbar button, no system menu
+inline constexpr int wxFRAME_FLOAT_ON_PARENT = 0x0008;  // Always above its parent
 
 // ----------------------------------------------------------------------------
 // wxFrame is a top-level window with optional menubar, statusbar and toolbar
