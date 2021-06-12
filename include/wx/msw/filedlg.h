@@ -59,8 +59,8 @@ private:
 
     // remember if our SetPosition() or Centre() (which requires special
     // treatment) was called
-    bool m_bMovedWindow;
-    int m_centreDir;        // nothing to do if 0
+    bool m_bMovedWindow{false};
+    int m_centreDir{0};        // nothing to do if 0
 
     wxDECLARE_DYNAMIC_CLASS(wxFileDialog);
     wxFileDialog(const wxFileDialog&) = delete;

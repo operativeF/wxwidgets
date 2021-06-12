@@ -174,9 +174,9 @@ private:
   ArrayEntries  m_aEntries;         // entries in this group
   ArrayGroups   m_aSubgroups;       // subgroups
   wxString      m_strName;          // group's name
-  wxFileConfigLineList *m_pLine;    // pointer to our line in the linked list
-  wxFileConfigEntry *m_pLastEntry;  // last entry/subgroup of this group in the
-  wxFileConfigGroup *m_pLastGroup;  // local file (we insert new ones after it)
+  wxFileConfigLineList *m_pLine{nullptr};    // pointer to our line in the linked list
+  wxFileConfigEntry *m_pLastEntry{nullptr};  // last entry/subgroup of this group in the
+  wxFileConfigGroup *m_pLastGroup{nullptr};  // local file (we insert new ones after it)
 
   // DeleteSubgroupByName helper
   bool DeleteSubgroup(wxFileConfigGroup *pGroup);
@@ -264,7 +264,7 @@ wxFileName wxFileConfig::GetGlobalFile(const wxString& szFile)
 {
     const wxStandardPathsBase& stdp = wxStandardPaths::Get();
 
-    return wxFileName(GetGlobalDir(), stdp.MakeConfigFileName(szFile));
+    return {GetGlobalDir(), stdp.MakeConfigFileName(szFile)};
 }
 
 wxFileName wxFileConfig::GetLocalFile(const wxString& szFile, int style)
@@ -283,7 +283,7 @@ wxFileName wxFileConfig::GetLocalFile(const wxString& szFile, int style)
                 ? wxStandardPaths::ConfigFileConv_Ext
                 : wxStandardPaths::ConfigFileConv_Dot;
 
-    return wxFileName(GetLocalDir(style), stdp.MakeConfigFileName(szFile, conv));
+    return {GetLocalDir(style), stdp.MakeConfigFileName(szFile, conv)};
 }
 
 // ----------------------------------------------------------------------------
@@ -393,9 +393,6 @@ wxFileConfig::wxFileConfig(const wxString& appName, const wxString& vendorName,
 wxFileConfig::wxFileConfig(wxInputStream &inStream, const wxMBConv& conv)
             : m_conv(conv.Clone())
 {
-    m_isDirty = false;
-    m_autosave = true;
-
     // always local_file when this constructor is called (?)
     SetStyle(GetStyle() | wxCONFIG_USE_LOCAL_FILE);
 
@@ -1357,14 +1354,10 @@ wxFileConfigGroup::wxFileConfigGroup(wxFileConfigGroup *pParent,
                                        wxFileConfig *pConfig)
                          : m_aEntries(CompareEntries),
                            m_aSubgroups(CompareGroups),
-                           m_strName(strName)
+                           m_strName(strName),
+                           m_pConfig(pConfig),
+                           m_pParent(pParent)
 {
-  m_pConfig = pConfig;
-  m_pParent = pParent;
-  m_pLine   = nullptr;
-
-  m_pLastEntry = nullptr;
-  m_pLastGroup = nullptr;
 }
 
 // dtor deletes all children

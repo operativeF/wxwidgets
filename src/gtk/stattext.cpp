@@ -281,7 +281,7 @@ wxString wxStaticText::WXGetVisibleLabel() const
 {
     wxFAIL_MSG(wxS("Unreachable"));
 
-    return wxString();
+    return {};
 }
 
 void wxStaticText::WXSetVisibleLabel(const wxString& WXUNUSED(str))

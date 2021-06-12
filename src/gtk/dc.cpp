@@ -669,6 +669,6 @@ void wxGTKDCImpl::DoGetSizeMM( int* width, int* height ) const
 wxSize wxGTKDCImpl::GetPPI() const
 {
     // TODO (should probably be pure virtual)
-    return wxSize(0, 0);
+    return {0, 0};
 }
 #endif

@@ -554,8 +554,8 @@ wxSize wxRendererMSW::GetCheckBoxSize(wxWindow* win, int WXUNUSED(flags))
     // for the display this window is on.
     wxCHECK_MSG( win, wxSize(0, 0), "Must have a valid window" );
 
-    return wxSize(wxGetSystemMetrics(SM_CXMENUCHECK, win),
-                  wxGetSystemMetrics(SM_CYMENUCHECK, win));
+    return {wxGetSystemMetrics(SM_CXMENUCHECK, win),
+            wxGetSystemMetrics(SM_CYMENUCHECK, win)};
 }
 
 int wxRendererMSW::GetHeaderButtonHeight(wxWindow * win)
@@ -904,7 +904,7 @@ wxSize wxRendererXP::GetCheckBoxSize(wxWindow* win, int flags)
         {
             SIZE checkSize;
             if (::GetThemePartSize(hTheme, nullptr, BP_CHECKBOX, CBS_UNCHECKEDNORMAL, nullptr, TS_DRAW, &checkSize) == S_OK)
-                return wxSize(checkSize.cx, checkSize.cy);
+                return {checkSize.cx, checkSize.cy};
         }
     }
     return m_rendererNative.GetCheckBoxSize(win, flags);
@@ -921,7 +921,7 @@ wxSize wxRendererXP::GetCheckMarkSize(wxWindow* win)
         {
             SIZE checkSize;
             if (::GetThemePartSize(hTheme, nullptr, MENU_POPUPCHECK, MC_CHECKMARKNORMAL, nullptr, TS_DRAW, &checkSize) == S_OK)
-                return wxSize(checkSize.cx, checkSize.cy);
+                return {checkSize.cx, checkSize.cy};
         }
     }
     return m_rendererNative.GetCheckMarkSize(win);
@@ -939,7 +939,7 @@ wxSize wxRendererXP::GetExpanderSize(wxWindow* win)
             SIZE expSize;
             if (::GetThemePartSize(hTheme, nullptr, TVP_GLYPH, GLPS_CLOSED, nullptr,
                                    TS_DRAW, &expSize) == S_OK)
-                return wxSize(expSize.cx, expSize.cy);
+                return {expSize.cx, expSize.cy};
 
         }
     }
@@ -1001,7 +1001,7 @@ wxSize wxRendererXP::GetCollapseButtonSize(wxWindow *win, wxDC& dc)
             TS_TRUE,
             &s);
 
-        return wxSize(s.cx, s.cy);
+        return {s.cx, s.cy};
     }
     else
         return m_rendererNative.GetCollapseButtonSize(win, dc);
@@ -1243,7 +1243,7 @@ wxRendererXP::GetSplitterParams(const wxWindow * win)
     if ( win->HasFlag(wxSP_NO_XP_THEME) )
         return m_rendererNative.GetSplitterParams(win);
     else
-        return wxSplitterRenderParams(SASH_WIDTH, 0, false);
+        return {SASH_WIDTH, 0, false};
 }
 
 void

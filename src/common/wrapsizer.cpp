@@ -159,7 +159,7 @@ void wxWrapSizer::AdjustLastRowItemProp(size_t n, wxSizerItem *itemLast)
 wxSize wxWrapSizer::CalcMin()
 {
     if ( m_children.empty() )
-        return wxSize();
+        return {};
 
     // We come here to calculate min size in two different situations:
     // 1 - Immediately after InformFirstDirection, then we find a min size that

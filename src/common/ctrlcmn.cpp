@@ -150,7 +150,7 @@ void wxControlBase::DoUpdateWindowUI(wxUpdateUIEvent& event)
 wxSize wxControlBase::DoGetSizeFromTextSize(int WXUNUSED(xlen),
                                             int WXUNUSED(ylen)) const
 {
-    return wxSize(-1, -1);
+    return {-1, -1};
 }
 
 /* static */

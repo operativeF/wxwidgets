@@ -673,7 +673,7 @@ protected:
 
 
     // the main top level window (may be NULL)
-    wxWindow *m_topWindow;
+    wxWindow *m_topWindow{nullptr};
 
     // if Yes, exit the main loop when the last top level window is deleted, if
     // No don't do it and if Later -- only do it once we reach our OnRun()
@@ -688,12 +688,12 @@ protected:
 
     // true if the app wants to use the best visual on systems where
     // more than one are available (Sun, SGI, XFree86 4.0 ?)
-    bool m_useBestVisual;
+    bool m_useBestVisual{false};
     // force TrueColour just in case "best" isn't TrueColour
-    bool m_forceTrueColour;
+    bool m_forceTrueColour{false};
 
     // does any of our windows have focus?
-    bool m_isActive;
+    bool m_isActive{true};
 
     wxAppBase(const wxAppBase&) = delete;
 	wxAppBase& operator=(const wxAppBase&) = delete;

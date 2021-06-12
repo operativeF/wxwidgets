@@ -1519,7 +1519,7 @@ wxSize wxGridSizer::CalcMin()
 {
     int nrows, ncols;
     if ( CalcRowsCols(nrows, ncols) == 0 )
-        return wxSize();
+        return {};
 
     // Find the max width and height for any component
     int w = 0;
@@ -1766,7 +1766,7 @@ wxSize wxFlexGridSizer::CalcMin()
 
     // Number of rows/columns can change as items are added or removed.
     if ( !CalcRowsCols(nrows, ncols) )
-        return wxSize();
+        return {};
 
 
     // We have to recalculate the sizes in case the item minimum size has

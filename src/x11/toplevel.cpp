@@ -434,7 +434,7 @@ wxPoint wxTopLevelWindowX11::GetClientAreaOrigin() const
 {
     // wxFrame::GetClientAreaOrigin
     // does the required calculation already.
-    return wxPoint(0, 0);
+    return {0, 0};
 }
 
 void wxTopLevelWindowX11::DoGetClientSize( int *width, int *height ) const

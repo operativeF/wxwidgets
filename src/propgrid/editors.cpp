@@ -490,12 +490,9 @@ class wxPGDoubleClickProcessor : public wxEvtHandler
 public:
 
     wxPGDoubleClickProcessor( wxOwnerDrawnComboBox* combo, wxBoolProperty* property )
-         
+        : m_combo(combo),
+          m_property(property)
     {
-        m_timeLastMouseUp = 0;
-        m_combo = combo;
-        m_property = property;
-        m_downReceived = false;
     }
 
 protected:
@@ -553,10 +550,10 @@ protected:
     }
 
 private:
-    wxMilliClock_t              m_timeLastMouseUp;
+    wxMilliClock_t              m_timeLastMouseUp{0};
     wxOwnerDrawnComboBox*       m_combo;
     wxBoolProperty*             m_property;  // Selected property
-    bool                        m_downReceived;
+    bool                        m_downReceived{false};
 
     wxDECLARE_EVENT_TABLE();
 };
@@ -1327,7 +1324,7 @@ wxPGWindowList wxPGChoiceAndButtonEditor::CreateControls( wxPropertyGrid* propGr
     bt->Show();
 #endif
 
-    return wxPGWindowList(ch, bt);
+    return {ch, bt};
 }
 
 
@@ -1354,7 +1351,7 @@ wxPGWindowList wxPGTextCtrlAndButtonEditor::CreateControls( wxPropertyGrid* prop
     wxWindow* wnd = propGrid->GenerateEditorTextCtrlAndButton( pos, sz, &wnd2,
         property->HasFlag(wxPG_PROP_NOEDITOR), property);
 
-    return wxPGWindowList(wnd, wnd2);
+    return {wnd, wnd2};
 }
 
 
@@ -1483,7 +1480,6 @@ public:
         // Due to SetOwnFont stuff necessary for GTK+ 1.2, we need to have this
         SetFont( parent->GetFont() );
 
-        m_state = 0;
         SetBoxHeight(12);
         SetBackgroundStyle( wxBG_STYLE_PAINT );
     }
@@ -1503,10 +1499,10 @@ public:
 
     static wxRect GetBoxRect(const wxRect& r, int box_h)
     {
-        return wxRect(r.x + wxPG_XBEFORETEXT, r.y + ((r.height - box_h) / 2), box_h, box_h);
+        return {r.x + wxPG_XBEFORETEXT, r.y + ((r.height - box_h) / 2), box_h, box_h};
     }
 
-    int m_state;
+    int m_state{0};
 
 private:
     void OnPaint( wxPaintEvent& event );

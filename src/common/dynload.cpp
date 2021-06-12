@@ -67,18 +67,14 @@ private:
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxPluginLibraryModule, wxModule);
 
-
+// It is simple to know what is the first object in the linked list of
+// wxClassInfo that we registered (it's also the last one chronologically),
+// it's just the new head of the wxClassInfo list:
 wxPluginLibrary::wxPluginLibrary(const wxString &libname, int flags)
-        : m_linkcount(1)
-        , m_objcount(0)
+        : m_ourFirst(wxClassInfo::GetFirst())
 {
     const wxClassInfo* const oldFirst = wxClassInfo::GetFirst();
     Load( libname, flags );
-
-    // It is simple to know what is the first object in the linked list of
-    // wxClassInfo that we registered (it's also the last one chronologically),
-    // it's just the new head of the wxClassInfo list:
-    m_ourFirst = wxClassInfo::GetFirst();
 
     // But to find the first wxClassInfo created by this library we need to
     // iterate until we get to the previous head as we don't have the links in

@@ -534,13 +534,13 @@ wxRect wxRibbonToolBar::GetToolRect(int tool_id)const
             wxRibbonToolBarToolBase* tool = group->tools.Item(t);
             if (tool->id == tool_id)
             {
-                return wxRect(group->position + tool->position, tool->size);
+                return {group->position + tool->position, tool->size};
             }
             ++pos;
         }
         ++pos; // Increment pos for group separator.
     }
-    return wxRect();
+    return {};
 }
 
 bool wxRibbonToolBar::GetToolState(int tool_id)const
@@ -553,7 +553,7 @@ bool wxRibbonToolBar::GetToolState(int tool_id)const
 wxBitmap wxRibbonToolBar::MakeDisabledBitmap(const wxBitmap& original)
 {
     wxImage img(original.ConvertToImage());
-    return wxBitmap(img.ConvertToGreyscale(), -1, original.GetScaleFactor());
+    return {img.ConvertToGreyscale(), -1, original.GetScaleFactor()};
 }
 
 void wxRibbonToolBar::AppendGroup()

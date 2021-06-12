@@ -271,7 +271,7 @@ struct wxStringFragment
 wxStringFragment GetFragment(wxString& text)
 {
     if ( text.empty() )
-        return wxStringFragment();
+        return {};
 
     // the maximum length of a sequence of digits that
     // can fit into wxUint64 when converted to a number

@@ -141,7 +141,7 @@ wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)
     if ( ext.IsSameAs(wxT("bmp"), false) )
         return wxT("image/bmp");
 
-    return wxString();
+    return {};
 }
 
 

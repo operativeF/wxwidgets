@@ -442,12 +442,12 @@ wxSize wxGCDCImpl::GetPPI() const
     {
         double x, y;
         m_graphicContext->GetDPI(&x, &y);
-        return wxSize(wxRound(x), wxRound(y));
+        return {wxRound(x), wxRound(y)};
     }
 
     // This is the same value that wxGraphicsContext::GetDPI() returns by
     // default.
-    return wxSize(72, 72);
+    return {72, 72};
 }
 
 int wxGCDCImpl::GetDepth() const
@@ -591,7 +591,7 @@ wxPoint wxGCDCImpl::DeviceToLogical(wxCoord x, wxCoord y) const
     double px = x;
     double py = y;
     m_matrixCurrentInv.TransformPoint(&px, &py);
-    return wxPoint(wxRound(px), wxRound(py));
+    return {wxRound(px), wxRound(py)};
 }
 
 wxPoint wxGCDCImpl::LogicalToDevice(wxCoord x, wxCoord y) const
@@ -599,7 +599,7 @@ wxPoint wxGCDCImpl::LogicalToDevice(wxCoord x, wxCoord y) const
     double px = x;
     double py = y;
     m_matrixCurrent.TransformPoint(&px, &py);
-    return wxPoint(wxRound(px), wxRound(py));
+    return {wxRound(px), wxRound(py)};
 }
 
 wxSize wxGCDCImpl::DeviceToLogicalRel(int x, int y) const
@@ -607,7 +607,7 @@ wxSize wxGCDCImpl::DeviceToLogicalRel(int x, int y) const
     double dx = x;
     double dy = y;
     m_matrixCurrentInv.TransformDistance(&dx, &dy);
-    return wxSize(wxRound(dx), wxRound(dy));
+    return {wxRound(dx), wxRound(dy)};
 }
 
 wxSize wxGCDCImpl::LogicalToDeviceRel(int x, int y) const
@@ -615,7 +615,7 @@ wxSize wxGCDCImpl::LogicalToDeviceRel(int x, int y) const
     double dx = x;
     double dy = y;
     m_matrixCurrent.TransformDistance(&dx, &dy);
-    return wxSize(wxRound(dx), wxRound(dy));
+    return {wxRound(dx), wxRound(dy)};
 }
 
 bool wxGCDCImpl::DoFloodFill(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y),

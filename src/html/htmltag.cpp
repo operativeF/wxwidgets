@@ -72,10 +72,8 @@ bool wxIsCDATAElement(const wxString& tag)
 }
 
 wxHtmlTagsCache::wxHtmlTagsCache(const wxString& source)
+    : m_Cache(new wxHtmlTagsCacheData())
 {
-    m_Cache = new wxHtmlTagsCacheData;
-    m_CachePos = 0;
-
     wxChar tagBuffer[256];
 
     const wxString::const_iterator end = source.end();
@@ -298,12 +296,9 @@ wxHtmlTag::wxHtmlTag(wxHtmlTag *parent,
                      const wxString::const_iterator& end_pos,
                      wxHtmlTagsCache *cache,
                      wxHtmlEntitiesParser *entParser)
+    : m_Parent(parent)
 {
     /* Setup DOM relations */
-
-    m_Next = nullptr;
-    m_FirstChild = m_LastChild = nullptr;
-    m_Parent = parent;
     if (parent)
     {
         m_Prev = m_Parent->m_LastChild;

@@ -32,7 +32,11 @@ FORCE_LINK_ME(m_hline)
 class wxHtmlLineCell : public wxHtmlCell
 {
     public:
-        wxHtmlLineCell(int size, bool shading)  {m_Height = size; m_HasShading = shading;}
+        wxHtmlLineCell(int size, bool shading)
+            : m_HasShading(shading)
+        {
+            m_Height = size;
+        }
 
         wxHtmlLineCell(const wxHtmlLineCell&) = delete;
 	    wxHtmlLineCell& operator=(const wxHtmlLineCell&) = delete;

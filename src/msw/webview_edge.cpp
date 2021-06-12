@@ -669,7 +669,7 @@ wxString wxWebViewEdge::GetCurrentURL() const
     if (m_impl->m_webView && SUCCEEDED(m_impl->m_webView->get_Source(&uri)))
         return wxString(uri);
     else
-        return wxString();
+        return {};
 }
 
 wxString wxWebViewEdge::GetCurrentTitle() const
@@ -678,7 +678,7 @@ wxString wxWebViewEdge::GetCurrentTitle() const
     if (m_impl->m_webView && SUCCEEDED(m_impl->m_webView->get_DocumentTitle(&title)))
         return wxString(title);
     else
-        return wxString();
+        return {};
 }
 
 void wxWebViewEdge::SetZoomType(wxWebViewZoomType)

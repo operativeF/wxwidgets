@@ -154,7 +154,7 @@ public:
 #elif defined(__UNIX__)
         return wxASCII_STR("unix");
 #else
-        return wxString();
+        return {};
 #endif
     }
 
@@ -361,7 +361,7 @@ protected:
             || (majorCur == major && minorCur == minor && microCur >= micro);
     }
 
-    bool m_initializedForCurrentPlatform;
+    bool m_initializedForCurrentPlatform{false};
 
     void InitForCurrentPlatform();
 
@@ -371,9 +371,9 @@ protected:
 
     // Version of the OS; valid if m_os != wxOS_UNKNOWN
     // (-1 means not initialized yet).
-    int m_osVersionMajor,
-        m_osVersionMinor,
-        m_osVersionMicro;
+    int m_osVersionMajor;
+    int m_osVersionMinor;
+    int m_osVersionMicro{-1};
 
     // Operating system ID.
     wxOperatingSystemId m_os;

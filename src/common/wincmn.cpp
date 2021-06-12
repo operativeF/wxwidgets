@@ -896,7 +896,7 @@ wxSize wxWindowBase::DoGetBorderSize() const
 {
     // there is one case in which we can implement it for all ports easily
     if ( GetBorder() == wxBORDER_NONE )
-        return wxSize(0, 0);
+        return {0, 0};
 
     // otherwise use the difference between the real size and the client size
     // as a fallback: notice that this is incorrect in general as client size

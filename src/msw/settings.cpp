@@ -339,7 +339,7 @@ extern wxFont wxGetCCDefaultFont()
                 win
            ) )
     {
-        return wxFont(wxNativeFontInfo(lf, win));
+        return {wxNativeFontInfo(lf, win)};
     }
     else
     {

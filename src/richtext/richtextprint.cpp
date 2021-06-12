@@ -442,8 +442,8 @@ wxRichTextPrinting::wxRichTextPrinting(const wxString& name, wxWindow *parentWin
     : m_title(name)
     , m_previewRect(100, 100, 800, 800)
     , m_parentWindow(parentWindow)
+    , m_pageSetupData(new wxPageSetupDialogData)
 {
-    m_pageSetupData = new wxPageSetupDialogData;
     m_pageSetupData->EnableMargins(true);
     m_pageSetupData->SetMarginTopLeft(wxPoint(25, 25));
     m_pageSetupData->SetMarginBottomRight(wxPoint(25, 25));

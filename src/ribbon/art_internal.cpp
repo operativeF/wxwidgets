@@ -46,13 +46,13 @@ wxColour wxRibbonInterpolateColour(const wxColour& start_colour,
     }
     position -= start_position;
     end_position -= start_position;
-    int r = end_colour.Red() - start_colour.Red();
-    int g = end_colour.Green() - start_colour.Green();
-    int b = end_colour.Blue() - start_colour.Blue();
+    unsigned char r = end_colour.Red() - start_colour.Red();
+    unsigned char g = end_colour.Green() - start_colour.Green();
+    unsigned char b = end_colour.Blue() - start_colour.Blue();
     r = start_colour.Red()   + (((r * position * 100) / end_position) / 100);
     g = start_colour.Green() + (((g * position * 100) / end_position) / 100);
     b = start_colour.Blue()  + (((b * position * 100) / end_position) / 100);
-    return wxColour(r, g, b);
+    return {r, g, b};
 }
 
 bool wxRibbonCanLabelBreakAtPosition(const wxString& label, size_t pos)
@@ -113,7 +113,7 @@ wxBitmap wxRibbonLoadPixmap(const char* const* bits, wxColour fore)
 {
     wxImage xpm = wxBitmap(bits).ConvertToImage();
     xpm.Replace(255, 0, 255, fore.Red(), fore.Green(), fore.Blue());
-    return wxBitmap(xpm);
+    return {xpm};
 }
 
 wxRibbonHSLColour::wxRibbonHSLColour(const wxColour& col)
@@ -215,10 +215,10 @@ wxColour wxRibbonHSLColour::ToRGB() const
         else
             blue = tmp1;
     }
-    return wxColour(
+    return {
         (unsigned char)(red * 255.0f),
         (unsigned char)(green * 255.0f),
-        (unsigned char)(blue * 255.0f));
+        (unsigned char)(blue * 255.0f)};
 }
 
 wxRibbonHSLColour wxRibbonHSLColour::Darker(float delta) const
@@ -234,12 +234,12 @@ wxRibbonHSLColour& wxRibbonHSLColour::MakeDarker(float delta)
 
 wxRibbonHSLColour wxRibbonHSLColour::Lighter(float delta) const
 {
-    return wxRibbonHSLColour(hue, saturation, luminance + delta);
+    return {hue, saturation, luminance + delta};
 }
 
 wxRibbonHSLColour wxRibbonHSLColour::Saturated(float delta) const
 {
-    return wxRibbonHSLColour(hue, saturation + delta, luminance);
+    return {hue, saturation + delta, luminance};
 }
 
 wxRibbonHSLColour wxRibbonHSLColour::Desaturated(float delta) const
@@ -249,7 +249,7 @@ wxRibbonHSLColour wxRibbonHSLColour::Desaturated(float delta) const
 
 wxRibbonHSLColour wxRibbonHSLColour::ShiftHue(float delta) const
 {
-    return wxRibbonHSLColour(hue + delta, saturation, luminance);
+    return {hue + delta, saturation, luminance};
 }
 
 #endif // wxUSE_RIBBON

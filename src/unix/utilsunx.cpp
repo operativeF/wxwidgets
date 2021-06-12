@@ -928,7 +928,7 @@ wxGetCommandOutput(const wxString &cmd, wxMBConv& conv = wxConvISO8859_1)
         // but only in case of some really catastrophic failure inside popen()
         // so we should really notify the user about this as this is not normal.
         wxLogSysError(wxT("Executing \"%s\" failed"), cmd);
-        return wxString();
+        return {};
     }
 
     wxString s;

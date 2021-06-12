@@ -25,8 +25,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxWizardXmlHandler, wxXmlResourceHandler);
 
 wxWizardXmlHandler::wxWizardXmlHandler()  
 {
-    m_wizard = nullptr;
-    m_lastSimplePage = nullptr;
     XRC_ADD_STYLE(wxWIZARD_EX_HELPBUTTON);
     AddWindowStyles();
 }

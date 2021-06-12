@@ -146,7 +146,7 @@ public:
 
         wxQtLineInfo start = GetLineInfo(lineNo, value);
         if ( start.startPos == wxString::npos )
-            return wxString();
+            return {};
 
         return value.Mid(start.startPos, start.endPos - start.startPos);
     }

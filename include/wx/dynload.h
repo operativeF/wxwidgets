@@ -92,8 +92,8 @@ private:
     const wxClassInfo    *m_ourFirst; // first class info in this plugin
     const wxClassInfo    *m_ourLast;  // ..and the last one
 
-    size_t          m_linkcount;    // Ref count of library link calls
-    size_t          m_objcount;     // ..and (pluggable) object instantiations.
+    size_t          m_linkcount{1};    // Ref count of library link calls
+    size_t          m_objcount{0};     // ..and (pluggable) object instantiations.
     wxModuleList    m_wxmodules;    // any wxModules that we initialised.
 
     void    UpdateClasses();        // Update ms_classes

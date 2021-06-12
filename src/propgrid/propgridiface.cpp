@@ -851,7 +851,7 @@ public:
 
 wxPGVIterator wxPropertyGridInterface::GetVIterator( int flags ) const
 {
-    return wxPGVIterator( new wxPGVIteratorBase_State( m_pState, flags ) );
+    return {new wxPGVIteratorBase_State( m_pState, flags )};
 }
 
 // -----------------------------------------------------------------------

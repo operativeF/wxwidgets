@@ -123,7 +123,7 @@ wxString wxMemoryFSHandlerBase::FindFirst(const wxString& url, int flags)
     {
         // we only store files, not directories, so we don't risk finding
         // anything
-        return wxString();
+        return {};
     }
 
     const wxString spec = GetRightLocation(url);
@@ -155,7 +155,7 @@ wxString wxMemoryFSHandlerBase::FindNext()
             return "memory:" + path;
     }
 
-    return wxString();
+    return {};
 }
 
 bool wxMemoryFSHandlerBase::CheckDoesntExist(const wxString& filename)

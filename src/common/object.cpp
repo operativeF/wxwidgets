@@ -319,12 +319,12 @@ wxClassInfo::const_iterator wxClassInfo::begin_classinfo()
 {
     sm_classTable->BeginFind();
 
-    return const_iterator(sm_classTable->Next(), sm_classTable);
+    return {sm_classTable->Next(), sm_classTable};
 }
 
 wxClassInfo::const_iterator wxClassInfo::end_classinfo()
 {
-    return const_iterator(nullptr, nullptr);
+    return {nullptr, nullptr};
 }
 
 // ----------------------------------------------------------------------------

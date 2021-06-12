@@ -475,7 +475,7 @@ bool wxTextCompleterSimple::Start(const wxString& prefix)
 wxString wxTextCompleterSimple::GetNext()
 {
     if ( m_index == m_completions.size() )
-        return wxString();
+        return {};
 
     return m_completions[m_index++];
 }

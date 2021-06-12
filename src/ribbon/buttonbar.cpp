@@ -72,13 +72,13 @@ wxBitmap MakeResizedBitmap(const wxBitmap& original, wxSize size)
 
     wxImage img(original.ConvertToImage());
     img.Rescale(scale * size.x, scale * size.y, wxImageResizeQuality::High);
-    return wxBitmap(img, -1, scale);
+    return {img, -1, scale};
 }
 
 wxBitmap MakeDisabledBitmap(const wxBitmap& original)
 {
     wxImage img(original.ConvertToImage());
-    return wxBitmap(img.ConvertToGreyscale(), -1, original.GetScaleFactor());
+    return {img.ConvertToGreyscale(), -1, original.GetScaleFactor()};
 }
 
 } // anonymous namespace

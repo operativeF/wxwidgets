@@ -1373,7 +1373,7 @@ int wxListCtrl::GetColumnCount() const
 
 wxSize wxListCtrl::GetItemSpacing() const
 {
-    return wxSize();
+    return {};
 }
 
 void wxListCtrl::SetItemTextColour(long item, const wxColour& col)

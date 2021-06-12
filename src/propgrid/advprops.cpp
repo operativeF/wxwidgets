@@ -274,7 +274,7 @@ wxPGWindowList wxPGSpinCtrlEditor::CreateControls( wxPropertyGrid* propgrid, wxP
     wnd1->SetValidator(validator);
 #endif
 
-    return wxPGWindowList(wnd1, wnd2);
+    return {wnd1, wnd2};
 }
 
 // Control's events are redirected here
@@ -891,7 +891,7 @@ wxColourPropertyValue wxSystemColourProperty::GetVal( const wxVariant* pVariant 
         pVariant = &m_value;
 
     if ( pVariant->IsNull() )
-        return wxColourPropertyValue(wxPG_COLOUR_UNSPECIFIED, wxColour());
+        return {wxPG_COLOUR_UNSPECIFIED, wxColour()};
 
     const wxString valType(pVariant->GetType());
     if ( valType == wxS("wxColourPropertyValue") )
@@ -944,7 +944,7 @@ wxColourPropertyValue wxSystemColourProperty::GetVal( const wxVariant* pVariant 
     }
 
     if ( !variantProcessed )
-        return wxColourPropertyValue(wxPG_COLOUR_UNSPECIFIED, wxColour());
+        return {wxPG_COLOUR_UNSPECIFIED, wxColour()};
 
     wxColourPropertyValue v2( wxPG_COLOUR_CUSTOM, col );
 
@@ -1624,7 +1624,7 @@ wxString wxColourProperty::ValueToString( wxVariant& value,
 
 wxColour wxColourProperty::GetColour( int index ) const
 {
-    return wxColour(gs_cp_es_normcolour_labels[m_choices.GetValue(index)]);
+    return {gs_cp_es_normcolour_labels[m_choices.GetValue(index)]};
 }
 
 wxVariant wxColourProperty::DoTranslateVal( wxColourPropertyValue& v ) const
@@ -1728,11 +1728,11 @@ wxSize wxCursorProperty::OnMeasureImage( int item ) const
 {
 #if wxPG_CAN_DRAW_CURSOR
     if ( item != -1 && item < NUM_CURSORS )
-        return wxSize(wxPG_CURSOR_IMAGE_WIDTH,wxPG_CURSOR_IMAGE_WIDTH);
+        return {wxPG_CURSOR_IMAGE_WIDTH,wxPG_CURSOR_IMAGE_WIDTH};
 #else
     wxUnusedVar(item);
 #endif
-    return wxSize(0,0);
+    return {0, 0};
 }
 
 #if wxPG_CAN_DRAW_CURSOR

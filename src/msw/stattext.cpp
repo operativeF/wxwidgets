@@ -112,7 +112,7 @@ wxSize wxStaticText::DoGetBestClientSize() const
     // still not aligned to the same position.
     heightTextTotal += 1;
 
-    return wxSize(widthTextMax, heightTextTotal);
+    return {widthTextMax, heightTextTotal};
 }
 
 void wxStaticText::DoSetSize(int x, int y, int w, int h, int sizeFlags)

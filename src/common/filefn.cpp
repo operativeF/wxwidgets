@@ -313,7 +313,7 @@ wxString wxPathOnly (const wxString& path)
         int i = l - 1;
 
         if ( i >= _MAXPATHLEN )
-            return wxString();
+            return {};
 
         // Local copy
         wxStrcpy(buf, path);
@@ -328,13 +328,13 @@ wxString wxPathOnly (const wxString& path)
                 if (i == 0)
                     i ++;
                 buf[i] = 0;
-                return wxString(buf);
+                return {buf};
             }
 #ifdef __VMS__
             if (path[i] == wxT(']'))
             {
                 buf[i+1] = 0;
-                return wxString(buf);
+                return {buf};
             }
 #endif
             i --;
@@ -347,11 +347,11 @@ wxString wxPathOnly (const wxString& path)
             // A:junk --> A:. (since A:.\junk Not A:\junk)
             buf[2] = wxT('.');
             buf[3] = wxT('\0');
-            return wxString(buf);
+            return {buf};
         }
 #endif
     }
-    return wxEmptyString;
+    return {};
 }
 
 // Utility for converting delimiters in DOS filenames to UNIX style
@@ -813,9 +813,9 @@ wxString wxGetOSDirectory()
         wxLogLastError(wxS("GetWindowsDirectory"));
     }
 
-    return wxString(buf);
+    return {buf};
 #else
-    return wxEmptyString;
+    return {};
 #endif
 }
 

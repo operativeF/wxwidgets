@@ -150,13 +150,12 @@ public:
         WriteAttr
     };
 
+    // be careful and use FILE_{READ,WRITE}_ATTRIBUTES here instead of the
+    // usual GENERIC_{READ,WRITE} as we don't want the file access time to
+    // be changed when we open it because this class is used for setting
+    // access time (see #10567)
     wxFileHandle(const wxString& filename, OpenMode mode, int flags = 0)
-    {
-        // be careful and use FILE_{READ,WRITE}_ATTRIBUTES here instead of the
-        // usual GENERIC_{READ,WRITE} as we don't want the file access time to
-        // be changed when we open it because this class is used for setting
-        // access time (see #10567)
-        m_hFile = ::CreateFile
+        : m_hFile(::CreateFile
                     (
                      filename.t_str(),             // name
                      mode == ReadAttr ? FILE_READ_ATTRIBUTES    // access mask
@@ -167,8 +166,8 @@ public:
                      OPEN_EXISTING,                 // creation disposition
                      flags,                         // flags
                      nullptr                           // no template file
-                    );
-
+                    ))
+    {
         if ( m_hFile == INVALID_HANDLE_VALUE )
         {
             if ( mode == ReadAttr )
@@ -596,7 +595,7 @@ void wxFileName::Clear()
 /* static */
 wxFileName wxFileName::FileName(const wxString& file, wxPathFormat format)
 {
-    return wxFileName(file, format);
+    return {file, format};
 }
 
 /* static */
@@ -2588,7 +2587,7 @@ wxFileName wxFileName::URLToFileName(const wxString& url)
 
     path.Replace(wxS('/'), wxFILE_SEP_PATH);
 
-    return wxFileName(path, wxPATH_NATIVE);
+    return {path, wxPATH_NATIVE};
 }
 
 // Escapes non-ASCII and others characters in file: URL to be valid URLs
@@ -2838,12 +2837,12 @@ wxULongLong wxFileName::GetSize(const wxString &filename)
     if ( ret == INVALID_FILE_SIZE && ::GetLastError() != NO_ERROR )
         return wxInvalidSize;
 
-    return wxULongLong(lpFileSizeHigh, ret);
+    return {lpFileSizeHigh, ret};
 #else // ! __WIN32__
     wxStructStat st;
     if (wxStat( filename, &st) != 0)
         return wxInvalidSize;
-    return wxULongLong(st.st_size);
+    return {st.st_size};
 #endif
 }
 

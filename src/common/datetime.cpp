@@ -762,7 +762,7 @@ wxString wxDateTime::GetEnglishMonthName(Month month, NameFlags flags)
 
     const int idx = NameArrayIndexFromFlag(flags);
     if ( idx == -1 )
-        return wxString();
+        return {};
 
     return monthNames[idx][month];
 }
@@ -800,7 +800,7 @@ wxString wxDateTime::GetEnglishWeekDayName(WeekDay wday, NameFlags flags)
 
     const int idx = NameArrayIndexFromFlag(flags);
     if ( idx == -1 )
-        return wxString();
+        return {};
 
     return weekdayNames[idx][wday];
 }
@@ -1745,7 +1745,7 @@ wxDateSpan wxDateTime::DiffAsDateSpan(const wxDateTime& dt) const
     // not in complete weeks
     d -= w * DAYS_PER_WEEK;
 
-    return wxDateSpan(y, m, w, d);
+    return {y, m, w, d};
 }
 
 // ----------------------------------------------------------------------------

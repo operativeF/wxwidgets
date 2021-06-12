@@ -68,7 +68,7 @@ public:
     void SetToolBar(wxToolBar *toolbar);
 #endif // wxUSE_TOOLBAR
 
-    wxPoint GetClientAreaOrigin() const { return wxPoint(0, 0); }
+    wxPoint GetClientAreaOrigin() const { return {0, 0}; }
 
     // implementation from now on
     // --------------------------

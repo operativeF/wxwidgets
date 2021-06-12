@@ -236,8 +236,8 @@ private:
 
   // member variables
   // ----------------
-  wxFileConfigLineList *m_linesHead,    // head of the linked list
-                       *m_linesTail;    // tail
+  wxFileConfigLineList *m_linesHead{nullptr};    // head of the linked list
+  wxFileConfigLineList *m_linesTail{nullptr};    // tail
 
   wxFileName  m_fnLocalFile,            // local  file name passed to ctor
               m_fnGlobalFile;           // global
@@ -252,8 +252,8 @@ private:
   int m_umask;                          // the umask to use for file creation
 #endif // __UNIX__
 
-  bool m_isDirty;                       // if true, we have unsaved changes
-  bool m_autosave;                      // if true, save changes on destruction
+  bool m_isDirty{false};                       // if true, we have unsaved changes
+  bool m_autosave{true};                      // if true, save changes on destruction
 
   wxDECLARE_ABSTRACT_CLASS(wxFileConfig);
 };

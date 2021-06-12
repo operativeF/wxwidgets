@@ -82,14 +82,9 @@ void wxStreamBuffer::InitWithStream(wxStreamBase& stream, BufMode mode)
     m_flushable = true;
 }
 
-wxStreamBuffer::wxStreamBuffer(BufMode mode)
+wxStreamBuffer::wxStreamBuffer(BufMode mode) : m_mode(mode)
 {
     Init();
-
-    m_stream = nullptr;
-    m_mode = mode;
-
-    m_flushable = false;
 }
 
 wxStreamBuffer::wxStreamBuffer(const wxStreamBuffer& buffer)

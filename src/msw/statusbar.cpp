@@ -497,7 +497,7 @@ wxSize wxStatusBar::DoGetBestSize() const
     int height = GetCharHeight();
     height += 4*borders.vert;
 
-    return wxSize(width, height);
+    return {width, height};
 }
 
 void wxStatusBar::DoMoveWindow(int x, int y, int width, int height)

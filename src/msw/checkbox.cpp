@@ -136,7 +136,7 @@ wxSize wxCheckBox::DoGetBestClientSize() const
         hCheckbox = checkSize;
     }
 
-    return wxSize(wCheckbox, hCheckbox);
+    return {wCheckbox, hCheckbox};
 }
 
 // ----------------------------------------------------------------------------

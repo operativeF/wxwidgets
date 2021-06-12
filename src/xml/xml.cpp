@@ -50,9 +50,8 @@ wxXmlNode::wxXmlNode(wxXmlNode *parent,wxXmlNodeType type,
                      wxXmlAttribute *attrs, wxXmlNode *next, int lineNo)
     : m_type(type), m_name(name), m_content(content),
       m_attrs(attrs), m_parent(parent),
-      m_children(nullptr), m_next(next),
-      m_lineNo(lineNo),
-      m_noConversion(false)
+      m_next(next),
+      m_lineNo(lineNo)
 {
     wxASSERT_MSG ( type != wxXML_ELEMENT_NODE || content.empty(), "element nodes can't have content" );
 
@@ -72,17 +71,13 @@ wxXmlNode::wxXmlNode(wxXmlNodeType type, const wxString& name,
                      const wxString& content,
                      int lineNo)
     : m_type(type), m_name(name), m_content(content),
-      m_attrs(nullptr), m_parent(nullptr),
-      m_children(nullptr), m_next(nullptr),
-      m_lineNo(lineNo), m_noConversion(false)
+      m_lineNo(lineNo)
 {
     wxASSERT_MSG ( type != wxXML_ELEMENT_NODE || content.empty(), "element nodes can't have content" );
 }
 
 wxXmlNode::wxXmlNode(const wxXmlNode& node)
 {
-    m_next = nullptr;
-    m_parent = nullptr;
     DoCopy(node);
 }
 
@@ -435,7 +430,7 @@ wxString wxXmlDoctype::GetFullString() const
             else if ( m_systemId.find('\'') == wxString::npos )
                 quote = wxS('\'');
             else // It's an error if we can't use either kind of quotes.
-                return wxString();
+                return {};
 
             content << wxS(' ') << quote << m_systemId << quote;
         }
@@ -460,7 +455,6 @@ wxXmlDocument::wxXmlDocument()
 }
 
 wxXmlDocument::wxXmlDocument(const wxString& filename, const wxString& encoding)
-              : m_docNode(nullptr)
 {
     SetFileType(wxTextFileType_Unix);
 
@@ -471,7 +465,6 @@ wxXmlDocument::wxXmlDocument(const wxString& filename, const wxString& encoding)
 }
 
 wxXmlDocument::wxXmlDocument(wxInputStream& stream, const wxString& encoding)
-              : m_docNode(nullptr)
 {
     SetFileType(wxTextFileType_Unix);
 
@@ -1188,10 +1181,7 @@ bool wxXmlDocument::Save(wxOutputStream& stream, int indentstep) const
 
 /*static*/ wxVersionInfo wxXmlDocument::GetLibraryVersionInfo()
 {
-    return wxVersionInfo("expat",
-                         XML_MAJOR_VERSION,
-                         XML_MINOR_VERSION,
-                         XML_MICRO_VERSION);
+    return {"expat", XML_MAJOR_VERSION, XML_MINOR_VERSION, XML_MICRO_VERSION};
 }
 
 #endif // wxUSE_XML

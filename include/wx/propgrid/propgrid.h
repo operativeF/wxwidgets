@@ -73,11 +73,11 @@ public:
     wxPGChoices         m_boolChoices;
 
     // Some shared variants
-    const wxVariant     m_vEmptyString;
-    const wxVariant     m_vZero;
-    const wxVariant     m_vMinusOne;
-    const wxVariant     m_vTrue;
-    const wxVariant     m_vFalse;
+    const wxVariant     m_vEmptyString{wxString()};
+    const wxVariant     m_vZero{0L};
+    const wxVariant     m_vMinusOne{-1L};
+    const wxVariant     m_vTrue{true};
+    const wxVariant     m_vFalse{false};
 
     // Cached constant strings
     const wxString      m_strstring;

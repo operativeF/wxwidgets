@@ -437,7 +437,7 @@ wxFontEncodingArray wxEncodingConverter::GetPlatformEquivalents(wxFontEncoding e
 
         default:
             wxFAIL_MSG(wxS("Invalid platform specified"));
-            return wxFontEncodingArray();
+            return {};
     }
 
     int i, clas, e ;

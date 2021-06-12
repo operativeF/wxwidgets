@@ -2489,7 +2489,7 @@ void wxImage::SetOption(const wxString& name, int value)
 wxString wxImage::GetOption(const wxString& name) const
 {
     if ( !M_IMGDATA )
-        return wxString();
+        return {};
 
     const auto match = std::find_if(M_IMGDATA->m_optionNames.cbegin(), M_IMGDATA->m_optionNames.cend(),
     [name](const auto& optname){
@@ -2497,7 +2497,7 @@ wxString wxImage::GetOption(const wxString& name) const
     });
 
     if ( match == M_IMGDATA->m_optionNames.cend() )
-        return wxString();
+        return {};
     else
     {
         const auto idx = std::distance(std::cbegin(M_IMGDATA->m_optionNames), match);

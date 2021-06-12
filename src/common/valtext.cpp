@@ -198,7 +198,7 @@ wxString wxTextValidator::IsValid(const wxString& str) const
         }
     }
 
-    return wxString();
+    return {};
 }
 
 

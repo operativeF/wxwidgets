@@ -77,12 +77,12 @@ class wxHtmlListCell : public wxHtmlContainerCell
     private:
         wxBrush m_Brush;
 
-        int m_NumRows;
-        wxHtmlListItemStruct *m_RowInfo;
+        int m_NumRows{0};
+        wxHtmlListItemStruct *m_RowInfo{nullptr};
         void ReallocRows(int rows);
         void ComputeMinMaxWidths();
         int ComputeMaxBase(wxHtmlCell *cell);
-        int m_ListmarkWidth;
+        int m_ListmarkWidth{0};
 
     public:
         explicit wxHtmlListCell(wxHtmlContainerCell *parent);
@@ -96,9 +96,6 @@ class wxHtmlListCell : public wxHtmlContainerCell
 
 wxHtmlListCell::wxHtmlListCell(wxHtmlContainerCell *parent) : wxHtmlContainerCell(parent)
 {
-    m_NumRows = 0;
-    m_RowInfo = nullptr;
-    m_ListmarkWidth = 0;
 }
 
 wxHtmlListCell::~wxHtmlListCell()

@@ -4696,7 +4696,7 @@ static wxSize GetWindowDPI(HWND hwnd)
     }
 #endif // wxUSE_DYNLIB_CLASS
 
-    return wxSize();
+    return {};
 }
 
 }

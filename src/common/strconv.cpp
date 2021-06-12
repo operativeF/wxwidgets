@@ -2718,10 +2718,8 @@ public:
     }
 
     explicit wxMBConv_wxwin(wxFontEncoding enc)
-    {
-        m_enc = enc;
-
-        
+        : m_enc(enc)
+    {   
         // Refuse to use broken wxEncodingConverter code for Mac-specific encodings.
         // The wxMBConv_cf class does a better job.
         m_ok = (m_enc < wxFONTENCODING_MACMIN || m_enc > wxFONTENCODING_MACMAX) &&
@@ -2843,11 +2841,6 @@ void wxCSConv::SetEncoding(wxFontEncoding encoding)
 
 wxCSConv::wxCSConv(const wxString& charset)
 {
-    
-    m_name = nullptr;
-    m_convReal =  nullptr;
-
-
     if ( !charset.empty() )
     {
         SetName(charset.ToAscii());
@@ -2871,11 +2864,6 @@ wxCSConv::wxCSConv(wxFontEncoding encoding)
         encoding = wxFONTENCODING_SYSTEM;
     }
 
-    
-    m_name = nullptr;
-    m_convReal =  nullptr;
-
-
     SetEncoding(encoding);
 
     m_convReal = DoCreate();
@@ -2889,11 +2877,6 @@ wxCSConv::~wxCSConv()
 wxCSConv::wxCSConv(const wxCSConv& conv)
         : wxMBConv()
 {
-    
-    m_name = nullptr;
-    m_convReal =  nullptr;
-
-
     SetName(conv.m_name);
     SetEncoding(conv.m_encoding);
 

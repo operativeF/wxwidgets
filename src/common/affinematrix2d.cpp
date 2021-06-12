@@ -155,8 +155,8 @@ wxAffineMatrix2D::DoTransformPoint(const wxPoint2DDouble& src) const
     if ( IsIdentity() )
         return src;
 
-    return wxPoint2DDouble(src.m_x * m_11 + src.m_y * m_21 + m_tx,
-                           src.m_x * m_12 + src.m_y * m_22 + m_ty);
+    return {src.m_x * m_11 + src.m_y * m_21 + m_tx,
+            src.m_x * m_12 + src.m_y * m_22 + m_ty};
 }
 
 // applies the matrix except for translations
@@ -169,8 +169,8 @@ wxAffineMatrix2D::DoTransformDistance(const wxPoint2DDouble& src) const
     if ( IsIdentity() )
         return src;
 
-    return wxPoint2DDouble(src.m_x * m_11 + src.m_y * m_21,
-                           src.m_x * m_12 + src.m_y * m_22);
+    return {src.m_x * m_11 + src.m_y * m_21,
+            src.m_x * m_12 + src.m_y * m_22};
 }
 
 bool wxAffineMatrix2D::IsIdentity() const

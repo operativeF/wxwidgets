@@ -41,8 +41,6 @@
 
 wxFFile::wxFFile(const wxString& filename, const wxString& mode)
 {
-    m_fp = nullptr;
-
     (void)Open(filename, mode);
 }
 

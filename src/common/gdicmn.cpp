@@ -891,7 +891,7 @@ wxSize wxGetDisplaySizeMM()
 {
     const wxSize ppi = wxGetDisplayPPI();
     if ( !ppi.x || !ppi.y )
-        return wxSize(0, 0);
+        return {0, 0};
 
     const wxSize pixels = wxGetDisplaySize();
     return wxSize(wxRound(pixels.x * inches2mm / ppi.x),

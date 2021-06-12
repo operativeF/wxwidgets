@@ -151,10 +151,10 @@ struct wxCmdLineOption: public wxCmdLineArgImpl
                     const wxString& desc,
                     wxCmdLineParamType typ,
                     int fl)
-                    : wxCmdLineArgImpl(k, shrt, lng, typ)
-        , description(desc)
+        : wxCmdLineArgImpl(k, shrt, lng, typ),
+          description(desc),
+          flags(fl)
     {
-        flags = fl;
     }
 
     wxString description;
@@ -166,10 +166,10 @@ struct wxCmdLineParam
     wxCmdLineParam(const wxString& desc,
                    wxCmdLineParamType typ,
                    int fl)
-        : description(desc)
+        : description(desc),
+          type(typ),
+          flags(fl)
     {
-        type = typ;
-        flags = fl;
     }
 
     wxString description;

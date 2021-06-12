@@ -214,10 +214,10 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlListBox, wxVListBox);
 // ----------------------------------------------------------------------------
 
 wxHtmlListBox::wxHtmlListBox()
-    : wxHtmlWindowMouseHelper(this)
+    : wxHtmlWindowMouseHelper(this),
+      m_htmlRendStyle(new wxHtmlListBoxStyle(*this)),
+      m_cache(new wxHtmlListBoxCache)
 {
-    m_htmlRendStyle = new wxHtmlListBoxStyle(*this);
-    m_cache = new wxHtmlListBoxCache;
 }
 
 // normal constructor which calls Create() internally
@@ -227,10 +227,10 @@ wxHtmlListBox::wxHtmlListBox(wxWindow *parent,
                              const wxSize& size,
                              long style,
                              const wxString& name)
-    : wxHtmlWindowMouseHelper(this)
+    : wxHtmlWindowMouseHelper(this),
+      m_htmlRendStyle(new wxHtmlListBoxStyle(*this)),
+      m_cache(new wxHtmlListBoxCache)
 {
-    m_htmlRendStyle = new wxHtmlListBoxStyle(*this);
-    m_cache = new wxHtmlListBoxCache;
     (void)Create(parent, id, pos, size, style, name);
 }
 

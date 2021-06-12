@@ -150,14 +150,8 @@ wxPGGlobalVarsClass* wxPGGlobalVars = nullptr;
 
 
 wxPGGlobalVarsClass::wxPGGlobalVarsClass()
-    // Prepare some shared variants
-    : m_vEmptyString(wxString())
-    , m_vZero(0L)
-    , m_vMinusOne(-1L)
-    , m_vTrue(true)
-    , m_vFalse(false)
     // Prepare cached string constants
-    , m_strstring(wxS("string"))
+    : m_strstring(wxS("string"))
     , m_strlong(wxS("long"))
     , m_strbool(wxS("bool"))
     , m_strlist(wxS("list"))
@@ -169,6 +163,7 @@ wxPGGlobalVarsClass::wxPGGlobalVarsClass()
 #if wxPG_COMPATIBILITY_1_4
     , m_strInlineHelp(wxS("InlineHelp"))
 #endif
+    , m_defaultRenderer(new wxPGDefaultRenderer())
 {
     wxPGProperty::sm_wxPG_LABEL = new wxString(wxPG_LABEL_STRING);
 
@@ -176,8 +171,6 @@ wxPGGlobalVarsClass::wxPGGlobalVarsClass()
     m_boolChoices.Add(_("False"));
     /* TRANSLATORS: Name of Boolean true value */
     m_boolChoices.Add(_("True"));
-
-    m_defaultRenderer = new wxPGDefaultRenderer();
 }
 
 
@@ -1143,7 +1136,7 @@ wxSize wxPropertyGrid::DoGetBestSize() const
         width += m_pState->GetColumnFitWidth(dc, m_pState->DoGetRoot(), i, true);
     }
 
-    return wxSize(width, lineHeight*numLines + 40);
+    return {width, lineHeight*numLines + 40};
 }
 
 void wxPropertyGrid::DoEnable(bool enable)
@@ -1705,7 +1698,7 @@ wxPoint wxPropertyGrid::GetGoodEditorDialogPosition( wxPGProperty* p,
         // below
         new_y = y + m_lineHeight;
 
-    return wxPoint(new_x + displayRect.GetX(), new_y + displayRect.GetY());
+    return {new_x + displayRect.GetX(), new_y + displayRect.GetY()};
 }
 
 // -----------------------------------------------------------------------
@@ -2521,7 +2514,7 @@ wxRect wxPropertyGrid::GetPropertyRect( const wxPGProperty* p1, const wxPGProper
         }
     }
 
-    return wxRect(0,visTop-vy,m_pState->GetVirtualWidth(),visBottom-visTop);
+    return {0, visTop-vy, m_pState->GetVirtualWidth(), visBottom-visTop};
 }
 
 // -----------------------------------------------------------------------
@@ -3754,10 +3747,10 @@ wxRect wxPropertyGrid::GetEditorWidgetRect( wxPGProperty* p, int column ) const
 wxRect wxPropertyGrid::GetImageRect( wxPGProperty* p, int item ) const
 {
     wxSize sz = GetImageSize(p, item);
-    return wxRect(wxPG_CONTROL_MARGIN + wxCC_CUSTOM_IMAGE_MARGIN1,
-                  wxPG_CUSTOM_IMAGE_SPACINGY,
-                  sz.x,
-                  sz.y);
+    return {wxPG_CONTROL_MARGIN + wxCC_CUSTOM_IMAGE_MARGIN1,
+            wxPG_CUSTOM_IMAGE_SPACINGY,
+            sz.x,
+            sz.y};
 }
 
 // return size of custom paint image
@@ -3766,7 +3759,7 @@ wxSize wxPropertyGrid::GetImageSize( wxPGProperty* p, int item ) const
     // If called with NULL property, then return default image
     // size for properties that use image.
     if ( !p )
-        return wxSize(wxPG_CUSTOM_IMAGE_WIDTH,wxPG_STD_CUST_IMAGE_HEIGHT(m_lineHeight));
+        return {wxPG_CUSTOM_IMAGE_WIDTH, wxPG_STD_CUST_IMAGE_HEIGHT(m_lineHeight)};
 
     wxSize cis = p->OnMeasureImage(item);
 
@@ -3778,7 +3771,7 @@ wxSize wxPropertyGrid::GetImageSize( wxPGProperty* p, int item ) const
         cis = GetCommonValue(cvi)->GetRenderer()->GetImageSize(nullptr, 1, cvi);
     }
     else if ( item >= 0 && choiceCount == 0 )
-        return wxSize(0, 0);
+        return {0, 0};
 
     wxASSERT( cis.x == wxDefaultCoord || cis.x >= 0 );
     if ( cis.x == wxDefaultCoord )
@@ -6251,7 +6244,7 @@ wxDEFINE_EVENT( wxEVT_PG_COLS_RESIZED, wxPropertyGridEvent);
 // -----------------------------------------------------------------------
 
 wxPropertyGridEvent::wxPropertyGridEvent(wxEventType commandType, int id)
-    : wxCommandEvent(commandType,id)
+    : wxCommandEvent(commandType, id)
 {
 }
 
@@ -6259,15 +6252,15 @@ wxPropertyGridEvent::wxPropertyGridEvent(wxEventType commandType, int id)
 
 wxPropertyGridEvent::wxPropertyGridEvent(const wxPropertyGridEvent& event)
     : wxCommandEvent(event)
+    , m_pg{event.m_pg}
+    , m_property{event.m_property}
+    , m_validationInfo{event.m_validationInfo}
+    , m_canVeto{event.m_canVeto}
+    , m_wasVetoed{event.m_wasVetoed}
 {
     m_eventType = event.GetEventType();
     m_eventObject = event.m_eventObject;
-    m_pg = event.m_pg;
     OnPropertyGridSet();
-    m_property = event.m_property;
-    m_validationInfo = event.m_validationInfo;
-    m_canVeto = event.m_canVeto;
-    m_wasVetoed = event.m_wasVetoed;
 }
 
 // -----------------------------------------------------------------------

@@ -302,7 +302,7 @@ wxIconBundle wxArtProvider::GetIconBundle(const wxArtID& id, const wxArtClient& 
     else
     {
         // fall back to single-icon bundle
-        return wxIconBundle(GetIcon(id, client));
+        return {GetIcon(id, client)};
     }
 }
 

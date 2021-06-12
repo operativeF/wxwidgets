@@ -282,7 +282,7 @@ wxString wxChoice::GetString(unsigned int n) const
     if (!gtk_tree_model_iter_nth_child (model, &iter, NULL, n))
     {
         wxFAIL_MSG( "invalid index" );
-        return wxString();
+        return {};
     }
 
     wxGtkValue value;

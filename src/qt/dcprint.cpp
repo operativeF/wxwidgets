@@ -44,7 +44,7 @@ int wxPrinterDCImpl::GetDepth() const
 
 wxSize wxPrinterDCImpl::GetPPI() const
 {
-    return wxSize();
+    return {};
 }
 
 void wxPrinterDCImpl::SetFont(const wxFont& WXUNUSED(font))

@@ -36,10 +36,9 @@ static constexpr int   UUID_CSTRLEN =  100;     // real length is 66
 
 // copy ctor
 Uuid::Uuid(const Uuid& uuid)
+    : m_uuid(uuid.m_uuid),
+      m_pszCForm(new wxChar[UUID_CSTRLEN])
 {
-  // bitwise copy Ok for UUIDs
-  m_uuid = uuid.m_uuid;
-
   // force the string to be allocated by RPC
   // (we free it later with RpcStringFree)
 #ifdef _UNICODE
@@ -48,8 +47,6 @@ Uuid::Uuid(const Uuid& uuid)
   UuidToString(&m_uuid, &m_pszUuid);
 #endif
 
-  // allocate new buffer
-  m_pszCForm = new wxChar[UUID_CSTRLEN];
   // and fill it
   memcpy(m_pszCForm, uuid.m_pszCForm, UUID_CSTRLEN*sizeof(wxChar));
 }

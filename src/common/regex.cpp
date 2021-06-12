@@ -76,7 +76,7 @@ class wxRegExMatches
 public:
     using match_type = regmatch_t *;
 
-    explicit wxRegExMatches(size_t n)        { m_matches = new regmatch_t[n]; }
+    explicit wxRegExMatches(size_t n) : m_matches(new regmatch_t[n]) {}
     ~wxRegExMatches()               { delete [] m_matches; }
 
     // we just use casts here because the fields of regmatch_t struct may be 64

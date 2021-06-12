@@ -71,16 +71,12 @@ class wxHtmlImageMapAreaCell : public wxHtmlCell
 	wxHtmlImageMapAreaCell& operator=(const wxHtmlImageMapAreaCell&) = delete;
 };
 
-
-
-
-
 wxHtmlImageMapAreaCell::wxHtmlImageMapAreaCell( wxHtmlImageMapAreaCell::celltype t, wxString &incoords, double pixel_scale )
+    : type(t)
 {
     int i;
     wxString x = incoords, y;
 
-    type = t;
     while ((i = x.Find( ',' )) != wxNOT_FOUND)
     {
         coords.Add( (int)(pixel_scale * (double)wxAtoi( x.Left( i ).c_str())) );

@@ -1061,7 +1061,7 @@ wxString wxAppTraitsBase::GetAssertStackTrace()
 #else // !wxDEBUG_LEVEL
     // this function is still present for ABI-compatibility even in debug level
     // 0 build but is not used there and so can simply do nothing
-    return wxString();
+    return {};
 #endif // wxDEBUG_LEVEL/!wxDEBUG_LEVEL
 }
 #endif // wxUSE_STACKWALKER

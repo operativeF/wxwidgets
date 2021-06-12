@@ -30,7 +30,7 @@ class WXDLLIMPEXP_HTML wxHtmlTagsCache
 {
 private:
     wxHtmlTagsCacheData *m_Cache;
-    int m_CachePos;
+    int m_CachePos{0};
 
     wxHtmlTagsCacheData& Cache() { return *m_Cache; }
 
@@ -146,9 +146,10 @@ private:
     wxArrayString m_ParamNames, m_ParamValues;
 
     // DOM tree relations:
-    wxHtmlTag *m_Next;
-    wxHtmlTag *m_Prev;
-    wxHtmlTag *m_FirstChild, *m_LastChild;
+    wxHtmlTag *m_Next{nullptr};
+    wxHtmlTag *m_Prev{nullptr};
+    wxHtmlTag *m_FirstChild{nullptr};
+    wxHtmlTag *m_LastChild{nullptr};
     wxHtmlTag *m_Parent;
 
     wxHtmlTag(const wxHtmlTag&) = delete;

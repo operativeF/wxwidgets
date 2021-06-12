@@ -197,7 +197,7 @@ wxString wxWebResponseCURL::GetHeader(const wxString& name) const
     if ( it != m_headers.end() )
         return it->second;
     else
-        return wxString();
+        return {};
 }
 
 int wxWebResponseCURL::GetStatus() const

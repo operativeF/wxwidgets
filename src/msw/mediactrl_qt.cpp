@@ -412,11 +412,8 @@ public:
 class WXDLLIMPEXP_MEDIA wxQTMediaEvtHandler : public wxEvtHandler
 {
 public:
-    wxQTMediaEvtHandler(wxQTMediaBackend *qtb, WXHWND hwnd)
+    wxQTMediaEvtHandler(wxQTMediaBackend *qtb, WXHWND hwnd) : m_qtb(qtb), m_hwnd(hwnd)
     {
-        m_qtb = qtb;
-        m_hwnd = hwnd;
-
         m_qtb->m_ctrl->Bind(
             wxEVT_ERASE_BACKGROUND,
             &wxQTMediaEvtHandler::OnEraseBackground, this);

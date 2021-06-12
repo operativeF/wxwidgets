@@ -68,7 +68,7 @@ ExtractUntil(char ch, wxString::const_iterator& it, wxString::const_iterator end
     }
 
     // Return empty string to indicate that we didn't find ch at all.
-    return wxString();
+    return {};
 }
 
 } // anonymous namespace
@@ -192,7 +192,7 @@ wxMarkupParser::ParseAttrs(wxString attrs, TagAndAttrs& tagAndAttrs)
         }
     }
 
-    return wxString();
+    return {};
 }
 
 bool wxMarkupParser::OutputTag(const TagAndAttrs& tagAndAttrs, bool start)
@@ -467,7 +467,7 @@ wxString wxMarkupParser::Strip(const wxString& text)
     StripOutput output;
     wxMarkupParser parser(output);
     if ( !parser.Parse(text) )
-        return wxString();
+        return {};
 
     return output.GetText();
 }

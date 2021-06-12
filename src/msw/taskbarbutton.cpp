@@ -606,8 +606,7 @@ wxThumbBarButton::wxThumbBarButton(int id,
       m_dismissOnClick(dismissOnClick),
       m_hasBackground(hasBackground),
       m_shown(shown),
-      m_interactive(interactive),
-      m_taskBarButtonParent(nullptr)
+      m_interactive(interactive)
 {
 }
 
@@ -1259,9 +1258,9 @@ void wxTaskBarJumpList::Update()
 wxTaskBarJumpListImpl::wxTaskBarJumpListImpl(wxTaskBarJumpList *jumpList,
                                              const wxString& appID)
     : m_jumpList(jumpList),
-      m_destinationList(nullptr)
+      m_destinationList(nullptr),
+      m_appID(appID)
 {
-    m_appID = appID;
     HRESULT hr = CoCreateInstance
                  (
                     wxCLSID_DestinationList,

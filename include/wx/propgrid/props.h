@@ -614,7 +614,7 @@ public:
 protected:
     bool DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value) override;
 
-    wxString    m_wildcard;
+    wxString    m_wildcard{wxALL_FILES};
     wxString    m_basePath; // If set, then show path relative to it
     wxString    m_initialPath; // If set, start the file dialog here
     int         m_indFilter{-1}; // index to the selected filter

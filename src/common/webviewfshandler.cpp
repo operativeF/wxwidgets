@@ -16,9 +16,9 @@
 #include "wx/filesys.h"
 
 wxWebViewFSHandler::wxWebViewFSHandler(const wxString& scheme) :
-                         wxWebViewHandler(scheme)
+    wxWebViewHandler(scheme),
+    m_fileSystem(new wxFileSystem())
 {
-    m_fileSystem = new wxFileSystem();
 }
 
 wxWebViewFSHandler::~wxWebViewFSHandler()

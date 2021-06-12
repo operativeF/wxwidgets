@@ -173,7 +173,7 @@ wxBitmap wxStaticBitmap::GetBitmap() const
         // ourselves internally in ConvertImage() to keep the transparency but
         // the user code doesn't know about it so it still can use GetBitmap()
         // to retrieve the bitmap
-        return wxBitmap(GetIcon());
+        return {GetIcon()};
     }
     else // we have a bitmap
     {

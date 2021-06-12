@@ -104,14 +104,9 @@ const void *wxSecretValue::GetData() const
 wxString wxSecretValue::GetAsString(const wxMBConv& conv) const
 {
     if ( !m_impl )
-        return wxString();
+        return {};
 
-    return wxString
-           (
-                static_cast<const char*>(m_impl->GetData()),
-                conv,
-                m_impl->GetSize()
-           );
+    return {static_cast<const char*>(m_impl->GetData()), conv, m_impl->GetSize()};
 }
 
 #ifndef __WINDOWS__

@@ -99,7 +99,7 @@ void wxTextEntry::SetEditable(bool WXUNUSED(editable))
 
 wxString wxTextEntry::DoGetValue() const
 {
-    return wxString();
+    return {};
 }
 
 void wxTextEntry::DoSetValue(const wxString &WXUNUSED(value), int WXUNUSED(flags))

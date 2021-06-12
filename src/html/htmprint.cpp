@@ -609,10 +609,9 @@ void wxHtmlPrintout::SetStandardFonts(int size,
 
 wxHtmlEasyPrinting::wxHtmlEasyPrinting(const wxString& name, wxWindow *parentWindow)
     : m_ParentWindow(parentWindow),
-      m_Name(name)
+      m_Name(name),
+      m_PageSetupData(new wxPageSetupDialogData())
 {
-    m_PageSetupData = new wxPageSetupDialogData;
-
     m_PageSetupData->EnableMargins(true);
     m_PageSetupData->SetMarginTopLeft(wxPoint(25, 25));
     m_PageSetupData->SetMarginBottomRight(wxPoint(25, 25));

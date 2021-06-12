@@ -88,8 +88,11 @@ class wxHtmlHelpTreeItemData : public wxTreeItemData
 class wxHtmlHelpHashData : public wxObject
 {
     public:
-        wxHtmlHelpHashData(int index, wxTreeItemId id)  
-            { m_Index = index; m_Id = id;}
+        wxHtmlHelpHashData(int index, wxTreeItemId id)
+            : m_Index(index),
+              m_Id(id)  
+        {}
+        
         ~wxHtmlHelpHashData() override = default;
 
         int m_Index;

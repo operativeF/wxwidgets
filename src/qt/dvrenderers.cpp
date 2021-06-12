@@ -81,7 +81,7 @@ void wxDataViewCustomRenderer::RenderText( const wxString &text, int xoffset,  w
 
 wxSize wxDataViewCustomRenderer::GetSize() const
 {
-    return wxSize();
+    return {};
 }
 
 
@@ -139,7 +139,7 @@ bool wxDataViewProgressRenderer::Render( wxRect cell, wxDC *dc, int state )
 
 wxSize wxDataViewProgressRenderer::GetSize() const
 {
-    return wxSize();
+    return {};
 }
 
 //==============================================================================
@@ -173,7 +173,7 @@ bool wxDataViewIconTextRenderer::Render( wxRect cell, wxDC *dc, int state )
 
 wxSize wxDataViewIconTextRenderer::GetSize() const
 {
-    return wxSize();
+    return {};
 }
 
 wxControl *wxDataViewIconTextRenderer::CreateEditorCtrl( wxWindow *parent, wxRect labelRect, const wxVariant &value )
@@ -213,7 +213,7 @@ bool wxDataViewDateRenderer::Render( wxRect cell, wxDC *dc, int state )
 
 wxSize wxDataViewDateRenderer::GetSize() const
 {
-    return wxSize();
+    return {};
 }
 
 bool wxDataViewDateRenderer::Activate( wxRect cell, wxDataViewModel *model,
@@ -238,7 +238,7 @@ bool wxDataViewChoiceRenderer::Render( wxRect rect, wxDC *dc, int state )
 
 wxSize wxDataViewChoiceRenderer::GetSize() const
 {
-    return wxSize();
+    return {};
 }
 
 bool wxDataViewChoiceRenderer::SetValue( const wxVariant &value )

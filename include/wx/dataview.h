@@ -1257,7 +1257,7 @@ public:
 private:
     wxDataViewTreeStoreNodes     m_children;
     wxIcon                       m_iconExpanded;
-    bool                         m_isExpanded;
+    bool                         m_isExpanded{false};
 };
 
 //-----------------------------------------------------------------------------

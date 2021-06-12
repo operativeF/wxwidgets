@@ -309,7 +309,7 @@ wxSize wxMSWHeaderCtrl::DoGetBestSize() const
         return wxControl::DoGetBestSize();
     }
 
-    return wxSize(wxDefaultCoord, wpos.cy);
+    return {wxDefaultCoord, wpos.cy};
 }
 
 void wxMSWHeaderCtrl::MSWUpdateFontOnDPIChange(const wxSize& newDPI)

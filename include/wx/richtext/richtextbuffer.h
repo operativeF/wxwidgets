@@ -2073,7 +2073,7 @@ public:
 
 protected:
 
-    double m_fontScale;
+    double m_fontScale{1.0};
 
     wxDECLARE_DYNAMIC_CLASS(wxRichTextFontTable);
 };
@@ -3076,9 +3076,9 @@ protected:
     wxSize                  m_maxSize;
     wxSize                  m_minSize;
     wxPoint                 m_pos;
-    int                     m_descent; // Descent for this object (if any)
-    int                     m_refCount;
-    bool                    m_show;
+    int                     m_descent{0}; // Descent for this object (if any)
+    int                     m_refCount{1};
+    bool                    m_show{true};
     wxRichTextObject*       m_parent;
 
     // The range of this object (start position to end position)
@@ -6174,8 +6174,8 @@ public:
 
 protected:
 
-    int m_rowCount;
-    int m_colCount;
+    int m_rowCount{0};
+    int m_colCount{0};
 
     // An array of rows, each of which is a wxRichTextObjectPtrArray containing
     // the cell objects. The cell objects are also children of this object.
@@ -6429,7 +6429,7 @@ public:
 protected:
 
     wxList  m_actions;
-    bool    m_freeze;
+    bool    m_freeze{false};
 };
 
 /**
@@ -6616,7 +6616,7 @@ protected:
 
     // Stores an object to replace the one at the position
     // defined by the container address and the action's range start position.
-    wxRichTextObject*               m_object;
+    wxRichTextObject*               m_object{nullptr};
 
     // Stores the attributes
     wxRichTextAttr                  m_attributes;
@@ -6631,7 +6631,7 @@ protected:
     wxRichTextRange                 m_range;
 
     // The insertion point for this command
-    long                            m_position;
+    long                            m_position{-1};
 
     // Ignore 1st 'Do' operation because we already did it
     bool                            m_ignoreThis;

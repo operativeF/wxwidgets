@@ -41,11 +41,9 @@ class wxDataViewEditorCtrlEvtHandler: public wxEvtHandler
 {
 public:
     wxDataViewEditorCtrlEvtHandler(wxWindow *editor, wxDataViewRenderer *owner)
+        : m_editorCtrl(editor),
+          m_owner(owner)
     {
-        m_editorCtrl = editor;
-        m_owner = owner;
-
-        m_finished = false;
     }
 
     void SetFocusOnIdle( bool focus = true ) { m_focusOnIdle = focus; }
@@ -61,7 +59,7 @@ private:
 
     wxDataViewRenderer     *m_owner;
     wxWindow               *m_editorCtrl;
-    bool                    m_finished;
+    bool                    m_finished{false};
     bool                    m_focusOnIdle;
 
     wxDECLARE_EVENT_TABLE();
@@ -537,7 +535,7 @@ unsigned int wxDataViewIndexListModel::GetRow( const wxDataViewItem &item ) cons
 wxDataViewItem wxDataViewIndexListModel::GetItem( unsigned int row ) const
 {
     wxASSERT( row < m_hash.GetCount() );
-    return wxDataViewItem( m_hash[row] );
+    return {m_hash[row]};
 }
 
 unsigned int wxDataViewIndexListModel::GetChildren( const wxDataViewItem &item, wxDataViewItemArray &children ) const
@@ -557,8 +555,8 @@ unsigned int wxDataViewIndexListModel::GetChildren( const wxDataViewItem &item, 
 #ifndef __WXMAC__
 
 wxDataViewVirtualListModel::wxDataViewVirtualListModel( unsigned int initial_size )
+    : m_size(initial_size)
 {
-    m_size = initial_size;
 }
 
 void wxDataViewVirtualListModel::Reset( unsigned int new_size )
@@ -680,8 +678,6 @@ wxDataViewRendererBase::wxDataViewRendererBase( const wxString &varianttype,
                                                 int WXUNUSED(align) )
     : m_variantType(varianttype)
 {
-    m_owner = nullptr;
-    m_valueAdjuster = nullptr;
 }
 
 wxDataViewRendererBase::~wxDataViewRendererBase()
@@ -1304,7 +1300,7 @@ void wxDataViewCtrlBase::SetCurrentItem(const wxDataViewItem& item)
 wxDataViewItem wxDataViewCtrlBase::GetSelection() const
 {
     if ( GetSelectedItemsCount() != 1 )
-        return wxDataViewItem();
+        return {};
 
     wxDataViewItemArray selections;
     GetSelections(selections);
@@ -1725,10 +1721,10 @@ void wxDataViewEvent::Init(wxDataViewCtrlBase* dvc,
 // -------------------------------------
 
 wxDataViewSpinRenderer::wxDataViewSpinRenderer( int min, int max, wxDataViewCellMode mode, int alignment ) :
-   wxDataViewCustomRenderer(wxT("long"), mode, alignment )
+   wxDataViewCustomRenderer(wxT("long"), mode, alignment ),
+   m_min(min),
+   m_max(max)
 {
-    m_min = min;
-    m_max = max;
 }
 
 wxWindow* wxDataViewSpinRenderer::CreateEditorCtrl( wxWindow *parent, wxRect labelRect, const wxVariant &value )
@@ -1804,9 +1800,9 @@ wxString wxDataViewSpinRenderer::GetAccessibleDescription() const
 #if defined(wxHAS_GENERIC_DATAVIEWCTRL)
 
 wxDataViewChoiceRenderer::wxDataViewChoiceRenderer( const wxArrayString& choices, wxDataViewCellMode mode, int alignment ) :
-   wxDataViewCustomRenderer(wxT("string"), mode, alignment )
+   wxDataViewCustomRenderer(wxT("string"), mode, alignment ),
+   m_choices(choices)
 {
-    m_choices = choices;
 }
 
 wxWindow* wxDataViewChoiceRenderer::CreateEditorCtrl( wxWindow *parent, wxRect labelRect, const wxVariant &value )
@@ -2477,9 +2473,9 @@ wxDataViewTreeStoreNode::wxDataViewTreeStoreNode(
         const wxString &text, const wxIcon &icon, wxClientData *data )
     : m_text(text)
     , m_icon(icon)
+    , m_parent(parent)
+    , m_data(data)
 {
-    m_parent = parent;
-    m_data = data;
 }
 
 wxDataViewTreeStoreNode::~wxDataViewTreeStoreNode()
@@ -2493,7 +2489,6 @@ wxDataViewTreeStoreContainerNode::wxDataViewTreeStoreContainerNode(
     : wxDataViewTreeStoreNode( parent, text, icon, data )
     , m_iconExpanded(expanded)
 {
-    m_isExpanded = false;
 }
 
 wxDataViewTreeStoreContainerNode::~wxDataViewTreeStoreContainerNode()

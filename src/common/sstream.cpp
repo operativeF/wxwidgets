@@ -122,9 +122,8 @@ size_t wxStringInputStream::OnSysRead(void *buffer, size_t size)
 wxStringOutputStream::wxStringOutputStream(wxString *pString, wxMBConv& conv)
     : m_conv(conv)
     , m_unconv(0)
+    , m_str(pString ? pString : &m_strInternal)
 {
-    m_str = pString ? pString : &m_strInternal;
-
     // We can avoid doing the conversion in the common case of using UTF-8
     // conversion in UTF-8 build, as it is exactly the same as the string
     // length anyhow in this case.

@@ -98,7 +98,7 @@ private:
   wxFFile(const wxFFile&);
   wxFFile& operator=(const wxFFile&);
 
-  FILE *m_fp;       // IO stream or NULL if not opened
+  FILE *m_fp{nullptr};       // IO stream or NULL if not opened
 
   wxString m_name;  // the name of the file (for diagnostic messages)
 };

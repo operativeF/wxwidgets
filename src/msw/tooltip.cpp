@@ -379,9 +379,6 @@ wxToolTip::wxToolTip(const wxString &tip)
 wxToolTip::wxToolTip(wxWindow* win, unsigned int id, const wxString &tip, const wxRect& rc)
          : m_text(tip), m_rect(rc), m_id(id)
 {
-    m_window = nullptr;
-    m_others = nullptr;
-
     SetWindow(win);
 }
 

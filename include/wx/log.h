@@ -784,7 +784,7 @@ private:
     wxLog *m_logOld;
 
     // do we pass the messages to the old logger?
-    bool m_bPassMessages;
+    bool m_bPassMessages{true};
 };
 
 // a chain log target which uses itself as the new logger

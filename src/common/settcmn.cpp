@@ -72,7 +72,7 @@ void wxSystemSettings::SetScreenType( wxSystemScreenType screen )
 
 wxString wxSystemAppearance::GetName() const
 {
-    return wxString();
+    return {};
 }
 
 bool wxSystemAppearance::IsDark() const

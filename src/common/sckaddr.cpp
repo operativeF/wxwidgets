@@ -447,7 +447,7 @@ wxString wxSockAddressImpl::GetHostName() const
     {
         sockaddr_in * const addr = Get<sockaddr_in>();
         if ( !addr )
-            return wxString();
+            return {};
 
         addrbuf = &addr->sin_addr;
         addrbuflen = sizeof(addr->sin_addr);
@@ -467,7 +467,7 @@ wxString wxSockAddressImpl::GetHostName() const
             &err
           ) )
     {
-        return wxString();
+        return {};
     }
 
     return wxString::FromUTF8(he.h_name);
@@ -718,7 +718,7 @@ wxString wxSockAddressImpl::GetPath() const
 {
     sockaddr_un * const addr = Get<sockaddr_un>();
     if ( !addr )
-        return wxString();
+        return {};
 
     return wxString::FromUTF8(addr->sun_path);
 }
@@ -874,7 +874,7 @@ wxString wxIPV4address::IPAddress() const
 {
     wxUint32 addr;
     if ( !GetImpl().GetHostAddress(&addr) )
-        return wxString();
+        return {};
 
     return wxString::Format
            (
@@ -942,7 +942,7 @@ wxString wxIPV6address::IPAddress() const
     } u;
 
     if ( !GetImpl().GetHostAddress(&u.addr6) )
-        return wxString();
+        return {};
 
     const wxUint8 * const addr = u.bytes;
 

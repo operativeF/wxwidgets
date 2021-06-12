@@ -63,7 +63,7 @@ wxSize wxPGCellRenderer::GetImageSize( const wxPGProperty* WXUNUSED(property),
                                        int WXUNUSED(column),
                                        int WXUNUSED(item) ) const
 {
-     return wxSize(0, 0);
+     return {0, 0};
 }
 
 void wxPGCellRenderer::DrawText( wxDC& dc, const wxRect& rect,
@@ -324,7 +324,7 @@ wxSize wxPGDefaultRenderer::GetImageSize( const wxPGProperty* property,
                 return bmp->GetSize();
         }
     }
-    return wxSize(0,0);
+    return {0, 0};
 }
 
 // -----------------------------------------------------------------------
@@ -332,18 +332,14 @@ wxSize wxPGDefaultRenderer::GetImageSize( const wxPGProperty* property,
 // -----------------------------------------------------------------------
 
 wxPGCellData::wxPGCellData()
-     
 {
-    m_hasValidText = false;
 }
 
 // -----------------------------------------------------------------------
 // wxPGCell
 // -----------------------------------------------------------------------
 
-wxPGCell::wxPGCell()
-     
-= default;
+wxPGCell::wxPGCell() = default;
 
 wxPGCell::wxPGCell( const wxString& text,
                     const wxBitmap& bitmap,
@@ -1266,10 +1262,10 @@ wxSize wxPGProperty::OnMeasureImage( int WXUNUSED(item) ) const
             }
         }
 
-        return wxSize(wxRound(scale*m_valueBitmap->GetWidth()), wxDefaultCoord);
+        return {wxRound(scale*m_valueBitmap->GetWidth()), wxDefaultCoord};
     }
 
-    return wxSize(0,0);
+    return {0, 0};
 }
 
 int wxPGProperty::GetImageOffset( int imageWidth ) const
@@ -3148,12 +3144,11 @@ static inline void DecDataRef(wxPGHashMapS2P& map)
     }
 }
 
-wxPGAttributeStorage::wxPGAttributeStorage()
-= default;
+wxPGAttributeStorage::wxPGAttributeStorage() = default;
 
 wxPGAttributeStorage::wxPGAttributeStorage(const wxPGAttributeStorage& other)
+    : m_map(other.m_map)
 {
-    m_map = other.m_map;
     IncDataRef(m_map);
 }
 

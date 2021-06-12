@@ -253,11 +253,11 @@ protected:
 
 
     wxString                m_variantType;
-    wxDataViewColumn       *m_owner;
+    wxDataViewColumn       *m_owner{nullptr};
     wxWeakRef<wxWindow>     m_editorCtrl;
     wxDataViewItem          m_item; // Item being currently edited, if valid.
 
-    wxDataViewValueAdjuster *m_valueAdjuster;
+    wxDataViewValueAdjuster *m_valueAdjuster{nullptr};
 
     // internal utility, may be used anywhere the window associated with the
     // renderer is required

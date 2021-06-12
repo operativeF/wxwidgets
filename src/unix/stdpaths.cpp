@@ -116,7 +116,7 @@ wxString wxStandardPaths::GetUserDataDir() const
 
 wxString wxStandardPaths::GetPluginsDir() const
 {
-    return wxString(); // TODO: this is wrong, it should return something
+    return {}; // TODO: this is wrong, it should return something
 }
 
 wxString

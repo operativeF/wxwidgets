@@ -65,10 +65,8 @@ WX_CHECK_BUILD_OPTIONS("wxQA")
 class XmlStackWalker : public wxStackWalker
 {
 public:
-    explicit XmlStackWalker(wxXmlNode *nodeStack)
+    explicit XmlStackWalker(wxXmlNode *nodeStack) : m_nodeStack(nodeStack)
     {
-        m_isOk = false;
-        m_nodeStack = nodeStack;
     }
 
     bool IsOk() const { return m_isOk; }
@@ -77,7 +75,7 @@ protected:
     void OnStackFrame(const wxStackFrame& frame) override;
 
     wxXmlNode *m_nodeStack;
-    bool m_isOk;
+    bool m_isOk{false};
 };
 
 // ----------------------------------------------------------------------------

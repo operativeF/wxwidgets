@@ -906,7 +906,7 @@ wxSize wxPropertyGridPageState::DoFitColumns( bool WXUNUSED(allowGridResize) )
     int x, y;
     pg->GetVirtualSize(&x, &y);
 
-    return wxSize(accWid, y);
+    return {accWid, y};
 }
 
 void wxPropertyGridPageState::CheckColumnWidths( int widthChange )

@@ -122,8 +122,8 @@ private:
   bool CheckForError(wxFileOffset rc) const;
 
 
-  int m_fd; // file descriptor or INVALID_FD if not opened
-  int m_lasterror; // errno value of last error
+  int m_fd{fd_invalid}; // file descriptor or INVALID_FD if not opened
+  int m_lasterror{0}; // errno value of last error
 };
 
 // ----------------------------------------------------------------------------

@@ -138,14 +138,9 @@ class wxIEnumString : public IEnumString
 {
 public:
     wxIEnumString()
-    {
-        
+    {   
         ::InitializeCriticalSection(&m_csCompleter);
         ::InitializeCriticalSection(&m_csRestart);
-
-        m_completer = nullptr;
-        m_restart = FALSE;
-    
     }
 
     wxIEnumString(const wxIEnumString&) = delete;
@@ -329,7 +324,7 @@ private:
 
     // The completer we delegate to for the completions generation. It is never
     // NULL after the initial ChangeCompleter() call.
-    wxTextCompleter *m_completer;
+    wxTextCompleter *m_completer{nullptr};
 
 
     // Critical section m_prefix and m_restart. It should be only entered for
@@ -345,7 +340,7 @@ private:
     // Notice that we use LONG and not bool here to ensure that reading this
     // value is atomic (32 bit reads are atomic operations under all Windows
     // versions but reading bool isn't necessarily).
-    LONG m_restart;
+    LONG m_restart{FALSE};
 };
 
 BEGIN_IID_TABLE(wxIEnumString)

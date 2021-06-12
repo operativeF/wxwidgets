@@ -41,13 +41,12 @@
 wxIMPLEMENT_ABSTRACT_CLASS(wxMemoryInputStream, wxInputStream);
 
 wxMemoryInputStream::wxMemoryInputStream(const void *data, size_t len)
+    : m_i_streambuf(new wxStreamBuffer(wxStreamBuffer::read)),
+      m_length(len)
 {
-    m_i_streambuf = new wxStreamBuffer(wxStreamBuffer::read);
     m_i_streambuf->SetBufferIO(const_cast<void *>(data), len);
     m_i_streambuf->SetIntPosition(0); // seek to start pos
     m_i_streambuf->Fixed(true);
-
-    m_length = len;
 }
 
 wxMemoryInputStream::wxMemoryInputStream(const wxMemoryOutputStream& stream)
@@ -152,8 +151,8 @@ wxFileOffset wxMemoryInputStream::OnSysTell() const
 wxIMPLEMENT_DYNAMIC_CLASS(wxMemoryOutputStream, wxOutputStream);
 
 wxMemoryOutputStream::wxMemoryOutputStream(void *data, size_t len)
+    : m_o_streambuf(new wxStreamBuffer(wxStreamBuffer::write))
 {
-    m_o_streambuf = new wxStreamBuffer(wxStreamBuffer::write);
     if ( data )
         m_o_streambuf->SetBufferIO(data, len);
     m_o_streambuf->Fixed(false);

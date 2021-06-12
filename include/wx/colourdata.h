@@ -45,10 +45,18 @@ public:
     // public for backwards compatibility only: don't use directly
     wxColour        m_dataColour;
     wxColour        m_custColours[NUM_CUSTOM];
-    bool            m_chooseFull;
+    bool            m_chooseFull{false};
 
 protected:
-    bool            m_chooseAlpha;
+
+#ifdef __WXOSX__
+    // Under OSX, legacy wxColourDialog had opacity selector
+    // (slider) always enabled, so for backward compatibilty
+    // we should tell the dialog to enable it by default.
+    bool m_chooseAlpha = true;
+#else
+    bool m_chooseAlpha = false;
+#endif // __WXOSX__ / !__WXOSX__
 
     wxDECLARE_DYNAMIC_CLASS(wxColourData);
 };

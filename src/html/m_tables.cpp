@@ -69,11 +69,13 @@ protected:
     /* These are real attributes: */
 
     // number of columns; rows
-    int m_NumCols, m_NumRows, m_NumAllocatedRows;
+    int m_NumCols{0};
+    int m_NumRows{0};
+    int m_NumAllocatedRows{0};
     // array of column information
-    colStruct *m_ColsInfo;
+    colStruct *m_ColsInfo{nullptr};
     // 2D array of all cells in the table : m_CellInfo[row][column]
-    cellStruct **m_CellInfo;
+    cellStruct **m_CellInfo{nullptr};
     // spaces between cells
     int m_Spacing;
     // cells internal indentation
@@ -83,7 +85,8 @@ private:
     /* ...and these are valid only when parsing the table: */
 
     // number of actual column (ranging from 0..m_NumCols)
-    int m_ActualCol, m_ActualRow;
+    int m_ActualCol{-1};
+    int m_ActualRow{-1};
 
     // default values (for table and row):
     wxColour m_tBkg, m_rBkg;
@@ -123,14 +126,9 @@ private:
 
 
 wxHtmlTableCell::wxHtmlTableCell(wxHtmlContainerCell *parent, const wxHtmlTag& tag, double pixel_scale)
- : wxHtmlContainerCell(parent)
+ : wxHtmlContainerCell(parent),
+   m_PixelScale(pixel_scale)
 {
-    m_PixelScale = pixel_scale;
-    m_ColsInfo = nullptr;
-    m_NumCols = m_NumRows = m_NumAllocatedRows = 0;
-    m_CellInfo = nullptr;
-    m_ActualCol = m_ActualRow = -1;
-
     /* scan params: */
     if (tag.GetParamAsColour(wxT("BGCOLOR"), &m_tBkg))
         SetBackgroundColour(m_tBkg);
@@ -155,9 +153,7 @@ wxHtmlTableCell::wxHtmlTableCell(wxHtmlContainerCell *parent, const wxHtmlTag& t
         SetBorder(TABLE_BORDER_CLR_1, TABLE_BORDER_CLR_2, (int)(m_PixelScale * (double)m_Border));
     else
         m_Border = 0;
-
 }
-
 
 
 wxHtmlTableCell::~wxHtmlTableCell()

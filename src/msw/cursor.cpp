@@ -274,7 +274,7 @@ wxSize ScaleAndReverseBitmap(HBITMAP& bitmap, float scale)
 {
     BITMAP bmp;
     if ( !::GetObject(bitmap, sizeof(bmp), &bmp) )
-        return wxSize();
+        return {};
     wxSize cs(bmp.bmWidth * scale, bmp.bmHeight * scale);
 
     MemoryHDC hdc;

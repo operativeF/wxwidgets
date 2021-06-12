@@ -994,7 +994,7 @@ wxString wxWebViewWebKit::GetPageSource() const
     WebKitWebResource *resource = webkit_web_view_get_main_resource(m_web_view);
     if (!resource)
     {
-        return wxString();
+        return {};
     }
 
     GAsyncResult *result = NULL;
@@ -1022,7 +1022,7 @@ wxString wxWebViewWebKit::GetPageSource() const
         free(source);
         return wxs;
     }
-    return wxString();
+    return {};
 }
 
 
@@ -1166,7 +1166,7 @@ wxString wxWebViewWebKit::GetSelectedText() const
             return wxString(text, wxConvUTF8);
         }
     }
-    return wxString();
+    return {};
 }
 
 wxString wxWebViewWebKit::GetSelectedSource() const
@@ -1188,7 +1188,7 @@ wxString wxWebViewWebKit::GetSelectedSource() const
             return wxString(source, wxConvUTF8);
         }
     }
-    return wxString();
+    return {};
 }
 
 void wxWebViewWebKit::ClearSelection()
@@ -1228,7 +1228,7 @@ wxString wxWebViewWebKit::GetPageText() const
             return wxString(text, wxConvUTF8);
         }
     }
-    return wxString();
+    return {};
 }
 
 extern "C"

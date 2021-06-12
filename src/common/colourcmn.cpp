@@ -215,7 +215,7 @@ bool wxColourBase::FromString(const wxString& str)
 wxString wxColourBase::GetAsString(long flags) const
 {
     if ( !IsOk() )
-        return wxString();
+        return {};
 
     wxString colName;
 
@@ -384,7 +384,7 @@ wxColour wxColourBase::ChangeLightness(int ialpha) const
     wxByte g = Green();
     wxByte b = Blue();
     ChangeLightness(&r, &g, &b, ialpha);
-    return wxColour(r,g,b);
+    return {r, g, b};
 }
 
 // wxColour <-> wxString utilities, used by wxConfig

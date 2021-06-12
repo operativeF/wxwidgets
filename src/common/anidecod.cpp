@@ -32,7 +32,9 @@ class wxANIFrameInfo
 {
 public:
     explicit wxANIFrameInfo(unsigned int delay = 0, int idx = -1)
-        { m_delay=delay; m_imageIndex=idx; }
+        : m_delay(delay),
+          m_imageIndex(idx)
+    {}
 
     unsigned int m_delay;
     int m_imageIndex;
@@ -76,7 +78,7 @@ wxSize wxANIDecoder::GetFrameSize(unsigned int WXUNUSED(frame)) const
 wxPoint wxANIDecoder::GetFramePosition(unsigned int WXUNUSED(frame)) const
 {
     // all frames are of the same size...
-    return wxPoint(0,0);
+    return {0, 0};
 }
 
 wxAnimationDisposal wxANIDecoder::GetDisposalMethod(unsigned int WXUNUSED(frame)) const
@@ -97,9 +99,9 @@ wxColour wxANIDecoder::GetTransparentColour(unsigned int frame) const
     if (!m_images[idx].HasMask())
         return wxNullColour;
 
-    return wxColour(m_images[idx].GetMaskRed(),
-                    m_images[idx].GetMaskGreen(),
-                    m_images[idx].GetMaskBlue());
+    return {m_images[idx].GetMaskRed(),
+            m_images[idx].GetMaskGreen(),
+            m_images[idx].GetMaskBlue()};
 }
 
 

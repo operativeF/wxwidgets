@@ -224,7 +224,7 @@ public:
                       int WXUNUSED(w), int WXUNUSED(h))
     {                                   }
     virtual wxSize GetVideoSize() const
-    {   return wxSize(0,0);             }
+    {   return {0, 0};             }
 
     virtual double GetPlaybackRate()
     {   return 0.0;                     }

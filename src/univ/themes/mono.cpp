@@ -832,14 +832,14 @@ wxSize wxMonoRenderer::GetToolBarButtonSize(wxCoord *WXUNUSED(separator)) const
 {
     wxFAIL_MSG(wxT("TODO"));
 
-    return wxSize();
+    return {};
 }
 
 wxSize wxMonoRenderer::GetToolBarMargin() const
 {
     wxFAIL_MSG(wxT("TODO"));
 
-    return wxSize();
+    return {};
 }
 
 #endif // wxUSE_TOOLBAR
@@ -865,14 +865,14 @@ wxSize wxMonoRenderer::GetTabIndent() const
 {
     wxFAIL_MSG(wxT("TODO"));
 
-    return wxSize();
+    return {};
 }
 
 wxSize wxMonoRenderer::GetTabPadding() const
 {
     wxFAIL_MSG(wxT("TODO"));
 
-    return wxSize();
+    return {};
 }
 
 #endif // wxUSE_NOTEBOOK
@@ -931,7 +931,7 @@ wxSize wxMonoRenderer::GetMenuBarItemSize(const wxSize& WXUNUSED(sizeText)) cons
 {
     wxFAIL_MSG(wxT("TODO"));
 
-    return wxSize();
+    return {};
 }
 
 wxMenuGeometryInfo *wxMonoRenderer::GetMenuGeometry(wxWindow *WXUNUSED(win),
@@ -1015,7 +1015,7 @@ wxSize wxMonoRenderer::GetSliderThumbSize(const wxRect& WXUNUSED(rect),
 {
     wxFAIL_MSG(wxT("TODO"));
 
-    return wxSize();
+    return {};
 }
 
 #endif // wxUSE_SLIDER
@@ -1024,7 +1024,7 @@ wxSize wxMonoRenderer::GetProgressBarStep() const
 {
     wxFAIL_MSG(wxT("TODO"));
 
-    return wxSize();
+    return {};
 }
 
 

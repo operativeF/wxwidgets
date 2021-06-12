@@ -541,12 +541,12 @@ private:
     //
     //  2. If m_name == NULL, m_encoding is always valid, i.e. not one of
     //     wxFONTENCODING_{SYSTEM,DEFAULT,MAX}.
-    char *m_name;
+    char *m_name{nullptr};
     wxFontEncoding m_encoding;
 
     // The conversion object for our encoding or NULL if we failed to create it
     // in which case we fall back to hard-coded ISO8859-1 conversion.
-    wxMBConv *m_convReal;
+    wxMBConv *m_convReal{nullptr};
 };
 
 // ----------------------------------------------------------------------------

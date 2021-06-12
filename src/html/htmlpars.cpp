@@ -68,9 +68,9 @@ public:
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlParser,wxObject);
 
-wxHtmlParser::wxHtmlParser() 
+wxHtmlParser::wxHtmlParser()
+    : m_entitiesParser(new wxHtmlEntitiesParser()) 
 {
-    m_entitiesParser = new wxHtmlEntitiesParser;
 }
 
 wxHtmlParser::~wxHtmlParser()

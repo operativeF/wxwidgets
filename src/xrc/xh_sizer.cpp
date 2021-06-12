@@ -561,7 +561,7 @@ wxGBPosition wxSizerXmlHandler::GetGBPos()
     wxSize sz = GetPairInts(wxS("cellpos"));
     if (sz.x < 0) sz.x = 0;
     if (sz.y < 0) sz.y = 0;
-    return wxGBPosition(sz.x, sz.y);
+    return {sz.x, sz.y};
 }
 
 wxGBSpan wxSizerXmlHandler::GetGBSpan()
@@ -569,7 +569,7 @@ wxGBSpan wxSizerXmlHandler::GetGBSpan()
     wxSize sz = GetPairInts(wxS("cellspan"));
     if (sz.x < 1) sz.x = 1;
     if (sz.y < 1) sz.y = 1;
-    return wxGBSpan(sz.x, sz.y);
+    return {sz.x, sz.y};
 }
 
 

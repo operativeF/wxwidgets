@@ -628,7 +628,7 @@ void wxTreeCtrl::SetStateImageList(wxImageList *imageList)
 wxString wxTreeCtrl::GetItemText(const wxTreeItemId& item) const
 {
     if ( !item.IsOk() )
-        return wxString();
+        return {};
 
     const QTreeWidgetItem* qTreeItem = wxQtConvertTreeItem(item);
     return wxQtConvertString(qTreeItem->text(0));

@@ -134,7 +134,7 @@ wxString wxDynamicLibrary::GetDllExt(wxDynamicLibraryCategory cat)
             return ".bundle";
     }
     wxFAIL_MSG("unreachable");
-    return wxString(); // silence gcc warning
+    return {}; // silence gcc warning
 #else
     return ".so";
 #endif

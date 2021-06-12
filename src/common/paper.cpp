@@ -309,7 +309,7 @@ wxSize wxPrintPaperDatabase::GetSize(wxPaperSize paperId) const
     if (type)
         return type->GetSize();
     else
-        return wxSize(0,0);
+        return {0, 0};
 }
 
 // Get the paper size

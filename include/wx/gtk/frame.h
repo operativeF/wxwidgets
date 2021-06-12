@@ -48,7 +48,7 @@ public:
 #endif // wxUSE_TOOLBAR
 
     bool ShowFullScreen(bool show, long style = wxFULLSCREEN_ALL) override;
-    wxPoint GetClientAreaOrigin() const override { return wxPoint(0, 0); }
+    wxPoint GetClientAreaOrigin() const override { return {0, 0}; }
 
     // implementation from now on
     // --------------------------

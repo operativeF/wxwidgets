@@ -225,7 +225,7 @@ wxPoint wxHtmlCell::GetAbsPos(const wxHtmlCell *rootCell) const
 
 wxRect wxHtmlCell::GetRect(const wxHtmlCell* rootCell) const
 {
-    return wxRect(GetAbsPos(rootCell), wxSize(m_Width, m_Height));
+    return {GetAbsPos(rootCell), wxSize(m_Width, m_Height)};
 }
 
 wxHtmlCell *wxHtmlCell::GetRootCell() const
@@ -316,7 +316,6 @@ wxHtmlWordCell::wxHtmlWordCell(const wxString& word, const wxDC& dc) :
     m_Height = h;
     m_Descent = d;
     SetCanLiveOnPagebreak(false);
-    m_allowLinebreak = true;
 }
 
 void wxHtmlWordCell::SetPreviousWord(wxHtmlWordCell *cell)
@@ -659,20 +658,10 @@ wxString wxHtmlWordCell::GetDescription() const
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlContainerCell, wxHtmlCell);
 
-wxHtmlContainerCell::wxHtmlContainerCell(wxHtmlContainerCell *parent)  
+wxHtmlContainerCell::wxHtmlContainerCell(wxHtmlContainerCell *parent) 
 {
-    m_Cells = m_LastCell = nullptr;
     m_Parent = parent;
-    m_MaxTotalWidth = 0;
     if (m_Parent) m_Parent->InsertCell(this);
-    m_AlignHor = wxHTML_ALIGN_LEFT;
-    m_AlignVer = wxHTML_ALIGN_BOTTOM;
-    m_IndentLeft = m_IndentRight = m_IndentTop = m_IndentBottom = 0;
-    m_WidthFloat = 100; m_WidthFloatUnits = wxHTML_UNITS_PERCENT;
-    m_Border = 0;
-    m_MinHeight = 0;
-    m_MinHeightAlign = wxHTML_ALIGN_TOP;
-    m_LastLayout = -1;
 }
 
 wxHtmlContainerCell::~wxHtmlContainerCell()
@@ -1577,11 +1566,11 @@ wxString wxHtmlFontCell::GetDescription() const
 wxIMPLEMENT_ABSTRACT_CLASS(wxHtmlWidgetCell, wxHtmlCell);
 
 wxHtmlWidgetCell::wxHtmlWidgetCell(wxWindow *wnd, int w)
+    : m_WidthFloat(w),
+      m_Wnd(wnd)
 {
-    m_Wnd = wnd;
     m_Width = m_Wnd->GetSize().x;
     m_Height = m_Wnd->GetSize().y;
-    m_WidthFloat = w;
 }
 
 

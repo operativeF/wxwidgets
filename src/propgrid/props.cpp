@@ -92,7 +92,7 @@ wxString wxStringProperty::ValueToString( wxVariant& value,
     // If string is password and value is for visual purposes,
     // then return asterisks instead the actual string.
     if ( (m_flags & wxPG_PROP_PASSWORD) && !(argFlags & (wxPG_FULL_VALUE|wxPG_EDITABLE_VALUE)) )
-        return wxString(wxS('*'), s.Length());
+        return {wxS('*'), s.Length()};
 
     return s;
 }
@@ -1491,7 +1491,6 @@ void wxFlagsProperty::Init()
 wxFlagsProperty::wxFlagsProperty( const wxString& label, const wxString& name,
     const wxChar* const* labels, const long* values, long value ) : wxPGProperty(label,name)
 {
-    m_oldChoicesData = nullptr;
     m_flags |= wxPG_PROP_USE_DCC; // same default like wxBoolProperty
 
     if ( labels )
@@ -1532,7 +1531,6 @@ wxFlagsProperty::wxFlagsProperty( const wxString& label, const wxString& name,
     wxPGChoices& choices, long value )
     : wxPGProperty(label,name)
 {
-    m_oldChoicesData = nullptr;
     m_flags |= wxPG_PROP_USE_DCC; // same default like wxBoolProperty
 
     if ( choices.IsOk() )
@@ -1882,7 +1880,6 @@ wxFileProperty::wxFileProperty( const wxString& label, const wxString& name,
 {
     m_flags |= wxPG_PROP_SHOW_FULL_FILENAME;
     m_flags &= ~wxPG_PROP_ACTIVE_BTN; // Property button enabled only in not read-only mode.
-    m_wildcard = wxALL_FILES;
 
     SetValue(value);
 }

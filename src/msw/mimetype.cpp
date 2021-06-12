@@ -287,7 +287,7 @@ wxString wxAssocQueryString(ASSOCSTR assoc,
             wxLogApiError("AssocQueryString", hr);
         }
 
-        return wxString();
+        return {};
     }
 
     return wxString(bufOut);

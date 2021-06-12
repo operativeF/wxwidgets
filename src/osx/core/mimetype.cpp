@@ -696,7 +696,7 @@ wxString
 wxFileTypeImpl::GetExpandedCommand(const wxString& WXUNUSED(verb),
                                    const wxFileType::MessageParameters& WXUNUSED(params)) const
 {
-    return wxString();
+    return {};
 }
 
 #endif // wxUSE_MIMETYPE

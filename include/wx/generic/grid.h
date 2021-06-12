@@ -543,7 +543,7 @@ public:
     void Reset() override
         { wxFAIL; }
     wxString GetValue() const override
-        { wxFAIL; return wxString(); }
+        { wxFAIL; return {}; }
 };
 
 // ----------------------------------------------------------------------------

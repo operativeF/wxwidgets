@@ -372,7 +372,7 @@ private:
 
     // the object which implements the real stuff like reading and writing
     // to/from system MIME database
-    wxFileTypeImpl *m_impl;
+    wxFileTypeImpl *m_impl{nullptr};
 };
 
 //----------------------------------------------------------------------------

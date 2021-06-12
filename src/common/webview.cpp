@@ -172,7 +172,7 @@ wxString wxWebView::GetSelectedText() const
 wxString wxWebView::GetSelectedSource() const
 {
     // TODO: could probably be implemented by script similar to GetSelectedText()
-    return wxString();
+    return {};
 }
 
 void wxWebView::DeleteSelection()
@@ -273,7 +273,7 @@ wxVersionInfo wxWebView::GetBackendVersionInfo(const wxString& backend)
     if (iter != m_factoryMap.end())
         return iter->second->GetVersionInfo();
     else
-        return wxVersionInfo();
+        return {};
 }
 
 // static

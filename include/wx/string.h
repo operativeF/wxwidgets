@@ -1586,7 +1586,7 @@ public:
     static wxString FromUTF8(const char *utf8)
     {
         if ( !utf8 || !wxStringOperations::IsValidUtf8String(utf8) )
-            return wxString();
+            return {};
 
         return FromImpl(wxStringImpl(utf8));
     }
@@ -1596,7 +1596,7 @@ public:
             return FromUTF8(utf8);
 
         if ( !utf8 || !wxStringOperations::IsValidUtf8String(utf8, len) )
-            return wxString();
+            return {};
 
         return FromImpl(wxStringImpl(utf8, len));
     }
@@ -1613,7 +1613,7 @@ public:
     static wxString FromUTF8(const std::string& utf8)
     {
         if ( utf8.empty() || !wxStringOperations::IsValidUtf8String(utf8.c_str(), utf8.length()) )
-            return wxString();
+            return {};
         return FromImpl(utf8);
     }
 

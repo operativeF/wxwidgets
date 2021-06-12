@@ -60,15 +60,17 @@ const wxChar wxRichTextLineBreakChar = (wxChar) 29;
 struct wxRichTextFloatRectMap
 {
     wxRichTextFloatRectMap(int sY, int eY, int w, wxRichTextObject* obj)
+        : startY(sY),
+          endY(eY),
+          width(w),
+          anchor(obj)
     {
-        startY = sY;
-        endY = eY;
-        width = w;
-        anchor = obj;
     }
 
-    int startY, endY;
+    int startY;
+    int endY;
     int width;
+
     wxRichTextObject* anchor;
 };
 
@@ -138,7 +140,7 @@ private:
     wxRichTextFloatRectMapArray m_right;
     //int m_width;
     wxRect               m_availableRect;
-    wxRichTextParagraph* m_para;
+    wxRichTextParagraph* m_para{nullptr};
 };
 
 // Delete a float
@@ -257,7 +259,6 @@ int wxRichTextFloatCollector::GetWidthFromFloatRect(const wxRichTextFloatRectMap
 wxRichTextFloatCollector::wxRichTextFloatCollector(const wxRect& rect) : m_left(wxRichTextFloatRectMapCmp), m_right(wxRichTextFloatRectMapCmp)
     , m_availableRect(rect)
 {
-    m_para = nullptr;
 }
 
 void wxRichTextFloatCollector::FreeFloatRectMapArray(wxRichTextFloatRectMapArray& array)
@@ -388,7 +389,7 @@ wxRect wxRichTextFloatCollector::GetAvailableRect(int startY, int endY)
     // TODO: actually we want to use the actual image positions to find the
     // available remaining space, since the image might not be right up against
     // the left or right edge of the container.
-    return wxRect(widthLeft + m_availableRect.x, 0, m_availableRect.width - widthLeft - widthRight, 0);
+    return {widthLeft + m_availableRect.x, 0, m_availableRect.width - widthLeft - widthRight, 0};
 }
 
 int wxRichTextFloatCollector::GetLastRectBottom()
@@ -521,16 +522,11 @@ inline void wxCheckSetBrush(wxDC& dc, const wxBrush& brush)
 
 wxIMPLEMENT_CLASS(wxRichTextObject, wxObject);
 
-wxRichTextObject::wxRichTextObject(wxRichTextObject* parent)
+wxRichTextObject::wxRichTextObject(wxRichTextObject* parent) : m_parent(parent)
 {
-    m_refCount = 1;
-    m_parent = parent;
-    m_descent = 0;
-    m_show = true;
 }
 
-wxRichTextObject::~wxRichTextObject()
-= default;
+wxRichTextObject::~wxRichTextObject() = default;
 
 void wxRichTextObject::Dereference()
 {
@@ -2717,7 +2713,7 @@ wxSize wxRichTextParagraphLayoutBox::GetLineSizeAtPosition(long pos, bool caretP
         return line->GetSize();
     }
     else
-        return wxSize(0, 0);
+        return {0, 0};
 }
 
 
@@ -2828,7 +2824,7 @@ wxRichTextRange wxRichTextParagraphLayoutBox::AddParagraphs(const wxString& text
 
     UpdateRanges();
 
-    return wxRichTextRange(firstPara->GetRange().GetStart(), lastPara->GetRange().GetEnd());
+    return {firstPara->GetRange().GetStart(), lastPara->GetRange().GetEnd()};
 }
 
 /// Convenience function to add an image
@@ -8201,7 +8197,7 @@ wxRichTextAttr wxRichTextParagraphLayoutBox::GetStyleForNewParagraph(wxRichTextB
         return attr;
     }
     else
-        return wxRichTextAttr();
+        return {};
 }
 
 /// Submit command to delete this range
@@ -10039,8 +10035,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextTable, wxRichTextBox);
 
 wxRichTextTable::wxRichTextTable(wxRichTextObject* parent): wxRichTextBox(parent)
 {
-    m_rowCount = 0;
-    m_colCount = 0;
 }
 
 // Draws the object.
@@ -11702,7 +11696,6 @@ wxRichTextCommand::wxRichTextCommand(const wxString& name, wxRichTextCommandId i
 
 wxRichTextCommand::wxRichTextCommand(const wxString& name): wxCommand(true, name)
 {
-    m_freeze = false;
 }
 
 wxRichTextCommand::~wxRichTextCommand()
@@ -11766,17 +11759,16 @@ void wxRichTextCommand::ClearActions()
 wxRichTextAction::wxRichTextAction(wxRichTextCommand* cmd, const wxString& name, wxRichTextCommandId id,
                                    wxRichTextBuffer* buffer, wxRichTextParagraphLayoutBox* container,
                                    wxRichTextCtrl* ctrl, bool ignoreFirstTime)
+    : m_buffer(buffer),
+      m_ignoreThis(ignoreFirstTime),
+      m_cmdId(id),
+      m_ctrl(ctrl),
+      m_name(name)
 {
-    m_buffer = buffer;
-    m_object = nullptr;
     m_containerAddress.Create(buffer, container);
-    m_ignoreThis = ignoreFirstTime;
-    m_cmdId = id;
-    m_position = -1;
-    m_ctrl = ctrl;
-    m_name = name;
     m_newParagraphs.SetDefaultStyle(buffer->GetDefaultStyle());
     m_newParagraphs.SetBasicStyle(buffer->GetBasicStyle());
+
     if (cmd)
         cmd->AddAction(this);
 }
@@ -12494,16 +12486,15 @@ wxRichTextImage::wxRichTextImage(const wxImage& image, wxRichTextObject* parent,
 }
 
 wxRichTextImage::wxRichTextImage(const wxRichTextImageBlock& imageBlock, wxRichTextObject* parent, wxRichTextAttr* charStyle):
-    wxRichTextObject(parent)
+    wxRichTextObject(parent),
+    m_imageBlock(imageBlock)
 {
     Init();
-    m_imageBlock = imageBlock;
     if (charStyle)
         SetAttributes(*charStyle);
 }
 
-wxRichTextImage::~wxRichTextImage()
-= default;
+wxRichTextImage::~wxRichTextImage() = default;
 
 void wxRichTextImage::Init()
 {
@@ -13419,9 +13410,8 @@ wxString wxRichTextImageBlock::GetExtension() const
 const wxChar *wxRichTextBufferDataObject::ms_richTextBufferFormatId = wxT("wxRichText");
 
 wxRichTextBufferDataObject::wxRichTextBufferDataObject(wxRichTextBuffer* richTextBuffer)
+    : m_richTextBuffer(richTextBuffer)
 {
-    m_richTextBuffer = richTextBuffer;
-
     // this string should uniquely identify our format, but is otherwise
     // arbitrary
     m_formatRichTextBuffer.SetId(GetRichTextBufferFormatId());
@@ -13587,7 +13577,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextFontTable, wxObject);
 wxRichTextFontTable::wxRichTextFontTable()
 {
     m_refData = new wxRichTextFontTableData;
-    m_fontScale = 1.0;
 }
 
 wxRichTextFontTable::wxRichTextFontTable(const wxRichTextFontTable& table)
@@ -13618,7 +13607,7 @@ wxFont wxRichTextFontTable::FindFont(const wxRichTextAttr& fontSpec)
     if (data)
         return data->FindFont(fontSpec, m_fontScale);
     else
-        return wxFont();
+        return {};
 }
 
 void wxRichTextFontTable::Clear()
@@ -14340,15 +14329,17 @@ void wxTextAttrDimension::CollectCommonAttributes(const wxTextAttrDimension& att
 }
 
 wxTextAttrDimensionConverter::wxTextAttrDimensionConverter(wxDC& dc, double scale, const wxSize& parentSize)
-    : m_parentSize(parentSize)
+    : m_parentSize(parentSize),
+      m_ppi(dc.GetPPI().x),
+      m_scale(scale)
 {
-    m_ppi = dc.GetPPI().x; m_scale = scale;
 }
 
 wxTextAttrDimensionConverter::wxTextAttrDimensionConverter(int ppi, double scale, const wxSize& parentSize)
-    : m_parentSize(parentSize)
+    : m_parentSize(parentSize),
+      m_scale(scale),
+      m_ppi(ppi)
 {
-    m_ppi = ppi; m_scale = scale;
 }
 
 int wxTextAttrDimensionConverter::ConvertTenthsMMToPixels(int units) const
@@ -15414,7 +15405,7 @@ wxRichTextRangeArray wxRichTextSelection::GetSelectionForObject(wxRichTextObject
             }
         }
     }
-    return wxRichTextRangeArray();
+    return {};
 }
 
 // Is the given position within the selection?
@@ -15458,10 +15449,10 @@ bool wxRichTextSelection::WithinSelection(const wxRichTextRange& range, const wx
 wxIMPLEMENT_CLASS(wxRichTextDrawingHandler, wxObject);
 wxIMPLEMENT_CLASS(wxRichTextDrawingContext, wxObject);
 
-wxRichTextDrawingContext::wxRichTextDrawingContext(wxRichTextBuffer* buffer)
+wxRichTextDrawingContext::wxRichTextDrawingContext(wxRichTextBuffer* buffer) : m_buffer(buffer)
 {
     Init();
-    m_buffer = buffer;
+
     if (m_buffer && m_buffer->GetRichTextCtrl())
     {
         EnableVirtualAttributes(m_buffer->GetRichTextCtrl()->GetVirtualAttributesEnabled());

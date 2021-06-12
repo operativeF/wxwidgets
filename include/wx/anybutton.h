@@ -165,7 +165,7 @@ protected:
         { }
 
     virtual wxSize DoGetBitmapMargins() const
-        { return wxSize(0, 0); }
+        { return {0, 0}; }
 
     virtual void DoSetBitmapMargins(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y))
         { }

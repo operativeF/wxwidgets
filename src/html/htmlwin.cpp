@@ -56,11 +56,11 @@ public:
     wxHtmlWinAutoScrollTimer(wxScrolledWindow *win,
                       wxEventType eventTypeToSend,
                       int pos, int orient)
-        : m_eventType(eventTypeToSend)
+        : m_eventType(eventTypeToSend),
+          m_win(win),
+          m_pos(pos),
+          m_orient(orient)
     {
-        m_win = win;
-        m_pos = pos;
-        m_orient = orient;
     }
 
     wxHtmlWinAutoScrollTimer(const wxHtmlWinAutoScrollTimer&) = delete;
@@ -1268,7 +1268,7 @@ wxRect GetBoundingRect(const wxHtmlCell* const fromCell,
     }
 
     wxFAIL_MSG("The cells have no common ancestor");
-    return wxRect();
+    return {};
 }
 
 } // namespace

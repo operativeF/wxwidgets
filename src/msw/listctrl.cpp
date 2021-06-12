@@ -128,7 +128,7 @@ class wxLV_ITEM
 {
 public:
     // default ctor, use Init() later
-    wxLV_ITEM() { m_buf = nullptr; m_pItem = nullptr; }
+    wxLV_ITEM() = default;
 
     // init without conversion
     void Init(LV_ITEM_NATIVE& item)
@@ -176,9 +176,9 @@ public:
     operator LV_ITEM_NATIVE&() const { return *m_pItem; }
 
 private:
-    LV_CONV_BUF *m_buf;
+    LV_CONV_BUF *m_buf{nullptr};
 
-    LV_ITEM_NATIVE *m_pItem;
+    LV_ITEM_NATIVE *m_pItem{nullptr};
     LV_ITEM_NATIVE m_item;
 };
 

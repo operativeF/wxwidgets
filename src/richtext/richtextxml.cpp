@@ -1123,7 +1123,7 @@ wxColour wxRichTextXMLHelper::HexStringToColour(const wxString& hex)
     unsigned char g = (unsigned char)wxHexToDec(hex.Mid(2, 2));
     unsigned char b = (unsigned char)wxHexToDec(hex.Mid(4, 2));
 
-    return wxColour(r, g, b);
+    return {r, g, b};
 }
 
 //-----------------------------------------------------------------------------

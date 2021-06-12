@@ -43,7 +43,7 @@ WXDLLEXPORT wxString wxConvertStringFromOle(BSTR bStr)
     // NULL BSTR is equivalent to an empty string (this is the convention used
     // by VB and hence we must follow it)
     if ( !bStr )
-        return wxString();
+        return {};
 
     const int len = SysStringLen(bStr);
 

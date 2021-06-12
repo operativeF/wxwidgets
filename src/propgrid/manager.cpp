@@ -211,9 +211,9 @@ class wxPGHeaderCtrl : public wxHeaderCtrl
 public:
     wxPGHeaderCtrl(wxPropertyGridManager* manager, wxWindowID id, const wxPoint& pos,
                    const wxSize& size, long style) :
-        wxHeaderCtrl(manager, id, pos, size, style)
+        wxHeaderCtrl(manager, id, pos, size, style),
+        m_manager(manager)
     {
-        m_manager = manager;
         EnsureColumnCount(2);
 
         // Seed titles with defaults

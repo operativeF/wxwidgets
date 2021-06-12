@@ -280,7 +280,7 @@ protected:
         if ( !otmSize )
         {
             wxLogLastError("GetOutlineTextMetrics(NULL)");
-            return wxString();
+            return {};
         }
 
         OUTLINETEXTMETRIC * const
@@ -291,7 +291,7 @@ protected:
         if ( !GetOutlineTextMetrics(hdc, otmSize, otm) )
         {
             wxLogLastError("GetOutlineTextMetrics()");
-            return wxString();
+            return {};
         }
 
         // in spite of its type, the otmpFamilyName field of OUTLINETEXTMETRIC

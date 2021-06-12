@@ -699,7 +699,7 @@ wxString wxWebResponseImpl::AsString() const
         return wxConvWhateverWorks.cMB2WC((const char*)m_readBuffer.GetData(), m_readBuffer.GetDataLen(), &outLen);
     }
     else
-        return wxString();
+        return {};
 }
 
 void* wxWebResponseImpl::GetDataBuffer(size_t sizeNeeded)

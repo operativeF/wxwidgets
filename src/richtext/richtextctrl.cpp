@@ -4691,7 +4691,7 @@ wxPoint wxRichTextCtrl::GetFirstVisiblePoint() const
     GetScrollPixelsPerUnit(& ppuX, & ppuY);
     GetViewStart(& startXUnits, & startYUnits);
 
-    return wxPoint(startXUnits * ppuX, startYUnits * ppuY);
+    return {startXUnits * ppuX, startYUnits * ppuY};
 }
 
 /// The adjusted caret position is the character position adjusted to take
@@ -4961,8 +4961,8 @@ bool wxRichTextCtrl::DoSetMargins(const wxPoint& pt)
 
 wxPoint wxRichTextCtrl::DoGetMargins() const
 {
-    return wxPoint(GetBuffer().GetAttributes().GetTextBoxAttr().GetMargins().GetLeft().GetValue(),
-                   GetBuffer().GetAttributes().GetTextBoxAttr().GetMargins().GetTop().GetValue());
+    return {GetBuffer().GetAttributes().GetTextBoxAttr().GetMargins().GetLeft().GetValue(),
+            GetBuffer().GetAttributes().GetTextBoxAttr().GetMargins().GetTop().GetValue()};
 }
 
 bool wxRichTextCtrl::SetFocusObject(wxRichTextParagraphLayoutBox* obj, bool setCaretPosition)
@@ -5163,7 +5163,7 @@ wxPoint wxRichTextCtrl::GetUnscaledPoint(const wxPoint& pt) const
     if (GetScale() == 1.0)
         return pt;
     else
-        return wxPoint((int) (0.5 + double(pt.x) / GetScale()), (int) (0.5 + double(pt.y) / GetScale()));
+        return {(int) (0.5 + double(pt.x) / GetScale()), (int) (0.5 + double(pt.y) / GetScale())};
 }
 
 // Get a scaled point
@@ -5172,7 +5172,7 @@ wxPoint wxRichTextCtrl::GetScaledPoint(const wxPoint& pt) const
     if (GetScale() == 1.0)
         return pt;
     else
-        return wxPoint((int) (0.5 + double(pt.x) * GetScale()), (int) (0.5 + double(pt.y) * GetScale()));
+        return {(int) (0.5 + double(pt.x) * GetScale()), (int) (0.5 + double(pt.y) * GetScale())};
 }
 
 // Get an unscaled size
@@ -5181,7 +5181,7 @@ wxSize wxRichTextCtrl::GetUnscaledSize(const wxSize& sz) const
     if (GetScale() == 1.0)
         return sz;
     else
-        return wxSize((int) (0.5 + double(sz.x) / GetScale()), (int) (0.5 + double(sz.y) / GetScale()));
+        return {(int) (0.5 + double(sz.x) / GetScale()), (int) (0.5 + double(sz.y) / GetScale())};
 }
 
 // Get a scaled size
@@ -5190,7 +5190,7 @@ wxSize wxRichTextCtrl::GetScaledSize(const wxSize& sz) const
     if (GetScale() == 1.0)
         return sz;
     else
-        return wxSize((int) (0.5 + double(sz.x) * GetScale()), (int) (0.5 + double(sz.y) * GetScale()));
+        return {(int) (0.5 + double(sz.x) * GetScale()), (int) (0.5 + double(sz.y) * GetScale())};
 }
 
 // Get an unscaled rect
@@ -5199,8 +5199,8 @@ wxRect wxRichTextCtrl::GetUnscaledRect(const wxRect& rect) const
     if (GetScale() == 1.0)
         return rect;
     else
-        return wxRect((int) (0.5 + double(rect.x) / GetScale()), (int) (0.5 + double(rect.y) / GetScale()),
-                      (int) (0.5 + double(rect.width) / GetScale()), (int) (0.5 + double(rect.height) / GetScale()));
+        return {(int) (0.5 + double(rect.x) / GetScale()), (int) (0.5 + double(rect.y) / GetScale()),
+                (int) (0.5 + double(rect.width) / GetScale()), (int) (0.5 + double(rect.height) / GetScale())};
 }
 
 // Get a scaled rect
@@ -5209,8 +5209,8 @@ wxRect wxRichTextCtrl::GetScaledRect(const wxRect& rect) const
     if (GetScale() == 1.0)
         return rect;
     else
-        return wxRect((int) (0.5 + double(rect.x) * GetScale()), (int) (0.5 + double(rect.y) * GetScale()),
-                      (int) (0.5 + double(rect.width) * GetScale()), (int) (0.5 + double(rect.height) * GetScale()));
+        return {(int) (0.5 + double(rect.x) * GetScale()), (int) (0.5 + double(rect.y) * GetScale()),
+                (int) (0.5 + double(rect.width) * GetScale()), (int) (0.5 + double(rect.height) * GetScale())};
 }
 
 // Do delayed image loading and garbage-collect other images

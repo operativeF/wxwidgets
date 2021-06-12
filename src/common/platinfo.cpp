@@ -133,22 +133,16 @@ wxPlatformInfo::wxPlatformInfo(wxPortId pid, int tkMajor, int tkMinor,
                                wxBitness bitness,
                                wxEndianness endian,
                                bool usingUniversal)
+    : m_tkVersionMajor(tkMajor),
+      m_tkVersionMinor(tkMinor),
+      m_port(pid),
+      m_usingUniversal(usingUniversal),
+      m_os(id),
+      m_osVersionMajor(osMajor),
+      m_osVersionMinor(osMinor),
+      m_endian(endian),
+      m_bitness(bitness)
 {
-    m_initializedForCurrentPlatform = false;
-
-    m_tkVersionMajor = tkMajor;
-    m_tkVersionMinor = tkMinor;
-    m_tkVersionMicro = -1;
-    m_port = pid;
-    m_usingUniversal = usingUniversal;
-
-    m_os = id;
-    m_osVersionMajor = osMajor;
-    m_osVersionMinor = osMinor;
-    m_osVersionMicro = -1;
-
-    m_endian = endian;
-    m_bitness = bitness;
 }
 
 bool wxPlatformInfo::operator==(const wxPlatformInfo &t) const

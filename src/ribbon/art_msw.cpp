@@ -264,14 +264,13 @@ static const char * const ribbon_help_button_xpm[] = {
 
 wxRibbonMSWArtProvider::wxRibbonMSWArtProvider(bool set_colour_scheme)
 #if defined( __WXMAC__ )
-    : m_tab_label_font(*wxSMALL_FONT)
+    : m_tab_label_font(*wxSMALL_FONT),
 #else
-    : m_tab_label_font(*wxNORMAL_FONT)
+    : m_tab_label_font(*wxNORMAL_FONT),
 #endif
+      m_button_bar_label_font(m_tab_label_font),
+      m_panel_label_font(m_tab_label_font)
 {
-    m_button_bar_label_font = m_tab_label_font;
-    m_panel_label_font = m_tab_label_font;
-
     if(set_colour_scheme)
     {
         SetColourScheme(
@@ -859,7 +858,7 @@ wxColour wxRibbonMSWArtProvider::GetColour(int id) const
             return m_tab_separator_gradient_colour;
         case wxRIBBON_ART_TAB_ACTIVE_BACKGROUND_TOP_COLOUR:
         case wxRIBBON_ART_TAB_ACTIVE_BACKGROUND_TOP_GRADIENT_COLOUR:
-            return wxColour(0, 0, 0);
+            return {0, 0, 0};
         case wxRIBBON_ART_TAB_ACTIVE_BACKGROUND_COLOUR:
             return m_tab_active_background_colour;
         case wxRIBBON_ART_TAB_ACTIVE_BACKGROUND_GRADIENT_COLOUR:
@@ -974,7 +973,7 @@ wxColour wxRibbonMSWArtProvider::GetColour(int id) const
             break;
     }
 
-    return wxColour();
+    return {};
 }
 
 void wxRibbonMSWArtProvider::SetColour(int id, const wxColor& colour)
@@ -2954,7 +2953,7 @@ wxSize wxRibbonMSWArtProvider::GetScrollButtonMinimumSize(
                         wxWindow* WXUNUSED(wnd),
                         long WXUNUSED(style))
 {
-    return wxSize(12, 12);
+    return {12, 12};
 }
 
 wxSize wxRibbonMSWArtProvider::GetPanelSize(
@@ -3098,7 +3097,7 @@ wxRect wxRibbonMSWArtProvider::GetPageBackgroundRedrawArea(
         if(page_new_size.y != page_old_size.y)
         {
             // Width and height both changed - redraw everything
-            return wxRect(page_new_size);
+            return {page_new_size};
         }
         else
         {
@@ -3114,7 +3113,7 @@ wxRect wxRibbonMSWArtProvider::GetPageBackgroundRedrawArea(
         if(page_new_size.y == page_old_size.y)
         {
             // Nothing changed (should never happen) - redraw nothing
-            return wxRect(0, 0, 0, 0);
+            return {0, 0, 0, 0};
         }
         else
         {
@@ -3324,14 +3323,14 @@ wxSize wxRibbonMSWArtProvider::GetMinimisedPanelMinimumSize(
     if(m_flags & wxRIBBON_BAR_FLOW_VERTICAL)
     {
         // Label alongside icon
-        return wxSize(base_size.x + label_size.x,
-            wxMax(base_size.y, label_size.y));
+        return {base_size.x + label_size.x,
+                wxMax(base_size.y, label_size.y)};
     }
     else
     {
         // Label beneath icon
-        return wxSize(wxMax(base_size.x, label_size.x),
-            base_size.y + label_size.y);
+        return {wxMax(base_size.x, label_size.x),
+                base_size.y + label_size.y};
     }
 }
 

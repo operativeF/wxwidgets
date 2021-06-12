@@ -84,7 +84,7 @@ void wxDataViewColumn::SetFlags(int flags)
 
 wxString wxDataViewColumn::GetTitle() const
 {
-    return wxString();
+    return {};
 }
 
 wxAlignment wxDataViewColumn::GetAlignment() const

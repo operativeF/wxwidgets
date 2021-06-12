@@ -174,7 +174,7 @@ public:
     {
         wxFAIL_MSG( "not implemented for native windows" );
 
-        return wxString();
+        return {};
     }
 
     void Maximize(bool WXUNUSED(maximize) = true) override

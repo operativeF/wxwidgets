@@ -595,7 +595,7 @@ wxSize wxRibbonAUIArtProvider::GetScrollButtonMinimumSize(
                         wxWindow* WXUNUSED(wnd),
                         long WXUNUSED(style))
 {
-    return wxSize(11, 11);
+    return {11, 11};
 }
 
 void wxRibbonAUIArtProvider::DrawScrollButton(

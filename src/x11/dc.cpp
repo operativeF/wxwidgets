@@ -60,5 +60,5 @@ void wxX11DCImpl::DoGetSizeMM( int* width, int* height ) const
 wxSize wxX11DCImpl::GetPPI() const
 {
     // TODO (should probably be pure virtual)
-    return wxSize(0, 0);
+    return {0, 0};
 }

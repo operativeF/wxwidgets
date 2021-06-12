@@ -145,9 +145,6 @@ bool wxFile::Access(const wxString& name, OpenMode mode)
 // ctors
 wxFile::wxFile(const wxString& fileName, OpenMode mode)
 {
-    m_fd = fd_invalid;
-    m_lasterror = 0;
-
     Open(fileName, mode);
 }
 

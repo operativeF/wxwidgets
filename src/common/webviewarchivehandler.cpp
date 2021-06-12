@@ -41,9 +41,9 @@ static wxString EscapeFileNameCharsInURL(const char *in)
 }
 
 wxWebViewArchiveHandler::wxWebViewArchiveHandler(const wxString& scheme) :
-                         wxWebViewHandler(scheme)
+    wxWebViewHandler(scheme),
+    m_fileSystem(new wxFileSystem())
 {
-    m_fileSystem = new wxFileSystem();
 }
 
 wxWebViewArchiveHandler::~wxWebViewArchiveHandler()

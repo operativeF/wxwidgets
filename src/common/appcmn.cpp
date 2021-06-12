@@ -58,13 +58,6 @@ WX_CHECK_BUILD_OPTIONS("wxCore")
 
 wxAppBase::wxAppBase()
 {
-    m_topWindow = nullptr;
-
-    m_useBestVisual = false;
-    m_forceTrueColour = false;
-
-    m_isActive = true;
-
     // We don't want to exit the app if the user code shows a dialog from its
     // OnInit() -- but this is what would happen if we set m_exitOnFrameDelete
     // to Yes initially as this dialog would be the last top level window.
@@ -197,7 +190,7 @@ wxWindow* wxAppBase::GetMainTopWindow()
 
 wxVideoMode wxAppBase::GetDisplayMode() const
 {
-    return wxVideoMode();
+    return {};
 }
 
 wxLayoutDirection wxAppBase::GetLayoutDirection() const

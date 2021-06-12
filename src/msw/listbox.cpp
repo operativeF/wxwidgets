@@ -621,7 +621,7 @@ wxSize wxListBox::DoGetBestClientSize() const
     int hListbox = SendMessage(GetHwnd(), LB_GETITEMHEIGHT, 0, 0)*
                     wxMin(wxMax(m_noItems, 3), 10);
 
-    return wxSize(wListbox, hListbox);
+    return {wListbox, hListbox};
 }
 
 bool wxListBox::MSWCommand(WXUINT param, WXWORD WXUNUSED(id))

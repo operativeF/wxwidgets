@@ -228,7 +228,6 @@ wxFileDialog::wxFileDialog(wxWindow *parent,
 {
     // NB: all style checks are done by wxFileDialogBase::Create
 
-    m_bMovedWindow = false;
     m_centreDir = 0;
 
     // Must set to zero, otherwise the wx routines won't size the window

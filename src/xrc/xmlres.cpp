@@ -267,16 +267,16 @@ wxXmlResource *wxXmlResource::ms_instance = nullptr;
 }
 
 wxXmlResource::wxXmlResource(int flags, const wxString& domain)
+    : m_flags(flags),
+      m_data(new wxXmlResourceDataRecords)
 {
-    m_flags = flags;
-    m_data = new wxXmlResourceDataRecords;
     SetDomain(domain);
 }
 
 wxXmlResource::wxXmlResource(const wxString& filemask, int flags, const wxString& domain)
+    : m_flags(flags),
+      m_data(new wxXmlResourceDataRecords)
 {
-    m_flags = flags;
-    m_data = new wxXmlResourceDataRecords;
     SetDomain(domain);
     Load(filemask);
 }
@@ -1909,7 +1909,7 @@ wxBitmap wxXmlResourceHandlerImpl::GetBitmap(const wxXmlNode* node,
         return wxNullBitmap;
     }
     if (!(size == wxDefaultSize)) img.Rescale(size.x, size.y);
-    return wxBitmap(img);
+    return {img};
 }
 
 
@@ -1925,7 +1925,7 @@ wxIcon wxXmlResourceHandlerImpl::GetIcon(const wxString& param,
     if ( !node )
     {
         // this is not an error as icon parameter could be optional
-        return wxIcon();
+        return {};
     }
 
     return GetIcon(node, defaultArtClient, size);
@@ -2993,11 +2993,11 @@ wxString wxXmlResource::FindXRCIDById(int numId)
         for ( XRCID_record *rec = XRCID_Records[i]; rec; rec = rec->next )
         {
             if ( rec->id == numId )
-                return wxString(rec->key);
+                return {rec->key};
         }
     }
 
-    return wxString();
+    return {};
 }
 
 static void CleanXRCID_Record(XRCID_record *rec)

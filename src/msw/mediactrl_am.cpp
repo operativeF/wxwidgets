@@ -1500,7 +1500,7 @@ wxSize wxAMMediaBackend::GetVideoSize() const
         if (w != 0 && h != 0)
             self->m_bestSize.Set(w, h);
         else
-            return wxSize(0,0);
+            return {0, 0};
     }
 
    return m_bestSize;

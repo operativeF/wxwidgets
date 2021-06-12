@@ -172,7 +172,9 @@ private:
     wxString m_name;
     wxString m_content;
     wxXmlAttribute *m_attrs{nullptr};
-    wxXmlNode *m_parent{nullptr}, *m_children{nullptr}, *m_next{nullptr};
+    wxXmlNode* m_parent{nullptr};
+    wxXmlNode* m_children{nullptr};
+    wxXmlNode* m_next{nullptr};
     int m_lineNo{-1}; // line number in original file, or -1
     bool m_noConversion{false}; // don't do encoding conversion - node is plain text
 

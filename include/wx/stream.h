@@ -335,7 +335,7 @@ public:
 
 protected:
     wxInputStream *m_parent_i_stream{nullptr};
-    bool m_owns{false};
+    bool m_owns;
 
     wxDECLARE_ABSTRACT_CLASS(wxFilterInputStream);
 };
@@ -554,15 +554,15 @@ protected:
          *m_buffer_pos;
 
     // the stream we're associated with
-    wxStreamBase *m_stream;
+    wxStreamBase *m_stream{nullptr};
 
     // its mode
     BufMode m_mode;
 
     // flags
-    bool m_destroybuf,      // deallocate buffer?
-         m_fixed,
-         m_flushable;
+    bool m_destroybuf;     // deallocate buffer?
+    bool m_fixed;
+    bool m_flushable{false};
 };
 
 // ---------------------------------------------------------------------------

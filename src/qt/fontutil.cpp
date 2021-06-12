@@ -21,7 +21,7 @@ bool wxNativeEncodingInfo::FromString(const wxString& WXUNUSED(s))
 
 wxString wxNativeEncodingInfo::ToString() const
 {
-    return wxString();
+    return {};
 }
 
 //#############################################################################

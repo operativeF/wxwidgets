@@ -270,14 +270,13 @@ wxString wxFileType::ExpandCommand(const wxString& command,
 }
 
 wxFileType::wxFileType(const wxFileTypeInfo& info)
+    : m_info(&info)
 {
-    m_info = &info;
-    m_impl = nullptr;
 }
 
 wxFileType::wxFileType()
+    : m_impl(new wxFileTypeImpl)
 {
-    m_impl = new wxFileTypeImpl;
 }
 
 wxFileType::~wxFileType()
