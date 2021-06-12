@@ -1094,7 +1094,15 @@ public:
   wxString() = default;
 
     // copy ctor
-  wxString(const wxString& stringSrc) : m_impl(stringSrc.m_impl) { }
+  wxString(const wxString& stringSrc) : m_impl(stringSrc.m_impl) {}
+  
+  wxString(wxString&& stringSrc) : m_impl(std::move(stringSrc.m_impl)) {}
+
+  wxString& operator=(wxString&& stringSrc) 
+  {
+    m_impl = std::move(stringSrc.m_impl);
+    return *this;
+  }
 
     // string containing nRepeat copies of ch
   wxString(wxUniChar ch, size_t nRepeat = 1 )
