@@ -43,6 +43,11 @@ public:
         Create(parent, id, value, pos, size, style, min, max, initial, name);
     }
 
+    wxSpinCtrl(const wxSpinCtrl&) = delete;
+	wxSpinCtrl& operator=(const wxSpinCtrl&) = delete;
+
+    ~wxSpinCtrl() override;
+
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 const wxString& value = wxEmptyString,
@@ -69,8 +74,6 @@ public:
 
     // implementation only from now on
     // -------------------------------
-
-    ~wxSpinCtrl() override;
 
     void SetValue(int val) override;
     int  GetValue() const override;
@@ -170,8 +173,6 @@ private:
 
     wxDECLARE_DYNAMIC_CLASS(wxSpinCtrl);
     wxDECLARE_EVENT_TABLE();
-    wxSpinCtrl(const wxSpinCtrl&) = delete;
-	wxSpinCtrl& operator=(const wxSpinCtrl&) = delete;
 };
 
 #endif // wxUSE_SPINCTRL

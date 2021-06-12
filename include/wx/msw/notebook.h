@@ -40,10 +40,10 @@ public:
               const wxString& name = wxASCII_STR(wxNotebookNameStr));
   ~wxNotebook() override;
 
-wxNotebook(const wxNotebook&) = delete;
-   wxNotebook& operator=(const wxNotebook&) = delete;
-   wxNotebook(wxNotebook&&) = default;
-   wxNotebook& operator=(wxNotebook&&) = default;
+  wxNotebook(const wxNotebook&) = delete;
+  wxNotebook& operator=(const wxNotebook&) = delete;
+  wxNotebook(wxNotebook&&) = default;
+  wxNotebook& operator=(wxNotebook&&) = default;
 
   // accessors
   // ---------

@@ -44,10 +44,10 @@ public:
     wxMSWDCImpl(wxDC *owner, WXHDC hDC);
     ~wxMSWDCImpl() override;
 
-   wxMSWDCImpl(const wxMSWDCImpl&) = delete;
-   wxMSWDCImpl& operator=(const wxMSWDCImpl&) = delete;
-   wxMSWDCImpl(wxMSWDCImpl&&) = default;
-   wxMSWDCImpl& operator=(wxMSWDCImpl&&) = default;
+    wxMSWDCImpl(const wxMSWDCImpl&) = delete;
+    wxMSWDCImpl& operator=(const wxMSWDCImpl&) = delete;
+    wxMSWDCImpl(wxMSWDCImpl&&) = default;
+    wxMSWDCImpl& operator=(wxMSWDCImpl&&) = default;
 
     void Clear() override;
 
@@ -344,6 +344,11 @@ public:
         SetHDC((WXHDC)nullptr);
     }
 
+    wxDCTempImpl(const wxDCTempImpl&) = delete;
+	wxDCTempImpl& operator=(const wxDCTempImpl&) = delete;
+    wxDCTempImpl(wxDCTempImpl&&) = default;
+	wxDCTempImpl& operator=(wxDCTempImpl&&) = default;
+
     wxSize DoGetSize() const override
     {
         wxASSERT_MSG( m_size.IsFullySpecified(),
@@ -356,9 +361,6 @@ private:
     // size of this DC must be explicitly set by SetSize() as we have no way to
     // find it ourselves
     const wxSize m_size;
-
-    wxDCTempImpl(const wxDCTempImpl&) = delete;
-	wxDCTempImpl& operator=(const wxDCTempImpl&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxDCTemp : public wxDC

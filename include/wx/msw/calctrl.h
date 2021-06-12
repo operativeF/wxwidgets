@@ -24,10 +24,10 @@ public:
         Create(parent, id, date, pos, size, style, name);
     }
 
-   wxCalendarCtrl(const wxCalendarCtrl&) = delete;
-   wxCalendarCtrl& operator=(const wxCalendarCtrl&) = delete;
-   wxCalendarCtrl(wxCalendarCtrl&&) = default;
-   wxCalendarCtrl& operator=(wxCalendarCtrl&&) = default;
+    wxCalendarCtrl(const wxCalendarCtrl&) = delete;
+    wxCalendarCtrl& operator=(const wxCalendarCtrl&) = delete;
+    wxCalendarCtrl(wxCalendarCtrl&&) = default;
+    wxCalendarCtrl& operator=(wxCalendarCtrl&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,

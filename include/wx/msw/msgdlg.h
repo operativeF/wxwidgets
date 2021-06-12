@@ -23,10 +23,12 @@ public:
     {
     }
 
-wxMessageDialog(const wxMessageDialog&) = delete;
-   wxMessageDialog& operator=(const wxMessageDialog&) = delete;
-   wxMessageDialog(wxMessageDialog&&) = default;
-   wxMessageDialog& operator=(wxMessageDialog&&) = default;
+    wxMessageDialog(const wxMessageDialog&) = delete;
+    wxMessageDialog& operator=(const wxMessageDialog&) = delete;
+    wxMessageDialog(wxMessageDialog&&) = default;
+    wxMessageDialog& operator=(wxMessageDialog&&) = default;
+
+    ~wxMessageDialog() = default;
 
     int ShowModal() override;
 

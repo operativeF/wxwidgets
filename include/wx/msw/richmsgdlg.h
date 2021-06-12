@@ -20,10 +20,11 @@ public:
         : wxGenericRichMessageDialog(parent, message, caption, style)
         { }
 
-wxRichMessageDialog(const wxRichMessageDialog&) = delete;
-   wxRichMessageDialog& operator=(const wxRichMessageDialog&) = delete;
-   wxRichMessageDialog(wxRichMessageDialog&&) = default;
-   wxRichMessageDialog& operator=(wxRichMessageDialog&&) = default;
+    wxRichMessageDialog(const wxRichMessageDialog&) = delete;
+    wxRichMessageDialog& operator=(const wxRichMessageDialog&) = delete;
+    wxRichMessageDialog(wxRichMessageDialog&&) = default;
+    wxRichMessageDialog& operator=(wxRichMessageDialog&&) = default;
+    ~wxRichMessageDialog() = default;    
 
     // overridden base class method showing the native task dialog if possible
     int ShowModal() override;

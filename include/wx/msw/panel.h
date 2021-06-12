@@ -31,10 +31,11 @@ public:
         Create(parent, winid, pos, size, style, name);
     }
 
-wxPanel(const wxPanel&) = delete;
-   wxPanel& operator=(const wxPanel&) = delete;
-   wxPanel(wxPanel&&) = default;
-   wxPanel& operator=(wxPanel&&) = default;
+    wxPanel(const wxPanel&) = delete;
+    wxPanel& operator=(const wxPanel&) = delete;
+    wxPanel(wxPanel&&) = default;
+    wxPanel& operator=(wxPanel&&) = default;
+    ~wxPanel() = default;
 
 	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;

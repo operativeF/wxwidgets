@@ -26,6 +26,8 @@ public:
 
     wxCustomBackgroundWindow(const wxCustomBackgroundWindow<W>&)  = delete;
 	wxCustomBackgroundWindow& operator=(const wxCustomBackgroundWindow<W>&) = delete;
+    wxCustomBackgroundWindow(wxCustomBackgroundWindow<W>&&)  = default;
+	wxCustomBackgroundWindow& operator=(wxCustomBackgroundWindow<W>&&) = default;
 
 protected:
     void DoSetBackgroundBitmap(const wxBitmap& bmp) override

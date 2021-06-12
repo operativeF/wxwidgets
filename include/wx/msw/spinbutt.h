@@ -33,10 +33,10 @@ public:
 
     ~wxSpinButton() override;
 
-wxSpinButton(const wxSpinButton&) = delete;
-   wxSpinButton& operator=(const wxSpinButton&) = delete;
-   wxSpinButton(wxSpinButton&&) = default;
-   wxSpinButton& operator=(wxSpinButton&&) = default;
+    wxSpinButton(const wxSpinButton&) = delete;
+    wxSpinButton& operator=(const wxSpinButton&) = delete;
+    wxSpinButton(wxSpinButton&&) = default;
+    wxSpinButton& operator=(wxSpinButton&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,

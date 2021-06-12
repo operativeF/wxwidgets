@@ -34,6 +34,13 @@ public:
     // Create a DC corresponding to the whole window
     wxWindowDCImpl( wxDC *owner, wxWindow *win );
 
+    wxWindowDCImpl(const wxWindowDCImpl&) = delete;
+	wxWindowDCImpl& operator=(const wxWindowDCImpl&) = delete;
+    wxWindowDCImpl(wxWindowDCImpl&&) = default;
+	wxWindowDCImpl& operator=(wxWindowDCImpl&&) = default;
+
+    ~wxWindowDCImpl() = default;
+
     wxSize DoGetSize() const override;
 
 protected:
@@ -41,8 +48,6 @@ protected:
     void InitDC();
 
     wxDECLARE_CLASS(wxWindowDCImpl);
-    wxWindowDCImpl(const wxWindowDCImpl&) = delete;
-	wxWindowDCImpl& operator=(const wxWindowDCImpl&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxClientDCImpl : public wxWindowDCImpl
@@ -56,14 +61,17 @@ public:
 
     ~wxClientDCImpl() override;
 
+    wxClientDCImpl(const wxClientDCImpl&) = delete;
+	wxClientDCImpl& operator=(const wxClientDCImpl&) = delete;
+    wxClientDCImpl(wxClientDCImpl&&) = default;
+	wxClientDCImpl& operator=(wxClientDCImpl&&) = default;
+
     wxSize DoGetSize() const override;
 
 protected:
     void InitDC();
 
     wxDECLARE_CLASS(wxClientDCImpl);
-    wxClientDCImpl(const wxClientDCImpl&) = delete;
-	wxClientDCImpl& operator=(const wxClientDCImpl&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxPaintDCImpl : public wxClientDCImpl
@@ -75,6 +83,11 @@ public:
     wxPaintDCImpl( wxDC *owner, wxWindow *win );
 
     ~wxPaintDCImpl() override;
+
+    wxPaintDCImpl(const wxPaintDCImpl&) = delete;
+	wxPaintDCImpl& operator=(const wxPaintDCImpl&) = delete;
+    wxPaintDCImpl(wxPaintDCImpl&&) = default;
+	wxPaintDCImpl& operator=(wxPaintDCImpl&&) = default;
 
     // find the entry for this DC in the cache (keyed by the window)
     static WXHDC FindDCInCache(wxWindow* win);
@@ -88,8 +101,6 @@ protected:
     static wxPaintDCInfo *FindInCache(wxWindow* win);
 
     wxDECLARE_CLASS(wxPaintDCImpl);
-    wxPaintDCImpl(const wxPaintDCImpl&) = delete;
-	wxPaintDCImpl& operator=(const wxPaintDCImpl&) = delete;
 };
 
 /*

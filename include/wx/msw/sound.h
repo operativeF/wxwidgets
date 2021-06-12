@@ -20,10 +20,10 @@ public:
     wxSound(const wxString& fileName, bool isResource = false);
     wxSound(size_t size, const void* data);
     ~wxSound() override;
-   wxSound(const wxSound&) = delete;
-   wxSound& operator=(const wxSound&) = delete;
-   wxSound(wxSound&&) = default;
-   wxSound& operator=(wxSound&&) = default;
+    wxSound(const wxSound&) = delete;
+    wxSound& operator=(const wxSound&) = delete;
+    wxSound(wxSound&&) = default;
+    wxSound& operator=(wxSound&&) = default;
 
     // Create from resource or file
     bool Create(const wxString& fileName, bool isResource = false);

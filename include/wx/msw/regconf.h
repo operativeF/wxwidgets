@@ -38,6 +38,11 @@ public:
     // dtor will save unsaved data
   ~wxRegConfig() override = default;
 
+  wxRegConfig(const wxRegConfig&) = delete;
+	wxRegConfig& operator=(const wxRegConfig&) = delete;
+  wxRegConfig(wxRegConfig&&) = default;
+	wxRegConfig& operator=(wxRegConfig&&) = default;
+
   // implement inherited pure virtual functions
   // ------------------------------------------
 
@@ -117,8 +122,6 @@ private:
   // current path (not '/' terminated)
   wxString  m_strPath;
 
-  wxRegConfig(const wxRegConfig&) = delete;
-	wxRegConfig& operator=(const wxRegConfig&) = delete;
   wxDECLARE_ABSTRACT_CLASS(wxRegConfig);
 };
 

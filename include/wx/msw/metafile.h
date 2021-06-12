@@ -81,6 +81,11 @@ public:
                      int xext, int yext, int xorg, int yorg);
     virtual ~wxMetafileDCImpl();
 
+    wxMetafileDCImpl(const wxMetafileDCImpl&) = delete;
+	wxMetafileDCImpl& operator=(const wxMetafileDCImpl&) = delete;
+    wxMetafileDCImpl(wxMetafileDCImpl&&) = default;
+	wxMetafileDCImpl& operator=(wxMetafileDCImpl&&) = default;
+
     virtual wxMetafile *Close();
     void SetMapMode(wxMappingMode mode) override;
     virtual void DoGetTextExtent(const wxString& string,
@@ -103,8 +108,6 @@ protected:
 
 private:
     wxDECLARE_CLASS(wxMetafileDCImpl);
-    wxMetafileDCImpl(const wxMetafileDCImpl&) = delete;
-	wxMetafileDCImpl& operator=(const wxMetafileDCImpl&) = delete;
 };
 
 class WXDLLIMPEXP_CORE wxMetafileDC: public wxDC

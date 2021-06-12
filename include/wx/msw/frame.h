@@ -30,10 +30,10 @@ public:
         Create(parent, id, title, pos, size, style, name);
     }
 
-wxFrame(const wxFrame&) = delete;
-   wxFrame& operator=(const wxFrame&) = delete;
-   wxFrame(wxFrame&&) = default;
-   wxFrame& operator=(wxFrame&&) = default;
+    wxFrame(const wxFrame&) = delete;
+    wxFrame& operator=(const wxFrame&) = delete;
+    wxFrame(wxFrame&&) = default;
+    wxFrame& operator=(wxFrame&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,

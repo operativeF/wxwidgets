@@ -33,10 +33,10 @@ public:
 
     ~wxGauge() override;
 
-wxGauge(const wxGauge&) = delete;
-   wxGauge& operator=(const wxGauge&) = delete;
-   wxGauge(wxGauge&&) = default;
-   wxGauge& operator=(wxGauge&&) = default;
+    wxGauge(const wxGauge&) = delete;
+    wxGauge& operator=(const wxGauge&) = delete;
+    wxGauge(wxGauge&&) = default;
+    wxGauge& operator=(wxGauge&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,

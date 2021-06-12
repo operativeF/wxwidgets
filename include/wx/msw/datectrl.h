@@ -28,10 +28,10 @@ public:
         Create(parent, id, dt, pos, size, style, validator, name);
     }
 
-wxDatePickerCtrl(const wxDatePickerCtrl&) = delete;
-   wxDatePickerCtrl& operator=(const wxDatePickerCtrl&) = delete;
-   wxDatePickerCtrl(wxDatePickerCtrl&&) = default;
-   wxDatePickerCtrl& operator=(wxDatePickerCtrl&&) = default;
+    wxDatePickerCtrl(const wxDatePickerCtrl&) = delete;
+    wxDatePickerCtrl& operator=(const wxDatePickerCtrl&) = delete;
+    wxDatePickerCtrl(wxDatePickerCtrl&&) = default;
+    wxDatePickerCtrl& operator=(wxDatePickerCtrl&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
