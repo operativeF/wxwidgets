@@ -144,11 +144,7 @@ public:
 
 protected:
     // ctor is private, use Get()
-    wxPersistenceManager()
-    {
-        m_doSave =
-        m_doRestore = true;
-    }
+    wxPersistenceManager() = default;
 
 
     // Return the config object to use, by default just the global one but a
@@ -170,8 +166,8 @@ private:
     // true if we should restore/save the settings (it doesn't make much sense
     // to use this class when both of them are false but setting one of them to
     // false may make sense in some situations)
-    bool m_doSave,
-         m_doRestore;
+    bool m_doSave{true};
+    bool m_doRestore{true};
 };
 
 // ----------------------------------------------------------------------------
@@ -230,7 +226,7 @@ protected:
     }
 
 private:
-    void * const m_obj;
+    void* const m_obj;
 };
 
 // Helper function calling RegisterAndRestore() on the global persistence

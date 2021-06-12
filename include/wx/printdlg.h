@@ -60,10 +60,10 @@ public:
     wxPrintDialog(wxWindow *parent, wxPrintData* data);
     ~wxPrintDialog() override;
 
-   wxPrintDialog(const wxPrintDialog&) = delete;
-   wxPrintDialog& operator=(const wxPrintDialog&) = delete;
-   wxPrintDialog(wxPrintDialog&&) = default;
-   wxPrintDialog& operator=(wxPrintDialog&&) = default;
+    wxPrintDialog(const wxPrintDialog&) = delete;
+    wxPrintDialog& operator=(const wxPrintDialog&) = delete;
+    wxPrintDialog(wxPrintDialog&&) = default;
+    wxPrintDialog& operator=(wxPrintDialog&&) = default;
 
     virtual int ShowModal();
 

@@ -336,28 +336,6 @@ wxAnyScrollHelperBase::wxAnyScrollHelperBase(wxWindow* win)
 wxScrollHelperBase::wxScrollHelperBase(wxWindow *win)
     : wxAnyScrollHelperBase(win)
 {
-    m_xScrollPixelsPerLine =
-    m_yScrollPixelsPerLine =
-    m_xScrollPosition =
-    m_yScrollPosition =
-    m_xScrollLines =
-    m_yScrollLines =
-    m_xScrollLinesPerPage =
-    m_yScrollLinesPerPage = 0;
-
-    m_xScrollingEnabled =
-    m_yScrollingEnabled = true;
-
-    m_scaleX =
-    m_scaleY = 1.0;
-#if wxUSE_MOUSEWHEEL
-    m_wheelRotation = 0;
-#endif
-
-    m_timerAutoScroll = nullptr;
-
-    m_handler = nullptr;
-
     m_win->SetScrollHelper(static_cast<wxScrollHelper *>(this));
 
     // by default, the associated window is also the target window

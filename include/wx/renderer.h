@@ -99,8 +99,8 @@ struct WXDLLIMPEXP_CORE wxSplitterRenderParams
     // the only way to initialize this struct is by using this ctor
     wxSplitterRenderParams(wxCoord widthSash_, wxCoord border_, bool isSens_)
         : widthSash(widthSash_), border(border_), isHotSensitive(isSens_)
-        {
-        }
+    {
+    }
 
     // the width of the splitter sash
     const wxCoord widthSash;
@@ -116,10 +116,6 @@ struct WXDLLIMPEXP_CORE wxSplitterRenderParams
 // extra optional parameters for DrawHeaderButton
 struct WXDLLIMPEXP_CORE wxHeaderButtonParams
 {
-    wxHeaderButtonParams()
-         
-    = default;
-
     wxColour    m_arrowColour;
     wxColour    m_selectionColour;
     wxString    m_labelText;

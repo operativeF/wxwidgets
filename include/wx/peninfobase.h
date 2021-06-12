@@ -103,13 +103,8 @@ public:
 
 protected:
     wxPenInfoBase(const wxColour& colour, wxPenStyle style)
-        : m_colour(colour)
+        : m_colour(colour), m_style(style)
     {
-        m_nb_dashes = 0;
-        m_dash = nullptr;
-        m_join = wxJOIN_ROUND;
-        m_cap = wxCAP_ROUND;
-        m_style = style;
     }
 
 private:
@@ -119,11 +114,11 @@ private:
     wxColour m_colour;
     wxBitmap m_stipple;
     wxPenStyle m_style;
-    wxPenJoin m_join;
-    wxPenCap m_cap;
+    wxPenJoin m_join{wxJOIN_ROUND};
+    wxPenCap m_cap{wxCAP_ROUND};
 
-    int m_nb_dashes;
-    wxDash* m_dash;
+    int m_nb_dashes{0};
+    wxDash* m_dash{nullptr};
 };
 
 #endif // _WX_PENINFOBASE_H_

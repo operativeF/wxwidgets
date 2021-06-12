@@ -42,9 +42,6 @@ inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxRearrangeDialogNameStr[] = "wxRea
 class WXDLLIMPEXP_CORE wxRearrangeList : public wxCheckListBox
 {
 public:
-    
-    // --------------
-
     // default ctor, call Create() later
     wxRearrangeList() = default;
 

@@ -45,6 +45,10 @@ class WXDLLIMPEXP_CORE wxPreferencesPage
 public:
     wxPreferencesPage() = default;
     virtual ~wxPreferencesPage() = default;
+    wxPreferencesPage(const wxPreferencesPage&) = delete;
+    wxPreferencesPage& operator=(const wxPreferencesPage&) = delete;
+    wxPreferencesPage(wxPreferencesPage&&) = default;
+    wxPreferencesPage& operator=(wxPreferencesPage&&) = default;
 
     // Name of the page, used e.g. for tabs
     virtual wxString GetName() const = 0;
@@ -61,11 +65,6 @@ public:
     // Create a window (usually a wxPanel) for this page. The caller takes
     // ownership of the returned window.
     virtual wxWindow *CreateWindow(wxWindow *parent) = 0;
-
-   wxPreferencesPage(const wxPreferencesPage&) = delete;
-   wxPreferencesPage& operator=(const wxPreferencesPage&) = delete;
-   wxPreferencesPage(wxPreferencesPage&&) = default;
-   wxPreferencesPage& operator=(wxPreferencesPage&&) = default;
 };
 
 

@@ -32,10 +32,10 @@ public:
     explicit wxPenInfo(const wxColour& colour = wxColour(),
                        int width = 1,
                        wxPenStyle style = wxPenStyle::Solid)
-        : wxPenInfoBase<wxPenInfo>(colour, style)
+        : wxPenInfoBase<wxPenInfo>(colour, style),
+          m_width(width),
+          m_quality(wxPenQuality::Default)
     {
-        m_width = width;
-        m_quality = wxPenQuality::Default;
     }
 
     // Setters

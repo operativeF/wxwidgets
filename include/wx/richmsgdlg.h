@@ -27,15 +27,15 @@ public:
                              long style )
         : wxGenericMessageDialog( parent, message, caption, style ),
           m_detailsExpanderCollapsedLabel( wxGetTranslation("&See details") ),
-          m_detailsExpanderExpandedLabel( wxGetTranslation("&Hide details") ),
-          m_checkBoxValue( false ),
-          m_footerIcon( 0 )
-        { }
+          m_detailsExpanderExpandedLabel( wxGetTranslation("&Hide details") )
+    {}
 
-   wxRichMessageDialogBase(const wxRichMessageDialogBase&) = delete;
-   wxRichMessageDialogBase& operator=(const wxRichMessageDialogBase&) = delete;
-   wxRichMessageDialogBase(wxRichMessageDialogBase&&) = default;
-   wxRichMessageDialogBase& operator=(wxRichMessageDialogBase&&) = default;
+    ~wxRichMessageDialogBase() = default;
+
+    wxRichMessageDialogBase(const wxRichMessageDialogBase&) = delete;
+    wxRichMessageDialogBase& operator=(const wxRichMessageDialogBase&) = delete;
+    wxRichMessageDialogBase(wxRichMessageDialogBase&&) = default;
+    wxRichMessageDialogBase& operator=(wxRichMessageDialogBase&&) = default;
 
     void ShowCheckBox(const wxString& checkBoxText, bool checked = false)
     {
@@ -67,10 +67,10 @@ protected:
     const wxString m_detailsExpanderExpandedLabel;
 
     wxString m_checkBoxText;
-    bool m_checkBoxValue;
     wxString m_detailedText;
     wxString m_footerText;
-    int m_footerIcon;
+    int m_footerIcon{0};
+    bool m_checkBoxValue{false};
 
 private:
     void ShowDetails(bool shown);

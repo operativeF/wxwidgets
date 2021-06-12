@@ -18,7 +18,7 @@ class WXDLLIMPEXP_CORE wxControl : public wxControlBase
 {
 public:
     wxControl() = default;
-
+    ~wxControl() override = default;
     wxControl(wxWindow *parent, wxWindowID id,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize, long style = 0,
@@ -28,10 +28,10 @@ public:
         Create(parent, id, pos, size, style, validator, name);
     }
 
-wxControl(const wxControl&) = delete;
-   wxControl& operator=(const wxControl&) = delete;
-   wxControl(wxControl&&) = default;
-   wxControl& operator=(wxControl&&) = default;
+    wxControl(const wxControl&) = delete;
+    wxControl& operator=(const wxControl&) = delete;
+    wxControl(wxControl&&) = default;
+    wxControl& operator=(wxControl&&) = default;
 
     bool Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,

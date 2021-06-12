@@ -85,7 +85,7 @@ public:
         const int m_stockId;
     };
 
-    wxMessageDialogBase() { m_dialogStyle = 0; }
+    wxMessageDialogBase() = default;
     wxMessageDialogBase(wxWindow *parent,
                         const wxString& message,
                         const wxString& caption,
@@ -250,10 +250,11 @@ protected:
         return msg;
     }
 
-    wxString m_message,
-             m_extendedMessage,
-             m_caption;
-    long m_dialogStyle;
+    wxString m_message;
+    wxString m_extendedMessage;
+    wxString m_caption;
+
+    long m_dialogStyle{0};
 
     // this function is called by our public SetXXXLabels() and should assign
     // the value to var with possibly some transformation (e.g. Cocoa version

@@ -54,7 +54,6 @@ public:
     // (i.e. without knowing the exact address class)
     virtual wxSockAddress *Clone() const = 0;
 
-
     // implementation only, don't use
     const wxSockAddressImpl& GetAddress() const { return *m_impl; }
     void SetAddress(const wxSockAddressImpl& address);

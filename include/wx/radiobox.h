@@ -87,17 +87,8 @@ public:
 
 
 protected:
-    wxRadioBoxBase()
-    {
-        m_numCols =
-        m_numRows =
-        m_majorDim = 0;
-
-#if wxUSE_TOOLTIPS
-        m_itemsTooltips = nullptr;
-#endif // wxUSE_TOOLTIPS
-    }
-
+    wxRadioBoxBase() = default;
+    
     virtual wxBorder GetDefaultBorder() const { return wxBORDER_NONE; }
 
     // return the number of items in major direction (which depends on whether
@@ -134,15 +125,15 @@ private:
     // the number of elements in major dimension (i.e. number of columns if
     // wxRA_SPECIFY_COLS or the number of rows if wxRA_SPECIFY_ROWS) and also
     // the number of rows/columns calculated from it
-    unsigned int m_majorDim,
-                 m_numCols,
-                 m_numRows;
+    unsigned int m_majorDim{0};
+    unsigned int m_numCols{0};
+    unsigned int m_numRows{0};
 
 #if wxUSE_TOOLTIPS
     // array of tooltips for the individual items
     //
     // this array is initially NULL and initialized on first use
-    wxToolTipArray *m_itemsTooltips;
+    wxToolTipArray *m_itemsTooltips{nullptr};
 #endif
 
 #if wxUSE_HELP

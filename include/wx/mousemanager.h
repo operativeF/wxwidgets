@@ -35,24 +35,16 @@ public:
     // a mouse event manager is always associated with a window and must be
     // deleted by the window when it is destroyed so if it is created using the
     // default ctor Create() must be called later
-    wxMouseEventsManager() { 
-    m_win = nullptr;
-    m_state = State_Normal;
-    m_item = wxNOT_FOUND;
- }
-    wxMouseEventsManager(wxWindow *win) { 
-    m_win = nullptr;
-    m_state = State_Normal;
-    m_item = wxNOT_FOUND;
- Create(win); }
+    wxMouseEventsManager() = default;
+    wxMouseEventsManager(wxWindow *win) { Create(win); }
     bool Create(wxWindow *win);
 
     ~wxMouseEventsManager() override;
 
-   wxMouseEventsManager(const wxMouseEventsManager&) = delete;
-   wxMouseEventsManager& operator=(const wxMouseEventsManager&) = delete;
-   wxMouseEventsManager(wxMouseEventsManager&&) = default;
-   wxMouseEventsManager& operator=(wxMouseEventsManager&&) = default;
+    wxMouseEventsManager(const wxMouseEventsManager&) = delete;
+    wxMouseEventsManager& operator=(const wxMouseEventsManager&) = delete;
+    wxMouseEventsManager(wxMouseEventsManager&&) = default;
+    wxMouseEventsManager& operator=(wxMouseEventsManager&&) = default;
 
 protected:
     // called to find the item at the given position: return wxNOT_FOUND (-1)
@@ -140,17 +132,17 @@ private:
 
     // the associated window, never NULL except between the calls to the
     // default ctor and Create()
-    wxWindow *m_win;
+    wxWindow *m_win{nullptr};
 
     // the current state
-    State m_state;
+    State m_state{State_Normal};
 
     // the details of the operation currently in progress, only valid if
     // m_state is not normal
 
     // the item being pressed or dragged (always valid, i.e. != wxNOT_FOUND if
     // m_state != State_Normal)
-    int m_item;
+    int m_item{wxNOT_FOUND};
 
     // the position of the last mouse event of interest: either mouse press in
     // State_Pressed or last movement event in State_Dragging

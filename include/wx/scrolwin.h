@@ -324,34 +324,34 @@ protected:
     }
 
 
-    double                m_scaleX;
-    double                m_scaleY;
+    double                m_scaleX{1.0};
+    double                m_scaleY{1.0};
 
     wxRect                m_rectToScroll;
 
-    wxTimer              *m_timerAutoScroll;
+    wxTimer*              m_timerAutoScroll{nullptr};
 
     // The number of pixels to scroll in horizontal and vertical directions
     // respectively.
     //
     // If 0, means that the scrolling in the given direction is disabled.
-    int                   m_xScrollPixelsPerLine;
-    int                   m_yScrollPixelsPerLine;
-    int                   m_xScrollPosition;
-    int                   m_yScrollPosition;
-    int                   m_xScrollLines;
-    int                   m_yScrollLines;
-    int                   m_xScrollLinesPerPage;
-    int                   m_yScrollLinesPerPage;
+    int                   m_xScrollPixelsPerLine{0};
+    int                   m_yScrollPixelsPerLine{0};
+    int                   m_xScrollPosition{0};
+    int                   m_yScrollPosition{0};
+    int                   m_xScrollLines{0};
+    int                   m_yScrollLines{0};
+    int                   m_xScrollLinesPerPage{0};
+    int                   m_yScrollLinesPerPage{0};
 
-    bool                  m_xScrollingEnabled;
-    bool                  m_yScrollingEnabled;
+    bool                  m_xScrollingEnabled{true};
+    bool                  m_yScrollingEnabled{true};
 
 #if wxUSE_MOUSEWHEEL
-    int m_wheelRotation;
+    int m_wheelRotation{0};
 #endif // wxUSE_MOUSEWHEEL
 
-    wxScrollHelperEvtHandler *m_handler;
+    wxScrollHelperEvtHandler* m_handler{nullptr};
 };
 
 // this macro can be used in a wxScrollHelper-derived class to forward wxWindow

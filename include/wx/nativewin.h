@@ -67,12 +67,7 @@ class WXDLLIMPEXP_CORE wxNativeWindow : public wxWindow
 {
 public:
     // Default ctor, Create() must be called later to really create the window.
-    wxNativeWindow()
-    {
-        
-        m_ownedByUser = true;
-    
-    }
+    wxNativeWindow() = default;
 
    wxNativeWindow(const wxNativeWindow&) = delete;
    wxNativeWindow& operator=(const wxNativeWindow&) = delete;
@@ -87,11 +82,7 @@ public:
     // Use GetHandle() to check if the creation was successful, it will return
     // 0 if the handle was invalid.
     wxNativeWindow(wxWindow* parent, wxWindowID winid, wxNativeWindowHandle handle)
-    {
-        
-        m_ownedByUser = true;
-    
-
+    {    
         Create(parent, winid, handle);
     }
 
@@ -123,7 +114,7 @@ private:
     void DoDisown();
 
     // If the native widget owned by the user code.
-    bool m_ownedByUser;
+    bool m_ownedByUser{true};
 };
 
 #endif // wxHAS_NATIVE_WINDOW

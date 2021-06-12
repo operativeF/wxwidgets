@@ -36,8 +36,7 @@ class WXDLLIMPEXP_CORE wxPickerBase : public wxNavigationEnabled<wxControl>
 {
 public:
     // ctor: text is the associated text control
-    wxPickerBase()  
-        = default;
+    wxPickerBase() = default;
     ~wxPickerBase() override = default;
 
 

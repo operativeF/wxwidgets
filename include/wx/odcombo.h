@@ -177,7 +177,7 @@ protected:
     void StopPartialCompletion();
 
     wxArrayString           m_strings;
-    std::vector<void*>         m_clientDatas;
+    std::vector<void*>      m_clientDatas;
 
     wxFont                  m_useFont;
 

@@ -72,10 +72,9 @@ public:
                      // asterisks in spin control. We also want to respect
                      // wxTE_PROCESS and the border flags as well.
                      style & (wxALIGN_MASK | wxBORDER_MASK | wxTE_PROCESS_ENTER)
-                           & ~wxTE_PASSWORD)
+                           & ~wxTE_PASSWORD),
+         m_spin(spin)
     {
-        m_spin = spin;
-
         InvalidateBestSize();
 
         // remove the default minsize, the spinctrl will have one instead
@@ -124,7 +123,7 @@ public:
         return wxSize(wxMax(minValSize.x, maxValSize.x), wxMax(minValSize.y, maxValSize.y));
     }
 
-    wxSpinCtrlGenericBase *m_spin;
+    wxSpinCtrlGenericBase* m_spin;
 
 private:
     wxDECLARE_EVENT_TABLE();
@@ -170,7 +169,7 @@ public:
             m_spin->OnSpinButton(event);
     }
 
-    wxSpinCtrlGenericBase *m_spin;
+    wxSpinCtrlGenericBase* m_spin;
 
 private:
     wxDECLARE_EVENT_TABLE();

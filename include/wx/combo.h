@@ -156,48 +156,7 @@ class WXDLLIMPEXP_CORE wxComboCtrlBase : public wxControl,
     friend class wxComboPopupEvtHandler;
 public:
     
-    wxComboCtrlBase()  { 
-    m_winPopup = nullptr;
-    m_popup = nullptr;
-    m_popupWinState = Hidden;
-    m_btn = nullptr;
-    m_text = nullptr;
-    m_popupInterface = nullptr;
-
-    m_popupEvtHandler = nullptr;
-    m_textEvtHandler = nullptr;
-
-#if INSTALL_TOPLEV_HANDLER
-    m_toplevEvtHandler = NULL;
-#endif
-
-    m_mainCtrlWnd = this;
-
-    m_heightPopup = -1;
-    m_widthMinPopup = -1;
-    m_anchorSide = 0;
-    m_widthCustomPaint = 0;
-    m_widthCustomBorder = 0;
-
-    m_btnState = 0;
-    m_btnWidDefault = 0;
-    m_blankButtonBg = false;
-    m_ignoreEvtText = 0;
-    m_popupWinType = POPUPWIN_NONE;
-    m_btnWid = m_btnHei = -1;
-    m_btnSide = wxRIGHT;
-    m_btnSpacingX = 0;
-
-    m_extLeft = 0;
-    m_extRight = 0;
-    m_marginLeft = -1;
-    m_iFlags = 0;
-    m_textCtrlStyle = 0;
-    m_timeCanAcceptClick = 0;
-
-    m_resetFocus = false;
-    m_hasTcBgCol = false;
- }
+    wxComboCtrlBase() : m_mainCtrlWnd(this) {}
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -655,29 +614,31 @@ protected:
     wxString                m_hintText;
 
     // the text control and button we show all the time
-    wxTextCtrl*             m_text;
-    wxWindow*               m_btn;
+    wxTextCtrl*             m_text{nullptr};
+    wxWindow*               m_btn{nullptr};
 
     // wxPopupWindow or similar containing the window managed by the interface.
-    wxWindow*               m_winPopup;
+    wxWindow*               m_winPopup{nullptr};
 
     // the popup control/panel
-    wxWindow*               m_popup;
+    wxWindow*               m_popup{nullptr};
 
     // popup interface
-    wxComboPopup*           m_popupInterface;
+    wxComboPopup*           m_popupInterface{nullptr};
 
     // this is input etc. handler for the text control
-    wxEvtHandler*           m_textEvtHandler;
+    wxEvtHandler*           m_textEvtHandler{nullptr};
 
+#if INSTALL_TOPLEV_HANDLER
     // this is for the top level window
-    wxEvtHandler*           m_toplevEvtHandler;
+    wxEvtHandler*           m_toplevEvtHandler{nullptr};
+#endif
 
     // this is for the control in popup
-    wxEvtHandler*           m_popupEvtHandler;
+    wxEvtHandler*           m_popupEvtHandler{nullptr};
 
     // this is for the popup window
-    wxEvtHandler*           m_popupWinEvtHandler;
+    wxEvtHandler*           m_popupWinEvtHandler{nullptr};
 
     // main (ie. topmost) window of a composite control (default = this)
     wxWindow*               m_mainCtrlWnd;
@@ -685,31 +646,31 @@ protected:
     // used to prevent immediate re-popupping in case closed popup
     // by clicking on the combo control (needed because of inconsistent
     // transient implementation across platforms).
-    wxMilliClock_t          m_timeCanAcceptClick;
+    wxMilliClock_t          m_timeCanAcceptClick{0};
 
     // how much popup should expand to the left/right of the control
-    wxCoord                 m_extLeft;
-    wxCoord                 m_extRight;
+    wxCoord                 m_extLeft{0};
+    wxCoord                 m_extRight{0};
 
     // minimum popup width
-    wxCoord                 m_widthMinPopup;
+    wxCoord                 m_widthMinPopup{-1};
 
     // preferred popup height
-    wxCoord                 m_heightPopup;
+    wxCoord                 m_heightPopup{-1};
 
     // how much of writable combo is custom-paint by callback?
     // also used to indicate area that is not covered by "blue"
     // selection indicator.
-    wxCoord                 m_widthCustomPaint;
+    wxCoord                 m_widthCustomPaint{0};
 
     // left margin, in pixels
-    wxCoord                 m_marginLeft;
+    wxCoord                 m_marginLeft{-1};
 
     // side on which the popup is aligned
-    int                     m_anchorSide;
+    int                     m_anchorSide{0};
 
     // Width of the "fake" border
-    wxCoord                 m_widthCustomBorder;
+    wxCoord                 m_widthCustomBorder{0};
 
     // The button and textctrl click/paint areas
     wxRect                  m_tcArea;
@@ -719,16 +680,16 @@ protected:
     wxColour                m_tcBgCol;
 
     // current button state (uses renderer flags)
-    int                     m_btnState;
+    int                     m_btnState{0};
 
     // button position
-    int                     m_btnWid;
-    int                     m_btnHei;
-    int                     m_btnSide;
-    int                     m_btnSpacingX;
+    int                     m_btnWid{-1};
+    int                     m_btnHei{-1};
+    int                     m_btnSide{wxRIGHT};
+    int                     m_btnSpacingX{0};
 
     // last default button width
-    int                     m_btnWidDefault;
+    int                     m_btnWidDefault{0};
 
     // custom dropbutton bitmaps
     wxBitmap                m_bmpNormal;
@@ -740,30 +701,28 @@ protected:
     wxSize                  m_btnSize;
 
     // platform-dependent customization and other flags
-    wxUint32                m_iFlags;
+    wxUint32                m_iFlags{0};
 
     // custom style for m_text
-    int                     m_textCtrlStyle;
+    int                     m_textCtrlStyle{0};
 
     // draw blank button background under bitmap?
-    bool                    m_blankButtonBg;
+    bool                    m_blankButtonBg{false};
 
     // is the popup window currently shown?
-    wxByte                  m_popupWinState;
+    wxByte                  m_popupWinState{Hidden};
 
     // should the focus be reset to the textctrl in idle time?
-    bool                    m_resetFocus;
+    bool                    m_resetFocus{false};
 
     // is the text-area background colour overridden?
-    bool                    m_hasTcBgCol;
+    bool                    m_hasTcBgCol{false};
 
 private:
-    
-
-    wxByte                  m_ignoreEvtText;  // Number of next EVT_TEXTs to ignore
+    wxByte                  m_ignoreEvtText{0};  // Number of next EVT_TEXTs to ignore
 
     // Is popup window wxPopupTransientWindow, wxPopupWindow or wxDialog?
-    wxByte                  m_popupWinType;
+    wxByte                  m_popupWinType{POPUPWIN_NONE};
 
     wxDECLARE_EVENT_TABLE();
 

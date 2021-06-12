@@ -27,11 +27,11 @@ class WXDLLIMPEXP_CORE wxScrollBarBase : public wxControl
 {
 public:
     wxScrollBarBase() = default;
-
-   wxScrollBarBase(const wxScrollBarBase&) = delete;
-   wxScrollBarBase& operator=(const wxScrollBarBase&) = delete;
-   wxScrollBarBase(wxScrollBarBase&&) = default;
-   wxScrollBarBase& operator=(wxScrollBarBase&&) = default;
+    ~wxScrollBarBase() override = default;
+    wxScrollBarBase(const wxScrollBarBase&) = delete;
+    wxScrollBarBase& operator=(const wxScrollBarBase&) = delete;
+    wxScrollBarBase(wxScrollBarBase&&) = default;
+    wxScrollBarBase& operator=(wxScrollBarBase&&) = default;
 
     /*
         Derived classes should provide the following method and ctor with the

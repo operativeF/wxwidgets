@@ -52,7 +52,6 @@ public:
 
     wxPowerEvent(wxEventType evtType) : wxEvent(wxID_NONE, evtType)
     {
-        m_veto = false;
     }
 
 	wxPowerEvent& operator=(const wxPowerEvent&) = delete;
