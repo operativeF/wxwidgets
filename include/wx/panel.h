@@ -30,8 +30,10 @@ class WXDLLIMPEXP_CORE wxPanelBase : public wxNavigationEnabled<wxWindow>
 public:
     wxPanelBase() = default;
 
-    wxPanelBase(const wxPanelBase&) = delete;
-	wxPanelBase& operator=(const wxPanelBase&) = delete;
+   wxPanelBase(const wxPanelBase&) = delete;
+   wxPanelBase& operator=(const wxPanelBase&) = delete;
+   wxPanelBase(wxPanelBase&&) = default;
+   wxPanelBase& operator=(wxPanelBase&&) = default;
 
     // Derived classes should also provide this constructor:
     /*

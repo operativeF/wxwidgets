@@ -54,9 +54,9 @@
 static wxDynamicLibrary s_mprLib;
 #endif
 
-typedef DWORD (WINAPI* WNetOpenEnumPtr)(DWORD, DWORD, DWORD, LPNETRESOURCE, LPHANDLE);
-typedef DWORD (WINAPI* WNetEnumResourcePtr)(HANDLE, LPDWORD, LPVOID, LPDWORD);
-typedef DWORD (WINAPI* WNetCloseEnumPtr)(HANDLE);
+using WNetOpenEnumPtr = DWORD(WINAPI*)(DWORD, DWORD, DWORD, LPNETRESOURCE, LPHANDLE);
+using WNetEnumResourcePtr = DWORD (WINAPI*)(HANDLE, LPDWORD, LPVOID, LPDWORD);
+using WNetCloseEnumPtr = DWORD (WINAPI*)(HANDLE);
 
 static WNetOpenEnumPtr s_pWNetOpenEnum;
 static WNetEnumResourcePtr s_pWNetEnumResource;

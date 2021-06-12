@@ -201,8 +201,10 @@ public:
         {
         }
 
-    wxDataObjectSimple(const wxDataObjectSimple&) = delete;
-	wxDataObjectSimple& operator=(const wxDataObjectSimple&) = delete;
+   wxDataObjectSimple(const wxDataObjectSimple&) = delete;
+   wxDataObjectSimple& operator=(const wxDataObjectSimple&) = delete;
+   wxDataObjectSimple(wxDataObjectSimple&&) = default;
+   wxDataObjectSimple& operator=(wxDataObjectSimple&&) = default;
 
     // get/set the format we support
     const wxDataFormat& GetFormat() const { return m_format; }
@@ -265,8 +267,10 @@ public:
     wxDataObjectComposite();
     ~wxDataObjectComposite() override;
 
-    wxDataObjectComposite(const wxDataObjectComposite&) = delete;
-	wxDataObjectComposite& operator=(const wxDataObjectComposite&) = delete;
+   wxDataObjectComposite(const wxDataObjectComposite&) = delete;
+   wxDataObjectComposite& operator=(const wxDataObjectComposite&) = delete;
+   wxDataObjectComposite(wxDataObjectComposite&&) = default;
+   wxDataObjectComposite& operator=(wxDataObjectComposite&&) = default;
 
     // add data object (it will be deleted by wxDataObjectComposite, hence it
     // must be allocated on the heap) whose format will become the preferred
@@ -380,8 +384,10 @@ public:
         {
         }
 
-    wxTextDataObject(const wxTextDataObject&) = delete;
-	wxTextDataObject& operator=(const wxTextDataObject&) = delete;
+   wxTextDataObject(const wxTextDataObject&) = delete;
+   wxTextDataObject& operator=(const wxTextDataObject&) = delete;
+   wxTextDataObject(wxTextDataObject&&) = default;
+   wxTextDataObject& operator=(wxTextDataObject&&) = default;
 
     // functions which you may override if you want to provide text on
     // demand only - otherwise, the trivial default versions will be used
@@ -447,8 +453,10 @@ public:
         {
         }
 
-    wxBitmapDataObjectBase(const wxBitmapDataObjectBase&) = delete;
-	wxBitmapDataObjectBase& operator=(const wxBitmapDataObjectBase&) = delete;
+   wxBitmapDataObjectBase(const wxBitmapDataObjectBase&) = delete;
+   wxBitmapDataObjectBase& operator=(const wxBitmapDataObjectBase&) = delete;
+   wxBitmapDataObjectBase(wxBitmapDataObjectBase&&) = default;
+   wxBitmapDataObjectBase& operator=(wxBitmapDataObjectBase&&) = default;
 
     // functions which you may override if you want to provide data on
     // demand only - otherwise, the trivial default versions will be used
@@ -472,8 +480,10 @@ public:
     // ctor: use AddFile() later to fill the array
     wxFileDataObjectBase() : wxDataObjectSimple(wxDF_FILENAME) { }
 
-    wxFileDataObjectBase(const wxFileDataObjectBase&) = delete;
-	wxFileDataObjectBase& operator=(const wxFileDataObjectBase&) = delete;
+   wxFileDataObjectBase(const wxFileDataObjectBase&) = delete;
+   wxFileDataObjectBase& operator=(const wxFileDataObjectBase&) = delete;
+   wxFileDataObjectBase(wxFileDataObjectBase&&) = default;
+   wxFileDataObjectBase& operator=(wxFileDataObjectBase&&) = default;
 
     // get a reference to our array
     const std::vector<wxString>& GetFilenames() const { return m_filenames; }
@@ -498,8 +508,10 @@ public:
     // the dtor calls Free()
     ~wxCustomDataObject() override;
 
-    wxCustomDataObject(const wxCustomDataObject&) = delete;
-	wxCustomDataObject& operator=(const wxCustomDataObject&) = delete;
+   wxCustomDataObject(const wxCustomDataObject&) = delete;
+   wxCustomDataObject& operator=(const wxCustomDataObject&) = delete;
+   wxCustomDataObject(wxCustomDataObject&&) = default;
+   wxCustomDataObject& operator=(wxCustomDataObject&&) = default;
 
     // you can call SetData() to set m_data: it will make a copy of the data
     // you pass - or you can use TakeData() which won't copy anything, but
@@ -553,8 +565,10 @@ class WXDLLIMPEXP_CORE wxImageDataObject : public wxCustomDataObject
 public:
     explicit wxImageDataObject(const wxImage& image = wxNullImage);
 
-    wxImageDataObject(const wxImageDataObject&) = delete;
-	wxImageDataObject& operator=(const wxImageDataObject&) = delete;
+   wxImageDataObject(const wxImageDataObject&) = delete;
+   wxImageDataObject& operator=(const wxImageDataObject&) = delete;
+   wxImageDataObject(wxImageDataObject&&) = default;
+   wxImageDataObject& operator=(wxImageDataObject&&) = default;
 
     void SetImage(const wxImage& image);
     wxImage GetImage() const;

@@ -40,8 +40,10 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
-    wxCollapsibleHeaderCtrlBase(const wxCollapsibleHeaderCtrlBase&) = delete;
-	wxCollapsibleHeaderCtrlBase& operator=(const wxCollapsibleHeaderCtrlBase&) = delete;
+   wxCollapsibleHeaderCtrlBase(const wxCollapsibleHeaderCtrlBase&) = delete;
+   wxCollapsibleHeaderCtrlBase& operator=(const wxCollapsibleHeaderCtrlBase&) = delete;
+   wxCollapsibleHeaderCtrlBase(wxCollapsibleHeaderCtrlBase&&) = default;
+   wxCollapsibleHeaderCtrlBase& operator=(wxCollapsibleHeaderCtrlBase&&) = default;
 
     bool Create(wxWindow *parent,
         wxWindowID id,
@@ -95,8 +97,10 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
-    wxCollapsibleHeaderCtrl(const wxCollapsibleHeaderCtrl&) = delete;
-	wxCollapsibleHeaderCtrl& operator=(const wxCollapsibleHeaderCtrl&) = delete;
+   wxCollapsibleHeaderCtrl(const wxCollapsibleHeaderCtrl&) = delete;
+   wxCollapsibleHeaderCtrl& operator=(const wxCollapsibleHeaderCtrl&) = delete;
+   wxCollapsibleHeaderCtrl(wxCollapsibleHeaderCtrl&&) = default;
+   wxCollapsibleHeaderCtrl& operator=(wxCollapsibleHeaderCtrl&&) = default;
 };
 
 #endif // wxUSE_COLLPANE

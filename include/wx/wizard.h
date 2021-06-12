@@ -64,8 +64,10 @@ public:
     wxWizardPage(wxWizard *parent,
                  const wxBitmap& bitmap = wxNullBitmap);
 
-	wxWizardPage(const wxWizardPage&) = delete;
-	wxWizardPage& operator=(const wxWizardPage&) = delete;
+wxWizardPage(const wxWizardPage&) = delete;
+   wxWizardPage& operator=(const wxWizardPage&) = delete;
+   wxWizardPage(wxWizardPage&&) = default;
+   wxWizardPage& operator=(wxWizardPage&&) = default;
 
     bool Create(wxWizard *parent,
                 const wxBitmap& bitmap = wxNullBitmap);
@@ -139,8 +141,10 @@ public:
         Create(parent, prev, next, bitmap);
     }
 
-    wxWizardPageSimple(const wxWizardPageSimple&) = delete;
-	wxWizardPageSimple& operator=(const wxWizardPageSimple&) = delete;
+   wxWizardPageSimple(const wxWizardPageSimple&) = delete;
+   wxWizardPageSimple& operator=(const wxWizardPageSimple&) = delete;
+   wxWizardPageSimple(wxWizardPageSimple&&) = default;
+   wxWizardPageSimple& operator=(wxWizardPageSimple&&) = default;
 
     bool Create(wxWizard *parent = nullptr, // let it be default ctor too
                 wxWizardPage *prev = nullptr,
@@ -213,8 +217,10 @@ public:
     */
     wxWizardBase() = default;
 
-    wxWizardBase(const wxWizardBase&) = delete;
-	wxWizardBase& operator=(const wxWizardBase&) = delete;
+   wxWizardBase(const wxWizardBase&) = delete;
+   wxWizardBase& operator=(const wxWizardBase&) = delete;
+   wxWizardBase(wxWizardBase&&) = default;
+   wxWizardBase& operator=(wxWizardBase&&) = default;
 
     // executes the wizard starting from the given page, returns true if it was
     // successfully finished, false if user cancelled it

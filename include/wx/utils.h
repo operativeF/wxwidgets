@@ -680,8 +680,10 @@ public:
     // dtor enables back all windows disabled by the ctor
     ~wxWindowDisabler();
 
-    wxWindowDisabler(const wxWindowDisabler&) = delete;
-	wxWindowDisabler& operator=(const wxWindowDisabler&) = delete;
+   wxWindowDisabler(const wxWindowDisabler&) = delete;
+   wxWindowDisabler& operator=(const wxWindowDisabler&) = delete;
+   wxWindowDisabler(wxWindowDisabler&&) = default;
+   wxWindowDisabler& operator=(wxWindowDisabler&&) = default;
 
 private:
     // disable all windows except the given one (used by both ctors)

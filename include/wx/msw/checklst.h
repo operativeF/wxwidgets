@@ -39,8 +39,10 @@ public:
                    const wxValidator& validator = wxDefaultValidator,
                    const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
-	wxCheckListBox(const wxCheckListBox&) = delete;
-	wxCheckListBox& operator=(const wxCheckListBox&) = delete;
+wxCheckListBox(const wxCheckListBox&) = delete;
+   wxCheckListBox& operator=(const wxCheckListBox&) = delete;
+   wxCheckListBox(wxCheckListBox&&) = default;
+   wxCheckListBox& operator=(wxCheckListBox&&) = default;
 
     bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,

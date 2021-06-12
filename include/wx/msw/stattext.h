@@ -27,8 +27,10 @@ public:
         Create(parent, id, label, pos, size, style, name);
     }
 
-	wxStaticText(const wxStaticText&) = delete;
-	wxStaticText& operator=(const wxStaticText&) = delete;
+wxStaticText(const wxStaticText&) = delete;
+   wxStaticText& operator=(const wxStaticText&) = delete;
+   wxStaticText(wxStaticText&&) = default;
+   wxStaticText& operator=(wxStaticText&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,

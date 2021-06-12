@@ -106,8 +106,10 @@ public:
                     int width = 0, int height = 0,
                     const wxString& description = wxEmptyString);
 
-	wxEnhMetaFileDC(const wxEnhMetaFileDC&) = delete;
-	wxEnhMetaFileDC& operator=(const wxEnhMetaFileDC&) = delete;
+wxEnhMetaFileDC(const wxEnhMetaFileDC&) = delete;
+   wxEnhMetaFileDC& operator=(const wxEnhMetaFileDC&) = delete;
+   wxEnhMetaFileDC(wxEnhMetaFileDC&&) = default;
+   wxEnhMetaFileDC& operator=(wxEnhMetaFileDC&&) = default;
 
     // obtain a pointer to the new metafile (caller should delete it)
     wxEnhMetaFile *Close();

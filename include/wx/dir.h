@@ -100,8 +100,10 @@ public:
     // dtor calls Close() automatically
     ~wxDir() { Close(); }
 
-    wxDir(const wxDir&) = delete;
-	wxDir& operator=(const wxDir&) = delete;
+   wxDir(const wxDir&) = delete;
+   wxDir& operator=(const wxDir&) = delete;
+   wxDir(wxDir&&) = default;
+   wxDir& operator=(wxDir&&) = default;
 
     // open the directory for enumerating
     bool Open(const wxString& dir);

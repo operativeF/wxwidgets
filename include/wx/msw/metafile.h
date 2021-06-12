@@ -122,8 +122,10 @@ public:
         : wxDC(new wxMetafileDCImpl( this, file, xext, yext, xorg, yorg ))
         { }
 
-    wxMetafileDC(const wxMetafileDC&) = delete;
-	wxMetafileDC& operator=(const wxMetafileDC&) = delete;
+   wxMetafileDC(const wxMetafileDC&) = delete;
+   wxMetafileDC& operator=(const wxMetafileDC&) = delete;
+   wxMetafileDC(wxMetafileDC&&) = default;
+   wxMetafileDC& operator=(wxMetafileDC&&) = default;
 
     wxMetafile *GetMetafile() const
        { return ((wxMetafileDCImpl*)m_pimpl)->GetMetaFile(); }

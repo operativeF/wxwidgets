@@ -101,8 +101,10 @@ public:
     // provide virtual dtor in case it's used like this in the user code.
     virtual ~wxTreeListItemComparator() = default;
 
-    wxTreeListItemComparator(const wxTreeListItemComparator&) = delete;
-	wxTreeListItemComparator& operator=(const wxTreeListItemComparator&) = delete;
+   wxTreeListItemComparator(const wxTreeListItemComparator&) = delete;
+   wxTreeListItemComparator& operator=(const wxTreeListItemComparator&) = delete;
+   wxTreeListItemComparator(wxTreeListItemComparator&&) = default;
+   wxTreeListItemComparator& operator=(wxTreeListItemComparator&&) = default;
 };
 
 // ----------------------------------------------------------------------------
@@ -137,8 +139,10 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    wxTreeListCtrl(const wxTreeListCtrl&) = delete;
-	wxTreeListCtrl& operator=(const wxTreeListCtrl&) = delete;
+   wxTreeListCtrl(const wxTreeListCtrl&) = delete;
+   wxTreeListCtrl& operator=(const wxTreeListCtrl&) = delete;
+   wxTreeListCtrl(wxTreeListCtrl&&) = default;
+   wxTreeListCtrl& operator=(wxTreeListCtrl&&) = default;
 
     bool Create(wxWindow* parent,
                 wxWindowID id,

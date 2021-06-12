@@ -71,8 +71,10 @@ public:
         (void)Create(parent, winid, pos, size, style, name);
     }
 
-    wxBookCtrlBase(const wxBookCtrlBase&) = delete;
-	wxBookCtrlBase& operator=(const wxBookCtrlBase&) = delete;
+   wxBookCtrlBase(const wxBookCtrlBase&) = delete;
+   wxBookCtrlBase& operator=(const wxBookCtrlBase&) = delete;
+   wxBookCtrlBase(wxBookCtrlBase&&) = default;
+   wxBookCtrlBase& operator=(wxBookCtrlBase&&) = default;
 
     // quasi ctor
     bool Create(wxWindow *parent,

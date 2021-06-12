@@ -64,8 +64,10 @@ public:
 
     ~wxTCPConnection() override;
 
-    wxTCPConnection(const wxTCPConnection&) = delete;
-	wxTCPConnection& operator=(const wxTCPConnection&) = delete;
+   wxTCPConnection(const wxTCPConnection&) = delete;
+   wxTCPConnection& operator=(const wxTCPConnection&) = delete;
+   wxTCPConnection(wxTCPConnection&&) = default;
+   wxTCPConnection& operator=(wxTCPConnection&&) = default;
 
     // implement base class pure virtual methods
     const void *Request(const wxString& item,
@@ -116,8 +118,10 @@ public:
     wxTCPServer() = default;
     ~wxTCPServer() override;
 
-    wxTCPServer(const wxTCPServer&) = delete;
-	wxTCPServer& operator=(const wxTCPServer&) = delete;
+   wxTCPServer(const wxTCPServer&) = delete;
+   wxTCPServer& operator=(const wxTCPServer&) = delete;
+   wxTCPServer(wxTCPServer&&) = default;
+   wxTCPServer& operator=(wxTCPServer&&) = default;
 
     // Returns false on error (e.g. port number is already in use)
     bool Create(const wxString& serverName) override;

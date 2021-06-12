@@ -42,8 +42,10 @@ public:
     // range has by default (0..100) values
     wxSpinButtonBase() = default;
 
-    wxSpinButtonBase(const wxSpinButtonBase&) = delete;
-	wxSpinButtonBase& operator=(const wxSpinButtonBase&) = delete;
+   wxSpinButtonBase(const wxSpinButtonBase&) = delete;
+   wxSpinButtonBase& operator=(const wxSpinButtonBase&) = delete;
+   wxSpinButtonBase(wxSpinButtonBase&&) = default;
+   wxSpinButtonBase& operator=(wxSpinButtonBase&&) = default;
 
     virtual int GetValue() const = 0;
     virtual int GetMin() const { return m_min; }

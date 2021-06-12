@@ -20,8 +20,10 @@ public:
     wxAnyButton() = default;
     ~wxAnyButton() override;
     
-    wxAnyButton(const wxAnyButton&) = delete;
-	wxAnyButton& operator=(const wxAnyButton&) = delete;
+   wxAnyButton(const wxAnyButton&) = delete;
+   wxAnyButton& operator=(const wxAnyButton&) = delete;
+   wxAnyButton(wxAnyButton&&) = default;
+   wxAnyButton& operator=(wxAnyButton&&) = default;
 
     void SetLabel(const wxString& label) override;
     bool SetBackgroundColour(const wxColour &colour) override;

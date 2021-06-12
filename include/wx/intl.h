@@ -170,8 +170,10 @@ public:
             Init(language, flags);
         }
 
-    wxLocale(const wxLocale&) = delete;
-	wxLocale& operator=(const wxLocale&) = delete;
+   wxLocale(const wxLocale&) = delete;
+   wxLocale& operator=(const wxLocale&) = delete;
+   wxLocale(wxLocale&&) = default;
+   wxLocale& operator=(wxLocale&&) = default;
 
         // the same as a function (returns true on success)
     bool Init(const wxString& name,

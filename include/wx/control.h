@@ -36,8 +36,10 @@ public:
 
     ~wxControlBase() override;
 
-    wxControlBase(const wxControlBase&) = delete;
-	wxControlBase& operator=(const wxControlBase&) = delete;
+   wxControlBase(const wxControlBase&) = delete;
+   wxControlBase& operator=(const wxControlBase&) = delete;
+   wxControlBase(wxControlBase&&) = default;
+   wxControlBase& operator=(wxControlBase&&) = default;
 
     // Create() function adds the validator parameter
     bool Create(wxWindow *parent, wxWindowID id,

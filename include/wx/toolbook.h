@@ -50,8 +50,10 @@ public:
         (void)Create(parent, id, pos, size, style, name);
     }
 
-	wxToolbook(const wxToolbook&) = delete;
-	wxToolbook& operator=(const wxToolbook&) = delete;
+wxToolbook(const wxToolbook&) = delete;
+   wxToolbook& operator=(const wxToolbook&) = delete;
+   wxToolbook(wxToolbook&&) = default;
+   wxToolbook& operator=(wxToolbook&&) = default;
 
     // quasi ctor
     bool Create(wxWindow *parent,

@@ -57,8 +57,10 @@ public:
     // trivial but virtual dtor
     virtual ~wxPersistenceManager();
 
-    wxPersistenceManager(const wxPersistenceManager&) = delete;
-	wxPersistenceManager& operator=(const wxPersistenceManager&) = delete;
+   wxPersistenceManager(const wxPersistenceManager&) = delete;
+   wxPersistenceManager& operator=(const wxPersistenceManager&) = delete;
+   wxPersistenceManager(wxPersistenceManager&&) = default;
+   wxPersistenceManager& operator=(wxPersistenceManager&&) = default;
 
     // globally disable restoring or saving the persistent properties (both are
     // enabled by default)
@@ -185,8 +187,10 @@ public:
     // trivial but virtual dtor
     virtual ~wxPersistentObject() = default;
 
-    wxPersistentObject(const wxPersistentObject&) = delete;
-	wxPersistentObject& operator=(const wxPersistentObject&) = delete;
+   wxPersistentObject(const wxPersistentObject&) = delete;
+   wxPersistentObject& operator=(const wxPersistentObject&) = delete;
+   wxPersistentObject(wxPersistentObject&&) = default;
+   wxPersistentObject& operator=(wxPersistentObject&&) = default;
 
     // methods used by wxPersistenceManager
     // ------------------------------------

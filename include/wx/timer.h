@@ -66,8 +66,10 @@ public:
 
     ~wxTimer() override;
 
-    wxTimer(const wxTimer&) = delete;
-	wxTimer& operator=(const wxTimer&) = delete;
+   wxTimer(const wxTimer&) = delete;
+   wxTimer& operator=(const wxTimer&) = delete;
+   wxTimer(wxTimer&&) = default;
+   wxTimer& operator=(wxTimer&&) = default;
 
     // working with the timer
     // ----------------------
@@ -142,8 +144,10 @@ public:
         }
     }
 
-    wxTimerRunner(const wxTimerRunner&) = delete;
-	wxTimerRunner& operator=(const wxTimerRunner&) = delete;
+   wxTimerRunner(const wxTimerRunner&) = delete;
+   wxTimerRunner& operator=(const wxTimerRunner&) = delete;
+   wxTimerRunner(wxTimerRunner&&) = default;
+   wxTimerRunner& operator=(wxTimerRunner&&) = default;
 
 private:
     wxTimer& m_timer;

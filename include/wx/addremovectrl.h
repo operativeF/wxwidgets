@@ -27,8 +27,10 @@ public:
     wxAddRemoveAdaptor() = default;
     virtual ~wxAddRemoveAdaptor() = default;
 
-    wxAddRemoveAdaptor(const wxAddRemoveAdaptor&) = delete;
-	wxAddRemoveAdaptor& operator=(const wxAddRemoveAdaptor&) = delete;
+   wxAddRemoveAdaptor(const wxAddRemoveAdaptor&) = delete;
+   wxAddRemoveAdaptor& operator=(const wxAddRemoveAdaptor&) = delete;
+   wxAddRemoveAdaptor(wxAddRemoveAdaptor&&) = default;
+   wxAddRemoveAdaptor& operator=(wxAddRemoveAdaptor&&) = default;
 
     // Override to return the associated control.
     virtual wxWindow* GetItemsCtrl() const = 0;
@@ -68,8 +70,10 @@ public:
         Create(parent, winid, pos, size, style, name);
     }
 
-    wxAddRemoveCtrl(const wxAddRemoveCtrl&) = delete;
-	wxAddRemoveCtrl& operator=(const wxAddRemoveCtrl&) = delete;
+   wxAddRemoveCtrl(const wxAddRemoveCtrl&) = delete;
+   wxAddRemoveCtrl& operator=(const wxAddRemoveCtrl&) = delete;
+   wxAddRemoveCtrl(wxAddRemoveCtrl&&) = default;
+   wxAddRemoveCtrl& operator=(wxAddRemoveCtrl&&) = default;
 
     bool Create(wxWindow* parent,
                 wxWindowID winid = wxID_ANY,

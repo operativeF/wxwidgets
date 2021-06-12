@@ -23,8 +23,10 @@ public:
 
     ~wxProgressDialog() override;
 
-	wxProgressDialog(const wxProgressDialog&) = delete;
-	wxProgressDialog& operator=(const wxProgressDialog&) = delete;
+wxProgressDialog(const wxProgressDialog&) = delete;
+   wxProgressDialog& operator=(const wxProgressDialog&) = delete;
+   wxProgressDialog(wxProgressDialog&&) = default;
+   wxProgressDialog& operator=(wxProgressDialog&&) = default;
 
     bool Update(int value, const wxString& newmsg = wxEmptyString, bool *skip = nullptr) override;
     bool Pulse(const wxString& newmsg = wxEmptyString, bool *skip = nullptr) override;

@@ -74,8 +74,10 @@ public:
 
     ~wxMenu() override;
 
-	wxMenu(const wxMenu&) = delete;
-	wxMenu& operator=(const wxMenu&) = delete;
+wxMenu(const wxMenu&) = delete;
+   wxMenu& operator=(const wxMenu&) = delete;
+   wxMenu(wxMenu&&) = default;
+   wxMenu& operator=(wxMenu&&) = default;
 
     void Break() override;
 
@@ -216,8 +218,10 @@ public:
     wxMenuBar(size_t n, wxMenu *menus[], const wxString titles[], long style = 0);
     ~wxMenuBar() override;
 
-	wxMenuBar(const wxMenuBar&) = delete;
-	wxMenuBar& operator=(const wxMenuBar&) = delete;
+wxMenuBar(const wxMenuBar&) = delete;
+   wxMenuBar& operator=(const wxMenuBar&) = delete;
+   wxMenuBar(wxMenuBar&&) = default;
+   wxMenuBar& operator=(wxMenuBar&&) = default;
 
     // menubar construction
     bool Append( wxMenu *menu, const wxString &title ) override;

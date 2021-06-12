@@ -59,8 +59,10 @@ public:
 
     ~wxGaugeBase() override;
 
-    wxGaugeBase(const wxGaugeBase&) = delete;
-	wxGaugeBase& operator=(const wxGaugeBase&) = delete;
+   wxGaugeBase(const wxGaugeBase&) = delete;
+   wxGaugeBase& operator=(const wxGaugeBase&) = delete;
+   wxGaugeBase(wxGaugeBase&&) = default;
+   wxGaugeBase& operator=(wxGaugeBase&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,

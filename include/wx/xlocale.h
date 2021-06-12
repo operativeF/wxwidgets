@@ -93,8 +93,10 @@ public:
     // doesn't give us any means to copy a _locale_t object so we reduce the
     // functionality to least common denominator here -- it shouldn't be a
     // problem as copying the locale objects shouldn't be often needed
-    wxXLocale(const wxXLocale&) = delete;
-	wxXLocale& operator=(const wxXLocale&) = delete;
+   wxXLocale(const wxXLocale&) = delete;
+   wxXLocale& operator=(const wxXLocale&) = delete;
+   wxXLocale(wxXLocale&&) = default;
+   wxXLocale& operator=(wxXLocale&&) = default;
 
     // Get the global "C" locale object
     static wxXLocale& GetCLocale();
@@ -152,8 +154,10 @@ public:
     // although it's not a problem to copy the objects of this class, we use
     // this macro in this implementation for consistency with the xlocale-based
     // one which can't be copied when using MSVC locale API
-    wxXLocale(const wxXLocale&) = delete;
-	wxXLocale& operator=(const wxXLocale&) = delete;
+   wxXLocale(const wxXLocale&) = delete;
+   wxXLocale& operator=(const wxXLocale&) = delete;
+   wxXLocale(wxXLocale&&) = default;
+   wxXLocale& operator=(wxXLocale&&) = default;
 
     // Default copy ctor, assignment operator and dtor are ok (or would be if
     // we didn't use (const &) = delete;

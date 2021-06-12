@@ -88,8 +88,10 @@ public:
 
     void OnContextHelp(wxCommandEvent& event);
 
-	wxContextHelpButton(const wxContextHelpButton&) = delete;
-	wxContextHelpButton& operator=(const wxContextHelpButton&) = delete;
+wxContextHelpButton(const wxContextHelpButton&) = delete;
+   wxContextHelpButton& operator=(const wxContextHelpButton&) = delete;
+   wxContextHelpButton(wxContextHelpButton&&) = default;
+   wxContextHelpButton& operator=(wxContextHelpButton&&) = default;
 
 	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;
@@ -237,8 +239,10 @@ public:
     // should be deleted separately.
     wxHelpControllerHelpProvider(wxHelpControllerBase* hc = nullptr);
 
-    wxHelpControllerHelpProvider(const wxHelpControllerHelpProvider&) = delete;
-	wxHelpControllerHelpProvider& operator=(const wxHelpControllerHelpProvider&) = delete;
+   wxHelpControllerHelpProvider(const wxHelpControllerHelpProvider&) = delete;
+   wxHelpControllerHelpProvider& operator=(const wxHelpControllerHelpProvider&) = delete;
+   wxHelpControllerHelpProvider(wxHelpControllerHelpProvider&&) = default;
+   wxHelpControllerHelpProvider& operator=(wxHelpControllerHelpProvider&&) = default;
     
     // implement wxHelpProvider methods
 

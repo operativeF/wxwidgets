@@ -187,8 +187,10 @@ public:
         Create(parent, id, title, pos, size, style, name);
     }
 
-	wxMDIChildFrame(const wxMDIChildFrame&) = delete;
-	wxMDIChildFrame& operator=(const wxMDIChildFrame&) = delete;
+wxMDIChildFrame(const wxMDIChildFrame&) = delete;
+   wxMDIChildFrame& operator=(const wxMDIChildFrame&) = delete;
+   wxMDIChildFrame(wxMDIChildFrame&&) = default;
+   wxMDIChildFrame& operator=(wxMDIChildFrame&&) = default;
 
     bool Create(wxMDIParentFrame *parent,
                 wxWindowID id,
@@ -258,8 +260,10 @@ class WXDLLIMPEXP_CORE wxMDIClientWindow : public wxMDIClientWindowBase
 public:
     wxMDIClientWindow() = default;
 
-	wxMDIClientWindow(const wxMDIClientWindow&) = delete;
-	wxMDIClientWindow& operator=(const wxMDIClientWindow&) = delete;
+wxMDIClientWindow(const wxMDIClientWindow&) = delete;
+   wxMDIClientWindow& operator=(const wxMDIClientWindow&) = delete;
+   wxMDIClientWindow(wxMDIClientWindow&&) = default;
+   wxMDIClientWindow& operator=(wxMDIClientWindow&&) = default;
 
     // Note: this is virtual, to allow overridden behaviour.
     bool CreateClient(wxMDIParentFrame *parent,

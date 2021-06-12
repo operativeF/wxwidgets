@@ -37,8 +37,10 @@ public:
     wxPopupWindowBase() = default;
     ~wxPopupWindowBase() override;
 
-    wxPopupWindowBase(const wxPopupWindowBase&) = delete;
-	wxPopupWindowBase& operator=(const wxPopupWindowBase&) = delete;
+   wxPopupWindowBase(const wxPopupWindowBase&) = delete;
+   wxPopupWindowBase& operator=(const wxPopupWindowBase&) = delete;
+   wxPopupWindowBase(wxPopupWindowBase&&) = default;
+   wxPopupWindowBase& operator=(wxPopupWindowBase&&) = default;
 
     // create the popup window
     //
@@ -134,8 +136,10 @@ public:
     wxPopupTransientWindow(wxWindow *parent, int style = wxBORDER_NONE)
         { Create(parent, style); }
 
-    wxPopupTransientWindow(const wxPopupTransientWindow&) = delete;
-	wxPopupTransientWindow& operator=(const wxPopupTransientWindow&) = delete;
+   wxPopupTransientWindow(const wxPopupTransientWindow&) = delete;
+   wxPopupTransientWindow& operator=(const wxPopupTransientWindow&) = delete;
+   wxPopupTransientWindow(wxPopupTransientWindow&&) = default;
+   wxPopupTransientWindow& operator=(wxPopupTransientWindow&&) = default;
 
     void Popup(wxWindow *focus = nullptr) override;
     void Dismiss() override;
@@ -168,8 +172,10 @@ public:
 
     virtual ~wxPopupTransientWindow();
 
-    wxPopupTransientWindow(const wxPopupTransientWindow&) = delete;
-	wxPopupTransientWindow& operator=(const wxPopupTransientWindow&) = delete;
+   wxPopupTransientWindow(const wxPopupTransientWindow&) = delete;
+   wxPopupTransientWindow& operator=(const wxPopupTransientWindow&) = delete;
+   wxPopupTransientWindow(wxPopupTransientWindow&&) = default;
+   wxPopupTransientWindow& operator=(wxPopupTransientWindow&&) = default;
 
     void Popup(wxWindow *focus = NULL) override;
     void Dismiss() override;

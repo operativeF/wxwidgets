@@ -37,8 +37,10 @@ public:
 
     ~wxNotificationMessageBase() override;
 
-    wxNotificationMessageBase(const wxNotificationMessageBase&) = delete;
-	wxNotificationMessageBase& operator=(const wxNotificationMessageBase&) = delete;
+   wxNotificationMessageBase(const wxNotificationMessageBase&) = delete;
+   wxNotificationMessageBase& operator=(const wxNotificationMessageBase&) = delete;
+   wxNotificationMessageBase(wxNotificationMessageBase&&) = default;
+   wxNotificationMessageBase& operator=(wxNotificationMessageBase&&) = default;
 
     // note that the setters must be called before Show()
 
@@ -145,8 +147,10 @@ public:
         Create(title, message, parent, flags);
     }
 
-    wxNotificationMessage(const wxNotificationMessage&) = delete;
-	wxNotificationMessage& operator=(const wxNotificationMessage&) = delete;
+   wxNotificationMessage(const wxNotificationMessage&) = delete;
+   wxNotificationMessage& operator=(const wxNotificationMessage&) = delete;
+   wxNotificationMessage(wxNotificationMessage&&) = default;
+   wxNotificationMessage& operator=(wxNotificationMessage&&) = default;
 
 #if defined(__WXMSW__) && defined(wxHAS_NATIVE_NOTIFICATION_MESSAGE)
     static bool MSWUseToasts(

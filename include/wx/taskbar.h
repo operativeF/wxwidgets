@@ -43,8 +43,10 @@ class WXDLLIMPEXP_CORE wxTaskBarIconBase : public wxEvtHandler
 public:
     wxTaskBarIconBase() = default;
 
-    wxTaskBarIconBase(const wxTaskBarIconBase&) = delete;
-	wxTaskBarIconBase& operator=(const wxTaskBarIconBase&) = delete;
+   wxTaskBarIconBase(const wxTaskBarIconBase&) = delete;
+   wxTaskBarIconBase& operator=(const wxTaskBarIconBase&) = delete;
+   wxTaskBarIconBase(wxTaskBarIconBase&&) = default;
+   wxTaskBarIconBase& operator=(wxTaskBarIconBase&&) = default;
 
 #if defined(__WXGTK__) || defined(__WXX11__) || defined(__WXMOTIF__) || defined(__WXQT__)
     static bool IsAvailable();

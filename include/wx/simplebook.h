@@ -63,8 +63,10 @@ public:
     
     }
 
-    wxSimplebook(const wxSimplebook&) = delete;
-	wxSimplebook& operator=(const wxSimplebook&) = delete;
+   wxSimplebook(const wxSimplebook&) = delete;
+   wxSimplebook& operator=(const wxSimplebook&) = delete;
+   wxSimplebook(wxSimplebook&&) = default;
+   wxSimplebook& operator=(wxSimplebook&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID winid = wxID_ANY,

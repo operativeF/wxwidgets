@@ -93,8 +93,10 @@ public:
     wxMessageOutputStderr(FILE *fp = stderr,
                           const wxMBConv &conv = wxConvWhateverWorks);
 
-    wxMessageOutputStderr(const wxMessageOutputStderr&) = delete;
-	wxMessageOutputStderr& operator=(const wxMessageOutputStderr&) = delete;
+   wxMessageOutputStderr(const wxMessageOutputStderr&) = delete;
+   wxMessageOutputStderr& operator=(const wxMessageOutputStderr&) = delete;
+   wxMessageOutputStderr(wxMessageOutputStderr&&) = default;
+   wxMessageOutputStderr& operator=(wxMessageOutputStderr&&) = default;
 
     void Output(const wxString& str) override;
 

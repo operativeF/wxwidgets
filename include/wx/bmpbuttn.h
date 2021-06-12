@@ -36,8 +36,10 @@ class WXDLLIMPEXP_CORE wxBitmapButtonBase : public wxButton
 public:
     wxBitmapButtonBase() = default;
 
-    wxBitmapButtonBase(const wxBitmapButtonBase&) = delete;
-	wxBitmapButtonBase& operator=(const wxBitmapButtonBase&) = delete;
+   wxBitmapButtonBase(const wxBitmapButtonBase&) = delete;
+   wxBitmapButtonBase& operator=(const wxBitmapButtonBase&) = delete;
+   wxBitmapButtonBase(wxBitmapButtonBase&&) = default;
+   wxBitmapButtonBase& operator=(wxBitmapButtonBase&&) = default;
     
     bool Create(wxWindow *parent,
                 wxWindowID winid,

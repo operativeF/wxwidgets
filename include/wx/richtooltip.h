@@ -92,8 +92,10 @@ public:
     // Non-virtual dtor as this class is not supposed to be derived from.
     ~wxRichToolTip();
 
-    wxRichToolTip(const wxRichToolTip&) = delete;
-	wxRichToolTip& operator=(const wxRichToolTip&) = delete;
+   wxRichToolTip(const wxRichToolTip&) = delete;
+   wxRichToolTip& operator=(const wxRichToolTip&) = delete;
+   wxRichToolTip(wxRichToolTip&&) = default;
+   wxRichToolTip& operator=(wxRichToolTip&&) = default;
 
 private:
     wxRichToolTipImpl* const m_impl;

@@ -24,8 +24,10 @@ public:
     wxFontDialog(wxWindow *parent, const wxFontData& data)
         : wxFontDialogBase(parent, data) { Create(parent, data); }
 
-	wxFontDialog(const wxFontDialog&) = delete;
-	wxFontDialog& operator=(const wxFontDialog&) = delete;
+wxFontDialog(const wxFontDialog&) = delete;
+   wxFontDialog& operator=(const wxFontDialog&) = delete;
+   wxFontDialog(wxFontDialog&&) = default;
+   wxFontDialog& operator=(wxFontDialog&&) = default;
 
     int ShowModal() override;
     void SetTitle(const wxString& title) override;

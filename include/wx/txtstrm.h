@@ -38,8 +38,10 @@ public:
 
     ~wxTextInputStream();
 
-    wxTextInputStream(const wxTextInputStream&) = delete;
-	wxTextInputStream& operator=(const wxTextInputStream&) = delete;
+   wxTextInputStream(const wxTextInputStream&) = delete;
+   wxTextInputStream& operator=(const wxTextInputStream&) = delete;
+   wxTextInputStream(wxTextInputStream&&) = default;
+   wxTextInputStream& operator=(wxTextInputStream&&) = default;
 
     const wxInputStream& GetInputStream() const { return m_input; }
 
@@ -130,8 +132,10 @@ public:
 
     virtual ~wxTextOutputStream();
 
-    wxTextOutputStream(const wxTextOutputStream&) = delete;
-	wxTextOutputStream& operator=(const wxTextOutputStream&) = delete;
+   wxTextOutputStream(const wxTextOutputStream&) = delete;
+   wxTextOutputStream& operator=(const wxTextOutputStream&) = delete;
+   wxTextOutputStream(wxTextOutputStream&&) = default;
+   wxTextOutputStream& operator=(wxTextOutputStream&&) = default;
 
     const wxOutputStream& GetOutputStream() const { return m_output; }
 

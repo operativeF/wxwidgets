@@ -44,8 +44,10 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-    wxToolBar(const wxToolBar&) = delete;
-	wxToolBar& operator=(const wxToolBar&) = delete;
+   wxToolBar(const wxToolBar&) = delete;
+   wxToolBar& operator=(const wxToolBar&) = delete;
+   wxToolBar(wxToolBar&&) = default;
+   wxToolBar& operator=(wxToolBar&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,

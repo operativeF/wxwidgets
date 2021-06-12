@@ -33,8 +33,10 @@ class WXDLLIMPEXP_CORE wxToggleButtonBase : public wxAnyButton
 public:
     wxToggleButtonBase() = default;
 
-    wxToggleButtonBase(const wxToggleButtonBase&) = delete;
-	wxToggleButtonBase& operator=(const wxToggleButtonBase&) = delete;
+   wxToggleButtonBase(const wxToggleButtonBase&) = delete;
+   wxToggleButtonBase& operator=(const wxToggleButtonBase&) = delete;
+   wxToggleButtonBase(wxToggleButtonBase&&) = default;
+   wxToggleButtonBase& operator=(wxToggleButtonBase&&) = default;
 
     // Get/set the value
     virtual void SetValue(bool state) = 0;

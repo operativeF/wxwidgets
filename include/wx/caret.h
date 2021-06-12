@@ -52,8 +52,10 @@ public:
         (void)Create(window, size);
     }
 
-    wxCaretBase(const wxCaretBase&) = delete;
-	wxCaretBase& operator=(const wxCaretBase&) = delete;
+   wxCaretBase(const wxCaretBase&) = delete;
+   wxCaretBase& operator=(const wxCaretBase&) = delete;
+   wxCaretBase(wxCaretBase&&) = default;
+   wxCaretBase& operator=(wxCaretBase&&) = default;
 
     // a virtual dtor has been provided since this class has virtual members
     virtual ~wxCaretBase() = default;
@@ -189,8 +191,10 @@ class WXDLLIMPEXP_CORE wxCaretSuspend
 public:
     wxCaretSuspend(wxWindow *WXUNUSED(win)) {}
 
-    wxCaretSuspend(const wxCaretSuspend&) = delete;
-	wxCaretSuspend& operator=(const wxCaretSuspend&) = delete;
+   wxCaretSuspend(const wxCaretSuspend&) = delete;
+   wxCaretSuspend& operator=(const wxCaretSuspend&) = delete;
+   wxCaretSuspend(wxCaretSuspend&&) = default;
+   wxCaretSuspend& operator=(wxCaretSuspend&&) = default;
 };
 
 #else // !wxHAS_CARET_USING_OVERLAYS
@@ -215,8 +219,10 @@ public:
             m_caret->Show();
     }
 
-    wxCaretSuspend(const wxCaretSuspend&) = delete;
-	wxCaretSuspend& operator=(const wxCaretSuspend&) = delete;
+   wxCaretSuspend(const wxCaretSuspend&) = delete;
+   wxCaretSuspend& operator=(const wxCaretSuspend&) = delete;
+   wxCaretSuspend(wxCaretSuspend&&) = default;
+   wxCaretSuspend& operator=(wxCaretSuspend&&) = default;
 
 private:
     wxCaret *m_caret;

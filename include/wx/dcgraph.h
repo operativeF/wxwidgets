@@ -36,8 +36,10 @@ public:
     wxGCDC();
     ~wxGCDC() override = default;
 
-    wxGCDC(const wxGCDC&) = delete;
-	wxGCDC& operator=(const wxGCDC&) = delete;
+   wxGCDC(const wxGCDC&) = delete;
+   wxGCDC& operator=(const wxGCDC&) = delete;
+   wxGCDC(wxGCDC&&) = default;
+   wxGCDC& operator=(wxGCDC&&) = default;
 
 #ifdef __WXMSW__
     // override wxDC virtual functions to provide access to HDC associated with
@@ -70,8 +72,10 @@ public:
 
     ~wxGCDCImpl() override;
 
-    wxGCDCImpl(const wxGCDCImpl&) = delete;
-	wxGCDCImpl& operator=(const wxGCDCImpl&) = delete;
+   wxGCDCImpl(const wxGCDCImpl&) = delete;
+   wxGCDCImpl& operator=(const wxGCDCImpl&) = delete;
+   wxGCDCImpl(wxGCDCImpl&&) = default;
+   wxGCDCImpl& operator=(wxGCDCImpl&&) = default;
     
     void Clear() override;
 

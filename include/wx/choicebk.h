@@ -51,8 +51,10 @@ public:
         (void)Create(parent, id, pos, size, style, name);
     }
 
-    wxChoicebook(const wxChoicebook&) = delete;
-	wxChoicebook& operator=(const wxChoicebook&) = delete;
+   wxChoicebook(const wxChoicebook&) = delete;
+   wxChoicebook& operator=(const wxChoicebook&) = delete;
+   wxChoicebook(wxChoicebook&&) = default;
+   wxChoicebook& operator=(wxChoicebook&&) = default;
 
     // quasi ctor
     bool Create(wxWindow *parent,

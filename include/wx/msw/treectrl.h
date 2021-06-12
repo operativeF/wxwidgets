@@ -108,8 +108,10 @@ public:
 
     ~wxTreeCtrl() override;
 
-    wxTreeCtrl(const wxTreeCtrl&) = delete;
-	wxTreeCtrl& operator=(const wxTreeCtrl&) = delete;
+   wxTreeCtrl(const wxTreeCtrl&) = delete;
+   wxTreeCtrl& operator=(const wxTreeCtrl&) = delete;
+   wxTreeCtrl(wxTreeCtrl&&) = default;
+   wxTreeCtrl& operator=(wxTreeCtrl&&) = default;
     
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,

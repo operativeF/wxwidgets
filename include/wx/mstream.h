@@ -71,8 +71,10 @@ public:
     wxMemoryOutputStream(void *data = nullptr, size_t length = 0);
     ~wxMemoryOutputStream() override;
 
-    wxMemoryOutputStream(const wxMemoryOutputStream&) = delete;
-	wxMemoryOutputStream& operator=(const wxMemoryOutputStream&) = delete;
+   wxMemoryOutputStream(const wxMemoryOutputStream&) = delete;
+   wxMemoryOutputStream& operator=(const wxMemoryOutputStream&) = delete;
+   wxMemoryOutputStream(wxMemoryOutputStream&&) = default;
+   wxMemoryOutputStream& operator=(wxMemoryOutputStream&&) = default;
 
     wxFileOffset GetLength() const override { return m_o_streambuf->GetLastAccess(); }
     bool IsSeekable() const override { return true; }

@@ -22,8 +22,10 @@ public:
     wxSocketOutputStream(wxSocketBase& s);
     ~wxSocketOutputStream() override;
 
-    wxSocketOutputStream(const wxSocketOutputStream&) = delete;
-	wxSocketOutputStream& operator=(const wxSocketOutputStream&) = delete;
+   wxSocketOutputStream(const wxSocketOutputStream&) = delete;
+   wxSocketOutputStream& operator=(const wxSocketOutputStream&) = delete;
+   wxSocketOutputStream(wxSocketOutputStream&&) = default;
+   wxSocketOutputStream& operator=(wxSocketOutputStream&&) = default;
 
 protected:
     wxSocketBase *m_o_socket;
@@ -43,8 +45,10 @@ public:
     wxSocketInputStream(wxSocketBase& s);
     ~wxSocketInputStream() override;
 
-    wxSocketInputStream(const wxSocketInputStream&) = delete;
-	wxSocketInputStream& operator=(const wxSocketInputStream&) = delete;
+   wxSocketInputStream(const wxSocketInputStream&) = delete;
+   wxSocketInputStream& operator=(const wxSocketInputStream&) = delete;
+   wxSocketInputStream(wxSocketInputStream&&) = default;
+   wxSocketInputStream& operator=(wxSocketInputStream&&) = default;
 
 protected:
     wxSocketBase *m_i_socket;
@@ -66,8 +70,10 @@ public:
     wxSocketStream(wxSocketBase& s);
     ~wxSocketStream() override = default;
 
-    wxSocketStream(const wxSocketStream&) = delete;
-	wxSocketStream& operator=(const wxSocketStream&) = delete;
+   wxSocketStream(const wxSocketStream&) = delete;
+   wxSocketStream& operator=(const wxSocketStream&) = delete;
+   wxSocketStream(wxSocketStream&&) = default;
+   wxSocketStream& operator=(wxSocketStream&&) = default;
 };
 
 #endif

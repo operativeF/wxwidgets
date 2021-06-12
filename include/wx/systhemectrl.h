@@ -28,8 +28,10 @@ public:
 #endif // wxHAS_SYSTEM_THEMED_CONTROL
     }
 
-    wxSystemThemedControlBase(const wxSystemThemedControlBase&) = delete;
-	wxSystemThemedControlBase& operator=(const wxSystemThemedControlBase&) = delete;
+   wxSystemThemedControlBase(const wxSystemThemedControlBase&) = delete;
+   wxSystemThemedControlBase& operator=(const wxSystemThemedControlBase&) = delete;
+   wxSystemThemedControlBase(wxSystemThemedControlBase&&) = default;
+   wxSystemThemedControlBase& operator=(wxSystemThemedControlBase&&) = default;
 
     bool IsSystemThemeDisabled() const
     {

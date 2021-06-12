@@ -32,8 +32,10 @@ public:
         m_mirror = mirror;
     }
 
-    wxMirrorDCImpl(const wxMirrorDCImpl&) = delete;
-	wxMirrorDCImpl& operator=(const wxMirrorDCImpl&) = delete;
+   wxMirrorDCImpl(const wxMirrorDCImpl&) = delete;
+   wxMirrorDCImpl& operator=(const wxMirrorDCImpl&) = delete;
+   wxMirrorDCImpl(wxMirrorDCImpl&&) = default;
+   wxMirrorDCImpl& operator=(wxMirrorDCImpl&&) = default;
 
     // wxDCBase operations
     void Clear() override { m_dc.Clear(); }
@@ -284,8 +286,10 @@ public:
         m_mirror = mirror;
     }
 
-    wxMirrorDC(const wxMirrorDC&) = delete;
-	wxMirrorDC& operator=(const wxMirrorDC&) = delete;
+   wxMirrorDC(const wxMirrorDC&) = delete;
+   wxMirrorDC& operator=(const wxMirrorDC&) = delete;
+   wxMirrorDC(wxMirrorDC&&) = default;
+   wxMirrorDC& operator=(wxMirrorDC&&) = default;
 
     // helper functions which may be useful for the users of this class
     wxSize Reflect(const wxSize& sizeOrig)

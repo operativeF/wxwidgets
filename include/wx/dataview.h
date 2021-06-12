@@ -544,8 +544,10 @@ public:
     wxDataViewCtrlBase() = default;
     ~wxDataViewCtrlBase() override;
 
-	wxDataViewCtrlBase(const wxDataViewCtrlBase&) = delete;
-	wxDataViewCtrlBase& operator=(const wxDataViewCtrlBase&) = delete;
+wxDataViewCtrlBase(const wxDataViewCtrlBase&) = delete;
+   wxDataViewCtrlBase& operator=(const wxDataViewCtrlBase&) = delete;
+   wxDataViewCtrlBase(wxDataViewCtrlBase&&) = default;
+   wxDataViewCtrlBase& operator=(wxDataViewCtrlBase&&) = default;
 
     // model
     // -----

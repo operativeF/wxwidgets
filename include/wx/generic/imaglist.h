@@ -26,8 +26,10 @@ public:
     wxGenericImageList( int width, int height, bool mask = true, int initialCount = 1 );
     virtual ~wxGenericImageList();
 
-    wxGenericImageList(const wxGenericImageList&) = delete;
-	wxGenericImageList& operator=(const wxGenericImageList&) = delete;
+   wxGenericImageList(const wxGenericImageList&) = delete;
+   wxGenericImageList& operator=(const wxGenericImageList&) = delete;
+   wxGenericImageList(wxGenericImageList&&) = default;
+   wxGenericImageList& operator=(wxGenericImageList&&) = default;
 
     bool Create( int width, int height, bool mask = true, int initialCount = 1 );
 

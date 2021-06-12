@@ -377,6 +377,7 @@ BENCHMARK_FUNC(MSWCompareString)
 {
     const wxString& s = GetTestAsciiString();
 
+    // FIXME: Use CompareStringEx
     return ::CompareString
              (
                 LOCALE_USER_DEFAULT,
@@ -390,6 +391,7 @@ BENCHMARK_FUNC(MSWCompareStringIgnoreCase)
 {
     const wxString& s = GetTestAsciiString();
 
+    // FIXME: Use CompareStringEx
     return ::CompareString
              (
                 LOCALE_USER_DEFAULT,

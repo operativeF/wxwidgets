@@ -104,8 +104,10 @@ public:
     wxPaintDCEx(wxWindow *canvas, WXHDC dc);
 
     wxDECLARE_CLASS(wxPaintDCEx);
-    wxPaintDCEx(const wxPaintDCEx&) = delete;
-	wxPaintDCEx& operator=(const wxPaintDCEx&) = delete;
+   wxPaintDCEx(const wxPaintDCEx&) = delete;
+   wxPaintDCEx& operator=(const wxPaintDCEx&) = delete;
+   wxPaintDCEx(wxPaintDCEx&&) = default;
+   wxPaintDCEx& operator=(wxPaintDCEx&&) = default;
 };
 
 #endif

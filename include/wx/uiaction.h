@@ -24,8 +24,10 @@ public:
     wxUIActionSimulator();
     ~wxUIActionSimulator();
 
-    wxUIActionSimulator(const wxUIActionSimulator&) = delete;
-	wxUIActionSimulator& operator=(const wxUIActionSimulator&) = delete;
+   wxUIActionSimulator(const wxUIActionSimulator&) = delete;
+   wxUIActionSimulator& operator=(const wxUIActionSimulator&) = delete;
+   wxUIActionSimulator(wxUIActionSimulator&&) = default;
+   wxUIActionSimulator& operator=(wxUIActionSimulator&&) = default;
 
     // Mouse simulation
     // ----------------

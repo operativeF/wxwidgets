@@ -66,8 +66,10 @@ public:
 
     ~wxListBox() override;
 
-	wxListBox(const wxListBox&) = delete;
-	wxListBox& operator=(const wxListBox&) = delete;
+wxListBox(const wxListBox&) = delete;
+   wxListBox& operator=(const wxListBox&) = delete;
+   wxListBox(wxListBox&&) = default;
+   wxListBox& operator=(wxListBox&&) = default;
 
     unsigned int GetCount() const override;
     wxString GetString(unsigned int n) const override;

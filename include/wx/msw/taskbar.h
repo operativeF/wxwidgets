@@ -23,8 +23,10 @@ public:
     wxTaskBarIcon(wxTaskBarIconType iconType = wxTaskBarIconType::DefaultType);
     ~wxTaskBarIcon() override;
 
-	wxTaskBarIcon(const wxTaskBarIcon&) = delete;
-	wxTaskBarIcon& operator=(const wxTaskBarIcon&) = delete;
+wxTaskBarIcon(const wxTaskBarIcon&) = delete;
+   wxTaskBarIcon& operator=(const wxTaskBarIcon&) = delete;
+   wxTaskBarIcon(wxTaskBarIcon&&) = default;
+   wxTaskBarIcon& operator=(wxTaskBarIcon&&) = default;
 
     // Accessors
     bool IsOk() const { return true; }

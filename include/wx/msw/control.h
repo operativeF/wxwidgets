@@ -28,8 +28,10 @@ public:
         Create(parent, id, pos, size, style, validator, name);
     }
 
-	wxControl(const wxControl&) = delete;
-	wxControl& operator=(const wxControl&) = delete;
+wxControl(const wxControl&) = delete;
+   wxControl& operator=(const wxControl&) = delete;
+   wxControl(wxControl&&) = default;
+   wxControl& operator=(wxControl&&) = default;
 
     bool Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,

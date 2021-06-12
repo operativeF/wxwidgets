@@ -27,8 +27,10 @@ class WXDLLIMPEXP_BASE wxArchiveFSHandler : public wxFileSystemHandler
 public:
     wxArchiveFSHandler() = default;
 
-    wxArchiveFSHandler(const wxArchiveFSHandler&) = delete;
-	wxArchiveFSHandler& operator=(const wxArchiveFSHandler&) = delete;
+   wxArchiveFSHandler(const wxArchiveFSHandler&) = delete;
+   wxArchiveFSHandler& operator=(const wxArchiveFSHandler&) = delete;
+   wxArchiveFSHandler(wxArchiveFSHandler&&) = default;
+   wxArchiveFSHandler& operator=(wxArchiveFSHandler&&) = default;
 
     bool CanOpen(const wxString& location) override;
     wxFSFile* OpenFile(wxFileSystem& fs, const wxString& location) override;

@@ -24,8 +24,10 @@ class WXDLLIMPEXP_CORE wxWindowsPrinter : public wxPrinterBase
 public:
     wxWindowsPrinter(wxPrintDialogData *data = nullptr);
 
-    wxWindowsPrinter(const wxWindowsPrinter&) = delete;
-	wxWindowsPrinter& operator=(const wxWindowsPrinter&) = delete;
+   wxWindowsPrinter(const wxWindowsPrinter&) = delete;
+   wxWindowsPrinter& operator=(const wxWindowsPrinter&) = delete;
+   wxWindowsPrinter(wxWindowsPrinter&&) = default;
+   wxWindowsPrinter& operator=(wxWindowsPrinter&&) = default;
 
     bool Print(wxWindow *parent,
                        wxPrintout *printout,
@@ -51,8 +53,10 @@ public:
                           wxPrintData *data);
     ~wxWindowsPrintPreview() override;
 
-	wxWindowsPrintPreview(const wxWindowsPrintPreview&) = delete;
-	wxWindowsPrintPreview& operator=(const wxWindowsPrintPreview&) = delete;
+wxWindowsPrintPreview(const wxWindowsPrintPreview&) = delete;
+   wxWindowsPrintPreview& operator=(const wxWindowsPrintPreview&) = delete;
+   wxWindowsPrintPreview(wxWindowsPrintPreview&&) = default;
+   wxWindowsPrintPreview& operator=(wxWindowsPrintPreview&&) = default;
 
     bool Print(bool interactive) override;
     void DetermineScaling() override;

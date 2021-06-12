@@ -36,8 +36,10 @@ public:
                       const wxSize &size = wxDefaultSize,
                       long style = wxDEFAULT_DIALOG_STYLE);
 
-    wxPrintDialogBase(const wxPrintDialogBase&) = delete;
-	wxPrintDialogBase& operator=(const wxPrintDialogBase&) = delete;
+   wxPrintDialogBase(const wxPrintDialogBase&) = delete;
+   wxPrintDialogBase& operator=(const wxPrintDialogBase&) = delete;
+   wxPrintDialogBase(wxPrintDialogBase&&) = default;
+   wxPrintDialogBase& operator=(wxPrintDialogBase&&) = default;
 
     virtual wxPrintDialogData& GetPrintDialogData() = 0;
     virtual wxPrintData& GetPrintData() = 0;
@@ -58,8 +60,10 @@ public:
     wxPrintDialog(wxWindow *parent, wxPrintData* data);
     ~wxPrintDialog() override;
 
-    wxPrintDialog(const wxPrintDialog&) = delete;
-	wxPrintDialog& operator=(const wxPrintDialog&) = delete;
+   wxPrintDialog(const wxPrintDialog&) = delete;
+   wxPrintDialog& operator=(const wxPrintDialog&) = delete;
+   wxPrintDialog(wxPrintDialog&&) = default;
+   wxPrintDialog& operator=(wxPrintDialog&&) = default;
 
     virtual int ShowModal();
 
@@ -89,8 +93,10 @@ public:
                       const wxSize &size = wxDefaultSize,
                       long style = wxDEFAULT_DIALOG_STYLE);
 
-    wxPageSetupDialogBase(const wxPageSetupDialogBase&) = delete;
-	wxPageSetupDialogBase& operator=(const wxPageSetupDialogBase&) = delete;
+   wxPageSetupDialogBase(const wxPageSetupDialogBase&) = delete;
+   wxPageSetupDialogBase& operator=(const wxPageSetupDialogBase&) = delete;
+   wxPageSetupDialogBase(wxPageSetupDialogBase&&) = default;
+   wxPageSetupDialogBase& operator=(wxPageSetupDialogBase&&) = default;
 
     virtual wxPageSetupDialogData& GetPageSetupDialogData() = 0;
 
@@ -108,8 +114,10 @@ public:
     wxPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data = nullptr);
     ~wxPageSetupDialog() override;
 
-    wxPageSetupDialog(const wxPageSetupDialog&) = delete;
-	wxPageSetupDialog& operator=(const wxPageSetupDialog&) = delete;
+   wxPageSetupDialog(const wxPageSetupDialog&) = delete;
+   wxPageSetupDialog& operator=(const wxPageSetupDialog&) = delete;
+   wxPageSetupDialog(wxPageSetupDialog&&) = default;
+   wxPageSetupDialog& operator=(wxPageSetupDialog&&) = default;
 
     int ShowModal();
     wxPageSetupDialogData& GetPageSetupDialogData();

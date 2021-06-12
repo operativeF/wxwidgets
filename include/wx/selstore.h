@@ -41,8 +41,10 @@ class WXDLLIMPEXP_CORE wxSelectionStore
 public:
     wxSelectionStore() : m_itemsSel(wxUIntCmp) {  m_count = 0; m_defaultState = false;  }
 
-    wxSelectionStore(const wxSelectionStore&) = delete;
-	wxSelectionStore& operator=(const wxSelectionStore&) = delete;
+   wxSelectionStore(const wxSelectionStore&) = delete;
+   wxSelectionStore& operator=(const wxSelectionStore&) = delete;
+   wxSelectionStore(wxSelectionStore&&) = default;
+   wxSelectionStore& operator=(wxSelectionStore&&) = default;
 
     // set the total number of items we handle
     void SetItemCount(unsigned count);

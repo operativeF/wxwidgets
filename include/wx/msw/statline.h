@@ -30,8 +30,10 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-	wxStaticLine(const wxStaticLine&) = delete;
-	wxStaticLine& operator=(const wxStaticLine&) = delete;
+wxStaticLine(const wxStaticLine&) = delete;
+   wxStaticLine& operator=(const wxStaticLine&) = delete;
+   wxStaticLine(wxStaticLine&&) = default;
+   wxStaticLine& operator=(wxStaticLine&&) = default;
 
     bool Create( wxWindow *parent,
                  wxWindowID id = wxID_ANY,

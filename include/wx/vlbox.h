@@ -47,8 +47,10 @@ public:
         (void)Create(parent, id, pos, size, style, name);
     }
 
-    wxVListBox(const wxVListBox&) = delete;
-	wxVListBox& operator=(const wxVListBox&) = delete;
+   wxVListBox(const wxVListBox&) = delete;
+   wxVListBox& operator=(const wxVListBox&) = delete;
+   wxVListBox(wxVListBox&&) = default;
+   wxVListBox& operator=(wxVListBox&&) = default;
 
     // really creates the control and sets the initial number of items in it
     // (which may be changed later with SetItemCount())

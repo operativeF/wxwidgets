@@ -125,8 +125,10 @@ public:
     wxSocketBase(wxSocketFlags flags, wxSocketType type);
     ~wxSocketBase() override;
 
-    wxSocketBase(const wxSocketBase&) = delete;
-	wxSocketBase& operator=(const wxSocketBase&) = delete;
+   wxSocketBase(const wxSocketBase&) = delete;
+   wxSocketBase& operator=(const wxSocketBase&) = delete;
+   wxSocketBase(wxSocketBase&&) = default;
+   wxSocketBase& operator=(wxSocketBase&&) = default;
 
     void Init();
     bool Destroy();
@@ -328,8 +330,10 @@ public:
     wxSocketServer(const wxSockAddress& addr,
                    wxSocketFlags flags = wxSOCKET_NONE);
 
-    wxSocketServer(const wxSocketServer&) = delete;
-	wxSocketServer& operator=(const wxSocketServer&) = delete;
+   wxSocketServer(const wxSocketServer&) = delete;
+   wxSocketServer& operator=(const wxSocketServer&) = delete;
+   wxSocketServer(wxSocketServer&&) = default;
+   wxSocketServer& operator=(wxSocketServer&&) = default;
 
     wxSocketBase* Accept(bool wait = true);
     bool AcceptWith(wxSocketBase& socket, bool wait = true);
@@ -349,8 +353,10 @@ class WXDLLIMPEXP_NET wxSocketClient : public wxSocketBase
 public:
     wxSocketClient(wxSocketFlags flags = wxSOCKET_NONE);
 
-    wxSocketClient(const wxSocketClient&) = delete;
-	wxSocketClient& operator=(const wxSocketClient&) = delete;
+   wxSocketClient(const wxSocketClient&) = delete;
+   wxSocketClient& operator=(const wxSocketClient&) = delete;
+   wxSocketClient(wxSocketClient&&) = default;
+   wxSocketClient& operator=(wxSocketClient&&) = default;
 
     virtual bool Connect(const wxSockAddress& addr, bool wait = true);
     bool Connect(const wxSockAddress& addr,
@@ -393,8 +399,10 @@ public:
     wxDatagramSocket(const wxSockAddress& addr,
                      wxSocketFlags flags = wxSOCKET_NONE);
 
-    wxDatagramSocket(const wxDatagramSocket&) = delete;
-	wxDatagramSocket& operator=(const wxDatagramSocket&) = delete;
+   wxDatagramSocket(const wxDatagramSocket&) = delete;
+   wxDatagramSocket& operator=(const wxDatagramSocket&) = delete;
+   wxDatagramSocket(wxDatagramSocket&&) = default;
+   wxDatagramSocket& operator=(wxDatagramSocket&&) = default;
 
     wxDatagramSocket& RecvFrom(wxSockAddress& addr,
                                void *buf,

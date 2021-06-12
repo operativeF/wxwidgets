@@ -183,8 +183,10 @@ public:
     wxWindowBase();
     ~wxWindowBase() override;
 
-    wxWindowBase(const wxWindowBase&) = delete;
-	wxWindowBase& operator=(const wxWindowBase&) = delete;
+   wxWindowBase(const wxWindowBase&) = delete;
+   wxWindowBase& operator=(const wxWindowBase&) = delete;
+   wxWindowBase(wxWindowBase&&) = default;
+   wxWindowBase& operator=(wxWindowBase&&) = default;
 
     // deleting the window
     // -------------------

@@ -40,8 +40,10 @@ public:
     wxTreeCtrlBase();
     ~wxTreeCtrlBase() override;
 
-    wxTreeCtrlBase(const wxTreeCtrlBase&) = delete;
-	wxTreeCtrlBase& operator=(const wxTreeCtrlBase&) = delete;
+   wxTreeCtrlBase(const wxTreeCtrlBase&) = delete;
+   wxTreeCtrlBase& operator=(const wxTreeCtrlBase&) = delete;
+   wxTreeCtrlBase(wxTreeCtrlBase&&) = default;
+   wxTreeCtrlBase& operator=(wxTreeCtrlBase&&) = default;
 
 
         // get the total number of items in the control

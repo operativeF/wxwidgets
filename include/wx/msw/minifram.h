@@ -18,8 +18,10 @@ class WXDLLIMPEXP_CORE wxMiniFrame : public wxFrame
 public:
   wxMiniFrame() = default;
 
-	wxMiniFrame(const wxMiniFrame&) = delete;
-	wxMiniFrame& operator=(const wxMiniFrame&) = delete;
+wxMiniFrame(const wxMiniFrame&) = delete;
+   wxMiniFrame& operator=(const wxMiniFrame&) = delete;
+   wxMiniFrame(wxMiniFrame&&) = default;
+   wxMiniFrame& operator=(wxMiniFrame&&) = default;
 
   bool Create(wxWindow *parent,
               wxWindowID id,

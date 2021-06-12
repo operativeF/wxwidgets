@@ -37,8 +37,10 @@ public:
   
   ~wxImageList() override;
 
-	wxImageList(const wxImageList&) = delete;
-	wxImageList& operator=(const wxImageList&) = delete;
+wxImageList(const wxImageList&) = delete;
+   wxImageList& operator=(const wxImageList&) = delete;
+   wxImageList(wxImageList&&) = default;
+   wxImageList& operator=(wxImageList&&) = default;
 
 
   // Attributes

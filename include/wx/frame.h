@@ -58,8 +58,10 @@ public:
     wxFrameBase() = default;
     ~wxFrameBase() override;
 
-    wxFrameBase(const wxFrameBase&) = delete;
-	wxFrameBase& operator=(const wxFrameBase&) = delete;
+   wxFrameBase(const wxFrameBase&) = delete;
+   wxFrameBase& operator=(const wxFrameBase&) = delete;
+   wxFrameBase(wxFrameBase&&) = default;
+   wxFrameBase& operator=(wxFrameBase&&) = default;
 
     wxFrame *New(wxWindow *parent,
                  wxWindowID winid,

@@ -122,6 +122,7 @@ wxString wxStandardPaths::DoGetDirectory(int csidl)
     wxString dir;
     HRESULT hr = E_FAIL;
 
+    // FIXME: Deprecated. Gets the path of a folder identified by a CSIDL value.
     hr = ::SHGetFolderPath
             (
             nullptr,               // parent window, not used
@@ -136,6 +137,7 @@ wxString wxStandardPaths::DoGetDirectory(int csidl)
     if ( hr == E_FAIL )
     {
         // directory doesn't exist, maybe we can get its default value?
+        // FIXME: Deprecated. Gets the path of a folder identified by a CSIDL value.
         hr = ::SHGetFolderPath
                 (
                 nullptr,

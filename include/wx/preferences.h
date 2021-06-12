@@ -62,8 +62,10 @@ public:
     // ownership of the returned window.
     virtual wxWindow *CreateWindow(wxWindow *parent) = 0;
 
-    wxPreferencesPage(const wxPreferencesPage&) = delete;
-	wxPreferencesPage& operator=(const wxPreferencesPage&) = delete;
+   wxPreferencesPage(const wxPreferencesPage&) = delete;
+   wxPreferencesPage& operator=(const wxPreferencesPage&) = delete;
+   wxPreferencesPage(wxPreferencesPage&&) = default;
+   wxPreferencesPage& operator=(wxPreferencesPage&&) = default;
 };
 
 
@@ -97,8 +99,10 @@ public:
     // Ctor creates an empty editor, use AddPage() to add controls to it.
     wxPreferencesEditor(const wxString& title = wxString());
 
-    wxPreferencesEditor(const wxPreferencesEditor&) = delete;
-	wxPreferencesEditor& operator=(const wxPreferencesEditor&) = delete;
+   wxPreferencesEditor(const wxPreferencesEditor&) = delete;
+   wxPreferencesEditor& operator=(const wxPreferencesEditor&) = delete;
+   wxPreferencesEditor(wxPreferencesEditor&&) = default;
+   wxPreferencesEditor& operator=(wxPreferencesEditor&&) = default;
     
     // Dtor destroys the dialog if still shown.
     virtual ~wxPreferencesEditor();

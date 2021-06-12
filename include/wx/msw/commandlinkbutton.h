@@ -33,8 +33,10 @@ public:
         Create(parent, id, mainLabel, note, pos, size, style, validator, name);
     }
 
-	wxCommandLinkButton(const wxCommandLinkButton&) = delete;
-	wxCommandLinkButton& operator=(const wxCommandLinkButton&) = delete;
+wxCommandLinkButton(const wxCommandLinkButton&) = delete;
+   wxCommandLinkButton& operator=(const wxCommandLinkButton&) = delete;
+   wxCommandLinkButton(wxCommandLinkButton&&) = default;
+   wxCommandLinkButton& operator=(wxCommandLinkButton&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,

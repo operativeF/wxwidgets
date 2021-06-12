@@ -22,8 +22,10 @@ public:
     wxNonOwnedWindow();
     ~wxNonOwnedWindow() override;
 
-    wxNonOwnedWindow(const wxNonOwnedWindow&) = delete;
-	wxNonOwnedWindow& operator=(const wxNonOwnedWindow&) = delete;
+   wxNonOwnedWindow(const wxNonOwnedWindow&) = delete;
+   wxNonOwnedWindow& operator=(const wxNonOwnedWindow&) = delete;
+   wxNonOwnedWindow(wxNonOwnedWindow&&) = default;
+   wxNonOwnedWindow& operator=(wxNonOwnedWindow&&) = default;
     
     bool Reparent(wxWindowBase* newParent) override;
     void InheritAttributes() override;

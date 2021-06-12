@@ -15,8 +15,10 @@ class WXDLLIMPEXP_CORE wxControlWithItems : public wxControlWithItemsBase
 public:
     wxControlWithItems() = default;
 
-    wxControlWithItems(const wxControlWithItems&) = delete;
-	wxControlWithItems& operator=(const wxControlWithItems&) = delete;
+   wxControlWithItems(const wxControlWithItems&) = delete;
+   wxControlWithItems& operator=(const wxControlWithItems&) = delete;
+   wxControlWithItems(wxControlWithItems&&) = default;
+   wxControlWithItems& operator=(wxControlWithItems&&) = default;
     
 protected:
     // preallocate memory for inserting the given new items into the control

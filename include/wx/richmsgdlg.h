@@ -32,8 +32,10 @@ public:
           m_footerIcon( 0 )
         { }
 
-    wxRichMessageDialogBase(const wxRichMessageDialogBase&) = delete;
-	wxRichMessageDialogBase& operator=(const wxRichMessageDialogBase&) = delete;
+   wxRichMessageDialogBase(const wxRichMessageDialogBase&) = delete;
+   wxRichMessageDialogBase& operator=(const wxRichMessageDialogBase&) = delete;
+   wxRichMessageDialogBase(wxRichMessageDialogBase&&) = default;
+   wxRichMessageDialogBase& operator=(wxRichMessageDialogBase&&) = default;
 
     void ShowCheckBox(const wxString& checkBoxText, bool checked = false)
     {

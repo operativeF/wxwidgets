@@ -44,8 +44,10 @@ public:
     wxMSWDCImpl(wxDC *owner, WXHDC hDC);
     ~wxMSWDCImpl() override;
 
-    wxMSWDCImpl(const wxMSWDCImpl&) = delete;
-	wxMSWDCImpl& operator=(const wxMSWDCImpl&) = delete;
+   wxMSWDCImpl(const wxMSWDCImpl&) = delete;
+   wxMSWDCImpl& operator=(const wxMSWDCImpl&) = delete;
+   wxMSWDCImpl(wxMSWDCImpl&&) = default;
+   wxMSWDCImpl& operator=(wxMSWDCImpl&&) = default;
 
     void Clear() override;
 

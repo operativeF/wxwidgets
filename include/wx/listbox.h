@@ -40,8 +40,10 @@ public:
     wxListBoxBase() = default;
     ~wxListBoxBase() override;
 
-    wxListBoxBase(const wxListBoxBase&) = delete;
-	wxListBoxBase& operator=(const wxListBoxBase&) = delete;
+   wxListBoxBase(const wxListBoxBase&) = delete;
+   wxListBoxBase& operator=(const wxListBoxBase&) = delete;
+   wxListBoxBase(wxListBoxBase&&) = default;
+   wxListBoxBase& operator=(wxListBoxBase&&) = default;
 
     void InsertItems(unsigned int nItems, const wxString *items, unsigned int pos)
         { Insert(nItems, items, pos); }

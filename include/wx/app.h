@@ -68,8 +68,10 @@ public:
     wxAppConsoleBase();
     ~wxAppConsoleBase() override;
 
-    wxAppConsoleBase(const wxAppConsoleBase&) = delete;
-	wxAppConsoleBase& operator=(const wxAppConsoleBase&) = delete;
+   wxAppConsoleBase(const wxAppConsoleBase&) = delete;
+   wxAppConsoleBase& operator=(const wxAppConsoleBase&) = delete;
+   wxAppConsoleBase(wxAppConsoleBase&&) = default;
+   wxAppConsoleBase& operator=(wxAppConsoleBase&&) = default;
 
     // the virtual functions which may/must be overridden in the derived class
     // -----------------------------------------------------------------------

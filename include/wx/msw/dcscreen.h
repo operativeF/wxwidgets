@@ -20,8 +20,10 @@ public:
     // Create a DC representing the whole virtual screen (all monitors)
     wxScreenDCImpl( wxScreenDC *owner );
 
-    wxScreenDCImpl(const wxScreenDCImpl&) = delete;
-	wxScreenDCImpl& operator=(const wxScreenDCImpl&) = delete;
+   wxScreenDCImpl(const wxScreenDCImpl&) = delete;
+   wxScreenDCImpl& operator=(const wxScreenDCImpl&) = delete;
+   wxScreenDCImpl(wxScreenDCImpl&&) = default;
+   wxScreenDCImpl& operator=(wxScreenDCImpl&&) = default;
 
     // Return the size of the whole virtual screen (all monitors)
     wxSize DoGetSize() const override;

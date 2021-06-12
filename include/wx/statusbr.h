@@ -113,8 +113,10 @@ public:
 
     ~wxStatusBarBase() override;
 
-    wxStatusBarBase(const wxStatusBarBase&) = delete;
-	wxStatusBarBase& operator=(const wxStatusBarBase&) = delete;
+   wxStatusBarBase(const wxStatusBarBase&) = delete;
+   wxStatusBarBase& operator=(const wxStatusBarBase&) = delete;
+   wxStatusBarBase(wxStatusBarBase&&) = default;
+   wxStatusBarBase& operator=(wxStatusBarBase&&) = default;
 
     // field count
     // -----------

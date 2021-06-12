@@ -31,8 +31,10 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
-	wxRadioButton(const wxRadioButton&) = delete;
-	wxRadioButton& operator=(const wxRadioButton&) = delete;
+wxRadioButton(const wxRadioButton&) = delete;
+   wxRadioButton& operator=(const wxRadioButton&) = delete;
+   wxRadioButton(wxRadioButton&&) = default;
+   wxRadioButton& operator=(wxRadioButton&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,

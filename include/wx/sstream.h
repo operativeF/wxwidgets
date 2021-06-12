@@ -26,8 +26,10 @@ public:
     // it
     wxStringInputStream(const wxString& s);
 
-    wxStringInputStream(const wxStringInputStream&) = delete;
-	wxStringInputStream& operator=(const wxStringInputStream&) = delete;
+   wxStringInputStream(const wxStringInputStream&) = delete;
+   wxStringInputStream& operator=(const wxStringInputStream&) = delete;
+   wxStringInputStream(wxStringInputStream&&) = default;
+   wxStringInputStream& operator=(wxStringInputStream&&) = default;
 
     wxFileOffset GetLength() const override;
     bool IsSeekable() const override { return true; }
@@ -66,8 +68,10 @@ public:
     explicit wxStringOutputStream(wxString *pString = nullptr,
                                   wxMBConv& conv = wxConvUTF8);
 
-    wxStringOutputStream(const wxStringOutputStream&) = delete;
-	wxStringOutputStream& operator=(const wxStringOutputStream&) = delete;
+   wxStringOutputStream(const wxStringOutputStream&) = delete;
+   wxStringOutputStream& operator=(const wxStringOutputStream&) = delete;
+   wxStringOutputStream(wxStringOutputStream&&) = default;
+   wxStringOutputStream& operator=(wxStringOutputStream&&) = default;
 
     // get the string containing current output
     const wxString& GetString() const { return *m_str; }

@@ -195,8 +195,10 @@ public:
 
     virtual ~wxClassInfo();
 
-    wxClassInfo(const wxClassInfo&) = delete;
-	wxClassInfo& operator=(const wxClassInfo&) = delete;
+   wxClassInfo(const wxClassInfo&) = delete;
+   wxClassInfo& operator=(const wxClassInfo&) = delete;
+   wxClassInfo(wxClassInfo&&) = default;
+   wxClassInfo& operator=(wxClassInfo&&) = default;
 
     // allocates an instance of this class, this object does not have to be
     // initialized or fully constructed as this call will be followed by a call to Create

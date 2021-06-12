@@ -21,8 +21,10 @@
 class WXDLLIMPEXP_BASE wxDataStreamBase
 {
 public:
-    wxDataStreamBase(const wxDataStreamBase&) = delete;
-	wxDataStreamBase& operator=(const wxDataStreamBase&) = delete;
+   wxDataStreamBase(const wxDataStreamBase&) = delete;
+   wxDataStreamBase& operator=(const wxDataStreamBase&) = delete;
+   wxDataStreamBase(wxDataStreamBase&&) = default;
+   wxDataStreamBase& operator=(wxDataStreamBase&&) = default;
 
     void BigEndianOrdered(bool be_order) { m_be_order = be_order; }
 
@@ -54,8 +56,10 @@ class WXDLLIMPEXP_BASE wxDataInputStream : public wxDataStreamBase
 public:
     wxDataInputStream(wxInputStream& s, const wxMBConv& conv = wxConvUTF8);
 
-    wxDataInputStream(const wxDataInputStream&) = delete;
-	wxDataInputStream& operator=(const wxDataInputStream&) = delete;
+   wxDataInputStream(const wxDataInputStream&) = delete;
+   wxDataInputStream& operator=(const wxDataInputStream&) = delete;
+   wxDataInputStream(wxDataInputStream&&) = default;
+   wxDataInputStream& operator=(wxDataInputStream&&) = default;
 
     bool IsOk() { return m_input->IsOk(); }
 
@@ -117,8 +121,10 @@ class WXDLLIMPEXP_BASE wxDataOutputStream : public wxDataStreamBase
 public:
     wxDataOutputStream(wxOutputStream& s, const wxMBConv& conv = wxConvUTF8);
 
-    wxDataOutputStream(const wxDataOutputStream&) = delete;
-	wxDataOutputStream& operator=(const wxDataOutputStream&) = delete;
+   wxDataOutputStream(const wxDataOutputStream&) = delete;
+   wxDataOutputStream& operator=(const wxDataOutputStream&) = delete;
+   wxDataOutputStream(wxDataOutputStream&&) = default;
+   wxDataOutputStream& operator=(wxDataOutputStream&&) = default;
 
     bool IsOk() { return m_output->IsOk(); }
 

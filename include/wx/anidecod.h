@@ -34,8 +34,10 @@ public:
     wxANIDecoder();
     ~wxANIDecoder() override;
 
-    wxANIDecoder(const wxANIDecoder&) = delete;
-	wxANIDecoder& operator=(const wxANIDecoder&) = delete;
+   wxANIDecoder(const wxANIDecoder&) = delete;
+   wxANIDecoder& operator=(const wxANIDecoder&) = delete;
+   wxANIDecoder(wxANIDecoder&&) = default;
+   wxANIDecoder& operator=(wxANIDecoder&&) = default;
 
     wxSize GetFrameSize(unsigned int frame) const override;
     wxPoint GetFramePosition(unsigned int frame) const override;

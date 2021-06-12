@@ -134,8 +134,10 @@ public:
                             int alignment = wxDVR_DEFAULT_ALIGNMENT );
     ~wxDataViewRendererBase() override;
 
-    wxDataViewRendererBase(const wxDataViewRendererBase&) = delete;
-	wxDataViewRendererBase& operator=(const wxDataViewRendererBase&) = delete;
+   wxDataViewRendererBase(const wxDataViewRendererBase&) = delete;
+   wxDataViewRendererBase& operator=(const wxDataViewRendererBase&) = delete;
+   wxDataViewRendererBase(wxDataViewRendererBase&&) = default;
+   wxDataViewRendererBase& operator=(wxDataViewRendererBase&&) = default;
 
     virtual bool Validate( wxVariant& WXUNUSED(value) )
         { return true; }
@@ -313,8 +315,10 @@ public:
     {
     }
 
-    wxDataViewCustomRendererBase(const wxDataViewCustomRendererBase&) = delete;
-	wxDataViewCustomRendererBase& operator=(const wxDataViewCustomRendererBase&) = delete;
+   wxDataViewCustomRendererBase(const wxDataViewCustomRendererBase&) = delete;
+   wxDataViewCustomRendererBase& operator=(const wxDataViewCustomRendererBase&) = delete;
+   wxDataViewCustomRendererBase(wxDataViewCustomRendererBase&&) = default;
+   wxDataViewCustomRendererBase& operator=(wxDataViewCustomRendererBase&&) = default;
 
     // Render the item using the current value (returned by GetValue()).
     virtual bool Render(wxRect cell, wxDC *dc, int state) = 0;
@@ -559,8 +563,10 @@ public:
                   int align = wxDVR_DEFAULT_ALIGNMENT
              );
 
-	wxDataViewCheckIconTextRenderer(const wxDataViewCheckIconTextRenderer&) = delete;
-	wxDataViewCheckIconTextRenderer& operator=(const wxDataViewCheckIconTextRenderer&) = delete;
+wxDataViewCheckIconTextRenderer(const wxDataViewCheckIconTextRenderer&) = delete;
+   wxDataViewCheckIconTextRenderer& operator=(const wxDataViewCheckIconTextRenderer&) = delete;
+   wxDataViewCheckIconTextRenderer(wxDataViewCheckIconTextRenderer&&) = default;
+   wxDataViewCheckIconTextRenderer& operator=(wxDataViewCheckIconTextRenderer&&) = default;
 
     // This renderer can always display the 3rd ("indeterminate") checkbox
     // state if the model contains cells with wxCHK_UNDETERMINED value, but it

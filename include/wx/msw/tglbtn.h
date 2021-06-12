@@ -31,8 +31,10 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
-	wxToggleButton(const wxToggleButton&) = delete;
-	wxToggleButton& operator=(const wxToggleButton&) = delete;
+wxToggleButton(const wxToggleButton&) = delete;
+   wxToggleButton& operator=(const wxToggleButton&) = delete;
+   wxToggleButton(wxToggleButton&&) = default;
+   wxToggleButton& operator=(wxToggleButton&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,

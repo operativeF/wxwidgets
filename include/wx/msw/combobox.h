@@ -46,8 +46,10 @@ public:
         Create(parent, id, value, pos, size, choices, style, validator, name);
     }
 
-	wxComboBox(const wxComboBox&) = delete;
-	wxComboBox& operator=(const wxComboBox&) = delete;
+wxComboBox(const wxComboBox&) = delete;
+   wxComboBox& operator=(const wxComboBox&) = delete;
+   wxComboBox(wxComboBox&&) = default;
+   wxComboBox& operator=(wxComboBox&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,

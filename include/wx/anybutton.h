@@ -53,8 +53,10 @@ class WXDLLIMPEXP_CORE wxAnyButtonBase : public wxControl
 public:
     wxAnyButtonBase() = default;
 
-    wxAnyButtonBase(const wxAnyButtonBase&) = delete;
-	wxAnyButtonBase& operator=(const wxAnyButtonBase&) = delete;
+   wxAnyButtonBase(const wxAnyButtonBase&) = delete;
+   wxAnyButtonBase& operator=(const wxAnyButtonBase&) = delete;
+   wxAnyButtonBase(wxAnyButtonBase&&) = default;
+   wxAnyButtonBase& operator=(wxAnyButtonBase&&) = default;
     
     // show the image in the button in addition to the label: this method is
     // supported on all (major) platforms

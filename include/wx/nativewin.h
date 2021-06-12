@@ -74,8 +74,10 @@ public:
     
     }
 
-    wxNativeWindow(const wxNativeWindow&) = delete;
-	wxNativeWindow& operator=(const wxNativeWindow&) = delete;
+   wxNativeWindow(const wxNativeWindow&) = delete;
+   wxNativeWindow& operator=(const wxNativeWindow&) = delete;
+   wxNativeWindow(wxNativeWindow&&) = default;
+   wxNativeWindow& operator=(wxNativeWindow&&) = default;
 
     // Create a window from an existing native window handle.
     //
@@ -166,8 +168,10 @@ public:
     // as it normally doesn't belong to us
     ~wxNativeContainerWindow() override;
 
-    wxNativeContainerWindow(const wxNativeContainerWindow&) = delete;
-	wxNativeContainerWindow& operator=(const wxNativeContainerWindow&) = delete;
+   wxNativeContainerWindow(const wxNativeContainerWindow&) = delete;
+   wxNativeContainerWindow& operator=(const wxNativeContainerWindow&) = delete;
+   wxNativeContainerWindow(wxNativeContainerWindow&&) = default;
+   wxNativeContainerWindow& operator=(wxNativeContainerWindow&&) = default;
 
     // provide (trivial) implementation of the base class pure virtuals
     void SetTitle(const wxString& WXUNUSED(title)) override

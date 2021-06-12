@@ -92,8 +92,10 @@ public:
         Create(parent, message, defaultDir, defaultFile, wildCard, style, pos, sz, name);
     }
 
-    wxFileDialogBase(const wxFileDialogBase&) = delete;
-	wxFileDialogBase& operator=(const wxFileDialogBase&) = delete;
+   wxFileDialogBase(const wxFileDialogBase&) = delete;
+   wxFileDialogBase& operator=(const wxFileDialogBase&) = delete;
+   wxFileDialogBase(wxFileDialogBase&&) = default;
+   wxFileDialogBase& operator=(wxFileDialogBase&&) = default;
 
     ~wxFileDialogBase() override = default;
 

@@ -192,8 +192,10 @@ public:
         }
     }
 
-    wxClipboardLocker(const wxClipboardLocker&) = delete;
-	wxClipboardLocker& operator=(const wxClipboardLocker&) = delete;
+   wxClipboardLocker(const wxClipboardLocker&) = delete;
+   wxClipboardLocker& operator=(const wxClipboardLocker&) = delete;
+   wxClipboardLocker(wxClipboardLocker&&) = default;
+   wxClipboardLocker& operator=(wxClipboardLocker&&) = default;
 
 private:
     wxClipboard *m_clipboard;

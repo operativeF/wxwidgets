@@ -46,8 +46,10 @@ public:
     {
     }
 
-    wxDocMDIParentFrame(const wxDocMDIParentFrame&) = delete;
-	wxDocMDIParentFrame& operator=(const wxDocMDIParentFrame&) = delete;
+   wxDocMDIParentFrame(const wxDocMDIParentFrame&) = delete;
+   wxDocMDIParentFrame& operator=(const wxDocMDIParentFrame&) = delete;
+   wxDocMDIParentFrame(wxDocMDIParentFrame&&) = default;
+   wxDocMDIParentFrame& operator=(wxDocMDIParentFrame&&) = default;
 
 private:
     wxDECLARE_CLASS(wxDocMDIParentFrame);
@@ -78,8 +80,10 @@ public:
     {
     }
 
-    wxDocMDIChildFrame(const wxDocMDIChildFrame&) = delete;
-	wxDocMDIChildFrame& operator=(const wxDocMDIChildFrame&) = delete;
+   wxDocMDIChildFrame(const wxDocMDIChildFrame&) = delete;
+   wxDocMDIChildFrame& operator=(const wxDocMDIChildFrame&) = delete;
+   wxDocMDIChildFrame(wxDocMDIChildFrame&&) = default;
+   wxDocMDIChildFrame& operator=(wxDocMDIChildFrame&&) = default;
 
 private:
     wxDECLARE_CLASS(wxDocMDIChildFrame);

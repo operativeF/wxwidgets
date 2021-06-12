@@ -33,8 +33,10 @@ public:
                      pos, size, style, validator, name);
     }
 
-	wxSlider(const wxSlider&) = delete;
-	wxSlider& operator=(const wxSlider&) = delete;
+wxSlider(const wxSlider&) = delete;
+   wxSlider& operator=(const wxSlider&) = delete;
+   wxSlider(wxSlider&&) = default;
+   wxSlider& operator=(wxSlider&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,

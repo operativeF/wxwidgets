@@ -23,7 +23,7 @@
 
 #include "wx/filesys.h"             // FileNameToURL()
 #include "wx/thread.h"              // wxMutex/wxMutexLocker
-#include <vector>              // std::vector<wxString>
+#include <vector>              // std<wxString>
 
 #ifdef __WXGTK__
     #include "wx/gtk/private/wrapgtk.h"
@@ -71,7 +71,7 @@ public:
     bool Load(const wxURI& location) override;
     virtual bool Load(const wxURI& location,
                       const wxURI& proxy) override
-        { return wxMediaBackendCommonBase::Load(location, proxy); }
+        { return wxMediaBackendCommonBase(location, proxy); }
 
 
     bool SetPosition(wxLongLong where) override;
@@ -188,7 +188,7 @@ static void realize_callback(GtkWidget* widget, wxGStreamerMediaBackend* be)
 }
 #endif // wxGTK
 
-wxGStreamerMediaBackend::wxGStreamerMediaBackend()
+wxGStreamerMediaBackend()
   : m_player(0), m_video_renderer(0), m_videoSize(0, 0), m_last_state(wxMEDIASTATE_STOPPED), m_loaded(false)
 {
 
@@ -219,7 +219,7 @@ static void end_of_stream_callback(GstPlayer * WXUNUSED(player), wxGStreamerMedi
 }
 }
 
-bool wxGStreamerMediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
+bool wxGStreamerMediaBackend(wxControl* ctrl, wxWindow* parent,
                                             wxWindowID id,
                                             const wxPoint& pos,
                                             const wxSize& size,
@@ -282,7 +282,7 @@ bool wxGStreamerMediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
     m_ctrl->m_noExpose = true;
 #endif
 
-    if( !m_ctrl->wxControl::Create(parent, id, pos, size,
+    if( !m_ctrl->wxControl(parent, id, pos, size,
                             style,  // TODO: remove borders???
                             validator, name) )
     {
@@ -337,38 +337,38 @@ bool wxGStreamerMediaBackend::CreateControl(wxControl* ctrl, wxWindow* parent,
     return true;
 }
 
-bool wxGStreamerMediaBackend::Play()
+bool wxGStreamerMediaBackend()
 {
     gst_player_play(m_player);
 
     return true;
 }
 
-bool wxGStreamerMediaBackend::Pause()
+bool wxGStreamerMediaBackend()
 {
     gst_player_pause(m_player);
 
     return true;
 }
 
-bool wxGStreamerMediaBackend::Stop()
+bool wxGStreamerMediaBackend()
 {
     gst_player_stop(m_player);
 
     return true;
 }
 
-bool wxGStreamerMediaBackend::Load(const wxString& fileName)
+bool wxGStreamerMediaBackend(const wxString& fileName)
 {
-    return DoLoad(wxFileSystem::FileNameToURL(fileName));
+    return DoLoad(wxFileSystem(fileName));
 }
 
-bool wxGStreamerMediaBackend::Load(const wxURI& location)
+bool wxGStreamerMediaBackend(const wxURI& location)
 {
     return DoLoad(location.BuildURI());
 }
 
-bool wxGStreamerMediaBackend::DoLoad(const wxString& locstring)
+bool wxGStreamerMediaBackend(const wxString& locstring)
 {
     // Make sure the passed URI is valid and tell playbin to load it
     // non-file uris are encoded
@@ -383,7 +383,7 @@ bool wxGStreamerMediaBackend::DoLoad(const wxString& locstring)
     return true;
 }
 
-void wxGStreamerMediaBackend::VideoDimensionsChanged(int width, int height)
+void wxGStreamerMediaBackend(int width, int height)
 {
     if (m_loaded) {
         m_videoSize.x = width;
@@ -392,7 +392,7 @@ void wxGStreamerMediaBackend::VideoDimensionsChanged(int width, int height)
     }
 }
 
-void wxGStreamerMediaBackend::StateChanged(GstPlayerState state)
+void wxGStreamerMediaBackend(GstPlayerState state)
 {
   switch (state) {
     case GST_PLAYER_STATE_BUFFERING:
@@ -417,34 +417,34 @@ void wxGStreamerMediaBackend::StateChanged(GstPlayerState state)
   }
 }
 
-void wxGStreamerMediaBackend::EndOfStream()
+void wxGStreamerMediaBackend()
 {
     if (SendStopEvent())
         QueueFinishEvent();
 }
 
-bool wxGStreamerMediaBackend::SetPosition(wxLongLong where)
+bool wxGStreamerMediaBackend(wxLongLong where)
 {
     gst_player_seek(m_player, where.GetValue() * GST_MSECOND);
 
     return true;
 }
 
-wxLongLong wxGStreamerMediaBackend::GetPosition()
+wxLongLong wxGStreamerMediaBackend()
 {
     GstClockTime position = gst_player_get_position(m_player);
 
     return GST_CLOCK_TIME_IS_VALID(position) ? position / GST_MSECOND : 0;
 }
 
-wxLongLong wxGStreamerMediaBackend::GetDuration()
+wxLongLong wxGStreamerMediaBackend()
 {
     GstClockTime duration = gst_player_get_duration(m_player);
 
     return GST_CLOCK_TIME_IS_VALID(duration) ? duration / GST_MSECOND : 0;
 }
 
-void wxGStreamerMediaBackend::Move(int WXUNUSED(x), int WXUNUSED(y), int WXUNUSED(w), int WXUNUSED(h))
+void wxGStreamerMediaBackend(int WXUNUSED(x), int WXUNUSED(y), int WXUNUSED(w), int WXUNUSED(h))
 {
     /* Nothing to be done here, at least for GTK+. For other toolkits we might
      * have to call
@@ -452,44 +452,44 @@ void wxGStreamerMediaBackend::Move(int WXUNUSED(x), int WXUNUSED(y), int WXUNUSE
      */
 }
 
-wxSize wxGStreamerMediaBackend::GetVideoSize() const
+wxSize wxGStreamerMediaBackend() const
 {
     return m_videoSize;
 }
 
-double wxGStreamerMediaBackend::GetPlaybackRate()
+double wxGStreamerMediaBackend()
 {
     return gst_player_get_rate(m_player);
 }
 
-bool wxGStreamerMediaBackend::SetPlaybackRate(double dRate)
+bool wxGStreamerMediaBackend(double dRate)
 {
     gst_player_set_rate(m_player, dRate);
     return true;
 }
 
-wxMediaState wxGStreamerMediaBackend::GetState()
+wxMediaState wxGStreamerMediaBackend()
 {
     return m_last_state;
 }
 
-bool wxGStreamerMediaBackend::SetVolume(double dVolume)
+bool wxGStreamerMediaBackend(double dVolume)
 {
     gst_player_set_volume(m_player, dVolume);
     return true;
 }
 
-double wxGStreamerMediaBackend::GetVolume()
+double wxGStreamerMediaBackend()
 {
     return gst_player_get_volume(m_player);
 }
 
-wxLongLong wxGStreamerMediaBackend::GetDownloadProgress()
+wxLongLong wxGStreamerMediaBackend()
 {
     return 0;
 }
 
-wxLongLong wxGStreamerMediaBackend::GetDownloadTotal()
+wxLongLong wxGStreamerMediaBackend()
 {
     return 0;
 }

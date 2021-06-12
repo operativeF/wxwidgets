@@ -235,8 +235,10 @@ public:
     wxAccessibleBase(wxWindow* win): m_window(win) {}
     ~wxAccessibleBase() override = default;
 
-    wxAccessibleBase(const wxAccessibleBase&) = delete;
-	wxAccessibleBase& operator=(const wxAccessibleBase&) = delete;
+   wxAccessibleBase(const wxAccessibleBase&) = delete;
+   wxAccessibleBase& operator=(const wxAccessibleBase&) = delete;
+   wxAccessibleBase(wxAccessibleBase&&) = default;
+   wxAccessibleBase& operator=(wxAccessibleBase&&) = default;
 
         // Can return either a child object, or an integer
         // representing the child element, starting from 1.

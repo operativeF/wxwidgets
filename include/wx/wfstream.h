@@ -35,8 +35,10 @@ public:
     wxFileInputStream(int fd);
     ~wxFileInputStream() override;
 
-    wxFileInputStream(const wxFileInputStream&) = delete;
-	wxFileInputStream& operator=(const wxFileInputStream&) = delete;
+   wxFileInputStream(const wxFileInputStream&) = delete;
+   wxFileInputStream& operator=(const wxFileInputStream&) = delete;
+   wxFileInputStream(wxFileInputStream&&) = default;
+   wxFileInputStream& operator=(wxFileInputStream&&) = default;
 
     wxFileOffset GetLength() const override;
 
@@ -66,8 +68,10 @@ public:
     wxFileOutputStream(int fd);
     ~wxFileOutputStream() override;
 
-    wxFileOutputStream(const wxFileOutputStream&) = delete;
-	wxFileOutputStream& operator=(const wxFileOutputStream&) = delete;
+   wxFileOutputStream(const wxFileOutputStream&) = delete;
+   wxFileOutputStream& operator=(const wxFileOutputStream&) = delete;
+   wxFileOutputStream(wxFileOutputStream&&) = default;
+   wxFileOutputStream& operator=(wxFileOutputStream&&) = default;
 
     void Sync() override;
     bool Close() override { return m_file_destroy ? m_file->Close() : true; }
@@ -97,8 +101,10 @@ public:
     wxTempFileOutputStream(const wxString& fileName);
     ~wxTempFileOutputStream() override;
 
-    wxTempFileOutputStream(const wxTempFileOutputStream&) = delete;
-	wxTempFileOutputStream& operator=(const wxTempFileOutputStream&) = delete;
+   wxTempFileOutputStream(const wxTempFileOutputStream&) = delete;
+   wxTempFileOutputStream& operator=(const wxTempFileOutputStream&) = delete;
+   wxTempFileOutputStream(wxTempFileOutputStream&&) = default;
+   wxTempFileOutputStream& operator=(wxTempFileOutputStream&&) = default;
 
     bool Close() override { return Commit(); }
     WXDLLIMPEXP_INLINE_BASE virtual bool Commit() { return m_file->Commit(); }
@@ -123,8 +129,10 @@ public:
     wxTempFFileOutputStream(const wxString& fileName);
     ~wxTempFFileOutputStream() override;
 
-    wxTempFFileOutputStream(const wxTempFFileOutputStream&) = delete;
-	wxTempFFileOutputStream& operator=(const wxTempFFileOutputStream&) = delete;
+   wxTempFFileOutputStream(const wxTempFFileOutputStream&) = delete;
+   wxTempFFileOutputStream& operator=(const wxTempFFileOutputStream&) = delete;
+   wxTempFFileOutputStream(wxTempFFileOutputStream&&) = default;
+   wxTempFFileOutputStream& operator=(wxTempFFileOutputStream&&) = default;
 
     bool Close() override { return Commit(); }
     WXDLLIMPEXP_INLINE_BASE virtual bool Commit() { return m_file->Commit(); }
@@ -149,8 +157,10 @@ class WXDLLIMPEXP_BASE wxFileStream : public wxFileInputStream,
 public:
     wxFileStream(const wxString& fileName);
 
-    wxFileStream(const wxFileStream&) = delete;
-	wxFileStream& operator=(const wxFileStream&) = delete;
+   wxFileStream(const wxFileStream&) = delete;
+   wxFileStream& operator=(const wxFileStream&) = delete;
+   wxFileStream(wxFileStream&&) = default;
+   wxFileStream& operator=(wxFileStream&&) = default;
 
     bool IsOk() const override;
 
@@ -196,8 +206,10 @@ public:
     wxFFileInputStream(FILE *file);
     ~wxFFileInputStream() override;
 
-    wxFFileInputStream(const wxFFileInputStream&) = delete;
-	wxFFileInputStream& operator=(const wxFFileInputStream&) = delete;
+   wxFFileInputStream(const wxFFileInputStream&) = delete;
+   wxFFileInputStream& operator=(const wxFFileInputStream&) = delete;
+   wxFFileInputStream(wxFFileInputStream&&) = default;
+   wxFFileInputStream& operator=(wxFFileInputStream&&) = default;
 
     wxFileOffset GetLength() const override;
 
@@ -227,8 +239,10 @@ public:
     wxFFileOutputStream(FILE *file);
     ~wxFFileOutputStream() override;
 
-    wxFFileOutputStream(const wxFFileOutputStream&) = delete;
-	wxFFileOutputStream& operator=(const wxFFileOutputStream&) = delete;
+   wxFFileOutputStream(const wxFFileOutputStream&) = delete;
+   wxFFileOutputStream& operator=(const wxFFileOutputStream&) = delete;
+   wxFFileOutputStream(wxFFileOutputStream&&) = default;
+   wxFFileOutputStream& operator=(wxFFileOutputStream&&) = default;
 
     void Sync() override;
     bool Close() override { return m_file_destroy ? m_file->Close() : true; }
@@ -258,8 +272,10 @@ class WXDLLIMPEXP_BASE wxFFileStream : public wxFFileInputStream,
 public:
     wxFFileStream(const wxString& fileName, const wxString& mode = wxASCII_STR("w+b"));
 
-    wxFFileStream(const wxFFileStream&) = delete;
-	wxFFileStream& operator=(const wxFFileStream&) = delete;
+   wxFFileStream(const wxFFileStream&) = delete;
+   wxFFileStream& operator=(const wxFFileStream&) = delete;
+   wxFFileStream(wxFFileStream&&) = default;
+   wxFFileStream& operator=(wxFFileStream&&) = default;
 
     // override some virtual functions to resolve ambiguities, just as in
     // wxFileStream

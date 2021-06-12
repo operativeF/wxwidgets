@@ -100,8 +100,10 @@ public:
 
     ~wxToolBarToolBase() override;
 
-	wxToolBarToolBase(const wxToolBarToolBase&) = delete;
-	wxToolBarToolBase& operator=(const wxToolBarToolBase&) = delete;
+wxToolBarToolBase(const wxToolBarToolBase&) = delete;
+   wxToolBarToolBase& operator=(const wxToolBarToolBase&) = delete;
+   wxToolBarToolBase(wxToolBarToolBase&&) = default;
+   wxToolBarToolBase& operator=(wxToolBarToolBase&&) = default;
 
     // general
     int GetId() const { return m_id; }
@@ -282,8 +284,10 @@ public:
     wxToolBarBase();
     ~wxToolBarBase() override;
 
-    wxToolBarBase(const wxToolBarBase&) = delete;
-	wxToolBarBase& operator=(const wxToolBarBase&) = delete;
+   wxToolBarBase(const wxToolBarBase&) = delete;
+   wxToolBarBase& operator=(const wxToolBarBase&) = delete;
+   wxToolBarBase(wxToolBarBase&&) = default;
+   wxToolBarBase& operator=(wxToolBarBase&&) = default;
 
     // the full AddTool() function
     //
