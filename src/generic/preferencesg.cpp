@@ -197,8 +197,6 @@ class wxModalPreferencesEditorImpl : public wxGenericPreferencesEditorImplBase
 public:
     wxModalPreferencesEditorImpl()
     {
-        m_dlg = nullptr;
-        m_currentPage = -1;
     }
 
     wxModalPreferencesEditorImpl(const wxModalPreferencesEditorImpl&) = delete;
@@ -232,8 +230,8 @@ public:
     }
 
 private:
-    wxGenericPrefsDialog* m_dlg;
-    int m_currentPage;
+    wxGenericPrefsDialog* m_dlg{nullptr};
+    int m_currentPage{-1};
 };
 
 inline

@@ -67,8 +67,8 @@ class WXDLLEXPORT wxScrollHelperEvtHandler : public wxEvtHandler
 {
 public:
     explicit wxScrollHelperEvtHandler(wxScrollHelperBase *scrollHelper)
+        : m_scrollHelper(scrollHelper)
     {
-        m_scrollHelper = scrollHelper;
     }
 
     wxScrollHelperEvtHandler(const wxScrollHelperEvtHandler&) = delete;
@@ -119,12 +119,12 @@ wxAutoScrollTimer::wxAutoScrollTimer(wxWindow *winToScroll,
                                      wxScrollHelperBase *scroll,
                                      wxEventType eventTypeToSend,
                                      int pos, int orient)
+    : m_win(winToScroll),
+      m_scrollHelper(scroll),
+      m_eventType(eventTypeToSend),
+      m_pos(pos),
+      m_orient(orient)
 {
-    m_win = winToScroll;
-    m_scrollHelper = scroll;
-    m_eventType = eventTypeToSend;
-    m_pos = pos;
-    m_orient = orient;
 }
 
 void wxAutoScrollTimer::Notify()
@@ -1193,9 +1193,6 @@ void wxScrollHelperBase::HandleOnChildFocus(wxChildFocusEvent& event)
 wxScrollHelper::wxScrollHelper(wxWindow *winToScroll)
     : wxScrollHelperBase(winToScroll)
 {
-    m_xVisibility =
-    m_yVisibility = wxSHOW_SB_DEFAULT;
-    m_adjustScrollFlagReentrancy = 0;
 }
 
 bool wxScrollHelper::IsScrollbarShown(int orient) const

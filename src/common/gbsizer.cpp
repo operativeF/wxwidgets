@@ -36,8 +36,7 @@ wxGBSizerItem::wxGBSizerItem( int width,
                               wxObject* userData)
     : wxSizerItem(width, height, 0, flag, border, userData),
       m_pos(pos),
-      m_span(span),
-      m_gbsizer(nullptr)
+      m_span(span)
 {
 }
 
@@ -50,8 +49,7 @@ wxGBSizerItem::wxGBSizerItem( wxWindow *window,
                               wxObject* userData )
     : wxSizerItem(window, 0, flag, border, userData),
       m_pos(pos),
-      m_span(span),
-      m_gbsizer(nullptr)
+      m_span(span)
 {
 }
 
@@ -64,15 +62,12 @@ wxGBSizerItem::wxGBSizerItem( wxSizer *sizer,
                               wxObject* userData )
     : wxSizerItem(sizer, 0, flag, border, userData),
       m_pos(pos),
-      m_span(span),
-      m_gbsizer(nullptr)
+      m_span(span)
 {
 }
 
 wxGBSizerItem::wxGBSizerItem()
-    : 
-      m_pos(-1,-1)
-      
+    : m_pos(-1,-1)
 {
 }
 

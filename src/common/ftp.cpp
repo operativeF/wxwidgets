@@ -671,9 +671,9 @@ class wxInputFTPStream : public wxSocketInputStream
 {
 public:
     wxInputFTPStream(wxFTP *ftp, wxSocketBase *sock)
-        : wxSocketInputStream(*sock)
+        : wxSocketInputStream(*sock),
+          m_ftp(ftp)
     {
-        m_ftp = ftp;
         // socket timeout automatically set in GetPort function
     }
 

@@ -44,12 +44,12 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPrintPaperType, wxObject);
  */
 
 wxPrintPaperType::wxPrintPaperType(wxPaperSize paperId, int platformId, const wxString& name, int w, int h)
-    : m_paperName(name)
+    : m_paperName(name),
+      m_paperId(paperId),
+      m_platformId(platformId),
+      m_width(w),
+      m_height(h)
 {
-    m_paperId = paperId;
-    m_platformId = platformId;
-    m_width = w;
-    m_height = h;
 }
 
 // Get width and height in points (1/72th of an inch)
@@ -69,9 +69,9 @@ WX_DEFINE_LIST(wxPrintPaperTypeList)
 wxPrintPaperDatabase* wxThePrintPaperDatabase = nullptr;
 
 wxPrintPaperDatabase::wxPrintPaperDatabase()
+    : m_map(new wxStringToPrintPaperTypeHashMap),
+      m_list(new wxPrintPaperTypeList)
 {
-    m_map = new wxStringToPrintPaperTypeHashMap;
-    m_list = new wxPrintPaperTypeList;
 }
 
 wxPrintPaperDatabase::~wxPrintPaperDatabase()

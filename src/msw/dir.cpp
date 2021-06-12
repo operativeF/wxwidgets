@@ -339,8 +339,6 @@ bool wxDirData::Read(wxString *filename)
 
 wxDir::wxDir(const wxString& dirname)
 {
-    m_data = nullptr;
-
     (void)Open(dirname);
 }
 

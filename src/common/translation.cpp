@@ -1400,8 +1400,8 @@ void wxTranslations::SetNonOwned(wxTranslations *t)
 
 
 wxTranslations::wxTranslations()
+    : m_loader(new wxFileTranslationsLoader)
 {
-    m_loader = new wxFileTranslationsLoader;
 }
 
 

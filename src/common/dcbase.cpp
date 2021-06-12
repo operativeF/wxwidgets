@@ -336,16 +336,14 @@ wxDCImpl::wxDCImpl( wxDC *owner )
         , m_mappingMode(wxMM_TEXT)
         , m_textForegroundColour(*wxBLACK)
         , m_textBackgroundColour(*wxWHITE)
-         
+        , m_owner(owner)
 #if wxUSE_PALETTE
         , m_hasCustomPalette(false)
 #endif // wxUSE_PALETTE
 {
-    m_owner = owner;
 }
 
-wxDCImpl::~wxDCImpl()
-= default;
+wxDCImpl::~wxDCImpl() = default;
 
 // ----------------------------------------------------------------------------
 // clipping

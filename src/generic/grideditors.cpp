@@ -228,8 +228,6 @@ void wxGridCellEditorEvtHandler::OnChar(wxKeyEvent& event)
 
 wxGridCellEditor::wxGridCellEditor()
 {
-    m_control = nullptr;
-    m_attr = nullptr;
 }
 
 wxGridCellEditor::~wxGridCellEditor()
@@ -428,8 +426,8 @@ void wxGridCellEditor::StartingClick()
 // ----------------------------------------------------------------------------
 
 wxGridCellTextEditor::wxGridCellTextEditor(size_t maxChars)
+    : m_maxChars(maxChars)
 {
-    m_maxChars = maxChars;
 }
 
 void wxGridCellTextEditor::Create(wxWindow* parent,
@@ -683,9 +681,9 @@ wxString wxGridCellTextEditor::GetValue() const
 // ----------------------------------------------------------------------------
 
 wxGridCellNumberEditor::wxGridCellNumberEditor(int min, int max)
+    : m_min(min),
+      m_max(max)
 {
-    m_min = min;
-    m_max = max;
 }
 
 void wxGridCellNumberEditor::Create(wxWindow* parent,
@@ -958,10 +956,10 @@ wxString wxGridCellNumberEditor::GetValue() const
 wxGridCellFloatEditor::wxGridCellFloatEditor(int width,
                                              int precision,
                                              int format)
+    : m_width(width),
+      m_precision(precision),
+      m_style(format)
 {
-    m_width = width;
-    m_precision = precision;
-    m_style = format;
 }
 
 void wxGridCellFloatEditor::Create(wxWindow* parent,
@@ -1694,10 +1692,7 @@ void wxGridCellChoiceEditor::OnComboCloseUp(wxCommandEvent& WXUNUSED(evt))
 // "John","Fred"..."Bob" in the combo choice box
 
 wxGridCellEnumEditor::wxGridCellEnumEditor(const wxString& choices)
-                     
 {
-    m_index = -1;
-
     if (!choices.empty())
         SetParameters(choices);
 }

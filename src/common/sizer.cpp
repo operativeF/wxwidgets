@@ -202,7 +202,6 @@ wxSizerItem::wxSizerItem(wxWindow *window,
              m_proportion(proportion),
              m_border(border),
              m_flag(flag),
-             m_id(wxID_NONE),
              m_userData(userData)
 {
     ASSERT_VALID_SIZER_FLAGS( m_flag );
@@ -227,7 +226,6 @@ wxSizerItem::wxSizerItem(wxSizer *sizer,
              m_proportion(proportion),
              m_border(border),
              m_flag(flag),
-             m_id(wxID_NONE),
              m_ratio(0),
              m_userData(userData)
 {
@@ -286,7 +284,6 @@ wxSizerItem::wxSizerItem(int width,
              m_proportion(proportion),
              m_border(border),
              m_flag(flag),
-             m_id(wxID_NONE),
              m_userData(userData)
 {
     ASSERT_VALID_SIZER_FLAGS( m_flag );

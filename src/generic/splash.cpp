@@ -54,7 +54,10 @@ wxSplashScreen::wxSplashScreen(const wxBitmap& bitmap, long splashStyle, int mil
                                wxWindow* parent, wxWindowID id, const wxPoint& pos,
                                const wxSize& size, long style)
     : wxFrame(parent, id, wxEmptyString, wxPoint(0,0), wxSize(100, 100),
-              style | wxFRAME_TOOL_WINDOW | wxFRAME_NO_TASKBAR)
+              style | wxFRAME_TOOL_WINDOW | wxFRAME_NO_TASKBAR),
+      m_splashStyle(splashStyle),
+      m_milliseconds(milliseconds),
+      m_window(new wxSplashScreenWindow(bitmap, this, wxID_ANY, pos, size, wxNO_BORDER))
 {
     Init();
 
@@ -66,12 +69,6 @@ wxSplashScreen::wxSplashScreen(const wxBitmap& bitmap, long splashStyle, int mil
     gtk_window_set_type_hint(GTK_WINDOW(m_widget),
                              GDK_WINDOW_TYPE_HINT_SPLASHSCREEN);
 #endif
-
-    m_splashStyle = splashStyle;
-    m_milliseconds = milliseconds;
-
-    m_window = new wxSplashScreenWindow(bitmap, this, wxID_ANY, pos, size, wxNO_BORDER);
-
     SetClientSize(bitmap.GetScaledWidth(), bitmap.GetScaledHeight());
 
     if (m_splashStyle & wxSPLASH_CENTRE_ON_PARENT)

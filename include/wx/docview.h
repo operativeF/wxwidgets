@@ -180,16 +180,16 @@ protected:
     wxString              m_documentFile;
     wxString              m_documentTitle;
     wxString              m_documentTypeName;
-    wxDocTemplate*        m_documentTemplate;
-    bool                  m_documentModified;
+    wxDocTemplate*        m_documentTemplate{nullptr};
+    bool                  m_documentModified{false};
 
     // if the document parent is non-NULL, it's a pseudo-document corresponding
     // to a part of the parent document which can't be saved or loaded
     // independently of its parent and is always closed when its parent is
     wxDocument*           m_documentParent;
 
-    wxCommandProcessor*   m_commandProcessor;
-    bool                  m_savedYet;
+    wxCommandProcessor*   m_commandProcessor{nullptr};
+    bool                  m_savedYet{false};
 
     // Called by OnSaveDocument and OnOpenDocument to implement standard
     // Save/Load behaviour. Re-implement in derived class for custom

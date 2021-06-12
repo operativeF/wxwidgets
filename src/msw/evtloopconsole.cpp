@@ -36,12 +36,12 @@
 // ----------------------------------------------------------------------------
 
 wxMSWEventLoopBase::wxMSWEventLoopBase()
+    : m_heventWake(::CreateEvent(nullptr, FALSE, FALSE, nullptr))
 {
     m_shouldExit = false;
     m_exitcode = 0;
 
     // Create initially not signalled auto-reset event object.
-    m_heventWake = ::CreateEvent(nullptr, FALSE, FALSE, nullptr);
     if ( !m_heventWake )
         wxLogLastError(wxS("CreateEvent(wake)"));
 }

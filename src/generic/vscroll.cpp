@@ -41,8 +41,8 @@ class WXDLLEXPORT wxVarScrollHelperEvtHandler : public wxEvtHandler
 {
 public:
     explicit wxVarScrollHelperEvtHandler(wxVarScrollHelperBase *scrollHelper)
+        : m_scrollHelper(scrollHelper)
     {
-        m_scrollHelper = scrollHelper;
     }
 
     wxVarScrollHelperEvtHandler(const wxVarScrollHelperEvtHandler&) = delete;

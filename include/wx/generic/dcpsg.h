@@ -155,7 +155,7 @@ protected:
     mutable double    m_underlinePosition;
     mutable double    m_underlineThickness;
     wxPrintData       m_printData;
-    double            m_pageHeight;
+    double            m_pageHeight{842 * PS2DEV};
     wxArrayString     m_definedPSFonts;
     bool              m_isFontChanged;
 

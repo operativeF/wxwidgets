@@ -153,10 +153,9 @@ class wxSpinCtrlButtonGeneric : public wxSpinButton
 public:
     wxSpinCtrlButtonGeneric(wxSpinCtrlGenericBase *spin, int style)
         : wxSpinButton(spin, wxID_ANY, wxDefaultPosition,
-                       wxDefaultSize, style | wxSP_VERTICAL)
+                       wxDefaultSize, style | wxSP_VERTICAL),
+          m_spin(spin)
     {
-        m_spin = spin;
-
         SetRange(-SPINCTRLBUT_MAX, SPINCTRLBUT_MAX);
 
         // remove the default minsize, the spinctrl will have one instead

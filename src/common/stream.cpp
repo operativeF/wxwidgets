@@ -1194,14 +1194,10 @@ wxFilterInputStream::~wxFilterInputStream()
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxFilterOutputStream, wxOutputStream);
 
-wxFilterOutputStream::wxFilterOutputStream()
- 
-    
-= default;
+wxFilterOutputStream::wxFilterOutputStream() = default;
 
 wxFilterOutputStream::wxFilterOutputStream(wxOutputStream& stream)
- :  m_parent_o_stream(&stream),
-    m_owns(false)
+ :  m_parent_o_stream(&stream)
 {
 }
 

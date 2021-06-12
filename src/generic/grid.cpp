@@ -1135,7 +1135,6 @@ void wxGridRowOrColAttrData::UpdateAttrRowsOrCols( size_t pos, int numRowsOrCols
 
 wxGridCellAttrProvider::wxGridCellAttrProvider()
 {
-    m_data = nullptr;
 }
 
 wxGridCellAttrProvider::~wxGridCellAttrProvider()
@@ -1508,8 +1507,6 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxGridTableBase, wxObject);
 
 wxGridTableBase::wxGridTableBase()
 {
-    m_view = nullptr;
-    m_attrProvider = nullptr;
 }
 
 wxGridTableBase::~wxGridTableBase()

@@ -130,14 +130,9 @@ void wxToolBarToolBase::SetDropdownMenu(wxMenu* menu)
 // wxToolBarBase adding/deleting items
 // ----------------------------------------------------------------------------
 
+// the list owns the pointers
 wxToolBarBase::wxToolBarBase()
 {
-    // the list owns the pointers
-    m_xMargin = m_yMargin = 0;
-    m_maxRows = m_maxCols = 0;
-    m_toolPacking = m_toolSeparation = 0;
-    m_defaultWidth = 16;
-    m_defaultHeight = 15;
 }
 
 void wxToolBarBase::FixupStyle()

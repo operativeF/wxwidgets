@@ -459,11 +459,11 @@ public:
 
 protected:
     wxPreviewCanvas*      m_previewCanvas;
-    wxPreviewControlBar*  m_controlBar;
-    wxPrintPreviewBase*   m_printPreview;
-    wxWindowDisabler*     m_windowDisabler;
+    wxPreviewControlBar*  m_controlBar{nullptr};
+    wxPrintPreviewBase*   m_printPreview{nullptr};
+    wxWindowDisabler*     m_windowDisabler{nullptr};
 
-    wxPreviewFrameModalityKind m_modalityKind;
+    wxPreviewFrameModalityKind m_modalityKind{wxPreviewFrame_NonModal};
 
 
 private:
@@ -568,10 +568,10 @@ public:
 
 protected:
     wxPrintPreviewBase*   m_printPreview;
-    wxButton*             m_closeButton;
-    wxChoice*             m_zoomControl;
-    wxPrintPageTextCtrl*  m_currentPageText;
-    wxPrintPageMaxCtrl*   m_maxPageText;
+    wxButton*             m_closeButton{nullptr};
+    wxChoice*             m_zoomControl{nullptr};
+    wxPrintPageTextCtrl*  m_currentPageText{nullptr};
+    wxPrintPageMaxCtrl*   m_maxPageText{nullptr};
 
     long                  m_buttonFlags;
 

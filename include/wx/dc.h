@@ -583,7 +583,7 @@ protected:
 
     // flags
     bool m_colour;
-    bool m_ok;
+    bool m_ok{true};
     bool m_clipping;
     bool m_isInteractive;
     bool m_isBBoxValid;

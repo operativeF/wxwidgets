@@ -48,10 +48,9 @@ class wxSearchTextCtrl : public wxTextCtrl
 public:
     wxSearchTextCtrl(wxSearchCtrl *search, const wxString& value, int style)
         : wxTextCtrl(search, wxID_ANY, value, wxDefaultPosition, wxDefaultSize,
-                     (style & ~wxBORDER_MASK) | wxNO_BORDER | wxTE_PROCESS_ENTER)
+                     (style & ~wxBORDER_MASK) | wxNO_BORDER | wxTE_PROCESS_ENTER),
+          m_search(search)
     {
-        m_search = search;
-
         SetHint(_("Search"));
 
         // Ensure that our best size is recomputed using our overridden

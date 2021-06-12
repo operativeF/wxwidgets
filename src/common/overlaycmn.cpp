@@ -34,8 +34,8 @@
 // ----------------------------------------------------------------------------
 
 wxOverlay::wxOverlay()
+    : m_impl(new wxOverlayImpl)
 {
-    m_impl = new wxOverlayImpl();
 }
 
 wxOverlay::~wxOverlay()

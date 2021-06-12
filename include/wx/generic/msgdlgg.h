@@ -46,7 +46,7 @@ private:
     wxSizer *CreateMsgDlgButtonSizer();
 
     wxPoint m_pos;
-    bool m_created;
+    bool m_created{false};
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxGenericMessageDialog);

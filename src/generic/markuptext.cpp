@@ -244,10 +244,10 @@ public:
         : wxMarkupParserRenderOutput(dc, rect, wxMarkupText::Render_Default),
           m_win(win),
           m_rendererFlags(rendererFlags),
-          m_renderer(&wxRendererNative::Get())
+          m_renderer(&wxRendererNative::Get()),
+          m_ellipsizeMode(ellipsizeMode == wxELLIPSIZE_NONE ? wxELLIPSIZE_NONE : wxELLIPSIZE_END)
     {
         // TODO: Support all ellipsizing modes
-        m_ellipsizeMode = ellipsizeMode == wxELLIPSIZE_NONE ? wxELLIPSIZE_NONE : wxELLIPSIZE_END;
     }
 
     void OnText(const wxString& text) override

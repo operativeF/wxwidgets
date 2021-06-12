@@ -495,10 +495,10 @@ protected:
 
     // the actual window we show on screen (this variable should actually be
     // named m_window, but m_control is kept for backward compatibility)
-    wxWindow*  m_control;
+    wxWindow*  m_control{nullptr};
 
     // a temporary pointer to the attribute being edited
-    wxGridCellAttr* m_attr;
+    wxGridCellAttr* m_attr{nullptr};
 
     // if we change the colours/font of the control from the default ones, we
     // must restore the default later and we save them here between calls to
@@ -905,7 +905,7 @@ public:
 private:
     void InitData();
 
-    wxGridCellAttrProviderData *m_data;
+    wxGridCellAttrProviderData *m_data{nullptr};
 
     wxGridCellAttrProvider(const wxGridCellAttrProvider&) = delete;
 	wxGridCellAttrProvider& operator=(const wxGridCellAttrProvider&) = delete;
@@ -1273,8 +1273,8 @@ public:
     virtual void SetColAttr(wxGridCellAttr *attr, int col);
 
 private:
-    wxGrid * m_view;
-    wxGridCellAttrProvider *m_attrProvider;
+    wxGrid * m_view{nullptr};
+    wxGridCellAttrProvider *m_attrProvider{nullptr};
 
     wxDECLARE_ABSTRACT_CLASS(wxGridTableBase);
     wxGridTableBase(const wxGridTableBase&) = delete;

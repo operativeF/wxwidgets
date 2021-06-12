@@ -2491,24 +2491,24 @@ public:
     }
 
     wxMBConv_win32(const wxMBConv_win32& conv)
-        : wxMBConv()
+        : wxMBConv(),
+          m_CodePage(conv.m_CodePage),
+          m_minMBCharWidth(conv.m_minMBCharWidth)
     {
-        m_CodePage = conv.m_CodePage;
-        m_minMBCharWidth = conv.m_minMBCharWidth;
     }
 
 #if wxUSE_FONTMAP
     explicit wxMBConv_win32(const char* name)
+        : m_CodePage(wxCharsetToCodepage(name)),
+          m_minMBCharWidth(0)
     {
-        m_CodePage = wxCharsetToCodepage(name);
-        m_minMBCharWidth = 0;
     }
 #endif // wxUSE_FONTMAP
 
     explicit wxMBConv_win32(wxFontEncoding encoding)
+        : m_CodePage(wxEncodingToCodepage(encoding)),
+          m_minMBCharWidth(0)
     {
-        m_CodePage = wxEncodingToCodepage(encoding);
-        m_minMBCharWidth = 0;
     }
 
     size_t MB2WC(wchar_t *buf, const char *psz, size_t n) const override
@@ -2875,12 +2875,11 @@ wxCSConv::~wxCSConv()
 }
 
 wxCSConv::wxCSConv(const wxCSConv& conv)
-        : wxMBConv()
+        : wxMBConv(),
+          m_convReal(DoCreate())
 {
     SetName(conv.m_name);
     SetEncoding(conv.m_encoding);
-
-    m_convReal = DoCreate();
 }
 
 wxCSConv& wxCSConv::operator=(const wxCSConv& conv)

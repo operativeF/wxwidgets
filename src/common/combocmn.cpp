@@ -450,7 +450,6 @@ public:
                                                 style)
     #endif
     {
-        m_inShow = 0;
     }
 
 #if USES_WXPOPUPTRANSIENTWINDOW
@@ -461,7 +460,7 @@ protected:
 #endif
 
 private:
-    wxByte      m_inShow;
+    wxByte      m_inShow{0};
 };
 
 
@@ -521,8 +520,8 @@ class wxComboPopupWindowEvtHandler : public wxEvtHandler
 public:
 
     explicit wxComboPopupWindowEvtHandler( wxComboCtrlBase *parent )
+        : m_combo(parent)
     {
-        m_combo = parent;
     }
 
     void OnSizeEvent( wxSizeEvent& event );
@@ -709,9 +708,8 @@ class wxComboBoxExtraInputHandler : public wxEvtHandler
 public:
 
     explicit wxComboBoxExtraInputHandler( wxComboCtrlBase* combo )
-         
+        : m_combo(combo)
     {
-        m_combo = combo;
     }
     ~wxComboBoxExtraInputHandler() override = default;
     void OnKey(wxKeyEvent& event);
@@ -786,14 +784,8 @@ class wxComboPopupEvtHandler : public wxEvtHandler
 public:
 
     explicit wxComboPopupEvtHandler( wxComboCtrlBase* combo )
-         
+        : m_combo(combo)
     {
-        m_combo = combo;
-        m_beenInside = false;
-
-        // Let's make it so that the popup control will not receive mouse
-        // events until mouse left button has been up.
-        m_blockEventsToPopup = true;
     }
     ~wxComboPopupEvtHandler() override = default;
 
@@ -809,8 +801,10 @@ public:
 protected:
     wxComboCtrlBase*     m_combo;
 
-    bool                m_beenInside;
-    bool                m_blockEventsToPopup;
+    bool                m_beenInside{false};
+    // Let's make it so that the popup control will not receive mouse
+    // events until mouse left button has been up.
+    bool                m_blockEventsToPopup{true};
 
 private:
     wxDECLARE_EVENT_TABLE();

@@ -49,9 +49,10 @@ wxGraphicsObjectRefData::wxGraphicsObjectRefData( wxGraphicsRenderer* renderer )
 }
 
 wxGraphicsObjectRefData::wxGraphicsObjectRefData( const wxGraphicsObjectRefData* data )
+    : m_renderer(data->m_renderer)
 {
-    m_renderer = data->m_renderer;
 }
+
 wxGraphicsRenderer* wxGraphicsObjectRefData::GetRenderer() const
 {
     return m_renderer ;
@@ -568,9 +569,9 @@ wxGraphicsContext::wxGraphicsContext(wxGraphicsRenderer* renderer,
       m_composition(wxCOMPOSITION_OVER),
       m_interpolation(wxInterpolationQuality::Default),
       m_enableOffset(false),
-      m_window(window)
+      m_window(window),
+      m_contentScaleFactor(window ? window->GetContentScaleFactor() : 1.0)
 {
-    m_contentScaleFactor = window ? window->GetContentScaleFactor() : 1.0;
 }
 
 wxGraphicsContext::~wxGraphicsContext()

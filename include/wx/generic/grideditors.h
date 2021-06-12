@@ -370,7 +370,7 @@ public:
     void ApplyEdit(int row, int col, wxGrid* grid) override;
 
 private:
-    long m_index;
+    long m_index{-1};
 
     wxGridCellEnumEditor(const wxGridCellEnumEditor&) = delete;
 	wxGridCellEnumEditor& operator=(const wxGridCellEnumEditor&) = delete;

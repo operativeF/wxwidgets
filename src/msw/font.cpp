@@ -156,7 +156,7 @@ public:
 
     int GetLogFontHeightAtPPI(int ppi) const
     {
-        return m_nativeFontInfo.GetLogFontHeightAtPPI(
+        return wxNativeFontInfo::GetLogFontHeightAtPPI(
             m_nativeFontInfo.pointSize, ppi);
     }
 
@@ -325,8 +325,8 @@ protected:
 // ----------------------------------------------------------------------------
 
 wxFontRefData::wxFontRefData(const wxFontInfo& info)
+    : m_sizeUsingPixels(info.IsUsingSizeInPixels())
 {
-    m_sizeUsingPixels = info.IsUsingSizeInPixels();
     if ( m_sizeUsingPixels )
     {
         m_nativeFontInfo.SetPixelSize(info.GetPixelSize());

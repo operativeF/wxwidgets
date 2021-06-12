@@ -766,11 +766,8 @@ wxZipEntry::wxZipEntry(const wxZipEntry& e)
     m_DiskStart(e.m_DiskStart),
     m_InternalAttributes(e.m_InternalAttributes),
     m_ExternalAttributes(e.m_ExternalAttributes),
-    m_z64infoOffset(0),
     m_Extra(AddRef(e.m_Extra)),
-    m_LocalExtra(AddRef(e.m_LocalExtra)),
-    m_zipnotifier(nullptr),
-    m_backlink(nullptr)
+    m_LocalExtra(AddRef(e.m_LocalExtra))
 {
 }
 
@@ -1568,17 +1565,17 @@ wxDEFINE_SCOPED_PTR (wxZipEntry, wxZipEntryPtr_)
 //
 wxZipInputStream::wxZipInputStream(wxInputStream& stream,
                                    wxMBConv& conv /*=wxConvLocal*/)
-  : wxArchiveInputStream(stream, conv)
+  : wxArchiveInputStream(stream, conv),
+    m_store(new wxStoredInputStream(*m_parent_i_stream)),
+    m_weaklinks(new wxZipWeakLinks)
 {
     
-    m_store = new wxStoredInputStream(*m_parent_i_stream);
     m_inflate = nullptr;
     m_rawin = nullptr;
     m_raw = false;
     m_headerSize = 0;
     m_decomp = nullptr;
     m_parentSeekable = false;
-    m_weaklinks = new wxZipWeakLinks;
     m_streamlink = nullptr;
     m_offsetAdjustment = 0;
     m_position = wxInvalidOffset;
@@ -2166,20 +2163,20 @@ wxZipOutputStream::wxZipOutputStream(wxOutputStream& stream,
                                      int level      /*=-1*/,
                                      wxMBConv& conv /*=wxConvUTF8*/)
   : wxArchiveOutputStream(stream, conv),
-    m_level(level)
+    m_level(level),
+    m_store(new wxStoredOutputStream(*m_parent_o_stream)),
+    m_initialData(new char[OUTPUT_LATENCY])
 {
-    m_store = new wxStoredOutputStream(*m_parent_o_stream);
-    m_initialData = new char[OUTPUT_LATENCY];
 }
 
 wxZipOutputStream::wxZipOutputStream(wxOutputStream *stream,
                                      int level      /*=-1*/,
                                      wxMBConv& conv /*=wxConvUTF8*/)
   : wxArchiveOutputStream(stream, conv),
-    m_level(level)
+    m_level(level),
+    m_store(new wxStoredOutputStream(*m_parent_o_stream)),
+    m_initialData(new char[OUTPUT_LATENCY])
 {
-    m_store = new wxStoredOutputStream(*m_parent_o_stream);
-    m_initialData = new char[OUTPUT_LATENCY];
 }
 
 wxZipOutputStream::~wxZipOutputStream()

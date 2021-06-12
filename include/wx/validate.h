@@ -79,7 +79,7 @@ public:
     static bool IsSilent() { return ms_isSilent; }
 
 protected:
-    wxWindow *m_validatorWindow;
+    wxWindow *m_validatorWindow{nullptr};
 
 private:
     static bool ms_isSilent;

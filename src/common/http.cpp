@@ -426,14 +426,13 @@ class wxHTTPStream : public wxSocketInputStream
 {
 public:
     wxHTTP *m_http;
-    size_t m_httpsize;
-    unsigned long m_read_bytes;
+    size_t m_httpsize{0};
+    unsigned long m_read_bytes{0};
 
-    explicit wxHTTPStream(wxHTTP *http) : wxSocketInputStream(*http)
+    explicit wxHTTPStream(wxHTTP *http)
+        : wxSocketInputStream(*http),
+          m_http(http)
     {
-        m_http = http;
-        m_httpsize = 0;
-        m_read_bytes = 0;
     }
 
     wxHTTPStream(const wxHTTPStream&) = delete;

@@ -489,10 +489,9 @@ wxBEGIN_EVENT_TABLE(wxLogFrame, wxFrame)
 wxEND_EVENT_TABLE()
 
 wxLogFrame::wxLogFrame(wxWindow *pParent, wxLogWindow *log, const wxString& szTitle)
-          : wxFrame(pParent, wxID_ANY, szTitle)
+          : wxFrame(pParent, wxID_ANY, szTitle),
+            m_log(log)
 {
-    m_log = log;
-
     m_pTextCtrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition,
             wxDefaultSize,
             wxTE_MULTILINE  |
@@ -592,15 +591,16 @@ wxLogWindow::wxLogWindow(wxWindow *pParent,
                          const wxString& szTitle,
                          bool bShow,
                          bool bDoPass)
+    : m_pLogFrame(new wxLogFrame(pParent, this, szTitle))
 {
+    // FIXME:
     // Initialize it to NULL to ensure that we don't crash if any log messages
     // are generated before the frame is fully created (while this doesn't
     // happen normally, it might, in principle).
-    m_pLogFrame = nullptr;
+    // m_pLogFrame = nullptr;
+    // m_pLogFrame = new wxLogFrame(pParent, this, szTitle);
 
     PassMessages(bDoPass);
-
-    m_pLogFrame = new wxLogFrame(pParent, this, szTitle);
 
     if ( bShow )
         m_pLogFrame->Show();
@@ -1055,8 +1055,8 @@ static int OpenLogFile(wxFile& file, wxString *pFilename, wxWindow *parent)
 // ----------------------------------------------------------------------------
 
 wxLogTextCtrl::wxLogTextCtrl(wxTextCtrl *pTextCtrl)
+    : m_pTextCtrl(pTextCtrl)
 {
-    m_pTextCtrl = pTextCtrl;
 }
 
 void wxLogTextCtrl::DoLogText(const wxString& msg)

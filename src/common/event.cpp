@@ -384,13 +384,9 @@ wxEvent::wxEvent(const wxEvent& src)
     , m_timeStamp(src.m_timeStamp)
     , m_id(src.m_id)
     , m_callbackUserData(src.m_callbackUserData)
-    , m_handlerToProcessOnlyIn(nullptr)
     , m_propagationLevel(src.m_propagationLevel)
-    , m_propagatedFrom(nullptr)
     , m_skipped(src.m_skipped)
     , m_isCommandEvent(src.m_isCommandEvent)
-    , m_wasProcessed(false)
-    , m_willBeProcessedAgain(false)
 {
 }
 
@@ -930,11 +926,11 @@ wxEventHashTable* wxEventHashTable::sm_first = nullptr;
 
 wxEventHashTable::wxEventHashTable(const wxEventTable &table)
                 : m_table(table),
-                  m_rebuildHash(true)
+                  m_rebuildHash(true),
+                  m_next(sm_first)
 {
     AllocEventTypeTable(EVENT_TYPE_TABLE_INIT_SIZE);
 
-    m_next = sm_first;
     if (m_next)
         m_next->m_previous = this;
     sm_first = this;

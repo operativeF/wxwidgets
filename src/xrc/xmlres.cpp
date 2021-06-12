@@ -2546,7 +2546,7 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
         if (hasFacename)
             font.SetFaceName(facename);
         if (hasEncoding)
-            font.SetDefaultEncoding(enc);
+            wxFont::SetDefaultEncoding(enc);
     }
     else // not based on system font
     {

@@ -249,14 +249,12 @@ wxDirItemData::wxDirItemData(const wxString& path, const wxString& name,
                              bool isDir)
     : m_path(path)
     , m_name(name)
+    , m_isDir(isDir)
 {
     /* Insert logic to detect hidden files here
      * In UnixLand we just check whether the first char is a dot
      * For FileNameFromPath read LastDirNameInThisPath ;-) */
     // m_isHidden = (bool)(wxFileNameFromPath(*m_path)[0] == '.');
-    m_isHidden = false;
-    m_isExpanded = false;
-    m_isDir = isDir;
 }
 
 void wxDirItemData::SetNewDirName(const wxString& path)
@@ -1373,7 +1371,9 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFileIconsTableModule, wxModule);
 class wxFileIconEntry : public wxObject
 {
 public:
-    explicit wxFileIconEntry(int i) { iconid = i; }
+    explicit wxFileIconEntry(int i)
+        : iconid(i)
+    {}
 
     int iconid;
 };
@@ -1381,8 +1381,6 @@ public:
 wxFileIconsTable::wxFileIconsTable()
     : m_size(16, 16)
 {
-    m_HashTable = nullptr;
-    m_smallImageList = nullptr;
 }
 
 wxFileIconsTable::~wxFileIconsTable()

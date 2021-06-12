@@ -262,8 +262,6 @@ constexpr wxRealPoint::wxRealPoint(const wxPoint& pt)
 
 wxColourDatabase::wxColourDatabase ()
 {
-    // will be created on demand in Initialize()
-    m_map = nullptr;
 }
 
 wxColourDatabase::~wxColourDatabase ()

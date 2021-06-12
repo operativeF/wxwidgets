@@ -210,25 +210,27 @@ wxRegKey::StdKey wxRegKey::GetStdKeyFromHkey(WXHKEY hkey)
 // ctors and dtor
 // ----------------------------------------------------------------------------
 
-wxRegKey::wxRegKey(WOW64ViewMode viewMode) : m_viewMode(viewMode)
+wxRegKey::wxRegKey(WOW64ViewMode viewMode)
+  : m_viewMode(viewMode),
+    m_hRootKey((WXHKEY) aStdKeys[HKCR].hkey)
 {
-  m_hRootKey = (WXHKEY) aStdKeys[HKCR].hkey;  
 }
 
 wxRegKey::wxRegKey(const wxString& strKey, WOW64ViewMode viewMode)
-    : m_strKey(strKey), m_viewMode(viewMode)
+    : m_strKey(strKey),
+      m_viewMode(viewMode),
+      m_hRootKey((WXHKEY) aStdKeys[ExtractKeyName(m_strKey)].hkey)
 {
-  m_hRootKey  = (WXHKEY) aStdKeys[ExtractKeyName(m_strKey)].hkey;  
 }
 
 // parent is a predefined (and preopened) key
 wxRegKey::wxRegKey(StdKey keyParent,
                    const wxString& strKey,
                    WOW64ViewMode viewMode)
-    : m_strKey(strKey), m_viewMode(viewMode)
+    : m_strKey(strKey), m_viewMode(viewMode),
+      m_hRootKey((WXHKEY) aStdKeys[keyParent].hkey)
 {
   RemoveTrailingSeparator(m_strKey);
-  m_hRootKey  = (WXHKEY) aStdKeys[keyParent].hkey;
 }
 
 // parent is a normal regkey

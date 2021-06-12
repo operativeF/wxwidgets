@@ -60,8 +60,8 @@ wxBEGIN_EVENT_TABLE(wxTextValidator, wxValidator)
 wxEND_EVENT_TABLE()
 
 wxTextValidator::wxTextValidator(long style, wxString *val)
+    : m_stringValue(val)
 {
-    m_stringValue = val;
     SetStyle(style);
 }
 

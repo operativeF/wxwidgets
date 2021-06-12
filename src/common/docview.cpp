@@ -107,16 +107,10 @@ wxString FindExtension(const wxString& path)
 // ----------------------------------------------------------------------------
 
 wxDocument::wxDocument(wxDocument *parent)
+    : m_documentParent(parent)
 {
-    m_documentModified = false;
-    m_documentTemplate = nullptr;
-
-    m_documentParent = parent;
     if ( parent )
         parent->m_childDocuments.push_back(this);
-
-    m_commandProcessor = nullptr;
-    m_savedYet = false;
 }
 
 bool wxDocument::DeleteContents()
@@ -764,13 +758,12 @@ wxDocTemplate::wxDocTemplate(wxDocManager *manager,
     , m_defaultExt(ext)
     , m_docTypeName(docTypeName)
     , m_viewTypeName(viewTypeName)
+    , m_documentManager(manager)
+    , m_flags(flags)
+    , m_docClassInfo(docClassInfo)
+    , m_viewClassInfo(viewClassInfo)
 {
-    m_documentManager = manager;
-    m_flags = flags;
     m_documentManager->AssociateTemplate(this);
-
-    m_docClassInfo = docClassInfo;
-    m_viewClassInfo = viewClassInfo;
 }
 
 wxDocTemplate::~wxDocTemplate()
@@ -2066,9 +2059,9 @@ wxString GetAppropriateTitle(const wxView *view, const wxString& titleGiven)
 } // anonymous namespace
 
 wxDocPrintout::wxDocPrintout(wxView *view, const wxString& title)
-             : wxPrintout(GetAppropriateTitle(view, title))
+             : wxPrintout(GetAppropriateTitle(view, title)),
+               m_printoutView(view)
 {
-    m_printoutView = view;
 }
 
 bool wxDocPrintout::OnPrintPage(int WXUNUSED(page))

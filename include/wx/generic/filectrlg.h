@@ -113,14 +113,11 @@ public:
 protected:
     wxString m_fileName;
     wxString   m_filePath;
-    wxFileOffset m_size;
+    wxFileOffset m_size{0};
     wxDateTime m_dateTime;
     wxString m_permissions;
-    int      m_type;
-    int      m_image;
-
-private:
-    
+    int      m_type{wxFileData::is_file};
+    int      m_image{wxFileIconsTable::file};    
 };
 
 //-----------------------------------------------------------------------------
@@ -174,11 +171,11 @@ protected:
     void FreeAllItemsData();
 
     wxString      m_dirName;
-    bool          m_showHidden;
+    bool          m_showHidden{false};
     wxString      m_wild;
 
-    bool m_sort_forward;
-    wxFileData::fileListFieldType m_sort_field;
+    bool m_sort_forward{true};
+    wxFileData::fileListFieldType m_sort_field{wxFileData::FileList_Name};
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxFileListCtrl);

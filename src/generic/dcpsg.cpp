@@ -264,10 +264,6 @@ wxPostScriptDCImpl::wxPostScriptDCImpl( wxPostScriptDC *owner ) :
    wxDCImpl( owner )
 {
     Init();
-
-    m_pageHeight = 842 * PS2DEV;
-
-    m_ok = true;
 }
 
 wxPostScriptDCImpl::wxPostScriptDCImpl( wxPostScriptDC *owner, const wxPrintData& data ) :
@@ -278,8 +274,6 @@ wxPostScriptDCImpl::wxPostScriptDCImpl( wxPostScriptDC *owner, const wxPrintData
     // this calculates m_pageHeight required for
     // taking the inverted Y axis into account
     SetPrintData( data );
-
-    m_ok = true;
 }
 
 
@@ -287,10 +281,6 @@ wxPostScriptDCImpl::wxPostScriptDCImpl( wxPrinterDC *owner ) :
    wxDCImpl( owner )
 {
     Init();
-
-    m_pageHeight = 842 * PS2DEV;
-
-    m_ok = true;
 }
 
 wxPostScriptDCImpl::wxPostScriptDCImpl( wxPrinterDC *owner, const wxPrintData& data ) :
@@ -301,8 +291,6 @@ wxPostScriptDCImpl::wxPostScriptDCImpl( wxPrinterDC *owner, const wxPrintData& d
     // this calculates m_pageHeight required for
     // taking the inverted Y axis into account
     SetPrintData( data );
-
-    m_ok = true;
 }
 
 void wxPostScriptDCImpl::Init()

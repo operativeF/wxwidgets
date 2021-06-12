@@ -909,7 +909,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
 
         // we draw the text label vertically centered, but this results in it
         // being 1px too low compared to native menus for some reason, fix it
-        if ( data->MenuLayout() != MenuDrawData::FullTheme )
+        if ( MenuDrawData::MenuLayout() != MenuDrawData::FullTheme )
             rcText.top--;
 
 #if wxUSE_UXTHEME
@@ -993,7 +993,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
 
         int flags = DST_PREFIXTEXT;
         // themes menu is using specified color for disabled labels
-        if ( data->MenuLayout() == MenuDrawData::Classic &&
+        if ( MenuDrawData::MenuLayout() == MenuDrawData::Classic &&
              (stat & wxODDisabled) && !(stat & wxODSelected) )
             flags |= DSS_DISABLED;
 
@@ -1017,7 +1017,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
 
             flags = DST_TEXT;
             // themes menu is using specified color for disabled labels
-            if ( data->MenuLayout() == MenuDrawData::Classic &&
+            if ( MenuDrawData::MenuLayout() == MenuDrawData::Classic &&
                  (stat & wxODDisabled) && !(stat & wxODSelected) )
                 flags |= DSS_DISABLED;
 
@@ -1026,7 +1026,7 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
                                  - data->ArrowBorder;
 
             // right align accel on FullTheme menu, left otherwise
-            if ( data->MenuLayout() == MenuDrawData::FullTheme)
+            if ( MenuDrawData::MenuLayout() == MenuDrawData::FullTheme)
                 x -= accelSize.cx;
             else
                 x -= m_parentMenu->GetMaxAccelWidth();

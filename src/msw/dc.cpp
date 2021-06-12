@@ -408,9 +408,9 @@ class StretchBltModeChanger
 {
 public:
     explicit StretchBltModeChanger(HDC hdc)
-        : m_hdc(hdc)
+        : m_hdc(hdc),
+          m_modeOld(::SetStretchBltMode(m_hdc, COLORONCOLOR))
     {
-        m_modeOld = ::SetStretchBltMode(m_hdc, COLORONCOLOR);
         if ( !m_modeOld )
         {
             wxLogLastError(wxT("SetStretchBltMode"));
@@ -473,10 +473,10 @@ WXHDC wxDC::GetHDC() const
 // ---------------------------------------------------------------------------
 
 wxMSWDCImpl::wxMSWDCImpl( wxDC *owner, WXHDC hDC ) :
-    wxDCImpl( owner )
+    wxDCImpl( owner ),
+    m_hDC(hDC)
 {
     Init();
-    m_hDC = hDC;
 }
 
 wxMSWDCImpl::~wxMSWDCImpl()
@@ -2600,21 +2600,17 @@ wxObjectList wxMSWDCImpl::sm_bitmapCache;
 wxObjectList wxMSWDCImpl::sm_dcCache;
 
 wxDCCacheEntry::wxDCCacheEntry(WXHBITMAP hBitmap, int w, int h, int depth)
+    : m_bitmap(hBitmap),
+      m_width(w),
+      m_height(h),
+      m_depth(depth)
 {
-    m_bitmap = hBitmap;
-    m_dc = nullptr;
-    m_width = w;
-    m_height = h;
-    m_depth = depth;
 }
 
 wxDCCacheEntry::wxDCCacheEntry(WXHDC hDC, int depth)
+    : m_dc(hDC),
+      m_depth(depth)
 {
-    m_bitmap = nullptr;
-    m_dc = hDC;
-    m_width = 0;
-    m_height = 0;
-    m_depth = depth;
 }
 
 wxDCCacheEntry::~wxDCCacheEntry()

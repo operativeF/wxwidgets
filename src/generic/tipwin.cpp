@@ -65,7 +65,7 @@ private:
     wxTipWindow* m_parent;
 
     std::vector<wxString> m_textLines;
-    wxCoord m_heightLine;
+    wxCoord m_heightLine{0};
 
 
     wxDECLARE_EVENT_TABLE();
@@ -215,17 +215,14 @@ void wxTipWindow::Close()
 // ----------------------------------------------------------------------------
 
 wxTipWindowView::wxTipWindowView(wxWindow *parent)
-               : wxWindow(parent, wxID_ANY,
-                          wxDefaultPosition, wxDefaultSize,
-                          wxNO_BORDER)
+    : wxWindow(parent, wxID_ANY,
+                wxDefaultPosition, wxDefaultSize,
+                wxNO_BORDER),
+      m_parent((wxTipWindow*)parent)
 {
     // set colours
     SetForegroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_INFOTEXT));
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_INFOBK));
-
-    m_parent = (wxTipWindow*)parent;
-
-    m_heightLine = 0;
 }
 
 void wxTipWindowView::Adjust(const wxString& text, wxCoord maxLength)

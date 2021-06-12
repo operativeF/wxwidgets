@@ -36,15 +36,15 @@ wxIMPLEMENT_CLASS(wxProtoInfo, wxObject);
 wxProtoInfo::wxProtoInfo(const wxChar *name, const wxChar *serv,
                          const bool need_host1, wxClassInfo *info)
            : m_protoname(name),
-             m_servname(serv)
+             m_servname(serv),
+             m_cinfo(info),
+             m_needhost(need_host1)
 {
-    m_cinfo = info;
-    m_needhost = need_host1;
 #if wxUSE_URL
     next = wxURL::ms_protocols;
     wxURL::ms_protocols = this;
 #else
-    next = NULL;
+    next = nullptr;
 #endif
 }
 

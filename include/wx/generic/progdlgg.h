@@ -133,10 +133,10 @@ protected:
 
 
     // continue processing or not (return value for Update())
-    State m_state;
+    State m_state{Uncancelable};
 
     // the maximum value
-    int m_maximum;
+    int m_maximum{0};
 
 #if defined(__WXMSW__)
     // the factor we use to always keep the value in 16 bit range as the native
@@ -147,16 +147,14 @@ protected:
     // time when the dialog was created
     unsigned long m_timeStart;
     // time when the dialog was closed or cancelled
-    unsigned long m_timeStop;
+    // FIXME: Max
+    unsigned long m_timeStop{static_cast<unsigned long>(-1)};
     // time between the moment the dialog was closed/cancelled and resume
-    unsigned long m_break;
+    unsigned long m_break{0};
 
 private:
     // update the label to show the given time (in seconds)
-    static void SetTimeLabel(unsigned long val, wxStaticText *label);
-
-    // common part of all ctors
-    
+    static void SetTimeLabel(unsigned long val, wxStaticText *label);    
 
     // create the label with given text and another one to show the time nearby
     // as the next windows in the sizer, returns the created control
@@ -179,50 +177,50 @@ private:
     void DisableAbort() { EnableAbort(false); }
 
     // the widget displaying current status (may be NULL)
-    wxGauge *m_gauge;
+    wxGauge *m_gauge{nullptr};
     // the message displayed
-    wxStaticText *m_msg;
+    wxStaticText *m_msg{nullptr};
     // displayed elapsed, estimated, remaining time
-    wxStaticText *m_elapsed,
-                 *m_estimated,
-                 *m_remaining;
+    wxStaticText *m_elapsed{nullptr};
+    wxStaticText *m_estimated{nullptr};
+    wxStaticText *m_remaining{nullptr};
 
     // Reference to the parent top level window, automatically becomes NULL if
     // it it is destroyed and could be always NULL if it's not given at all.
-    wxWindowRef m_parentTop;
+    wxWindowRef m_parentTop{nullptr};
 
     // Progress dialog styles: this is not the same as m_windowStyle because
     // wxPD_XXX constants clash with the existing TLW styles so to be sure we
     // don't have any conflicts we just use a separate variable for storing
     // them.
-    int m_pdStyle;
+    int m_pdStyle{0};
 
     // skip some portion
-    bool m_skip;
+    bool m_skip{false};
 
     // the abort and skip buttons (or NULL if none)
-    wxButton *m_btnAbort;
-    wxButton *m_btnSkip;
+    wxButton *m_btnAbort{nullptr};
+    wxButton *m_btnSkip{nullptr};
 
     // saves the time when elapsed time was updated so there is only one
     // update per second
-    unsigned long m_last_timeupdate;
+    unsigned long m_last_timeupdate{0};
 
     // tells how often a change of the estimated time has to be confirmed
     // before it is actually displayed - this reduces the frequency of updates
     // of estimated and remaining time
-    int m_delay;
+    int m_delay{3};
 
     // counts the confirmations
-    int m_ctdelay;
-    unsigned long m_display_estimated;
+    int m_ctdelay{0};
+    unsigned long m_display_estimated{0};
 
     // for wxPD_APP_MODAL case
-    wxWindowDisabler *m_winDisabler;
+    wxWindowDisabler *m_winDisabler{nullptr};
 
     // Temporary event loop created by the dialog itself if there is no
     // currently active loop when it is created.
-    wxEventLoop *m_tempEventLoop;
+    wxEventLoop *m_tempEventLoop{nullptr};
 
 
     wxDECLARE_EVENT_TABLE();

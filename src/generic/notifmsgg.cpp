@@ -86,7 +86,7 @@ private:
     wxStaticText* m_messageText;
     wxStaticText* m_messageTitle;
     wxBitmapButton* m_closeBtn;
-    wxBoxSizer* m_buttonSizer;
+    wxBoxSizer* m_buttonSizer{nullptr};
 
     wxTimer m_timer;
     int m_timeout;
@@ -128,15 +128,13 @@ wxEND_EVENT_TABLE()
 std::vector<wxNotificationMessageWindow*> wxNotificationMessageWindow::ms_visibleNotifications;
 
 wxNotificationMessageWindow::wxNotificationMessageWindow(wxGenericNotificationMessageImpl* notificationImpl)
-                           : wxFrame(nullptr, wxID_ANY, _("Notice"),
-                                      wxDefaultPosition, wxDefaultSize,
-                                      wxBORDER_NONE | wxFRAME_TOOL_WINDOW | wxSTAY_ON_TOP /* no caption, no border styles */),
-                             m_timer(this),
-                             m_mouseActiveCount(0),
-                             m_notificationImpl(notificationImpl)
+    : wxFrame(nullptr, wxID_ANY, _("Notice"),
+                wxDefaultPosition, wxDefaultSize,
+                wxBORDER_NONE | wxFRAME_TOOL_WINDOW | wxSTAY_ON_TOP /* no caption, no border styles */),
+        m_timer(this),
+        m_mouseActiveCount(0),
+        m_notificationImpl(notificationImpl)
 {
-    m_buttonSizer = nullptr;
-
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNSHADOW));
 
     m_messagePanel = new wxPanel(this, wxID_ANY);
@@ -447,9 +445,9 @@ void wxGenericNotificationMessage::Init()
 int wxGenericNotificationMessageImpl::ms_timeout = 3;
 
 wxGenericNotificationMessageImpl::wxGenericNotificationMessageImpl(wxNotificationMessageBase* notification) :
-    wxNotificationMessageImpl(notification)
+    wxNotificationMessageImpl(notification),
+    m_window(new wxNotificationMessageWindow(this))
 {
-    m_window = new wxNotificationMessageWindow(this);
 }
 
 wxGenericNotificationMessageImpl::~wxGenericNotificationMessageImpl()

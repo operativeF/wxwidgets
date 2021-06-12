@@ -69,16 +69,16 @@ private:
     wxFontEnumerator *m_fontEnum;
 
     // if != -1, enum only fonts which have this encoding
-    int m_charset;
+    int m_charset{DEFAULT_CHARSET};
 
     // if not empty, enum only the fonts with this facename
     wxString m_facename;
 
     // if true, enum only fixed fonts
-    bool m_fixedOnly;
+    bool m_fixedOnly{false};
 
     // if true, we enumerate the encodings, not fonts
-    bool m_enumEncodings;
+    bool m_enumEncodings{false};
 
     // the list of charsets we already found while enumerating charsets
     std::vector<int> m_charsets;
@@ -103,11 +103,8 @@ int CALLBACK wxFontEnumeratorProc(LPLOGFONT lplf, LPTEXTMETRIC lptm,
 // ----------------------------------------------------------------------------
 
 wxFontEnumeratorHelper::wxFontEnumeratorHelper(wxFontEnumerator *fontEnum)
+    : m_fontEnum(fontEnum)
 {
-    m_fontEnum = fontEnum;
-    m_charset = DEFAULT_CHARSET;
-    m_fixedOnly = false;
-    m_enumEncodings = false;
 }
 
 void wxFontEnumeratorHelper::SetFaceName(const wxString& facename)

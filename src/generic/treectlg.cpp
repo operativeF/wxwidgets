@@ -112,7 +112,7 @@ private:
     wxGenericTreeCtrl  *m_owner;
     wxGenericTreeItem  *m_itemEdited;
     wxString            m_startValue;
-    bool                m_aboutToFinish;
+    bool                m_aboutToFinish{false};
 
     wxDECLARE_EVENT_TABLE();
 };
@@ -125,7 +125,7 @@ public:
     // reset the current prefix after half a second of inactivity
     enum { DELAY = 500 };
 
-    explicit wxTreeFindTimer( wxGenericTreeCtrl *owner ) { m_owner = owner; }
+    explicit wxTreeFindTimer( wxGenericTreeCtrl *owner ) : m_owner(owner) {}
 
     wxTreeFindTimer(const wxTreeFindTimer&) = delete;
 	wxTreeFindTimer& operator=(const wxTreeFindTimer&) = delete;
@@ -331,28 +331,28 @@ private:
 
     wxTreeItemData     *m_data{nullptr};         // user-provided data
 
-    int                 m_state;        // item state
+    int                 m_state{wxTREE_ITEMSTATE_NONE};        // item state
 
     wxArrayGenericTreeItems m_children; // list of children
     wxGenericTreeItem  *m_parent;       // parent of this item
 
-    wxItemAttr     *m_attr;         // attributes???
+    wxItemAttr     *m_attr{nullptr};         // attributes???
 
     // tree ctrl images for the normal, selected, expanded and
     // expanded+selected states
     int                 m_images[wxTreeItemIcon_Max];
 
-    wxCoord             m_x;            // (virtual) offset from top
-    wxCoord             m_y;            // (virtual) offset from left
-    int                 m_width;        // width of this item
-    int                 m_height;       // height of this item
+    wxCoord             m_x{0};            // (virtual) offset from top
+    wxCoord             m_y{0};            // (virtual) offset from left
+    int                 m_width{-1};        // width of this item
+    int                 m_height{-1};       // height of this item
 
-    unsigned int        m_isCollapsed;
-    unsigned int        m_hasHilight; // same as focused
-    unsigned int        m_hasPlus; // used for item which doesn't have
+    bool        m_isCollapsed{true};
+    bool        m_hasHilight{false}; // same as focused
+    bool        m_hasPlus{false}; // used for item which doesn't have
                                    // children but has a [+] button
-    unsigned int        m_isBold; // render the label in bold font
-    unsigned int        m_ownsAttr; // delete attribute when done
+    bool        m_isBold{false}; // render the label in bold font
+    bool        m_ownsAttr{false}; // delete attribute when done
 };
 
 // =============================================================================
@@ -400,8 +400,8 @@ IsDescendantOf(const wxGenericTreeItem *parent, const wxGenericTreeItem *item)
 // -----------------------------------------------------------------------------
 
 wxTreeRenameTimer::wxTreeRenameTimer( wxGenericTreeCtrl *owner )
+    : m_owner(owner)
 {
-    m_owner = owner;
 }
 
 void wxTreeRenameTimer::Notify()
@@ -421,11 +421,9 @@ wxEND_EVENT_TABLE()
 
 wxTreeTextCtrl::wxTreeTextCtrl(wxGenericTreeCtrl *owner,
                                wxGenericTreeItem *itm)
-              : m_itemEdited(itm), m_startValue(itm->GetText())
+              : m_itemEdited(itm), m_startValue(itm->GetText()),
+                m_owner(owner)
 {
-    m_owner = owner;
-    m_aboutToFinish = false;
-
     wxRect rect;
     m_owner->GetBoundingRect(m_itemEdited, rect, true);
 
@@ -578,33 +576,14 @@ wxGenericTreeItem::wxGenericTreeItem(wxGenericTreeItem *parent,
                                      const wxString& text,
                                      int image, int selImage,
                                      wxTreeItemData *data)
-                 : m_text(text)
+                 : m_text(text),
+                   m_data(data),
+                   m_parent(parent)
 {
     m_images[wxTreeItemIcon_Normal] = image;
     m_images[wxTreeItemIcon_Selected] = selImage;
     m_images[wxTreeItemIcon_Expanded] = NO_IMAGE;
     m_images[wxTreeItemIcon_SelectedExpanded] = NO_IMAGE;
-
-    m_data = data;
-    m_state = wxTREE_ITEMSTATE_NONE;
-    m_x = m_y = 0;
-
-    m_isCollapsed = true;
-    m_hasHilight = false;
-    m_hasPlus = false;
-    m_isBold = false;
-
-    m_parent = parent;
-
-    m_attr = nullptr;
-    m_ownsAttr = false;
-
-    // We don't know the height here yet.
-    m_width = 0;
-    m_height = 0;
-
-    m_widthText = -1;
-    m_heightText = -1;
 }
 
 wxGenericTreeItem::~wxGenericTreeItem()

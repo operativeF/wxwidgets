@@ -45,8 +45,8 @@ class wxContextHelpEvtHandler: public wxEvtHandler
 {
 public:
     explicit wxContextHelpEvtHandler(wxContextHelp* contextHelp)
+        : m_contextHelp(contextHelp)
     {
-        m_contextHelp = contextHelp;
     }
 
     bool ProcessEvent(wxEvent& event) override;
@@ -423,8 +423,8 @@ bool wxSimpleHelpProvider::ShowHelp(wxWindowBase *window)
 // ----------------------------------------------------------------------------
 
 wxHelpControllerHelpProvider::wxHelpControllerHelpProvider(wxHelpControllerBase* hc)
+    : m_helpController(hc)
 {
-    m_helpController = hc;
 }
 
 bool wxHelpControllerHelpProvider::ShowHelp(wxWindowBase *window)

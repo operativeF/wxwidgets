@@ -226,10 +226,10 @@ class WXDLLIMPEXP_BASE wxVariantDataLong: public wxVariantData
 {
 public:
     wxVariantDataLong() = default;
-    explicit wxVariantDataLong(long value) { m_value = value; }
+    explicit wxVariantDataLong(long value) : m_value(value) {}
 
     inline long GetValue() const { return m_value; }
-    inline void SetValue(long value) { m_value = value; }
+    inline void SetValue(long value) {m_value = value;}
 
     bool Eq(wxVariantData& data) const override;
 
@@ -324,21 +324,21 @@ bool wxVariantDataLong::Read(wxString& str)
 // wxVariant
 
 wxVariant::wxVariant(long val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataLong(val);
-    m_name = name;
 }
 
 wxVariant::wxVariant(int val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataLong((long)val);
-    m_name = name;
 }
 
 wxVariant::wxVariant(short val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataLong((long)val);
-    m_name = name;
 }
 
 bool wxVariant::operator== (long value) const
@@ -389,7 +389,7 @@ class WXDLLIMPEXP_BASE wxVariantDoubleData: public wxVariantData
 {
 public:
     wxVariantDoubleData() = default;
-    explicit wxVariantDoubleData(double value) { m_value = value; }
+    explicit wxVariantDoubleData(double value) : m_value(value) {}
 
     inline double GetValue() const { return m_value; }
     inline void SetValue(double value) { m_value = value; }
@@ -469,9 +469,9 @@ bool wxVariantDoubleData::Read(wxString& str)
 //  wxVariant double code
 
 wxVariant::wxVariant(double val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDoubleData(val);
-    m_name = name;
 }
 
 bool wxVariant::operator== (double value) const
@@ -522,10 +522,10 @@ class WXDLLIMPEXP_BASE wxVariantDataBool: public wxVariantData
 {
 public:
     wxVariantDataBool() = default;
-    explicit wxVariantDataBool(bool value) { m_value = value; }
+    explicit wxVariantDataBool(bool value) : m_value(value) {}
 
     inline bool GetValue() const { return m_value; }
-    inline void SetValue(bool value) { m_value = value; }
+    inline void SetValue(bool value) {m_value = value;}
 
     bool Eq(wxVariantData& data) const override;
     bool Write(std::ostream& str) const override;
@@ -604,9 +604,9 @@ bool wxVariantDataBool::Read(wxString& str)
 // wxVariant ****
 
 wxVariant::wxVariant(bool val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataBool(val);
-    m_name = name;
 }
 
 bool wxVariant::operator== (bool value) const
@@ -742,21 +742,21 @@ bool wxVariantDataChar::Read(wxString& str)
 }
 
 wxVariant::wxVariant(const wxUniChar& val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataChar(val);
-    m_name = name;
 }
 
 wxVariant::wxVariant(char val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataChar(val);
-    m_name = name;
 }
 
 wxVariant::wxVariant(wchar_t val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataChar(val);
-    m_name = name;
 }
 
 bool wxVariant::operator==(const wxUniChar& value) const
@@ -896,51 +896,51 @@ bool wxVariantDataString::Read(wxString& str)
 // wxVariant ****
 
 wxVariant::wxVariant(const wxString& val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataString(val);
-    m_name = name;
 }
 
 wxVariant::wxVariant(const char* val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataString(wxString(val));
-    m_name = name;
 }
 
 wxVariant::wxVariant(const wchar_t* val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataString(wxString(val));
-    m_name = name;
 }
 
 wxVariant::wxVariant(const wxCStrData& val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataString(val.AsString());
-    m_name = name;
 }
 
 wxVariant::wxVariant(const wxScopedCharBuffer& val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataString(wxString(val));
-    m_name = name;
 }
 
 wxVariant::wxVariant(const wxScopedWCharBuffer& val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataString(wxString(val));
-    m_name = name;
 }
 
 wxVariant::wxVariant(const std::string& val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataString(wxString(val));
-    m_name = name;
 }
 
 wxVariant::wxVariant(const wxStdWideString& val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataString(wxString(val));
-    m_name = name;
 }
 
 bool wxVariant::operator== (const wxString& value) const
@@ -991,10 +991,10 @@ class wxVariantDataWxObjectPtr: public wxVariantData
 {
 public:
     wxVariantDataWxObjectPtr() = default;
-    explicit wxVariantDataWxObjectPtr(wxObject* value) { m_value = value; }
+    explicit wxVariantDataWxObjectPtr(wxObject* value) : m_value(value) {}
 
     inline wxObject* GetValue() const { return m_value; }
-    inline void SetValue(wxObject* value) { m_value = value; }
+    inline void SetValue(wxObject* value) {m_value = value;}
 
     bool Eq(wxVariantData& data) const override;
     bool Write(std::ostream& str) const override;
@@ -1073,9 +1073,9 @@ bool wxVariantDataWxObjectPtr::Read(wxString& WXUNUSED(str))
 // wxVariant
 
 wxVariant::wxVariant( wxObject* val, const wxString& name)
+    : m_name(name)
 {
     m_refData = new wxVariantDataWxObjectPtr(val);
-    m_name = name;
 }
 
 bool wxVariant::operator== (wxObject* value) const
@@ -1107,7 +1107,7 @@ class wxVariantDataVoidPtr: public wxVariantData
 {
 public:
     wxVariantDataVoidPtr() = default;
-    explicit wxVariantDataVoidPtr(void* value) { m_value = value; }
+    explicit wxVariantDataVoidPtr(void* value) : m_value(value) {}
 
     inline void* GetValue() const { return m_value; }
     inline void SetValue(void* value) { m_value = value; }

@@ -87,26 +87,26 @@ public:
     wxPrintNativeDataBase *GetNativeData() const { return m_nativeData; }
 
 private:
-    wxPrintBin      m_bin;
-    int             m_media;
-    wxPrintMode     m_printMode;
+    wxPrintBin      m_bin{wxPrintBin::Default};
+    int             m_media{wxPRINTMEDIA_DEFAULT};
+    wxPrintMode     m_printMode{wxPrintMode::Printer};
 
-    int             m_printNoCopies;
-    wxPrintOrientation m_printOrientation;
-    bool            m_printOrientationReversed;
-    bool            m_printCollate;
+    int             m_printNoCopies{1};
+    wxPrintOrientation m_printOrientation{wxPrintOrientation::Portrait};
+    bool            m_printOrientationReversed{false};
+    bool            m_printCollate{false};
 
     wxString        m_printerName;
-    bool            m_colour;
-    wxDuplexMode    m_duplexMode;
-    wxPrintQuality  m_printQuality;
-    wxPaperSize     m_paperId;
+    bool            m_colour{true};
+    wxDuplexMode    m_duplexMode{wxDuplexMode::Simplex};
+    wxPrintQuality  m_printQuality{wxPRINT_QUALITY_HIGH};
+    wxPaperSize     m_paperId{wxPaperSize::None};
     wxSize          m_paperSize;
 
     wxString        m_filename;
 
-    char* m_privData;
-    int   m_privDataLen;
+    char* m_privData{nullptr};
+    int   m_privDataLen{0};
 
     wxPrintNativeDataBase  *m_nativeData;
 
@@ -170,19 +170,19 @@ public:
     void operator=(const wxPrintData& data); // Sets internal m_printData member
 
 private:
-    int             m_printFromPage;
-    int             m_printToPage;
-    int             m_printMinPage;
-    int             m_printMaxPage;
-    int             m_printNoCopies;
-    bool            m_printAllPages;
-    bool            m_printCollate;
-    bool            m_printToFile;
-    bool            m_printSelection;
-    bool            m_printEnableSelection;
-    bool            m_printEnablePageNumbers;
-    bool            m_printEnableHelp;
-    bool            m_printEnablePrintToFile;
+    int             m_printFromPage{0};
+    int             m_printToPage{0};
+    int             m_printMinPage{0};
+    int             m_printMaxPage{0};
+    int             m_printNoCopies{1};
+    bool            m_printAllPages{false};
+    bool            m_printCollate{false};
+    bool            m_printToFile{false};
+    bool            m_printSelection{false};
+    bool            m_printEnableSelection{false};
+    bool            m_printEnablePageNumbers{true};
+    bool            m_printEnableHelp{false};
+    bool            m_printEnablePrintToFile{true}; // TODO: correct default behavior?
     wxPrintData     m_printData;
 
 private:

@@ -345,8 +345,8 @@ wxPrintDialogData& wxPrinterBase::GetPrintDialogData() const
 wxIMPLEMENT_CLASS(wxPrinter, wxPrinterBase);
 
 wxPrinter::wxPrinter(wxPrintDialogData *data)
+    : m_pimpl(wxPrintFactory::GetFactory()->CreatePrinter( data ))
 {
-    m_pimpl = wxPrintFactory::GetFactory()->CreatePrinter( data );
 }
 
 wxPrinter::~wxPrinter()
@@ -421,13 +421,13 @@ wxPrintDialogBase::wxPrintDialogBase(wxWindow *parent,
 wxIMPLEMENT_CLASS(wxPrintDialog, wxObject);
 
 wxPrintDialog::wxPrintDialog(wxWindow *parent, wxPrintDialogData* data)
+    : m_pimpl(wxPrintFactory::GetFactory()->CreatePrintDialog( parent, data ))
 {
-    m_pimpl = wxPrintFactory::GetFactory()->CreatePrintDialog( parent, data );
 }
 
 wxPrintDialog::wxPrintDialog(wxWindow *parent, wxPrintData* data)
+    : m_pimpl(wxPrintFactory::GetFactory()->CreatePrintDialog( parent, data ))
 {
-    m_pimpl = wxPrintFactory::GetFactory()->CreatePrintDialog( parent, data );
 }
 
 wxPrintDialog::~wxPrintDialog()
@@ -479,8 +479,8 @@ wxPageSetupDialogBase::wxPageSetupDialogBase(wxWindow *parent,
 wxIMPLEMENT_CLASS(wxPageSetupDialog, wxObject);
 
 wxPageSetupDialog::wxPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data )
+    : m_pimpl(wxPrintFactory::GetFactory()->CreatePageSetupDialog( parent, data ))
 {
-    m_pimpl = wxPrintFactory::GetFactory()->CreatePageSetupDialog( parent, data );
 }
 
 wxPageSetupDialog::~wxPageSetupDialog()
@@ -915,14 +915,14 @@ wxEND_EVENT_TABLE()
 //     really horrible flicker when resizing the preview frame, but without
 //     this style it simply doesn't work correctly at all...
 wxPreviewCanvas::wxPreviewCanvas(wxPrintPreviewBase *preview, wxWindow *parent,
-                                 const wxPoint& pos, const wxSize& size, long style, const wxString& name):
-wxScrolledWindow(parent, wxID_ANY, pos, size, style | wxFULL_REPAINT_ON_RESIZE, name)
+                                 const wxPoint& pos, const wxSize& size, long style, const wxString& name)
+    : wxScrolledWindow(parent, wxID_ANY, pos, size, style | wxFULL_REPAINT_ON_RESIZE, name),
+      m_printPreview(preview)
 {
     // As we rely on getting idle events, do this to ensure that we do receive
     // them even when using wxIDLE_PROCESS_SPECIFIED global idle mode.
     SetExtraStyle(wxWS_EX_PROCESS_IDLE);
 
-    m_printPreview = preview;
 #ifdef __WXMAC__
     // The app workspace colour is always white, but we should have
     // a contrast with the page.
@@ -1293,15 +1293,11 @@ wxEND_EVENT_TABLE()
 
 wxPreviewControlBar::wxPreviewControlBar(wxPrintPreviewBase *preview, long buttons,
                                          wxWindow *parent, const wxPoint& pos, const wxSize& size,
-                                         long style, const wxString& name):
-wxPanel(parent, wxID_ANY, pos, size, style, name)
+                                         long style, const wxString& name)
+    : wxPanel(parent, wxID_ANY, pos, size, style, name),
+      m_printPreview(preview),
+      m_buttonFlags(buttons)
 {
-    m_printPreview = preview;
-    m_closeButton = nullptr;
-    m_zoomControl = nullptr;
-    m_currentPageText = nullptr;
-    m_maxPageText = nullptr;
-    m_buttonFlags = buttons;
 }
 
 wxPreviewControlBar::~wxPreviewControlBar() = default;
@@ -1691,15 +1687,10 @@ void wxPreviewFrame::OnChar(wxKeyEvent &event)
 }
 
 wxPreviewFrame::wxPreviewFrame(wxPrintPreviewBase *preview, wxWindow *parent, const wxString& title,
-                               const wxPoint& pos, const wxSize& size, long style, const wxString& name):
-wxFrame(parent, wxID_ANY, title, pos, size, style, name)
+                               const wxPoint& pos, const wxSize& size, long style, const wxString& name)
+    : wxFrame(parent, wxID_ANY, title, pos, size, style, name),
+      m_printPreview(preview)
 {
-    m_printPreview = preview;
-    m_controlBar = nullptr;
-    m_previewCanvas = nullptr;
-    m_windowDisabler = nullptr;
-    m_modalityKind = wxPreviewFrame_NonModal;
-
     // Give the application icon
 #ifdef __WXMSW__
     wxFrame* topFrame = wxDynamicCast(wxTheApp->GetTopWindow(), wxFrame);
@@ -2178,11 +2169,11 @@ wxPrintPreview::wxPrintPreview(wxPrintout *printout,
 
 wxPrintPreview::wxPrintPreview(wxPrintout *printout,
                    wxPrintout *printoutForPrinting,
-                   wxPrintData *data ) :
-    wxPrintPreviewBase( printout, printoutForPrinting, data )
+                   wxPrintData *data )
+    : wxPrintPreviewBase( printout, printoutForPrinting, data ),
+      m_pimpl(wxPrintFactory::GetFactory()->
+        CreatePrintPreview( printout, printoutForPrinting, data ))
 {
-    m_pimpl = wxPrintFactory::GetFactory()->
-        CreatePrintPreview( printout, printoutForPrinting, data );
 }
 
 wxPrintPreview::~wxPrintPreview()

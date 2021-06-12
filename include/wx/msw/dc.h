@@ -28,10 +28,10 @@ public:
     wxDCCacheEntry(WXHDC hDC, int depth);
     ~wxDCCacheEntry() override;
 
-    WXHBITMAP   m_bitmap;
-    WXHDC       m_dc;
-    int         m_width;
-    int         m_height;
+    WXHBITMAP   m_bitmap{nullptr};
+    WXHDC       m_dc{nullptr};
+    int         m_width{0};
+    int         m_height{0};
     int         m_depth;
 };
 #endif

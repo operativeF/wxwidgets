@@ -123,7 +123,7 @@ private:
     void Free();
 
     // The corresponding locale handle, NULL if invalid
-    wxXLocale_t m_locale;
+    wxXLocale_t m_locale{nullptr};
 };
 
 #else // !wxHAS_XLOCALE_SUPPORT

@@ -45,9 +45,9 @@ private:
                            wxScrollbarVisibility visibility);
 
 
-    wxScrollbarVisibility m_xVisibility,
-                          m_yVisibility;
-    wxRecursionGuardFlag m_adjustScrollFlagReentrancy;
+    wxScrollbarVisibility m_xVisibility{wxSHOW_SB_DEFAULT};
+    wxScrollbarVisibility m_yVisibility{wxSHOW_SB_DEFAULT};
+    wxRecursionGuardFlag m_adjustScrollFlagReentrancy{0};
 
     wxScrollHelper(const wxScrollHelper&) = delete;
 	wxScrollHelper& operator=(const wxScrollHelper&) = delete;

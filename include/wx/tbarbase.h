@@ -631,19 +631,20 @@ protected:
     wxToolBarToolsList m_tools;
 
     // the offset of the first tool
-    int m_xMargin;
-    int m_yMargin;
+    int m_xMargin{0};
+    int m_yMargin{0};
 
     // the maximum number of toolbar rows/columns
-    int m_maxRows;
-    int m_maxCols;
+    int m_maxRows{0};
+    int m_maxCols{0};
 
     // the tool packing and separation
-    int m_toolPacking,
-        m_toolSeparation;
+    int m_toolPacking{0};
+    int m_toolSeparation{0};
 
     // the size of the toolbar bitmaps
-    wxCoord m_defaultWidth, m_defaultHeight;
+    wxCoord m_defaultWidth{16};
+    wxCoord m_defaultHeight{15};
 
 private:
     wxDECLARE_EVENT_TABLE();

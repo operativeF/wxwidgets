@@ -74,10 +74,10 @@ public:
 class WXDLLEXPORT wxIFFDecoder
 {
 private:
-    IFFImage *m_image;        // image data
+    IFFImage *m_image{nullptr};        // image data
     wxInputStream *m_f;       // input stream
-    unsigned char *databuf;
-    unsigned char *decomp_mem;
+    unsigned char *databuf{nullptr};
+    unsigned char *decomp_mem{nullptr};
 
     void Destroy();
 
@@ -107,11 +107,8 @@ public:
 //---------------------------------------------------------------------------
 
 wxIFFDecoder::wxIFFDecoder(wxInputStream *s)
+    : m_f(s)
 {
-    m_f = s;
-    m_image = nullptr;
-    databuf = nullptr;
-    decomp_mem = nullptr;
 }
 
 void wxIFFDecoder::Destroy()

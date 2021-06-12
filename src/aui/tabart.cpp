@@ -607,7 +607,7 @@ void wxAuiGenericTabArt::DrawTab(wxDC& dc,
                 drawn_tab_yoff + (drawn_tab_height)/2 - (texty/2) - 1);
 
     // draw focus rectangle
-    if (page.active && (wnd->FindFocus() == wnd))
+    if (page.active && (wxWindow::FindFocus() == wnd))
     {
         wxRect focusRectText(text_offset, (drawn_tab_yoff + (drawn_tab_height)/2 - (texty/2) - 1),
             selected_textx, selected_texty);
@@ -1156,7 +1156,7 @@ void wxAuiSimpleTabArt::DrawTab(wxDC& dc,
 
 
     // draw focus rectangle
-    if (page.active && (wnd->FindFocus() == wnd))
+    if (page.active && (wxWindow::FindFocus() == wnd))
     {
         wxRect focusRect(text_offset, ((tab_y + tab_height)/2 - (texty/2) + 1),
             selected_textx, selected_texty);

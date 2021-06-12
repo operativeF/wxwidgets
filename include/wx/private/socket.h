@@ -296,20 +296,20 @@ public:
     // TODO: make these fields protected and provide accessors for those of
     //       them that wxSocketBase really needs
 //protected:
-    wxSOCKET_T m_fd;
+    wxSOCKET_T m_fd{INVALID_SOCKET};
 
-    int m_initialRecvBufferSize;
-    int m_initialSendBufferSize;
+    int m_initialRecvBufferSize{-1};
+    int m_initialSendBufferSize{-1};
 
     wxSockAddressImpl m_local,
                       m_peer;
-    wxSocketError m_error;
+    wxSocketError m_error{wxSOCKET_NOERROR};
 
-    bool m_stream;
-    bool m_establishing;
-    bool m_reusable;
-    bool m_broadcast;
-    bool m_dobind;
+    bool m_stream{true};
+    bool m_establishing{false};
+    bool m_reusable{false};
+    bool m_broadcast{false};
+    bool m_dobind{true};
 
     wxTimeVal_t m_timeout;
 

@@ -128,8 +128,6 @@ wxTreeEvent::wxTreeEvent(wxEventType commandType,
            : wxNotifyEvent(commandType, tree->GetId()),
              m_item(item)
 {
-    m_editCancelled = false;
-
     SetEventObject(tree);
 
     if ( item.IsOk() )
@@ -140,7 +138,6 @@ wxTreeEvent::wxTreeEvent(wxEventType commandType, int id)
            : wxNotifyEvent(commandType, id)
 {
     m_itemOld = nullptr;
-    m_editCancelled = false;
 }
 
 wxTreeEvent::wxTreeEvent(const wxTreeEvent & event)
@@ -150,8 +147,8 @@ wxTreeEvent::wxTreeEvent(const wxTreeEvent & event)
     , m_itemOld(event.m_itemOld)
     , m_pointDrag(event.m_pointDrag)
     , m_label(event.m_label)
+    , m_editCancelled(event.m_editCancelled)
 {
-    m_editCancelled = event.m_editCancelled;
 }
 
 // ----------------------------------------------------------------------------

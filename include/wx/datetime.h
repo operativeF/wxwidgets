@@ -324,14 +324,17 @@ public:
         //     instead of modifying the member fields directly!
     struct WXDLLIMPEXP_BASE Tm
     {
-        wxDateTime_t msec, sec, min, hour,
-                     mday,  // Day of the month in 1..31 range.
-                     yday;  // Day of the year in 0..365 range.
-        Month mon;
-        int year;
+        wxDateTime_t msec{0};
+        wxDateTime_t sec{0};
+        wxDateTime_t min{0};
+        wxDateTime_t hour{0};
+        wxDateTime_t mday{0};  // Day of the month in 1..31 range.
+        wxDateTime_t yday{0};  // Day of the year in 0..365 range.
+        
+        Month mon{wxDateTime::Inv_Month};
+        int year{(wxDateTime_t)wxDateTime::Inv_Year};
 
-        // default ctor inits the object to an invalid value
-        Tm();
+        Tm() = default;
 
         // ctor from struct tm and the timezone
         Tm(const struct tm& tm, const TimeZone& tz);
@@ -364,7 +367,7 @@ public:
         // This value can only be accessed via GetWeekDay() and not directly
         // because it's not always computed when creating this object and may
         // need to be calculated on demand.
-        wxDateTime_t wday;
+        wxDateTime_t wday{wxDateTime::Inv_WeekDay};
     };
 
     // static methods

@@ -183,7 +183,7 @@ public:
 private:
     friend class wxDirData;
 
-    wxDirData *m_data;
+    wxDirData *m_data{nullptr};
 };
 
 #endif // _WX_DIR_H_

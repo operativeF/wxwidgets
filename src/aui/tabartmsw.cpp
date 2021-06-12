@@ -209,7 +209,7 @@ void wxAuiMSWTabArt::DrawTab(wxDC& dc,
     dc.DrawLabel(page.caption, page.bitmap, textRect, wxALIGN_CENTRE);
 
     // draw focus rectangle
-    if ( page.active && (wnd->FindFocus() == wnd) )
+    if ( page.active && (wxWindow::FindFocus() == wnd) )
     {
         wxRect focusRect = tabRect;
         focusRect.Deflate(wnd->FromDIP(2));
@@ -269,7 +269,7 @@ int wxAuiMSWTabArt::GetAdditionalBorderSpace(wxWindow* wnd)
 {
     if ( IsThemed() )
     {
-        return wnd->FromDIP(4, nullptr);
+        return wxWindowBase::FromDIP(4, nullptr);
     }
     else
         return wxAuiGenericTabArt::GetAdditionalBorderSpace(wnd);

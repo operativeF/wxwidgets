@@ -754,7 +754,7 @@ void wxRichTextColourSwatchCtrl::OnMouseEvent(wxMouseEvent& event)
         wxRichTextFormattingDialog* dlg = wxDynamicCast(parent, wxRichTextFormattingDialog);
         wxColourData data;
         if (dlg)
-            data = dlg->GetColourData();
+            data = wxRichTextFormattingDialog::GetColourData();
 
         data.SetChooseFull(true);
         data.SetColour(m_colour);
@@ -768,7 +768,7 @@ void wxRichTextColourSwatchCtrl::OnMouseEvent(wxMouseEvent& event)
         {
             wxColourData retData = dialog->GetColourData();
             if (dlg)
-                dlg->SetColourData(retData);
+                wxRichTextFormattingDialog::SetColourData(retData);
             m_colour = retData.GetColour();
             SetBackgroundColour(m_colour);
         }

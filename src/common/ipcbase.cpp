@@ -24,8 +24,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxConnectionBase, wxObject)
 wxConnectionBase::wxConnectionBase(void *buffer, size_t bytes)
     : m_buffer((char *)buffer),
       m_buffersize(bytes),
-      m_deletebufferwhendone(false),
-      m_connected(true)
+      m_deletebufferwhendone(false)
 {
   if ( buffer == nullptr )
   { // behave like next constructor

@@ -87,8 +87,6 @@ wxXLocale& wxXLocale::GetCLocale()
 #if wxUSE_INTL
 wxXLocale::wxXLocale(wxLanguage lang)
 {
-    m_locale = nullptr;
-
     const wxLanguageInfo * const info = wxLocale::GetLanguageInfo(lang);
     if ( info )
     {

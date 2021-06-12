@@ -49,55 +49,55 @@
 wxIMPLEMENT_CLASS(wxGenericValidator, wxValidator);
 
 wxGenericValidator::wxGenericValidator(bool *val)
+    : m_pBool(val)
 {
     Initialize();
-    m_pBool = val;
 }
 
 wxGenericValidator::wxGenericValidator(int *val)
+    : m_pInt(val)
 {
     Initialize();
-    m_pInt = val;
 }
 
 wxGenericValidator::wxGenericValidator(wxString *val)
+    : m_pString(val)
 {
     Initialize();
-    m_pString = val;
 }
 
 wxGenericValidator::wxGenericValidator(std::vector<int> *val)
+    : m_pArrayInt(val)
 {
     Initialize();
-    m_pArrayInt = val;
 }
 
 #if wxUSE_DATETIME
 
 wxGenericValidator::wxGenericValidator(wxDateTime *val)
+    : m_pDateTime(val)
 {
     Initialize();
-    m_pDateTime = val;
 }
 
 #endif // wxUSE_DATETIME
 
 wxGenericValidator::wxGenericValidator(wxFileName *val)
+    : m_pFileName(val)
 {
     Initialize();
-    m_pFileName = val;
 }
 
 wxGenericValidator::wxGenericValidator(float *val)
+    : m_pFloat(val)
 {
     Initialize();
-    m_pFloat = val;
 }
 
 wxGenericValidator::wxGenericValidator(double *val)
+    : m_pDouble(val)
 {
     Initialize();
-    m_pDouble = val;
 }
 
 wxGenericValidator::wxGenericValidator(const wxGenericValidator& val)

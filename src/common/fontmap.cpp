@@ -128,11 +128,12 @@ static constexpr wxChar FONTMAPPER_FONT_DONT_ASK[] = wxT("none");
 // is best to not do anything because otherwise we risk to enter an infinite
 // loop so we create an object of this class on stack to test for this in all
 // interactive functions
+// FIXME: This is insanity.
 class ReentrancyBlocker
 {
 public:
     explicit ReentrancyBlocker(bool& flag) : m_flagOld(flag), m_flag(flag)
-        { m_flag = true; }
+    { m_flag = true; }
     ~ReentrancyBlocker() { m_flag = m_flagOld; }
 
     ReentrancyBlocker(const ReentrancyBlocker&) = delete;

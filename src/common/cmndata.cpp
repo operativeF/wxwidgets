@@ -54,36 +54,15 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPageSetupDialogData, wxObject);
 // ----------------------------------------------------------------------------
 
 wxPrintData::wxPrintData()
-    : m_paperSize(wxDefaultSize)
+    : m_paperSize(wxDefaultSize),
+      m_nativeData(wxPrintFactory::GetFactory()->CreatePrintNativeData())
 {
-    m_bin = wxPrintBin::Default;
-    m_media = wxPRINTMEDIA_DEFAULT;
-    m_printMode = wxPrintMode::Printer;
-    m_printOrientation = wxPrintOrientation::Portrait;
-    m_printOrientationReversed = false;
-    m_printNoCopies = 1;
-    m_printCollate = false;
-
-    // New, 24/3/99
-    m_colour = true;
-    m_duplexMode = wxDuplexMode::Simplex;
-    m_printQuality = wxPRINT_QUALITY_HIGH;
-
     // we intentionally don't initialize paper id and size at all, like this
     // the default system settings will be used for them
-    m_paperId = wxPaperSize::None;
-
-    m_privData = nullptr;
-    m_privDataLen = 0;
-
-    m_nativeData = wxPrintFactory::GetFactory()->CreatePrintNativeData();
 }
 
 wxPrintData::wxPrintData(const wxPrintData& printData)
-     
 {
-    m_nativeData = nullptr;
-    m_privData = nullptr;
     (*this) = printData;
 }
 
@@ -173,22 +152,8 @@ bool wxPrintData::IsOk() const
 
 wxPrintDialogData::wxPrintDialogData()
 {
-    m_printFromPage = 0;
-    m_printToPage = 0;
-    m_printMinPage = 0;
-    m_printMaxPage = 0;
-    m_printNoCopies = 1;
-    m_printAllPages = false;
-    m_printCollate = false;
-    m_printToFile = false;
-    m_printSelection = false;
-    m_printEnableSelection = false;
-    m_printEnablePageNumbers = true;
-
     wxPrintFactory* factory = wxPrintFactory::GetFactory();
     m_printEnablePrintToFile = ! factory->HasOwnPrintToFile();
-
-    m_printEnableHelp = false;
 }
 
 wxPrintDialogData::wxPrintDialogData(const wxPrintDialogData& dialogData)
@@ -198,30 +163,20 @@ wxPrintDialogData::wxPrintDialogData(const wxPrintDialogData& dialogData)
 }
 
 wxPrintDialogData::wxPrintDialogData(const wxPrintData& printData)
-    : m_printData(printData)
-{
-    m_printFromPage = 1;
-    m_printToPage = 0;
-    m_printMinPage = 1;
-    m_printMaxPage = 9999;
-    m_printNoCopies = 1;
-    // On Mac the Print dialog always defaults to "All Pages"
+    : m_printData(printData),
+      m_printFromPage(1),
+      m_printMinPage(1),
+      m_printMaxPage(9999)
+          // On Mac the Print dialog always defaults to "All Pages"
 #ifdef __WXMAC__
-    m_printAllPages = true;
-#else
-    m_printAllPages = false;
+      , m_printAllPages{true}
 #endif
-    m_printCollate = false;
-    m_printToFile = false;
-    m_printSelection = false;
-    m_printEnableSelection = false;
-    m_printEnablePageNumbers = true;
-    m_printEnablePrintToFile = true;
-    m_printEnableHelp = false;
+{
 }
 
 wxPrintDialogData::~wxPrintDialogData() = default;
 
+// FIXME: Not needed?
 void wxPrintDialogData::operator=(const wxPrintDialogData& data)
 {
     m_printFromPage = data.m_printFromPage;

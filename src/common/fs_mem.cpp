@@ -29,20 +29,20 @@ class wxMemoryFSFile
 {
 public:
     wxMemoryFSFile(const void *data, size_t len, const wxString& mime)
+        : m_Data(new char[len]),
+          m_Len(len),
+          m_MimeType(mime)
     {
-        m_Data = new char[len];
         memcpy(m_Data, data, len);
-        m_Len = len;
-        m_MimeType = mime;
         InitTime();
     }
 
     wxMemoryFSFile(const wxMemoryOutputStream& stream, const wxString& mime)
+        : m_Len(stream.GetSize()),
+          m_Data(new char[m_Len]),
+          m_MimeType(mime)
     {
-        m_Len = stream.GetSize();
-        m_Data = new char[m_Len];
         stream.CopyTo(m_Data, m_Len);
-        m_MimeType = mime;
         InitTime();
     }
 

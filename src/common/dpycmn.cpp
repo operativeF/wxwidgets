@@ -75,8 +75,8 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxDisplayModule, wxModule);
 // ----------------------------------------------------------------------------
 
 wxDisplay::wxDisplay()
+    : m_impl(Factory().GetPrimaryDisplay())
 {
-    m_impl = Factory().GetPrimaryDisplay();
 }
 
 wxDisplay::wxDisplay(unsigned n)

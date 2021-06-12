@@ -343,8 +343,8 @@ public:
 #endif // wxUSE_IMAGE
 
 private :
-    Bitmap* m_bitmap;
-    Bitmap* m_helper;
+    Bitmap* m_bitmap{nullptr};
+    Bitmap* m_helper{nullptr};
 };
 
 class wxGDIPlusFontData : public wxGraphicsObjectRefData
@@ -829,10 +829,10 @@ void wxGDIPlusPenData::Init()
 
 wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
                                     const wxGraphicsPenInfo &info )
-    : wxGDIPlusPenBrushBaseData(renderer)
+    : wxGDIPlusPenBrushBaseData(renderer),
+      m_width(info.GetWidth())
 {
     Init();
-    m_width = info.GetWidth();
 
     m_pen = new Pen(wxColourToColor(info.GetColour()), m_width );
 
@@ -1206,15 +1206,11 @@ wxGDIPlusFontData::~wxGDIPlusFontData()
 wxGDIPlusBitmapData::wxGDIPlusBitmapData( wxGraphicsRenderer* renderer, Bitmap* bitmap ) :
     wxGraphicsBitmapData( renderer ), m_bitmap( bitmap )
 {
-    m_helper = nullptr;
 }
 
 wxGDIPlusBitmapData::wxGDIPlusBitmapData( wxGraphicsRenderer* renderer,
                         const wxBitmap &bmp) : wxGraphicsBitmapData( renderer )
 {
-    m_bitmap = nullptr;
-    m_helper = nullptr;
-
     Bitmap* image = nullptr;
     if ( bmp.GetMask() )
     {
@@ -1314,11 +1310,9 @@ wxGDIPlusBitmapData::wxGDIPlusBitmapData( wxGraphicsRenderer* renderer,
 
 #if wxUSE_IMAGE
 wxGDIPlusBitmapData::wxGDIPlusBitmapData(wxGraphicsRenderer* renderer, const wxImage& img)
-    : wxGraphicsBitmapData(renderer)
+    : wxGraphicsBitmapData(renderer),
+      m_bitmap(new Bitmap(img.GetWidth(), img.GetHeight(), img.HasAlpha() || img.HasMask() ? PixelFormat32bppPARGB : PixelFormat32bppRGB))
 {
-    m_helper = nullptr;
-    m_bitmap = new Bitmap(img.GetWidth(), img.GetHeight(), img.HasAlpha() || img.HasMask() ? PixelFormat32bppPARGB : PixelFormat32bppRGB);
-
     UINT w = m_bitmap->GetWidth();
     UINT h = m_bitmap->GetHeight();
     Rect bounds(0, 0, (INT)w, (INT)h);
@@ -1831,9 +1825,8 @@ class wxGDIPlusOffsetHelper
 {
 public :
     wxGDIPlusOffsetHelper(Graphics* gr, double scaleFactor, bool offset)
+        : m_gr(gr)
     {
-        m_gr = gr;
-        m_offset = 0;
         if (offset)
         {
             Matrix matrix;
@@ -1845,14 +1838,15 @@ public :
             m_gr->TranslateTransform(m_offset, m_offset);
         }
     }
-    ~wxGDIPlusOffsetHelper( )
+
+    ~wxGDIPlusOffsetHelper()
     {
         if (m_offset > 0)
             m_gr->TranslateTransform(-m_offset, -m_offset);
     }
     
     Graphics* m_gr;
-    float m_offset;
+    float m_offset{0.0F};
 } ;
 
 wxGDIPlusContext::wxGDIPlusContext( wxGraphicsRenderer* renderer, HDC hdc, double width, double height   )

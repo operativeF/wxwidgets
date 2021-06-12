@@ -371,31 +371,17 @@ static int GetDSTOffset(wxLongLong t)
 // struct Tm
 // ----------------------------------------------------------------------------
 
-wxDateTime::Tm::Tm()
-{
-    year = (wxDateTime_t)wxDateTime::Inv_Year;
-    mon = wxDateTime::Inv_Month;
-    mday =
-    yday = 0;
-    hour =
-    min =
-    sec =
-    msec = 0;
-    wday = wxDateTime::Inv_WeekDay;
-}
-
 wxDateTime::Tm::Tm(const struct tm& tm, const TimeZone& tz)
-              : m_tz(tz)
+    : m_tz(tz),
+      sec((wxDateTime::wxDateTime_t)tm.tm_sec),
+      min((wxDateTime::wxDateTime_t)tm.tm_min),
+      hour((wxDateTime::wxDateTime_t)tm.tm_hour),
+      mday((wxDateTime::wxDateTime_t)tm.tm_mday),
+      mon((wxDateTime::Month)tm.tm_mon),
+      year(1900 + tm.tm_year),
+      wday((wxDateTime::wxDateTime_t)tm.tm_wday),
+      yday((wxDateTime::wxDateTime_t)tm.tm_yday)
 {
-    msec = 0;
-    sec = (wxDateTime::wxDateTime_t)tm.tm_sec;
-    min = (wxDateTime::wxDateTime_t)tm.tm_min;
-    hour = (wxDateTime::wxDateTime_t)tm.tm_hour;
-    mday = (wxDateTime::wxDateTime_t)tm.tm_mday;
-    mon = (wxDateTime::Month)tm.tm_mon;
-    year = 1900 + tm.tm_year;
-    wday = (wxDateTime::wxDateTime_t)tm.tm_wday;
-    yday = (wxDateTime::wxDateTime_t)tm.tm_yday;
 }
 
 bool wxDateTime::Tm::IsValid() const

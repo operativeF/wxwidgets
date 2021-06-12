@@ -133,22 +133,16 @@ extern size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, s
 //-----------------------------------------------------------------------------
 
 wxFileData::wxFileData( const wxString &filePath, const wxString &fileName, fileType type, int image_id )
+    : m_fileName(fileName),
+      m_filePath(filePath),
+      m_type(type),
+      m_image(image_id)
 {
-    
-    m_size = 0;
-    m_type = wxFileData::is_file;
-    m_image = wxFileIconsTable::file;
-
-    m_fileName = fileName;
-    m_filePath = filePath;
-    m_type = type;
-    m_image = image_id;
-
     ReadData();
 }
 
 
-
+// FIXME: Default this?
 void wxFileData::Copy( const wxFileData& fileData )
 {
     m_fileName = fileData.GetFileName();
@@ -365,9 +359,6 @@ wxEND_EVENT_TABLE()
 
 wxFileListCtrl::wxFileListCtrl()
 {
-    m_showHidden = false;
-    m_sort_forward = true;
-    m_sort_field = wxFileData::FileList_Name;
 }
 
 wxFileListCtrl::wxFileListCtrl(wxWindow *win,
@@ -380,18 +371,13 @@ wxFileListCtrl::wxFileListCtrl(wxWindow *win,
                        const wxValidator &validator,
                        const wxString &name)
           : wxListCtrl(win, id, pos, size, style, validator, name),
-            m_wild(wild)
+            m_wild(wild),
+            m_showHidden(showHidden),
+            m_dirName(wxT("*"))
 {
     wxImageList *imageList = wxTheFileIconsTable->GetSmallImageList();
 
     SetImageList( imageList, wxIMAGE_LIST_SMALL );
-
-    m_showHidden = showHidden;
-
-    m_sort_forward = true;
-    m_sort_field = wxFileData::FileList_Name;
-
-    m_dirName = wxT("*");
 
     if (style & wxLC_REPORT)
         ChangeToReportMode();

@@ -87,7 +87,6 @@ wxGenericMessageDialog::wxGenericMessageDialog( wxWindow *parent,
                                             style),
                         m_pos(pos)
 {
-    m_created = false;
 }
 
 wxSizer *wxGenericMessageDialog::CreateMsgDlgButtonSizer()

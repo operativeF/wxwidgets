@@ -140,7 +140,7 @@ protected:
     void DoLogTextAtLevel(wxLogLevel level, const wxString& msg) override;
 
 private:
-    wxLogFrame *m_pLogFrame;      // the log frame
+    wxLogFrame *m_pLogFrame{nullptr};      // the log frame
 
     wxLogWindow(const wxLogWindow&) = delete;
 	wxLogWindow& operator=(const wxLogWindow&) = delete;

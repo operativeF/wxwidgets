@@ -385,8 +385,8 @@ wxExecuteWindowCbk(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 // ----------------------------------------------------------------------------
 
 wxPipeInputStream::wxPipeInputStream(HANDLE hInput)
+    : m_hInput(hInput)
 {
-    m_hInput = hInput;
 }
 
 wxPipeInputStream::~wxPipeInputStream()
@@ -470,9 +470,8 @@ size_t wxPipeInputStream::OnSysRead(void *buffer, size_t len)
 // ----------------------------------------------------------------------------
 
 wxPipeOutputStream::wxPipeOutputStream(HANDLE hOutput)
+    : m_hOutput(hOutput)
 {
-    m_hOutput = hOutput;
-
     // unblock the pipe to prevent deadlocks when we're writing to the pipe
     // from which the child process can't read because it is writing in its own
     // end of it

@@ -29,24 +29,23 @@
 // ----------------------------------------------------------------------------
 
 wxFileInputStream::wxFileInputStream(const wxString& fileName)
-   
+   : m_file(new wxFile(fileName, wxFile::read)),
+     m_file_destroy(true)
 {
-    m_file = new wxFile(fileName, wxFile::read);
-    m_file_destroy = true;
     if ( !m_file->IsOpened() )
         m_lasterror = wxSTREAM_READ_ERROR;
 }
 
 wxFileInputStream::wxFileInputStream(wxFile& file)
+    : m_file_destroy(false),
+      m_file(&file)
 {
-    m_file = &file;
-    m_file_destroy = false;
 }
 
 wxFileInputStream::wxFileInputStream(int fd)
+    : m_file(new wxFile(fd)),
+      m_file_destroy(true)
 {
-    m_file = new wxFile(fd);
-    m_file_destroy = true;
 }
 
 wxFileInputStream::~wxFileInputStream()
@@ -106,24 +105,23 @@ bool wxFileInputStream::IsOk() const
 // ----------------------------------------------------------------------------
 
 wxFileOutputStream::wxFileOutputStream(const wxString& fileName)
+    : m_file(new wxFile(fileName, wxFile::write)),
+      m_file_destroy(true)
 {
-    m_file = new wxFile(fileName, wxFile::write);
-    m_file_destroy = true;
-
     if (!m_file->IsOpened())
         m_lasterror = wxSTREAM_WRITE_ERROR;
 }
 
 wxFileOutputStream::wxFileOutputStream(wxFile& file)
+    : m_file_destroy(false),
+      m_file(&file)
 {
-    m_file = &file;
-    m_file_destroy = false;
 }
 
 wxFileOutputStream::wxFileOutputStream(int fd)
+    : m_file(new wxFile(fd)),
+      m_file_destroy(true)
 {
-    m_file = new wxFile(fd);
-    m_file_destroy = true;
 }
 
 wxFileOutputStream::~wxFileOutputStream()
@@ -175,9 +173,8 @@ bool wxFileOutputStream::IsOk() const
 // ----------------------------------------------------------------------------
 
 wxTempFileOutputStream::wxTempFileOutputStream(const wxString& fileName)
+    : m_file(new wxTempFile(fileName))
 {
-    m_file = new wxTempFile(fileName);
-
     if (!m_file->IsOpened())
         m_lasterror = wxSTREAM_WRITE_ERROR;
 }
@@ -202,9 +199,8 @@ size_t wxTempFileOutputStream::OnSysWrite(const void *buffer, size_t size)
 // ----------------------------------------------------------------------------
 
 wxTempFFileOutputStream::wxTempFFileOutputStream(const wxString& fileName)
+    : m_file(new wxTempFFile(fileName))
 {
-    m_file = new wxTempFFile(fileName);
-
     if (!m_file->IsOpened())
         m_lasterror = wxSTREAM_WRITE_ERROR;
 }
@@ -229,8 +225,6 @@ size_t wxTempFFileOutputStream::OnSysWrite(const void *buffer, size_t size)
 // ----------------------------------------------------------------------------
 
 wxFileStream::wxFileStream(const wxString& fileName)
-            
-              
 {
     wxFileOutputStream::m_file =
     wxFileInputStream::m_file = new wxFile(fileName, wxFile::read_write);
@@ -256,25 +250,23 @@ bool wxFileStream::IsOk() const
 
 wxFFileInputStream::wxFFileInputStream(const wxString& fileName,
                                        const wxString& mode)
-                   
+    : m_file(new wxFFile(fileName, mode)),
+      m_file_destroy(true)
 {
-    m_file = new wxFFile(fileName, mode);
-    m_file_destroy = true;
-
     if (!m_file->IsOpened())
         m_lasterror = wxSTREAM_WRITE_ERROR;
 }
 
 wxFFileInputStream::wxFFileInputStream(wxFFile& file)
+    : m_file(&file),
+      m_file_destroy(false)
 {
-    m_file = &file;
-    m_file_destroy = false;
 }
 
 wxFFileInputStream::wxFFileInputStream(FILE *file)
+    : m_file(new wxFFile(file)),
+      m_file_destroy(true)
 {
-    m_file = new wxFFile(file);
-    m_file_destroy = true;
 }
 
 wxFFileInputStream::~wxFFileInputStream()
@@ -325,10 +317,9 @@ bool wxFFileInputStream::IsOk() const
 
 wxFFileOutputStream::wxFFileOutputStream(const wxString& fileName,
                                          const wxString& mode)
+    : m_file(new wxFFile(fileName, mode)),
+      m_file_destroy(true)
 {
-    m_file = new wxFFile(fileName, mode);
-    m_file_destroy = true;
-
     if (!m_file->IsOpened())
     {
         m_lasterror = wxSTREAM_WRITE_ERROR;
@@ -341,15 +332,15 @@ wxFFileOutputStream::wxFFileOutputStream(const wxString& fileName,
 }
 
 wxFFileOutputStream::wxFFileOutputStream(wxFFile& file)
+    : m_file(&file),
+      m_file_destroy(false)
 {
-    m_file = &file;
-    m_file_destroy = false;
 }
 
 wxFFileOutputStream::wxFFileOutputStream(FILE *file)
+    : m_file(new wxFFile(file)),
+      m_file_destroy(true)
 {
-    m_file = new wxFFile(file);
-    m_file_destroy = true;
 }
 
 wxFFileOutputStream::~wxFFileOutputStream()
@@ -403,8 +394,6 @@ bool wxFFileOutputStream::IsOk() const
 // ----------------------------------------------------------------------------
 
 wxFFileStream::wxFFileStream(const wxString& fileName, const wxString& mode)
-             
-               
 {
     wxASSERT_MSG( mode.find_first_of('+') != wxString::npos,
                   "must be opened in read-write mode for this class to work" );

@@ -235,7 +235,7 @@ private:
                   m_itemOld;
     wxPoint       m_pointDrag;
     wxString      m_label;
-    bool          m_editCancelled;
+    bool          m_editCancelled{false};
 
     friend class WXDLLIMPEXP_FWD_CORE wxTreeCtrl;
     friend class WXDLLIMPEXP_FWD_CORE wxGenericTreeCtrl;

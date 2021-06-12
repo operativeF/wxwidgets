@@ -65,8 +65,8 @@ public:
     bool HasFiles(const wxString& spec = wxEmptyString) const;
 
     wxString m_path, m_name;
-    bool m_isHidden;
-    bool m_isExpanded;
+    bool m_isHidden{false};
+    bool m_isExpanded{false};
     bool m_isDir;
 };
 
@@ -305,8 +305,8 @@ public:
 protected:
     void Create(const wxSize& sz);  // create on first use
 
-    wxImageList *m_smallImageList;
-    wxHashTable *m_HashTable;
+    wxImageList *m_smallImageList{nullptr};
+    wxHashTable *m_HashTable{nullptr};
     wxSize  m_size;
 };
 

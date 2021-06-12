@@ -351,10 +351,10 @@ bool wxRichTextObject::ImportFromXML(wxRichTextBuffer* WXUNUSED(buffer), wxXmlNo
 // Export this object directly to the given stream.
 bool wxRichTextObject::ExportXML(wxOutputStream& stream, int indent, wxRichTextXMLHandler* handler)
 {
-    handler->GetHelper().OutputIndentation(stream, indent);
+    wxRichTextXMLHelper::OutputIndentation(stream, indent);
     handler->GetHelper().OutputString(stream, wxT("<") + GetXMLNodeName());
 
-    wxString style = handler->GetHelper().AddAttributes(this, true);
+    wxString style = wxRichTextXMLHelper::AddAttributes(this, true);
 
     handler->GetHelper().OutputString(stream, style + wxT(">"));
 
@@ -374,7 +374,7 @@ bool wxRichTextObject::ExportXML(wxOutputStream& stream, int indent, wxRichTextX
         }
     }
 
-    handler->GetHelper().OutputIndentation(stream, indent);
+    wxRichTextXMLHelper::OutputIndentation(stream, indent);
     handler->GetHelper().OutputString(stream, wxT("</") + GetXMLNodeName() + wxT(">"));
     return true;
 }
@@ -386,7 +386,7 @@ bool wxRichTextObject::ExportXML(wxXmlNode* parent, wxRichTextXMLHandler* handle
 {
     wxXmlNode* elementNode = new wxXmlNode(wxXML_ELEMENT_NODE, GetXMLNodeName());
     parent->AddChild(elementNode);
-    handler->GetHelper().AddAttributes(elementNode, this, true);
+    wxRichTextXMLHelper::AddAttributes(elementNode, this, true);
     handler->GetHelper().WriteProperties(elementNode, GetProperties());
 
     wxRichTextCompositeObject* composite = wxDynamicCast(this, wxRichTextCompositeObject);
@@ -497,7 +497,7 @@ bool wxRichTextPlainText::ImportFromXML(wxRichTextBuffer* buffer, wxXmlNode* nod
 // Export this object directly to the given stream.
 bool wxRichTextPlainText::ExportXML(wxOutputStream& stream, int indent, wxRichTextXMLHandler* handler)
 {
-    wxString style = handler->GetHelper().AddAttributes(this, false);
+    wxString style = wxRichTextXMLHelper::AddAttributes(this, false);
 
     int i;
     int last = 0;
@@ -507,13 +507,13 @@ bool wxRichTextPlainText::ExportXML(wxOutputStream& stream, int indent, wxRichTe
     if (len == 0)
     {
         i = 0;
-        handler->GetHelper().OutputIndentation(stream, indent);
+        wxRichTextXMLHelper::OutputIndentation(stream, indent);
         handler->GetHelper().OutputString(stream, wxT("<text"));
         handler->GetHelper().OutputString(stream, style + wxT(">"));
         if (GetProperties().GetCount() > 0)
         {
             handler->GetHelper().WriteProperties(stream, GetProperties(), indent);
-            handler->GetHelper().OutputIndentation(stream, indent);
+            wxRichTextXMLHelper::OutputIndentation(stream, indent);
         }
         handler->GetHelper().OutputString(stream, wxT("</text>"));
     }
@@ -530,7 +530,7 @@ bool wxRichTextPlainText::ExportXML(wxOutputStream& stream, int indent, wxRichTe
                 wxString fragment(text.Mid(last, i-last));
                 if (!fragment.empty())
                 {
-                    handler->GetHelper().OutputIndentation(stream, indent);
+                    wxRichTextXMLHelper::OutputIndentation(stream, indent);
                     handler->GetHelper().OutputString(stream, wxT("<text"));
 
                     handler->GetHelper().OutputString(stream, style + wxT(">"));
@@ -547,7 +547,7 @@ bool wxRichTextPlainText::ExportXML(wxOutputStream& stream, int indent, wxRichTe
                     if (GetProperties().GetCount() > 0)
                     {
                         handler->GetHelper().WriteProperties(stream, GetProperties(), indent);
-                        handler->GetHelper().OutputIndentation(stream, indent);
+                        wxRichTextXMLHelper::OutputIndentation(stream, indent);
                     }
                     handler->GetHelper().OutputString(stream, wxT("</text>"));
                 }
@@ -556,7 +556,7 @@ bool wxRichTextPlainText::ExportXML(wxOutputStream& stream, int indent, wxRichTe
             // Output this character as a number in a separate tag, because XML can't cope
             // with entities below 32 except for 10 and 13
             last = i + 1;
-            handler->GetHelper().OutputIndentation(stream, indent);
+            wxRichTextXMLHelper::OutputIndentation(stream, indent);
             handler->GetHelper().OutputString(stream, wxT("<symbol"));
 
             handler->GetHelper().OutputString(stream, style + wxT(">"));
@@ -565,7 +565,7 @@ bool wxRichTextPlainText::ExportXML(wxOutputStream& stream, int indent, wxRichTe
             if (GetProperties().GetCount() > 0)
             {
                 handler->GetHelper().WriteProperties(stream, GetProperties(), indent);
-                handler->GetHelper().OutputIndentation(stream, indent);
+                wxRichTextXMLHelper::OutputIndentation(stream, indent);
             }
             handler->GetHelper().OutputString(stream, wxT("</symbol>"));
         }
@@ -579,7 +579,7 @@ bool wxRichTextPlainText::ExportXML(wxOutputStream& stream, int indent, wxRichTe
 
     if (last < len)
     {
-        handler->GetHelper().OutputIndentation(stream, indent);
+        wxRichTextXMLHelper::OutputIndentation(stream, indent);
         handler->GetHelper().OutputString(stream, wxT("<text"));
 
         handler->GetHelper().OutputString(stream, style + wxT(">"));
@@ -587,7 +587,7 @@ bool wxRichTextPlainText::ExportXML(wxOutputStream& stream, int indent, wxRichTe
         if (GetProperties().GetCount() > 0)
         {
             handler->GetHelper().WriteProperties(stream, GetProperties(), indent);
-            handler->GetHelper().OutputIndentation(stream, indent);
+            wxRichTextXMLHelper::OutputIndentation(stream, indent);
         }
 
         if (!fragment.empty() && (fragment[0] == wxT(' ') || fragment[fragment.length()-1] == wxT(' ')))
@@ -621,7 +621,7 @@ bool wxRichTextPlainText::ExportXML(wxXmlNode* parent, wxRichTextXMLHandler* han
         wxXmlNode* elementNode = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("text"));
         parent->AddChild(elementNode);
 
-        handler->GetHelper().AddAttributes(elementNode, GetAttributes(), false);
+        wxRichTextXMLHelper::AddAttributes(elementNode, GetAttributes(), false);
         handler->GetHelper().WriteProperties(elementNode, GetProperties());
     }
     else for (i = 0; i < len; i++)
@@ -638,7 +638,7 @@ bool wxRichTextPlainText::ExportXML(wxXmlNode* parent, wxRichTextXMLHandler* han
                     // TODO: I'm assuming wxXmlDocument will output quotes if necessary
                     wxXmlNode* elementNode = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("text"));
                     parent->AddChild(elementNode);
-                    handler->GetHelper().AddAttributes(elementNode, GetAttributes(), false);
+                    wxRichTextXMLHelper::AddAttributes(elementNode, GetAttributes(), false);
                     handler->GetHelper().WriteProperties(elementNode, GetProperties());
 
                     wxXmlNode* textNode = new wxXmlNode(wxXML_TEXT_NODE, wxT("text"));
@@ -657,7 +657,7 @@ bool wxRichTextPlainText::ExportXML(wxXmlNode* parent, wxRichTextXMLHandler* han
             wxXmlNode* elementNode = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("symbol"));
             parent->AddChild(elementNode);
 
-            handler->GetHelper().AddAttributes(elementNode, GetAttributes(), false);
+            wxRichTextXMLHelper::AddAttributes(elementNode, GetAttributes(), false);
             handler->GetHelper().WriteProperties(elementNode, GetProperties());
 
             wxXmlNode* textNode = new wxXmlNode(wxXML_TEXT_NODE, wxT("text"));
@@ -678,7 +678,7 @@ bool wxRichTextPlainText::ExportXML(wxXmlNode* parent, wxRichTextXMLHandler* han
     {
         wxXmlNode* elementNode = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("text"));
         parent->AddChild(elementNode);
-        handler->GetHelper().AddAttributes(elementNode, GetAttributes(), false);
+        wxRichTextXMLHelper::AddAttributes(elementNode, GetAttributes(), false);
 
         wxXmlNode* textNode = new wxXmlNode(wxXML_TEXT_NODE, wxT("text"));
         elementNode->AddChild(textNode);
@@ -750,9 +750,9 @@ bool wxRichTextImage::ImportFromXML(wxRichTextBuffer* buffer, wxXmlNode* node, w
 // Export this object directly to the given stream.
 bool wxRichTextImage::ExportXML(wxOutputStream& stream, int indent, wxRichTextXMLHandler* handler)
 {
-    wxString style = handler->GetHelper().AddAttributes(this, false);
+    wxString style = wxRichTextXMLHelper::AddAttributes(this, false);
 
-    handler->GetHelper().OutputIndentation(stream, indent);
+    wxRichTextXMLHelper::OutputIndentation(stream, indent);
     handler->GetHelper().OutputString(stream, wxT("<image"));
     if (!GetImageBlock().IsOk())
     {
@@ -766,10 +766,10 @@ bool wxRichTextImage::ExportXML(wxOutputStream& stream, int indent, wxRichTextXM
     if (GetProperties().GetCount() > 0)
     {
         handler->GetHelper().WriteProperties(stream, GetProperties(), indent);
-        handler->GetHelper().OutputIndentation(stream, indent);
+        wxRichTextXMLHelper::OutputIndentation(stream, indent);
     }
 
-    handler->GetHelper().OutputIndentation(stream, indent+1);
+    wxRichTextXMLHelper::OutputIndentation(stream, indent+1);
     handler->GetHelper().OutputString(stream, wxT("<data>"));
 
     // wxStopWatch stopwatch;
@@ -779,7 +779,7 @@ bool wxRichTextImage::ExportXML(wxOutputStream& stream, int indent, wxRichTextXM
     // wxLogDebug(wxT("Image conversion to hex took %ldms"), stopwatch.Time());
 
     handler->GetHelper().OutputString(stream, wxT("</data>\n"));
-    handler->GetHelper().OutputIndentation(stream, indent);
+    wxRichTextXMLHelper::OutputIndentation(stream, indent);
     handler->GetHelper().OutputString(stream, wxT("</image>"));
     return true;
 }
@@ -795,7 +795,7 @@ bool wxRichTextImage::ExportXML(wxXmlNode* parent, wxRichTextXMLHandler* handler
     if (GetImageBlock().IsOk())
         elementNode->AddAttribute(wxT("imagetype"), wxRichTextXMLHelper::MakeString((int) GetImageBlock().GetImageType()));
 
-    handler->GetHelper().AddAttributes(elementNode, this, false);
+    wxRichTextXMLHelper::AddAttributes(elementNode, this, false);
     handler->GetHelper().WriteProperties(elementNode, GetProperties());
 
     wxXmlNode* dataNode = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("data"));
@@ -882,11 +882,11 @@ bool wxRichTextParagraphLayoutBox::ImportFromXML(wxRichTextBuffer* buffer, wxXml
 // Export this object directly to the given stream.
 bool wxRichTextParagraphLayoutBox::ExportXML(wxOutputStream& stream, int indent, wxRichTextXMLHandler* handler)
 {
-    handler->GetHelper().OutputIndentation(stream, indent);
+    wxRichTextXMLHelper::OutputIndentation(stream, indent);
     wxString nodeName = GetXMLNodeName();
     handler->GetHelper().OutputString(stream, wxT("<") + nodeName);
 
-    wxString style = handler->GetHelper().AddAttributes(this, true);
+    wxString style = wxRichTextXMLHelper::AddAttributes(this, true);
 
     if (GetPartialParagraph())
         style << wxT(" partialparagraph=\"true\"");
@@ -905,7 +905,7 @@ bool wxRichTextParagraphLayoutBox::ExportXML(wxOutputStream& stream, int indent,
         child->ExportXML(stream, indent+1, handler);
     }
 
-    handler->GetHelper().OutputIndentation(stream, indent);
+    wxRichTextXMLHelper::OutputIndentation(stream, indent);
     handler->GetHelper().OutputString(stream, wxT("</") + nodeName + wxT(">"));
     return true;
 }
@@ -917,7 +917,7 @@ bool wxRichTextParagraphLayoutBox::ExportXML(wxXmlNode* parent, wxRichTextXMLHan
 {
     wxXmlNode* elementNode = new wxXmlNode(wxXML_ELEMENT_NODE, GetXMLNodeName());
     parent->AddChild(elementNode);
-    handler->GetHelper().AddAttributes(elementNode, this, true);
+    wxRichTextXMLHelper::AddAttributes(elementNode, this, true);
     handler->GetHelper().WriteProperties(elementNode, GetProperties());
 
     if (GetPartialParagraph())
@@ -980,11 +980,11 @@ bool wxRichTextTable::ImportFromXML(wxRichTextBuffer* buffer, wxXmlNode* node, w
 // Export this object directly to the given stream.
 bool wxRichTextTable::ExportXML(wxOutputStream& stream, int indent, wxRichTextXMLHandler* handler)
 {
-    handler->GetHelper().OutputIndentation(stream, indent);
+    wxRichTextXMLHelper::OutputIndentation(stream, indent);
     wxString nodeName = GetXMLNodeName();
     handler->GetHelper().OutputString(stream, wxT("<") + nodeName);
 
-    wxString style = handler->GetHelper().AddAttributes(this, true);
+    wxString style = wxRichTextXMLHelper::AddAttributes(this, true);
 
     style << wxT(" rows=\"") << m_rowCount << wxT("\"");
     style << wxT(" cols=\"") << m_colCount << wxT("\"");
@@ -1006,7 +1006,7 @@ bool wxRichTextTable::ExportXML(wxOutputStream& stream, int indent, wxRichTextXM
         }
     }
 
-    handler->GetHelper().OutputIndentation(stream, indent);
+    wxRichTextXMLHelper::OutputIndentation(stream, indent);
     handler->GetHelper().OutputString(stream, wxT("</") + nodeName + wxT(">"));
 
     return true;
@@ -1019,7 +1019,7 @@ bool wxRichTextTable::ExportXML(wxXmlNode* parent, wxRichTextXMLHandler* handler
 {
     wxXmlNode* elementNode = new wxXmlNode(wxXML_ELEMENT_NODE, GetXMLNodeName());
     parent->AddChild(elementNode);
-    handler->GetHelper().AddAttributes(elementNode, this, true);
+    wxRichTextXMLHelper::AddAttributes(elementNode, this, true);
     handler->GetHelper().WriteProperties(elementNode, GetProperties());
 
     elementNode->AddAttribute(wxT("rows"), wxString::Format(wxT("%d"), m_rowCount));

@@ -307,19 +307,7 @@ void wxSocketManager::Init()
 wxSocketImpl::wxSocketImpl(wxSocketBase& wxsocket)
     : m_wxsocket(&wxsocket)
 {
-    m_fd              = INVALID_SOCKET;
-    m_error           = wxSOCKET_NOERROR;
-    m_server          = false;
-    m_stream          = true;
-
     SetTimeout(wxsocket.GetTimeout() * 1000);
-
-    m_establishing    = false;
-    m_reusable        = false;
-    m_broadcast       = false;
-    m_dobind          = true;
-    m_initialRecvBufferSize = -1;
-    m_initialSendBufferSize = -1;
 }
 
 wxSocketImpl::~wxSocketImpl()
@@ -858,12 +846,11 @@ wxSocketBase::wxSocketBase()
 }
 
 wxSocketBase::wxSocketBase(wxSocketFlags flags, wxSocketType type)
+    : m_type(type)
 {
     Init();
 
     SetFlags(flags);
-
-    m_type = type;
 }
 
 wxSocketBase::~wxSocketBase()
