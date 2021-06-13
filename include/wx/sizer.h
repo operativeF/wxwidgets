@@ -449,8 +449,6 @@ public:
     void AssignSpacer(int w, int h) { AssignSpacer(wxSize(w, h)); }
 
 protected:
-    void Init() { m_userData = nullptr; m_kind = Item_None; }
-
     // common part of ctors taking wxSizerFlags
     void Init(const wxSizerFlags& flags);
 
@@ -474,7 +472,8 @@ protected:
         Item_Sizer,
         Item_Spacer,
         Item_Max
-    } m_kind;
+    } m_kind{Item_None};
+
     union
     {
         wxWindow      *m_window;
@@ -497,7 +496,7 @@ protected:
     // is shrunk.  It is safer to preserve the initial value.
     float        m_ratio;
 
-    wxObject    *m_userData;
+    wxObject    *m_userData{nullptr};
 
 private:
     wxDECLARE_CLASS(wxSizerItem);
@@ -513,7 +512,7 @@ WX_DECLARE_EXPORTED_LIST( wxSizerItem, wxSizerItemList );
 class WXDLLIMPEXP_CORE wxSizer: public wxObject, public wxClientDataContainer
 {
 public:
-    wxSizer() { m_containingWindow = nullptr; }
+    wxSizer() = default;
     ~wxSizer() override;
 
     // methods for adding elements to the sizer: there are Add/Insert/Prepend
@@ -753,7 +752,7 @@ protected:
     wxSizerItemList     m_children;
 
     // the window this sizer is used in, can be NULL
-    wxWindow *m_containingWindow;
+    wxWindow *m_containingWindow{nullptr};
 
     wxSize GetMaxClientSize( wxWindow *window ) const;
     wxSize GetMinClientSize( wxWindow *window );

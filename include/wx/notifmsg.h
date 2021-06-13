@@ -137,15 +137,12 @@ class WXDLLIMPEXP_CORE wxNotificationMessage : public
 #endif
 {
 public:
-    wxNotificationMessage() { Init(); }
+    wxNotificationMessage();
+    
     wxNotificationMessage(const wxString& title,
-                          const wxString& message = wxString(),
-                          wxWindow *parent = nullptr,
-                          int flags = wxICON_INFORMATION)
-    {
-        Init();
-        Create(title, message, parent, flags);
-    }
+        const wxString& message = wxString(),
+        wxWindow* parent = nullptr,
+        int flags = wxICON_INFORMATION);
 
    wxNotificationMessage(const wxNotificationMessage&) = delete;
    wxNotificationMessage& operator=(const wxNotificationMessage&) = delete;
@@ -161,10 +158,6 @@ public:
     static wxTaskBarIcon *UseTaskBarIcon(wxTaskBarIcon *icon);
 
 #endif // defined(__WXMSW__) && defined(wxHAS_NATIVE_NOTIFICATION_MESSAGE)
-
-private:
-    // common part of all ctors
-    void Init();
 };
 
 #endif // wxUSE_NOTIFICATION_MESSAGE

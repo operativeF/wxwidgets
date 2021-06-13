@@ -327,6 +327,36 @@ bool wxBalloonNotifMsgImpl::Close()
 // wxNotificationMessage
 // ----------------------------------------------------------------------------
 
+wxNotificationMessage::wxNotificationMessage()
+{
+#if wxUSE_WINRT
+    if (wxToastNotificationHelper::IsEnabled())
+        m_impl = wxToastNotificationHelper::CreateInstance(this);
+    else
+#endif
+    {
+        m_impl = new wxBalloonNotifMsgImpl(this);
+    }
+}
+
+wxNotificationMessage::wxNotificationMessage(const wxString& title,
+    const wxString& message,
+    wxWindow* parent,
+    int flags)
+{
+#if wxUSE_WINRT
+    if (wxToastNotificationHelper::IsEnabled())
+        m_impl = wxToastNotificationHelper::CreateInstance(this);
+    else
+#endif
+    {
+        m_impl = new wxBalloonNotifMsgImpl(this);
+    }
+
+    Create(title, message, parent, flags);
+}
+
+
 /* static */
 wxTaskBarIcon *wxNotificationMessage::UseTaskBarIcon(wxTaskBarIcon *icon)
 {
@@ -344,18 +374,6 @@ bool wxNotificationMessage::MSWUseToasts(
     wxUnusedVar(appId);
     return false;
 #endif
-}
-
-void wxNotificationMessage::Init()
-{
-#if wxUSE_WINRT
-    if ( wxToastNotificationHelper::IsEnabled() )
-        m_impl = wxToastNotificationHelper::CreateInstance(this);
-    else
-#endif
-    {
-        m_impl = new wxBalloonNotifMsgImpl(this);
-    }
 }
 
 #endif // wxUSE_NOTIFICATION_MESSAGE && wxUSE_TASKBARICON
