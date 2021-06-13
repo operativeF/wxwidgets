@@ -560,13 +560,10 @@ wxSize wxRadioBox::GetMaxButtonSize() const
 wxSize wxRadioBox::GetTotalButtonSize(const wxSize& sizeBtn) const
 {
     // the radiobox should be big enough for its buttons
-    int cx1, cy1;
-    wxGetCharSize(m_hWnd, &cx1, &cy1, GetFont());
+    wxSize ch_size = wxGetCharSize(m_hWnd, GetFont());
 
-    int extraHeight = cy1;
-
-    int height = GetRowCount() * sizeBtn.y + cy1/2 + extraHeight;
-    int width  = GetColumnCount() * (sizeBtn.x + cx1) + cx1;
+    int height = GetRowCount() * sizeBtn.y + ch_size.y / 2 + ch_size.y;
+    int width  = GetColumnCount() * (sizeBtn.x + ch_size.x) + ch_size.x;
 
     // Add extra space under the label, if it exists.
     if (!wxControl::GetLabel().empty())
@@ -638,11 +635,10 @@ wxRadioBox::PositionAllButtons(int x, int y, int width, int WXUNUSED(height))
     // wxRA_SPECIFY_ROWS means that the buttons are arranged top to bottom and
     // GetMajorDim() is the number of rows.
 
-    int cx1, cy1;
-    wxGetCharSize(m_hWnd, &cx1, &cy1, GetFont());
+    wxSize ch_size = wxGetCharSize(m_hWnd, GetFont());
 
-    int x_offset = x + cx1;
-    int y_offset = y + cy1;
+    int x_offset = x + ch_size.x;
+    int y_offset = y + ch_size.y;
 
     // Add extra space under the label, if it exists.
     if (!wxControl::GetLabel().empty())
@@ -679,7 +675,7 @@ wxRadioBox::PositionAllButtons(int x, int y, int width, int WXUNUSED(height))
             {
                 // start of new column
                 y_offset = startY;
-                x_offset += maxWidth + cx1;
+                x_offset += maxWidth + ch_size.x;
             }
             else // start of new row
             {
@@ -692,7 +688,7 @@ wxRadioBox::PositionAllButtons(int x, int y, int width, int WXUNUSED(height))
         if ( isLastInTheRow )
         {
             // make the button go to the end of radio box
-            widthBtn = startX + width - x_offset - 2*cx1;
+            widthBtn = startX + width - x_offset - 2*ch_size.x;
             if ( widthBtn < maxWidth )
                 widthBtn = maxWidth;
         }
@@ -717,7 +713,7 @@ wxRadioBox::PositionAllButtons(int x, int y, int width, int WXUNUSED(height))
         else
         {
             // to the right of this one
-            x_offset += widthBtn + cx1;
+            x_offset += widthBtn + ch_size.x;
         }
     }
 }

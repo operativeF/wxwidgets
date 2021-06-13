@@ -452,8 +452,7 @@ wxSize wxMSWButton::IncreaseToStdSizeAndCache(wxControl *btn, const wxSize& size
     // so make them as high as it.
     // The standard height is generally higher than this, but if not (e.g. when
     // using a larger font) increase the button height as well.
-    int yText;
-    wxGetCharSize(GetHwndOf(btn), nullptr, &yText, btn->GetFont());
+    int yText = wxGetCharSize(GetHwndOf(btn), btn->GetFont()).y;
     yText = wxGetEditHeightFromCharHeight(yText, btn);
 
     sizeBtn.IncTo(wxSize(-1, yText));

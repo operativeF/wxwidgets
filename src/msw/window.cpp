@@ -6519,7 +6519,7 @@ wxWindowMSW::MSWUnregisterMessageHandler(int msg, MSWMessageHandler handler)
 // global functions
 // ===========================================================================
 
-void wxGetCharSize(WXHWND wnd, int *x, int *y, const wxFont& the_font)
+wxSize wxGetCharSize(WXHWND wnd, const wxFont& the_font)
 {
     TEXTMETRIC tm;
     HDC dc = ::GetDC((HWND) wnd);
@@ -6538,10 +6538,7 @@ void wxGetCharSize(WXHWND wnd, int *x, int *y, const wxFont& the_font)
     }
     ReleaseDC((HWND)wnd, dc);
 
-    if ( x )
-        *x = tm.tmAveCharWidth;
-    if ( y )
-        *y = tm.tmHeight + tm.tmExternalLeading;
+    return {tm.tmAveCharWidth, tm.tmHeight + tm.tmExternalLeading};
 
     //   the_font.ReleaseResource();
 }

@@ -595,10 +595,9 @@ wxSize wxChoice::DoGetBestSize() const
 
 int wxChoice::SetHeightSimpleComboBox(int nItems) const
 {
-    int cx, cy;
-    wxGetCharSize( GetHWND(), &cx, &cy, GetFont() );
+    wxSize ch_size = wxGetCharSize( GetHWND(), GetFont() );
     int hItem = SendMessage(GetHwnd(), CB_GETITEMHEIGHT, (WPARAM)-1, 0);
-    return EDIT_HEIGHT_FROM_CHAR_HEIGHT( cy ) * wxMin( wxMax( nItems, 3 ), 6 ) + hItem - 1;
+    return EDIT_HEIGHT_FROM_CHAR_HEIGHT( ch_size.y ) * wxMin( wxMax( nItems, 3 ), 6 ) + hItem - 1;
 }
 
 wxSize wxChoice::DoGetSizeFromTextSize(int xlen, int ylen) const

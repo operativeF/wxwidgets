@@ -166,14 +166,13 @@ wxSize wxStaticBox::DoGetBestSize() const
     wxSize best;
 
     // Calculate the size needed by the label
-    int cx, cy;
-    wxGetCharSize(GetHWND(), &cx, &cy, GetFont());
+    wxSize char_size = wxGetCharSize(GetHWND(), GetFont());
 
     int wBox;
-    GetTextExtent(GetLabelText(wxGetWindowText(m_hWnd)), &wBox, &cy);
+    GetTextExtent(GetLabelText(wxGetWindowText(m_hWnd)), &wBox, &char_size.y);
 
-    wBox += 3*cx;
-    int hBox = EDIT_HEIGHT_FROM_CHAR_HEIGHT(cy);
+    wBox += 3 * char_size.x;
+    int hBox = EDIT_HEIGHT_FROM_CHAR_HEIGHT(char_size.y);
 
     // If there is a sizer then the base best size is the sizer's minimum
     if (GetSizer() != nullptr)

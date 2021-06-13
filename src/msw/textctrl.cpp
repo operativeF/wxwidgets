@@ -2437,16 +2437,15 @@ wxSize wxTextCtrl::DoGetBestSize() const
 
 wxSize wxTextCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
 {
-    int cy;
     wxFont font = GetFont();
     font.WXAdjustToPPI(GetDPI());
-    wxGetCharSize(GetHWND(), nullptr, &cy, font);
+    int char_height = wxGetCharSize(GetHWND(), font).y;
 
     DWORD wText = FromDIP(1);
     ::SystemParametersInfo(SPI_GETCARETWIDTH, 0, &wText, 0);
     wText += xlen;
 
-    int hText = cy;
+    int hText = char_height;
     if ( m_windowStyle & wxTE_MULTILINE )
     {
         // add space for vertical scrollbar
@@ -2481,7 +2480,7 @@ wxSize wxTextCtrl::DoGetSizeFromTextSize(int xlen, int ylen) const
 
         // we have to add the adjustments for the control height only once, not
         // once per line, so do it after multiplication above
-        hText += EDIT_HEIGHT_FROM_CHAR_HEIGHT(cy) - cy;
+        hText += EDIT_HEIGHT_FROM_CHAR_HEIGHT(char_height) - char_height;
     }
 
     // Perhaps the user wants something different from CharHeight, or ylen
