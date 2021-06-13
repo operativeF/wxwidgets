@@ -79,8 +79,6 @@ TAG_HANDLER_BEGIN(PRE, "PRE")
 
     TAG_HANDLER_PROC(tag)
     {
-        wxHtmlContainerCell *c;
-
         const int fixed = m_WParser->GetFontFixed();
         const int italic = m_WParser->GetFontItalic();
         const int underlined = m_WParser->GetFontUnderlined();
@@ -89,7 +87,7 @@ TAG_HANDLER_BEGIN(PRE, "PRE")
         const wxHtmlWinParser::WhitespaceMode whitespace =
             m_WParser->GetWhitespaceMode();
 
-        c = m_WParser->GetContainer();
+        wxHtmlContainerCell *c = m_WParser->GetContainer();
         m_WParser->SetWhitespaceMode(wxHtmlWinParser::Whitespace_Pre);
         m_WParser->SetFontUnderlined(false);
         m_WParser->SetFontBold(false);

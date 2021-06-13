@@ -152,6 +152,7 @@ GetMonthFromName(wxString::const_iterator& p,
     if ( name.empty() )
         return wxDateTime::Inv_Month;
 
+    // TODO: Lambda
     wxDateTime::Month mon;
     for ( mon = wxDateTime::Jan; mon < wxDateTime::Inv_Month; wxNextMonth(mon) )
     {
@@ -231,6 +232,7 @@ GetWeekDayFromName(wxString::const_iterator& p,
     if ( name.empty() )
         return wxDateTime::Inv_WeekDay;
 
+    // TODO: Lambda
     wxDateTime::WeekDay wd;
     for ( wd = wxDateTime::Sun; wd < wxDateTime::Inv_WeekDay; wxNextWDay(wd) )
     {

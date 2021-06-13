@@ -71,18 +71,15 @@ void wxRibbonDrawParallelGradientLines(wxDC& dc,
                                     const wxColour& start_colour,
                                     const wxColour& end_colour)
 {
-    int rd, gd, bd;
-    rd = end_colour.Red() - start_colour.Red();
-    gd = end_colour.Green() - start_colour.Green();
-    bd = end_colour.Blue() - start_colour.Blue();
+    int rd = end_colour.Red() - start_colour.Red();
+    int gd = end_colour.Green() - start_colour.Green();
+    int bd = end_colour.Blue() - start_colour.Blue();
 
     for (int step = 0; step < numsteps; ++step)
     {
-        int r,g,b;
-
-        r = start_colour.Red() + (((step*rd*100)/numsteps)/100);
-        g = start_colour.Green() + (((step*gd*100)/numsteps)/100);
-        b = start_colour.Blue() + (((step*bd*100)/numsteps)/100);
+        int r = start_colour.Red() + (((step*rd*100)/numsteps)/100);
+        int g = start_colour.Green() + (((step*gd*100)/numsteps)/100);
+        int b = start_colour.Blue() + (((step*bd*100)/numsteps)/100);
 
         wxPen p(wxColour((unsigned char)r,
                         (unsigned char)g,

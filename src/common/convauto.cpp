@@ -212,6 +212,7 @@ void wxConvAuto::InitFromBOM(wxBOM bomType)
 
 void wxConvAuto::SkipBOM(const char **src, size_t *len) const
 {
+    // TODO: Lambda
     int ofs;
     switch ( m_bomType )
     {

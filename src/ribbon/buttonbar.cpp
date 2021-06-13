@@ -255,8 +255,8 @@ public:
     {
         overall_size = wxSize(0, 0);
         size_t btn_count = buttons.Count();
-        size_t btn_i;
-        for(btn_i = 0; btn_i < btn_count; ++btn_i)
+
+        for(size_t btn_i = 0; btn_i < btn_count; ++btn_i)
         {
             wxRibbonButtonBarButtonInstance& instance = buttons.Item(btn_i);
             wxSize size = instance.base->sizes[instance.size].size;
@@ -281,8 +281,8 @@ public:
             return nullptr;
         }
         size_t btn_count = buttons.Count();
-        size_t btn_i;
-        for(btn_i = 0; btn_i < btn_count; ++btn_i)
+
+        for(size_t btn_i = 0; btn_i < btn_count; ++btn_i)
         {
             wxRibbonButtonBarButtonInstance& instance = buttons.Item(btn_i);
             if(instance.base == inst->base)
@@ -573,12 +573,13 @@ void wxRibbonButtonBar::ClearButtons()
 {
     m_layouts_valid = false;
     size_t count = m_buttons.GetCount();
-    size_t i;
-    for(i = 0; i < count; ++i)
+
+    for(size_t i = 0; i < count; ++i)
     {
         wxRibbonButtonBarButtonBase* button = m_buttons.Item(i);
         delete button;
     }
+
     m_buttons.Clear();
     Realize();
 }
@@ -586,8 +587,8 @@ void wxRibbonButtonBar::ClearButtons()
 bool wxRibbonButtonBar::DeleteButton(int button_id)
 {
     size_t count = m_buttons.GetCount();
-    size_t i;
-    for(i = 0; i < count; ++i)
+
+    for(size_t i = 0; i < count; ++i)
     {
         wxRibbonButtonBarButtonBase* button = m_buttons.Item(i);
         if(button->id == button_id)
@@ -610,8 +611,8 @@ bool wxRibbonButtonBar::DeleteButton(int button_id)
 void wxRibbonButtonBar::EnableButton(int button_id, bool enable)
 {
     size_t count = m_buttons.GetCount();
-    size_t i;
-    for(i = 0; i < count; ++i)
+
+    for(size_t i = 0; i < count; ++i)
     {
         wxRibbonButtonBarButtonBase* button = m_buttons.Item(i);
         if(button->id == button_id)
@@ -640,8 +641,8 @@ void wxRibbonButtonBar::EnableButton(int button_id, bool enable)
 void wxRibbonButtonBar::ToggleButton(int button_id, bool checked)
 {
     size_t count = m_buttons.GetCount();
-    size_t i;
-    for(i = 0; i < count; ++i)
+
+    for(size_t i = 0; i < count; ++i)
     {
         wxRibbonButtonBarButtonBase* button = m_buttons.Item(i);
         if(button->id == button_id)
@@ -781,8 +782,8 @@ void wxRibbonButtonBar::SetArtProvider(wxRibbonArtProvider* art)
 
     wxClientDC temp_dc(this);
     size_t btn_count = m_buttons.Count();
-    size_t btn_i;
-    for(btn_i = 0; btn_i < btn_count; ++btn_i)
+
+    for(size_t btn_i = 0; btn_i < btn_count; ++btn_i)
     {
         wxRibbonButtonBarButtonBase* base = m_buttons.Item(btn_i);
 
@@ -804,8 +805,8 @@ wxSize wxRibbonButtonBar::DoGetNextSmallerSize(wxOrientation direction,
                                              wxSize result) const
 {
     size_t nlayouts = m_layouts.GetCount();
-    size_t i;
-    for(i = 0; i < nlayouts; ++i)
+
+    for(size_t i = 0; i < nlayouts; ++i)
     {
         wxRibbonButtonBarLayout* layout = m_layouts.Item(i);
         wxSize size = layout->overall_size;
@@ -934,8 +935,8 @@ void wxRibbonButtonBar::OnPaint(wxPaintEvent& WXUNUSED(evt))
     wxRibbonBar* const ribbon = GetAncestorRibbonBar();
 
     size_t btn_count = layout->buttons.Count();
-    size_t btn_i;
-    for(btn_i = 0; btn_i < btn_count; ++btn_i)
+
+    for(size_t btn_i = 0; btn_i < btn_count; ++btn_i)
     {
         wxRibbonButtonBarButtonInstance& button = layout->buttons.Item(btn_i);
         wxRibbonButtonBarButtonBase* base = button.base;
@@ -954,9 +955,10 @@ void wxRibbonButtonBar::OnSize(wxSizeEvent& evt)
 {
     wxSize new_size = evt.GetSize();
     size_t layout_count = m_layouts.GetCount();
-    size_t layout_i;
+
     m_current_layout = layout_count - 1;
-    for(layout_i = 0; layout_i < layout_count; ++layout_i)
+    
+    for(size_t layout_i = 0; layout_i < layout_count; ++layout_i)
     {
         wxSize layout_size = m_layouts.Item(layout_i)->overall_size;
         if(layout_size.x <= new_size.x && layout_size.y <= new_size.y)
@@ -967,6 +969,7 @@ void wxRibbonButtonBar::OnSize(wxSizeEvent& evt)
             break;
         }
     }
+
     m_hovered_button = m_layouts.Item(m_current_layout)->FindSimilarInstance(m_hovered_button);
     Refresh();
 }
@@ -1027,23 +1030,26 @@ void wxRibbonButtonBar::MakeLayouts()
             m_active_button->base->state &= ~wxRIBBON_BUTTONBAR_BUTTON_ACTIVE_MASK;
             m_active_button = nullptr;
         }
+
         size_t count = m_layouts.GetCount();
-        size_t i;
-        for(i = 0; i < count; ++i)
+
+        for(size_t i = 0; i < count; ++i)
         {
             wxRibbonButtonBarLayout* layout = m_layouts.Item(i);
             delete layout;
         }
+
         m_layouts.Clear();
     }
+
     size_t btn_count = m_buttons.Count();
-    size_t btn_i;
 
     // Determine available height:
     // 1 large button or, if not found, 3 medium or small buttons
     int available_height = 0;
     bool large_button_found = false;
-    for(btn_i = 0; btn_i < btn_count; ++btn_i)
+
+    for(size_t btn_i = 0; btn_i < btn_count; ++btn_i)
     {
         wxRibbonButtonBarButtonBase* button = m_buttons.Item(btn_i);
         wxRibbonButtonBarButtonState size_class = button->GetLargestSize();
@@ -1052,6 +1058,7 @@ void wxRibbonButtonBar::MakeLayouts()
         if(size_class == wxRIBBON_BUTTONBAR_BUTTON_LARGE)
             large_button_found = true;
     }
+
     if(!large_button_found)
         available_height *= 3;
 
@@ -1062,7 +1069,7 @@ void wxRibbonButtonBar::MakeLayouts()
         wxRibbonButtonBarLayout* layout = new wxRibbonButtonBarLayout;
         wxPoint cursor(0, 0);
         layout->overall_size.y = 0;
-        for(btn_i = 0; btn_i < btn_count; ++btn_i)
+        for(size_t btn_i = 0; btn_i < btn_count; ++btn_i)
         {
             wxRibbonButtonBarButtonBase* button = m_buttons.Item(btn_i);
             wxRibbonButtonBarButtonInstance instance = button->NewInstance();

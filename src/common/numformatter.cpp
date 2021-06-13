@@ -220,6 +220,7 @@ void wxNumberFormatter::AddThousandsSeparators(wxString& s)
     if ( s.find_first_of("eE") != wxString::npos )
         return;
 
+    // TODO: Return value
     wxChar thousandsSep;
     if ( !GetThousandsSeparatorIfUsed(&thousandsSep) )
         return;
@@ -280,6 +281,7 @@ void wxNumberFormatter::RemoveTrailingZeroes(wxString& s)
 
 void wxNumberFormatter::RemoveThousandsSeparators(wxString& s)
 {
+    // TODO: Returrn value.
     wxChar thousandsSep;
     if ( !GetThousandsSeparatorIfUsed(&thousandsSep) )
         return;

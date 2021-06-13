@@ -180,17 +180,15 @@ void wxHtmlTableCell::RemoveExtraSpacing(bool WXUNUSED(top),
 
 void wxHtmlTableCell::ReallocCols(int cols)
 {
-    int i,j;
-
-    for (i = 0; i < m_NumRows; i++)
+    for (int i = 0; i < m_NumRows; i++)
     {
         m_CellInfo[i] = (cellStruct*) realloc(m_CellInfo[i], sizeof(cellStruct) * cols);
-        for (j = m_NumCols; j < cols; j++)
+        for (int j = m_NumCols; j < cols; j++)
             m_CellInfo[i][j].flag = cellFree;
     }
 
     m_ColsInfo = (colStruct*) realloc(m_ColsInfo, sizeof(colStruct) * cols);
-    for (j = m_NumCols; j < cols; j++)
+    for (int j = m_NumCols; j < cols; j++)
     {
            m_ColsInfo[j].width = 0;
            m_ColsInfo[j].units = wxHTML_UNITS_PERCENT;
@@ -556,12 +554,13 @@ void wxHtmlTableCell::Layout(int w)
 
                 // Make sure to leave enough space for the other columns
                 int minRequired = 0;
-                int r;
-                for (r = i + 1; r < m_NumCols; r++)
+
+                for (int r = i + 1; r < m_NumCols; r++)
                 {
                     if (!m_ColsInfo[r].width)
                         minRequired += m_ColsInfo[r].minWidth;
                 }
+                
                 const int pixwidthPrev = m_ColsInfo[i].pixwidth;
                 m_ColsInfo[i].pixwidth = wxMax(wxMin(wpix - minRequired, m_ColsInfo[i].pixwidth), m_ColsInfo[i].minWidth);
 

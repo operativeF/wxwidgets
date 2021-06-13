@@ -181,6 +181,7 @@ bool wxConfigBase::Read(const wxString& key, size_t* val) const
 {
     wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );
 
+    // TODO: Lambda
     SizeSameSizeAsSizeT tmp;
     if ( !Read(key, &tmp) )
         return false;
@@ -207,6 +208,7 @@ bool wxConfigBase::Read(const wxString& key, float* val) const
 {
     wxCHECK_MSG( val, false, wxT("wxConfig::Read(): NULL parameter") );
 
+    // TODO: Lambda
     double temp;
     if ( !Read(key, &temp) )
         return false;

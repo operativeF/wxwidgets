@@ -114,12 +114,12 @@ void wxRibbonToolBar::CommonInit(long WXUNUSED(style))
 wxRibbonToolBar::~wxRibbonToolBar()
 {
     size_t count = m_groups.GetCount();
-    size_t i, t;
-    for(i = 0; i < count; ++i)
+
+    for(size_t i = 0; i < count; ++i)
     {
         wxRibbonToolBarToolGroup* group = m_groups.Item(i);
         size_t tool_count = group->tools.GetCount();
-        for(t = 0; t < tool_count; ++t)
+        for(size_t t = 0; t < tool_count; ++t)
         {
             wxRibbonToolBarToolBase* tool = group->tools.Item(t);
             delete tool;
@@ -500,13 +500,14 @@ wxRibbonButtonKind wxRibbonToolBar::GetToolKind(int tool_id)const
 int wxRibbonToolBar::GetToolPos(int tool_id)const
 {
     size_t group_count = m_groups.GetCount();
-    size_t g, t;
+
     int pos = 0;
-    for(g = 0; g < group_count; ++g)
+
+    for(size_t g = 0; g < group_count; ++g)
     {
         wxRibbonToolBarToolGroup* group = m_groups.Item(g);
         size_t tool_count = group->tools.GetCount();
-        for(t = 0; t < tool_count; ++t)
+        for(size_t t = 0; t < tool_count; ++t)
         {
             wxRibbonToolBarToolBase* tool = group->tools.Item(t);
             if(tool->id == tool_id)

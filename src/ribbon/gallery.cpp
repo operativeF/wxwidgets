@@ -165,8 +165,8 @@ void wxRibbonGallery::OnMouseMove(wxMouseEvent& evt)
             pos.y += m_scroll_amount;
 
         size_t item_count = m_items.Count();
-        size_t item_i;
-        for(item_i = 0; item_i < item_count; ++item_i)
+
+        for(size_t item_i = 0; item_i < item_count; ++item_i)
         {
             wxRibbonGalleryItem *item = m_items.Item(item_i);
             if(!item->IsVisible())
@@ -263,8 +263,8 @@ void wxRibbonGallery::OnMouseDown(wxMouseEvent& evt)
         else
             pos.y += m_scroll_amount;
         size_t item_count = m_items.Count();
-        size_t item_i;
-        for(item_i = 0; item_i < item_count; ++item_i)
+
+        for(size_t item_i = 0; item_i < item_count; ++item_i)
         {
             wxRibbonGalleryItem *item = m_items.Item(item_i);
             if(!item->IsVisible())
@@ -506,8 +506,8 @@ void wxRibbonGallery::OnPaint(wxPaintEvent& WXUNUSED(evt))
     if(m_art->GetFlags() & wxRIBBON_BAR_FLOW_VERTICAL)
         offset_vertical = false;
     size_t item_count = m_items.Count();
-    size_t item_i;
-    for(item_i = 0; item_i < item_count; ++item_i)
+
+    for(size_t item_i = 0; item_i < item_count; ++item_i)
     {
         wxRibbonGalleryItem *item = m_items.Item(item_i);
         if(!item->IsVisible())
@@ -569,8 +569,8 @@ wxRibbonGalleryItem* wxRibbonGallery::Append(const wxBitmap& bitmap, int id,
 void wxRibbonGallery::Clear()
 {
     size_t item_count = m_items.Count();
-    size_t item_i;
-    for(item_i = 0; item_i < item_count; ++item_i)
+
+    for(size_t item_i = 0; item_i < item_count; ++item_i)
     {
         wxRibbonGalleryItem *item = m_items.Item(item_i);
         delete item;
@@ -630,8 +630,11 @@ bool wxRibbonGallery::Layout()
     int y_cursor = 0;
 
     size_t item_count = m_items.Count();
-    size_t item_i;
+
     long art_flags = m_art->GetFlags();
+
+    size_t item_i;
+
     for(item_i = 0; item_i < item_count; ++item_i)
     {
         wxRibbonGalleryItem *item = m_items.Item(item_i);

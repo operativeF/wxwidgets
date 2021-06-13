@@ -248,6 +248,7 @@ static long GetTruncatedJDN(wxDateTime::wxDateTime_t day,
     // make the year positive to avoid problems with negative numbers division
     year += 4800;
 
+    // TODO: Lambda
     // months are counted from March here
     int month;
     if ( mon >= wxDateTime::Mar )
@@ -1411,7 +1412,6 @@ wxDateTime& wxDateTime::SetFromDOS(unsigned long ddt)
 
 unsigned long wxDateTime::GetAsDOS() const
 {
-    unsigned long ddt;
     time_t ticks = GetTicks();
     struct tm tmstruct;
     struct tm *tm = wxLocaltime_r(&ticks, &tmstruct);
@@ -1437,8 +1437,7 @@ unsigned long wxDateTime::GetAsDOS() const
     long second = tm->tm_sec;
     second /= 2;
 
-    ddt = year | month | day | hour | minute | second;
-    return ddt;
+    return year | month | day | hour | minute | second;
 }
 
 // ----------------------------------------------------------------------------
@@ -1810,6 +1809,7 @@ wxDateTime& wxDateTime::SetToWeekDayInSameWeek(WeekDay weekday, WeekFlags flags)
 
 wxDateTime& wxDateTime::SetToNextWeekDay(WeekDay weekday)
 {
+    // TODO: Lambda
     wxDATETIME_CHECK( weekday != Inv_WeekDay, wxT("invalid weekday") );
 
     int diff;
@@ -1834,6 +1834,7 @@ wxDateTime& wxDateTime::SetToNextWeekDay(WeekDay weekday)
 
 wxDateTime& wxDateTime::SetToPrevWeekDay(WeekDay weekday)
 {
+    // TODO: Lambda, very similar to prior function.
     wxDATETIME_CHECK( weekday != Inv_WeekDay, wxT("invalid weekday") );
 
     int diff;
@@ -2027,6 +2028,7 @@ wxDateTime::wxDateTime_t wxDateTime::GetWeekOfMonth(wxDateTime::WeekFlags flags,
 
     UseEffectiveWeekDayFlags(flags);
 
+    // TODO: Lambda
     // compute offset of dateFirst from the beginning of the week
     int firstOffset;
     if ( flags == Sunday_First )
@@ -2160,6 +2162,7 @@ void wxDateTime::UseEffectiveWeekDayFlags(WeekFlags &flags) const
 {
     if ( flags == Default_First )
     {
+        // TODO: Return value
         WeekDay firstDay;
         GetFirstWeekDay(&firstDay);
         flags = firstDay == Sun ? Sunday_First : Monday_First;

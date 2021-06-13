@@ -535,6 +535,7 @@ size_t wxHtmlListBox::GetItemForCell(const wxHtmlCell *cell) const
     wxCHECK_MSG( cell, 0, wxT("no root cell") );
 
     // the cell's ID contains item index, see CacheItem():
+    // TODO: Return value.
     unsigned long n;
     if ( !cell->GetId().ToULong(&n) )
     {
@@ -559,7 +560,7 @@ void wxHtmlListBox::OnInternalIdle()
     {
         wxPoint pos = ScreenToClient(wxGetMousePosition());
         wxHtmlCell *cell;
-
+        // TODO: Return value.
         if ( !PhysicalCoordsToCell(pos, cell) )
             return;
 
@@ -578,6 +579,7 @@ void wxHtmlListBox::OnLeftDown(wxMouseEvent& event)
     wxPoint pos = event.GetPosition();
     wxHtmlCell *cell;
 
+    // TODO: Return value.
     if ( !PhysicalCoordsToCell(pos, cell) )
     {
         event.Skip();

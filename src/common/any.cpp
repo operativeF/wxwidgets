@@ -346,6 +346,7 @@ bool wxAnyConvertString(const wxString& value,
     }
     else if ( wxANY_VALUE_TYPE_CHECK_TYPE(dstType, wxAnyBaseIntType) )
     {
+        // TODO: Lambda, return value.
         wxAnyBaseIntType value2;
 #ifdef wxLongLong_t
         if ( !value.ToLongLong(&value2) )

@@ -483,6 +483,8 @@ void wxRibbonAUIArtProvider::DrawTab(wxDC& dc,
             int offset = 0;
             if(icon.IsOk())
                 offset += icon.GetScaledWidth() + 2;
+
+            // TODO: Return value.
             int text_height;
             int text_width;
             dc.GetTextExtent(label, &text_width, &text_height);

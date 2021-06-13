@@ -92,12 +92,10 @@ wxHtmlLinkInfo *wxHtmlImageMapAreaCell::GetLink( int x, int y ) const
         case RECT:
             if ( coords.GetCount() == 4 )
             {
-                int l, t, r, b;
-
-                l = coords[ 0 ];
-                t = coords[ 1 ];
-                r = coords[ 2 ];
-                b = coords[ 3 ];
+                int l = coords[ 0 ];
+                int t = coords[ 1 ];
+                int r = coords[ 2 ];
+                int b = coords[ 3 ];
                 if (x >= l && x <= r && y >= t && y <= b)
                 {
                     return m_Link;
@@ -107,13 +105,10 @@ wxHtmlLinkInfo *wxHtmlImageMapAreaCell::GetLink( int x, int y ) const
         case CIRCLE:
             if ( coords.GetCount() == 3 )
             {
-                int l, t, r;
-                double  d;
-
-                l = coords[ 0 ];
-                t = coords[ 1 ];
-                r = coords[ 2 ];
-                d = sqrt( (double) (((x - l) * (x - l)) + ((y - t) * (y - t))) );
+                int l = coords[ 0 ];
+                int t = coords[ 1 ];
+                int r = coords[ 2 ];
+                double d = sqrt( (double) (((x - l) * (x - l)) + ((y - t) * (y - t))) );
                 if (d < (double)r)
                 {
                     return m_Link;
@@ -462,9 +457,8 @@ void wxHtmlImageCell::SetImage(const wxImage& img, double scaleHDPI)
     {
         delete m_bitmap;
 
-        int ww, hh;
-        ww = img.GetWidth();
-        hh = img.GetHeight();
+        int ww = img.GetWidth();
+        int hh = img.GetHeight();
 
         if ( m_bmpW == wxDefaultCoord)
             m_bmpW = ww / scaleHDPI;
@@ -629,6 +623,7 @@ void wxHtmlImageCell::Draw(wxDC& dc, int x, int y,
         if (m_Height != m_bitmap->GetScaledHeight())
             imageScaleY = (double) m_Height / (double) m_bitmap->GetScaledHeight();
 
+        // TODO: Return value.
         double us_x, us_y;
         dc.GetUserScale(&us_x, &us_y);
         dc.SetUserScale(us_x * imageScaleX, us_y * imageScaleY);

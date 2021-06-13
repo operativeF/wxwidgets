@@ -74,6 +74,7 @@ wxDataInputStream::wxDataInputStream(wxInputStream& s, const wxMBConv& conv)
 #if wxHAS_INT64
 wxUint64 wxDataInputStream::Read64()
 {
+  // TODO: Return value
   wxUint64 tmp;
   Read64(&tmp, 1);
   return tmp;
@@ -82,6 +83,7 @@ wxUint64 wxDataInputStream::Read64()
 
 wxUint32 wxDataInputStream::Read32()
 {
+  // TODO: Return value
   wxUint32 i32;
 
   m_input->Read(&i32, 4);
@@ -94,6 +96,7 @@ wxUint32 wxDataInputStream::Read32()
 
 wxUint16 wxDataInputStream::Read16()
 {
+  // TODO: Return value.
   wxUint16 i16;
 
   m_input->Read(&i16, 2);

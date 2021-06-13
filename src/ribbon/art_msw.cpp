@@ -1467,6 +1467,7 @@ void wxRibbonMSWArtProvider::DrawTab(
 
             dc.SetBackgroundMode(wxBrushStyle::Transparent);
 
+            // TODO: Return value.
             int text_height;
             int text_width;
             dc.GetTextExtent(label, &text_width, &text_height);
@@ -2664,6 +2665,7 @@ void wxRibbonMSWArtProvider::DrawButtonBarButtonForeground(
             dc.DrawBitmap(bitmap_small, x_cursor,
                     rect.y + (rect.height - bitmap_small.GetScaledHeight())/2, true);
             x_cursor += bitmap_small.GetScaledWidth() + 2;
+            // TODO: Return value.
             wxCoord label_w, label_h;
             dc.GetTextExtent(label, &label_w, &label_h);
             dc.DrawText(label, x_cursor,
@@ -3199,6 +3201,7 @@ bool wxRibbonMSWArtProvider::GetButtonBarButtonSize(
         {
             wxSize icon_size(bitmap_size_large);
             icon_size += wxSize(4, 4);
+            // TODO: Return value.
             wxCoord label_height;
             wxCoord best_width;
             dc.GetTextExtent(label, &best_width, &label_height);
