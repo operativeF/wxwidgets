@@ -73,28 +73,10 @@ wxPrinterDCImpl::wxPrinterDCImpl( wxPrinterDC *owner, const wxPrintData& printDa
     wxMSWDCImpl( owner )
     , m_printData(printData)
 {
-    m_isInteractive = false;
-
     m_hDC = wxGetPrinterDC(printData);
     m_ok = m_hDC != nullptr;
     m_bOwnsDC = true;
 
-    Init();
-}
-
-
-wxPrinterDCImpl::wxPrinterDCImpl( wxPrinterDC *owner, WXHDC dc ) :
-    wxMSWDCImpl( owner )
-{
-    m_isInteractive = false;
-
-    m_hDC = dc;
-    m_bOwnsDC = true;
-    m_ok = true;
-}
-
-void wxPrinterDCImpl::Init()
-{
     if ( m_hDC )
     {
         //     int width = GetDeviceCaps(m_hDC, VERTRES);
@@ -104,6 +86,15 @@ void wxPrinterDCImpl::Init()
         SetBrush(*wxBLACK_BRUSH);
         SetPen(*wxBLACK_PEN);
     }
+}
+
+
+wxPrinterDCImpl::wxPrinterDCImpl( wxPrinterDC *owner, WXHDC dc ) :
+    wxMSWDCImpl( owner )
+{
+    m_hDC = dc;
+    m_bOwnsDC = true;
+    m_ok = true;
 }
 
 // ----------------------------------------------------------------------------

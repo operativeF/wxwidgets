@@ -20,18 +20,29 @@
 class WXDLLIMPEXP_CORE wxColourDialog : public wxDialog
 {
 public:
-    wxColourDialog() { Init(); }
+    wxColourDialog()
+    {
+        // reset to zero, otherwise the wx routines won't size the window the
+        // second time the dialog is shown, because they would believe it already
+        // has the requested size/position
+        s_rectDialog.x = 0;
+        s_rectDialog.y = 0;
+    }
     wxColourDialog(wxWindow *parent, const wxColourData *data = nullptr)
     {
-        Init();
+        // reset to zero, otherwise the wx routines won't size the window the
+        // second time the dialog is shown, because they would believe it already
+        // has the requested size/position
+        s_rectDialog.x = 0;
+        s_rectDialog.y = 0;
 
         Create(parent, data);
     }
 
-wxColourDialog(const wxColourDialog&) = delete;
-   wxColourDialog& operator=(const wxColourDialog&) = delete;
-   wxColourDialog(wxColourDialog&&) = default;
-   wxColourDialog& operator=(wxColourDialog&&) = default;
+    wxColourDialog(const wxColourDialog&) = delete;
+    wxColourDialog& operator=(const wxColourDialog&) = delete;
+    wxColourDialog(wxColourDialog&&) = default;
+    wxColourDialog& operator=(wxColourDialog&&) = default;
 
     bool Create(wxWindow *parent, const wxColourData *data = nullptr);
 
@@ -53,9 +64,6 @@ wxColourDialog(const wxColourDialog&) = delete;
     void MSWCheckIfCurrentChanged(WXCOLORREF currentCol);
 
 protected:
-    // FIXME: Protected Init()
-    void Init();
-
     wxPoint DoGetPosition() const override;
     wxSize DoGetSize() const override;
     wxSize DoGetClientSize() const override;
@@ -70,10 +78,15 @@ protected:
 
     // indicates that the dialog should be centered in this direction if non 0
     // (set by DoCentre(), used by MSWOnInitDone())
-    int m_centreDir;
+    int m_centreDir{0};
 
     // true if DoMoveWindow() had been called
-    bool m_movedWindow;
+    bool m_movedWindow{false};
+
+    // standard colors dialog size for the Windows systems
+    // this is ok if color dialog created with standard color
+    // and "Define Custom Colors" extension not shown
+    inline static wxRect s_rectDialog{ 0, 0, 222, 324 };
 
 public:
 	wxClassInfo *GetClassInfo() const override;

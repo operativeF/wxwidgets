@@ -35,9 +35,8 @@ public:
     wxAccessible(wxWindow *win = nullptr);
     ~wxAccessible() override;
 
-// Overridables
-
-// Accessors
+    wxAccessible(const wxAccessible&) = delete;
+	wxAccessible& operator=(const wxAccessible&) = delete;
 
     // Returns the wxIAccessible pointer
     wxIAccessible* GetIAccessible() { return m_pIAccessible; }
@@ -51,16 +50,10 @@ public:
     static void NotifyEvent(int eventType, wxWindow* window, wxAccObject objectType,
                             int objectId);
 
-protected:
-    void Init();
-
 private:
     wxIAccessible * m_pIAccessible;  // the pointer to COM interface
-    IAccessible*    m_pIAccessibleStd;  // the pointer to the standard COM interface,
+    IAccessible*    m_pIAccessibleStd{nullptr};  // the pointer to the standard COM interface,
                                         // for default processing
-
-    wxAccessible(const wxAccessible&) = delete;
-	wxAccessible& operator=(const wxAccessible&) = delete;
 };
 
 #endif  //wxUSE_ACCESSIBILITY

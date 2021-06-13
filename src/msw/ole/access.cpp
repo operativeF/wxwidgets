@@ -1770,18 +1770,11 @@ IAccessible* wxIAccessible::GetChildAccessible(int id)
 
 // ctors
 
-// common part of all ctors
-void wxAccessible::Init()
-{
-    m_pIAccessibleStd = nullptr;
-    m_pIAccessible = new wxIAccessible(this);
-    m_pIAccessible->AddRef();
-}
-
 wxAccessible::wxAccessible(wxWindow* win)
-            : wxAccessibleBase(win)
+            : wxAccessibleBase(win),
+              m_pIAccessible(new wxIAccessible(this))
 {
-    Init();
+    m_pIAccessible->AddRef();
 }
 
 wxAccessible::~wxAccessible()

@@ -150,25 +150,10 @@ public:
     void SetLayoutDirection(wxLayoutDirection dir) override;
 
 protected:
-    void Init()
-    {
-        m_bOwnsDC = false;
-        m_hDC = nullptr;
-
-        m_oldBitmap = nullptr;
-        m_oldPen = nullptr;
-        m_oldBrush = nullptr;
-        m_oldFont = nullptr;
-
-#if wxUSE_PALETTE
-        m_oldPalette = nullptr;
-#endif // wxUSE_PALETTE
-        m_isClipBoxValid = false;
-    }
 
     // create an uninitialized DC: this should be only used by the derived
     // classes
-    wxMSWDCImpl( wxDC *owner ) : wxDCImpl( owner ) { Init(); }
+    wxMSWDCImpl( wxDC *owner ) : wxDCImpl( owner ) {}
 
     void RealizeScaleAndOrigin();
 
@@ -295,21 +280,21 @@ protected:
     wxBitmap          m_selectedBitmap;
 
     // TRUE => DeleteDC() in dtor, FALSE => only ReleaseDC() it
-    bool              m_bOwnsDC;
+    bool              m_bOwnsDC{false};
 
     // our HDC
-    WXHDC             m_hDC;
+    WXHDC             m_hDC{nullptr};
 
     // Store all old GDI objects when do a SelectObject, so we can select them
     // back in (this unselecting user's objects) so we can safely delete the
     // DC.
-    WXHBITMAP         m_oldBitmap;
-    WXHPEN            m_oldPen;
-    WXHBRUSH          m_oldBrush;
-    WXHFONT           m_oldFont;
+    WXHBITMAP         m_oldBitmap{nullptr};
+    WXHPEN            m_oldPen{nullptr};
+    WXHBRUSH          m_oldBrush{nullptr};
+    WXHFONT           m_oldFont{nullptr};
 
 #if wxUSE_PALETTE
-    WXHPALETTE        m_oldPalette;
+    WXHPALETTE        m_oldPalette{nullptr};
 #endif // wxUSE_PALETTE
 
 #if wxUSE_DC_CACHEING
@@ -317,7 +302,7 @@ protected:
     static wxObjectList     sm_dcCache;
 #endif
 
-    bool m_isClipBoxValid;
+    bool m_isClipBoxValid{false};
 
     wxDECLARE_CLASS(wxMSWDCImpl);
 };

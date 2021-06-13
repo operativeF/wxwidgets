@@ -585,7 +585,7 @@ protected:
     bool m_colour;
     bool m_ok{true};
     bool m_clipping;
-    bool m_isInteractive;
+    bool m_isInteractive{false};
     bool m_isBBoxValid;
 
     // coordinate system variables

@@ -40,14 +40,35 @@ wxMemoryDCImpl::wxMemoryDCImpl( wxMemoryDC *owner )
         : wxMSWDCImpl( owner )
 {
     CreateCompatible(nullptr);
-    Init();
+
+    if ( m_ok )
+    {
+        SetBrush(*wxWHITE_BRUSH);
+        SetPen(*wxBLACK_PEN);
+        SetFont(*wxNORMAL_FONT);
+
+        // the background mode is only used for text background and is set in
+        // DrawText() to OPAQUE as required, otherwise always TRANSPARENT
+        ::SetBkMode( GetHdc(), TRANSPARENT );
+    }
 }
 
 wxMemoryDCImpl::wxMemoryDCImpl( wxMemoryDC *owner, wxBitmap& bitmap )
         : wxMSWDCImpl( owner )
 {
     CreateCompatible(nullptr);
-    Init();
+
+    if ( m_ok )
+    {
+        SetBrush(*wxWHITE_BRUSH);
+        SetPen(*wxBLACK_PEN);
+        SetFont(*wxNORMAL_FONT);
+
+        // the background mode is only used for text background and is set in
+        // DrawText() to OPAQUE as required, otherwise always TRANSPARENT
+        ::SetBkMode( GetHdc(), TRANSPARENT );
+    }
+    
     DoSelect(bitmap);
 }
 
@@ -58,11 +79,6 @@ wxMemoryDCImpl::wxMemoryDCImpl( wxMemoryDC *owner, wxDC *dc )
 
     CreateCompatible(dc);
 
-    Init();
-}
-
-void wxMemoryDCImpl::Init()
-{
     if ( m_ok )
     {
         SetBrush(*wxWHITE_BRUSH);

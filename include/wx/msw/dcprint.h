@@ -54,11 +54,6 @@ protected:
         return GetDeviceSize();
     }
 
-
-    // init the dc
-    // FIXME: Protected Init
-    void Init();
-
     wxPrintData m_printData;
 
 private:

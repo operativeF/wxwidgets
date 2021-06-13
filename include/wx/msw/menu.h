@@ -218,10 +218,10 @@ public:
     wxMenuBar(size_t n, wxMenu *menus[], const wxString titles[], long style = 0);
     ~wxMenuBar() override;
 
-wxMenuBar(const wxMenuBar&) = delete;
-   wxMenuBar& operator=(const wxMenuBar&) = delete;
-   wxMenuBar(wxMenuBar&&) = default;
-   wxMenuBar& operator=(wxMenuBar&&) = default;
+    wxMenuBar(const wxMenuBar&) = delete;
+    wxMenuBar& operator=(const wxMenuBar&) = delete;
+    wxMenuBar(wxMenuBar&&) = default;
+    wxMenuBar& operator=(wxMenuBar&&) = default;
 
     // menubar construction
     bool Append( wxMenu *menu, const wxString &title ) override;
@@ -262,9 +262,6 @@ wxMenuBar(const wxMenuBar&) = delete;
     wxMenu* MSWGetMenu(WXHMENU hMenu) const;
 
 protected:
-    // common part of all ctors
-    void Init();
-
     WXHMENU       m_hMenu{nullptr};
 
     // Return the MSW position for a wxMenu which is sometimes different from

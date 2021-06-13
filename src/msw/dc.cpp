@@ -476,7 +476,6 @@ wxMSWDCImpl::wxMSWDCImpl( wxDC *owner, WXHDC hDC ) :
     wxDCImpl( owner ),
     m_hDC(hDC)
 {
-    Init();
 }
 
 wxMSWDCImpl::~wxMSWDCImpl()

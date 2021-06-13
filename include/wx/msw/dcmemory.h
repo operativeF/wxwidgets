@@ -38,10 +38,6 @@ protected:
     // create DC compatible with the given one or screen if dc == NULL
     bool CreateCompatible(wxDC *dc);
 
-    // initialize the newly created DC
-    // FIXME: Protected Init
-    void Init();
-
     wxDECLARE_CLASS(wxMemoryDCImpl);
 };
 

@@ -696,10 +696,10 @@ class GlobalPtr
 {
 public:
     // default ctor, call Init() later
-    GlobalPtr()
-    {
-        m_hGlobal = nullptr;
-    }
+    GlobalPtr() = default;
+
+    GlobalPtr(const GlobalPtr&) = delete;
+	GlobalPtr& operator=(const GlobalPtr&) = delete;
 
     // allocates a block of given size
     void Init(size_t size, unsigned flags = GMEM_MOVEABLE)
@@ -728,10 +728,7 @@ public:
     operator HGLOBAL() const { return m_hGlobal; }
 
 private:
-    HGLOBAL m_hGlobal;
-
-    GlobalPtr(const GlobalPtr&) = delete;
-	GlobalPtr& operator=(const GlobalPtr&) = delete;
+    HGLOBAL m_hGlobal{nullptr};
 };
 
 // when working with global pointers (which is unfortunately still necessary
@@ -742,11 +739,10 @@ class GlobalPtrLock
 public:
     // default ctor, use Init() later -- should only be used if the HGLOBAL can
     // be NULL (in which case Init() shouldn't be called)
-    GlobalPtrLock()
-    {
-        m_hGlobal = nullptr;
-        m_ptr = nullptr;
-    }
+    GlobalPtrLock() = default;
+
+    GlobalPtrLock(const GlobalPtrLock&) = delete;
+	GlobalPtrLock& operator=(const GlobalPtrLock&) = delete;
 
     // initialize the object, may be only called if we were created using the
     // default ctor; HGLOBAL must not be NULL
@@ -795,11 +791,8 @@ public:
     }
 
 private:
-    HGLOBAL m_hGlobal;
-    void *m_ptr;
-
-    GlobalPtrLock(const GlobalPtrLock&) = delete;
-	GlobalPtrLock& operator=(const GlobalPtrLock&) = delete;
+    HGLOBAL m_hGlobal{nullptr};
+    void *m_ptr{nullptr};
 };
 
 // register the class when it is first needed and unregister it in dtor

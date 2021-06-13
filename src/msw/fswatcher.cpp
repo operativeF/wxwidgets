@@ -430,8 +430,7 @@ wxMSWFileSystemWatcher::wxMSWFileSystemWatcher()
 }
 
 wxMSWFileSystemWatcher::wxMSWFileSystemWatcher(const wxFileName& path,
-                                               int events) 
-    
+                                               int events)
 {
     if (!Init())
         return;

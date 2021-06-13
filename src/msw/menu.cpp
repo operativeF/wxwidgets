@@ -818,24 +818,19 @@ wxMenu* wxMenu::MSWGetMenu(WXHMENU hMenu)
 // Menu Bar
 // ---------------------------------------------------------------------------
 
-void wxMenuBar::Init()
+wxMenuBar::wxMenuBar()
 {
     m_eventHandler = this;
 }
 
-wxMenuBar::wxMenuBar()
-{
-    Init();
-}
-
 wxMenuBar::wxMenuBar( long WXUNUSED(style) )
 {
-    Init();
+    m_eventHandler = this;
 }
 
 wxMenuBar::wxMenuBar(size_t count, wxMenu *menus[], const wxString titles[], long WXUNUSED(style))
 {
-    Init();
+    m_eventHandler = this;
 
     for ( size_t i = 0; i < count; i++ )
     {
