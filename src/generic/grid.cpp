@@ -1652,7 +1652,7 @@ wxString wxGridTableBase::GetColLabelValue( int col )
     //   etc.
 
     wxString s;
-    unsigned int i, n;
+    unsigned int n;
     for ( n = 1; ; n++ )
     {
         s += (wxChar) (wxT('A') + (wxChar)(col % 26));
@@ -1663,7 +1663,7 @@ wxString wxGridTableBase::GetColLabelValue( int col )
 
     // reverse the string...
     wxString s2;
-    for ( i = 0; i < n; i++ )
+    for ( unsigned int i = 0; i < n; i++ )
     {
         s2 += s[n - i - 1];
     }
@@ -1808,18 +1808,15 @@ void wxGridStringTable::SetValue( int row, int col, const wxString& value )
 
 void wxGridStringTable::Clear()
 {
-    int numRows;
-    numRows = m_data.GetCount();
+    int numRows = m_data.GetCount();
+
     if ( numRows > 0 )
     {
-        int numCols;
-        numCols = m_data[0].GetCount();
+        int numCols = m_data[0].GetCount();
 
-        int row;
-        for ( row = 0; row < numRows; row++ )
+        for ( int row = 0; row < numRows; row++ )
         {
-            int col;
-            for ( col = 0; col < numCols; col++ )
+            for ( int col = 0; col < numCols; col++ )
             {
                 m_data[row][col].clear();
             }
@@ -1980,8 +1977,6 @@ bool wxGridStringTable::AppendCols( size_t numCols )
 
 bool wxGridStringTable::DeleteCols( size_t pos, size_t numCols )
 {
-    size_t row;
-
     size_t curNumRows = m_data.GetCount();
     size_t curNumCols = m_numCols;
 
@@ -2020,7 +2015,7 @@ bool wxGridStringTable::DeleteCols( size_t pos, size_t numCols )
 
     if ( numCols >= curNumCols )
     {
-        for ( row = 0; row < curNumRows; row++ )
+        for ( size_t row = 0; row < curNumRows; row++ )
         {
             m_data[row].Clear();
         }
@@ -2029,7 +2024,7 @@ bool wxGridStringTable::DeleteCols( size_t pos, size_t numCols )
     }
     else // something will be left
     {
-        for ( row = 0; row < curNumRows; row++ )
+        for ( size_t row = 0; row < curNumRows; row++ )
         {
             m_data[row].RemoveAt( colID, numCols );
         }
@@ -2083,9 +2078,8 @@ void wxGridStringTable::SetRowLabelValue( int row, const wxString& value )
     if ( row > (int)(m_rowLabels.GetCount()) - 1 )
     {
         int n = m_rowLabels.GetCount();
-        int i;
 
-        for ( i = n; i <= row; i++ )
+        for ( int i = n; i <= row; i++ )
         {
             m_rowLabels.Add( wxGridTableBase::GetRowLabelValue(i) );
         }
@@ -3273,7 +3267,6 @@ void wxGrid::CalcWindowSizes()
 //
 bool wxGrid::Redimension( wxGridTableMessage& msg )
 {
-    int i;
     bool result = false;
 
     // Clear the attribute cache as the attribute might refer to a different
@@ -3305,7 +3298,7 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
                 if ( pos > 0 )
                     bottom = m_rowBottoms[pos - 1];
 
-                for ( i = pos; i < m_numRows; i++ )
+                for ( int i = pos; i < m_numRows; i++ )
                 {
                     bottom += GetRowHeight(i);
                     m_rowBottoms[i] = bottom;
@@ -3343,7 +3336,7 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
                 if ( oldNumRows > 0 )
                     bottom = m_rowBottoms[oldNumRows - 1];
 
-                for ( i = oldNumRows; i < m_numRows; i++ )
+                for ( int i = oldNumRows; i < m_numRows; i++ )
                 {
                     bottom += GetRowHeight(i);
                     m_rowBottoms[i] = bottom;
@@ -3372,7 +3365,7 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
                 m_rowBottoms.erase(std::begin(m_rowBottoms) + pos, std::begin(m_rowBottoms) + pos + numRows );
 
                 int h = 0;
-                for ( i = 0; i < m_numRows; i++ )
+                for ( int i = 0; i < m_numRows; i++ )
                 {
                     h += GetRowHeight(i);
                     m_rowBottoms[i] = h;
@@ -3420,7 +3413,7 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
             if ( !m_colAt.empty() )
             {
                 //Shift the column IDs
-                for ( i = 0; i < m_numCols - numCols; i++ )
+                for ( int i = 0; i < m_numCols - numCols; i++ )
                 {
                     if ( m_colAt[i] >= (int)pos )
                         m_colAt[i] += numCols;
@@ -3429,7 +3422,7 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
                 m_colAt.insert(std::begin(m_colAt) + pos, numCols, pos );
 
                 //Set the new columns' positions
-                for ( i = pos + 1; i < (int)pos + numCols; i++ )
+                for ( int i = pos + 1; i < (int)pos + numCols; i++ )
                 {
                     m_colAt[i] = i;
                 }
@@ -3444,10 +3437,9 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
                 if ( pos > 0 )
                     right = m_colRights[GetColAt( pos - 1 )];
 
-                int colPos;
-                for ( colPos = pos; colPos < m_numCols; colPos++ )
+                for ( int colPos = pos; colPos < m_numCols; colPos++ )
                 {
-                    i = GetColAt( colPos );
+                    int i = GetColAt( colPos );
 
                     right += GetColWidth(i);
                     m_colRights[i] = right;
@@ -3481,7 +3473,7 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
                 m_colAt.insert(std::end(m_colAt), numCols, 0);
 
                 //Set the new columns' positions
-                for ( i = oldNumCols; i < m_numCols; i++ )
+                for ( int i = oldNumCols; i < m_numCols; i++ )
                 {
                     m_colAt[i] = i;
                 }
@@ -3496,10 +3488,9 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
                 if ( oldNumCols > 0 )
                     right = m_colRights[GetColAt( oldNumCols - 1 )];
 
-                int colPos;
-                for ( colPos = oldNumCols; colPos < m_numCols; colPos++ )
+                for ( int colPos = oldNumCols; colPos < m_numCols; colPos++ )
                 {
-                    i = GetColAt( colPos );
+                    int i = GetColAt( colPos );
 
                     right += GetColWidth(i);
                     m_colRights[i] = right;
@@ -3537,8 +3528,7 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
                 m_colAt.erase( std::begin(m_colAt) + pos, std::begin(m_colAt) + pos + numCols );
 
                 //Shift the column IDs
-                int colPos;
-                for ( colPos = 0; colPos < m_numCols; colPos++ )
+                for ( int colPos = 0; colPos < m_numCols; colPos++ )
                 {
                     if ( m_colAt[colPos] > colID )
                         m_colAt[colPos] -= numCols;
@@ -3551,10 +3541,9 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
                 m_colRights.erase(std::begin(m_colRights) + pos, std::begin(m_colRights) + pos + numCols);
 
                 int w = 0;
-                int colPos;
-                for ( colPos = 0; colPos < m_numCols; colPos++ )
+                for ( int colPos = 0; colPos < m_numCols; colPos++ )
                 {
-                    i = GetColAt( colPos );
+                    int i = GetColAt( colPos );
 
                     w += GetColWidth(i);
                     m_colRights[i] = w;
@@ -3633,8 +3622,7 @@ std::vector<int> wxGrid::CalcRowLabelsExposed( const wxRegion& reg, wxGridWindow
 
         // find the row labels within these bounds
         //
-        int row;
-        for ( row = internalYToRow(top, gridWindow); row < m_numRows; row++ )
+        for ( int row = internalYToRow(top, gridWindow); row < m_numRows; row++ )
         {
             if ( GetRowBottom(row) < top )
                 continue;
@@ -9574,10 +9562,9 @@ void wxGrid::SetCellSize( int row, int col, int num_rows, int num_cols )
         // if this was already a multicell then "turn off" the other cells first
         if ((cell_rows > 1) || (cell_cols > 1))
         {
-            int i, j;
-            for (j=row; j < row + cell_rows; j++)
+            for (int j=row; j < row + cell_rows; j++)
             {
-                for (i=col; i < col + cell_cols; i++)
+                for (int i=col; i < col + cell_cols; i++)
                 {
                     if ((i != col) || (j != row))
                     {
@@ -9591,10 +9578,9 @@ void wxGrid::SetCellSize( int row, int col, int num_rows, int num_cols )
         // negative or zero values to point back at this cell
         if (((num_rows > 1) || (num_cols > 1)) && (num_rows >= 1) && (num_cols >= 1))
         {
-            int i, j;
-            for (j=row; j < row + num_rows; j++)
+            for (int j=row; j < row + num_rows; j++)
             {
-                for (i=col; i < col + num_cols; i++)
+                for (int i=col; i < col + num_cols; i++)
                 {
                     if ((i != col) || (j != row))
                     {

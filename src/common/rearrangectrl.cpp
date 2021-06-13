@@ -54,8 +54,8 @@ bool wxRearrangeList::Create(wxWindow *parent,
 
     wxArrayString itemsInOrder;
     itemsInOrder.reserve(count);
-    size_t n;
-    for ( n = 0; n < count; n++ )
+    // FIXME: Indexing in vector with a different array's size.
+    for ( size_t n = 0; n < count; n++ )
     {
         int idx = order[n];
         if ( idx < 0 )
@@ -69,7 +69,8 @@ bool wxRearrangeList::Create(wxWindow *parent,
         return false;
 
     // and now check all the items which should be initially checked
-    for ( n = 0; n < count; n++ )
+    // FIXME: Indexing in vector with a different array's size.
+    for ( size_t n = 0; n < count; n++ )
     {
         if ( order[n] >= 0 )
         {

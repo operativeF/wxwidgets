@@ -1033,9 +1033,9 @@ D2D1_RECT_F wxD2DConvertRect(const wxRect& rect)
 
 wxCOMPtr<ID2D1Geometry> wxD2DConvertRegionToGeometry(ID2D1Factory* direct2dFactory, const wxRegion& region)
 {
+    // TODO: Use lambdas.
     // Build the array of geometries
     HRESULT hr;
-    int i;
     ID2D1Geometry** geometries;
     int rectCount;
     if ( region.IsEmpty() )
@@ -1062,7 +1062,7 @@ wxCOMPtr<ID2D1Geometry> wxD2DConvertRegionToGeometry(ID2D1Factory* direct2dFacto
         geometries = new ID2D1Geometry*[rectCount];
         regionIterator.Reset(region);
 
-        i = 0;
+        int i = 0;
         while(regionIterator)
         {
             geometries[i] = nullptr;
@@ -1091,7 +1091,7 @@ wxCOMPtr<ID2D1Geometry> wxD2DConvertRegionToGeometry(ID2D1Factory* direct2dFacto
     wxFAILED_HRESULT_MSG(hr);
 
     // Cleanup temporaries
-    for (i = 0; i < rectCount; ++i)
+    for (int i = 0; i < rectCount; ++i)
     {
         geometries[i]->Release();
     }

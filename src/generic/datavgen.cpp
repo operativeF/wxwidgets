@@ -2413,8 +2413,8 @@ wxBitmap wxDataViewMainWindow::CreateItemBitmap( unsigned int row, int &indent )
     int height = GetLineHeight( row );
     int width = 0;
     unsigned int cols = GetOwner()->GetColumnCount();
-    unsigned int col;
-    for (col = 0; col < cols; col++)
+
+    for (unsigned int col = 0; col < cols; col++)
     {
         wxDataViewColumn *column = GetOwner()->GetColumnAt(col);
         if (column->IsHidden())
@@ -2444,7 +2444,7 @@ wxBitmap wxDataViewMainWindow::CreateItemBitmap( unsigned int row, int &indent )
         expander = GetExpanderColumnOrFirstOne(GetOwner());
 
     int x = 0;
-    for (col = 0; col < cols; col++)
+    for (unsigned int col = 0; col < cols; col++)
     {
         wxDataViewColumn *column = GetOwner()->GetColumnAt( col );
         wxDataViewRenderer *cell = column->GetRenderer();
@@ -3472,8 +3472,8 @@ wxDataViewItem wxDataViewMainWindow::GetTopItem() const
 int wxDataViewMainWindow::GetEndOfLastCol() const
 {
     int width = 0;
-    unsigned int i;
-    for (i = 0; i < GetOwner()->GetColumnCount(); i++)
+
+    for (unsigned int i = 0; i < GetOwner()->GetColumnCount(); i++)
     {
         const wxDataViewColumn *c =
             const_cast<wxDataViewCtrl*>(GetOwner())->GetColumnAt( i );
@@ -3481,6 +3481,7 @@ int wxDataViewMainWindow::GetEndOfLastCol() const
         if (!c->IsHidden())
             width += c->GetWidth();
     }
+
     return width;
 }
 
@@ -3677,8 +3678,7 @@ int wxDataViewMainWindow::GetLineStart( unsigned int row ) const
     if ( m_rowHeightCache->GetLineStart(row, start) )
         return start;
 
-    unsigned int r;
-    for (r = 0; r < row; r++)
+    for (unsigned int r = 0; r < row; r++)
     {
         int height = 0;
         if ( !m_rowHeightCache->GetLineHeight(r, height) )
@@ -3772,8 +3772,8 @@ int wxDataViewMainWindow::QueryAndCacheLineHeight(unsigned int row, wxDataViewIt
     const wxDataViewModel *model = GetModel();
     int height = m_lineHeight;
     unsigned int cols = GetOwner()->GetColumnCount();
-    unsigned int col;
-    for (col = 0; col < cols; col++)
+
+    for (unsigned int col = 0; col < cols; col++)
     {
         const wxDataViewColumn *column = GetOwner()->GetColumn(col);
         if (column->IsHidden())
@@ -4943,8 +4943,8 @@ void wxDataViewMainWindow::OnMouse( wxMouseEvent &event )
 
     int xpos = 0;
     unsigned int cols = GetOwner()->GetColumnCount();
-    unsigned int i;
-    for (i = 0; i < cols; i++)
+
+    for (unsigned int i = 0; i < cols; i++)
     {
         wxDataViewColumn *c = GetOwner()->GetColumnAt( i );
         if (c->IsHidden())

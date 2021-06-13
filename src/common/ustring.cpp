@@ -26,8 +26,7 @@ wxUString &wxUString::assignFromAscii( const char *str )
    wxU32CharBuffer buffer( len );
    wxChar32 *ptr = buffer.data();
 
-   size_type i;
-   for (i = 0; i < len; i++)
+   for (size_type i = 0; i < len; i++)
    {
        *ptr = *str;
        ptr++;
@@ -50,8 +49,7 @@ wxUString &wxUString::assignFromAscii( const char *str, size_type n )
    wxU32CharBuffer buffer( len );
    wxChar32 *ptr = buffer.data();
 
-   size_type i;
-   for (i = 0; i < len; i++)
+   for (size_type i = 0; i < len; i++)
    {
        *ptr = *str;
        ptr++;

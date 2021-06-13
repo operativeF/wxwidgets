@@ -125,8 +125,7 @@ void AtomicTestCase::TestWithThreads(int count, ETestType testType)
 
     wxArrayThread  threads;
 
-    int i;
-    for ( i = 0; i < count; ++i )
+    for ( int i = 0; i < count; ++i )
     {
         ETestType actualThreadType;
         switch(testType)
@@ -150,13 +149,13 @@ void AtomicTestCase::TestWithThreads(int count, ETestType testType)
             threads.Add(thread);
     }
 
-    for ( i = 0; i < count; ++i )
+    for (int i = 0; i < count; ++i )
     {
         threads[i]->Run();
     }
 
 
-    for ( i = 0; i < count; ++i )
+    for ( int i = 0; i < count; ++i )
     {
         // each thread should return 0, else it detected some problem
         CPPUNIT_ASSERT (threads[i]->Wait() == (wxThread::ExitCode)0);

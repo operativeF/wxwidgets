@@ -109,9 +109,10 @@ void LogTraceLargeArray(const wxString& prefix, const wxArrayString& arr)
 #endif // wxUSE_LOG_TRACE/!wxUSE_LOG_TRACE
 
 // Use locale-based detection as a fallback
+// TODO: Lambda
 wxString GetPreferredUILanguageFallback(const wxArrayString& WXUNUSED(available))
 {
-    const wxString lang = wxLocale::GetLanguageCanonicalName(wxLocale::GetSystemLanguage());
+    wxString lang = wxLocale::GetLanguageCanonicalName(wxLocale::GetSystemLanguage());
     wxLogTrace(TRACE_I18N, " - obtained best language from locale: %s", lang);
     return lang;
 }
@@ -1582,7 +1583,8 @@ wxString wxTranslations::GetBestTranslation(const wxString& domain,
 
     wxLogTrace(TRACE_I18N, "choosing best language for domain '%s'", domain);
     LogTraceArray(" - available translations", available);
-    const wxString lang = GetPreferredUILanguage(available);
+    // TODO: Lambda
+    wxString lang = GetPreferredUILanguage(available);
     wxLogTrace(TRACE_I18N, " => using language '%s'", lang);
     return lang;
 }

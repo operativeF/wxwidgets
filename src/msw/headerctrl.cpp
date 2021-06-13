@@ -347,11 +347,9 @@ int wxMSWHeaderCtrl::GetShownColumnsCount() const
 
 void wxMSWHeaderCtrl::SetCount(unsigned int count)
 {
-    unsigned n;
-
     // first delete all old columns
     const unsigned countOld = GetShownColumnsCount();
-    for ( n = 0; n < countOld; n++ )
+    for ( unsigned int n = 0; n < countOld; n++ )
     {
         if ( !Header_DeleteItem(GetHwnd(), 0) )
         {
@@ -365,7 +363,7 @@ void wxMSWHeaderCtrl::SetCount(unsigned int count)
     // and add the new ones
     m_numColumns = count;
     m_isHidden.resize(m_numColumns);
-    for ( n = 0; n < count; n++ )
+    for ( unsigned int n = 0; n < count; n++ )
     {
         const wxHeaderColumn& col = m_header.GetColumn(n);
         if ( col.IsShown() )

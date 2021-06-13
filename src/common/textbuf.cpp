@@ -215,12 +215,11 @@ wxTextFileType wxTextBuffer::GuessType() const
             default: wxFAIL_MSG(wxT("unknown line terminator")); \
         }
 
-    size_t n;
-    for ( n = 0; n < nScan; n++ )     // the beginning
+    for ( size_t n = 0; n < nScan; n++ )     // the beginning
         AnalyseLine(n);
-    for ( n = (nCount - nScan)/2; n < (nCount + nScan)/2; n++ )
+    for ( size_t n = (nCount - nScan)/2; n < (nCount + nScan)/2; n++ )
         AnalyseLine(n);
-    for ( n = nCount - nScan; n < nCount; n++ )
+    for ( size_t n = nCount - nScan; n < nCount; n++ )
         AnalyseLine(n);
 
     #undef   AnalyseLine

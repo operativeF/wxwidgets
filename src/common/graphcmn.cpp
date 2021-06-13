@@ -521,6 +521,7 @@ void wxGraphicsPathData::AddArcToPoint( double x1, double y1 , double x2, double
 
 void wxGraphicsGradientStops::Add(const wxGraphicsGradientStop& stop)
 {
+    // FIXME: Can't we just avoid this loop altogether?
     for ( std::vector<wxGraphicsGradientStop>::iterator it = m_stops.begin();
           it != m_stops.end();
           ++it )

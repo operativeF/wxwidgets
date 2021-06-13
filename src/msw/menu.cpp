@@ -1181,8 +1181,10 @@ void wxMenuBar::RebuildAccelTable()
 {
     // merge the accelerators of all menus into one accel table
     size_t nAccelCount = 0;
-    size_t i, count = GetMenuCount();
+    size_t i;
+    size_t count = GetMenuCount();
     wxMenuList::iterator it;
+    // FIXME: Use an algorithm
     for ( i = 0, it = m_menus.begin(); i < count; i++, ++it )
     {
         nAccelCount += (*it)->GetAccelCount();
@@ -1193,6 +1195,7 @@ void wxMenuBar::RebuildAccelTable()
         wxAcceleratorEntry *accelEntries = new wxAcceleratorEntry[nAccelCount];
 
         nAccelCount = 0;
+        // FIXME: Use an algorithm.
         for ( i = 0, it = m_menus.begin(); i < count; i++, ++it )
         {
             nAccelCount += (*it)->CopyAccels(&accelEntries[nAccelCount]);

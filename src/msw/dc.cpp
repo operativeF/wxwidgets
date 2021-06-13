@@ -1000,15 +1000,15 @@ wxMSWDCImpl::DoDrawPolyPolygon(int n,
                         wxPolygonFillMode fillStyle)
 {
     wxBrushAttrsSetter cc(*this); // needed for wxBrushStyle::StippleMaskOpaque handling
-    int i, cnt;
-    for (i = cnt = 0; i < n; i++)
+    int cnt;
+    for (int i = cnt = 0; i < n; i++)
         cnt += count[i];
 
     // Do things less efficiently if we have offsets
     if (xoffset != 0 || yoffset != 0)
     {
         POINT *cpoints = new POINT[cnt];
-        for (i = 0; i < cnt; i++)
+        for (int i = 0; i < cnt; i++)
         {
             cpoints[i].x = (int)(points[i].x + xoffset);
             cpoints[i].y = (int)(points[i].y + yoffset);
@@ -1022,7 +1022,7 @@ wxMSWDCImpl::DoDrawPolyPolygon(int n,
     }
     else
     {
-        for (i = 0; i < cnt; i++)
+        for (int i = 0; i < cnt; i++)
             CalcBoundingBox(points[i].x, points[i].y);
 
         int prev = SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
@@ -1037,8 +1037,7 @@ void wxMSWDCImpl::DoDrawLines(int n, const wxPoint points[], wxCoord xoffset, wx
     if (xoffset != 0 || yoffset != 0)
     {
         POINT *cpoints = new POINT[n];
-        int i;
-        for (i = 0; i < n; i++)
+        for (int i = 0; i < n; i++)
         {
             cpoints[i].x = (int)(points[i].x + xoffset);
             cpoints[i].y = (int)(points[i].y + yoffset);
@@ -1050,8 +1049,7 @@ void wxMSWDCImpl::DoDrawLines(int n, const wxPoint points[], wxCoord xoffset, wx
     }
     else
     {
-        int i;
-        for (i = 0; i < n; i++)
+        for (int i = 0; i < n; i++)
             CalcBoundingBox(points[i].x, points[i].y);
 
         Polyline(GetHdc(), reinterpret_cast<const POINT*>(points), n);

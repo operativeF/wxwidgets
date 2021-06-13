@@ -125,6 +125,7 @@ void wxBitmapComboBox::RecreateControl()
     const unsigned numItems = strings.size();
     unsigned i;
 
+    // TODO: Lambda
     // Save the client data pointers before clearing the control, if any.
     const wxClientDataType clientDataType = GetClientDataType();
     std::vector<wxClientData*> objectClientData;

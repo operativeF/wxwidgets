@@ -172,6 +172,7 @@ wxRegKey::StdKey wxRegKey::ExtractKeyName(wxString& strKey)
 {
   wxString strRoot = strKey.BeforeFirst(REG_SEPARATOR);
 
+  // TODO: Lambda
   size_t ui;
   for ( ui = 0; ui < nStdKeys; ui++ ) {
     if ( strRoot.CmpNoCase(aStdKeys[ui].szName) == 0 ||

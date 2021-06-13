@@ -184,11 +184,9 @@ int wxColourDialog::ShowModal()
     CHOOSECOLOR chooseColorStruct;
     memset(&chooseColorStruct, 0, sizeof(CHOOSECOLOR));
 
-    size_t i;
-
     // and transfer data from m_colourData to it
     COLORREF custColours[16];
-    for ( i = 0; i < WXSIZEOF(custColours); i++ )
+    for ( size_t i = 0; i < WXSIZEOF(custColours); i++ )
     {
         if ( m_colourData.GetCustomColour(i).IsOk() )
             custColours[i] = wxColourToRGB(m_colourData.GetCustomColour(i));
@@ -232,7 +230,7 @@ int wxColourDialog::ShowModal()
 
 
     // transfer the values chosen by user back into m_colourData
-    for ( i = 0; i < WXSIZEOF(custColours); i++ )
+    for ( size_t i = 0; i < WXSIZEOF(custColours); i++ )
     {
       wxRGBToColour(m_colourData.m_custColours[i], custColours[i]);
     }

@@ -297,8 +297,7 @@ void wxMessageDialog::AdjustButtonLabels()
         wBtnNew = 0;            // required new buttons width
     RECT rcBtn;                 // stores the button height and y positions
     unsigned numButtons = 0;    // total number of buttons in the message box
-    unsigned n;
-    for ( n = 0; n < WXSIZEOF(ms_buttons); n++ )
+    for ( unsigned n = 0; n < WXSIZEOF(ms_buttons); n++ )
     {
         const HWND hwndBtn = ::GetDlgItem(GetHwnd(), ms_buttons[n].id);
         if ( !hwndBtn )
@@ -375,7 +374,7 @@ void wxMessageDialog::AdjustButtonLabels()
                   wBoxNew - wAllButtons) / 2;
     rcBtn.right = rcBtn.left + wBtnNew;
 
-    for ( n = 0; n < WXSIZEOF(ms_buttons); n++ )
+    for ( unsigned n = 0; n < WXSIZEOF(ms_buttons); n++ )
     {
         const HWND hwndBtn = ::GetDlgItem(GetHwnd(), ms_buttons[n].id);
         if ( !hwndBtn )

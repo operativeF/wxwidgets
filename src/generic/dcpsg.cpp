@@ -742,8 +742,7 @@ void wxPostScriptDCImpl::DoDrawLines (int n, const wxPoint points[], wxCoord xof
 
     SetPen (m_pen);
 
-    int i;
-    for ( i =0; i<n ; i++ )
+    for ( int i =0; i<n ; i++ )
         CalcBoundingBox( points[i].x+xoffset, points[i].y+yoffset );
 
     wxString buffer;
@@ -754,7 +753,7 @@ void wxPostScriptDCImpl::DoDrawLines (int n, const wxPoint points[], wxCoord xof
     buffer.Replace( ",", "." );
     PsPrint( buffer );
 
-    for (i = 1; i < n; i++)
+    for (int i = 1; i < n; i++)
     {
         buffer.Printf( "%f %f lineto\n",
                   XLOG2DEV(points[i].x+xoffset),

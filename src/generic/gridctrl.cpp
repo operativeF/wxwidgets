@@ -497,6 +497,7 @@ wxGridCellAutoWrapStringRenderer::BreakWord(wxDC& dc,
     dc.GetPartialTextExtents(word, widths);
 
     // TODO: Use binary search to find the first element > maxWidth.
+    // TODO: Lambda
     const unsigned count = widths.size();
     unsigned n;
     for ( n = 0; n < count; n++ )

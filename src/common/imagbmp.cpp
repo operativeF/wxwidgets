@@ -304,12 +304,11 @@ bool wxBMPHandler::SaveDib(wxImage *image,
 #endif // wxUSE_PALETTE
         }
 
-        int i;
         unsigned char r, g, b;
         wxScopedArray<wxUint8> rgbquadTmp(palette_size*4);
         rgbquad.swap(rgbquadTmp);
 
-        for (i = 0; i < palette_size; i++)
+        for (int i = 0; i < palette_size; i++)
         {
 #if wxUSE_PALETTE
             if ( !palette->GetRGB(i, &r, &g, &b) )
@@ -365,11 +364,11 @@ bool wxBMPHandler::SaveDib(wxImage *image,
 
     wxScopedArray<wxUint8> buffer(row_width);
     memset(buffer.get(), 0, row_width);
-    int y; unsigned x;
+    unsigned x;
     long int pixel;
     const int dstPixLen = saveAlpha ? 4 : 3;
 
-    for (y = image->GetHeight() -1; y >= 0; y--)
+    for (int y = image->GetHeight() -1; y >= 0; y--)
     {
         if ( format == wxBMP_24BPP ) // 3 bytes per pixel red,green,blue
         {

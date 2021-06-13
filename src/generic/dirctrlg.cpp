@@ -460,7 +460,7 @@ void wxGenericDirCtrl::SetupSections()
     wxArrayString paths, names;
     std::vector<int> icons;
 
-    size_t n, count = wxGetAvailableDrives(paths, names, icons);
+    size_t count = wxGetAvailableDrives(paths, names, icons);
 
 #ifdef __WXGTK20__
     wxString home = wxGetHomeDir();
@@ -469,7 +469,7 @@ void wxGenericDirCtrl::SetupSections()
     AddSection( home, _("Desktop"), 1);
 #endif
 
-    for (n = 0; n < count; n++)
+    for (size_t n = 0; n < count; n++)
         AddSection(paths[n], names[n], icons[n]);
 }
 
@@ -724,8 +724,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
     m_treeCtrl->SetItemHasChildren(parentId, !dirs.empty() || !filenames.empty());
 
     // Add the sorted dirs
-    size_t i;
-    for (i = 0; i < dirs.GetCount(); i++)
+    for (size_t i = 0; i < dirs.GetCount(); i++)
     {
         eachFilename = dirs[i];
         path = dirName;
@@ -750,7 +749,7 @@ void wxGenericDirCtrl::PopulateNode(wxTreeItemId parentId)
     // Add the sorted filenames
     if (!HasFlag(wxDIRCTRL_DIR_ONLY))
     {
-        for (i = 0; i < filenames.GetCount(); i++)
+        for (size_t i = 0; i < filenames.GetCount(); i++)
         {
             eachFilename = filenames[i];
             path = dirName;

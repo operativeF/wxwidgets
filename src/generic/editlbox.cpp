@@ -183,9 +183,8 @@ bool wxEditableListBox::Create(wxWindow *parent, wxWindowID id,
 void wxEditableListBox::SetStrings(const wxArrayString& strings)
 {
     m_listCtrl->DeleteAllItems();
-    size_t i;
 
-    for (i = 0; i < strings.GetCount(); i++)
+    for (size_t i = 0; i < strings.GetCount(); i++)
         m_listCtrl->InsertItem(i, strings[i]);
 
     m_listCtrl->InsertItem(strings.GetCount(), wxEmptyString);

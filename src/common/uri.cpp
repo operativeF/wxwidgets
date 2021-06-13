@@ -751,26 +751,25 @@ void wxURI::Resolve(const wxURI& base, int flags)
             our.push_back(wxString());
         }
 
-        const wxArrayString::const_iterator end = our.end();
-        for ( wxArrayString::const_iterator i = our.begin(); i != end; ++i )
+        for ( const auto& i : our )
         {
-            if ( i->empty() || *i == "." )
+            if ( i.empty() || i == "." )
             {
                 // as in ParsePath(), while normally we ignore the empty
                 // segments, we need to take account of them at the end
-                if ( i == end - 1 )
-                    result.push_back(wxString());
+                if ( i == *(our.cend() - 1) )
+                    result.push_back({});
                 continue;
             }
 
-            if ( *i == ".." )
+            if ( i == ".." )
             {
                 if ( !result.empty() )
                 {
                     result.pop_back();
 
-                    if ( i == end - 1 )
-                        result.push_back(wxString());
+                    if ( i == *(our.cend() - 1) )
+                        result.push_back({});
                 }
                 //else: just ignore, extra ".." don't accumulate
             }
@@ -779,10 +778,10 @@ void wxURI::Resolve(const wxURI& base, int flags)
                 if ( result.empty() )
                 {
                     // ensure that the resulting path will always be absolute
-                    result.push_back(wxString());
+                    result.push_back({});
                 }
 
-                result.push_back(*i);
+                result.push_back(i);
             }
         }
 

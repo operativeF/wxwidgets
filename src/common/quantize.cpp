@@ -304,11 +304,10 @@ prescan_quantize (j_decompress_ptr cinfo, JSAMPARRAY input_buf,
   JSAMPROW ptr;
   histptr histp;
   hist3d histogram = cquantize->histogram;
-  int row;
   JDIMENSION col;
   JDIMENSION width = cinfo->output_width;
 
-  for (row = 0; row < num_rows; row++) {
+  for (int row = 0; row < num_rows; row++) {
     ptr = input_buf[row];
     for (col = width; col > 0; col--) {
 

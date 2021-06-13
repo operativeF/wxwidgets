@@ -104,8 +104,8 @@ bool wxDataViewModelNotifier::ItemsAdded( const wxDataViewItem &parent, const wx
 bool wxDataViewModelNotifier::ItemsDeleted( const wxDataViewItem &parent, const wxDataViewItemArray &items )
 {
     size_t count = items.GetCount();
-    size_t i;
-    for (i = 0; i < count; i++)
+
+    for (size_t i = 0; i < count; i++)
         if (!ItemDeleted( parent, items[i] )) return false;
 
     return true;
@@ -114,8 +114,8 @@ bool wxDataViewModelNotifier::ItemsDeleted( const wxDataViewItem &parent, const 
 bool wxDataViewModelNotifier::ItemsChanged( const wxDataViewItemArray &items )
 {
     size_t count = items.GetCount();
-    size_t i;
-    for (i = 0; i < count; i++)
+
+    for (size_t i = 0; i < count; i++)
         if (!ItemChanged( items[i] )) return false;
 
     return true;
@@ -125,8 +125,7 @@ bool wxDataViewModelNotifier::ItemsChanged( const wxDataViewItemArray &items )
 // wxDataViewModel
 // ---------------------------------------------------------
 
-wxDataViewModel::wxDataViewModel()
-= default;
+wxDataViewModel::wxDataViewModel() = default;
 
 wxDataViewModel::~wxDataViewModel()
 {

@@ -353,11 +353,9 @@ bool wxApp::Initialize(int& argc_, wxChar **argv_)
 
     bool init_result;
 
-    int i;
-
     // gtk_init() wants UTF-8, not wchar_t, so convert
     char **argvGTK = new char *[argc_ + 1];
-    for ( i = 0; i < argc_; i++ )
+    for ( int i = 0; i < argc_; i++ )
     {
         argvGTK[i] = wxStrdupA(wxConvUTF8.cWX2MB(argv_[i]));
     }
@@ -391,7 +389,7 @@ bool wxApp::Initialize(int& argc_, wxChar **argv_)
     if ( argcGTK != argc_ )
     {
         // we have to drop the parameters which were consumed by GTK+
-        for ( i = 0; i < argcGTK; i++ )
+        for ( int i = 0; i < argcGTK; i++ )
         {
             while ( strcmp(wxConvUTF8.cWX2MB(argv_[i]), argvGTK[i]) != 0 )
             {
@@ -405,7 +403,7 @@ bool wxApp::Initialize(int& argc_, wxChar **argv_)
     //else: gtk_init() didn't modify our parameters
 
     // free our copy
-    for ( i = 0; i < argcGTK; i++ )
+    for ( int i = 0; i < argcGTK; i++ )
     {
         free(argvGTK[i]);
     }

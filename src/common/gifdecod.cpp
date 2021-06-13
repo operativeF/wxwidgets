@@ -78,9 +78,9 @@ wxGIFDecoder::~wxGIFDecoder()
 void wxGIFDecoder::Destroy()
 {
     wxASSERT(m_nFrames==m_frames.size());
-    for (unsigned int i=0; i<m_nFrames; i++)
+    for(auto* frame : m_frames)
     {
-        GIFImage *f = (GIFImage*)m_frames[i];
+        GIFImage *f = (GIFImage*)frame;
         free(f->p);
         free(f->pal);
         delete f;

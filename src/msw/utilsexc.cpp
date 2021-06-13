@@ -146,11 +146,9 @@ public:
             // now wait until they terminate
             if ( !gs_asyncThreads.empty() )
             {
-                const size_t numThreads = gs_asyncThreads.size();
-
                 if ( ::WaitForMultipleObjects
                        (
-                        numThreads,
+                        gs_asyncThreads.size(),
                         &gs_asyncThreads[0],
                         TRUE,   // wait for all of them to become signalled
                         3000    // long but finite value
@@ -159,9 +157,9 @@ public:
                     wxLogDebug(wxT("Failed to stop all wxExecute monitor threads"));
                 }
 
-                for ( size_t n = 0; n < numThreads; n++ )
+                for ( auto* asyncThread : gs_asyncThreads )
                 {
-                    ::CloseHandle(gs_asyncThreads[n]);
+                    ::CloseHandle(asyncThread);
                 }
 
                 gs_asyncThreads.clear();
@@ -348,6 +346,7 @@ wxExecuteWindowCbk(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         else
         {
             // asynchronous execution - we should do the clean up
+            // FIXME: Remove - erase
             for ( std::vector<HANDLE>::iterator it = gs_asyncThreads.begin();
                   it != gs_asyncThreads.end();
                   ++it )

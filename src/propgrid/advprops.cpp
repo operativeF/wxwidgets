@@ -1992,19 +1992,18 @@ wxArrayInt wxMultiChoiceProperty::GetValueAsIndices() const
 {
     wxVariant variant = GetValue();
     const wxArrayInt& valueArr = wxArrayIntRefFromVariant(variant);
-    unsigned int i;
 
     // Translate values to string indices.
     wxArrayInt selections;
 
     if ( !m_choices.IsOk() || !m_choices.GetCount() )
     {
-        for ( i=0; i<valueArr.size(); i++ )
+        for ( unsigned int i=0; i<valueArr.size(); i++ )
             selections.Add(-1);
     }
     else
     {
-        for ( i=0; i<valueArr.size(); i++ )
+        for ( unsigned int i=0; i<valueArr.size(); i++ )
         {
             int sIndex = m_choices.Index(valueArr[i]);
             if ( sIndex >= 0 )

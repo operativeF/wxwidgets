@@ -3101,8 +3101,7 @@ bool wxTextCtrl::MSWSetParaFormat(const wxTextAttr& style, long start, long end)
         const std::vector<int>& tabs = style.GetTabs();
 
         pf.cTabCount = (SHORT)wxMin(tabs.size(), MAX_TAB_STOPS);
-        size_t i;
-        for (i = 0; i < (size_t) pf.cTabCount; i++)
+        for (size_t i = 0; i < (size_t) pf.cTabCount; i++)
         {
             // Convert from 1/10 mm to TWIPS
             pf.rgxTabs[i] = (int) (((double) tabs[i]) * mm2twips / 10.0) ;
@@ -3378,8 +3377,7 @@ bool wxTextCtrl::GetStyle(long position, wxTextAttr& style)
         style.SetAlignment(wxTextAttrAlignment::Left);
 
     std::vector<int> tabStops;
-    size_t i;
-    for (i = 0; i < (size_t) pf.cTabCount; i++)
+    for (size_t i = 0; i < (size_t) pf.cTabCount; i++)
     {
         tabStops.push_back( (int) ((double) (pf.rgxTabs[i] & 0xFFFF) * twips2mm * 10.0) );
     }

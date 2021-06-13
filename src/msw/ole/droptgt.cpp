@@ -590,6 +590,7 @@ wxDataFormat wxDropTarget::MSWGetSupportedFormat(IDataObject *pIDataSource) cons
 
     m_dataObject->GetAllFormats(formats, wxDataObject::Set);
 
+    // TODO: Lambda
     // cycle through all supported formats
     size_t n;
     for ( n = 0; n < nFormats; n++ ) {

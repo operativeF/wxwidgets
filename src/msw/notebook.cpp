@@ -371,9 +371,9 @@ bool wxNotebook::SetPageText(size_t nPage, const wxString& strText)
     if ( ret && rows != GetRowCount() )
     {
         const wxRect r = GetPageSize();
-        const size_t count = m_pages.size();
-        for ( size_t page = 0; page < count; page++ )
-            m_pages[page]->SetSize(r);
+
+        for ( auto& page : m_pages )
+            page->SetSize(r);
     }
 
     return ret;

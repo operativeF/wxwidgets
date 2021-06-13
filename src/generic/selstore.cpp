@@ -98,14 +98,13 @@ bool wxSelectionStore::SelectRange(unsigned itemFrom, unsigned itemTo,
             // TODO: it should be possible to optimize the searches a bit
             //       knowing the possible range
 
-            unsigned item;
-            for ( item = 0; item < itemFrom; item++ )
+            for ( unsigned item = 0; item < itemFrom; item++ )
             {
                 if ( selOld.Index(item) == wxNOT_FOUND )
                     m_itemsSel.Add(item);
             }
 
-            for ( item = itemTo + 1; item < m_count; item++ )
+            for ( unsigned item = itemTo + 1; item < m_count; item++ )
             {
                 if ( selOld.Index(item) == wxNOT_FOUND )
                     m_itemsSel.Add(item);

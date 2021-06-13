@@ -861,6 +861,7 @@ void wxPGProperty::DoGenerateComposedValue( wxString& text,
         }
     }
 
+    // TODO: Lambda
     int i;
     for ( i = 0; i < iMax; i++ )
     {

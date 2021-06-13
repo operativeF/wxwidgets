@@ -184,9 +184,10 @@ void wxHeaderCtrlBase::ResetColumnsOrder()
     DoSetColumnsOrder(order);
 }
 
+// TODO: Lambda
 std::vector<int> wxHeaderCtrlBase::GetColumnsOrder() const
 {
-    const std::vector<int> order = DoGetColumnsOrder();
+    std::vector<int> order = DoGetColumnsOrder();
 
     wxASSERT_MSG( order.size() == GetColumnCount(), "invalid order array" );
 

@@ -839,14 +839,12 @@ void wxVarHVScrollHelper::RefreshRowColumn(size_t row, size_t column)
     v_rect.height = OnGetRowHeight(row);
     h_rect.width = OnGetColumnWidth(column);
 
-    size_t n;
-
-    for ( n = GetVisibleRowsBegin(); n < row; n++ )
+    for ( size_t n = GetVisibleRowsBegin(); n < row; n++ )
     {
         v_rect.y += OnGetRowHeight(n);
     }
 
-    for ( n = GetVisibleColumnsBegin(); n < column; n++ )
+    for ( size_t n = GetVisibleColumnsBegin(); n < column; n++ )
     {
         h_rect.x += OnGetColumnWidth(n);
     }
@@ -892,28 +890,27 @@ void wxVarHVScrollHelper::RefreshRowsColumns(size_t fromRow, size_t toRow,
 
     // calculate the rect occupied by these units on screen
     wxRect v_rect, h_rect;
-    size_t nBefore, nBetween;
 
-    for ( nBefore = GetVisibleRowsBegin();
+    for ( size_t nBefore = GetVisibleRowsBegin();
           nBefore < fromRow;
           nBefore++ )
     {
         v_rect.y += OnGetRowHeight(nBefore);
     }
 
-    for ( nBetween = fromRow; nBetween <= toRow; nBetween++ )
+    for ( size_t nBetween = fromRow; nBetween <= toRow; nBetween++ )
     {
         v_rect.height += OnGetRowHeight(nBetween);
     }
 
-    for ( nBefore = GetVisibleColumnsBegin();
+    for ( size_t nBefore = GetVisibleColumnsBegin();
           nBefore < fromColumn;
           nBefore++ )
     {
         h_rect.x += OnGetColumnWidth(nBefore);
     }
 
-    for ( nBetween = fromColumn; nBetween <= toColumn; nBetween++ )
+    for ( size_t nBetween = fromColumn; nBetween <= toColumn; nBetween++ )
     {
         h_rect.width += OnGetColumnWidth(nBetween);
     }

@@ -337,6 +337,7 @@ void wxIOCPThread::ProcessNativeEvents(std::vector<wxEventProcessingData>& event
             wxFileName oldpath = GetEventPath(*watch, e);
             wxFileName newpath;
 
+            // FIXME: Look ahead loop
             // newpath should be in the next entry. what if there isn't?
             ++it;
             if ( it != events.end() )

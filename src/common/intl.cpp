@@ -106,7 +106,7 @@ inline wxString ExtractNotLang(const wxString& langFull)
     if ( pos != wxString::npos )
         return langFull.substr(pos);
     else
-        return {};
+        return wxString();
 }
 
 #endif // __UNIX__
@@ -1701,7 +1701,7 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory cat)
         switch ( index )
         {
             case wxLOCALE_THOUSANDS_SEP:
-                return {};
+                return wxString();
 
             case wxLOCALE_DECIMAL_POINT:
                 return ".";
@@ -1789,7 +1789,7 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory WXUNUSED(cat))
                         break;
                     default:
                         wxFAIL_MSG( "unexpected time locale" );
-                        return {};
+                        return wxString();
                 }
                 wxCFRef<CFDateFormatterRef> dateFormatter( CFDateFormatterCreate
                     (NULL, userLocaleRef, dateStyle, timeStyle));
@@ -1802,7 +1802,7 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory WXUNUSED(cat))
 
         default:
             wxFAIL_MSG( "Unknown locale info" );
-            return {};
+            return wxString();
     }
 
     wxCFStringRef str(wxCFRetain(cfstr));
@@ -1828,7 +1828,7 @@ wxString GetDateFormatFromLangInfo(wxLocaleInfo index)
     if ( nlidx < 0 || nlidx >= (int)WXSIZEOF(items) )
     {
         wxFAIL_MSG( "logic error in GetInfo() code" );
-        return {};
+        return wxString();
     }
 
     const wxString fmt(nl_langinfo(items[nlidx]));
@@ -1888,7 +1888,7 @@ wxString GetDateFormatFromLangInfo(wxLocaleInfo index)
     // could try to reverse engineer the format from strftime() output but this
     // looks like too much trouble considering the relatively small number of
     // systems without nl_langinfo() still in use)
-    return {};
+    return wxString();
 #endif // HAVE_LANGINFO_H/!HAVE_LANGINFO_H
 }
 
@@ -1899,7 +1899,7 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory cat)
 {
     lconv * const lc = localeconv();
     if ( !lc )
-        return {};
+        return wxString();
 
     switch ( index )
     {
@@ -1939,7 +1939,7 @@ wxString wxLocale::GetInfo(wxLocaleInfo index, wxLocaleCategory cat)
             wxFAIL_MSG( "unknown wxLocaleInfo value" );
     }
 
-    return {};
+    return wxString();
 }
 
 #endif // platform

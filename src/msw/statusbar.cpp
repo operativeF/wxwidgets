@@ -219,8 +219,8 @@ void wxStatusBar::MSWUpdateFieldsWidths()
     int *pWidths = new int[count];
 
     int nCurPos = 0;
-    int i;
-    for ( i = 0; i < count; i++ )
+
+    for ( int i = 0; i < count; i++ )
     {
         nCurPos += widthsAbs[i] + extraWidth;
         pWidths[i] = nCurPos;
@@ -237,7 +237,7 @@ void wxStatusBar::MSWUpdateFieldsWidths()
     }
 
     // Now that all parts have been created, set their text.
-    for ( i = 0; i < count; i++ )
+    for ( int i = 0; i < count; i++ )
     {
         DoUpdateStatusText(i);
     }

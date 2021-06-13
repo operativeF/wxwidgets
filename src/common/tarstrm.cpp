@@ -233,6 +233,7 @@ bool wxTarHeaderBlock::Read(wxInputStream& in)
 
 bool wxTarHeaderBlock::Write(wxOutputStream& out)
 {
+    // FIXME: Don't use enum as upper limit for loop.
     bool ok = true;
 
     for (int id = 0; id < TAR_NUMFIELDS && ok; id++)

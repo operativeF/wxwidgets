@@ -519,9 +519,9 @@ int wxFileDialog::ShowModal()
     // as it doesn't like two backslashes in a row neither
 
     wxString  dir;
-    size_t    i, len = m_dir.length();
+    size_t    len = m_dir.length();
     dir.reserve(len);
-    for ( i = 0; i < len; i++ )
+    for (size_t i = 0; i < len; i++ )
     {
         wxChar ch = m_dir[i];
         switch ( ch )
@@ -566,7 +566,7 @@ int wxFileDialog::ShowModal()
 
     wxString filterBuffer;
 
-    for (i = 0; i < items ; i++)
+    for (size_t i = 0; i < items ; i++)
     {
         filterBuffer += wildDescriptions[i];
         filterBuffer += wxT("|");
@@ -575,7 +575,7 @@ int wxFileDialog::ShowModal()
     }
 
     // Replace | with \0
-    for (i = 0; i < filterBuffer.length(); i++ ) {
+    for (size_t i = 0; i < filterBuffer.length(); i++ ) {
         if ( filterBuffer.GetChar(i) == wxT('|') ) {
             filterBuffer[i] = wxT('\0');
         }
@@ -645,7 +645,7 @@ int wxFileDialog::ShowModal()
        )
     {
         m_dir = fileNameBuffer;
-        i = of.nFileOffset;
+        auto i = of.nFileOffset;
         m_fileName = &fileNameBuffer[i];
         m_fileNames.push_back(m_fileName);
         i += m_fileName.length() + 1;
