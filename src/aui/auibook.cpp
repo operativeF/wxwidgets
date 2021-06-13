@@ -2216,7 +2216,7 @@ bool wxAuiNotebook::SetPageToolTip(size_t page_idx, const wxString& text)
 wxString wxAuiNotebook::GetPageToolTip(size_t page_idx) const
 {
     if (page_idx >= m_tabs.GetPageCount())
-        return {};
+        return wxString();
 
     const wxAuiNotebookPage& page_info = m_tabs.GetPage(page_idx);
     return page_info.tooltip;
@@ -3562,7 +3562,7 @@ wxSize wxAuiNotebook::DoGetBestSize() const
     }
 
     if ( layouts.empty() )
-        return {0, 0};
+        return wxSize(0, 0);
 
     std::sort(layouts.begin(), layouts.end());
 

@@ -1019,11 +1019,6 @@ void StringTestCase::CStrDataImplicitConversion()
 
     CPPUNIT_ASSERT( CheckStrConstWChar(s, s.c_str()) );
     CPPUNIT_ASSERT( CheckStrConstChar(s, s.c_str()) );
-
-    // implicit conversion of wxString is not available in STL build
-
-    CPPUNIT_ASSERT( CheckStrConstChar(s, s) );
-#endif
 }
 
 void StringTestCase::ExplicitConversion()

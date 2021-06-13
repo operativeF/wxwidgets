@@ -54,7 +54,7 @@ public:
                     const wxPoint& pos,
                     const wxSize& size,
                     const std::vector<int>& order,
-                    const wxArrayString& items,
+                    const std::vector<wxString>& items,
                     long style = 0,
                     const wxValidator& validator = wxDefaultValidator,
                     const wxString& name = wxASCII_STR(wxRearrangeListNameStr))
@@ -74,7 +74,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const std::vector<int>& order,
-                const wxArrayString& items,
+                const std::vector<wxString>& items,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxRearrangeListNameStr));
@@ -113,7 +113,6 @@ private:
     // event handler for item checking/unchecking
     void OnCheck(wxCommandEvent& event);
 
-
     // the current order array
     std::vector<int> m_order;
 
@@ -135,7 +134,7 @@ public:
                     const wxPoint& pos,
                     const wxSize& size,
                     const std::vector<int>& order,
-                    const wxArrayString& items,
+                    const std::vector<wxString>& items,
                     long style = 0,
                     const wxValidator& validator = wxDefaultValidator,
                     const wxString& name = wxASCII_STR(wxRearrangeListNameStr))
@@ -153,7 +152,7 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const std::vector<int>& order,
-                const wxArrayString& items,
+                const std::vector<wxString>& items,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxRearrangeListNameStr));
@@ -187,7 +186,7 @@ public:
                       const wxString& message,
                       const wxString& title,
                       const std::vector<int>& order,
-                      const wxArrayString& items,
+                      const std::vector<wxString>& items,
                       const wxPoint& pos = wxDefaultPosition,
                       const wxString& name = wxASCII_STR(wxRearrangeDialogNameStr))
     {
@@ -203,7 +202,7 @@ public:
                 const wxString& message,
                 const wxString& title,
                 const std::vector<int>& order,
-                const wxArrayString& items,
+                const std::vector<wxString>& items,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxString& name = wxASCII_STR(wxRearrangeDialogNameStr));
 

@@ -29,6 +29,8 @@
 #include "wx/rearrangectrl.h"
 #include "wx/renderer.h"
 
+#include <numeric>
+
 namespace
 {
 
@@ -43,7 +45,7 @@ class wxHeaderColumnsRearrangeDialog : public wxRearrangeDialog
 public:
     wxHeaderColumnsRearrangeDialog(wxWindow *parent,
                                    const std::vector<int>& order,
-                                   const wxArrayString& items)
+                                   const std::vector<wxString>& items)
         : wxRearrangeDialog
           (
             parent,
@@ -98,10 +100,9 @@ void wxHeaderCtrlBase::SetColumnCount(unsigned int count)
 
 int wxHeaderCtrlBase::GetColumnTitleWidth(const wxHeaderColumn& col)
 {
-    int w = wxWindowBase::GetTextExtent(col.GetTitle()).x;
-
-    // add some margin:
-    w += wxRendererNative::Get().GetHeaderButtonMargin(this);
+    int w = wxWindowBase::GetTextExtent(col.GetTitle()).x +
+        // add some margin:
+        wxRendererNative::Get().GetHeaderButtonMargin(this);
 
     // if a bitmap is used, add space for it and 2px border:
     wxBitmap bmp = col.GetBitmap();
@@ -159,15 +160,8 @@ void wxHeaderCtrlBase::SetColumnsOrder(const std::vector<int>& order)
     wxCHECK_RET( order.size() == count, "wrong number of columns" );
 
     // check the array validity
-    std::vector<int> seen(count, 0);
-    for ( unsigned n = 0; n < count; n++ )
-    {
-        const unsigned idx = order[n];
-        wxCHECK_RET( idx < count, "invalid column index" );
-        wxCHECK_RET( !seen[idx], "duplicate column index" );
-
-        seen[idx] = 1;
-    }
+    wxCHECK_RET( *std::max_element(order.cbegin(), order.cend()) < count, "invalid column index" );
+    wxCHECK_RET( std::adjacent_find(order.cbegin(), order.cend()) == order.cend(), "duplicate column index" );
 
     DoSetColumnsOrder(order);
 
@@ -176,45 +170,40 @@ void wxHeaderCtrlBase::SetColumnsOrder(const std::vector<int>& order)
 
 void wxHeaderCtrlBase::ResetColumnsOrder()
 {
-    const unsigned count = GetColumnCount();
-    std::vector<int> order(count);
-    for ( unsigned n = 0; n < count; n++ )
-        order[n] = n;
+    std::vector<int> order(GetColumnCount());
+
+    std::iota(order.begin(), order.end(), 0);
 
     DoSetColumnsOrder(order);
 }
 
-// TODO: Lambda
 std::vector<int> wxHeaderCtrlBase::GetColumnsOrder() const
 {
-    std::vector<int> order = DoGetColumnsOrder();
+    // TODO: Is this even necessary anymore?
+    // wxASSERT_MSG( order.size() == GetColumnCount(), "invalid order array" );
 
-    wxASSERT_MSG( order.size() == GetColumnCount(), "invalid order array" );
-
-    return order;
+    return DoGetColumnsOrder();
 }
 
 unsigned int wxHeaderCtrlBase::GetColumnAt(unsigned int pos) const
 {
-    wxCHECK_MSG( pos < GetColumnCount(), wxNO_COLUMN, "invalid position" );
-
-    return GetColumnsOrder()[pos];
+    return GetColumnsOrder().at(pos);
 }
 
 unsigned int wxHeaderCtrlBase::GetColumnPos(unsigned int idx) const
 {
-    const unsigned count = GetColumnCount();
-
-    wxCHECK_MSG( idx < count, wxNO_COLUMN, "invalid index" );
+    wxCHECK_MSG( idx < GetColumnCount(), wxNO_COLUMN, "invalid index" );
 
     const std::vector<int> order = GetColumnsOrder();
     const auto pos = std::find(order.begin(), order.end(), idx);
-    wxCHECK_MSG( pos != std::end(order), wxNO_COLUMN, "column unexpectedly not displayed at all" );
+    // TODO: This is impossible now, yeah?
+    // wxCHECK_MSG( pos != std::end(order), wxNO_COLUMN, "column unexpectedly not displayed at all" );
 
     return std::distance(std::cbegin(order), pos);
 }
 
 /* static */
+// TODO: This is a rotate.
 void wxHeaderCtrlBase::MoveColumnInOrderArray(std::vector<int>& order,
                                               unsigned int idx,
                                               unsigned int pos)
@@ -230,7 +219,7 @@ void wxHeaderCtrlBase::MoveColumnInOrderArray(std::vector<int>& order,
 }
 
 void
-wxHeaderCtrlBase::DoResizeColumnIndices(std::vector<int>& colIndices, unsigned int count)
+wxHeaderCtrlBase::DoResizeColumnIndices(std::vector<int>& colIndices, size_t count)
 {
     // update the column indices array if necessary
     const auto countOld = colIndices.size();
@@ -244,16 +233,10 @@ wxHeaderCtrlBase::DoResizeColumnIndices(std::vector<int>& colIndices, unsigned i
     {
         // filter out all the positions which are invalid now while keeping the
         // order of the remaining ones
-        std::vector<int> colIndicesNew;
-        colIndicesNew.reserve(count);
-        for ( unsigned n = 0; n < countOld; n++ )
-        {
-            const unsigned idx = colIndices[n];
-            if ( idx < count )
-                colIndicesNew.push_back(idx);
-        }
-
-        colIndices.swap(colIndicesNew);
+        // FIXME: Verify this is an off-by-one problem if greater than is used instead
+        // of greater-than-or-equal-to.
+        colIndices.erase(std::remove_if(colIndices.begin(), colIndices.end(),
+            [&](const auto idx){ return idx >= count; }), colIndices.end());
     }
     //else: count didn't really change, nothing to do
 

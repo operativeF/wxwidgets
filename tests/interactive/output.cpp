@@ -470,7 +470,7 @@ void InteractiveOutputTestCase::TestFSVolume()
                  n + 1,
                  vol.GetDisplayName(),
                  vol.GetName(),
-                 volumeKinds[vol.GetKind()],
+                 volumeKinds[static_cast<int>(vol.GetKind())],
                  vol.IsWritable() ? wxT("rw") : wxT("ro"),
                  vol.GetFlags() & wxFS_VOL_REMOVABLE ? wxT("removable")
                                                      : wxT("fixed"));

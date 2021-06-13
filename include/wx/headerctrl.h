@@ -216,7 +216,7 @@ protected:
 
     // helper function for the derived classes: update the array of column
     // indices after the number of columns changed
-    void DoResizeColumnIndices(std::vector<int>& colIndices, unsigned int count);
+    void DoResizeColumnIndices(std::vector<int>& colIndices, size_t count);
 
 protected:
     // this window doesn't look nice with the border so don't use it by default

@@ -63,7 +63,7 @@ CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( CmdLineTestCase, "CmdLineTestCase" );
 //     test failure messages
 #define WX_ASSERT_STRARRAY_EQUAL(s, a)                                        \
     {                                                                         \
-        wxArrayString expected(wxSplit(s, '|', '\0'));                        \
+        std::vector<wxString> expected(wxSplit(s, '|', '\0'));                \
                                                                               \
         CPPUNIT_ASSERT_EQUAL( expected.size(), a.size() );                    \
                                                                               \
@@ -81,7 +81,7 @@ void CmdLineTestCase::ConvertStringTestCase()
 {
     #define WX_ASSERT_DOS_ARGS_EQUAL(s, args)                                 \
         {                                                                     \
-            const wxArrayString                                               \
+            const std::vector<wxString>                                       \
                 argsDOS(wxCmdLineParser::ConvertStringToArgs(args,            \
                                             wxCMD_LINE_SPLIT_DOS));           \
             WX_ASSERT_STRARRAY_EQUAL(s, argsDOS);                             \
@@ -89,7 +89,7 @@ void CmdLineTestCase::ConvertStringTestCase()
 
     #define WX_ASSERT_UNIX_ARGS_EQUAL(s, args)                                \
         {                                                                     \
-            const wxArrayString                                               \
+            const std::vector<wxString>                                       \
                 argsUnix(wxCmdLineParser::ConvertStringToArgs(args,           \
                                             wxCMD_LINE_SPLIT_UNIX));          \
             WX_ASSERT_STRARRAY_EQUAL(s, argsUnix);                            \

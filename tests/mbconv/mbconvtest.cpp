@@ -1298,7 +1298,7 @@ void MBConvTestCase::TestStreamEncoder(
     // (which has exposed some problems with wxMBConv)
     wxMemoryOutputStream memoryOutputStream;
     // wxEOL_UNIX will pass \n \r unchanged
-    wxTextOutputStream textOutputStream( memoryOutputStream, wxEOL_UNIX, converter );
+    wxTextOutputStream textOutputStream( memoryOutputStream, wxEOL::Unix, converter );
     for ( size_t i = 0; i < wideChars; i++ )
     {
         textOutputStream.PutChar( wideBuffer[i] );

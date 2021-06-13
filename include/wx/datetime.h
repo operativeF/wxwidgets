@@ -1550,9 +1550,8 @@ public:
 
     // fills the provided array with all holidays in the given range, returns
     // the number of them
-    static size_t GetHolidaysInRange(const wxDateTime& dtStart,
-                                     const wxDateTime& dtEnd,
-                                     wxDateTimeArray& holidays);
+    static std::vector<wxDateTime> GetHolidaysInRange(const wxDateTime& dtStart,
+                                                      const wxDateTime& dtEnd);
 
     // clear the list of holiday authorities
     static void ClearAllAuthorities();
@@ -1576,9 +1575,8 @@ protected:
     //
     // returns the number of holidays in the given range and fills holidays
     // array
-    virtual size_t DoGetHolidaysInRange(const wxDateTime& dtStart,
-                                        const wxDateTime& dtEnd,
-                                        wxDateTimeArray& holidays) const = 0;
+    virtual std::vector<wxDateTime> DoGetHolidaysInRange(const wxDateTime& dtStart,
+                                                         const wxDateTime& dtEnd) const = 0;
 
 private:
     // all holiday authorities
@@ -1590,9 +1588,8 @@ class WXDLLIMPEXP_BASE wxDateTimeWorkDays : public wxDateTimeHolidayAuthority
 {
 protected:
     bool DoIsHoliday(const wxDateTime& dt) const override;
-    size_t DoGetHolidaysInRange(const wxDateTime& dtStart,
-                                        const wxDateTime& dtEnd,
-                                        wxDateTimeArray& holidays) const override;
+    std::vector<wxDateTime> DoGetHolidaysInRange(const wxDateTime& dtStart,
+                                                 const wxDateTime& dtEnd) const override;
 };
 
 // ============================================================================

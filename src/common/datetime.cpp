@@ -2208,26 +2208,24 @@ bool wxDateTimeHolidayAuthority::IsHoliday(const wxDateTime& dt)
 }
 
 /* static */
-size_t
+std::vector<wxDateTime>
 wxDateTimeHolidayAuthority::GetHolidaysInRange(const wxDateTime& dtStart,
-                                               const wxDateTime& dtEnd,
-                                               wxDateTimeArray& holidays)
+                                               const wxDateTime& dtEnd)
 {
-    wxDateTimeArray hol;
-
-    holidays.Clear();
+    std::vector<wxDateTime> holidays;
 
     const size_t countAuth = ms_authorities.size();
     for ( size_t nAuth = 0; nAuth < countAuth; nAuth++ )
     {
-        ms_authorities[nAuth]->DoGetHolidaysInRange(dtStart, dtEnd, hol);
+        const auto holidaysInRange = ms_authorities[nAuth]->DoGetHolidaysInRange(dtStart, dtEnd);
 
-        WX_APPEND_ARRAY(holidays, hol);
+        holidays.insert(std::end(holidays), std::cbegin(holidaysInRange), std::cend(holidaysInRange));
     }
 
-    holidays.Sort(wxDateTimeCompareFunc);
+    std::sort(holidays.begin(), holidays.end(),
+        [](const auto dt1, const auto dt2) { return dt1 == dt2 ? 0 : dt1 < dt2 ? -1 : +1; });
 
-    return holidays.size();
+    return holidays;
 }
 
 /* static */
@@ -2258,18 +2256,15 @@ bool wxDateTimeWorkDays::DoIsHoliday(const wxDateTime& dt) const
     return (wd == wxDateTime::Sun) || (wd == wxDateTime::Sat);
 }
 
-size_t wxDateTimeWorkDays::DoGetHolidaysInRange(const wxDateTime& dtStart,
-                                                const wxDateTime& dtEnd,
-                                                wxDateTimeArray& holidays) const
+std::vector<wxDateTime> wxDateTimeWorkDays::DoGetHolidaysInRange(const wxDateTime& dtStart,
+                                                                 const wxDateTime& dtEnd) const
 {
     if ( dtStart > dtEnd )
     {
         wxFAIL_MSG( wxT("invalid date range in GetHolidaysInRange") );
 
-        return 0u;
+        return {};
     }
-
-    holidays.Empty();
 
     // instead of checking all days, start with the first Sat after dtStart and
     // end with the last Sun before dtEnd
@@ -2279,17 +2274,19 @@ size_t wxDateTimeWorkDays::DoGetHolidaysInRange(const wxDateTime& dtStart,
                dtSunLast = dtEnd.GetPrevWeekDay(wxDateTime::Sun),
                dt;
 
+    std::vector<wxDateTime> holidays;
+
     for ( dt = dtSatFirst; dt <= dtSatLast; dt += wxDateSpan::Week() )
     {
-        holidays.Add(dt);
+        holidays.push_back(dt);
     }
 
     for ( dt = dtSunFirst; dt <= dtSunLast; dt += wxDateSpan::Week() )
     {
-        holidays.Add(dt);
+        holidays.push_back(dt);
     }
 
-    return holidays.GetCount();
+    return holidays;
 }
 
 // ============================================================================

@@ -180,13 +180,11 @@ bool wxCalendarCtrlBase::SetHolidayAttrs()
     wxDateTime dtStart(1, tm.mon, tm.year),
                dtEnd = dtStart.GetLastMonthDay();
 
-    wxDateTimeArray hol;
-    wxDateTimeHolidayAuthority::GetHolidaysInRange(dtStart, dtEnd, hol);
+    std::vector<wxDateTime> holidays = wxDateTimeHolidayAuthority::GetHolidaysInRange(dtStart, dtEnd);
 
-    const size_t count = hol.GetCount();
-    for ( size_t n = 0; n < count; n++ )
+    for ( const auto& holiday : holidays )
     {
-        SetHoliday(hol[n].GetDay());
+        SetHoliday(holiday.GetDay());
     }
 
     return true;
