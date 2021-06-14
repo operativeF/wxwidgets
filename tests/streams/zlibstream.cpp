@@ -26,9 +26,9 @@
 
 using std::string;
 
-#define DATABUFFER_SIZE 1024
+static constexpr unsigned int DATABUFFER_SIZE = 1024;
 
-static const wxString FILENAME_GZ = wxT("zlibtest.gz");
+static constexpr wxChar FILENAME_GZ[] = wxT("zlibtest.gz");
 
 ///////////////////////////////////////////////////////////////////////////////
 // The test case
@@ -525,14 +525,14 @@ void zlibStream::genExtTestData(wxTextOutputStream &out, const char *buf, int fl
     out << wxT("void zlibStream::Decompress_wxXXXData()") << wxT("\n");
     out << wxT("{") << wxT("\n") << wxT("    const unsigned char data[] = {");
 
-    size_t i;
-    for (i = 0; i < size; i++)
+    for (size_t i = 0; i < size; i++)
     {
-        if (i+1 != size)
+        if (i + 1 != size)
             out << wxString::Format(wxT("%d,"), data[i]);
         else
             out << wxString::Format(wxT("%d"), data[i]);
     }
+    
     delete [] data;
 
     out << wxT("};") << wxT("\n");

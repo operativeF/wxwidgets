@@ -715,7 +715,8 @@ TEST_CASE("wxDynArray::TestSTL", "[dynarray]")
     wxArrayInt::iterator it, en;
     wxArrayInt::reverse_iterator rit, ren;
     int i;
-    static const int COUNT = 5;
+    
+    static constexpr int COUNT = 5;
 
     for ( i = 0; i < COUNT; ++i )
         list1.push_back(i);

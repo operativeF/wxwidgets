@@ -53,7 +53,7 @@ public:
 
 TEST_CASE("wxFileSystem::URLParsing", "[filesys][url][parse]")
 {
-    static const struct Data
+    static constexpr struct Data
     {
         const wxChar *url;
         const wxChar *protocol, *left, *right, *anchor;

@@ -3660,21 +3660,20 @@ wxImage wxImage::Rotate(double angle,
     const int w = GetWidth();
     const int h = GetHeight();
 
-    int i;
-
     // Create pointer-based array to accelerate access to wxImage's data
-    unsigned char ** data = new unsigned char * [h];
+    std::unique_ptr<unsigned char*[]> data(new unsigned char* [h]);
+
     data[0] = GetData();
-    for (i = 1; i < h; i++)
+    for (int i = 1; i < h; i++)
         data[i] = data[i - 1] + (3 * w);
 
     // Same for alpha channel
-    unsigned char ** alpha = nullptr;
+    std::unique_ptr<unsigned char*[]> alpha(new unsigned char* [h]);
+
     if (has_alpha)
     {
-        alpha = new unsigned char * [h];
         alpha[0] = GetAlpha();
-        for (i = 1; i < h; i++)
+        for (int i = 1; i < h; i++)
             alpha[i] = alpha[i - 1] + w;
     }
 
@@ -3918,9 +3917,6 @@ wxImage wxImage::Rotate(double angle,
             }
         }
     }
-
-    delete [] data;
-    delete [] alpha;
 
     return rotated;
 }

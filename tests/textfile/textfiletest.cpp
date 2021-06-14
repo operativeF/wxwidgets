@@ -71,7 +71,7 @@ private:
     void ReadBig();
 
     // return the name of the test file we use
-    static const char *GetTestFileName() { return "textfiletest.txt"; }
+    static constexpr char* GetTestFileName() { return "textfiletest.txt"; }
 
     // create the test file with the given contents
     static void CreateTestFile(const char *contents)
@@ -221,7 +221,7 @@ void TextFileTestCase::ReadMixedWithFuzzing()
         // Create a random buffer with lots of newlines. This is intended to catch
         // bad parsing in unexpected situations such as the one from ReadCRCRLF()
         // (which is so common it deserves a test of its own).
-        static const char CHOICES[] = {'\r', '\n', 'X'};
+        static constexpr char CHOICES[] = {'\r', '\n', 'X'};
 
         const size_t BUF_LEN = 100;
         char data[BUF_LEN + 1];
@@ -307,7 +307,7 @@ void TextFileTestCase::ReadUTF16()
 
 void TextFileTestCase::ReadBig()
 {
-    static const size_t NUM_LINES = 10000;
+    static constexpr size_t NUM_LINES = 10000;
 
     {
         wxFFile f(GetTestFileName(), "w");

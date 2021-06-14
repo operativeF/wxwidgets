@@ -393,25 +393,22 @@ bool wxPenRefData::Alloc()
 
        lb.lbColor = col;
 
-       DWORD *dash;
+       std::unique_ptr<DWORD[]> dash;
+       
        if ( m_style == wxPenStyle::UserDash && m_nbDash && m_dash )
        {
-           dash = new DWORD[m_nbDash];
+           dash.reset(new DWORD[m_nbDash]);
+           
            int rw = m_width > 1 ? m_width : 1;
+
            for ( int i = 0; i < m_nbDash; i++ )
                dash[i] = m_dash[i] * rw;
-       }
-       else
-       {
-           dash = nullptr;
        }
 
        // Note that width can't be 0 for ExtCreatePen(), unlike for CreatePen().
        int width = m_width == 0 ? 1 : m_width;
 
-       m_hPen = ::ExtCreatePen(styleMSW, width, &lb, m_nbDash, (LPDWORD)dash);
-
-       delete [] dash;
+       m_hPen = ::ExtCreatePen(styleMSW, width, &lb, m_nbDash, (LPDWORD)dash.get());
    }
 
    return m_hPen != nullptr;

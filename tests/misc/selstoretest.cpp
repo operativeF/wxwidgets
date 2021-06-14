@@ -28,15 +28,13 @@ public:
     }
 
     // NB: must be even
-    static const unsigned NUM_ITEMS;
+    static constexpr unsigned NUM_ITEMS{10};
 
     wxSelectionStore m_store;
 
     SelStoreTest(const SelStoreTest&) = delete;
 	SelStoreTest& operator=(const SelStoreTest&) = delete;
 };
-
-const unsigned SelStoreTest::NUM_ITEMS = 10; // NB: must be even
 
 TEST_CASE_METHOD(SelStoreTest, "wxSelectionStore::SelectItem", "[selstore]")
 {

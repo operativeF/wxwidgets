@@ -41,7 +41,7 @@ TEST_CASE("Ellipsization::NormalCase", "[ellipsization]")
         "\t\n&", "a\t\n&string\t\n&with\t\n&many\t\n&chars"
     };
 
-    static const int flagsToTest[] =
+    static constexpr int flagsToTest[] =
     {
         0,
         wxELLIPSIZE_FLAGS_PROCESS_MNEMONICS,
@@ -49,7 +49,7 @@ TEST_CASE("Ellipsization::NormalCase", "[ellipsization]")
         wxELLIPSIZE_FLAGS_PROCESS_MNEMONICS | wxELLIPSIZE_FLAGS_EXPAND_TABS
     };
 
-    static const wxEllipsizeMode modesToTest[] =
+    static constexpr wxEllipsizeMode modesToTest[] =
     {
         wxELLIPSIZE_START,
         wxELLIPSIZE_MIDDLE,

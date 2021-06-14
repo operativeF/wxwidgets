@@ -371,7 +371,7 @@ TEST_CASE("wxFont::NativeFontInfoUserDesc", "[font][fontinfo]")
     // strings (see #18590).
     wxFont font(*wxNORMAL_FONT);
 
-    static const double sizes[] = { 12.0, 10.5, 13.8, 10.123, 11.1 };
+    static constexpr double sizes[] = { 12.0, 10.5, 13.8, 10.123, 11.1 };
     for ( unsigned n = 0; n < WXSIZEOF(sizes); n++ )
     {
         font.SetFractionalPointSize(sizes[n]);

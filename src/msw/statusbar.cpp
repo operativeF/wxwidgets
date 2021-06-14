@@ -216,7 +216,7 @@ void wxStatusBar::MSWUpdateFieldsWidths()
 
     // update the field widths in the native control:
 
-    int *pWidths = new int[count];
+    std::unique_ptr<int[]> pWidths(new int[count]);
 
     int nCurPos = 0;
 
@@ -231,7 +231,7 @@ void wxStatusBar::MSWUpdateFieldsWidths()
     // separator line just before it.
     pWidths[count - 1] += gripWidth;
 
-    if ( !StatusBar_SetParts(GetHwnd(), count, pWidths) )
+    if ( !StatusBar_SetParts(GetHwnd(), count, pWidths.get()) )
     {
         wxLogLastError("StatusBar_SetParts");
     }
@@ -241,8 +241,6 @@ void wxStatusBar::MSWUpdateFieldsWidths()
     {
         DoUpdateStatusText(i);
     }
-
-    delete [] pWidths;
 }
 
 void wxStatusBar::MSWUpdateFontOnDPIChange(const wxSize& newDPI)

@@ -22,6 +22,8 @@
 #include "wx/hashmap.h"
 #include "wx/hashset.h"
 
+#include <array>
+
 #if defined wxLongLong_t && !defined wxLongLongIsLong
     #define TEST_LONGLONG
 #endif
@@ -234,13 +236,12 @@ void HashesTestCase::wxUntypedHashTableDeleteContents()
         CPPUNIT_ASSERT( hash.GetCount() == 0 );
         CPPUNIT_ASSERT( FooObject::count == 0 );
 
-        static const int hashTestData[] =
+        static constexpr int hashTestData[] =
         {
             0, 1, 17, -2, 2, 4, -4, 345, 3, 3, 2, 1,
         };
 
-        size_t n;
-        for ( n = 0; n < WXSIZEOF(hashTestData); n++ )
+        for ( size_t n = 0; n < WXSIZEOF(hashTestData); n++ )
         {
             hash.Put(hashTestData[n], n, new FooObject(n));
         }
@@ -272,38 +273,37 @@ void HashesTestCase::wxTypedHashTableTest()
         CPPUNIT_ASSERT( hash.GetCount() == 0 );
         CPPUNIT_ASSERT( Foo::count == 0 );
 
-        static const int hashTestData[] =
+        static constexpr std::array<int, 12> hashTestData =
         {
             0, 1, 17, -2, 2, 4, -4, 345, 3, 3, 2, 1,
         };
 
-        size_t n;
-        for ( n = 0; n < WXSIZEOF(hashTestData); n++ )
+        for ( size_t n = 0; n < hashTestData.size(); n++ )
         {
             hash.Put(hashTestData[n], n, new Foo(n));
         }
 
-        CPPUNIT_ASSERT( hash.GetCount() == WXSIZEOF(hashTestData) );
-        CPPUNIT_ASSERT( Foo::count == WXSIZEOF(hashTestData) );
+        CPPUNIT_ASSERT( hash.GetCount() == hashTestData.size() );
+        CPPUNIT_ASSERT( Foo::count == hashTestData.size() );
 
-        for ( n = 0; n < WXSIZEOF(hashTestData); n++ )
+        for ( size_t n = 0; n < hashTestData.size(); n++ )
         {
             Foo *foo = hash.Get(hashTestData[n], n);
 
-            CPPUNIT_ASSERT( foo != NULL );
+            CPPUNIT_ASSERT( foo != nullptr );
             CPPUNIT_ASSERT( foo->n == (int)n );
         }
 
         // element not in hash
-        CPPUNIT_ASSERT( hash.Get(1234) == NULL );
-        CPPUNIT_ASSERT( hash.Get(1, 0) == NULL );
+        CPPUNIT_ASSERT( hash.Get(1234) == nullptr );
+        CPPUNIT_ASSERT( hash.Get(1, 0) == nullptr );
 
         // delete from hash without deleting object
         Foo* foo = hash.Delete(0);
 
-        CPPUNIT_ASSERT( Foo::count == WXSIZEOF(hashTestData) );
+        CPPUNIT_ASSERT( Foo::count == hashTestData.size() );
         delete foo;
-        CPPUNIT_ASSERT( Foo::count == WXSIZEOF(hashTestData) - 1 );
+        CPPUNIT_ASSERT( Foo::count == hashTestData.size() - 1 );
     }
 
     // hash destroyed

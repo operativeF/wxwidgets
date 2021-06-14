@@ -158,7 +158,7 @@ void StringTestCase::Format()
     s2.Printf(wxT("Number 18: %s\n"), s1.c_str());
     CPPUNIT_ASSERT( s2 == wxString::Format(wxT("Number 18: %s\n"), s1.c_str()) );
 
-    static const size_t lengths[] = { 1, 512, 1024, 1025, 2048, 4096, 4097 };
+    static constexpr size_t lengths[] = { 1, 512, 1024, 1025, 2048, 4096, 4097 };
     for ( size_t n = 0; n < WXSIZEOF(lengths); n++ )
     {
         const size_t len = lengths[n];
@@ -561,7 +561,7 @@ void StringTestCase::CompareNoCase()
 
 void StringTestCase::Contains()
 {
-    static const struct ContainsData
+    static constexpr struct ContainsData
     {
         const wxChar *hay;
         const wxChar *needle;
@@ -605,7 +605,7 @@ typedef long TestValue_t;
 
 wxGCC_WARNING_SUPPRESS(missing-field-initializers)
 
-static const struct ToLongData
+static constexpr struct ToLongData
 {
     const wxChar *str;
     TestValue_t value;
@@ -764,7 +764,7 @@ void StringTestCase::ToULongLong()
 void StringTestCase::ToDouble()
 {
     double d;
-    static const struct ToDoubleData
+    static constexpr struct ToDoubleData
     {
         const wxChar *str;
         double value;
@@ -809,7 +809,7 @@ void StringTestCase::ToDouble()
     // don't load default catalog, it may be unavailable:
     CPPUNIT_ASSERT( locale.Init(wxLANGUAGE_FRENCH, wxLOCALE_DONT_LOAD_DEFAULT) );
 
-    static const struct ToDoubleData doubleData2[] =
+    static constexpr struct ToDoubleData doubleData2[] =
     {
         { wxT("1"), 1, true },
         { wxT("1,23"), 1.23, true },
@@ -836,7 +836,7 @@ void StringTestCase::ToDouble()
 
 void StringTestCase::FromDouble()
 {
-    static const struct FromDoubleTestData
+    static constexpr struct FromDoubleTestData
     {
         double value;
         int prec;
@@ -927,8 +927,8 @@ void StringTestCase::StringBuf()
 void StringTestCase::UTF8Buf()
 {
     // "czech" in Czech ("cestina"):
-    static const char *textUTF8 = "\304\215e\305\241tina";
-    static const wchar_t textUTF16[] = {0x10D, 0x65, 0x161, 0x74, 0x69, 0x6E, 0x61, 0};
+    static constexpr char *textUTF8 = "\304\215e\305\241tina";
+    static constexpr wchar_t textUTF16[] = {0x10D, 0x65, 0x161, 0x74, 0x69, 0x6E, 0x61, 0};
 
     wxString s;
     wxStrcpy(wxUTF8StringBuffer(s, 9), textUTF8);

@@ -268,7 +268,7 @@ wxREGISTER_UNIT_TEST_WITH_TAGS(DateTimeTestCase, "[datetime]");
 // test leap years detection
 void DateTimeTestCase::TestLeapYears()
 {
-    static const struct LeapYearTestData
+    static constexpr struct LeapYearTestData
     {
         int year;
         bool isLeap;
@@ -928,7 +928,7 @@ void DateTimeTestCase::TestTimeZoneParse()
 {
     wxGCC_WARNING_SUPPRESS(missing-field-initializers)
 
-    static const struct
+    static constexpr struct
     {
         const char *str;
         bool good;
@@ -999,7 +999,7 @@ void DateTimeTestCase::TestTimeSpanFormat()
 {
     wxGCC_WARNING_SUPPRESS(missing-field-initializers)
 
-    static const struct TimeSpanFormatTestData
+    static constexpr struct TimeSpanFormatTestData
     {
         long h, min, sec, msec;
         const char *fmt;
@@ -1054,7 +1054,7 @@ void DateTimeTestCase::TestParseRFC822()
 {
     wxGCC_WARNING_SUPPRESS(missing-field-initializers)
 
-    static const struct ParseTestData
+    static constexpr struct ParseTestData
     {
         const char *rfc822;
         Date date;              // NB: this should be in UTC
@@ -1130,7 +1130,7 @@ void DateTimeTestCase::TestDateParse()
 {
     wxGCC_WARNING_SUPPRESS(missing-field-initializers)
 
-    static const struct ParseTestData
+    static constexpr struct ParseTestData
     {
         const char *str;
         Date date;              // NB: this should be in UTC

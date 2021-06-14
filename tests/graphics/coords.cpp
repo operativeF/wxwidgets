@@ -22,9 +22,9 @@
 // test class
 // ----------------------------------------------------------------------------
 
-static const wxSize s_dcSize(100, 100);
-static const wxPoint s_posDev(24, 57);
-static const wxSize s_dimDev(40, 15);
+static constexpr wxSize s_dcSize(100, 100);
+static constexpr wxPoint s_posDev(24, 57);
+static constexpr wxSize s_dimDev(40, 15);
 
 // ====================
 // wxDC / wxGCDC tests

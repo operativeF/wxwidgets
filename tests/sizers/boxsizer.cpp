@@ -92,7 +92,7 @@ TEST_CASE_METHOD(BoxSizerTestCase, "BoxSizer::Size3", "[sizer]")
 
     // check that various combinations of minimal sizes and proportions work as
     // expected for different window sizes
-    static const struct LayoutTestData
+    static constexpr struct LayoutTestData
     {
         // proportions of the elements
         int prop[3];
@@ -222,9 +222,9 @@ TEST_CASE_METHOD(BoxSizerTestCase, "BoxSizer::Size3", "[sizer]")
 
 TEST_CASE_METHOD(BoxSizerTestCase, "BoxSizer::CalcMin", "[sizer]")
 {
-    static const unsigned NUM_TEST_ITEM = 3;
+    static constexpr unsigned NUM_TEST_ITEM = 3;
 
-    static const struct CalcMinTestData
+    static constexpr struct CalcMinTestData
     {
         // proportions of the elements, if one of them is -1 it means to not
         // use this window at all in this test

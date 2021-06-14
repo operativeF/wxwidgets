@@ -29,13 +29,13 @@
 // constants
 // ----------------------------------------------------------------------------
 
-static const char OPTION_LIST = 'l';
-static const char OPTION_SINGLE = '1';
+static constexpr char OPTION_LIST = 'l';
+static constexpr char OPTION_SINGLE = '1';
 
-static const char OPTION_AVG_COUNT = 'a';
-static const char OPTION_NUM_RUNS = 'n';
-static const char OPTION_NUMERIC_PARAM = 'p';
-static const char OPTION_STRING_PARAM = 's';
+static constexpr char OPTION_AVG_COUNT = 'a';
+static constexpr char OPTION_NUM_RUNS = 'n';
+static constexpr char OPTION_NUMERIC_PARAM = 'p';
+static constexpr char OPTION_STRING_PARAM = 's';
 
 // ----------------------------------------------------------------------------
 // BenchApp declaration

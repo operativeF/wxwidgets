@@ -331,7 +331,7 @@ void FileNameTestCase::TestNormalize()
     if (cwd.Contains(wxT(':')))
         cwd = cwd.AfterFirst(wxT(':'));
 
-    static const struct FileNameTest
+    static constexpr struct FileNameTest
     {
         const char *original;
         int flags;
@@ -462,7 +462,7 @@ void FileNameTestCase::TestRelative()
 
 void FileNameTestCase::TestReplace()
 {
-    static const struct FileNameTest
+    static constexpr struct FileNameTest
     {
         const char *original;
         const char *env_contents;
@@ -535,7 +535,7 @@ void FileNameTestCase::TestReplace()
 
 void FileNameTestCase::TestGetHumanReadable()
 {
-    static const struct TestData
+    static constexpr struct TestData
     {
         const char *result;
         int size;
@@ -630,7 +630,7 @@ void FileNameTestCase::TestVolumeUniqueName()
 
 void FileNameTestCase::TestCreateTempFileName()
 {
-    static const struct TestData
+    static constexpr struct TestData
     {
         const char *prefix;
         const char *expectedFolder;

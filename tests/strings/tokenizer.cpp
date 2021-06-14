@@ -61,7 +61,7 @@ CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( TokenizerTestCase, "TokenizerTestCase" );
 // test data
 // ----------------------------------------------------------------------------
 
-static const struct TokenizerTestData
+static constexpr struct TokenizerTestData
 {
     // the string to tokenize
     const wxChar *str;

@@ -24,8 +24,8 @@
 // constants
 // ----------------------------------------------------------------------------
 
-static const char *strMB = "hello, world";
-static const wchar_t *strWC = L"hello, world";
+static constexpr char strMB[] = "hello, world";
+static constexpr wchar_t strWC[] = L"hello, world";
 static const wxString strWX("hello, world");
 
 // ----------------------------------------------------------------------------

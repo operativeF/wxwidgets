@@ -647,7 +647,7 @@ wxDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
 void wxDCImpl::DrawLines(const wxPointList *list, wxCoord xoffset, wxCoord yoffset)
 {
     int n = list->GetCount();
-    wxPoint *points = new wxPoint[n];
+    std::unique_ptr<wxPoint[]> points(new wxPoint[n]);
 
     int i = 0;
     for ( wxPointList::compatibility_iterator node = list->GetFirst(); node; node = node->GetNext(), i++ )
@@ -657,9 +657,7 @@ void wxDCImpl::DrawLines(const wxPointList *list, wxCoord xoffset, wxCoord yoffs
         points[i].y = point->y;
     }
 
-    DoDrawLines(n, points, xoffset, yoffset);
-
-    delete [] points;
+    DoDrawLines(n, points.get(), xoffset, yoffset);
 }
 
 void wxDCImpl::DrawPolygon(const wxPointList *list,
@@ -667,7 +665,7 @@ void wxDCImpl::DrawPolygon(const wxPointList *list,
                            wxPolygonFillMode fillStyle)
 {
     const int n = list->GetCount();
-    wxPoint *points = new wxPoint[n];
+    std::unique_ptr<wxPoint[]> points(new wxPoint[n]);
 
     int i = 0;
     for ( wxPointList::compatibility_iterator node = list->GetFirst(); node; node = node->GetNext(), i++ )
@@ -677,9 +675,7 @@ void wxDCImpl::DrawPolygon(const wxPointList *list,
         points[i].y = point->y;
     }
 
-    DoDrawPolygon(n, points, xoffset, yoffset, fillStyle);
-
-    delete [] points;
+    DoDrawPolygon(n, points.get(), xoffset, yoffset, fillStyle);
 }
 
 void
@@ -696,14 +692,15 @@ wxDCImpl::DoDrawPolyPolygon(int n,
     }
 
     int      i, j, lastOfs;
-    wxPoint* pts;
 
     for (i = j = lastOfs = 0; i < n; i++)
     {
         lastOfs = j;
         j      += count[i];
     }
-    pts = new wxPoint[j+n-1];
+
+    std::unique_ptr<wxPoint[]> pts(new wxPoint[j + n - 1]);
+    
     for (i = 0; i < j; i++)
         pts[i] = points[i];
     for (i = 2; i <= n; i++)
@@ -714,15 +711,15 @@ wxDCImpl::DoDrawPolyPolygon(int n,
 
     {
         wxDCPenChanger setTransp(*m_owner, *wxTRANSPARENT_PEN);
-        DoDrawPolygon(j, pts, xoffset, yoffset, fillStyle);
+        DoDrawPolygon(j, pts.get(), xoffset, yoffset, fillStyle);
     }
 
     for (i = j = 0; i < n; i++)
     {
-        DoDrawLines(count[i], pts+j, xoffset, yoffset);
+        // FIXME: Pointer arithmetic 
+        DoDrawLines(count[i], pts.get()+j, xoffset, yoffset);
         j += count[i];
     }
-    delete[] pts;
 }
 
 #if wxUSE_SPLINES

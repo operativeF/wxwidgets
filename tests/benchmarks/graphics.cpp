@@ -857,7 +857,7 @@ class GraphicsBenchmarkApp : public wxApp
 public:
     virtual void OnInitCmdLine(wxCmdLineParser& parser)
     {
-        static const wxCmdLineEntryDesc desc[] =
+        static constexpr wxCmdLineEntryDesc desc[] =
         {
             { wxCMD_LINE_SWITCH, "",  "bitmaps" },
             { wxCMD_LINE_SWITCH, "",  "images" },

@@ -72,7 +72,7 @@ private:
 
 strStream::strStream()
 {
-    static const size_t LEN = 256;
+    static constexpr size_t LEN = 256;
     m_str.reserve(LEN);
     for ( size_t n = 0; n < LEN; n++ )
     {

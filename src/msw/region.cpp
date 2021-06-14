@@ -316,7 +316,6 @@ WXHRGN wxRegion::GetHRGN() const
 
 wxRegionIterator::~wxRegionIterator()
 {
-    delete [] m_rects;
 }
 
 // Initialize iterator for region
@@ -330,19 +329,18 @@ wxRegionIterator& wxRegionIterator::operator=(const wxRegionIterator& ri)
     if (this == &ri)
         return *this;
 
-    delete [] m_rects;
-
     m_current = ri.m_current;
     m_numRects = ri.m_numRects;
     if ( m_numRects )
     {
-        m_rects = new wxRect[m_numRects];
+        m_rects.reset(new wxRect[m_numRects]);
+
         for ( long n = 0; n < m_numRects; n++ )
             m_rects[n] = ri.m_rects[n];
     }
     else
     {
-        m_rects = nullptr;
+        m_rects.reset();
     }
 
     return *this;
@@ -358,19 +356,21 @@ void wxRegionIterator::Reset(const wxRegion& region)
     m_current = 0;
     m_region = region;
 
-    wxDELETEA(m_rects);
-
     if (m_region.Empty())
+    {
+        m_rects.reset();
         m_numRects = 0;
+    }
     else
     {
         DWORD noBytes = ::GetRegionData(((wxRegionRefData*)region.m_refData)->m_region, 0, nullptr);
+        
         RGNDATA *rgnData = (RGNDATA*) new char[noBytes];
         ::GetRegionData(((wxRegionRefData*)region.m_refData)->m_region, noBytes, rgnData);
 
         RGNDATAHEADER* header = (RGNDATAHEADER*) rgnData;
 
-        m_rects = new wxRect[header->nCount];
+        m_rects.reset(new wxRect[header->nCount]);
 
         RECT* rect = (RECT*) ((char*)rgnData + sizeof(RGNDATAHEADER));
         for (size_t i = 0; i < header->nCount; i++)

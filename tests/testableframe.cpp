@@ -63,7 +63,7 @@ EventCounter::~EventCounter()
 
 bool EventCounter::WaitEvent(int timeInMs)
 {
-    static const int SINGLE_WAIT_DURATION = 50;
+    static constexpr int SINGLE_WAIT_DURATION = 50;
 
     for ( int i = 0; i < timeInMs / SINGLE_WAIT_DURATION; ++i )
     {

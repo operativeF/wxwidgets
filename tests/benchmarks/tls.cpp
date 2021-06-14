@@ -35,7 +35,7 @@
 #endif
 
 
-static const int NUM_ITER = 1000;
+static constexpr int NUM_ITER = 1000;
 
 // this is just a baseline
 BENCHMARK_FUNC(DummyTLS)

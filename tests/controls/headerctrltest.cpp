@@ -106,7 +106,7 @@ void HeaderCtrlTestCase::BestSize()
 
 void HeaderCtrlTestCase::Reorder()
 {
-    static const int COL_COUNT = 4;
+    static constexpr int COL_COUNT = 4;
 
     int n;
 

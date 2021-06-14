@@ -196,7 +196,7 @@ void TextStreamTestCase::TestULongLong()
 
 #endif // wxUSE_LONGLONG
 
-static const wchar_t txtWchar[4] =
+static constexpr wchar_t txtWchar[4] =
 {
     0x0041, // LATIN CAPITAL LETTER A
     0x0100, // A WITH BREVE, LATIN SMALL LETTER
@@ -204,28 +204,28 @@ static const wchar_t txtWchar[4] =
     0x0100, // A WITH BREVE, LATIN SMALL LETTER
 };
 
-static const unsigned char txtUtf8[6] =
+static constexpr unsigned char txtUtf8[6] =
 {
     0x41, 0xc4, 0x80, 0x41, 0xc4, 0x80,
 };
 
-static const unsigned char txtUtf16le[8] =
+static constexpr unsigned char txtUtf16le[8] =
 {
     0x41, 0x00, 0x00, 0x01, 0x41, 0x00, 0x00, 0x01,
 };
 
-static const unsigned char txtUtf16be[8] =
+static constexpr unsigned char txtUtf16be[8] =
 {
     0x00, 0x41, 0x01, 0x00, 0x00, 0x41, 0x01, 0x00,
 };
 
-static const unsigned char txtUtf32le[16] =
+static constexpr unsigned char txtUtf32le[16] =
 {
     0x41, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00,
     0x41, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00,
 };
 
-static const unsigned char txtUtf32be[16] =
+static constexpr unsigned char txtUtf32be[16] =
 {
     0x00, 0x00, 0x00, 0x41, 0x00, 0x00, 0x01, 0x00,
     0x00, 0x00, 0x00, 0x41, 0x00, 0x00, 0x01, 0x00,

@@ -93,7 +93,7 @@ private:
     long     m_current {0};
     long     m_numRects {0};
     wxRegion m_region;
-    wxRect*  m_rects {nullptr};
+    std::unique_ptr<wxRect[]>  m_rects;
 
     wxDECLARE_DYNAMIC_CLASS(wxRegionIterator);
 };

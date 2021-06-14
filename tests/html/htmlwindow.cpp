@@ -84,7 +84,7 @@ void HtmlWindowTestCase::tearDown()
 // tests themselves
 // ----------------------------------------------------------------------------
 
-static const char *TEST_MARKUP =
+static constexpr char TEST_MARKUP[] =
     "<html><body>"
     "<title>Page</title>"
     "  Title<p>"
@@ -92,12 +92,12 @@ static const char *TEST_MARKUP =
     "  and the last line."
     "</body></html>";
 
-static const char *TEST_MARKUP_LINK =
+static constexpr char TEST_MARKUP_LINK[] =
     "<html><body>"
     "<a href=\"link\">link<\\a> "
     "</body></html>";
 
-static const char *TEST_PLAIN_TEXT =
+static constexpr char TEST_PLAIN_TEXT[] =
     "Title\nA longer line\nand the last line.";
 
 void HtmlWindowTestCase::SelectionToText()

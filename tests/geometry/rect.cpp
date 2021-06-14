@@ -81,7 +81,7 @@ void RectTestCase::InflateDeflate()
 void RectTestCase::Operators()
 {
     // test + operator which works like Union but does not ignore empty rectangles
-    static const struct RectData
+    static constexpr struct RectData
     {
         int x1, y1, w1, h1;
         int x2, y2, w2, h2;
@@ -125,7 +125,7 @@ void RectTestCase::Operators()
 
 void RectTestCase::Union()
 {
-    static const struct RectData
+    static constexpr struct RectData
     {
         int x1, y1, w1, h1;
         int x2, y2, w2, h2;

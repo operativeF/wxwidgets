@@ -144,7 +144,8 @@ void StopWatchTestCase::RestartBug()
     sw.Pause();
 
     // Calling Start() should resume the stopwatch if it was paused.
-    static const int offset = 5000;
+    static constexpr int offset = 5000;
+    
     sw.Start(offset);
     wxMilliSleep(sleepTime);
 
