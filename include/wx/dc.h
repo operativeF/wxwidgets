@@ -221,6 +221,7 @@ public:
       const wxPoint ptDev = LogicalToDevice(x, y);
       x = ptDev.x;
       y = ptDev.y;
+
       if ( m_isBBoxValid )
       {
          if ( x < m_minX ) m_minX = x;
@@ -238,6 +239,7 @@ public:
          m_maxY = y;
       }
     }
+    
     void ResetBoundingBox()
     {
         m_isBBoxValid = false;

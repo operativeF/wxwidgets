@@ -324,7 +324,7 @@ public:
         DoSetSpacer(wxSize(width, height));
     }
 
-    wxSizerItem();
+    wxSizerItem() = default;
     ~wxSizerItem() override;
 
    wxSizerItem(const wxSizerItem&) = delete;
