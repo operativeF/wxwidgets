@@ -207,27 +207,16 @@ public:
 #endif
 
 private:
-    static bool m_initialized;
-    static bool m_hasDirect2DSupport;
-    static wxD2DVersion m_D2DRuntimeVersion;
+    inline static bool m_initialized{false};
+    inline static bool m_hasDirect2DSupport{false};
+    inline static wxD2DVersion m_D2DRuntimeVersion{wxD2D_VERSION_NONE};
 
-    static wxDynamicLibrary m_dllDirect2d;
-    static wxDynamicLibrary m_dllDirectWrite;
+    inline static wxDynamicLibrary m_dllDirect2d{};
+    inline static wxDynamicLibrary m_dllDirectWrite;
 #if wxD2D_DEVICE_CONTEXT_SUPPORTED
-    static wxDynamicLibrary m_dllDirect3d;
+    inline static wxDynamicLibrary m_dllDirect3d{};
 #endif
 };
-
-// define the members
-bool wxDirect2D::m_initialized = false;
-bool wxDirect2D::m_hasDirect2DSupport = false;
-wxDirect2D::wxD2DVersion wxDirect2D::m_D2DRuntimeVersion = wxD2D_VERSION_NONE;
-
-wxDynamicLibrary wxDirect2D::m_dllDirect2d;
-wxDynamicLibrary wxDirect2D::m_dllDirectWrite;
-#if wxD2D_DEVICE_CONTEXT_SUPPORTED
-wxDynamicLibrary wxDirect2D::m_dllDirect3d;
-#endif
 
 // define the (not yet imported) functions
 wxDirect2D::D2D1CreateFactory_t wxDirect2D::D2D1CreateFactory = nullptr;

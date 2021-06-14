@@ -314,7 +314,7 @@ void wxComboCtrl::OnPaintEvent( wxPaintEvent& WXUNUSED(event) )
     // TODO: Convert drawing in this function to Windows API Code
 
     wxSize sz = GetClientSize();
-    wxDC* dcPtr = wxAutoBufferedPaintDCFactory(this);
+    std::unique_ptr<wxDC> dcPtr(wxAutoBufferedPaintDCFactory(this));
     wxDC& dc = *dcPtr;
 
     const wxRect& rectButton = m_btnArea;
@@ -515,12 +515,10 @@ void wxComboCtrl::OnPaintEvent( wxPaintEvent& WXUNUSED(event) )
 
         dc.SetClippingRegion(rectTextField);
         if ( m_popupInterface )
-            m_popupInterface->PaintComboControl(dc,rectTextField);
+            m_popupInterface->PaintComboControl(dc, rectTextField);
         else
-            wxComboPopup::DefaultPaintComboControl(this,dc,rectTextField);
+            wxComboPopup::DefaultPaintComboControl(this, dc, rectTextField);
     }
-
-    delete dcPtr;
 }
 
 void wxComboCtrl::OnMouseEvent( wxMouseEvent& event )

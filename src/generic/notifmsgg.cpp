@@ -97,11 +97,11 @@ private:
 
     void PrepareNotificationControl(wxWindow* ctrl, bool handleClick = true);
 
-    static wxPoint ms_presentationPos;
+    inline static wxPoint ms_presentationPos{wxDefaultPosition};
 
-    static int ms_presentationDirection;
+    inline static int ms_presentationDirection{0};
 
-    static std::vector<wxNotificationMessageWindow*> ms_visibleNotifications;
+    inline static std::vector<wxNotificationMessageWindow*> ms_visibleNotifications;
 
     static void AddVisibleNotification(wxNotificationMessageWindow* notif);
 
@@ -112,9 +112,6 @@ private:
     wxDECLARE_EVENT_TABLE();
 };
 
-int wxNotificationMessageWindow::ms_presentationDirection = 0;
-wxPoint wxNotificationMessageWindow::ms_presentationPos = wxDefaultPosition;
-
 // ============================================================================
 // wxNotificationMessageWindow implementation
 // ============================================================================
@@ -124,8 +121,6 @@ wxBEGIN_EVENT_TABLE(wxNotificationMessageWindow, wxFrame)
 
     EVT_TIMER(wxID_ANY, wxNotificationMessageWindow::OnTimer)
 wxEND_EVENT_TABLE()
-
-std::vector<wxNotificationMessageWindow*> wxNotificationMessageWindow::ms_visibleNotifications;
 
 wxNotificationMessageWindow::wxNotificationMessageWindow(wxGenericNotificationMessageImpl* notificationImpl)
     : wxFrame(nullptr, wxID_ANY, _("Notice"),
