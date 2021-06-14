@@ -191,7 +191,7 @@ wxFontMapper::CharsetToEncoding(const wxString& charset, bool interactive)
         // the list of choices
         const size_t count = GetSupportedEncodingsCount();
 
-        wxString *encodingNamesTranslated = new wxString[count];
+        std::unique_ptr<wxString[]> encodingNamesTranslated(new wxString[count]);
 
         for ( size_t i = 0; i < count; i++ )
         {
@@ -206,10 +206,8 @@ wxFontMapper::CharsetToEncoding(const wxString& charset, bool interactive)
         // do ask the user and get back the index in encodings table
         const int n = wxGetSingleChoiceIndex(msg, title,
                                        count,
-                                       encodingNamesTranslated,
+                                       encodingNamesTranslated.get(),
                                        parent);
-
-        delete [] encodingNamesTranslated;
 
         if ( n != -1 )
         {

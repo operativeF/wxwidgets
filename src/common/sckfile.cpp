@@ -29,12 +29,9 @@
 wxIMPLEMENT_DYNAMIC_CLASS(wxFileProto, wxProtocol);
 IMPLEMENT_PROTOCOL(wxFileProto, wxT("file"), NULL, false)
 
-wxFileProto::wxFileProto()
-            
-= default;
+wxFileProto::wxFileProto() = default;
 
-wxFileProto::~wxFileProto()
-= default;
+wxFileProto::~wxFileProto() = default;
 
 wxInputStream *wxFileProto::GetInputStream(const wxString& path)
 {

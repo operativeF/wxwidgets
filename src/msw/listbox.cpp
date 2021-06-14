@@ -383,10 +383,10 @@ int wxListBox::GetSelections(std::vector<int>& aSelections) const
         }
         else if ( countSel != 0 )
         {
-            int *selections = new int[countSel];
+            std::unique_ptr<int[]> selections(new int[countSel]);
 
             if ( ListBox_GetSelItems(GetHwnd(),
-                                     countSel, selections) == LB_ERR )
+                                     countSel, selections.get()) == LB_ERR )
             {
                 wxLogDebug(wxT("ListBox_GetSelItems failed"));
                 countSel = -1;
@@ -397,8 +397,6 @@ int wxListBox::GetSelections(std::vector<int>& aSelections) const
                 for ( int n = 0; n < countSel; n++ )
                     aSelections.push_back(selections[n]);
             }
-
-            delete [] selections;
         }
 
         return countSel;
