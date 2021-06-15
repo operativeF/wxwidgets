@@ -1280,8 +1280,8 @@ bool wxFileName::Mkdir( const wxString& dir, int perm, int flags )
         }
 
         wxArrayString dirs = filename.GetDirs();
-        size_t count = dirs.GetCount();
-        for ( size_t i = 0; i < count; i++ )
+
+        for ( size_t i = 0; i < dirs.GetCount(); i++ )
         {
             if ( i > 0 || filename.IsAbsolute() )
                 currPath += wxFILE_SEP_PATH;

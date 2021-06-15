@@ -89,16 +89,18 @@ namespace
 
 #if wxUSE_LOG_TRACE
 
+// TODO: Use span / string_view
 void LogTraceArray(const char *prefix, const wxArrayString& arr)
 {
     wxLogTrace(TRACE_I18N, "%s: [%s]", prefix, wxJoin(arr, ','));
 }
 
+// TODO: Use span / string_view
 void LogTraceLargeArray(const wxString& prefix, const wxArrayString& arr)
 {
     wxLogTrace(TRACE_I18N, "%s:", prefix);
-    for ( wxArrayString::const_iterator i = arr.begin(); i != arr.end(); ++i )
-        wxLogTrace(TRACE_I18N, "    %s", *i);
+    for ( const auto& i : arr )
+        wxLogTrace(TRACE_I18N, "    %s", i);
 }
 
 #else // !wxUSE_LOG_TRACE

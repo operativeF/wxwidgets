@@ -663,6 +663,7 @@ wxMimeTypesManager::GetFileTypeFromMimeType(const wxString& mimeType)
     return ft;
 }
 
+// TODO: Null ptr check / reference
 void wxMimeTypesManager::AddFallbacks(const wxFileTypeInfo *filetypes)
 {
     EnsureImpl();
@@ -671,6 +672,7 @@ void wxMimeTypesManager::AddFallbacks(const wxFileTypeInfo *filetypes)
     }
 }
 
+// TODO: Return vector
 size_t wxMimeTypesManager::EnumAllFileTypes(wxArrayString& mimetypes)
 {
     EnsureImpl();

@@ -647,17 +647,14 @@ void wxLog::ClearTraceMasks()
     TraceMasks().Clear();
 }
 
+// TODO: std::find
 /*static*/ bool wxLog::IsAllowedTraceMask(const wxString& mask)
 {
     wxCRIT_SECT_LOCKER(lock, GetTraceMaskCS());
 
-    const wxArrayString& masks = GetTraceMasks();
-    for ( wxArrayString::const_iterator it = masks.begin(),
-                                        en = masks.end();
-          it != en;
-          ++it )
+    for ( const auto& tMask : GetTraceMasks() )
     {
-        if ( *it == mask)
+        if (tMask == mask)
             return true;
     }
 

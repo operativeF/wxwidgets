@@ -122,6 +122,7 @@ void wxItemContainer::Delete(unsigned int pos)
 //
 // ----------------------------------------------------------------------------
 
+// TODO: Use a span
 int wxItemContainer::DoInsertItemsInLoop(const wxArrayStringsAdapter& items,
                                          unsigned int pos,
                                          void **clientData,
@@ -129,8 +130,8 @@ int wxItemContainer::DoInsertItemsInLoop(const wxArrayStringsAdapter& items,
 {
     int n = wxNOT_FOUND;
 
-    const unsigned int count = items.GetCount();
-    for ( unsigned int i = 0; i < count; ++i )
+    // TODO: Use algorithm
+    for ( unsigned int i = 0; i < items.GetCount(); ++i )
     {
         n = DoInsertOneItem(items[i], pos++);
         if ( n == wxNOT_FOUND )

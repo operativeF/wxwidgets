@@ -226,6 +226,7 @@ void wxTextValidator::AddCharExcludes(const wxString& chars)
     m_charExcludes += chars;
 }
 
+// TODO: Use a span.
 void wxTextValidator::SetIncludes(const wxArrayString& includes)
 {
     // preserve compatibily with versions prior 3.1.3 which used m_includes
@@ -249,6 +250,7 @@ void wxTextValidator::AddInclude(const wxString& include)
     m_includes.push_back(include);
 }
 
+// TODO: Use a span
 void wxTextValidator::SetExcludes(const wxArrayString& excludes)
 {
     // preserve compatibily with versions prior 3.1.3 which used m_excludes
