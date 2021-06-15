@@ -727,7 +727,8 @@ bool wxRegKey::DeleteSelf()
     bCont = GetNextKey(strKey, lIndex);
   }
 
-  for ( size_t nKey = 0; nKey < astrSubkeys.Count(); nKey++ ) {
+  size_t nKeyCount = astrSubkeys.Count();
+  for ( size_t nKey = 0; nKey < nKeyCount; nKey++ ) {
     wxRegKey key(*this, astrSubkeys[nKey]);
     if ( !key.DeleteSelf() )
       return false;

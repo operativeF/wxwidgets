@@ -155,12 +155,13 @@ bool wxTopLevelWindowBase::IsLastBeforeExit() const
     if ( GetParent() && !GetParent()->IsBeingDeleted() )
         return false;
 
+    wxWindowList::const_iterator i;
     const wxWindowList::const_iterator end = wxTopLevelWindows.end();
 
     // then decide whether we should exit at all
-    for ( auto i : wxTopLevelWindows )
+    for ( i = wxTopLevelWindows.begin(); i != end; ++i )
     {
-        wxTopLevelWindow * const win = static_cast<wxTopLevelWindow *>(i);
+        wxTopLevelWindow * const win = static_cast<wxTopLevelWindow *>(*i);
         if ( win->ShouldPreventAppExit() )
         {
             // there remains at least one important TLW, don't exit
@@ -169,9 +170,10 @@ bool wxTopLevelWindowBase::IsLastBeforeExit() const
     }
 
     // if yes, close all the other windows: this could still fail
-    for ( auto win : wxTopLevelWindows )
+    for ( i = wxTopLevelWindows.begin(); i != end; ++i )
     {
         // don't close twice the windows which are already marked for deletion
+        wxTopLevelWindow * const win = static_cast<wxTopLevelWindow *>(*i);
         if ( !wxPendingDelete.Member(win) && !win->Close() )
         {
             // one of the windows refused to close, don't exit

@@ -168,7 +168,8 @@ bool wxTextFile::OnWrite(wxTextFileType typeNew, const wxMBConv& conv)
     wxString chunk;
     chunk.reserve(chunk_size);
 
-    for ( size_t n = 0; n < GetLineCount(); n++ )
+    const size_t nCount = GetLineCount();
+    for ( size_t n = 0; n < nCount; n++ )
     {
         chunk += GetLine(n) +
                   GetEOL(typeNew == wxTextFileType_None ? GetLineType(n)

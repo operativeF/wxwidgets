@@ -1697,14 +1697,12 @@ void wxFlexGridSizer::RepositionChildren(const wxSize& minSize)
 }
 
 // helper function used in CalcMin() to sum up the sizes of non-hidden items
-// TODO: Use span.
 static int SumArraySizes(const std::vector<int>& sizes, int gap)
 {
     // Sum total minimum size, including gaps between rows/columns.
     // -1 is used as a magic number meaning empty row/column.
     int total = 0;
 
-    // TODO: Algorithm
     const size_t count = sizes.size();
     for ( size_t n = 0; n < count; n++ )
     {
@@ -1723,7 +1721,6 @@ static int SumArraySizes(const std::vector<int>& sizes, int gap)
 wxSize wxFlexGridSizer::FindWidthsAndHeights(int WXUNUSED(nrows), int ncols)
 {
     // n is the index of the item in left-to-right top-to-bottom order
-    // TODO: Min max algorithm
     size_t n = 0;
     for ( wxSizerItemList::iterator i = m_children.begin();
           i != m_children.end();
@@ -1798,17 +1795,17 @@ void wxFlexGridSizer::AdjustForFlexDirection()
         const size_t count = array.size();
 
         // find the largest value in this array
+        size_t n;
         int largest = 0;
 
-        // TODO: Algorithm
-        for ( size_t n = 0; n < count; ++n )
+        for ( n = 0; n < count; ++n )
         {
             if ( array[n] > largest )
                 largest = array[n];
         }
 
         // and now fill it with the largest value
-        for ( size_t n = 0; n < count; ++n )
+        for ( n = 0; n < count; ++n )
         {
             // don't touch hidden rows
             if ( array[n] != -1 )
@@ -1908,7 +1905,6 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
         {
             int nrows = CalcRows();
 
-            // TODO: Remove this and make sure it doesn't happen through other means.
             for ( size_t n = 0; n < m_growableRows.size(); n++ )
             {
                 wxASSERT_MSG( m_growableRows[n] < nrows,
@@ -1920,7 +1916,6 @@ void wxFlexGridSizer::AdjustForGrowables(const wxSize& sz, const wxSize& minSize
         {
             int ncols = CalcCols();
 
-            // TODO: Remove this and make sure it doesn't happen through other means.
             for ( size_t n = 0; n < m_growableCols.size(); n++ )
             {
                 wxASSERT_MSG( m_growableCols[n] < ncols,

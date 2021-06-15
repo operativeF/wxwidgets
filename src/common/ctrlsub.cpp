@@ -66,9 +66,11 @@ bool wxItemContainerImmutable::SetStringSelection(const wxString& s)
 
 std::vector<wxString> wxItemContainerImmutable::GetStrings() const
 {
-    std::vector<wxString> result(GetCount());
+    std::vector<wxString> result;
 
-    for ( unsigned int n = 0; n < result.size(); n++ )
+    const unsigned int count = GetCount();
+    result.reserve(count);
+    for ( unsigned int n = 0; n < count; n++ )
         result.push_back(GetString(n));
 
     return result;
@@ -91,7 +93,8 @@ void wxItemContainer::Clear()
 {
     if ( HasClientObjectData() )
     {
-        for ( unsigned i = 0; i < GetCount(); ++i )
+        const unsigned count = GetCount();
+        for ( unsigned i = 0; i < count; ++i )
             ResetItemClientObject(i);
     }
 

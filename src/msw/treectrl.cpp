@@ -1673,7 +1673,8 @@ void wxTreeCtrl::DeleteChildren(const wxTreeItemId& item)
         child = GetNextChild(item, cookie);
     }
 
-    for ( size_t n = 0; n < children.Count(); n++ )
+    size_t nCount = children.Count();
+    for ( size_t n = 0; n < nCount; n++ )
     {
         Delete(children[n]);
     }

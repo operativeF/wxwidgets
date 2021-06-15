@@ -209,10 +209,11 @@ std::vector<int> wxStatusBarBase::CalculateAbsWidths(wxCoord widthTotal) const
     {
         // calculate the total width of all the fixed width fields and the
         // total number of var field widths counting with multiplicity
-        size_t nTotalWidth = 0;
-        size_t nVarCount = 0;
+        size_t nTotalWidth = 0,
+            nVarCount = 0,
+            i;
 
-        for (size_t i = 0; i < m_panes.GetCount(); i++ )
+        for ( i = 0; i < m_panes.GetCount(); i++ )
         {
             if ( m_panes[i].GetWidth() >= 0 )
                 nTotalWidth += m_panes[i].GetWidth();
@@ -224,7 +225,7 @@ std::vector<int> wxStatusBarBase::CalculateAbsWidths(wxCoord widthTotal) const
         int widthExtra = widthTotal - nTotalWidth;
 
         // do fill the array
-        for (size_t i = 0; i < m_panes.GetCount(); i++ )
+        for ( i = 0; i < m_panes.GetCount(); i++ )
         {
             if ( m_panes[i].GetWidth() >= 0 )
                 widths.push_back(m_panes[i].GetWidth());

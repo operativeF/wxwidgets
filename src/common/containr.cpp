@@ -56,11 +56,16 @@ bool wxControlContainerBase::UpdateCanFocusChildren()
     return acceptsFocusChildren;
 }
 
-// TODO: Algorithm
 bool wxControlContainerBase::HasAnyFocusableChildren() const
 {
-    for ( const auto& child : m_winParent->GetChildren())
+    const wxWindowList& children = m_winParent->GetChildren();
+    for ( wxWindowList::const_iterator i = children.begin(),
+                                     end = children.end();
+          i != end;
+          ++i )
     {
+        const wxWindow * const child = *i;
+
         if ( !m_winParent->IsClientAreaChild(child) )
             continue;
 
@@ -73,11 +78,16 @@ bool wxControlContainerBase::HasAnyFocusableChildren() const
     return false;
 }
 
-// TODO: Algorithm
 bool wxControlContainerBase::HasAnyChildrenAcceptingFocus() const
 {
-    for ( const auto& child : m_winParent->GetChildren())
+    const wxWindowList& children = m_winParent->GetChildren();
+    for ( wxWindowList::const_iterator i = children.begin(),
+                                     end = children.end();
+          i != end;
+          ++i )
     {
+        const wxWindow * const child = *i;
+
         if ( !m_winParent->IsClientAreaChild(child) )
             continue;
 
@@ -280,8 +290,12 @@ void wxControlContainer::HandleOnNavigationKey( wxNavigationKeyEvent& event )
     {
         // check if we have a unique notebook-like child
         wxWindow *bookctrl = nullptr;
-        for ( const auto& window : children )
+        for ( wxWindowList::const_iterator i = children.begin(),
+                                         end = children.end();
+              i != end;
+              ++i )
         {
+            wxWindow * const window = *i;
             if ( window->HasMultiplePages() )
             {
                 if ( bookctrl )

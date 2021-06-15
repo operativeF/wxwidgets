@@ -51,17 +51,20 @@ void wxStaticBoxBase::WXDestroyWithoutChildren()
 {
     // Notice that we must make a copy of the list as it will be changed by
     // Reparent() calls in the loop.
+    const wxWindowList children = GetChildren();
     wxWindow* const parent = GetParent();
-    for ( const auto& i : GetChildren())
+    for ( wxWindowList::const_iterator i = children.begin();
+          i != children.end();
+          ++i )
     {
         // The label window doesn't count as our child, it's really a part of
         // static box itself and it makes no sense to leave it alive when the
         // box is destroyed, so do it even when it's supposed to be destroyed
         // without destroying its children -- by not reparenting it, we ensure
         // that it's destroyed when this object itself is below.
-        if ( i != m_labelWin )
+        if ( *i != m_labelWin )
         {
-            i->Reparent(parent);
+            (*i)->Reparent(parent);
         }
     }
 
@@ -88,10 +91,13 @@ bool wxStaticBoxBase::Enable(bool enable)
 
         m_areChildrenEnabled = enable;
 
-        for ( const auto& i : GetChildren() )
+        const wxWindowList& children = GetChildren();
+        for ( wxWindowList::const_iterator i = children.begin();
+              i != children.end();
+              ++i )
         {
-            if ( i != m_labelWin )
-                i->Enable(enable);
+            if ( *i != m_labelWin )
+                (*i)->Enable(enable);
         }
 
         return true;
