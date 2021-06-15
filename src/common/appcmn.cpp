@@ -230,7 +230,7 @@ void wxAppBase::OnInitCmdLine(wxCmdLineParser& parser)
     wxAppConsole::OnInitCmdLine(parser);
 
     // the standard command line options
-    static const wxCmdLineEntryDesc cmdLineGUIDesc[] =
+    static constexpr wxCmdLineEntryDesc cmdLineGUIDesc[] =
     {
 #ifdef __WXUNIVERSAL__
         {

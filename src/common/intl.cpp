@@ -1819,7 +1819,7 @@ wxString GetDateFormatFromLangInfo(wxLocaleInfo index)
 #ifdef HAVE_LANGINFO_H
     // array containing parameters for nl_langinfo() indexes by offset of index
     // from wxLOCALE_SHORT_DATE_FMT
-    static const nl_item items[] =
+    static constexpr nl_item items[] =
     {
         D_FMT, D_T_FMT, D_T_FMT, T_FMT,
     };

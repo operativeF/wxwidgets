@@ -51,7 +51,7 @@
 // ----------------------------------------------------------------------------
 
 // encodings supported by GetEncodingDescription
-static const wxFontEncoding gs_encodings[] =
+static constexpr wxFontEncoding gs_encodings[] =
 {
     wxFONTENCODING_ISO8859_1,
     wxFONTENCODING_ISO8859_2,

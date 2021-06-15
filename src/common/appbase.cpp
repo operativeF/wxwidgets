@@ -746,7 +746,7 @@ static constexpr char OPTION_VERBOSE[] = "verbose";
 void wxAppConsoleBase::OnInitCmdLine(wxCmdLineParser& parser)
 {
     // the standard command line options
-    static const wxCmdLineEntryDesc cmdLineDesc[] =
+    static constexpr wxCmdLineEntryDesc cmdLineDesc[] =
     {
         {
             wxCMD_LINE_SWITCH,

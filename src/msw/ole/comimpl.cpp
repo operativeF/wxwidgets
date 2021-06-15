@@ -60,7 +60,7 @@ static wxString GetIidName(REFIID riid)
   // construct the table containing all known interfaces
   #define ADD_KNOWN_IID(name) { &IID_I##name, wxT(#name) }
 
-  static const KNOWN_IID aKnownIids[] = {
+  static constexpr KNOWN_IID aKnownIids[] = {
     ADD_KNOWN_IID(AdviseSink),
     ADD_KNOWN_IID(AdviseSink2),
     ADD_KNOWN_IID(BindCtx),

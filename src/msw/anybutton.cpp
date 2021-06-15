@@ -1153,7 +1153,7 @@ void DrawXPBackground(wxAnyButton *button, HDC hdc, RECT& rectBtn, UINT state)
 
     // this array is indexed by wxAnyButton::State values and so must be kept in
     // sync with it
-    static const int uxStates[] =
+    static constexpr int uxStates[] =
     {
         PBS_NORMAL, PBS_HOT, PBS_PRESSED, PBS_DISABLED, PBS_DEFAULTED
     };

@@ -371,7 +371,7 @@ void wxIOCPThread::SendEvent(wxFileSystemWatcherEvent& evt)
 
 int wxIOCPThread::Native2WatcherFlags(int flags)
 {
-    static const int flag_mapping[][2] = {
+    static constexpr int flag_mapping[][2] = {
         { FILE_ACTION_ADDED,            wxFSW_EVENT_CREATE },
         { FILE_ACTION_REMOVED,          wxFSW_EVENT_DELETE },
 

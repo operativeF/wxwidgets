@@ -260,7 +260,7 @@ typedef struct
 
 #define myRGB(r,g,b)   ((wxUint32)r<<16|(wxUint32)g<<8|(wxUint32)b)
 
-static const rgbRecord theRGBRecords[] =
+static constexpr rgbRecord theRGBRecords[] =
 {
     {"aliceblue", myRGB(240, 248, 255)},
     {"antiquewhite", myRGB(250, 235, 215)},
