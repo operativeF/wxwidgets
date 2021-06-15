@@ -469,12 +469,12 @@ void wxCmdLineParserData::SetArguments(const wxString& cmdLine)
     WX_APPEND_ARRAY(m_arguments, args);
 }
 
+// TODO: Find algorithm
 int wxCmdLineParserData::FindOption(const wxString& name)
 {
     if ( !name.empty() )
     {
-        const size_t count = m_options.GetCount();
-        for ( size_t n = 0; n < count; n++ )
+        for ( size_t n = 0; n < m_options.GetCount(); n++ )
         {
             if ( m_options[n].shortName == name )
             {
@@ -487,10 +487,10 @@ int wxCmdLineParserData::FindOption(const wxString& name)
     return wxNOT_FOUND;
 }
 
+// TODO: Find algorithm
 int wxCmdLineParserData::FindOptionByLongName(const wxString& name)
 {
-    const size_t count = m_options.GetCount();
-    for ( size_t n = 0; n < count; n++ )
+    for ( size_t n = 0; n < m_options.GetCount(); n++ )
     {
         if ( m_options[n].longName == name )
         {

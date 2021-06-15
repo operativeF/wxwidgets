@@ -38,13 +38,13 @@
 
 static bool wxIsNumeric(const wxString& val)
 {
-    for ( wxString::const_iterator i = val.begin(); i != val.end(); ++i )
+    for ( const auto& i : val )
     {
         // Allow for "," (French) as well as "." -- in future we should
         // use wxSystemSettings or other to do better localisation
-        if ((!wxIsdigit(*i)) &&
-            (*i != wxS('.')) && (*i != wxS(',')) && (*i != wxS('e')) &&
-            (*i != wxS('E')) && (*i != wxS('+')) && (*i != wxS('-')))
+        if ((!wxIsdigit(i)) &&
+            (i != wxS('.')) && (i != wxS(',')) && (i != wxS('e')) &&
+            (i != wxS('E')) && (i != wxS('+')) && (i != wxS('-')))
             return false;
     }
     return true;
@@ -178,6 +178,7 @@ bool wxTextValidator::TransferFromWindow()
     return true;
 }
 
+// TODO: string_view
 wxString wxTextValidator::IsValid(const wxString& str) const
 {
     if ( HasFlag(wxFILTER_EMPTY) && str.empty() )
@@ -188,10 +189,9 @@ wxString wxTextValidator::IsValid(const wxString& str) const
         return wxString::Format(_("'%s' is not one of the valid strings"), str);
 
     // check the whole string for invalid chars.
-    for ( wxString::const_iterator i = str.begin(), end = str.end();
-          i != end; ++i )
+    for ( const auto& i : str )
     {
-        if ( !IsValidChar(*i) )
+        if ( !IsValidChar(i) )
         {
             return wxString::Format(
                 _("'%s' contains invalid character(s)"), str);
@@ -233,10 +233,9 @@ void wxTextValidator::SetIncludes(const wxArrayString& includes)
     // to store the list of char includes.
     if ( HasFlag(wxFILTER_INCLUDE_CHAR_LIST) )
     {
-        for ( wxArrayString::const_iterator i = includes.begin(),
-              end = includes.end(); i != end; ++i )
+        for ( const auto& i : includes )
         {
-            AddCharIncludes(*i);
+            AddCharIncludes(i);
         }
 
         return;
@@ -257,10 +256,9 @@ void wxTextValidator::SetExcludes(const wxArrayString& excludes)
     // to store the list of char excludes.
     if ( HasFlag(wxFILTER_EXCLUDE_CHAR_LIST) )
     {
-        for ( wxArrayString::const_iterator i = excludes.begin(),
-              end = excludes.end(); i != end; ++i )
+        for ( const auto& i : excludes )
         {
-            AddCharExcludes(*i);
+            AddCharExcludes(i);
         }
 
         return;
@@ -343,10 +341,9 @@ bool wxTextValidator::IsValidChar(const wxUniChar& c) const
 // kept for compatibility reasons.
 bool wxTextValidator::ContainsOnlyIncludedCharacters(const wxString& str) const
 {
-    for ( wxString::const_iterator i = str.begin(), end = str.end();
-          i != end; ++i )
+    for ( const auto& i : str)
     {
-        if ( !IsCharIncluded(*i) )
+        if ( !IsCharIncluded(i) )
             return false;
     }
 
@@ -356,10 +353,9 @@ bool wxTextValidator::ContainsOnlyIncludedCharacters(const wxString& str) const
 // kept for compatibility reasons.
 bool wxTextValidator::ContainsExcludedCharacters(const wxString& str) const
 {
-    for ( wxString::const_iterator i = str.begin(), end = str.end();
-          i != end; ++i )
+    for ( const auto& i : str )
     {
-        if ( IsCharExcluded(*i) )
+        if ( IsCharExcluded(i) )
             return true;
     }
 

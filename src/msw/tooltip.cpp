@@ -631,11 +631,9 @@ void wxToolTip::DoForAllWindows(void (wxToolTip::*func)(WXHWND))
 
     if ( m_others )
     {
-        for ( wxToolTipOtherWindows::const_iterator it = m_others->begin();
-              it != m_others->end();
-              ++it )
+        for ( auto* it : *m_others )
         {
-            (this->*func)(*it);
+            (this->*func)(it);
         }
     }
 }

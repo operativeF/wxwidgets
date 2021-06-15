@@ -420,8 +420,6 @@ wxGBSizerItem* wxGridBagSizer::FindItemWithData(const wxObject* userData)
 // min size from that.
 wxSize wxGridBagSizer::CalcMin()
 {
-    int idx;
-
     if (m_children.GetCount() == 0)
         return m_emptyCellSize;
 
@@ -447,9 +445,9 @@ wxSize wxGridBagSizer::CalcMin()
 
             // See if this item increases the size of its row(s) or col(s)
             const wxSize size(item->CalcMin());
-            for (idx=pos.GetRow(); idx <= endrow; idx++)
+            for (int idx = pos.GetRow(); idx <= endrow; idx++)
                 m_rowHeights[idx] = wxMax(m_rowHeights[idx], size.y / (endrow-pos.GetRow()+1));
-            for (idx=pos.GetCol(); idx <= endcol; idx++)
+            for (int idx = pos.GetCol(); idx <= endcol; idx++)
                 m_colWidths[idx] = wxMax(m_colWidths[idx], size.x / (endcol-pos.GetCol()+1));
         }
         node = node->GetNext();
@@ -461,12 +459,12 @@ wxSize wxGridBagSizer::CalcMin()
     // Now traverse the heights and widths arrays calcing the totals, including gaps
     int width = 0;
     m_cols = m_colWidths.size();
-    for (idx=0; idx < m_cols; idx++)
+    for (int idx = 0; idx < m_cols; idx++)
         width += m_colWidths[idx] + ( idx == m_cols-1 ? 0 : m_hgap );
 
     int height = 0;
     m_rows = m_rowHeights.size();
-    for (idx=0; idx < m_rows; idx++)
+    for (int idx = 0; idx < m_rows; idx++)
         height += m_rowHeights[idx] + ( idx == m_rows-1 ? 0 : m_vgap );
 
     return wxSize(width, height);
@@ -488,7 +486,7 @@ void wxGridBagSizer::RepositionChildren(const wxSize& minSize)
 
     m_rows = m_rowHeights.size();
     m_cols = m_colWidths.size();
-    int idx, width, height;
+    int width, height;
 
     AdjustForGrowables(sz, minSize);
 
@@ -496,7 +494,7 @@ void wxGridBagSizer::RepositionChildren(const wxSize& minSize)
     std::vector<int> rowpos(m_rows, 0);
 
     int y = pt.y;
-    for (idx=0; idx < m_rows; idx++)
+    for (int idx = 0; idx < m_rows; idx++)
     {
         height = m_rowHeights[idx] + m_vgap;
         rowpos[idx] = y;
@@ -506,7 +504,7 @@ void wxGridBagSizer::RepositionChildren(const wxSize& minSize)
     std::vector<int> colpos(m_cols, 0);
 
     int x = pt.x;
-    for (idx=0; idx < m_cols; idx++)
+    for (int idx = 0; idx < m_cols; idx++)
     {
         width = m_colWidths[idx] + m_hgap;
         colpos[idx] = x;
@@ -527,12 +525,12 @@ void wxGridBagSizer::RepositionChildren(const wxSize& minSize)
             item->GetEndPos(endrow, endcol);
 
             height = 0;
-            for(idx=pos.GetRow(); idx <= endrow; idx++)
+            for(int idx = pos.GetRow(); idx <= endrow; idx++)
                 height += m_rowHeights[idx];
             height += (endrow - pos.GetRow()) * m_vgap; // add a vgap for every row spanned
 
             width = 0;
-            for (idx=pos.GetCol(); idx <= endcol; idx++)
+            for (int idx = pos.GetCol(); idx <= endcol; idx++)
                 width += m_colWidths[idx];
             width += (endcol - pos.GetCol()) * m_hgap; // add a hgap for every col spanned
 

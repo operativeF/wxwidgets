@@ -103,7 +103,7 @@ void wxTextWrapper::Wrap(wxWindow *win, const wxString& text, int widthMax)
     const wxClientDC dc(win);
 
     const std::vector<wxString> full_text = wxSplit(text, '\n', '\0');
-    for ( auto tline : full_text )
+    for ( auto& tline : full_text )
     {
         wxString line = tline;
 

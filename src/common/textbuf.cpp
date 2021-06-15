@@ -73,9 +73,10 @@ wxString wxTextBuffer::Translate(const wxString& text, wxTextFileType type)
     result.Alloc(text.Len());
 
     wxChar chLast = 0;
-    for ( wxString::const_iterator i = text.begin(); i != text.end(); ++i )
+
+    for ( const auto& i : text )
     {
-        wxChar ch = *i;
+        wxChar ch = i;
         switch ( ch ) {
             case wxT('\n'):
                 // Dos/Unix line termination

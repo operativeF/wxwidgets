@@ -140,7 +140,7 @@ wxStatusBar::~wxStatusBar()
 
 #if wxUSE_TOOLTIPS
     // delete existing tooltips
-    for (size_t i=0; i<m_tooltips.size(); i++)
+    for (size_t i=0; i < m_tooltips.size(); i++)
     {
         wxDELETE(m_tooltips[i]);
     }
@@ -591,9 +591,7 @@ wxStatusBar::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
         // resizing. It is possible to send this message to any window.
         if ( wParam == HTBOTTOMRIGHT )
         {
-            wxWindow *win;
-
-            for ( win = GetParent(); win; win = win->GetParent() )
+            for ( wxWindow* win = GetParent(); win; win = win->GetParent() )
             {
                 if ( win->IsTopLevel() )
                 {
@@ -614,7 +612,7 @@ wxStatusBar::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                 HasFlag(wxSTB_ELLIPSIZE_MIDDLE) ||
                     HasFlag(wxSTB_ELLIPSIZE_END) )
         {
-            for (int i=0; i<GetFieldsCount(); i++)
+            for (int i = 0; i < GetFieldsCount(); i++)
             {
                 // re-set the field text, in case we need to ellipsize
                 // (or de-ellipsize) some parts of it

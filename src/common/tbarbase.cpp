@@ -434,11 +434,9 @@ void wxToolBarBase::AdjustToolBitmapSize()
 
     wxSize sizeActual(sizeOrig);
 
-    for ( wxToolBarToolsList::const_iterator i = m_tools.begin();
-          i != m_tools.end();
-          ++i )
+    for ( const auto& i : m_tools )
     {
-        const wxBitmap& bmp = (*i)->GetNormalBitmap();
+        const wxBitmap& bmp = i->GetNormalBitmap();
         if ( bmp.IsOk() )
             sizeActual.IncTo(bmp.GetScaledSize());
     }

@@ -93,8 +93,7 @@ wxFont wxDataViewItemAttr::GetEffectiveFont(const wxFont& font) const
 
 bool wxDataViewModelNotifier::ItemsAdded( const wxDataViewItem &parent, const wxDataViewItemArray &items )
 {
-    size_t count = items.GetCount();
-    for (size_t i = 0; i < count; i++)
+    for (size_t i = 0; i < items.GetCount(); i++)
         if (!ItemAdded( parent, items[i] )) return false;
 
     return true;
@@ -102,9 +101,7 @@ bool wxDataViewModelNotifier::ItemsAdded( const wxDataViewItem &parent, const wx
 
 bool wxDataViewModelNotifier::ItemsDeleted( const wxDataViewItem &parent, const wxDataViewItemArray &items )
 {
-    size_t count = items.GetCount();
-
-    for (size_t i = 0; i < count; i++)
+    for (size_t i = 0; i < items.GetCount(); i++)
         if (!ItemDeleted( parent, items[i] )) return false;
 
     return true;
@@ -112,9 +109,7 @@ bool wxDataViewModelNotifier::ItemsDeleted( const wxDataViewItem &parent, const 
 
 bool wxDataViewModelNotifier::ItemsChanged( const wxDataViewItemArray &items )
 {
-    size_t count = items.GetCount();
-
-    for (size_t i = 0; i < count; i++)
+    for (size_t i = 0; i < items.GetCount(); i++)
         if (!ItemChanged( items[i] )) return false;
 
     return true;
@@ -165,6 +160,7 @@ bool wxDataViewModel::ItemDeleted( const wxDataViewItem &parent, const wxDataVie
     return ret;
 }
 
+// TODO: Algorithm, Find if
 bool wxDataViewModel::ItemChanged( const wxDataViewItem &item )
 {
     bool ret = true;
@@ -240,14 +236,13 @@ bool wxDataViewModel::ValueChanged( const wxDataViewItem &item, unsigned int col
     return ret;
 }
 
+// TODO: Algorithm
 bool wxDataViewModel::Cleared()
 {
     bool ret = true;
 
-    wxDataViewModelNotifiers::iterator iter;
-    for (iter = m_notifiers.begin(); iter != m_notifiers.end(); ++iter)
+    for (auto& notifier : m_notifiers)
     {
-        wxDataViewModelNotifier* notifier = *iter;
         if (!notifier->Cleared())
             ret = false;
     }
@@ -259,10 +254,8 @@ bool wxDataViewModel::BeforeReset()
 {
     bool ret = true;
 
-    wxDataViewModelNotifiers::iterator iter;
-    for (iter = m_notifiers.begin(); iter != m_notifiers.end(); ++iter)
+    for (auto& notifier : m_notifiers)
     {
-        wxDataViewModelNotifier* notifier = *iter;
         if (!notifier->BeforeReset())
             ret = false;
     }
@@ -274,10 +267,8 @@ bool wxDataViewModel::AfterReset()
 {
     bool ret = true;
 
-    wxDataViewModelNotifiers::iterator iter;
-    for (iter = m_notifiers.begin(); iter != m_notifiers.end(); ++iter)
+    for (auto& notifier : m_notifiers)
     {
-        wxDataViewModelNotifier* notifier = *iter;
         if (!notifier->AfterReset())
             ret = false;
     }
@@ -287,10 +278,8 @@ bool wxDataViewModel::AfterReset()
 
 void wxDataViewModel::Resort()
 {
-    wxDataViewModelNotifiers::iterator iter;
-    for (iter = m_notifiers.begin(); iter != m_notifiers.end(); ++iter)
+    for (auto& notifier : m_notifiers)
     {
-        wxDataViewModelNotifier* notifier = *iter;
         notifier->Resort();
     }
 }
@@ -422,7 +411,7 @@ static int my_sort( int *v1, int *v2 )
 wxDataViewIndexListModel::wxDataViewIndexListModel( unsigned int initial_size )
 {
     // build initial index
-    for (unsigned int i = 1; i < initial_size+1; i++)
+    for (unsigned int i = 1; i < initial_size + 1; i++)
             m_hash.Add( wxDataViewItem(wxUIntToPtr(i)) );
     m_nextFreeID = initial_size + 1;
 }

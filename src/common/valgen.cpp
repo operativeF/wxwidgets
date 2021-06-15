@@ -366,13 +366,11 @@ bool wxGenericValidator::TransferToWindow()
         if (m_pArrayInt)
         {
             // clear all selections
-            size_t count = pControl->GetCount();
-            for ( size_t i = 0 ; i < count; i++ )
+            for ( size_t i = 0 ; i < pControl->GetCount(); i++ )
                 pControl->Check(i, false);
 
             // select each item in our array
-            count = m_pArrayInt->size();
-            for ( size_t i = 0 ; i < count; i++ )
+            for ( size_t i = 0 ; i < m_pArrayInt->size(); i++ )
                 pControl->Check(m_pArrayInt->at(i));
 
             return true;
@@ -388,13 +386,11 @@ bool wxGenericValidator::TransferToWindow()
         if (m_pArrayInt)
         {
             // clear all selections
-            size_t count = pControl->GetCount();
-            for ( size_t i = 0 ; i < count; i++ )
+            for ( size_t i = 0 ; i < pControl->GetCount(); i++ )
                 pControl->Deselect(i);
 
             // select each item in our array
-            count = m_pArrayInt->size();
-            for ( size_t i = 0 ; i < count; i++ )
+            for ( size_t i = 0 ; i < m_pArrayInt->size(); i++ )
                 pControl->SetSelection(m_pArrayInt->at(i));
 
             return true;
@@ -643,8 +639,7 @@ bool wxGenericValidator::TransferFromWindow()
             m_pArrayInt->clear();
 
             // add each selected item to our array
-            size_t count = pControl->GetCount();
-            for ( size_t i = 0; i < count; i++ )
+            for ( size_t i = 0; i < pControl->GetCount(); i++ )
             {
                 if (pControl->IsChecked(i))
                     m_pArrayInt->push_back(i);
@@ -666,8 +661,7 @@ bool wxGenericValidator::TransferFromWindow()
             m_pArrayInt->clear();
 
             // add each selected item to our array
-            size_t count = pControl->GetCount();
-            for ( size_t i = 0; i < count; i++ )
+            for ( size_t i = 0; i < pControl->GetCount(); i++ )
             {
                 if (pControl->IsSelected(i))
                     m_pArrayInt->push_back(i);
