@@ -87,7 +87,7 @@ wxString wxFileCtrlEvent::GetFile() const
                   wxT( "Please use GetFiles() to get all files instead of this function" ) );
 
     wxString string;
-    if (m_files.size() != 0)
+    if (!m_files.empty())
         string = m_files[0];
     return string;
 }

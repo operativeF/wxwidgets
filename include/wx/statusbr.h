@@ -94,7 +94,7 @@ private:
     // PushStatusText() call, its top element is the value to restore after the
     // next PopStatusText() call while the currently shown value is always in
     // m_text
-    wxArrayString m_arrStack;
+    std::vector<wxString> m_arrStack;
 
     // is the currently shown value shown with ellipsis in the status bar?
     bool m_bEllipsized;

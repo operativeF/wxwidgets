@@ -1070,7 +1070,7 @@ public:
 
 public:
     std::vector<wxDataViewListStoreLine*> m_data;
-    wxArrayString                      m_cols;
+    std::vector<wxString>                 m_cols;
 };
 
 //-----------------------------------------------------------------------------

@@ -227,7 +227,6 @@ public:
     void SetCmdLine(int argc, const wxCmdLineArgsArray& argv);
     void SetCmdLine(const wxString& cmdline);
 
-    // not virtual, don't use this class polymorphically
     ~wxCmdLineParser();
 
     wxCmdLineParser(const wxCmdLineParser&) = delete;

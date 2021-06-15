@@ -196,10 +196,10 @@ struct wxCmdLineParserData
     wxString m_logo;            // some extra text to show in Usage()
 
     // cmd line data
-    wxArrayString m_arguments;  // == argv, argc == m_arguments.GetCount()
+    std::vector<wxString> m_arguments;  // == argv, argc == m_arguments.GetCount()
     wxArrayOptions m_options;   // all possible options and switches
     wxArrayParams m_paramDesc;  // description of all possible params
-    wxArrayString m_parameters; // all params found
+    std::vector<wxString> m_parameters; // all params found
     wxArrayArgs m_parsedArguments; // all options and parameters in parsing order
 
     // methods
@@ -972,7 +972,7 @@ int wxCmdLineParser::Parse(bool showUsage)
                         // next argument, in fact
                         wxString arg2 = arg[0u];
                         arg2 += arg.Mid(len + 1); // +1 for leading '-'
-
+                        // TODO: Verify this change after changing to std::vector
                         m_data->m_arguments.insert
                             (m_data->m_arguments.begin() + n + 1, arg2);
                         count++;

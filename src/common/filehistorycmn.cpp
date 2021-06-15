@@ -97,9 +97,8 @@ void wxFileHistoryBase::AddFileToHistory(const wxString& file)
     // functions and a string comparison.
     const wxFileName fnNew(file);
     const wxString newFile = NormalizeFileName(fnNew);
-    size_t i,
-           numFiles = m_fileHistory.size();
-    for ( i = 0; i < numFiles; i++ )
+    size_t numFiles = m_fileHistory.size();
+    for ( size_t i = 0; i < numFiles; i++ )
     {
         if ( newFile == NormalizeFileName(m_fileHistory[i]) )
         {
@@ -274,8 +273,7 @@ void wxFileHistoryBase::Load(const wxConfigBase& config)
 
 void wxFileHistoryBase::Save(wxConfigBase& config)
 {
-    size_t i;
-    for (i = 0; i < m_fileMaxFiles; i++)
+    for (size_t i = 0; i < m_fileMaxFiles; i++)
     {
         wxString buf;
         buf.Printf(wxT("file%d"), (int)i+1);

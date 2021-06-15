@@ -1796,7 +1796,7 @@ wxString wxDataViewSpinRenderer::GetAccessibleDescription() const
 
 #if defined(wxHAS_GENERIC_DATAVIEWCTRL)
 
-wxDataViewChoiceRenderer::wxDataViewChoiceRenderer( const wxArrayString& choices, wxDataViewCellMode mode, int alignment ) :
+wxDataViewChoiceRenderer::wxDataViewChoiceRenderer( const std::vector<wxString>& choices, wxDataViewCellMode mode, int alignment ) :
    wxDataViewCustomRenderer(wxT("string"), mode, alignment ),
    m_choices(choices)
 {
@@ -1835,8 +1835,8 @@ wxSize wxDataViewChoiceRenderer::GetSize() const
 {
     wxSize sz;
 
-    for ( wxArrayString::const_iterator i = m_choices.begin(); i != m_choices.end(); ++i )
-        sz.IncTo(GetTextExtent(*i));
+    for ( const auto& choice : m_choices )
+        sz.IncTo(GetTextExtent(choice));
 
     // Allow some space for the right-side button, which is approximately the
     // size of a scrollbar (and getting pixel-exact value would be complicated).
@@ -1870,7 +1870,7 @@ wxString wxDataViewChoiceRenderer::GetAccessibleDescription() const
 // wxDataViewChoiceByIndexRenderer
 // ----------------------------------------------------------------------------
 
-wxDataViewChoiceByIndexRenderer::wxDataViewChoiceByIndexRenderer( const wxArrayString &choices,
+wxDataViewChoiceByIndexRenderer::wxDataViewChoiceByIndexRenderer( const std::vector<wxString>& choices,
                                   wxDataViewCellMode mode, int alignment ) :
       wxDataViewChoiceRenderer( choices, mode, alignment )
 {
@@ -1886,11 +1886,15 @@ wxWindow* wxDataViewChoiceByIndexRenderer::CreateEditorCtrl( wxWindow *parent, w
 
 bool wxDataViewChoiceByIndexRenderer::GetValueFromEditorCtrl( wxWindow* editor, wxVariant &value )
 {
+    // FIXME: Simplify this.
     wxVariant string_value;
     if (!wxDataViewChoiceRenderer::GetValueFromEditorCtrl( editor, string_value ))
         return false;
+    // TODO: Verify this.
+    const auto iter_idx = std::find_if(GetChoices().cbegin(), GetChoices().cend(),
+        [string_value](const auto& choice) { return string_value.GetString().IsSameAs(choice); });
 
-    value = (long) GetChoices().Index( string_value.GetString() );
+    value = static_cast<long>(std::distance(std::cbegin(GetChoices()), iter_idx));
     return true;
 }
 
@@ -1902,11 +1906,15 @@ bool wxDataViewChoiceByIndexRenderer::SetValue( const wxVariant &value )
 
 bool wxDataViewChoiceByIndexRenderer::GetValue( wxVariant &value ) const
 {
+    // FIXME: Simplify this.
     wxVariant string_value;
     if (!wxDataViewChoiceRenderer::GetValue( string_value ))
         return false;
 
-    value = (long) GetChoices().Index( string_value.GetString() );
+    const auto iter_idx = std::find_if(GetChoices().cbegin(), GetChoices().cend(),
+        [string_value](const auto& choice) { return string_value.GetString().IsSameAs(choice); });
+    // TODO: Verify this.
+    value = static_cast<long>(std::distance(std::cbegin(GetChoices()), iter_idx));
     return true;
 }
 
@@ -1916,8 +1924,10 @@ wxString wxDataViewChoiceByIndexRenderer::GetAccessibleDescription() const
     wxVariant strVal;
     if ( wxDataViewChoiceRenderer::GetValue(strVal) )
         return strVal;
+    const auto iter_idx = std::find_if(GetChoices().cbegin(), GetChoices().cend(),
+        [strVal](const auto& choice) { return strVal.GetString().IsSameAs(choice); });
 
-    return wxString::Format(wxS("%li"), (long)GetChoices().Index(strVal.GetString()));
+    return wxString::Format(wxS("%li"), static_cast<long>(std::distance(std::cbegin(GetChoices()), iter_idx)));
 }
 #endif // wxUSE_ACCESSIBILITY
 
@@ -2197,8 +2207,7 @@ wxSize wxDataViewCheckIconTextRenderer::GetCheckSize() const
 // wxDataViewListStore
 //-----------------------------------------------------------------------------
 
-wxDataViewListStore::wxDataViewListStore()
-= default;
+wxDataViewListStore::wxDataViewListStore() = default;
 
 wxDataViewListStore::~wxDataViewListStore()
 {
@@ -2210,22 +2219,22 @@ wxDataViewListStore::~wxDataViewListStore()
 
 void wxDataViewListStore::PrependColumn( const wxString &varianttype )
 {
-    m_cols.Insert( varianttype, 0 );
+    m_cols.insert( std::cbegin(m_cols), varianttype);
 }
 
 void wxDataViewListStore::InsertColumn( unsigned int pos, const wxString &varianttype )
 {
-    m_cols.Insert( varianttype, pos );
+    m_cols.insert( std::cbegin(m_cols) + pos, varianttype );
 }
 
 void wxDataViewListStore::AppendColumn( const wxString &varianttype )
 {
-    m_cols.Add( varianttype );
+    m_cols.push_back( varianttype );
 }
 
 unsigned int wxDataViewListStore::GetColumnCount() const
 {
-    return m_cols.GetCount();
+    return m_cols.size();
 }
 
 unsigned int wxDataViewListStore::GetItemCount() const
@@ -2235,7 +2244,8 @@ unsigned int wxDataViewListStore::GetItemCount() const
 
 wxString wxDataViewListStore::GetColumnType( unsigned int pos ) const
 {
-    return m_cols[pos];
+    // FIXME: Hazardous with [] operator. Should return iterator instead.
+    return m_cols.at(pos);
 }
 
 void wxDataViewListStore::AppendItem( const std::vector<wxVariant> &values, wxUIntPtr data )

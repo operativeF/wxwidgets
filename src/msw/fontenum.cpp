@@ -84,7 +84,7 @@ private:
     std::vector<int> m_charsets;
 
     // the list of facenames we already found while enumerating facenames
-    wxArrayString m_facenames;
+    std::vector<wxString> m_facenames;
 };
 
 // ----------------------------------------------------------------------------
@@ -205,14 +205,14 @@ bool wxFontEnumeratorHelper::OnFont(const LPLOGFONT lf,
         // we can get the same facename twice or more in this case because it
         // may exist in several charsets but we only want to return one copy of
         // it (note that this can't happen for m_charset != DEFAULT_CHARSET)
-        if ( m_facenames.Index(lf->lfFaceName) != wxNOT_FOUND )
+        if(std::find(m_facenames.cbegin(), m_facenames.cend(), lf->lfFaceName) != m_facenames.cend())
         {
             // continue enumeration
             return true;
         }
 
         const_cast<wxFontEnumeratorHelper *>(this)->
-            m_facenames.Add(lf->lfFaceName);
+            m_facenames.push_back(lf->lfFaceName);
     }
 
     return m_fontEnum->OnFacename(lf->lfFaceName);

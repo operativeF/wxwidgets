@@ -381,7 +381,7 @@ bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bo
 {
     HRESULT hr = S_OK;
     wxString path;
-    wxArrayString tempPaths;
+    std::vector<wxString> tempPaths;
 
     if ( multipleSelection )
     {

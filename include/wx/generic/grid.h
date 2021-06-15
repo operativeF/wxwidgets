@@ -1377,7 +1377,7 @@ public:
     wxString GetCornerLabelValue() const override;
 
 private:
-    wxGridStringArray m_data;
+    std::vector<std::vector<wxString>> m_data;
 
     // notice that while we don't need to store the number of our rows as it's
     // always equal to the size of m_data array, we do need to store the number
@@ -1388,8 +1388,8 @@ private:
     // These only get used if you set your own labels, otherwise the
     // GetRow/ColLabelValue functions return wxGridTableBase defaults
     //
-    wxArrayString     m_rowLabels;
-    wxArrayString     m_colLabels;
+    std::vector<wxString>     m_rowLabels;
+    std::vector<wxString>     m_colLabels;
 
     wxString m_cornerLabel;
 

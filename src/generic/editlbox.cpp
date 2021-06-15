@@ -169,7 +169,7 @@ bool wxEditableListBox::Create(wxWindow *parent, wxWindowID id,
          st |= wxLC_EDIT_LABELS;
     m_listCtrl = new CleverListCtrl(this, wxID_ELB_LISTCTRL,
                                     wxDefaultPosition, wxDefaultSize, st);
-    wxArrayString empty_ar;
+    std::vector<wxString> empty_ar;
     SetStrings(empty_ar);
 
     sizer->Add(m_listCtrl, wxSizerFlags(1).Expand());
@@ -180,23 +180,24 @@ bool wxEditableListBox::Create(wxWindow *parent, wxWindowID id,
     return true;
 }
 
-void wxEditableListBox::SetStrings(const wxArrayString& strings)
+void wxEditableListBox::SetStrings(const std::vector<wxString>& strings)
 {
     m_listCtrl->DeleteAllItems();
 
-    for (size_t i = 0; i < strings.GetCount(); i++)
+    for (size_t i = 0; i < strings.size(); i++)
         m_listCtrl->InsertItem(i, strings[i]);
 
-    m_listCtrl->InsertItem(strings.GetCount(), wxEmptyString);
+    m_listCtrl->InsertItem(strings.size(), wxEmptyString);
     m_listCtrl->SetItemState(0, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
 }
 
-void wxEditableListBox::GetStrings(wxArrayString& strings) const
+// FIXME: Just return a vector.
+void wxEditableListBox::GetStrings(std::vector<wxString>& strings) const
 {
-    strings.Clear();
+    strings.clear();
 
     for (int i = 0; i < m_listCtrl->GetItemCount()-1; i++)
-        strings.Add(m_listCtrl->GetItemText(i));
+        strings.push_back(m_listCtrl->GetItemText(i));
 }
 
 void wxEditableListBox::OnItemSelected(wxListEvent& event)

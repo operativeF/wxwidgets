@@ -138,7 +138,7 @@ private:
 
 #if wxUSE_HELP
     // help text associated with a particular item or empty string if none
-    wxArrayString m_itemsHelpTexts;
+    std::vector<wxString> m_itemsHelpTexts;
 #endif // wxUSE_HELP
 };
 

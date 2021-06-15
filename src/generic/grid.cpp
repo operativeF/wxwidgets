@@ -1778,13 +1778,11 @@ wxGridStringTable::wxGridStringTable( int numRows, int numCols )
 {
     m_numCols = numCols;
 
-    m_data.Alloc( numRows );
+    m_data.reserve( numRows );
 
-    wxArrayString sa;
-    sa.Alloc( numCols );
-    sa.Add( wxEmptyString, numCols );
+    std::vector<wxString> sa(numCols, wxEmptyString);
 
-    m_data.Add( sa, numRows );
+    m_data.insert(std::begin(m_data), numRows, sa );
 }
 
 wxString wxGridStringTable::GetValue( int row, int col )
@@ -1808,11 +1806,11 @@ void wxGridStringTable::SetValue( int row, int col, const wxString& value )
 
 void wxGridStringTable::Clear()
 {
-    int numRows = m_data.GetCount();
+    int numRows = m_data.size();
 
     if ( numRows > 0 )
     {
-        int numCols = m_data[0].GetCount();
+        int numCols = m_data[0].size();
 
         for ( int row = 0; row < numRows; row++ )
         {
@@ -1831,10 +1829,9 @@ bool wxGridStringTable::InsertRows( size_t pos, size_t numRows )
         return AppendRows( numRows );
     }
 
-    wxArrayString sa;
-    sa.Alloc( m_numCols );
-    sa.Add( wxEmptyString, m_numCols );
-    m_data.Insert( sa, pos, numRows );
+    std::vector<wxString> sa(m_numCols, wxEmptyString);
+    // TODO: Default value.
+    m_data.insert( m_data.begin() + pos, numRows, sa );
 
     if ( GetView() )
     {
@@ -1851,14 +1848,16 @@ bool wxGridStringTable::InsertRows( size_t pos, size_t numRows )
 
 bool wxGridStringTable::AppendRows( size_t numRows )
 {
-    wxArrayString sa;
-    if ( m_numCols > 0 )
-    {
-        sa.Alloc( m_numCols );
-        sa.Add( wxEmptyString, m_numCols );
-    }
+    std::vector<wxString> sa(m_numCols, wxEmptyString);
 
-    m_data.Add( sa, numRows );
+    // TODO: What good does checking for zero do?
+    // if ( m_numCols > 0 )
+    // {
+    //     sa.reserve( m_numCols );
+    //     sa.insert( std::begin(sa), m_numCols, wxEmptyString );
+    // }
+
+    m_data.insert( m_data.end(), numRows, sa );
 
     if ( GetView() )
     {
@@ -1874,7 +1873,7 @@ bool wxGridStringTable::AppendRows( size_t numRows )
 
 bool wxGridStringTable::DeleteRows( size_t pos, size_t numRows )
 {
-    size_t curNumRows = m_data.GetCount();
+    size_t curNumRows = m_data.size();
 
     if ( pos >= curNumRows )
     {
@@ -1896,11 +1895,11 @@ bool wxGridStringTable::DeleteRows( size_t pos, size_t numRows )
 
     if ( numRows >= curNumRows )
     {
-        m_data.Clear();
+        m_data.clear();
     }
     else
     {
-        m_data.RemoveAt( pos, numRows );
+        m_data.erase( std::begin(m_data) + pos, std::begin(m_data) + pos + numRows );
     }
 
     if ( GetView() )
@@ -1923,9 +1922,9 @@ bool wxGridStringTable::InsertCols( size_t pos, size_t numCols )
         return AppendCols( numCols );
     }
 
-    if ( !m_colLabels.IsEmpty() )
+    if ( !m_colLabels.empty() )
     {
-        m_colLabels.Insert( wxEmptyString, pos, numCols );
+        m_colLabels.insert( std::begin(m_colLabels) + pos, numCols, wxEmptyString );
 
         for ( size_t i = pos; i < pos + numCols; i++ )
             m_colLabels[i] = wxGridTableBase::GetColLabelValue( i );
@@ -1935,7 +1934,7 @@ bool wxGridStringTable::InsertCols( size_t pos, size_t numCols )
     {
         for ( size_t col = pos; col < pos + numCols; col++ )
         {
-            m_data[row].Insert( wxEmptyString, col );
+            m_data[row].insert( std::begin(m_data[row]) + col, 1, wxEmptyString );
         }
     }
 
@@ -1958,7 +1957,7 @@ bool wxGridStringTable::AppendCols( size_t numCols )
 {
     for ( size_t row = 0; row < m_data.size(); row++ )
     {
-        m_data[row].Add( wxEmptyString, numCols );
+        m_data[row].insert( std::end(m_data[row]), numCols, wxEmptyString );
     }
 
     m_numCols += numCols;
@@ -1977,7 +1976,7 @@ bool wxGridStringTable::AppendCols( size_t numCols )
 
 bool wxGridStringTable::DeleteCols( size_t pos, size_t numCols )
 {
-    size_t curNumRows = m_data.GetCount();
+    size_t curNumRows = m_data.size();
     size_t curNumCols = m_numCols;
 
     if ( pos >= curNumCols )
@@ -2003,21 +2002,21 @@ bool wxGridStringTable::DeleteCols( size_t pos, size_t numCols )
         numCols = curNumCols - colID;
     }
 
-    if ( !m_colLabels.IsEmpty() )
+    if ( !m_colLabels.empty() )
     {
         // m_colLabels stores just as many elements as it needs, e.g. if only
         // the label of the first column had been set it would have only one
         // element and not numCols, so account for it
         int numRemaining = m_colLabels.size() - colID;
         if (numRemaining > 0)
-            m_colLabels.RemoveAt( colID, wxMin(numCols, numRemaining) );
+            m_colLabels.erase(std::begin(m_colLabels) + colID, std::begin(m_colLabels) + colID + wxMin(numCols, numRemaining) );
     }
 
     if ( numCols >= curNumCols )
     {
         for ( size_t row = 0; row < curNumRows; row++ )
         {
-            m_data[row].Clear();
+            m_data[row].clear();
         }
 
         m_numCols = 0;
@@ -2026,7 +2025,7 @@ bool wxGridStringTable::DeleteCols( size_t pos, size_t numCols )
     {
         for ( size_t row = 0; row < curNumRows; row++ )
         {
-            m_data[row].RemoveAt( colID, numCols );
+            m_data[row].erase( std::begin(m_data[row]) + colID, std::begin(m_data[row]) + colID + numCols );
         }
 
         m_numCols -= numCols;
@@ -2047,7 +2046,7 @@ bool wxGridStringTable::DeleteCols( size_t pos, size_t numCols )
 
 wxString wxGridStringTable::GetRowLabelValue( int row )
 {
-    if ( row > (int)(m_rowLabels.GetCount()) - 1 )
+    if ( row > (int)(m_rowLabels.size()) - 1 )
     {
         // using default label
         //
@@ -2061,7 +2060,7 @@ wxString wxGridStringTable::GetRowLabelValue( int row )
 
 wxString wxGridStringTable::GetColLabelValue( int col )
 {
-    if ( col > (int)(m_colLabels.GetCount()) - 1 )
+    if ( col > (int)(m_colLabels.size()) - 1 )
     {
         // using default label
         //
@@ -2075,13 +2074,13 @@ wxString wxGridStringTable::GetColLabelValue( int col )
 
 void wxGridStringTable::SetRowLabelValue( int row, const wxString& value )
 {
-    if ( row > (int)(m_rowLabels.GetCount()) - 1 )
+    if ( row > (int)(m_rowLabels.size()) - 1 )
     {
-        int n = m_rowLabels.GetCount();
+        int n = m_rowLabels.size();
 
         for ( int i = n; i <= row; i++ )
         {
-            m_rowLabels.Add( wxGridTableBase::GetRowLabelValue(i) );
+            m_rowLabels.push_back( wxGridTableBase::GetRowLabelValue(i) );
         }
     }
 
@@ -2090,14 +2089,14 @@ void wxGridStringTable::SetRowLabelValue( int row, const wxString& value )
 
 void wxGridStringTable::SetColLabelValue( int col, const wxString& value )
 {
-    if ( col > (int)(m_colLabels.GetCount()) - 1 )
+    if ( col > (int)(m_colLabels.size()) - 1 )
     {
-        int n = m_colLabels.GetCount();
+        int n = m_colLabels.size();
         int i;
 
         for ( i = n; i <= col; i++ )
         {
-            m_colLabels.Add( wxGridTableBase::GetColLabelValue(i) );
+            m_colLabels.push_back( wxGridTableBase::GetColLabelValue(i) );
         }
     }
 

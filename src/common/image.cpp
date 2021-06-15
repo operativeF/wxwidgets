@@ -3100,7 +3100,11 @@ wxImageHandler *wxImage::FindHandler( const wxString& extension, wxBitmapType bi
         {
             if (handler->GetExtension() == extension)
                 return handler;
-            if (handler->GetAltExtensions().Index(extension, false) != wxNOT_FOUND)
+
+            const auto ext_idx = std::find_if(handler->GetAltExtensions().cbegin(), handler->GetAltExtensions().cend(),
+                [extension](const auto& alt_extension) { return extension.IsSameAs(alt_extension, false); });
+
+            if (ext_idx != handler->GetAltExtensions().cend())
                 return handler;
         }
         node = node->GetNext();

@@ -48,6 +48,18 @@ public:
         Create(parent, id, pos, size, choices, style, validator, name);
     }
 
+    wxChoice(wxWindow* parent,
+        wxWindowID id,
+        const wxPoint& pos,
+        const wxSize& size,
+        const std::vector<wxString>& choices,
+        long style = 0,
+        const wxValidator& validator = wxDefaultValidator,
+        const wxString& name = wxASCII_STR(wxChoiceNameStr))
+    {
+        Create(parent, id, pos, size, choices, style, validator, name);
+    }
+
     wxChoice(const wxChoice&) = delete;
     wxChoice& operator=(const wxChoice&) = delete;
 
@@ -64,6 +76,14 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const wxArrayString& choices,
+                long style = 0,
+                const wxValidator& validator = wxDefaultValidator,
+                const wxString& name = wxASCII_STR(wxChoiceNameStr));
+    bool Create(wxWindow* parent,
+                wxWindowID id,
+                const wxPoint& pos,
+                const wxSize& size,
+                const std::vector<wxString>& choices,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxChoiceNameStr));

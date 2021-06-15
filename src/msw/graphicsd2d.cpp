@@ -419,7 +419,7 @@ public:
 private:
     wxCOMPtr<IDWriteFactory> m_factory;
     wxCOMPtr<IDWriteFontFile> m_currentFile;
-    wxArrayString m_filePaths;
+    std::vector<wxString> m_filePaths;
     size_t m_nextIndex;
 };
 

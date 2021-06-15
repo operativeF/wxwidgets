@@ -121,6 +121,20 @@ bool wxChoice::Create(wxWindow *parent,
                   style, validator, name);
 }
 
+bool wxChoice::Create(wxWindow* parent,
+    wxWindowID id,
+    const wxPoint& pos,
+    const wxSize& size,
+    const std::vector<wxString>& choices,
+    long style,
+    const wxValidator& validator,
+    const wxString& name)
+{
+    return Create(parent, id, pos, size, choices.size(), choices.data(),
+        style, validator, name);
+}
+
+
 bool wxChoice::MSWShouldPreProcessMessage(WXMSG *pMsg)
 {
     MSG *msg = (MSG *) pMsg;

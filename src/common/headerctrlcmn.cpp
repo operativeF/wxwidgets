@@ -309,14 +309,14 @@ bool wxHeaderCtrlBase::ShowCustomizeDialog()
 
     // notice that titles are always in the index order, they will be shown
     // rearranged according to the display order in the dialog
-    wxArrayString titles;
+    std::vector<wxString> titles;
     titles.reserve(count);
+    
     for ( unsigned n = 0; n < count; n++ )
         titles.push_back(GetColumn(n).GetTitle());
 
     // this loop is however over positions and not indices
-    unsigned pos;
-    for ( pos = 0; pos < count; pos++ )
+    for ( unsigned pos = 0; pos < count; pos++ )
     {
         int& idx = order[pos];
         if ( GetColumn(idx).IsHidden() )
@@ -332,7 +332,7 @@ bool wxHeaderCtrlBase::ShowCustomizeDialog()
     {
         // and apply the changes
         order = dlg.GetOrder();
-        for ( pos = 0; pos < count; pos++ )
+        for ( unsigned pos = 0; pos < count; pos++ )
         {
             int& idx = order[pos];
             const bool show = idx >= 0;

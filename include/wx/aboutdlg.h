@@ -21,6 +21,7 @@
 // wxAboutDialogInfo: information shown by the standard "About" dialog
 // ----------------------------------------------------------------------------
 
+// TODO: Can't convert into std::vector<wxString> until std::fmt
 class WXDLLIMPEXP_CORE wxAboutDialogInfo
 {
 public:

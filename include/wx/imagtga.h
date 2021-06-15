@@ -24,7 +24,7 @@ public:
     {
         m_name = wxT("TGA file");
         m_extension = wxT("tga");
-        m_altExtensions.Add(wxT("tpic"));
+        m_altExtensions.push_back(wxT("tpic"));
         m_type = wxBITMAP_TYPE_TGA;
         m_mime = wxT("image/tga");
     }
