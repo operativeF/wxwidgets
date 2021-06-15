@@ -2195,8 +2195,7 @@ wxHolidayAuthoritiesArray wxDateTimeHolidayAuthority::ms_authorities;
 /* static */
 bool wxDateTimeHolidayAuthority::IsHoliday(const wxDateTime& dt)
 {
-    const size_t count = ms_authorities.size();
-    for ( size_t n = 0; n < count; n++ )
+    for ( size_t n = 0; n < ms_authorities.size(); n++ )
     {
         if ( ms_authorities[n]->DoIsHoliday(dt) )
         {

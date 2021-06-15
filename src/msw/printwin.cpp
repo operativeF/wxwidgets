@@ -191,9 +191,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
             break;
         }
 
-        int pn;
-
-        for ( pn = minPageNum;
+        for ( int pn = minPageNum;
               pn <= maxPageNum && printout->HasPage(pn);
               pn++ )
         {

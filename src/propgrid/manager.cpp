@@ -824,6 +824,7 @@ int wxPropertyGridManager::GetPageByState( const wxPropertyGridPageState* pState
 {
     wxASSERT( pState );
 
+    // FIXME: Find if
     for ( size_t i = 0; i < GetPageCount(); i++ )
     {
         if ( pState == m_arrPages[i]->GetStatePtr() )

@@ -744,8 +744,8 @@ int wxAuiGenericToolBarArt::ShowDropDown(wxWindow* wnd,
 
     size_t items_added = 0;
 
-    size_t i, count = items.GetCount();
-    for (i = 0; i < count; ++i)
+    size_t count = items.GetCount();
+    for (size_t i = 0; i < count; ++i)
     {
         wxAuiToolBarItem& item = items.Item(i);
 
@@ -1148,8 +1148,8 @@ wxControl* wxAuiToolBar::FindControl(int id)
 
 wxAuiToolBarItem* wxAuiToolBar::FindTool(int tool_id) const
 {
-    size_t i, count;
-    for (i = 0, count = m_items.GetCount(); i < count; ++i)
+    size_t count;
+    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
         if (item.m_toolId == tool_id)
@@ -1161,8 +1161,8 @@ wxAuiToolBarItem* wxAuiToolBar::FindTool(int tool_id) const
 
 wxAuiToolBarItem* wxAuiToolBar::FindToolByPosition(wxCoord x, wxCoord y) const
 {
-    size_t i, count;
-    for (i = 0, count = m_items.GetCount(); i < count; ++i)
+    size_t count;
+    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
 
@@ -1185,8 +1185,8 @@ wxAuiToolBarItem* wxAuiToolBar::FindToolByPosition(wxCoord x, wxCoord y) const
 
 wxAuiToolBarItem* wxAuiToolBar::FindToolByPositionWithPacking(wxCoord x, wxCoord y) const
 {
-    size_t i, count;
-    for (i = 0, count = m_items.GetCount(); i < count; ++i)
+    size_t count;
+    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
 
@@ -1428,8 +1428,8 @@ void wxAuiToolBar::SetHoverItem(wxAuiToolBarItem* pitem)
 
     wxAuiToolBarItem* former_hover = nullptr;
 
-    size_t i, count;
-    for (i = 0, count = m_items.GetCount(); i < count; ++i)
+    size_t count;
+    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
         if (item.m_state & wxAUI_BUTTON_STATE_HOVER)
@@ -1453,8 +1453,8 @@ void wxAuiToolBar::SetPressedItem(wxAuiToolBarItem* pitem)
 {
     wxAuiToolBarItem* former_item = nullptr;
 
-    size_t i, count;
-    for (i = 0, count = m_items.GetCount(); i < count; ++i)
+    size_t count;
+    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
         if (item.m_state & wxAUI_BUTTON_STATE_PRESSED)
@@ -1525,14 +1525,13 @@ void wxAuiToolBar::ToggleTool(int tool_id, bool state)
 
             if (idx >= 0 && idx < count)
             {
-                int i;
-                for (i = idx + 1; i < count; ++i)
+                for (int i = idx + 1; i < count; ++i)
                 {
                     if (m_items[i].m_kind != wxITEM_RADIO)
                         break;
                     m_items[i].m_state &= ~wxAUI_BUTTON_STATE_CHECKED;
                 }
-                for (i = idx - 1; i >= 0; i--)
+                for (int i = idx - 1; i >= 0; i--)
                 {
                     if (m_items[i].m_kind != wxITEM_RADIO)
                         break;
@@ -1741,8 +1740,8 @@ int wxAuiToolBar::GetToolIndex(int tool_id) const
     if (tool_id == -1)
         return wxNOT_FOUND;
 
-    size_t i, count = m_items.GetCount();
-    for (i = 0; i < count; ++i)
+    size_t count = m_items.GetCount();
+    for (size_t i = 0; i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
         if (item.m_toolId == tool_id)
@@ -1887,8 +1886,8 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
             sizer->Add(1, m_leftPadding);
     }
 
-    size_t i, count;
-    for (i = 0, count = m_items.GetCount(); i < count; ++i)
+    size_t count;
+    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
         wxSizerItem* sizerItem = nullptr;
@@ -2054,7 +2053,7 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
     m_sizer = outside_sizer;
 
     // calculate the rock-bottom minimum size
-    for (i = 0, count = m_items.GetCount(); i < count; ++i)
+    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
         if (item.m_sizerItem && item.m_proportion > 0 && item.m_minSize.IsFullySpecified())
@@ -2064,7 +2063,7 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
     m_absoluteMinSize = m_sizer->GetMinSize();
 
     // reset the min sizes to what they were
-    for (i = 0, count = m_items.GetCount(); i < count; ++i)
+    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
         if (item.m_sizerItem && item.m_proportion > 0 && item.m_minSize.IsFullySpecified())
@@ -2152,8 +2151,8 @@ void wxAuiToolBar::DoIdleUpdate()
 
     bool need_refresh = false;
 
-    size_t i, count;
-    for (i = 0, count = m_items.GetCount(); i < count; ++i)
+    size_t count;
+    for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
 
@@ -2398,8 +2397,8 @@ void wxAuiToolBar::OnPaint(wxPaintEvent& WXUNUSED(evt))
         last_extent -= overflowSize;
 
     // paint each individual tool
-    size_t i, count = m_items.GetCount();
-    for (i = 0; i < count; ++i)
+    size_t count = m_items.GetCount();
+    for (size_t i = 0; i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
 
@@ -2505,18 +2504,16 @@ void wxAuiToolBar::OnLeftDown(wxMouseEvent& evt)
             }
             else
             {
-                size_t i, count;
                 wxAuiToolBarItemArray overflow_items;
 
-
                 // add custom overflow prepend items, if any
-                count = m_customOverflowPrepend.GetCount();
-                for (i = 0; i < count; ++i)
+                size_t count = m_customOverflowPrepend.GetCount();
+                for (size_t i = 0; i < count; ++i)
                     overflow_items.Add(m_customOverflowPrepend[i]);
 
                 // only show items that don't fit in the dropdown
                 count = m_items.GetCount();
-                for (i = 0; i < count; ++i)
+                for (size_t i = 0; i < count; ++i)
                 {
                     if (!GetToolFitsByIndex(i))
                         overflow_items.Add(m_items[i]);
@@ -2524,7 +2521,7 @@ void wxAuiToolBar::OnLeftDown(wxMouseEvent& evt)
 
                 // add custom overflow append items, if any
                 count = m_customOverflowAppend.GetCount();
-                for (i = 0; i < count; ++i)
+                for (size_t i = 0; i < count; ++i)
                     overflow_items.Add(m_customOverflowAppend[i]);
 
                 int res = m_art->ShowDropDown(this, overflow_items);

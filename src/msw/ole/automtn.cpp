@@ -110,6 +110,7 @@ bool wxAutomationObject::Invoke(const wxString& member, int action,
     // Find number of names args
     int namedArgCount = 0;
 
+    // FIXME: Count if
     for (int i = 0; i < noArgs; i++)
     {
         if ( !INVOKEARG(i).GetName().empty() )
@@ -123,8 +124,8 @@ bool wxAutomationObject::Invoke(const wxString& member, int action,
     argNames[0].AssignFromString(member);
 
     // Note that arguments are specified in reverse order
-    // (all totally logical; hey, we're dealing with OLE here.)
 
+    // FIXME: Count if
     int j = 0;
 
     for (int i = 0; i < namedArgCount; i++)

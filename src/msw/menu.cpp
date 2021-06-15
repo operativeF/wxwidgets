@@ -133,8 +133,7 @@ wxMenu::wxMenu(WXHMENU hMenu)
     //
     // We could also retrieve the real labels of the items here but it doesn't
     // seem to be worth the trouble.
-    const int numExistingItems = ::GetMenuItemCount(m_hMenu);
-    for ( int n = 0; n < numExistingItems; n++ )
+    for ( int n = 0; n < ::GetMenuItemCount(m_hMenu); n++ )
     {
         wxMenuBase::DoAppend(wxMenuItem::New(this, wxID_SEPARATOR));
     }
@@ -172,8 +171,7 @@ void wxMenu::Break()
 
 int wxMenu::FindAccel(int id) const
 {
-    size_t count = m_accels.GetCount();
-    for ( size_t n = 0; n < count; n++ )
+    for ( size_t n = 0; n < m_accels.GetCount(); n++ )
     {
         if ( m_accels[n]->m_command == id )
             return n;

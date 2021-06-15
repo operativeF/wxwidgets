@@ -494,9 +494,7 @@ wxFileConfig::~wxFileConfig()
 void wxFileConfig::Parse(const wxTextBuffer& buffer, bool bLocal)
 {
 
-  const size_t nLineCount = buffer.GetLineCount();
-
-  for ( size_t n = 0; n < nLineCount; n++ )
+  for ( size_t n = 0; n < buffer.GetLineCount(); n++ )
   {
     wxString strLine = buffer[n];
     // FIXME-UTF8: rewrite using iterators, without this buffer
@@ -676,9 +674,8 @@ wxFileConfig::DoSetPath(const wxString& strPath, bool createMissingComponents)
     }
 
     // change current group
-    size_t n;
     m_pCurrentGroup = m_pRootGroup;
-    for ( n = 0; n < aParts.GetCount(); n++ ) {
+    for ( size_t n = 0; n < aParts.GetCount(); n++ ) {
         wxFileConfigGroup *pNextGroup = m_pCurrentGroup->FindSubgroup(aParts[n]);
         if ( pNextGroup == nullptr )
         {
@@ -693,7 +690,7 @@ wxFileConfig::DoSetPath(const wxString& strPath, bool createMissingComponents)
 
     // recombine path parts in one variable
     m_strPath.Empty();
-    for ( n = 0; n < aParts.GetCount(); n++ ) {
+    for ( size_t n = 0; n < aParts.GetCount(); n++ ) {
         m_strPath << wxCONFIG_PATH_SEPARATOR << aParts[n];
     }
 
@@ -1364,13 +1361,11 @@ wxFileConfigGroup::wxFileConfigGroup(wxFileConfigGroup *pParent,
 wxFileConfigGroup::~wxFileConfigGroup()
 {
   // entries
-  size_t n, nCount = m_aEntries.GetCount();
-  for ( n = 0; n < nCount; n++ )
+  for ( size_t n = 0; n < m_aEntries.GetCount(); n++ )
     delete m_aEntries[n];
 
   // subgroups
-  nCount = m_aSubgroups.GetCount();
-  for ( n = 0; n < nCount; n++ )
+  for ( size_t n = 0; n < m_aSubgroups.GetCount(); n++ )
     delete m_aSubgroups[n];
 }
 

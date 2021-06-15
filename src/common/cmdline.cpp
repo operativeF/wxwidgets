@@ -1315,8 +1315,8 @@ wxString wxCmdLineParser::GetUsageString() const
                                              : m_data->m_switchChars[0u];
 
     bool areLongOptionsEnabled = AreLongOptionsEnabled();
-    size_t n, count = m_data->m_options.GetCount();
-    for ( n = 0; n < count; n++ )
+    size_t count = m_data->m_options.GetCount();
+    for ( size_t n = 0; n < count; n++ )
     {
         wxCmdLineOption& opt = m_data->m_options[n];
         wxString option, negator;
@@ -1386,7 +1386,7 @@ wxString wxCmdLineParser::GetUsageString() const
     }
 
     count = m_data->m_paramDesc.GetCount();
-    for ( n = 0; n < count; n++ )
+    for ( size_t n = 0; n < count; n++ )
     {
         wxCmdLineParam& param = m_data->m_paramDesc[n];
 
@@ -1424,14 +1424,14 @@ wxString wxCmdLineParser::GetUsageString() const
 
     // now construct the detailed help message
     size_t len, lenMax = 0;
-    for ( n = 0; n < namesOptions.size(); n++ )
+    for ( size_t n = 0; n < namesOptions.size(); n++ )
     {
         len = namesOptions[n].length();
         if ( len > lenMax )
             lenMax = len;
     }
 
-    for ( n = 0; n < namesOptions.size(); n++ )
+    for ( size_t n = 0; n < namesOptions.size(); n++ )
     {
         if ( n == count )
             usage << wxT('\n') << stdDesc;

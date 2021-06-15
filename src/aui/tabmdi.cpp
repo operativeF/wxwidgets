@@ -606,8 +606,7 @@ void wxAuiMDIChildFrame::SetTitle(const wxString& title)
     wxAuiMDIClientWindow* pClientWindow = pParentFrame->GetClientWindow();
     if (pClientWindow != nullptr)
     {
-        size_t pos;
-        for (pos = 0; pos < pClientWindow->GetPageCount(); pos++)
+        for (size_t pos = 0; pos < pClientWindow->GetPageCount(); pos++)
         {
             if (pClientWindow->GetPage(pos) == this)
             {
@@ -651,8 +650,7 @@ void wxAuiMDIChildFrame::Activate()
 
     if (pClientWindow != nullptr)
     {
-        size_t pos;
-        for (pos = 0; pos < pClientWindow->GetPageCount(); pos++)
+        for (size_t pos = 0; pos < pClientWindow->GetPageCount(); pos++)
         {
             if (pClientWindow->GetPage(pos) == this)
             {

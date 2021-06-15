@@ -308,8 +308,7 @@ bool wxRadioBox::MSWCommand(WXUINT cmd, WXWORD id_)
 
         int selectedButton = wxNOT_FOUND;
 
-        const unsigned int count = GetCount();
-        for ( unsigned int i = 0; i < count; i++ )
+        for ( unsigned int i = 0; i < GetCount(); i++ )
         {
             const HWND hwndBtn = (*m_radioButtons)[i];
             if ( id == wxGetWindowId(hwndBtn) )
@@ -537,8 +536,9 @@ wxSize wxRadioBox::GetMaxButtonSize() const
     // calculate the max button size
     int widthMax = 0,
         heightMax = 0;
-    const unsigned int count = GetCount();
-    for ( unsigned int i = 0 ; i < count; i++ )
+
+    // FIXME: Lambda.
+    for ( unsigned int i = 0 ; i < GetCount(); i++ )
     {
         int width, height;
         GetTextExtent(wxGetWindowText((*m_radioButtons)[i]), &width, &height);
@@ -753,8 +753,7 @@ WXHRGN wxRadioBox::MSWGetRegionWithoutChildren()
     ::GetWindowRect(GetHwnd(), &rc);
     HRGN hrgn = ::CreateRectRgn(rc.left, rc.top, rc.right + 1, rc.bottom + 1);
 
-    const unsigned int count = GetCount();
-    for ( unsigned int i = 0; i < count; ++i )
+    for ( unsigned int i = 0; i < GetCount(); ++i )
     {
         // don't clip out hidden children
         if ( !IsItemShown(i) )

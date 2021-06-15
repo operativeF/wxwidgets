@@ -261,10 +261,10 @@ void wxAuiGenericTabArt::SetSizingInfo(const wxSize& tab_ctrl_size,
 
 void wxAuiGenericTabArt::DrawBorder(wxDC& dc, wxWindow* wnd, const wxRect& rect)
 {
-    int i, border_width = GetBorderWidth(wnd);
+    int border_width = GetBorderWidth(wnd);
 
     wxRect theRect(rect);
-    for (i = 0; i < border_width; ++i)
+    for (int i = 0; i < border_width; ++i)
     {
         dc.DrawRectangle(theRect.x, theRect.y, theRect.width, theRect.height);
         theRect.Deflate(1);
@@ -781,8 +781,8 @@ int wxAuiGenericTabArt::ShowDropDown(wxWindow* wnd,
 {
     wxMenu menuPopup;
 
-    size_t i, count = pages.GetCount();
-    for (i = 0; i < count; ++i)
+    size_t count = pages.GetCount();
+    for (size_t i = 0; i < count; ++i)
     {
         const wxAuiNotebookPage& page = pages.Item(i);
 
@@ -840,8 +840,8 @@ int wxAuiGenericTabArt::GetBestTabCtrlSize(wxWindow* wnd,
 
 
     int max_y = 0;
-    size_t i, page_count = pages.GetCount();
-    for (i = 0; i < page_count; ++i)
+    size_t page_count = pages.GetCount();
+    for (size_t i = 0; i < page_count; ++i)
     {
         wxAuiNotebookPage& page = pages.Item(i);
 
@@ -986,10 +986,10 @@ void wxAuiSimpleTabArt::SetActiveColour(const wxColour& colour)
 
 void wxAuiSimpleTabArt::DrawBorder(wxDC& dc, wxWindow* wnd, const wxRect& rect)
 {
-    int i, border_width = GetBorderWidth(wnd);
+    int border_width = GetBorderWidth(wnd);
 
     wxRect theRect(rect);
-    for (i = 0; i < border_width; ++i)
+    for (int i = 0; i < border_width; ++i)
     {
         dc.DrawRectangle(theRect.x, theRect.y, theRect.width, theRect.height);
         theRect.Deflate(1);
@@ -1298,8 +1298,8 @@ int wxAuiSimpleTabArt::ShowDropDown(wxWindow* wnd,
 {
     wxMenu menuPopup;
 
-    size_t i, count = pages.GetCount();
-    for (i = 0; i < count; ++i)
+    size_t count = pages.GetCount();
+    for (size_t i = 0; i < count; ++i)
     {
         const wxAuiNotebookPage& page = pages.Item(i);
         menuPopup.AppendCheckItem(1000+i, page.caption);

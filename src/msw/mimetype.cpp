@@ -105,6 +105,7 @@ static bool CanonicalizeParams(wxString& command)
     //     return a string with _exactly_ one '%s'!
     bool foundFilename = false;
     const size_t len = command.length();
+    // FIXME: Use a lambda.
     for ( size_t n = 0; (n < len) && !foundFilename; n++ )
     {
         if ( command[n] == wxT('%') &&

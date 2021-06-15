@@ -27,6 +27,7 @@ class WXDLLEXPORT wxPaletteRefData: public wxGDIRefData
 public:
     wxPaletteRefData() { }
 
+    // FIXME: Negative n poses hazard.
     wxPaletteRefData(int n,
                      const unsigned char *red,
                      const unsigned char *green,

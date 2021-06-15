@@ -79,6 +79,7 @@ bool operator == (const wxColourPropertyValue& a, const wxColourPropertyValue& b
 
 bool operator == (const wxArrayInt& array1, const wxArrayInt& array2)
 {
+    // FIXME: Lexicographical compare
     if ( array1.size() != array2.size() )
         return false;
     for ( size_t i = 0; i < array1.size(); i++ )

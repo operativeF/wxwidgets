@@ -335,6 +335,7 @@ wxRegionIterator& wxRegionIterator::operator=(const wxRegionIterator& ri)
     {
         m_rects.reset(new wxRect[m_numRects]);
 
+        // FIXME: Copy algorithm
         for ( long n = 0; n < m_numRects; n++ )
             m_rects[n] = ri.m_rects[n];
     }

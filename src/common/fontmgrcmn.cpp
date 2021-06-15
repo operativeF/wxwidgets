@@ -86,7 +86,7 @@ wxFontInstance *wxFontFaceBase::GetFontInstance(float ptSize, bool aa)
 wxFontBundleBase::wxFontBundleBase()
 {
     for (int i = 0; i < FaceType_Max; i++)
-        m_faces[i] = NULL;
+        m_faces[i] = nullptr;
 }
 
 wxFontBundleBase::~wxFontBundleBase()

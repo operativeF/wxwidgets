@@ -402,8 +402,7 @@ void wxListCtrl::MSWUpdateFontOnDPIChange(const wxSize& newDPI)
 
 void wxListCtrl::OnDPIChanged(wxDPIChangedEvent &event)
 {
-    const int numCols = GetColumnCount();
-    for ( int i = 0; i < numCols; ++i )
+    for ( int i = 0; i < GetColumnCount(); ++i )
     {
         int width = GetColumnWidth(i);
         if ( width > 0 )
@@ -425,8 +424,7 @@ void wxListCtrl::SetDoubleBuffered(bool WXUNUSED(on))
 
 void wxListCtrl::FreeAllInternalData()
 {
-    const unsigned count = m_internalData.size();
-    for ( unsigned n = 0; n < count; n++ )
+    for ( unsigned n = 0; n < m_internalData.size(); n++ )
         delete m_internalData[n];
 
     m_internalData.clear();
@@ -1744,8 +1742,8 @@ long wxListCtrl::FindItem(long start, wxUIntPtr data)
     // we need to find the right value to search for (and there can be several
     // of them)
     int idx = wxNOT_FOUND;
-    const unsigned count = m_internalData.size();
-    for ( unsigned n = 0; n < count; n++ )
+
+    for ( unsigned n = 0; n < m_internalData.size(); n++ )
     {
         if ( m_internalData[n]->lParam == (LPARAM)data )
         {
@@ -2123,8 +2121,7 @@ int WXDLLIMPEXP_CORE wxMSWGetColumnClicked(NMHDR *nmhdr, POINT *ptClick)
         wxLogLastError(wxT("ScreenToClient(listctrl)"));
     }
 
-    const int colCount = Header_GetItemCount(nmhdr->hwndFrom);
-    for ( int col = 0; col < colCount; col++ )
+    for ( int col = 0; col < Header_GetItemCount(nmhdr->hwndFrom); col++ )
     {
         RECT rect;
         if ( Header_GetItemRect(nmhdr->hwndFrom, col, &rect) )
@@ -2829,8 +2826,7 @@ bool wxListCtrl::MSWOnNotify(int idCtrl, WXLPARAM lParam, WXLPARAM *result)
             // accessed during the handling of the event.
             if ( wxMSWListItemData *data = MSWGetItemData(event.m_itemIndex) )
             {
-                const unsigned count = m_internalData.size();
-                for ( unsigned n = 0; n < count; n++ )
+                for ( unsigned n = 0; n < m_internalData.size(); n++ )
                 {
                     if ( m_internalData[n] == data )
                     {

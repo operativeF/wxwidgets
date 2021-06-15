@@ -220,6 +220,7 @@ void wxStatusBar::MSWUpdateFieldsWidths()
 
     int nCurPos = 0;
 
+    // FIXME: Algorithm
     for ( int i = 0; i < count; i++ )
     {
         nCurPos += widthsAbs[i] + extraWidth;

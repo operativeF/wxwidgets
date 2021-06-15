@@ -771,10 +771,8 @@ long wxExecute(const wxString& cmd, int flags, wxProcess *handler,
             // assume Unicode by default.
             dwFlags |= CREATE_UNICODE_ENVIRONMENT;
 
-            wxEnvVariableHashMap::const_iterator it;
-
             size_t envSz = 1; // ending '\0'
-            for ( it = env->env.begin(); it != env->env.end(); ++it )
+            for ( auto it = env->env.begin(); it != env->env.end(); ++it )
             {
                 // Add size of env variable name and value, and '=' char and
                 // ending '\0'
@@ -784,7 +782,7 @@ long wxExecute(const wxString& cmd, int flags, wxProcess *handler,
             envBuffer.extend(envSz);
 
             wxChar *p = envBuffer.data();
-            for ( it = env->env.begin(); it != env->env.end(); ++it )
+            for ( auto it = env->env.begin(); it != env->env.end(); ++it )
             {
                 const wxString line = it->first + wxS("=") + it->second;
 

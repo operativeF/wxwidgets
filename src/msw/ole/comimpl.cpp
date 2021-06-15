@@ -28,6 +28,7 @@
 // Implementation
 // ============================================================================
 
+// FIXME: Array + size
 // return true if the iid is in the array
 WXDLLEXPORT bool IsIidFromList(REFIID riid, const IID *aIids[], size_t nCount)
 {

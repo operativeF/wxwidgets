@@ -932,9 +932,7 @@ void wxNotebook::OnSize(wxSizeEvent& event)
     int width = rc.right - rc.left;
     int height = rc.bottom - rc.top;
 
-    size_t nCount = m_pages.size();
-
-    for ( size_t nPage = 0; nPage < nCount; nPage++ ) {
+    for ( size_t nPage = 0; nPage < m_pages.size(); nPage++ ) {
         wxNotebookPage *pPage = m_pages[nPage];
         pPage->SetSize(rc.left, rc.top, width, height);
     }

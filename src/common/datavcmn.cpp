@@ -94,8 +94,7 @@ wxFont wxDataViewItemAttr::GetEffectiveFont(const wxFont& font) const
 bool wxDataViewModelNotifier::ItemsAdded( const wxDataViewItem &parent, const wxDataViewItemArray &items )
 {
     size_t count = items.GetCount();
-    size_t i;
-    for (i = 0; i < count; i++)
+    for (size_t i = 0; i < count; i++)
         if (!ItemAdded( parent, items[i] )) return false;
 
     return true;
@@ -438,8 +437,7 @@ void wxDataViewIndexListModel::Reset( unsigned int new_size )
     m_ordered = true;
 
     // build initial index
-    unsigned int i;
-    for (i = 1; i < new_size+1; i++)
+    for (unsigned int i = 1; i < new_size + 1; i++)
             m_hash.Add( wxDataViewItem(wxUIntToPtr(i)) );
 
     m_nextFreeID = new_size + 1;
@@ -603,8 +601,8 @@ void wxDataViewVirtualListModel::RowsDeleted( const std::vector<int> &rows )
     std::sort(sorted.begin(), sorted.end());
 
     wxDataViewItemArray array;
-    unsigned int i;
-    for (i = 0; i < sorted.size(); i++)
+
+    for (unsigned int i = 0; i < sorted.size(); i++)
     {
         wxDataViewItem item( wxUIntToPtr(sorted[i]+1) );
         array.Add( item );
@@ -2204,10 +2202,8 @@ wxDataViewListStore::wxDataViewListStore()
 
 wxDataViewListStore::~wxDataViewListStore()
 {
-    std::vector<wxDataViewListStoreLine*>::iterator it;
-    for (it = m_data.begin(); it != m_data.end(); ++it)
+    for (auto* line : m_data)
     {
-        wxDataViewListStoreLine* line = *it;
         delete line;
     }
 }
@@ -2824,10 +2820,8 @@ unsigned int wxDataViewTreeStore::GetChildren( const wxDataViewItem &item, wxDat
     wxDataViewTreeStoreContainerNode *node = FindContainerNode( item );
     if (!node) return 0;
 
-    wxDataViewTreeStoreNodes::iterator iter;
-    for (iter = node->GetChildren().begin(); iter != node->GetChildren().end(); ++iter)
+    for (const auto* child : node->GetChildren())
     {
-        wxDataViewTreeStoreNode* child = *iter;
         children.Add( child->GetItem() );
     }
 
@@ -2855,13 +2849,12 @@ int wxDataViewTreeStore::Compare( const wxDataViewItem &item1, const wxDataViewI
     if (node2->IsContainer() && !node1->IsContainer())
         return 1;
 
-    wxDataViewTreeStoreNodes::const_iterator iter;
-    for (iter = parent->GetChildren().begin(); iter != parent->GetChildren().end(); ++iter)
+    for (const auto* child : parent->GetChildren())
     {
-        if ( *iter == node1 )
+        if ( child == node1 )
             return -1;
 
-        if ( *iter == node2 )
+        if ( child == node2 )
             return 1;
     }
 

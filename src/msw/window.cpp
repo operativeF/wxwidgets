@@ -6349,8 +6349,7 @@ int wxWindowMSW::HandleMenuChar(int chAccel,
     mii.fMask = MIIM_FTYPE | MIIM_DATA;
 
     // find if we have this letter in any owner drawn item
-    const int count = ::GetMenuItemCount(hmenu);
-    for ( int i = 0; i < count; i++ )
+    for ( int i = 0; i < ::GetMenuItemCount(hmenu); i++ )
     {
         if ( ::GetMenuItemInfo(hmenu, i, TRUE, &mii) )
         {
@@ -6565,12 +6564,14 @@ int ChooseNormalOrExtended(int lParam, int keyNormal, int keyExtended)
     return !lParam || (HIWORD(lParam) & KF_EXTENDED) ? keyExtended : keyNormal;
 }
 
+} // anonymous namespace
+
 // this array contains the Windows virtual key codes which map one to one to
 // WXK_xxx constants and is used in wxMSWKeyboard::VKToWX/WXToVK() below
 //
 // note that keys having a normal and numpad version (e.g. WXK_HOME and
 // WXK_NUMPAD_HOME) are not included in this table as the mapping is not 1-to-1
-const struct wxKeyMapping
+static constexpr struct wxKeyMapping
 {
     int vk;
     wxKeyCode wxk;
@@ -6659,8 +6660,6 @@ const struct wxKeyMapping
     { VK_LAUNCH_APP1,         WXK_LAUNCH_APP1 },
     { VK_LAUNCH_APP2,         WXK_LAUNCH_APP2 },
 };
-
-} // anonymous namespace
 
 int VKToWX(WXWORD vk, WXLPARAM lParam, wchar_t *uc)
 {

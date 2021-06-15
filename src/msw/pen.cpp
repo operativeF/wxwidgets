@@ -419,6 +419,7 @@ bool wxPenRefData::Free()
     if ( !m_hPen )
         return false;
 
+    // FIXME: use unique_ptr with custom deleter
     ::DeleteObject(m_hPen);
     m_hPen = nullptr;
 
