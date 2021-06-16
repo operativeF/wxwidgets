@@ -40,53 +40,53 @@ class WXDLLIMPEXP_FWD_RICHTEXT wxRichTextStyleDefinition;
     Styles
 */
 
-#define wxRE_READONLY          0x0010
-#define wxRE_MULTILINE         0x0020
-#define wxRE_CENTRE_CARET      0x8000
-#define wxRE_CENTER_CARET      wxRE_CENTRE_CARET
+inline constexpr auto wxRE_READONLY          = 0x0010;
+inline constexpr auto wxRE_MULTILINE         = 0x0020;
+inline constexpr auto wxRE_CENTRE_CARET      = 0x8000;
+inline constexpr auto wxRE_CENTER_CARET      = wxRE_CENTRE_CARET;
 
 /**
     Flags
 */
 
-#define wxRICHTEXT_SHIFT_DOWN  0x01
-#define wxRICHTEXT_CTRL_DOWN   0x02
-#define wxRICHTEXT_ALT_DOWN    0x04
+inline constexpr auto wxRICHTEXT_SHIFT_DOWN  = 0x01;
+inline constexpr auto wxRICHTEXT_CTRL_DOWN   = 0x02;
+inline constexpr auto wxRICHTEXT_ALT_DOWN    = 0x04;
 
 /**
     Extra flags
 */
 
 // Don't draw guide lines around boxes and tables
-#define wxRICHTEXT_EX_NO_GUIDELINES 0x00000100
+inline constexpr auto wxRICHTEXT_EX_NO_GUIDELINES = 0x00000100;
 
 
 /*
     Defaults
 */
 
-#define wxRICHTEXT_DEFAULT_OVERALL_SIZE wxSize(-1, -1)
-#define wxRICHTEXT_DEFAULT_IMAGE_SIZE wxSize(80, 80)
-#define wxRICHTEXT_DEFAULT_SPACING 3
-#define wxRICHTEXT_DEFAULT_MARGIN 3
+inline constexpr wxSize wxRICHTEXT_DEFAULT_OVERALL_SIZE = wxSize(-1, -1);
+inline constexpr wxSize wxRICHTEXT_DEFAULT_IMAGE_SIZE = wxSize(80, 80);
+inline constexpr auto wxRICHTEXT_DEFAULT_SPACING = 3;
+inline constexpr auto wxRICHTEXT_DEFAULT_MARGIN = 3;
 #define wxRICHTEXT_DEFAULT_UNFOCUSSED_BACKGROUND wxColour(175, 175, 175)
 #define wxRICHTEXT_DEFAULT_FOCUSSED_BACKGROUND wxColour(140, 140, 140)
 #define wxRICHTEXT_DEFAULT_UNSELECTED_BACKGROUND wxSystemSettings::GetColour(wxSYS_COLOUR_3DFACE)
 #define wxRICHTEXT_DEFAULT_TYPE_COLOUR wxColour(0, 0, 200)
 #define wxRICHTEXT_DEFAULT_FOCUS_RECT_COLOUR wxColour(100, 80, 80)
-#define wxRICHTEXT_DEFAULT_CARET_WIDTH 2
+inline constexpr auto wxRICHTEXT_DEFAULT_CARET_WIDTH = 2;
 // Minimum buffer size before delayed layout kicks in
-#define wxRICHTEXT_DEFAULT_DELAYED_LAYOUT_THRESHOLD 20000
+inline constexpr auto wxRICHTEXT_DEFAULT_DELAYED_LAYOUT_THRESHOLD = 20000;
 // Milliseconds before layout occurs after resize
-#define wxRICHTEXT_DEFAULT_LAYOUT_INTERVAL 50
+inline constexpr auto wxRICHTEXT_DEFAULT_LAYOUT_INTERVAL = 50;
 // Milliseconds before delayed image processing occurs
-#define wxRICHTEXT_DEFAULT_DELAYED_IMAGE_PROCESSING_INTERVAL 200
+inline constexpr auto wxRICHTEXT_DEFAULT_DELAYED_IMAGE_PROCESSING_INTERVAL = 200;
 
 /* Identifiers
  */
-#define wxID_RICHTEXT_PROPERTIES1   (wxID_HIGHEST + 1)
-#define wxID_RICHTEXT_PROPERTIES2   (wxID_HIGHEST + 2)
-#define wxID_RICHTEXT_PROPERTIES3   (wxID_HIGHEST + 3)
+inline constexpr auto wxID_RICHTEXT_PROPERTIES1 = wxID_HIGHEST + 1;
+inline constexpr auto wxID_RICHTEXT_PROPERTIES2 = wxID_HIGHEST + 2;
+inline constexpr auto wxID_RICHTEXT_PROPERTIES3 = wxID_HIGHEST + 3;
 
 /*
     Normal selection occurs initially and as user drags within one container.
@@ -141,7 +141,11 @@ public:
     /**
         Clears the items.
     */
-    void Clear() { m_objects.Clear(); m_labels.Clear(); }
+    void Clear()
+    {
+        m_objects.Clear();
+        m_labels.clear();
+    }
 
 // Accessors
 
@@ -168,12 +172,12 @@ public:
     /**
         Returns the array of labels.
     */
-    wxArrayString& GetLabels() { return m_labels; }
+    std::vector<wxString>& GetLabels() { return m_labels; }
 
     /**
         Returns the array of labels.
     */
-    const wxArrayString& GetLabels() const { return m_labels; }
+    const std::vector<wxString>& GetLabels() const { return m_labels; }
 
     /**
         Returns the number of items.
@@ -181,7 +185,7 @@ public:
     int GetCount() const { return m_objects.GetCount(); }
 
     wxRichTextObjectPtrArray    m_objects;
-    wxArrayString               m_labels;
+    std::vector<wxString>       m_labels;
 };
 
 /**

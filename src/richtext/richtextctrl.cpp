@@ -5480,7 +5480,7 @@ bool wxRichTextContextMenuPropertiesInfo::AddItem(const wxString& label, wxRichT
 {
     if (GetCount() < 3)
     {
-        m_labels.Add(label);
+        m_labels.push_back(label);
         m_objects.Add(obj);
         return true;
     }
@@ -5576,10 +5576,14 @@ int wxRichTextContextMenuPropertiesInfo::AddItems(wxRichTextCtrl* ctrl, wxRichTe
     if (obj && ctrl->CanEditProperties(obj))
         AddItem(ctrl->GetPropertiesMenuLabel(obj), obj);
 
-    if (container && container != obj && ctrl->CanEditProperties(container) && m_labels.Index(ctrl->GetPropertiesMenuLabel(container)) == wxNOT_FOUND)
+    const auto propLabelNotFound = std::cend(m_labels) == std::find(m_labels.cbegin(), m_labels.cend(), ctrl->GetPropertiesMenuLabel(container));
+    const auto parentLabelNotFound = std::cend(m_labels) == std::find(m_labels.cbegin(), m_labels.cend(), ctrl->GetPropertiesMenuLabel(container->GetParent()));
+
+
+    if (container && container != obj && ctrl->CanEditProperties(container) && propLabelNotFound)
         AddItem(ctrl->GetPropertiesMenuLabel(container), container);
 
-    if (container && container->GetParent() && ctrl->CanEditProperties(container->GetParent()) && m_labels.Index(ctrl->GetPropertiesMenuLabel(container->GetParent())) == wxNOT_FOUND)
+    if (container && container->GetParent() && ctrl->CanEditProperties(container->GetParent()) && parentLabelNotFound)
         AddItem(ctrl->GetPropertiesMenuLabel(container->GetParent()), container->GetParent());
 
     return GetCount();
