@@ -655,27 +655,28 @@ void wxFileConfig::SetRootPath()
 bool
 wxFileConfig::DoSetPath(const wxString& strPath, bool createMissingComponents)
 {
-    wxArrayString aParts;
+    std::vector<wxString> aParts;
 
     if ( strPath.empty() ) {
         SetRootPath();
         return true;
     }
 
+    // TODO: Use lambda.
     if ( strPath[0] == wxCONFIG_PATH_SEPARATOR ) {
         // absolute path
-        wxSplitPath(aParts, strPath);
+        aParts = wxSplitPath(strPath);
     }
     else {
         // relative path, combine with current one
         wxString strFullPath = m_strPath;
         strFullPath << wxCONFIG_PATH_SEPARATOR << strPath;
-        wxSplitPath(aParts, strFullPath);
+        aParts = wxSplitPath(strFullPath);
     }
 
     // change current group
     m_pCurrentGroup = m_pRootGroup;
-    for ( size_t n = 0; n < aParts.GetCount(); n++ ) {
+    for ( size_t n = 0; n < aParts.size(); n++ ) {
         wxFileConfigGroup *pNextGroup = m_pCurrentGroup->FindSubgroup(aParts[n]);
         if ( pNextGroup == nullptr )
         {
@@ -690,7 +691,7 @@ wxFileConfig::DoSetPath(const wxString& strPath, bool createMissingComponents)
 
     // recombine path parts in one variable
     m_strPath.Empty();
-    for ( size_t n = 0; n < aParts.GetCount(); n++ ) {
+    for ( size_t n = 0; n < aParts.size(); n++ ) {
         m_strPath << wxCONFIG_PATH_SEPARATOR << aParts[n];
     }
 

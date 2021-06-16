@@ -312,7 +312,7 @@ void wxRadioBoxBase::SetItemHelpText(unsigned int n, const wxString& helpText)
     if ( m_itemsHelpTexts.empty() )
     {
         // once-only initialization of the array: reserve space for all items
-        m_itemsHelpTexts.reserve(GetCount());
+        m_itemsHelpTexts.resize(GetCount());
     }
 
     m_itemsHelpTexts[n] = helpText;

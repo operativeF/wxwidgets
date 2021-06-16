@@ -483,7 +483,7 @@ WXDLLIMPEXP_BASE wxString wxExpandEnvVars(const wxString &sz);
 /*
   Split path into parts removing '..' in progress
  */
-WXDLLIMPEXP_BASE void wxSplitPath(wxArrayString& aParts, const wxString& path);
+WXDLLIMPEXP_BASE std::vector<wxString> wxSplitPath(const wxString& path);
 
 #endif // _WX_CONFBASE_H_
 

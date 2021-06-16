@@ -93,7 +93,7 @@ public:
     wxSize GetPPI() const;
 
     // get the default resolution for displays on this platform
-    static int GetStdPPIValue()
+    static constexpr int GetStdPPIValue()
     {
 #ifdef __WXOSX__
         return 72;

@@ -552,9 +552,9 @@ wxString wxExpandEnvVars(const wxString& str)
 
 // TODO: Return std::vector instead.
 // this function is used to properly interpret '..' in path
-void wxSplitPath(wxArrayString& aParts, const wxString& path)
+std::vector<wxString> wxSplitPath(const wxString& path)
 {
-  aParts.clear();
+  std::vector<wxString> aParts;
 
   wxString strCurrent;
   wxString::const_iterator pc = path.begin();
@@ -591,4 +591,6 @@ void wxSplitPath(wxArrayString& aParts, const wxString& path)
 
     ++pc;
   }
+
+  return aParts;
 }

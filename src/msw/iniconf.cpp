@@ -94,20 +94,21 @@ wxIniConfig::~wxIniConfig()
 
 void wxIniConfig::SetPath(const wxString& strPath)
 {
-  wxArrayString aParts;
+  std::vector<wxString> aParts;
 
+  // TODO: Use lambda.
   if ( strPath.empty() ) {
     // nothing
   }
   else if ( strPath[0u] == wxCONFIG_PATH_SEPARATOR ) {
     // absolute path
-    wxSplitPath(aParts, strPath);
+    aParts = wxSplitPath(strPath);
   }
   else {
     // relative path, combine with current one
     wxString strFullPath = GetPath();
     strFullPath << wxCONFIG_PATH_SEPARATOR << strPath;
-    wxSplitPath(aParts, strFullPath);
+    aParts = wxSplitPath(strFullPath);
   }
 
   size_t nPartsCount = aParts.Count();

@@ -186,25 +186,25 @@ void wxRegConfig::SetPath(const wxString& strPath)
     wxString m_strPathAlt;
 
     {
-        wxArrayString aParts;
+        std::vector<wxString> aParts;
 
         // because GetPath() returns "" when we're at root, we must understand
         // empty string as "/"
         if ( strPath.empty() || (strPath[0] == wxCONFIG_PATH_SEPARATOR) ) {
             // absolute path
-            wxSplitPath(aParts, strPath);
+            aParts = wxSplitPath(strPath);
         }
         else {
             // relative path, combine with current one
             wxString strFullPath = GetPath();
             strFullPath << wxCONFIG_PATH_SEPARATOR << strPath;
-            wxSplitPath(aParts, strFullPath);
+            aParts = wxSplitPath(strFullPath);
         }
 
         // recombine path parts in one variable
         wxString strRegPath;
         m_strPathAlt.Empty();
-        for ( size_t n = 0; n < aParts.Count(); n++ ) {
+        for ( size_t n = 0; n < aParts.size(); n++ ) {
             strRegPath << '\\' << aParts[n];
             m_strPathAlt << wxCONFIG_PATH_SEPARATOR << aParts[n];
         }
