@@ -61,7 +61,7 @@ public:
 
     // Accessors
     virtual wxString GetHistoryFile(size_t i) const { return m_fileHistory[i]; }
-    virtual size_t GetCount() const { return m_fileHistory.GetCount(); }
+    virtual size_t GetCount() const { return m_fileHistory.size(); }
 
     const wxList& GetMenus() const { return m_fileMenus; }
 
@@ -74,7 +74,7 @@ public:
 
 protected:
     // Last n files
-    wxArrayString              m_fileHistory;
+    std::vector<wxString>       m_fileHistory;
 
     // Menus to maintain (may need several for an MDI app)
     wxList                      m_fileMenus;

@@ -69,7 +69,7 @@ TEST_CASE("FTP", "[net][.]")
         CPPUNIT_ASSERT( ftp.ChDir(directory) );
 
         // test NLIST and LIST
-        wxArrayString files;
+        std::vector<wxString> files;
         CPPUNIT_ASSERT( ftp.GetFilesList(files) );
         CPPUNIT_ASSERT( ftp.GetDirList(files) );
 

@@ -822,7 +822,7 @@ wxOutputStream *wxFTP::GetOutputStream(const wxString& path)
 // FTP directory listing
 // ----------------------------------------------------------------------------
 
-bool wxFTP::GetList(wxArrayString& files,
+bool wxFTP::GetList(std::vector<wxString>& files,
                     const wxString& wildcard,
                     bool details)
 {
@@ -857,10 +857,10 @@ bool wxFTP::GetList(wxArrayString& files,
         return false;
     }
 
-    files.Empty();
+    files.clear();
     while (ReadLine(sock, line) == wxPROTO_NOERR )
     {
-        files.Add(line);
+        files.push_back(line);
     }
 
     delete sock;
@@ -877,7 +877,7 @@ bool wxFTP::FileExists(const wxString& fileName)
     // If this succeeds (and the list is not empty) the file exists.
 
     bool retval = false;
-    wxArrayString fileList;
+    std::vector<wxString> fileList;
 
     if ( GetList(fileList, fileName, false) )
     {
@@ -889,7 +889,7 @@ bool wxFTP::FileExists(const wxString& fileName)
         // 226 Transfer complete
         // Here wxFTP::GetList(...) will succeed but it will return an empty
         // list.
-        retval = !fileList.IsEmpty();
+        retval = !fileList.empty();
     }
 
     return retval;
@@ -958,10 +958,10 @@ int wxFTP::GetFileSize(const wxString& fileName)
             // returned an invalid reply.
             // We now try to get details for the file with a "LIST"-command
             // and then parse the output from there..
-            wxArrayString fileList;
+            std::vector<wxString> fileList;
             if ( GetList(fileList, fileName, true) )
             {
-                if ( !fileList.IsEmpty() )
+                if ( !fileList.empty() )
                 {
                     // We _should_ only get one line in return, but just to be
                     // safe we run through the line(s) returned and look for a
@@ -970,7 +970,7 @@ int wxFTP::GetFileSize(const wxString& fileName)
                     // filename. The search is not case-sensitive.
                     const size_t numFiles = fileList.size();
                     size_t i;
-                    for ( i = 0; i < fileList.GetCount(); i++ )
+                    for ( i = 0; i < fileList.size(); i++ )
                     {
                         if ( fileList[i].Upper().Contains(fileName.Upper()) )
                             break;

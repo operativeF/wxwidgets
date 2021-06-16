@@ -585,10 +585,6 @@ public: \
 //#include "wx/object.h"
 //wxDECLARE_ANY_TYPE(wxObject*, WXDLLIMPEXP_BASE)
 
-//#include "wx/arrstr.h"
-//wxDECLARE_ANY_TYPE(wxArrayString, WXDLLIMPEXP_BASE)
-
-
 #if wxUSE_VARIANT
 
 class WXDLLIMPEXP_FWD_BASE wxAnyToVariantRegistration;

@@ -99,7 +99,7 @@ public:
 
     // get the list of full filenames, the format is fixed: one file name per
     // line
-    bool GetFilesList(wxArrayString& files,
+    bool GetFilesList(std::vector<wxString>& files,
                       const wxString& wildcard = wxEmptyString)
     {
         return GetList(files, wildcard, false);
@@ -107,14 +107,14 @@ public:
 
     // get a directory list in server dependent format - this can be shown
     // directly to the user
-    bool GetDirList(wxArrayString& files,
+    bool GetDirList(std::vector<wxString>& files,
                     const wxString& wildcard = wxEmptyString)
     {
         return GetList(files, wildcard, true);
     }
 
     // equivalent to either GetFilesList() (default) or GetDirList()
-    bool GetList(wxArrayString& files,
+    bool GetList(std::vector<wxString>& files,
                  const wxString& wildcard = wxEmptyString,
                  bool details = false);
 

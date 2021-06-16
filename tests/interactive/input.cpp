@@ -258,7 +258,7 @@ void InteractiveInputTestCase::TestFtpInteractive()
             if ( wxStrlen(buf) > 4 )
                 wildcard = buf + 5;
 
-            wxArrayString files;
+            std::vector<wxString> files;
             if ( !ftp.GetList(files, wildcard, start == wxT("LIST")) )
             {
                 wxPrintf(wxT("ERROR: failed to get %s of files\n"), start);

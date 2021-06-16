@@ -79,7 +79,7 @@ protected:
     void Clear();
 
 
-    wxArrayString m_aMessages;      // the log message texts
+    std::vector<wxString> m_aMessages;      // the log message texts
     std::vector<int>    m_aSeverity;      // one of wxLOG_XXX values
     std::vector<long>   m_aTimes;   // the time of each message
     bool          m_bErrors,        // do we have any errors?
@@ -94,7 +94,7 @@ private:
                                         int style);
 
     // this method is called to show multiple log messages, it uses wxLogDialog
-    virtual void DoShowMultipleLogMessages(const wxArrayString& messages,
+    virtual void DoShowMultipleLogMessages(const std::vector<wxString>& messages,
                                            const std::vector<int>& severities,
                                            const std::vector<long>& times,
                                            const wxString& title,

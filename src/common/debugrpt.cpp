@@ -276,8 +276,8 @@ wxDebugReport::AddFile(const wxString& filename, const wxString& description)
                       wxT("file should exist in debug report directory") );
     }
 
-    m_files.Add(name);
-    m_descriptions.Add(description);
+    m_files.push_back(name);
+    m_descriptions.push_back(description);
 }
 
 bool
@@ -308,18 +308,23 @@ wxDebugReport::AddText(const wxString& filename,
 
 void wxDebugReport::RemoveFile(const wxString& name)
 {
-    const int n = m_files.Index(name);
+    const auto iter_n = std::find_if(m_files.cbegin(), m_files.cend(),
+    [name](const auto& filen){
+        return name.IsSameAs(filen);
+    });
+    const int n = std::distance(std::cbegin(m_files), iter_n);
+
     wxCHECK_RET( n != wxNOT_FOUND, wxT("No such file in wxDebugReport") );
 
-    m_files.RemoveAt(n);
-    m_descriptions.RemoveAt(n);
+    m_files.erase(std::begin(m_files) + n);
+    m_descriptions.erase(std::begin(m_descriptions) + n);
 
     wxRemove(wxFileName(GetDirectory(), name).GetFullPath());
 }
 
 bool wxDebugReport::GetFile(size_t n, wxString *name, wxString *desc) const
 {
-    if ( n >= m_files.GetCount() )
+    if ( n >= m_files.size() )
         return false;
 
     if ( name )
@@ -712,7 +717,9 @@ bool wxDebugReportUpload::DoProcess()
         return false;
 
 
-    wxArrayString output, errors;
+    std::vector<wxString> output;
+    std::vector<wxString> errors;
+
     int rc = wxExecute(wxString::Format
                        (
                             wxT("%s -F \"%s=@%s\" %s"),
@@ -729,7 +736,7 @@ bool wxDebugReportUpload::DoProcess()
     }
     else if ( rc != 0 )
     {
-        const size_t count = errors.GetCount();
+        const size_t count = errors.size();
         if ( count )
         {
             for ( size_t n = 0; n < count; n++ )

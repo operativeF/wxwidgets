@@ -11,7 +11,6 @@
 #ifndef   _WX_FILENAME_H_
 #define   _WX_FILENAME_H_
 
-#include "wx/arrstr.h"
 #include "wx/filefn.h"
 #include "wx/datetime.h"
 #include "wx/intl.h"
@@ -500,7 +499,7 @@ public:
     void SetFullName(const wxString& fullname);
     wxString GetFullName() const;
 
-    const wxArrayString& GetDirs() const        { return m_dirs; }
+    const std::vector<wxString>& GetDirs() const        { return m_dirs; }
 
     // flags are combination of wxPATH_GET_XXX flags
     wxString GetPath(int flags = wxPATH_GET_VOLUME,
@@ -603,7 +602,7 @@ private:
     wxString        m_volume;
 
     // the path components of the file
-    wxArrayString   m_dirs;
+    std::vector<wxString>   m_dirs;
 
     // the file name and extension (empty for directories)
     wxString        m_name,

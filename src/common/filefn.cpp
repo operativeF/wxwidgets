@@ -876,11 +876,11 @@ time_t WXDLLIMPEXP_BASE wxFileModificationTime(const wxString& filename)
 // filterStr is in the form: "All files (*.*)|*.*|JPEG Files (*.jpeg)|*.jpeg"
 // TODO: string_view
 int WXDLLIMPEXP_BASE wxParseCommonDialogsFilter(const wxString& filterStr,
-                                           wxArrayString& descriptions,
-                                           wxArrayString& filters)
+                                           std::vector<wxString>& descriptions,
+                                           std::vector<wxString>& filters)
 {
-    descriptions.Clear();
-    filters.Clear();
+    descriptions.clear();
+    filters.clear();
 
     wxString str(filterStr);
 
@@ -893,10 +893,10 @@ int WXDLLIMPEXP_BASE wxParseCommonDialogsFilter(const wxString& filterStr,
         {
             // if there are no '|'s at all in the string just take the entire
             // string as filter and make description empty for later autocompletion
-            if ( filters.IsEmpty() )
+            if ( filters.empty() )
             {
-                descriptions.Add(wxEmptyString);
-                filters.Add(filterStr);
+                descriptions.push_back(wxEmptyString);
+                filters.push_back(filterStr);
             }
             else
             {
@@ -919,8 +919,8 @@ int WXDLLIMPEXP_BASE wxParseCommonDialogsFilter(const wxString& filterStr,
             str = str.Mid(pos + 1);
         }
 
-        descriptions.Add(description);
-        filters.Add(filter);
+        descriptions.push_back(description);
+        filters.push_back(filter);
     }
 
 #if defined(__WXMOTIF__)
@@ -971,7 +971,7 @@ int WXDLLIMPEXP_BASE wxParseCommonDialogsFilter(const wxString& filterStr,
 #endif
 
     // autocompletion
-    for( size_t j = 0 ; j < descriptions.GetCount() ; j++ )
+    for( size_t j = 0 ; j < descriptions.size() ; j++ )
     {
         if ( descriptions[j].empty() && !filters[j].empty() )
         {
@@ -979,7 +979,7 @@ int WXDLLIMPEXP_BASE wxParseCommonDialogsFilter(const wxString& filterStr,
         }
     }
 
-    return filters.GetCount();
+    return filters.size();
 }
 
 #if defined(__WINDOWS__) && !defined(__UNIX__)

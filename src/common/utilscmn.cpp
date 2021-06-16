@@ -599,7 +599,7 @@ bool wxGetEnvMap(wxEnvVariableHashMap *map)
 //
 // returns true if ok, false if error
 #if wxUSE_STREAMS
-static bool ReadAll(wxInputStream *is, wxArrayString& output)
+static bool ReadAll(wxInputStream *is, std::vector<wxString>& output)
 {
     if ( !is )
         return true;
@@ -618,7 +618,7 @@ static bool ReadAll(wxInputStream *is, wxArrayString& output)
         {
             // add the last, possibly incomplete, line
             if ( !line.empty() )
-                output.Add(line);
+                output.push_back(line);
             break;
         }
 
@@ -626,7 +626,7 @@ static bool ReadAll(wxInputStream *is, wxArrayString& output)
         if ( !*is )
             return false;
 
-        output.Add(line);
+        output.push_back(line);
     }
 
     return true;
@@ -637,8 +637,8 @@ static bool ReadAll(wxInputStream *is, wxArrayString& output)
 // array is passed by reference, the second by pointer - instead we have 2
 // public versions of wxExecute() below
 static long wxDoExecuteWithCapture(const wxString& command,
-                                   wxArrayString& output,
-                                   wxArrayString* error,
+                                   std::vector<wxString>& output,
+                                   std::vector<wxString>* error,
                                    int flags,
                                    const wxExecuteEnv *env)
 {
@@ -670,15 +670,15 @@ static long wxDoExecuteWithCapture(const wxString& command,
     return rc;
 }
 
-long wxExecute(const wxString& command, wxArrayString& output, int flags,
+long wxExecute(const wxString& command, std::vector<wxString>& output, int flags,
                const wxExecuteEnv *env)
 {
     return wxDoExecuteWithCapture(command, output, nullptr, flags, env);
 }
 
 long wxExecute(const wxString& command,
-               wxArrayString& output,
-               wxArrayString& error,
+               std::vector<wxString>& output,
+               std::vector<wxString>& error,
                int flags,
                const wxExecuteEnv *env)
 {

@@ -558,7 +558,8 @@ int wxFileDialog::ShowModal()
     of.lpfnHook          = wxFileDialogHookFunction;
     of.lCustData         = (LPARAM)this;
 
-    wxArrayString wildDescriptions, wildFilters;
+    std::vector<wxString> wildDescriptions;
+    std::vector<wxString> wildFilters;
 
     size_t items = wxParseCommonDialogsFilter(m_wildCard, wildDescriptions, wildFilters);
 

@@ -156,8 +156,8 @@ wxString wxFileTypeImpl::GetVerbPath(const wxString& verb) const
     return path;
 }
 
-size_t wxFileTypeImpl::GetAllCommands(wxArrayString *verbs,
-                                      wxArrayString *commands,
+size_t wxFileTypeImpl::GetAllCommands(std::vector<wxString> *verbs,
+                                      std::vector<wxString> *commands,
                                       const wxFileType::MessageParameters& params) const
 {
     wxCHECK_MSG( !m_ext.empty(), 0, wxT("GetAllCommands() needs an extension") );
@@ -191,16 +191,16 @@ size_t wxFileTypeImpl::GetAllCommands(wxArrayString *verbs,
         if ( verb.CmpNoCase(wxT("open")) == 0 )
         {
             if ( verbs )
-                verbs->Insert(verb, 0);
+                verbs->insert(std::begin(*verbs), verb);
             if ( commands )
-                commands->Insert(command, 0);
+                commands->insert(std::begin(*commands), command);
         }
         else // anything else than "open"
         {
             if ( verbs )
-                verbs->Add(verb);
+                verbs->push_back(verb);
             if ( commands )
-                commands->Add(command);
+                commands->push_back(command);
         }
 
         count++;
@@ -356,7 +356,7 @@ wxFileTypeImpl::GetExpandedCommand(const wxString & verb,
 // ----------------------------------------------------------------------------
 
 // TODO this function is half implemented
-bool wxFileTypeImpl::GetExtensions(wxArrayString& extensions)
+bool wxFileTypeImpl::GetExtensions(std::vector<wxString>& extensions)
 {
     if ( m_ext.empty() ) {
         // the only way to get the list of extensions from the file type is to
@@ -364,8 +364,8 @@ bool wxFileTypeImpl::GetExtensions(wxArrayString& extensions)
         return false;
     }
     else {
-        extensions.Empty();
-        extensions.Add(m_ext);
+        extensions.clear();
+        extensions.push_back(m_ext);
 
         // it's a lie too, we don't return _all_ extensions...
         return true;
@@ -382,7 +382,7 @@ bool wxFileTypeImpl::GetMimeType(wxString *mimeType) const
                 key.QueryValue(wxT("Content Type"), *mimeType);
 }
 
-bool wxFileTypeImpl::GetMimeTypes(wxArrayString& mimeTypes) const
+bool wxFileTypeImpl::GetMimeTypes(std::vector<wxString>& mimeTypes) const
 {
     wxString s;
 
@@ -391,8 +391,8 @@ bool wxFileTypeImpl::GetMimeTypes(wxArrayString& mimeTypes) const
         return false;
     }
 
-    mimeTypes.Clear();
-    mimeTypes.Add(s);
+    mimeTypes.clear();
+    mimeTypes.push_back(s);
     return true;
 }
 
@@ -521,7 +521,7 @@ wxMimeTypesManagerImpl::GetFileTypeFromMimeType(const wxString& mimeType)
     return nullptr;
 }
 
-size_t wxMimeTypesManagerImpl::EnumAllFileTypes(wxArrayString& mimetypes)
+size_t wxMimeTypesManagerImpl::EnumAllFileTypes(std::vector<wxString>& mimetypes)
 {
     // enumerate all keys under MIME_DATABASE_KEY
     wxRegKey key(wxRegKey::HKCR, MIME_DATABASE_KEY);
@@ -531,12 +531,12 @@ size_t wxMimeTypesManagerImpl::EnumAllFileTypes(wxArrayString& mimetypes)
     bool cont = key.GetFirstKey(type, cookie);
     while ( cont )
     {
-        mimetypes.Add(type);
+        mimetypes.push_back(type);
 
         cont = key.GetNextKey(type, cookie);
     }
 
-    return mimetypes.GetCount();
+    return mimetypes.size();
 }
 
 // ----------------------------------------------------------------------------

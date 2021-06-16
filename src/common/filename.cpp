@@ -418,7 +418,7 @@ void wxFileName::Assign(const wxString& volume,
 
 void wxFileName::SetPath( const wxString& pathOrig, wxPathFormat format )
 {
-    m_dirs.Clear();
+    m_dirs.clear();
 
     if ( pathOrig.empty() )
     {
@@ -504,12 +504,12 @@ void wxFileName::SetPath( const wxString& pathOrig, wxPathFormat format )
         if (token.empty())
         {
             if (format == wxPATH_MAC)
-                m_dirs.Add( wxT("..") );
+                m_dirs.push_back( wxT("..") );
             // else ignore
         }
         else
         {
-           m_dirs.Add( token );
+           m_dirs.push_back( token );
         }
     }
 }
@@ -1279,9 +1279,9 @@ bool wxFileName::Mkdir( const wxString& dir, int perm, int flags )
             currPath << wxGetVolumeString(filename.GetVolume(), wxPATH_NATIVE);
         }
 
-        wxArrayString dirs = filename.GetDirs();
+        std::vector<wxString> dirs = filename.GetDirs();
 
-        for ( size_t i = 0; i < dirs.GetCount(); i++ )
+        for ( size_t i = 0; i < dirs.size(); i++ )
         {
             if ( i > 0 || filename.IsAbsolute() )
                 currPath += wxFILE_SEP_PATH;
@@ -1420,7 +1420,7 @@ bool wxFileName::Normalize(int flags,
     }
 
     // the existing path components
-    wxArrayString dirs = GetDirs();
+    std::vector<wxString> dirs = GetDirs();
 
     // the path to prepend in front to make the path absolute
     wxFileName curDir;
@@ -1443,14 +1443,14 @@ bool wxFileName::Normalize(int flags,
     // handle ~ stuff under Unix only
     if ( (format == wxPATH_UNIX) && (flags & wxPATH_NORM_TILDE) && m_relative )
     {
-        if ( !dirs.IsEmpty() )
+        if ( !dirs.empty() )
         {
             wxString dir = dirs[0u];
             if ( !dir.empty() && dir[0u] == wxT('~') )
             {
                 // to make the path absolute use the home directory
                 curDir.AssignDir(wxGetUserHome(dir.c_str() + 1));
-                dirs.RemoveAt(0u);
+                dirs.erase(std::begin(dirs));
             }
         }
     }
@@ -1473,8 +1473,8 @@ bool wxFileName::Normalize(int flags,
         }
 
         // finally, prepend curDir to the dirs array
-        wxArrayString dirsNew = curDir.GetDirs();
-        WX_PREPEND_ARRAY(dirs, dirsNew);
+        std::vector<wxString> dirsNew = curDir.GetDirs();
+        dirs.insert(dirs.begin(), dirsNew.begin(), dirsNew.end());
 
         // if we used e.g. tilde expansion previously and wxGetUserHome didn't
         // return for some reason an absolute path, then curDir maybe not be absolute!
@@ -1489,8 +1489,9 @@ bool wxFileName::Normalize(int flags,
     }
 
     // now deal with ".", ".." and the rest
-    m_dirs.Empty();
-    size_t count = dirs.GetCount();
+    m_dirs.clear();
+
+    size_t count = dirs.size();
     for ( size_t n = 0; n < count; n++ )
     {
         wxString dir = dirs[n];
@@ -1529,7 +1530,7 @@ bool wxFileName::Normalize(int flags,
             }
         }
 
-        m_dirs.Add(dir);
+        m_dirs.push_back(dir);
     }
 
 #if defined(__WIN32__) && wxUSE_OLE
@@ -1560,7 +1561,7 @@ bool wxFileName::Normalize(int flags,
         m_ext.MakeLower();
 
         // directory entries must be made lower case as well
-        count = m_dirs.GetCount();
+        count = m_dirs.size();
         for ( size_t i = 0; i < count; i++ )
         {
             m_dirs[i].MakeLower();
@@ -1733,7 +1734,7 @@ bool wxFileName::IsAbsolute(wxPathFormat format) const
     // unix paths beginning with ~ are reported as being absolute
     if ( format == wxPATH_UNIX )
     {
-        if ( !m_dirs.IsEmpty() )
+        if ( !m_dirs.empty() )
         {
             wxString dir = m_dirs[0u];
 
@@ -1787,18 +1788,18 @@ bool wxFileName::MakeRelativeTo(const wxString& pathBase, wxPathFormat format)
     m_volume.clear();
 
     // remove common directories starting at the top
-    while ( !m_dirs.IsEmpty() && !fnBase.m_dirs.IsEmpty() &&
+    while ( !m_dirs.empty() && !fnBase.m_dirs.empty() &&
                 m_dirs[0u].IsSameAs(fnBase.m_dirs[0u], withCase) )
     {
-        m_dirs.RemoveAt(0);
-        fnBase.m_dirs.RemoveAt(0);
+        m_dirs.erase(std::begin(m_dirs));
+        fnBase.m_dirs.erase(std::begin(m_dirs));
     }
 
     // add as many ".." as needed
-    size_t count = fnBase.m_dirs.GetCount();
+    size_t count = fnBase.m_dirs.size();
     for ( size_t i = 0; i < count; i++ )
     {
-        m_dirs.Insert(wxT(".."), 0u);
+        m_dirs.insert(std::begin(m_dirs), wxT(".."));
     }
 
     switch ( GetFormat(format) )
@@ -1813,9 +1814,9 @@ bool wxFileName::MakeRelativeTo(const wxString& pathBase, wxPathFormat format)
             // a directory made relative with respect to itself is '.' under
             // Unix and DOS, by definition (but we don't have to insert "./"
             // for the files)
-            if ( m_dirs.IsEmpty() && IsDir() )
+            if ( m_dirs.empty() && IsDir() )
             {
-                m_dirs.Add(wxT('.'));
+                m_dirs.push_back(wxT('.'));
             }
             break;
 
@@ -2010,7 +2011,7 @@ bool wxFileName::AppendDir( const wxString& dir )
 {
     if (!IsValidDirComponent(dir))
         return false;
-    m_dirs.Add(dir);
+    m_dirs.push_back(dir);
     return true;
 }
 
@@ -2023,13 +2024,13 @@ bool wxFileName::InsertDir(size_t before, const wxString& dir)
 {
     if (!IsValidDirComponent(dir))
         return false;
-    m_dirs.Insert(dir, before);
+    m_dirs.insert(std::begin(m_dirs) + before, dir);
     return true;
 }
 
 void wxFileName::RemoveDir(size_t pos)
 {
-    m_dirs.RemoveAt(pos);
+    m_dirs.erase(std::begin(m_dirs) + pos);
 }
 
 // ----------------------------------------------------------------------------
@@ -2109,7 +2110,7 @@ wxString wxFileName::GetPath( int flags, wxPathFormat format ) const
         fullpath += wxT('[');
     }
 
-    const size_t dirCount = m_dirs.GetCount();
+    const size_t dirCount = m_dirs.size();
     for ( size_t i = 0; i < dirCount; i++ )
     {
         switch (format)
@@ -2229,12 +2230,12 @@ wxString wxFileName::GetLongPath() const
     else
         pathOut.clear();
 
-    wxArrayString dirs = GetDirs();
-    dirs.Add(GetFullName());
+    std::vector<wxString> dirs = GetDirs();
+    dirs.push_back(GetFullName());
 
     wxString tmpPath;
 
-    size_t count = dirs.GetCount();
+    size_t count = dirs.size();
     for ( size_t i = 0; i < count; i++ )
     {
         const wxString& dir = dirs[i];

@@ -25,7 +25,6 @@
     #include "wx/log.h"
     #include "wx/intl.h"
     #include "wx/filefn.h"
-    #include "wx/arrstr.h"
 #endif //WX_PRECOMP
 
 #include "wx/dir.h"
@@ -217,7 +216,7 @@ size_t wxDir::Traverse(wxDirTraverser& sink,
 class wxDirTraverserSimple : public wxDirTraverser
 {
 public:
-    explicit wxDirTraverserSimple(wxArrayString& files) : m_files(files) { }
+    explicit wxDirTraverserSimple(std::vector<wxString>& files) : m_files(files) { }
 
     wxDirTraverserSimple(const wxDirTraverserSimple&) = delete;
 	wxDirTraverserSimple& operator=(const wxDirTraverserSimple&) = delete;
@@ -234,12 +233,12 @@ public:
     }
 
 private:
-    wxArrayString& m_files;
+    std::vector<wxString>& m_files;
 };
 
 /* static */
 size_t wxDir::GetAllFiles(const wxString& dirname,
-                          wxArrayString *files,
+                          std::vector<wxString>* files,
                           const wxString& filespec,
                           int flags)
 {
@@ -333,7 +332,7 @@ public:
             // we need to at least warn the user that the resulting
             // final size could be not reliable (if e.g. the locked
             // file is very big).
-            m_skippedFiles.Add(filename);
+            m_skippedFiles.push_back(filename);
             return wxDIR_CONTINUE;
         }
 
@@ -348,15 +347,15 @@ public:
 
     wxULongLong GetTotalSize() const
         { return m_sz; }
-    const wxArrayString& GetSkippedFiles() const
+    const std::vector<wxString>& GetSkippedFiles() const
         { return m_skippedFiles; }
 
 protected:
     wxULongLong m_sz;
-    wxArrayString m_skippedFiles;
+    std::vector<wxString> m_skippedFiles;
 };
 
-wxULongLong wxDir::GetTotalSize(const wxString &dirname, wxArrayString *filesSkipped)
+wxULongLong wxDir::GetTotalSize(const wxString &dirname, std::vector<wxString>* filesSkipped)
 {
     if (!wxDirExists(dirname))
         return wxInvalidSize;

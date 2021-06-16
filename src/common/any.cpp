@@ -472,7 +472,6 @@ WX_IMPLEMENT_ANY_VALUE_TYPE(wxAnyValueTypeImpl<wxDateTime>)
 #endif // wxUSE_DATETIME
 
 //WX_IMPLEMENT_ANY_VALUE_TYPE(wxAnyValueTypeImpl<wxObject*>)
-//WX_IMPLEMENT_ANY_VALUE_TYPE(wxAnyValueTypeImpl<wxArrayString>)
 
 //-------------------------------------------------------------------------
 // wxAnyNullValueType implementation

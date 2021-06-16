@@ -190,7 +190,7 @@ public:
 
         // the array elements correspond to the parameters of the ctor above in
         // the same order
-    wxFileTypeInfo(const wxArrayString& sArray);
+    wxFileTypeInfo(const std::vector<wxString>& sArray);
 
         // invalid item - use this to terminate the array passed to
         // wxMimeTypesManager::AddFallbacks
@@ -230,8 +230,8 @@ public:
         // get the long, user visible description
     const wxString& GetDescription() const { return m_desc; }
         // get the array of all extensions
-    const wxArrayString& GetExtensions() const { return m_exts; }
-    size_t GetExtensionsCount() const {return m_exts.GetCount(); }
+    const std::vector<wxString>& GetExtensions() const { return m_exts; }
+    size_t GetExtensionsCount() const {return m_exts.size(); }
         // get the icon info
     const wxString& GetIconFile() const { return m_iconFile; }
     int GetIconIndex() const { return m_iconIndex; }
@@ -247,13 +247,13 @@ private:
     wxString m_iconFile;    // the file containing the icon
     int      m_iconIndex;   // icon index in this file
 
-    wxArrayString m_exts;   // the extensions which are mapped on this filetype
+    std::vector<wxString> m_exts;   // the extensions which are mapped on this filetype
 
 
 #if 0 // TODO
     // the additional (except "open" and "print") command names and values
-    wxArrayString m_commandNames,
-                  m_commandValues;
+    std::vector<wxString> m_commandNames;
+    std::vector<wxString> m_commandValues;
 #endif // 0
 };
 
@@ -313,10 +313,10 @@ public:
     // parameters are unchanged)
         // return the MIME type for this file type
     bool GetMimeType(wxString *mimeType) const;
-    bool GetMimeTypes(wxArrayString& mimeTypes) const;
+    bool GetMimeTypes(std::vector<wxString>& mimeTypes) const;
         // fill passed in array with all extensions associated with this file
         // type
-    bool GetExtensions(wxArrayString& extensions);
+    bool GetExtensions(std::vector<wxString>& extensions);
         // get the icon corresponding to this file type and of the given size
     bool GetIcon(wxIconLocation *iconloc) const;
     bool GetIcon(wxIconLocation *iconloc,
@@ -337,7 +337,7 @@ public:
 
 
         // return the number of commands defined for this file type, 0 if none
-    size_t GetAllCommands(wxArrayString *verbs, wxArrayString *commands,
+    size_t GetAllCommands(std::vector<wxString> *verbs, std::vector<wxString> *commands,
                           const wxFileType::MessageParameters& params) const;
 
     // set an arbitrary command, ask confirmation if it already exists and
@@ -454,7 +454,7 @@ public:
     // enumerate all known MIME types
     //
     // returns the number of retrieved file types
-    size_t EnumAllFileTypes(wxArrayString& mimetypes);
+    size_t EnumAllFileTypes(std::vector<wxString>& mimetypes);
 
     // these functions can be used to provide default values for some of the
     // MIME types inside the program itself

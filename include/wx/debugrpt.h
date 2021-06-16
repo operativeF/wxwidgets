@@ -15,7 +15,6 @@
 #if wxUSE_DEBUGREPORT && wxUSE_XML
 
 #include "wx/string.h"
-#include "wx/arrstr.h"
 #include "wx/filename.h"
 
 class WXDLLIMPEXP_FWD_XML wxXmlNode;
@@ -96,7 +95,7 @@ public:
     virtual wxString GetReportName() const;
 
     // get the files in this report
-    size_t GetFilesCount() const { return m_files.GetCount(); }
+    size_t GetFilesCount() const { return m_files.size(); }
     bool GetFile(size_t n, wxString *name, wxString *desc) const;
 
     // remove the file from report: this is used by wxDebugReportPreview to
@@ -124,8 +123,8 @@ private:
     wxString m_dir;
 
     // the arrays of files in this report and their descriptions
-    wxArrayString m_files,
-                  m_descriptions;
+    std::vector<wxString> m_files;
+    std::vector<wxString> m_descriptions;
 };
 
 #if wxUSE_ZIPSTREAM
@@ -192,7 +191,7 @@ protected:
     // returned
     //
     // return value becomes the return value of Process()
-    virtual bool OnServerReply(const wxArrayString& WXUNUSED(reply))
+    virtual bool OnServerReply(const std::vector<wxString>& WXUNUSED(reply))
     {
         return true;
     }

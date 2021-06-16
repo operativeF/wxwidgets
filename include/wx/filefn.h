@@ -567,7 +567,7 @@ WXDLLIMPEXP_BASE time_t wxFileModificationTime(const wxString& filename);
 // The arrays will contain an equal number of items found before the error.
 // wildCard is in the form:
 // "All files (*)|*|Image Files (*.jpeg *.png)|*.jpg;*.png"
-WXDLLIMPEXP_BASE int wxParseCommonDialogsFilter(const wxString& wildCard, wxArrayString& descriptions, wxArrayString& filters);
+WXDLLIMPEXP_BASE int wxParseCommonDialogsFilter(const wxString& wildCard, std::vector<wxString>& descriptions, std::vector<wxString>& filters);
 
 // ----------------------------------------------------------------------------
 // classes

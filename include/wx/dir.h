@@ -15,8 +15,6 @@
 #include "wx/string.h"
 #include "wx/filefn.h"      // for wxS_DIR_DEFAULT
 
-class WXDLLIMPEXP_FWD_BASE wxArrayString;
-
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -150,7 +148,7 @@ public:
     // simplest version of Traverse(): get the names of all files under this
     // directory into filenames array, return the number of files
     static size_t GetAllFiles(const wxString& dirname,
-                              wxArrayString *files,
+                              std::vector<wxString>* files,
                               const wxString& filespec = wxEmptyString,
                               int flags = wxDIR_DEFAULT);
 
@@ -163,7 +161,7 @@ public:
 
 #if wxUSE_LONGLONG
     // returns the size of all directories recursively found in given path
-    static wxULongLong GetTotalSize(const wxString &dir, wxArrayString *filesSkipped = nullptr);
+    static wxULongLong GetTotalSize(const wxString &dir, std::vector<wxString>* filesSkipped = nullptr);
 #endif // wxUSE_LONGLONG
 
 

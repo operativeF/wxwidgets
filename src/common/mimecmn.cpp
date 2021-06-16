@@ -142,7 +142,7 @@ void wxFileTypeInfo::DoVarArgInit(const wxString& mimeType,
             break;
         }
 
-        m_exts.Add(ext.GetString());
+        m_exts.push_back(ext.GetString());
     }
 }
 
@@ -161,16 +161,16 @@ void wxFileTypeInfo::VarArgInit(const wxString *mimeType,
 }
 
 
-wxFileTypeInfo::wxFileTypeInfo(const wxArrayString& sArray)
+wxFileTypeInfo::wxFileTypeInfo(const std::vector<wxString>& sArray)
     : m_mimeType(sArray[0u])
     , m_openCmd( sArray[1u])
     , m_printCmd(sArray[2u])
     , m_desc(    sArray[3u])
 {
-    const size_t count = sArray.GetCount();
+    const size_t count = sArray.size();
     for ( size_t i = 4; i < count; i++ )
     {
-        m_exts.Add(sArray[i]);
+        m_exts.push_back(sArray[i]);
     }
 }
 
@@ -297,7 +297,7 @@ wxFileType::~wxFileType()
     delete m_impl;
 }
 
-bool wxFileType::GetExtensions(wxArrayString& extensions)
+bool wxFileType::GetExtensions(std::vector<wxString>& extensions)
 {
     if ( m_info )
     {
@@ -322,12 +322,12 @@ bool wxFileType::GetMimeType(wxString *mimeType) const
     return m_impl->GetMimeType(mimeType);
 }
 
-bool wxFileType::GetMimeTypes(wxArrayString& mimeTypes) const
+bool wxFileType::GetMimeTypes(std::vector<wxString>& mimeTypes) const
 {
     if ( m_info )
     {
-        mimeTypes.Clear();
-        mimeTypes.Add(m_info->GetMimeType());
+        mimeTypes.clear();
+        mimeTypes.push_back(m_info->GetMimeType());
 
         return true;
     }
@@ -438,14 +438,14 @@ wxFileType::GetExpandedCommand(const wxString& verb,
 }
 
 
-size_t wxFileType::GetAllCommands(wxArrayString *verbs,
-                                  wxArrayString *commands,
+size_t wxFileType::GetAllCommands(std::vector<wxString> *verbs,
+                                  std::vector<wxString> *commands,
                                   const wxFileType::MessageParameters& params) const
 {
     if ( verbs )
-        verbs->Clear();
+        verbs->clear();
     if ( commands )
-        commands->Clear();
+        commands->clear();
 
 #if defined (__WINDOWS__)  || defined(__UNIX__)
     return m_impl->GetAllCommands(verbs, commands, params);
@@ -457,18 +457,18 @@ size_t wxFileType::GetAllCommands(wxArrayString *verbs,
     if ( GetOpenCommand(&cmd, params) )
     {
         if ( verbs )
-            verbs->Add(wxT("Open"));
+            verbs->push_back(wxT("Open"));
         if ( commands )
-            commands->Add(cmd);
+            commands->push_back(cmd);
         count++;
     }
 
     if ( GetPrintCommand(&cmd, params) )
     {
         if ( verbs )
-            verbs->Add(wxT("Print"));
+            verbs->push_back(wxT("Print"));
         if ( commands )
-            commands->Add(cmd);
+            commands->push_back(cmd);
 
         count++;
     }
@@ -640,7 +640,12 @@ wxMimeTypesManager::GetFileTypeFromExtension(const wxString& ext)
         //       sorted array?
         const size_t count = m_fallbacks.GetCount();
         for ( size_t n = 0; n < count; n++ ) {
-            if ( m_fallbacks[n].GetExtensions().Index(ext) != wxNOT_FOUND ) {
+            const auto iter_idx = std::find_if(m_fallbacks[n].GetExtensions().cbegin(), m_fallbacks[n].GetExtensions().cend(),
+                [ext](const auto& anExt)
+                {
+                    return ext.IsSameAs(anExt);
+                });
+            if ( iter_idx != std::cend(m_fallbacks[n].GetExtensions())) {
                 ft = new wxFileType(m_fallbacks[n]);
 
                 break;
@@ -686,7 +691,7 @@ void wxMimeTypesManager::AddFallbacks(const wxFileTypeInfo *filetypes)
 }
 
 // TODO: Return vector
-size_t wxMimeTypesManager::EnumAllFileTypes(wxArrayString& mimetypes)
+size_t wxMimeTypesManager::EnumAllFileTypes(std::vector<wxString>& mimetypes)
 {
     EnsureImpl();
     size_t countAll = m_impl->EnumAllFileTypes(mimetypes);
@@ -694,8 +699,14 @@ size_t wxMimeTypesManager::EnumAllFileTypes(wxArrayString& mimetypes)
     // add the fallback filetypes
     const size_t count = m_fallbacks.GetCount();
     for ( size_t n = 0; n < count; n++ ) {
-        if ( mimetypes.Index(m_fallbacks[n].GetMimeType()) == wxNOT_FOUND ) {
-            mimetypes.Add(m_fallbacks[n].GetMimeType());
+        const auto fallMime = m_fallbacks[n].GetMimeType();
+        const auto iter_idx = std::find_if(mimetypes.cbegin(), mimetypes.cend(),
+            [fallMime](const auto& aType)
+            {
+                return fallMime.IsSameAs(aType);
+            });
+        if ( iter_idx == std::cend(mimetypes) ) {
+            mimetypes.push_back(m_fallbacks[n].GetMimeType());
             countAll++;
         }
     }

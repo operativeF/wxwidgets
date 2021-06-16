@@ -36,9 +36,9 @@ public:
     void Init(const wxString& strFileType, const wxString& ext);
 
     // implement accessor functions
-    bool GetExtensions(wxArrayString& extensions);
+    bool GetExtensions(std::vector<wxString>& extensions);
     bool GetMimeType(wxString *mimeType) const;
-    bool GetMimeTypes(wxArrayString& mimeTypes) const;
+    bool GetMimeTypes(std::vector<wxString>& mimeTypes) const;
     bool GetIcon(wxIconLocation *iconLoc) const;
     bool GetDescription(wxString *desc) const;
     bool GetOpenCommand(wxString *openCmd,
@@ -55,7 +55,7 @@ public:
         return !printCmd->empty();
     }
 
-    size_t GetAllCommands(wxArrayString * verbs, wxArrayString * commands,
+    size_t GetAllCommands(std::vector<wxString>* verbs, std::vector<wxString>* commands,
                           const wxFileType::MessageParameters& params) const;
 
     bool Unassociate();
@@ -126,7 +126,7 @@ public:
     wxFileType *GetOrAllocateFileTypeFromExtension(const wxString& ext);
     wxFileType *GetFileTypeFromMimeType(const wxString& mimeType);
 
-    size_t EnumAllFileTypes(wxArrayString& mimetypes);
+    size_t EnumAllFileTypes(std::vector<wxString>& mimetypes);
 
     // create a new filetype association
     wxFileType *Associate(const wxFileTypeInfo& ftInfo);

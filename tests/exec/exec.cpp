@@ -218,14 +218,14 @@ void ExecTestCase::TestExecute()
 
         // test running COMMAND again, but this time with redirection:
         // and the expected data is on stdout.
-        wxArrayString stdout_arr;
+        std::vector<wxString> stdout_arr;
         CPPUNIT_ASSERT_EQUAL( 0, wxExecute(COMMAND, stdout_arr, execFlags) );
         CPPUNIT_ASSERT_EQUAL( "hi", stdout_arr[0] );
 
         // test running COMMAND_STDERR with redirection and the expected data
         // is on stderr.
-        wxArrayString stderr_arr;
-        stdout_arr.Empty();
+        std::vector<wxString> stderr_arr;
+        stdout_arr.clear();
         CPPUNIT_ASSERT( wxExecute(COMMAND_STDERR, stdout_arr, stderr_arr, execFlags) != 0 );
 
         // Check that there is something on stderr.
@@ -460,7 +460,7 @@ void ExecTestCase::TestOverlappedSyncExecute()
     class DelayedExecuteTimer : public wxTimer
     {
     public:
-        DelayedExecuteTimer(const wxString& command, wxArrayString& outputArray)
+        DelayedExecuteTimer(const wxString& command, std::vector<wxString>& outputArray)
             : m_command(command),
               m_outputArray(outputArray)
         {
@@ -475,7 +475,7 @@ void ExecTestCase::TestOverlappedSyncExecute()
 
     private:
         wxString m_command;
-        wxArrayString& m_outputArray;
+        std::vector<wxString>& m_outputArray;
     };
 
     // Create two scripts with one of them taking longer than the other one to
@@ -489,8 +489,8 @@ void ExecTestCase::TestOverlappedSyncExecute()
     const wxString longSleepCommand = MakeShellCommand(longSleepFile);
 
     // Collect the child process output
-    wxArrayString shortSleepOutput,
-                  longSleepOutput;
+    std::vector<wxString> shortSleepOutput;
+    std::vector<wxString> longSleepOutput;
 
     // Test that launching a process taking a longer time to run while the
     // shorter process is running works, i.e. that our outer wxExecute()
@@ -523,7 +523,7 @@ void ExecTestCase::TestOverlappedSyncExecute()
 // produces the expected output.
 TEST_CASE("wxExecute::RedirectUTF8", "[exec][unicode][.]")
 {
-    wxArrayString output;
+    std::vector<wxString> output;
     REQUIRE( wxExecute("/bin/ls --version", output) == 0 );
 
     for ( size_t n = 0; n < output.size(); ++n )

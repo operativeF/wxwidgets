@@ -201,7 +201,7 @@ void wxFileHistoryBase::RemoveFileFromHistory(size_t i)
                  wxT("invalid index in wxFileHistoryBase::RemoveFileFromHistory") );
 
     // delete the element from the array
-    m_fileHistory.RemoveAt(i);
+    m_fileHistory.erase(std::begin(m_fileHistory) + i);
     numFiles--;
 
     for ( wxList::compatibility_iterator node = m_fileMenus.GetFirst();
@@ -253,18 +253,18 @@ void wxFileHistoryBase::Load(const wxConfigBase& config)
 {
     RemoveExistingHistory();
 
-    m_fileHistory.Clear();
+    m_fileHistory.clear();
 
     wxString buf;
     buf.Printf(wxT("file%d"), 1);
 
     wxString historyFile;
-    while ((m_fileHistory.GetCount() < m_fileMaxFiles) &&
+    while ((m_fileHistory.size() < m_fileMaxFiles) &&
            config.Read(buf, &historyFile) && !historyFile.empty())
     {
-        m_fileHistory.Add(historyFile);
+        m_fileHistory.push_back(historyFile);
 
-        buf.Printf(wxT("file%d"), (int)m_fileHistory.GetCount()+1);
+        buf.Printf(wxT("file%d"), (int)m_fileHistory.size()+1);
         historyFile.clear();
     }
 
@@ -277,7 +277,7 @@ void wxFileHistoryBase::Save(wxConfigBase& config)
     {
         wxString buf;
         buf.Printf(wxT("file%d"), (int)i+1);
-        if (i < m_fileHistory.GetCount())
+        if (i < m_fileHistory.size())
             config.Write(buf, wxString(m_fileHistory[i]));
         else
             config.Write(buf, wxEmptyString);
@@ -306,7 +306,7 @@ void wxFileHistoryBase::AddFilesToMenu(wxMenu* menu)
     if ( menu->GetMenuItemCount() )
         menu->AppendSeparator();
 
-    for ( size_t i = 0; i < m_fileHistory.GetCount(); i++ )
+    for ( size_t i = 0; i < m_fileHistory.size(); i++ )
     {
         menu->Append(m_idBase + i, GetMRUEntryLabel(i, m_fileHistory[i]));
     }
@@ -314,7 +314,7 @@ void wxFileHistoryBase::AddFilesToMenu(wxMenu* menu)
 
 void wxFileHistoryBase::RemoveExistingHistory()
 {
-    const size_t count = m_fileHistory.GetCount();
+    const size_t count = m_fileHistory.size();
     if ( !count )
         return;
 

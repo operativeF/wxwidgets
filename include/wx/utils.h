@@ -385,14 +385,14 @@ WXDLLIMPEXP_BASE long wxExecute(const wchar_t* const* argv,
 // execute the command capturing its output into an array line by line, this is
 // always synchronous
 WXDLLIMPEXP_BASE long wxExecute(const wxString& command,
-                                wxArrayString& output,
+                                std::vector<wxString>& output,
                                 int flags = 0,
                                 const wxExecuteEnv *env = nullptr);
 
 // also capture stderr (also synchronous)
 WXDLLIMPEXP_BASE long wxExecute(const wxString& command,
-                                wxArrayString& output,
-                                wxArrayString& error,
+                                std::vector<wxString>& output,
+                                std::vector<wxString>& error,
                                 int flags = 0,
                                 const wxExecuteEnv *env = nullptr);
 

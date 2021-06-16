@@ -91,7 +91,7 @@ class wxLogDialog : public wxDialog
 {
 public:
     wxLogDialog(wxWindow *parent,
-                const wxArrayString& messages,
+                const std::vector<wxString>& messages,
                 const std::vector<int>& severity,
                 const std::vector<long>& timess,
                 const wxString& caption,
@@ -137,7 +137,7 @@ private:
 
 
     // the data for the listctrl
-    wxArrayString m_messages;
+    std::vector<wxString> m_messages;
     std::vector<int> m_severity;
     std::vector<long> m_times;
 
@@ -202,7 +202,7 @@ void wxLogGui::Clear()
     m_bWarnings =
     m_bHasMessages = false;
 
-    m_aMessages.Empty();
+    m_aMessages.clear();
     m_aSeverity.clear();
     m_aTimes.clear();
 }
@@ -247,7 +247,7 @@ wxLogGui::DoShowSingleLogMessage(const wxString& message,
 }
 
 void
-wxLogGui::DoShowMultipleLogMessages(const wxArrayString& messages,
+wxLogGui::DoShowMultipleLogMessages(const std::vector<wxString>& messages,
                                     const std::vector<int>& severities,
                                     const std::vector<long>& times,
                                     const wxString& title,
@@ -318,7 +318,7 @@ void wxLogGui::Flush()
     }
     else // more than one message
     {
-        wxArrayString messages;
+        std::vector<wxString> messages;
         std::vector<int> severities;
         std::vector<long> times;
 
@@ -342,7 +342,7 @@ void wxLogGui::DoLogRecord(wxLogLevel level,
         case wxLOG_Info:
         case wxLOG_Message:
             {
-                m_aMessages.Add(msg);
+                m_aMessages.push_back(msg);
                 m_aSeverity.push_back(wxLOG_Message);
                 m_aTimes.push_back((long)(info.timestampMS / 1000));
                 m_bHasMessages = true;
@@ -395,7 +395,7 @@ void wxLogGui::DoLogRecord(wxLogLevel level,
                 m_bWarnings = true;
             }
 
-            m_aMessages.Add(msg);
+            m_aMessages.push_back(msg);
             m_aSeverity.push_back((int)level);
             m_aTimes.push_back((long)(info.timestampMS / 1000));
             m_bHasMessages = true;
@@ -661,7 +661,7 @@ wxString wxLogDialog::ms_details;
 size_t wxLogDialog::ms_maxLength = 0;
 
 wxLogDialog::wxLogDialog(wxWindow *parent,
-                         const wxArrayString& messages,
+                         const std::vector<wxString>& messages,
                          const std::vector<int>& severity,
                          const std::vector<long>& times,
                          const wxString& caption,
@@ -685,14 +685,14 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
         ms_maxLength = (2 * wxGetDisplaySize().x/3) / GetCharWidth();
     }
 
-    size_t count = messages.GetCount();
-    m_messages.Alloc(count);
+    size_t count = messages.size();
+    m_messages.reserve(count);
     m_severity.reserve(count);
     m_times.reserve(count);
 
     for ( size_t n = 0; n < count; n++ )
     {
-        m_messages.Add(messages[n]);
+        m_messages.push_back(messages[n]);
         m_severity.push_back(severity[n]);
         m_times.push_back(times[n]);
     }
@@ -719,7 +719,7 @@ wxLogDialog::wxLogDialog(wxWindow *parent,
     }
 
     // create the text sizer with a minimal size so that we are sure it won't be too small
-    wxString message = EllipsizeString(messages.Last());
+    wxString message = EllipsizeString(messages.back());
     wxSizer *szText = CreateTextSizer(message);
     szText->SetMinSize(wxMin(300, wxGetDisplaySize().x / 3), -1);
 
@@ -834,7 +834,7 @@ void wxLogDialog::CreateDetailsControls(wxWindow *parent)
     m_listctrl->SetImageList(imageList, wxIMAGE_LIST_SMALL);
 
     // fill the listctrl
-    size_t count = m_messages.GetCount();
+    size_t count = m_messages.size();
     for ( size_t n = 0; n < count; n++ )
     {
         int image;
@@ -925,7 +925,7 @@ wxString wxLogDialog::GetLogMessages() const
         fmt = "%c";
     }
 
-    const size_t count = m_messages.GetCount();
+    const size_t count = m_messages.size();
 
     wxString text;
     text.reserve(count*m_messages[0].length());
