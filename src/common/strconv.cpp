@@ -2499,15 +2499,13 @@ public:
 
 #if wxUSE_FONTMAP
     explicit wxMBConv_win32(const char* name)
-        : m_CodePage(wxCharsetToCodepage(name)),
-          m_minMBCharWidth(0)
+        : m_CodePage(wxCharsetToCodepage(name))
     {
     }
 #endif // wxUSE_FONTMAP
 
     explicit wxMBConv_win32(wxFontEncoding encoding)
-        : m_CodePage(wxEncodingToCodepage(encoding)),
-          m_minMBCharWidth(0)
+        : m_CodePage(wxEncodingToCodepage(encoding))
     {
     }
 

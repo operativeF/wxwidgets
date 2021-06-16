@@ -470,13 +470,12 @@ static HBITMAP GetMaskForImage(const wxBitmap& bitmap, const wxBitmap& mask)
 #endif // wxUSE_IMAGE
 
     HBITMAP hbmpMask;
-    wxMask *pMask;
+    wxMask *pMask{nullptr};
     bool deleteMask = false;
 
     if ( mask.IsOk() )
     {
         hbmpMask = GetHbitmapOf(mask);
-        pMask = nullptr;
     }
     else
     {

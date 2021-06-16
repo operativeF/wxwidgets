@@ -53,15 +53,12 @@
 // get item (converted to right type)
 #define GetItem(n)    ((wxCheckListBoxItem *)(GetItem(n)))
 
-namespace
-{
-    // space around check mark bitmap in pixels
-    static constexpr int CHECKMARK_EXTRA_SPACE = 1;
 
-    // space between check bitmap and text label
-    static constexpr int CHECKMARK_LABEL_SPACE = 2;
+// space around check mark bitmap in pixels
+static constexpr int CHECKMARK_EXTRA_SPACE = 1;
 
-} // anonymous namespace
+// space between check bitmap and text label
+static constexpr int CHECKMARK_LABEL_SPACE = 2;
 
 // ============================================================================
 // implementation

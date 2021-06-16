@@ -37,16 +37,12 @@
 
 // For now the appearance is fixed, we could make these constants customizable
 // later if really needed.
-namespace
-{
 
 // Total number of "running" dots.
 static constexpr int NUM_DOTS = 8;
 
 // Delay between the consecutive updates in milliseconds.
 static constexpr int FRAME_DELAY = 150;
-
-} // anonymous namespace
 
 // ----------------------------------------------------------------------------
 // wxActivityIndicatorImpl: class containing the real implementation.

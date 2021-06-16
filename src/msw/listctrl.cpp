@@ -159,10 +159,10 @@ public:
     }
 
     // ctor without conversion
-    explicit wxLV_ITEM(LV_ITEM_NATIVE& item) : m_buf(nullptr), m_pItem(&item) { }
+    explicit wxLV_ITEM(LV_ITEM_NATIVE& item) : m_pItem(&item) { }
 
     // ctor with conversion
-    explicit wxLV_ITEM(LV_ITEM_OTHER& item) : m_buf(nullptr)
+    explicit wxLV_ITEM(LV_ITEM_OTHER& item)
     {
         Init(item);
     }
