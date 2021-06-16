@@ -16,7 +16,6 @@
 #if wxUSE_FILEDLG
 
 #include "wx/dialog.h"
-#include "wx/arrstr.h"
 
 // this symbol is defined for the platforms which support multiple
 // ('|'-separated) filters in the file dialog

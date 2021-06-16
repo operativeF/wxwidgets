@@ -23,7 +23,6 @@
 #include "wx/tokenzr.h"
 
 #ifndef WX_PRECOMP
-    #include "wx/arrstr.h"
     #include "wx/crt.h"
 #endif
 

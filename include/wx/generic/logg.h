@@ -11,6 +11,8 @@
 #ifndef   _WX_LOGG_H_
 #define   _WX_LOGG_H_
 
+#include "wx/arrstr.h"
+
 #if wxUSE_GUI
 
 class WXDLLIMPEXP_FWD_CORE wxTextCtrl;

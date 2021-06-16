@@ -15,7 +15,6 @@
 #include "wx/defs.h"
 #include "wx/object.h"
 #include "wx/string.h"
-#include "wx/arrstr.h"
 
 // Host Type that the server component can be
 enum wxURIHostType

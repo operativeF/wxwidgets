@@ -28,7 +28,6 @@
     #include "wx/app.h"
     #include "wx/list.h"
     #include "wx/string.h"
-    #include "wx/arrstr.h"
 #endif
 
 // ----------------------------------------------------------------------------

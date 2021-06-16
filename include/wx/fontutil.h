@@ -33,7 +33,6 @@
 #include "wx/osx/core/cfref.h"
 #endif
 
-class WXDLLIMPEXP_FWD_BASE wxArrayString;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 struct WXDLLIMPEXP_FWD_CORE wxNativeEncodingInfo;
 

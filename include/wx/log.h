@@ -40,8 +40,6 @@ class WXDLLIMPEXP_FWD_BASE wxObject;
 
 #if wxUSE_LOG
 
-#include "wx/arrstr.h"
-
 #include <ctime>   // for time_t
 
 #include "wx/dynarray.h"

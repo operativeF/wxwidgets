@@ -37,7 +37,6 @@
 #include <cctype>
 #include <cstdlib>
 
-#include "wx/arrstr.h"
 #include "wx/dir.h"
 #include "wx/file.h"
 #include "wx/filename.h"

@@ -26,7 +26,6 @@
     #include "wx/log.h"
     #include "wx/app.h"
     #include "wx/utils.h"
-    #include "wx/arrstr.h"
     #include "wx/math.h"
 #endif //WX_PRECOMP
 

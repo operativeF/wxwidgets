@@ -18,7 +18,6 @@
 #include "wx/object.h"
 #include "wx/list.h"
 #include "wx/string.h"
-#include "wx/arrstr.h"
 
 class WXDLLIMPEXP_FWD_CORE wxMenu;
 class WXDLLIMPEXP_FWD_BASE wxConfigBase;
