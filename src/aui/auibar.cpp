@@ -1148,7 +1148,6 @@ wxControl* wxAuiToolBar::FindControl(int id)
 
 wxAuiToolBarItem* wxAuiToolBar::FindTool(int tool_id) const
 {
-    size_t count;
     for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
@@ -1161,7 +1160,6 @@ wxAuiToolBarItem* wxAuiToolBar::FindTool(int tool_id) const
 
 wxAuiToolBarItem* wxAuiToolBar::FindToolByPosition(wxCoord x, wxCoord y) const
 {
-    size_t count;
     for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
@@ -1185,7 +1183,6 @@ wxAuiToolBarItem* wxAuiToolBar::FindToolByPosition(wxCoord x, wxCoord y) const
 
 wxAuiToolBarItem* wxAuiToolBar::FindToolByPositionWithPacking(wxCoord x, wxCoord y) const
 {
-    size_t count;
     for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
@@ -1428,7 +1425,6 @@ void wxAuiToolBar::SetHoverItem(wxAuiToolBarItem* pitem)
 
     wxAuiToolBarItem* former_hover = nullptr;
 
-    size_t count;
     for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
@@ -1453,7 +1449,6 @@ void wxAuiToolBar::SetPressedItem(wxAuiToolBarItem* pitem)
 {
     wxAuiToolBarItem* former_item = nullptr;
 
-    size_t count;
     for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
@@ -1740,8 +1735,7 @@ int wxAuiToolBar::GetToolIndex(int tool_id) const
     if (tool_id == -1)
         return wxNOT_FOUND;
 
-    size_t count = m_items.GetCount();
-    for (size_t i = 0; i < count; ++i)
+    for (size_t i = 0; i < m_items.GetCount(); ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
         if (item.m_toolId == tool_id)
@@ -1886,7 +1880,6 @@ bool wxAuiToolBar::RealizeHelper(wxClientDC& dc, bool horizontal)
             sizer->Add(1, m_leftPadding);
     }
 
-    size_t count;
     for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);
@@ -2151,7 +2144,6 @@ void wxAuiToolBar::DoIdleUpdate()
 
     bool need_refresh = false;
 
-    size_t count;
     for (size_t i = 0, count = m_items.GetCount(); i < count; ++i)
     {
         wxAuiToolBarItem& item = m_items.Item(i);

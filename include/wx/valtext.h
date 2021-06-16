@@ -87,10 +87,10 @@ public:
     void SetCharIncludes(const wxString& chars);
     void AddCharIncludes(const wxString& chars);
 
-    void SetIncludes(const wxArrayString& includes);
+    void SetIncludes(const std::vector<wxString>& includes);
     void AddInclude(const wxString& include);
 
-    const wxArrayString& GetIncludes() const { return m_includes; }
+    const std::vector<wxString>& GetIncludes() const { return m_includes; }
     wxString GetCharIncludes() const { return m_charIncludes; }
 
     // strings & chars exclusions:
@@ -99,10 +99,10 @@ public:
     void SetCharExcludes(const wxString& chars);
     void AddCharExcludes(const wxString& chars);
 
-    void SetExcludes(const wxArrayString& excludes);
+    void SetExcludes(const std::vector<wxString>& excludes);
     void AddExclude(const wxString& exclude);
 
-    const wxArrayString& GetExcludes() const { return m_excludes; }
+    const std::vector<wxString>& GetExcludes() const { return m_excludes; }
     wxString GetCharExcludes() const { return m_charExcludes; }
 
     bool HasFlag(wxTextValidatorStyle style) const
@@ -129,7 +129,7 @@ protected:
     bool IsIncluded(const wxString& str) const
     {
         if ( HasFlag(wxFILTER_INCLUDE_LIST) )
-            return m_includes.Index(str) != wxNOT_FOUND;
+            return m_includes.cend() != std::find(m_includes.cbegin(), m_includes.cend(), str);
 
         // m_includes should be ignored (i.e. return true)
         // if the style is not set.
@@ -138,7 +138,7 @@ protected:
 
     bool IsExcluded(const wxString& str) const
     {
-        return m_excludes.Index(str) != wxNOT_FOUND;
+        return m_excludes.cend() != std::find(m_excludes.cbegin(), m_excludes.cend(), str);
     }
 
     // returns false if the character is invalid
@@ -153,8 +153,8 @@ protected:
     wxString*            m_stringValue;
     wxString             m_charIncludes;
     wxString             m_charExcludes;
-    wxArrayString        m_includes;
-    wxArrayString        m_excludes;
+    std::vector<wxString>        m_includes;
+    std::vector<wxString>        m_excludes;
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxTextValidator);

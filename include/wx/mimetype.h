@@ -75,8 +75,8 @@ class WXDLLIMPEXP_BASE wxMimeTypeCommands
 public:
     wxMimeTypeCommands() = default;
 
-    wxMimeTypeCommands(const wxArrayString& verbs,
-                       const wxArrayString& commands)
+    wxMimeTypeCommands(const std::vector<wxString>& verbs,
+                       const std::vector<wxString>& commands)
         : m_verbs(verbs),
           m_commands(commands)
     {
@@ -86,17 +86,25 @@ public:
     void AddOrReplaceVerb(const wxString& verb, const wxString& cmd);
     void Add(const wxString& s)
     {
-        m_verbs.Add(s.BeforeFirst(wxT('=')));
-        m_commands.Add(s.AfterFirst(wxT('=')));
+        m_verbs.push_back(s.BeforeFirst(wxT('=')));
+        m_commands.push_back(s.AfterFirst(wxT('=')));
     }
 
     // access the commands
-    size_t GetCount() const { return m_verbs.GetCount(); }
+    size_t GetCount() const
+    {
+        return m_verbs.size();
+    }
+    
+    // FIXME: Unsafe
     const wxString& GetVerb(size_t n) const { return m_verbs[n]; }
     const wxString& GetCmd(size_t n) const { return m_commands[n]; }
 
+    // TODO: string_view
     bool HasVerb(const wxString& verb) const
-        { return m_verbs.Index(verb) != wxNOT_FOUND; }
+    {
+        return std::find(m_verbs.cbegin(), m_verbs.cend(), verb) != m_verbs.cend();
+    }
 
     // returns empty string and wxNOT_FOUND in idx if no such verb
     wxString GetCommandForVerb(const wxString& verb, size_t *idx = nullptr) const;
@@ -105,8 +113,8 @@ public:
     wxString GetVerbCmd(size_t n) const;
 
 private:
-    wxArrayString m_verbs;
-    wxArrayString m_commands;
+    std::vector<wxString> m_verbs;
+    std::vector<wxString> m_commands;
 };
 
 // ----------------------------------------------------------------------------
@@ -415,6 +423,10 @@ public:
     static bool IsOfType(const wxString& mimeType, const wxString& wildcard);
 
     wxMimeTypesManager() = default;
+    ~wxMimeTypesManager();
+
+    wxMimeTypesManager(const wxMimeTypesManager&) = delete;
+    wxMimeTypesManager& operator=(const wxMimeTypesManager&) = delete;
 
     // NB: the following 2 functions are for Unix only and don't do anything
     //     elsewhere
@@ -462,14 +474,7 @@ public:
         // undo Associate()
     bool Unassociate(wxFileType *ft) ;
 
-    // dtor (not virtual, shouldn't be derived from)
-    ~wxMimeTypesManager();
-
 private:
-    // no copy ctor/assignment operator
-    wxMimeTypesManager(const wxMimeTypesManager&);
-    wxMimeTypesManager& operator=(const wxMimeTypesManager&);
-
     // the fallback info which is used if the information is not found in the
     // real system database
     wxArrayFileTypeInfo m_fallbacks;

@@ -57,14 +57,20 @@
 void
 wxMimeTypeCommands::AddOrReplaceVerb(const wxString& verb, const wxString& cmd)
 {
-    const int n = m_verbs.Index(verb, false /* ignore case */);
-    if ( n == wxNOT_FOUND )
+    const auto& verb_iter = std::find_if(m_verbs.cbegin(), m_verbs.cend(),
+    [verb](const auto& m_verb)
     {
-        m_verbs.Add(verb);
-        m_commands.Add(cmd);
+        return verb.IsSameAs(m_verb, false);
+    });
+
+    if ( verb_iter == m_verbs.cend() )
+    {
+        m_verbs.push_back(verb);
+        m_commands.push_back(cmd);
     }
     else
     {
+        const auto n = std::distance(std::cbegin(m_verbs), verb_iter);
         m_commands[n] = cmd;
     }
 }
@@ -74,9 +80,16 @@ wxMimeTypeCommands::GetCommandForVerb(const wxString& verb, size_t *idx) const
 {
     wxString s;
 
-    int n = m_verbs.Index(verb);
-    if ( n != wxNOT_FOUND )
+    const auto& verb_iter = std::find_if(m_verbs.cbegin(), m_verbs.cend(),
+        [verb](const auto& m_verb)
+        {
+            return verb.IsSameAs(m_verb, false);
+        });
+
+    if ( verb_iter != m_verbs.cend() )
     {
+        const auto n = std::distance(std::cbegin(m_verbs), verb_iter);
+        
         s = m_commands[(size_t)n];
         if ( idx )
             *idx = n;

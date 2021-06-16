@@ -461,7 +461,7 @@ public:
 
     // get string trace masks: note that this is MT-unsafe if other threads can
     // call AddTraceMask() concurrently
-    static const wxArrayString& GetTraceMasks();
+    static const std::vector<wxString>& GetTraceMasks();
 
     // is this trace mask in the list?
     static bool IsAllowedTraceMask(const wxString& mask);

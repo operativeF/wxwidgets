@@ -874,7 +874,7 @@ time_t WXDLLIMPEXP_BASE wxFileModificationTime(const wxString& filename)
 // Parses the filterStr, returning the number of filters.
 // Returns 0 if none or if there's a problem.
 // filterStr is in the form: "All files (*.*)|*.*|JPEG Files (*.jpeg)|*.jpeg"
-
+// TODO: string_view
 int WXDLLIMPEXP_BASE wxParseCommonDialogsFilter(const wxString& filterStr,
                                            wxArrayString& descriptions,
                                            wxArrayString& filters)

@@ -227,16 +227,15 @@ void wxTextValidator::AddCharExcludes(const wxString& chars)
 }
 
 // TODO: Use a span.
-void wxTextValidator::SetIncludes(const wxArrayString& includes)
+void wxTextValidator::SetIncludes(const std::vector<wxString>& includes)
 {
     // preserve compatibily with versions prior 3.1.3 which used m_includes
     // to store the list of char includes.
     if ( HasFlag(wxFILTER_INCLUDE_CHAR_LIST) )
     {
-        for ( wxArrayString::const_iterator i = includes.begin(),
-              end = includes.end(); i != end; ++i )
+        for ( const auto& i : includes )
         {
-            AddCharIncludes(*i);
+            AddCharIncludes(i);
         }
 
         return;
@@ -251,16 +250,15 @@ void wxTextValidator::AddInclude(const wxString& include)
 }
 
 // TODO: Use a span
-void wxTextValidator::SetExcludes(const wxArrayString& excludes)
+void wxTextValidator::SetExcludes(const std::vector<wxString>& excludes)
 {
     // preserve compatibily with versions prior 3.1.3 which used m_excludes
     // to store the list of char excludes.
     if ( HasFlag(wxFILTER_EXCLUDE_CHAR_LIST) )
     {
-        for ( wxArrayString::const_iterator i = excludes.begin(),
-              end = excludes.end(); i != end; ++i )
+        for ( const auto& i : excludes )
         {
-            AddCharExcludes(*i);
+            AddCharExcludes(i);
         }
 
         return;

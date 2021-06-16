@@ -606,16 +606,16 @@ namespace
 //
 // notice that this doesn't make accessing it MT-safe, of course, you need to
 // serialize accesses to it using GetTraceMaskCS() for this
-wxArrayString& TraceMasks()
+std::vector<wxString>& TraceMasks()
 {
-    static wxArrayString s_traceMasks;
+    static std::vector<wxString> s_traceMasks;
 
     return s_traceMasks;
 }
 
 } // anonymous namespace
 
-/* static */ const wxArrayString& wxLog::GetTraceMasks()
+/* static */ const std::vector<wxString>& wxLog::GetTraceMasks()
 {
     // because of this function signature (it returns a reference, not the
     // object), it is inherently MT-unsafe so there is no need to acquire the
@@ -635,16 +635,17 @@ void wxLog::RemoveTraceMask(const wxString& str)
 {
     wxCRIT_SECT_LOCKER(lock, GetTraceMaskCS());
 
-    int index = TraceMasks().Index(str);
-    if ( index != wxNOT_FOUND )
-        TraceMasks().RemoveAt((size_t)index);
+    auto idx_iter = std::find(TraceMasks().begin(), TraceMasks().end(), str);
+
+    if ( idx_iter != TraceMasks().end() )
+        TraceMasks().erase(idx_iter);
 }
 
 void wxLog::ClearTraceMasks()
 {
     wxCRIT_SECT_LOCKER(lock, GetTraceMaskCS());
 
-    TraceMasks().Clear();
+    TraceMasks().clear();
 }
 
 // TODO: std::find
