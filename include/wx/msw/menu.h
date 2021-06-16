@@ -47,9 +47,9 @@ public:
     // if we have a title, insert it in the beginning of the menu
     if ( !m_title.empty() )
     {
-        const wxString title = m_title;
+        const wxString aTitle = m_title;
         m_title.clear(); // so that SetTitle() knows there was no title before
-        SetTitle(title);
+        SetTitle(aTitle);
     }
  }
 

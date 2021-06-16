@@ -541,7 +541,7 @@ const char* wxURI::ParsePath(const char* uri)
     if ( isAbs )
         m_path += *uri++;
 
-    wxArrayString segments;
+    std::vector<wxString> segments;
     wxString segment;
     for ( ;; )
     {

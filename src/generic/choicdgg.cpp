@@ -200,6 +200,22 @@ void *wxGetSingleChoiceData( const wxString& message,
     return dialog.ShowModal() == wxID_OK ? dialog.GetSelectionData() : nullptr;
 }
 
+void *wxGetSingleChoiceData( const wxString& message,
+                             const wxString& caption,
+                             const std::vector<wxString>& choices,
+                             void **client_data,
+                             wxWindow *parent,
+                             int WXUNUSED(x), int WXUNUSED(y),
+                             bool WXUNUSED(centre),
+                             int WXUNUSED(width), int WXUNUSED(height),
+                             int initialSelection)
+{
+    wxSingleChoiceDialog dialog(parent, message, caption, choices, client_data);
+
+    dialog.SetSelection(initialSelection);
+    return dialog.ShowModal() == wxID_OK ? dialog.GetSelectionData() : nullptr;
+}
+
 void* wxGetSingleChoiceData( const wxString& message,
                              const wxString& caption,
                              const wxArrayString& choices,
@@ -405,6 +421,18 @@ bool wxSingleChoiceDialog::Create( wxWindow *parent,
 {
     wxCArrayString chs(choices);
     return Create( parent, message, caption, chs.GetCount(), chs.GetStrings(),
+                   clientData, style, pos );
+}
+
+bool wxSingleChoiceDialog::Create( wxWindow *parent,
+                                   const wxString& message,
+                                   const wxString& caption,
+                                   const std::vector<wxString>& choices,
+                                   void **clientData,
+                                   long style,
+                                   const wxPoint& pos )
+{
+    return Create( parent, message, caption, choices.size(), choices.data(),
                    clientData, style, pos );
 }
 

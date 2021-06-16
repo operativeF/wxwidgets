@@ -40,7 +40,7 @@
 
 // helper function: returns all array elements in a single comma-separated and
 // newline-terminated string
-static wxString AllAsString(const wxArrayString& a)
+static wxString AllAsString(const std::vector<wxString>& a)
 {
     wxString s;
     const size_t count = a.size();

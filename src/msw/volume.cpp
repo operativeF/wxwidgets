@@ -188,7 +188,7 @@ static unsigned GetBasicFlags(const wxChar* filename)
 // Purpose: Add a file to the list if it meets the filter requirement.
 // Notes: - See GetBasicFlags for remarks about the Mounted flag.
 //=============================================================================
-static bool FilteredAdd(wxArrayString& list, const wxChar* filename,
+static bool FilteredAdd(std::vector<wxString>& list, const wxChar* filename,
                         unsigned flagsSet, unsigned flagsUnset)
 {
     bool accept = true;
@@ -213,7 +213,7 @@ static bool FilteredAdd(wxArrayString& list, const wxChar* filename,
 
     // Add to the list if passed the filter.
     if (accept)
-        list.Add(filename);
+        list.push_back(filename);
 
     return accept;
 } // FilteredAdd
@@ -225,7 +225,7 @@ static bool FilteredAdd(wxArrayString& list, const wxChar* filename,
 //          all items while determining which are connected and not.  So this
 //          function will find either all items or connected items.
 //=============================================================================
-static void BuildListFromNN(wxArrayString& list, NETRESOURCE* pResSrc,
+static void BuildListFromNN(std::vector<wxString>& list, NETRESOURCE* pResSrc,
                             unsigned flagsSet, unsigned flagsUnset)
 {
     HANDLE hEnum;
@@ -322,7 +322,7 @@ static int CompareFcn(const wxString& first, const wxString& second)
 //          way manually.
 //        - The resulting list is sorted alphabetically.
 //=============================================================================
-static bool BuildRemoteList(wxArrayString& list, NETRESOURCE* pResSrc,
+static bool BuildRemoteList(std::vector<wxString>& list, NETRESOURCE* pResSrc,
                             unsigned flagsSet, unsigned flagsUnset)
 {
     // NN query depends on dynamically loaded library.
@@ -340,7 +340,8 @@ static bool BuildRemoteList(wxArrayString& list, NETRESOURCE* pResSrc,
     // Generate the list according to the flags set.
     //----------------------------------------------
     BuildListFromNN(list, pResSrc, flagsSet, flagsUnset);
-    list.Sort(CompareFcn);
+
+    std::sort(list.begin(), list.end(), CompareFcn);
 
     //-------------------------------------------------------------------------
     // If mounted only is requested, then we only need one simple pass.
@@ -350,13 +351,14 @@ static bool BuildRemoteList(wxArrayString& list, NETRESOURCE* pResSrc,
     if (!(flagsSet & wxFS_VOL_MOUNTED))
     {
         // generate.
-        wxArrayString mounted;
+        std::vector<wxString> mounted;
         BuildListFromNN(mounted, pResSrc, flagsSet | wxFS_VOL_MOUNTED, flagsUnset & ~wxFS_VOL_MOUNTED);
-        mounted.Sort(CompareFcn);
+        
+        std::sort(mounted.begin(), mounted.end(), CompareFcn);
 
         // apply list from bottom to top to preserve indexes if removing items.
-        ssize_t iList = list.GetCount()-1;
-        for (ssize_t iMounted = mounted.GetCount()-1; iMounted >= 0 && iList >= 0; iMounted--)
+        ssize_t iList = list.size() - 1;
+        for (ssize_t iMounted = mounted.size() - 1; iMounted >= 0 && iList >= 0; iMounted--)
         {
             int compare;
             wxString all(list[iList]);
@@ -375,7 +377,7 @@ static bool BuildRemoteList(wxArrayString& list, NETRESOURCE* pResSrc,
             {
                 // Found the element.  Remove it or mark it mounted.
                 if (flagsUnset & wxFS_VOL_MOUNTED)
-                    list.RemoveAt(iList);
+                    list.erase(std::begin(list) + iList);
                 else
                     s_fileInfo[list[iList]].m_flags |= wxFS_VOL_MOUNTED;
 
@@ -397,7 +399,7 @@ static bool BuildRemoteList(wxArrayString& list, NETRESOURCE* pResSrc,
 // Purpose: Generate and return a list of all volumes (drives) available.
 // Notes:
 //=============================================================================
-wxArrayString wxFSVolumeBase::GetVolumes(int flagsSet, int flagsUnset)
+std::vector<wxString> wxFSVolumeBase::GetVolumes(int flagsSet, int flagsUnset)
 {
     ::InterlockedExchange(&s_cancelSearch, FALSE);     // reset
 
@@ -415,7 +417,7 @@ wxArrayString wxFSVolumeBase::GetVolumes(int flagsSet, int flagsUnset)
     }
 #endif
 
-    wxArrayString list;
+    std::vector<wxString> list;
 
     //-------------------------------
     // Local and mapped drives first.
@@ -450,11 +452,11 @@ wxArrayString wxFSVolumeBase::GetVolumes(int flagsSet, int flagsUnset)
     {
         // The returned list will be sorted alphabetically.  We don't pass
         // our in since we don't want to change to order of the local drives.
-        wxArrayString nn;
+        std::vector<wxString> nn;
         if (BuildRemoteList(nn, nullptr, flagsSet, flagsUnset))
         {
-            for (size_t idx = 0; idx < nn.GetCount(); idx++)
-                list.Add(nn[idx]);
+            for (size_t idx = 0; idx < nn.size(); idx++)
+                list.push_back(nn[idx]);
         }
     }
 

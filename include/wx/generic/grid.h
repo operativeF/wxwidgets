@@ -1633,7 +1633,7 @@ public:
     // Split a string containing newline characters into an array of
     // strings and return the number of lines
     //
-    void StringToLines( const wxString& value, wxArrayString& lines ) const;
+    void StringToLines( const wxString& value, std::vector<wxString>& lines ) const;
 
     void GetTextBoxSize( const wxDC& dc,
                          const std::vector<wxString>& lines,

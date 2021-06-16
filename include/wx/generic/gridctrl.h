@@ -261,7 +261,7 @@ protected:
     {
     }
 
-    wxArrayString m_choices;
+    std::vector<wxString> m_choices;
 };
 
 

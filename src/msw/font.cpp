@@ -1091,12 +1091,12 @@ namespace
 {
 
 // Contains the file names of all fonts added by AddPrivateFont().
-wxArrayString gs_privateFontFileNames;
+std::vector<wxString> gs_privateFontFileNames;
 
 } // anonymous namespace
 
 // Accessor for use in src/msw/graphics.cpp only.
-extern const wxArrayString& wxGetPrivateFontFileNames()
+extern const std::vector<wxString>& wxGetPrivateFontFileNames()
 {
     return gs_privateFontFileNames;
 }
@@ -1126,7 +1126,7 @@ bool wxFontBase::AddPrivateFont(const wxString& filename)
     }
 
     // Remember it for use in wxGDIPlusRenderer::Load().
-    gs_privateFontFileNames.Add(filename);
+    gs_privateFontFileNames.push_back(filename);
     return true;
 }
 

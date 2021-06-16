@@ -41,7 +41,7 @@ public :
 
 class WXDLLIMPEXP_CORE wxGraphicsMatrixData : public wxGraphicsObjectRefData
 {
-public :
+public:
     wxGraphicsMatrixData( wxGraphicsRenderer* renderer) :
        wxGraphicsObjectRefData(renderer) {}
 

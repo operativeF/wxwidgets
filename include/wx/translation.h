@@ -65,7 +65,6 @@
 // forward decls
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_FWD_BASE wxArrayString;
 class WXDLLIMPEXP_FWD_BASE wxTranslationsLoader;
 class WXDLLIMPEXP_FWD_BASE wxLocale;
 
@@ -135,7 +134,7 @@ public:
     void SetLanguage(const wxString& lang);
 
     // get languages available for this app
-    wxArrayString GetAvailableTranslations(const wxString& domain) const;
+    std::vector<wxString> GetAvailableTranslations(const wxString& domain) const;
 
     // find best translation language for given domain
     wxString GetBestTranslation(const wxString& domain, wxLanguage msgIdLanguage);
@@ -205,7 +204,7 @@ public:
     virtual wxMsgCatalog *LoadCatalog(const wxString& domain,
                                       const wxString& lang) = 0;
 
-    virtual wxArrayString GetAvailableTranslations(const wxString& domain) const = 0;
+    virtual std::vector<wxString> GetAvailableTranslations(const wxString& domain) const = 0;
 };
 
 
@@ -219,7 +218,7 @@ public:
     wxMsgCatalog *LoadCatalog(const wxString& domain,
                               const wxString& lang) override;
 
-    wxArrayString GetAvailableTranslations(const wxString& domain) const override;
+    std::vector<wxString> GetAvailableTranslations(const wxString& domain) const override;
 };
 
 
@@ -232,7 +231,7 @@ public:
     wxMsgCatalog *LoadCatalog(const wxString& domain,
                               const wxString& lang) override;
 
-    wxArrayString GetAvailableTranslations(const wxString& domain) const override;
+    std::vector<wxString> GetAvailableTranslations(const wxString& domain) const override;
 
 protected:
     // returns resource type to use for translations

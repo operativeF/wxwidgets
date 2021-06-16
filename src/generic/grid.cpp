@@ -7213,7 +7213,7 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
 // Any existing contents of the string array are preserved.
 //
 // TODO: refactor wxTextFile::Read() and reuse the same code from here
-void wxGrid::StringToLines( const wxString& value, wxArrayString& lines ) const
+void wxGrid::StringToLines( const wxString& value, std::vector<wxString>& lines ) const
 {
     int startPos = 0;
     wxString eol = wxTextFile::GetEOL( wxTextFileType_Unix );
@@ -7229,11 +7229,11 @@ void wxGrid::StringToLines( const wxString& value, wxArrayString& lines ) const
         }
         else if ( pos == 0 )
         {
-            lines.Add( wxEmptyString );
+            lines.push_back( wxEmptyString );
         }
         else
         {
-            lines.Add( tVal.Mid(startPos, pos) );
+            lines.push_back( tVal.Mid(startPos, pos) );
         }
 
         startPos += pos + 1;
@@ -7241,7 +7241,7 @@ void wxGrid::StringToLines( const wxString& value, wxArrayString& lines ) const
 
     if ( startPos < (int)tVal.length() )
     {
-        lines.Add( tVal.Mid( startPos ) );
+        lines.push_back( tVal.Mid( startPos ) );
     }
 }
 

@@ -295,7 +295,7 @@ void wxGridCellChoiceRenderer::SetParameters(const wxString& params)
     wxStringTokenizer tk(params, wxT(','));
     while ( tk.HasMoreTokens() )
     {
-        m_choices.Add(tk.GetNextToken());
+        m_choices.push_back(tk.GetNextToken());
     }
 }
 
@@ -417,6 +417,7 @@ wxGridCellAutoWrapStringRenderer::GetTextLines(wxGrid& grid,
         return logicalLines;
 
     std::vector<wxString> physicalLines;
+    
     for ( const auto& line : logicalLines )
     {
         if ( dc.GetTextExtent(line).x > maxWidth )

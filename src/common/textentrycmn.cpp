@@ -467,7 +467,7 @@ bool wxTextCompleterSimple::Start(const wxString& prefix)
 {
     m_index = 0;
     m_completions.clear();
-    GetCompletions(prefix, m_completions);
+    m_completions = GetCompletions(prefix);
 
     return !m_completions.empty();
 }

@@ -100,9 +100,9 @@ size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, std::vec
 #if defined(__WIN32__) && wxUSE_FSVOLUME
     // TODO: this code (using wxFSVolumeBase) should be used for all platforms
     //       but unfortunately wxFSVolumeBase is not implemented everywhere
-    const wxArrayString as = wxFSVolumeBase::GetVolumes();
+    const std::vector<wxString> as = wxFSVolumeBase::GetVolumes();
 
-    for (size_t i = 0; i < as.GetCount(); i++)
+    for (size_t i = 0; i < as.size(); i++)
     {
         wxString path = as[i];
         wxFSVolume vol(path);

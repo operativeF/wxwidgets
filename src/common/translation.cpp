@@ -90,13 +90,13 @@ namespace
 #if wxUSE_LOG_TRACE
 
 // TODO: Use span / string_view
-void LogTraceArray(const char *prefix, const wxArrayString& arr)
+void LogTraceArray(const char *prefix, const std::vector<wxString>& arr)
 {
     wxLogTrace(TRACE_I18N, "%s: [%s]", prefix, wxJoin(arr, ','));
 }
 
 // TODO: Use span / string_view
-void LogTraceLargeArray(const wxString& prefix, const wxArrayString& arr)
+void LogTraceLargeArray(const wxString& prefix, const std::vector<wxString>& arr)
 {
     wxLogTrace(TRACE_I18N, "%s:", prefix);
     for ( const auto& i : arr )
@@ -112,7 +112,7 @@ void LogTraceLargeArray(const wxString& prefix, const wxArrayString& arr)
 
 // Use locale-based detection as a fallback
 // TODO: Lambda
-wxString GetPreferredUILanguageFallback(const wxArrayString& WXUNUSED(available))
+wxString GetPreferredUILanguageFallback(const std::vector<wxString>& WXUNUSED(available))
 {
     wxString lang = wxLocale::GetLanguageCanonicalName(wxLocale::GetSystemLanguage());
     wxLogTrace(TRACE_I18N, " - obtained best language from locale: %s", lang);
@@ -121,7 +121,7 @@ wxString GetPreferredUILanguageFallback(const wxArrayString& WXUNUSED(available)
 
 #ifdef __WINDOWS__
 
-wxString GetPreferredUILanguage(const wxArrayString& available)
+wxString GetPreferredUILanguage(const std::vector<wxString>& available)
 {
     typedef BOOL (WINAPI *GetUserPreferredUILanguages_t)(DWORD, PULONG, PWSTR, PULONG);
     static GetUserPreferredUILanguages_t s_pfnGetUserPreferredUILanguages = nullptr;
@@ -148,7 +148,7 @@ wxString GetPreferredUILanguage(const wxArrayString& available)
                                                      langs.get(),
                                                      &bufferSize) )
             {
-                wxArrayString preferred;
+                std::vector<wxString> preferred;
 
                 WCHAR *buf = langs.get();
                 for ( unsigned i = 0; i < numLangs; i++ )
@@ -159,19 +159,27 @@ wxString GetPreferredUILanguage(const wxArrayString& available)
                 }
                 LogTraceArray(" - system preferred languages", preferred);
 
-                for ( wxArrayString::const_iterator j = preferred.begin();
-                      j != preferred.end();
-                      ++j )
+                for ( const auto& j : preferred )
                 {
-                    wxString lang(*j);
+                    wxString lang(j);
                     lang.Replace("-", "_");
-                    if ( available.Index(lang, /*bCase=*/false) != wxNOT_FOUND )
+                    const auto isLang = std::find_if(available.cbegin(), available.cend(),
+                        [lang](const auto& aLang){
+                            return lang.IsSameAs(aLang, false);
+                        });
+                    if ( isLang != std::cend(available) )
                         return lang;
+
                     size_t pos = lang.find('_');
+
                     if ( pos != wxString::npos )
                     {
                         lang = lang.substr(0, pos);
-                        if ( available.Index(lang, /*bCase=*/false) != wxNOT_FOUND )
+                        const auto isSubLang = std::find_if(available.cbegin(), available.cend(),
+                            [lang](const auto& aLang){
+                                return lang.IsSameAs(aLang, false);
+                            });
+                        if ( isSubLang != std::cend(available) )
                             return lang;
                     }
                 }
@@ -1446,9 +1454,9 @@ void wxTranslations::SetLanguage(const wxString& lang)
 }
 
 
-wxArrayString wxTranslations::GetAvailableTranslations(const wxString& domain) const
+std::vector<wxString> wxTranslations::GetAvailableTranslations(const wxString& domain) const
 {
-    wxCHECK_MSG( m_loader, wxArrayString(), "loader can't be NULL" );
+    wxCHECK_MSG( m_loader, std::vector<wxString>(), "loader can't be NULL" );
 
     return m_loader->GetAvailableTranslations(domain);
 }
@@ -1578,7 +1586,7 @@ wxString wxTranslations::GetBestTranslation(const wxString& domain,
     if ( !m_lang.empty() )
         return m_lang;
 
-    wxArrayString available(GetAvailableTranslations(domain));
+    std::vector<wxString> available(GetAvailableTranslations(domain));
     // it's OK to have duplicates, so just add msgid language
     available.push_back(msgIdLanguage);
     available.push_back(msgIdLanguage.BeforeFirst('_'));
@@ -1724,7 +1732,7 @@ namespace
 {
 
 // the list of the directories to search for message catalog files
-wxArrayString gs_searchPrefixes;
+std::vector<wxString> gs_searchPrefixes;
 
 // return the directories to search for message catalogs under the given
 // prefix, separated by wxPATH_SEP
@@ -1766,9 +1774,9 @@ bool HasMsgCatalogInDir(const wxString& dir, const wxString& domain)
 
 // get prefixes to locale directories; if lang is empty, don't point to
 // OSX's .lproj bundles
-wxArrayString GetSearchPrefixes()
+std::vector<wxString> GetSearchPrefixes()
 {
-    wxArrayString paths;
+    std::vector<wxString> paths;
 
     // first take the entries explicitly added by the program
     paths = gs_searchPrefixes;
@@ -1777,8 +1785,12 @@ wxArrayString GetSearchPrefixes()
     // then look in the standard location
     wxString stdp;
     stdp = wxStandardPaths::Get().GetResourcesDir();
-    if ( paths.Index(stdp) == wxNOT_FOUND )
-        paths.Add(stdp);
+    const auto path_iter = std::find_if(paths.cbegin(), paths.cend(),
+        [stdp](const auto& path){
+            return stdp.IsSameAs(path);
+        });
+    if ( path_iter == std::cend(paths) )
+        paths.push_back(stdp);
 
   #ifdef wxHAS_STDPATHS_INSTALL_PREFIX
     stdp = wxStandardPaths::Get().GetInstallPrefix() + "/share/locale";
@@ -1818,13 +1830,9 @@ wxString GetFullSearchPath(const wxString& lang)
     wxString searchPath;
     searchPath.reserve(500);
 
-    const wxArrayString prefixes = GetSearchPrefixes();
-
-    for ( wxArrayString::const_iterator i = prefixes.begin();
-          i != prefixes.end();
-          ++i )
+    for ( const auto& i : GetSearchPrefixes() )
     {
-        const wxString p = GetMsgCatalogSubdirs(*i, lang);
+        const wxString p = GetMsgCatalogSubdirs(i, lang);
 
         if ( !searchPath.empty() )
             searchPath += wxPATH_SEP;
@@ -1839,9 +1847,13 @@ wxString GetFullSearchPath(const wxString& lang)
 
 void wxFileTranslationsLoader::AddCatalogLookupPathPrefix(const wxString& prefix)
 {
-    if ( gs_searchPrefixes.Index(prefix) == wxNOT_FOUND )
+
+    if (std::cend(gs_searchPrefixes) == std::find_if(gs_searchPrefixes.cbegin(), gs_searchPrefixes.cend(),
+        [prefix](const auto& searchPrefix) {
+            return prefix.IsSameAs(searchPrefix);
+        }))
     {
-        gs_searchPrefixes.Add(prefix);
+        gs_searchPrefixes.push_back(prefix);
     }
     //else: already have it
 }
@@ -1874,10 +1886,10 @@ wxMsgCatalog *wxFileTranslationsLoader::LoadCatalog(const wxString& domain,
 }
 
 
-wxArrayString wxFileTranslationsLoader::GetAvailableTranslations(const wxString& domain) const
+std::vector<wxString> wxFileTranslationsLoader::GetAvailableTranslations(const wxString& domain) const
 {
-    wxArrayString langs;
-    const wxArrayString prefixes = GetSearchPrefixes();
+    std::vector<wxString> langs;
+    const std::vector<wxString> prefixes = GetSearchPrefixes();
 
     LogTraceLargeArray
     (
@@ -1885,14 +1897,12 @@ wxArrayString wxFileTranslationsLoader::GetAvailableTranslations(const wxString&
         prefixes
     );
 
-    for ( wxArrayString::const_iterator i = prefixes.begin();
-          i != prefixes.end();
-          ++i )
+    for ( const auto& i : prefixes )
     {
-        if ( i->empty() )
+        if ( i.empty() )
             continue;
         wxDir dir;
-        if ( !dir.Open(*i) )
+        if ( !dir.Open(i) )
             continue;
 
         wxString lang;
@@ -1900,7 +1910,7 @@ wxArrayString wxFileTranslationsLoader::GetAvailableTranslations(const wxString&
               ok;
               ok = dir.GetNext(&lang) )
         {
-            const wxString langdir = *i + wxFILE_SEP_PATH + lang;
+            const wxString langdir = i + wxFILE_SEP_PATH + lang;
             if ( HasMsgCatalogInDir(langdir, domain) )
             {
 #ifdef __WXOSX__
@@ -1962,7 +1972,7 @@ namespace
 struct EnumCallbackData
 {
     wxString prefix;
-    wxArrayString langs;
+    std::vector<wxString> langs;
 };
 
 BOOL CALLBACK EnumTranslations(HMODULE WXUNUSED(hModule),
@@ -1985,7 +1995,7 @@ BOOL CALLBACK EnumTranslations(HMODULE WXUNUSED(hModule),
 } // anonymous namespace
 
 
-wxArrayString wxResourceTranslationsLoader::GetAvailableTranslations(const wxString& domain) const
+std::vector<wxString> wxResourceTranslationsLoader::GetAvailableTranslations(const wxString& domain) const
 {
     EnumCallbackData data;
     data.prefix = domain + "_";

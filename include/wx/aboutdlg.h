@@ -89,40 +89,40 @@ public:
     // ------------------------
 
     // the list of developers of the program
-    void SetDevelopers(const wxArrayString& developers)
+    void SetDevelopers(const std::vector<wxString>& developers)
         { m_developers = developers; }
     void AddDeveloper(const wxString& developer)
         { m_developers.push_back(developer); }
 
     bool HasDevelopers() const { return !m_developers.empty(); }
-    const wxArrayString& GetDevelopers() const { return m_developers; }
+    const std::vector<wxString>& GetDevelopers() const { return m_developers; }
 
     // the list of documentation writers
-    void SetDocWriters(const wxArrayString& docwriters)
+    void SetDocWriters(const std::vector<wxString>& docwriters)
         { m_docwriters = docwriters; }
     void AddDocWriter(const wxString& docwriter)
         { m_docwriters.push_back(docwriter); }
 
     bool HasDocWriters() const { return !m_docwriters.empty(); }
-    const wxArrayString& GetDocWriters() const { return m_docwriters; }
+    const std::vector<wxString>& GetDocWriters() const { return m_docwriters; }
 
     // the list of artists for the program art
-    void SetArtists(const wxArrayString& artists)
+    void SetArtists(const std::vector<wxString>& artists)
         { m_artists = artists; }
     void AddArtist(const wxString& artist)
         { m_artists.push_back(artist); }
 
     bool HasArtists() const { return !m_artists.empty(); }
-    const wxArrayString& GetArtists() const { return m_artists; }
+    const std::vector<wxString>& GetArtists() const { return m_artists; }
 
     // the list of translators
-    void SetTranslators(const wxArrayString& translators)
+    void SetTranslators(const std::vector<wxString>& translators)
         { m_translators = translators; }
     void AddTranslator(const wxString& translator)
         { m_translators.push_back(translator); }
 
     bool HasTranslators() const { return !m_translators.empty(); }
-    const wxArrayString& GetTranslators() const { return m_translators; }
+    const std::vector<wxString>& GetTranslators() const { return m_translators; }
 
 
     // implementation only
@@ -155,7 +155,7 @@ private:
     wxString m_url,
              m_urlDesc;
 
-    wxArrayString m_developers,
+    std::vector<wxString> m_developers,
                   m_docwriters,
                   m_artists,
                   m_translators;

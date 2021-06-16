@@ -716,18 +716,18 @@ bool wxRegKey::DeleteSelf()
 
   // we can't delete keys while enumerating because it confuses GetNextKey, so
   // we first save the key names and then delete them all
-  wxArrayString astrSubkeys;
+  std::vector<wxString> astrSubkeys;
 
   wxString strKey;
   long lIndex;
   bool bCont = GetFirstKey(strKey, lIndex);
   while ( bCont ) {
-    astrSubkeys.Add(strKey);
+    astrSubkeys.push_back(strKey);
 
     bCont = GetNextKey(strKey, lIndex);
   }
 
-  size_t nKeyCount = astrSubkeys.Count();
+  size_t nKeyCount = astrSubkeys.size();
   for ( size_t nKey = 0; nKey < nKeyCount; nKey++ ) {
     wxRegKey key(*this, astrSubkeys[nKey]);
     if ( !key.DeleteSelf() )

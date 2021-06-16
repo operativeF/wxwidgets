@@ -1748,7 +1748,7 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
 wxDocTemplate *wxDocManager::SelectDocumentType(wxDocTemplate **templates,
                                                 int noTemplates, bool sort)
 {
-    wxArrayString strings;
+    std::vector<wxString> strings;
     wxScopedArray<wxDocTemplate *> data(noTemplates);
     int i;
     int n = 0;
@@ -1770,7 +1770,7 @@ wxDocTemplate *wxDocManager::SelectDocumentType(wxDocTemplate **templates,
 
             if ( want )
             {
-                strings.Add(templates[i]->m_description);
+                strings.push_back(templates[i]->m_description);
 
                 data[n] = templates[i];
                 n ++;
@@ -1780,14 +1780,11 @@ wxDocTemplate *wxDocManager::SelectDocumentType(wxDocTemplate **templates,
 
     if (sort)
     {
-        strings.Sort(); // ascending sort
-        // Yes, this will be slow, but template lists
-        // are typically short.
-        int j;
-        n = strings.Count();
-        for (i = 0; i < n; i++)
+        std::sort(strings.begin(), strings.end());
+
+        for (i = 0; i < strings.size(); i++)
         {
-            for (j = 0; j < noTemplates; j++)
+            for (int j = 0; j < noTemplates; j++)
             {
                 if (strings[i] == templates[j]->m_description)
                     data[i] = templates[j];
@@ -1826,7 +1823,7 @@ wxDocTemplate *wxDocManager::SelectDocumentType(wxDocTemplate **templates,
 wxDocTemplate *wxDocManager::SelectViewType(wxDocTemplate **templates,
                                             int noTemplates, bool sort)
 {
-    wxArrayString strings;
+    std::vector<wxString> strings;
     wxScopedArray<wxDocTemplate *> data(noTemplates);
     int i;
     int n = 0;
@@ -1836,9 +1833,8 @@ wxDocTemplate *wxDocManager::SelectViewType(wxDocTemplate **templates,
         wxDocTemplate *templ = templates[i];
         if ( templ->IsVisible() && !templ->GetViewName().empty() )
         {
-            int j;
             bool want = true;
-            for (j = 0; j < n; j++)
+            for (int j = 0; j < n; j++)
             {
                 //filter out NOT unique views
                 if ( templates[i]->m_viewTypeName == data[j]->m_viewTypeName )
@@ -1847,7 +1843,7 @@ wxDocTemplate *wxDocManager::SelectViewType(wxDocTemplate **templates,
 
             if ( want )
             {
-                strings.Add(templ->m_viewTypeName);
+                strings.push_back(templ->m_viewTypeName);
                 data[n] = templ;
                 n ++;
             }
@@ -1856,14 +1852,14 @@ wxDocTemplate *wxDocManager::SelectViewType(wxDocTemplate **templates,
 
     if (sort)
     {
-        strings.Sort(); // ascending sort
+        std::sort(strings.begin(), strings.end());
         // Yes, this will be slow, but template lists
         // are typically short.
-        int j;
-        n = strings.Count();
+
+        n = strings.size();
         for (i = 0; i < n; i++)
         {
-            for (j = 0; j < noTemplates; j++)
+            for (int j = 0; j < noTemplates; j++)
             {
                 if (strings[i] == templates[j]->m_viewTypeName)
                     data[i] = templates[j];

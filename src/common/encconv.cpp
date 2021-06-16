@@ -95,7 +95,6 @@ static CharsetItem* BuildReverseTable(const wxUint16 *tbl)
 
 bool wxEncodingConverter::Init(wxFontEncoding input_enc, wxFontEncoding output_enc, int method)
 {
-    unsigned i;
     const wxUint16 *in_tbl;
     const wxUint16 *out_tbl = nullptr;
 

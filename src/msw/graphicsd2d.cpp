@@ -358,7 +358,7 @@ HRESULT WINAPI wxD3D11CreateDevice(
 #if wxUSE_PRIVATE_FONTS
 
 // This function is defined in src/msw/font.cpp.
-extern const wxArrayString& wxGetPrivateFontFileNames();
+extern const std::vector<wxString>& wxGetPrivateFontFileNames();
 
 namespace
 {
@@ -369,7 +369,7 @@ using wxDirect2DFontKey = unsigned int;
 class wxDirect2DFontFileEnumerator : public IDWriteFontFileEnumerator
 {
 public:
-    wxDirect2DFontFileEnumerator(IDWriteFactory* pFactory, const wxArrayString& fontCollection)
+    wxDirect2DFontFileEnumerator(IDWriteFactory* pFactory, const std::vector<wxString>& fontCollection)
         : m_factory(pFactory)
         , m_filePaths(fontCollection)
         , m_nextIndex(0)
@@ -486,14 +486,14 @@ public:
         return ms_isInitialized;
     }
 
-    static wxDirect2DFontKey SetFontList(const wxArrayString& list)
+    static wxDirect2DFontKey SetFontList(const std::vector<wxString>& list)
     {
         ms_fontList = list;
         // Every time font collection is changed, generate unique key
         return ++ms_key;
     }
 
-    static const wxArrayString& GetFontList()
+    static const std::vector<wxString>& GetFontList()
     {
         return ms_fontList;
     }
@@ -503,7 +503,7 @@ public:
 
 private:
     static bool ms_isInitialized;
-    static wxArrayString ms_fontList;
+    inline static std::vector<wxString> ms_fontList;
     static wxDirect2DFontKey ms_key;
 };
 
@@ -515,8 +515,8 @@ END_IID_TABLE;
 IMPLEMENT_IUNKNOWN_METHODS(wxDirect2DFontCollectionLoader)
 
 bool wxDirect2DFontCollectionLoader::ms_isInitialized(false);
-wxArrayString wxDirect2DFontCollectionLoader::ms_fontList;
 wxDirect2DFontKey wxDirect2DFontCollectionLoader::ms_key(0);
+
 } // anonymous namespace
 
 #endif // wxUSE_PRIVATE_FONTS
@@ -3241,7 +3241,7 @@ wxD2DFontData::wxD2DFontData(wxGraphicsRenderer* renderer, const wxFont& font, c
         // or from private GDI font.
 #if wxUSE_PRIVATE_FONTS
         // Make private fonts available to D2D.
-        const wxArrayString& privateFonts = wxGetPrivateFontFileNames();
+        const std::vector<wxString>& privateFonts = wxGetPrivateFontFileNames();
         if ( privateFonts.empty() )
         {
             wxLogApiError(wxString::Format("IDWriteGdiInterop::CreateFontFromLOGFONT() for '%s'", logfont.lfFaceName), hr);

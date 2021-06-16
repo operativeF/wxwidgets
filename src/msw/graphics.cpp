@@ -1092,7 +1092,7 @@ Gdiplus::FontFamily* gs_pFontFamily = nullptr;
 } // anonymous namespace
 
 // This function is defined in src/msw/font.cpp.
-extern const wxArrayString& wxGetPrivateFontFileNames();
+extern const std::vector<wxString>& wxGetPrivateFontFileNames();
 
 #endif // wxUSE_PRIVATE_FONTS
 
@@ -2588,7 +2588,7 @@ void wxGDIPlusRenderer::Load()
 
 #if wxUSE_PRIVATE_FONTS
         // Make private fonts available to GDI+, if any.
-        const wxArrayString& privateFonts = wxGetPrivateFontFileNames();
+        const std::vector<wxString>& privateFonts = wxGetPrivateFontFileNames();
         const size_t n = privateFonts.size();
         if ( n )
         {

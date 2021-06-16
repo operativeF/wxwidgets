@@ -52,13 +52,13 @@ public:
    wxTextCompleterSimple& operator=(wxTextCompleterSimple&&) = default;
 
     // Must be implemented to return all the completions for the given prefix.
-    virtual void GetCompletions(const wxString& prefix, wxArrayString& res) = 0;
+    virtual const std::vector<wxString>& GetCompletions(const wxString& prefix) = 0;
 
     bool Start(const wxString& prefix) override;
     wxString GetNext() override;
 
 private:
-    wxArrayString m_completions;
+    std::vector<wxString> m_completions;
     unsigned m_index{0};
 };
 
@@ -74,19 +74,18 @@ private:
 class wxTextCompleterFixed : public wxTextCompleterSimple
 {
 public:
-    void SetCompletions(const wxArrayString& strings)
+    void SetCompletions(const std::vector<wxString>& strings)
     {
         m_strings = strings;
     }
 
-    void GetCompletions(const wxString& WXUNUSED(prefix),
-                                wxArrayString& res) override
+    const std::vector<wxString>& GetCompletions(const wxString& WXUNUSED(prefix)) override
     {
-        res = m_strings;
+        return m_strings;
     }
 
 private:
-    wxArrayString m_strings;
+    std::vector<wxString> m_strings;
 };
 
 
