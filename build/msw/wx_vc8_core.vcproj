@@ -1535,10 +1535,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\msw\dialup.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\msw\dib.cpp"
 				>
 			</File>
@@ -3518,10 +3514,6 @@
 			</File>
 			<File
 				RelativePath="..\..\include\wx\dialog.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\include\wx\dialup.h"
 				>
 			</File>
 			<File

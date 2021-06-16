@@ -741,7 +741,6 @@ WX_ARG_FEATURE(catch_segvs,   [  --enable-catch_segvs    catch signals in wxApp:
 WX_ARG_FEATURE(cmdline,       [  --enable-cmdline        use wxCmdLineParser class], wxUSE_CMDLINE_PARSER)
 WX_ARG_FEATURE(datetime,      [  --enable-datetime       use wxDateTime class], wxUSE_DATETIME)
 WX_ARG_FEATURE(debugreport,   [  --enable-debugreport    use wxDebugReport class], wxUSE_DEBUGREPORT)
-WX_ARG_FEATURE(dialupman,     [  --enable-dialupman      use dialup network classes], wxUSE_DIALUP_MANAGER)
 WX_ARG_FEATURE(dynlib,        [  --enable-dynlib         use wxLibrary class for DLL loading], wxUSE_DYNLIB_CLASS)
 WX_ARG_FEATURE(dynamicloader, [  --enable-dynamicloader  use (new) wxDynamicLibrary class], wxUSE_DYNAMIC_LOADER)
 WX_ARG_FEATURE(exceptions,    [  --enable-exceptions     build exception-safe library], wxUSE_EXCEPTIONS)

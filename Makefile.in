@@ -3852,7 +3852,6 @@ COND_USE_GUI_1_ALL_GUI_HEADERS =  \
 	wx/dataobj.h \
 	wx/dcmirror.h \
 	wx/dcps.h \
-	wx/dialup.h \
 	wx/dirctrl.h \
 	wx/display.h \
 	wx/dnd.h \

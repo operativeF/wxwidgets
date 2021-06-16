@@ -107,7 +107,6 @@
 #include <wx/debugrpt.h>
 #include <wx/defs.h>
 #include <wx/dialog.h>
-#include <wx/dialup.h>
 #include <wx/dirctrl.h>
 #include <wx/dirdlg.h>
 #include <wx/dir.h>

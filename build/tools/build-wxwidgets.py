@@ -384,7 +384,6 @@ def main(scriptName, args):
         if options.wxpython:
             flags["wxDIALOG_UNIT_COMPATIBILITY "] = "0"
             flags["wxUSE_DEBUGREPORT"] = "0"
-            flags["wxUSE_DIALUP_MANAGER"] = "0"
             flags["wxUSE_GRAPHICS_CONTEXT"] = "1"
             flags["wxUSE_DISPLAY"] = "1"
             flags["wxUSE_GLCANVAS"] = "1"

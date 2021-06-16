@@ -194,7 +194,6 @@ QT_WIN32_SRC=
     src/msw/ole/oleutils.cpp
     src/msw/ole/safearray.cpp
     src/msw/ole/uuid.cpp
-    src/msw/dialup.cpp
     src/msw/dib.cpp
     src/msw/joystick.cpp
     src/msw/sound.cpp
@@ -988,7 +987,6 @@ GUI_CMN_HDR =
     wx/dcscreen.h
     wx/dcsvg.h
     wx/dialog.h
-    wx/dialup.h
     wx/dirctrl.h
     wx/dirdlg.h
     wx/display.h
@@ -1224,7 +1222,6 @@ XWIN_LOWLEVEL_SRC =
     src/common/taskbarcmn.cpp
     src/generic/caret.cpp
     src/generic/imaglist.cpp
-    src/unix/dialup.cpp
     src/unix/fontenum.cpp
     src/unix/fontutil.cpp
     src/unix/joystick.cpp
@@ -1249,7 +1246,6 @@ GTK_WIN32_SRC =
     src/common/taskbarcmn.cpp
     src/generic/caret.cpp
     src/generic/imaglist.cpp
-    src/msw/dialup.cpp
     src/msw/dib.cpp
     src/msw/display.cpp
     src/msw/joystick.cpp
@@ -1900,7 +1896,6 @@ MSW_LOWLEVEL_SRC =
     src/msw/dcmemory.cpp
     src/msw/dcprint.cpp
     src/msw/dcscreen.cpp
-    src/msw/dialup.cpp
     src/msw/dib.cpp
     src/msw/display.cpp
     src/msw/enhmeta.cpp

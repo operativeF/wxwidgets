@@ -304,8 +304,6 @@ typedef pid_t GPid;
 
 #define wxUSE_CONFIG_NATIVE   0
 
-#define wxUSE_DIALUP_MANAGER   1
-
 #define wxUSE_DYNLIB_CLASS    1
 
 #define wxUSE_DYNAMIC_LOADER  0

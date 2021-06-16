@@ -61,14 +61,6 @@
 #   endif
 #endif /* wxUSE_DC_CACHEING */
 
-#ifndef wxUSE_DIALUP_MANAGER
-#    ifdef wxABORT_ON_CONFIG_ERROR
-#        error "wxUSE_DIALUP_MANAGER must be defined."
-#    else
-#        define wxUSE_DIALUP_MANAGER 0
-#    endif
-#endif /* !defined(wxUSE_DIALUP_MANAGER) */
-
 #ifndef wxUSE_MS_HTML_HELP
 #    ifdef wxABORT_ON_CONFIG_ERROR
 #        error "wxUSE_MS_HTML_HELP must be defined."

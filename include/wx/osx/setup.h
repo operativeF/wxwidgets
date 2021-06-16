@@ -427,15 +427,6 @@
 // Recommended setting: 1
 #define wxUSE_CONFIG_NATIVE   1
 
-// If wxUSE_DIALUP_MANAGER is 1, compile in wxDialUpManager class which allows
-// to connect/disconnect from the network and be notified whenever the dial-up
-// network connection is established/terminated. Requires wxUSE_DYNAMIC_LOADER.
-//
-// Default is 1.
-//
-// Recommended setting: 1
-#define wxUSE_DIALUP_MANAGER   1
-
 // Compile in classes for run-time DLL loading and function calling.
 // Required by wxUSE_DIALUP_MANAGER.
 //

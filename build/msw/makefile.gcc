@@ -8019,11 +8019,6 @@ $(OBJS)\monodll_dcscreen.o: ../../src/msw/dcscreen.cpp
 endif
 
 ifeq ($(USE_GUI),1)
-$(OBJS)\monodll_dialup.o: ../../src/msw/dialup.cpp
-	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
-endif
-
-ifeq ($(USE_GUI),1)
 $(OBJS)\monodll_dib.o: ../../src/msw/dib.cpp
 	$(CXX) -c -o $@ $(MONODLL_CXXFLAGS) $(CPPDEPS) $<
 endif
@@ -10574,11 +10569,6 @@ $(OBJS)\monolib_dcscreen.o: ../../src/msw/dcscreen.cpp
 endif
 
 ifeq ($(USE_GUI),1)
-$(OBJS)\monolib_dialup.o: ../../src/msw/dialup.cpp
-	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
-endif
-
-ifeq ($(USE_GUI),1)
 $(OBJS)\monolib_dib.o: ../../src/msw/dib.cpp
 	$(CXX) -c -o $@ $(MONOLIB_CXXFLAGS) $(CPPDEPS) $<
 endif
@@ -13093,11 +13083,6 @@ $(OBJS)\coredll_dcscreen.o: ../../src/msw/dcscreen.cpp
 endif
 
 ifeq ($(USE_GUI),1)
-$(OBJS)\coredll_dialup.o: ../../src/msw/dialup.cpp
-	$(CXX) -c -o $@ $(COREDLL_CXXFLAGS) $(CPPDEPS) $<
-endif
-
-ifeq ($(USE_GUI),1)
 $(OBJS)\coredll_dib.o: ../../src/msw/dib.cpp
 	$(CXX) -c -o $@ $(COREDLL_CXXFLAGS) $(CPPDEPS) $<
 endif
@@ -14819,11 +14804,6 @@ endif
 
 ifeq ($(USE_GUI),1)
 $(OBJS)\corelib_dcscreen.o: ../../src/msw/dcscreen.cpp
-	$(CXX) -c -o $@ $(CORELIB_CXXFLAGS) $(CPPDEPS) $<
-endif
-
-ifeq ($(USE_GUI),1)
-$(OBJS)\corelib_dialup.o: ../../src/msw/dialup.cpp
 	$(CXX) -c -o $@ $(CORELIB_CXXFLAGS) $(CPPDEPS) $<
 endif
 

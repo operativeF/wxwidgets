@@ -709,7 +709,6 @@
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)msw_%(Filename).obj</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)msw_%(Filename).obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="..\..\src\msw\dialup.cpp" />
     <ClCompile Include="..\..\src\msw\dib.cpp" />
     <ClCompile Include="..\..\src\msw\dirdlg.cpp" />
     <ClCompile Include="..\..\src\msw\display.cpp" />
@@ -1285,7 +1284,6 @@
     <ClInclude Include="..\..\include\wx\dcscreen.h" />
     <ClInclude Include="..\..\include\wx\dcsvg.h" />
     <ClInclude Include="..\..\include\wx\dialog.h" />
-    <ClInclude Include="..\..\include\wx\dialup.h" />
     <ClInclude Include="..\..\include\wx\dirctrl.h" />
     <ClInclude Include="..\..\include\wx\dirdlg.h" />
     <ClInclude Include="..\..\include\wx\display.h" />

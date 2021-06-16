@@ -39,9 +39,6 @@
 #undef wxUSE_DEBUGREPORT
 #define wxUSE_DEBUGREPORT 0
 
-#undef wxUSE_DIALUP_MANAGER
-#define wxUSE_DIALUP_MANAGER 0
-
 #undef wxUSE_DISPLAY
 #define wxUSE_DISPLAY 0
 

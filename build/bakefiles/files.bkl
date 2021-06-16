@@ -242,7 +242,6 @@ IMPORTANT: please read docs/tech/tn0016.txt before modifying this file!
 
 <set var="QT_WIN32_SRC" hints="files">
     src/msw/ole/comimpl.cpp
-    src/msw/dialup.cpp
     src/msw/dib.cpp
     src/msw/joystick.cpp
     src/msw/ole/oleutils.cpp
@@ -1147,7 +1146,6 @@ IMPORTANT: please read docs/tech/tn0016.txt before modifying this file!
     wx/dataobj.h
     wx/dcmirror.h
     wx/dcps.h
-    wx/dialup.h
     wx/dirctrl.h
     wx/display.h
     wx/dnd.h
@@ -1310,7 +1308,6 @@ IMPORTANT: please read docs/tech/tn0016.txt before modifying this file!
 <set var="XWIN_LOWLEVEL_SRC" hints="files">
     src/generic/caret.cpp
     src/generic/imaglist.cpp
-    src/unix/dialup.cpp
     src/unix/fontenum.cpp
     src/unix/fontutil.cpp
     src/unix/uiactionx11.cpp
@@ -1343,7 +1340,6 @@ IMPORTANT: please read docs/tech/tn0016.txt before modifying this file!
     src/msw/ole/oleutils.cpp
     src/msw/ole/safearray.cpp
     src/msw/ole/uuid.cpp
-    src/msw/dialup.cpp
     src/msw/dib.cpp
     src/msw/display.cpp
     src/msw/utilswin.cpp
@@ -2021,7 +2017,6 @@ IMPORTANT: please read docs/tech/tn0016.txt before modifying this file!
     src/msw/dcmemory.cpp
     src/msw/dcprint.cpp
     src/msw/dcscreen.cpp
-    src/msw/dialup.cpp
     src/msw/dib.cpp
     src/msw/display.cpp
     src/msw/enhmeta.cpp

@@ -771,9 +771,6 @@
     <ClCompile Include="..\..\src\msw\dialog.cpp">
       <Filter>MSW Sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\msw\dialup.cpp">
-      <Filter>MSW Sources</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\msw\dib.cpp">
       <Filter>MSW Sources</Filter>
     </ClCompile>
@@ -1256,9 +1253,6 @@
       <Filter>Common Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\wx\dialog.h">
-      <Filter>Common Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\wx\dialup.h">
       <Filter>Common Headers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\wx\dirctrl.h">

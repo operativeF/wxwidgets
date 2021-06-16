@@ -170,7 +170,6 @@ set(QT_WIN32_SRC
     src/msw/ole/oleutils.cpp
     src/msw/ole/uuid.cpp
     src/msw/ole/comimpl.cpp
-    src/msw/dialup.cpp
     src/msw/dib.cpp
     src/msw/joystick.cpp
     src/qt/graphics.cpp
@@ -1054,7 +1053,6 @@ set(GUI_CMN_HDR
     wx/dataobj.h
     wx/dcmirror.h
     wx/dcps.h
-    wx/dialup.h
     wx/dirctrl.h
     wx/display.h
     wx/dnd.h
@@ -1205,7 +1203,6 @@ set(UNIX_SRC
 set(XWIN_LOWLEVEL_SRC
     src/generic/caret.cpp
     src/generic/imaglist.cpp
-    src/unix/dialup.cpp
     src/unix/fontenum.cpp
     src/unix/fontutil.cpp
     src/unix/uiactionx11.cpp
@@ -1234,7 +1231,6 @@ set(GTK_WIN32_SRC
     src/msw/ole/oleutils.cpp
     src/msw/ole/safearray.cpp
     src/msw/ole/uuid.cpp
-    src/msw/dialup.cpp
     src/msw/dib.cpp
     src/msw/display.cpp
     src/msw/utilswin.cpp
@@ -1895,7 +1891,6 @@ set(MSW_LOWLEVEL_SRC
     src/msw/dcmemory.cpp
     src/msw/dcprint.cpp
     src/msw/dcscreen.cpp
-    src/msw/dialup.cpp
     src/msw/dib.cpp
     src/msw/display.cpp
     src/msw/enhmeta.cpp

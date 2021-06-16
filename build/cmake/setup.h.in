@@ -254,8 +254,6 @@
 
 #cmakedefine01 wxUSE_CONFIG_NATIVE
 
-#cmakedefine01 wxUSE_DIALUP_MANAGER
-
 #cmakedefine01 wxUSE_DYNLIB_CLASS
 
 #cmakedefine01 wxUSE_DYNAMIC_LOADER
