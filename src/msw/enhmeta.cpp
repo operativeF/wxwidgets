@@ -430,21 +430,19 @@ bool wxEnhMetaFileDataObject::GetDataHere(const wxDataFormat& format, void *buf)
         const size_t size = ::GetWinMetaFileBits(hEMF, 0, nullptr, MM_ANISOTROPIC, hdc);
         wxCHECK_MSG( size, false, wxT("GetWinMetaFileBits() failed") );
 
-        BYTE *bits = (BYTE *)malloc(size);
+        std::vector<BYTE> bits(size);
 
         // then get the enh metafile bits
-        if ( !::GetWinMetaFileBits(hEMF, size, bits, MM_ANISOTROPIC, hdc) )
+        if ( !::GetWinMetaFileBits(hEMF, size, bits.data(), MM_ANISOTROPIC, hdc) )
         {
             wxLogLastError(wxT("GetWinMetaFileBits"));
-
-            free(bits);
 
             return false;
         }
 
         // and finally convert them to the WMF
-        HMETAFILE hMF = ::SetMetaFileBitsEx(size, bits);
-        free(bits);
+        HMETAFILE hMF = ::SetMetaFileBitsEx(size, bits.data());
+
         if ( !hMF )
         {
             wxLogLastError(wxT("SetMetaFileBitsEx"));
@@ -490,12 +488,11 @@ bool wxEnhMetaFileDataObject::SetData(const wxDataFormat& format,
         wxCHECK_MSG( size, false, wxT("GetMetaFileBitsEx() failed") );
 
         // then get metafile bits
-        BYTE *bits = (BYTE *)malloc(size);
-        if ( !::GetMetaFileBitsEx(mfpict->hMF, size, bits) )
+        std::vector<BYTE> bits(size);
+
+        if ( !::GetMetaFileBitsEx(mfpict->hMF, size, bits.data()) )
         {
             wxLogLastError(wxT("GetMetaFileBitsEx"));
-
-            free(bits);
 
             return false;
         }
@@ -503,8 +500,8 @@ bool wxEnhMetaFileDataObject::SetData(const wxDataFormat& format,
         ScreenHDC hdcRef;
 
         // and finally create an enhanced metafile from them
-        hEMF = ::SetWinMetaFileBits(size, bits, hdcRef, mfpict);
-        free(bits);
+        hEMF = ::SetWinMetaFileBits(size, bits.data(), hdcRef, mfpict);
+
         if ( !hEMF )
         {
             wxLogLastError(wxT("SetWinMetaFileBits"));

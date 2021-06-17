@@ -56,7 +56,7 @@ public:
     int transparent{0};                // transparent color index (-1 = none)
     wxAnimationDisposal disposal{wxANIM_DONOTREMOVE};   // disposal method
     long delay{-1};                 // delay in ms (-1 = unused)
-    unsigned char *p{nullptr};      // bitmap
+    std::vector<unsigned char> p;      // bitmap
     unsigned char *pal{nullptr};    // palette
     unsigned int ncolours{0};       // number of colours
     wxString comment;
@@ -81,7 +81,6 @@ void wxGIFDecoder::Destroy()
     for(auto* frame : m_frames)
     {
         GIFImage *f = (GIFImage*)frame;
-        free(f->p);
         free(f->pal);
         delete f;
     }
@@ -249,7 +248,7 @@ wxColour wxGIFDecoder::GetTransparentColour(unsigned int frame) const
                     pal[n*3 + 2]);
 }
 
-unsigned char* wxGIFDecoder::GetData(unsigned int frame) const    { return (GetFrame(frame)->p); }
+unsigned char* wxGIFDecoder::GetData(unsigned int frame) const    { return (GetFrame(frame)->p.data()); }
 unsigned char* wxGIFDecoder::GetPalette(unsigned int frame) const { return (GetFrame(frame)->pal); }
 unsigned int wxGIFDecoder::GetNcolours(unsigned int frame) const  { return (GetFrame(frame)->ncolours); }
 int wxGIFDecoder::GetTransparentColourIndex(unsigned int frame) const  { return (GetFrame(frame)->transparent); }
@@ -598,7 +597,6 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
     unsigned int  global_ncolors = 0;
     int           bits, interl, i;
     wxAnimationDisposal disposal;
-    long          size;
     long          delay;
     unsigned char type = 0;
     unsigned char pal[768];
@@ -808,17 +806,17 @@ wxGIFErrorCode wxGIFDecoder::LoadGIF(wxInputStream& stream)
                 }
 
                 interl = ((buf[8] & 0x40)? 1 : 0);
-                size = pimg->w * pimg->h;
+                auto pimg_size = pimg->w * pimg->h;
 
                 pimg->transparent = transparent;
                 pimg->disposal = disposal;
                 pimg->delay = delay;
 
                 // allocate memory for image and palette
-                pimg->p   = (unsigned char *) malloc((unsigned int)size);
+                pimg->p.resize(pimg_size);
                 pimg->pal = (unsigned char *) malloc(768);
 
-                if ((!pimg->p) || (!pimg->pal))
+                if (pimg->p.empty() || (!pimg->pal))
                     return wxGIF_MEMERR;
 
                 // load local color map if available, else use global map
