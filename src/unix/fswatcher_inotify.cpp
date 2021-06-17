@@ -95,7 +95,7 @@ public:
         }
     }
 
-    bool DoAdd(wxSharedPtr<wxFSWatchEntryUnix> watch) override
+    bool DoAdd(std::shared_ptr<wxFSWatchEntryUnix> watch) override
     {
         wxCHECK_MSG( IsOk(), false,
                     "Inotify not initialized or invalid inotify descriptor" );
@@ -118,7 +118,7 @@ public:
         return true;
     }
 
-    bool DoRemove(wxSharedPtr<wxFSWatchEntryUnix> watch) override
+    bool DoRemove(std::shared_ptr<wxFSWatchEntryUnix> watch) override
     {
         wxCHECK_MSG( IsOk(), false,
                     "Inotify not initialized or invalid inotify descriptor" );

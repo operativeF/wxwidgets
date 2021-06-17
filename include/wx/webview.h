@@ -130,7 +130,7 @@ public:
     virtual wxVersionInfo GetVersionInfo() { return wxVersionInfo(); }
 };
 
-WX_DECLARE_STRING_HASH_MAP(wxSharedPtr<wxWebViewFactory>, wxStringWebViewFactoryMap);
+WX_DECLARE_STRING_HASH_MAP(std::shared_ptr<wxWebViewFactory>, wxStringWebViewFactoryMap);
 
 class WXDLLIMPEXP_WEBVIEW wxWebView : public wxControl
 {
@@ -164,7 +164,7 @@ public:
                           const wxString& name = wxASCII_STR(wxWebViewNameStr));
 
     static void RegisterFactory(const wxString& backend,
-                                wxSharedPtr<wxWebViewFactory> factory);
+                                std::shared_ptr<wxWebViewFactory> factory);
     static bool IsBackendAvailable(const wxString& backend);
     static wxVersionInfo GetBackendVersionInfo(const wxString& backend = wxASCII_STR(wxWebViewBackendDefault));
 
@@ -185,7 +185,7 @@ public:
     virtual bool IsEditable() const = 0;
     virtual void LoadURL(const wxString& url) = 0;
     virtual void Print() = 0;
-    virtual void RegisterHandler(wxSharedPtr<wxWebViewHandler> handler) = 0;
+    virtual void RegisterHandler(std::shared_ptr<wxWebViewHandler> handler) = 0;
     virtual void Reload(wxWebViewReloadFlags flags = wxWEBVIEW_RELOAD_DEFAULT) = 0;
     virtual bool SetUserAgent(const wxString& userAgent) { wxUnusedVar(userAgent); return false; }
     virtual wxString GetUserAgent() const;
@@ -221,9 +221,9 @@ public:
     virtual void GoForward() = 0;
     virtual void ClearHistory() = 0;
     virtual void EnableHistory(bool enable = true) = 0;
-    virtual std::vector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() = 0;
-    virtual std::vector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() = 0;
-    virtual void LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item) = 0;
+    virtual std::vector<std::shared_ptr<wxWebViewHistoryItem> > GetBackwardHistory() = 0;
+    virtual std::vector<std::shared_ptr<wxWebViewHistoryItem> > GetForwardHistory() = 0;
+    virtual void LoadHistoryItem(std::shared_ptr<wxWebViewHistoryItem> item) = 0;
 
     //Zoom
     virtual bool CanSetZoomType(wxWebViewZoomType type) const = 0;

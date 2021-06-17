@@ -45,7 +45,7 @@ public:
     //which are added as documentcomplete events arrive, unless we are loading
     //an item from the history. The position is stored as an int, and reflects
     //where we are in the history list.
-    std::vector<wxSharedPtr<wxWebViewHistoryItem> > m_historyList;
+    std::vector<std::shared_ptr<wxWebViewHistoryItem> > m_historyList;
     std::vector<ClassFactory*> m_factories;
     int m_historyPosition;
     bool m_historyLoadingFromList;
@@ -82,10 +82,10 @@ protected:
     VOID * fileP;
 
     wxFSFile* m_file;
-    wxSharedPtr<wxWebViewHandler> m_handler;
+    std::shared_ptr<wxWebViewHandler> m_handler;
 
 public:
-    VirtualProtocol(wxSharedPtr<wxWebViewHandler> handler);
+    VirtualProtocol(std::shared_ptr<wxWebViewHandler> handler);
     virtual ~VirtualProtocol() = default;
 
     //IUnknown
@@ -141,7 +141,7 @@ public:
 class ClassFactory : public IClassFactory
 {
 public:
-    ClassFactory(wxSharedPtr<wxWebViewHandler> handler) : m_handler(handler)
+    ClassFactory(std::shared_ptr<wxWebViewHandler> handler) : m_handler(handler)
         { AddRef(); }
     virtual ~ClassFactory() = default;
 
@@ -156,7 +156,7 @@ public:
     DECLARE_IUNKNOWN_METHODS;
 
 private:
-    wxSharedPtr<wxWebViewHandler> m_handler;
+    std::shared_ptr<wxWebViewHandler> m_handler;
 };
 
 class wxIEContainer : public wxActiveXContainer

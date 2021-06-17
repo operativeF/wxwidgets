@@ -252,7 +252,7 @@ wxWebView* wxWebView::New(wxWindow* parent, wxWindowID id, const wxString& url,
 
 // static
 void wxWebView::RegisterFactory(const wxString& backend,
-                                wxSharedPtr<wxWebViewFactory> factory)
+                                std::shared_ptr<wxWebViewFactory> factory)
 {
     m_factoryMap[backend] = factory;
 }
@@ -306,19 +306,19 @@ void wxWebView::InitFactoryMap()
 #ifdef __WXMSW__
 #if wxUSE_WEBVIEW_IE
     if(m_factoryMap.find(wxWebViewBackendIE) == m_factoryMap.end())
-        RegisterFactory(wxWebViewBackendIE, wxSharedPtr<wxWebViewFactory>
+        RegisterFactory(wxWebViewBackendIE, std::shared_ptr<wxWebViewFactory>
                                                    (new wxWebViewFactoryIE));
 #endif
 
 #if wxUSE_WEBVIEW_EDGE
     if (m_factoryMap.find(wxWebViewBackendEdge) == m_factoryMap.end())
-        RegisterFactory(wxWebViewBackendEdge, wxSharedPtr<wxWebViewFactory>
+        RegisterFactory(wxWebViewBackendEdge, std::shared_ptr<wxWebViewFactory>
         (new wxWebViewFactoryEdge));
 #endif
 
 #else
     if(m_factoryMap.find(wxWebViewBackendWebKit) == m_factoryMap.end())
-        RegisterFactory(wxWebViewBackendWebKit, wxSharedPtr<wxWebViewFactory>
+        RegisterFactory(wxWebViewBackendWebKit, std::shared_ptr<wxWebViewFactory>
                                                        (new wxWebViewFactoryWebKit));
 #endif
 }

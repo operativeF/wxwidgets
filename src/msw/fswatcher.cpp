@@ -35,9 +35,9 @@ protected:
     bool Init() override;
 
     // adds watch to be monitored for file system changes
-    bool DoAdd(wxSharedPtr<wxFSWatchEntryMSW> watch) override;
+    bool DoAdd(std::shared_ptr<wxFSWatchEntryMSW> watch) override;
 
-    bool DoRemove(wxSharedPtr<wxFSWatchEntryMSW> watch) override;
+    bool DoRemove(std::shared_ptr<wxFSWatchEntryMSW> watch) override;
 
 private:
     bool DoSetUpWatch(wxFSWatchEntryMSW& watch);
@@ -89,7 +89,7 @@ bool wxFSWatcherImplMSW::Init()
 }
 
 // adds watch to be monitored for file system changes
-bool wxFSWatcherImplMSW::DoAdd(wxSharedPtr<wxFSWatchEntryMSW> watch)
+bool wxFSWatcherImplMSW::DoAdd(std::shared_ptr<wxFSWatchEntryMSW> watch)
 {
     // setting up wait for directory changes
     if (!DoSetUpWatch(*watch))
@@ -100,7 +100,7 @@ bool wxFSWatcherImplMSW::DoAdd(wxSharedPtr<wxFSWatchEntryMSW> watch)
 }
 
 bool
-wxFSWatcherImplMSW::DoRemove(wxSharedPtr<wxFSWatchEntryMSW> watch)
+wxFSWatcherImplMSW::DoRemove(std::shared_ptr<wxFSWatchEntryMSW> watch)
 {
     return m_iocp.ScheduleForRemoval(watch);
 }

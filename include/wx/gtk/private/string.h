@@ -72,12 +72,12 @@ public:
         gchar *new_key = g_utf8_collate_key( new_key_lower, -1);
         g_free( new_key_lower );
 
-        wxSharedPtr<wxGtkCollatableString> new_ptr( new wxGtkCollatableString( new_label, new_key ) );
+        std::shared_ptr<wxGtkCollatableString> new_ptr( new wxGtkCollatableString( new_label, new_key ) );
 
-        std::vector< wxSharedPtr<wxGtkCollatableString> >::iterator iter;
+        std::vector< std::shared_ptr<wxGtkCollatableString> >::iterator iter;
         for (iter = m_list.begin(); iter != m_list.end(); ++iter)
         {
-            wxSharedPtr<wxGtkCollatableString> ptr = *iter;
+            std::shared_ptr<wxGtkCollatableString> ptr = *iter;
 
             gchar *key = ptr->m_key;
             if (strcmp(key,new_key) >= 0)
@@ -113,7 +113,7 @@ public:
     }
 
 private:
-    std::vector< wxSharedPtr<wxGtkCollatableString> > m_list;
+    std::vector< std::shared_ptr<wxGtkCollatableString> > m_list;
 };
 
 

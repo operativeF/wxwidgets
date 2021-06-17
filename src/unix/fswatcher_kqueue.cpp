@@ -134,7 +134,7 @@ public:
         wxDELETE(m_source);
     }
 
-    bool DoAdd(wxSharedPtr<wxFSWatchEntryKq> watch) override
+    bool DoAdd(std::shared_ptr<wxFSWatchEntryKq> watch) override
     {
         wxCHECK_MSG( IsOk(), false,
                     "Kqueue not initialized or invalid kqueue descriptor" );
@@ -157,7 +157,7 @@ public:
         return true;
     }
 
-    bool DoRemove(wxSharedPtr<wxFSWatchEntryKq> watch) override
+    bool DoRemove(std::shared_ptr<wxFSWatchEntryKq> watch) override
     {
         wxCHECK_MSG( IsOk(), false,
                     "Kqueue not initialized or invalid kqueue descriptor" );

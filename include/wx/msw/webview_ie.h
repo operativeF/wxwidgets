@@ -71,9 +71,9 @@ public:
            const wxString& name = wxASCII_STR(wxWebViewNameStr)) override;
 
     void LoadURL(const wxString& url) override;
-    void LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item) override;
-    std::vector<wxSharedPtr<wxWebViewHistoryItem> > GetBackwardHistory() override;
-    std::vector<wxSharedPtr<wxWebViewHistoryItem> > GetForwardHistory() override;
+    void LoadHistoryItem(std::shared_ptr<wxWebViewHistoryItem> item) override;
+    std::vector<std::shared_ptr<wxWebViewHistoryItem> > GetBackwardHistory() override;
+    std::vector<std::shared_ptr<wxWebViewHistoryItem> > GetForwardHistory() override;
 
     bool CanGoForward() const override;
     bool CanGoBack() const override;
@@ -134,7 +134,7 @@ public:
     bool RunScript(const wxString& javascript, wxString* output = nullptr) const override;
 
     //Virtual Filesystem Support
-    void RegisterHandler(wxSharedPtr<wxWebViewHandler> handler) override;
+    void RegisterHandler(std::shared_ptr<wxWebViewHandler> handler) override;
 
     void* GetNativeBackend() const override;
 

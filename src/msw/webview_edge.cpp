@@ -269,7 +269,7 @@ HRESULT wxWebViewEdgeImpl::OnNavigationCompleted(ICoreWebView2* WXUNUSED(sender)
                 m_historyList.erase(m_historyList.begin() + m_historyPosition + 1,
                     m_historyList.end());
             }
-            wxSharedPtr<wxWebViewHistoryItem> item(new wxWebViewHistoryItem(uri, m_ctrl->GetCurrentTitle()));
+            std::shared_ptr<wxWebViewHistoryItem> item(new wxWebViewHistoryItem(uri, m_ctrl->GetCurrentTitle()));
             m_historyList.push_back(item);
             m_historyPosition++;
         }
@@ -568,7 +568,7 @@ void wxWebViewEdge::LoadURL(const wxString& url)
         wxLogApiError("WebView2::Navigate", hr);
 }
 
-void wxWebViewEdge::LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item)
+void wxWebViewEdge::LoadHistoryItem(std::shared_ptr<wxWebViewHistoryItem> item)
 {
     int pos = -1;
     for (unsigned int i = 0; i < m_impl->m_historyList.size(); i++)
@@ -583,9 +583,9 @@ void wxWebViewEdge::LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item)
     m_impl->m_historyPosition = pos;
 }
 
-std::vector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewEdge::GetBackwardHistory()
+std::vector<std::shared_ptr<wxWebViewHistoryItem> > wxWebViewEdge::GetBackwardHistory()
 {
-    std::vector<wxSharedPtr<wxWebViewHistoryItem> > backhist;
+    std::vector<std::shared_ptr<wxWebViewHistoryItem> > backhist;
     //As we don't have std::copy or an iterator constructor in the wxwidgets
     //native vector we construct it by hand
     for (int i = 0; i < m_impl->m_historyPosition; i++)
@@ -595,9 +595,9 @@ std::vector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewEdge::GetBackwardHistor
     return backhist;
 }
 
-std::vector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewEdge::GetForwardHistory()
+std::vector<std::shared_ptr<wxWebViewHistoryItem> > wxWebViewEdge::GetForwardHistory()
 {
-    std::vector<wxSharedPtr<wxWebViewHistoryItem> > forwardhist;
+    std::vector<std::shared_ptr<wxWebViewHistoryItem> > forwardhist;
     //As we don't have std::copy or an iterator constructor in the wxwidgets
     //native vector we construct it by hand
     for (int i = m_impl->m_historyPosition + 1; i < static_cast<int>(m_impl->m_historyList.size()); i++)
@@ -944,7 +944,7 @@ void wxWebViewEdge::RemoveAllUserScripts()
     m_impl->m_userScriptIds.clear();
 }
 
-void wxWebViewEdge::RegisterHandler(wxSharedPtr<wxWebViewHandler> WXUNUSED(handler))
+void wxWebViewEdge::RegisterHandler(std::shared_ptr<wxWebViewHandler> WXUNUSED(handler))
 {
     // TODO: could maybe be implemented via IWebView2WebView5::add_WebResourceRequested
     wxLogDebug("Registering handlers is not supported");

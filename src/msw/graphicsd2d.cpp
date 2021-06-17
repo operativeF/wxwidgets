@@ -2926,7 +2926,7 @@ public:
     }
 
 private:
-    wxSharedPtr<wxManagedResourceHolder> m_brushResourceHolder;
+    std::shared_ptr<wxManagedResourceHolder> m_brushResourceHolder;
 };
 
 //-----------------------------------------------------------------------------
@@ -2938,15 +2938,15 @@ wxD2DBrushData::wxD2DBrushData(wxGraphicsRenderer* renderer, const wxBrush brush
 {
     if (brush.GetStyle() == wxBrushStyle::Solid)
     {
-        m_brushResourceHolder = new wxD2DSolidBrushResourceHolder(brush);
+        m_brushResourceHolder = std::make_shared<wxD2DSolidBrushResourceHolder>(brush);
     }
     else if (brush.IsHatch())
     {
-        m_brushResourceHolder = new wxD2DHatchBrushResourceHolder(brush);
+        m_brushResourceHolder = std::make_shared<wxD2DHatchBrushResourceHolder>(brush);
     }
     else
     {
-        m_brushResourceHolder = new wxD2DBitmapBrushResourceHolder(brush);
+        m_brushResourceHolder = std::make_shared<wxD2DBitmapBrushResourceHolder>(brush);
     }
 }
 
@@ -2961,7 +2961,7 @@ void wxD2DBrushData::CreateLinearGradientBrush(
     const wxGraphicsGradientStops& stops,
     const wxGraphicsMatrix& matrix)
 {
-    m_brushResourceHolder = new wxD2DLinearGradientBrushResourceHolder(
+    m_brushResourceHolder = std::make_shared<wxD2DLinearGradientBrushResourceHolder>(
         x1, y1, x2, y2, stops, matrix);
 }
 
@@ -2972,7 +2972,7 @@ void wxD2DBrushData::CreateRadialGradientBrush(
     const wxGraphicsGradientStops& stops,
     const wxGraphicsMatrix& matrix)
 {
-    m_brushResourceHolder = new wxD2DRadialGradientBrushResourceHolder(
+    m_brushResourceHolder = std::make_shared<wxD2DRadialGradientBrushResourceHolder>(
         startX, startY, endX, endY, radius, stops, matrix);
 }
 
@@ -3045,7 +3045,7 @@ private:
     wxCOMPtr<ID2D1StrokeStyle> m_strokeStyle;
 
     // Drawing outlines with Direct2D requires a brush for the color or stipple.
-    wxSharedPtr<wxD2DBrushData> m_stippleBrush;
+    std::shared_ptr<wxD2DBrushData> m_stippleBrush;
 
     // The width of the stroke
     FLOAT m_width;
@@ -3086,11 +3086,11 @@ wxD2DPenData::wxD2DPenData(
     switch ( m_penInfo.GetGradientType() )
     {
     case wxGradientType::None:
-        m_stippleBrush = new wxD2DBrushData(renderer, strokeBrush);
+        m_stippleBrush = std::make_shared<wxD2DBrushData>(renderer, strokeBrush);
         break;
 
     case wxGradientType::Linear:
-        m_stippleBrush = new wxD2DBrushData(renderer);
+        m_stippleBrush = std::make_shared<wxD2DBrushData>(renderer);
         m_stippleBrush->CreateLinearGradientBrush(
                                 m_penInfo.GetX1(), m_penInfo.GetY1(),
                                 m_penInfo.GetX2(), m_penInfo.GetY2(),
@@ -3099,7 +3099,7 @@ wxD2DPenData::wxD2DPenData(
         break;
 
     case wxGradientType::Radial:
-        m_stippleBrush = new wxD2DBrushData(renderer);
+        m_stippleBrush = std::make_shared<wxD2DBrushData>(renderer);
         m_stippleBrush->CreateRadialGradientBrush(
                                 m_penInfo.GetStartX(), m_penInfo.GetStartY(),
                                 m_penInfo.GetEndX(), m_penInfo.GetEndY(),
@@ -4019,7 +4019,7 @@ private:
     };
 
     ID2D1Factory* m_direct2dFactory;
-    wxSharedPtr<wxD2DRenderTargetResourceHolder> m_renderTargetHolder;
+    std::shared_ptr<wxD2DRenderTargetResourceHolder> m_renderTargetHolder;
     wxStack<StateData> m_stateStack;
     wxStack<LayerData> m_layers;
     ID2D1RenderTarget* m_cachedRenderTarget;
@@ -4106,7 +4106,7 @@ wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer, ID2D1Factory* direct2dF
 wxD2DContext::wxD2DContext(wxGraphicsRenderer* renderer, ID2D1Factory* direct2dFactory, void* nativeContext) :
     wxGraphicsContext(renderer), m_direct2dFactory(direct2dFactory)
 {
-    m_renderTargetHolder = *((wxSharedPtr<wxD2DRenderTargetResourceHolder>*)nativeContext);
+    m_renderTargetHolder = *((std::shared_ptr<wxD2DRenderTargetResourceHolder>*)nativeContext);
     m_width = 0;
     m_height = 0;
     

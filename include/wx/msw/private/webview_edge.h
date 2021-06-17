@@ -84,7 +84,7 @@ public:
     HRESULT OnEnvironmentCreated(HRESULT result, ICoreWebView2Environment* environment);
     HRESULT OnWebViewCreated(HRESULT result, ICoreWebView2Controller* webViewController);
 
-    std::vector<wxSharedPtr<wxWebViewHistoryItem> > m_historyList;
+    std::vector<std::shared_ptr<wxWebViewHistoryItem> > m_historyList;
     int m_historyPosition;
     bool m_historyLoadingFromList;
     bool m_historyEnabled;

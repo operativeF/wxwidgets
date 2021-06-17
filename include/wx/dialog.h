@@ -417,7 +417,7 @@ public:
             // We only want to call this handler once. Also, by deleting
             // the functor here, its data (such as wxWindowPtr pointing to
             // the dialog) are freed immediately after exiting this operator().
-            wxSharedPtr<Functor> functor(m_f);
+            std::shared_ptr<Functor> functor(m_f);
             m_f.reset();
 
             (*functor)(event.GetReturnCode());
@@ -429,7 +429,7 @@ public:
     }
 
 private:
-    wxSharedPtr<Functor> m_f;
+    std::shared_ptr<Functor> m_f;
 };
 
 template<typename Functor>

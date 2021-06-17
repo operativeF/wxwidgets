@@ -96,7 +96,7 @@ public:
 
     void AddPage(wxPreferencesPage* page) override
     {
-        m_pages.push_back(wxSharedPtr<wxPreferencesPage>(page));
+        m_pages.push_back(std::shared_ptr<wxPreferencesPage>(page));
     }
 
 protected:
@@ -131,7 +131,7 @@ protected:
         return dlg;
     }
 
-    using Pages = std::vector<wxSharedPtr<wxPreferencesPage>>;
+    using Pages = std::vector<std::shared_ptr<wxPreferencesPage>>;
     Pages m_pages;
 
 private:

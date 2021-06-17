@@ -565,7 +565,7 @@ bool wxWebViewIE::CanGoForward() const
         return false;
 }
 
-void wxWebViewIE::LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item)
+void wxWebViewIE::LoadHistoryItem(std::shared_ptr<wxWebViewHistoryItem> item)
 {
     int pos = -1;
     for(unsigned int i = 0; i < m_impl->m_historyList.size(); i++)
@@ -581,9 +581,9 @@ void wxWebViewIE::LoadHistoryItem(wxSharedPtr<wxWebViewHistoryItem> item)
     m_impl->m_historyPosition = pos;
 }
 
-std::vector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewIE::GetBackwardHistory()
+std::vector<std::shared_ptr<wxWebViewHistoryItem> > wxWebViewIE::GetBackwardHistory()
 {
-    std::vector<wxSharedPtr<wxWebViewHistoryItem> > backhist;
+    std::vector<std::shared_ptr<wxWebViewHistoryItem> > backhist;
     //As we don't have std::copy or an iterator constructor in the wxwidgets
     //native vector we construct it by hand
     for(int i = 0; i < m_impl->m_historyPosition; i++)
@@ -593,9 +593,9 @@ std::vector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewIE::GetBackwardHistory(
     return backhist;
 }
 
-std::vector<wxSharedPtr<wxWebViewHistoryItem> > wxWebViewIE::GetForwardHistory()
+std::vector<std::shared_ptr<wxWebViewHistoryItem> > wxWebViewIE::GetForwardHistory()
 {
-    std::vector<wxSharedPtr<wxWebViewHistoryItem> > forwardhist;
+    std::vector<std::shared_ptr<wxWebViewHistoryItem> > forwardhist;
     //As we don't have std::copy or an iterator constructor in the wxwidgets
     //native vector we construct it by hand
     for(int i = m_impl->m_historyPosition + 1; i < static_cast<int>(m_impl->m_historyList.size()); i++)
@@ -1078,7 +1078,7 @@ bool wxWebViewIE::RunScript(const wxString& javascript, wxString* output) const
     return true;
 }
 
-void wxWebViewIE::RegisterHandler(wxSharedPtr<wxWebViewHandler> handler)
+void wxWebViewIE::RegisterHandler(std::shared_ptr<wxWebViewHandler> handler)
 {
     wxDynamicLibrary urlMon(wxT("urlmon.dll"));
     if(urlMon.HasSymbol(wxT("CoInternetGetSession")))
@@ -1499,7 +1499,7 @@ void wxWebViewIE::onActiveXEvent(wxActiveXEvent& evt)
                     m_impl->m_historyList.erase(m_impl->m_historyList.begin() + m_impl->m_historyPosition + 1,
                                                 m_impl->m_historyList.end());
                 }
-                wxSharedPtr<wxWebViewHistoryItem> item(new wxWebViewHistoryItem(url, GetCurrentTitle()));
+                std::shared_ptr<wxWebViewHistoryItem> item(new wxWebViewHistoryItem(url, GetCurrentTitle()));
                 m_impl->m_historyList.push_back(item);
                 m_impl->m_historyPosition++;
             }
@@ -1624,7 +1624,7 @@ void wxWebViewIE::onActiveXEvent(wxActiveXEvent& evt)
     evt.Skip();
 }
 
-VirtualProtocol::VirtualProtocol(wxSharedPtr<wxWebViewHandler> handler)
+VirtualProtocol::VirtualProtocol(std::shared_ptr<wxWebViewHandler> handler)
 {
     m_file = nullptr;
     m_handler = handler;

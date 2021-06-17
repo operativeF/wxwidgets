@@ -15,17 +15,17 @@
 #ifdef wxHAS_INOTIFY
     class wxFSWatchEntryUnix;
     #define wxFSWatchEntry wxFSWatchEntryUnix
-    WX_DECLARE_STRING_HASH_MAP(wxSharedPtr<wxFSWatchEntry>,wxFSWatchEntries);
+    WX_DECLARE_STRING_HASH_MAP(std::shared_ptr<wxFSWatchEntry>,wxFSWatchEntries);
     #include "wx/unix/private/fswatcher_inotify.h"
 #elif defined(wxHAS_KQUEUE)
     class wxFSWatchEntryKq;
     #define wxFSWatchEntry wxFSWatchEntryKq
-    WX_DECLARE_STRING_HASH_MAP(wxSharedPtr<wxFSWatchEntry>,wxFSWatchEntries);
+    WX_DECLARE_STRING_HASH_MAP(std::shared_ptr<wxFSWatchEntry>,wxFSWatchEntries);
     #include "wx/unix/private/fswatcher_kqueue.h"
 #elif defined(__WINDOWS__)
     class wxFSWatchEntryMSW;
     #define wxFSWatchEntry wxFSWatchEntryMSW
-    WX_DECLARE_STRING_HASH_MAP(wxSharedPtr<wxFSWatchEntry>,wxFSWatchEntries);
+    WX_DECLARE_STRING_HASH_MAP(std::shared_ptr<wxFSWatchEntry>,wxFSWatchEntries);
     #include "wx/msw/private/fswatcher.h"
 #else
     #define wxFSWatchEntry wxFSWatchEntryPolling
@@ -57,7 +57,7 @@ public:
         }
 
         // construct watch entry
-        wxSharedPtr<wxFSWatchEntry> watch(new wxFSWatchEntry(winfo));
+        std::shared_ptr<wxFSWatchEntry> watch(new wxFSWatchEntry(winfo));
 
         if (!DoAdd(watch))
             return false;
@@ -77,7 +77,7 @@ public:
             // This can happen if a dir is watched, then a parent tree added
             return true;
         }
-        wxSharedPtr<wxFSWatchEntry> watch = it->second;
+        std::shared_ptr<wxFSWatchEntry> watch = it->second;
         m_watches.erase(it);
         return DoRemove(watch);
     }
@@ -103,9 +103,9 @@ public:
     }
 
 protected:
-    virtual bool DoAdd(wxSharedPtr<wxFSWatchEntry> watch) = 0;
+    virtual bool DoAdd(std::shared_ptr<wxFSWatchEntry> watch) = 0;
 
-    virtual bool DoRemove(wxSharedPtr<wxFSWatchEntry> watch) = 0;
+    virtual bool DoRemove(std::shared_ptr<wxFSWatchEntry> watch) = 0;
 
     wxFSWatchEntries m_watches;
     wxFileSystemWatcherBase* m_watcher;

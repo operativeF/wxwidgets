@@ -46,7 +46,7 @@ struct TreeItemDataQt
     }
 
 private:
-    wxSharedPtr<wxTreeItemData> data;
+    std::shared_ptr<wxTreeItemData> data;
 };
 
 QDataStream &operator<<(QDataStream &out, const TreeItemDataQt &WXUNUSED(obj))

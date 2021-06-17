@@ -130,7 +130,7 @@ public:
     }
 
     // associates a wxFSWatchEntryMSW with completion port
-    bool Add(wxSharedPtr<wxFSWatchEntryMSW> watch)
+    bool Add(std::shared_ptr<wxFSWatchEntryMSW> watch)
     {
         wxCHECK_MSG( m_iocp != INVALID_HANDLE_VALUE, false, "IOCP not init" );
         wxCHECK_MSG( watch->IsOk(), false, "Invalid watch" );
@@ -159,7 +159,7 @@ public:
     // immediately, CompleteRemoval() must be called later when it's really
     // safe to delete the watch, i.e. after completion of the IO operation
     // using it.
-    bool ScheduleForRemoval(const wxSharedPtr<wxFSWatchEntryMSW>& watch)
+    bool ScheduleForRemoval(const std::shared_ptr<wxFSWatchEntryMSW>& watch)
     {
         wxCHECK_MSG( m_iocp != INVALID_HANDLE_VALUE, false, "IOCP not init" );
         wxCHECK_MSG( watch->IsOk(), false, "Invalid watch" );
@@ -283,7 +283,7 @@ protected:
     wxFSWatchEntries m_watches;
 
     // Contains the watches which had been removed but are still pending.
-    using Watches = std::vector<wxSharedPtr<wxFSWatchEntryMSW>>;
+    using Watches = std::vector<std::shared_ptr<wxFSWatchEntryMSW>>;
     Watches m_removedWatches;
 };
 
