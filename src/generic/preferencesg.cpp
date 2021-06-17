@@ -30,7 +30,7 @@
 #include "wx/notebook.h"
 #include "wx/sizer.h"
 #include "wx/sharedptr.h"
-#include "wx/scopedptr.h"
+
 #include "wx/scopeguard.h"
 #include <vector>
 
@@ -204,7 +204,7 @@ public:
 
     void Show(wxWindow* parent) override
     {
-        wxScopedPtr<wxGenericPrefsDialog> dlg(CreateDialog(parent));
+        std::unique_ptr<wxGenericPrefsDialog> dlg(CreateDialog(parent));
 
         // Store it for Dismiss() but ensure that the pointer is reset to NULL
         // when the dialog is destroyed on leaving this function.

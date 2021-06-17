@@ -17,7 +17,7 @@
 #endif // WX_PRECOMP
 
 #include "wx/notebook.h"
-#include "wx/scopedptr.h"
+
 
 #include "bookctrlbasetest.h"
 #include "testableframe.h"
@@ -124,7 +124,7 @@ TEST_CASE("wxNotebook::AddPageEvents", "[wxNotebook][AddPage][event]")
     wxNotebook* const
         notebook = new wxNotebook(wxTheApp->GetTopWindow(), wxID_ANY,
                                   wxDefaultPosition, wxSize(400, 200));
-    wxScopedPtr<wxNotebook> cleanup(notebook);
+    std::unique_ptr<wxNotebook> cleanup(notebook);
 
     CHECK( notebook->GetSelection() == wxNOT_FOUND );
 

@@ -35,7 +35,7 @@
     #include "wx/image.h"
 #endif
 
-#include "wx/scopedptr.h"
+
 #include "wx/msw/private.h"
 #include "wx/msw/dc.h"
 
@@ -615,7 +615,7 @@ bool wxBitmap::CopyFromIcon(const wxIcon& icon, wxBitmapTransparency transp)
 
 bool wxBitmap::CopyFromDIB(const wxDIB& dib)
 {
-    wxScopedPtr<wxBitmapRefData> newData(new wxBitmapRefData);
+    std::unique_ptr<wxBitmapRefData> newData(new wxBitmapRefData);
     newData->CopyFromDIB(dib);
     if ( !newData->IsOk() )
         return false;

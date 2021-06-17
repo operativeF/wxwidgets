@@ -26,7 +26,7 @@
 #endif // WX_PRECOMP
 
 #include "wx/config.h"
-#include "wx/scopedptr.h"
+
 
 // Tests using wxColour can only be done when using GUI library and they
 // require template functions that are not supported by some ancient compilers.
@@ -46,7 +46,7 @@ TEST_CASE("wxConfig::ReadWriteLocal", "[config]")
 {
     wxString app = "wxConfigTestCase";
     wxString vendor = "wxWidgets";
-    wxScopedPtr<wxConfig> config(new wxConfig(app, vendor, "", "",
+    std::unique_ptr<wxConfig> config(new wxConfig(app, vendor, "", "",
                                               wxCONFIG_USE_LOCAL_FILE));
     config->DeleteAll();
     config->Write("string1", "abc");
@@ -199,7 +199,7 @@ TEST_CASE("wxConfig::RecordingDefaults", "[config]")
 {
     wxString app = "wxConfigTestCaseRD";
     wxString vendor = "wxWidgets";
-    wxScopedPtr<wxConfig> config(new wxConfig(app, vendor, "", "",
+    std::unique_ptr<wxConfig> config(new wxConfig(app, vendor, "", "",
                                               wxCONFIG_USE_LOCAL_FILE));
     config->DeleteAll();
     config->SetRecordDefaults(false); // by default it is false

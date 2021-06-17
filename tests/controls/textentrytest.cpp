@@ -22,7 +22,7 @@
 #include "textentrytest.h"
 #include "testableframe.h"
 
-#include "wx/scopedptr.h"
+
 #include "wx/uiaction.h"
 
 void TextEntryTestCase::SetValue()
@@ -518,7 +518,7 @@ void TestProcessEnter(const TextLikeControlCreator& controlCreator)
 
     SECTION("Without wxTE_PROCESS_ENTER but with wxTE_MULTILINE")
     {
-        wxScopedPtr<TextLikeControlCreator>
+        std::unique_ptr<TextLikeControlCreator>
             multiLineCreator(controlCreator.CloneAsMultiLine());
         if ( !multiLineCreator )
             return;
@@ -530,7 +530,7 @@ void TestProcessEnter(const TextLikeControlCreator& controlCreator)
 
     SECTION("With wxTE_PROCESS_ENTER and wxTE_MULTILINE but skipping")
     {
-        wxScopedPtr<TextLikeControlCreator>
+        std::unique_ptr<TextLikeControlCreator>
             multiLineCreator(controlCreator.CloneAsMultiLine());
         if ( !multiLineCreator )
             return;
@@ -542,7 +542,7 @@ void TestProcessEnter(const TextLikeControlCreator& controlCreator)
 
     SECTION("With wxTE_PROCESS_ENTER and wxTE_MULTILINE without skipping")
     {
-        wxScopedPtr<TextLikeControlCreator>
+        std::unique_ptr<TextLikeControlCreator>
             multiLineCreator(controlCreator.CloneAsMultiLine());
         if ( !multiLineCreator )
             return;

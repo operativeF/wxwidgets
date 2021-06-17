@@ -25,7 +25,7 @@
 #include "wx/module.h"
 #include "wx/hashmap.h"
 #include "wx/hashset.h"
-#include "wx/scopedptr.h"
+
 
 using namespace wxPrivate;
 
@@ -111,9 +111,9 @@ private:
     std::vector<wxAnyToVariantRegistration*>   m_anyToVariantRegs;
 };
 
-static wxScopedPtr<wxAnyValueTypeGlobals>& GetAnyValueTypeGlobals()
+static std::unique_ptr<wxAnyValueTypeGlobals>& GetAnyValueTypeGlobals()
 {
-    static wxScopedPtr<wxAnyValueTypeGlobals> s_wxAnyValueTypeGlobals;
+    static std::unique_ptr<wxAnyValueTypeGlobals> s_wxAnyValueTypeGlobals;
     if ( !s_wxAnyValueTypeGlobals )
     {
         // Notice that it is _not_ sufficient to just initialize the static

@@ -16,7 +16,7 @@
 #endif
 
 #include "wx/evtloop.h"
-#include "wx/scopedptr.h"
+
 #include "wx/unix/private/wakeuppipe.h"
 #include "wx/private/fdiodispatcher.h"
 #include "wx/private/fdioeventloopsourcehandler.h"

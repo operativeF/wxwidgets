@@ -29,7 +29,7 @@
 
 #include "wx/evtloopsrc.h"
 
-#include "wx/scopedptr.h"
+
 
 #include "wx/osx/private.h"
 #include "wx/osx/core/cfref.h"

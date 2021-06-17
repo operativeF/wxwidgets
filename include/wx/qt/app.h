@@ -24,7 +24,7 @@ public:
     bool Initialize(int& argc, wxChar **argv) override;
 
 private:
-    wxScopedPtr<QApplication> m_qtApplication;
+    std::unique_ptr<QApplication> m_qtApplication;
     int m_qtArgc;
     wxScopedArray<char*> m_qtArgv;
 

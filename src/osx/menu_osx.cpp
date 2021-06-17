@@ -31,7 +31,7 @@
 #endif
 
 #include "wx/osx/private.h"
-#include "wx/scopedptr.h"
+
 #include "wx/private/menuradio.h" // for wxMenuRadioItemsData
 
 // other standard headers
@@ -47,7 +47,7 @@ wxMenuImpl::~wxMenuImpl()
 // the (popup) menu title has this special menuid
 static const int idMenuTitle = -3;
 
-wxScopedPtr<wxMenu> gs_emptyMenuBar;
+std::unique_ptr<wxMenu> gs_emptyMenuBar;
 
 // ============================================================================
 // implementation

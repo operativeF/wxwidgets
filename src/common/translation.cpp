@@ -1239,7 +1239,7 @@ bool wxMsgCatalogFile::FillHash(wxStringToStringHashMap& hash,
     // conversion to use to convert catalog strings to the GUI encoding
     wxMBConv *inputConv = nullptr;
 
-    wxScopedPtr<wxMBConv> inputConvPtr; // just to delete inputConv if needed
+    std::unique_ptr<wxMBConv> inputConvPtr; // just to delete inputConv if needed
 
     if ( !m_charset.empty() )
     {
@@ -1309,7 +1309,7 @@ bool wxMsgCatalogFile::FillHash(wxStringToStringHashMap& hash,
 wxMsgCatalog *wxMsgCatalog::CreateFromFile(const wxString& filename,
                                            const wxString& domain)
 {
-    wxScopedPtr<wxMsgCatalog> cat(new wxMsgCatalog(domain));
+    std::unique_ptr<wxMsgCatalog> cat(new wxMsgCatalog(domain));
 
     wxMsgCatalogFile file;
 
@@ -1326,7 +1326,7 @@ wxMsgCatalog *wxMsgCatalog::CreateFromFile(const wxString& filename,
 wxMsgCatalog *wxMsgCatalog::CreateFromData(const wxScopedCharBuffer& data,
                                            const wxString& domain)
 {
-    wxScopedPtr<wxMsgCatalog> cat(new wxMsgCatalog(domain));
+    std::unique_ptr<wxMsgCatalog> cat(new wxMsgCatalog(domain));
 
     wxMsgCatalogFile file;
 

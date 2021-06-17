@@ -38,7 +38,7 @@
 #include "wx/evtloop.h"
 #include "wx/filename.h"
 #include "wx/msgout.h"
-#include "wx/scopedptr.h"
+
 #include "wx/sysopt.h"
 #include "wx/tokenzr.h"
 #include "wx/thread.h"
@@ -394,7 +394,7 @@ bool wxAppConsoleBase::Yield(bool onlyIfNeeded)
     if ( loop )
        return loop->Yield(onlyIfNeeded);
 
-    wxScopedPtr<wxEventLoopBase> tmpLoop(CreateMainLoop());
+    std::unique_ptr<wxEventLoopBase> tmpLoop(CreateMainLoop());
     return tmpLoop->Yield(onlyIfNeeded);
 }
 

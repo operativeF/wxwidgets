@@ -18,7 +18,7 @@
 #endif // WX_PRECOMP
 
 #include "wx/xml/xml.h"
-#include "wx/scopedptr.h"
+
 #include "wx/sstream.h"
 
 #include <stdarg.h>
@@ -108,7 +108,7 @@ CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( XmlTestCase, "XmlTestCase" );
 
 void XmlTestCase::InsertChild()
 {
-    wxScopedPtr<wxXmlNode> root(new wxXmlNode(wxXML_ELEMENT_NODE, "root"));
+    std::unique_ptr<wxXmlNode> root(new wxXmlNode(wxXML_ELEMENT_NODE, "root"));
     root->AddChild(new wxXmlNode(wxXML_ELEMENT_NODE, "1"));
     wxXmlNode *two = new wxXmlNode(wxXML_ELEMENT_NODE, "2");
     root->AddChild(two);
@@ -128,7 +128,7 @@ void XmlTestCase::InsertChild()
 
 void XmlTestCase::InsertChildAfter()
 {
-    wxScopedPtr<wxXmlNode> root(new wxXmlNode(wxXML_ELEMENT_NODE, "root"));
+    std::unique_ptr<wxXmlNode> root(new wxXmlNode(wxXML_ELEMENT_NODE, "root"));
 
     root->InsertChildAfter(new wxXmlNode(wxXML_ELEMENT_NODE, "1"), NULL);
     CheckXml(root.get(), "1", NULL);

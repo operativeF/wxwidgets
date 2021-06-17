@@ -37,7 +37,7 @@
 
 #include "wx/msw/private.h"
 #include "wx/evtloop.h"
-#include "wx/scopedptr.h"
+
 
 // ----------------------------------------------------------------------------
 // wxWin macros

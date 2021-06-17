@@ -24,7 +24,7 @@
 
 #include "wx/msw/private.h"
 #include "wx/msw/taskbarbutton.h"
-#include "wx/scopedptr.h"
+
 #include "wx/msw/private/comptr.h"
 #include "wx/msw/private/cotaskmemptr.h"
 
@@ -575,9 +575,9 @@ private:
     wxCOMPtr<ICustomDestinationList>    m_destinationList;
     wxCOMPtr<IObjectArray>              m_objectArray;
 
-    wxScopedPtr<wxTaskBarJumpListCategory> m_tasks;
-    wxScopedPtr<wxTaskBarJumpListCategory> m_frequent;
-    wxScopedPtr<wxTaskBarJumpListCategory> m_recent;
+    std::unique_ptr<wxTaskBarJumpListCategory> m_tasks;
+    std::unique_ptr<wxTaskBarJumpListCategory> m_frequent;
+    std::unique_ptr<wxTaskBarJumpListCategory> m_recent;
     wxTaskBarJumpListCategories m_customCategories;
     bool m_recent_visible;
     bool m_frequent_visible;

@@ -9,7 +9,7 @@
 #ifndef _WX_TESTS_TESTWINDOW_H_
 #define _WX_TESTS_TESTWINDOW_H_
 
-#include "wx/scopedptr.h"
+
 #include "wx/window.h"
 
 // We need to wrap wxWindow* in a class as specializing StringMaker for
@@ -19,7 +19,7 @@ class wxWindowPtr
 public:
     explicit wxWindowPtr(wxWindow* win) : m_win(win) {}
     template <typename W>
-    explicit wxWindowPtr(const wxScopedPtr<W>& win) : m_win(win.get()) {}
+    explicit wxWindowPtr(const std::unique_ptr<W>& win) : m_win(win.get()) {}
 
     wxString Dump() const
     {

@@ -40,7 +40,7 @@
 #include "wx/dir.h"
 #include "wx/xml/xml.h"
 #include "wx/hashset.h"
-#include "wx/scopedptr.h"
+
 #include "wx/config.h"
 #include "wx/platinfo.h"
 
@@ -58,7 +58,7 @@ wxDateTime GetXRCFileModTime(const wxString& filename)
 {
 #if wxUSE_FILESYSTEM
     wxFileSystem fsys;
-    wxScopedPtr<wxFSFile> file(fsys.OpenFile(filename));
+    std::unique_ptr<wxFSFile> file(fsys.OpenFile(filename));
 
     return file ? file->GetModificationTime() : wxDateTime();
 #else // wxUSE_FILESYSTEM
@@ -743,7 +743,7 @@ wxXmlDocument *wxXmlResource::DoLoadFile(const wxString& filename)
 
 #if wxUSE_FILESYSTEM
     wxFileSystem fsys;
-    wxScopedPtr<wxFSFile> file(fsys.OpenFile(filename));
+    std::unique_ptr<wxFSFile> file(fsys.OpenFile(filename));
     if (file)
     {
         // Notice that we don't have ownership of the stream in this case, it
@@ -762,7 +762,7 @@ wxXmlDocument *wxXmlResource::DoLoadFile(const wxString& filename)
     }
 
     wxString encoding(wxT("UTF-8"));
-    wxScopedPtr<wxXmlDocument> doc(new wxXmlDocument);
+    std::unique_ptr<wxXmlDocument> doc(new wxXmlDocument);
     if (!doc->Load(*stream, encoding))
     {
         wxLogError(_("Cannot load resources from file '%s'."), filename);

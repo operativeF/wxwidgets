@@ -16,7 +16,8 @@
 #include "wx/string.h"
 #include "wx/filename.h"
 #include "wx/dc.h"
-#include "wx/scopedptr.h"
+
+#include <memory>
 
 inline constexpr wxChar wxSVGVersion[] = wxT("v0101");
 
@@ -280,10 +281,11 @@ private:
     wxString            m_filename;
     bool                m_OK;
     bool                m_graphics_changed;  // set by Set{Brush,Pen}()
-    int                 m_width, m_height;
+    int                 m_width;
+    int                 m_height;
     double              m_dpi;
-    wxScopedPtr<wxFileOutputStream> m_outfile;
-    wxScopedPtr<wxSVGBitmapHandler> m_bmp_handler; // class to handle bitmaps
+    std::unique_ptr<wxFileOutputStream> m_outfile;
+    std::unique_ptr<wxSVGBitmapHandler> m_bmp_handler; // class to handle bitmaps
     wxSVGShapeRenderingMode m_renderingMode;
 
     // The clipping nesting level is incremented by every call to

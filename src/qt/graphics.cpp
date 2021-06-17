@@ -29,7 +29,7 @@
 #endif
 
 #include "wx/graphics.h"
-#include "wx/scopedptr.h"
+
 #include "wx/tokenzr.h"
 
 #include "wx/private/graphics.h"

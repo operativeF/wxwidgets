@@ -55,7 +55,7 @@
 #include "wx/stdpaths.h"
 #include <vector>
 #include "wx/scopedarray.h"
-#include "wx/scopedptr.h"
+
 #include "wx/scopeguard.h"
 #include "wx/except.h"
 
@@ -819,7 +819,7 @@ wxDocTemplate::InitDocument(wxDocument* doc, const wxString& path, long flags)
 
 wxView *wxDocTemplate::CreateView(wxDocument *doc, long flags)
 {
-    wxScopedPtr<wxView> view(DoCreateView());
+    std::unique_ptr<wxView> view(DoCreateView());
     if ( !view )
         return nullptr;
 

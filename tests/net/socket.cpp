@@ -23,12 +23,12 @@
 
 #include "wx/socket.h"
 #include "wx/url.h"
-#include "wx/scopedptr.h"
+
 #include "wx/sstream.h"
 #include "wx/evtloop.h"
 
-typedef wxScopedPtr<wxSockAddress> wxSockAddressPtr;
-typedef wxScopedPtr<wxSocketClient> wxSocketClientPtr;
+typedef std::unique_ptr<wxSockAddress> wxSockAddressPtr;
+typedef std::unique_ptr<wxSocketClient> wxSocketClientPtr;
 
 static wxString gs_serverHost(wxGetenv("WX_TEST_SERVER"));
 
@@ -295,7 +295,7 @@ void SocketTestCase::UrlTest()
 
     wxURL url("http://" + gs_serverHost);
 
-    const wxScopedPtr<wxInputStream> in(url.GetInputStream());
+    const std::unique_ptr<wxInputStream> in(url.GetInputStream());
     CPPUNIT_ASSERT( in.get() );
 
     wxStringOutputStream out;

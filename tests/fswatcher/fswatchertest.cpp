@@ -23,7 +23,7 @@
 #include "wx/filename.h"
 #include "wx/filefn.h"
 #include "wx/fswatcher.h"
-#include "wx/scopedptr.h"
+
 #include "wx/stdpaths.h"
 #include <vector>
 
@@ -326,7 +326,7 @@ protected:
     EventGenerator& eg;
     wxEventLoop m_loop;    // loop reference
 
-    wxScopedPtr<wxFileSystemWatcher> m_watcher;
+    std::unique_ptr<wxFileSystemWatcher> m_watcher;
 
     int m_eventTypes;  // Which event-types to watch. Normally all of them
 

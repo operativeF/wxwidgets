@@ -20,7 +20,7 @@
 #endif // WX_PRECOMP
 
 #include "wx/menu.h"
-#include "wx/scopedptr.h"
+
 #include "wx/translation.h"
 #include "wx/uiaction.h"
 
@@ -626,7 +626,7 @@ namespace
 
 void VerifyAccelAssigned( wxString labelText, int keycode )
 {
-    const wxScopedPtr<wxAcceleratorEntry> entry(
+    const std::unique_ptr<wxAcceleratorEntry> entry(
         wxAcceleratorEntry::Create( labelText )
     );
 

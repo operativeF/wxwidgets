@@ -38,7 +38,7 @@
 #endif
 
 #include "wx/fontutil.h"
-#include "wx/scopedptr.h"
+
 #include "wx/stack.h"
 #include "wx/sysopt.h"
 

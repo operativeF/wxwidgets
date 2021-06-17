@@ -183,7 +183,7 @@ void ZipPipeTestCase::runTest()
     TestInputStream in(out, m_id % ((m_options & PipeIn) ? 4 : 3));
     wxZipInputStream zip(in);
 
-    wxScopedPtr<wxZipEntry> entry(zip.GetNextEntry());
+    std::unique_ptr<wxZipEntry> entry(zip.GetNextEntry());
     CPPUNIT_ASSERT(entry.get() != NULL);
 
     if ((m_options & PipeIn) == 0)

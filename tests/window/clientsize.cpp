@@ -18,8 +18,6 @@
     #include "wx/window.h"
 #endif // WX_PRECOMP
 
-#include "wx/scopedptr.h"
-
 #include "asserthelper.h"
 
 // ----------------------------------------------------------------------------
@@ -43,7 +41,7 @@ TEST_CASE("wxWindow::ClientWindowSizeRoundTrip", "[window][client-size]")
 
 TEST_CASE("wxWindow::MinClientSize", "[window][client-size]")
 {
-    wxScopedPtr<wxWindow> w(new wxWindow(wxTheApp->GetTopWindow(), wxID_ANY,
+    std::unique_ptr<wxWindow> w(new wxWindow(wxTheApp->GetTopWindow(), wxID_ANY,
                                          wxDefaultPosition, wxDefaultSize,
                                          wxBORDER_THEME));
     w->SetSize(wxSize(1,1));

@@ -16,7 +16,7 @@
 
 #include "wx/evtloop.h"
 
-#include "wx/scopedptr.h"
+
 #include "wx/modalhook.h"
 
 #include "wx/gtk/private/wrapgtk.h"

@@ -20,7 +20,7 @@
 #endif // WX_PRECOMP
 
 #include "wx/html/winpars.h"
-#include "wx/scopedptr.h"
+
 
 // Test that parsing invalid HTML simply fails but doesn't crash for example.
 TEST_CASE("wxHtmlParser::ParseInvalid", "[html][parser][error]")
@@ -45,7 +45,7 @@ TEST_CASE("wxHtmlCell::Detach", "[html][cell]")
 {
     wxMemoryDC dc;
 
-    wxScopedPtr<wxHtmlContainerCell> const top(new wxHtmlContainerCell(NULL));
+    std::unique_ptr<wxHtmlContainerCell> const top(new wxHtmlContainerCell(NULL));
     wxHtmlContainerCell* const cont = new wxHtmlContainerCell(NULL);
     wxHtmlCell* const cell1 = new wxHtmlWordCell("Hello", dc);
     wxHtmlCell* const cell2 = new wxHtmlColourCell(*wxRED);

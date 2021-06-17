@@ -23,7 +23,7 @@
 #include "wx/docmdi.h"
 #include "wx/frame.h"
 #include "wx/menu.h"
-#include "wx/scopedptr.h"
+
 #include "wx/scopeguard.h"
 #include "wx/toolbar.h"
 #include "wx/uiaction.h"
@@ -469,7 +469,7 @@ void EventPropagationTestCase::MenuEvent()
     wxMenu* const menu = CreateTestMenu(frame);
 #if wxUSE_MENUBAR
     wxMenuBar* const mb = menu->GetMenuBar();
-    wxScopedPtr<wxMenuBar> ensureMenuBarDestruction(mb);
+    std::unique_ptr<wxMenuBar> ensureMenuBarDestruction(mb);
     wxON_BLOCK_EXIT_OBJ1( *frame, wxFrame::SetMenuBar, (wxMenuBar*)NULL );
 #endif
     // Check that wxApp gets the event exactly once.
@@ -542,7 +542,7 @@ void EventPropagationTestCase::DocView()
     // Set up the parent frame and its menu bar.
     wxDocManager docManager;
 
-    wxScopedPtr<wxDocMDIParentFrame>
+    std::unique_ptr<wxDocMDIParentFrame>
         parent(new wxDocMDIParentFrame(&docManager, NULL, wxID_ANY, "Parent"));
 
     wxMenu* const menu = CreateTestMenu(parent.get());
@@ -570,7 +570,7 @@ void EventPropagationTestCase::DocView()
     wxDocument* const doc = docTemplate.CreateDocument("");
     wxView* const view = doc->GetFirstView();
 
-    wxScopedPtr<wxMDIChildFrame>
+    std::unique_ptr<wxMDIChildFrame>
         child(new wxDocMDIChildFrame(doc, view, parent.get(), wxID_ANY, "Child"));
 
     wxMenu* const menuChild = CreateTestMenu(child.get());

@@ -553,7 +553,7 @@ TestEntry& ArchiveTestCase<ClassFactoryT>::Add(const char *name,
 template <class ClassFactoryT>
 void ArchiveTestCase<ClassFactoryT>::CreateArchive(wxOutputStream& out)
 {
-    wxScopedPtr<OutputStreamT> arc(m_factory->NewStream(out));
+    std::unique_ptr<OutputStreamT> arc(m_factory->NewStream(out));
     TestEntries::iterator it;
 
     OnCreateArchive(*arc);
@@ -581,7 +581,7 @@ void ArchiveTestCase<ClassFactoryT>::CreateArchive(wxOutputStream& out)
 
         if ((choices & 2) || testEntry.IsText()) {
             // try PutNextEntry(EntryT *pEntry)
-            wxScopedPtr<EntryT> entry(m_factory->NewEntry());
+            std::unique_ptr<EntryT> entry(m_factory->NewEntry());
             entry->SetName(name, wxPATH_UNIX);
             if (setIsDir)
                 entry->SetIsDir();
@@ -697,8 +697,8 @@ template <class ClassFactoryT>
 void ArchiveTestCase<ClassFactoryT>::ModifyArchive(wxInputStream& in,
                                                    wxOutputStream& out)
 {
-    wxScopedPtr<InputStreamT> arcIn(m_factory->NewStream(in));
-    wxScopedPtr<OutputStreamT> arcOut(m_factory->NewStream(out));
+    std::unique_ptr<InputStreamT> arcIn(m_factory->NewStream(in));
+    std::unique_ptr<OutputStreamT> arcOut(m_factory->NewStream(out));
     EntryT *pEntry;
 
     const wxString deleteName = wxT("bin/bin1000");
@@ -710,7 +710,7 @@ void ArchiveTestCase<ClassFactoryT>::ModifyArchive(wxInputStream& in,
     arcOut->CopyArchiveMetaData(*arcIn);
 
     while ((pEntry = arcIn->GetNextEntry()) != NULL) {
-        wxScopedPtr<EntryT> entry(pEntry);
+        std::unique_ptr<EntryT> entry(pEntry);
         OnSetNotifier(*entry);
         wxString name = entry->GetName(wxPATH_UNIX);
 
@@ -755,7 +755,7 @@ void ArchiveTestCase<ClassFactoryT>::ModifyArchive(wxInputStream& in,
 
     // try adding a new entry
     TestEntry& testEntry = Add(newName.mb_str(), newData);
-    wxScopedPtr<EntryT> newentry(m_factory->NewEntry());
+    std::unique_ptr<EntryT> newentry(m_factory->NewEntry());
     newentry->SetName(newName);
     newentry->SetDateTime(testEntry.GetDateTime());
     newentry->SetSize(testEntry.GetLength());
@@ -778,7 +778,7 @@ void ArchiveTestCase<ClassFactoryT>::ExtractArchive(wxInputStream& in)
     typedef std::list<EntryPtr> Entries;
     typedef typename Entries::iterator EntryIter;
 
-    wxScopedPtr<InputStreamT> arc(m_factory->NewStream(in));
+    std::unique_ptr<InputStreamT> arc(m_factory->NewStream(in));
     int expectedTotal = m_testEntries.size();
     EntryPtr entry;
     Entries entries;
@@ -989,7 +989,7 @@ void ArchiveTestCase<ClassFactoryT>::TestIterator(wxInputStream& in)
     typedef std::list<EntryT*> ArchiveCatalog;
     typedef typename ArchiveCatalog::iterator CatalogIter;
 
-    wxScopedPtr<InputStreamT> arc(m_factory->NewStream(in));
+    std::unique_ptr<InputStreamT> arc(m_factory->NewStream(in));
     size_t count = 0;
 
 #ifdef WXARC_MEMBER_TEMPLATES
@@ -1001,7 +1001,7 @@ void ArchiveTestCase<ClassFactoryT>::TestIterator(wxInputStream& in)
 #endif
 
     for (CatalogIter it = cat.begin(); it != cat.end(); ++it) {
-        wxScopedPtr<EntryT> entry(*it);
+        std::unique_ptr<EntryT> entry(*it);
         count += m_testEntries.count(entry->GetName(wxPATH_UNIX));
     }
 
@@ -1018,7 +1018,7 @@ void ArchiveTestCase<ClassFactoryT>::TestPairIterator(wxInputStream& in)
     typedef std::map<wxString, EntryT*> ArchiveCatalog;
     typedef typename ArchiveCatalog::iterator CatalogIter;
 
-    wxScopedPtr<InputStreamT> arc(m_factory->NewStream(in));
+    std::unique_ptr<InputStreamT> arc(m_factory->NewStream(in));
     size_t count = 0;
 
 #ifdef WXARC_MEMBER_TEMPLATES
@@ -1030,7 +1030,7 @@ void ArchiveTestCase<ClassFactoryT>::TestPairIterator(wxInputStream& in)
 #endif
 
     for (CatalogIter it = cat.begin(); it != cat.end(); ++it) {
-        wxScopedPtr<EntryT> entry(it->second);
+        std::unique_ptr<EntryT> entry(it->second);
         count += m_testEntries.count(entry->GetName(wxPATH_UNIX));
     }
 
@@ -1047,7 +1047,7 @@ void ArchiveTestCase<ClassFactoryT>::TestSmartIterator(wxInputStream& in)
     typedef typename ArchiveCatalog::iterator CatalogIter;
     typedef wxArchiveIterator<InputStreamT, Ptr<EntryT> > Iter;
 
-    wxScopedPtr<InputStreamT> arc(m_factory->NewStream(in));
+    std::unique_ptr<InputStreamT> arc(m_factory->NewStream(in));
 
 #ifdef WXARC_MEMBER_TEMPLATES
     ArchiveCatalog cat((Iter)*arc, Iter());
@@ -1078,7 +1078,7 @@ void ArchiveTestCase<ClassFactoryT>::TestSmartPairIterator(wxInputStream& in)
     typedef wxArchiveIterator<InputStreamT,
                 std::pair<wxString, Ptr<EntryT> > > PairIter;
 
-    wxScopedPtr<InputStreamT> arc(m_factory->NewStream(in));
+    std::unique_ptr<InputStreamT> arc(m_factory->NewStream(in));
 
 #ifdef WXARC_MEMBER_TEMPLATES
     ArchiveCatalog cat((PairIter)*arc, PairIter());
@@ -1106,8 +1106,8 @@ void ArchiveTestCase<ClassFactoryT>::ReadSimultaneous(TestInputStream& in)
 
     // create two archive input streams
     TestInputStream in2(in);
-    wxScopedPtr<InputStreamT> arc(m_factory->NewStream(in));
-    wxScopedPtr<InputStreamT> arc2(m_factory->NewStream(in2));
+    std::unique_ptr<InputStreamT> arc(m_factory->NewStream(in));
+    std::unique_ptr<InputStreamT> arc2(m_factory->NewStream(in2));
 
     // load the catalog
 #ifdef WXARC_MEMBER_TEMPLATES
@@ -1199,7 +1199,7 @@ protected:
     void CreateArchive(wxOutputStream& out);
     void ExtractArchive(wxInputStream& in);
 
-    wxScopedPtr<wxArchiveClassFactory> m_factory;  // factory to make classes
+    std::unique_ptr<wxArchiveClassFactory> m_factory;  // factory to make classes
     int m_options;                              // test options
 };
 
@@ -1239,7 +1239,7 @@ void CorruptionTestCase::runTest()
 
 void CorruptionTestCase::CreateArchive(wxOutputStream& out)
 {
-    wxScopedPtr<wxArchiveOutputStream> arc(m_factory->NewStream(out));
+    std::unique_ptr<wxArchiveOutputStream> arc(m_factory->NewStream(out));
 
     arc->PutNextDirEntry(wxT("dir"));
     arc->PutNextEntry(wxT("file"));
@@ -1248,8 +1248,8 @@ void CorruptionTestCase::CreateArchive(wxOutputStream& out)
 
 void CorruptionTestCase::ExtractArchive(wxInputStream& in)
 {
-    wxScopedPtr<wxArchiveInputStream> arc(m_factory->NewStream(in));
-    wxScopedPtr<wxArchiveEntry> entry(arc->GetNextEntry());
+    std::unique_ptr<wxArchiveInputStream> arc(m_factory->NewStream(in));
+    std::unique_ptr<wxArchiveEntry> entry(arc->GetNextEntry());
 
     while (entry.get() != NULL) {
         char buf[1024];

@@ -16,7 +16,7 @@
 #include "wx/xrc/xh_animatctrl.h"
 #include "wx/animate.h"
 #include "wx/generic/animate.h"
-#include "wx/scopedptr.h"
+
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxAnimationCtrlXmlHandler, wxXmlResourceHandler);
 
@@ -57,7 +57,7 @@ wxObject *wxAnimationCtrlXmlHandler::DoCreateResource()
     if ( GetBool("hidden", false) == 1 )
         ctrl->Hide();
 
-    wxScopedPtr<wxAnimation> animation(GetAnimation("animation", ctrl));
+    std::unique_ptr<wxAnimation> animation(GetAnimation("animation", ctrl));
     if ( animation )
         ctrl->SetAnimation(*animation);
 
@@ -84,7 +84,7 @@ wxAnimation* wxXmlResourceHandlerImpl::GetAnimation(const wxString& param,
         return nullptr;
 
     // load the animation from file
-    wxScopedPtr<wxAnimation> ani(ctrl ? new wxAnimation(ctrl->CreateAnimation())
+    std::unique_ptr<wxAnimation> ani(ctrl ? new wxAnimation(ctrl->CreateAnimation())
                                       : new wxAnimation);
 #if wxUSE_FILESYSTEM
     wxFSFile * const

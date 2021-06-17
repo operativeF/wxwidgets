@@ -23,7 +23,7 @@
 #include "wx/uiaction.h"
 #include "wx/caret.h"
 #include "wx/cshelp.h"
-#include "wx/scopedptr.h"
+
 #include "wx/stopwatch.h"
 #include "wx/tooltip.h"
 
@@ -428,8 +428,8 @@ TEST_CASE_METHOD(WindowTestCase, "Window::FindWindowBy", "[window]")
 TEST_CASE_METHOD(WindowTestCase, "Window::SizerErrors", "[window][sizer][error]")
 {
     wxWindow* const child = new wxWindow(m_window, wxID_ANY);
-    wxScopedPtr<wxSizer> const sizer1(new wxBoxSizer(wxHORIZONTAL));
-    wxScopedPtr<wxSizer> const sizer2(new wxBoxSizer(wxHORIZONTAL));
+    std::unique_ptr<wxSizer> const sizer1(new wxBoxSizer(wxHORIZONTAL));
+    std::unique_ptr<wxSizer> const sizer2(new wxBoxSizer(wxHORIZONTAL));
 
     REQUIRE_NOTHROW( sizer1->Add(child) );
     CHECK_THROWS_AS( sizer1->Add(child), TestAssertFailure );

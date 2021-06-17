@@ -363,7 +363,7 @@ TEST_CASE_METHOD(RequestFixture,
         return;
 
     Create("/put");
-    wxScopedPtr<wxInputStream> is(new wxFileInputStream("horse.png"));
+    std::unique_ptr<wxInputStream> is(new wxFileInputStream("horse.png"));
     REQUIRE( is->IsOk() );
 
     request.SetData(is.release(), "image/png");

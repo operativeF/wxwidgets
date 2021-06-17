@@ -525,7 +525,7 @@ bool wxNonOwnedWindow::DoSetRegionShape(const wxRegion& region)
 
 #if wxUSE_GRAPHICS_CONTEXT
 
-#include "wx/scopedptr.h"
+
 
 bool wxNonOwnedWindow::DoSetPathShape(const wxGraphicsPath& path)
 {

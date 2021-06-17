@@ -287,7 +287,7 @@
 #include <wx/sckipc.h>
 #include <wx/sckstrm.h>
 #include <wx/scopedarray.h>
-#include <wx/scopedptr.h>
+#include <>
 #include <wx/scopeguard.h>
 #include <wx/scrolbar.h>
 #include <wx/scrolwin.h>

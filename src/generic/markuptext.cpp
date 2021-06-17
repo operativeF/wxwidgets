@@ -35,7 +35,7 @@
 
 #if wxUSE_GRAPHICS_CONTEXT
     #include "wx/graphics.h"
-    #include "wx/scopedptr.h"
+    
 #endif
 
 namespace
@@ -294,7 +294,7 @@ public:
 
 private:
 #if wxUSE_GRAPHICS_CONTEXT
-    wxScopedPtr<wxGraphicsContext> m_gc;
+    std::unique_ptr<wxGraphicsContext> m_gc;
 #endif
     wxWindow* const m_win;
     int const m_rendererFlags;

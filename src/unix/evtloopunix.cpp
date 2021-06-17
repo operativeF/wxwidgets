@@ -30,7 +30,7 @@
 #endif
 
 #include "wx/apptrait.h"
-#include "wx/scopedptr.h"
+
 #include "wx/thread.h"
 #include "wx/module.h"
 #include "wx/unix/private/timer.h"

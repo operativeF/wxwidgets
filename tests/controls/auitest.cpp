@@ -20,7 +20,7 @@
 #endif // WX_PRECOMP
 
 #include "wx/panel.h"
-#include "wx/scopedptr.h"
+
 
 #include "wx/aui/auibook.h"
 
@@ -35,7 +35,7 @@ TEST_CASE( "wxAuiNotebook::DoGetBestSize", "[aui]" )
     wxWindow *frame = wxTheApp->GetTopWindow();
     REQUIRE( frame );
     wxAuiNotebook *nb = new wxAuiNotebook(frame);
-    wxScopedPtr<wxAuiNotebook> cleanUp(nb);
+    std::unique_ptr<wxAuiNotebook> cleanUp(nb);
 
     wxPanel *p = new wxPanel(nb);
     p->SetMinSize(wxSize(100, 100));

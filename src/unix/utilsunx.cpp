@@ -41,7 +41,7 @@
 #include "wx/apptrait.h"
 
 #include "wx/process.h"
-#include "wx/scopedptr.h"
+
 #include "wx/thread.h"
 
 #include "wx/cmdline.h"

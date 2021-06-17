@@ -22,7 +22,7 @@
 
 #include "wx/buffer.h"
 #include "wx/datetime.h"
-#include "wx/scopedptr.h"
+
 #include "wx/filename.h"
 #include "wx/thread.h"
 
