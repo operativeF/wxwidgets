@@ -261,7 +261,7 @@ int ReadTGA(wxImage* image, wxInputStream& stream)
 
     const unsigned long imageSize = static_cast<unsigned long>(width) * height * pixelSize;
 
-    wxScopedArray<unsigned char> imageData(imageSize);
+    std::unique_ptr<unsigned char[]> imageData(new unsigned char[imageSize]);
 
     if (!imageData)
     {
@@ -290,13 +290,13 @@ int ReadTGA(wxImage* image, wxInputStream& stream)
         return wxTGA_INVFORMAT;
 
 
-    wxScopedArray<unsigned char> palette;
+    std::unique_ptr<unsigned char[]> palette;
     // Load a palette if we have one.
     if (colorType == wxTGA_MAPPED)
     {
         {
             int palEntrySize = (palettebpp == 15 || palettebpp == 24) ? 3 : 4;
-            wxScopedArray<unsigned char> paletteTmp(paletteLength*palEntrySize);
+            std::unique_ptr<unsigned char[]> paletteTmp(new unsigned char[paletteLength * palEntrySize]);
             palette.swap(paletteTmp);
         }
 
@@ -781,7 +781,7 @@ int SaveTGA(const wxImage& image, wxOutputStream *stream)
     unsigned bytesPerPixel = 3 + (hasAlpha ? 1 : 0);
     wxSize size = image.GetSize();
     size_t scanlineSize = size.x * bytesPerPixel;
-    wxScopedArray<unsigned char> scanlineData(scanlineSize);
+    std::unique_ptr<unsigned char[]> scanlineData(new unsigned char[scanlineSize]);
     if (!scanlineData)
     {
         return wxTGA_MEMERR;

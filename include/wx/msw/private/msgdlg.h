@@ -11,7 +11,8 @@
 #define _WX_MSW_PRIVATE_MSGDLG_H_
 
 #include "wx/msw/wrapcctl.h"
-#include "wx/scopedarray.h"
+
+#include <memory>
 
 // Macro to help identify if task dialogs are available: we rely on
 // TD_WARNING_ICON being defined in the headers for this as this symbol is used
@@ -39,7 +40,7 @@ namespace wxMSWMessageDialog
         // initializes the object from a message dialog.
         wxMSWTaskDialogConfig(const wxMessageDialogBase& dlg);
 
-        wxScopedArray<TASKDIALOG_BUTTON> buttons;
+        std::unique_ptr<TASKDIALOG_BUTTON[]> buttons;
         wxWindow *parent{nullptr};
         wxString caption;
         wxString message;

@@ -658,7 +658,7 @@ bool wxDIB::Create(const wxImage& image, PixelFormat pf, int dstDepth)
         return false;
 
     // if requested, convert wxImage's content to monochrome
-    wxScopedArray<unsigned char> eightBitData;
+    std::unique_ptr<unsigned char[]> eightBitData;
 #if wxUSE_PALETTE
     if ( dstDepth == 1 )
     {

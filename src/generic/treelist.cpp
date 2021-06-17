@@ -30,7 +30,7 @@
 #include "wx/dataview.h"
 #include "wx/renderer.h"
 #include "wx/scopedarray.h"
-
+#include "wx/scopedptr.h"
 
 // ----------------------------------------------------------------------------
 // Constants
@@ -135,6 +135,7 @@ public:
         if ( !m_columnsTexts )
             return;
 
+        // TODO: Figure this out somehow. Maybe use a container instead?
         wxScopedArray<wxString> oldTexts(m_columnsTexts);
         m_columnsTexts = new wxString[numColumns - 1];
 
@@ -162,7 +163,8 @@ public:
 
         if ( !m_columnsTexts )
             return;
-
+    
+        // TODO: Figure this out somehow. Maybe use a container instead?
         wxScopedArray<wxString> oldTexts(m_columnsTexts);
         m_columnsTexts = new wxString[numColumns - 2];
 
@@ -484,7 +486,7 @@ wxTreeListModel::InsertItem(Node* parent,
         dvc->SetIndent(dvc->GetIndent());
     }
 
-    std::unique_ptr<Node>
+    wxScopedPtr<Node>
         newItem(new Node(parent, text, imageClosed, imageOpened, data));
 
     // If we have no children at all, then inserting as last child is the same

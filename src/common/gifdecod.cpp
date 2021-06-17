@@ -328,15 +328,15 @@ wxGIFDecoder::dgif(wxInputStream& stream, GIFImage *img, int interl, int bits)
 {
     static constexpr int allocSize = 4096 + 1;
 
-    wxScopedArray<int> ab_prefix(allocSize); // alphabet (prefixes)
+    std::unique_ptr<int[]> ab_prefix(new int[allocSize]); // alphabet (prefixes)
     if ( !ab_prefix )
         return wxGIF_MEMERR;
 
-    wxScopedArray<int> ab_tail(allocSize);   // alphabet (tails)
+    std::unique_ptr<int[]> ab_tail(new int[allocSize]);   // alphabet (tails)
     if ( !ab_tail )
         return wxGIF_MEMERR;
 
-    wxScopedArray<int> stack(allocSize);     // decompression stack
+    std::unique_ptr<int[]> stack(new int[allocSize]);     // decompression stack
     if ( !stack )
         return wxGIF_MEMERR;
 

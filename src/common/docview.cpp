@@ -1749,7 +1749,7 @@ wxDocTemplate *wxDocManager::SelectDocumentType(wxDocTemplate **templates,
                                                 int noTemplates, bool sort)
 {
     std::vector<wxString> strings;
-    wxScopedArray<wxDocTemplate *> data(noTemplates);
+    std::unique_ptr<wxDocTemplate*[]> data(new wxDocTemplate*[noTemplates]);
     int i;
     int n = 0;
 
@@ -1824,7 +1824,7 @@ wxDocTemplate *wxDocManager::SelectViewType(wxDocTemplate **templates,
                                             int noTemplates, bool sort)
 {
     std::vector<wxString> strings;
-    wxScopedArray<wxDocTemplate *> data(noTemplates);
+    std::unique_ptr<wxDocTemplate*[]> data(new wxDocTemplate*[noTemplates]);
     int i;
     int n = 0;
 

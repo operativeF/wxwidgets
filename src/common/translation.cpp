@@ -141,7 +141,7 @@ wxString GetPreferredUILanguage(const std::vector<wxString>& available)
                                                  nullptr,
                                                  &bufferSize) )
         {
-            wxScopedArray<WCHAR> langs(bufferSize);
+            std::unique_ptr<WCHAR[]> langs(new WCHAR[bufferSize]);
             if ( (*s_pfnGetUserPreferredUILanguages)(MUI_LANGUAGE_NAME,
                                                      &numLangs,
                                                      langs.get(),

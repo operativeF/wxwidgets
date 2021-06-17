@@ -243,7 +243,7 @@ bool wxGIFHandler::DoSaveFile(const wxImage& image, wxOutputStream *stream,
     }
 
     const wxUint8 *src = image.GetData();
-    wxScopedArray<wxUint8> eightBitData(width);
+    std::unique_ptr<wxUint8[]> eightBitData(new wxUint8[width]);
 
     SetupCompress(stream, 8);
 

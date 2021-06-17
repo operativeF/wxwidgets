@@ -654,7 +654,7 @@ size_t wxMenu::CopyAccels(wxAcceleratorEntry *accels) const
 wxAcceleratorTable *wxMenu::CreateAccelTable() const
 {
     const size_t count = m_accels.size();
-    wxScopedArray<wxAcceleratorEntry> accels(count);
+    std::unique_ptr<wxAcceleratorEntry[]> accels(new wxAcceleratorEntry[count]);
     CopyAccels(accels.get());
 
     return new wxAcceleratorTable(count, accels.get());

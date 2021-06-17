@@ -823,7 +823,7 @@ void wxSVGFileDCImpl::DoDrawPolyPolygon(int n, const int count[], const wxPoint 
     for (j = 0; j < n; ++j)
         totalPts += count[j];
 
-    wxScopedArray<wxPoint> pts(totalPts + n);
+    std::unique_ptr<wxPoint[]> pts(new wxPoint[totalPts + n]);
 
     int polyCounter = 0, polyIndex = 0;
     for (i = j = 0; i < totalPts; ++i)

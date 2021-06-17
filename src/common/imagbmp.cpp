@@ -272,7 +272,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
 #if wxUSE_PALETTE
     std::unique_ptr<wxPalette> palette; // entries for quantized images
 #endif // wxUSE_PALETTE
-    wxScopedArray<wxUint8> rgbquad; // for the RGBQUAD bytes for the colormap
+    std::unique_ptr<wxUint8[]> rgbquad; // for the RGBQUAD bytes for the colormap
     std::unique_ptr<wxImage> q_image;   // destination for quantized image
 
     // if <24bpp use quantization to reduce colors for *some* of the formats
@@ -305,7 +305,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
         }
 
         unsigned char r, g, b;
-        wxScopedArray<wxUint8> rgbquadTmp(palette_size*4);
+        std::unique_ptr<wxUint8[]> rgbquadTmp(new wxUint8[palette_size*4]);
         rgbquad.swap(rgbquadTmp);
 
         for (int i = 0; i < palette_size; i++)
@@ -325,7 +325,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
     else if ( (format == wxBMP_8BPP_GREY) || (format == wxBMP_8BPP_RED) ||
               (format == wxBMP_1BPP_BW) )
     {
-        wxScopedArray<wxUint8> rgbquadTmp(palette_size*4);
+        std::unique_ptr<wxUint8[]> rgbquadTmp(new wxUint8[palette_size*4]);
         rgbquad.swap(rgbquadTmp);
 
         for ( int i = 0; i < palette_size; i++ )
@@ -362,7 +362,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
                                         : image->GetData();
     const unsigned char* const alpha = saveAlpha ? image->GetAlpha() : nullptr;
 
-    wxScopedArray<wxUint8> buffer(row_width);
+    std::unique_ptr<wxUint8[]> buffer(new wxUint8[row_width]);
     memset(buffer.get(), 0, row_width);
     unsigned x;
     long int pixel;
@@ -583,10 +583,9 @@ bool wxBMPHandler::DoLoadDib(wxImage * image, int width, int height,
     if ( bpp < 16 && ncolors != 0 )
     {
 #if wxUSE_PALETTE
-        wxScopedArray<unsigned char>
-             r(ncolors),
-             g(ncolors),
-             b(ncolors);
+        std::unique_ptr<unsigned char[]> r(new unsigned char[ncolors]);
+        std::unique_ptr<unsigned char[]> g(new unsigned char[ncolors]);
+        std::unique_ptr<unsigned char[]> b(new unsigned char[ncolors]);
 #endif // wxUSE_PALETTE
         for (int j = 0; j < ncolors; j++)
         {
@@ -1554,7 +1553,7 @@ bool wxICOHandler::DoLoadFile(wxImage *image, wxInputStream& stream,
     wxUint16 nType = wxUINT16_SWAP_ON_BE(IconDir.idType);
 
     // loop round the icons and choose the best one:
-    wxScopedArray<ICONDIRENTRY> pIconDirEntry(nIcons);
+    std::unique_ptr<ICONDIRENTRY[]> pIconDirEntry(new ICONDIRENTRY[nIcons]);
     ICONDIRENTRY *pCurrentEntry = pIconDirEntry.get();
     int wMax = 0;
     int colmax = 0;
