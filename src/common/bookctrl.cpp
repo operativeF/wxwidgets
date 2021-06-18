@@ -439,7 +439,7 @@ void wxBookCtrlBase::DoSetSelectionAfterRemoval(size_t n)
     if ( m_selection >= (int)n )
     {
         // ensure that the selection is valid
-        int sel = [=]() {
+        const int sel = [=]() {
         if ( GetPageCount() == 0 )
             return wxNOT_FOUND;
         else

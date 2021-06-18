@@ -64,7 +64,7 @@ public:
 
 
     // Returns the directory corresponding to the specified Windows shell CSIDL
-    static wxString MSWGetShellDir(int csidl);
+    static wxString MSWGetShellDir(const GUID& rfid);
 
 protected:
     // Ctor is protected, use wxStandardPaths::Get() instead of instantiating
@@ -73,9 +73,6 @@ protected:
     // It calls IgnoreAppBuildSubDirs() and also sets up the object to use
     // both vendor and application name by default.
     wxStandardPaths();
-
-    // get the path corresponding to the given standard CSIDL_XXX constant
-    static wxString DoGetDirectory(int csidl);
 
     static wxString DoGetKnownFolder(const _GUID& rfid);
 

@@ -2461,7 +2461,7 @@ void wxFileName::SplitPath(const wxString& fullpathWithVolume,
         // up to, but excluding, the last dot
         size_t nStart = posLastSlash == wxString::npos ? 0 : posLastSlash + 1;
         
-        size_t count = [posLastDot, posLastSlash]() {
+        const size_t count = [posLastDot, posLastSlash]() {
             if ( posLastDot == wxString::npos )
             {
                 // take all until the end

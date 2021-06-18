@@ -195,7 +195,7 @@ bool wxFFile::Seek(wxFileOffset ofs, wxSeekMode mode)
 {
     wxCHECK_MSG( IsOpened(), false, wxT("can't seek on closed file") );
 
-    int origin = [mode]() {
+    const int origin = [mode]() {
         switch ( mode )
         {
             default:

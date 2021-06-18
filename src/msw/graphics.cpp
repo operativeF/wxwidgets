@@ -836,7 +836,7 @@ wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
 
     m_pen = new Pen(wxColourToColor(info.GetColour()), m_width );
 
-    LineCap cap = [info]() {
+    const LineCap cap = [info]() {
         switch ( info.GetCap() )
         {
         case wxCAP_ROUND:
@@ -855,7 +855,7 @@ wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
 
     m_pen->SetLineCap(cap,cap, DashCapFlat);
 
-    LineJoin join = [info]() {
+    const LineJoin join = [info]() {
         switch ( info.GetJoin() )
         {
         case wxJOIN_BEVEL:

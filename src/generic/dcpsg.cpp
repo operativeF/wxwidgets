@@ -1177,7 +1177,7 @@ void wxPostScriptDCImpl::SetPen( const wxPen& pen )
     wxPenCap cap = m_pen.IsOk() ? m_pen.GetCap() : wxCAP_INVALID;
     wxPenJoin join = m_pen.IsOk() ? m_pen.GetJoin() : wxJOIN_INVALID;
 
-    double width = [this]() {
+    const double width = [this]() {
         if (m_pen.GetWidth() <= 0)
             return 0.1;
         else

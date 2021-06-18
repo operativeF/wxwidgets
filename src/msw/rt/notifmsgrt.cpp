@@ -378,7 +378,7 @@ public:
         if ( !shortcutFilename.HasExt() )
             shortcutFilename.SetExt("lnk");
         if ( shortcutFilename.IsRelative() )
-            shortcutFilename.MakeAbsolute(wxStandardPaths::MSWGetShellDir(CSIDL_STARTMENU));
+            shortcutFilename.MakeAbsolute(wxStandardPaths::MSWGetShellDir(FOLDERID_StartMenu));
 
         ms_appId = appId;
 

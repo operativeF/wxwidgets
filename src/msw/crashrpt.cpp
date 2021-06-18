@@ -179,7 +179,7 @@ bool wxCrashReportImpl::Generate(int flags, EXCEPTION_POINTERS *ep)
         minidumpExcInfo.ClientPointers = FALSE; // in our own address space
 
         // do generate the dump
-        MINIDUMP_TYPE dumpFlags = [flags]() {
+        const MINIDUMP_TYPE dumpFlags = [flags]() {
             if ( flags & wxCRASH_REPORT_LOCALS )
             {
                 // the only way to get local variables is to dump the entire

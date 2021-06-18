@@ -116,41 +116,6 @@ void ResolveShellFunctions()
 // private helpers
 // ----------------------------------------------------------------------------
 
-/* static */
-wxString wxStandardPaths::DoGetDirectory(int csidl)
-{
-    wxString dir;
-    HRESULT hr = E_FAIL;
-
-    // FIXME: Deprecated. Gets the path of a folder identified by a CSIDL value.
-    hr = ::SHGetFolderPath
-            (
-            nullptr,               // parent window, not used
-            csidl,
-            nullptr,               // access token (current user)
-            SHGFP_TYPE_CURRENT, // current path, not just default value
-            wxStringBuffer(dir, MAX_PATH)
-            );
-
-    // somewhat incredibly, the error code in the Unicode version is
-    // different from the one in ASCII version for this function
-    if ( hr == E_FAIL )
-    {
-        // directory doesn't exist, maybe we can get its default value?
-        // FIXME: Deprecated. Gets the path of a folder identified by a CSIDL value.
-        hr = ::SHGetFolderPath
-                (
-                nullptr,
-                csidl,
-                nullptr,
-                SHGFP_TYPE_DEFAULT,
-                wxStringBuffer(dir, MAX_PATH)
-                );
-    }
-
-    return dir;
-}
-
 wxString wxStandardPaths::DoGetKnownFolder(const GUID& rfid)
 {
     if (!gs_shellFuncs.initialized)
@@ -184,39 +149,33 @@ wxString wxStandardPaths::GetAppDir() const
 
 wxString wxStandardPaths::GetUserDir(Dir userDir) const
 {
-    int csidl;
-    switch (userDir)
-    {
-        case Dir_Cache:
-            csidl = CSIDL_LOCAL_APPDATA;
-            break;
-        case Dir_Desktop:
-            csidl = CSIDL_DESKTOPDIRECTORY;
-            break;
-        case Dir_Downloads:
+    const GUID knownID = [userDir]() {
+        switch (userDir)
         {
-            csidl = CSIDL_PERSONAL;
-            // Downloads folder is only available since Vista
-            wxString dir = DoGetKnownFolder(wxFOLDERID_Downloads);
-            if ( !dir.empty() )
-                return dir;
-            break;
-        }
-        case Dir_Music:
-            csidl = CSIDL_MYMUSIC;
-            break;
-        case Dir_Pictures:
-            csidl = CSIDL_MYPICTURES;
-            break;
-        case Dir_Videos:
-            csidl = CSIDL_MYVIDEO;
-            break;
-        default:
-            csidl = CSIDL_PERSONAL;
-            break;
-    }
+            case Dir_Cache:
+                return FOLDERID_LocalAppData;
 
-    return DoGetDirectory(csidl);
+            case Dir_Desktop:
+                return FOLDERID_Desktop;
+
+            case Dir_Downloads:
+                return FOLDERID_Downloads;
+
+            case Dir_Music:
+                return FOLDERID_Music;
+
+            case Dir_Pictures:
+                return FOLDERID_Pictures;
+
+            case Dir_Videos:
+                return FOLDERID_Videos;
+
+            default:
+                return FOLDERID_Documents;
+        }
+    }();
+
+    return DoGetKnownFolder(knownID);
 }
 
 // ----------------------------------------------------------------------------
@@ -281,9 +240,9 @@ void wxStandardPaths::DontIgnoreAppSubDir()
 }
 
 /* static */
-wxString wxStandardPaths::MSWGetShellDir(int csidl)
+wxString wxStandardPaths::MSWGetShellDir(const GUID& rfid)
 {
-    return DoGetDirectory(csidl);
+    return DoGetKnownFolder(rfid);
 }
 
 // ----------------------------------------------------------------------------
@@ -303,12 +262,12 @@ wxString wxStandardPaths::GetExecutablePath() const
 
 wxString wxStandardPaths::GetConfigDir() const
 {
-    return AppendAppInfo(DoGetDirectory(CSIDL_COMMON_APPDATA));
+    return AppendAppInfo(DoGetKnownFolder(FOLDERID_ProgramData));
 }
 
 wxString wxStandardPaths::GetUserConfigDir() const
 {
-    return DoGetDirectory(CSIDL_APPDATA);
+    return DoGetKnownFolder(FOLDERID_RoamingAppData);
 }
 
 wxString wxStandardPaths::GetDataDir() const
@@ -325,7 +284,7 @@ wxString wxStandardPaths::GetUserDataDir() const
 
 wxString wxStandardPaths::GetUserLocalDataDir() const
 {
-    return AppendAppInfo(DoGetDirectory(CSIDL_LOCAL_APPDATA));
+    return AppendAppInfo(DoGetKnownFolder(FOLDERID_LocalAppData));
 }
 
 wxString wxStandardPaths::GetPluginsDir() const

@@ -2026,7 +2026,7 @@ wxDateTime::wxDateTime_t wxDateTime::GetWeekOfMonth(wxDateTime::WeekFlags flags,
     UseEffectiveWeekDayFlags(flags);
 
     // compute offset of dateFirst from the beginning of the week
-    int firstOffset = [=]() {
+    const int firstOffset = [=]() {
         if ( flags == Sunday_First )
             return wdFirst - Sun;
         else

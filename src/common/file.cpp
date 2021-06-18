@@ -114,7 +114,7 @@ bool wxFile::Exists(const wxString& name)
 
 bool wxFile::Access(const wxString& name, OpenMode mode)
 {
-    int how = [mode]()
+    const int how = [mode]()
     {
         switch ( mode )
         {
@@ -417,7 +417,7 @@ wxFileOffset wxFile::Seek(wxFileOffset ofs, wxSeekMode mode)
                  wxInvalidOffset,
                  wxT("invalid absolute file offset") );
 
-    int origin = [mode]() {
+    const int origin = [mode]() {
         switch ( mode ) {
         default:
             wxFAIL_MSG(wxT("unknown seek origin"));

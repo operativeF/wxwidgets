@@ -253,7 +253,7 @@ bool wxAppConsoleBase::OnInit()
     OnInitCmdLine(parser);
 
     // TODO: Lambda
-    bool cont = [&parser, this]() {
+    const bool cont = [&parser, this]() {
         switch ( parser.Parse(false /* don't show usage */) )
         {
             case -1:

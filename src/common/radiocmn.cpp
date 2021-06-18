@@ -331,7 +331,7 @@ wxString wxRadioBoxBase::DoGetHelpTextAtPoint(const wxWindow *derived,
                                               const wxPoint& pt,
                                               wxHelpEvent::Origin origin) const
 {
-    int item = [=]() {
+    const int item = [=]() {
         switch ( origin )
         {
             case wxHelpEvent::Origin_HelpButton:
