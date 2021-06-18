@@ -436,6 +436,7 @@ void wxPostScriptDCImpl::DoDrawArc (wxCoord x1, wxCoord y1, wxCoord x2, wxCoord 
     double radius = sqrt( (double)(dx*dx+dy*dy) );
     double alpha1, alpha2;
 
+    // TODO: Return lambda pair
     if (x1 == x2 && y1 == y2)
     {
         alpha1 = 0.0;
@@ -1176,12 +1177,12 @@ void wxPostScriptDCImpl::SetPen( const wxPen& pen )
     wxPenCap cap = m_pen.IsOk() ? m_pen.GetCap() : wxCAP_INVALID;
     wxPenJoin join = m_pen.IsOk() ? m_pen.GetJoin() : wxJOIN_INVALID;
 
-    double width;
-
-    if (m_pen.GetWidth() <= 0)
-        width = 0.1;
-    else
-        width = (double) m_pen.GetWidth();
+    double width = [this]() {
+        if (m_pen.GetWidth() <= 0)
+            return 0.1;
+        else
+            return (double) m_pen.GetWidth();
+    }();
 
     wxString buffer;
     buffer.Printf( "%f setlinewidth\n", width * DEV2PS * m_scaleX );
@@ -1454,30 +1455,19 @@ void wxPostScriptDCImpl::DoDrawSpline( const wxPointList *points )
 
     SetPen( m_pen );
 
-    // a and b are not used
-    //double a, b;
-    double c, d, x1, y1, x3, y3;
-    wxPoint *p, *q;
-
     wxPointList::compatibility_iterator node = points->GetFirst();
-    p = node->GetData();
-    x1 = p->x;
-    y1 = p->y;
+    wxPoint* p = node->GetData();
+    double x1 = p->x;
+    double y1 = p->y;
 
     node = node->GetNext();
     p = node->GetData();
-    c = p->x;
-    d = p->y;
-    x3 =
-         #if 0
-         a =
-         #endif
-         (double)(x1 + c) / 2;
-    y3 =
-         #if 0
-         b =
-         #endif
-         (double)(y1 + d) / 2;
+
+    double c = p->x;
+    double d = p->y;
+
+    double x3 = (double)(x1 + c) / 2;
+    double y3 = (double)(y1 + d) / 2;
 
     wxString buffer;
     buffer.Printf( "newpath\n"
@@ -1494,13 +1484,12 @@ void wxPostScriptDCImpl::DoDrawSpline( const wxPointList *points )
     node = node->GetNext();
     while (node)
     {
-        double x2, y2;
-        q = node->GetData();
+        wxPoint* q = node->GetData();
 
         x1 = x3;
         y1 = y3;
-        x2 = c;
-        y2 = d;
+        double x2 = c;
+        double y2 = d;
         c = q->x;
         d = q->y;
         x3 = (double)(x2 + c) / 2;

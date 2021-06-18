@@ -195,25 +195,23 @@ bool wxFFile::Seek(wxFileOffset ofs, wxSeekMode mode)
 {
     wxCHECK_MSG( IsOpened(), false, wxT("can't seek on closed file") );
 
-    int origin;
-    switch ( mode )
-    {
-        default:
-            wxFAIL_MSG(wxT("unknown seek mode"));
-            [[fallthrough]];
+    int origin = [mode]() {
+        switch ( mode )
+        {
+            default:
+                wxFAIL_MSG(wxT("unknown seek mode"));
+                [[fallthrough]];
 
-        case wxSeekMode::FromStart:
-            origin = SEEK_SET;
-            break;
+            case wxSeekMode::FromStart:
+                return SEEK_SET;
 
-        case wxSeekMode::FromCurrent:
-            origin = SEEK_CUR;
-            break;
+            case wxSeekMode::FromCurrent:
+                return SEEK_CUR;
 
-        case wxSeekMode::FromEnd:
-            origin = SEEK_END;
-            break;
-    }
+            case wxSeekMode::FromEnd:
+                return SEEK_END;
+        }
+    }();
 
 #ifndef wxHAS_LARGE_FFILES
     if ((long)ofs != ofs)

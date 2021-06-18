@@ -213,41 +213,38 @@ wxCursor::wxCursor(const wxString& filename,
                    int hotSpotX,
                    int hotSpotY)
 {
-    HCURSOR hcursor;
-    switch ( kind )
-    {
-        case wxBITMAP_TYPE_CUR_RESOURCE:
-            hcursor = ::LoadCursor(wxGetInstance(), filename.t_str());
-            break;
+    HCURSOR hcursor = [=]() {
+        switch ( kind )
+        {
+            case wxBITMAP_TYPE_CUR_RESOURCE:
+                return ::LoadCursor(wxGetInstance(), filename.t_str());
 
-        case wxBITMAP_TYPE_ANI:
-        case wxBITMAP_TYPE_CUR:
-            hcursor = ::LoadCursorFromFile(filename.t_str());
-            break;
+            case wxBITMAP_TYPE_ANI:
+            case wxBITMAP_TYPE_CUR:
+                return ::LoadCursorFromFile(filename.t_str());
 
-        case wxBITMAP_TYPE_ICO:
-            hcursor = wxBitmapToHCURSOR
-                      (
-                       wxIcon(filename, wxBITMAP_TYPE_ICO),
-                       hotSpotX,
-                       hotSpotY
-                      );
-            break;
+            case wxBITMAP_TYPE_ICO:
+                return wxBitmapToHCURSOR
+                        (
+                        wxIcon(filename, wxBITMAP_TYPE_ICO),
+                        hotSpotX,
+                        hotSpotY
+                        );
 
-        case wxBITMAP_TYPE_BMP:
-            hcursor = wxBitmapToHCURSOR
-                      (
-                       wxBitmap(filename, wxBITMAP_TYPE_BMP),
-                       hotSpotX,
-                       hotSpotY
-                      );
-            break;
+            case wxBITMAP_TYPE_BMP:
+                return wxBitmapToHCURSOR
+                        (
+                        wxBitmap(filename, wxBITMAP_TYPE_BMP),
+                        hotSpotX,
+                        hotSpotY
+                        );
 
-        default:
-            wxLogError( wxT("unknown cursor resource type '%d'"), kind );
+            default:
+                wxLogError( wxT("unknown cursor resource type '%d'"), kind );
 
-            hcursor = nullptr;
-    }
+                return static_cast<HCURSOR>(nullptr);
+        }
+    }();
 
     if ( hcursor )
     {

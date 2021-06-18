@@ -215,7 +215,9 @@ hostent *deepCopyHostent(hostent *h,
         pos += misalign;
 
     /* leave space for pointer list */
-    char **p = h->h_addr_list, **q;
+    char **p = h->h_addr_list;
+    char **q{nullptr};
+
     char **h_addr_list = (char **)(buffer + pos);
     while(*(p++) != nullptr)
         pos += sizeof(char *);
@@ -455,7 +457,7 @@ wxString wxSockAddressImpl::GetHostName() const
 
     hostent he;
     wxGethostBuf buffer;
-    int err;
+    int err{0};
     if ( !wxGethostbyaddr_r
           (
             static_cast<const char *>(addrbuf),
@@ -476,7 +478,7 @@ wxString wxSockAddressImpl::GetHostName() const
 bool wxSockAddressImpl::SetPortName(const wxString& name, const char *protocol)
 {
     // test whether it's a number first
-    unsigned long port;
+    unsigned long port{0};
     if ( name.ToULong(&port) )
     {
         if ( port > 65535 )
@@ -535,7 +537,7 @@ bool wxSockAddressImpl::SetHostName4(const wxString& name)
     // it's a host name, resolve it
     hostent he;
     wxGethostBuf buffer;
-    int err;
+    int err{0};
     if ( !wxGethostbyname_r(namebuf, &he, buffer, sizeof(buffer), &err) )
         return false;
 
@@ -872,7 +874,7 @@ bool wxIPV4address::IsLocalHost() const
 
 wxString wxIPV4address::IPAddress() const
 {
-    wxUint32 addr;
+    wxUint32 addr{0};
     if ( !GetImpl().GetHostAddress(&addr) )
         return {};
 
@@ -947,9 +949,9 @@ wxString wxIPV6address::IPAddress() const
     const wxUint8 * const addr = u.bytes;
 
     wxUint16 words[8];
-    int i,
-        prefix_zero_count = 0;
-    for ( i = 0; i < 8; ++i )
+    int prefix_zero_count = 0;
+    
+    for ( int i = 0; i < 8; ++i )
     {
         words[i] = addr[i*2];
         words[i] <<= 8;
@@ -972,7 +974,7 @@ wxString wxIPV6address::IPAddress() const
     else // general case
     {
         result = ":";
-        for ( i = prefix_zero_count; i < 8; ++i )
+        for ( int i = prefix_zero_count; i < 8; ++i )
         {
             result += wxString::Format(":%x", words[i]);
         }

@@ -2653,6 +2653,7 @@ void wxStaticBoxSizer::RepositionChildren(const wxSize& minSize)
 
 wxSize wxStaticBoxSizer::CalcMin()
 {
+    // TODO: Return size.
     int top_border, other_border;
     m_staticBox->GetBordersForSizer(&top_border, &other_border);
 

@@ -836,46 +836,41 @@ wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
 
     m_pen = new Pen(wxColourToColor(info.GetColour()), m_width );
 
-    LineCap cap;
-    switch ( info.GetCap() )
-    {
-    case wxCAP_ROUND :
-        cap = LineCapRound;
-        break;
+    LineCap cap = [info]() {
+        switch ( info.GetCap() )
+        {
+        case wxCAP_ROUND:
+            return LineCapRound;
 
-    case wxCAP_PROJECTING :
-        cap = LineCapSquare;
-        break;
+        case wxCAP_PROJECTING:
+            return LineCapSquare;
 
-    case wxCAP_BUTT :
-        cap = LineCapFlat; // TODO verify
-        break;
+        case wxCAP_BUTT:
+            return LineCapFlat; // TODO verify
 
-    default :
-        cap = LineCapFlat;
-        break;
-    }
+        default:
+            return LineCapFlat;
+        }
+    }();
+
     m_pen->SetLineCap(cap,cap, DashCapFlat);
 
-    LineJoin join;
-    switch ( info.GetJoin() )
-    {
-    case wxJOIN_BEVEL :
-        join = LineJoinBevel;
-        break;
+    LineJoin join = [info]() {
+        switch ( info.GetJoin() )
+        {
+        case wxJOIN_BEVEL:
+            return LineJoinBevel;
 
-    case wxJOIN_MITER :
-        join = LineJoinMiter;
-        break;
+        case wxJOIN_MITER:
+            return LineJoinMiter;
 
-    case wxJOIN_ROUND :
-        join = LineJoinRound;
-        break;
+        case wxJOIN_ROUND:
+            return LineJoinRound;
 
-    default :
-        join = LineJoinMiter;
-        break;
-    }
+        default:
+            return LineJoinMiter;
+        }
+    }();
 
     m_pen->SetLineJoin(join);
 

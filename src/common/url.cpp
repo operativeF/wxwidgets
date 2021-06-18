@@ -396,19 +396,16 @@ void wxURL::SetProxy(const wxString& url_proxy)
     }
     else
     {
-        wxString tmp_str;
-        wxString hostname, port;
-        int pos;
         wxIPV4address addr;
 
-        tmp_str = url_proxy;
-        pos = tmp_str.Find(wxT(':'));
+        wxString tmp_str = url_proxy;
+        int pos = tmp_str.Find(wxT(':'));
         // This is an invalid proxy name.
         if (pos == wxNOT_FOUND)
             return;
 
-        hostname = tmp_str(0, pos);
-        port = tmp_str(pos+1, tmp_str.length()-pos);
+        wxString hostname = tmp_str(0, pos);
+        wxString port = tmp_str(pos+1, tmp_str.length()-pos);
 
         addr.Hostname(hostname);
         addr.Service(port);

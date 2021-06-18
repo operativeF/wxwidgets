@@ -240,15 +240,13 @@ wxRadioButton* wxGetSelectedButtonInGroup(const wxRadioButton *btn)
     if (btn->HasFlag(wxRB_SINGLE))
         return nullptr;
 
-    wxRadioButton *selBtn;
-
     // First check all previous buttons
-    for (selBtn = btn->GetPreviousInGroup(); selBtn; selBtn = selBtn->GetPreviousInGroup())
+    for (wxRadioButton* selBtn = btn->GetPreviousInGroup(); selBtn; selBtn = selBtn->GetPreviousInGroup())
         if (selBtn->GetValue())
             return selBtn;
 
     // Now all following buttons
-    for (selBtn = btn->GetNextInGroup(); selBtn; selBtn = selBtn->GetNextInGroup())
+    for (wxRadioButton* selBtn = btn->GetNextInGroup(); selBtn; selBtn = selBtn->GetNextInGroup())
         if (selBtn->GetValue())
             return selBtn;
 

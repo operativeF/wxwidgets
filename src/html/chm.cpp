@@ -45,7 +45,7 @@ public:
     static const wxString ChmErrorMsg(int error);
 
     /// get an array of archive-member-filenames
-    const wxArrayString *GetFileNames()
+    const std::vector<wxString> *GetFileNames()
     {
         return m_fileNames;
     }
@@ -83,7 +83,7 @@ private:
     struct mschm_decompressor *m_decompressor;
 
     /// Array of filenames in archive
-    wxArrayString * m_fileNames;
+    std::vector<wxString> * m_fileNames;
 
     /// Internal function to get filepointer
     struct mschmd_file *GetMschmdFile(const wxString& pattern);
@@ -125,7 +125,7 @@ wxChmTools::wxChmTools(const wxFileName &archive)
         m_archive = chmh;
 
         // Create Filenamearray
-        m_fileNames = new wxArrayString;
+        m_fileNames = new std::vector<wxString>;
 
         // Store Filenames in array
         for (file = chmh->files; file; file = file->next)

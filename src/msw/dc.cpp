@@ -998,6 +998,7 @@ wxMSWDCImpl::DoDrawPolyPolygon(int n,
                         wxPolygonFillMode fillStyle)
 {
     wxBrushAttrsSetter cc(*this); // needed for wxBrushStyle::StippleMaskOpaque handling
+    // TODO: Accumulate
     int cnt;
     for (int i = cnt = 0; i < n; i++)
         cnt += count[i];

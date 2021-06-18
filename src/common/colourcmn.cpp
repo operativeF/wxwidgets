@@ -93,8 +93,12 @@ bool wxColourBase::FromString(const wxString& str)
         // CSS-like RGB specification
         // according to http://www.w3.org/TR/css3-color/#colorunits
         // values outside 0-255 range are allowed but should be clipped
-        int red, green, blue,
-            alpha = wxALPHA_OPAQUE;
+        // TODO: Do these values actually change meaningfully?
+        int red;
+        int green;
+        int blue;
+        int alpha = wxALPHA_OPAQUE;
+
         if ( str.length() > 3 && (str[3] == wxT('a') || str[3] == wxT('A')) )
         {
             // We can't use sscanf() for the alpha value as sscanf() uses the
@@ -136,7 +140,7 @@ bool wxColourBase::FromString(const wxString& str)
 
             alphaStr.Trim();
 
-            double a;
+            double a{0.0};
             if ( !alphaStr.ToCDouble(&a) )
                 return false;
 
@@ -158,7 +162,7 @@ bool wxColourBase::FromString(const wxString& str)
     {
         // hexadecimal prefixed with # ("HTML syntax")
         // see https://drafts.csswg.org/css-color/#hex-notation
-        unsigned long tmp;
+        unsigned long tmp{0};
         if (wxSscanf(str.wx_str() + 1, wxT("%lx"), &tmp) != 1)
             return false;
 

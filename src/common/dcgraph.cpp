@@ -297,6 +297,7 @@ void wxGCDCImpl::Flush()
 
 void wxGCDCImpl::UpdateClipBox()
 {
+    // TODO: Return rect
     double x, y, w, h;
     m_graphicContext->GetClipBox(&x, &y, &w, &h);
 
@@ -676,6 +677,7 @@ void wxGCDCImpl::DoDrawArc( wxCoord x1, wxCoord y1,
 
     double sa, ea; // In radians
 
+    // TODO: Return a pair
     if (x1 == x2 && y1 == y2)
     {
         sa = 0.0;

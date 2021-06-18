@@ -54,13 +54,13 @@ wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)
 {
     wxString ext, mime;
     wxString loc = GetRightLocation(location);
-    int l = loc.length(), l2;
+    int l = loc.length();
+    int l2 = l;
 
-    l2 = l;
     for (int i = l-1; i >= 0; i--)
     {
-        wxChar c;
-        c = loc[(unsigned int) i];
+        wxChar c = loc[(unsigned int) i];
+
         if ( c == wxT('#') )
             l2 = i + 1;
         if ( c == wxT('.') )
@@ -165,13 +165,19 @@ wxString wxFileSystemHandler::GetProtocol(const wxString& location)
 /* static */
 wxString wxFileSystemHandler::GetLeftLocation(const wxString& location)
 {
-    int i;
     bool fnd = false;
 
-    for (i = location.length()-1; i >= 0; i--) {
-        if ((location[i] == wxT(':')) && (i != 1 /*win: C:\path*/)) fnd = true;
-        else if (fnd && (location[i] == wxT('#'))) return location.Left(i);
+    for (int i = location.length()-1; i >= 0; i--) {
+        if ((location[i] == wxT(':')) && (i != 1 /*win: C:\path*/))
+        {
+            fnd = true;
+        }
+        else if (fnd && (location[i] == wxT('#')))
+        {
+            return location.Left(i);
+        }
     }
+
     return wxEmptyString;
 }
 
@@ -344,11 +350,15 @@ static wxString MakeCorrectPath(const wxString& path)
 {
     wxString p(path);
     wxString r;
-    int i, j, cnt;
+    int i, j;
 
-    cnt = p.length();
+    int cnt = p.length();
+    
     for (i = 0; i < cnt; i++)
-      if (p.GetChar(i) == wxT('\\')) p.GetWritableChar(i) = wxT('/'); // Want to be windows-safe
+    {
+      if (p.GetChar(i) == wxT('\\'))
+        p.GetWritableChar(i) = wxT('/'); // Want to be windows-safe
+    }
 
     if (p.Left(2) == wxT("./")) { p = p.Mid(2); cnt -= 2; }
 
@@ -460,13 +470,12 @@ wxFSFile* wxFileSystem::OpenFile(const wxString& location, int flags)
         return nullptr;
 
     wxString loc = MakeCorrectPath(location);
-    unsigned i, ln;
-    wxChar meta;
+    unsigned i;
     wxFSFile *s = nullptr;
     wxList::compatibility_iterator node;
 
-    ln = loc.length();
-    meta = 0;
+    unsigned int ln = loc.length();
+    wxChar meta = 0;
     for (i = 0; i < ln; i++)
     {
         switch ( loc[i].GetValue() )

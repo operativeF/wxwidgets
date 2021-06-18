@@ -164,7 +164,8 @@ wxString GetPenPattern(const wxPen& pen)
         case wxPenStyle::UserDash:
         {
             s = wxS("stroke-dasharray=\"");
-            wxDash* dashes;
+            // TODO: Return from GetDashes
+            wxDash* dashes{nullptr};
             int count = pen.GetDashes(&dashes);
             if ((dashes != nullptr) && (count > 0))
             {
@@ -1074,6 +1075,7 @@ void wxSVGFileDCImpl::DoGradientFillConcentric(const wxRect& rect,
 {
     NewGraphicsIfNeeded();
 
+    // TODO: Return color with opacity
     float initOpacity;
     float destOpacity;
     wxString initCol = Col2SVG(initialColour, &initOpacity);

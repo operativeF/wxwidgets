@@ -179,29 +179,30 @@ bool wxCrashReportImpl::Generate(int flags, EXCEPTION_POINTERS *ep)
         minidumpExcInfo.ClientPointers = FALSE; // in our own address space
 
         // do generate the dump
-        MINIDUMP_TYPE dumpFlags;
-        if ( flags & wxCRASH_REPORT_LOCALS )
-        {
-            // the only way to get local variables is to dump the entire
-            // process memory space -- but this makes for huge (dozens or
-            // even hundreds of Mb) files
-            dumpFlags = MiniDumpWithFullMemory;
-        }
-        else if ( flags & wxCRASH_REPORT_GLOBALS )
-        {
-            // MiniDumpWriteDump() has the option for dumping just the data
-            // segment which contains all globals -- exactly what we need
-            dumpFlags = MiniDumpWithDataSegs;
-        }
-        else // minimal dump
-        {
-            // the file size is not much bigger than when using MiniDumpNormal
-            // if we use the flags below, but the minidump is much more useful
-            // as it contains the values of many (but not all) local variables
-            dumpFlags = (MINIDUMP_TYPE)(MiniDumpScanMemory
-                                        |MiniDumpWithIndirectlyReferencedMemory
-                                        );
-        }
+        MINIDUMP_TYPE dumpFlags = [flags]() {
+            if ( flags & wxCRASH_REPORT_LOCALS )
+            {
+                // the only way to get local variables is to dump the entire
+                // process memory space -- but this makes for huge (dozens or
+                // even hundreds of Mb) files
+                return MiniDumpWithFullMemory;
+            }
+            else if ( flags & wxCRASH_REPORT_GLOBALS )
+            {
+                // MiniDumpWriteDump() has the option for dumping just the data
+                // segment which contains all globals -- exactly what we need
+                return MiniDumpWithDataSegs;
+            }
+            else // minimal dump
+            {
+                // the file size is not much bigger than when using MiniDumpNormal
+                // if we use the flags below, but the minidump is much more useful
+                // as it contains the values of many (but not all) local variables
+                return (MINIDUMP_TYPE)(MiniDumpScanMemory
+                                       | MiniDumpWithIndirectlyReferencedMemory
+                                       );
+            }
+        }();
 
         if ( !wxDbgHelpDLL::MiniDumpWriteDump
               (

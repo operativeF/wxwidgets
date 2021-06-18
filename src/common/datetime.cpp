@@ -560,22 +560,19 @@ bool wxDateTime::IsLeapYear(int year, wxDateTime::Calendar cal)
 #include "wx/msw/registry.h"
 
 /* static */
-bool wxDateTime::GetFirstWeekDay(wxDateTime::WeekDay *firstDay)
+wxDateTime::WeekDay wxDateTime::GetFirstWeekDay()
 {
-    wxCHECK_MSG( firstDay, false, wxS("output parameter must be non-null") );
     wxRegKey key(wxRegKey::HKCU, "Control Panel\\International");
     wxString val;
 
     if ( key.Exists() && key.HasValue("iFirstDayOfWeek") )
     {
         key.QueryValue("iFirstDayOfWeek", val);
-        *firstDay = wxDateTime::WeekDay((wxAtoi(val) + 1) % 7);
-        return true;
+        return wxDateTime::WeekDay((wxAtoi(val) + 1) % 7);
     }
     else
     {
-        *firstDay = wxDateTime::Sun;
-        return false;
+        return wxDateTime::Sun;
     }
 }
 
@@ -2028,13 +2025,13 @@ wxDateTime::wxDateTime_t wxDateTime::GetWeekOfMonth(wxDateTime::WeekFlags flags,
 
     UseEffectiveWeekDayFlags(flags);
 
-    // TODO: Lambda
     // compute offset of dateFirst from the beginning of the week
-    int firstOffset;
-    if ( flags == Sunday_First )
-        firstOffset = wdFirst - Sun;
-    else
-        firstOffset = wdFirst == Sun ? DAYS_PER_WEEK - 1 : wdFirst - Mon;
+    int firstOffset = [=]() {
+        if ( flags == Sunday_First )
+            return wdFirst - Sun;
+        else
+            return wdFirst == Sun ? DAYS_PER_WEEK - 1 : wdFirst - Mon;
+    }();
 
     return (wxDateTime::wxDateTime_t)((tm.mday - 1 + firstOffset)/7 + 1);
 }
@@ -2162,9 +2159,8 @@ void wxDateTime::UseEffectiveWeekDayFlags(WeekFlags &flags) const
 {
     if ( flags == Default_First )
     {
-        // TODO: Return value
-        WeekDay firstDay;
-        GetFirstWeekDay(&firstDay);
+        WeekDay firstDay = GetFirstWeekDay();
+        
         flags = firstDay == Sun ? Sunday_First : Monday_First;
     }
 }

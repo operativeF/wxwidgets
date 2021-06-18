@@ -1577,15 +1577,13 @@ wxFileConfigGroup::FindEntry(const wxString& name) const
   wxFileConfigEntry *pEntry;
 
   while ( lo < hi ) {
-    size_t i;
-    i = (lo + hi)/2;
+    size_t i = (lo + hi)/2;
     pEntry = m_aEntries[i];
 
-    int res;
     #if wxCONFIG_CASE_SENSITIVE
-      res = pEntry->Name().compare(name);
+      int res = pEntry->Name().compare(name);
     #else
-      res = pEntry->Name().CmpNoCase(name);
+      int res = pEntry->Name().CmpNoCase(name);
     #endif
 
     if ( res > 0 )
@@ -1608,15 +1606,13 @@ wxFileConfigGroup::FindSubgroup(const wxString& name) const
   wxFileConfigGroup *pGroup;
 
   while ( lo < hi ) {
-    size_t i;
-    i = (lo + hi)/2;
+    size_t i = (lo + hi)/2;
     pGroup = m_aSubgroups[i];
 
-    int res;
     #if wxCONFIG_CASE_SENSITIVE
-      res = pGroup->Name().compare(name);
+    int res = pGroup->Name().compare(name);
     #else
-      res = pGroup->Name().CmpNoCase(name);
+    int res = pGroup->Name().CmpNoCase(name);
     #endif
 
     if ( res > 0 )

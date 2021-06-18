@@ -212,7 +212,9 @@ bool wxMaskBase::Create(const wxBitmap& bitmap, int paletteIndex)
     wxCHECK_MSG( pal, false,
                  wxT("Cannot create mask from palette index of a bitmap without palette") );
 
-    unsigned char r,g,b;
+    unsigned char r{};
+    unsigned char g{};
+    unsigned char b{};
     pal->GetRGB(paletteIndex, &r, &g, &b);
 
     return Create(bitmap, wxColour(r, g, b));

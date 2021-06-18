@@ -490,15 +490,16 @@ wxString wxDateTime::Format(const wxString& formatp, const TimeZone& tz) const
 
                         // be careful to not go too far - we risk to leave the
                         // supported range
-                        int year;
-                        if ( mod28 < 10 )
-                        {
-                            year = 1988 + mod28;      // 1988 == 0 (mod 28)
-                        }
-                        else
-                        {
-                            year = 1970 + mod28 - 10; // 1970 == 10 (mod 28)
-                        }
+                        int year = [mod28]() {
+                            if ( mod28 < 10 )
+                            {
+                                return 1988 + mod28;      // 1988 == 0 (mod 28)
+                            }
+                            else
+                            {
+                                return 1970 + mod28 - 10; // 1970 == 10 (mod 28)
+                            }
+                        }();
 
                         const int nCentury = year / 100;
                         const int nCenturyReal = yearReal / 100;
@@ -1997,6 +1998,7 @@ wxDateTime::ParseDate(const wxString& date, wxString::const_iterator *end)
                         // composite (or not) ordinals
                     };
 
+                    // TODO: Algorithm
                     size_t n;
                     for ( n = 0; n < WXSIZEOF(ordinals); n++ )
                     {

@@ -536,8 +536,6 @@ bool wxICOResourceHandler::LoadIcon(wxIcon *icon,
                                     wxBitmapType WXUNUSED(flags),
                                     int desiredWidth, int desiredHeight)
 {
-    HICON hicon;
-
     // do we need the icon of the specific size or would any icon do?
     bool hasSize = desiredWidth != -1 || desiredHeight != -1;
 
@@ -550,16 +548,18 @@ bool wxICOResourceHandler::LoadIcon(wxIcon *icon,
 
     // note that we can't just always call LoadImage() because it seems to do
     // some icon rescaling internally which results in very ugly 16x16 icons
-    if ( hasSize )
-    {
-        hicon = (HICON)::LoadImage(wxGetInstance(), name.t_str(), IMAGE_ICON,
-                                    desiredWidth, desiredHeight,
-                                    LR_DEFAULTCOLOR);
-    }
-    else
-    {
-        hicon = ::LoadIcon(wxGetInstance(), name.t_str());
-    }
+    HICON hicon = [=]() {
+        if ( hasSize )
+        {
+            return (HICON)::LoadImage(wxGetInstance(), name.t_str(), IMAGE_ICON,
+                                        desiredWidth, desiredHeight,
+                                        LR_DEFAULTCOLOR);
+        }
+        else
+        {
+            return ::LoadIcon(wxGetInstance(), name.t_str());
+        }
+    }();
 
     // next check if it's not a standard icon
     if ( !hicon && !hasSize )

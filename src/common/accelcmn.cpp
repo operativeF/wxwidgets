@@ -141,7 +141,7 @@ static int IsNumberedAccelKey(const wxString& str,
     if ( !CompareAccelString(str.Left(lenPrefix), prefix) )
         return 0;
 
-    unsigned long num;
+    unsigned long num{0};
     if ( !str.Mid(lenPrefix).ToULong(&num) )
         return 0;
 
@@ -313,8 +313,9 @@ wxAcceleratorEntry *wxAcceleratorEntry::Create(const wxString& str)
         return nullptr;
     }
 
-    int flags,
-        keyCode;
+    // TODO: Return pair
+    int flags{0};
+    int keyCode{0};
     if ( !ParseAccel(accelStr, &flags, &keyCode) )
         return nullptr;
 
@@ -368,6 +369,7 @@ wxString wxAcceleratorEntry::AsPossiblyLocalizedString(bool localized) const
              << code - WXK_SPECIAL1 + 1;
     else // check the named keys
     {
+        // TODO: Algorithm
         size_t n;
         for ( n = 0; n < WXSIZEOF(wxKeyNames); n++ )
         {

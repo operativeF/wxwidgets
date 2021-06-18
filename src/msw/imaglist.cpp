@@ -449,6 +449,7 @@ wxIcon wxImageList::GetIcon(int index) const
     {
         wxIcon icon;
 
+        // TODO: Return size.
         int iconW, iconH;
         GetSize(index, iconW, iconH);
         icon.InitFromHICON((WXHICON)hIcon, iconW, iconH);

@@ -187,14 +187,13 @@ CPP_METHODDEF(void) wx_ignore_message (j_common_ptr WXUNUSED(cinfo))
 static
 void wx_jpeg_io_src( j_decompress_ptr cinfo, wxInputStream& infile )
 {
-    wx_src_ptr src;
-
     if (cinfo->src == nullptr) {    /* first time for this JPEG object? */
         cinfo->src = (struct jpeg_source_mgr *)
             (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_PERMANENT,
             sizeof(wx_source_mgr));
     }
-    src = (wx_src_ptr) cinfo->src;
+
+    wx_src_ptr src = (wx_src_ptr) cinfo->src;
     src->pub.bytes_in_buffer = 0; /* forces fill_input_buffer on first read */
     src->buffer = new JOCTET[JPEG_IO_BUFFER_SIZE];
     src->pub.next_input_byte = nullptr; /* until buffer loaded */
@@ -211,9 +210,8 @@ static inline void wx_cmyk_to_rgb(unsigned char* rgb, const unsigned char* cmyk)
 {
     int k = 255 - cmyk[3];
     int k2 = cmyk[3];
-    int c;
-
-    c = k + k2 * (255 - cmyk[0]) / 255;
+    int c = k + k2 * (255 - cmyk[0]) / 255;
+    
     rgb[0] = (unsigned char)((c > 255) ? 0 : (255 - c));
 
     c = k + k2 * (255 - cmyk[1]) / 255;

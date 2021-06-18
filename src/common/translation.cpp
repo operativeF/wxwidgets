@@ -1422,8 +1422,7 @@ wxTranslations::~wxTranslations()
     // free catalogs memory
     while ( m_pMsgCat != nullptr )
     {
-        wxMsgCatalog* pTmpCat;
-        pTmpCat = m_pMsgCat;
+        wxMsgCatalog* pTmpCat = m_pMsgCat;
         m_pMsgCat = m_pMsgCat->m_pNext;
         delete pTmpCat;
     }
@@ -1628,11 +1627,10 @@ const wxString *wxTranslations::GetTranslatedString(const wxString& origString,
         return nullptr;
 
     const wxString *trans = nullptr;
-    wxMsgCatalog *pMsgCat;
 
     if ( !domain.empty() )
     {
-        pMsgCat = FindCatalog(domain);
+        wxMsgCatalog* pMsgCat = FindCatalog(domain);
 
         // does the catalog exist?
         if ( pMsgCat != nullptr )
@@ -1641,7 +1639,7 @@ const wxString *wxTranslations::GetTranslatedString(const wxString& origString,
     else
     {
         // search in all domains
-        for ( pMsgCat = m_pMsgCat; pMsgCat != nullptr; pMsgCat = pMsgCat->m_pNext )
+        for ( wxMsgCatalog* pMsgCat = m_pMsgCat; pMsgCat != nullptr; pMsgCat = pMsgCat->m_pNext )
         {
             trans = pMsgCat->GetString(origString, n, context);
             if ( trans != nullptr )   // take the first found
@@ -1673,11 +1671,10 @@ wxString wxTranslations::GetHeaderValue(const wxString& header,
         return wxEmptyString;
 
     const wxString *trans = nullptr;
-    wxMsgCatalog *pMsgCat;
 
     if ( !domain.empty() )
     {
-        pMsgCat = FindCatalog(domain);
+        wxMsgCatalog* pMsgCat = FindCatalog(domain);
 
         // does the catalog exist?
         if ( pMsgCat == nullptr )
@@ -1688,7 +1685,7 @@ wxString wxTranslations::GetHeaderValue(const wxString& header,
     else
     {
         // search in all domains
-        for ( pMsgCat = m_pMsgCat; pMsgCat != nullptr; pMsgCat = pMsgCat->m_pNext )
+        for ( wxMsgCatalog* pMsgCat = m_pMsgCat; pMsgCat != nullptr; pMsgCat = pMsgCat->m_pNext )
         {
             trans = pMsgCat->GetString(wxEmptyString, UINT_MAX);
             if ( trans != nullptr )   // take the first found

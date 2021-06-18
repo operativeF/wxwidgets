@@ -139,9 +139,8 @@ wxImage wxXPMDecoder::ReadFile(wxInputStream& stream)
     /*
      *  Remove comments from the file:
      */
-    char *p, *q;
-    for (p = xpm_buffer; *p != '\0'; p++)
-    {
+    for (char* p = xpm_buffer; *p != '\0'; p++)
+    {        
         if ( (*p == '"') || (*p == '\'') )
         {
             if (*p == '"')
@@ -162,6 +161,7 @@ wxImage wxXPMDecoder::ReadFile(wxInputStream& stream)
         }
         if ( (*p != '/') || (*(p + 1) != '*') )
             continue;
+        char *q;
         for (q = p + 2; *q != '\0'; q++)
         {
             if ( (*q == '*') && (*(q + 1) == '/') )
@@ -177,10 +177,11 @@ wxImage wxXPMDecoder::ReadFile(wxInputStream& stream)
      *  Remove unquoted characters:
      */
     size_t i = 0;
-    for (p = xpm_buffer; *p != '\0'; p++)
+    for (char* p = xpm_buffer; *p != '\0'; p++)
     {
         if ( *p != '"' )
             continue;
+        char *q;
         for (q = p + 1; *q != '\0'; q++)
             if (*q == '"')
                 break;
@@ -198,7 +199,7 @@ wxImage wxXPMDecoder::ReadFile(wxInputStream& stream)
     size_t lines_cnt = 0;
     size_t line;
 
-    for (p = xpm_buffer; *p != '\0'; p++)
+    for (char* p = xpm_buffer; *p != '\0'; p++)
     {
         if ( *p == '\n' )
             lines_cnt++;
@@ -213,7 +214,7 @@ wxImage wxXPMDecoder::ReadFile(wxInputStream& stream)
     xpm_lines = new const char*[lines_cnt + 1];
     xpm_lines[0] = xpm_buffer;
     line = 1;
-    for (p = xpm_buffer; (*p != '\0') && (line < lines_cnt); p++)
+    for (char* p = xpm_buffer; (*p != '\0') && (line < lines_cnt); p++)
     {
         if ( *p == '\n' )
         {

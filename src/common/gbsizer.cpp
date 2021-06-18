@@ -134,6 +134,7 @@ bool wxGBSizerItem::Intersects(const wxGBPosition& pos, const wxGBSpan& span)
 }
 
 
+// TODO: Return wxPoint.
 void wxGBSizerItem::GetEndPos(int& row, int& col)
 {
     row = m_pos.GetRow() + m_span.GetRowspan() - 1;

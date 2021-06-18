@@ -342,8 +342,7 @@ wxFSFile* wxArchiveFSHandler::OpenFile(
     if (!m_cache)
         m_cache = new wxArchiveFSCache;
 
-    const wxArchiveClassFactory *factory;
-    factory = wxArchiveClassFactory::Find(protocol);
+    const wxArchiveClassFactory* factory = wxArchiveClassFactory::Find(protocol);
     if (!factory)
         return nullptr;
 
@@ -405,8 +404,7 @@ wxString wxArchiveFSHandler::FindFirst(const wxString& spec, int flags)
     if (!m_cache)
         m_cache = new wxArchiveFSCache;
 
-    const wxArchiveClassFactory *factory;
-    factory = wxArchiveClassFactory::Find(protocol);
+    const wxArchiveClassFactory* factory = wxArchiveClassFactory::Find(protocol);
     if (!factory)
         return wxEmptyString;
 

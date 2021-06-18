@@ -1625,7 +1625,6 @@ bool wxFileName::GetShortcutTarget(const wxString& shortcutPath,
     wxString path, file, ext;
     wxFileName::SplitPath(shortcutPath, & path, & file, & ext);
 
-    HRESULT hres;
     wxCOMPtr<IShellLink> psl;
     bool success = false;
 
@@ -1637,7 +1636,7 @@ bool wxFileName::GetShortcutTarget(const wxString& shortcutPath,
     wxOleInitializer oleInit;
 
     // create a ShellLink object
-    hres = CoCreateInstance(CLSID_ShellLink, nullptr, CLSCTX_INPROC_SERVER,
+    HRESULT hres = CoCreateInstance(CLSID_ShellLink, nullptr, CLSCTX_INPROC_SERVER,
                             IID_IShellLink, (LPVOID*) &psl);
 
     if (SUCCEEDED(hres))
@@ -2220,9 +2219,6 @@ wxString wxFileName::GetLongPath() const
     // Some other error occured.
     // We need to call FindFirstFile on each component in turn.
 
-    WIN32_FIND_DATA findFileData;
-    HANDLE hFind;
-
     if ( HasVolume() )
         pathOut = GetVolume() +
                   GetVolumeSeparator(wxPATH_DOS) +
@@ -2258,7 +2254,9 @@ wxString wxFileName::GetLongPath() const
             continue;
         }
 
-        hFind = ::FindFirstFile(tmpPath.t_str(), &findFileData);
+        WIN32_FIND_DATA findFileData;
+
+        HANDLE hFind = ::FindFirstFile(tmpPath.t_str(), &findFileData);
         if (hFind == INVALID_HANDLE_VALUE)
         {
             // Error: most likely reason is that path doesn't exist, so
@@ -2462,20 +2460,22 @@ void wxFileName::SplitPath(const wxString& fullpathWithVolume,
         // take all characters starting from the one after the last slash and
         // up to, but excluding, the last dot
         size_t nStart = posLastSlash == wxString::npos ? 0 : posLastSlash + 1;
-        size_t count;
-        if ( posLastDot == wxString::npos )
-        {
-            // take all until the end
-            count = wxString::npos;
-        }
-        else if ( posLastSlash == wxString::npos )
-        {
-            count = posLastDot;
-        }
-        else // have both dot and slash
-        {
-            count = posLastDot - posLastSlash - 1;
-        }
+        
+        size_t count = [posLastDot, posLastSlash]() {
+            if ( posLastDot == wxString::npos )
+            {
+                // take all until the end
+                return wxString::npos;
+            }
+            else if ( posLastSlash == wxString::npos )
+            {
+                return posLastDot;
+            }
+            else // have both dot and slash
+            {
+                return posLastDot - posLastSlash - 1;
+            }
+        }();
 
         *pstrName = fullpath.Mid(nStart, count);
     }

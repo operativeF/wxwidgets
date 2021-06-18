@@ -253,21 +253,19 @@ bool wxAppConsoleBase::OnInit()
     OnInitCmdLine(parser);
 
     // TODO: Lambda
-    bool cont;
-    switch ( parser.Parse(false /* don't show usage */) )
-    {
-        case -1:
-            cont = OnCmdLineHelp(parser);
-            break;
+    bool cont = [&parser, this]() {
+        switch ( parser.Parse(false /* don't show usage */) )
+        {
+            case -1:
+                return OnCmdLineHelp(parser);
 
-        case 0:
-            cont = OnCmdLineParsed(parser);
-            break;
+            case 0:
+                return OnCmdLineParsed(parser);
 
-        default:
-            cont = OnCmdLineError(parser);
-            break;
-    }
+            default:
+                return OnCmdLineError(parser);
+        }
+    }();
 
     if ( !cont )
         return false;

@@ -205,9 +205,7 @@ bool wxCalendarCtrlBase::WeekStartsOnMonday() const
         // Neither flag was explicitly given, let's make a best guess
         // based on locale and/or OS settings.
 
-        wxDateTime::WeekDay firstDay;
-        wxDateTime::GetFirstWeekDay(&firstDay);
-        return firstDay == wxDateTime::Mon;
+        return wxDateTime::GetFirstWeekDay() == wxDateTime::Mon;
     }
 }
 

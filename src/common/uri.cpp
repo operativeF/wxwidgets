@@ -888,8 +888,8 @@ bool wxURI::ParseIPv6address(const char*& uri)
     //               / [ *5( h16 ":" ) h16 ] "::"              h16
     //               / [ *6( h16 ":" ) h16 ] "::"
 
-    size_t numPrefix = 0,
-              maxPostfix;
+    size_t numPrefix = 0;
+    size_t maxPostfix = 0;
 
     bool bEndHex = false;
 

@@ -94,6 +94,7 @@ wxNumValidatorBase::GetCurrentValueAndInsertionPoint(wxString& val,
     val = control->GetValue();
     pos = control->GetInsertionPoint();
 
+    // TODO: Return pair
     long selFrom, selTo;
     control->GetSelection(&selFrom, &selTo);
 

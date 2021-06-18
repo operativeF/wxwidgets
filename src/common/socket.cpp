@@ -639,7 +639,7 @@ const wxSockAddressImpl& wxSocketImpl::GetLocal()
 
 int wxSocketImpl::RecvStream(void *buffer, int size)
 {
-    int ret;
+    int ret{0};
     DO_WHILE_EINTR( ret, recv(m_fd, static_cast<char *>(buffer), size, 0) );
 
     if ( !ret )
@@ -1258,7 +1258,7 @@ wxSocketBase& wxSocketBase::Unread(const void *buffer, wxUint32 nbytes)
 wxSocketBase& wxSocketBase::Discard()
 {
     char *buffer = new char[MAX_DISCARD_SIZE];
-    wxUint32 ret;
+    wxUint32 ret{0};
     wxUint32 total = 0;
 
     wxSocketReadGuard read(this);
@@ -1433,16 +1433,18 @@ wxSocketBase::DoWait(long timeout, wxSocketEventFlags flags)
     // Get the active event loop which we'll use for the message dispatching
     // when running in the main thread unless this was explicitly disabled by
     // setting wxSOCKET_BLOCK flag
-    wxEventLoopBase *eventLoop;
-    if ( !(m_flags & wxSOCKET_BLOCK) && wxIsMainThread() )
+    wxEventLoopBase* eventLoop = [=]()
     {
-        eventLoop = wxEventLoop::GetActive();
-    }
-    else // in worker thread
-    {
-        // We never dispatch messages from threads other than the main one.
-        eventLoop = nullptr;
-    }
+        if ( !(m_flags & wxSOCKET_BLOCK) && wxIsMainThread() )
+        {
+            return wxEventLoop::GetActive();
+        }
+        else // in worker thread
+        {
+            // We never dispatch messages from threads other than the main one.
+            return static_cast<wxEventLoopBase*>(nullptr);
+        }
+    }();
 
     // Make sure the events we're interested in are enabled before waiting for
     // them: this is really necessary here as otherwise this could happen:
@@ -1603,9 +1605,7 @@ bool wxSocketBase::GetLocal(wxSockAddress& addr) const
 
 void wxSocketBase::SaveState()
 {
-    wxSocketState *state;
-
-    state = new wxSocketState();
+    wxSocketState *state = new wxSocketState();
 
     state->m_flags      = m_flags;
     state->m_notify     = m_notify;
@@ -1617,14 +1617,11 @@ void wxSocketBase::SaveState()
 
 void wxSocketBase::RestoreState()
 {
-    wxList::compatibility_iterator node;
-    wxSocketState *state;
-
-    node = m_states.GetLast();
+    wxList::compatibility_iterator node = m_states.GetLast();
     if (!node)
         return;
 
-    state = (wxSocketState *)node->GetData();
+    wxSocketState* state = (wxSocketState *)node->GetData();
 
     m_flags      = state->m_flags;
     m_notify     = state->m_notify;
@@ -1768,9 +1765,7 @@ void wxSocketBase::Pushback(const void *buffer, wxUint32 size)
         m_unread = malloc(size);
     else
     {
-        void *tmp;
-
-        tmp = malloc(m_unrd_size + size);
+        void* tmp = malloc(m_unrd_size + size);
         memcpy((char *)tmp + size, m_unread, m_unrd_size);
         free(m_unread);
 

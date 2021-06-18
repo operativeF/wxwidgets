@@ -823,11 +823,9 @@ bool wxShell(const wxString& command)
 // Shutdown or reboot the PC
 bool wxShutdown(int flags)
 {
-    bool bOK = true;
-
     // Get a token for this process.
     HANDLE hToken;
-    bOK = ::OpenProcessToken(GetCurrentProcess(),
+    bool bOK = ::OpenProcessToken(GetCurrentProcess(),
                                 TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY,
                                 &hToken) != 0;
     if ( bOK )

@@ -552,6 +552,7 @@ wxMenuItem *wxMenuBase::FindChildItem(int itemid, size_t *ppos) const
     wxMenuItem *item = nullptr;
     wxMenuItemList::compatibility_iterator node = GetMenuItems().GetFirst();
 
+    // TODO: Algorithm
     size_t pos;
     for ( pos = 0; node; pos++ )
     {

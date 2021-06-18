@@ -85,12 +85,11 @@ void FlipTGA(unsigned char* imageData, int width, int height, short pixelSize)
     unsigned char *line1 = imageData;
     unsigned char *line2 = &imageData[lineLength * (height - 1)];
 
-    unsigned char temp;
     for ( ; line1 < line2; line2 -= (lineLength * 2))
     {
         for (int index = 0; index < lineLength; line1++, line2++, index++)
         {
-            temp = *line1;
+            unsigned char temp = *line1;
             *line1 = *line2;
             *line2 = temp;
         }
@@ -112,8 +111,7 @@ int DecodeRLE(unsigned char* imageData, unsigned long imageSize,
         if ( ch == wxEOF )
             return wxTGA_IOERR;
 
-        unsigned char current;
-        current = ch;
+        unsigned char current = ch;
 
         // RLE packet.
         if ( current & 0x80 )
@@ -452,8 +450,7 @@ int ReadTGA(wxImage* image, wxInputStream& stream)
                 {
                     for (unsigned long index = 0; index < imageSize; index += pixelSize)
                     {
-                        unsigned char temp;
-                        temp = (imageData[index + 1] & 0x7c) << 1;
+                        unsigned char temp = (imageData[index + 1] & 0x7c) << 1;
                         temp |= temp >> 5;
                         *(dst++) = temp;
 
@@ -661,8 +658,7 @@ int ReadTGA(wxImage* image, wxInputStream& stream)
                 {
                     for (unsigned long index = 0; index < imageSize; index += pixelSize)
                     {
-                        unsigned char temp;
-                        temp = (imageData[index + 1] & 0x7c) << 1;
+                        unsigned char temp = (imageData[index + 1] & 0x7c) << 1;
                         temp |= temp >> 5;
                         *(dst++) = temp;
 

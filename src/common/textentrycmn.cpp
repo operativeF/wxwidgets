@@ -271,6 +271,7 @@ void wxTextEntryBase::Replace(long from, long to, const wxString& value)
 
 bool wxTextEntryBase::HasSelection() const
 {
+    // TODO: Return pair
     long from, to;
     GetSelection(&from, &to);
 

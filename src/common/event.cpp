@@ -1029,8 +1029,7 @@ void wxEventHashTable::InitHashTable()
     }
 
     // Let's free some memory.
-    size_t i;
-    for(i = 0; i < m_size; i++)
+    for(size_t i = 0; i < m_size; i++)
     {
         EventTypeTablePointer  eTTnode = m_eventTypeTable[i];
         if (eTTnode)

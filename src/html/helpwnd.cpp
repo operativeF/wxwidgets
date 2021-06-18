@@ -780,7 +780,7 @@ void wxHtmlHelpWindow::DisplayIndexItem(const wxHtmlHelpMergedIndexItem *it)
 
         // more pages associated with this index item -- let the user choose
         // which one she/he wants from a list:
-        wxArrayString arr;
+        std::vector<wxString> arr;
         size_t len = it->items.size();
         for (size_t i = 0; i < len; i++)
         {

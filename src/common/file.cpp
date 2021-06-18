@@ -72,7 +72,7 @@
 
 // Windows compilers don't have these constants
 #ifndef W_OK
-    enum
+    enum class wxFilePermissions
     {
         F_OK = 0,   // test for existence
         X_OK = 1,   //          execute permission
@@ -114,26 +114,25 @@ bool wxFile::Exists(const wxString& name)
 
 bool wxFile::Access(const wxString& name, OpenMode mode)
 {
-    int how;
-
-    switch ( mode )
+    int how = [mode]()
     {
-        default:
-            wxFAIL_MSG(wxT("bad wxFile::Access mode parameter."));
-            [[fallthrough]];
+        switch ( mode )
+        {
+            default:
+                wxFAIL_MSG(wxT("bad wxFile::Access mode parameter."));
+                [[fallthrough]];
 
-        case read:
-            how = R_OK;
-            break;
+            case read:
+                return static_cast<int>(wxFilePermissions::R_OK);
 
-        case write:
-            how = W_OK;
-            break;
+            case write:
+                return static_cast<int>(wxFilePermissions::W_OK);
 
-        case read_write:
-            how = R_OK | W_OK;
-            break;
-    }
+            case read_write:
+                return static_cast<int>(wxFilePermissions::R_OK) |
+                       static_cast<int>(wxFilePermissions::W_OK);
+        }
+    }();
 
     return wxAccess(name, how) == 0;
 }
@@ -418,23 +417,23 @@ wxFileOffset wxFile::Seek(wxFileOffset ofs, wxSeekMode mode)
                  wxInvalidOffset,
                  wxT("invalid absolute file offset") );
 
-    int origin;
-    switch ( mode ) {
+    int origin = [mode]() {
+        switch ( mode ) {
         default:
             wxFAIL_MSG(wxT("unknown seek origin"));
             [[fallthrough]];
+
         case wxSeekMode::FromStart:
-            origin = SEEK_SET;
-            break;
+            return SEEK_SET;
 
         case wxSeekMode::FromCurrent:
-            origin = SEEK_CUR;
+            return SEEK_CUR;
             break;
 
         case wxSeekMode::FromEnd:
-            origin = SEEK_END;
-            break;
-    }
+            return SEEK_END;
+        }
+    }();
 
     const wxFileOffset iRc = wxSeek(m_fd, ofs, origin);
     if ( CheckForError(iRc) )
