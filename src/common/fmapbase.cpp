@@ -46,12 +46,16 @@
     #include "wx/memconf.h"
 #endif
 
+#include <array>
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
 
+static constexpr auto NumberOfEncodings = 83;
+
 // encodings supported by GetEncodingDescription
-static constexpr wxFontEncoding gs_encodings[] =
+static constexpr std::array<wxFontEncoding, NumberOfEncodings> gs_encodings =
 {
     wxFONTENCODING_ISO8859_1,
     wxFONTENCODING_ISO8859_2,
@@ -140,7 +144,7 @@ static constexpr wxFontEncoding gs_encodings[] =
 };
 
 // the descriptions for them
-static const char* const gs_encodingDescs[] =
+static constexpr std::array<char*, NumberOfEncodings> gs_encodingDescs =
 {
     wxTRANSLATE( "Western European (ISO-8859-1)" ),
     wxTRANSLATE( "Central European (ISO-8859-2)" ),
@@ -236,8 +240,8 @@ static const char* const gs_encodingDescs[] =
 };
 
 // and the internal names (these are not translated on purpose!)
-static const wxChar* const gs_encodingNames[][9] =
-{
+static constexpr std::array<wxChar*[9], NumberOfEncodings> gs_encodingNames =
+{{
     // names from the columns correspond to these OS:
     //      Linux        Solaris and IRIX       HP-UX             AIX
     { wxT("ISO-8859-1"),  wxT("ISO8859-1"),  wxT("iso88591"),  wxT("8859-1"), wxT("iso_8859_1"), nullptr },
@@ -344,10 +348,7 @@ static const wxChar* const gs_encodingNames[][9] =
     { wxT( "MacCeltic" ), nullptr },
     { wxT( "MacGaelic" ), nullptr },
     { wxT( "MacKeyboardGlyphs" ), nullptr }
-};
-
-wxCOMPILE_TIME_ASSERT( WXSIZEOF(gs_encodingDescs) == WXSIZEOF(gs_encodings), EncodingsArraysNotInSync );
-wxCOMPILE_TIME_ASSERT( WXSIZEOF(gs_encodingNames) == WXSIZEOF(gs_encodings), EncodingsArraysNotInSync );
+}};
 
 // ----------------------------------------------------------------------------
 // private classes
@@ -631,9 +632,9 @@ wxFontMapperBase::NonInteractiveCharsetToEncoding(const wxString& charset)
 
         for ( size_t i = 0; i < WXSIZEOF(gs_encodingNames); ++i )
         {
-            for ( const wxChar* const* encName = gs_encodingNames[i]; *encName; ++encName )
+            for ( auto encName : gs_encodingNames[i] )
             {
-                if ( cs.CmpNoCase(*encName) == 0 )
+                if ( cs.CmpNoCase(encName) == 0 )
                     return gs_encodings[i];
             }
         }
