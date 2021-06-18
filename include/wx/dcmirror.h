@@ -58,12 +58,12 @@ public:
     wxSize GetPPI() const override { return m_dc.GetPPI(); }
     bool IsOk() const override { return m_dc.IsOk(); }
     void SetMapMode(wxMappingMode mode) override { m_dc.SetMapMode(mode); }
-    void SetUserScale(double x, double y) override
-        { m_dc.SetUserScale(GetX(x, y), GetY(x, y)); }
-    void SetLogicalOrigin(wxCoord x, wxCoord y) override
-        { m_dc.SetLogicalOrigin(GetX(x, y), GetY(x, y)); }
-    void SetDeviceOrigin(wxCoord x, wxCoord y) override
-        { m_dc.SetDeviceOrigin(GetX(x, y), GetY(x, y)); }
+    void SetUserScale(wxScale userScale) override
+        { m_dc.SetUserScale({GetX(userScale.x, userScale.y), GetY(userScale.x, userScale.y)}); }
+    void SetLogicalOrigin(wxPoint logicalOrigin) override
+        { m_dc.SetLogicalOrigin({GetX(logicalOrigin.x, logicalOrigin.y), GetY(logicalOrigin.x, logicalOrigin.y)}); }
+    void SetDeviceOrigin(wxPoint deviceOrigin) override
+        { m_dc.SetDeviceOrigin({GetX(deviceOrigin.x, deviceOrigin.y), GetY(deviceOrigin.x, deviceOrigin.y)}); }
     void SetAxisOrientation(bool xLeftRight, bool yBottomUp) override
         { m_dc.SetAxisOrientation(GetX(xLeftRight, yBottomUp),
                                   GetY(xLeftRight, yBottomUp)); }

@@ -623,14 +623,12 @@ void wxHtmlImageCell::Draw(wxDC& dc, int x, int y,
         if (m_Height != m_bitmap->GetScaledHeight())
             imageScaleY = (double) m_Height / (double) m_bitmap->GetScaledHeight();
 
-        // TODO: Return value.
-        double us_x, us_y;
-        dc.GetUserScale(&us_x, &us_y);
-        dc.SetUserScale(us_x * imageScaleX, us_y * imageScaleY);
+        wxScale userScale = dc.GetUserScale();
+        dc.SetUserScale({ userScale.x * imageScaleX, userScale.y * imageScaleY });
 
         dc.DrawBitmap(*m_bitmap, (int) ((x + m_PosX) / (imageScaleX)),
                                  (int) ((y + m_PosY) / (imageScaleY)), true);
-        dc.SetUserScale(us_x, us_y);
+        dc.SetUserScale(userScale);
     }
 }
 

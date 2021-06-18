@@ -3182,7 +3182,7 @@ void wxListCtrl::OnPaint(wxPaintEvent& event)
     wxListCtrlBase::OnPaint(event);
 
     // Reset the device origin since it may have been set
-    dc.SetDeviceOrigin(0, 0);
+    dc.SetDeviceOrigin({0, 0});
 
     wxPen pen(wxSystemSettings::GetColour(wxSYS_COLOUR_3DLIGHT));
     dc.SetPen(pen);

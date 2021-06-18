@@ -1817,7 +1817,7 @@ wxBitmap wxPropertyGrid::RescaleBitmap(const wxBitmap& srcBmp,
 #endif // __WXMSW__ || __WXOSX__
     {
         wxMemoryDC dc(dstBmp);
-        dc.SetUserScale(scaleX, scaleY);
+        dc.SetUserScale({scaleX, scaleY});
         dc.DrawBitmap(srcBmp, 0, 0);
     }
 #endif // wxUSE_IMAGE/!wxUSE_IMAGE

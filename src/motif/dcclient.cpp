@@ -176,7 +176,7 @@ wxWindowDCImpl::wxWindowDCImpl(wxDC *owner, wxWindow *window)
     gcvalues.subwindow_mode = IncludeInferiors;
     gcvalues.line_width = 1;
 #if !wxMOTIF_NEW_FONT_HANDLING
-    WXFontStructPtr pFontStruct = m_font.GetFontStruct(m_userScaleY*m_logicalScaleY, m_display);
+    WXFontStructPtr pFontStruct = m_font.GetFontStruct(m_userScale.y * m_logicalScale.y, m_display);
     gcvalues.font = ((XFontStruct*)pFontStruct)->fid;
 #endif
     m_gc = (WXGC) XCreateGC (display, RootWindow (display, DefaultScreen (display)),
@@ -1043,7 +1043,7 @@ void wxWindowDCImpl::DoDrawText( const wxString &text, wxCoord x, wxCoord y )
     }
 
     if (m_font.IsOk())
-        wxGetTextExtent (m_display, m_font, m_userScaleY * m_logicalScaleY,
+        wxGetTextExtent (m_display, m_font, m_userScale.y * m_logicalScale.y,
                          text, &cx, &cy, &ascent, NULL);
 
     // First draw a rectangle representing the text background, if a text
@@ -1121,7 +1121,7 @@ void wxWindowDCImpl::DoDrawText( const wxString &text, wxCoord x, wxCoord y )
     else
 #endif // 0
 #if wxMOTIF_NEW_FONT_HANDLING
-        XFontSet fset = (XFontSet) m_font.GetFontSet (m_userScaleY * m_logicalScaleY, m_display);
+        XFontSet fset = (XFontSet) m_font.GetFontSet (m_userScale.y * m_logicalScale.y, m_display);
         XmbDrawString((Display*) m_display, (Pixmap) m_pixmap, fset, (GC) m_gc, XLOG2DEV (x), YLOG2DEV (y) + ascent, text, slen);
 #else
         XDrawString((Display*) m_display, (Pixmap) m_pixmap, (GC) m_gc, XLOG2DEV (x), YLOG2DEV (y) + ascent, text, slen);
@@ -1196,7 +1196,7 @@ void wxWindowDCImpl::DoDrawRotatedText( const wxString &text, wxCoord x, wxCoord
     int ascent = 0;
 
     if (m_font.IsOk())
-        wxGetTextExtent (m_display, m_font, m_userScaleY * m_logicalScaleY,
+        wxGetTextExtent (m_display, m_font, m_userScale.y * m_logicalScale.y,
                          text, &cx, &cy, &ascent, NULL);
 
     wxBitmap src(cx, cy);
@@ -1317,7 +1317,7 @@ void wxWindowDCImpl::DoGetTextExtent( const wxString &string, wxCoord *width, wx
         return;
     }
 
-    wxGetTextExtent(m_display, *theFont, m_userScaleY * m_logicalScaleY,
+    wxGetTextExtent(m_display, *theFont, m_userScale.y * m_logicalScale.y,
                     string, width, height, NULL, descent);
 
     if (width) *width = XDEV2LOGREL (*width);
@@ -1333,7 +1333,7 @@ wxCoord wxWindowDCImpl::GetCharWidth() const
 
     int width;
 
-    wxGetTextExtent (m_display, m_font, m_userScaleY * m_logicalScaleY,
+    wxGetTextExtent (m_display, m_font, m_userScale.y * m_logicalScale.y,
                      "x", &width, NULL, NULL, NULL);
 
     return XDEV2LOGREL(width);
@@ -1346,7 +1346,7 @@ wxCoord wxWindowDCImpl::GetCharHeight() const
 
     int height;
 
-    wxGetTextExtent (m_display, m_font, m_userScaleY * m_logicalScaleY,
+    wxGetTextExtent (m_display, m_font, m_userScale.y * m_logicalScale.y,
                      "x", NULL, &height, NULL, NULL);
 
     return XDEV2LOGREL(height);
@@ -1412,7 +1412,7 @@ void wxWindowDCImpl::SetFont( const wxFont &font )
     }
 
 #if !wxMOTIF_NEW_FONT_HANDLING
-    WXFontStructPtr pFontStruct = m_font.GetFontStruct(m_userScaleY*m_logicalScaleY, m_display);
+    WXFontStructPtr pFontStruct = m_font.GetFontStruct(m_userScale.y * m_logicalScale.y, m_display);
 
     Font fontId = ((XFontStruct*)pFontStruct)->fid;
     XSetFont ((Display*) m_display, (GC) m_gc, fontId);

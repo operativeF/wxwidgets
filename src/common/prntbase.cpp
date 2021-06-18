@@ -666,8 +666,8 @@ void wxPrintout::FitThisSizeToPaper(const wxSize& imageSize)
 
     double actualScale = wxMin(scaleX, scaleY);
 
-    m_printoutDC->SetUserScale(actualScale, actualScale);
-    m_printoutDC->SetDeviceOrigin(0, 0);
+    m_printoutDC->SetUserScale(actualScale);
+    m_printoutDC->SetDeviceOrigin({0, 0});
 
     wxRect logicalPaperRect = GetLogicalPaperRect();
     SetLogicalOrigin(logicalPaperRect.x, logicalPaperRect.y);
@@ -687,8 +687,8 @@ void wxPrintout::FitThisSizeToPage(const wxSize& imageSize)
 
     double actualScale = wxMin(scaleX, scaleY);
 
-    m_printoutDC->SetUserScale(actualScale, actualScale);
-    m_printoutDC->SetDeviceOrigin(0, 0);
+    m_printoutDC->SetUserScale(actualScale);
+    m_printoutDC->SetDeviceOrigin({0, 0});
 }
 
 void wxPrintout::FitThisSizeToPageMargins(const wxSize& imageSize, const wxPageSetupDialogData& pageSetupData)
@@ -720,8 +720,8 @@ void wxPrintout::FitThisSizeToPageMargins(const wxSize& imageSize, const wxPageS
 
     double actualScale = wxMin(scaleX, scaleY);
 
-    m_printoutDC->SetUserScale(actualScale, actualScale);
-    m_printoutDC->SetDeviceOrigin(0, 0);
+    m_printoutDC->SetUserScale(actualScale);
+    m_printoutDC->SetDeviceOrigin({0, 0});
 
     wxRect logicalPageMarginsRect = GetLogicalPageMarginsRect(pageSetupData);
     SetLogicalOrigin(logicalPageMarginsRect.x, logicalPageMarginsRect.y);
@@ -755,8 +755,8 @@ void wxPrintout::MapScreenSizeToPage()
     GetPageSizePixels(&pageSizePixelsX, &pageSizePixelsY);
     double userScaleX = (double(ppiPrinterX) * printout_size.x) / (double(ppiScreenX) * pageSizePixelsX);
     double userScaleY = (double(ppiPrinterY) * printout_size.y) / (double(ppiScreenY) * pageSizePixelsY);
-    m_printoutDC->SetUserScale(userScaleX, userScaleY);
-    m_printoutDC->SetDeviceOrigin(0, 0);
+    m_printoutDC->SetUserScale({ userScaleX, userScaleY });
+    m_printoutDC->SetDeviceOrigin({ 0, 0 });
 }
 
 void wxPrintout::MapScreenSizeToPageMargins(const wxPageSetupDialogData& pageSetupData)
@@ -784,8 +784,8 @@ void wxPrintout::MapScreenSizeToDevice()
     double userScaleX = double(po_size.x) / pageSizePixelsX;
     double userScaleY = double(po_size.y) / pageSizePixelsY;
 
-    m_printoutDC->SetUserScale(userScaleX, userScaleY);
-    m_printoutDC->SetDeviceOrigin(0, 0);
+    m_printoutDC->SetUserScale({ userScaleX, userScaleY });
+    m_printoutDC->SetDeviceOrigin({0, 0});
 }
 
 wxRect wxPrintout::GetLogicalPaperRect() const
@@ -880,17 +880,17 @@ void wxPrintout::SetLogicalOrigin(wxCoord x, wxCoord y)
 {
     // Set the device origin by specifying a point in logical coordinates.
     m_printoutDC->SetDeviceOrigin(
-        m_printoutDC->LogicalToDeviceX(x),
-        m_printoutDC->LogicalToDeviceY(y) );
+        { m_printoutDC->LogicalToDeviceX(x),
+        m_printoutDC->LogicalToDeviceY(y) });
 }
 
 void wxPrintout::OffsetLogicalOrigin(wxCoord xoff, wxCoord yoff)
 {
     // Offset the device origin by a specified distance in device coordinates.
     wxPoint dev_org = m_printoutDC->GetDeviceOrigin();
-    m_printoutDC->SetDeviceOrigin(
+    m_printoutDC->SetDeviceOrigin({
         dev_org.x + m_printoutDC->LogicalToDeviceXRel(xoff),
-        dev_org.y + m_printoutDC->LogicalToDeviceYRel(yoff) );
+        dev_org.y + m_printoutDC->LogicalToDeviceYRel(yoff) });
 }
 
 

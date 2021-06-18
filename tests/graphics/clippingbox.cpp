@@ -764,10 +764,10 @@ void ClippingBoxTestCaseDCBase::InitialState()
 void ClippingBoxTestCaseDCBase::InitialStateWithTransformedDC()
 {
     // Initial clipping box with transformed DC.
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-15, -20);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -15, -20 });
     m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
     CheckClipBox(m_dc->DeviceToLogicalX(0), m_dc->DeviceToLogicalY(0),
@@ -934,10 +934,10 @@ void ClippingBoxTestCaseDCBase::OneRegionOverTransformedDC()
     // with applied some transformations.
     wxRect r1(-10, -20, 80, 75);
 
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-15, -20);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -15, -20 });
     m_dc->SetClippingRegion(r1);
     m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
     m_dc->Clear();
@@ -961,16 +961,16 @@ void ClippingBoxTestCaseDCBase::OneRegionAndDCTransformation()
     // and applying DC transformation afterwards.
     wxRect r(-10, -21, 26, 21);
 
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-16, -21);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -16, -21 });
 
     m_dc->SetClippingRegion(r);
     m_dc->SetBackground(wxBrush(s_tmpColour, wxBrushStyle::Solid));
     m_dc->Clear();
 
-    m_dc->SetDeviceOrigin(16, 24);
+    m_dc->SetDeviceOrigin({ 16, 24 });
 
     // This should entirely overpaint previous clipping area.
     wxCoord x, y, w, h;
@@ -1088,10 +1088,10 @@ void ClippingBoxTestCaseDCBase::OneDevRegion()
     const int w = 80;
     const int h = 75;
 
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-15, -20);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -15, -20 });
     wxRegion reg(x, y, w, h);
     m_dc->SetDeviceClippingRegion(reg);
     m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
@@ -1108,10 +1108,10 @@ void ClippingBoxTestCaseDCBase::OneLargeDevRegion()
     // Setting one clipping region in device coordinates larger
     // then transformed DC surface.
     // Final clipping box should be limited to the DC extents.
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-15, -20);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -15, -20 });
     wxRegion reg(-10, -20, s_dcSize.GetWidth()+30, s_dcSize.GetHeight()+50);
     m_dc->SetDeviceClippingRegion(reg);
     m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
@@ -1128,10 +1128,10 @@ void ClippingBoxTestCaseDCBase::OneOuterDevRegion()
     // Setting one clipping region in device coordinates
     // entirely outside transformed DC surface.
     // Final clipping box should be empty.
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-15, -20);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -15, -20 });
     wxRegion reg(200, 80, 20, 40);
     m_dc->SetDeviceClippingRegion(reg);
     m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
@@ -1154,10 +1154,10 @@ void ClippingBoxTestCaseDCBase::OneDevRegionNegDim()
     wxRect r = r1.Intersect(r2);
     wxASSERT( !r.IsEmpty() );
 
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-15, -20);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -15, -20 });
     wxRegion reg(x, y, w, h);
     m_dc->SetDeviceClippingRegion(reg);
     m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
@@ -1196,10 +1196,10 @@ void ClippingBoxTestCaseDCBase::OneDevRegionNonRect()
     if ( dcRef != &memDC )
         delete dcRef;
 
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-15, -20);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -15, -20 });
     wxRegion r(WXSIZEOF(poly), poly);
     m_dc->SetDeviceClippingRegion(r);
     m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
@@ -1223,10 +1223,10 @@ void ClippingBoxTestCaseDCBase::OneDevRegionAndReset()
     // Setting one clipping region in device coordinates
     // and next destroy it.
     // Final clipping box should be the same as DC surface.
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-15, -20);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -15, -20 });
     wxRegion reg(10, 20, 80, 75);
     m_dc->SetDeviceClippingRegion(reg);
     m_dc->DestroyClippingRegion();
@@ -1244,10 +1244,10 @@ void ClippingBoxTestCaseDCBase::OneDevRegionAndEmpty()
     // Setting one clipping region in device coordinates
     // and next an empty region.
     // Final clipping box should empty.
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-15, -20);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -15, -20 });
     wxRegion reg1(10, 20, 80, 75);
     m_dc->SetDeviceClippingRegion(reg1);
     wxRegion reg2(0, 0, 0, 0);
@@ -1264,10 +1264,10 @@ void ClippingBoxTestCaseDCBase::OneDevRegionOverTransformedDC()
     // DC area with applied some transformations.
     wxRect r1(8, 15, 60, 75);
 
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-15, -20);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -15, -20 });
     wxRegion reg(r1);
     m_dc->SetDeviceClippingRegion(reg);
     m_dc->SetBackground(wxBrush(s_fgColour, wxBrushStyle::Solid));
@@ -1289,17 +1289,17 @@ void ClippingBoxTestCaseDCBase::OneDevRegionAndDCTransformation()
     // DC area and apply DC transformation afterwards.
     wxRect r1(8, 15, 60, 75);
 
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-16, -21);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -16, -21 });
 
     wxRegion reg(r1);
     m_dc->SetDeviceClippingRegion(reg);
     m_dc->SetBackground(wxBrush(s_tmpColour, wxBrushStyle::Solid));
     m_dc->Clear();
 
-    m_dc->SetDeviceOrigin(16, 24);
+    m_dc->SetDeviceOrigin({ 16, 24 });
 
     // This should entirely overpaint previous clipping area.
     wxCoord x, y, w, h;
@@ -1328,10 +1328,10 @@ void ClippingBoxTestCaseDCBase::TwoDevRegionsOverlapping()
     wxRect r = r1.Intersect(r2);
     wxASSERT( !r.IsEmpty() );
 
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-15, -20);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -15, -20 });
     wxRegion reg1(r1);
     m_dc->SetDeviceClippingRegion(reg1);
     wxRegion reg2(r2);
@@ -1365,10 +1365,10 @@ void ClippingBoxTestCaseDCBase::TwoDevRegionsOverlappingNegDim()
     wxRect r = r1.Intersect(r2);
     wxASSERT( !r.IsEmpty() );
 
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-15, -20);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -15, -20 });
     wxRegion reg1(x1, y1, w1, h1);
     m_dc->SetDeviceClippingRegion(reg1);
     wxRegion reg2(x2, y2, w2, h2);
@@ -1391,10 +1391,10 @@ void ClippingBoxTestCaseDCBase::TwoDevRegionsNonOverlapping()
     wxRect r2(50, 60, 50, 40);
     wxASSERT( !r1.Intersects(r2) );
 
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-15, -20);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -15, -20 });
     wxRegion reg1(r1);
     m_dc->SetDeviceClippingRegion(reg1);
     wxRegion reg2(r2);
@@ -1423,10 +1423,10 @@ void ClippingBoxTestCaseDCBase::TwoDevRegionsNonOverlappingNegDim()
     wxRect r2(x2, y2, w2, h2);
     wxASSERT( !r1.Intersects(r2) );
 
-    m_dc->SetDeviceOrigin(10, 15);
-    m_dc->SetUserScale(0.5, 1.5);
-    m_dc->SetLogicalScale(4.0, 2.0);
-    m_dc->SetLogicalOrigin(-15, -20);
+    m_dc->SetDeviceOrigin({ 10, 15 });
+    m_dc->SetUserScale({ 0.5, 1.5 });
+    m_dc->SetLogicalScale({ 4.0, 2.0 });
+    m_dc->SetLogicalOrigin({ -15, -20 });
     wxRegion reg1(x1, y1, w1, h1);
     m_dc->SetDeviceClippingRegion(reg1);
     wxRegion reg2(x2, y2, w2, h2);

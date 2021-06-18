@@ -2885,17 +2885,16 @@ wxGenericTreeCtrl::PaintLevel(wxGenericTreeItem *item,
 
                 // Only draw the portion of the line that is visible, in case
                 // it is huge
-                wxCoord xOrigin=0, yOrigin=0;
-                dc.GetDeviceOrigin(&xOrigin, &yOrigin);
-                yOrigin = abs(yOrigin);
+                wxPoint Origin = dc.GetDeviceOrigin();
+                Origin.y = abs(Origin.y);
 
                 int cli_h = GetClientSize().y;
 
                 // Move end points to the beginning/end of the view?
-                if (y_mid < yOrigin)
-                    y_mid = yOrigin;
-                if (oldY > yOrigin + cli_h)
-                    oldY = yOrigin + cli_h;
+                if (y_mid < Origin.y)
+                    y_mid = Origin.y;
+                if (oldY > Origin.y + cli_h)
+                    oldY = Origin.y + cli_h;
 
                 // after the adjustments if y_mid is larger than oldY then the
                 // line isn't visible at all so don't draw anything

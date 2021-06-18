@@ -1869,7 +1869,7 @@ void wxGtkPrinterDCImpl::DoDrawRotatedText(const wxString& text, wxCoord x, wxCo
     if (fabs(angle) > 0.00001)
         cairo_rotate( m_cairo, angle*DEG2RAD );
 
-    cairo_scale(m_cairo, m_scaleX, m_scaleY);
+    cairo_scale(m_cairo, m_scale.x, m_scale.y);
 
     int w,h;
     pango_layout_get_pixel_size( m_layout, &w, &h );
@@ -1952,7 +1952,7 @@ void wxGtkPrinterDCImpl::SetPen( const wxPen& pen )
     if (m_pen.GetWidth() <= 0)
         width = 0.1; // Thin, scale-independent line.
     else
-        width = (double) m_pen.GetWidth() * m_scaleX;
+        width = (double) m_pen.GetWidth() * m_scale.x;
 
     cairo_set_line_width( m_cairo, width * m_DEV2PS );
     static const double dotted[] = {2.0, 5.0};
@@ -2242,7 +2242,7 @@ void wxGtkPrinterDCImpl::DoGetTextExtent(const wxString& string, wxCoord *width,
     }
 
     cairo_save( m_cairo );
-    cairo_scale(m_cairo, m_scaleX, m_scaleY);
+    cairo_scale(m_cairo, m_scale.x, m_scale.y);
 
     // Set layout's text
     const wxScopedCharBuffer dataUTF8 = string.utf8_str();
@@ -2295,7 +2295,7 @@ bool wxGtkPrinterDCImpl::DoGetPartialTextExtents(const wxString& text, std::vect
     if ( data.length() > 0 )
     {
         cairo_save(m_cairo);
-        cairo_scale(m_cairo, m_scaleX, m_scaleY);
+        cairo_scale(m_cairo, m_scale.x, m_scale.y);
 
         pango_layout_set_text(m_layout, data, data.length());
         PangoLayoutIter* iter = pango_layout_get_iter(m_layout);

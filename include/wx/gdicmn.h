@@ -457,6 +457,8 @@ struct WXDLLIMPEXP_CORE wxRealPoint
     constexpr wxRealPoint& operator-=(const wxSize& s) { x -= s.x; y -= s.y; return *this; }
 };
 
+using wxScale = wxRealPoint;
+
 // FIXME: This is incorrect, and probably shouldn't be implemented at all.
 inline bool operator==(const wxRealPoint& p1, const wxRealPoint& p2)
 {

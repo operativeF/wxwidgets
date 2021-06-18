@@ -759,7 +759,7 @@ void wxVarScrollHelperBase::DoPrepareDC(wxDC& dc)
 
         IncOrient(pt.x, pt.y, -GetScrollOffset());
 
-        dc.SetDeviceOrigin(pt.x, pt.y);
+        dc.SetDeviceOrigin(pt);
     }
 }
 

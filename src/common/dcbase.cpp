@@ -318,12 +318,6 @@ wxDCImpl::wxDCImpl( wxDC *owner )
         , m_colour(true)
         , m_clipping(false)
         , m_isBBoxValid(false)
-        , m_logicalOriginX(0), m_logicalOriginY(0)
-        , m_deviceOriginX(0), m_deviceOriginY(0)
-        , m_deviceLocalOriginX(0), m_deviceLocalOriginY(0)
-        , m_logicalScaleX(1.0), m_logicalScaleY(1.0)
-        , m_userScaleX(1.0), m_userScaleY(1.0)
-        , m_scaleX(1.0), m_scaleY(1.0)
         , m_signX(1), m_signY(1)
         , m_contentScaleFactor(1)
         , m_mm_to_pix_x(0.0), m_mm_to_pix_y(0.0)
@@ -420,68 +414,68 @@ bool wxDCImpl::DoGetClippingRect(wxRect& rect) const
 
 wxCoord wxDCImpl::DeviceToLogicalX(wxCoord x) const
 {
-    return wxRound( (double)((x - m_deviceOriginX - m_deviceLocalOriginX) * m_signX) / m_scaleX ) + m_logicalOriginX ;
+    return wxRound( (double)((x - m_deviceOrigin.x - m_deviceLocalOrigin.x) * m_signX) / m_scale.x ) + m_logicalOrigin.x ;
 }
 
 wxCoord wxDCImpl::DeviceToLogicalY(wxCoord y) const
 {
-    return wxRound( (double)((y - m_deviceOriginY - m_deviceLocalOriginY) * m_signY) / m_scaleY ) + m_logicalOriginY ;
+    return wxRound( (double)((y - m_deviceOrigin.y - m_deviceLocalOrigin.y) * m_signY) / m_scale.y ) + m_logicalOrigin.y ;
 }
 
 wxCoord wxDCImpl::DeviceToLogicalXRel(wxCoord x) const
 {
-    return wxRound((double)(x) / m_scaleX);
+    return wxRound((double)(x) / m_scale.x);
 }
 
 wxCoord wxDCImpl::DeviceToLogicalYRel(wxCoord y) const
 {
-    return wxRound((double)(y) / m_scaleY);
+    return wxRound((double)(y) / m_scale.y);
 }
 
 wxCoord wxDCImpl::LogicalToDeviceX(wxCoord x) const
 {
-    return wxRound( (double)((x - m_logicalOriginX) * m_signX) * m_scaleX) + m_deviceOriginX + m_deviceLocalOriginX;
+    return wxRound( (double)((x - m_logicalOrigin.x) * m_signX) * m_scale.x) + m_deviceOrigin.x + m_deviceLocalOrigin.x;
 }
 
 wxCoord wxDCImpl::LogicalToDeviceY(wxCoord y) const
 {
-    return wxRound( (double)((y - m_logicalOriginY) * m_signY) * m_scaleY) + m_deviceOriginY + m_deviceLocalOriginY;
+    return wxRound( (double)((y - m_logicalOrigin.y) * m_signY) * m_scale.y) + m_deviceOrigin.y + m_deviceLocalOrigin.y;
 }
 
 wxCoord wxDCImpl::LogicalToDeviceXRel(wxCoord x) const
 {
-    return wxRound((double)(x) * m_scaleX);
+    return wxRound((double)(x) * m_scale.x);
 }
 
 wxCoord wxDCImpl::LogicalToDeviceYRel(wxCoord y) const
 {
-    return wxRound((double)(y) * m_scaleY);
+    return wxRound((double)(y) * m_scale.y);
 }
 
 wxPoint wxDCImpl::DeviceToLogical(wxCoord x, wxCoord y) const
 {
-    return wxPoint(DeviceToLogicalX(x), DeviceToLogicalY(y));
+    return {DeviceToLogicalX(x), DeviceToLogicalY(y)};
 }
 
 wxPoint wxDCImpl::LogicalToDevice(wxCoord x, wxCoord y) const
 {
-    return wxPoint(LogicalToDeviceX(x), LogicalToDeviceY(y));
+    return {LogicalToDeviceX(x), LogicalToDeviceY(y)};
 }
 
 wxSize wxDCImpl::DeviceToLogicalRel(int x, int y) const
 {
-    return wxSize(DeviceToLogicalXRel(x), DeviceToLogicalYRel(y));
+    return {DeviceToLogicalXRel(x), DeviceToLogicalYRel(y)};
 }
 
 wxSize wxDCImpl::LogicalToDeviceRel(int x, int y) const
 {
-    return wxSize(LogicalToDeviceXRel(x), LogicalToDeviceYRel(y));
+    return {LogicalToDeviceXRel(x), LogicalToDeviceYRel(y)};
 }
 
 void wxDCImpl::ComputeScaleAndOrigin()
 {
-    m_scaleX = m_logicalScaleX * m_userScaleX;
-    m_scaleY = m_logicalScaleY * m_userScaleY;
+    m_scale.x = m_logicalScale.x * m_userScale.x;
+    m_scale.y = m_logicalScale.y * m_userScale.y;
 }
 
 void wxDCImpl::SetMapMode( wxMappingMode mode )
@@ -489,59 +483,64 @@ void wxDCImpl::SetMapMode( wxMappingMode mode )
     switch (mode)
     {
         case wxMM_TWIPS:
-          SetLogicalScale( twips2mm*GetMMToPXx(), twips2mm*GetMMToPXy() );
+          SetLogicalScale( {twips2mm*GetMMToPXx(), twips2mm*GetMMToPXy()} );
           break;
         case wxMM_POINTS:
-          SetLogicalScale( pt2mm*GetMMToPXx(), pt2mm*GetMMToPXy() );
+          SetLogicalScale( {pt2mm*GetMMToPXx(), pt2mm*GetMMToPXy()} );
           break;
         case wxMM_METRIC:
-          SetLogicalScale( GetMMToPXx(), GetMMToPXy() );
+          SetLogicalScale( {GetMMToPXx(), GetMMToPXy()} );
           break;
         case wxMM_LOMETRIC:
-          SetLogicalScale( GetMMToPXx()/10.0, GetMMToPXy()/10.0 );
+          SetLogicalScale( {GetMMToPXx()/10.0, GetMMToPXy()/10.0} );
           break;
         default:
         case wxMM_TEXT:
-          SetLogicalScale( 1.0, 1.0 );
+          SetLogicalScale(1.0);
           break;
     }
     m_mappingMode = mode;
 }
 
-void wxDCImpl::SetUserScale( double x, double y )
+void wxDCImpl::SetUserScale(double userScale)
+{
+    SetUserScale({ userScale, userScale });
+}
+
+void wxDCImpl::SetUserScale(wxScale userScale)
 {
     // allow negative ? -> no
-    m_userScaleX = x;
-    m_userScaleY = y;
+    m_userScale = userScale;
     ComputeScaleAndOrigin();
 }
 
-void wxDCImpl::SetLogicalScale( double x, double y )
+void wxDCImpl::SetLogicalScale(double logicalScale)
+{
+    SetLogicalScale({ logicalScale, logicalScale });
+}
+
+void wxDCImpl::SetLogicalScale(wxScale logicalScale)
 {
     // allow negative ?
-    m_logicalScaleX = x;
-    m_logicalScaleY = y;
+    m_logicalScale = logicalScale;
     ComputeScaleAndOrigin();
 }
 
-void wxDCImpl::SetLogicalOrigin( wxCoord x, wxCoord y )
+void wxDCImpl::SetLogicalOrigin( wxPoint logicalOrigin )
 {
-    m_logicalOriginX = x * m_signX;
-    m_logicalOriginY = y * m_signY;
+    m_logicalOrigin = {logicalOrigin.x * m_signX, logicalOrigin.y * m_signY};
     ComputeScaleAndOrigin();
 }
 
-void wxDCImpl::SetDeviceOrigin( wxCoord x, wxCoord y )
+void wxDCImpl::SetDeviceOrigin( wxPoint deviceOrigin )
 {
-    m_deviceOriginX = x;
-    m_deviceOriginY = y;
+    m_deviceOrigin = deviceOrigin;
     ComputeScaleAndOrigin();
 }
 
-void wxDCImpl::SetDeviceLocalOrigin( wxCoord x, wxCoord y )
+void wxDCImpl::SetDeviceLocalOrigin( wxPoint deviceLocalOrigin )
 {
-    m_deviceLocalOriginX = x;
-    m_deviceLocalOriginY = y;
+    m_deviceLocalOrigin = deviceLocalOrigin;
     ComputeScaleAndOrigin();
 }
 
@@ -557,7 +556,7 @@ void wxDCImpl::SetAxisOrientation( bool xLeftRight, bool yBottomUp )
 bool wxDCImpl::DoGetPartialTextExtents(const wxString& text, std::vector<int>& widths) const
 {
     wxTextMeasure tm(GetOwner(), &m_font);
-    return tm.GetPartialTextExtents(text, widths, m_scaleX);
+    return tm.GetPartialTextExtents(text, widths, m_scale.x);
 }
 
 void wxDCImpl::GetMultiLineTextExtent(const wxString& text,
@@ -610,34 +609,33 @@ wxDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
     const double yscale = (double)srcHeight/dstHeight;
 
     // Shift origin to avoid imprecision of integer destination coordinates
-    const int deviceOriginX = m_deviceOriginX;
-    const int deviceOriginY = m_deviceOriginY;
-    const int deviceLocalOriginX = m_deviceLocalOriginX;
-    const int deviceLocalOriginY = m_deviceLocalOriginY;
-    const int logicalOriginX = m_logicalOriginX;
-    const int logicalOriginY = m_logicalOriginY;
-    m_deviceOriginX = LogicalToDeviceX(xdest);
-    m_deviceOriginY = LogicalToDeviceY(ydest);
-    m_deviceLocalOriginX = 0;
-    m_deviceLocalOriginY = 0;
-    m_logicalOriginX = 0;
-    m_logicalOriginY = 0;
+    const int deviceOriginX = m_deviceOrigin.x;
+    const int deviceOriginY = m_deviceOrigin.y;
+    const int deviceLocalOriginX = m_deviceLocalOrigin.x;
+    const int deviceLocalOriginY = m_deviceLocalOrigin.y;
+    const int logicalOriginX = m_logicalOrigin.x;
+    const int logicalOriginY = m_logicalOrigin.y;
+    m_deviceOrigin.x = LogicalToDeviceX(xdest);
+    m_deviceOrigin.y = LogicalToDeviceY(ydest);
+    m_deviceLocalOrigin.x = 0;
+    m_deviceLocalOrigin.y = 0;
+    m_logicalOrigin.x = 0;
+    m_logicalOrigin.y = 0;
 
-    double xscaleOld, yscaleOld;
-    GetUserScale(&xscaleOld, &yscaleOld);
-    SetUserScale(xscaleOld/xscale, yscaleOld/yscale);
+    wxScale scaleOld = GetUserScale();
+    SetUserScale({scaleOld.x / xscale, scaleOld.y / yscale});
 
     const bool rc = DoBlit(0, 0, srcWidth, srcHeight,
                      source,
                      xsrc, ysrc, rop, useMask, xsrcMask, ysrcMask);
 
-    m_deviceOriginX = deviceOriginX;
-    m_deviceOriginY = deviceOriginY;
-    m_deviceLocalOriginX = deviceLocalOriginX;
-    m_deviceLocalOriginY = deviceLocalOriginY;
-    m_logicalOriginX = logicalOriginX;
-    m_logicalOriginY = logicalOriginY;
-    SetUserScale(xscaleOld, yscaleOld);
+    m_deviceOrigin.x = deviceOriginX;
+    m_deviceOrigin.y = deviceOriginY;
+    m_deviceLocalOrigin.x = deviceLocalOriginX;
+    m_deviceLocalOrigin.y = deviceLocalOriginY;
+    m_logicalOrigin.x = logicalOriginX;
+    m_logicalOrigin.y = logicalOriginY;
+    SetUserScale(scaleOld);
 
     return rc;
 }

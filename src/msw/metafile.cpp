@@ -280,33 +280,28 @@ void wxMetafileDCImpl::SetMapMode(wxMappingMode mode)
     {
         case wxMM_TWIPS:
             {
-                m_logicalScaleX = twips2mm * mm2pixelsX;
-                m_logicalScaleY = twips2mm * mm2pixelsY;
+                m_logicalScale = {twips2mm * mm2pixelsX, twips2mm * mm2pixelsY};
                 break;
             }
         case wxMM_POINTS:
             {
-                m_logicalScaleX = pt2mm * mm2pixelsX;
-                m_logicalScaleY = pt2mm * mm2pixelsY;
+                m_logicalScale = {pt2mm * mm2pixelsX, pt2mm * mm2pixelsY};
                 break;
             }
         case wxMM_METRIC:
             {
-                m_logicalScaleX = mm2pixelsX;
-                m_logicalScaleY = mm2pixelsY;
+                m_logicalScale = {mm2pixelsX, mm2pixelsY};
                 break;
             }
         case wxMM_LOMETRIC:
             {
-                m_logicalScaleX = mm2pixelsX / 10;
-                m_logicalScaleY = mm2pixelsY / 10;
+                m_logicalScale = {mm2pixelsX / 10, mm2pixelsY / 10};
                 break;
             }
         default:
         case wxMM_TEXT:
             {
-                m_logicalScaleX = 1.0;
-                m_logicalScaleY = 1.0;
+                m_logicalScale = {1.0, 1.0};
                 break;
             }
     }

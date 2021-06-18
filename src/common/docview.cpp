@@ -2091,7 +2091,7 @@ bool wxDocPrintout::OnPrintPage(int WXUNUSED(page))
     // If printer pageWidth == current DC width, then this doesn't
     // change. But w might be the preview bitmap width, so scale down.
     const double overallScale = scale * dcWidth / pageWidth;
-    dc->SetUserScale(overallScale, overallScale);
+    dc->SetUserScale(overallScale);
 
     if (m_printoutView)
     {

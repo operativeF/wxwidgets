@@ -644,9 +644,9 @@ void wxScrollHelperBase::DoPrepareDC(wxDC& dc)
                             pt.y - m_yScrollPosition * m_yScrollPixelsPerLine );
     else
 #endif
-        dc.SetDeviceOrigin( pt.x - m_xScrollPosition * m_xScrollPixelsPerLine,
-                            pt.y - m_yScrollPosition * m_yScrollPixelsPerLine );
-    dc.SetUserScale( m_scaleX, m_scaleY );
+        dc.SetDeviceOrigin({ pt.x - m_xScrollPosition * m_xScrollPixelsPerLine,
+                             pt.y - m_yScrollPosition * m_yScrollPixelsPerLine });
+    dc.SetUserScale(m_scale);
 }
 
 void wxScrollHelperBase::SetScrollRate( int xstep, int ystep )

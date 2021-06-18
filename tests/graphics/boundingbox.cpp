@@ -355,9 +355,9 @@ void GCDCBoundingBoxTestCase::DrawTwoRectangles()
 void GCDCBoundingBoxTestCase::DrawRectsOnTransformedDC()
 {
     m_gcdc->DrawRectangle(10, 15, 50, 30);
-    m_gcdc->SetDeviceOrigin(15, 20);
+    m_gcdc->SetDeviceOrigin({15, 20});
     m_gcdc->DrawRectangle(15, 20, 45, 35);
-    m_gcdc->SetDeviceOrigin(5, 10);
+    m_gcdc->SetDeviceOrigin({5, 10});
     AssertBox(5, 5, 65, 60);
 }
 

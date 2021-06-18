@@ -468,7 +468,7 @@ void wxRichTextCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         wxRichTextDrawingContext context(& GetBuffer());
         if (GetBuffer().IsDirty())
         {
-            dc.SetUserScale(GetScale(), GetScale());
+            dc.SetUserScale(GetScale());
 
             GetBuffer().Defragment(context);
             GetBuffer().UpdateRanges();     // If items were deleted, ranges need recalculation
@@ -477,7 +477,7 @@ void wxRichTextCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
 
             GetBuffer().Invalidate(wxRICHTEXT_NONE);
 
-            dc.SetUserScale(1.0, 1.0);
+            dc.SetUserScale(1.0);
 
             SetupScrollbars(false, true /* from OnPaint */);
         }
@@ -500,7 +500,7 @@ void wxRichTextCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         if ((GetExtraStyle() & wxRICHTEXT_EX_NO_GUIDELINES) == 0)
             flags |= wxRICHTEXT_DRAW_GUIDELINES;
 
-        dc.SetUserScale(GetScale(), GetScale());
+        dc.SetUserScale(GetScale());
 
         GetBuffer().Draw(dc, context, GetBuffer().GetOwnRange(), GetSelection(), drawingArea, 0 /* descent */, flags);
 
@@ -517,7 +517,7 @@ void wxRichTextCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         }
 #endif
 
-        dc.SetUserScale(1.0, 1.0);
+        dc.SetUserScale(1.0);
     }
 
 #if !wxRICHTEXT_USE_OWN_CARET
@@ -4204,7 +4204,7 @@ bool wxRichTextCtrl::GetCaretPositionForIndex(long position, wxRect& rect, wxRic
 {
     wxClientDC dc(this);
     PrepareDC(dc);
-    dc.SetUserScale(GetScale(), GetScale());
+    dc.SetUserScale(GetScale());
     dc.SetFont(GetFont());
 
     wxPoint pt;
@@ -4295,7 +4295,7 @@ bool wxRichTextCtrl::LayoutContent(bool onlyVisibleRect)
 
         PrepareDC(dc);
         dc.SetFont(GetFont());
-        dc.SetUserScale(GetScale(), GetScale());
+        dc.SetUserScale(GetScale());
 
         wxRichTextDrawingContext context(& GetBuffer());
         GetBuffer().Defragment(context);
@@ -4303,7 +4303,7 @@ bool wxRichTextCtrl::LayoutContent(bool onlyVisibleRect)
         DoLayoutBuffer(GetBuffer(), dc, context, availableSpace, availableSpace, flags);
         GetBuffer().Invalidate(wxRICHTEXT_NONE);
 
-        dc.SetUserScale(1.0, 1.0);
+        dc.SetUserScale(1.0);
 
         if (!IsFrozen() && !onlyVisibleRect)
             SetupScrollbars();

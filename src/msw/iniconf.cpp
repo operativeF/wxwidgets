@@ -85,8 +85,7 @@ wxIniConfig::wxIniConfig(const wxString& strAppName,
     SetPath(wxEmptyString);
 }
 
-wxIniConfig::~wxIniConfig()
-= default;
+wxIniConfig::~wxIniConfig() = default;
 
 // ----------------------------------------------------------------------------
 // path management
@@ -111,7 +110,7 @@ void wxIniConfig::SetPath(const wxString& strPath)
     aParts = wxSplitPath(strFullPath);
   }
 
-  size_t nPartsCount = aParts.Count();
+  size_t nPartsCount = aParts.size();
   m_strPath.Empty();
   if ( nPartsCount == 0 ) {
     // go to the root

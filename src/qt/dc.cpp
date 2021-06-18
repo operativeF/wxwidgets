@@ -852,16 +852,16 @@ void wxQtDCImpl::ComputeScaleAndOrigin()
     QTransform t;
 
     // First apply device origin
-    t.translate( m_deviceOriginX + m_deviceLocalOriginX,
-                 m_deviceOriginY + m_deviceLocalOriginY );
+    t.translate( m_deviceOrigin.x + m_deviceLocalOrigin.x,
+                 m_deviceOrigin.y + m_deviceLocalOrigin.y );
 
     // Second, scale
-    m_scaleX = m_logicalScaleX * m_userScaleX;
-    m_scaleY = m_logicalScaleY * m_userScaleY;
-    t.scale( m_scaleX * m_signX, m_scaleY * m_signY );
+    m_scale.x = m_logicalScale.x * m_userScale.x;
+    m_scale.y = m_logicalScale.y * m_userScale.y;
+    t.scale( m_scale.x * m_signX, m_scale.y * m_signY );
 
     // Finally, logical origin
-    t.translate( m_logicalOriginX, m_logicalOriginY );
+    t.translate( m_logicalOrigin.x, m_logicalOrigin.y );
 
     // Apply transform to QPainter, overwriting the previous one
     m_qtPainter->setWorldTransform(t, false);

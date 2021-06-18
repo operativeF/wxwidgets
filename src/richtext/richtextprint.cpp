@@ -282,15 +282,13 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
     wxRichTextRange rangeToDraw(m_pageBreaksStart[page-1], m_pageBreaksEnd[page-1]);
 
     wxPoint oldOrigin = dc->GetLogicalOrigin();
-    double scaleX, scaleY;
-    dc->GetUserScale(& scaleX, & scaleY);
 
     int yOffset = 0;
     if (page > 1)
         yOffset = m_pageYOffsets[page-2];
 
     if (yOffset != oldOrigin.y)
-        dc->SetLogicalOrigin(oldOrigin.x, oldOrigin.y + yOffset);
+        dc->SetLogicalOrigin({ oldOrigin.x, oldOrigin.y + yOffset });
 
     dc->SetClippingRegion(wxRect(textRect.x, textRect.y + yOffset, textRect.width, textRect.height));
 
@@ -300,7 +298,7 @@ void wxRichTextPrintout::RenderPage(wxDC *dc, int page)
     dc->DestroyClippingRegion();
 
     if (yOffset != oldOrigin.y)
-        dc->SetLogicalOrigin(oldOrigin.x, oldOrigin.y);
+        dc->SetLogicalOrigin(oldOrigin);
 }
 
 void wxRichTextPrintout::SetMargins(int top, int bottom, int left, int right)
@@ -335,7 +333,7 @@ void wxRichTextPrintout::CalculateScaling(wxDC* dc, wxRect& textRect, wxRect& he
     // If printer pageWidth == current DC width, then this doesn't
     // change. But w might be the preview bitmap width, so scale down.
     const double previewScale = double(dc_w) / pageWidth;
-    const double overallScale = scale * previewScale;
+    const wxScale overallScale = { scale * previewScale, scale * previewScale };
 
     // The dimensions used for indentation etc. have to be unscaled
     // during printing to be correct when scaling is applied.
@@ -352,7 +350,7 @@ void wxRichTextPrintout::CalculateScaling(wxDC* dc, wxRect& textRect, wxRect& he
     int headerMargin = wxRichTextObject::ConvertTenthsMMToPixels(ppiPrinterX, m_headerFooterData.GetHeaderMargin());
     int footerMargin = wxRichTextObject::ConvertTenthsMMToPixels(ppiPrinterX, m_headerFooterData.GetFooterMargin());
 
-    dc->SetUserScale(overallScale, overallScale);
+    dc->SetUserScale(overallScale);
 
     wxRect rect((int) (marginLeft/scale), (int) (marginTop/scale),
                 (int) ((pageWidth - marginLeft - marginRight)/scale), (int)((pageHeight - marginTop - marginBottom)/scale));

@@ -1258,16 +1258,14 @@ void wxSVGFileDCImpl::NewGraphicsIfNeeded()
 
 void wxSVGFileDCImpl::DoStartNewGraphics()
 {
-    wxString s;
-
-    s = wxString::Format(wxS("<g style=\"%s %s %s\" transform=\"translate(%d %d) scale(%s %s)\">\n"),
+    wxString s = wxString::Format(wxS("<g style=\"%s %s %s\" transform=\"translate(%d %d) scale(%s %s)\">\n"),
         GetPenStyle(m_pen),
         GetBrushFill(m_brush.GetColour(), m_brush.GetStyle()),
         GetPenStroke(m_pen.GetColour(), m_pen.GetStyle()),
-        (m_deviceOriginX - m_logicalOriginX) * m_signX,
-        (m_deviceOriginY - m_logicalOriginY) * m_signY,
-        NumStr(m_scaleX * m_signX),
-        NumStr(m_scaleY * m_signY));
+        (m_deviceOrigin.x - m_logicalOrigin.x) * m_signX,
+        (m_deviceOrigin.y - m_logicalOrigin.y) * m_signY,
+        NumStr(m_scale.x * m_signX),
+        NumStr(m_scale.y * m_signY));
 
     write(s);
 }

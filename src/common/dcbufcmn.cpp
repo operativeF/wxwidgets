@@ -137,14 +137,13 @@ void wxBufferedDC::UnMask()
     wxCHECK_RET( m_dc, wxT("no underlying wxDC?") );
     wxASSERT_MSG( m_buffer && m_buffer->IsOk(), wxT("invalid backing store") );
 
-    wxCoord x = 0,
-            y = 0;
+    wxPoint DOrigin;
 
     // Ensure the scale matches the device
-    SetUserScale(1.0, 1.0);
+    SetUserScale(1.0);
 
     if ( m_style & wxBUFFER_CLIENT_AREA )
-        GetDeviceOrigin(&x, &y);
+        DOrigin = GetDeviceOrigin();
 
     // It's possible that the buffer may be bigger than the area that needs to
     // be drawn (the client size of the window is smaller than the bitmap, or
@@ -162,7 +161,7 @@ void wxBufferedDC::UnMask()
     }
 
     const wxPoint origin = GetLogicalOrigin();
-    m_dc->Blit(-origin.x, -origin.y, width, height, this, -x, -y);
+    m_dc->Blit(-origin.x, -origin.y, width, height, this, -DOrigin.x, -DOrigin.y);
     m_dc = nullptr;
 
     if ( m_style & wxBUFFER_USES_SHARED_BUFFER )

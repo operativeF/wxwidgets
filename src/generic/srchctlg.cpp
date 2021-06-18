@@ -955,7 +955,7 @@ static void RescaleBitmap(wxBitmap& bmp, const wxSize& sizeNeeded)
         wxMemoryDC dc(newBmp);
         double scX = (double)sizeNeeded.GetWidth() / bmp.GetWidth();
         double scY = (double)sizeNeeded.GetHeight() / bmp.GetHeight();
-        dc.SetUserScale(scX, scY);
+        dc.SetUserScale({scX, scY});
         dc.DrawBitmap(bmp, 0, 0);
     }
     bmp = newBmp;

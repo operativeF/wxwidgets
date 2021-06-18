@@ -478,8 +478,8 @@ void wxWindowDCImpl::DoDrawArc( wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, 
             if ((m_brush.GetStyle() == wxBrushStyle::StippleMaskOpaque) && (m_brush.GetStipple()->GetMask()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_textGC,
-                                      m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
-                                      m_deviceOriginY % m_brush.GetStipple()->GetHeight() );
+                                      m_deviceOrigin.x % m_brush.GetStipple()->GetWidth(),
+                                      m_deviceOrigin.y % m_brush.GetStipple()->GetHeight() );
 
                 XFillArc( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xxc-r, yyc-r, 2*r,2*r, alpha1, alpha2 );
@@ -489,7 +489,7 @@ void wxWindowDCImpl::DoDrawArc( wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, 
             if (IS_15_PIX_HATCH(m_brush.GetStyle()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % 15, m_deviceOriginY % 15 );
+                                      m_deviceOrigin.x % 15, m_deviceOrigin.y % 15 );
 
                 XFillArc( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xxc-r, yyc-r, 2*r,2*r, alpha1, alpha2 );
@@ -499,7 +499,7 @@ void wxWindowDCImpl::DoDrawArc( wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, 
             if (IS_16_PIX_HATCH(m_brush.GetStyle()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % 16, m_deviceOriginY % 16 );
+                                      m_deviceOrigin.x % 16, m_deviceOrigin.y % 16 );
 
                 XFillArc( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xxc-r, yyc-r, 2*r,2*r, alpha1, alpha2 );
@@ -509,8 +509,8 @@ void wxWindowDCImpl::DoDrawArc( wxCoord x1, wxCoord y1, wxCoord x2, wxCoord y2, 
             if (m_brush.GetStyle() == wxBrushStyle::Stipple)
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
-                                      m_deviceOriginY % m_brush.GetStipple()->GetHeight() );
+                                      m_deviceOrigin.x % m_brush.GetStipple()->GetWidth(),
+                                      m_deviceOrigin.y % m_brush.GetStipple()->GetHeight() );
 
                 XFillArc( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xxc-r, yyc-r, 2*r,2*r, alpha1, alpha2 );
@@ -564,8 +564,8 @@ void wxWindowDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord width, wxC
             if ((m_brush.GetStyle() == wxBrushStyle::StippleMaskOpaque) && (m_brush.GetStipple()->GetMask()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_textGC,
-                                      m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
-                                      m_deviceOriginY % m_brush.GetStipple()->GetHeight() );
+                                      m_deviceOrigin.x % m_brush.GetStipple()->GetWidth(),
+                                      m_deviceOrigin.y % m_brush.GetStipple()->GetHeight() );
 
                 XFillArc( (Display*) m_display, (Window) m_x11window,
                     (GC) m_textGC, xx, yy, ww, hh, start, end );
@@ -575,7 +575,7 @@ void wxWindowDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord width, wxC
             if (IS_15_PIX_HATCH(m_brush.GetStyle()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % 15, m_deviceOriginY % 15 );
+                                      m_deviceOrigin.x % 15, m_deviceOrigin.y % 15 );
 
                 XFillArc( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xx, yy, ww, hh, start, end );
@@ -585,7 +585,7 @@ void wxWindowDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord width, wxC
             if (IS_16_PIX_HATCH(m_brush.GetStyle()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % 16, m_deviceOriginY % 16 );
+                                      m_deviceOrigin.x % 16, m_deviceOrigin.y % 16 );
 
                 XFillArc( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xx, yy, ww, hh, start, end );
@@ -595,8 +595,8 @@ void wxWindowDCImpl::DoDrawEllipticArc( wxCoord x, wxCoord y, wxCoord width, wxC
             if (m_brush.GetStyle() == wxBrushStyle::Stipple)
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
-                                      m_deviceOriginY % m_brush.GetStipple()->GetHeight() );
+                                      m_deviceOrigin.x % m_brush.GetStipple()->GetWidth(),
+                                      m_deviceOrigin.y % m_brush.GetStipple()->GetHeight() );
 
                 XFillArc( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xx, yy, ww, hh, start, end );
@@ -678,8 +678,8 @@ void wxWindowDCImpl::DoDrawPolygon( int n, const wxPoint points[],
             if ((m_brush.GetStyle() == wxBrushStyle::StippleMaskOpaque) && (m_brush.GetStipple()->GetMask()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_textGC,
-                                      m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
-                                      m_deviceOriginY % m_brush.GetStipple()->GetHeight() );
+                                      m_deviceOrigin.x % m_brush.GetStipple()->GetWidth(),
+                                      m_deviceOrigin.y % m_brush.GetStipple()->GetHeight() );
 
                 XFillPolygon( (Display*) m_display, (Window) m_x11window,
                     (GC) m_textGC, xpoints, n, Complex, 0);
@@ -689,7 +689,7 @@ void wxWindowDCImpl::DoDrawPolygon( int n, const wxPoint points[],
             if (IS_15_PIX_HATCH(m_brush.GetStyle()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % 15, m_deviceOriginY % 15 );
+                                      m_deviceOrigin.x % 15, m_deviceOrigin.y % 15 );
 
                 XFillPolygon( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xpoints, n, Complex, 0);
@@ -699,7 +699,7 @@ void wxWindowDCImpl::DoDrawPolygon( int n, const wxPoint points[],
             if (IS_16_PIX_HATCH(m_brush.GetStyle()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % 16, m_deviceOriginY % 16 );
+                                      m_deviceOrigin.x % 16, m_deviceOrigin.y % 16 );
 
                 XFillPolygon( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xpoints, n, Complex, 0);
@@ -709,8 +709,8 @@ void wxWindowDCImpl::DoDrawPolygon( int n, const wxPoint points[],
             if (m_brush.GetStyle() == wxBrushStyle::Stipple)
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
-                                      m_deviceOriginY % m_brush.GetStipple()->GetHeight() );
+                                      m_deviceOrigin.x % m_brush.GetStipple()->GetWidth(),
+                                      m_deviceOrigin.y % m_brush.GetStipple()->GetHeight() );
 
                 XFillPolygon( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xpoints, n, Complex, 0);
@@ -760,8 +760,8 @@ void wxWindowDCImpl::DoDrawRectangle( wxCoord x, wxCoord y, wxCoord width, wxCoo
             if ((m_brush.GetStyle() == wxBrushStyle::StippleMaskOpaque) && (m_brush.GetStipple()->GetMask()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_textGC,
-                                      m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
-                                      m_deviceOriginY % m_brush.GetStipple()->GetHeight() );
+                                      m_deviceOrigin.x % m_brush.GetStipple()->GetWidth(),
+                                      m_deviceOrigin.y % m_brush.GetStipple()->GetHeight() );
 
                 XFillRectangle( (Display*) m_display, (Window) m_x11window,
                     (GC) m_textGC, xx, yy, ww, hh );
@@ -771,7 +771,7 @@ void wxWindowDCImpl::DoDrawRectangle( wxCoord x, wxCoord y, wxCoord width, wxCoo
             if (IS_15_PIX_HATCH(m_brush.GetStyle()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % 15, m_deviceOriginY % 15 );
+                                      m_deviceOrigin.x % 15, m_deviceOrigin.y % 15 );
 
                 XFillRectangle( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xx, yy, ww, hh );
@@ -781,7 +781,7 @@ void wxWindowDCImpl::DoDrawRectangle( wxCoord x, wxCoord y, wxCoord width, wxCoo
             if (IS_16_PIX_HATCH(m_brush.GetStyle()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % 16, m_deviceOriginY % 16 );
+                                      m_deviceOrigin.x % 16, m_deviceOrigin.y % 16 );
 
                 XFillRectangle( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xx, yy, ww, hh );
@@ -791,8 +791,8 @@ void wxWindowDCImpl::DoDrawRectangle( wxCoord x, wxCoord y, wxCoord width, wxCoo
             if (m_brush.GetStyle() == wxBrushStyle::Stipplee)
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
-                                      m_deviceOriginY % m_brush.GetStipple()->GetHeight() );
+                                      m_deviceOrigin.x % m_brush.GetStipple()->GetWidth(),
+                                      m_deviceOrigin.y % m_brush.GetStipple()->GetHeight() );
 
                 XFillRectangle( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xx, yy, ww, hh );
@@ -867,8 +867,8 @@ void wxWindowDCImpl::DoDrawRoundedRectangle( wxCoord x, wxCoord y, wxCoord width
             if ((m_brush.GetStyle() == wxBrushStyle::StippleMaskOpaque) && (m_brush.GetStipple()->GetMask()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_textGC,
-                              m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
-                              m_deviceOriginY % m_brush.GetStipple()->GetHeight() );
+                              m_deviceOrigin.x % m_brush.GetStipple()->GetWidth(),
+                              m_deviceOrigin.y % m_brush.GetStipple()->GetHeight() );
                 XFillRectangle( (Display*) m_display, (Window) m_x11window, (GC) m_textGC, xx+rr, yy, ww-dd+1, hh );
                 XFillRectangle( (Display*) m_display, (Window) m_x11window, (GC) m_textGC, xx, yy+rr, ww, hh-dd+1 );
                 XFillArc( (Display*) m_display, (Window) m_x11window, (GC) m_textGC, xx, yy, dd, dd, 90*64, 90*64 );
@@ -879,7 +879,7 @@ void wxWindowDCImpl::DoDrawRoundedRectangle( wxCoord x, wxCoord y, wxCoord width
             } else
             if (IS_15_PIX_HATCH(m_brush.GetStyle()))
             {
-                XSetTSOrigin( (Display*) m_display, (GC) m_brushGC, m_deviceOriginX % 15, m_deviceOriginY % 15 );
+                XSetTSOrigin( (Display*) m_display, (GC) m_brushGC, m_deviceOrigin.x % 15, m_deviceOrigin.y % 15 );
                 XFillRectangle( (Display*) m_display, (Window) m_x11window, (GC) m_brushGC, xx+rr, yy, ww-dd+1, hh );
                 XFillRectangle( (Display*) m_display, (Window) m_x11window, (GC) m_brushGC, xx, yy+rr, ww, hh-dd+1 );
                 XFillArc( (Display*) m_display, (Window) m_x11window, (GC) m_brushGC, xx, yy, dd, dd, 90*64, 90*64 );
@@ -890,7 +890,7 @@ void wxWindowDCImpl::DoDrawRoundedRectangle( wxCoord x, wxCoord y, wxCoord width
             } else
             if (IS_16_PIX_HATCH(m_brush.GetStyle()))
             {
-                XSetTSOrigin( (Display*) m_display, (GC) m_brushGC, m_deviceOriginX % 16, m_deviceOriginY % 16 );
+                XSetTSOrigin( (Display*) m_display, (GC) m_brushGC, m_deviceOrigin.x % 16, m_deviceOrigin.y % 16 );
                 XFillRectangle( (Display*) m_display, (Window) m_x11window, (GC) m_brushGC, xx+rr, yy, ww-dd+1, hh );
                 XFillRectangle( (Display*) m_display, (Window) m_x11window, (GC) m_brushGC, xx, yy+rr, ww, hh-dd+1 );
                 XFillArc( (Display*) m_display, (Window) m_x11window, (GC) m_brushGC, xx, yy, dd, dd, 90*64, 90*64 );
@@ -902,8 +902,8 @@ void wxWindowDCImpl::DoDrawRoundedRectangle( wxCoord x, wxCoord y, wxCoord width
             if (m_brush.GetStyle() == wxBrushStyle::Stipple)
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                              m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
-                              m_deviceOriginY % m_brush.GetStipple()->GetHeight() );
+                              m_deviceOrigin.x % m_brush.GetStipple()->GetWidth(),
+                              m_deviceOrigin.y % m_brush.GetStipple()->GetHeight() );
                 XFillRectangle( (Display*) m_display, (Window) m_x11window, (GC) m_brushGC, xx+rr, yy, ww-dd+1, hh );
                 XFillRectangle( (Display*) m_display, (Window) m_x11window, (GC) m_brushGC, xx, yy+rr, ww, hh-dd+1 );
                 XFillArc( (Display*) m_display, (Window) m_x11window, (GC) m_brushGC, xx, yy, dd, dd, 90*64, 90*64 );
@@ -960,8 +960,8 @@ void wxWindowDCImpl::DoDrawEllipse( wxCoord x, wxCoord y, wxCoord width, wxCoord
             if ((m_brush.GetStyle() == wxBrushStyle::StippleMaskOpaque) && (m_brush.GetStipple()->GetMask()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_textGC,
-                                      m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
-                                      m_deviceOriginY % m_brush.GetStipple()->GetHeight() );
+                                      m_deviceOrigin.x % m_brush.GetStipple()->GetWidth(),
+                                      m_deviceOrigin.y % m_brush.GetStipple()->GetHeight() );
 
                 XFillArc( (Display*) m_display, (Window) m_x11window,
                     (GC) m_textGC, xx, yy, ww, hh, 0, 360*64 );
@@ -971,7 +971,7 @@ void wxWindowDCImpl::DoDrawEllipse( wxCoord x, wxCoord y, wxCoord width, wxCoord
             if (IS_15_PIX_HATCH(m_brush.GetStyle()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % 15, m_deviceOriginY % 15 );
+                                      m_deviceOrigin.x % 15, m_deviceOrigin.y % 15 );
 
                 XFillArc( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xx, yy, ww, hh, 0, 360*64 );
@@ -981,7 +981,7 @@ void wxWindowDCImpl::DoDrawEllipse( wxCoord x, wxCoord y, wxCoord width, wxCoord
             if (IS_16_PIX_HATCH(m_brush.GetStyle()))
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % 16, m_deviceOriginY % 16 );
+                                      m_deviceOrigin.x % 16, m_deviceOrigin.y % 16 );
 
                 XFillArc( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xx, yy, ww, hh, 0, 360*64 );
@@ -991,8 +991,8 @@ void wxWindowDCImpl::DoDrawEllipse( wxCoord x, wxCoord y, wxCoord width, wxCoord
             if (m_brush.GetStyle() == wxBrushStyle::Stipple)
             {
                 XSetTSOrigin( (Display*) m_display, (GC) m_brushGC,
-                                      m_deviceOriginX % m_brush.GetStipple()->GetWidth(),
-                                      m_deviceOriginY % m_brush.GetStipple()->GetHeight() );
+                                      m_deviceOrigin.x % m_brush.GetStipple()->GetWidth(),
+                                      m_deviceOrigin.y % m_brush.GetStipple()->GetHeight() );
 
                 XFillArc( (Display*) m_display, (Window) m_x11window,
                     (GC) m_brushGC, xx, yy, ww, hh, 0, 360*64 );
@@ -2239,13 +2239,13 @@ void wxWindowDCImpl::Destroy()
 void wxWindowDCImpl::ComputeScaleAndOrigin()
 {
     /* CMB: copy scale to see if it changes */
-    double origScaleX = m_scaleX;
-    double origScaleY = m_scaleY;
+    double origScaleX = m_scale.x;
+    double origScaleY = m_scale.y;
 
     wxDCImpl::ComputeScaleAndOrigin();
 
     /* CMB: if scale has changed call SetPen to recalculate the line width */
-    if ((m_scaleX != origScaleX || m_scaleY != origScaleY) &&
+    if ((m_scale.x != origScaleX || m_scale.y != origScaleY) &&
         (m_pen.IsOk()))
     {
       /* this is a bit artificial, but we need to force wxDC to think

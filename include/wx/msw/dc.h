@@ -78,10 +78,10 @@ public:
 
 
     void SetMapMode(wxMappingMode mode) override;
-    void SetUserScale(double x, double y) override;
-    void SetLogicalScale(double x, double y) override;
-    void SetLogicalOrigin(wxCoord x, wxCoord y) override;
-    void SetDeviceOrigin(wxCoord x, wxCoord y) override;
+    void SetUserScale(wxScale userScale) override;
+    void SetLogicalScale(wxScale logicalScale) override;
+    void SetLogicalOrigin(wxPoint logicalOrigin) override;
+    void SetDeviceOrigin(wxPoint deviceOrigin) override;
     void SetAxisOrientation(bool xLeftRight, bool yBottomUp) override;
 
     wxPoint DeviceToLogical(wxCoord x, wxCoord y) const override;

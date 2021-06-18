@@ -1740,8 +1740,8 @@ void wxMSWDCImpl::SetBrush(const wxBrush& brush)
             if ( !::SetBrushOrgEx
                     (
                         GetHdc(),
-                        m_deviceOriginX % sizeBrushBitmap.x,
-                        m_deviceOriginY % sizeBrushBitmap.y,
+                        m_deviceOrigin.x % sizeBrushBitmap.x,
+                        m_deviceOrigin.y % sizeBrushBitmap.y,
                         nullptr                    // [out] previous brush origin
                     ) )
             {
@@ -1957,8 +1957,8 @@ void wxMSWDCImpl::RealizeScaleAndOrigin()
     int devExtX, devExtY,   // Viewport, i.e. device space, extents.
         logExtX, logExtY;   // Window, i.e. logical coordinate space, extents.
 
-    ApplyEffectiveScale(m_scaleX, m_signX, &devExtX, &logExtX);
-    ApplyEffectiveScale(m_scaleY, m_signY, &devExtY, &logExtY);
+    ApplyEffectiveScale(m_scale.x, m_signX, &devExtX, &logExtX);
+    ApplyEffectiveScale(m_scale.y, m_signY, &devExtY, &logExtY);
 
     // In GDI anisotropic mode only devExt/logExt ratio is important
     // so we can reduce the fractions to avoid large numbers
@@ -1973,8 +1973,8 @@ void wxMSWDCImpl::RealizeScaleAndOrigin()
     ::SetViewportExtEx(GetHdc(), devExtX, devExtY, nullptr);
     ::SetWindowExtEx(GetHdc(), logExtX, logExtY, nullptr);
 
-    ::SetViewportOrgEx(GetHdc(), m_deviceOriginX, m_deviceOriginY, nullptr);
-    ::SetWindowOrgEx(GetHdc(), m_logicalOriginX, m_logicalOriginY, nullptr);
+    ::SetViewportOrgEx(GetHdc(), m_deviceOrigin.x, m_deviceOrigin.y, nullptr);
+    ::SetWindowOrgEx(GetHdc(), m_logicalOrigin.x, m_logicalOrigin.y, nullptr);
 
     m_isClipBoxValid = false;
 }
@@ -1985,8 +1985,7 @@ void wxMSWDCImpl::SetMapMode(wxMappingMode mode)
 
     if ( mode == wxMM_TEXT )
     {
-        m_logicalScaleX =
-        m_logicalScaleY = 1.0;
+        m_logicalScale = {1.0, 1.0};
     }
     else // need to do some calculations
     {
@@ -2007,23 +2006,19 @@ void wxMSWDCImpl::SetMapMode(wxMappingMode mode)
         switch (mode)
         {
             case wxMM_TWIPS:
-                m_logicalScaleX = twips2mm * mm2pixelsX;
-                m_logicalScaleY = twips2mm * mm2pixelsY;
+                m_logicalScale = {twips2mm * mm2pixelsX, twips2mm * mm2pixelsY};
                 break;
 
             case wxMM_POINTS:
-                m_logicalScaleX = pt2mm * mm2pixelsX;
-                m_logicalScaleY = pt2mm * mm2pixelsY;
+                m_logicalScale = {pt2mm * mm2pixelsX, pt2mm * mm2pixelsY};
                 break;
 
             case wxMM_METRIC:
-                m_logicalScaleX = mm2pixelsX;
-                m_logicalScaleY = mm2pixelsY;
+                m_logicalScale = {mm2pixelsX, mm2pixelsY};
                 break;
 
             case wxMM_LOMETRIC:
-                m_logicalScaleX = mm2pixelsX / 10.0;
-                m_logicalScaleY = mm2pixelsY / 10.0;
+                m_logicalScale = {mm2pixelsX / 10.0, mm2pixelsY / 10.0};
                 break;
 
             default:
@@ -2036,12 +2031,9 @@ void wxMSWDCImpl::SetMapMode(wxMappingMode mode)
     RealizeScaleAndOrigin();
 }
 
-void wxMSWDCImpl::SetUserScale(double x, double y)
+void wxMSWDCImpl::SetUserScale(wxScale userScale)
 {
-    if ( x == m_userScaleX && y == m_userScaleY )
-        return;
-
-    wxDCImpl::SetUserScale(x,y);
+    wxDCImpl::SetUserScale(userScale);
 
     RealizeScaleAndOrigin();
 }
@@ -2060,32 +2052,29 @@ void wxMSWDCImpl::SetAxisOrientation(bool xLeftRight,
     RealizeScaleAndOrigin();
 }
 
-void wxMSWDCImpl::SetLogicalOrigin(wxCoord x, wxCoord y)
+void wxMSWDCImpl::SetLogicalOrigin(wxPoint logicalOrigin)
 {
-    if ( x == m_logicalOriginX && y == m_logicalOriginY )
-        return;
-
-    wxDCImpl::SetLogicalOrigin( x, y );
+    wxDCImpl::SetLogicalOrigin(logicalOrigin);
 
     RealizeScaleAndOrigin();
 }
 
 // For use by wxWidgets only, unless custom units are required.
-void wxMSWDCImpl::SetLogicalScale(double x, double y)
+void wxMSWDCImpl::SetLogicalScale(wxScale logicalScale)
 {
-    wxDCImpl::SetLogicalScale(x,y);
+    wxDCImpl::SetLogicalScale(logicalScale);
 
     RealizeScaleAndOrigin();
 }
 
-void wxMSWDCImpl::SetDeviceOrigin(wxCoord x, wxCoord y)
+void wxMSWDCImpl::SetDeviceOrigin(wxPoint deviceOrigin)
 {
-    if ( x == m_deviceOriginX && y == m_deviceOriginY )
+    if (deviceOrigin.x == m_deviceOrigin.x && deviceOrigin.y == m_deviceOrigin.y )
         return;
 
-    wxDCImpl::SetDeviceOrigin( x, y );
+    wxDCImpl::SetDeviceOrigin(deviceOrigin);
 
-    ::SetViewportOrgEx(GetHdc(), (int)m_deviceOriginX, (int)m_deviceOriginY, nullptr);
+    ::SetViewportOrgEx(GetHdc(), (int)m_deviceOrigin.x, (int)m_deviceOrigin.y, nullptr);
 
     m_isClipBoxValid = false;
 }

@@ -51,9 +51,9 @@ void wxX11DCImpl::DoGetSizeMM( int* width, int* height ) const
     DoGetSize( &w, &h );
 
     if ( width )
-        *width = int( double(w) / (m_scaleX*GetMMToPXx()) );
+        *width = int( double(w) / (m_scale.x * GetMMToPXx()) );
     if ( height )
-        *height = int( double(h) / (m_scaleY*GetMMToPXy()) );
+        *height = int( double(h) / (m_scale.y * GetMMToPXy()) );
 }
 
 // Resolution in pixels per logical inch

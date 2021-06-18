@@ -45,8 +45,8 @@ wxScreenDCImpl::wxScreenDCImpl(wxScreenDC *owner)
     if (sm_overlayWindow)
     {
         m_pixmap = sm_overlayWindow;
-        m_deviceOriginX = - sm_overlayWindowX;
-        m_deviceOriginY = - sm_overlayWindowY;
+        m_deviceOrigin.x = - sm_overlayWindowX;
+        m_deviceOrigin.y = - sm_overlayWindowY;
     }
     else
         m_pixmap = (WXPixmap) RootWindow(display, DefaultScreen(display));

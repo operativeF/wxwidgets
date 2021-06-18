@@ -411,9 +411,9 @@ void wxGCDCImpl::DoGetSizeMM( int* width, int* height ) const
     wxSize sz = GetOwner()->GetSize();
 
     if (width)
-        *width = long( double(sz.x) / (m_scaleX * GetMMToPXx()) );
+        *width = long( double(sz.x) / (m_scale.x * GetMMToPXx()) );
     if (height)
-        *height = long( double(sz.y) / (m_scaleY * GetMMToPXy()) );
+        *height = long( double(sz.y) / (m_scale.y * GetMMToPXy()) );
 }
 
 void wxGCDCImpl::SetTextForeground( const wxColour &col )
@@ -465,10 +465,10 @@ void wxGCDCImpl::ComputeScaleAndOrigin()
         m_matrixCurrent = m_graphicContext->CreateMatrix();
 
         // the logical origin sets the origin to have new coordinates
-        m_matrixCurrent.Translate( m_deviceOriginX - m_logicalOriginX * m_signX * m_scaleX,
-                                   m_deviceOriginY - m_logicalOriginY * m_signY * m_scaleY);
+        m_matrixCurrent.Translate( m_deviceOrigin.x - m_logicalOrigin.x * m_signX * m_scale.x,
+                                   m_deviceOrigin.y - m_logicalOrigin.y * m_signY * m_scale.y);
 
-        m_matrixCurrent.Scale( m_scaleX * m_signX, m_scaleY * m_signY );
+        m_matrixCurrent.Scale( m_scale.x * m_signX, m_scale.y * m_signY );
 
         m_graphicContext->SetTransform( m_matrixOriginal );
 #if wxUSE_DC_TRANSFORM_MATRIX
@@ -780,7 +780,7 @@ void wxGCDCImpl::DoDrawPoint( wxCoord x, wxCoord y )
     wxDCPenChanger penChanger(*GetOwner(), *wxTRANSPARENT_PEN);
 
     // Raster-based DCs draw a single pixel regardless of scale
-    m_graphicContext->DrawRectangle(x, y, 1 / m_scaleX, 1 / m_scaleY);
+    m_graphicContext->DrawRectangle(x, y, 1 / m_scale.x, 1 / m_scale.y);
 
     CalcBoundingBox(x, y);
 }

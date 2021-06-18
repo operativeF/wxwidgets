@@ -364,32 +364,31 @@ public:
     virtual void SetMapMode(wxMappingMode mode);
     virtual wxMappingMode GetMapMode() const { return m_mappingMode; }
 
-    virtual void SetUserScale(double x, double y);
-    virtual void GetUserScale(double *x, double *y) const
+    virtual void SetUserScale(double userScale);
+    virtual void SetUserScale(wxScale userScale);
+    virtual wxScale GetUserScale() const
     {
-        if ( x ) *x = m_userScaleX;
-        if ( y ) *y = m_userScaleY;
+        return m_userScale;
     }
 
-    virtual void SetLogicalScale(double x, double y);
-    virtual void GetLogicalScale(double *x, double *y) const
+    virtual void SetLogicalScale(double logicalScale);
+    virtual void SetLogicalScale(wxScale logicalScale);
+    virtual wxScale GetLogicalScale() const
     {
-        if ( x ) *x = m_logicalScaleX;
-        if ( y ) *y = m_logicalScaleY;
+        return m_logicalScale;
     }
 
-    virtual void SetLogicalOrigin(wxCoord x, wxCoord y);
-    virtual void DoGetLogicalOrigin(wxCoord *x, wxCoord *y) const
+    virtual void SetLogicalOrigin(wxPoint logicalOrigin);
+    virtual wxPoint DoGetLogicalOrigin() const
     {
-        if ( x ) *x = m_logicalOriginX;
-        if ( y ) *y = m_logicalOriginY;
+        return m_logicalOrigin;
     }
 
-    virtual void SetDeviceOrigin(wxCoord x, wxCoord y);
-    virtual void DoGetDeviceOrigin(wxCoord *x, wxCoord *y) const
+    virtual void SetDeviceOrigin(wxPoint deviceOrigin);
+
+    virtual wxPoint DoGetDeviceOrigin() const
     {
-        if ( x ) *x = m_deviceOriginX;
-        if ( y ) *y = m_deviceOriginY;
+        return m_deviceLocalOrigin;
     }
 
 #if wxUSE_DC_TRANSFORM_MATRIX
@@ -406,7 +405,7 @@ public:
         { }
 #endif // wxUSE_DC_TRANSFORM_MATRIX
 
-    virtual void SetDeviceLocalOrigin( wxCoord x, wxCoord y );
+    virtual void SetDeviceLocalOrigin( wxPoint deviceLocalOrigin );
 
     virtual void ComputeScaleAndOrigin();
 
@@ -592,18 +591,18 @@ protected:
 
     // coordinate system variables
 
-    wxCoord m_logicalOriginX, m_logicalOriginY;
-    wxCoord m_deviceOriginX, m_deviceOriginY;           // Usually 0,0, can be change by user
-
-    wxCoord m_deviceLocalOriginX, m_deviceLocalOriginY; // non-zero if native top-left corner
-                                                        // is not at 0,0. This was the case under
-                                                        // Mac's GrafPorts (coordinate system
-                                                        // used toplevel window's origin) and
-                                                        // e.g. for Postscript, where the native
-                                                        // origin in the bottom left corner.
-    double m_logicalScaleX, m_logicalScaleY;
-    double m_userScaleX, m_userScaleY;
-    double m_scaleX, m_scaleY;  // calculated from logical scale and user scale
+    wxPoint m_logicalOrigin{0, 0};
+    wxPoint m_deviceOrigin{0, 0};
+    wxPoint m_deviceLocalOrigin{0, 0};   // non-zero if native top-left corner
+                                   // is not at 0,0. This was the case under
+                                   // Mac's GrafPorts (coordinate system
+                                   // used toplevel window's origin) and
+                                   // e.g. for Postscript, where the native
+                                   // origin in the bottom left corner.
+    
+    wxScale m_logicalScale{1.0, 1.0};
+    wxScale m_userScale{1.0, 1.0};
+    wxScale m_scale{1.0, 1.0};
 
     int m_signX, m_signY;  // Used by SetAxisOrientation() to invert the axes
 
@@ -923,29 +922,29 @@ public:
     wxMappingMode GetMapMode() const
         { return m_pimpl->GetMapMode(); }
 
-    void SetUserScale(double x, double y)
-        { m_pimpl->SetUserScale(x,y); }
-    void GetUserScale(double *x, double *y) const
-        { m_pimpl->GetUserScale( x, y ); }
+    void SetUserScale(double userScale)
+        { SetUserScale({ userScale, userScale }); }
+    void SetUserScale(wxScale userScale)
+        { m_pimpl->SetUserScale(userScale); }
+    wxScale GetUserScale() const
+        { return m_pimpl->GetUserScale(); }
 
-    void SetLogicalScale(double x, double y)
-        { m_pimpl->SetLogicalScale( x, y ); }
-    void GetLogicalScale(double *x, double *y) const
-        { m_pimpl->GetLogicalScale( x, y ); }
+    void SetLogicalScale(double logicalScale)
+        { SetLogicalScale({ logicalScale, logicalScale }); }
+    void SetLogicalScale(wxScale logicalScale)
+        { m_pimpl->SetLogicalScale(logicalScale); }
+    wxScale GetLogicalScale() const
+        { return m_pimpl->GetLogicalScale(); }
 
-    void SetLogicalOrigin(wxCoord x, wxCoord y)
-        { m_pimpl->SetLogicalOrigin(x,y); }
-    void GetLogicalOrigin(wxCoord *x, wxCoord *y) const
-        { m_pimpl->DoGetLogicalOrigin(x, y); }
+    void SetLogicalOrigin(wxPoint logicalOrigin)
+        { m_pimpl->SetLogicalOrigin(logicalOrigin); }
     wxPoint GetLogicalOrigin() const
-        { wxCoord x, y; m_pimpl->DoGetLogicalOrigin(&x, &y); return wxPoint(x, y); }
+        { return m_pimpl->DoGetLogicalOrigin(); }
 
-    void SetDeviceOrigin(wxCoord x, wxCoord y)
-        { m_pimpl->SetDeviceOrigin( x, y); }
-    void GetDeviceOrigin(wxCoord *x, wxCoord *y) const
-        { m_pimpl->DoGetDeviceOrigin(x, y); }
+    void SetDeviceOrigin( wxPoint deviceOrigin )
+        { m_pimpl->SetDeviceOrigin(deviceOrigin); }
     wxPoint GetDeviceOrigin() const
-        { wxCoord x, y; m_pimpl->DoGetDeviceOrigin(&x, &y); return wxPoint(x, y); }
+        { return m_pimpl->DoGetDeviceOrigin(); }
 
     void SetAxisOrientation(bool xLeftRight, bool yBottomUp)
         { m_pimpl->SetAxisOrientation(xLeftRight, yBottomUp); }
@@ -965,8 +964,8 @@ public:
 #endif // wxUSE_DC_TRANSFORM_MATRIX
 
     // mostly internal
-    void SetDeviceLocalOrigin( wxCoord x, wxCoord y )
-        { m_pimpl->SetDeviceLocalOrigin( x, y ); }
+    void SetDeviceLocalOrigin( wxPoint deviceLocalOrigin )
+        { m_pimpl->SetDeviceLocalOrigin( deviceLocalOrigin ); }
 
 
     // -----------------------------------------------

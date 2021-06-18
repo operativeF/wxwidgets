@@ -183,9 +183,9 @@ public:
     }
 
     // Set the scale factor, used in PrepareDC
-    void SetScale(double xs, double ys) { m_scaleX = xs; m_scaleY = ys; }
-    double GetScaleX() const { return m_scaleX; }
-    double GetScaleY() const { return m_scaleY; }
+    void SetScale(wxScale aScale) { m_scale = aScale; }
+    double GetScaleX() const { return m_scale.x; }
+    double GetScaleY() const { return m_scale.y; }
 
     // translate between scrolled and unscrolled coordinates
     void CalcScrolledPosition(int x, int y, int *xx, int *yy) const
@@ -323,9 +323,7 @@ protected:
         return true;
     }
 
-
-    double                m_scaleX{1.0};
-    double                m_scaleY{1.0};
+    wxScale m_scale{1.0, 1.0};
 
     wxRect                m_rectToScroll;
 

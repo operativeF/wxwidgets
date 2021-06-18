@@ -129,15 +129,15 @@ public:
         return wxRasterOperationMode::Copy;
     }
 
-    void SetLogicalOrigin(wxCoord x, wxCoord y) override
+    void SetLogicalOrigin(wxPoint logicalOrigin) override
     {
-        wxDCImpl::SetLogicalOrigin(x, y);
+        wxDCImpl::SetLogicalOrigin(logicalOrigin);
         m_graphics_changed = true;
     }
 
-    void SetDeviceOrigin(wxCoord x, wxCoord y) override
+    void SetDeviceOrigin(wxPoint deviceOrigin) override
     {
-        wxDCImpl::SetDeviceOrigin(x, y);
+        wxDCImpl::SetDeviceOrigin(deviceOrigin);
         m_graphics_changed = true;
     }
 

@@ -3939,7 +3939,7 @@ void wxAuiManager::Repaint(wxDC* dc)
     // origin will not be (0,0).
     wxPoint pt = m_frame->GetClientAreaOrigin();
     if (pt.x != 0 || pt.y != 0)
-        dc->SetDeviceOrigin(pt.x, pt.y);
+        dc->SetDeviceOrigin(pt);
 
     // render all the items
     Render(dc);
@@ -4100,7 +4100,7 @@ void wxAuiManager::UpdateButtonOnScreen(wxAuiDockUIPart* button_ui_part,
     // origin will not be (0,0).
     wxPoint pt = m_frame->GetClientAreaOrigin();
     if (pt.x != 0 || pt.y != 0)
-        cdc.SetDeviceOrigin(pt.x, pt.y);
+        cdc.SetDeviceOrigin(pt);
 
     if (hit_test->pane)
     {

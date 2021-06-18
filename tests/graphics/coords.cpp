@@ -114,14 +114,13 @@ static void InitialState(wxDC* dc)
     CHECK(origin.x == 0);
     CHECK(origin.y == 0);
 
-    double sx, sy;
-    dc->GetUserScale(&sx, &sy);
-    CHECK(sx == 1.0);
-    CHECK(sy == 1.0);
+    wxScale userScale = dc->GetUserScale();
+    CHECK(userScale.x == 1.0);
+    CHECK(userScale.y == 1.0);
 
-    dc->GetLogicalScale(&sx, &sy);
-    CHECK(sx == 1.0);
-    CHECK(sy == 1.0);
+    wxScale logicalScale = dc->GetLogicalScale();
+    CHECK(logicalScale.x == 1.0);
+    CHECK(logicalScale.y == 1.0);
 
 #if wxUSE_DC_TRANSFORM_MATRIX
     if ( dc->CanUseTransformMatrix() )
@@ -195,7 +194,7 @@ static void DeviceOriginChanged(wxDC* dc)
     // Only device origin is changed
     const wxCoord dx = 10;
     const wxCoord dy = 15;
-    dc->SetDeviceOrigin(dx, dy);
+    dc->SetDeviceOrigin({ dx, dy });
 
     // First convert from device to logical coordinates
     wxPoint posLog;
@@ -229,7 +228,7 @@ static void DeviceOriginChangedEx(wxDC * dc)
     // Only device origin is changed
     const wxCoord dx = 10;
     const wxCoord dy = 15;
-    dc->SetDeviceOrigin(dx, dy);
+    dc->SetDeviceOrigin({ dx, dy });
 
     // First convert from device to logical coordinates
     wxPoint posLog;
@@ -259,7 +258,7 @@ static void LogicalOriginChanged(wxDC* dc)
     // Only logical origin is changed
     const wxCoord dx = -15;
     const wxCoord dy = -20;
-    dc->SetLogicalOrigin(dx, dy);
+    dc->SetLogicalOrigin({ dx, dy });
 
     // First convert from device to logical coordinates
     wxPoint posLog;
@@ -293,7 +292,7 @@ static void LogicalOriginChangedEx(wxDC * dc)
     // Only logical origin is changed
     const wxCoord dx = -15;
     const wxCoord dy = -20;
-    dc->SetLogicalOrigin(dx, dy);
+    dc->SetLogicalOrigin({ dx, dy });
 
     // First convert from device to logical coordinates
     wxPoint posLog;
@@ -323,7 +322,7 @@ static void UserScaleChanged(wxDC* dc)
     // Only user scale is changed
     const double sx = 2.0;
     const double sy = 3.0;
-    dc->SetUserScale(sx, sy);
+    dc->SetUserScale({ sx, sy });
 
     // First convert from device to logical coordinates
     wxPoint posLog;
@@ -357,7 +356,7 @@ static void UserScaleChangedEx(wxDC * dc)
     // Only user scale is changed
     const double sx = 2.0;
     const double sy = 3.0;
-    dc->SetUserScale(sx, sy);
+    dc->SetUserScale({ sx, sy });
 
     // First convert from device to logical coordinates
     wxPoint posLog;
@@ -387,7 +386,7 @@ static void LogicalScaleChanged(wxDC* dc)
     // Only logical scale is changed
     const double sx = 2.0;
     const double sy = 3.0;
-    dc->SetLogicalScale(sx, sy);
+    dc->SetLogicalScale({ sx, sy });
 
     // First convert from device to logical coordinates
     wxPoint posLog;
@@ -421,7 +420,7 @@ static void LogicalScaleChangedEx(wxDC * dc)
     // Only logical scale is changed
     const double sx = 2.0;
     const double sy = 3.0;
-    dc->SetLogicalScale(sx, sy);
+    dc->SetLogicalScale({ sx, sy });
 
     // First convert from device to logical coordinates
     wxPoint posLog;
@@ -449,10 +448,10 @@ static void LogicalScaleChangedEx(wxDC * dc)
 static void TransformedStd(wxDC* dc)
 {
     // Apply all standardd transformations
-    dc->SetDeviceOrigin(10, 15);
-    dc->SetUserScale(0.5, 2.0);
-    dc->SetLogicalScale(4.0, 1.5);
-    dc->SetLogicalOrigin(-15, -20);
+    dc->SetDeviceOrigin({ 10, 15 });
+    dc->SetUserScale({ 0.5, 2.0 });
+    dc->SetLogicalScale({ 4.0, 1.5 });
+    dc->SetLogicalOrigin({ -15, -20 });
 
     // First convert from device to logical coordinates
     wxPoint posLog;
@@ -484,10 +483,10 @@ static void TransformedStd(wxDC* dc)
 static void TransformedStdEx(wxDC * dc)
 {
     // Apply all standardd transformations
-    dc->SetDeviceOrigin(10, 15);
-    dc->SetUserScale(0.5, 2.0);
-    dc->SetLogicalScale(4.0, 1.5);
-    dc->SetLogicalOrigin(-15, -20);
+    dc->SetDeviceOrigin({ 10, 15 });
+    dc->SetUserScale({ 0.5, 2.0 });
+    dc->SetLogicalScale({ 4.0, 1.5 });
+    dc->SetLogicalOrigin({ -15, -20 });
 
     // First convert from device to logical coordinates
     wxPoint posLog;
@@ -608,11 +607,11 @@ static void TransformedWithMatrixAndStd(wxDC* dc)
 #if wxUSE_DC_TRANSFORM_MATRIX
     if ( dc->CanUseTransformMatrix() )
     {
-        dc->SetDeviceOrigin(10, 15);
+        dc->SetDeviceOrigin({ 10, 15 });
 
-        dc->SetUserScale(0.5, 1.5);
-        dc->SetLogicalScale(4.0, 2.0);
-        dc->SetLogicalOrigin(-15, -20);
+        dc->SetUserScale({ 0.5, 1.5 });
+        dc->SetLogicalScale({ 4.0, 2.0 });
+        dc->SetLogicalOrigin({ -15, -20 });
 
         wxAffineMatrix2D m = dc->GetTransformMatrix();
         m.Translate(10, 18);
@@ -664,11 +663,11 @@ static void TransformedWithMatrixAndStdEx(wxDC * dc)
 #if wxUSE_DC_TRANSFORM_MATRIX
     if ( dc->CanUseTransformMatrix() )
     {
-        dc->SetDeviceOrigin(10, 15);
+        dc->SetDeviceOrigin({ 10, 15 });
 
-        dc->SetUserScale(0.5, 1.5);
-        dc->SetLogicalScale(4.0, 2.0);
-        dc->SetLogicalOrigin(-15, -20);
+        dc->SetUserScale({ 0.5, 1.5 });
+        dc->SetLogicalScale({ 4.0, 2.0 });
+        dc->SetLogicalOrigin({ -15, -20 });
 
         wxAffineMatrix2D m = dc->GetTransformMatrix();
         m.Translate(10, 18);

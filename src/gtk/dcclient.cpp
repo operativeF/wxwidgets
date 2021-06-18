@@ -339,7 +339,7 @@ wxWindowDCImpl::wxWindowDCImpl( wxDC *owner, wxWindow *window ) :
         m_signX = -1;
 
         // origin in the upper right corner
-        m_deviceOriginX = m_window->GetClientSize().x;
+        m_deviceOrigin.x = m_window->GetClientSize().x;
     }
 }
 
@@ -573,8 +573,8 @@ void wxWindowDCImpl::DrawingSetup(GdkGC*& gc, bool& originChanged)
     {
         int w, h;
         gdk_drawable_get_size(pixmap, &w, &h);
-        origin_x = m_deviceOriginX % w;
-        origin_y = m_deviceOriginY % h;
+        origin_x = m_deviceOrigin.x % w;
+        origin_y = m_deviceOrigin.y % h;
     }
 
     originChanged = origin_x || origin_y;
@@ -1127,7 +1127,7 @@ void wxWindowDCImpl::DoDrawBitmap( const wxBitmap &bitmap,
     {
         if (isScaled)
         {
-            mask = ScaleMask(mask, 0, 0, w, h, ww, hh, m_scaleX, m_scaleY);
+            mask = ScaleMask(mask, 0, 0, w, h, ww, hh, m_scale.x, m_scale.y);
             mask_new = mask;
         }
         if (overlap == wxPartRegion)
@@ -1165,9 +1165,9 @@ void wxWindowDCImpl::DoDrawBitmap( const wxBitmap &bitmap,
     if (isScaled)
     {
         if (pixbuf)
-            pixbuf = Scale(pixbuf, ww, hh, m_scaleX, m_scaleY);
+            pixbuf = Scale(pixbuf, ww, hh, m_scale.x, m_scale.y);
         else
-            pixbuf = Scale(pixmap, 0, 0, w, h, ww, hh, m_scaleX, m_scaleY);
+            pixbuf = Scale(pixmap, 0, 0, w, h, ww, hh, m_scale.x, m_scale.y);
 
         pixbuf_new = pixbuf;
     }
@@ -1296,8 +1296,8 @@ bool wxWindowDCImpl::DoBlit( wxCoord xdest, wxCoord ydest,
         double usx, usy, lsx, lsy;
         source->GetUserScale(&usx, &usy);
         source->GetLogicalScale(&lsx, &lsy);
-        scale_x = m_scaleX / (usx * lsx);
-        scale_y = m_scaleY / (usy * lsy);
+        scale_x = m_scale.x / (usx * lsx);
+        scale_y = m_scale.y / (usy * lsy);
     }
 
     GdkGC* const use_gc = m_penGC;
@@ -1406,9 +1406,9 @@ void wxWindowDCImpl::DoDrawRotatedText(const wxString& text, int xLogical, int y
         bg_col = m_textBackgroundColour.GetColor();
 
     PangoMatrix matrix = PANGO_MATRIX_INIT;
-    if (!wxIsSameDouble(m_scaleX, 1) || !wxIsSameDouble(m_scaleY, 1) || !wxIsNullDouble(angle))
+    if (!wxIsSameDouble(m_scale.x, 1) || !wxIsSameDouble(m_scale.y, 1) || !wxIsNullDouble(angle))
     {
-        pango_matrix_scale(&matrix, m_scaleX, m_scaleY);
+        pango_matrix_scale(&matrix, m_scale.x, m_scale.y);
         pango_matrix_rotate(&matrix, angle);
         pango_context_set_matrix(m_context, &matrix);
         pango_layout_context_changed(m_layout);
@@ -1484,7 +1484,7 @@ bool wxWindowDCImpl::DoGetPartialTextExtents(const wxString& text,
     wxCHECK_MSG( m_font.IsOk(), false, wxT("Invalid font") );
 
     wxTextMeasure txm(GetOwner(), &m_font);
-    return txm.GetPartialTextExtents(text, widths, m_scaleX);
+    return txm.GetPartialTextExtents(text, widths, m_scale.x);
 }
 
 
@@ -2043,10 +2043,9 @@ void wxWindowDCImpl::Destroy()
     m_bgGC = NULL;
 }
 
-void wxWindowDCImpl::SetDeviceOrigin( wxCoord x, wxCoord y )
+void wxWindowDCImpl::SetDeviceOrigin( wxPoint deviceOrigin )
 {
-    m_deviceOriginX = x;
-    m_deviceOriginY = y;
+    m_deviceOrigin = deviceOrigin;
 
     ComputeScaleAndOrigin();
 }
@@ -2065,12 +2064,12 @@ void wxWindowDCImpl::SetAxisOrientation( bool xLeftRight, bool yBottomUp )
 
 void wxWindowDCImpl::ComputeScaleAndOrigin()
 {
-    const wxRealPoint origScale(m_scaleX, m_scaleY);
+    const wxRealPoint origScale(m_scale.x, m_scale.y);
 
     wxDCImpl::ComputeScaleAndOrigin();
 
     // if scale has changed call SetPen to recalculate the line width
-    if ( wxRealPoint(m_scaleX, m_scaleY) != origScale && m_pen.IsOk() )
+    if ( wxRealPoint(m_scale.x, m_scale.y) != origScale && m_pen.IsOk() )
     {
         // this is a bit artificial, but we need to force wxDC to think the pen
         // has changed

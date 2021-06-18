@@ -2147,7 +2147,7 @@ void wxGridRowLabelWindow::OnPaint( wxPaintEvent& WXUNUSED(event) )
     m_owner->GetGridWindowOffset(gridWindow, x, y);
     m_owner->CalcGridWindowUnscrolledPosition( x, y, &x, &y, gridWindow );
     wxPoint pt = dc.GetDeviceOrigin();
-    dc.SetDeviceOrigin( pt.x, pt.y-y );
+    dc.SetDeviceOrigin( {pt.x, pt.y - y} );
 
     std::vector<int> rows = m_owner->CalcRowLabelsExposed( GetUpdateRegion(), gridWindow);
     m_owner->DrawRowLabels( dc, rows );
@@ -2196,7 +2196,7 @@ void wxGridColLabelWindow::OnPaint( wxPaintEvent& WXUNUSED(event) )
     m_owner->GetGridWindowOffset(gridWindow, x, y);
     m_owner->CalcGridWindowUnscrolledPosition( x, y, &x, &y, gridWindow );
     wxPoint pt = dc.GetDeviceOrigin();
-    dc.SetDeviceOrigin( pt.x-x, pt.y );
+    dc.SetDeviceOrigin( {pt.x - x, pt.y} );
 
     std::vector<int> cols = m_owner->CalcColLabelsExposed( GetUpdateRegion(), gridWindow );
     m_owner->DrawColLabels( dc, cols );
@@ -2304,12 +2304,10 @@ void wxGrid::Render( wxDC& dc,
     }
 
     // store user device origin
-    wxCoord userOriginX, userOriginY;
-    dc.GetDeviceOrigin( &userOriginX, &userOriginY );
+    wxPoint userOrigin = dc.GetDeviceOrigin();
 
     // store user scale
-    double scaleUserX, scaleUserY;
-    dc.GetUserScale( &scaleUserX, &scaleUserY );
+    wxScale userScale = dc.GetUserScale();
 
     // set defaults if necessary
     wxGridCellCoords leftTop( topLeft ), rightBottom( bottomRight );
@@ -2342,11 +2340,9 @@ void wxGrid::Render( wxDC& dc,
 
     // get render start position in logical units
     wxPoint positionRender = GetRenderPosition( dc, position );
+    wxPoint originDevice{ dc.LogicalToDeviceX(positionRender.x), dc.LogicalToDeviceY(positionRender.y) };
 
-    wxCoord originX = dc.LogicalToDeviceX( positionRender.x );
-    wxCoord originY = dc.LogicalToDeviceY( positionRender.y );
-
-    dc.SetDeviceOrigin( originX, originY );
+    dc.SetDeviceOrigin( originDevice );
 
     SetRenderScale( dc, positionRender, size, sizeGrid );
 
@@ -2356,39 +2352,39 @@ void wxGrid::Render( wxDC& dc,
         if ( style & wxGRID_DRAW_COLS_HEADER )
         {
             DrawCornerLabel( dc ); // do only if both col and row labels drawn
-            originY += dc.LogicalToDeviceYRel( GetColLabelSize() );
+            originDevice.y += dc.LogicalToDeviceYRel( GetColLabelSize() );
         }
 
-        originY -= dc.LogicalToDeviceYRel( pointOffSet.y );
-        dc.SetDeviceOrigin( originX, originY );
+        originDevice.y -= dc.LogicalToDeviceYRel( pointOffSet.y );
+        dc.SetDeviceOrigin( originDevice );
 
         DrawRowLabels( dc, arrayRows );
 
         // reset for columns
         if ( style & wxGRID_DRAW_COLS_HEADER )
-            originY -= dc.LogicalToDeviceYRel( GetColLabelSize() );
+            originDevice.y -= dc.LogicalToDeviceYRel( GetColLabelSize() );
 
-        originY += dc.LogicalToDeviceYRel( pointOffSet.y );
+        originDevice.y += dc.LogicalToDeviceYRel( pointOffSet.y );
         // X offset so we don't overwrite row labels
-        originX += dc.LogicalToDeviceXRel( GetRowLabelSize() );
+        originDevice.x += dc.LogicalToDeviceXRel( GetRowLabelSize() );
     }
 
     // subtract col offset where startcol > 0
-    originX -= dc.LogicalToDeviceXRel( pointOffSet.x );
+    originDevice.x -= dc.LogicalToDeviceXRel( pointOffSet.x );
     // no y offset for col labels, they are at the Y origin
 
     // draw column labels
     if ( style & wxGRID_DRAW_COLS_HEADER )
     {
-        dc.SetDeviceOrigin( originX, originY );
+        dc.SetDeviceOrigin( originDevice );
         DrawColLabels( dc, arrayCols );
         // don't overwrite the labels, increment originY
-        originY += dc.LogicalToDeviceYRel( GetColLabelSize() );
+        originDevice.y += dc.LogicalToDeviceYRel( GetColLabelSize() );
     }
 
     // set device origin to draw grid cells and lines
-    originY -= dc.LogicalToDeviceYRel( pointOffSet.y );
-    dc.SetDeviceOrigin( originX, originY );
+    originDevice.y -= dc.LogicalToDeviceYRel( pointOffSet.y );
+    dc.SetDeviceOrigin( originDevice );
 
     // draw cell area background
     dc.SetBrush( GetDefaultCellBackgroundColour() );
@@ -2423,8 +2419,8 @@ void wxGrid::Render( wxDC& dc,
                  leftTop, rightBottom );
 
     // restore user setings
-    dc.SetDeviceOrigin( userOriginX, userOriginY );
-    dc.SetUserScale( scaleUserX, scaleUserY );
+    dc.SetDeviceOrigin(userOrigin);
+    dc.SetUserScale(userScale);
 
     if ( selectedCells.size() && !( style & wxGRID_DRAW_SELECTION ) )
     {
@@ -2440,7 +2436,6 @@ wxGrid::SetRenderScale(wxDC& dc,
                        const wxPoint& pos, const wxSize& size,
                        const wxSize& sizeGrid )
 {
-    double scaleX, scaleY;
     wxSize sizeTemp;
 
     if ( size.x != wxDefaultSize.x ) // size.x was specified
@@ -2453,10 +2448,10 @@ wxGrid::SetRenderScale(wxDC& dc,
     else
         sizeTemp.y = dc.DeviceToLogicalYRel( dc.GetSize().y) - pos.y;
 
-    scaleX = (double)( (double) sizeTemp.x / (double) sizeGrid.x );
-    scaleY = (double)( (double) sizeTemp.y / (double) sizeGrid.y );
+    double scaleX = (double)( (double) sizeTemp.x / (double) sizeGrid.x );
+    double scaleY = (double)( (double) sizeTemp.y / (double) sizeGrid.y );
 
-    dc.SetUserScale( wxMin( scaleX, scaleY), wxMin( scaleX, scaleY ) );
+    dc.SetUserScale(wxMin(scaleX, scaleY));
 }
 
 // get grid rendered size, origin offset and fill cell arrays
@@ -3777,7 +3772,7 @@ void wxGrid::PrepareDCFor(wxDC &dc, wxGridWindow *gridWindow)
     if ( gridWindow->GetType() & wxGridWindow::wxGridWindowFrozenRow )
         dcOrigin.y = 0;
 
-    dc.SetDeviceOrigin(dcOrigin.x, dcOrigin.y);
+    dc.SetDeviceOrigin(dcOrigin);
 }
 
 void wxGrid::ProcessRowLabelMouseEvent( wxMouseEvent& event, wxGridRowLabelWindow* rowLabelWin )

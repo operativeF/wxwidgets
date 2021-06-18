@@ -1156,7 +1156,7 @@ void wxPostScriptDCImpl::SetPSFont()
 
     // Select font
     double size = m_font.GetPointSize() * double(GetFontPointSizeAdjustment(DPI));
-    buffer.Printf( "%s findfont %f scalefont setfont\n", name.c_str(), size * m_scaleX );
+    buffer.Printf( "%s findfont %f scalefont setfont\n", name.c_str(), size * m_scale.x );
     buffer.Replace( ",", "." );
     PsPrint( buffer );
 
@@ -1185,7 +1185,7 @@ void wxPostScriptDCImpl::SetPen( const wxPen& pen )
     }();
 
     wxString buffer;
-    buffer.Printf( "%f setlinewidth\n", width * DEV2PS * m_scaleX );
+    buffer.Printf( "%f setlinewidth\n", width * DEV2PS * m_scale.x );
     buffer.Replace( ",", "." );
     PsPrint( buffer );
 
@@ -1548,13 +1548,13 @@ void wxPostScriptDCImpl::SetPrintData(const wxPrintData& data)
 
 void wxPostScriptDCImpl::ComputeScaleAndOrigin()
 {
-    const wxRealPoint origScale(m_scaleX, m_scaleY);
+    const wxRealPoint origScale(m_scale.x, m_scale.y);
 
     wxDCImpl::ComputeScaleAndOrigin();
 
     // If scale has changed call SetPen to recalculate the line width
     // and request for recalculating the font size at nearest opportunity.
-    if ( wxRealPoint(m_scaleX, m_scaleY) != origScale )
+    if ( wxRealPoint(m_scale.x, m_scale.y) != origScale )
     {
         if ( m_pen.IsOk() )
             SetPen( m_pen );
