@@ -7265,10 +7265,9 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
                     oldWidth = 0;
 
                 // Add these partial extents
-                std::vector<int> p;
-                dc.GetPartialTextExtents(stringFragment, p);
-                size_t j;
-                for (j = 0; j < p.size(); j++)
+                std::vector<int> p = dc.GetPartialTextExtents(stringFragment);
+
+                for (size_t j = 0; j < p.size(); j++)
                     partialExtents->push_back(oldWidth + p[j]);
 
                 if (partialExtents->size() > 0)
@@ -7322,10 +7321,9 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
                 oldWidth = 0;
 
             // Add these partial extents
-            std::vector<int> p;
-            dc.GetPartialTextExtents(stringChunk, p);
-            size_t j;
-            for (j = 0; j < p.size(); j++)
+            std::vector<int> p = dc.GetPartialTextExtents(stringChunk);
+
+            for (size_t j = 0; j < p.size(); j++)
                 partialExtents->push_back(oldWidth + p[j]);
         }
         else

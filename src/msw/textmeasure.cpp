@@ -144,15 +144,15 @@ void wxTextMeasure::DoGetTextExtent(const wxString& string,
     }
 }
 
-bool wxTextMeasure::DoGetPartialTextExtents(const wxString& text,
-                                            std::vector<int>& widths,
-                                            double scaleX)
+std::vector<int> wxTextMeasure::DoGetPartialTextExtents(const wxString& text, double scaleX)
 {
     if ( !m_hdc )
-        return wxTextMeasureBase::DoGetPartialTextExtents(text, widths, scaleX);
+        return wxTextMeasureBase::DoGetPartialTextExtents(text, scaleX);
 
     int fit = 0;
     SIZE sz = {0,0};
+    std::vector<int> widths;
+
     if ( !::GetTextExtentExPoint(m_hdc,
                                  text.t_str(), // string to check
                                  text.length(),
@@ -163,8 +163,8 @@ bool wxTextMeasure::DoGetPartialTextExtents(const wxString& text,
                                  &sz) )
     {
         wxLogLastError(wxT("GetTextExtentExPoint"));
-
-        return false;
+        // FIXME: Return empty or perhaps partially filled vector?
+        return widths;
     }
 
     // The width of \t determined by GetTextExtentExPoint is 0. Determine the
@@ -173,6 +173,7 @@ bool wxTextMeasure::DoGetPartialTextExtents(const wxString& text,
     int tabWidth = 0;
     int tabHeight = 0;
     int* widthPtr = &widths[0];
+    // TODO: Use std::transform.
     for ( wxString::const_iterator i = text.begin(); i != text.end(); ++i )
     {
         if ( *i == '\t' )
@@ -187,5 +188,5 @@ bool wxTextMeasure::DoGetPartialTextExtents(const wxString& text,
         *widthPtr++ += offset;
     }
 
-    return true;
+    return widths;
 }

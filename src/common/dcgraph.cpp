@@ -1272,21 +1272,18 @@ void wxGCDCImpl::DoGetTextExtent( const wxString &str, wxCoord *width, wxCoord *
     }
 }
 
-bool wxGCDCImpl::DoGetPartialTextExtents(const wxString& text, std::vector<int>& widths) const
+std::vector<int> wxGCDCImpl::DoGetPartialTextExtents(const wxString& text) const
 {
-    wxCHECK_MSG( m_graphicContext, false, wxT("wxGCDC(cg)::DoGetPartialTextExtents - invalid DC") );
-    widths.clear();
-    widths.insert(std::end(widths), text.Length(), 0);
     if ( text.IsEmpty() )
-        return true;
+        return {};
 
-    std::vector<double> widthsD;
+    std::vector<double> widthsD = m_graphicContext->GetPartialTextExtents(text);
 
-    m_graphicContext->GetPartialTextExtents( text, widthsD );
-    for ( size_t i = 0; i < widths.size(); ++i )
-        widths[i] = wxRound(widthsD[i]);
+    std::vector<int> widths(widthsD.size());
+    std::transform(widthsD.begin(), widthsD.end(), widths.begin(), [](auto width){ return wxRound(width); });
 
-    return true;
+
+    return widths;
 }
 
 wxCoord wxGCDCImpl::GetCharWidth() const

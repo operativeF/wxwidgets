@@ -292,7 +292,7 @@ protected:
                      wxCoord *descent = NULL,
                      wxCoord *externalLeading = NULL,
                      const wxFont *theFont = NULL ) const override;
-    bool DoGetPartialTextExtents(const wxString& text, std::vector<int>& widths) const override;
+    std::vector<int> DoGetPartialTextExtents(const wxString& text) const override;
     wxSize DoGetSize() const override;
     void DoGetSizeMM(int *width, int *height) const override;
 

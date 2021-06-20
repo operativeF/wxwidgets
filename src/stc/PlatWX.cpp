@@ -609,11 +609,10 @@ void SurfaceImpl::DrawTextTransparent(PRectangle rc, Font &font, XYPOSITION ybas
 void SurfaceImpl::MeasureWidths(Font &font, const char *s, int len, XYPOSITION *positions) {
 
     wxString   str = stc2wx(s, len);
-    std::vector<int> tpos;
 
     SetFont(font);
 
-    hdc->GetPartialTextExtents(str, tpos);
+    std::vector<int> tpos = hdc->GetPartialTextExtents(str);
 
     // Map the widths back to the UTF-8 input string
     size_t utf8i = 0;

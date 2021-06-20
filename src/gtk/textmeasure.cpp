@@ -162,12 +162,10 @@ void wxTextMeasure::DoGetTextExtent(const wxString& string,
     }
 }
 
-bool wxTextMeasure::DoGetPartialTextExtents(const wxString& text,
-                                            std::vector<int>& widths,
-                                            double scaleX)
+std::vector<int> wxTextMeasure::DoGetPartialTextExtents(const wxString& text, double scaleX)
 {
     if ( !m_layout )
-        return wxTextMeasureBase::DoGetPartialTextExtents(text, widths, scaleX);
+        return wxTextMeasureBase::DoGetPartialTextExtents(text, scaleX);
 
     // Set layout's text
     const wxCharBuffer dataUTF8 = wxGTK_CONV_FONT(text, GetFont());
@@ -182,6 +180,8 @@ bool wxTextMeasure::DoGetPartialTextExtents(const wxString& text,
 
     // Calculate the position of each character based on the widths of
     // the previous characters
+
+    std::vector<int> widths;
 
     // Code borrowed from Scintilla's PlatGTK
     PangoLayoutIter *iter = pango_layout_get_iter(m_layout);
@@ -200,5 +200,5 @@ bool wxTextMeasure::DoGetPartialTextExtents(const wxString& text,
         widths[i++] = PANGO_PIXELS(pos.x + pos.width);
     pango_layout_iter_free(iter);
 
-    return true;
+    return widths;
 }

@@ -512,7 +512,7 @@ public:
 
     virtual void GetTextExtent( const wxString &str, double *width, double *height,
                                 double *descent, double *externalLeading ) const override;
-    void GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const override;
+    std::vector<int> GetPartialTextExtents(const wxString& text) const override;
 
 protected:
     void DoDrawText( const wxString &str, double x, double y ) override;
@@ -2926,13 +2926,15 @@ void wxCairoContext::GetTextExtent( const wxString &str, double *width, double *
     }
 }
 
-void wxCairoContext::GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const
+std::vector<int> wxCairoContext::GetPartialTextExtents(const wxString& text) const
 {
-    widths.clear();
-    wxCHECK_RET( !m_font.IsNull(), wxT("wxCairoContext::GetPartialTextExtents - no valid font set") );
+    //wxCHECK_RET( !m_font.IsNull(), wxT("wxCairoContext::GetPartialTextExtents - no valid font set") );
 #ifdef __WXGTK__
     const wxCharBuffer data = text.utf8_str();
     int w = 0;
+
+    std::vector<int> widths;
+
     if (data.length())
     {
         wxGtkObject<PangoLayout> layout(pango_cairo_create_layout(m_context));
@@ -2964,6 +2966,8 @@ void wxCairoContext::GetPartialTextExtents(const wxString& text, std::vector<dou
         widths.push_back(te.width);
     }
 #endif
+
+    return widths;
 }
 
 void * wxCairoContext::GetNativeContext()

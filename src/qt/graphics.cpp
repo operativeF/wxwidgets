@@ -985,9 +985,8 @@ public:
             *externalLeading = metrics.leading() - (metrics.ascent() + metrics.descent());
     }
 
-    virtual void
-    GetPartialTextExtents(const wxString& text,
-                          std::vector<double>& widths) const override
+    virtual std::vector<double>
+    GetPartialTextExtents(const wxString& text) const override
     {
         wxCHECK_RET( !m_font.IsNull(),
                      "wxQtContext::GetPartialTextExtents - no valid font set" );
@@ -1002,16 +1001,15 @@ public:
 
         const size_t textLength = text.length();
 
-        widths.clear();
-        widths.insert(widths.end(), textLength, 0);
-
         for ( size_t i = 0; i < textLength; ++i )
         {
             const wxString subString = text.substr(0, i+1);
             const QRect
                 boundingRect = metrics.boundingRect(QString(subString));
-            widths[i] = boundingRect.width();
+            widths.push_back(boundingRect.width());
         }
+
+        return widths;
     }
 
 protected:

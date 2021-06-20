@@ -363,8 +363,8 @@ void wxHtmlWordCell::Split(const wxDC& dc,
 
     // before selection:
     // (include character under caret only if in first half of width)
-    std::vector<int> widths ;
-    dc.GetPartialTextExtents(m_Word,widths) ;
+    std::vector<int> widths = dc.GetPartialTextExtents(m_Word);
+
     while( i < len && pt1.x >= widths[i] )
         i++ ;
     if ( i < len )

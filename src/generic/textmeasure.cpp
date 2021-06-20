@@ -55,11 +55,9 @@ void wxTextMeasure::DoGetTextExtent(const wxString& string,
     //else: we already asserted in the ctor, don't do it any more
 }
 
-bool wxTextMeasure::DoGetPartialTextExtents(const wxString& text,
-                                            std::vector<int>& widths,
-                                            double scaleX)
+std::vector<int> wxTextMeasure::DoGetPartialTextExtents(const wxString& text, double scaleX)
 {
-    return wxTextMeasureBase::DoGetPartialTextExtents(text, widths, scaleX);
+    return wxTextMeasureBase::DoGetPartialTextExtents(text, scaleX);
 }
 
 #endif // wxUSE_GENERIC_TEXTMEASURE

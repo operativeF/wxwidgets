@@ -169,7 +169,7 @@ public:
                                  wxCoord *descent = nullptr,
                                  wxCoord *externalLeading = nullptr,
                                  const wxFont *theFont = nullptr) const override;
-    bool DoGetPartialTextExtents(const wxString& text, std::vector<int>& widths) const override;
+    std::vector<int> DoGetPartialTextExtents(const wxString& text) const override;
 
     bool DoFloodFill(wxCoord x, wxCoord y, const wxColour& col,
                              wxFloodFillStyle style = wxFLOOD_SURFACE) override;

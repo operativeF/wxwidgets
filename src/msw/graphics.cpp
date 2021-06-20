@@ -479,7 +479,7 @@ public:
 
     void GetTextExtent( const wxString &str, double *width, double *height,
         double *descent, double *externalLeading ) const override;
-    void GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const override;
+    std::vector<double> GetPartialTextExtents(const wxString& text) const override;
     bool ShouldOffset() const override;
     virtual void GetSize( double* width, double *height );
     void GetDPI(double* dpiX, double* dpiY) const override;
@@ -2377,15 +2377,13 @@ void wxGDIPlusContext::GetTextExtent( const wxString &str, double *width, double
     }
 }
 
-void wxGDIPlusContext::GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const
+// FIXME: This function is a total mess and probably broken.
+std::vector<double> wxGDIPlusContext::GetPartialTextExtents(const wxString& text) const
 {
-    widths.clear();
-    widths.insert(widths.end(), text.length(), 0.0);
-
-    wxCHECK_RET( !m_font.IsNull(), wxT("wxGDIPlusContext::GetPartialTextExtents - no valid font set") );
+    //wxCHECK_RET( !m_font.IsNull(), wxT("wxGDIPlusContext::GetPartialTextExtents - no valid font set") );
 
     if (text.empty())
-        return;
+        return {};
 
     Font* f = ((wxGDIPlusFontData*)m_font.GetRefData())->GetGDIPlusFont();
     wxWCharBuffer ws = text.wc_str( *wxConvUI );
@@ -2400,6 +2398,8 @@ void wxGDIPlusContext::GetPartialTextExtents(const wxString& text, std::vector<d
     const size_t maxSpan = 32;
     CharacterRange* ranges = new CharacterRange[maxSpan] ;
     Region* regions = new Region[maxSpan];
+
+    std::vector<double> widths;
 
     while( remainder > 0 )
     {
@@ -2425,6 +2425,8 @@ void wxGDIPlusContext::GetPartialTextExtents(const wxString& text, std::vector<d
 
     delete[] ranges;
     delete[] regions;
+
+    return widths;
 }
 
 bool wxGDIPlusContext::ShouldOffset() const

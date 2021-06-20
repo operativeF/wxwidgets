@@ -3794,7 +3794,7 @@ class wxNullContext : public wxGraphicsContext
 public:
     explicit wxNullContext(wxGraphicsRenderer* renderer) : wxGraphicsContext(renderer) {}
     void GetTextExtent(const wxString&, double*, double*, double*, double*) const override {}
-    void GetPartialTextExtents(const wxString&, std::vector<double>&) const override {}
+    std::vector<double> GetPartialTextExtents(const wxString&) const override { return {}; }
     void Clip(const wxRegion&) override {}
     void Clip(double, double, double, double) override {}
     void ResetClip() override {}
@@ -3834,19 +3834,23 @@ public:
         GetTextExtent(wxGetD2DFontData(m_font), str, width, height, descent, externalLeading);
     }
 
-    void GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const override
+    std::vector<double> GetPartialTextExtents(const wxString& text) const override
     {
-        GetPartialTextExtents(wxGetD2DFontData(m_font), text, widths);
+        return GetPartialTextExtents(wxGetD2DFontData(m_font), text);
     }
 
-    static void GetPartialTextExtents(wxD2DFontData* fontData, const wxString& text, std::vector<double>& widths)
+    static std::vector<double> GetPartialTextExtents(wxD2DFontData* fontData, const wxString& text)
     {
+        std::vector<double> widths;
+
         for (unsigned int i = 0; i < text.Length(); ++i)
         {
             double width;
             GetTextExtent(fontData, text.SubString(0, i), &width, nullptr, nullptr, nullptr);
             widths.push_back(width);
         }
+
+        return widths;
     }
 
     static void GetTextExtent(wxD2DFontData* fontData, const wxString& str, double* width, double* height, double* descent, double* externalLeading)
@@ -3963,7 +3967,7 @@ public:
         double* descent,
         double* externalLeading) const override;
 
-    void GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const override;
+    std::vector<double> GetPartialTextExtents(const wxString& text) const override;
 
     bool ShouldOffset() const override;
 
@@ -4707,13 +4711,12 @@ void wxD2DContext::GetTextExtent(
         wxGetD2DFontData(m_font), str, width, height, descent, externalLeading);
 }
 
-void wxD2DContext::GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const
+std::vector<double> wxD2DContext::GetPartialTextExtents(const wxString& text) const
 {
-    wxCHECK_RET(!m_font.IsNull(),
-        wxS("wxD2DContext::GetPartialTextExtents - no valid font set"));
+    //wxCHECK_RET(!m_font.IsNull(),
+    //    wxS("wxD2DContext::GetPartialTextExtents - no valid font set"));
 
-    wxD2DMeasuringContext::GetPartialTextExtents(
-        wxGetD2DFontData(m_font), text, widths);
+    return wxD2DMeasuringContext::GetPartialTextExtents(wxGetD2DFontData(m_font), text);
 }
 
 bool wxD2DContext::ShouldOffset() const

@@ -1506,7 +1506,7 @@ public:
     virtual void GetTextExtent( const wxString &text, double *width, double *height,
         double *descent, double *externalLeading ) const override;
 
-    void GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const override;
+    std::vector<double> GetPartialTextExtents(const wxString& text) const override;
 
     //
     // image support
@@ -2634,14 +2634,12 @@ void wxMacCoreGraphicsContext::GetTextExtent( const wxString &str, double *width
     CheckInvariants();
 }
 
-void wxMacCoreGraphicsContext::GetPartialTextExtents(const wxString& text, std::vector<double>& widths) const
+std::vector<double> wxMacCoreGraphicsContext::GetPartialTextExtents(const wxString& text) const
 {
-    widths.clear();
-
     wxCHECK_RET( !m_font.IsNull(), wxT("wxMacCoreGraphicsContext::DrawText - no valid font set") );
 
     if (text.empty())
-        return;
+        return {};
 
     wxMacCoreGraphicsFontData* fref = (wxMacCoreGraphicsFontData*)m_font.GetRefData();
 
@@ -2649,8 +2647,9 @@ void wxMacCoreGraphicsContext::GetPartialTextExtents(const wxString& text, std::
     wxCFRef<CFAttributedStringRef> attrtext( CFAttributedStringCreate(kCFAllocatorDefault, t, fref->OSXGetCTFontAttributes()) );
     wxCFRef<CTLineRef> line( CTLineCreateWithAttributedString(attrtext) );
 
-    widths.reserve(text.length());
+    std::vector<int> widths(text.length());
     CFIndex u16index = 1;
+
     for ( wxString::const_iterator iter = text.begin(); iter != text.end(); ++iter, ++u16index )
     {
         // Take care of surrogate pairs: they take two, not one, of UTF-16 code
@@ -2659,7 +2658,8 @@ void wxMacCoreGraphicsContext::GetPartialTextExtents(const wxString& text, std::
         {
             ++u16index;
         }
-        widths.push_back( CTLineGetOffsetForStringIndex( line, u16index, NULL ) );
+
+        widths.push_back( CTLineGetOffsetForStringIndex( line, u16index, nullptr ) );
     }
 
     CheckInvariants();

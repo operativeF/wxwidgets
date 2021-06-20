@@ -132,8 +132,8 @@ TEST_CASE("wxDC::GetPartialTextExtent", "[dc][text-extent][partial]")
 {
     wxClientDC dc(wxTheApp->GetTopWindow());
 
-    wxArrayInt widths;
-    REQUIRE( dc.GetPartialTextExtents("Hello", widths) );
+    std::vector<int> widths = dc.GetPartialTextExtents("Hello");
+    
     REQUIRE( widths.size() == 5 );
     CHECK( widths[0] == dc.GetTextExtent("H").x );
     CHECK( widths[4] == dc.GetTextExtent("Hello").x );

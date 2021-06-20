@@ -208,20 +208,15 @@ wxSize wxTextMeasureBase::GetLargestStringExtent(const std::vector<wxString>& st
     return wxSize(widthMax, heightMax);
 }
 
-bool wxTextMeasureBase::GetPartialTextExtents(const wxString& text,
-                                              std::vector<int>& widths,
-                                              double scaleX)
+std::vector<int> wxTextMeasureBase::GetPartialTextExtents(const wxString& text, double scaleX)
 {
-    widths.clear();
     if ( text.empty() )
-        return true;
+        return {};
 
     MeasuringGuard guard(*this);
 
     // FIXME: Necessary?
-    widths.insert(std::end(widths), text.length(), 0);
-
-    return DoGetPartialTextExtents(text, widths, scaleX);
+    return DoGetPartialTextExtents(text, scaleX);
 }
 
 // ----------------------------------------------------------------------------
@@ -257,9 +252,7 @@ public:
 
 static FontWidthCache s_fontWidthCache;
 
-bool wxTextMeasureBase::DoGetPartialTextExtents(const wxString& text,
-                                                std::vector<int>& widths,
-                                                double scaleX)
+std::vector<int> wxTextMeasureBase::DoGetPartialTextExtents(const wxString& text, double scaleX)
 {
     int totalWidth = 0;
 
@@ -274,9 +267,9 @@ bool wxTextMeasureBase::DoGetPartialTextExtents(const wxString& text,
         s_fontWidthCache.m_scaleX = scaleX;
     }
 
+    std::vector<int> widths;
     // Calculate the position of each character based on the widths of
     // the previous characters. This is inexact for not fixed fonts.
-    int n = 0;
     for ( wxString::const_iterator it = text.begin();
           it != text.end();
           ++it )
@@ -297,9 +290,9 @@ bool wxTextMeasureBase::DoGetPartialTextExtents(const wxString& text,
         }
 
         totalWidth += w;
-        widths[n++] = totalWidth;
+        widths.push_back(totalWidth);
     }
 
-    return true;
+    return widths;
 }
 

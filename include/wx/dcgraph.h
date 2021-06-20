@@ -219,7 +219,7 @@ public:
         wxCoord *externalLeading = nullptr,
         const wxFont *theFont = nullptr) const override;
 
-    bool DoGetPartialTextExtents(const wxString& text, std::vector<int>& widths) const override;
+    std::vector<int> DoGetPartialTextExtents(const wxString& text) const override;
 
 #ifdef __WXMSW__
     wxRect MSWApplyGDIPlusTransform(const wxRect& r) const override;

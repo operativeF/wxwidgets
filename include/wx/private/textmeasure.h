@@ -55,9 +55,7 @@ public:
     //
     // The scaleX argument is the horizontal scale used by wxDC and is only
     // used in the generic implementation.
-    bool GetPartialTextExtents(const wxString& text,
-                               std::vector<int>& widths,
-                               double scaleX);
+    std::vector<int> GetPartialTextExtents(const wxString& text, double scaleX);
 
 
     // This is another method which is only used by MeasuringGuard.
@@ -112,9 +110,7 @@ protected:
     //
     // On input, widths array contains text.length() zero elements and the text
     // is guaranteed to be non-empty.
-    virtual bool DoGetPartialTextExtents(const wxString& text,
-                                         std::vector<int>& widths,
-                                         double scaleX) = 0;
+    virtual std::vector<int> DoGetPartialTextExtents(const wxString& text, double scaleX) = 0;
 
     // Call either DoGetTextExtent() or wxDC::GetTextExtent() depending on the
     // value of m_useDCImpl.

@@ -323,7 +323,7 @@ public:
                                         wxCoord *height,
                                         wxCoord *heightLine = nullptr,
                                         const wxFont *font = nullptr) const;
-    virtual bool DoGetPartialTextExtents(const wxString& text, std::vector<int>& widths) const;
+    virtual std::vector<int> DoGetPartialTextExtents(const wxString& text) const;
 
     // clearing
 
@@ -816,6 +816,7 @@ public:
         return wxSize(w, h);
     }
 
+    // TODO: Forwarding parameters
     void GetMultiLineTextExtent(const wxString& string,
                                         wxCoord *width,
                                         wxCoord *height,
@@ -830,8 +831,8 @@ public:
         return wxSize(w, h);
     }
 
-    bool GetPartialTextExtents(const wxString& text, std::vector<int>& widths) const
-        { return m_pimpl->DoGetPartialTextExtents(text, widths); }
+    std::vector<int> GetPartialTextExtents(const wxString& text) const
+        { return m_pimpl->DoGetPartialTextExtents(text); }
 
     // clearing
 

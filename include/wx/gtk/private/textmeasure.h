@@ -44,9 +44,7 @@ protected:
                                  wxCoord *descent = NULL,
                                  wxCoord *externalLeading = NULL) override;
 
-    virtual bool DoGetPartialTextExtents(const wxString& text,
-                                         std::vector<int>& widths,
-                                         double scaleX) override;
+    virtual std::vector<int> DoGetPartialTextExtents(const wxString& text, double scaleX) override;
 
     // This class is only used for DC text measuring with GTK+ 2 as GTK+ 3 uses
     // Cairo and not Pango for this. However it's still used even with GTK+ 3
