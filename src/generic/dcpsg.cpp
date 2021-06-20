@@ -31,6 +31,8 @@
 #include "wx/filename.h"
 #include "wx/stdpaths.h"
 
+#include <string_view>
+
 #ifdef __WXMSW__
 
 #ifdef DrawText
@@ -55,7 +57,7 @@
 // start and end of document/page
 //-----------------------------------------------------------------------------
 
-static constexpr char wxPostScriptHeaderConicTo[] = "\
+static constexpr std::string_view wxPostScriptHeaderConicTo = "\
 /conicto {\n\
     /to_y exch def\n\
     /to_x exch def\n\
@@ -72,7 +74,7 @@ static constexpr char wxPostScriptHeaderConicTo[] = "\
 }  bind def\n\
 ";
 
-static constexpr char wxPostScriptHeaderEllipse[] =
+static constexpr std::string_view wxPostScriptHeaderEllipse =
 "/ellipse {\n"             // x y xrad yrad startangle endangle
 "  matrix currentmatrix\n" // x y xrad yrad startangle endangle CTM
 "  0 0 1\n"                // x y xrad yrad startangle endangle CTM 0 0 1
@@ -85,7 +87,7 @@ static constexpr char wxPostScriptHeaderEllipse[] =
 "  setmatrix\n"            // -> restore transformation matrix
 "} def\n";
 
-static constexpr char wxPostScriptHeaderEllipticArc[] =
+static constexpr std::string_view wxPostScriptHeaderEllipticArc =
 "/ellipticarc {\n"         // x y xrad yrad startangle endangle do_fill
 "  dup\n"                  // x y xrad yrad startangle endangle do_fill do_fill
 "  8 1 roll\n"             // do_fill x y xrad yrad startangle endangle do_fill
@@ -102,7 +104,7 @@ static constexpr char wxPostScriptHeaderEllipticArc[] =
 "  { fill }{ stroke } ifelse\n" // -> fill or stroke
 "} def\n";
 
-static constexpr char wxPostScriptHeaderSpline[] = "\
+static constexpr std::string_view wxPostScriptHeaderSpline = "\
 /DrawSplineSection {\n\
     /y3 exch def\n\
     /x3 exch def\n\
@@ -119,7 +121,7 @@ static constexpr char wxPostScriptHeaderSpline[] = "\
     } def\n\
 ";
 
-static constexpr char wxPostScriptHeaderColourImage[] = "\
+static constexpr std::string_view wxPostScriptHeaderColourImage = "\
 % define 'colorimage' if it isn't defined\n\
 %   ('colortogray' and 'mergeprocs' come from xwd2ps\n\
 %     via xgrab)\n\
@@ -174,7 +176,7 @@ static constexpr char wxPostScriptHeaderColourImage[] = "\
   } ifelse          % end of 'false' case\n\
 ";
 
-static constexpr char wxPostScriptHeaderReencodeISO1[] =
+static constexpr std::string_view wxPostScriptHeaderReencodeISO1 =
     "\n/reencodeISO {\n"
 "dup dup findfont dup length dict begin\n"
 "{ 1 index /FID ne { def }{ pop pop } ifelse } forall\n"
@@ -198,7 +200,7 @@ static constexpr char wxPostScriptHeaderReencodeISO1[] =
 "/.notdef/dotlessi/grave/acute/circumflex/tilde/macron/breve\n"
 "/dotaccent/dieresis/.notdef/ring/cedilla/.notdef/hungarumlaut\n";
 
-static constexpr char wxPostScriptHeaderReencodeISO2[] =
+static constexpr std::string_view wxPostScriptHeaderReencodeISO2 =
 "/ogonek/caron/space/exclamdown/cent/sterling/currency/yen/brokenbar\n"
 "/section/dieresis/copyright/ordfeminine/guillemotleft/logicalnot\n"
 "/hyphen/registered/macron/degree/plusminus/twosuperior/threesuperior\n"
@@ -216,7 +218,7 @@ static constexpr char wxPostScriptHeaderReencodeISO2[] =
         "] def\n\n";
 
 // Split multiline string and store each line in the array.
-static constexpr char wxPostScriptHeaderStrSplit[] =
+static constexpr std::string_view wxPostScriptHeaderStrSplit =
 "/strsplit {\n"      // str delim
 "  [ 3 1 roll\n"     // [ str delim
 "    {\n"            // [ str-items str delim
