@@ -52,10 +52,8 @@
 // constants
 // ----------------------------------------------------------------------------
 
-static constexpr auto NumberOfEncodings = 83;
-
 // encodings supported by GetEncodingDescription
-static constexpr std::array<wxFontEncoding, NumberOfEncodings> gs_encodings =
+static constexpr std::array gs_encodings =
 {
     wxFONTENCODING_ISO8859_1,
     wxFONTENCODING_ISO8859_2,
@@ -144,7 +142,7 @@ static constexpr std::array<wxFontEncoding, NumberOfEncodings> gs_encodings =
 };
 
 // the descriptions for them
-static constexpr std::array<char*, NumberOfEncodings> gs_encodingDescs =
+static constexpr std::array gs_encodingDescs =
 {
     wxTRANSLATE( "Western European (ISO-8859-1)" ),
     wxTRANSLATE( "Central European (ISO-8859-2)" ),
@@ -240,7 +238,7 @@ static constexpr std::array<char*, NumberOfEncodings> gs_encodingDescs =
 };
 
 // and the internal names (these are not translated on purpose!)
-static constexpr std::array<wxChar*[9], NumberOfEncodings> gs_encodingNames =
+static constexpr std::array<std::array<const wxChar*, 9>, 83> gs_encodingNames =
 {{
     // names from the columns correspond to these OS:
     //      Linux        Solaris and IRIX       HP-UX             AIX
@@ -630,7 +628,7 @@ wxFontMapperBase::NonInteractiveCharsetToEncoding(const wxString& charset)
             }
         }
 
-        for ( size_t i = 0; i < WXSIZEOF(gs_encodingNames); ++i )
+        for ( size_t i = 0; i < gs_encodingNames.size(); ++i )
         {
             for ( auto encName : gs_encodingNames[i] )
             {
@@ -808,11 +806,11 @@ wxString wxFontMapperBase::GetEncodingName(wxFontEncoding encoding)
         return _("default");
     }
 
-    for ( size_t i = 0; i < WXSIZEOF(gs_encodingNames); i++ )
+    for ( size_t i = 0; i < gs_encodingNames.size(); i++ )
     {
         if ( gs_encodings[i] == encoding )
         {
-            return gs_encodingNames[i][0];
+            return gs_encodingNames[i].front();
         }
     }
 
@@ -823,27 +821,25 @@ wxString wxFontMapperBase::GetEncodingName(wxFontEncoding encoding)
 }
 
 /* static */
-const wxChar** wxFontMapperBase::GetAllEncodingNames(wxFontEncoding encoding)
+std::array<const wxChar*, 9> wxFontMapperBase::GetAllEncodingNames(wxFontEncoding encoding)
 {
-    static const wxChar* const dummy[] = { nullptr };
-
-    for ( size_t i = 0; i < WXSIZEOF(gs_encodingNames); i++ )
+    for ( size_t i = 0; i < gs_encodingNames.size(); i++ )
     {
         if ( gs_encodings[i] == encoding )
         {
-            return const_cast<const wxChar**>(gs_encodingNames[i]);
+            return gs_encodingNames[i];
         }
     }
 
-    return const_cast<const wxChar**>(dummy);
+    return {};
 }
 
 /* static */
 wxFontEncoding wxFontMapperBase::GetEncodingFromName(const wxString& name)
 {
-    for ( size_t i = 0; i < WXSIZEOF(gs_encodingNames); i++ )
+    for ( size_t i = 0; i < gs_encodingNames.size(); i++ )
     {
-        for ( const wxChar* const* encName = gs_encodingNames[i]; *encName; ++encName )
+        for (const auto& encName : gs_encodingNames[i] )
         {
             if ( name.CmpNoCase(*encName) == 0 )
                 return gs_encodings[i];

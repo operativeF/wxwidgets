@@ -101,7 +101,7 @@ public:
     static wxString GetEncodingName(wxFontEncoding encoding);
 
     // return a list of all names of this encoding (see GetEncodingName)
-    static const wxChar** GetAllEncodingNames(wxFontEncoding encoding);
+    static std::array<const wxChar*, 9> GetAllEncodingNames(wxFontEncoding encoding);
 
     // return user-readable string describing the given encoding
     //
