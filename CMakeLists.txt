@@ -7,7 +7,16 @@
 # Licence:     wxWindows licence
 #############################################################################
 
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.11)
+include(FetchContent)
+
+set(CMAKE_CXX_STANDARD_REQUIRED 17)
+
+FetchContent_Declare(DocTest
+    GIT_REPOSITORY "https://github.com/onqtam/doctest"         
+    GIT_TAG "4d8716f1efc1d14aa736ef52ee727bd4204f4c40")
+
+FetchContent_MakeAvailable(DocTest)
 
 if(NOT CMAKE_CONFIGURATION_TYPES)
     get_property(HAVE_MULTI_CONFIG_GENERATOR GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
@@ -78,3 +87,5 @@ include(build/cmake/main.cmake)
 if(wxBUILD_SAMPLES AND wxUSE_GUI)
     set_directory_properties(PROPERTIES VS_STARTUP_PROJECT minimal)
 endif()
+
+enable_testing()
