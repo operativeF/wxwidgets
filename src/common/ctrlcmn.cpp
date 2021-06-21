@@ -301,7 +301,7 @@ struct EllipsizeCalculator
             const wxString cpy = wxControl::RemoveMnemonics(s);
 
             m_charOffsetsPx = dc.GetPartialTextExtents(cpy);
-
+            m_isOk = true;
             // Iterate through the original string inserting a cumulative width
             // value for each ampersand that is the same as the following
             // character's cumulative width value. Except this is only done
@@ -339,6 +339,7 @@ struct EllipsizeCalculator
         else
         {
             m_charOffsetsPx = dc.GetPartialTextExtents(s);
+            m_isOk = true;
         }
 
         // Either way, we should end up with the same number of offsets as
