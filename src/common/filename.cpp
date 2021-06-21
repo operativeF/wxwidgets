@@ -1787,11 +1787,15 @@ bool wxFileName::MakeRelativeTo(const wxString& pathBase, wxPathFormat format)
     m_volume.clear();
 
     // remove common directories starting at the top
-    while ( !m_dirs.empty() && !fnBase.m_dirs.empty() &&
-                m_dirs[0u].IsSameAs(fnBase.m_dirs[0u], withCase) )
+    if(!m_dirs.empty() && !fnBase.m_dirs.empty())
     {
-        m_dirs.erase(std::begin(m_dirs));
-        fnBase.m_dirs.erase(std::begin(m_dirs));
+        const auto first_mismatching_dirs = std::mismatch(m_dirs.cbegin(), m_dirs.cend(), fnBase.m_dirs.cbegin(), fnBase.m_dirs.cend(),
+            [withCase](const auto& dir, const auto& base_dir){
+                return dir.IsSameAs(base_dir, withCase);
+            });
+
+        m_dirs.erase(std::begin(m_dirs), first_mismatching_dirs.first);
+        fnBase.m_dirs.erase(std::begin(fnBase.m_dirs), first_mismatching_dirs.second);
     }
 
     // add as many ".." as needed

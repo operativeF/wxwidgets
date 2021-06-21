@@ -33,6 +33,11 @@ class WXDLLIMPEXP_FWD_CORE wxFontMapper;
     class WXDLLIMPEXP_FWD_CORE wxWindow;
 #endif // wxUSE_GUI
 
+#include <string_view>
+
+// string_view splitter
+std::vector<std::wstring_view> SVSplit(std::wstring_view str, wchar_t delim);
+
 // ============================================================================
 // wxFontMapper manages user-definable correspondence between wxWidgets font
 // encodings and the fonts present on the machine.
@@ -101,7 +106,7 @@ public:
     static wxString GetEncodingName(wxFontEncoding encoding);
 
     // return a list of all names of this encoding (see GetEncodingName)
-    static std::array<const wxChar*, 9> GetAllEncodingNames(wxFontEncoding encoding);
+    static std::vector<std::wstring_view> GetAllEncodingNames(wxFontEncoding encoding);
 
     // return user-readable string describing the given encoding
     //
