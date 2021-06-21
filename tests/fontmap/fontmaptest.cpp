@@ -22,29 +22,6 @@
 
 #include "wx/fontmap.h"
 
-std::vector<std::wstring_view> SVSplit(std::wstring_view str, wchar_t delim)
-{
-    std::vector<std::wstring_view> output;
-
-    size_t first = 0;
-
-    while (first < str.size())
-    {
-        const auto second = str.find_first_of(delim, first);
-
-        if (first != second)
-            output.emplace_back(str.substr(first, second - first));
-
-        if (second == std::wstring_view::npos)
-            break;
-
-        first = second + 1;
-    }
-
-    return output;
-}
-
-
 // ----------------------------------------------------------------------------
 // test class
 // ----------------------------------------------------------------------------
