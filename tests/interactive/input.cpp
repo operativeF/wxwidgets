@@ -267,7 +267,7 @@ void InteractiveInputTestCase::TestFtpInteractive()
             {
                 wxPrintf(wxT("--- %s of '%s' under '%s':\n"),
                          start, wildcard, ftp.Pwd());
-                size_t count = files.GetCount();
+                size_t count = files.size();
                 for ( size_t n = 0; n < count; n++ )
                 {
                     wxPrintf(wxT("\t%s\n"), files[n]);

@@ -151,7 +151,7 @@ std::vector<int> wxTextMeasure::DoGetPartialTextExtents(const wxString& text, do
 
     int fit = 0;
     SIZE sz = {0,0};
-    std::vector<int> widths;
+    std::vector<int> widths(text.length());
 
     if ( !::GetTextExtentExPoint(m_hdc,
                                  text.t_str(), // string to check

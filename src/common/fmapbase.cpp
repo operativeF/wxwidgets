@@ -841,7 +841,7 @@ wxFontEncoding wxFontMapperBase::GetEncodingFromName(const wxString& name)
     {
         for (const auto& encName : gs_encodingNames[i] )
         {
-            if ( name.CmpNoCase(*encName) == 0 )
+            if ( name.CmpNoCase(encName) == 0 )
                 return gs_encodings[i];
         }
     }

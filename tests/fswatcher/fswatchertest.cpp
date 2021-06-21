@@ -151,7 +151,7 @@ public:
         REQUIRE(dir.DirExists());
 
         // just to be really sure we know what we remove
-        REQUIRE( dir.GetDirs().Last() == "fswatcher_test" );
+        REQUIRE( dir.GetDirs().back() == "fswatcher_test" );
 
         CHECK( dir.Rmdir(wxPATH_RMDIR_RECURSIVE) );
     }

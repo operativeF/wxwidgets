@@ -446,8 +446,8 @@ void InteractiveOutputTestCase::TestFSVolume()
 #ifdef TEST_VOLUME
     wxPuts(wxT("*** Testing wxFSVolume class ***"));
 
-    wxArrayString volumes = wxFSVolume::GetVolumes();
-    size_t count = volumes.GetCount();
+    std::vector<wxString> volumes = wxFSVolume::GetVolumes();
+    size_t count = volumes.size();
 
     if ( !count )
     {
