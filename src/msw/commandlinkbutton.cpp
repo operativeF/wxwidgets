@@ -121,14 +121,11 @@ bool wxCommandLinkButton::HasNativeBitmap() const
 
 // Margin measures can be found at
 // http://expression.microsoft.com/en-us/ee662150.aspx
-namespace
-{
-    const int MAINLABEL_TOP_MARGIN = 16; // Includes image top margin.
-    const int MAINLABEL_NOTE_LEFT_MARGIN = 23;
-    const int NOTE_TOP_MARGIN = 21;
-    const int NOTE_BOTTOM_MARGIN = 1;
-    const int MAINLABEL_NOTE_MARGIN = NOTE_TOP_MARGIN - MAINLABEL_TOP_MARGIN;
-};
+static constexpr int MAINLABEL_TOP_MARGIN = 16; // Includes image top margin.
+static constexpr int MAINLABEL_NOTE_LEFT_MARGIN = 23;
+static constexpr int NOTE_TOP_MARGIN = 21;
+static constexpr int NOTE_BOTTOM_MARGIN = 1;
+static constexpr int MAINLABEL_NOTE_MARGIN = NOTE_TOP_MARGIN - MAINLABEL_TOP_MARGIN;
 
 wxSize wxCommandLinkButton::DoGetBestSize() const
 {

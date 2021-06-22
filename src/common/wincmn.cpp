@@ -2853,7 +2853,7 @@ wxWindowBase::FromDIP(const wxSize& sz, const wxWindowBase* w)
 {
     const wxSize dpi = GetDPIHelper(w);
 
-    const int baseline = wxDisplay::GetStdPPIValue();
+    static constexpr int baseline = wxDisplay::GetStdPPIValue();
 
     // Take care to not scale -1 because it has a special meaning of
     // "unspecified" which should be preserved.

@@ -231,7 +231,7 @@ wxPGWindowList wxPGSpinCtrlEditor::CreateControls( wxPropertyGrid* propgrid, wxP
     wxNumericProperty* prop = wxDynamicCast(property, wxNumericProperty);
     if ( prop )
     {
-        const int margin = 1;
+        static constexpr int margin = 1;
 #if IS_MOTION_SPIN_SUPPORTED
         if ( prop->UseSpinMotion() )
         {

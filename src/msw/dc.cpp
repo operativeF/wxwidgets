@@ -965,7 +965,7 @@ void wxMSWDCImpl::DoDrawPolygon(int n,
     // Do things less efficiently if we have offsets
     if (xoffset != 0 || yoffset != 0)
     {
-        std::unique_ptr<POINT[]> cpoints(new POINT[n]);
+        auto cpoints = std::make_unique<POINT[]>(n);
 
         for (int i = 0; i < n; i++)
         {
@@ -1006,7 +1006,7 @@ wxMSWDCImpl::DoDrawPolyPolygon(int n,
     // Do things less efficiently if we have offsets
     if (xoffset != 0 || yoffset != 0)
     {
-        std::unique_ptr<POINT[]> cpoints(new POINT[cnt]);
+        auto cpoints = std::make_unique<POINT[]>(cnt);
 
         for (int i = 0; i < cnt; i++)
         {
@@ -1036,7 +1036,7 @@ void wxMSWDCImpl::DoDrawLines(int n, const wxPoint points[], wxCoord xoffset, wx
     // Do things less efficiently if we have offsets
     if (xoffset != 0 || yoffset != 0)
     {
-        std::unique_ptr<POINT[]> cpoints(new POINT[n]);
+        auto cpoints = std::make_unique<POINT[]>(n);
 
         for (int i = 0; i < n; i++)
         {
@@ -1163,7 +1163,7 @@ void wxMSWDCImpl::DoDrawSpline(const wxPointList *points)
     wxASSERT_MSG( n_points > 2 , wxT("incomplete list of spline points?") );
 
     const size_t n_bezier_points = n_points * 3 + 1;
-    std::unique_ptr<POINT[]> lppt(new POINT[n_bezier_points]);
+    auto lppt = std::make_unique<POINT[]>(n_bezier_points);
     size_t bezier_pos = 0;
     wxCoord x1, y1, x2, y2, cx1, cy1;
 

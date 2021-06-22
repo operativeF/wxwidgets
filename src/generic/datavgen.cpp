@@ -2924,7 +2924,7 @@ void wxDataViewMainWindow::OnPaint( wxPaintEvent &WXUNUSED(event) )
 #if wxUSE_DRAG_AND_DROP
     if (m_dropItemInfo.m_hint == DropHint_Below || m_dropItemInfo.m_hint == DropHint_Above)
     {
-        const int insertLineHeight = 2;     // TODO: setup (should be even)
+        static constexpr int insertLineHeight = 2;     // TODO: setup (should be even)
 
         int rect_y = dropItemRect.y - insertLineHeight/2;     // top insert
         if (m_dropItemInfo.m_hint == DropHint_Below)

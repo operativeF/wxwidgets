@@ -102,8 +102,8 @@
 /**
     The line break character that can be embedded in content.
  */
+inline constexpr wxChar wxRichTextLineBreakChar = (wxChar)29;
 
-extern WXDLLIMPEXP_RICHTEXT const wxChar wxRichTextLineBreakChar;
 
 /**
     File types in wxRichText context.

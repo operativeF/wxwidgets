@@ -117,12 +117,12 @@ public:
     virtual void SetBitmapPosition(wxDirection dir) = 0;
 };
 
-namespace
-{
-
 // the gap between button edge and the interior area used by Windows for the
 // standard buttons
-const int OD_BUTTON_MARGIN = 4;
+static constexpr int OD_BUTTON_MARGIN = 4;
+
+namespace
+{
 
 class wxODButtonImageData : public wxButtonImageData
 {

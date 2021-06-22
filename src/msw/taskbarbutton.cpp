@@ -465,7 +465,7 @@ wxTaskBarJumpListItem* GetItemFromIShellLink(IShellLink* link)
     item->SetArguments(wxString(var.pwszVal));
     PropVariantClear(&var);
 
-    const int bufferSize = 2048;
+    static constexpr int bufferSize = 2048;
     wchar_t buffer[bufferSize];
 
     link->GetDescription(buffer, INFOTIPSIZE);

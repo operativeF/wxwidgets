@@ -1076,7 +1076,7 @@ bool wxToolBar::Realize()
     // Next add the buttons and separators
     // -----------------------------------
 
-    std::unique_ptr<TBBUTTON[]> buttons(new TBBUTTON[nTools]);
+    auto buttons = std::make_unique<TBBUTTON[]>(nTools);
 
     // this array will hold the indices of all controls in the toolbar
     std::vector<int> controlIds;

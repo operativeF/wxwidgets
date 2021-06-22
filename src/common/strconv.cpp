@@ -914,8 +914,8 @@ static constexpr wxUint32 utf8_max[]=
 
 // boundaries of the private use area we use to (temporarily) remap invalid
 // characters invalid in a UTF-8 encoded string
-const wxUint32 wxUnicodePUA = 0x100000;
-const wxUint32 wxUnicodePUAEnd = wxUnicodePUA + 256;
+static constexpr wxUint32 wxUnicodePUA = 0x100000;
+static constexpr wxUint32 wxUnicodePUAEnd = wxUnicodePUA + 256;
 
 // this table gives the length of the UTF-8 encoding from its first character:
 extern const unsigned char tableUtf8Lengths[256] = {

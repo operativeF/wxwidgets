@@ -412,7 +412,7 @@ wxFileName wxIOCPThread::GetEventPath(const wxFSWatchEntryMSW& watch,
     if (path.IsDir())
     {
         wxString rel(e.FileName, e.FileNameLength / sizeof(e.FileName[0]));
-        const int pathFlags = wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR;
+        static constexpr int pathFlags = wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR;
         path = wxFileName(path.GetPath(pathFlags) + rel);
     }
     return path;

@@ -1334,7 +1334,7 @@ void wxHtmlWindow::OnMouseDown(wxMouseEvent& event)
 #if wxUSE_CLIPBOARD
     if ( event.LeftDown() && IsSelectionEnabled() )
     {
-        const long TRIPLECLICK_LEN = 200; // 0.2 sec after doubleclick
+        static constexpr long TRIPLECLICK_LEN = 200; // 0.2 sec after doubleclick
         if ( wxGetLocalTimeMillis() - m_lastDoubleClick <= TRIPLECLICK_LEN )
         {
             SelectLine(CalcUnscrolledPosition(event.GetPosition()));
@@ -1500,7 +1500,7 @@ void wxHtmlWindow::OnInternalIdle()
                 {
                     // start selecting only if mouse movement was big enough
                     // (otherwise it was meant as mouse click, not selection):
-                    const int PRECISION = 2;
+                    static constexpr int PRECISION = 2;
                     wxPoint diff = m_tmpSelFromPos - wxPoint(x,y);
                     if (abs(diff.x) > PRECISION || abs(diff.y) > PRECISION)
                     {

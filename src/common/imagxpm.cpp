@@ -109,7 +109,7 @@ namespace
 void
 MakeValidCIdent(wxString* str)
 {
-    const wxChar chUnderscore = wxT('_');
+    static constexpr wxChar chUnderscore = wxT('_');
 
     for ( wxString::iterator it = str->begin(); it != str->end(); ++it )
     {

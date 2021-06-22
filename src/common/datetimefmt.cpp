@@ -1490,7 +1490,7 @@ wxDateTime::ParseFormat(const wxString& date,
                     ++input;
 
                     // Here should follow exactly 2 digits for hours (HH).
-                    const size_t numRequiredDigits = 2;
+                    static constexpr size_t numRequiredDigits = 2;
                     size_t numScannedDigits;
 
                     unsigned long hours;

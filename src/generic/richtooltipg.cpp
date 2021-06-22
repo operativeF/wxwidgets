@@ -372,7 +372,7 @@ private:
 
 
         // Hard-coded radius of the round main rectangle corners.
-        const double RADIUS = 5;
+        static constexpr double RADIUS = 5;
 
         // Create a path defining the shape of the tooltip window.
         wxGraphicsPath

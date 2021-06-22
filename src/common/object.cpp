@@ -76,9 +76,6 @@ wxClassInfo *wxObject::GetClassInfo() const
 
 #endif // wxUSE_EXTENDED_RTTI
 
-// this variable exists only so that we can avoid 'always true/false' warnings
-const bool wxFalse = false;
-
 // Is this object a kind of (a subclass of) 'info'?
 // E.g. is wxWindow a kind of wxObject?
 // Go from this class to superclass, taking into account

@@ -201,7 +201,7 @@ bool wxGenericProgressDialog::Create( const wxString& title,
 
     wxStdDialogButtonSizer *buttonSizer = wxDialog::CreateStdDialogButtonSizer(0);
 
-    const int borderFlags = wxALL;
+    static constexpr int borderFlags = wxALL;
 
     wxSizerFlags sizerFlags =
         wxSizerFlags().Border(borderFlags, LAYOUT_MARGIN);

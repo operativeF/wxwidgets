@@ -708,7 +708,7 @@ bool wxPNGHandler::SaveFile( wxImage *image, wxOutputStream& stream, bool verbos
     {
         case wxIMAGE_RESOLUTION_INCHES:
             {
-                const double INCHES_IN_METER = 10000.0 / 254;
+                static constexpr double INCHES_IN_METER = 10000.0 / 254;
                 resX = int(resX * INCHES_IN_METER);
                 resY = int(resY * INCHES_IN_METER);
             }

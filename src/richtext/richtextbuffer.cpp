@@ -54,8 +54,6 @@ WX_DEFINE_LIST(wxRichTextLineList)
 // Use GetPartialTextExtents for platforms that support it natively
 #define wxRICHTEXT_USE_PARTIAL_TEXT_EXTENTS 1
 
-const wxChar wxRichTextLineBreakChar = (wxChar) 29;
-
 // Helper classes for floating layout
 struct wxRichTextFloatRectMap
 {
@@ -4483,7 +4481,7 @@ bool wxRichTextParagraphLayoutBox::DoNumberList(const wxRichTextRange& range, co
     bool renumber = ((flags & wxRICHTEXT_SETSTYLE_RENUMBER) != 0);
 
     // Max number of levels
-    const int maxLevels = 10;
+    static constexpr int maxLevels = 10;
 
     // The level we're looking at now
     int currentLevel = -1;

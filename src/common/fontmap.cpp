@@ -191,7 +191,7 @@ wxFontMapper::CharsetToEncoding(const wxString& charset, bool interactive)
         // the list of choices
         const size_t count = GetSupportedEncodingsCount();
 
-        std::unique_ptr<wxString[]> encodingNamesTranslated(new wxString[count]);
+        auto encodingNamesTranslated = std::make_unique<wxString[]>(count);
 
         for ( size_t i = 0; i < count; i++ )
         {

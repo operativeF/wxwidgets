@@ -418,7 +418,7 @@ wxSVGBitmapEmbedHandler::ProcessBitmap(const wxBitmap& bmp,
                           sub_images++);
 
     // Wrap Base64 encoded data on 76 columns boundary (same as Inkscape).
-    const unsigned WRAP = 76;
+    static constexpr unsigned WRAP = 76;
     for ( size_t i = 0; i < data.size(); i += WRAP )
     {
         if (i < data.size() - WRAP)
@@ -824,7 +824,7 @@ void wxSVGFileDCImpl::DoDrawPolyPolygon(int n, const int count[], const wxPoint 
     for (j = 0; j < n; ++j)
         totalPts += count[j];
 
-    std::unique_ptr<wxPoint[]> pts(new wxPoint[totalPts + n]);
+    auto pts = std::make_unique<wxPoint[]>(totalPts + n);
 
     int polyCounter = 0, polyIndex = 0;
     for (i = j = 0; i < totalPts; ++i)
@@ -984,8 +984,8 @@ void wxSVGFileDCImpl::DoDrawEllipticArc(wxCoord x, wxCoord y, wxCoord w, wxCoord
     if (angle <= 0)
         angle += 360;
 
-    int fArc = angle > 180 ? 1 : 0; // flag for large or small arc
-    const int fSweep = 0;                 // flag for sweep always 0
+    int fArc = angle > 180 ? 1 : 0;  // flag for large or small arc
+    static constexpr int fSweep = 0; // flag for sweep always 0
 
     wxString arcPath;
     if (angle == 360)

@@ -643,7 +643,8 @@ wxDCImpl::DoStretchBlit(wxCoord xdest, wxCoord ydest,
 void wxDCImpl::DrawLines(const wxPointList *list, wxCoord xoffset, wxCoord yoffset)
 {
     int n = list->GetCount();
-    std::unique_ptr<wxPoint[]> points(new wxPoint[n]);
+
+    auto points = std::make_unique<wxPoint[]>(n);
 
     int i = 0;
     for ( wxPointList::compatibility_iterator node = list->GetFirst(); node; node = node->GetNext(), i++ )
@@ -661,7 +662,7 @@ void wxDCImpl::DrawPolygon(const wxPointList *list,
                            wxPolygonFillMode fillStyle)
 {
     const int n = list->GetCount();
-    std::unique_ptr<wxPoint[]> points(new wxPoint[n]);
+    auto points = std::make_unique<wxPoint[]>(n);
 
     int i = 0;
     for ( wxPointList::compatibility_iterator node = list->GetFirst(); node; node = node->GetNext(), i++ )
@@ -695,7 +696,7 @@ wxDCImpl::DoDrawPolyPolygon(int n,
         j      += count[i];
     }
 
-    std::unique_ptr<wxPoint[]> pts(new wxPoint[j + n - 1]);
+    auto pts = std::make_unique<wxPoint[]>(j + n - 1);
     
     for (i = 0; i < j; i++)
         pts[i] = points[i];

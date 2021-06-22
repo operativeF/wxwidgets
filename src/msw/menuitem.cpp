@@ -1141,7 +1141,7 @@ void DrawColorCheckMark(HDC hdc, int x, int y, int cx, int cy, HDC hdcCheckMask,
     {
         if ( colCheck != colBlack )
         {
-            const DWORD ROP_DSna = 0x00220326;  // dest = (NOT src) AND dest
+            static constexpr DWORD ROP_DSna = 0x00220326;  // dest = (NOT src) AND dest
             ::BitBlt(hdcMem, 0, 0, cx, cy, hdcCheckMask, 0, 0, ROP_DSna);
         }
 

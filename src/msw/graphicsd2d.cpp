@@ -1601,7 +1601,7 @@ ID2D1Geometry* wxD2DPathData::GetFullGeometry(D2D1_FILL_MODE fillMode) const
     // as well as pointer to the current geometry in the auxiliary array.
     const size_t numGeometries = m_pTransformedGeometries.size();
 
-    std::unique_ptr<ID2D1Geometry*[]> pGeometries(new ID2D1Geometry*[numGeometries+1]);
+    auto pGeometries = std::make_unique<ID2D1Geometry*[]>(numGeometries + 1);
 
     for( size_t i = 0; i < numGeometries; i++ )
         pGeometries[i] = m_pTransformedGeometries[i];

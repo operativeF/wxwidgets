@@ -488,7 +488,7 @@ extern bool WXDLLIMPEXP_BASE wxAssertIsEqual(int x, int y);
 
 // Use of wxFalse instead of false suppresses compiler warnings about testing
 // constant expression
-extern WXDLLIMPEXP_DATA_BASE(const bool) wxFalse;
+inline constexpr bool wxFalse = false;
 
 #define wxAssertFailure wxFalse
 

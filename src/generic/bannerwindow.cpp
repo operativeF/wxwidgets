@@ -21,15 +21,10 @@
 
 #include "wx/dcbuffer.h"
 
-namespace
-{
-
 // Some constants for banner layout, currently they're hard coded but we could
 // easily make them configurable if needed later.
-const int MARGIN_X = 5;
-const int MARGIN_Y = 5;
-
-} // anonymous namespace
+static constexpr int MARGIN_X = 5;
+static constexpr int MARGIN_Y = 5;
 
 wxBEGIN_EVENT_TABLE(wxBannerWindow, wxWindow)
     EVT_SIZE(wxBannerWindow::OnSize)

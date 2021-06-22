@@ -282,7 +282,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
         // make a new palette and quantize the image
         if (format != wxBMP_8BPP_PALETTE)
         {
-            q_image.reset(new wxImage());
+            q_image = std::make_unique<wxImage>();
 
             // I get a delete error using Quantize when desired colors > 236
             int quantize = ((palette_size > 236) ? 236 : palette_size);
@@ -305,7 +305,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
         }
 
         unsigned char r, g, b;
-        std::unique_ptr<wxUint8[]> rgbquadTmp(new wxUint8[palette_size*4]);
+        auto rgbquadTmp = std::make_unique<wxUint8[]>(palette_size * 4);
         rgbquad.swap(rgbquadTmp);
 
         for (int i = 0; i < palette_size; i++)
@@ -325,7 +325,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
     else if ( (format == wxBMP_8BPP_GREY) || (format == wxBMP_8BPP_RED) ||
               (format == wxBMP_1BPP_BW) )
     {
-        std::unique_ptr<wxUint8[]> rgbquadTmp(new wxUint8[palette_size*4]);
+        auto rgbquadTmp = std::make_unique<wxUint8[]>(palette_size*4);
         rgbquad.swap(rgbquadTmp);
 
         for ( int i = 0; i < palette_size; i++ )
@@ -362,7 +362,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
                                         : image->GetData();
     const unsigned char* const alpha = saveAlpha ? image->GetAlpha() : nullptr;
 
-    std::unique_ptr<wxUint8[]> buffer(new wxUint8[row_width]);
+    auto buffer = std::make_unique<wxUint8[]>(row_width);
     memset(buffer.get(), 0, row_width);
     unsigned x;
     long int pixel;
@@ -583,9 +583,9 @@ bool wxBMPHandler::DoLoadDib(wxImage * image, int width, int height,
     if ( bpp < 16 && ncolors != 0 )
     {
 #if wxUSE_PALETTE
-        std::unique_ptr<unsigned char[]> r(new unsigned char[ncolors]);
-        std::unique_ptr<unsigned char[]> g(new unsigned char[ncolors]);
-        std::unique_ptr<unsigned char[]> b(new unsigned char[ncolors]);
+        auto r = std::make_unique<unsigned char[]>(ncolors);
+        auto g = std::make_unique<unsigned char[]>(ncolors);
+        auto b = std::make_unique<unsigned char[]>(ncolors);
 #endif // wxUSE_PALETTE
         for (int j = 0; j < ncolors; j++)
         {
@@ -1150,7 +1150,7 @@ bool wxBMPHandler::LoadDib(wxImage *image, wxInputStream& stream,
         //
         // Note: hardcode its size as struct BITMAPINFOHEADER is not defined on
         // non-MSW platforms.
-        const wxInt32 sizeBITMAPINFOHEADER = 40;
+        static constexpr wxInt32 sizeBITMAPINFOHEADER = 40;
         if ( hdrSize > sizeBITMAPINFOHEADER )
         {
             if ( stream.SeekI(hdrSize - sizeBITMAPINFOHEADER, wxSeekMode::FromCurrent) == wxInvalidOffset )
@@ -1265,7 +1265,7 @@ bool wxICOHandler::SaveFile(wxImage *image,
         return false;
     }
 
-    const int images = 1; // only generate one image
+    static constexpr int images = 1; // only generate one image
 
     // VS: This is a hack of sort - since ICO and CUR files are almost
     //     identical, we have all the meat in wxICOHandler and check for
@@ -1553,7 +1553,7 @@ bool wxICOHandler::DoLoadFile(wxImage *image, wxInputStream& stream,
     wxUint16 nType = wxUINT16_SWAP_ON_BE(IconDir.idType);
 
     // loop round the icons and choose the best one:
-    std::unique_ptr<ICONDIRENTRY[]> pIconDirEntry(new ICONDIRENTRY[nIcons]);
+    auto pIconDirEntry = std::make_unique<ICONDIRENTRY[]>(nIcons);
     ICONDIRENTRY *pCurrentEntry = pIconDirEntry.get();
     int wMax = 0;
     int colmax = 0;

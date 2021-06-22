@@ -19,9 +19,9 @@
 
 #include "wx/spinbutt.h"
 
-static const long DEFAULT_VALUE = 0;
-static const long DEFAULT_MIN = 0;
-static const long DEFAULT_MAX = 100;
+static constexpr long DEFAULT_VALUE = 0;
+static constexpr long DEFAULT_MIN = 0;
+static constexpr long DEFAULT_MAX = 100;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxSpinButtonXmlHandler, wxXmlResourceHandler);
 
@@ -64,7 +64,7 @@ bool wxSpinButtonXmlHandler::CanHandle(wxXmlNode *node)
 
 #include "wx/spinctrl.h"
 
-static const float DEFAULT_INC = 1;
+static constexpr float DEFAULT_INC = 1;
 
 static void AddSpinCtrlStyles(wxXmlResourceHandler& handler)
 {

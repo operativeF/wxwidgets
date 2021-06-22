@@ -443,7 +443,7 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
     // Draw a label if one is given
     if ( params && !params->m_labelText.empty() )
     {
-        const int margin = 5;   // number of pixels to reserve on either side of the label
+        static constexpr int margin = 5;   // number of pixels to reserve on either side of the label
         labelWidth += 2*margin;
 
         wxFont font  = params->m_labelFont.IsOk() ?
@@ -506,8 +506,8 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
 int wxRendererGeneric::GetHeaderButtonHeight(wxWindow *win)
 {
     // Copied and adapted from src/generic/listctrl.cpp
-    const int HEADER_OFFSET_Y = 1;
-    const int EXTRA_HEIGHT = 4;
+    static constexpr int HEADER_OFFSET_Y = 1;
+    static constexpr int EXTRA_HEIGHT = 4;
 
     int w=0, h=14, d=0;
     if (win)

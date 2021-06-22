@@ -243,7 +243,7 @@ bool wxGIFHandler::DoSaveFile(const wxImage& image, wxOutputStream *stream,
     }
 
     const wxUint8 *src = image.GetData();
-    std::unique_ptr<wxUint8[]> eightBitData(new wxUint8[width]);
+    auto eightBitData = std::make_unique<wxUint8[]>(width);
 
     SetupCompress(stream, 8);
 
@@ -756,7 +756,7 @@ bool wxGIFHandler_WriteComment(wxOutputStream *stream, const wxString& comment)
 bool wxGIFHandler_WriteLoop(wxOutputStream *stream)
 {
     wxUint8 buf[4];
-    const int loopcount = 0; // infinite
+    static constexpr int loopcount = 0; // infinite
 
     buf[0] = GIF_MARKER_EXT;
     buf[1] = GIF_MARKER_EXT_APP;

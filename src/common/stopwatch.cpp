@@ -70,10 +70,10 @@ PerfCounter& GetPerfCounterState()
 
 #endif // __WINDOWS__
 
-const int MILLISECONDS_PER_SECOND = 1000;
-const int MICROSECONDS_PER_SECOND = 1000*1000;
-
 } // anonymous namespace
+
+static constexpr int MILLISECONDS_PER_SECOND = 1000;
+static constexpr int MICROSECONDS_PER_SECOND = 1000 * 1000;
 
 void wxStopWatch::DoStart()
 {

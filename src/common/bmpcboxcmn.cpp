@@ -168,7 +168,7 @@ void wxBitmapComboBoxBase::DrawBackground(wxDC& dc,
 {
     if ( flags & wxODCB_PAINTING_SELECTED )
     {
-        const int vSizeDec = 0;  // Vertical size reduction of selection rectangle edges
+        static constexpr int vSizeDec = 0;  // Vertical size reduction of selection rectangle edges
 
         dc.SetTextForeground(wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHTTEXT));
 

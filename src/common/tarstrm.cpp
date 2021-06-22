@@ -762,7 +762,7 @@ bool wxTarInputStream::CloseEntry()
     }
 
     if (remainder) {
-        const int BUFSIZE = 8192;
+        static constexpr int BUFSIZE = 8192;
         wxCharBuffer buf(BUFSIZE);
 
         while (remainder > 0 && m_parent_i_stream->IsOk())

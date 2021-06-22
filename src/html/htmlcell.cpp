@@ -602,7 +602,7 @@ wxString wxHtmlWordWithTabsCell::GetPartAsText(int begin, int end) const
 
     wxASSERT( begin < end );
 
-    const unsigned SPACES_PER_TAB = 8;
+    static constexpr unsigned SPACES_PER_TAB = 8;
 
     wxString sel;
 

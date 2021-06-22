@@ -250,14 +250,10 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxAnyValueTypeGlobalsManager, wxModule);
     #define UseUintMax (ULONG_MAX)
 #endif
 
-namespace
-{
 
-const double UseIntMinF = static_cast<double>(UseIntMin);
-const double UseIntMaxF = static_cast<double>(UseIntMax);
-const double UseUintMaxF = static_cast<double>(UseUintMax);
-
-} // anonymous namespace
+static constexpr double UseIntMinF  = static_cast<double>(UseIntMin);
+static constexpr double UseIntMaxF  = static_cast<double>(UseIntMax);
+static constexpr double UseUintMaxF = static_cast<double>(UseUintMax);
 
 bool wxAnyValueTypeImplInt::ConvertValue(const wxAnyValueBuffer& src,
                                          wxAnyValueType* dstType,

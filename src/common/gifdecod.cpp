@@ -327,16 +327,16 @@ wxGIFDecoder::dgif(wxInputStream& stream, GIFImage *img, int interl, int bits)
 {
     static constexpr int allocSize = 4096 + 1;
 
-    std::unique_ptr<int[]> ab_prefix(new int[allocSize]); // alphabet (prefixes)
+    auto ab_prefix = std::make_unique<int[]>(allocSize);  // alphabet (prefixes)
     if ( !ab_prefix )
         return wxGIF_MEMERR;
 
-    std::unique_ptr<int[]> ab_tail(new int[allocSize]);   // alphabet (tails)
+    auto ab_tail = std::make_unique<int[]>(allocSize);     // alphabet (tails)
     if ( !ab_tail )
         return wxGIF_MEMERR;
 
-    std::unique_ptr<int[]> stack(new int[allocSize]);     // decompression stack
-    if ( !stack )
+    auto decomp_stack = std::make_unique<int[]>(allocSize); // decompression stack
+    if ( !decomp_stack )
         return wxGIF_MEMERR;
 
     int ab_clr;                     // clear code
@@ -395,13 +395,13 @@ wxGIFDecoder::dgif(wxInputStream& stream, GIFImage *img, int interl, int bits)
         if (code >= ab_free)
         {
             code = lastcode;            // take last string
-            stack[pos++] = abcabca;     // add first character
+            decomp_stack[pos++] = abcabca;     // add first character
         }
 
-        // build the string for this code in the stack
+        // build the string for this code in the decomp_stack
         while (code > ab_clr)
         {
-            stack[pos++] = ab_tail[code];
+            decomp_stack[pos++] = ab_tail[code];
             code         = ab_prefix[code];
 
             // Don't overflow. This shouldn't happen with normal
@@ -414,7 +414,7 @@ wxGIFDecoder::dgif(wxInputStream& stream, GIFImage *img, int interl, int bits)
         if (pos >= allocSize)
             return wxGIF_INVFORMAT;
 
-        stack[pos] = code;              // push last code into the stack
+        decomp_stack[pos] = code;              // push last code into the decomp_stack
         abcabca    = code;              // save for special case
 
         // make new entry in alphabet (only if NOT just cleared)
@@ -445,10 +445,10 @@ wxGIFDecoder::dgif(wxInputStream& stream, GIFImage *img, int interl, int bits)
             }
         }
 
-        // dump stack data to the image buffer
+        // dump decomp_stack data to the image buffer
         while (pos >= 0)
         {
-            (img->p)[x + (y * (img->w))] = (char) stack[pos];
+            (img->p)[x + (y * (img->w))] = (char) decomp_stack[pos];
             pos--;
 
             if (++x >= (img->w))

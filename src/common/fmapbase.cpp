@@ -659,7 +659,7 @@ wxFontMapperBase::NonInteractiveCharsetToEncoding(const wxString& charset)
         int enc_index = 0;
 
         // TODO: Implement find for string_views that's case insensitive.
-        for ( const auto& encFamily : gs_encodingNames )
+        for ( const auto encFamily : gs_encodingNames )
         {
             if (encFamily.find(cs.MakeUpper().wc_str()) != std::wstring_view::npos)
                 return gs_encodings[enc_index];
@@ -869,7 +869,7 @@ wxFontEncoding wxFontMapperBase::GetEncodingFromName(const wxString& name)
 {
     int i{0};
 
-    for(const auto& encName : gs_encodingNames)
+    for(const auto encName : gs_encodingNames)
     {
         const auto name_match = std::search(encName.cbegin(), encName.cend(), name.cbegin(), name.cend(), 
             [](const auto& enc_ch, const auto& name_ch){

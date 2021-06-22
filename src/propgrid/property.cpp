@@ -1040,7 +1040,7 @@ bool wxPGProperty::StringToValue( wxVariant& v, const wxString& text, int argFla
 
     // It is best only to add non-empty group items
     bool addOnlyIfNotEmpty = false;
-    const wxChar delimiter = wxS(';');
+    static constexpr wxChar delimiter = wxS(';');
 
     size_t tokenStart = 0xFFFFFF;
 

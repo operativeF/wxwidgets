@@ -211,7 +211,7 @@ void wxStatusBar::MSWUpdateFieldsWidths()
 
     // update the field widths in the native control:
 
-    std::unique_ptr<int[]> pWidths(new int[count]);
+    auto pWidths = std::make_unique<int[]>(count);
 
     int nCurPos = 0;
 

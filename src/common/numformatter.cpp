@@ -241,7 +241,7 @@ void wxNumberFormatter::AddThousandsSeparators(wxString& s)
     // and GetLocaleInfo(LOCALE_SGROUPING) (under MSW) to get information about
     // the correct grouping to use. This is something that needs to be done at
     // wxLocale level first and then used here in the future (TODO).
-    const size_t GROUP_LEN = 3;
+    static constexpr size_t GROUP_LEN = 3;
 
     while ( pos > start + GROUP_LEN )
     {

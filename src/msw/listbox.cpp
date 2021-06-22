@@ -383,7 +383,7 @@ int wxListBox::GetSelections(std::vector<int>& aSelections) const
         }
         else if ( countSel != 0 )
         {
-            std::unique_ptr<int[]> selections(new int[countSel]);
+            auto selections = std::make_unique<int[]>(countSel);
 
             if ( ListBox_GetSelItems(GetHwnd(),
                                      countSel, selections.get()) == LB_ERR )

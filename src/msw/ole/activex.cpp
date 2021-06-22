@@ -758,11 +758,8 @@ public:
     }
 };
 
-namespace
-{
 // just a unique global variable
-const int invalid_entry_marker = 0;
-}
+static constexpr int invalid_entry_marker = 0;
 
 wxVariant wxActiveXEvents::ms_invalidEntryMarker(const_cast<void*>(static_cast<const void*>(&invalid_entry_marker)));
 

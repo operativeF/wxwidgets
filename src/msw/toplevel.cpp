@@ -434,7 +434,7 @@ bool wxTopLevelWindowMSW::Create(wxWindow *parent,
 
         // we need 3 additional WORDs for dialog menu, class and title (as we
         // don't use DS_SETFONT we don't need the fourth WORD for the font)
-        static const int dlgsize = sizeof(DLGTEMPLATE) + (sizeof(WORD) * 3);
+        static constexpr int dlgsize = sizeof(DLGTEMPLATE) + (sizeof(WORD) * 3);
         DLGTEMPLATE *dlgTemplate = (DLGTEMPLATE *)malloc(dlgsize);
         wxON_BLOCK_EXIT1(free, dlgTemplate);
 

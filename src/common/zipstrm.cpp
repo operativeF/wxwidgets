@@ -1761,7 +1761,7 @@ bool wxZipInputStream::FindEndRecord()
     // unfortunately, the record has a comment field that can be up to 65535
     // bytes in length, so if the signature not found then search backwards.
     wxFileOffset pos = m_parent_i_stream->TellI();
-    const int BUFSIZE = 1024;
+    static constexpr int BUFSIZE = 1024;
     wxCharBuffer buf(BUFSIZE);
 
     memcpy(buf.data(), magic, 3);
@@ -2081,7 +2081,7 @@ bool wxZipInputStream::CloseEntry()
         if (!IsOpened() && !OpenDecompressor(true))
             return false;
 
-        const int BUFSIZE = 8192;
+        static constexpr int BUFSIZE = 8192;
         wxCharBuffer buf(BUFSIZE);
         while (IsOk())
             Read(buf.data(), BUFSIZE);

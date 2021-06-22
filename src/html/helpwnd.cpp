@@ -952,7 +952,8 @@ void wxHtmlHelpWindow::CreateContents()
 
     m_PagesHash = new wxHashTable(wxKEY_STRING, 2 * cnt);
 
-    const int MAX_ROOTS = 64;
+    static constexpr int MAX_ROOTS = 64;
+
     wxTreeItemId roots[MAX_ROOTS];
     // VS: this array holds information about whether we've set item icon at
     //     given level. This is necessary because m_Data has a flat structure
