@@ -15,6 +15,10 @@
 /tests/.vs
 # /build/
 /build/.ninja*
+/build/build.ninja
+/build/CMakeCache.txt
+/build/cmake_install.cmake
+/build/x64
 
 # /build/autoconf_prepend-include/autoconf/
 /build/autoconf_prepend-include/autoconf/autoconf.m4f
@@ -102,6 +106,9 @@
 /build/osx/build
 /build/osx/setup/cocoa/include/wx/setup.h
 /build/osx/setup/iphone/include/wx/setup.h
+
+# /build/packages
+/build/packages
 
 # /demos/
 /demos/*/*.sln
