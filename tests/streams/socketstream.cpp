@@ -10,6 +10,7 @@
 // and "wx/cppunit.h"
 #include "testprec.h"
 
+#if wxUSE_NOSOCKSTREAM
 
 // for all others, include the necessary headers
 #ifndef WX_PRECOMP
@@ -250,3 +251,5 @@ void socketStream::DoCheckInputStream(wxSocketInputStream& stream_in)
 
 // Register the stream sub suite, by using some stream helper macro.
 STREAM_TEST_SUBSUITE_NAMED_REGISTRATION(socketStream)
+
+#endif // NO_SOCKSTREAM

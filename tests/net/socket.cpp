@@ -19,7 +19,7 @@
 #include "testprec.h"
 
 
-#if wxUSE_SOCKETS
+#if wxUSE_SOCKETSNO
 
 #include "wx/socket.h"
 #include "wx/url.h"
