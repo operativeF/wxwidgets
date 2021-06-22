@@ -32,6 +32,29 @@ class WXDLLIMPEXP_FWD_CORE wxSizer;
 // wxSizerFlags: flags used for an item in the sizer
 // ----------------------------------------------------------------------------
 
+enum wxStretch
+{
+    wxSTRETCH_NOT             = 0x0000,
+    wxSHRINK                  = 0x1000,
+    wxGROW                    = 0x2000,
+    wxEXPAND                  = wxGROW,
+    wxSHAPED                  = 0x4000,
+    wxTILE                    = 0xc000, /* wxSHAPED | wxFIXED_MINSIZE */
+
+    /*  a mask to extract stretch from the combination of flags */
+    wxSTRETCH_MASK            = 0x7000 /* sans wxTILE */
+};
+
+/* misc. flags for wxSizer items */
+enum wxSizerFlagBits
+{
+    wxFIXED_MINSIZE                = 0x8000,
+    wxRESERVE_SPACE_EVEN_IF_HIDDEN = 0x0002,
+
+    /*  a mask to extract wxSizerFlagBits from combination of flags */
+    wxSIZER_FLAG_BITS_MASK         = 0x8002
+};
+
 class WXDLLIMPEXP_CORE wxSizerFlags
 {
 public:

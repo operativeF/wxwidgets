@@ -14,6 +14,17 @@
 
 #include "wx/memory.h"
 
+/*  menu and toolbar item kinds */
+enum wxItemKind
+{
+    wxITEM_SEPARATOR = -1,
+    wxITEM_NORMAL,
+    wxITEM_CHECK,
+    wxITEM_RADIO,
+    wxITEM_DROPDOWN,
+    wxITEM_MAX
+};
+
 #define wxDECLARE_CLASS_INFO_ITERATORS()                                     \
 class WXDLLIMPEXP_BASE const_iterator                                    \
     {                                                                        \

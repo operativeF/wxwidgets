@@ -42,6 +42,17 @@ inline constexpr int wxCHK_ALLOW_3RD_STATE_FOR_USER = 0x2000;
 
 inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxCheckBoxNameStr[] = "check";
 
+/*
+ * The possible states of a 3-state checkbox (Compatible
+ * with the 2-state checkbox).
+ */
+enum wxCheckBoxState
+{
+    wxCHK_UNCHECKED,
+    wxCHK_CHECKED,
+    wxCHK_UNDETERMINED /* 3-state checkbox only */
+};
+
 // ----------------------------------------------------------------------------
 // wxCheckBox: a control which shows a label and a box which may be checked
 // ----------------------------------------------------------------------------

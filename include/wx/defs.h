@@ -1098,29 +1098,6 @@ enum wxAlignment
     wxALIGN_MASK              = 0x0f00
 };
 
-/* misc. flags for wxSizer items */
-enum wxSizerFlagBits
-{
-    wxFIXED_MINSIZE                = 0x8000,
-    wxRESERVE_SPACE_EVEN_IF_HIDDEN = 0x0002,
-
-    /*  a mask to extract wxSizerFlagBits from combination of flags */
-    wxSIZER_FLAG_BITS_MASK         = 0x8002
-};
-
-enum wxStretch
-{
-    wxSTRETCH_NOT             = 0x0000,
-    wxSHRINK                  = 0x1000,
-    wxGROW                    = 0x2000,
-    wxEXPAND                  = wxGROW,
-    wxSHAPED                  = 0x4000,
-    wxTILE                    = 0xc000, /* wxSHAPED | wxFIXED_MINSIZE */
-
-    /*  a mask to extract stretch from the combination of flags */
-    wxSTRETCH_MASK            = 0x7000 /* sans wxTILE */
-};
-
 /*  border flags: the values are chosen for backwards compatibility */
 enum wxBorder
 {
@@ -1741,29 +1718,6 @@ typedef int wxWindowID;
 /*  other constants */
 /*  ---------------------------------------------------------------------------- */
 
-/*  menu and toolbar item kinds */
-enum wxItemKind
-{
-    wxITEM_SEPARATOR = -1,
-    wxITEM_NORMAL,
-    wxITEM_CHECK,
-    wxITEM_RADIO,
-    wxITEM_DROPDOWN,
-    wxITEM_MAX
-};
-
-/*
- * The possible states of a 3-state checkbox (Compatible
- * with the 2-state checkbox).
- */
-enum wxCheckBoxState
-{
-    wxCHK_UNCHECKED,
-    wxCHK_CHECKED,
-    wxCHK_UNDETERMINED /* 3-state checkbox only */
-};
-
-
 /*  hit test results */
 enum wxHitTest
 {
@@ -1836,39 +1790,6 @@ enum wxHatchStyle
     wxHATCHSTYLE_HORIZONTAL,
     wxHATCHSTYLE_VERTICAL,
     wxHATCHSTYLE_LAST = wxHATCHSTYLE_VERTICAL
-};
-
-/*
-    WARNING: the following styles are deprecated; use the
-             wxFontFamily, wxFontStyle, wxFontWeight, wxBrushStyle,
-             wxPenStyle, wxPenCap, wxPenJoin enum values instead!
-*/
-
-/*  the values of the format constants should be the same as corresponding */
-/*  CF_XXX constants in Windows API */
-enum wxDataFormatId
-{
-    wxDF_INVALID =          0,
-    wxDF_TEXT =             1,  /* CF_TEXT */
-    wxDF_BITMAP =           2,  /* CF_BITMAP */
-    wxDF_METAFILE =         3,  /* CF_METAFILEPICT */
-    wxDF_SYLK =             4,
-    wxDF_DIF =              5,
-    wxDF_TIFF =             6,
-    wxDF_OEMTEXT =          7,  /* CF_OEMTEXT */
-    wxDF_DIB =              8,  /* CF_DIB */
-    wxDF_PALETTE =          9,
-    wxDF_PENDATA =          10,
-    wxDF_RIFF =             11,
-    wxDF_WAVE =             12,
-    wxDF_UNICODETEXT =      13,
-    wxDF_ENHMETAFILE =      14,
-    wxDF_FILENAME =         15, /* CF_HDROP */
-    wxDF_LOCALE =           16,
-    wxDF_PRIVATE =          20,
-    wxDF_HTML =             30, /* Note: does not correspond to CF_ constant */
-    wxDF_PNG =              31, /* Note: does not correspond to CF_ constant */
-    wxDF_MAX
 };
 
 /* Key codes */
