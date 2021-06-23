@@ -209,8 +209,6 @@ public:
 
     wxNavigationEnabled(const wxNavigationEnabled<W>&)  = delete;
 	wxNavigationEnabled& operator=(const wxNavigationEnabled<W>&) = delete;
-    wxNavigationEnabled(wxNavigationEnabled<W>&&)  = default;
-	wxNavigationEnabled& operator=(wxNavigationEnabled<W>&&) = default;
 
     WXDLLIMPEXP_INLINE_CORE bool AcceptsFocus() const override
     {

@@ -38,8 +38,8 @@ public:
 
    wxGCDC(const wxGCDC&) = delete;
    wxGCDC& operator=(const wxGCDC&) = delete;
-   wxGCDC(wxGCDC&&) = delete;
-   wxGCDC& operator=(wxGCDC&&) = delete;
+   wxGCDC(wxGCDC&&) = default;
+   wxGCDC& operator=(wxGCDC&&) = default;
 
 #ifdef __WXMSW__
     // override wxDC virtual functions to provide access to HDC associated with

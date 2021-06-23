@@ -81,11 +81,6 @@ public:
 
     ~wxWindowMSW() override;
 
-    wxWindowMSW(const wxWindowMSW&) = delete;
-	wxWindowMSW& operator=(const wxWindowMSW&) = delete;
-    wxWindowMSW(wxWindowMSW&&) = default;
-    wxWindowMSW& operator=(wxWindowMSW&&) = default;
-    
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
@@ -839,6 +834,8 @@ protected:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxWindowMSW);
+    wxWindowMSW(const wxWindowMSW&) = delete;
+	wxWindowMSW& operator=(const wxWindowMSW&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 

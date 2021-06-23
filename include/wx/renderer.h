@@ -426,8 +426,8 @@ public:
 
    wxDelegateRendererNative(const wxDelegateRendererNative&) = delete;
    wxDelegateRendererNative& operator=(const wxDelegateRendererNative&) = delete;
-   wxDelegateRendererNative(wxDelegateRendererNative&&) = delete;
-   wxDelegateRendererNative& operator=(wxDelegateRendererNative&&) = delete;
+   wxDelegateRendererNative(wxDelegateRendererNative&&) = default;
+   wxDelegateRendererNative& operator=(wxDelegateRendererNative&&) = default;
 
     int  DrawHeaderButton(wxWindow *win,
                           wxDC& dc,

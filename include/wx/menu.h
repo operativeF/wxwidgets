@@ -624,8 +624,8 @@ public:
 
    wxMenuInvokingWindowSetter(const wxMenuInvokingWindowSetter&) = delete;
    wxMenuInvokingWindowSetter& operator=(const wxMenuInvokingWindowSetter&) = delete;
-   wxMenuInvokingWindowSetter(wxMenuInvokingWindowSetter&&) = delete;
-   wxMenuInvokingWindowSetter& operator=(wxMenuInvokingWindowSetter&&) = delete;
+   wxMenuInvokingWindowSetter(wxMenuInvokingWindowSetter&&) = default;
+   wxMenuInvokingWindowSetter& operator=(wxMenuInvokingWindowSetter&&) = default;
 
 private:
     wxMenu& m_menu;

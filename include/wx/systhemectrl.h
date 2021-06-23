@@ -72,8 +72,6 @@ public:
 
     wxSystemThemedControl(const wxSystemThemedControl<C>&)  = delete;
 	wxSystemThemedControl& operator=(const wxSystemThemedControl<C>&) = delete;
-    wxSystemThemedControl(wxSystemThemedControl<C>&&)  = default;
-	wxSystemThemedControl& operator=(wxSystemThemedControl<C>&&) = default;
 
     void EnableSystemTheme(bool enable = true)
     {

@@ -131,7 +131,7 @@ private:
     // the original string and the position in it we correspond to, if the
     // string is NULL this object is NULL pointer-like
     const wxString * const m_str{nullptr};
-    const wxString::const_iterator m_iter{};
+    const wxString::const_iterator m_iter;
 };
 
 #endif // _WX_ANYSTR_H_

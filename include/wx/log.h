@@ -669,8 +669,8 @@ public:
 
    wxLogStderr(const wxLogStderr&) = delete;
    wxLogStderr& operator=(const wxLogStderr&) = delete;
-   wxLogStderr(wxLogStderr&&) = delete;
-   wxLogStderr& operator=(wxLogStderr&&) = delete;
+   wxLogStderr(wxLogStderr&&) = default;
+   wxLogStderr& operator=(wxLogStderr&&) = default;
 
 protected:
     // implement sink function
@@ -688,8 +688,8 @@ public:
 
    wxLogStream(const wxLogStream&) = delete;
    wxLogStream& operator=(const wxLogStream&) = delete;
-   wxLogStream(wxLogStream&&) = delete;
-   wxLogStream& operator=(wxLogStream&&) = delete;
+   wxLogStream(wxLogStream&&) = default;
+   wxLogStream& operator=(wxLogStream&&) = default;
 
 protected:
     // implement sink function
@@ -846,8 +846,8 @@ public:
 
    wxLogger(const wxLogger&) = delete;
    wxLogger& operator=(const wxLogger&) = delete;
-   wxLogger(wxLogger&&) = delete; // TODO: Maybe not make the logger const?
-   wxLogger& operator=(wxLogger&&) = delete;
+   wxLogger(wxLogger&&) = default;
+   wxLogger& operator=(wxLogger&&) = default;
 
     // store extra data in our log record and return this object itself (so
     // that further calls to its functions could be chained)

@@ -304,8 +304,8 @@ public:
 
    wxCriticalSectionLocker(const wxCriticalSectionLocker&) = delete;
    wxCriticalSectionLocker& operator=(const wxCriticalSectionLocker&) = delete;
-   wxCriticalSectionLocker(wxCriticalSectionLocker&&) = delete;
-   wxCriticalSectionLocker& operator=(wxCriticalSectionLocker&&) = delete;
+   wxCriticalSectionLocker(wxCriticalSectionLocker&&) = default;
+   wxCriticalSectionLocker& operator=(wxCriticalSectionLocker&&) = default;
 
 private:
     wxCriticalSection& m_critsect;

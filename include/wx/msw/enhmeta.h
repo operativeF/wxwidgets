@@ -108,8 +108,8 @@ public:
 
 wxEnhMetaFileDC(const wxEnhMetaFileDC&) = delete;
    wxEnhMetaFileDC& operator=(const wxEnhMetaFileDC&) = delete;
-   wxEnhMetaFileDC(wxEnhMetaFileDC&&) = delete;
-   wxEnhMetaFileDC& operator=(wxEnhMetaFileDC&&) = delete;
+   wxEnhMetaFileDC(wxEnhMetaFileDC&&) = default;
+   wxEnhMetaFileDC& operator=(wxEnhMetaFileDC&&) = default;
 
     // obtain a pointer to the new metafile (caller should delete it)
     wxEnhMetaFile *Close();
