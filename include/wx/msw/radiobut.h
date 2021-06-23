@@ -33,8 +33,8 @@ public:
 
     wxRadioButton(const wxRadioButton&) = delete;
     wxRadioButton& operator=(const wxRadioButton&) = delete;
-    wxRadioButton(wxRadioButton&&) = default;
-    wxRadioButton& operator=(wxRadioButton&&) = default;
+    wxRadioButton(wxRadioButton&&) = delete;
+    wxRadioButton& operator=(wxRadioButton&&) = delete;
     ~wxRadioButton() = default;
 
     bool Create(wxWindow *parent,

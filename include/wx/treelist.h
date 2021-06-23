@@ -139,10 +139,10 @@ public:
         Create(parent, id, pos, size, style, name);
     }
 
-   wxTreeListCtrl(const wxTreeListCtrl&) = delete;
-   wxTreeListCtrl& operator=(const wxTreeListCtrl&) = delete;
-   wxTreeListCtrl(wxTreeListCtrl&&) = default;
-   wxTreeListCtrl& operator=(wxTreeListCtrl&&) = default;
+    wxTreeListCtrl(const wxTreeListCtrl&) = delete;
+    wxTreeListCtrl& operator=(const wxTreeListCtrl&) = delete;
+    wxTreeListCtrl(wxTreeListCtrl&&) = delete;
+    wxTreeListCtrl& operator=(wxTreeListCtrl&&) = delete;
 
     bool Create(wxWindow* parent,
                 wxWindowID id,

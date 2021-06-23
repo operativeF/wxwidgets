@@ -749,8 +749,7 @@ using wxDocChildFrameBase = wxDocChildFrameAny<wxFrame, wxFrame>;
 class WXDLLIMPEXP_CORE wxDocChildFrame : public wxDocChildFrameBase
 {
 public:
-    wxDocChildFrame()
-    = default;
+    wxDocChildFrame() = default;
 
     wxDocChildFrame(wxDocument *doc,
                     wxView *view,
@@ -768,8 +767,8 @@ public:
 
    wxDocChildFrame(const wxDocChildFrame&) = delete;
    wxDocChildFrame& operator=(const wxDocChildFrame&) = delete;
-   wxDocChildFrame(wxDocChildFrame&&) = default;
-   wxDocChildFrame& operator=(wxDocChildFrame&&) = default;
+   wxDocChildFrame(wxDocChildFrame&&) = delete;
+   wxDocChildFrame& operator=(wxDocChildFrame&&) = delete;
 
     bool Create(wxDocument *doc,
                 wxView *view,
@@ -812,10 +811,10 @@ public:
         m_docManager = nullptr;
     }
 
-   wxDocParentFrameAnyBase(const wxDocParentFrameAnyBase&) = delete;
-   wxDocParentFrameAnyBase& operator=(const wxDocParentFrameAnyBase&) = delete;
-   wxDocParentFrameAnyBase(wxDocParentFrameAnyBase&&) = default;
-   wxDocParentFrameAnyBase& operator=(wxDocParentFrameAnyBase&&) = default;
+    wxDocParentFrameAnyBase(const wxDocParentFrameAnyBase&) = delete;
+    wxDocParentFrameAnyBase& operator=(const wxDocParentFrameAnyBase&) = delete;
+    wxDocParentFrameAnyBase(wxDocParentFrameAnyBase&&) = delete;
+    wxDocParentFrameAnyBase& operator=(wxDocParentFrameAnyBase&&) = delete;
 
     wxDocManager *GetDocumentManager() const { return m_docManager; }
 
@@ -928,10 +927,10 @@ public:
     {
     }
 
-   wxDocParentFrame(const wxDocParentFrame&) = delete;
-   wxDocParentFrame& operator=(const wxDocParentFrame&) = delete;
-   wxDocParentFrame(wxDocParentFrame&&) = default;
-   wxDocParentFrame& operator=(wxDocParentFrame&&) = default;
+    wxDocParentFrame(const wxDocParentFrame&) = delete;
+    wxDocParentFrame& operator=(const wxDocParentFrame&) = delete;
+    wxDocParentFrame(wxDocParentFrame&&) = delete;
+    wxDocParentFrame& operator=(wxDocParentFrame&&) = delete;
 
     bool Create(wxDocManager *manager,
                 wxFrame *parent,

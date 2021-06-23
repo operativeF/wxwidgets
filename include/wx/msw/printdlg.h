@@ -102,10 +102,10 @@ public:
     wxWindowsPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data = nullptr);
     ~wxWindowsPageSetupDialog() override;
 
-wxWindowsPageSetupDialog(const wxWindowsPageSetupDialog&) = delete;
-   wxWindowsPageSetupDialog& operator=(const wxWindowsPageSetupDialog&) = delete;
-   wxWindowsPageSetupDialog(wxWindowsPageSetupDialog&&) = default;
-   wxWindowsPageSetupDialog& operator=(wxWindowsPageSetupDialog&&) = default;
+    wxWindowsPageSetupDialog(const wxWindowsPageSetupDialog&) = delete;
+    wxWindowsPageSetupDialog& operator=(const wxWindowsPageSetupDialog&) = delete;
+    wxWindowsPageSetupDialog(wxWindowsPageSetupDialog&&) = delete;
+    wxWindowsPageSetupDialog& operator=(wxWindowsPageSetupDialog&&) = delete;
 
     bool Create(wxWindow *parent, wxPageSetupDialogData *data = nullptr);
     int ShowModal() override;

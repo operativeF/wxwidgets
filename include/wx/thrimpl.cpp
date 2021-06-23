@@ -82,11 +82,11 @@ class wxConditionInternal
 public:
     wxConditionInternal(wxMutex& mutex);
 
-   wxConditionInternal(const wxConditionInternal&) = delete;
-   wxConditionInternal& operator=(const wxConditionInternal&) = delete;
-   wxConditionInternal(wxConditionInternal&&) = default;
-   wxConditionInternal& operator=(wxConditionInternal&&) = default;
-
+    wxConditionInternal(const wxConditionInternal&) = delete;
+    wxConditionInternal& operator=(const wxConditionInternal&) = delete;
+    wxConditionInternal(wxConditionInternal&&) = delete;
+    wxConditionInternal& operator=(wxConditionInternal&&) = delete;    
+    
     bool IsOk() const { return m_mutex.IsOk() && m_semaphore.IsOk(); }
 
     wxCondError Wait();

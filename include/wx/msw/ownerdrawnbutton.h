@@ -40,10 +40,10 @@ protected:
     // FIXME: Verify this.
     ~wxMSWOwnerDrawnButtonBase() = default;
 
-   wxMSWOwnerDrawnButtonBase(const wxMSWOwnerDrawnButtonBase&) = delete;
-   wxMSWOwnerDrawnButtonBase& operator=(const wxMSWOwnerDrawnButtonBase&) = delete;
-   wxMSWOwnerDrawnButtonBase(wxMSWOwnerDrawnButtonBase&&) = default;
-   wxMSWOwnerDrawnButtonBase& operator=(wxMSWOwnerDrawnButtonBase&&) = default;
+    wxMSWOwnerDrawnButtonBase(const wxMSWOwnerDrawnButtonBase&) = delete;
+    wxMSWOwnerDrawnButtonBase& operator=(const wxMSWOwnerDrawnButtonBase&) = delete;
+    wxMSWOwnerDrawnButtonBase(wxMSWOwnerDrawnButtonBase&&) = delete;
+    wxMSWOwnerDrawnButtonBase& operator=(wxMSWOwnerDrawnButtonBase&&) = delete;
 
     // Make the control owner drawn if necessary to implement support for the
     // given foreground colour.

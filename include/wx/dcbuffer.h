@@ -71,10 +71,10 @@ public:
             UnMask();
     }
 
-   wxBufferedDC(const wxBufferedDC&) = delete;
-   wxBufferedDC& operator=(const wxBufferedDC&) = delete;
-   wxBufferedDC(wxBufferedDC&&) = default;
-   wxBufferedDC& operator=(wxBufferedDC&&) = default;
+    wxBufferedDC(const wxBufferedDC&) = delete;
+    wxBufferedDC& operator=(const wxBufferedDC&) = delete;
+    wxBufferedDC(wxBufferedDC&&) = delete;
+    wxBufferedDC& operator=(wxBufferedDC&&) = delete;
 
     // These reimplement the actions of the ctors for two stage creation
     void Init(wxDC *dc,
@@ -186,10 +186,10 @@ public:
         UnMask();
     }
 
-   wxBufferedPaintDC(const wxBufferedPaintDC&) = delete;
-   wxBufferedPaintDC& operator=(const wxBufferedPaintDC&) = delete;
-   wxBufferedPaintDC(wxBufferedPaintDC&&) = default;
-   wxBufferedPaintDC& operator=(wxBufferedPaintDC&&) = default;
+    wxBufferedPaintDC(const wxBufferedPaintDC&) = delete;
+    wxBufferedPaintDC& operator=(const wxBufferedPaintDC&) = delete;
+    wxBufferedPaintDC(wxBufferedPaintDC&&) = delete;
+    wxBufferedPaintDC& operator=(wxBufferedPaintDC&&) = delete;
 
 protected:
     // return the size needed by the buffer: this depends on whether we're
@@ -235,10 +235,10 @@ public:
 
     ~wxAutoBufferedPaintDC() override = default;
 
-   wxAutoBufferedPaintDC(const wxAutoBufferedPaintDC&) = delete;
-   wxAutoBufferedPaintDC& operator=(const wxAutoBufferedPaintDC&) = delete;
-   wxAutoBufferedPaintDC(wxAutoBufferedPaintDC&&) = default;
-   wxAutoBufferedPaintDC& operator=(wxAutoBufferedPaintDC&&) = default;
+    wxAutoBufferedPaintDC(const wxAutoBufferedPaintDC&) = delete;
+    wxAutoBufferedPaintDC& operator=(const wxAutoBufferedPaintDC&) = delete;
+    wxAutoBufferedPaintDC(wxAutoBufferedPaintDC&&) = delete;
+    wxAutoBufferedPaintDC& operator=(wxAutoBufferedPaintDC&&) = delete;
 };
 
 

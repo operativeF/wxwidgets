@@ -159,10 +159,10 @@ public:
     // as it normally doesn't belong to us
     ~wxNativeContainerWindow() override;
 
-   wxNativeContainerWindow(const wxNativeContainerWindow&) = delete;
-   wxNativeContainerWindow& operator=(const wxNativeContainerWindow&) = delete;
-   wxNativeContainerWindow(wxNativeContainerWindow&&) = default;
-   wxNativeContainerWindow& operator=(wxNativeContainerWindow&&) = default;
+    wxNativeContainerWindow(const wxNativeContainerWindow&) = delete;
+    wxNativeContainerWindow& operator=(const wxNativeContainerWindow&) = delete;
+    wxNativeContainerWindow(wxNativeContainerWindow&&) = delete;
+    wxNativeContainerWindow& operator=(wxNativeContainerWindow&&) = delete;
 
     // provide (trivial) implementation of the base class pure virtuals
     void SetTitle(const wxString& WXUNUSED(title)) override

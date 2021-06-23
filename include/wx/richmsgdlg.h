@@ -34,8 +34,8 @@ public:
 
     wxRichMessageDialogBase(const wxRichMessageDialogBase&) = delete;
     wxRichMessageDialogBase& operator=(const wxRichMessageDialogBase&) = delete;
-    wxRichMessageDialogBase(wxRichMessageDialogBase&&) = default;
-    wxRichMessageDialogBase& operator=(wxRichMessageDialogBase&&) = default;
+    wxRichMessageDialogBase(wxRichMessageDialogBase&&) = delete;
+    wxRichMessageDialogBase& operator=(wxRichMessageDialogBase&&) = delete;
 
     void ShowCheckBox(const wxString& checkBoxText, bool checked = false)
     {

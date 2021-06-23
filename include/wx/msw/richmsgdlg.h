@@ -22,8 +22,8 @@ public:
 
     wxRichMessageDialog(const wxRichMessageDialog&) = delete;
     wxRichMessageDialog& operator=(const wxRichMessageDialog&) = delete;
-    wxRichMessageDialog(wxRichMessageDialog&&) = default;
-    wxRichMessageDialog& operator=(wxRichMessageDialog&&) = default;
+    wxRichMessageDialog(wxRichMessageDialog&&) = delete;
+    wxRichMessageDialog& operator=(wxRichMessageDialog&&) = delete;
     ~wxRichMessageDialog() = default;    
 
     // overridden base class method showing the native task dialog if possible

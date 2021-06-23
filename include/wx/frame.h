@@ -60,8 +60,8 @@ public:
 
    wxFrameBase(const wxFrameBase&) = delete;
    wxFrameBase& operator=(const wxFrameBase&) = delete;
-   wxFrameBase(wxFrameBase&&) = default;
-   wxFrameBase& operator=(wxFrameBase&&) = default;
+   wxFrameBase(wxFrameBase&&) = delete;
+   wxFrameBase& operator=(wxFrameBase&&) = delete;
 
     wxFrame *New(wxWindow *parent,
                  wxWindowID winid,

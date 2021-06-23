@@ -37,7 +37,10 @@ public:
     // ctor & dtor
     wxDropTarget(wxDataObject *dataObject = nullptr);
     ~wxDropTarget() override;
-
+    wxDropTarget(const wxDropTarget&) = delete;
+	wxDropTarget& operator=(const wxDropTarget&) = delete;
+    wxDropTarget(wxDropTarget&&) = delete;
+	wxDropTarget& operator=(wxDropTarget&&) = delete;
     // normally called by wxWindow on window creation/destruction, but might be
     // called `manually' as well. Register() returns true on success.
     bool Register(WXHWND hwnd);
@@ -80,9 +83,6 @@ private:
     wxIDropTarget     *m_pIDropTarget; // the pointer to our COM interface
     IDataObject       *m_pIDataSource; // the pointer to the source data object
     wxIDropTargetHelper *m_dropTargetHelper{nullptr}; // the drop target helper
-
-    wxDropTarget(const wxDropTarget&) = delete;
-	wxDropTarget& operator=(const wxDropTarget&) = delete;
 };
 
 #endif  //wxUSE_DRAG_AND_DROP

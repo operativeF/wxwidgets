@@ -68,10 +68,10 @@ public:
     explicit wxStringOutputStream(wxString *pString = nullptr,
                                   wxMBConv& conv = wxConvUTF8);
 
-   wxStringOutputStream(const wxStringOutputStream&) = delete;
-   wxStringOutputStream& operator=(const wxStringOutputStream&) = delete;
-   wxStringOutputStream(wxStringOutputStream&&) = default;
-   wxStringOutputStream& operator=(wxStringOutputStream&&) = default;
+    wxStringOutputStream(const wxStringOutputStream&) = delete;
+    wxStringOutputStream& operator=(const wxStringOutputStream&) = delete;
+    wxStringOutputStream(wxStringOutputStream&&) = delete;
+    wxStringOutputStream& operator=(wxStringOutputStream&&) = delete;
 
     // get the string containing current output
     const wxString& GetString() const { return *m_str; }

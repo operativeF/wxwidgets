@@ -36,10 +36,10 @@ public:
                       const wxSize &size = wxDefaultSize,
                       long style = wxDEFAULT_DIALOG_STYLE);
 
-   wxPrintDialogBase(const wxPrintDialogBase&) = delete;
-   wxPrintDialogBase& operator=(const wxPrintDialogBase&) = delete;
-   wxPrintDialogBase(wxPrintDialogBase&&) = default;
-   wxPrintDialogBase& operator=(wxPrintDialogBase&&) = default;
+    wxPrintDialogBase(const wxPrintDialogBase&) = delete;
+    wxPrintDialogBase& operator=(const wxPrintDialogBase&) = delete;
+    wxPrintDialogBase(wxPrintDialogBase&&) = delete;
+    wxPrintDialogBase& operator=(wxPrintDialogBase&&) = delete;
 
     virtual wxPrintDialogData& GetPrintDialogData() = 0;
     virtual wxPrintData& GetPrintData() = 0;
@@ -93,10 +93,10 @@ public:
                       const wxSize &size = wxDefaultSize,
                       long style = wxDEFAULT_DIALOG_STYLE);
 
-   wxPageSetupDialogBase(const wxPageSetupDialogBase&) = delete;
-   wxPageSetupDialogBase& operator=(const wxPageSetupDialogBase&) = delete;
-   wxPageSetupDialogBase(wxPageSetupDialogBase&&) = default;
-   wxPageSetupDialogBase& operator=(wxPageSetupDialogBase&&) = default;
+    wxPageSetupDialogBase(const wxPageSetupDialogBase&) = delete;
+    wxPageSetupDialogBase& operator=(const wxPageSetupDialogBase&) = delete;
+    wxPageSetupDialogBase(wxPageSetupDialogBase&&) = delete;
+    wxPageSetupDialogBase& operator=(wxPageSetupDialogBase&&) = delete;
 
     virtual wxPageSetupDialogData& GetPageSetupDialogData() = 0;
 

@@ -383,10 +383,10 @@ public:
                     const wxString& name = wxT("canvas"));
     ~wxPreviewCanvas() override;
 
-   wxPreviewCanvas(const wxPreviewCanvas&) = delete;
-   wxPreviewCanvas& operator=(const wxPreviewCanvas&) = delete;
-   wxPreviewCanvas(wxPreviewCanvas&&) = default;
-   wxPreviewCanvas& operator=(wxPreviewCanvas&&) = default;
+    wxPreviewCanvas(const wxPreviewCanvas&) = delete;
+    wxPreviewCanvas& operator=(const wxPreviewCanvas&) = delete;
+    wxPreviewCanvas(wxPreviewCanvas&&) = delete;
+    wxPreviewCanvas& operator=(wxPreviewCanvas&&) = delete;
 
     void SetPreview(wxPrintPreviewBase *preview) { m_printPreview = preview; }
 
@@ -427,10 +427,10 @@ public:
                    const wxString& name = wxASCII_STR(wxFrameNameStr));
     ~wxPreviewFrame() override;
 
-   wxPreviewFrame(const wxPreviewFrame&) = delete;
-   wxPreviewFrame& operator=(const wxPreviewFrame&) = delete;
-   wxPreviewFrame(wxPreviewFrame&&) = default;
-   wxPreviewFrame& operator=(wxPreviewFrame&&) = default;
+    wxPreviewFrame(const wxPreviewFrame&) = delete;
+    wxPreviewFrame& operator=(const wxPreviewFrame&) = delete;
+    wxPreviewFrame(wxPreviewFrame&&) = delete;
+    wxPreviewFrame& operator=(wxPreviewFrame&&) = delete;
 
     // Either Initialize() or InitializeWithModality() must be called before
     // showing the preview frame, the former being just a particular case of
@@ -784,10 +784,10 @@ public:
                        long style = wxDEFAULT_DIALOG_STYLE,
                        const wxString& name = wxT("dialog"));
 
-   wxPrintAbortDialog(const wxPrintAbortDialog&) = delete;
-   wxPrintAbortDialog& operator=(const wxPrintAbortDialog&) = delete;
-   wxPrintAbortDialog(wxPrintAbortDialog&&) = default;
-   wxPrintAbortDialog& operator=(wxPrintAbortDialog&&) = default;
+    wxPrintAbortDialog(const wxPrintAbortDialog&) = delete;
+    wxPrintAbortDialog& operator=(const wxPrintAbortDialog&) = delete;
+    wxPrintAbortDialog(wxPrintAbortDialog&&) = delete;
+    wxPrintAbortDialog& operator=(wxPrintAbortDialog&&) = delete;
 
     void SetProgress(int currentPage, int totalPages,
                      int currentCopy, int totalCopies);

@@ -64,6 +64,8 @@ public:
 
     wxCheckBoxBase(const wxCheckBoxBase&) = delete;
 	wxCheckBoxBase& operator=(const wxCheckBoxBase&) = delete;
+    wxCheckBoxBase(wxCheckBoxBase&&) = default;
+    wxCheckBoxBase& operator=(wxCheckBoxBase&&) = default;
     
     // set/get the checked status of the listbox
     virtual void SetValue(bool value) = 0;

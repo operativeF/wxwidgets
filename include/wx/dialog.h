@@ -69,8 +69,8 @@ public:
 
    wxDialogBase(const wxDialogBase&) = delete;
    wxDialogBase& operator=(const wxDialogBase&) = delete;
-   wxDialogBase(wxDialogBase&&) = default;
-   wxDialogBase& operator=(wxDialogBase&&) = default;
+   wxDialogBase(wxDialogBase&&) = delete;
+   wxDialogBase& operator=(wxDialogBase&&) = delete;
 
     // define public wxDialog methods to be implemented by the derived classes
     virtual int ShowModal() = 0;

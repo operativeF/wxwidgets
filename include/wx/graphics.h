@@ -563,10 +563,10 @@ public:
 
     ~wxGraphicsContext() override;
 
-   wxGraphicsContext(const wxGraphicsContext&) = delete;
-   wxGraphicsContext& operator=(const wxGraphicsContext&) = delete;
-   wxGraphicsContext(wxGraphicsContext&&) = default;
-   wxGraphicsContext& operator=(wxGraphicsContext&&) = default;
+    wxGraphicsContext(const wxGraphicsContext&) = delete;
+    wxGraphicsContext& operator=(const wxGraphicsContext&) = delete;
+    wxGraphicsContext(wxGraphicsContext&&) = delete;
+    wxGraphicsContext& operator=(wxGraphicsContext&&) = delete;
 
     static wxGraphicsContext* Create( const wxWindowDC& dc);
     static wxGraphicsContext * Create( const wxMemoryDC& dc);

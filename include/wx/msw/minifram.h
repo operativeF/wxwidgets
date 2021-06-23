@@ -20,8 +20,8 @@ public:
 
   wxMiniFrame(const wxMiniFrame&) = delete;
   wxMiniFrame& operator=(const wxMiniFrame&) = delete;
-  wxMiniFrame(wxMiniFrame&&) = default;
-  wxMiniFrame& operator=(wxMiniFrame&&) = default;
+  wxMiniFrame(wxMiniFrame&&) = delete;
+  wxMiniFrame& operator=(wxMiniFrame&&) = delete;
 
   ~wxMiniFrame() = default;
 

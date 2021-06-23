@@ -36,10 +36,10 @@ class WXDLLIMPEXP_CORE wxRadioButtonBase : public wxRadioButtonBaseBase
 public:
     wxRadioButtonBase() = default;
 
-   wxRadioButtonBase(const wxRadioButtonBase&) = delete;
-   wxRadioButtonBase& operator=(const wxRadioButtonBase&) = delete;
-   wxRadioButtonBase(wxRadioButtonBase&&) = default;
-   wxRadioButtonBase& operator=(wxRadioButtonBase&&) = default;
+    wxRadioButtonBase(const wxRadioButtonBase&) = delete;
+    wxRadioButtonBase& operator=(const wxRadioButtonBase&) = delete;
+    wxRadioButtonBase(wxRadioButtonBase&&) = delete;
+    wxRadioButtonBase& operator=(wxRadioButtonBase&&) = delete;
 
     // Methods to be implemented by the derived classes:
     virtual void SetValue(bool value) = 0;

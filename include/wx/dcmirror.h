@@ -32,10 +32,10 @@ public:
         m_mirror = mirror;
     }
 
-   wxMirrorDCImpl(const wxMirrorDCImpl&) = delete;
-   wxMirrorDCImpl& operator=(const wxMirrorDCImpl&) = delete;
-   wxMirrorDCImpl(wxMirrorDCImpl&&) = default;
-   wxMirrorDCImpl& operator=(wxMirrorDCImpl&&) = default;
+    wxMirrorDCImpl(const wxMirrorDCImpl&) = delete;
+    wxMirrorDCImpl& operator=(const wxMirrorDCImpl&) = delete;
+    wxMirrorDCImpl(wxMirrorDCImpl&&) = delete;
+    wxMirrorDCImpl& operator=(wxMirrorDCImpl&&) = delete;
 
     // wxDCBase operations
     void Clear() override { m_dc.Clear(); }

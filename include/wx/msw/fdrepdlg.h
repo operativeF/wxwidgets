@@ -25,10 +25,10 @@ public:
                         const wxString &title,
                         int style = 0);
 
-   wxFindReplaceDialog(const wxFindReplaceDialog&) = delete;
-   wxFindReplaceDialog& operator=(const wxFindReplaceDialog&) = delete;
-   wxFindReplaceDialog(wxFindReplaceDialog&&) = default;
-   wxFindReplaceDialog& operator=(wxFindReplaceDialog&&) = default;
+    wxFindReplaceDialog(const wxFindReplaceDialog&) = delete;
+    wxFindReplaceDialog& operator=(const wxFindReplaceDialog&) = delete;
+    wxFindReplaceDialog(wxFindReplaceDialog&&) = delete;
+    wxFindReplaceDialog& operator=(wxFindReplaceDialog&&) = delete;
 
     bool Create(wxWindow *parent,
                 wxFindReplaceData *data,
