@@ -219,8 +219,8 @@ public:
 
    wxWizardBase(const wxWizardBase&) = delete;
    wxWizardBase& operator=(const wxWizardBase&) = delete;
-   wxWizardBase(wxWizardBase&&) = delete;
-   wxWizardBase& operator=(wxWizardBase&&) = delete;
+   wxWizardBase(wxWizardBase&&) = default;
+   wxWizardBase& operator=(wxWizardBase&&) = default;
 
     // executes the wizard starting from the given page, returns true if it was
     // successfully finished, false if user cancelled it

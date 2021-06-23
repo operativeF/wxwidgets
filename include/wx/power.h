@@ -134,10 +134,10 @@ public:
             wxPowerResource::Release(m_kind);
     }
 
-    wxPowerResourceBlocker(const wxPowerResourceBlocker&) = delete;
-    wxPowerResourceBlocker& operator=(const wxPowerResourceBlocker&) = delete;
-    wxPowerResourceBlocker(wxPowerResourceBlocker&&) = delete;
-    wxPowerResourceBlocker& operator=(wxPowerResourceBlocker&&) = delete;
+   wxPowerResourceBlocker(const wxPowerResourceBlocker&) = delete;
+   wxPowerResourceBlocker& operator=(const wxPowerResourceBlocker&) = delete;
+   wxPowerResourceBlocker(wxPowerResourceBlocker&&) = default;
+   wxPowerResourceBlocker& operator=(wxPowerResourceBlocker&&) = default;
 
 private:
     const wxPowerResourceKind m_kind;

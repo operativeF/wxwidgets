@@ -32,8 +32,8 @@ public:
 
     wxFrame(const wxFrame&) = delete;
     wxFrame& operator=(const wxFrame&) = delete;
-    wxFrame(wxFrame&&) = delete;
-    wxFrame& operator=(wxFrame&&) = delete;
+    wxFrame(wxFrame&&) = default;
+    wxFrame& operator=(wxFrame&&) = default;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,

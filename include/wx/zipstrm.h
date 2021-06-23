@@ -308,8 +308,8 @@ public:
 
    wxZipOutputStream(const wxZipOutputStream&) = delete;
    wxZipOutputStream& operator=(const wxZipOutputStream&) = delete;
-   wxZipOutputStream(wxZipOutputStream&&) = delete;
-   wxZipOutputStream& operator=(wxZipOutputStream&&) = delete;
+   wxZipOutputStream(wxZipOutputStream&&) = default;
+   wxZipOutputStream& operator=(wxZipOutputStream&&) = default;
 
     bool PutNextEntry(wxZipEntry *entry)        { return DoCreate(entry); }
 

@@ -34,8 +34,8 @@ public:
 
    wxTextFile(const wxTextFile&) = delete;
    wxTextFile& operator=(const wxTextFile&) = delete;
-   wxTextFile(wxTextFile&&) = delete;
-   wxTextFile& operator=(wxTextFile&&) = delete;
+   wxTextFile(wxTextFile&&) = default;
+   wxTextFile& operator=(wxTextFile&&) = default;
 
 protected:
     // implement the base class pure virtuals

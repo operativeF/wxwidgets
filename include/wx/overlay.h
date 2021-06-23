@@ -81,10 +81,10 @@ public:
     // removes the connection between the overlay and the dc
     virtual ~wxDCOverlay();
 
-    wxDCOverlay(const wxDCOverlay&) = delete;
-    wxDCOverlay& operator=(const wxDCOverlay&) = delete;
-    wxDCOverlay(wxDCOverlay&&) = delete;
-    wxDCOverlay& operator=(wxDCOverlay&&) = delete;
+   wxDCOverlay(const wxDCOverlay&) = delete;
+   wxDCOverlay& operator=(const wxDCOverlay&) = delete;
+   wxDCOverlay(wxDCOverlay&&) = default;
+   wxDCOverlay& operator=(wxDCOverlay&&) = default;
 
     // clears the layer, restoring the state at the last init
     void Clear();

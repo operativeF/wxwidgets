@@ -30,8 +30,8 @@ public:
 
    wxApp(const wxApp&) = delete;
    wxApp& operator=(const wxApp&) = delete;
-   wxApp(wxApp&&) = delete;
-   wxApp& operator=(wxApp&&) = delete;
+   wxApp(wxApp&&) = default;
+   wxApp& operator=(wxApp&&) = default;
 
     bool Initialize(int& argc, wxChar **argv) override;
     void CleanUp() override;

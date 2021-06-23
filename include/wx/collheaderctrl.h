@@ -97,10 +97,10 @@ public:
         Create(parent, id, label, pos, size, style, validator, name);
     }
 
-    wxCollapsibleHeaderCtrl(const wxCollapsibleHeaderCtrl&) = delete;
-    wxCollapsibleHeaderCtrl& operator=(const wxCollapsibleHeaderCtrl&) = delete;
-    wxCollapsibleHeaderCtrl(wxCollapsibleHeaderCtrl&&) = delete;
-    wxCollapsibleHeaderCtrl& operator=(wxCollapsibleHeaderCtrl&&) = delete;
+   wxCollapsibleHeaderCtrl(const wxCollapsibleHeaderCtrl&) = delete;
+   wxCollapsibleHeaderCtrl& operator=(const wxCollapsibleHeaderCtrl&) = delete;
+   wxCollapsibleHeaderCtrl(wxCollapsibleHeaderCtrl&&) = default;
+   wxCollapsibleHeaderCtrl& operator=(wxCollapsibleHeaderCtrl&&) = default;
 };
 
 #endif // wxUSE_COLLPANE

@@ -117,8 +117,8 @@ public:
     wxDECLARE_CLASS(wxPaintDCEx);
    wxPaintDCEx(const wxPaintDCEx&) = delete;
    wxPaintDCEx& operator=(const wxPaintDCEx&) = delete;
-   wxPaintDCEx(wxPaintDCEx&&) = delete;
-   wxPaintDCEx& operator=(wxPaintDCEx&&) = delete;
+   wxPaintDCEx(wxPaintDCEx&&) = default;
+   wxPaintDCEx& operator=(wxPaintDCEx&&) = default;
 };
 
 #endif

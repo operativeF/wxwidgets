@@ -220,8 +220,8 @@ public:
 
    wxTarOutputStream(const wxTarOutputStream&) = delete;
    wxTarOutputStream& operator=(const wxTarOutputStream&) = delete;
-   wxTarOutputStream(wxTarOutputStream&&) = delete;
-   wxTarOutputStream& operator=(wxTarOutputStream&&) = delete;
+   wxTarOutputStream(wxTarOutputStream&&) = default;
+   wxTarOutputStream& operator=(wxTarOutputStream&&) = default;
 
     bool PutNextEntry(wxTarEntry *entry);
 

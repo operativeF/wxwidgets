@@ -193,10 +193,10 @@ public:
         Create(parent, message, title, order, items, pos, name);
     }
 
-    wxRearrangeDialog(const wxRearrangeDialog&) = delete;
-    wxRearrangeDialog& operator=(const wxRearrangeDialog&) = delete;
-    wxRearrangeDialog(wxRearrangeDialog&&) = delete;
-    wxRearrangeDialog& operator=(wxRearrangeDialog&&) = delete;
+   wxRearrangeDialog(const wxRearrangeDialog&) = delete;
+   wxRearrangeDialog& operator=(const wxRearrangeDialog&) = delete;
+   wxRearrangeDialog(wxRearrangeDialog&&) = default;
+   wxRearrangeDialog& operator=(wxRearrangeDialog&&) = default;
 
     bool Create(wxWindow *parent,
                 const wxString& message,

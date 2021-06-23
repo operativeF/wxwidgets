@@ -22,10 +22,10 @@ public:
                 const wxSize& size = wxDefaultSize,
                 const wxString& name = wxASCII_STR(wxDirDialogNameStr));
 
-    wxDirDialog(const wxDirDialog&) = delete;
-    wxDirDialog& operator=(const wxDirDialog&) = delete;
-    wxDirDialog(wxDirDialog&&) = delete;
-    wxDirDialog& operator=(wxDirDialog&&) = delete;
+wxDirDialog(const wxDirDialog&) = delete;
+   wxDirDialog& operator=(const wxDirDialog&) = delete;
+   wxDirDialog(wxDirDialog&&) = default;
+   wxDirDialog& operator=(wxDirDialog&&) = default;
 
     void SetPath(const wxString& path) override;
 

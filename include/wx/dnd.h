@@ -245,8 +245,8 @@ public:
 
    wxTextDropTarget(const wxTextDropTarget&) = delete;
    wxTextDropTarget& operator=(const wxTextDropTarget&) = delete;
-   wxTextDropTarget(wxTextDropTarget&&) = delete;
-   wxTextDropTarget& operator=(wxTextDropTarget&&) = delete;
+   wxTextDropTarget(wxTextDropTarget&&) = default;
+   wxTextDropTarget& operator=(wxTextDropTarget&&) = default;
 
     virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& text) = 0;
 
@@ -259,10 +259,10 @@ class WXDLLIMPEXP_CORE wxFileDropTarget : public wxDropTarget
 public:
     wxFileDropTarget();
 
-    wxFileDropTarget(const wxFileDropTarget&) = delete;
-    wxFileDropTarget& operator=(const wxFileDropTarget&) = delete;
-    wxFileDropTarget(wxFileDropTarget&&) = delete;
-    wxFileDropTarget& operator=(wxFileDropTarget&&) = delete;
+   wxFileDropTarget(const wxFileDropTarget&) = delete;
+   wxFileDropTarget& operator=(const wxFileDropTarget&) = delete;
+   wxFileDropTarget(wxFileDropTarget&&) = default;
+   wxFileDropTarget& operator=(wxFileDropTarget&&) = default;
 
     // parameters are the number of files and the array of file names
     virtual bool OnDropFiles(wxCoord x, wxCoord y,

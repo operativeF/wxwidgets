@@ -64,10 +64,10 @@ public:
 
     ~wxTCPConnection() override;
 
-    wxTCPConnection(const wxTCPConnection&) = delete;
-    wxTCPConnection& operator=(const wxTCPConnection&) = delete;
-    wxTCPConnection(wxTCPConnection&&) = delete;
-    wxTCPConnection& operator=(wxTCPConnection&&) = delete;
+   wxTCPConnection(const wxTCPConnection&) = delete;
+   wxTCPConnection& operator=(const wxTCPConnection&) = delete;
+   wxTCPConnection(wxTCPConnection&&) = default;
+   wxTCPConnection& operator=(wxTCPConnection&&) = default;
 
     // implement base class pure virtual methods
     const void *Request(const wxString& item,

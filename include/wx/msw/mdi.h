@@ -187,10 +187,10 @@ public:
         Create(parent, id, title, pos, size, style, name);
     }
 
-    wxMDIChildFrame(const wxMDIChildFrame&) = delete;
-    wxMDIChildFrame& operator=(const wxMDIChildFrame&) = delete;
-    wxMDIChildFrame(wxMDIChildFrame&&) = delete;
-    wxMDIChildFrame& operator=(wxMDIChildFrame&&) = delete;
+wxMDIChildFrame(const wxMDIChildFrame&) = delete;
+   wxMDIChildFrame& operator=(const wxMDIChildFrame&) = delete;
+   wxMDIChildFrame(wxMDIChildFrame&&) = default;
+   wxMDIChildFrame& operator=(wxMDIChildFrame&&) = default;
 
     bool Create(wxMDIParentFrame *parent,
                 wxWindowID id,

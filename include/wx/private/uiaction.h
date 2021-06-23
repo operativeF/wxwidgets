@@ -20,11 +20,6 @@ public:
     wxUIActionSimulatorImpl() = default;
     virtual ~wxUIActionSimulatorImpl() = default;
 
-    wxUIActionSimulatorImpl(const wxUIActionSimulatorImpl&) = delete;
-    wxUIActionSimulatorImpl& operator=(const wxUIActionSimulatorImpl&) = delete;
-    wxUIActionSimulatorImpl(wxUIActionSimulatorImpl&&) = default;
-    wxUIActionSimulatorImpl& operator=(wxUIActionSimulatorImpl&&) = default;
-
     // Low level mouse methods which must be implemented in the derived class.
     virtual bool MouseMove(long x, long y) = 0;
     virtual bool MouseDown(int button = wxMOUSE_BTN_LEFT) = 0;
@@ -41,6 +36,10 @@ public:
     // presses. It should generate exactly one key event with the given
     // parameters.
     virtual bool DoKey(int keycode, int modifiers, bool isDown) = 0;
+
+private:
+    wxUIActionSimulatorImpl(const wxUIActionSimulatorImpl&) = delete;
+	wxUIActionSimulatorImpl& operator=(const wxUIActionSimulatorImpl&) = delete;
 };
 
 #endif // _WX_PRIVATE_UIACTION_H_

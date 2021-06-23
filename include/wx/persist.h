@@ -183,10 +183,10 @@ public:
     // trivial but virtual dtor
     virtual ~wxPersistentObject() = default;
 
-    wxPersistentObject(const wxPersistentObject&) = delete;
-    wxPersistentObject& operator=(const wxPersistentObject&) = delete;
-    wxPersistentObject(wxPersistentObject&&) = delete;
-    wxPersistentObject& operator=(wxPersistentObject&&) = delete;
+   wxPersistentObject(const wxPersistentObject&) = delete;
+   wxPersistentObject& operator=(const wxPersistentObject&) = delete;
+   wxPersistentObject(wxPersistentObject&&) = default;
+   wxPersistentObject& operator=(wxPersistentObject&&) = default;
 
     // methods used by wxPersistenceManager
     // ------------------------------------

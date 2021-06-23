@@ -25,8 +25,8 @@ public:
 
     wxMessageDialog(const wxMessageDialog&) = delete;
     wxMessageDialog& operator=(const wxMessageDialog&) = delete;
-    wxMessageDialog(wxMessageDialog&&) = delete;
-    wxMessageDialog& operator=(wxMessageDialog&&) = delete;
+    wxMessageDialog(wxMessageDialog&&) = default;
+    wxMessageDialog& operator=(wxMessageDialog&&) = default;
 
     ~wxMessageDialog() = default;
 

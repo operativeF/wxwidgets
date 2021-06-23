@@ -500,10 +500,10 @@ public:
                      const wxString& name = wxASCII_STR(wxPanelNameStr))
         : wxScrolled<wxPanel>(parent, winid, pos, size, style, name) {}
 
-    wxScrolledWindow(const wxScrolledWindow&) = delete;
-    wxScrolledWindow& operator=(const wxScrolledWindow&) = delete;
-    wxScrolledWindow(wxScrolledWindow&&) = delete;
-    wxScrolledWindow& operator=(wxScrolledWindow&&) = delete;
+wxScrolledWindow(const wxScrolledWindow&) = delete;
+   wxScrolledWindow& operator=(const wxScrolledWindow&) = delete;
+   wxScrolledWindow(wxScrolledWindow&&) = default;
+   wxScrolledWindow& operator=(wxScrolledWindow&&) = default;
 
 	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;

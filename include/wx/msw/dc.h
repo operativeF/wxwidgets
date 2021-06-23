@@ -331,8 +331,8 @@ public:
 
     wxDCTempImpl(const wxDCTempImpl&) = delete;
 	wxDCTempImpl& operator=(const wxDCTempImpl&) = delete;
-    wxDCTempImpl(wxDCTempImpl&&) = delete;
-	wxDCTempImpl& operator=(wxDCTempImpl&&) = delete;
+    wxDCTempImpl(wxDCTempImpl&&) = default;
+	wxDCTempImpl& operator=(wxDCTempImpl&&) = default;
 
     wxSize DoGetSize() const override
     {

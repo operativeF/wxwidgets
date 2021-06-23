@@ -37,11 +37,6 @@ public:
         FreeIfNeeded();
     }
 
-    wxWithImages(const wxWithImages&) = delete;
-    wxWithImages& operator=(const wxWithImages&) = delete;
-    wxWithImages(wxWithImages&&) = default;
-    wxWithImages& operator=(wxWithImages&&) = default;
-
     // Sets the image list to use, it is *not* deleted by the control.
     virtual void SetImageList(wxImageList* imageList)
     {
@@ -94,6 +89,11 @@ private:
 
     // False by default, if true then we delete m_imageList.
     bool m_ownsImageList;
+
+   wxWithImages(const wxWithImages&) = delete;
+   wxWithImages& operator=(const wxWithImages&) = delete;
+   wxWithImages(wxWithImages&&) = default;
+   wxWithImages& operator=(wxWithImages&&) = default;
 };
 
 #endif // _WX_WITHIMAGES_H_

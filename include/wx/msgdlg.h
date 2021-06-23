@@ -99,10 +99,10 @@ public:
 
     ~wxMessageDialogBase() override = default;
 
-    wxMessageDialogBase(const wxMessageDialogBase&) = delete;
-    wxMessageDialogBase& operator=(const wxMessageDialogBase&) = delete;
-    wxMessageDialogBase(wxMessageDialogBase&&) = delete;
-    wxMessageDialogBase& operator=(wxMessageDialogBase&&) = delete;
+   wxMessageDialogBase(const wxMessageDialogBase&) = delete;
+   wxMessageDialogBase& operator=(const wxMessageDialogBase&) = delete;
+   wxMessageDialogBase(wxMessageDialogBase&&) = default;
+   wxMessageDialogBase& operator=(wxMessageDialogBase&&) = default;
 
     wxString GetCaption() const { return m_caption; }
 

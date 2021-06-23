@@ -41,8 +41,8 @@ public:
 
     wxColourDialog(const wxColourDialog&) = delete;
     wxColourDialog& operator=(const wxColourDialog&) = delete;
-    wxColourDialog(wxColourDialog&&) = delete;
-    wxColourDialog& operator=(wxColourDialog&&) = delete;
+    wxColourDialog(wxColourDialog&&) = default;
+    wxColourDialog& operator=(wxColourDialog&&) = default;
 
     bool Create(wxWindow *parent, const wxColourData *data = nullptr);
 

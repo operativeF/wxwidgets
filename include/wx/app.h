@@ -70,8 +70,8 @@ public:
 
    wxAppConsoleBase(const wxAppConsoleBase&) = delete;
    wxAppConsoleBase& operator=(const wxAppConsoleBase&) = delete;
-   wxAppConsoleBase(wxAppConsoleBase&&) = delete;
-   wxAppConsoleBase& operator=(wxAppConsoleBase&&) = delete;
+   wxAppConsoleBase(wxAppConsoleBase&&) = default;
+   wxAppConsoleBase& operator=(wxAppConsoleBase&&) = default;
 
     // the virtual functions which may/must be overridden in the derived class
     // -----------------------------------------------------------------------
@@ -536,11 +536,7 @@ class WXDLLIMPEXP_CORE wxAppBase : public wxAppConsole
 public:
     wxAppBase();
     ~wxAppBase() override;
-    wxAppBase(const wxAppBase&) = delete;
-	wxAppBase& operator=(const wxAppBase&) = delete;
-    wxAppBase(wxAppBase&&) = delete;
-    wxAppBase& operator=(wxAppBase&&) = delete;
-    
+
     // the virtual functions which may/must be overridden in the derived class
     // -----------------------------------------------------------------------
 
@@ -698,6 +694,9 @@ protected:
 
     // does any of our windows have focus?
     bool m_isActive{true};
+
+    wxAppBase(const wxAppBase&) = delete;
+	wxAppBase& operator=(const wxAppBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

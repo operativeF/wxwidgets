@@ -26,8 +26,8 @@ public:
 
     wxFontDialog(const wxFontDialog&) = delete;
     wxFontDialog& operator=(const wxFontDialog&) = delete;
-    wxFontDialog(wxFontDialog&&) = delete;
-    wxFontDialog& operator=(wxFontDialog&&) = delete;
+    wxFontDialog(wxFontDialog&&) = default;
+    wxFontDialog& operator=(wxFontDialog&&) = default;
 
     int ShowModal() override;
     void SetTitle(const wxString& title) override;
