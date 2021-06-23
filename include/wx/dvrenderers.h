@@ -11,6 +11,8 @@
 #ifndef _WX_DVRENDERERS_H_
 #define _WX_DVRENDERERS_H_
 
+#include "wx/checkbox.h"
+
 /*
     Note about the structure of various headers: they're organized in a more
     complicated way than usual because of the various dependencies which are
