@@ -39,6 +39,8 @@ public:
 
     wxChoiceBase(const wxChoiceBase&) = delete;
 	wxChoiceBase& operator=(const wxChoiceBase&) = delete;
+    wxChoiceBase(wxChoiceBase&&) = default;
+	wxChoiceBase& operator=(wxChoiceBase&&) = default;
     
     // all generic methods are in wxControlWithItems
 

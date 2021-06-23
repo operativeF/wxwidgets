@@ -396,8 +396,8 @@ public:
 
    wxZipInputStream(const wxZipInputStream&) = delete;
    wxZipInputStream& operator=(const wxZipInputStream&) = delete;
-   wxZipInputStream(wxZipInputStream&&) = default;
-   wxZipInputStream& operator=(wxZipInputStream&&) = default;
+   wxZipInputStream(wxZipInputStream&&) = delete;
+   wxZipInputStream& operator=(wxZipInputStream&&) = delete;
 
     bool OpenEntry(wxZipEntry& entry)   { return DoOpen(&entry); }
     bool WXZIPFIX CloseEntry() override;

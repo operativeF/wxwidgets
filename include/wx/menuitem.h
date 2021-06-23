@@ -52,6 +52,14 @@ public:
     // destruction: wxMenuItem will delete its submenu
     ~wxMenuItemBase() override;
 
+    // and, if we have one ctor, compiler won't generate a default copy one, so
+    // declare them ourselves - but don't implement as they shouldn't be used
+    wxMenuItemBase(const wxMenuItemBase& item) = delete;
+    wxMenuItemBase& operator=(const wxMenuItemBase& item) = delete;
+    
+    wxMenuItemBase(wxMenuItemBase&& item) = default;
+    wxMenuItemBase& operator=(wxMenuItemBase&& item) = default;
+
     // the menu we're in
     wxMenu *GetMenu() const { return m_parentMenu; }
     void SetMenu(wxMenu* menu) { m_parentMenu = menu; }
@@ -152,12 +160,6 @@ protected:
                    const wxString& help = wxEmptyString,
                    wxItemKind kind = wxITEM_NORMAL,
                    wxMenu *subMenu = nullptr);
-
-private:
-    // and, if we have one ctor, compiler won't generate a default copy one, so
-    // declare them ourselves - but don't implement as they shouldn't be used
-    wxMenuItemBase(const wxMenuItemBase& item);
-    wxMenuItemBase& operator=(const wxMenuItemBase& item);
 };
 
 // ----------------------------------------------------------------------------

@@ -40,6 +40,8 @@ public:
 
     wxCompositeWindowSettersOnly(const wxCompositeWindowSettersOnly<W>&)  = delete;
 	wxCompositeWindowSettersOnly& operator=(const wxCompositeWindowSettersOnly<W>&) = delete;
+    wxCompositeWindowSettersOnly(wxCompositeWindowSettersOnly<W>&&)  = default;
+	wxCompositeWindowSettersOnly& operator=(wxCompositeWindowSettersOnly<W>&&) = default;
 
     // Override all wxWindow methods which must be forwarded to the composite
     // window parts.

@@ -51,6 +51,8 @@ class WXDLLIMPEXP_BASE wxTextBuffer
 public:
     wxTextBuffer(const wxTextBuffer&) = delete;
     wxTextBuffer& operator=(const wxTextBuffer&) = delete;
+    wxTextBuffer(wxTextBuffer&&) = default;
+    wxTextBuffer& operator=(wxTextBuffer&&) = default;
 
     // constants and static functions
     // default type for current platform (determined at compile time)

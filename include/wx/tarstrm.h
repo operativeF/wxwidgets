@@ -162,8 +162,8 @@ public:
 
    wxTarInputStream(const wxTarInputStream&) = delete;
    wxTarInputStream& operator=(const wxTarInputStream&) = delete;
-   wxTarInputStream(wxTarInputStream&&) = default;
-   wxTarInputStream& operator=(wxTarInputStream&&) = default;
+   wxTarInputStream(wxTarInputStream&&) = delete;
+   wxTarInputStream& operator=(wxTarInputStream&&) = delete;
 
     bool OpenEntry(wxTarEntry& entry);
     bool CloseEntry() override;

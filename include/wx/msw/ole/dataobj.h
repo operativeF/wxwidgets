@@ -28,6 +28,11 @@ public:
     wxDataObject();
     ~wxDataObject() override;
 
+    wxDataObject(const wxDataObject&) = delete;
+	wxDataObject& operator=(const wxDataObject&) = delete;
+    wxDataObject(wxDataObject&&) = default;
+	wxDataObject& operator=(wxDataObject&&) = default;
+
     // retrieve IDataObject interface (for other OLE related classes)
     IDataObject *GetInterface() const { return m_pIDataObject; }
 
@@ -71,9 +76,6 @@ public:
 
 private:
     IDataObject *m_pIDataObject; // pointer to the COM interface
-
-    wxDataObject(const wxDataObject&) = delete;
-	wxDataObject& operator=(const wxDataObject&) = delete;
 };
 
 #endif  //_WX_MSW_OLE_DATAOBJ_H

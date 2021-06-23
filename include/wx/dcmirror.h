@@ -288,8 +288,8 @@ public:
 
    wxMirrorDC(const wxMirrorDC&) = delete;
    wxMirrorDC& operator=(const wxMirrorDC&) = delete;
-   wxMirrorDC(wxMirrorDC&&) = default;
-   wxMirrorDC& operator=(wxMirrorDC&&) = default;
+   wxMirrorDC(wxMirrorDC&&) = delete;
+   wxMirrorDC& operator=(wxMirrorDC&&) = delete;
 
     // helper functions which may be useful for the users of this class
     wxSize Reflect(const wxSize& sizeOrig)

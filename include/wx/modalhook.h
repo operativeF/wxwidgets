@@ -92,8 +92,8 @@ public:
 
    wxModalDialogHookExitGuard(const wxModalDialogHookExitGuard&) = delete;
    wxModalDialogHookExitGuard& operator=(const wxModalDialogHookExitGuard&) = delete;
-   wxModalDialogHookExitGuard(wxModalDialogHookExitGuard&&) = default;
-   wxModalDialogHookExitGuard& operator=(wxModalDialogHookExitGuard&&) = default;
+   wxModalDialogHookExitGuard(wxModalDialogHookExitGuard&&) = delete;
+   wxModalDialogHookExitGuard& operator=(wxModalDialogHookExitGuard&&) = delete;
     
 private:
     wxDialog* const m_dialog;

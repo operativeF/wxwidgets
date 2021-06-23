@@ -1156,8 +1156,8 @@ public:
 
    wxPropagationDisabler(const wxPropagationDisabler&) = delete;
    wxPropagationDisabler& operator=(const wxPropagationDisabler&) = delete;
-   wxPropagationDisabler(wxPropagationDisabler&&) = default;
-   wxPropagationDisabler& operator=(wxPropagationDisabler&&) = default;
+   wxPropagationDisabler(wxPropagationDisabler&&) = delete;
+   wxPropagationDisabler& operator=(wxPropagationDisabler&&) = delete;
 
 private:
     wxEvent& m_event;
@@ -1193,8 +1193,8 @@ public:
 
    wxPropagateOnce(const wxPropagateOnce&) = delete;
    wxPropagateOnce& operator=(const wxPropagateOnce&) = delete;
-   wxPropagateOnce(wxPropagateOnce&&) = default;
-   wxPropagateOnce& operator=(wxPropagateOnce&&) = default;
+   wxPropagateOnce(wxPropagateOnce&&) = delete;
+   wxPropagateOnce& operator=(wxPropagateOnce&&) = delete;
 
 private:
     wxEvent& m_event;
@@ -1220,8 +1220,8 @@ public:
 
    wxEventProcessInHandlerOnly(const wxEventProcessInHandlerOnly&) = delete;
    wxEventProcessInHandlerOnly& operator=(const wxEventProcessInHandlerOnly&) = delete;
-   wxEventProcessInHandlerOnly(wxEventProcessInHandlerOnly&&) = default;
-   wxEventProcessInHandlerOnly& operator=(wxEventProcessInHandlerOnly&&) = default;
+   wxEventProcessInHandlerOnly(wxEventProcessInHandlerOnly&&) = delete;
+   wxEventProcessInHandlerOnly& operator=(wxEventProcessInHandlerOnly&&) = delete;
 
 private:
     wxEvent& m_event;
@@ -3630,8 +3630,8 @@ public:
 
    wxEventHashTable(const wxEventHashTable&) = delete;
    wxEventHashTable& operator=(const wxEventHashTable&) = delete;
-   wxEventHashTable(wxEventHashTable&&) = default;
-   wxEventHashTable& operator=(wxEventHashTable&&) = default;
+   wxEventHashTable(wxEventHashTable&&) = delete;
+   wxEventHashTable& operator=(wxEventHashTable&&) = delete;
 
     // Handle the given event, in other words search the event table hash
     // and call self->ProcessEvent() if a match was found.

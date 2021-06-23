@@ -95,8 +95,8 @@ public:
 
    wxMessageOutputStderr(const wxMessageOutputStderr&) = delete;
    wxMessageOutputStderr& operator=(const wxMessageOutputStderr&) = delete;
-   wxMessageOutputStderr(wxMessageOutputStderr&&) = default;
-   wxMessageOutputStderr& operator=(wxMessageOutputStderr&&) = default;
+   wxMessageOutputStderr(wxMessageOutputStderr&&) = delete;
+   wxMessageOutputStderr& operator=(wxMessageOutputStderr&&) = delete;
 
     void Output(const wxString& str) override;
 

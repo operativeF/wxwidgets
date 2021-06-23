@@ -146,8 +146,8 @@ public:
 
    wxTimerRunner(const wxTimerRunner&) = delete;
    wxTimerRunner& operator=(const wxTimerRunner&) = delete;
-   wxTimerRunner(wxTimerRunner&&) = default;
-   wxTimerRunner& operator=(wxTimerRunner&&) = default;
+   wxTimerRunner(wxTimerRunner&&) = delete;
+   wxTimerRunner& operator=(wxTimerRunner&&) = delete;
 
 private:
     wxTimer& m_timer;
