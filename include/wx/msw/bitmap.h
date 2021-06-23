@@ -283,6 +283,8 @@ public:
     wxBitmapHandler(const wxString& name, const wxString& ext, wxBitmapType type)
         : wxGDIImageHandler(name, ext, type) { }
 
+    ~wxBitmapHandler() override = default;
+
     // implement wxGDIImageHandler's pure virtuals:
 
     bool Create(wxGDIImage *image,
@@ -313,9 +315,6 @@ public:
                           const wxString& name,
                           wxBitmapType type,
                           const wxPalette *palette = nullptr) const;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxBitmapHandler);
 };
 
 #endif

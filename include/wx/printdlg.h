@@ -105,11 +105,11 @@ private:
 // wxPageSetupDialog: the page setup dialog
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPageSetupDialog: public wxObject
+class WXDLLIMPEXP_CORE wxPageSetupDialog
 {
 public:
     wxPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data = nullptr);
-    ~wxPageSetupDialog() override;
+    ~wxPageSetupDialog();
 
    wxPageSetupDialog(const wxPageSetupDialog&) = delete;
    wxPageSetupDialog& operator=(const wxPageSetupDialog&) = delete;
@@ -123,9 +123,6 @@ public:
 
 private:
     wxPageSetupDialogBase  *m_pimpl;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxPageSetupDialog);
 };
 
 #endif

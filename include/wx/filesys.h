@@ -175,10 +175,10 @@ public:
     wxFileSystem()  { m_FindFileHandler = nullptr;}
     ~wxFileSystem() override;
 
-   wxFileSystem(const wxFileSystem&) = delete;
-   wxFileSystem& operator=(const wxFileSystem&) = delete;
-   wxFileSystem(wxFileSystem&&) = default;
-   wxFileSystem& operator=(wxFileSystem&&) = default;
+    wxFileSystem(const wxFileSystem&) = delete;
+    wxFileSystem& operator=(const wxFileSystem&) = delete;
+    wxFileSystem(wxFileSystem&&) = default;
+    wxFileSystem& operator=(wxFileSystem&&) = default;
 
     // sets the current location. Every call to OpenFile is
     // relative to this location.

@@ -141,7 +141,7 @@ protected:
 // wxGDIImageHandler: a class which knows how to load/save wxGDIImages.
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxGDIImageHandler : public wxObject
+class WXDLLIMPEXP_CORE wxGDIImageHandler
 {
 public:
     wxGDIImageHandler() { m_type = wxBITMAP_TYPE_INVALID; }
@@ -150,6 +150,8 @@ public:
                       wxBitmapType type)
         : m_name(name), m_extension(ext), m_type(type) { }
 
+    virtual ~wxGDIImageHandler() = default;
+    
     void SetName(const wxString& name) { m_name = name; }
     void SetExtension(const wxString& ext) { m_extension = ext; }
     void SetType(wxBitmapType type) { m_type = type; }

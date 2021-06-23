@@ -56,17 +56,6 @@
 BOOL CALLBACK wxAbortProc(HDC hdc, int error);
 
 // ---------------------------------------------------------------------------
-// wxWin macros
-// ---------------------------------------------------------------------------
-
-    wxIMPLEMENT_DYNAMIC_CLASS(wxWindowsPrinter, wxPrinterBase);
-    wxIMPLEMENT_CLASS(wxWindowsPrintPreview, wxPrintPreviewBase);
-
-// ===========================================================================
-// implementation
-// ===========================================================================
-
-// ---------------------------------------------------------------------------
 // Printer
 // ---------------------------------------------------------------------------
 
@@ -95,7 +84,7 @@ bool wxWindowsPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt
     wxPrinterDC *dc wxDUMMY_INITIALIZE(nullptr);
     if (prompt)
     {
-        dc = wxDynamicCast(PrintDialog(parent), wxPrinterDC);
+        dc = dynamic_cast<wxPrinterDC*>(PrintDialog(parent));
         if (!dc)
             return false;
     }

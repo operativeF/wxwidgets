@@ -155,7 +155,6 @@ private:
 wxIMPLEMENT_DYNAMIC_CLASS(wxBitmap, wxGDIObject);
 wxIMPLEMENT_DYNAMIC_CLASS(wxMask, wxObject);
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapHandler, wxObject);
 
 // ============================================================================
 // implementation
@@ -1051,7 +1050,7 @@ bool wxBitmap::LoadFile(const wxString& filename, wxBitmapType type)
 {
     UnRef();
 
-    wxBitmapHandler *handler = wxDynamicCast(FindHandler(type), wxBitmapHandler);
+    wxBitmapHandler *handler = dynamic_cast<wxBitmapHandler*>(FindHandler(type));
 
     if ( handler )
     {
@@ -1091,7 +1090,7 @@ bool wxBitmap::Create(const void* data, wxBitmapType type, int width, int height
 {
     UnRef();
 
-    wxBitmapHandler *handler = wxDynamicCast(FindHandler(type), wxBitmapHandler);
+    wxBitmapHandler *handler = dynamic_cast<wxBitmapHandler*>(FindHandler(type));
 
     if ( !handler )
     {
@@ -1109,7 +1108,7 @@ bool wxBitmap::SaveFile(const wxString& filename,
                         wxBitmapType type,
                         const wxPalette *palette) const
 {
-    wxBitmapHandler *handler = wxDynamicCast(FindHandler(type), wxBitmapHandler);
+    wxBitmapHandler *handler = dynamic_cast<wxBitmapHandler*>(FindHandler(type));
 
     if ( handler )
     {

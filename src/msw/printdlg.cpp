@@ -161,8 +161,6 @@ wxCreateDevNames(const wxString& driverName,
     return hDev;
 }
 
-wxIMPLEMENT_CLASS(wxWindowsPrintNativeData, wxPrintNativeDataBase);
-
 wxWindowsPrintNativeData::~wxWindowsPrintNativeData()
 {
     if ( m_devMode )

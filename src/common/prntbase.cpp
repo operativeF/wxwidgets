@@ -281,12 +281,6 @@ wxPrintNativeDataBase *wxNativePrintFactory::CreatePrintNativeData()
 }
 
 //----------------------------------------------------------------------------
-// wxPrintNativeDataBase
-//----------------------------------------------------------------------------
-
-wxIMPLEMENT_ABSTRACT_CLASS(wxPrintNativeDataBase, wxObject);
-
-//----------------------------------------------------------------------------
 // wxPrintFactoryModule
 //----------------------------------------------------------------------------
 
@@ -306,8 +300,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxPrintFactoryModule, wxModule);
 //----------------------------------------------------------------------------
 // wxPrinterBase
 //----------------------------------------------------------------------------
-
-wxIMPLEMENT_CLASS(wxPrinterBase, wxObject);
 
 wxPrinterBase::wxPrinterBase(wxPrintDialogData *data)
 {
@@ -341,8 +333,6 @@ wxPrintDialogData& wxPrinterBase::GetPrintDialogData() const
 //----------------------------------------------------------------------------
 // wxPrinter
 //----------------------------------------------------------------------------
-
-wxIMPLEMENT_CLASS(wxPrinter, wxPrinterBase);
 
 wxPrinter::wxPrinter(wxPrintDialogData *data)
     : m_pimpl(wxPrintFactory::GetFactory()->CreatePrinter( data ))
@@ -474,8 +464,6 @@ wxPageSetupDialogBase::wxPageSetupDialogBase(wxWindow *parent,
 // wxPageSetupDialog: the page setup dialog
 // ---------------------------------------------------------------------------
 
-wxIMPLEMENT_CLASS(wxPageSetupDialog, wxObject);
-
 wxPageSetupDialog::wxPageSetupDialog(wxWindow *parent, wxPageSetupDialogData *data )
     : m_pimpl(wxPrintFactory::GetFactory()->CreatePageSetupDialog( parent, data ))
 {
@@ -569,8 +557,6 @@ void wxPrintAbortDialog::OnCancel(wxCommandEvent& WXUNUSED(event))
 //----------------------------------------------------------------------------
 // wxPrintout
 //----------------------------------------------------------------------------
-
-wxIMPLEMENT_ABSTRACT_CLASS(wxPrintout, wxObject);
 
 wxPrintout::wxPrintout(const wxString& title)
     : m_printoutTitle(title)
@@ -1807,8 +1793,6 @@ void wxPreviewFrame::CreateControlBar()
 * Print preview
 */
 
-wxIMPLEMENT_CLASS(wxPrintPreviewBase, wxObject);
-
 wxPrintPreviewBase::wxPrintPreviewBase(wxPrintout *printout,
                                        wxPrintout *printoutForPrinting,
                                        wxPrintData *data)
@@ -2153,8 +2137,6 @@ void wxPrintPreviewBase::SetOk(bool ok)
 //----------------------------------------------------------------------------
 // wxPrintPreview
 //----------------------------------------------------------------------------
-
-wxIMPLEMENT_CLASS(wxPrintPreview, wxPrintPreviewBase);
 
 wxPrintPreview::wxPrintPreview(wxPrintout *printout,
                    wxPrintout *printoutForPrinting,

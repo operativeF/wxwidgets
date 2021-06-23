@@ -75,9 +75,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxDocManager, wxEvtHandler);
 wxIMPLEMENT_CLASS(wxDocChildFrame, wxFrame);
 wxIMPLEMENT_CLASS(wxDocParentFrame, wxFrame);
 
-#if wxUSE_PRINTING_ARCHITECTURE
-wxIMPLEMENT_DYNAMIC_CLASS(wxDocPrintout, wxPrintout);
-#endif
 
 // ============================================================================
 // implementation

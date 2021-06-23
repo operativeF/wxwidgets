@@ -65,11 +65,6 @@ protected:
 #if wxUSE_ENH_METAFILE
     bool RenderPageIntoBitmap(wxBitmap& bmp, int pageNum) override;
 #endif
-
-public:
-	wxClassInfo *GetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif

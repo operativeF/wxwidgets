@@ -484,10 +484,10 @@ protected:
 
     private:
         wxDECLARE_ABSTRACT_CLASS(wxControlWithItems);
-       wxControlWithItems(const wxControlWithItems&) = delete;
-   wxControlWithItems& operator=(const wxControlWithItems&) = delete;
-   wxControlWithItems(wxControlWithItems&&) = default;
-   wxControlWithItems& operator=(wxControlWithItems&&) = default;
+        wxControlWithItems(const wxControlWithItems&) = delete;
+        wxControlWithItems& operator=(const wxControlWithItems&) = delete;
+        wxControlWithItems(wxControlWithItems&&) = default;
+        wxControlWithItems& operator=(wxControlWithItems&&) = default;
     };
 #endif
 

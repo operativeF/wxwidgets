@@ -156,16 +156,16 @@ public:
 // wxPrintNativeDataBase
 //----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPrintNativeDataBase: public wxObject
+class WXDLLIMPEXP_CORE wxPrintNativeDataBase
 {
 public:
     wxPrintNativeDataBase() = default;
-    ~wxPrintNativeDataBase() override = default;
+    virtual ~wxPrintNativeDataBase() = default;
 
-   wxPrintNativeDataBase(const wxPrintNativeDataBase&) = delete;
-   wxPrintNativeDataBase& operator=(const wxPrintNativeDataBase&) = delete;
-   wxPrintNativeDataBase(wxPrintNativeDataBase&&) = default;
-   wxPrintNativeDataBase& operator=(wxPrintNativeDataBase&&) = default;
+    wxPrintNativeDataBase(const wxPrintNativeDataBase&) = delete;
+    wxPrintNativeDataBase& operator=(const wxPrintNativeDataBase&) = delete;
+    wxPrintNativeDataBase(wxPrintNativeDataBase&&) = default;
+    wxPrintNativeDataBase& operator=(wxPrintNativeDataBase&&) = default;
 
     virtual bool TransferTo( wxPrintData &data ) = 0;
     virtual bool TransferFrom( const wxPrintData &data ) = 0;
@@ -178,9 +178,6 @@ public:
     virtual bool IsOk() const = 0;
 
     int  m_ref{1};
-
-private:
-    wxDECLARE_CLASS(wxPrintNativeDataBase);
 };
 
 //----------------------------------------------------------------------------
@@ -191,16 +188,16 @@ private:
  * Represents the printer: manages printing a wxPrintout object
  */
 
-class WXDLLIMPEXP_CORE wxPrinterBase: public wxObject
+class WXDLLIMPEXP_CORE wxPrinterBase
 {
 public:
     wxPrinterBase(wxPrintDialogData *data = nullptr);
-    ~wxPrinterBase() override;
+    virtual ~wxPrinterBase();
 
-   wxPrinterBase(const wxPrinterBase&) = delete;
-   wxPrinterBase& operator=(const wxPrinterBase&) = delete;
-   wxPrinterBase(wxPrinterBase&&) = default;
-   wxPrinterBase& operator=(wxPrinterBase&&) = default;
+    wxPrinterBase(const wxPrinterBase&) = delete;
+    wxPrinterBase& operator=(const wxPrinterBase&) = delete;
+    wxPrinterBase(wxPrinterBase&&) = default;
+    wxPrinterBase& operator=(wxPrinterBase&&) = default;
 
     virtual wxPrintAbortDialog *CreateAbortWindow(wxWindow *parent, wxPrintout *printout);
     virtual void ReportError(wxWindow *parent, wxPrintout *printout, const wxString& message);
@@ -226,9 +223,6 @@ protected:
 public:
     static wxWindow*      sm_abortWindow;
     static bool           sm_abortIt;
-
-private:
-    wxDECLARE_CLASS(wxPrinterBase);
 };
 
 //----------------------------------------------------------------------------
@@ -241,10 +235,10 @@ public:
     wxPrinter(wxPrintDialogData *data = nullptr);
     ~wxPrinter() override;
 
-   wxPrinter(const wxPrinter&) = delete;
-   wxPrinter& operator=(const wxPrinter&) = delete;
-   wxPrinter(wxPrinter&&) = default;
-   wxPrinter& operator=(wxPrinter&&) = default;
+    wxPrinter(const wxPrinter&) = delete;
+    wxPrinter& operator=(const wxPrinter&) = delete;
+    wxPrinter(wxPrinter&&) = default;
+    wxPrinter& operator=(wxPrinter&&) = default;
 
     wxPrintAbortDialog *CreateAbortWindow(wxWindow *parent, wxPrintout *printout) override;
     void ReportError(wxWindow *parent, wxPrintout *printout, const wxString& message) override;
@@ -257,9 +251,6 @@ public:
 
 protected:
     wxPrinterBase    *m_pimpl;
-
-private:
-    wxDECLARE_CLASS(wxPrinter);
 };
 
 //----------------------------------------------------------------------------
@@ -273,16 +264,16 @@ private:
  * object for previewing.
  */
 
-class WXDLLIMPEXP_CORE wxPrintout: public wxObject
+class WXDLLIMPEXP_CORE wxPrintout
 {
 public:
     wxPrintout(const wxString& title = wxGetTranslation("Printout"));
-    ~wxPrintout() override;
+    virtual ~wxPrintout();
 
-   wxPrintout(const wxPrintout&) = delete;
-   wxPrintout& operator=(const wxPrintout&) = delete;
-   wxPrintout(wxPrintout&&) = default;
-   wxPrintout& operator=(wxPrintout&&) = default;
+    wxPrintout(const wxPrintout&) = delete;
+    wxPrintout& operator=(const wxPrintout&) = delete;
+    wxPrintout(wxPrintout&&) = default;
+    wxPrintout& operator=(wxPrintout&&) = default;
 
     virtual bool OnBeginDocument(int startPage, int endPage);
     virtual void OnEndDocument();
@@ -359,9 +350,6 @@ private:
     int              m_PPIPrinterY{0};
 
     wxRect           m_paperRectPixels;
-
-private:
-    wxDECLARE_ABSTRACT_CLASS(wxPrintout);
 };
 
 //----------------------------------------------------------------------------
@@ -602,7 +590,7 @@ private:
  * Programmer creates an object of this class to preview a wxPrintout.
  */
 
-class WXDLLIMPEXP_CORE wxPrintPreviewBase: public wxObject
+class WXDLLIMPEXP_CORE wxPrintPreviewBase
 {
 public:
     wxPrintPreviewBase(wxPrintout *printout,
@@ -611,12 +599,12 @@ public:
     wxPrintPreviewBase(wxPrintout *printout,
                        wxPrintout *printoutForPrinting,
                        wxPrintData *data);
-    ~wxPrintPreviewBase() override;
+    virtual ~wxPrintPreviewBase();
 
-   wxPrintPreviewBase(const wxPrintPreviewBase&) = delete;
-   wxPrintPreviewBase& operator=(const wxPrintPreviewBase&) = delete;
-   wxPrintPreviewBase(wxPrintPreviewBase&&) = default;
-   wxPrintPreviewBase& operator=(wxPrintPreviewBase&&) = default;
+    wxPrintPreviewBase(const wxPrintPreviewBase&) = delete;
+    wxPrintPreviewBase& operator=(const wxPrintPreviewBase&) = delete;
+    wxPrintPreviewBase(wxPrintPreviewBase&&) = default;
+    wxPrintPreviewBase& operator=(wxPrintPreviewBase&&) = default;
 
     virtual bool SetCurrentPage(int pageNum);
     virtual int GetCurrentPage() const;
@@ -709,8 +697,6 @@ protected:
 
 private:
     void Init(wxPrintout *printout, wxPrintout *printoutForPrinting);
-
-    wxDECLARE_CLASS(wxPrintPreviewBase);
 };
 
 //----------------------------------------------------------------------------

@@ -73,9 +73,6 @@ public:
     bool SaveFile(const wxBitmap *bitmap,
                           const wxString& name, wxBitmapType type,
                           const wxPalette *palette = nullptr) const override;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxBMPFileHandler);
 };
 
 class WXDLLEXPORT wxBMPResourceHandler: public wxBitmapHandler
@@ -151,9 +148,6 @@ protected:
     bool LoadIcon(wxIcon *icon,
                           const wxString& name, wxBitmapType flags,
                           int desiredWidth = -1, int desiredHeight = -1) override;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxICOFileHandler);
 };
 
 class WXDLLEXPORT wxICOResourceHandler: public wxIconHandler
@@ -169,9 +163,6 @@ protected:
     bool LoadIcon(wxIcon *icon,
                           const wxString& name, wxBitmapType flags,
                           int desiredWidth = -1, int desiredHeight = -1) override;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxICOResourceHandler);
 };
 
 #if wxUSE_PNG_RESOURCE_HANDLER
@@ -188,29 +179,9 @@ public:
     bool LoadFile(wxBitmap *bitmap,
                           const wxString& name, wxBitmapType flags,
                           int desiredWidth, int desiredHeight) override;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxPNGResourceHandler);
 };
 
 #endif // wxUSE_PNG_RESOURCE_HANDLER
-
-// ----------------------------------------------------------------------------
-// wxWin macros
-// ----------------------------------------------------------------------------
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxBMPFileHandler, wxBitmapHandler);
-wxIMPLEMENT_DYNAMIC_CLASS(wxBMPResourceHandler, wxBitmapHandler);
-wxIMPLEMENT_DYNAMIC_CLASS(wxICOFileHandler, wxObject);
-wxIMPLEMENT_DYNAMIC_CLASS(wxICOResourceHandler, wxObject);
-#if wxUSE_PNG_RESOURCE_HANDLER
-wxIMPLEMENT_DYNAMIC_CLASS(wxPNGResourceHandler, wxBitmapHandler);
-#endif // wxUSE_PNG_RESOURCE_HANDLER
-
-// ----------------------------------------------------------------------------
-// private functions
-// ----------------------------------------------------------------------------
-
 
 // ============================================================================
 // implementation

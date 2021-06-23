@@ -65,10 +65,10 @@ public:
     wxDocument(wxDocument *parent = nullptr);
     ~wxDocument() override;
 
-   wxDocument(const wxDocument&) = delete;
-   wxDocument& operator=(const wxDocument&) = delete;
-   wxDocument(wxDocument&&) = default;
-   wxDocument& operator=(wxDocument&&) = default;
+    wxDocument(const wxDocument&) = delete;
+    wxDocument& operator=(const wxDocument&) = delete;
+    wxDocument(wxDocument&&) = default;
+    wxDocument& operator=(wxDocument&&) = default;
 
     void SetFilename(const wxString& filename, bool notifyViews = false);
     wxString GetFilename() const { return m_documentFile; }
