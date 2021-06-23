@@ -51,11 +51,11 @@ inline constexpr int wxEOF = -1;
 // wxStreamBase: common (but non virtual!) base for all stream classes
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxStreamBase : public wxObject
+class WXDLLIMPEXP_BASE wxStreamBase
 {
 public:
     wxStreamBase() = default;
-    ~wxStreamBase() override = default;
+    virtual ~wxStreamBase() = default;
 
    wxStreamBase(const wxStreamBase&) = delete;
    wxStreamBase& operator=(const wxStreamBase&) = delete;
@@ -85,8 +85,6 @@ protected:
     wxStreamError m_lasterror{wxSTREAM_NO_ERROR};
 
     friend class wxStreamBuffer;
-
-    wxDECLARE_ABSTRACT_CLASS(wxStreamBase);
 };
 
 // ----------------------------------------------------------------------------
@@ -99,10 +97,10 @@ public:
     wxInputStream();
     ~wxInputStream() override;
 
-   wxInputStream(const wxInputStream&) = delete;
-   wxInputStream& operator=(const wxInputStream&) = delete;
-   wxInputStream(wxInputStream&&) = default;
-   wxInputStream& operator=(wxInputStream&&) = default;
+    wxInputStream(const wxInputStream&) = delete;
+    wxInputStream& operator=(const wxInputStream&) = delete;
+    wxInputStream(wxInputStream&&) = default;
+    wxInputStream& operator=(wxInputStream&&) = default;
 
     // IO functions
     // ------------
@@ -227,8 +225,6 @@ protected:
     size_t m_wbackcur{0};
 
     friend class wxStreamBuffer;
-
-    wxDECLARE_ABSTRACT_CLASS(wxInputStream);
 };
 
 // ----------------------------------------------------------------------------
@@ -273,8 +269,6 @@ protected:
     virtual size_t OnSysWrite(const void *buffer, size_t bufsize);
 
     friend class wxStreamBuffer;
-
-    wxDECLARE_ABSTRACT_CLASS(wxOutputStream);
 };
 
 // ============================================================================
@@ -306,8 +300,6 @@ protected:
 
     size_t m_currentPos,
            m_lastPos;
-
-    wxDECLARE_DYNAMIC_CLASS(wxCountingOutputStream);
 };
 
 // ---------------------------------------------------------------------------
@@ -336,8 +328,6 @@ public:
 protected:
     wxInputStream *m_parent_i_stream{nullptr};
     bool m_owns;
-
-    wxDECLARE_ABSTRACT_CLASS(wxFilterInputStream);
 };
 
 class WXDLLIMPEXP_BASE wxFilterOutputStream : public wxOutputStream
@@ -362,8 +352,6 @@ public:
 protected:
     wxOutputStream *m_parent_o_stream{nullptr};
     bool m_owns{false};
-
-    wxDECLARE_ABSTRACT_CLASS(wxFilterOutputStream);
 };
 
 enum wxStreamProtocolType
@@ -426,8 +414,6 @@ protected:
 private:
     inline static wxFilterClassFactory *sm_first{nullptr};
     wxFilterClassFactory *m_next;
-
-    wxDECLARE_ABSTRACT_CLASS(wxFilterClassFactory);
 };
 
 // ============================================================================

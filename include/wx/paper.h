@@ -28,7 +28,7 @@
 #define WXADDPAPER(paperId, platformId, name, w, h) AddPaperType(paperId, 0, name, w, h)
 #endif
 
-class WXDLLIMPEXP_CORE wxPrintPaperType: public wxObject
+class WXDLLIMPEXP_CORE wxPrintPaperType
 {
 public:
     wxPrintPaperType() = default;
@@ -59,9 +59,6 @@ public:
     int         m_width{0};  // In tenths of a millimetre
     int         m_height{0}; // In tenths of a millimetre
     wxString    m_paperName;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxPrintPaperType);
 };
 
 WX_DECLARE_STRING_HASH_MAP(wxPrintPaperType*, wxStringToPrintPaperTypeHashMap);

@@ -334,7 +334,6 @@ wxString wxLocalFSHandler::FindNext()
 //-----------------------------------------------------------------------------
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxFileSystem, wxObject);
-wxIMPLEMENT_ABSTRACT_CLASS(wxFSFile, wxObject);
 
 
 wxList wxFileSystem::m_Handlers;

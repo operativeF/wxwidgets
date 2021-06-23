@@ -29,7 +29,7 @@ class WXDLLIMPEXP_FWD_BASE wxFileSystem;
 //                  (in 'index.htm#chapter2', 'chapter2' is anchor)
 //--------------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxFSFile : public wxObject
+class WXDLLIMPEXP_BASE wxFSFile
 {
 public:
     wxFSFile(wxInputStream *stream, const wxString& loc,
@@ -48,7 +48,7 @@ public:
         m_Stream = stream;
     }
 
-    ~wxFSFile() override { delete m_Stream; }
+    ~wxFSFile() { delete m_Stream; }
 
    wxFSFile(const wxFSFile&) = delete;
    wxFSFile& operator=(const wxFSFile&) = delete;
@@ -93,8 +93,6 @@ private:
 #if wxUSE_DATETIME
     wxDateTime m_Modif;
 #endif // wxUSE_DATETIME
-
-    wxDECLARE_ABSTRACT_CLASS(wxFSFile);
 };
 
 

@@ -10,7 +10,7 @@
 
 #include "wx/colour.h"
 
-class WXDLLIMPEXP_CORE wxColourData : public wxObject
+class WXDLLIMPEXP_CORE wxColourData
 {
 public:
     // number of custom colours we store
@@ -22,7 +22,7 @@ public:
     wxColourData();
     wxColourData(const wxColourData& data);
     wxColourData& operator=(const wxColourData& data);
-    ~wxColourData() override;
+    ~wxColourData();
 
     void SetChooseFull(bool flag) { m_chooseFull = flag; }
     bool GetChooseFull() const { return m_chooseFull; }
@@ -57,8 +57,6 @@ protected:
 #else
     bool m_chooseAlpha = false;
 #endif // __WXOSX__ / !__WXOSX__
-
-    wxDECLARE_DYNAMIC_CLASS(wxColourData);
 };
 
 #endif // _WX_COLOURDATA_H_

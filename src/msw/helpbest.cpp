@@ -24,8 +24,6 @@
 #include "wx/html/helpctrl.h"
 #include "wx/msw/helpbest.h"
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxBestHelpController, wxHelpControllerBase);
-
 bool wxBestHelpController::Initialize( const wxString& filename )
 {
     // try wxCHMHelpController

@@ -63,14 +63,14 @@ enum wxRelationship
 // wxIndividualLayoutConstraint: a constraint on window position
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxIndividualLayoutConstraint : public wxObject
+class WXDLLIMPEXP_CORE wxIndividualLayoutConstraint
 {
 public:
     wxIndividualLayoutConstraint() = default;
 
     // note that default copy ctor and assignment operators are ok
 
-    ~wxIndividualLayoutConstraint() override = default;
+    ~wxIndividualLayoutConstraint() = default;
 
     void Set(wxRelationship rel, wxWindowBase *otherW, wxEdge otherE, int val = 0, int marg = wxLAYOUT_DEFAULT_MARGIN);
 
@@ -146,15 +146,13 @@ protected:
     int percent{0};
     wxEdge otherEdge{wxTop};
     bool done{false};
-
-    wxDECLARE_DYNAMIC_CLASS(wxIndividualLayoutConstraint);
 };
 
 // ----------------------------------------------------------------------------
 // wxLayoutConstraints: the complete set of constraints for a window
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxLayoutConstraints : public wxObject
+class WXDLLIMPEXP_CORE wxLayoutConstraints
 {
 public:
     // Edge constraints
@@ -173,7 +171,7 @@ public:
 
     // note that default copy ctor and assignment operators are ok
 
-    ~wxLayoutConstraints() override = default;
+    ~wxLayoutConstraints() = default;
 
     bool SatisfyConstraints(wxWindowBase *win, int *noChanges);
     bool AreSatisfied() const
@@ -181,8 +179,6 @@ public:
         return left.GetDone() && top.GetDone() &&
                width.GetDone() && height.GetDone();
     }
-
-    wxDECLARE_DYNAMIC_CLASS(wxLayoutConstraints);
 };
 
 #endif // wxUSE_CONSTRAINTS

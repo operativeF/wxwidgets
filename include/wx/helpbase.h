@@ -31,11 +31,11 @@ enum wxHelpSearchMode
 };
 
 // Defines the API for help controllers
-class WXDLLIMPEXP_CORE wxHelpControllerBase: public wxObject
+class WXDLLIMPEXP_CORE wxHelpControllerBase
 {
 public:
-    inline wxHelpControllerBase(wxWindow* parentWindow = nullptr) { m_parentWindow = parentWindow; }
-    inline ~wxHelpControllerBase() override = default;
+    wxHelpControllerBase(wxWindow* parentWindow = nullptr) { m_parentWindow = parentWindow; }
+    virtual ~wxHelpControllerBase() = default;
 
     // Must call this to set the filename and server name.
     // server is only required when implementing TCP/IP-based
@@ -95,8 +95,6 @@ public:
 
 protected:
     wxWindow* m_parentWindow;
-private:
-    wxDECLARE_CLASS(wxHelpControllerBase);
 };
 
 #endif // wxUSE_HELP

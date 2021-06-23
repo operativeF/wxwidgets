@@ -126,7 +126,6 @@ wxCONSTRUCTOR_5( wxListCtrl, wxWindow*, Parent, wxWindowID, Id, \
  */
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxListView, wxListCtrl);
-wxIMPLEMENT_DYNAMIC_CLASS(wxListItem, wxObject);
 wxIMPLEMENT_DYNAMIC_CLASS(wxListEvent, wxNotifyEvent);
 
 // ----------------------------------------------------------------------------

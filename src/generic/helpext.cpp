@@ -59,8 +59,6 @@ static constexpr wxChar WXEXTHELP_ENVVAR_BROWSER[] = wxT("WX_HELPBROWSER");
 // Is browser a netscape browser?
 static constexpr wxChar WXEXTHELP_ENVVAR_BROWSERISNETSCAPE[] =  wxT("WX_HELPBROWSER_NS");
 
-wxIMPLEMENT_CLASS(wxExtHelpController, wxHelpControllerBase);
-
 wxExtHelpController::wxExtHelpController(wxWindow* parentWindow)
                    : wxHelpControllerBase(parentWindow)
 {

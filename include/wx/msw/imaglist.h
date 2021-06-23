@@ -17,7 +17,7 @@
 // now, the app must take care of ownership issues. That is, the
 // image lists must be explicitly deleted after the control(s) that uses them
 // is (are) deleted, or when the app exits.
-class WXDLLIMPEXP_CORE wxImageList : public wxObject
+class WXDLLIMPEXP_CORE wxImageList
 {
 public:
   /*
@@ -35,12 +35,12 @@ public:
     Create(width, height, mask, initialCount);
   }
   
-  ~wxImageList() override;
+  ~wxImageList();
 
-wxImageList(const wxImageList&) = delete;
-   wxImageList& operator=(const wxImageList&) = delete;
-   wxImageList(wxImageList&&) = default;
-   wxImageList& operator=(wxImageList&&) = default;
+  wxImageList(const wxImageList&) = delete;
+  wxImageList& operator=(const wxImageList&) = delete;
+  wxImageList(wxImageList&&) = default;
+  wxImageList& operator=(wxImageList&&) = default;
 
 
   // Attributes
@@ -201,11 +201,6 @@ protected:
   WXHIMAGELIST m_hImageList{nullptr};
   wxSize m_size;
   bool m_useMask{false};
-
-public:
-	wxClassInfo *GetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif

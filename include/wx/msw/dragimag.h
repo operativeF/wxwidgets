@@ -98,7 +98,7 @@
  * wxDragImage
  */
 
-class WXDLLIMPEXP_CORE wxDragImage: public wxObject
+class WXDLLIMPEXP_CORE wxDragImage
 {
 public:
     wxDragImage() = default;
@@ -131,7 +131,7 @@ public:
     }
 #endif
 
-    ~wxDragImage() override;
+    ~wxDragImage();
 
    wxDragImage(const wxDragImage&) = delete;
    wxDragImage& operator=(const wxDragImage&) = delete;
@@ -211,9 +211,6 @@ protected:
     wxWindow*       m_window{nullptr};
     wxRect          m_boundingRect;
     bool            m_fullScreen{false};
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxDragImage);
 };
 
 #endif // wxUSE_DRAGIMAGE

@@ -668,8 +668,6 @@ wxFileOffset wxStreamBuffer::Tell() const
 // wxStreamBase
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_ABSTRACT_CLASS(wxStreamBase, wxObject);
-
 size_t wxStreamBase::GetSize() const
 {
     wxFileOffset length = GetLength();
@@ -695,8 +693,6 @@ wxFileOffset wxStreamBase::OnSysTell() const
 // ----------------------------------------------------------------------------
 // wxInputStream
 // ----------------------------------------------------------------------------
-
-wxIMPLEMENT_ABSTRACT_CLASS(wxInputStream, wxStreamBase);
 
 wxInputStream::wxInputStream()
 {
@@ -1016,8 +1012,6 @@ wxFileOffset wxInputStream::TellI() const
 // wxOutputStream
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_ABSTRACT_CLASS(wxOutputStream, wxStreamBase);
-
 wxOutputStream::wxOutputStream()
 = default;
 
@@ -1098,8 +1092,6 @@ void wxOutputStream::Sync()
 // wxCountingOutputStream
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxCountingOutputStream, wxOutputStream);
-
 wxCountingOutputStream::wxCountingOutputStream ()
 {
     m_currentPos =
@@ -1163,12 +1155,7 @@ wxFileOffset wxCountingOutputStream::OnSysTell() const
 // wxFilterInputStream
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_ABSTRACT_CLASS(wxFilterInputStream, wxInputStream);
-
-wxFilterInputStream::wxFilterInputStream()
- 
-    
-= default;
+wxFilterInputStream::wxFilterInputStream() = default;
 
 wxFilterInputStream::wxFilterInputStream(wxInputStream& stream)
  :  m_parent_i_stream(&stream),
@@ -1191,8 +1178,6 @@ wxFilterInputStream::~wxFilterInputStream()
 // ----------------------------------------------------------------------------
 // wxFilterOutputStream
 // ----------------------------------------------------------------------------
-
-wxIMPLEMENT_ABSTRACT_CLASS(wxFilterOutputStream, wxOutputStream);
 
 wxFilterOutputStream::wxFilterOutputStream() = default;
 
@@ -1260,8 +1245,6 @@ bool wxFilterClassFactoryBase::CanHandle(const wxString& protocol,
 // ----------------------------------------------------------------------------
 // wxFilterClassFactory
 // ----------------------------------------------------------------------------
-
-wxIMPLEMENT_ABSTRACT_CLASS(wxFilterClassFactory, wxFilterClassFactoryBase);
 
 void wxFilterClassFactory::Remove()
 {

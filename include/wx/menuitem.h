@@ -38,7 +38,7 @@ class WXDLLIMPEXP_FWD_CORE wxMenu;
 // menu or a separator
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxMenuItemBase : public wxObject
+class WXDLLIMPEXP_CORE wxMenuItemBase
 {
 public:
     // creation
@@ -50,7 +50,7 @@ public:
                            wxMenu *subMenu = nullptr);
 
     // destruction: wxMenuItem will delete its submenu
-    ~wxMenuItemBase() override;
+    ~wxMenuItemBase();
 
     // the menu we're in
     wxMenu *GetMenu() const { return m_parentMenu; }

@@ -33,8 +33,6 @@
 FORCE_LINK(wxhtml_chm_support)
 #endif
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxHtmlHelpController, wxHelpControllerBase);
-
 wxHtmlHelpController::wxHtmlHelpController(int style, wxWindow* parentWindow):
     wxHelpControllerBase(parentWindow)
 {

@@ -59,7 +59,7 @@ enum wxFindReplaceDialogStyles
 // wxFindReplaceData: holds Setup Data/Feedback Data for wxFindReplaceDialog
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFindReplaceData : public wxObject
+class WXDLLIMPEXP_CORE wxFindReplaceData
 {
 public:
     wxFindReplaceData() = default;

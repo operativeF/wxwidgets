@@ -35,11 +35,11 @@
  * window for the application to display help for.
  */
 
-class WXDLLIMPEXP_CORE wxContextHelp : public wxObject
+class WXDLLIMPEXP_CORE wxContextHelp
 {
 public:
     wxContextHelp(wxWindow* win = nullptr, bool beginHelp = true);
-    ~wxContextHelp() override;
+    ~wxContextHelp();
 
     bool BeginContextHelp(wxWindow* win);
     bool EndContextHelp();
@@ -52,9 +52,6 @@ public:
 protected:
     bool    m_inHelp{false};
     bool    m_status; // true if the user left-clicked
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxContextHelp);
 };
 
 #if wxUSE_BMPBUTTON

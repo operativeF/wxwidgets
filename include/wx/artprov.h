@@ -119,11 +119,11 @@ using wxArtID = wxString;
 // wxArtProvider class
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxArtProvider : public wxObject
+class WXDLLIMPEXP_CORE wxArtProvider
 {
 public:
     // Dtor removes the provider from providers stack if it's still on it
-    ~wxArtProvider() override;
+    ~wxArtProvider();
 
     // Does this platform implement native icons theme?
     static bool HasNativeProvider();
@@ -234,8 +234,6 @@ private:
     inline static wxArtProvidersList *sm_providers{nullptr};
     // art resources cache (so that CreateXXX is not called that often):
     inline static wxArtProviderCache *sm_cache{nullptr};
-
-    wxDECLARE_ABSTRACT_CLASS(wxArtProvider);
 };
 
 

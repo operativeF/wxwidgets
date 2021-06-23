@@ -40,11 +40,6 @@
 #include "wx/printdlg.h"
 #include "wx/paper.h"
 
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxPrintData, wxObject);
-wxIMPLEMENT_DYNAMIC_CLASS(wxPrintDialogData, wxObject);
-wxIMPLEMENT_DYNAMIC_CLASS(wxPageSetupDialogData, wxObject);
-
 // ============================================================================
 // implementation
 // ============================================================================

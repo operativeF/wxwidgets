@@ -98,11 +98,11 @@ extern wxWindowMSW *wxWindowBeingErased; // From src/msw/window.cpp
 
 // we use different data classes for owner drawn buttons and for themed XP ones
 
-class wxButtonImageData: public wxObject
+class wxButtonImageData
 {
 public:
     wxButtonImageData() = default;
-    ~wxButtonImageData() override = default;
+    virtual ~wxButtonImageData() = default;
 
     wxButtonImageData(const wxButtonImageData&) = delete;
 	wxButtonImageData& operator=(const wxButtonImageData&) = delete;
@@ -183,11 +183,7 @@ private:
     wxBitmap m_bitmaps[wxAnyButton::State_Max];
     wxSize m_margin;
     wxDirection m_dir;
-
-    wxDECLARE_ABSTRACT_CLASS(wxODButtonImageData);
 };
-
-wxIMPLEMENT_ABSTRACT_CLASS(wxODButtonImageData, wxButtonImageData);
 
 #if wxUSE_UXTHEME
 
@@ -347,11 +343,7 @@ private:
 
     // the button we're associated with
     const HWND m_hwndBtn;
-
-    wxDECLARE_ABSTRACT_CLASS(wxXPButtonImageData);
 };
-
-wxIMPLEMENT_ABSTRACT_CLASS(wxXPButtonImageData, wxButtonImageData);
 
 #endif // wxUSE_UXTHEME
 
@@ -719,7 +711,7 @@ void wxAnyButton::DoSetBitmap(const wxBitmap& bitmap, State which)
         // We can't change the size of the images stored in wxImageList
         // in wxXPButtonImageData::m_iml so force recreating it below but
         // keep the current data to copy its values into the new one.
-        oldData = wxDynamicCast(m_imageData, wxXPButtonImageData);
+        oldData = dynamic_cast<wxXPButtonImageData*>(m_imageData);
         if ( oldData )
         {
             m_imageData = nullptr;
@@ -1220,7 +1212,7 @@ void wxAnyButton::MakeOwnerDrawn()
         // We need to use owner-drawn specific data structure so we have
         // to create it and copy the data from native data structure,
         // if necessary.
-        if ( m_imageData && wxDynamicCast(m_imageData, wxODButtonImageData) == nullptr )
+        if ( m_imageData && dynamic_cast<wxODButtonImageData*>(m_imageData) == nullptr )
         {
             wxODButtonImageData* newData = new wxODButtonImageData(this, m_imageData->GetBitmap(State_Normal));
             for ( int n = 0; n < State_Max; n++ )

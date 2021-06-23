@@ -115,7 +115,7 @@ extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewBackendIE[];
 extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewBackendEdge[];
 extern WXDLLIMPEXP_DATA_WEBVIEW(const char) wxWebViewBackendWebKit[];
 
-class WXDLLIMPEXP_WEBVIEW wxWebViewFactory : public wxObject
+class WXDLLIMPEXP_WEBVIEW wxWebViewFactory
 {
 public:
     virtual wxWebView* Create() = 0;

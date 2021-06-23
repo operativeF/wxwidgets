@@ -76,8 +76,6 @@ static HWND GetSuitableHWND(wxWindow *win)
 }
 
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxCHMHelpController, wxHelpControllerBase);
-
 bool wxCHMHelpController::Initialize(const wxString& filename)
 {
     if ( !GetHtmlHelpFunction() )

@@ -38,8 +38,6 @@ static HWND GetSuitableHWND(wxWinHelpController* controller)
         return GetDesktopWindow();
 }
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxWinHelpController, wxHelpControllerBase);
-
 bool wxWinHelpController::Initialize(const wxString& filename)
 {
     m_helpFile = filename;

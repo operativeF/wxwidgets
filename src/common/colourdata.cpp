@@ -17,8 +17,6 @@
 // wxColourData
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxColourData, wxObject);
-
 wxColourData::wxColourData()
 {
     m_dataColour.Set(0,0,0);

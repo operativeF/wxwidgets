@@ -103,11 +103,11 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxHtmlHelpDataItem, wxHtmlHelpDataItems,
 //                  of keyword(s)
 //------------------------------------------------------------------------------
 
-class WXDLLIMPEXP_HTML wxHtmlSearchEngine : public wxObject
+class WXDLLIMPEXP_HTML wxHtmlSearchEngine
 {
 public:
     wxHtmlSearchEngine()  = default;
-    ~wxHtmlSearchEngine() override = default;
+    virtual ~wxHtmlSearchEngine() = default;
 
     wxHtmlSearchEngine(const wxHtmlSearchEngine&) = delete;
 	wxHtmlSearchEngine& operator=(const wxHtmlSearchEngine&) = delete;

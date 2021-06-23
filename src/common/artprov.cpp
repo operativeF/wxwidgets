@@ -121,8 +121,6 @@ wxArtProviderCache::ConstructHashID(const wxArtID& id,
 // wxArtProvider class
 // ============================================================================
 
-wxIMPLEMENT_ABSTRACT_CLASS(wxArtProvider, wxObject);
-
 // ----------------------------------------------------------------------------
 // wxArtProvider ctors/dtor
 // ----------------------------------------------------------------------------

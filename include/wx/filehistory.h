@@ -34,7 +34,7 @@ enum wxFileHistoryMenuPathStyle
 // File history management
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxFileHistoryBase : public wxObject
+class WXDLLIMPEXP_CORE wxFileHistoryBase
 {
 public:
     wxFileHistoryBase(size_t maxFiles = 9, wxWindowID idBase = wxID_FILE1);
@@ -108,8 +108,6 @@ private:
     public:
         wxFileHistory(size_t maxFiles = 9, wxWindowID idBase = wxID_FILE1)
             : wxFileHistoryBase(maxFiles, idBase) {}
-
-        wxDECLARE_DYNAMIC_CLASS(wxFileHistory);
     };
 #endif
 

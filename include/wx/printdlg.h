@@ -53,12 +53,12 @@ private:
 // wxPrintDialog: the dialog for printing.
 // ---------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxPrintDialog : public wxObject
+class WXDLLIMPEXP_CORE wxPrintDialog
 {
 public:
     wxPrintDialog(wxWindow *parent, wxPrintDialogData* data = nullptr);
     wxPrintDialog(wxWindow *parent, wxPrintData* data);
-    ~wxPrintDialog() override;
+    ~wxPrintDialog();
 
     wxPrintDialog(const wxPrintDialog&) = delete;
     wxPrintDialog& operator=(const wxPrintDialog&) = delete;
@@ -73,9 +73,6 @@ public:
 
 private:
     wxPrintDialogBase  *m_pimpl;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxPrintDialog);
 };
 
 // ---------------------------------------------------------------------------

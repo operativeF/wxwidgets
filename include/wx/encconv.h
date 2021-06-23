@@ -48,12 +48,12 @@ WX_DEFINE_ARRAY_INT(wxFontEncoding, wxFontEncodingArray);
 //                  8bit encodings/charsets. It can also convert from/to Unicode
 //--------------------------------------------------------------------------------
 
-class WXDLLIMPEXP_BASE wxEncodingConverter : public wxObject
+class WXDLLIMPEXP_BASE wxEncodingConverter
 {
     public:
 
             wxEncodingConverter() = default;
-            ~wxEncodingConverter() override { delete[] m_Table; }
+            ~wxEncodingConverter() { delete[] m_Table; }
 
             wxEncodingConverter(const wxEncodingConverter&) = delete;
             wxEncodingConverter& operator=(const wxEncodingConverter&) = delete;

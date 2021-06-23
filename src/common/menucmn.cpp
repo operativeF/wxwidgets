@@ -186,9 +186,6 @@ wxENUM_MEMBER( wxITEM_CHECK )
 wxENUM_MEMBER( wxITEM_RADIO )
 wxEND_ENUM( wxItemKind )
 
-wxIMPLEMENT_DYNAMIC_CLASS_XTI_CALLBACK(wxMenuItem, wxObject, "wx/menuitem.h", \
-                                       wxMenuItemStreamingCallback)
-
 wxBEGIN_PROPERTIES_TABLE(wxMenuItem)
 wxPROPERTY( Parent, wxMenu*, SetMenu, GetMenu, wxEMPTY_PARAMETER_VALUE, \
            0 /*flags*/, wxT("Helpstring"), wxT("group") )

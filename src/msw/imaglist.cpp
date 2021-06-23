@@ -40,8 +40,6 @@
 #include "wx/msw/dib.h"
 #include "wx/msw/private.h"
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxImageList, wxObject);
-
 #define GetHImageList()     ((HIMAGELIST)m_hImageList)
 
 // ----------------------------------------------------------------------------

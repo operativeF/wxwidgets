@@ -20,11 +20,11 @@ enum
     wxFONTRESTRICT_FIXEDPITCH   = 1 << 1
 };
 
-class WXDLLIMPEXP_CORE wxFontData : public wxObject
+class WXDLLIMPEXP_CORE wxFontData
 {
 public:
     wxFontData() = default;
-    ~wxFontData() override = default;
+    ~wxFontData() = default;
 
     wxFontData(const wxFontData& data);
     wxFontData& operator=(const wxFontData& data);
@@ -74,8 +74,6 @@ private:
     wxFontEncoding       m_encoding{wxFONTENCODING_SYSTEM};
     wxNativeEncodingInfo m_encodingInfo;
     int                  m_restrictSelection{wxFONTRESTRICT_NONE};
-
-    wxDECLARE_DYNAMIC_CLASS(wxFontData);
 };
 
 #endif // _WX_FONTDATA_H_

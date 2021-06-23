@@ -301,8 +301,6 @@ wxArchiveFSCacheData *wxArchiveFSCache::Get(const wxString& name)
 // wxArchiveFSHandler
 //----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxArchiveFSHandler, wxFileSystemHandler);
-
 wxArchiveFSHandler::~wxArchiveFSHandler()
 {
     Cleanup();

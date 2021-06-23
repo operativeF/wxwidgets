@@ -17,11 +17,11 @@
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 class wxToolTipOtherWindows;
 
-class WXDLLIMPEXP_CORE wxToolTip : public wxObject
+class WXDLLIMPEXP_CORE wxToolTip
 {
 public:
     wxToolTip(const wxString &tip);
-    ~wxToolTip() override;
+    ~wxToolTip();
 
    wxToolTip(const wxToolTip&) = delete;
    wxToolTip& operator=(const wxToolTip&) = delete;
@@ -116,8 +116,6 @@ private:
     wxRect    m_rect;           // the rect of the window for which this tooltip is shown
                                 // (or a rect with width/height == 0 to show it for the entire window)
     unsigned int m_id{0};          // the id of this tooltip (ignored when m_rect width/height is 0)
-
-    wxDECLARE_ABSTRACT_CLASS(wxToolTip);
 };
 
 #endif // _WX_MSW_TOOLTIP_H_

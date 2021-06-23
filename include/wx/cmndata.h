@@ -25,12 +25,12 @@ class WXDLLIMPEXP_FWD_CORE wxPrintNativeDataBase;
 
 inline constexpr int wxPRINTMEDIA_DEFAULT = 0;
 
-class WXDLLIMPEXP_CORE wxPrintData: public wxObject
+class WXDLLIMPEXP_CORE wxPrintData
 {
 public:
     wxPrintData();
     wxPrintData(const wxPrintData& printData);
-    ~wxPrintData() override;
+    ~wxPrintData();
 
     int GetNoCopies() const { return m_printNoCopies; }
     bool GetCollate() const { return m_printCollate; }
@@ -109,9 +109,6 @@ private:
     int   m_privDataLen{0};
 
     wxPrintNativeDataBase  *m_nativeData;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxPrintData);
 };
 
 /*
@@ -121,13 +118,13 @@ private:
  * from the dialog.
  */
 
-class WXDLLIMPEXP_CORE wxPrintDialogData: public wxObject
+class WXDLLIMPEXP_CORE wxPrintDialogData
 {
 public:
     wxPrintDialogData();
     wxPrintDialogData(const wxPrintDialogData& dialogData);
     wxPrintDialogData(const wxPrintData& printData);
-    ~wxPrintDialogData() override;
+    ~wxPrintDialogData();
 
     int GetFromPage() const { return m_printFromPage; }
     int GetToPage() const { return m_printToPage; }
@@ -184,22 +181,19 @@ private:
     bool            m_printEnableHelp{false};
     bool            m_printEnablePrintToFile{true}; // TODO: correct default behavior?
     wxPrintData     m_printData;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxPrintDialogData);
 };
 
 /*
 * This is the data used (and returned) by the wxPageSetupDialog.
 */
 
-class WXDLLIMPEXP_CORE wxPageSetupDialogData: public wxObject
+class WXDLLIMPEXP_CORE wxPageSetupDialogData
 {
 public:
     wxPageSetupDialogData();
     wxPageSetupDialogData(const wxPageSetupDialogData& dialogData);
     wxPageSetupDialogData(const wxPrintData& printData);
-    ~wxPageSetupDialogData() override;
+    ~wxPageSetupDialogData();
 
     wxSize GetPaperSize() const { return m_paperSize; }
     wxPaperSize GetPaperId() const { return m_printData.GetPaperId(); }
@@ -270,9 +264,6 @@ private:
     bool            m_getDefaultInfo{false}; // Equiv. to PSD_RETURNDEFAULT
     bool            m_enableHelp{false};
     wxPrintData     m_printData;
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxPageSetupDialogData);
 };
 
 #endif // wxUSE_PRINTING_ARCHITECTURE

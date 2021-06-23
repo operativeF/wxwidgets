@@ -12,8 +12,6 @@
 
 #include "wx/fontdata.h"
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxFontData, wxObject);
-
 wxFontData::wxFontData(const wxFontData& data)
     : 
       m_fontColour(data.m_fontColour),
@@ -34,7 +32,6 @@ wxFontData& wxFontData::operator=(const wxFontData& data)
 {
     if (&data != this)
     {
-        wxObject::operator=(data);
         m_fontColour        = data.m_fontColour;
         m_showHelp          = data.m_showHelp;
         m_allowSymbols      = data.m_allowSymbols;

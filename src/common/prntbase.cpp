@@ -418,8 +418,6 @@ wxPrintDialogBase::wxPrintDialogBase(wxWindow *parent,
 // wxPrintDialog: the dialog for printing
 // ---------------------------------------------------------------------------
 
-wxIMPLEMENT_CLASS(wxPrintDialog, wxObject);
-
 wxPrintDialog::wxPrintDialog(wxWindow *parent, wxPrintDialogData* data)
     : m_pimpl(wxPrintFactory::GetFactory()->CreatePrintDialog( parent, data ))
 {

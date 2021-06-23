@@ -4577,7 +4577,7 @@ wxWindowMSW::MSWOnDrawItem(int WXUNUSED_UNLESS_ODRAWN(id),
         if ( !pMenuItem )
             return false;
 
-        wxCHECK_MSG( wxDynamicCast(pMenuItem, wxMenuItem),
+        wxCHECK_MSG( dynamic_cast<wxMenuItem*>(pMenuItem),
                          false, wxT("MSWOnDrawItem: bad wxMenuItem pointer") );
 
         // prepare to call OnDrawItem(): notice using of wxDCTemp to prevent
@@ -4643,7 +4643,7 @@ wxWindowMSW::MSWOnMeasureItem(int id, WXMEASUREITEMSTRUCT *itemStruct)
         if ( !pMenuItem )
             return false;
 
-        wxCHECK_MSG( wxDynamicCast(pMenuItem, wxMenuItem),
+        wxCHECK_MSG( dynamic_cast<wxMenuItem*>(pMenuItem),
                         false, wxT("MSWOnMeasureItem: bad wxMenuItem pointer") );
 
         size_t w, h;

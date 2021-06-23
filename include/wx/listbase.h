@@ -168,7 +168,7 @@ using wxListItemAttr = wxItemAttr;
 // wxListItem: the item or column info, used to exchange data with wxListCtrl
 // ----------------------------------------------------------------------------
 
-class WXDLLIMPEXP_CORE wxListItem : public wxObject
+class WXDLLIMPEXP_CORE wxListItem
 {
 public:
     wxListItem() = default;
@@ -211,7 +211,7 @@ public:
         return *this;
     }
 
-    ~wxListItem() override { delete m_attr; }
+    ~wxListItem() { delete m_attr; }
 
     // resetting
     void Clear()
@@ -315,9 +315,6 @@ protected:
     }
 
     wxItemAttr *m_attr{nullptr};     // optional pointer to the items style
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxListItem);
 };
 
 // ----------------------------------------------------------------------------

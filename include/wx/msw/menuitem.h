@@ -139,11 +139,6 @@ private:
 
     // Give wxMenu access to our MSWMustUseOwnerDrawn() and GetHBitmapForMenu().
     friend class wxMenu;
-
-public:
-	wxClassInfo *GetClassInfo() const override;
-	static wxClassInfo ms_classInfo;
-	static wxObject* wxCreateObject();
 };
 
 #endif  //_MENUITEM_H
