@@ -20,8 +20,9 @@
 #if wxUSE_BOOKCTRL
 
 #include "wx/control.h"
-#include <vector>
 #include "wx/withimages.h"
+
+#include <vector>
 
 class WXDLLIMPEXP_FWD_CORE wxImageList;
 class WXDLLIMPEXP_FWD_CORE wxBookCtrlEvent;
@@ -411,7 +412,7 @@ typedef void (wxEvtHandler::*wxBookCtrlEventFunction)(wxBookCtrlEvent&);
 // make a default book control for given platform
 #if wxUSE_NOTEBOOK
     // dedicated to majority of desktops
-    #include "wx/notebook.h"
+    class WXDLLIMPEXP_FWD_CORE                     wxNotebook;
     #define wxBookCtrl                             wxNotebook
     #define wxEVT_BOOKCTRL_PAGE_CHANGED            wxEVT_NOTEBOOK_PAGE_CHANGED
     #define wxEVT_BOOKCTRL_PAGE_CHANGING           wxEVT_NOTEBOOK_PAGE_CHANGING
@@ -419,7 +420,7 @@ typedef void (wxEvtHandler::*wxBookCtrlEventFunction)(wxBookCtrlEvent&);
     #define EVT_BOOKCTRL_PAGE_CHANGING(id, fn)     EVT_NOTEBOOK_PAGE_CHANGING(id, fn)
 #else
     // dedicated to Smartphones
-    #include "wx/choicebk.h"
+    class WXDLLIMPEXP_FWD_CORE                     wxChoicebook;
     #define wxBookCtrl                             wxChoicebook
     #define wxEVT_BOOKCTRL_PAGE_CHANGED            wxEVT_CHOICEBOOK_PAGE_CHANGED
     #define wxEVT_BOOKCTRL_PAGE_CHANGING           wxEVT_CHOICEBOOK_PAGE_CHANGING

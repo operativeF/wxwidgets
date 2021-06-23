@@ -11,6 +11,7 @@
 #define _WX_SIMPLEBOOK_H_
 
 #include "wx/bookctrl.h"
+#include "wx/notebook.h"
 
 #if wxUSE_BOOKCTRL
 
