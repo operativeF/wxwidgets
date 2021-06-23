@@ -52,7 +52,7 @@ inline constexpr int wxNB_NOPAGETHEME = 0x0400;
 
 using wxNotebookPage = wxWindow;  // so far, any window can be a page
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxNotebookNameStr[] = "notebook";
+inline constexpr char wxNotebookNameStr[] = "notebook";
 
 #if wxUSE_EXTENDED_RTTI
 

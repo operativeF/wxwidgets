@@ -22,7 +22,7 @@
 #include "wx/window.h"      // base class
 #include "wx/gdicmn.h"      // wxEllipsize...
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxControlNameStr[] = "control";
+inline constexpr char wxControlNameStr[] = "control";
 
 
 // ----------------------------------------------------------------------------

@@ -59,7 +59,7 @@ enum class wxDialogModality
     AppModal
 };
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxDialogNameStr[] = "dialog";
+inline constexpr char wxDialogNameStr[] = "dialog";
 
 class WXDLLIMPEXP_CORE wxDialogBase : public wxNavigationEnabled<wxTopLevelWindow>
 {

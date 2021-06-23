@@ -17,7 +17,7 @@
 
 #include "wx/control.h"
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxScrollBarNameStr[] = "scrollBar";
+inline constexpr char wxScrollBarNameStr[] = "scrollBar";
 
 // ----------------------------------------------------------------------------
 // wxScrollBar: a scroll bar control

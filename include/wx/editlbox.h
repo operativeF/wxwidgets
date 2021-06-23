@@ -26,7 +26,7 @@ inline constexpr int wxEL_ALLOW_DELETE  = 0x0400;
 inline constexpr int wxEL_NO_REORDER    = 0x0800;
 inline constexpr int wxEL_DEFAULT_STYLE = wxEL_ALLOW_NEW | wxEL_ALLOW_EDIT | wxEL_ALLOW_DELETE;
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxEditableListBoxNameStr[] = "editableListBox";
+inline constexpr char wxEditableListBoxNameStr[] = "editableListBox";
 
 // This class provides a composite control that lets the
 // user easily enter list of strings

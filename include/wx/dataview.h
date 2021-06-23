@@ -63,7 +63,7 @@ class WXDLLIMPEXP_FWD_CORE wxDataViewModelNotifier;
 class WXDLLIMPEXP_FWD_CORE wxDataViewCtrlAccessible;
 #endif // wxUSE_ACCESSIBILITY
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxDataViewCtrlNameStr[] = "dataviewCtrl";
+inline constexpr char wxDataViewCtrlNameStr[] = "dataviewCtrl";
 
 // ----------------------------------------------------------------------------
 // wxDataViewCtrl flags

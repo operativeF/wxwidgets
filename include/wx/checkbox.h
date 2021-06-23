@@ -40,7 +40,7 @@ inline constexpr int wxCHK_3STATE = 0x1000;
  */
 inline constexpr int wxCHK_ALLOW_3RD_STATE_FOR_USER = 0x2000;
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxCheckBoxNameStr[] = "check";
+inline constexpr char wxCheckBoxNameStr[] = "check";
 
 /*
  * The possible states of a 3-state checkbox (Compatible

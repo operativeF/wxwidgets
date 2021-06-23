@@ -22,7 +22,7 @@ class WXDLLIMPEXP_FWD_CORE wxBitmap;
 class WXDLLIMPEXP_FWD_CORE wxColour;
 class WXDLLIMPEXP_FWD_CORE wxDC;
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxBannerWindowNameStr[] = "bannerwindow";
+inline constexpr char wxBannerWindowNameStr[] = "bannerwindow";
 
 // ----------------------------------------------------------------------------
 // A simple banner window showing either a bitmap or text.

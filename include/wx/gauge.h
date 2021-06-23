@@ -40,7 +40,7 @@ inline constexpr int wxGA_TEXT = 0x0040;
     #define wxGAUGE_EMULATE_INDETERMINATE_MODE 0
 #endif
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxGaugeNameStr[] = "gauge";
+inline constexpr char wxGaugeNameStr[] = "gauge";
 
 class WXDLLIMPEXP_FWD_CORE wxAppProgressIndicator;
 

@@ -22,7 +22,7 @@
 #include "wx/weakref.h"
 
 // the default names for various classes
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxFrameNameStr[] = "frame";
+inline constexpr char wxFrameNameStr[] = "frame";
 
 // ----------------------------------------------------------------------------
 // constants

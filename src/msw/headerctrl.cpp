@@ -206,7 +206,7 @@ private:
 // wxMSWHeaderCtrl implementation
 // ============================================================================
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxMSWHeaderCtrlNameStr[] = "wxMSWHeaderCtrl";
+inline constexpr char wxMSWHeaderCtrlNameStr[] = "wxMSWHeaderCtrl";
 
 // ----------------------------------------------------------------------------
 // wxMSWHeaderCtrl construction/destruction

@@ -19,8 +19,8 @@
 
 #include "wx/arrstr.h"
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxRearrangeListNameStr[] = "wxRearrangeList";
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxRearrangeDialogNameStr[] = "wxRearrangeDlg";
+inline constexpr char wxRearrangeListNameStr[] = "wxRearrangeList";
+inline constexpr char wxRearrangeDialogNameStr[] = "wxRearrangeDlg";
 
 // ----------------------------------------------------------------------------
 // wxRearrangeList: a (check) list box allowing to move items around

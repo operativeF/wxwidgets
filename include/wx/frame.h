@@ -19,7 +19,7 @@
 #include "wx/statusbr.h"
 
 // the default names for various classes
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxStatusLineNameStr[] = "status_line";
+inline constexpr char wxStatusLineNameStr[] = "status_line";
 
 class WXDLLIMPEXP_FWD_CORE wxFrame;
 #if wxUSE_MENUBAR

@@ -1064,10 +1064,10 @@ extern WXDLLIMPEXP_DATA_CORE(wxIconBundle) wxNullIconBundle;
 
 extern WXDLLIMPEXP_DATA_CORE(wxColourDatabase*)  wxTheColourDatabase;
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxPanelNameStr[] = "panel";
+inline constexpr char wxPanelNameStr[] = "panel";
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(wxSize) wxDefaultSize{wxDefaultCoord, wxDefaultCoord};
-inline constexpr WXDLLIMPEXP_DATA_CORE(wxPoint) wxDefaultPosition{wxDefaultCoord, wxDefaultCoord};
+inline constexpr wxSize wxDefaultSize{wxDefaultCoord, wxDefaultCoord};
+inline constexpr wxPoint wxDefaultPosition{wxDefaultCoord, wxDefaultCoord};
 
 // ---------------------------------------------------------------------------
 // global functions

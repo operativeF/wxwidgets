@@ -29,7 +29,7 @@ enum
 
 inline constexpr int wxFC_DEFAULT_STYLE = wxFC_OPEN;
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxFileCtrlNameStr[] = "wxfilectrl";
+inline constexpr char wxFileCtrlNameStr[] = "wxfilectrl";
 
 class WXDLLIMPEXP_CORE wxFileCtrlBase
 {

@@ -21,9 +21,9 @@
 // constants
 // ----------------------------------------------------------------------------
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxDirDialogNameStr[] = "wxDirCtrl";
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxDirDialogDefaultFolderStr[] = "/";
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxDirSelectorPromptStr[] = "Select a directory";
+inline constexpr char wxDirDialogNameStr[] = "wxDirCtrl";
+inline constexpr char wxDirDialogDefaultFolderStr[] = "/";
+inline constexpr char wxDirSelectorPromptStr[] = "Select a directory";
 
 
 /*

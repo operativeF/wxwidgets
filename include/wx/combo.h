@@ -147,7 +147,7 @@ struct wxComboCtrlFeatures
     };
 };
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxComboCtrlNameStr[] = "comboCtrl";
+inline constexpr char wxComboCtrlNameStr[] = "comboCtrl";
 
 class WXDLLIMPEXP_CORE wxComboCtrlBase : public wxControl,
                                          public wxTextEntry

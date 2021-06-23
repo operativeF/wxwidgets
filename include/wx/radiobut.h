@@ -53,7 +53,7 @@ public:
     wxRadioButton* GetNextInGroup() const;
 };
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxRadioButtonNameStr[] = "radioButton";
+inline constexpr char wxRadioButtonNameStr[] = "radioButton";
 
 #if defined(__WXUNIVERSAL__)
     #include "wx/univ/radiobut.h"

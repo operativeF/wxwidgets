@@ -57,7 +57,7 @@ public:
 #if 0
 class WXDLLIMPEXP_FWD_CORE wxBitmap;
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxBitmapRadioButtonNameStr[] = "radioButton";
+inline constexpr char wxBitmapRadioButtonNameStr[] = "radioButton";
 
 class WXDLLIMPEXP_CORE wxBitmapRadioButton: public wxRadioButton
 {

@@ -27,7 +27,7 @@ inline constexpr int wxHL_ALIGN_RIGHT        = 0x0004;
 inline constexpr int wxHL_ALIGN_CENTRE       = 0x0008;
 inline constexpr int wxHL_DEFAULT_STYLE      = wxHL_CONTEXTMENU | wxNO_BORDER | wxHL_ALIGN_CENTRE;
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxHyperlinkCtrlNameStr[] = "hyperlink";
+inline constexpr char wxHyperlinkCtrlNameStr[] = "hyperlink";
 
 // ----------------------------------------------------------------------------
 // wxHyperlinkCtrl

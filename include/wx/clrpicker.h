@@ -21,8 +21,8 @@
 
 class WXDLLIMPEXP_FWD_CORE wxColourPickerEvent;
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxColourPickerCtrlNameStr[] = "colourpicker";
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxColourPickerWidgetNameStr[] = "colourpickerwidget";
+inline constexpr char wxColourPickerCtrlNameStr[] = "colourpicker";
+inline constexpr char wxColourPickerWidgetNameStr[] = "colourpickerwidget";
 
 // show the colour in HTML form (#AABBCC) as colour button label
 inline constexpr int wxCLRBTN_SHOW_LABEL = 100;

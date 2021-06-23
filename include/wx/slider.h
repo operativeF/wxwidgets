@@ -41,7 +41,7 @@ inline constexpr int wxSL_MIN_MAX_LABELS  = 0x2000;
 inline constexpr int wxSL_VALUE_LABEL     = 0x4000;
 inline constexpr int wxSL_LABELS          = wxSL_MIN_MAX_LABELS | wxSL_VALUE_LABEL;
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxSliderNameStr[] = "slider";
+inline constexpr char wxSliderNameStr[] = "slider";
 
 // ----------------------------------------------------------------------------
 // wxSliderBase: define wxSlider interface

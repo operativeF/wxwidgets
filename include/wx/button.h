@@ -17,7 +17,7 @@
 
 #include "wx/anybutton.h"
 
-inline constexpr WXDLLIMPEXP_DATA_CORE(char) wxButtonNameStr[] = "button";
+inline constexpr char wxButtonNameStr[] = "button";
 
 // ----------------------------------------------------------------------------
 // wxButton: a push button
