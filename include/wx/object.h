@@ -324,9 +324,6 @@ public:
         return *this;
     }
 
-    wxObject(wxObject&&) = default;
-    wxObject& operator=(wxObject&&) = default;
-
     bool IsKindOf(const wxClassInfo *info) const;
 
     virtual wxClassInfo *GetClassInfo() const;
