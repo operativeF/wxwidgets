@@ -31,8 +31,7 @@ wxSocketOutputStream::wxSocketOutputStream(wxSocketBase& s)
 {
 }
 
-wxSocketOutputStream::~wxSocketOutputStream()
-= default;
+wxSocketOutputStream::~wxSocketOutputStream() = default;
 
 size_t wxSocketOutputStream::OnSysWrite(const void *buffer, size_t size)
 {
