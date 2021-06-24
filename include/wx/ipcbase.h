@@ -49,13 +49,13 @@ enum wxIPCFormat
 class WXDLLIMPEXP_FWD_BASE wxServerBase;
 class WXDLLIMPEXP_FWD_BASE wxClientBase;
 
-class WXDLLIMPEXP_BASE wxConnectionBase: public wxObject
+class WXDLLIMPEXP_BASE wxConnectionBase
 {
 public:
   wxConnectionBase(void *buffer, size_t size); // use external buffer
   wxConnectionBase(); // use internal, adaptive buffer
   wxConnectionBase(const wxConnectionBase& copy);
-  ~wxConnectionBase() override;
+  virtual ~wxConnectionBase();
 
   wxConnectionBase& operator=(const wxConnectionBase&) = delete;
 
@@ -222,31 +222,27 @@ private:
 
 protected:
   bool          m_connected{true};
-
-  wxDECLARE_CLASS(wxConnectionBase);
 };
 
 
-class WXDLLIMPEXP_BASE wxServerBase : public wxObject
+class WXDLLIMPEXP_BASE wxServerBase
 {
 public:
   wxServerBase() = default;
-  ~wxServerBase() override = default;
+  virtual ~wxServerBase() = default;
 
   // Returns false on error (e.g. port number is already in use)
   virtual bool Create(const wxString& serverName) = 0;
 
   // Callbacks to SERVER - override at will
   virtual wxConnectionBase *OnAcceptConnection(const wxString& topic) = 0;
-
-  wxDECLARE_CLASS(wxServerBase);
 };
 
-class WXDLLIMPEXP_BASE wxClientBase : public wxObject
+class WXDLLIMPEXP_BASE wxClientBase
 {
 public:
   wxClientBase() = default;
-  ~wxClientBase() override = default;
+  virtual ~wxClientBase() = default;
 
   virtual bool ValidHost(const wxString& host) = 0;
 
@@ -257,8 +253,6 @@ public:
 
   // Callbacks to CLIENT - override at will
   virtual wxConnectionBase *OnMakeConnection() = 0;
-
-  wxDECLARE_CLASS(wxClientBase);
 };
 
 #endif // _WX_IPCBASEH__

@@ -1210,8 +1210,6 @@ wxFilterOutputStream::~wxFilterOutputStream()
 // wxFilterClassFactoryBase
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_ABSTRACT_CLASS(wxFilterClassFactoryBase, wxObject);
-
 wxString wxFilterClassFactoryBase::PopExtension(const wxString& location) const
 {
     return location.substr(0, FindExtension(location));

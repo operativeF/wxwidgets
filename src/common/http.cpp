@@ -306,7 +306,8 @@ bool wxHTTP::Connect(const wxSockAddress& addr, bool WXUNUSED(wait))
 
     m_addr = addr.Clone();
 
-    wxIPV4address *ipv4addr = wxDynamicCast(&addr, wxIPV4address);
+    const wxIPV4address *ipv4addr = dynamic_cast<const wxIPV4address*>(&addr);
+
     if ( ipv4addr )
     {
         wxString hostHdr = ipv4addr->OrigHostname();

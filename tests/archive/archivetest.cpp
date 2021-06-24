@@ -21,6 +21,8 @@
 #include <map>
 #include <sys/stat.h>
 
+#include "wx/zipstrm.h"
+
 using std::string;
 
 
@@ -1185,10 +1187,10 @@ class CorruptionTestCase : public CppUnit::TestCase
 {
 public:
     CorruptionTestCase(std::string name,
-                       wxArchiveClassFactory *factory,
+                       std::unique_ptr<wxArchiveClassFactory> factory,
                        int options)
       : CppUnit::TestCase(TestId::MakeId() + name),
-        m_factory(factory),
+        m_factory(std::move(factory)),
         m_options(options)
     { }
 
@@ -1337,11 +1339,10 @@ void ArchiveTestSuite::DoRunTest()
                     }
                 }
 
+    // FIXME: Assume zip here?
     for (int options = 0; options <= PipeIn; options += PipeIn)
     {
-        wxObject *pObj = wxCreateDynamicObject(m_name + wxT("ClassFactory"));
-        wxArchiveClassFactory *factory;
-        factory = wxDynamicCast(pObj, wxArchiveClassFactory);
+        auto factory = std::make_unique<wxZipClassFactory>();
 
         if (factory) {
             string descr(m_name.mb_str());
@@ -1350,7 +1351,7 @@ void ArchiveTestSuite::DoRunTest()
             if (options)
                 descr += " (PipeIn)";
 
-            CorruptionTestCase test(descr, factory, options);
+            CorruptionTestCase test(descr, std::move(factory), options);
             test.runTest();
         }
     }

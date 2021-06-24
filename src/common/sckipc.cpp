@@ -346,21 +346,12 @@ private:
 
 } // anonymous namespace
 
-// ==========================================================================
-// implementation
-// ==========================================================================
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxTCPServer, wxServerBase);
-wxIMPLEMENT_DYNAMIC_CLASS(wxTCPClient, wxClientBase);
-wxIMPLEMENT_CLASS(wxTCPConnection, wxConnectionBase);
 
 // --------------------------------------------------------------------------
 // wxTCPClient
 // --------------------------------------------------------------------------
 
-wxTCPClient::wxTCPClient()
-            
-= default;
+wxTCPClient::wxTCPClient() = default;
 
 bool wxTCPClient::ValidHost(const wxString& host)
 {
@@ -396,9 +387,10 @@ wxConnectionBase *wxTCPClient::MakeConnection(const wxString& host,
             wxTCPConnection *
                 connection = (wxTCPConnection *)OnMakeConnection ();
 
+            // TODO: Why would we dynamic cast back here?
             if (connection)
             {
-                if (wxDynamicCast(connection, wxTCPConnection))
+                if (dynamic_cast<wxTCPConnection*>(connection))
                 {
                     connection->m_topic = topic;
                     connection->m_sock  = client;
@@ -883,9 +875,10 @@ void wxTCPEventHandler::Server_OnRequest(wxSocketEvent &event)
             wxTCPConnection *new_connection =
                 (wxTCPConnection *)ipcserv->OnAcceptConnection (topic);
 
+            // TODO: Why dynamic cast back?
             if (new_connection)
             {
-                if (wxDynamicCast(new_connection, wxTCPConnection))
+                if (dynamic_cast<wxTCPConnection*>(new_connection))
                 {
                     // Acknowledge success
                     out.Write8(IPC_CONNECT);

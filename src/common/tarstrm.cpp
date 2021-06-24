@@ -80,10 +80,6 @@ static constexpr char USTAR_VERSION[] = "00";
 static constexpr char GNU_MAGIC[]     = "ustar ";
 static constexpr char GNU_VERION[]    = " ";
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxTarEntry, wxArchiveEntry);
-wxIMPLEMENT_DYNAMIC_CLASS(wxTarClassFactory, wxArchiveClassFactory);
-
-
 /////////////////////////////////////////////////////////////////////////////
 // Class factory
 
@@ -740,7 +736,7 @@ bool wxTarInputStream::OpenEntry(wxTarEntry& entry)
 
 bool wxTarInputStream::OpenEntry(wxArchiveEntry& entry)
 {
-    wxTarEntry *tarEntry = wxStaticCast(&entry, wxTarEntry);
+    auto* tarEntry = static_cast<wxTarEntry*>(&entry);
     return tarEntry ? OpenEntry(*tarEntry) : false;
 }
 
@@ -1149,7 +1145,7 @@ bool wxTarOutputStream::PutNextDirEntry(const wxString& name,
 
 bool wxTarOutputStream::PutNextEntry(wxArchiveEntry *entry)
 {
-    wxTarEntry *tarEntry = wxStaticCast(entry, wxTarEntry);
+    auto* tarEntry = static_cast<wxTarEntry*>(entry);
     if (!tarEntry)
         delete entry;
     return PutNextEntry(tarEntry);

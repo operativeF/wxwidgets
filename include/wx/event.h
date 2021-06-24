@@ -3680,10 +3680,10 @@ public:
     wxEvtHandler();
     ~wxEvtHandler() override;
 
-wxEvtHandler(const wxEvtHandler&) = delete;
-   wxEvtHandler& operator=(const wxEvtHandler&) = delete;
-   wxEvtHandler(wxEvtHandler&&) = default;
-   wxEvtHandler& operator=(wxEvtHandler&&) = default;
+    wxEvtHandler(const wxEvtHandler&) = delete;
+    wxEvtHandler& operator=(const wxEvtHandler&) = delete;
+    wxEvtHandler(wxEvtHandler&&) = default;
+    wxEvtHandler& operator=(wxEvtHandler&&) = default;
 
     // Event handler chain
     // -------------------

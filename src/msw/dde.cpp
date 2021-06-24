@@ -124,9 +124,6 @@ private:
 // wxWin macros
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxDDEServer, wxServerBase);
-wxIMPLEMENT_DYNAMIC_CLASS(wxDDEClient, wxClientBase);
-wxIMPLEMENT_DYNAMIC_CLASS(wxDDEConnection, wxConnectionBase);
 wxIMPLEMENT_DYNAMIC_CLASS(wxDDEModule, wxModule);
 
 // ============================================================================

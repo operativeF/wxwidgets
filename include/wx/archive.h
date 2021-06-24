@@ -30,10 +30,10 @@ public:
 //
 // Holds an entry's meta data, such as filename and timestamp.
 
-class WXDLLIMPEXP_BASE wxArchiveEntry : public wxObject
+class WXDLLIMPEXP_BASE wxArchiveEntry
 {
 public:
-    ~wxArchiveEntry() override = default;
+    virtual ~wxArchiveEntry() = default;
 
     virtual wxDateTime   GetDateTime() const = 0;
     virtual wxFileOffset GetSize() const = 0;
@@ -58,7 +58,7 @@ public:
 
 protected:
     wxArchiveEntry() = default;
-    wxArchiveEntry(const wxArchiveEntry& e) : wxObject(e), m_notifier(nullptr) { }
+    wxArchiveEntry(const wxArchiveEntry& e) = default;
 
     virtual void SetOffset(wxFileOffset offset) = 0;
     virtual wxArchiveEntry* DoClone() const = 0;
@@ -68,8 +68,6 @@ protected:
 
 private:
     wxArchiveNotifier *m_notifier{nullptr};
-
-    wxDECLARE_ABSTRACT_CLASS(wxArchiveEntry);
 };
 
 
@@ -364,8 +362,6 @@ private:
     wxMBConv *m_pConv{nullptr};
     static wxArchiveClassFactory *sm_first;
     wxArchiveClassFactory *m_next;
-
-    wxDECLARE_ABSTRACT_CLASS(wxArchiveClassFactory);
 };
 
 #endif // wxUSE_STREAMS && wxUSE_ARCHIVE_STREAMS

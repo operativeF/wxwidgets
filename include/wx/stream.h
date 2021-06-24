@@ -364,10 +364,10 @@ enum wxStreamProtocolType
 
 void WXDLLIMPEXP_BASE wxUseFilterClasses();
 
-class WXDLLIMPEXP_BASE wxFilterClassFactoryBase : public wxObject
+class WXDLLIMPEXP_BASE wxFilterClassFactoryBase
 {
 public:
-    ~wxFilterClassFactoryBase() override = default;
+    virtual ~wxFilterClassFactoryBase() = default;
 
     wxString GetProtocol() const { return wxString(*GetProtocols()); }
     wxString PopExtension(const wxString& location) const;
@@ -381,8 +381,6 @@ public:
 
 protected:
     wxString::size_type FindExtension(const wxString& location) const;
-
-    wxDECLARE_ABSTRACT_CLASS(wxFilterClassFactoryBase);
 };
 
 class WXDLLIMPEXP_BASE wxFilterClassFactory : public wxFilterClassFactoryBase

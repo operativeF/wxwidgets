@@ -345,9 +345,6 @@ protected:
         { return NewStream(stream); }
     wxArchiveOutputStream *DoNewStream(wxOutputStream *stream) const override
         { return NewStream(stream); }
-
-private:
-    wxDECLARE_DYNAMIC_CLASS(wxTarClassFactory);
 };
 
 

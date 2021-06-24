@@ -60,8 +60,6 @@ wxVersionInfo wxGetZlibVersionInfo()
 /////////////////////////////////////////////////////////////////////////////
 // Zlib Class factory
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxZlibClassFactory, wxFilterClassFactory);
-
 static wxZlibClassFactory g_wxZlibClassFactory;
 
 wxZlibClassFactory::wxZlibClassFactory()
@@ -87,8 +85,6 @@ wxZlibClassFactory::GetProtocols(wxStreamProtocolType type) const
 
 /////////////////////////////////////////////////////////////////////////////
 // Gzip Class factory
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxGzipClassFactory, wxFilterClassFactory);
 
 static wxGzipClassFactory g_wxGzipClassFactory;
 

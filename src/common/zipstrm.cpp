@@ -69,9 +69,6 @@ enum {
     SUMS_OFFSET  = 14
 };
 
-wxIMPLEMENT_DYNAMIC_CLASS(wxZipEntry, wxArchiveEntry);
-wxIMPLEMENT_DYNAMIC_CLASS(wxZipClassFactory, wxArchiveClassFactory);
-
 
 /////////////////////////////////////////////////////////////////////////////
 // Helpers
@@ -1936,7 +1933,7 @@ wxUint32 wxZipInputStream::ReadSignature()
 
 bool wxZipInputStream::OpenEntry(wxArchiveEntry& entry)
 {
-    wxZipEntry *zipEntry = wxStaticCast(&entry, wxZipEntry);
+    auto* zipEntry = static_cast<wxZipEntry*>(&entry);
     return zipEntry ? OpenEntry(*zipEntry) : false;
 }
 
@@ -2221,7 +2218,7 @@ bool wxZipOutputStream::CopyEntry(wxZipEntry *entry,
 
 bool wxZipOutputStream::PutNextEntry(wxArchiveEntry *entry)
 {
-    wxZipEntry *zipEntry = wxStaticCast(entry, wxZipEntry);
+    auto* zipEntry = static_cast<wxZipEntry*>(entry);
     if (!zipEntry)
         delete entry;
     return PutNextEntry(zipEntry);
@@ -2230,7 +2227,7 @@ bool wxZipOutputStream::PutNextEntry(wxArchiveEntry *entry)
 bool wxZipOutputStream::CopyEntry(wxArchiveEntry *entry,
                                   wxArchiveInputStream& stream)
 {
-    wxZipEntry *zipEntry = wxStaticCast(entry, wxZipEntry);
+    auto* zipEntry = static_cast<wxZipEntry*>(entry);
 
     if (!zipEntry || !stream.OpenEntry(*zipEntry)) {
         delete entry;

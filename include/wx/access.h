@@ -229,16 +229,16 @@ class  WXDLLIMPEXP_FWD_CORE wxWindow;
 struct WXDLLIMPEXP_FWD_CORE wxPoint;
 class  WXDLLIMPEXP_FWD_CORE wxRect;
 
-class WXDLLIMPEXP_CORE wxAccessibleBase : public wxObject
+class WXDLLIMPEXP_CORE wxAccessibleBase
 {
 public:
     wxAccessibleBase(wxWindow* win): m_window(win) {}
-    ~wxAccessibleBase() override = default;
+    virtual ~wxAccessibleBase() = default;
 
-   wxAccessibleBase(const wxAccessibleBase&) = delete;
-   wxAccessibleBase& operator=(const wxAccessibleBase&) = delete;
-   wxAccessibleBase(wxAccessibleBase&&) = default;
-   wxAccessibleBase& operator=(wxAccessibleBase&&) = default;
+    wxAccessibleBase(const wxAccessibleBase&) = delete;
+    wxAccessibleBase& operator=(const wxAccessibleBase&) = delete;
+    wxAccessibleBase(wxAccessibleBase&&) = default;
+    wxAccessibleBase& operator=(wxAccessibleBase&&) = default;
 
         // Can return either a child object, or an integer
         // representing the child element, starting from 1.

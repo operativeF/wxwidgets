@@ -46,8 +46,6 @@ const wxString& wxFSFile::GetMimeType() const
 // wxFileSystemHandler
 // ----------------------------------------------------------------------------
 
-wxIMPLEMENT_ABSTRACT_CLASS(wxFileSystemHandler, wxObject);
-
 
 /* static */
 wxString wxFileSystemHandler::GetMimeTypeFromExt(const wxString& location)

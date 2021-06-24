@@ -26,7 +26,7 @@ class wxSockAddressImpl;
 struct sockaddr;
 
 // Any socket address kind
-class WXDLLIMPEXP_NET wxSockAddress : public wxObject
+class WXDLLIMPEXP_NET wxSockAddress
 {
 public:
     enum Family
@@ -39,7 +39,7 @@ public:
 
     wxSockAddress();
     wxSockAddress(const wxSockAddress& other);
-    ~wxSockAddress() override;
+    virtual ~wxSockAddress();
 
     wxSockAddress& operator=(const wxSockAddress& other);
 
@@ -60,9 +60,6 @@ public:
 
 protected:
     wxSockAddressImpl* m_impl;
-
-private:
-    wxDECLARE_ABSTRACT_CLASS(wxSockAddress);
 };
 
 // An IP address (either IPv4 or IPv6)
