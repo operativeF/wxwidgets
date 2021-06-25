@@ -74,7 +74,7 @@ protected:
     // auto-completion uses COM under Windows so they won't work without
     // wxUSE_OLE as OleInitialize() is not called then
 #if wxUSE_OLE
-    bool DoAutoCompleteStrings(const wxArrayString& choices) override;
+    bool DoAutoCompleteStrings(const std::vector<wxString>& choices) override;
 #if wxUSE_DYNLIB_CLASS
     bool DoAutoCompleteFileNames(int flags) override;
 #endif // wxUSE_DYNLIB_CLASS

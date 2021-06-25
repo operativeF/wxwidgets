@@ -311,7 +311,7 @@ int wxFileSystemWatcherBase::GetWatchedPathsCount() const
 }
 
 // TODO: Return a std::vector
-int wxFileSystemWatcherBase::GetWatchedPaths(wxArrayString* paths) const
+int wxFileSystemWatcherBase::GetWatchedPaths(std::vector<wxString>* paths) const
 {
     wxCHECK_MSG( paths != nullptr, -1, "Null array passed to retrieve paths");
 

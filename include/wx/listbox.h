@@ -21,9 +21,6 @@
 
 #include "wx/ctrlsub.h"         // base class
 
-// forward declarations are enough here
-class WXDLLIMPEXP_FWD_BASE wxArrayString;
-
 // ----------------------------------------------------------------------------
 // global data
 // ----------------------------------------------------------------------------
@@ -47,7 +44,7 @@ public:
 
     void InsertItems(unsigned int nItems, const wxString *items, unsigned int pos)
         { Insert(nItems, items, pos); }
-    void InsertItems(const wxArrayString& items, unsigned int pos)
+    void InsertItems(const std::vector<wxString>& items, unsigned int pos)
         { Insert(items, pos); }
 
     // multiple selection logic

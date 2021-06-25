@@ -113,15 +113,16 @@ bool wxPathList::Add(const wxString& path)
         return false;
 
     wxString toadd = fn.GetPath();
-    if (Index(toadd) == wxNOT_FOUND)
-        wxArrayString::Add(toadd);      // do not add duplicates
+
+    if (std::find(m_paths.cbegin(), m_paths.cend(), toadd) == m_paths.cend())
+        m_paths.push_back(toadd);      // do not add duplicates
 
     return true;
 }
 
-void wxPathList::Add(const wxArrayString &arr)
+void wxPathList::Add(const std::vector<wxString> &arr)
 {
-    for (size_t j=0; j < arr.GetCount(); j++)
+    for (size_t j=0; j < arr.size(); j++)
         Add(arr[j]);
 }
 
@@ -144,7 +145,8 @@ void wxPathList::AddEnvList (const wxString& envVariable)
     {
         // split into an array of string the value of the env var
         const std::vector<wxString> arr = wxStringTokenize(val, PATH_TOKS);
-        WX_APPEND_ARRAY(*this, arr);
+
+        m_paths.insert(m_paths.end(), arr.begin(), arr.end());
     }
 }
 
@@ -177,9 +179,9 @@ wxString wxPathList::FindValidPath (const wxString& file) const
     else
         strend = fn.GetFullPath();
 
-    for (size_t i=0; i<GetCount(); i++)
+    for (size_t i=0; i < m_paths.size(); i++)
     {
-        wxString strstart = Item(i);
+        wxString strstart = m_paths[i];
         if (!strstart.IsEmpty() && strstart.Last() != wxFileName::GetPathSeparator())
             strstart += wxFileName::GetPathSeparator();
 

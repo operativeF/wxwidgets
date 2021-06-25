@@ -247,7 +247,7 @@ void wxGenericCalendarCtrl::CreateMonthComboBox()
                                   wxEmptyString,
                                   wxDefaultPosition,
                                   wxDefaultSize,
-                                  0, nullptr,
+                                  {},
                                   wxCB_READONLY | wxCLIP_SIBLINGS);
 
     wxDateTime::Month m;

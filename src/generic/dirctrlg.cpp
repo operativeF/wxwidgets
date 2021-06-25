@@ -1219,7 +1219,7 @@ bool wxDirFilterListCtrl::Create(wxGenericDirCtrl* parent,
                                  long style)
 {
     m_dirCtrl = parent;
-    return wxChoice::Create(parent, treeid, pos, size, 0, nullptr, style);
+    return wxChoice::Create(parent, treeid, pos, size, {}, style);
 }
 
 void wxDirFilterListCtrl::OnSelFilter(wxCommandEvent& WXUNUSED(event))

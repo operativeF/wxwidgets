@@ -346,7 +346,7 @@ public:
      * TODO think about API here: we need to return more information (like is
      * the path watched recursively)
      */
-    int GetWatchedPaths(wxArrayString* paths) const;
+    int GetWatchedPaths(std::vector<wxString>* paths) const;
 
     wxEvtHandler* GetOwner() const
     {

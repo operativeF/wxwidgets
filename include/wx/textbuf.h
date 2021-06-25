@@ -189,7 +189,7 @@ protected:
 
 private:
     wxArrayLinesType m_aTypes;   // type of each line
-    wxArrayString    m_aLines;   // lines of file
+    std::vector<wxString>    m_aLines;   // lines of file
 
     size_t        m_nCurLine{0}; // number of current line in the buffer
 

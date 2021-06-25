@@ -50,7 +50,7 @@ wxREGISTER_UNIT_TEST_WITH_TAGS(ChoiceTestCase,
 
 void ChoiceTestCase::setUp()
 {
-    m_choice = new wxChoice(wxTheApp->GetTopWindow(), wxID_ANY);
+    m_choice = new wxChoice(wxTheApp->GetTopWindow(), wxID_ANY, wxDefaultPosition, wxDefaultSize);
 }
 
 void ChoiceTestCase::tearDown()
@@ -63,7 +63,7 @@ void ChoiceTestCase::Sort()
 #if !defined(__WXOSX__)
     wxDELETE(m_choice);
     m_choice = new wxChoice(wxTheApp->GetTopWindow(), wxID_ANY,
-                            wxDefaultPosition, wxDefaultSize, 0, 0,
+                            wxDefaultPosition, wxDefaultSize, {},
                             wxCB_SORT);
 
     wxArrayString testitems;

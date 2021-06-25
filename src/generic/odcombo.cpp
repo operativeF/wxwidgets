@@ -65,7 +65,7 @@ bool wxVListBoxComboPopup::Create(wxWindow* parent)
 
     m_useFont = m_combo->GetFont();
 
-    wxVListBox::SetItemCount(m_strings.GetCount());
+    wxVListBox::SetItemCount(m_strings.size());
 
     // TODO: Move this to SetFont
     m_itemHeight = m_combo->GetCharHeight();
@@ -513,7 +513,7 @@ void wxVListBoxComboPopup::Insert( const wxString& item, int pos )
         m_value++;
     }
 
-    m_strings.Insert(item,pos);
+    m_strings.insert(std::cbegin(m_strings) + pos, item);
     if ( (int)m_clientDatas.size() >= pos )
         m_clientDatas.insert(m_clientDatas.begin()+pos, NULL);
 
@@ -526,16 +526,16 @@ void wxVListBoxComboPopup::Insert( const wxString& item, int pos )
 
 int wxVListBoxComboPopup::Append(const wxString& item)
 {
-    int pos = (int)m_strings.GetCount();
+    int pos = (int)m_strings.size();
 
     if ( m_combo->GetWindowStyle() & wxCB_SORT )
     {
         // Find position
         // TODO: Could be optimized with binary search
-        const wxArrayString& strings = m_strings;
-        for ( size_t i=0; i<strings.GetCount(); i++ )
+        const std::vector<wxString>& strings = m_strings;
+        for ( size_t i=0; i<strings.size(); i++ )
         {
-            if ( item.CmpNoCase(strings.Item(i)) <= 0 )
+            if ( item.CmpNoCase(strings[i]) <= 0 )
             {
                 pos = (int)i;
                 break;
@@ -552,7 +552,7 @@ void wxVListBoxComboPopup::Clear()
 {
     wxASSERT(m_combo);
 
-    m_strings.Empty();
+    m_strings.clear();
     m_widths.clear();
 
     m_widestWidth = 0;
@@ -606,8 +606,8 @@ void wxVListBoxComboPopup::Delete( unsigned int item )
         m_clientDatas.erase(m_clientDatas.begin()+item);
     }
 
-    m_strings.RemoveAt(item);
-    m_widths.erase(m_widths.begin()+item);
+    m_strings.erase(m_strings.begin() + item);
+    m_widths.erase(m_widths.begin() + item);
 
     if ( (int)item == m_widestItem )
         m_findWidest = true;
@@ -626,22 +626,40 @@ void wxVListBoxComboPopup::Delete( unsigned int item )
 
 int wxVListBoxComboPopup::FindString(const wxString& s, bool bCase) const
 {
-    return m_strings.Index(s, bCase);
+    const auto possibleMatch = std::find_if(m_strings.cbegin(), m_strings.cend(),
+        [s, bCase](const auto& str){
+            return s.IsSameAs(str, bCase);
+    });
+
+    if(possibleMatch == m_strings.cend())
+    {
+        return wxNOT_FOUND;
+    }
+    else
+    {
+        return std::distance(std::cbegin(m_strings), possibleMatch);
+    }
 }
 
 bool wxVListBoxComboPopup::FindItem(const wxString& item, wxString* trueItem)
 {
-    int idx = m_strings.Index(item, false);
-    if ( idx == wxNOT_FOUND )
+    int idx = std::find_if(m_strings.cbegin(), m_strings.cend(),
+        [item](const auto& str){
+            return item.IsSameAs(str, false);
+    }) - m_strings.cbegin();
+
+    // TODO: Verify this.
+    if (idx == m_strings.size())
         return false;
     if ( trueItem != nullptr )
         *trueItem = m_strings[idx];
     return true;
 }
 
+// TODO: Mismatch type return
 unsigned int wxVListBoxComboPopup::GetCount() const
 {
-    return m_strings.GetCount();
+    return m_strings.size();
 }
 
 wxString wxVListBoxComboPopup::GetString( int item ) const
@@ -683,14 +701,15 @@ int wxVListBoxComboPopup::GetSelection() const
 
 void wxVListBoxComboPopup::SetStringValue( const wxString& value )
 {
-    int index = m_strings.Index(value);
+    const auto index = std::find(m_strings.cbegin(), m_strings.cend(), value);
 
     m_stringValue = value;
 
-    if ( index >= 0 && index < (int)wxVListBox::GetItemCount() )
+    if ( index != std::cend(m_strings) &&
+       ( index - std::cbegin(m_strings) < wxVListBox::GetItemCount()))
     {
-        wxVListBox::SetSelection(index);
-        m_value = index;
+        wxVListBox::SetSelection(index - std::cbegin(m_strings));
+        m_value = index - m_strings.cbegin();
     }
 }
 
@@ -789,7 +808,7 @@ wxSize wxVListBoxComboPopup::GetAdjustedSize( int minWidth, int prefHeight, int 
 
     maxHeight -= 2;  // Must take borders into account
 
-    if ( m_strings.GetCount() )
+    if ( !m_strings.empty() )
     {
         if ( prefHeight > 0 )
             height = prefHeight;
@@ -828,14 +847,14 @@ wxSize wxVListBoxComboPopup::GetAdjustedSize( int minWidth, int prefHeight, int 
 }
 
 //void wxVListBoxComboPopup::Populate( int n, const wxString choices[] )
-void wxVListBoxComboPopup::Populate( const wxArrayString& choices )
+void wxVListBoxComboPopup::Populate( const std::vector<wxString>& choices )
 {
-    int n = choices.GetCount();
+    int n = choices.size();
 
     for ( int i=0; i<n; i++ )
     {
-        const wxString& item = choices.Item(i);
-        m_strings.Add(item);
+        const wxString& item = choices[i];
+        m_strings.push_back(item);
     }
 
     m_widths.resize(n,-1);
@@ -846,12 +865,12 @@ void wxVListBoxComboPopup::Populate( const wxArrayString& choices )
 
     // Sort the initial choices
     if ( m_combo->GetWindowStyle() & wxCB_SORT )
-        m_strings.Sort();
-
+        std::sort(m_strings.begin(), m_strings.end());
     // Find initial selection
     wxString strValue = m_combo->GetValue();
+    // TODO: Check for out of bounds?
     if ( !strValue.empty() )
-        m_value = m_strings.Index(strValue);
+        m_value = std::find(m_strings.cbegin(), m_strings.cend(), strValue) - m_strings.cbegin();
 }
 
 // ----------------------------------------------------------------------------
@@ -881,7 +900,7 @@ wxOwnerDrawnComboBox::wxOwnerDrawnComboBox(wxWindow *parent,
                                            const wxString& value,
                                            const wxPoint& pos,
                                            const wxSize& size,
-                                           const wxArrayString& choices,
+                                           const std::vector<wxString>& choices,
                                            long style,
                                            const wxValidator& validator,
                                            const wxString& name)
@@ -897,7 +916,7 @@ bool wxOwnerDrawnComboBox::Create(wxWindow *parent,
                                   const wxString& value,
                                   const wxPoint& pos,
                                   const wxSize& size,
-                                  const wxArrayString& choices,
+                                  const std::vector<wxString>& choices,
                                   long style,
                                   const wxValidator& validator,
                                   const wxString& name)
@@ -930,7 +949,7 @@ bool wxOwnerDrawnComboBox::Create(wxWindow *parent,
     }
 
     for ( int i=0; i<n; i++ )
-        m_initChs.Add(choices[i]);
+        m_initChs.push_back(choices[i]);
 
     return true;
 }
@@ -956,7 +975,7 @@ void wxOwnerDrawnComboBox::DoSetPopupControl(wxComboPopup* popup)
     if ( !GetVListBoxComboPopup()->GetCount() )
     {
         GetVListBoxComboPopup()->Populate(m_initChs);
-        m_initChs.Clear();
+        m_initChs.clear();
     }
 }
 
@@ -991,10 +1010,11 @@ void wxOwnerDrawnComboBox::DoDeleteOneItem(unsigned int n)
     GetVListBoxComboPopup()->Delete(n);
 }
 
+// TODO: Type mismatch
 unsigned int wxOwnerDrawnComboBox::GetCount() const
 {
     if ( !m_popupInterface )
-        return m_initChs.GetCount();
+        return m_initChs.size();
 
     return GetVListBoxComboPopup()->GetCount();
 }
@@ -1004,7 +1024,7 @@ wxString wxOwnerDrawnComboBox::GetString(unsigned int n) const
     wxCHECK_MSG( IsValid(n), wxEmptyString, wxT("invalid index in wxOwnerDrawnComboBox::GetString") );
 
     if ( !m_popupInterface )
-        return m_initChs.Item(n);
+        return m_initChs[n];
 
     return GetVListBoxComboPopup()->GetString(n);
 }
@@ -1020,8 +1040,12 @@ void wxOwnerDrawnComboBox::SetString(unsigned int n, const wxString& s)
 
 int wxOwnerDrawnComboBox::FindString(const wxString& s, bool bCase) const
 {
+    // TODO: OOB?
     if ( !m_popupInterface )
-        return m_initChs.Index(s, bCase);
+        return std::find_if(m_initChs.cbegin(), m_initChs.cend(),
+            [s, bCase](const auto& str){
+                return s.IsSameAs(str, bCase);
+        }) - m_initChs.cbegin();
 
     return GetVListBoxComboPopup()->FindString(s, bCase);
 }
@@ -1049,8 +1073,9 @@ void wxOwnerDrawnComboBox::Select(int n)
 
 int wxOwnerDrawnComboBox::GetSelection() const
 {
+    // TODO: OOB?
     if ( !m_popupInterface )
-        return m_initChs.Index(m_valueString);
+        return std::find(m_initChs.cbegin(), m_initChs.cend(), m_valueString) - m_initChs.cbegin();
 
     return GetVListBoxComboPopup()->GetSelection();
 }

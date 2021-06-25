@@ -1583,15 +1583,14 @@ void wxPreviewControlBar::CreateButtons()
     {
         sizer.AddButton(wxID_PREVIEW_ZOOM_OUT, wxART_MINUS, _("Zoom Out"));
 
-        wxString choices[] =
+        std::vector<wxString> choices =
         {
             wxT("10%"), wxT("15%"), wxT("20%"), wxT("25%"), wxT("30%"), wxT("35%"), wxT("40%"), wxT("45%"), wxT("50%"), wxT("55%"),
                 wxT("60%"), wxT("65%"), wxT("70%"), wxT("75%"), wxT("80%"), wxT("85%"), wxT("90%"), wxT("95%"), wxT("100%"), wxT("110%"),
                 wxT("120%"), wxT("150%"), wxT("200%")
         };
-        int n = WXSIZEOF(choices);
 
-        m_zoomControl = new wxChoice( this, wxID_PREVIEW_ZOOM, wxDefaultPosition, wxSize(70,wxDefaultCoord), n, choices, 0 );
+        m_zoomControl = new wxChoice( this, wxID_PREVIEW_ZOOM, wxDefaultPosition, wxSize(70,wxDefaultCoord), choices, 0 );
         sizer.Add(m_zoomControl);
         SetZoomControl(m_printPreview->GetZoom());
 

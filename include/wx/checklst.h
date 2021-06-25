@@ -26,10 +26,10 @@ class WXDLLIMPEXP_CORE wxCheckListBoxBase : public wxListBox
 public:
     wxCheckListBoxBase() = default;
 
-   wxCheckListBoxBase(const wxCheckListBoxBase&) = delete;
-   wxCheckListBoxBase& operator=(const wxCheckListBoxBase&) = delete;
-   wxCheckListBoxBase(wxCheckListBoxBase&&) = default;
-   wxCheckListBoxBase& operator=(wxCheckListBoxBase&&) = default;
+    wxCheckListBoxBase(const wxCheckListBoxBase&) = delete;
+    wxCheckListBoxBase& operator=(const wxCheckListBoxBase&) = delete;
+    wxCheckListBoxBase(wxCheckListBoxBase&&) = default;
+    wxCheckListBoxBase& operator=(wxCheckListBoxBase&&) = default;
     
     // check list box specific methods
     virtual bool IsChecked(unsigned int item) const = 0;

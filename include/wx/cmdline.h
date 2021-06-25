@@ -347,7 +347,7 @@ public:
     void Reset();
 
     // break down the command line in arguments
-    static wxArrayString
+    static std::vector<wxString>
     ConvertStringToArgs(const wxString& cmdline,
                         wxCmdLineSplitType type = wxCMD_LINE_SPLIT_DOS);
 
@@ -368,7 +368,7 @@ private:
 class WXDLLIMPEXP_BASE wxCmdLineParser
 {
 public:
-    static wxArrayString
+    static std::vector<wxString>
     ConvertStringToArgs(const wxString& cmdline,
                         wxCmdLineSplitType type = wxCMD_LINE_SPLIT_DOS);
 };

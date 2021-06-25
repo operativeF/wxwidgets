@@ -647,9 +647,10 @@ int wxSizerXmlHandler::GetSizerFlags()
     wxStringTokenizer tkn(s, wxS("| \t\n"), wxTOKEN_STRTOK);
     while ( tkn.HasMoreTokens() )
     {
+        // TODO: Verify this.
         const wxString flagName = tkn.GetNextToken();
-        const int n = m_styleNames.Index(flagName);
-        if ( n == wxNOT_FOUND )
+        const int n = std::find(m_styleNames.cbegin(), m_styleNames.cend(), flagName) - std::cbegin(m_styleNames);
+        if ( n == m_styleNames.size() )
         {
             ReportParamError
             (

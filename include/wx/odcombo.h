@@ -108,7 +108,7 @@ public:
     int GetSelection() const;
 
     //void Populate( int n, const wxString choices[] );
-    void Populate( const wxArrayString& choices );
+    void Populate( const std::vector<wxString>& choices );
     void ClearClientDatas();
 
     // helpers
@@ -176,7 +176,7 @@ protected:
     // Stop partial completion (when some other event occurs)
     void StopPartialCompletion();
 
-    wxArrayString           m_strings;
+    std::vector<wxString>   m_strings;
     std::vector<void*>      m_clientDatas;
 
     wxFont                  m_useFont;
@@ -273,7 +273,7 @@ public:
                          const wxString& value = wxEmptyString,
                          const wxPoint& pos = wxDefaultPosition,
                          const wxSize& size = wxDefaultSize,
-                         const wxArrayString& choices = wxArrayString(),
+                         const std::vector<wxString>& choices = {},
                          long style = 0,
                          const wxValidator& validator = wxDefaultValidator,
                          const wxString& name = wxASCII_STR(wxComboCtrlNameStr));
@@ -294,7 +294,7 @@ public:
                 const wxString& value,
                 const wxPoint& pos,
                 const wxSize& size,
-                const wxArrayString& choices,
+                const std::vector<wxString>& choices,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxComboCtrlNameStr));
@@ -377,6 +377,7 @@ protected:
         return (wxVListBoxComboPopup*) m_popupInterface;
     }
 
+    // TODO: Use std::span
     int DoInsertItems(const wxArrayStringsAdapter& items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
@@ -386,7 +387,7 @@ protected:
     // temporary storage for the initial choices
     //const wxString*         m_baseChoices;
     //int                     m_baseChoicesCount;
-    wxArrayString           m_initChs;
+    std::vector<wxString>           m_initChs;
 
 private:
     

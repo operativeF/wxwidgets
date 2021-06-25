@@ -14,7 +14,6 @@
 #include "wx/string.h"
 #include "wx/platinfo.h"
 
-class WXDLLIMPEXP_FWD_BASE wxArrayString;
 class WXDLLIMPEXP_FWD_BASE wxConfigBase;
 class WXDLLIMPEXP_FWD_BASE wxEventLoopBase;
 #if wxUSE_FONTMAP
@@ -154,8 +153,8 @@ public:
     // line options parsed automatically by current port: if this string is
     // empty, there are no such options, otherwise the function also fills
     // passed arrays with the names and the descriptions of those options.
-    virtual wxString GetStandardCmdLineOptions(wxArrayString& names,
-                                               wxArrayString& desc) const
+    virtual wxString GetStandardCmdLineOptions(std::vector<wxString>& names,
+                                               std::vector<wxString>& desc) const
     {
         wxUnusedVar(names);
         wxUnusedVar(desc);

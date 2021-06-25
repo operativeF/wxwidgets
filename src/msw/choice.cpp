@@ -48,7 +48,7 @@ bool wxChoice::Create(wxWindow *parent,
                       wxWindowID id,
                       const wxPoint& pos,
                       const wxSize& size,
-                      int n, const wxString choices[],
+                      const std::vector<wxString>& choices,
                       long style,
                       const wxValidator& validator,
                       const wxString& name)
@@ -61,7 +61,7 @@ bool wxChoice::Create(wxWindow *parent,
                   wxT("this style flag is ignored by wxChoice, you ")
                   wxT("probably want to use a wxComboBox") );
 
-    return CreateAndInit(parent, id, pos, size, n, choices, style,
+    return CreateAndInit(parent, id, pos, size, choices, style,
                          validator, name);
 }
 
@@ -69,7 +69,7 @@ bool wxChoice::CreateAndInit(wxWindow *parent,
                              wxWindowID id,
                              const wxPoint& pos,
                              const wxSize& size,
-                             int n, const wxString choices[],
+                             const std::vector<wxString>& choices,
                              long style,
                              const wxValidator& validator,
                              const wxString& name)
@@ -84,7 +84,7 @@ bool wxChoice::CreateAndInit(wxWindow *parent,
 
 
     // initialize the controls contents
-    Append(n, choices);
+    Append(choices.size(), choices.data());
 
     // and now we may finally size the control properly (if needed)
     SetInitialSize(size);
@@ -106,34 +106,6 @@ void wxChoice::SetLabel(const wxString& label)
 
     wxChoiceBase::SetLabel(label);
 }
-
-bool wxChoice::Create(wxWindow *parent,
-                      wxWindowID id,
-                      const wxPoint& pos,
-                      const wxSize& size,
-                      const wxArrayString& choices,
-                      long style,
-                      const wxValidator& validator,
-                      const wxString& name)
-{
-    wxCArrayString chs(choices);
-    return Create(parent, id, pos, size, chs.GetCount(), chs.GetStrings(),
-                  style, validator, name);
-}
-
-bool wxChoice::Create(wxWindow* parent,
-    wxWindowID id,
-    const wxPoint& pos,
-    const wxSize& size,
-    const std::vector<wxString>& choices,
-    long style,
-    const wxValidator& validator,
-    const wxString& name)
-{
-    return Create(parent, id, pos, size, choices.size(), choices.data(),
-        style, validator, name);
-}
-
 
 bool wxChoice::MSWShouldPreProcessMessage(WXMSG *pMsg)
 {

@@ -14,7 +14,6 @@
 // and should probably be replaced with int anyhow)
 using wxTextPos = long;
 
-class WXDLLIMPEXP_FWD_BASE wxArrayString;
 class WXDLLIMPEXP_FWD_CORE wxTextCompleter;
 class WXDLLIMPEXP_FWD_CORE wxTextEntryHintData;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
@@ -114,7 +113,7 @@ public:
     // commonly meaning that this functionality is not available under the
     // current platform)
 
-    bool AutoComplete(const wxArrayString& choices)
+    bool AutoComplete(const std::vector<wxString>& choices)
         { return DoAutoCompleteStrings(choices); }
 
     bool AutoCompleteFileNames()
@@ -242,7 +241,7 @@ protected:
     // auto-completion, they do the same thing as their public counterparts but
     // have different names to allow overriding just one of them without hiding
     // the other one(s)
-    virtual bool DoAutoCompleteStrings(const wxArrayString& WXUNUSED(choices))
+    virtual bool DoAutoCompleteStrings(const std::vector<wxString>& WXUNUSED(choices))
         { return false; }
     virtual bool DoAutoCompleteFileNames(int WXUNUSED(flags)) // wxFILE | wxDIR
         { return false; }

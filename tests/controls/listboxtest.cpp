@@ -77,7 +77,7 @@ void ListBoxTestCase::setUp()
     if( ms_ownerdrawn )
     {
         m_list = new wxListBox(wxTheApp->GetTopWindow(), wxID_ANY,
-                               wxDefaultPosition, wxSize(300, 200), 0, NULL,
+                               wxDefaultPosition, wxSize(300, 200), {},
                                wxLB_OWNERDRAW);
     }
     else
@@ -97,7 +97,7 @@ void ListBoxTestCase::Sort()
 #ifndef __WXOSX__
     wxDELETE(m_list);
     m_list = new wxListBox(wxTheApp->GetTopWindow(), wxID_ANY,
-                            wxDefaultPosition, wxDefaultSize, 0, 0,
+                            wxDefaultPosition, wxDefaultSize, {},
                             wxLB_SORT);
 
     wxArrayString testitems;
@@ -128,7 +128,7 @@ void ListBoxTestCase::MultipleSelect()
 {
     wxDELETE(m_list);
     m_list = new wxListBox(wxTheApp->GetTopWindow(), wxID_ANY,
-                            wxDefaultPosition, wxDefaultSize, 0, 0,
+                            wxDefaultPosition, wxDefaultSize, {},
                             wxLB_MULTIPLE);
 
     wxArrayString testitems;

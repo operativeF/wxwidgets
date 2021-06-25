@@ -365,7 +365,8 @@ bool wxExtHelpController::KeywordSearch(const wxString& k,
    if (! m_NumOfEntries)
       return false;
 
-   wxString *choices = new wxString[m_NumOfEntries];
+   std::vector<wxString> choices(m_NumOfEntries);
+
    wxString *urls = new wxString[m_NumOfEntries];
 
    int          idx = 0;
@@ -437,11 +438,11 @@ bool wxExtHelpController::KeywordSearch(const wxString& k,
         if (showAll)
             idx = wxGetSingleChoiceIndex(_("Help Index"),
                                          _("Help Index"),
-                                         idx, choices);
+                                         choices);
         else
             idx = wxGetSingleChoiceIndex(_("Relevant entries:"),
                                          _("Entries found"),
-                                         idx, choices);
+                                         choices);
 
         if (idx >= 0)
             rc = DisplayHelp(urls[idx]);
@@ -449,7 +450,6 @@ bool wxExtHelpController::KeywordSearch(const wxString& k,
     }
 
     delete [] urls;
-    delete [] choices;
 
     return rc;
 }

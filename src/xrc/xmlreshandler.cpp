@@ -28,7 +28,7 @@ wxXmlResourceHandlerImplBase* wxXmlResourceHandler::GetImpl() const
 
 void wxXmlResourceHandler::AddStyle(const wxString& name, int value)
 {
-    m_styleNames.Add(name);
+    m_styleNames.push_back(name);
     m_styleValues.push_back(value);
 }
 

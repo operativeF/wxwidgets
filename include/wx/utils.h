@@ -28,9 +28,6 @@
     #include <vector>
 #endif
 
-class WXDLLIMPEXP_FWD_BASE wxArrayString;
-class WXDLLIMPEXP_FWD_BASE wxArrayInt;
-
 // need this for wxGetDiskSpace() as we can't, unfortunately, forward declare
 // wxLongLong
 #include "wx/longlong.h"
@@ -467,7 +464,7 @@ WXDLLIMPEXP_BASE bool wxShell(const wxString& command = wxEmptyString);
 
 // As wxShell(), but must give a (non interactive) command and its output will
 // be returned in output array
-WXDLLIMPEXP_BASE bool wxShell(const wxString& command, wxArrayString& output);
+WXDLLIMPEXP_BASE bool wxShell(const wxString& command, std::vector<wxString>& output);
 
 // Sleep for nSecs seconds
 WXDLLIMPEXP_BASE void wxSleep(int nSecs);

@@ -204,7 +204,7 @@ wxTextFileType wxTextBuffer::GuessType() const
 
     // we take MAX_LINES_SCAN in the beginning, middle and the end of buffer
     static constexpr int MAX_LINES_SCAN = 10;
-    const size_t nCount = m_aLines.GetCount() / 3;
+    const size_t nCount = m_aLines.size() / 3;
     const size_t nScan =  nCount > 3*MAX_LINES_SCAN ? MAX_LINES_SCAN : nCount / 3;
 
     #define   AnalyseLine(n)              \

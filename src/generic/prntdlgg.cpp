@@ -821,7 +821,7 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
       new wxStaticBox(this,wxPRINTID_STATIC, _("Paper size")), wxHORIZONTAL );
 
     size_t      n = wxThePrintPaperDatabase->GetCount();
-    wxString   *choices = new wxString [n];
+    std::vector<wxString> choices(n);
 
     for (size_t i = 0; i < n; i++)
     {
@@ -834,7 +834,7 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
                                         _("Paper size"),
                                         wxDefaultPosition,
                                         wxSize(300, wxDefaultCoord),
-                                        n, choices );
+                                        choices );
     topsizer->Add( m_paperTypeChoice, 1, wxEXPAND|wxALL, 5 );
 //  m_paperTypeChoice->SetSelection(sel);
 
@@ -842,11 +842,11 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
 
     // 2) middle sizer with radio box
 
-    wxString *choices2 = new wxString[2];
+    std::vector<wxString> choices2(2);
     choices2[0] = _("Portrait");
     choices2[1] = _("Landscape");
     m_orientationRadioBox = new wxRadioBox(this, wxPRINTID_ORIENTATION, _("Orientation"),
-        wxDefaultPosition, wxDefaultSize, 2, choices2, 2);
+        wxDefaultPosition, wxDefaultSize, choices2, 2);
     m_orientationRadioBox->SetSelection(0);
 
     mainsizer->Add( m_orientationRadioBox, 0, wxTOP|wxLEFT|wxRIGHT, 10 );
@@ -914,9 +914,6 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
     Centre(wxBOTH);
 
     InitDialog();
-
-    delete[] choices;
-    delete [] choices2;
 }
 
 wxGenericPageSetupDialog::~wxGenericPageSetupDialog()
@@ -1019,7 +1016,7 @@ wxComboBox *wxGenericPageSetupDialog::CreatePaperTypeChoice(int *x, int *y)
 */
 
     size_t      n = wxThePrintPaperDatabase->GetCount();
-    wxString   *choices = new wxString [n];
+    std::vector<wxString> choices(n);
 
     for (size_t i = 0; i < n; i++)
     {
@@ -1035,9 +1032,8 @@ wxComboBox *wxGenericPageSetupDialog::CreatePaperTypeChoice(int *x, int *y)
                                          _("Paper size"),
                                          wxPoint(*x, *y),
                                          wxSize(300, wxDefaultCoord),
-                                         n, choices );
+                                         choices );
     *y += 35;
-    delete[] choices;
 
 //    choice->SetSelection(sel);
     return choice;

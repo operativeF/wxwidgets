@@ -461,7 +461,7 @@ bool wxComboBox::Create(wxWindow *parent, wxWindowID id,
                         const wxString& value,
                         const wxPoint& pos,
                         const wxSize& size,
-                        int n, const wxString choices[],
+                        const std::vector<wxString>& choices,
                         long style,
                         const wxValidator& validator,
                         const wxString& name)
@@ -471,7 +471,7 @@ bool wxComboBox::Create(wxWindow *parent, wxWindowID id,
     // some noticeable flicker while the control rearranges itself
     m_isShown = false;
 
-    if ( !CreateAndInit(parent, id, pos, size, n, choices, style,
+    if ( !CreateAndInit(parent, id, pos, size, choices, style,
                         validator, name) )
         return false;
 
@@ -493,20 +493,6 @@ bool wxComboBox::Create(wxWindow *parent, wxWindowID id,
     Show(true);
 
     return true;
-}
-
-bool wxComboBox::Create(wxWindow *parent, wxWindowID id,
-                        const wxString& value,
-                        const wxPoint& pos,
-                        const wxSize& size,
-                        const wxArrayString& choices,
-                        long style,
-                        const wxValidator& validator,
-                        const wxString& name)
-{
-    wxCArrayString chs(choices);
-    return Create(parent, id, value, pos, size, chs.GetCount(),
-                  chs.GetStrings(), style, validator, name);
 }
 
 WXDWORD wxComboBox::MSWGetStyle(long style, WXDWORD *exstyle) const

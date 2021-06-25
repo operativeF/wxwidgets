@@ -464,9 +464,9 @@ void wxCmdLineParserData::SetArguments(const wxString& cmdLine)
     else
         m_arguments.push_back(wxEmptyString);
 
-    wxArrayString args = wxCmdLineParser::ConvertStringToArgs(cmdLine);
+    std::vector<wxString> args = wxCmdLineParser::ConvertStringToArgs(cmdLine);
 
-    WX_APPEND_ARRAY(m_arguments, args);
+    m_arguments.insert(m_arguments.end(), args.begin(), args.end()); 
 }
 
 int wxCmdLineParserData::FindOption(const wxString& name)
@@ -1300,7 +1300,8 @@ wxString wxCmdLineParser::GetUsageString() const
     // help message below because we want to align the options descriptions
     // and for this we must first know the longest one of them
     wxString usage;
-    wxArrayString namesOptions, descOptions;
+    std::vector<wxString> namesOptions;
+    std::vector<wxString> descOptions;
 
     if ( !m_data->m_logo.empty() )
     {
@@ -1564,11 +1565,11 @@ static wxString GetLongOptionName(wxString::const_iterator p,
  */
 
 /* static */
-wxArrayString
+std::vector<wxString>
 wxCmdLineParser::ConvertStringToArgs(const wxString& cmdline,
                                      wxCmdLineSplitType type)
 {
-    wxArrayString args;
+    std::vector<wxString> args;
 
     wxString arg;
     arg.reserve(1024);

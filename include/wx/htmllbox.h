@@ -225,7 +225,7 @@ public:
                         wxWindowID id,
                         const wxPoint& pos,
                         const wxSize& size,
-                        const wxArrayString& choices,
+                        const std::vector<wxString>& choices,
                         long style = wxHLB_DEFAULT_STYLE,
                         const wxValidator& validator = wxDefaultValidator,
                         const wxString& name = wxASCII_STR(wxSimpleHtmlListBoxNameStr))
@@ -243,7 +243,7 @@ public:
     bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos,
                 const wxSize& size,
-                const wxArrayString& choices,
+                const std::vector<wxString>& choices,
                 long style = wxHLB_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxSimpleHtmlListBoxNameStr));
@@ -266,13 +266,14 @@ public:
     // accessing strings
     // -----------------
 
+    // TODO: Type mismatch
     unsigned int GetCount() const override
-        { return m_items.GetCount(); }
+        { return m_items.size(); }
 
     wxString GetString(unsigned int n) const override;
 
     // override default unoptimized wxItemContainer::GetStrings() function
-    wxArrayString GetStrings() const
+    std::vector<wxString> GetStrings() const
         { return m_items; }
 
     void SetString(unsigned int n, const wxString& s) override;
@@ -316,8 +317,8 @@ protected:
             wxVListBox::InitEvent(event, n);
         }
 
-    wxArrayString   m_items;
-    std::vector<void*>  m_HTMLclientData;
+    std::vector<wxString>   m_items;
+    std::vector<void*>      m_HTMLclientData;
 
     // Note: For the benefit of old compilers (like gcc-2.8) this should
     // not be named m_clientdata as that clashes with the name of an

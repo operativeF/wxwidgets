@@ -820,7 +820,7 @@ bool wxSearchCtrl::SetBackgroundColour(const wxColour& colour)
 
 
 // Autocomplete
-bool wxSearchCtrl::DoAutoCompleteStrings(const wxArrayString &choices)
+bool wxSearchCtrl::DoAutoCompleteStrings(const std::vector<wxString> &choices)
 {
     return m_text->AutoComplete( choices );
 }

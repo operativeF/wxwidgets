@@ -60,8 +60,7 @@ wxObject *wxBitmapComboBoxXmlHandler::DoCreateResource()
                         GetID(),
                         GetText(wxT("value")),
                         GetPosition(), GetSize(),
-                        0,
-                        nullptr,
+                        {},
                         GetStyle(),
                         wxDefaultValidator,
                         GetName());

@@ -1548,10 +1548,11 @@ int wxXmlResourceHandlerImpl::GetStyle(const wxString& param, int defaults)
     while (tkn.HasMoreTokens())
     {
         fl = tkn.GetNextToken();
-        index = m_handler->m_styleNames.Index(fl);
-        if (index != wxNOT_FOUND)
+        const auto index = std::find(m_handler->m_styleNames.cbegin(), m_handler->m_styleNames.cend(), fl);
+
+        if (index != m_handler->m_styleNames.cend())
         {
-            style |= m_handler->m_styleValues[index];
+            style |= m_handler->m_styleValues[index - std::cbegin(m_handler->m_styleNames)];
         }
         else
         {

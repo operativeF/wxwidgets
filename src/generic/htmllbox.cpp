@@ -625,7 +625,7 @@ bool wxSimpleHtmlListBox::Create(wxWindow *parent, wxWindowID id,
 bool wxSimpleHtmlListBox::Create(wxWindow *parent, wxWindowID id,
                                  const wxPoint& pos,
                                  const wxSize& size,
-                                 const wxArrayString& choices,
+                                 const std::vector<wxString>& choices,
                                  long style,
                                  const wxValidator& wxVALIDATOR_PARAM(validator),
                                  const wxString& name)
@@ -649,9 +649,9 @@ wxSimpleHtmlListBox::~wxSimpleHtmlListBox()
 
 void wxSimpleHtmlListBox::DoClear()
 {
-    wxASSERT(m_items.GetCount() == m_HTMLclientData.size());
+    wxASSERT(m_items.size() == m_HTMLclientData.size());
 
-    m_items.Clear();
+    m_items.clear();
     m_HTMLclientData.clear();
 
     UpdateCount();
@@ -676,7 +676,7 @@ void wxSimpleHtmlListBox::DoDeleteOneItem(unsigned int n)
         }
     }
 
-    m_items.RemoveAt(n);
+    m_items.erase(std::begin(m_items) + n);
 
     m_HTMLclientData.erase(std::begin(m_HTMLclientData) + n);
 
@@ -690,7 +690,7 @@ int wxSimpleHtmlListBox::DoInsertItems(const wxArrayStringsAdapter& items,
 {
     const unsigned int count = items.GetCount();
 
-    m_items.Insert(wxEmptyString, pos, count);
+    m_items.insert(std::begin(m_items) + pos, count, wxEmptyString);
     m_HTMLclientData.insert(std::begin(m_HTMLclientData) + pos, count, nullptr);
 
     for ( unsigned int i = 0; i < count; ++i, ++pos )
@@ -723,8 +723,8 @@ wxString wxSimpleHtmlListBox::GetString(unsigned int n) const
 
 void wxSimpleHtmlListBox::UpdateCount()
 {
-    wxASSERT(m_items.GetCount() == m_HTMLclientData.size());
-    wxHtmlListBox::SetItemCount(m_items.GetCount());
+    wxASSERT(m_items.size() == m_HTMLclientData.size());
+    wxHtmlListBox::SetItemCount(m_items.size());
 
     // very small optimization: if you need to add lot of items to
     // a wxSimpleHtmlListBox be sure to use the

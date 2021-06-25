@@ -416,7 +416,7 @@ protected:
     wxWindow* GetParentAsWindow() const       { return m_parentAsWindow; }
 
 
-    wxArrayString m_styleNames;
+    std::vector<wxString> m_styleNames;
     std::vector<int> m_styleValues;
 
     friend class wxXmlResourceHandlerImpl;

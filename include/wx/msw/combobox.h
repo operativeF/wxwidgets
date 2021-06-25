@@ -14,6 +14,8 @@
 #include "wx/choice.h"
 #include "wx/textentry.h"
 
+#include <vector>
+
 #if wxUSE_COMBOBOX
 
 class WXDLLIMPEXP_CORE wxComboBox : public wxChoice,
@@ -26,19 +28,7 @@ public:
             const wxString& value = wxEmptyString,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
-            int n = 0, const wxString choices[] = nullptr,
-            long style = 0,
-            const wxValidator& validator = wxDefaultValidator,
-            const wxString& name = wxASCII_STR(wxComboBoxNameStr))
-    {
-        Create(parent, id, value, pos, size, n, choices, style, validator, name);
-    }
-
-    wxComboBox(wxWindow *parent, wxWindowID id,
-            const wxString& value,
-            const wxPoint& pos,
-            const wxSize& size,
-            const wxArrayString& choices,
+            const std::vector<wxString>& choices = {},
             long style = 0,
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxComboBoxNameStr))
@@ -53,20 +43,10 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& value = wxEmptyString,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                int n = 0,
-                const wxString choices[] = nullptr,
-                long style = 0,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxComboBoxNameStr));
-    bool Create(wxWindow *parent,
-                wxWindowID id,
                 const wxString& value,
                 const wxPoint& pos,
                 const wxSize& size,
-                const wxArrayString& choices,
+                const std::vector<wxString>& choices,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxComboBoxNameStr));

@@ -609,11 +609,11 @@ private:
 
 
 // Path searching
-class WXDLLIMPEXP_BASE wxPathList : public wxArrayString
+class WXDLLIMPEXP_BASE wxPathList
 {
 public:
     wxPathList() = default;
-    wxPathList(const wxArrayString &arr)
+    wxPathList(const std::vector<wxString> &arr)
         { Add(arr); }
 
     // Adds all paths in environment variable
@@ -621,7 +621,7 @@ public:
 
     // Adds given path to this list
     bool Add(const wxString& path);
-    void Add(const wxArrayString &paths);
+    void Add(const std::vector<wxString> &paths);
 
     // Find the first full path for which the file exists
     wxString FindValidPath(const wxString& filename) const;
@@ -632,6 +632,9 @@ public:
 
     // Given full path and filename, add path to list
     bool EnsureFileAccessible(const wxString& path);
+
+private:
+    std::vector<wxString> m_paths;
 };
 
 #endif // _WX_FILEFN_H_

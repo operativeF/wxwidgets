@@ -24,6 +24,8 @@
 #include "itemcontainertest.h"
 #include "testableframe.h"
 
+#include <array>
+
 // ----------------------------------------------------------------------------
 // test class
 // ----------------------------------------------------------------------------
@@ -159,7 +161,7 @@ void ComboBoxTestCase::Sort()
 #if !defined(__WXOSX__)
     delete m_combo;
     m_combo = new wxComboBox(wxTheApp->GetTopWindow(), wxID_ANY, "",
-                             wxDefaultPosition, wxDefaultSize, 0, NULL,
+                             wxDefaultPosition, wxDefaultSize, {},
                              wxCB_SORT);
 
     m_combo->Append("aaa");
@@ -237,11 +239,11 @@ TEST_CASE("wxComboBox::ProcessEnter", "[wxComboBox][enter]")
     public:
         wxControl* Create(wxWindow* parent, int style) const override
         {
-            const wxString choices[] = { "foo", "bar", "baz" };
+            std::vector<wxString> choices = { "foo", "bar", "baz" };
 
             return new wxComboBox(parent, wxID_ANY, wxString(),
                                   wxDefaultPosition, wxDefaultSize,
-                                  WXSIZEOF(choices), choices,
+                                  choices,
                                   style);
         }
     };

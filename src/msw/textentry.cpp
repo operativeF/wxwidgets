@@ -460,7 +460,7 @@ public:
         return m_autoComplete && m_autoCompleteDropDown && m_enumStrings;
     }
 
-    void ChangeStrings(const wxArrayString& strings)
+    void ChangeStrings(const std::vector<wxString>& strings)
     {
         if ( !m_fixedCompleter )
             m_fixedCompleter = new wxTextCompleterFixed;
@@ -877,7 +877,7 @@ bool wxTextEntry::MSWEnsureHasAutoCompleteData()
     return true;
 }
 
-bool wxTextEntry::DoAutoCompleteStrings(const wxArrayString& choices)
+bool wxTextEntry::DoAutoCompleteStrings(const std::vector<wxString>& choices)
 {
     if ( !MSWEnsureHasAutoCompleteData() )
         return false;
@@ -923,7 +923,7 @@ bool wxTextEntry::DoAutoCompleteFileNames(int flags)
     return wxTextEntryBase::DoAutoCompleteFileNames(flags);
 }
 
-bool wxTextEntry::DoAutoCompleteStrings(const wxArrayString& choices)
+bool wxTextEntry::DoAutoCompleteStrings(const std::vector<wxString>& choices)
 {
     return wxTextEntryBase::DoAutoCompleteStrings(choices);
 }

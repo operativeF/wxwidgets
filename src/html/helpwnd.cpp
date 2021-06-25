@@ -418,7 +418,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
             m_Bookmarks = new wxComboBox(dummy, wxID_HTML_BOOKMARKSLIST,
                                          wxEmptyString,
                                          wxDefaultPosition, wxDefaultSize,
-                                         0, nullptr, comboStyle);
+                                         {}, comboStyle);
             m_Bookmarks->Append(_("(bookmarks)"));
             for (unsigned i = 0; i < m_BookmarksNames.GetCount(); i++)
                 m_Bookmarks->Append(m_BookmarksNames[i]);
@@ -499,7 +499,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
                                             wxALIGN_RIGHT | wxST_NO_AUTORESIZE);
         m_IndexList = new wxListBox(dummy, wxID_HTML_INDEXLIST,
                                     wxDefaultPosition, wxDefaultSize,
-                                    0, nullptr, wxLB_SINGLE);
+                                    {}, wxLB_SINGLE);
 
 #if wxUSE_TOOLTIPS
         m_IndexButton->SetToolTip(_("Display all index items that contain given substring. Search is case insensitive."));
@@ -541,7 +541,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
 #endif //wxUSE_TOOLTIPS
         m_SearchList = new wxListBox(dummy, wxID_HTML_SEARCHLIST,
                                      wxDefaultPosition, wxDefaultSize,
-                                     0, nullptr, wxLB_SINGLE);
+                                     {}, wxLB_SINGLE);
 
         sizer->Add(m_SearchText, 0, wxEXPAND | wxALL, 10);
         sizer->Add(m_SearchChoice, 0, wxEXPAND | wxLEFT | wxRIGHT | wxBOTTOM, 10);
@@ -1212,11 +1212,11 @@ public:
 
         sizer->Add(NormalFont = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition,
                       wxSize(200, wxDefaultCoord),
-                      0, nullptr, wxCB_DROPDOWN | wxCB_READONLY));
+                      {}, wxCB_DROPDOWN | wxCB_READONLY));
 
         sizer->Add(FixedFont = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition,
                       wxSize(200, wxDefaultCoord),
-                      0, nullptr, wxCB_DROPDOWN | wxCB_READONLY));
+                      {}, wxCB_DROPDOWN | wxCB_READONLY));
 
         sizer->Add(FontSize = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition,
                       wxDefaultSize, wxSP_ARROW_KEYS, 2, 100, 2, wxT("wxSpinCtrl")));

@@ -15,6 +15,8 @@
   #error  "wxCheckListBox class requires owner-drawn functionality."
 #endif
 
+#include <vector>
+
 class WXDLLIMPEXP_FWD_CORE wxOwnerDrawn;
 class WXDLLIMPEXP_FWD_CORE wxCheckListBoxItem; // fwd decl, defined in checklst.cpp
 
@@ -26,35 +28,20 @@ public:
     wxCheckListBox(wxWindow *parent, wxWindowID id,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   int nStrings = 0,
-                   const wxString choices[] = nullptr,
-                   long style = 0,
-                   const wxValidator& validator = wxDefaultValidator,
-                   const wxString& name = wxASCII_STR(wxListBoxNameStr));
-    wxCheckListBox(wxWindow *parent, wxWindowID id,
-                   const wxPoint& pos,
-                   const wxSize& size,
-                   const wxArrayString& choices,
+                   const std::vector<wxString>& choices = {},
                    long style = 0,
                    const wxValidator& validator = wxDefaultValidator,
                    const wxString& name = wxASCII_STR(wxListBoxNameStr));
 
-wxCheckListBox(const wxCheckListBox&) = delete;
-   wxCheckListBox& operator=(const wxCheckListBox&) = delete;
-   wxCheckListBox(wxCheckListBox&&) = default;
-   wxCheckListBox& operator=(wxCheckListBox&&) = default;
+    wxCheckListBox(const wxCheckListBox&) = delete;
+    wxCheckListBox& operator=(const wxCheckListBox&) = delete;
+    wxCheckListBox(wxCheckListBox&&) = default;
+    wxCheckListBox& operator=(wxCheckListBox&&) = default;
 
     bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                int n = 0, const wxString choices[] = nullptr,
-                long style = 0,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxListBoxNameStr));
-    bool Create(wxWindow *parent, wxWindowID id,
-                const wxPoint& pos,
-                const wxSize& size,
-                const wxArrayString& choices,
+                const std::vector<wxString>& choices = {},
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxListBoxNameStr));

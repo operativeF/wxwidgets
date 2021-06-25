@@ -142,8 +142,7 @@ bool wxRadioBox::Create(wxWindow *parent,
                         const wxString& title,
                         const wxPoint& pos,
                         const wxSize& size,
-                        int n,
-                        const wxString choices[],
+                        const std::vector<wxString>& choices,
                         int majorDim,
                         long style,
                         const wxValidator& val,
@@ -171,9 +170,9 @@ bool wxRadioBox::Create(wxWindow *parent,
     // well and we just want to ignore it until destroying it.
     // For instance, we don't want the bounding box of the radio
     // buttons to include the dummy button
-    m_radioButtons = new wxSubwindows(n);
+    m_radioButtons = new wxSubwindows(choices.size());
 
-    for ( int i = 0; i < n; i++ )
+    for ( int i = 0; i < choices.size(); i++ )
     {
         long styleBtn = BS_AUTORADIOBUTTON | WS_TABSTOP | WS_CHILD | WS_VISIBLE;
         if ( i == 0 )
@@ -219,9 +218,9 @@ bool wxRadioBox::Create(wxWindow *parent,
 
     m_radioButtons->SetFont(GetFont());
 
-    SetMajorDim(majorDim == 0 ? n : majorDim, style);
+    SetMajorDim(majorDim == 0 ? choices.size() : majorDim, style);
     // Select the first radio button if we have any buttons at all.
-    if ( n > 0 )
+    if ( !choices.empty() )
         SetSelection(0);
     SetSize(pos.x, pos.y, size.x, size.y);
 
@@ -239,22 +238,6 @@ bool wxRadioBox::Create(wxWindow *parent,
     m_container.EnableSelfFocus();
 
     return true;
-}
-
-bool wxRadioBox::Create(wxWindow *parent,
-                        wxWindowID id,
-                        const wxString& title,
-                        const wxPoint& pos,
-                        const wxSize& size,
-                        const wxArrayString& choices,
-                        int majorDim,
-                        long style,
-                        const wxValidator& val,
-                        const wxString& name)
-{
-    wxCArrayString chs(choices);
-    return Create(parent, id, title, pos, size, chs.GetCount(),
-                  chs.GetStrings(), majorDim, style, val, name);
 }
 
 wxRadioBox::~wxRadioBox()

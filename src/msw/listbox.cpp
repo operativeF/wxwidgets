@@ -76,7 +76,7 @@ bool wxListBox::Create(wxWindow *parent,
                        wxWindowID id,
                        const wxPoint& pos,
                        const wxSize& size,
-                       int n, const wxString choices[],
+                       const std::vector<wxString>& choices,
                        long style,
                        const wxValidator& validator,
                        const wxString& name)
@@ -93,7 +93,7 @@ bool wxListBox::Create(wxWindow *parent,
     }
 
     // initialize the contents
-    for ( int i = 0; i < n; i++ )
+    for ( int i = 0; i < choices.size(); i++ )
     {
         Append(choices[i]);
     }
@@ -102,20 +102,6 @@ bool wxListBox::Create(wxWindow *parent,
     SetInitialSize(size);
 
     return true;
-}
-
-bool wxListBox::Create(wxWindow *parent,
-                       wxWindowID id,
-                       const wxPoint& pos,
-                       const wxSize& size,
-                       const wxArrayString& choices,
-                       long style,
-                       const wxValidator& validator,
-                       const wxString& name)
-{
-    wxCArrayString chs(choices);
-    return Create(parent, id, pos, size, chs.GetCount(), chs.GetStrings(),
-                  style, validator, name);
 }
 
 wxListBox::~wxListBox()

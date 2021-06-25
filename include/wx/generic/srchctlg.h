@@ -160,7 +160,7 @@ public:
     void SetEditable(bool editable) override;
 
     // Autocomplete
-    bool DoAutoCompleteStrings(const wxArrayString &choices) override;
+    bool DoAutoCompleteStrings(const std::vector<wxString> &choices) override;
     bool DoAutoCompleteFileNames(int flags) override;
     bool DoAutoCompleteCustom(wxTextCompleter *completer) override;
 

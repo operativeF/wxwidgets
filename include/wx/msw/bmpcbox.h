@@ -13,6 +13,7 @@
 
 #include "wx/combobox.h"
 
+#include <vector>
 
 // ----------------------------------------------------------------------------
 // wxBitmapComboBox: a wxComboBox that allows images to be shown
@@ -31,45 +32,23 @@ public:
                      const wxString& value = wxEmptyString,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     int n = 0,
-                     const wxString choices[] = nullptr,
+                     const std::vector<wxString>& choices = {},
                      long style = 0,
                      const wxValidator& validator = wxDefaultValidator,
                      const wxString& name = wxASCII_STR(wxBitmapComboBoxNameStr))
         
           
     {
-        (void)Create(parent, id, value, pos, size, n,
+        (void)Create(parent, id, value, pos, size,
                      choices, style, validator, name);
     }
 
-    wxBitmapComboBox(wxWindow *parent,
-                     wxWindowID id,
-                     const wxString& value,
-                     const wxPoint& pos,
-                     const wxSize& size,
-                     const wxArrayString& choices,
-                     long style,
-                     const wxValidator& validator = wxDefaultValidator,
-                     const wxString& name = wxASCII_STR(wxBitmapComboBoxNameStr));
-
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& value,
                 const wxPoint& pos,
                 const wxSize& size,
-                int n,
-                const wxString choices[],
-                long style = 0,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxBitmapComboBoxNameStr));
-
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxString& value,
-                const wxPoint& pos,
-                const wxSize& size,
-                const wxArrayString& choices,
+                const std::vector<wxString>& choices,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxBitmapComboBoxNameStr));

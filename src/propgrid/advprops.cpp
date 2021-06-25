@@ -2030,8 +2030,7 @@ bool wxMultiChoiceProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& v
     wxMultiChoiceDialog dlg( pg->GetPanel(),
                              _("Make a selection:"),
                              m_dlgTitle.empty() ? GetLabel() : m_dlgTitle,
-                             choiceCount,
-                             choiceCount?&labels[0]:nullptr,
+                             labels,
                              m_dlgStyle );
 
     dlg.Move( pg->GetGoodEditorDialogPosition(this,dlg.GetSize()) );

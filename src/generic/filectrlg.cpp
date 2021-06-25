@@ -938,7 +938,7 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
     m_text = new wxTextCtrl( this, ID_TEXT, wxEmptyString,
                              wxDefaultPosition, wxDefaultSize,
                              wxTE_PROCESS_ENTER );
-    m_choice = new wxChoice( this, ID_CHOICE );
+    m_choice = new wxChoice( this, ID_CHOICE, wxDefaultPosition, wxDefaultSize );
 
     if ( is_pda )
     {

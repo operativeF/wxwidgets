@@ -109,7 +109,7 @@ public:
     bool IsEmpty() const { return m_args.empty(); }
 
     // access the arguments as a convenient array of wxStrings
-    const wxArrayString& GetArguments() const { return m_args; }
+    const std::vector<wxString>& GetArguments() const { return m_args; }
 
     ~wxCmdLineArgsArray()
     {
@@ -137,7 +137,7 @@ private:
         Free(m_argsW);
     }
 
-    wxArrayString m_args;
+    std::vector<wxString> m_args;
     mutable char **m_argsA;
     mutable wchar_t **m_argsW;
 };
