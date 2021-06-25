@@ -147,8 +147,6 @@ protected:
     // returns right part of address:
     // {it returns "/README.txt" for "file:subdir/archive.tar.gz#tar:/README.txt"}
     static wxString GetRightLocation(const wxString& location);
-
-    wxDECLARE_ABSTRACT_CLASS(wxFileSystemHandler);
 };
 
 

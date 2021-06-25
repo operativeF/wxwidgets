@@ -2147,7 +2147,8 @@ wxSizer* wxAuiManager::LayoutAll(wxAuiPaneInfoArray& panes,
     }
 
     // remove any empty docks
-    for (size_t i = docks.GetCount() - 1; i >= 0; --i)
+    // FIXME: Underflow with size_t, just use an algorithm.
+    for (int i = docks.GetCount() - 1; i >= 0; --i)
     {
         if (docks.Item(i).panes.GetCount() == 0)
             docks.RemoveAt(i);
