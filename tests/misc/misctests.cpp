@@ -38,7 +38,6 @@ private:
         CPPUNIT_TEST( CallForEach );
 #endif // HAVE_VARIADIC_MACROS
         CPPUNIT_TEST( Delete );
-        CPPUNIT_TEST( StaticCast );
     CPPUNIT_TEST_SUITE_END();
 
     void Assert();
@@ -129,38 +128,6 @@ bool IsNull(void *p)
 }
 
 } // anonymous namespace
-
-void MiscTestCase::StaticCast()
-{
-#if wxUSE_TARSTREAM
-    wxTarEntry tarEntry;
-    CPPUNIT_ASSERT( wxStaticCast(&tarEntry, wxArchiveEntry) );
-
-    wxArchiveEntry *entry = &tarEntry;
-    CPPUNIT_ASSERT( wxStaticCast(entry, wxTarEntry) );
-
-#if wxUSE_ZIPSTREAM
-    wxZipEntry zipEntry;
-    entry = &zipEntry;
-    CPPUNIT_ASSERT( wxStaticCast(entry, wxZipEntry) );
-    WX_ASSERT_FAILS_WITH_ASSERT( IsNull(wxStaticCast(&zipEntry, wxTarEntry)) );
-#endif // wxUSE_ZIPSTREAM
-
-    WX_ASSERT_FAILS_WITH_ASSERT( IsNull(wxStaticCast(entry, wxTarEntry)) );
-#endif // wxUSE_TARSTREAM
-}
-
-TEST_CASE("RTTI::ClassInfo", "[rtti]")
-{
-    wxObject obj;
-    CHECK( obj.GetClassInfo()->IsKindOf(wxCLASSINFO(wxObject)) );
-    CHECK( !obj.GetClassInfo()->IsKindOf(wxCLASSINFO(wxArchiveEntry)) );
-
-#if wxUSE_ZIPSTREAM
-    wxZipEntry zipEntry;
-    CHECK( zipEntry.GetClassInfo()->IsKindOf(wxCLASSINFO(wxArchiveEntry)) );
-#endif // wxUSE_ZIPSTREAM
-}
 
 TEST_CASE("wxCTZ", "[math]")
 {
