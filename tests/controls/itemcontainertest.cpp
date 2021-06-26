@@ -26,21 +26,21 @@ void ItemContainerTestCase::Append()
 
     CPPUNIT_ASSERT_EQUAL("item 0", container->GetString(0));
 
-    wxArrayString testitems;
-    testitems.Add("item 1");
-    testitems.Add("item 2");
+    std::vector<wxString> testitems;
+    testitems.push_back("item 1");
+    testitems.push_back("item 2");
 
     container->Append(testitems);
 
     CPPUNIT_ASSERT_EQUAL("item 1", container->GetString(1));
     CPPUNIT_ASSERT_EQUAL("item 2", container->GetString(2));
 
-    wxString arritems[] = { "item 3", "item 4" };
+    //wxString arritems[] = { "item 3", "item 4" };
 
-    container->Append(2, arritems);
+    //container->Append(2, arritems);
 
-    CPPUNIT_ASSERT_EQUAL("item 3", container->GetString(3));
-    CPPUNIT_ASSERT_EQUAL("item 4", container->GetString(4));
+    //CPPUNIT_ASSERT_EQUAL("item 3", container->GetString(3));
+    //CPPUNIT_ASSERT_EQUAL("item 4", container->GetString(4));
 }
 
 void ItemContainerTestCase::Insert()
@@ -59,11 +59,11 @@ void ItemContainerTestCase::Insert()
     CPPUNIT_ASSERT_EQUAL("item 1", container->GetString(0));
     CPPUNIT_ASSERT_EQUAL("item 2", container->GetString(1));
 
-    wxString arritems[] = { "item 3", "item 4" };
+    //wxString arritems[] = { "item 3", "item 4" };
 
-    CPPUNIT_ASSERT_EQUAL( 2, container->Insert(2, arritems, 1) );
-    CPPUNIT_ASSERT_EQUAL("item 3", container->GetString(1));
-    CPPUNIT_ASSERT_EQUAL("item 4", container->GetString(2));
+    //CPPUNIT_ASSERT_EQUAL( 2, container->Insert(2, arritems, 1) );
+    //CPPUNIT_ASSERT_EQUAL("item 3", container->GetString(1));
+    //CPPUNIT_ASSERT_EQUAL("item 4", container->GetString(2));
 }
 
 void ItemContainerTestCase::Count()
@@ -238,12 +238,12 @@ void ItemContainerTestCase::Set()
     CPPUNIT_ASSERT_EQUAL(4, container->GetCount());
     CPPUNIT_ASSERT_EQUAL("new item 1", container->GetString(1));
 
-    wxString arrnewitems[] = { "even newer 0", "event newer 1" };
+    //wxString arrnewitems[] = { "even newer 0", "event newer 1" };
 
-    container->Set(2, arrnewitems);
+    //container->Set(2, arrnewitems);
 
-    CPPUNIT_ASSERT_EQUAL(2, container->GetCount());
-    CPPUNIT_ASSERT_EQUAL("even newer 0", container->GetString(0));
+    //CPPUNIT_ASSERT_EQUAL(2, container->GetCount());
+    //CPPUNIT_ASSERT_EQUAL("even newer 0", container->GetString(0));
 }
 
 void ItemContainerTestCase::SetString()

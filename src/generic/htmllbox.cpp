@@ -601,27 +601,6 @@ void wxHtmlListBox::OnLeftDown(wxMouseEvent& event)
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxSimpleHtmlListBox, wxHtmlListBox);
 
-
-bool wxSimpleHtmlListBox::Create(wxWindow *parent, wxWindowID id,
-                                 const wxPoint& pos,
-                                 const wxSize& size,
-                                 int n, const wxString choices[],
-                                 long style,
-                                 const wxValidator& wxVALIDATOR_PARAM(validator),
-                                 const wxString& name)
-{
-    if (!wxHtmlListBox::Create(parent, id, pos, size, style, name))
-        return false;
-
-#if wxUSE_VALIDATORS
-    SetValidator(validator);
-#endif
-
-    Append(n, choices);
-
-    return true;
-}
-
 bool wxSimpleHtmlListBox::Create(wxWindow *parent, wxWindowID id,
                                  const wxPoint& pos,
                                  const wxSize& size,

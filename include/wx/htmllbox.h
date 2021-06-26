@@ -213,19 +213,7 @@ public:
                         wxWindowID id,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        int n = 0, const wxString choices[] = nullptr,
-                        long style = wxHLB_DEFAULT_STYLE,
-                        const wxValidator& validator = wxDefaultValidator,
-                        const wxString& name = wxASCII_STR(wxSimpleHtmlListBoxNameStr))
-    {
-        Create(parent, id, pos, size, n, choices, style, validator, name);
-    }
-
-    wxSimpleHtmlListBox(wxWindow *parent,
-                        wxWindowID id,
-                        const wxPoint& pos,
-                        const wxSize& size,
-                        const std::vector<wxString>& choices,
+                        const std::vector<wxString>& choices = {},
                         long style = wxHLB_DEFAULT_STYLE,
                         const wxValidator& validator = wxDefaultValidator,
                         const wxString& name = wxASCII_STR(wxSimpleHtmlListBoxNameStr))
@@ -233,13 +221,6 @@ public:
         Create(parent, id, pos, size, choices, style, validator, name);
     }
 
-    bool Create(wxWindow *parent, wxWindowID id,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                int n = 0, const wxString choices[] = nullptr,
-                long style = wxHLB_DEFAULT_STYLE,
-                const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxSimpleHtmlListBoxNameStr));
     bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos,
                 const wxSize& size,

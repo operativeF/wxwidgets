@@ -143,6 +143,7 @@ private:
                     void **clientData,
                     wxClientDataType type)
     {
+        // TODO: Why not?
         wxASSERT_MSG( !IsSorted(), wxT("can't insert items in sorted control") );
 
         wxCHECK_MSG( pos <= GetCount(), wxNOT_FOUND,
@@ -203,27 +204,16 @@ public:
 
     // append several items at once to the control, return the position of the
     // last item appended
-    int Append(const wxArrayString& items)
-        { return AppendItems(items); }
-    int Append(const wxArrayString& items, void **clientData)
-        { return AppendItems(items, clientData); }
-    int Append(const wxArrayString& items, wxClientData **clientData)
-        { return AppendItems(items, clientData); }
-    int Append(unsigned int n, const wxString *items)
-        { return AppendItems(wxArrayStringsAdapter(n, items)); }
-    int Append(unsigned int n, const wxString *items, void **clientData)
-        { return AppendItems(wxArrayStringsAdapter(n, items), clientData); }
-    int Append(unsigned int n,
-               const wxString *items,
-               wxClientData **clientData)
-        { return AppendItems(wxArrayStringsAdapter(n, items), clientData); }
-
     int Append(const std::vector<wxString>& items)
         { return AppendItems(items); }
+    int Append(const std::vector<wxString>& items, void **clientData)
+        { return AppendItems(items, clientData); }
+    int Append(const std::vector<wxString>& items, wxClientData **clientData)
+        { return AppendItems(items, clientData); }
 
     // only for RTTI needs (separate name)
-    void AppendString(const wxString& item)
-        { Append(item); }
+    // void AppendString(const wxString& item)
+    //     { Append(item); }
 
 
     // inserting items: not for sorted controls!
@@ -239,48 +229,24 @@ public:
 
     // insert several items at once into the control, return the index of the
     // last item inserted
-    int Insert(const wxArrayString& items, unsigned int pos)
-        { return InsertItems(items, pos); }
-    int Insert(const wxArrayString& items, unsigned int pos, void **clientData)
-        { return InsertItems(items, pos, clientData); }
-    int Insert(const wxArrayString& items,
-               unsigned int pos,
-               wxClientData **clientData)
-        { return InsertItems(items, pos, clientData); }
-    int Insert(unsigned int n, const wxString *items, unsigned int pos)
-        { return InsertItems(wxArrayStringsAdapter(n, items), pos); }
-    int Insert(unsigned int n,
-               const wxString *items,
-               unsigned int pos,
-               void **clientData)
-        { return InsertItems(wxArrayStringsAdapter(n, items), pos, clientData); }
-    int Insert(unsigned int n,
-               const wxString *items,
-               unsigned int pos,
-               wxClientData **clientData)
-        { return InsertItems(wxArrayStringsAdapter(n, items), pos, clientData); }
-
     int Insert(const std::vector<wxString>& items, unsigned int pos)
         { return InsertItems(items, pos); }
+    int Insert(const std::vector<wxString>& items, unsigned int pos, void **clientData)
+        { return InsertItems(items, pos, clientData); }
+    int Insert(const std::vector<wxString>& items,
+               unsigned int pos,
+               wxClientData **clientData)
+        { return InsertItems(items, pos, clientData); }
 
     // replacing items
     // ---------------
 
-    void Set(const wxArrayString& items)
-        { Clear(); Append(items); }
-    void Set(const wxArrayString& items, void **clientData)
-        { Clear(); Append(items, clientData); }
-    void Set(const wxArrayString& items, wxClientData **clientData)
-        { Clear(); Append(items, clientData); }
-    void Set(unsigned int n, const wxString *items)
-        { Clear(); Append(n, items); }
-    void Set(unsigned int n, const wxString *items, void **clientData)
-        { Clear(); Append(n, items, clientData); }
-    void Set(unsigned int n, const wxString *items, wxClientData **clientData)
-        { Clear(); Append(n, items, clientData); }
-
     void Set(const std::vector<wxString>& items)
         { Clear(); Append(items); }
+    void Set(const std::vector<wxString>& items, void **clientData)
+        { Clear(); Append(items, clientData); }
+    void Set(const std::vector<wxString>& items, wxClientData **clientData)
+        { Clear(); Append(items, clientData); }
 
     // deleting items
     // --------------

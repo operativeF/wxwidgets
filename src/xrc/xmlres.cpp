@@ -1543,7 +1543,7 @@ int wxXmlResourceHandlerImpl::GetStyle(const wxString& param, int defaults)
 
     wxStringTokenizer tkn(s, wxT("| \t\n"), wxTOKEN_STRTOK);
     int style = 0;
-    int index;
+
     wxString fl;
     while (tkn.HasMoreTokens())
     {

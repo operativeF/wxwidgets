@@ -42,8 +42,6 @@ public:
    wxListBoxBase(wxListBoxBase&&) = default;
    wxListBoxBase& operator=(wxListBoxBase&&) = default;
 
-    void InsertItems(unsigned int nItems, const wxString *items, unsigned int pos)
-        { Insert(nItems, items, pos); }
     void InsertItems(const std::vector<wxString>& items, unsigned int pos)
         { Insert(items, pos); }
 

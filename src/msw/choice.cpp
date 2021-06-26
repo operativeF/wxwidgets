@@ -84,7 +84,7 @@ bool wxChoice::CreateAndInit(wxWindow *parent,
 
 
     // initialize the controls contents
-    Append(choices.size(), choices.data());
+    Append(choices);
 
     // and now we may finally size the control properly (if needed)
     SetInitialSize(size);
