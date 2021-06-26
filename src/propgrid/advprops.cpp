@@ -1966,7 +1966,7 @@ wxString wxMultiChoiceProperty::ValueToString( wxVariant& value,
 void wxMultiChoiceProperty::GenerateValueAsString( wxVariant& value,
                                                    wxString* target ) const
 {
-    wxArrayString strings;
+    std::vector<wxString> strings;
 
     if ( value.IsType(wxPG_VARIANT_TYPE_ARRSTRING) )
         strings = value.GetArrayString();
@@ -2035,8 +2035,8 @@ bool wxMultiChoiceProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& v
 
     dlg.Move( pg->GetGoodEditorDialogPosition(this,dlg.GetSize()) );
 
-    wxArrayString strings = value.GetArrayString();
-    wxArrayString extraStrings;
+    std::vector<wxString> strings = value.GetArrayString();
+    std::vector<wxString> extraStrings;
 
     dlg.SetSelections(m_choices.GetIndicesForStrings(strings, &extraStrings));
 
@@ -2045,7 +2045,7 @@ bool wxMultiChoiceProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& v
         auto arrInt = dlg.GetSelections();
 
         // Strings that were not in list of choices
-        wxArrayString newValue;
+        std::vector<wxString> newValue;
 
         // Translate string indices to strings
 
@@ -2073,11 +2073,11 @@ bool wxMultiChoiceProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& v
 
 bool wxMultiChoiceProperty::StringToValue( wxVariant& variant, const wxString& text, int ) const
 {
-    wxArrayString arr;
+    std::vector<wxString> arr;
 
     WX_PG_TOKENIZER2_BEGIN(text,wxT('"'))
         if ( m_userStringMode > 0 || (m_choices.IsOk() && m_choices.Index( token ) != wxNOT_FOUND) )
-            arr.Add(token);
+            arr.push_back(token);
     WX_PG_TOKENIZER2_END()
 
     wxVariant v(arr);

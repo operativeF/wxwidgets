@@ -267,13 +267,13 @@ public:
     operator wchar_t() const { return GetChar(); }
     wxUniChar GetChar() const;
 
-    // wxArrayString
-    wxVariant(const wxArrayString& val, const wxString& name = wxEmptyString);
-    bool operator== (const wxArrayString& value) const;
-    bool operator!= (const wxArrayString& value) const;
-    void operator= (const wxArrayString& value);
-    operator wxArrayString () const { return GetArrayString(); }
-    wxArrayString GetArrayString() const;
+    // std::vector<wxString>
+    wxVariant(const std::vector<wxString>& val, const wxString& name = wxEmptyString);
+    bool operator== (const std::vector<wxString>& value) const;
+    bool operator!= (const std::vector<wxString>& value) const;
+    void operator= (const std::vector<wxString>& value);
+    operator std::vector<wxString>() const { return GetArrayString(); }
+    std::vector<wxString> GetArrayString() const;
 
     // void*
     wxVariant(void* ptr, const wxString& name = wxEmptyString);

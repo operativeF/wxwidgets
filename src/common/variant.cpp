@@ -1339,10 +1339,10 @@ class wxVariantDataArrayString: public wxVariantData
 {
 public:
     wxVariantDataArrayString() = default;
-    explicit wxVariantDataArrayString(const wxArrayString& value) : m_value(value) { }
+    explicit wxVariantDataArrayString(const std::vector<wxString>& value) : m_value(value) { }
 
-    wxArrayString GetValue() const { return m_value; }
-    void SetValue(const wxArrayString& value) { m_value = value; }
+    std::vector<wxString> GetValue() const { return m_value; }
+    void SetValue(const std::vector<wxString>& value) { m_value = value; }
 
     bool Eq(wxVariantData& data) const override;
     bool Write(std::ostream& str) const override;
@@ -1354,10 +1354,10 @@ public:
 
     DECLARE_WXANY_CONVERSION()
 protected:
-    wxArrayString m_value;
+    std::vector<wxString> m_value;
 };
 
-IMPLEMENT_TRIVIAL_WXANY_CONVERSION(wxArrayString, wxVariantDataArrayString)
+IMPLEMENT_TRIVIAL_WXANY_CONVERSION(std::vector<wxString>, wxVariantDataArrayString)
 
 bool wxVariantDataArrayString::Eq(wxVariantData& data) const
 {
@@ -1376,7 +1376,7 @@ bool wxVariantDataArrayString::Write(std::ostream& WXUNUSED(str)) const
 
 bool wxVariantDataArrayString::Write(wxString& str) const
 {
-    const size_t count = m_value.GetCount();
+    const size_t count = m_value.size();
     for ( size_t n = 0; n < count; n++ )
     {
         if ( n )
@@ -1401,7 +1401,7 @@ bool wxVariantDataArrayString::Read(wxString& str)
     wxStringTokenizer tk(str, wxT(";"));
     while ( tk.HasMoreTokens() )
     {
-        m_value.Add(tk.GetNextToken());
+        m_value.push_back(tk.GetNextToken());
     }
 
     return true;
@@ -1409,25 +1409,25 @@ bool wxVariantDataArrayString::Read(wxString& str)
 
 // wxVariant
 
-wxVariant::wxVariant(const wxArrayString& val, const wxString& name) // Strings
+wxVariant::wxVariant(const std::vector<wxString>& val, const wxString& name) // Strings
 {
     m_refData = new wxVariantDataArrayString(val);
     m_name = name;
 }
 
-bool wxVariant::operator==(const wxArrayString& WXUNUSED(value)) const
+bool wxVariant::operator==(const std::vector<wxString>& WXUNUSED(value)) const
 {
     wxFAIL_MSG( wxT("TODO") );
 
     return false;
 }
 
-bool wxVariant::operator!=(const wxArrayString& value) const
+bool wxVariant::operator!=(const std::vector<wxString>& value) const
 {
     return !(*this == value);
 }
 
-void wxVariant::operator=(const wxArrayString& value)
+void wxVariant::operator=(const std::vector<wxString>& value)
 {
     if (GetType() == wxT("arrstring") &&
         m_refData->GetRefCount() == 1)
@@ -1441,12 +1441,12 @@ void wxVariant::operator=(const wxArrayString& value)
     }
 }
 
-wxArrayString wxVariant::GetArrayString() const
+std::vector<wxString> wxVariant::GetArrayString() const
 {
     if ( GetType() == wxT("arrstring") )
         return ((wxVariantDataArrayString *)GetData())->GetValue();
 
-    return wxArrayString();
+    return std::vector<wxString>();
 }
 
 // ----------------------------------------------------------------------------

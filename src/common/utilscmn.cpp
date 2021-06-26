@@ -338,7 +338,7 @@ wxPlatform& wxPlatform::Else(const wxString& value)
 void wxPlatform::AddPlatform(int platform)
 {
     if (!sm_customPlatforms)
-        sm_customPlatforms = new wxArrayInt;
+        sm_customPlatforms = new std::vector<int>();
     sm_customPlatforms->push_back(platform);
 }
 

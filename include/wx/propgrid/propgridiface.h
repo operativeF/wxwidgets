@@ -465,10 +465,10 @@ public:
     if ( !value.IsType(PGTypeName) ) \
         return DEFVAL; \
 
-    wxArrayString GetPropertyValueAsArrayString( wxPGPropArg id ) const
+    std::vector<wxString> GetPropertyValueAsArrayString( wxPGPropArg id ) const
     {
         wxPG_PROP_ID_GETPROPVAL_CALL_PROLOG_RETVAL(wxPG_VARIANT_TYPE_ARRSTRING,
-                                                   wxArrayString())
+                                                   std::vector<wxString>())
         return value.GetArrayString();
     }
 

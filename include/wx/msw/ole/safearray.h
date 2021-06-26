@@ -214,7 +214,7 @@ public:
 
         Can be called only for wxSafeArray<VT_BSTR>.
     */
-    bool CreateFromArrayString(const wxArrayString& strings)
+    bool CreateFromArrayString(const std::vector<wxString>& strings)
     {
         wxCHECK(varType == VT_BSTR, false);
 
@@ -330,7 +330,7 @@ public:
         multidimensional, it is flattened using the algorithm originally
         employed in wxConvertOleToVariant().
     */
-    bool ConvertToArrayString(wxArrayString& strings) const
+    bool ConvertToArrayString(std::vector<wxString>& strings) const
     {
         wxCHECK_MSG( m_array, false, wxS("Uninitialized array") );
         wxCHECK(varType == VT_BSTR, false);

@@ -391,14 +391,14 @@ public:
 
     wxEnumProperty( const wxString& label,
                     const wxString& name,
-                    const wxArrayString& labels,
-                    const wxArrayInt& values = wxArrayInt(),
+                    const std::vector<wxString>& labels,
+                    const std::vector<int>& values = {},
                     int value = 0 );
 #else
     wxEnumProperty( const wxString& label = wxPG_LABEL,
                     const wxString& name = wxPG_LABEL,
-                    const wxArrayString& labels = wxArrayString(),
-                    const wxArrayInt& values = wxArrayInt(),
+                    const std::vector<wxString>& labels = {},
+                    const std::vector<int>& values = {},
                     int value = 0 );
 #endif
 
@@ -467,8 +467,8 @@ public:
                         const wxString& value );
     wxEditEnumProperty( const wxString& label = wxPG_LABEL,
                         const wxString& name = wxPG_LABEL,
-                        const wxArrayString& labels = wxArrayString(),
-                        const wxArrayInt& values = wxArrayInt(),
+                        const std::vector<wxString>& labels = {},
+                        const std::vector<int>& values = {},
                         const wxString& value = wxEmptyString );
     wxEditEnumProperty( const wxString& label,
                         const wxString& name,
@@ -522,8 +522,8 @@ public:
 #endif
     wxFlagsProperty( const wxString& label = wxPG_LABEL,
                      const wxString& name = wxPG_LABEL,
-                     const wxArrayString& labels = wxArrayString(),
-                     const wxArrayInt& values = wxArrayInt(),
+                     const std::vector<wxString>& labels = {},
+                     const std::vector<int>& values = {},
                      int value = 0 );
     ~wxFlagsProperty () override;
 
@@ -686,7 +686,7 @@ class WXDLLIMPEXP_PROPGRID wxArrayStringProperty : public wxEditorDialogProperty
 public:
     wxArrayStringProperty( const wxString& label = wxPG_LABEL,
                            const wxString& name = wxPG_LABEL,
-                           const wxArrayString& value = wxArrayString() );
+                           const std::vector<wxString>& value = {} );
     ~wxArrayStringProperty() override;
 
     void OnSetValue() override;
@@ -697,7 +697,7 @@ public:
     bool DoSetAttribute( const wxString& name, wxVariant& value ) override;
 
     // Implement in derived class for custom array-to-string conversion.
-    virtual void ConvertArrayToString(const wxArrayString& arr,
+    virtual void ConvertArrayToString(const std::vector<wxString>& arr,
                                       wxString* pString,
                                       const wxUniChar& delimiter) const;
 
@@ -716,8 +716,8 @@ public:
     };
 
     // Generates contents for string dst based on the contents of
-    // wxArrayString src.
-    static void ArrayStringToString( wxString& dst, const wxArrayString& src,
+    // std::vector<wxString> src.
+    static void ArrayStringToString( wxString& dst, const std::vector<wxString>& src,
                                      wxUniChar delimiter, int flags );
 
 protected:
@@ -940,7 +940,7 @@ public:
     bool OnCustomNewAction(wxString* resString) override;
 
 protected:
-    wxArrayString   m_array;
+    std::vector<wxString>   m_array;
 
     wxArrayStringProperty*     m_pCallingClass;
 

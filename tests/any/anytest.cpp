@@ -623,7 +623,7 @@ void wxAnyTestCase::wxVariantConversions()
     any = wxAny(vArrayString);
     res = any.GetAs(&variant);
     CPPUNIT_ASSERT(res);
-    wxArrayString arrstr2 = variant.GetArrayString();
+    std::vector<wxString> arrstr2 = variant.GetArrayString();
     CPPUNIT_ASSERT(arrstr2 == arrstr);
 
     any = m_testDateTime;

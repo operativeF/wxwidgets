@@ -1131,7 +1131,7 @@ wxEnumProperty::wxEnumProperty( const wxString& label, const wxString& name,
 }
 
 wxEnumProperty::wxEnumProperty( const wxString& label, const wxString& name,
-    const wxArrayString& labels, const wxArrayInt& values, int value )
+    const std::vector<wxString>& labels, const std::vector<int>& values, int value )
     : wxPGProperty(label,name)
 {
     SetIndex(0);
@@ -1336,7 +1336,7 @@ wxEditEnumProperty::wxEditEnumProperty( const wxString& label, const wxString& n
 }
 
 wxEditEnumProperty::wxEditEnumProperty( const wxString& label, const wxString& name,
-    const wxArrayString& labels, const wxArrayInt& values, const wxString& value )
+    const std::vector<wxString>& labels, const std::vector<int>& values, const wxString& value )
     : wxEnumProperty(label,name,labels,values,0)
 {
     SetValue( value );
@@ -1508,7 +1508,7 @@ wxFlagsProperty::wxFlagsProperty( const wxString& label, const wxString& name,
 }
 
 wxFlagsProperty::wxFlagsProperty( const wxString& label, const wxString& name,
-        const wxArrayString& labels, const wxArrayInt& values, int value )
+        const std::vector<wxString>& labels, const std::vector<int>& values, int value )
     : wxPGProperty(label,name)
 {
     m_flags |= wxPG_PROP_USE_DCC; // same default like wxBoolProperty
@@ -2497,9 +2497,9 @@ size_t wxPGArrayStringEditorDialog::ArrayGetCount()
 bool wxPGArrayStringEditorDialog::ArrayInsert( const wxString& str, int index )
 {
     if (index<0)
-        m_array.Add(str);
+        m_array.push_back(str);
     else
-        m_array.Insert(str,index);
+        m_array.insert(m_array.begin() + index, str);
     return true;
 }
 
@@ -2511,7 +2511,7 @@ bool wxPGArrayStringEditorDialog::ArraySet( size_t index, const wxString& str )
 
 void wxPGArrayStringEditorDialog::ArrayRemoveAt( int index )
 {
-    m_array.RemoveAt(index);
+    m_array.erase(m_array.begin() + index);
 }
 
 void wxPGArrayStringEditorDialog::ArraySwap( size_t first, size_t second )
@@ -2544,7 +2544,7 @@ wxPG_IMPLEMENT_PROPERTY_CLASS(wxArrayStringProperty, wxEditorDialogProperty, Tex
 
 wxArrayStringProperty::wxArrayStringProperty( const wxString& label,
                                                         const wxString& name,
-                                                        const wxArrayString& array )
+                                                        const std::vector<wxString>& array )
     : wxEditorDialogProperty(label,name)
     , m_delimiter(',')
 {
@@ -2560,7 +2560,7 @@ void wxArrayStringProperty::OnSetValue()
 }
 
 void
-wxArrayStringProperty::ConvertArrayToString(const wxArrayString& arr,
+wxArrayStringProperty::ConvertArrayToString(const std::vector<wxString>& arr,
                                             wxString* pString,
                                             const wxUniChar& delimiter) const
 {
@@ -2592,7 +2592,7 @@ wxString wxArrayStringProperty::ValueToString( wxVariant& WXUNUSED(value),
         return m_display;
     }
 
-    wxArrayString arr = m_value.GetArrayString();
+    std::vector<wxString> arr = m_value.GetArrayString();
     wxString s;
     ConvertArrayToString(arr, &s, m_delimiter);
     return s;
@@ -2603,13 +2603,13 @@ wxString wxArrayStringProperty::ValueToString( wxVariant& WXUNUSED(value),
 // conversion.
 void
 wxArrayStringProperty::ArrayStringToString( wxString& dst,
-                                            const wxArrayString& src,
+                                            const std::vector<wxString>& src,
                                             wxUniChar delimiter, int flags )
 {
     wxString pdr;
     wxString preas;
 
-    unsigned int itemCount = src.size();
+    const size_t itemCount = src.size();
 
     dst.Empty();
 
@@ -2627,7 +2627,7 @@ wxArrayStringProperty::ArrayStringToString( wxString& dst,
 
     for ( unsigned int i = 0; i < itemCount; i++ )
     {
-        wxString str( src.Item(i) );
+        wxString str( src[i] );
 
         // Do some character conversion.
         // Converts \ to \\ and $delimiter to \$delimiter
@@ -2654,7 +2654,7 @@ wxArrayStringProperty::ArrayStringToString( wxString& dst,
 
 void wxArrayStringProperty::GenerateValueAsString()
 {
-    wxArrayString arr = m_value.GetArrayString();
+    std::vector<wxString> arr = m_value.GetArrayString();
     ConvertArrayToString(arr, &m_display, m_delimiter);
 }
 
@@ -2709,7 +2709,7 @@ bool wxArrayStringProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& v
             wxVariant curValue = dlg->GetDialogValue();
             if ( !curValue.IsNull() )
             {
-                wxArrayString actualValue = curValue.GetArrayString();
+                std::vector<wxString> actualValue = curValue.GetArrayString();
                 wxString tempStr;
                 ConvertArrayToString(actualValue, &tempStr, m_delimiter);
             #if wxUSE_VALIDATORS
