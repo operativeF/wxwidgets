@@ -749,8 +749,7 @@ using wxDocChildFrameBase = wxDocChildFrameAny<wxFrame, wxFrame>;
 class WXDLLIMPEXP_CORE wxDocChildFrame : public wxDocChildFrameBase
 {
 public:
-    wxDocChildFrame()
-    = default;
+    wxDocChildFrame() = default;
 
     wxDocChildFrame(wxDocument *doc,
                     wxView *view,

@@ -109,7 +109,6 @@ public:
     // type such as disk or pipe
   wxFileKind GetKind() const { return wxGetFileKind(m_fd); }
 
-
   // dtor closes the file if opened
   ~wxFile() { Close(); }
 

@@ -54,8 +54,6 @@ private:
     wxArchiveFilenameHashMap *m_DirsFound{nullptr};
 
     wxString DoFind();
-
-    wxDECLARE_DYNAMIC_CLASS(wxArchiveFSHandler);
 };
 
 #endif // wxUSE_FS_ARCHIVE

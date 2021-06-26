@@ -337,7 +337,7 @@ public:
                                int argFlags = 0) const override;
     bool DoSetAttribute( const wxString& name, wxVariant& value ) override;
 
-    wxArrayInt GetValueAsArrayInt() const
+    std::vector<int> GetValueAsArrayInt() const
     {
         return m_choices.GetValuesForStrings(m_value.GetArrayString());
     }
@@ -348,9 +348,9 @@ protected:
     void GenerateValueAsString( wxVariant& value, wxString* target ) const;
 
     // Returns translation of values into string indices.
-    wxArrayInt GetValueAsIndices() const;
+    std::vector<int> GetValueAsIndices() const;
 
-    wxArrayString       m_valueAsStrings;  // Value as array of strings
+    std::vector<wxString>       m_valueAsStrings;  // Value as array of strings
 
     // Cache displayed text since generating it is relatively complicated.
     wxString            m_display;

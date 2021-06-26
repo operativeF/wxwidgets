@@ -218,7 +218,7 @@ bool wxIsPlatformLittleEndian()
  * Class to make it easier to specify platform-dependent values
  */
 
-wxArrayInt*  wxPlatform::sm_customPlatforms = nullptr;
+std::vector<int>*  wxPlatform::sm_customPlatforms = nullptr;
 
 void wxPlatform::Copy(const wxPlatform& platform)
 {
@@ -339,7 +339,7 @@ void wxPlatform::AddPlatform(int platform)
 {
     if (!sm_customPlatforms)
         sm_customPlatforms = new wxArrayInt;
-    sm_customPlatforms->Add(platform);
+    sm_customPlatforms->push_back(platform);
 }
 
 void wxPlatform::ClearPlatforms()
@@ -377,10 +377,8 @@ bool wxPlatform::Is(int platform)
         return true;
 #endif
 
-    if (sm_customPlatforms && sm_customPlatforms->Index(platform) != wxNOT_FOUND)
-        return true;
-
-    return false;
+    return std::find(sm_customPlatforms->cbegin(), sm_customPlatforms->cend(), platform)
+        != sm_customPlatforms->cend();
 }
 
 // ----------------------------------------------------------------------------

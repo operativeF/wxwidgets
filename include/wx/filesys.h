@@ -50,10 +50,10 @@ public:
 
     ~wxFSFile() { delete m_Stream; }
 
-   wxFSFile(const wxFSFile&) = delete;
-   wxFSFile& operator=(const wxFSFile&) = delete;
-   wxFSFile(wxFSFile&&) = default;
-   wxFSFile& operator=(wxFSFile&&) = default;
+    wxFSFile(const wxFSFile&) = delete;
+    wxFSFile& operator=(const wxFSFile&) = delete;
+    wxFSFile(wxFSFile&&) = default;
+    wxFSFile& operator=(wxFSFile&&) = default;
 
     // returns stream. This doesn't give away ownership of the stream object.
     wxInputStream *GetStream() const { return m_Stream; }

@@ -750,7 +750,7 @@ public:
     // labels - Labels for choices.
     // values - Values for choices. If empty, indexes are used.
     wxPGChoices( const std::vector<wxString>& labels,
-                 const wxArrayInt& values = wxArrayInt() )
+                 const std::vector<int>& values = {} )
     {
         Init();
         Add(labels,values);
@@ -780,8 +780,8 @@ public:
     // values - Values for added choices. If empty, relevant entry indexes are used.
     void Add( const wxChar* const* labels, const ValArrItem* values = nullptr );
 
-    // Version that works with wxArrayString and wxArrayInt.
-    void Add( const std::vector<wxString>& arr, const wxArrayInt& arrint = wxArrayInt() );
+    // Version that works with std::vector<wxString> and std::vector<int>.
+    void Add( const std::vector<wxString>& arr, const std::vector<int>& arrint = {} );
 
     // Adds a single choice.
     // label - Label for added choice.
@@ -855,12 +855,12 @@ public:
 
     // Returns array of values matching the given strings. Unmatching strings
     // result in wxPG_INVALID_VALUE entry in array.
-    wxArrayInt GetValuesForStrings( const wxArrayString& strings ) const;
+    std::vector<int> GetValuesForStrings( const std::vector<wxString>& strings ) const;
 
     // Returns array of indices matching given strings. Unmatching strings
     // are added to 'unmatched', if not NULL.
-    wxArrayInt GetIndicesForStrings( const wxArrayString& strings,
-                                     wxArrayString* unmatched = nullptr ) const;
+    std::vector<int> GetIndicesForStrings( const std::vector<wxString>& strings,
+                                     std::vector<wxString>* unmatched = nullptr ) const;
 
     // Returns index of item with given label.
     int Index( const wxString& str ) const;
@@ -914,9 +914,9 @@ public:
     }
 
     // Sets contents from lists of strings and values.
-    // Version that works with wxArrayString and wxArrayInt.
-    void Set( const wxArrayString& labels,
-              const wxArrayInt& values = wxArrayInt() )
+    // Version that works with std::vector<wxString> and std::vector<int>.
+    void Set( const std::vector<wxString>& labels,
+              const std::vector<int>& values = {} )
     {
         Free();
         Add(labels,values);

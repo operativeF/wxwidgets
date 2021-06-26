@@ -244,7 +244,7 @@ private:
     long                m_longValue;
     double              m_doubleValue;
     wxString            m_stringValue;
-    static wxArrayInt*  sm_customPlatforms;
+    static std::vector<int>*  sm_customPlatforms;
 };
 
 /// Function for testing current platform

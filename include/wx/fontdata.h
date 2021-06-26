@@ -62,11 +62,13 @@ public:
 
     // public for backwards compatibility only: don't use directly
     wxColour        m_fontColour;
+    wxFont          m_initialFont;
+    wxFont          m_chosenFont;
+
     bool            m_showHelp{false};
     bool            m_allowSymbols{true};
     bool            m_enableEffects{true};
-    wxFont          m_initialFont;
-    wxFont          m_chosenFont;
+
     int             m_minSize{0};
     int             m_maxSize{0};
 

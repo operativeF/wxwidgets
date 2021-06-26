@@ -2949,18 +2949,18 @@ void wxPGChoices::Add( const wxChar* const* labels, const ValArrItem* values )
 
 // -----------------------------------------------------------------------
 
-void wxPGChoices::Add( const std::vector<wxString>& arr, const wxArrayInt& arrint )
+void wxPGChoices::Add( const std::vector<wxString>& arr, const std::vector<int>& arrint )
 {
     AllocExclusive();
 
-    const unsigned int itemcount = arr.size();
-    const unsigned int valcount = arrint.size();
+    const auto itemcount = arr.size();
+    const auto valcount = arrint.size();
     wxASSERT_MSG( valcount >= itemcount || valcount == 0,
                   wxS("Insufficient number of values in the array") );
 
-    for ( unsigned int i = 0; i < itemcount; i++ )
+    for ( size_t i = 0; i < itemcount; i++ )
     {
-        const int value = (i < valcount) ? arrint[i] : i;
+        const auto value = (i < valcount) ? arrint[i] : i;
         wxPGChoiceEntry entry(arr[i], value);
         m_data->Insert( i, entry );
     }
@@ -3035,9 +3035,9 @@ wxArrayString wxPGChoices::GetLabels() const
 
 // -----------------------------------------------------------------------
 
-wxArrayInt wxPGChoices::GetValuesForStrings( const wxArrayString& strings ) const
+std::vector<int> wxPGChoices::GetValuesForStrings( const std::vector<wxString>& strings ) const
 {
-    wxArrayInt arr;
+    std::vector<int> arr;
 
     if ( IsOk() )
     {
@@ -3045,9 +3045,9 @@ wxArrayInt wxPGChoices::GetValuesForStrings( const wxArrayString& strings ) cons
         {
             int index = Index(strings[i]);
             if ( index >= 0 )
-                arr.Add(GetValue(index));
+                arr.push_back(GetValue(index));
             else
-                arr.Add(wxPG_INVALID_VALUE);
+                arr.push_back(wxPG_INVALID_VALUE);
         }
     }
 
@@ -3056,10 +3056,10 @@ wxArrayInt wxPGChoices::GetValuesForStrings( const wxArrayString& strings ) cons
 
 // -----------------------------------------------------------------------
 
-wxArrayInt wxPGChoices::GetIndicesForStrings( const wxArrayString& strings,
-                                              wxArrayString* unmatched ) const
+std::vector<int> wxPGChoices::GetIndicesForStrings( const std::vector<wxString>& strings,
+                                              std::vector<wxString>* unmatched ) const
 {
-    wxArrayInt arr;
+    std::vector<int> arr;
 
     if ( IsOk() )
     {
@@ -3068,9 +3068,9 @@ wxArrayInt wxPGChoices::GetIndicesForStrings( const wxArrayString& strings,
             const wxString& str = strings[i];
             int index = Index(str);
             if ( index >= 0 )
-                arr.Add(index);
+                arr.push_back(index);
             else if ( unmatched )
-                unmatched->Add(str);
+                unmatched->push_back(str);
         }
     }
 

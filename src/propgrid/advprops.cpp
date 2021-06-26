@@ -1989,18 +1989,18 @@ void wxMultiChoiceProperty::GenerateValueAsString( wxVariant& value,
     }
 }
 
-wxArrayInt wxMultiChoiceProperty::GetValueAsIndices() const
+std::vector<int> wxMultiChoiceProperty::GetValueAsIndices() const
 {
     wxVariant variant = GetValue();
     const wxArrayInt& valueArr = wxArrayIntRefFromVariant(variant);
 
     // Translate values to string indices.
-    wxArrayInt selections;
+    std::vector<int> selections;
 
     if ( !m_choices.IsOk() || !m_choices.GetCount() )
     {
         for ( unsigned int i=0; i<valueArr.size(); i++ )
-            selections.Add(-1);
+            selections.push_back(-1);
     }
     else
     {
@@ -2008,7 +2008,7 @@ wxArrayInt wxMultiChoiceProperty::GetValueAsIndices() const
         {
             int sIndex = m_choices.Index(valueArr[i]);
             if ( sIndex >= 0 )
-                selections.Add(sIndex);
+                selections.push_back(sIndex);
         }
     }
 

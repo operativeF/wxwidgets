@@ -48,10 +48,10 @@ public:
         wxASSERT_MSG( !m_next, "Forgot to call wxEvtHandler::RemoveFilter()?" );
     }
 
-   wxEventFilter(const wxEventFilter&) = delete;
-   wxEventFilter& operator=(const wxEventFilter&) = delete;
-   wxEventFilter(wxEventFilter&&) = default;
-   wxEventFilter& operator=(wxEventFilter&&) = default;
+    wxEventFilter(const wxEventFilter&) = delete;
+    wxEventFilter& operator=(const wxEventFilter&) = delete;
+    wxEventFilter(wxEventFilter&&) = default;
+    wxEventFilter& operator=(wxEventFilter&&) = default;
     
     // This method allows to filter all the events processed by the program, so
     // you should try to return quickly from it to avoid slowing down the
