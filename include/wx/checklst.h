@@ -35,7 +35,7 @@ public:
     virtual bool IsChecked(unsigned int item) const = 0;
     virtual void Check(unsigned int item, bool check = true) = 0;
 
-    virtual std::size_t GetCheckedItemsCount(std::vector<unsigned int>& checkedItems);
+    virtual std::size_t GetCheckedItemsCount(std::vector<int>& checkedItems);
 };
 
 #if defined(__WXUNIVERSAL__)

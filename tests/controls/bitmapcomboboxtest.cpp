@@ -74,7 +74,7 @@ void BitmapComboBoxTestCase::tearDown()
 
 void BitmapComboBoxTestCase::Bitmap()
 {
-    wxArrayString items;
+    std::vector<wxString> items;
     items.push_back("item 0");
     items.push_back("item 1");
     // TODO: Add wxBitmapComboBoxBase::Append(wxArrayString )

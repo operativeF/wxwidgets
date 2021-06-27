@@ -522,7 +522,7 @@ void wxAnyTestCase::wxVariantConversions()
     wxVariant vLongLong(wxLongLong(wxLL(0xAABBBBCCCC)));
     wxVariant vULongLong(wxULongLong(wxULL(123456)));
 #endif
-    wxArrayString arrstr;
+    std::vector<wxString> arrstr;
     arrstr.push_back("test string");
     wxVariant vArrayString(arrstr);
     wxVariant vDateTime(m_testDateTime);

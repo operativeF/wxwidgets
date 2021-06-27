@@ -209,13 +209,13 @@ void LogTraceArray(const char *prefix, CFArrayRef arr)
 
 #endif // wxUSE_LOG_TRACE
 
-wxString GetPreferredUILanguage(const wxArrayString& available)
+wxString GetPreferredUILanguage(const std::vector<wxString>& available)
 {
     wxStringToStringHashMap availableNormalized;
     wxCFRef<CFMutableArrayRef> availableArr(
         CFArrayCreateMutable(kCFAllocatorDefault, 0, &kCFTypeArrayCallBacks));
 
-    for ( wxArrayString::const_iterator i = available.begin();
+    for ( auto i = available.begin();
           i != available.end();
           ++i )
     {
@@ -257,10 +257,10 @@ wxString GetPreferredUILanguage(const wxArrayString& available)
 // The LANGUAGE variable may contain a colon separated list of language
 // codes in the order of preference.
 // http://www.gnu.org/software/gettext/manual/html_node/The-LANGUAGE-variable.html
-wxString GetPreferredUILanguage(const wxArrayString& available)
+wxString GetPreferredUILanguage(const std::vector<wxString>& available)
 {
     wxString languageFromEnv;
-    wxArrayString preferred;
+    std::vector<wxString> preferred;
     if ( wxGetEnv("LANGUAGE", &languageFromEnv) )
     {
         wxStringTokenizer tknzr(languageFromEnv, ":");
@@ -279,7 +279,7 @@ wxString GetPreferredUILanguage(const wxArrayString& available)
     }
 
     LogTraceArray(" - preferred languages from environment", preferred);
-    for ( wxArrayString::const_iterator j = preferred.begin();
+    for ( auto j = preferred.begin();
           j != preferred.end();
           ++j )
     {

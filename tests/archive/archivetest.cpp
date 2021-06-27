@@ -1293,7 +1293,7 @@ ArchiveTestSuite::ArchiveTestSuite(string name)
 // add the command for an external archiver to the list, testing for it in
 // the path first
 //
-void ArchiveTestSuite::AddCmd(wxArrayString& cmdlist, const wxString& cmd)
+void ArchiveTestSuite::AddCmd(std::vector<wxString>& cmdlist, const wxString& cmd)
 {
     if (IsInPath(cmd))
         cmdlist.push_back(cmd);
@@ -1312,7 +1312,7 @@ bool ArchiveTestSuite::IsInPath(const wxString& cmd)
 //
 void ArchiveTestSuite::DoRunTest()
 {
-    typedef wxArrayString::iterator Iter;
+    typedef std::vector<wxString>::iterator Iter;
 
     for (int generic = 0; generic < 2; generic++)
         for (Iter i = m_unarchivers.begin(); i != m_unarchivers.end(); ++i)

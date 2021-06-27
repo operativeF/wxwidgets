@@ -519,7 +519,7 @@ public:
         // to effectively disable auto-completion just fine. We could (and
         // probably should) use IAutoComplete::Enable(FALSE) for this too but
         // then we'd need to call Enable(TRUE) to turn it on back again later.
-        ChangeStrings(wxArrayString());
+        ChangeStrings({});
     }
 
 private:

@@ -1519,7 +1519,7 @@ wxVariant wxPGProperty::GetDefaultValue() const
         if ( valueType == wxPG_VARIANT_TYPE_DOUBLE )
             return wxVariant(0.0);
         if ( valueType == wxPG_VARIANT_TYPE_ARRSTRING )
-            return wxVariant(wxArrayString());
+            return wxVariant(std::vector<wxString>());
 #if wxUSE_LONGLONG
         if ( valueType == wxPG_VARIANT_TYPE_LONGLONG )
             return wxVariant(wxLongLong(0));
@@ -3022,9 +3022,9 @@ int wxPGChoices::Index( int val ) const
 
 // -----------------------------------------------------------------------
 
-wxArrayString wxPGChoices::GetLabels() const
+std::vector<wxString> wxPGChoices::GetLabels() const
 {
-    wxArrayString arr;
+    std::vector<wxString> arr;
 
     if ( IsOk() )
         for ( unsigned int i = 0; i < GetCount(); i++ )

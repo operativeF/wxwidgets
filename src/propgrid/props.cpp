@@ -2287,7 +2287,7 @@ bool wxPGArrayEditorDialog::Create( wxWindow *parent,
     }
 
     // Populate the list box
-    wxArrayString arr;
+    std::vector<wxString> arr;
     for ( unsigned int i=0; i<ArrayGetCount(); i++ )
         arr.push_back(ArrayGet(i));
     m_elb->SetStrings(arr);
@@ -2737,7 +2737,7 @@ bool wxArrayStringProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& v
 bool wxArrayStringProperty::StringToValue( wxVariant& variant,
                                            const wxString& text, int ) const
 {
-    wxArrayString arr;
+    std::vector<wxString> arr;
 
     if ( m_delimiter == '"' || m_delimiter == '\'' )
     {
@@ -2748,7 +2748,7 @@ bool wxArrayStringProperty::StringToValue( wxVariant& variant,
             // (opposite what is done in ConvertArrayToString()).
             token.Replace ( wxS("\\\\"), wxS("\\"), true );
 
-            arr.Add( token );
+            arr.push_back( token );
 
         WX_PG_TOKENIZER2_END()
     }
@@ -2756,7 +2756,7 @@ bool wxArrayStringProperty::StringToValue( wxVariant& variant,
     {
         // Regular delimiter
         WX_PG_TOKENIZER1_BEGIN(text, m_delimiter)
-            arr.Add( token );
+            arr.push_back( token );
         WX_PG_TOKENIZER1_END()
     }
 

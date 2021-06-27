@@ -83,7 +83,7 @@ void SafeArrayConvertTestCase::VariantListDefault()
 void SafeArrayConvertTestCase::VariantStringsDefault()
 {
     wxVariant variant;
-    wxArrayString as;
+    std::vector<wxString> as;
     VARIANT oleVariant;
 
     as.push_back("abc");
@@ -152,7 +152,7 @@ void SafeArrayConvertTestCase::VariantListReturnSafeArray()
 // and then to a wxVariant with the safearray type
 void SafeArrayConvertTestCase::StringsReturnSafeArray()
 {
-    wxArrayString as;
+    std::vector<wxString> as;
     wxSafeArray<VT_BSTR> safeArray;
 
     as.push_back("abc");

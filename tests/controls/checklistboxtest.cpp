@@ -61,12 +61,12 @@ void CheckListBoxTestCase::Check()
 {
     EventCounter toggled(m_check, wxEVT_CHECKLISTBOX);
 
-    wxArrayInt checkedItems;
-    wxArrayString testitems;
-    testitems.Add("item 0");
-    testitems.Add("item 1");
-    testitems.Add("item 2");
-    testitems.Add("item 3");
+    std::vector<int> checkedItems;
+    std::vector<wxString> testitems;
+    testitems.push_back("item 0");
+    testitems.push_back("item 1");
+    testitems.push_back("item 2");
+    testitems.push_back("item 3");
 
     m_check->Append(testitems);
 
@@ -80,13 +80,13 @@ void CheckListBoxTestCase::Check()
     CPPUNIT_ASSERT_EQUAL(false, m_check->IsChecked(1));
 
     // FIXME: No conversion from wxArrayInt to std::vector<unsigned int>
-    //CPPUNIT_ASSERT_EQUAL(1, m_check->GetCheckedItemsCount(checkedItems));
-    //CPPUNIT_ASSERT_EQUAL(0, checkedItems[0]);
+    CPPUNIT_ASSERT_EQUAL(1, m_check->GetCheckedItemsCount(checkedItems));
+    CPPUNIT_ASSERT_EQUAL(0, checkedItems[0]);
 
     //Make sure a double check of an items doesn't deselect it
-    //m_check->Check(0);
+    m_check->Check(0);
 
-    //CPPUNIT_ASSERT_EQUAL(true, m_check->IsChecked(0));
+    CPPUNIT_ASSERT_EQUAL(true, m_check->IsChecked(0));
 }
 
 #endif // wxUSE_CHECKLISTBOX

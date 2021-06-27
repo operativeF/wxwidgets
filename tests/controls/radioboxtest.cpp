@@ -63,7 +63,7 @@ CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( RadioBoxTestCase, "RadioBoxTestCase" );
 
 void RadioBoxTestCase::setUp()
 {
-    wxArrayString choices;
+    std::vector<wxString> choices;
     choices.push_back("item 0");
     choices.push_back("item 1");
     choices.push_back("item 2");
@@ -88,7 +88,7 @@ void RadioBoxTestCase::FindString()
 void RadioBoxTestCase::RowColCount()
 {
 #ifndef __WXGTK__
-    wxArrayString choices;
+    std::vector<wxString> choices;
     choices.push_back("item 0");
     choices.push_back("item 1");
     choices.push_back("item 2");

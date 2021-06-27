@@ -50,9 +50,9 @@ void ItemContainerTestCase::Insert()
     CPPUNIT_ASSERT_EQUAL( 0, container->Insert("item 0", 0) );
     CPPUNIT_ASSERT_EQUAL("item 0", container->GetString(0));
 
-    wxArrayString testitems;
-    testitems.Add("item 1");
-    testitems.Add("item 2");
+    std::vector<wxString> testitems;
+    testitems.push_back("item 1");
+    testitems.push_back("item 2");
 
     CPPUNIT_ASSERT_EQUAL( 1, container->Insert(testitems, 0) );
 
@@ -73,11 +73,11 @@ void ItemContainerTestCase::Count()
     CPPUNIT_ASSERT(container->IsEmpty());
     WX_ASSERT_FAILS_WITH_ASSERT( container->GetString(0) );
 
-    wxArrayString testitems;
-    testitems.Add("item 0");
-    testitems.Add("item 1");
-    testitems.Add("item 2");
-    testitems.Add("item 3");
+    std::vector<wxString> testitems;
+    testitems.push_back("item 0");
+    testitems.push_back("item 1");
+    testitems.push_back("item 2");
+    testitems.push_back("item 3");
 
     container->Append(testitems);
 
@@ -103,11 +103,11 @@ void ItemContainerTestCase::ItemSelection()
 {
     wxItemContainer * const container = GetContainer();
 
-    wxArrayString testitems;
-    testitems.Add("item 0");
-    testitems.Add("item 1");
-    testitems.Add("item 2");
-    testitems.Add("ITEM 2"); // The same as the last one except for case.
+    std::vector<wxString> testitems;
+    testitems.push_back("item 0");
+    testitems.push_back("item 1");
+    testitems.push_back("item 2");
+    testitems.push_back("ITEM 2"); // The same as the last one except for case.
 
     container->Append(testitems);
 
@@ -136,11 +136,11 @@ void ItemContainerTestCase::FindString()
 {
    wxItemContainer * const container = GetContainer();
 
-    wxArrayString testitems;
-    testitems.Add("item 0");
-    testitems.Add("item 1");
-    testitems.Add("item 2");
-    testitems.Add("item 3");
+    std::vector<wxString> testitems;
+    testitems.push_back("item 0");
+    testitems.push_back("item 1");
+    testitems.push_back("item 2");
+    testitems.push_back("item 3");
 
     container->Append(testitems);
 
@@ -221,17 +221,17 @@ void ItemContainerTestCase::Set()
 {
     wxItemContainer * const container = GetContainer();
 
-    wxArrayString testitems;
-    testitems.Add("item 0");
-    testitems.Add("item 1");
+    std::vector<wxString> testitems;
+    testitems.push_back("item 0");
+    testitems.push_back("item 1");
 
     container->Append(testitems);
 
-    wxArrayString newtestitems;
-    newtestitems.Add("new item 0");
-    newtestitems.Add("new item 1");
-    newtestitems.Add("new item 2");
-    newtestitems.Add("new item 3");
+    std::vector<wxString> newtestitems;
+    newtestitems.push_back("new item 0");
+    newtestitems.push_back("new item 1");
+    newtestitems.push_back("new item 2");
+    newtestitems.push_back("new item 3");
 
     container->Set(newtestitems);
 
@@ -250,11 +250,11 @@ void ItemContainerTestCase::SetString()
 {
    wxItemContainer * const container = GetContainer();
 
-    wxArrayString testitems;
-    testitems.Add("item 0");
-    testitems.Add("item 1");
-    testitems.Add("item 2");
-    testitems.Add("item 3");
+    std::vector<wxString> testitems;
+    testitems.push_back("item 0");
+    testitems.push_back("item 1");
+    testitems.push_back("item 2");
+    testitems.push_back("item 3");
 
     container->Append(testitems);
 

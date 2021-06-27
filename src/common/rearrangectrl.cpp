@@ -52,7 +52,7 @@ bool wxRearrangeList::Create(wxWindow *parent,
     const size_t count = items.size();
     wxCHECK_MSG( order.size() == count, false, "arrays not in sync" );
 
-    wxArrayString itemsInOrder;
+    std::vector<wxString> itemsInOrder;
     itemsInOrder.reserve(count);
     // FIXME: Indexing in vector with a different array's size.
     for ( size_t n = 0; n < count; n++ )

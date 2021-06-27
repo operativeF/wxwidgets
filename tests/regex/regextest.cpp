@@ -81,7 +81,7 @@ private:
     wxString m_flags;
     wxString m_pattern;
     wxString m_data;
-    wxArrayString m_expected;
+    std::vector<wxString> m_expected;
 
     // the flag decoded
     int m_compileFlags;
@@ -199,7 +199,7 @@ void RegExTestCase::runTest()
 
     // Provide more information about the test case if it fails.
     wxString str;
-    wxArrayString::const_iterator it;
+    std::vector<wxString>::const_iterator it;
 
     str << (wxChar)m_mode << wxT(" ") << m_id << wxT(" ") << m_flags << wxT(" ")
         << quote(m_pattern) << wxT(" ") << quote(m_data);

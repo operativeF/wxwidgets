@@ -46,7 +46,7 @@ private:
     void GetName();
 
     void CreateTempFile(const wxString& path);
-    wxArrayString DirEnumHelper(wxDir& dir,
+    std::vector<wxString> DirEnumHelper(wxDir& dir,
                                int flags = wxDIR_DEFAULT,
                                const wxString& filespec = wxEmptyString);
 
@@ -95,11 +95,11 @@ void DirTestCase::tearDown()
     wxDir::Remove(DIRTEST_FOLDER, wxPATH_RMDIR_RECURSIVE);
 }
 
-wxArrayString DirTestCase::DirEnumHelper(wxDir& dir,
+std::vector<wxString> DirTestCase::DirEnumHelper(wxDir& dir,
                                          int flags,
                                          const wxString& filespec)
 {
-    wxArrayString ret;
+    std::vector<wxString> ret;
     CPPUNIT_ASSERT( dir.IsOpened() );
 
     wxString filename;
@@ -143,7 +143,7 @@ void DirTestCase::Enum()
 class TestDirTraverser : public wxDirTraverser
 {
 public:
-    wxArrayString dirs;
+    std::vector<wxString> dirs;
 
     wxDirTraverseResult OnFile(const wxString& WXUNUSED(filename)) override
     {
@@ -160,7 +160,7 @@ public:
 void DirTestCase::Traverse()
 {
     // enum all files
-    wxArrayString files;
+    std::vector<wxString> files;
     CPPUNIT_ASSERT_EQUAL(4, wxDir::GetAllFiles(DIRTEST_FOLDER, &files));
 
     // enum all files according to the filter

@@ -103,8 +103,8 @@ void MiscGUIFuncsTestCase::URLDataObject()
 
 void MiscGUIFuncsTestCase::ParseFileDialogFilter()
 {
-    wxArrayString descs,
-                  filters;
+    std::vector<wxString> descs;
+    std::vector<wxString> filters;
 
     CPPUNIT_ASSERT_EQUAL
     (

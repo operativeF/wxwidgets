@@ -52,8 +52,8 @@ wxREGISTER_UNIT_TEST_WITH_TAGS(RearrangeListTestCase,
 void RearrangeListTestCase::setUp()
 {
     //We do not add items here as the wxITEM_CONTAINER_TESTS add their own
-    wxArrayInt order;
-    wxArrayString items;
+    std::vector<int> order;
+    std::vector<wxString> items;
 
     m_rearrange = new wxRearrangeList(wxTheApp->GetTopWindow(), wxID_ANY,
                                       wxDefaultPosition, wxDefaultSize, order,
@@ -67,12 +67,12 @@ void RearrangeListTestCase::tearDown()
 
 void RearrangeListTestCase::Move()
 {
-    wxArrayInt order;
+    std::vector<int> order;
     order.push_back(1);
     order.push_back(~2);
     order.push_back(0);
 
-    wxArrayString items;
+    std::vector<wxString> items;
     items.push_back("first");
     items.push_back("second");
     items.push_back("third");
@@ -117,12 +117,12 @@ void RearrangeListTestCase::Move()
 
 void RearrangeListTestCase::MoveClientData()
 {
-    wxArrayInt order;
+    std::vector<int> order;
     order.push_back(0);
     order.push_back(1);
     order.push_back(2);
 
-    wxArrayString items;
+    std::vector<wxString> items;
     items.push_back("first");
     items.push_back("second");
     items.push_back("third");

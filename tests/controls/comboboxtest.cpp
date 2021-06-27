@@ -186,9 +186,9 @@ void ComboBoxTestCase::Sort()
 
 void ComboBoxTestCase::ReadOnly()
 {
-    wxArrayString testitems;
-    testitems.Add("item 1");
-    testitems.Add("item 2");
+    std::vector<wxString> testitems;
+    testitems.push_back("item 1");
+    testitems.push_back("item 2");
 
     delete m_combo;
     m_combo = new wxComboBox(wxTheApp->GetTopWindow(), wxID_ANY, "",

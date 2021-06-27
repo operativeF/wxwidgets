@@ -487,7 +487,7 @@ wxPG_PROP_CLASS_SPECIFIC_3          = 0x00400000
 #define wxPG_ATTR_INLINE_HELP               wxS("InlineHelp")
 #endif
 
-// Universal, wxArrayString. Set to enable auto-completion in any
+// Universal, std::vector<wxString>. Set to enable auto-completion in any
 // wxTextCtrl-based property editor.
 #define wxPG_ATTR_AUTOCOMPLETE              wxS("AutoComplete")
 
@@ -945,7 +945,7 @@ public:
     }
 
     // Returns array of choice labels.
-    wxArrayString GetLabels() const;
+    std::vector<wxString> GetLabels() const;
 
     void operator= (const wxPGChoices& a)
     {

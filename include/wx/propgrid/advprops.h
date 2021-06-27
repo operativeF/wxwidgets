@@ -317,16 +317,16 @@ public:
 
     wxMultiChoiceProperty( const wxString& label,
                            const wxString& name,
-                           const wxArrayString& strings,
-                           const wxArrayString& value );
+                           const std::vector<wxString>& strings,
+                           const std::vector<wxString>& value );
     wxMultiChoiceProperty( const wxString& label,
                            const wxString& name,
                            const wxPGChoices& choices,
-                           const wxArrayString& value = wxArrayString() );
+                           const std::vector<wxString>& value = {} );
 
     wxMultiChoiceProperty( const wxString& label = wxPG_LABEL,
                            const wxString& name = wxPG_LABEL,
-                           const wxArrayString& value = wxArrayString() );
+                           const std::vector<wxString>& value = {} );
 
     ~wxMultiChoiceProperty() override;
 

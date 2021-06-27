@@ -132,13 +132,13 @@ void InteractiveOutputTestCase::TestMimeEnum()
 #ifdef TEST_MIME
     wxPuts(wxT("*** Testing wxMimeTypesManager::EnumAllFileTypes() ***\n"));
 
-    wxArrayString mimetypes;
+    std::vector<wxString> mimetypes;
 
     size_t count = wxTheMimeTypesManager->EnumAllFileTypes(mimetypes);
 
     wxPrintf(wxT("*** All %zu known filetypes: ***\n"), count);
 
-    wxArrayString exts;
+    std::vector<wxString> exts;
     wxString desc;
 
     for ( size_t n = 0; n < count; n++ )
@@ -158,7 +158,7 @@ void InteractiveOutputTestCase::TestMimeEnum()
         filetype->GetIcon(NULL);
 
         wxString extsAll;
-        for ( size_t e = 0; e < exts.GetCount(); e++ )
+        for ( size_t e = 0; e < exts.size(); e++ )
         {
             if ( e > 0 )
                 extsAll << wxT(", ");

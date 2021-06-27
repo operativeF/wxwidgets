@@ -1917,7 +1917,7 @@ wxPG_IMPLEMENT_PROPERTY_CLASS(wxMultiChoiceProperty,wxEditorDialogProperty,
 wxMultiChoiceProperty::wxMultiChoiceProperty( const wxString& label,
                                               const wxString& name,
                                               const wxPGChoices& choices,
-                                              const wxArrayString& value)
+                                              const std::vector<wxString>& value)
     : wxEditorDialogProperty(label,name)
 {
     m_choices.Assign(choices);
@@ -1926,8 +1926,8 @@ wxMultiChoiceProperty::wxMultiChoiceProperty( const wxString& label,
 
 wxMultiChoiceProperty::wxMultiChoiceProperty( const wxString& label,
                                               const wxString& name,
-                                              const wxArrayString& strings,
-                                              const wxArrayString& value)
+                                              const std::vector<wxString>& strings,
+                                              const std::vector<wxString>& value)
     : wxEditorDialogProperty(label,name)
 {
     m_choices.Set(strings);
@@ -1936,10 +1936,10 @@ wxMultiChoiceProperty::wxMultiChoiceProperty( const wxString& label,
 
 wxMultiChoiceProperty::wxMultiChoiceProperty( const wxString& label,
                                               const wxString& name,
-                                              const wxArrayString& value)
+                                              const std::vector<wxString>& value)
 : wxEditorDialogProperty(label,name)
 {
-    wxArrayString strings;
+    std::vector<wxString> strings;
     m_choices.Set(strings);
     SetValue(value);
 }
@@ -1992,7 +1992,7 @@ void wxMultiChoiceProperty::GenerateValueAsString( wxVariant& value,
 std::vector<int> wxMultiChoiceProperty::GetValueAsIndices() const
 {
     wxVariant variant = GetValue();
-    const wxArrayInt& valueArr = wxArrayIntRefFromVariant(variant);
+    const std::vector<int>& valueArr = wxArrayIntRefFromVariant(variant);
 
     // Translate values to string indices.
     std::vector<int> selections;
@@ -2023,7 +2023,7 @@ bool wxMultiChoiceProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& v
         return false;
     }
 
-    wxArrayString labels = m_choices.GetLabels();
+    std::vector<wxString> labels = m_choices.GetLabels();
     unsigned int choiceCount = m_choices.GetCount();
 
     // launch editor dialog

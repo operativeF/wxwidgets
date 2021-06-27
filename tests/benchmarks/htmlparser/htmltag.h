@@ -122,7 +122,8 @@ public:
 private:
     wxString m_Name;
     int m_Begin, m_End1, m_End2;
-    wxArrayString m_ParamNames, m_ParamValues;
+    std::vector<wxString> m_ParamNames;
+    std::vector<wxString> m_ParamValues;
 
     // DOM tree relations:
     wx28HtmlTag *m_Next;

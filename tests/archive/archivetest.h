@@ -275,10 +275,10 @@ protected:
 private:
     wxString m_name;
     wxPathList m_path;
-    wxArrayString m_archivers;
-    wxArrayString m_unarchivers;
+    std::vector<wxString> m_archivers;
+    std::vector<wxString> m_unarchivers;
 
-    void AddCmd(wxArrayString& cmdlist, const wxString& cmd);
+    void AddCmd(std::vector<wxString>& cmdlist, const wxString& cmd);
 };
 
 #endif

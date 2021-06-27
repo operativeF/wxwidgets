@@ -1494,25 +1494,10 @@ void wxGridCellBoolEditor::SetGridFromValue(int row, int col, wxGrid* grid) cons
 // wxGridCellChoiceEditor
 // ----------------------------------------------------------------------------
 
-wxGridCellChoiceEditor::wxGridCellChoiceEditor(const wxArrayString& choices,
+wxGridCellChoiceEditor::wxGridCellChoiceEditor(const std::vector<wxString>& choices,
                                                bool allowOthers)
     : m_choices(choices),
       m_allowOthers(allowOthers) { }
-
-wxGridCellChoiceEditor::wxGridCellChoiceEditor(size_t count,
-                                               const wxString choices[],
-                                               bool allowOthers)
-                      : m_allowOthers(allowOthers)
-{
-    if ( count )
-    {
-        m_choices.Alloc(count);
-        for ( size_t n = 0; n < count; n++ )
-        {
-            m_choices.Add(choices[n]);
-        }
-    }
-}
 
 wxGridCellEditor *wxGridCellChoiceEditor::Clone() const
 {
@@ -1645,12 +1630,12 @@ void wxGridCellChoiceEditor::SetParameters(const wxString& params)
         return;
     }
 
-    m_choices.Empty();
+    m_choices.clear();
 
     wxStringTokenizer tk(params, wxT(','));
     while ( tk.HasMoreTokens() )
     {
-        m_choices.Add(tk.GetNextToken());
+        m_choices.push_back(tk.GetNextToken());
     }
 
     if ( m_control )

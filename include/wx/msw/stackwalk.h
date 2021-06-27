@@ -33,7 +33,7 @@ private:
     wxStackFrame *ConstCast() const
         { return const_cast<wxStackFrame *>(this); }
 
-    size_t DoGetParamCount() const { return m_paramTypes.GetCount(); }
+    size_t DoGetParamCount() const { return m_paramTypes.size(); }
 
 public:
     wxStackFrame(size_t level, void *address, size_t addrFrame)
@@ -76,9 +76,9 @@ private:
 
     size_t m_addrFrame;
 
-    wxArrayString m_paramTypes,
-                  m_paramNames,
-                  m_paramValues;
+    std::vector<wxString> m_paramTypes;
+    std::vector<wxString> m_paramNames;
+    std::vector<wxString> m_paramValues;
 };
 
 // ----------------------------------------------------------------------------

@@ -7069,7 +7069,7 @@ void wxGrid::DrawTextRectangle( wxDC& dc,
                                 int vertAlign,
                                 int textOrientation ) const
 {
-    wxArrayString lines;
+    std::vector<wxString> lines;
 
     StringToLines( value, lines );
 
@@ -9786,7 +9786,7 @@ void wxGrid::SetRowSize( int row, int height )
     if ( height == -1 && GetRowHeight(row) != 0 )
     {
         long w, h;
-        wxArrayString lines;
+        std::vector<wxString> lines;
         wxClientDC dc(m_rowLabelWin);
         dc.SetFont(GetLabelFont());
         StringToLines(GetRowLabelValue( row ), lines);
@@ -9953,7 +9953,7 @@ void wxGrid::SetColSize( int col, int width )
         else
         {
             long w, h;
-            wxArrayString lines;
+            std::vector<wxString> lines;
             wxClientDC dc(m_colLabelWin);
             dc.SetFont(GetLabelFont());
             StringToLines(GetColLabelValue(col), lines);
@@ -10445,13 +10445,13 @@ wxCoord wxGrid::CalcColOrRowLabelAreaMinSize(wxGridDirection direction)
     const bool
         useWidth = calcRows || (GetColLabelTextOrientation() == wxVERTICAL);
 
-    wxArrayString lines;
+    std::vector<wxString> lines;
     wxCoord extentMax = 0;
 
     const int numRowsOrCols = calcRows ? m_numRows : m_numCols;
     for ( int rowOrCol = 0; rowOrCol < numRowsOrCols; rowOrCol++ )
     {
-        lines.Clear();
+        lines.clear();
 
         wxString label = calcRows ? GetRowLabelValue(rowOrCol)
                                   : GetColLabelValue(rowOrCol);

@@ -107,7 +107,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
     {
         val.SetStyle(wxFILTER_INCLUDE_LIST);
 
-        wxArrayString includes;
+        std::vector<wxString> includes;
         includes.push_back("wxMSW");
         includes.push_back("wxGTK");
         includes.push_back("wxOSX");
@@ -118,7 +118,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
 
         SECTION("wxFILTER_EXCLUDE_LIST - use exclude with include list")
         {
-            wxArrayString excludes;
+            std::vector<wxString> excludes;
             excludes.push_back("wxGTK");
             excludes.push_back("wxGTK1");
             val.SetExcludes(excludes);
@@ -132,7 +132,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
     {
         val.SetStyle(wxFILTER_EXCLUDE_LIST);
 
-        wxArrayString excludes;
+        std::vector<wxString> excludes;
         excludes.push_back("wxMSW");
         excludes.push_back("wxGTK");
         excludes.push_back("wxOSX");
@@ -143,7 +143,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
 
         SECTION("wxFILTER_INCLUDE_LIST - use include with exclude list")
         {
-            wxArrayString includes;
+            std::vector<wxString> includes;
             includes.push_back("wxGTK");
             val.SetIncludes(includes); // exclusion takes priority over inclusion.
 

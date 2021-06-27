@@ -159,7 +159,7 @@ void wxPGEditor::DeleteItem( wxWindow*, int ) const
 {
 }
 
-void wxPGEditor::SetItems(wxWindow* WXUNUSED(ctrl), const wxArrayString& WXUNUSED(labels)) const
+void wxPGEditor::SetItems(wxWindow* WXUNUSED(ctrl), const std::vector<wxString>& WXUNUSED(labels)) const
 {
 }
 
@@ -587,7 +587,7 @@ public:
                 const wxString& value,
                 const wxPoint& pos,
                 const wxSize& size,
-                const wxArrayString& choices,
+                const std::vector<wxString>& choices,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxS("wxOwnerDrawnComboBox"))
@@ -960,7 +960,7 @@ wxWindow* wxPGChoiceEditor::CreateControlsBase( wxPropertyGrid* propGrid,
         argFlags |= wxPG_EDITABLE_VALUE;
     defString = property->GetValueAsString(argFlags);
 
-    wxArrayString labels = choices.GetLabels();
+    std::vector<wxString> labels = choices.GetLabels();
 
     wxPoint po(pos);
     wxSize si(sz);
@@ -992,7 +992,7 @@ wxWindow* wxPGChoiceEditor::CreateControlsBase( wxPropertyGrid* propGrid,
         }
 
         for ( unsigned int i = 0; i < cmnVals; i++ )
-            labels.Add(propGrid->GetCommonValueLabel(i));
+            labels.push_back(propGrid->GetCommonValueLabel(i));
     }
 
     wxPGComboBox* cb = new wxPGComboBox();
@@ -1084,7 +1084,7 @@ void wxPGChoiceEditor::DeleteItem( wxWindow* ctrl, int index ) const
     cb->Delete(index);
 }
 
-void wxPGChoiceEditor::SetItems(wxWindow* ctrl, const wxArrayString& labels) const
+void wxPGChoiceEditor::SetItems(wxWindow* ctrl, const std::vector<wxString>& labels) const
 {
     wxASSERT( ctrl );
     wxOwnerDrawnComboBox* cb = wxDynamicCast(ctrl, wxOwnerDrawnComboBox);

@@ -66,13 +66,15 @@ void ChoiceTestCase::Sort()
                             wxDefaultPosition, wxDefaultSize, {},
                             wxCB_SORT);
 
-    wxArrayString testitems;
-    testitems.Add("aaa");
-    testitems.Add("Aaa");
-    testitems.Add("aba");
-    testitems.Add("aaab");
-    testitems.Add("aab");
-    testitems.Add("AAA");
+    std::vector<wxString> testitems =
+    {
+        "aaa",
+        "Aaa",
+        "aba",
+        "aaab",
+        "aab",
+        "AAA"
+    };
 
     m_choice->Append(testitems);
 
@@ -91,9 +93,11 @@ void ChoiceTestCase::Sort()
 
 void ChoiceTestCase::GetBestSize()
 {
-    wxArrayString testitems;
-    testitems.Add("1");
-    testitems.Add("11");
+    std::vector<wxString> testitems = {
+        "1",
+        "11"
+    };
+    
     m_choice->Append(testitems);
 
     SECTION("Normal best size")

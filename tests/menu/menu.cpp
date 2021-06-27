@@ -123,7 +123,7 @@ private:
     // and a sub-submenu item
     int m_subsubmenuItemId;
 
-    wxArrayString m_menuLabels;
+    std::vector<wxString> m_menuLabels;
 
     // The menu containing the item with MenuTestCase_Bar id.
     wxMenu* m_menuWithBar;
@@ -183,8 +183,8 @@ void MenuTestCase::CreateFrame()
     m_itemCount++;
 
     // Use an arraystring here, to help with future tests
-    m_menuLabels.Add("&File");
-    m_menuLabels.Add("&Help");
+    m_menuLabels.push_back("&File");
+    m_menuLabels.push_back("&Help");
 
     wxMenuBar *menuBar = new wxMenuBar();
     menuBar->Append(fileMenu, m_menuLabels[0]);

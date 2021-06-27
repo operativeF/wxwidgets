@@ -32,7 +32,7 @@ void GraphicsContextDrawingTestCase::RunPluginsDrawingCase (
         if (!wxGetEnv ("WX_TEST_SUITE_GC_DRAWING_PLUGINS", &pluginsListStr))
             return; // no plugins
 
-        wxArrayString pluginsNameArray = wxSplit (pluginsListStr, ',', '\0');
+        std::vector<wxString> pluginsNameArray = wxSplit (pluginsListStr, ',', '\0');
         m_drawingPlugins.resize (pluginsNameArray.size());
 
         for (size_t idx=0; idx<pluginsNameArray.size(); ++idx)

@@ -100,13 +100,13 @@ void ListBoxTestCase::Sort()
                             wxDefaultPosition, wxDefaultSize, {},
                             wxLB_SORT);
 
-    wxArrayString testitems;
-    testitems.Add("aaa");
-    testitems.Add("Aaa");
-    testitems.Add("aba");
-    testitems.Add("aaab");
-    testitems.Add("aab");
-    testitems.Add("AAA");
+    std::vector<wxString> testitems;
+    testitems.push_back("aaa");
+    testitems.push_back("Aaa");
+    testitems.push_back("aba");
+    testitems.push_back("aaab");
+    testitems.push_back("aab");
+    testitems.push_back("AAA");
 
     m_list->Append(testitems);
 
@@ -131,11 +131,11 @@ void ListBoxTestCase::MultipleSelect()
                             wxDefaultPosition, wxDefaultSize, {},
                             wxLB_MULTIPLE);
 
-    wxArrayString testitems;
-    testitems.Add("item 0");
-    testitems.Add("item 1");
-    testitems.Add("item 2");
-    testitems.Add("item 3");
+    std::vector<wxString> testitems;
+    testitems.push_back("item 0");
+    testitems.push_back("item 1");
+    testitems.push_back("item 2");
+    testitems.push_back("item 3");
 
     m_list->Append(testitems);
 
@@ -184,10 +184,10 @@ void ListBoxTestCase::ClickEvents()
 
     wxUIActionSimulator sim;
 
-    wxArrayString testitems;
-    testitems.Add("item 0");
-    testitems.Add("item 1");
-    testitems.Add("item 2");
+    std::vector<wxString> testitems;
+    testitems.push_back("item 0");
+    testitems.push_back("item 1");
+    testitems.push_back("item 2");
 
     m_list->Append(testitems);
 
@@ -220,10 +220,10 @@ void ListBoxTestCase::ClickNotOnItem()
 
     wxUIActionSimulator sim;
 
-    wxArrayString testitems;
-    testitems.Add("item 0");
-    testitems.Add("item 1");
-    testitems.Add("item 2");
+    std::vector<wxString> testitems;
+    testitems.push_back("item 0");
+    testitems.push_back("item 1");
+    testitems.push_back("item 2");
 
     m_list->Append(testitems);
 
@@ -254,10 +254,10 @@ void ListBoxTestCase::ClickNotOnItem()
 
 void ListBoxTestCase::HitTest()
 {
-    wxArrayString testitems;
-    testitems.Add("item 0");
-    testitems.Add("item 1");
-    testitems.Add("item 2");
+    std::vector<wxString> testitems;
+    testitems.push_back("item 0");
+    testitems.push_back("item 1");
+    testitems.push_back("item 2");
 
     m_list->Append(testitems);
 
