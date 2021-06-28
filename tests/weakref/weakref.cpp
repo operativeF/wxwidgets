@@ -10,8 +10,9 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "testprec.h"
+#include "doctest.h"
 
+#include "testprec.h"
 
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
@@ -35,44 +36,6 @@ public:
 // test class
 // --------------------------------------------------------------------------
 
-class WeakRefTestCase : public CppUnit::TestCase
-{
-public:
-    WeakRefTestCase() {}
-
-private:
-    CPPUNIT_TEST_SUITE( WeakRefTestCase );
-        CPPUNIT_TEST( DeclareTest );
-        CPPUNIT_TEST( AssignTest );
-        CPPUNIT_TEST( AssignWeakRefTest );
-        CPPUNIT_TEST( MultiAssignTest );
-        CPPUNIT_TEST( CleanupTest );
-        CPPUNIT_TEST( DeleteTest );
-#ifdef HAVE_DYNAMIC_CAST
-        CPPUNIT_TEST( DynamicRefTest );
-#endif
-    CPPUNIT_TEST_SUITE_END();
-
-    void DeclareTest();
-    void AssignTest();
-    void AssignWeakRefTest();
-    void MultiAssignTest();
-    void CleanupTest();
-    void DeleteTest();
-#ifdef HAVE_DYNAMIC_CAST
-    void DynamicRefTest();
-#endif
-
-    WeakRefTestCase(const WeakRefTestCase&) = delete;
-	WeakRefTestCase& operator=(const WeakRefTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( WeakRefTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( WeakRefTestCase, "WeakRefTestCase" );
-
 
 // Test weak reference to an incomplete type, this should work if the type is
 // fully defined before it is used (but currently doesn't, see #11916)
@@ -84,7 +47,7 @@ struct ForwardDeclaredClass : wxEvtHandler { };
 // A incomplete class that would be defined in other compilation units
 struct IncompleteClass;
 
-void WeakRefTestCase::DeclareTest()
+TEST_CASE("DeclareTest")
 {
     {
         // Not initializing or initializing with NULL should work too
@@ -100,19 +63,19 @@ void WeakRefTestCase::DeclareTest()
         wxWeakRef<wxEvtHandler> wro2(&eh);
         wxWeakRef<wxObjectTrackable> wro3(&ot);
 
-        CPPUNIT_ASSERT( wro2.get() == &eh );
-        CPPUNIT_ASSERT( wro3.get() == &ot );
+        CHECK( wro2.get() == &eh );
+        CHECK( wro3.get() == &ot );
 
         // Test accessing wxObject members
-        CPPUNIT_ASSERT( !wro2->GetRefData() );
-        CPPUNIT_ASSERT( !wro3->GetRefData() );
+        CHECK( !wro2->GetRefData() );
+        CHECK( !wro3->GetRefData() );
 
 
         wxWeakRef<wxEvtHandler> wreh(&eh);
         wxWeakRef<wxObjectTrackable> wrot(&ot);
 
-        CPPUNIT_ASSERT( wreh.get() == &eh );
-        CPPUNIT_ASSERT( wrot.get() == &ot );
+        CHECK( wreh.get() == &eh );
+        CHECK( wrot.get() == &ot );
     }
 
     // This test requires a working dynamic_cast<>
@@ -120,10 +83,10 @@ void WeakRefTestCase::DeclareTest()
     {
         ForwardDeclaredClass fdc;
         g_incompleteWeakRef = &fdc;
-        CPPUNIT_ASSERT( g_incompleteWeakRef );
+        CHECK( g_incompleteWeakRef );
     }
 
-    CPPUNIT_ASSERT( !g_incompleteWeakRef );
+    CHECK( !g_incompleteWeakRef );
 #endif // RTTI enabled
 
     {
@@ -144,7 +107,7 @@ void WeakRefTestCase::DeclareTest()
     }
 }
 
-void WeakRefTestCase::AssignTest()
+TEST_CASE("AssignTest")
 {
     wxWeakRef<wxEvtHandler> wro1;
     wxWeakRef<wxObjectTrackable> wro2;
@@ -156,13 +119,13 @@ void WeakRefTestCase::AssignTest()
         wro1 = &eh;
         wro2 = &ot;
 
-        CPPUNIT_ASSERT( wro1.get() == &eh );
-        CPPUNIT_ASSERT( wro2.get() == &ot );
+        CHECK( wro1.get() == &eh );
+        CHECK( wro2.get() == &ot );
     }
 
     // Should be reset now
-    CPPUNIT_ASSERT( !wro1 );
-    CPPUNIT_ASSERT( !wro2 );
+    CHECK( !wro1 );
+    CHECK( !wro2 );
 
     // Explicitly resetting should work too
     wxEvtHandler eh;
@@ -174,11 +137,11 @@ void WeakRefTestCase::AssignTest()
     wro1 = NULL;
     wro2 = NULL;
 
-    CPPUNIT_ASSERT( !wro1 );
-    CPPUNIT_ASSERT( !wro2 );
+    CHECK( !wro1 );
+    CHECK( !wro2 );
 }
 
-void WeakRefTestCase::AssignWeakRefTest()
+TEST_CASE("AssignWeakRefTest")
 {
     // Test declare when T is wxObject
     wxWeakRef<wxEvtHandler> wro1;
@@ -195,21 +158,21 @@ void WeakRefTestCase::AssignWeakRefTest()
         wro3 = wro1;
         wro4 = wro2;
 
-        CPPUNIT_ASSERT( wro1.get() == &eh );
-        CPPUNIT_ASSERT( wro2.get() == &ot );
-        CPPUNIT_ASSERT( wro3.get() == &eh );
-        CPPUNIT_ASSERT( wro4.get() == &ot );
+        CHECK( wro1.get() == &eh );
+        CHECK( wro2.get() == &ot );
+        CHECK( wro3.get() == &eh );
+        CHECK( wro4.get() == &ot );
 
         wro4.Release();
-        CPPUNIT_ASSERT( !wro4.get() );
+        CHECK( !wro4.get() );
     }
 
     // Should be reset now
-    CPPUNIT_ASSERT( !wro1 );
-    CPPUNIT_ASSERT( !wro2 );
+    CHECK( !wro1 );
+    CHECK( !wro2 );
 }
 
-void WeakRefTestCase::MultiAssignTest()
+TEST_CASE("MultiAssignTest")
 {
     // Object is tracked by several refs
     wxEvtHandler *peh = new wxEvtHandler;
@@ -222,22 +185,22 @@ void WeakRefTestCase::MultiAssignTest()
     wxWeakRef<wxObjectTrackable> wro3 = pot;
     wxWeakRef<wxObjectTrackable> wro4 = pot;
 
-    CPPUNIT_ASSERT( wro1.get() == peh );
-    CPPUNIT_ASSERT( wro2.get() == peh );
-    CPPUNIT_ASSERT( wro3.get() == pot );
-    CPPUNIT_ASSERT( wro4.get() == pot );
+    CHECK( wro1.get() == peh );
+    CHECK( wro2.get() == peh );
+    CHECK( wro3.get() == pot );
+    CHECK( wro4.get() == pot );
 
     delete peh;
     delete pot;
 
     // Should be reset now
-    CPPUNIT_ASSERT( !wro1 );
-    CPPUNIT_ASSERT( !wro2 );
-    CPPUNIT_ASSERT( !wro3 );
-    CPPUNIT_ASSERT( !wro4 );
+    CHECK( !wro1 );
+    CHECK( !wro2 );
+    CHECK( !wro3 );
+    CHECK( !wro4 );
 }
 
-void WeakRefTestCase::CleanupTest()
+TEST_CASE("CleanupTest")
 {
     // Make sure that trackable objects have no left over tracker nodes after use.
     // This time the references goes out of scope before the objects.
@@ -259,18 +222,18 @@ void WeakRefTestCase::CleanupTest()
         // Access members of reffed object
         wro3->TestFunc();
 
-        CPPUNIT_ASSERT( eh.GetFirst()==&wro2 );
-        CPPUNIT_ASSERT( ots.wxTrackable::GetFirst()==&wro3 );
-        CPPUNIT_ASSERT( otd.wxTrackable::GetFirst()==&wro4 );
+        CHECK( eh.GetFirst()==&wro2 );
+        CHECK( ots.wxTrackable::GetFirst()==&wro3 );
+        CHECK( otd.wxTrackable::GetFirst()==&wro4 );
     }
 
     // Should be reset now
-    CPPUNIT_ASSERT( !eh.GetFirst() );
-    CPPUNIT_ASSERT( !ots.wxTrackable::GetFirst() );
-    CPPUNIT_ASSERT( !otd.wxTrackable::GetFirst() );
+    CHECK( !eh.GetFirst() );
+    CHECK( !ots.wxTrackable::GetFirst() );
+    CHECK( !otd.wxTrackable::GetFirst() );
 }
 
-void WeakRefTestCase::DeleteTest()
+TEST_CASE("DeleteTest")
 {
     // Object is tracked by several refs
     wxEvtHandler *peh = new wxEvtHandler;
@@ -279,18 +242,18 @@ void WeakRefTestCase::DeleteTest()
     wxEvtHandlerRef wre(peh);
     wxWeakRef<wxEvtHandler> wro(peh);
 
-    CPPUNIT_ASSERT( wre.get() == peh );
-    CPPUNIT_ASSERT( wro.get() == peh );
+    CHECK( wre.get() == peh );
+    CHECK( wro.get() == peh );
 
     delete wre.get();
 
-    CPPUNIT_ASSERT( !wre );
-    CPPUNIT_ASSERT( !wro );
+    CHECK( !wre );
+    CHECK( !wro );
 }
 
 #ifdef HAVE_DYNAMIC_CAST
 
-void WeakRefTestCase::DynamicRefTest()
+TEST_CASE("DynamicRefTest")
 {
     wxWeakRefDynamic<wxEvtHandler> wro1;
     wxWeakRefDynamic<wxObjectTrackable> wro2;
@@ -302,24 +265,24 @@ void WeakRefTestCase::DynamicRefTest()
             wro1 = &eh;
         }
 
-        CPPUNIT_ASSERT( !wro1 );
+        CHECK( !wro1 );
 
         wxObjectTrackable otd1;
         wxObjectTrackable otd2;
         wro2 = &otd1;
         wro3 = &otd2;
 
-        CPPUNIT_ASSERT( wro2.get() == &otd1 );
-        CPPUNIT_ASSERT( wro3.get() == &otd2 );
+        CHECK( wro2.get() == &otd1 );
+        CHECK( wro3.get() == &otd2 );
 
         wro3 = wro2;
-        CPPUNIT_ASSERT( wro2.get() == &otd1 );
-        CPPUNIT_ASSERT( wro3.get() == &otd1 );
+        CHECK( wro2.get() == &otd1 );
+        CHECK( wro3.get() == &otd1 );
     }
 
     // Should be reset now
-    CPPUNIT_ASSERT( !wro2 );
-    CPPUNIT_ASSERT( !wro3 );
+    CHECK( !wro2 );
+    CHECK( !wro3 );
 }
 
 #endif // HAVE_DYNAMIC_CAST
