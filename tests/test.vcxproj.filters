@@ -25,5 +25,8 @@
     <ClCompile Include="formatconverter\formatconvertertest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hashes\hashes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
