@@ -10,10 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "testprec.h"
 
-
-#if wxUSE_FILE
+#include "doctest.h"
 
 #include "wx/file.h"
 
@@ -23,44 +21,11 @@
 // test class
 // ----------------------------------------------------------------------------
 
-class FileTestCase : public CppUnit::TestCase
-{
-public:
-    FileTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( FileTestCase );
-        CPPUNIT_TEST( ReadAll );
-        CPPUNIT_TEST( RoundTripUTF8 );
-        CPPUNIT_TEST( RoundTripUTF16 );
-        CPPUNIT_TEST( RoundTripUTF32 );
-        CPPUNIT_TEST( TempFile );
-    CPPUNIT_TEST_SUITE_END();
-
-    void ReadAll();
-    void RoundTripUTF8() { DoRoundTripTest(wxConvUTF8); }
-    void RoundTripUTF16() { DoRoundTripTest(wxMBConvUTF16()); }
-    void RoundTripUTF32() { DoRoundTripTest(wxMBConvUTF32()); }
-
-    void DoRoundTripTest(const wxMBConv& conv);
-    void TempFile();
-
-    FileTestCase(const FileTestCase&) = delete;
-	FileTestCase& operator=(const FileTestCase&) = delete;
-};
-
-// ----------------------------------------------------------------------------
-// CppUnit macros
-// ----------------------------------------------------------------------------
-
-CPPUNIT_TEST_SUITE_REGISTRATION( FileTestCase );
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( FileTestCase, "FileTestCase" );
-
 // ----------------------------------------------------------------------------
 // tests implementation
 // ----------------------------------------------------------------------------
 
-void FileTestCase::ReadAll()
+TEST_CASE("ReadAll")
 {
     TestFile tf;
 
@@ -68,22 +33,22 @@ void FileTestCase::ReadAll()
 
     {
         wxFile fout(tf.GetName(), wxFile::write);
-        CPPUNIT_ASSERT( fout.IsOpened() );
+        CHECK( fout.IsOpened() );
         fout.Write(text, strlen(text));
-        CPPUNIT_ASSERT( fout.Close() );
+        CHECK( fout.Close() );
     }
 
     {
         wxFile fin(tf.GetName(), wxFile::read);
-        CPPUNIT_ASSERT( fin.IsOpened() );
+        CHECK( fin.IsOpened() );
 
         wxString s;
-        CPPUNIT_ASSERT( fin.ReadAll(&s) );
-        CPPUNIT_ASSERT_EQUAL( text, s );
+        CHECK( fin.ReadAll(&s) );
+        CHECK_EQ( text, s );
     }
 }
 
-void FileTestCase::DoRoundTripTest(const wxMBConv& conv)
+static void DoRoundTripTest(const wxMBConv& conv)
 {
     TestFile tf;
 
@@ -92,41 +57,45 @@ void FileTestCase::DoRoundTripTest(const wxMBConv& conv)
 
     {
         wxFile fout(tf.GetName(), wxFile::write);
-        CPPUNIT_ASSERT( fout.IsOpened() );
+        CHECK( fout.IsOpened() );
 
-        CPPUNIT_ASSERT( fout.Write(data, conv) );
+        CHECK( fout.Write(data, conv) );
     }
 
     {
         wxFile fin(tf.GetName(), wxFile::read);
-        CPPUNIT_ASSERT( fin.IsOpened() );
+        CHECK( fin.IsOpened() );
 
         const ssize_t len = fin.Length();
         wxCharBuffer buf(len);
-        CPPUNIT_ASSERT_EQUAL( len, fin.Read(buf.data(), len) );
+        CHECK_EQ( len, fin.Read(buf.data(), len) );
 
         wxString dataReadBack(buf, conv, len);
-        CPPUNIT_ASSERT_EQUAL( data, dataReadBack );
+        CHECK_EQ( data, dataReadBack );
     }
 
     {
         wxFile fin(tf.GetName(), wxFile::read);
-        CPPUNIT_ASSERT( fin.IsOpened() );
+        CHECK( fin.IsOpened() );
 
         wxString dataReadBack;
-        CPPUNIT_ASSERT( fin.ReadAll(&dataReadBack, conv) );
+        CHECK( fin.ReadAll(&dataReadBack, conv) );
 
-        CPPUNIT_ASSERT_EQUAL( data, dataReadBack );
+        CHECK_EQ( data, dataReadBack );
     }
 }
 
-void FileTestCase::TempFile()
+TEST_CASE("RoundTripUTF8")  { DoRoundTripTest(wxConvUTF8); }
+TEST_CASE("RoundTripUTF16") { DoRoundTripTest(wxMBConvUTF16()); }
+TEST_CASE("RoundTripUTF32") { DoRoundTripTest(wxMBConvUTF32()); }
+
+TEST_CASE("TempFile")
 {
     wxTempFile tmpFile;
-    CPPUNIT_ASSERT( tmpFile.Open(wxT("test2")) );
-    CPPUNIT_ASSERT( tmpFile.Write(wxT("the answer is 42")) );
-    CPPUNIT_ASSERT( tmpFile.Commit() );
-    CPPUNIT_ASSERT( wxRemoveFile(wxT("test2")) );
+    CHECK( tmpFile.Open(wxT("test2")) );
+    CHECK( tmpFile.Write(wxT("the answer is 42")) );
+    CHECK( tmpFile.Commit() );
+    CHECK( wxRemoveFile(wxT("test2")) );
 }
 
 #ifdef __LINUX__
@@ -164,5 +133,3 @@ TEST_CASE("wxFile::Special", "[file][linux][special-file]")
 }
 
 #endif // __LINUX__
-
-#endif // wxUSE_FILE

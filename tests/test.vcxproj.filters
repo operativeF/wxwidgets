@@ -34,5 +34,8 @@
     <ClCompile Include="filesys\filesystest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="file\filetest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
