@@ -55,5 +55,8 @@
     <ClCompile Include="weakref\evtconnection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="uris\url.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

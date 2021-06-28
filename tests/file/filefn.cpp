@@ -193,7 +193,7 @@ static void DoRenameFile(const wxString& oldFilePath,
     wxRemoveFile(newFilePath);
 }
 
-TEST_SUITE("File Functions")
+TEST_CASE("File Functions")
 {
     // Initialize local data
     wxFileName fn1(wxFileName::GetTempDir(), wxT("wx_file_mask.txt"));
@@ -208,7 +208,7 @@ TEST_SUITE("File Functions")
     wxString m_fileNameNonASCII = fn2.GetFullPath();
     wxString m_fileNameWork = fn3.GetFullPath();
 
-    TEST_CASE("Get temporary folder")
+    SUBCASE("Get temporary folder")
     {
         // Verify that obtained temporary folder is not empty.
         wxString tmpDir = wxFileName::GetTempDir();
@@ -216,7 +216,7 @@ TEST_SUITE("File Functions")
         CHECK( !tmpDir.IsEmpty() );
     }
 
-    TEST_CASE("Copy file")
+    SUBCASE("Copy file")
     {
         const wxString filename1(wxS("horse.xpm"));
         const wxString& filename2 = m_fileNameWork;
@@ -244,7 +244,7 @@ TEST_SUITE("File Functions")
         CHECK_MESSAGE(wxRemoveFile(filename2), msg);
     }
 
-    TEST_CASE("Create file")
+    SUBCASE("Create file")
     {
         // Create file name containing ASCII characters only.
         DoCreateFile(m_fileNameASCII);
@@ -252,7 +252,7 @@ TEST_SUITE("File Functions")
         DoCreateFile(m_fileNameNonASCII);
     }
 
-    TEST_CASE("File exists")
+    SUBCASE("File exists")
     {
         CHECK( wxFileExists(wxT("horse.png")) );
         CHECK( !wxFileExists(wxT("horse.___")) );
@@ -263,7 +263,7 @@ TEST_SUITE("File Functions")
         DoFileExists(m_fileNameNonASCII);
     }
 
-    TEST_CASE("Find file")
+    SUBCASE("Find file")
     {
         // Find file name containing ASCII characters only.
         DoFindFile(m_fileNameASCII);
@@ -271,7 +271,7 @@ TEST_SUITE("File Functions")
         DoFindFile(m_fileNameNonASCII);
     }
 
-    TEST_CASE("Find next file")
+    SUBCASE("Find next file")
     {
         // Construct file name containing ASCII characters only.
         const wxString fileMask(wxT("horse.*"));
@@ -300,7 +300,7 @@ TEST_SUITE("File Functions")
         CHECK( fn1.GetName() == fn2.GetName() );
     }
 
-    TEST_CASE("Remove file")
+    SUBCASE("Remove file")
     {
         // Create & remove file with name containing ASCII characters only.
         DoRemoveFile(m_fileNameASCII);
@@ -308,7 +308,7 @@ TEST_SUITE("File Functions")
         DoRemoveFile(m_fileNameNonASCII);
     }
 
-    TEST_CASE("Rename file")
+    SUBCASE("Rename file")
     {
         // Verify renaming file with/without overwriting
         // when new file already exist/don't exist.
@@ -322,13 +322,13 @@ TEST_SUITE("File Functions")
         DoRenameFile(m_fileNameNonASCII, m_fileNameASCII, true, true);
     }
 
-    TEST_CASE("Concatenate files")
+    SUBCASE("Concatenate files")
     {
         DoConcatFile(m_fileNameASCII, m_fileNameNonASCII, m_fileNameWork);
         DoConcatFile(m_fileNameNonASCII, m_fileNameASCII, m_fileNameWork);
     }
 
-    TEST_CASE("Get current working directory")
+    SUBCASE("Get current working directory")
     {
         // Verify that obtained working directory is not empty.
         wxString cwd = wxGetCwd();
@@ -336,7 +336,7 @@ TEST_SUITE("File Functions")
         CHECK( !cwd.IsEmpty() );
     }
 
-    TEST_CASE("Get file EOF")
+    SUBCASE("Get file EOF")
     {
         const wxString filename(wxT("horse.bmp"));
         const std::string msg = wxString::Format("File: %s", filename).ToStdString();
@@ -354,7 +354,7 @@ TEST_SUITE("File Functions")
         // wxFFile::Eof after close should not cause crash but fail instead
     }
 
-    TEST_CASE("File error")
+    SUBCASE("File error")
     {
         const wxString filename(wxT("horse.bmp"));
         const std::string msg = wxString::Format("File: %s", filename).ToStdString();
@@ -369,7 +369,7 @@ TEST_SUITE("File Functions")
         CHECK_MESSAGE(file.Close(), msg);
     }
 
-    TEST_CASE("Check directory existence")
+    SUBCASE("Check directory existence")
     {
         wxString cwd = wxGetCwd();
         const std::string msg = wxString::Format("CWD: %s", cwd).ToStdString();
@@ -378,7 +378,7 @@ TEST_SUITE("File Functions")
         CHECK_MESSAGE(wxDirExists(cwd), msg);
     }
 
-    TEST_CASE("Check absolute paths")
+    SUBCASE("Check absolute paths")
     {
         wxString name = wxT("horse.bmp");
         const std::string msg = wxString::Format("File: %s", name).ToStdString();
@@ -398,7 +398,7 @@ TEST_SUITE("File Functions")
     #endif
     }
 
-    TEST_CASE("Check path only")
+    SUBCASE("Check path only")
     {
         wxString name = wxT("horse.bmp");
         // Get absolute path to horse.bmp
@@ -412,7 +412,7 @@ TEST_SUITE("File Functions")
 
     // Unit tests for Mkdir and Rmdir doesn't cover non-ASCII directory names.
     // Rmdir fails on them on Linux. See ticket #17644.
-    TEST_CASE("Check making directories")
+    SUBCASE("Check making directories")
     {
         wxString dirname = wxString::FromUTF8("__wxMkdir_test_dir_with_\xc3\xb6");
         const std::string msg = wxString::Format("Dir: %s", dirname).ToStdString();
@@ -421,7 +421,7 @@ TEST_SUITE("File Functions")
         CHECK_MESSAGE(wxRmdir(dirname), msg);
     }
 
-    TEST_CASE("Check removing directories.")
+    SUBCASE("Check removing directories.")
     {
         wxString dirname = wxString::FromUTF8("__wxRmdir_test_dir_with_\xc3\xb6");
         const std::string msg = wxString::Format("Dir: %s", dirname).ToStdString();
@@ -431,21 +431,18 @@ TEST_SUITE("File Functions")
         CHECK_MESSAGE(!wxDirExists(dirname), msg);
     }
 
-    TEST_CASE("Remove temp files")
+    // Remove all remaining temporary files
+    if (wxFileExists(m_fileNameASCII))
     {
-        // Remove all remaining temporary files
-        if (wxFileExists(m_fileNameASCII))
-        {
-            wxRemoveFile(m_fileNameASCII);
-        }
-        if (wxFileExists(m_fileNameNonASCII))
-        {
-            wxRemoveFile(m_fileNameNonASCII);
-        }
-        if (wxFileExists(m_fileNameWork))
-        {
-            wxRemoveFile(m_fileNameWork);
-        }
+        wxRemoveFile(m_fileNameASCII);
+    }
+    if (wxFileExists(m_fileNameNonASCII))
+    {
+        wxRemoveFile(m_fileNameNonASCII);
+    }
+    if (wxFileExists(m_fileNameWork))
+    {
+        wxRemoveFile(m_fileNameWork);
     }
 }
 /*
