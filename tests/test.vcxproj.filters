@@ -61,5 +61,8 @@
     <ClCompile Include="uris\uris.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="uris\ftp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

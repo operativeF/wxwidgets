@@ -50,6 +50,7 @@
     <ClCompile Include="longlong\longlongtest.cpp" />
     <ClCompile Include="mbconv\convautotest.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="uris\ftp.cpp" />
     <ClCompile Include="uris\uris.cpp" />
     <ClCompile Include="uris\url.cpp" />
     <ClCompile Include="weakref\evtconnection.cpp" />
