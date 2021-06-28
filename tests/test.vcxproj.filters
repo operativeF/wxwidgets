@@ -31,5 +31,8 @@
     <ClCompile Include="lists\lists.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="filesys\filesystest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
