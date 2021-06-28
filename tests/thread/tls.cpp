@@ -10,8 +10,9 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "testprec.h"
+#include "doctest.h"
 
+#include "testprec.h"
 
 #ifndef WX_PRECOMP
 #endif // WX_PRECOMP
@@ -65,7 +66,7 @@ public:
         wxASSERT( gs_threadData.name == std::string("worker") );
         wxASSERT( gs_threadData.number == 2 );
 
-        return NULL;
+        return nullptr;
     }
 };
 
@@ -75,55 +76,31 @@ public:
 // test class
 // ----------------------------------------------------------------------------
 
-class TLSTestCase : public CppUnit::TestCase
+TEST_CASE("TestInt")
 {
-public:
-    TLSTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( TLSTestCase );
-        CPPUNIT_TEST( TestInt );
-        CPPUNIT_TEST( TestStruct );
-    CPPUNIT_TEST_SUITE_END();
-
-    void TestInt();
-    void TestStruct();
-
-    TLSTestCase(const TLSTestCase&) = delete;
-	TLSTestCase& operator=(const TLSTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( TLSTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( TLSTestCase, "TLSTestCase" );
-
-void TLSTestCase::TestInt()
-{
-    CPPUNIT_ASSERT_EQUAL( 0, gs_threadInt );
+    CHECK_EQ( 0, gs_threadInt );
 
     gs_threadInt++;
-    CPPUNIT_ASSERT_EQUAL( 1, gs_threadInt );
+    CHECK_EQ( 1, gs_threadInt );
 
     TLSTestThread().Wait();
 
-    CPPUNIT_ASSERT_EQUAL( 1, gs_threadInt );
+    CHECK_EQ( 1, gs_threadInt );
 }
 
-void TLSTestCase::TestStruct()
+TEST_CASE("TestStruct")
 {
-    CPPUNIT_ASSERT_EQUAL( NULL, gs_threadData.name );
-    CPPUNIT_ASSERT_EQUAL( 0, gs_threadData.number );
+    CHECK_EQ( nullptr, gs_threadData.name );
+    CHECK_EQ( 0, gs_threadData.number );
 
     gs_threadData.name = "main";
     gs_threadData.number = 1;
 
-    CPPUNIT_ASSERT_EQUAL( 1, gs_threadData.number );
+    CHECK_EQ( 1, gs_threadData.number );
 
     TLSTestThread().Wait();
 
-    CPPUNIT_ASSERT_EQUAL( std::string("main"), gs_threadData.name );
-    CPPUNIT_ASSERT_EQUAL( 1, gs_threadData.number );
+    CHECK_EQ( std::string("main"), gs_threadData.name );
+    CHECK_EQ( 1, gs_threadData.number );
 }
 
