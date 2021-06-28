@@ -49,6 +49,7 @@ public:
     }
     virtual ~wxControlContainerBase() = default;
 
+    // FIXME: Make sure it can't be called twice.
     void SetContainerWindow(wxWindow *winParent)
     {
         wxASSERT_MSG( !m_winParent, wxT("shouldn't be called twice") );

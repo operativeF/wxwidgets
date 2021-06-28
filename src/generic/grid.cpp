@@ -3411,6 +3411,7 @@ bool wxGrid::Redimension( wxGridTableMessage& msg )
                 m_colAt.insert(std::begin(m_colAt) + pos, numCols, pos );
 
                 //Set the new columns' positions
+                // FIXME: iota
                 for ( int i = pos + 1; i < (int)pos + numCols; i++ )
                 {
                     m_colAt[i] = i;

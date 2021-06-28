@@ -169,15 +169,12 @@ void wxMenu::Break()
 
 #if wxUSE_ACCEL
 
-int wxMenu::FindAccel(int id) const
+std::vector<wxAcceleratorEntry*>::const_iterator wxMenu::FindAccel(int id) const
 {
-    for ( size_t n = 0; n < m_accels.GetCount(); n++ )
-    {
-        if ( m_accels[n]->m_command == id )
-            return n;
-    }
-
-    return wxNOT_FOUND;
+    return std::find_if(m_accels.begin(), m_accels.end(),
+        [id](const auto& accel){
+            return accel->m_command == id;
+        });
 }
 
 void wxMenu::UpdateAccel(wxMenuItem *item)
@@ -211,23 +208,25 @@ void wxMenu::UpdateAccel(wxMenuItem *item)
             accel->m_command = item->GetId();
 
         // find the old one
-        int n = FindAccel(item->GetId());
-        if ( n == wxNOT_FOUND )
+        const auto old_accel = FindAccel(item->GetId());
+
+        if ( old_accel == m_accels.cend() )
         {
             // no old, add new if any
             if ( accel )
-                m_accels.Add(accel);
+                m_accels.push_back(accel);
             else
                 return;     // skipping RebuildAccelTable() below
         }
         else
         {
             // replace old with new or just remove the old one if no new
-            delete m_accels[n];
+            delete *old_accel;
+
             if ( accel )
-                m_accels[n] = accel;
+                m_accels.insert(old_accel, accel);
             else
-                m_accels.RemoveAt(n);
+                m_accels.erase(old_accel);
         }
 
         if ( IsAttached() )
@@ -255,12 +254,12 @@ void wxMenu::RemoveAccel(wxMenuItem *item)
     }
 
     // remove the corresponding accel from the accel table
-    int n = FindAccel(item->GetId());
-    if ( n != wxNOT_FOUND )
+    auto accelToRemove = FindAccel(item->GetId());
+    if ( accelToRemove != m_accels.cend() )
     {
-        delete m_accels[n];
+        delete *accelToRemove;
 
-        m_accels.RemoveAt(n);
+        m_accels.erase(accelToRemove);
 
 #if wxUSE_OWNER_DRAWN
         ResetMaxAccelWidth();

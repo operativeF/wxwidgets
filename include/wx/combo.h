@@ -372,6 +372,7 @@ public:
     // to focus the popup control, and normal function of common native controls.
     // This alternative popup window is usually a wxDialog, and as such it's parent
     // frame will appear as if the focus has been lost from it.
+    // FIXME: Make sure you can't call this after SetPopupControl
     void UseAltPopupWindow( bool enable = true )
     {
         wxASSERT_MSG( !m_winPopup,

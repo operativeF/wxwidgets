@@ -101,6 +101,7 @@ wxWindow *wxButtonBase::SetDefault()
     return tlw->SetDefaultItem(this);
 }
 
+// FIXME: wxDirection should be enum class.
 void wxAnyButtonBase::SetBitmapPosition(wxDirection dir)
 {
     wxASSERT_MSG( !(dir & ~wxDIRECTION_MASK), "non-direction flag used" );

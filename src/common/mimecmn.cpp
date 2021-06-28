@@ -357,6 +357,7 @@ bool
 wxFileType::GetIcon(wxIconLocation *iconloc,
                     const MessageParameters& params) const
 {
+    // FIXME: We're checking iconloc twice.
     if ( !GetIcon(iconloc) )
     {
         return false;
