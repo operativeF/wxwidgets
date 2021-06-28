@@ -10,8 +10,9 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "testprec.h"
+#include "doctest.h"
 
+#include "testprec.h"
 
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
@@ -59,56 +60,23 @@ public:
     }
 };
 
-
-
-// --------------------------------------------------------------------------
-// test class
-// --------------------------------------------------------------------------
-
-class EvtConnectionTestCase : public CppUnit::TestCase
-{
-public:
-    EvtConnectionTestCase() {}
-
-private:
-    CPPUNIT_TEST_SUITE( EvtConnectionTestCase );
-        CPPUNIT_TEST( SinkTest );
-        CPPUNIT_TEST( SourceDestroyTest );
-        CPPUNIT_TEST( MultiConnectionTest );
-    CPPUNIT_TEST_SUITE_END();
-
-    void SinkTest();
-    void SourceDestroyTest();
-    void MultiConnectionTest();
-
-    EvtConnectionTestCase(const EvtConnectionTestCase&) = delete;
-	EvtConnectionTestCase& operator=(const EvtConnectionTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( EvtConnectionTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( EvtConnectionTestCase, "EvtConnectionTestCase" );
-
-
 // Helpers
-void DoConnect( wxEvtHandler& eh1, wxEvtHandler& eh2, wxTestSink& ts ){
+static void DoConnect(wxEvtHandler& eh1, wxEvtHandler& eh2, wxTestSink& ts) {
     eh1.Connect(wxEVT_TEST, (wxObjectEventFunction)&wxTestSink::OnTestEvent,
-                NULL, &ts);
-    eh2.Connect(wxEVT_TEST, (wxObjectEventFunction) &wxTestSink::OnTestEvent,
-                NULL, &ts);
+        nullptr, &ts);
+    eh2.Connect(wxEVT_TEST, (wxObjectEventFunction)&wxTestSink::OnTestEvent,
+        nullptr, &ts);
 }
 
-void DoDisconnect( wxEvtHandler& eh1, wxEvtHandler& eh2, wxTestSink& ts ){
-    eh1.Disconnect(wxEVT_TEST, (wxObjectEventFunction) &wxTestSink::OnTestEvent,
-                NULL, &ts);
-    eh2.Disconnect(wxEVT_TEST, (wxObjectEventFunction) &wxTestSink::OnTestEvent,
-                NULL, &ts);
+static void DoDisconnect(wxEvtHandler& eh1, wxEvtHandler& eh2, wxTestSink& ts) {
+    eh1.Disconnect(wxEVT_TEST, (wxObjectEventFunction)&wxTestSink::OnTestEvent,
+        nullptr, &ts);
+    eh2.Disconnect(wxEVT_TEST, (wxObjectEventFunction)&wxTestSink::OnTestEvent,
+        nullptr, &ts);
 }
 
 
-void EvtConnectionTestCase::SinkTest()
+TEST_CASE("SinkTest")
 {
     // Let the sink be destroyed before the sources
 
@@ -122,7 +90,7 @@ void EvtConnectionTestCase::SinkTest()
 
     {
         wxTestSink ts;
-        CPPUNIT_ASSERT( !ts.GetFirst() );
+        CHECK( !ts.GetFirst() );
         DoConnect(eh1, eh2, ts);
 
         DoDisconnect(eh1, eh2, ts);
@@ -136,7 +104,7 @@ void EvtConnectionTestCase::SinkTest()
         eh2.ProcessEvent(evt);
 
         // Make sure they were processed correctly
-        CPPUNIT_ASSERT_EQUAL( 0x00010001, gs_value );
+        CHECK_EQ( 0x00010001, gs_value );
     }
 
     // Fire events again, should be no sink connected now
@@ -147,10 +115,10 @@ void EvtConnectionTestCase::SinkTest()
     eh2.ProcessEvent( evt );
 
     // Make sure no processing happened
-    CPPUNIT_ASSERT_EQUAL( 0, gs_value );
+    CHECK_EQ( 0, gs_value );
 }
 
-void EvtConnectionTestCase::SourceDestroyTest()
+TEST_CASE("SourceDestroyTest")
 {
     // Let the sources be destroyed before the sink
     wxTestSink ts;
@@ -158,7 +126,7 @@ void EvtConnectionTestCase::SourceDestroyTest()
     {
         wxEvtHandler eh1;
         {
-            CPPUNIT_ASSERT( !ts.GetFirst() );
+            CHECK( !ts.GetFirst() );
 
             // Connect two event handlers to one sink
             wxEvtHandler eh2;
@@ -174,7 +142,7 @@ void EvtConnectionTestCase::SourceDestroyTest()
             eh2.ProcessEvent( evt );
 
             // Make sure they were processed correctly
-            CPPUNIT_ASSERT_EQUAL( 0x00010001, gs_value );
+            CHECK_EQ( 0x00010001, gs_value );
         }
 
         gs_value = 0;
@@ -182,12 +150,12 @@ void EvtConnectionTestCase::SourceDestroyTest()
         eh1.ProcessEvent( evt );
 
         // Make sure still connected
-        CPPUNIT_ASSERT_EQUAL( 0x00000001, gs_value );
+        CHECK_EQ( 0x00000001, gs_value );
     }
-    CPPUNIT_ASSERT( !ts.GetFirst() );
+    CHECK( !ts.GetFirst() );
 }
 
-void EvtConnectionTestCase::MultiConnectionTest()
+TEST_CASE("MultiConnectionTest")
 {
     // events used below
     wxTestEvent evt;
@@ -197,7 +165,7 @@ void EvtConnectionTestCase::MultiConnectionTest()
     // One source
     wxEvtHandler eh1;
     evt.SetEventObject(&eh1);
-    gs_psrc1 = NULL;
+    gs_psrc1 = nullptr;
     gs_psrc2 = &eh1;
 
     {
@@ -205,18 +173,18 @@ void EvtConnectionTestCase::MultiConnectionTest()
         wxTestSink ts;
 
         eh1.Connect(wxEVT_TEST, (wxObjectEventFunction)&wxTestSink::OnTestEvent,
-                    NULL, &ts);
+                    nullptr, &ts);
         eh1.Connect(wxEVT_TEST1, (wxObjectEventFunction)&wxTestSink::OnTestEvent1,
-                    NULL, &ts);
+                    nullptr, &ts);
         eh1.Connect(wxEVT_TEST2, (wxObjectEventFunction)&wxTestSink::OnTestEvent2,
-                    NULL, &ts);
+                    nullptr, &ts);
 
         // Generate events
         gs_value = 0;
         eh1.ProcessEvent(evt);
         eh1.ProcessEvent(evt1);
         eh1.ProcessEvent(evt2);
-        CPPUNIT_ASSERT( gs_value==0x01010100 );
+        CHECK( gs_value==0x01010100 );
 
         {
             // Declare weak references to the objects (using same list)
@@ -225,11 +193,11 @@ void EvtConnectionTestCase::MultiConnectionTest()
         // And now destroyed
 
         eh1.Disconnect(wxEVT_TEST, (wxObjectEventFunction)&wxTestSink::OnTestEvent,
-                       NULL, &ts);
+                       nullptr, &ts);
         eh1.ProcessEvent(evt);
         eh1.ProcessEvent(evt1);
         eh1.ProcessEvent(evt2);
-        CPPUNIT_ASSERT_EQUAL( 0x02010200, gs_value );
+        CHECK_EQ( 0x02010200, gs_value );
     }
 
     // No connection should be left now
@@ -239,6 +207,6 @@ void EvtConnectionTestCase::MultiConnectionTest()
     eh1.ProcessEvent(evt2);
 
     // Nothing should have been done
-    CPPUNIT_ASSERT_EQUAL( 0, gs_value );
+    CHECK_EQ( 0, gs_value );
 }
 

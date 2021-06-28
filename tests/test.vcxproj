@@ -50,6 +50,7 @@
     <ClCompile Include="longlong\longlongtest.cpp" />
     <ClCompile Include="mbconv\convautotest.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="weakref\evtconnection.cpp" />
     <ClCompile Include="weakref\weakref.cpp" />
     <ClCompile Include="xlocale\xlocale.cpp" />
   </ItemGroup>
