@@ -10,8 +10,7 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "testprec.h"
-
+#include "doctest.h"
 
 #include "wx/event.h"
 

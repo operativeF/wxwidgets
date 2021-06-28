@@ -10,8 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "testprec.h"
 
+#include "doctest.h"
 
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
@@ -27,7 +27,7 @@
 // ----------------------------------------------------------------------------
 
 // number of iterations in loops
-#define ITEMS 1000
+static constexpr int ITEMS = 1000;
 
 // make a 64 bit number from 4 16 bit ones
 #define MAKE_LL(x1, x2, x3, x4) wxLongLong((x1 << 16) | x2, (x3 << 16) | x3)
@@ -35,7 +35,7 @@
 // get a random 64 bit number
 #define RAND_LL()   MAKE_LL(rand(), rand(), rand(), rand())
 
-static const long testLongs[] =
+static constexpr long testLongs[] =
 {
     0,
     1,
@@ -46,77 +46,30 @@ static const long testLongs[] =
     -0x1234
 };
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class LongLongTestCase : public CppUnit::TestCase
-{
-public:
-    LongLongTestCase();
-
-private:
-    CPPUNIT_TEST_SUITE( LongLongTestCase );
-        CPPUNIT_TEST( Conversion );
-        CPPUNIT_TEST( Comparison );
-        CPPUNIT_TEST( Addition );
-        CPPUNIT_TEST( Multiplication );
-        CPPUNIT_TEST( Division );
-        CPPUNIT_TEST( BitOperations );
-        CPPUNIT_TEST( ToString );
-        CPPUNIT_TEST( LoHi );
-        CPPUNIT_TEST( Limits );
-    CPPUNIT_TEST_SUITE_END();
-
-    void Conversion();
-    void Comparison();
-    void Addition();
-    void Multiplication();
-    void Division();
-    void BitOperations();
-    void ToString();
-    void LoHi();
-    void Limits();
-
-    LongLongTestCase(const LongLongTestCase&) = delete;
-	LongLongTestCase& operator=(const LongLongTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( LongLongTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( LongLongTestCase, "LongLongTestCase" );
-
-LongLongTestCase::LongLongTestCase()
-{
-    srand((unsigned)time(NULL));
-}
-
-void LongLongTestCase::Conversion()
+TEST_CASE("Conversions")
 {
     for ( size_t n = 0; n < ITEMS; n++ )
     {
         wxLongLong a = RAND_LL();
 
         wxLongLong b(a.GetHi(), a.GetLo());
-        CPPUNIT_ASSERT( a == b );
+        CHECK( a == b );
 
 #if wxUSE_LONGLONG_WX
         wxLongLongWx c(a.GetHi(), a.GetLo());
-        CPPUNIT_ASSERT( a == c );
+        CHECK( a == c );
 #endif
 
 #if wxUSE_LONGLONG_NATIVE
         wxLongLongNative d(a.GetHi(), a.GetLo());
-        CPPUNIT_ASSERT( a == d );
+        CHECK( a == d );
 #endif
     }
 }
 
-void LongLongTestCase::Comparison()
+TEST_CASE("Comparison")
 {
-    static const long ls[2] =
+    static constexpr long ls[2] =
     {
         0x1234,
        -0x1234,
@@ -130,17 +83,17 @@ void LongLongTestCase::Comparison()
     {
         for ( size_t m = 0; m < WXSIZEOF(lls); m++ )
         {
-            CPPUNIT_ASSERT( (lls[m] < testLongs[n]) == (ls[m] < testLongs[n]) );
-            CPPUNIT_ASSERT( (lls[m] > testLongs[n]) == (ls[m] > testLongs[n]) );
-            CPPUNIT_ASSERT( (lls[m] <= testLongs[n]) == (ls[m] <= testLongs[n]) );
-            CPPUNIT_ASSERT( (lls[m] >= testLongs[n]) == (ls[m] >= testLongs[n]) );
-            CPPUNIT_ASSERT( (lls[m] != testLongs[n]) == (ls[m] != testLongs[n]) );
-            CPPUNIT_ASSERT( (lls[m] == testLongs[n]) == (ls[m] == testLongs[n]) );
+            CHECK( (lls[m] < testLongs[n]) == (ls[m] < testLongs[n]) );
+            CHECK( (lls[m] > testLongs[n]) == (ls[m] > testLongs[n]) );
+            CHECK( (lls[m] <= testLongs[n]) == (ls[m] <= testLongs[n]) );
+            CHECK( (lls[m] >= testLongs[n]) == (ls[m] >= testLongs[n]) );
+            CHECK( (lls[m] != testLongs[n]) == (ls[m] != testLongs[n]) );
+            CHECK( (lls[m] == testLongs[n]) == (ls[m] == testLongs[n]) );
         }
     }
 }
 
-void LongLongTestCase::Addition()
+TEST_CASE("Addition")
 {
     for ( size_t n = 0; n < ITEMS; n++ )
     {
@@ -152,19 +105,19 @@ void LongLongTestCase::Addition()
         wxLongLongNative a1 = a;
         wxLongLongNative b1 = b;
         wxLongLongNative c1 = a1 + b1;
-        CPPUNIT_ASSERT( c == c1 );
+        CHECK( c == c1 );
 #endif
 
 #if wxUSE_LONGLONG_WX
         wxLongLongWx a2 = a;
         wxLongLongWx b2 = b;
         wxLongLongWx c2 = a2 + b2;
-        CPPUNIT_ASSERT( c == c2 );
+        CHECK( c == c2 );
 #endif
     }
 }
 
-void LongLongTestCase::Multiplication()
+TEST_CASE("Multiplication")
 {
     for ( size_t n = 0; n < ITEMS; n++ )
     {
@@ -175,25 +128,25 @@ void LongLongTestCase::Multiplication()
         wxLongLong a1(a.GetHi(), a.GetLo());
         wxLongLong b1(b.GetHi(), b.GetLo());
         wxLongLong c1 = a1*b1;
-        CPPUNIT_ASSERT( c1 == c );
+        CHECK( c1 == c );
 
 #if wxUSE_LONGLONG_WX
         wxLongLongWx a2(a.GetHi(), a.GetLo());
         wxLongLongWx b2(b.GetHi(), b.GetLo());
         wxLongLongWx c2 = a2*b2;
-        CPPUNIT_ASSERT( c2 == c );
+        CHECK( c2 == c );
 #endif
 
 #if wxUSE_LONGLONG_NATIVE
         wxLongLongNative a3(a.GetHi(), a.GetLo());
         wxLongLongNative b3(b.GetHi(), b.GetLo());
         wxLongLongNative c3 = a3*b3;
-        CPPUNIT_ASSERT( c3 == c );
+        CHECK( c3 == c );
 #endif
     }
 }
 
-void LongLongTestCase::Division()
+TEST_CASE("Division")
 {
     for ( size_t n = 0; n < ITEMS; n++ )
     {
@@ -212,29 +165,29 @@ void LongLongTestCase::Division()
         wxLongLong q = a / l;
         wxLongLong r = a % l;
 
-        CPPUNIT_ASSERT( a == ( q * l + r ) );
+        CHECK( a == ( q * l + r ) );
 
 #if wxUSE_LONGLONG_WX
         wxLongLongWx a1(a.GetHi(), a.GetLo());
         wxLongLongWx q1 = a1 / l;
         wxLongLongWx r1 = a1 % l;
-        CPPUNIT_ASSERT( q == q1 );
-        CPPUNIT_ASSERT( r == r1 );
-        CPPUNIT_ASSERT( a1 == ( q1 * l + r1 ) );
+        CHECK( q == q1 );
+        CHECK( r == r1 );
+        CHECK( a1 == ( q1 * l + r1 ) );
 #endif
 
 #if wxUSE_LONGLONG_NATIVE
         wxLongLongNative a2(a.GetHi(), a.GetLo());
         wxLongLongNative q2 = a2 / l;
         wxLongLongNative r2 = a2 % l;
-        CPPUNIT_ASSERT( q == q2 );
-        CPPUNIT_ASSERT( r == r2 );
-        CPPUNIT_ASSERT( a2 == ( q2 * l + r2 ) );
+        CHECK( q == q2 );
+        CHECK( r == r2 );
+        CHECK( a2 == ( q2 * l + r2 ) );
 #endif
     }
 }
 
-void LongLongTestCase::BitOperations()
+TEST_CASE("Bit Operations")
 {
     for ( size_t m = 0; m < ITEMS; m++ )
     {
@@ -245,35 +198,35 @@ void LongLongTestCase::BitOperations()
             wxLongLong b(a.GetHi(), a.GetLo()), c, d = b, e;
             d >>= n;
             c = b >> n;
-            CPPUNIT_ASSERT( c == d );
+            CHECK( c == d );
             d <<= n;
             e = c << n;
-            CPPUNIT_ASSERT( d == e );
+            CHECK( d == e );
 
 #if wxUSE_LONGLONG_WX
             wxLongLongWx b1(a.GetHi(), a.GetLo()), c1, d1 = b1, e1;
             d1 >>= n;
             c1 = b1 >> n;
-            CPPUNIT_ASSERT( c1 == d1 );
+            CHECK( c1 == d1 );
             d1 <<= n;
             e1 = c1 << n;
-            CPPUNIT_ASSERT( d1 == e1 );
+            CHECK( d1 == e1 );
 #endif
 
 #if wxUSE_LONGLONG_NATIVE
             wxLongLongNative b2(a.GetHi(), a.GetLo()), c2, d2 = b2, e2;
             d2 >>= n;
             c2 = b2 >> n;
-            CPPUNIT_ASSERT( c2 == d2 );
+            CHECK( c2 == d2 );
             d2 <<= n;
             e2 = c2 << n;
-            CPPUNIT_ASSERT( d2 == e2 );
+            CHECK( d2 == e2 );
 #endif
         }
     }
 }
 
-void LongLongTestCase::ToString()
+TEST_CASE("To String")
 {
     wxString s1, s2;
 
@@ -282,68 +235,68 @@ void LongLongTestCase::ToString()
         wxLongLong a = testLongs[n];
         s1 = wxString::Format(wxT("%ld"), testLongs[n]);
         s2 = a.ToString();
-        CPPUNIT_ASSERT( s1 == s2 );
+        CHECK( s1 == s2 );
 
         s2 = wxEmptyString;
         s2 << a;
-        CPPUNIT_ASSERT( s1 == s2 );
+        CHECK( s1 == s2 );
 
 #if wxUSE_LONGLONG_WX
         wxLongLongWx a1 = testLongs[n];
         s2 = a1.ToString();
-        CPPUNIT_ASSERT( s1 == s2 );
+        CHECK( s1 == s2 );
 #endif
 
 #if wxUSE_LONGLONG_NATIVE
         wxLongLongNative a2 = testLongs[n];
         s2 = a2.ToString();
-        CPPUNIT_ASSERT( s1 == s2 );
+        CHECK( s1 == s2 );
 #endif
     }
 
     wxLongLong a(0x12345678, 0x87654321);
-    CPPUNIT_ASSERT( a.ToString() == wxT("1311768467139281697") );
+    CHECK( a.ToString() == wxT("1311768467139281697") );
     a.Negate();
-    CPPUNIT_ASSERT( a.ToString() == wxT("-1311768467139281697") );
+    CHECK( a.ToString() == wxT("-1311768467139281697") );
 
     wxLongLong llMin(-2147483647L - 1L, 0);
-    CPPUNIT_ASSERT( llMin.ToString() == wxT("-9223372036854775808") );
+    CHECK( llMin.ToString() == wxT("-9223372036854775808") );
 
 #if wxUSE_LONGLONG_WX
     wxLongLongWx a1(a.GetHi(), a.GetLo());
-    CPPUNIT_ASSERT( a1.ToString() == wxT("-1311768467139281697") );
+    CHECK( a1.ToString() == wxT("-1311768467139281697") );
     a1.Negate();
-    CPPUNIT_ASSERT( a1.ToString() == wxT("1311768467139281697") );
+    CHECK( a1.ToString() == wxT("1311768467139281697") );
 #endif
 
 #if wxUSE_LONGLONG_NATIVE
     wxLongLongNative a2(a.GetHi(), a.GetLo());
-    CPPUNIT_ASSERT( a2.ToString() == wxT("-1311768467139281697") );
+    CHECK( a2.ToString() == wxT("-1311768467139281697") );
     a2.Negate();
-    CPPUNIT_ASSERT( a2.ToString() == wxT("1311768467139281697") );
+    CHECK( a2.ToString() == wxT("1311768467139281697") );
 #endif
 
 }
 
-void LongLongTestCase::LoHi()
+TEST_CASE("Lo - Hi")
 {
     wxLongLong ll(123, 456);
-    CPPUNIT_ASSERT_EQUAL( 456u, ll.GetLo() );
-    CPPUNIT_ASSERT_EQUAL( 123, ll.GetHi() );
+    CHECK_EQ( 456u, ll.GetLo() );
+    CHECK_EQ( 123, ll.GetHi() );
 
     wxULongLong ull(987, 654);
-    CPPUNIT_ASSERT_EQUAL( 654u, ull.GetLo() );
-    CPPUNIT_ASSERT_EQUAL( 987u, ull.GetHi() );
+    CHECK_EQ( 654u, ull.GetLo() );
+    CHECK_EQ( 987u, ull.GetHi() );
 }
 
-void LongLongTestCase::Limits()
+TEST_CASE("Limits")
 {
 #if wxUSE_LONGLONG_NATIVE
-    CPPUNIT_ASSERT( std::numeric_limits<wxLongLong>::is_specialized );
-    CPPUNIT_ASSERT( std::numeric_limits<wxULongLong>::is_specialized );
+    CHECK( std::numeric_limits<wxLongLong>::is_specialized );
+    CHECK( std::numeric_limits<wxULongLong>::is_specialized );
 
     wxULongLong maxval = std::numeric_limits<wxULongLong>::max();
-    CPPUNIT_ASSERT( maxval.ToDouble() > 0 );
+    CHECK( maxval.ToDouble() > 0 );
 #endif // wxUSE_LONGLONG_NATIVE
 }
 

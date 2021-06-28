@@ -13,7 +13,13 @@
     <ClCompile Include="fontmap\fontmaptest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="events\evthandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="longlong\longlongtest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

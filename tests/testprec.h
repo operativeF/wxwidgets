@@ -7,8 +7,6 @@
 // This needs to be included before catch.hpp to be taken into account.
 #include "testdate.h"
 
-#include "wx/catch_cppunit.h"
-
 // Custom test macro that is only defined when wxUIActionSimulator is available
 // this allows the tests that do not rely on it to run on platforms that don't
 // support it.
@@ -61,22 +59,7 @@
 // 20 this overload is explicitly deleted, so it results in compile-time error.
 //
 // Hence define this specialization to allow compiling such comparisons.
-namespace Catch
-{
 
-template <>
-struct StringMaker<wchar_t>
-{
-    static std::string convert(wchar_t wc)
-    {
-        if ( wc < 0x7f )
-            return std::string(static_cast<char>(wc), 1);
-
-        return wxString::Format(wxASCII_STR("U+%06X"), wc).ToStdString(wxConvLibc);
-    }
-};
-
-} // namespace Catch
 
 
 // thrown when assert fails in debug build

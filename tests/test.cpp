@@ -10,6 +10,10 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+
+#include "doctest.h"
+
 // For compilers that support precompilation, includes "wx/wx.h"
 // and "catch.hpp"
 #include "testprec.h"
@@ -20,19 +24,9 @@ wxCLANG_WARNING_SUPPRESS(missing-braces)
 wxCLANG_WARNING_SUPPRESS(logical-op-parentheses)
 wxCLANG_WARNING_SUPPRESS(inconsistent-missing-override)
 
-// This file needs to get the CATCH definitions in addition to the usual
-// assertion macros declarations from catch.hpp included by testprec.h.
-// Including an internal file like this is ugly, but there doesn't seem to be
-// any better way, see https://github.com/philsquared/Catch/issues/1061
-#include "internal/catch_impl.hpp"
-
 wxCLANG_WARNING_RESTORE(missing-braces)
 wxCLANG_WARNING_RESTORE(logical-op-parentheses)
 wxCLANG_WARNING_RESTORE(inconsistent-missing-override)
-
-// This probably could be done by predefining CLARA_CONFIG_MAIN, but at the
-// point where we are, just define this global variable manually.
-namespace Catch { namespace Clara { UnpositionalTag _; } }
 
 // Also define our own global variables.
 namespace wxPrivate
@@ -171,17 +165,6 @@ static void TestAssertHandler(const wxString& file,
     _exit(-1);
 }
 
-CATCH_TRANSLATE_EXCEPTION(TestAssertFailure& e)
-{
-    wxString desc = e.m_msg;
-    if ( desc.empty() )
-        desc.Printf(wxASCII_STR("Condition \"%s\" failed"), e.m_cond);
-
-    desc += wxString::Format(wxASCII_STR(" in %s() at %s:%d"), e.m_func, e.m_file, e.m_line);
-
-    return desc.ToStdString(wxConvUTF8);
-}
-
 #endif // wxDEBUG_LEVEL
 
 #if wxUSE_GUI
@@ -238,7 +221,7 @@ public:
     bool OnExceptionInMainLoop() override
     {
         wxFprintf(stderr, wxASCII_STR("Unhandled exception in the main loop: %s\n"),
-                  wxASCII_STR(Catch::translateActiveException().c_str()));
+                  wxASCII_STR("Nil")); // FIXME: Doctest
 
         throw;
     }
@@ -331,23 +314,6 @@ static int TestCrtReportHook(int reportType, char *message, int *)
 }
 
 #endif // wxUSE_VC_CRTDBG
-
-int main(int argc, char **argv)
-{
-    // tests can be ran non-interactively so make sure we don't show any assert
-    // dialog boxes -- neither our own nor from MSVC debug CRT -- which would
-    // prevent them from completing
-
-#if wxDEBUG_LEVEL
-    wxSetAssertHandler(TestAssertHandler);
-#endif // wxDEBUG_LEVEL
-
-#ifdef wxUSE_VC_CRTDBG
-    _CrtSetReportHook(TestCrtReportHook);
-#endif // wxUSE_VC_CRTDBG
-
-    return wxEntry(argc, argv);
-}
 
 extern void SetFilterEventFunc(FilterEventFunc func)
 {
@@ -634,7 +600,8 @@ int TestApp::RunTests()
     // Cast is needed under MSW where Catch also provides an overload taking
     // wchar_t, but as it simply converts arguments to char internally anyhow,
     // we can just as well always use the char version.
-    return Catch::Session().run(argc, static_cast<char**>(argv));
+    // return Catch::Session().run(argc, static_cast<char**>(argv));
+    return 0; // FIXME: Doctest?
 }
 
 int TestApp::OnExit()
