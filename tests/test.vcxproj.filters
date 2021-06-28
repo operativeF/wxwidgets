@@ -37,5 +37,14 @@
     <ClCompile Include="file\filetest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="fswatcher\fswatchertest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="file\filefn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mbconv\convautotest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
