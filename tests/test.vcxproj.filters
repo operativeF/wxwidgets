@@ -28,5 +28,8 @@
     <ClCompile Include="hashes\hashes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="lists\lists.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
