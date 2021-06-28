@@ -18,7 +18,8 @@
 #include "wx/dynarray.h"
 
 class WXDLLIMPEXP_FWD_CORE wxSpinCtrl;
-WX_DEFINE_EXPORTED_ARRAY_PTR(wxSpinCtrl *, wxArraySpins);
+
+using wxArraySpins = std::vector<wxSpinCtrl*>;
 
 // ----------------------------------------------------------------------------
 // Under Win32, wxSpinCtrl is a wxSpinButton with a buddy (as MSDN docs call

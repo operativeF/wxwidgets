@@ -259,7 +259,7 @@ void wxListBox::DoDeleteOneItem(unsigned int n)
     if ( HasFlag(wxLB_OWNERDRAW) )
     {
         delete m_aItems[n];
-        m_aItems.RemoveAt(n);
+        m_aItems.erase(m_aItems.begin() + n);
     }
 #endif // wxUSE_OWNER_DRAWN
 
@@ -456,7 +456,7 @@ int wxListBox::DoInsertItems(const wxArrayStringsAdapter & items,
         {
             wxOwnerDrawn *pNewItem = CreateLboxItem(n);
             pNewItem->SetFont(GetFont());
-            m_aItems.Insert(pNewItem, n);
+            m_aItems.insert(m_aItems.begin() + n, pNewItem);
         }
 #endif // wxUSE_OWNER_DRAWN
         AssignNewItemClientData(n, clientData, i, type);
@@ -661,7 +661,7 @@ bool wxListBox::SetFont(const wxFont &font)
 
     if ( HasFlag(wxLB_OWNERDRAW) )
     {
-        const unsigned count = m_aItems.GetCount();
+        const unsigned count = m_aItems.size();
         for ( unsigned i = 0; i < count; i++ )
             m_aItems[i]->SetFont(m_font);
 

@@ -19,7 +19,7 @@
   // define the array of list box items
   #include  "wx/dynarray.h"
 
-  WX_DEFINE_EXPORTED_ARRAY_PTR(wxOwnerDrawn *, wxListBoxItemsArray);
+  using wxListBoxItemsArray = std::vector<wxOwnerDrawn*>;
 #endif // wxUSE_OWNER_DRAWN
 
 #include <vector>
@@ -88,7 +88,18 @@ public:
     wxOwnerDrawn *GetItem(size_t n) const { return m_aItems[n]; }
 
     // get the index of the given item
-    int GetItemIndex(wxOwnerDrawn *item) const { return m_aItems.Index(item); }
+    // FIXME: Use iterators.
+    int GetItemIndex(wxOwnerDrawn *item) const
+    {
+        const auto index = std::distance(m_aItems.begin(), std::find(m_aItems.begin(), m_aItems.end(), item));
+
+        if(index == m_aItems.size())
+        {
+            return -1;
+        }
+
+        return index;
+    }
 
     // get rect of the given item index
     bool GetItemRect(size_t n, wxRect& rect) const;

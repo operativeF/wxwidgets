@@ -23,7 +23,7 @@
 
 class WXDLLIMPEXP_FWD_CORE wxToolTip;
 
-WX_DEFINE_EXPORTED_ARRAY_PTR(wxToolTip *, wxToolTipArray);
+using wxToolTipArray = std::vector<wxToolTip*>;
 
 #endif // wxUSE_TOOLTIPS
 
@@ -131,8 +131,7 @@ private:
 
 #if wxUSE_TOOLTIPS
     // array of tooltips for the individual items
-    //
-    // this array is initially NULL and initialized on first use
+
     wxToolTipArray *m_itemsTooltips{nullptr};
 #endif
 

@@ -3069,6 +3069,7 @@ Walker(wxDataViewTreeNode * node, DoJob & func, WalkFlags flags = Walk_All)
 
 } // anonymous namespace
 
+// TODO: Switch to iterators.
 bool wxDataViewMainWindow::ItemAdded(const wxDataViewItem & parent, const wxDataViewItem & item)
 {
     if (IsVirtualList())
@@ -3100,7 +3101,14 @@ bool wxDataViewMainWindow::ItemAdded(const wxDataViewItem & parent, const wxData
             GetModel()->GetChildren(parent, modelSiblings);
             const int modelSiblingsSize = modelSiblings.size();
 
-            int posInModel = modelSiblings.Index(item, /*fromEnd=*/true);
+            int posInModel = std::distance(modelSiblings.cbegin(), std::find(modelSiblings.cbegin(), modelSiblings.cend(), item));
+
+            if((posInModel + modelSiblings.cbegin()) == modelSiblings.cend())
+            {
+                posInModel = -1;
+            }
+
+            //int posInModel = modelSiblings.Index(item, /*fromEnd=*/true);
             wxCHECK_MSG(posInModel != wxNOT_FOUND, false, "adding non-existent item?");
 
 
@@ -6187,7 +6195,7 @@ int wxDataViewCtrl::GetCountPerPage() const
 
 int wxDataViewCtrl::GetSelections( wxDataViewItemArray & sel ) const
 {
-    sel.Empty();
+    sel.clear();
     const wxSelectionStore& selections = m_clientArea->GetSelections();
 
     wxSelectionStore::IterationState cookie;
@@ -6198,7 +6206,7 @@ int wxDataViewCtrl::GetSelections( wxDataViewItemArray & sel ) const
         wxDataViewItem item = m_clientArea->GetItemByRow(row);
         if ( item.IsOk() )
         {
-            sel.Add(item);
+            sel.push_back(item);
         }
         else
         {
@@ -6235,7 +6243,7 @@ void wxDataViewCtrl::SetSelections( const wxDataViewItemArray & sel )
     }
 
     // Also make the last item as current item
-    DoSetCurrentItem(sel.Last());
+    DoSetCurrentItem(sel.back());
 }
 
 void wxDataViewCtrl::Select( const wxDataViewItem & item )
@@ -7266,7 +7274,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetSelections(wxVariant* selections)
 
     wxDataViewItemArray sel;
     dvCtrl->GetSelections(sel);
-    if ( sel.IsEmpty() )
+    if ( sel.empty() )
     {
         selections->MakeNull();
     }
@@ -7275,7 +7283,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetSelections(wxVariant* selections)
         wxVariantList tempList;
         wxVariant v(tempList);
 
-        for( size_t i = 0; i < sel.GetCount(); i++ )
+        for( size_t i = 0; i < sel.size(); i++ )
         {
             int row = dvCtrl->GetRowByItem(sel[i]);
             v.Append(wxVariant((long)row+1));

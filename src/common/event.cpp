@@ -997,7 +997,7 @@ bool wxEventHashTable::HandleEvent(wxEvent &event, wxEvtHandler *self)
         const wxEventTableEntryPointerArray&
             eventEntryTable = eTTnode->eventEntryTable;
 
-        const size_t count = eventEntryTable.GetCount();
+        const size_t count = eventEntryTable.size();
         for (size_t n = 0; n < count; n++)
         {
             const wxEventTableEntry& entry = *eventEntryTable[n];
@@ -1034,7 +1034,7 @@ void wxEventHashTable::InitHashTable()
         EventTypeTablePointer  eTTnode = m_eventTypeTable[i];
         if (eTTnode)
         {
-            eTTnode->eventEntryTable.Shrink();
+            eTTnode->eventEntryTable.shrink_to_fit();
         }
     }
 }
@@ -1067,7 +1067,7 @@ void wxEventHashTable::AddEntry(const wxEventTableEntry &entry)
     }
 
     // Fill all hash entries between entry.m_id and entry.m_lastId...
-    eTTnode->eventEntryTable.Add(&entry);
+    eTTnode->eventEntryTable.push_back(&entry);
 }
 
 void wxEventHashTable::AllocEventTypeTable(size_t size)

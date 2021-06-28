@@ -3607,7 +3607,7 @@ struct WXDLLIMPEXP_BASE wxEventTable
 // wxEventHashTable: a helper of wxEvtHandler to speed up wxEventTable lookups.
 // ----------------------------------------------------------------------------
 
-WX_DEFINE_ARRAY_PTR(const wxEventTableEntry*, wxEventTableEntryPointerArray);
+using wxEventTableEntryPointerArray = std::vector<const wxEventTableEntry*>;
 
 class WXDLLIMPEXP_BASE wxEventHashTable
 {

@@ -393,7 +393,7 @@ wxArrayVideoModes wxDisplayMSW::GetModes(const wxVideoMode& modeMatch) const
         const wxVideoMode mode = ConvertToVideoMode(dm);
         if ( mode.Matches(modeMatch) )
         {
-            modes.Add(mode);
+            modes.push_back(mode);
         }
     }
 

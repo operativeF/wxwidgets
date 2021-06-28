@@ -93,7 +93,7 @@ wxFont wxDataViewItemAttr::GetEffectiveFont(const wxFont& font) const
 
 bool wxDataViewModelNotifier::ItemsAdded( const wxDataViewItem &parent, const wxDataViewItemArray &items )
 {
-    size_t count = items.GetCount();
+    size_t count = items.size();
     for (size_t i = 0; i < count; i++)
         if (!ItemAdded( parent, items[i] )) return false;
 
@@ -102,7 +102,7 @@ bool wxDataViewModelNotifier::ItemsAdded( const wxDataViewItem &parent, const wx
 
 bool wxDataViewModelNotifier::ItemsDeleted( const wxDataViewItem &parent, const wxDataViewItemArray &items )
 {
-    size_t count = items.GetCount();
+    size_t count = items.size();
 
     for (size_t i = 0; i < count; i++)
         if (!ItemDeleted( parent, items[i] )) return false;
@@ -112,7 +112,7 @@ bool wxDataViewModelNotifier::ItemsDeleted( const wxDataViewItem &parent, const 
 
 bool wxDataViewModelNotifier::ItemsChanged( const wxDataViewItemArray &items )
 {
-    size_t count = items.GetCount();
+    size_t count = items.size();
 
     for (size_t i = 0; i < count; i++)
         if (!ItemChanged( items[i] )) return false;
@@ -423,7 +423,7 @@ wxDataViewIndexListModel::wxDataViewIndexListModel( unsigned int initial_size )
 {
     // build initial index
     for (unsigned int i = 1; i < initial_size+1; i++)
-            m_hash.Add( wxDataViewItem(wxUIntToPtr(i)) );
+            m_hash.push_back( wxDataViewItem(wxUIntToPtr(i)) );
     m_nextFreeID = initial_size + 1;
 }
 
@@ -431,14 +431,14 @@ void wxDataViewIndexListModel::Reset( unsigned int new_size )
 {
     /* wxDataViewModel:: */ BeforeReset();
 
-    m_hash.Clear();
+    m_hash.clear();
 
     // IDs are ordered until an item gets deleted or inserted
     m_ordered = true;
 
     // build initial index
     for (unsigned int i = 1; i < new_size + 1; i++)
-            m_hash.Add( wxDataViewItem(wxUIntToPtr(i)) );
+            m_hash.push_back( wxDataViewItem(wxUIntToPtr(i)) );
 
     m_nextFreeID = new_size + 1;
 
@@ -453,7 +453,7 @@ void wxDataViewIndexListModel::RowPrepended()
     m_nextFreeID++;
 
     const wxDataViewItem item( wxUIntToPtr(id) );
-    m_hash.Insert( item, 0 );
+    m_hash.insert( m_hash.begin(), item );
     ItemAdded( wxDataViewItem(nullptr), item );
 
 }
@@ -466,7 +466,7 @@ void wxDataViewIndexListModel::RowInserted( unsigned int before )
     m_nextFreeID++;
 
     const wxDataViewItem item( wxUIntToPtr(id) );
-    m_hash.Insert( item, before );
+    m_hash.insert( m_hash.begin() + before, item );
     ItemAdded( wxDataViewItem(nullptr), item );
 }
 
@@ -476,7 +476,7 @@ void wxDataViewIndexListModel::RowAppended()
     m_nextFreeID++;
 
     const wxDataViewItem item( wxUIntToPtr(id) );
-    m_hash.Add( item );
+    m_hash.push_back( item );
     ItemAdded( wxDataViewItem(nullptr), item );
 }
 
@@ -485,7 +485,7 @@ void wxDataViewIndexListModel::RowDeleted( unsigned int row )
     m_ordered = false;
 
     const wxDataViewItem item( m_hash[row] );
-    m_hash.RemoveAt( row );
+    m_hash.erase(m_hash.begin() + row );
     /* wxDataViewModel:: */ ItemDeleted( wxDataViewItem(nullptr), item );
 }
 
@@ -497,7 +497,7 @@ void wxDataViewIndexListModel::RowsDeleted( const std::vector<int> &rows )
     for (int i = 0; i < rows.size(); i++)
     {
             const wxDataViewItem item( m_hash[rows[i]] );
-            array.Add( item );
+            array.push_back( item );
     }
 
     std::vector<int> sorted = rows;
@@ -505,7 +505,7 @@ void wxDataViewIndexListModel::RowsDeleted( const std::vector<int> &rows )
     std::sort(sorted.begin(), sorted.end());
 
     for (int i = 0; i < sorted.size(); i++)
-           m_hash.RemoveAt( sorted[i] );
+           m_hash.erase( m_hash.begin() + sorted[i] );
 
     /* wxDataViewModel:: */ ItemsDeleted( wxDataViewItem(nullptr), array );
 }
@@ -526,12 +526,12 @@ unsigned int wxDataViewIndexListModel::GetRow( const wxDataViewItem &item ) cons
         return wxPtrToUInt(item.GetID())-1;
 
     // assert for not found
-    return (unsigned int) m_hash.Index( item );
+    return std::distance(m_hash.begin(), std::find(m_hash.cbegin(), m_hash.cend(), item));
 }
 
 wxDataViewItem wxDataViewIndexListModel::GetItem( unsigned int row ) const
 {
-    wxASSERT( row < m_hash.GetCount() );
+    wxASSERT( row < m_hash.size() );
     return {m_hash[row]};
 }
 
@@ -542,7 +542,7 @@ unsigned int wxDataViewIndexListModel::GetChildren( const wxDataViewItem &item, 
 
     children = m_hash;
 
-    return m_hash.GetCount();
+    return m_hash.size();
 }
 
 // ---------------------------------------------------------
@@ -605,7 +605,7 @@ void wxDataViewVirtualListModel::RowsDeleted( const std::vector<int> &rows )
     for (unsigned int i = 0; i < sorted.size(); i++)
     {
         wxDataViewItem item( wxUIntToPtr(sorted[i]+1) );
-        array.Add( item );
+        array.push_back( item );
     }
     /* wxDataViewModel:: */ ItemsDeleted( wxDataViewItem(nullptr), array );
 }
@@ -2832,7 +2832,7 @@ unsigned int wxDataViewTreeStore::GetChildren( const wxDataViewItem &item, wxDat
 
     for (const auto* child : node->GetChildren())
     {
-        children.Add( child->GetItem() );
+        children.push_back( child->GetItem() );
     }
 
     return node->GetChildren().size();
@@ -3042,7 +3042,7 @@ void wxDataViewTreeCtrl::DeleteChildren( const wxDataViewItem& item )
     for (iter = node->GetChildren().begin(); iter != node->GetChildren().end(); ++iter)
     {
         wxDataViewTreeStoreNode* child = *iter;
-        array.Add( child->GetItem() );
+        array.push_back( child->GetItem() );
     }
 
     GetStore()->DeleteChildren( item );

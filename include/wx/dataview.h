@@ -19,7 +19,6 @@
 #include "wx/headercol.h"
 #include "wx/variant.h"
 #include "wx/dnd.h"             // For wxDragResult declaration only.
-#include "wx/dynarray.h"
 #include "wx/icon.h"
 #include "wx/itemid.h"
 #include "wx/weakref.h"
@@ -98,7 +97,7 @@ public:
     explicit wxDataViewItem(void* pItem) : wxItemId<void*>(pItem) { }
 };
 
-WX_DEFINE_ARRAY(wxDataViewItem, wxDataViewItemArray);
+using wxDataViewItemArray = std::vector<wxDataViewItem>;
 
 // ---------------------------------------------------------
 // wxDataViewModelNotifier
@@ -396,7 +395,7 @@ public:
     // implement base methods
     unsigned int GetChildren( const wxDataViewItem &item, wxDataViewItemArray &children ) const override;
 
-    unsigned int GetCount() const override { return (unsigned int)m_hash.GetCount(); }
+    unsigned int GetCount() const override { return (unsigned int)m_hash.size(); }
 
 private:
     wxDataViewItemArray m_hash;
@@ -544,10 +543,10 @@ public:
     wxDataViewCtrlBase() = default;
     ~wxDataViewCtrlBase() override;
 
-wxDataViewCtrlBase(const wxDataViewCtrlBase&) = delete;
-   wxDataViewCtrlBase& operator=(const wxDataViewCtrlBase&) = delete;
-   wxDataViewCtrlBase(wxDataViewCtrlBase&&) = default;
-   wxDataViewCtrlBase& operator=(wxDataViewCtrlBase&&) = default;
+    wxDataViewCtrlBase(const wxDataViewCtrlBase&) = delete;
+    wxDataViewCtrlBase& operator=(const wxDataViewCtrlBase&) = delete;
+    wxDataViewCtrlBase(wxDataViewCtrlBase&&) = default;
+    wxDataViewCtrlBase& operator=(wxDataViewCtrlBase&&) = default;
 
     // model
     // -----
