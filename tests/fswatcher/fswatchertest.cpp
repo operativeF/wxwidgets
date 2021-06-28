@@ -10,8 +10,9 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "testprec.h"
+#include "doctest.h"
 
+#include "testprec.h"
 
 #ifndef WX_PRECOMP
     #include "wx/timer.h"
@@ -25,6 +26,7 @@
 #include "wx/fswatcher.h"
 
 #include "wx/stdpaths.h"
+
 #include <vector>
 
 #include "testfile.h"
@@ -257,7 +259,7 @@ public:
 
         // XXX only now can we construct Watcher, because we need
         // active loop here
-        m_watcher.reset(new wxFileSystemWatcher());
+        m_watcher = std::make_unique<wxFileSystemWatcher>();
         m_watcher->SetOwner(this);
 
         // add dir to be watched
@@ -301,18 +303,18 @@ public:
             }
         }
 
-        WX_ASSERT_EQUAL_MESSAGE
-        (
-            (
-                "Extra events received, last one is of type %x, path=\"%s\" "
-                "(the original event was for \"%s\" (\"%s\")",
-                m_events.back()->GetChangeType(),
-                m_events.back()->GetPath().GetFullPath(),
-                e->GetPath().GetFullPath(),
-                e->GetNewPath().GetFullPath()
-            ),
-            1, m_events.size()
-        );
+        //CHECK_MESSAGE
+        //(
+        //    (
+        //        "Extra events received, last one is of type %x, path=\"%s\" "
+        //        "(the original event was for \"%s\" (\"%s\")",
+        //        m_events.back()->GetChangeType(),
+        //        m_events.back()->GetPath().GetFullPath(),
+        //        e->GetPath().GetFullPath(),
+        //        e->GetNewPath().GetFullPath()
+        //    ),
+        //    1, m_events.size()
+        //);
 
         delete e;
     }
@@ -373,8 +375,8 @@ public:
 // TestEventCreate
 // ----------------------------------------------------------------------------
 
-TEST_CASE_METHOD(FileSystemWatcherTestCase,
-                 "wxFileSystemWatcher::EventCreate", "[fsw]")
+TEST_CASE_FIXTURE(FileSystemWatcherTestCase,
+                 "wxFileSystemWatcher::EventCreate")
 {
     class EventTester : public FSWTesterBase
     {
@@ -402,8 +404,8 @@ TEST_CASE_METHOD(FileSystemWatcherTestCase,
 // TestEventDelete
 // ----------------------------------------------------------------------------
 
-TEST_CASE_METHOD(FileSystemWatcherTestCase,
-                 "wxFileSystemWatcher::EventDelete", "[fsw]")
+TEST_CASE_FIXTURE(FileSystemWatcherTestCase,
+                 "wxFileSystemWatcher::EventDelete")
 {
     class EventTester : public FSWTesterBase
     {
@@ -442,8 +444,8 @@ TEST_CASE_METHOD(FileSystemWatcherTestCase,
 // TestEventRename
 // ----------------------------------------------------------------------------
 
-TEST_CASE_METHOD(FileSystemWatcherTestCase,
-                 "wxFileSystemWatcher::EventRename", "[fsw]")
+TEST_CASE_FIXTURE(FileSystemWatcherTestCase,
+                 "wxFileSystemWatcher::EventRename")
 {
     class EventTester : public FSWTesterBase
     {
@@ -473,8 +475,8 @@ TEST_CASE_METHOD(FileSystemWatcherTestCase,
 // TestEventModify
 // ----------------------------------------------------------------------------
 
-TEST_CASE_METHOD(FileSystemWatcherTestCase,
-                 "wxFileSystemWatcher::EventModify", "[fsw]")
+TEST_CASE_FIXTURE(FileSystemWatcherTestCase,
+                 "wxFileSystemWatcher::EventModify")
 {
     class EventTester : public FSWTesterBase
     {
@@ -507,8 +509,8 @@ TEST_CASE_METHOD(FileSystemWatcherTestCase,
 // TestEventAccess
 // ----------------------------------------------------------------------------
 
-TEST_CASE_METHOD(FileSystemWatcherTestCase,
-                 "wxFileSystemWatcher::EventAccess", "[fsw]")
+TEST_CASE_FIXTURE(FileSystemWatcherTestCase,
+                 "wxFileSystemWatcher::EventAccess")
 {
     class EventTester : public FSWTesterBase
     {
@@ -543,8 +545,8 @@ TEST_CASE_METHOD(FileSystemWatcherTestCase,
 // ----------------------------------------------------------------------------
 // TestEventAttribute
 // ----------------------------------------------------------------------------
-TEST_CASE_METHOD(FileSystemWatcherTestCase,
-                 "wxFileSystemWatcher::EventAttribute", "[fsw]")
+TEST_CASE_FIXTURE(FileSystemWatcherTestCase,
+                 "wxFileSystemWatcher::EventAttribute")
 {
     class EventTester : public FSWTesterBase
     {
@@ -574,8 +576,8 @@ TEST_CASE_METHOD(FileSystemWatcherTestCase,
 // TestSingleWatchtypeEvent: Watch only wxFSW_EVENT_ACCESS
 // ----------------------------------------------------------------------------
 
-TEST_CASE_METHOD(FileSystemWatcherTestCase,
-                 "wxFileSystemWatcher::SingleWatchtypeEvent", "[fsw]")
+TEST_CASE_FIXTURE(FileSystemWatcherTestCase,
+                 "wxFileSystemWatcher::SingleWatchtypeEvent")
 {
     class EventTester : public FSWTesterBase
     {
@@ -611,8 +613,8 @@ TEST_CASE_METHOD(FileSystemWatcherTestCase,
 // TestTrees
 // ----------------------------------------------------------------------------
 
-TEST_CASE_METHOD(FileSystemWatcherTestCase,
-                 "wxFileSystemWatcher::Trees", "[fsw]")
+TEST_CASE_FIXTURE(FileSystemWatcherTestCase,
+                 "wxFileSystemWatcher::Trees")
 {
     class TreeTester : public FSWTesterBase
     {
@@ -903,8 +905,8 @@ public:
 
 } // anonymous namespace
 
-TEST_CASE_METHOD(FileSystemWatcherTestCase,
-                 "wxFileSystemWatcher::NoEventsAfterRemove", "[fsw]")
+TEST_CASE_FIXTURE(FileSystemWatcherTestCase,
+                 "wxFileSystemWatcher::NoEventsAfterRemove")
 {
     NoEventsAfterRemoveEventTester tester;
     tester.Run();

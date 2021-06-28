@@ -10,7 +10,7 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#define DOCTEST_CONFIG_IMPLEMENT
 
 #include "doctest.h"
 
@@ -298,6 +298,41 @@ private:
 
 wxIMPLEMENT_APP_NO_MAIN(TestApp);
 
+int main(int argc, char** argv)
+{
+    doctest::Context context;
+
+    context.applyCommandLine(argc, argv);
+
+    // overrides
+    context.setOption("no-breaks", true);             // don't break in the debugger when assertions fail
+
+    wxEntryStart(argc, argv);
+    wxTheApp->CallOnInit();
+
+    int res = context.run(); // run
+
+    if (context.shouldExit()) // important - query flags (and --exit) rely on the user doing this
+        return res;
+
+    wxTheApp->OnRun();
+    wxTheApp->OnExit();
+    wxEntryCleanup();
+
+    // tests can be ran non-interactively so make sure we don't show any assert
+    // dialog boxes -- neither our own nor from MSVC debug CRT -- which would
+    // prevent them from completing
+
+#if wxDEBUG_LEVEL
+    wxSetAssertHandler(TestAssertHandler);
+#endif // wxDEBUG_LEVEL
+
+#ifdef wxUSE_VC_CRTDBG
+    _CrtSetReportHook(TestCrtReportHook);
+#endif // wxUSE_VC_CRTDBG
+
+    return res; // the result from doctest is propagated here as well
+}
 
 // ----------------------------------------------------------------------------
 // global functions

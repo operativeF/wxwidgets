@@ -6,8 +6,8 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "testprec.h"
 
+#include "doctest.h"
 
 // for all others, include the necessary headers
 #ifndef WX_PRECOMP

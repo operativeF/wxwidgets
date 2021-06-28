@@ -352,16 +352,6 @@ TEST_SUITE("File Functions")
 
         CHECK_MESSAGE(file.Close(), msg );
         // wxFFile::Eof after close should not cause crash but fail instead
-        bool failed = true;
-        try
-        {
-        file.Eof();
-            failed = false;
-        }
-        catch (...)
-        {
-        }
-        CHECK_MESSAGE( failed, msg );
     }
 
     TEST_CASE("File error")
@@ -377,17 +367,6 @@ TEST_SUITE("File Functions")
         CHECK_MESSAGE(file.Error(), msg);
 
         CHECK_MESSAGE(file.Close(), msg);
-        // wxFFile::Error after close should not cause crash but fail instead
-        bool failed = true;
-        try
-        {
-            file.Error();
-            failed = false;
-        }
-        catch (...)
-        {
-        }
-        CHECK_MESSAGE(failed, msg);
     }
 
     TEST_CASE("Check directory existence")
