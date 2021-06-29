@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -19,7 +21,7 @@
 
 #include <algorithm>
 
-TEST_CASE("StdString::Constructors", "[stdstring]")
+TEST_CASE("StdString::Constructors")
 {
     wxString s1(wxT("abcdefgh")),
              s2(wxT("abcdefghijklm"), 8),
@@ -45,7 +47,7 @@ TEST_CASE("StdString::Constructors", "[stdstring]")
     CHECK( wxString(pw, pw + 1) == "a" );
 }
 
-TEST_CASE("StdString::Iterators", "[stdstring]")
+TEST_CASE("StdString::Iterators")
 {
     // test compilation of default iterators ctors:
     wxString::iterator i1;
@@ -54,7 +56,7 @@ TEST_CASE("StdString::Iterators", "[stdstring]")
     wxString::const_reverse_iterator i4;
 }
 
-TEST_CASE("StdString::IteratorsCmp", "[stdstring]")
+TEST_CASE("StdString::IteratorsCmp")
 {
     wxString s("foobar");
     wxString::iterator i = s.begin();
@@ -78,7 +80,7 @@ TEST_CASE("StdString::IteratorsCmp", "[stdstring]")
     CHECK( !(ci < i) );
 }
 
-TEST_CASE("StdString::Append", "[stdstring]")
+TEST_CASE("StdString::Append")
 {
     wxString s1, s2, s3, s4, s5, s6, s7, s8;
 
@@ -116,7 +118,7 @@ TEST_CASE("StdString::Append", "[stdstring]")
     CHECK( s8 == wxString(wxT("null\0timedef"), 12) );
 }
 
-TEST_CASE("StdString::Assign", "[stdstring]")
+TEST_CASE("StdString::Assign")
 {
     wxString s1, s2, s3, s4, s5, s6, s7, s8;
 
@@ -147,7 +149,7 @@ TEST_CASE("StdString::Assign", "[stdstring]")
     CHECK( s1 == "e" );
 }
 
-TEST_CASE("StdString::Compare", "[stdstring]")
+TEST_CASE("StdString::Compare")
 {
     wxString s1, s2, s3, s4, s5, s6, s7, s8;
 
@@ -169,7 +171,7 @@ TEST_CASE("StdString::Compare", "[stdstring]")
     CHECK( s1.compare(1, 7, wxT("bcdefgh"), 7) == 0);
 }
 
-TEST_CASE("StdString::Erase", "[stdstring]")
+TEST_CASE("StdString::Erase")
 {
     wxString s1, s2, s3, s4, s5, s6, s7;
 
@@ -197,7 +199,7 @@ TEST_CASE("StdString::Erase", "[stdstring]")
     CHECK( it3 == s7.end() );
 }
 
-TEST_CASE("StdString::Find", "[stdstring]")
+TEST_CASE("StdString::Find")
 {
     //                0         1         2
     //                01234567890123456789012345
@@ -248,7 +250,7 @@ TEST_CASE("StdString::Find", "[stdstring]")
     CHECK( _s1.find(_s2, 6) == 6u );
 }
 
-TEST_CASE("StdString::FindFirst", "[stdstring]")
+TEST_CASE("StdString::FindFirst")
 {
     //                0         1         2         3
     //                01234567890123456789012345678901234
@@ -274,7 +276,7 @@ TEST_CASE("StdString::FindFirst", "[stdstring]")
     CHECK( s1.find_first_of(wxT("ddcfga"), 17, 5) == 24u );
 }
 
-TEST_CASE("StdString::FindLast", "[stdstring]")
+TEST_CASE("StdString::FindLast")
 {
     //                0         1         2         3
     //                01234567890123456789012345678901234
@@ -326,7 +328,7 @@ TEST_CASE("StdString::FindLast", "[stdstring]")
     CHECK( s1.find_last_of(wxT("a"), 18) == 18u );
 }
 
-TEST_CASE("StdString::StartsEndsWith", "[stdstring]")
+TEST_CASE("StdString::StartsEndsWith")
 {
     const wxString s(wxT("Hello, world!"));
     CHECK( s.starts_with(wxT("Hello")) == true );
@@ -348,7 +350,7 @@ TEST_CASE("StdString::StartsEndsWith", "[stdstring]")
     CHECK( s.ends_with(wxT("Gello, world!")) == false );
 }
 
-TEST_CASE("StdString::Insert", "[stdstring]")
+TEST_CASE("StdString::Insert")
 {
     wxString s1, s2, s3, s4, s5, s6, s7, s8, s9, s10;
 
@@ -381,7 +383,7 @@ TEST_CASE("StdString::Insert", "[stdstring]")
     CHECK( s2 == wxT("aaaacc") );
 }
 
-TEST_CASE("StdString::Replace", "[stdstring]")
+TEST_CASE("StdString::Replace")
 {
     wxString s1, s2, s3, s4, s5, s6, s7, s8, s9;
 
@@ -406,7 +408,7 @@ TEST_CASE("StdString::Replace", "[stdstring]")
     CHECK( s7 == wxT("QWwertyP") );
 }
 
-TEST_CASE("StdString::RFind", "[stdstring]")
+TEST_CASE("StdString::RFind")
 {
     //                0         1         2
     //                01234567890123456789012345
@@ -454,7 +456,7 @@ TEST_CASE("StdString::RFind", "[stdstring]")
     CHECK( s1.rfind(wxT("gABZZZ"), 5, 3) == wxString::npos );
 }
 
-TEST_CASE("StdString::Resize", "[stdstring]")
+TEST_CASE("StdString::Resize")
 {
     wxString s1, s2, s3, s4;
 
@@ -476,7 +478,7 @@ TEST_CASE("StdString::Resize", "[stdstring]")
     CHECK( s == wxString::FromUTF8("\xd0\x9f\xd1\x80\xd0\xb8") );
 }
 
-TEST_CASE("StdString::Riter", "[stdstring]")
+TEST_CASE("StdString::Riter")
 {
     const wxString s(wxT("fozbar"));
 
@@ -496,7 +498,7 @@ TEST_CASE("StdString::Riter", "[stdstring]")
     CHECK( wxT('z') == *i );
 }
 
-TEST_CASE("StdString::Substr", "[stdstring]")
+TEST_CASE("StdString::Substr")
 {
     wxString s1 = wxT("abcdefgABCDEFG");
 
@@ -520,7 +522,7 @@ TEST_CASE("StdString::Substr", "[stdstring]")
     CHECK( s1.substr( 17, 30 ) == wxT("") );
 }
 
-TEST_CASE("StdString::Conversion", "[stdstring]")
+TEST_CASE("StdString::Conversion")
 {
     std::string strStd("std::string value");
     wxStdWideString strStdWide(L"std::wstring value");
@@ -551,7 +553,7 @@ TEST_CASE("StdString::Conversion", "[stdstring]")
 
     wxStdWideString s6 = s4;
 
-    CHECK( s6 == "hello" );
+    CHECK( s6 == L"hello" );
 
 #if wxUSE_UNSAFE_WXSTRING_CONV
     std::string s7(s4);
@@ -559,7 +561,7 @@ TEST_CASE("StdString::Conversion", "[stdstring]")
 #endif
 
     wxStdWideString s8(s4);
-    CHECK( s8 == "hello" );
+    CHECK( s8 == L"hello" );
 
     std::string s9("\xF0\x9F\x90\xB1\0\xE7\x8C\xAB", 9); /* U+1F431 U+0000 U+732B */
     wxString s10 = wxString::FromUTF8(s9);
@@ -572,7 +574,7 @@ TEST_CASE("StdString::Conversion", "[stdstring]")
     CHECK( wxString("bye").utf8_string() == std::string("bye") );
 }
 
-TEST_CASE("StdString::Algo", "[stdstring]")
+TEST_CASE("StdString::Algo")
 {
     wxString s("AB");
     std::reverse(s.begin(), s.end());
