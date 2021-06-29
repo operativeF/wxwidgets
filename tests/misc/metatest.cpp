@@ -6,6 +6,8 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #include "wx/object.h"
@@ -17,81 +19,47 @@
 #include <typeinfo>
 #endif
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class MetaProgrammingTestCase : public CppUnit::TestCase
+TEST_CASE("IsPod")
 {
-public:
-    MetaProgrammingTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( MetaProgrammingTestCase );
-        CPPUNIT_TEST( IsPod );
-        CPPUNIT_TEST( IsMovable );
-        CPPUNIT_TEST( ImplicitConversion );
-        CPPUNIT_TEST( MinMax );
-    CPPUNIT_TEST_SUITE_END();
-
-    void IsPod();
-    void IsMovable();
-    void ImplicitConversion();
-    void MinMax();
-
-    MetaProgrammingTestCase(const MetaProgrammingTestCase&) = delete;
-	MetaProgrammingTestCase& operator=(const MetaProgrammingTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( MetaProgrammingTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( MetaProgrammingTestCase,
-                                       "MetaProgrammingTestCase" );
-
-
-void MetaProgrammingTestCase::IsPod()
-{
-    CPPUNIT_ASSERT(wxIsPod<bool>::value);
-    CPPUNIT_ASSERT(wxIsPod<signed int>::value);
-    CPPUNIT_ASSERT(wxIsPod<double>::value);
-    CPPUNIT_ASSERT(wxIsPod<wxObject*>::value);
-    CPPUNIT_ASSERT(!wxIsPod<wxObject>::value);
+    CHECK(wxIsPod<bool>::value);
+    CHECK(wxIsPod<signed int>::value);
+    CHECK(wxIsPod<double>::value);
+    CHECK(wxIsPod<wxObject*>::value);
+    CHECK(!wxIsPod<wxObject>::value);
 }
 
-void MetaProgrammingTestCase::IsMovable()
+TEST_CASE("IsMovable")
 {
-    CPPUNIT_ASSERT(wxIsMovable<bool>::value);
-    CPPUNIT_ASSERT(wxIsMovable<signed int>::value);
-    CPPUNIT_ASSERT(wxIsMovable<double>::value);
-    CPPUNIT_ASSERT(wxIsMovable<wxObject*>::value);
-    CPPUNIT_ASSERT(!wxIsMovable<wxObject>::value);
+    CHECK(wxIsMovable<bool>::value);
+    CHECK(wxIsMovable<signed int>::value);
+    CHECK(wxIsMovable<double>::value);
+    CHECK(wxIsMovable<wxObject*>::value);
+    CHECK(!wxIsMovable<wxObject>::value);
 }
 
-void MetaProgrammingTestCase::ImplicitConversion()
+TEST_CASE("ImplicitConversion")
 {
 #ifndef wxNO_RTTI
-    CPPUNIT_ASSERT(typeid(wxImplicitConversionType<char,int>::value) == typeid(int));
-    CPPUNIT_ASSERT(typeid(wxImplicitConversionType<int,unsigned>::value) == typeid(unsigned));
+    CHECK(typeid(wxImplicitConversionType<char,int>::value) == typeid(int));
+    CHECK(typeid(wxImplicitConversionType<int,unsigned>::value) == typeid(unsigned));
 #ifdef wxLongLong_t
-    CPPUNIT_ASSERT(typeid(wxImplicitConversionType<wxLongLong_t,float>::value) == typeid(float));
+    CHECK(typeid(wxImplicitConversionType<wxLongLong_t,float>::value) == typeid(float));
 #endif
 #endif // !wxNO_RTTI
 }
 
-void MetaProgrammingTestCase::MinMax()
+TEST_CASE("MinMax")
 {
     // test that wxMax(1.1,1) returns float, not long int
     float f = wxMax(1.1f, 1l);
-    CPPUNIT_ASSERT_EQUAL( 1.1f, f);
+    CHECK_EQ( 1.1f, f);
 
     // test that comparing signed and unsigned correctly returns unsigned: this
     // may seem counterintuitive in this case but this is consistent with the
     // standard C conversions
-    CPPUNIT_ASSERT_EQUAL( 1, wxMin(-1, 1u) );
+    CHECK_EQ( 1, wxMin(-1, 1u) );
 
-    CPPUNIT_ASSERT_EQUAL( -1., wxClip(-1.5, -1, 1) );
-    CPPUNIT_ASSERT_EQUAL( 0, wxClip(0, -1, 1) );
-    CPPUNIT_ASSERT_EQUAL( 1, wxClip(2l, -1, 1) );
+    CHECK_EQ( -1., wxClip(-1.5, -1, 1) );
+    CHECK_EQ( 0, wxClip(0, -1, 1) );
+    CHECK_EQ( 1, wxClip(2l, -1, 1) );
 }
