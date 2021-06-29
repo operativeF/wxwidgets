@@ -76,5 +76,8 @@
     <ClCompile Include="cmdline\cmdlinetest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="file\dir.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

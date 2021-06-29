@@ -10,8 +10,9 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "testprec.h"
+#include "doctest.h"
 
+#include "testprec.h"
 
 #include "wx/dir.h"
 #include "wx/filename.h"
@@ -21,58 +22,17 @@
 #define SEP                 wxFileName::GetPathSeparator()
 
 // ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class DirTestCase : public CppUnit::TestCase
-{
-public:
-    DirTestCase() { }
-
-    void setUp() override;
-    void tearDown() override;
-
-private:
-    CPPUNIT_TEST_SUITE( DirTestCase );
-        CPPUNIT_TEST( DirExists );
-        CPPUNIT_TEST( Traverse );
-        CPPUNIT_TEST( Enum );
-        CPPUNIT_TEST( GetName );
-    CPPUNIT_TEST_SUITE_END();
-
-    void DirExists();
-    void Traverse();
-    void Enum();
-    void GetName();
-
-    void CreateTempFile(const wxString& path);
-    std::vector<wxString> DirEnumHelper(wxDir& dir,
-                               int flags = wxDIR_DEFAULT,
-                               const wxString& filespec = wxEmptyString);
-
-    DirTestCase(const DirTestCase&) = delete;
-	DirTestCase& operator=(const DirTestCase&) = delete;
-};
-
-// ----------------------------------------------------------------------------
-// CppUnit macros
-// ----------------------------------------------------------------------------
-
-CPPUNIT_TEST_SUITE_REGISTRATION( DirTestCase );
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( DirTestCase, "DirTestCase" );
-
-// ----------------------------------------------------------------------------
 // tests implementation
 // ----------------------------------------------------------------------------
 
-void DirTestCase::CreateTempFile(const wxString& path)
+static void CreateTempFile(const wxString& path)
 {
     wxFile f(path, wxFile::write);
     f.Write("dummy test file");
     f.Close();
 }
 
-void DirTestCase::setUp()
+static void setUp()
 {
     // create a test directory hierarchy
     wxDir::Make(DIRTEST_FOLDER + SEP + "folder1" + SEP + "subfolder1", wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
@@ -86,7 +46,7 @@ void DirTestCase::setUp()
     CreateTempFile(DIRTEST_FOLDER + SEP + "folder3" + SEP + "subfolder1" + SEP + "dummy.foo.bar");
 }
 
-void DirTestCase::tearDown()
+static void tearDown()
 {
     wxRemove(DIRTEST_FOLDER + SEP + "folder1" + SEP + "subfolder2" + SEP + "dummy");
     wxRemove(DIRTEST_FOLDER + SEP + "dummy");
@@ -95,12 +55,12 @@ void DirTestCase::tearDown()
     wxDir::Remove(DIRTEST_FOLDER, wxPATH_RMDIR_RECURSIVE);
 }
 
-std::vector<wxString> DirTestCase::DirEnumHelper(wxDir& dir,
-                                         int flags,
-                                         const wxString& filespec)
+static std::vector<wxString> DirEnumHelper(wxDir& dir,
+                                           int flags = wxDIR_DEFAULT,
+                                           const wxString& filespec = wxEmptyString)
 {
     std::vector<wxString> ret;
-    CPPUNIT_ASSERT( dir.IsOpened() );
+    CHECK( dir.IsOpened() );
 
     wxString filename;
     bool cont = dir.GetFirst(&filename, filespec, flags);
@@ -113,139 +73,146 @@ std::vector<wxString> DirTestCase::DirEnumHelper(wxDir& dir,
     return ret;
 }
 
-void DirTestCase::Enum()
+TEST_CASE("Directory Tests")
 {
-    wxDir dir(DIRTEST_FOLDER);
-    CPPUNIT_ASSERT( dir.IsOpened() );
+    setUp();
 
-    // enumerating everything in test directory
-    CPPUNIT_ASSERT_EQUAL(4, DirEnumHelper(dir).size());
-
-    // enumerating really everything in test directory recursively
-    CPPUNIT_ASSERT_EQUAL(6, DirEnumHelper(dir, wxDIR_DEFAULT | wxDIR_DOTDOT).size());
-
-    // enumerating object files in test directory
-    CPPUNIT_ASSERT_EQUAL(0, DirEnumHelper(dir, wxDIR_DEFAULT, "*.o*").size());
-
-    // enumerating directories in test directory
-    CPPUNIT_ASSERT_EQUAL(3, DirEnumHelper(dir, wxDIR_DIRS).size());
-
-    // enumerating files in test directory
-    CPPUNIT_ASSERT_EQUAL(1, DirEnumHelper(dir, wxDIR_FILES).size());
-
-    // enumerating files including hidden in test directory
-    CPPUNIT_ASSERT_EQUAL(1, DirEnumHelper(dir, wxDIR_FILES | wxDIR_HIDDEN).size());
-
-    // enumerating files and folders in test directory
-    CPPUNIT_ASSERT_EQUAL(4, DirEnumHelper(dir, wxDIR_FILES | wxDIR_DIRS).size());
-}
-
-class TestDirTraverser : public wxDirTraverser
-{
-public:
-    std::vector<wxString> dirs;
-
-    wxDirTraverseResult OnFile(const wxString& WXUNUSED(filename)) override
+    SUBCASE("Enum")
     {
-        return wxDIR_CONTINUE;
+        wxDir dir(DIRTEST_FOLDER);
+        CHECK( dir.IsOpened() );
+
+        // enumerating everything in test directory
+        CHECK_EQ(4, DirEnumHelper(dir).size());
+
+        // enumerating really everything in test directory recursively
+        CHECK_EQ(6, DirEnumHelper(dir, wxDIR_DEFAULT | wxDIR_DOTDOT).size());
+
+        // enumerating object files in test directory
+        CHECK_EQ(0, DirEnumHelper(dir, wxDIR_DEFAULT, "*.o*").size());
+
+        // enumerating directories in test directory
+        CHECK_EQ(3, DirEnumHelper(dir, wxDIR_DIRS).size());
+
+        // enumerating files in test directory
+        CHECK_EQ(1, DirEnumHelper(dir, wxDIR_FILES).size());
+
+        // enumerating files including hidden in test directory
+        CHECK_EQ(1, DirEnumHelper(dir, wxDIR_FILES | wxDIR_HIDDEN).size());
+
+        // enumerating files and folders in test directory
+        CHECK_EQ(4, DirEnumHelper(dir, wxDIR_FILES | wxDIR_DIRS).size());
     }
 
-    wxDirTraverseResult OnDir(const wxString& dirname) override
+    class TestDirTraverser : public wxDirTraverser
     {
-        dirs.push_back(dirname);
-        return wxDIR_CONTINUE;
-    }
-};
+    public:
+        std::vector<wxString> dirs;
 
-void DirTestCase::Traverse()
-{
-    // enum all files
-    std::vector<wxString> files;
-    CPPUNIT_ASSERT_EQUAL(4, wxDir::GetAllFiles(DIRTEST_FOLDER, &files));
+        wxDirTraverseResult OnFile(const wxString& WXUNUSED(filename)) override
+        {
+            return wxDIR_CONTINUE;
+        }
 
-    // enum all files according to the filter
-    CPPUNIT_ASSERT_EQUAL(1, wxDir::GetAllFiles(DIRTEST_FOLDER, &files, "*.foo"));
-
-    // enum again with custom traverser
-    wxDir dir(DIRTEST_FOLDER);
-    TestDirTraverser traverser;
-    dir.Traverse(traverser, wxEmptyString, wxDIR_DIRS | wxDIR_HIDDEN);
-    CPPUNIT_ASSERT_EQUAL(6, traverser.dirs.size());
-}
-
-void DirTestCase::DirExists()
-{
-    struct
-    {
-        const char *dirname;
-        bool shouldExist;
-    } testData[] =
-    {
-        { ".", true },
-        { "..", true },
-        { "$USER_DOCS_DIR", true },
-#if defined(__WINDOWS__)
-        { "$USER_DOCS_DIR\\", true },
-        { "$USER_DOCS_DIR\\\\", true },
-        { "..\\..", true },
-        { "$MSW_DRIVE", true },
-        { "$MSW_DRIVE\\", true },
-        { "$MSW_DRIVE\\\\", true },
-        { "\\\\non_existent_share\\file", false },
-        { "$MSW_DRIVE\\a\\directory\\which\\does\\not\\exist", false },
-        { "$MSW_DRIVE\\a\\directory\\which\\does\\not\\exist\\", false },
-        { "$MSW_DRIVE\\a\\directory\\which\\does\\not\\exist\\\\", false },
-        { "test.exe", false }            // not a directory!
-#elif defined(__UNIX__)
-        { "../..", true },
-        { "/", true },
-        { "//", true },
-        { "/usr/bin", true },
-        { "/usr//bin", true },
-        { "/usr///bin", true },
-        { "/tmp/a/directory/which/does/not/exist", false },
-        { "/bin/ls", false }             // not a directory!
-#endif
+        wxDirTraverseResult OnDir(const wxString& dirname) override
+        {
+            dirs.push_back(dirname);
+            return wxDIR_CONTINUE;
+        }
     };
 
-#ifdef __WINDOWS__
-    wxString homedrive = wxGetenv("HOMEDRIVE");
-    if ( homedrive.empty() )
-        homedrive = "c:";
-#endif // __WINDOWS__
-
-    for ( size_t n = 0; n < WXSIZEOF(testData); n++ )
+    SUBCASE("Traverse")
     {
-        wxString dirname = testData[n].dirname;
-        dirname.Replace("$USER_DOCS_DIR", wxStandardPaths::Get().GetDocumentsDir());
+        // enum all files
+        std::vector<wxString> files;
+        CHECK_EQ(4, wxDir::GetAllFiles(DIRTEST_FOLDER, &files));
 
-#ifdef __WINDOWS__
-        dirname.Replace("$MSW_DRIVE", homedrive);
-#endif // __WINDOWS__
+        // enum all files according to the filter
+        CHECK_EQ(1, wxDir::GetAllFiles(DIRTEST_FOLDER, &files, "*.foo"));
 
-        std::string errDesc = wxString::Format("failed on directory '%s'", dirname).ToStdString();
-        CPPUNIT_ASSERT_EQUAL_MESSAGE(errDesc, testData[n].shouldExist, wxDir::Exists(dirname));
-
-        wxDir d(dirname);
-        CPPUNIT_ASSERT_EQUAL(testData[n].shouldExist, d.IsOpened());
+        // enum again with custom traverser
+        wxDir dir(DIRTEST_FOLDER);
+        TestDirTraverser traverser;
+        dir.Traverse(traverser, wxEmptyString, wxDIR_DIRS | wxDIR_HIDDEN);
+        CHECK_EQ(6, traverser.dirs.size());
     }
 
-    CPPUNIT_ASSERT( wxDir::Exists(wxGetCwd()) );
-}
+    SUBCASE("DirExists")
+    {
+        struct
+        {
+            const char *dirname;
+            bool shouldExist;
+        } testData[] =
+        {
+            { ".", true },
+            { "..", true },
+            { "$USER_DOCS_DIR", true },
+    #if defined(__WINDOWS__)
+            { "$USER_DOCS_DIR\\", true },
+            { "$USER_DOCS_DIR\\\\", true },
+            { "..\\..", true },
+            { "$MSW_DRIVE", true },
+            { "$MSW_DRIVE\\", true },
+            { "$MSW_DRIVE\\\\", true },
+            { "\\\\non_existent_share\\file", false },
+            { "$MSW_DRIVE\\a\\directory\\which\\does\\not\\exist", false },
+            { "$MSW_DRIVE\\a\\directory\\which\\does\\not\\exist\\", false },
+            { "$MSW_DRIVE\\a\\directory\\which\\does\\not\\exist\\\\", false },
+            { "test.exe", false }            // not a directory!
+    #elif defined(__UNIX__)
+            { "../..", true },
+            { "/", true },
+            { "//", true },
+            { "/usr/bin", true },
+            { "/usr//bin", true },
+            { "/usr///bin", true },
+            { "/tmp/a/directory/which/does/not/exist", false },
+            { "/bin/ls", false }             // not a directory!
+    #endif
+        };
 
-void DirTestCase::GetName()
-{
-    wxDir d;
+    #ifdef __WINDOWS__
+        wxString homedrive = wxGetenv("HOMEDRIVE");
+        if ( homedrive.empty() )
+            homedrive = "c:";
+    #endif // __WINDOWS__
 
-    CPPUNIT_ASSERT( d.Open(".") );
-    CPPUNIT_ASSERT( d.GetName().Last() != wxFILE_SEP_PATH );
-    CPPUNIT_ASSERT( d.GetNameWithSep().Last() == wxFILE_SEP_PATH );
-    CPPUNIT_ASSERT_EQUAL( d.GetName() + wxFILE_SEP_PATH,
-                          d.GetNameWithSep() );
+        for ( size_t n = 0; n < WXSIZEOF(testData); n++ )
+        {
+            wxString dirname = testData[n].dirname;
+            dirname.Replace("$USER_DOCS_DIR", wxStandardPaths::Get().GetDocumentsDir());
 
-#ifdef __UNIX__
-    CPPUNIT_ASSERT( d.Open("/") );
-    CPPUNIT_ASSERT_EQUAL( "/", d.GetName() );
-    CPPUNIT_ASSERT_EQUAL( "/", d.GetNameWithSep() );
-#endif
+    #ifdef __WINDOWS__
+            dirname.Replace("$MSW_DRIVE", homedrive);
+    #endif // __WINDOWS__
+
+            std::string errDesc = wxString::Format("failed on directory '%s'", dirname).ToStdString();
+            CHECK_MESSAGE(testData[n].shouldExist == wxDir::Exists(dirname), errDesc);
+
+            wxDir d(dirname);
+            CHECK_EQ(testData[n].shouldExist, d.IsOpened());
+        }
+
+        CHECK( wxDir::Exists(wxGetCwd()) );
+    }
+
+    SUBCASE("GetName")
+    {
+        wxDir d;
+
+        CHECK( d.Open(".") );
+        CHECK( d.GetName().Last() != wxFILE_SEP_PATH );
+        CHECK( d.GetNameWithSep().Last() == wxFILE_SEP_PATH );
+        CHECK_EQ( d.GetName() + wxFILE_SEP_PATH,
+                              d.GetNameWithSep() );
+
+    #ifdef __UNIX__
+        CHECK( d.Open("/") );
+        CHECK_EQ( "/", d.GetName() );
+        CHECK_EQ( "/", d.GetNameWithSep() );
+    #endif
+    }
+
+    tearDown();
 }
