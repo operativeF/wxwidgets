@@ -11,8 +11,9 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "testprec.h"
+#include "doctest.h"
 
+#include "testprec.h"
 
 #ifndef WX_PRECOMP
 #endif // WX_PRECOMP
@@ -34,33 +35,8 @@ const int sleepTime = 500;
 // test class
 // --------------------------------------------------------------------------
 
-class StopWatchTestCase : public CppUnit::TestCase
-{
-public:
-    StopWatchTestCase() {}
 
-private:
-    CPPUNIT_TEST_SUITE( StopWatchTestCase );
-        CPPUNIT_TEST( Misc );
-        CPPUNIT_TEST( BackwardsClockBug );
-        CPPUNIT_TEST( RestartBug );
-    CPPUNIT_TEST_SUITE_END();
-
-    void Misc();
-    void BackwardsClockBug();
-    void RestartBug();
-
-    StopWatchTestCase(const StopWatchTestCase&) = delete;
-	StopWatchTestCase& operator=(const StopWatchTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( StopWatchTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( StopWatchTestCase, "StopWatchTestCase" );
-
-void StopWatchTestCase::Misc()
+TEST_CASE("Misc")
 {
     // Buildbot machines are quite slow and sleep doesn't work reliably there,
     // i.e. it can sleep for much longer than requested. This is not really an
@@ -78,30 +54,30 @@ void StopWatchTestCase::Misc()
 
     // verify that almost no time elapsed
     usec = sw.TimeInMicro();
-    WX_ASSERT_MESSAGE
+    CHECK_MESSAGE
     (
-        ("Elapsed time was %" wxLongLongFmtSpec "dus", usec),
-        usec < tolerance*1000
+        (usec < (tolerance * 1000)),
+        ("Elapsed time was %" wxLongLongFmtSpec "dus", usec)
     );
 
     wxSleep(1);
     t = sw.Time();
 
     // check that the stop watch doesn't advance while paused
-    WX_ASSERT_MESSAGE
+    CHECK_MESSAGE
     (
-        ("Actual time value is %ld", t),
-        t >= 0 && t < tolerance
+        ((t >= 0) && (t < tolerance)),
+        ("Actual time value is %ld", t)
     );
 
     sw.Resume();
     wxMilliSleep(sleepTime);
     t = sw.Time();
     // check that it did advance now by ~1.5s
-    WX_ASSERT_MESSAGE
+    CHECK_MESSAGE
     (
-        ("Actual time value is %ld", t),
-        t > sleepTime - tolerance && t < 2*sleepTime
+        ((t > (sleepTime - tolerance)) && (t < (2*sleepTime))),
+        ("Actual time value is %ld", t)
     );
 
     sw.Pause();
@@ -114,14 +90,14 @@ void StopWatchTestCase::Misc()
     t = sw.Time();
 
     // and it should advance again
-    WX_ASSERT_MESSAGE
+    CHECK_MESSAGE
     (
-        ("Actual time value is %ld", t),
-        t > 2*sleepTime - tolerance && t < 3*sleepTime
+        (((t > (2*sleepTime) - tolerance) && (t < (3*sleepTime)))),
+        ("Actual time value is %ld", t)
     );
 }
 
-void StopWatchTestCase::BackwardsClockBug()
+TEST_CASE("BackwardsClockBug")
 {
     wxStopWatch sw;
     wxStopWatch sw2;
@@ -132,13 +108,13 @@ void StopWatchTestCase::BackwardsClockBug()
 
         for ( size_t m = 0; m < 10000; m++ )
         {
-            CPPUNIT_ASSERT( sw.Time() >= 0 );
-            CPPUNIT_ASSERT( sw2.Time() >= 0 );
+            CHECK( sw.Time() >= 0 );
+            CHECK( sw2.Time() >= 0 );
         }
     }
 }
 
-void StopWatchTestCase::RestartBug()
+TEST_CASE("RestartBug")
 {
     wxStopWatch sw;
     sw.Pause();
@@ -150,10 +126,10 @@ void StopWatchTestCase::RestartBug()
     wxMilliSleep(sleepTime);
 
     long t = sw.Time();
-    WX_ASSERT_MESSAGE
+    CHECK_MESSAGE
     (
-        ("Actual time value is %ld", t),
-        t >= offset + sleepTime - tolerance
+        t >= offset + sleepTime - tolerance,
+        ("Actual time value is %ld", t)
     );
 
     // As above, this is not actually due to the fact of the test being
@@ -162,10 +138,10 @@ void StopWatchTestCase::RestartBug()
     if ( !IsAutomaticTest() )
     {
 
-        WX_ASSERT_MESSAGE
+        CHECK_MESSAGE
         (
-            ("Actual time value is %ld", t),
-            t < offset + sleepTime + tolerance
+            t < offset + sleepTime + tolerance,
+            ("Actual time value is %ld", t)
         );
     }
 }
