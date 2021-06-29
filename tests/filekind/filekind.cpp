@@ -39,69 +39,39 @@
 ///////////////////////////////////////////////////////////////////////////////
 // The test case
 
-class FileKindTestCase : public CppUnit::TestCase
-{
-    CPPUNIT_TEST_SUITE(FileKindTestCase);
-        CPPUNIT_TEST(File);
-#if defined __UNIX__ || defined _MSC_VER || defined __MINGW32__
-        CPPUNIT_TEST(Pipe);
-#endif
-#if defined __UNIX__
-        CPPUNIT_TEST(Socket);
-#endif
-        CPPUNIT_TEST(Stdin);
-        CPPUNIT_TEST(MemoryStream);
-#if wxUSE_SOCKETS
-        CPPUNIT_TEST(SocketStream);
-#endif
-    CPPUNIT_TEST_SUITE_END();
-
-    void File();
-    void Pipe();
-    void Socket();
-    void Stdin();
-    void MemoryStream();
-#if wxUSE_SOCKETS
-    void SocketStream();
-#endif
-
-    void TestFILE(wxFFile& file, bool expected);
-    void TestFd(wxFile& file, bool expected);
-};
-
 // test a wxFFile and wxFFileInput/OutputStreams of a known type
 //
-void FileKindTestCase::TestFILE(wxFFile& file, bool expected)
+static void TestFILE(wxFFile& file, bool expected)
 {
-    CPPUNIT_ASSERT(file.IsOpened());
-    CPPUNIT_ASSERT((wxGetFileKind(file.fp()) == wxFileKind::Disk) == expected);
-    CPPUNIT_ASSERT((file.GetKind() == wxFileKind::Disk) == expected);
+    CHECK(file.IsOpened());
+    CHECK((wxGetFileKind(file.fp()) == wxFileKind::Disk) == expected);
+    CHECK((file.GetKind() == wxFileKind::Disk) == expected);
 
     wxFFileInputStream inStream(file);
-    CPPUNIT_ASSERT(inStream.IsSeekable() == expected);
+    CHECK(inStream.IsSeekable() == expected);
 
     wxFFileOutputStream outStream(file);
-    CPPUNIT_ASSERT(outStream.IsSeekable() == expected);
+    CHECK(outStream.IsSeekable() == expected);
 }
 
 // test a wxFile and wxFileInput/OutputStreams of a known type
 //
-void FileKindTestCase::TestFd(wxFile& file, bool expected)
+static void TestFd(wxFile& file, bool expected)
 {
-    CPPUNIT_ASSERT(file.IsOpened());
-    CPPUNIT_ASSERT((wxGetFileKind(file.fd()) == wxFileKind::Disk) == expected);
-    CPPUNIT_ASSERT((file.GetKind() == wxFileKind::Disk) == expected);
+    CHECK(file.IsOpened());
+    CHECK((wxGetFileKind(file.fd()) == wxFileKind::Disk) == expected);
+    CHECK((file.GetKind() == wxFileKind::Disk) == expected);
 
     wxFileInputStream inStream(file);
-    CPPUNIT_ASSERT(inStream.IsSeekable() == expected);
+    CHECK(inStream.IsSeekable() == expected);
 
     wxFileOutputStream outStream(file);
-    CPPUNIT_ASSERT(outStream.IsSeekable() == expected);
+    CHECK(outStream.IsSeekable() == expected);
 }
 
 // test with an ordinary file
 //
-void FileKindTestCase::File()
+TEST_CASE("File")
 {
     TempFile tmp; // put first
     wxFile file;
@@ -116,7 +86,7 @@ void FileKindTestCase::File()
 // test with a pipe
 //
 #if defined __UNIX__ || defined _MSC_VER || defined __MINGW32__
-void FileKindTestCase::Pipe()
+TEST_CASE("Pipe")
 {
     int afd[2];
     int rc;
@@ -125,7 +95,7 @@ void FileKindTestCase::Pipe()
 #else
     rc = _pipe(afd, 256, O_BINARY);
 #endif
-    CPPUNIT_ASSERT_EQUAL_MESSAGE("Failed to create pipe", 0, rc);
+    CHECK_MESSAGE(0 == rc, "Failed to create pipe");
 
     wxFile file0(afd[0]);
     wxFile file1(afd[1]);
@@ -156,51 +126,46 @@ void FileKindTestCase::Socket()
 // Socket streams should be non-seekable
 //
 #if wxUSE_SOCKETS
-void FileKindTestCase::SocketStream()
+
+TEST_CASE("SocketStream")
 {
     wxSocketClient client;
     wxSocketInputStream inStream(client);
-    CPPUNIT_ASSERT(!inStream.IsSeekable());
+    CHECK(!inStream.IsSeekable());
     wxSocketOutputStream outStream(client);
-    CPPUNIT_ASSERT(!outStream.IsSeekable());
+    CHECK(!outStream.IsSeekable());
 
     wxBufferedInputStream nonSeekableBufferedInput(inStream);
-    CPPUNIT_ASSERT(!nonSeekableBufferedInput.IsSeekable());
+    CHECK(!nonSeekableBufferedInput.IsSeekable());
     wxBufferedOutputStream nonSeekableBufferedOutput(outStream);
-    CPPUNIT_ASSERT(!nonSeekableBufferedOutput.IsSeekable());
+    CHECK(!nonSeekableBufferedOutput.IsSeekable());
 }
 #endif
 
 // Memory streams should be seekable
 //
-void FileKindTestCase::MemoryStream()
+TEST_CASE("MemoryStream")
 {
     char buf[20];
     wxMemoryInputStream inStream(buf, sizeof(buf));
-    CPPUNIT_ASSERT(inStream.IsSeekable());
+    CHECK(inStream.IsSeekable());
     wxMemoryOutputStream outStream(buf, sizeof(buf));
-    CPPUNIT_ASSERT(outStream.IsSeekable());
+    CHECK(outStream.IsSeekable());
 
     wxBufferedInputStream seekableBufferedInput(inStream);
-    CPPUNIT_ASSERT(seekableBufferedInput.IsSeekable());
+    CHECK(seekableBufferedInput.IsSeekable());
     wxBufferedOutputStream seekableBufferedOutput(outStream);
-    CPPUNIT_ASSERT(seekableBufferedOutput.IsSeekable());
+    CHECK(seekableBufferedOutput.IsSeekable());
 }
 
 // Stdin will usually be a terminal, if so then test it
 //
-void FileKindTestCase::Stdin()
+TEST_CASE("Stdin")
 {
     if (isatty(0))
-        CPPUNIT_ASSERT(wxGetFileKind(0) == wxFileKind::Terminal);
+        CHECK(wxGetFileKind(0) == wxFileKind::Terminal);
     if (isatty(fileno(stdin)))
-        CPPUNIT_ASSERT(wxGetFileKind(stdin) == wxFileKind::Terminal);
+        CHECK(wxGetFileKind(stdin) == wxFileKind::Terminal);
 }
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION(FileKindTestCase);
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(FileKindTestCase, "FileKindTestCase");
 
 #endif // wxUSE_STREAMS

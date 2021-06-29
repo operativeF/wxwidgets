@@ -79,5 +79,8 @@
     <ClCompile Include="file\dir.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="filekind\filekind.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
