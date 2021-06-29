@@ -26,7 +26,7 @@
 // tests themselves
 // ----------------------------------------------------------------------------
 
-TEST_CASE("StringPrintf", "[wxString][Printf][vararg]")
+TEST_CASE("StringPrintf")
 {
     wxString s, s2;
 
@@ -69,7 +69,7 @@ TEST_CASE("StringPrintf", "[wxString][Printf][vararg]")
     wxCLANG_WARNING_RESTORE(c++11-compat-deprecated-writable-strings)
 }
 
-TEST_CASE("CharPrintf", "[wxString][Printf][vararg]")
+TEST_CASE("CharPrintf")
 {
     wxString foo("foo");
     wxString s;
@@ -107,7 +107,7 @@ TEST_CASE("CharPrintf", "[wxString][Printf][vararg]")
     CHECK( s == "value is 240 (int)" );
 }
 
-TEST_CASE("SizetPrintf", "[wxString][Printf][vararg]")
+TEST_CASE("SizetPrintf")
 {
     size_t  i =  1;
     ssize_t j = -2;
@@ -119,7 +119,7 @@ TEST_CASE("SizetPrintf", "[wxString][Printf][vararg]")
                 == "size_t=0xA0" );
 }
 
-TEST_CASE("StdString", "[wxString][Printf][vararg]")
+TEST_CASE("StdString")
 {
     // test passing std::[w]string
     wxString s;
@@ -135,7 +135,7 @@ TEST_CASE("StdString", "[wxString][Printf][vararg]")
 }
 
 #if wxUSE_LONGLONG
-TEST_CASE("LongLongPrintf", "[wxString][Printf][vararg]")
+TEST_CASE("LongLongPrintf")
 {
     const char * const llfmt = "%" wxLongLongFmtSpec "d";
 
@@ -171,7 +171,7 @@ TEST_CASE("Sscanf", "[wxSscanf][vararg]")
 #endif
 }
 
-TEST_CASE("RepeatedPrintf", "[wxString][Printf][vararg]")
+TEST_CASE("RepeatedPrintf")
 {
     wxCharBuffer buffer(2);
     char *p = buffer.data();
@@ -252,7 +252,7 @@ TEST_CASE("ArgsValidation", "[wxString][vararg][error]")
 #endif
 }
 
-TEST_CASE("VeryLongArg", "[wxString][Format][vararg]")
+TEST_CASE("VeryLongArg")
 {
     const size_t LENGTH = 70000;
     wxString veryLongString('.', LENGTH);
@@ -283,7 +283,7 @@ wxString CallPrintfV(const char* format, ...)
 
 } // anonymous namespace
 
-TEST_CASE("PrintfError", "[wxString][Format][vararg][error]")
+TEST_CASE("PrintfError")
 {
     // Check that using invalid argument doesn't keep doubling the buffer until
     // we run out of memory and die.
