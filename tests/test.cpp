@@ -312,12 +312,12 @@ int main(int argc, char** argv)
 
     int res = context.run(); // run
 
+    //wxTheApp->OnRun();
+    //wxTheApp->OnExit();
+    wxEntryCleanup();
+
     if (context.shouldExit()) // important - query flags (and --exit) rely on the user doing this
         return res;
-
-    wxTheApp->OnRun();
-    wxTheApp->OnExit();
-    wxEntryCleanup();
 
     // tests can be ran non-interactively so make sure we don't show any assert
     // dialog boxes -- neither our own nor from MSVC debug CRT -- which would
