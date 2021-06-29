@@ -23,7 +23,7 @@
 
 #include "asserthelper.h"
 
-TEST_CASE("wxWrapSizer::CalcMin", "[wxWrapSizer]")
+TEST_CASE("wxWrapSizer::CalcMin")
 {
     std::unique_ptr<wxWindow> win(new wxWindow(wxTheApp->GetTopWindow(), wxID_ANY));
     win->SetClientSize(180, 240);
@@ -74,7 +74,7 @@ TEST_CASE("wxWrapSizer::CalcMin", "[wxWrapSizer]")
     CHECK( sizeMinExpected == sizer->CalcMin() );
 }
 
-TEST_CASE("wxWrapSizer::CalcMinFromMinor", "[wxWrapSizer]")
+TEST_CASE("wxWrapSizer::CalcMinFromMinor")
 {
     std::unique_ptr<wxWindow> win(new wxWindow(wxTheApp->GetTopWindow(), wxID_ANY));
     win->SetClientSize(180, 240);

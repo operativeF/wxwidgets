@@ -496,12 +496,31 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="events\evtlooptest.cpp" />
+    <ClCompile Include="exec\exec.cpp" />
+    <ClCompile Include="geometry\size.cpp" />
+    <ClCompile Include="graphics\ellipsization.cpp" />
+    <ClCompile Include="graphics\measuring.cpp" />
     <ClCompile Include="menu\accelentry.cpp" />
+    <ClCompile Include="sizers\boxsizer.cpp" />
+    <ClCompile Include="sizers\gridsizer.cpp" />
+    <ClCompile Include="sizers\wrapsizer.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="testableframe.cpp" />
+    <ClCompile Include="window\clientsize.cpp" />
+    <ClCompile Include="window\setsize.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="testableframe.h" />
+    <ClInclude Include="testdate.h" />
+    <ClInclude Include="testfile.h" />
+    <ClInclude Include="testimage.h" />
+    <ClInclude Include="testprec.h" />
+    <ClInclude Include="testwindow.h" />
+    <ClInclude Include="waitforpaint.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

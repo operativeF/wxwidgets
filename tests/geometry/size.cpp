@@ -19,33 +19,8 @@
     #include "wx/gdicmn.h"
 #endif // WX_PRECOMP
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
 
-class SizeTestCase : public CppUnit::TestCase
-{
-public:
-    SizeTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( SizeTestCase );
-        CPPUNIT_TEST( Operators );
-    CPPUNIT_TEST_SUITE_END();
-
-    void Operators();
-
-    SizeTestCase(const SizeTestCase&) = delete;
-	SizeTestCase& operator=(const SizeTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( SizeTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( SizeTestCase, "SizeTestCase" );
-
-void SizeTestCase::Operators()
+TEST_CASE("Operators")
 {
     wxSize s1(1,2);
     wxSize s2(3,4);

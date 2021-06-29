@@ -52,18 +52,18 @@ protected:
 // tests themselves
 // ----------------------------------------------------------------------------
 
-TEST_CASE("wxWindow::SetSize", "[window][size]")
+TEST_CASE("wxWindow::SetSize")
 {
     std::unique_ptr<wxWindow> w(new MyWindow(wxTheApp->GetTopWindow()));
 
-    SECTION("Simple")
+    SUBCASE("Simple")
     {
         const wxSize size(127, 35);
         w->SetSize(size);
         CHECK( size == w->GetSize() );
     }
 
-    SECTION("With min size")
+    SUBCASE("With min size")
     {
         w->SetMinSize(wxSize(100, 100));
 
@@ -73,7 +73,7 @@ TEST_CASE("wxWindow::SetSize", "[window][size]")
     }
 }
 
-TEST_CASE("wxWindow::GetBestSize", "[window][size][best-size]")
+TEST_CASE("wxWindow::GetBestSize")
 {
     std::unique_ptr<wxWindow> w(new MyWindow(wxTheApp->GetTopWindow()));
 
@@ -86,7 +86,7 @@ TEST_CASE("wxWindow::GetBestSize", "[window][size][best-size]")
     CHECK( wxSize(100, 200) == w->GetBestSize() );
 }
 
-TEST_CASE("wxWindow::MovePreservesSize", "[window][size][move]")
+TEST_CASE("wxWindow::MovePreservesSize")
 {
     std::unique_ptr<wxWindow>
         w(new wxFrame(wxTheApp->GetTopWindow(), wxID_ANY, "Test child frame"));

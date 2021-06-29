@@ -22,7 +22,7 @@
 // test class
 // ----------------------------------------------------------------------------
 
-TEST_CASE("Ellipsization::NormalCase", "[ellipsization]")
+TEST_CASE("Ellipsization::NormalCase")
 {
     wxMemoryDC dc;
 
@@ -90,8 +90,9 @@ TEST_CASE("Ellipsization::NormalCase", "[ellipsization]")
                     const int
                         width = dc.GetMultiLineTextExtent(displayed).GetWidth();
 
-                    WX_ASSERT_MESSAGE
+                    CHECK_MESSAGE
                     (
+                        width <= widthsToTest[w],
                      (
                         "Test #(%u,%u.%u): %s\n\"%s\" -> \"%s\"; width=%dpx > %dpx",
                         s, f, m,
@@ -100,8 +101,7 @@ TEST_CASE("Ellipsization::NormalCase", "[ellipsization]")
                         ret,
                         width,
                         widthsToTest[w]
-                     ),
-                     width <= widthsToTest[w]
+                     )
                     );
                 }
             }
@@ -110,7 +110,7 @@ TEST_CASE("Ellipsization::NormalCase", "[ellipsization]")
 }
 
 
-TEST_CASE("Ellipsization::EnoughSpace", "[ellipsization]")
+TEST_CASE("Ellipsization::EnoughSpace")
 {
     // No ellipsization should occur if there's plenty of space.
 
@@ -125,7 +125,7 @@ TEST_CASE("Ellipsization::EnoughSpace", "[ellipsization]")
 }
 
 
-TEST_CASE("Ellipsization::VeryLittleSpace", "[ellipsization]")
+TEST_CASE("Ellipsization::VeryLittleSpace")
 {
     // If there's not enough space, the shortened label should still contain "..." and one character
 
@@ -140,7 +140,7 @@ TEST_CASE("Ellipsization::VeryLittleSpace", "[ellipsization]")
 }
 
 
-TEST_CASE("Ellipsization::HasThreeDots", "[ellipsization]")
+TEST_CASE("Ellipsization::HasThreeDots")
 {
     wxMemoryDC dc;
 
