@@ -46,6 +46,7 @@
     <ClCompile Include="events\evtlooptest.cpp" />
     <ClCompile Include="events\stopwatch.cpp" />
     <ClCompile Include="events\timertest.cpp" />
+    <ClCompile Include="exec\exec.cpp" />
     <ClCompile Include="filekind\filekind.cpp" />
     <ClCompile Include="filesys\filesystest.cpp" />
     <ClCompile Include="file\dir.cpp" />

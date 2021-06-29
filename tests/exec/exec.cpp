@@ -13,6 +13,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -45,129 +47,174 @@
 
 #define SLEEP_END_STRING "Done sleeping"
 
-namespace
+
+enum AsyncExecLoopExitEnum
 {
-    enum AsyncExecLoopExitEnum
-    {
-        AsyncExec_DontExitLoop,
-        AsyncExec_ExitLoop
-    };
-} // anonymous namespace
-
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class ExecTestCase : public CppUnit::TestCase
-{
-public:
-    ExecTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( ExecTestCase );
-// wxX11 didn't implement some required features. Disable these tests
-// for now.
-#if !defined (__WXX11__)
-        CPPUNIT_TEST( TestShell );
-        CPPUNIT_TEST( TestExecute );
-        CPPUNIT_TEST( TestProcess );
-        CPPUNIT_TEST( TestAsync );
-        CPPUNIT_TEST( TestAsyncRedirect );
-        CPPUNIT_TEST( TestOverlappedSyncExecute );
-#endif
-    CPPUNIT_TEST_SUITE_END();
-
-    void TestShell();
-    void TestExecute();
-    void TestProcess();
-    void TestAsync();
-    void TestAsyncRedirect();
-    void TestOverlappedSyncExecute();
-
-    // Helper: create an executable file sleeping for the given amount of
-    // seconds with the specified base name.
-    //
-    // Returns the name of the file.
-    static wxString CreateSleepFile(const wxString& basename, int seconds);
-
-    // Return the full command, to be passed to wxExecute(), launching the
-    // specified script file.
-    static wxString MakeShellCommand(const wxString& filename);
-
-
-    // Helper of TestAsyncRedirect(): tests that the output of the given
-    // command on the given stream contains the expected string.
-    enum CheckStream { Check_Stdout, Check_Stderr };
-
-    void DoTestAsyncRedirect(const wxString& command,
-                             CheckStream check,
-                             const char* expectedContaining);
-
-    // This class is used as a helper in order to run wxExecute(ASYNC)
-    // inside of an event loop.
-    class AsyncInEventLoop : public wxTimer
-    {
-    public:
-        AsyncInEventLoop() { }
-
-        long DoExecute(AsyncExecLoopExitEnum forceExitLoop_,
-                     const wxString& command_,
-                     int flags_ = wxEXEC_ASYNC,
-                     wxProcess* callback_ = NULL)
-        {
-            forceExitLoop = forceExitLoop_;
-            command = command_;
-            flags = flags_;
-            callback = callback_;
-
-            wxEventLoop loop;
-
-            // Trigger the timer to go off inside the event loop
-            // so that we can run wxExecute there.
-            StartOnce(10);
-
-            // Run the event loop.
-            loop.Run();
-
-            return wxExecuteReturnCode;
-        }
-
-        void Notify() override
-        {
-            // Run wxExecute inside the event loop.
-            wxExecuteReturnCode = wxExecute(command, flags, callback);
-
-            if (forceExitLoop == AsyncExec_ExitLoop)
-            {
-                wxEventLoop::GetActive()->Exit();
-            }
-        }
-
-    private:
-        AsyncExecLoopExitEnum forceExitLoop;
-        wxString command;
-        int flags;
-        wxProcess* callback;
-        long wxExecuteReturnCode;
-    };
-
-    ExecTestCase(const ExecTestCase&) = delete;
-	ExecTestCase& operator=(const ExecTestCase&) = delete;
+    AsyncExec_DontExitLoop,
+    AsyncExec_ExitLoop
 };
 
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( ExecTestCase );
+// Helper of TestAsyncRedirect(): tests that the output of the given
+// command on the given stream contains the expected string.
+enum CheckStream { Check_Stdout, Check_Stderr };
 
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( ExecTestCase, "ExecTestCase" );
-
-
-void ExecTestCase::TestShell()
+// This class is used as a helper in order to run wxExecute(ASYNC)
+// inside of an event loop.
+class AsyncInEventLoop : public wxTimer
 {
-    CPPUNIT_ASSERT( wxShell(SHELL_COMMAND) );
+public:
+    AsyncInEventLoop() { }
+
+    long DoExecute(AsyncExecLoopExitEnum forceExitLoop_,
+        const wxString& command_,
+        int flags_ = wxEXEC_ASYNC,
+        wxProcess* callback_ = NULL)
+    {
+        forceExitLoop = forceExitLoop_;
+        command = command_;
+        flags = flags_;
+        callback = callback_;
+
+        wxEventLoop loop;
+
+        // Trigger the timer to go off inside the event loop
+        // so that we can run wxExecute there.
+        StartOnce(10);
+
+        // Run the event loop.
+        loop.Run();
+
+        return wxExecuteReturnCode;
+    }
+
+    void Notify() override
+    {
+        // Run wxExecute inside the event loop.
+        wxExecuteReturnCode = wxExecute(command, flags, callback);
+
+        if (forceExitLoop == AsyncExec_ExitLoop)
+        {
+            wxEventLoop::GetActive()->Exit();
+        }
+    }
+
+private:
+    AsyncExecLoopExitEnum forceExitLoop;
+    wxString command;
+    int flags;
+    wxProcess* callback;
+    long wxExecuteReturnCode;
+};
+
+// This class exits the event loop associated with it when the child process
+// terminates.
+class TestAsyncProcess : public wxProcess
+{
+public:
+    explicit TestAsyncProcess()
+    {
+    }
+
+    // may be overridden to be notified about process termination
+    void OnTerminate(int WXUNUSED(pid), int WXUNUSED(status)) override
+    {
+        wxEventLoop::GetActive()->ScheduleExit();
+    }
+
+private:
+    TestAsyncProcess(const TestAsyncProcess&) = delete;
+    TestAsyncProcess& operator=(const TestAsyncProcess&) = delete;
+};
+
+static void DoTestAsyncRedirect(const wxString& command,
+                                CheckStream check,
+                                const char* expectedContaining)
+{
+    AsyncInEventLoop asyncInEventLoop;
+    TestAsyncProcess proc;
+
+    proc.Redirect();
+
+    CHECK(asyncInEventLoop.DoExecute(
+        AsyncExec_DontExitLoop,  // proc is expected (inside of its OnTerminate())
+                // to trigger the exit of the event loop.
+        command, wxEXEC_ASYNC, &proc) != 0);
+
+    wxInputStream* streamToCheck = NULL;
+    switch (check)
+    {
+    case Check_Stdout:
+        streamToCheck = proc.GetInputStream();
+        break;
+
+    case Check_Stderr:
+        streamToCheck = proc.GetErrorStream();
+        break;
+    }
+
+    wxTextInputStream tis(*streamToCheck);
+
+    // Check that the first line of output contains what we expect.
+    CHECK(tis.ReadLine().Contains(expectedContaining));
 }
 
-void ExecTestCase::TestExecute()
+static wxString CreateSleepFile(const wxString& basename, int seconds)
+{
+#ifdef __UNIX__
+    static const char* const scriptExt = ".sh";
+
+    // The script text is a format string with a single "%d" appearing in it
+    // which will be replaced by the number of seconds to sleep below.
+    static const char* const scriptText =
+        "sleep %d\n"
+        "echo " SLEEP_END_STRING "\n";
+#elif defined(__WINDOWS__)
+    static const char* const scriptExt = ".bat";
+
+    // Notice that we need to ping N+1 times for it to take N seconds as the
+    // first ping is sent out immediately, without waiting a second.
+    static const char* const scriptText =
+        "@ ping 127.0.0.1 -n 1 > nul\n"
+        "@ ping 127.0.0.1 -n %d > nul\n"
+        "@ echo " SLEEP_END_STRING "\n";
+#else
+#error "Need code to create sleep file for this platform"
+#endif
+
+    const wxString fnSleep = wxFileName(".", basename, scriptExt).GetFullPath();
+
+    wxFile fileSleep;
+    CHECK
+    (
+        fileSleep.Create(fnSleep, true, wxS_IRUSR | wxS_IWUSR | wxS_IXUSR)
+    );
+
+    fileSleep.Write(wxString::Format(scriptText, seconds));
+
+    return fnSleep;
+}
+
+static wxString MakeShellCommand(const wxString& filename)
+{
+    wxString command;
+
+#ifdef __UNIX__
+    command = "/bin/sh " + filename;
+#elif defined(__WINDOWS__)
+    command = wxString::Format("cmd.exe /c \"%s\"", filename);
+#else
+#error "Need to code to launch shell for this platform"
+#endif
+
+    return command;
+}
+
+TEST_CASE("TestShell")
+{
+    CHECK( wxShell(SHELL_COMMAND) );
+}
+
+TEST_CASE("TestExecute")
 {
     // Launching interactive programs doesn't work without an interactive
     // session.
@@ -186,7 +233,7 @@ void ExecTestCase::TestExecute()
     long pid = asyncInEventLoop.DoExecute(AsyncExec_ExitLoop, // Force exit of event loop right
                                                 // after the call to wxExecute()
                                           ASYNC_COMMAND, wxEXEC_ASYNC);
-    CPPUNIT_ASSERT( pid != 0 );
+    CHECK( pid != 0 );
 
     // Give the system some time to launch the child.
     wxMilliSleep(200);
@@ -214,19 +261,19 @@ void ExecTestCase::TestExecute()
 
         // test sync exec (with a command not producing any output to avoid
         // interfering with the test):
-        CPPUNIT_ASSERT( wxExecute(COMMAND_NO_OUTPUT, execFlags) == 0 );
+        CHECK( wxExecute(COMMAND_NO_OUTPUT, execFlags) == 0 );
 
         // test running COMMAND again, but this time with redirection:
         // and the expected data is on stdout.
         std::vector<wxString> stdout_arr;
-        CPPUNIT_ASSERT_EQUAL( 0, wxExecute(COMMAND, stdout_arr, execFlags) );
-        CPPUNIT_ASSERT_EQUAL( "hi", stdout_arr[0] );
+        CHECK_EQ( 0, wxExecute(COMMAND, stdout_arr, execFlags) );
+        CHECK_EQ( "hi", stdout_arr[0] );
 
         // test running COMMAND_STDERR with redirection and the expected data
         // is on stderr.
         std::vector<wxString> stderr_arr;
         stdout_arr.clear();
-        CPPUNIT_ASSERT( wxExecute(COMMAND_STDERR, stdout_arr, stderr_arr, execFlags) != 0 );
+        CHECK( wxExecute(COMMAND_STDERR, stdout_arr, stderr_arr, execFlags) != 0 );
 
         // Check that there is something on stderr.
         // In Unix systems, the 'cat' command has the name of the file it could not
@@ -235,11 +282,11 @@ void ExecTestCase::TestExecute()
         // a file:
         // "The system cannot find the file specified"
         // In both cases, we expect the word 'file' to be in the stderr.
-        CPPUNIT_ASSERT( stderr_arr[0].Contains("file") );
+        CHECK( stderr_arr[0].Contains("file") );
     }
 }
 
-void ExecTestCase::TestProcess()
+TEST_CASE("TestProcess")
 {
     if ( IsAutomaticTest() )
         return;
@@ -257,8 +304,8 @@ void ExecTestCase::TestProcess()
     long pid = asyncInEventLoop.DoExecute(AsyncExec_ExitLoop, // Force exit of event loop right
                                                 // after the call to wxExecute()
                                           ASYNC_COMMAND, wxEXEC_ASYNC, proc);
-    CPPUNIT_ASSERT( proc->GetPid() == pid );
-    CPPUNIT_ASSERT( pid != 0 );
+    CHECK( proc->GetPid() == pid );
+    CHECK( pid != 0 );
 
     // As above, give the system time to launch the process.
     wxMilliSleep(200);
@@ -282,102 +329,48 @@ void ExecTestCase::TestProcess()
     {
         wxProcess proc2;
         proc2.Redirect();
-        CPPUNIT_ASSERT_EQUAL( 0, wxExecute(COMMAND, wxEXEC_SYNC, &proc2) );
+        CHECK_EQ( 0, wxExecute(COMMAND, wxEXEC_SYNC, &proc2) );
 
         wxStringOutputStream procOutput;
-        CPPUNIT_ASSERT( proc2.GetInputStream() );
-        CPPUNIT_ASSERT_EQUAL( wxSTREAM_EOF,
+        CHECK( proc2.GetInputStream() );
+        CHECK_EQ( wxSTREAM_EOF,
             proc2.GetInputStream()->Read(procOutput).GetLastError() );
 
         wxString output = procOutput.GetString();
-        CPPUNIT_ASSERT_EQUAL( "hi", output.Trim() );
+        CHECK_EQ( "hi", output.Trim() );
     }
 
     // And now without event dispatching.
     {
         wxProcess proc2;
         proc2.Redirect();
-        CPPUNIT_ASSERT_EQUAL( 0,
+        CHECK_EQ( 0,
             wxExecute(COMMAND, wxEXEC_SYNC | wxEXEC_NOEVENTS, &proc2) );
 
         wxStringOutputStream procOutput;
-        CPPUNIT_ASSERT( proc2.GetInputStream() );
-        CPPUNIT_ASSERT_EQUAL( wxSTREAM_EOF,
+        CHECK( proc2.GetInputStream() );
+        CHECK_EQ( wxSTREAM_EOF,
             proc2.GetInputStream()->Read(procOutput).GetLastError() );
 
         wxString output = procOutput.GetString();
-        CPPUNIT_ASSERT_EQUAL( "hi", output.Trim() );
+        CHECK_EQ( "hi", output.Trim() );
     }
 }
 
-
-// This class exits the event loop associated with it when the child process
-// terminates.
-class TestAsyncProcess : public wxProcess
-{
-public:
-    explicit TestAsyncProcess()
-    {
-    }
-
-    // may be overridden to be notified about process termination
-    void OnTerminate(int WXUNUSED(pid), int WXUNUSED(status)) override
-    {
-        wxEventLoop::GetActive()->ScheduleExit();
-    }
-
-private:
-    TestAsyncProcess(const TestAsyncProcess&) = delete;
-	TestAsyncProcess& operator=(const TestAsyncProcess&) = delete;
-};
-
-void ExecTestCase::TestAsync()
+TEST_CASE("TestAsync")
 {
     // Test asynchronous execution with no redirection, just to make sure we
     // get the OnTerminate() call.
     TestAsyncProcess proc;
     AsyncInEventLoop asyncInEventLoop;
 
-    CPPUNIT_ASSERT( asyncInEventLoop.DoExecute(
+    CHECK( asyncInEventLoop.DoExecute(
                        AsyncExec_DontExitLoop,  // proc is expected (inside of its OnTerminate())
                                // to trigger the exit of the event loop.
                        COMMAND_NO_OUTPUT, wxEXEC_ASYNC, &proc) != 0 );
 }
 
-void
-ExecTestCase::DoTestAsyncRedirect(const wxString& command,
-                                  CheckStream check,
-                                  const char* expectedContaining)
-{
-    AsyncInEventLoop asyncInEventLoop;
-    TestAsyncProcess proc;
-
-    proc.Redirect();
-
-    CPPUNIT_ASSERT( asyncInEventLoop.DoExecute(
-                       AsyncExec_DontExitLoop,  // proc is expected (inside of its OnTerminate())
-                               // to trigger the exit of the event loop.
-                       command, wxEXEC_ASYNC, &proc) != 0 );
-
-    wxInputStream *streamToCheck = NULL;
-    switch ( check )
-    {
-        case Check_Stdout:
-            streamToCheck = proc.GetInputStream();
-            break;
-
-        case Check_Stderr:
-            streamToCheck = proc.GetErrorStream();
-            break;
-    }
-
-    wxTextInputStream tis(*streamToCheck);
-
-    // Check that the first line of output contains what we expect.
-    CPPUNIT_ASSERT( tis.ReadLine().Contains(expectedContaining) );
-}
-
-void ExecTestCase::TestAsyncRedirect()
+TEST_CASE("TestAsyncRedirect")
 {
     // Test redirection with reading from the input stream after process termination.
     DoTestAsyncRedirect(COMMAND, Check_Stdout, "hi");
@@ -386,60 +379,7 @@ void ExecTestCase::TestAsyncRedirect()
     DoTestAsyncRedirect(COMMAND_STDERR, Check_Stderr, "file");
 }
 
-// static
-wxString ExecTestCase::CreateSleepFile(const wxString& basename, int seconds)
-{
-#ifdef __UNIX__
-    static const char* const scriptExt = ".sh";
-
-    // The script text is a format string with a single "%d" appearing in it
-    // which will be replaced by the number of seconds to sleep below.
-    static const char* const scriptText =
-        "sleep %d\n"
-        "echo " SLEEP_END_STRING "\n";
-#elif defined(__WINDOWS__)
-    static const char* const scriptExt = ".bat";
-
-    // Notice that we need to ping N+1 times for it to take N seconds as the
-    // first ping is sent out immediately, without waiting a second.
-    static const char* const scriptText =
-        "@ ping 127.0.0.1 -n 1 > nul\n"
-        "@ ping 127.0.0.1 -n %d > nul\n"
-        "@ echo " SLEEP_END_STRING "\n";
-#else
-    #error "Need code to create sleep file for this platform"
-#endif
-
-    const wxString fnSleep = wxFileName(".", basename, scriptExt).GetFullPath();
-
-    wxFile fileSleep;
-    CPPUNIT_ASSERT
-    (
-        fileSleep.Create(fnSleep, true, wxS_IRUSR | wxS_IWUSR | wxS_IXUSR)
-    );
-
-    fileSleep.Write(wxString::Format(scriptText, seconds));
-
-    return fnSleep;
-}
-
-// static
-wxString ExecTestCase::MakeShellCommand(const wxString& filename)
-{
-    wxString command;
-
-#ifdef __UNIX__
-    command = "/bin/sh " + filename;
-#elif defined(__WINDOWS__)
-    command = wxString::Format("cmd.exe /c \"%s\"", filename);
-#else
-    #error "Need to code to launch shell for this platform"
-#endif
-
-    return command;
-}
-
-void ExecTestCase::TestOverlappedSyncExecute()
+TEST_CASE("TestOverlappedSyncExecute")
 {
     // Windows Synchronous wxExecute implementation does not currently
     // support overlapped event loops.  It is still using wxYield, which is
@@ -497,22 +437,22 @@ void ExecTestCase::TestOverlappedSyncExecute()
     // doesn't return until both process terminate.
     DelayedExecuteTimer delayLongSleep(longSleepCommand, longSleepOutput);
     wxExecute(shortSleepCommand, shortSleepOutput);
-    CPPUNIT_ASSERT( !shortSleepOutput.empty() );
-    CPPUNIT_ASSERT_EQUAL( SLEEP_END_STRING, shortSleepOutput.Last() );
+    CHECK( !shortSleepOutput.empty() );
+    CHECK_EQ( SLEEP_END_STRING, shortSleepOutput.Last() );
 
-    CPPUNIT_ASSERT( !longSleepOutput.empty() );
-    CPPUNIT_ASSERT_EQUAL( SLEEP_END_STRING, longSleepOutput.Last() );
+    CHECK( !longSleepOutput.empty() );
+    CHECK_EQ( SLEEP_END_STRING, longSleepOutput.Last() );
 
     // And also that, vice versa, running a short-lived child process that both
     // starts and ends while a longer-lived parent process is still running
     // works too.
     DelayedExecuteTimer delayShortSleep(shortSleepCommand, shortSleepOutput);
     wxExecute(longSleepCommand, longSleepOutput);
-    CPPUNIT_ASSERT( !shortSleepOutput.empty() );
-    CPPUNIT_ASSERT_EQUAL( SLEEP_END_STRING, shortSleepOutput.Last() );
+    CHECK( !shortSleepOutput.empty() );
+    CHECK_EQ( SLEEP_END_STRING, shortSleepOutput.Last() );
 
-    CPPUNIT_ASSERT( !longSleepOutput.empty() );
-    CPPUNIT_ASSERT_EQUAL( SLEEP_END_STRING, longSleepOutput.Last() );
+    CHECK( !longSleepOutput.empty() );
+    CHECK_EQ( SLEEP_END_STRING, longSleepOutput.Last() );
 #endif // !__WINDOWS__
 }
 

@@ -100,5 +100,8 @@
     <ClCompile Include="events\evtlooptest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="exec\exec.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
