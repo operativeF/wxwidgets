@@ -10,8 +10,9 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "testprec.h"
+#include "doctest.h"
 
+#include "testprec.h"
 
 #if wxUSE_CONFIG && wxUSE_REGKEY
 
