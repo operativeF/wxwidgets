@@ -11,8 +11,9 @@
 // headers
 // ----------------------------------------------------------------------------
 
-#include "testprec.h"
+#include "doctest.h"
 
+#include "testprec.h"
 
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
@@ -235,7 +236,7 @@ TEST_CASE("CRT::Strtox", "[crt][strtod][strtol]")
     const double d = 123.0;
     const long l = 123;
 
-    SECTION("char")
+    SUBCASE("char")
     {
         char* end = NULL;
         CHECK( wxStrtod(s, &end) == d );
@@ -247,7 +248,7 @@ TEST_CASE("CRT::Strtox", "[crt][strtod][strtol]")
         CHECK( *end == '@' );
     }
 
-    SECTION("wchar_t")
+    SUBCASE("wchar_t")
     {
         wchar_t* end = NULL;
         CHECK( wxStrtod(s, &end) == d );
@@ -259,7 +260,7 @@ TEST_CASE("CRT::Strtox", "[crt][strtod][strtol]")
         CHECK( *end == L'@' );
     }
 
-    SECTION("other")
+    SUBCASE("other")
     {
         CHECK( wxStrtod(s, 0) == d );
         CHECK( wxStrtod(s, nullptr) == d );
