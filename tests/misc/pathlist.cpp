@@ -16,7 +16,7 @@
 
 #include "wx/filefn.h"
 
-TEST_CASE("wxPathList::FindValidPath", "[file][path]")
+TEST_CASE("wxPathList::FindValidPath")
 {
 #ifdef __UNIX__
     #define CMD_IN_PATH "ls"

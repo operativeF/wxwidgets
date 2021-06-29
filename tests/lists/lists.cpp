@@ -183,7 +183,7 @@ TEST_CASE("wxListCtorTest")
 // Check that we convert wxList to std::list using the latter's ctor taking 2
 // iterators: this used to be broken in C++11 because wxList iterators didn't
 // fully implement input iterator requirements.
-TEST_CASE("wxList::iterator", "[list][std][iterator]")
+TEST_CASE("wxList::iterator")
 {
     Baz baz1("one"),
         baz2("two");

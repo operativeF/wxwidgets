@@ -158,7 +158,7 @@ static void DoTestAsyncRedirect(const wxString& command,
     CHECK(tis.ReadLine().Contains(expectedContaining));
 }
 
-static wxString CreateSleepFile(const wxString& basename, int seconds)
+[[maybe_unused]] static wxString CreateSleepFile(const wxString& basename, int seconds)
 {
 #ifdef __UNIX__
     static const char* const scriptExt = ".sh";
@@ -194,7 +194,7 @@ static wxString CreateSleepFile(const wxString& basename, int seconds)
     return fnSleep;
 }
 
-static wxString MakeShellCommand(const wxString& filename)
+[[maybe_unused]] static wxString MakeShellCommand(const wxString& filename)
 {
     wxString command;
 

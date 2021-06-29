@@ -33,7 +33,7 @@ static const wxString strWX("hello, world");
 // tests
 // ----------------------------------------------------------------------------
 
-TEST_CASE("CRT::SetGetEnv", "[crt][getenv][setenv]")
+TEST_CASE("CRT::SetGetEnv")
 {
 #define TESTVAR_NAME wxT("WXTESTVAR")
 
@@ -55,7 +55,7 @@ TEST_CASE("CRT::SetGetEnv", "[crt][getenv][setenv]")
 #undef TESTVAR_NAME
 }
 
-TEST_CASE("CRT::Strchr", "[crt][strchr]")
+TEST_CASE("CRT::Strchr")
 {
     // test that searching for a wide character in a narrow string simply
     // doesn't find it but doesn't fail with an assert (#11487)
@@ -68,7 +68,7 @@ TEST_CASE("CRT::Strchr", "[crt][strchr]")
                     static_cast<wchar_t>(smiley)) );
 }
 
-TEST_CASE("CRT::Strcmp", "[crt][strcmp]")
+TEST_CASE("CRT::Strcmp")
 {
     // this code tests if all possible ways of calling wxStrcmp() compile:
     const char * const char1 = "first";
@@ -128,7 +128,7 @@ TEST_CASE("CRT::Strcmp", "[crt][strcmp]")
     CHECK( wxStrcmp(wcharbuf1, wcharbuf2) < 0 );
 }
 
-TEST_CASE("CRT::Strspn", "[crt][strspn]")
+TEST_CASE("CRT::Strspn")
 {
     CHECK( wxStrspn(strMB, "xyz") == 0 );
     CHECK( wxStrspn(strWC, "xyz") == 0 );
@@ -150,7 +150,7 @@ TEST_CASE("CRT::Strspn", "[crt][strspn]")
     CHECK( wxStrspn(strWX, strMB) == strWX.length() );
 }
 
-TEST_CASE("CRT::Strcspn", "[crt][strcspn]")
+TEST_CASE("CRT::Strcspn")
 {
     CHECK( wxStrcspn(strMB, strWX) == 0 );
     CHECK( wxStrcspn(strWC, strMB) == 0 );
@@ -169,7 +169,7 @@ TEST_CASE("CRT::Strcspn", "[crt][strcspn]")
     CHECK( wxStrcspn(strWX, "xy") == strWX.length() );
 }
 
-TEST_CASE("CRT::Strpbrk", "[crt][strpbrk]")
+TEST_CASE("CRT::Strpbrk")
 {
     const wxString s(", ");
 
@@ -199,7 +199,7 @@ TEST_CASE("CRT::Strpbrk", "[crt][strpbrk]")
     CHECK( !wxStrpbrk(strWX.c_str(), L"xyz") );
 }
 
-TEST_CASE("CRT::Strnlen", "[crt][strnlen]")
+TEST_CASE("CRT::Strnlen")
 {
     // other misc tests for wxStrnlen(const char*, size_t)
 
@@ -230,7 +230,7 @@ TEST_CASE("CRT::Strnlen", "[crt][strnlen]")
     CHECK( wxStrnlen(L"1234" L"\0" L"5678", 12) == 4 );
 }
 
-TEST_CASE("CRT::Strtox", "[crt][strtod][strtol]")
+TEST_CASE("CRT::Strtox")
 {
     const wxString s = "123@";
     const double d = 123.0;

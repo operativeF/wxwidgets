@@ -150,7 +150,7 @@ wxGCC_WARNING_RESTORE(unused-function)
 } // anonymous namespace
 
 
-TEST_CASE("Event::BuiltinConnect", "[event][connect]")
+TEST_CASE("Event::BuiltinConnect")
 {
     MyHandler handler;
 
@@ -179,7 +179,7 @@ TEST_CASE("Event::BuiltinConnect", "[event][connect]")
     handler.Unbind(wxEVT_IDLE, &MyHandler::StaticOnIdle);
 }
 
-TEST_CASE("Event::LegacyConnect", "[event][connect]")
+TEST_CASE("Event::LegacyConnect")
 {
     MyHandler handler;
 
@@ -201,7 +201,7 @@ TEST_CASE("Event::LegacyConnect", "[event][connect]")
     handler.Disconnect( 0, 0, LegacyEventType, (wxObjectEventFunction)&MyHandler::OnEvent, NULL, &handler );
 }
 
-TEST_CASE("Event::ConnectOverloaded", "[event][connect]")
+TEST_CASE("Event::ConnectOverloaded")
 {
     MyHandler handler;
 
@@ -209,7 +209,7 @@ TEST_CASE("Event::ConnectOverloaded", "[event][connect]")
     handler.Connect(wxEVT_THREAD, wxThreadEventHandler(MyHandler::OnOverloadedHandler));
 }
 
-TEST_CASE("Event::DisconnectWildcard", "[event][connect][disconnect]")
+TEST_CASE("Event::DisconnectWildcard")
 {
     MyHandler handler;
 
@@ -222,7 +222,7 @@ TEST_CASE("Event::DisconnectWildcard", "[event][connect][disconnect]")
     // wxEventConnectionRef without crashing
 }
 
-TEST_CASE("Event::AutoDisconnect", "[event][connect][disconnect]")
+TEST_CASE("Event::AutoDisconnect")
 {
     wxEvtHandler source;
     {
@@ -236,7 +236,7 @@ TEST_CASE("Event::AutoDisconnect", "[event][connect][disconnect]")
     CHECK(!source.Disconnect(wxID_ANY, wxEVT_IDLE));
 }
 
-TEST_CASE("Event::BindFunction", "[event][bind]")
+TEST_CASE("Event::BindFunction")
 {
     MyHandler handler;
     MyEvent e;
@@ -258,7 +258,7 @@ TEST_CASE("Event::BindFunction", "[event][bind]")
     handler.Unbind( MyEventType, GlobalOnMyEvent, 0, 0 );
 }
 
-TEST_CASE("Event::BindStaticMethod", "[event][bind]")
+TEST_CASE("Event::BindStaticMethod")
 {
     MyHandler handler;
     MyEvent e;
@@ -281,7 +281,7 @@ TEST_CASE("Event::BindStaticMethod", "[event][bind]")
     handler.Unbind( MyEventType, &MyHandler::StaticOnMyEvent, 0, 0 );
 }
 
-TEST_CASE("Event::BindFunctor", "[event][bind]")
+TEST_CASE("Event::BindFunctor")
 {
     MyHandler handler;
     MyEvent e;
@@ -318,7 +318,7 @@ TEST_CASE("Event::BindFunctor", "[event][bind]")
     CHECK( !handler.Unbind( MyEventType, func, 0, 0 ));
 }
 
-TEST_CASE("Event::BindMethod", "[event][bind]")
+TEST_CASE("Event::BindMethod")
 {
     MyHandler handler;
     MyEvent e;
@@ -340,7 +340,7 @@ TEST_CASE("Event::BindMethod", "[event][bind]")
     handler.Unbind( MyEventType, &MyHandler::OnMyEvent, &handler, 0, 0 );
 }
 
-TEST_CASE("Event::BindMethodUsingBaseEvent", "[event][bind]")
+TEST_CASE("Event::BindMethodUsingBaseEvent")
 {
     MyHandler handler;
     MyEvent e;
@@ -365,7 +365,7 @@ TEST_CASE("Event::BindMethodUsingBaseEvent", "[event][bind]")
 }
 
 
-TEST_CASE("Event::BindFunctionUsingBaseEvent", "[event][bind]")
+TEST_CASE("Event::BindFunctionUsingBaseEvent")
 {
     MyHandler handler;
     MyEvent e;
@@ -391,7 +391,7 @@ TEST_CASE("Event::BindFunctionUsingBaseEvent", "[event][bind]")
 
 
 
-TEST_CASE("Event::BindNonHandler", "[event][bind]")
+TEST_CASE("Event::BindNonHandler")
 {
     MyHandler handler;
     MyEvent e;
@@ -409,7 +409,7 @@ TEST_CASE("Event::BindNonHandler", "[event][bind]")
     CHECK( !g_called.method );
 }
 
-TEST_CASE("Event::InvalidBind", "[event][bind]")
+TEST_CASE("Event::InvalidBind")
 {
     // these calls shouldn't compile but we unfortunately can't check this
     // automatically, you need to uncomment them manually and test that
@@ -489,7 +489,7 @@ private:
 	Handler2& operator=(const Handler2&) = delete;
 };
 
-TEST_CASE("Event::UnbindFromHandler", "[event][bind][unbind]")
+TEST_CASE("Event::UnbindFromHandler")
 {
     MyHandler handler;
     MyEvent e;

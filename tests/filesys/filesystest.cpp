@@ -50,7 +50,7 @@ public:
 // tests themselves
 // ----------------------------------------------------------------------------
 
-TEST_CASE("wxFileSystem::URLParsing", "[filesys][url][parse]")
+TEST_CASE("wxFileSystem::URLParsing")
 {
     static constexpr struct Data
     {
@@ -133,7 +133,7 @@ TEST_CASE("wxFileSystem::URLParsing", "[filesys][url][parse]")
     }
 }
 
-TEST_CASE("wxFileSystem::FileNameToUrlConversion", "[filesys][url][filename]")
+TEST_CASE("wxFileSystem::FileNameToUrlConversion")
 {
     const static struct Data {
         const wxChar *input, *expected;
@@ -160,7 +160,7 @@ TEST_CASE("wxFileSystem::FileNameToUrlConversion", "[filesys][url][filename]")
     }
 }
 
-TEST_CASE("wxFileSystem::UnicodeFileNameToUrlConversion", "[filesys][url][filename][unicode]")
+TEST_CASE("wxFileSystem::UnicodeFileNameToUrlConversion")
 {
     const unsigned char filename_utf8[] = {
               0x4b, 0x72, 0xc3, 0xa1, 0x73, 0x79, 0x50, 0xc5,
@@ -177,7 +177,7 @@ TEST_CASE("wxFileSystem::UnicodeFileNameToUrlConversion", "[filesys][url][filena
 
 // Test that using FindFirst() after removing a previously found URL works:
 // this used to be broken, see https://trac.wxwidgets.org/ticket/18744
-TEST_CASE("wxFileSystem::MemoryFSHandler", "[filesys][memoryfshandler][find]")
+TEST_CASE("wxFileSystem::MemoryFSHandler")
 {
     // Install wxMemoryFSHandler just for the duration of this test.
     class AutoMemoryFSHandler

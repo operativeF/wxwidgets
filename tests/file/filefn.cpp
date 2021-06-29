@@ -279,25 +279,25 @@ TEST_CASE("File Functions")
         // Check using method 1.
         wxString foundFile1 = wxFindFirstFile(fileMask, wxFILE);
         wxString foundFile2 = wxFindNextFile();
-        wxFileName fn1(foundFile1);
-        wxFileName fn2(foundFile2);
+        wxFileName firstFile(foundFile1);
+        wxFileName nextFile(foundFile2);
         // Full names must be different.
         CHECK( foundFile1 != foundFile2 );
         // Base names must be the same.
-        CHECK( fn1.GetName() == fn2.GetName() );
+        CHECK( firstFile.GetName() == nextFile.GetName() );
 
         // Check using method 2.
         wxFileSystem fs;
         wxString furl = fs.FindFirst(fileMask, wxFILE);
-        fn1 = wxFileName::URLToFileName(furl);
-        foundFile1 = fn1.GetFullPath();
+        firstFile = wxFileName::URLToFileName(furl);
+        foundFile1 = firstFile.GetFullPath();
         furl = fs.FindNext();
-        fn2 = wxFileName::URLToFileName(furl);
-        foundFile2 = fn2.GetFullPath();
+        nextFile = wxFileName::URLToFileName(furl);
+        foundFile2 = nextFile.GetFullPath();
         // Full names must be different.
-        CHECK( fn1.GetFullPath() != fn2.GetFullPath() );
+        CHECK( firstFile.GetFullPath() != nextFile.GetFullPath() );
         // Base names must be the same.
-        CHECK( fn1.GetName() == fn2.GetName() );
+        CHECK( firstFile.GetName() == nextFile.GetName() );
     }
 
     SUBCASE("Remove file")

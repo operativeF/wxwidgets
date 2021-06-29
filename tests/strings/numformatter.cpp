@@ -72,7 +72,7 @@ wxString ToStringWithTrailingZeroes(double val, int precision)
 // tests themselves
 // ----------------------------------------------------------------------------
 
-TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::LongToString", "[numformatter]")
+TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::LongToString")
 {
     if ( !CanRunTest() )
         return;
@@ -98,7 +98,7 @@ TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::LongToString", "[numforma
 
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
-TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::LongLongToString", "[numformatter]")
+TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::LongLongToString")
 {
     if ( !CanRunTest() )
         return;
@@ -116,7 +116,7 @@ TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::LongLongToString", "[numf
 
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
-TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::DoubleToString", "[numformatter]")
+TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::DoubleToString")
 {
     if ( !CanRunTest() )
         return;
@@ -136,7 +136,7 @@ TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::DoubleToString", "[numfor
     CHECK( ToStringWithTrailingZeroes(   -0.02, 1) ==      "-0.0" );
 }
 
-TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::NoTrailingZeroes", "[numformatter]")
+TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::NoTrailingZeroes")
 {
     //CHECK_THROWS
     //(
@@ -159,7 +159,7 @@ TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::NoTrailingZeroes", "[numf
     CHECK( ToStringWithoutTrailingZeroes(   1e-120, -1) ==        "1e-120" );
 }
 
-TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::LongFromString", "[numformatter]")
+TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::LongFromString")
 {
     if ( !CanRunTest() )
         return;
@@ -204,7 +204,7 @@ TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::LongFromString", "[numfor
 
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
-TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::LongLongFromString", "[numformatter]")
+TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::LongLongFromString")
 {
     if ( !CanRunTest() )
         return;
@@ -259,7 +259,7 @@ TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::LongLongFromString", "[nu
 
 #endif // wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG
 
-TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::ULongLongFromString", "[numformatter]")
+TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::ULongLongFromString")
 {
     if ( !CanRunTest() )
         return;
@@ -304,7 +304,7 @@ TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::ULongLongFromString", "[n
     CHECK_FALSE( wxNumberFormatter::FromString("18446744073709551616", &u) );
 }
 
-TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::DoubleFromString", "[numformatter]")
+TEST_CASE_FIXTURE(NumFormatterTestCase, "NumFormatter::DoubleFromString")
 {
     if ( !CanRunTest() )
         return;

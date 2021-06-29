@@ -59,7 +59,7 @@ static wxString ChangePath(wxFileConfig& fc, const char *path)
 // test class
 // ----------------------------------------------------------------------------
 
-TEST_CASE("wxFileConfig::Path", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::Path")
 {
     wxStringInputStream sis(testconfig);
     wxFileConfig fc(sis);
@@ -72,7 +72,7 @@ TEST_CASE("wxFileConfig::Path", "[fileconfig][config]")
     CHECK( ChangePath(fc, "/root/group2") == "/root/group2" );
 }
 
-TEST_CASE("wxFileConfig::AddEntries", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::AddEntries")
 {
     wxFileConfig fc;
 
@@ -153,7 +153,7 @@ CheckGroupSubgroups(const wxFileConfig& fc,
 
 } // anonymous namespace
 
-TEST_CASE("wxFileConfig::GetEntries", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::GetEntries")
 {
     wxStringInputStream sis(testconfig);
     wxFileConfig fc(sis);
@@ -165,7 +165,7 @@ TEST_CASE("wxFileConfig::GetEntries", "[fileconfig][config]")
                         2, "subentry", "subentry2");
 }
 
-TEST_CASE("wxFileConfig::GetGroups", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::GetGroups")
 {
     wxStringInputStream sis(testconfig);
     wxFileConfig fc(sis);
@@ -176,7 +176,7 @@ TEST_CASE("wxFileConfig::GetGroups", "[fileconfig][config]")
     CheckGroupSubgroups(fc, "/root/group2", 0);
 }
 
-TEST_CASE("wxFileConfig::HasEntry", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::HasEntry")
 {
     wxStringInputStream sis(testconfig);
     wxFileConfig fc(sis);
@@ -192,7 +192,7 @@ TEST_CASE("wxFileConfig::HasEntry", "[fileconfig][config]")
     CHECK( !fc.HasGroup("/root/no_such_group") );
 }
 
-TEST_CASE("wxFileConfig::HasGroup", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::HasGroup")
 {
     wxStringInputStream sis(testconfig);
     wxFileConfig fc(sis);
@@ -208,7 +208,7 @@ TEST_CASE("wxFileConfig::HasGroup", "[fileconfig][config]")
     CHECK( !fc.HasGroup("foot") );
 }
 
-TEST_CASE("wxFileConfig::Binary", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::Binary")
 {
     wxStringInputStream sis(
         "[root]\n"
@@ -232,14 +232,14 @@ TEST_CASE("wxFileConfig::Binary", "[fileconfig][config]")
     );
 }
 
-TEST_CASE("wxFileConfig::Save", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::Save")
 {
     wxStringInputStream sis(testconfig);
     wxFileConfig fc(sis);
     wxVERIFY_FILECONFIG( testconfig, fc );
 }
 
-TEST_CASE("wxFileConfig::DeleteEntry", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::DeleteEntry")
 {
     wxStringInputStream sis(testconfig);
     wxFileConfig fc(sis);
@@ -265,7 +265,7 @@ TEST_CASE("wxFileConfig::DeleteEntry", "[fileconfig][config]")
                          fc );
 }
 
-TEST_CASE("wxFileConfig::DeleteAndWriteEntry", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::DeleteAndWriteEntry")
 {
     wxStringInputStream sis(
             "[root/group1]\n"
@@ -306,7 +306,7 @@ TEST_CASE("wxFileConfig::DeleteAndWriteEntry", "[fileconfig][config]")
     wxVERIFY_FILECONFIG( "", fc );
 }
 
-TEST_CASE("wxFileConfig::DeleteLastRootEntry", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::DeleteLastRootEntry")
 {
     // This tests for the bug which occurred when the last entry of the root
     // group was deleted: this corrupted internal state and resulted in a crash
@@ -324,7 +324,7 @@ TEST_CASE("wxFileConfig::DeleteLastRootEntry", "[fileconfig][config]")
     wxVERIFY_FILECONFIG( "key=value\n", fc );
 }
 
-TEST_CASE("wxFileConfig::DeleteGroup", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::DeleteGroup")
 {
     wxStringInputStream sis(testconfig);
     wxFileConfig fc(sis);
@@ -347,7 +347,7 @@ TEST_CASE("wxFileConfig::DeleteGroup", "[fileconfig][config]")
     CHECK( Dump(fc).empty() );
 }
 
-TEST_CASE("wxFileConfig::DeleteAll", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::DeleteAll")
 {
     wxStringInputStream sis(testconfig);
     wxFileConfig fc(sis);
@@ -356,7 +356,7 @@ TEST_CASE("wxFileConfig::DeleteAll", "[fileconfig][config]")
     CHECK( Dump(fc).empty() );
 }
 
-TEST_CASE("wxFileConfig::RenameEntry", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::RenameEntry")
 {
     wxStringInputStream sis(testconfig);
     wxFileConfig fc(sis);
@@ -387,7 +387,7 @@ TEST_CASE("wxFileConfig::RenameEntry", "[fileconfig][config]")
                          fc );
 }
 
-TEST_CASE("wxFileConfig::RenameGroup", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::RenameGroup")
 {
     wxStringInputStream sis(testconfig);
     wxFileConfig fc(sis);
@@ -473,7 +473,7 @@ TEST_CASE("wxFileConfig::RenameGroup", "[fileconfig][config]")
                          fc );
 }
 
-TEST_CASE("wxFileConfig::CreateSubgroupAndEntries", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::CreateSubgroupAndEntries")
 {
     wxFileConfig fc;
     fc.Write("sub/sub_first", "sub_one");
@@ -485,7 +485,7 @@ TEST_CASE("wxFileConfig::CreateSubgroupAndEntries", "[fileconfig][config]")
                          fc );
 }
 
-TEST_CASE("wxFileConfig::CreateEntriesAndSubgroup", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::CreateEntriesAndSubgroup")
 {
     wxFileConfig fc;
     fc.Write("first", "one");
@@ -520,7 +520,7 @@ static void EmptyConfigAndWriteKey()
     CHECK( fc.Write(groupPath + "/entry", "value") );
 }
 
-TEST_CASE("wxFileConfig::DeleteLastGroup", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::DeleteLastGroup")
 {
     /*
     We make 2 of the same calls, first to create a file config with a single
@@ -540,7 +540,7 @@ TEST_CASE("wxFileConfig::DeleteLastGroup", "[fileconfig][config]")
     (void) ::wxRemoveFile(wxFileConfig::GetLocalFileName("deleteconftest"));
 }
 
-TEST_CASE("wxFileConfig::DeleteAndRecreateGroup", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::DeleteAndRecreateGroup")
 {
     static const char *confInitial =
         "[First]\n"
@@ -564,7 +564,7 @@ TEST_CASE("wxFileConfig::DeleteAndRecreateGroup", "[fileconfig][config]")
                          fc );
 }
 
-TEST_CASE("wxFileConfig::AddToExistingRoot", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::AddToExistingRoot")
 {
     static const char *confInitial =
         "[Group]\n"
@@ -582,7 +582,7 @@ TEST_CASE("wxFileConfig::AddToExistingRoot", "[fileconfig][config]")
     );
 }
 
-TEST_CASE("wxFileConfig::ReadNonExistent", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::ReadNonExistent")
 {
     static const char *confTest =
         "community=censored\n"
@@ -601,7 +601,7 @@ TEST_CASE("wxFileConfig::ReadNonExistent", "[fileconfig][config]")
     CHECK( !fc.Read("URL", &url) );
 }
 
-TEST_CASE("wxFileConfig::ReadEmpty", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::ReadEmpty")
 {
     static const char *confTest = "";
 
@@ -609,7 +609,7 @@ TEST_CASE("wxFileConfig::ReadEmpty", "[fileconfig][config]")
     wxFileConfig fc(sis);
 }
 
-TEST_CASE("wxFileConfig::ReadFloat", "[fileconfig][config]")
+TEST_CASE("wxFileConfig::ReadFloat")
 {
     static const char *confTest =
         "x=1.234\n"
@@ -628,7 +628,7 @@ TEST_CASE("wxFileConfig::ReadFloat", "[fileconfig][config]")
     CHECK( f == -9876.5432f );
 }
 
-TEST_CASE("wxFileConfig::LongLong", "[fileconfig][config][longlong]")
+TEST_CASE("wxFileConfig::LongLong")
 {
     wxFileConfig fc("", "", "", "", 0); // Don't use any files.
 

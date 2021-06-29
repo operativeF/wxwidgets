@@ -27,7 +27,7 @@
 // test class
 // ----------------------------------------------------------------------------
 
-TEST_CASE("wxRegConfig::ReadWrite", "[regconfig][config][registry]")
+TEST_CASE("wxRegConfig::ReadWrite")
 {
     wxString app = "wxRegConfigTestCase";
     wxString vendor = "wxWidgets";
@@ -69,7 +69,7 @@ TEST_CASE("wxRegConfig::ReadWrite", "[regconfig][config][registry]")
     config->DeleteAll();
 }
 
-TEST_CASE("wxRegKey::DeleteFromRedirectedView", "[registry][64bits]")
+TEST_CASE("wxRegKey::DeleteFromRedirectedView")
 {
     if ( !wxIsPlatform64Bit() )
     {

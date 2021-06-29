@@ -93,13 +93,13 @@ ModuleD::ModuleD()
 // tests themselves
 // ----------------------------------------------------------------------------
 
-TEST_CASE("wxModule::Initialized", "[module]")
+TEST_CASE("wxModule::Initialized")
 {
     CHECK( !gs_wasInitialized );
     CHECK( wxModule::AreInitialized() );
 }
 
-TEST_CASE("wxModule::LoadOrder", "[module]")
+TEST_CASE("wxModule::LoadOrder")
 {
     // module D is the only one with no dependencies and so should load as first (and so on):
     CHECK( g_strLoadOrder == "ModuleDModuleCModuleBModuleA" );

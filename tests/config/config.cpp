@@ -43,7 +43,7 @@
 // the tests
 // --------------------------------------------------------------------------
 
-TEST_CASE("wxConfig::ReadWriteLocal", "[config]")
+TEST_CASE("wxConfig::ReadWriteLocal")
 {
     wxString app = "wxConfigTestCase";
     wxString vendor = "wxWidgets";
@@ -196,7 +196,7 @@ size_t ReadValues(const wxConfig& config, bool has_values)
 }
 
 
-TEST_CASE("wxConfig::RecordingDefaults", "[config]")
+TEST_CASE("wxConfig::RecordingDefaults")
 {
     wxString app = "wxConfigTestCaseRD";
     wxString vendor = "wxWidgets";

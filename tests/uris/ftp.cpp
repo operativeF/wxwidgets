@@ -28,7 +28,7 @@
 //
 // Optionally, WX_FTP_TEST_USER and WX_FTP_TEST_PASS may also be defined,
 // otherwise anonymous FTP is used.
-TEST_CASE("FTP", "[net][.]")
+TEST_CASE("FTP")
 {
     wxString hostname,
              directory,
