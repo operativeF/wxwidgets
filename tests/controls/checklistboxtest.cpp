@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_CHECKLISTBOX
@@ -19,46 +21,11 @@
 #include "itemcontainertest.h"
 #include "testableframe.h"
 
-class CheckListBoxTestCase : public ItemContainerTestCase, public CppUnit::TestCase
+
+TEST_CASE("Checklist box")
 {
-public:
-    CheckListBoxTestCase() { }
+    auto m_check = new wxCheckListBox(wxTheApp->GetTopWindow(), wxID_ANY);
 
-    void setUp() override;
-    void tearDown() override;
-
-private:
-    wxItemContainer *GetContainer() const override { return m_check; }
-    wxWindow *GetContainerWindow() const override { return m_check; }
-
-    CPPUNIT_TEST_SUITE( CheckListBoxTestCase );
-        wxITEM_CONTAINER_TESTS();
-        CPPUNIT_TEST( Check );
-    CPPUNIT_TEST_SUITE_END();
-
-    void Check();
-
-    wxCheckListBox* m_check;
-
-    CheckListBoxTestCase(const CheckListBoxTestCase&) = delete;
-	CheckListBoxTestCase& operator=(const CheckListBoxTestCase&) = delete;
-};
-
-wxREGISTER_UNIT_TEST_WITH_TAGS(CheckListBoxTestCase,
-                               "[CheckListBoxTestCase][item-container]");
-
-void CheckListBoxTestCase::setUp()
-{
-    m_check = new wxCheckListBox(wxTheApp->GetTopWindow(), wxID_ANY);
-}
-
-void CheckListBoxTestCase::tearDown()
-{
-    wxDELETE(m_check);
-}
-
-void CheckListBoxTestCase::Check()
-{
     EventCounter toggled(m_check, wxEVT_CHECKLISTBOX);
 
     std::vector<int> checkedItems;
@@ -87,6 +54,8 @@ void CheckListBoxTestCase::Check()
     m_check->Check(0);
 
     CHECK_EQ(true, m_check->IsChecked(0));
+
+    wxDELETE(m_check);
 }
 
 #endif // wxUSE_CHECKLISTBOX
