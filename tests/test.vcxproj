@@ -73,6 +73,7 @@
     <ClCompile Include="strings\numformatter.cpp" />
     <ClCompile Include="strings\stdstrings.cpp" />
     <ClCompile Include="strings\strings.cpp" />
+    <ClCompile Include="strings\tokenizer.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="textfile\textfiletest.cpp" />
     <ClCompile Include="thread\atomic.cpp" />
