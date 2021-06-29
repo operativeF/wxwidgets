@@ -145,5 +145,8 @@
     <ClCompile Include="strings\stdstrings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="strings\strings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
