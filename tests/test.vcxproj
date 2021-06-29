@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="doctest.h" />
+    <ClInclude Include="streams\bstream.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cmdline\cmdlinetest.cpp" />
@@ -67,6 +68,7 @@
     <ClCompile Include="misc\module.cpp" />
     <ClCompile Include="misc\pathlist.cpp" />
     <ClCompile Include="misc\typeinfotest.cpp" />
+    <ClCompile Include="streams\datastreamtest.cpp" />
     <ClCompile Include="strings\crt.cpp" />
     <ClCompile Include="strings\hexconv.cpp" />
     <ClCompile Include="strings\iostream.cpp" />
@@ -76,6 +78,7 @@
     <ClCompile Include="strings\tokenizer.cpp" />
     <ClCompile Include="strings\unicode.cpp" />
     <ClCompile Include="strings\vararg.cpp" />
+    <ClCompile Include="strings\vsnprintf.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="textfile\textfiletest.cpp" />
     <ClCompile Include="thread\atomic.cpp" />

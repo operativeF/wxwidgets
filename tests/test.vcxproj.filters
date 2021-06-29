@@ -8,6 +8,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="doctest.h" />
+    <ClInclude Include="streams\bstream.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fontmap\fontmaptest.cpp">
@@ -155,6 +156,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="strings\vararg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strings\vsnprintf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="streams\datastreamtest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

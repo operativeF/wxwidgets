@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -25,70 +27,10 @@
 
 #include "testfile.h"
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
 
-class DataStreamTestCase : public CppUnit::TestCase
-{
-public:
-    DataStreamTestCase();
+static bool ms_useBigEndianFormat = false;
 
-private:
-    CPPUNIT_TEST_SUITE( DataStreamTestCase );
-        CPPUNIT_TEST( FloatRW );
-        CPPUNIT_TEST( DoubleRW );
-        CPPUNIT_TEST( StringRW );
-#if wxUSE_LONGLONG
-        CPPUNIT_TEST( LongLongRW );
-#endif
-#if wxHAS_INT64
-        CPPUNIT_TEST( Int64RW );
-#endif
-        CPPUNIT_TEST( NaNRW );
-        CPPUNIT_TEST( PseudoTest_UseBigEndian );
-        CPPUNIT_TEST( FloatRW );
-        CPPUNIT_TEST( DoubleRW );
-        // Only test standard IEEE 754 formats if we're using IEEE extended
-        // format by default, otherwise the tests above already covered them.
-
-    CPPUNIT_TEST_SUITE_END();
-
-    double TestFloatRW(double fValue);
-
-    void FloatRW();
-    void DoubleRW();
-    void StringRW();
-#if wxUSE_LONGLONG
-    void LongLongRW();
-#endif
-#if wxHAS_INT64
-    void Int64RW();
-#endif
-    void NaNRW();
-
-    void PseudoTest_UseBigEndian() { ms_useBigEndianFormat = true; }
-    void PseudoTest_UseLittleEndian() { ms_useBigEndianFormat = false; }
-
-    static bool ms_useBigEndianFormat;
-
-    DataStreamTestCase(const DataStreamTestCase&) = delete;
-	DataStreamTestCase& operator=(const DataStreamTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( DataStreamTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( DataStreamTestCase, "DataStreamTestCase" );
-
-bool DataStreamTestCase::ms_useBigEndianFormat = false;
-
-DataStreamTestCase::DataStreamTestCase()
-{
-}
-
-double DataStreamTestCase::TestFloatRW(double fValue)
+static double TestFloatRW(double fValue)
 {
     TempFile f("mytext.dat");
 
@@ -203,35 +145,35 @@ T TestRW(const T &Value)
     return InValue;
 }
 
-void DataStreamTestCase::FloatRW()
+TEST_CASE("FloatRW")
 {
-    CPPUNIT_ASSERT( TestFloatRW(5.5) == 5.5 );
-    CPPUNIT_ASSERT( TestFloatRW(5) == 5 );
-    CPPUNIT_ASSERT( TestFloatRW(5.55) == 5.55 );
-    CPPUNIT_ASSERT( TestFloatRW(55555.555555) == 55555.555555 );
+    CHECK( TestFloatRW(5.5) == 5.5 );
+    CHECK( TestFloatRW(5) == 5 );
+    CHECK( TestFloatRW(5.55) == 5.55 );
+    CHECK( TestFloatRW(55555.555555) == 55555.555555 );
 }
 
-void DataStreamTestCase::DoubleRW()
+TEST_CASE("DoubleRW")
 {
-    CPPUNIT_ASSERT( TestFloatRW(2132131.1232132) == 2132131.1232132 );
-    CPPUNIT_ASSERT( TestFloatRW(21321343431.1232143432) == 21321343431.1232143432 );
+    CHECK( TestFloatRW(2132131.1232132) == 2132131.1232132 );
+    CHECK( TestFloatRW(21321343431.1232143432) == 21321343431.1232143432 );
 }
 
-void DataStreamTestCase::StringRW()
+TEST_CASE("StringRW")
 {
     wxString s(wxT("Test1"));
-    CPPUNIT_ASSERT_EQUAL( TestRW(s), s );
+    CHECK_EQ( TestRW(s), s );
 
     s.append(2, wxT('\0'));
     s.append(wxT("Test2"));
-    CPPUNIT_ASSERT_EQUAL( TestRW(s), s );
+    CHECK_EQ( TestRW(s), s );
 
     s = wxString::FromUTF8("\xc3\xbc"); // U+00FC LATIN SMALL LETTER U WITH DIAERESIS
-    CPPUNIT_ASSERT_EQUAL( TestRW(s), s );
+    CHECK_EQ( TestRW(s), s );
 }
 
 #if wxUSE_LONGLONG
-void DataStreamTestCase::LongLongRW()
+TEST_CASE("LongLongRW")
 {
     TestMultiRW<wxLongLong>::ValueArray ValuesLL;
     TestMultiRW<wxULongLong>::ValueArray ValuesULL;
@@ -247,15 +189,15 @@ void DataStreamTestCase::LongLongRW()
     ValuesULL.push_back(wxULongLong(0x12345678l));
     ValuesULL.push_back(wxULongLong(0x12345678l, 0xabcdef01l));
 
-    CPPUNIT_ASSERT( TestRW(wxLongLong(0x12345678l)) == wxLongLong(0x12345678l) );
-    CPPUNIT_ASSERT( TestRW(wxLongLong(0x12345678l, 0xabcdef01l)) == wxLongLong(0x12345678l, 0xabcdef01l) );
-    CPPUNIT_ASSERT( TestMultiRW<wxLongLong>(ValuesLL, &wxDataOutputStream::WriteLL, &wxDataInputStream::ReadLL).IsOk() );
-    CPPUNIT_ASSERT( TestMultiRW<wxULongLong>(ValuesULL, &wxDataOutputStream::WriteLL, &wxDataInputStream::ReadLL).IsOk() );
+    CHECK( TestRW(wxLongLong(0x12345678l)) == wxLongLong(0x12345678l) );
+    CHECK( TestRW(wxLongLong(0x12345678l, 0xabcdef01l)) == wxLongLong(0x12345678l, 0xabcdef01l) );
+    CHECK( TestMultiRW<wxLongLong>(ValuesLL, &wxDataOutputStream::WriteLL, &wxDataInputStream::ReadLL).IsOk() );
+    CHECK( TestMultiRW<wxULongLong>(ValuesULL, &wxDataOutputStream::WriteLL, &wxDataInputStream::ReadLL).IsOk() );
 }
 #endif
 
 #if wxHAS_INT64
-void DataStreamTestCase::Int64RW()
+TEST_CASE("Int64RW")
 {
     TestMultiRW<wxInt64>::ValueArray ValuesI64;
     TestMultiRW<wxUint64>::ValueArray ValuesUI64;
@@ -271,16 +213,14 @@ void DataStreamTestCase::Int64RW()
     ValuesUI64.push_back(wxUint64(0x12345678l));
     ValuesUI64.push_back((wxUint64(0x12345678l) << 32) + wxUint64(0xabcdef01l));
 
-    CPPUNIT_ASSERT( TestRW(wxUint64(0x12345678l)) == wxUint64(0x12345678l) );
-    CPPUNIT_ASSERT( TestRW((wxUint64(0x12345678l) << 32) + wxUint64(0xabcdef01l)) == (wxUint64(0x12345678l) << 32) + wxUint64(0xabcdef01l) );
-    CPPUNIT_ASSERT( TestMultiRW<wxInt64>(ValuesI64, &wxDataOutputStream::Write64, &wxDataInputStream::Read64).IsOk() );
-    CPPUNIT_ASSERT( TestMultiRW<wxUint64>(ValuesUI64, &wxDataOutputStream::Write64, &wxDataInputStream::Read64).IsOk() );
+    CHECK( TestRW(wxUint64(0x12345678l)) == wxUint64(0x12345678l) );
+    CHECK( TestRW((wxUint64(0x12345678l) << 32) + wxUint64(0xabcdef01l)) == (wxUint64(0x12345678l) << 32) + wxUint64(0xabcdef01l) );
+    CHECK( TestMultiRW<wxInt64>(ValuesI64, &wxDataOutputStream::Write64, &wxDataInputStream::Read64).IsOk() );
+    CHECK( TestMultiRW<wxUint64>(ValuesUI64, &wxDataOutputStream::Write64, &wxDataInputStream::Read64).IsOk() );
 }
 #endif
 
-void DataStreamTestCase::NaNRW()
-{
-    //TODO?
-}
-
-
+//void DataStreamTestCase::NaNRW()
+//{
+//    //TODO?
+//}
