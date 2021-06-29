@@ -66,6 +66,7 @@
     <ClCompile Include="misc\misctests.cpp" />
     <ClCompile Include="misc\module.cpp" />
     <ClCompile Include="misc\pathlist.cpp" />
+    <ClCompile Include="misc\typeinfotest.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="textfile\textfiletest.cpp" />
     <ClCompile Include="thread\atomic.cpp" />
