@@ -70,6 +70,7 @@
     <ClCompile Include="strings\crt.cpp" />
     <ClCompile Include="strings\hexconv.cpp" />
     <ClCompile Include="strings\iostream.cpp" />
+    <ClCompile Include="strings\numformatter.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="textfile\textfiletest.cpp" />
     <ClCompile Include="thread\atomic.cpp" />
