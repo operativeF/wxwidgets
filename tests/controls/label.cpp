@@ -90,14 +90,14 @@ void DoTestLabel(wxControl* c)
 
 TEST_CASE("wxControl::Label", "[wxControl][label]")
 {
-    SECTION("wxStaticText")
+    SUBCASE("wxStaticText")
     {
         const std::unique_ptr<wxStaticText>
             st(new wxStaticText(wxTheApp->GetTopWindow(), wxID_ANY, ORIGINAL_LABEL));
         DoTestLabel(st.get());
     }
 
-    SECTION("wxStaticText/ellipsized")
+    SUBCASE("wxStaticText/ellipsized")
     {
         const std::unique_ptr<wxStaticText>
             st(new wxStaticText(wxTheApp->GetTopWindow(), wxID_ANY, ORIGINAL_LABEL,
@@ -106,14 +106,14 @@ TEST_CASE("wxControl::Label", "[wxControl][label]")
         DoTestLabel(st.get());
     }
 
-    SECTION("wxGenericStaticText")
+    SUBCASE("wxGenericStaticText")
     {
         const std::unique_ptr<wxGenericStaticText>
             gst(new wxGenericStaticText(wxTheApp->GetTopWindow(), wxID_ANY, ORIGINAL_LABEL));
         DoTestLabel(gst.get());
     }
 
-    SECTION("wxCheckBox")
+    SUBCASE("wxCheckBox")
     {
         const std::unique_ptr<wxCheckBox>
             cb(new wxCheckBox(wxTheApp->GetTopWindow(), wxID_ANY, ORIGINAL_LABEL));
