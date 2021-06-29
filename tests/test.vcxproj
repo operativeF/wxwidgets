@@ -75,6 +75,7 @@
     <ClCompile Include="strings\strings.cpp" />
     <ClCompile Include="strings\tokenizer.cpp" />
     <ClCompile Include="strings\unicode.cpp" />
+    <ClCompile Include="strings\vararg.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="textfile\textfiletest.cpp" />
     <ClCompile Include="thread\atomic.cpp" />
