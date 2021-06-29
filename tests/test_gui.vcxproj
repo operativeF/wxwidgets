@@ -486,6 +486,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="asserthelper.cpp" />
+    <ClCompile Include="controls\auitest.cpp" />
     <ClCompile Include="controls\frametest.cpp" />
     <ClCompile Include="dummy.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DLL Debug|Win32'">Create</PrecompiledHeader>
