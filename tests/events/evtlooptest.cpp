@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -20,34 +22,12 @@
 // ----------------------------------------------------------------------------
 
 // Use two arbitrary but different return codes for the two loops.
-const int EXIT_CODE_OUTER_LOOP = 99;
-const int EXIT_CODE_INNER_LOOP = 55;
+constexpr int EXIT_CODE_OUTER_LOOP = 99;
+constexpr int EXIT_CODE_INNER_LOOP = 55;
 
 // ----------------------------------------------------------------------------
 // test class
 // ----------------------------------------------------------------------------
-
-class EvtloopTestCase : public CppUnit::TestCase
-{
-public:
-    EvtloopTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( EvtloopTestCase );
-        CPPUNIT_TEST( TestExit );
-    CPPUNIT_TEST_SUITE_END();
-
-    void TestExit();
-
-    EvtloopTestCase(const EvtloopTestCase&) = delete;
-	EvtloopTestCase& operator=(const EvtloopTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( EvtloopTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( EvtloopTestCase, "EvtloopTestCase" );
 
 
 // Helper class to schedule exit of the given event loop after the specified
@@ -93,7 +73,7 @@ public:
         m_timerOuter.StartOnce(m_loopOuterDuration);
         timerInner.StartOnce(m_loopInnerDuration);
 
-        CPPUNIT_ASSERT_EQUAL( EXIT_CODE_INNER_LOOP, loopInner.Run() );
+        CHECK_EQ( EXIT_CODE_INNER_LOOP, loopInner.Run() );
     }
 
 private:
@@ -102,24 +82,24 @@ private:
     const int m_loopInnerDuration;
 };
 
-void EvtloopTestCase::TestExit()
+TEST_CASE("TestExit")
 {
     // Test that simply exiting the loop works.
     wxEventLoop loopOuter;
     ScheduleLoopExitTimer timerExit(loopOuter, EXIT_CODE_OUTER_LOOP);
     timerExit.StartOnce(1);
-    CPPUNIT_ASSERT_EQUAL( EXIT_CODE_OUTER_LOOP, loopOuter.Run() );
+    CHECK_EQ( EXIT_CODE_OUTER_LOOP, loopOuter.Run() );
 
     // Test that exiting the outer loop before the inner loop (outer duration
     // parameter less than inner duration in the timer ctor below) works.
     ScheduleLoopExitTimer timerExitOuter(loopOuter, EXIT_CODE_OUTER_LOOP);
     RunNestedAndExitBothLoopsTimer timerRun(timerExitOuter, 5, 10);
     timerRun.StartOnce(1);
-    CPPUNIT_ASSERT_EQUAL( EXIT_CODE_OUTER_LOOP, loopOuter.Run() );
+    CHECK_EQ( EXIT_CODE_OUTER_LOOP, loopOuter.Run() );
 
     // Test that exiting the inner loop before the outer one works too.
     ScheduleLoopExitTimer timerExitOuter2(loopOuter, EXIT_CODE_OUTER_LOOP);
     RunNestedAndExitBothLoopsTimer timerRun2(timerExitOuter, 10, 5);
     timerRun2.StartOnce(1);
-    CPPUNIT_ASSERT_EQUAL( EXIT_CODE_OUTER_LOOP, loopOuter.Run() );
+    CHECK_EQ( EXIT_CODE_OUTER_LOOP, loopOuter.Run() );
 }

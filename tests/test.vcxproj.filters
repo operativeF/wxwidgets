@@ -97,5 +97,8 @@
     <ClCompile Include="events\timertest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="events\evtlooptest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

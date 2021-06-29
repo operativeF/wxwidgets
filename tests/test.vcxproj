@@ -43,6 +43,7 @@
     <ClCompile Include="config\fileconf.cpp" />
     <ClCompile Include="config\regconf.cpp" />
     <ClCompile Include="events\evthandler.cpp" />
+    <ClCompile Include="events\evtlooptest.cpp" />
     <ClCompile Include="events\stopwatch.cpp" />
     <ClCompile Include="events\timertest.cpp" />
     <ClCompile Include="filekind\filekind.cpp" />
