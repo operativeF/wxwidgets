@@ -21,41 +21,8 @@
 // This test suite tests helpers from wx/testing.h intended for testing of code
 // that calls modal dialogs. It does not test the implementation of wxWidgets'
 // dialogs.
-class ModalDialogsTestCase : public CppUnit::TestCase
-{
-public:
-    ModalDialogsTestCase() { }
 
-private:
-    CPPUNIT_TEST_SUITE( ModalDialogsTestCase );
-// wxInfoBar has bug under x11. It will cause the dialog crash
-// Disable it for now.
-#if !defined (__WXX11__)
-        CPPUNIT_TEST( MessageDialog );
-#endif
-#if wxUSE_FILEDLG
-        CPPUNIT_TEST( FileDialog );
-#endif
-        CPPUNIT_TEST( CustomDialog );
-        CPPUNIT_TEST( InitDialog );
-    CPPUNIT_TEST_SUITE_END();
-
-    void MessageDialog();
-    void FileDialog();
-    void CustomDialog();
-    void InitDialog();
-
-    ModalDialogsTestCase(const ModalDialogsTestCase&) = delete;
-	ModalDialogsTestCase& operator=(const ModalDialogsTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( ModalDialogsTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( ModalDialogsTestCase, "ModalDialogsTestCase" );
-
-void ModalDialogsTestCase::MessageDialog()
+TEST_CASE("MessageDialog")
 {
     int rc;
 
@@ -77,9 +44,9 @@ void ModalDialogsTestCase::MessageDialog()
 }
 
 #if wxUSE_FILEDLG
-void ModalDialogsTestCase::FileDialog()
+TEST_CASE("FileDialog")
 {
-    wxFileDialog dlg(NULL);
+    wxFileDialog dlg(nullptr);
     int rc;
 
     wxTEST_DIALOG
@@ -131,9 +98,9 @@ protected:
     int m_valueToSet;
 };
 
-void ModalDialogsTestCase::CustomDialog()
+TEST_CASE("CustomDialog")
 {
-    MyDialog dlg(NULL);
+    MyDialog dlg(nullptr);
 
     wxTEST_DIALOG
     (
@@ -148,7 +115,7 @@ void ModalDialogsTestCase::CustomDialog()
 class MyModalDialog : public wxDialog
 {
 public:
-    MyModalDialog() : wxDialog (NULL, wxID_ANY, "Modal Dialog")
+    MyModalDialog() : wxDialog (nullptr, wxID_ANY, "Modal Dialog")
     {
         m_wasModal = false;
         Bind( wxEVT_INIT_DIALOG, &MyModalDialog::OnInit, this );
@@ -169,7 +136,7 @@ private:
     bool m_wasModal;
 };
 
-void ModalDialogsTestCase::InitDialog()
+TEST_CASE("InitDialog")
 {
     MyModalDialog dlg;
     dlg.ShowModal();
