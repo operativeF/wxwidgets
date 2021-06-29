@@ -47,7 +47,7 @@ private:
 
 static void TopLevelWindowShowTest(wxTopLevelWindow* tlw)
 {
-    CHECK(!tlw->IsShown());
+    CHECK_FALSE(tlw->IsShown());
 
     wxTextCtrl* textCtrl = new wxTextCtrl(tlw, -1, "test");
     textCtrl->SetFocus();
@@ -57,11 +57,11 @@ static void TopLevelWindowShowTest(wxTopLevelWindow* tlw)
     wxTheApp->GetTopWindow()->SetFocus();
     tlw->ShowWithoutActivating();
     CHECK(tlw->IsShown());
-    CHECK(!tlw->IsActive());
+    CHECK_FALSE(tlw->IsActive());
 
     tlw->Hide();
-    CHECK(!tlw->IsShown());
-    CHECK(!tlw->IsActive());
+    CHECK_FALSE(tlw->IsShown());
+    CHECK_FALSE(tlw->IsActive());
 #endif
 
     // Note that at least under MSW, ShowWithoutActivating() still generates
@@ -80,25 +80,25 @@ static void TopLevelWindowShowTest(wxTopLevelWindow* tlw)
     CHECK(tlw->IsShown());
 
     tlw->Hide();
-    CHECK(!tlw->IsShown());
+    CHECK_FALSE(tlw->IsShown());
 
     countActivate.WaitEvent();
-    CHECK(!tlw->IsActive());
+    CHECK_FALSE(tlw->IsActive());
 }
 
 TEST_CASE("wxTopLevel::Show", "[tlw][show]")
 {
-    SECTION("Dialog")
+    SUBCASE("Dialog")
     {
-        wxDialog* dialog = new wxDialog(NULL, -1, "Dialog Test");
+        wxDialog* dialog = new wxDialog(nullptr, -1, "Dialog Test");
         DestroyOnScopeExit destroy(dialog);
 
         TopLevelWindowShowTest(dialog);
     }
 
-    SECTION("Frame")
+    SUBCASE("Frame")
     {
-        wxFrame* frame = new wxFrame(NULL, -1, "Frame test");
+        wxFrame* frame = new wxFrame(nullptr, -1, "Frame test");
         DestroyOnScopeExit destroy(frame);
 
         TopLevelWindowShowTest(frame);
@@ -108,7 +108,7 @@ TEST_CASE("wxTopLevel::Show", "[tlw][show]")
 // Check that we receive the expected event when showing the TLW.
 TEST_CASE("wxTopLevel::ShowEvent", "[tlw][show][event]")
 {
-    wxFrame* const frame = new wxFrame(NULL, wxID_ANY, "Maximized frame");
+    wxFrame* const frame = new wxFrame(nullptr, wxID_ANY, "Maximized frame");
     DestroyOnScopeExit destroy(frame);
 
     EventCounter countShow(frame, wxEVT_SHOW);

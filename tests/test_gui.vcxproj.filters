@@ -56,6 +56,9 @@
     <ClCompile Include="window\setsize.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="toplevel\toplevel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc">

@@ -507,6 +507,7 @@
     <ClCompile Include="sizers\wrapsizer.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="testableframe.cpp" />
+    <ClCompile Include="toplevel\toplevel.cpp" />
     <ClCompile Include="window\clientsize.cpp" />
     <ClCompile Include="window\setsize.cpp" />
   </ItemGroup>
