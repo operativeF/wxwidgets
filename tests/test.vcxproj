@@ -63,6 +63,7 @@
     <ClCompile Include="misc\dynamiclib.cpp" />
     <ClCompile Include="misc\environ.cpp" />
     <ClCompile Include="misc\metatest.cpp" />
+    <ClCompile Include="misc\misctests.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="textfile\textfiletest.cpp" />
     <ClCompile Include="thread\atomic.cpp" />
