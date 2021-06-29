@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #ifdef wxHAS_RAW_BITMAP
@@ -133,7 +135,7 @@ TEST_CASE("BitmapTestCase::Mask", "[bitmap][mask]")
 
 TEST_CASE("BitmapTestCase::ToImage", "[bitmap][image][convertto]")
 {
-    SECTION("RGB bitmap without mask")
+    SUBCASE("RGB bitmap without mask")
     {
         // RGB bitmap
         wxBitmap bmp(16, 16, 24);
@@ -168,7 +170,7 @@ TEST_CASE("BitmapTestCase::ToImage", "[bitmap][image][convertto]")
         }
     }
 
-    SECTION("RGB bitmap with mask")
+    SUBCASE("RGB bitmap with mask")
     {
         // RGB bitmap
         wxBitmap bmp(16, 16, 24);
@@ -240,7 +242,7 @@ TEST_CASE("BitmapTestCase::ToImage", "[bitmap][image][convertto]")
         CHECK(unmaskedPixelsCount == numUnmaskedPixels);
     }
 
-    SECTION("RGBA bitmap without mask")
+    SUBCASE("RGBA bitmap without mask")
     {
         // RGBA Bitmap
         wxBitmap bmp(16, 16, 32);
@@ -318,7 +320,7 @@ TEST_CASE("BitmapTestCase::ToImage", "[bitmap][image][convertto]")
         }
     }
 
-    SECTION("RGBA bitmap with mask")
+    SUBCASE("RGBA bitmap with mask")
     {
         // RGBA Bitmap
         wxBitmap bmp(16, 16, 32);
@@ -439,7 +441,7 @@ TEST_CASE("BitmapTestCase::FromImage", "[bitmap][image][convertfrom]")
     const wxColour maskCol(*wxRED);
     const wxColour fillCol(*wxGREEN);
 
-    SECTION("RGB image without mask")
+    SUBCASE("RGB image without mask")
     {
         wxImage img(2, 2);
         img.SetRGB(0, 0, maskCol.Red(), maskCol.Green(), maskCol.Blue());
@@ -471,7 +473,7 @@ TEST_CASE("BitmapTestCase::FromImage", "[bitmap][image][convertfrom]")
         }
     }
 
-    SECTION("RGB image with mask")
+    SUBCASE("RGB image with mask")
     {
         wxImage img(2, 2);
         img.SetRGB(0, 0, maskCol.Red(), maskCol.Green(), maskCol.Blue());
@@ -513,7 +515,7 @@ TEST_CASE("BitmapTestCase::FromImage", "[bitmap][image][convertfrom]")
         }
     }
 
-    SECTION("RGBA image without mask")
+    SUBCASE("RGBA image without mask")
     {
         wxImage img(2, 2);
         img.SetRGB(0, 0, maskCol.Red(), maskCol.Green(), maskCol.Blue());
@@ -557,7 +559,7 @@ TEST_CASE("BitmapTestCase::FromImage", "[bitmap][image][convertfrom]")
         }
     }
 
-    SECTION("RGBA image with mask")
+    SUBCASE("RGBA image with mask")
     {
         wxImage img(2, 2);
         img.SetRGB(0, 0, maskCol.Red(), maskCol.Green(), maskCol.Blue());
@@ -1646,7 +1648,7 @@ TEST_CASE("DC::Clear", "[bitmap][dc]")
 
     wxBitmap bmp(img);
 
-    SECTION("Clearing uses white by default")
+    SUBCASE("Clearing uses white by default")
     {
         {
             wxMemoryDC dc(bmp);
@@ -1656,7 +1658,7 @@ TEST_CASE("DC::Clear", "[bitmap][dc]")
         CHECK_THAT(bmp, AllPixelsAre(*wxWHITE));
     }
 
-    SECTION("Clearing with specified brush works as expected")
+    SUBCASE("Clearing with specified brush works as expected")
     {
         {
             wxMemoryDC dc(bmp);
@@ -1666,7 +1668,7 @@ TEST_CASE("DC::Clear", "[bitmap][dc]")
         CHECK_THAT(bmp, AllPixelsAre(*wxRED));
     }
 
-    SECTION("Clearing with transparent brush does nothing")
+    SUBCASE("Clearing with transparent brush does nothing")
     {
         {
             wxMemoryDC dc(bmp);
@@ -1677,7 +1679,7 @@ TEST_CASE("DC::Clear", "[bitmap][dc]")
         CHECK_THAT(bmp.ConvertToImage(), RGBSameAs(img));
     }
 
-    SECTION("Clearing with invalid brush uses white too")
+    SUBCASE("Clearing with invalid brush uses white too")
     {
         {
             wxMemoryDC dc(bmp);
@@ -1743,34 +1745,34 @@ TEST_CASE("GC::DrawBitmap", "[bitmap][drawbitmap]")
         mdc.DrawRectangle(20, 20, 60, 60);
     }
 
-    SECTION("Draw bitmap using default GC")
+    SUBCASE("Draw bitmap using default GC")
     {
         DrawScaledBmp(bmp, 1, wxGraphicsRenderer::GetDefaultRenderer());
     }
 
-    SECTION("Draw bitmap 0.5x scaled using default GC")
+    SUBCASE("Draw bitmap 0.5x scaled using default GC")
     {
         DrawScaledBmp(bmp, 0.5, wxGraphicsRenderer::GetDefaultRenderer());
     }
 
-    SECTION("Draw bitmap 5x scaled using default GC")
+    SUBCASE("Draw bitmap 5x scaled using default GC")
     {
         DrawScaledBmp(bmp, 5, wxGraphicsRenderer::GetDefaultRenderer());
     }
 
 #if defined(__WXMSW__) && wxUSE_GRAPHICS_DIRECT2D
 
-    SECTION("Draw bitmap using Direct2D GC")
+    SUBCASE("Draw bitmap using Direct2D GC")
     {
         DrawScaledBmp(bmp, 1, wxGraphicsRenderer::GetDirect2DRenderer());
     }
 
-    SECTION("Draw bitmap 0.5x scaled using Direct2D GC")
+    SUBCASE("Draw bitmap 0.5x scaled using Direct2D GC")
     {
         DrawScaledBmp(bmp, 0.5, wxGraphicsRenderer::GetDirect2DRenderer());
     }
 
-    SECTION("Draw bitmap 5x scaled using Direct2D GC")
+    SUBCASE("Draw bitmap 5x scaled using Direct2D GC")
     {
         DrawScaledBmp(bmp, 5, wxGraphicsRenderer::GetDirect2DRenderer());
     }

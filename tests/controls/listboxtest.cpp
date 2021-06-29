@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_LISTBOX
@@ -110,17 +112,17 @@ void ListBoxTestCase::Sort()
 
     m_list->Append(testitems);
 
-    CPPUNIT_ASSERT_EQUAL("AAA", m_list->GetString(0));
-    CPPUNIT_ASSERT_EQUAL("Aaa", m_list->GetString(1));
-    CPPUNIT_ASSERT_EQUAL("aaa", m_list->GetString(2));
-    CPPUNIT_ASSERT_EQUAL("aaab", m_list->GetString(3));
-    CPPUNIT_ASSERT_EQUAL("aab", m_list->GetString(4));
-    CPPUNIT_ASSERT_EQUAL("aba", m_list->GetString(5));
+    CHECK_EQ("AAA", m_list->GetString(0));
+    CHECK_EQ("Aaa", m_list->GetString(1));
+    CHECK_EQ("aaa", m_list->GetString(2));
+    CHECK_EQ("aaab", m_list->GetString(3));
+    CHECK_EQ("aab", m_list->GetString(4));
+    CHECK_EQ("aba", m_list->GetString(5));
 
     m_list->Append("a", wxUIntToPtr(1));
 
-    CPPUNIT_ASSERT_EQUAL("a", m_list->GetString(0));
-    CPPUNIT_ASSERT_EQUAL(wxUIntToPtr(1), m_list->GetClientData(0));
+    CHECK_EQ("a", m_list->GetString(0));
+    CHECK_EQ(wxUIntToPtr(1), m_list->GetClientData(0));
 #endif
 }
 
@@ -144,33 +146,33 @@ void ListBoxTestCase::MultipleSelect()
     wxArrayInt selected;
     m_list->GetSelections(selected);
 
-    CPPUNIT_ASSERT_EQUAL(1, selected.Count());
-    CPPUNIT_ASSERT_EQUAL(0, selected.Item(0));
+    CHECK_EQ(1, selected.Count());
+    CHECK_EQ(0, selected.Item(0));
 
     m_list->SetSelection(2);
 
     m_list->GetSelections(selected);
 
-    CPPUNIT_ASSERT_EQUAL(2, selected.Count());
-    CPPUNIT_ASSERT_EQUAL(2, selected.Item(1));
+    CHECK_EQ(2, selected.Count());
+    CHECK_EQ(2, selected.Item(1));
 
     m_list->Deselect(0);
 
     m_list->GetSelections(selected);
 
-    CPPUNIT_ASSERT_EQUAL(1, selected.Count());
-    CPPUNIT_ASSERT_EQUAL(2, selected.Item(0));
+    CHECK_EQ(1, selected.Count());
+    CHECK_EQ(2, selected.Item(0));
 
-    CPPUNIT_ASSERT(!m_list->IsSelected(0));
-    CPPUNIT_ASSERT(!m_list->IsSelected(1));
-    CPPUNIT_ASSERT(m_list->IsSelected(2));
-    CPPUNIT_ASSERT(!m_list->IsSelected(3));
+    CHECK(!m_list->IsSelected(0));
+    CHECK(!m_list->IsSelected(1));
+    CHECK(m_list->IsSelected(2));
+    CHECK(!m_list->IsSelected(3));
 
     m_list->SetSelection(0);
     m_list->SetSelection(wxNOT_FOUND);
 
     m_list->GetSelections(selected);
-    CPPUNIT_ASSERT_EQUAL(0, selected.Count());
+    CHECK_EQ(0, selected.Count());
 }
 
 void ListBoxTestCase::ClickEvents()
@@ -200,12 +202,12 @@ void ListBoxTestCase::ClickEvents()
     sim.MouseClick();
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, selected.GetCount());
+    CHECK_EQ(1, selected.GetCount());
 
     sim.MouseDblClick();
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, dclicked.GetCount());
+    CHECK_EQ(1, dclicked.GetCount());
 #endif
 }
 
@@ -247,8 +249,8 @@ void ListBoxTestCase::ClickNotOnItem()
     wxYield();
 
     //If we are not clicking on an item we shouldn't have any events
-    CPPUNIT_ASSERT_EQUAL(0, selected.GetCount());
-    CPPUNIT_ASSERT_EQUAL(0, dclicked.GetCount());
+    CHECK_EQ(0, selected.GetCount());
+    CHECK_EQ(0, dclicked.GetCount());
 #endif
 }
 
@@ -266,9 +268,9 @@ void ListBoxTestCase::HitTest()
     wxYield();
 #endif
 
-    CPPUNIT_ASSERT_EQUAL( 0, m_list->HitTest(5, 5) );
+    CHECK_EQ( 0, m_list->HitTest(5, 5) );
 
-    CPPUNIT_ASSERT_EQUAL( wxNOT_FOUND, m_list->HitTest(290, 190) );
+    CHECK_EQ( wxNOT_FOUND, m_list->HitTest(290, 190) );
 }
 
 #endif //wxUSE_LISTBOX

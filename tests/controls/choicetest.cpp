@@ -78,16 +78,16 @@ void ChoiceTestCase::Sort()
 
     m_choice->Append(testitems);
 
-    CPPUNIT_ASSERT_EQUAL("AAA", m_choice->GetString(0));
-    CPPUNIT_ASSERT_EQUAL("Aaa", m_choice->GetString(1));
-    CPPUNIT_ASSERT_EQUAL("aaa", m_choice->GetString(2));
-    CPPUNIT_ASSERT_EQUAL("aaab", m_choice->GetString(3));
-    CPPUNIT_ASSERT_EQUAL("aab", m_choice->GetString(4));
-    CPPUNIT_ASSERT_EQUAL("aba", m_choice->GetString(5));
+    CHECK_EQ("AAA", m_choice->GetString(0));
+    CHECK_EQ("Aaa", m_choice->GetString(1));
+    CHECK_EQ("aaa", m_choice->GetString(2));
+    CHECK_EQ("aaab", m_choice->GetString(3));
+    CHECK_EQ("aab", m_choice->GetString(4));
+    CHECK_EQ("aba", m_choice->GetString(5));
 
     m_choice->Append("a");
 
-    CPPUNIT_ASSERT_EQUAL("a", m_choice->GetString(0));
+    CHECK_EQ("a", m_choice->GetString(0));
 #endif
 }
 

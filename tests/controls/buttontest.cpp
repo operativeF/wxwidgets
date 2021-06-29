@@ -19,7 +19,7 @@
 #include "testableframe.h"
 #include "wx/uiaction.h"
 #include "wx/artprov.h"
-//For CPPUNIT_ASSERT_EQUAL to work a class must have a stream output function
+//For CHECK_EQ to work a class must have a stream output function
 //for those classes which do not have them by default we define them in
 //asserthelper.h so they can be reused
 #include "asserthelper.h"
@@ -91,7 +91,7 @@ void ButtonTestCase::Click()
     sim.MouseClick();
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL( 1, clicked.GetCount() );
+    CHECK_EQ( 1, clicked.GetCount() );
 }
 
 void ButtonTestCase::Disabled()
@@ -122,7 +122,7 @@ void ButtonTestCase::Disabled()
     sim.MouseClick();
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL( 0, clicked.GetCount() );
+    CHECK_EQ( 0, clicked.GetCount() );
 }
 
 #endif // wxUSE_UIACTIONSIMULATOR
@@ -137,16 +137,16 @@ void ButtonTestCase::Auth()
         return;
 
     //We are running Windows Vista or newer
-    CPPUNIT_ASSERT(!m_button->GetAuthNeeded());
+    CHECK(!m_button->GetAuthNeeded());
 
     m_button->SetAuthNeeded();
 
-    CPPUNIT_ASSERT(m_button->GetAuthNeeded());
+    CHECK(m_button->GetAuthNeeded());
 
     //We test both states
     m_button->SetAuthNeeded(false);
 
-    CPPUNIT_ASSERT(!m_button->GetAuthNeeded());
+    CHECK(!m_button->GetAuthNeeded());
 }
 
 void ButtonTestCase::BitmapMargins()
@@ -161,25 +161,25 @@ void ButtonTestCase::BitmapMargins()
 
     m_button->SetBitmapMargins(15, 15);
 
-    CPPUNIT_ASSERT_EQUAL(wxSize(15, 15), m_button->GetBitmapMargins());
+    CHECK_EQ(wxSize(15, 15), m_button->GetBitmapMargins());
 
     m_button->SetBitmapMargins(wxSize(20, 20));
 
-    CPPUNIT_ASSERT_EQUAL(wxSize(20, 20), m_button->GetBitmapMargins());
+    CHECK_EQ(wxSize(20, 20), m_button->GetBitmapMargins());
 #endif
 }
 
 void ButtonTestCase::Bitmap()
 {
     //We start with no bitmaps
-    CPPUNIT_ASSERT(!m_button->GetBitmap().IsOk());
+    CHECK(!m_button->GetBitmap().IsOk());
 
     // Some bitmap, doesn't really matter which.
     const wxBitmap bmp = wxArtProvider::GetBitmap(wxART_INFORMATION);
 
     m_button->SetBitmap(bmp);
 
-    CPPUNIT_ASSERT(m_button->GetBitmap().IsOk());
+    CHECK(m_button->GetBitmap().IsOk());
 
     // Check that resetting the button label doesn't result in problems when
     // updating the bitmap later, as it used to be the case in wxGTK (#18898).

@@ -11,6 +11,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_LISTCTRL
@@ -169,9 +171,9 @@ void ListCtrlTestCase::ColumnDrag()
     sim.MouseUp();
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, begindrag.GetCount());
-    CPPUNIT_ASSERT(dragging.GetCount() > 0);
-    CPPUNIT_ASSERT_EQUAL(1, enddrag.GetCount());
+    CHECK_EQ(1, begindrag.GetCount());
+    CHECK(dragging.GetCount() > 0);
+    CHECK_EQ(1, enddrag.GetCount());
 
     m_list->ClearAll();
 }
@@ -193,8 +195,8 @@ void ListCtrlTestCase::ColumnClick()
     sim.MouseClick(wxMOUSE_BTN_RIGHT);
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, colclick.GetCount());
-    CPPUNIT_ASSERT_EQUAL(1, colrclick.GetCount());
+    CHECK_EQ(1, colclick.GetCount());
+    CHECK_EQ(1, colrclick.GetCount());
 
     m_list->ClearAll();
 }

@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_TREEBOOK
@@ -81,15 +83,15 @@ void TreebookTestCase::SubPages()
 
     m_treebook->AddSubPage(subpanel1, "Subpanel 1", false, 0);
 
-    CPPUNIT_ASSERT_EQUAL(2, m_treebook->GetPageParent(3));
+    CHECK_EQ(2, m_treebook->GetPageParent(3));
 
     m_treebook->InsertSubPage(1, subpanel2, "Subpanel 2", false, 1);
 
-    CPPUNIT_ASSERT_EQUAL(1, m_treebook->GetPageParent(2));
+    CHECK_EQ(1, m_treebook->GetPageParent(2));
 
     m_treebook->AddSubPage(subpanel3, "Subpanel 3", false, 2);
 
-    CPPUNIT_ASSERT_EQUAL(3, m_treebook->GetPageParent(5));
+    CHECK_EQ(3, m_treebook->GetPageParent(5));
 }
 
 void TreebookTestCase::ContainerPage()
@@ -116,20 +118,20 @@ void TreebookTestCase::Expand()
     m_treebook->InsertSubPage(1, subpanel2, "Subpanel 2", false, 1);
     m_treebook->AddSubPage(subpanel3, "Subpanel 3", false, 2);
 
-    CPPUNIT_ASSERT(!m_treebook->IsNodeExpanded(1));
-    CPPUNIT_ASSERT(!m_treebook->IsNodeExpanded(3));
+    CHECK(!m_treebook->IsNodeExpanded(1));
+    CHECK(!m_treebook->IsNodeExpanded(3));
 
     m_treebook->CollapseNode(1);
 
-    CPPUNIT_ASSERT(!m_treebook->IsNodeExpanded(1));
+    CHECK(!m_treebook->IsNodeExpanded(1));
 
     m_treebook->ExpandNode(3, false);
 
-    CPPUNIT_ASSERT(!m_treebook->IsNodeExpanded(3));
+    CHECK(!m_treebook->IsNodeExpanded(3));
 
     m_treebook->ExpandNode(1);
 
-    CPPUNIT_ASSERT(m_treebook->IsNodeExpanded(1));
+    CHECK(m_treebook->IsNodeExpanded(1));
 }
 
 void TreebookTestCase::Delete()
@@ -142,19 +144,19 @@ void TreebookTestCase::Delete()
     m_treebook->InsertSubPage(1, subpanel2, "Subpanel 2", false, 1);
     m_treebook->AddSubPage(subpanel3, "Subpanel 3", false, 2);
 
-    CPPUNIT_ASSERT_EQUAL(6, m_treebook->GetPageCount());
+    CHECK_EQ(6, m_treebook->GetPageCount());
 
     m_treebook->DeletePage(3);
 
-    CPPUNIT_ASSERT_EQUAL(3, m_treebook->GetPageCount());
+    CHECK_EQ(3, m_treebook->GetPageCount());
 
     m_treebook->DeletePage(1);
 
-    CPPUNIT_ASSERT_EQUAL(1, m_treebook->GetPageCount());
+    CHECK_EQ(1, m_treebook->GetPageCount());
 
     m_treebook->DeletePage(0);
 
-    CPPUNIT_ASSERT_EQUAL(0, m_treebook->GetPageCount());
+    CHECK_EQ(0, m_treebook->GetPageCount());
 }
 
 #endif // wxUSE_TREEBOOK

@@ -84,26 +84,26 @@ void CheckBoxTestCase::Check()
     EventCounter clicked(m_check, wxEVT_CHECKBOX);
 
     //We should be unchecked by default
-    CPPUNIT_ASSERT(!m_check->IsChecked());
+    CHECK(!m_check->IsChecked());
 
     m_check->SetValue(true);
 
-    CPPUNIT_ASSERT(m_check->IsChecked());
+    CHECK(m_check->IsChecked());
 
     m_check->SetValue(false);
 
-    CPPUNIT_ASSERT(!m_check->IsChecked());
+    CHECK(!m_check->IsChecked());
 
     m_check->Set3StateValue(wxCHK_CHECKED);
 
-    CPPUNIT_ASSERT(m_check->IsChecked());
+    CHECK(m_check->IsChecked());
 
     m_check->Set3StateValue(wxCHK_UNCHECKED);
 
-    CPPUNIT_ASSERT(!m_check->IsChecked());
+    CHECK(!m_check->IsChecked());
 
     //None of these should send events
-    CPPUNIT_ASSERT_EQUAL(0, clicked.GetCount());
+    CHECK_EQ(0, clicked.GetCount());
 }
 
 #ifdef wxHAS_3STATE_CHECKBOX
@@ -111,34 +111,34 @@ void CheckBoxTestCase::ThirdState()
 {
     CreateCheckBox(wxCHK_3STATE);
 
-    CPPUNIT_ASSERT_EQUAL(wxCHK_UNCHECKED, m_check->Get3StateValue());
-    CPPUNIT_ASSERT(m_check->Is3State());
-    CPPUNIT_ASSERT(!m_check->Is3rdStateAllowedForUser());
+    CHECK_EQ(wxCHK_UNCHECKED, m_check->Get3StateValue());
+    CHECK(m_check->Is3State());
+    CHECK(!m_check->Is3rdStateAllowedForUser());
 
     m_check->SetValue(true);
 
-    CPPUNIT_ASSERT_EQUAL(wxCHK_CHECKED, m_check->Get3StateValue());
+    CHECK_EQ(wxCHK_CHECKED, m_check->Get3StateValue());
 
     m_check->Set3StateValue(wxCHK_UNDETERMINED);
 
-    CPPUNIT_ASSERT_EQUAL(wxCHK_UNDETERMINED, m_check->Get3StateValue());
+    CHECK_EQ(wxCHK_UNDETERMINED, m_check->Get3StateValue());
 }
 
 void CheckBoxTestCase::ThirdStateUser()
 {
     CreateCheckBox(wxCHK_3STATE | wxCHK_ALLOW_3RD_STATE_FOR_USER);
 
-    CPPUNIT_ASSERT_EQUAL(wxCHK_UNCHECKED, m_check->Get3StateValue());
-    CPPUNIT_ASSERT(m_check->Is3State());
-    CPPUNIT_ASSERT(m_check->Is3rdStateAllowedForUser());
+    CHECK_EQ(wxCHK_UNCHECKED, m_check->Get3StateValue());
+    CHECK(m_check->Is3State());
+    CHECK(m_check->Is3rdStateAllowedForUser());
 
     m_check->SetValue(true);
 
-    CPPUNIT_ASSERT_EQUAL(wxCHK_CHECKED, m_check->Get3StateValue());
+    CHECK_EQ(wxCHK_CHECKED, m_check->Get3StateValue());
 
     m_check->Set3StateValue(wxCHK_UNDETERMINED);
 
-    CPPUNIT_ASSERT_EQUAL(wxCHK_UNDETERMINED, m_check->Get3StateValue());
+    CHECK_EQ(wxCHK_UNDETERMINED, m_check->Get3StateValue());
 }
 
 void CheckBoxTestCase::InvalidStyles()
@@ -146,15 +146,15 @@ void CheckBoxTestCase::InvalidStyles()
     // Check that using incompatible styles doesn't work.
     WX_ASSERT_FAILS_WITH_ASSERT( CreateCheckBox(wxCHK_2STATE | wxCHK_3STATE) );
 #if !wxDEBUG_LEVEL
-    CPPUNIT_ASSERT( !m_check->Is3State() );
-    CPPUNIT_ASSERT( !m_check->Is3rdStateAllowedForUser() );
+    CHECK( !m_check->Is3State() );
+    CHECK( !m_check->Is3rdStateAllowedForUser() );
 #endif
 
     WX_ASSERT_FAILS_WITH_ASSERT(
         CreateCheckBox(wxCHK_2STATE | wxCHK_ALLOW_3RD_STATE_FOR_USER) );
 #if !wxDEBUG_LEVEL
-    CPPUNIT_ASSERT( !m_check->Is3State() );
-    CPPUNIT_ASSERT( !m_check->Is3rdStateAllowedForUser() );
+    CHECK( !m_check->Is3State() );
+    CHECK( !m_check->Is3rdStateAllowedForUser() );
 #endif
 
     // wxCHK_ALLOW_3RD_STATE_FOR_USER without wxCHK_3STATE doesn't work.

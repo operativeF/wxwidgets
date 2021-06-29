@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -38,7 +40,7 @@ TEST_CASE( "wxAcceleratorEntry::Create", "[accelentry]" )
 {
     std::unique_ptr<wxAcceleratorEntry> pa;
 
-    SECTION( "Correct behavior" )
+    SUBCASE( "Correct behavior" )
     {
         pa.reset( wxAcceleratorEntry::Create("Foo\tCtrl+Z") );
 
@@ -47,21 +49,21 @@ TEST_CASE( "wxAcceleratorEntry::Create", "[accelentry]" )
         CheckAccelEntry(*pa, 'Z', wxACCEL_CTRL);
     }
 
-    SECTION( "Tab missing" )
+    SUBCASE( "Tab missing" )
     {
         pa.reset( wxAcceleratorEntry::Create("Shift-Q") );
 
         CHECK( !pa );
     }
 
-    SECTION( "No accelerator key specified" )
+    SUBCASE( "No accelerator key specified" )
     {
         pa.reset( wxAcceleratorEntry::Create("bloordyblop") );
 
         CHECK( !pa );
     }
 
-    SECTION( "Display name parsing" )
+    SUBCASE( "Display name parsing" )
     {
         pa.reset( wxAcceleratorEntry::Create("Test\tBackSpace") );
 
@@ -80,18 +82,18 @@ TEST_CASE( "wxAcceleratorEntry::StringTests", "[accelentry]" )
 {
     wxAcceleratorEntry a(wxACCEL_ALT, 'X');
 
-    SECTION( "Create string from key" )
+    SUBCASE( "Create string from key" )
     {
         CHECK( "Alt+X" == a.ToString() );
     }
 
-    SECTION( "Create from valid string" )
+    SUBCASE( "Create from valid string" )
     {
         CHECK( a.FromString("Alt+Shift+F1") );
         CheckAccelEntry(a, WXK_F1, wxACCEL_ALT | wxACCEL_SHIFT);
     }
 
-    SECTION( "Create from invalid string" )
+    SUBCASE( "Create from invalid string" )
     {
         CHECK( !a.FromString("bloordyblop") );
     }

@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -63,15 +65,15 @@ void AffineTransformTestCase::InvertMatrix()
     wxMatrix2D m;
     wxPoint2DDouble p;
     matrix2.Get(&m, &p);
-    CPPUNIT_ASSERT_EQUAL( 1, (int)m.m_11 );
-    CPPUNIT_ASSERT_EQUAL( -1, (int)m.m_12 );
-    CPPUNIT_ASSERT_EQUAL( -1, (int)m.m_21 );
-    CPPUNIT_ASSERT_EQUAL( 2, (int)m.m_22 );
-    CPPUNIT_ASSERT_EQUAL( 0, (int)p.m_x );
-    CPPUNIT_ASSERT_EQUAL( -1, (int)p.m_y );
+    CHECK_EQ( 1, (int)m.m_11 );
+    CHECK_EQ( -1, (int)m.m_12 );
+    CHECK_EQ( -1, (int)m.m_21 );
+    CHECK_EQ( 2, (int)m.m_22 );
+    CHECK_EQ( 0, (int)p.m_x );
+    CHECK_EQ( -1, (int)p.m_y );
 
     matrix2.Concat(matrix1);
-    CPPUNIT_ASSERT( matrix2.IsIdentity() );
+    CHECK( matrix2.IsIdentity() );
 }
 
 void AffineTransformTestCase::Concat()
@@ -112,7 +114,7 @@ public:
         m_dc = NULL;
         wxImage::AddHandler(new wxJPEGHandler);
         m_imgOrig.LoadFile(wxS("horse.jpg"));
-        CPPUNIT_ASSERT( m_imgOrig.IsOk() );
+        CHECK( m_imgOrig.IsOk() );
     }
 
     virtual ~TransformMatrixTestCaseDCBase()

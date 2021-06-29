@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -64,7 +66,7 @@ void FrameTestCase::Iconize()
     m_frame->Iconize();
     m_frame->Iconize(false);
 
-    CPPUNIT_ASSERT_EQUAL(2, iconize.GetCount());
+    CHECK_EQ(2, iconize.GetCount());
 #endif
 }
 
@@ -74,5 +76,5 @@ void FrameTestCase::Close()
 
     m_frame->Close();
 
-    CPPUNIT_ASSERT_EQUAL(1, close.GetCount());
+    CHECK_EQ(1, close.GetCount());
 }

@@ -6,6 +6,8 @@
 // Copyright:   (c) 2012 Vaclav Slavik
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -71,7 +73,7 @@ void ModalDialogsTestCase::MessageDialog()
         FILE_DIALOG_TEST
     );
 
-    CPPUNIT_ASSERT_EQUAL(wxNO, rc);
+    CHECK_EQ(wxNO, rc);
 }
 
 #if wxUSE_FILEDLG
@@ -86,9 +88,9 @@ void ModalDialogsTestCase::FileDialog()
         wxExpectModal<wxFileDialog>(wxGetCwd() + "/test.txt")
     );
 
-    CPPUNIT_ASSERT_EQUAL((int)wxID_OK, rc);
+    CHECK_EQ((int)wxID_OK, rc);
 
-    CPPUNIT_ASSERT_EQUAL("test.txt", dlg.GetFilename());
+    CHECK_EQ("test.txt", dlg.GetFilename());
 
 #ifdef __WXGTK3__
     // The native file dialog in GTK+ 3 launches an async operation which tries
@@ -139,7 +141,7 @@ void ModalDialogsTestCase::CustomDialog()
         wxExpectModal<MyDialog>(42)
     );
 
-    CPPUNIT_ASSERT_EQUAL( 42, dlg.m_value );
+    CHECK_EQ( 42, dlg.m_value );
 }
 
 
@@ -171,7 +173,7 @@ void ModalDialogsTestCase::InitDialog()
 {
     MyModalDialog dlg;
     dlg.ShowModal();
-    CPPUNIT_ASSERT( dlg.WasModal() );
+    CHECK( dlg.WasModal() );
 }
 
 #endif // HAVE_VARIADIC_MACROS

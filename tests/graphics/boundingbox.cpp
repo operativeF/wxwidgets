@@ -77,10 +77,10 @@ private:
         }
         else
         {
-            CPPUNIT_ASSERT_EQUAL(minX, m_gcdc->MinX());
-            CPPUNIT_ASSERT_EQUAL(minY, m_gcdc->MinY());
-            CPPUNIT_ASSERT_EQUAL(maxX, m_gcdc->MaxX());
-            CPPUNIT_ASSERT_EQUAL(maxY, m_gcdc->MaxY());
+            CHECK_EQ(minX, m_gcdc->MinX());
+            CHECK_EQ(minY, m_gcdc->MinY());
+            CHECK_EQ(maxX, m_gcdc->MaxX());
+            CHECK_EQ(maxY, m_gcdc->MaxY());
         }
     }
 

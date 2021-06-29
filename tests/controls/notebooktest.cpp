@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_NOTEBOOK
@@ -80,7 +82,7 @@ void NotebookTestCase::tearDown()
 
 void NotebookTestCase::RowCount()
 {
-    CPPUNIT_ASSERT_EQUAL(1, m_notebook->GetRowCount());
+    CHECK_EQ(1, m_notebook->GetRowCount());
 
 #ifdef __WXMSW__
     wxDELETE(m_notebook);
@@ -93,7 +95,7 @@ void NotebookTestCase::RowCount()
         m_notebook->AddPage(new wxPanel(m_notebook), "Panel", false, 0);
     }
 
-    CPPUNIT_ASSERT( m_notebook->GetRowCount() != 1 );
+    CHECK( m_notebook->GetRowCount() != 1 );
 #endif
 }
 

@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -38,7 +40,7 @@ unsigned GetRectsCount(const wxRegion& rgn)
 
 } // anonymous namespace
 
-// this operator is needed to use CPPUNIT_ASSERT_EQUAL with wxRegions
+// this operator is needed to use CHECK_EQ with wxRegions
 std::ostream& operator<<(std::ostream& os, const wxRegion& rgn)
 {
     wxRect r = rgn.GetBox();
@@ -130,6 +132,6 @@ void RegionTestCase::Intersect()
 
     wxRegion region2(4,points2);
 
-    CPPUNIT_ASSERT( region1.Intersect(region2) );
-    CPPUNIT_ASSERT( region1.IsEmpty() );
+    CHECK( region1.Intersect(region2) );
+    CHECK( region1.IsEmpty() );
 }

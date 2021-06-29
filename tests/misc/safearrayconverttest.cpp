@@ -6,6 +6,8 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -16,7 +18,7 @@
 #include "wx/msw/ole/oleutils.h"
 #include "wx/msw/ole/safearray.h"
 
-// need this to be able to use CPPUNIT_ASSERT_EQUAL with wxVariant objects
+// need this to be able to use CHECK_EQ with wxVariant objects
 inline std::ostream& operator<<(std::ostream& ostr, const wxVariant& v)
 {
     ostr << v.GetString();
@@ -70,12 +72,12 @@ void SafeArrayConvertTestCase::VariantListDefault()
     variant.Append(12.34);
     variant.Append(42L);
     variant.Append("ABC");
-    CPPUNIT_ASSERT( wxConvertVariantToOle(variant, oleVariant) );
+    CHECK( wxConvertVariantToOle(variant, oleVariant) );
 
     wxVariant variantCopy;
 
-    CPPUNIT_ASSERT( wxConvertOleToVariant(oleVariant, variantCopy) );
-    CPPUNIT_ASSERT( variant == variantCopy );
+    CHECK( wxConvertOleToVariant(oleVariant, variantCopy) );
+    CHECK( variant == variantCopy );
 }
 
 // test converting a wxVariant with the arrstring type to an OLE VARIANT
@@ -90,12 +92,12 @@ void SafeArrayConvertTestCase::VariantStringsDefault()
     as.push_back("def");
     as.push_back("ghi");
     variant = as;
-    CPPUNIT_ASSERT( wxConvertVariantToOle(variant, oleVariant) );
+    CHECK( wxConvertVariantToOle(variant, oleVariant) );
 
     wxVariant variantCopy;
 
-    CPPUNIT_ASSERT( wxConvertOleToVariant(oleVariant, variantCopy) );
-    CPPUNIT_ASSERT( variant == variantCopy );
+    CHECK( wxConvertOleToVariant(oleVariant, variantCopy) );
+    CHECK( variant == variantCopy );
 }
 
 // test converting a wxVariant with the list type to an OLE VARIANT
@@ -110,15 +112,15 @@ void SafeArrayConvertTestCase::VariantListReturnSafeArray()
     variant.Append(12.34);
     variant.Append(42L);
     variant.Append("test");
-    CPPUNIT_ASSERT( wxConvertVariantToOle(variant, oleVariant) );
+    CHECK( wxConvertVariantToOle(variant, oleVariant) );
 
     wxVariant variantCopy;
 
-    CPPUNIT_ASSERT(
+    CHECK(
         wxConvertOleToVariant(oleVariant, variantCopy,
                               wxOleConvertVariant_ReturnSafeArrays)
     );
-    CPPUNIT_ASSERT( variantCopy.GetType() == wxT("safearray") );
+    CHECK( variantCopy.GetType() == wxT("safearray") );
 
     wxSafeArray<VT_VARIANT> safeArray;
     wxVariantDataSafeArray*
@@ -126,25 +128,25 @@ void SafeArrayConvertTestCase::VariantListReturnSafeArray()
                                       wxVariantDataSafeArray);
     long bound wxDUMMY_INITIALIZE(0);
 
-    CPPUNIT_ASSERT( vsa );
-    CPPUNIT_ASSERT( safeArray.Attach(vsa->GetValue()) );
-    CPPUNIT_ASSERT_EQUAL( 1, safeArray.GetDim() );
-    CPPUNIT_ASSERT( safeArray.GetLBound(1, bound) );
-    CPPUNIT_ASSERT_EQUAL( 0, bound );
-    CPPUNIT_ASSERT( safeArray.GetUBound(1, bound) );
+    CHECK( vsa );
+    CHECK( safeArray.Attach(vsa->GetValue()) );
+    CHECK_EQ( 1, safeArray.GetDim() );
+    CHECK( safeArray.GetLBound(1, bound) );
+    CHECK_EQ( 0, bound );
+    CHECK( safeArray.GetUBound(1, bound) );
 
     const long count = variant.GetCount();
 
     // bound + 1 because safearray elements are accessed by index ranging from
     // LBound to UBound inclusive
-    CPPUNIT_ASSERT_EQUAL( bound + 1, count );
+    CHECK_EQ( bound + 1, count );
 
     wxVariant variantItem;
 
     for ( long i = 0; i < count; i++ )
     {
-        CPPUNIT_ASSERT( safeArray.GetElement(&i, variantItem) );
-        CPPUNIT_ASSERT_EQUAL( variantItem, variant[i] );
+        CHECK( safeArray.GetElement(&i, variantItem) );
+        CHECK_EQ( variantItem, variant[i] );
     }
 }
 
@@ -158,41 +160,41 @@ void SafeArrayConvertTestCase::StringsReturnSafeArray()
     as.push_back("abc");
     as.push_back("def");
     as.push_back("ghi");
-    CPPUNIT_ASSERT( safeArray.CreateFromArrayString(as) );
+    CHECK( safeArray.CreateFromArrayString(as) );
 
     VARIANT oleVariant;
     wxVariant variant;
 
     oleVariant.vt = VT_BSTR | VT_ARRAY;
     oleVariant.parray = safeArray.Detach();
-    CPPUNIT_ASSERT( oleVariant.parray );
-    CPPUNIT_ASSERT(
+    CHECK( oleVariant.parray );
+    CHECK(
         wxConvertOleToVariant(oleVariant, variant,
                               wxOleConvertVariant_ReturnSafeArrays)
     );
-    CPPUNIT_ASSERT( variant.GetType() == wxT("safearray") );
+    CHECK( variant.GetType() == wxT("safearray") );
 
     wxVariantDataSafeArray*
         vsa = wxStaticCastVariantData(variant.GetData(),
                                       wxVariantDataSafeArray);
     long bound wxDUMMY_INITIALIZE(0);
 
-    CPPUNIT_ASSERT( vsa );
-    CPPUNIT_ASSERT( safeArray.Attach(vsa->GetValue()) );
-    CPPUNIT_ASSERT_EQUAL( 1, safeArray.GetDim() );
-    CPPUNIT_ASSERT( safeArray.GetLBound(1, bound) );
-    CPPUNIT_ASSERT_EQUAL( 0, bound );
-    CPPUNIT_ASSERT( safeArray.GetUBound(1, bound) );
+    CHECK( vsa );
+    CHECK( safeArray.Attach(vsa->GetValue()) );
+    CHECK_EQ( 1, safeArray.GetDim() );
+    CHECK( safeArray.GetLBound(1, bound) );
+    CHECK_EQ( 0, bound );
+    CHECK( safeArray.GetUBound(1, bound) );
 
     const long count = as.size();
-    CPPUNIT_ASSERT_EQUAL( bound + 1, count );
+    CHECK_EQ( bound + 1, count );
 
     wxString str;
 
     for ( long i = 0; i < count; i++ )
     {
-        CPPUNIT_ASSERT( safeArray.GetElement(&i, str) );
-        CPPUNIT_ASSERT( str == as[i] );
+        CHECK( safeArray.GetElement(&i, str) );
+        CHECK( str == as[i] );
     }
 }
 

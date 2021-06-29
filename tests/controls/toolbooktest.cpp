@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_TOOLBOOK
@@ -73,8 +75,8 @@ void ToolbookTestCase::ToolBar()
 {
     wxToolBar* toolbar = static_cast<wxToolBar*>(m_toolbook->GetToolBar());
 
-    CPPUNIT_ASSERT(toolbar);
-    CPPUNIT_ASSERT_EQUAL(3, toolbar->GetToolsCount());
+    CHECK(toolbar);
+    CHECK_EQ(3, toolbar->GetToolsCount());
 }
 
 #endif //wxUSE_TOOLBOOK

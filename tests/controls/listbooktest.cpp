@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_LISTBOOK
@@ -72,9 +74,9 @@ void ListbookTestCase::ListView()
 {
     wxListView* listview = m_listbook->GetListView();
 
-    CPPUNIT_ASSERT(listview);
-    CPPUNIT_ASSERT_EQUAL(3, listview->GetItemCount());
-    CPPUNIT_ASSERT_EQUAL("Panel 1", listview->GetItemText(0));
+    CHECK(listview);
+    CHECK_EQ(3, listview->GetItemCount());
+    CHECK_EQ("Panel 1", listview->GetItemText(0));
 }
 
 #endif //wxUSE_LISTBOOK

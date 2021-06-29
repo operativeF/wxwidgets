@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_BITMAPCOMBOBOX
@@ -81,28 +83,28 @@ void BitmapComboBoxTestCase::Bitmap()
     for( unsigned int i = 0; i < items.size(); ++i )
         m_combo->Append(items[i]);
 
-    CPPUNIT_ASSERT(!m_combo->GetItemBitmap(0).IsOk());
+    CHECK(!m_combo->GetItemBitmap(0).IsOk());
 
     wxBitmap bitmap = wxArtProvider::GetIcon(wxART_INFORMATION, wxART_OTHER,
                                              wxSize(16, 16));
 
     m_combo->Append("item with bitmap", bitmap);
 
-    CPPUNIT_ASSERT(m_combo->GetItemBitmap(2).IsOk());
+    CHECK(m_combo->GetItemBitmap(2).IsOk());
 
     m_combo->Insert("item with bitmap", bitmap, 1);
 
-    CPPUNIT_ASSERT(m_combo->GetItemBitmap(1).IsOk());
+    CHECK(m_combo->GetItemBitmap(1).IsOk());
 
     m_combo->SetItemBitmap(0, bitmap);
 
-    CPPUNIT_ASSERT(m_combo->GetItemBitmap(0).IsOk());
+    CHECK(m_combo->GetItemBitmap(0).IsOk());
 
-    CPPUNIT_ASSERT_EQUAL(wxSize(16, 16), m_combo->GetBitmapSize());
+    CHECK_EQ(wxSize(16, 16), m_combo->GetBitmapSize());
 
     m_combo->SetSelection( 1 );
 
-    CPPUNIT_ASSERT_EQUAL( m_combo->GetStringSelection(), "item with bitmap" );
+    CHECK_EQ( m_combo->GetStringSelection(), "item with bitmap" );
 }
 
 #endif //wxUSE_BITMAPCOMBOBOX

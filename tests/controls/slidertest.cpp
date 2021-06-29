@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_SLIDER
@@ -100,8 +102,8 @@ void SliderTestCase::PageUpDown()
 
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, pageup.GetCount());
-    CPPUNIT_ASSERT_EQUAL(1, pagedown.GetCount());
+    CHECK_EQ(1, pageup.GetCount());
+    CHECK_EQ(1, pagedown.GetCount());
 #endif
 }
 
@@ -120,8 +122,8 @@ void SliderTestCase::LineUpDown()
 
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, lineup.GetCount());
-    CPPUNIT_ASSERT_EQUAL(1, linedown.GetCount());
+    CHECK_EQ(1, lineup.GetCount());
+    CHECK_EQ(1, linedown.GetCount());
 #endif
 }
 
@@ -139,7 +141,7 @@ void SliderTestCase::EvtSlider()
 
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(2, slider.GetCount());
+    CHECK_EQ(2, slider.GetCount());
 #endif
 }
 
@@ -156,8 +158,8 @@ void SliderTestCase::LinePageSize()
 
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(20, m_slider->GetPageSize());
-    CPPUNIT_ASSERT_EQUAL(30, m_slider->GetValue());
+    CHECK_EQ(20, m_slider->GetPageSize());
+    CHECK_EQ(30, m_slider->GetValue());
 
     m_slider->SetLineSize(2);
 
@@ -165,8 +167,8 @@ void SliderTestCase::LinePageSize()
 
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(2, m_slider->GetLineSize());
-    CPPUNIT_ASSERT_EQUAL(28, m_slider->GetValue());
+    CHECK_EQ(2, m_slider->GetLineSize());
+    CHECK_EQ(28, m_slider->GetValue());
 #endif
 }
 
@@ -174,34 +176,34 @@ void SliderTestCase::Value()
 {
     m_slider->SetValue(30);
 
-    CPPUNIT_ASSERT_EQUAL(30, m_slider->GetValue());
+    CHECK_EQ(30, m_slider->GetValue());
 
     //When setting a value larger that max or smaller than min
     //max and min are set
     m_slider->SetValue(-1);
 
-    CPPUNIT_ASSERT_EQUAL(0, m_slider->GetValue());
+    CHECK_EQ(0, m_slider->GetValue());
 
     m_slider->SetValue(110);
 
-    CPPUNIT_ASSERT_EQUAL(100, m_slider->GetValue());
+    CHECK_EQ(100, m_slider->GetValue());
 }
 
 void SliderTestCase::Range()
 {
-    CPPUNIT_ASSERT_EQUAL(0, m_slider->GetMin());
-    CPPUNIT_ASSERT_EQUAL(100, m_slider->GetMax());
+    CHECK_EQ(0, m_slider->GetMin());
+    CHECK_EQ(100, m_slider->GetMax());
 
     // Changing range shouldn't change the value.
     m_slider->SetValue(17);
     m_slider->SetRange(0, 200);
-    CPPUNIT_ASSERT_EQUAL(17, m_slider->GetValue());
+    CHECK_EQ(17, m_slider->GetValue());
 
     //Test negative ranges
     m_slider->SetRange(-50, 0);
 
-    CPPUNIT_ASSERT_EQUAL(-50, m_slider->GetMin());
-    CPPUNIT_ASSERT_EQUAL(0, m_slider->GetMax());
+    CHECK_EQ(-50, m_slider->GetMin());
+    CHECK_EQ(0, m_slider->GetMax());
 }
 
 void SliderTestCase::Thumb()
@@ -220,10 +222,10 @@ void SliderTestCase::Thumb()
     sim.MouseDragDrop(m_slider->ClientToScreen(wxPoint(10, ypos)),m_slider->ClientToScreen(wxPoint(50, ypos)));
     wxYield();
 
-    CPPUNIT_ASSERT(track.GetCount() != 0);
-    CPPUNIT_ASSERT_EQUAL(1, release.GetCount());
+    CHECK(track.GetCount() != 0);
+    CHECK_EQ(1, release.GetCount());
 #if defined(__WXMSW__) || defined(__WXGTK__)
-    CPPUNIT_ASSERT_EQUAL(1, changed.GetCount());
+    CHECK_EQ(1, changed.GetCount());
 #endif
 #endif
 }

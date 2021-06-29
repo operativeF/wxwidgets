@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_TREELISTCTRL
@@ -152,15 +154,15 @@ void TreeListCtrlTestCase::Traversal()
 {
     // GetParent() tests:
     wxTreeListItem root = m_treelist->GetRootItem();
-    CPPUNIT_ASSERT( !m_treelist->GetItemParent(root) );
+    CHECK( !m_treelist->GetItemParent(root) );
 
-    CPPUNIT_ASSERT_EQUAL( root, m_treelist->GetItemParent(m_code) );
-    CPPUNIT_ASSERT_EQUAL( m_code, m_treelist->GetItemParent(m_code_osx) );
+    CHECK_EQ( root, m_treelist->GetItemParent(m_code) );
+    CHECK_EQ( m_code, m_treelist->GetItemParent(m_code_osx) );
 
 
     // GetFirstChild() and GetNextSibling() tests:
-    CPPUNIT_ASSERT_EQUAL( m_code, m_treelist->GetFirstChild(root) );
-    CPPUNIT_ASSERT_EQUAL
+    CHECK_EQ( m_code, m_treelist->GetFirstChild(root) );
+    CHECK_EQ
     (
         m_code_osx,
         m_treelist->GetNextSibling
@@ -181,51 +183,51 @@ void TreeListCtrlTestCase::Traversal()
         numItems++;
     }
 
-    CPPUNIT_ASSERT_EQUAL( m_numItems, numItems );
+    CHECK_EQ( m_numItems, numItems );
 }
 
 // Test accessing items text.
 void TreeListCtrlTestCase::ItemText()
 {
-    CPPUNIT_ASSERT_EQUAL( "Cocoa", m_treelist->GetItemText(m_code_osx_cocoa) );
-    CPPUNIT_ASSERT_EQUAL( "46", m_treelist->GetItemText(m_code_osx_cocoa, 1) );
+    CHECK_EQ( "Cocoa", m_treelist->GetItemText(m_code_osx_cocoa) );
+    CHECK_EQ( "46", m_treelist->GetItemText(m_code_osx_cocoa, 1) );
 
     m_treelist->SetItemText(m_code_osx_cocoa, "wxCocoa");
-    CPPUNIT_ASSERT_EQUAL( "wxCocoa", m_treelist->GetItemText(m_code_osx_cocoa) );
+    CHECK_EQ( "wxCocoa", m_treelist->GetItemText(m_code_osx_cocoa) );
 
     m_treelist->SetItemText(m_code_osx_cocoa, 1, "47");
-    CPPUNIT_ASSERT_EQUAL( "47", m_treelist->GetItemText(m_code_osx_cocoa, 1) );
+    CHECK_EQ( "47", m_treelist->GetItemText(m_code_osx_cocoa, 1) );
 }
 
 // Test checking and unchecking items.
 void TreeListCtrlTestCase::ItemCheck()
 {
-    CPPUNIT_ASSERT_EQUAL( wxCHK_UNCHECKED,
+    CHECK_EQ( wxCHK_UNCHECKED,
                           m_treelist->GetCheckedState(m_code) );
 
     m_treelist->CheckItemRecursively(m_code);
-    CPPUNIT_ASSERT_EQUAL( wxCHK_CHECKED,
+    CHECK_EQ( wxCHK_CHECKED,
                           m_treelist->GetCheckedState(m_code) );
-    CPPUNIT_ASSERT_EQUAL( wxCHK_CHECKED,
+    CHECK_EQ( wxCHK_CHECKED,
                           m_treelist->GetCheckedState(m_code_osx) );
-    CPPUNIT_ASSERT_EQUAL( wxCHK_CHECKED,
+    CHECK_EQ( wxCHK_CHECKED,
                           m_treelist->GetCheckedState(m_code_osx_cocoa) );
 
     m_treelist->UncheckItem(m_code_osx_cocoa);
-    CPPUNIT_ASSERT_EQUAL( wxCHK_UNCHECKED,
+    CHECK_EQ( wxCHK_UNCHECKED,
                           m_treelist->GetCheckedState(m_code_osx_cocoa) );
 
     m_treelist->UpdateItemParentStateRecursively(m_code_osx_cocoa);
-    CPPUNIT_ASSERT_EQUAL( wxCHK_UNDETERMINED,
+    CHECK_EQ( wxCHK_UNDETERMINED,
                           m_treelist->GetCheckedState(m_code_osx) );
-    CPPUNIT_ASSERT_EQUAL( wxCHK_UNDETERMINED,
+    CHECK_EQ( wxCHK_UNDETERMINED,
                           m_treelist->GetCheckedState(m_code) );
 
     m_treelist->CheckItemRecursively(m_code_osx, wxCHK_UNCHECKED);
     m_treelist->UpdateItemParentStateRecursively(m_code_osx_cocoa);
-    CPPUNIT_ASSERT_EQUAL( wxCHK_UNCHECKED,
+    CHECK_EQ( wxCHK_UNCHECKED,
                           m_treelist->GetCheckedState(m_code_osx) );
-    CPPUNIT_ASSERT_EQUAL( wxCHK_UNDETERMINED,
+    CHECK_EQ( wxCHK_UNDETERMINED,
                           m_treelist->GetCheckedState(m_code) );
 }
 

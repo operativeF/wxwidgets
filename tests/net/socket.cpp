@@ -16,6 +16,9 @@
 
 // For compilers that support precompilation, includes "wx/wx.h".
 // and "wx/cppunit.h"
+
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -135,7 +138,7 @@ wxSocketClient* SocketTestCase::GetHTTPSocket(int flags)
 
     wxSocketClient *sock = new wxSocketClient(flags);
     sock->SetTimeout(1);
-    CPPUNIT_ASSERT( sock->Connect(*addr) );
+    CHECK( sock->Connect(*addr) );
 
     const wxString httpGetRoot =
         "GET / HTTP/1.1\r\n"
@@ -154,7 +157,7 @@ void SocketTestCase::BlockingConnect()
         return;
 
     wxSocketClient sock;
-    CPPUNIT_ASSERT( sock.Connect(*addr) );
+    CHECK( sock.Connect(*addr) );
 }
 
 void SocketTestCase::NonblockingConnect()
@@ -169,7 +172,7 @@ void SocketTestCase::NonblockingConnect()
     sock.Connect(*addr, false);
     sock.WaitOnConnect(10);
 
-    CPPUNIT_ASSERT( sock.IsConnected() );
+    CHECK( sock.IsConnected() );
 }
 
 void SocketTestCase::ReadNormal()
@@ -183,17 +186,17 @@ void SocketTestCase::ReadNormal()
     char bufSmall[128];
     sock->Read(bufSmall, WXSIZEOF(bufSmall));
 
-    CPPUNIT_ASSERT_EQUAL( wxSOCKET_NOERROR, sock->LastError() );
-    CPPUNIT_ASSERT_EQUAL( WXSIZEOF(bufSmall), (size_t)sock->LastCount() );
-    CPPUNIT_ASSERT_EQUAL( WXSIZEOF(bufSmall), (size_t)sock->LastReadCount() );
+    CHECK_EQ( wxSOCKET_NOERROR, sock->LastError() );
+    CHECK_EQ( WXSIZEOF(bufSmall), (size_t)sock->LastCount() );
+    CHECK_EQ( WXSIZEOF(bufSmall), (size_t)sock->LastReadCount() );
 
 
     char bufBig[102400];
     sock->Read(bufBig, WXSIZEOF(bufBig));
 
-    CPPUNIT_ASSERT_EQUAL( wxSOCKET_NOERROR, sock->LastError() );
-    CPPUNIT_ASSERT( WXSIZEOF(bufBig) >= sock->LastCount() );
-    CPPUNIT_ASSERT( WXSIZEOF(bufBig) >= sock->LastReadCount() );
+    CHECK_EQ( wxSOCKET_NOERROR, sock->LastError() );
+    CHECK( WXSIZEOF(bufBig) >= sock->LastCount() );
+    CHECK( WXSIZEOF(bufBig) >= sock->LastReadCount() );
 }
 
 void SocketTestCase::ReadBlock()
@@ -205,17 +208,17 @@ void SocketTestCase::ReadBlock()
     char bufSmall[128];
     sock->Read(bufSmall, WXSIZEOF(bufSmall));
 
-    CPPUNIT_ASSERT_EQUAL( wxSOCKET_NOERROR, sock->LastError() );
-    CPPUNIT_ASSERT_EQUAL( WXSIZEOF(bufSmall), (size_t)sock->LastCount() );
-    CPPUNIT_ASSERT_EQUAL( WXSIZEOF(bufSmall), (size_t)sock->LastReadCount() );
+    CHECK_EQ( wxSOCKET_NOERROR, sock->LastError() );
+    CHECK_EQ( WXSIZEOF(bufSmall), (size_t)sock->LastCount() );
+    CHECK_EQ( WXSIZEOF(bufSmall), (size_t)sock->LastReadCount() );
 
 
     char bufBig[102400];
     sock->Read(bufBig, WXSIZEOF(bufBig));
 
-    CPPUNIT_ASSERT_EQUAL( wxSOCKET_NOERROR, sock->LastError() );
-    CPPUNIT_ASSERT( WXSIZEOF(bufBig) >= sock->LastCount() );
-    CPPUNIT_ASSERT( WXSIZEOF(bufBig) >= sock->LastReadCount() );
+    CHECK_EQ( wxSOCKET_NOERROR, sock->LastError() );
+    CHECK( WXSIZEOF(bufBig) >= sock->LastCount() );
+    CHECK( WXSIZEOF(bufBig) >= sock->LastReadCount() );
 }
 
 void SocketTestCase::ReadNowait()
@@ -228,7 +231,7 @@ void SocketTestCase::ReadNowait()
     sock->Read(buf, WXSIZEOF(buf));
     if ( sock->LastError() != wxSOCKET_WOULDBLOCK )
     {
-        CPPUNIT_ASSERT_EQUAL( wxSOCKET_NOERROR, sock->LastError() );
+        CHECK_EQ( wxSOCKET_NOERROR, sock->LastError() );
     }
 }
 
@@ -243,9 +246,9 @@ void SocketTestCase::ReadWaitall()
     char buf[128];
     sock->Read(buf, WXSIZEOF(buf));
 
-    CPPUNIT_ASSERT_EQUAL( wxSOCKET_NOERROR, sock->LastError() );
-    CPPUNIT_ASSERT_EQUAL( WXSIZEOF(buf), (size_t)sock->LastCount() );
-    CPPUNIT_ASSERT_EQUAL( WXSIZEOF(buf), (size_t)sock->LastReadCount() );
+    CHECK_EQ( wxSOCKET_NOERROR, sock->LastError() );
+    CHECK_EQ( WXSIZEOF(buf), (size_t)sock->LastCount() );
+    CHECK_EQ( WXSIZEOF(buf), (size_t)sock->LastReadCount() );
 }
 
 void SocketTestCase::ReadAnotherThread()
@@ -296,10 +299,10 @@ void SocketTestCase::UrlTest()
     wxURL url("http://" + gs_serverHost);
 
     const std::unique_ptr<wxInputStream> in(url.GetInputStream());
-    CPPUNIT_ASSERT( in.get() );
+    CHECK( in.get() );
 
     wxStringOutputStream out;
-    CPPUNIT_ASSERT_EQUAL( wxSTREAM_EOF, in->Read(out).GetLastError() );
+    CHECK_EQ( wxSTREAM_EOF, in->Read(out).GetLastError() );
 }
 
 #endif // wxUSE_SOCKETS

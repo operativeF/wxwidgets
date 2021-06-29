@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_HYPERLINKCTRL
@@ -65,27 +67,27 @@ void HyperlinkCtrlTestCase::tearDown()
 void HyperlinkCtrlTestCase::Colour()
 {
 #ifndef __WXGTK__
-    CPPUNIT_ASSERT(m_hyperlink->GetHoverColour().IsOk());
-    CPPUNIT_ASSERT(m_hyperlink->GetNormalColour().IsOk());
-    CPPUNIT_ASSERT(m_hyperlink->GetVisitedColour().IsOk());
+    CHECK(m_hyperlink->GetHoverColour().IsOk());
+    CHECK(m_hyperlink->GetNormalColour().IsOk());
+    CHECK(m_hyperlink->GetVisitedColour().IsOk());
 
     m_hyperlink->SetHoverColour(*wxGREEN);
     m_hyperlink->SetNormalColour(*wxRED);
     m_hyperlink->SetVisitedColour(*wxBLUE);
 
-    CPPUNIT_ASSERT_EQUAL(*wxGREEN, m_hyperlink->GetHoverColour());
-    CPPUNIT_ASSERT_EQUAL(*wxRED, m_hyperlink->GetNormalColour());
-    CPPUNIT_ASSERT_EQUAL(*wxBLUE, m_hyperlink->GetVisitedColour());
+    CHECK_EQ(*wxGREEN, m_hyperlink->GetHoverColour());
+    CHECK_EQ(*wxRED, m_hyperlink->GetNormalColour());
+    CHECK_EQ(*wxBLUE, m_hyperlink->GetVisitedColour());
 #endif
 }
 
 void HyperlinkCtrlTestCase::Url()
 {
-    CPPUNIT_ASSERT_EQUAL("http://wxwidgets.org", m_hyperlink->GetURL());
+    CHECK_EQ("http://wxwidgets.org", m_hyperlink->GetURL());
 
     m_hyperlink->SetURL("http://google.com");
 
-    CPPUNIT_ASSERT_EQUAL("http://google.com", m_hyperlink->GetURL());
+    CHECK_EQ("http://google.com", m_hyperlink->GetURL());
 }
 
 void HyperlinkCtrlTestCase::Click()
@@ -101,7 +103,7 @@ void HyperlinkCtrlTestCase::Click()
     sim.MouseClick();
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, hyperlink.GetCount());
+    CHECK_EQ(1, hyperlink.GetCount());
 #endif
 }
 

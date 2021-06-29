@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_AUI
@@ -20,7 +22,6 @@
 #endif // WX_PRECOMP
 
 #include "wx/panel.h"
-
 
 #include "wx/aui/auibook.h"
 
@@ -43,7 +44,7 @@ TEST_CASE( "wxAuiNotebook::DoGetBestSize", "[aui]" )
 
     const int tabHeight = nb->GetTabCtrlHeight();
 
-    SECTION( "Single pane with multiple tabs" )
+    SUBCASE( "Single pane with multiple tabs" )
     {
         p = new wxPanel(nb);
         p->SetMinSize(wxSize(300, 100));
@@ -56,7 +57,7 @@ TEST_CASE( "wxAuiNotebook::DoGetBestSize", "[aui]" )
         CHECK( nb->GetBestSize() == wxSize(300, 200 + tabHeight) );
     }
 
-    SECTION( "Horizontal split" )
+    SUBCASE( "Horizontal split" )
     {
         p = new wxPanel(nb);
         p->SetMinSize(wxSize(25, 0));
@@ -80,7 +81,7 @@ TEST_CASE( "wxAuiNotebook::DoGetBestSize", "[aui]" )
         CHECK( nb->GetBestSize() == wxSize(275, 100 + tabHeight) );
     }
 
-    SECTION( "Vertical split" )
+    SUBCASE( "Vertical split" )
     {
         p = new wxPanel(nb);
         p->SetMinSize(wxSize(0, 100));
@@ -102,7 +103,7 @@ TEST_CASE( "wxAuiNotebook::DoGetBestSize", "[aui]" )
         CHECK( nb->GetBestSize() == wxSize(100, 275 + 4*tabHeight) );
     }
 
-    SECTION( "Surrounding panes" )
+    SUBCASE( "Surrounding panes" )
     {
         p = new wxPanel(nb);
         p->SetMinSize(wxSize(50, 25));

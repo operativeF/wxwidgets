@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_HTML
@@ -106,7 +108,7 @@ void HtmlWindowTestCase::SelectionToText()
     m_win->SetPage(TEST_MARKUP);
     m_win->SelectAll();
 
-    CPPUNIT_ASSERT_EQUAL( TEST_PLAIN_TEXT, m_win->SelectionToText() );
+    CHECK_EQ( TEST_PLAIN_TEXT, m_win->SelectionToText() );
 #endif // wxUSE_CLIPBOARD
 }
 
@@ -114,7 +116,7 @@ void HtmlWindowTestCase::Title()
 {
     m_win->SetPage(TEST_MARKUP);
 
-    CPPUNIT_ASSERT_EQUAL("Page", m_win->GetOpenedPageTitle());
+    CHECK_EQ("Page", m_win->GetOpenedPageTitle());
 }
 
 #if wxUSE_UIACTIONSIMULATOR
@@ -134,7 +136,7 @@ void HtmlWindowTestCase::CellClick()
     sim.MouseClick();
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, clicked.GetCount());
+    CHECK_EQ(1, clicked.GetCount());
 }
 
 void HtmlWindowTestCase::LinkClick()
@@ -153,7 +155,7 @@ void HtmlWindowTestCase::LinkClick()
     sim.MouseClick();
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, clicked.GetCount());
+    CHECK_EQ(1, clicked.GetCount());
 }
 #endif // wxUSE_UIACTIONSIMULATOR
 
@@ -163,7 +165,7 @@ void HtmlWindowTestCase::AppendToPage()
     m_win->SetPage(TEST_MARKUP_LINK);
     m_win->AppendToPage("A new paragraph");
 
-    CPPUNIT_ASSERT_EQUAL("link A new paragraph", m_win->ToText());
+    CHECK_EQ("link A new paragraph", m_win->ToText());
 #endif // wxUSE_CLIPBOARD
 }
 

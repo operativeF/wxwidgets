@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_MENUBAR
@@ -53,7 +55,7 @@ void PopulateMenu(wxMenu* menu, const wxString& name,  size_t& itemcount)
 
 void RecursivelyCountMenuItems(const wxMenu* menu, size_t& count)
 {
-    CPPUNIT_ASSERT( menu );
+    CHECK( menu );
 
     count += menu->GetMenuItemCount();
     for (size_t n=0; n < menu->GetMenuItemCount(); ++n)
@@ -164,7 +166,7 @@ void MenuTestCase::CreateFrame()
 
     // Check GetTitle() returns the correct string _before_ appending to the bar
     fileMenu->SetTitle("&Foo\tCtrl-F");
-    CPPUNIT_ASSERT_EQUAL( "&Foo\tCtrl-F", fileMenu->GetTitle() );
+    CHECK_EQ( "&Foo\tCtrl-F", fileMenu->GetTitle() );
 
     PopulateMenu(fileMenu, "Filemenu item ", m_itemCount);
 
@@ -197,45 +199,45 @@ void MenuTestCase::FindInMenubar()
     wxMenuBar* bar = m_frame->GetMenuBar();
 
     // Find by name:
-    CPPUNIT_ASSERT( bar->FindMenu("File") != wxNOT_FOUND );
-    CPPUNIT_ASSERT( bar->FindMenu("&File") != wxNOT_FOUND );
-    CPPUNIT_ASSERT( bar->FindMenu("&Fail") == wxNOT_FOUND );
+    CHECK( bar->FindMenu("File") != wxNOT_FOUND );
+    CHECK( bar->FindMenu("&File") != wxNOT_FOUND );
+    CHECK( bar->FindMenu("&Fail") == wxNOT_FOUND );
 
     // Find by menu name plus item name:
-    CPPUNIT_ASSERT( bar->FindMenuItem("File", "Foo") != wxNOT_FOUND );
-    CPPUNIT_ASSERT( bar->FindMenuItem("&File", "&Foo") != wxNOT_FOUND );
+    CHECK( bar->FindMenuItem("File", "Foo") != wxNOT_FOUND );
+    CHECK( bar->FindMenuItem("&File", "&Foo") != wxNOT_FOUND );
     // and using the menu label
     int index = bar->FindMenu("&File");
-    CPPUNIT_ASSERT( index != wxNOT_FOUND );
+    CHECK( index != wxNOT_FOUND );
     wxString menulabel = bar->GetMenuLabel(index);
-    CPPUNIT_ASSERT( bar->FindMenuItem(menulabel, "&Foo") != wxNOT_FOUND );
+    CHECK( bar->FindMenuItem(menulabel, "&Foo") != wxNOT_FOUND );
     // and title
     wxString menutitle = bar->GetMenu(index)->GetTitle();
-    CPPUNIT_ASSERT( bar->FindMenuItem(menutitle, "&Foo") != wxNOT_FOUND );
+    CHECK( bar->FindMenuItem(menutitle, "&Foo") != wxNOT_FOUND );
 
     // Find by position:
     for (size_t n=0; n < bar->GetMenuCount(); ++n)
     {
-        CPPUNIT_ASSERT( bar->GetMenu(n) );
+        CHECK( bar->GetMenu(n) );
     }
 
     // Find by id:
     wxMenu* menu = NULL;
     wxMenuItem* item = NULL;
     item = bar->FindItem(MenuTestCase_Foo, &menu);
-    CPPUNIT_ASSERT( item );
-    CPPUNIT_ASSERT( menu );
+    CHECK( item );
+    CHECK( menu );
     // Check that the correct menu was found
-    CPPUNIT_ASSERT( menu->FindChildItem(MenuTestCase_Foo) );
+    CHECK( menu->FindChildItem(MenuTestCase_Foo) );
 
     // Find submenu item:
     item = bar->FindItem(m_submenuItemId, &menu);
-    CPPUNIT_ASSERT( item );
-    CPPUNIT_ASSERT( menu );
+    CHECK( item );
+    CHECK( menu );
     // and, for completeness, a subsubmenu one:
     item = bar->FindItem(m_subsubmenuItemId, &menu);
-    CPPUNIT_ASSERT( item );
-    CPPUNIT_ASSERT( menu );
+    CHECK( item );
+    CHECK( menu );
 }
 
 void MenuTestCase::FindInMenu()
@@ -244,32 +246,32 @@ void MenuTestCase::FindInMenu()
 
     // Find by name:
     wxMenu* menuFind = bar->GetMenu(0);
-    CPPUNIT_ASSERT( menuFind->FindItem("Foo") != wxNOT_FOUND );
-    CPPUNIT_ASSERT( menuFind->FindItem("&Foo") != wxNOT_FOUND );
+    CHECK( menuFind->FindItem("Foo") != wxNOT_FOUND );
+    CHECK( menuFind->FindItem("&Foo") != wxNOT_FOUND );
     // and for submenus
     wxMenu* menuHelp = bar->GetMenu(1);
-    CPPUNIT_ASSERT( menuHelp->FindItem("Submenu") != wxNOT_FOUND );
-    CPPUNIT_ASSERT( menuHelp->FindItem("Sub&menu") != wxNOT_FOUND );
+    CHECK( menuHelp->FindItem("Submenu") != wxNOT_FOUND );
+    CHECK( menuHelp->FindItem("Sub&menu") != wxNOT_FOUND );
 
     // Find by position:
     size_t n;
     for (n=0; n < menuHelp->GetMenuItemCount(); ++n)
     {
-        CPPUNIT_ASSERT( menuHelp->FindItemByPosition(n) );
+        CHECK( menuHelp->FindItemByPosition(n) );
     }
 
     // Find by id:
-    CPPUNIT_ASSERT( menuHelp->FindItem(MenuTestCase_Bar) );
-    CPPUNIT_ASSERT( !menuHelp->FindItem(MenuTestCase_Foo) );
+    CHECK( menuHelp->FindItem(MenuTestCase_Bar) );
+    CHECK( !menuHelp->FindItem(MenuTestCase_Foo) );
 
     for (n=0; n < menuHelp->GetMenuItemCount(); ++n)
     {
         size_t locatedAt;
         wxMenuItem* itemByPos = menuHelp->FindItemByPosition(n);
-        CPPUNIT_ASSERT( itemByPos );
+        CHECK( itemByPos );
         wxMenuItem* itemById = menuHelp->FindChildItem(itemByPos->GetId(), &locatedAt);
-        CPPUNIT_ASSERT_EQUAL( itemByPos, itemById );
-        CPPUNIT_ASSERT_EQUAL( locatedAt, n );
+        CHECK_EQ( itemByPos, itemById );
+        CHECK_EQ( locatedAt, n );
     }
 
     // Find submenu item:
@@ -280,8 +282,8 @@ void MenuTestCase::FindInMenu()
         {
             wxMenu* submenu;
             wxMenuItem* submenuItem = menuHelp->FindItem(m_submenuItemId, &submenu);
-            CPPUNIT_ASSERT( submenuItem );
-            CPPUNIT_ASSERT( item->GetSubMenu() == submenu );
+            CHECK( submenuItem );
+            CHECK( item->GetSubMenu() == submenu );
         }
     }
 }
@@ -289,62 +291,62 @@ void MenuTestCase::FindInMenu()
 void MenuTestCase::EnableTop()
 {
     wxMenuBar* const bar = m_frame->GetMenuBar();
-    CPPUNIT_ASSERT( bar->IsEnabledTop(0) );
+    CHECK( bar->IsEnabledTop(0) );
     bar->EnableTop( 0, false );
-    CPPUNIT_ASSERT( !bar->IsEnabledTop(0) );
+    CHECK( !bar->IsEnabledTop(0) );
     bar->EnableTop( 0, true );
-    CPPUNIT_ASSERT( bar->IsEnabledTop(0) );
+    CHECK( bar->IsEnabledTop(0) );
 }
 
 void MenuTestCase::Count()
 {
     wxMenuBar* bar = m_frame->GetMenuBar();
     // I suppose you could call this "counting menubars" :)
-    CPPUNIT_ASSERT( bar );
+    CHECK( bar );
 
-    CPPUNIT_ASSERT_EQUAL( bar->GetMenuCount(), 2 );
+    CHECK_EQ( bar->GetMenuCount(), 2 );
 
     size_t count = 0;
     for (size_t n=0; n < bar->GetMenuCount(); ++n)
     {
         RecursivelyCountMenuItems(bar->GetMenu(n), count);
     }
-    CPPUNIT_ASSERT_EQUAL( count, m_itemCount );
+    CHECK_EQ( count, m_itemCount );
 }
 
 void MenuTestCase::Labels()
 {
     wxMenuBar* bar = m_frame->GetMenuBar();
-    CPPUNIT_ASSERT( bar );
+    CHECK( bar );
     wxMenu* filemenu;
     wxMenuItem* itemFoo = bar->FindItem(MenuTestCase_Foo, &filemenu);
-    CPPUNIT_ASSERT( itemFoo );
-    CPPUNIT_ASSERT( filemenu );
+    CHECK( itemFoo );
+    CHECK( filemenu );
 
     // These return labels including mnemonics/accelerators:
 
     // wxMenuBar
-    CPPUNIT_ASSERT_EQUAL( "&File", bar->GetMenuLabel(0) );
-    CPPUNIT_ASSERT_EQUAL( "&Foo\tCtrl-F", bar->GetLabel(MenuTestCase_Foo) );
+    CHECK_EQ( "&File", bar->GetMenuLabel(0) );
+    CHECK_EQ( "&Foo\tCtrl-F", bar->GetLabel(MenuTestCase_Foo) );
 
     // wxMenu
-    CPPUNIT_ASSERT_EQUAL( "&File", filemenu->GetTitle() );
-    CPPUNIT_ASSERT_EQUAL( "&Foo\tCtrl-F", filemenu->GetLabel(MenuTestCase_Foo) );
+    CHECK_EQ( "&File", filemenu->GetTitle() );
+    CHECK_EQ( "&Foo\tCtrl-F", filemenu->GetLabel(MenuTestCase_Foo) );
 
     // wxMenuItem
-    CPPUNIT_ASSERT_EQUAL( "&Foo\tCtrl-F", itemFoo->GetItemLabel() );
+    CHECK_EQ( "&Foo\tCtrl-F", itemFoo->GetItemLabel() );
 
     // These return labels stripped of mnemonics/accelerators:
 
     // wxMenuBar
-    CPPUNIT_ASSERT_EQUAL( "File", bar->GetMenuLabelText(0) );
+    CHECK_EQ( "File", bar->GetMenuLabelText(0) );
 
     // wxMenu
-    CPPUNIT_ASSERT_EQUAL( "Foo", filemenu->GetLabelText(MenuTestCase_Foo) );
+    CHECK_EQ( "Foo", filemenu->GetLabelText(MenuTestCase_Foo) );
 
     // wxMenuItem
-    CPPUNIT_ASSERT_EQUAL( "Foo", itemFoo->GetItemLabelText() );
-    CPPUNIT_ASSERT_EQUAL( "Foo", wxMenuItem::GetLabelText("&Foo\tCtrl-F") );
+    CHECK_EQ( "Foo", itemFoo->GetItemLabelText() );
+    CHECK_EQ( "Foo", wxMenuItem::GetLabelText("&Foo\tCtrl-F") );
 }
 
 #if wxUSE_INTL
@@ -363,13 +365,13 @@ void MenuTestCase::TranslatedMnemonics()
     wxTranslations trans;
     trans.SetLanguage(wxLANGUAGE_JAPANESE);
     wxFileTranslationsLoader::AddCatalogLookupPathPrefix("./intl");
-    CPPUNIT_ASSERT( trans.AddCatalog("internat") );
+    CHECK( trans.AddCatalog("internat") );
 
     // Check the translation is being used:
-    CPPUNIT_ASSERT( wxString("&File") != GetTranslatedString(trans, "&File") );
+    CHECK( wxString("&File") != GetTranslatedString(trans, "&File") );
 
     wxString filemenu = m_frame->GetMenuBar()->GetMenuLabel(0);
-    CPPUNIT_ASSERT_EQUAL
+    CHECK_EQ
     (
          wxStripMenuCodes(GetTranslatedString(trans, "&File"), wxStrip_Menu),
          wxStripMenuCodes(GetTranslatedString(trans, filemenu), wxStrip_Menu)
@@ -377,21 +379,21 @@ void MenuTestCase::TranslatedMnemonics()
 
     // Test strings that have shortcuts. Duplicate non-mnemonic translations
     // exist for both "Edit" and "View", for ease of comparison
-    CPPUNIT_ASSERT_EQUAL
+    CHECK_EQ
     (
          GetTranslatedString(trans, "Edit"),
          wxStripMenuCodes(GetTranslatedString(trans, "E&dit\tCtrl+E"), wxStrip_Menu)
     );
 
     // "Vie&w" also has a space before the (&W)
-    CPPUNIT_ASSERT_EQUAL
+    CHECK_EQ
     (
          GetTranslatedString(trans, "View"),
          wxStripMenuCodes(GetTranslatedString(trans, "Vie&w\tCtrl+V"), wxStrip_Menu)
     );
 
     // Test a 'normal' mnemonic too: the translation is "Preten&d"
-    CPPUNIT_ASSERT_EQUAL
+    CHECK_EQ
     (
          "Pretend",
          wxStripMenuCodes(GetTranslatedString(trans, "B&ogus"), wxStrip_Menu)
@@ -410,18 +412,18 @@ void MenuTestCase::RadioItems()
     menu->AppendRadioItem(MenuTestCase_First + 1, "Radio 1");
 
     // First item of a radio group is checked by default.
-    CPPUNIT_ASSERT( menu->IsChecked(MenuTestCase_First) );
+    CHECK( menu->IsChecked(MenuTestCase_First) );
 
     // Subsequent items in a group are not checked.
-    CPPUNIT_ASSERT( !menu->IsChecked(MenuTestCase_First + 1) );
+    CHECK( !menu->IsChecked(MenuTestCase_First + 1) );
 
 #ifdef __WXQT__
     WARN("Radio check test does not work under Qt");
 #else
     // Checking the second one make the first one unchecked however.
     menu->Check(MenuTestCase_First + 1, true);
-    CPPUNIT_ASSERT( !menu->IsChecked(MenuTestCase_First) );
-    CPPUNIT_ASSERT( menu->IsChecked(MenuTestCase_First + 1) );
+    CHECK( !menu->IsChecked(MenuTestCase_First) );
+    CHECK( menu->IsChecked(MenuTestCase_First + 1) );
     menu->Check(MenuTestCase_First, true);
 #endif
 
@@ -432,30 +434,30 @@ void MenuTestCase::RadioItems()
     menu->AppendRadioItem(MenuTestCase_First + 4, "Radio 4");
 
     // ... which is independent from the first one.
-    CPPUNIT_ASSERT( menu->IsChecked(MenuTestCase_First) );
-    CPPUNIT_ASSERT( menu->IsChecked(MenuTestCase_First + 2) );
+    CHECK( menu->IsChecked(MenuTestCase_First) );
+    CHECK( menu->IsChecked(MenuTestCase_First + 2) );
 
 #ifdef __WXQT__
     WARN("Radio check test does not work under Qt");
 #else
     menu->Check(MenuTestCase_First + 3, true);
-    CPPUNIT_ASSERT( menu->IsChecked(MenuTestCase_First + 3) );
-    CPPUNIT_ASSERT( !menu->IsChecked(MenuTestCase_First + 2) );
+    CHECK( menu->IsChecked(MenuTestCase_First + 3) );
+    CHECK( !menu->IsChecked(MenuTestCase_First + 2) );
 
-    CPPUNIT_ASSERT( menu->IsChecked(MenuTestCase_First) );
+    CHECK( menu->IsChecked(MenuTestCase_First) );
     menu->Check(MenuTestCase_First + 2, true);
 #endif
 
     // Insert an item in the middle of an existing radio group.
     menu->InsertRadioItem(4, MenuTestCase_First + 5, "Radio 5");
-    CPPUNIT_ASSERT( menu->IsChecked(MenuTestCase_First + 2) );
-    CPPUNIT_ASSERT( !menu->IsChecked(MenuTestCase_First + 5) );
+    CHECK( menu->IsChecked(MenuTestCase_First + 2) );
+    CHECK( !menu->IsChecked(MenuTestCase_First + 5) );
 
 #ifdef __WXQT__
     WARN("Radio check test does not work under Qt");
 #else
     menu->Check( MenuTestCase_First + 5, true );
-    CPPUNIT_ASSERT( !menu->IsChecked(MenuTestCase_First + 3) );
+    CHECK( !menu->IsChecked(MenuTestCase_First + 3) );
 
     menu->Check( MenuTestCase_First + 3, true );
 #endif
@@ -463,19 +465,19 @@ void MenuTestCase::RadioItems()
     // Prepend a couple of items before the first group.
     menu->PrependRadioItem(MenuTestCase_First + 6, "Radio 6");
     menu->PrependRadioItem(MenuTestCase_First + 7, "Radio 7");
-    CPPUNIT_ASSERT( !menu->IsChecked(MenuTestCase_First + 6) );
-    CPPUNIT_ASSERT( !menu->IsChecked(MenuTestCase_First + 7) );
+    CHECK( !menu->IsChecked(MenuTestCase_First + 6) );
+    CHECK( !menu->IsChecked(MenuTestCase_First + 7) );
 
 #ifdef __WXQT__
     WARN("Radio check test does not work under Qt");
 #else
     menu->Check(MenuTestCase_First + 7, true);
-    CPPUNIT_ASSERT( !menu->IsChecked(MenuTestCase_First + 1) );
+    CHECK( !menu->IsChecked(MenuTestCase_First + 1) );
 
 
     // Check that the last radio group still works as expected.
     menu->Check(MenuTestCase_First + 4, true);
-    CPPUNIT_ASSERT( !menu->IsChecked(MenuTestCase_First + 5) );
+    CHECK( !menu->IsChecked(MenuTestCase_First + 5) );
 #endif
 }
 
@@ -487,15 +489,15 @@ void MenuTestCase::RemoveAdd()
     wxMenu* menu1 = bar->GetMenu(1);
     wxMenuItem* item = new wxMenuItem(menu0, MenuTestCase_Foo + 100, "t&ext\tCtrl-E");
     menu0->Insert(0, item);
-    CPPUNIT_ASSERT( menu0->FindItemByPosition(0) == item );
+    CHECK( menu0->FindItemByPosition(0) == item );
     menu0->Remove(item);
-    CPPUNIT_ASSERT( menu0->FindItemByPosition(0) != item );
+    CHECK( menu0->FindItemByPosition(0) != item );
     menu1->Insert(0, item);
-    CPPUNIT_ASSERT( menu1->FindItemByPosition(0) == item );
+    CHECK( menu1->FindItemByPosition(0) == item );
     menu1->Remove(item);
-    CPPUNIT_ASSERT( menu1->FindItemByPosition(0) != item );
+    CHECK( menu1->FindItemByPosition(0) != item );
     menu0->Insert(0, item);
-    CPPUNIT_ASSERT( menu0->FindItemByPosition(0) == item );
+    CHECK( menu0->FindItemByPosition(0) == item );
     menu0->Delete(item);
 }
 
@@ -546,7 +548,7 @@ public:
 
     const wxCommandEvent& GetEvent()
     {
-        CPPUNIT_ASSERT( m_gotEvent );
+        CHECK( m_gotEvent );
 
         m_gotEvent = false;
 
@@ -561,7 +563,7 @@ public:
 private:
     void OnMenu(wxCommandEvent& event)
     {
-        CPPUNIT_ASSERT( !m_gotEvent );
+        CHECK( !m_gotEvent );
 
         delete m_event;
         m_event = static_cast<wxCommandEvent*>(event.Clone());
@@ -591,14 +593,14 @@ void MenuTestCase::Events()
     wxYield();
 
     const wxCommandEvent& ev = handler.GetEvent();
-    CPPUNIT_ASSERT_EQUAL( static_cast<int>(MenuTestCase_Bar), ev.GetId() );
+    CHECK_EQ( static_cast<int>(MenuTestCase_Bar), ev.GetId() );
 
     wxObject* const src = ev.GetEventObject();
-    CPPUNIT_ASSERT( src );
+    CHECK( src );
 
-    CPPUNIT_ASSERT_EQUAL( "wxMenu",
+    CHECK_EQ( "wxMenu",
                           wxString(src->GetClassInfo()->GetClassName()) );
-    CPPUNIT_ASSERT_EQUAL( static_cast<wxObject*>(m_menuWithBar),
+    CHECK_EQ( static_cast<wxObject*>(m_menuWithBar),
                           src );
 
     // Invoke another accelerator, it should also work.

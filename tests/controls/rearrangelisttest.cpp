@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #ifndef __WXOSX_IPHONE__
@@ -87,18 +89,18 @@ void RearrangeListTestCase::Move()
     //item specified in the constructor
     m_rearrange->SetSelection(0);
 
-    CPPUNIT_ASSERT(!m_rearrange->CanMoveCurrentUp());
-    CPPUNIT_ASSERT(m_rearrange->CanMoveCurrentDown());
+    CHECK(!m_rearrange->CanMoveCurrentUp());
+    CHECK(m_rearrange->CanMoveCurrentDown());
 
     m_rearrange->SetSelection(1);
 
-    CPPUNIT_ASSERT(m_rearrange->CanMoveCurrentUp());
-    CPPUNIT_ASSERT(m_rearrange->CanMoveCurrentDown());
+    CHECK(m_rearrange->CanMoveCurrentUp());
+    CHECK(m_rearrange->CanMoveCurrentDown());
 
     m_rearrange->SetSelection(2);
 
-    CPPUNIT_ASSERT(m_rearrange->CanMoveCurrentUp());
-    CPPUNIT_ASSERT(!m_rearrange->CanMoveCurrentDown());
+    CHECK(m_rearrange->CanMoveCurrentUp());
+    CHECK(!m_rearrange->CanMoveCurrentDown());
 
     m_rearrange->MoveCurrentUp();
     m_rearrange->SetSelection(0);
@@ -106,13 +108,13 @@ void RearrangeListTestCase::Move()
 
     auto neworder = m_rearrange->GetCurrentOrder();
 
-    CPPUNIT_ASSERT_EQUAL(neworder[0], 0);
-    CPPUNIT_ASSERT_EQUAL(neworder[1], 1);
-    CPPUNIT_ASSERT_EQUAL(neworder[2], ~2);
+    CHECK_EQ(neworder[0], 0);
+    CHECK_EQ(neworder[1], 1);
+    CHECK_EQ(neworder[2], ~2);
 
-    CPPUNIT_ASSERT_EQUAL("first", m_rearrange->GetString(0));
-    CPPUNIT_ASSERT_EQUAL("second", m_rearrange->GetString(1));
-    CPPUNIT_ASSERT_EQUAL("third", m_rearrange->GetString(2));
+    CHECK_EQ("first", m_rearrange->GetString(0));
+    CHECK_EQ("second", m_rearrange->GetString(1));
+    CHECK_EQ("third", m_rearrange->GetString(2));
 }
 
 void RearrangeListTestCase::MoveClientData()
@@ -147,13 +149,13 @@ void RearrangeListTestCase::MoveClientData()
     m_rearrange->SetSelection(2);
     m_rearrange->MoveCurrentUp();
 
-    CPPUNIT_ASSERT_EQUAL(item1data, m_rearrange->GetClientObject(0));
-    CPPUNIT_ASSERT_EQUAL(item2data, m_rearrange->GetClientObject(1));
-    CPPUNIT_ASSERT_EQUAL(item0data, m_rearrange->GetClientObject(2));
+    CHECK_EQ(item1data, m_rearrange->GetClientObject(0));
+    CHECK_EQ(item2data, m_rearrange->GetClientObject(1));
+    CHECK_EQ(item0data, m_rearrange->GetClientObject(2));
 
-    CPPUNIT_ASSERT_EQUAL("second", m_rearrange->GetString(0));
-    CPPUNIT_ASSERT_EQUAL("third", m_rearrange->GetString(1));
-    CPPUNIT_ASSERT_EQUAL("first", m_rearrange->GetString(2));
+    CHECK_EQ("second", m_rearrange->GetString(0));
+    CHECK_EQ("third", m_rearrange->GetString(1));
+    CHECK_EQ("first", m_rearrange->GetString(2));
 }
 
 #endif

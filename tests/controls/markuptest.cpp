@@ -6,6 +6,8 @@
 // Copyright:   (c) 2011 Vadim Zeitlin <vadim@wxwidgets.org>
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -103,8 +105,8 @@ void MarkupTestCase::RoundTrip()
 
                 case wxMarkupSpanAttributes::Size_Symbolic:
                     {
-                        CPPUNIT_ASSERT( attrs.m_fontSize >= -3 );
-                        CPPUNIT_ASSERT( attrs.m_fontSize <= 3 );
+                        CHECK( attrs.m_fontSize >= -3 );
+                        CHECK( attrs.m_fontSize <= 3 );
                         static const char *cssSizes[] =
                         {
                             "xx-small", "x-small", "small",
@@ -144,16 +146,16 @@ void MarkupTestCase::RoundTrip()
 
     #define CHECK_PARSES_OK(text) \
         output.Reset(); \
-        CPPUNIT_ASSERT( parser.Parse(text) ); \
-        CPPUNIT_ASSERT_EQUAL( text, output.GetText() )
+        CHECK( parser.Parse(text) ); \
+        CHECK_EQ( text, output.GetText() )
 
     #define CHECK_PARSES_AS(text, result) \
         output.Reset(); \
-        CPPUNIT_ASSERT( parser.Parse(text) ); \
-        CPPUNIT_ASSERT_EQUAL( result, output.GetText() )
+        CHECK( parser.Parse(text) ); \
+        CHECK_EQ( result, output.GetText() )
 
     #define CHECK_DOESNT_PARSE(text) \
-        CPPUNIT_ASSERT( !parser.Parse(text) )
+        CHECK( !parser.Parse(text) )
 
     CHECK_PARSES_OK( "" );
     CHECK_PARSES_OK( "foo" );
@@ -189,17 +191,17 @@ void MarkupTestCase::RoundTrip()
 
 void MarkupTestCase::Quote()
 {
-    CPPUNIT_ASSERT_EQUAL( "", wxMarkupParser::Quote("") );
-    CPPUNIT_ASSERT_EQUAL( "foo", wxMarkupParser::Quote("foo") );
-    CPPUNIT_ASSERT_EQUAL( "&lt;foo&gt;", wxMarkupParser::Quote("<foo>") );
-    CPPUNIT_ASSERT_EQUAL( "B&amp;B", wxMarkupParser::Quote("B&B") );
-    CPPUNIT_ASSERT_EQUAL( "&quot;&quot;", wxMarkupParser::Quote("\"\"") );
+    CHECK_EQ( "", wxMarkupParser::Quote("") );
+    CHECK_EQ( "foo", wxMarkupParser::Quote("foo") );
+    CHECK_EQ( "&lt;foo&gt;", wxMarkupParser::Quote("<foo>") );
+    CHECK_EQ( "B&amp;B", wxMarkupParser::Quote("B&B") );
+    CHECK_EQ( "&quot;&quot;", wxMarkupParser::Quote("\"\"") );
 }
 
 void MarkupTestCase::Strip()
 {
     #define CHECK_STRIP( text, stripped ) \
-        CPPUNIT_ASSERT_EQUAL( stripped, wxMarkupParser::Strip(text) )
+        CHECK_EQ( stripped, wxMarkupParser::Strip(text) )
 
     CHECK_STRIP( "", "" );
     CHECK_STRIP( "foo", "foo" );

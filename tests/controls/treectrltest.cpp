@@ -11,6 +11,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_TREECTRL
@@ -165,79 +167,79 @@ void TreeCtrlTestCase::tearDown()
 
 void TreeCtrlTestCase::HasChildren()
 {
-    CPPUNIT_ASSERT( m_tree->HasChildren(m_root) );
-    CPPUNIT_ASSERT( m_tree->HasChildren(m_child1) );
-    CPPUNIT_ASSERT( !m_tree->HasChildren(m_child2) );
-    CPPUNIT_ASSERT( !m_tree->HasChildren(m_grandchild) );
+    CHECK( m_tree->HasChildren(m_root) );
+    CHECK( m_tree->HasChildren(m_child1) );
+    CHECK( !m_tree->HasChildren(m_child2) );
+    CHECK( !m_tree->HasChildren(m_grandchild) );
 }
 
 void TreeCtrlTestCase::GetCount()
 {
-    CPPUNIT_ASSERT_EQUAL(3, m_tree->GetCount());
+    CHECK_EQ(3, m_tree->GetCount());
 }
 
 void TreeCtrlTestCase::SelectItemSingle()
 {
     // this test should be only ran in single-selection control
-    CPPUNIT_ASSERT( !m_tree->HasFlag(wxTR_MULTIPLE) );
+    CHECK( !m_tree->HasFlag(wxTR_MULTIPLE) );
 
     // initially nothing is selected
-    CPPUNIT_ASSERT( !m_tree->IsSelected(m_child1) );
+    CHECK( !m_tree->IsSelected(m_child1) );
 
     // selecting an item should make it selected
     m_tree->SelectItem(m_child1);
-    CPPUNIT_ASSERT( m_tree->IsSelected(m_child1) );
+    CHECK( m_tree->IsSelected(m_child1) );
 
     // selecting it again shouldn't change anything
     m_tree->SelectItem(m_child1);
-    CPPUNIT_ASSERT( m_tree->IsSelected(m_child1) );
+    CHECK( m_tree->IsSelected(m_child1) );
 
     // selecting another item should switch the selection to it
     m_tree->SelectItem(m_child2);
-    CPPUNIT_ASSERT( !m_tree->IsSelected(m_child1) );
-    CPPUNIT_ASSERT( m_tree->IsSelected(m_child2) );
+    CHECK( !m_tree->IsSelected(m_child1) );
+    CHECK( m_tree->IsSelected(m_child2) );
 
     // selecting it again still shouldn't change anything
     m_tree->SelectItem(m_child2);
-    CPPUNIT_ASSERT( !m_tree->IsSelected(m_child1) );
-    CPPUNIT_ASSERT( m_tree->IsSelected(m_child2) );
+    CHECK( !m_tree->IsSelected(m_child1) );
+    CHECK( m_tree->IsSelected(m_child2) );
 
     // deselecting an item should remove the selection entirely
     m_tree->UnselectItem(m_child2);
-    CPPUNIT_ASSERT( !m_tree->IsSelected(m_child1) );
-    CPPUNIT_ASSERT( !m_tree->IsSelected(m_child2) );
+    CHECK( !m_tree->IsSelected(m_child1) );
+    CHECK( !m_tree->IsSelected(m_child2) );
 }
 
 void TreeCtrlTestCase::SelectItemMulti()
 {
     // this test should be only ran in multi-selection control
-    CPPUNIT_ASSERT( m_tree->HasFlag(wxTR_MULTIPLE) );
+    CHECK( m_tree->HasFlag(wxTR_MULTIPLE) );
 
     // initially nothing is selected
-    CPPUNIT_ASSERT( !m_tree->IsSelected(m_child1) );
+    CHECK( !m_tree->IsSelected(m_child1) );
 
     // selecting an item should make it selected
     m_tree->SelectItem(m_child1);
-    CPPUNIT_ASSERT( m_tree->IsSelected(m_child1) );
+    CHECK( m_tree->IsSelected(m_child1) );
 
     // selecting it again shouldn't change anything
     m_tree->SelectItem(m_child1);
-    CPPUNIT_ASSERT( m_tree->IsSelected(m_child1) );
+    CHECK( m_tree->IsSelected(m_child1) );
 
     // selecting another item shouldn't deselect the previously selected one
     m_tree->SelectItem(m_child2);
-    CPPUNIT_ASSERT( m_tree->IsSelected(m_child1) );
-    CPPUNIT_ASSERT( m_tree->IsSelected(m_child2) );
+    CHECK( m_tree->IsSelected(m_child1) );
+    CHECK( m_tree->IsSelected(m_child2) );
 
     // selecting it again still shouldn't change anything
     m_tree->SelectItem(m_child2);
-    CPPUNIT_ASSERT( m_tree->IsSelected(m_child1) );
-    CPPUNIT_ASSERT( m_tree->IsSelected(m_child2) );
+    CHECK( m_tree->IsSelected(m_child1) );
+    CHECK( m_tree->IsSelected(m_child2) );
 
     // deselecting one of the items should leave the others selected
     m_tree->UnselectItem(m_child1);
-    CPPUNIT_ASSERT( !m_tree->IsSelected(m_child1) );
-    CPPUNIT_ASSERT( m_tree->IsSelected(m_child2) );
+    CHECK( !m_tree->IsSelected(m_child1) );
+    CHECK( m_tree->IsSelected(m_child2) );
 
     // collapsing a branch with selected items should still leave them selected
     m_tree->Expand(m_child1);
@@ -272,8 +274,8 @@ void TreeCtrlTestCase::ItemClick()
     sim.MouseClick(wxMOUSE_BTN_RIGHT);
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, activated.GetCount());
-    CPPUNIT_ASSERT_EQUAL(1, rclick.GetCount());
+    CHECK_EQ(1, activated.GetCount());
+    CHECK_EQ(1, rclick.GetCount());
 #endif // wxUSE_UIACTIONSIMULATOR
 }
 
@@ -285,7 +287,7 @@ void TreeCtrlTestCase::DeleteItem()
     m_tree->AppendItem(todelete, "deleteme2");
     m_tree->Delete(todelete);
 
-    CPPUNIT_ASSERT_EQUAL(2, deleteitem.GetCount());
+    CHECK_EQ(2, deleteitem.GetCount());
 }
 
 void TreeCtrlTestCase::DeleteChildren()
@@ -322,12 +324,12 @@ void TreeCtrlTestCase::LabelEdit()
     sim.Text("newroottext");
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, beginedit.GetCount());
+    CHECK_EQ(1, beginedit.GetCount());
 
     sim.Char(WXK_RETURN);
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, endedit.GetCount());
+    CHECK_EQ(1, endedit.GetCount());
 }
 
 void TreeCtrlTestCase::KeyDown()
@@ -340,7 +342,7 @@ void TreeCtrlTestCase::KeyDown()
     sim.Text("aAbB");
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(6, keydown.GetCount());
+    CHECK_EQ(6, keydown.GetCount());
 }
 
 void TreeCtrlTestCase::CollapseExpandEvents()
@@ -372,8 +374,8 @@ void TreeCtrlTestCase::CollapseExpandEvents()
     sim.MouseDblClick();
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, expanding.GetCount());
-    CPPUNIT_ASSERT_EQUAL(1, expanded.GetCount());
+    CHECK_EQ(1, expanding.GetCount());
+    CHECK_EQ(1, expanded.GetCount());
 
 #ifdef __WXGTK__
     // Don't even know the reason why, but GTK has to sleep
@@ -384,8 +386,8 @@ void TreeCtrlTestCase::CollapseExpandEvents()
     sim.MouseDblClick();
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, collapsing.GetCount());
-    CPPUNIT_ASSERT_EQUAL(1, collapsed.GetCount());
+    CHECK_EQ(1, collapsing.GetCount());
+    CHECK_EQ(1, collapsed.GetCount());
 }
 
 void TreeCtrlTestCase::SelectionChange()
@@ -419,8 +421,8 @@ void TreeCtrlTestCase::SelectionChange()
     sim.MouseClick();
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, changed.GetCount());
-    CPPUNIT_ASSERT_EQUAL(1, changing.GetCount());
+    CHECK_EQ(1, changed.GetCount());
+    CHECK_EQ(1, changing.GetCount());
 
     sim.MouseMove(point2);
     wxYield();
@@ -428,8 +430,8 @@ void TreeCtrlTestCase::SelectionChange()
     sim.MouseClick();
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(2, changed.GetCount());
-    CPPUNIT_ASSERT_EQUAL(2, changing.GetCount());
+    CHECK_EQ(2, changed.GetCount());
+    CHECK_EQ(2, changing.GetCount());
 }
 
 void TreeCtrlTestCase::Menu()
@@ -449,7 +451,7 @@ void TreeCtrlTestCase::Menu()
     sim.MouseClick(wxMOUSE_BTN_RIGHT);
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, menu.GetCount());
+    CHECK_EQ(1, menu.GetCount());
 }
 
 #endif // wxUSE_UIACTIONSIMULATOR
@@ -462,76 +464,76 @@ void TreeCtrlTestCase::ItemData()
 
     m_tree->SetItemData(m_child1, child1data);
 
-    CPPUNIT_ASSERT_EQUAL(child1data, m_tree->GetItemData(m_child1));
-    CPPUNIT_ASSERT_EQUAL(m_child1, child1data->GetId());
+    CHECK_EQ(child1data, m_tree->GetItemData(m_child1));
+    CHECK_EQ(m_child1, child1data->GetId());
 
     wxTreeItemId append = m_tree->AppendItem(m_root, "new", -1, -1, appenddata);
 
-    CPPUNIT_ASSERT_EQUAL(appenddata, m_tree->GetItemData(append));
-    CPPUNIT_ASSERT_EQUAL(append, appenddata->GetId());
+    CHECK_EQ(appenddata, m_tree->GetItemData(append));
+    CHECK_EQ(append, appenddata->GetId());
 
     wxTreeItemId insert = m_tree->InsertItem(m_root, m_child1, "new", -1, -1,
                                              insertdata);
 
-    CPPUNIT_ASSERT_EQUAL(insertdata, m_tree->GetItemData(insert));
-    CPPUNIT_ASSERT_EQUAL(insert, insertdata->GetId());
+    CHECK_EQ(insertdata, m_tree->GetItemData(insert));
+    CHECK_EQ(insert, insertdata->GetId());
 }
 
 void TreeCtrlTestCase::Iteration()
 {
     // Get first / next / last child
     wxTreeItemIdValue cookie;
-    CPPUNIT_ASSERT_EQUAL(m_tree->GetFirstChild(m_root, cookie), m_child1);
-    CPPUNIT_ASSERT_EQUAL(m_tree->GetNextChild(m_root, cookie),
+    CHECK_EQ(m_tree->GetFirstChild(m_root, cookie), m_child1);
+    CHECK_EQ(m_tree->GetNextChild(m_root, cookie),
                          m_tree->GetLastChild(m_root));
-    CPPUNIT_ASSERT_EQUAL(m_child2, m_tree->GetLastChild(m_root));
+    CHECK_EQ(m_child2, m_tree->GetLastChild(m_root));
 
     // Get next / previous sibling
-    CPPUNIT_ASSERT_EQUAL(m_child2, m_tree->GetNextSibling(m_child1));
-    CPPUNIT_ASSERT_EQUAL(m_child1, m_tree->GetPrevSibling(m_child2));
+    CHECK_EQ(m_child2, m_tree->GetNextSibling(m_child1));
+    CHECK_EQ(m_child1, m_tree->GetPrevSibling(m_child2));
 }
 
 void TreeCtrlTestCase::Parent()
 {
-    CPPUNIT_ASSERT_EQUAL(m_root, m_tree->GetRootItem());
-    CPPUNIT_ASSERT_EQUAL(m_root, m_tree->GetItemParent(m_child1));
-    CPPUNIT_ASSERT_EQUAL(m_root, m_tree->GetItemParent(m_child2));
-    CPPUNIT_ASSERT_EQUAL(m_child1, m_tree->GetItemParent(m_grandchild));
+    CHECK_EQ(m_root, m_tree->GetRootItem());
+    CHECK_EQ(m_root, m_tree->GetItemParent(m_child1));
+    CHECK_EQ(m_root, m_tree->GetItemParent(m_child2));
+    CHECK_EQ(m_child1, m_tree->GetItemParent(m_grandchild));
 }
 
 void TreeCtrlTestCase::CollapseExpand()
 {
     m_tree->ExpandAll();
 
-    CPPUNIT_ASSERT(m_tree->IsExpanded(m_root));
-    CPPUNIT_ASSERT(m_tree->IsExpanded(m_child1));
+    CHECK(m_tree->IsExpanded(m_root));
+    CHECK(m_tree->IsExpanded(m_child1));
 
     m_tree->CollapseAll();
 
-    CPPUNIT_ASSERT(!m_tree->IsExpanded(m_root));
-    CPPUNIT_ASSERT(!m_tree->IsExpanded(m_child1));
+    CHECK(!m_tree->IsExpanded(m_root));
+    CHECK(!m_tree->IsExpanded(m_child1));
 
     m_tree->ExpandAllChildren(m_root);
 
-    CPPUNIT_ASSERT(m_tree->IsExpanded(m_root));
-    CPPUNIT_ASSERT(m_tree->IsExpanded(m_child1));
+    CHECK(m_tree->IsExpanded(m_root));
+    CHECK(m_tree->IsExpanded(m_child1));
 
     m_tree->CollapseAllChildren(m_child1);
 
-    CPPUNIT_ASSERT(!m_tree->IsExpanded(m_child1));
+    CHECK(!m_tree->IsExpanded(m_child1));
 
     m_tree->Expand(m_child1);
 
-    CPPUNIT_ASSERT(m_tree->IsExpanded(m_child1));
+    CHECK(m_tree->IsExpanded(m_child1));
 
     m_tree->Collapse(m_root);
 
-    CPPUNIT_ASSERT(!m_tree->IsExpanded(m_root));
-    CPPUNIT_ASSERT(m_tree->IsExpanded(m_child1));
+    CHECK(!m_tree->IsExpanded(m_root));
+    CHECK(m_tree->IsExpanded(m_child1));
 
     m_tree->CollapseAndReset(m_root);
 
-    CPPUNIT_ASSERT(!m_tree->IsExpanded(m_root));
+    CHECK(!m_tree->IsExpanded(m_root));
 }
 
 void TreeCtrlTestCase::AssignImageList()
@@ -547,54 +549,54 @@ void TreeCtrlTestCase::AssignImageList()
     m_tree->AssignImageList(imagelist);
     m_tree->AssignStateImageList(statelist);
 
-    CPPUNIT_ASSERT_EQUAL(imagelist, m_tree->GetImageList());
-    CPPUNIT_ASSERT_EQUAL(statelist, m_tree->GetStateImageList());
+    CHECK_EQ(imagelist, m_tree->GetImageList());
+    CHECK_EQ(statelist, m_tree->GetStateImageList());
 }
 
 void TreeCtrlTestCase::Focus()
 {
     m_tree->SetFocusedItem(m_child1);
 
-    CPPUNIT_ASSERT_EQUAL(m_child1, m_tree->GetFocusedItem());
+    CHECK_EQ(m_child1, m_tree->GetFocusedItem());
 
     m_tree->ClearFocusedItem();
 
-    CPPUNIT_ASSERT(!m_tree->GetFocusedItem());
+    CHECK(!m_tree->GetFocusedItem());
 }
 
 void TreeCtrlTestCase::Bold()
 {
-    CPPUNIT_ASSERT(!m_tree->IsBold(m_child1));
+    CHECK(!m_tree->IsBold(m_child1));
 
     m_tree->SetItemBold(m_child1);
 
-    CPPUNIT_ASSERT(m_tree->IsBold(m_child1));
+    CHECK(m_tree->IsBold(m_child1));
 
     m_tree->SetItemBold(m_child1, false);
 
-    CPPUNIT_ASSERT(!m_tree->IsBold(m_child1));
+    CHECK(!m_tree->IsBold(m_child1));
 }
 
 void TreeCtrlTestCase::Visible()
 {
     m_tree->CollapseAll();
 
-    CPPUNIT_ASSERT(m_tree->IsVisible(m_root));
-    CPPUNIT_ASSERT(!m_tree->IsVisible(m_child1));
+    CHECK(m_tree->IsVisible(m_root));
+    CHECK(!m_tree->IsVisible(m_child1));
 
     m_tree->EnsureVisible(m_grandchild);
 
-    CPPUNIT_ASSERT(m_tree->IsVisible(m_grandchild));
+    CHECK(m_tree->IsVisible(m_grandchild));
 
     m_tree->ExpandAll();
 
-    CPPUNIT_ASSERT_EQUAL(m_root, m_tree->GetFirstVisibleItem());
-    CPPUNIT_ASSERT_EQUAL(m_child1, m_tree->GetNextVisible(m_root));
-    CPPUNIT_ASSERT_EQUAL(m_grandchild, m_tree->GetNextVisible(m_child1));
-    CPPUNIT_ASSERT_EQUAL(m_child2, m_tree->GetNextVisible(m_grandchild));
+    CHECK_EQ(m_root, m_tree->GetFirstVisibleItem());
+    CHECK_EQ(m_child1, m_tree->GetNextVisible(m_root));
+    CHECK_EQ(m_grandchild, m_tree->GetNextVisible(m_child1));
+    CHECK_EQ(m_child2, m_tree->GetNextVisible(m_grandchild));
 
-    CPPUNIT_ASSERT(!m_tree->GetNextVisible(m_child2));
-    CPPUNIT_ASSERT(!m_tree->GetPrevVisible(m_root));
+    CHECK(!m_tree->GetNextVisible(m_child2));
+    CHECK(!m_tree->GetPrevVisible(m_root));
 }
 
 void TreeCtrlTestCase::Sort()
@@ -606,10 +608,10 @@ void TreeCtrlTestCase::Sort()
 
     wxTreeItemIdValue cookie;
 
-    CPPUNIT_ASSERT_EQUAL(aitem, m_tree->GetFirstChild(m_root, cookie));
-    CPPUNIT_ASSERT_EQUAL(m_child1, m_tree->GetNextChild(m_root, cookie));
-    CPPUNIT_ASSERT_EQUAL(m_child2, m_tree->GetNextChild(m_root, cookie));
-    CPPUNIT_ASSERT_EQUAL(zitem, m_tree->GetNextChild(m_root, cookie));
+    CHECK_EQ(aitem, m_tree->GetFirstChild(m_root, cookie));
+    CHECK_EQ(m_child1, m_tree->GetNextChild(m_root, cookie));
+    CHECK_EQ(m_child2, m_tree->GetNextChild(m_root, cookie));
+    CHECK_EQ(zitem, m_tree->GetNextChild(m_root, cookie));
 }
 
 void TreeCtrlTestCase::KeyNavigation()
@@ -626,7 +628,7 @@ void TreeCtrlTestCase::KeyNavigation()
     sim.Char(WXK_RIGHT);
     wxYield();
 
-    CPPUNIT_ASSERT(m_tree->IsExpanded(m_root));
+    CHECK(m_tree->IsExpanded(m_root));
 
 #ifdef wxHAS_GENERIC_TREECTRL
     sim.Char('-');
@@ -636,7 +638,7 @@ void TreeCtrlTestCase::KeyNavigation()
 
     wxYield();
 
-    CPPUNIT_ASSERT(!m_tree->IsExpanded(m_root));
+    CHECK(!m_tree->IsExpanded(m_root));
 
     wxYield();
 
@@ -644,12 +646,12 @@ void TreeCtrlTestCase::KeyNavigation()
     sim.Char(WXK_DOWN);
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(m_child1, m_tree->GetSelection());
+    CHECK_EQ(m_child1, m_tree->GetSelection());
 
     sim.Char(WXK_DOWN);
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(m_child2, m_tree->GetSelection());
+    CHECK_EQ(m_child2, m_tree->GetSelection());
 #endif
 }
 

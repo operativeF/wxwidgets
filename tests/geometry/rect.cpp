@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -55,10 +57,10 @@ void RectTestCase::CentreIn()
 {
     typedef wxRect R;
 
-    CPPUNIT_ASSERT_EQUAL( R(45, 45, 10, 10),
+    CHECK_EQ( R(45, 45, 10, 10),
                           R(0, 0, 10, 10).CentreIn(R(0, 0, 100, 100)));
 
-    CPPUNIT_ASSERT_EQUAL( R(-5, -5, 20, 20),
+    CHECK_EQ( R(-5, -5, 20, 20),
                           R(0, 0, 20, 20).CentreIn(R(0, 0, 10, 10)));
 }
 
@@ -67,15 +69,15 @@ void RectTestCase::InflateDeflate()
     // This is the rectangle from the example in the documentation of wxRect::Inflate().
     const wxRect r1(10, 10, 20, 40);
 
-    CPPUNIT_ASSERT(r1.Inflate( 10,  10)==wxRect(  0,   0, 40,  60));
-    CPPUNIT_ASSERT(r1.Inflate( 20,  30)==wxRect(-10, -20, 60, 100));
-    CPPUNIT_ASSERT(r1.Inflate(-10, -10)==wxRect( 20,  20,  0,  20));
-    CPPUNIT_ASSERT(r1.Inflate(-15, -15)==wxRect( 20,  25,  0,  10));
+    CHECK(r1.Inflate( 10,  10)==wxRect(  0,   0, 40,  60));
+    CHECK(r1.Inflate( 20,  30)==wxRect(-10, -20, 60, 100));
+    CHECK(r1.Inflate(-10, -10)==wxRect( 20,  20,  0,  20));
+    CHECK(r1.Inflate(-15, -15)==wxRect( 20,  25,  0,  10));
 
-    CPPUNIT_ASSERT(r1.Inflate( 10,  10)==r1.Deflate(-10, -10));
-    CPPUNIT_ASSERT(r1.Inflate( 20,  30)==r1.Deflate(-20, -30));
-    CPPUNIT_ASSERT(r1.Inflate(-10, -10)==r1.Deflate( 10,  10));
-    CPPUNIT_ASSERT(r1.Inflate(-15, -15)==r1.Deflate( 15,  15));
+    CHECK(r1.Inflate( 10,  10)==r1.Deflate(-10, -10));
+    CHECK(r1.Inflate( 20,  30)==r1.Deflate(-20, -30));
+    CHECK(r1.Inflate(-10, -10)==r1.Deflate( 10,  10));
+    CHECK(r1.Inflate(-15, -15)==r1.Deflate( 15,  15));
 }
 
 void RectTestCase::Operators()
@@ -105,11 +107,11 @@ void RectTestCase::Operators()
     {
         const RectData& data = s_rects[n];
 
-        CPPUNIT_ASSERT(
+        CHECK(
             ( data.GetFirst() + data.GetSecond() ) == data.GetResult()
         );
 
-        CPPUNIT_ASSERT(
+        CHECK(
             ( data.GetSecond() + data.GetFirst() ) == data.GetResult()
         );
     }
@@ -118,9 +120,9 @@ void RectTestCase::Operators()
     wxRect r1 = wxRect(0, 2, 3, 4);
     wxRect r2 = wxRect(1, 2, 7, 8);
     r1 *= r2;
-    CPPUNIT_ASSERT(wxRect(1, 2, 2, 4) == r1);
+    CHECK(wxRect(1, 2, 2, 4) == r1);
 
-    CPPUNIT_ASSERT( (r1 * wxRect()).IsEmpty() );
+    CHECK( (r1 * wxRect()).IsEmpty() );
 }
 
 void RectTestCase::Union()
@@ -149,11 +151,11 @@ void RectTestCase::Union()
     {
         const RectData& data = s_rects[n];
 
-        CPPUNIT_ASSERT(
+        CHECK(
             data.GetFirst().Union(data.GetSecond()) == data.GetResult()
         );
 
-        CPPUNIT_ASSERT(
+        CHECK(
             data.GetSecond().Union(data.GetFirst()) == data.GetResult()
         );
     }

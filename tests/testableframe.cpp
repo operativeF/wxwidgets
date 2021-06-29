@@ -7,6 +7,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 // For compilers that support precompilation, includes "wx/wx.h".
+
+#include "doctest.h"
+
 #include "testprec.h"
 
 

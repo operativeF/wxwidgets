@@ -120,19 +120,19 @@ void ComboBoxTestCase::Size()
 
     // check that the height doesn't change if we don't touch it
     m_combo->SetSize(100, -1);
-    CPPUNIT_ASSERT_EQUAL( heightOrig, m_combo->GetSize().y );
+    CHECK_EQ( heightOrig, m_combo->GetSize().y );
 
     // check that setting both big and small (but not too small, there is a
     // limit on how small the control can become under MSW) heights works
     m_combo->SetSize(-1, 50);
-    CPPUNIT_ASSERT_EQUAL( 50, m_combo->GetSize().y );
+    CHECK_EQ( 50, m_combo->GetSize().y );
 
     m_combo->SetSize(-1, 10);
-    CPPUNIT_ASSERT_EQUAL( 10, m_combo->GetSize().y );
+    CHECK_EQ( 10, m_combo->GetSize().y );
 
     // and also that restoring it works (this used to be broken before 2.9.1)
     m_combo->SetSize(-1, heightOrig);
-    CPPUNIT_ASSERT_EQUAL( heightOrig, m_combo->GetSize().y );
+    CHECK_EQ( heightOrig, m_combo->GetSize().y );
 }
 
 void ComboBoxTestCase::PopDismiss()
@@ -142,7 +142,7 @@ void ComboBoxTestCase::PopDismiss()
     EventCounter close(m_combo, wxEVT_COMBOBOX_CLOSEUP);
 
     m_combo->Popup();
-    CPPUNIT_ASSERT_EQUAL(1, drop.GetCount());
+    CHECK_EQ(1, drop.GetCount());
 
     m_combo->Dismiss();
 
@@ -152,7 +152,7 @@ void ComboBoxTestCase::PopDismiss()
     wxYield();
 #endif // wxGTK2
 
-    CPPUNIT_ASSERT_EQUAL(1, close.GetCount());
+    CHECK_EQ(1, close.GetCount());
 #endif
 }
 
@@ -171,16 +171,16 @@ void ComboBoxTestCase::Sort()
     m_combo->Append("aab");
     m_combo->Append("AAA");
 
-    CPPUNIT_ASSERT_EQUAL("AAA", m_combo->GetString(0));
-    CPPUNIT_ASSERT_EQUAL("Aaa", m_combo->GetString(1));
-    CPPUNIT_ASSERT_EQUAL("aaa", m_combo->GetString(2));
-    CPPUNIT_ASSERT_EQUAL("aaab", m_combo->GetString(3));
-    CPPUNIT_ASSERT_EQUAL("aab", m_combo->GetString(4));
-    CPPUNIT_ASSERT_EQUAL("aba", m_combo->GetString(5));
+    CHECK_EQ("AAA", m_combo->GetString(0));
+    CHECK_EQ("Aaa", m_combo->GetString(1));
+    CHECK_EQ("aaa", m_combo->GetString(2));
+    CHECK_EQ("aaab", m_combo->GetString(3));
+    CHECK_EQ("aab", m_combo->GetString(4));
+    CHECK_EQ("aba", m_combo->GetString(5));
 
     m_combo->Append("a");
 
-    CPPUNIT_ASSERT_EQUAL("a", m_combo->GetString(0));
+    CHECK_EQ("a", m_combo->GetString(0));
 #endif
 }
 
@@ -197,34 +197,34 @@ void ComboBoxTestCase::ReadOnly()
 
     m_combo->SetValue("item 1");
 
-    CPPUNIT_ASSERT_EQUAL("item 1", m_combo->GetValue());
+    CHECK_EQ("item 1", m_combo->GetValue());
 
     m_combo->SetValue("not an item");
 
-    CPPUNIT_ASSERT_EQUAL("item 1", m_combo->GetValue());
+    CHECK_EQ("item 1", m_combo->GetValue());
 
     // Since this uses FindString it is case insensitive
     m_combo->SetValue("ITEM 2");
 
-    CPPUNIT_ASSERT_EQUAL("item 2", m_combo->GetValue());
+    CHECK_EQ("item 2", m_combo->GetValue());
 }
 
 void ComboBoxTestCase::IsEmpty()
 {
-    CPPUNIT_ASSERT( m_combo->IsListEmpty() );
-    CPPUNIT_ASSERT( m_combo->IsTextEmpty() );
+    CHECK( m_combo->IsListEmpty() );
+    CHECK( m_combo->IsTextEmpty() );
 
     m_combo->Append("foo");
-    CPPUNIT_ASSERT( !m_combo->IsListEmpty() );
-    CPPUNIT_ASSERT( m_combo->IsTextEmpty() );
+    CHECK( !m_combo->IsListEmpty() );
+    CHECK( m_combo->IsTextEmpty() );
 
     m_combo->SetValue("bar");
-    CPPUNIT_ASSERT( !m_combo->IsListEmpty() );
-    CPPUNIT_ASSERT( !m_combo->IsTextEmpty() );
+    CHECK( !m_combo->IsListEmpty() );
+    CHECK( !m_combo->IsTextEmpty() );
 
     m_combo->Clear();
-    CPPUNIT_ASSERT( m_combo->IsListEmpty() );
-    CPPUNIT_ASSERT( m_combo->IsTextEmpty() );
+    CHECK( m_combo->IsListEmpty() );
+    CHECK( m_combo->IsTextEmpty() );
 
 #ifdef TEST_INVALID_COMBOBOX_ISEMPTY
     // Compiling this should fail, see failtest target definition in test.bkl.

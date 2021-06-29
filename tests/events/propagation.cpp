@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -303,7 +305,7 @@ void EventPropagationTestCase::OneHandler()
     wxCommandEvent event(TEST_EVT);
     TestEvtHandler h1('1');
     h1.ProcessEvent(event);
-    CPPUNIT_ASSERT_EQUAL( "oa1A", g_str );
+    CHECK_EQ( "oa1A", g_str );
 }
 
 void EventPropagationTestCase::TwoHandlers()
@@ -314,7 +316,7 @@ void EventPropagationTestCase::TwoHandlers()
     h1.SetNextHandler(&h2);
     h2.SetPreviousHandler(&h1);
     h1.ProcessEvent(event);
-    CPPUNIT_ASSERT_EQUAL( "oa1o2A", g_str );
+    CHECK_EQ( "oa1o2A", g_str );
 }
 
 void EventPropagationTestCase::WindowWithoutHandler()
@@ -326,7 +328,7 @@ void EventPropagationTestCase::WindowWithoutHandler()
     TestWindow * const child = new TestWindow(parent, 'c');
 
     child->GetEventHandler()->ProcessEvent(event);
-    CPPUNIT_ASSERT_EQUAL( "acpA", g_str );
+    CHECK_EQ( "acpA", g_str );
 }
 
 void EventPropagationTestCase::WindowWithHandler()
@@ -345,7 +347,7 @@ void EventPropagationTestCase::WindowWithHandler()
     wxON_BLOCK_EXIT_OBJ1( *child, wxWindow::PopEventHandler, false );
 
     child->HandleWindowEvent(event);
-    CPPUNIT_ASSERT_EQUAL( "oa2o1cpA", g_str );
+    CHECK_EQ( "oa2o1cpA", g_str );
 }
 
 void EventPropagationTestCase::ForwardEvent()
@@ -379,7 +381,7 @@ void EventPropagationTestCase::ForwardEvent()
     // First send the event directly to f.
     wxCommandEvent event1(TEST_EVT);
     f.ProcessEvent(event1);
-    CPPUNIT_ASSERT_EQUAL( "foa1wA", g_str );
+    CHECK_EQ( "foa1wA", g_str );
     g_str.clear();
 
     // And then also test sending it to f indirectly.
@@ -387,7 +389,7 @@ void EventPropagationTestCase::ForwardEvent()
     TestEvtHandler h2('2');
     h2.SetNextHandler(&f);
     h2.ProcessEvent(event2);
-    CPPUNIT_ASSERT_EQUAL( "oa2fo1wAA", g_str );
+    CHECK_EQ( "oa2fo1wAA", g_str );
 }
 
 void EventPropagationTestCase::ScrollWindowWithoutHandler()
@@ -399,13 +401,13 @@ void EventPropagationTestCase::ScrollWindowWithoutHandler()
 
 #ifdef CAN_TEST_PAINT_EVENTS
     win->GeneratePaintEvent();
-    CPPUNIT_ASSERT_EQUAL( "PD", g_str );
+    CHECK_EQ( "PD", g_str );
 #endif
 
     g_str.clear();
     wxCommandEvent eventCmd(TEST_EVT);
     win->HandleWindowEvent(eventCmd);
-    CPPUNIT_ASSERT_EQUAL( "apA", g_str );
+    CHECK_EQ( "apA", g_str );
 }
 
 void EventPropagationTestCase::ScrollWindowWithHandler()
@@ -421,13 +423,13 @@ void EventPropagationTestCase::ScrollWindowWithHandler()
     wxON_BLOCK_EXIT_OBJ1( *win, wxWindow::PopEventHandler, false );
 
     win->GeneratePaintEvent();
-    CPPUNIT_ASSERT_EQUAL( "ohPD", g_str );
+    CHECK_EQ( "ohPD", g_str );
 #endif
 
     g_str.clear();
     wxCommandEvent eventCmd(TEST_EVT);
     win->HandleWindowEvent(eventCmd);
-    CPPUNIT_ASSERT_EQUAL( "apA", g_str );
+    CHECK_EQ( "apA", g_str );
 }
 
 #if wxUSE_MENUS
@@ -622,7 +624,7 @@ void EventPropagationTestCase::DocView()
     g_str.clear();
     tb->OnLeftClick(wxID_APPLY, true /* doesn't matter */);
 
-    CPPUNIT_ASSERT_EQUAL( "advmcpA", g_str );
+    CHECK_EQ( "advmcpA", g_str );
 #endif // wxUSE_TOOLBAR
 }
 
@@ -680,7 +682,7 @@ void EventPropagationTestCase::ContextMenuEvent()
     // from the right mouse click event, we must dispatch the mouse messages.
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL( "cp", g_str );
+    CHECK_EQ( "cp", g_str );
 
     // For some unfathomable reason the test below sporadically fails in wxGTK
     // buildbot builds, so disable it there to avoid spurious failure reports.
@@ -695,7 +697,7 @@ void EventPropagationTestCase::ContextMenuEvent()
     sim.MouseMove(origin + wxPoint(60, 60));
     sim.MouseClick(wxMOUSE_BTN_RIGHT);
     wxYield();
-    CPPUNIT_ASSERT_EQUAL( "p", g_str );
+    CHECK_EQ( "p", g_str );
 }
 
 // Helper function: get the event propagation level.
@@ -709,20 +711,20 @@ int GetPropagationLevel(wxEvent& e)
 void EventPropagationTestCase::PropagationLevel()
 {
     wxSizeEvent se;
-    CPPUNIT_ASSERT_EQUAL( GetPropagationLevel(se), (int)wxEVENT_PROPAGATE_NONE );
+    CHECK_EQ( GetPropagationLevel(se), (int)wxEVENT_PROPAGATE_NONE );
 
     wxCommandEvent ce;
-    CPPUNIT_ASSERT_EQUAL( GetPropagationLevel(ce), (int)wxEVENT_PROPAGATE_MAX );
+    CHECK_EQ( GetPropagationLevel(ce), (int)wxEVENT_PROPAGATE_MAX );
 
     wxCommandEvent ce2(ce);
-    CPPUNIT_ASSERT_EQUAL( GetPropagationLevel(ce2), (int)wxEVENT_PROPAGATE_MAX );
+    CHECK_EQ( GetPropagationLevel(ce2), (int)wxEVENT_PROPAGATE_MAX );
 
     wxCommandEvent ce3;
     ce3.ResumePropagation(17);
-    CPPUNIT_ASSERT_EQUAL( GetPropagationLevel(ce3), 17 );
+    CHECK_EQ( GetPropagationLevel(ce3), 17 );
 
     wxCommandEvent ce4(ce3);
-    CPPUNIT_ASSERT_EQUAL( GetPropagationLevel(ce4), 17 );
+    CHECK_EQ( GetPropagationLevel(ce4), 17 );
 }
 
 #endif // wxUSE_UIACTIONSIMULATOR

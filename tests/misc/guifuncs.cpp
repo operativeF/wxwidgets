@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -69,21 +71,21 @@ void MiscGUIFuncsTestCase::DisplaySize()
     wxDisplaySize(&w, &h);
     wxSize sz = wxGetDisplaySize();
 
-    CPPUNIT_ASSERT_EQUAL( w, sz.x );
-    CPPUNIT_ASSERT_EQUAL( h, sz.y );
+    CHECK_EQ( w, sz.x );
+    CHECK_EQ( h, sz.y );
 
     // test that passing NULL works as expected, e.g. doesn't crash
     wxDisplaySize(NULL, NULL);
     wxDisplaySize(&w, NULL);
     wxDisplaySize(NULL, &h);
 
-    CPPUNIT_ASSERT_EQUAL( w, sz.x );
-    CPPUNIT_ASSERT_EQUAL( h, sz.y );
+    CHECK_EQ( w, sz.x );
+    CHECK_EQ( h, sz.y );
 
     // test that display PPI is something reasonable
     sz = wxGetDisplayPPI();
-    CPPUNIT_ASSERT( sz.x < 1000 );
-    CPPUNIT_ASSERT( sz.y < 1000 );
+    CHECK( sz.x < 1000 );
+    CHECK( sz.y < 1000 );
 }
 
 void MiscGUIFuncsTestCase::URLDataObject()
@@ -93,10 +95,10 @@ void MiscGUIFuncsTestCase::URLDataObject()
     const char * const
         url = "http://something.long.to.overwrite.plenty.memory.example.com";
     wxURLDataObject * const dobj = new wxURLDataObject(url);
-    CPPUNIT_ASSERT_EQUAL( url, dobj->GetURL() );
+    CHECK_EQ( url, dobj->GetURL() );
 
     wxClipboardLocker lockClip;
-    CPPUNIT_ASSERT( wxTheClipboard->SetData(dobj) );
+    CHECK( wxTheClipboard->SetData(dobj) );
     wxTheClipboard->Flush();
 #endif // wxUSE_DATAOBJ
 }
@@ -106,16 +108,16 @@ void MiscGUIFuncsTestCase::ParseFileDialogFilter()
     std::vector<wxString> descs;
     std::vector<wxString> filters;
 
-    CPPUNIT_ASSERT_EQUAL
+    CHECK_EQ
     (
         1,
         wxParseCommonDialogsFilter("Image files|*.jpg;*.png", descs, filters)
     );
 
-    CPPUNIT_ASSERT_EQUAL( "Image files", descs[0] );
-    CPPUNIT_ASSERT_EQUAL( "*.jpg;*.png", filters[0] );
+    CHECK_EQ( "Image files", descs[0] );
+    CHECK_EQ( "*.jpg;*.png", filters[0] );
 
-    CPPUNIT_ASSERT_EQUAL
+    CHECK_EQ
     (
         2,
         wxParseCommonDialogsFilter
@@ -125,8 +127,8 @@ void MiscGUIFuncsTestCase::ParseFileDialogFilter()
         )
     );
 
-    CPPUNIT_ASSERT_EQUAL( "*.*", filters[0] );
-    CPPUNIT_ASSERT_EQUAL( "*.py", filters[1] );
+    CHECK_EQ( "*.*", filters[0] );
+    CHECK_EQ( "*.py", filters[1] );
 
     // Test some invalid ones too.
     WX_ASSERT_FAILS_WITH_ASSERT
@@ -142,7 +144,7 @@ void MiscGUIFuncsTestCase::ParseFileDialogFilter()
 void MiscGUIFuncsTestCase::ClientToScreen()
 {
     wxWindow* const tlw = wxTheApp->GetTopWindow();
-    CPPUNIT_ASSERT( tlw );
+    CHECK( tlw );
 
     wxPanel* const
         p1 = new wxPanel(tlw, wxID_ANY, wxPoint(0, 0), wxSize(100, 50));
@@ -156,13 +158,13 @@ void MiscGUIFuncsTestCase::ClientToScreen()
 
     const wxPoint tlwOrig = tlw->ClientToScreen(wxPoint(0, 0));
 
-    CPPUNIT_ASSERT_EQUAL
+    CHECK_EQ
     (
         tlwOrig + wxPoint(0, 50),
         p2->ClientToScreen(wxPoint(0, 0))
     );
 
-    CPPUNIT_ASSERT_EQUAL
+    CHECK_EQ
     (
         tlwOrig + wxPoint(10, 60),
         b->ClientToScreen(wxPoint(0, 0))
@@ -201,7 +203,7 @@ wxString GetLabelOfWindowAtPoint(wxWindow* parent, int x, int y)
 void MiscGUIFuncsTestCase::FindWindowAtPoint()
 {
     wxWindow* const parent = wxTheApp->GetTopWindow();
-    CPPUNIT_ASSERT( parent );
+    CHECK( parent );
 
     // Set a label to allow distinguishing it from the other windows in the
     // assertion messages.

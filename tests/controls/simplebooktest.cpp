@@ -6,6 +6,8 @@
 // Copyright:   (c) 2013 Vadim Zeitlin <vadim@wxwidgets.org>
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_BOOKCTRL

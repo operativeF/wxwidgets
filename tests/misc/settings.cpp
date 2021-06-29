@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -60,7 +62,7 @@ CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( SettingsTestCase, "SettingsTestCase" );
 void SettingsTestCase::GetColour()
 {
     for (unsigned int i=wxSYS_COLOUR_SCROLLBAR; i < wxSYS_COLOUR_MAX; i++)
-        CPPUNIT_ASSERT( wxSystemSettings::GetColour((wxSystemColour)i).IsOk() );
+        CHECK( wxSystemSettings::GetColour((wxSystemColour)i).IsOk() );
 }
 
 void SettingsTestCase::GetFont()
@@ -79,8 +81,8 @@ void SettingsTestCase::GetFont()
     for (unsigned int i=0; i < WXSIZEOF(ids); i++)
     {
         const wxFont& font = wxSystemSettings::GetFont(ids[i]);
-        CPPUNIT_ASSERT( font.IsOk() );
-        CPPUNIT_ASSERT( wxFontEnumerator::IsValidFacename(font.GetFaceName()) );
+        CHECK( font.IsOk() );
+        CHECK( wxFontEnumerator::IsValidFacename(font.GetFaceName()) );
     }
 }
 
@@ -98,7 +100,7 @@ void SettingsTestCase::GlobalColours()
     };
 
     for (unsigned int i=0; i < WXSIZEOF(col); i++)
-        CPPUNIT_ASSERT( col[i].IsOk() );
+        CHECK( col[i].IsOk() );
 }
 
 void SettingsTestCase::GlobalFonts()
@@ -113,7 +115,7 @@ void SettingsTestCase::GlobalFonts()
 
     for (unsigned int i=0; i < WXSIZEOF(font); i++)
     {
-        CPPUNIT_ASSERT( font[i].IsOk() );
+        CHECK( font[i].IsOk() );
 
         const wxString facename = font[i].GetFaceName();
         if ( !facename.empty() )
@@ -143,7 +145,7 @@ void SettingsTestCase::GlobalBrushes()
     };
 
     for (unsigned int i=0; i < WXSIZEOF(brush); i++)
-        CPPUNIT_ASSERT( brush[i].IsOk() );
+        CHECK( brush[i].IsOk() );
 }
 
 void SettingsTestCase::GlobalPens()
@@ -164,5 +166,5 @@ void SettingsTestCase::GlobalPens()
     };
 
     for (unsigned int i=0; i < WXSIZEOF(pen); i++)
-        CPPUNIT_ASSERT( pen[i].IsOk() );
+        CHECK( pen[i].IsOk() );
 }

@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_LISTCTRL
@@ -77,29 +79,29 @@ void ListViewTestCase::Selection()
     m_list->Select(2);
     m_list->Select(3);
 
-    CPPUNIT_ASSERT(m_list->IsSelected(0));
-    CPPUNIT_ASSERT(!m_list->IsSelected(1));
+    CHECK(m_list->IsSelected(0));
+    CHECK(!m_list->IsSelected(1));
 
     long sel = m_list->GetFirstSelected();
 
-    CPPUNIT_ASSERT_EQUAL(0, sel);
+    CHECK_EQ(0, sel);
 
     sel = m_list->GetNextSelected(sel);
 
-    CPPUNIT_ASSERT_EQUAL(2, sel);
+    CHECK_EQ(2, sel);
 
     sel = m_list->GetNextSelected(sel);
 
-    CPPUNIT_ASSERT_EQUAL(3, sel);
+    CHECK_EQ(3, sel);
 
     sel = m_list->GetNextSelected(sel);
 
-    CPPUNIT_ASSERT_EQUAL(-1, sel);
+    CHECK_EQ(-1, sel);
 
     m_list->Select(0, false);
 
-    CPPUNIT_ASSERT(!m_list->IsSelected(0));
-    CPPUNIT_ASSERT_EQUAL(2, m_list->GetFirstSelected());
+    CHECK(!m_list->IsSelected(0));
+    CHECK_EQ(2, m_list->GetFirstSelected());
 }
 
 void ListViewTestCase::Focus()
@@ -113,13 +115,13 @@ void ListViewTestCase::Focus()
     m_list->InsertItem(2, "Item 2");
     m_list->InsertItem(3, "Item 3");
 
-    CPPUNIT_ASSERT_EQUAL(0, focused.GetCount());
-    CPPUNIT_ASSERT_EQUAL(-1, m_list->GetFocusedItem());
+    CHECK_EQ(0, focused.GetCount());
+    CHECK_EQ(-1, m_list->GetFocusedItem());
 
     m_list->Focus(0);
 
-    CPPUNIT_ASSERT_EQUAL(1, focused.GetCount());
-    CPPUNIT_ASSERT_EQUAL(0, m_list->GetFocusedItem());
+    CHECK_EQ(1, focused.GetCount());
+    CHECK_EQ(0, m_list->GetFocusedItem());
 }
 
 #endif

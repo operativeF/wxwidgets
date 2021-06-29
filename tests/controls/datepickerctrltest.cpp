@@ -6,6 +6,8 @@
 // Copyright:   (c) 2011 Vadim Zeitlin <vadim@wxwidgets.org>
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_DATEPICKCTRL
@@ -71,7 +73,7 @@ void DatePickerCtrlTestCase::Value()
     const wxDateTime dt(18, wxDateTime::Jul, 2011);
     m_datepicker->SetValue(dt);
 
-    CPPUNIT_ASSERT_EQUAL( dt, m_datepicker->GetValue() );
+    CHECK_EQ( dt, m_datepicker->GetValue() );
 
     // We don't use wxDP_ALLOWNONE currently, hence a value is required.
     WX_ASSERT_FAILS_WITH_ASSERT( m_datepicker->SetValue(wxDateTime()) );
@@ -88,7 +90,7 @@ void DatePickerCtrlTestCase::Range()
     // therefore we should omit this assertion for QT
 #ifndef __WXQT__
     m_datepicker->GetRange(&dtRangeStart, &dtRangeEnd);
-    CPPUNIT_ASSERT( !dtRangeEnd.IsValid() );
+    CHECK( !dtRangeEnd.IsValid() );
 #endif
 
     // After we set it we should be able to get it back.
@@ -97,32 +99,32 @@ void DatePickerCtrlTestCase::Range()
         dtEnd(18, wxDateTime::Jun, 2011);
 
     m_datepicker->SetRange(dtStart, dtEnd);
-    CPPUNIT_ASSERT( m_datepicker->GetRange(&dtRangeStart, &dtRangeEnd) );
-    CPPUNIT_ASSERT_EQUAL( dtStart, dtRangeStart );
-    CPPUNIT_ASSERT_EQUAL( dtEnd, dtRangeEnd );
+    CHECK( m_datepicker->GetRange(&dtRangeStart, &dtRangeEnd) );
+    CHECK_EQ( dtStart, dtRangeStart );
+    CHECK_EQ( dtEnd, dtRangeEnd );
 
     // Setting dates inside the range should work, including the range end
     // points.
     m_datepicker->SetValue(dtStart);
-    CPPUNIT_ASSERT_EQUAL( dtStart, m_datepicker->GetValue() );
+    CHECK_EQ( dtStart, m_datepicker->GetValue() );
 
     m_datepicker->SetValue(dtEnd);
-    CPPUNIT_ASSERT_EQUAL( dtEnd, m_datepicker->GetValue() );
+    CHECK_EQ( dtEnd, m_datepicker->GetValue() );
 
 
     // Setting dates outside the range should not work.
     m_datepicker->SetValue(dtEnd + wxTimeSpan::Day());
-    CPPUNIT_ASSERT_EQUAL( dtEnd, m_datepicker->GetValue() );
+    CHECK_EQ( dtEnd, m_datepicker->GetValue() );
 
     m_datepicker->SetValue(dtStart - wxTimeSpan::Day());
-    CPPUNIT_ASSERT_EQUAL( dtEnd, m_datepicker->GetValue() );
+    CHECK_EQ( dtEnd, m_datepicker->GetValue() );
 
 
     // Changing the range should clamp the current value to it if necessary.
     const wxDateTime
         dtBeforeEnd = dtEnd - wxDateSpan::Day();
     m_datepicker->SetRange(dtStart, dtBeforeEnd);
-    CPPUNIT_ASSERT_EQUAL( dtBeforeEnd, m_datepicker->GetValue() );
+    CHECK_EQ( dtBeforeEnd, m_datepicker->GetValue() );
 }
 
 #if wxUSE_UIACTIONSIMULATOR

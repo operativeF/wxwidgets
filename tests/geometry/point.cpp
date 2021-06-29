@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -71,30 +73,30 @@ void PointTestCase::Operators()
     wxPoint p4(5,1);
     wxPoint p5 = p2 + p1;
     wxPoint p6 = p2 - p1;
-    CPPUNIT_ASSERT( p3.x == p5.x );
-    CPPUNIT_ASSERT( p3.y == p5.y );
-    CPPUNIT_ASSERT( p4.x == p6.x );
-    CPPUNIT_ASSERT( p4.y == p6.y );
-    CPPUNIT_ASSERT( p3 == p5 );
-    CPPUNIT_ASSERT( p4 == p6 );
-    CPPUNIT_ASSERT( p3 != p4 );
+    CHECK( p3.x == p5.x );
+    CHECK( p3.y == p5.y );
+    CHECK( p4.x == p6.x );
+    CHECK( p4.y == p6.y );
+    CHECK( p3 == p5 );
+    CHECK( p4 == p6 );
+    CHECK( p3 != p4 );
     p5 = p2; p5 += p1;
     p6 = p2; p6 -= p1;
-    CPPUNIT_ASSERT( p3 == p5 );
-    CPPUNIT_ASSERT( p4 == p6 );
+    CHECK( p3 == p5 );
+    CHECK( p4 == p6 );
     wxSize s(p1.x,p1.y);
     p5 = p2; p5 = p2 + s;
     p6 = p2; p6 = p2 - s;
-    CPPUNIT_ASSERT( p3 == p5 );
-    CPPUNIT_ASSERT( p4 == p6 );
+    CHECK( p3 == p5 );
+    CHECK( p4 == p6 );
     p5 = p2; p5 = s + p2;
     p6 = p2; p6 = s - p2;
-    CPPUNIT_ASSERT( p3 == p5 );
-    CPPUNIT_ASSERT( p4 == -p6 );
+    CHECK( p3 == p5 );
+    CHECK( p4 == -p6 );
     p5 = p2; p5 += s;
     p6 = p2; p6 -= s;
-    CPPUNIT_ASSERT( p3 == p5 );
-    CPPUNIT_ASSERT( p4 == p6 );
+    CHECK( p3 == p5 );
+    CHECK( p4 == p6 );
 }
 
 void RealPointTestCase::Operators()
@@ -107,12 +109,12 @@ void RealPointTestCase::Operators()
     wxRealPoint p5 = p2 + p1;
     wxRealPoint p6 = p2 - p1;
     /*
-    CPPUNIT_ASSERT( p3 == p5 );
-    CPPUNIT_ASSERT( p4 == p6 );
-    CPPUNIT_ASSERT( p3 != p4 );
+    CHECK( p3 == p5 );
+    CHECK( p4 == p6 );
+    CHECK( p3 != p4 );
     */
-    CPPUNIT_ASSERT( fabs( p3.x - p5.x ) < EPSILON );
-    CPPUNIT_ASSERT( fabs( p3.y - p5.y ) < EPSILON );
-    CPPUNIT_ASSERT( fabs( p4.x - p6.x ) < EPSILON );
-    CPPUNIT_ASSERT( fabs( p4.y - p6.y ) < EPSILON );
+    CHECK( fabs( p3.x - p5.x ) < EPSILON );
+    CHECK( fabs( p3.y - p5.y ) < EPSILON );
+    CHECK( fabs( p4.x - p6.x ) < EPSILON );
+    CHECK( fabs( p4.y - p6.y ) < EPSILON );
 }

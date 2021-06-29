@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_GAUGE
@@ -60,49 +62,49 @@ void GaugeTestCase::tearDown()
 void GaugeTestCase::Direction()
 {
     //We should default to a horizontal gauge
-    CPPUNIT_ASSERT(!m_gauge->IsVertical());
+    CHECK(!m_gauge->IsVertical());
 
     wxDELETE(m_gauge);
     m_gauge = new wxGauge(wxTheApp->GetTopWindow(), wxID_ANY, 100,
                           wxDefaultPosition, wxDefaultSize, wxGA_VERTICAL);
 
-    CPPUNIT_ASSERT(m_gauge->IsVertical());
+    CHECK(m_gauge->IsVertical());
 
     wxDELETE(m_gauge);
     m_gauge = new wxGauge(wxTheApp->GetTopWindow(), wxID_ANY, 100,
                           wxDefaultPosition, wxDefaultSize, wxGA_HORIZONTAL);
 
-    CPPUNIT_ASSERT(!m_gauge->IsVertical());
+    CHECK(!m_gauge->IsVertical());
 }
 
 void GaugeTestCase::Range()
 {
-    CPPUNIT_ASSERT_EQUAL(100, m_gauge->GetRange());
+    CHECK_EQ(100, m_gauge->GetRange());
 
     m_gauge->SetRange(50);
 
-    CPPUNIT_ASSERT_EQUAL(50, m_gauge->GetRange());
+    CHECK_EQ(50, m_gauge->GetRange());
 
     m_gauge->SetRange(0);
 
-    CPPUNIT_ASSERT_EQUAL(0, m_gauge->GetRange());
+    CHECK_EQ(0, m_gauge->GetRange());
 }
 
 void GaugeTestCase::Value()
 {
-    CPPUNIT_ASSERT_EQUAL(0, m_gauge->GetValue());
+    CHECK_EQ(0, m_gauge->GetValue());
 
     m_gauge->SetValue(50);
 
-    CPPUNIT_ASSERT_EQUAL(50, m_gauge->GetValue());
+    CHECK_EQ(50, m_gauge->GetValue());
 
     m_gauge->SetValue(0);
 
-    CPPUNIT_ASSERT_EQUAL(0, m_gauge->GetValue());
+    CHECK_EQ(0, m_gauge->GetValue());
 
     m_gauge->SetValue(100);
 
-    CPPUNIT_ASSERT_EQUAL(100, m_gauge->GetValue());
+    CHECK_EQ(100, m_gauge->GetValue());
 }
 
 #endif //wxUSE_GAUGE

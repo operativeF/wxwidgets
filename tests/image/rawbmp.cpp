@@ -11,6 +11,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -29,7 +31,7 @@ namespace
 }
 
 #define ASSERT_COL_EQUAL(x, y) \
-    CPPUNIT_ASSERT_EQUAL( (unsigned char)(x), (y) )
+    CHECK_EQ( (unsigned char)(x), (y) )
 
 // ----------------------------------------------------------------------------
 // test class

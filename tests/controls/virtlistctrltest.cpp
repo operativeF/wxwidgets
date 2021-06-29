@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_LISTCTRL
@@ -93,18 +95,18 @@ void VirtListCtrlTestCase::tearDown()
 void VirtListCtrlTestCase::UpdateSelection()
 {
     m_list->SetItemCount(10);
-    CPPUNIT_ASSERT_EQUAL( 0, m_list->GetSelectedItemCount() );
+    CHECK_EQ( 0, m_list->GetSelectedItemCount() );
 
     m_list->SetItemState(7, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
-    CPPUNIT_ASSERT_EQUAL( 1, m_list->GetSelectedItemCount() );
+    CHECK_EQ( 1, m_list->GetSelectedItemCount() );
 
     m_list->SetItemState(0, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
-    CPPUNIT_ASSERT_EQUAL( 2, m_list->GetSelectedItemCount() );
+    CHECK_EQ( 2, m_list->GetSelectedItemCount() );
 
     // The item 7 is now invalid and so shouldn't be counted as selected any
     // more.
     m_list->SetItemCount(5);
-    CPPUNIT_ASSERT_EQUAL( 1, m_list->GetSelectedItemCount() );
+    CHECK_EQ( 1, m_list->GetSelectedItemCount() );
 }
 
 void VirtListCtrlTestCase::DeselectedEvent()
@@ -140,8 +142,8 @@ void VirtListCtrlTestCase::DeselectedEvent()
     sim.MouseClick();
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL(1, selected.GetCount());
-    CPPUNIT_ASSERT_EQUAL(1, deselected.GetCount());
+    CHECK_EQ(1, selected.GetCount());
+    CHECK_EQ(1, deselected.GetCount());
 #endif
 }
 

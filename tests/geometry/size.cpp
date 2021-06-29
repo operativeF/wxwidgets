@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -50,33 +52,33 @@ void SizeTestCase::Operators()
     wxSize s3;
 
     s3 = s1 + s2;
-    CPPUNIT_ASSERT( s3.GetWidth()==4 );
-    CPPUNIT_ASSERT( s3.GetHeight()==6 );
+    CHECK( s3.GetWidth()==4 );
+    CHECK( s3.GetHeight()==6 );
     s3 = s2 - s1;
-    CPPUNIT_ASSERT( s3.GetWidth()==2 );
-    CPPUNIT_ASSERT( s3.GetHeight()==2 );
+    CHECK( s3.GetWidth()==2 );
+    CHECK( s3.GetHeight()==2 );
     s3 = s1 * 2;
-    CPPUNIT_ASSERT( s3.GetWidth()==2 );
-    CPPUNIT_ASSERT( s3.GetHeight()==4 );
+    CHECK( s3.GetWidth()==2 );
+    CHECK( s3.GetHeight()==4 );
     s3 = 2 * s1;
-    CPPUNIT_ASSERT( s3.GetWidth()==2 );
-    CPPUNIT_ASSERT( s3.GetHeight()==4 );
+    CHECK( s3.GetWidth()==2 );
+    CHECK( s3.GetHeight()==4 );
     s3 = s3 / 2;
-    CPPUNIT_ASSERT( s3.GetWidth()==1 );
-    CPPUNIT_ASSERT( s3.GetHeight()==2 );
+    CHECK( s3.GetWidth()==1 );
+    CHECK( s3.GetHeight()==2 );
 
     s3 = s2;
-    CPPUNIT_ASSERT( s3 != s1 );
+    CHECK( s3 != s1 );
     s3 = s1;
-    CPPUNIT_ASSERT( s3 == s1 );
+    CHECK( s3 == s1 );
     s3 += s2;
-    CPPUNIT_ASSERT( s3.GetWidth()==4 );
-    CPPUNIT_ASSERT( s3.GetHeight()==6 );
+    CHECK( s3.GetWidth()==4 );
+    CHECK( s3.GetHeight()==6 );
     s3 -= s2;
-    CPPUNIT_ASSERT( s3 == s1 );
+    CHECK( s3 == s1 );
     s3 *= 2;
-    CPPUNIT_ASSERT( s3.GetWidth()==2 );
-    CPPUNIT_ASSERT( s3.GetHeight()==4 );
+    CHECK( s3.GetWidth()==2 );
+    CHECK( s3.GetHeight()==4 );
     s3 /= 2;
-    CPPUNIT_ASSERT( s3 == s1 );
+    CHECK( s3 == s1 );
 }
