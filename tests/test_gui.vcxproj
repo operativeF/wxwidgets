@@ -487,7 +487,6 @@
   <ItemGroup>
     <ClCompile Include="asserthelper.cpp" />
     <ClCompile Include="controls\auitest.cpp" />
-    <ClCompile Include="controls\checklistboxtest.cpp" />
     <ClCompile Include="controls\frametest.cpp" />
     <ClCompile Include="controls\gaugetest.cpp" />
     <ClCompile Include="dummy.cpp">
