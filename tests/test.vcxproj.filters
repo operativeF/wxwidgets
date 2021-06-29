@@ -85,5 +85,8 @@
     <ClCompile Include="config\regconf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="config\config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

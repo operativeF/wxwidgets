@@ -16,10 +16,11 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_CONFIG
-
 
 #ifndef WX_PRECOMP
     #include "wx/wx.h"
