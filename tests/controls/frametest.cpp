@@ -18,63 +18,43 @@
 
 #include "testableframe.h"
 
-class FrameTestCase : public CppUnit::TestCase
+static std::unique_ptr<wxFrame> setUp()
 {
-public:
-    FrameTestCase() { }
-
-    void setUp() override;
-    void tearDown() override;
-
-private:
-    CPPUNIT_TEST_SUITE( FrameTestCase );
-        CPPUNIT_TEST( Iconize );
-        CPPUNIT_TEST( Close );
-    CPPUNIT_TEST_SUITE_END();
-
-    void Iconize();
-    void Close();
-
-    wxFrame *m_frame;
-
-    FrameTestCase(const FrameTestCase&) = delete;
-	FrameTestCase& operator=(const FrameTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( FrameTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( FrameTestCase, "FrameTestCase" );
-
-void FrameTestCase::setUp()
-{
-    m_frame = new wxFrame(NULL, wxID_ANY, "test frame");
+    auto m_frame = std::make_unique<wxFrame>(nullptr, wxID_ANY, "test frame");
     m_frame->Show();
+
+    return m_frame;
 }
 
-void FrameTestCase::tearDown()
+static void tearDown(wxFrame* frame)
 {
-    m_frame->Destroy();
+    frame->Destroy();
 }
 
-void FrameTestCase::Iconize()
+TEST_CASE("Frame test")
 {
-#ifdef __WXMSW__
-    EventCounter iconize(m_frame, wxEVT_ICONIZE);
+    auto m_frame = setUp();
 
-    m_frame->Iconize();
-    m_frame->Iconize(false);
+    SUBCASE("Iconize")
+    {
+    #ifdef __WXMSW__
+        EventCounter iconize(m_frame.get(), wxEVT_ICONIZE);
 
-    CHECK_EQ(2, iconize.GetCount());
-#endif
-}
+        m_frame->Iconize();
+        m_frame->Iconize(false);
 
-void FrameTestCase::Close()
-{
-    EventCounter close(m_frame, wxEVT_CLOSE_WINDOW);
+        CHECK_EQ(2, iconize.GetCount());
+    #endif
+    }
 
-    m_frame->Close();
+    SUBCASE("Close")
+    {
+        EventCounter close(m_frame.get(), wxEVT_CLOSE_WINDOW);
 
-    CHECK_EQ(1, close.GetCount());
+        m_frame->Close();
+
+        CHECK_EQ(1, close.GetCount());
+    }
+
+    tearDown(m_frame.get());
 }
