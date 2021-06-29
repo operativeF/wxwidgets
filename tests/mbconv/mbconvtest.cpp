@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -52,180 +54,199 @@ wchar_t u1000a5[] = { 0xdbc0, 0xdca5, 0 };
 wchar_t u10fffd[] = { 0xdbff, 0xdffd, 0 };
 #endif
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class MBConvTestCase : public CppUnit::TestCase
-{
-public:
-    MBConvTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( MBConvTestCase );
-        CPPUNIT_TEST( UTF32LETests );
-        CPPUNIT_TEST( UTF32BETests );
-        CPPUNIT_TEST( WC2CP1250 );
-        CPPUNIT_TEST( UTF7Tests );
-        CPPUNIT_TEST( UTF8Tests );
-        CPPUNIT_TEST( UTF16LETests );
-        CPPUNIT_TEST( UTF16BETests );
-        CPPUNIT_TEST( CP932Tests );
-        CPPUNIT_TEST( CP1252Tests ); // depends on UTF8 Decoder functioning correctly
-        CPPUNIT_TEST( LibcTests );
-        CPPUNIT_TEST( IconvTests );
-        CPPUNIT_TEST( Latin1Tests );
-        CPPUNIT_TEST( FontmapTests );
-        CPPUNIT_TEST( BufSize );
-        CPPUNIT_TEST( FromWCharTests );
-        CPPUNIT_TEST( NonBMPCharTests );
-#ifdef HAVE_WCHAR_H
-        CPPUNIT_TEST( UTF8_41 );
-        CPPUNIT_TEST( UTF8_7f );
-        CPPUNIT_TEST( UTF8_80 );
-        CPPUNIT_TEST( UTF8_c2_7f );
-        CPPUNIT_TEST( UTF8_c2_80 );
-        CPPUNIT_TEST( UTF8_ce_91 );
-        CPPUNIT_TEST( UTF8_df_bf );
-        CPPUNIT_TEST( UTF8_df_c0 );
-        CPPUNIT_TEST( UTF8_e0_a0_7f );
-        CPPUNIT_TEST( UTF8_e0_a0_80 );
-        CPPUNIT_TEST( UTF8_e2_98_a0 );
-        CPPUNIT_TEST( UTF8_ef_bf_bd );
-        CPPUNIT_TEST( UTF8_ef_bf_c0 );
-        CPPUNIT_TEST( UTF8_f0_90_80_7f );
-        CPPUNIT_TEST( UTF8_f0_90_80_80 );
-        CPPUNIT_TEST( UTF8_f4_8f_bf_bd );
-        CPPUNIT_TEST( UTF8PUA_f4_80_82_a5 );
-        CPPUNIT_TEST( UTF8Octal_backslash245 );
-#endif // HAVE_WCHAR_H
-    CPPUNIT_TEST_SUITE_END();
-
-    void WC2CP1250();
-    void UTF7Tests();
-    void UTF8Tests();
-    void UTF16LETests();
-    void UTF16BETests();
-    void UTF32LETests();
-    void UTF32BETests();
-    void CP932Tests();
-    void CP1252Tests();
-    void LibcTests();
-    void FontmapTests();
-    void BufSize();
-    void FromWCharTests();
-    void NonBMPCharTests();
-    void IconvTests();
-    void Latin1Tests();
-
-    // verifies that the specified multibyte sequence decodes to the specified wchar_t sequence
-    void TestDecoder(
-        const wchar_t* wideBuffer,  // the same character sequence as multiBuffer, encoded as wchar_t
-        size_t         wideChars,   // the number of wide characters at wideBuffer
-        const char*    multiBuffer, // a multibyte encoded character sequence that can be decoded by "converter"
-        size_t         multiBytes,  // the byte length of the multibyte character sequence that can be decoded by "converter"
-        wxMBConv&      converter,   // the wxMBConv object that can decode multiBuffer into a wide character sequence
-        int            sizeofNull   // number of bytes occupied by terminating null in this encoding
-        );
-
-    // verifies that the specified wchar_t sequence encodes to the specified multibyte sequence
-    void TestEncoder(
-        const wchar_t* wideBuffer,  // the same character sequence as multiBuffer, encoded as wchar_t
-        size_t         wideChars,   // the number of wide characters at wideBuffer
-        const char*    multiBuffer, // a multibyte encoded character sequence that can be decoded by "converter"
-        size_t         multiBytes,  // the byte length of the multibyte character sequence that can be decoded by "converter"
-        wxMBConv&      converter,   // the wxMBConv object that can decode multiBuffer into a wide character sequence
-        int            sizeofNull   // number of bytes occupied by terminating null in this encoding
-        );
-
 #if wxUSE_STREAMS
-    // use wxTextInputStream to exercise wxMBConv interface
-    // (this reveals some bugs in certain wxMBConv subclasses)
-    void TestStreamDecoder(
-        const wchar_t* wideBuffer,  // the same character sequence as multiBuffer, encoded as wchar_t
-        size_t         wideChars,   // the number of wide characters at wideBuffer
-        const char*    multiBuffer, // a multibyte encoded character sequence that can be decoded by "converter"
-        size_t         multiBytes,  // the byte length of the multibyte character sequence that can be decoded by "converter"
-        wxMBConv&      converter    // the wxMBConv object that can decode multiBuffer into a wide character sequence
-        );
+// use wxTextInputStream to exercise wxMBConv interface
+// (this reveals some bugs in certain wxMBConv subclasses)
+static void TestStreamEncoder(
+    const wchar_t* wideBuffer,  // the same character sequence as multiBuffer, encoded as wchar_t
+    size_t         wideChars,   // the number of wide characters at wideBuffer
+    const char* multiBuffer, // a multibyte encoded character sequence that can be decoded by "converter"
+    size_t         multiBytes,  // the byte length of the multibyte character sequence that can be decoded by "converter"
+    wxMBConv& converter    // the wxMBConv object that can decode multiBuffer into a wide character sequence
+)
+{
+    // this isn't meant to test wxMemoryOutputStream or wxTextOutputStream
+    // it's meant to test the way wxTextOutputStream uses wxMBConv
+    // (which has exposed some problems with wxMBConv)
+    wxMemoryOutputStream memoryOutputStream;
+    // wxEOL_UNIX will pass \n \r unchanged
+    wxTextOutputStream textOutputStream(memoryOutputStream, wxEOL::Unix, converter);
+    for (size_t i = 0; i < wideChars; i++)
+    {
+        textOutputStream.PutChar(wideBuffer[i]);
+    }
 
-    // use wxTextOutputStream to exercise wxMBConv interface
-    // (this reveals some bugs in certain wxMBConv subclasses)
-    void TestStreamEncoder(
-        const wchar_t* wideBuffer,  // the same character sequence as multiBuffer, encoded as wchar_t
-        size_t         wideChars,   // the number of wide characters at wideBuffer
-        const char*    multiBuffer, // a multibyte encoded character sequence that can be decoded by "converter"
-        size_t         multiBytes,  // the byte length of the multibyte character sequence that can be decoded by "converter"
-        wxMBConv&      converter    // the wxMBConv object that can decode multiBuffer into a wide character sequence
-        );
+    textOutputStream.Flush();
+
+    CHECK_EQ(multiBytes, size_t(memoryOutputStream.TellO()));
+    wxCharBuffer copy(memoryOutputStream.TellO());
+    memoryOutputStream.CopyTo(copy.data(), memoryOutputStream.TellO());
+    CHECK_EQ(0, memcmp(copy.data(), multiBuffer, multiBytes));
+}
 #endif
 
-    // tests the encoding and decoding capability of an wxMBConv object
-    //
-    // decodes the utf-8 bytes into wide characters
-    // encodes the wide characters to compare against input multiBuffer
-    // decodes the multiBuffer to compare against wide characters
-    // decodes the multiBuffer into wide characters
-    void TestCoder(
-        const char*    multiBuffer, // a multibyte encoded character sequence that can be decoded by "converter"
-        size_t         multiBytes,  // the byte length of the multibyte character sequence that can be decoded by "converter"
-        const char*    utf8Buffer,  // the same character sequence as multiBuffer, encoded as UTF-8
-        size_t         utf8Bytes,   // the byte length of the UTF-8 encoded character sequence
-        wxMBConv&      converter,   // the wxMBConv object that can decode multiBuffer into a wide character sequence
-        int            sizeofNull   // the number of bytes occupied by a terminating null in the converter's encoding
+#if wxUSE_STREAMS
+// use wxTextInputStream to exercise wxMBConv interface
+// (this reveals some bugs in certain wxMBConv subclasses)
+static void TestStreamDecoder(
+    const wchar_t* wideBuffer,  // the same character sequence as multiBuffer, encoded as wchar_t
+    size_t         wideChars,   // the number of wide characters at wideBuffer
+    const char* multiBuffer, // a multibyte encoded character sequence that can be decoded by "converter"
+    size_t         multiBytes,  // the byte length of the multibyte character sequence that can be decoded by "converter"
+    wxMBConv& converter    // the wxMBConv object that can decode multiBuffer into a wide character sequence
+)
+{
+    // this isn't meant to test wxMemoryInputStream or wxTextInputStream
+    // it's meant to test the way wxTextInputStream uses wxMBConv
+    // (which has exposed some problems with wxMBConv)
+    wxMemoryInputStream memoryInputStream(multiBuffer, multiBytes);
+    wxTextInputStream textInputStream(memoryInputStream, wxT(""), converter);
+    for (size_t i = 0; i < wideChars; i++)
+    {
+        wxChar wc = textInputStream.GetChar();
+        CHECK_MESSAGE(
+            wideBuffer[i] == wc,
+            wxString::Format("At position %lu", (unsigned long)i).ToStdString()
         );
+    }
+    CHECK(0 == textInputStream.GetChar());
+    CHECK(memoryInputStream.Eof());
+}
+#endif
 
-#ifdef HAVE_WCHAR_H
-    // UTF-8 tests. Test the first, last and one in the middle for sequences
-    // of each length
-    void UTF8_41() { UTF8("\x41", u41); }
-    void UTF8_7f() { UTF8("\x7f", u7f); }
-    void UTF8_80() { UTF8("\x80", NULL); }
 
-    void UTF8_c2_7f() { UTF8("\xc2\x7f", NULL); }
-    void UTF8_c2_80() { UTF8("\xc2\x80", u80); }
-    void UTF8_ce_91() { UTF8("\xce\x91", u391); }
-    void UTF8_df_bf() { UTF8("\xdf\xbf", u7ff); }
-    void UTF8_df_c0() { UTF8("\xdf\xc0", NULL); }
+// verifies that the specified mb sequences decode to the specified wc sequence
+static void TestDecoder(
+    const wchar_t* wideBuffer,  // the same character sequence as multiBuffer, encoded as wchar_t
+    size_t         wideChars,   // the number of wide characters at wideBuffer
+    const char* multiBuffer, // a multibyte encoded character sequence that can be decoded by "converter"
+    size_t         multiBytes,  // the byte length of the multibyte character sequence that can be decoded by "converter"
+    wxMBConv& converter,   // the wxMBConv object that can decode multiBuffer into a wide character sequence
+    int            sizeofNull   // number of bytes occupied by terminating null in this encoding
+)
+{
+    const unsigned UNINITIALIZED = 0xcd;
 
-    void UTF8_e0_a0_7f() { UTF8("\xe0\xa0\x7f", NULL); }
-    void UTF8_e0_a0_80() { UTF8("\xe0\xa0\x80", u800); }
-    void UTF8_e2_98_a0() { UTF8("\xe2\x98\xa0", u2620); }
-    void UTF8_ef_bf_bd() { UTF8("\xef\xbf\xbd", ufffd); }
-    void UTF8_ef_bf_c0() { UTF8("\xef\xbf\xc0", NULL); }
+    // copy the input bytes into a null terminated buffer
+    wxCharBuffer inputCopy(multiBytes + sizeofNull);
+    memcpy(inputCopy.data(), multiBuffer, multiBytes);
+    memset(&inputCopy.data()[multiBytes], 0, sizeofNull);
 
-    void UTF8_f0_90_80_7f() { UTF8("\xf0\x90\x80\x7f", NULL); }
-    void UTF8_f0_90_80_80() { UTF8("\xf0\x90\x80\x80", u10000); }
-    void UTF8_f4_8f_bf_bd() { UTF8("\xf4\x8f\xbf\xbd", u10fffd); }
+    // calculate the output size
+    size_t outputWritten = converter.MB2WC
+    (
+        0,
+        (const char*)inputCopy.data(),
+        0
+    );
+    // make sure the correct output length was calculated
+    CHECK_MESSAGE
+    (
+        wideChars == outputWritten,
+        ("while converting \"%s\"", inputCopy)
+    );
 
-    // test 'escaping the escape characters' for the two escaping schemes
-    void UTF8PUA_f4_80_82_a5() { UTF8PUA("\xf4\x80\x82\xa5", u1000a5); }
-    void UTF8Octal_backslash245() { UTF8Octal("\\245", L"\\245"); }
+    // convert the string
+    size_t guardChars = 8; // to make sure we're not overrunning the output buffer
+    size_t nullCharacters = 1;
+    size_t outputBufferChars = outputWritten + nullCharacters + guardChars;
+    wxWCharBuffer outputBuffer(outputBufferChars);
+    memset(outputBuffer.data(), UNINITIALIZED, outputBufferChars * sizeof(wchar_t));
 
-    // Test that converting string with incomplete surrogates in them fails
-    // (surrogates are only used in UTF-16, i.e. when wchar_t is 16 bits).
-#if SIZEOF_WCHAR_T == 2
-    void UTF8_fail_broken_surrogates();
-#endif // SIZEOF_WCHAR_T == 2
+    outputWritten = converter.MB2WC
+    (
+        outputBuffer.data(),
+        (const char*)inputCopy.data(),
+        outputBufferChars
+    );
+    // make sure the correct number of characters were outputs
+    CHECK_EQ(wideChars, outputWritten);
 
-    // implementation for the utf-8 tests (see comments below)
-    void UTF8(const char *charSequence, const wchar_t *wideSequence);
-    void UTF8PUA(const char *charSequence, const wchar_t *wideSequence);
-    void UTF8Octal(const char *charSequence, const wchar_t *wideSequence);
-    void UTF8(const char *charSequence, const wchar_t *wideSequence, int option);
-#endif // HAVE_WCHAR_H
+    // make sure the characters generated are correct
+    CHECK(0 == memcmp(outputBuffer, wideBuffer, wideChars * sizeof(wchar_t)));
 
-    MBConvTestCase(const MBConvTestCase&) = delete;
-	MBConvTestCase& operator=(const MBConvTestCase&) = delete;
-};
+    // the output buffer should be null terminated
+    CHECK(outputBuffer[outputWritten] == 0);
 
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( MBConvTestCase );
+    // make sure the rest of the output buffer is untouched
+    for (size_t i = (wideChars + 1) * sizeof(wchar_t); i < (outputBufferChars * sizeof(wchar_t)); i++)
+    {
+        CHECK(((unsigned char*)outputBuffer.data())[i] == UNINITIALIZED);
+    }
 
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( MBConvTestCase, "MBConv" );
+#if wxUSE_STREAMS
+    TestStreamDecoder(wideBuffer, wideChars, multiBuffer, multiBytes, converter);
+#endif
+}
 
-void MBConvTestCase::WC2CP1250()
+// verifies that the specified wc sequences encodes to the specified mb sequence
+static void TestEncoder(
+    const wchar_t* wideBuffer,  // the same character sequence as multiBuffer, encoded as wchar_t
+    size_t         wideChars,   // the number of wide characters at wideBuffer
+    const char* multiBuffer, // a multibyte encoded character sequence that can be decoded by "converter"
+    size_t         multiBytes,  // the byte length of the multibyte character sequence that can be decoded by "converter"
+    wxMBConv& converter,   // the wxMBConv object that can decode multiBuffer into a wide character sequence
+    int            sizeofNull   // number of bytes occupied by terminating null in this encoding
+)
+{
+    const unsigned UNINITIALIZED = 0xcd;
+
+    // copy the input bytes into a null terminated buffer
+    wxWCharBuffer inputCopy(wideChars + 1);
+    memcpy(inputCopy.data(), wideBuffer, (wideChars * sizeof(wchar_t)));
+    inputCopy.data()[wideChars] = 0;
+
+    // calculate the output size: notice that it can be greater than the real
+    // size as the converter is allowed to estimate the maximal size needed
+    // instead of computing it precisely
+    size_t outputWritten = converter.WC2MB
+    (
+        0,
+        (const wchar_t*)inputCopy.data(),
+        0
+    );
+    CHECK(outputWritten >= multiBytes);
+
+    // convert the string
+    size_t guardBytes = 8; // to make sure we're not overrunning the output buffer
+    size_t outputBufferSize = outputWritten + sizeofNull + guardBytes;
+    wxCharBuffer outputBuffer(outputBufferSize);
+    memset(outputBuffer.data(), UNINITIALIZED, outputBufferSize);
+
+    outputWritten = converter.WC2MB
+    (
+        outputBuffer.data(),
+        (const wchar_t*)inputCopy.data(),
+        outputBufferSize
+    );
+
+    // make sure the correct number of characters were output
+    CHECK_EQ(multiBytes, outputWritten);
+
+    // make sure the characters generated are correct
+    CHECK(0 == memcmp(outputBuffer, multiBuffer, multiBytes));
+
+    size_t i;
+
+    // the output buffer should be null terminated
+    for (i = multiBytes; i < multiBytes + sizeofNull; i++)
+    {
+        CHECK(((unsigned char*)outputBuffer.data())[i] == 0);
+    }
+
+    // make sure the rest of the output buffer is untouched
+    for (i = multiBytes + sizeofNull; i < outputBufferSize; i++)
+    {
+        CHECK(((unsigned char*)outputBuffer.data())[i] == UNINITIALIZED);
+    }
+
+#if wxUSE_STREAMS
+    TestStreamEncoder(wideBuffer, wideChars, multiBuffer, multiBytes, converter);
+#endif
+}
+
+
+TEST_CASE("WC2CP1250")
 {
     static constexpr struct Data
     {
@@ -234,7 +255,7 @@ void MBConvTestCase::WC2CP1250()
     } data[] =
     {
         { L"hello", "hello" },  // test that it works in simplest case
-        { L"\xBD of \xBD is \xBC", NULL }, // this should fail as cp1250 doesn't have 1/2
+        { L"\xBD of \xBD is \xBC", nullptr }, // this should fail as cp1250 doesn't have 1/2
     };
 
     wxCSConv cs1250(wxFONTENCODING_CP1250);
@@ -243,11 +264,11 @@ void MBConvTestCase::WC2CP1250()
         const Data& d = data[n];
         if (d.cp1250)
         {
-            CPPUNIT_ASSERT( strcmp(cs1250.cWC2MB(d.wc), d.cp1250) == 0 );
+            CHECK( strcmp(cs1250.cWC2MB(d.wc), d.cp1250) == 0 );
         }
         else
         {
-            CPPUNIT_ASSERT( (const char*)cs1250.cWC2MB(d.wc) == NULL );
+            CHECK( (const char*)cs1250.cWC2MB(d.wc) == nullptr );
         }
     }
 }
@@ -395,7 +416,7 @@ static constexpr unsigned char welcome_cp932[71] =
     #endif
 #endif
 
-void MBConvTestCase::UTF7Tests()
+TEST_CASE("UTF7Tests")
 {
 #if 0
     wxCSConv convUTF7(wxFONTENCODING_UTF7);
@@ -446,7 +467,7 @@ void MBConvTestCase::UTF7Tests()
         );
 }
 
-void MBConvTestCase::UTF8Tests()
+TEST_CASE("UTF8Tests")
 {
     TestDecoder
         (
@@ -470,13 +491,13 @@ void MBConvTestCase::UTF8Tests()
 #if SIZEOF_WCHAR_T == 2
     // Can't use \ud800 as it's an invalid Unicode character.
     const wchar_t wc = 0xd800;
-    CPPUNIT_ASSERT_EQUAL(wxCONV_FAILED, wxConvUTF8.FromWChar(NULL, 0, &wc, 1));
+    CHECK_EQ(wxCONV_FAILED, wxConvUTF8.FromWChar(nullptr, 0, &wc, 1));
 #endif // SIZEOF_WCHAR_T == 2
 
-    SECTION("UTF-8-FFFF")
+    SUBCASE("UTF-8-FFFF")
     {
         const wchar_t wcFFFF = 0xFFFF;
-        REQUIRE(wxConvUTF8.FromWChar(NULL, 0, &wcFFFF, 1) == 3);
+        REQUIRE(wxConvUTF8.FromWChar(nullptr, 0, &wcFFFF, 1) == 3);
 
         char buf[4];
         buf[3] = '\0';
@@ -488,7 +509,7 @@ void MBConvTestCase::UTF8Tests()
     }
 }
 
-void MBConvTestCase::UTF16LETests()
+TEST_CASE("UTF16LETests")
 {
     wxMBConvUTF16LE convUTF16LE;
     TestDecoder
@@ -511,7 +532,7 @@ void MBConvTestCase::UTF16LETests()
         );
 }
 
-void MBConvTestCase::UTF16BETests()
+TEST_CASE("UTF16BETests")
 {
     wxMBConvUTF16BE convUTF16BE;
     TestDecoder
@@ -534,7 +555,7 @@ void MBConvTestCase::UTF16BETests()
         );
 }
 
-void MBConvTestCase::UTF32LETests()
+TEST_CASE("UTF32LETests")
 {
     wxMBConvUTF32LE convUTF32LE;
     TestDecoder
@@ -557,7 +578,7 @@ void MBConvTestCase::UTF32LETests()
         );
 }
 
-void MBConvTestCase::UTF32BETests()
+TEST_CASE("UTF32BETests")
 {
     wxMBConvUTF32BE convUTF32BE;
     TestDecoder
@@ -580,7 +601,7 @@ void MBConvTestCase::UTF32BETests()
         );
 }
 
-void MBConvTestCase::CP932Tests()
+TEST_CASE("CP932Tests")
 {
     wxCSConv convCP932( wxFONTENCODING_CP932 );
     TestDecoder
@@ -757,7 +778,7 @@ static constexpr unsigned char iso8859_5_utf8[380] =
 
 // DecodeUTF8
 // decodes the specified *unterminated* UTF-8 byte array
-wxWCharBuffer DecodeUTF8(
+static wxWCharBuffer DecodeUTF8(
     const void* data, // an unterminated UTF-8 encoded byte array
     size_t size       // the byte length of data
     )
@@ -778,7 +799,7 @@ wxWCharBuffer DecodeUTF8(
 // encodes the wide characters to compare against input multiBuffer
 // decodes the multiBuffer to compare against wide characters
 // decodes the multiBuffer into wide characters
-void MBConvTestCase::TestCoder(
+static void TestCoder(
     const char*    multiBuffer, // a multibyte encoded character sequence that can be decoded by "converter"
     size_t         multiBytes,  // the byte length of the multibyte character sequence that can be decoded by "converter"
     const char*    utf8Buffer,  // the same character sequence as multiBuffer, encoded as UTF-8
@@ -818,7 +839,7 @@ void MBConvTestCase::TestCoder(
 
 WXDLLIMPEXP_BASE wxMBConv* new_wxMBConv_wxwin( const char* name );
 
-void MBConvTestCase::FontmapTests()
+TEST_CASE("FontmapTests")
 {
 #ifdef wxUSE_FONTMAP
     wxMBConv* converter = new_wxMBConv_wxwin("CP1252");
@@ -838,54 +859,54 @@ void MBConvTestCase::FontmapTests()
 #endif
 }
 
-void MBConvTestCase::BufSize()
+TEST_CASE("BufSize")
 {
     wxCSConv conv1251(wxT("CP1251"));
-    CPPUNIT_ASSERT( conv1251.IsOk() );
+    CHECK( conv1251.IsOk() );
     const char *cp1251text =
         "\313\301\326\305\324\323\321 \325\304\301\336\316\331\315";
 
-    const size_t lenW = conv1251.MB2WC(NULL, cp1251text, 0);
-    CPPUNIT_ASSERT_EQUAL( strlen(cp1251text), lenW );
+    const size_t lenW = conv1251.MB2WC(nullptr, cp1251text, 0);
+    CHECK_EQ( strlen(cp1251text), lenW );
     wxWCharBuffer wbuf(lenW + 1); // allocates lenW + 2 characters
     wbuf.data()[lenW + 1] = L'!';
 
     // lenW is not enough because it's the length and we need the size
-    CPPUNIT_ASSERT_EQUAL(
+    CHECK_EQ(
         wxCONV_FAILED, conv1251.MB2WC(wbuf.data(), cp1251text, lenW) );
 
     // lenW+1 is just fine
-    CPPUNIT_ASSERT(
+    CHECK(
         conv1251.MB2WC(wbuf.data(), cp1251text, lenW + 1) != wxCONV_FAILED );
 
     // of course, greater values work too
-    CPPUNIT_ASSERT(
+    CHECK(
         conv1251.MB2WC(wbuf.data(), cp1251text, lenW + 2) != wxCONV_FAILED );
 
     // but they shouldn't write more stuff to the buffer
-    CPPUNIT_ASSERT_EQUAL( L'!', wbuf[lenW + 1] );
+    CHECK_EQ( L'!', wbuf[lenW + 1] );
 
 
     // test in the other direction too, using an encoding with multibyte NUL
     wxCSConv convUTF16(wxT("UTF-16LE"));
-    CPPUNIT_ASSERT( convUTF16.IsOk() );
+    CHECK( convUTF16.IsOk() );
     const wchar_t *utf16text = L"Hello";
 
-    const size_t lenMB = convUTF16.WC2MB(NULL, utf16text, 0);
-    CPPUNIT_ASSERT_EQUAL( wcslen(utf16text)*2, lenMB );
+    const size_t lenMB = convUTF16.WC2MB(nullptr, utf16text, 0);
+    CHECK_EQ( wcslen(utf16text)*2, lenMB );
     wxCharBuffer buf(lenMB + 2); // it only adds 1 for NUL on its own, we need 2
                                  // for NUL and an extra one for the guard byte
     buf.data()[lenMB + 2] = '?';
 
-    CPPUNIT_ASSERT_EQUAL(
+    CHECK_EQ(
         wxCONV_FAILED, convUTF16.WC2MB(buf.data(), utf16text, lenMB) );
-    CPPUNIT_ASSERT_EQUAL(
+    CHECK_EQ(
         wxCONV_FAILED, convUTF16.WC2MB(buf.data(), utf16text, lenMB + 1) );
-    CPPUNIT_ASSERT(
+    CHECK(
         convUTF16.WC2MB(buf.data(), utf16text, lenMB + 2) != wxCONV_FAILED );
-    CPPUNIT_ASSERT(
+    CHECK(
         convUTF16.WC2MB(buf.data(), utf16text, lenMB + 3) != wxCONV_FAILED );
-    CPPUNIT_ASSERT_EQUAL( '?', buf[lenMB + 2] );
+    CHECK_EQ( '?', buf[lenMB + 2] );
 
     // Test cWC2MB() too.
     const wxCharBuffer buf2 = convUTF16.cWC2MB(utf16text);
@@ -898,7 +919,7 @@ void MBConvTestCase::BufSize()
     CHECK( memcmp(buf, buf3, lenMB) == 0 );
 }
 
-void MBConvTestCase::FromWCharTests()
+TEST_CASE("FromWCharTests")
 {
     wxCSConv conv950("CP950");
     char mbuf[10];
@@ -907,63 +928,63 @@ void MBConvTestCase::FromWCharTests()
 
     // test simple ASCII text
     memset(mbuf, '!', sizeof(mbuf));
-    CPPUNIT_ASSERT_EQUAL( wxCONV_FAILED, conv950.FromWChar(mbuf, 0, L"a", 1));
-    CPPUNIT_ASSERT_EQUAL( '!', mbuf[0]);
+    CHECK_EQ( wxCONV_FAILED, conv950.FromWChar(mbuf, 0, L"a", 1));
+    CHECK_EQ( '!', mbuf[0]);
 
     memset(mbuf, '!', sizeof(mbuf));
-    CPPUNIT_ASSERT_EQUAL( 1, conv950.FromWChar(mbuf, 1, L"a", 1));
-    CPPUNIT_ASSERT_EQUAL( 'a', mbuf[0]);
-    CPPUNIT_ASSERT_EQUAL( '!', mbuf[1]);
+    CHECK_EQ( 1, conv950.FromWChar(mbuf, 1, L"a", 1));
+    CHECK_EQ( 'a', mbuf[0]);
+    CHECK_EQ( '!', mbuf[1]);
 
     memset(mbuf, '!', sizeof(mbuf));
-    CPPUNIT_ASSERT_EQUAL( wxCONV_FAILED, conv950.FromWChar(mbuf, 1, L"a", 2));
+    CHECK_EQ( wxCONV_FAILED, conv950.FromWChar(mbuf, 1, L"a", 2));
 
     memset(mbuf, '!', sizeof(mbuf));
-    CPPUNIT_ASSERT_EQUAL( 2, conv950.FromWChar(mbuf, 2, L"a", 2));
-    CPPUNIT_ASSERT_EQUAL( 'a', mbuf[0]);
-    CPPUNIT_ASSERT_EQUAL( '\0', mbuf[1]);
-    CPPUNIT_ASSERT_EQUAL( '!', mbuf[2]);
+    CHECK_EQ( 2, conv950.FromWChar(mbuf, 2, L"a", 2));
+    CHECK_EQ( 'a', mbuf[0]);
+    CHECK_EQ( '\0', mbuf[1]);
+    CHECK_EQ( '!', mbuf[2]);
 
     // test non-ASCII text, 1 wchar -> 2 char
     memset(mbuf, '!', sizeof(mbuf));
-    CPPUNIT_ASSERT_EQUAL( wxCONV_FAILED, conv950.FromWChar(mbuf, 0, wbuf, 1));
+    CHECK_EQ( wxCONV_FAILED, conv950.FromWChar(mbuf, 0, wbuf, 1));
 
     memset(mbuf, '!', sizeof(mbuf));
-    CPPUNIT_ASSERT_EQUAL( wxCONV_FAILED, conv950.FromWChar(mbuf, 1, wbuf, 1));
+    CHECK_EQ( wxCONV_FAILED, conv950.FromWChar(mbuf, 1, wbuf, 1));
 
     memset(mbuf, '!', sizeof(mbuf));
-    CPPUNIT_ASSERT_EQUAL( 2, conv950.FromWChar(mbuf, 2, wbuf, 1));
-    CPPUNIT_ASSERT_EQUAL( '!', mbuf[2]);
+    CHECK_EQ( 2, conv950.FromWChar(mbuf, 2, wbuf, 1));
+    CHECK_EQ( '!', mbuf[2]);
 
     memset(mbuf, '!', sizeof(mbuf));
-    CPPUNIT_ASSERT_EQUAL( wxCONV_FAILED, conv950.FromWChar(mbuf, 2, wbuf, 2));
+    CHECK_EQ( wxCONV_FAILED, conv950.FromWChar(mbuf, 2, wbuf, 2));
 
     memset(mbuf, '!', sizeof(mbuf));
-    CPPUNIT_ASSERT_EQUAL( 3, conv950.FromWChar(mbuf, 3, wbuf, 2));
-    CPPUNIT_ASSERT_EQUAL( '\0', mbuf[2]);
-    CPPUNIT_ASSERT_EQUAL( '!', mbuf[3]);
+    CHECK_EQ( 3, conv950.FromWChar(mbuf, 3, wbuf, 2));
+    CHECK_EQ( '\0', mbuf[2]);
+    CHECK_EQ( '!', mbuf[3]);
 
     // test text with embedded NUL-character and srcLen specified
     memset(mbuf, '!', sizeof(mbuf));
-    CPPUNIT_ASSERT_EQUAL( wxCONV_FAILED, conv950.FromWChar(mbuf, 3, wbuf, 3));
+    CHECK_EQ( wxCONV_FAILED, conv950.FromWChar(mbuf, 3, wbuf, 3));
 
     memset(mbuf, '!', sizeof(mbuf));
-    CPPUNIT_ASSERT_EQUAL( wxCONV_FAILED, conv950.FromWChar(mbuf, 4, wbuf, 3));
-    CPPUNIT_ASSERT_EQUAL( 5, conv950.FromWChar(mbuf, 5, wbuf, 3));
-    CPPUNIT_ASSERT_EQUAL( '\0', mbuf[2]);
-    CPPUNIT_ASSERT_EQUAL( '!', mbuf[5]);
+    CHECK_EQ( wxCONV_FAILED, conv950.FromWChar(mbuf, 4, wbuf, 3));
+    CHECK_EQ( 5, conv950.FromWChar(mbuf, 5, wbuf, 3));
+    CHECK_EQ( '\0', mbuf[2]);
+    CHECK_EQ( '!', mbuf[5]);
 
     memset(mbuf, '!', sizeof(mbuf));
-    CPPUNIT_ASSERT_EQUAL( wxCONV_FAILED, conv950.FromWChar(mbuf, 5, wbuf, 4));
+    CHECK_EQ( wxCONV_FAILED, conv950.FromWChar(mbuf, 5, wbuf, 4));
 
     memset(mbuf, '!', sizeof(mbuf));
-    CPPUNIT_ASSERT_EQUAL( 6, conv950.FromWChar(mbuf, 6, wbuf, 4));
-    CPPUNIT_ASSERT_EQUAL( '\0', mbuf[2]);
-    CPPUNIT_ASSERT_EQUAL( '\0', mbuf[5]);
-    CPPUNIT_ASSERT_EQUAL( '!', mbuf[6]);
+    CHECK_EQ( 6, conv950.FromWChar(mbuf, 6, wbuf, 4));
+    CHECK_EQ( '\0', mbuf[2]);
+    CHECK_EQ( '\0', mbuf[5]);
+    CHECK_EQ( '!', mbuf[6]);
 }
 
-void MBConvTestCase::NonBMPCharTests()
+TEST_CASE("NonBMPCharTests")
 {
     // U+1F363 (UTF-16: D83C DF63, UTF-8: F0 9F 8D A3) sushi (emoji)
     // U+732B (UTF-8: E7 8C AB) cat (kanji)
@@ -997,7 +1018,7 @@ void MBConvTestCase::NonBMPCharTests()
         TestDecoder(w, wchars, u8, sizeof(u8)-1, wxConvUTF8, 1);
         TestEncoder(w, wchars, u8, sizeof(u8)-1, wxConvUTF8, 1);
     }
-    SECTION("wxMBConvUTF16LE")
+    SUBCASE("wxMBConvUTF16LE")
     {
         char u16le[sizeof(u16)];
         for (size_t i = 0; i < sizeof(u16)/2; ++i) {
@@ -1008,7 +1029,7 @@ void MBConvTestCase::NonBMPCharTests()
         TestDecoder(w, wchars, u16le, sizeof(u16le)-2, conv, 2);
         TestEncoder(w, wchars, u16le, sizeof(u16le)-2, conv, 2);
     }
-    SECTION("wxMBConvUTF16BE")
+    SUBCASE("wxMBConvUTF16BE")
     {
         char u16be[sizeof(u16)];
         for (size_t i = 0; i < sizeof(u16)/2; ++i) {
@@ -1019,7 +1040,7 @@ void MBConvTestCase::NonBMPCharTests()
         TestDecoder(w, wchars, u16be, sizeof(u16be)-2, conv, 2);
         TestEncoder(w, wchars, u16be, sizeof(u16be)-2, conv, 2);
     }
-    SECTION("wxMBConvUTF32LE")
+    SUBCASE("wxMBConvUTF32LE")
     {
         char u32le[sizeof(u32)];
         for (size_t i = 0; i < sizeof(u32)/4; ++i) {
@@ -1032,7 +1053,7 @@ void MBConvTestCase::NonBMPCharTests()
         TestDecoder(w, wchars, u32le, sizeof(u32le)-4, conv, 4);
         TestEncoder(w, wchars, u32le, sizeof(u32le)-4, conv, 4);
     }
-    SECTION("wxMBConvUTF32BE")
+    SUBCASE("wxMBConvUTF32BE")
     {
         char u32be[sizeof(u32)];
         for (size_t i = 0; i < sizeof(u32)/4; ++i) {
@@ -1049,7 +1070,7 @@ void MBConvTestCase::NonBMPCharTests()
 
 WXDLLIMPEXP_BASE wxMBConv* new_wxMBConv_iconv( const char* name );
 
-void MBConvTestCase::IconvTests()
+TEST_CASE("IconvTests")
 {
 #ifdef HAVE_ICONV
     wxMBConv* converter = new_wxMBConv_iconv("CP932");
@@ -1069,7 +1090,7 @@ void MBConvTestCase::IconvTests()
 #endif
 }
 
-void MBConvTestCase::Latin1Tests()
+TEST_CASE("Latin1Tests")
 {
     TestCoder(
         (const char*)iso8859_1,
@@ -1084,10 +1105,10 @@ void MBConvTestCase::Latin1Tests()
     static constexpr size_t mbLen = WXSIZEOF(nulstr) - 1;
     size_t wcLen;
     wxConvISO8859_1.cMB2WC(nulstr, mbLen, &wcLen);
-    CPPUNIT_ASSERT_EQUAL( mbLen, wcLen );
+    CHECK_EQ( mbLen, wcLen );
 }
 
-void MBConvTestCase::CP1252Tests()
+TEST_CASE("CP1252Tests")
 {
     wxCSConv convCP1252( wxFONTENCODING_CP1252 );
     TestCoder(
@@ -1100,7 +1121,7 @@ void MBConvTestCase::CP1252Tests()
         );
 }
 
-void MBConvTestCase::LibcTests()
+TEST_CASE("LibcTests")
 {
     // The locale name are OS-dependent so this test is done only under Windows
     // when using MSVC (surprisingly it fails with MinGW, even though it's
@@ -1121,255 +1142,17 @@ void MBConvTestCase::LibcTests()
 #endif // __VISUALC__
 }
 
-// verifies that the specified mb sequences decode to the specified wc sequence
-void MBConvTestCase::TestDecoder(
-    const wchar_t* wideBuffer,  // the same character sequence as multiBuffer, encoded as wchar_t
-    size_t         wideChars,   // the number of wide characters at wideBuffer
-    const char*    multiBuffer, // a multibyte encoded character sequence that can be decoded by "converter"
-    size_t         multiBytes,  // the byte length of the multibyte character sequence that can be decoded by "converter"
-    wxMBConv&      converter,   // the wxMBConv object that can decode multiBuffer into a wide character sequence
-    int            sizeofNull   // number of bytes occupied by terminating null in this encoding
-    )
-{
-    const unsigned UNINITIALIZED = 0xcd;
-
-    // copy the input bytes into a null terminated buffer
-    wxCharBuffer inputCopy( multiBytes+sizeofNull );
-    memcpy( inputCopy.data(), multiBuffer, multiBytes );
-    memset( &inputCopy.data()[multiBytes], 0, sizeofNull );
-
-    // calculate the output size
-    size_t outputWritten = converter.MB2WC
-        (
-        0,
-        (const char*)inputCopy.data(),
-        0
-        );
-    // make sure the correct output length was calculated
-    WX_ASSERT_EQUAL_MESSAGE
-    (
-        ("while converting \"%s\"", inputCopy),
-        wideChars,
-        outputWritten
-    );
-
-    // convert the string
-    size_t guardChars = 8; // to make sure we're not overrunning the output buffer
-    size_t nullCharacters = 1;
-    size_t outputBufferChars = outputWritten + nullCharacters + guardChars;
-    wxWCharBuffer outputBuffer(outputBufferChars);
-    memset( outputBuffer.data(), UNINITIALIZED, outputBufferChars*sizeof(wchar_t) );
-
-    outputWritten = converter.MB2WC
-        (
-        outputBuffer.data(),
-        (const char*)inputCopy.data(),
-        outputBufferChars
-        );
-    // make sure the correct number of characters were outputs
-    CPPUNIT_ASSERT_EQUAL( wideChars, outputWritten );
-
-    // make sure the characters generated are correct
-    CPPUNIT_ASSERT( 0 == memcmp( outputBuffer, wideBuffer, wideChars*sizeof(wchar_t) ) );
-
-    // the output buffer should be null terminated
-    CPPUNIT_ASSERT(  outputBuffer[outputWritten] == 0 );
-
-    // make sure the rest of the output buffer is untouched
-    for ( size_t i = (wideChars+1)*sizeof(wchar_t); i < (outputBufferChars*sizeof(wchar_t)); i++ )
-    {
-        CPPUNIT_ASSERT( ((unsigned char*)outputBuffer.data())[i] == UNINITIALIZED );
-    }
-
-#if wxUSE_STREAMS
-    TestStreamDecoder( wideBuffer, wideChars, multiBuffer, multiBytes, converter );
-#endif
-}
-
-// verifies that the specified wc sequences encodes to the specified mb sequence
-void MBConvTestCase::TestEncoder(
-    const wchar_t* wideBuffer,  // the same character sequence as multiBuffer, encoded as wchar_t
-    size_t         wideChars,   // the number of wide characters at wideBuffer
-    const char*    multiBuffer, // a multibyte encoded character sequence that can be decoded by "converter"
-    size_t         multiBytes,  // the byte length of the multibyte character sequence that can be decoded by "converter"
-    wxMBConv&      converter,   // the wxMBConv object that can decode multiBuffer into a wide character sequence
-    int            sizeofNull   // number of bytes occupied by terminating null in this encoding
-    )
-{
-    const unsigned UNINITIALIZED = 0xcd;
-
-    // copy the input bytes into a null terminated buffer
-    wxWCharBuffer inputCopy( wideChars + 1 );
-    memcpy( inputCopy.data(), wideBuffer, (wideChars*sizeof(wchar_t)) );
-    inputCopy.data()[wideChars] = 0;
-
-    // calculate the output size: notice that it can be greater than the real
-    // size as the converter is allowed to estimate the maximal size needed
-    // instead of computing it precisely
-    size_t outputWritten = converter.WC2MB
-        (
-        0,
-        (const wchar_t*)inputCopy.data(),
-        0
-        );
-    CPPUNIT_ASSERT( outputWritten >= multiBytes );
-
-    // convert the string
-    size_t guardBytes = 8; // to make sure we're not overrunning the output buffer
-    size_t outputBufferSize = outputWritten + sizeofNull + guardBytes;
-    wxCharBuffer outputBuffer(outputBufferSize);
-    memset( outputBuffer.data(), UNINITIALIZED, outputBufferSize );
-
-    outputWritten = converter.WC2MB
-        (
-        outputBuffer.data(),
-        (const wchar_t*)inputCopy.data(),
-        outputBufferSize
-        );
-
-    // make sure the correct number of characters were output
-    CPPUNIT_ASSERT_EQUAL( multiBytes, outputWritten );
-
-    // make sure the characters generated are correct
-    CPPUNIT_ASSERT( 0 == memcmp( outputBuffer, multiBuffer, multiBytes ) );
-
-    size_t i;
-
-    // the output buffer should be null terminated
-    for ( i = multiBytes; i < multiBytes + sizeofNull; i++ )
-    {
-        CPPUNIT_ASSERT( ((unsigned char*)outputBuffer.data())[i] == 0 );
-    }
-
-    // make sure the rest of the output buffer is untouched
-    for ( i = multiBytes + sizeofNull; i < outputBufferSize; i++ )
-    {
-        CPPUNIT_ASSERT( ((unsigned char*)outputBuffer.data())[i] == UNINITIALIZED );
-    }
-
-#if wxUSE_STREAMS
-    TestStreamEncoder( wideBuffer, wideChars, multiBuffer, multiBytes, converter );
-#endif
-}
-
-#if wxUSE_STREAMS
-// use wxTextInputStream to exercise wxMBConv interface
-// (this reveals some bugs in certain wxMBConv subclasses)
-void MBConvTestCase::TestStreamDecoder(
-                                       const wchar_t* wideBuffer,  // the same character sequence as multiBuffer, encoded as wchar_t
-                                       size_t         wideChars,   // the number of wide characters at wideBuffer
-                                       const char*    multiBuffer, // a multibyte encoded character sequence that can be decoded by "converter"
-                                       size_t         multiBytes,  // the byte length of the multibyte character sequence that can be decoded by "converter"
-                                       wxMBConv&      converter    // the wxMBConv object that can decode multiBuffer into a wide character sequence
-                                       )
-{
-    // this isn't meant to test wxMemoryInputStream or wxTextInputStream
-    // it's meant to test the way wxTextInputStream uses wxMBConv
-    // (which has exposed some problems with wxMBConv)
-    wxMemoryInputStream memoryInputStream( multiBuffer, multiBytes );
-    wxTextInputStream textInputStream( memoryInputStream, wxT(""), converter );
-    for ( size_t i = 0; i < wideChars; i++ )
-    {
-        wxChar wc = textInputStream.GetChar();
-        CPPUNIT_ASSERT_EQUAL_MESSAGE(
-            wxString::Format("At position %lu", (unsigned long)i).ToStdString(),
-            wideBuffer[i],
-            wc
-        );
-    }
-    CPPUNIT_ASSERT( 0 == textInputStream.GetChar() );
-    CPPUNIT_ASSERT( memoryInputStream.Eof() );
-}
-#endif
-
-#if wxUSE_STREAMS
-// use wxTextInputStream to exercise wxMBConv interface
-// (this reveals some bugs in certain wxMBConv subclasses)
-void MBConvTestCase::TestStreamEncoder(
-    const wchar_t* wideBuffer,  // the same character sequence as multiBuffer, encoded as wchar_t
-    size_t         wideChars,   // the number of wide characters at wideBuffer
-    const char*    multiBuffer, // a multibyte encoded character sequence that can be decoded by "converter"
-    size_t         multiBytes,  // the byte length of the multibyte character sequence that can be decoded by "converter"
-    wxMBConv&      converter    // the wxMBConv object that can decode multiBuffer into a wide character sequence
-    )
-{
-    // this isn't meant to test wxMemoryOutputStream or wxTextOutputStream
-    // it's meant to test the way wxTextOutputStream uses wxMBConv
-    // (which has exposed some problems with wxMBConv)
-    wxMemoryOutputStream memoryOutputStream;
-    // wxEOL_UNIX will pass \n \r unchanged
-    wxTextOutputStream textOutputStream( memoryOutputStream, wxEOL::Unix, converter );
-    for ( size_t i = 0; i < wideChars; i++ )
-    {
-        textOutputStream.PutChar( wideBuffer[i] );
-    }
-
-    textOutputStream.Flush();
-
-    CPPUNIT_ASSERT_EQUAL( multiBytes, size_t(memoryOutputStream.TellO()) );
-    wxCharBuffer copy( memoryOutputStream.TellO() );
-    memoryOutputStream.CopyTo( copy.data(), memoryOutputStream.TellO());
-    CPPUNIT_ASSERT_EQUAL( 0, memcmp( copy.data(), multiBuffer, multiBytes ) );
-}
-#endif
-
-
 // ----------------------------------------------------------------------------
 // UTF-8 tests
 // ----------------------------------------------------------------------------
 
 #ifdef HAVE_WCHAR_H
 
-// Check that 'charSequence' translates to 'wideSequence' and back.
-// Invalid sequences can be tested by giving NULL for 'wideSequence'. Even
-// invalid sequences should roundtrip when an option is given and this is
-// checked.
-//
-void MBConvTestCase::UTF8(const char *charSequence,
-                          const wchar_t *wideSequence)
-{
-    UTF8(charSequence, wideSequence, wxMBConvUTF8::MAP_INVALID_UTF8_NOT);
-    UTF8(charSequence, wideSequence, wxMBConvUTF8::MAP_INVALID_UTF8_TO_PUA);
-    UTF8(charSequence, wideSequence, wxMBConvUTF8::MAP_INVALID_UTF8_TO_OCTAL);
-}
-
-// Use this alternative when 'charSequence' contains a PUA character. Such
-// sequences should still roundtrip ok, and this is checked.
-//
-void MBConvTestCase::UTF8PUA(const char *charSequence,
-                             const wchar_t *wideSequence)
-{
-    UTF8(charSequence, wideSequence, wxMBConvUTF8::MAP_INVALID_UTF8_NOT);
-    UTF8(charSequence, NULL, wxMBConvUTF8::MAP_INVALID_UTF8_TO_PUA);
-    UTF8(charSequence, wideSequence, wxMBConvUTF8::MAP_INVALID_UTF8_TO_OCTAL);
-}
-
-// Use this alternative when 'charSequence' contains an octal escape sequence.
-// Such sequences should still roundtrip ok, and this is checked.
-//
-void MBConvTestCase::UTF8Octal(const char *charSequence,
-                               const wchar_t *wideSequence)
-{
-    UTF8(charSequence, wideSequence, wxMBConvUTF8::MAP_INVALID_UTF8_NOT);
-    UTF8(charSequence, wideSequence, wxMBConvUTF8::MAP_INVALID_UTF8_TO_PUA);
-    UTF8(charSequence, NULL, wxMBConvUTF8::MAP_INVALID_UTF8_TO_OCTAL);
-}
-
-// in case wcscpy is missing
-//
-static wchar_t *wx_wcscpy(wchar_t *dest, const wchar_t *src)
-{
-    wchar_t *d = dest;
-    while ((*d++ = *src++) != 0)
-        ;
-    return dest;
-}
-
 // in case wcscat is missing
 //
-static wchar_t *wx_wcscat(wchar_t *dest, const wchar_t *src)
+static wchar_t* wx_wcscat(wchar_t* dest, const wchar_t* src)
 {
-    wchar_t *d = dest;
+    wchar_t* d = dest;
     while (*d)
         d++;
     while ((*d++ = *src++) != 0)
@@ -1377,9 +1160,19 @@ static wchar_t *wx_wcscat(wchar_t *dest, const wchar_t *src)
     return dest;
 }
 
+// in case wcscpy is missing
+//
+static wchar_t* wx_wcscpy(wchar_t* dest, const wchar_t* src)
+{
+    wchar_t* d = dest;
+    while ((*d++ = *src++) != 0)
+        ;
+    return dest;
+}
+
 // in case wcscmp is missing
 //
-static int wx_wcscmp(const wchar_t *s1, const wchar_t *s2)
+static int wx_wcscmp(const wchar_t* s1, const wchar_t* s2)
 {
     while (*s1 == *s2 && *s1 != 0)
     {
@@ -1391,23 +1184,19 @@ static int wx_wcscmp(const wchar_t *s1, const wchar_t *s2)
 
 // in case wcslen is missing
 //
-static size_t wx_wcslen(const wchar_t *s)
+static size_t wx_wcslen(const wchar_t* s)
 {
-    const wchar_t *t = s;
+    const wchar_t* t = s;
     while (*t != 0)
         t++;
     return t - s;
 }
 
-// include the option in the error messages so it's possible to see which
-// test failed
-#define UTF8ASSERT(expr) CPPUNIT_ASSERT_MESSAGE(#expr + errmsg,  expr)
-
 // The test implementation
 //
-void MBConvTestCase::UTF8(const char *charSequence,
-                          const wchar_t *wideSequence,
-                          int option)
+static void UTF8(const char* charSequence,
+    const wchar_t* wideSequence,
+    int option)
 {
     const size_t BUFSIZE = 128;
     wxASSERT(strlen(charSequence) * 3 + 10 < BUFSIZE);
@@ -1428,13 +1217,13 @@ void MBConvTestCase::UTF8(const char *charSequence,
     // translate it into wide characters
     wxMBConvUTF8 utf8(option);
     wchar_t widechars[BUFSIZE];
-    size_t lenResult = utf8.MB2WC(NULL, bytes, 0);
+    size_t lenResult = utf8.MB2WC(nullptr, bytes, 0);
     size_t result = utf8.MB2WC(widechars, bytes, BUFSIZE);
-    UTF8ASSERT(result == lenResult);
+    CHECK(result == lenResult);
 
     // check we got the expected result
     if (wideSequence) {
-        UTF8ASSERT(result != (size_t)-1);
+        CHECK(result != (size_t)-1);
         wxASSERT(result < BUFSIZE);
 
         wchar_t expected[BUFSIZE];
@@ -1444,38 +1233,74 @@ void MBConvTestCase::UTF8(const char *charSequence,
         wx_wcscat(expected, L"XYZ");
         wx_wcscat(expected, wideSequence);
 
-        UTF8ASSERT(wx_wcscmp(widechars, expected) == 0);
-        UTF8ASSERT(wx_wcslen(widechars) == result);
+        CHECK(wx_wcscmp(widechars, expected) == 0);
+        CHECK(wx_wcslen(widechars) == result);
     }
     else {
-        // If 'wideSequence' is NULL, then the result is expected to be
+        // If 'wideSequence' is nullptr, then the result is expected to be
         // invalid.  Normally that is as far as we can go, but if there is an
         // option then the conversion should succeed anyway, and it should be
         // possible to translate back to the original
         if (!option) {
-            UTF8ASSERT(result == (size_t)-1);
+            CHECK(result == (size_t)-1);
             return;
         }
         else {
-            UTF8ASSERT(result != (size_t)-1);
+            CHECK(result != (size_t)-1);
         }
     }
 
     // translate it back and check we get the original
     char bytesAgain[BUFSIZE];
-    size_t lenResultAgain = utf8.WC2MB(NULL, widechars, 0);
+    size_t lenResultAgain = utf8.WC2MB(nullptr, widechars, 0);
     size_t resultAgain = utf8.WC2MB(bytesAgain, widechars, BUFSIZE);
-    UTF8ASSERT(resultAgain == lenResultAgain);
-    UTF8ASSERT(resultAgain != (size_t)-1);
+    CHECK(resultAgain == lenResultAgain);
+    CHECK(resultAgain != (size_t)-1);
     wxASSERT(resultAgain < BUFSIZE);
 
-    UTF8ASSERT(strcmp(bytes, bytesAgain) == 0);
-    UTF8ASSERT(strlen(bytesAgain) == resultAgain);
+    CHECK(strcmp(bytes, bytesAgain) == 0);
+    CHECK(strlen(bytesAgain) == resultAgain);
+}
+
+
+// Check that 'charSequence' translates to 'wideSequence' and back.
+// Invalid sequences can be tested by giving nullptr for 'wideSequence'. Even
+// invalid sequences should roundtrip when an option is given and this is
+// checked.
+//
+static void UTF8(const char *charSequence,
+                 const wchar_t *wideSequence)
+{
+    UTF8(charSequence, wideSequence, wxMBConvUTF8::MAP_INVALID_UTF8_NOT);
+    UTF8(charSequence, wideSequence, wxMBConvUTF8::MAP_INVALID_UTF8_TO_PUA);
+    UTF8(charSequence, wideSequence, wxMBConvUTF8::MAP_INVALID_UTF8_TO_OCTAL);
+}
+
+// Use this alternative when 'charSequence' contains a PUA character. Such
+// sequences should still roundtrip ok, and this is checked.
+//
+static void UTF8PUA(const char *charSequence,
+                             const wchar_t *wideSequence)
+{
+    UTF8(charSequence, wideSequence, wxMBConvUTF8::MAP_INVALID_UTF8_NOT);
+    UTF8(charSequence, nullptr, wxMBConvUTF8::MAP_INVALID_UTF8_TO_PUA);
+    UTF8(charSequence, wideSequence, wxMBConvUTF8::MAP_INVALID_UTF8_TO_OCTAL);
+}
+
+// Use this alternative when 'charSequence' contains an octal escape sequence.
+// Such sequences should still roundtrip ok, and this is checked.
+//
+static void UTF8Octal(const char *charSequence,
+                               const wchar_t *wideSequence)
+{
+    UTF8(charSequence, wideSequence, wxMBConvUTF8::MAP_INVALID_UTF8_NOT);
+    UTF8(charSequence, wideSequence, wxMBConvUTF8::MAP_INVALID_UTF8_TO_PUA);
+    UTF8(charSequence, nullptr, wxMBConvUTF8::MAP_INVALID_UTF8_TO_OCTAL);
 }
 
 #endif // HAVE_WCHAR_H
 
-TEST_CASE("wxMBConv::cWC2MB", "[mbconv][wc2mb]")
+TEST_CASE("wxMBConv::cWC2MB")
 {
     wxMBConvUTF16 convUTF16;
 
@@ -1491,10 +1316,11 @@ TEST_CASE("wxMBConv::cWC2MB", "[mbconv][wc2mb]")
     // conversion object doesn't return to its unshifted state -- which is
     // probably a bug in wxMBConvUTF7.
     // TODO: fix it there and reenable the test.
-    CHECK_NOFAIL( wxConvUTF7.cWC2MB(wxWCharBuffer::CreateNonOwned(L"\xa3")).length() == 5 );
+    // TODO: Fix this for doctest
+    //CHECK_NOFAIL( wxConvUTF7.cWC2MB(wxWCharBuffer::CreateNonOwned(L"\xa3")).length() == 5 );
 }
 
-TEST_CASE("wxMBConv::cMB2WC", "[mbconv][mb2wc]")
+TEST_CASE("wxMBConv::cMB2WC")
 {
     wxMBConvUTF16 convUTF16;
 
@@ -1507,3 +1333,34 @@ TEST_CASE("wxMBConv::cMB2WC", "[mbconv][mb2wc]")
     CHECK( wxConvUTF7.cMB2WC(wxCharBuffer()).length() == 0 );
     CHECK( wxConvUTF7.cMB2WC("+AKM-").length() == 1 );
 }
+
+#ifdef HAVE_WCHAR_H
+TEST_CASE("UTF8 tests")
+{
+    // UTF-8 tests. Test the first, last and one in the middle for sequences
+    // of each length
+    SUBCASE("UTF8_41") { UTF8("\x41", u41); }
+    SUBCASE("UTF8_7f") { UTF8("\x7f", u7f); }
+    SUBCASE("UTF8_80") { UTF8("\x80", nullptr); }
+
+    SUBCASE("UTF8_c2_7f") { UTF8("\xc2\x7f", nullptr); }
+    SUBCASE("UTF8_c2_80") { UTF8("\xc2\x80", u80); }
+    SUBCASE("UTF8_ce_91") { UTF8("\xce\x91", u391); }
+    SUBCASE("UTF8_df_bf") { UTF8("\xdf\xbf", u7ff); }
+    SUBCASE("UTF8_df_c0") { UTF8("\xdf\xc0", nullptr); }
+
+    SUBCASE("UTF8_e0_a0_7f") { UTF8("\xe0\xa0\x7f", nullptr); }
+    SUBCASE("UTF8_e0_a0_80") { UTF8("\xe0\xa0\x80", u800); }
+    SUBCASE("UTF8_e2_98_a0") { UTF8("\xe2\x98\xa0", u2620); }
+    SUBCASE("UTF8_ef_bf_bd") { UTF8("\xef\xbf\xbd", ufffd); }
+    SUBCASE("UTF8_ef_bf_c0") { UTF8("\xef\xbf\xc0", nullptr); }
+
+    SUBCASE("UTF8_f0_90_80_7f") { UTF8("\xf0\x90\x80\x7f", nullptr); }
+    SUBCASE("UTF8_f0_90_80_80") { UTF8("\xf0\x90\x80\x80", u10000); }
+    SUBCASE("UTF8_f4_8f_bf_bd") { UTF8("\xf4\x8f\xbf\xbd", u10fffd); }
+
+    // test 'escaping the escape characters' for the two escaping schemes
+    SUBCASE("UTF8PUA_f4_80_82_a5") { UTF8PUA("\xf4\x80\x82\xa5", u1000a5); }
+    SUBCASE("UTF8Octal_backslash245") { UTF8Octal("\\245", L"\\245"); }
+}
+#endif // HAVE_WCHAR_H

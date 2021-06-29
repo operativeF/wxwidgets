@@ -61,6 +61,7 @@
     <ClCompile Include="lists\lists.cpp" />
     <ClCompile Include="longlong\longlongtest.cpp" />
     <ClCompile Include="mbconv\convautotest.cpp" />
+    <ClCompile Include="mbconv\mbconvtest.cpp" />
     <ClCompile Include="misc\dynamiclib.cpp" />
     <ClCompile Include="misc\environ.cpp" />
     <ClCompile Include="misc\metatest.cpp" />
