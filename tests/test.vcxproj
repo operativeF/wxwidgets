@@ -38,6 +38,7 @@
     <ClInclude Include="doctest.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cmdline\cmdlinetest.cpp" />
     <ClCompile Include="events\evthandler.cpp" />
     <ClCompile Include="filesys\filesystest.cpp" />
     <ClCompile Include="file\filefn.cpp" />

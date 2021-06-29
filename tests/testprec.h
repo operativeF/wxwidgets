@@ -98,7 +98,7 @@ public:
             try { code ; } \
             catch ( const TestAssertFailure& ) { throwsAssert = true; } \
             if ( !throwsAssert ) \
-                CPPUNIT_FAIL(msg); \
+                FAIL(msg); \
         wxSTATEMENT_MACRO_END
 
     #define WX_ASSERT_FAILS_WITH_ASSERT(code) \
