@@ -40,6 +40,7 @@
   <ItemGroup>
     <ClCompile Include="cmdline\cmdlinetest.cpp" />
     <ClCompile Include="config\config.cpp" />
+    <ClCompile Include="config\fileconf.cpp" />
     <ClCompile Include="config\regconf.cpp" />
     <ClCompile Include="events\evthandler.cpp" />
     <ClCompile Include="filekind\filekind.cpp" />
