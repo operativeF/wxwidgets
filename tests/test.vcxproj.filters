@@ -109,5 +109,8 @@
     <ClCompile Include="textfile\textfiletest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="misc\dynamiclib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

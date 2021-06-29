@@ -60,6 +60,7 @@
     <ClCompile Include="lists\lists.cpp" />
     <ClCompile Include="longlong\longlongtest.cpp" />
     <ClCompile Include="mbconv\convautotest.cpp" />
+    <ClCompile Include="misc\dynamiclib.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="textfile\textfiletest.cpp" />
     <ClCompile Include="thread\atomic.cpp" />

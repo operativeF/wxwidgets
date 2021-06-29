@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #include "wx/dynlib.h"
@@ -23,29 +25,7 @@
 // test class
 // ----------------------------------------------------------------------------
 
-class DynamicLibraryTestCase : public CppUnit::TestCase
-{
-public:
-    DynamicLibraryTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( DynamicLibraryTestCase );
-        CPPUNIT_TEST( Load );
-    CPPUNIT_TEST_SUITE_END();
-
-    void Load();
-
-    DynamicLibraryTestCase(const DynamicLibraryTestCase&) = delete;
-	DynamicLibraryTestCase& operator=(const DynamicLibraryTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( DynamicLibraryTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( DynamicLibraryTestCase, "DynamicLibraryTestCase" );
-
-void DynamicLibraryTestCase::Load()
+TEST_CASE("Load")
 {
 #if defined(__WINDOWS__)
     static constexpr wxChar LIB_NAME[] = wxT("kernel32.dll");
@@ -70,17 +50,17 @@ void DynamicLibraryTestCase::Load()
 #endif
 
     wxDynamicLibrary lib(LIB_NAME);
-    CPPUNIT_ASSERT( lib.IsLoaded() );
+    CHECK( lib.IsLoaded() );
 
     typedef int (wxSTDCALL *wxStrlenType)(const char *);
     wxStrlenType pfnStrlen = (wxStrlenType)lib.GetSymbol(FUNC_NAME);
 
     wxString errMsg = wxString::Format("ERROR: function '%s' wasn't found in '%s'.\n",
                                        FUNC_NAME, LIB_NAME);
-    CPPUNIT_ASSERT_MESSAGE( errMsg.ToStdString(), (pfnStrlen != NULL) );
+    CHECK_MESSAGE((pfnStrlen != nullptr), errMsg.ToStdString() );
 
     // Call the function dynamically loaded
-    CPPUNIT_ASSERT( pfnStrlen("foo") == 3 );
+    CHECK( pfnStrlen("foo") == 3 );
 
 #ifdef __WINDOWS__
     static constexpr wxChar FUNC_NAME_AW[] = wxT("lstrlen");
@@ -91,8 +71,8 @@ void DynamicLibraryTestCase::Load()
 
     wxString errMsg2 = wxString::Format("ERROR: function '%s' wasn't found in '%s'.\n",
                                        FUNC_NAME_AW, LIB_NAME);
-    CPPUNIT_ASSERT_MESSAGE( errMsg2.ToStdString(), (pfnStrlenAorW != NULL) );
+    CHECK_MESSAGE((pfnStrlenAorW != nullptr), errMsg2.ToStdString());
 
-    CPPUNIT_ASSERT( pfnStrlenAorW(wxT("foobar")) == 6 );
+    CHECK( pfnStrlenAorW(wxT("foobar")) == 6 );
 #endif // __WINDOWS__
 }
