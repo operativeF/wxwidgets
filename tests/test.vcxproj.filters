@@ -103,5 +103,8 @@
     <ClCompile Include="exec\exec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="datetime\datetimetest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

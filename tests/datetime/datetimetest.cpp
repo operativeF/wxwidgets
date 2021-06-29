@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -175,7 +177,7 @@ struct Date
 // test data
 // ----------------------------------------------------------------------------
 
-static const Date testDates[] =
+static constexpr Date testDates[] =
 {
     {  1, wxDateTime::Jan,  1970, 00, 00, 00, 2440587.5, wxDateTime::Thu,         0 },
     {  7, wxDateTime::Feb,  2036, 00, 00, 00, 2464730.5, wxDateTime::Thu,        -1 },
@@ -199,74 +201,8 @@ static const Date testDates[] =
 };
 
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class DateTimeTestCase : public CppUnit::TestCase
-{
-public:
-    DateTimeTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( DateTimeTestCase );
-        CPPUNIT_TEST( TestLeapYears );
-        CPPUNIT_TEST( TestTimeSet );
-        CPPUNIT_TEST( TestTimeJDN );
-        CPPUNIT_TEST( TestTimeWNumber );
-        CPPUNIT_TEST( TestTimeWDays );
-        CPPUNIT_TEST( TestTimeDST );
-        CPPUNIT_TEST( TestTimeFormat );
-        CPPUNIT_TEST( TestTimeParse );
-        CPPUNIT_TEST( TestTimeZoneParse );
-        CPPUNIT_TEST( TestTimeSpanFormat );
-        CPPUNIT_TEST( TestTimeTicks );
-        CPPUNIT_TEST( TestParseRFC822 );
-        CPPUNIT_TEST( TestDateParse );
-        CPPUNIT_TEST( TestDateParseISO );
-        CPPUNIT_TEST( TestDateTimeParse );
-        CPPUNIT_TEST( TestDateWeekFormat );
-        CPPUNIT_TEST( TestTimeArithmetics );
-        CPPUNIT_TEST( TestDSTBug );
-        CPPUNIT_TEST( TestDateOnly );
-        CPPUNIT_TEST( TestTranslateFromUnicodeFormat );
-        CPPUNIT_TEST( TestConvToFromLocalTZ );
-    CPPUNIT_TEST_SUITE_END();
-
-    void TestLeapYears();
-    void TestTimeSet();
-    void TestTimeJDN();
-    void TestTimeWNumber();
-    void TestTimeWDays();
-    void TestTimeDST();
-    void TestTimeFormat();
-    void TestTimeParse();
-    void TestTimeZoneParse();
-    void TestTimeSpanFormat();
-    void TestTimeTicks();
-    void TestParseRFC822();
-    void TestDateParse();
-    void TestDateParseISO();
-    void TestDateTimeParse();
-    void TestDateWeekFormat();
-    void TestTimeArithmetics();
-    void TestDSTBug();
-    void TestDateOnly();
-    void TestTranslateFromUnicodeFormat();
-    void TestConvToFromLocalTZ();
-
-    DateTimeTestCase(const DateTimeTestCase&) = delete;
-	DateTimeTestCase& operator=(const DateTimeTestCase&) = delete;
-};
-
-wxREGISTER_UNIT_TEST_WITH_TAGS(DateTimeTestCase, "[datetime]");
-
-// ============================================================================
-// implementation
-// ============================================================================
-
 // test leap years detection
-void DateTimeTestCase::TestLeapYears()
+TEST_CASE("TestLeapYears")
 {
     static constexpr struct LeapYearTestData
     {
@@ -288,12 +224,12 @@ void DateTimeTestCase::TestLeapYears()
     {
         const LeapYearTestData& y = years[n];
 
-        CPPUNIT_ASSERT_EQUAL( y.isLeap, wxDateTime::IsLeapYear(y.year) );
+        CHECK_EQ( y.isLeap, wxDateTime::IsLeapYear(y.year) );
     }
 }
 
 // test constructing wxDateTime objects
-void DateTimeTestCase::TestTimeSet()
+TEST_CASE("TestTimeSet")
 {
     for ( size_t n = 0; n < WXSIZEOF(testDates); n++ )
     {
@@ -309,7 +245,7 @@ void DateTimeTestCase::TestTimeSet()
 }
 
 // test conversions to JDN &c
-void DateTimeTestCase::TestTimeJDN()
+TEST_CASE("TestTimeJDN")
 {
     for ( size_t n = 0; n < WXSIZEOF(testDates); n++ )
     {
@@ -328,7 +264,7 @@ void DateTimeTestCase::TestTimeJDN()
 }
 
 // test week days computation
-void DateTimeTestCase::TestTimeWDays()
+TEST_CASE("TestTimeWDays")
 {
     // test GetWeekDay()
     size_t n;
@@ -444,12 +380,12 @@ for n in range(20):
         dt.SetToWeekDay(wd.wday, wd.nWeek, wd.month, wd.year);
 
         const Date& d = wd.date;
-        CPPUNIT_ASSERT( d.SameDay(dt.GetTm()) );
+        CHECK( d.SameDay(dt.GetTm()) );
     }
 }
 
 // test the computation of (ISO) week numbers
-void DateTimeTestCase::TestTimeWNumber()
+TEST_CASE("TestTimeWNumber")
 {
     struct WeekNumberTestData
     {
@@ -560,14 +496,10 @@ for n in range(20):
             wmon2 = dt.GetWeekOfMonth(wxDateTime::Sunday_First),
             dnum = dt.GetDayOfYear();
 
-        WX_ASSERT_EQUAL_MESSAGE( ("day of year for %s", d.Format()),
-                                 wn.dnum, dnum );
-        WX_ASSERT_EQUAL_MESSAGE( ("week of month (Monday) for %s", d.Format()),
-                                 wn.wmon, wmon );
-        WX_ASSERT_EQUAL_MESSAGE( ("week of month (Sunday) for %s", d.Format()),
-                                 wn.wmon2, wmon2 );
-        WX_ASSERT_EQUAL_MESSAGE( ("week of year for %s", d.Format()),
-                                 wn.week, week );
+        CHECK_MESSAGE(wn.dnum == dnum, ("day of year for %s", d.Format()));
+        CHECK_MESSAGE(wn.wmon == wmon, ("week of month (Monday) for %s", d.Format()));
+        CHECK_MESSAGE(wn.wmon2 == wmon2, ("week of month (Sunday) for %s", d.Format()));
+        CHECK_MESSAGE(wn.week == week, ("week of year for %s", d.Format()));
 
         int year = d.year;
         if ( week == 1 && d.month != wxDateTime::Jan )
@@ -578,12 +510,12 @@ for n in range(20):
 
         wxDateTime
             dt2 = wxDateTime::SetToWeekOfYear(year, week, dt.GetWeekDay());
-        CPPUNIT_ASSERT_EQUAL( dt, dt2 );
+        CHECK_EQ( dt, dt2 );
     }
 }
 
 // test DST applicability
-void DateTimeTestCase::TestTimeDST()
+TEST_CASE("TestTimeDST")
 {
     // taken from http://www.energy.ca.gov/daylightsaving.html
     static const Date datesDST[2][2009 - 1990 + 1] =
@@ -644,13 +576,13 @@ void DateTimeTestCase::TestTimeDST()
         const Date& dBegin = datesDST[0][n];
         const Date& dEnd = datesDST[1][n];
 
-        CPPUNIT_ASSERT_EQUAL( dBegin.DT().FormatDate(), dtBegin.FormatDate() );
-        CPPUNIT_ASSERT_EQUAL( dEnd.DT().FormatDate(), dtEnd.FormatDate() );
+        CHECK_EQ( dBegin.DT().FormatDate(), dtBegin.FormatDate() );
+        CHECK_EQ( dEnd.DT().FormatDate(), dtEnd.FormatDate() );
     }
 }
 
 // test wxDateTime -> text conversion
-void DateTimeTestCase::TestTimeFormat()
+TEST_CASE("TestTimeFormat")
 {
     // some information may be lost during conversion, so store what kind
     // of info should we recover after a round trip
@@ -785,9 +717,9 @@ void DateTimeTestCase::TestTimeFormat()
                 if ( !result )
                 {
                     // conversion failed - should it have?
-                    WX_ASSERT_MESSAGE(
-                        ("Test #%u failed: failed to parse \"%s\"", n, s),
-                        kind == CompareNone
+                    CHECK_MESSAGE(
+                        kind == CompareNone,
+                        ("Test #%u failed: failed to parse \"%s\"", n, s)
                     );
                 }
                 else // conversion succeeded
@@ -799,10 +731,10 @@ void DateTimeTestCase::TestTimeFormat()
                     while ( *result && (*result >= 'A' && *result <= 'Z') )
                         result++;
 
-                    WX_ASSERT_MESSAGE(
+                    CHECK_MESSAGE(
+                        !*result,
                         ("Test #%u failed: \"%s\" was left unparsed in \"%s\"",
-                         n, result, s),
-                        !*result
+                         n, result, s)
                     );
 
                     // Without "%z" we can't recover the time zone used in the
@@ -848,83 +780,83 @@ void DateTimeTestCase::TestTimeFormat()
         }
     }
 
-    CPPUNIT_ASSERT(wxDateTime::Now().Format("%%") == "%");
+    CHECK(wxDateTime::Now().Format("%%") == "%");
 
     wxDateTime dt;
 
 #if 0
     // special case which was known to fail
-    CPPUNIT_ASSERT( dt.ParseFormat("02/06/1856", "%x") );
-    CPPUNIT_ASSERT_EQUAL( 1856, dt.GetYear() );
+    CHECK( dt.ParseFormat("02/06/1856", "%x") );
+    CHECK_EQ( 1856, dt.GetYear() );
 #endif
 
     // also test %l separately
-    CPPUNIT_ASSERT( dt.ParseFormat("12:23:45.678", "%H:%M:%S.%l") );
-    CPPUNIT_ASSERT_EQUAL( 678, dt.GetMillisecond() );
+    CHECK( dt.ParseFormat("12:23:45.678", "%H:%M:%S.%l") );
+    CHECK_EQ( 678, dt.GetMillisecond() );
 
     // test special case of %l matching 0 milliseconds
-    CPPUNIT_ASSERT( dt.ParseFormat("12:23:45.000", "%H:%M:%S.%l") );
-    CPPUNIT_ASSERT_EQUAL( 0, dt.GetMillisecond() );
+    CHECK( dt.ParseFormat("12:23:45.000", "%H:%M:%S.%l") );
+    CHECK_EQ( 0, dt.GetMillisecond() );
 
     // test another format modifier not tested above.
-    CPPUNIT_ASSERT( dt.ParseFormat("23", "%e") );
-    CPPUNIT_ASSERT_EQUAL( 23, dt.GetDay() );
+    CHECK( dt.ParseFormat("23", "%e") );
+    CHECK_EQ( 23, dt.GetDay() );
 
     // test partially specified dates too
     wxDateTime dtDef(26, wxDateTime::Sep, 2008);
-    CPPUNIT_ASSERT( dt.ParseFormat("17", "%d", dtDef) );
-    CPPUNIT_ASSERT_EQUAL( 17, dt.GetDay() );
-    CPPUNIT_ASSERT_EQUAL( wxDateTime::Sep, dt.GetMonth() );
-    CPPUNIT_ASSERT_EQUAL( 2008, dt.GetYear() );
+    CHECK( dt.ParseFormat("17", "%d", dtDef) );
+    CHECK_EQ( 17, dt.GetDay() );
+    CHECK_EQ( wxDateTime::Sep, dt.GetMonth() );
+    CHECK_EQ( 2008, dt.GetYear() );
 
     // test some degenerate cases
-    CPPUNIT_ASSERT( !dt.ParseFormat("", "%z") );
-    CPPUNIT_ASSERT( !dt.ParseFormat("", "%%") );
+    CHECK( !dt.ParseFormat("", "%z") );
+    CHECK( !dt.ParseFormat("", "%%") );
 
     // test compilation of some calls which should compile (and not result in
     // ambiguity because of char*<->wxCStrData<->wxString conversions)
     wxString s("foo");
-    CPPUNIT_ASSERT( !dt.ParseFormat("foo") );
-    CPPUNIT_ASSERT( !dt.ParseFormat(wxT("foo")) );
-    CPPUNIT_ASSERT( !dt.ParseFormat(s) );
+    CHECK( !dt.ParseFormat("foo") );
+    CHECK( !dt.ParseFormat(wxT("foo")) );
+    CHECK( !dt.ParseFormat(s) );
     dt.ParseFormat(s.c_str()); // Simply test compilation of this one.
 
-    CPPUNIT_ASSERT( !dt.ParseFormat("foo", "%c") );
-    CPPUNIT_ASSERT( !dt.ParseFormat(wxT("foo"), "%c") );
-    CPPUNIT_ASSERT( !dt.ParseFormat(s, "%c") );
+    CHECK( !dt.ParseFormat("foo", "%c") );
+    CHECK( !dt.ParseFormat(wxT("foo"), "%c") );
+    CHECK( !dt.ParseFormat(s, "%c") );
     dt.ParseFormat(s.c_str(), "%c");
 
-    CPPUNIT_ASSERT( !dt.ParseFormat("foo", wxT("%c")) );
-    CPPUNIT_ASSERT( !dt.ParseFormat(wxT("foo"), wxT("%c")) );
-    CPPUNIT_ASSERT( !dt.ParseFormat(s, "%c") );
+    CHECK( !dt.ParseFormat("foo", wxT("%c")) );
+    CHECK( !dt.ParseFormat(wxT("foo"), wxT("%c")) );
+    CHECK( !dt.ParseFormat(s, "%c") );
     dt.ParseFormat(s.c_str(), wxT("%c"));
 
     wxString spec("%c");
-    CPPUNIT_ASSERT( !dt.ParseFormat("foo", spec) );
-    CPPUNIT_ASSERT( !dt.ParseFormat(wxT("foo"), spec) );
-    CPPUNIT_ASSERT( !dt.ParseFormat(s, spec) );
+    CHECK( !dt.ParseFormat("foo", spec) );
+    CHECK( !dt.ParseFormat(wxT("foo"), spec) );
+    CHECK( !dt.ParseFormat(s, spec) );
     dt.ParseFormat(s.c_str(), spec);
 }
 
 // Test parsing time in free format.
-void DateTimeTestCase::TestTimeParse()
+TEST_CASE("TestTimeParse")
 {
     wxDateTime dt;
 
     // Parsing standard formats should work.
-    CPPUNIT_ASSERT( dt.ParseTime("12:34:56") );
-    CPPUNIT_ASSERT_EQUAL( "12:34:56", dt.FormatISOTime() );
+    CHECK( dt.ParseTime("12:34:56") );
+    CHECK_EQ( "12:34:56", dt.FormatISOTime() );
 
     // Parsing just hours should work too.
     dt.ResetTime();
-    CPPUNIT_ASSERT( dt.ParseTime("17") );
-    CPPUNIT_ASSERT_EQUAL( "17:00:00", dt.FormatISOTime() );
+    CHECK( dt.ParseTime("17") );
+    CHECK_EQ( "17:00:00", dt.FormatISOTime() );
 
     // Parsing gibberish shouldn't work.
-    CPPUNIT_ASSERT( !dt.ParseTime("bloordyblop") );
+    CHECK( !dt.ParseTime("bloordyblop") );
 }
 
-void DateTimeTestCase::TestTimeZoneParse()
+TEST_CASE("TestTimeZoneParse")
 {
     wxGCC_WARNING_SUPPRESS(missing-field-initializers)
 
@@ -983,19 +915,19 @@ void DateTimeTestCase::TestTimeZoneParse()
         if ( dt.ParseFormat(sTimeZone, wxS("%H:%M%z"), &end)
              && end == sTimeZone.end() )
         {
-            CPPUNIT_ASSERT( parseTestTimeZones[n].good );
-            CPPUNIT_ASSERT_EQUAL( 13, dt.GetHour(wxDateTime::UTC));
-            CPPUNIT_ASSERT_EQUAL( 37, dt.GetMinute(wxDateTime::UTC));
+            CHECK( parseTestTimeZones[n].good );
+            CHECK_EQ( 13, dt.GetHour(wxDateTime::UTC));
+            CHECK_EQ( 37, dt.GetMinute(wxDateTime::UTC));
         }
         else
         {
             // Failed to parse time zone.
-            CPPUNIT_ASSERT( !parseTestTimeZones[n].good );
+            CHECK( !parseTestTimeZones[n].good );
         }
     }
 }
 
-void DateTimeTestCase::TestTimeSpanFormat()
+TEST_CASE("TestTimeSpanFormat")
 {
     wxGCC_WARNING_SUPPRESS(missing-field-initializers)
 
@@ -1028,11 +960,11 @@ void DateTimeTestCase::TestTimeSpanFormat()
     {
         const TimeSpanFormatTestData& td = testSpans[n];
         wxTimeSpan ts(td.h, td.min, td.sec, td.msec);
-        CPPUNIT_ASSERT_EQUAL( td.result, ts.Format(td.fmt) );
+        CHECK_EQ( td.result, ts.Format(td.fmt) );
     }
 }
 
-void DateTimeTestCase::TestTimeTicks()
+TEST_CASE("TestTimeTicks")
 {
     for ( size_t n = 0; n < WXSIZEOF(testDates); n++ )
     {
@@ -1050,7 +982,7 @@ void DateTimeTestCase::TestTimeTicks()
 }
 
 // test parsing dates in RFC822 format
-void DateTimeTestCase::TestParseRFC822()
+TEST_CASE("TestParseRFC822")
 {
     wxGCC_WARNING_SUPPRESS(missing-field-initializers)
 
@@ -1107,26 +1039,26 @@ void DateTimeTestCase::TestParseRFC822()
         wxDateTime dt;
         if ( dt.ParseRfc822Date(datestr) )
         {
-            WX_ASSERT_MESSAGE(
-                ("Erroneously parsed \"%s\"", datestr),
-                parseTestDates[n].good
+            CHECK_MESSAGE(
+                parseTestDates[n].good,
+                ("Erroneously parsed \"%s\"", datestr)
             );
 
             wxDateTime dtReal = parseTestDates[n].date.DT().FromUTC();
-            CPPUNIT_ASSERT_EQUAL( dtReal, dt );
+            CHECK_EQ( dtReal, dt );
         }
         else // failed to parse
         {
-            WX_ASSERT_MESSAGE(
-                ("Failed to parse \"%s\"", datestr),
-                !parseTestDates[n].good
+            CHECK_MESSAGE(
+                !parseTestDates[n].good,
+                ("Failed to parse \"%s\"", datestr)
             );
         }
     }
 }
 
 // test parsing dates in free format
-void DateTimeTestCase::TestDateParse()
+TEST_CASE("TestDateParse")
 {
     wxGCC_WARNING_SUPPRESS(missing-field-initializers)
 
@@ -1154,8 +1086,8 @@ void DateTimeTestCase::TestDateParse()
 
     // special cases
     wxDateTime dt;
-    CPPUNIT_ASSERT( dt.ParseDate(wxT("today")) );
-    CPPUNIT_ASSERT_EQUAL( wxDateTime::Today(), dt );
+    CHECK( dt.ParseDate(wxT("today")) );
+    CHECK_EQ( wxDateTime::Today(), dt );
 
     for ( size_t n = 0; n < WXSIZEOF(parseTestDates); n++ )
     {
@@ -1164,28 +1096,28 @@ void DateTimeTestCase::TestDateParse()
         const char * const end = dt.ParseDate(datestr);
         if ( end && !*end )
         {
-            WX_ASSERT_MESSAGE(
-                ("Erroneously parsed \"%s\"", datestr),
-                parseTestDates[n].good
+            CHECK_MESSAGE(
+                parseTestDates[n].good,
+                ("Erroneously parsed \"%s\"", datestr)
             );
 
-            CPPUNIT_ASSERT_EQUAL( parseTestDates[n].date.DT(), dt );
+            CHECK_EQ( parseTestDates[n].date.DT(), dt );
         }
         else // failed to parse
         {
-            WX_ASSERT_MESSAGE(
-                ("Failed to parse \"%s\"", datestr),
-                !parseTestDates[n].good
+            CHECK_MESSAGE(
+                !parseTestDates[n].good,
+                ("Failed to parse \"%s\"", datestr)
             );
         }
     }
 
     // Check that incomplete parse works correctly.
     const char* p = dt.ParseFormat("2012-03-23 12:34:56", "%Y-%m-%d");
-    CPPUNIT_ASSERT_EQUAL( " 12:34:56", wxString(p) );
+    CHECK_EQ( " 12:34:56", wxString(p) );
 }
 
-void DateTimeTestCase::TestDateParseISO()
+TEST_CASE("TestDateParseISO")
 {
     wxGCC_WARNING_SUPPRESS(missing-field-initializers)
 
@@ -1231,9 +1163,9 @@ void DateTimeTestCase::TestDateParseISO()
         wxDateTime dt;
         if ( dt.ParseISODate(parseTestDates[n].str) )
         {
-            CPPUNIT_ASSERT( parseTestDates[n].good );
+            CHECK( parseTestDates[n].good );
 
-            CPPUNIT_ASSERT_EQUAL( parseTestDates[n].date.DT(), dt );
+            CHECK_EQ( parseTestDates[n].date.DT(), dt );
 
             for ( size_t m = 0; m < WXSIZEOF(parseTestTimes); m++ )
             {
@@ -1244,26 +1176,26 @@ void DateTimeTestCase::TestDateParseISO()
 
                 if ( dt.ParseISOCombined(dtCombined) )
                 {
-                    CPPUNIT_ASSERT( parseTestTimes[m].good );
+                    CHECK( parseTestTimes[m].good );
 
-                    CPPUNIT_ASSERT_EQUAL( parseTestTimes[m].hour, dt.GetHour()) ;
-                    CPPUNIT_ASSERT_EQUAL( parseTestTimes[m].min, dt.GetMinute()) ;
-                    CPPUNIT_ASSERT_EQUAL( parseTestTimes[m].sec, dt.GetSecond()) ;
+                    CHECK_EQ( parseTestTimes[m].hour, dt.GetHour()) ;
+                    CHECK_EQ( parseTestTimes[m].min, dt.GetMinute()) ;
+                    CHECK_EQ( parseTestTimes[m].sec, dt.GetSecond()) ;
                 }
                 else // failed to parse combined date/time
                 {
-                    CPPUNIT_ASSERT( !parseTestTimes[m].good );
+                    CHECK( !parseTestTimes[m].good );
                 }
             }
         }
         else // failed to parse
         {
-            CPPUNIT_ASSERT( !parseTestDates[n].good );
+            CHECK( !parseTestDates[n].good );
         }
     }
 }
 
-void DateTimeTestCase::TestDateTimeParse()
+TEST_CASE("TestDateTimeParse")
 {
     wxGCC_WARNING_SUPPRESS(missing-field-initializers)
 
@@ -1313,26 +1245,26 @@ void DateTimeTestCase::TestDateTimeParse()
         const char * const end = dt.ParseDateTime(datestr);
         if ( end && !*end )
         {
-            WX_ASSERT_MESSAGE(
-                ("Erroneously parsed \"%s\"", datestr),
-                parseTestDates[n].good
+            CHECK_MESSAGE(
+                parseTestDates[n].good,
+                ("Erroneously parsed \"%s\"", datestr)
             );
 
-            CPPUNIT_ASSERT_EQUAL( parseTestDates[n].date.DT(), dt );
+            CHECK_EQ( parseTestDates[n].date.DT(), dt );
         }
         else // failed to parse
         {
-            WX_ASSERT_MESSAGE(
-                ("Failed to parse \"%s\"", datestr),
-                !parseTestDates[n].good
+            CHECK_MESSAGE(
+                !parseTestDates[n].good,
+                ("Failed to parse \"%s\"", datestr)
             );
 
-            CPPUNIT_ASSERT( !parseTestDates[n].good );
+            CHECK( !parseTestDates[n].good );
         }
     }
 }
 
-void DateTimeTestCase::TestDateWeekFormat()
+TEST_CASE("TestDateWeekFormat")
 {
     static const struct DateWeekTestData
     {
@@ -1404,14 +1336,14 @@ void DateTimeTestCase::TestDateWeekFormat()
         const DateWeekTestData& td = testWeeks[n];
         wxDateTime d(td.d, wxDateTime::Month(td.m - 1), td.y);
 
-        CPPUNIT_ASSERT_EQUAL( td.result, d.Format("%G-%V") );
+        CHECK_EQ( td.result, d.Format("%G-%V") );
 
         if ( td.y > 2000 )
-            CPPUNIT_ASSERT_EQUAL( td.result + 2, d.Format("%g-%V") );
+            CHECK_EQ( td.result + 2, d.Format("%g-%V") );
     }
 }
 
-void DateTimeTestCase::TestTimeArithmetics()
+TEST_CASE("TestTimeArithmetics")
 {
     static const wxDateSpan testArithmData[] =
     {
@@ -1432,10 +1364,10 @@ void DateTimeTestCase::TestTimeArithmetics()
         dt1 = dt + span;
         dt2 = dt - span;
 
-        CPPUNIT_ASSERT_EQUAL( dt, dt1 - span );
-        CPPUNIT_ASSERT_EQUAL( dt, dt2 + span );
-        CPPUNIT_ASSERT_EQUAL( dt1, dt2 + 2*span );
-        CPPUNIT_ASSERT_EQUAL( span, dt1.DiffAsDateSpan(dt) );
+        CHECK_EQ( dt, dt1 - span );
+        CHECK_EQ( dt, dt2 + span );
+        CHECK_EQ( dt1, dt2 + 2*span );
+        CHECK_EQ( span, dt1.DiffAsDateSpan(dt) );
     }
 
     // More date span arithmetics tests
@@ -1443,59 +1375,59 @@ void DateTimeTestCase::TestTimeArithmetics()
     wxDateTime dtd2(6, wxDateTime::Aug, 1999);
 
     // All parts in dtd2 is after dtd1
-    CPPUNIT_ASSERT_EQUAL( wxDateSpan(1, 2, 0, 1), dtd2.DiffAsDateSpan(dtd1) );
+    CHECK_EQ( wxDateSpan(1, 2, 0, 1), dtd2.DiffAsDateSpan(dtd1) );
 
     // Year and month after, day earlier, so no full month
     // Jul has 31 days, so it's 31 - 5 + 4 = 30, or 4w 2d
     dtd2.Set(4, wxDateTime::Aug, 1999);
-    CPPUNIT_ASSERT_EQUAL( wxDateSpan(1, 1, 4, 2), dtd2.DiffAsDateSpan(dtd1) );
+    CHECK_EQ( wxDateSpan(1, 1, 4, 2), dtd2.DiffAsDateSpan(dtd1) );
 
     // Year and day after, month earlier, so no full year, but same day diff as
     // first example
     dtd2.Set(6, wxDateTime::May, 1999);
-    CPPUNIT_ASSERT_EQUAL( wxDateSpan(0, 11, 0, 1), dtd2.DiffAsDateSpan(dtd1) );
+    CHECK_EQ( wxDateSpan(0, 11, 0, 1), dtd2.DiffAsDateSpan(dtd1) );
 
     // Year after, month and day earlier, so no full month and no full year
     // April has 30 days, so it's 30 - 5 + 4 = 29, or 4w 1d
     dtd2.Set(4, wxDateTime::May, 1999);
-    CPPUNIT_ASSERT_EQUAL( wxDateSpan(0, 10, 4, 1), dtd2.DiffAsDateSpan(dtd1) );
+    CHECK_EQ( wxDateSpan(0, 10, 4, 1), dtd2.DiffAsDateSpan(dtd1) );
 
     // And a reverse. Now we should use days in Jun (again 30 => 4w 1d)
-    CPPUNIT_ASSERT_EQUAL( wxDateSpan(0, -10, -4, -1), dtd1.DiffAsDateSpan(dtd2) );
+    CHECK_EQ( wxDateSpan(0, -10, -4, -1), dtd1.DiffAsDateSpan(dtd2) );
 
     const wxTimeSpan ts1 = wxTimeSpan::Seconds(30);
     const wxTimeSpan ts2 = wxTimeSpan::Seconds(5);
-    CPPUNIT_ASSERT_EQUAL( wxTimeSpan::Seconds(25), ts1 - ts2 );
+    CHECK_EQ( wxTimeSpan::Seconds(25), ts1 - ts2 );
 }
 
-void DateTimeTestCase::TestDSTBug()
+TEST_CASE("TestDSTBug")
 {
     /////////////////////////
     // Test GetEndDST()
     wxDateTime dt = wxDateTime::GetEndDST(2004, wxDateTime::France);
-    CPPUNIT_ASSERT_EQUAL(31, (int)dt.GetDay());
-    CPPUNIT_ASSERT_EQUAL(wxDateTime::Oct, dt.GetMonth());
-    CPPUNIT_ASSERT_EQUAL(2004, (int)dt.GetYear());
-    CPPUNIT_ASSERT_EQUAL(1, (int)dt.GetHour());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt.GetMinute());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt.GetSecond());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt.GetMillisecond());
+    CHECK_EQ(31, (int)dt.GetDay());
+    CHECK_EQ(wxDateTime::Oct, dt.GetMonth());
+    CHECK_EQ(2004, (int)dt.GetYear());
+    CHECK_EQ(1, (int)dt.GetHour());
+    CHECK_EQ(0, (int)dt.GetMinute());
+    CHECK_EQ(0, (int)dt.GetSecond());
+    CHECK_EQ(0, (int)dt.GetMillisecond());
 
     /////////////////////////
     // Test ResetTime()
     dt.SetHour(5);
-    CPPUNIT_ASSERT_EQUAL(5, (int)dt.GetHour());
+    CHECK_EQ(5, (int)dt.GetHour());
     dt.ResetTime();
-    CPPUNIT_ASSERT_EQUAL(31, (int)dt.GetDay());
-    CPPUNIT_ASSERT_EQUAL(wxDateTime::Oct, dt.GetMonth());
-    CPPUNIT_ASSERT_EQUAL(2004, (int)dt.GetYear());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt.GetHour());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt.GetMinute());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt.GetSecond());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt.GetMillisecond());
+    CHECK_EQ(31, (int)dt.GetDay());
+    CHECK_EQ(wxDateTime::Oct, dt.GetMonth());
+    CHECK_EQ(2004, (int)dt.GetYear());
+    CHECK_EQ(0, (int)dt.GetHour());
+    CHECK_EQ(0, (int)dt.GetMinute());
+    CHECK_EQ(0, (int)dt.GetSecond());
+    CHECK_EQ(0, (int)dt.GetMillisecond());
 
     dt.Set(1, 0, 0, 0);
-    CPPUNIT_ASSERT_EQUAL(1, (int)dt.GetHour());
+    CHECK_EQ(1, (int)dt.GetHour());
 
     /////////////////////////
     // Test Today()
@@ -1505,13 +1437,13 @@ void DateTimeTestCase::TestDSTBug()
         dt = wxDateTime::Today();
     }
 
-    CPPUNIT_ASSERT_EQUAL(31, (int)dt.GetDay());
-    CPPUNIT_ASSERT_EQUAL(wxDateTime::Oct, dt.GetMonth());
-    CPPUNIT_ASSERT_EQUAL(2004, (int)dt.GetYear());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt.GetHour());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt.GetMinute());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt.GetSecond());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt.GetMillisecond());
+    CHECK_EQ(31, (int)dt.GetDay());
+    CHECK_EQ(wxDateTime::Oct, dt.GetMonth());
+    CHECK_EQ(2004, (int)dt.GetYear());
+    CHECK_EQ(0, (int)dt.GetHour());
+    CHECK_EQ(0, (int)dt.GetMinute());
+    CHECK_EQ(0, (int)dt.GetSecond());
+    CHECK_EQ(0, (int)dt.GetMillisecond());
 
     /////////////////////////
     // Test Set(hour, minute, second, milli)
@@ -1522,21 +1454,21 @@ void DateTimeTestCase::TestDSTBug()
         dt2.Set(5, 30, 0, 0);
     }
 
-    CPPUNIT_ASSERT_EQUAL(31, (int)dt.GetDay());
-    CPPUNIT_ASSERT_EQUAL(wxDateTime::Oct, dt.GetMonth());
-    CPPUNIT_ASSERT_EQUAL(2004, (int)dt.GetYear());
-    CPPUNIT_ASSERT_EQUAL(1, (int)dt.GetHour());
-    CPPUNIT_ASSERT_EQUAL(30, (int)dt.GetMinute());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt.GetSecond());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt.GetMillisecond());
+    CHECK_EQ(31, (int)dt.GetDay());
+    CHECK_EQ(wxDateTime::Oct, dt.GetMonth());
+    CHECK_EQ(2004, (int)dt.GetYear());
+    CHECK_EQ(1, (int)dt.GetHour());
+    CHECK_EQ(30, (int)dt.GetMinute());
+    CHECK_EQ(0, (int)dt.GetSecond());
+    CHECK_EQ(0, (int)dt.GetMillisecond());
 
-    CPPUNIT_ASSERT_EQUAL(31, (int)dt2.GetDay());
-    CPPUNIT_ASSERT_EQUAL(wxDateTime::Oct, dt2.GetMonth());
-    CPPUNIT_ASSERT_EQUAL(2004, (int)dt2.GetYear());
-    CPPUNIT_ASSERT_EQUAL(5, (int)dt2.GetHour());
-    CPPUNIT_ASSERT_EQUAL(30, (int)dt2.GetMinute());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt2.GetSecond());
-    CPPUNIT_ASSERT_EQUAL(0, (int)dt2.GetMillisecond());
+    CHECK_EQ(31, (int)dt2.GetDay());
+    CHECK_EQ(wxDateTime::Oct, dt2.GetMonth());
+    CHECK_EQ(2004, (int)dt2.GetYear());
+    CHECK_EQ(5, (int)dt2.GetHour());
+    CHECK_EQ(30, (int)dt2.GetMinute());
+    CHECK_EQ(0, (int)dt2.GetSecond());
+    CHECK_EQ(0, (int)dt2.GetMillisecond());
 #endif // CHANGE_SYSTEM_DATE
 
     // Verify that setting the date to the beginning of the DST period moves it
@@ -1546,30 +1478,30 @@ void DateTimeTestCase::TestDSTBug()
     // either unchanged or moved forward.
     wxDateTime dtDST(10, wxDateTime::Mar, 2013, 2, 0, 0);
     if ( dtDST.GetHour() != 2 )
-        CPPUNIT_ASSERT_EQUAL( 3, dtDST.GetHour() );
+        CHECK_EQ( 3, dtDST.GetHour() );
 
     dtDST = wxDateTime(31, wxDateTime::Mar, 2013, 2, 0, 0);
     if ( dtDST.GetHour() != 2 )
-        CPPUNIT_ASSERT_EQUAL( 3, dtDST.GetHour() );
+        CHECK_EQ( 3, dtDST.GetHour() );
 }
 
-void DateTimeTestCase::TestDateOnly()
+TEST_CASE("TestDateOnly")
 {
     wxDateTime dt(19, wxDateTime::Jan, 2007, 15, 01, 00);
 
     static const wxDateTime::wxDateTime_t DATE_ZERO = 0;
-    CPPUNIT_ASSERT_EQUAL( DATE_ZERO, dt.GetDateOnly().GetHour() );
-    CPPUNIT_ASSERT_EQUAL( DATE_ZERO, dt.GetDateOnly().GetMinute() );
-    CPPUNIT_ASSERT_EQUAL( DATE_ZERO, dt.GetDateOnly().GetSecond() );
-    CPPUNIT_ASSERT_EQUAL( DATE_ZERO, dt.GetDateOnly().GetMillisecond() );
+    CHECK_EQ( DATE_ZERO, dt.GetDateOnly().GetHour() );
+    CHECK_EQ( DATE_ZERO, dt.GetDateOnly().GetMinute() );
+    CHECK_EQ( DATE_ZERO, dt.GetDateOnly().GetSecond() );
+    CHECK_EQ( DATE_ZERO, dt.GetDateOnly().GetMillisecond() );
 
     dt.ResetTime();
-    CPPUNIT_ASSERT_EQUAL( wxDateTime(19, wxDateTime::Jan, 2007), dt );
+    CHECK_EQ( wxDateTime(19, wxDateTime::Jan, 2007), dt );
 
-    CPPUNIT_ASSERT_EQUAL( wxDateTime::Today(), wxDateTime::Now().GetDateOnly() );
+    CHECK_EQ( wxDateTime::Today(), wxDateTime::Now().GetDateOnly() );
 }
 
-void DateTimeTestCase::TestTranslateFromUnicodeFormat()
+TEST_CASE("TestTranslateFromUnicodeFormat")
 {
 #if defined(__WINDOWS__) || defined(__WXOSX__)
     // This function is defined in src/common/intl.cpp and as it is not public we
@@ -1580,34 +1512,34 @@ void DateTimeTestCase::TestTranslateFromUnicodeFormat()
 
     // Test single quote handling...
 
-    CPPUNIT_ASSERT_EQUAL("",   wxTranslateFromUnicodeFormat("'"));
-    CPPUNIT_ASSERT_EQUAL("%H", wxTranslateFromUnicodeFormat("H'"));
-    CPPUNIT_ASSERT_EQUAL("H",  wxTranslateFromUnicodeFormat("'H"));
+    CHECK_EQ("",   wxTranslateFromUnicodeFormat("'"));
+    CHECK_EQ("%H", wxTranslateFromUnicodeFormat("H'"));
+    CHECK_EQ("H",  wxTranslateFromUnicodeFormat("'H"));
 
-    CPPUNIT_ASSERT_EQUAL("'",   wxTranslateFromUnicodeFormat("''"));
-    CPPUNIT_ASSERT_EQUAL("%H'", wxTranslateFromUnicodeFormat("H''"));
-    CPPUNIT_ASSERT_EQUAL("H",   wxTranslateFromUnicodeFormat("'H'"));
-    CPPUNIT_ASSERT_EQUAL("'%H", wxTranslateFromUnicodeFormat("''H"));
+    CHECK_EQ("'",   wxTranslateFromUnicodeFormat("''"));
+    CHECK_EQ("%H'", wxTranslateFromUnicodeFormat("H''"));
+    CHECK_EQ("H",   wxTranslateFromUnicodeFormat("'H'"));
+    CHECK_EQ("'%H", wxTranslateFromUnicodeFormat("''H"));
 
-    CPPUNIT_ASSERT_EQUAL("'",   wxTranslateFromUnicodeFormat("'''"));
-    CPPUNIT_ASSERT_EQUAL("%H'", wxTranslateFromUnicodeFormat("H'''"));
-    CPPUNIT_ASSERT_EQUAL("H'",  wxTranslateFromUnicodeFormat("'H''"));
-    CPPUNIT_ASSERT_EQUAL("'%H", wxTranslateFromUnicodeFormat("''H'"));
-    CPPUNIT_ASSERT_EQUAL("'H",  wxTranslateFromUnicodeFormat("'''H"));
+    CHECK_EQ("'",   wxTranslateFromUnicodeFormat("'''"));
+    CHECK_EQ("%H'", wxTranslateFromUnicodeFormat("H'''"));
+    CHECK_EQ("H'",  wxTranslateFromUnicodeFormat("'H''"));
+    CHECK_EQ("'%H", wxTranslateFromUnicodeFormat("''H'"));
+    CHECK_EQ("'H",  wxTranslateFromUnicodeFormat("'''H"));
 
-    CPPUNIT_ASSERT_EQUAL("''",   wxTranslateFromUnicodeFormat("''''"));
-    CPPUNIT_ASSERT_EQUAL("%H''", wxTranslateFromUnicodeFormat("H''''"));
-    CPPUNIT_ASSERT_EQUAL("H'",   wxTranslateFromUnicodeFormat("'H'''"));
-    CPPUNIT_ASSERT_EQUAL("'%H'", wxTranslateFromUnicodeFormat("''H''"));
-    CPPUNIT_ASSERT_EQUAL("'H",   wxTranslateFromUnicodeFormat("'''H'"));
-    CPPUNIT_ASSERT_EQUAL("''%H", wxTranslateFromUnicodeFormat("''''H"));
+    CHECK_EQ("''",   wxTranslateFromUnicodeFormat("''''"));
+    CHECK_EQ("%H''", wxTranslateFromUnicodeFormat("H''''"));
+    CHECK_EQ("H'",   wxTranslateFromUnicodeFormat("'H'''"));
+    CHECK_EQ("'%H'", wxTranslateFromUnicodeFormat("''H''"));
+    CHECK_EQ("'H",   wxTranslateFromUnicodeFormat("'''H'"));
+    CHECK_EQ("''%H", wxTranslateFromUnicodeFormat("''''H"));
 
-    CPPUNIT_ASSERT_EQUAL("'%H o'clock: It's about time'",
+    CHECK_EQ("'%H o'clock: It's about time'",
         wxTranslateFromUnicodeFormat("''H 'o''clock: It''s about time'''"));
 #endif // ports having wxTranslateFromUnicodeFormat()
 }
 
-void DateTimeTestCase::TestConvToFromLocalTZ()
+TEST_CASE("TestConvToFromLocalTZ")
 {
     // Choose a date when the DST is on in many time zones and verify that
     // converting from/to local time zone still doesn't modify time in this
@@ -1661,7 +1593,7 @@ static void DoTestSetFunctionsOnDST(const wxDateTime &orig)
 #undef DST_TEST_FUN
 }
 
-TEST_CASE("wxDateTime::SetOnDST", "[datetime][dst]")
+TEST_CASE("wxDateTime::SetOnDST")
 {
     wxDateTime dst = wxDateTime::GetEndDST();
     if ( !dst.IsValid() )
@@ -1670,12 +1602,12 @@ TEST_CASE("wxDateTime::SetOnDST", "[datetime][dst]")
         return;
     }
 
-    SECTION("An hour before DST end")
+    SUBCASE("An hour before DST end")
     {
         DoTestSetFunctionsOnDST(dst - wxTimeSpan::Hour());
     }
 
-    SECTION("At DST end")
+    SUBCASE("At DST end")
     {
         DoTestSetFunctionsOnDST(dst);
     }
@@ -1684,9 +1616,11 @@ TEST_CASE("wxDateTime::SetOnDST", "[datetime][dst]")
 // Tests random problems that used to appear in BST time zone during DST.
 // This test is disabled by default as it only passes in BST time zone, due to
 // the times hard-coded in it.
-TEST_CASE("wxDateTime-BST-bugs", "[datetime][dst][BST][.]")
+// FIXME: Figure out fix for BST timezone
+/*
+TEST_CASE("wxDateTime-BST-bugs")
 {
-    SECTION("bug-17220")
+    SUBCASE("bug-17220")
     {
         wxDateTime dt;
         dt.Set(22, wxDateTime::Oct, 2015, 10, 10, 10, 10);
@@ -1703,8 +1637,9 @@ TEST_CASE("wxDateTime-BST-bugs", "[datetime][dst][BST][.]")
         CHECK( dt.Format("%Y-%m-%d %H:%M:%S", wxDateTime::UTC   ) == "2015-10-22 10:10:10" );
     }
 }
+*/
 
-TEST_CASE("wxDateTime::UNow", "[datetime][now][unow]")
+TEST_CASE("wxDateTime::UNow")
 {
     // It's unlikely, but possible, that the consecutive functions are called
     // on different sides of some second boundary, but it really shouldn't
@@ -1717,10 +1652,11 @@ TEST_CASE("wxDateTime::UNow", "[datetime][now][unow]")
         if ( now.GetSecond() == unow.GetSecond() )
             break;
 
-        WARN("wxDateTime::Now() and UNow() returned different "
-             "second values ("
-             << now.GetSecond() << " and " << unow.GetSecond() <<
-             "), retrying.");
+        // FIXME: Too complicated.
+        //WARN("wxDateTime::Now() and UNow() returned different "
+        //     "second values ("
+        //     << now.GetSecond() << " and " << unow.GetSecond() <<
+        //     "), retrying.");
 
         wxMilliSleep(123);
     }
