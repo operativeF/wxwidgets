@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -19,32 +21,15 @@
 
 #include <sstream>
 
-#define ASSERT_OSTREAM_EQUAL(p, s) CPPUNIT_ASSERT_EQUAL(std::string(p), s.str())
-#define ASSERT_WOSTREAM_EQUAL(p, s) CPPUNIT_ASSERT_EQUAL(std::wstring(p), s.str())
+#define ASSERT_OSTREAM_EQUAL(p, s) CHECK_EQ(std::string(p), s.str())
+#define ASSERT_WOSTREAM_EQUAL(p, s) CHECK_EQ(std::wstring(p), s.str())
 
 // ----------------------------------------------------------------------------
 // test class
 // ----------------------------------------------------------------------------
 
-class StringIostreamTestCase : public CppUnit::TestCase
-{
-public:
-    StringIostreamTestCase() { }
 
-private:
-    CPPUNIT_TEST_SUITE( StringIostreamTestCase );
-        CPPUNIT_TEST( Out );
-    CPPUNIT_TEST_SUITE_END();
-
-    void Out();
-};
-
-CPPUNIT_TEST_SUITE_REGISTRATION( StringIostreamTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( StringIostreamTestCase, "StringIostream" );
-
-void StringIostreamTestCase::Out()
+TEST_CASE("Out")
 {
     std::ostringstream s;
     s << wxString("hello");
