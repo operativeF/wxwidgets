@@ -504,6 +504,7 @@
     </ClCompile>
     <ClCompile Include="events\evtlooptest.cpp" />
     <ClCompile Include="events\keyboard.cpp" />
+    <ClCompile Include="events\propagation.cpp" />
     <ClCompile Include="exec\exec.cpp" />
     <ClCompile Include="font\fonttest.cpp" />
     <ClCompile Include="geometry\point.cpp" />
