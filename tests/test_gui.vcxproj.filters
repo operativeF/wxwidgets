@@ -137,6 +137,9 @@
     <ClCompile Include="persistence\tlw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="persistence\dataview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc">
