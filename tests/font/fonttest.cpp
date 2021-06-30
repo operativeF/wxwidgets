@@ -72,7 +72,7 @@ wxString DumpFont(const wxFont *font)
 // the tests
 // ----------------------------------------------------------------------------
 
-TEST_CASE("wxFont::Construct", "[font][ctor]")
+TEST_CASE("wxFont::Construct")
 {
     // The main purpose of this test is to verify that the font ctors below
     // compile because it's easy to introduce ambiguities due to the number of
@@ -83,7 +83,7 @@ TEST_CASE("wxFont::Construct", "[font][ctor]")
                       wxFONTWEIGHT_NORMAL).IsOk() );
 }
 
-TEST_CASE("wxFont::Size", "[font][size]")
+TEST_CASE("wxFont::Size")
 {
     const struct Sizes
     {
@@ -138,7 +138,7 @@ TEST_CASE("wxFont::Size", "[font][size]")
     CHECK( font.GetPointSize() == 10 );
 }
 
-TEST_CASE("wxFont::Weight", "[font][weight]")
+TEST_CASE("wxFont::Weight")
 {
     wxFont font;
     font.SetNumericWeight(123);
@@ -159,7 +159,7 @@ TEST_CASE("wxFont::Weight", "[font][weight]")
     CHECK( font.GetWeight() == wxFONTWEIGHT_SEMIBOLD );
 }
 
-TEST_CASE("wxFont::GetSet", "[font][getters]")
+TEST_CASE("wxFont::GetSet")
 {
     unsigned numFonts;
     const wxFont *pf = GetTestFonts(numFonts);
@@ -185,12 +185,12 @@ TEST_CASE("wxFont::GetSet", "[font][getters]")
         static const char *knownGoodFaceName = "Monospace";
 #endif
 
-        WX_ASSERT_MESSAGE
+        CHECK_MESSAGE
         (
+            test.SetFaceName(knownGoodFaceName),
             ("failed to set face name \"%s\" for test font #%u\n"
              "(this failure is harmless if this face name is not "
-             "available on this system)", knownGoodFaceName, n),
-            test.SetFaceName(knownGoodFaceName)
+             "available on this system)", knownGoodFaceName, n)
         );
         CHECK( test.IsOk() );
 
@@ -271,7 +271,7 @@ TEST_CASE("wxFont::GetSet", "[font][getters]")
     }
 }
 
-TEST_CASE("wxFont::NativeFontInfo", "[font][fontinfo]")
+TEST_CASE("wxFont::NativeFontInfo")
 {
     unsigned numFonts;
     const wxFont *pf = GetTestFonts(numFonts);
@@ -286,10 +286,10 @@ TEST_CASE("wxFont::NativeFontInfo", "[font][fontinfo]")
         wxFont temp;
         CHECK( temp.SetNativeFontInfo(nid) );
         CHECK( temp.IsOk() );
-        WX_ASSERT_MESSAGE(
+        CHECK_MESSAGE(
+            temp == test,
             ("Test #%u failed\ndump of test font: \"%s\"\ndump of temp font: \"%s\"", \
-             n, DumpFont(&test), DumpFont(&temp)),
-            temp == test );
+             n, DumpFont(&test), DumpFont(&temp)));
     }
 
     // test that clearly invalid font info strings do not work
@@ -325,7 +325,7 @@ TEST_CASE("wxFont::NativeFontInfo", "[font][fontinfo]")
     // according to docs, so it is not tested.
 }
 
-TEST_CASE("wxFont::NativeFontInfoUserDesc", "[font][fontinfo]")
+TEST_CASE("wxFont::NativeFontInfoUserDesc")
 {
     unsigned numFonts;
     const wxFont *pf = GetTestFonts(numFonts);
@@ -382,7 +382,7 @@ TEST_CASE("wxFont::NativeFontInfoUserDesc", "[font][fontinfo]")
         // errors, so don't expect the actual size to be exactly equal to what
         // we used -- but close enough.
         const double sizeUsed = font.GetFractionalPointSize();
-        CHECK( sizeUsed == Approx(sizes[n]).epsilon(0.001) );
+        CHECK( sizeUsed == doctest::Approx(sizes[n]).epsilon(0.001) );
 
         const wxString& desc = font.GetNativeFontInfoDesc();
         INFO("Font description: " << desc);
