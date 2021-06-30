@@ -50,7 +50,7 @@ static wxFrame* CreatePersistenceTestFrame()
 // tests themselves
 // ----------------------------------------------------------------------------
 
-TEST_CASE_METHOD(PersistenceTests, "wxPersistTLW", "[persist][tlw]")
+TEST_CASE_FIXTURE(PersistenceTests, "wxPersistTLW", "[persist][tlw]")
 {
     const wxPoint pos(100, 150);
     const wxSize size(450, 350);
