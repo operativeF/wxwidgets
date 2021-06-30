@@ -5,6 +5,8 @@
 // Created:     2019-01-01
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_VALIDATORS && wxUSE_UIACTIONSIMULATOR
@@ -36,19 +38,19 @@ protected:
 };
 
 #define TEXT_VALIDATOR_TEST_CASE(name, tags) \
-    TEST_CASE_METHOD(TextValidatorTestCase, name, tags)
+    TEST_CASE_FIXTURE(TextValidatorTestCase, name, tags)
 
 TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]")
 {
     wxString value = "";
     wxTextValidator val(wxFILTER_NONE, &value);
 
-    SECTION("wxFILTER_NONE - no filtering should take place")
+    SUBCASE("wxFILTER_NONE - no filtering should take place")
     {
         CHECK( val.IsValid("wx-90.?! @_~E+{").empty() );
     }
 
-    SECTION("wxFILTER_EMPTY - empty strings are filtered out")
+    SUBCASE("wxFILTER_EMPTY - empty strings are filtered out")
     {
         val.SetStyle(wxFILTER_EMPTY);
 
@@ -56,14 +58,14 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
         CHECK( val.IsValid(" ").empty() ); // space is valid
     }
 
-    SECTION("wxFILTER_ASCII - non-ASCII characters are filtered out")
+    SUBCASE("wxFILTER_ASCII - non-ASCII characters are filtered out")
     {
         val.SetStyle(wxFILTER_ASCII);
 
         CHECK( val.IsValid("wx-90.?! @_~E+{").empty() );
     }
 
-    SECTION("wxFILTER_ALPHA - non-alpha characters are filtered out")
+    SUBCASE("wxFILTER_ALPHA - non-alpha characters are filtered out")
     {
         val.SetStyle(wxFILTER_ALPHA);
 
@@ -71,7 +73,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
         CHECK( !val.IsValid("wx_").empty() ); // _ is not alpha
     }
 
-    SECTION("wxFILTER_ALPHANUMERIC - non-alphanumeric characters are filtered out")
+    SUBCASE("wxFILTER_ALPHANUMERIC - non-alphanumeric characters are filtered out")
     {
         val.SetStyle(wxFILTER_ALPHANUMERIC);
 
@@ -79,7 +81,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
         CHECK( !val.IsValid("wx 01").empty() ); // 'space' is not alphanumeric
     }
 
-    SECTION("wxFILTER_DIGITS - non-digit characters are filtered out")
+    SUBCASE("wxFILTER_DIGITS - non-digit characters are filtered out")
     {
         val.SetStyle(wxFILTER_DIGITS);
 
@@ -87,7 +89,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
         CHECK( !val.IsValid("9.7").empty() ); // . is not digit
     }
 
-    SECTION("wxFILTER_XDIGITS - non-xdigit characters are filtered out")
+    SUBCASE("wxFILTER_XDIGITS - non-xdigit characters are filtered out")
     {
         val.SetStyle(wxFILTER_XDIGITS);
 
@@ -95,7 +97,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
         CHECK( !val.IsValid("90GEF").empty() ); // G is not xdigit
     }
 
-    SECTION("wxFILTER_NUMERIC - non-numeric characters are filtered out")
+    SUBCASE("wxFILTER_NUMERIC - non-numeric characters are filtered out")
     {
         val.SetStyle(wxFILTER_NUMERIC);
 
@@ -103,7 +105,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
         CHECK( !val.IsValid("-8.5#0").empty() ); // # is not numeric
     }
 
-    SECTION("wxFILTER_INCLUDE_LIST - use include list")
+    SUBCASE("wxFILTER_INCLUDE_LIST - use include list")
     {
         val.SetStyle(wxFILTER_INCLUDE_LIST);
 
@@ -116,7 +118,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
         CHECK( val.IsValid("wxGTK").empty() );
         CHECK( !val.IsValid("wxQT").empty() ); // wxQT is not included
 
-        SECTION("wxFILTER_EXCLUDE_LIST - use exclude with include list")
+        SUBCASE("wxFILTER_EXCLUDE_LIST - use exclude with include list")
         {
             std::vector<wxString> excludes;
             excludes.push_back("wxGTK");
@@ -128,7 +130,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
         }
     }
 
-    SECTION("wxFILTER_EXCLUDE_LIST - use exclude list")
+    SUBCASE("wxFILTER_EXCLUDE_LIST - use exclude list")
     {
         val.SetStyle(wxFILTER_EXCLUDE_LIST);
 
@@ -141,7 +143,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
         CHECK( val.IsValid("wxQT & wxUNIV").empty() );
         CHECK( !val.IsValid("wxMSW").empty() ); // wxMSW is excluded
 
-        SECTION("wxFILTER_INCLUDE_LIST - use include with exclude list")
+        SUBCASE("wxFILTER_INCLUDE_LIST - use include with exclude list")
         {
             std::vector<wxString> includes;
             includes.push_back("wxGTK");
@@ -152,7 +154,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
         }
     }
 
-    SECTION("wxFILTER_INCLUDE_CHAR_LIST - use include char list")
+    SUBCASE("wxFILTER_INCLUDE_CHAR_LIST - use include char list")
     {
         val.SetStyle(wxFILTER_INCLUDE_CHAR_LIST);
         val.SetCharIncludes("tuvwxyz.012+-");
@@ -170,7 +172,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
         CHECK( !val.IsValid("x*y").empty() ); // * now excluded
     }
 
-    SECTION("wxFILTER_EXCLUDE_CHAR_LIST - use exclude char list")
+    SUBCASE("wxFILTER_EXCLUDE_CHAR_LIST - use exclude char list")
     {
         val.SetStyle(wxFILTER_EXCLUDE_CHAR_LIST);
         val.SetCharExcludes("tuvwxyz.012+-");
