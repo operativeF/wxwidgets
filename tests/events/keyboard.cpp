@@ -154,34 +154,29 @@ void TestEvent(int line, const wxKeyEvent& ev, const KeyDesc& desc)
     else if ( t == wxEVT_KEY_UP )
         msg = "key up";
     else
-        CPPUNIT_FAIL( "unknown event type" );
+        FAIL( "unknown event type" );
 
     msg += " event at line ";
     msg += wxString::Format("%d", line).mb_str();
 
 
-    CPPUNIT_ASSERT_EQUAL_MESSAGE( "wrong key code in " + msg,
-                                  desc.m_keycode,
-                                  ev.GetKeyCode() );
+    CHECK_MESSAGE(desc.m_keycode == ev.GetKeyCode(), ("wrong key code in " + msg) );
 
     if ( desc.m_keycode < WXK_START )
     {
         // For Latin-1 our key code is the same as Unicode character value.
-        CPPUNIT_ASSERT_EQUAL_MESSAGE( "wrong Unicode key in " + msg,
-                                      (char)desc.m_keycode,
-                                      (char)ev.GetUnicodeKey() );
+        CHECK_MESSAGE((char)desc.m_keycode == (char)ev.GetUnicodeKey(),
+                      ("wrong Unicode key in " + msg) );
     }
     else // Special key
     {
         // Key codes above WXK_START don't correspond to printable characters.
-        CPPUNIT_ASSERT_EQUAL_MESSAGE( "wrong non-zero Unicode key in " + msg,
-                                      0,
-                                      (int)ev.GetUnicodeKey() );
+        CHECK_MESSAGE( 0 == (int)ev.GetUnicodeKey(),
+                       ("wrong non-zero Unicode key in " + msg) );
     }
 
-    CPPUNIT_ASSERT_EQUAL_MESSAGE( "wrong modifiers in " + msg,
-                                  desc.m_mods,
-                                  ev.GetModifiers() );
+    CHECK_MESSAGE( desc.m_mods == ev.GetModifiers(),
+                   ("wrong modifiers in " + msg) );
 }
 
 // Call TestEvent() passing it the line number from where it was called: this
@@ -190,188 +185,149 @@ void TestEvent(int line, const wxKeyEvent& ev, const KeyDesc& desc)
 
 } // anonymous namespace
 
-// --------------------------------------------------------------------------
-// test class
-// --------------------------------------------------------------------------
 
-class KeyboardEventTestCase : public CppUnit::TestCase
+TEST_CASE("Keyboard Event Tests")
 {
-public:
-    KeyboardEventTestCase() {}
-
-    void setUp() override;
-    void tearDown() override;
-
-private:
-    CPPUNIT_TEST_SUITE( KeyboardEventTestCase );
-        WXUISIM_TEST( NormalLetter );
-        WXUISIM_TEST( NormalSpecial );
-        WXUISIM_TEST( CtrlLetter );
-        WXUISIM_TEST( CtrlSpecial );
-        WXUISIM_TEST( ShiftLetter );
-        WXUISIM_TEST( ShiftSpecial );
-    CPPUNIT_TEST_SUITE_END();
-
-    void NormalLetter();
-    void NormalSpecial();
-    void CtrlLetter();
-    void CtrlSpecial();
-    void ShiftLetter();
-    void ShiftSpecial();
-
-    KeyboardTestWindow *m_win;
-
-    KeyboardEventTestCase(const KeyboardEventTestCase&) = delete;
-	KeyboardEventTestCase& operator=(const KeyboardEventTestCase&) = delete;
-};
-
-wxREGISTER_UNIT_TEST(KeyboardEvent);
-
-void KeyboardEventTestCase::setUp()
-{
-    m_win = new KeyboardTestWindow(wxTheApp->GetTopWindow());
+    auto m_win = new KeyboardTestWindow(wxTheApp->GetTopWindow());
     wxYield();
     m_win->SetFocus();
 
 #ifdef __WXGTK__
-    for ( wxStopWatch sw; sw.Time() < 10; )
+    for (wxStopWatch sw; sw.Time() < 10; )
 #endif
-        wxYield(); // needed to show the new window
+    wxYield(); // needed to show the new window
 
     // The window might get some key up events when it's being shown if the key
     // was pressed when the program was started and released after the window
     // was shown, e.g. this does happen in practice when launching the test
     // from command line. Simply discard all the spurious events so far.
     m_win->ClearEvents();
-}
 
-void KeyboardEventTestCase::tearDown()
-{
+    SUBCASE("NormalLetter")
+    {
+        wxUIActionSimulator sim;
+        sim.Char('a');
+        wxYield();
+
+        CHECK_EQ( 1, m_win->GetKeyDownCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(), 'A' );
+
+        CHECK_EQ( 1, m_win->GetCharCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetCharEvent(), 'a' );
+
+        CHECK_EQ( 1, m_win->GetKeyUpCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(), 'A' );
+    }
+
+    SUBCASE("NormalSpecial")
+    {
+        wxUIActionSimulator sim;
+        sim.Char(WXK_END);
+        wxYield();
+
+        CHECK_EQ( 1, m_win->GetKeyDownCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(), WXK_END );
+
+        CHECK_EQ( 1, m_win->GetCharCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetCharEvent(), WXK_END );
+
+        CHECK_EQ( 1, m_win->GetKeyUpCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(), WXK_END );
+    }
+
+    SUBCASE("CtrlLetter")
+    {
+        wxUIActionSimulator sim;
+        sim.Char('z', wxMOD_CONTROL);
+        wxYield();
+
+        CHECK_EQ( 2, m_win->GetKeyDownCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(0),
+                             ModKeyDown(WXK_CONTROL) );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(1),
+                             KeyDesc('Z', wxMOD_CONTROL) );
+
+        CHECK_EQ( 1, m_win->GetCharCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetCharEvent(),
+                             KeyDesc('\x1a', wxMOD_CONTROL) );
+
+        CHECK_EQ( 2, m_win->GetKeyUpCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(0),
+                             KeyDesc('Z', wxMOD_CONTROL) );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(1),
+                             ModKeyUp(WXK_CONTROL) );
+    }
+
+    SUBCASE("CtrlSpecial")
+    {
+        wxUIActionSimulator sim;
+        sim.Char(WXK_PAGEUP, wxMOD_CONTROL);
+        wxYield();
+
+        CHECK_EQ( 2, m_win->GetKeyDownCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(0),
+                             ModKeyDown(WXK_CONTROL) );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(1),
+                             KeyDesc(WXK_PAGEUP, wxMOD_CONTROL) );
+
+        CHECK_EQ( 1, m_win->GetCharCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetCharEvent(),
+                             KeyDesc(WXK_PAGEUP, wxMOD_CONTROL) );
+
+        CHECK_EQ( 2, m_win->GetKeyUpCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(0),
+                             KeyDesc(WXK_PAGEUP, wxMOD_CONTROL) );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(1),
+                             ModKeyUp(WXK_CONTROL) );
+    }
+
+    SUBCASE("ShiftLetter")
+    {
+        wxUIActionSimulator sim;
+        sim.Char('Q', wxMOD_SHIFT);
+        wxYield();
+
+        CHECK_EQ( 2, m_win->GetKeyDownCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(0),
+                             ModKeyDown(WXK_SHIFT) );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(1),
+                             KeyDesc('Q', wxMOD_SHIFT) );
+
+        CHECK_EQ( 1, m_win->GetCharCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetCharEvent(),
+                             KeyDesc('Q', wxMOD_SHIFT) );
+
+        CHECK_EQ( 2, m_win->GetKeyUpCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(0),
+                             KeyDesc('Q', wxMOD_SHIFT) );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(1),
+                             ModKeyUp(WXK_SHIFT) );
+    }
+
+    SUBCASE("ShiftSpecial")
+    {
+        wxUIActionSimulator sim;
+        sim.Char(WXK_F3, wxMOD_SHIFT);
+        wxYield();
+
+        CHECK_EQ( 2, m_win->GetKeyDownCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(0),
+                             ModKeyDown(WXK_SHIFT) );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(1),
+                             KeyDesc(WXK_F3, wxMOD_SHIFT) );
+
+        CHECK_EQ( 1, m_win->GetCharCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetCharEvent(),
+                             KeyDesc(WXK_F3, wxMOD_SHIFT) );
+
+        CHECK_EQ( 2, m_win->GetKeyUpCount() );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(0),
+                             KeyDesc(WXK_F3, wxMOD_SHIFT) );
+        ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(1),
+                             ModKeyUp(WXK_SHIFT) );
+    }
+
     m_win->Destroy();
-}
-
-void KeyboardEventTestCase::NormalLetter()
-{
-    wxUIActionSimulator sim;
-    sim.Char('a');
-    wxYield();
-
-    CHECK_EQ( 1, m_win->GetKeyDownCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(), 'A' );
-
-    CHECK_EQ( 1, m_win->GetCharCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetCharEvent(), 'a' );
-
-    CHECK_EQ( 1, m_win->GetKeyUpCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(), 'A' );
-}
-
-void KeyboardEventTestCase::NormalSpecial()
-{
-    wxUIActionSimulator sim;
-    sim.Char(WXK_END);
-    wxYield();
-
-    CHECK_EQ( 1, m_win->GetKeyDownCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(), WXK_END );
-
-    CHECK_EQ( 1, m_win->GetCharCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetCharEvent(), WXK_END );
-
-    CHECK_EQ( 1, m_win->GetKeyUpCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(), WXK_END );
-}
-
-void KeyboardEventTestCase::CtrlLetter()
-{
-    wxUIActionSimulator sim;
-    sim.Char('z', wxMOD_CONTROL);
-    wxYield();
-
-    CHECK_EQ( 2, m_win->GetKeyDownCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(0),
-                         ModKeyDown(WXK_CONTROL) );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(1),
-                         KeyDesc('Z', wxMOD_CONTROL) );
-
-    CHECK_EQ( 1, m_win->GetCharCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetCharEvent(),
-                         KeyDesc('\x1a', wxMOD_CONTROL) );
-
-    CHECK_EQ( 2, m_win->GetKeyUpCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(0),
-                         KeyDesc('Z', wxMOD_CONTROL) );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(1),
-                         ModKeyUp(WXK_CONTROL) );
-}
-
-void KeyboardEventTestCase::CtrlSpecial()
-{
-    wxUIActionSimulator sim;
-    sim.Char(WXK_PAGEUP, wxMOD_CONTROL);
-    wxYield();
-
-    CHECK_EQ( 2, m_win->GetKeyDownCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(0),
-                         ModKeyDown(WXK_CONTROL) );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(1),
-                         KeyDesc(WXK_PAGEUP, wxMOD_CONTROL) );
-
-    CHECK_EQ( 1, m_win->GetCharCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetCharEvent(),
-                         KeyDesc(WXK_PAGEUP, wxMOD_CONTROL) );
-
-    CHECK_EQ( 2, m_win->GetKeyUpCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(0),
-                         KeyDesc(WXK_PAGEUP, wxMOD_CONTROL) );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(1),
-                         ModKeyUp(WXK_CONTROL) );
-}
-
-void KeyboardEventTestCase::ShiftLetter()
-{
-    wxUIActionSimulator sim;
-    sim.Char('Q', wxMOD_SHIFT);
-    wxYield();
-
-    CHECK_EQ( 2, m_win->GetKeyDownCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(0),
-                         ModKeyDown(WXK_SHIFT) );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(1),
-                         KeyDesc('Q', wxMOD_SHIFT) );
-
-    CHECK_EQ( 1, m_win->GetCharCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetCharEvent(),
-                         KeyDesc('Q', wxMOD_SHIFT) );
-
-    CHECK_EQ( 2, m_win->GetKeyUpCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(0),
-                         KeyDesc('Q', wxMOD_SHIFT) );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(1),
-                         ModKeyUp(WXK_SHIFT) );
-}
-
-void KeyboardEventTestCase::ShiftSpecial()
-{
-    wxUIActionSimulator sim;
-    sim.Char(WXK_F3, wxMOD_SHIFT);
-    wxYield();
-
-    CHECK_EQ( 2, m_win->GetKeyDownCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(0),
-                         ModKeyDown(WXK_SHIFT) );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyDownEvent(1),
-                         KeyDesc(WXK_F3, wxMOD_SHIFT) );
-
-    CHECK_EQ( 1, m_win->GetCharCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetCharEvent(),
-                         KeyDesc(WXK_F3, wxMOD_SHIFT) );
-
-    CHECK_EQ( 2, m_win->GetKeyUpCount() );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(0),
-                         KeyDesc(WXK_F3, wxMOD_SHIFT) );
-    ASSERT_KEY_EVENT_IS( m_win->GetKeyUpEvent(1),
-                         ModKeyUp(WXK_SHIFT) );
 }
 
 #endif // wxUSE_UIACTIONSIMULATOR

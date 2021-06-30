@@ -503,6 +503,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="events\evtlooptest.cpp" />
+    <ClCompile Include="events\keyboard.cpp" />
     <ClCompile Include="exec\exec.cpp" />
     <ClCompile Include="font\fonttest.cpp" />
     <ClCompile Include="geometry\point.cpp" />

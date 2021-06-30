@@ -101,6 +101,9 @@
     <ClCompile Include="graphics\coords.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="events\keyboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc">
