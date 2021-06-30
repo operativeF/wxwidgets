@@ -21,41 +21,9 @@
 
 #include "asserthelper.h"
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class RectTestCase : public CppUnit::TestCase
+TEST_CASE("CentreIn")
 {
-public:
-    RectTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( RectTestCase );
-        CPPUNIT_TEST( CentreIn );
-        CPPUNIT_TEST( InflateDeflate );
-        CPPUNIT_TEST( Operators );
-        CPPUNIT_TEST( Union );
-    CPPUNIT_TEST_SUITE_END();
-
-    void CentreIn();
-    void InflateDeflate();
-    void Operators();
-    void Union();
-
-    RectTestCase(const RectTestCase&) = delete;
-	RectTestCase& operator=(const RectTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( RectTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( RectTestCase, "RectTestCase" );
-
-void RectTestCase::CentreIn()
-{
-    typedef wxRect R;
+    using R = wxRect;
 
     CHECK_EQ( R(45, 45, 10, 10),
                           R(0, 0, 10, 10).CentreIn(R(0, 0, 100, 100)));
@@ -64,7 +32,7 @@ void RectTestCase::CentreIn()
                           R(0, 0, 20, 20).CentreIn(R(0, 0, 10, 10)));
 }
 
-void RectTestCase::InflateDeflate()
+TEST_CASE("InflateDeflate")
 {
     // This is the rectangle from the example in the documentation of wxRect::Inflate().
     const wxRect r1(10, 10, 20, 40);
@@ -80,7 +48,7 @@ void RectTestCase::InflateDeflate()
     CHECK(r1.Inflate(-15, -15)==r1.Deflate( 15,  15));
 }
 
-void RectTestCase::Operators()
+TEST_CASE("Operators")
 {
     // test + operator which works like Union but does not ignore empty rectangles
     static constexpr struct RectData
@@ -125,7 +93,7 @@ void RectTestCase::Operators()
     CHECK( (r1 * wxRect()).IsEmpty() );
 }
 
-void RectTestCase::Union()
+TEST_CASE("Union")
 {
     static constexpr struct RectData
     {
