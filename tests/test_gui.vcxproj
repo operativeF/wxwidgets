@@ -486,6 +486,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="asserthelper.cpp" />
+    <ClCompile Include="config\config.cpp" />
     <ClCompile Include="controls\auitest.cpp" />
     <ClCompile Include="controls\dialogtest.cpp" />
     <ClCompile Include="controls\frametest.cpp" />
