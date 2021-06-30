@@ -507,6 +507,7 @@
     <ClCompile Include="font\fonttest.cpp" />
     <ClCompile Include="geometry\point.cpp" />
     <ClCompile Include="geometry\rect.cpp" />
+    <ClCompile Include="geometry\region.cpp" />
     <ClCompile Include="geometry\size.cpp" />
     <ClCompile Include="graphics\ellipsization.cpp" />
     <ClCompile Include="graphics\measuring.cpp" />

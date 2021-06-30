@@ -51,70 +51,41 @@ std::ostream& operator<<(std::ostream& os, const wxRegion& rgn)
     return os;
 }
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class RegionTestCase : public CppUnit::TestCase
-{
-public:
-    RegionTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( RegionTestCase );
-        CPPUNIT_TEST( Validity );
-        CPPUNIT_TEST( Intersect );
-    CPPUNIT_TEST_SUITE_END();
-
-    void Validity();
-    void Intersect();
-
-    RegionTestCase(const RegionTestCase&) = delete;
-	RegionTestCase& operator=(const RegionTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( RegionTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( RegionTestCase, "RegionTestCase" );
-
-void RegionTestCase::Validity()
+TEST_CASE("Validity")
 {
     wxRegion r;
 
-    CPPUNIT_ASSERT_MESSAGE
+    CHECK_MESSAGE
     (
-        "Default constructed region must be invalid",
-        !r.IsOk()
+        !r.IsOk(),
+        "Default constructed region must be invalid"
     );
 
-    CPPUNIT_ASSERT_MESSAGE
+    CHECK_MESSAGE
     (
-        "Invalid region should be empty",
-        r.IsEmpty()
+        r.IsEmpty(),
+        "Invalid region should be empty"
     );
 
     // Offsetting an invalid region doesn't make sense.
     CHECK_THROWS( r.Offset(1, 1) );
 
-    CPPUNIT_ASSERT_MESSAGE
+    CHECK_MESSAGE
     (
-        "Combining with a valid region should create a valid region",
-        r.Union(0, 0, 10, 10)
+        r.Union(0, 0, 10, 10),
+        "Combining with a valid region should create a valid region"
     );
 
-    CPPUNIT_ASSERT_EQUAL_MESSAGE
+    CHECK_MESSAGE
     (
-        "Union() with invalid region should give the same region",
-        wxRegion(0, 0, 10, 10),
-        r
+        wxRegion(0, 0, 10, 10) == r,
+        "Union() with invalid region should give the same region"
     );
 }
 
-void RegionTestCase::Intersect()
+TEST_CASE("Intersect")
 {
-    const wxPoint points1[] = {
+    static constexpr wxPoint points1[] = {
         wxPoint(310, 392),
         wxPoint(270, 392),
         wxPoint(270, 421),
@@ -123,7 +94,7 @@ void RegionTestCase::Intersect()
 
     wxRegion region1(WXSIZEOF(points1), points1);
 
-    const wxPoint points2[] = {
+    static constexpr wxPoint points2[] = {
         wxPoint(54, 104),
         wxPoint(85,  82),
         wxPoint(68,  58),
