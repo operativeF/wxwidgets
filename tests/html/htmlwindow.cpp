@@ -25,62 +25,6 @@
 #include "wx/uiaction.h"
 #include "testableframe.h"
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class HtmlWindowTestCase : public CppUnit::TestCase
-{
-public:
-    HtmlWindowTestCase() { }
-
-    void setUp() override;
-    void tearDown() override;
-
-private:
-    CPPUNIT_TEST_SUITE( HtmlWindowTestCase );
-        CPPUNIT_TEST( SelectionToText );
-        CPPUNIT_TEST( Title );
-#if wxUSE_UIACTIONSIMULATOR
-        WXUISIM_TEST( CellClick );
-        WXUISIM_TEST( LinkClick );
-#endif // wxUSE_UIACTIONSIMULATOR
-        CPPUNIT_TEST( AppendToPage );
-    CPPUNIT_TEST_SUITE_END();
-
-    void SelectionToText();
-    void Title();
-    void CellClick();
-    void LinkClick();
-    void AppendToPage();
-
-    wxHtmlWindow *m_win;
-
-    HtmlWindowTestCase(const HtmlWindowTestCase&) = delete;
-	HtmlWindowTestCase& operator=(const HtmlWindowTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( HtmlWindowTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( HtmlWindowTestCase, "HtmlWindowTestCase" );
-
-// ----------------------------------------------------------------------------
-// test initialization
-// ----------------------------------------------------------------------------
-
-void HtmlWindowTestCase::setUp()
-{
-    m_win = new wxHtmlWindow(wxTheApp->GetTopWindow(), wxID_ANY,
-                             wxDefaultPosition, wxSize(400, 200));
-}
-
-void HtmlWindowTestCase::tearDown()
-{
-    DeleteTestWindow(m_win);
-    m_win = NULL;
-}
 
 // ----------------------------------------------------------------------------
 // tests themselves
@@ -102,71 +46,80 @@ static constexpr char TEST_MARKUP_LINK[] =
 static constexpr char TEST_PLAIN_TEXT[] =
     "Title\nA longer line\nand the last line.";
 
-void HtmlWindowTestCase::SelectionToText()
+TEST_CASE("HTML Window")
 {
-#if wxUSE_CLIPBOARD
-    m_win->SetPage(TEST_MARKUP);
-    m_win->SelectAll();
+    auto m_win = new wxHtmlWindow(wxTheApp->GetTopWindow(), wxID_ANY,
+                             wxDefaultPosition, wxSize(400, 200));
 
-    CHECK_EQ( TEST_PLAIN_TEXT, m_win->SelectionToText() );
-#endif // wxUSE_CLIPBOARD
-}
+    SUBCASE("SelectionToText")
+    {
+    #if wxUSE_CLIPBOARD
+        m_win->SetPage(TEST_MARKUP);
+        m_win->SelectAll();
 
-void HtmlWindowTestCase::Title()
-{
-    m_win->SetPage(TEST_MARKUP);
+        CHECK_EQ( TEST_PLAIN_TEXT, m_win->SelectionToText() );
+    #endif // wxUSE_CLIPBOARD
+    }
 
-    CHECK_EQ("Page", m_win->GetOpenedPageTitle());
-}
+    SUBCASE("Title")
+    {
+        m_win->SetPage(TEST_MARKUP);
+
+        CHECK_EQ("Page", m_win->GetOpenedPageTitle());
+    }
 
 #if wxUSE_UIACTIONSIMULATOR
-void HtmlWindowTestCase::CellClick()
-{
-    EventCounter clicked(m_win, wxEVT_HTML_CELL_CLICKED);
+    SUBCASE("CellClick")
+    {
+        EventCounter clicked(m_win, wxEVT_HTML_CELL_CLICKED);
 
-    wxUIActionSimulator sim;
+        wxUIActionSimulator sim;
 
-    m_win->SetPage(TEST_MARKUP);
-    m_win->Update();
-    m_win->Refresh();
+        m_win->SetPage(TEST_MARKUP);
+        m_win->Update();
+        m_win->Refresh();
 
-    sim.MouseMove(m_win->ClientToScreen(wxPoint(15, 15)));
-    wxYield();
+        sim.MouseMove(m_win->ClientToScreen(wxPoint(15, 15)));
+        wxYield();
 
-    sim.MouseClick();
-    wxYield();
+        sim.MouseClick();
+        wxYield();
 
-    CHECK_EQ(1, clicked.GetCount());
-}
+        CHECK_EQ(1, clicked.GetCount());
+    }
 
-void HtmlWindowTestCase::LinkClick()
-{
-    EventCounter clicked(m_win, wxEVT_HTML_LINK_CLICKED);
+    SUBCASE("LinkClick")
+    {
+        EventCounter clicked(m_win, wxEVT_HTML_LINK_CLICKED);
 
-    wxUIActionSimulator sim;
+        wxUIActionSimulator sim;
 
-    m_win->SetPage(TEST_MARKUP_LINK);
-    m_win->Update();
-    m_win->Refresh();
+        m_win->SetPage(TEST_MARKUP_LINK);
+        m_win->Update();
+        m_win->Refresh();
 
-    sim.MouseMove(m_win->ClientToScreen(wxPoint(15, 15)));
-    wxYield();
+        sim.MouseMove(m_win->ClientToScreen(wxPoint(15, 15)));
+        wxYield();
 
-    sim.MouseClick();
-    wxYield();
+        sim.MouseClick();
+        wxYield();
 
-    CHECK_EQ(1, clicked.GetCount());
-}
+        CHECK_EQ(1, clicked.GetCount());
+    }
 #endif // wxUSE_UIACTIONSIMULATOR
 
-void HtmlWindowTestCase::AppendToPage()
-{
-#if wxUSE_CLIPBOARD
-    m_win->SetPage(TEST_MARKUP_LINK);
-    m_win->AppendToPage("A new paragraph");
+    SUBCASE("AppendToPage")
+    {
+    #if wxUSE_CLIPBOARD
+        m_win->SetPage(TEST_MARKUP_LINK);
+        m_win->AppendToPage("A new paragraph");
 
-    CHECK_EQ("link A new paragraph", m_win->ToText());
-#endif // wxUSE_CLIPBOARD
-}
+        CHECK_EQ("link A new paragraph", m_win->ToText());
+    #endif // wxUSE_CLIPBOARD
+    }
+
+    DeleteTestWindow(m_win);
+    m_win = nullptr;
+} // END TEST_CASE("HTML Window")
 
 #endif //wxUSE_HTML
