@@ -537,6 +537,7 @@
     <ClCompile Include="toplevel\toplevel.cpp" />
     <ClCompile Include="window\clientsize.cpp" />
     <ClCompile Include="window\setsize.cpp" />
+    <ClCompile Include="xml\xmltest.cpp" />
     <ClCompile Include="xml\xrctest.cpp" />
   </ItemGroup>
   <ItemGroup>

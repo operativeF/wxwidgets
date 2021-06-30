@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -40,117 +42,69 @@ void CheckXml(const wxXmlNode *n, ...)
     for (;;)
     {
         const char *childName = va_arg(args, char*);
-        if ( childName == NULL )
+        if ( childName == nullptr )
             break;
 
-        CPPUNIT_ASSERT( child );
-        CPPUNIT_ASSERT_EQUAL( childName, child->GetName() );
-        CPPUNIT_ASSERT( child->GetChildren() == NULL );
-        CPPUNIT_ASSERT( child->GetParent() == n );
+        CHECK( child );
+        CHECK_EQ( childName, child->GetName() );
+        CHECK( child->GetChildren() == nullptr );
+        CHECK( child->GetParent() == n );
 
         child = child->GetNext();
     }
 
     va_end(args);
 
-    CPPUNIT_ASSERT( child == NULL ); // no more children
+    CHECK( child == nullptr ); // no more children
 }
 
 } // anon namespace
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class XmlTestCase : public CppUnit::TestCase
-{
-public:
-    XmlTestCase() {}
-
-private:
-    CPPUNIT_TEST_SUITE( XmlTestCase );
-        CPPUNIT_TEST( InsertChild );
-        CPPUNIT_TEST( InsertChildAfter );
-        CPPUNIT_TEST( LoadSave );
-        CPPUNIT_TEST( CDATA );
-        CPPUNIT_TEST( PI );
-        CPPUNIT_TEST( Escaping );
-        CPPUNIT_TEST( DetachRoot );
-        CPPUNIT_TEST( AppendToProlog );
-        CPPUNIT_TEST( SetRoot );
-        CPPUNIT_TEST( CopyNode );
-        CPPUNIT_TEST( CopyDocument );
-        CPPUNIT_TEST( Doctype );
-    CPPUNIT_TEST_SUITE_END();
-
-    void InsertChild();
-    void InsertChildAfter();
-    void LoadSave();
-    void CDATA();
-    void PI();
-    void Escaping();
-    void DetachRoot();
-    void AppendToProlog();
-    void SetRoot();
-    void CopyNode();
-    void CopyDocument();
-    void Doctype();
-
-    XmlTestCase(const XmlTestCase&) = delete;
-	XmlTestCase& operator=(const XmlTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( XmlTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( XmlTestCase, "XmlTestCase" );
-
-void XmlTestCase::InsertChild()
+TEST_CASE("InsertChild")
 {
     std::unique_ptr<wxXmlNode> root(new wxXmlNode(wxXML_ELEMENT_NODE, "root"));
     root->AddChild(new wxXmlNode(wxXML_ELEMENT_NODE, "1"));
     wxXmlNode *two = new wxXmlNode(wxXML_ELEMENT_NODE, "2");
     root->AddChild(two);
     root->AddChild(new wxXmlNode(wxXML_ELEMENT_NODE, "3"));
-    CheckXml(root.get(), "1", "2", "3", NULL);
+    CheckXml(root.get(), "1", "2", "3", nullptr);
 
     // check inserting in front:
-    root->InsertChild(new wxXmlNode(wxXML_ELEMENT_NODE, "A"), NULL);
-    CheckXml(root.get(), "A", "1", "2", "3", NULL);
+    root->InsertChild(new wxXmlNode(wxXML_ELEMENT_NODE, "A"), nullptr);
+    CheckXml(root.get(), "A", "1", "2", "3", nullptr);
     root->InsertChild(new wxXmlNode(wxXML_ELEMENT_NODE, "B"), root->GetChildren());
-    CheckXml(root.get(), "B", "A", "1", "2", "3", NULL);
+    CheckXml(root.get(), "B", "A", "1", "2", "3", nullptr);
 
     // and in the middle:
     root->InsertChild(new wxXmlNode(wxXML_ELEMENT_NODE, "C"), two);
-    CheckXml(root.get(), "B", "A", "1", "C", "2", "3", NULL);
+    CheckXml(root.get(), "B", "A", "1", "C", "2", "3", nullptr);
 }
 
-void XmlTestCase::InsertChildAfter()
+TEST_CASE("InsertChildAfter")
 {
     std::unique_ptr<wxXmlNode> root(new wxXmlNode(wxXML_ELEMENT_NODE, "root"));
 
-    root->InsertChildAfter(new wxXmlNode(wxXML_ELEMENT_NODE, "1"), NULL);
-    CheckXml(root.get(), "1", NULL);
+    root->InsertChildAfter(new wxXmlNode(wxXML_ELEMENT_NODE, "1"), nullptr);
+    CheckXml(root.get(), "1", nullptr);
 
     wxXmlNode *two = new wxXmlNode(wxXML_ELEMENT_NODE, "2");
     root->AddChild(two);
     wxXmlNode *three = new wxXmlNode(wxXML_ELEMENT_NODE, "3");
     root->AddChild(three);
-    CheckXml(root.get(), "1", "2", "3", NULL);
+    CheckXml(root.get(), "1", "2", "3", nullptr);
 
     // check inserting in the middle:
     root->InsertChildAfter(new wxXmlNode(wxXML_ELEMENT_NODE, "A"), root->GetChildren());
-    CheckXml(root.get(), "1", "A", "2", "3", NULL);
+    CheckXml(root.get(), "1", "A", "2", "3", nullptr);
     root->InsertChildAfter(new wxXmlNode(wxXML_ELEMENT_NODE, "B"), two);
-    CheckXml(root.get(), "1", "A", "2", "B", "3", NULL);
+    CheckXml(root.get(), "1", "A", "2", "B", "3", nullptr);
 
     // and at the end:
     root->InsertChildAfter(new wxXmlNode(wxXML_ELEMENT_NODE, "C"), three);
-    CheckXml(root.get(), "1", "A", "2", "B", "3", "C", NULL);
+    CheckXml(root.get(), "1", "A", "2", "B", "3", "C", nullptr);
 }
 
-void XmlTestCase::LoadSave()
+TEST_CASE("LoadSave")
 {
     // NB: this is not real XRC but rather some XRC-like XML fragment which
     //     exercises different XML constructs to check that they're saved back
@@ -174,12 +128,12 @@ void XmlTestCase::LoadSave()
     wxStringInputStream sis(xmlText);
 
     wxXmlDocument doc;
-    CPPUNIT_ASSERT( doc.Load(sis) );
+    CHECK( doc.Load(sis) );
 
     wxStringOutputStream sos;
-    CPPUNIT_ASSERT( doc.Save(sos) );
+    CHECK( doc.Save(sos) );
 
-    CPPUNIT_ASSERT_EQUAL( xmlText, sos.GetString() );
+    CHECK_EQ( xmlText, sos.GetString() );
 
 
     const char *utf8xmlText =
@@ -191,18 +145,18 @@ void XmlTestCase::LoadSave()
     ;
 
     wxStringInputStream sis8(wxString::FromUTF8(utf8xmlText));
-    CPPUNIT_ASSERT( doc.Load(sis8) );
+    CHECK( doc.Load(sis8) );
 
     // this contents can't be represented in Latin-1 as it contains Cyrillic
     // letters
     doc.SetFileEncoding("ISO-8859-1");
-    CPPUNIT_ASSERT( !doc.Save(sos) );
+    CHECK( !doc.Save(sos) );
 
     // but it should work in UTF-8
     wxStringOutputStream sos8;
     doc.SetFileEncoding("UTF-8");
-    CPPUNIT_ASSERT( doc.Save(sos8) );
-    CPPUNIT_ASSERT_EQUAL( wxString(utf8xmlText),
+    CHECK( doc.Save(sos8) );
+    CHECK_EQ( wxString(utf8xmlText),
                           wxString(sos8.GetString().ToUTF8()) );
 
     const char *xmlTextProlog =
@@ -223,15 +177,15 @@ void XmlTestCase::LoadSave()
     ;
 
     wxStringInputStream sisp(xmlTextProlog);
-    CPPUNIT_ASSERT( doc.Load(sisp, "UTF-8") );
+    CHECK( doc.Load(sisp, "UTF-8") );
 
     wxStringOutputStream sosp;
-    CPPUNIT_ASSERT( doc.Save(sosp) );
+    CHECK( doc.Save(sosp) );
 
-    CPPUNIT_ASSERT_EQUAL( xmlTextProlog, sosp.GetString() );
+    CHECK_EQ( xmlTextProlog, sosp.GetString() );
 }
 
-void XmlTestCase::CDATA()
+TEST_CASE("CDATA")
 {
     const char *xmlText =
         "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n"
@@ -242,21 +196,21 @@ void XmlTestCase::CDATA()
 
     wxStringInputStream sis(xmlText);
     wxXmlDocument doc;
-    CPPUNIT_ASSERT( doc.Load(sis) );
+    CHECK( doc.Load(sis) );
 
     wxXmlNode *n = doc.GetRoot();
-    CPPUNIT_ASSERT( n );
+    CHECK( n );
 
     n = n->GetChildren();
-    CPPUNIT_ASSERT( n );
+    CHECK( n );
 
     // check that both leading ("  ") and trailing white space is not part of
     // the node contents when CDATA is used and wxXMLDOC_KEEP_WHITESPACE_NODES
     // is not
-    CPPUNIT_ASSERT_EQUAL( "Giovanni Mittone", n->GetContent() );
+    CHECK_EQ( "Giovanni Mittone", n->GetContent() );
 }
 
-void XmlTestCase::PI()
+TEST_CASE("PI")
 {
     const char *xmlText =
         "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n"
@@ -267,18 +221,18 @@ void XmlTestCase::PI()
 
     wxStringInputStream sis(xmlText);
     wxXmlDocument doc;
-    CPPUNIT_ASSERT( doc.Load(sis) );
+    CHECK( doc.Load(sis) );
 
     wxXmlNode *n = doc.GetRoot();
-    CPPUNIT_ASSERT( n );
+    CHECK( n );
 
     n = n->GetChildren();
-    CPPUNIT_ASSERT( n );
+    CHECK( n );
 
-    CPPUNIT_ASSERT_EQUAL( "index=\"no\" follow=\"no\"", n->GetContent() );
+    CHECK_EQ( "index=\"no\" follow=\"no\"", n->GetContent() );
 }
 
-void XmlTestCase::Escaping()
+TEST_CASE("Escaping")
 {
     // Verify that attribute values are escaped correctly, see
     // https://trac.wxwidgets.org/ticket/12275
@@ -293,15 +247,15 @@ void XmlTestCase::Escaping()
     wxStringInputStream sis(xmlText);
 
     wxXmlDocument doc;
-    CPPUNIT_ASSERT( doc.Load(sis) );
+    CHECK( doc.Load(sis) );
 
     wxStringOutputStream sos;
-    CPPUNIT_ASSERT( doc.Save(sos) );
+    CHECK( doc.Save(sos) );
 
-    CPPUNIT_ASSERT_EQUAL( xmlText, sos.GetString() );
+    CHECK_EQ( xmlText, sos.GetString() );
 }
 
-void XmlTestCase::DetachRoot()
+TEST_CASE("DetachRoot")
 {
     const char *xmlTextProlog =
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -332,17 +286,17 @@ void XmlTestCase::DetachRoot()
     wxXmlDocument doc;
 
     wxStringInputStream sish(xmlTextHtm);
-    CPPUNIT_ASSERT( doc.Load(sish) );
+    CHECK( doc.Load(sish) );
 
     wxXmlNode *root = doc.DetachRoot();
 
     wxStringInputStream sisp(xmlTextProlog);
-    CPPUNIT_ASSERT( doc.Load(sisp) );
+    CHECK( doc.Load(sisp) );
 
     doc.SetRoot(root);
 
     wxStringOutputStream sos;
-    CPPUNIT_ASSERT( doc.Save(sos) );
+    CHECK( doc.Save(sos) );
 
     const char *xmlTextResult1 =
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -358,20 +312,20 @@ void XmlTestCase::DetachRoot()
 "</html>\n"
 "<!-- Trailing comment -->\n"
     ;
-    CPPUNIT_ASSERT_EQUAL( xmlTextResult1, sos.GetString() );
+    CHECK_EQ( xmlTextResult1, sos.GetString() );
 
     wxStringInputStream sisp2(xmlTextProlog);
-    CPPUNIT_ASSERT( doc.Load(sisp2) );
+    CHECK( doc.Load(sisp2) );
 
     root = doc.DetachRoot();
 
     wxStringInputStream sish2(xmlTextHtm);
-    CPPUNIT_ASSERT( doc.Load(sish2) );
+    CHECK( doc.Load(sish2) );
 
     doc.SetRoot(root);
 
     wxStringOutputStream sos2;
-    CPPUNIT_ASSERT( doc.Save(sos2) );
+    CHECK( doc.Save(sos2) );
 
     const char *xmlTextResult2 =
 "<?xml version=\"1.0\" encoding=\"windows-1252\"?>\n"
@@ -385,10 +339,10 @@ void XmlTestCase::DetachRoot()
 "  </object>\n"
 "</resource>\n"
     ;
-    CPPUNIT_ASSERT_EQUAL( xmlTextResult2, sos2.GetString() );
+    CHECK_EQ( xmlTextResult2, sos2.GetString() );
 }
 
-void XmlTestCase::AppendToProlog()
+TEST_CASE("AppendToProlog")
 {
     const char *xmlText =
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -398,7 +352,7 @@ void XmlTestCase::AppendToProlog()
     ;
     wxXmlDocument rootdoc;
     wxStringInputStream sis(xmlText);
-    CPPUNIT_ASSERT( rootdoc.Load(sis) );
+    CHECK( rootdoc.Load(sis) );
     wxXmlNode *root = rootdoc.DetachRoot();
 
     wxXmlNode *comment1 = new wxXmlNode(wxXML_COMMENT_NODE, "comment",
@@ -415,7 +369,7 @@ void XmlTestCase::AppendToProlog()
     doc.AppendToProlog( comment2 );
 
     wxStringOutputStream sos;
-    CPPUNIT_ASSERT( doc.Save(sos) );
+    CHECK( doc.Save(sos) );
 
     const char *xmlTextResult =
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -426,54 +380,54 @@ void XmlTestCase::AppendToProlog()
 "  <p>Some text</p>\n"
 "</root>\n"
     ;
-    CPPUNIT_ASSERT_EQUAL( xmlTextResult, sos.GetString() );
+    CHECK_EQ( xmlTextResult, sos.GetString() );
 }
 
-void XmlTestCase::SetRoot()
+TEST_CASE("SetRoot")
 {
     wxXmlDocument doc;
-    CPPUNIT_ASSERT( !doc.IsOk() );
+    CHECK( !doc.IsOk() );
     wxXmlNode *root = new wxXmlNode(wxXML_ELEMENT_NODE, "root");
 
     // Test for the problem of https://trac.wxwidgets.org/ticket/13135
     doc.SetRoot( root );
     wxXmlNode *docNode = doc.GetDocumentNode();
-    CPPUNIT_ASSERT( docNode );
-    CPPUNIT_ASSERT( root == docNode->GetChildren() );
-    CPPUNIT_ASSERT( doc.IsOk() );
+    CHECK( docNode );
+    CHECK( root == docNode->GetChildren() );
+    CHECK( doc.IsOk() );
 
     // Other tests.
-    CPPUNIT_ASSERT( docNode == root->GetParent() );
-    doc.SetRoot(NULL); // Removes from doc but dosn't free mem, doc node left.
-    CPPUNIT_ASSERT( !doc.IsOk() );
+    CHECK( docNode == root->GetParent() );
+    doc.SetRoot(nullptr); // Removes from doc but dosn't free mem, doc node left.
+    CHECK( !doc.IsOk() );
 
     wxXmlNode *comment = new wxXmlNode(wxXML_COMMENT_NODE, "comment", "Prolog Comment");
     wxXmlNode *pi = new wxXmlNode(wxXML_PI_NODE, "target", "PI instructions");
     doc.AppendToProlog(comment);
     doc.SetRoot( root );
     doc.AppendToProlog(pi);
-    CPPUNIT_ASSERT( doc.IsOk() );
+    CHECK( doc.IsOk() );
     wxXmlNode *node = docNode->GetChildren();
-    CPPUNIT_ASSERT( node );
-    CPPUNIT_ASSERT( node->GetType() == wxXML_COMMENT_NODE );
-    CPPUNIT_ASSERT( node->GetParent() == docNode );
+    CHECK( node );
+    CHECK( node->GetType() == wxXML_COMMENT_NODE );
+    CHECK( node->GetParent() == docNode );
     node = node->GetNext();
-    CPPUNIT_ASSERT( node );
-    CPPUNIT_ASSERT( node->GetType() == wxXML_PI_NODE );
-    CPPUNIT_ASSERT( node->GetParent() == docNode );
+    CHECK( node );
+    CHECK( node->GetType() == wxXML_PI_NODE );
+    CHECK( node->GetParent() == docNode );
     node = node->GetNext();
-    CPPUNIT_ASSERT( node );
-    CPPUNIT_ASSERT( node->GetType() == wxXML_ELEMENT_NODE );
-    CPPUNIT_ASSERT( node->GetParent() == docNode );
+    CHECK( node );
+    CHECK( node->GetType() == wxXML_ELEMENT_NODE );
+    CHECK( node->GetParent() == docNode );
     node = node->GetNext();
-    CPPUNIT_ASSERT( !node );
-    doc.SetRoot(NULL);
-    CPPUNIT_ASSERT( !doc.IsOk() );
+    CHECK( !node );
+    doc.SetRoot(nullptr);
+    CHECK( !doc.IsOk() );
     doc.SetRoot(root);
-    CPPUNIT_ASSERT( doc.IsOk() );
+    CHECK( doc.IsOk() );
 }
 
-void XmlTestCase::CopyNode()
+TEST_CASE("CopyNode")
 {
     const char *xmlText =
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -484,21 +438,21 @@ void XmlTestCase::CopyNode()
     ;
     wxXmlDocument doc;
     wxStringInputStream sis(xmlText);
-    CPPUNIT_ASSERT( doc.Load(sis) );
+    CHECK( doc.Load(sis) );
 
     wxXmlNode* const root = doc.GetRoot();
-    CPPUNIT_ASSERT( root );
+    CHECK( root );
 
     wxXmlNode* const first = root->GetChildren();
-    CPPUNIT_ASSERT( first );
+    CHECK( first );
 
     wxXmlNode* const second = first->GetNext();
-    CPPUNIT_ASSERT( second );
+    CHECK( second );
 
     *first = *second;
 
     wxStringOutputStream sos;
-    CPPUNIT_ASSERT( doc.Save(sos) );
+    CHECK( doc.Save(sos) );
 
     const char *xmlTextResult =
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -507,10 +461,10 @@ void XmlTestCase::CopyNode()
 "  <second/>\n"
 "</root>\n"
     ;
-    CPPUNIT_ASSERT_EQUAL( xmlTextResult, sos.GetString() );
+    CHECK_EQ( xmlTextResult, sos.GetString() );
 }
 
-void XmlTestCase::CopyDocument()
+TEST_CASE("CopyDocument")
 {
     const char *xmlText =
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -523,17 +477,17 @@ void XmlTestCase::CopyDocument()
     ;
     wxXmlDocument doc1;
     wxStringInputStream sis(xmlText);
-    CPPUNIT_ASSERT( doc1.Load(sis) );
+    CHECK( doc1.Load(sis) );
 
     wxXmlDocument doc2 = doc1;
 
     wxStringOutputStream sos;
-    CPPUNIT_ASSERT(doc2.Save(sos));
+    CHECK(doc2.Save(sos));
 
-    CPPUNIT_ASSERT_EQUAL( xmlText, sos.GetString() );
+    CHECK_EQ( xmlText, sos.GetString() );
 }
 
-void XmlTestCase::Doctype()
+TEST_CASE("Doctype")
 {
     const char *xmlText =
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
@@ -545,26 +499,26 @@ void XmlTestCase::Doctype()
 
     wxStringInputStream sis(xmlText);
     wxXmlDocument doc;
-    CPPUNIT_ASSERT( doc.Load(sis) );
+    CHECK( doc.Load(sis) );
 
     wxXmlDoctype dt = doc.GetDoctype();
 
-    CPPUNIT_ASSERT_EQUAL( "root", dt.GetRootName() );
-    CPPUNIT_ASSERT_EQUAL( "System\"ID\"", dt.GetSystemId() );
-    CPPUNIT_ASSERT_EQUAL( "Public-ID", dt.GetPublicId() );
+    CHECK_EQ( "root", dt.GetRootName() );
+    CHECK_EQ( "System\"ID\"", dt.GetSystemId() );
+    CHECK_EQ( "Public-ID", dt.GetPublicId() );
 
-    CPPUNIT_ASSERT( dt.IsValid() );
-    CPPUNIT_ASSERT_EQUAL( "root PUBLIC \"Public-ID\" 'System\"ID\"'", dt.GetFullString() );
+    CHECK( dt.IsValid() );
+    CHECK_EQ( "root PUBLIC \"Public-ID\" 'System\"ID\"'", dt.GetFullString() );
     dt = wxXmlDoctype( dt.GetRootName(), dt.GetSystemId() );
-    CPPUNIT_ASSERT( dt.IsValid() );
-    CPPUNIT_ASSERT_EQUAL( "root SYSTEM 'System\"ID\"'", dt.GetFullString() );
+    CHECK( dt.IsValid() );
+    CHECK_EQ( "root SYSTEM 'System\"ID\"'", dt.GetFullString() );
     dt = wxXmlDoctype( dt.GetRootName() );
-    CPPUNIT_ASSERT( dt.IsValid() );
-    CPPUNIT_ASSERT_EQUAL( "root", dt.GetFullString() );
+    CHECK( dt.IsValid() );
+    CHECK_EQ( "root", dt.GetFullString() );
 
     doc.SetDoctype(dt);
     wxStringOutputStream sos;
-    CPPUNIT_ASSERT(doc.Save(sos));
+    CHECK(doc.Save(sos));
     const char *xmlText1 =
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
         "<!DOCTYPE root>\n"
@@ -572,22 +526,22 @@ void XmlTestCase::Doctype()
         "  <content/>\n"
         "</root>\n"
     ;
-    CPPUNIT_ASSERT_EQUAL( xmlText1, sos.GetString() );
+    CHECK_EQ( xmlText1, sos.GetString() );
 
     doc.SetDoctype(wxXmlDoctype());
     wxStringOutputStream sos2;
-    CPPUNIT_ASSERT(doc.Save(sos2));
+    CHECK(doc.Save(sos2));
     const char *xmlText2 =
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
         "<root>\n"
         "  <content/>\n"
         "</root>\n"
     ;
-    CPPUNIT_ASSERT_EQUAL( xmlText2, sos2.GetString() );
+    CHECK_EQ( xmlText2, sos2.GetString() );
 
     doc.SetDoctype(wxXmlDoctype("root", "Sys'id"));
     wxStringOutputStream sos3;
-    CPPUNIT_ASSERT(doc.Save(sos3));
+    CHECK(doc.Save(sos3));
     const char *xmlText3 =
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
         "<!DOCTYPE root SYSTEM \"Sys'id\">\n"
@@ -595,17 +549,17 @@ void XmlTestCase::Doctype()
         "  <content/>\n"
         "</root>\n"
     ;
-    CPPUNIT_ASSERT_EQUAL( xmlText3, sos3.GetString() );
+    CHECK_EQ( xmlText3, sos3.GetString() );
 
     dt = wxXmlDoctype( "", "System\"ID\"", "Public-ID" );
-    CPPUNIT_ASSERT( !dt.IsValid() );
-    CPPUNIT_ASSERT_EQUAL( "", dt.GetFullString() );
+    CHECK( !dt.IsValid() );
+    CHECK_EQ( "", dt.GetFullString() );
     // Strictly speaking, this is illegal for XML but is legal for SGML.
     dt = wxXmlDoctype( "root", "", "Public-ID" );
-    CPPUNIT_ASSERT( dt.IsValid() );
-    CPPUNIT_ASSERT_EQUAL( "root PUBLIC \"Public-ID\"", dt.GetFullString() );
+    CHECK( dt.IsValid() );
+    CHECK_EQ( "root PUBLIC \"Public-ID\"", dt.GetFullString() );
 
     // Using both single and double quotes in system ID is not allowed.
     dt = wxXmlDoctype( "root", "O'Reilly (\"editor\")", "Public-ID" );
-    CPPUNIT_ASSERT( !dt.IsValid() );
+    CHECK( !dt.IsValid() );
 }
