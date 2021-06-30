@@ -24,39 +24,14 @@
 #include "wx/image.h"
 #include "wx/rawbmp.h"
 
-namespace
-{
-    const int WIDTH = 10;
-    const int HEIGHT = 10;
-}
+
+constexpr int WIDTH = 10;
+constexpr int HEIGHT = 10;
 
 #define ASSERT_COL_EQUAL(x, y) \
     CHECK_EQ( (unsigned char)(x), (y) )
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class ImageRawTestCase : public CppUnit::TestCase
-{
-public:
-    ImageRawTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( ImageRawTestCase );
-        CPPUNIT_TEST( RGBImage );
-    CPPUNIT_TEST_SUITE_END();
-
-    void RGBImage();
-
-    ImageRawTestCase(const ImageRawTestCase&) = delete;
-	ImageRawTestCase& operator=(const ImageRawTestCase&) = delete;
-};
-
-CPPUNIT_TEST_SUITE_REGISTRATION( ImageRawTestCase );
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( ImageRawTestCase, "ImageRawTestCase" );
-
-void ImageRawTestCase::RGBImage()
+TEST_CASE("RGBImage")
 {
     // create a check board image
     wxImage image(WIDTH, HEIGHT);

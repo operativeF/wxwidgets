@@ -506,6 +506,7 @@
     <ClCompile Include="geometry\size.cpp" />
     <ClCompile Include="graphics\ellipsization.cpp" />
     <ClCompile Include="graphics\measuring.cpp" />
+    <ClCompile Include="image\rawbmp.cpp" />
     <ClCompile Include="menu\accelentry.cpp" />
     <ClCompile Include="sizers\boxsizer.cpp" />
     <ClCompile Include="sizers\gridsizer.cpp" />
