@@ -131,6 +131,9 @@
     <ClCompile Include="controls\webtest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rowheightcache\rowheightcachetest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc">

@@ -526,6 +526,7 @@
     <ClCompile Include="html\htmprint.cpp" />
     <ClCompile Include="image\rawbmp.cpp" />
     <ClCompile Include="menu\accelentry.cpp" />
+    <ClCompile Include="rowheightcache\rowheightcachetest.cpp" />
     <ClCompile Include="sizers\boxsizer.cpp" />
     <ClCompile Include="sizers\gridsizer.cpp" />
     <ClCompile Include="sizers\wrapsizer.cpp" />
