@@ -529,6 +529,7 @@
     <ClCompile Include="misc\garbage.cpp" />
     <ClCompile Include="misc\guifuncs.cpp" />
     <ClCompile Include="misc\selstoretest.cpp" />
+    <ClCompile Include="misc\settings.cpp" />
     <ClCompile Include="persistence\dataview.cpp" />
     <ClCompile Include="persistence\tlw.cpp" />
     <ClCompile Include="rowheightcache\rowheightcachetest.cpp" />

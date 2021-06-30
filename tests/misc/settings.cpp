@@ -20,52 +20,13 @@
 #include "wx/brush.h"
 #include "wx/pen.h"
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class SettingsTestCase : public CppUnit::TestCase
-{
-public:
-    SettingsTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( SettingsTestCase );
-        CPPUNIT_TEST( GetColour );
-        CPPUNIT_TEST( GetFont );
-        CPPUNIT_TEST( GlobalColours );
-        CPPUNIT_TEST( GlobalFonts );
-        CPPUNIT_TEST( GlobalBrushes );
-        CPPUNIT_TEST( GlobalPens );
-    CPPUNIT_TEST_SUITE_END();
-
-    void GetColour();
-    void GetFont();
-
-    // not really wxSystemSettings stuff but still nice to test:
-    void GlobalColours();
-    void GlobalFonts();
-    void GlobalBrushes();
-    void GlobalPens();
-
-    SettingsTestCase(const SettingsTestCase&) = delete;
-	SettingsTestCase& operator=(const SettingsTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( SettingsTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( SettingsTestCase, "SettingsTestCase" );
-
-
-void SettingsTestCase::GetColour()
+TEST_CASE("Get colour")
 {
     for (unsigned int i=wxSYS_COLOUR_SCROLLBAR; i < wxSYS_COLOUR_MAX; i++)
         CHECK( wxSystemSettings::GetColour((wxSystemColour)i).IsOk() );
 }
 
-void SettingsTestCase::GetFont()
+TEST_CASE("Get font")
 {
     const wxSystemFont ids[] =
     {
@@ -86,7 +47,7 @@ void SettingsTestCase::GetFont()
     }
 }
 
-void SettingsTestCase::GlobalColours()
+TEST_CASE("Get global colours")
 {
     wxColour col[] =
     {
@@ -103,7 +64,7 @@ void SettingsTestCase::GlobalColours()
         CHECK( col[i].IsOk() );
 }
 
-void SettingsTestCase::GlobalFonts()
+TEST_CASE("Get global fonts")
 {
     const wxFont font[] =
     {
@@ -120,15 +81,15 @@ void SettingsTestCase::GlobalFonts()
         const wxString facename = font[i].GetFaceName();
         if ( !facename.empty() )
         {
-            WX_ASSERT_MESSAGE(
-                ("font #%u: facename \"%s\" is invalid", i, facename),
-                wxFontEnumerator::IsValidFacename(facename)
+            CHECK_MESSAGE(
+                wxFontEnumerator::IsValidFacename(facename),
+                ("font #%u: facename \"%s\" is invalid", i, facename)
             );
         }
     }
 }
 
-void SettingsTestCase::GlobalBrushes()
+TEST_CASE("Get global brushes")
 {
     wxBrush brush[] =
     {
@@ -148,7 +109,7 @@ void SettingsTestCase::GlobalBrushes()
         CHECK( brush[i].IsOk() );
 }
 
-void SettingsTestCase::GlobalPens()
+TEST_CASE("Get global pens")
 {
     wxPen pen[] =
     {
