@@ -58,7 +58,7 @@ TEST_CASE("wxHtmlCell::Detach", "[html][cell]")
     cont->InsertCell(cell3);
     top->InsertCell(cont);
 
-    SECTION("container")
+    SUBCASE("container")
     {
         top->Detach(cont);
         CHECK( top->GetFirstChild() == NULL );
@@ -66,7 +66,7 @@ TEST_CASE("wxHtmlCell::Detach", "[html][cell]")
         delete cont;
     }
 
-    SECTION("first-child")
+    SUBCASE("first-child")
     {
         cont->Detach(cell1);
         CHECK( cont->GetFirstChild() == cell2 );
@@ -74,7 +74,7 @@ TEST_CASE("wxHtmlCell::Detach", "[html][cell]")
         delete cell1;
     }
 
-    SECTION("middle-child")
+    SUBCASE("middle-child")
     {
         cont->Detach(cell2);
         CHECK( cont->GetFirstChild() == cell1 );
@@ -83,7 +83,7 @@ TEST_CASE("wxHtmlCell::Detach", "[html][cell]")
         delete cell2;
     }
 
-    SECTION("last-child")
+    SUBCASE("last-child")
     {
         cont->Detach(cell3);
         CHECK( cont->GetFirstChild() == cell1 );
@@ -93,7 +93,7 @@ TEST_CASE("wxHtmlCell::Detach", "[html][cell]")
         delete cell3;
     }
 
-    SECTION("invalid")
+    SUBCASE("invalid")
     {
         WX_ASSERT_FAILS_WITH_ASSERT_MESSAGE
         (
