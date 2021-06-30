@@ -110,6 +110,9 @@
     <ClCompile Include="config\config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="graphics\bitmap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc">
@@ -119,7 +122,6 @@
   <ItemGroup>
     <ClInclude Include="testdate.h" />
     <ClInclude Include="testfile.h" />
-    <ClInclude Include="testimage.h" />
     <ClInclude Include="testableframe.h" />
     <ClInclude Include="testwindow.h" />
     <ClInclude Include="waitforpaint.h" />

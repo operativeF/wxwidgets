@@ -512,6 +512,7 @@
     <ClCompile Include="geometry\rect.cpp" />
     <ClCompile Include="geometry\region.cpp" />
     <ClCompile Include="geometry\size.cpp" />
+    <ClCompile Include="graphics\bitmap.cpp" />
     <ClCompile Include="graphics\coords.cpp" />
     <ClCompile Include="graphics\ellipsization.cpp" />
     <ClCompile Include="graphics\graphpath.cpp" />
@@ -535,7 +536,6 @@
     <ClInclude Include="testableframe.h" />
     <ClInclude Include="testdate.h" />
     <ClInclude Include="testfile.h" />
-    <ClInclude Include="testimage.h" />
     <ClInclude Include="testprec.h" />
     <ClInclude Include="testwindow.h" />
     <ClInclude Include="waitforpaint.h" />
