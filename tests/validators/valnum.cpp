@@ -49,7 +49,7 @@ NumValidatorTestCase::~NumValidatorTestCase()
     delete m_text;
 }
 
-TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::TransferInt", "[valnum]")
+TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferInt")
 {
     int value = 0;
     wxIntegerValidator<int> valInt(&value);
@@ -77,7 +77,7 @@ TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::TransferInt", "[valnum]")
     CHECK( !valInt.TransferFromWindow() );
 }
 
-TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::TransferUnsigned", "[valnum]")
+TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferUnsigned")
 {
     unsigned value = 0;
     wxIntegerValidator<unsigned> valUnsigned(&value);
@@ -117,13 +117,13 @@ TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::TransferUnsigned", "[valnum]")
     CHECK( !valUnsigned.TransferFromWindow() );
 }
 
-TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::TransferULL", "[valnum]")
+TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferULL", "[valnum]")
 {
     unsigned long long value = 0;
     wxIntegerValidator<unsigned long long> valULL(&value);
     valULL.SetWindow(m_text);
 
-    SECTION("LLONG_MAX")
+    SUBCASE("LLONG_MAX")
     {
         m_text->ChangeValue("9223372036854775807"); // == LLONG_MAX
         REQUIRE( valULL.TransferFromWindow() );
@@ -133,7 +133,7 @@ TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::TransferULL", "[valnum]")
         CHECK( m_text->GetValue() == "9223372036854775807" );
     }
 
-    SECTION("LLONG_MAX+1")
+    SUBCASE("LLONG_MAX+1")
     {
         m_text->ChangeValue("9223372036854775808"); // == LLONG_MAX + 1
         REQUIRE( valULL.TransferFromWindow() );
@@ -143,7 +143,7 @@ TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::TransferULL", "[valnum]")
         CHECK( m_text->GetValue() == "9223372036854775808" );
     }
 
-    SECTION("ULLONG_MAX")
+    SUBCASE("ULLONG_MAX")
     {
         m_text->ChangeValue("18446744073709551615"); // == ULLONG_MAX
         REQUIRE( valULL.TransferFromWindow() );
@@ -153,14 +153,14 @@ TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::TransferULL", "[valnum]")
         CHECK( m_text->GetValue() == "18446744073709551615" );
     }
 
-    SECTION("ULLONG_MAX+1")
+    SUBCASE("ULLONG_MAX+1")
     {
         m_text->ChangeValue("18446744073709551616"); // == ULLONG_MAX + 1
         CHECK( !valULL.TransferFromWindow() );
     }
 }
 
-TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::TransferFloat", "[valnum]")
+TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferFloat", "[valnum]")
 {
     // We need a locale with point as decimal separator.
     wxLocale loc(wxLANGUAGE_ENGLISH_UK, wxLOCALE_DONT_LOAD_DEFAULT);
@@ -192,7 +192,7 @@ TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::TransferFloat", "[valnum]")
     CHECK( !valFloat.TransferFromWindow() );
 }
 
-TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::ZeroAsBlank", "[valnum]")
+TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::ZeroAsBlank", "[valnum]")
 {
     long value = 0;
     m_text->SetValidator(
@@ -208,7 +208,7 @@ TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::ZeroAsBlank", "[valnum]")
     CHECK( value == 0 );
 }
 
-TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::NoTrailingZeroes", "[valnum]")
+TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::NoTrailingZeroes", "[valnum]")
 {
     // We need a locale with point as decimal separator.
     wxLocale loc(wxLANGUAGE_ENGLISH_UK, wxLOCALE_DONT_LOAD_DEFAULT);
@@ -229,7 +229,7 @@ TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::NoTrailingZeroes", "[valnum]")
 
 #if wxUSE_UIACTIONSIMULATOR
 
-TEST_CASE_METHOD(NumValidatorTestCase, "ValNum::Interactive", "[valnum]")
+TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::Interactive", "[valnum]")
 {
 #ifdef __WXMSW__
     // FIXME: This test fails on MSW buildbot slaves although works fine on

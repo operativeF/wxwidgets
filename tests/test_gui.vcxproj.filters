@@ -149,6 +149,9 @@
     <ClCompile Include="validators\valtext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="validators\valnum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc">
