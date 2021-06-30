@@ -509,6 +509,7 @@
     <ClCompile Include="geometry\rect.cpp" />
     <ClCompile Include="geometry\region.cpp" />
     <ClCompile Include="geometry\size.cpp" />
+    <ClCompile Include="graphics\coords.cpp" />
     <ClCompile Include="graphics\ellipsization.cpp" />
     <ClCompile Include="graphics\graphpath.cpp" />
     <ClCompile Include="graphics\imagelist.cpp" />

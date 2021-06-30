@@ -788,13 +788,13 @@ static void RotatedWithMatrixEx(wxDC * dc)
         // And next back from logical to device coordinates
         wxPoint posDev;
         posDev = dc->LogicalToDevice(posLog);
-        CHECK(Approx(posDev.x).margin(1) == s_posDev.x);
-        CHECK(Approx(posDev.y).margin(1) == s_posDev.y);
+        CHECK(doctest::Approx(posDev.x).epsilon(1) == s_posDev.x);
+        CHECK(doctest::Approx(posDev.y).epsilon(1) == s_posDev.y);
 
         wxSize dimDev;
         dimDev = dc->LogicalToDeviceRel(dimLog);
-        CHECK(Approx(dimDev.x).margin(1) == s_dimDev.x);
-        CHECK(Approx(dimDev.y).margin(1) == s_dimDev.y);
+        CHECK(doctest::Approx(dimDev.x).epsilon(1) == s_dimDev.x);
+        CHECK(doctest::Approx(dimDev.y).epsilon(1) == s_dimDev.y);
     }
 #endif // wxUSE_DC_TRANSFORM_MATRIX
 }
@@ -802,115 +802,115 @@ static void RotatedWithMatrixEx(wxDC * dc)
 // For GTK+ 3 and OSX wxDC is equivalent to wxGCDC
 // so it doesn't need to be tested individually.
 #if !defined(__WXGTK3__) && !defined(__WXOSX__)
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::InitialState", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::InitialState")
 {
     // Check initial state
     InitialState(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::NoTransform", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::NoTransform")
 {
     // No transformations
     NoTransform(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::NoTransformEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::NoTransformEx")
 {
     // No transformations
     NoTransformEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::DeviceOriginChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::DeviceOriginChanged")
 {
     // Only device origin is changed
     DeviceOriginChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::DeviceOriginChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::DeviceOriginChangedEx")
 {
     // Only device origin is changed
     DeviceOriginChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::LogicalOriginChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::LogicalOriginChanged")
 {
     // Only logical origin is changed
     LogicalOriginChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::LogicalOriginChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::LogicalOriginChangedEx")
 {
     // Only logical origin is changed
     LogicalOriginChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::UserScaleChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::UserScaleChanged")
 {
     // Only user scale is changed
     UserScaleChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::UserScaleChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::UserScaleChangedEx")
 {
     // Only user scale is changed
     UserScaleChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::LogicalScaleChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::LogicalScaleChanged")
 {
     // Only logical scale is changed
     LogicalScaleChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::LogicalScaleChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::LogicalScaleChangedEx")
 {
     // Only logical scale is changed
     LogicalScaleChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::TransformedStd", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::TransformedStd")
 {
     // Apply all standardd transformations
     TransformedStd(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::TransformedStdEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::TransformedStdEx")
 {
     // Apply all standardd transformations
     TransformedStdEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::TransformedWithMatrix", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::TransformedWithMatrix")
 {
     // Apply transformation matrix only
     TransformedWithMatrix(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::TransformedWithMatrixEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::TransformedWithMatrixEx")
 {
     // Apply transformation matrix only
     TransformedWithMatrixEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::TransformedWithMatrixAndStd", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::TransformedWithMatrixAndStd")
 {
     // Apply combination of standard and matrix transformations
     TransformedWithMatrixAndStd(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::TransformedWithMatrixAndStdEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::TransformedWithMatrixAndStdEx")
 {
     // Apply combination of standard and matrix transformations
     TransformedWithMatrixAndStdEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::RotatedWithMatrix", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::RotatedWithMatrix")
 {
     // Apply matrix transformations with rotation component
     RotatedWithMatrix(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::RotatedWithMatrixEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesDCTestCase, "CoordinatesDC::RotatedWithMatrixEx")
 {
     // Apply matrix transformations with rotation component
     RotatedWithMatrixEx(m_dc);
@@ -921,115 +921,115 @@ TEST_CASE_METHOD(CoordinatesDCTestCase, "CoordinatesDC::RotatedWithMatrixEx", "[
 // For MSW we have individual test cases for each graphics renderer
 // so we don't need to test wxGCDC with default renderer.
 #ifndef __WXMSW__
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::InitialState", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::InitialState")
 {
     // Check initial state
     InitialState(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::NoTransform", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::NoTransform")
 {
     // No transformations
     NoTransform(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::NoTransformEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::NoTransformEx")
 {
     // No transformations
     NoTransformEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::DeviceOriginChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::DeviceOriginChanged")
 {
     // Only device origin is changed
     DeviceOriginChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::DeviceOriginChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::DeviceOriginChangedEx")
 {
     // Only device origin is changed
     DeviceOriginChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::LogicalOriginChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::LogicalOriginChanged")
 {
     // Only logical origin is changed
     LogicalOriginChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::LogicalOriginChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::LogicalOriginChangedEx")
 {
     // Only logical origin is changed
     LogicalOriginChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::UserScaleChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::UserScaleChanged")
 {
     // Only user scale is changed
     UserScaleChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::UserScaleChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::UserScaleChangedEx")
 {
     // Only user scale is changed
     UserScaleChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::LogicalScaleChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::LogicalScaleChanged")
 {
     // Only logical scale is changed
     LogicalScaleChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::LogicalScaleChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::LogicalScaleChangedEx")
 {
     // Only logical scale is changed
     LogicalScaleChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::TransformedStd", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::TransformedStd")
 {
     // Apply all standardd transformations
     TransformedStd(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::TransformedStdEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::TransformedStdEx")
 {
     // Apply all standardd transformations
     TransformedStdEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::TransformedWithMatrix", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::TransformedWithMatrix")
 {
     // Apply transformation matrix only
     TransformedWithMatrix(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::TransformedWithMatrixEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::TransformedWithMatrixEx")
 {
     // Apply transformation matrix only
     TransformedWithMatrixEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::TransformedWithMatrixAndStd", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::TransformedWithMatrixAndStd")
 {
     // Apply combination of standard and matrix transformations
     TransformedWithMatrixAndStd(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::TransformedWithMatrixAndStdEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::TransformedWithMatrixAndStdEx")
 {
     // Apply combination of standard and matrix transformations
     TransformedWithMatrixAndStdEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::RotatedWithMatrix", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::RotatedWithMatrix")
 {
     // Apply matrix transformations with rotation component
     RotatedWithMatrix(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCTestCase, "CoordinatesGCDC::RotatedWithMatrixEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCTestCase, "CoordinatesGCDC::RotatedWithMatrixEx")
 {
     // Apply matrix transformations with rotation component
     RotatedWithMatrixEx(m_dc);
@@ -1050,115 +1050,115 @@ public:
     virtual ~CoordinatesGCDCGDIPlusTestCase() {}
 };
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::InitialState", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::InitialState")
 {
     // Check initial state
     InitialState(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::NoTransform", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::NoTransform")
 {
     // No transformations
     NoTransform(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::NoTransformEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::NoTransformEx")
 {
     // No transformations
     NoTransformEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::DeviceOriginChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::DeviceOriginChanged")
 {
     // Only device origin is changed
     DeviceOriginChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::DeviceOriginChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::DeviceOriginChangedEx")
 {
     // Only device origin is changed
     DeviceOriginChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::LogicalOriginChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::LogicalOriginChanged")
 {
     // Only logical origin is changed
     LogicalOriginChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::LogicalOriginChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::LogicalOriginChangedEx")
 {
     // Only logical origin is changed
     LogicalOriginChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::UserScaleChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::UserScaleChanged")
 {
     // Only user scale is changed
     UserScaleChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::UserScaleChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::UserScaleChangedEx")
 {
     // Only user scale is changed
     UserScaleChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::LogicalScaleChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::LogicalScaleChanged")
 {
     // Only logical scale is changed
     LogicalScaleChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::LogicalScaleChangedex", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::LogicalScaleChangedex")
 {
     // Only logical scale is changed
     LogicalScaleChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedStd", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedStd")
 {
     // Apply all standardd transformations
     TransformedStd(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedStdEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedStdEx")
 {
     // Apply all standardd transformations
     TransformedStdEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedWithMatrix", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedWithMatrix")
 {
     // Apply transformation matrix only
     TransformedWithMatrix(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedWithMatrixEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedWithMatrixEx")
 {
     // Apply transformation matrix only
     TransformedWithMatrixEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedWithMatrixAndStd", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedWithMatrixAndStd")
 {
     // Apply combination of standard and matrix transformations
     TransformedWithMatrixAndStd(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedWithMatrixAndStdEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::TransformedWithMatrixAndStdEx")
 {
     // Apply combination of standard and matrix transformations
     TransformedWithMatrixAndStdEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::RotatedWithMatrix", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::RotatedWithMatrix")
 {
     // Apply matrix transformations with rotation component
     RotatedWithMatrix(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::RotatedWithMatrixEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::RotatedWithMatrixEx")
 {
     // Apply matrix transformations with rotation component
     RotatedWithMatrixEx(m_dc);
@@ -1180,115 +1180,115 @@ public:
     virtual ~CoordinatesGCDCDirect2DTestCase() {}
 };
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::InitialState", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::InitialState")
 {
     // Check initial state
     InitialState(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::NoTransform", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::NoTransform")
 {
     // No transformations
     NoTransform(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::NoTransformEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::NoTransformEx")
 {
     // No transformations
     NoTransformEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::DeviceOriginChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::DeviceOriginChanged")
 {
     // Only device origin is changed
     DeviceOriginChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::DeviceOriginChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::DeviceOriginChangedEx")
 {
     // Only device origin is changed
     DeviceOriginChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::LogicalOriginChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::LogicalOriginChanged")
 {
     // Only logical origin is changed
     LogicalOriginChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::LogicalOriginChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::LogicalOriginChangedEx")
 {
     // Only logical origin is changed
     LogicalOriginChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::UserScaleChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::UserScaleChanged")
 {
     // Only user scale is changed
     UserScaleChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::UserScaleChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::UserScaleChangedEx")
 {
     // Only user scale is changed
     UserScaleChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::LogicalScaleChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::LogicalScaleChanged")
 {
     // Only logical scale is changed
     LogicalScaleChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::LogicalScaleChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::LogicalScaleChangedEx")
 {
     // Only logical scale is changed
     LogicalScaleChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::TransformedStd", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::TransformedStd")
 {
     // Apply all standardd transformations
     TransformedStd(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::TransformedStdEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::TransformedStdEx")
 {
     // Apply all standardd transformations
     TransformedStdEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::TransformedWithMatrix", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::TransformedWithMatrix")
 {
     // Apply transformation matrix only
     TransformedWithMatrix(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::TransformedWithMatrixEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::TransformedWithMatrixEx")
 {
     // Apply transformation matrix only
     TransformedWithMatrixEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::TransformedWithMatrixAndStd", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::TransformedWithMatrixAndStd")
 {
     // Apply combination of standard and matrix transformations
     TransformedWithMatrixAndStd(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::TransformedWithMatrixAndStdEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::TransformedWithMatrixAndStdEx")
 {
     // Apply combination of standard and matrix transformations
     TransformedWithMatrixAndStdEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::RotatedWithMatrix", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::RotatedWithMatrix")
 {
     // Apply matrix transformations with rotation component
     RotatedWithMatrix(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::RotatedWithMatrixEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::RotatedWithMatrixEx")
 {
     // Apply matrix transformations with rotation component
     RotatedWithMatrixEx(m_dc);
@@ -1311,115 +1311,115 @@ public:
     virtual ~CoordinatesGCDCCairoTestCase() {}
 };
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::InitialState", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::InitialState")
 {
     // Check initial state
     InitialState(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::NoTransform", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::NoTransform")
 {
     // No transformations
     NoTransform(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::NoTransformEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::NoTransformEx")
 {
     // No transformations
     NoTransformEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::DeviceOriginChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::DeviceOriginChanged")
 {
     // Only device origin is changed
     DeviceOriginChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::DeviceOriginChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::DeviceOriginChangedEx")
 {
     // Only device origin is changed
     DeviceOriginChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::LogicalOriginChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::LogicalOriginChanged")
 {
     // Only logical origin is changed
     LogicalOriginChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::LogicalOriginChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::LogicalOriginChangedEx")
 {
     // Only logical origin is changed
     LogicalOriginChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::UserScaleChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::UserScaleChanged")
 {
     // Only user scale is changed
     UserScaleChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::UserScaleChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::UserScaleChangedEx")
 {
     // Only user scale is changed
     UserScaleChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::LogicalScaleChanged", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::LogicalScaleChanged")
 {
     // Only logical scale is changed
     LogicalScaleChanged(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::LogicalScaleChangedEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::LogicalScaleChangedEx")
 {
     // Only logical scale is changed
     LogicalScaleChangedEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::TransformedStd", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::TransformedStd")
 {
     // Apply all standardd transformations
     TransformedStd(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::TransformedStdEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::TransformedStdEx")
 {
     // Apply all standardd transformations
     TransformedStdEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::TransformedWithMatrix", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::TransformedWithMatrix")
 {
     // Apply transformation matrix only
     TransformedWithMatrix(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::TransformedWithMatrixEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::TransformedWithMatrixEx")
 {
     // Apply transformation matrix only
     TransformedWithMatrixEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::TransformedWithMatrixAndStd", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::TransformedWithMatrixAndStd")
 {
     // Apply combination of standard and matrix transformations
     TransformedWithMatrixAndStd(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::TransformedWithMatrixAndStdEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::TransformedWithMatrixAndStdEx")
 {
     // Apply combination of standard and matrix transformations
     TransformedWithMatrixAndStdEx(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::RotatedWithMatrix", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::RotatedWithMatrix")
 {
     // Apply matrix transformations with rotation component
     RotatedWithMatrix(m_dc);
 }
 
-TEST_CASE_METHOD(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::RotatedWithMatrixEx", "[coordinates]")
+TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::RotatedWithMatrixEx")
 {
     // Apply matrix transformations with rotation component
     RotatedWithMatrixEx(m_dc);
