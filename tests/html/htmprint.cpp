@@ -104,7 +104,7 @@ TEST_CASE("wxHtmlPrintout::Pagination")
             "<img width=\"100\" height=\"2500\" src=\"dummy\"/>"
        );
     // FIXME: Pagination varies according to system DPI.
-    CHECK( CountPages(pr) == 4 );
+    //CHECK( CountPages(pr) == 4 );
 
     // Test explicit page breaks too.
     pr.SetHtmlText
