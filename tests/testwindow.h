@@ -51,16 +51,16 @@ private:
 
 #define CHECK_FOCUS_IS(w) CHECK_SAME_WINDOW(wxWindow::FindFocus(), w)
 
-namespace Catch
-{
-    template <>
-    struct StringMaker<wxWindowPtr>
-    {
-        static std::string convert(const wxWindowPtr window)
-        {
-            return window.Dump().ToStdString();
-        }
-    };
-}
+//namespace doctest
+//{
+//    template <>
+//    struct StringMaker<wxWindowPtr>
+//    {
+//        static std::string convert(const wxWindowPtr window)
+//        {
+//            return window.Dump().ToStdString();
+//        }
+//    };
+//}
 
 #endif // _WX_TESTS_TESTWINDOW_H_

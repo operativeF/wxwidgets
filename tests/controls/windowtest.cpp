@@ -56,7 +56,7 @@ protected:
 	WindowTestCase& operator=(const WindowTestCase&) = delete;
 };
 
-TEST_CASE_METHOD(WindowTestCase, "Window::ShowHideEvent", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::ShowHideEvent")
 {
 #if defined(__WXMSW__)
     EventCounter show(m_window, wxEVT_SHOW);
@@ -75,7 +75,7 @@ TEST_CASE_METHOD(WindowTestCase, "Window::ShowHideEvent", "[window]")
 #endif // __WXMSW__
 }
 
-TEST_CASE_METHOD(WindowTestCase, "Window::KeyEvent", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::KeyEvent")
 {
 #if wxUSE_UIACTIONSIMULATOR
     if ( !EnableUITests() )
@@ -100,7 +100,7 @@ TEST_CASE_METHOD(WindowTestCase, "Window::KeyEvent", "[window]")
 #endif
 }
 
-TEST_CASE_METHOD(WindowTestCase, "Window::FocusEvent", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::FocusEvent")
 {
 #ifndef __WXOSX__
     if ( IsAutomaticTest() )
@@ -128,7 +128,7 @@ TEST_CASE_METHOD(WindowTestCase, "Window::FocusEvent", "[window]")
 #endif
 }
 
-TEST_CASE_METHOD(WindowTestCase, "Window::Mouse", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::Mouse")
 {
     wxCursor cursor(wxCURSOR_CHAR);
     m_window->SetCursor(cursor);
@@ -141,12 +141,12 @@ TEST_CASE_METHOD(WindowTestCase, "Window::Mouse", "[window]")
     wxCaret* caret = NULL;
 
     // Try creating the caret in two different, but normally equivalent, ways.
-    SECTION("Caret 1-step")
+    SUBCASE("Caret 1-step")
     {
         caret = new wxCaret(m_window, 16, 16);
     }
 
-    SECTION("Caret 2-step")
+    SUBCASE("Caret 2-step")
     {
         caret = new wxCaret();
         caret->Create(m_window, 16, 16);
@@ -166,7 +166,7 @@ TEST_CASE_METHOD(WindowTestCase, "Window::Mouse", "[window]")
     CHECK(!m_window->HasCapture());
 }
 
-TEST_CASE_METHOD(WindowTestCase, "Window::Properties", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::Properties")
 {
     m_window->SetLabel("label");
 
@@ -185,7 +185,7 @@ TEST_CASE_METHOD(WindowTestCase, "Window::Properties", "[window]")
 }
 
 #if wxUSE_TOOLTIPS
-TEST_CASE_METHOD(WindowTestCase, "Window::ToolTip", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::ToolTip")
 {
     CHECK(!m_window->GetToolTip());
     CHECK( m_window->GetToolTipText() == "" );
@@ -208,7 +208,7 @@ TEST_CASE_METHOD(WindowTestCase, "Window::ToolTip", "[window]")
 }
 #endif // wxUSE_TOOLTIPS
 
-TEST_CASE_METHOD(WindowTestCase, "Window::Help", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::Help")
 {
 #if wxUSE_HELP
     wxHelpProvider::Set(new wxSimpleHelpProvider());
@@ -221,13 +221,13 @@ TEST_CASE_METHOD(WindowTestCase, "Window::Help", "[window]")
 #endif
 }
 
-TEST_CASE_METHOD(WindowTestCase, "Window::Parent", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::Parent")
 {
     CHECK( m_window->GetGrandParent() == static_cast<wxWindow*>(NULL) );
     CHECK( m_window->GetParent() == wxTheApp->GetTopWindow() );
 }
 
-TEST_CASE_METHOD(WindowTestCase, "Window::Siblings", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::Siblings")
 {
     CHECK( m_window->GetNextSibling() == static_cast<wxWindow*>(NULL) );
     CHECK( m_window->GetPrevSibling() == static_cast<wxWindow*>(NULL) );
@@ -243,7 +243,7 @@ TEST_CASE_METHOD(WindowTestCase, "Window::Siblings", "[window]")
     wxDELETE(newwin);
 }
 
-TEST_CASE_METHOD(WindowTestCase, "Window::Children", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::Children")
 {
     CHECK( m_window->GetChildren().GetCount() == 0 );
 
@@ -269,7 +269,7 @@ TEST_CASE_METHOD(WindowTestCase, "Window::Children", "[window]")
     CHECK( m_window->GetChildren().GetCount() == 0 );
 }
 
-TEST_CASE_METHOD(WindowTestCase, "Window::Focus", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::Focus")
 {
 #ifndef __WXOSX__
     CHECK(!m_window->HasFocus());
@@ -291,7 +291,7 @@ TEST_CASE_METHOD(WindowTestCase, "Window::Focus", "[window]")
 #endif
 }
 
-TEST_CASE_METHOD(WindowTestCase, "Window::Positioning", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::Positioning")
 {
     //Some basic tests for consistency
     wxPoint winPos = m_window->GetPosition();
@@ -307,7 +307,7 @@ TEST_CASE_METHOD(WindowTestCase, "Window::Positioning", "[window]")
     CHECK( m_window->GetScreenRect().GetTopLeft() == m_window->GetScreenPosition() );
 }
 
-TEST_CASE_METHOD(WindowTestCase, "Window::PositioningBeyondShortLimit", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::PositioningBeyondShortLimit")
 {
 #ifdef __WXMSW__
     //Positioning under MSW is limited to short relative coordinates
@@ -348,7 +348,7 @@ TEST_CASE_METHOD(WindowTestCase, "Window::PositioningBeyondShortLimit", "[window
 #endif
 }
 
-TEST_CASE_METHOD(WindowTestCase, "Window::Show", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::Show")
 {
     CHECK(m_window->IsShown());
 
@@ -373,7 +373,7 @@ TEST_CASE_METHOD(WindowTestCase, "Window::Show", "[window]")
     CHECK(!m_window->IsShown());
 }
 
-TEST_CASE_METHOD(WindowTestCase, "Window::Enable", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::Enable")
 {
     CHECK(m_window->IsEnabled());
 
@@ -412,7 +412,7 @@ TEST_CASE_METHOD(WindowTestCase, "Window::Enable", "[window]")
     CHECK(child->IsThisEnabled());
 }
 
-TEST_CASE_METHOD(WindowTestCase, "Window::FindWindowBy", "[window]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::FindWindowBy")
 {
     m_window->SetId(wxID_HIGHEST + 1);
     m_window->SetName("name");
@@ -427,7 +427,7 @@ TEST_CASE_METHOD(WindowTestCase, "Window::FindWindowBy", "[window]")
     CHECK( wxWindow::FindWindowByLabel("nolabel") == NULL );
 }
 
-TEST_CASE_METHOD(WindowTestCase, "Window::SizerErrors", "[window][sizer][error]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::SizerErrors", "[window][sizer][error]")
 {
     wxWindow* const child = new wxWindow(m_window, wxID_ANY);
     std::unique_ptr<wxSizer> const sizer1(new wxBoxSizer(wxHORIZONTAL));
