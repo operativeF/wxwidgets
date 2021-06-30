@@ -38,7 +38,7 @@ public:
 	SelStoreTest& operator=(const SelStoreTest&) = delete;
 };
 
-TEST_CASE_METHOD(SelStoreTest, "wxSelectionStore::SelectItem", "[selstore]")
+TEST_CASE_FIXTURE(SelStoreTest, "wxSelectionStore::SelectItem")
 {
     m_store.SelectItem(0);
     CHECK( m_store.GetSelectedCount() == 1 );
@@ -53,7 +53,7 @@ TEST_CASE_METHOD(SelStoreTest, "wxSelectionStore::SelectItem", "[selstore]")
     CHECK( !m_store.IsSelected(0) );
 }
 
-TEST_CASE_METHOD(SelStoreTest, "wxSelectionStore::SelectRange", "[selstore]")
+TEST_CASE_FIXTURE(SelStoreTest, "wxSelectionStore::SelectRange")
 {
     m_store.SelectRange(0, NUM_ITEMS/2);
     CHECK( m_store.GetSelectedCount() == NUM_ITEMS/2 + 1 );
@@ -72,7 +72,7 @@ TEST_CASE_METHOD(SelStoreTest, "wxSelectionStore::SelectRange", "[selstore]")
     CHECK( m_store.IsSelected(NUM_ITEMS - 1) );
 }
 
-TEST_CASE_METHOD(SelStoreTest, "wxSelectionStore::SetItemCount", "[selstore]")
+TEST_CASE_FIXTURE(SelStoreTest, "wxSelectionStore::SetItemCount")
 {
     m_store.SelectRange(1, NUM_ITEMS - 2);
     CHECK( m_store.GetSelectedCount() == NUM_ITEMS - 2 );
@@ -91,7 +91,7 @@ TEST_CASE_METHOD(SelStoreTest, "wxSelectionStore::SetItemCount", "[selstore]")
     CHECK( m_store.GetSelectedCount() == 1 );
 }
 
-TEST_CASE_METHOD(SelStoreTest, "wxSelectionStore::Clear", "[selstore]")
+TEST_CASE_FIXTURE(SelStoreTest, "wxSelectionStore::Clear")
 {
     CHECK(m_store.IsEmpty());
     CHECK( m_store.GetSelectedCount() == 0 );
@@ -106,7 +106,7 @@ TEST_CASE_METHOD(SelStoreTest, "wxSelectionStore::Clear", "[selstore]")
     CHECK( m_store.GetSelectedCount() == 0 );
 }
 
-TEST_CASE_METHOD(SelStoreTest, "wxSelectionStore::Iterate", "[selstore]")
+TEST_CASE_FIXTURE(SelStoreTest, "wxSelectionStore::Iterate")
 {
     m_store.SelectRange(NUM_ITEMS/2 - 1, NUM_ITEMS/2 + 1);
 
@@ -123,7 +123,7 @@ TEST_CASE_METHOD(SelStoreTest, "wxSelectionStore::Iterate", "[selstore]")
     CHECK(1 == m_store.GetFirstSelectedItem(cookie));
 }
 
-TEST_CASE_METHOD(SelStoreTest, "wxSelectionStore::ItemsAddDelete", "[selstore]")
+TEST_CASE_FIXTURE(SelStoreTest, "wxSelectionStore::ItemsAddDelete")
 {
     m_store.SelectItem(0);
     m_store.SelectItem(NUM_ITEMS/2);
@@ -154,7 +154,7 @@ TEST_CASE_METHOD(SelStoreTest, "wxSelectionStore::ItemsAddDelete", "[selstore]")
     CHECK(m_store.IsSelected(NUM_ITEMS/2));
 }
 
-TEST_CASE_METHOD(SelStoreTest, "wxSelectionStore::InsertInSelected", "[selstore]")
+TEST_CASE_FIXTURE(SelStoreTest, "wxSelectionStore::InsertInSelected")
 {
     m_store.SelectRange(0, NUM_ITEMS - 1);
     CHECK( m_store.GetSelectedCount() == NUM_ITEMS );
