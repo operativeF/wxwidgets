@@ -363,7 +363,7 @@ void MiscThreadTestCase::TestThreadRun()
     thread1.Wait();     // wait until the thread ends
 
     // verify that running twice the same thread fails
-    WX_ASSERT_FAILS_WITH_ASSERT( thread1.Run() );
+    CHECK_THROWS( thread1.Run() );
 }
 
 void MiscThreadTestCase::TestThreadConditions()

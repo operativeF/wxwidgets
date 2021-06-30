@@ -34,8 +34,7 @@ static bool AssertIfOdd(int n)
 TEST_CASE("Assert")
 {
     AssertIfOdd(0);
-    // FIXME: Doesn't work with DocTest
-    //WX_ASSERT_FAILS_WITH_ASSERT(AssertIfOdd(1));
+    CHECK_THROWS(AssertIfOdd(1));
 
     // doesn't fail any more
     wxAssertHandler_t oldHandler = wxSetAssertHandler(nullptr);
@@ -97,6 +96,6 @@ TEST_CASE("wxRound")
     CHECK( wxRound(3.7) == 4 );
     CHECK( wxRound(-0.5f) == -1 );
 
-    //WX_ASSERT_FAILS_WITH_ASSERT( wxRound(2.0*INT_MAX) );
-    //WX_ASSERT_FAILS_WITH_ASSERT( wxRound(1.1*INT_MIN) );
+    CHECK_THROWS( wxRound(2.0*INT_MAX) );
+    CHECK_THROWS( wxRound(1.1*INT_MIN) );
 }

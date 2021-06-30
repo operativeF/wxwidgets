@@ -678,7 +678,7 @@ void TextCtrlTestCase::DoPositionToCoordsTestWithStyle(long style)
     CreateText(style|wxTE_MULTILINE);
 
     // Asking for invalid index should fail.
-    WX_ASSERT_FAILS_WITH_ASSERT( m_text->PositionToCoords(1) );
+    CHECK_THROWS( m_text->PositionToCoords(1) );
 
     // Getting position shouldn't return wxDefaultPosition except if the method
     // is not implemented at all in the current port.
@@ -707,7 +707,7 @@ void TextCtrlTestCase::DoPositionToCoordsTestWithStyle(long style)
     CHECK( m_text->PositionToCoords(5).x > posHello4 );
 
     // But asking for the next position should fail.
-    WX_ASSERT_FAILS_WITH_ASSERT( m_text->PositionToCoords(6) );
+    CHECK_THROWS( m_text->PositionToCoords(6) );
 
     // Test getting the coordinates of the last character when it is in the
     // beginning of a new line to exercise MSW code which has specific logic

@@ -112,7 +112,7 @@ void ListBaseTestCase::ItemRect()
 
     // do test
     wxRect r;
-    WX_ASSERT_FAILS_WITH_ASSERT( list->GetItemRect(1, r) );
+    CHECK_THROWS( list->GetItemRect(1, r) );
     CHECK( list->GetItemRect(0, r) );
     CHECK_EQ( 150, r.GetWidth() );
 
@@ -125,7 +125,7 @@ void ListBaseTestCase::ItemRect()
     CHECK( list->GetSubItemRect(0, 2, r) );
     CHECK_EQ( 40, r.GetWidth() );
 
-    WX_ASSERT_FAILS_WITH_ASSERT( list->GetSubItemRect(0, 3, r) );
+    CHECK_THROWS( list->GetSubItemRect(0, 3, r) );
 
 
     // As we have a header, the top item shouldn't be at (0, 0), but somewhere

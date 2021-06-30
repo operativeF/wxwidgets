@@ -346,38 +346,38 @@ TEST_CASE("Found")
     long dummyl;
     double dummyd;
     // now verify that any option/switch badly queried actually generates an exception
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("v", &dummyd));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("v", &dummydate));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("v", &dummyl));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("v", &dummys));
+    CHECK_THROWS(p.Found("v", &dummyd));
+    CHECK_THROWS(p.Found("v", &dummydate));
+    CHECK_THROWS(p.Found("v", &dummyl));
+    CHECK_THROWS(p.Found("v", &dummys));
     CHECK(p.FoundSwitch("v") != wxCMD_SWITCH_NOT_FOUND);
     CHECK(p.Found("v"));
 
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("o", &dummyd));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("o", &dummydate));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("o", &dummyl));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.FoundSwitch("o"));
+    CHECK_THROWS(p.Found("o", &dummyd));
+    CHECK_THROWS(p.Found("o", &dummydate));
+    CHECK_THROWS(p.Found("o", &dummyl));
+    CHECK_THROWS(p.FoundSwitch("o"));
     CHECK(p.Found("o", &dummys));
     CHECK(p.Found("o"));
 
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("s", &dummyd));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("s", &dummydate));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("s", &dummys));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.FoundSwitch("s"));
+    CHECK_THROWS(p.Found("s", &dummyd));
+    CHECK_THROWS(p.Found("s", &dummydate));
+    CHECK_THROWS(p.Found("s", &dummys));
+    CHECK_THROWS(p.FoundSwitch("s"));
     CHECK(p.Found("s", &dummyl));
     CHECK(p.Found("s"));
 
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("d", &dummyd));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("d", &dummyl));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("d", &dummys));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.FoundSwitch("d"));
+    CHECK_THROWS(p.Found("d", &dummyd));
+    CHECK_THROWS(p.Found("d", &dummyl));
+    CHECK_THROWS(p.Found("d", &dummys));
+    CHECK_THROWS(p.FoundSwitch("d"));
     CHECK(p.Found("d", &dummydate));
     CHECK(p.Found("d"));
 
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("f", &dummydate));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("f", &dummyl));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.Found("f", &dummys));
-    //WX_ASSERT_FAILS_WITH_ASSERT(p.FoundSwitch("f"));
+    CHECK_THROWS(p.Found("f", &dummydate));
+    CHECK_THROWS(p.Found("f", &dummyl));
+    CHECK_THROWS(p.Found("f", &dummys));
+    CHECK_THROWS(p.FoundSwitch("f"));
     CHECK(p.Found("f", &dummyd));
     CHECK(p.Found("f"));
 }

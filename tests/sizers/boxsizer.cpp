@@ -362,8 +362,6 @@ TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::RecalcSizesRespectsMaxSize2")
     CHECK(child3->GetSize().GetHeight() == 125);
 }
 
-// FIXME: Doesn't work with doctest
-/*
 TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::IncompatibleFlags")
 {
     // This unhygienic macro relies on having a local variable called "sizer".
@@ -445,7 +443,6 @@ TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::IncompatibleFlags")
 #undef ASSERT_SIZER_INCOMPATIBLE_FLAGS
 #undef ASSERT_SIZER_INVALID_FLAGS
 }
-*/
 
 TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::Replace")
 {

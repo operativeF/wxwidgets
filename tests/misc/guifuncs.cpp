@@ -131,7 +131,7 @@ void MiscGUIFuncsTestCase::ParseFileDialogFilter()
     CHECK_EQ( "*.py", filters[1] );
 
     // Test some invalid ones too.
-    WX_ASSERT_FAILS_WITH_ASSERT
+    CHECK_THROWS
     (
         wxParseCommonDialogsFilter
         (

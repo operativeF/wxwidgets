@@ -294,34 +294,17 @@ private:
     // the program exit code
     int m_exitcode;
 #endif // wxUSE_GUI
+
+    doctest::Context m_context;
 };
 
 wxIMPLEMENT_APP_NO_MAIN(TestApp);
 
 int main(int argc, char** argv)
 {
-    doctest::Context context;
-
-    context.applyCommandLine(argc, argv);
-
-    // overrides
-    context.setOption("no-breaks", true);             // don't break in the debugger when assertions fail
-
-    wxEntryStart(argc, argv);
-    wxTheApp->CallOnInit();
-
-    int res = context.run(); // run
-
-    //wxTheApp->OnRun();
-    //wxTheApp->OnExit();
-    wxEntryCleanup();
-
-    if (context.shouldExit()) // important - query flags (and --exit) rely on the user doing this
-        return res;
-
-    // tests can be ran non-interactively so make sure we don't show any assert
-    // dialog boxes -- neither our own nor from MSVC debug CRT -- which would
-    // prevent them from completing
+ // tests can be ran non-interactively so make sure we don't show any assert
+// dialog boxes -- neither our own nor from MSVC debug CRT -- which would
+// prevent them from completing
 
 #if wxDEBUG_LEVEL
     wxSetAssertHandler(TestAssertHandler);
@@ -330,6 +313,13 @@ int main(int argc, char** argv)
 #ifdef wxUSE_VC_CRTDBG
     _CrtSetReportHook(TestCrtReportHook);
 #endif // wxUSE_VC_CRTDBG
+
+    wxEntryStart(argc, argv);
+    wxTheApp->CallOnInit();
+
+    int res = wxTheApp->OnRun();
+    wxTheApp->OnExit();
+    wxEntryCleanup();
 
     return res; // the result from doctest is propagated here as well
 }
@@ -636,7 +626,12 @@ int TestApp::RunTests()
     // wchar_t, but as it simply converts arguments to char internally anyhow,
     // we can just as well always use the char version.
     // return Catch::Session().run(argc, static_cast<char**>(argv));
-    return 0; // FIXME: Doctest?
+    m_context.applyCommandLine(argc, argv);
+
+    // overrides
+    m_context.setOption("no-breaks", true);             // don't break in the debugger when assertions fail
+
+    return m_context.run(); // FIXME: Doctest?
 }
 
 int TestApp::OnExit()
@@ -644,6 +639,6 @@ int TestApp::OnExit()
 #if wxUSE_GUI
     delete GetTopWindow();
 #endif // wxUSE_GUI
-
-    return TestAppBase::OnExit();
+    if (m_context.shouldExit()) // important - query flags (and --exit) rely on the user doing this
+        return TestAppBase::OnExit();
 }

@@ -176,10 +176,9 @@ TEST_CASE_FIXTURE(GridSizerTestCase,
                  "wxGridSizer::IncompatibleFlags",
                  "[grid-sizer][sizer]")
 {
-    // FIXME: Doesnt'w work with doctest
-    //WX_ASSERT_FAILS_WITH_ASSERT_MESSAGE
-    //(
-    //    m_sizer->Add(10, 10, wxSizerFlags().Expand().Centre()),
-    //    "Combining wxEXPAND and wxCENTRE should assert"
-    //);
+    CHECK_THROWS_MESSAGE
+    (
+        m_sizer->Add(10, 10, wxSizerFlags().Expand().Centre()),
+        "Combining wxEXPAND and wxCENTRE should assert"
+    );
 }

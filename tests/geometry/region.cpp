@@ -96,7 +96,7 @@ void RegionTestCase::Validity()
     );
 
     // Offsetting an invalid region doesn't make sense.
-    WX_ASSERT_FAILS_WITH_ASSERT( r.Offset(1, 1) );
+    CHECK_THROWS( r.Offset(1, 1) );
 
     CPPUNIT_ASSERT_MESSAGE
     (

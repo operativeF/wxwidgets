@@ -336,7 +336,7 @@ TEST_CASE_METHOD(VsnprintfTestCase, "Vsnprintf::WrongFormatStrings", "[vsnprintf
     // test how wxVsnprintf() behaves with wrong format string:
 
     // a missing positional arg should result in an assert
-    WX_ASSERT_FAILS_WITH_ASSERT(
+    CHECK_THROWS(
             wxSnprintf(buf, MAX_TEST_LEN, wxT("%1$d %3$d"), 1, 2, 3) );
 
     // positional and non-positionals in the same format string:
