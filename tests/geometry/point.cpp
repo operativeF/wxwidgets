@@ -21,51 +21,7 @@
 
 #include "wx/math.h"
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class PointTestCase : public CppUnit::TestCase
-{
-public:
-    PointTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( PointTestCase );
-        CPPUNIT_TEST( Operators );
-    CPPUNIT_TEST_SUITE_END();
-
-    void Operators();
-
-    PointTestCase(const PointTestCase&) = delete;
-	PointTestCase& operator=(const PointTestCase&) = delete;
-};
-
-class RealPointTestCase : public CppUnit::TestCase
-{
-public:
-    RealPointTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( RealPointTestCase );
-        CPPUNIT_TEST( Operators );
-    CPPUNIT_TEST_SUITE_END();
-
-    void Operators();
-
-    RealPointTestCase(const RealPointTestCase&) = delete;
-	RealPointTestCase& operator=(const RealPointTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( PointTestCase );
-CPPUNIT_TEST_SUITE_REGISTRATION( RealPointTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( PointTestCase, "PointTestCase" );
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( RealPointTestCase, "RealPointTestCase" );
-
-void PointTestCase::Operators()
+TEST_CASE("Operators")
 {
     wxPoint p1(1,2);
     wxPoint p2(6,3);
@@ -99,7 +55,7 @@ void PointTestCase::Operators()
     CHECK( p4 == p6 );
 }
 
-void RealPointTestCase::Operators()
+TEST_CASE("Operators")
 {
     const double EPSILON = 0.00001;
     wxRealPoint p1(1.2,3.4);
