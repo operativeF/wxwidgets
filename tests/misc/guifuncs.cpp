@@ -30,41 +30,7 @@
 
 #include "asserthelper.h"
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class MiscGUIFuncsTestCase : public CppUnit::TestCase
-{
-public:
-    MiscGUIFuncsTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( MiscGUIFuncsTestCase );
-        CPPUNIT_TEST( DisplaySize );
-        CPPUNIT_TEST( URLDataObject );
-        CPPUNIT_TEST( ParseFileDialogFilter );
-        CPPUNIT_TEST( ClientToScreen );
-        CPPUNIT_TEST( FindWindowAtPoint );
-    CPPUNIT_TEST_SUITE_END();
-
-    void DisplaySize();
-    void URLDataObject();
-    void ParseFileDialogFilter();
-    void ClientToScreen();
-    void FindWindowAtPoint();
-
-    MiscGUIFuncsTestCase(const MiscGUIFuncsTestCase&) = delete;
-	MiscGUIFuncsTestCase& operator=(const MiscGUIFuncsTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( MiscGUIFuncsTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( MiscGUIFuncsTestCase, "MiscGUIFuncsTestCase" );
-
-void MiscGUIFuncsTestCase::DisplaySize()
+TEST_CASE("DisplaySize")
 {
     // test that different (almost) overloads return the same results
     int w, h;
@@ -88,7 +54,7 @@ void MiscGUIFuncsTestCase::DisplaySize()
     CHECK( sz.y < 1000 );
 }
 
-void MiscGUIFuncsTestCase::URLDataObject()
+TEST_CASE("URLDataObject")
 {
 #if wxUSE_DATAOBJ
     // this tests for buffer overflow, see #11102
@@ -103,7 +69,7 @@ void MiscGUIFuncsTestCase::URLDataObject()
 #endif // wxUSE_DATAOBJ
 }
 
-void MiscGUIFuncsTestCase::ParseFileDialogFilter()
+TEST_CASE("ParseFileDialogFilter")
 {
     std::vector<wxString> descs;
     std::vector<wxString> filters;
@@ -141,7 +107,7 @@ void MiscGUIFuncsTestCase::ParseFileDialogFilter()
     );
 }
 
-void MiscGUIFuncsTestCase::ClientToScreen()
+TEST_CASE("ClientToScreen")
 {
     wxWindow* const tlw = wxTheApp->GetTopWindow();
     CHECK( tlw );
@@ -200,7 +166,7 @@ wxString GetLabelOfWindowAtPoint(wxWindow* parent, int x, int y)
 
 } // anonymous namespace
 
-void MiscGUIFuncsTestCase::FindWindowAtPoint()
+TEST_CASE("FindWindowAtPoint")
 {
     wxWindow* const parent = wxTheApp->GetTopWindow();
     CHECK( parent );
@@ -216,57 +182,50 @@ void MiscGUIFuncsTestCase::FindWindowAtPoint()
     // We need this to realize the windows created above under wxGTK.
     wxYield();
 
-    CPPUNIT_ASSERT_EQUAL_MESSAGE
+    CHECK_MESSAGE
     (
-        "No window for a point outside of the window",
-        "NONE",
-        GetLabelOfWindowAtPoint(parent, 900, 900)
+        "NONE" == GetLabelOfWindowAtPoint(parent, 900, 900),
+        "No window for a point outside of the window"
     );
 
-    CPPUNIT_ASSERT_EQUAL_MESSAGE
+    CHECK_MESSAGE
     (
-        "Point over a child control corresponds to it",
-        btn1->GetLabel(),
-        GetLabelOfWindowAtPoint(parent, 11, 11)
+        btn1->GetLabel() == GetLabelOfWindowAtPoint(parent, 11, 11),
+        "Point over a child control corresponds to it"
     );
 
-    CPPUNIT_ASSERT_EQUAL_MESSAGE
+    CHECK_MESSAGE
     (
-        "Point outside of any child control returns the TLW itself",
-        parent->GetLabel(),
-        GetLabelOfWindowAtPoint(parent, 5, 5)
+        parent->GetLabel() == GetLabelOfWindowAtPoint(parent, 5, 5),
+        "Point outside of any child control returns the TLW itself"
     );
 
     btn2->Disable();
-    CPPUNIT_ASSERT_EQUAL_MESSAGE
+    CHECK_MESSAGE
     (
-        "Point over a disabled child control still corresponds to it",
-        btn2->GetLabel(),
-        GetLabelOfWindowAtPoint(parent, 11, 91)
+        btn2->GetLabel() == GetLabelOfWindowAtPoint(parent, 11, 91),
+        "Point over a disabled child control still corresponds to it"
     );
 
     btn2->Hide();
-    CPPUNIT_ASSERT_EQUAL_MESSAGE
+    CHECK_MESSAGE
     (
-        "Point over a hidden child control doesn't take it into account",
-        parent->GetLabel(),
-        GetLabelOfWindowAtPoint(parent, 11, 91)
+        parent->GetLabel() == GetLabelOfWindowAtPoint(parent, 11, 91),
+        "Point over a hidden child control doesn't take it into account"
     );
 
     btn2->Show();
-    CPPUNIT_ASSERT_EQUAL_MESSAGE
+    CHECK_MESSAGE
     (
-        "Point over child control corresponds to the child",
-        btn3->GetLabel(),
-        GetLabelOfWindowAtPoint(parent, 31, 111)
+        btn3->GetLabel() == GetLabelOfWindowAtPoint(parent, 31, 111),
+        "Point over child control corresponds to the child"
     );
 
     btn3->Disable();
-    CPPUNIT_ASSERT_EQUAL_MESSAGE
+    CHECK_MESSAGE
     (
-        "Point over disabled child controls still corresponds to this child",
-        btn3->GetLabel(),
-        GetLabelOfWindowAtPoint(parent, 31, 111)
+        btn3->GetLabel() == GetLabelOfWindowAtPoint(parent, 31, 111),
+        "Point over disabled child controls still corresponds to this child"
     );
 
     btn1->Destroy();

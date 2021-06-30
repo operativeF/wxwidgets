@@ -526,6 +526,7 @@
     <ClCompile Include="html\htmprint.cpp" />
     <ClCompile Include="image\rawbmp.cpp" />
     <ClCompile Include="menu\accelentry.cpp" />
+    <ClCompile Include="misc\guifuncs.cpp" />
     <ClCompile Include="persistence\dataview.cpp" />
     <ClCompile Include="persistence\tlw.cpp" />
     <ClCompile Include="rowheightcache\rowheightcachetest.cpp" />
