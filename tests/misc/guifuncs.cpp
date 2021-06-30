@@ -176,7 +176,7 @@ TEST_CASE("FindWindowAtPoint")
     parent->SetLabel("parent");
 
     // Set the position so it doesn't interfere with other windows.
-    parent->SetPosition({10, 10});
+    parent->SetPosition({400, 400});
 
     wxWindow* btn1 = new TestButton(parent, "1", wxPoint(10, 10));
     wxWindow* btn2 = new TestButton(parent, "2", wxPoint(10, 90));

@@ -307,6 +307,9 @@ TEST_CASE("Image test")
             CHECK(img.LoadFile(g_testfiles[i].file));
     }
 
+    // FIXME: Until performance improves, we're not using sockets.
+    // Maybe sockets should just be gutted for Networking TS or Boost Beast.
+    /*
     SUBCASE("LoadFromSocketStream")
     {
         wxSocketBase::Initialize();
@@ -359,6 +362,7 @@ TEST_CASE("Image test")
 
         wxSocketBase::Shutdown();
     }
+    */
 
     SUBCASE("LoadFromZipStream")
     {
