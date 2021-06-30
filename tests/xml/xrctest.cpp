@@ -153,7 +153,7 @@ private:
 	XrcTestCase& operator=(const XrcTestCase&) = delete;
 };
 
-TEST_CASE_METHOD(XrcTestCase, "XRC::ObjectReferences", "[xrc]")
+TEST_CASE_FIXTURE(XrcTestCase, "XRC::ObjectReferences")
 {
     wxXmlResource::Get()->InitAllHandlers();
 
@@ -176,7 +176,7 @@ TEST_CASE_METHOD(XrcTestCase, "XRC::ObjectReferences", "[xrc]")
     }
 }
 
-TEST_CASE_METHOD(XrcTestCase, "XRC::IDRanges", "[xrc]")
+TEST_CASE_FIXTURE(XrcTestCase, "XRC::IDRanges")
 {
     // Tests ID ranges
     for ( int n = 0; n < 2; ++n )
@@ -214,7 +214,7 @@ TEST_CASE_METHOD(XrcTestCase, "XRC::IDRanges", "[xrc]")
     }
 }
 
-TEST_CASE("XRC::PathWithFragment", "[xrc][uri]")
+TEST_CASE("XRC::PathWithFragment")
 {
     wxXmlResource::Get()->AddHandler(new wxBitmapXmlHandler);
     wxImage::AddHandler(new wxXPMHandler);
@@ -260,12 +260,14 @@ TEST_CASE("XRC::PathWithFragment", "[xrc][uri]")
     CHECK( !wxXmlResource::Get()->LoadBitmap("bad").IsOk() );
 }
 
+// FIXME:
 // This test is disabled by default as it requires the environment variable
 // below to be defined to point to a HTTP URL with the file to load.
 //
 // Use something like "python3 -m http.server samples/xrc/rc" and set
 // WX_TEST_XRC_URL to http://localhost/menu.xrc to run this test.
-TEST_CASE_METHOD(XrcTestCase, "XRC::LoadURL", "[xrc][.]")
+/*
+TEST_CASE_FIXTURE(XrcTestCase, "XRC::LoadURL")
 {
     wxString url;
     REQUIRE( wxGetEnv("WX_TEST_XRC_URL", &url) );
@@ -286,5 +288,6 @@ TEST_CASE_METHOD(XrcTestCase, "XRC::LoadURL", "[xrc][.]")
 
     CHECK( wxXmlResource::Get()->Load(url) );
 }
+*/
 
 #endif // wxUSE_XRC

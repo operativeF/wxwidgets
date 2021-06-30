@@ -140,6 +140,9 @@
     <ClCompile Include="persistence\dataview.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="xml\xrctest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc">
@@ -153,5 +156,6 @@
     <ClInclude Include="testwindow.h" />
     <ClInclude Include="waitforpaint.h" />
     <ClInclude Include="testprec.h" />
+    <ClInclude Include="persistence\testpersistence.h" />
   </ItemGroup>
 </Project>

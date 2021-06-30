@@ -537,11 +537,13 @@
     <ClCompile Include="toplevel\toplevel.cpp" />
     <ClCompile Include="window\clientsize.cpp" />
     <ClCompile Include="window\setsize.cpp" />
+    <ClCompile Include="xml\xrctest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="persistence\testpersistence.h" />
     <ClInclude Include="testableframe.h" />
     <ClInclude Include="testdate.h" />
     <ClInclude Include="testfile.h" />
