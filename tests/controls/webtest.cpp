@@ -64,7 +64,7 @@ protected:
     EventCounter* const m_loaded;
 };
 
-TEST_CASE_METHOD(WebViewTestCase, "WebView", "[wxWebView]")
+TEST_CASE_FIXTURE(WebViewTestCase, "WebView", "[wxWebView]")
 {
 #if defined(__WXGTK__) && !defined(__WXGTK3__)
     wxString value;
@@ -79,7 +79,7 @@ TEST_CASE_METHOD(WebViewTestCase, "WebView", "[wxWebView]")
     m_browser -> Create(wxTheApp->GetTopWindow(), wxID_ANY);
     ENSURE_LOADED;
 
-    SECTION("Title")
+    SUBCASE("Title")
     {
         CHECK(m_browser->GetCurrentTitle() == "");
 
@@ -93,7 +93,7 @@ TEST_CASE_METHOD(WebViewTestCase, "WebView", "[wxWebView]")
         CHECK(m_browser->GetCurrentTitle() == "");
     }
 
-    SECTION("URL")
+    SUBCASE("URL")
     {
         CHECK(m_browser->GetCurrentURL() == "about:blank");
 
@@ -102,7 +102,7 @@ TEST_CASE_METHOD(WebViewTestCase, "WebView", "[wxWebView]")
         CHECK(m_browser->GetCurrentURL() == "about:");
     }
 
-    SECTION("History")
+    SUBCASE("History")
     {
         LoadUrl(3);
 
@@ -126,7 +126,7 @@ TEST_CASE_METHOD(WebViewTestCase, "WebView", "[wxWebView]")
     }
 
 #if !wxUSE_WEBVIEW_WEBKIT2 && !defined(__WXOSX__)
-    SECTION("HistoryEnable")
+    SUBCASE("HistoryEnable")
     {
         LoadUrl();
         m_browser->EnableHistory(false);
@@ -142,7 +142,7 @@ TEST_CASE_METHOD(WebViewTestCase, "WebView", "[wxWebView]")
 #endif
 
 #if !wxUSE_WEBVIEW_WEBKIT2 && !defined(__WXOSX__)
-    SECTION("HistoryClear")
+    SUBCASE("HistoryClear")
     {
         LoadUrl(2);
 
@@ -160,7 +160,7 @@ TEST_CASE_METHOD(WebViewTestCase, "WebView", "[wxWebView]")
     }
 #endif
 
-    SECTION("HistoryList")
+    SUBCASE("HistoryList")
     {
         LoadUrl(2);
         m_browser->GoBack();
@@ -177,7 +177,7 @@ TEST_CASE_METHOD(WebViewTestCase, "WebView", "[wxWebView]")
     }
 
 #if !defined(__WXOSX__) && (!defined(wxUSE_WEBVIEW_EDGE) || !wxUSE_WEBVIEW_EDGE)
-    SECTION("Editable")
+    SUBCASE("Editable")
     {
         CHECK(!m_browser->IsEditable());
 
@@ -191,7 +191,7 @@ TEST_CASE_METHOD(WebViewTestCase, "WebView", "[wxWebView]")
     }
 #endif
 
-    SECTION("Selection")
+    SUBCASE("Selection")
     {
         m_browser->SetPage("<html><body>Some <strong>strong</strong> text</body></html>", "");
         ENSURE_LOADED;
@@ -218,10 +218,10 @@ TEST_CASE_METHOD(WebViewTestCase, "WebView", "[wxWebView]")
         // equality and just check that the source contains things we'd expect it
         // to.
         const wxString selSource = m_browser->GetSelectedSource();
-        WX_ASSERT_MESSAGE
+        CHECK_MESSAGE
         (
-            ("Unexpected selection source: \"%s\"", selSource),
-            selSource.Lower().Matches("*some*<strong*strong</strong>*text*")
+            selSource.Lower().Matches("*some*<strong*strong</strong>*text*"),
+            ("Unexpected selection source: \"%s\"", selSource)
         );
 #endif // !defined(__WXOSX__)
 
@@ -229,7 +229,7 @@ TEST_CASE_METHOD(WebViewTestCase, "WebView", "[wxWebView]")
         CHECK(!m_browser->HasSelection());
     }
 
-    SECTION("Zoom")
+    SUBCASE("Zoom")
     {
         if(m_browser->CanSetZoomType(wxWEBVIEW_ZOOM_TYPE_LAYOUT))
         {
@@ -253,7 +253,7 @@ TEST_CASE_METHOD(WebViewTestCase, "WebView", "[wxWebView]")
         }
     }
 
-    SECTION("RunScript")
+    SUBCASE("RunScript")
     {
         m_browser->
             SetPage("<html><head><script></script></head><body></body></html>", "");
@@ -370,7 +370,7 @@ TEST_CASE_METHOD(WebViewTestCase, "WebView", "[wxWebView]")
         CHECK(!m_browser->RunScript("x.y.z"));
     }
 
-    SECTION("SetPage")
+    SUBCASE("SetPage")
     {
         m_browser->SetPage("<html><body>text</body></html>", "");
         ENSURE_LOADED;
