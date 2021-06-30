@@ -510,6 +510,7 @@
     <ClCompile Include="geometry\region.cpp" />
     <ClCompile Include="geometry\size.cpp" />
     <ClCompile Include="graphics\ellipsization.cpp" />
+    <ClCompile Include="graphics\imagelist.cpp" />
     <ClCompile Include="graphics\measuring.cpp" />
     <ClCompile Include="image\rawbmp.cpp" />
     <ClCompile Include="menu\accelentry.cpp" />

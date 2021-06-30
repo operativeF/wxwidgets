@@ -26,7 +26,7 @@
 // tests
 // ----------------------------------------------------------------------------
 
-TEST_CASE("ImageList:WithMask", "[imagelist][withmask]")
+TEST_CASE("ImageList:WithMask")
 {
     wxInitAllImageHandlers();
 
@@ -84,7 +84,7 @@ TEST_CASE("ImageList:WithMask", "[imagelist][withmask]")
 
     wxImageList il(32, 32, true);
 
-    SECTION("Add RGB image to list")
+    SUBCASE("Add RGB image to list")
     {
         il.RemoveAll();
         int idx = il.Add(bmpRGB);
@@ -112,7 +112,7 @@ TEST_CASE("ImageList:WithMask", "[imagelist][withmask]")
         CHECK(bmp3.GetHeight() == 32);
     }
 
-    SECTION("Add RGBA image to list")
+    SUBCASE("Add RGBA image to list")
     {
         il.RemoveAll();
         int idx = il.Add(bmpRGBA);
@@ -140,7 +140,7 @@ TEST_CASE("ImageList:WithMask", "[imagelist][withmask]")
         CHECK(bmp3.GetHeight() == 32);
     }
 
-    SECTION("Add icon to list")
+    SUBCASE("Add icon to list")
     {
         il.RemoveAll();
         int idx = il.Add(ico);
@@ -150,7 +150,7 @@ TEST_CASE("ImageList:WithMask", "[imagelist][withmask]")
         CHECK(icon1.GetHeight() == 32);
     }
 
-    SECTION("Replace with RGB image")
+    SUBCASE("Replace with RGB image")
     {
         il.RemoveAll();
         int idx1 = il.Add(bmpRGBA);
@@ -174,7 +174,7 @@ TEST_CASE("ImageList:WithMask", "[imagelist][withmask]")
         CHECK(bmp2.GetHeight() == 32);
     }
 
-    SECTION("Replace with RGBA image")
+    SUBCASE("Replace with RGBA image")
     {
         il.RemoveAll();
         int idx1 = il.Add(bmpRGB);
@@ -198,7 +198,7 @@ TEST_CASE("ImageList:WithMask", "[imagelist][withmask]")
         CHECK(bmp2.GetHeight() == 32);
     }
 
-    SECTION("Add images with incompatible sizes")
+    SUBCASE("Add images with incompatible sizes")
     {
         il.RemoveAll();
         wxSize sz = il.GetSize();
@@ -436,7 +436,7 @@ TEST_CASE("ImageList:WithMask", "[imagelist][withmask]")
     }
 }
 
-TEST_CASE("ImageList:NoMask", "[imagelist][nomask]")
+TEST_CASE("ImageList:NoMask")
 {
     wxInitAllImageHandlers();
 
@@ -494,7 +494,7 @@ TEST_CASE("ImageList:NoMask", "[imagelist][nomask]")
 
     wxImageList il(32, 32, false);
 
-    SECTION("Add RGB image to list")
+    SUBCASE("Add RGB image to list")
     {
         il.RemoveAll();
         int idx = il.Add(bmpRGB);
@@ -522,7 +522,7 @@ TEST_CASE("ImageList:NoMask", "[imagelist][nomask]")
         CHECK(bmp3.GetHeight() == 32);
     }
 
-    SECTION("Add RGBA image to list")
+    SUBCASE("Add RGBA image to list")
     {
         il.RemoveAll();
         int idx = il.Add(bmpRGBA);
@@ -550,7 +550,7 @@ TEST_CASE("ImageList:NoMask", "[imagelist][nomask]")
         CHECK(bmp3.GetHeight() == 32);
     }
 
-    SECTION("Add icon to list")
+    SUBCASE("Add icon to list")
     {
         il.RemoveAll();
         int idx = il.Add(ico);
@@ -560,7 +560,7 @@ TEST_CASE("ImageList:NoMask", "[imagelist][nomask]")
         CHECK(icon1.GetHeight() == 32);
     }
 
-    SECTION("Replace with RGB image")
+    SUBCASE("Replace with RGB image")
     {
         il.RemoveAll();
         int idx1 = il.Add(bmpRGBA);
@@ -584,7 +584,7 @@ TEST_CASE("ImageList:NoMask", "[imagelist][nomask]")
         CHECK(bmp2.GetHeight() == 32);
     }
 
-    SECTION("Replace with RGBA image")
+    SUBCASE("Replace with RGBA image")
     {
         il.RemoveAll();
         int idx1 = il.Add(bmpRGB);
@@ -621,7 +621,7 @@ TEST_CASE("ImageList:NegativeTests", "[imagelist][negative]")
     }
     REQUIRE(bmp.IsOk());
 
-    SECTION("Invalid size (negative)")
+    SUBCASE("Invalid size (negative)")
     {
         wxImageList il;
         bool ok = il.Create(-1, -1);
@@ -656,7 +656,7 @@ TEST_CASE("ImageList:NegativeTests", "[imagelist][negative]")
 #endif
     }
 
-    SECTION("Invalid size (zero)")
+    SUBCASE("Invalid size (zero)")
     {
         wxImageList il;
         bool ok = il.Create(0, 0);
@@ -699,7 +699,7 @@ TEST_CASE("ImageList:NegativeTests", "[imagelist][negative]")
 #endif
     }
 
-    SECTION("Invalid Get/Replace/Remove indices")
+    SUBCASE("Invalid Get/Replace/Remove indices")
     {
         wxImageList il(32, 32, false);
         CHECK(il.GetImageCount() == 0);
@@ -753,7 +753,7 @@ TEST_CASE("ImageList:NegativeTests", "[imagelist][negative]")
     }
 }
 
-TEST_CASE("ImageList:HiDPI", "[imagelist][hidpi]")
+TEST_CASE("ImageList:HiDPI")
 {
 #if defined(__WXMSW__)  || ( defined(__WXGTK20__) && !defined(__WXGTK3__) )
 
@@ -781,7 +781,7 @@ TEST_CASE("ImageList:HiDPI", "[imagelist][hidpi]")
     CHECK_FALSE(bmp2x.HasAlpha());
     CHECK(bmp2x.GetMask() == NULL);
 
-    SECTION("Add images 2x to the list 2x")
+    SUBCASE("Add images 2x to the list 2x")
     {
         // Logical image size
         wxImageList il(8, 4, false);
@@ -813,7 +813,7 @@ TEST_CASE("ImageList:HiDPI", "[imagelist][hidpi]")
         CHECK(bmp.GetMask() == NULL);
     }
 
-    SECTION("Add images 2x to the list 1x")
+    SUBCASE("Add images 2x to the list 1x")
     {
         // Logical image size
         wxImageList il(16, 8, false);
@@ -845,7 +845,7 @@ TEST_CASE("ImageList:HiDPI", "[imagelist][hidpi]")
         CHECK(bmp.GetMask() == NULL);
     }
 
-    SECTION("Replaces images in the list 2x")
+    SUBCASE("Replaces images in the list 2x")
     {
         // Logical image size
         wxImageList il(8, 4, false);
@@ -877,7 +877,7 @@ TEST_CASE("ImageList:HiDPI", "[imagelist][hidpi]")
         CHECK(bmp.GetMask() == NULL);
     }
 
-    SECTION("Replaces images in the list 1x")
+    SUBCASE("Replaces images in the list 1x")
     {
         // Logical image size
         wxImageList il(16, 8, false);
@@ -908,7 +908,7 @@ TEST_CASE("ImageList:HiDPI", "[imagelist][hidpi]")
         CHECK(bmp.GetMask() == NULL);
     }
 
-    SECTION("Changes list 1x to 2x")
+    SUBCASE("Changes list 1x to 2x")
     {
         wxImage img2(32, 16);
         img2.SetRGB(wxRect(0, 0, 32, 16), 255, 128, 64);
