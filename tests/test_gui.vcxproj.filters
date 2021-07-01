@@ -197,6 +197,9 @@
     <ClCompile Include="controls\pickertest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="controls\datepickerctrltest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc">
