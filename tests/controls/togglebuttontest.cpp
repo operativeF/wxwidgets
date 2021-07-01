@@ -21,84 +21,51 @@
 #include "wx/uiaction.h"
 #include "wx/tglbtn.h"
 
-class ToggleButtonTestCase : public CppUnit::TestCase
+
+TEST_CASE("Toggle button test")
 {
-public:
-    ToggleButtonTestCase() { }
+    auto m_button = std::make_unique<wxToggleButton>(wxTheApp->GetTopWindow(),
+                                                     wxID_ANY, "wxToggleButton");
 
-    void setUp() override;
-    void tearDown() override;
-
-private:
-    CPPUNIT_TEST_SUITE( ToggleButtonTestCase );
-        WXUISIM_TEST( Click );
-        CPPUNIT_TEST( Value );
-    CPPUNIT_TEST_SUITE_END();
-
-    void Click();
-    void Value();
-
-    wxToggleButton* m_button;
-
-    ToggleButtonTestCase(const ToggleButtonTestCase&) = delete;
-	ToggleButtonTestCase& operator=(const ToggleButtonTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( ToggleButtonTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( ToggleButtonTestCase, "ToggleButtonTestCase" );
-
-void ToggleButtonTestCase::setUp()
-{
-    m_button = new wxToggleButton(wxTheApp->GetTopWindow(), wxID_ANY, "wxToggleButton");
-}
-
-void ToggleButtonTestCase::tearDown()
-{
-    wxDELETE(m_button);
-}
-
-void ToggleButtonTestCase::Click()
-{
 #if wxUSE_UIACTIONSIMULATOR
-    EventCounter clicked(m_button, wxEVT_TOGGLEBUTTON);
+    SUBCASE("Click")
+    {
+        EventCounter clicked(m_button.get(), wxEVT_TOGGLEBUTTON);
 
-    wxUIActionSimulator sim;
+        wxUIActionSimulator sim;
 
-    //We move in slightly to account for window decorations
-    sim.MouseMove(m_button->GetScreenPosition() + wxPoint(10, 10));
-    wxYield();
+        //We move in slightly to account for window decorations
+        sim.MouseMove(m_button->GetScreenPosition() + wxPoint(10, 10));
+        wxYield();
 
-    sim.MouseClick();
-    wxYield();
+        sim.MouseClick();
+        wxYield();
 
-    CHECK_EQ(1, clicked.GetCount());
-    CHECK(m_button->GetValue());
-    clicked.Clear();
+        CHECK_EQ(1, clicked.GetCount());
+        CHECK(m_button->GetValue());
+        clicked.Clear();
 
-    sim.MouseClick();
-    wxYield();
+        sim.MouseClick();
+        wxYield();
 
-    CHECK_EQ(1, clicked.GetCount());
-    CHECK(!m_button->GetValue());
+        CHECK_EQ(1, clicked.GetCount());
+        CHECK(!m_button->GetValue());
+    }
 #endif
+
+    SUBCASE("Value")
+    {
+        EventCounter clicked(m_button.get(), wxEVT_BUTTON);
+
+        m_button->SetValue(true);
+
+        CHECK(m_button->GetValue());
+
+        m_button->SetValue(false);
+
+        CHECK(!m_button->GetValue());
+
+        CHECK_EQ( 0, clicked.GetCount() );
+    }
 }
-
-void ToggleButtonTestCase::Value()
-{
-    EventCounter clicked(m_button, wxEVT_BUTTON);
-
-    m_button->SetValue(true);
-
-    CHECK(m_button->GetValue());
-
-    m_button->SetValue(false);
-
-    CHECK(!m_button->GetValue());
-
-    CHECK_EQ( 0, clicked.GetCount() );
-}
-
 #endif //wxUSE_TOGGLEBTN
