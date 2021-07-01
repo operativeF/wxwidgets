@@ -488,6 +488,7 @@
     <ClCompile Include="asserthelper.cpp" />
     <ClCompile Include="config\config.cpp" />
     <ClCompile Include="controls\auitest.cpp" />
+    <ClCompile Include="controls\bitmaptogglebuttontest.cpp" />
     <ClCompile Include="controls\choicebooktest.cpp" />
     <ClCompile Include="controls\datepickerctrltest.cpp" />
     <ClCompile Include="controls\dialogtest.cpp" />
