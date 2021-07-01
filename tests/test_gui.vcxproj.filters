@@ -209,6 +209,9 @@
     <ClCompile Include="controls\buttontest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="controls\radioboxtest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc">
