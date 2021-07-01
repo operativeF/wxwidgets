@@ -167,9 +167,6 @@
     <ClCompile Include="image\image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="menu\menu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="controls\choicebooktest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -200,6 +197,12 @@
     <ClCompile Include="controls\datepickerctrltest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="menu\menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\markuptest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc">
@@ -217,5 +220,6 @@
     <ClInclude Include="controls\bookctrlbasetest.h" />
     <ClInclude Include="controls\listbasetest.h" />
     <ClInclude Include="controls\pickerbasetest.h" />
+    <ClInclude Include="controls\textentrytest.h" />
   </ItemGroup>
 </Project>

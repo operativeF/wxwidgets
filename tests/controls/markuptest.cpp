@@ -16,204 +16,181 @@
 
 #include "wx/private/markupparser.h"
 
-class MarkupTestCase : public CppUnit::TestCase
+TEST_CASE("Markup tests")
 {
-public:
-    MarkupTestCase() { }
-
-private:
-    CPPUNIT_TEST_SUITE( MarkupTestCase );
-        CPPUNIT_TEST( RoundTrip );
-        CPPUNIT_TEST( Quote );
-        CPPUNIT_TEST( Strip );
-    CPPUNIT_TEST_SUITE_END();
-
-    void RoundTrip();
-    void Quote();
-    void Strip();
-
-    MarkupTestCase(const MarkupTestCase&) = delete;
-	MarkupTestCase& operator=(const MarkupTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( MarkupTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( MarkupTestCase, "MarkupTestCase" );
-
-void MarkupTestCase::RoundTrip()
-{
-    // Define a wxMarkupParserOutput object which produces the same markup
-    // string on output. This is, of course, perfectly useless, but allows us
-    // to test that parsing works as expected.
-    class RoundTripOutput : public wxMarkupParserOutput
+    SUBCASE("RoundTrip")
     {
-    public:
-        RoundTripOutput() { }
-
-        void Reset() { m_text.clear(); }
-
-        const wxString& GetText() const { return m_text; }
-
-
-        void OnText(const wxString& text) override { m_text += text; }
-
-        void OnBoldStart() override { m_text += "<b>"; }
-        void OnBoldEnd() override { m_text += "</b>"; }
-
-        void OnItalicStart() override { m_text += "<i>"; }
-        void OnItalicEnd() override { m_text += "</i>"; }
-
-        void OnUnderlinedStart() override { m_text += "<u>"; }
-        void OnUnderlinedEnd() override { m_text += "</u>"; }
-
-        void OnStrikethroughStart() override { m_text += "<s>"; }
-        void OnStrikethroughEnd() override { m_text += "</s>"; }
-
-        void OnBigStart() override { m_text += "<big>"; }
-        void OnBigEnd() override { m_text += "</big>"; }
-
-        void OnSmallStart() override { m_text += "<small>"; }
-        void OnSmallEnd() override { m_text += "</small>"; }
-
-        void OnTeletypeStart() override { m_text += "<tt>"; }
-        void OnTeletypeEnd() override { m_text += "</tt>"; }
-
-        void OnSpanStart(const wxMarkupSpanAttributes& attrs) override
+        // Define a wxMarkupParserOutput object which produces the same markup
+        // string on output. This is, of course, perfectly useless, but allows us
+        // to test that parsing works as expected.
+        class RoundTripOutput : public wxMarkupParserOutput
         {
-            m_text << "<span";
+        public:
+            RoundTripOutput() { }
 
-            if ( !attrs.m_fgCol.empty() )
-                m_text << " foreground='" << attrs.m_fgCol << "'";
+            void Reset() { m_text.clear(); }
 
-            if ( !attrs.m_bgCol.empty() )
-                m_text << " background='" << attrs.m_bgCol << "'";
+            const wxString& GetText() const { return m_text; }
 
-            if ( !attrs.m_fontFace.empty() )
-                m_text << " face='" << attrs.m_fontFace << "'";
 
-            wxString size;
-            switch ( attrs.m_sizeKind )
+            void OnText(const wxString& text) override { m_text += text; }
+
+            void OnBoldStart() override { m_text += "<b>"; }
+            void OnBoldEnd() override { m_text += "</b>"; }
+
+            void OnItalicStart() override { m_text += "<i>"; }
+            void OnItalicEnd() override { m_text += "</i>"; }
+
+            void OnUnderlinedStart() override { m_text += "<u>"; }
+            void OnUnderlinedEnd() override { m_text += "</u>"; }
+
+            void OnStrikethroughStart() override { m_text += "<s>"; }
+            void OnStrikethroughEnd() override { m_text += "</s>"; }
+
+            void OnBigStart() override { m_text += "<big>"; }
+            void OnBigEnd() override { m_text += "</big>"; }
+
+            void OnSmallStart() override { m_text += "<small>"; }
+            void OnSmallEnd() override { m_text += "</small>"; }
+
+            void OnTeletypeStart() override { m_text += "<tt>"; }
+            void OnTeletypeEnd() override { m_text += "</tt>"; }
+
+            void OnSpanStart(const wxMarkupSpanAttributes& attrs) override
             {
-                case wxMarkupSpanAttributes::Size_Unspecified:
-                    break;
+                m_text << "<span";
 
-                case wxMarkupSpanAttributes::Size_Relative:
-                    size << (attrs.m_fontSize > 0 ? "larger" : "smaller");
-                    break;
+                if ( !attrs.m_fgCol.empty() )
+                    m_text << " foreground='" << attrs.m_fgCol << "'";
 
-                case wxMarkupSpanAttributes::Size_Symbolic:
-                    {
-                        CHECK( attrs.m_fontSize >= -3 );
-                        CHECK( attrs.m_fontSize <= 3 );
-                        static const char *cssSizes[] =
+                if ( !attrs.m_bgCol.empty() )
+                    m_text << " background='" << attrs.m_bgCol << "'";
+
+                if ( !attrs.m_fontFace.empty() )
+                    m_text << " face='" << attrs.m_fontFace << "'";
+
+                wxString size;
+                switch ( attrs.m_sizeKind )
+                {
+                    case wxMarkupSpanAttributes::Size_Unspecified:
+                        break;
+
+                    case wxMarkupSpanAttributes::Size_Relative:
+                        size << (attrs.m_fontSize > 0 ? "larger" : "smaller");
+                        break;
+
+                    case wxMarkupSpanAttributes::Size_Symbolic:
                         {
-                            "xx-small", "x-small", "small",
-                            "medium",
-                            "large", "x-large", "xx-large",
-                        };
+                            CHECK( attrs.m_fontSize >= -3 );
+                            CHECK( attrs.m_fontSize <= 3 );
+                            static const char *cssSizes[] =
+                            {
+                                "xx-small", "x-small", "small",
+                                "medium",
+                                "large", "x-large", "xx-large",
+                            };
 
-                        size << cssSizes[attrs.m_fontSize + 3];
-                    }
-                    break;
+                            size << cssSizes[attrs.m_fontSize + 3];
+                        }
+                        break;
 
-                case wxMarkupSpanAttributes::Size_PointParts:
-                    size.Printf("%u", attrs.m_fontSize);
-                    break;
+                    case wxMarkupSpanAttributes::Size_PointParts:
+                        size.Printf("%u", attrs.m_fontSize);
+                        break;
+                }
+
+                if ( !size.empty() )
+                    m_text << " size='" << size << '\'';
+
+                // TODO: Handle the rest of attributes.
+
+                m_text << ">";
             }
 
-            if ( !size.empty() )
-                m_text << " size='" << size << '\'';
+            void OnSpanEnd(const wxMarkupSpanAttributes& WXUNUSED(attrs)) override
+            {
+                m_text += "</span>";
+            }
 
-            // TODO: Handle the rest of attributes.
-
-            m_text << ">";
-        }
-
-        void OnSpanEnd(const wxMarkupSpanAttributes& WXUNUSED(attrs)) override
-        {
-            m_text += "</span>";
-        }
-
-    private:
-        wxString m_text;
-    };
+        private:
+            wxString m_text;
+        };
 
 
-    RoundTripOutput output;
-    wxMarkupParser parser(output);
+        RoundTripOutput output;
+        wxMarkupParser parser(output);
 
-    #define CHECK_PARSES_OK(text) \
-        output.Reset(); \
-        CHECK( parser.Parse(text) ); \
-        CHECK_EQ( text, output.GetText() )
+        #define CHECK_PARSES_OK(text) \
+            output.Reset(); \
+            CHECK( parser.Parse(text) ); \
+            CHECK_EQ( text, output.GetText() )
 
-    #define CHECK_PARSES_AS(text, result) \
-        output.Reset(); \
-        CHECK( parser.Parse(text) ); \
-        CHECK_EQ( result, output.GetText() )
+        #define CHECK_PARSES_AS(text, result) \
+            output.Reset(); \
+            CHECK( parser.Parse(text) ); \
+            CHECK_EQ( result, output.GetText() )
 
-    #define CHECK_DOESNT_PARSE(text) \
-        CHECK( !parser.Parse(text) )
+        #define CHECK_DOESNT_PARSE(text) \
+            CHECK( !parser.Parse(text) )
 
-    CHECK_PARSES_OK( "" );
-    CHECK_PARSES_OK( "foo" );
-    CHECK_PARSES_OK( "foo<b>bar</b>" );
-    CHECK_PARSES_OK( "1<big>2<small>3</small>4<big>5</big></big>6" );
-    CHECK_PARSES_OK( "first <span foreground='red'>second</span> last" );
-    CHECK_PARSES_OK( "first <span foreground='red' "
-                                 "background='#ffffff'>second </span> last" );
-    CHECK_PARSES_OK( "<span size='10240'>10pt</span>" );
-    CHECK_PARSES_OK( "<span size='x-small'>much smaller</span>" );
-    CHECK_PARSES_OK( "<span size='larger'>larger</span>" );
-    CHECK_PARSES_OK
-    (
-        "<u>Please</u> notice: <i><b>any</b></i> <span foreground='grey'>"
-        "<s><tt>bugs</tt></s></span> in this code are <span foreground='red' "
-        "size='xx-large'>NOT</span> allowed."
-    );
+        CHECK_PARSES_OK( "" );
+        CHECK_PARSES_OK( "foo" );
+        CHECK_PARSES_OK( "foo<b>bar</b>" );
+        CHECK_PARSES_OK( "1<big>2<small>3</small>4<big>5</big></big>6" );
+        CHECK_PARSES_OK( "first <span foreground='red'>second</span> last" );
+        CHECK_PARSES_OK( "first <span foreground='red' "
+                                     "background='#ffffff'>second </span> last" );
+        CHECK_PARSES_OK( "<span size='10240'>10pt</span>" );
+        CHECK_PARSES_OK( "<span size='x-small'>much smaller</span>" );
+        CHECK_PARSES_OK( "<span size='larger'>larger</span>" );
+        CHECK_PARSES_OK
+        (
+            "<u>Please</u> notice: <i><b>any</b></i> <span foreground='grey'>"
+            "<s><tt>bugs</tt></s></span> in this code are <span foreground='red' "
+            "size='xx-large'>NOT</span> allowed."
+        );
 
-    CHECK_PARSES_OK( "foo&bar" );
-    CHECK_PARSES_AS( "foo&amp;bar", "foo&bar" );
-    CHECK_PARSES_AS( "&lt;O&apos;Reilly&gt;", "<O'Reilly>" );
+        CHECK_PARSES_OK( "foo&bar" );
+        CHECK_PARSES_AS( "foo&amp;bar", "foo&bar" );
+        CHECK_PARSES_AS( "&lt;O&apos;Reilly&gt;", "<O'Reilly>" );
 
-    CHECK_DOESNT_PARSE( "<" );
-    CHECK_DOESNT_PARSE( "<b" );
-    CHECK_DOESNT_PARSE( "<b>" );
-    CHECK_DOESNT_PARSE( "<b></i>" );
-    CHECK_DOESNT_PARSE( "<b><i></b></i>" );
-    CHECK_DOESNT_PARSE( "<foo></foo>" );
+        CHECK_DOESNT_PARSE( "<" );
+        CHECK_DOESNT_PARSE( "<b" );
+        CHECK_DOESNT_PARSE( "<b>" );
+        CHECK_DOESNT_PARSE( "<b></i>" );
+        CHECK_DOESNT_PARSE( "<b><i></b></i>" );
+        CHECK_DOESNT_PARSE( "<foo></foo>" );
 
-    #undef CHECK_PARSES_OK
-    #undef CHECK_DOESNT_PARSE
-}
+        #undef CHECK_PARSES_OK
+        #undef CHECK_DOESNT_PARSE
+    }
 
-void MarkupTestCase::Quote()
-{
-    CHECK_EQ( "", wxMarkupParser::Quote("") );
-    CHECK_EQ( "foo", wxMarkupParser::Quote("foo") );
-    CHECK_EQ( "&lt;foo&gt;", wxMarkupParser::Quote("<foo>") );
-    CHECK_EQ( "B&amp;B", wxMarkupParser::Quote("B&B") );
-    CHECK_EQ( "&quot;&quot;", wxMarkupParser::Quote("\"\"") );
-}
+    SUBCASE("Quote")
+    {
+        CHECK_EQ( "", wxMarkupParser::Quote("") );
+        CHECK_EQ( "foo", wxMarkupParser::Quote("foo") );
+        CHECK_EQ( "&lt;foo&gt;", wxMarkupParser::Quote("<foo>") );
+        CHECK_EQ( "B&amp;B", wxMarkupParser::Quote("B&B") );
+        CHECK_EQ( "&quot;&quot;", wxMarkupParser::Quote("\"\"") );
+    }
 
-void MarkupTestCase::Strip()
-{
-    #define CHECK_STRIP( text, stripped ) \
-        CHECK_EQ( stripped, wxMarkupParser::Strip(text) )
+    SUBCASE("Strip")
+    {
+        #define CHECK_STRIP( text, stripped ) \
+            CHECK_EQ( stripped, wxMarkupParser::Strip(text) )
 
-    CHECK_STRIP( "", "" );
-    CHECK_STRIP( "foo", "foo" );
-    CHECK_STRIP( "&lt;foo&gt;", "<foo>" );
-    CHECK_STRIP( "<b>Big</b> problem", "Big problem" );
-    CHECK_STRIP( "<span foreground='red'>c</span>"
-                 "<span background='green'>o</span>"
-                 "<span background='blue'>l</span>"
-                 "<span background='green'>o</span>"
-                 "<span foreground='yellow'>u</span>"
-                 "<span background='green'>r</span>",
-                 "colour" );
+        CHECK_STRIP( "", "" );
+        CHECK_STRIP( "foo", "foo" );
+        CHECK_STRIP( "&lt;foo&gt;", "<foo>" );
+        CHECK_STRIP( "<b>Big</b> problem", "Big problem" );
+        CHECK_STRIP( "<span foreground='red'>c</span>"
+                     "<span background='green'>o</span>"
+                     "<span background='blue'>l</span>"
+                     "<span background='green'>o</span>"
+                     "<span foreground='yellow'>u</span>"
+                     "<span background='green'>r</span>",
+                     "colour" );
 
-    #undef CHECK_STRIP
+        #undef CHECK_STRIP
+    }
 }
