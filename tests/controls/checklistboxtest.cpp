@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_CHECKLISTBOX
@@ -19,74 +21,45 @@
 #include "itemcontainertest.h"
 #include "testableframe.h"
 
-class CheckListBoxTestCase : public ItemContainerTestCase, public CppUnit::TestCase
+using wxChecklistBoxTest = ItemContainerTest<wxCheckListBox>;
+
+TEST_CASE_FIXTURE(wxChecklistBoxTest, "Checklist box test")
 {
-public:
-    CheckListBoxTestCase() { }
+    m_container = std::make_unique<wxCheckListBox>(wxTheApp->GetTopWindow(), wxID_ANY);
 
-    void setUp() override;
-    void tearDown() override;
+    SUBCASE("Check")
+    {
+        EventCounter toggled(m_container.get(), wxEVT_CHECKLISTBOX);
 
-private:
-    wxItemContainer *GetContainer() const override { return m_check; }
-    wxWindow *GetContainerWindow() const override { return m_check; }
+        std::vector<int> checkedItems;
+        std::vector<wxString> testitems;
+        testitems.push_back("item 0");
+        testitems.push_back("item 1");
+        testitems.push_back("item 2");
+        testitems.push_back("item 3");
 
-    CPPUNIT_TEST_SUITE( CheckListBoxTestCase );
-        wxITEM_CONTAINER_TESTS();
-        CPPUNIT_TEST( Check );
-    CPPUNIT_TEST_SUITE_END();
+        m_container->Append(testitems);
 
-    void Check();
+        m_container->Check(0);
+        m_container->Check(1);
+        m_container->Check(1, false);
 
-    wxCheckListBox* m_check;
+        //We should not get any events when changing this from code
+        CHECK_EQ(0, toggled.GetCount());
+        CHECK_EQ(true, m_container->IsChecked(0));
+        CHECK_EQ(false, m_container->IsChecked(1));
 
-    CheckListBoxTestCase(const CheckListBoxTestCase&) = delete;
-	CheckListBoxTestCase& operator=(const CheckListBoxTestCase&) = delete;
-};
+        // FIXME: No conversion from wxArrayInt to std::vector<unsigned int>
+        CHECK_EQ(1, m_container->GetCheckedItemsCount(checkedItems));
+        CHECK_EQ(0, checkedItems[0]);
 
-wxREGISTER_UNIT_TEST_WITH_TAGS(CheckListBoxTestCase,
-                               "[CheckListBoxTestCase][item-container]");
+        //Make sure a double check of an items doesn't deselect it
+        m_container->Check(0);
 
-void CheckListBoxTestCase::setUp()
-{
-    m_check = new wxCheckListBox(wxTheApp->GetTopWindow(), wxID_ANY);
-}
+        CHECK_EQ(true, m_container->IsChecked(0));
+    }
 
-void CheckListBoxTestCase::tearDown()
-{
-    wxDELETE(m_check);
-}
-
-void CheckListBoxTestCase::Check()
-{
-    EventCounter toggled(m_check, wxEVT_CHECKLISTBOX);
-
-    std::vector<int> checkedItems;
-    std::vector<wxString> testitems;
-    testitems.push_back("item 0");
-    testitems.push_back("item 1");
-    testitems.push_back("item 2");
-    testitems.push_back("item 3");
-
-    m_check->Append(testitems);
-
-    m_check->Check(0);
-    m_check->Check(1);
-    m_check->Check(1, false);
-
-    //We should not get any events when changing this from code
-    CHECK_EQ(0, toggled.GetCount());
-    CHECK_EQ(true, m_check->IsChecked(0));
-    CHECK_EQ(false, m_check->IsChecked(1));
-
-    // FIXME: No conversion from wxArrayInt to std::vector<unsigned int>
-    CHECK_EQ(1, m_check->GetCheckedItemsCount(checkedItems));
-    CHECK_EQ(0, checkedItems[0]);
-
-    //Make sure a double check of an items doesn't deselect it
-    m_check->Check(0);
-
-    CHECK_EQ(true, m_check->IsChecked(0));
+    wxITEM_CONTAINER_TESTS();
 }
 
 #endif // wxUSE_CHECKLISTBOX
