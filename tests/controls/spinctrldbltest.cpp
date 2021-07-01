@@ -54,7 +54,7 @@ public:
 };
 
 
-TEST_CASE("SpinCtrlDouble::NoEventsInCtor", "[spinctrl][spinctrldouble]")
+TEST_CASE("SpinCtrlDouble::NoEventsInCtor")
 {
     // Verify that creating the control does not generate any events. This is
     // unexpected and shouldn't happen.
@@ -73,8 +73,8 @@ TEST_CASE("SpinCtrlDouble::NoEventsInCtor", "[spinctrl][spinctrldouble]")
 
 #if wxUSE_UIACTIONSIMULATOR
 
-TEST_CASE_METHOD(SpinCtrlDoubleTestCase,
-                 "SpinCtrlDouble::Arrows", "[spinctrl][spinctrldouble]")
+TEST_CASE_FIXTURE(SpinCtrlDoubleTestCase,
+                 "SpinCtrlDouble::Arrows")
 {
     EventCounter updated(m_spin, wxEVT_SPINCTRLDOUBLE);
 
@@ -97,8 +97,8 @@ TEST_CASE_METHOD(SpinCtrlDoubleTestCase,
     CHECK( m_spin->GetValue() == 0.0 );
 }
 
-TEST_CASE_METHOD(SpinCtrlDoubleTestCaseWrap,
-                 "SpinCtrlDouble::Wrap", "[spinctrl][spinctrldouble]")
+TEST_CASE_FIXTURE(SpinCtrlDoubleTestCaseWrap,
+                 "SpinCtrlDouble::Wrap")
 {
     wxUIActionSimulator sim;
 
@@ -119,8 +119,8 @@ TEST_CASE_METHOD(SpinCtrlDoubleTestCaseWrap,
 }
 #endif // wxUSE_UIACTIONSIMULATOR
 
-TEST_CASE_METHOD(SpinCtrlDoubleTestCase,
-                 "SpinCtrlDouble::Range", "[spinctrl][spinctrldouble]")
+TEST_CASE_FIXTURE(SpinCtrlDoubleTestCase,
+                 "SpinCtrlDouble::Range")
 {
     CHECK( m_spin->GetMin() == 0.0 );
     CHECK( m_spin->GetMax() == 100.0 );
@@ -152,8 +152,8 @@ TEST_CASE_METHOD(SpinCtrlDoubleTestCase,
     CHECK( m_spin->GetMax() == 50.0 );
 }
 
-TEST_CASE_METHOD(SpinCtrlDoubleTestCase,
-                 "SpinCtrlDouble::Value", "[spinctrl][spinctrldouble]")
+TEST_CASE_FIXTURE(SpinCtrlDoubleTestCase,
+                 "SpinCtrlDouble::Value")
 {
     EventCounter updatedSpin(m_spin, wxEVT_SPINCTRLDOUBLE);
     EventCounter updatedText(m_spin, wxEVT_TEXT);
@@ -193,8 +193,8 @@ TEST_CASE_METHOD(SpinCtrlDoubleTestCase,
 
 #if wxUSE_UIACTIONSIMULATOR
 
-TEST_CASE_METHOD(SpinCtrlDoubleTestCase,
-                 "SpinCtrlDouble::Increment", "[spinctrl][spinctrldouble]")
+TEST_CASE_FIXTURE(SpinCtrlDoubleTestCase,
+                 "SpinCtrlDouble::Increment")
 {
     CHECK( m_spin->GetIncrement() == 1.0 );
 
@@ -217,8 +217,8 @@ TEST_CASE_METHOD(SpinCtrlDoubleTestCase,
 
 #endif // wxUSE_UIACTIONSIMULATOR
 
-TEST_CASE_METHOD(SpinCtrlDoubleTestCase,
-                 "SpinCtrlDouble::Digits", "[spinctrl][spinctrldouble]")
+TEST_CASE_FIXTURE(SpinCtrlDoubleTestCase,
+                 "SpinCtrlDouble::Digits")
 {
     m_spin->SetDigits(5);
 
@@ -234,7 +234,7 @@ static inline unsigned int GetInitialDigits(double inc)
     return digits;
 }
 
-TEST_CASE("SpinCtrlDouble::InitialDigits", "[spinctrldouble][initialdigits]")
+TEST_CASE("SpinCtrlDouble::InitialDigits")
 {
     REQUIRE(GetInitialDigits(15) == 0);
     REQUIRE(GetInitialDigits(10) == 0);
