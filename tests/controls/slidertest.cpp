@@ -21,213 +21,191 @@
 #include "wx/uiaction.h"
 #include "testableframe.h"
 
-class SliderTestCase : public CppUnit::TestCase
-{
-public:
-    SliderTestCase() { }
 
-    void setUp() override;
-    void tearDown() override;
-
-private:
-    CPPUNIT_TEST_SUITE( SliderTestCase );
-#ifndef __WXOSX__
-        WXUISIM_TEST( PageUpDown );
-        WXUISIM_TEST( LineUpDown );
-        WXUISIM_TEST( EvtSlider );
-        WXUISIM_TEST( LinePageSize );
-#endif
-        CPPUNIT_TEST( Value );
-        CPPUNIT_TEST( Range );
-        WXUISIM_TEST( Thumb );
-        CPPUNIT_TEST( PseudoTest_Inversed );
-        CPPUNIT_TEST( Value );
-        CPPUNIT_TEST( Range );
-    CPPUNIT_TEST_SUITE_END();
-
-    void PageUpDown();
-    void LineUpDown();
-    void EvtSlider();
-    void LinePageSize();
-    void Value();
-    void Range();
-    void Thumb();
-    void PseudoTest_Inversed() { ms_inversed = true; }
-
-    static bool ms_inversed;
-
-    wxSlider* m_slider;
-
-    SliderTestCase(const SliderTestCase&) = delete;
-	SliderTestCase& operator=(const SliderTestCase&) = delete;
-};
-
-bool SliderTestCase::ms_inversed = false;
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( SliderTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( SliderTestCase, "SliderTestCase" );
-
-void SliderTestCase::setUp()
+TEST_CASE("Slider control test")
 {
     long style = wxSL_HORIZONTAL;
 
-    if ( ms_inversed )
-        style |= wxSL_INVERSE;
+    auto m_slider = std::make_unique<wxSlider>(wxTheApp->GetTopWindow(), wxID_ANY,
+                                          50, 0, 100,
+                                          wxDefaultPosition, wxDefaultSize,
+                                          style);
 
-    m_slider = new wxSlider(wxTheApp->GetTopWindow(), wxID_ANY, 50, 0, 100,
-                            wxDefaultPosition, wxDefaultSize,
-                            style);
-}
-
-void SliderTestCase::tearDown()
-{
-    wxDELETE(m_slider);
-}
-
-void SliderTestCase::PageUpDown()
-{
 #if wxUSE_UIACTIONSIMULATOR
-    EventCounter pageup(m_slider, wxEVT_SCROLL_PAGEUP);
-    EventCounter pagedown(m_slider, wxEVT_SCROLL_PAGEDOWN);
+    SUBCASE("PageUpDown")
+    {
+        EventCounter pageup(m_slider.get(), wxEVT_SCROLL_PAGEUP);
+        EventCounter pagedown(m_slider.get(), wxEVT_SCROLL_PAGEDOWN);
 
-    wxUIActionSimulator sim;
+        wxUIActionSimulator sim;
 
-    m_slider->SetFocus();
+        m_slider->SetFocus();
 
-    sim.Char(WXK_PAGEUP);
-    sim.Char(WXK_PAGEDOWN);
+        sim.Char(WXK_PAGEUP);
+        sim.Char(WXK_PAGEDOWN);
 
-    wxYield();
+        wxYield();
 
-    CHECK_EQ(1, pageup.GetCount());
-    CHECK_EQ(1, pagedown.GetCount());
+        CHECK_EQ(1, pageup.GetCount());
+        CHECK_EQ(1, pagedown.GetCount());
+    }
+
+    SUBCASE("LineUpDown")
+    {
+        EventCounter lineup(m_slider.get(), wxEVT_SCROLL_LINEUP);
+        EventCounter linedown(m_slider.get(), wxEVT_SCROLL_LINEDOWN);
+
+        wxUIActionSimulator sim;
+        wxYield();
+        m_slider->SetFocus();
+
+        sim.Char(WXK_UP);
+        sim.Char(WXK_DOWN);
+
+        wxYield();
+
+        CHECK_EQ(1, lineup.GetCount());
+        CHECK_EQ(1, linedown.GetCount());
+
+    }
+
+    SUBCASE("EvtSlider")
+    {
+        EventCounter slider(m_slider.get(), wxEVT_SLIDER);
+
+        wxUIActionSimulator sim;
+        wxYield();
+        m_slider->SetFocus();
+
+        sim.Char(WXK_UP);
+        sim.Char(WXK_DOWN);
+
+        wxYield();
+
+        CHECK_EQ(2, slider.GetCount());
+    }
+
+    SUBCASE("LinePageSize")
+    {
+        wxUIActionSimulator sim;
+        wxYield();
+        m_slider->SetFocus();
+
+        m_slider->SetPageSize(20);
+
+        sim.Char(WXK_PAGEUP);
+
+        wxYield();
+
+        CHECK_EQ(20, m_slider->GetPageSize());
+        CHECK_EQ(30, m_slider->GetValue());
+
+        m_slider->SetLineSize(2);
+
+        sim.Char(WXK_UP);
+
+        wxYield();
+
+        CHECK_EQ(2, m_slider->GetLineSize());
+        CHECK_EQ(28, m_slider->GetValue());
+    }
+
 #endif
-}
 
-void SliderTestCase::LineUpDown()
-{
+    SUBCASE("Value")
+    {
+        m_slider->SetValue(30);
+
+        CHECK_EQ(30, m_slider->GetValue());
+
+        //When setting a value larger that max or smaller than min
+        //max and min are set
+        m_slider->SetValue(-1);
+
+        CHECK_EQ(0, m_slider->GetValue());
+
+        m_slider->SetValue(110);
+
+        CHECK_EQ(100, m_slider->GetValue());
+    }
+
+    SUBCASE("Range")
+    {
+        CHECK_EQ(0, m_slider->GetMin());
+        CHECK_EQ(100, m_slider->GetMax());
+
+        // Changing range shouldn't change the value.
+        m_slider->SetValue(17);
+        m_slider->SetRange(0, 200);
+        CHECK_EQ(17, m_slider->GetValue());
+
+        //Test negative ranges
+        m_slider->SetRange(-50, 0);
+
+        CHECK_EQ(-50, m_slider->GetMin());
+        CHECK_EQ(0, m_slider->GetMax());
+    }
+
 #if wxUSE_UIACTIONSIMULATOR
-    EventCounter lineup(m_slider, wxEVT_SCROLL_LINEUP);
-    EventCounter linedown(m_slider, wxEVT_SCROLL_LINEDOWN);
+    SUBCASE("Thumb")
+    {
+        EventCounter track(m_slider.get(), wxEVT_SCROLL_THUMBTRACK);
+        EventCounter release(m_slider.get(), wxEVT_SCROLL_THUMBRELEASE);
+        EventCounter changed(m_slider.get(), wxEVT_SCROLL_CHANGED);
 
-    wxUIActionSimulator sim;
-    wxYield();
-    m_slider->SetFocus();
+        wxUIActionSimulator sim;
 
-    sim.Char(WXK_UP);
-    sim.Char(WXK_DOWN);
+        m_slider->SetValue(0);
 
-    wxYield();
+        // use the slider real position for dragging the mouse.
+        const int ypos = m_slider->GetSize().y / 2;
+        sim.MouseDragDrop(m_slider->ClientToScreen(wxPoint(10, ypos)),m_slider->ClientToScreen(wxPoint(50, ypos)));
+        wxYield();
 
-    CHECK_EQ(1, lineup.GetCount());
-    CHECK_EQ(1, linedown.GetCount());
+        CHECK(track.GetCount() != 0);
+        CHECK_EQ(1, release.GetCount());
+    #if defined(__WXMSW__) || defined(__WXGTK__)
+        CHECK_EQ(1, changed.GetCount());
+    #endif
 #endif
-}
+    }
 
-void SliderTestCase::EvtSlider()
-{
-#if wxUSE_UIACTIONSIMULATOR
-    EventCounter slider(m_slider, wxEVT_SLIDER);
+    // TODO: Figure out a better way to do this.
+    style |= wxSL_INVERSE;
 
-    wxUIActionSimulator sim;
-    wxYield();
-    m_slider->SetFocus();
+    SUBCASE("Inverse Value")
+    {
+        m_slider->SetValue(30);
 
-    sim.Char(WXK_UP);
-    sim.Char(WXK_DOWN);
+        CHECK_EQ(30, m_slider->GetValue());
 
-    wxYield();
+        //When setting a value larger that max or smaller than min
+        //max and min are set
+        m_slider->SetValue(-1);
 
-    CHECK_EQ(2, slider.GetCount());
-#endif
-}
+        CHECK_EQ(0, m_slider->GetValue());
 
-void SliderTestCase::LinePageSize()
-{
-#if wxUSE_UIACTIONSIMULATOR
-    wxUIActionSimulator sim;
-    wxYield();
-    m_slider->SetFocus();
+        m_slider->SetValue(110);
 
-    m_slider->SetPageSize(20);
+        CHECK_EQ(100, m_slider->GetValue());
+    }
 
-    sim.Char(WXK_PAGEUP);
+    SUBCASE("Inverse Range")
+    {
+        CHECK_EQ(0, m_slider->GetMin());
+        CHECK_EQ(100, m_slider->GetMax());
 
-    wxYield();
+        // Changing range shouldn't change the value.
+        m_slider->SetValue(17);
+        m_slider->SetRange(0, 200);
+        CHECK_EQ(17, m_slider->GetValue());
 
-    CHECK_EQ(20, m_slider->GetPageSize());
-    CHECK_EQ(30, m_slider->GetValue());
+        //Test negative ranges
+        m_slider->SetRange(-50, 0);
 
-    m_slider->SetLineSize(2);
-
-    sim.Char(WXK_UP);
-
-    wxYield();
-
-    CHECK_EQ(2, m_slider->GetLineSize());
-    CHECK_EQ(28, m_slider->GetValue());
-#endif
-}
-
-void SliderTestCase::Value()
-{
-    m_slider->SetValue(30);
-
-    CHECK_EQ(30, m_slider->GetValue());
-
-    //When setting a value larger that max or smaller than min
-    //max and min are set
-    m_slider->SetValue(-1);
-
-    CHECK_EQ(0, m_slider->GetValue());
-
-    m_slider->SetValue(110);
-
-    CHECK_EQ(100, m_slider->GetValue());
-}
-
-void SliderTestCase::Range()
-{
-    CHECK_EQ(0, m_slider->GetMin());
-    CHECK_EQ(100, m_slider->GetMax());
-
-    // Changing range shouldn't change the value.
-    m_slider->SetValue(17);
-    m_slider->SetRange(0, 200);
-    CHECK_EQ(17, m_slider->GetValue());
-
-    //Test negative ranges
-    m_slider->SetRange(-50, 0);
-
-    CHECK_EQ(-50, m_slider->GetMin());
-    CHECK_EQ(0, m_slider->GetMax());
-}
-
-void SliderTestCase::Thumb()
-{
-#if wxUSE_UIACTIONSIMULATOR
-    EventCounter track(m_slider, wxEVT_SCROLL_THUMBTRACK);
-    EventCounter release(m_slider, wxEVT_SCROLL_THUMBRELEASE);
-    EventCounter changed(m_slider, wxEVT_SCROLL_CHANGED);
-
-    wxUIActionSimulator sim;
-
-    m_slider->SetValue(0);
-
-    // use the slider real position for dragging the mouse.
-    const int ypos = m_slider->GetSize().y / 2;
-    sim.MouseDragDrop(m_slider->ClientToScreen(wxPoint(10, ypos)),m_slider->ClientToScreen(wxPoint(50, ypos)));
-    wxYield();
-
-    CHECK(track.GetCount() != 0);
-    CHECK_EQ(1, release.GetCount());
-#if defined(__WXMSW__) || defined(__WXGTK__)
-    CHECK_EQ(1, changed.GetCount());
-#endif
-#endif
+        CHECK_EQ(-50, m_slider->GetMin());
+        CHECK_EQ(0, m_slider->GetMax());
+    }
 }
 
 #endif

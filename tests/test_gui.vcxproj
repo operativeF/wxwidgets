@@ -506,6 +506,7 @@
     <ClCompile Include="controls\radioboxtest.cpp" />
     <ClCompile Include="controls\radiobuttontest.cpp" />
     <ClCompile Include="controls\simplebooktest.cpp" />
+    <ClCompile Include="controls\slidertest.cpp" />
     <ClCompile Include="controls\togglebuttontest.cpp" />
     <ClCompile Include="controls\toolbooktest.cpp" />
     <ClCompile Include="controls\treebooktest.cpp" />

@@ -221,6 +221,9 @@
     <ClCompile Include="controls\togglebuttontest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="controls\slidertest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc">
