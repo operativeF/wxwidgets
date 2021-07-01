@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_CHECKBOX
@@ -18,70 +20,19 @@
 
 #include "testableframe.h"
 
-class CheckBoxTestCase : public CppUnit::TestCase
+
+// Initialize m_check with a new checkbox with the specified style
+//
+// This function always returns false just to make it more convenient to
+// use inside WX_ASSERT_FAILS_WITH_ASSERT(), its return value doesn't have
+// any meaning otherwise
+
+TEST_CASE("Check")
 {
-public:
-    CheckBoxTestCase() { }
+    auto m_check = std::make_unique<wxCheckBox>(wxTheApp->GetTopWindow(),
+                                                wxID_ANY, "Check box");
 
-    void setUp() override;
-    void tearDown() override;
-
-private:
-    CPPUNIT_TEST_SUITE( CheckBoxTestCase );
-        CPPUNIT_TEST( Check );
-#ifdef wxHAS_3STATE_CHECKBOX
-        CPPUNIT_TEST( ThirdState );
-        CPPUNIT_TEST( ThirdStateUser );
-        CPPUNIT_TEST( InvalidStyles );
-#endif // wxHAS_3STATE_CHECKBOX
-    CPPUNIT_TEST_SUITE_END();
-
-    void Check();
-#ifdef wxHAS_3STATE_CHECKBOX
-    void ThirdState();
-    void ThirdStateUser();
-    void InvalidStyles();
-#endif // wxHAS_3STATE_CHECKBOX
-
-    // Initialize m_check with a new checkbox with the specified style
-    //
-    // This function always returns false just to make it more convenient to
-    // use inside WX_ASSERT_FAILS_WITH_ASSERT(), its return value doesn't have
-    // any meaning otherwise.
-    bool CreateCheckBox(long style)
-    {
-        wxDELETE( m_check );
-        m_check = new wxCheckBox(wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
-                                 wxDefaultPosition, wxDefaultSize, style);
-        return false;
-    }
-
-
-    wxCheckBox* m_check;
-
-    CheckBoxTestCase(const CheckBoxTestCase&) = delete;
-	CheckBoxTestCase& operator=(const CheckBoxTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( CheckBoxTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( CheckBoxTestCase, "CheckBoxTestCase" );
-
-void CheckBoxTestCase::setUp()
-{
-    m_check = new wxCheckBox(wxTheApp->GetTopWindow(), wxID_ANY, "Check box");
-}
-
-void CheckBoxTestCase::tearDown()
-{
-    delete m_check;
-}
-
-void CheckBoxTestCase::Check()
-{
-    EventCounter clicked(m_check, wxEVT_CHECKBOX);
+    EventCounter clicked(m_check.get(), wxEVT_CHECKBOX);
 
     //We should be unchecked by default
     CHECK(!m_check->IsChecked());
@@ -107,9 +58,10 @@ void CheckBoxTestCase::Check()
 }
 
 #ifdef wxHAS_3STATE_CHECKBOX
-void CheckBoxTestCase::ThirdState()
+TEST_CASE("ThirdState")
 {
-    CreateCheckBox(wxCHK_3STATE);
+    auto m_check = std::make_unique<wxCheckBox>(wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
+                                            wxDefaultPosition, wxDefaultSize, wxCHK_3STATE);
 
     CHECK_EQ(wxCHK_UNCHECKED, m_check->Get3StateValue());
     CHECK(m_check->Is3State());
@@ -124,9 +76,10 @@ void CheckBoxTestCase::ThirdState()
     CHECK_EQ(wxCHK_UNDETERMINED, m_check->Get3StateValue());
 }
 
-void CheckBoxTestCase::ThirdStateUser()
+TEST_CASE("ThirdStateUser")
 {
-    CreateCheckBox(wxCHK_3STATE | wxCHK_ALLOW_3RD_STATE_FOR_USER);
+    auto m_check = std::make_unique<wxCheckBox>(wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
+        wxDefaultPosition, wxDefaultSize, wxCHK_3STATE | wxCHK_ALLOW_3RD_STATE_FOR_USER);
 
     CHECK_EQ(wxCHK_UNCHECKED, m_check->Get3StateValue());
     CHECK(m_check->Is3State());
@@ -141,24 +94,33 @@ void CheckBoxTestCase::ThirdStateUser()
     CHECK_EQ(wxCHK_UNDETERMINED, m_check->Get3StateValue());
 }
 
-void CheckBoxTestCase::InvalidStyles()
+TEST_CASE("InvalidStyles")
 {
     // Check that using incompatible styles doesn't work.
-    WX_ASSERT_FAILS_WITH_ASSERT( CreateCheckBox(wxCHK_2STATE | wxCHK_3STATE) );
+    WX_ASSERT_FAILS_WITH_ASSERT( std::make_unique<wxCheckBox>(
+        wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
+        wxDefaultPosition, wxDefaultSize, wxCHK_2STATE | wxCHK_3STATE) );
+
 #if !wxDEBUG_LEVEL
     CHECK( !m_check->Is3State() );
     CHECK( !m_check->Is3rdStateAllowedForUser() );
 #endif
 
-    WX_ASSERT_FAILS_WITH_ASSERT(
-        CreateCheckBox(wxCHK_2STATE | wxCHK_ALLOW_3RD_STATE_FOR_USER) );
+    WX_ASSERT_FAILS_WITH_ASSERT(std::make_unique<wxCheckBox>(
+        wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
+        wxDefaultPosition, wxDefaultSize,
+        wxCHK_2STATE | wxCHK_ALLOW_3RD_STATE_FOR_USER));
+
 #if !wxDEBUG_LEVEL
     CHECK( !m_check->Is3State() );
     CHECK( !m_check->Is3rdStateAllowedForUser() );
 #endif
 
     // wxCHK_ALLOW_3RD_STATE_FOR_USER without wxCHK_3STATE doesn't work.
-    WX_ASSERT_FAILS_WITH_ASSERT( CreateCheckBox(wxCHK_ALLOW_3RD_STATE_FOR_USER) );
+    WX_ASSERT_FAILS_WITH_ASSERT(std::make_unique<wxCheckBox>(
+        wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
+        wxDefaultPosition, wxDefaultSize,
+        wxCHK_ALLOW_3RD_STATE_FOR_USER));
 }
 
 #endif // wxHAS_3STATE_CHECKBOX
