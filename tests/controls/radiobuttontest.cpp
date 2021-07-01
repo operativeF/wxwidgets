@@ -52,7 +52,7 @@ RadioButtonTestCase::~RadioButtonTestCase()
     delete m_radio;
 }
 
-TEST_CASE_METHOD(RadioButtonTestCase, "RadioButton::Click", "[radiobutton]")
+TEST_CASE_FIXTURE(RadioButtonTestCase, "RadioButton::Click")
 {
     // OS X doesn't support selecting a single radio button
 #if wxUSE_UIACTIONSIMULATOR && !defined(__WXOSX__)
@@ -70,7 +70,7 @@ TEST_CASE_METHOD(RadioButtonTestCase, "RadioButton::Click", "[radiobutton]")
 #endif
 }
 
-TEST_CASE_METHOD(RadioButtonTestCase, "RadioButton::Value", "[radiobutton]")
+TEST_CASE_FIXTURE(RadioButtonTestCase, "RadioButton::Value")
 {
 #ifndef __WXGTK__
     EventCounter selected(m_radio, wxEVT_RADIOBUTTON);
@@ -87,7 +87,7 @@ TEST_CASE_METHOD(RadioButtonTestCase, "RadioButton::Value", "[radiobutton]")
 #endif
 }
 
-TEST_CASE_METHOD(RadioButtonTestCase, "RadioButton::Group", "[radiobutton]")
+TEST_CASE_FIXTURE(RadioButtonTestCase, "RadioButton::Group")
 {
     wxWindow* const parent = wxTheApp->GetTopWindow();
 
@@ -174,7 +174,7 @@ TEST_CASE_METHOD(RadioButtonTestCase, "RadioButton::Group", "[radiobutton]")
     CHECK_SAME_WINDOW(g2radio2->GetPreviousInGroup(), g2radio1);
 }
 
-TEST_CASE_METHOD(RadioButtonTestCase, "RadioButton::Single", "[radiobutton]")
+TEST_CASE_FIXTURE(RadioButtonTestCase, "RadioButton::Single")
 {
     //Create a group of 2 buttons, having second button selected
     std::unique_ptr<wxRadioButton> gradio0(new wxRadioButton(wxTheApp->GetTopWindow(),
@@ -212,7 +212,7 @@ TEST_CASE_METHOD(RadioButtonTestCase, "RadioButton::Single", "[radiobutton]")
     CHECK_SAME_WINDOW(sradio->GetNextInGroup(), NULL);
 }
 
-TEST_CASE("RadioButton::Focus", "[radiobutton][focus]")
+TEST_CASE("RadioButton::Focus")
 {
     // Create a container panel just to be able to destroy all the windows
     // created here at once by simply destroying it.
