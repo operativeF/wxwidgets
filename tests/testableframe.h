@@ -6,6 +6,10 @@
 // Licence:     wxWindows licence
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifndef _WX_TESTS_TESTABLE_FRAME_H_
+#define _WX_TESTS_TESTABLE_FRAME_H_
+
+
 #include "wx/frame.h"
 #include "wx/hashmap.h"
 #include "wx/event.h"
@@ -47,3 +51,5 @@ private:
     wxTestableFrame* m_frame;
     wxWindow* m_win;
 };
+
+#endif // _WX_TESTS_TESTABLE_FRAME_H_
