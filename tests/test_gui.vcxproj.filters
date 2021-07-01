@@ -185,6 +185,9 @@
     <ClCompile Include="controls\notebooktest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="controls\simplebooktest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc">
@@ -199,5 +202,6 @@
     <ClInclude Include="waitforpaint.h" />
     <ClInclude Include="testprec.h" />
     <ClInclude Include="persistence\testpersistence.h" />
+    <ClInclude Include="controls\bookctrlbasetest.h" />
   </ItemGroup>
 </Project>

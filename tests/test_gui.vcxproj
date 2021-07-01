@@ -495,6 +495,7 @@
     <ClCompile Include="controls\label.cpp" />
     <ClCompile Include="controls\listbooktest.cpp" />
     <ClCompile Include="controls\notebooktest.cpp" />
+    <ClCompile Include="controls\simplebooktest.cpp" />
     <ClCompile Include="controls\toolbooktest.cpp" />
     <ClCompile Include="controls\treebooktest.cpp" />
     <ClCompile Include="controls\virtlistctrltest.cpp" />
@@ -557,6 +558,7 @@
     <ResourceCompile Include="..\samples\sample.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="controls\bookctrlbasetest.h" />
     <ClInclude Include="persistence\testpersistence.h" />
     <ClInclude Include="testableframe.h" />
     <ClInclude Include="testdate.h" />
