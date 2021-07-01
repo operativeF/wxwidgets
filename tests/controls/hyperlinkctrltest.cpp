@@ -22,89 +22,55 @@
 #include "testableframe.h"
 #include "asserthelper.h"
 
-class HyperlinkCtrlTestCase : public CppUnit::TestCase
+TEST_CASE("Hyperlink control test")
 {
-public:
-    HyperlinkCtrlTestCase() { }
+    auto m_hyperlink = std::make_unique<wxHyperlinkCtrl>(wxTheApp->GetTopWindow(),
+                                                         wxID_ANY, "wxWidgets",
+                                                         "http://wxwidgets.org");
 
-    void setUp() override;
-    void tearDown() override;
+    SUBCASE("Colour")
+    {
+    #ifndef __WXGTK__
+        CHECK(m_hyperlink->GetHoverColour().IsOk());
+        CHECK(m_hyperlink->GetNormalColour().IsOk());
+        CHECK(m_hyperlink->GetVisitedColour().IsOk());
 
-private:
-    CPPUNIT_TEST_SUITE( HyperlinkCtrlTestCase );
-        CPPUNIT_TEST( Colour );
-        CPPUNIT_TEST( Url );
-        WXUISIM_TEST( Click );
-    CPPUNIT_TEST_SUITE_END();
+        m_hyperlink->SetHoverColour(*wxGREEN);
+        m_hyperlink->SetNormalColour(*wxRED);
+        m_hyperlink->SetVisitedColour(*wxBLUE);
 
-    void Colour();
-    void Url();
-    void Click();
+        CHECK_EQ(*wxGREEN, m_hyperlink->GetHoverColour());
+        CHECK_EQ(*wxRED, m_hyperlink->GetNormalColour());
+        CHECK_EQ(*wxBLUE, m_hyperlink->GetVisitedColour());
+    #endif
+    }
 
-    wxHyperlinkCtrl* m_hyperlink;
+    SUBCASE("Url")
+    {
+        CHECK_EQ("http://wxwidgets.org", m_hyperlink->GetURL());
 
-    HyperlinkCtrlTestCase(const HyperlinkCtrlTestCase&) = delete;
-	HyperlinkCtrlTestCase& operator=(const HyperlinkCtrlTestCase&) = delete;
-};
+        m_hyperlink->SetURL("http://google.com");
 
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( HyperlinkCtrlTestCase );
+        CHECK_EQ("http://google.com", m_hyperlink->GetURL());
+    }
 
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( HyperlinkCtrlTestCase, "HyperlinkCtrlTestCase" );
-
-void HyperlinkCtrlTestCase::setUp()
-{
-    m_hyperlink = new wxHyperlinkCtrl(wxTheApp->GetTopWindow(), wxID_ANY,
-                                     "wxWidgets", "http://wxwidgets.org");
-}
-
-void HyperlinkCtrlTestCase::tearDown()
-{
-    wxDELETE(m_hyperlink);
-}
-
-void HyperlinkCtrlTestCase::Colour()
-{
-#ifndef __WXGTK__
-    CHECK(m_hyperlink->GetHoverColour().IsOk());
-    CHECK(m_hyperlink->GetNormalColour().IsOk());
-    CHECK(m_hyperlink->GetVisitedColour().IsOk());
-
-    m_hyperlink->SetHoverColour(*wxGREEN);
-    m_hyperlink->SetNormalColour(*wxRED);
-    m_hyperlink->SetVisitedColour(*wxBLUE);
-
-    CHECK_EQ(*wxGREEN, m_hyperlink->GetHoverColour());
-    CHECK_EQ(*wxRED, m_hyperlink->GetNormalColour());
-    CHECK_EQ(*wxBLUE, m_hyperlink->GetVisitedColour());
-#endif
-}
-
-void HyperlinkCtrlTestCase::Url()
-{
-    CHECK_EQ("http://wxwidgets.org", m_hyperlink->GetURL());
-
-    m_hyperlink->SetURL("http://google.com");
-
-    CHECK_EQ("http://google.com", m_hyperlink->GetURL());
-}
-
-void HyperlinkCtrlTestCase::Click()
-{
 #if wxUSE_UIACTIONSIMULATOR
-    EventCounter hyperlink(m_hyperlink, wxEVT_HYPERLINK);
+    SUBCASE("Click")
+    {
+        EventCounter hyperlink(m_hyperlink.get(), wxEVT_HYPERLINK);
 
-    wxUIActionSimulator sim;
+        wxUIActionSimulator sim;
 
-    sim.MouseMove(m_hyperlink->GetScreenPosition() + wxPoint(10, 10));
-    wxYield();
+        sim.MouseMove(m_hyperlink->GetScreenPosition() + wxPoint(10, 10));
+        wxYield();
 
-    sim.MouseClick();
-    wxYield();
+        sim.MouseClick();
+        wxYield();
 
-    CHECK_EQ(1, hyperlink.GetCount());
+        CHECK_EQ(1, hyperlink.GetCount());
+    }
 #endif
+
 }
 
 #endif //wxUSE_HYPERLINKCTRL
