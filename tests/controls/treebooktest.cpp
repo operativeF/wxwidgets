@@ -21,142 +21,98 @@
 #include "wx/treebook.h"
 #include "bookctrlbasetest.h"
 
-class TreebookTestCase : public BookCtrlBaseTestCase, public CppUnit::TestCase
+using wxTreebookTest = BookCtrlBaseT<wxTreebook>;
+
+TEST_CASE_FIXTURE(wxTreebookTest, "Treebook Test")
 {
-public:
-    TreebookTestCase() { }
-
-    void setUp() override;
-    void tearDown() override;
-
-private:
-    wxBookCtrlBase *GetBase() const override { return m_treebook; }
-
-    wxEventType GetChangedEvent() const override
-        { return wxEVT_TREEBOOK_PAGE_CHANGED; }
-
-    wxEventType GetChangingEvent() const override
-        { return wxEVT_TREEBOOK_PAGE_CHANGING; }
-
-    CPPUNIT_TEST_SUITE( TreebookTestCase );
-        wxBOOK_CTRL_BASE_TESTS();
-        CPPUNIT_TEST( Image );
-        CPPUNIT_TEST( SubPages );
-        CPPUNIT_TEST( ContainerPage );
-        CPPUNIT_TEST( Expand );
-        CPPUNIT_TEST( Delete );
-    CPPUNIT_TEST_SUITE_END();
-
-    void SubPages();
-    void ContainerPage();
-    void Expand();
-    void Delete();
-
-    wxTreebook *m_treebook;
-
-    TreebookTestCase(const TreebookTestCase&) = delete;
-	TreebookTestCase& operator=(const TreebookTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( TreebookTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( TreebookTestCase, "TreebookTestCase" );
-
-void TreebookTestCase::setUp()
-{
-    m_treebook = new wxTreebook(wxTheApp->GetTopWindow(), wxID_ANY);
+    m_bookctrl = std::make_unique<wxTreebook>(wxTheApp->GetTopWindow(), wxID_ANY);
     AddPanels();
-}
 
-void TreebookTestCase::tearDown()
-{
-    wxDELETE(m_treebook);
-}
+    SUBCASE("SubPages")
+    {
+        wxPanel* subpanel1 = new wxPanel(m_bookctrl.get());
+        wxPanel* subpanel2 = new wxPanel(m_bookctrl.get());
+        wxPanel* subpanel3 = new wxPanel(m_bookctrl.get());
 
-void TreebookTestCase::SubPages()
-{
-    wxPanel* subpanel1 = new wxPanel(m_treebook);
-    wxPanel* subpanel2 = new wxPanel(m_treebook);
-    wxPanel* subpanel3 = new wxPanel(m_treebook);
+        m_bookctrl->AddSubPage(subpanel1, "Subpanel 1", false, 0);
 
-    m_treebook->AddSubPage(subpanel1, "Subpanel 1", false, 0);
+        CHECK_EQ(2, m_bookctrl->GetPageParent(3));
 
-    CHECK_EQ(2, m_treebook->GetPageParent(3));
+        m_bookctrl->InsertSubPage(1, subpanel2, "Subpanel 2", false, 1);
 
-    m_treebook->InsertSubPage(1, subpanel2, "Subpanel 2", false, 1);
+        CHECK_EQ(1, m_bookctrl->GetPageParent(2));
 
-    CHECK_EQ(1, m_treebook->GetPageParent(2));
+        m_bookctrl->AddSubPage(subpanel3, "Subpanel 3", false, 2);
 
-    m_treebook->AddSubPage(subpanel3, "Subpanel 3", false, 2);
+        CHECK_EQ(3, m_bookctrl->GetPageParent(5));
+    }
 
-    CHECK_EQ(3, m_treebook->GetPageParent(5));
-}
+    SUBCASE("ContainerPage")
+    {
+        // Get rid of the pages added in setUp().
+        m_bookctrl->DeleteAllPages();
+        CHECK( m_bookctrl->GetPageCount() == 0 );
 
-void TreebookTestCase::ContainerPage()
-{
-    // Get rid of the pages added in setUp().
-    m_treebook->DeleteAllPages();
-    CHECK( m_treebook->GetPageCount() == 0 );
+        // Adding a page without the associated window should be allowed.
+        REQUIRE_NOTHROW( m_bookctrl->AddPage(nullptr, "Container page") );
+        CHECK( m_bookctrl->GetPageParent(0) == -1 );
 
-    // Adding a page without the associated window should be allowed.
-    REQUIRE_NOTHROW( m_treebook->AddPage(NULL, "Container page") );
-    CHECK( m_treebook->GetPageParent(0) == -1 );
+        m_bookctrl->AddSubPage(new wxPanel(m_bookctrl.get()), "Child page");
+        CHECK( m_bookctrl->GetPageParent(1) == 0 );
+    }
 
-    m_treebook->AddSubPage(new wxPanel(m_treebook), "Child page");
-    CHECK( m_treebook->GetPageParent(1) == 0 );
-}
+    SUBCASE("Expand")
+    {
+        wxPanel* subpanel1 = new wxPanel(m_bookctrl.get());
+        wxPanel* subpanel2 = new wxPanel(m_bookctrl.get());
+        wxPanel* subpanel3 = new wxPanel(m_bookctrl.get());
 
-void TreebookTestCase::Expand()
-{
-    wxPanel* subpanel1 = new wxPanel(m_treebook);
-    wxPanel* subpanel2 = new wxPanel(m_treebook);
-    wxPanel* subpanel3 = new wxPanel(m_treebook);
+        m_bookctrl->AddSubPage(subpanel1, "Subpanel 1", false, 0);
+        m_bookctrl->InsertSubPage(1, subpanel2, "Subpanel 2", false, 1);
+        m_bookctrl->AddSubPage(subpanel3, "Subpanel 3", false, 2);
 
-    m_treebook->AddSubPage(subpanel1, "Subpanel 1", false, 0);
-    m_treebook->InsertSubPage(1, subpanel2, "Subpanel 2", false, 1);
-    m_treebook->AddSubPage(subpanel3, "Subpanel 3", false, 2);
+        CHECK(!m_bookctrl->IsNodeExpanded(1));
+        CHECK(!m_bookctrl->IsNodeExpanded(3));
 
-    CHECK(!m_treebook->IsNodeExpanded(1));
-    CHECK(!m_treebook->IsNodeExpanded(3));
+        m_bookctrl->CollapseNode(1);
 
-    m_treebook->CollapseNode(1);
+        CHECK(!m_bookctrl->IsNodeExpanded(1));
 
-    CHECK(!m_treebook->IsNodeExpanded(1));
+        m_bookctrl->ExpandNode(3, false);
 
-    m_treebook->ExpandNode(3, false);
+        CHECK(!m_bookctrl->IsNodeExpanded(3));
 
-    CHECK(!m_treebook->IsNodeExpanded(3));
+        m_bookctrl->ExpandNode(1);
 
-    m_treebook->ExpandNode(1);
+        CHECK(m_bookctrl->IsNodeExpanded(1));
+    }
 
-    CHECK(m_treebook->IsNodeExpanded(1));
-}
+    SUBCASE("Delete")
+    {
+        wxPanel* subpanel1 = new wxPanel(m_bookctrl.get());
+        wxPanel* subpanel2 = new wxPanel(m_bookctrl.get());
+        wxPanel* subpanel3 = new wxPanel(m_bookctrl.get());
 
-void TreebookTestCase::Delete()
-{
-    wxPanel* subpanel1 = new wxPanel(m_treebook);
-    wxPanel* subpanel2 = new wxPanel(m_treebook);
-    wxPanel* subpanel3 = new wxPanel(m_treebook);
+        m_bookctrl->AddSubPage(subpanel1, "Subpanel 1", false, 0);
+        m_bookctrl->InsertSubPage(1, subpanel2, "Subpanel 2", false, 1);
+        m_bookctrl->AddSubPage(subpanel3, "Subpanel 3", false, 2);
 
-    m_treebook->AddSubPage(subpanel1, "Subpanel 1", false, 0);
-    m_treebook->InsertSubPage(1, subpanel2, "Subpanel 2", false, 1);
-    m_treebook->AddSubPage(subpanel3, "Subpanel 3", false, 2);
+        CHECK_EQ(6, m_bookctrl->GetPageCount());
 
-    CHECK_EQ(6, m_treebook->GetPageCount());
+        m_bookctrl->DeletePage(3);
 
-    m_treebook->DeletePage(3);
+        CHECK_EQ(3, m_bookctrl->GetPageCount());
 
-    CHECK_EQ(3, m_treebook->GetPageCount());
+        m_bookctrl->DeletePage(1);
 
-    m_treebook->DeletePage(1);
+        CHECK_EQ(1, m_bookctrl->GetPageCount());
 
-    CHECK_EQ(1, m_treebook->GetPageCount());
+        m_bookctrl->DeletePage(0);
 
-    m_treebook->DeletePage(0);
+        CHECK_EQ(0, m_bookctrl->GetPageCount());
+    }
 
-    CHECK_EQ(0, m_treebook->GetPageCount());
+    wxBOOK_CTRL_BASE_TESTS();
 }
 
 #endif // wxUSE_TREEBOOK

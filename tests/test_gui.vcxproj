@@ -494,7 +494,9 @@
     <ClCompile Include="controls\gaugetest.cpp" />
     <ClCompile Include="controls\label.cpp" />
     <ClCompile Include="controls\listbooktest.cpp" />
+    <ClCompile Include="controls\notebooktest.cpp" />
     <ClCompile Include="controls\toolbooktest.cpp" />
+    <ClCompile Include="controls\treebooktest.cpp" />
     <ClCompile Include="controls\virtlistctrltest.cpp" />
     <ClCompile Include="controls\webtest.cpp" />
     <ClCompile Include="controls\windowtest.cpp" />
