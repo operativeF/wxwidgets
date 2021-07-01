@@ -188,6 +188,9 @@
     <ClCompile Include="controls\simplebooktest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="controls\listviewtest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\samples\sample.rc">
@@ -203,5 +206,6 @@
     <ClInclude Include="testprec.h" />
     <ClInclude Include="persistence\testpersistence.h" />
     <ClInclude Include="controls\bookctrlbasetest.h" />
+    <ClInclude Include="controls\listbasetest.h" />
   </ItemGroup>
 </Project>

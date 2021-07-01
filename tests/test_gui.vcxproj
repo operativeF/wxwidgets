@@ -494,6 +494,7 @@
     <ClCompile Include="controls\gaugetest.cpp" />
     <ClCompile Include="controls\label.cpp" />
     <ClCompile Include="controls\listbooktest.cpp" />
+    <ClCompile Include="controls\listviewtest.cpp" />
     <ClCompile Include="controls\notebooktest.cpp" />
     <ClCompile Include="controls\simplebooktest.cpp" />
     <ClCompile Include="controls\toolbooktest.cpp" />
@@ -559,6 +560,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="controls\bookctrlbasetest.h" />
+    <ClInclude Include="controls\listbasetest.h" />
     <ClInclude Include="persistence\testpersistence.h" />
     <ClInclude Include="testableframe.h" />
     <ClInclude Include="testdate.h" />
