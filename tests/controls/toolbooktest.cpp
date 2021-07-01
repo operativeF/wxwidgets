@@ -22,61 +22,23 @@
 #include "wx/toolbar.h"
 #include "bookctrlbasetest.h"
 
-class ToolbookTestCase : public BookCtrlBaseTestCase, public CppUnit::TestCase
+using wxToolbookTest = BookCtrlBaseT<wxToolbook>;
+
+TEST_CASE_FIXTURE(wxToolbookTest, "List book test")
 {
-public:
-    ToolbookTestCase() { }
-
-    void setUp() override;
-    void tearDown() override;
-
-private:
-    wxBookCtrlBase *GetBase() const override { return m_toolbook; }
-
-    wxEventType GetChangedEvent() const override
-    { return wxEVT_TOOLBOOK_PAGE_CHANGED; }
-
-    wxEventType GetChangingEvent() const override
-    { return wxEVT_TOOLBOOK_PAGE_CHANGING; }
-
-    void Realize() override { m_toolbook->GetToolBar()->Realize(); }
-
-    CPPUNIT_TEST_SUITE( ToolbookTestCase );
-        wxBOOK_CTRL_BASE_TESTS();
-        CPPUNIT_TEST( ToolBar );
-    CPPUNIT_TEST_SUITE_END();
-
-    void ToolBar();
-
-    wxToolbook *m_toolbook;
-
-    ToolbookTestCase(const ToolbookTestCase&) = delete;
-	ToolbookTestCase& operator=(const ToolbookTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( ToolbookTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( ToolbookTestCase, "ToolbookTestCase" );
-
-void ToolbookTestCase::setUp()
-{
-    m_toolbook = new wxToolbook(wxTheApp->GetTopWindow(), wxID_ANY, wxDefaultPosition, wxSize(400, 200));
+    m_bookctrl = std::make_unique<wxToolbook>(wxTheApp->GetTopWindow(), wxID_ANY,
+                                              wxDefaultPosition, wxSize(400, 200));
     AddPanels();
-}
 
-void ToolbookTestCase::tearDown()
-{
-    wxDELETE(m_toolbook);
-}
+    auto toolbar = static_cast<wxToolBar*>(m_bookctrl->GetToolBar());
 
-void ToolbookTestCase::ToolBar()
-{
-    wxToolBar* toolbar = static_cast<wxToolBar*>(m_toolbook->GetToolBar());
+    SUBCASE("Toolbar Test")
+    {
+        CHECK(toolbar);
+        CHECK_EQ(3, toolbar->GetToolsCount());
+    }
 
-    CHECK(toolbar);
-    CHECK_EQ(3, toolbar->GetToolsCount());
+    wxBOOK_CTRL_BASE_TESTS();
 }
 
 #endif //wxUSE_TOOLBOOK

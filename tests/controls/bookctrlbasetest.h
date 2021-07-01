@@ -115,7 +115,10 @@ public:
 
         base->AssignImageList(m_list);
 
-        //Realize();
+        if constexpr(std::is_same_v<BookCtrlT, wxToolbook>)
+        {
+            m_bookctrl->GetToolBar()->Realize();
+        }
 
         m_panel1 = new wxPanel(base);
         m_panel2 = new wxPanel(base);
@@ -172,7 +175,10 @@ public:
 
         base->InsertPage(0, new wxPanel(base), "New Panel", true, 0);
 
-        //Realize();
+        if constexpr (std::is_same_v<BookCtrlT, wxToolbook>)
+        {
+            m_bookctrl->GetToolBar()->Realize();
+        }
 
         CHECK_EQ(0, base->GetSelection());
         CHECK_EQ(4, base->GetPageCount());
