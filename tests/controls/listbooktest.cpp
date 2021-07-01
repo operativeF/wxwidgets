@@ -22,61 +22,24 @@
 #include "wx/listctrl.h"
 #include "bookctrlbasetest.h"
 
-class ListbookTestCase : public BookCtrlBaseTestCase, public CppUnit::TestCase
+using wxListbookTest = BookCtrlBaseT<wxListbook>;
+
+TEST_CASE_FIXTURE(wxListbookTest, "List book test")
 {
-public:
-    ListbookTestCase() { }
-
-    void setUp() override;
-    void tearDown() override;
-
-private:
-    wxBookCtrlBase *GetBase() const override { return m_listbook; }
-
-    wxEventType GetChangedEvent() const override
-    { return wxEVT_LISTBOOK_PAGE_CHANGED; }
-
-    wxEventType GetChangingEvent() const override
-    { return wxEVT_LISTBOOK_PAGE_CHANGING; }
-
-    CPPUNIT_TEST_SUITE( ListbookTestCase );
-        wxBOOK_CTRL_BASE_TESTS();
-        CPPUNIT_TEST( ListView );
-    CPPUNIT_TEST_SUITE_END();
-
-    void ListView();
-
-    wxListbook *m_listbook;
-
-    ListbookTestCase(const ListbookTestCase&) = delete;
-	ListbookTestCase& operator=(const ListbookTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( ListbookTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( ListbookTestCase, "ListbookTestCase" );
-
-void ListbookTestCase::setUp()
-{
-    m_listbook = new wxListbook(wxTheApp->GetTopWindow(), wxID_ANY,
-                                wxDefaultPosition, wxSize(400, 300));
+    m_bookctrl = std::make_unique<wxListbook>(wxTheApp->GetTopWindow(), wxID_ANY,
+                                              wxDefaultPosition, wxSize(400, 300));
     AddPanels();
-}
 
-void ListbookTestCase::tearDown()
-{
-    wxDELETE(m_listbook);
-}
+    SUBCASE("List view")
+    {
+        wxListView* listview = m_bookctrl->GetListView();
 
-void ListbookTestCase::ListView()
-{
-    wxListView* listview = m_listbook->GetListView();
+        CHECK(listview);
+        CHECK_EQ(3, listview->GetItemCount());
+        CHECK_EQ("Panel 1", listview->GetItemText(0));
+    }
 
-    CHECK(listview);
-    CHECK_EQ(3, listview->GetItemCount());
-    CHECK_EQ("Panel 1", listview->GetItemText(0));
+    wxBOOK_CTRL_BASE_TESTS();
 }
 
 #endif //wxUSE_LISTBOOK
