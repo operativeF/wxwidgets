@@ -6,6 +6,8 @@
 // Copyright:   (c) 2010 Steven Lamerton
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 #if wxUSE_CHOICE
@@ -18,108 +20,74 @@
 
 #include "itemcontainertest.h"
 
-class ChoiceTestCase : public ItemContainerTestCase, public CppUnit::TestCase
+
+using ChoiceControlTest = ItemContainerTest<wxChoice>;
+
+TEST_CASE_FIXTURE(ChoiceControlTest, "Choice control test.")
 {
-public:
-    ChoiceTestCase() { }
-
-    void setUp() override;
-    void tearDown() override;
-
-private:
-    wxItemContainer *GetContainer() const override { return m_choice; }
-    wxWindow *GetContainerWindow() const override { return m_choice; }
-
-    CPPUNIT_TEST_SUITE( ChoiceTestCase );
-        wxITEM_CONTAINER_TESTS();
-        CPPUNIT_TEST( Sort );
-        CPPUNIT_TEST( GetBestSize );
-    CPPUNIT_TEST_SUITE_END();
-
-    void Sort();
-    void GetBestSize();
-
-    wxChoice* m_choice;
-
-    ChoiceTestCase(const ChoiceTestCase&) = delete;
-	ChoiceTestCase& operator=(const ChoiceTestCase&) = delete;
-};
-
-wxREGISTER_UNIT_TEST_WITH_TAGS(ChoiceTestCase,
-                               "[ChoiceTestCase][item-container]");
-
-void ChoiceTestCase::setUp()
-{
-    m_choice = new wxChoice(wxTheApp->GetTopWindow(), wxID_ANY, wxDefaultPosition, wxDefaultSize);
-}
-
-void ChoiceTestCase::tearDown()
-{
-    wxDELETE(m_choice);
-}
-
-void ChoiceTestCase::Sort()
-{
+    m_container = std::make_unique<wxChoice>(wxTheApp->GetTopWindow(),
+                                             wxID_ANY, wxDefaultPosition,
+                                             wxDefaultSize, std::vector<wxString>{}, wxCB_SORT);
 #if !defined(__WXOSX__)
-    wxDELETE(m_choice);
-    m_choice = new wxChoice(wxTheApp->GetTopWindow(), wxID_ANY,
-                            wxDefaultPosition, wxDefaultSize, {},
-                            wxCB_SORT);
-
-    std::vector<wxString> testitems =
+    SUBCASE("Sort")
     {
-        "aaa",
-        "Aaa",
-        "aba",
-        "aaab",
-        "aab",
-        "AAA"
-    };
+        std::vector<wxString> testitems =
+        {
+            "aaa",
+            "Aaa",
+            "aba",
+            "aaab",
+            "aab",
+            "AAA"
+        };
 
-    m_choice->Append(testitems);
+        m_container->Append(testitems);
 
-    CHECK_EQ("AAA", m_choice->GetString(0));
-    CHECK_EQ("Aaa", m_choice->GetString(1));
-    CHECK_EQ("aaa", m_choice->GetString(2));
-    CHECK_EQ("aaab", m_choice->GetString(3));
-    CHECK_EQ("aab", m_choice->GetString(4));
-    CHECK_EQ("aba", m_choice->GetString(5));
+        CHECK_EQ("AAA", m_container->GetString(0));
+        CHECK_EQ("Aaa", m_container->GetString(1));
+        CHECK_EQ("aaa", m_container->GetString(2));
+        CHECK_EQ("aaab", m_container->GetString(3));
+        CHECK_EQ("aab", m_container->GetString(4));
+        CHECK_EQ("aba", m_container->GetString(5));
 
-    m_choice->Append("a");
+        m_container->Append("a");
 
-    CHECK_EQ("a", m_choice->GetString(0));
+        CHECK_EQ("a", m_container->GetString(0));
+    }
 #endif
-}
 
-void ChoiceTestCase::GetBestSize()
-{
-    std::vector<wxString> testitems = {
-        "1",
-        "11"
-    };
+    SUBCASE("GetBestSize")
+    {
+        std::vector<wxString> testitems = {
+            "1",
+            "11"
+        };
     
-    m_choice->Append(testitems);
+        m_container->Append(testitems);
 
-    SECTION("Normal best size")
-    {
-        // nothing to do here
+
+        // Ensure that the hidden control return a valid best size too.
+        SUBCASE("Hidden best size")
+        {
+            m_container->Hide();
+        }
+
+        wxYield();
+
+        m_container->InvalidateBestSize();
+        const wxSize bestSize = m_container->GetBestSize();
+
+        CHECK(bestSize.GetWidth() > m_container->FromDIP(30));
+        CHECK(bestSize.GetWidth() < m_container->FromDIP(120));
+        CHECK(bestSize.GetHeight() > m_container->FromDIP(15));
+        CHECK(bestSize.GetHeight() < m_container->FromDIP(35));
     }
 
-    // Ensure that the hidden control return a valid best size too.
-    SECTION("Hidden best size")
-    {
-        m_choice->Hide();
-    }
+    // FIXME: ? Sorted containers aren't allowed to append.
+    m_container = std::make_unique<wxChoice>(wxTheApp->GetTopWindow(),
+        wxID_ANY, wxDefaultPosition,
+        wxDefaultSize, std::vector<wxString>{});
 
-    wxYield();
-
-    m_choice->InvalidateBestSize();
-    const wxSize bestSize = m_choice->GetBestSize();
-
-    CHECK(bestSize.GetWidth() > m_choice->FromDIP(30));
-    CHECK(bestSize.GetWidth() < m_choice->FromDIP(120));
-    CHECK(bestSize.GetHeight() > m_choice->FromDIP(15));
-    CHECK(bestSize.GetHeight() < m_choice->FromDIP(35));
+    wxITEM_CONTAINER_TESTS();
 }
-
 #endif //wxUSE_CHOICE

@@ -21,6 +21,8 @@
 #include "wx/scopeguard.h"
 #include "wx/uiaction.h"
 
+#include <memory>
+
 template<typename ItemContT>
 class ItemContainerTest
 {
@@ -39,7 +41,7 @@ public:
     wxWindow* GetContainerWindow() const { return m_container.get(); }
 
 protected:
-    void Append()
+    void AppendTest()
     {
         m_container->Append("item 0");
 
@@ -62,18 +64,18 @@ protected:
         //CHECK_EQ("item 4", m_container->GetString(4));
     }
 
-    void Insert()
+    void InsertTest()
     {
-        
-
-        CHECK_EQ( 0, m_container->Insert("item 0", 0) );
+        auto pos_0 = m_container->Insert("item 0", 0);
+        CHECK_EQ( 0, pos_0 );
         CHECK_EQ("item 0", m_container->GetString(0));
 
         std::vector<wxString> testitems;
         testitems.push_back("item 1");
         testitems.push_back("item 2");
 
-        CHECK_EQ( 1, m_container->Insert(testitems, 0) );
+        auto pos_1 = m_container->Insert(testitems, 0);
+        CHECK_EQ( 1, pos_1 );
 
         CHECK_EQ("item 1", m_container->GetString(0));
         CHECK_EQ("item 2", m_container->GetString(1));
@@ -85,10 +87,8 @@ protected:
         //CHECK_EQ("item 4", m_container->GetString(2));
     }
 
-    void Count()
+    void CountTest()
     {
-        
-
         CHECK(m_container->IsEmpty());
         WX_ASSERT_FAILS_WITH_ASSERT( m_container->GetString(0) );
 
@@ -118,10 +118,8 @@ protected:
         WX_ASSERT_FAILS_WITH_ASSERT( m_container->GetString(10) );
     }
 
-    void ItemSelection()
+    void ItemSelectionTest()
     {
-        
-
         std::vector<wxString> testitems;
         testitems.push_back("item 0");
         testitems.push_back("item 1");
@@ -151,10 +149,8 @@ protected:
         CHECK_EQ("item 2", m_container->GetStringSelection());
     }
 
-    void FindString()
+    void FindStringTest()
     {
-    
-
         std::vector<wxString> testitems;
         testitems.push_back("item 0");
         testitems.push_back("item 1");
@@ -168,10 +164,8 @@ protected:
         CHECK_EQ(wxNOT_FOUND, m_container->FindString("ITEM 1", true));
     }
 
-    void ClientData()
+    void ClientDataTest()
     {
-        
-
         wxStringClientData* item0data = new wxStringClientData("item0data");
         wxStringClientData* item1data = new wxStringClientData("item1data");
         wxStringClientData* item2data = new wxStringClientData("item2data");
@@ -196,10 +190,8 @@ protected:
         WX_ASSERT_FAILS_WITH_ASSERT( m_container->SetClientObject(12345, item0data) );
     }
 
-    void VoidData()
+    void VoidDataTest()
     {
-        
-
         wxString item0data("item0data"), item1data("item0data"),
                 item2data("item0data");
 
@@ -236,10 +228,8 @@ protected:
         CHECK_EQ( minus1, wxPtrToUInt(m_container->GetClientData(3)) );
     }
 
-    void Set()
+    void SetTest()
     {
-        
-
         std::vector<wxString> testitems;
         testitems.push_back("item 0");
         testitems.push_back("item 1");
@@ -265,10 +255,8 @@ protected:
         //CHECK_EQ("even newer 0", m_container->GetString(0));
     }
 
-    void SetString()
+    void SetStringTest()
     {
-    
-
         std::vector<wxString> testitems;
         testitems.push_back("item 0");
         testitems.push_back("item 1");
@@ -291,10 +279,8 @@ protected:
     #endif
     }
 
-    void SelectionAfterDelete()
+    void SelectionAfterDeleteTest()
     {
-        
-
         m_container->Append("item 0");
         m_container->Append("item 1");
         m_container->Append("item 2");
@@ -318,10 +304,8 @@ protected:
         CHECK( m_container->GetSelection() == wxNOT_FOUND );
     }
 
-    void SetSelection()
+    void SetSelectionTest()
     {
-        
-
         m_container->Append("first");
         m_container->Append("second");
 
@@ -355,7 +339,7 @@ protected:
 
     #if wxUSE_UIACTIONSIMULATOR
 
-    void SimSelect()
+    void SimSelectTest()
     {
         m_container->Append("first");
         m_container->Append("second");
@@ -378,18 +362,18 @@ protected:
     // this should be inserted in the derived class CPPUNIT_TEST_SUITE
     // definition to run all wxItemContainer tests as part of it
     #define wxITEM_CONTAINER_TESTS() \
-            SUBCASE( "Append" ) { Append(); } \
-            SUBCASE( "Insert" ) { Insert(); } \
-            SUBCASE( "Count" ) { Count(); } \
-            SUBCASE( "ItemSelection" ) { ItemSelection(); } \
-            SUBCASE( "FindString" ) { FindString(); } \
-            SUBCASE( "ClientData" ) { ClientData(); } \
-            SUBCASE( "VoidData" ) { VoidData(); } \
-            SUBCASE( "Set" ) { Set(); } \
-            SUBCASE( "SetSelection" ) { SetSelection(); } \
-            SUBCASE( "SetString" ) { SetString(); } \
-            SUBCASE( "SelectionAfterDelete" ) { SelectionAfterDelete(); } \
-            SUBCASE( "SimSelect" ) { SimSelect(); }
+            SUBCASE( "AppendTest" ) { AppendTest(); } \
+            SUBCASE( "InsertTest" ) { InsertTest(); } \
+            SUBCASE( "CountTest" ) { CountTest(); } \
+            SUBCASE( "ItemSelectionTest" ) { ItemSelectionTest(); } \
+            SUBCASE( "FindStringTest" ) { FindStringTest(); } \
+            SUBCASE( "ClientDataTest" ) { ClientDataTest(); } \
+            SUBCASE( "VoidDataTest" ) { VoidDataTest(); } \
+            SUBCASE( "SetTest" ) { SetTest(); } \
+            SUBCASE( "SetSelectionTest" ) { SetSelectionTest(); } \
+            SUBCASE( "SetStringTest" ) { SetStringTest(); } \
+            SUBCASE( "SelectionAfterDeleteTest" ) { SelectionAfterDeleteTest(); } \
+            SUBCASE( "SimSelectTest" ) { SimSelectTest(); }
 };
 
 #endif // _WX_TESTS_CONTROLS_ITEMCONTAINERTEST_H_

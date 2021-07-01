@@ -493,6 +493,7 @@
     <ClCompile Include="controls\checkboxtest.cpp" />
     <ClCompile Include="controls\checklistboxtest.cpp" />
     <ClCompile Include="controls\choicebooktest.cpp" />
+    <ClCompile Include="controls\choicetest.cpp" />
     <ClCompile Include="controls\datepickerctrltest.cpp" />
     <ClCompile Include="controls\dialogtest.cpp" />
     <ClCompile Include="controls\frametest.cpp" />
