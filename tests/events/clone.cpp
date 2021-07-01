@@ -10,6 +10,8 @@
 // headers
 // ----------------------------------------------------------------------------
 
+#include "doctest.h"
+
 #include "testprec.h"
 
 
@@ -18,7 +20,7 @@
     #include "wx/timer.h"
 #endif // WX_PRECOMP
 
-TEST_CASE("EventClone", "[wxEvent][clone]")
+TEST_CASE("EventClone")
 {
     // Dummy timer needed just to create a wxTimerEvent.
     wxTimer dummyTimer;
@@ -50,7 +52,7 @@ TEST_CASE("EventClone", "[wxEvent][clone]")
         }
         else
         {
-            FAIL("Can't create objects of type " + cn);
+            FAIL(("Can't create objects of type " + cn));
             continue;
         }
 

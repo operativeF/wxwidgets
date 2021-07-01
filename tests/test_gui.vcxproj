@@ -527,6 +527,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="events\clone.cpp" />
     <ClCompile Include="events\evtlooptest.cpp" />
     <ClCompile Include="events\keyboard.cpp" />
     <ClCompile Include="events\propagation.cpp" />
