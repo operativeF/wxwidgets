@@ -18,22 +18,10 @@
 
 #include "testableframe.h"
 
-static std::unique_ptr<wxFrame> setUp()
+TEST_CASE("Frame test")
 {
     auto m_frame = std::make_unique<wxFrame>(nullptr, wxID_ANY, "test frame");
     m_frame->Show();
-
-    return m_frame;
-}
-
-static void tearDown(wxFrame* frame)
-{
-    frame->Destroy();
-}
-
-TEST_CASE("Frame test")
-{
-    auto m_frame = setUp();
 
     SUBCASE("Iconize")
     {
@@ -55,6 +43,4 @@ TEST_CASE("Frame test")
 
         CHECK_EQ(1, close.GetCount());
     }
-
-    tearDown(m_frame.get());
 }
