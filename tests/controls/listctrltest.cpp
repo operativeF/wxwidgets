@@ -29,177 +29,126 @@
 #include "testableframe.h"
 #include "wx/uiaction.h"
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
 
-class ListCtrlTestCase : public ListBaseTestCase, public CppUnit::TestCase
+using ListCtrlTest = ListBaseTest<wxListCtrl>;
+
+TEST_CASE_FIXTURE(ListCtrlTest, "List control test")
 {
-public:
-    ListCtrlTestCase() { }
+    m_listctrl = std::make_unique<wxListCtrl>(wxTheApp->GetTopWindow());
+    m_listctrl->SetWindowStyle(wxLC_REPORT);
+    m_listctrl->SetSize(400, 200);
 
-    void setUp() override;
-    void tearDown() override;
-
-    wxListCtrl *GetList() const override { return m_list; }
-
-private:
-    CPPUNIT_TEST_SUITE( ListCtrlTestCase );
-        wxLIST_BASE_TESTS();
-        CPPUNIT_TEST( EditLabel );
-        WXUISIM_TEST( ColumnClick );
-        WXUISIM_TEST( ColumnDrag );
-        CPPUNIT_TEST( SubitemRect );
-    CPPUNIT_TEST_SUITE_END();
-
-    void EditLabel();
-    void SubitemRect();
-#if wxUSE_UIACTIONSIMULATOR
-    // Column events are only supported in wxListCtrl currently so we test them
-    // here rather than in ListBaseTest
-    void ColumnClick();
-    void ColumnDrag();
-#endif // wxUSE_UIACTIONSIMULATOR
-
-    wxListCtrl *m_list;
-
-    ListCtrlTestCase(const ListCtrlTestCase&) = delete;
-	ListCtrlTestCase& operator=(const ListCtrlTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( ListCtrlTestCase );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( ListCtrlTestCase, "ListCtrlTestCase" );
-
-// ----------------------------------------------------------------------------
-// test initialization
-// ----------------------------------------------------------------------------
-
-void ListCtrlTestCase::setUp()
-{
-    m_list = new wxListCtrl(wxTheApp->GetTopWindow());
-    m_list->SetWindowStyle(wxLC_REPORT);
-    m_list->SetSize(400, 200);
-}
-
-void ListCtrlTestCase::tearDown()
-{
-    DeleteTestWindow(m_list);
-    m_list = NULL;
-}
-
-void ListCtrlTestCase::EditLabel()
-{
-    m_list->InsertColumn(0, "Column 0");
-    m_list->InsertItem(0, "foo");
-    m_list->EditLabel(0);
-}
-
-void ListCtrlTestCase::SubitemRect()
-{
-    wxBitmap bmp = wxArtProvider::GetBitmap(wxART_ERROR);
-
-    wxImageList* const iml = new wxImageList(bmp.GetWidth(), bmp.GetHeight());
-    iml->Add(bmp);
-    m_list->AssignImageList(iml, wxIMAGE_LIST_SMALL);
-
-    m_list->InsertColumn(0, "Column 0");
-    m_list->InsertColumn(1, "Column 1");
-    m_list->InsertColumn(2, "Column 2");
-    for ( int i = 0; i < 3; i++ )
+    SUBCASE("EditLabel")
     {
-        long index = m_list->InsertItem(i, wxString::Format("This is item %d", i), 0);
-        m_list->SetItem(index, 1, wxString::Format("Column 1 item %d", i));
-        m_list->SetItem(index, 2, wxString::Format("Column 2 item %d", i));
+        m_listctrl->InsertColumn(0, "Column 0");
+        m_listctrl->InsertItem(0, "foo");
+        m_listctrl->EditLabel(0);
     }
 
-    wxRect rectLabel, rectIcon, rectItem;
+    SUBCASE("SubitemRect")
+    {
+        wxBitmap bmp = wxArtProvider::GetBitmap(wxART_ERROR);
 
-    // First check a subitem with an icon: it should have a valid icon
-    // rectangle and the label rectangle should be adjacent to it.
-    m_list->GetSubItemRect(1, 0, rectItem, wxLIST_RECT_BOUNDS);
-    m_list->GetSubItemRect(1, 0, rectIcon, wxLIST_RECT_ICON);
-    m_list->GetSubItemRect(1, 0, rectLabel, wxLIST_RECT_LABEL);
+        wxImageList* const iml = new wxImageList(bmp.GetWidth(), bmp.GetHeight());
+        iml->Add(bmp);
+        m_listctrl->AssignImageList(iml, wxIMAGE_LIST_SMALL);
 
-    CHECK(!rectIcon.IsEmpty());
-    // Note that we can't use "==" here, in the native MSW version there is a
-    // gap between the item rectangle and the icon one.
-    CHECK(rectIcon.GetLeft() >= rectItem.GetLeft());
-    CHECK(rectLabel.GetLeft() == rectIcon.GetRight() + 1);
-    CHECK(rectLabel.GetRight() == rectItem.GetRight());
+        m_listctrl->InsertColumn(0, "Column 0");
+        m_listctrl->InsertColumn(1, "Column 1");
+        m_listctrl->InsertColumn(2, "Column 2");
+        for ( int i = 0; i < 3; i++ )
+        {
+            long index = m_listctrl->InsertItem(i, wxString::Format("This is item %d", i), 0);
+            m_listctrl->SetItem(index, 1, wxString::Format("Column 1 item %d", i));
+            m_listctrl->SetItem(index, 2, wxString::Format("Column 2 item %d", i));
+        }
 
-    // For a subitem without an icon, label rectangle is the same one as the
-    // entire item one and the icon rectangle should be empty.
-    m_list->GetSubItemRect(1, 1, rectItem, wxLIST_RECT_BOUNDS);
-    m_list->GetSubItemRect(1, 1, rectIcon, wxLIST_RECT_ICON);
-    m_list->GetSubItemRect(1, 1, rectLabel, wxLIST_RECT_LABEL);
+        wxRect rectLabel, rectIcon, rectItem;
 
-    CHECK(rectIcon.IsEmpty());
-    // Here we can't check for exact equality neither as there can be a margin.
-    CHECK(rectLabel.GetLeft() >= rectItem.GetLeft());
-    CHECK(rectLabel.GetRight() == rectItem.GetRight());
-}
+        // First check a subitem with an icon: it should have a valid icon
+        // rectangle and the label rectangle should be adjacent to it.
+        m_listctrl->GetSubItemRect(1, 0, rectItem, wxLIST_RECT_BOUNDS);
+        m_listctrl->GetSubItemRect(1, 0, rectIcon, wxLIST_RECT_ICON);
+        m_listctrl->GetSubItemRect(1, 0, rectLabel, wxLIST_RECT_LABEL);
+
+        CHECK(!rectIcon.IsEmpty());
+        // Note that we can't use "==" here, in the native MSW version there is a
+        // gap between the item rectangle and the icon one.
+        CHECK(rectIcon.GetLeft() >= rectItem.GetLeft());
+        CHECK(rectLabel.GetLeft() == rectIcon.GetRight() + 1);
+        CHECK(rectLabel.GetRight() == rectItem.GetRight());
+
+        // For a subitem without an icon, label rectangle is the same one as the
+        // entire item one and the icon rectangle should be empty.
+        m_listctrl->GetSubItemRect(1, 1, rectItem, wxLIST_RECT_BOUNDS);
+        m_listctrl->GetSubItemRect(1, 1, rectIcon, wxLIST_RECT_ICON);
+        m_listctrl->GetSubItemRect(1, 1, rectLabel, wxLIST_RECT_LABEL);
+
+        CHECK(rectIcon.IsEmpty());
+        // Here we can't check for exact equality neither as there can be a margin.
+        CHECK(rectLabel.GetLeft() >= rectItem.GetLeft());
+        CHECK(rectLabel.GetRight() == rectItem.GetRight());
+    }
 
 #if wxUSE_UIACTIONSIMULATOR
-void ListCtrlTestCase::ColumnDrag()
-{
-    EventCounter begindrag(m_list, wxEVT_LIST_COL_BEGIN_DRAG);
-    EventCounter dragging(m_list, wxEVT_LIST_COL_DRAGGING);
-    EventCounter enddrag(m_list, wxEVT_LIST_COL_END_DRAG);
+    SUBCASE("ColumnDrag")
+    {
+        EventCounter begindrag(m_listctrl.get(), wxEVT_LIST_COL_BEGIN_DRAG);
+        EventCounter dragging(m_listctrl.get(), wxEVT_LIST_COL_DRAGGING);
+        EventCounter enddrag(m_listctrl.get(), wxEVT_LIST_COL_END_DRAG);
 
-    m_list->InsertColumn(0, "Column 0");
-    m_list->InsertColumn(1, "Column 1");
-    m_list->InsertColumn(2, "Column 2");
-    m_list->Update();
-    m_list->SetFocus();
+        m_listctrl->InsertColumn(0, "Column 0");
+        m_listctrl->InsertColumn(1, "Column 1");
+        m_listctrl->InsertColumn(2, "Column 2");
+        m_listctrl->Update();
+        m_listctrl->SetFocus();
 
-    wxUIActionSimulator sim;
+        wxUIActionSimulator sim;
 
-    wxPoint pt = m_list->ClientToScreen(wxPoint(m_list->GetColumnWidth(0), 5));
+        wxPoint pt = m_listctrl->ClientToScreen(wxPoint(m_listctrl->GetColumnWidth(0), 5));
 
-    sim.MouseMove(pt);
-    wxYield();
+        sim.MouseMove(pt);
+        wxYield();
 
-    sim.MouseDown();
-    wxYield();
+        sim.MouseDown();
+        wxYield();
 
-    sim.MouseMove(pt.x + 50, pt.y);
-    wxYield();
+        sim.MouseMove(pt.x + 50, pt.y);
+        wxYield();
 
-    sim.MouseUp();
-    wxYield();
+        sim.MouseUp();
+        wxYield();
 
-    CHECK_EQ(1, begindrag.GetCount());
-    CHECK(dragging.GetCount() > 0);
-    CHECK_EQ(1, enddrag.GetCount());
+        CHECK_EQ(1, begindrag.GetCount());
+        CHECK(dragging.GetCount() > 0);
+        CHECK_EQ(1, enddrag.GetCount());
 
-    m_list->ClearAll();
-}
+        m_listctrl->ClearAll();
+    }
 
-void ListCtrlTestCase::ColumnClick()
-{
-    EventCounter colclick(m_list, wxEVT_LIST_COL_CLICK);
-    EventCounter colrclick(m_list, wxEVT_LIST_COL_RIGHT_CLICK);
+    SUBCASE("ColumnClick")
+    {
+        EventCounter colclick(m_listctrl.get(), wxEVT_LIST_COL_CLICK);
+        EventCounter colrclick(m_listctrl.get(), wxEVT_LIST_COL_RIGHT_CLICK);
 
 
-    m_list->InsertColumn(0, "Column 0", wxLIST_FORMAT_LEFT, 60);
+        m_listctrl->InsertColumn(0, "Column 0", wxLIST_FORMAT_LEFT, 60);
 
-    wxUIActionSimulator sim;
+        wxUIActionSimulator sim;
 
-    sim.MouseMove(m_list->ClientToScreen(wxPoint(4, 4)));
-    wxYield();
+        sim.MouseMove(m_listctrl->ClientToScreen(wxPoint(4, 4)));
+        wxYield();
 
-    sim.MouseClick();
-    sim.MouseClick(wxMOUSE_BTN_RIGHT);
-    wxYield();
+        sim.MouseClick();
+        sim.MouseClick(wxMOUSE_BTN_RIGHT);
+        wxYield();
 
-    CHECK_EQ(1, colclick.GetCount());
-    CHECK_EQ(1, colrclick.GetCount());
+        CHECK_EQ(1, colclick.GetCount());
+        CHECK_EQ(1, colrclick.GetCount());
 
-    m_list->ClearAll();
-}
+        m_listctrl->ClearAll();
+    }
 #endif // wxUSE_UIACTIONSIMULATOR
+}
 
 #endif // wxUSE_LISTCTRL
