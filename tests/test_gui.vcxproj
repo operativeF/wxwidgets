@@ -497,6 +497,7 @@
     <ClCompile Include="controls\listctrltest.cpp" />
     <ClCompile Include="controls\listviewtest.cpp" />
     <ClCompile Include="controls\notebooktest.cpp" />
+    <ClCompile Include="controls\pickertest.cpp" />
     <ClCompile Include="controls\simplebooktest.cpp" />
     <ClCompile Include="controls\toolbooktest.cpp" />
     <ClCompile Include="controls\treebooktest.cpp" />
@@ -562,6 +563,7 @@
   <ItemGroup>
     <ClInclude Include="controls\bookctrlbasetest.h" />
     <ClInclude Include="controls\listbasetest.h" />
+    <ClInclude Include="controls\pickerbasetest.h" />
     <ClInclude Include="persistence\testpersistence.h" />
     <ClInclude Include="testableframe.h" />
     <ClInclude Include="testdate.h" />

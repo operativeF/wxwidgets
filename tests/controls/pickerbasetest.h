@@ -9,35 +9,74 @@
 #ifndef _WX_TESTS_CONTROLS_PICKERBASETEST_H_
 #define _WX_TESTS_CONTROLS_PICKERBASETEST_H_
 
-class PickerBaseTestCase
+#include "wx/pickerbase.h"
+
+template<typename PickCtrlT>
+struct PickerBaseTest
 {
-public:
-    PickerBaseTestCase() { }
-    virtual ~PickerBaseTestCase() { }
+    wxPickerBase* GetBase() { return m_pickctrl.get(); }
 
-protected:
-    // this function must be overridden by the derived classes to return the
-    // text entry object we're testing, typically this is done by creating a
-    // control implementing wxPickerBase interface in setUp() virtual method and
-    // just returning it from here
-    virtual wxPickerBase *GetBase() const = 0;
-
-    // this should be inserted in the derived class CPPUNIT_TEST_SUITE
-    // definition to run all wxPickerBase tests as part of it
     #define wxPICKER_BASE_TESTS() \
-        CPPUNIT_TEST( Margin ); \
-        CPPUNIT_TEST( Proportion ); \
-        CPPUNIT_TEST( Growable ); \
-        CPPUNIT_TEST( Controls )
+            SUBCASE( "Margin" ) { Margin(); } \
+            SUBCASE( "Proportion" ) { Proportion(); } \
+            SUBCASE( "Growable" ) { Growable(); } \
+            SUBCASE( "Controls" ) { Controls(); }
 
-    void Margin();
-    void Proportion();
-    void Growable();
-    void Controls();
+    void Margin()
+    {
+        wxPickerBase* const base = GetBase();
 
-private:
-    PickerBaseTestCase(const PickerBaseTestCase&) = delete;
-	PickerBaseTestCase& operator=(const PickerBaseTestCase&) = delete;
+        CHECK(base->HasTextCtrl());
+        CHECK(base->GetInternalMargin() >= 0);
+
+        base->SetInternalMargin(15);
+
+        CHECK_EQ(15, base->GetInternalMargin());
+    }
+
+    void Proportion()
+    {
+        wxPickerBase* const base = GetBase();
+
+        CHECK(base->HasTextCtrl());
+
+        base->SetPickerCtrlProportion(1);
+        base->SetTextCtrlProportion(1);
+
+        CHECK_EQ(1, base->GetPickerCtrlProportion());
+        CHECK_EQ(1, base->GetTextCtrlProportion());
+    }
+
+    void Growable()
+    {
+        wxPickerBase* const base = GetBase();
+
+        CHECK(base->HasTextCtrl());
+
+        base->SetPickerCtrlGrowable();
+        base->SetTextCtrlGrowable();
+
+        CHECK(base->IsPickerCtrlGrowable());
+        CHECK(base->IsTextCtrlGrowable());
+
+        base->SetPickerCtrlGrowable(false);
+        base->SetTextCtrlGrowable(false);
+
+        CHECK(!base->IsPickerCtrlGrowable());
+        CHECK(!base->IsTextCtrlGrowable());
+    }
+
+    void Controls()
+    {
+        wxPickerBase* const base = GetBase();
+
+        CHECK(base->HasTextCtrl());
+        CHECK(base->GetTextCtrl() != NULL);
+        CHECK(base->GetPickerCtrl() != NULL);
+    }
+
+    std::unique_ptr<PickCtrlT> m_pickctrl;
+
 };
 
 #endif // _WX_TESTS_CONTROLS_PICKERBASETEST_H_
