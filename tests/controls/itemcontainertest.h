@@ -89,7 +89,7 @@ protected:
 
     void CountTest()
     {
-        CHECK(m_container->IsEmpty());
+        CHECK(m_container->wxItemContainerImmutable::IsEmpty());
         WX_ASSERT_FAILS_WITH_ASSERT( m_container->GetString(0) );
 
         std::vector<wxString> testitems;
@@ -100,7 +100,7 @@ protected:
 
         m_container->Append(testitems);
 
-        CHECK(!m_container->IsEmpty());
+        CHECK(!m_container->wxItemContainerImmutable::IsEmpty());
         CHECK_EQ(4, m_container->GetCount());
 
         m_container->Delete(0);
