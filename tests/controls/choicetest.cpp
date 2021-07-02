@@ -83,7 +83,7 @@ TEST_CASE_FIXTURE(ChoiceControlTest, "Choice control test.")
         CHECK(bestSize.GetHeight() < m_container->FromDIP(35));
     }
 
-    // FIXME: ? Sorted containers aren't allowed to append.
+    // FIXME: ? Sorted containers aren't allowed to insert.
     m_container = std::make_unique<wxChoice>(wxTheApp->GetTopWindow(),
         wxID_ANY, wxDefaultPosition,
         wxDefaultSize, std::vector<wxString>{});
