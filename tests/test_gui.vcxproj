@@ -511,6 +511,7 @@
     <ClCompile Include="controls\pickertest.cpp" />
     <ClCompile Include="controls\radioboxtest.cpp" />
     <ClCompile Include="controls\radiobuttontest.cpp" />
+    <ClCompile Include="controls\richtextctrltest.cpp" />
     <ClCompile Include="controls\simplebooktest.cpp" />
     <ClCompile Include="controls\slidertest.cpp" />
     <ClCompile Include="controls\spinctrldbltest.cpp" />
