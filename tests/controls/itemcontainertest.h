@@ -18,6 +18,7 @@
     #include "wx/ctrlsub.h"
 #endif // WX_PRECOMP
 
+#include "wx/ctrlsub.h"
 #include "wx/scopeguard.h"
 #include "wx/uiaction.h"
 
@@ -130,15 +131,15 @@ protected:
 
         m_container->SetSelection(wxNOT_FOUND);
         CHECK_EQ(wxNOT_FOUND, m_container->GetSelection());
-        CHECK_EQ("", m_container->GetStringSelection());
+        CHECK_EQ("", m_container->wxItemContainer::GetStringSelection());
 
         m_container->SetSelection(1);
         CHECK_EQ(1, m_container->GetSelection());
-        CHECK_EQ("item 1", m_container->GetStringSelection());
+        CHECK_EQ("item 1", m_container->wxItemContainer::GetStringSelection());
 
         CHECK( m_container->SetStringSelection("item 2") );
         CHECK_EQ(2, m_container->GetSelection());
-        CHECK_EQ("item 2", m_container->GetStringSelection());
+        CHECK_EQ("item 2", m_container->wxItemContainer::GetStringSelection());
 
         // Check that selecting a non-existent item fails.
         CHECK( !m_container->SetStringSelection("bloordyblop") );
@@ -146,7 +147,7 @@ protected:
         // Check that SetStringSelection() is case-insensitive.
         CHECK( m_container->SetStringSelection("ITEM 2") );
         CHECK_EQ(2, m_container->GetSelection());
-        CHECK_EQ("item 2", m_container->GetStringSelection());
+        CHECK_EQ("item 2", m_container->wxItemContainer::GetStringSelection());
     }
 
     void FindStringTest()

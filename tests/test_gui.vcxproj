@@ -512,6 +512,7 @@
     <ClCompile Include="controls\listviewtest.cpp" />
     <ClCompile Include="controls\markuptest.cpp" />
     <ClCompile Include="controls\notebooktest.cpp" />
+    <ClCompile Include="controls\ownerdrawncomboboxtest.cpp" />
     <ClCompile Include="controls\pickertest.cpp" />
     <ClCompile Include="controls\radioboxtest.cpp" />
     <ClCompile Include="controls\radiobuttontest.cpp" />

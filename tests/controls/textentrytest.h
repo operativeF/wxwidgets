@@ -128,7 +128,7 @@ protected:
         }
         else
         {
-            CHECK_EQ( sel, m_entry->GetStringSelection() );
+            CHECK_EQ( sel, m_entry->wxTextEntryBase::GetStringSelection() );
         }
     }
 
