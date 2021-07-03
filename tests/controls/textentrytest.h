@@ -9,6 +9,27 @@
 #ifndef _WX_TESTS_CONTROLS_TEXTENTRYTEST_H_
 #define _WX_TESTS_CONTROLS_TEXTENTRYTEST_H_
 
+#include "doctest.h"
+
+#include "testprec.h"
+
+#ifndef WX_PRECOMP
+#include "wx/app.h"
+#include "wx/dialog.h"
+#include "wx/event.h"
+#include "wx/sizer.h"
+#include "wx/textctrl.h"
+#include "wx/textentry.h"
+#include "wx/timer.h"
+#include "wx/window.h"
+#endif // WX_PRECOMP
+
+#include "textentrytest.h"
+#include "testableframe.h"
+
+
+#include "wx/uiaction.h"
+
 class WXDLLIMPEXP_FWD_CORE wxTextEntry;
 
 template<typename TextEntryT>
@@ -399,24 +420,167 @@ private:
     //}
 };
 
+#if wxUSE_UIACTIONSIMULATOR
+
+class TextEventHandler
+{
+public:
+    explicit TextEventHandler(wxWindow* win)
+        : m_win(win)
+    {
+        m_win->Bind(wxEVT_TEXT, &TextEventHandler::OnText, this);
+    }
+
+    ~TextEventHandler()
+    {
+        m_win->Unbind(wxEVT_TEXT, &TextEventHandler::OnText, this);
+    }
+
+    const wxString& GetLastString() const
+    {
+        return m_string;
+    }
+
+private:
+    void OnText(wxCommandEvent& event)
+    {
+        m_string = event.GetString();
+    }
+
+    wxWindow* const m_win;
+
+    wxString m_string;
+};
+
 // Helper used for creating the control of the specific type (currently either
 // wxTextCtrl or wxComboBox) with the given flag.
-template<typename TextCtrlT>
-struct TextControlCreator
+struct TextLikeControlCreator
 {
     // Create the control of the right type using the given parent and style.
-    wxControl* Create(wxWindow* parent, int style) const = 0;
+    virtual wxControl* Create(wxWindow* parent, int style) const = 0;
 
     // Return another creator similar to this one, but creating multiline
     // version of the control. If the returned pointer is non-null, it must be
     // deleted by the caller.
-    std::unique_ptr<TextControlCreator> CloneAsMultiLine() const
+    virtual TextLikeControlCreator* CloneAsMultiLine() const
     {
-        return std::make_unique<TextControlCreator>(wxTE_MULTILINE);
+        return nullptr;
     }
 };
 
-/*
+namespace
+{
+
+    enum ProcessEnter
+    {
+        ProcessEnter_No,
+        ProcessEnter_ButSkip,
+        ProcessEnter_WithoutSkipping
+    };
+
+    class TestDialog : public wxDialog
+    {
+    public:
+        explicit TestDialog(const TextLikeControlCreator& controlCreator,
+            ProcessEnter processEnter)
+            : wxDialog(wxTheApp->GetTopWindow(), wxID_ANY, "Test dialog"),
+            m_control
+            (
+                controlCreator.Create
+                (
+                    this,
+                    processEnter == ProcessEnter_No ? 0 : wxTE_PROCESS_ENTER
+                )
+            ),
+            m_processEnter(processEnter),
+            m_gotEnter(false)
+        {
+            wxSizer* const sizer = new wxBoxSizer(wxVERTICAL);
+            sizer->Add(m_control, wxSizerFlags().Expand());
+            sizer->Add(CreateStdDialogButtonSizer(wxOK));
+            SetSizerAndFit(sizer);
+
+            CallAfter(&TestDialog::SimulateEnter);
+
+            m_timer.Bind(wxEVT_TIMER, &TestDialog::OnTimeOut, this);
+            m_timer.StartOnce(2000);
+        }
+
+        bool GotEnter() const { return m_gotEnter; }
+
+    private:
+        void OnTextEnter(wxCommandEvent& e)
+        {
+            m_gotEnter = true;
+
+            switch (m_processEnter)
+            {
+            case ProcessEnter_No:
+                FAIL("Shouldn't be getting wxEVT_TEXT_ENTER at all");
+                break;
+
+            case ProcessEnter_ButSkip:
+                e.Skip();
+                break;
+
+            case ProcessEnter_WithoutSkipping:
+                // Close the dialog with a different exit code than what
+                // pressing the OK button would have generated.
+                EndModal(wxID_APPLY);
+                break;
+            }
+        }
+
+        void OnText(wxCommandEvent& WXUNUSED(e))
+        {
+            // This should only happen for the multiline text controls.
+            switch (m_processEnter)
+            {
+            case ProcessEnter_No:
+            case ProcessEnter_ButSkip:
+                // We consider that the text succeeded, but in a different way,
+                // so use a different ID to be able to distinguish between this
+                // scenario and Enter activating the default button.
+                EndModal(wxID_CLOSE);
+                break;
+
+            case ProcessEnter_WithoutSkipping:
+                FAIL("Shouldn't be getting wxEVT_TEXT if handled");
+                break;
+            }
+        }
+
+        void OnTimeOut(wxTimerEvent&)
+        {
+            EndModal(wxID_CANCEL);
+        }
+
+        void SimulateEnter()
+        {
+            wxUIActionSimulator sim;
+            m_control->SetFocus();
+            sim.Char(WXK_RETURN);
+        }
+
+        wxControl* const m_control;
+        const ProcessEnter m_processEnter;
+        wxTimer m_timer;
+        bool m_gotEnter;
+
+        wxDECLARE_EVENT_TABLE();
+    };
+
+    // Note that we must use event table macros here instead of Bind() because
+    // binding wxEVT_TEXT_ENTER handler for a control without wxTE_PROCESS_ENTER
+    // style would fail with an assertion failure, due to wx helpfully complaining
+    // about it.
+    wxBEGIN_EVENT_TABLE(TestDialog, wxDialog)
+        EVT_TEXT(wxID_ANY, TestDialog::OnText)
+        EVT_TEXT_ENTER(wxID_ANY, TestDialog::OnTextEnter)
+    wxEND_EVENT_TABLE()
+
+} // anonymous namespace
+
 // Use the given control creator to check that various combinations of
 // specifying and not specifying wxTE_PROCESS_ENTER and handling or not
 // handling the resulting event work as expected.
@@ -495,6 +659,5 @@ void TestProcessEnter(const TextLikeControlCreator& WXUNUSED(controlCreator))
 }
 
 #endif // wxUSE_UIACTIONSIMULATOR/!wxUSE_UIACTIONSIMULATOR
-*/
 
 #endif // _WX_TESTS_CONTROLS_TEXTENTRYTEST_H_

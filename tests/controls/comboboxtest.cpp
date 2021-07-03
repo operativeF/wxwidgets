@@ -175,8 +175,8 @@ TEST_CASE_FIXTURE(wxComboBoxTextTest, "Combo box text test")
     wxTEXT_ENTRY_TESTS();
 }
 
-/*
-TEST_CASE_FIXTURE("wxComboBox::ProcessEnter")
+
+TEST_CASE("wxComboBox::ProcessEnter")
 {
 
     class ComboBoxCreator : public TextLikeControlCreator
@@ -195,6 +195,5 @@ TEST_CASE_FIXTURE("wxComboBox::ProcessEnter")
 
     TestProcessEnter(ComboBoxCreator());
 }
-*/
 
 #endif //wxUSE_COMBOBOX
