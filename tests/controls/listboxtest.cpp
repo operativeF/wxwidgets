@@ -22,255 +22,367 @@
 #include "testableframe.h"
 #include "wx/uiaction.h"
 
-class ListBoxTestCase : public ItemContainerTestCase, public CppUnit::TestCase
+using ListBoxTest = ItemContainerTest<wxListBox>;
+
+TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
 {
-public:
-    ListBoxTestCase() { }
+    m_container = std::make_unique<wxListBox>(wxTheApp->GetTopWindow(), wxID_ANY,
+        wxDefaultPosition, wxSize(300, 200));
 
-    void setUp() override;
-    void tearDown() override;
-
-private:
-    wxItemContainer *GetContainer() const override { return m_list; }
-    wxWindow *GetContainerWindow() const override { return m_list; }
-
-    CPPUNIT_TEST_SUITE( ListBoxTestCase );
-        wxITEM_CONTAINER_TESTS();
-        CPPUNIT_TEST( Sort );
-        CPPUNIT_TEST( MultipleSelect );
-        WXUISIM_TEST( ClickEvents );
-        WXUISIM_TEST( ClickNotOnItem );
-        CPPUNIT_TEST( HitTest );
-        //We also run all tests as an ownerdrawn list box.  We do not need to
-        //run the wxITEM_CONTAINER_TESTS as they are tested with wxCheckListBox
-#ifdef __WXMSW__
-        CPPUNIT_TEST( PseudoTest_OwnerDrawn );
-        CPPUNIT_TEST( Sort );
-        CPPUNIT_TEST( MultipleSelect );
-        WXUISIM_TEST( ClickEvents );
-        WXUISIM_TEST( ClickNotOnItem );
-        CPPUNIT_TEST( HitTest );
-#endif
-    CPPUNIT_TEST_SUITE_END();
-
-    void Sort();
-    void MultipleSelect();
-    void ClickEvents();
-    void ClickNotOnItem();
-    void HitTest();
-    void PseudoTest_OwnerDrawn() { ms_ownerdrawn = true; }
-
-    static bool ms_ownerdrawn;
-
-    wxListBox* m_list;
-
-    ListBoxTestCase(const ListBoxTestCase&) = delete;
-	ListBoxTestCase& operator=(const ListBoxTestCase&) = delete;
-};
-
-wxREGISTER_UNIT_TEST_WITH_TAGS(ListBoxTestCase,
-                               "[ListBoxTestCase][item-container]");
-
-//initialise the static variable
-bool ListBoxTestCase::ms_ownerdrawn = false;
-
-void ListBoxTestCase::setUp()
-{
-    if( ms_ownerdrawn )
-    {
-        m_list = new wxListBox(wxTheApp->GetTopWindow(), wxID_ANY,
-                               wxDefaultPosition, wxSize(300, 200), {},
-                               wxLB_OWNERDRAW);
-    }
-    else
-    {
-        m_list = new wxListBox(wxTheApp->GetTopWindow(), wxID_ANY,
-                               wxDefaultPosition, wxSize(300, 200));
-    }
-}
-
-void ListBoxTestCase::tearDown()
-{
-    wxDELETE(m_list);
-}
-
-void ListBoxTestCase::Sort()
-{
 #ifndef __WXOSX__
-    wxDELETE(m_list);
-    m_list = new wxListBox(wxTheApp->GetTopWindow(), wxID_ANY,
-                            wxDefaultPosition, wxDefaultSize, {},
-                            wxLB_SORT);
+    SUBCASE("Sort")
+    {
+        m_container = std::make_unique<wxListBox>(wxTheApp->GetTopWindow(),
+                                wxID_ANY, wxDefaultPosition, wxDefaultSize,
+                                std::vector<wxString>{}, wxLB_SORT);
 
-    std::vector<wxString> testitems;
-    testitems.push_back("aaa");
-    testitems.push_back("Aaa");
-    testitems.push_back("aba");
-    testitems.push_back("aaab");
-    testitems.push_back("aab");
-    testitems.push_back("AAA");
+        std::vector<wxString> testitems;
+        testitems.push_back("aaa");
+        testitems.push_back("Aaa");
+        testitems.push_back("aba");
+        testitems.push_back("aaab");
+        testitems.push_back("aab");
+        testitems.push_back("AAA");
 
-    m_list->Append(testitems);
+        m_container->Append(testitems);
 
-    CHECK_EQ("AAA", m_list->GetString(0));
-    CHECK_EQ("Aaa", m_list->GetString(1));
-    CHECK_EQ("aaa", m_list->GetString(2));
-    CHECK_EQ("aaab", m_list->GetString(3));
-    CHECK_EQ("aab", m_list->GetString(4));
-    CHECK_EQ("aba", m_list->GetString(5));
+        CHECK_EQ("AAA", m_container->GetString(0));
+        CHECK_EQ("Aaa", m_container->GetString(1));
+        CHECK_EQ("aaa", m_container->GetString(2));
+        CHECK_EQ("aaab", m_container->GetString(3));
+        CHECK_EQ("aab", m_container->GetString(4));
+        CHECK_EQ("aba", m_container->GetString(5));
 
-    m_list->Append("a", wxUIntToPtr(1));
+        m_container->Append("a", wxUIntToPtr(1));
 
-    CHECK_EQ("a", m_list->GetString(0));
-    CHECK_EQ(wxUIntToPtr(1), m_list->GetClientData(0));
+        CHECK_EQ("a", m_container->GetString(0));
+        CHECK_EQ(wxUIntToPtr(1), m_container->GetClientData(0));
+    }
 #endif
-}
 
-void ListBoxTestCase::MultipleSelect()
-{
-    wxDELETE(m_list);
-    m_list = new wxListBox(wxTheApp->GetTopWindow(), wxID_ANY,
-                            wxDefaultPosition, wxDefaultSize, {},
-                            wxLB_MULTIPLE);
+    SUBCASE("MultipleSelect")
+    {
+        m_container = std::make_unique<wxListBox>(wxTheApp->GetTopWindow(),
+                                wxID_ANY, wxDefaultPosition, wxDefaultSize,
+                                std::vector<wxString>{}, wxLB_MULTIPLE);
 
-    std::vector<wxString> testitems;
-    testitems.push_back("item 0");
-    testitems.push_back("item 1");
-    testitems.push_back("item 2");
-    testitems.push_back("item 3");
+        std::vector<wxString> testitems;
+        testitems.push_back("item 0");
+        testitems.push_back("item 1");
+        testitems.push_back("item 2");
+        testitems.push_back("item 3");
 
-    m_list->Append(testitems);
+        m_container->Append(testitems);
 
-    m_list->SetSelection(0);
+        m_container->SetSelection(0);
 
-    wxArrayInt selected;
-    m_list->GetSelections(selected);
+        std::vector<int> selected;
+        m_container->GetSelections(selected);
 
-    CHECK_EQ(1, selected.Count());
-    CHECK_EQ(0, selected.Item(0));
+        CHECK_EQ(1, selected.size());
+        CHECK_EQ(0, selected[0]);
 
-    m_list->SetSelection(2);
+        m_container->SetSelection(2);
 
-    m_list->GetSelections(selected);
+        m_container->GetSelections(selected);
 
-    CHECK_EQ(2, selected.Count());
-    CHECK_EQ(2, selected.Item(1));
+        CHECK_EQ(2, selected.size());
+        CHECK_EQ(2, selected[1]);
 
-    m_list->Deselect(0);
+        m_container->Deselect(0);
 
-    m_list->GetSelections(selected);
+        m_container->GetSelections(selected);
 
-    CHECK_EQ(1, selected.Count());
-    CHECK_EQ(2, selected.Item(0));
+        CHECK_EQ(1, selected.size());
+        CHECK_EQ(2, selected[0]);
 
-    CHECK(!m_list->IsSelected(0));
-    CHECK(!m_list->IsSelected(1));
-    CHECK(m_list->IsSelected(2));
-    CHECK(!m_list->IsSelected(3));
+        CHECK(!m_container->IsSelected(0));
+        CHECK(!m_container->IsSelected(1));
+        CHECK(m_container->IsSelected(2));
+        CHECK(!m_container->IsSelected(3));
 
-    m_list->SetSelection(0);
-    m_list->SetSelection(wxNOT_FOUND);
+        m_container->SetSelection(0);
+        m_container->SetSelection(wxNOT_FOUND);
 
-    m_list->GetSelections(selected);
-    CHECK_EQ(0, selected.Count());
-}
+        m_container->GetSelections(selected);
+        CHECK_EQ(0, selected.size());
+    }
 
-void ListBoxTestCase::ClickEvents()
-{
 #if wxUSE_UIACTIONSIMULATOR
-    wxTestableFrame* frame = wxStaticCast(wxTheApp->GetTopWindow(),
-                                              wxTestableFrame);
+    SUBCASE("ClickEvents")
+    {
+        wxTestableFrame* frame = wxStaticCast(wxTheApp->GetTopWindow(),
+                                                  wxTestableFrame);
 
-    EventCounter selected(frame, wxEVT_LISTBOX);
-    EventCounter dclicked(frame, wxEVT_LISTBOX_DCLICK);
+        EventCounter selected(frame, wxEVT_LISTBOX);
+        EventCounter dclicked(frame, wxEVT_LISTBOX_DCLICK);
 
-    wxUIActionSimulator sim;
+        wxUIActionSimulator sim;
 
-    std::vector<wxString> testitems;
-    testitems.push_back("item 0");
-    testitems.push_back("item 1");
-    testitems.push_back("item 2");
+        std::vector<wxString> testitems;
+        testitems.push_back("item 0");
+        testitems.push_back("item 1");
+        testitems.push_back("item 2");
 
-    m_list->Append(testitems);
+        m_container->Append(testitems);
 
-    m_list->Update();
-    m_list->Refresh();
+        m_container->Update();
+        m_container->Refresh();
 
-    sim.MouseMove(m_list->ClientToScreen(wxPoint(10, 10)));
-    wxYield();
+        sim.MouseMove(m_container->ClientToScreen(wxPoint(10, 10)));
+        wxYield();
 
-    sim.MouseClick();
-    wxYield();
+        sim.MouseClick();
+        wxYield();
 
-    CHECK_EQ(1, selected.GetCount());
+        CHECK_EQ(1, selected.GetCount());
 
-    sim.MouseDblClick();
-    wxYield();
+        sim.MouseDblClick();
+        wxYield();
 
-    CHECK_EQ(1, dclicked.GetCount());
+        CHECK_EQ(1, dclicked.GetCount());
+    }
+
+    SUBCASE("ClickNotOnItem")
+    {
+        wxTestableFrame* frame = wxStaticCast(wxTheApp->GetTopWindow(),
+                                                  wxTestableFrame);
+
+        EventCounter selected(frame, wxEVT_LISTBOX);
+        EventCounter dclicked(frame, wxEVT_LISTBOX_DCLICK);
+
+        wxUIActionSimulator sim;
+
+        std::vector<wxString> testitems;
+        testitems.push_back("item 0");
+        testitems.push_back("item 1");
+        testitems.push_back("item 2");
+
+        m_container->Append(testitems);
+
+        // It is important to set a valid selection: if the control doesn't have
+        // any, clicking anywhere in it, even outside of any item, selects the
+        // first item in the control under GTK resulting in a selection changed
+        // event. This is not a wx bug, just the native platform behaviour so
+        // simply avoid it by starting with a valid selection.
+        m_container->SetSelection(0);
+
+        m_container->Update();
+        m_container->Refresh();
+
+        sim.MouseMove(m_container->ClientToScreen(wxPoint(m_container->GetSize().x - 10, m_container->GetSize().y - 10)));
+        wxYield();
+
+        sim.MouseClick();
+        wxYield();
+
+        sim.MouseDblClick();
+        wxYield();
+
+        //If we are not clicking on an item we shouldn't have any events
+        CHECK_EQ(0, selected.GetCount());
+        CHECK_EQ(0, dclicked.GetCount());
+    }
 #endif
+
+    SUBCASE("HitTest")
+    {
+        std::vector<wxString> testitems;
+        testitems.push_back("item 0");
+        testitems.push_back("item 1");
+        testitems.push_back("item 2");
+
+        m_container->Append(testitems);
+
+    #ifdef __WXGTK__
+        // The control needs to be realized for HitTest() to work.
+        wxYield();
+    #endif
+
+        CHECK_EQ( 0, m_container->HitTest(5, 5) );
+
+        CHECK_EQ( wxNOT_FOUND, m_container->HitTest(290, 190) );
+    }
+
+    wxITEM_CONTAINER_TESTS();
 }
 
-void ListBoxTestCase::ClickNotOnItem()
+#ifdef __WXMSW__
+
+TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
 {
-#if wxUSE_UIACTIONSIMULATOR
-    wxTestableFrame* frame = wxStaticCast(wxTheApp->GetTopWindow(),
-                                              wxTestableFrame);
+    m_container = std::make_unique<wxListBox>(wxTheApp->GetTopWindow(), wxID_ANY,
+                                              wxDefaultPosition, wxSize(300, 200),
+                                              std::vector<wxString>{}, wxLB_OWNERDRAW);
+    SUBCASE("Sort")
+    {
+        m_container = std::make_unique<wxListBox>(wxTheApp->GetTopWindow(), wxID_ANY,
+            wxDefaultPosition, wxDefaultSize, std::vector<wxString>{},
+            wxLB_SORT | wxLB_OWNERDRAW);
 
-    EventCounter selected(frame, wxEVT_LISTBOX);
-    EventCounter dclicked(frame, wxEVT_LISTBOX_DCLICK);
+        std::vector<wxString> testitems;
+        testitems.push_back("aaa");
+        testitems.push_back("Aaa");
+        testitems.push_back("aba");
+        testitems.push_back("aaab");
+        testitems.push_back("aab");
+        testitems.push_back("AAA");
 
-    wxUIActionSimulator sim;
+        m_container->Append(testitems);
 
-    std::vector<wxString> testitems;
-    testitems.push_back("item 0");
-    testitems.push_back("item 1");
-    testitems.push_back("item 2");
+        CHECK_EQ("AAA", m_container->GetString(0));
+        CHECK_EQ("Aaa", m_container->GetString(1));
+        CHECK_EQ("aaa", m_container->GetString(2));
+        CHECK_EQ("aaab", m_container->GetString(3));
+        CHECK_EQ("aab", m_container->GetString(4));
+        CHECK_EQ("aba", m_container->GetString(5));
 
-    m_list->Append(testitems);
+        m_container->Append("a", wxUIntToPtr(1));
 
-    // It is important to set a valid selection: if the control doesn't have
-    // any, clicking anywhere in it, even outside of any item, selects the
-    // first item in the control under GTK resulting in a selection changed
-    // event. This is not a wx bug, just the native platform behaviour so
-    // simply avoid it by starting with a valid selection.
-    m_list->SetSelection(0);
+        CHECK_EQ("a", m_container->GetString(0));
+        CHECK_EQ(wxUIntToPtr(1), m_container->GetClientData(0));
+    }
 
-    m_list->Update();
-    m_list->Refresh();
+    SUBCASE("MultipleSelect")
+    {
+        m_container = std::make_unique<wxListBox>(wxTheApp->GetTopWindow(), wxID_ANY,
+            wxDefaultPosition, wxDefaultSize, std::vector<wxString>{},
+            wxLB_MULTIPLE | wxLB_OWNERDRAW);
 
-    sim.MouseMove(m_list->ClientToScreen(wxPoint(m_list->GetSize().x - 10, m_list->GetSize().y - 10)));
-    wxYield();
+        std::vector<wxString> testitems;
+        testitems.push_back("item 0");
+        testitems.push_back("item 1");
+        testitems.push_back("item 2");
+        testitems.push_back("item 3");
 
-    sim.MouseClick();
-    wxYield();
+        m_container->Append(testitems);
 
-    sim.MouseDblClick();
-    wxYield();
+        m_container->SetSelection(0);
 
-    //If we are not clicking on an item we shouldn't have any events
-    CHECK_EQ(0, selected.GetCount());
-    CHECK_EQ(0, dclicked.GetCount());
-#endif
+        std::vector<int> selected;
+        m_container->GetSelections(selected);
+
+        CHECK_EQ(1, selected.size());
+        CHECK_EQ(0, selected[0]);
+
+        m_container->SetSelection(2);
+
+        m_container->GetSelections(selected);
+
+        CHECK_EQ(2, selected.size());
+        CHECK_EQ(2, selected[1]);
+
+        m_container->Deselect(0);
+
+        m_container->GetSelections(selected);
+
+        CHECK_EQ(1, selected.size());
+        CHECK_EQ(2, selected[0]);
+
+        CHECK(!m_container->IsSelected(0));
+        CHECK(!m_container->IsSelected(1));
+        CHECK(m_container->IsSelected(2));
+        CHECK(!m_container->IsSelected(3));
+
+        m_container->SetSelection(0);
+        m_container->SetSelection(wxNOT_FOUND);
+
+        m_container->GetSelections(selected);
+        CHECK_EQ(0, selected.size());
+    }
+
+    SUBCASE("ClickEvents")
+    {
+        wxTestableFrame* frame = wxStaticCast(wxTheApp->GetTopWindow(),
+            wxTestableFrame);
+
+        EventCounter selected(frame, wxEVT_LISTBOX);
+        EventCounter dclicked(frame, wxEVT_LISTBOX_DCLICK);
+
+        wxUIActionSimulator sim;
+
+        std::vector<wxString> testitems;
+        testitems.push_back("item 0");
+        testitems.push_back("item 1");
+        testitems.push_back("item 2");
+
+        m_container->Append(testitems);
+
+        m_container->Update();
+        m_container->Refresh();
+
+        sim.MouseMove(m_container->ClientToScreen(wxPoint(10, 10)));
+        wxYield();
+
+        sim.MouseClick();
+        wxYield();
+
+        CHECK_EQ(1, selected.GetCount());
+
+        sim.MouseDblClick();
+        wxYield();
+
+        CHECK_EQ(1, dclicked.GetCount());
+    }
+
+    SUBCASE("ClickNotOnItem")
+    {
+        wxTestableFrame* frame = wxStaticCast(wxTheApp->GetTopWindow(),
+            wxTestableFrame);
+
+        EventCounter selected(frame, wxEVT_LISTBOX);
+        EventCounter dclicked(frame, wxEVT_LISTBOX_DCLICK);
+
+        wxUIActionSimulator sim;
+
+        std::vector<wxString> testitems;
+        testitems.push_back("item 0");
+        testitems.push_back("item 1");
+        testitems.push_back("item 2");
+
+        m_container->Append(testitems);
+
+        // It is important to set a valid selection: if the control doesn't have
+        // any, clicking anywhere in it, even outside of any item, selects the
+        // first item in the control under GTK resulting in a selection changed
+        // event. This is not a wx bug, just the native platform behaviour so
+        // simply avoid it by starting with a valid selection.
+        m_container->SetSelection(0);
+
+        m_container->Update();
+        m_container->Refresh();
+
+        sim.MouseMove(m_container->ClientToScreen(wxPoint(m_container->GetSize().x - 10, m_container->GetSize().y - 10)));
+        wxYield();
+
+        sim.MouseClick();
+        wxYield();
+
+        sim.MouseDblClick();
+        wxYield();
+
+        //If we are not clicking on an item we shouldn't have any events
+        CHECK_EQ(0, selected.GetCount());
+        CHECK_EQ(0, dclicked.GetCount());
+    }
+
+    SUBCASE("HitTest")
+    {
+        std::vector<wxString> testitems;
+        testitems.push_back("item 0");
+        testitems.push_back("item 1");
+        testitems.push_back("item 2");
+
+        m_container->Append(testitems);
+
+        CHECK_EQ(0, m_container->HitTest(5, 5));
+
+        CHECK_EQ(wxNOT_FOUND, m_container->HitTest(290, 190));
+    }
+
+    wxITEM_CONTAINER_TESTS();
 }
 
-void ListBoxTestCase::HitTest()
-{
-    std::vector<wxString> testitems;
-    testitems.push_back("item 0");
-    testitems.push_back("item 1");
-    testitems.push_back("item 2");
-
-    m_list->Append(testitems);
-
-#ifdef __WXGTK__
-    // The control needs to be realized for HitTest() to work.
-    wxYield();
 #endif
-
-    CHECK_EQ( 0, m_list->HitTest(5, 5) );
-
-    CHECK_EQ( wxNOT_FOUND, m_list->HitTest(290, 190) );
-}
 
 #endif //wxUSE_LISTBOX
