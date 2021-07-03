@@ -38,8 +38,6 @@ TEST_CASE_FIXTURE(wxComboBoxTest, "Combo box test")
 {
     m_container = std::make_unique<wxComboBox>(wxTheApp->GetTopWindow(), wxID_ANY);
 
-    // wxTEXT_ENTRY_TESTS();
-
     SUBCASE("Size")
     {
         // under MSW changing combobox size is a non-trivial operation because of
@@ -174,7 +172,6 @@ TEST_CASE_FIXTURE(wxComboBoxTextTest, "Combo box text test")
 
     wxTEXT_ENTRY_TESTS();
 }
-
 
 TEST_CASE("wxComboBox::ProcessEnter")
 {
