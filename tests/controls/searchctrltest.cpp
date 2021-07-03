@@ -34,8 +34,8 @@ protected:
     std::unique_ptr<wxSearchCtrl> m_search;
 };
 
-#define SEARCH_CTRL_TEST_CASE(name, tags) \
-    TEST_CASE_FIXTURE(SearchCtrlTestCase, name, tags)
+#define SEARCH_CTRL_TEST_CASE(name) \
+    TEST_CASE_FIXTURE(SearchCtrlTestCase, name)
 
 // TODO OS X test only passes when run solo ...
 #ifndef __WXOSX__
