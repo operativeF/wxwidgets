@@ -15,8 +15,10 @@
 
 #ifndef WX_PRECOMP
 #include "wx/app.h"
+#include "wx/bmpcbox.h"
 #include "wx/dialog.h"
 #include "wx/event.h"
+#include "wx/odcombo.h"
 #include "wx/sizer.h"
 #include "wx/textctrl.h"
 #include "wx/textentry.h"
@@ -118,15 +120,18 @@ protected:
         updated.Clear();
     }
 
-    /*
     void CheckStringSelection(const char *sel)
     {
-        //if constexr(std::is_same<m_entry)
-        CHECK_EQ( sel, GetTestEntry()->GetStringSelection() );
+        if constexpr(std::is_base_of_v<wxComboBox, TextEntryT>)
+        {
+            return;
+        }
+        else
+        {
+            CHECK_EQ( sel, m_entry->GetStringSelection() );
+        }
     }
-    */
 
-    /*
     void AssertSelection(int from, int to, const char *sel)
     {
         CHECK( m_entry->HasSelection() );
@@ -141,9 +146,7 @@ protected:
 
         CheckStringSelection(sel);
     }
-    */
 
-    /*
     void Selection()
     {
         m_entry->SetValue("0123456789");
@@ -160,7 +163,7 @@ protected:
         m_entry->SetSelection(0, 0);
         CHECK( !m_entry->HasSelection() );
     }
-    */
+
     void InsertionPoint()
     {
         CHECK_EQ( 0, m_entry->GetLastPosition() );
@@ -374,7 +377,7 @@ protected:
     #define wxTEXT_ENTRY_TESTS() \
             SUBCASE( "SetValue" ) { SetValue(); } \
             SUBCASE( "TextChangeEvents" ) { TextChangeEvents(); } \
-            /*SUBCASE( "Selection" ) { Selection(); }*/ \
+            SUBCASE( "Selection" ) { Selection(); } \
             SUBCASE( "InsertionPoint" ) { InsertionPoint(); } \
             SUBCASE( "Replace" ) { Replace(); } \
             SUBCASE( "Editable" ) { Editable(); } \
@@ -386,26 +389,6 @@ protected:
     std::unique_ptr<TextEntryT> m_entry;
 
 private:
-    /*
-    // Selection() test helper: verify that selection is as described by the
-    // function parameters
-    void AssertSelection(int from, int to, const char *sel)
-    {
-        wxTextEntry * const entry = GetTestEntry();
-
-        CHECK( m_entry->HasSelection() );
-
-        long fromReal,
-            toReal;
-        m_entry->GetSelection(&fromReal, &toReal);
-        CHECK_EQ( from, fromReal );
-        CHECK_EQ( to, toReal );
-
-        CHECK_EQ( from, m_entry->GetInsertionPoint() );
-
-        CheckStringSelection(sel);
-    }
-    */
     // helper of AssertSelection(): check that the text selected in the control
     // is the given one
     //
@@ -413,11 +396,6 @@ private:
     // doesn't provide any way to access the string selection directly, its
     // GetStringSelection() method returns the currently selected string in the
     // wxChoice part of the control, not the selected text
-
-    //void CheckStringSelection(const char* sel)
-    //{
-    //    if constexpr
-    //}
 };
 
 #if wxUSE_UIACTIONSIMULATOR
