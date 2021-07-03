@@ -501,7 +501,9 @@
     <ClCompile Include="controls\dialogtest.cpp" />
     <ClCompile Include="controls\frametest.cpp" />
     <ClCompile Include="controls\gaugetest.cpp" />
+    <ClCompile Include="controls\gridtest.cpp" />
     <ClCompile Include="controls\headerctrltest.cpp" />
+    <ClCompile Include="controls\htmllboxtest.cpp" />
     <ClCompile Include="controls\hyperlinkctrltest.cpp" />
     <ClCompile Include="controls\label.cpp" />
     <ClCompile Include="controls\listbooktest.cpp" />
@@ -514,6 +516,7 @@
     <ClCompile Include="controls\radioboxtest.cpp" />
     <ClCompile Include="controls\radiobuttontest.cpp" />
     <ClCompile Include="controls\richtextctrltest.cpp" />
+    <ClCompile Include="controls\searchctrltest.cpp" />
     <ClCompile Include="controls\simplebooktest.cpp" />
     <ClCompile Include="controls\slidertest.cpp" />
     <ClCompile Include="controls\spinctrldbltest.cpp" />

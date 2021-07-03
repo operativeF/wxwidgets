@@ -111,7 +111,7 @@ public:
         if ( attr )
             attr->DecRef();
 
-        return attr != NULL;
+        return attr != nullptr;
     }
 
     size_t GetCellAttrCount() const
@@ -149,14 +149,14 @@ public:
 
 // Compares two grids, checking for differences with attribute presence and
 // cell sizes.
-class GridAttrMatcher : public Catch::MatcherBase<TestableGrid>
+class GridAttrMatcher
 {
 public:
     GridAttrMatcher(const TestableGrid& grid);
 
-    bool match(const TestableGrid& other) const override;
+    bool match(const TestableGrid& other) const;
 
-    std::string describe() const override;
+    std::string describe() const;
 
 private:
     const TestableGrid* m_grid;
@@ -190,7 +190,7 @@ void FitGridToMulticell(TestableGrid* grid, const Multicell& multi)
 
 } // anonymous namespace
 
-namespace Catch
+namespace doctest
 {
 
 template <> struct StringMaker<TestableGrid>
@@ -272,7 +272,7 @@ protected:
         int top, bottom;
     };
 
-    typedef std::vector<RowRange> RowRanges;
+    using RowRanges = std::vector<RowRange>;
 
     void CheckRowSelection(const RowRanges& ranges)
     {
@@ -344,7 +344,7 @@ protected:
 	GridTestCase& operator=(const GridTestCase&) = delete;
 };
 
-GridTestCase::GridTestCase() : m_tempGrid(NULL)
+GridTestCase::GridTestCase() : m_tempGrid(nullptr)
 {
     m_grid = new TestableGrid(wxTheApp->GetTopWindow());
     m_grid->CreateGrid(10, 2);
@@ -376,7 +376,7 @@ GridTestCase::~GridTestCase()
     delete m_tempGrid;
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::CellEdit", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::CellEdit")
 {
     // TODO on OSX when running the grid test suite solo this works
     // but not when running it together with other tests
@@ -411,7 +411,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::CellEdit", "[grid]")
 #endif
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::CellClick", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::CellClick")
 {
 #if wxUSE_UIACTIONSIMULATOR
     EventCounter lclick(m_grid, wxEVT_GRID_CELL_LEFT_CLICK);
@@ -459,7 +459,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::CellClick", "[grid]")
 #endif
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::ReorderedColumnsCellClick", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::ReorderedColumnsCellClick")
 {
 #if wxUSE_UIACTIONSIMULATOR
     EventCounter click(m_grid, wxEVT_GRID_CELL_LEFT_CLICK);
@@ -488,7 +488,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::ReorderedColumnsCellClick", "[grid]")
 #endif
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::CellSelect", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::CellSelect")
 {
 #if wxUSE_UIACTIONSIMULATOR
     EventCounter cell(m_grid, wxEVT_GRID_SELECT_CELL);
@@ -524,15 +524,15 @@ TEST_CASE_METHOD(GridTestCase, "Grid::CellSelect", "[grid]")
 #endif
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::LabelClick", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::LabelClick")
 {
 #if wxUSE_UIACTIONSIMULATOR
     if ( !EnableUITests() )
         return;
 
-    SECTION("Default") {}
-    SECTION("Native header") { m_grid->UseNativeColHeader(); }
-    SECTION("Native labels") { m_grid->SetUseNativeColLabels(); }
+    SUBCASE("Default") {}
+    SUBCASE("Native header") { m_grid->UseNativeColHeader(); }
+    SUBCASE("Native labels") { m_grid->SetUseNativeColLabels(); }
 
     EventCounter lclick(m_grid, wxEVT_GRID_LABEL_LEFT_CLICK);
     EventCounter ldclick(m_grid, wxEVT_GRID_LABEL_LEFT_DCLICK);
@@ -580,15 +580,15 @@ TEST_CASE_METHOD(GridTestCase, "Grid::LabelClick", "[grid]")
 #endif
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::SortClick", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::SortClick")
 {
 #if wxUSE_UIACTIONSIMULATOR
     if ( !EnableUITests() )
         return;
 
-    SECTION("Default") {}
-    SECTION("Native header") { m_grid->UseNativeColHeader(); }
-    SECTION("Native labels") { m_grid->SetUseNativeColLabels(); }
+    SUBCASE("Default") {}
+    SUBCASE("Native header") { m_grid->UseNativeColHeader(); }
+    SUBCASE("Native labels") { m_grid->SetUseNativeColLabels(); }
 
     m_grid->SetSortingColumn(0);
 
@@ -609,7 +609,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::SortClick", "[grid]")
 #endif
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::Size", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::Size")
 {
     // TODO on OSX resizing interactively works, but not automated
     // Grid could not pass the test under GTK, OSX, and Universal.
@@ -656,7 +656,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::Size", "[grid]")
 #endif
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::RangeSelect", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::RangeSelect")
 {
 #if wxUSE_UIACTIONSIMULATOR
     if ( !EnableUITests() )
@@ -687,7 +687,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::RangeSelect", "[grid]")
 #endif
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::Cursor", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::Cursor")
 {
     m_grid->SetGridCursor(1, 1);
 
@@ -732,7 +732,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::Cursor", "[grid]")
     CHECK(m_grid->GetGridCursorRow() == 0);
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::KeyboardSelection", "[grid][selection]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::KeyboardSelection")
 {
     m_grid->SetCellValue(1, 1, "R2C2");
     m_grid->SetCellValue(2, 0, "R3C1");
@@ -761,7 +761,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::KeyboardSelection", "[grid][selection]")
     CheckSelection(wxGridBlockCoords(0, 0, 4, 0));
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::Selection", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::Selection")
 {
     m_grid->SelectAll();
 
@@ -805,7 +805,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::Selection", "[grid]")
     CHECK(!m_grid->IsInSelection(0, 1));
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::SelectionRange", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::SelectionRange")
 {
     const wxGridBlocks empty = m_grid->GetSelectedBlocks();
     CHECK( empty.begin() == empty.end() );
@@ -836,11 +836,11 @@ TEST_CASE_METHOD(GridTestCase, "Grid::SelectionRange", "[grid]")
     }
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::SelectEmptyGrid", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::SelectEmptyGrid")
 {
     for ( int i = 0; i < 2; ++i )
     {
-        SECTION(i == 0 ? "No rows" : "No columns")
+        SUBCASE(i == 0 ? "No rows" : "No columns")
         {
 
             if ( i == 0 )
@@ -854,19 +854,19 @@ TEST_CASE_METHOD(GridTestCase, "Grid::SelectEmptyGrid", "[grid]")
                 REQUIRE( m_grid->GetNumberCols() == 0 );
             }
 
-            SECTION("Move right")
+            SUBCASE("Move right")
             {
                 m_grid->MoveCursorRight(true);
             }
-            SECTION("Move down")
+            SUBCASE("Move down")
             {
                 m_grid->MoveCursorDown(true);
             }
-            SECTION("Select row")
+            SUBCASE("Select row")
             {
                 m_grid->SelectRow(1);
             }
-            SECTION("Select column")
+            SUBCASE("Select column")
             {
                 m_grid->SelectCol(1);
             }
@@ -880,7 +880,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::SelectEmptyGrid", "[grid]")
     CHECK( m_grid->GetSelectedCols().size() == 0 );
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::ScrollWhenSelect", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::ScrollWhenSelect")
 {
     m_grid->AppendCols(10);
 
@@ -904,7 +904,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::ScrollWhenSelect", "[grid]")
     CHECK( m_grid->IsVisible(9, 1) );
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::MoveGridCursorUsingEndKey", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::MoveGridCursorUsingEndKey")
 {
 #if wxUSE_UIACTIONSIMULATOR
     if ( !EnableUITests() )
@@ -937,7 +937,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::MoveGridCursorUsingEndKey", "[grid]")
 #endif
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::SelectUsingEndKey", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::SelectUsingEndKey")
 {
 #if wxUSE_UIACTIONSIMULATOR
     if ( !EnableUITests() )
@@ -972,7 +972,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::SelectUsingEndKey", "[grid]")
 #endif
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::AddRowCol", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::AddRowCol")
 {
     CHECK(m_grid->GetNumberRows() == 10);
     CHECK(m_grid->GetNumberCols() == 2);
@@ -996,10 +996,10 @@ TEST_CASE_METHOD(GridTestCase, "Grid::AddRowCol", "[grid]")
     CHECK(m_grid->GetNumberCols() == 7);
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::DeleteAndAddRowCol", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::DeleteAndAddRowCol")
 {
-    SECTION("Default") {}
-    SECTION("Native header") { m_grid->UseNativeColHeader(); }
+    SUBCASE("Default") {}
+    SUBCASE("Native header") { m_grid->UseNativeColHeader(); }
 
     CHECK(m_grid->GetNumberRows() == 10);
     CHECK(m_grid->GetNumberCols() == 2);
@@ -1028,11 +1028,11 @@ TEST_CASE_METHOD(GridTestCase, "Grid::DeleteAndAddRowCol", "[grid]")
     m_grid->AppendRows(5);
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::ColumnOrder", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::ColumnOrder")
 {
-    SECTION("Default") {}
-    SECTION("Native header") { m_grid->UseNativeColHeader(); }
-    SECTION("Native labels") { m_grid->SetUseNativeColLabels(); }
+    SUBCASE("Default") {}
+    SUBCASE("Native header") { m_grid->UseNativeColHeader(); }
+    SUBCASE("Native labels") { m_grid->SetUseNativeColLabels(); }
 
     m_grid->AppendCols(2);
 
@@ -1064,7 +1064,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::ColumnOrder", "[grid]")
     CHECK(m_grid->GetColPos(3) == 3);
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::ColumnVisibility", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::ColumnVisibility")
 {
     m_grid->AppendCols(3);
     CHECK( m_grid->IsColShown(1) );
@@ -1077,7 +1077,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::ColumnVisibility", "[grid]")
     CHECK( m_grid->IsColShown(1) );
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::LineFormatting", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::LineFormatting")
 {
     CHECK(m_grid->GridLinesEnabled());
 
@@ -1092,7 +1092,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::LineFormatting", "[grid]")
     CHECK(*wxRED == m_grid->GetGridLineColour());
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::SortSupport", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::SortSupport")
 {
     CHECK(m_grid->GetSortingColumn() == wxNOT_FOUND);
 
@@ -1114,7 +1114,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::SortSupport", "[grid]")
     CHECK(!m_grid->IsSortingBy(1));
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::Labels", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::Labels")
 {
     CHECK(m_grid->GetColLabelValue(0) == "A");
     CHECK(m_grid->GetRowLabelValue(0) == "1");
@@ -1136,7 +1136,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::Labels", "[grid]")
     CHECK(m_grid->GetColLabelTextOrientation() == wxVERTICAL);
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::SelectionMode", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::SelectionMode")
 {
     //We already test this mode in Select
     CHECK(m_grid->GetSelectionMode() == wxGrid::wxGridSelectCells);
@@ -1223,7 +1223,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::SelectionMode", "[grid]")
     CHECK(m_grid->GetSelectionMode() == wxGrid::wxGridSelectColumns);
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::CellFormatting", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::CellFormatting")
 {
     //Check that initial alignment is default
     int horiz, cellhoriz, vert, cellvert;
@@ -1255,7 +1255,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::CellFormatting", "[grid]")
     CHECK(m_grid->GetCellTextColour(0,0) == *wxGREEN);
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::GetNonDefaultAlignment", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::GetNonDefaultAlignment")
 {
     // GetNonDefaultAlignment() is used by several renderers having their own
     // preferred alignment, so check that if we don't reset the alignment
@@ -1296,7 +1296,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::GetNonDefaultAlignment", "[grid]")
     CHECK( attr->CanOverflow() );
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::Editable", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::Editable")
 {
 #if wxUSE_UIACTIONSIMULATOR
     if ( !EnableUITests() )
@@ -1326,7 +1326,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::Editable", "[grid]")
 #endif
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::ReadOnly", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::ReadOnly")
 {
 #if wxUSE_UIACTIONSIMULATOR
     if ( !EnableUITests() )
@@ -1359,7 +1359,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::ReadOnly", "[grid]")
 #endif
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::WindowAsEditorControl", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::WindowAsEditorControl")
 {
 #if wxUSE_UIACTIONSIMULATOR
     if ( !EnableUITests() )
@@ -1422,7 +1422,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::WindowAsEditorControl", "[grid]")
 #endif
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::ResizeScrolledHeader", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::ResizeScrolledHeader")
 {
     // TODO this test currently works only under Windows unfortunately
 #if wxUSE_UIACTIONSIMULATOR && (defined(__WXMSW__) || defined(__WXGTK__))
@@ -1435,8 +1435,8 @@ TEST_CASE_METHOD(GridTestCase, "Grid::ResizeScrolledHeader", "[grid]")
         return;
 #endif
 
-    SECTION("Default") {}
-    SECTION("Native header") { m_grid->UseNativeColHeader(); }
+    SUBCASE("Default") {}
+    SUBCASE("Native header") { m_grid->UseNativeColHeader(); }
 
     int const startwidth = m_grid->GetColSize(0);
     int const draglength = 100;
@@ -1473,7 +1473,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::ResizeScrolledHeader", "[grid]")
 #endif
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::ColumnMinWidth", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::ColumnMinWidth")
 {
     // TODO this test currently works only under Windows unfortunately
 #if wxUSE_UIACTIONSIMULATOR && (defined(__WXMSW__) || defined(__WXGTK__))
@@ -1486,8 +1486,8 @@ TEST_CASE_METHOD(GridTestCase, "Grid::ColumnMinWidth", "[grid]")
         return;
 #endif
 
-    SECTION("Default") {}
-    SECTION("Native header")
+    SUBCASE("Default") {}
+    SUBCASE("Native header")
     {
         // For some unknown reason, this test fails under AppVeyor even though
         // it passes locally, so disable it there. If anybody can reproduce the
@@ -1537,11 +1537,11 @@ void GridTestCase::CheckFirstColAutoSize(int expected)
     CHECK(m_grid->GetColSize(0) == expected);
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::AutoSizeColumn", "[grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::AutoSizeColumn")
 {
-    SECTION("Default") {}
-    SECTION("Native header") { m_grid->UseNativeColHeader(); }
-    SECTION("Native labels") { m_grid->SetUseNativeColLabels(); }
+    SUBCASE("Default") {}
+    SUBCASE("Native header") { m_grid->UseNativeColHeader(); }
+    SUBCASE("Native labels") { m_grid->SetUseNativeColLabels(); }
 
     // Hardcoded extra margin for the columns used in grid.cpp.
     const int margin = m_grid->FromDIP(10);
@@ -1560,19 +1560,19 @@ TEST_CASE_METHOD(GridTestCase, "Grid::AutoSizeColumn", "[grid]")
     const wxString longStr      = "WWWWWWWW";
     const wxString multilineStr = mediumStr + "\n" + longStr;
 
-    SECTION("Empty column and label")
+    SUBCASE("Empty column and label")
     {
         m_grid->SetColLabelValue(0, wxString());
         CheckFirstColAutoSize( m_grid->GetDefaultColSize() );
     }
 
-    SECTION("Empty column with label")
+    SUBCASE("Empty column with label")
     {
         m_grid->SetColLabelValue(0, mediumStr);
         CheckFirstColAutoSize( GetColumnLabelWidth(dcLabel, 0, margin) );
     }
 
-    SECTION("Column with empty label")
+    SUBCASE("Column with empty label")
     {
         m_grid->SetColLabelValue(0, wxString());
         m_grid->SetCellValue(0, 0, mediumStr);
@@ -1584,7 +1584,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::AutoSizeColumn", "[grid]")
                                    m_grid->GetRowHeight(3)) + margin );
     }
 
-    SECTION("Column with label longer than contents")
+    SUBCASE("Column with label longer than contents")
     {
         m_grid->SetColLabelValue(0, multilineStr);
         m_grid->SetCellValue(0, 0, mediumStr);
@@ -1592,7 +1592,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::AutoSizeColumn", "[grid]")
         CheckFirstColAutoSize( GetColumnLabelWidth(dcLabel, 0, margin) );
     }
 
-    SECTION("Column with contents longer than label")
+    SUBCASE("Column with contents longer than label")
     {
         m_grid->SetColLabelValue(0, mediumStr);
         m_grid->SetCellValue(0, 0, mediumStr);
@@ -1603,7 +1603,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::AutoSizeColumn", "[grid]")
                                    m_grid->GetRowHeight(3)) + margin );
     }
 
-    SECTION("Column with equally sized contents and label")
+    SUBCASE("Column with equally sized contents and label")
     {
         m_grid->SetColLabelValue(0, mediumStr);
         m_grid->SetCellValue(0, 0, mediumStr);
@@ -1622,7 +1622,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::AutoSizeColumn", "[grid]")
         CheckFirstColAutoSize( wxMax(labelWidth, cellWidth) );
     }
 
-    SECTION("Column with auto wrapping contents taller than row")
+    SUBCASE("Column with auto wrapping contents taller than row")
     {
         // Verify row height remains unchanged with an auto-wrapping multi-line
         // cell.
@@ -1639,7 +1639,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::AutoSizeColumn", "[grid]")
     }
 }
 
-TEST_CASE_METHOD(GridTestCase, "Grid::DrawInvalidCell", "[grid][multicell]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::DrawInvalidCell")
 {
     // Set up a multicell with inside an overflowing cell.
     // This is artificial and normally inside cells are probably not expected
@@ -1667,13 +1667,13 @@ TEST_CASE_METHOD(GridTestCase, "Grid::DrawInvalidCell", "[grid][multicell]")
 
 #define CHECK_ATTR_COUNT(n) CHECK( m_grid->GetCellAttrCount() == n )
 
-TEST_CASE_METHOD(GridTestCase, "Grid::CellAttribute", "[attr][cell][grid]")
+TEST_CASE_FIXTURE(GridTestCase, "Grid::CellAttribute")
 {
-    SECTION("Overwrite")
+    SUBCASE("Overwrite")
     {
         CHECK_ATTR_COUNT( 0 );
 
-        m_grid->SetAttr(0, 0, NULL);
+        m_grid->SetAttr(0, 0, nullptr);
         CHECK_ATTR_COUNT( 0 );
 
         SetCellAttr(0, 0);
@@ -1683,20 +1683,20 @@ TEST_CASE_METHOD(GridTestCase, "Grid::CellAttribute", "[attr][cell][grid]")
         SetCellAttr(0, 0);
         CHECK_ATTR_COUNT( 1 );
 
-        m_grid->SetAttr(0, 0, NULL);
+        m_grid->SetAttr(0, 0, nullptr);
         CHECK_ATTR_COUNT( 0 );
 
         SetCellAttr(0, 0);
         m_grid->SetCellBackgroundColour(0, 1, *wxGREEN);
         CHECK_ATTR_COUNT( 2 );
 
-        m_grid->SetAttr(0, 1, NULL);
-        m_grid->SetAttr(0, 0, NULL);
+        m_grid->SetAttr(0, 1, nullptr);
+        m_grid->SetAttr(0, 0, nullptr);
         CHECK_ATTR_COUNT( 0 );
     }
 
 
-    // Fill the grid with attributes for next sections.
+    // Fill the grid with attributes for next SUBCASEs.
 
     const int numRows = m_grid->GetNumberRows();
     const int numCols = m_grid->GetNumberCols();
@@ -1711,7 +1711,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::CellAttribute", "[attr][cell][grid]")
 
     CHECK_ATTR_COUNT( numAttrs );
 
-    SECTION("Expanding")
+    SUBCASE("Expanding")
     {
         CHECK( !HasCellAttr(numRows, numCols) );
 
@@ -1725,7 +1725,7 @@ TEST_CASE_METHOD(GridTestCase, "Grid::CellAttribute", "[attr][cell][grid]")
         CHECK( HasCellAttr(numRows, numCols) );
     }
 
-    SECTION("Shrinking")
+    SUBCASE("Shrinking")
     {
         CHECK( HasCellAttr(numRows - 1 , numCols - 1) );
         CHECK( HasCellAttr(0, numCols - 1) );
@@ -1743,21 +1743,18 @@ TEST_CASE_METHOD(GridTestCase, "Grid::CellAttribute", "[attr][cell][grid]")
     }
 }
 
-#define CHECK_MULTICELL() CHECK_THAT( *m_grid, HasMulticellOnly(multi) )
+#define CHECK_MULTICELL() CHECK( HasMulticellOnly(multi).match(*m_grid) )
 
-#define CHECK_NO_MULTICELL() CHECK_THAT( *m_grid, HasEmptyGrid() )
+#define CHECK_NO_MULTICELL() CHECK( HasEmptyGrid().match(*m_grid) )
 
-#define WHEN_N(s, n) WHEN(wxString::Format(s, n).ToStdString())
-
-TEST_CASE_METHOD(GridTestCase,
-                 "Grid::InsertionsWithMulticell",
-                 "[attr][cell][grid][insert][multicell]")
+TEST_CASE_FIXTURE(GridTestCase,
+                 "Grid::InsertionsWithMulticell")
 {
     int insertions = 0, offset = 0;
 
     Multicell multi(1, 1, 3, 5);
 
-    SECTION("Sanity checks")
+    SUBCASE("Sanity checks")
     {
         FitGridToMulticell(m_grid, multi);
         m_grid->SetMulticell(multi);
@@ -1791,7 +1788,7 @@ TEST_CASE_METHOD(GridTestCase,
     // repeat the same tests for both rows and columns as the code for
     // updating them works symmetrically.
 
-    GIVEN(Catch::toString(multi))
+    GIVEN("Basic column insertions")
     {
         FitGridToMulticell(m_grid, multi);
         m_grid->SetMulticell(multi);
@@ -1826,7 +1823,7 @@ TEST_CASE_METHOD(GridTestCase,
 
     wxSwap(multi.rows, multi.cols);
 
-    GIVEN(Catch::toString(multi))
+    GIVEN("Basic row insertions")
     {
         FitGridToMulticell(m_grid, multi);
         m_grid->SetMulticell(multi);
@@ -1837,7 +1834,7 @@ TEST_CASE_METHOD(GridTestCase,
         {
             insertions = insertionCounts[i];
 
-            WHEN_N("inserting %d row(s), just before main", insertions)
+            WHEN("inserting row(s), just before main")
             {
                 InsertRows(multi.row - 1, insertions);
 
@@ -1848,7 +1845,7 @@ TEST_CASE_METHOD(GridTestCase,
                 }
             }
 
-            WHEN_N("inserting %d row(s) in multicell, at main", insertions)
+            WHEN("inserting row(s) in multicell, at main")
             {
                 InsertRows(multi.row + 0, insertions);
 
@@ -1869,7 +1866,7 @@ TEST_CASE_METHOD(GridTestCase,
         {
             offset = insertionOffsets[i];
 
-            WHEN_N("inserting rows in multicell, %d row(s) after main", offset)
+            WHEN("inserting rows in multicell, row(s) after main")
             {
                 InsertRows(multi.row + offset, insertions);
 
@@ -1896,9 +1893,8 @@ TEST_CASE_METHOD(GridTestCase,
 
 }
 
-TEST_CASE_METHOD(GridTestCase,
-                 "GridMulticell::DeletionsWithMulticell",
-                 "[cellattr][delete][grid][multicell]")
+TEST_CASE_FIXTURE(GridTestCase,
+                 "GridMulticell::DeletionsWithMulticell")
 {
     int deletions = 0, offset = 0;
 
@@ -1908,7 +1904,7 @@ TEST_CASE_METHOD(GridTestCase,
 
     Multicell multi(1, 1, 5, 3);
 
-    GIVEN(Catch::toString(multi))
+    GIVEN("Row tests")
     {
         FitGridToMulticell(m_grid, multi);
         m_grid->SetMulticell(multi);
@@ -1943,7 +1939,7 @@ TEST_CASE_METHOD(GridTestCase,
 
     wxSwap(multi.rows, multi.cols);
 
-    GIVEN(Catch::toString(multi))
+    GIVEN("Column tests")
     {
         FitGridToMulticell(m_grid, multi);
         m_grid->SetMulticell(multi);
@@ -2003,8 +1999,8 @@ TEST_CASE_METHOD(GridTestCase,
         {
             offset = offsets[i];
 
-            WHEN_N("deleting columns only within multicell,"
-                   " %d column(s) after main", offset)
+            WHEN("deleting columns only within multicell,"
+                   " column(s) after main")
             {
                 DeleteCols(multi.col + offset, deletions);
 
@@ -2059,7 +2055,7 @@ std::ostream& operator<<(std::ostream& os, const wxGridBlockCoords& block) {
     return os;
 }
 
-TEST_CASE("GridBlockCoords::Canonicalize", "[grid]")
+TEST_CASE("GridBlockCoords::Canonicalize")
 {
     const wxGridBlockCoords block =
         wxGridBlockCoords(4, 3, 2, 1).Canonicalize();
@@ -2070,7 +2066,7 @@ TEST_CASE("GridBlockCoords::Canonicalize", "[grid]")
     CHECK(block.GetRightCol() == 3);
 }
 
-TEST_CASE("GridBlockCoords::Intersects", "[grid]")
+TEST_CASE("GridBlockCoords::Intersects")
 {
     // Inside.
     CHECK(wxGridBlockCoords(1, 1, 3, 3).Intersects(wxGridBlockCoords(1, 2, 2, 3)));
@@ -2082,7 +2078,7 @@ TEST_CASE("GridBlockCoords::Intersects", "[grid]")
     CHECK(!wxGridBlockCoords(1, 1, 3, 3).Intersects(wxGridBlockCoords(4, 4, 6, 6)));
 }
 
-TEST_CASE("GridBlockCoords::Contains", "[grid]")
+TEST_CASE("GridBlockCoords::Contains")
 {
     // Inside.
     CHECK(wxGridBlockCoords(1, 1, 3, 3).Contains(wxGridCellCoords(2, 2)));
@@ -2103,9 +2099,9 @@ TEST_CASE("GridBlockCoords::Contains", "[grid]")
     CHECK(!block4.Contains(block1));
 }
 
-TEST_CASE("GridBlockCoords::Difference", "[grid]")
+TEST_CASE("GridBlockCoords::Difference")
 {
-    SECTION("Subtract contained block (splitted horizontally)")
+    SUBCASE("Subtract contained block (splitted horizontally)")
     {
         const wxGridBlockCoords block1(1, 1, 7, 7);
         const wxGridBlockCoords block2(3, 3, 5, 5);
@@ -2118,7 +2114,7 @@ TEST_CASE("GridBlockCoords::Difference", "[grid]")
         CHECK(result.m_parts[3] == wxGridBlockCoords(3, 6, 5, 7));
     }
 
-    SECTION("Subtract contained block (splitted vertically)")
+    SUBCASE("Subtract contained block (splitted vertically)")
     {
         const wxGridBlockCoords block1(1, 1, 7, 7);
         const wxGridBlockCoords block2(3, 3, 5, 5);
@@ -2131,7 +2127,7 @@ TEST_CASE("GridBlockCoords::Difference", "[grid]")
         CHECK(result.m_parts[3] == wxGridBlockCoords(6, 3, 7, 5));
     }
 
-    SECTION("Blocks intersect by the corner (splitted horizontally)")
+    SUBCASE("Blocks intersect by the corner (splitted horizontally)")
     {
         const wxGridBlockCoords block1(1, 1, 5, 5);
         const wxGridBlockCoords block2(3, 3, 7, 7);
@@ -2144,7 +2140,7 @@ TEST_CASE("GridBlockCoords::Difference", "[grid]")
         CHECK(result.m_parts[3] == wxGridNoBlockCoords);
     }
 
-    SECTION("Blocks intersect by the corner (splitted vertically)")
+    SUBCASE("Blocks intersect by the corner (splitted vertically)")
     {
         const wxGridBlockCoords block1(1, 1, 5, 5);
         const wxGridBlockCoords block2(3, 3, 7, 7);
@@ -2157,7 +2153,7 @@ TEST_CASE("GridBlockCoords::Difference", "[grid]")
         CHECK(result.m_parts[3] == wxGridNoBlockCoords);
     }
 
-    SECTION("Blocks are the same")
+    SUBCASE("Blocks are the same")
     {
         const wxGridBlockCoords block1(1, 1, 3, 3);
         const wxGridBlockCoords block2(1, 1, 3, 3);
@@ -2170,7 +2166,7 @@ TEST_CASE("GridBlockCoords::Difference", "[grid]")
         CHECK(result.m_parts[3] == wxGridNoBlockCoords);
     }
 
-    SECTION("Blocks doesn't intersects")
+    SUBCASE("Blocks doesn't intersects")
     {
         const wxGridBlockCoords block1(1, 1, 3, 3);
         const wxGridBlockCoords block2(5, 5, 7, 7);
@@ -2185,9 +2181,9 @@ TEST_CASE("GridBlockCoords::Difference", "[grid]")
 }
 
 
-TEST_CASE("GridBlockCoords::SymDifference", "[grid]")
+TEST_CASE("GridBlockCoords::SymDifference")
 {
-    SECTION("With contained block")
+    SUBCASE("With contained block")
     {
         const wxGridBlockCoords block1(1, 1, 7, 7);
         const wxGridBlockCoords block2(3, 3, 5, 5);
@@ -2199,7 +2195,7 @@ TEST_CASE("GridBlockCoords::SymDifference", "[grid]")
         CHECK(result.m_parts[3] == wxGridBlockCoords(3, 6, 5, 7));
     }
 
-    SECTION("Blocks intersect by the corner")
+    SUBCASE("Blocks intersect by the corner")
     {
         const wxGridBlockCoords block1(1, 1, 5, 5);
         const wxGridBlockCoords block2(3, 3, 7, 7);
@@ -2211,7 +2207,7 @@ TEST_CASE("GridBlockCoords::SymDifference", "[grid]")
         CHECK(result.m_parts[3] == wxGridBlockCoords(3, 6, 5, 7));
     }
 
-    SECTION("Blocks are the same")
+    SUBCASE("Blocks are the same")
     {
         const wxGridBlockCoords block1(1, 1, 3, 3);
         const wxGridBlockCoords block2(1, 1, 3, 3);
@@ -2223,7 +2219,7 @@ TEST_CASE("GridBlockCoords::SymDifference", "[grid]")
         CHECK(result.m_parts[3] == wxGridNoBlockCoords);
     }
 
-    SECTION("Blocks doesn't intersects")
+    SUBCASE("Blocks doesn't intersects")
     {
         const wxGridBlockCoords block1(1, 1, 3, 3);
         const wxGridBlockCoords block2(5, 5, 7, 7);
