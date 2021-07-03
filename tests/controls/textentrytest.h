@@ -563,7 +563,7 @@ namespace
 // specifying and not specifying wxTE_PROCESS_ENTER and handling or not
 // handling the resulting event work as expected.
 
-void TestProcessEnter(const TextLikeControlCreator& controlCreator)
+inline void TestProcessEnter(const TextLikeControlCreator& controlCreator)
 {
     if ( !EnableUITests() )
     {
@@ -631,7 +631,7 @@ void TestProcessEnter(const TextLikeControlCreator& controlCreator)
 
 #else // !wxUSE_UIACTIONSIMULATOR
 
-void TestProcessEnter(const TextLikeControlCreator& WXUNUSED(controlCreator))
+inline void TestProcessEnter(const TextLikeControlCreator& WXUNUSED(controlCreator))
 {
     WARN("Skipping wxTE_PROCESS_ENTER tests: wxUIActionSimulator not available");
 }
