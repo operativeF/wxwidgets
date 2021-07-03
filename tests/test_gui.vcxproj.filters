@@ -248,6 +248,9 @@
     <ClCompile Include="controls\comboboxtest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="controls\bitmapcomboboxtest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="controls\dataviewctrltest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

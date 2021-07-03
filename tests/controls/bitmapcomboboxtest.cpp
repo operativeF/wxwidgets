@@ -23,88 +23,57 @@
 #include "itemcontainertest.h"
 #include "asserthelper.h"
 
-class BitmapComboBoxTestCase : public TextEntryTestCase,
-                               public ItemContainerTestCase,
-                               public CppUnit::TestCase
+using BitmapComboBoxTest = ItemContainerTest<wxBitmapComboBox>;
+
+TEST_CASE_FIXTURE(BitmapComboBoxTest, "Bitmap combobox test")
 {
-public:
-    BitmapComboBoxTestCase() { }
+    m_container = std::make_unique<wxBitmapComboBox>(wxTheApp->GetTopWindow(),
+                                                     wxID_ANY);
 
-    void setUp() override;
-    void tearDown() override;
-
-private:
-    wxTextEntry *GetTestEntry() const override { return m_combo; }
-    wxWindow *GetTestWindow() const override { return m_combo; }
-
-    wxItemContainer *GetContainer() const override { return m_combo; }
-    wxWindow *GetContainerWindow() const override { return m_combo; }
-
-    void CheckStringSelection(const char * WXUNUSED(sel)) override
+    SUBCASE("Bitmap")
     {
-        // do nothing here, as explained in TextEntryTestCase comment, our
-        // GetStringSelection() is the wxChoice, not wxTextEntry, one and there
-        // is no way to return the selection contents directly
+        std::vector<wxString> items;
+        items.push_back("item 0");
+        items.push_back("item 1");
+
+        for( const auto& item : items )
+            m_container->Append(item);
+
+        CHECK(!m_container->GetItemBitmap(0).IsOk());
+
+        wxBitmap bitmap = wxArtProvider::GetIcon(wxART_INFORMATION, wxART_OTHER,
+                                                 wxSize(16, 16));
+
+        m_container->Append("item with bitmap", bitmap);
+
+        CHECK(m_container->GetItemBitmap(2).IsOk());
+
+        m_container->Insert("item with bitmap", bitmap, 1);
+
+        CHECK(m_container->GetItemBitmap(1).IsOk());
+
+        m_container->SetItemBitmap(0, bitmap);
+
+        CHECK(m_container->GetItemBitmap(0).IsOk());
+
+        CHECK_EQ(wxSize(16, 16), m_container->GetBitmapSize());
+
+        m_container->SetSelection( 1 );
+
+        CHECK_EQ( m_container->GetStringSelection(), "item with bitmap" );
     }
 
-    CPPUNIT_TEST_SUITE( BitmapComboBoxTestCase );
-        wxTEXT_ENTRY_TESTS();
-        wxITEM_CONTAINER_TESTS();
-        CPPUNIT_TEST( Bitmap );
-    CPPUNIT_TEST_SUITE_END();
-
-    void Bitmap();
-
-    wxBitmapComboBox *m_combo;
-
-    BitmapComboBoxTestCase(const BitmapComboBoxTestCase&) = delete;
-	BitmapComboBoxTestCase& operator=(const BitmapComboBoxTestCase&) = delete;
-};
-
-wxREGISTER_UNIT_TEST_WITH_TAGS(BitmapComboBoxTestCase,
-                               "[BitmapComboBoxTestCase][item-container]");
-
-void BitmapComboBoxTestCase::setUp()
-{
-    m_combo = new wxBitmapComboBox(wxTheApp->GetTopWindow(), wxID_ANY);
+    //wxITEM_CONTAINER_TESTS();
 }
 
-void BitmapComboBoxTestCase::tearDown()
+using BitmapComboBoxTextTest = TextEntryTest<wxBitmapComboBox>;
+
+TEST_CASE_FIXTURE(BitmapComboBoxTextTest, "Bitmap combobox test")
 {
-    wxDELETE(m_combo);
-}
+    m_entry = std::make_unique<wxBitmapComboBox>(wxTheApp->GetTopWindow(),
+                                                 wxID_ANY);
 
-void BitmapComboBoxTestCase::Bitmap()
-{
-    std::vector<wxString> items;
-    items.push_back("item 0");
-    items.push_back("item 1");
-    // TODO: Add wxBitmapComboBoxBase::Append(wxArrayString )
-    for( unsigned int i = 0; i < items.size(); ++i )
-        m_combo->Append(items[i]);
-
-    CHECK(!m_combo->GetItemBitmap(0).IsOk());
-
-    wxBitmap bitmap = wxArtProvider::GetIcon(wxART_INFORMATION, wxART_OTHER,
-                                             wxSize(16, 16));
-
-    m_combo->Append("item with bitmap", bitmap);
-
-    CHECK(m_combo->GetItemBitmap(2).IsOk());
-
-    m_combo->Insert("item with bitmap", bitmap, 1);
-
-    CHECK(m_combo->GetItemBitmap(1).IsOk());
-
-    m_combo->SetItemBitmap(0, bitmap);
-
-    CHECK(m_combo->GetItemBitmap(0).IsOk());
-
-    CHECK_EQ(wxSize(16, 16), m_combo->GetBitmapSize());
-
-    m_combo->SetSelection( 1 );
-
-    CHECK_EQ( m_combo->GetStringSelection(), "item with bitmap" );
+    wxTEXT_ENTRY_TESTS();
 }
 
 #endif //wxUSE_BITMAPCOMBOBOX
