@@ -569,6 +569,7 @@
     <ClCompile Include="menu\menu.cpp" />
     <ClCompile Include="misc\garbage.cpp" />
     <ClCompile Include="misc\guifuncs.cpp" />
+    <ClCompile Include="misc\safearrayconverttest.cpp" />
     <ClCompile Include="misc\selstoretest.cpp" />
     <ClCompile Include="misc\settings.cpp" />
     <ClCompile Include="persistence\dataview.cpp" />

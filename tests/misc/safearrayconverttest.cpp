@@ -25,44 +25,9 @@ inline std::ostream& operator<<(std::ostream& ostr, const wxVariant& v)
     return ostr;
 }
 
-// ----------------------------------------------------------------------------
-// test class
-// ----------------------------------------------------------------------------
-
-class SafeArrayConvertTestCase  : public CppUnit::TestCase
-{
-public:
-    SafeArrayConvertTestCase () { }
-
-private:
-     CPPUNIT_TEST_SUITE( SafeArrayConvertTestCase  );
-        CPPUNIT_TEST( VariantListDefault );
-        CPPUNIT_TEST( VariantStringsDefault );
-        CPPUNIT_TEST( VariantListReturnSafeArray );
-        CPPUNIT_TEST( StringsReturnSafeArray );
-     CPPUNIT_TEST_SUITE_END();
-
-    void VariantListDefault();
-    void VariantStringsDefault();
-
-    void VariantListReturnSafeArray();
-    void StringsReturnSafeArray();
-
-    SafeArrayConvertTestCase(const SafeArrayConvertTestCase&) = delete;
-	SafeArrayConvertTestCase& operator=(const SafeArrayConvertTestCase&) = delete;
-};
-
-// register in the unnamed registry so that these tests are run by default
-CPPUNIT_TEST_SUITE_REGISTRATION( SafeArrayConvertTestCase  );
-
-// also include in its own registry so that these tests can be run alone
-CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( SafeArrayConvertTestCase, "SafeArrayConvertTestCase" );
-
-
-
 // test converting a wxVariant with the list type to an OLE VARIANT
 // and back to wxVariant the list type
-void SafeArrayConvertTestCase::VariantListDefault()
+TEST_CASE("VariantListDefault")
 {
     wxVariant variant;
     VARIANT oleVariant;
@@ -82,7 +47,7 @@ void SafeArrayConvertTestCase::VariantListDefault()
 
 // test converting a wxVariant with the arrstring type to an OLE VARIANT
 // and back to a wxVariant with the arrstring type
-void SafeArrayConvertTestCase::VariantStringsDefault()
+TEST_CASE("VariantStringsDefault")
 {
     wxVariant variant;
     std::vector<wxString> as;
@@ -102,7 +67,7 @@ void SafeArrayConvertTestCase::VariantStringsDefault()
 
 // test converting a wxVariant with the list type to an OLE VARIANT
 // and then to a wxVariant with the safearray type
-void SafeArrayConvertTestCase::VariantListReturnSafeArray()
+TEST_CASE("VariantListReturnSafeArray")
 {
     wxVariant variant;
     VARIANT oleVariant;
@@ -152,7 +117,7 @@ void SafeArrayConvertTestCase::VariantListReturnSafeArray()
 
 // test converting a wxArrayString to an OLE VARIANT
 // and then to a wxVariant with the safearray type
-void SafeArrayConvertTestCase::StringsReturnSafeArray()
+TEST_CASE("StringsReturnSafeArray")
 {
     std::vector<wxString> as;
     wxSafeArray<VT_BSTR> safeArray;
