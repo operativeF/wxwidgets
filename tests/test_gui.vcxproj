@@ -495,6 +495,7 @@
     <ClCompile Include="controls\choicebooktest.cpp" />
     <ClCompile Include="controls\choicetest.cpp" />
     <ClCompile Include="controls\comboboxtest.cpp" />
+    <ClCompile Include="controls\dataviewctrltest.cpp" />
     <ClCompile Include="controls\datepickerctrltest.cpp" />
     <ClCompile Include="controls\dialogtest.cpp" />
     <ClCompile Include="controls\frametest.cpp" />

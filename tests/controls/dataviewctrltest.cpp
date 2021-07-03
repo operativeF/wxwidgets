@@ -147,7 +147,7 @@ MultiColumnsDataViewCtrlTestCase::~MultiColumnsDataViewCtrlTestCase()
 // the tests themselves
 // ----------------------------------------------------------------------------
 
-TEST_CASE_METHOD(MultiSelectDataViewCtrlTestCase,
+TEST_CASE_FIXTURE(MultiSelectDataViewCtrlTestCase,
                  "wxDVC::Selection",
                  "[wxDataViewCtrl][select]")
 {
@@ -171,7 +171,7 @@ TEST_CASE_METHOD(MultiSelectDataViewCtrlTestCase,
     CHECK( sel2.empty() );
 }
 
-TEST_CASE_METHOD(MultiSelectDataViewCtrlTestCase,
+TEST_CASE_FIXTURE(MultiSelectDataViewCtrlTestCase,
                  "wxDVC::DeleteSelected",
                  "[wxDataViewCtrl][delete]")
 {
@@ -200,7 +200,7 @@ TEST_CASE_METHOD(MultiSelectDataViewCtrlTestCase,
     CHECK( sel[0] == m_child2 );
 }
 
-TEST_CASE_METHOD(MultiSelectDataViewCtrlTestCase,
+TEST_CASE_FIXTURE(MultiSelectDataViewCtrlTestCase,
                  "wxDVC::DeleteNotSelected",
                  "[wxDataViewCtrl][delete]")
 {
@@ -246,7 +246,7 @@ void DataViewCtrlTestCase::TestSelectionFor0and1()
     CHECK( selections[0] == m_child1 );
 }
 
-TEST_CASE_METHOD(MultiSelectDataViewCtrlTestCase,
+TEST_CASE_FIXTURE(MultiSelectDataViewCtrlTestCase,
                  "wxDVC::GetSelectionForMulti",
                  "[wxDataViewCtrl][select]")
 {
@@ -263,14 +263,14 @@ TEST_CASE_METHOD(MultiSelectDataViewCtrlTestCase,
     CHECK( selections[1] == m_child2 );
 }
 
-TEST_CASE_METHOD(SingleSelectDataViewCtrlTestCase,
+TEST_CASE_FIXTURE(SingleSelectDataViewCtrlTestCase,
                  "wxDVC::SingleSelection",
                  "[wxDataViewCtrl][selection]")
 {
     TestSelectionFor0and1();
 }
 
-TEST_CASE_METHOD(SingleSelectDataViewCtrlTestCase,
+TEST_CASE_FIXTURE(SingleSelectDataViewCtrlTestCase,
                  "wxDVC::IsExpanded",
                  "[wxDataViewCtrl][expand]")
 {
@@ -299,7 +299,7 @@ TEST_CASE_METHOD(SingleSelectDataViewCtrlTestCase,
     CHECK( m_dvc->IsExpanded(m_child1) );
 }
 
-TEST_CASE_METHOD(SingleSelectDataViewCtrlTestCase,
+TEST_CASE_FIXTURE(SingleSelectDataViewCtrlTestCase,
                  "wxDVC::GetItemRect",
                  "[wxDataViewCtrl][item]")
 {
@@ -371,7 +371,7 @@ TEST_CASE_METHOD(SingleSelectDataViewCtrlTestCase,
     CHECK( rectRoot == wxRect() );
 }
 
-TEST_CASE_METHOD(SingleSelectDataViewCtrlTestCase,
+TEST_CASE_FIXTURE(SingleSelectDataViewCtrlTestCase,
                  "wxDVC::DeleteAllItems",
                  "[wxDataViewCtrl][delete]")
 {
@@ -385,7 +385,7 @@ TEST_CASE_METHOD(SingleSelectDataViewCtrlTestCase,
     CHECK( m_dvc->GetChildCount(wxDataViewItem()) == 0 );
 }
 
-TEST_CASE_METHOD(MultiColumnsDataViewCtrlTestCase,
+TEST_CASE_FIXTURE(MultiColumnsDataViewCtrlTestCase,
                  "wxDVC::AppendTextColumn",
                  "[wxDataViewCtrl][column]")
 {
