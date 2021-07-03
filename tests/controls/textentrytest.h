@@ -434,6 +434,8 @@ private:
 // wxTextCtrl or wxComboBox) with the given flag.
 struct TextLikeControlCreator
 {
+    virtual ~TextLikeControlCreator() = default;
+
     // Create the control of the right type using the given parent and style.
     virtual wxControl* Create(wxWindow* parent, int style) const = 0;
 

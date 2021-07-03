@@ -515,12 +515,15 @@
     <ClCompile Include="controls\pickertest.cpp" />
     <ClCompile Include="controls\radioboxtest.cpp" />
     <ClCompile Include="controls\radiobuttontest.cpp" />
+    <ClCompile Include="controls\rearrangelisttest.cpp" />
     <ClCompile Include="controls\richtextctrltest.cpp" />
     <ClCompile Include="controls\searchctrltest.cpp" />
     <ClCompile Include="controls\simplebooktest.cpp" />
     <ClCompile Include="controls\slidertest.cpp" />
     <ClCompile Include="controls\spinctrldbltest.cpp" />
     <ClCompile Include="controls\spinctrltest.cpp" />
+    <ClCompile Include="controls\styledtextctrltest.cpp" />
+    <ClCompile Include="controls\textctrltest.cpp" />
     <ClCompile Include="controls\togglebuttontest.cpp" />
     <ClCompile Include="controls\toolbooktest.cpp" />
     <ClCompile Include="controls\treebooktest.cpp" />

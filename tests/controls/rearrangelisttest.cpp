@@ -21,141 +21,104 @@
 #include "itemcontainertest.h"
 #include "testableframe.h"
 
-class RearrangeListTestCase : public ItemContainerTestCase, public CppUnit::TestCase
+using RearrangeListTest = ItemContainerTest<wxRearrangeList>;
+
+TEST_CASE_FIXTURE(RearrangeListTest, "Rearrange list control test")
 {
-public:
-    RearrangeListTestCase() { }
+    auto m_rearrange = std::make_unique<wxRearrangeList>(wxTheApp->GetTopWindow(),
+                                                         wxID_ANY,
+                                                         wxDefaultPosition,
+                                                         wxDefaultSize,
+                                                         std::vector<int>{},
+                                                         std::vector<wxString>{});
+    SUBCASE("Move")
+    {
+        std::vector<int> order;
+        order.push_back(1);
+        order.push_back(~2);
+        order.push_back(0);
 
-    void setUp() override;
-    void tearDown() override;
+        std::vector<wxString> items;
+        items.push_back("first");
+        items.push_back("second");
+        items.push_back("third");
 
-private:
-    wxItemContainer *GetContainer() const override { return m_rearrange; }
-    wxWindow *GetContainerWindow() const override { return m_rearrange; }
+        m_rearrange = std::make_unique<wxRearrangeList>(wxTheApp->GetTopWindow(),
+                                                        wxID_ANY, wxDefaultPosition,
+                                                        wxDefaultSize, order,
+                                                        items);
 
-    CPPUNIT_TEST_SUITE( RearrangeListTestCase );
-        wxITEM_CONTAINER_TESTS();
-        CPPUNIT_TEST( Move );
-        CPPUNIT_TEST( MoveClientData );
-    CPPUNIT_TEST_SUITE_END();
+        //Confusingly setselection sets the physical item rather than the
+        //item specified in the constructor
+        m_rearrange->SetSelection(0);
 
-    void Move();
-    void MoveClientData();
+        CHECK(!m_rearrange->CanMoveCurrentUp());
+        CHECK(m_rearrange->CanMoveCurrentDown());
 
-    wxRearrangeList* m_rearrange;
+        m_rearrange->SetSelection(1);
 
-    RearrangeListTestCase(const RearrangeListTestCase&) = delete;
-	RearrangeListTestCase& operator=(const RearrangeListTestCase&) = delete;
-};
+        CHECK(m_rearrange->CanMoveCurrentUp());
+        CHECK(m_rearrange->CanMoveCurrentDown());
 
-wxREGISTER_UNIT_TEST_WITH_TAGS(RearrangeListTestCase,
-                               "[RearrangeListTestCase][item-container]");
+        m_rearrange->SetSelection(2);
 
-void RearrangeListTestCase::setUp()
-{
-    //We do not add items here as the wxITEM_CONTAINER_TESTS add their own
-    std::vector<int> order;
-    std::vector<wxString> items;
+        CHECK(m_rearrange->CanMoveCurrentUp());
+        CHECK(!m_rearrange->CanMoveCurrentDown());
 
-    m_rearrange = new wxRearrangeList(wxTheApp->GetTopWindow(), wxID_ANY,
-                                      wxDefaultPosition, wxDefaultSize, order,
-                                      items);
-}
+        m_rearrange->MoveCurrentUp();
+        m_rearrange->SetSelection(0);
+        m_rearrange->MoveCurrentDown();
 
-void RearrangeListTestCase::tearDown()
-{
-    wxDELETE(m_rearrange);
-}
+        auto neworder = m_rearrange->GetCurrentOrder();
 
-void RearrangeListTestCase::Move()
-{
-    std::vector<int> order;
-    order.push_back(1);
-    order.push_back(~2);
-    order.push_back(0);
+        CHECK_EQ(neworder[0], 0);
+        CHECK_EQ(neworder[1], 1);
+        CHECK_EQ(neworder[2], ~2);
 
-    std::vector<wxString> items;
-    items.push_back("first");
-    items.push_back("second");
-    items.push_back("third");
+        CHECK_EQ("first", m_rearrange->GetString(0));
+        CHECK_EQ("second", m_rearrange->GetString(1));
+        CHECK_EQ("third", m_rearrange->GetString(2));
+    }
 
-    wxDELETE(m_rearrange);
+    SUBCASE("MoveClientData")
+    {
+        std::vector<int> order;
+        order.push_back(0);
+        order.push_back(1);
+        order.push_back(2);
 
-    m_rearrange = new wxRearrangeList(wxTheApp->GetTopWindow(), wxID_ANY,
-                                      wxDefaultPosition, wxDefaultSize, order,
-                                      items);
+        std::vector<wxString> items;
+        items.push_back("first");
+        items.push_back("second");
+        items.push_back("third");
 
-    //Confusingly setselection sets the physical item rather than the
-    //item specified in the constructor
-    m_rearrange->SetSelection(0);
+        wxClientData* item0data = new wxStringClientData("item0data");
+        wxClientData* item1data = new wxStringClientData("item1data");
+        wxClientData* item2data = new wxStringClientData("item2data");
 
-    CHECK(!m_rearrange->CanMoveCurrentUp());
-    CHECK(m_rearrange->CanMoveCurrentDown());
+        m_rearrange = std::make_unique<wxRearrangeList>(wxTheApp->GetTopWindow(),
+                                                        wxID_ANY, wxDefaultPosition,
+                                                        wxDefaultSize, order,
+                                                        items);
 
-    m_rearrange->SetSelection(1);
+        m_rearrange->SetClientObject(0, item0data);
+        m_rearrange->SetClientObject(1, item1data);
+        m_rearrange->SetClientObject(2, item2data);
 
-    CHECK(m_rearrange->CanMoveCurrentUp());
-    CHECK(m_rearrange->CanMoveCurrentDown());
+        m_rearrange->SetSelection(0);
+        m_rearrange->MoveCurrentDown();
 
-    m_rearrange->SetSelection(2);
+        m_rearrange->SetSelection(2);
+        m_rearrange->MoveCurrentUp();
 
-    CHECK(m_rearrange->CanMoveCurrentUp());
-    CHECK(!m_rearrange->CanMoveCurrentDown());
+        CHECK_EQ(item1data, m_rearrange->GetClientObject(0));
+        CHECK_EQ(item2data, m_rearrange->GetClientObject(1));
+        CHECK_EQ(item0data, m_rearrange->GetClientObject(2));
 
-    m_rearrange->MoveCurrentUp();
-    m_rearrange->SetSelection(0);
-    m_rearrange->MoveCurrentDown();
-
-    auto neworder = m_rearrange->GetCurrentOrder();
-
-    CHECK_EQ(neworder[0], 0);
-    CHECK_EQ(neworder[1], 1);
-    CHECK_EQ(neworder[2], ~2);
-
-    CHECK_EQ("first", m_rearrange->GetString(0));
-    CHECK_EQ("second", m_rearrange->GetString(1));
-    CHECK_EQ("third", m_rearrange->GetString(2));
-}
-
-void RearrangeListTestCase::MoveClientData()
-{
-    std::vector<int> order;
-    order.push_back(0);
-    order.push_back(1);
-    order.push_back(2);
-
-    std::vector<wxString> items;
-    items.push_back("first");
-    items.push_back("second");
-    items.push_back("third");
-
-    wxClientData* item0data = new wxStringClientData("item0data");
-    wxClientData* item1data = new wxStringClientData("item1data");
-    wxClientData* item2data = new wxStringClientData("item2data");
-
-    wxDELETE(m_rearrange);
-
-    m_rearrange = new wxRearrangeList(wxTheApp->GetTopWindow(), wxID_ANY,
-                                      wxDefaultPosition, wxDefaultSize, order,
-                                      items);
-
-    m_rearrange->SetClientObject(0, item0data);
-    m_rearrange->SetClientObject(1, item1data);
-    m_rearrange->SetClientObject(2, item2data);
-
-    m_rearrange->SetSelection(0);
-    m_rearrange->MoveCurrentDown();
-
-    m_rearrange->SetSelection(2);
-    m_rearrange->MoveCurrentUp();
-
-    CHECK_EQ(item1data, m_rearrange->GetClientObject(0));
-    CHECK_EQ(item2data, m_rearrange->GetClientObject(1));
-    CHECK_EQ(item0data, m_rearrange->GetClientObject(2));
-
-    CHECK_EQ("second", m_rearrange->GetString(0));
-    CHECK_EQ("third", m_rearrange->GetString(1));
-    CHECK_EQ("first", m_rearrange->GetString(2));
+        CHECK_EQ("second", m_rearrange->GetString(0));
+        CHECK_EQ("third", m_rearrange->GetString(1));
+        CHECK_EQ("first", m_rearrange->GetString(2));
+    }
 }
 
 #endif
