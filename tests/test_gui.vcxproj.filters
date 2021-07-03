@@ -257,6 +257,9 @@
     <ClCompile Include="controls\richtextctrltest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="controls\treectrltest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="controls\treelistctrltest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

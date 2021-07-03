@@ -520,6 +520,7 @@
     <ClCompile Include="controls\togglebuttontest.cpp" />
     <ClCompile Include="controls\toolbooktest.cpp" />
     <ClCompile Include="controls\treebooktest.cpp" />
+    <ClCompile Include="controls\treectrltest.cpp" />
     <ClCompile Include="controls\treelistctrltest.cpp" />
     <ClCompile Include="controls\virtlistctrltest.cpp" />
     <ClCompile Include="controls\webtest.cpp" />
