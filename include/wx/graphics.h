@@ -563,10 +563,10 @@ public:
 
     ~wxGraphicsContext() override;
 
-   wxGraphicsContext(const wxGraphicsContext&) = delete;
-   wxGraphicsContext& operator=(const wxGraphicsContext&) = delete;
-   wxGraphicsContext(wxGraphicsContext&&) = default;
-   wxGraphicsContext& operator=(wxGraphicsContext&&) = default;
+    wxGraphicsContext(const wxGraphicsContext&) = delete;
+    wxGraphicsContext& operator=(const wxGraphicsContext&) = delete;
+    wxGraphicsContext(wxGraphicsContext&&) = default;
+    wxGraphicsContext& operator=(wxGraphicsContext&&) = default;
 
     static wxGraphicsContext* Create( const wxWindowDC& dc);
     static wxGraphicsContext * Create( const wxMemoryDC& dc);
@@ -965,10 +965,10 @@ public:
     wxGraphicsRenderer() = default;
     ~wxGraphicsRenderer() override = default;
 
-   wxGraphicsRenderer(const wxGraphicsRenderer&) = delete;
-   wxGraphicsRenderer& operator=(const wxGraphicsRenderer&) = delete;
-   wxGraphicsRenderer(wxGraphicsRenderer&&) = default;
-   wxGraphicsRenderer& operator=(wxGraphicsRenderer&&) = default;
+    wxGraphicsRenderer(const wxGraphicsRenderer&) = delete;
+    wxGraphicsRenderer& operator=(const wxGraphicsRenderer&) = delete;
+    wxGraphicsRenderer(wxGraphicsRenderer&&) = default;
+    wxGraphicsRenderer& operator=(wxGraphicsRenderer&&) = default;
 
     static wxGraphicsRenderer* GetDefaultRenderer();
 

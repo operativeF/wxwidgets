@@ -46,10 +46,10 @@ public:
     // dtor deletes all the menu items we own
     ~wxMenuBase() override;
 
-   wxMenuBase(const wxMenuBase&) = delete;
-   wxMenuBase& operator=(const wxMenuBase&) = delete;
-   wxMenuBase(wxMenuBase&&) = default;
-   wxMenuBase& operator=(wxMenuBase&&) = default;
+    wxMenuBase(const wxMenuBase&) = delete;
+    wxMenuBase& operator=(const wxMenuBase&) = delete;
+    wxMenuBase(wxMenuBase&&) = default;
+    wxMenuBase& operator=(wxMenuBase&&) = default;
 
     // append any kind of item (normal/check/radio/separator)
     wxMenuItem* Append(int itemid,
@@ -622,10 +622,10 @@ public:
         m_menu.SetInvokingWindow(nullptr);
     }
 
-   wxMenuInvokingWindowSetter(const wxMenuInvokingWindowSetter&) = delete;
-   wxMenuInvokingWindowSetter& operator=(const wxMenuInvokingWindowSetter&) = delete;
-   wxMenuInvokingWindowSetter(wxMenuInvokingWindowSetter&&) = default;
-   wxMenuInvokingWindowSetter& operator=(wxMenuInvokingWindowSetter&&) = default;
+    wxMenuInvokingWindowSetter(const wxMenuInvokingWindowSetter&) = delete;
+    wxMenuInvokingWindowSetter& operator=(const wxMenuInvokingWindowSetter&) = delete;
+    wxMenuInvokingWindowSetter(wxMenuInvokingWindowSetter&&) = default;
+    wxMenuInvokingWindowSetter& operator=(wxMenuInvokingWindowSetter&&) = default;
 
 private:
     wxMenu& m_menu;

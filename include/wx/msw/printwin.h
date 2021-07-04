@@ -53,10 +53,10 @@ public:
                           wxPrintData *data);
     ~wxWindowsPrintPreview() override;
 
-wxWindowsPrintPreview(const wxWindowsPrintPreview&) = delete;
-   wxWindowsPrintPreview& operator=(const wxWindowsPrintPreview&) = delete;
-   wxWindowsPrintPreview(wxWindowsPrintPreview&&) = default;
-   wxWindowsPrintPreview& operator=(wxWindowsPrintPreview&&) = default;
+    wxWindowsPrintPreview(const wxWindowsPrintPreview&) = delete;
+    wxWindowsPrintPreview& operator=(const wxWindowsPrintPreview&) = delete;
+    wxWindowsPrintPreview(wxWindowsPrintPreview&&) = default;
+    wxWindowsPrintPreview& operator=(wxWindowsPrintPreview&&) = default;
 
     bool Print(bool interactive) override;
     void DetermineScaling() override;

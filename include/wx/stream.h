@@ -57,10 +57,10 @@ public:
     wxStreamBase() = default;
     virtual ~wxStreamBase() = default;
 
-   wxStreamBase(const wxStreamBase&) = delete;
-   wxStreamBase& operator=(const wxStreamBase&) = delete;
-   wxStreamBase(wxStreamBase&&) = default;
-   wxStreamBase& operator=(wxStreamBase&&) = default;
+    wxStreamBase(const wxStreamBase&) = delete;
+    wxStreamBase& operator=(const wxStreamBase&) = delete;
+    wxStreamBase(wxStreamBase&&) = default;
+    wxStreamBase& operator=(wxStreamBase&&) = default;
 
     // error testing
     wxStreamError GetLastError() const { return m_lasterror; }
@@ -237,10 +237,10 @@ public:
     wxOutputStream();
     ~wxOutputStream() override;
 
-   wxOutputStream(const wxOutputStream&) = delete;
-   wxOutputStream& operator=(const wxOutputStream&) = delete;
-   wxOutputStream(wxOutputStream&&) = default;
-   wxOutputStream& operator=(wxOutputStream&&) = default;
+    wxOutputStream(const wxOutputStream&) = delete;
+    wxOutputStream& operator=(const wxOutputStream&) = delete;
+    wxOutputStream(wxOutputStream&&) = default;
+    wxOutputStream& operator=(wxOutputStream&&) = default;
 
     void PutC(char c);
     virtual wxOutputStream& Write(const void *buffer, size_t size);
@@ -284,10 +284,10 @@ class WXDLLIMPEXP_BASE wxCountingOutputStream : public wxOutputStream
 public:
     wxCountingOutputStream();
 
-   wxCountingOutputStream(const wxCountingOutputStream&) = delete;
-   wxCountingOutputStream& operator=(const wxCountingOutputStream&) = delete;
-   wxCountingOutputStream(wxCountingOutputStream&&) = default;
-   wxCountingOutputStream& operator=(wxCountingOutputStream&&) = default;
+    wxCountingOutputStream(const wxCountingOutputStream&) = delete;
+    wxCountingOutputStream& operator=(const wxCountingOutputStream&) = delete;
+    wxCountingOutputStream(wxCountingOutputStream&&) = default;
+    wxCountingOutputStream& operator=(wxCountingOutputStream&&) = default;
 
     wxFileOffset GetLength() const override;
     bool Ok() const { return IsOk(); }
@@ -314,10 +314,10 @@ public:
     wxFilterInputStream(wxInputStream *stream);
     ~wxFilterInputStream() override;
 
-   wxFilterInputStream(const wxFilterInputStream&) = delete;
-   wxFilterInputStream& operator=(const wxFilterInputStream&) = delete;
-   wxFilterInputStream(wxFilterInputStream&&) = default;
-   wxFilterInputStream& operator=(wxFilterInputStream&&) = default;
+    wxFilterInputStream(const wxFilterInputStream&) = delete;
+    wxFilterInputStream& operator=(const wxFilterInputStream&) = delete;
+    wxFilterInputStream(wxFilterInputStream&&) = default;
+    wxFilterInputStream& operator=(wxFilterInputStream&&) = default;
 
     char Peek() override { return m_parent_i_stream->Peek(); }
 
@@ -338,10 +338,10 @@ public:
     wxFilterOutputStream(wxOutputStream *stream);
     ~wxFilterOutputStream() override;
 
-   wxFilterOutputStream(const wxFilterOutputStream&) = delete;
-   wxFilterOutputStream& operator=(const wxFilterOutputStream&) = delete;
-   wxFilterOutputStream(wxFilterOutputStream&&) = default;
-   wxFilterOutputStream& operator=(wxFilterOutputStream&&) = default;
+    wxFilterOutputStream(const wxFilterOutputStream&) = delete;
+    wxFilterOutputStream& operator=(const wxFilterOutputStream&) = delete;
+    wxFilterOutputStream(wxFilterOutputStream&&) = default;
+    wxFilterOutputStream& operator=(wxFilterOutputStream&&) = default;
 
     wxFileOffset GetLength() const override { return m_parent_o_stream->GetLength(); }
 
@@ -570,10 +570,10 @@ public:
 
     ~wxBufferedInputStream() override;
 
-   wxBufferedInputStream(const wxBufferedInputStream&) = delete;
-   wxBufferedInputStream& operator=(const wxBufferedInputStream&) = delete;
-   wxBufferedInputStream(wxBufferedInputStream&&) = default;
-   wxBufferedInputStream& operator=(wxBufferedInputStream&&) = default;
+    wxBufferedInputStream(const wxBufferedInputStream&) = delete;
+    wxBufferedInputStream& operator=(const wxBufferedInputStream&) = delete;
+    wxBufferedInputStream(wxBufferedInputStream&&) = default;
+    wxBufferedInputStream& operator=(wxBufferedInputStream&&) = default;
 
     char Peek() override;
     wxInputStream& Read(void *buffer, size_t size) override;
@@ -616,10 +616,10 @@ public:
 
     ~wxBufferedOutputStream() override;
 
-   wxBufferedOutputStream(const wxBufferedOutputStream&) = delete;
-   wxBufferedOutputStream& operator=(const wxBufferedOutputStream&) = delete;
-   wxBufferedOutputStream(wxBufferedOutputStream&&) = default;
-   wxBufferedOutputStream& operator=(wxBufferedOutputStream&&) = default;
+    wxBufferedOutputStream(const wxBufferedOutputStream&) = delete;
+    wxBufferedOutputStream& operator=(const wxBufferedOutputStream&) = delete;
+    wxBufferedOutputStream(wxBufferedOutputStream&&) = default;
+    wxBufferedOutputStream& operator=(wxBufferedOutputStream&&) = default;
 
     wxOutputStream& Write(const void *buffer, size_t size) override;
 
@@ -661,10 +661,10 @@ public:
     wxWrapperInputStream(wxInputStream& stream);
     wxWrapperInputStream(wxInputStream* stream);
 
-   wxWrapperInputStream(const wxWrapperInputStream&) = delete;
-   wxWrapperInputStream& operator=(const wxWrapperInputStream&) = delete;
-   wxWrapperInputStream(wxWrapperInputStream&&) = default;
-   wxWrapperInputStream& operator=(wxWrapperInputStream&&) = default;
+    wxWrapperInputStream(const wxWrapperInputStream&) = delete;
+    wxWrapperInputStream& operator=(const wxWrapperInputStream&) = delete;
+    wxWrapperInputStream(wxWrapperInputStream&&) = default;
+    wxWrapperInputStream& operator=(wxWrapperInputStream&&) = default;
 
     // Override the base class methods to forward to the wrapped stream.
     wxFileOffset GetLength() const override;

@@ -154,10 +154,10 @@ public:
 
     wxGBSizerItem();
 
-   wxGBSizerItem(const wxGBSizerItem&) = delete;
-   wxGBSizerItem& operator=(const wxGBSizerItem&) = delete;
-   wxGBSizerItem(wxGBSizerItem&&) = default;
-   wxGBSizerItem& operator=(wxGBSizerItem&&) = default;
+    wxGBSizerItem(const wxGBSizerItem&) = delete;
+    wxGBSizerItem& operator=(const wxGBSizerItem&) = delete;
+    wxGBSizerItem(wxGBSizerItem&&) = default;
+    wxGBSizerItem& operator=(wxGBSizerItem&&) = default;
 
     // Get the grid position of the item
     wxGBPosition GetPos() const { return m_pos; }
@@ -212,10 +212,10 @@ class WXDLLIMPEXP_CORE wxGridBagSizer : public wxFlexGridSizer
 public:
     wxGridBagSizer(int vgap = 0, int hgap = 0 );
 
-   wxGridBagSizer(const wxGridBagSizer&) = delete;
-   wxGridBagSizer& operator=(const wxGridBagSizer&) = delete;
-   wxGridBagSizer(wxGridBagSizer&&) = default;
-   wxGridBagSizer& operator=(wxGridBagSizer&&) = default;
+    wxGridBagSizer(const wxGridBagSizer&) = delete;
+    wxGridBagSizer& operator=(const wxGridBagSizer&) = delete;
+    wxGridBagSizer(wxGridBagSizer&&) = default;
+    wxGridBagSizer& operator=(wxGridBagSizer&&) = default;
 
     // The Add methods return true if the item was successfully placed at the
     // given position, false if something was already there.

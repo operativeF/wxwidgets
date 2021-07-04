@@ -45,6 +45,7 @@ class WXDLLIMPEXP_CORE wxPreferencesPage
 public:
     wxPreferencesPage() = default;
     virtual ~wxPreferencesPage() = default;
+
     wxPreferencesPage(const wxPreferencesPage&) = delete;
     wxPreferencesPage& operator=(const wxPreferencesPage&) = delete;
     wxPreferencesPage(wxPreferencesPage&&) = default;
@@ -98,10 +99,10 @@ public:
     // Ctor creates an empty editor, use AddPage() to add controls to it.
     wxPreferencesEditor(const wxString& title = wxString());
 
-   wxPreferencesEditor(const wxPreferencesEditor&) = delete;
-   wxPreferencesEditor& operator=(const wxPreferencesEditor&) = delete;
-   wxPreferencesEditor(wxPreferencesEditor&&) = default;
-   wxPreferencesEditor& operator=(wxPreferencesEditor&&) = default;
+    wxPreferencesEditor(const wxPreferencesEditor&) = delete;
+    wxPreferencesEditor& operator=(const wxPreferencesEditor&) = delete;
+    wxPreferencesEditor(wxPreferencesEditor&&) = default;
+    wxPreferencesEditor& operator=(wxPreferencesEditor&&) = default;
     
     // Dtor destroys the dialog if still shown.
     virtual ~wxPreferencesEditor();

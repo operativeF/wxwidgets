@@ -70,10 +70,10 @@ public:
         Create(parent, winid, pos, size, style, name);
     }
 
-   wxAddRemoveCtrl(const wxAddRemoveCtrl&) = delete;
-   wxAddRemoveCtrl& operator=(const wxAddRemoveCtrl&) = delete;
-   wxAddRemoveCtrl(wxAddRemoveCtrl&&) = default;
-   wxAddRemoveCtrl& operator=(wxAddRemoveCtrl&&) = default;
+    wxAddRemoveCtrl(const wxAddRemoveCtrl&) = delete;
+    wxAddRemoveCtrl& operator=(const wxAddRemoveCtrl&) = delete;
+    wxAddRemoveCtrl(wxAddRemoveCtrl&&) = default;
+    wxAddRemoveCtrl& operator=(wxAddRemoveCtrl&&) = default;
 
     bool Create(wxWindow* parent,
                 wxWindowID winid = wxID_ANY,

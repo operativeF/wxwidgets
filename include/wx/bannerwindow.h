@@ -76,10 +76,10 @@ public:
         Create(parent, winid, dir, pos, size, style, name);
     }
 
-   wxBannerWindow(const wxBannerWindow&) = delete;
-   wxBannerWindow& operator=(const wxBannerWindow&) = delete;
-   wxBannerWindow(wxBannerWindow&&) = default;
-   wxBannerWindow& operator=(wxBannerWindow&&) = default;
+    wxBannerWindow(const wxBannerWindow&) = delete;
+    wxBannerWindow& operator=(const wxBannerWindow&) = delete;
+    wxBannerWindow(wxBannerWindow&&) = default;
+    wxBannerWindow& operator=(wxBannerWindow&&) = default;
 
     // Can be only called on objects created with the default constructor.
     bool Create(wxWindow* parent,

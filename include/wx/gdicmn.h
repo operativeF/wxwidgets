@@ -986,10 +986,10 @@ public:
     wxStockGDI();
     virtual ~wxStockGDI();
 
-   wxStockGDI(const wxStockGDI&) = delete;
-   wxStockGDI& operator=(const wxStockGDI&) = delete;
-   wxStockGDI(wxStockGDI&&) = default;
-   wxStockGDI& operator=(wxStockGDI&&) = default;
+    wxStockGDI(const wxStockGDI&) = delete;
+    wxStockGDI& operator=(const wxStockGDI&) = delete;
+    wxStockGDI(wxStockGDI&&) = default;
+    wxStockGDI& operator=(wxStockGDI&&) = default;
 
     static void DeleteAll();
 

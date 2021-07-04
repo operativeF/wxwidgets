@@ -141,10 +141,10 @@ public:
     // dtor will save unsaved data
   ~wxFileConfig() override;
 
- wxFileConfig(const wxFileConfig&) = delete;
-   wxFileConfig& operator=(const wxFileConfig&) = delete;
-   wxFileConfig(wxFileConfig&&) = default;
-   wxFileConfig& operator=(wxFileConfig&&) = default;
+  wxFileConfig(const wxFileConfig&) = delete;
+  wxFileConfig& operator=(const wxFileConfig&) = delete;
+  wxFileConfig(wxFileConfig&&) = default;
+  wxFileConfig& operator=(wxFileConfig&&) = default;
 
   // under Unix, set the umask to be used for the file creation, do nothing
   // under other systems

@@ -64,6 +64,9 @@ public:
     wxWindowsPrintDialog(wxWindow *parent, wxPrintData* data);
     ~wxWindowsPrintDialog() override;
 
+    wxWindowsPrintDialog(const wxWindowsPrintDialog&) = delete;
+    wxWindowsPrintDialog& operator=(const wxWindowsPrintDialog&) = delete;
+
     bool Create(wxWindow *parent, wxPrintDialogData* data = nullptr);
     int ShowModal() override;
 
@@ -87,8 +90,6 @@ private:
 
 private:
     wxDECLARE_CLASS(wxWindowsPrintDialog);
-    wxWindowsPrintDialog(const wxWindowsPrintDialog&) = delete;
-	wxWindowsPrintDialog& operator=(const wxWindowsPrintDialog&) = delete;
 };
 
 // ---------------------------------------------------------------------------

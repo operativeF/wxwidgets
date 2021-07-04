@@ -51,10 +51,10 @@ public:
     wxGIFDecoder();
     ~wxGIFDecoder() override;
 
-   wxGIFDecoder(const wxGIFDecoder&) = delete;
-   wxGIFDecoder& operator=(const wxGIFDecoder&) = delete;
-   wxGIFDecoder(wxGIFDecoder&&) = default;
-   wxGIFDecoder& operator=(wxGIFDecoder&&) = default;
+    wxGIFDecoder(const wxGIFDecoder&) = delete;
+    wxGIFDecoder& operator=(const wxGIFDecoder&) = delete;
+    wxGIFDecoder(wxGIFDecoder&&) = default;
+    wxGIFDecoder& operator=(wxGIFDecoder&&) = default;
 
     // get data of current frame
     unsigned char* GetData(unsigned int frame) const;

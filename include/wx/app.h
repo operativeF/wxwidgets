@@ -537,6 +537,9 @@ public:
     wxAppBase();
     ~wxAppBase() override;
 
+    wxAppBase(const wxAppBase&) = delete;
+    wxAppBase& operator=(const wxAppBase&) = delete;
+
     // the virtual functions which may/must be overridden in the derived class
     // -----------------------------------------------------------------------
 
@@ -694,9 +697,6 @@ protected:
 
     // does any of our windows have focus?
     bool m_isActive{true};
-
-    wxAppBase(const wxAppBase&) = delete;
-	wxAppBase& operator=(const wxAppBase&) = delete;
 };
 
 // ----------------------------------------------------------------------------

@@ -38,10 +38,10 @@ class WXDLLIMPEXP_CORE wxStaticLineBase : public wxControl
 public:
     wxStaticLineBase() = default;
 
-   wxStaticLineBase(const wxStaticLineBase&) = delete;
-   wxStaticLineBase& operator=(const wxStaticLineBase&) = delete;
-   wxStaticLineBase(wxStaticLineBase&&) = default;
-   wxStaticLineBase& operator=(wxStaticLineBase&&) = default;
+    wxStaticLineBase(const wxStaticLineBase&) = delete;
+    wxStaticLineBase& operator=(const wxStaticLineBase&) = delete;
+    wxStaticLineBase(wxStaticLineBase&&) = default;
+    wxStaticLineBase& operator=(wxStaticLineBase&&) = default;
 
     // is the line vertical?
     bool IsVertical() const { return (GetWindowStyle() & wxLI_VERTICAL) != 0; }

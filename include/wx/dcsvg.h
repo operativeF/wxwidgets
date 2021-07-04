@@ -88,10 +88,10 @@ public:
 
     ~wxSVGFileDCImpl() override;
 
-   wxSVGFileDCImpl(const wxSVGFileDCImpl&) = delete;
-   wxSVGFileDCImpl& operator=(const wxSVGFileDCImpl&) = delete;
-   wxSVGFileDCImpl(wxSVGFileDCImpl&&) = default;
-   wxSVGFileDCImpl& operator=(wxSVGFileDCImpl&&) = default;
+    wxSVGFileDCImpl(const wxSVGFileDCImpl&) = delete;
+    wxSVGFileDCImpl& operator=(const wxSVGFileDCImpl&) = delete;
+    wxSVGFileDCImpl(wxSVGFileDCImpl&&) = default;
+    wxSVGFileDCImpl& operator=(wxSVGFileDCImpl&&) = default;
 
     bool IsOk() const override { return m_OK; }
 

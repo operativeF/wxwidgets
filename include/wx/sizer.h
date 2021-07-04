@@ -350,10 +350,10 @@ public:
     wxSizerItem() = default;
     ~wxSizerItem() override;
 
-   wxSizerItem(const wxSizerItem&) = delete;
-   wxSizerItem& operator=(const wxSizerItem&) = delete;
-   wxSizerItem(wxSizerItem&&) = default;
-   wxSizerItem& operator=(wxSizerItem&&) = default;
+    wxSizerItem(const wxSizerItem&) = delete;
+    wxSizerItem& operator=(const wxSizerItem&) = delete;
+    wxSizerItem(wxSizerItem&&) = default;
+    wxSizerItem& operator=(wxSizerItem&&) = default;
 
     virtual void DeleteWindows();
 
@@ -912,10 +912,10 @@ public:
 
     ~wxFlexGridSizer() override = default;
 
-   wxFlexGridSizer(const wxFlexGridSizer&) = delete;
-   wxFlexGridSizer& operator=(const wxFlexGridSizer&) = delete;
-   wxFlexGridSizer(wxFlexGridSizer&&) = default;
-   wxFlexGridSizer& operator=(wxFlexGridSizer&&) = default;
+    wxFlexGridSizer(const wxFlexGridSizer&) = delete;
+    wxFlexGridSizer& operator=(const wxFlexGridSizer&) = delete;
+    wxFlexGridSizer(wxFlexGridSizer&&) = default;
+    wxFlexGridSizer& operator=(wxFlexGridSizer&&) = default;
 
     // set the rows/columns which will grow (the others will remain of the
     // constant initial size)
@@ -1080,10 +1080,10 @@ public:
     wxStaticBoxSizer(int orient, wxWindow *win, const wxString& label = wxEmptyString);
     ~wxStaticBoxSizer() override;
 
-   wxStaticBoxSizer(const wxStaticBoxSizer&) = delete;
-   wxStaticBoxSizer& operator=(const wxStaticBoxSizer&) = delete;
-   wxStaticBoxSizer(wxStaticBoxSizer&&) = default;
-   wxStaticBoxSizer& operator=(wxStaticBoxSizer&&) = default;
+    wxStaticBoxSizer(const wxStaticBoxSizer&) = delete;
+    wxStaticBoxSizer& operator=(const wxStaticBoxSizer&) = delete;
+    wxStaticBoxSizer(wxStaticBoxSizer&&) = default;
+    wxStaticBoxSizer& operator=(wxStaticBoxSizer&&) = default;
 
     wxSize CalcMin() override;
     void RepositionChildren(const wxSize& minSize) override;
@@ -1122,10 +1122,10 @@ public:
     // vertical for PDAs, horizontal for everything else?
     wxStdDialogButtonSizer();
 
-   wxStdDialogButtonSizer(const wxStdDialogButtonSizer&) = delete;
-   wxStdDialogButtonSizer& operator=(const wxStdDialogButtonSizer&) = delete;
-   wxStdDialogButtonSizer(wxStdDialogButtonSizer&&) = default;
-   wxStdDialogButtonSizer& operator=(wxStdDialogButtonSizer&&) = default;
+    wxStdDialogButtonSizer(const wxStdDialogButtonSizer&) = delete;
+    wxStdDialogButtonSizer& operator=(const wxStdDialogButtonSizer&) = delete;
+    wxStdDialogButtonSizer(wxStdDialogButtonSizer&&) = default;
+    wxStdDialogButtonSizer& operator=(wxStdDialogButtonSizer&&) = default;
 
     // Checks button ID against system IDs and sets one of the pointers below
     // to this button. Does not do any sizer-related things here.

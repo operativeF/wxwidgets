@@ -86,10 +86,10 @@ public:
     wxHashTableBase();
     virtual ~wxHashTableBase() = default;
 
-   wxHashTableBase(const wxHashTableBase&) = delete;
-   wxHashTableBase& operator=(const wxHashTableBase&) = delete;
-   wxHashTableBase(wxHashTableBase&&) = default;
-   wxHashTableBase& operator=(wxHashTableBase&&) = default;
+    wxHashTableBase(const wxHashTableBase&) = delete;
+    wxHashTableBase& operator=(const wxHashTableBase&) = delete;
+    wxHashTableBase(wxHashTableBase&&) = default;
+    wxHashTableBase& operator=(wxHashTableBase&&) = default;
 
     void Create( wxKeyType keyType = wxKEY_INTEGER,
                  size_t size = wxHASH_SIZE_DEFAULT );

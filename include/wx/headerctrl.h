@@ -291,10 +291,10 @@ public:
         Create(parent, winid, pos, size, style, name);
     }
 
-   wxHeaderCtrlSimple(const wxHeaderCtrlSimple&) = delete;
-   wxHeaderCtrlSimple& operator=(const wxHeaderCtrlSimple&) = delete;
-   wxHeaderCtrlSimple(wxHeaderCtrlSimple&&) = default;
-   wxHeaderCtrlSimple& operator=(wxHeaderCtrlSimple&&) = default;
+    wxHeaderCtrlSimple(const wxHeaderCtrlSimple&) = delete;
+    wxHeaderCtrlSimple& operator=(const wxHeaderCtrlSimple&) = delete;
+    wxHeaderCtrlSimple(wxHeaderCtrlSimple&&) = default;
+    wxHeaderCtrlSimple& operator=(wxHeaderCtrlSimple&&) = default;
 
     // managing the columns
     // --------------------

@@ -31,10 +31,10 @@ public:
     // Dtor unregisters the hook if it had been registered.
     virtual ~wxModalDialogHook() { DoUnregister(); }
 
-   wxModalDialogHook(const wxModalDialogHook&) = delete;
-   wxModalDialogHook& operator=(const wxModalDialogHook&) = delete;
-   wxModalDialogHook(wxModalDialogHook&&) = default;
-   wxModalDialogHook& operator=(wxModalDialogHook&&) = default;
+    wxModalDialogHook(const wxModalDialogHook&) = delete;
+    wxModalDialogHook& operator=(const wxModalDialogHook&) = delete;
+    wxModalDialogHook(wxModalDialogHook&&) = default;
+    wxModalDialogHook& operator=(wxModalDialogHook&&) = default;
 
     // Register this hook as being active, i.e. its Enter() and Exit() methods
     // will be called.
@@ -90,10 +90,10 @@ public:
         wxModalDialogHook::CallExit(m_dialog);
     }
 
-   wxModalDialogHookExitGuard(const wxModalDialogHookExitGuard&) = delete;
-   wxModalDialogHookExitGuard& operator=(const wxModalDialogHookExitGuard&) = delete;
-   wxModalDialogHookExitGuard(wxModalDialogHookExitGuard&&) = default;
-   wxModalDialogHookExitGuard& operator=(wxModalDialogHookExitGuard&&) = default;
+    wxModalDialogHookExitGuard(const wxModalDialogHookExitGuard&) = delete;
+    wxModalDialogHookExitGuard& operator=(const wxModalDialogHookExitGuard&) = delete;
+    wxModalDialogHookExitGuard(wxModalDialogHookExitGuard&&) = default;
+    wxModalDialogHookExitGuard& operator=(wxModalDialogHookExitGuard&&) = default;
     
 private:
     wxDialog* const m_dialog;

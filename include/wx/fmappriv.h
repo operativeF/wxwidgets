@@ -53,10 +53,10 @@ public:
             m_fontMapper->RestorePath(m_pathOld);
     }
 
-   wxFontMapperPathChanger(const wxFontMapperPathChanger&) = delete;
-   wxFontMapperPathChanger& operator=(const wxFontMapperPathChanger&) = delete;
-   wxFontMapperPathChanger(wxFontMapperPathChanger&&) = default;
-   wxFontMapperPathChanger& operator=(wxFontMapperPathChanger&&) = default;
+    wxFontMapperPathChanger(const wxFontMapperPathChanger&) = delete;
+    wxFontMapperPathChanger& operator=(const wxFontMapperPathChanger&) = delete;
+    wxFontMapperPathChanger(wxFontMapperPathChanger&&) = default;
+    wxFontMapperPathChanger& operator=(wxFontMapperPathChanger&&) = default;
 
 private:
     // the fontmapper object we're working with

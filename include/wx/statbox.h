@@ -29,10 +29,10 @@ class WXDLLIMPEXP_CORE wxStaticBoxBase : public wxNavigationEnabled<wxControl>
 public:
     wxStaticBoxBase();
 
-   wxStaticBoxBase(const wxStaticBoxBase&) = delete;
-   wxStaticBoxBase& operator=(const wxStaticBoxBase&) = delete;
-   wxStaticBoxBase(wxStaticBoxBase&&) = default;
-   wxStaticBoxBase& operator=(wxStaticBoxBase&&) = default;
+    wxStaticBoxBase(const wxStaticBoxBase&) = delete;
+    wxStaticBoxBase& operator=(const wxStaticBoxBase&) = delete;
+    wxStaticBoxBase(wxStaticBoxBase&&) = default;
+    wxStaticBoxBase& operator=(wxStaticBoxBase&&) = default;
 
     // overridden base class virtuals
     bool HasTransparentBackground() override { return true; }

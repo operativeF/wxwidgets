@@ -297,10 +297,10 @@ public:
     wxFSInputStream(const wxString& filename, int flags = 0);
     ~wxFSInputStream() override;
 
-   wxFSInputStream(const wxFSInputStream&) = delete;
-   wxFSInputStream& operator=(const wxFSInputStream&) = delete;
-   wxFSInputStream(wxFSInputStream&&) = default;
-   wxFSInputStream& operator=(wxFSInputStream&&) = default;
+    wxFSInputStream(const wxFSInputStream&) = delete;
+    wxFSInputStream& operator=(const wxFSInputStream&) = delete;
+    wxFSInputStream(wxFSInputStream&&) = default;
+    wxFSInputStream& operator=(wxFSInputStream&&) = default;
 
 private:
     wxFSFile* m_file;

@@ -160,10 +160,10 @@ public:
     // default ctor, SetContainerWindow() must be called later
     wxControlContainer();
 
-   wxControlContainer(const wxControlContainer&) = delete;
-   wxControlContainer& operator=(const wxControlContainer&) = delete;
-   wxControlContainer(wxControlContainer&&) = default;
-   wxControlContainer& operator=(wxControlContainer&&) = default;
+    wxControlContainer(const wxControlContainer&) = delete;
+    wxControlContainer& operator=(const wxControlContainer&) = delete;
+    wxControlContainer(wxControlContainer&&) = default;
+    wxControlContainer& operator=(wxControlContainer&&) = default;
 
     // the methods to be called from the window event handlers
     void HandleOnNavigationKey(wxNavigationKeyEvent& event);

@@ -371,10 +371,10 @@ public:
                     const wxString& name = wxT("canvas"));
     ~wxPreviewCanvas() override;
 
-   wxPreviewCanvas(const wxPreviewCanvas&) = delete;
-   wxPreviewCanvas& operator=(const wxPreviewCanvas&) = delete;
-   wxPreviewCanvas(wxPreviewCanvas&&) = default;
-   wxPreviewCanvas& operator=(wxPreviewCanvas&&) = default;
+    wxPreviewCanvas(const wxPreviewCanvas&) = delete;
+    wxPreviewCanvas& operator=(const wxPreviewCanvas&) = delete;
+    wxPreviewCanvas(wxPreviewCanvas&&) = default;
+    wxPreviewCanvas& operator=(wxPreviewCanvas&&) = default;
 
     void SetPreview(wxPrintPreviewBase *preview) { m_printPreview = preview; }
 
@@ -415,10 +415,10 @@ public:
                    const wxString& name = wxASCII_STR(wxFrameNameStr));
     ~wxPreviewFrame() override;
 
-   wxPreviewFrame(const wxPreviewFrame&) = delete;
-   wxPreviewFrame& operator=(const wxPreviewFrame&) = delete;
-   wxPreviewFrame(wxPreviewFrame&&) = default;
-   wxPreviewFrame& operator=(wxPreviewFrame&&) = default;
+    wxPreviewFrame(const wxPreviewFrame&) = delete;
+    wxPreviewFrame& operator=(const wxPreviewFrame&) = delete;
+    wxPreviewFrame(wxPreviewFrame&&) = default;
+    wxPreviewFrame& operator=(wxPreviewFrame&&) = default;
 
     // Either Initialize() or InitializeWithModality() must be called before
     // showing the preview frame, the former being just a particular case of
@@ -508,10 +508,10 @@ public:
                         const wxString& name = wxT("panel"));
     ~wxPreviewControlBar() override;
 
-   wxPreviewControlBar(const wxPreviewControlBar&) = delete;
-   wxPreviewControlBar& operator=(const wxPreviewControlBar&) = delete;
-   wxPreviewControlBar(wxPreviewControlBar&&) = default;
-   wxPreviewControlBar& operator=(wxPreviewControlBar&&) = default;
+    wxPreviewControlBar(const wxPreviewControlBar&) = delete;
+    wxPreviewControlBar& operator=(const wxPreviewControlBar&) = delete;
+    wxPreviewControlBar(wxPreviewControlBar&&) = default;
+    wxPreviewControlBar& operator=(wxPreviewControlBar&&) = default;
 
     virtual void CreateButtons();
     virtual void SetPageInfo(int minPage, int maxPage);
@@ -714,10 +714,10 @@ public:
                    wxPrintData *data);
     ~wxPrintPreview() override;
 
-   wxPrintPreview(const wxPrintPreview&) = delete;
-   wxPrintPreview& operator=(const wxPrintPreview&) = delete;
-   wxPrintPreview(wxPrintPreview&&) = default;
-   wxPrintPreview& operator=(wxPrintPreview&&) = default;
+    wxPrintPreview(const wxPrintPreview&) = delete;
+    wxPrintPreview& operator=(const wxPrintPreview&) = delete;
+    wxPrintPreview(wxPrintPreview&&) = default;
+    wxPrintPreview& operator=(wxPrintPreview&&) = default;
 
     bool SetCurrentPage(int pageNum) override;
     int GetCurrentPage() const override;
@@ -770,10 +770,10 @@ public:
                        long style = wxDEFAULT_DIALOG_STYLE,
                        const wxString& name = wxT("dialog"));
 
-   wxPrintAbortDialog(const wxPrintAbortDialog&) = delete;
-   wxPrintAbortDialog& operator=(const wxPrintAbortDialog&) = delete;
-   wxPrintAbortDialog(wxPrintAbortDialog&&) = default;
-   wxPrintAbortDialog& operator=(wxPrintAbortDialog&&) = default;
+    wxPrintAbortDialog(const wxPrintAbortDialog&) = delete;
+    wxPrintAbortDialog& operator=(const wxPrintAbortDialog&) = delete;
+    wxPrintAbortDialog(wxPrintAbortDialog&&) = default;
+    wxPrintAbortDialog& operator=(wxPrintAbortDialog&&) = default;
 
     void SetProgress(int currentPage, int totalPages,
                      int currentCopy, int totalCopies);

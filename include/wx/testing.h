@@ -319,10 +319,10 @@ public:
         Register();
     }
 
-   wxTestingModalHook(const wxTestingModalHook&) = delete;
-   wxTestingModalHook& operator=(const wxTestingModalHook&) = delete;
-   wxTestingModalHook(wxTestingModalHook&&) = default;
-   wxTestingModalHook& operator=(wxTestingModalHook&&) = default;
+    wxTestingModalHook(const wxTestingModalHook&) = delete;
+    wxTestingModalHook& operator=(const wxTestingModalHook&) = delete;
+    wxTestingModalHook(wxTestingModalHook&&) = default;
+    wxTestingModalHook& operator=(wxTestingModalHook&&) = default;
 
     // Called to verify that all expectations were met. This cannot be done in
     // the destructor, because ReportFailure() may throw (either because it's

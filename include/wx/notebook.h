@@ -105,10 +105,10 @@ class WXDLLIMPEXP_CORE wxNotebookBase : public wxBookCtrlBase
 public:
     wxNotebookBase() = default;
 
-   wxNotebookBase(const wxNotebookBase&) = delete;
-   wxNotebookBase& operator=(const wxNotebookBase&) = delete;
-   wxNotebookBase(wxNotebookBase&&) = default;
-   wxNotebookBase& operator=(wxNotebookBase&&) = default;
+    wxNotebookBase(const wxNotebookBase&) = delete;
+    wxNotebookBase& operator=(const wxNotebookBase&) = delete;
+    wxNotebookBase(wxNotebookBase&&) = default;
+    wxNotebookBase& operator=(wxNotebookBase&&) = default;
 
     // wxNotebook-specific additions to wxBookCtrlBase interface
     // ---------------------------------------------------------

@@ -61,10 +61,10 @@ public:
     // Non-virtual dtor as this class is not supposed to be derived from.
     ~wxRichToolTip();
 
-   wxRichToolTip(const wxRichToolTip&) = delete;
-   wxRichToolTip& operator=(const wxRichToolTip&) = delete;
-   wxRichToolTip(wxRichToolTip&&) = default;
-   wxRichToolTip& operator=(wxRichToolTip&&) = default;
+    wxRichToolTip(const wxRichToolTip&) = delete;
+    wxRichToolTip& operator=(const wxRichToolTip&) = delete;
+    wxRichToolTip(wxRichToolTip&&) = default;
+    wxRichToolTip& operator=(wxRichToolTip&&) = default;
 
     // Set the background colour: if two colours are specified, the background
     // is drawn using a gradient from top to bottom, otherwise a single solid

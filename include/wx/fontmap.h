@@ -63,10 +63,10 @@ public:
     // virtual dtor for any base class
     virtual ~wxFontMapperBase();
 
-   wxFontMapperBase(const wxFontMapperBase&) = delete;
-   wxFontMapperBase& operator=(const wxFontMapperBase&) = delete;
-   wxFontMapperBase(wxFontMapperBase&&) = default;
-   wxFontMapperBase& operator=(wxFontMapperBase&&) = default;
+    wxFontMapperBase(const wxFontMapperBase&) = delete;
+    wxFontMapperBase& operator=(const wxFontMapperBase&) = delete;
+    wxFontMapperBase(wxFontMapperBase&&) = default;
+    wxFontMapperBase& operator=(wxFontMapperBase&&) = default;
     
     // return instance of the wxFontMapper singleton
     // wxBase code only cares that it's a wxFontMapperBase
@@ -204,10 +204,10 @@ public:
     // virtual dtor for a base class
     ~wxFontMapper() override = default;
 
-   wxFontMapper(const wxFontMapper&) = delete;
-   wxFontMapper& operator=(const wxFontMapper&) = delete;
-   wxFontMapper(wxFontMapper&&) = default;
-   wxFontMapper& operator=(wxFontMapper&&) = default;
+    wxFontMapper(const wxFontMapper&) = delete;
+    wxFontMapper& operator=(const wxFontMapper&) = delete;
+    wxFontMapper(wxFontMapper&&) = default;
+    wxFontMapper& operator=(wxFontMapper&&) = default;
 
     // working with the encodings
     // --------------------------

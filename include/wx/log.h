@@ -330,10 +330,10 @@ public:
 
     virtual ~wxLog();
 
-   wxLog(const wxLog&) = delete;
-   wxLog& operator=(const wxLog&) = delete;
-   wxLog(wxLog&&) = default;
-   wxLog& operator=(wxLog&&) = default;
+    wxLog(const wxLog&) = delete;
+    wxLog& operator=(const wxLog&) = delete;
+    wxLog(wxLog&&) = default;
+    wxLog& operator=(wxLog&&) = default;
 
     // log messages selection
     // ----------------------
@@ -638,10 +638,10 @@ class WXDLLIMPEXP_BASE wxLogBuffer : public wxLog
 public:
     wxLogBuffer() = default;
 
-   wxLogBuffer(const wxLogBuffer&) = delete;
-   wxLogBuffer& operator=(const wxLogBuffer&) = delete;
-   wxLogBuffer(wxLogBuffer&&) = default;
-   wxLogBuffer& operator=(wxLogBuffer&&) = default;
+    wxLogBuffer(const wxLogBuffer&) = delete;
+    wxLogBuffer& operator=(const wxLogBuffer&) = delete;
+    wxLogBuffer(wxLogBuffer&&) = default;
+    wxLogBuffer& operator=(wxLogBuffer&&) = default;
 
     // get the string contents with all messages logged
     const wxString& GetBuffer() const { return m_str; }
@@ -667,10 +667,10 @@ public:
     wxLogStderr(FILE *fp = nullptr,
                 const wxMBConv &conv = wxConvWhateverWorks);
 
-   wxLogStderr(const wxLogStderr&) = delete;
-   wxLogStderr& operator=(const wxLogStderr&) = delete;
-   wxLogStderr(wxLogStderr&&) = default;
-   wxLogStderr& operator=(wxLogStderr&&) = default;
+    wxLogStderr(const wxLogStderr&) = delete;
+    wxLogStderr& operator=(const wxLogStderr&) = delete;
+    wxLogStderr(wxLogStderr&&) = default;
+    wxLogStderr& operator=(wxLogStderr&&) = default;
 
 protected:
     // implement sink function
@@ -686,10 +686,10 @@ public:
     wxLogStream(std::ostream *ostr = (std::ostream *) nullptr,
                 const wxMBConv& conv = wxConvWhateverWorks);
 
-   wxLogStream(const wxLogStream&) = delete;
-   wxLogStream& operator=(const wxLogStream&) = delete;
-   wxLogStream(wxLogStream&&) = default;
-   wxLogStream& operator=(wxLogStream&&) = default;
+    wxLogStream(const wxLogStream&) = delete;
+    wxLogStream& operator=(const wxLogStream&) = delete;
+    wxLogStream(wxLogStream&&) = default;
+    wxLogStream& operator=(wxLogStream&&) = default;
 
 protected:
     // implement sink function
@@ -744,10 +744,10 @@ public:
     wxLogChain(wxLog *logger);
     ~wxLogChain() override;
 
-   wxLogChain(const wxLogChain&) = delete;
-   wxLogChain& operator=(const wxLogChain&) = delete;
-   wxLogChain(wxLogChain&&) = default;
-   wxLogChain& operator=(wxLogChain&&) = default;
+    wxLogChain(const wxLogChain&) = delete;
+    wxLogChain& operator=(const wxLogChain&) = delete;
+    wxLogChain(wxLogChain&&) = default;
+    wxLogChain& operator=(wxLogChain&&) = default;
 
     // change the new log target
     void SetLog(wxLog *logger);
@@ -794,10 +794,10 @@ class WXDLLIMPEXP_BASE wxLogInterposer : public wxLogChain
 public:
     wxLogInterposer();
 
-   wxLogInterposer(const wxLogInterposer&) = delete;
-   wxLogInterposer& operator=(const wxLogInterposer&) = delete;
-   wxLogInterposer(wxLogInterposer&&) = default;
-   wxLogInterposer& operator=(wxLogInterposer&&) = default;
+    wxLogInterposer(const wxLogInterposer&) = delete;
+    wxLogInterposer& operator=(const wxLogInterposer&) = delete;
+    wxLogInterposer(wxLogInterposer&&) = default;
+    wxLogInterposer& operator=(wxLogInterposer&&) = default;
 };
 
 // a temporary interposer which doesn't destroy the old log target
@@ -808,10 +808,10 @@ class WXDLLIMPEXP_BASE wxLogInterposerTemp : public wxLogChain
 public:
     wxLogInterposerTemp();
 
-   wxLogInterposerTemp(const wxLogInterposerTemp&) = delete;
-   wxLogInterposerTemp& operator=(const wxLogInterposerTemp&) = delete;
-   wxLogInterposerTemp(wxLogInterposerTemp&&) = default;
-   wxLogInterposerTemp& operator=(wxLogInterposerTemp&&) = default;
+    wxLogInterposerTemp(const wxLogInterposerTemp&) = delete;
+    wxLogInterposerTemp& operator=(const wxLogInterposerTemp&) = delete;
+    wxLogInterposerTemp(wxLogInterposerTemp&&) = default;
+    wxLogInterposerTemp& operator=(wxLogInterposerTemp&&) = default;
 };
 
 #if wxUSE_GUI
@@ -844,10 +844,10 @@ public:
     {
     }
 
-   wxLogger(const wxLogger&) = delete;
-   wxLogger& operator=(const wxLogger&) = delete;
-   wxLogger(wxLogger&&) = default;
-   wxLogger& operator=(wxLogger&&) = default;
+    wxLogger(const wxLogger&) = delete;
+    wxLogger& operator=(const wxLogger&) = delete;
+    wxLogger(wxLogger&&) = default;
+    wxLogger& operator=(wxLogger&&) = default;
 
     // store extra data in our log record and return this object itself (so
     // that further calls to its functions could be chained)

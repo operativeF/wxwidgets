@@ -37,10 +37,10 @@ public:
     wxListBoxBase() = default;
     ~wxListBoxBase() override;
 
-   wxListBoxBase(const wxListBoxBase&) = delete;
-   wxListBoxBase& operator=(const wxListBoxBase&) = delete;
-   wxListBoxBase(wxListBoxBase&&) = default;
-   wxListBoxBase& operator=(wxListBoxBase&&) = default;
+    wxListBoxBase(const wxListBoxBase&) = delete;
+    wxListBoxBase& operator=(const wxListBoxBase&) = delete;
+    wxListBoxBase(wxListBoxBase&&) = default;
+    wxListBoxBase& operator=(wxListBoxBase&&) = default;
 
     void InsertItems(const std::vector<wxString>& items, unsigned int pos)
         { Insert(items, pos); }

@@ -41,6 +41,9 @@ public:
 
     ~wxRadioBox() override;
 
+    wxRadioBox(const wxRadioBox&) = delete;
+	wxRadioBox& operator=(const wxRadioBox&) = delete;
+
     bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& title,
@@ -147,8 +150,6 @@ protected:
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxRadioBox);
-    wxRadioBox(const wxRadioBox&) = delete;
-	wxRadioBox& operator=(const wxRadioBox&) = delete;
 };
 
 #endif

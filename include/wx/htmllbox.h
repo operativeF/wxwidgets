@@ -52,10 +52,10 @@ public:
                   long style = 0,
                   const wxString& name = wxASCII_STR(wxHtmlListBoxNameStr));
 
-   wxHtmlListBox(const wxHtmlListBox&) = delete;
-   wxHtmlListBox& operator=(const wxHtmlListBox&) = delete;
-   wxHtmlListBox(wxHtmlListBox&&) = default;
-   wxHtmlListBox& operator=(wxHtmlListBox&&) = default;
+    wxHtmlListBox(const wxHtmlListBox&) = delete;
+    wxHtmlListBox& operator=(const wxHtmlListBox&) = delete;
+    wxHtmlListBox(wxHtmlListBox&&) = default;
+    wxHtmlListBox& operator=(wxHtmlListBox&&) = default;
 
     // really creates the control and sets the initial number of items in it
     // (which may be changed later with SetItemCount())
@@ -231,10 +231,10 @@ public:
 
     ~wxSimpleHtmlListBox() override;
 
-   wxSimpleHtmlListBox(const wxSimpleHtmlListBox&) = delete;
-   wxSimpleHtmlListBox& operator=(const wxSimpleHtmlListBox&) = delete;
-   wxSimpleHtmlListBox(wxSimpleHtmlListBox&&) = default;
-   wxSimpleHtmlListBox& operator=(wxSimpleHtmlListBox&&) = default;
+    wxSimpleHtmlListBox(const wxSimpleHtmlListBox&) = delete;
+    wxSimpleHtmlListBox& operator=(const wxSimpleHtmlListBox&) = delete;
+    wxSimpleHtmlListBox(wxSimpleHtmlListBox&&) = default;
+    wxSimpleHtmlListBox& operator=(wxSimpleHtmlListBox&&) = default;
 
     // these must be overloaded otherwise the compiler will complain
     // about  wxItemContainerImmutable::[G|S]etSelection being pure virtuals...

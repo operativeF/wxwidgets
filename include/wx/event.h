@@ -1154,10 +1154,10 @@ public:
         m_event.ResumePropagation(m_propagationLevelOld);
     }
 
-   wxPropagationDisabler(const wxPropagationDisabler&) = delete;
-   wxPropagationDisabler& operator=(const wxPropagationDisabler&) = delete;
-   wxPropagationDisabler(wxPropagationDisabler&&) = default;
-   wxPropagationDisabler& operator=(wxPropagationDisabler&&) = default;
+    wxPropagationDisabler(const wxPropagationDisabler&) = delete;
+    wxPropagationDisabler& operator=(const wxPropagationDisabler&) = delete;
+    wxPropagationDisabler(wxPropagationDisabler&&) = default;
+    wxPropagationDisabler& operator=(wxPropagationDisabler&&) = default;
 
 private:
     wxEvent& m_event;
@@ -1218,10 +1218,10 @@ public:
         m_event.m_handlerToProcessOnlyIn = m_handlerToProcessOnlyInOld;
     }
 
-   wxEventProcessInHandlerOnly(const wxEventProcessInHandlerOnly&) = delete;
-   wxEventProcessInHandlerOnly& operator=(const wxEventProcessInHandlerOnly&) = delete;
-   wxEventProcessInHandlerOnly(wxEventProcessInHandlerOnly&&) = default;
-   wxEventProcessInHandlerOnly& operator=(wxEventProcessInHandlerOnly&&) = default;
+    wxEventProcessInHandlerOnly(const wxEventProcessInHandlerOnly&) = delete;
+    wxEventProcessInHandlerOnly& operator=(const wxEventProcessInHandlerOnly&) = delete;
+    wxEventProcessInHandlerOnly(wxEventProcessInHandlerOnly&&) = default;
+    wxEventProcessInHandlerOnly& operator=(wxEventProcessInHandlerOnly&&) = default;
 
 private:
     wxEvent& m_event;

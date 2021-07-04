@@ -18,10 +18,10 @@ public:
     wxAppProgressIndicatorBase() = default;
     virtual ~wxAppProgressIndicatorBase() = default;
 
-   wxAppProgressIndicatorBase(const wxAppProgressIndicatorBase&) = delete;
-   wxAppProgressIndicatorBase& operator=(const wxAppProgressIndicatorBase&) = delete;
-   wxAppProgressIndicatorBase(wxAppProgressIndicatorBase&&) = default;
-   wxAppProgressIndicatorBase& operator=(wxAppProgressIndicatorBase&&) = default;
+    wxAppProgressIndicatorBase(const wxAppProgressIndicatorBase&) = delete;
+    wxAppProgressIndicatorBase& operator=(const wxAppProgressIndicatorBase&) = delete;
+    wxAppProgressIndicatorBase(wxAppProgressIndicatorBase&&) = default;
+    wxAppProgressIndicatorBase& operator=(wxAppProgressIndicatorBase&&) = default;
     
     virtual bool IsAvailable() const = 0;
 

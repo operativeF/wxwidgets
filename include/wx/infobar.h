@@ -30,10 +30,10 @@ public:
     // user code would result in flicker)
     wxInfoBarBase() = default;
 
-   wxInfoBarBase(const wxInfoBarBase&) = delete;
-   wxInfoBarBase& operator=(const wxInfoBarBase&) = delete;
-   wxInfoBarBase(wxInfoBarBase&&) = default;
-   wxInfoBarBase& operator=(wxInfoBarBase&&) = default;
+    wxInfoBarBase(const wxInfoBarBase&) = delete;
+    wxInfoBarBase& operator=(const wxInfoBarBase&) = delete;
+    wxInfoBarBase(wxInfoBarBase&&) = default;
+    wxInfoBarBase& operator=(wxInfoBarBase&&) = default;
 
     // show the info bar with the given message and optionally an icon
     virtual void ShowMessage(const wxString& msg,

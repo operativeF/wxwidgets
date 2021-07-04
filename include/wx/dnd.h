@@ -65,10 +65,10 @@ public:
         { m_data = nullptr; }
     virtual ~wxDropSourceBase() = default;
 
-   wxDropSourceBase(const wxDropSourceBase&) = delete;
-   wxDropSourceBase& operator=(const wxDropSourceBase&) = delete;
-   wxDropSourceBase(wxDropSourceBase&&) = default;
-   wxDropSourceBase& operator=(wxDropSourceBase&&) = default;
+    wxDropSourceBase(const wxDropSourceBase&) = delete;
+    wxDropSourceBase& operator=(const wxDropSourceBase&) = delete;
+    wxDropSourceBase(wxDropSourceBase&&) = default;
+    wxDropSourceBase& operator=(wxDropSourceBase&&) = default;
 
     // set the data which is transferred by drag and drop
     void SetData(wxDataObject& data)
@@ -143,10 +143,10 @@ public:
     virtual ~wxDropTargetBase()
         { delete m_dataObject; }
 
-   wxDropTargetBase(const wxDropTargetBase&) = delete;
-   wxDropTargetBase& operator=(const wxDropTargetBase&) = delete;
-   wxDropTargetBase(wxDropTargetBase&&) = default;
-   wxDropTargetBase& operator=(wxDropTargetBase&&) = default;
+    wxDropTargetBase(const wxDropTargetBase&) = delete;
+    wxDropTargetBase& operator=(const wxDropTargetBase&) = delete;
+    wxDropTargetBase(wxDropTargetBase&&) = default;
+    wxDropTargetBase& operator=(wxDropTargetBase&&) = default;
 
     // get/set the associated wxDataObject
     wxDataObject *GetDataObject() const
@@ -243,10 +243,10 @@ class WXDLLIMPEXP_CORE wxTextDropTarget : public wxDropTarget
 public:
     wxTextDropTarget();
 
-   wxTextDropTarget(const wxTextDropTarget&) = delete;
-   wxTextDropTarget& operator=(const wxTextDropTarget&) = delete;
-   wxTextDropTarget(wxTextDropTarget&&) = default;
-   wxTextDropTarget& operator=(wxTextDropTarget&&) = default;
+    wxTextDropTarget(const wxTextDropTarget&) = delete;
+    wxTextDropTarget& operator=(const wxTextDropTarget&) = delete;
+    wxTextDropTarget(wxTextDropTarget&&) = default;
+    wxTextDropTarget& operator=(wxTextDropTarget&&) = default;
 
     virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& text) = 0;
 
@@ -259,10 +259,10 @@ class WXDLLIMPEXP_CORE wxFileDropTarget : public wxDropTarget
 public:
     wxFileDropTarget();
 
-   wxFileDropTarget(const wxFileDropTarget&) = delete;
-   wxFileDropTarget& operator=(const wxFileDropTarget&) = delete;
-   wxFileDropTarget(wxFileDropTarget&&) = default;
-   wxFileDropTarget& operator=(wxFileDropTarget&&) = default;
+    wxFileDropTarget(const wxFileDropTarget&) = delete;
+    wxFileDropTarget& operator=(const wxFileDropTarget&) = delete;
+    wxFileDropTarget(wxFileDropTarget&&) = default;
+    wxFileDropTarget& operator=(wxFileDropTarget&&) = default;
 
     // parameters are the number of files and the array of file names
     virtual bool OnDropFiles(wxCoord x, wxCoord y,

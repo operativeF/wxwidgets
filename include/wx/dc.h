@@ -651,10 +651,10 @@ public:
 
     ~wxDC() override { delete m_pimpl; }
 
-   wxDC(const wxDC&) = delete;
-   wxDC& operator=(const wxDC&) = delete;
-   wxDC(wxDC&&) = default;
-   wxDC& operator=(wxDC&&) = default;
+    wxDC(const wxDC&) = delete;
+    wxDC& operator=(const wxDC&) = delete;
+    wxDC(wxDC&&) = default;
+    wxDC& operator=(wxDC&&) = default;
 
     wxDCImpl *GetImpl()
         { return m_pimpl; }
@@ -1269,10 +1269,10 @@ public:
             m_dc.SetTextForeground(m_colFgOld);
     }
 
-   wxDCTextColourChanger(const wxDCTextColourChanger&) = delete;
-   wxDCTextColourChanger& operator=(const wxDCTextColourChanger&) = delete;
-   wxDCTextColourChanger(wxDCTextColourChanger&&) = default;
-   wxDCTextColourChanger& operator=(wxDCTextColourChanger&&) = default;
+    wxDCTextColourChanger(const wxDCTextColourChanger&) = delete;
+    wxDCTextColourChanger& operator=(const wxDCTextColourChanger&) = delete;
+    wxDCTextColourChanger(wxDCTextColourChanger&&) = default;
+    wxDCTextColourChanger& operator=(wxDCTextColourChanger&&) = default;
 
     void Set(const wxColour& col)
     {
@@ -1308,10 +1308,10 @@ public:
             m_dc.SetTextBackground(m_colBgOld);
     }
 
-   wxDCTextBgColourChanger(const wxDCTextBgColourChanger&) = delete;
-   wxDCTextBgColourChanger& operator=(const wxDCTextBgColourChanger&) = delete;
-   wxDCTextBgColourChanger(wxDCTextBgColourChanger&&) = default;
-   wxDCTextBgColourChanger& operator=(wxDCTextBgColourChanger&&) = default;
+    wxDCTextBgColourChanger(const wxDCTextBgColourChanger&) = delete;
+    wxDCTextBgColourChanger& operator=(const wxDCTextBgColourChanger&) = delete;
+    wxDCTextBgColourChanger(wxDCTextBgColourChanger&&) = default;
+    wxDCTextBgColourChanger& operator=(wxDCTextBgColourChanger&&) = default;
 
     void Set(const wxColour& col)
     {
@@ -1347,10 +1347,10 @@ public:
             m_dc.SetBackgroundMode(m_modeOld);
     }
 
-   wxDCTextBgModeChanger(const wxDCTextBgModeChanger&) = delete;
-   wxDCTextBgModeChanger& operator=(const wxDCTextBgModeChanger&) = delete;
-   wxDCTextBgModeChanger(wxDCTextBgModeChanger&&) = default;
-   wxDCTextBgModeChanger& operator=(wxDCTextBgModeChanger&&) = default;
+    wxDCTextBgModeChanger(const wxDCTextBgModeChanger&) = delete;
+    wxDCTextBgModeChanger& operator=(const wxDCTextBgModeChanger&) = delete;
+    wxDCTextBgModeChanger(wxDCTextBgModeChanger&&) = default;
+    wxDCTextBgModeChanger& operator=(wxDCTextBgModeChanger&&) = default;
 
     void Set(wxBrushStyle mode)
     {
@@ -1384,10 +1384,10 @@ public:
             m_dc.SetPen(m_penOld);
     }
 
-   wxDCPenChanger(const wxDCPenChanger&) = delete;
-   wxDCPenChanger& operator=(const wxDCPenChanger&) = delete;
-   wxDCPenChanger(wxDCPenChanger&&) = default;
-   wxDCPenChanger& operator=(wxDCPenChanger&&) = default;
+    wxDCPenChanger(const wxDCPenChanger&) = delete;
+    wxDCPenChanger& operator=(const wxDCPenChanger&) = delete;
+    wxDCPenChanger(wxDCPenChanger&&) = default;
+    wxDCPenChanger& operator=(wxDCPenChanger&&) = default;
 
 private:
     wxDC& m_dc;
@@ -1414,10 +1414,10 @@ public:
             m_dc.SetBrush(m_brushOld);
     }
 
-   wxDCBrushChanger(const wxDCBrushChanger&) = delete;
-   wxDCBrushChanger& operator=(const wxDCBrushChanger&) = delete;
-   wxDCBrushChanger(wxDCBrushChanger&&) = default;
-   wxDCBrushChanger& operator=(wxDCBrushChanger&&) = default;
+    wxDCBrushChanger(const wxDCBrushChanger&) = delete;
+    wxDCBrushChanger& operator=(const wxDCBrushChanger&) = delete;
+    wxDCBrushChanger(wxDCBrushChanger&&) = default;
+    wxDCBrushChanger& operator=(wxDCBrushChanger&&) = default;
 
 private:
     wxDC& m_dc;
@@ -1453,10 +1453,10 @@ public:
             m_dc.SetClippingRegion(m_oldClipRect);
     }
 
-   wxDCClipper(const wxDCClipper&) = delete;
-   wxDCClipper& operator=(const wxDCClipper&) = delete;
-   wxDCClipper(wxDCClipper&&) = default;
-   wxDCClipper& operator=(wxDCClipper&&) = default;
+    wxDCClipper(const wxDCClipper&) = delete;
+    wxDCClipper& operator=(const wxDCClipper&) = delete;
+    wxDCClipper(wxDCClipper&&) = default;
+    wxDCClipper& operator=(wxDCClipper&&) = default;
 
 private:
     // Common part of all ctors.
@@ -1503,10 +1503,10 @@ public:
             m_dc.SetFont(m_fontOld);
     }
 
-   wxDCFontChanger(const wxDCFontChanger&) = delete;
-   wxDCFontChanger& operator=(const wxDCFontChanger&) = delete;
-   wxDCFontChanger(wxDCFontChanger&&) = default;
-   wxDCFontChanger& operator=(wxDCFontChanger&&) = default;
+    wxDCFontChanger(const wxDCFontChanger&) = delete;
+    wxDCFontChanger& operator=(const wxDCFontChanger&) = delete;
+    wxDCFontChanger(wxDCFontChanger&&) = default;
+    wxDCFontChanger& operator=(wxDCFontChanger&&) = default;
 
 private:
     wxDC& m_dc;

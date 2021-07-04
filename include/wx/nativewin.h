@@ -69,10 +69,10 @@ public:
     // Default ctor, Create() must be called later to really create the window.
     wxNativeWindow() = default;
 
-   wxNativeWindow(const wxNativeWindow&) = delete;
-   wxNativeWindow& operator=(const wxNativeWindow&) = delete;
-   wxNativeWindow(wxNativeWindow&&) = default;
-   wxNativeWindow& operator=(wxNativeWindow&&) = default;
+    wxNativeWindow(const wxNativeWindow&) = delete;
+    wxNativeWindow& operator=(const wxNativeWindow&) = delete;
+    wxNativeWindow(wxNativeWindow&&) = default;
+    wxNativeWindow& operator=(wxNativeWindow&&) = default;
 
     // Create a window from an existing native window handle.
     //

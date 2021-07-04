@@ -442,12 +442,12 @@ class WXDLLIMPEXP_BASE wxConfigPathChanger
 public:
   // ctor/dtor do path changing/restoring of the path
   wxConfigPathChanger(const wxConfigBase *pContainer, const wxString& strEntry);
- ~wxConfigPathChanger();
+  ~wxConfigPathChanger();
 
- wxConfigPathChanger(const wxConfigPathChanger&) = delete;
-   wxConfigPathChanger& operator=(const wxConfigPathChanger&) = delete;
-   wxConfigPathChanger(wxConfigPathChanger&&) = default;
-   wxConfigPathChanger& operator=(wxConfigPathChanger&&) = default;
+  wxConfigPathChanger(const wxConfigPathChanger&) = delete;
+  wxConfigPathChanger& operator=(const wxConfigPathChanger&) = delete;
+  wxConfigPathChanger(wxConfigPathChanger&&) = default;
+  wxConfigPathChanger& operator=(wxConfigPathChanger&&) = default;
 
   // get the key name
   const wxString& Name() const { return m_strName; }

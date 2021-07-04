@@ -233,10 +233,10 @@ public:
 
     // no copy ctor/assignment operators (or we'd try to unload the library
     // twice)
-   wxDynamicLibrary(const wxDynamicLibrary&) = delete;
-   wxDynamicLibrary& operator=(const wxDynamicLibrary&) = delete;
-   wxDynamicLibrary(wxDynamicLibrary&&) = default;
-   wxDynamicLibrary& operator=(wxDynamicLibrary&&) = default;
+    wxDynamicLibrary(const wxDynamicLibrary&) = delete;
+    wxDynamicLibrary& operator=(const wxDynamicLibrary&) = delete;
+    wxDynamicLibrary(wxDynamicLibrary&&) = default;
+    wxDynamicLibrary& operator=(wxDynamicLibrary&&) = default;
 
     // return true if the library was loaded successfully
     bool IsLoaded() const { return m_handle != nullptr; }

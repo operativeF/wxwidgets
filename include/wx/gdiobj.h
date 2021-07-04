@@ -24,10 +24,12 @@ class WXDLLIMPEXP_CORE wxGDIRefData : public wxObjectRefData
 public:
     wxGDIRefData() = default;
 
-   wxGDIRefData(const wxGDIRefData&) = delete;
-   wxGDIRefData& operator=(const wxGDIRefData&) = delete;
-   wxGDIRefData(wxGDIRefData&&) = default;
-   wxGDIRefData& operator=(wxGDIRefData&&) = default;
+    wxGDIRefData(const wxGDIRefData&) = delete;
+    wxGDIRefData& operator=(const wxGDIRefData&) = delete;
+    wxGDIRefData(wxGDIRefData&&) = default;
+    wxGDIRefData& operator=(wxGDIRefData&&) = default;
+
+    virtual ~wxGDIRefData() = default;
     
     // override this in the derived classes to check if this data object is
     // really fully initialized

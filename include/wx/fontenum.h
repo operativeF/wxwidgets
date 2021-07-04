@@ -31,10 +31,10 @@ public:
     // virtual dtor for the base class
     virtual ~wxFontEnumerator() = default;
 
-   wxFontEnumerator(const wxFontEnumerator&) = delete;
-   wxFontEnumerator& operator=(const wxFontEnumerator&) = delete;
-   wxFontEnumerator(wxFontEnumerator&&) = default;
-   wxFontEnumerator& operator=(wxFontEnumerator&&) = default;
+    wxFontEnumerator(const wxFontEnumerator&) = delete;
+    wxFontEnumerator& operator=(const wxFontEnumerator&) = delete;
+    wxFontEnumerator(wxFontEnumerator&&) = default;
+    wxFontEnumerator& operator=(wxFontEnumerator&&) = default;
 
     // start enumerating font facenames (either all of them or those which
     // support the given encoding) - will result in OnFacename() being

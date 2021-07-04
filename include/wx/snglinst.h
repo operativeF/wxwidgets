@@ -35,10 +35,10 @@ public:
         Create(name, path);
     }
 
-   wxSingleInstanceChecker(const wxSingleInstanceChecker&) = delete;
-   wxSingleInstanceChecker& operator=(const wxSingleInstanceChecker&) = delete;
-   wxSingleInstanceChecker(wxSingleInstanceChecker&&) = default;
-   wxSingleInstanceChecker& operator=(wxSingleInstanceChecker&&) = default;
+    wxSingleInstanceChecker(const wxSingleInstanceChecker&) = delete;
+    wxSingleInstanceChecker& operator=(const wxSingleInstanceChecker&) = delete;
+    wxSingleInstanceChecker(wxSingleInstanceChecker&&) = default;
+    wxSingleInstanceChecker& operator=(wxSingleInstanceChecker&&) = default;
 
     // notice that calling Create() is optional now, if you don't do it before
     // calling IsAnotherRunning(), CreateDefault() is used automatically

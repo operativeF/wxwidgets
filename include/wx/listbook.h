@@ -51,10 +51,10 @@ public:
         (void)Create(parent, id, pos, size, style, name);
     }
 
-   wxListbook(const wxListbook&) = delete;
-   wxListbook& operator=(const wxListbook&) = delete;
-   wxListbook(wxListbook&&) = default;
-   wxListbook& operator=(wxListbook&&) = default;
+    wxListbook(const wxListbook&) = delete;
+    wxListbook& operator=(const wxListbook&) = delete;
+    wxListbook(wxListbook&&) = default;
+    wxListbook& operator=(wxListbook&&) = default;
 
     // quasi ctor
     bool Create(wxWindow *parent,
