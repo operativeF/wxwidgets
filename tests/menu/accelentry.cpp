@@ -42,7 +42,7 @@ TEST_CASE( "wxAcceleratorEntry::Create")
 
     SUBCASE( "Correct behavior" )
     {
-        pa.reset( wxAcceleratorEntry::Create("Foo\tCtrl+Z") );
+        pa = wxAcceleratorEntry::Create("Foo\tCtrl+Z");
 
         CHECK( pa );
         CHECK( pa->IsOk() );
@@ -51,21 +51,21 @@ TEST_CASE( "wxAcceleratorEntry::Create")
 
     SUBCASE( "Tab missing" )
     {
-        pa.reset( wxAcceleratorEntry::Create("Shift-Q") );
+        pa = wxAcceleratorEntry::Create("Shift-Q");
 
         CHECK( !pa );
     }
 
     SUBCASE( "No accelerator key specified" )
     {
-        pa.reset( wxAcceleratorEntry::Create("bloordyblop") );
+        pa = wxAcceleratorEntry::Create("bloordyblop");
 
         CHECK( !pa );
     }
 
     SUBCASE( "Display name parsing" )
     {
-        pa.reset( wxAcceleratorEntry::Create("Test\tBackSpace") );
+        pa = wxAcceleratorEntry::Create("Test\tBackSpace");
 
         CHECK( pa );
         CHECK( pa->IsOk() );

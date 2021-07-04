@@ -302,7 +302,7 @@ wxAcceleratorEntry::ParseAccel(const wxString& text, int *flagsOut, int *keyOut)
 }
 
 /* static */
-wxAcceleratorEntry *wxAcceleratorEntry::Create(const wxString& str)
+std::unique_ptr<wxAcceleratorEntry> wxAcceleratorEntry::Create(const wxString& str)
 {
     const wxString accelStr = str.AfterFirst('\t');
     if ( accelStr.empty() )
@@ -319,7 +319,7 @@ wxAcceleratorEntry *wxAcceleratorEntry::Create(const wxString& str)
     if ( !ParseAccel(accelStr, &flags, &keyCode) )
         return nullptr;
 
-    return new wxAcceleratorEntry(flags, keyCode);
+    return std::make_unique<wxAcceleratorEntry>(flags, keyCode);
 }
 
 bool wxAcceleratorEntry::FromString(const wxString& str)
@@ -398,7 +398,7 @@ wxString wxAcceleratorEntry::AsPossiblyLocalizedString(bool localized) const
     return text;
 }
 
-wxAcceleratorEntry *wxGetAccelFromString(const wxString& label)
+std::unique_ptr<wxAcceleratorEntry> wxGetAccelFromString(const wxString& label)
 {
     return wxAcceleratorEntry::Create(label);
 }

@@ -15,7 +15,7 @@
     #include "wx/accel.h"
     #include "wx/dynarray.h"
 
-    using wxAcceleratorArray = std::vector<wxAcceleratorEntry*>;
+    using wxAcceleratorArray = std::vector<std::unique_ptr<wxAcceleratorEntry>>;
 #endif // wxUSE_ACCEL
 
 class WXDLLIMPEXP_FWD_CORE wxFrame;
@@ -119,7 +119,7 @@ wxMenu(const wxMenu&) = delete;
     void RemoveAccel(wxMenuItem *item);
 
     // helper used by wxMenu itself (returns an iterator to an accel in m_accels)
-    std::vector<wxAcceleratorEntry*>::const_iterator FindAccel(int id) const;
+    std::vector<std::unique_ptr<wxAcceleratorEntry>>::const_iterator FindAccel(int id) const;
 
     // used only by wxMDIParentFrame currently but could be useful elsewhere:
     // returns a new accelerator table with accelerators for just this menu

@@ -114,10 +114,10 @@ public:
 #if wxUSE_ACCEL
     // extract the accelerator from the given menu string, return NULL if none
     // found
-    static wxAcceleratorEntry *GetAccelFromString(const wxString& label);
+    static std::unique_ptr<wxAcceleratorEntry> GetAccelFromString(const wxString& label);
 
     // get our accelerator or NULL (caller must delete the pointer)
-    virtual wxAcceleratorEntry *GetAccel() const;
+    virtual std::unique_ptr<wxAcceleratorEntry> GetAccel() const;
 
     // set the accel for this item - this may also be done indirectly with
     // SetText()

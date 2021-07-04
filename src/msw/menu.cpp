@@ -155,7 +155,7 @@ wxMenu::~wxMenu()
 
 #if wxUSE_ACCEL
     // delete accels
-    WX_CLEAR_ARRAY(m_accels);
+    // m_accels.clear();
 #endif // wxUSE_ACCEL
 
     delete m_radioData;
@@ -169,7 +169,7 @@ void wxMenu::Break()
 
 #if wxUSE_ACCEL
 
-std::vector<wxAcceleratorEntry*>::const_iterator wxMenu::FindAccel(int id) const
+std::vector<std::unique_ptr<wxAcceleratorEntry>>::const_iterator wxMenu::FindAccel(int id) const
 {
     return std::find_if(m_accels.begin(), m_accels.end(),
         [id](const auto& accel){
@@ -203,7 +203,7 @@ void wxMenu::UpdateAccel(wxMenuItem *item)
         }
 
         // find the (new) accel for this item
-        wxAcceleratorEntry *accel = wxAcceleratorEntry::Create(item->GetItemLabel());
+        auto accel = wxAcceleratorEntry::Create(item->GetItemLabel());
         if ( accel )
             accel->m_command = item->GetId();
 
@@ -214,17 +214,15 @@ void wxMenu::UpdateAccel(wxMenuItem *item)
         {
             // no old, add new if any
             if ( accel )
-                m_accels.push_back(accel);
+                m_accels.emplace_back(std::move(accel));
             else
                 return;     // skipping RebuildAccelTable() below
         }
         else
         {
             // replace old with new or just remove the old one if no new
-            delete *old_accel;
-
             if ( accel )
-                m_accels.insert(old_accel, accel);
+                m_accels.insert(old_accel, std::move(accel));
             else
                 m_accels.erase(old_accel);
         }
@@ -257,8 +255,6 @@ void wxMenu::RemoveAccel(wxMenuItem *item)
     auto accelToRemove = FindAccel(item->GetId());
     if ( accelToRemove != m_accels.cend() )
     {
-        delete *accelToRemove;
-
         m_accels.erase(accelToRemove);
 
 #if wxUSE_OWNER_DRAWN
