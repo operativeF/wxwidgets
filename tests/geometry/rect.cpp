@@ -21,6 +21,9 @@
 
 #include "asserthelper.h"
 
+#include <algorithm>
+#include <array>
+
 TEST_CASE("CentreIn")
 {
     using R = wxRect;
@@ -51,7 +54,7 @@ TEST_CASE("InflateDeflate")
 TEST_CASE("Operators")
 {
     // test + operator which works like Union but does not ignore empty rectangles
-    static constexpr struct RectData
+    struct RectData
     {
         int x1, y1, w1, h1;
         int x2, y2, w2, h2;
@@ -60,71 +63,66 @@ TEST_CASE("Operators")
         wxRect GetFirst() const { return wxRect(x1, y1, w1, h1); }
         wxRect GetSecond() const { return wxRect(x2, y2, w2, h2); }
         wxRect GetResult() const { return wxRect(x, y, w, h); }
-    } s_rects[] =
-    {
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 2, 2 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 4, 4, 1, 1, 1, 1, 4, 4 },
-        { 1, 1, 2, 2, 4, 4, 1, 1, 1, 1, 4, 4 },
-        { 2, 2, 2, 2, 4, 4, 4, 4, 2, 2, 6, 6 },
-        { 1, 1, 4, 4, 4, 4, 1, 1, 1, 1, 4, 4 }
     };
 
-    for ( size_t n = 0; n < WXSIZEOF(s_rects); n++ )
+    SUBCASE("Check operators including empty rectangles.")
     {
-        const RectData& data = s_rects[n];
+        static constexpr std::array<RectData, 7> s_rects =
+        {{
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 2, 2 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 4, 4, 1, 1, 1, 1, 4, 4 },
+            { 1, 1, 2, 2, 4, 4, 1, 1, 1, 1, 4, 4 },
+            { 2, 2, 2, 2, 4, 4, 4, 4, 2, 2, 6, 6 },
+            { 1, 1, 4, 4, 4, 4, 1, 1, 1, 1, 4, 4 }
+        }};
 
-        CHECK(
-            ( data.GetFirst() + data.GetSecond() ) == data.GetResult()
-        );
+        std::for_each(s_rects.cbegin(), s_rects.cend(),
+            [](const auto& rect) {
+                CHECK(
+                    rect.GetFirst() + rect.GetSecond() == rect.GetResult()
+                );
 
-        CHECK(
-            ( data.GetSecond() + data.GetFirst() ) == data.GetResult()
-        );
+                CHECK(
+                    rect.GetSecond() + rect.GetFirst() == rect.GetResult()
+                );
+            });
     }
 
-    // test operator*() which returns the intersection of two rectangles
-    wxRect r1 = wxRect(0, 2, 3, 4);
-    wxRect r2 = wxRect(1, 2, 7, 8);
-    r1 *= r2;
-    CHECK(wxRect(1, 2, 2, 4) == r1);
-
-    CHECK( (r1 * wxRect()).IsEmpty() );
-}
-
-TEST_CASE("Union")
-{
-    static constexpr struct RectData
+    SUBCASE("Intersection")
     {
-        int x1, y1, w1, h1;
-        int x2, y2, w2, h2;
-        int x, y, w, h;
+        // test operator*() which returns the intersection of two rectangles
+        wxRect r1 = wxRect(0, 2, 3, 4);
+        wxRect r2 = wxRect(1, 2, 7, 8);
+        r1 *= r2;
+        CHECK(wxRect(1, 2, 2, 4) == r1);
 
-        wxRect GetFirst() const { return wxRect(x1, y1, w1, h1); }
-        wxRect GetSecond() const { return wxRect(x2, y2, w2, h2); }
-        wxRect GetResult() const { return wxRect(x, y, w, h); }
-    } s_rects[] =
+        CHECK( (r1 * wxRect()).IsEmpty() );
+    }
+
+    SUBCASE("Union")
     {
-        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 1, 1, 1, 4, 4, 1, 1, 1, 1, 4, 4 },
-        { 1, 1, 2, 2, 4, 4, 1, 1, 1, 1, 4, 4 },
-        { 2, 2, 2, 2, 4, 4, 4, 4, 2, 2, 6, 6 },
-        { 1, 1, 4, 4, 4, 4, 1, 1, 1, 1, 4, 4 }
-    };
+        static constexpr std::array<RectData, 7> s_rects =
+        {{
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 4, 4, 1, 1, 1, 1, 4, 4 },
+            { 1, 1, 2, 2, 4, 4, 1, 1, 1, 1, 4, 4 },
+            { 2, 2, 2, 2, 4, 4, 4, 4, 2, 2, 6, 6 },
+            { 1, 1, 4, 4, 4, 4, 1, 1, 1, 1, 4, 4 }
+        }};
 
-    for ( size_t n = 0; n < WXSIZEOF(s_rects); n++ )
-    {
-        const RectData& data = s_rects[n];
+        std::for_each(s_rects.cbegin(), s_rects.cend(),
+            [](const auto& rect) {
+                CHECK(
+                    rect.GetFirst().Union(rect.GetSecond()) == rect.GetResult()
+                );
 
-        CHECK(
-            data.GetFirst().Union(data.GetSecond()) == data.GetResult()
-        );
-
-        CHECK(
-            data.GetSecond().Union(data.GetFirst()) == data.GetResult()
-        );
+                CHECK(
+                    rect.GetSecond().Union(rect.GetFirst()) == rect.GetResult()
+                );
+            });
     }
 }
