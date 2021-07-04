@@ -124,7 +124,7 @@ bool wxRearrangeList::MoveCurrentDown()
 void wxRearrangeList::Swap(int pos1, int pos2)
 {
     // update the internally stored order
-    wxSwap(m_order[pos1], m_order[pos2]);
+    std::swap(m_order[pos1], m_order[pos2]);
 
 
     // and now also swap all the attributes of the items

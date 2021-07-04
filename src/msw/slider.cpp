@@ -360,7 +360,7 @@ int wxSlider::GetLabelsSize(int *widthMin, int *widthMax) const
 
         if ( HasFlag(wxSL_INVERSE) )
         {
-            wxSwap(*widthMin, *widthMax);
+            std::swap(*widthMin, *widthMax);
         }
     }
 

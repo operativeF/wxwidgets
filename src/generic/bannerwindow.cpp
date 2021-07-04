@@ -113,7 +113,7 @@ wxSize wxBannerWindow::DoGetBestClientSize() const
 
         // If we draw the text vertically width and height are swapped.
         if ( m_direction == wxLEFT || m_direction == wxRIGHT )
-            wxSwap(sizeWin.x, sizeWin.y);
+            std::swap(sizeWin.x, sizeWin.y);
 
         sizeWin += 2*wxSize(MARGIN_X, MARGIN_Y);
 

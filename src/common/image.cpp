@@ -253,7 +253,7 @@ wxImage wxImage::MakeEmptyClone(int flags) const
     long width  = M_IMGDATA->m_width;
 
     if ( flags & Clone_SwapOrientation )
-        wxSwap( width, height );
+        std::swap( width, height );
 
     if ( !image.Create( width, height, false ) )
     {

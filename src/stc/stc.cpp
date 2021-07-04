@@ -375,7 +375,7 @@ void wxStyledTextCtrl::SetSavePoint()
 wxMemoryBuffer wxStyledTextCtrl::GetStyledText(int startPos, int endPos) {
         wxMemoryBuffer buf;
         if (endPos < startPos) {
-            wxSwap(startPos, endPos);
+            std::swap(startPos, endPos);
         }
         int len = endPos - startPos;
         if (!len) return buf;
@@ -1685,7 +1685,7 @@ int wxStyledTextCtrl::FindText(int minPos, int maxPos, const wxString& text,
              Sci_RangeToFormat fr;
 
              if (endPos < startPos) {
-                 wxSwap(startPos, endPos);
+                 std::swap(startPos, endPos);
              }
              fr.hdc = draw;
              fr.hdcTarget = target;
@@ -1769,7 +1769,7 @@ wxString wxStyledTextCtrl::GetSelectedText() {
 // Retrieve a range of text.
 wxString wxStyledTextCtrl::GetTextRange(int startPos, int endPos) {
          if (endPos < startPos) {
-             wxSwap(startPos, endPos);
+             std::swap(startPos, endPos);
          }
          int len = endPos - startPos;
          if (!len) return wxEmptyString;
@@ -5089,7 +5089,7 @@ wxCharBuffer wxStyledTextCtrl::GetTargetTextRaw()
 wxCharBuffer wxStyledTextCtrl::GetTextRangeRaw(int startPos, int endPos)
 {
     if (endPos < startPos) {
-        wxSwap(startPos, endPos);
+        std::swap(startPos, endPos);
     }
     int len  = endPos - startPos;
     if (!len) {

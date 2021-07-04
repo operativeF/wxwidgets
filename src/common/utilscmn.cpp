@@ -993,7 +993,7 @@ unsigned int wxGCD(unsigned int u, unsigned int v)
         // then set v = v - u (which is even)
         if (u > v)
         {
-            wxSwap(u, v);
+            std::swap(u, v);
         }
         v -= u;  // Here v >= u
     } while (v != 0);

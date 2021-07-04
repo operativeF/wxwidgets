@@ -60,7 +60,7 @@ public:
                     // There is no need to add the text of an item already
                     // present in the combobox again, but do move it to the top
                     // of it to indicate that it was the last one used.
-                    wxSwap(*items.begin(), *it);
+                    std::swap(*items.begin(), *it);
                     break;
                 }
             }

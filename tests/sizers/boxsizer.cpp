@@ -177,16 +177,16 @@ TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::Size3")
 
                 case 1:
                     // exchange first and last elements
-                    wxSwap(ltd.prop[0], ltd.prop[2]);
-                    wxSwap(ltd.minsize[0], ltd.minsize[2]);
-                    wxSwap(ltd.sizes[0], ltd.sizes[2]);
+                    std::swap(ltd.prop[0], ltd.prop[2]);
+                    std::swap(ltd.minsize[0], ltd.minsize[2]);
+                    std::swap(ltd.sizes[0], ltd.sizes[2]);
                     break;
 
                 case 2:
                     // exchange the original third and second elements
-                    wxSwap(ltd.prop[0], ltd.prop[1]);
-                    wxSwap(ltd.minsize[0], ltd.minsize[1]);
-                    wxSwap(ltd.sizes[0], ltd.sizes[1]);
+                    std::swap(ltd.prop[0], ltd.prop[1]);
+                    std::swap(ltd.minsize[0], ltd.minsize[1]);
+                    std::swap(ltd.sizes[0], ltd.sizes[1]);
                     break;
             }
 

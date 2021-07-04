@@ -997,10 +997,10 @@ public:
         wxGridBlockCoords result = *this;
 
         if ( result.m_topRow > result.m_bottomRow )
-            wxSwap(result.m_topRow, result.m_bottomRow);
+            std::swap(result.m_topRow, result.m_bottomRow);
 
         if ( result.m_leftCol > result.m_rightCol )
-            wxSwap(result.m_leftCol, result.m_rightCol);
+            std::swap(result.m_leftCol, result.m_rightCol);
 
         return result;
     }

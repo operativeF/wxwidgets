@@ -3660,7 +3660,7 @@ void wxDataViewMainWindow::RefreshRowsAfter( unsigned int firstRow )
 wxRect wxDataViewMainWindow::GetLinesRect( unsigned int rowFrom, unsigned int rowTo ) const
 {
     if (rowFrom > rowTo)
-        wxSwap(rowFrom, rowTo);
+        std::swap(rowFrom, rowTo);
 
     wxRect rect;
     rect.x = 0;

@@ -686,15 +686,6 @@
         }
     }
 
-    // trivial implementation of std::swap() for primitive types
-    template <typename T>
-    inline void wxSwap(T& first, T& second)
-    {
-        T tmp(first);
-        first = second;
-        second = tmp;
-    }
-
 /* And also define a couple of simple functions to cast pointer to/from it. */
 inline wxUIntPtr wxPtrToUInt(const void *p)
 {

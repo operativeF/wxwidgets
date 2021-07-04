@@ -633,7 +633,7 @@ bool wxGridSelection::ExtendCurrentBlock(const wxGridCellCoords& blockStart,
             int top = blockStart.GetRow(),
                 bottom = blockEnd.GetRow();
             if ( top > bottom )
-                wxSwap(top, bottom);
+                std::swap(top, bottom);
 
             if ( top < newBlock.GetTopRow() )
                 newBlock.SetTopRow(top);
@@ -658,7 +658,7 @@ bool wxGridSelection::ExtendCurrentBlock(const wxGridCellCoords& blockStart,
             int left = blockStart.GetCol(),
                 right = blockEnd.GetCol();
             if ( left > right )
-                wxSwap(left, right);
+                std::swap(left, right);
 
             if ( left < newBlock.GetLeftCol() )
                 newBlock.SetLeftCol(left);

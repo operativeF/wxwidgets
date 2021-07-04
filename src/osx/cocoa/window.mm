@@ -2781,7 +2781,7 @@ wxWidgetCocoaImpl::ShowViewOrWindowWithEffect(wxWindow *win,
     {
         // we need to restore it to the original rectangle instead of making it
         // disappear
-        wxSwap(rectStart, rectEnd);
+        std::swap(rectStart, rectEnd);
 
         // and as the window is currently hidden, we need to show it for the
         // animation to be visible at all (but don't restore it at its full

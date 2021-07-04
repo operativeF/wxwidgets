@@ -1869,7 +1869,7 @@ void wxListMainWindow::HighlightLines( size_t lineFrom,
 {
     // It is safe to swap the bounds here if they are not in order.
     if ( lineFrom > lineTo )
-        wxSwap(lineFrom, lineTo);
+        std::swap(lineFrom, lineTo);
 
     if ( IsVirtual() )
     {

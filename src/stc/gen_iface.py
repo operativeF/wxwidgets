@@ -151,7 +151,7 @@ methodOverrideMap = {
      '''wxMemoryBuffer %s(int startPos, int endPos) {
         wxMemoryBuffer buf;
         if (endPos < startPos) {
-            wxSwap(startPos, endPos);
+            std::swap(startPos, endPos);
         }
         int len = endPos - startPos;
         if (!len) return buf;
@@ -578,7 +578,7 @@ methodOverrideMap = {
              Sci_RangeToFormat fr;
 
              if (endPos < startPos) {
-                 wxSwap(startPos, endPos);
+                 std::swap(startPos, endPos);
              }
              fr.hdc = draw;
              fr.hdcTarget = target;
@@ -632,7 +632,7 @@ methodOverrideMap = {
 
      '''wxString %s(int startPos, int endPos) {
          if (endPos < startPos) {
-             wxSwap(startPos, endPos);
+             std::swap(startPos, endPos);
          }
          int len = endPos - startPos;
          if (!len) return wxEmptyString;

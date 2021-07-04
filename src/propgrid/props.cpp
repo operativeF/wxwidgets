@@ -2516,7 +2516,7 @@ void wxPGArrayStringEditorDialog::ArrayRemoveAt( int index )
 
 void wxPGArrayStringEditorDialog::ArraySwap( size_t first, size_t second )
 {
-    wxSwap(m_array[first], m_array[second]);
+    std::swap(m_array[first], m_array[second]);
 }
 
 wxPGArrayStringEditorDialog::wxPGArrayStringEditorDialog()

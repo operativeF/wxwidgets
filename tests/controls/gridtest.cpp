@@ -1821,7 +1821,7 @@ TEST_CASE_FIXTURE(GridTestCase,
 
     // Do more extensive testing with rows.
 
-    wxSwap(multi.rows, multi.cols);
+    std::swap(multi.rows, multi.cols);
 
     GIVEN("Basic row insertions")
     {
@@ -1937,7 +1937,7 @@ TEST_CASE_FIXTURE(GridTestCase,
 
     // Do more extensive testing with columns.
 
-    wxSwap(multi.rows, multi.cols);
+    std::swap(multi.rows, multi.cols);
 
     GIVEN("Column tests")
     {

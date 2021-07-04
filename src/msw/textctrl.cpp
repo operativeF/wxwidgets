@@ -3174,7 +3174,7 @@ bool wxTextCtrl::SetStyle(long start, long end, const wxTextAttr& style)
 
     // order the range if needed
     if ( start > end )
-        wxSwap(start, end);
+        std::swap(start, end);
 
     // we can only change the format of the selection, so select the range we
     // want and restore the old selection later, after MSWSetXXXFormat()
