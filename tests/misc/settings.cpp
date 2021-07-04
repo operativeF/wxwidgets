@@ -20,6 +20,9 @@
 #include "wx/brush.h"
 #include "wx/pen.h"
 
+#include <algorithm>
+#include <array>
+
 TEST_CASE("Get colour")
 {
     for (unsigned int i=wxSYS_COLOUR_SCROLLBAR; i < wxSYS_COLOUR_MAX; i++)
@@ -28,7 +31,7 @@ TEST_CASE("Get colour")
 
 TEST_CASE("Get font")
 {
-    const wxSystemFont ids[] =
+    static constexpr std::array ids =
     {
         wxSYS_OEM_FIXED_FONT,
         wxSYS_ANSI_FIXED_FONT,
@@ -39,17 +42,17 @@ TEST_CASE("Get font")
         wxSYS_DEFAULT_GUI_FONT
     };
 
-    for (unsigned int i=0; i < WXSIZEOF(ids); i++)
-    {
-        const wxFont& font = wxSystemSettings::GetFont(ids[i]);
-        CHECK( font.IsOk() );
-        CHECK( wxFontEnumerator::IsValidFacename(font.GetFaceName()) );
-    }
+    std::for_each(ids.cbegin(), ids.cend(),
+        [](const auto& id) {
+            const wxFont& font = wxSystemSettings::GetFont(id);
+            CHECK(font.IsOk());
+            CHECK(wxFontEnumerator::IsValidFacename(font.GetFaceName()));
+        });
 }
 
 TEST_CASE("Get global colours")
 {
-    wxColour col[] =
+    static const std::array cols =
     {
         *wxBLACK,
         *wxBLUE,
@@ -60,13 +63,15 @@ TEST_CASE("Get global colours")
         *wxWHITE
     };
 
-    for (unsigned int i=0; i < WXSIZEOF(col); i++)
-        CHECK( col[i].IsOk() );
+    std::for_each(cols.cbegin(), cols.cend(),
+        [](const auto& col) {
+            CHECK( col.IsOk() );
+        });
 }
 
 TEST_CASE("Get global fonts")
 {
-    const wxFont font[] =
+    static const std::array fonts =
     {
         *wxNORMAL_FONT,
         *wxSMALL_FONT,
@@ -74,24 +79,24 @@ TEST_CASE("Get global fonts")
         *wxSWISS_FONT
     };
 
-    for (unsigned int i=0; i < WXSIZEOF(font); i++)
-    {
-        CHECK( font[i].IsOk() );
+    std::for_each(fonts.cbegin(), fonts.cend(),
+        [](const auto& font) {
+        CHECK( font.IsOk() );
 
-        const wxString facename = font[i].GetFaceName();
+        const wxString facename = font.GetFaceName();
         if ( !facename.empty() )
         {
             CHECK_MESSAGE(
                 wxFontEnumerator::IsValidFacename(facename),
-                ("font #%u: facename \"%s\" is invalid", i, facename)
+                ("font #%s: facename \"%s\" is invalid", font, facename)
             );
         }
-    }
+    });
 }
 
 TEST_CASE("Get global brushes")
 {
-    wxBrush brush[] =
+    static const std::array brushes =
     {
         *wxBLACK_BRUSH,
         *wxBLUE_BRUSH,
@@ -105,13 +110,15 @@ TEST_CASE("Get global brushes")
         *wxWHITE_BRUSH
     };
 
-    for (unsigned int i=0; i < WXSIZEOF(brush); i++)
-        CHECK( brush[i].IsOk() );
+    std::for_each(brushes.cbegin(), brushes.cend(),
+        [](const auto& brush) {
+            CHECK(brush.IsOk());
+        });
 }
 
 TEST_CASE("Get global pens")
 {
-    wxPen pen[] =
+    static const std::array pens =
     {
         *wxBLACK_DASHED_PEN,
         *wxBLACK_PEN,
@@ -126,6 +133,8 @@ TEST_CASE("Get global pens")
         *wxWHITE_PEN
     };
 
-    for (unsigned int i=0; i < WXSIZEOF(pen); i++)
-        CHECK( pen[i].IsOk() );
+    std::for_each(pens.cbegin(), pens.cend(),
+        [](const auto& pen) {
+            CHECK(pen.IsOk());
+        });
 }
