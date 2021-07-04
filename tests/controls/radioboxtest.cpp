@@ -22,10 +22,7 @@
 
 TEST_CASE("Radiobox test")
 {
-    std::vector<wxString> choices;
-    choices.push_back("item 0");
-    choices.push_back("item 1");
-    choices.push_back("item 2");
+    const std::vector<wxString> choices = { "item 0", "item 1", "item 2" };
 
     auto m_radio = std::make_unique<wxRadioBox>(wxTheApp->GetTopWindow(), wxID_ANY,
                                                 "RadioBox", wxDefaultPosition,
@@ -39,13 +36,10 @@ TEST_CASE("Radiobox test")
         CHECK_EQ(wxNOT_FOUND, m_radio->FindString("ITEM 2", true));
     }
 
+#ifndef __WXGTK__
     SUBCASE("RowColCount")
     {
-    #ifndef __WXGTK__
-        std::vector<wxString> choices;
-        choices.push_back("item 0");
-        choices.push_back("item 1");
-        choices.push_back("item 2");
+        const std::vector<wxString> choices = { "item 0", "item 1", "item 2" };
 
         m_radio = std::make_unique<wxRadioBox>(wxTheApp->GetTopWindow(), wxID_ANY,
                                   "RadioBox", wxDefaultPosition,
@@ -61,12 +55,12 @@ TEST_CASE("Radiobox test")
 
         CHECK_EQ(3, m_radio->GetColumnCount());
         CHECK_EQ(1, m_radio->GetRowCount());
-    #endif
     }
+#endif
 
+#ifndef __WXOSX__
     SUBCASE("Enable")
     {
-    #ifndef __WXOSX__
         m_radio->Enable(false);
 
         CHECK(!m_radio->IsItemEnabled(0));
@@ -88,8 +82,8 @@ TEST_CASE("Radiobox test")
         CHECK(!m_radio->IsItemEnabled(0));
         CHECK(m_radio->IsItemEnabled(1));
         CHECK(m_radio->IsItemEnabled(2));
-    #endif
     }
+#endif
 
     SUBCASE("Show")
     {
@@ -129,9 +123,9 @@ TEST_CASE("Radiobox test")
         CHECK_EQ(wxEmptyString, m_radio->GetItemHelpText(1));
     }
 
+#if defined (__WXMSW__) || defined(__WXGTK__)
     SUBCASE("ToolTip")
     {
-    #if defined (__WXMSW__) || defined(__WXGTK__)
         //GetItemToolTip returns nullptr if there is no tooltip set
         CHECK(!m_radio->GetItemToolTip(0));
 
@@ -143,8 +137,8 @@ TEST_CASE("Radiobox test")
 
         //However if we set a blank tip this does count as a tooltip
         CHECK(!m_radio->GetItemToolTip(1));
-    #endif
     }
+#endif
 
     SUBCASE("Selection")
     {
