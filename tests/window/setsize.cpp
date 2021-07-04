@@ -54,7 +54,7 @@ protected:
 
 TEST_CASE("wxWindow::SetSize")
 {
-    std::unique_ptr<wxWindow> w(new MyWindow(wxTheApp->GetTopWindow()));
+    auto w = std::make_unique<MyWindow>(wxTheApp->GetTopWindow());
 
     SUBCASE("Simple")
     {
@@ -75,7 +75,7 @@ TEST_CASE("wxWindow::SetSize")
 
 TEST_CASE("wxWindow::GetBestSize")
 {
-    std::unique_ptr<wxWindow> w(new MyWindow(wxTheApp->GetTopWindow()));
+    auto w = std::make_unique<MyWindow>(wxTheApp->GetTopWindow());
 
     CHECK( wxSize(50, 250) == w->GetBestSize() );
 
@@ -88,8 +88,8 @@ TEST_CASE("wxWindow::GetBestSize")
 
 TEST_CASE("wxWindow::MovePreservesSize")
 {
-    std::unique_ptr<wxWindow>
-        w(new wxFrame(wxTheApp->GetTopWindow(), wxID_ANY, "Test child frame"));
+    auto w = std::make_unique<wxFrame>(wxTheApp->GetTopWindow(), wxID_ANY,
+                                       "Test child frame");
 
     // Unfortunately showing the window is asynchronous, at least when using
     // X11, so we have to wait for some time before retrieving its true
