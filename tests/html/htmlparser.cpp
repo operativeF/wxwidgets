@@ -25,7 +25,7 @@
 
 
 // Test that parsing invalid HTML simply fails but doesn't crash for example.
-TEST_CASE("wxHtmlParser::ParseInvalid", "[html][parser][error]")
+TEST_CASE("wxHtmlParser::ParseInvalid")
 {
     class NullParser : public wxHtmlWinParser
     {
@@ -43,12 +43,12 @@ TEST_CASE("wxHtmlParser::ParseInvalid", "[html][parser][error]")
     delete p.Parse("<!---");
 }
 
-TEST_CASE("wxHtmlCell::Detach", "[html][cell]")
+TEST_CASE("wxHtmlCell::Detach")
 {
     wxMemoryDC dc;
 
-    std::unique_ptr<wxHtmlContainerCell> const top(new wxHtmlContainerCell(NULL));
-    wxHtmlContainerCell* const cont = new wxHtmlContainerCell(NULL);
+    std::unique_ptr<wxHtmlContainerCell> const top(new wxHtmlContainerCell(nullptr));
+    wxHtmlContainerCell* const cont = new wxHtmlContainerCell(nullptr);
     wxHtmlCell* const cell1 = new wxHtmlWordCell("Hello", dc);
     wxHtmlCell* const cell2 = new wxHtmlColourCell(*wxRED);
     wxHtmlCell* const cell3 = new wxHtmlWordCell("world", dc);
@@ -61,7 +61,7 @@ TEST_CASE("wxHtmlCell::Detach", "[html][cell]")
     SUBCASE("container")
     {
         top->Detach(cont);
-        CHECK( top->GetFirstChild() == NULL );
+        CHECK( top->GetFirstChild() == nullptr );
 
         delete cont;
     }
@@ -88,7 +88,7 @@ TEST_CASE("wxHtmlCell::Detach", "[html][cell]")
         cont->Detach(cell3);
         CHECK( cont->GetFirstChild() == cell1 );
         CHECK( cell1->GetNext() == cell2 );
-        CHECK( cell2->GetNext() == NULL );
+        CHECK( cell2->GetNext() == nullptr );
 
         delete cell3;
     }

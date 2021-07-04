@@ -114,7 +114,7 @@ void GTKWaitRealized(wxDataViewCtrl* list)
 
 // Note: The wxDataViewCtrl test currently uses the derivative class
 // wxDataViewListCtrl for convenience.
-TEST_CASE_FIXTURE(PersistenceTests, "wxPersistDVC", "[persist][wxDataViewCtrl]")
+TEST_CASE_FIXTURE(PersistenceTests, "wxPersistDVC")
 {
     {
         wxDataViewCtrl* const list = CreatePersistenceTestDVC();

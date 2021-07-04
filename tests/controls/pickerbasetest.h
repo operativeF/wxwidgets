@@ -71,8 +71,8 @@ struct PickerBaseTest
         wxPickerBase* const base = GetBase();
 
         CHECK(base->HasTextCtrl());
-        CHECK(base->GetTextCtrl() != NULL);
-        CHECK(base->GetPickerCtrl() != NULL);
+        CHECK(base->GetTextCtrl() != nullptr);
+        CHECK(base->GetPickerCtrl() != nullptr);
     }
 
     std::unique_ptr<PickCtrlT> m_pickctrl;

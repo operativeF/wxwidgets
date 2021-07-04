@@ -24,7 +24,7 @@
 // ----------------------------------------------------------------------------
 // TestRowRangesAdd
 // ----------------------------------------------------------------------------
-TEST_CASE("RowHeightCacheTestCase::TestRowRangesSimple", "[dataview][heightcache]")
+TEST_CASE("RowHeightCacheTestCase::TestRowRangesSimple")
 {
     RowRanges rr;
 
@@ -73,7 +73,7 @@ TEST_CASE("RowHeightCacheTestCase::TestRowRangesSimple", "[dataview][heightcache
 // ----------------------------------------------------------------------------
 // TestRowRangesRemove
 // ----------------------------------------------------------------------------
-TEST_CASE("RowHeightCacheTestCase::TestRowRangesGapsMod2", "[dataview][heightcache]")
+TEST_CASE("RowHeightCacheTestCase::TestRowRangesGapsMod2")
 {
     RowRanges rr;
     for (int i = 0; i < 100; i++)
@@ -132,7 +132,7 @@ TEST_CASE("RowHeightCacheTestCase::TestRowRangesGapsMod2", "[dataview][heightcac
 // ----------------------------------------------------------------------------
 // TestRowRangesCleanUp1
 // ----------------------------------------------------------------------------
-TEST_CASE("RowHeightCacheTestCase::TestRowRangesCleanUp1", "[dataview][heightcache]")
+TEST_CASE("RowHeightCacheTestCase::TestRowRangesCleanUp1")
 {
     RowRanges rr;
     for (unsigned int i = 0; i < 100; i++)
@@ -164,7 +164,7 @@ TEST_CASE("RowHeightCacheTestCase::TestRowRangesCleanUp1", "[dataview][heightcac
 // ----------------------------------------------------------------------------
 // TestRowRangesCleanUp2
 // ----------------------------------------------------------------------------
-TEST_CASE("RowHeightCacheTestCase::TestRowRangesCleanUp2", "[dataview][heightcache]")
+TEST_CASE("RowHeightCacheTestCase::TestRowRangesCleanUp2")
 {
     RowRanges rr;
     for (unsigned int i = 0; i < 10; i++)
@@ -190,7 +190,7 @@ TEST_CASE("RowHeightCacheTestCase::TestRowRangesCleanUp2", "[dataview][heightcac
 // ----------------------------------------------------------------------------
 // TestHeightCache
 // ----------------------------------------------------------------------------
-TEST_CASE("RowHeightCacheTestCase::TestHeightCache", "[dataview][heightcache]")
+TEST_CASE("RowHeightCacheTestCase::TestHeightCache")
 {
     HeightCache hc;
 

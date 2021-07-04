@@ -40,10 +40,10 @@ TEST_CASE("DisplaySize")
     CHECK_EQ( w, sz.x );
     CHECK_EQ( h, sz.y );
 
-    // test that passing NULL works as expected, e.g. doesn't crash
-    wxDisplaySize(NULL, NULL);
-    wxDisplaySize(&w, NULL);
-    wxDisplaySize(NULL, &h);
+    // test that passing nullptr works as expected, e.g. doesn't crash
+    wxDisplaySize(nullptr, nullptr);
+    wxDisplaySize(&w, nullptr);
+    wxDisplaySize(nullptr, &h);
 
     CHECK_EQ( w, sz.x );
     CHECK_EQ( h, sz.y );

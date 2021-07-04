@@ -148,8 +148,7 @@ MultiColumnsDataViewCtrlTestCase::~MultiColumnsDataViewCtrlTestCase()
 // ----------------------------------------------------------------------------
 
 TEST_CASE_FIXTURE(MultiSelectDataViewCtrlTestCase,
-                 "wxDVC::Selection",
-                 "[wxDataViewCtrl][select]")
+                 "wxDVC::Selection")
 {
     // Check selection round-trip.
     wxDataViewItemArray sel;
@@ -172,8 +171,7 @@ TEST_CASE_FIXTURE(MultiSelectDataViewCtrlTestCase,
 }
 
 TEST_CASE_FIXTURE(MultiSelectDataViewCtrlTestCase,
-                 "wxDVC::DeleteSelected",
-                 "[wxDataViewCtrl][delete]")
+                 "wxDVC::DeleteSelected")
 {
 #ifdef __WXGTK__
     wxString useASAN;
@@ -201,8 +199,7 @@ TEST_CASE_FIXTURE(MultiSelectDataViewCtrlTestCase,
 }
 
 TEST_CASE_FIXTURE(MultiSelectDataViewCtrlTestCase,
-                 "wxDVC::DeleteNotSelected",
-                 "[wxDataViewCtrl][delete]")
+                 "wxDVC::DeleteNotSelected")
 {
     // TODO not working on OS X as expected
 #ifdef __WXOSX__
@@ -247,8 +244,7 @@ void DataViewCtrlTestCase::TestSelectionFor0and1()
 }
 
 TEST_CASE_FIXTURE(MultiSelectDataViewCtrlTestCase,
-                 "wxDVC::GetSelectionForMulti",
-                 "[wxDataViewCtrl][select]")
+                 "wxDVC::GetSelectionForMulti")
 {
     wxDataViewItemArray selections;
 
@@ -264,15 +260,13 @@ TEST_CASE_FIXTURE(MultiSelectDataViewCtrlTestCase,
 }
 
 TEST_CASE_FIXTURE(SingleSelectDataViewCtrlTestCase,
-                 "wxDVC::SingleSelection",
-                 "[wxDataViewCtrl][selection]")
+                 "wxDVC::SingleSelection")
 {
     TestSelectionFor0and1();
 }
 
 TEST_CASE_FIXTURE(SingleSelectDataViewCtrlTestCase,
-                 "wxDVC::IsExpanded",
-                 "[wxDataViewCtrl][expand]")
+                 "wxDVC::IsExpanded")
 {
     CHECK( m_dvc->IsExpanded(m_root) );
     CHECK( !m_dvc->IsExpanded(m_child1) );
@@ -300,8 +294,7 @@ TEST_CASE_FIXTURE(SingleSelectDataViewCtrlTestCase,
 }
 
 TEST_CASE_FIXTURE(SingleSelectDataViewCtrlTestCase,
-                 "wxDVC::GetItemRect",
-                 "[wxDataViewCtrl][item]")
+                 "wxDVC::GetItemRect")
 {
 #ifdef __WXGTK__
     // We need to let the native control have some events to lay itself out.
@@ -372,8 +365,7 @@ TEST_CASE_FIXTURE(SingleSelectDataViewCtrlTestCase,
 }
 
 TEST_CASE_FIXTURE(SingleSelectDataViewCtrlTestCase,
-                 "wxDVC::DeleteAllItems",
-                 "[wxDataViewCtrl][delete]")
+                 "wxDVC::DeleteAllItems")
 {
     // The invalid item corresponds to the root of tree store model, so it
     // should have a single item (our m_root) initially.
@@ -386,8 +378,7 @@ TEST_CASE_FIXTURE(SingleSelectDataViewCtrlTestCase,
 }
 
 TEST_CASE_FIXTURE(MultiColumnsDataViewCtrlTestCase,
-                 "wxDVC::AppendTextColumn",
-                 "[wxDataViewCtrl][column]")
+                 "wxDVC::AppendTextColumn")
 {
 #ifdef __WXGTK__
     // Wait for the list control to be realized.

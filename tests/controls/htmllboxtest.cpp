@@ -24,7 +24,7 @@ using HTMLBoxTest = ItemContainerTest<wxSimpleHtmlListBox>;
 
 TEST_CASE_FIXTURE(HTMLBoxTest, "HTML List Box test")
 {
-    auto m_container = std::make_unique<wxSimpleHtmlListBox>(
+    m_container = std::make_unique<wxSimpleHtmlListBox>(
         wxTheApp->GetTopWindow(), wxID_ANY);
 
     //wxITEM_CONTAINER_TESTS();

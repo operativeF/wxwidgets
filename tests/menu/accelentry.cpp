@@ -36,7 +36,7 @@ void CheckAccelEntry(const wxAcceleratorEntry& accel, int keycode, int flags)
 /*
  * Test the creation of accelerator keys using the Create function
  */
-TEST_CASE( "wxAcceleratorEntry::Create", "[accelentry]" )
+TEST_CASE( "wxAcceleratorEntry::Create")
 {
     std::unique_ptr<wxAcceleratorEntry> pa;
 
@@ -78,7 +78,7 @@ TEST_CASE( "wxAcceleratorEntry::Create", "[accelentry]" )
  * Test the creation of accelerator keys from strings and also the
  * creation of strings from an accelerator key
  */
-TEST_CASE( "wxAcceleratorEntry::StringTests", "[accelentry]" )
+TEST_CASE( "wxAcceleratorEntry::StringTests")
 {
     wxAcceleratorEntry a(wxACCEL_ALT, 'X');
 

@@ -88,7 +88,7 @@ void DoTestLabel(wxControl* c)
 
 } // anonymous namespace
 
-TEST_CASE("wxControl::Label", "[wxControl][label]")
+TEST_CASE("wxControl::Label")
 {
     SUBCASE("wxStaticText")
     {
@@ -121,14 +121,14 @@ TEST_CASE("wxControl::Label", "[wxControl][label]")
     }
 }
 
-TEST_CASE("wxControl::RemoveMnemonics", "[wxControl][label][mnemonics]")
+TEST_CASE("wxControl::RemoveMnemonics")
 {
     CHECK( "mnemonic"  == wxControl::RemoveMnemonics("&mnemonic") );
     CHECK( "&mnemonic" == wxControl::RemoveMnemonics("&&mnemonic") );
     CHECK( "&mnemonic" == wxControl::RemoveMnemonics("&&&mnemonic") );
 }
 
-TEST_CASE("wxControl::FindAccelIndex", "[wxControl][label][mnemonics]")
+TEST_CASE("wxControl::FindAccelIndex")
 {
     CHECK( wxControl::FindAccelIndex("foo") == wxNOT_FOUND );
     CHECK( wxControl::FindAccelIndex("&foo") == 0 );

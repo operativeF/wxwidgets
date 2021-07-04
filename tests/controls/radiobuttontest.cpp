@@ -159,17 +159,17 @@ TEST_CASE_FIXTURE(RadioButtonTestCase, "RadioButton::Group")
 
     // GetNextInGroup()
     CHECK_SAME_WINDOW(g1radio0->GetNextInGroup(), g1radio1);
-    CHECK_SAME_WINDOW(g1radio1->GetNextInGroup(), NULL);
+    CHECK_SAME_WINDOW(g1radio1->GetNextInGroup(), nullptr);
 
     CHECK_SAME_WINDOW(g2radio0->GetNextInGroup(), g2radio1);
     CHECK_SAME_WINDOW(g2radio1->GetNextInGroup(), g2radio2);
-    CHECK_SAME_WINDOW(g2radio2->GetNextInGroup(), NULL);
+    CHECK_SAME_WINDOW(g2radio2->GetNextInGroup(), nullptr);
 
     // GetPreviousInGroup()
-    CHECK_SAME_WINDOW(g1radio0->GetPreviousInGroup(), NULL);
+    CHECK_SAME_WINDOW(g1radio0->GetPreviousInGroup(), nullptr);
     CHECK_SAME_WINDOW(g1radio1->GetPreviousInGroup(), g1radio0);
 
-    CHECK_SAME_WINDOW(g2radio0->GetPreviousInGroup(), NULL);
+    CHECK_SAME_WINDOW(g2radio0->GetPreviousInGroup(), nullptr);
     CHECK_SAME_WINDOW(g2radio1->GetPreviousInGroup(), g2radio0);
     CHECK_SAME_WINDOW(g2radio2->GetPreviousInGroup(), g2radio1);
 }
@@ -208,8 +208,8 @@ TEST_CASE_FIXTURE(RadioButtonTestCase, "RadioButton::Single")
     // Also check that navigation works as expected with "single" buttons.
     CHECK_SAME_WINDOW(sradio->GetFirstInGroup(), sradio);
     CHECK_SAME_WINDOW(sradio->GetLastInGroup(), sradio);
-    CHECK_SAME_WINDOW(sradio->GetPreviousInGroup(), NULL);
-    CHECK_SAME_WINDOW(sradio->GetNextInGroup(), NULL);
+    CHECK_SAME_WINDOW(sradio->GetPreviousInGroup(), nullptr);
+    CHECK_SAME_WINDOW(sradio->GetNextInGroup(), nullptr);
 }
 
 TEST_CASE("RadioButton::Focus")

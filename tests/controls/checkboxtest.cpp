@@ -97,7 +97,7 @@ TEST_CASE("ThirdStateUser")
 TEST_CASE("InvalidStyles")
 {
     // Check that using incompatible styles doesn't work.
-    WX_ASSERT_FAILS_WITH_ASSERT( std::make_unique<wxCheckBox>(
+    WX_ASSERT_FAILS_WITH_ASSERT( auto failed_cb = std::make_unique<wxCheckBox>(
         wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
         wxDefaultPosition, wxDefaultSize, wxCHK_2STATE | wxCHK_3STATE) );
 
@@ -106,7 +106,7 @@ TEST_CASE("InvalidStyles")
     CHECK( !m_check->Is3rdStateAllowedForUser() );
 #endif
 
-    WX_ASSERT_FAILS_WITH_ASSERT(std::make_unique<wxCheckBox>(
+    WX_ASSERT_FAILS_WITH_ASSERT(auto failed_cb = std::make_unique<wxCheckBox>(
         wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
         wxDefaultPosition, wxDefaultSize,
         wxCHK_2STATE | wxCHK_ALLOW_3RD_STATE_FOR_USER));
@@ -117,7 +117,7 @@ TEST_CASE("InvalidStyles")
 #endif
 
     // wxCHK_ALLOW_3RD_STATE_FOR_USER without wxCHK_3STATE doesn't work.
-    WX_ASSERT_FAILS_WITH_ASSERT(std::make_unique<wxCheckBox>(
+    WX_ASSERT_FAILS_WITH_ASSERT(auto failed_cb = std::make_unique<wxCheckBox>(
         wxTheApp->GetTopWindow(), wxID_ANY, "Check box",
         wxDefaultPosition, wxDefaultSize,
         wxCHK_ALLOW_3RD_STATE_FOR_USER));

@@ -40,7 +40,7 @@ TEST_CASE("GraphicsPathTestCase", "[path]")
 #else
 
 #if wxUSE_GRAPHICS_GDIPLUS
-TEST_CASE("GraphicsPathTestCaseGDIPlus", "[path][gdi+]")
+TEST_CASE("GraphicsPathTestCaseGDIPlus")
 {
     wxBitmap bmp(500, 500);
     wxMemoryDC mdc(bmp);
@@ -51,7 +51,7 @@ TEST_CASE("GraphicsPathTestCaseGDIPlus", "[path][gdi+]")
 #endif // wxUSE_GRAPHICS_GDIPLUS
 
 #if wxUSE_GRAPHICS_DIRECT2D
-TEST_CASE("GraphicsPathTestCaseDirect2D", "[path][d2d]")
+TEST_CASE("GraphicsPathTestCaseDirect2D")
 {
     wxBitmap bmp(500, 500);
     wxMemoryDC mdc(bmp);

@@ -357,7 +357,7 @@ extern bool IsNetworkAvailable()
     // under Travis to avoid false positives.
     static int s_isTravis = -1;
     if ( s_isTravis == -1 )
-        s_isTravis = wxGetEnv(wxASCII_STR("TRAVIS"), NULL);
+        s_isTravis = wxGetEnv(wxASCII_STR("TRAVIS"), nullptr);
 
     if ( s_isTravis )
         return false;
@@ -401,9 +401,9 @@ extern bool IsAutomaticTest()
         // Also recognize various CI environments.
         if ( !s_isAutomatic )
         {
-            s_isAutomatic = wxGetEnv(wxASCII_STR("TRAVIS"), NULL) ||
-                              wxGetEnv(wxASCII_STR("GITHUB_ACTIONS"), NULL) ||
-                                wxGetEnv(wxASCII_STR("APPVEYOR"), NULL);
+            s_isAutomatic = wxGetEnv(wxASCII_STR("TRAVIS"), nullptr) ||
+                              wxGetEnv(wxASCII_STR("GITHUB_ACTIONS"), nullptr) ||
+                                wxGetEnv(wxASCII_STR("APPVEYOR"), nullptr);
         }
     }
 
@@ -546,8 +546,8 @@ TestApp::TestApp()
 {
     m_runTests = true;
 
-    m_filterEventFunc = NULL;
-    m_processEventFunc = NULL;
+    m_filterEventFunc = nullptr;
+    m_processEventFunc = nullptr;
 
 #if wxUSE_GUI
     m_exitcode = EXIT_SUCCESS;
@@ -569,7 +569,7 @@ bool TestApp::OnInit()
          << "build: " << WX_BUILD_OPTIONS_SIGNATURE << "\n"
          << "running under " << wxGetOsDescription()
          << " as " << wxGetUserId()
-         << ", locale is " << setlocale(LC_ALL, NULL)
+         << ", locale is " << setlocale(LC_ALL, nullptr)
          << std::endl;
 
 #if wxUSE_GUI
@@ -579,7 +579,7 @@ bool TestApp::OnInit()
     Connect(wxEVT_IDLE, wxIdleEventHandler(TestApp::OnIdle));
 
 #ifdef __WXGTK20__
-    g_log_set_default_handler(wxTestGLogHandler, NULL);
+    g_log_set_default_handler(wxTestGLogHandler, nullptr);
 #endif // __WXGTK__
 
 #ifdef GDK_WINDOWING_X11
@@ -616,7 +616,7 @@ int TestApp::RunTests()
     // Switch off logging to avoid interfering with the tests output unless
     // WXTRACE is set, as otherwise setting it would have no effect while
     // running the tests.
-    if ( !wxGetEnv(wxASCII_STR("WXTRACE"), NULL) )
+    if ( !wxGetEnv(wxASCII_STR("WXTRACE"), nullptr) )
         wxLog::EnableLogging(false);
     else
         wxLog::SetTimestamp("%Y-%m-%d %H:%M:%S.%l");

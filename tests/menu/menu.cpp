@@ -94,7 +94,7 @@ public:
         m_win->Bind(wxEVT_MENU, &MenuEventHandler::OnMenu, this);
 
         m_gotEvent = false;
-        m_event = NULL;
+        m_event = nullptr;
     }
 
     virtual ~MenuEventHandler()
@@ -233,8 +233,8 @@ TEST_CASE("Menu tests.")
         }
 
         // Find by id:
-        wxMenu* menu = NULL;
-        wxMenuItem* item = NULL;
+        wxMenu* menu = nullptr;
+        wxMenuItem* item = nullptr;
         item = bar->FindItem(MenuTestCase_Foo, &menu);
         CHECK( item );
         CHECK( menu );
@@ -521,7 +521,7 @@ TEST_CASE("Menu tests.")
 
         // Force owner drawn usage by having a bitmap that's wider than the
         // standard size. This results in rearranging the parent menu which
-        // hasn't always worked properly and lead to a null pointer exception.
+        // hasn't always worked properly and lead to a nullptr pointer exception.
         item->SetBitmap(wxBitmap(512, 1));
 
         wxDELETE(menu);

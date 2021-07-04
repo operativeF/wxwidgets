@@ -31,7 +31,7 @@
 // test class
 // ----------------------------------------------------------------------------
 
-TEST_CASE( "wxAuiNotebook::DoGetBestSize", "[aui]" )
+TEST_CASE( "wxAuiNotebook::DoGetBestSize")
 {
     wxWindow *frame = wxTheApp->GetTopWindow();
     REQUIRE( frame );

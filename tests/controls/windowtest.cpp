@@ -138,7 +138,7 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Mouse")
 #if wxUSE_CARET
     CHECK(!m_window->GetCaret());
 
-    wxCaret* caret = NULL;
+    wxCaret* caret = nullptr;
 
     // Try creating the caret in two different, but normally equivalent, ways.
     SUBCASE("Caret 1-step")
@@ -223,21 +223,21 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Help")
 
 TEST_CASE_FIXTURE(WindowTestCase, "Window::Parent")
 {
-    CHECK( m_window->GetGrandParent() == static_cast<wxWindow*>(NULL) );
+    CHECK( m_window->GetGrandParent() == static_cast<wxWindow*>(nullptr) );
     CHECK( m_window->GetParent() == wxTheApp->GetTopWindow() );
 }
 
 TEST_CASE_FIXTURE(WindowTestCase, "Window::Siblings")
 {
-    CHECK( m_window->GetNextSibling() == static_cast<wxWindow*>(NULL) );
-    CHECK( m_window->GetPrevSibling() == static_cast<wxWindow*>(NULL) );
+    CHECK( m_window->GetNextSibling() == static_cast<wxWindow*>(nullptr) );
+    CHECK( m_window->GetPrevSibling() == static_cast<wxWindow*>(nullptr) );
 
     wxWindow* newwin = new wxWindow(wxTheApp->GetTopWindow(), wxID_ANY);
 
     CHECK( m_window->GetNextSibling() == newwin );
-    CHECK( m_window->GetPrevSibling() == static_cast<wxWindow*>(NULL) );
+    CHECK( m_window->GetPrevSibling() == static_cast<wxWindow*>(nullptr) );
 
-    CHECK( newwin->GetNextSibling() == static_cast<wxWindow*>(NULL) );
+    CHECK( newwin->GetNextSibling() == static_cast<wxWindow*>(nullptr) );
     CHECK( newwin->GetPrevSibling() == m_window );
 
     wxDELETE(newwin);
@@ -422,12 +422,12 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::FindWindowBy")
     CHECK( wxWindow::FindWindowByName("name") == m_window );
     CHECK( wxWindow::FindWindowByLabel("label") == m_window );
 
-    CHECK( wxWindow::FindWindowById(wxID_HIGHEST + 3) == NULL );
-    CHECK( wxWindow::FindWindowByName("noname") == NULL );
-    CHECK( wxWindow::FindWindowByLabel("nolabel") == NULL );
+    CHECK( wxWindow::FindWindowById(wxID_HIGHEST + 3) == nullptr );
+    CHECK( wxWindow::FindWindowByName("noname") == nullptr );
+    CHECK( wxWindow::FindWindowByLabel("nolabel") == nullptr );
 }
 
-TEST_CASE_FIXTURE(WindowTestCase, "Window::SizerErrors", "[window][sizer][error]")
+TEST_CASE_FIXTURE(WindowTestCase, "Window::SizerErrors")
 {
     wxWindow* const child = new wxWindow(m_window, wxID_ANY);
     std::unique_ptr<wxSizer> const sizer1(new wxBoxSizer(wxHORIZONTAL));

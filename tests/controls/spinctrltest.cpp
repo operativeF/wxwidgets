@@ -87,13 +87,13 @@ protected:
 };
 
 
-TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Init", "[spinctrl]")
+TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Init")
 {
     // Initial value is defined by "initial" argument which is 0 by default.
     CHECK(m_spin->GetValue() == 0);
 }
 
-TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::Init2", "[spinctrl]")
+TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::Init2")
 {
     m_spin->Create(wxTheApp->GetTopWindow(), wxID_ANY, "",
                    wxDefaultPosition, wxDefaultSize, 0,
@@ -103,7 +103,7 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::Init2", "[spinctrl]")
     CHECK(m_spin->GetValue() == 17);
 }
 
-TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::Init3", "[spinctrl]")
+TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::Init3")
 {
     m_spin->Create(wxTheApp->GetTopWindow(), wxID_ANY, "",
                    wxDefaultPosition, wxDefaultSize, 0,
@@ -114,7 +114,7 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::Init3", "[spinctrl]")
     CHECK(m_spin->GetValue() == 150);
 }
 
-TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::Init4", "[spinctrl]")
+TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::Init4")
 {
     m_spin->Create(wxTheApp->GetTopWindow(), wxID_ANY, "99",
                    wxDefaultPosition, wxDefaultSize, 0,
@@ -126,7 +126,7 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::Init4", "[spinctrl]")
     CHECK(m_spin->GetValue() == 99);
 }
 
-TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::NoEventsInCtor", "[spinctrl]")
+TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::NoEventsInCtor")
 {
     // Verify that creating the control does not generate any events. This is
     // unexpected and shouldn't happen.
@@ -141,7 +141,7 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::NoEventsInCtor", "[spinctrl]")
     CHECK(updatedText.GetCount() == 0);
 }
 
-TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Arrows", "[spinctrl]")
+TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Arrows")
 {
 #if wxUSE_UIACTIONSIMULATOR
     EventCounter updated(m_spin, wxEVT_SPINCTRL);
@@ -168,7 +168,7 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Arrows", "[spinctrl]")
 #endif
 }
 
-TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::Wrap", "[spinctrl]")
+TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::Wrap")
 {
 #if wxUSE_UIACTIONSIMULATOR
     m_spin->Create(wxTheApp->GetTopWindow(), wxID_ANY, "",
@@ -194,7 +194,7 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase1, "SpinCtrl::Wrap", "[spinctrl]")
 #endif
 }
 
-TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Range", "[spinctrl]")
+TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Range")
 {
     CHECK(m_spin->GetMin() == 0);
     CHECK(m_spin->GetMax() == 100);
@@ -251,7 +251,7 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Range", "[spinctrl]")
     CHECK(m_spin->GetMax() == 50);
 }
 
-TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Value", "[spinctrl]")
+TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Value")
 {
     EventCounter updatedSpin(m_spin, wxEVT_SPINCTRL);
     EventCounter updatedText(m_spin, wxEVT_TEXT);
@@ -289,7 +289,7 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Value", "[spinctrl]")
     CHECK(updatedText.GetCount() == 0);
 }
 
-TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Base", "[spinctrl]")
+TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Base")
 {
     CHECK(m_spin->GetMin() == 0);
     CHECK(m_spin->GetMax() == 100);
@@ -329,7 +329,7 @@ TEST_CASE_FIXTURE(SpinCtrlTestCase2, "SpinCtrl::Base", "[spinctrl]")
     CHECK(m_spin->GetBase() == 10);
 }
 
-TEST_CASE_FIXTURE(SpinCtrlTestCase3, "SpinCtrl::SetValueInsideEventHandler", "[spinctrl]")
+TEST_CASE_FIXTURE(SpinCtrlTestCase3, "SpinCtrl::SetValueInsideEventHandler")
 {
 #if wxUSE_UIACTIONSIMULATOR
     // A dummy control with which we change the focus.

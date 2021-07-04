@@ -26,7 +26,7 @@
 // tests themselves
 // ----------------------------------------------------------------------------
 
-TEST_CASE("wxWindow::ClientWindowSizeRoundTrip", "[window][client-size]")
+TEST_CASE("wxWindow::ClientWindowSizeRoundTrip")
 {
     wxWindow* const w = wxTheApp->GetTopWindow();
     REQUIRE( w );
@@ -41,7 +41,7 @@ TEST_CASE("wxWindow::ClientWindowSizeRoundTrip", "[window][client-size]")
     CHECK( sizeClient == w->WindowToClientSize(sizeWindow) );
 }
 
-TEST_CASE("wxWindow::MinClientSize", "[window][client-size]")
+TEST_CASE("wxWindow::MinClientSize")
 {
     std::unique_ptr<wxWindow> w(new wxWindow(wxTheApp->GetTopWindow(), wxID_ANY,
                                          wxDefaultPosition, wxDefaultSize,

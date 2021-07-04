@@ -139,7 +139,7 @@ class LocaleSetter
 {
 public:
     LocaleSetter(const char *loc)
-        : m_locOld(wxStrdupA(setlocale(LC_ALL, NULL)))
+        : m_locOld(wxStrdupA(setlocale(LC_ALL, nullptr)))
     {
         setlocale(LC_ALL, loc);
     }

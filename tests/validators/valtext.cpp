@@ -37,10 +37,10 @@ protected:
     wxTextCtrl* const m_text;
 };
 
-#define TEXT_VALIDATOR_TEST_CASE(name, tags) \
-    TEST_CASE_FIXTURE(TextValidatorTestCase, name, tags)
+#define TEXT_VALIDATOR_TEST_CASE(name) \
+    TEST_CASE_FIXTURE(TextValidatorTestCase, name)
 
-TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]")
+TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid")
 {
     wxString value = "";
     wxTextValidator val(wxFILTER_NONE, &value);
@@ -186,7 +186,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid", "[wxTextValidator][filters]
     }
 }
 
-TEXT_VALIDATOR_TEST_CASE("wxTextValidator::TransferToWindow", "[wxTextValidator][transferdata]")
+TEXT_VALIDATOR_TEST_CASE("wxTextValidator::TransferToWindow")
 {
     wxString value = "wxwidgets";
     wxTextValidator val(wxFILTER_ALPHA, &value);
@@ -199,7 +199,7 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::TransferToWindow", "[wxTextValidator]
     CHECK( m_text->GetValue() == "wxwidgets" );
 }
 
-TEXT_VALIDATOR_TEST_CASE("wxTextValidator::TransferFromWindow", "[wxTextValidator][transferdata]")
+TEXT_VALIDATOR_TEST_CASE("wxTextValidator::TransferFromWindow")
 {
     wxString value;
     wxTextValidator val(wxFILTER_ALPHA, &value);

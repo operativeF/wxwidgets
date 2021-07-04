@@ -60,9 +60,9 @@ GridSizerTestCase::GridSizerTestCase()
 GridSizerTestCase::~GridSizerTestCase()
 {
     delete m_win;
-    m_win = NULL;
+    m_win = nullptr;
 
-    m_sizer = NULL;
+    m_sizer = nullptr;
 }
 
 // ----------------------------------------------------------------------------
@@ -88,8 +88,7 @@ void GridSizerTestCase::SetChildren(const std::vector<wxWindow*>& children,
 // ----------------------------------------------------------------------------
 
 TEST_CASE_FIXTURE(GridSizerTestCase,
-                 "wxGridSizer::Layout",
-                 "[grid-sizer][sizer]")
+                 "wxGridSizer::Layout")
 {
     const wxSize sizeTotal = m_win->GetClientSize();
     const wxSize sizeChild(sizeTotal.x / 4, sizeTotal.y / 4);
@@ -173,8 +172,7 @@ TEST_CASE_FIXTURE(GridSizerTestCase,
 }
 
 TEST_CASE_FIXTURE(GridSizerTestCase,
-                 "wxGridSizer::IncompatibleFlags",
-                 "[grid-sizer][sizer]")
+                 "wxGridSizer::IncompatibleFlags")
 {
     CHECK_THROWS_MESSAGE
     (

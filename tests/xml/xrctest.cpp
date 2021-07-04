@@ -164,7 +164,7 @@ TEST_CASE_FIXTURE(XrcTestCase, "XRC::ObjectReferences")
         // In xrc there's now a dialog containing two panels, one an object
         // reference of the other
         wxDialog dlg;
-        REQUIRE( wxXmlResource::Get()->LoadDialog(&dlg, NULL, "dialog") );
+        REQUIRE( wxXmlResource::Get()->LoadDialog(&dlg, nullptr, "dialog") );
         // Might as well test XRCCTRL too
         wxPanel* panel1 = XRCCTRL(dlg,"panel1",wxPanel);
         wxPanel* panel2 = XRCCTRL(dlg,"ref_of_panel1",wxPanel);

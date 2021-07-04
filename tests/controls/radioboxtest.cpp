@@ -132,7 +132,7 @@ TEST_CASE("Radiobox test")
     SUBCASE("ToolTip")
     {
     #if defined (__WXMSW__) || defined(__WXGTK__)
-        //GetItemToolTip returns null if there is no tooltip set
+        //GetItemToolTip returns nullptr if there is no tooltip set
         CHECK(!m_radio->GetItemToolTip(0));
 
         m_radio->SetItemToolTip(1, "Item 1 help");

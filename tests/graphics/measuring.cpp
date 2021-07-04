@@ -46,7 +46,7 @@ struct GetTextExtentTester
     {
         // Test that getting the height only doesn't crash.
         int y;
-        obj.GetTextExtent("H", NULL, &y);
+        obj.GetTextExtent("H", nullptr, &y);
 
         CHECK( y > 1 );
 
@@ -63,14 +63,14 @@ struct GetTextExtentTester
 // tests themselves
 // ----------------------------------------------------------------------------
 
-TEST_CASE("wxDC::GetTextExtent", "[dc][text-extent]")
+TEST_CASE("wxDC::GetTextExtent")
 {
     wxClientDC dc(wxTheApp->GetTopWindow());
 
     GetTextExtentTester<wxClientDC> testDC(dc);
 
     int w;
-    dc.GetMultiLineTextExtent("Good\nbye", &w, NULL);
+    dc.GetMultiLineTextExtent("Good\nbye", &w, nullptr);
     const wxSize sz = dc.GetTextExtent("Good");
     CHECK( w == sz.x );
 
@@ -99,38 +99,38 @@ TEST_CASE("wxDC::GetTextExtent", "[dc][text-extent]")
 #endif
 }
 
-TEST_CASE("wxDC::LeadingAndDescent", "[dc][text-extent]")
+TEST_CASE("wxDC::LeadingAndDescent")
 {
     wxClientDC dc(wxTheApp->GetTopWindow());
 
     // Retrieving just the descent should work.
     int descent = -17;
-    dc.GetTextExtent("foo", NULL, NULL, &descent);
+    dc.GetTextExtent("foo", nullptr, nullptr, &descent);
     CHECK( descent != -17 );
 
     // Same for external leading.
     int leading = -289;
-    dc.GetTextExtent("foo", NULL, NULL, NULL, &leading);
+    dc.GetTextExtent("foo", nullptr, nullptr, nullptr, &leading);
     CHECK( leading != -289 );
 
     // And both should also work for the empty string as they retrieve the
     // values valid for the entire font and not just this string.
     int descent2,
         leading2;
-    dc.GetTextExtent("", NULL, NULL, &descent2, &leading2);
+    dc.GetTextExtent("", nullptr, nullptr, &descent2, &leading2);
 
     CHECK( descent2 == descent );
     CHECK( leading2 == leading );
 }
 
-TEST_CASE("wxWindow::GetTextExtent", "[window][text-extent]")
+TEST_CASE("wxWindow::GetTextExtent")
 {
     wxWindow* const win = wxTheApp->GetTopWindow();
 
     GetTextExtentTester<wxWindow> testWin(*win);
 }
 
-TEST_CASE("wxDC::GetPartialTextExtent", "[dc][text-extent][partial]")
+TEST_CASE("wxDC::GetPartialTextExtent")
 {
     wxClientDC dc(wxTheApp->GetTopWindow());
 
@@ -143,7 +143,7 @@ TEST_CASE("wxDC::GetPartialTextExtent", "[dc][text-extent][partial]")
 
 #ifdef TEST_GC
 
-TEST_CASE("wxGC::GetTextExtent", "[dc][text-extent]")
+TEST_CASE("wxGC::GetTextExtent")
 {
     wxGraphicsRenderer* renderer = wxGraphicsRenderer::GetDefaultRenderer();
     REQUIRE(renderer);

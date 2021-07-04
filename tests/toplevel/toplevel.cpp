@@ -86,7 +86,7 @@ static void TopLevelWindowShowTest(wxTopLevelWindow* tlw)
     CHECK_FALSE(tlw->IsActive());
 }
 
-TEST_CASE("wxTopLevel::Show", "[tlw][show]")
+TEST_CASE("wxTopLevel::Show")
 {
     SUBCASE("Dialog")
     {
@@ -106,7 +106,7 @@ TEST_CASE("wxTopLevel::Show", "[tlw][show]")
 }
 
 // Check that we receive the expected event when showing the TLW.
-TEST_CASE("wxTopLevel::ShowEvent", "[tlw][show][event]")
+TEST_CASE("wxTopLevel::ShowEvent")
 {
     wxFrame* const frame = new wxFrame(nullptr, wxID_ANY, "Maximized frame");
     DestroyOnScopeExit destroy(frame);

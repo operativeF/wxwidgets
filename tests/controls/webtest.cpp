@@ -64,7 +64,7 @@ protected:
     EventCounter* const m_loaded;
 };
 
-TEST_CASE_FIXTURE(WebViewTestCase, "WebView", "[wxWebView]")
+TEST_CASE_FIXTURE(WebViewTestCase, "WebView")
 {
 #if defined(__WXGTK__) && !defined(__WXGTK3__)
     wxString value;

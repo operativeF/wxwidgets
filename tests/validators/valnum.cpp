@@ -117,7 +117,7 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferUnsigned")
     CHECK( !valUnsigned.TransferFromWindow() );
 }
 
-TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferULL", "[valnum]")
+TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferULL")
 {
     unsigned long long value = 0;
     wxIntegerValidator<unsigned long long> valULL(&value);
@@ -160,7 +160,7 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferULL", "[valnum]")
     }
 }
 
-TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferFloat", "[valnum]")
+TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferFloat")
 {
     // We need a locale with point as decimal separator.
     wxLocale loc(wxLANGUAGE_ENGLISH_UK, wxLOCALE_DONT_LOAD_DEFAULT);
@@ -192,7 +192,7 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferFloat", "[valnum]")
     CHECK( !valFloat.TransferFromWindow() );
 }
 
-TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::ZeroAsBlank", "[valnum]")
+TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::ZeroAsBlank")
 {
     long value = 0;
     m_text->SetValidator(
@@ -208,7 +208,7 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::ZeroAsBlank", "[valnum]")
     CHECK( value == 0 );
 }
 
-TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::NoTrailingZeroes", "[valnum]")
+TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::NoTrailingZeroes")
 {
     // We need a locale with point as decimal separator.
     wxLocale loc(wxLANGUAGE_ENGLISH_UK, wxLOCALE_DONT_LOAD_DEFAULT);
@@ -229,7 +229,7 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::NoTrailingZeroes", "[valnum]")
 
 #if wxUSE_UIACTIONSIMULATOR
 
-TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::Interactive", "[valnum]")
+TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::Interactive")
 {
 #ifdef __WXMSW__
     // FIXME: This test fails on MSW buildbot slaves although works fine on
@@ -243,7 +243,7 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::Interactive", "[valnum]")
     wxLocale loc(wxLANGUAGE_ENGLISH_UK, wxLOCALE_DONT_LOAD_DEFAULT);
 
     m_text->SetValidator(
-        wxIntegerValidator<unsigned>(NULL, wxNUM_VAL_THOUSANDS_SEPARATOR));
+        wxIntegerValidator<unsigned>(nullptr, wxNUM_VAL_THOUSANDS_SEPARATOR));
 
     // Create a sibling text control to be able to switch focus and thus
     // trigger the control validation/normalization.

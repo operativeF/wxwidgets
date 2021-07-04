@@ -104,7 +104,7 @@ TEST_CASE("Virtual list control test.")
     }
 
     delete m_list;
-    m_list = NULL;
+    m_list = nullptr;
 }
 
 #endif // wxUSE_LISTCTRL
