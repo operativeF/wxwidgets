@@ -231,9 +231,10 @@ protected:
 
     void SetTest()
     {
-        std::vector<wxString> testitems;
-        testitems.push_back("item 0");
-        testitems.push_back("item 1");
+        std::vector<wxString> testitems = {
+            "item 0",
+            "item 1"
+        };
 
         m_container->Append(testitems);
 

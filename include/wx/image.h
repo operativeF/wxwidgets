@@ -251,21 +251,21 @@ public:
 // wxImage
 //-----------------------------------------------------------------------------
 
+    // red, green and blue are 8 bit unsigned integers in the range of 0..255
+    // We use the identifier RGBValue instead of RGB, since RGB is #defined
+struct RGBValue
+{
+    constexpr RGBValue(unsigned char r, unsigned char g, unsigned char b)
+        : red(r), green(g), blue(b) {}
+
+    unsigned char red{ 0 };
+    unsigned char green{ 0 };
+    unsigned char blue{ 0 };
+};
+
 class WXDLLIMPEXP_CORE wxImage: public wxObject
 {
 public:
-    // red, green and blue are 8 bit unsigned integers in the range of 0..255
-    // We use the identifier RGBValue instead of RGB, since RGB is #defined
-    class RGBValue
-    {
-    public:
-      RGBValue(unsigned char r=0, unsigned char g=0, unsigned char b=0)
-        : red(r), green(g), blue(b) {}
-        unsigned char red;
-        unsigned char green;
-        unsigned char blue;
-    };
-
     // hue, saturation and value are doubles in the range 0.0..1.0
     class HSVValue
     {

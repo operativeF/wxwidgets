@@ -21,6 +21,9 @@
 
 #include "wx/headerctrl.h"
 
+#include <algorithm>
+#include <array>
+
 // ----------------------------------------------------------------------------
 // test class
 // ----------------------------------------------------------------------------
@@ -62,41 +65,52 @@ TEST_CASE("Header control test")
 
     SUBCASE("Reorder")
     {
-        static constexpr int COL_COUNT = 4;
-
-        int n;
-
-        for ( n = 0; n < COL_COUNT; n++ )
+        for ( int n = 0; n < 4; n++ )
             m_header->AppendColumn(wxHeaderColumnSimple(wxString::Format("%d", n)));
 
-        auto order = m_header->GetColumnsOrder(); // initial order: [0 1 2 3]
-        for ( n = 0; n < COL_COUNT; n++ )
-            CHECK_EQ( n, order[n] );
+        auto ordering = m_header->GetColumnsOrder();
 
-        wxHeaderCtrl::MoveColumnInOrderArray(order, 0, 2);
-        m_header->SetColumnsOrder(order);   // change order to [1 2 0 3]
+        // "Check initial order [0, 1, 2, 3]")
 
-        order = m_header->GetColumnsOrder();
-        CHECK_EQ( 1, order[0] );
-        CHECK_EQ( 2, order[1] );
-        CHECK_EQ( 0, order[2] );
-        CHECK_EQ( 3, order[3] );
+        constexpr std::array<int, 4> initOrder{ 0, 1, 2, 3 };
 
-        order[2] = 3;
-        order[3] = 0;
-        m_header->SetColumnsOrder(order);   // and now [1 2 3 0]
-        order = m_header->GetColumnsOrder();
-        CHECK_EQ( 1, order[0] );
-        CHECK_EQ( 2, order[1] );
-        CHECK_EQ( 3, order[2] );
-        CHECK_EQ( 0, order[3] );
+        CHECK(std::equal(ordering.cbegin(), ordering.cend(),
+                         initOrder.cbegin(), initOrder.cend()));
 
-        wxHeaderCtrl::MoveColumnInOrderArray(order, 1, 3);
-        m_header->SetColumnsOrder(order);    // finally [2 3 0 1]
-        order = m_header->GetColumnsOrder();
-        CHECK_EQ( 2, order[0] );
-        CHECK_EQ( 3, order[1] );
-        CHECK_EQ( 0, order[2] );
-        CHECK_EQ( 1, order[3] );
+        // "Check reorder [1, 2, 0, 3]"
+
+        constexpr std::array<int, 4> reorderA{ 1, 2, 0, 3 };
+
+        wxHeaderCtrl::MoveColumnInOrderArray(ordering, 0, 2);
+        m_header->SetColumnsOrder(ordering);
+
+        ordering = m_header->GetColumnsOrder();
+
+        CHECK(std::equal(ordering.cbegin(), ordering.cend(),
+                         reorderA.cbegin(), reorderA.cend()));
+
+        // "Check reorder [1, 2, 3, 0]"
+
+        ordering[2] = 3;
+        ordering[3] = 0;
+
+        m_header->SetColumnsOrder(ordering);
+        ordering = m_header->GetColumnsOrder();
+
+        constexpr std::array<int, 4> reorderB{ 1, 2, 3, 0 };
+
+        CHECK(std::equal(ordering.cbegin(), ordering.cend(),
+                         reorderB.cbegin(), reorderB.cend()));
+
+        // "Check reorder [2, 3, 0, 1]"
+
+        wxHeaderCtrl::MoveColumnInOrderArray(ordering, 1, 3);
+        m_header->SetColumnsOrder(ordering);
+        ordering = m_header->GetColumnsOrder();
+
+        constexpr std::array<int, 4> reorderC{ 2, 3, 0, 1 };
+
+        CHECK(std::equal(ordering.cbegin(), ordering.cend(),
+                         reorderC.cbegin(), reorderC.cend()));
     }
 }

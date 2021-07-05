@@ -119,6 +119,15 @@ TEST_CASE_FIXTURE(RearrangeListTest, "Rearrange list control test")
         CHECK_EQ("third", m_rearrange->GetString(1));
         CHECK_EQ("first", m_rearrange->GetString(2));
     }
+
+    m_container = std::make_unique<wxRearrangeList>(wxTheApp->GetTopWindow(),
+                                                    wxID_ANY,
+                                                    wxDefaultPosition,
+                                                    wxDefaultSize,
+                                                    std::vector<int>{},
+                                                    std::vector<wxString>{});
+
+    wxITEM_CONTAINER_TESTS();
 }
 
 #endif

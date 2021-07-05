@@ -24,17 +24,12 @@ class TextValidatorTestCase
 {
 public:
     TextValidatorTestCase()
-        : m_text(new wxTextCtrl(wxTheApp->GetTopWindow(), wxID_ANY))
+        : m_text(std::make_unique<wxTextCtrl>(wxTheApp->GetTopWindow(), wxID_ANY))
     {
-    }
-
-    ~TextValidatorTestCase()
-    {
-        delete m_text;
     }
 
 protected:
-    wxTextCtrl* const m_text;
+    std::unique_ptr<wxTextCtrl> m_text;
 };
 
 #define TEXT_VALIDATOR_TEST_CASE(name) \
@@ -109,10 +104,12 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid")
     {
         val.SetStyle(wxFILTER_INCLUDE_LIST);
 
-        std::vector<wxString> includes;
-        includes.push_back("wxMSW");
-        includes.push_back("wxGTK");
-        includes.push_back("wxOSX");
+        std::vector<wxString> includes = {
+            "wxMSW",
+            "wxGTK",
+            "wxOSX"
+        };
+
         val.SetIncludes(includes);
 
         CHECK( val.IsValid("wxGTK").empty() );
@@ -134,10 +131,12 @@ TEXT_VALIDATOR_TEST_CASE("wxTextValidator::IsValid")
     {
         val.SetStyle(wxFILTER_EXCLUDE_LIST);
 
-        std::vector<wxString> excludes;
-        excludes.push_back("wxMSW");
-        excludes.push_back("wxGTK");
-        excludes.push_back("wxOSX");
+        std::vector<wxString> excludes = {
+            "wxMSW",
+            "wxGTK",
+            "wxOSX"
+        };
+
         val.SetExcludes(excludes);
 
         CHECK( val.IsValid("wxQT & wxUNIV").empty() );

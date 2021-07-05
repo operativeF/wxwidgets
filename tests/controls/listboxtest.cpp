@@ -36,13 +36,14 @@ TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
                                 wxID_ANY, wxDefaultPosition, wxDefaultSize,
                                 std::vector<wxString>{}, wxLB_SORT);
 
-        std::vector<wxString> testitems;
-        testitems.push_back("aaa");
-        testitems.push_back("Aaa");
-        testitems.push_back("aba");
-        testitems.push_back("aaab");
-        testitems.push_back("aab");
-        testitems.push_back("AAA");
+        const std::vector<wxString> testitems = {
+            "aaa",
+            "Aaa",
+            "aba",
+            "aaab",
+            "aab",
+            "AAA"
+        };
 
         m_container->Append(testitems);
 
@@ -66,11 +67,12 @@ TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
                                 wxID_ANY, wxDefaultPosition, wxDefaultSize,
                                 std::vector<wxString>{}, wxLB_MULTIPLE);
 
-        std::vector<wxString> testitems;
-        testitems.push_back("item 0");
-        testitems.push_back("item 1");
-        testitems.push_back("item 2");
-        testitems.push_back("item 3");
+        const std::vector<wxString> testitems = {
+            "item 0",
+            "item 1",
+            "item 2",
+            "item 3"
+        };
 
         m_container->Append(testitems);
 
@@ -119,10 +121,11 @@ TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
 
         wxUIActionSimulator sim;
 
-        std::vector<wxString> testitems;
-        testitems.push_back("item 0");
-        testitems.push_back("item 1");
-        testitems.push_back("item 2");
+        const std::vector<wxString> testitems = {
+            "item 0",
+            "item 1",
+            "item 2"
+        };
 
         m_container->Append(testitems);
 
@@ -153,10 +156,11 @@ TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
 
         wxUIActionSimulator sim;
 
-        std::vector<wxString> testitems;
-        testitems.push_back("item 0");
-        testitems.push_back("item 1");
-        testitems.push_back("item 2");
+        const std::vector<wxString> testitems = {
+            "item 0",
+            "item 1",
+            "item 2"
+        };
 
         m_container->Append(testitems);
 
@@ -187,10 +191,11 @@ TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
 
     SUBCASE("HitTest")
     {
-        std::vector<wxString> testitems;
-        testitems.push_back("item 0");
-        testitems.push_back("item 1");
-        testitems.push_back("item 2");
+        const std::vector<wxString> testitems = {
+            "item 0",
+            "item 1",
+            "item 2"
+        };
 
         m_container->Append(testitems);
 
@@ -220,13 +225,14 @@ TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
             wxDefaultPosition, wxDefaultSize, std::vector<wxString>{},
             wxLB_SORT | wxLB_OWNERDRAW);
 
-        std::vector<wxString> testitems;
-        testitems.push_back("aaa");
-        testitems.push_back("Aaa");
-        testitems.push_back("aba");
-        testitems.push_back("aaab");
-        testitems.push_back("aab");
-        testitems.push_back("AAA");
+        const std::vector<wxString> testitems = {
+            "aaa",
+            "Aaa",
+            "aba",
+            "aaab",
+            "aab",
+            "AAA"
+        };
 
         m_container->Append(testitems);
 
@@ -249,11 +255,12 @@ TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
             wxDefaultPosition, wxDefaultSize, std::vector<wxString>{},
             wxLB_MULTIPLE | wxLB_OWNERDRAW);
 
-        std::vector<wxString> testitems;
-        testitems.push_back("item 0");
-        testitems.push_back("item 1");
-        testitems.push_back("item 2");
-        testitems.push_back("item 3");
+        const std::vector<wxString> testitems = {
+            "item 0",
+            "item 1",
+            "item 2",
+            "item 3"
+        };
 
         m_container->Append(testitems);
 
@@ -301,10 +308,11 @@ TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
 
         wxUIActionSimulator sim;
 
-        std::vector<wxString> testitems;
-        testitems.push_back("item 0");
-        testitems.push_back("item 1");
-        testitems.push_back("item 2");
+        std::vector<wxString> testitems = {
+            "item 0",
+            "item 1",
+            "item 2"
+        };
 
         m_container->Append(testitems);
 
@@ -335,10 +343,11 @@ TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
 
         wxUIActionSimulator sim;
 
-        std::vector<wxString> testitems;
-        testitems.push_back("item 0");
-        testitems.push_back("item 1");
-        testitems.push_back("item 2");
+        const std::vector<wxString> testitems = {
+            "item 0",
+            "item 1",
+            "item 2"
+        };
 
         m_container->Append(testitems);
 
@@ -368,10 +377,11 @@ TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
 
     SUBCASE("HitTest")
     {
-        std::vector<wxString> testitems;
-        testitems.push_back("item 0");
-        testitems.push_back("item 1");
-        testitems.push_back("item 2");
+        const std::vector<wxString> testitems = {
+            "item 0",
+            "item 1",
+            "item 2"
+        };
 
         m_container->Append(testitems);
 

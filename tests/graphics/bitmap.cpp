@@ -1615,10 +1615,10 @@ TEST_CASE("DC::Clear")
     // Just some arbitrary pixel data.
     static unsigned char data[] =
     {
-        0xff, 0, 0,
-        0, 0xff, 0,
-        0, 0, 0xff,
-        0x7f, 0, 0x7f
+        0xff,    0,      0,
+           0, 0xff,      0,
+           0,    0,   0xff,
+        0x7f,    0,   0x7f
     };
 
     const wxImage img(2, 2, data, true /* don't take ownership of data */);

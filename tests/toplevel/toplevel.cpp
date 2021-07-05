@@ -25,26 +25,6 @@
 
 #include "testableframe.h"
 
-class DestroyOnScopeExit
-{
-public:
-    explicit DestroyOnScopeExit(wxTopLevelWindow* tlw)
-        : m_tlw(tlw)
-    {
-    }
-
-    ~DestroyOnScopeExit()
-    {
-        m_tlw->Destroy();
-    }
-
-private:
-    wxTopLevelWindow* const m_tlw;
-
-    DestroyOnScopeExit(const DestroyOnScopeExit&) = delete;
-	DestroyOnScopeExit& operator=(const DestroyOnScopeExit&) = delete;
-};
-
 static void TopLevelWindowShowTest(wxTopLevelWindow* tlw)
 {
     CHECK_FALSE(tlw->IsShown());
@@ -90,28 +70,25 @@ TEST_CASE("wxTopLevel::Show")
 {
     SUBCASE("Dialog")
     {
-        wxDialog* dialog = new wxDialog(nullptr, -1, "Dialog Test");
-        DestroyOnScopeExit destroy(dialog);
+        auto dialog = std::make_unique<wxDialog>(nullptr, -1, "Dialog Test");
 
-        TopLevelWindowShowTest(dialog);
+        TopLevelWindowShowTest(dialog.get());
     }
 
     SUBCASE("Frame")
     {
-        wxFrame* frame = new wxFrame(nullptr, -1, "Frame test");
-        DestroyOnScopeExit destroy(frame);
+        auto frame = std::make_unique<wxFrame>(nullptr, -1, "Frame test");
 
-        TopLevelWindowShowTest(frame);
+        TopLevelWindowShowTest(frame.get());
     }
 }
 
 // Check that we receive the expected event when showing the TLW.
 TEST_CASE("wxTopLevel::ShowEvent")
 {
-    wxFrame* const frame = new wxFrame(nullptr, wxID_ANY, "Maximized frame");
-    DestroyOnScopeExit destroy(frame);
+    auto frame = std::make_unique<wxFrame>(nullptr, wxID_ANY, "Maximized frame");
 
-    EventCounter countShow(frame, wxEVT_SHOW);
+    EventCounter countShow(frame.get(), wxEVT_SHOW);
 
     frame->Maximize();
     frame->Show();

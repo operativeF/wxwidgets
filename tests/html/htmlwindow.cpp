@@ -25,10 +25,7 @@
 #include "wx/uiaction.h"
 #include "testableframe.h"
 
-
-// ----------------------------------------------------------------------------
-// tests themselves
-// ----------------------------------------------------------------------------
+#include <memory>
 
 static constexpr char TEST_MARKUP[] =
     "<html><body>"
@@ -48,8 +45,9 @@ static constexpr char TEST_PLAIN_TEXT[] =
 
 TEST_CASE("HTML Window")
 {
-    auto m_win = new wxHtmlWindow(wxTheApp->GetTopWindow(), wxID_ANY,
-                             wxDefaultPosition, wxSize(400, 200));
+    auto m_win = std::make_unique<wxHtmlWindow>(wxTheApp->GetTopWindow(), wxID_ANY,
+                                                wxDefaultPosition,
+                                                wxSize(400, 200));
 
     SUBCASE("SelectionToText")
     {
@@ -71,7 +69,7 @@ TEST_CASE("HTML Window")
 #if wxUSE_UIACTIONSIMULATOR
     SUBCASE("CellClick")
     {
-        EventCounter clicked(m_win, wxEVT_HTML_CELL_CLICKED);
+        EventCounter clicked(m_win.get(), wxEVT_HTML_CELL_CLICKED);
 
         wxUIActionSimulator sim;
 
@@ -90,7 +88,7 @@ TEST_CASE("HTML Window")
 
     SUBCASE("LinkClick")
     {
-        EventCounter clicked(m_win, wxEVT_HTML_LINK_CLICKED);
+        EventCounter clicked(m_win.get(), wxEVT_HTML_LINK_CLICKED);
 
         wxUIActionSimulator sim;
 
@@ -117,9 +115,6 @@ TEST_CASE("HTML Window")
         CHECK_EQ("link A new paragraph", m_win->ToText());
     #endif // wxUSE_CLIPBOARD
     }
-
-    DeleteTestWindow(m_win);
-    m_win = nullptr;
 } // END TEST_CASE("HTML Window")
 
 #endif //wxUSE_HTML

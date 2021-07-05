@@ -23,8 +23,6 @@
 
 #include "wx/sstream.h"
 
-#include <stdarg.h>
-
 // ----------------------------------------------------------------------------
 // helpers for testing XML tree
 // ----------------------------------------------------------------------------
@@ -32,76 +30,68 @@
 namespace
 {
 
-void CheckXml(const wxXmlNode *n, ...)
+template<typename XNode, typename... ChildNodes>
+void CheckXml(XNode* n, ChildNodes&&... child_nodes)
 {
-    va_list args;
-    va_start(args, n);
-
     wxXmlNode *child = n->GetChildren();
 
-    for (;;)
-    {
-        const char *childName = va_arg(args, char*);
-        if ( childName == nullptr )
-            break;
+    std::vector<wxString> childNodesInOrder { child_nodes... }; 
 
+    for (const auto& childNode : childNodesInOrder)
+    {
         CHECK( child );
-        CHECK_EQ( childName, child->GetName() );
+        CHECK_EQ( childNode, child->GetName() );
         CHECK( child->GetChildren() == nullptr );
         CHECK( child->GetParent() == n );
 
         child = child->GetNext();
     }
-
-    va_end(args);
-
-    CHECK( child == nullptr ); // no more children
 }
 
 } // anon namespace
 
 TEST_CASE("InsertChild")
 {
-    std::unique_ptr<wxXmlNode> root(new wxXmlNode(wxXML_ELEMENT_NODE, "root"));
+    auto root = std::make_unique<wxXmlNode>(wxXML_ELEMENT_NODE, "root");
     root->AddChild(new wxXmlNode(wxXML_ELEMENT_NODE, "1"));
     wxXmlNode *two = new wxXmlNode(wxXML_ELEMENT_NODE, "2");
     root->AddChild(two);
     root->AddChild(new wxXmlNode(wxXML_ELEMENT_NODE, "3"));
-    CheckXml(root.get(), "1", "2", "3", nullptr);
+    CheckXml(root.get(), "1", "2", "3");
 
     // check inserting in front:
     root->InsertChild(new wxXmlNode(wxXML_ELEMENT_NODE, "A"), nullptr);
-    CheckXml(root.get(), "A", "1", "2", "3", nullptr);
+    CheckXml(root.get(), "A", "1", "2", "3");
     root->InsertChild(new wxXmlNode(wxXML_ELEMENT_NODE, "B"), root->GetChildren());
-    CheckXml(root.get(), "B", "A", "1", "2", "3", nullptr);
+    CheckXml(root.get(), "B", "A", "1", "2", "3");
 
     // and in the middle:
     root->InsertChild(new wxXmlNode(wxXML_ELEMENT_NODE, "C"), two);
-    CheckXml(root.get(), "B", "A", "1", "C", "2", "3", nullptr);
+    CheckXml(root.get(), "B", "A", "1", "C", "2", "3");
 }
 
 TEST_CASE("InsertChildAfter")
 {
-    std::unique_ptr<wxXmlNode> root(new wxXmlNode(wxXML_ELEMENT_NODE, "root"));
+    auto root = std::make_unique<wxXmlNode>(wxXML_ELEMENT_NODE, "root");
 
     root->InsertChildAfter(new wxXmlNode(wxXML_ELEMENT_NODE, "1"), nullptr);
-    CheckXml(root.get(), "1", nullptr);
+    CheckXml(root.get(), "1");
 
     wxXmlNode *two = new wxXmlNode(wxXML_ELEMENT_NODE, "2");
     root->AddChild(two);
     wxXmlNode *three = new wxXmlNode(wxXML_ELEMENT_NODE, "3");
     root->AddChild(three);
-    CheckXml(root.get(), "1", "2", "3", nullptr);
+    CheckXml(root.get(), "1", "2", "3");
 
     // check inserting in the middle:
     root->InsertChildAfter(new wxXmlNode(wxXML_ELEMENT_NODE, "A"), root->GetChildren());
-    CheckXml(root.get(), "1", "A", "2", "3", nullptr);
+    CheckXml(root.get(), "1", "A", "2", "3");
     root->InsertChildAfter(new wxXmlNode(wxXML_ELEMENT_NODE, "B"), two);
-    CheckXml(root.get(), "1", "A", "2", "B", "3", nullptr);
+    CheckXml(root.get(), "1", "A", "2", "B", "3");
 
     // and at the end:
     root->InsertChildAfter(new wxXmlNode(wxXML_ELEMENT_NODE, "C"), three);
-    CheckXml(root.get(), "1", "A", "2", "B", "3", "C", nullptr);
+    CheckXml(root.get(), "1", "A", "2", "B", "3", "C");
 }
 
 TEST_CASE("LoadSave")

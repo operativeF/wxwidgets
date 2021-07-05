@@ -29,31 +29,19 @@
 class NumValidatorTestCase
 {
 public:
-    NumValidatorTestCase();
-    ~NumValidatorTestCase();
+    NumValidatorTestCase() :
+        m_text(std::make_unique<wxTextCtrl>(wxTheApp->GetTopWindow(), wxID_ANY)) {}
 
 protected:
-    wxTextCtrl* const m_text;
-
-    NumValidatorTestCase(const NumValidatorTestCase&) = delete;
-	NumValidatorTestCase& operator=(const NumValidatorTestCase&) = delete;
+    std::unique_ptr<wxTextCtrl> m_text;
 };
 
-NumValidatorTestCase::NumValidatorTestCase()
-    : m_text(new wxTextCtrl(wxTheApp->GetTopWindow(), wxID_ANY))
-{
-}
-
-NumValidatorTestCase::~NumValidatorTestCase()
-{
-    delete m_text;
-}
 
 TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferInt")
 {
     int value = 0;
     wxIntegerValidator<int> valInt(&value);
-    valInt.SetWindow(m_text);
+    valInt.SetWindow(m_text.get());
 
     CHECK( valInt.TransferToWindow() );
     CHECK( m_text->GetValue() == "0" );
@@ -81,7 +69,7 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferUnsigned")
 {
     unsigned value = 0;
     wxIntegerValidator<unsigned> valUnsigned(&value);
-    valUnsigned.SetWindow(m_text);
+    valUnsigned.SetWindow(m_text.get());
 
     CHECK( valUnsigned.TransferToWindow() );
     CHECK( m_text->GetValue() == "0" );
@@ -121,7 +109,7 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferULL")
 {
     unsigned long long value = 0;
     wxIntegerValidator<unsigned long long> valULL(&value);
-    valULL.SetWindow(m_text);
+    valULL.SetWindow(m_text.get());
 
     SUBCASE("LLONG_MAX")
     {
@@ -167,7 +155,7 @@ TEST_CASE_FIXTURE(NumValidatorTestCase, "ValNum::TransferFloat")
 
     float value = 0;
     wxFloatingPointValidator<float> valFloat(3, &value);
-    valFloat.SetWindow(m_text);
+    valFloat.SetWindow(m_text.get());
 
     CHECK( valFloat.TransferToWindow() );
     CHECK( m_text->GetValue() == "0.000" );

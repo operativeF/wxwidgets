@@ -33,20 +33,15 @@ class BoxSizerTestCase
 {
 public:
     BoxSizerTestCase()
-        : m_win(new wxWindow(wxTheApp->GetTopWindow(), wxID_ANY)),
+        : m_win(std::make_unique<wxWindow>(wxTheApp->GetTopWindow(), wxID_ANY)),
           m_sizer(new wxBoxSizer(wxHORIZONTAL))
     {
         m_win->SetClientSize(127, 35);
         m_win->SetSizer(m_sizer);
     }
 
-    ~BoxSizerTestCase()
-    {
-        delete m_win;
-    }
-
 protected:
-    wxWindow* const m_win;
+    const std::unique_ptr<wxWindow> m_win;
     wxSizer* const m_sizer;
 };
 
@@ -60,7 +55,7 @@ TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::Size1")
     const wxSize sizeChild = sizeTotal / 2;
 
     wxWindow * const
-        child = new wxWindow(m_win, wxID_ANY, wxDefaultPosition, sizeChild);
+        child = new wxWindow(m_win.get(), wxID_ANY, wxDefaultPosition, sizeChild);
     m_sizer->Add(child);
     m_win->Layout();
     CHECK(child->GetSize() == sizeChild);
@@ -154,9 +149,9 @@ TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::Size3")
     wxGCC_WARNING_RESTORE(missing-field-initializers)
 
     wxWindow *child[3];
-    child[0] = new wxWindow(m_win, wxID_ANY);
-    child[1] = new wxWindow(m_win, wxID_ANY);
-    child[2] = new wxWindow(m_win, wxID_ANY);
+    child[0] = new wxWindow(m_win.get(), wxID_ANY);
+    child[1] = new wxWindow(m_win.get(), wxID_ANY);
+    child[2] = new wxWindow(m_win.get(), wxID_ANY);
 
     for ( unsigned i = 0; i < WXSIZEOF(layoutTestData); i++ )
     {
@@ -249,7 +244,7 @@ TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::CalcMin")
     unsigned n;
     wxWindow *child[NUM_TEST_ITEM];
     for ( n = 0; n < NUM_TEST_ITEM; n++ )
-        child[n] = new wxWindow(m_win, wxID_ANY);
+        child[n] = new wxWindow(m_win.get(), wxID_ANY);
 
     for ( unsigned i = 0; i < WXSIZEOF(calcMinTestData); i++ )
     {
@@ -275,7 +270,7 @@ TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::CalcMin")
 
 TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::SetMinSize")
 {
-    wxWindow* const child = new wxWindow(m_win, wxID_ANY);
+    wxWindow* const child = new wxWindow(m_win.get(), wxID_ANY);
     child->SetInitialSize(wxSize(10, -1));
     m_sizer->Add(child);
 
@@ -296,7 +291,7 @@ TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::BestSizeRespectsMaxSize")
     const int maxWidth = 100;
 
     wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-    wxListBox* listbox = new wxListBox(m_win, wxID_ANY);
+    wxListBox* listbox = new wxListBox(m_win.get(), wxID_ANY);
     listbox->Append("some very very very very very very very very very very very long string");
     listbox->SetMaxSize(wxSize(maxWidth, -1));
     sizer->Add(listbox);
@@ -318,14 +313,14 @@ TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::RecalcSizesRespectsMaxSize1")
     wxSizer* sizer1 = new wxBoxSizer(wxVERTICAL);
     m_sizer->Add(sizer1);
 
-    wxListBox* listbox1 = new wxListBox(m_win, wxID_ANY);
+    wxListBox* listbox1 = new wxListBox(m_win.get(), wxID_ANY);
     listbox1->Append("some very very very very very very very very very very very long string");
     sizer1->Add(listbox1);
 
     wxSizer* sizer2 = new wxBoxSizer(wxHORIZONTAL);
     sizer1->Add(sizer2, wxSizerFlags().Expand());
 
-    wxListBox* listbox2 = new wxListBox(m_win, wxID_ANY);
+    wxListBox* listbox2 = new wxListBox(m_win.get(), wxID_ANY);
     listbox2->Append("some string");
     listbox2->SetMaxSize(wxSize(100, -1));
     sizer2->Add(listbox2, wxSizerFlags().Proportion(1));
@@ -345,14 +340,14 @@ TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::RecalcSizesRespectsMaxSize2")
     wxSizer* sizer1 = new wxBoxSizer(wxVERTICAL);
     m_sizer->Add(sizer1, wxSizerFlags().Expand());
 
-    wxWindow* child1 = new wxWindow(m_win, wxID_ANY);
+    wxWindow* child1 = new wxWindow(m_win.get(), wxID_ANY);
     sizer1->Add(child1, wxSizerFlags().Proportion(1));
 
-    wxWindow* child2 = new wxWindow(m_win, wxID_ANY);
+    wxWindow* child2 = new wxWindow(m_win.get(), wxID_ANY);
     child2->SetMaxSize(wxSize(-1, 50));
     sizer1->Add(child2, wxSizerFlags().Proportion(1));
 
-    wxWindow* child3 = new wxWindow(m_win, wxID_ANY);
+    wxWindow* child3 = new wxWindow(m_win.get(), wxID_ANY);
     sizer1->Add(child3, wxSizerFlags().Proportion(1));
 
     m_win->Layout();
@@ -447,5 +442,5 @@ TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::IncompatibleFlags")
 TEST_CASE_FIXTURE(BoxSizerTestCase, "BoxSizer::Replace")
 {
     m_sizer->AddSpacer(1);
-    m_sizer->Replace(0, new wxSizerItem(new wxWindow(m_win, wxID_ANY)));
+    m_sizer->Replace(0, new wxSizerItem(new wxWindow(m_win.get(), wxID_ANY)));
 }

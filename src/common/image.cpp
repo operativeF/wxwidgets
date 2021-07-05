@@ -1849,7 +1849,7 @@ wxImage wxImage::ConvertToGreyscale(double weight_r, double weight_g, double wei
 }
 
 // TODO-C++11: Replace with a lambda function.
-static void DoMakeMono(wxImage *WXUNUSED(image), unsigned char *rgb, wxImage::RGBValue rgbValue)
+static void DoMakeMono(wxImage *WXUNUSED(image), unsigned char *rgb, RGBValue rgbValue)
 {
     const bool on = (rgb[0] == rgbValue.red) && (rgb[1] == rgbValue.green) && (rgb[2] == rgbValue.blue);
     wxColour::MakeMono(rgb, rgb + 1, rgb + 2, on);
@@ -3242,7 +3242,7 @@ wxImage::HSVValue wxImage::RGBtoHSV(const RGBValue& rgb)
     return HSVValue(hue, saturation, value);
 }
 
-wxImage::RGBValue wxImage::HSVtoRGB(const HSVValue& hsv)
+RGBValue wxImage::HSVtoRGB(const HSVValue& hsv)
 {
     double red, green, blue;
 
@@ -3309,7 +3309,7 @@ wxImage::RGBValue wxImage::HSVtoRGB(const HSVValue& hsv)
 // TODO-C++11: Replace with a lambda function.
 static void DoRotateHue(wxImage *WXUNUSED(image), unsigned char *rgb, double angle)
 {
-    wxImage::RGBValue rgbValue(rgb[0], rgb[1], rgb[2]);
+    RGBValue rgbValue(rgb[0], rgb[1], rgb[2]);
     wxImage::HSVValue hsvValue = wxImage::RGBtoHSV(rgbValue);
 
     hsvValue.hue = hsvValue.hue + angle;
@@ -3341,7 +3341,7 @@ void wxImage::RotateHue(double angle)
 // TODO-C++11: Replace with a lambda function.
 static void DoChangeSaturation(wxImage *WXUNUSED(image), unsigned char *rgb, double factor)
 {
-    wxImage::RGBValue rgbValue(rgb[0], rgb[1], rgb[2]);
+    RGBValue rgbValue(rgb[0], rgb[1], rgb[2]);
     wxImage::HSVValue hsvValue = wxImage::RGBtoHSV(rgbValue);
 
     hsvValue.saturation += hsvValue.saturation * factor;
@@ -3373,7 +3373,7 @@ void wxImage::ChangeSaturation(double factor)
 // TODO-C++11: Replace with a lambda function.
 static void DoChangeBrightness(wxImage *WXUNUSED(image), unsigned char *rgb, double factor)
 {
-    wxImage::RGBValue rgbValue(rgb[0], rgb[1], rgb[2]);
+    RGBValue rgbValue(rgb[0], rgb[1], rgb[2]);
     wxImage::HSVValue hsvValue = wxImage::RGBtoHSV(rgbValue);
 
     hsvValue.value += hsvValue.value * factor;

@@ -25,7 +25,7 @@
 
 TEST_CASE("wxWrapSizer::CalcMin")
 {
-    std::unique_ptr<wxWindow> win(new wxWindow(wxTheApp->GetTopWindow(), wxID_ANY));
+    auto win = std::make_unique<wxWindow>(wxTheApp->GetTopWindow(), wxID_ANY);
     win->SetClientSize(180, 240);
 
     wxSizer *sizer = new wxWrapSizer(wxHORIZONTAL);
@@ -76,7 +76,7 @@ TEST_CASE("wxWrapSizer::CalcMin")
 
 TEST_CASE("wxWrapSizer::CalcMinFromMinor")
 {
-    std::unique_ptr<wxWindow> win(new wxWindow(wxTheApp->GetTopWindow(), wxID_ANY));
+    auto win = std::make_unique<wxWindow>(wxTheApp->GetTopWindow(), wxID_ANY);
     win->SetClientSize(180, 240);
 
     wxSizer* boxSizer = new wxBoxSizer(wxHORIZONTAL);

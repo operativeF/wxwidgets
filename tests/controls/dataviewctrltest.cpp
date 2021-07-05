@@ -26,6 +26,8 @@
 #include "testableframe.h"
 #include "asserthelper.h"
 
+#include <memory>
+
 // ----------------------------------------------------------------------------
 // test class
 // ----------------------------------------------------------------------------
@@ -34,22 +36,21 @@ class DataViewCtrlTestCase
 {
 public:
     explicit DataViewCtrlTestCase(long style);
-    ~DataViewCtrlTestCase();
+
+    DataViewCtrlTestCase(const DataViewCtrlTestCase&) = delete;
+    DataViewCtrlTestCase& operator=(const DataViewCtrlTestCase&) = delete;
 
 protected:
     void TestSelectionFor0and1();
 
     // the dataview control itself
-    wxDataViewTreeCtrl *m_dvc;
+    std::unique_ptr<wxDataViewTreeCtrl> m_dvc;
 
     // and some of its items
-    wxDataViewItem m_root,
-                   m_child1,
-                   m_child2,
-                   m_grandchild;
-
-    DataViewCtrlTestCase(const DataViewCtrlTestCase&) = delete;
-	DataViewCtrlTestCase& operator=(const DataViewCtrlTestCase&) = delete;
+    wxDataViewItem m_root;
+    wxDataViewItem m_child1;
+    wxDataViewItem m_child2;
+    wxDataViewItem m_grandchild;
 };
 
 class SingleSelectDataViewCtrlTestCase : public DataViewCtrlTestCase
@@ -74,11 +75,10 @@ class MultiColumnsDataViewCtrlTestCase
 {
 public:
     MultiColumnsDataViewCtrlTestCase();
-    ~MultiColumnsDataViewCtrlTestCase();
 
 protected:
     // the dataview control itself
-    wxDataViewListCtrl *m_dvc;
+    std::unique_ptr<wxDataViewListCtrl> m_dvc;
 
     // constants
     const wxSize m_size;
@@ -87,9 +87,6 @@ protected:
     // and the columns
     wxDataViewColumn* m_firstColumn;
     wxDataViewColumn* m_lastColumn;
-
-    MultiColumnsDataViewCtrlTestCase(const MultiColumnsDataViewCtrlTestCase&) = delete;
-	MultiColumnsDataViewCtrlTestCase& operator=(const MultiColumnsDataViewCtrlTestCase&) = delete;
 };
 
 // ----------------------------------------------------------------------------
@@ -98,7 +95,7 @@ protected:
 
 DataViewCtrlTestCase::DataViewCtrlTestCase(long style)
 {
-    m_dvc = new wxDataViewTreeCtrl(wxTheApp->GetTopWindow(),
+    m_dvc = std::make_unique<wxDataViewTreeCtrl>(wxTheApp->GetTopWindow(),
                                    wxID_ANY,
                                    wxDefaultPosition,
                                    wxSize(400, 200),
@@ -115,16 +112,11 @@ DataViewCtrlTestCase::DataViewCtrlTestCase(long style)
     m_dvc->Update();
 }
 
-DataViewCtrlTestCase::~DataViewCtrlTestCase()
-{
-    delete m_dvc;
-}
-
 MultiColumnsDataViewCtrlTestCase::MultiColumnsDataViewCtrlTestCase()
     : m_size(200, 100),
       m_firstColumnWidth(50)
 {
-    m_dvc = new wxDataViewListCtrl(wxTheApp->GetTopWindow(), wxID_ANY);
+    m_dvc = std::make_unique<wxDataViewListCtrl>(wxTheApp->GetTopWindow(), wxID_ANY);
 
     m_firstColumn =
         m_dvc->AppendTextColumn(wxString(), wxDATAVIEW_CELL_INERT, m_firstColumnWidth);
@@ -136,11 +128,6 @@ MultiColumnsDataViewCtrlTestCase::MultiColumnsDataViewCtrlTestCase()
     m_dvc->Layout();
     m_dvc->Refresh();
     m_dvc->Update();
-}
-
-MultiColumnsDataViewCtrlTestCase::~MultiColumnsDataViewCtrlTestCase()
-{
-    delete m_dvc;
 }
 
 // ----------------------------------------------------------------------------

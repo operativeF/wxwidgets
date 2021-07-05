@@ -178,9 +178,9 @@ TEST_CASE("FindWindowAtPoint")
     // Set the position so it doesn't interfere with other windows.
     parent->SetPosition({400, 400});
 
-    wxWindow* btn1 = new TestButton(parent, "1", wxPoint(10, 10));
-    wxWindow* btn2 = new TestButton(parent, "2", wxPoint(10, 90));
-    wxWindow* btn3 = new TestButton(btn2, "3", wxPoint(20, 20));
+    auto btn1 = std::make_unique<TestButton>(parent, "1", wxPoint(10, 10));
+    auto btn2 = std::make_unique<TestButton>(parent, "2", wxPoint(10, 90));
+    auto btn3 = std::make_unique<TestButton>(btn2.get(), "3", wxPoint(20, 20));
 
     // We need this to realize the windows created above under wxGTK.
     wxYield();
@@ -231,7 +231,7 @@ TEST_CASE("FindWindowAtPoint")
         "Point over disabled child controls still corresponds to this child"
     );
 
-    btn1->Destroy();
-    btn2->Destroy();
+    //btn1->Destroy();
+    //btn2->Destroy();
     // btn3 was already deleted when its parent was
 }

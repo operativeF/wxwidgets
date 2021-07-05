@@ -115,9 +115,10 @@ TEST_CASE_FIXTURE(wxComboBoxTest, "Combo box test")
 
     SUBCASE("ReadOnly")
     {
-        std::vector<wxString> testitems;
-        testitems.push_back("item 1");
-        testitems.push_back("item 2");
+        const std::vector<wxString> testitems = {
+            "item 1",
+            "item 2"
+        };
 
         m_container = std::make_unique<wxComboBox>(wxTheApp->GetTopWindow(),
                                                    wxID_ANY, "",
@@ -181,7 +182,7 @@ TEST_CASE("wxComboBox::ProcessEnter")
     public:
         wxControl* Create(wxWindow* parent, int style) const override
         {
-            std::vector<wxString> choices = { "foo", "bar", "baz" };
+            const std::vector<wxString> choices = { "foo", "bar", "baz" };
 
             return new wxComboBox(parent, wxID_ANY, wxString(),
                                   wxDefaultPosition, wxDefaultSize,

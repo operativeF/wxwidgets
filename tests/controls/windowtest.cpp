@@ -354,7 +354,7 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Show")
 
     m_window->Hide();
 
-    CHECK(!m_window->IsShown());
+    CHECK_FALSE(m_window->IsShown());
 
     m_window->Show();
 
@@ -362,7 +362,7 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Show")
 
     m_window->Show(false);
 
-    CHECK(!m_window->IsShown());
+    CHECK_FALSE(m_window->IsShown());
 
     m_window->ShowWithEffect(wxSHOW_EFFECT_BLEND);
 
@@ -370,7 +370,7 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Show")
 
     m_window->HideWithEffect(wxSHOW_EFFECT_BLEND);
 
-    CHECK(!m_window->IsShown());
+    CHECK_FALSE(m_window->IsShown());
 }
 
 TEST_CASE_FIXTURE(WindowTestCase, "Window::Enable")
@@ -379,7 +379,7 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Enable")
 
     m_window->Disable();
 
-    CHECK(!m_window->IsEnabled());
+    CHECK_FALSE(m_window->IsEnabled());
 
     m_window->Enable();
 
@@ -387,7 +387,7 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Enable")
 
     m_window->Enable(false);
 
-    CHECK(!m_window->IsEnabled());
+    CHECK_FALSE(m_window->IsEnabled());
     m_window->Enable();
 
 
@@ -396,16 +396,16 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::Enable")
     CHECK(child->IsThisEnabled());
 
     m_window->Disable();
-    CHECK(!child->IsEnabled());
+    CHECK_FALSE(child->IsEnabled());
     CHECK(child->IsThisEnabled());
 
     child->Disable();
-    CHECK(!child->IsEnabled());
-    CHECK(!child->IsThisEnabled());
+    CHECK_FALSE(child->IsEnabled());
+    CHECK_FALSE(child->IsThisEnabled());
 
     m_window->Enable();
-    CHECK(!child->IsEnabled());
-    CHECK(!child->IsThisEnabled());
+    CHECK_FALSE(child->IsEnabled());
+    CHECK_FALSE(child->IsThisEnabled());
 
     child->Enable();
     CHECK(child->IsEnabled());
@@ -430,8 +430,8 @@ TEST_CASE_FIXTURE(WindowTestCase, "Window::FindWindowBy")
 TEST_CASE_FIXTURE(WindowTestCase, "Window::SizerErrors")
 {
     wxWindow* const child = new wxWindow(m_window, wxID_ANY);
-    std::unique_ptr<wxSizer> const sizer1(new wxBoxSizer(wxHORIZONTAL));
-    std::unique_ptr<wxSizer> const sizer2(new wxBoxSizer(wxHORIZONTAL));
+    const auto sizer1 = std::make_unique<wxBoxSizer>(wxHORIZONTAL);
+    const auto sizer2 = std::make_unique<wxBoxSizer>(wxHORIZONTAL);
 
     REQUIRE_NOTHROW( sizer1->Add(child) );
     CHECK_THROWS_AS( sizer1->Add(child), TestAssertFailure );

@@ -48,6 +48,9 @@ public:
         Connect(wxEVT_KEY_UP, wxKeyEventHandler(KeyboardTestWindow::OnKeyUp));
     }
 
+    KeyboardTestWindow(const KeyboardTestWindow&) = delete;
+    KeyboardTestWindow& operator=(const KeyboardTestWindow&) = delete;
+
     unsigned GetKeyDownCount() const { return m_keyDownEvents.size(); }
     unsigned GetCharCount() const { return m_charEvents.size(); }
     unsigned GetKeyUpCount() const { return m_keyUpEvents.size(); }
@@ -67,9 +70,9 @@ public:
 
     void ClearEvents()
     {
-        m_keyDownEvents =
-        m_charEvents =
-        m_keyUpEvents = std::vector<wxKeyEvent>();
+        m_keyDownEvents.clear();
+        m_charEvents.clear();
+        m_keyUpEvents.clear();
     }
 
 private:
@@ -91,13 +94,10 @@ private:
         event.Skip();
     }
 
-    std::vector<wxKeyEvent> m_keyDownEvents,
-                         m_charEvents,
-                         m_keyUpEvents;
+    std::vector<wxKeyEvent> m_keyDownEvents;
+    std::vector<wxKeyEvent> m_charEvents;
+    std::vector<wxKeyEvent> m_keyUpEvents;
 
-
-    KeyboardTestWindow(const KeyboardTestWindow&) = delete;
-	KeyboardTestWindow& operator=(const KeyboardTestWindow&) = delete;
 };
 
 // Object describing the (main fields of) keyboard event.
@@ -145,16 +145,20 @@ KeyDesc ModKeyUp(int keycode)
 void TestEvent(int line, const wxKeyEvent& ev, const KeyDesc& desc)
 {
     // Construct the message we'll display if an assert fails.
-    std::string msg;
-    const wxEventType t = ev.GetEventType();
-    if ( t == wxEVT_KEY_DOWN )
-        msg = "key down";
-    else if ( t == wxEVT_CHAR )
-        msg = "char";
-    else if ( t == wxEVT_KEY_UP )
-        msg = "key up";
-    else
-        FAIL( "unknown event type" );
+    std::string msg = [=](const auto testEvt) {
+        if(testEvt == wxEVT_KEY_DOWN)
+            return "key down";
+        else if(testEvt == wxEVT_KEY_UP)
+            return "key up";
+        else if(testEvt == wxEVT_CHAR)
+            return "char";
+        else
+        {
+            FAIL("unknown event type");
+            return ""; // Never actually will reach this.
+        }
+        
+    }(ev.GetEventType());
 
     msg += " event at line ";
     msg += wxString::Format("%d", line).mb_str();
@@ -186,10 +190,11 @@ void TestEvent(int line, const wxKeyEvent& ev, const KeyDesc& desc)
 } // anonymous namespace
 
 
+// FIXME: A lot of yielding going on here.
+// Is this really necessary?
 TEST_CASE("Keyboard Event Tests")
 {
-    auto m_win = new KeyboardTestWindow(wxTheApp->GetTopWindow());
-    wxYield();
+    auto m_win = std::make_unique<KeyboardTestWindow>(wxTheApp->GetTopWindow());
     m_win->SetFocus();
 
 #ifdef __WXGTK__
@@ -327,7 +332,8 @@ TEST_CASE("Keyboard Event Tests")
                              ModKeyUp(WXK_SHIFT) );
     }
 
-    m_win->Destroy();
+    // TODO: Can we bypass this entirely without issue?
+    //m_win->Destroy();
 }
 
 #endif // wxUSE_UIACTIONSIMULATOR

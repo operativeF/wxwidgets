@@ -34,9 +34,8 @@
 #include "wx/clipbrd.h"
 #include "wx/dataobj.h"
 
-// FIXME: Modify for doctest
-//#include "testimage.h"
-
+#include <array>
+#include <numeric>
 
 #define CHECK_EQUAL_COLOUR_RGB(c1, c2) \
     CHECK( (int)c1.Red()   == (int)c2.Red() ); \
@@ -59,8 +58,10 @@ struct testData {
     const char* file;
     wxBitmapType type;
     unsigned bitDepth;
-} g_testfiles[] =
-{
+};
+
+constexpr std::array<testData, 12> g_testfiles =
+{{
     { "horse.ico", wxBITMAP_TYPE_ICO, 4 },
     { "horse.xpm", wxBITMAP_TYPE_XPM, 8 },
     { "horse.png", wxBITMAP_TYPE_PNG, 24 },
@@ -73,7 +74,7 @@ struct testData {
     { "horse.pnm", wxBITMAP_TYPE_PNM, 24 },
     { "horse.tga", wxBITMAP_TYPE_TGA, 8 },
     { "horse.tif", wxBITMAP_TYPE_TIFF, 8 }
-};
+}};
 
 static void SetAlpha(wxImage* image)
 {
@@ -82,6 +83,7 @@ static void SetAlpha(wxImage* image)
     unsigned char* ptr = image->GetAlpha();
     const int width = image->GetWidth();
     const int height = image->GetHeight();
+
     for (int y = 0; y < height; ++y)
     {
         for (int x = 0; x < width; ++x)
@@ -303,8 +305,8 @@ TEST_CASE("Image test")
     SUBCASE("LoadFromFile")
     {
         wxImage img;
-        for (unsigned int i=0; i<WXSIZEOF(g_testfiles); i++)
-            CHECK(img.LoadFile(g_testfiles[i].file));
+        for (const auto& testFile : g_testfiles)
+            CHECK(img.LoadFile(testFile.file));
     }
 
     // FIXME: Until performance improves, we're not using sockets.
@@ -366,9 +368,9 @@ TEST_CASE("Image test")
 
     SUBCASE("LoadFromZipStream")
     {
-        for (unsigned int i=0; i<WXSIZEOF(g_testfiles); i++)
+        for (const auto& testFile : g_testfiles)
         {
-            switch (g_testfiles[i].type)
+            switch (testFile.type)
             {
                 case wxBITMAP_TYPE_XPM:
                 case wxBITMAP_TYPE_GIF:
@@ -385,7 +387,7 @@ TEST_CASE("Image test")
             // compress the test file on the fly:
             wxMemoryOutputStream memOut;
             {
-                wxFileInputStream file(g_testfiles[i].file);
+                wxFileInputStream file(testFile.file);
                 CHECK(file.IsOk());
 
                 wxZlibOutputStream compressFilter(memOut, 5, wxZLIB_GZIP);
@@ -407,8 +409,8 @@ TEST_CASE("Image test")
             // NOTE: it's important to inform wxImage about the type of the image being
             //       loaded otherwise it will try to autodetect the format, but that
             //       requires a seekable stream!
-            CHECK_MESSAGE(img.LoadFile(decompressFilter, g_testfiles[i].type),
-                         ("Could not load file type '%d' after it was zipped", g_testfiles[i].type));
+            CHECK_MESSAGE(img.LoadFile(decompressFilter, testFile.type),
+                         ("Could not load file type '%d' after it was zipped", testFile.type));
         }
     }
 
@@ -1031,15 +1033,15 @@ TEST_CASE("Image test")
         wxImage expected24("horse.png");
         CHECK( expected24.IsOk() );
 
-        for (size_t i=0; i<WXSIZEOF(g_testfiles); i++)
+        for (const auto& testFile : g_testfiles)
         {
-            if ( !(g_testfiles[i].bitDepth == 8 || g_testfiles[i].bitDepth == 24)
-                || g_testfiles[i].type == wxBITMAP_TYPE_JPEG /*skip lossy JPEG*/)
+            if ( !(testFile.bitDepth == 8 || testFile.bitDepth == 24)
+                || testFile.type == wxBITMAP_TYPE_JPEG /*skip lossy JPEG*/)
             {
                 continue;
             }
 
-            wxImage actual(g_testfiles[i].file);
+            wxImage actual(testFile.file);
 
             if ( actual.GetSize() != expected8.GetSize() )
             {
@@ -1047,10 +1049,10 @@ TEST_CASE("Image test")
             }
 
 
-            INFO("Compare test '%s' for loading", g_testfiles[i].file);
+            INFO("Compare test '%s' for loading", testFile.file);
             // FIXME: Find better way.
             //CHECK_THAT( actual,
-            //            RGBSameAs(g_testfiles[i].bitDepth == 8 ? expected8
+            //            RGBSameAs(testFile.bitDepth == 8 ? expected8
             //                                                   : expected24) );
         }
     }
@@ -1064,12 +1066,12 @@ TEST_CASE("Image test")
         wxImage expected8 = expected24.ConvertToGreyscale();
 
 #if wxUSE_PALETTE
-        unsigned char greys[256];
-        for (int i = 0; i < 256; ++i)
-        {
-            greys[i] = i;
-        }
-        wxPalette palette(256, greys, greys, greys);
+        std::array<unsigned char, 256> greys;
+
+        std::iota(greys.begin(), greys.end(), 0);
+
+        // FIXME: Add interface for std::array in wxPalette
+        wxPalette palette(256, greys.data(), greys.data(), greys.data());
         expected8.SetPalette(palette);
 #endif // #if wxUSE_PALETTE
 
@@ -1133,12 +1135,12 @@ TEST_CASE("Image test")
         */
         expected8.SetAlpha();
 
-        int x, y;
         const int width = expected8.GetWidth();
         const int height = expected8.GetHeight();
-        for (y = 0; y < height; ++y)
+
+        for (int y = 0; y < height; ++y)
         {
-            for (x = 0; x < width; ++x)
+            for (int x = 0; x < width; ++x)
             {
                 expected8.SetAlpha(x, y, expected8.GetRed(x, y));
             }
@@ -1192,7 +1194,7 @@ TEST_CASE("Image test")
 
     SUBCASE("ReadCorruptedTGA")
     {
-        static unsigned char corruptTGA[18 + 1 + 3] =
+        static std::array<unsigned char, 18 + 1 + 3> corruptTGA =
         {
             0,
             0,
@@ -1211,7 +1213,8 @@ TEST_CASE("Image test")
             0xff, 0xff, 0xff // One 24-bit pixel.
         };
 
-        wxMemoryInputStream memIn(corruptTGA, WXSIZEOF(corruptTGA));
+        // FIXME: Add std::array (or span) interface to wxMemoryInputStream
+        wxMemoryInputStream memIn(corruptTGA.data(), WXSIZEOF(corruptTGA));
         CHECK(memIn.IsOk());
 
         wxImage tgaImage;
@@ -1288,8 +1291,8 @@ TEST_CASE("Image test")
 
 #if wxUSE_PALETTE
         wxImageArray images;
-        int i;
-        for (i = 0; i < 4; ++i)
+
+        for (int i = 0; i < 4; ++i)
         {
             if (i)
             {
@@ -1314,7 +1317,7 @@ TEST_CASE("Image test")
         wxMemoryInputStream memIn(memOut);
         CHECK(memIn.IsOk());
         const int imageCount = handler.GetImageCount(memIn);
-        for (i = 0; i < imageCount; ++i)
+        for (int i = 0; i < imageCount; ++i)
         {
             wxFileOffset pos = memIn.TellI();
             CHECK(handler.LoadFile(&image, memIn, true /*verbose?*/, i));
@@ -1443,15 +1446,15 @@ TEST_CASE("Image test")
         }
         else
         {
-            std::vector<wxPoint> coords;
-            coords.push_back(wxPoint(14, 10)); // blue square
-            coords.push_back(wxPoint(8, 22));  // red square
-            coords.push_back(wxPoint(26, 18)); // yellow square
-            coords.push_back(wxPoint(25, 5));  // empty / tranparent
+            std::vector<wxPoint> coords = {
+                wxPoint(14, 10), // blue square
+                wxPoint(8, 22),  // red square
+                wxPoint(26, 18), // yellow square
+                wxPoint(25, 5)   // empty / tranparent
+            };
 
-            for (size_t i = 0; i < coords.size(); ++i)
+            for (const auto p1 : coords)
             {
-                wxPoint const& p1 = coords[i];
                 wxPoint p2 = wxPoint(p1.x * (result.GetWidth() / (double)image.GetWidth()), p1.y * (result.GetHeight() / (double)image.GetHeight()));
 
 #if defined(__WXMSW__)
@@ -1931,7 +1934,7 @@ TEST_CASE("wxImage::RGBtoHSV")
 {
     SUBCASE("RGB(0,0,0) (Black) to HSV")
     {
-       wxImage::RGBValue rgbBlack(0, 0, 0);
+       RGBValue rgbBlack(0, 0, 0);
        wxImage::HSVValue hsvBlack = wxImage::RGBtoHSV(rgbBlack);
 
        CHECK(hsvBlack.value == doctest::Approx(0.0));
@@ -1939,7 +1942,7 @@ TEST_CASE("wxImage::RGBtoHSV")
     }
     SUBCASE("RGB(255,255,255) (White) to HSV")
     {
-       wxImage::RGBValue rgbWhite(255, 255, 255);
+       RGBValue rgbWhite(255, 255, 255);
        wxImage::HSVValue hsvWhite = wxImage::RGBtoHSV(rgbWhite);
 
        CHECK(hsvWhite.saturation == doctest::Approx(0.0));
@@ -1948,7 +1951,7 @@ TEST_CASE("wxImage::RGBtoHSV")
     }
     SUBCASE("RGB(0,255,0) (Green) to HSV")
     {
-       wxImage::RGBValue rgbGreen(0, 255, 0);
+       RGBValue rgbGreen(0, 255, 0);
        wxImage::HSVValue hsvGreen = wxImage::RGBtoHSV(rgbGreen);
 
        CHECK(hsvGreen.hue == doctest::Approx(1.0/3.0));
@@ -1958,25 +1961,24 @@ TEST_CASE("wxImage::RGBtoHSV")
 
     SUBCASE("RGB to HSV to RGB")
     {
-        const wxImage::RGBValue rgbValues[] =
-        {
-            wxImage::RGBValue(   0,   0,   0 ),
-            wxImage::RGBValue(  10,  10,  10 ),
-            wxImage::RGBValue( 255, 255, 255 ),
-            wxImage::RGBValue( 255,   0,   0 ),
-            wxImage::RGBValue(   0, 255,   0 ),
-            wxImage::RGBValue(   0,   0, 255 ),
-            wxImage::RGBValue(   1,   2,   3 ),
-            wxImage::RGBValue(  10,  20,  30 ),
-            wxImage::RGBValue(   0,   1,   6 ),
-            wxImage::RGBValue(   9,   0,  99 ),
-        };
+        static constexpr std::array<RGBValue, 10> rgbValues =
+        {{
+            {   0,   0,   0 },
+            {  10,  10,  10 },
+            { 255, 255, 255 },
+            { 255,   0,   0 },
+            {   0, 255,   0 },
+            {   0,   0, 255 },
+            {   1,   2,   3 },
+            {  10,  20,  30 },
+            {   0,   1,   6 },
+            {   9,   0,  99 }
+        }};
 
-        for (unsigned i = 0; i < WXSIZEOF(rgbValues); i++)
+        for (const auto& rgbValue : rgbValues)
         {
-            wxImage::RGBValue rgbValue = rgbValues[i];
             wxImage::HSVValue hsvValue = wxImage::RGBtoHSV(rgbValue);
-            wxImage::RGBValue rgbRoundtrip = wxImage::HSVtoRGB(hsvValue);
+            RGBValue rgbRoundtrip = wxImage::HSVtoRGB(hsvValue);
 
             CHECK(rgbRoundtrip.red == rgbValue.red);
             CHECK(rgbRoundtrip.green == rgbValue.green);

@@ -58,14 +58,12 @@ TEST_CASE("SpinCtrlDouble::NoEventsInCtor")
 {
     // Verify that creating the control does not generate any events. This is
     // unexpected and shouldn't happen.
-    std::unique_ptr<wxSpinCtrlDouble> m_spin(new wxSpinCtrlDouble);
+    auto m_spin = std::make_unique<wxSpinCtrlDouble>(wxTheApp->GetTopWindow(), wxID_ANY, "",
+                                                     wxDefaultPosition, wxDefaultSize, 0,
+                                                     0., 100., 17.);
 
     EventCounter updatedSpin(m_spin.get(), wxEVT_SPINCTRLDOUBLE);
     EventCounter updatedText(m_spin.get(), wxEVT_TEXT);
-
-    m_spin->Create(wxTheApp->GetTopWindow(), wxID_ANY, "",
-                   wxDefaultPosition, wxDefaultSize, 0,
-                   0., 100., 17.);
 
     CHECK( updatedSpin.GetCount() == 0 );
     CHECK( updatedText.GetCount() == 0 );
@@ -227,10 +225,13 @@ TEST_CASE_FIXTURE(SpinCtrlDoubleTestCase,
 
 static inline unsigned int GetInitialDigits(double inc)
 {
-    wxSpinCtrlDouble* sc = new wxSpinCtrlDouble(wxTheApp->GetTopWindow(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS,
-        0, 50, 0, inc);
-    unsigned int digits = sc->GetDigits();
-    delete sc;
+    wxSpinCtrlDouble sc (wxTheApp->GetTopWindow(), wxID_ANY,
+                         wxEmptyString, wxDefaultPosition,
+                         wxDefaultSize, wxSP_ARROW_KEYS,
+                         0, 50, 0, inc);
+
+    unsigned int digits = sc.GetDigits();
+
     return digits;
 }
 

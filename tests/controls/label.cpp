@@ -26,18 +26,17 @@
 
 #include "wx/generic/stattextg.h"
 
-namespace
-{
+#include <array>
 
-const char* const ORIGINAL_LABEL = "origin label";
+static constexpr char ORIGINAL_LABEL[] = "origin label";
 
 // The actual testing function. It will change the label of the provided
 // control, which is assumed to be ORIGINAL_LABEL initially.
-void DoTestLabel(wxControl* c)
+static void DoTestLabel(wxControl* c)
 {
     CHECK( c->GetLabel() == ORIGINAL_LABEL );
 
-    const wxString testLabelArray[] = {
+    static const std::array<wxString, 7> testLabelArray = {
         "label without mnemonics and markup",
         "label with &mnemonic",
         "label with <span foreground='blue'>some</span> <b>markup</b>",
@@ -47,23 +46,21 @@ void DoTestLabel(wxControl* c)
         "", // empty label should work too
     };
 
-    for ( unsigned int s = 0; s < WXSIZEOF(testLabelArray); s++ )
+    for ( const auto& label : testLabelArray )
     {
-        const wxString& l = testLabelArray[s];
-
         // GetLabel() should always return the string passed to SetLabel()
-        c->SetLabel(l);
-        CHECK( c->GetLabel() == l );
+        c->SetLabel(label);
+        CHECK( c->GetLabel() == label );
 
         // GetLabelText() should always return unescaped version of the label
-        CHECK( c->GetLabelText() == wxControl::RemoveMnemonics(l) );
+        CHECK( c->GetLabelText() == wxControl::RemoveMnemonics(label) );
 
         // GetLabelText() should always return the string passed to SetLabelText()
-        c->SetLabelText(l);
-        CHECK( c->GetLabelText() == l );
+        c->SetLabelText(label);
+        CHECK( c->GetLabelText() == label );
 
         // And GetLabel() should be the escaped version of the text
-        CHECK( l == wxControl::RemoveMnemonics(c->GetLabel()) );
+        CHECK( label == wxControl::RemoveMnemonics(c->GetLabel()) );
     }
 
     // Check that both "&" and "&amp;" work in markup.
@@ -86,37 +83,36 @@ void DoTestLabel(wxControl* c)
 #endif // wxUSE_MARKUP
 }
 
-} // anonymous namespace
-
 TEST_CASE("wxControl::Label")
 {
     SUBCASE("wxStaticText")
     {
-        const std::unique_ptr<wxStaticText>
-            st(new wxStaticText(wxTheApp->GetTopWindow(), wxID_ANY, ORIGINAL_LABEL));
+        const auto st = std::make_unique<wxStaticText>(wxTheApp->GetTopWindow(),
+                                                       wxID_ANY, ORIGINAL_LABEL);
         DoTestLabel(st.get());
     }
 
     SUBCASE("wxStaticText/ellipsized")
     {
-        const std::unique_ptr<wxStaticText>
-            st(new wxStaticText(wxTheApp->GetTopWindow(), wxID_ANY, ORIGINAL_LABEL,
-                                wxDefaultPosition, wxDefaultSize,
-                                wxST_ELLIPSIZE_START));
+        const auto st = std::make_unique<wxStaticText>(wxTheApp->GetTopWindow(),
+                                                       wxID_ANY, ORIGINAL_LABEL,
+                                                       wxDefaultPosition,
+                                                       wxDefaultSize,
+                                                       wxST_ELLIPSIZE_START);
         DoTestLabel(st.get());
     }
 
     SUBCASE("wxGenericStaticText")
     {
-        const std::unique_ptr<wxGenericStaticText>
-            gst(new wxGenericStaticText(wxTheApp->GetTopWindow(), wxID_ANY, ORIGINAL_LABEL));
+        const auto gst = std::make_unique<wxGenericStaticText>(wxTheApp->GetTopWindow(),
+                                                               wxID_ANY, ORIGINAL_LABEL);
         DoTestLabel(gst.get());
     }
 
     SUBCASE("wxCheckBox")
     {
-        const std::unique_ptr<wxCheckBox>
-            cb(new wxCheckBox(wxTheApp->GetTopWindow(), wxID_ANY, ORIGINAL_LABEL));
+        const auto cb = std::make_unique<wxCheckBox>(wxTheApp->GetTopWindow(),
+                                                     wxID_ANY, ORIGINAL_LABEL);
         DoTestLabel(cb.get());
     }
 }

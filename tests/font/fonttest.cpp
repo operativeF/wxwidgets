@@ -210,6 +210,7 @@ TEST_CASE("wxFont::GetSet")
 
         // test Get/SetEncoding()
 
+        // FIXME: Disabled for now because it prompts user to change fonts.
         //test.SetEncoding( wxFONTENCODING_KOI8 );
         //CHECK( test.IsOk() );
         //CHECK( wxFONTENCODING_KOI8 == test.GetEncoding() );
@@ -374,15 +375,15 @@ TEST_CASE("wxFont::NativeFontInfoUserDesc")
     wxFont font(*wxNORMAL_FONT);
 
     static constexpr double sizes[] = { 12.0, 10.5, 13.8, 10.123, 11.1 };
-    for ( unsigned n = 0; n < WXSIZEOF(sizes); n++ )
+    for ( const auto& fontSize : sizes )
     {
-        font.SetFractionalPointSize(sizes[n]);
+        font.SetFractionalPointSize(fontSize);
 
         // Just setting the font can slightly change it because of rounding
         // errors, so don't expect the actual size to be exactly equal to what
         // we used -- but close enough.
         const double sizeUsed = font.GetFractionalPointSize();
-        CHECK( sizeUsed == doctest::Approx(sizes[n]).epsilon(0.001) );
+        CHECK( sizeUsed == doctest::Approx(fontSize).epsilon(0.001) );
 
         const wxString& desc = font.GetNativeFontInfoDesc();
         INFO("Font description: " << desc);

@@ -31,14 +31,14 @@ class GridSizerTestCase
 {
 protected:
     GridSizerTestCase();
-    ~GridSizerTestCase();
+
     // Clear the current sizer contents and add the specified windows to it,
     // using the same flags for all of them.
     void SetChildren(const std::vector<wxWindow*>& children,
                      const wxSizerFlags& flags);
 
-    wxWindow *m_win;
-    wxFlexGridSizer *m_sizer;
+    std::unique_ptr<wxWindow> m_win;
+    wxFlexGridSizer* m_sizer;
 
     GridSizerTestCase(const GridSizerTestCase&) = delete;
 	GridSizerTestCase& operator=(const GridSizerTestCase&) = delete;
@@ -50,19 +50,11 @@ protected:
 
 GridSizerTestCase::GridSizerTestCase()
 {
-    m_win = new wxWindow(wxTheApp->GetTopWindow(), wxID_ANY);
+    m_win = std::make_unique<wxWindow>(wxTheApp->GetTopWindow(), wxID_ANY);
     m_win->SetClientSize(127, 35);
 
     m_sizer = new wxFlexGridSizer(2);
     m_win->SetSizer(m_sizer);
-}
-
-GridSizerTestCase::~GridSizerTestCase()
-{
-    delete m_win;
-    m_win = nullptr;
-
-    m_sizer = nullptr;
 }
 
 // ----------------------------------------------------------------------------
@@ -73,11 +65,9 @@ void GridSizerTestCase::SetChildren(const std::vector<wxWindow*>& children,
                                     const wxSizerFlags& flags)
 {
     m_sizer->Clear();
-    for ( std::vector<wxWindow*>::const_iterator i = children.begin();
-          i != children.end();
-          ++i )
+    for (const auto& child : children)
     {
-        m_sizer->Add(*i, flags);
+        m_sizer->Add(child, flags);
     }
 
     m_win->Layout();
@@ -98,7 +88,7 @@ TEST_CASE_FIXTURE(GridSizerTestCase,
     std::vector<wxWindow*> children;
     for ( int n = 0; n < 4; n++ )
     {
-        children.push_back(new wxWindow(m_win, wxID_ANY, wxDefaultPosition,
+        children.push_back(new wxWindow(m_win.get(), wxID_ANY, wxDefaultPosition,
                                         sizeChild));
     }
 

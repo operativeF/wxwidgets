@@ -31,12 +31,12 @@ TEST_CASE_FIXTURE(wxChecklistBoxTest, "Checklist box test")
     {
         EventCounter toggled(m_container.get(), wxEVT_CHECKLISTBOX);
 
-        std::vector<int> checkedItems;
-        std::vector<wxString> testitems;
-        testitems.push_back("item 0");
-        testitems.push_back("item 1");
-        testitems.push_back("item 2");
-        testitems.push_back("item 3");
+        const std::vector<wxString> testitems = {
+            "item 0",
+            "item 1",
+            "item 2",
+            "item 3"
+        };
 
         m_container->Append(testitems);
 
@@ -49,7 +49,8 @@ TEST_CASE_FIXTURE(wxChecklistBoxTest, "Checklist box test")
         CHECK_EQ(true, m_container->IsChecked(0));
         CHECK_EQ(false, m_container->IsChecked(1));
 
-        // FIXME: No conversion from wxArrayInt to std::vector<unsigned int>
+        std::vector<int> checkedItems;
+
         CHECK_EQ(1, m_container->GetCheckedItemsCount(checkedItems));
         CHECK_EQ(0, checkedItems[0]);
 
