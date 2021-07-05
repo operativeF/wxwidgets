@@ -30,6 +30,8 @@
 
 #include "waitforpaint.h"
 
+#include <array>
+
 namespace
 {
 
@@ -341,7 +343,7 @@ protected:
     TestableGrid *m_tempGrid;
 
     GridTestCase(const GridTestCase&) = delete;
-	GridTestCase& operator=(const GridTestCase&) = delete;
+    GridTestCase& operator=(const GridTestCase&) = delete;
 };
 
 GridTestCase::GridTestCase() : m_tempGrid(nullptr)
@@ -466,9 +468,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::ReorderedColumnsCellClick")
 
     wxUIActionSimulator sim;
 
-    wxArrayInt neworder;
-    neworder.push_back(1);
-    neworder.push_back(0);
+    std::vector<int> neworder = { 1, 0 };
 
     m_grid->SetColumnsOrder(neworder);
 
@@ -786,23 +786,23 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::Selection")
 
     CHECK(m_grid->IsInSelection(0, 1));
     CHECK(m_grid->IsInSelection(9, 1));
-    CHECK(!m_grid->IsInSelection(3, 0));
+    CHECK_FALSE(m_grid->IsInSelection(3, 0));
 
     m_grid->SelectRow(4, true /* add to selection */);
 
     CHECK(m_grid->IsInSelection(4, 0));
     CHECK(m_grid->IsInSelection(4, 1));
-    CHECK(!m_grid->IsInSelection(3, 0));
+    CHECK_FALSE(m_grid->IsInSelection(3, 0));
 
     // Check that deselecting a row does deselect the cells in it, but leaves
     // the other ones selected.
     m_grid->DeselectRow(4);
-    CHECK(!m_grid->IsInSelection(4, 0));
-    CHECK(!m_grid->IsInSelection(4, 1));
+    CHECK_FALSE(m_grid->IsInSelection(4, 0));
+    CHECK_FALSE(m_grid->IsInSelection(4, 1));
     CHECK(m_grid->IsInSelection(0, 1));
 
     m_grid->DeselectCol(1);
-    CHECK(!m_grid->IsInSelection(0, 1));
+    CHECK_FALSE(m_grid->IsInSelection(0, 1));
 }
 
 TEST_CASE_FIXTURE(GridTestCase, "Grid::SelectionRange")
@@ -1038,11 +1038,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::ColumnOrder")
 
     CHECK(m_grid->GetNumberCols() == 4);
 
-    wxArrayInt neworder;
-    neworder.push_back(1);
-    neworder.push_back(3);
-    neworder.push_back(2);
-    neworder.push_back(0);
+    std::vector<int> neworder = { 1, 3, 2, 0 };
 
     m_grid->SetColumnsOrder(neworder);
 
@@ -1070,7 +1066,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::ColumnVisibility")
     CHECK( m_grid->IsColShown(1) );
 
     m_grid->HideCol(1);
-    CHECK( !m_grid->IsColShown(1) );
+    CHECK_FALSE( m_grid->IsColShown(1) );
     CHECK( m_grid->IsColShown(2) );
 
     m_grid->ShowCol(1);
@@ -1083,7 +1079,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::LineFormatting")
 
     m_grid->EnableGridLines(false);
 
-    CHECK(!m_grid->GridLinesEnabled());
+    CHECK_FALSE(m_grid->GridLinesEnabled());
 
     m_grid->EnableGridLines();
 
@@ -1098,20 +1094,20 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::SortSupport")
 
     m_grid->SetSortingColumn(1);
 
-    CHECK(!m_grid->IsSortingBy(0));
+    CHECK_FALSE(m_grid->IsSortingBy(0));
     CHECK(m_grid->IsSortingBy(1));
     CHECK(m_grid->IsSortOrderAscending());
 
     m_grid->SetSortingColumn(0, false);
 
     CHECK(m_grid->IsSortingBy(0));
-    CHECK(!m_grid->IsSortingBy(1));
-    CHECK(!m_grid->IsSortOrderAscending());
+    CHECK_FALSE(m_grid->IsSortingBy(1));
+    CHECK_FALSE(m_grid->IsSortOrderAscending());
 
     m_grid->UnsetSortingColumn();
 
-    CHECK(!m_grid->IsSortingBy(0));
-    CHECK(!m_grid->IsSortingBy(1));
+    CHECK_FALSE(m_grid->IsSortingBy(0));
+    CHECK_FALSE(m_grid->IsSortingBy(1));
 }
 
 TEST_CASE_FIXTURE(GridTestCase, "Grid::Labels")
@@ -1150,7 +1146,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::SelectionMode")
     m_grid->SetSelectionMode(wxGrid::wxGridSelectRows);
     CHECK( m_grid->IsInSelection(5, 0) );
     CHECK( m_grid->IsInSelection(5, 1) );
-    CHECK( !m_grid->IsInSelection(3, 1) );
+    CHECK_FALSE( m_grid->IsInSelection(3, 1) );
 
     //Test row selection be selecting a single cell and checking the whole
     //row is selected
@@ -1235,15 +1231,13 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::CellFormatting")
     CHECK(vert == cellvert);
 
     //Check initial text colour and background colour are default
-    wxColour text, back;
-
-    back = m_grid->GetDefaultCellBackgroundColour();
+    auto back = m_grid->GetDefaultCellBackgroundColour();
 
     CHECK(m_grid->GetCellBackgroundColour(0, 0) == back);
 
-    back = m_grid->GetDefaultCellTextColour();
+    auto text = m_grid->GetDefaultCellTextColour();
 
-    CHECK(m_grid->GetCellTextColour(0, 0) == back);
+    CHECK(m_grid->GetCellTextColour(0, 0) == text);
 
     m_grid->SetCellAlignment(0, 0, wxALIGN_LEFT, wxALIGN_BOTTOM);
     m_grid->GetCellAlignment(0, 0, &cellhoriz, &cellvert);
@@ -1261,8 +1255,8 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::GetNonDefaultAlignment")
     // preferred alignment, so check that if we don't reset the alignment
     // explicitly, it doesn't override the alignment used by default.
     wxGridCellAttrPtr attr;
-    int hAlign = wxALIGN_RIGHT,
-        vAlign = wxALIGN_INVALID;
+    int hAlign = wxALIGN_RIGHT;
+    int vAlign = wxALIGN_INVALID;
 
     attr = m_grid->CallGetCellAttr(0, 0);
     REQUIRE( attr );
@@ -1311,7 +1305,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::Editable")
 
     m_grid->EnableEditing(false);
 
-    CHECK(!m_grid->IsEditable());
+    CHECK_FALSE(m_grid->IsEditable());
 
     m_grid->SetFocus();
     m_grid->SetGridCursor(1, 1);
@@ -1337,7 +1331,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::ReadOnly")
 
     wxUIActionSimulator sim;
 
-    CHECK(!m_grid->IsReadOnly(1, 1));
+    CHECK_FALSE(m_grid->IsReadOnly(1, 1));
 
     m_grid->SetReadOnly(1, 1);
 
@@ -1713,11 +1707,11 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::CellAttribute")
 
     SUBCASE("Expanding")
     {
-        CHECK( !HasCellAttr(numRows, numCols) );
+        CHECK_FALSE( HasCellAttr(numRows, numCols) );
 
         m_grid->InsertCols();
         CHECK_ATTR_COUNT( numAttrs );
-        CHECK( !HasCellAttr(0, 0) );
+        CHECK_FALSE( HasCellAttr(0, 0) );
         CHECK( HasCellAttr(0, numCols) );
 
         m_grid->InsertRows();
@@ -1734,12 +1728,12 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::CellAttribute")
         numAttrs -= m_grid->GetNumberRows();
         CHECK_ATTR_COUNT( numAttrs );
         CHECK( HasCellAttr(0, 0) );
-        CHECK( !HasCellAttr(0, numCols - 1) );
+        CHECK_FALSE( HasCellAttr(0, numCols - 1) );
 
         m_grid->DeleteRows();
         numAttrs -= m_grid->GetNumberCols();
         CHECK_ATTR_COUNT( numAttrs );
-        CHECK( !HasCellAttr(numRows - 1 , numCols - 1) );
+        CHECK_FALSE( HasCellAttr(numRows - 1 , numCols - 1) );
     }
 }
 
@@ -1750,7 +1744,8 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::CellAttribute")
 TEST_CASE_FIXTURE(GridTestCase,
                  "Grid::InsertionsWithMulticell")
 {
-    int insertions = 0, offset = 0;
+    int insertions = 0;
+    int offset = 0;
 
     Multicell multi(1, 1, 3, 5);
 
@@ -1762,11 +1757,11 @@ TEST_CASE_FIXTURE(GridTestCase,
         REQUIRE( static_cast<int>(m_grid->GetCellAttrCount())
                     == multi.rows * multi.cols );
 
-        int row, col, rows, cols;
+        int rows, cols;
 
         // Check main cell.
-        row = multi.row,
-        col = multi.col;
+        int row = multi.row;
+        int col = multi.col;
         wxGrid::CellSpan span = m_grid->GetCellSize(row, col, &rows, &cols);
 
         REQUIRE( span == wxGrid::CellSpan_Main );
@@ -1828,12 +1823,10 @@ TEST_CASE_FIXTURE(GridTestCase,
         FitGridToMulticell(m_grid, multi);
         m_grid->SetMulticell(multi);
 
-        const int insertionCounts[] = {1, 2, multi.rows};
+        const std::array<int, 3> insertionCounts = {1, 2, multi.rows};
 
-        for ( size_t i = 0; i < WXSIZEOF(insertionCounts); ++i )
+        for ( const auto insertions : insertionCounts )
         {
-            insertions = insertionCounts[i];
-
             WHEN("inserting row(s), just before main")
             {
                 InsertRows(multi.row - 1, insertions);
@@ -1860,12 +1853,10 @@ TEST_CASE_FIXTURE(GridTestCase,
         insertions = multi.rows / 2;
 
         // Check insertions within multicell, at and near edges.
-        const int insertionOffsets[] = {1, 2, multi.rows - 2, multi.rows - 1};
+        const std::array<int, 4> insertionOffsets = {1, 2, multi.rows - 2, multi.rows - 1};
 
-        for ( size_t i = 0; i < WXSIZEOF(insertionOffsets); ++i )
+        for ( const auto offset : insertionOffsets )
         {
-            offset = insertionOffsets[i];
-
             WHEN("inserting rows in multicell, row(s) after main")
             {
                 InsertRows(multi.row + offset, insertions);
@@ -1896,7 +1887,8 @@ TEST_CASE_FIXTURE(GridTestCase,
 TEST_CASE_FIXTURE(GridTestCase,
                  "GridMulticell::DeletionsWithMulticell")
 {
-    int deletions = 0, offset = 0;
+    int deletions = 0;
+    int offset = 0;
 
     // Same as with the previous (insertions) test case but instead of some
     // basic testing with columns first, this time use rows for that and do more
@@ -1993,12 +1985,10 @@ TEST_CASE_FIXTURE(GridTestCase,
         deletions = 2;
 
         // Check deletions within multicell, at and near edges.
-        const int offsets[] = {1, 2, multi.cols - deletions};
+        const std::array<int, 3> offsets = {1, 2, multi.cols - deletions};
 
-        for ( size_t i = 0; i < WXSIZEOF(offsets); ++i )
+        for ( const auto offset : offsets )
         {
-            offset = offsets[i];
-
             WHEN("deleting columns only within multicell,"
                    " column(s) after main")
             {
@@ -2075,7 +2065,7 @@ TEST_CASE("GridBlockCoords::Intersects")
     CHECK(wxGridBlockCoords(1, 1, 3, 3).Intersects(wxGridBlockCoords(2, 2, 4, 4)));
 
     // Doesn't intersects.
-    CHECK(!wxGridBlockCoords(1, 1, 3, 3).Intersects(wxGridBlockCoords(4, 4, 6, 6)));
+    CHECK_FALSE(wxGridBlockCoords(1, 1, 3, 3).Intersects(wxGridBlockCoords(4, 4, 6, 6)));
 }
 
 TEST_CASE("GridBlockCoords::Contains")
@@ -2084,7 +2074,7 @@ TEST_CASE("GridBlockCoords::Contains")
     CHECK(wxGridBlockCoords(1, 1, 3, 3).Contains(wxGridCellCoords(2, 2)));
 
     // Outside.
-    CHECK(!wxGridBlockCoords(1, 1, 3, 3).Contains(wxGridCellCoords(5, 5)));
+    CHECK_FALSE(wxGridBlockCoords(1, 1, 3, 3).Contains(wxGridCellCoords(5, 5)));
 
     wxGridBlockCoords block1(1, 1, 5, 5);
     wxGridBlockCoords block2(1, 1, 3, 3);
@@ -2092,11 +2082,11 @@ TEST_CASE("GridBlockCoords::Contains")
     wxGridBlockCoords block4(10, 10, 12, 12);
 
     CHECK( block1.Contains(block2));
-    CHECK(!block2.Contains(block1));
-    CHECK(!block1.Contains(block3));
-    CHECK(!block1.Contains(block4));
-    CHECK(!block3.Contains(block1));
-    CHECK(!block4.Contains(block1));
+    CHECK_FALSE(block2.Contains(block1));
+    CHECK_FALSE(block1.Contains(block3));
+    CHECK_FALSE(block1.Contains(block4));
+    CHECK_FALSE(block3.Contains(block1));
+    CHECK_FALSE(block4.Contains(block1));
 }
 
 TEST_CASE("GridBlockCoords::Difference")
