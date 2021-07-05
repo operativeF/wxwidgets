@@ -225,55 +225,15 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextCtrl : public wxControl,
     wxDECLARE_EVENT_TABLE();
 
 public:
-// Constructors
-
-    /**
-        Default constructor.
-    */
     wxRichTextCtrl( );
 
-    /**
-        Constructor, creating and showing a rich text control.
-
-        @param parent
-            Parent window. Must not be @NULL.
-        @param id
-            Window identifier. The value @c wxID_ANY indicates a default value.
-        @param value
-            Default string.
-        @param pos
-            Window position.
-        @param size
-            Window size.
-        @param style
-            Window style.
-        @param validator
-            Window validator.
-        @param name
-            Window name.
-
-        @see Create(), wxValidator
-    */
     wxRichTextCtrl( wxWindow* parent, wxWindowID id = -1, const wxString& value = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize,
         long style = wxRE_MULTILINE, const wxValidator& validator = wxDefaultValidator, const wxString& name = wxASCII_STR(wxTextCtrlNameStr));
 
-    /**
-        Destructor.
-    */
-    ~wxRichTextCtrl( ) override;
+    ~wxRichTextCtrl() override;
 
-// Operations
-
-    /**
-        Creates the underlying window.
-    */
     bool Create( wxWindow* parent, wxWindowID id = -1, const wxString& value = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize,
         long style = wxRE_MULTILINE, const wxValidator& validator = wxDefaultValidator, const wxString& name = wxASCII_STR(wxTextCtrlNameStr) );
-
-    /**
-        Initialises the members of the control.
-    */
-    void Init();
 
 // Accessors
 
@@ -485,7 +445,7 @@ public:
     /**
         Returns the current context menu.
     */
-    wxMenu* GetContextMenu() const { return m_contextMenu; }
+    wxMenu* GetContextMenu() const { return m_contextMenu.get(); }
 
     /**
         Sets the current context menu.
@@ -2334,65 +2294,65 @@ protected:
     /// Text buffer
     wxRichTextBuffer        m_buffer;
 
-    wxMenu*                 m_contextMenu;
+    std::unique_ptr<wxMenu> m_contextMenu;
 
     /// Caret position (1 less than the character position, so -1 is the
     /// first caret position).
-    long                    m_caretPosition;
+    long                    m_caretPosition{-1};
 
     /// Caret position when the default formatting has been changed. As
     /// soon as this position changes, we no longer reflect the default style
     /// in the UI.
-    long                    m_caretPositionForDefaultStyle;
+    long                    m_caretPositionForDefaultStyle{-2};
 
     /// Selection range in character positions. -2, -2 means no selection.
     wxRichTextSelection     m_selection;
 
-    wxRichTextCtrlSelectionState m_selectionState;
+    wxRichTextCtrlSelectionState m_selectionState{wxRichTextCtrlSelectionState_Normal};
 
     /// Anchor so we know how to extend the selection
     /// It's a caret position since it's between two characters.
-    long                    m_selectionAnchor;
+    long                    m_selectionAnchor{-2};
 
     /// Anchor object if selecting multiple container objects, such as grid cells.
-    wxRichTextObject*       m_selectionAnchorObject;
+    wxRichTextObject*       m_selectionAnchorObject{nullptr};
 
     /// Are we editable?
-    bool                    m_editable;
+    bool                    m_editable{true};
 
     /// Can we use virtual attributes and virtual text?
-    bool                    m_useVirtualAttributes;
+    bool                    m_useVirtualAttributes{false};
 
     /// Is the vertical scrollbar enabled?
-    bool                    m_verticalScrollbarEnabled;
+    bool                    m_verticalScrollbarEnabled{true};
 
     /// Are we showing the caret position at the start of a line
     /// instead of at the end of the previous one?
-    bool                    m_caretAtLineStart;
+    bool                    m_caretAtLineStart{false};
 
     /// Are we dragging (i.e. extending) a selection?
-    bool                    m_dragging;
+    bool                    m_dragging{false};
 
 #if wxUSE_DRAG_AND_DROP
     /// Are we trying to start Drag'n'Drop?
-    bool m_preDrag;
+    bool                    m_preDrag{false};
 
     /// Initial position when starting Drag'n'Drop
-    wxPoint m_dragStartPoint;
+    wxPoint                 m_dragStartPoint;
 
 #if wxUSE_DATETIME
     /// Initial time when starting Drag'n'Drop
-  wxDateTime m_dragStartTime;
+    wxDateTime              m_dragStartTime;
 #endif // wxUSE_DATETIME
 #endif // wxUSE_DRAG_AND_DROP
 
     /// Do we need full layout in idle?
-    bool                    m_fullLayoutRequired;
-    wxLongLong              m_fullLayoutTime;
-    long                    m_fullLayoutSavedPosition;
+    bool                    m_fullLayoutRequired{false};
+    wxLongLong              m_fullLayoutTime{0};
+    long                    m_fullLayoutSavedPosition{0};
 
     /// Threshold for doing delayed layout
-    long                    m_delayedLayoutThreshold;
+    long                    m_delayedLayoutThreshold{wxRICHTEXT_DEFAULT_DELAYED_LAYOUT_THRESHOLD};
 
     /// Cursors
     wxCursor                m_textCursor;
@@ -2406,23 +2366,23 @@ protected:
     wxRichTextParagraphLayoutBox* m_focusObject;
 
     /// An overall scale factor
-    double                  m_scale;
+    double                  m_scale{1.0};
 
     /// Variables for scrollbar hysteresis detection
     wxSize                  m_lastWindowSize;
-    int                     m_setupScrollbarsCount;
-    int                     m_setupScrollbarsCountInOnSize;
+    int                     m_setupScrollbarsCount{0};
+    int                     m_setupScrollbarsCountInOnSize{0};
 
     /// Whether images are enabled for this control
-    bool                    m_enableImages;
+    bool                    m_enableImages{true};
 
     /// Line height in pixels
-    int                     m_lineHeight;
+    int                     m_lineHeight{5};
 
     /// Whether delayed image loading is enabled for this control
-    bool                    m_enableDelayedImageLoading;
-    bool                    m_delayedImageProcessingRequired;
-    wxLongLong              m_delayedImageProcessingTime;
+    bool                    m_enableDelayedImageLoading{false};
+    bool                    m_delayedImageProcessingRequired{false};
+    wxLongLong              m_delayedImageProcessingTime{0};
     wxTimer                 m_delayedImageProcessingTimer;
 };
 
@@ -2665,10 +2625,10 @@ protected:
 
 private:
     public:
-	wxRichTextEvent& operator=(const wxRichTextEvent&) = delete;
-	wxClassInfo *GetClassInfo() const override ;
-	static wxClassInfo ms_classInfo; 
-	static wxObject* wxCreateObject();
+    wxRichTextEvent& operator=(const wxRichTextEvent&) = delete;
+    wxClassInfo *GetClassInfo() const override ;
+    static wxClassInfo ms_classInfo; 
+    static wxObject* wxCreateObject();
 };
 
 /*!

@@ -2567,7 +2567,7 @@ bool wxRichTextParagraphLayoutBox::GetRangeSize(const wxRichTextRange& range, wx
 wxRichTextParagraph* wxRichTextParagraphLayoutBox::GetParagraphAtPosition(long pos, bool caretPosition) const
 {
     if (caretPosition)
-        pos ++;
+        ++pos;
 
     // First find the first paragraph whose starting position is within the range.
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
@@ -2596,7 +2596,7 @@ wxRichTextParagraph* wxRichTextParagraphLayoutBox::GetParagraphAtPosition(long p
 wxRichTextLine* wxRichTextParagraphLayoutBox::GetLineAtPosition(long pos, bool caretPosition) const
 {
     if (caretPosition)
-        pos ++;
+        ++pos;
 
     // First find the first paragraph whose starting position is within the range.
     wxRichTextObjectList::compatibility_iterator node = m_children.GetFirst();
