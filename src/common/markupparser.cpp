@@ -231,10 +231,8 @@ bool wxMarkupParser::OutputTag(const TagAndAttrs& tagAndAttrs, bool start)
                     &wxMarkupParserOutput::OnTeletypeEnd },
         };
 
-        for ( unsigned n = 0; n < WXSIZEOF(tagHandlers); n++ )
+        for ( const auto& h : tagHandlers )
         {
-            const TagHandler& h = tagHandlers[n];
-
             if ( tagAndAttrs.name.CmpNoCase(h.name) == 0 )
             {
                 if ( start )

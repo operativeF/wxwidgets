@@ -974,7 +974,10 @@ wxImage wxImage::ResampleBicubic(int width, int height) const
             const BicubicPrecalc& hPrecalc = hPrecalcs[dstx];
 
             // Sums for each color channel
-            double sum_r = 0, sum_g = 0, sum_b = 0, sum_a = 0;
+            double sum_r = 0;
+            double sum_g = 0;
+            double sum_b = 0;
+            double sum_a = 0;
 
             // Here we actually determine the RGBA values for the destination pixel
             for ( int k = -1; k <= 2; k++ )

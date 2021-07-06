@@ -536,9 +536,8 @@ void wxMSWHeaderCtrl::SetColumnsOrder(const std::vector<int>& order)
     std::vector<int> orderShown;
     orderShown.reserve(m_numColumns);
 
-    for ( unsigned n = 0; n < m_numColumns; n++ )
+    for ( const auto idx : order )
     {
-        const int idx = order[n];
         if ( m_header.GetColumn(idx).IsShown() )
             orderShown.push_back(MSWToNativeIdx(idx));
     }

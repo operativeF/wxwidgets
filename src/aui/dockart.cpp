@@ -166,12 +166,9 @@ static void DrawGradientRectangle(wxDC& dc,
 
     for (int i = 0; i <= high; ++i)
     {
-        int r,g,b;
-
-
-        r = start_color.Red() + (high <= 0 ? 0 : (((i*rd*100)/high)/100));
-        g = start_color.Green() + (high <= 0 ? 0 : (((i*gd*100)/high)/100));
-        b = start_color.Blue() + (high <= 0 ? 0 : (((i*bd*100)/high)/100));
+        int r = start_color.Red() + (high <= 0 ? 0 : (((i*rd*100)/high)/100));
+        int g = start_color.Green() + (high <= 0 ? 0 : (((i*gd*100)/high)/100));
+        int b = start_color.Blue() + (high <= 0 ? 0 : (((i*bd*100)/high)/100));
 
         wxPen p(wxColor((unsigned char)r,
                         (unsigned char)g,
@@ -187,16 +184,15 @@ static void DrawGradientRectangle(wxDC& dc,
 
 wxString wxAuiChopText(wxDC& dc, const wxString& text, int max_size)
 {
-    wxCoord x,y;
+    wxCoord x, y;
 
     // first check if the text fits with no problems
     dc.GetTextExtent(text, &x, &y);
     if (x <= max_size)
         return text;
 
-    size_t i, len = text.Length();
     size_t last_good_length = 0;
-    for (i = 0; i < len; ++i)
+    for (size_t i = 0; i < text.Length(); ++i)
     {
         wxString s = text.Left(i);
         s += wxT("...");

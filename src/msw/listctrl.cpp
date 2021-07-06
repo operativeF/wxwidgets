@@ -424,8 +424,8 @@ void wxListCtrl::SetDoubleBuffered(bool WXUNUSED(on))
 
 void wxListCtrl::FreeAllInternalData()
 {
-    for ( unsigned n = 0; n < m_internalData.size(); n++ )
-        delete m_internalData[n];
+    for ( auto& datum : m_internalData )
+        delete datum;
 
     m_internalData.clear();
 }

@@ -364,7 +364,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
 
     auto buffer = std::make_unique<wxUint8[]>(row_width);
     memset(buffer.get(), 0, row_width);
-    unsigned x;
+
     long int pixel;
     const int dstPixLen = saveAlpha ? 4 : 3;
 
@@ -372,7 +372,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
     {
         if ( format == wxBMP_24BPP ) // 3 bytes per pixel red,green,blue
         {
-            for ( x = 0; x < width; x++ )
+            for (auto x = 0; x < width; x++ )
             {
                 pixel = 3*(y*width + x);
 
@@ -386,7 +386,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
         else if ((format == wxBMP_8BPP) ||       // 1 byte per pixel in color
                  (format == wxBMP_8BPP_PALETTE))
         {
-            for (x = 0; x < width; x++)
+            for (auto x = 0; x < width; x++)
             {
                 pixel = 3*(y*width + x);
 #if wxUSE_PALETTE
@@ -401,7 +401,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
         }
         else if ( format == wxBMP_8BPP_GREY ) // 1 byte per pix, rgb ave to grey
         {
-            for (x = 0; x < width; x++)
+            for (auto x = 0; x < width; x++)
             {
                 pixel = 3*(y*width + x);
                 buffer[x] = (wxUint8)(.299*data[pixel] +
@@ -411,14 +411,14 @@ bool wxBMPHandler::SaveDib(wxImage *image,
         }
         else if ( format == wxBMP_8BPP_RED ) // 1 byte per pixel, red as greys
         {
-            for (x = 0; x < width; x++)
+            for (auto x = 0; x < width; x++)
             {
                 buffer[x] = (wxUint8)data[3*(y*width + x)];
             }
         }
         else if ( format == wxBMP_4BPP ) // 4 bpp in color
         {
-            for (x = 0; x < width; x+=2)
+            for (auto x = 0; x < width; x+=2)
             {
                 pixel = 3*(y*width + x);
 
@@ -441,7 +441,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
         }
         else if ( format == wxBMP_1BPP ) // 1 bpp in "color"
         {
-            for (x = 0; x < width; x+=8)
+            for (auto x = 0; x < width; x+=8)
             {
                 pixel = 3*(y*width + x);
 
@@ -463,7 +463,7 @@ bool wxBMPHandler::SaveDib(wxImage *image,
         }
         else if ( format == wxBMP_1BPP_BW ) // 1 bpp B&W colormap from red color ONLY
         {
-            for (x = 0; x < width; x+=8)
+            for (auto x = 0; x < width; x+=8)
             {
                 pixel = 3*(y*width + x);
 

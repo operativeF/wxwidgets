@@ -140,12 +140,11 @@ bool wxIFFDecoder::ConvertToImage(wxImage *image) const
     unsigned char *dst = image->GetData();
     int colors = GetNumColors();
     int transparent = GetTransparentColour();
-    long i;
 
     // set transparent colour mask
     if (transparent != -1)
     {
-        for (i = 0; i < colors; i++)
+        for (int i = 0; i < colors; i++)
         {
             if ((pal[3 * i + 0] == 255) &&
                 (pal[3 * i + 1] == 0) &&
@@ -171,7 +170,7 @@ bool wxIFFDecoder::ConvertToImage(wxImage *image) const
         unsigned char* g = new unsigned char[colors];
         unsigned char* b = new unsigned char[colors];
 
-        for (i = 0; i < colors; i++)
+        for (int i = 0; i < colors; i++)
         {
             r[i] = pal[3*i + 0];
             g[i] = pal[3*i + 1];
@@ -187,7 +186,7 @@ bool wxIFFDecoder::ConvertToImage(wxImage *image) const
 #endif // wxUSE_PALETTE
 
     // copy image data
-    for (i = 0; i < (long)(GetWidth() * GetHeight()); i++, src += 3, dst += 3)
+    for (int i = 0; i < (long)(GetWidth() * GetHeight()); i++, src += 3, dst += 3)
     {
     dst[0] = src[0];
     dst[1] = src[1];

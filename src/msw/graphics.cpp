@@ -2586,17 +2586,17 @@ void wxGDIPlusRenderer::Load()
 #if wxUSE_PRIVATE_FONTS
         // Make private fonts available to GDI+, if any.
         const std::vector<wxString>& privateFonts = wxGetPrivateFontFileNames();
-        const size_t n = privateFonts.size();
-        if ( n )
+
+        if ( !privateFonts.empty() )
         {
             gs_privateFonts = new Gdiplus::PrivateFontCollection();
-            for ( size_t i = 0 ; i < n; i++ )
+            
+            for ( const auto& fname : privateFonts )
             {
-                const wxString& fname = privateFonts[i];
                 gs_privateFonts->AddFontFile(fname.wc_str());
             }
 
-            gs_pFontFamily = new Gdiplus::FontFamily[n];
+            gs_pFontFamily = new Gdiplus::FontFamily[privateFonts.size()];
         }
 #endif // wxUSE_PRIVATE_FONTS
     }
