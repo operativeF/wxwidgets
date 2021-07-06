@@ -263,9 +263,9 @@ void wxMessageDialog::ReplaceStaticWithEdit()
     SetWindowRect(GetHwnd(), rcBox);
 
     // and adjust all the buttons positions
-    for ( unsigned n = 0; n < WXSIZEOF(ms_buttons); n++ )
+    for ( const auto& button : ms_buttons )
     {
-        const HWND hwndBtn = ::GetDlgItem(GetHwnd(), ms_buttons[n].id);
+        const HWND hwndBtn = ::GetDlgItem(GetHwnd(), button.id);
         if ( !hwndBtn )
             continue;   // it's ok, not all buttons are always present
 
@@ -297,15 +297,15 @@ void wxMessageDialog::AdjustButtonLabels()
         wBtnNew = 0;            // required new buttons width
     RECT rcBtn;                 // stores the button height and y positions
     unsigned numButtons = 0;    // total number of buttons in the message box
-    for ( unsigned n = 0; n < WXSIZEOF(ms_buttons); n++ )
+    for ( const auto& button : ms_buttons )
     {
-        const HWND hwndBtn = ::GetDlgItem(GetHwnd(), ms_buttons[n].id);
+        const HWND hwndBtn = ::GetDlgItem(GetHwnd(), button.id);
         if ( !hwndBtn )
             continue;   // it's ok, not all buttons are always present
 
         numButtons++;
 
-        const wxString label = (this->*ms_buttons[n].getter)();
+        const wxString label = (this->*button.getter)();
         const wxSize sizeLabel = wxWindowBase::GetTextExtent(label);
 
         // check if the button is big enough for this label
@@ -374,9 +374,9 @@ void wxMessageDialog::AdjustButtonLabels()
                   wBoxNew - wAllButtons) / 2;
     rcBtn.right = rcBtn.left + wBtnNew;
 
-    for ( unsigned n = 0; n < WXSIZEOF(ms_buttons); n++ )
+    for ( const auto& button : ms_buttons )
     {
-        const HWND hwndBtn = ::GetDlgItem(GetHwnd(), ms_buttons[n].id);
+        const HWND hwndBtn = ::GetDlgItem(GetHwnd(), button.id);
         if ( !hwndBtn )
             continue;
 

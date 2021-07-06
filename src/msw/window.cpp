@@ -6666,11 +6666,11 @@ int VKToWX(WXWORD vk, WXLPARAM lParam, wchar_t *uc)
     int wxk;
 
     // check the table first
-    for ( size_t n = 0; n < WXSIZEOF(gs_specialKeys); n++ )
+    for ( const auto& sp_key : gs_specialKeys )
     {
-        if ( gs_specialKeys[n].vk == vk )
+        if ( sp_key.vk == vk )
         {
-            wxk = gs_specialKeys[n].wxk;
+            wxk = sp_key.wxk;
             if ( wxk < WXK_START )
             {
                 // Unicode code for this key is the same as its ASCII code.
@@ -6806,9 +6806,9 @@ int VKToWX(WXWORD vk, WXLPARAM lParam, wchar_t *uc)
 WXWORD WXToVK(int wxk, bool *isExtended)
 {
     // check the table first
-    for ( size_t n = 0; n < WXSIZEOF(gs_specialKeys); n++ )
+    for ( const auto& sp_key : gs_specialKeys )
     {
-        if ( gs_specialKeys[n].wxk == wxk )
+        if ( sp_key.wxk == wxk )
         {
             // All extended keys (i.e. non-numpad versions of the keys that
             // exist both in the numpad and outside of it) are dealt with
@@ -6816,7 +6816,7 @@ WXWORD WXToVK(int wxk, bool *isExtended)
             if ( isExtended )
                 *isExtended = false;
 
-            return gs_specialKeys[n].vk;
+            return sp_key.vk;
         }
     }
 

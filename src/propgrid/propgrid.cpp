@@ -182,8 +182,8 @@ wxPGGlobalVarsClass::~wxPGGlobalVarsClass()
     delete m_fontFamilyChoices;
 
 #if wxUSE_VALIDATORS
-    for ( size_t i = 0; i < m_arrValidators.size(); i++ )
-        delete ((wxValidator*)m_arrValidators[i]);
+    for(auto* validator : m_arrValidators)
+        delete validator;
 #endif
 
     //

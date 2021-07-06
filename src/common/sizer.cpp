@@ -1789,25 +1789,10 @@ void wxFlexGridSizer::AdjustForFlexDirection()
         std::vector<int>& array = m_flexDirection == wxVERTICAL ? m_colWidths
                                                           : m_rowHeights;
 
-        const size_t count = array.size();
+        auto largest = *std::max_element(array.cbegin(), array.cend());
 
-        // find the largest value in this array
-        size_t n;
-        int largest = 0;
-
-        for ( n = 0; n < count; ++n )
-        {
-            if ( array[n] > largest )
-                largest = array[n];
-        }
-
-        // and now fill it with the largest value
-        for ( n = 0; n < count; ++n )
-        {
-            // don't touch hidden rows
-            if ( array[n] != -1 )
-                array[n] = largest;
-        }
+        // and now fill it with the largest value if not hidden (== -1)
+        std::replace_if(array.begin(), array.end(), [](auto val) { return val != -1; }, largest);
     }
 }
 

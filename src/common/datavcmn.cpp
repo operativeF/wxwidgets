@@ -93,29 +93,27 @@ wxFont wxDataViewItemAttr::GetEffectiveFont(const wxFont& font) const
 
 bool wxDataViewModelNotifier::ItemsAdded( const wxDataViewItem &parent, const wxDataViewItemArray &items )
 {
-    size_t count = items.size();
-    for (size_t i = 0; i < count; i++)
-        if (!ItemAdded( parent, items[i] )) return false;
+    for (const auto& item : items)
+        if (!ItemAdded( parent, item ))
+            return false;
 
     return true;
 }
 
 bool wxDataViewModelNotifier::ItemsDeleted( const wxDataViewItem &parent, const wxDataViewItemArray &items )
 {
-    size_t count = items.size();
-
-    for (size_t i = 0; i < count; i++)
-        if (!ItemDeleted( parent, items[i] )) return false;
+    for (const auto& item : items)
+        if (!ItemDeleted( parent, item ))
+            return false;
 
     return true;
 }
 
 bool wxDataViewModelNotifier::ItemsChanged( const wxDataViewItemArray &items )
 {
-    size_t count = items.size();
-
-    for (size_t i = 0; i < count; i++)
-        if (!ItemChanged( items[i] )) return false;
+    for (const auto& item : items)
+        if (!ItemChanged( item ))
+            return false;
 
     return true;
 }

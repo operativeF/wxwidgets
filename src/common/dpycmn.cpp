@@ -214,10 +214,10 @@ bool wxDisplay::ChangeMode(const wxVideoMode& mode)
 
 void wxDisplayFactory::ClearImpls()
 {
-    for ( size_t n = 0; n < m_impls.size(); ++n )
+    for ( auto* impl : m_impls )
     {
         // It can be null, that's ok.
-        delete m_impls[n];
+        delete impl;
     }
 
     m_impls.clear();

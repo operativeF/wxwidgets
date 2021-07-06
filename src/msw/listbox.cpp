@@ -93,9 +93,9 @@ bool wxListBox::Create(wxWindow *parent,
     }
 
     // initialize the contents
-    for ( int i = 0; i < choices.size(); i++ )
+    for ( const auto& choice : choices)
     {
-        Append(choices[i]);
+        Append(choice);
     }
 
     // now we can compute our best size correctly, so do it again

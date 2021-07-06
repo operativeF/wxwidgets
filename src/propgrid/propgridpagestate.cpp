@@ -305,7 +305,7 @@ void wxPropertyGridPageState::CalculateFontAndBitmapStuff( int WXUNUSED(vspacing
     // Recalculate caption text extents.
     for ( unsigned int i = 0; i < m_regularArray.GetChildCount();i++ )
     {
-        wxPGProperty* p =m_regularArray.Item(i);
+        wxPGProperty* p = m_regularArray.Item(i);
 
         if ( p->IsCategory() )
             ((wxPropertyCategory*)p)->CalculateTextExtent(propGrid, propGrid->GetCaptionFont());

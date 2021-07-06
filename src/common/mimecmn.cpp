@@ -167,23 +167,8 @@ wxFileTypeInfo::wxFileTypeInfo(const std::vector<wxString>& sArray)
     , m_printCmd(sArray[2u])
     , m_desc(    sArray[3u])
 {
-    const size_t count = sArray.size();
-    for ( size_t i = 4; i < count; i++ )
-    {
-        m_exts.push_back(sArray[i]);
-    }
+    std::copy(sArray.cbegin(), sArray.cend(), std::back_inserter(m_exts));
 }
-
-#include "wx/arrimpl.cpp"
-WX_DEFINE_OBJARRAY(wxArrayFileTypeInfo)
-
-// ============================================================================
-// implementation of the wrapper classes
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// wxFileType
-// ----------------------------------------------------------------------------
 
 /* static */
 wxString wxFileType::ExpandCommand(const wxString& command,
@@ -639,15 +624,14 @@ wxMimeTypesManager::GetFileTypeFromExtension(const wxString& ext)
         //
         // TODO linear search is potentially slow, perhaps we should use a
         //       sorted array?
-        const size_t count = m_fallbacks.GetCount();
-        for ( size_t n = 0; n < count; n++ ) {
-            const auto iter_idx = std::find_if(m_fallbacks[n].GetExtensions().cbegin(), m_fallbacks[n].GetExtensions().cend(),
+        for ( const auto& fallback : m_fallbacks ) {
+            const auto iter_idx = std::find_if(fallback.GetExtensions().cbegin(), fallback.GetExtensions().cend(),
                 [ext](const auto& anExt)
                 {
                     return ext.IsSameAs(anExt);
                 });
-            if ( iter_idx != std::cend(m_fallbacks[n].GetExtensions())) {
-                ft = new wxFileType(m_fallbacks[n]);
+            if ( iter_idx != std::cend(fallback.GetExtensions())) {
+                ft = new wxFileType(fallback);
 
                 break;
             }
@@ -668,11 +652,10 @@ wxMimeTypesManager::GetFileTypeFromMimeType(const wxString& mimeType)
         //
         // TODO linear search is potentially slow, perhaps we should use a
         //      sorted array?
-        const size_t count = m_fallbacks.GetCount();
-        for ( size_t n = 0; n < count; n++ ) {
+        for ( const auto& fallback : m_fallbacks ) {
             if ( wxMimeTypesManager::IsOfType(mimeType,
-                                              m_fallbacks[n].GetMimeType()) ) {
-                ft = new wxFileType(m_fallbacks[n]);
+                                              fallback.GetMimeType()) ) {
+                ft = new wxFileType(fallback);
 
                 break;
             }
@@ -698,16 +681,15 @@ size_t wxMimeTypesManager::EnumAllFileTypes(std::vector<wxString>& mimetypes)
     size_t countAll = m_impl->EnumAllFileTypes(mimetypes);
 
     // add the fallback filetypes
-    const size_t count = m_fallbacks.GetCount();
-    for ( size_t n = 0; n < count; n++ ) {
-        const auto fallMime = m_fallbacks[n].GetMimeType();
+    for ( const auto& fallback : m_fallbacks ) {
+        const auto fallMime = fallback.GetMimeType();
         const auto iter_idx = std::find_if(mimetypes.cbegin(), mimetypes.cend(),
             [fallMime](const auto& aType)
             {
                 return fallMime.IsSameAs(aType);
             });
         if ( iter_idx == std::cend(mimetypes) ) {
-            mimetypes.push_back(m_fallbacks[n].GetMimeType());
+            mimetypes.push_back(fallback.GetMimeType());
             countAll++;
         }
     }
@@ -761,7 +743,7 @@ public:
         if ( gs_mimeTypesManager.m_impl != nullptr )
         {
             wxDELETE(gs_mimeTypesManager.m_impl);
-            gs_mimeTypesManager.m_fallbacks.Clear();
+            gs_mimeTypesManager.m_fallbacks.clear();
         }
     }
 

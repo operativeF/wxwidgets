@@ -257,8 +257,7 @@ private:
 #endif // 0
 };
 
-WX_DECLARE_USER_EXPORTED_OBJARRAY(wxFileTypeInfo, wxArrayFileTypeInfo,
-                                  WXDLLIMPEXP_BASE);
+using wxArrayFileTypeInfo = std::vector<wxFileTypeInfo>;
 
 // ----------------------------------------------------------------------------
 // wxFileType: gives access to all information about the files of given type.
@@ -462,7 +461,7 @@ public:
     // The filetypes array should be terminated by either NULL entry or an
     // invalid wxFileTypeInfo (i.e. the one created with default ctor)
     void AddFallbacks(const wxFileTypeInfo *filetypes);
-    void AddFallback(const wxFileTypeInfo& ft) { m_fallbacks.Add(ft); }
+    void AddFallback(const wxFileTypeInfo& ft) { m_fallbacks.push_back(ft); }
 
     // create or remove associations
 
