@@ -116,8 +116,7 @@ public:
     // found
     static std::unique_ptr<wxAcceleratorEntry> GetAccelFromString(const wxString& label);
 
-    // get our accelerator or NULL (caller must delete the pointer)
-    virtual std::unique_ptr<wxAcceleratorEntry> GetAccel() const;
+    virtual std::optional<wxAcceleratorEntry> GetAccel() const;
 
     // set the accel for this item - this may also be done indirectly with
     // SetText()

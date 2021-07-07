@@ -145,7 +145,7 @@ private:
     void UpdateWindowMenu(bool enable);
 
 #if wxUSE_ACCEL
-    wxAcceleratorTable *m_accelWindowMenu{nullptr};
+    std::unique_ptr<wxAcceleratorTable> m_accelWindowMenu;
 #endif // wxUSE_ACCEL
 #endif // wxUSE_MENUS
 
@@ -164,8 +164,6 @@ private:
 
     wxDECLARE_EVENT_TABLE();
     wxDECLARE_DYNAMIC_CLASS(wxMDIParentFrame);
-    wxMDIParentFrame(const wxMDIParentFrame&) = delete;
-	wxMDIParentFrame& operator=(const wxMDIParentFrame&) = delete;
 };
 
 // ---------------------------------------------------------------------------

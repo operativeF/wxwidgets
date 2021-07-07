@@ -15,7 +15,7 @@
     #include "wx/accel.h"
     #include "wx/dynarray.h"
 
-    using wxAcceleratorArray = std::vector<std::unique_ptr<wxAcceleratorEntry>>;
+    using wxAcceleratorArray = std::vector<wxAcceleratorEntry>;
 #endif // wxUSE_ACCEL
 
 class WXDLLIMPEXP_FWD_CORE wxFrame;
@@ -112,19 +112,19 @@ wxMenu(const wxMenu&) = delete;
     // called by wxMenuBar to build its accel table from the accels of all menus
     bool HasAccels() const { return !m_accels.empty(); }
     size_t GetAccelCount() const { return m_accels.size(); }
-    size_t CopyAccels(wxAcceleratorEntry *accels) const;
+    void CopyAccels(std::vector<wxAcceleratorEntry>& accels) const;
 
     // called by wxMenuItem when its accels changes
     void UpdateAccel(wxMenuItem *item);
     void RemoveAccel(wxMenuItem *item);
 
     // helper used by wxMenu itself (returns an iterator to an accel in m_accels)
-    std::vector<std::unique_ptr<wxAcceleratorEntry>>::const_iterator FindAccel(int id) const;
+    std::vector<wxAcceleratorEntry>::const_iterator FindAccel(int id) const;
 
     // used only by wxMDIParentFrame currently but could be useful elsewhere:
     // returns a new accelerator table with accelerators for just this menu
     // (shouldn't be called if we don't have any accelerators)
-    wxAcceleratorTable *CreateAccelTable() const;
+    std::unique_ptr<wxAcceleratorTable> CreateAccelTable() const;
 #endif // wxUSE_ACCEL
 
     // get the menu with given handle (recursively)

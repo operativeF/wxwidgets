@@ -580,9 +580,7 @@ namespace
 
 void VerifyAccelAssigned( wxString labelText, int keycode )
 {
-    const std::unique_ptr<wxAcceleratorEntry> entry(
-        wxAcceleratorEntry::Create( labelText )
-    );
+    auto entry = wxAcceleratorEntry::Create( labelText );
 
     CHECK( entry );
     CHECK( entry->GetKeyCode() == keycode );

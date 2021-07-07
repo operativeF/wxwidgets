@@ -276,7 +276,7 @@ wxMenuItemBase::~wxMenuItemBase()
 
 #if wxUSE_ACCEL
 
-std::unique_ptr<wxAcceleratorEntry> wxMenuItemBase::GetAccel() const
+std::optional<wxAcceleratorEntry> wxMenuItemBase::GetAccel() const
 {
     return wxAcceleratorEntry::Create(GetItemLabel());
 }

@@ -17,7 +17,7 @@
 
 #include "wx/object.h"
 
-#include <memory>
+#include <optional>
 
 class WXDLLIMPEXP_FWD_CORE wxAcceleratorTable;
 class WXDLLIMPEXP_FWD_CORE wxMenuItem;
@@ -59,7 +59,7 @@ public:
 
     // create accelerator corresponding to the specified string, return NULL if
     // string couldn't be parsed or a pointer to be deleted by the caller
-    static std::unique_ptr<wxAcceleratorEntry> Create(const wxString& str);
+    static std::optional<wxAcceleratorEntry> Create(const wxString& str);
 
     void Set(int flags, int keyCode, int cmd, wxMenuItem *item = nullptr)
     {

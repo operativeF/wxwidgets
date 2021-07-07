@@ -38,7 +38,7 @@ void CheckAccelEntry(const wxAcceleratorEntry& accel, int keycode, int flags)
  */
 TEST_CASE( "wxAcceleratorEntry::Create")
 {
-    std::unique_ptr<wxAcceleratorEntry> pa;
+    std::optional<wxAcceleratorEntry> pa;
 
     SUBCASE( "Correct behavior" )
     {

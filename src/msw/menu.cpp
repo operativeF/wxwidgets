@@ -169,11 +169,11 @@ void wxMenu::Break()
 
 #if wxUSE_ACCEL
 
-std::vector<std::unique_ptr<wxAcceleratorEntry>>::const_iterator wxMenu::FindAccel(int id) const
+std::vector<wxAcceleratorEntry>::const_iterator wxMenu::FindAccel(int id) const
 {
     return std::find_if(m_accels.begin(), m_accels.end(),
         [id](const auto& accel){
-            return accel->m_command == id;
+            return accel.m_command == id;
         });
 }
 
@@ -214,7 +214,7 @@ void wxMenu::UpdateAccel(wxMenuItem *item)
         {
             // no old, add new if any
             if ( accel )
-                m_accels.emplace_back(std::move(accel));
+                m_accels.push_back(*accel);
             else
                 return;     // skipping RebuildAccelTable() below
         }
@@ -222,7 +222,7 @@ void wxMenu::UpdateAccel(wxMenuItem *item)
         {
             // replace old with new or just remove the old one if no new
             if ( accel )
-                m_accels.insert(old_accel, std::move(accel));
+                m_accels.insert(old_accel, *accel);
             else
                 m_accels.erase(old_accel);
         }
@@ -633,26 +633,17 @@ wxMenuItem *wxMenu::DoRemove(wxMenuItem *item)
 
 #if wxUSE_ACCEL
 
-// create the wxAcceleratorEntries for our accels and put them into the provided
-// array - return the number of accels we have
-size_t wxMenu::CopyAccels(wxAcceleratorEntry *accels) const
+// create the wxAcceleratorEntries for our accels and put them into a vector
+void wxMenu::CopyAccels(std::vector<wxAcceleratorEntry>& accels) const
 {
-    size_t count = GetAccelCount();
-    for ( size_t n = 0; n < count; n++ )
-    {
-        *accels++ = *m_accels[n];
-    }
-
-    return count;
+    std::copy(m_accels.begin(), m_accels.end(), std::back_inserter(accels));
 }
 
-wxAcceleratorTable *wxMenu::CreateAccelTable() const
+std::unique_ptr<wxAcceleratorTable> wxMenu::CreateAccelTable() const
 {
-    const size_t count = m_accels.size();
-    auto accels = std::make_unique<wxAcceleratorEntry[]>(count);
-    CopyAccels(accels.get());
-
-    return new wxAcceleratorTable(count, accels.get());
+    std::vector<wxAcceleratorEntry> entries;
+    CopyAccels(entries);
+    return std::make_unique<wxAcceleratorTable>(entries);
 }
 
 #endif // wxUSE_ACCEL
@@ -1180,18 +1171,15 @@ void wxMenuBar::RebuildAccelTable()
 
     if ( nAccelCount )
     {
-        wxAcceleratorEntry *accelEntries = new wxAcceleratorEntry[nAccelCount];
+        std::vector<wxAcceleratorEntry> accelEntries(nAccelCount);
 
-        nAccelCount = 0;
         // FIXME: Use an algorithm.
-        for ( i = 0, it = m_menus.begin(); i < count; i++, ++it )
-        {
-            nAccelCount += (*it)->CopyAccels(&accelEntries[nAccelCount]);
-        }
+        std::for_each(m_menus.begin(), m_menus.end(),
+            [&accelEntries](const auto& aMenu){
+                aMenu->CopyAccels(accelEntries);
+        });
 
-        SetAcceleratorTable(wxAcceleratorTable(nAccelCount, accelEntries));
-
-        delete [] accelEntries;
+        SetAcceleratorTable(wxAcceleratorTable(accelEntries));
     }
     else // No (more) accelerators.
     {

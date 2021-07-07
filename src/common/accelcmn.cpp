@@ -301,24 +301,23 @@ wxAcceleratorEntry::ParseAccel(const wxString& text, int *flagsOut, int *keyOut)
 }
 
 /* static */
-std::unique_ptr<wxAcceleratorEntry> wxAcceleratorEntry::Create(const wxString& str)
+std::optional<wxAcceleratorEntry> wxAcceleratorEntry::Create(const wxString& str)
 {
     const wxString accelStr = str.AfterFirst('\t');
     if ( accelStr.empty() )
     {
         // It's ok to pass strings not containing any accelerators at all to
         // this function, wxMenuItem code does it and we should just return
-        // NULL in this case.
-        return nullptr;
+        // nullopt in this case.
+        return std::nullopt;
     }
 
-    // TODO: Return pair
     int flags{0};
     int keyCode{0};
     if ( !ParseAccel(accelStr, &flags, &keyCode) )
-        return nullptr;
+        return std::nullopt;
 
-    return std::make_unique<wxAcceleratorEntry>(flags, keyCode);
+    return wxAcceleratorEntry(flags, keyCode);
 }
 
 bool wxAcceleratorEntry::FromString(const wxString& str)
@@ -397,7 +396,7 @@ wxString wxAcceleratorEntry::AsPossiblyLocalizedString(bool localized) const
     return text;
 }
 
-std::unique_ptr<wxAcceleratorEntry> wxGetAccelFromString(const wxString& label)
+std::optional<wxAcceleratorEntry> wxGetAccelFromString(const wxString& label)
 {
     return wxAcceleratorEntry::Create(label);
 }

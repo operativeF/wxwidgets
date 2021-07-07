@@ -312,7 +312,7 @@ bool wxRichTextCtrl::Create( wxWindow* parent, wxWindowID id, const wxString& va
 
 #if wxUSE_ACCEL
     // Accelerators
-    wxAcceleratorEntry entries[6];
+    std::vector<wxAcceleratorEntry> entries(6);
 
     entries[0].Set(wxACCEL_CTRL,   (int) 'C',       wxID_COPY);
     entries[1].Set(wxACCEL_CTRL,   (int) 'X',       wxID_CUT);
@@ -321,7 +321,7 @@ bool wxRichTextCtrl::Create( wxWindow* parent, wxWindowID id, const wxString& va
     entries[4].Set(wxACCEL_CTRL,   (int) 'Z',       wxID_UNDO);
     entries[5].Set(wxACCEL_CTRL,   (int) 'Y',       wxID_REDO);
 
-    wxAcceleratorTable accel(6, entries);
+    wxAcceleratorTable accel(entries);
     SetAcceleratorTable(accel);
 #endif // wxUSE_ACCEL
 

@@ -31,6 +31,8 @@
 #include "wx/msw/private.h"
 #include "wx/msw/private/keyboard.h"
 
+#include "gsl/gsl"
+
 wxIMPLEMENT_DYNAMIC_CLASS(wxAcceleratorTable, wxObject);
 
 // ----------------------------------------------------------------------------
@@ -86,12 +88,13 @@ wxAcceleratorTable::wxAcceleratorTable(const wxString& resource)
 }
 
 // Create from an array
-wxAcceleratorTable::wxAcceleratorTable(int n, const wxAcceleratorEntry entries[])
+wxAcceleratorTable::wxAcceleratorTable(gsl::span<wxAcceleratorEntry> entries)
 {
     m_refData = new wxAcceleratorRefData;
 
-    ACCEL* arr = new ACCEL[n];
-    for ( int i = 0; i < n; i++ )
+    auto arr = std::make_unique<ACCEL[]>(entries.size());
+
+    for ( size_t i = 0; i < entries.size(); ++i )
     {
         int flags = entries[i].GetFlags();
 
@@ -110,8 +113,7 @@ wxAcceleratorTable::wxAcceleratorTable(int n, const wxAcceleratorEntry entries[]
         arr[i].cmd = (WORD)entries[i].GetCommand();
     }
 
-    M_ACCELDATA->m_hAccel = ::CreateAcceleratorTable(arr, n);
-    delete[] arr;
+    M_ACCELDATA->m_hAccel = ::CreateAcceleratorTable(arr.get(), gsl::narrow_cast<int>(entries.size()));
 
     M_ACCELDATA->m_ok = (M_ACCELDATA->m_hAccel != nullptr);
 }

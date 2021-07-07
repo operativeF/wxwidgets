@@ -220,10 +220,6 @@ wxMDIParentFrame::~wxMDIParentFrame()
     m_frameStatusBar = nullptr;
 #endif // wxUSE_STATUSBAR
 
-#if wxUSE_MENUS && wxUSE_ACCEL
-    delete m_accelWindowMenu;
-#endif // wxUSE_MENUS && wxUSE_ACCEL
-
     DestroyChildren();
 
     // the MDI frame menubar is not automatically deleted by Windows unlike for
@@ -385,7 +381,7 @@ void wxMDIParentFrame::SetWindowMenu(wxMenu* menu)
     }
 
 #if wxUSE_ACCEL
-    wxDELETE(m_accelWindowMenu);
+    m_accelWindowMenu.reset();
 
     if ( menu && menu->HasAccels() )
         m_accelWindowMenu = menu->CreateAccelTable();

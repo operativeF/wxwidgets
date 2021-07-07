@@ -11,6 +11,8 @@
 #ifndef _WX_ACCEL_H_
 #define _WX_ACCEL_H_
 
+#include "gsl/span"
+
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 
 // ----------------------------------------------------------------------------
@@ -27,7 +29,7 @@ public:
     wxAcceleratorTable(const wxString& resource);
 
     // initialize from array
-    wxAcceleratorTable(int n, const wxAcceleratorEntry entries[]);
+    wxAcceleratorTable(gsl::span<wxAcceleratorEntry> entries);
 
     bool Ok() const { return IsOk(); }
     bool IsOk() const;
