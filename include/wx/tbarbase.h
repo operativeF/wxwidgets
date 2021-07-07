@@ -54,8 +54,6 @@ enum wxToolBarToolStyle
 class WXDLLIMPEXP_CORE wxToolBarToolBase : public wxObject
 {
 public:
-    // ctors & dtor
-    // ------------
 
     // generic ctor for any kind of tool
     wxToolBarToolBase(wxToolBarBase *tbar = nullptr,
@@ -67,35 +65,30 @@ public:
                       wxObject *clientData = nullptr,
                       const wxString& shortHelpString = wxEmptyString,
                       const wxString& longHelpString = wxEmptyString)
-        : m_label(label),
+        : m_tbar(tbar),
+          m_label(label),
           m_shortHelpString(shortHelpString),
-          m_longHelpString(longHelpString)
+          m_longHelpString(longHelpString),
+          m_bmpNormal(bmpNormal),
+          m_bmpDisabled(bmpDisabled),
+          m_clientData(clientData),
+          m_kind(kind)
     {
-        Init
-        (
-            tbar,
-            toolid == wxID_SEPARATOR ? wxTOOL_STYLE_SEPARATOR
-                                     : wxTOOL_STYLE_BUTTON,
-            toolid == wxID_ANY ? wxWindow::NewControlId()
-                               : toolid,
-            kind
-        );
-
-        m_clientData = clientData;
-
-        m_bmpNormal = bmpNormal;
-        m_bmpDisabled = bmpDisabled;
+        m_toolStyle = toolid == wxID_SEPARATOR ? wxTOOL_STYLE_SEPARATOR : wxTOOL_STYLE_BUTTON;
+        m_id = toolid == wxID_ANY ? wxWindow::NewControlId() : toolid;
     }
 
     // ctor for controls only
     wxToolBarToolBase(wxToolBarBase *tbar,
                       wxControl *control,
                       const wxString& label)
-        : m_label(label)
+        : m_label(label),
+          m_control(control),
+          m_tbar(tbar),
+          m_toolStyle(wxTOOL_STYLE_CONTROL),
+          m_kind(wxITEM_MAX),
+          m_id(control->GetId())
     {
-        Init(tbar, wxTOOL_STYLE_CONTROL, control->GetId(), wxITEM_MAX);
-
-        m_control = control;
     }
 
     ~wxToolBarToolBase() override;
@@ -206,29 +199,6 @@ public:
 #endif
 
 protected:
-    // common part of all ctors
-    void Init(wxToolBarBase *tbar,
-              wxToolBarToolStyle style,
-              int toolid,
-              wxItemKind kind)
-    {
-        m_tbar = tbar;
-        m_toolStyle = style;
-        m_id = toolid;
-        m_kind = kind;
-
-        m_clientData = nullptr;
-
-        m_stretchable = false;
-        m_toggled = false;
-        m_enabled = true;
-
-#if wxUSE_MENUS
-        m_dropdownMenu = nullptr;
-#endif
-
-    }
-
     wxToolBarBase *m_tbar;  // the toolbar to which we belong (may be NULL)
 
     // tool parameters
@@ -244,11 +214,11 @@ protected:
     };
 
     // true if this tool is stretchable: currently is only value for separators
-    bool m_stretchable;
+    bool m_stretchable{false};
 
     // tool state
-    bool m_toggled;
-    bool m_enabled;
+    bool m_toggled{false};
+    bool m_enabled{true};
 
     // normal and disabled bitmaps for the tool, both can be invalid
     wxBitmap m_bmpNormal;
@@ -262,7 +232,7 @@ protected:
     wxString m_longHelpString;
 
 #if wxUSE_MENUS
-    wxMenu *m_dropdownMenu;
+    wxMenu *m_dropdownMenu{nullptr};
 #endif
 
 public:

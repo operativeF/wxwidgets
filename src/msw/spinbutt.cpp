@@ -64,29 +64,27 @@ bool wxSpinButton::Create(wxWindow *parent,
 
     SetName(name);
 
-    int x = pos.x;
-    int y = pos.y;
-    int width = size.x;
-    int height = size.y;
+    wxPoint pt = pos;
+    wxSize sz = size;
 
     m_windowStyle = style;
 
     SetParent(parent);
 
     // get the right size for the control
-    if ( width <= 0 || height <= 0 )
+    if ( sz.x <= 0 || sz.y <= 0 )
     {
         wxSize bestSize = DoGetBestSize();
-        if ( width <= 0 )
-            width = bestSize.x;
-        if ( height <= 0 )
-            height = bestSize.y;
+        if ( sz.x <= 0 )
+            sz.x = bestSize.x;
+        if ( sz.y <= 0 )
+            sz.y = bestSize.y;
     }
 
-    if ( x < 0 )
-        x = 0;
-    if ( y < 0 )
-        y = 0;
+    if ( pt.x < 0 )
+        pt.x = 0;
+    if ( pt.y < 0 )
+        pt.y = 0;
 
     // translate the styles
     DWORD wstyle = WS_VISIBLE | WS_CHILD | WS_TABSTOP | /*  WS_CLIPSIBLINGS | */
@@ -107,7 +105,7 @@ bool wxSpinButton::Create(wxWindow *parent,
     m_hWnd = (WXHWND)CreateUpDownControl
                      (
                        wstyle,
-                       x, y, width, height,
+                       pt.x, pt.y, sz.x, sz.y,
                        GetHwndOf(parent),
                        m_windowId,
                        wxGetInstance(),
@@ -162,13 +160,12 @@ wxSize wxSpinButton::DoGetBestSize() const
 
 int wxSpinButton::GetValue() const
 {
-    int n;
 #ifdef UDM_GETPOS32
     // use the full 32 bit range if available
-    n = ::SendMessage(GetHwnd(), UDM_GETPOS32, 0, 0);
+    auto n = ::SendMessage(GetHwnd(), UDM_GETPOS32, 0, 0);
 #else
     // we're limited to 16 bit
-    n = (short)LOWORD(::SendMessage(GetHwnd(), UDM_GETPOS, 0, 0));
+    auto n = (short)LOWORD(::SendMessage(GetHwnd(), UDM_GETPOS, 0, 0));
 #endif // UDM_GETPOS32
 
     if (n < m_min) n = m_min;
