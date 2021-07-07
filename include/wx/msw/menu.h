@@ -11,6 +11,8 @@
 #ifndef _WX_MENU_H_
 #define _WX_MENU_H_
 
+#include "wx/private/menuradio.h"
+
 #if wxUSE_ACCEL
     #include "wx/accel.h"
     #include "wx/dynarray.h"
@@ -19,11 +21,6 @@
 #endif // wxUSE_ACCEL
 
 class WXDLLIMPEXP_FWD_CORE wxFrame;
-
-class wxMenuRadioItemsData;
-
-
-#include "wx/arrstr.h"
 
 // ----------------------------------------------------------------------------
 // Menu
@@ -174,7 +171,7 @@ private:
     // group and also where its group starts and ends.
     //
     // It is initially NULL and only allocated if we have any radio items.
-    wxMenuRadioItemsData *m_radioData;
+    std::unique_ptr<wxMenuRadioItemsData> m_radioData;
 
     // if true, insert a break before appending the next item
     bool m_doBreak;

@@ -110,7 +110,6 @@ void SetOwnerDrawnMenuItem(HMENU hmenu,
 // Construct a menu with optional title (then use append)
 void wxMenu::InitNoCreate()
 {
-    m_radioData = nullptr;
     m_doBreak = false;
 
 #if wxUSE_OWNER_DRAWN
@@ -152,13 +151,6 @@ wxMenu::~wxMenu()
             wxLogLastError(wxT("DestroyMenu"));
         }
     }
-
-#if wxUSE_ACCEL
-    // delete accels
-    // m_accels.clear();
-#endif // wxUSE_ACCEL
-
-    delete m_radioData;
 }
 
 void wxMenu::Break()
@@ -335,7 +327,7 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
     if ( pItem->IsRadio() )
     {
         if ( !m_radioData )
-            m_radioData = new wxMenuRadioItemsData;
+            m_radioData = std::make_unique<wxMenuRadioItemsData>();
 
         if ( m_radioData->UpdateOnInsertRadio(pos) )
             checkInitially = true;
@@ -1158,33 +1150,14 @@ wxMenu *wxMenuBar::Remove(size_t pos)
 
 void wxMenuBar::RebuildAccelTable()
 {
-    // merge the accelerators of all menus into one accel table
-    size_t nAccelCount = 0;
-    size_t i;
-    size_t count = GetMenuCount();
-    wxMenuList::iterator it;
-    // FIXME: Use an algorithm
-    for ( i = 0, it = m_menus.begin(); i < count; i++, ++it )
-    {
-        nAccelCount += (*it)->GetAccelCount();
-    }
+    std::vector<wxAcceleratorEntry> accelEntries;
 
-    if ( nAccelCount )
-    {
-        std::vector<wxAcceleratorEntry> accelEntries(nAccelCount);
+    std::for_each(m_menus.begin(), m_menus.end(),
+        [&accelEntries](const auto& aMenu){
+            aMenu->CopyAccels(accelEntries);
+    });
 
-        // FIXME: Use an algorithm.
-        std::for_each(m_menus.begin(), m_menus.end(),
-            [&accelEntries](const auto& aMenu){
-                aMenu->CopyAccels(accelEntries);
-        });
-
-        SetAcceleratorTable(wxAcceleratorTable(accelEntries));
-    }
-    else // No (more) accelerators.
-    {
-        SetAcceleratorTable(wxAcceleratorTable());
-    }
+    SetAcceleratorTable(wxAcceleratorTable(accelEntries));
 }
 
 #endif // wxUSE_ACCEL
