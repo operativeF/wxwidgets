@@ -32,24 +32,7 @@ class WXDLLIMPEXP_CORE wxWindowMSW : public wxWindowBase
     friend class wxSlider;
     friend class wxRadioBox;
 public:
-    wxWindowMSW() { 
-    // MSW specific
-    m_oldWndProc = nullptr;
-    m_mouseInWindow = false;
-    m_lastKeydownProcessed = false;
-
-    m_hWnd = nullptr;
-
-    m_xThumbSize = 0;
-    m_yThumbSize = 0;
-
-#if wxUSE_DEFERRED_SIZING
-    m_hDWP = nullptr;
-    m_pendingPosition = wxDefaultPosition;
-    m_pendingSize = wxDefaultSize;
-#endif // wxUSE_DEFERRED_SIZING
-
- }
+    wxWindowMSW() = default;
 
     wxWindowMSW(wxWindow *parent,
                 wxWindowID id,
@@ -58,28 +41,13 @@ public:
                 long style = 0,
                 const wxString& name = wxASCII_STR(wxPanelNameStr))
     {
-        
-    // MSW specific
-    m_oldWndProc = nullptr;
-    m_mouseInWindow = false;
-    m_lastKeydownProcessed = false;
-
-    m_hWnd = nullptr;
-
-    m_xThumbSize = 0;
-    m_yThumbSize = 0;
-
-#if wxUSE_DEFERRED_SIZING
-    m_hDWP = nullptr;
-    m_pendingPosition = wxDefaultPosition;
-    m_pendingSize = wxDefaultSize;
-#endif // wxUSE_DEFERRED_SIZING
-
-
         Create(parent, id, pos, size, style, name);
     }
 
     ~wxWindowMSW() override;
+
+    wxWindowMSW(const wxWindowMSW&) = delete;
+	wxWindowMSW& operator=(const wxWindowMSW&) = delete;
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -657,18 +625,18 @@ protected:
 #endif // wxUSE_MENUS_NATIVE
 
     // the window handle
-    WXHWND                m_hWnd;
+    WXHWND                m_hWnd{nullptr};
 
     // the old window proc (we subclass all windows)
-    WXWNDPROC             m_oldWndProc;
+    WXWNDPROC             m_oldWndProc{nullptr};
 
     // additional (MSW specific) flags
-    bool                  m_mouseInWindow;
-    bool                  m_lastKeydownProcessed;
+    bool                  m_mouseInWindow{false};
+    bool                  m_lastKeydownProcessed{false};
 
     // the size of one page for scrolling
-    int                   m_xThumbSize;
-    int                   m_yThumbSize;
+    int                   m_xThumbSize{0};
+    int                   m_yThumbSize{0};
 
     // implement the base class pure virtuals
     void DoGetTextExtent(const wxString& string,
@@ -823,19 +791,17 @@ protected:
     }
 
     // current defer window position operation handle (may be NULL)
-    WXHANDLE m_hDWP;
+    WXHANDLE m_hDWP{nullptr};
 
     // When deferred positioning is done these hold the pending changes, and
     // are used for the default values if another size/pos changes is done on
     // this window before the group of deferred changes is completed.
-    wxPoint     m_pendingPosition;
-    wxSize      m_pendingSize;
+    wxPoint     m_pendingPosition{wxDefaultPosition};
+    wxSize      m_pendingSize{wxDefaultSize};
 #endif // wxUSE_DEFERRED_SIZING
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxWindowMSW);
-    wxWindowMSW(const wxWindowMSW&) = delete;
-	wxWindowMSW& operator=(const wxWindowMSW&) = delete;
     wxDECLARE_EVENT_TABLE();
 };
 
