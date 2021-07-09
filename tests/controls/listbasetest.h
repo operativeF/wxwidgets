@@ -14,8 +14,8 @@
 #include "wx/app.h"
 #endif // WX_PRECOMP
 
+#include "wx/uiaction.h"
 #include "wx/artprov.h"
-
 #include "wx/listctrl.h"
 #include "wx/imaglist.h"
 

@@ -15,6 +15,7 @@
 #endif // WX_PRECOMP
 
 #include "wx/artprov.h"
+#include "wx/choicebk.h"
 #include "wx/imaglist.h"
 #include "wx/bookctrl.h"
 #include "wx/treebook.h"
