@@ -45,7 +45,7 @@ public:
     wxCollapsibleHeaderCtrlBase(wxCollapsibleHeaderCtrlBase&&) = default;
     wxCollapsibleHeaderCtrlBase& operator=(wxCollapsibleHeaderCtrlBase&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
         wxWindowID id,
         const wxString& label,
         const wxPoint& pos = wxDefaultPosition,

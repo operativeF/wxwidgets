@@ -38,7 +38,7 @@ public:
 
     ~wxMDIParentFrame() override;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& title,
                 const wxPoint& pos = wxDefaultPosition,
@@ -190,7 +190,7 @@ wxMDIChildFrame(const wxMDIChildFrame&) = delete;
    wxMDIChildFrame(wxMDIChildFrame&&) = default;
    wxMDIChildFrame& operator=(wxMDIChildFrame&&) = default;
 
-    bool Create(wxMDIParentFrame *parent,
+    [[maybe_unused]] bool Create(wxMDIParentFrame *parent,
                 wxWindowID id,
                 const wxString& title,
                 const wxPoint& pos = wxDefaultPosition,

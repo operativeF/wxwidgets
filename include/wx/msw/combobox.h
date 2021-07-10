@@ -41,7 +41,7 @@ public:
     wxComboBox(wxComboBox&&) = default;
     wxComboBox& operator=(wxComboBox&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& value,
                 const wxPoint& pos,

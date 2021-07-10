@@ -111,7 +111,7 @@ public:
         const wxString& name = wxASCII_STR(wxColourPickerCtrlNameStr))
         { Create(parent, id, col, pos, size, style, validator, name); }
 
-    bool Create(wxWindow *parent, wxWindowID id,
+    [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
            const wxColour& col = *wxBLACK,
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize,

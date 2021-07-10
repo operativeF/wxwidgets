@@ -145,22 +145,22 @@ public:
     ////////////////////////////////////////////////////////////////////////////
 
     // Create a drag image from a bitmap and optional cursor
-    bool Create(const wxBitmap& image, const wxCursor& cursor = wxNullCursor);
+    [[maybe_unused]] bool Create(const wxBitmap& image, const wxCursor& cursor = wxNullCursor);
 
     // Create a drag image from an icon and optional cursor
-    bool Create(const wxIcon& image, const wxCursor& cursor = wxNullCursor);
+    [[maybe_unused]] bool Create(const wxIcon& image, const wxCursor& cursor = wxNullCursor);
 
     // Create a drag image from a string and optional cursor
-    bool Create(const wxString& str, const wxCursor& cursor = wxNullCursor);
+    [[maybe_unused]] bool Create(const wxString& str, const wxCursor& cursor = wxNullCursor);
 
 #if wxUSE_TREECTRL
     // Create a drag image for the given tree control item
-    bool Create(const wxTreeCtrl& treeCtrl, wxTreeItemId& id);
+    [[maybe_unused]] bool Create(const wxTreeCtrl& treeCtrl, wxTreeItemId& id);
 #endif
 
 #if wxUSE_LISTCTRL
     // Create a drag image for the given list control item
-    bool Create(const wxListCtrl& listCtrl, long id);
+    [[maybe_unused]] bool Create(const wxListCtrl& listCtrl, long id);
 #endif
 
     // Begin drag. hotspot is the location of the drag position relative to the upper-left

@@ -587,7 +587,7 @@ public:
     //
     // note that it returns bool just for consistency with Create() methods in
     // other classes, we never return false from here
-    bool Create(wxDocument *doc, wxView *view, wxWindow *win)
+    [[maybe_unused]] bool Create(wxDocument *doc, wxView *view, wxWindow *win)
     {
         m_childDocument = doc;
         m_childView = view;
@@ -693,7 +693,7 @@ public:
     wxDocChildFrameAny(const wxDocChildFrameAny<ChildFrame, ParentFrame>&) = delete;
     wxDocChildFrameAny& operator=(const wxDocChildFrameAny<ChildFrame, ParentFrame>&) = delete;
 
-    bool Create(wxDocument *doc,
+    [[maybe_unused]] bool Create(wxDocument *doc,
                 wxView *view,
                 ParentFrame *parent,
                 wxWindowID id,
@@ -770,7 +770,7 @@ public:
     wxDocChildFrame(wxDocChildFrame&&) = default;
     wxDocChildFrame& operator=(wxDocChildFrame&&) = default;
 
-    bool Create(wxDocument *doc,
+    [[maybe_unused]] bool Create(wxDocument *doc,
                 wxView *view,
                 wxFrame *parent,
                 wxWindowID id,
@@ -855,7 +855,7 @@ public:
     wxDocParentFrameAny(wxDocParentFrameAny&&) = default;
     wxDocParentFrameAny& operator=(wxDocParentFrameAny&&) = default;
 
-    bool Create(wxDocManager *manager,
+    [[maybe_unused]] bool Create(wxDocManager *manager,
                 wxFrame *frame,
                 wxWindowID id,
                 const wxString& title,
@@ -932,7 +932,7 @@ public:
     wxDocParentFrame(wxDocParentFrame&&) = default;
     wxDocParentFrame& operator=(wxDocParentFrame&&) = default;
 
-    bool Create(wxDocManager *manager,
+    [[maybe_unused]] bool Create(wxDocManager *manager,
                 wxFrame *parent,
                 wxWindowID id,
                 const wxString& title,

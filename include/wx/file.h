@@ -62,7 +62,7 @@ public:
   // open/close
     // create a new file (with the default value of bOverwrite, it will fail if
     // the file already exists, otherwise it will overwrite it and succeed)
-  bool Create(const wxString& fileName, bool bOverwrite = false,
+  [[maybe_unused]] bool Create(const wxString& fileName, bool bOverwrite = false,
               int access = wxS_DEFAULT);
   bool Open(const wxString& fileName, OpenMode mode = read,
             int access = wxS_DEFAULT);

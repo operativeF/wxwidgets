@@ -82,7 +82,7 @@ public:
     wxBannerWindow& operator=(wxBannerWindow&&) = default;
 
     // Can be only called on objects created with the default constructor.
-    bool Create(wxWindow* parent,
+    [[maybe_unused]] bool Create(wxWindow* parent,
                 wxWindowID winid,
                 wxDirection dir = wxLEFT,
                 const wxPoint& pos = wxDefaultPosition,

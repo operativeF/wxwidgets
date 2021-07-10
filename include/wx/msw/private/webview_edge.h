@@ -42,7 +42,7 @@ public:
     explicit wxWebViewEdgeImpl(wxWebViewEdge* webview);
     ~wxWebViewEdgeImpl();
 
-    bool Create();
+    [[maybe_unused]] bool Create();
 
     wxWebViewEdge* m_ctrl;
 

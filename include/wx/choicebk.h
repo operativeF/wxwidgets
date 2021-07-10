@@ -57,7 +57,7 @@ public:
     wxChoicebook& operator=(wxChoicebook&&) = default;
 
     // quasi ctor
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,

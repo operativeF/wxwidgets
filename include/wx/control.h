@@ -42,7 +42,7 @@ public:
     wxControlBase& operator=(wxControlBase&&) = default;
 
     // Create() function adds the validator parameter
-    bool Create(wxWindow *parent, wxWindowID id,
+    [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,

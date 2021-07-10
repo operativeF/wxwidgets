@@ -29,7 +29,7 @@ public:
     wxCalendarCtrl(wxCalendarCtrl&&) = default;
     wxCalendarCtrl& operator=(wxCalendarCtrl&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxDateTime& date = wxDefaultDateTime,
                 const wxPoint& pos = wxDefaultPosition,

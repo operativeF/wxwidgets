@@ -55,7 +55,7 @@ wxTreebook(const wxTreebook&) = delete;
    wxTreebook& operator=(wxTreebook&&) = default;
 
     // Really creates the control
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,

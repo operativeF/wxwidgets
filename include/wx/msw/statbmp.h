@@ -37,7 +37,7 @@ public:
    wxStaticBitmap(wxStaticBitmap&&) = default;
    wxStaticBitmap& operator=(wxStaticBitmap&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxGDIImage& label,
                 const wxPoint& pos = wxDefaultPosition,

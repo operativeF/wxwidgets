@@ -35,7 +35,7 @@ public:
 
     ~wxWebViewEdge();
 
-    bool Create(wxWindow* parent,
+    [[maybe_unused]] bool Create(wxWindow* parent,
         wxWindowID id,
         const wxString& url = wxWebViewDefaultURLStr,
         const wxPoint& pos = wxDefaultPosition,

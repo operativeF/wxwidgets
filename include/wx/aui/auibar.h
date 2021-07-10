@@ -491,7 +491,7 @@ public:
 
     ~wxAuiToolBar() override;
 
-    bool Create(wxWindow* parent,
+    [[maybe_unused]] bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,

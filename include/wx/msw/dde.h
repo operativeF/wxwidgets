@@ -81,7 +81,7 @@ class WXDLLIMPEXP_BASE wxDDEServer : public wxServerBase
 {
 public:
     wxDDEServer();
-    bool Create(const wxString& server_name) override;
+    [[maybe_unused]] bool Create(const wxString& server_name) override;
     ~wxDDEServer() override;
 
     wxConnectionBase *OnAcceptConnection(const wxString& topic) override;

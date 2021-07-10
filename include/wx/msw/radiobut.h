@@ -37,7 +37,7 @@ public:
     wxRadioButton& operator=(wxRadioButton&&) = default;
     ~wxRadioButton() = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& label,
                 const wxPoint& pos = wxDefaultPosition,

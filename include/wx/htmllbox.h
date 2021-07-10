@@ -63,7 +63,7 @@ public:
     // the only special style which may be specified here is wxLB_MULTIPLE
     //
     // returns true on success or false if the control couldn't be created
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
@@ -221,7 +221,7 @@ public:
         Create(parent, id, pos, size, choices, style, validator, name);
     }
 
-    bool Create(wxWindow *parent, wxWindowID id,
+    [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos,
                 const wxSize& size,
                 const std::vector<wxString>& choices,

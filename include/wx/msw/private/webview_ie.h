@@ -24,7 +24,7 @@ public:
     explicit wxWebViewIEImpl(wxWebViewIE* webview);
     ~wxWebViewIEImpl();
 
-    bool Create();
+    [[maybe_unused]] bool Create();
 
     wxWebViewIE* m_webview;
 

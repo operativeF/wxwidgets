@@ -36,9 +36,9 @@ public:
     wxFontDialogBase(wxFontDialogBase&&) = default;
     wxFontDialogBase& operator=(wxFontDialogBase&&) = default;
     
-    bool Create(wxWindow *parent)
+    [[maybe_unused]] bool Create(wxWindow *parent)
         { return DoCreate(parent); }
-    bool Create(wxWindow *parent, const wxFontData& data)
+    [[maybe_unused]] bool Create(wxWindow *parent, const wxFontData& data)
         { InitFontData(&data); return Create(parent); }
 
     // retrieve the font data

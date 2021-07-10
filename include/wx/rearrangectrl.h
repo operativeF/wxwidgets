@@ -69,7 +69,7 @@ public:
 
     // Create() function takes the same parameters as the base class one and
     // the order array determining the initial display order
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxPoint& pos,
                 const wxSize& size,
@@ -148,7 +148,7 @@ public:
     wxRearrangeCtrl(wxRearrangeCtrl&&) = default;
     wxRearrangeCtrl& operator=(wxRearrangeCtrl&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxPoint& pos,
                 const wxSize& size,
@@ -199,7 +199,7 @@ public:
     wxRearrangeDialog(wxRearrangeDialog&&) = default;
     wxRearrangeDialog& operator=(wxRearrangeDialog&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 const wxString& message,
                 const wxString& title,
                 const std::vector<int>& order,

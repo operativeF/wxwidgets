@@ -67,7 +67,7 @@ public:
                const wxString& name = wxGLCanvasName,
                const wxPalette& palette = wxNullPalette);
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 const wxGLAttributes& dispAttrs,
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
@@ -76,7 +76,7 @@ public:
                 const wxString& name = wxGLCanvasName,
                 const wxPalette& palette = wxNullPalette);
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,

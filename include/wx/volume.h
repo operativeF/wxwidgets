@@ -66,7 +66,7 @@ public:
     // by GetVolumes()).
     wxFSVolumeBase();
     wxFSVolumeBase(const wxString& name);
-    bool Create(const wxString& name);
+    [[maybe_unused]] bool Create(const wxString& name);
 
     // is this a valid volume?
     bool IsOk() const;

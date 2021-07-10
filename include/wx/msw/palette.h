@@ -23,7 +23,7 @@ public:
         Create(n, red, green, blue);
     }
 
-    bool Create(int n,
+    [[maybe_unused]] bool Create(int n,
                 const unsigned char *red, const unsigned char *green, const unsigned char *blue);
 
     int GetColoursCount() const override;

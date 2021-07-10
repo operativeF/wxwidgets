@@ -40,7 +40,7 @@ public:
         Create(parent, id, pos, size, choices, style, validator, name);
     }
     
-    bool Create(wxWindow *parent, wxWindowID id,
+    [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 const std::vector<wxString>& choices = {},

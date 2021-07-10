@@ -35,7 +35,7 @@ public:
     }
 
     // Creation function (for two-step construction).
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& label, const wxString& url,
                 const wxPoint& pos = wxDefaultPosition,

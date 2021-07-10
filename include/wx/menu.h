@@ -411,7 +411,7 @@ public:
     wxMenuInfoHelper() { m_menu = NULL; }
     virtual ~wxMenuInfoHelper() { }
 
-    bool Create( wxMenu *menu, const wxString &title )
+    [[maybe_unused]] bool Create( wxMenu *menu, const wxString &title )
     {
         m_menu = menu;
         m_title = title;

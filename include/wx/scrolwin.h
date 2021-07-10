@@ -438,7 +438,7 @@ public:
    wxScrolled(wxScrolled&&) = default;
    wxScrolled& operator=(wxScrolled&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID winid,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,

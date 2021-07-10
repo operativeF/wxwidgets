@@ -66,7 +66,7 @@ public:
     ~wxDirDialogBase() override = default;
 
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 const wxString& title = wxASCII_STR(wxDirSelectorPromptStr),
                 const wxString& defaultPath = wxEmptyString,
                 long style = wxDD_DEFAULT_STYLE,

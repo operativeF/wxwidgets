@@ -55,7 +55,7 @@ public:
 
     // default copy ctor, assignment operator and dtor are ok
 
-    bool Create(const wxString& uri);
+    [[maybe_unused]] bool Create(const wxString& uri);
 
     wxURI& operator=(const wxString& string)
     {

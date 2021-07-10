@@ -33,7 +33,7 @@ public:
     wxScrollBar(wxScrollBar&&) = default;
     wxScrollBar& operator=(wxScrollBar&&) = default;
 
-    bool Create(wxWindow *parent, wxWindowID id,
+    [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             long style = wxSB_HORIZONTAL,

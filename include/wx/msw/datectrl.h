@@ -33,7 +33,7 @@ public:
     wxDatePickerCtrl(wxDatePickerCtrl&&) = default;
     wxDatePickerCtrl& operator=(wxDatePickerCtrl&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxDateTime& dt = wxDefaultDateTime,
                 const wxPoint& pos = wxDefaultPosition,

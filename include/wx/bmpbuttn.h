@@ -41,7 +41,7 @@ public:
     wxBitmapButtonBase(wxBitmapButtonBase&&) = default;
     wxBitmapButtonBase& operator=(wxBitmapButtonBase&&) = default;
     
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID winid,
                 const wxPoint& pos,
                 const wxSize& size,

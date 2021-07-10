@@ -41,7 +41,7 @@ public:
         Create(size, family, style, weight, underlined, face, encoding);
     }
 
-    bool Create(int size,
+    [[maybe_unused]] bool Create(int size,
                 wxFontFamily family,
                 wxFontStyle style,
                 wxFontWeight weight,
@@ -95,7 +95,7 @@ public:
                                              encoding));
     }
 
-    bool Create(const wxNativeFontInfo& info, WXHFONT hFont = nullptr);
+    [[maybe_unused]] bool Create(const wxNativeFontInfo& info, WXHFONT hFont = nullptr);
 
     
     double GetFractionalPointSize() const override;

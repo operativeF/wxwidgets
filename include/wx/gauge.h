@@ -64,7 +64,7 @@ public:
     wxGaugeBase(wxGaugeBase&&) = default;
     wxGaugeBase& operator=(wxGaugeBase&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 int range,
                 const wxPoint& pos = wxDefaultPosition,

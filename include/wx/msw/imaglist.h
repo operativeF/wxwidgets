@@ -62,7 +62,7 @@ public:
   // width, height specify the size of the images in the list (all the same).
   // mask specifies whether the images have masks or not.
   // initialNumber is the initial number of images to reserve.
-  bool Create(int width, int height, bool mask = true, int initialNumber = 1);
+  [[maybe_unused]] bool Create(int width, int height, bool mask = true, int initialNumber = 1);
 
   // Adds a bitmap, and optionally a mask bitmap.
   // Note that wxImageList creates *new* bitmaps, so you may delete

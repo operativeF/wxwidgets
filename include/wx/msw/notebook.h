@@ -32,7 +32,7 @@ public:
              long style = 0,
              const wxString& name = wxASCII_STR(wxNotebookNameStr));
     // Create() function
-  bool Create(wxWindow *parent,
+  [[maybe_unused]] bool Create(wxWindow *parent,
               wxWindowID id,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,

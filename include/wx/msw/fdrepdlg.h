@@ -30,7 +30,7 @@ public:
    wxFindReplaceDialog(wxFindReplaceDialog&&) = default;
    wxFindReplaceDialog& operator=(wxFindReplaceDialog&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxFindReplaceData *data,
                 const wxString &title,
                 int style = 0);

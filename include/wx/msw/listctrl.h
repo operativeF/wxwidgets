@@ -95,7 +95,7 @@ public:
    wxListCtrl(wxListCtrl&&) = default;
    wxListCtrl& operator=(wxListCtrl&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,

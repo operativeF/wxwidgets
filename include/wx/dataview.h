@@ -1086,7 +1086,7 @@ public:
 
 	wxDataViewListCtrl& operator=(const wxDataViewListCtrl&) = delete;
 
-    bool Create( wxWindow *parent, wxWindowID id,
+    [[maybe_unused]] bool Create( wxWindow *parent, wxWindowID id,
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize, long style = wxDV_ROW_LINES,
            const wxValidator& validator = wxDefaultValidator );
@@ -1347,7 +1347,7 @@ public:
 
 	wxDataViewTreeCtrl& operator=(const wxDataViewTreeCtrl&) = delete;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,

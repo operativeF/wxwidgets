@@ -113,7 +113,7 @@ public:
    wxTreeCtrl(wxTreeCtrl&&) = default;
    wxTreeCtrl& operator=(wxTreeCtrl&&) = default;
     
-    bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
+    [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT,

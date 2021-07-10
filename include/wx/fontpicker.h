@@ -119,7 +119,7 @@ public:
         Create(parent, id, initial, pos, size, style, validator, name);
     }
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxFont& initial = wxNullFont,
                 const wxPoint& pos = wxDefaultPosition,

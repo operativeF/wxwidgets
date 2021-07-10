@@ -87,7 +87,7 @@ public:
     }
 
     // Same as non-default ctor, but with a return code.
-    bool Create(wxWindow* parent, wxWindowID winid, wxNativeWindowHandle handle);
+    [[maybe_unused]] bool Create(wxWindow* parent, wxWindowID winid, wxNativeWindowHandle handle);
 
     // By default the native window with which this wxWindow is associated is
     // owned by the user code and needs to be destroyed by it in a platform
@@ -141,7 +141,7 @@ public:
     }
 
     // same as ctor above but with a return code
-    bool Create(wxNativeContainerWindowHandle handle);
+    [[maybe_unused]] bool Create(wxNativeContainerWindowHandle handle);
 
 #if defined(__WXGTK__)
     // this is a convenient ctor for wxGTK applications which can also create
@@ -152,7 +152,7 @@ public:
     // (when GDK_WINDOWING_X11 is defined) or HWND under Win32
     wxNativeContainerWindow(wxNativeContainerWindowId winid) { Create(winid); }
 
-    bool Create(wxNativeContainerWindowId winid);
+    [[maybe_unused]] bool Create(wxNativeContainerWindowId winid);
 #endif // wxGTK
 
     // unlike for the normal windows, dtor will not destroy the native window

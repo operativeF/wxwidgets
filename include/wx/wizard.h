@@ -69,7 +69,7 @@ public:
     wxWizardPage(wxWizardPage&&) = default;
     wxWizardPage& operator=(wxWizardPage&&) = default;
 
-    bool Create(wxWizard *parent,
+    [[maybe_unused]] bool Create(wxWizard *parent,
                 const wxBitmap& bitmap = wxNullBitmap);
 
     // these functions are used by the wizard to show another page when the
@@ -146,7 +146,7 @@ public:
     wxWizardPageSimple(wxWizardPageSimple&&) = default;
     wxWizardPageSimple& operator=(wxWizardPageSimple&&) = default;
 
-    bool Create(wxWizard *parent = nullptr, // let it be default ctor too
+    [[maybe_unused]] bool Create(wxWizard *parent = nullptr, // let it be default ctor too
                 wxWizardPage *prev = nullptr,
                 wxWizardPage *next = nullptr,
                 const wxBitmap& bitmap = wxNullBitmap)

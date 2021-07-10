@@ -37,7 +37,7 @@ public:
     // default ctor Create() must be called later
     wxMouseEventsManager() = default;
     wxMouseEventsManager(wxWindow *win) { Create(win); }
-    bool Create(wxWindow *win);
+    [[maybe_unused]] bool Create(wxWindow *win);
 
     ~wxMouseEventsManager() override;
 

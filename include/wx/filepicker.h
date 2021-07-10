@@ -249,7 +249,7 @@ public:
                validator, name);
     }
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& path = wxEmptyString,
                 const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
@@ -351,7 +351,7 @@ public:
         Create(parent, id, path, message, pos, size, style, validator, name);
     }
 
-    bool Create(wxWindow *parent, wxWindowID id,
+    [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const wxString& path = wxEmptyString,
                 const wxString& message = wxASCII_STR(wxDirSelectorPromptStr),
                 const wxPoint& pos = wxDefaultPosition,

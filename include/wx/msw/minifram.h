@@ -25,7 +25,7 @@ public:
 
   ~wxMiniFrame() = default;
 
-  bool Create(wxWindow *parent,
+  [[maybe_unused]] bool Create(wxWindow *parent,
               wxWindowID id,
               const wxString& title,
               const wxPoint& pos = wxDefaultPosition,

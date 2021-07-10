@@ -92,11 +92,11 @@ public:
  (void)Load(filename); }
 
     // same as the corresponding ctors but with return value
-    bool Create(int width, int height, int depth);
+    [[maybe_unused]] bool Create(int width, int height, int depth);
 #ifdef __WXMSW__
-    bool Create(const wxBitmap& bmp, int depth = -1) { return Create(GetHbitmapOf(bmp), depth); }
+    [[maybe_unused]] bool Create(const wxBitmap& bmp, int depth = -1) { return Create(GetHbitmapOf(bmp), depth); }
 #endif
-    bool Create(HBITMAP hbmp, int depth = -1);
+    [[maybe_unused]] bool Create(HBITMAP hbmp, int depth = -1);
     bool Load(const wxString& filename);
 
     // dtor is not virtual, this class is not meant to be used polymorphically
@@ -206,7 +206,7 @@ public:
     wxDIB& operator=(const wxDIB&) = delete;
     
     // same as the above ctor but with the return code
-    bool Create(const wxImage& image, PixelFormat pf = PixelFormat_PreMultiplied, int depth = -1);
+    [[maybe_unused]] bool Create(const wxImage& image, PixelFormat pf = PixelFormat_PreMultiplied, int depth = -1);
 
     // create wxImage having the same data as this DIB
 

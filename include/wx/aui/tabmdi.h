@@ -50,7 +50,7 @@ public:
 
     ~wxAuiMDIParentFrame() override;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID winid,
                 const wxString& title,
                 const wxPoint& pos = wxDefaultPosition,
@@ -134,7 +134,7 @@ public:
                        const wxString& name = wxASCII_STR(wxFrameNameStr));
 
     ~wxAuiMDIChildFrame() override;
-    bool Create(wxAuiMDIParentFrame *parent,
+    [[maybe_unused]] bool Create(wxAuiMDIParentFrame *parent,
                 wxWindowID winid,
                 const wxString& title,
                 const wxPoint& pos = wxDefaultPosition,

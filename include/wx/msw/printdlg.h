@@ -67,7 +67,7 @@ public:
     wxWindowsPrintDialog(const wxWindowsPrintDialog&) = delete;
     wxWindowsPrintDialog& operator=(const wxWindowsPrintDialog&) = delete;
 
-    bool Create(wxWindow *parent, wxPrintDialogData* data = nullptr);
+    [[maybe_unused]] bool Create(wxWindow *parent, wxPrintDialogData* data = nullptr);
     int ShowModal() override;
 
     wxPrintDialogData& GetPrintDialogData() override { return m_printDialogData; }
@@ -108,7 +108,7 @@ wxWindowsPageSetupDialog(const wxWindowsPageSetupDialog&) = delete;
    wxWindowsPageSetupDialog(wxWindowsPageSetupDialog&&) = default;
    wxWindowsPageSetupDialog& operator=(wxWindowsPageSetupDialog&&) = default;
 
-    bool Create(wxWindow *parent, wxPageSetupDialogData *data = nullptr);
+    [[maybe_unused]] bool Create(wxWindow *parent, wxPageSetupDialogData *data = nullptr);
     int ShowModal() override;
     bool ConvertToNative( wxPageSetupDialogData &data );
     bool ConvertFromNative( wxPageSetupDialogData &data );

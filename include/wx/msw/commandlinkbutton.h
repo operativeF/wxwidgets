@@ -38,7 +38,7 @@ wxCommandLinkButton(const wxCommandLinkButton&) = delete;
    wxCommandLinkButton(wxCommandLinkButton&&) = default;
    wxCommandLinkButton& operator=(wxCommandLinkButton&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& mainLabel = wxEmptyString,
                 const wxString& note = wxEmptyString,

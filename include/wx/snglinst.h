@@ -51,7 +51,7 @@ public:
     //
     // returns false if initialization failed, it doesn't mean that another
     // instance is running - use IsAnotherRunning() to check it
-    bool Create(const wxString& name, const wxString& path = wxEmptyString);
+    [[maybe_unused]] bool Create(const wxString& name, const wxString& path = wxEmptyString);
 
     // use the default name, which is a combination of wxTheApp->GetAppName()
     // and wxGetUserId() for mutex/lock file

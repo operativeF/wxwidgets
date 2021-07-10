@@ -76,7 +76,7 @@ public:
     wxVListBoxComboPopup()  = default;
     ~wxVListBoxComboPopup() override;
 
-    bool Create(wxWindow* parent) override;
+    [[maybe_unused]] bool Create(wxWindow* parent) override;
     void SetFocus() override;
     wxWindow *GetControl() override { return this; }
     void SetStringValue( const wxString& value ) override;
@@ -278,7 +278,7 @@ public:
                          const wxValidator& validator = wxDefaultValidator,
                          const wxString& name = wxASCII_STR(wxComboCtrlNameStr));
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& value,
                 const wxPoint& pos,
@@ -289,7 +289,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxComboCtrlNameStr));
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& value,
                 const wxPoint& pos,

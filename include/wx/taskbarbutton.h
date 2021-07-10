@@ -53,7 +53,7 @@ public:
                      bool shown = true,
                      bool interactive = true);
 
-    bool Create(int id,
+    [[maybe_unused]] bool Create(int id,
                 const wxIcon& icon,
                 const wxString& tooltip = wxString(),
                 bool enable = true,

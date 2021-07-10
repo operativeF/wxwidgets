@@ -112,7 +112,7 @@ public:
     wxGenericCommandLinkButton(const wxGenericCommandLinkButton&) = delete;
 	wxGenericCommandLinkButton& operator=(const wxGenericCommandLinkButton&) = delete;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& mainLabel = wxEmptyString,
                 const wxString& note = wxEmptyString,

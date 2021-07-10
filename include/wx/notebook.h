@@ -66,7 +66,7 @@ public:
     wxNotebookPageInfo() { m_page = NULL; m_imageId = -1; m_selected = false; }
     virtual ~wxNotebookPageInfo() { }
 
-    bool Create(wxNotebookPage *page,
+    [[maybe_unused]] bool Create(wxNotebookPage *page,
                 const wxString& text,
                 bool selected,
                 int imageId)

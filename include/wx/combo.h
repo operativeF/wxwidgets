@@ -158,7 +158,7 @@ public:
     
     wxComboCtrlBase() : m_mainCtrlWnd(this) {}
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& value,
                 const wxPoint& pos,

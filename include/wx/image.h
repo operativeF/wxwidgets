@@ -307,18 +307,18 @@ public:
         { LoadFile( stream, mimetype, index ); }
 #endif // wxUSE_STREAMS
 
-    bool Create( const char* const* xpmData );
+    [[maybe_unused]] bool Create( const char* const* xpmData );
 
-    bool Create( int width, int height, bool clear = true );
-    bool Create( int width, int height, unsigned char* data, bool static_data = false );
-    bool Create( int width, int height, unsigned char* data, unsigned char* alpha, bool static_data = false );
+    [[maybe_unused]] bool Create( int width, int height, bool clear = true );
+    [[maybe_unused]] bool Create( int width, int height, unsigned char* data, bool static_data = false );
+    [[maybe_unused]] bool Create( int width, int height, unsigned char* data, unsigned char* alpha, bool static_data = false );
 
     // Create() variants using wxSize:
-    bool Create( const wxSize& sz, bool clear = true )
+    [[maybe_unused]] bool Create( const wxSize& sz, bool clear = true )
         { return Create(sz.x, sz.y, clear); }
-    bool Create( const wxSize& sz, unsigned char* data, bool static_data = false )
+    [[maybe_unused]] bool Create( const wxSize& sz, unsigned char* data, bool static_data = false )
         { return Create(sz.x, sz.y, data, static_data); }
-    bool Create( const wxSize& sz, unsigned char* data, unsigned char* alpha, bool static_data = false )
+    [[maybe_unused]] bool Create( const wxSize& sz, unsigned char* data, unsigned char* alpha, bool static_data = false )
         { return Create(sz.x, sz.y, data, alpha, static_data); }
 
     void Destroy();

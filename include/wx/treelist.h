@@ -145,7 +145,7 @@ public:
    wxTreeListCtrl(wxTreeListCtrl&&) = default;
    wxTreeListCtrl& operator=(wxTreeListCtrl&&) = default;
 
-    bool Create(wxWindow* parent,
+    [[maybe_unused]] bool Create(wxWindow* parent,
                 wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,

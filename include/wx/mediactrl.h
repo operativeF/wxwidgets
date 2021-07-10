@@ -98,7 +98,7 @@ public:
 
     ~wxMediaCtrl() override;
 
-    bool Create(wxWindow* parent, wxWindowID winid,
+    [[maybe_unused]] bool Create(wxWindow* parent, wxWindowID winid,
                 const wxString& fileName = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
@@ -107,7 +107,7 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxT("mediaCtrl"));
 
-    bool Create(wxWindow* parent, wxWindowID winid,
+    [[maybe_unused]] bool Create(wxWindow* parent, wxWindowID winid,
                 const wxURI& location,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,

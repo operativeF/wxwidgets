@@ -26,10 +26,10 @@ public:
     wxSound& operator=(wxSound&&) = default;
 
     // Create from resource or file
-    bool Create(const wxString& fileName, bool isResource = false);
+    [[maybe_unused]] bool Create(const wxString& fileName, bool isResource = false);
 
     // Create from data
-    bool Create(size_t size, const void* data);
+    [[maybe_unused]] bool Create(size_t size, const void* data);
 
     bool IsOk() const { return m_data != nullptr; }
 

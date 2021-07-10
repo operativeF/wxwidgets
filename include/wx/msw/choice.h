@@ -41,7 +41,7 @@ public:
     wxChoice(const wxChoice&) = delete;
     wxChoice& operator=(const wxChoice&) = delete;
 
-    bool Create(wxWindow* parent,
+    [[maybe_unused]] bool Create(wxWindow* parent,
                 wxWindowID id,
                 const wxPoint& pos,
                 const wxSize& size,

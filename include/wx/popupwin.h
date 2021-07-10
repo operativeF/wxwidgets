@@ -45,7 +45,7 @@ public:
     // create the popup window
     //
     // style may only contain border flags
-    bool Create(wxWindow *parent, int style = wxBORDER_NONE);
+    [[maybe_unused]] bool Create(wxWindow *parent, int style = wxBORDER_NONE);
 
     // move the popup window to the right position, i.e. such that it is
     // entirely visible
@@ -234,7 +234,7 @@ public:
     wxPopupComboWindow() { m_combo = NULL; }
     wxPopupComboWindow(wxComboCtrl *parent);
 
-    bool Create(wxComboCtrl *parent);
+    [[maybe_unused]] bool Create(wxComboCtrl *parent);
 
     // position the window correctly relatively to the combo
     void PositionNearCombo();

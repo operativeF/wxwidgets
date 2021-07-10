@@ -254,9 +254,9 @@ public:
 
     ~wxMask() override;
 
-    bool Create(const wxBitmap& bitmap, const wxColour& colour);
-    bool Create(const wxBitmap& bitmap, int paletteIndex);
-    bool Create(const wxBitmap& bitmap);
+    [[maybe_unused]] bool Create(const wxBitmap& bitmap, const wxColour& colour);
+    [[maybe_unused]] bool Create(const wxBitmap& bitmap, int paletteIndex);
+    [[maybe_unused]] bool Create(const wxBitmap& bitmap);
 
     wxBitmap GetBitmap() const;
 
@@ -287,7 +287,7 @@ public:
 
     // implement wxGDIImageHandler's pure virtuals:
 
-    bool Create(wxGDIImage *image,
+    [[maybe_unused]] bool Create(wxGDIImage *image,
                         const void* data,
                         wxBitmapType type,
                         int width, int height, int depth = 1) override;
@@ -303,7 +303,7 @@ public:
     // make wxBitmapHandler compatible with the wxBitmapHandler interface
     // declared in bitmap.h, even if it's derived from wxGDIImageHandler:
 
-    virtual bool Create(wxBitmap *bitmap,
+    virtual [[maybe_unused]] bool Create(wxBitmap *bitmap,
                         const void* data,
                         wxBitmapType type,
                         int width, int height, int depth = 1);

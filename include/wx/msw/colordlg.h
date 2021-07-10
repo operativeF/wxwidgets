@@ -44,7 +44,7 @@ public:
     wxColourDialog(wxColourDialog&&) = default;
     wxColourDialog& operator=(wxColourDialog&&) = default;
 
-    bool Create(wxWindow *parent, const wxColourData *data = nullptr);
+    [[maybe_unused]] bool Create(wxWindow *parent, const wxColourData *data = nullptr);
 
     wxColourData& GetColourData() { return m_colourData; }
 

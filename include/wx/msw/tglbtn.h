@@ -36,7 +36,7 @@ wxToggleButton(const wxToggleButton&) = delete;
    wxToggleButton(wxToggleButton&&) = default;
    wxToggleButton& operator=(wxToggleButton&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& label,
                 const wxPoint& pos = wxDefaultPosition,
@@ -93,7 +93,7 @@ public:
     }
 
     // Create the control
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxBitmap& label,
                 const wxPoint& pos = wxDefaultPosition,

@@ -37,7 +37,7 @@ wxTimePickerCtrl(const wxTimePickerCtrl&) = delete;
    wxTimePickerCtrl(wxTimePickerCtrl&&) = default;
    wxTimePickerCtrl& operator=(wxTimePickerCtrl&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxDateTime& dt = wxDefaultDateTime,
                 const wxPoint& pos = wxDefaultPosition,

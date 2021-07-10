@@ -35,7 +35,7 @@ public:
 
     // Wrappers around {Create,Set,Reset}Event() Windows API functions, with
     // the same semantics.
-    bool Create(Kind kind = AutomaticReset,
+    [[maybe_unused]] bool Create(Kind kind = AutomaticReset,
                 InitialState initialState = Nonsignaled,
                 const wxChar* name = nullptr);
     bool Set();
