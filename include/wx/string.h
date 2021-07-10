@@ -1096,9 +1096,9 @@ public:
     // copy ctor
   wxString(const wxString& stringSrc) : m_impl(stringSrc.m_impl) {}
   
-  wxString(wxString&& stringSrc) : m_impl(std::move(stringSrc.m_impl)) {}
+  wxString(wxString&& stringSrc) noexcept : m_impl(std::move(stringSrc.m_impl)) {}
 
-  wxString& operator=(wxString&& stringSrc) 
+  wxString& operator=(wxString&& stringSrc) noexcept
   {
     m_impl = std::move(stringSrc.m_impl);
     return *this;
