@@ -45,17 +45,16 @@ struct GetTextExtentTester
     GetTextExtentTester(const T& obj)
     {
         // Test that getting the height only doesn't crash.
-        int y;
-        obj.GetTextExtent("H", nullptr, &y);
+        auto y = obj.GetTextExtent("H").y;
 
         CHECK( y > 1 );
 
-        wxSize size = obj.GetTextExtent("Hello");
+        auto size = obj.GetTextExtent("Hello");
         CHECK( size.x > 1 );
         CHECK( size.y == y );
 
         // Test that getting text extent of an empty string returns (0, 0).
-        CHECK( obj.GetTextExtent(wxString()) == wxSize() );
+        CHECK( obj.GetTextExtent(wxString()) == wxSize(0, 0) );
     }
 };
 
@@ -105,19 +104,19 @@ TEST_CASE("wxDC::LeadingAndDescent")
 
     // Retrieving just the descent should work.
     int descent = -17;
-    dc.GetTextExtent("foo", nullptr, nullptr, &descent);
+    dc.GetTextExtent("foo", &descent, nullptr);
     CHECK( descent != -17 );
 
     // Same for external leading.
     int leading = -289;
-    dc.GetTextExtent("foo", nullptr, nullptr, nullptr, &leading);
+    dc.GetTextExtent("foo", nullptr, &leading);
     CHECK( leading != -289 );
 
     // And both should also work for the empty string as they retrieve the
     // values valid for the entire font and not just this string.
     int descent2,
         leading2;
-    dc.GetTextExtent("", nullptr, nullptr, &descent2, &leading2);
+    dc.GetTextExtent("", &descent2, &leading2);
 
     CHECK( descent2 == descent );
     CHECK( leading2 == leading );
@@ -152,8 +151,8 @@ TEST_CASE("wxGC::GetTextExtent")
     wxFont font(12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL);
     REQUIRE(font.IsOk());
     context->SetFont(font, *wxBLACK);
-    double width, height, descent, externalLeading = 0.0;
-    context->GetTextExtent("x", &width, &height, &descent, &externalLeading);
+    double descent, externalLeading = 0.0;
+    auto [width, height] = context->GetTextExtent("x", &descent, &externalLeading);
     delete context;
 
     // TODO: Determine a way to make these tests more robust.

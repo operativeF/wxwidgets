@@ -541,8 +541,8 @@ void wxTreeTextCtrl::OnKeyUp( wxKeyEvent &event )
         wxSize parentSize = m_owner->GetSize();
         wxPoint myPos = GetPosition();
         wxSize mySize = GetSize();
-        int sx, sy;
-        GetTextExtent(GetValue() + wxT("M"), &sx, &sy);
+
+        auto sx = GetTextExtent(GetValue() + wxT("M")).x;
         if (myPos.x + sx > parentSize.x)
             sx = parentSize.x - myPos.x;
         if (mySize.x > sx)

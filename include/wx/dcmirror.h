@@ -261,14 +261,13 @@ protected:
         m_dc.DoSetClippingRegion(GetX(x, y), GetY(x, y), GetX(w, h), GetY(w, h));
     }
 
-    void DoGetTextExtent(const wxString& string,
-                                 wxCoord *x, wxCoord *y,
+    wxSize DoGetTextExtent(const wxString& string,
                                  wxCoord *descent = nullptr,
                                  wxCoord *externalLeading = nullptr,
                                  const wxFont *theFont = nullptr) const override
     {
         // never mirrored
-        m_dc.DoGetTextExtent(string, x, y, descent, externalLeading, theFont);
+        return m_dc.DoGetTextExtent(string, descent, externalLeading, theFont);
     }
 
 private:

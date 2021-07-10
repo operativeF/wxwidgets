@@ -1093,13 +1093,16 @@ void wxDCImpl::DoGetFontMetrics(int *height,
                                 int *averageWidth) const
 {
     // Average width is typically the same as width of 'x'.
-    wxCoord h, d;
-    DoGetTextExtent("x", averageWidth, &h, &d, externalLeading);
+    wxCoord d;
+    auto textExtents = DoGetTextExtent("x", &d, externalLeading);
+
+    if(averageWidth)
+        *averageWidth = textExtents.x;
 
     if ( height )
-        *height = h;
+        *height = textExtents.y;
     if ( ascent )
-        *ascent = h - d;
+        *ascent = textExtents.y - d;
     if ( descent )
         *descent = d;
     if ( internalLeading )
@@ -1212,8 +1215,7 @@ void wxDC::DrawLabel(const wxString& text,
                 //     wxALIGN_LEFT is 0
                 if ( alignment & (wxALIGN_RIGHT | wxALIGN_CENTRE_HORIZONTAL) )
                 {
-                    wxCoord widthLine;
-                    GetTextExtent(curLine, &widthLine, nullptr);
+                    wxCoord widthLine = GetTextExtent(curLine).x;
 
                     if ( alignment & wxALIGN_RIGHT )
                     {
@@ -1250,9 +1252,9 @@ void wxDC::DrawLabel(const wxString& text,
             if ( pc - text.begin() == indexAccel )
             {
                 // remember to draw underscore here
-                GetTextExtent(curLine, &startUnderscore, nullptr);
+                startUnderscore = GetTextExtent(curLine).x;
                 curLine += *pc;
-                GetTextExtent(curLine, &endUnderscore, nullptr);
+                endUnderscore = GetTextExtent(curLine).x;
 
                 yUnderscore = y + heightLine;
             }

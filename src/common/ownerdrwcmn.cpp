@@ -55,11 +55,10 @@ bool wxOwnerDrawnBase::OnMeasureItem(size_t *width, size_t *height)
         // item name/text without mnemonics
         wxString name = wxStripMenuCodes(GetName(), wxStrip_Mnemonics);
 
-        wxCoord w, h;
-        dc.GetTextExtent(name, &w, &h);
+        auto textExtents = dc.GetTextExtent(name);
 
-        *width = w + m_margin;
-        *height = h;
+        *width = textExtents.x + m_margin;
+        *height = textExtents.y;
     }
     else
     {

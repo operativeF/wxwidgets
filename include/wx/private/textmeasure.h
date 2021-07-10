@@ -35,9 +35,7 @@ public:
 	wxTextMeasureBase& operator=(const wxTextMeasureBase&) = delete;
 
     // Return the extent of a single line string.
-    void GetTextExtent(const wxString& string,
-                       wxCoord *width,
-                       wxCoord *height,
+    wxSize GetTextExtent(const wxString& string,
                        wxCoord *descent = nullptr,
                        wxCoord *externalLeading = nullptr);
 
@@ -100,9 +98,7 @@ protected:
     //
     // The width and height pointers here are never NULL and the input string
     // is not empty.
-    virtual void DoGetTextExtent(const wxString& string,
-                                 wxCoord *width,
-                                 wxCoord *height,
+    virtual wxSize DoGetTextExtent(const wxString& string,
                                  wxCoord *descent = nullptr,
                                  wxCoord *externalLeading = nullptr) = 0;
 
@@ -116,9 +112,7 @@ protected:
     // value of m_useDCImpl.
     //
     // This must be always used instead of calling DoGetTextExtent() directly!
-    void CallGetTextExtent(const wxString& string,
-                           wxCoord *width,
-                           wxCoord *height,
+    wxSize CallGetTextExtent(const wxString& string,
                            wxCoord *descent = nullptr,
                            wxCoord *externalLeading = nullptr);
 

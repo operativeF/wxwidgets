@@ -168,8 +168,7 @@ wxSize wxStaticBox::DoGetBestSize() const
     // Calculate the size needed by the label
     wxSize char_size = wxGetCharSize(GetHWND(), GetFont());
 
-    int wBox;
-    GetTextExtent(GetLabelText(wxGetWindowText(m_hWnd)), &wBox, &char_size.y);
+    int wBox = GetTextExtent(GetLabelText(wxGetWindowText(m_hWnd))).x;
 
     wBox += 3 * char_size.x;
     int hBox = EDIT_HEIGHT_FROM_CHAR_HEIGHT(char_size.y);
@@ -540,17 +539,15 @@ void wxStaticBox::PaintForeground(wxDC& dc, const RECT&)
         }
 
         // Get the font extent
-        int width, height;
-        dc.GetTextExtent(wxStripMenuCodes(label, wxStrip_Mnemonics),
-                         &width, &height);
+        auto textExtent = dc.GetTextExtent(wxStripMenuCodes(label, wxStrip_Mnemonics));
 
         // first we need to correctly paint the background of the label
         // as Windows ignores the brush offset when doing it
         // NOTE: Border intentionally does not use DIPs in order to match native look
         const int x = LABEL_HORZ_OFFSET;
-        RECT dimensions = { x, 0, 0, height };
+        RECT dimensions = { x, 0, 0, textExtent.y };
         dimensions.left = x;
-        dimensions.right = x + width;
+        dimensions.right = x + textExtent.x;
 
         // need to adjust the rectangle to cover all the label background
         dimensions.left -= LABEL_HORZ_BORDER;
@@ -585,7 +582,7 @@ void wxStaticBox::PaintForeground(wxDC& dc, const RECT&)
         }
 
         // now draw the text
-        RECT rc2 = { x, 0, x + width, height };
+        RECT rc2 = { x, 0, x + textExtent.x, textExtent.y };
         ::DrawText(hdc, label.t_str(), label.length(), &rc2,
                    drawTextFlags);
     }

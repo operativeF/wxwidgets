@@ -520,21 +520,19 @@ wxSize wxRadioBox::GetMaxButtonSize() const
     int widthMax = 0,
         heightMax = 0;
 
-    // FIXME: Lambda.
     for ( unsigned int i = 0 ; i < GetCount(); i++ )
     {
-        int width, height;
-        GetTextExtent(wxGetWindowText((*m_radioButtons)[i]), &width, &height);
+        auto button_extents = GetTextExtent(wxGetWindowText((*m_radioButtons)[i]));
 
         // adjust the size to take into account the radio box itself
-        width += radioWidth;
-        height *= 3;
-        height /= 2;
+        button_extents.x += radioWidth;
+        button_extents.y *= 3;
+        button_extents.y  /= 2;
 
-        if ( widthMax < width )
-            widthMax = width;
-        if ( heightMax < height )
-            heightMax = height;
+        if ( widthMax < button_extents.x  )
+            widthMax = button_extents.x ;
+        if ( heightMax < button_extents.y  )
+            heightMax = button_extents.y ;
     }
 
     return wxSize(widthMax, heightMax);

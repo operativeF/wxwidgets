@@ -313,8 +313,7 @@ public:
                                   int *externalLeading,
                                   int *averageWidth) const;
 
-    virtual void DoGetTextExtent(const wxString& string,
-                                 wxCoord *x, wxCoord *y,
+    virtual wxSize DoGetTextExtent(const wxString& string,
                                  wxCoord *descent = nullptr,
                                  wxCoord *externalLeading = nullptr,
                                  const wxFont *theFont = nullptr) const = 0;
@@ -802,19 +801,11 @@ public:
         return fm;
     }
 
-    void GetTextExtent(const wxString& string,
-                       wxCoord *x, wxCoord *y,
+    wxSize GetTextExtent(const wxString& string,
                        wxCoord *descent = nullptr,
                        wxCoord *externalLeading = nullptr,
                        const wxFont *theFont = nullptr) const
-        { m_pimpl->DoGetTextExtent(string, x, y, descent, externalLeading, theFont); }
-
-    wxSize GetTextExtent(const wxString& string) const
-    {
-        wxCoord w, h;
-        m_pimpl->DoGetTextExtent(string, &w, &h);
-        return wxSize(w, h);
-    }
+        { return m_pimpl->DoGetTextExtent(string, descent, externalLeading, theFont); }
 
     // TODO: Forwarding parameters
     void GetMultiLineTextExtent(const wxString& string,

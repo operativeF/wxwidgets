@@ -3793,7 +3793,7 @@ class wxNullContext : public wxGraphicsContext
 {
 public:
     explicit wxNullContext(wxGraphicsRenderer* renderer) : wxGraphicsContext(renderer) {}
-    void GetTextExtent(const wxString&, double*, double*, double*, double*) const override {}
+    std::pair<double, double> GetTextExtent(const wxString&, double*, double*) const override { return {}; }
     std::vector<double> GetPartialTextExtents(const wxString&) const override { return {}; }
     void Clip(const wxRegion&) override {}
     void Clip(double, double, double, double) override {}
@@ -3829,9 +3829,9 @@ class wxD2DMeasuringContext : public wxNullContext
 public:
     explicit wxD2DMeasuringContext(wxGraphicsRenderer* renderer) : wxNullContext(renderer) {}
 
-    void GetTextExtent(const wxString& str, double* width, double* height, double* descent, double* externalLeading) const override
+    std::pair<double, double> GetTextExtent(const wxString& str, double* descent, double* externalLeading) const override
     {
-        GetTextExtent(wxGetD2DFontData(m_font), str, width, height, descent, externalLeading);
+        return GetTextExtent(wxGetD2DFontData(m_font), str, descent, externalLeading);
     }
 
     std::vector<double> GetPartialTextExtents(const wxString& text) const override
@@ -3845,15 +3845,14 @@ public:
 
         for (unsigned int i = 0; i < text.Length(); ++i)
         {
-            double width;
-            GetTextExtent(fontData, text.SubString(0, i), &width, nullptr, nullptr, nullptr);
+            auto width = GetTextExtent(fontData, text.SubString(0, i), nullptr, nullptr).first;
             widths.push_back(width);
         }
 
         return widths;
     }
 
-    static void GetTextExtent(wxD2DFontData* fontData, const wxString& str, double* width, double* height, double* descent, double* externalLeading)
+    static std::pair<double, double> GetTextExtent(wxD2DFontData* fontData, const wxString& str, double* descent, double* externalLeading)
     {
         wxCOMPtr<IDWriteTextLayout> textLayout = fontData->CreateTextLayout(str);
         wxCOMPtr<IDWriteFont> font = fontData->GetFont();
@@ -3866,11 +3865,10 @@ public:
 
         FLOAT ratio = fontData->GetTextFormat()->GetFontSize() / (FLOAT)fontMetrics.designUnitsPerEm;
 
-        if (width != nullptr) *width = textMetrics.widthIncludingTrailingWhitespace;
-        if (height != nullptr) *height = textMetrics.height;
-
         if (descent != nullptr) *descent = fontMetrics.descent * ratio;
         if (externalLeading != nullptr) *externalLeading = wxMax(0.0f, (fontMetrics.ascent + fontMetrics.descent) * ratio - textMetrics.height);
+
+        return { textMetrics.widthIncludingTrailingWhitespace, textMetrics.height };
     }
 };
 
@@ -3960,10 +3958,8 @@ public:
 
     void PopState() override;
 
-    void GetTextExtent(
+    std::pair<double, double> GetTextExtent(
         const wxString& str,
-        double* width,
-        double* height,
         double* descent,
         double* externalLeading) const override;
 
@@ -4697,18 +4693,17 @@ void wxD2DContext::PopState()
     m_isClipBoxValid = false;
 }
 
-void wxD2DContext::GetTextExtent(
+std::pair<double, double> wxD2DContext::GetTextExtent(
     const wxString& str,
-    double* width,
-    double* height,
     double* descent,
     double* externalLeading) const
 {
-    wxCHECK_RET(!m_font.IsNull(),
-        wxS("wxD2DContext::GetTextExtent - no valid font set"));
+    // FIXME: Does not return wxSize.
+    //wxCHECK_RET(!m_font.IsNull(),
+    //    wxS("wxD2DContext::GetTextExtent - no valid font set"));
 
-    wxD2DMeasuringContext::GetTextExtent(
-        wxGetD2DFontData(m_font), str, width, height, descent, externalLeading);
+    return wxD2DMeasuringContext::GetTextExtent(
+        wxGetD2DFontData(m_font), str, descent, externalLeading);
 }
 
 std::vector<double> wxD2DContext::GetPartialTextExtents(const wxString& text) const

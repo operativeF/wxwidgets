@@ -172,15 +172,14 @@ bool wxDragImage::Create(const wxString& str, const wxCursor& cursor)
 {
     wxFont font(wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT));
 
-    wxCoord w = 0, h = 0;
     wxScreenDC dc;
     dc.SetFont(font);
-    dc.GetTextExtent(str, & w, & h);
+    auto textExtents = dc.GetTextExtent(str);
     dc.SetFont(wxNullFont);
 
     wxMemoryDC dc2;
     dc2.SetFont(font);
-    wxBitmap bitmap((int) w+2, (int) h+2);
+    wxBitmap bitmap((int) textExtents.x + 2, (int) textExtents.y + 2);
     dc2.SelectObject(bitmap);
 
     dc2.SetBackground(* wxWHITE_BRUSH);

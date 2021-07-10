@@ -747,13 +747,11 @@ void wxVListBoxComboPopup::CalcWidths()
                     // have been checked precily.
                     if ( dirtyHandled < 1024 )
                     {
-                        wxCoord y;
-                        dc.GetTextExtent(text, &x, &y, nullptr, nullptr);
-                        x += 4;
+                        x = dc.GetTextExtent(text, nullptr, nullptr).x + 4;
                     }
                     else
                     {
-                        x = text.length() * (dc.GetCharWidth()+1);
+                        x = text.length() * (dc.GetCharWidth() + 1);
                     }
                 }
 

@@ -1254,9 +1254,9 @@ void wxPropertyGrid::CalculateFontAndBitmapStuff( int vspacing )
 
     m_captionFont = wxControl::GetFont();
 
-    GetTextExtent(wxS("jG"), &x, &y, nullptr, nullptr, &m_captionFont);
-    m_subgroup_extramargin = x + (x/2);
-    m_fontHeight = y;
+    auto captionSize = GetTextExtent(wxS("jG"), nullptr, nullptr, &m_captionFont);
+    m_subgroup_extramargin = captionSize.x + (captionSize.x / 2);
+    m_fontHeight = captionSize.y;
 
 #if wxPG_USE_RENDERER_NATIVE
     m_iconWidth = FromDIP(wxPG_ICON_WIDTH);
@@ -1284,10 +1284,11 @@ void wxPropertyGrid::CalculateFontAndBitmapStuff( int vspacing )
     if ( !(m_windowStyle & wxPG_HIDE_MARGIN) )
         m_marginWidth = m_gutterWidth*2 + m_iconWidth;
 
+    // FIXME: This is stupid, to just get the font...
     m_captionFont.SetWeight(wxFONTWEIGHT_BOLD);
-    GetTextExtent(wxS("jG"), &x, &y, nullptr, nullptr, &m_captionFont);
+    auto boldCaptionSize = GetTextExtent(wxS("jG"), nullptr, nullptr, &m_captionFont);
 
-    m_lineHeight = m_fontHeight+(2*m_spacingy)+1;
+    m_lineHeight = m_fontHeight + (2 * m_spacingy) + 1;
 
     // button spacing
     m_buttonSpacingY = (m_lineHeight - m_iconHeight) / 2;
@@ -5056,14 +5057,13 @@ bool wxPropertyGrid::HandleMouseMove( int x, unsigned int y,
 
                         space -= m_propHover->GetImageOffset(imageWidth);
                         space -= (wxPG_XBEFORETEXT + 1);
-                        int tw, th;
                         const wxFont* font = nullptr;
                         if ( (m_windowStyle & wxPG_BOLD_MODIFIED) && m_propHover->HasFlag(wxPG_PROP_MODIFIED) )
                             font = &m_captionFont;
                         if ( cell.GetFont().IsOk() )
                             font = &cell.GetFont();
-                        GetTextExtent( tipString, &tw, &th, nullptr, nullptr, font );
-                        if ( tw > space )
+                        auto tipStrWidth = GetTextExtent( tipString, nullptr, nullptr, font ).x;
+                        if ( tipStrWidth > space )
                             SetToolTip( tipString );
                     }
                     else

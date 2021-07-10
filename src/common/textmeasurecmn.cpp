@@ -59,52 +59,35 @@ wxFont wxTextMeasureBase::GetFont() const
                           : m_dc->GetFont();
 }
 
-void wxTextMeasureBase::CallGetTextExtent(const wxString& string,
-                                          wxCoord *width,
-                                          wxCoord *height,
+wxSize wxTextMeasureBase::CallGetTextExtent(const wxString& string,
                                           wxCoord *descent,
                                           wxCoord *externalLeading)
 {
     if ( m_useDCImpl )
-        m_dc->GetTextExtent(string, width, height, descent, externalLeading);
+        return m_dc->GetTextExtent(string, descent, externalLeading);
     else
-        DoGetTextExtent(string, width, height, descent, externalLeading);
+        return DoGetTextExtent(string, descent, externalLeading);
 }
 
-void wxTextMeasureBase::GetTextExtent(const wxString& string,
-                                      wxCoord *width,
-                                      wxCoord *height,
+wxSize wxTextMeasureBase::GetTextExtent(const wxString& string,
                                       wxCoord *descent,
                                       wxCoord *externalLeading)
 {
-    // To make the code simpler, make sure that the width and height pointers
-    // are always valid, even if they point to dummy variables.
-    int unusedWidth, unusedHeight;
-    if ( !width )
-        width = &unusedWidth;
-    if ( !height )
-        height = &unusedHeight;
-
     // Avoid even setting up the DC for measuring if we don't actually need to
     // measure anything.
     if ( string.empty() && !descent && !externalLeading )
     {
-        *width =
-        *height = 0;
-
-        return;
+        return {0, 0};
     }
 
     MeasuringGuard guard(*this);
 
-    CallGetTextExtent(string, width, height, descent, externalLeading);
+    return CallGetTextExtent(string, descent, externalLeading);
 }
 
 int wxTextMeasureBase::GetEmptyLineHeight()
 {
-    int dummy, height;
-    CallGetTextExtent(wxS("W"), &dummy, &height);
-    return height;
+    return CallGetTextExtent(wxS("W")).y;
 }
 
 void wxTextMeasureBase::GetMultiLineTextExtent(const wxString& text,
@@ -134,14 +117,20 @@ void wxTextMeasureBase::GetMultiLineTextExtent(const wxString& text,
         if ( text.empty() )
             *height = GetEmptyLineHeight();
         else
-            CallGetTextExtent(text, width, height);
+        {
+            auto textExtent = CallGetTextExtent(text);
+            *width = textExtent.x;
+            *height = textExtent.y;
+        }
 
         if ( heightOneLine )
             *heightOneLine = *height;
         return;
     }
 
-    wxCoord widthLine, heightLine = 0, heightLineDefault = 0;
+    wxCoord widthLine = 0;
+    wxCoord heightLine = 0;
+    wxCoord heightLineDefault = 0;
 
     wxString::const_iterator lineStart = text.begin();
     for ( wxString::const_iterator pc = text.begin(); ; ++pc )
@@ -167,7 +156,10 @@ void wxTextMeasureBase::GetMultiLineTextExtent(const wxString& text,
             }
             else
             {
-                CallGetTextExtent(wxString(lineStart, pc), &widthLine, &heightLine);
+                auto textExtents = CallGetTextExtent(wxString(lineStart, pc));
+                widthLine = textExtents.x;
+                heightLine = textExtents.y;
+
                 if ( widthLine > *width )
                     *width = widthLine;
                 *height += heightLine;
@@ -193,16 +185,16 @@ wxSize wxTextMeasureBase::GetLargestStringExtent(const std::vector<wxString>& st
 {
     MeasuringGuard guard(*this);
 
-    wxCoord w, h, widthMax = 0, heightMax = 0;
+    wxCoord widthMax = 0, heightMax = 0;
 
     for ( const auto& str : strings )
     {
-        CallGetTextExtent(str, &w, &h);
+        auto textExtent = CallGetTextExtent(str);
 
-        if ( w > widthMax )
-            widthMax = w;
-        if ( h > heightMax )
-            heightMax = h;
+        if ( textExtent.x > widthMax )
+            widthMax = textExtent.x;
+        if ( textExtent.y > heightMax )
+            heightMax = textExtent.y;
     }
 
     return wxSize(widthMax, heightMax);

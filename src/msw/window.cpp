@@ -2261,8 +2261,7 @@ int wxWindowMSW::GetCharWidth() const
 #endif
 }
 
-void wxWindowMSW::DoGetTextExtent(const wxString& string,
-                                  int *x, int *y,
+wxSize wxWindowMSW::DoGetTextExtent(const wxString& string,
                                   int *descent,
                                   int *externalLeading,
                                   const wxFont *fontToUse) const
@@ -2274,11 +2273,11 @@ void wxWindowMSW::DoGetTextExtent(const wxString& string,
     else
         font = *fontToUse;
 
-    wxCHECK_RET( font.IsOk(), wxT("invalid font in GetTextExtent()") );
+    //wxCHECK_RET( font.IsOk(), wxT("invalid font in GetTextExtent()") );
 
     const wxWindow* win = static_cast<const wxWindow*>(this);
     wxTextMeasure txm(win, &font);
-    txm.GetTextExtent(string, x, y, descent, externalLeading);
+    return txm.GetTextExtent(string, descent, externalLeading);
 }
 
 // ---------------------------------------------------------------------------

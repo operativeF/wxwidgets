@@ -263,22 +263,21 @@ wxSize wxRadioButton::DoGetBestSize() const
     wxCoord& radioSize = s_radioSize.Get();
     wxString str = GetLabel();
 
-    int wRadio, hRadio;
+    wxSize radioTextExtents;
     if ( !str.empty() )
     {
-        GetTextExtent(GetLabelText(str), &wRadio, &hRadio);
-        wRadio += radioSize + GetCharWidth();
+        radioTextExtents = GetTextExtent(GetLabelText(str));
+        radioTextExtents.x += radioSize + GetCharWidth();
 
-        if ( hRadio < radioSize )
-            hRadio = radioSize;
+        if ( radioTextExtents.y < radioSize )
+            radioTextExtents.y = radioSize;
     }
     else
     {
-        wRadio = radioSize;
-        hRadio = radioSize;
+        radioTextExtents = {radioSize, radioSize};
     }
 
-    return wxSize(wRadio, hRadio);
+    return radioTextExtents;
 }
 
 WXDWORD wxRadioButton::MSWGetStyle(long style, WXDWORD *exstyle) const

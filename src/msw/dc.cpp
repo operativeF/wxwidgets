@@ -1478,9 +1478,8 @@ void wxMSWDCImpl::DoDrawText(const wxString& text, wxCoord x, wxCoord y)
     // update the bounding box
     CalcBoundingBox(x, y);
 
-    wxCoord w, h;
-    GetOwner()->GetTextExtent(text, &w, &h);
-    CalcBoundingBox(x + w, y + h);
+    auto textExtents = GetOwner()->GetTextExtent(text);
+    CalcBoundingBox(x + textExtents.x, y + textExtents.y);
 }
 
 void wxMSWDCImpl::DrawAnyText(const wxString& text, wxCoord x, wxCoord y)
@@ -1901,14 +1900,14 @@ void wxMSWDCImpl::DoGetFontMetrics(int *height,
         *averageWidth = tm.tmAveCharWidth;
 }
 
-void wxMSWDCImpl::DoGetTextExtent(const wxString& string, wxCoord *x, wxCoord *y,
+wxSize wxMSWDCImpl::DoGetTextExtent(const wxString& string,
                            wxCoord *descent, wxCoord *externalLeading,
                            const wxFont *font) const
 {
     wxASSERT_MSG( !font || font->IsOk(), wxT("invalid font in wxMSWDCImpl::GetTextExtent") );
 
     wxTextMeasure txm(GetOwner(), font);
-    txm.GetTextExtent(string, x, y, descent, externalLeading);
+    return txm.GetTextExtent(string, descent, externalLeading);
 }
 
 

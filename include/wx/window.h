@@ -1187,20 +1187,12 @@ public:
 
         // get the width/height/... of the text using current or specified
         // font
-    void GetTextExtent(const wxString& string,
-                       int *x, int *y,
+    wxSize GetTextExtent(const wxString& string,
                        int *descent = nullptr,
                        int *externalLeading = nullptr,
                        const wxFont *font = nullptr) const
     {
-        DoGetTextExtent(string, x, y, descent, externalLeading, font);
-    }
-
-    wxSize GetTextExtent(const wxString& string) const
-    {
-        wxCoord w, h;
-        GetTextExtent(string, &w, &h);
-        return wxSize(w, h);
+        return DoGetTextExtent(string, descent, externalLeading, font);
     }
 
     // client <-> screen coords
@@ -1773,8 +1765,7 @@ protected:
     //     only one to be virtual.
 
     // text extent
-    virtual void DoGetTextExtent(const wxString& string,
-                                 int *x, int *y,
+    virtual wxSize DoGetTextExtent(const wxString& string,
                                  int *descent = nullptr,
                                  int *externalLeading = nullptr,
                                  const wxFont *font = nullptr) const = 0;

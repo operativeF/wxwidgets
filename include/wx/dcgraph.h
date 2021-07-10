@@ -213,8 +213,7 @@ public:
         wxCoord width, wxCoord height) override;
     bool DoGetClippingRect(wxRect& rect) const override;
 
-    void DoGetTextExtent(const wxString& string,
-        wxCoord *x, wxCoord *y,
+    wxSize DoGetTextExtent(const wxString& string,
         wxCoord *descent = nullptr,
         wxCoord *externalLeading = nullptr,
         const wxFont *theFont = nullptr) const override;

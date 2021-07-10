@@ -717,11 +717,10 @@ wxGraphicsContext::DoDrawFilledText(const wxString &str,
 {
     wxGraphicsBrush formerBrush = m_brush;
     wxGraphicsPen formerPen = m_pen;
-    double width;
-    double height;
+
     double descent;
     double externalLeading;
-    GetTextExtent( str , &width, &height, &descent, &externalLeading );
+    auto [width, height] = GetTextExtent( str, &descent, &externalLeading );
     SetBrush( backgroundBrush );
     // to make sure our 'OffsetToPixelBoundaries' doesn't move the fill shape
     SetPen( wxNullGraphicsPen );
@@ -742,11 +741,10 @@ wxGraphicsContext::DoDrawRotatedFilledText(const wxString &str,
     wxGraphicsBrush formerBrush = m_brush;
     wxGraphicsPen formerPen = m_pen;
 
-    double width;
-    double height;
     double descent;
     double externalLeading;
-    GetTextExtent( str , &width, &height, &descent, &externalLeading );
+
+    auto [width, height] = GetTextExtent( str, &descent, &externalLeading );
     SetBrush( backgroundBrush );
     // to make sure our 'OffsetToPixelBoundaries' doesn't move the fill shape
     SetPen( wxNullGraphicsPen );

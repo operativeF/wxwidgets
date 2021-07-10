@@ -457,23 +457,23 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
         dc.SetTextForeground(clr);
         dc.SetBackgroundMode(wxBrushStyle::Transparent);
 
-        int tw, th, td;
-        dc.GetTextExtent( label, &tw, &th, &td);
+        int td;
+        auto textSize = dc.GetTextExtent( label, &td);
 
         int x = rect.x + bmpWidth + margin;
-        const int y = rect.y + wxMax(0, (rect.height - (th+td)) / 2);
+        const int y = rect.y + wxMax(0, (rect.height - (textSize.y + td)) / 2);
 
         // truncate and add an ellipsis (...) if the text is too wide.
         const int availWidth = rect.width - labelWidth;
 #if wxUSE_CONTROLS
-        if ( tw > availWidth )
+        if ( textSize.x > availWidth )
         {
             label = wxControl::Ellipsize(label,
                                          dc,
                                          wxELLIPSIZE_END,
                                          availWidth,
                                          wxELLIPSIZE_FLAGS_NONE);
-            tw = dc.GetTextExtent(label).x;
+            textSize.x = dc.GetTextExtent(label).x;
         }
         else // enough space, we can respect alignment
 #endif // wxUSE_CONTROLS
@@ -485,18 +485,18 @@ wxRendererGeneric::DrawHeaderButtonContents(wxWindow *win,
                     break;
 
                 case wxALIGN_CENTER:
-                    x += (availWidth - tw)/2;
+                    x += (availWidth - textSize.x)/2;
                     break;
 
                 case wxALIGN_RIGHT:
-                    x += availWidth - tw;
+                    x += availWidth - textSize.x;
                     break;
             }
         }
 
         dc.DrawText(label, x, y);
 
-        labelWidth += tw;
+        labelWidth += textSize.x;
     }
 
     return labelWidth;
@@ -509,11 +509,12 @@ int wxRendererGeneric::GetHeaderButtonHeight(wxWindow *win)
     static constexpr int HEADER_OFFSET_Y = 1;
     static constexpr int EXTRA_HEIGHT = 4;
 
-    int w=0, h=14, d=0;
+    int defaultHeight{14};
+    int d = 0;
     if (win)
-        win->GetTextExtent(wxT("Hg"), &w, &h, &d);
+        defaultHeight = win->GetTextExtent(wxT("Hg"), &d).y;
 
-    return h + d + 2 * HEADER_OFFSET_Y + EXTRA_HEIGHT;
+    return defaultHeight + d + 2 * HEADER_OFFSET_Y + EXTRA_HEIGHT;
 }
 
 int wxRendererGeneric::GetHeaderButtonMargin(wxWindow *WXUNUSED(win))

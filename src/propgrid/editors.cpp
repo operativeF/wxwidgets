@@ -762,9 +762,8 @@ void wxPropertyGrid::OnComboItemPaint( const wxPGComboBox* pCb,
         // Default measure behaviour (no flexible, custom paint image only)
         if ( rect.width < 0 )
         {
-            wxCoord x, y;
-            pCb->GetTextExtent(text, &x, &y, nullptr, nullptr);
-            rect.width = cis.x + wxCC_CUSTOM_IMAGE_MARGIN1 + wxCC_CUSTOM_IMAGE_MARGIN2 + 9 + x;
+            auto textWidth = pCb->GetTextExtent(text, nullptr, nullptr).x;
+            rect.width = cis.x + wxCC_CUSTOM_IMAGE_MARGIN1 + wxCC_CUSTOM_IMAGE_MARGIN2 + 9 + textWidth;
         }
 
         rect.height = cis.y + 2;

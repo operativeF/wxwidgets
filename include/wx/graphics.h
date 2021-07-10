@@ -823,8 +823,7 @@ public:
                    double angle, const wxGraphicsBrush& backgroundBrush )
         { DoDrawRotatedFilledText(str, x, y, angle, backgroundBrush); }
 
-
-    virtual void GetTextExtent( const wxString &text, double *width, double *height,
+    virtual std::pair<double, double> GetTextExtent( const wxString &text,
         double *descent = nullptr, double *externalLeading = nullptr ) const  = 0;
 
     virtual std::vector<double> GetPartialTextExtents(const wxString& text) const = 0;

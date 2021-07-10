@@ -40,9 +40,7 @@ protected:
     void BeginMeasuring() override;
     void EndMeasuring() override;
 
-    void DoGetTextExtent(const wxString& string,
-                               wxCoord *width,
-                               wxCoord *height,
+    wxSize DoGetTextExtent(const wxString& string,
                                wxCoord *descent = nullptr,
                                wxCoord *externalLeading = nullptr) override;
 

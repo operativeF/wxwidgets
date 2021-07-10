@@ -764,10 +764,7 @@ int wxMenuItem::MeasureAccelWidth() const
     GetFontToUse(font);
     dc.SetFont(font);
 
-    wxCoord w;
-    dc.GetTextExtent(accel, &w, nullptr);
-
-    return w;
+    return dc.GetTextExtent(accel).x;
 }
 
 wxString wxMenuItem::GetName() const
@@ -800,15 +797,14 @@ bool wxMenuItem::OnMeasureItem(size_t *width, size_t *height)
         GetFontToUse(font);
         dc.SetFont(font);
 
-        wxCoord w, h;
-        dc.GetTextExtent(str, &w, &h);
+        auto textExtents = dc.GetTextExtent(str);
 
-        *width = data->TextBorder + w + data->AccelBorder;
-        *height = h;
+        *width = data->TextBorder + textExtents.x + data->AccelBorder;
+        *height = textExtents.y;
 
-        w = m_parentMenu->GetMaxAccelWidth();
-        if ( w > 0 )
-            *width += w + data->ArrowBorder;
+        textExtents.x = m_parentMenu->GetMaxAccelWidth();
+        if ( textExtents.x > 0 )
+            *width += textExtents.x + data->ArrowBorder;
 
         *width += data->Offset;
         *width += data->ArrowMargin.GetTotalX() + data->ArrowSize.cx;

@@ -86,13 +86,11 @@ void wxTextMeasure::EndMeasuring()
 }
 
 // Notice we don't check here the font. It is supposed to be OK before the call.
-void wxTextMeasure::DoGetTextExtent(const wxString& string,
-                                       wxCoord *width,
-                                       wxCoord *height,
+wxSize wxTextMeasure::DoGetTextExtent(const wxString& string,
                                        wxCoord *descent,
                                        wxCoord *externalLeading)
 {
-    SIZE sizeRect;
+    SIZE sizeRect{0, 0};
     const size_t len = string.length();
     if ( !::GetTextExtentPoint32(m_hdc, string.t_str(), len, &sizeRect) )
     {
@@ -130,9 +128,6 @@ void wxTextMeasure::DoGetTextExtent(const wxString& string,
         //else: GetCharABCWidths() failed, not a TrueType font?
     }
 
-    *width = sizeRect.cx;
-    *height = sizeRect.cy;
-
     if ( descent || externalLeading )
     {
         TEXTMETRIC tm;
@@ -142,6 +137,8 @@ void wxTextMeasure::DoGetTextExtent(const wxString& string,
         if ( externalLeading )
             *externalLeading = tm.tmExternalLeading;
     }
+
+    return {sizeRect.cx, sizeRect.cy};
 }
 
 std::vector<int> wxTextMeasure::DoGetPartialTextExtents(const wxString& text, double scaleX)
@@ -170,17 +167,16 @@ std::vector<int> wxTextMeasure::DoGetPartialTextExtents(const wxString& text, do
     // The width of \t determined by GetTextExtentExPoint is 0. Determine the
     // actual width using DoGetTextExtent and update the widths accordingly.
     int offset = 0;
-    int tabWidth = 0;
-    int tabHeight = 0;
+    int tabWidth{0};
     int* widthPtr = &widths[0];
-    // TODO: Use std::transform.
+
     for ( wxString::const_iterator i = text.begin(); i != text.end(); ++i )
     {
         if ( *i == '\t' )
         {
             if ( tabWidth == 0 )
             {
-                DoGetTextExtent("\t", &tabWidth, &tabHeight);
+                tabWidth = DoGetTextExtent("\t").x;
             }
             offset += tabWidth;
         }

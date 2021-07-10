@@ -701,7 +701,7 @@ int wxPropertyGridPageState::GetColumnFitWidth(const wxDC& dc,
 {
     wxPropertyGrid* pg = m_pPropGrid;
     int maxW = 0;
-    int w, h;
+    int w;
 
     for ( unsigned int i = 0; i <pwc->GetChildCount(); i++ )
     {
@@ -710,7 +710,7 @@ int wxPropertyGridPageState::GetColumnFitWidth(const wxDC& dc,
         {
             wxString text;
             p->GetDisplayInfo(col, -1, 0, &text, (wxPGCell*)nullptr);
-            dc.GetTextExtent(text, &w, &h);
+            w = dc.GetTextExtent(text).x;
             if ( col == 0 )
                 w += ( (p->GetDepth()-1) * pg->m_subgroup_extramargin );
 

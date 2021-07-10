@@ -639,8 +639,7 @@ protected:
     int                   m_yThumbSize{0};
 
     // implement the base class pure virtuals
-    void DoGetTextExtent(const wxString& string,
-                                 int *x, int *y,
+    wxSize DoGetTextExtent(const wxString& string,
                                  int *descent = nullptr,
                                  int *externalLeading = nullptr,
                                  const wxFont *font = nullptr) const override;

@@ -510,7 +510,7 @@ public:
     void PopState() override;
     void Flush() override;
 
-    virtual void GetTextExtent( const wxString &str, double *width, double *height,
+    virtual void GetTextExtent( const wxString &str,
                                 double *descent, double *externalLeading ) const override;
     std::vector<int> GetPartialTextExtents(const wxString& text) const override;
 
@@ -2834,7 +2834,7 @@ void wxCairoContext::DoDrawText(const wxString& str, double x, double y)
     cairo_show_text(m_context, data);
 }
 
-void wxCairoContext::GetTextExtent( const wxString &str, double *width, double *height,
+void wxCairoContext::GetTextExtent( const wxString &str,
                                     double *descent, double *externalLeading ) const
 {
     wxCHECK_RET( !m_font.IsNull(), wxT("wxCairoContext::GetTextExtent - no valid font set") );

@@ -219,21 +219,20 @@ TEST_CASE("Bounding box tests.")
     SUBCASE("DrawRotatedText")
     {
         wxString text("vertical");
-        wxCoord w, h;
-        m_gcdc->GetTextExtent(text, &w, &h);
+        auto textExtent = m_gcdc->GetTextExtent(text);
 
         m_gcdc->DrawRotatedText(text, 43, 22, -90);
-        AssertBox(m_gcdc.get(), 43 - h, 22, h, w, 3);
+        AssertBox(m_gcdc.get(), 43 - textExtent.y, 22,
+                                textExtent.y, textExtent.x, 3);
     }
 
     SUBCASE("DrawText")
     {
         wxString text("H");
-        wxCoord w, h;
-        m_gcdc->GetTextExtent(text, &w, &h);
+        auto textExtent = m_gcdc->GetTextExtent(text);
 
         m_gcdc->DrawText(text, 3, 3);
-        AssertBox(m_gcdc.get(), 3, 3, w, h, 3);
+        AssertBox(m_gcdc.get(), 3, 3, textExtent.x, textExtent.y, 3);
     }
 
     SUBCASE("GradientFillLinear")

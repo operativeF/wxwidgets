@@ -181,9 +181,8 @@ void wxGridCellEditorEvtHandler::OnChar(wxKeyEvent& event)
             if (!value.empty())
             {
                 // get width of cell CONTENTS (text)
-                int y;
                 wxFont font = m_grid->GetCellFont(row, col);
-                m_grid->GetTextExtent(value, &textWidth, &y, nullptr, nullptr, &font);
+                textWidth = m_grid->GetTextExtent(value, nullptr, nullptr, &font).x;
 
                 // try to RIGHT align the text by scrolling
                 const int client_right = m_grid->GetGridWindow()->GetClientSize().x;

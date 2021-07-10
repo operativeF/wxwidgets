@@ -477,7 +477,7 @@ public:
     void PushState() override;
     void PopState() override;
 
-    void GetTextExtent( const wxString &str, double *width, double *height,
+    std::pair<double, double> GetTextExtent( const wxString &str,
         double *descent, double *externalLeading ) const override;
     std::vector<double> GetPartialTextExtents(const wxString& text) const override;
     bool ShouldOffset() const override;
@@ -2309,16 +2309,19 @@ void wxGDIPlusContext::DoDrawText(const wxString& str,
                );
 }
 
-void wxGDIPlusContext::GetTextExtent( const wxString &str, double *width, double *height,
+std::pair<double, double> wxGDIPlusContext::GetTextExtent( const wxString &str,
                                      double *descent, double *externalLeading ) const
 {
-    wxCHECK_RET( !m_font.IsNull(), wxT("wxGDIPlusContext::GetTextExtent - no valid font set") );
+    // FIXME: Must return std::pair<double, double>
+    //wxCHECK_RET( !m_font.IsNull(), wxT("wxGDIPlusContext::GetTextExtent - no valid font set") );
 
     wxWCharBuffer s = str.wc_str( *wxConvUI );
     Font* f = ((wxGDIPlusFontData*)m_font.GetRefData())->GetGDIPlusFont();
 
+    std::pair<double, double> textExtents;
+
     // Get the font metrics if we actually need them.
-    if ( descent || externalLeading || (height && str.empty()) )
+    if ( descent || externalLeading || str.empty() )
     {
         // Because it looks that calling to Font::GetFamily() for a private font is
         // messing up something in the array of cached private font families so
@@ -2348,8 +2351,8 @@ void wxGDIPlusContext::GetTextExtent( const wxString &str, double *width, double
         if ( !pPrivFontFamily )
             delete pffamily;
 
-        if ( height && str.empty() )
-            *height = rHeight;
+        if ( str.empty() )
+            textExtents.second = rHeight;
         if ( descent )
             *descent = rDescent;
         if ( externalLeading )
@@ -2359,8 +2362,7 @@ void wxGDIPlusContext::GetTextExtent( const wxString &str, double *width, double
     // measuring empty strings is not guaranteed, so do it by hand
     if ( str.IsEmpty())
     {
-        if ( width )
-            *width = 0 ;
+        textExtents.first = 0 ;
 
         // Height already assigned above if necessary.
     }
@@ -2370,11 +2372,11 @@ void wxGDIPlusContext::GetTextExtent( const wxString &str, double *width, double
 
         RectF bounds ;
         m_context->MeasureString((const wchar_t *) s , wcslen(s) , f, layoutRect, GetDrawTextStringFormat(), &bounds ) ;
-        if ( width )
-            *width = bounds.Width;
-        if ( height )
-            *height = bounds.Height;
+        textExtents.first = bounds.Width;
+        textExtents.second = bounds.Height;
     }
+
+    return textExtents;
 }
 
 // FIXME: This function is a total mess and probably broken.

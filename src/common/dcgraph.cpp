@@ -1217,10 +1217,9 @@ void wxGCDCImpl::DoDrawText(const wxString& str, wxCoord x, wxCoord y)
 
     m_graphicContext->SetCompositionMode(curMode);
 
-    wxCoord w, h;
-    GetOwner()->GetTextExtent(str, &w, &h);
+    auto textExtents = GetOwner()->GetTextExtent(str);
     CalcBoundingBox(x, y);
-    CalcBoundingBox(x + w, y + h);
+    CalcBoundingBox(x + textExtents.x, y + textExtents.y);
 }
 
 bool wxGCDCImpl::CanGetTextExtent() const
@@ -1230,46 +1229,40 @@ bool wxGCDCImpl::CanGetTextExtent() const
     return true;
 }
 
-void wxGCDCImpl::DoGetTextExtent( const wxString &str, wxCoord *width, wxCoord *height,
+wxSize wxGCDCImpl::DoGetTextExtent( const wxString &str,
                               wxCoord *descent, wxCoord *externalLeading ,
                               const wxFont *theFont ) const
 {
-    wxCHECK_RET( m_graphicContext, wxT("wxGCDC(cg)::DoGetTextExtent - invalid DC") );
+    //wxCHECK_RET( m_graphicContext, wxT("wxGCDC(cg)::DoGetTextExtent - invalid DC") );
 
     if ( theFont )
     {
         m_graphicContext->SetFont( *theFont, m_textForegroundColour );
     }
 
-    double w wxDUMMY_INITIALIZE(0),
-             h wxDUMMY_INITIALIZE(0),
-             d wxDUMMY_INITIALIZE(0),
+    double   d wxDUMMY_INITIALIZE(0),
              e wxDUMMY_INITIALIZE(0);
 
     // Don't pass non-NULL pointers for the parts we don't need, this could
     // result in doing extra unnecessary work inside GetTextExtent().
-    m_graphicContext->GetTextExtent
+    auto [width, height] = m_graphicContext->GetTextExtent
                       (
                         str,
-                        width ? &w : nullptr,
-                        height ? &h : nullptr,
                         descent ? &d : nullptr,
                         externalLeading ? &e : nullptr
                       );
 
-    if ( height )
-        *height = (wxCoord)wxRound(h);
     if ( descent )
         *descent = (wxCoord)wxRound(d);
     if ( externalLeading )
         *externalLeading = (wxCoord)wxRound(e);
-    if ( width )
-        *width = (wxCoord)wxRound(w);
 
     if ( theFont )
     {
         m_graphicContext->SetFont( m_font, m_textForegroundColour );
     }
+
+    return { wxRound(width), wxRound(height) };
 }
 
 std::vector<int> wxGCDCImpl::DoGetPartialTextExtents(const wxString& text) const
@@ -1288,18 +1281,12 @@ std::vector<int> wxGCDCImpl::DoGetPartialTextExtents(const wxString& text) const
 
 wxCoord wxGCDCImpl::GetCharWidth() const
 {
-    wxCoord width = 0;
-    DoGetTextExtent( wxT("g") , &width , nullptr , nullptr , nullptr , nullptr );
-
-    return width;
+    return DoGetTextExtent( wxT("g"), nullptr, nullptr, nullptr ).x;
 }
 
 wxCoord wxGCDCImpl::GetCharHeight() const
 {
-    wxCoord height = 0;
-    DoGetTextExtent( wxT("g") , nullptr , &height , nullptr , nullptr , nullptr );
-
-    return height;
+    return DoGetTextExtent( wxT("g"), nullptr, nullptr, nullptr ).y;
 }
 
 void wxGCDCImpl::Clear()

@@ -218,7 +218,8 @@ public:
         rect.x = m_pos;
 
         int descent;
-        m_dc.GetTextExtent(text, &rect.width, &rect.height, &descent);
+        rect.SetSize(m_dc.GetTextExtent(text, &descent));
+
         rect.height -= descent;
         rect.y += m_rect.height - rect.height;
 

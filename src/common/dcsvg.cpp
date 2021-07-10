@@ -722,11 +722,11 @@ void wxSVGFileDCImpl::DoDrawRotatedText(const wxString& sText, wxCoord x, wxCoor
         const double yRect = y + lineNum * dy;
 
         // convert x,y to SVG text x,y (the coordinates of the text baseline)
-        wxCoord ww, hh, desc;
+        wxCoord desc;
         wxString const& line = lines[lineNum];
-        DoGetTextExtent(line, &ww, &hh, &desc);
-        const double xText = xRect + (hh - desc) * sin(rad);
-        const double yText = yRect + (hh - desc) * cos(rad);
+        auto textExtents = DoGetTextExtent(line, &desc);
+        const double xText = xRect + (textExtents.y - desc) * sin(rad);
+        const double yText = yRect + (textExtents.y - desc) * cos(rad);
 
         if (m_backgroundMode == wxBrushStyle::Solid)
         {
@@ -742,7 +742,7 @@ void wxSVGFileDCImpl::DoDrawRotatedText(const wxString& sText, wxCoord x, wxCoor
 
             s = wxString::Format(
                 wxS("  <rect x=\"%s\" y=\"%s\" width=\"%d\" height=\"%d\" %s %s %s/>\n"),
-                NumStr(xRect), NumStr(yRect), ww, hh,
+                NumStr(xRect), NumStr(yRect), textExtents.x, textExtents.y,
                 GetRenderMode(m_renderingMode), rectStyle, rectTransform);
 
             write(s);
@@ -754,7 +754,7 @@ void wxSVGFileDCImpl::DoDrawRotatedText(const wxString& sText, wxCoord x, wxCoor
 
         s = wxString::Format(
             wxS("  <text x=\"%s\" y=\"%s\" textLength=\"%d\" %s %s>%s</text>\n"),
-            NumStr(xText), NumStr(yText), ww, style, transform,
+            NumStr(xText), NumStr(yText), textExtents.x, style, transform,
 #if wxUSE_MARKUP
             wxMarkupParser::Quote(line)
 #else
@@ -1167,9 +1167,7 @@ void wxSVGFileDCImpl::DestroyClippingRegion()
     wxDCImpl::DestroyClippingRegion();
 }
 
-void wxSVGFileDCImpl::DoGetTextExtent(const wxString& string,
-                                      wxCoord* x,
-                                      wxCoord* y,
+wxSize wxSVGFileDCImpl::DoGetTextExtent(const wxString& string,
                                       wxCoord* descent,
                                       wxCoord* externalLeading,
                                       const wxFont* theFont) const
@@ -1177,7 +1175,7 @@ void wxSVGFileDCImpl::DoGetTextExtent(const wxString& string,
     wxScreenDC sDC;
     SetScaledScreenDCFont(sDC, theFont ? *theFont : m_font);
 
-    sDC.GetTextExtent(string, x, y, descent, externalLeading);
+    return sDC.GetTextExtent(string, descent, externalLeading);
 }
 
 wxCoord wxSVGFileDCImpl::GetCharHeight() const

@@ -667,17 +667,18 @@ static constexpr wxChar EXTENT_TEST[] = wxT(" `~!@#$%^&*()-_=+\\|[]{};:\"\'<,>.?
 
 XYPOSITION SurfaceImpl::Ascent(Font &font) {
     SetFont(font);
-    int w, h, d, e;
-    hdc->GetTextExtent(EXTENT_TEST, &w, &h, &d, &e);
-    const int ascent = h - d;
+    int d, e;
+    auto textHeight = hdc->GetTextExtent(EXTENT_TEST, &d, &e).y;
+    const int ascent = textHeight - d;
     SetAscent(font, ascent);
     return ascent;
 }
 
+// FIXME: Wasteful.
 XYPOSITION SurfaceImpl::Descent(Font &font) {
     SetFont(font);
-    int w, h, d, e;
-    hdc->GetTextExtent(EXTENT_TEST, &w, &h, &d, &e);
+    int d, e;
+    auto textSize = hdc->GetTextExtent(EXTENT_TEST, &d, &e);
     return d;
 }
 
@@ -685,10 +686,11 @@ XYPOSITION SurfaceImpl::InternalLeading(Font &WXUNUSED(font)) {
     return 0;
 }
 
+// FIXME: Wasteful
 XYPOSITION SurfaceImpl::ExternalLeading(Font &font) {
     SetFont(font);
-    int w, h, d, e;
-    hdc->GetTextExtent(EXTENT_TEST, &w, &h, &d, &e);
+    int d, e;
+    std::ignore = hdc->GetTextExtent(EXTENT_TEST, &d, &e);
     return e;
 }
 

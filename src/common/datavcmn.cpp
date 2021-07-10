@@ -1031,9 +1031,7 @@ wxSize wxDataViewCustomRendererBase::GetTextExtent(const wxString& str) const
     if ( m_attr.HasFont() )
     {
         wxFont font(m_attr.GetEffectiveFont(view->GetFont()));
-        wxSize size;
-        view->GetTextExtent(str, &size.x, &size.y, nullptr, nullptr, &font);
-        return size;
+        return view->GetTextExtent(str, nullptr, nullptr, &font);
     }
     else
     {

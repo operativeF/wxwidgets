@@ -7136,24 +7136,22 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
             continue;
         }
 
-        wxCoord lineWidth = 0,
-             lineHeight = 0;
-        dc.GetTextExtent(line, &lineWidth, &lineHeight);
+        auto lineSize = dc.GetTextExtent(line);
 
         switch ( horizAlign )
         {
             case wxALIGN_RIGHT:
                 if ( textOrientation == wxHORIZONTAL )
-                    x = rect.x + (rect.width - lineWidth - GRID_TEXT_MARGIN);
+                    x = rect.x + (rect.width - lineSize.x - GRID_TEXT_MARGIN);
                 else
-                    y = rect.y + lineWidth + GRID_TEXT_MARGIN;
+                    y = rect.y + lineSize.x + GRID_TEXT_MARGIN;
                 break;
 
             case wxALIGN_CENTRE:
                 if ( textOrientation == wxHORIZONTAL )
-                    x = rect.x + ((rect.width - lineWidth) / 2);
+                    x = rect.x + ((rect.width - lineSize.x) / 2);
                 else
-                    y = rect.y + rect.height - ((rect.height - lineWidth) / 2);
+                    y = rect.y + rect.height - ((rect.height - lineSize.x) / 2);
                 break;
 
             case wxALIGN_LEFT:
@@ -7168,12 +7166,12 @@ void wxGrid::DrawTextRectangle(wxDC& dc,
         if ( textOrientation == wxHORIZONTAL )
         {
             dc.DrawText( line, x, y );
-            y += lineHeight;
+            y += lineSize.y;
         }
         else
         {
             dc.DrawRotatedText( line, x, y, 90.0 );
-            x += lineHeight;
+            x += lineSize.y;
         }
     }
 }
@@ -7242,10 +7240,8 @@ void wxGrid::GetTextBoxSize( const wxDC& dc,
 {
     wxCoord w = 0;
     wxCoord h = 0;
-    wxCoord lineW = 0, lineH = 0;
 
-    size_t i;
-    for ( i = 0; i < lines.size(); i++ )
+    for (size_t i = 0; i < lines.size(); i++ )
     {
         if ( lines[i].empty() )
         {
@@ -7255,9 +7251,9 @@ void wxGrid::GetTextBoxSize( const wxDC& dc,
         }
         else
         {
-            dc.GetTextExtent( lines[i], &lineW, &lineH );
-            w = wxMax( w, lineW );
-            h += lineH;
+            auto lineSize = dc.GetTextExtent( lines[i] );
+            w = wxMax( w, lineSize.x );
+            h += lineSize.y;
         }
     }
 
@@ -7525,8 +7521,7 @@ bool wxGrid::DoShowCellEditControl(const wxGridActivationSource& actSource)
     wxString value = GetCellValue(row, col);
     if ( !value.empty() && attr->GetOverflow() )
     {
-        int y;
-        GetTextExtent(value, &maxWidth, &y, nullptr, nullptr, &attr->GetFont());
+        maxWidth = GetTextExtent(value, nullptr, nullptr, &attr->GetFont()).x;
         if (maxWidth < rect.width)
             maxWidth = rect.width;
     }
