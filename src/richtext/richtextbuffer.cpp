@@ -9291,7 +9291,7 @@ bool wxRichTextStdRenderer::MeasureBullet(wxRichTextParagraph* paragraph, wxDC& 
     }
     else if (attr.HasBulletText())
     {
-        wxCoord w, h, maxDescent;
+        wxCoord maxDescent;
         wxString text(attr.GetBulletText());
         if (attr.HasTextEffects() && (attr.GetTextEffects() & (wxTEXT_ATTR_EFFECT_CAPITALS|wxTEXT_ATTR_EFFECT_SMALL_CAPITALS)))
             text.MakeUpper();

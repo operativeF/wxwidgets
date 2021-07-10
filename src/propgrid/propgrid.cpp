@@ -1250,8 +1250,6 @@ void wxPropertyGrid::SetScrollbars(int pixelsPerUnitX, int pixelsPerUnitY,
 
 void wxPropertyGrid::CalculateFontAndBitmapStuff( int vspacing )
 {
-    int x = 0, y = 0;
-
     m_captionFont = wxControl::GetFont();
 
     auto captionSize = GetTextExtent(wxS("jG"), nullptr, nullptr, &m_captionFont);
