@@ -193,31 +193,22 @@ bool wxRichTextTabsPage::TransferDataToWindow()
     return true;
 }
 
-static int wxTabSortFunc(int* a, int* b)
-{
-    if ((*a) < (*b))
-        return -1;
-    else if ((*b) < (*a))
-        return 1;
-    else
-        return 0;
-}
-
 /// Sorts the tab array
+// FIXME: Add a test.
 void wxRichTextTabsPage::SortTabs()
 {
     std::vector<int> tabs;
-    size_t i;
-    for (i = 0; i < m_tabListCtrl->GetCount(); i++)
+
+    for (size_t i = 0; i < m_tabListCtrl->GetCount(); i++)
     {
         tabs.push_back(wxAtoi(m_tabListCtrl->GetString(i)));
     }
 
-    // FIXME: Doesn't work at the moment.
-    //std::sort(tabs.begin(), tabs.end(), &wxTabSortFunc);
+    std::sort(tabs.begin(), tabs.end());
 
     m_tabListCtrl->Clear();
-    for (i = 0; i < tabs.size(); i++)
+
+    for (size_t i = 0; i < tabs.size(); i++)
     {
         wxString s(wxString::Format(wxT("%d"), tabs[i]));
         m_tabListCtrl->Append(s);
