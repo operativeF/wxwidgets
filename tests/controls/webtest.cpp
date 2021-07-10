@@ -34,9 +34,9 @@ class WebViewTestCase
 {
 public:
     WebViewTestCase()
-        : m_browser(wxWebView::New()),
-          m_loaded(std::make_unique<EventCounter>(m_browser, wxEVT_WEBVIEW_LOADED))
     {
+        m_browser = wxWebView::New();
+        m_loaded = std::make_unique<EventCounter>(m_browser, wxEVT_WEBVIEW_LOADED);
     }
 
     ~WebViewTestCase()
@@ -59,8 +59,8 @@ protected:
         }
     }
 
-    wxWebView* const m_browser;
-    const std::unique_ptr<EventCounter> m_loaded;
+    wxWebView* m_browser;
+    std::unique_ptr<EventCounter> m_loaded;
 };
 
 TEST_CASE_FIXTURE(WebViewTestCase, "WebView")
