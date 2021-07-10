@@ -123,7 +123,7 @@ class WXDLLIMPEXP_CORE wxArtProvider
 {
 public:
     // Dtor removes the provider from providers stack if it's still on it
-    ~wxArtProvider();
+    virtual ~wxArtProvider();
 
     // Does this platform implement native icons theme?
     static bool HasNativeProvider();
