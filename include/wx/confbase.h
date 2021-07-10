@@ -228,32 +228,32 @@ public:
   // convenience functions returning directly the value
   wxString Read(const wxString& key,
                 const wxString& defVal = wxEmptyString) const
-    { wxString s; (void)Read(key, &s, defVal); return s; }
+    { wxString s; Read(key, &s, defVal); return s; }
 
   // we have to provide a separate version for C strings as otherwise the
   // template Read() would be used
 #ifndef wxNO_IMPLICIT_WXSTRING_ENCODING
-  wxString Read(const wxString& key, const char* defVal) const
+  [[maybe_unused]] wxString Read(const wxString& key, const char* defVal) const
     { return Read(key, wxString(defVal)); }
 #endif
-  wxString Read(const wxString& key, const wchar_t* defVal) const
+  [[maybe_unused]] wxString Read(const wxString& key, const wchar_t* defVal) const
     { return Read(key, wxString(defVal)); }
 
   long ReadLong(const wxString& key, long defVal) const
-    { long l; (void)Read(key, &l, defVal); return l; }
+    { long l; Read(key, &l, defVal); return l; }
 
   wxLongLong_t ReadLongLong(const wxString& key, wxLongLong_t defVal) const
-    { wxLongLong_t ll; (void)Read(key, &ll, defVal); return ll; }
+    { wxLongLong_t ll; Read(key, &ll, defVal); return ll; }
 
   double ReadDouble(const wxString& key, double defVal) const
-    { double d; (void)Read(key, &d, defVal); return d; }
+    { double d; Read(key, &d, defVal); return d; }
 
   bool ReadBool(const wxString& key, bool defVal) const
-    { bool b; (void)Read(key, &b, defVal); return b; }
+    { bool b; Read(key, &b, defVal); return b; }
 
   template <typename T>
   T ReadObject(const wxString& key, T const& defVal) const
-    { T t; (void)Read(key, &t, defVal); return t; }
+    { T t; Read(key, &t, defVal); return t; }
 
   // for compatibility with wx 2.8
   long Read(const wxString& key, long defVal) const

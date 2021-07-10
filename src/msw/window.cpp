@@ -1288,7 +1288,7 @@ void wxWindowMSW::SubclassWin(WXHWND hWnd)
 
     // we're officially created now, send the event
     wxWindowCreateEvent event((wxWindow *)this);
-    (void)HandleWindowEvent(event);
+    HandleWindowEvent(event);
 }
 
 void wxWindowMSW::UnsubclassWin()
@@ -1696,7 +1696,7 @@ void wxWindowMSW::Update()
 
     // just calling UpdateWindow() is not enough, what we did in our WM_PAINT
     // handler needs to be really drawn right now
-    (void)::GdiFlush();
+    ::GdiFlush();
 }
 
 // ---------------------------------------------------------------------------
@@ -4263,7 +4263,7 @@ bool wxWindowMSW::HandleSetFocus(WXHWND hwnd)
     // notify the parent keeping track of focus for the kbd navigation
     // purposes that we got it
     wxChildFocusEvent eventFocus((wxWindow *)this);
-    (void)HandleWindowEvent(eventFocus);
+    HandleWindowEvent(eventFocus);
 
 #if wxUSE_CARET
     // Deal with caret
@@ -4921,7 +4921,7 @@ bool wxWindowMSW::HandleSysColorChange()
     wxSysColourChangedEvent event;
     event.SetEventObject(this);
 
-    (void)HandleWindowEvent(event);
+    HandleWindowEvent(event);
 
     // always let the system carry on the default processing to allow the
     // native controls to react to the colours update
@@ -5925,7 +5925,7 @@ bool wxWindowMSW::HandleMouseMove(int x, int y, WXUINT flags)
             wxMouseEvent event(wxEVT_ENTER_WINDOW);
             InitMouseEvent(event, x, y, flags);
 
-            (void)HandleWindowEvent(event);
+            HandleWindowEvent(event);
         }
     }
 #ifdef HAVE_TRACKMOUSEEVENT
@@ -6054,7 +6054,7 @@ void wxWindowMSW::GenerateMouseLeave()
     wxMouseEvent event(wxEVT_LEAVE_WINDOW);
     InitMouseEvent(event, pt.x, pt.y, state);
 
-    (void)HandleWindowEvent(event);
+    HandleWindowEvent(event);
 }
 
 #ifdef WM_GESTURE
@@ -7643,7 +7643,7 @@ static TEXTMETRIC wxGetTextMetrics(const wxWindowMSW *win)
     // and clean up
     if ( hfont )
     {
-        (void)::SelectObject(hdc, hfont);
+        ::SelectObject(hdc, hfont);
     }
 #endif
 

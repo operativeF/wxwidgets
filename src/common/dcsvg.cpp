@@ -824,7 +824,7 @@ void wxSVGFileDCImpl::DoDrawPolyPolygon(int n, const int count[], const wxPoint 
     for (j = 0; j < n; ++j)
         totalPts += count[j];
 
-    auto pts = std::make_unique<wxPoint[]>(totalPts + n);
+    std::vector<wxPoint> pts(totalPts + n);
 
     int polyCounter = 0, polyIndex = 0;
     for (i = j = 0; i < totalPts; ++i)
@@ -841,12 +841,12 @@ void wxSVGFileDCImpl::DoDrawPolyPolygon(int n, const int count[], const wxPoint 
 
     {
         wxDCPenChanger setTransp(*GetOwner(), *wxTRANSPARENT_PEN);
-        DoDrawPolygon(j, pts.get(), xoffset, yoffset, fillStyle);
+        DoDrawPolygon(j, pts.data(), xoffset, yoffset, fillStyle);
     }
 
     for (i = j = 0; i < n; i++)
     {
-        DoDrawLines(count[i] + 1, pts.get() + j, xoffset, yoffset);
+        DoDrawLines(count[i] + 1, pts.data() + j, xoffset, yoffset);
         j += count[i] + 1;
     }
 }

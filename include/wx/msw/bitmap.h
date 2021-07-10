@@ -67,8 +67,8 @@ public:
     //
     // NB: this ctor will create a DIB for 24 and 32bpp bitmaps, use ctor
     //     taking a DC argument if you want to force using DDB in this case
-    wxBitmap(int width, int height, int depth = -1) { (void)Create(width, height, depth); }
-    wxBitmap(const wxSize& sz, int depth = -1) { (void)Create(sz, depth); }
+    wxBitmap(int width, int height, int depth = -1) { Create(width, height, depth); }
+    wxBitmap(const wxSize& sz, int depth = -1) { Create(sz, depth); }
 
     // Create a bitmap compatible with the given DC
     wxBitmap(int width, int height, const wxDC& dc);
@@ -76,11 +76,11 @@ public:
 #if wxUSE_IMAGE
     // Convert from wxImage
     wxBitmap(const wxImage& image, int depth = -1, double WXUNUSED(scale) = 1.0)
-        { (void)CreateFromImage(image, depth); }
+        { CreateFromImage(image, depth); }
 
     // Create a DDB compatible with the given DC from wxImage
     wxBitmap(const wxImage& image, const wxDC& dc)
-        { (void)CreateFromImage(image, dc); }
+        { CreateFromImage(image, dc); }
 #endif // wxUSE_IMAGE
 
     // we must have this, otherwise icons are silently copied into bitmaps using
@@ -94,7 +94,7 @@ public:
     // Convert from wxCursor
     explicit wxBitmap(const wxCursor& cursor)
     {
-        (void)CopyFromCursor(cursor, wxBitmapTransparency::Auto);
+        CopyFromCursor(cursor, wxBitmapTransparency::Auto);
     }
 
 #if wxUSE_IMAGE
@@ -106,7 +106,7 @@ public:
 
     wxBitmap& operator=(const wxIcon& icon)
     {
-        (void)CopyFromIcon(icon);
+        CopyFromIcon(icon);
 
         return *this;
     }
@@ -126,11 +126,11 @@ public:
     wxBitmap GetSubBitmapOfHDC( const wxRect& rect, WXHDC hdc ) const;
 
     // copies the contents and mask of the given (colour) icon to the bitmap
-    bool CopyFromIcon(const wxIcon& icon,
+    [[maybe_unused]] bool CopyFromIcon(const wxIcon& icon,
                       wxBitmapTransparency transp = wxBitmapTransparency::Auto);
 
     // copies the contents and mask of the given cursor to the bitmap
-    bool CopyFromCursor(const wxCursor& cursor,
+    [[maybe_unused]] bool CopyFromCursor(const wxCursor& cursor,
                         wxBitmapTransparency transp = wxBitmapTransparency::Auto);
 
 #if wxUSE_WXDIB
@@ -140,12 +140,12 @@ public:
     bool ConvertToDIB();
 #endif
 
-    virtual bool Create(int width, int height, int depth = wxBITMAP_SCREEN_DEPTH);
-    virtual bool Create(const wxSize& sz, int depth = wxBITMAP_SCREEN_DEPTH)
+    virtual [[maybe_unused]] bool Create(int width, int height, int depth = wxBITMAP_SCREEN_DEPTH);
+    virtual [[maybe_unused]] bool Create(const wxSize& sz, int depth = wxBITMAP_SCREEN_DEPTH)
         { return Create(sz.x, sz.y, depth); }
 
-    virtual bool Create(int width, int height, const wxDC& dc);
-    virtual bool Create(const void* data, wxBitmapType type, int width, int height, int depth = 1);
+    virtual [[maybe_unused]] bool Create(int width, int height, const wxDC& dc);
+    virtual [[maybe_unused]] bool Create(const void* data, wxBitmapType type, int width, int height, int depth = 1);
     virtual bool CreateScaled(int w, int h, int d, double logicalScale)
         { return Create(wxRound(w*logicalScale), wxRound(h*logicalScale), d); }
 
@@ -207,13 +207,13 @@ protected:
 
 #if wxUSE_IMAGE
     // creates the bitmap from wxImage, supposed to be called from ctor
-    bool CreateFromImage(const wxImage& image, int depth);
+    [[maybe_unused]] bool CreateFromImage(const wxImage& image, int depth);
 
     // creates a DDB from wxImage, supposed to be called from ctor
-    bool CreateFromImage(const wxImage& image, const wxDC& dc);
+    [[maybe_unused]] bool CreateFromImage(const wxImage& image, const wxDC& dc);
 
     // common part of the 2 methods above (hdc may be 0)
-    bool CreateFromImage(const wxImage& image, int depth, WXHDC hdc);
+    [[maybe_unused]] bool CreateFromImage(const wxImage& image, int depth, WXHDC hdc);
 #endif // wxUSE_IMAGE
 
 private:

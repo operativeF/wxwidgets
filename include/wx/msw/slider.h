@@ -29,7 +29,7 @@ public:
              const wxValidator& validator = wxDefaultValidator,
              const wxString& name = wxASCII_STR(wxSliderNameStr))
     {
-        (void)Create(parent, id, value, minValue, maxValue,
+        Create(parent, id, value, minValue, maxValue,
                      pos, size, style, validator, name);
     }
 
@@ -38,7 +38,7 @@ public:
     wxSlider(wxSlider&&) = default;
     wxSlider& operator=(wxSlider&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 int value,
                 int minValue, int maxValue,

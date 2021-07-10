@@ -21,14 +21,14 @@ public:
     wxPopupWindow() { m_owner = nullptr; }
 
     wxPopupWindow(wxWindow *parent, int flags = wxBORDER_NONE)
-        { (void)Create(parent, flags); }
+        { Create(parent, flags); }
 
     wxPopupWindow(const wxPopupWindow&) = delete;
     wxPopupWindow& operator=(const wxPopupWindow&) = delete;
     wxPopupWindow(wxPopupWindow&&) = default;
     wxPopupWindow& operator=(wxPopupWindow&&) = default;
 
-    bool Create(wxWindow *parent, int flags = wxBORDER_NONE);
+    [[maybe_unused]] bool Create(wxWindow *parent, int flags = wxBORDER_NONE);
 
     ~wxPopupWindow() override;
 

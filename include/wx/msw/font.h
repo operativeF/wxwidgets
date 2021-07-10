@@ -66,7 +66,7 @@ public:
            const wxString& face = wxEmptyString,
            wxFontEncoding encoding = wxFONTENCODING_DEFAULT)
     {
-        (void)Create(pixelSize, family, style, weight,
+        Create(pixelSize, family, style, weight,
                      underlined, face, encoding);
     }
 
@@ -78,7 +78,7 @@ public:
     wxFont(const wxString& fontDesc);
 
 
-    bool Create(const wxSize& pixelSize,
+    [[maybe_unused]] bool Create(const wxSize& pixelSize,
                 wxFontFamily family,
                 wxFontStyle style,
                 wxFontWeight weight,

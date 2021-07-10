@@ -255,11 +255,11 @@ public:
         
 
 
-        (void)Create(parent, id, value, pos, size, n,
+        Create(parent, id, value, pos, size, n,
                      choices, style, validator, name);
     }
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& value = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,

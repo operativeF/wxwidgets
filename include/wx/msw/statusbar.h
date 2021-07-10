@@ -28,10 +28,10 @@ public:
                 long style = wxSTB_DEFAULT_STYLE,
                 const wxString& name = wxASCII_STR(wxStatusBarNameStr))
     {
-        (void)Create(parent, id, style, name);
+        Create(parent, id, style, name);
     }
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 long style = wxSTB_DEFAULT_STYLE,
                 const wxString& name = wxASCII_STR(wxStatusBarNameStr));

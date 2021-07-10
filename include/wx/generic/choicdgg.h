@@ -43,7 +43,7 @@ public:
                       const wxPoint& pos = wxDefaultPosition,
                       long styleLbox = wxLB_ALWAYS_SB)
     {
-        (void)Create(parent, message, caption, choices,
+        Create(parent, message, caption, choices,
                      styleDlg, pos, styleLbox);
     }
 
@@ -136,10 +136,10 @@ public:
                         long style = wxCHOICEDLG_STYLE,
                         const wxPoint& pos = wxDefaultPosition)
     {
-        (void)Create(parent, message, caption, choices, style, pos);
+        Create(parent, message, caption, choices, style, pos);
     }
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 const wxString& message,
                 const wxString& caption,
                 const std::vector<wxString>& choices,

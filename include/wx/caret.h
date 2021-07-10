@@ -44,12 +44,12 @@ public:
         // with the given window
     wxCaretBase(wxWindowBase *window, int width, int height)
     {
-        (void)Create(window, width, height);
+        Create(window, width, height);
     }
         // same as above
     wxCaretBase(wxWindowBase *window, const wxSize& size)
     {
-        (void)Create(window, size);
+        Create(window, size);
     }
 
     wxCaretBase(const wxCaretBase&) = delete;
@@ -64,10 +64,10 @@ public:
     // --------------------------------------------------------------
 
         // same as ctor
-    bool Create(wxWindowBase *window, int width, int height)
+    [[maybe_unused]] bool Create(wxWindowBase *window, int width, int height)
         { return DoCreate(window, width, height); }
         // same as ctor
-    bool Create(wxWindowBase *window, const wxSize& size)
+    [[maybe_unused]] bool Create(wxWindowBase *window, const wxSize& size)
         { return DoCreate(window, size.x, size.y); }
 
         // is the caret valid?

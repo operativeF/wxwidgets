@@ -579,7 +579,7 @@ public:
                       const wxString& name = wxASCII_STR(wxPanelNameStr))
     : wxVarVScrollLegacyAdaptor(this)
     {
-        (void)Create(parent, id, pos, size, style, name);
+        Create(parent, id, pos, size, style, name);
     }
 
    wxVScrolledWindow(const wxVScrolledWindow&) = delete;
@@ -591,7 +591,7 @@ public:
     //
     // just as with the ctor above, wxVSCROLL style is always used, there is no
     // need to specify it
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
@@ -650,7 +650,7 @@ public:
                       const wxString& name = wxASCII_STR(wxPanelNameStr))
         : wxVarHScrollHelper(this)
     {
-        (void)Create(parent, id, pos, size, style, name);
+        Create(parent, id, pos, size, style, name);
     }
 
    wxHScrolledWindow(const wxHScrolledWindow&) = delete;
@@ -662,7 +662,7 @@ public:
     //
     // just as with the ctor above, wxHSCROLL style is always used, there is no
     // need to specify it
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
@@ -718,7 +718,7 @@ public:
         : 
           wxVarHVScrollHelper(this)
     {
-        (void)Create(parent, id, pos, size, style, name);
+        Create(parent, id, pos, size, style, name);
     }
 
    wxHVScrolledWindow(const wxHVScrolledWindow&) = delete;

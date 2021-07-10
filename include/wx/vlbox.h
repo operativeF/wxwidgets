@@ -44,7 +44,7 @@ public:
                long style = 0,
                const wxString& name = wxASCII_STR(wxVListBoxNameStr))
     {
-        (void)Create(parent, id, pos, size, style, name);
+        Create(parent, id, pos, size, style, name);
     }
 
    wxVListBox(const wxVListBox&) = delete;
@@ -58,7 +58,7 @@ public:
     // the only special style which may be specified here is wxLB_MULTIPLE
     //
     // returns true on success or false if the control couldn't be created
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,

@@ -134,10 +134,10 @@ public:
     // change current mode, return true if succeeded, false otherwise
     //
     // for the default value of the argument restores the video mode to default
-    bool ChangeMode(const wxVideoMode& mode = wxDefaultVideoMode);
+    [[maybe_unused]] bool ChangeMode(const wxVideoMode& mode = wxDefaultVideoMode);
 
     // restore the default video mode (just a more readable synonym)
-    void ResetMode() { (void)ChangeMode(); }
+    void ResetMode() { ChangeMode(); }
 #endif // wxUSE_DISPLAY
 
     // If the implementation caches any information about the displays, calling

@@ -332,7 +332,7 @@ public:
     // the rest are not virtual
     bool HandleCreate(WXLPCREATESTRUCT cs, bool *mayCreate);
     bool HandleInitDialog(WXHWND hWndFocus);
-    bool HandleDestroy();
+    [[maybe_unused]] bool HandleDestroy();
 
     bool HandlePaint();
     bool HandlePrintClient(WXHDC hDC);

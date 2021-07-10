@@ -274,7 +274,7 @@ public:
 
         // return the last access, last modification and create times
         // (any of the pointers may be NULL)
-    bool GetTimes(wxDateTime *dtAccess,
+    [[maybe_unused]] bool GetTimes(wxDateTime *dtAccess,
                   wxDateTime *dtMod,
                   wxDateTime *dtCreate) const;
 
@@ -282,7 +282,7 @@ public:
     wxDateTime GetModificationTime() const
     {
         wxDateTime dtMod;
-        (void)GetTimes(nullptr, &dtMod, nullptr);
+        GetTimes(nullptr, &dtMod, nullptr);
         return dtMod;
     }
 #endif // wxUSE_DATETIME

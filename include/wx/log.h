@@ -354,7 +354,7 @@ public:
     }
 
     // change the flag state, return the previous one
-    static bool EnableLogging(bool enable = true)
+    [[maybe_unused]] static bool EnableLogging(bool enable = true)
     {
 #if wxUSE_THREADS
         if ( !wxThread::IsMain() )
@@ -723,7 +723,7 @@ class WXDLLIMPEXP_BASE wxLogNull
 {
 public:
     wxLogNull() : m_flagOld(wxLog::EnableLogging(false)) { }
-    ~wxLogNull() { (void)wxLog::EnableLogging(m_flagOld); }
+    ~wxLogNull() { wxLog::EnableLogging(m_flagOld); }
 
 private:
     bool m_flagOld; // the previous value of the wxLog::ms_doLog

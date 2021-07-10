@@ -69,7 +69,7 @@ public:
                    long style = 0,
                    const wxString& name = wxEmptyString)
     {
-        (void)Create(parent, winid, pos, size, style, name);
+        Create(parent, winid, pos, size, style, name);
     }
 
     wxBookCtrlBase(const wxBookCtrlBase&) = delete;
@@ -78,7 +78,7 @@ public:
     wxBookCtrlBase& operator=(wxBookCtrlBase&&) = default;
 
     // quasi ctor
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID winid,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,

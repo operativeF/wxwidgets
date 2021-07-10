@@ -202,7 +202,7 @@ public:
         ::new(place) T(value);
     }
 
-    static const T& GetValue(const wxAnyValueBuffer& buf)
+    [[maybe_unused]] static const T& GetValue(const wxAnyValueBuffer& buf)
     {
         // Use a union to avoid undefined behaviour (and gcc -Wstrict-alias
         // warnings about it) which would occur if we just casted a wxByte

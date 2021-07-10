@@ -19,12 +19,12 @@ public:
         // with the given window
     wxCaret(wxWindow *window, int width, int height)
     {
-        (void)Create(window, width, height);
+        Create(window, width, height);
     }
         // same as above
     wxCaret(wxWindowBase *window, const wxSize& size)
     {
-        (void)Create(window, size);
+        Create(window, size);
     }
 
    wxCaret(const wxCaret&) = delete;

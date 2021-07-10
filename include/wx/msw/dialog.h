@@ -27,7 +27,7 @@ public:
              long style = wxDEFAULT_DIALOG_STYLE,
              const wxString& name = wxASCII_STR(wxDialogNameStr))
     {
-        (void)Create(parent, id, title, pos, size, style, name);
+        Create(parent, id, title, pos, size, style, name);
     }
 
     ~wxDialog() override;
@@ -37,7 +37,7 @@ public:
    wxDialog(wxDialog&&) = default;
    wxDialog& operator=(wxDialog&&) = default;
 
-    bool Create(wxWindow *parent, wxWindowID id,
+    [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const wxString& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,

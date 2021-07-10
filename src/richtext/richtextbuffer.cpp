@@ -5341,7 +5341,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
             // FIXME: Wasteful.
             if (maxDescent == 0)
             {
-                std::ignore = dc.GetTextExtent(wxT("X"), & maxDescent);
+                (void)dc.GetTextExtent(wxT("X"), & maxDescent);
             }
 
             // Add a new line
@@ -5456,7 +5456,7 @@ bool wxRichTextParagraph::Layout(wxDC& dc, wxRichTextDrawingContext& context, co
         // FIXME: Wasteful.
         if (maxDescent == 0)
         {
-            std::ignore = dc.GetTextExtent(wxT("X"), & maxDescent);
+            (void)dc.GetTextExtent(wxT("X"), & maxDescent);
         }
 
         line->SetSize(wxSize(currentWidth, lineHeight));
@@ -7347,7 +7347,7 @@ bool wxRichTextPlainText::GetRangeSize(const wxRichTextRange& range, wxSize& siz
 
     // FIXME: Wasteful
     if (!haveDescent)
-        std::ignore = dc.GetTextExtent(wxT("X"), & descent);
+        (void)dc.GetTextExtent(wxT("X"), & descent);
 
     if ( bScript )
         dc.SetFont(font);

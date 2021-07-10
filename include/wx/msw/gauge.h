@@ -28,7 +28,7 @@ public:
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxGaugeNameStr))
     {
-        (void)Create(parent, id, range, pos, size, style, validator, name);
+        Create(parent, id, range, pos, size, style, validator, name);
     }
 
     ~wxGauge() override;
@@ -38,7 +38,7 @@ public:
     wxGauge(wxGauge&&) = default;
     wxGauge& operator=(wxGauge&&) = default;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 int range,
                 const wxPoint& pos = wxDefaultPosition,

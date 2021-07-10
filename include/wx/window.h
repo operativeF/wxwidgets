@@ -851,7 +851,7 @@ public:
         // when processing wx events when called from C code (e.g. in GTK+
         // callback) when the exception wouldn't correctly propagate to
         // wxEventLoop.
-    bool HandleWindowEvent(wxEvent& event) const;
+    [[maybe_unused]] bool HandleWindowEvent(wxEvent& event) const;
 
         // disable wxEvtHandler double-linked list mechanism:
     void SetNextHandler(wxEvtHandler *handler) override;

@@ -30,10 +30,10 @@ public:
                         long style = wxDEFAULT_FRAME_STYLE,
                         const wxString& name = wxASCII_STR(wxFrameNameStr))
     {
-        (void)Create(parent, id, title, pos, size, style, name);
+        Create(parent, id, title, pos, size, style, name);
     }
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& title,
                 const wxPoint& pos = wxDefaultPosition,

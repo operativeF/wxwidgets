@@ -1601,8 +1601,8 @@ ID2D1Geometry* wxD2DPathData::GetFullGeometry(D2D1_FILL_MODE fillMode) const
     // as well as pointer to the current geometry in the auxiliary array.
     const size_t numGeometries = m_pTransformedGeometries.size();
 
-    auto pGeometries = std::make_unique<ID2D1Geometry*[]>(numGeometries + 1);
-
+    std::vector<ID2D1Geometry*> pGeometries(numGeometries + 1);
+    
     for( size_t i = 0; i < numGeometries; i++ )
         pGeometries[i] = m_pTransformedGeometries[i];
 
@@ -1611,7 +1611,7 @@ ID2D1Geometry* wxD2DPathData::GetFullGeometry(D2D1_FILL_MODE fillMode) const
     // And use this array as a source to create geometry group.
     m_combinedGeometry.reset();
     HRESULT hr = m_direct2dfactory->CreateGeometryGroup(fillMode,
-                                  pGeometries.get(), numGeometries+1, &m_combinedGeometry);
+                                  pGeometries.data(), numGeometries + 1, &m_combinedGeometry);
     wxFAILED_HRESULT_MSG(hr);
 
     return m_combinedGeometry;

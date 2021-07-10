@@ -975,7 +975,7 @@ void wxMSWDCImpl::DoDrawPolygon(int n,
             CalcBoundingBox(cpoints[i].x, cpoints[i].y);
         }
         int prev = SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
-        (void)Polygon(GetHdc(), cpoints.get(), n);
+        Polygon(GetHdc(), cpoints.get(), n);
         SetPolyFillMode(GetHdc(),prev);
     }
     else
@@ -1017,7 +1017,7 @@ wxMSWDCImpl::DoDrawPolyPolygon(int n,
         }
 
         int prev = SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
-        (void)PolyPolygon(GetHdc(), cpoints.get(), count, n);
+        PolyPolygon(GetHdc(), cpoints.get(), count, n);
         SetPolyFillMode(GetHdc(),prev);
     }
     else
@@ -1046,7 +1046,7 @@ void wxMSWDCImpl::DoDrawLines(int n, const wxPoint points[], wxCoord xoffset, wx
             CalcBoundingBox(cpoints[i].x, cpoints[i].y);
         }
 
-        (void)Polyline(GetHdc(), cpoints.get(), n);
+        Polyline(GetHdc(), cpoints.get(), n);
     }
     else
     {
@@ -1084,7 +1084,7 @@ void wxMSWDCImpl::DoDrawRectangle(wxCoord x, wxCoord y, wxCoord width, wxCoord h
         y2dev++;
     }
 
-    (void)Rectangle(GetHdc(), x1dev, y1dev, x2dev, y2dev);
+    Rectangle(GetHdc(), x1dev, y1dev, x2dev, y2dev);
 
     CalcBoundingBox(x, y);
     CalcBoundingBox(x2, y2);
@@ -1115,7 +1115,7 @@ void wxMSWDCImpl::DoDrawRoundedRectangle(wxCoord x, wxCoord y, wxCoord width, wx
         y2++;
     }
 
-    (void)RoundRect(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), XLOG2DEV(x2),
+    RoundRect(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), XLOG2DEV(x2),
         YLOG2DEV(y2), (int) (2*XLOG2DEV(radius)), (int)( 2*YLOG2DEV(radius)));
 
     CalcBoundingBox(x, y);
@@ -1257,18 +1257,18 @@ void wxMSWDCImpl::DoDrawEllipticArc(wxCoord x,wxCoord y,wxCoord w,wxCoord h,doub
     HPEN hpenOld = (HPEN) ::SelectObject(GetHdc(), (HPEN) ::GetStockObject(NULL_PEN));
     if (m_signY > 0)
     {
-        (void)Pie(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), XLOG2DEV(x2)+1, YLOG2DEV(y2)+1,
+        Pie(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), XLOG2DEV(x2)+1, YLOG2DEV(y2)+1,
                   rx1, ry1, rx2, ry2);
     }
     else
     {
-        (void)Pie(GetHdc(), XLOG2DEV(x), YLOG2DEV(y)-1, XLOG2DEV(x2)+1, YLOG2DEV(y2),
+        Pie(GetHdc(), XLOG2DEV(x), YLOG2DEV(y)-1, XLOG2DEV(x2)+1, YLOG2DEV(y2),
                   rx1, ry1-1, rx2, ry2-1);
     }
 
     ::SelectObject(GetHdc(), hpenOld);
 
-    (void)Arc(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), XLOG2DEV(x2), YLOG2DEV(y2),
+    Arc(GetHdc(), XLOG2DEV(x), YLOG2DEV(y), XLOG2DEV(x2), YLOG2DEV(y2),
               rx1, ry1, rx2, ry2);
 
     CalcBoundingBox(x, y);
@@ -1783,7 +1783,7 @@ void wxMSWDCImpl::SetBackground(const wxBrush& brush)
 
     if ( m_backgroundBrush.IsOk() )
     {
-        (void)SetBkColor(GetHdc(), m_backgroundBrush.GetColour().GetPixel());
+        SetBkColor(GetHdc(), m_backgroundBrush.GetColour().GetPixel());
     }
 }
 

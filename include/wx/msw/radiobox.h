@@ -35,7 +35,7 @@ public:
                const wxValidator& val = wxDefaultValidator,
                const wxString& name = wxASCII_STR(wxRadioBoxNameStr))
     {
-        (void)Create(parent, id, title, pos, size, choices, majorDim,
+        Create(parent, id, title, pos, size, choices, majorDim,
                      style, val, name);
     }
 
@@ -44,7 +44,7 @@ public:
     wxRadioBox(const wxRadioBox&) = delete;
 	wxRadioBox& operator=(const wxRadioBox&) = delete;
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& title,
                 const wxPoint& pos,

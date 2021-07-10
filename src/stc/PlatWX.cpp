@@ -690,7 +690,7 @@ XYPOSITION SurfaceImpl::InternalLeading(Font &WXUNUSED(font)) {
 XYPOSITION SurfaceImpl::ExternalLeading(Font &font) {
     SetFont(font);
     int d, e;
-    std::ignore = hdc->GetTextExtent(EXTENT_TEST, &d, &e);
+    (void)hdc->GetTextExtent(EXTENT_TEST, &d, &e);
     return e;
 }
 

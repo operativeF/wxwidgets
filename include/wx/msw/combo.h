@@ -46,10 +46,10 @@ public:
                    const wxString& name = wxASCII_STR(wxComboCtrlNameStr))
          
     {
-        (void)Create(parent, id, value, pos, size, style, validator, name);
+        Create(parent, id, value, pos, size, style, validator, name);
     }
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 const wxString& value = wxEmptyString,
                 const wxPoint& pos = wxDefaultPosition,
