@@ -1335,6 +1335,9 @@ TEST_CASE("wxTextCtrl::LongPaste")
 
     wxTheClipboard->AddData(new wxTextDataObject(s));
 
+    wxUIActionSimulator sim;
+    sim.MouseMove(wxDefaultPosition);
+
     wxYield();
 
     text->ChangeValue("THE BEGINNING\n");
