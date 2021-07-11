@@ -154,7 +154,7 @@ wxDEFINE_TIED_SCOPED_PTR_TYPE(wxEventLoopBase)
 
 wxAppConsoleBase::wxAppConsoleBase()
 {
-    ms_appInstance = reinterpret_cast<wxAppConsole *>(this);
+    ms_appInstance = dynamic_cast<wxAppConsole *>(this);
 
 #ifdef __WXDEBUG__
     SetTraceMasks();

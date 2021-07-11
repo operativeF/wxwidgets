@@ -98,7 +98,7 @@ protected:
     {
         wxCOMPILE_TIME_ASSERT( wxIsStaticTrackable<TDerived>::value,
                                 Tracked_class_should_inherit_from_wxTrackable );
-        wxTrackable *ptbase = static_cast<wxTrackable*>(pobj);
+        wxTrackable *ptbase = pobj;
         DoAssign(pobj, ptbase);
     }
 
