@@ -742,7 +742,7 @@ bool wxFrame::HandleSize(int WXUNUSED(x), int WXUNUSED(y), WXUINT id)
             // restore all child frames too
             IconizeChildFrames(false);
 
-            (void)SendIconizeEvent(false);
+            SendIconizeEvent(false);
             break;
 
         case SIZE_MINIMIZED:

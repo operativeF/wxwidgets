@@ -500,7 +500,7 @@ int wxBookCtrlBase::DoSetSelection(size_t n, int flags)
             {
                 // program allows the page change
                 MakeChangedEvent(*event);
-                (void)GetEventHandler()->ProcessEvent(*event);
+                GetEventHandler()->ProcessEvent(*event);
             }
         }
         else

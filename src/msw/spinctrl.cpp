@@ -335,7 +335,7 @@ bool wxSpinCtrl::Create(wxWindow *parent,
     m_wndProcBuddy = wxSetWindowProc(GetBuddyHwnd(), wxBuddyTextWndProc);
 
     // associate the text window with the spin button
-    (void)::SendMessage(GetHwnd(), UDM_SETBUDDY, (WPARAM)m_hwndBuddy, 0);
+    ::SendMessage(GetHwnd(), UDM_SETBUDDY, (WPARAM)m_hwndBuddy, 0);
 
     // set up fonts and colours  (This is nomally done in MSWCreateControl)
     InheritAttributes();
@@ -372,7 +372,7 @@ bool wxSpinCtrl::Create(wxWindow *parent,
 
     SetInitialSize(size);
 
-    (void)::ShowWindow(GetBuddyHwnd(), SW_SHOW);
+    ::ShowWindow(GetBuddyHwnd(), SW_SHOW);
 
     return true;
 }
@@ -647,7 +647,7 @@ bool wxSpinCtrl::Reparent(wxWindowBase *newParent)
 
     // associate it with the buddy control again
     ::SetParent(GetBuddyHwnd(), GetHwndOf(GetParent()));
-    (void)::SendMessage(GetHwnd(), UDM_SETBUDDY, (WPARAM)GetBuddyHwnd(), 0);
+    ::SendMessage(GetHwnd(), UDM_SETBUDDY, (WPARAM)GetBuddyHwnd(), 0);
 
     // also set the size again with wxSIZE_ALLOW_MINUS_ONE flag: this is
     // necessary if our original position used -1 for either x or y
@@ -689,7 +689,7 @@ void wxSpinCtrl::SendSpinUpdate(int value)
     wxSpinEvent event(wxEVT_SPINCTRL, GetId());
     event.SetEventObject(this);
     event.SetInt(value);
-    (void)HandleWindowEvent(event);
+    HandleWindowEvent(event);
 }
 
 bool wxSpinCtrl::MSWOnScroll(int WXUNUSED(orientation), WXWORD wParam,

@@ -713,12 +713,12 @@ wxBitmap::wxBitmap(const char bits[], int width, int height, int depth)
 
 wxBitmap::wxBitmap(int w, int h, const wxDC& dc)
 {
-    (void)Create(w, h, dc);
+    Create(w, h, dc);
 }
 
 wxBitmap::wxBitmap(const void* data, wxBitmapType type, int width, int height, int depth)
 {
-    (void)Create(data, type, width, height, depth);
+    Create(data, type, width, height, depth);
 }
 
 wxBitmap::wxBitmap(const wxString& filename, wxBitmapType type)

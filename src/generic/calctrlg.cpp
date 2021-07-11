@@ -135,7 +135,7 @@ wxGenericCalendarCtrl::wxGenericCalendarCtrl(wxWindow *parent,
     InitColours();
 
 
-    (void)Create(parent, id, date, pos, size, style, name);
+    Create(parent, id, date, pos, size, style, name);
 }
 
 
@@ -1362,7 +1362,7 @@ void wxGenericCalendarCtrl::OnClick(wxMouseEvent& event)
                 wxCalendarEvent eventWd(this, GetDate(),
                                         wxEVT_CALENDAR_WEEKDAY_CLICKED);
                 eventWd.SetWeekDay(wday);
-                (void)GetEventHandler()->ProcessEvent(eventWd);
+                GetEventHandler()->ProcessEvent(eventWd);
             }
             break;
 

@@ -46,7 +46,7 @@ public:
                long style = wxBK_DEFAULT,
                const wxString& name = wxEmptyString)
     {
-        (void)Create(parent, id, pos, size, style, name);
+        Create(parent, id, pos, size, style, name);
     }
 
 wxTreebook(const wxTreebook&) = delete;

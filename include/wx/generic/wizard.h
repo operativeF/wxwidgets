@@ -68,7 +68,7 @@ public:
     // show the prev/next page, but call TransferDataFromWindow on the current
     // page first and return false without changing the page if
     // TransferDataFromWindow() returns false - otherwise, returns true
-    virtual bool ShowPage(wxWizardPage *page, bool goingForward = true);
+    [[maybe_unused]] virtual bool ShowPage(wxWizardPage *page, bool goingForward = true);
 
     // do fill the dialog with controls
     // this is app-overridable to, for example, set help and tooltip text

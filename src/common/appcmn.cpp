@@ -359,7 +359,7 @@ void wxAppBase::SetActive(bool active, wxWindow * WXUNUSED(lastFocus))
     wxActivateEvent event(wxEVT_ACTIVATE_APP, active);
     event.SetEventObject(this);
 
-    (void)ProcessEvent(event);
+    ProcessEvent(event);
 }
 
 bool wxAppBase::SafeYield(wxWindow *win, bool onlyIfNeeded)

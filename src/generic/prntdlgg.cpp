@@ -1024,6 +1024,7 @@ wxComboBox *wxGenericPageSetupDialog::CreatePaperTypeChoice(int *x, int *y)
         choices[i] = paper->GetName();
     }
 
+    // FIXME: This isn't good.
     (void) new wxStaticText(this, wxPRINTID_STATIC, _("Paper size"), wxPoint(*x, *y));
     *y += 25;
 

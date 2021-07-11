@@ -45,10 +45,10 @@ public:
     m_popup = nullptr;
 
 
-        (void)Create(parent, id, date, pos, size, style, validator, name);
+        Create(parent, id, date, pos, size, style, validator, name);
     }
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxDateTime& date = wxDefaultDateTime,
                 const wxPoint& pos = wxDefaultPosition,

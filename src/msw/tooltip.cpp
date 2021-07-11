@@ -237,7 +237,7 @@ LRESULT APIENTRY wxToolTipWndProc(HWND hwndTT,
 void wxToolTip::Enable(bool flag)
 {
     // Make sure the tooltip has been created
-    (void) GetToolTipCtrl();
+    GetToolTipCtrl();
 
     SendTooltipMessageToAll(ms_hwndTT, TTM_ACTIVATE, flag, 0);
 }
@@ -245,7 +245,7 @@ void wxToolTip::Enable(bool flag)
 void wxToolTip::SetDelay(long milliseconds)
 {
     // Make sure the tooltip has been created
-    (void) GetToolTipCtrl();
+    GetToolTipCtrl();
 
     SendTooltipMessageToAll(ms_hwndTT, TTM_SETDELAYTIME,
                             TTDT_INITIAL, milliseconds);
@@ -359,7 +359,7 @@ void wxToolTip::UpdateVisibility()
 /* static */
 void wxToolTip::RelayEvent(WXMSG *msg)
 {
-    (void)SendTooltipMessage(GetToolTipCtrl(), TTM_RELAYEVENT, msg);
+    SendTooltipMessage(GetToolTipCtrl(), TTM_RELAYEVENT, msg);
 }
 
 // ----------------------------------------------------------------------------
@@ -398,7 +398,7 @@ void wxToolTip::Remove(WXHWND hWnd, unsigned int id, const wxRect& rc)
 {
     wxToolInfo ti((HWND)hWnd, id, rc);
 
-    (void)SendTooltipMessage(GetToolTipCtrl(), TTM_DELTOOL, &ti);
+    SendTooltipMessage(GetToolTipCtrl(), TTM_DELTOOL, &ti);
 }
 
 void wxToolTip::DoRemove(WXHWND hWnd)
@@ -511,7 +511,7 @@ void wxToolTip::SetRect(const wxRect& rc)
     if ( m_window )
     {
         wxToolInfo ti(GetHwndOf(m_window), m_id, m_rect);
-        (void)SendTooltipMessage(GetToolTipCtrl(), TTM_NEWTOOLRECT, &ti);
+        SendTooltipMessage(GetToolTipCtrl(), TTM_NEWTOOLRECT, &ti);
     }
 }
 
@@ -539,11 +539,12 @@ void wxToolTip::DoSetTip(WXHWND hWnd)
     // for some reason, changing the tooltip text directly results in
     // repaint of the controls under it, see #10520 -- but this doesn't
     // happen if we reset it first
+    // FIXME: Not sure about the necessity of const_cast here.
     ti.lpszText = const_cast<wxChar *>(wxT(""));
-    (void)SendTooltipMessage(GetToolTipCtrl(), TTM_UPDATETIPTEXT, &ti);
+    SendTooltipMessage(GetToolTipCtrl(), TTM_UPDATETIPTEXT, &ti);
 
     ti.lpszText = wxMSW_CONV_LPTSTR(m_text);
-    (void)SendTooltipMessage(GetToolTipCtrl(), TTM_UPDATETIPTEXT, &ti);
+    SendTooltipMessage(GetToolTipCtrl(), TTM_UPDATETIPTEXT, &ti);
 }
 
 bool wxToolTip::AdjustMaxWidth()

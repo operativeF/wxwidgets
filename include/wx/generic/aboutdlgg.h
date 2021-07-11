@@ -48,11 +48,11 @@ public:
     {
          m_sizerText = nullptr; 
 
-        (void)Create(info, parent);
+        Create(info, parent);
     }
 
     // this method must be called if and only if the default ctor was used
-    bool Create(const wxAboutDialogInfo& info, wxWindow* parent = nullptr);
+    [[maybe_unused]] bool Create(const wxAboutDialogInfo& info, wxWindow* parent = nullptr);
 
 protected:
     // this virtual method may be overridden to add some more controls to the

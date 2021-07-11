@@ -2958,7 +2958,7 @@ wxWindowMSW::MSWHandleMessage(WXLRESULT *result,
             // DefWindowProc() as Windows may do some internal cleanup when
             // processing it and failing to pass the message along may cause
             // memory and resource leaks!
-            (void)HandleDestroy();
+            HandleDestroy();
             break;
 
         case WM_SIZE:

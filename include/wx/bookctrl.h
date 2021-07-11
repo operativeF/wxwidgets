@@ -300,7 +300,7 @@ protected:
     // It also needs to update the current selection if necessary, i.e. if the
     // page being removed comes before the selected one and the helper method
     // DoSetSelectionAfterRemoval() can be used for this.
-    virtual wxWindow *DoRemovePage(size_t page) = 0;
+    [[maybe_unused]] virtual wxWindow *DoRemovePage(size_t page) = 0;
 
     // our best size is the size which fits all our pages
     wxSize DoGetBestSize() const override;

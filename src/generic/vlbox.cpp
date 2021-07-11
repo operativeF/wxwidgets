@@ -260,7 +260,7 @@ void wxVListBox::SendSelectedEvent()
 
     wxCommandEvent event(wxEVT_LISTBOX, GetId());
     InitEvent(event, m_current);
-    (void)GetEventHandler()->ProcessEvent(event);
+    GetEventHandler()->ProcessEvent(event);
 }
 
 void wxVListBox::SetSelection(int selection)
@@ -700,7 +700,7 @@ void wxVListBox::OnLeftDClick(wxMouseEvent& eventMouse)
         {
             wxCommandEvent event(wxEVT_LISTBOX_DCLICK, GetId());
             InitEvent(event, item);
-            (void)GetEventHandler()->ProcessEvent(event);
+            GetEventHandler()->ProcessEvent(event);
         }
         else
         {

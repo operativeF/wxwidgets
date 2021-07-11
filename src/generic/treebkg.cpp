@@ -185,8 +185,9 @@ bool wxTreebook::DoInsertPage(size_t pagePos,
 
     if ( !newId.IsOk() )
     {
+        // FIXME: Don't do it like this.
         //something wrong -> cleaning and returning with false
-        (void)wxBookCtrlBase::DoRemovePage(pagePos);
+        wxBookCtrlBase::DoRemovePage(pagePos);
 
         wxFAIL_MSG( wxT("Failed to insert treebook page") );
         return false;

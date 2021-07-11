@@ -695,7 +695,7 @@ void wxToolBarBase::OnMouseEnter(int toolid)
         frame->DoGiveHelp(help, toolid != wxID_ANY);
     }
 
-    (void)GetEventHandler()->ProcessEvent(event);
+    GetEventHandler()->ProcessEvent(event);
 }
 
 // ----------------------------------------------------------------------------

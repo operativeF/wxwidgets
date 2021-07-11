@@ -53,7 +53,7 @@ public:
                           long style = wxCAL_SHOW_HOLIDAYS,
                           const wxString& name = wxASCII_STR(wxCalendarNameStr));
 
-    bool Create(wxWindow *parent,
+    [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxDateTime& date = wxDefaultDateTime,
                 const wxPoint& pos = wxDefaultPosition,

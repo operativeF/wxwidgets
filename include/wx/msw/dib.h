@@ -46,7 +46,7 @@ public:
     m_width =
     m_height =
     m_depth = 0;
- (void)Create(width, height, depth); }
+ Create(width, height, depth); }
 
 #ifdef __WXMSW__
     // create a DIB from the DDB
@@ -60,7 +60,7 @@ public:
     m_width =
     m_height =
     m_depth = 0;
- (void)Create(bmp, depth); }
+ Create(bmp, depth); }
 #endif // __WXMSW__
 
     // create a DIB from the Windows DDB
@@ -74,7 +74,7 @@ public:
     m_width =
     m_height =
     m_depth = 0;
- (void)Create(hbmp); }
+ Create(hbmp); }
 
     // load a DIB from file (any depth is supoprted here unlike above)
     //
@@ -198,7 +198,7 @@ public:
     m_height =
     m_depth = 0;
 
-        (void)Create(image, pf, depth);
+        Create(image, pf, depth);
     }
 
     // DIBs can't be copied

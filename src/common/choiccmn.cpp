@@ -120,7 +120,7 @@ wxSize wxChoiceBase::DoGetBestSize() const
 void wxChoiceBase::Command(wxCommandEvent& event)
 {
     SetSelection(event.GetInt());
-    (void)GetEventHandler()->ProcessEvent(event);
+    GetEventHandler()->ProcessEvent(event);
 }
 
 #endif // wxUSE_CHOICE

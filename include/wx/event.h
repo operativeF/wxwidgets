@@ -3720,7 +3720,7 @@ public:
     // Process an event right now: this can only be called from the main
     // thread, use QueueEvent() for scheduling the events for
     // processing from other threads.
-    virtual bool ProcessEvent(wxEvent& event);
+    [[maybe_unused]] virtual bool ProcessEvent(wxEvent& event);
 
     // Process an event by calling ProcessEvent and handling any exceptions
     // thrown by event handlers. It's mostly useful when processing wx events

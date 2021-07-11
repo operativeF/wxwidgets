@@ -96,7 +96,7 @@ private:
     static WXHWND ms_hwndTT;
 
     // create the tooltip ctrl if it doesn't exist yet and return its HWND
-    static WXHWND GetToolTipCtrl();
+    [[maybe_unused]] static WXHWND GetToolTipCtrl();
 
     // to be used in wxModule for deleting tooltip ctrl window when exiting mainloop
     static void DeleteToolTipCtrl();

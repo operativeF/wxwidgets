@@ -86,7 +86,7 @@ bool wxControlBase::CreateControl(wxWindowBase *parent,
 
 void wxControlBase::Command(wxCommandEvent& event)
 {
-    (void)GetEventHandler()->ProcessEvent(event);
+    GetEventHandler()->ProcessEvent(event);
 }
 
 void wxControlBase::InitCommandEvent(wxCommandEvent& event) const

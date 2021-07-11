@@ -232,7 +232,7 @@ protected:
 
     // send the given event, return false if the event was processed and vetoed
     // by the user code
-    bool DoSendEvent(wxSplitterEvent& event);
+    [[maybe_unused]] bool DoSendEvent(wxSplitterEvent& event);
 
     // common part of all ctors
     void Init();

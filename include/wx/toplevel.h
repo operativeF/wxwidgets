@@ -325,7 +325,7 @@ protected:
     bool IsLastBeforeExit() const;
 
     // send the iconize event, return true if processed
-    bool SendIconizeEvent(bool iconized = true);
+    [[maybe_unused]] bool SendIconizeEvent(bool iconized = true);
 
     static int WidthDefault(int w) { return w == wxDefaultCoord ? GetDefaultSize().x : w; }
     static int HeightDefault(int h) { return h == wxDefaultCoord ? GetDefaultSize().y : h; }

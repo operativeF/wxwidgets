@@ -294,7 +294,8 @@ protected:
 
     // update the event to include the items client data and pass it to
     // HandleWindowEvent(), return true if it processed it
-    bool HandleTreeEvent(wxTreeEvent& event) const;
+    // FIXME: Probably shouldn't return anything.
+    [[maybe_unused]] bool HandleTreeEvent(wxTreeEvent& event) const;
 
     // pass the event to HandleTreeEvent() and return true if the event was
     // either unprocessed or not vetoed

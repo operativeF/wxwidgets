@@ -1106,6 +1106,7 @@ void wxDocManager::DoOpenMRUFile(unsigned n)
         // have any useful information to put in the error message anyhow, so
         // we assume that in case of an error the appropriate message had been
         // already logged.
+        // FIXME: This interface could use work.
         (void)CreateDocument(filename, wxDOC_SILENT);
     }
     else // file doesn't exist

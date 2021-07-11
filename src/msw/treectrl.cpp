@@ -337,11 +337,11 @@ static bool SetFocus(HWND hwndTV, HTREEITEM htItem)
             // prevent the tree from unselecting the old focus which it
             // would do by default (TreeView_SelectItem unselects the
             // focused item)
-            (void)TreeView_SelectItem(hwndTV, 0);
+            TreeView_SelectItem(hwndTV, 0);
             SelectItem(hwndTV, htFocus);
         }
 
-        (void)TreeView_SelectItem(hwndTV, htItem);
+        TreeView_SelectItem(hwndTV, htItem);
 
         if ( !wasSelected )
         {
@@ -356,7 +356,7 @@ static bool SetFocus(HWND hwndTV, HTREEITEM htItem)
         bool wasFocusSelected = IsItemSelected(hwndTV, htFocus);
 
         // just clear the focus
-        (void)TreeView_SelectItem(hwndTV, 0);
+        TreeView_SelectItem(hwndTV, 0);
 
         if ( wasFocusSelected )
         {
@@ -871,13 +871,13 @@ unsigned int wxTreeCtrl::GetIndent() const
 
 void wxTreeCtrl::SetIndent(unsigned int indent)
 {
-    (void)TreeView_SetIndent(GetHwnd(), indent);
+    TreeView_SetIndent(GetHwnd(), indent);
 }
 
 void wxTreeCtrl::SetAnyImageList(wxImageList *imageList, int which)
 {
     // no error return
-    (void) TreeView_SetImageList(GetHwnd(),
+     TreeView_SetImageList(GetHwnd(),
                                  imageList ? imageList->GetHIMAGELIST() : nullptr,
                                  which);
 }
@@ -1744,7 +1744,7 @@ void wxTreeCtrl::DoExpand(const wxTreeItemId& item, int flag)
             return;
 
         wxTreeEvent event(wxEVT_TREE_ITEM_COLLAPSED, this, item);
-        (void)HandleTreeEvent(event);
+        HandleTreeEvent(event);
     }
     //else: change didn't took place, so do nothing at all
 }
@@ -1795,7 +1795,7 @@ void wxTreeCtrl::Unselect()
             wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                      this, wxTreeItemId());
             changedEvent.m_itemOld = htFocus;
-            (void)HandleTreeEvent(changedEvent);
+            HandleTreeEvent(changedEvent);
         }
     }
     else
@@ -1833,7 +1833,7 @@ void wxTreeCtrl::UnselectAll()
 
             wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED, this);
             changedEvent.m_itemOld = htFocus;
-            (void)HandleTreeEvent(changedEvent);
+            HandleTreeEvent(changedEvent);
         }
     }
     else
@@ -1871,7 +1871,7 @@ void wxTreeCtrl::SelectChildren(const wxTreeItemId& parent)
 
         wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED, this);
         changedEvent.m_itemOld = htFocus;
-        (void)HandleTreeEvent(changedEvent);
+        HandleTreeEvent(changedEvent);
     }
 }
 
@@ -1908,7 +1908,7 @@ void wxTreeCtrl::SelectItem(const wxTreeItemId& item, bool select)
 
             wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                      this, item);
-            (void)HandleTreeEvent(changedEvent);
+            HandleTreeEvent(changedEvent);
         }
     }
     else // single selection
@@ -1948,7 +1948,7 @@ void wxTreeCtrl::SelectItem(const wxTreeItemId& item, bool select)
                 wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                          this, itemNew);
                 changedEvent.SetOldItem(itemOld);
-                (void)HandleTreeEvent(changedEvent);
+                HandleTreeEvent(changedEvent);
             }
         }
         //else: program vetoed the change
@@ -1970,7 +1970,7 @@ void wxTreeCtrl::EnsureVisible(const wxTreeItemId& item)
     }
 
     // no error return
-    (void)TreeView_EnsureVisible(GetHwnd(), HITEM(item));
+    TreeView_EnsureVisible(GetHwnd(), HITEM(item));
 }
 
 void wxTreeCtrl::ScrollTo(const wxTreeItemId& item)
@@ -2044,7 +2044,7 @@ wxTreeItemId wxTreeCtrl::DoTreeHitTest(const wxPoint& point, int& flags) const
     hitTestInfo.pt.x = (int)point.x;
     hitTestInfo.pt.y = (int)point.y;
 
-    (void) TreeView_HitTest(GetHwnd(), &hitTestInfo);
+     TreeView_HitTest(GetHwnd(), &hitTestInfo);
 
     flags = 0;
 
@@ -2278,7 +2278,7 @@ bool wxTreeCtrl::MSWHandleSelectionKey(unsigned vkey)
                     wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                              this, htSel);
                     changedEvent.m_itemOld = htSel;
-                    (void)HandleTreeEvent(changedEvent);
+                    HandleTreeEvent(changedEvent);
                 }
             }
             else
@@ -2300,7 +2300,7 @@ bool wxTreeCtrl::MSWHandleSelectionKey(unsigned vkey)
                         wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                                  this, htSel);
                         changedEvent.m_itemOld = htSel;
-                        (void)HandleTreeEvent(changedEvent);
+                        HandleTreeEvent(changedEvent);
                     }
                 }
             }
@@ -2345,7 +2345,7 @@ bool wxTreeCtrl::MSWHandleSelectionKey(unsigned vkey)
                     wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                              this, next);
                     changedEvent.m_itemOld = htSel;
-                    (void)HandleTreeEvent(changedEvent);
+                    HandleTreeEvent(changedEvent);
                 }
             }
             else if ( htSel )
@@ -2377,7 +2377,7 @@ bool wxTreeCtrl::MSWHandleSelectionKey(unsigned vkey)
 
                         wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED, this, next);
                         changedEvent.m_itemOld = htSel;
-                        (void)HandleTreeEvent(changedEvent);
+                        HandleTreeEvent(changedEvent);
                     }
                 }
 
@@ -2409,7 +2409,7 @@ bool wxTreeCtrl::MSWHandleSelectionKey(unsigned vkey)
                         wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                                  this, next);
                         changedEvent.m_itemOld = htSel;
-                        (void)HandleTreeEvent(changedEvent);
+                        HandleTreeEvent(changedEvent);
                     }
                 }
             }
@@ -2443,7 +2443,7 @@ bool wxTreeCtrl::MSWHandleSelectionKey(unsigned vkey)
 
                     wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED, this, next);
                     changedEvent.m_itemOld = htSel;
-                    (void)HandleTreeEvent(changedEvent);
+                    HandleTreeEvent(changedEvent);
                 }
             }
             break;
@@ -2503,7 +2503,7 @@ bool wxTreeCtrl::MSWHandleSelectionKey(unsigned vkey)
                             wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                                      this, next);
                             changedEvent.m_itemOld = htSel;
-                            (void)HandleTreeEvent(changedEvent);
+                            HandleTreeEvent(changedEvent);
                         }
                     }
                 }
@@ -2522,7 +2522,7 @@ bool wxTreeCtrl::MSWHandleSelectionKey(unsigned vkey)
                         wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                                  this, next);
                         changedEvent.m_itemOld = htSel;
-                        (void)HandleTreeEvent(changedEvent);
+                        HandleTreeEvent(changedEvent);
                     }
                 }
             }
@@ -2625,7 +2625,7 @@ bool wxTreeCtrl::MSWHandleSelectionKey(unsigned vkey)
                     wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                              this, next);
                     changedEvent.m_itemOld = htSel;
-                    (void)HandleTreeEvent(changedEvent);
+                    HandleTreeEvent(changedEvent);
                 }
             }
             break;
@@ -2653,7 +2653,7 @@ bool wxTreeCtrl::MSWHandleTreeKeyDownEvent(WXWPARAM wParam, WXLPARAM lParam)
         {
             wxTreeEvent activatedEvent(wxEVT_TREE_ITEM_ACTIVATED,
                                        this, htSel);
-            (void)HandleTreeEvent(activatedEvent);
+            HandleTreeEvent(activatedEvent);
         }
     }
 
@@ -2804,7 +2804,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                         wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                                  this, htItem);
                         changedEvent.m_itemOld = htOldItem;
-                        (void)HandleTreeEvent(changedEvent);
+                        HandleTreeEvent(changedEvent);
                     }
                 }
                 else if ( wParam & MK_SHIFT )
@@ -2859,7 +2859,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                             wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                                      this, htItem);
                             changedEvent.m_itemOld = htOldItem;
-                            (void)HandleTreeEvent(changedEvent);
+                            HandleTreeEvent(changedEvent);
                         }
                     }
                 }
@@ -2900,7 +2900,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                                 wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                                          this, htItem);
                                 changedEvent.m_itemOld = htOldItem;
-                                (void)HandleTreeEvent(changedEvent);
+                                HandleTreeEvent(changedEvent);
                             }
                         }
                         else
@@ -2979,7 +2979,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                         wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                                  this, htItem);
                         changedEvent.m_itemOld = htOldItem;
-                        (void)HandleTreeEvent(changedEvent);
+                        HandleTreeEvent(changedEvent);
                     }
                 }
 
@@ -3073,7 +3073,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                                 wxTreeEvent changedEvent(wxEVT_TREE_SEL_CHANGED,
                                                          this, htItem);
                                 changedEvent.m_itemOld = htOldItem;
-                                (void)HandleTreeEvent(changedEvent);
+                                HandleTreeEvent(changedEvent);
                             }
                         }
                     }
@@ -3086,7 +3086,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                         {
                             wxTreeEvent event(wxEVT_TREE_STATE_IMAGE_CLICK,
                                               this, htItem);
-                            (void)HandleTreeEvent(event);
+                            HandleTreeEvent(event);
 
                             m_triggerStateImageClick = false;
                             processed = true;
@@ -3111,7 +3111,7 @@ wxTreeCtrl::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lParam)
                     wxTreeEvent event(wxEVT_TREE_END_DRAG,
                                       this, htItem);
                     event.m_pointDrag = wxPoint(x, y);
-                    (void)HandleTreeEvent(event);
+                    HandleTreeEvent(event);
 
                     // if we don't do it, the tree seems to think that 2 items
                     // are selected simultaneously which is quite weird

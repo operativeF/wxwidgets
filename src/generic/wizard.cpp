@@ -574,7 +574,7 @@ bool wxWizard::ShowPage(wxWizardPage *page, bool goingForward)
         // and notify the user code (this is especially useful for modeless
         // wizards)
         wxWizardEvent event(wxEVT_WIZARD_FINISHED, GetId(), false, m_page);
-        (void)GetEventHandler()->ProcessEvent(event);
+        GetEventHandler()->ProcessEvent(event);
 
         m_page = nullptr;
 
@@ -633,7 +633,7 @@ bool wxWizard::ShowPage(wxWizardPage *page, bool goingForward)
 
     // send the change event to the new page now
     wxWizardEvent event(wxEVT_WIZARD_PAGE_CHANGED, GetId(), goingForward, m_page);
-    (void)m_page->GetEventHandler()->ProcessEvent(event);
+    m_page->GetEventHandler()->ProcessEvent(event);
 
     // and finally show it
     m_page->Show();
@@ -691,7 +691,7 @@ bool wxWizard::RunWizard(wxWizardPage *firstPage)
     m_firstpage = firstPage;
 
     // can't return false here because there is no old page
-    (void)ShowPage(firstPage, true /* forward */);
+    ShowPage(firstPage, true /* forward */);
 
     m_wasModal = true;
 
@@ -797,7 +797,7 @@ void wxWizard::OnBackOrNext(wxCommandEvent& event)
 
     // Give the application a chance to set state which may influence GetNext()/GetPrev()
     wxWizardEvent eventPreChanged(wxEVT_WIZARD_BEFORE_PAGE_CHANGED, GetId(), forward, m_page);
-    (void)m_page->GetEventHandler()->ProcessEvent(eventPreChanged);
+    m_page->GetEventHandler()->ProcessEvent(eventPreChanged);
 
     if (!eventPreChanged.IsAllowed())
         return;
@@ -828,7 +828,7 @@ void wxWizard::OnHelp(wxCommandEvent& WXUNUSED(event))
         // event data contains the active page so that context-sensitive
         // help is possible
         wxWizardEvent eventHelp(wxEVT_WIZARD_HELP, GetId(), true, m_page);
-        (void)m_page->GetEventHandler()->ProcessEvent(eventHelp);
+        m_page->GetEventHandler()->ProcessEvent(eventHelp);
     }
 }
 

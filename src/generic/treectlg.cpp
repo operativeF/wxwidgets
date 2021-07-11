@@ -438,7 +438,7 @@ wxTreeTextCtrl::wxTreeTextCtrl(wxGenericTreeCtrl *owner,
     rect.height += 4;
 #endif // platforms
 
-    (void)Create(m_owner, wxID_ANY, m_startValue,
+    Create(m_owner, wxID_ANY, m_startValue,
                  rect.GetPosition(), rect.GetSize());
 
     SelectAll();
@@ -3745,7 +3745,7 @@ void wxGenericTreeCtrl::OnMouse( wxMouseEvent &event )
 
         eventEndDrag.m_pointDrag = CalcScrolledPosition(pt);
 
-        (void)GetEventHandler()->ProcessEvent(eventEndDrag);
+        GetEventHandler()->ProcessEvent(eventEndDrag);
 
         m_isDragging = false;
         m_dropTarget = nullptr;

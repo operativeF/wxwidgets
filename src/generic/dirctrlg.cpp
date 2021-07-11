@@ -221,7 +221,7 @@ bool wxIsDriveAvailable(const wxString& dirName)
 #endif
     }
 #ifdef __WIN32__
-    (void) SetErrorMode(errorMode);
+    SetErrorMode(errorMode);
 #endif
 
     return success;

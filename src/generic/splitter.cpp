@@ -311,7 +311,7 @@ void wxSplitterWindow::OnMouseEvent(wxMouseEvent& event)
                 OnUnsplit(removedWindow);
                 wxSplitterEvent eventUnsplit(wxEVT_SPLITTER_UNSPLIT, this);
                 eventUnsplit.m_data.win = removedWindow;
-                (void)DoSendEvent(eventUnsplit);
+                DoSendEvent(eventUnsplit);
                 SetSashPositionAndNotify(0);
             }
             else if ( posSashNew == GetWindowSize() )
@@ -322,7 +322,7 @@ void wxSplitterWindow::OnMouseEvent(wxMouseEvent& event)
                 OnUnsplit(removedWindow);
                 wxSplitterEvent eventUnsplit(wxEVT_SPLITTER_UNSPLIT, this);
                 eventUnsplit.m_data.win = removedWindow;
-                (void)DoSendEvent(eventUnsplit);
+                DoSendEvent(eventUnsplit);
                 SetSashPositionAndNotify(0);
             }
             else
@@ -670,7 +670,7 @@ void wxSplitterWindow::SetSashPositionAndNotify(int sashPos)
     wxSplitterEvent event(wxEVT_SPLITTER_SASH_POS_CHANGED, this);
     event.m_data.pos = m_sashPosition;
 
-    (void)DoSendEvent(event);
+    DoSendEvent(event);
 }
 
 // Position and size subwindows.
@@ -1038,7 +1038,7 @@ void wxSplitterWindow::OnDoubleClickSash(int x, int y)
             {
                 wxSplitterEvent unsplitEvent(wxEVT_SPLITTER_UNSPLIT, this);
                 unsplitEvent.m_data.win = win;
-                (void)DoSendEvent(unsplitEvent);
+                DoSendEvent(unsplitEvent);
             }
         }
     }

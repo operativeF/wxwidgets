@@ -808,7 +808,7 @@ wxFont::wxFont(const wxString& fontdesc)
 {
     wxNativeFontInfo info;
     if ( info.FromString(fontdesc) )
-        (void)Create(info);
+        Create(info);
 }
 
 wxFont::wxFont(const wxFontInfo& info)
