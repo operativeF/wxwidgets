@@ -335,7 +335,7 @@ namespace std
 
 template <>
 inline
-void swap<wxUniCharRef>(wxUniCharRef& lhs, wxUniCharRef& rhs)
+void swap<wxUniCharRef>(wxUniCharRef& lhs, wxUniCharRef& rhs) noexcept
 {
     if ( &lhs != &rhs )
     {
