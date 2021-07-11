@@ -965,7 +965,7 @@ void wxMSWDCImpl::DoDrawPolygon(int n,
     // Do things less efficiently if we have offsets
     if (xoffset != 0 || yoffset != 0)
     {
-        auto cpoints = std::make_unique<POINT[]>(n);
+        std::vector<POINT> cpoints(n);
 
         for (int i = 0; i < n; i++)
         {
@@ -975,7 +975,7 @@ void wxMSWDCImpl::DoDrawPolygon(int n,
             CalcBoundingBox(cpoints[i].x, cpoints[i].y);
         }
         int prev = SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
-        Polygon(GetHdc(), cpoints.get(), n);
+        Polygon(GetHdc(), cpoints.data(), n);
         SetPolyFillMode(GetHdc(),prev);
     }
     else
@@ -1006,7 +1006,7 @@ wxMSWDCImpl::DoDrawPolyPolygon(int n,
     // Do things less efficiently if we have offsets
     if (xoffset != 0 || yoffset != 0)
     {
-        auto cpoints = std::make_unique<POINT[]>(cnt);
+        std::vector<POINT> cpoints(cnt);
 
         for (int i = 0; i < cnt; i++)
         {
@@ -1017,7 +1017,7 @@ wxMSWDCImpl::DoDrawPolyPolygon(int n,
         }
 
         int prev = SetPolyFillMode(GetHdc(),fillStyle==wxODDEVEN_RULE?ALTERNATE:WINDING);
-        PolyPolygon(GetHdc(), cpoints.get(), count, n);
+        PolyPolygon(GetHdc(), cpoints.data(), count, n);
         SetPolyFillMode(GetHdc(),prev);
     }
     else
@@ -1036,7 +1036,7 @@ void wxMSWDCImpl::DoDrawLines(int n, const wxPoint points[], wxCoord xoffset, wx
     // Do things less efficiently if we have offsets
     if (xoffset != 0 || yoffset != 0)
     {
-        auto cpoints = std::make_unique<POINT[]>(n);
+        std::vector<POINT> cpoints(n);
 
         for (int i = 0; i < n; i++)
         {
@@ -1046,7 +1046,7 @@ void wxMSWDCImpl::DoDrawLines(int n, const wxPoint points[], wxCoord xoffset, wx
             CalcBoundingBox(cpoints[i].x, cpoints[i].y);
         }
 
-        Polyline(GetHdc(), cpoints.get(), n);
+        Polyline(GetHdc(), cpoints.data(), n);
     }
     else
     {
@@ -1163,7 +1163,9 @@ void wxMSWDCImpl::DoDrawSpline(const wxPointList *points)
     wxASSERT_MSG( n_points > 2 , wxT("incomplete list of spline points?") );
 
     const size_t n_bezier_points = n_points * 3 + 1;
-    auto lppt = std::make_unique<POINT[]>(n_bezier_points);
+
+    std::vector<POINT> lppt(n_bezier_points);
+
     size_t bezier_pos = 0;
     wxCoord x1, y1, x2, y2, cx1, cy1;
 
@@ -1227,7 +1229,7 @@ void wxMSWDCImpl::DoDrawSpline(const wxPointList *points)
     lppt[ bezier_pos ] = lppt[ bezier_pos-1 ];
     bezier_pos++;
 
-    ::PolyBezier( GetHdc(), lppt.get(), bezier_pos );
+    ::PolyBezier( GetHdc(), lppt.data(), bezier_pos );
 }
 #endif // wxUSE_SPLINES
 

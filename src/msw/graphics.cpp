@@ -904,13 +904,13 @@ wxGDIPlusPenData::wxGDIPlusPenData( wxGraphicsRenderer* renderer,
             int count = info.GetDashes( &dashes );
             if ((dashes != nullptr) && (count > 0))
             {
-                REAL *userLengths = new REAL[count];
+                std::vector<REAL> userLengths(count);
+
                 for ( int i = 0; i < count; ++i )
                 {
                     userLengths[i] = dashes[i];
                 }
-                m_pen->SetDashPattern( userLengths, count);
-                delete[] userLengths;
+                m_pen->SetDashPattern( userLengths.data(), count);
             }
         }
         break;
@@ -1992,15 +1992,17 @@ void wxGDIPlusContext::StrokeLines( size_t n, const wxPoint2DDouble *points)
    if ( !m_pen.IsNull() )
    {
         wxGDIPlusOffsetHelper helper(m_context, GetContentScaleFactor(), ShouldOffset());
-       PointF *cpoints = new PointF[n];
-       for (size_t i = 0; i < n; i++)
-       {
-           cpoints[i].X = static_cast<REAL>(points[i].m_x);
-           cpoints[i].Y = static_cast<REAL>(points[i].m_y);
 
-       } // for (size_t i = 0; i < n; i++)
-       m_context->DrawLines( ((wxGDIPlusPenData*)m_pen.GetGraphicsData())->GetGDIPlusPen() , cpoints , n ) ;
-       delete[] cpoints;
+        std::vector<PointF> cpoints(n);
+
+        for (size_t i = 0; i < n; i++)
+        {
+            cpoints[i].X = static_cast<REAL>(points[i].m_x);
+            cpoints[i].Y = static_cast<REAL>(points[i].m_y);
+        
+        }
+
+        m_context->DrawLines(((wxGDIPlusPenData*)m_pen.GetGraphicsData())->GetGDIPlusPen(), cpoints.data(), n) ;
    }
 }
 
@@ -2010,7 +2012,8 @@ void wxGDIPlusContext::DrawLines( size_t n, const wxPoint2DDouble *points, wxPol
         return;
 
     wxGDIPlusOffsetHelper helper(m_context, GetContentScaleFactor(), ShouldOffset());
-    PointF *cpoints = new PointF[n];
+    std::vector<PointF> cpoints(n);
+
     for (size_t i = 0; i < n; i++)
     {
         cpoints[i].X = static_cast<REAL>(points[i].m_x);
@@ -2018,11 +2021,10 @@ void wxGDIPlusContext::DrawLines( size_t n, const wxPoint2DDouble *points, wxPol
 
     } // for (int i = 0; i < n; i++)
     if ( !m_brush.IsNull() )
-        m_context->FillPolygon( ((wxGDIPlusBrushData*)m_brush.GetRefData())->GetGDIPlusBrush() , cpoints , n ,
-                                fillStyle == wxODDEVEN_RULE ? FillModeAlternate : FillModeWinding ) ;
+        m_context->FillPolygon(((wxGDIPlusBrushData*)m_brush.GetRefData())->GetGDIPlusBrush(), cpoints.data(), n,
+                                fillStyle == wxODDEVEN_RULE ? FillModeAlternate : FillModeWinding);
     if ( !m_pen.IsNull() )
-        m_context->DrawLines( ((wxGDIPlusPenData*)m_pen.GetGraphicsData())->GetGDIPlusPen() , cpoints , n ) ;
-    delete[] cpoints;
+        m_context->DrawLines(((wxGDIPlusPenData*)m_pen.GetGraphicsData())->GetGDIPlusPen(), cpoints.data(), n);
 }
 
 void wxGDIPlusContext::StrokePath( const wxGraphicsPath& path )

@@ -777,8 +777,10 @@ int SaveTGA(const wxImage& image, wxOutputStream *stream)
     unsigned bytesPerPixel = 3 + (hasAlpha ? 1 : 0);
     wxSize size = image.GetSize();
     size_t scanlineSize = size.x * bytesPerPixel;
-    auto scanlineData = std::make_unique<unsigned char[]>(scanlineSize);
-    if (!scanlineData)
+
+    std::vector<unsigned char> scanlineData(scanlineSize);
+
+    if (scanlineData.empty())
     {
         return wxTGA_MEMERR;
     }
@@ -815,7 +817,8 @@ int SaveTGA(const wxImage& image, wxOutputStream *stream)
     unsigned char *alpha = image.GetAlpha();
     for (int y = 0; y < size.y; ++y)
     {
-        unsigned char *dst = scanlineData.get();
+        unsigned char *dst = scanlineData.data();
+
         for (int x = 0; x < size.x; ++x)
         {
             dst[0] = src[2];
@@ -828,7 +831,7 @@ int SaveTGA(const wxImage& image, wxOutputStream *stream)
             src += 3;
             dst += bytesPerPixel;
         }
-        if ( !stream->Write(scanlineData.get(), scanlineSize) )
+        if ( !stream->Write(scanlineData.data(), scanlineSize) )
         {
             return wxTGA_IOERR;
         }

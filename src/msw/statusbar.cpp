@@ -211,7 +211,7 @@ void wxStatusBar::MSWUpdateFieldsWidths()
 
     // update the field widths in the native control:
 
-    auto pWidths = std::make_unique<int[]>(count);
+    std::vector<int> pWidths(count);
 
     int nCurPos = 0;
 
@@ -227,7 +227,7 @@ void wxStatusBar::MSWUpdateFieldsWidths()
     // separator line just before it.
     pWidths[count - 1] += gripWidth;
 
-    if ( !StatusBar_SetParts(GetHwnd(), count, pWidths.get()) )
+    if ( !StatusBar_SetParts(GetHwnd(), count, pWidths.data()) )
     {
         wxLogLastError("StatusBar_SetParts");
     }

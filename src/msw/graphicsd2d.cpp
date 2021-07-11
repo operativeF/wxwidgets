@@ -2517,13 +2517,14 @@ public:
             hr = wxWICImagingFactory()->CreateBitmap(w, h, GUID_WICPixelFormat32bppPBGRA, WICBitmapCacheOnLoad, &m_srcBitmap);
             wxCHECK_HRESULT_RET(hr);
 
-            BYTE* colorBuffer = new BYTE[4 * w * h];
-            BYTE* maskBuffer = new BYTE[4 * w * h];
+            std::vector<BYTE> colorBuffer(4 * w * h);
+            std::vector<BYTE> maskBuffer(4 * w * h);
+
             BYTE* resultBuffer;
 
-            hr = colorBitmap->CopyPixels(nullptr, w * 4, 4 * w * h, colorBuffer);
+            hr = colorBitmap->CopyPixels(nullptr, w * 4, 4 * w * h, colorBuffer.data());
             wxCHECK_HRESULT_RET(hr);
-            hr = maskBitmap->CopyPixels(nullptr, w * 4, 4 * w * h, maskBuffer);
+            hr = maskBitmap->CopyPixels(nullptr, w * 4, 4 * w * h, maskBuffer.data());
             wxCHECK_HRESULT_RET(hr);
 
             {
@@ -2537,8 +2538,8 @@ public:
                 // Create the result bitmap
                 for ( int i = 0; i < w * h * 4; i += 4 )
                 {
-                    wxPBGRAColor color(colorBuffer + i);
-                    wxPBGRAColor mask(maskBuffer + i);
+                    wxPBGRAColor color(colorBuffer.data() + i);
+                    wxPBGRAColor mask(maskBuffer.data() + i);
 
                     if ( mask.IsBlack() )
                     {
@@ -2550,9 +2551,6 @@ public:
                     }
                 }
             }
-
-            delete[] colorBuffer;
-            delete[] maskBuffer;
         }
         else
         {

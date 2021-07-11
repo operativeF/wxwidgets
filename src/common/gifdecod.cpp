@@ -327,17 +327,11 @@ wxGIFDecoder::dgif(wxInputStream& stream, GIFImage *img, int interl, int bits)
 {
     static constexpr int allocSize = 4096 + 1;
 
-    auto ab_prefix = std::make_unique<int[]>(allocSize);  // alphabet (prefixes)
-    if ( !ab_prefix )
-        return wxGIF_MEMERR;
+    std::vector<int> ab_prefix(allocSize);  // alphabet (prefixes)
 
-    auto ab_tail = std::make_unique<int[]>(allocSize);     // alphabet (tails)
-    if ( !ab_tail )
-        return wxGIF_MEMERR;
+    std::vector<int> ab_tail(allocSize);     // alphabet (tails)
 
-    auto decomp_stack = std::make_unique<int[]>(allocSize); // decompression stack
-    if ( !decomp_stack )
-        return wxGIF_MEMERR;
+    std::vector<int> decomp_stack(allocSize); // decompression stack
 
     int ab_clr;                     // clear code
     int ab_fin;                     // end of info code

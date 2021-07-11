@@ -799,7 +799,8 @@ void wxGCDCImpl::DoDrawLines(int n, const wxPoint points[],
     int maxX = minX;
     int maxY = minY;
 
-    wxPoint2DDouble* pointsD = new wxPoint2DDouble[n];
+    std::vector<wxPoint2DDouble> pointsD(n);
+
     for( int i = 0; i < n; ++i)
     {
         const wxPoint p = points[i];
@@ -812,8 +813,7 @@ void wxGCDCImpl::DoDrawLines(int n, const wxPoint points[],
         else if (p.y > maxY) maxY = p.y;
     }
 
-    m_graphicContext->StrokeLines( n , pointsD);
-    delete[] pointsD;
+    m_graphicContext->StrokeLines( n , pointsD.data());
 
     CalcBoundingBox(minX + xoffset, minY + yoffset);
     CalcBoundingBox(maxX + xoffset, maxY + yoffset);
@@ -896,7 +896,8 @@ void wxGCDCImpl::DoDrawPolygon( int n, const wxPoint points[],
     int maxX = minX;
     int maxY = minY;
 
-    wxPoint2DDouble* pointsD = new wxPoint2DDouble[n+(closeIt?1:0)];
+    std::vector<wxPoint2DDouble> pointsD(n + (closeIt ? 1 : 0));
+
     for( int i = 0; i < n; ++i)
     {
         wxPoint p = points[i];
@@ -908,11 +909,11 @@ void wxGCDCImpl::DoDrawPolygon( int n, const wxPoint points[],
         if (p.y < minY)      minY = p.y;
         else if (p.y > maxY) maxY = p.y;
     }
+
     if ( closeIt )
         pointsD[n] = pointsD[0];
 
-    m_graphicContext->DrawLines( n+(closeIt?1:0) , pointsD, fillStyle);
-    delete[] pointsD;
+    m_graphicContext->DrawLines( n + (closeIt ? 1 : 0) , pointsD.data(), fillStyle);
 
     CalcBoundingBox(minX + xoffset, minY + yoffset);
     CalcBoundingBox(maxX + xoffset, maxY + yoffset);
@@ -944,6 +945,7 @@ void wxGCDCImpl::DoDrawPolyPolygon(int n,
         if ( start != points[i-1])
             path.AddLineToPoint( start.x+ xoffset, start.y+ yoffset);
     }
+
     m_graphicContext->DrawPath( path , fillStyle);
 
     wxRect2DDouble box = path.GetBox();
@@ -1096,6 +1098,7 @@ bool wxGCDCImpl::DoStretchBlit(
             double y = ydest;
             double w = dstWidth;
             double h = dstHeight;
+
             // adjust dest rect if source rect is clipped
             if (subrect.width != subrectOrig.width || subrect.height != subrectOrig.height)
             {

@@ -644,7 +644,7 @@ void wxDCImpl::DrawLines(const wxPointList *list, wxCoord xoffset, wxCoord yoffs
 {
     int n = list->GetCount();
 
-    auto points = std::make_unique<wxPoint[]>(n);
+    std::vector<wxPoint> points(n);
 
     int i = 0;
     for ( wxPointList::compatibility_iterator node = list->GetFirst(); node; node = node->GetNext(), i++ )
@@ -654,7 +654,7 @@ void wxDCImpl::DrawLines(const wxPointList *list, wxCoord xoffset, wxCoord yoffs
         points[i].y = point->y;
     }
 
-    DoDrawLines(n, points.get(), xoffset, yoffset);
+    DoDrawLines(n, points.data(), xoffset, yoffset);
 }
 
 void wxDCImpl::DrawPolygon(const wxPointList *list,
@@ -662,7 +662,7 @@ void wxDCImpl::DrawPolygon(const wxPointList *list,
                            wxPolygonFillMode fillStyle)
 {
     const int n = list->GetCount();
-    auto points = std::make_unique<wxPoint[]>(n);
+    std::vector<wxPoint> points(n);
 
     int i = 0;
     for ( wxPointList::compatibility_iterator node = list->GetFirst(); node; node = node->GetNext(), i++ )
@@ -672,7 +672,7 @@ void wxDCImpl::DrawPolygon(const wxPointList *list,
         points[i].y = point->y;
     }
 
-    DoDrawPolygon(n, points.get(), xoffset, yoffset, fillStyle);
+    DoDrawPolygon(n, points.data(), xoffset, yoffset, fillStyle);
 }
 
 void
@@ -696,7 +696,7 @@ wxDCImpl::DoDrawPolyPolygon(int n,
         j      += count[i];
     }
 
-    auto pts = std::make_unique<wxPoint[]>(j + n - 1);
+    std::vector<wxPoint> pts(j + n - 1);
     
     for (i = 0; i < j; i++)
         pts[i] = points[i];
@@ -708,13 +708,13 @@ wxDCImpl::DoDrawPolyPolygon(int n,
 
     {
         wxDCPenChanger setTransp(*m_owner, *wxTRANSPARENT_PEN);
-        DoDrawPolygon(j, pts.get(), xoffset, yoffset, fillStyle);
+        DoDrawPolygon(j, pts.data(), xoffset, yoffset, fillStyle);
     }
 
     for (i = j = 0; i < n; i++)
     {
         // FIXME: Pointer arithmetic 
-        DoDrawLines(count[i], pts.get()+j, xoffset, yoffset);
+        DoDrawLines(count[i], pts.data() + j, xoffset, yoffset);
         j += count[i];
     }
 }

@@ -221,25 +221,23 @@ std::vector<int> wxTextMeasureBase::GetPartialTextExtents(const wxString& text, 
 // if available and if faster.  Note: pango_layout_index_to_pos is much slower
 // than calling GetTextExtent!!
 
-#define FWC_SIZE 256
+static constexpr int FWC_SIZE = 256;
 
 class FontWidthCache
 {
 public:
-    FontWidthCache()  = default;
-    ~FontWidthCache() { delete []m_widths; }
-
     void Reset()
     {
-        if ( !m_widths )
-            m_widths = new int[FWC_SIZE];
+        // FIXME: Reserve or resize?
+        if ( m_widths.empty() )
+            m_widths.reserve(FWC_SIZE);
 
-        memset(m_widths, 0, sizeof(int)*FWC_SIZE);
+        m_widths.clear();
     }
 
     wxFont m_font;
     double m_scaleX{1};
-    int *m_widths{nullptr};
+    std::vector<int> m_widths;
 };
 
 static FontWidthCache s_fontWidthCache;
@@ -250,7 +248,7 @@ std::vector<int> wxTextMeasureBase::DoGetPartialTextExtents(const wxString& text
 
     // reset the cache if font or horizontal scale have changed
     // FIXME: Double equality
-    if ( !s_fontWidthCache.m_widths ||
+    if ( s_fontWidthCache.m_widths.empty() ||
          !(s_fontWidthCache.m_scaleX == scaleX) ||
          (s_fontWidthCache.m_font != *m_font) )
     {
