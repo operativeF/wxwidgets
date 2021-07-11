@@ -42,6 +42,8 @@ public:
     wxFileHistoryBase(const wxFileHistoryBase&) = delete;
 	wxFileHistoryBase& operator=(const wxFileHistoryBase&) = delete;
 
+    virtual ~wxFileHistoryBase() = default;
+
     // Operations
     virtual void AddFileToHistory(const wxString& file);
     virtual void RemoveFileFromHistory(size_t i);

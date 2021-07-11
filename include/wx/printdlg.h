@@ -58,7 +58,7 @@ class WXDLLIMPEXP_CORE wxPrintDialog
 public:
     wxPrintDialog(wxWindow *parent, wxPrintDialogData* data = nullptr);
     wxPrintDialog(wxWindow *parent, wxPrintData* data);
-    ~wxPrintDialog();
+    virtual ~wxPrintDialog();
 
     wxPrintDialog(const wxPrintDialog&) = delete;
     wxPrintDialog& operator=(const wxPrintDialog&) = delete;

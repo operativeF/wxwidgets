@@ -50,7 +50,7 @@ public:
                            wxMenu *subMenu = nullptr);
 
     // destruction: wxMenuItem will delete its submenu
-    ~wxMenuItemBase();
+    virtual ~wxMenuItemBase();
 
     // the menu we're in
     wxMenu *GetMenu() const { return m_parentMenu; }
