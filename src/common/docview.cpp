@@ -786,7 +786,7 @@ wxDocument *wxDocTemplate::CreateDocument(const wxString& path, long flags)
 bool
 wxDocTemplate::InitDocument(wxDocument* doc, const wxString& path, long flags)
 {
-    wxTRY
+    try
     {
         doc->SetFilename(path);
         doc->SetDocumentTemplate(this);
@@ -807,11 +807,11 @@ wxDocTemplate::InitDocument(wxDocument* doc, const wxString& path, long flags)
 
         return false;
     }
-    wxCATCH_ALL(
+    catch(...){ // FIXME: Don't do this. This is BS.
         if ( GetDocumentManager()->GetDocuments().Member(doc) )
             doc->DeleteAllViews();
         throw;
-    )
+    }
 }
 
 wxView *wxDocTemplate::CreateView(wxDocument *doc, long flags)

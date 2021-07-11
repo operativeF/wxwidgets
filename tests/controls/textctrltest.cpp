@@ -920,9 +920,11 @@ TEST_CASE_FIXTURE(TextCtrlTest, "Text control test")
             m_entry->AppendText("http://www.wxwidgets.org");
 
             wxUIActionSimulator sim;
-            sim.MouseMove(m_entry->ClientToScreen(wxPoint(5, 5)));
+            // FIXME: Make this dependant on actual realized screen, not hardcoded coords.
+            sim.MouseMove(m_entry->ClientToScreen(wxPoint(10, 10)));
             sim.MouseClick();
-            //wxYield();
+
+            wxYield();
 
             CHECK_EQ(1, url.GetCount());
         }
@@ -1332,6 +1334,8 @@ TEST_CASE("wxTextCtrl::LongPaste")
     s += "THE END";
 
     wxTheClipboard->AddData(new wxTextDataObject(s));
+
+    wxYield();
 
     text->ChangeValue("THE BEGINNING\n");
     text->SetInsertionPointEnd();
