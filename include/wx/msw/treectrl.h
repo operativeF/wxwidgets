@@ -75,26 +75,15 @@ class WXDLLIMPEXP_CORE wxTreeCtrl : public wxTreeCtrlBase
 public:
     // creation
     // --------
-    wxTreeCtrl() { 
-    m_textCtrl = nullptr;
-    m_hasAnyAttr = false;
-#if wxUSE_DRAGIMAGE
-    m_dragImage = nullptr;
-#endif
-    m_pVirtualRoot = nullptr;
-    m_dragStarted = false;
-    m_focusLost = true;
-    m_changingSelection = false;
-    m_triggerStateImageClick = false;
-    m_mouseUpDeselect = false;
-
-    // initialize the global array of events now as it can't be done statically
-    // with the wxEVT_XXX values being allocated during run-time only
-    gs_expandEvents[IDX_COLLAPSE][IDX_DONE] = wxEVT_TREE_ITEM_COLLAPSED;
-    gs_expandEvents[IDX_COLLAPSE][IDX_DOING] = wxEVT_TREE_ITEM_COLLAPSING;
-    gs_expandEvents[IDX_EXPAND][IDX_DONE] = wxEVT_TREE_ITEM_EXPANDED;
-    gs_expandEvents[IDX_EXPAND][IDX_DOING] = wxEVT_TREE_ITEM_EXPANDING;
- }
+    wxTreeCtrl()
+    { 
+        // initialize the global array of events now as it can't be done statically
+        // with the wxEVT_XXX values being allocated during run-time only
+        gs_expandEvents[IDX_COLLAPSE][IDX_DONE] = wxEVT_TREE_ITEM_COLLAPSED;
+        gs_expandEvents[IDX_COLLAPSE][IDX_DOING] = wxEVT_TREE_ITEM_COLLAPSING;
+        gs_expandEvents[IDX_EXPAND][IDX_DONE] = wxEVT_TREE_ITEM_EXPANDED;
+        gs_expandEvents[IDX_EXPAND][IDX_DOING] = wxEVT_TREE_ITEM_EXPANDING;
+    }
 
     wxTreeCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
                const wxPoint& pos = wxDefaultPosition,
@@ -108,10 +97,10 @@ public:
 
     ~wxTreeCtrl() override;
 
-   wxTreeCtrl(const wxTreeCtrl&) = delete;
-   wxTreeCtrl& operator=(const wxTreeCtrl&) = delete;
-   wxTreeCtrl(wxTreeCtrl&&) = default;
-   wxTreeCtrl& operator=(wxTreeCtrl&&) = default;
+    wxTreeCtrl(const wxTreeCtrl&) = delete;
+    wxTreeCtrl& operator=(const wxTreeCtrl&) = delete;
+    wxTreeCtrl(wxTreeCtrl&&) = default;
+    wxTreeCtrl& operator=(wxTreeCtrl&&) = default;
     
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
@@ -119,9 +108,6 @@ public:
                 long style = wxTR_HAS_BUTTONS | wxTR_LINES_AT_ROOT,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxTreeCtrlNameStr));
-
-    
-    // ----------------------------------
 
     unsigned int GetCount() const override;
 
@@ -318,13 +304,10 @@ protected:
     void MSWUpdateFontOnDPIChange(const wxSize& newDPI) override;
 
     // data used only while editing the item label:
-    wxTextCtrl  *m_textCtrl;        // text control in which it is edited
+    wxTextCtrl  *m_textCtrl{nullptr};        // text control in which it is edited
     wxTreeItemId m_idEdited;        // the item being edited
 
-private:
-    // the common part of all ctors
-    
-
+private:    
     // helper functions
     bool DoGetItem(wxTreeViewItem *tvItem) const;
     void DoSetItem(wxTreeViewItem *tvItem);
@@ -360,15 +343,15 @@ private:
     wxMapTreeAttr m_attrs;
 
     // true if the hash above is not empty
-    bool m_hasAnyAttr;
+    bool m_hasAnyAttr{false};
 
 #if wxUSE_DRAGIMAGE
     // used for dragging
-    wxDragImage *m_dragImage;
+    wxDragImage *m_dragImage{nullptr};
 #endif
 
     // Virtual root item, if wxTR_HIDE_ROOT is set.
-    void* m_pVirtualRoot;
+    void* m_pVirtualRoot{nullptr};
 
     // Item to call EnsureVisible() on when the tree is thawed, if necessary.
     wxTreeItemId m_htEnsureVisibleOnThaw;
@@ -378,20 +361,20 @@ private:
     wxPoint m_ptClick;
 
     // whether dragging has started
-    bool m_dragStarted;
+    bool m_dragStarted{false};
 
     // whether focus was lost between subsequent clicks of a single item
-    bool m_focusLost;
+    bool m_focusLost{true};
 
     // set when we are changing selection ourselves (only used in multi
     // selection mode)
-    bool m_changingSelection;
+    bool m_changingSelection{false};
 
     // whether we need to trigger a state image click event
-    bool m_triggerStateImageClick;
+    bool m_triggerStateImageClick{false};
 
     // whether we need to deselect other items on mouse up
-    bool m_mouseUpDeselect;
+    bool m_mouseUpDeselect{false};
 
     friend class wxTreeItemIndirectData;
     friend class wxTreeSortHelper;

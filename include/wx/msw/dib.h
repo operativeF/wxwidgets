@@ -37,59 +37,37 @@ public:
     // after using this ctor, GetData() and GetHandle() may be used if IsOk()
     // returns true
     wxDIB(int width, int height, int depth)
-        { 
-    m_handle = nullptr;
-    m_ownsHandle = true;
-
-    m_data = nullptr;
-
-    m_width =
-    m_height =
-    m_depth = 0;
- Create(width, height, depth); }
+    { 
+        Create(width, height, depth);
+    }
 
 #ifdef __WXMSW__
     // create a DIB from the DDB
     wxDIB(const wxBitmap& bmp, int depth = -1)
-        { 
-    m_handle = nullptr;
-    m_ownsHandle = true;
-
-    m_data = nullptr;
-
-    m_width =
-    m_height =
-    m_depth = 0;
- Create(bmp, depth); }
+    { 
+        Create(bmp, depth);
+    }
 #endif // __WXMSW__
 
     // create a DIB from the Windows DDB
     wxDIB(HBITMAP hbmp)
-        { 
-    m_handle = nullptr;
-    m_ownsHandle = true;
-
-    m_data = nullptr;
-
-    m_width =
-    m_height =
-    m_depth = 0;
- Create(hbmp); }
+    {
+        Create(hbmp);
+    }
 
     // load a DIB from file (any depth is supoprted here unlike above)
     //
     // as above, use IsOk() to see if the bitmap was loaded successfully
     wxDIB(const wxString& filename)
-        { 
-    m_handle = nullptr;
-    m_ownsHandle = true;
+    { 
+        Load(filename);
+    }
 
-    m_data = nullptr;
-
-    m_width =
-    m_height =
-    m_depth = 0;
- (void)Load(filename); }
+    // DIBs can't be copied
+    wxDIB(const wxDIB&) = delete;
+    wxDIB& operator=(const wxDIB&) = delete;
+    wxDIB(wxDIB&&) = default;
+    wxDIB& operator=(wxDIB&&) = default;
 
     // same as the corresponding ctors but with return value
     [[maybe_unused]] bool Create(int width, int height, int depth);
@@ -99,9 +77,7 @@ public:
     [[maybe_unused]] bool Create(HBITMAP hbmp, int depth = -1);
     bool Load(const wxString& filename);
 
-    // dtor is not virtual, this class is not meant to be used polymorphically
     ~wxDIB();
-
 
     // operations
     // ----------
@@ -188,22 +164,8 @@ public:
     // does pre-multiplication internally.
     wxDIB(const wxImage& image, PixelFormat pf = PixelFormat_PreMultiplied, int depth = -1)
     {
-        
-    m_handle = nullptr;
-    m_ownsHandle = true;
-
-    m_data = nullptr;
-
-    m_width =
-    m_height =
-    m_depth = 0;
-
         Create(image, pf, depth);
     }
-
-    // DIBs can't be copied
-    wxDIB(const wxDIB&) = delete;
-    wxDIB& operator=(const wxDIB&) = delete;
     
     // same as the above ctor but with the return code
     [[maybe_unused]] bool Create(const wxImage& image, PixelFormat pf = PixelFormat_PreMultiplied, int depth = -1);
@@ -248,7 +210,7 @@ private:
 
 
     // the DIB section handle, 0 if invalid
-    HBITMAP m_handle;
+    HBITMAP m_handle{nullptr};
 
     // NB: we could store only m_handle and not any of the other fields as
     //     we may always retrieve them from it using ::GetObject(), but we
@@ -262,17 +224,17 @@ private:
     void DoGetObject() const;
 
     // pointer to DIB bits, may be NULL
-    void *m_data;
+    void *m_data{nullptr};
 
     // size and depth of the image
-    int m_width,
-        m_height,
-        m_depth;
+    int m_width{0};
+    int m_height{0};
+    int m_depth{0};
 
     // in some cases we could be using a handle which we didn't create and in
     // this case we shouldn't free it neither -- this flag tell us if this is
     // the case
-    bool m_ownsHandle;
+    bool m_ownsHandle{true};
 };
 
 // ----------------------------------------------------------------------------
