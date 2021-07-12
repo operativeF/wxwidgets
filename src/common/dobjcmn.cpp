@@ -46,9 +46,6 @@ WXDLLEXPORT const wxDataFormat& wxFormatInvalid = dataFormatInvalid;
 // wxDataObjectBase
 // ----------------------------------------------------------------------------
 
-wxDataObjectBase::~wxDataObjectBase()
-= default;
-
 bool wxDataObjectBase::IsSupported(const wxDataFormat& format,
                                    Direction dir) const
 {

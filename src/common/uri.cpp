@@ -41,8 +41,6 @@ wxIMPLEMENT_CLASS(wxURI, wxObject);
 // Constructors and cleanup
 // ---------------------------------------------------------------------------
 
-wxURI::wxURI() = default;
-
 wxURI::wxURI(const wxString& uri)
 {
     Create(uri);

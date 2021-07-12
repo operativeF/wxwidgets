@@ -197,10 +197,8 @@ protected:
 class WXDLLIMPEXP_PROPGRID wxPGCell : public wxObject
 {
 public:
-    wxPGCell();
-    wxPGCell(const wxPGCell& other)
-         
-    = default;
+    wxPGCell() = default;
+    wxPGCell(const wxPGCell& other) = default;
 
     wxPGCell( const wxString& text,
               const wxBitmap& bitmap = wxNullBitmap,
@@ -286,7 +284,7 @@ private:
 class WXDLLIMPEXP_PROPGRID wxPGAttributeStorage
 {
 public:
-    wxPGAttributeStorage();
+    wxPGAttributeStorage() = default;
     wxPGAttributeStorage(const wxPGAttributeStorage& other);
     ~wxPGAttributeStorage();
 

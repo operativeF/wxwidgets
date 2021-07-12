@@ -40,7 +40,7 @@ public:
     {
     }
 
-    wxWindowPtr() {}
+    wxWindowPtr() = default;
     wxWindowPtr(const wxWindowPtr& tocopy) : std::shared_ptr<T>(tocopy) {}
 
     wxWindowPtr& operator=(const wxWindowPtr& tocopy)

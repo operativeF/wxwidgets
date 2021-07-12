@@ -69,7 +69,7 @@ static const wxCmdLineEntryDesc g_cmdLineDesc[] =
 class IfaceCheckLog : public wxLog
 {
 public:
-    IfaceCheckLog() {}
+    IfaceCheckLog() = default;
 
     virtual void DoLogText(const wxString& msg)
     {

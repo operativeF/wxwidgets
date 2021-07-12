@@ -184,7 +184,7 @@ using wxDataViewModelNotifiers = std::vector<wxDataViewModelNotifier *>;
 class WXDLLIMPEXP_CORE wxDataViewModel: public wxRefCounter
 {
 public:
-    wxDataViewModel();
+    wxDataViewModel() = default;
 
     virtual unsigned int GetColumnCount() const = 0;
 
@@ -1035,7 +1035,7 @@ private:
 class WXDLLIMPEXP_CORE wxDataViewListStore: public wxDataViewIndexListModel
 {
 public:
-    wxDataViewListStore();
+    wxDataViewListStore() = default;
     ~wxDataViewListStore() override;
 
     void PrependColumn( const wxString &varianttype );

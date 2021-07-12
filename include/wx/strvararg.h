@@ -491,7 +491,7 @@ struct wxArgNormalizerWithBuffer
 {
     using CharBuffer = wxScopedCharTypeBuffer<CharType>;
 
-    wxArgNormalizerWithBuffer() {}
+    wxArgNormalizerWithBuffer() = default;
     wxArgNormalizerWithBuffer(const CharBuffer& buf,
                               const wxFormatString *fmt,
                               unsigned index)

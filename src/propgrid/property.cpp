@@ -339,8 +339,6 @@ wxPGCellData::wxPGCellData()
 // wxPGCell
 // -----------------------------------------------------------------------
 
-wxPGCell::wxPGCell() = default;
-
 wxPGCell::wxPGCell( const wxString& text,
                     const wxBitmap& bitmap,
                     const wxColour& fgCol,
@@ -3143,8 +3141,6 @@ static inline void DecDataRef(wxPGHashMapS2P& map)
         static_cast<wxVariantData*>(it->second)->DecRef();
     }
 }
-
-wxPGAttributeStorage::wxPGAttributeStorage() = default;
 
 wxPGAttributeStorage::wxPGAttributeStorage(const wxPGAttributeStorage& other)
     : m_map(other.m_map)

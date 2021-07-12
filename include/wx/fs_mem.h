@@ -31,7 +31,7 @@ WX_DECLARE_STRING_HASH_MAP(wxMemoryFSFile *, wxMemoryFSHash);
 class WXDLLIMPEXP_BASE wxMemoryFSHandlerBase : public wxFileSystemHandler
 {
 public:
-    wxMemoryFSHandlerBase();
+    wxMemoryFSHandlerBase() = default;
     ~wxMemoryFSHandlerBase() override;
 
     // Add file to list of files stored in memory. Stored data (bitmap, text or

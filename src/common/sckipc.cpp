@@ -351,8 +351,6 @@ private:
 // wxTCPClient
 // --------------------------------------------------------------------------
 
-wxTCPClient::wxTCPClient() = default;
-
 bool wxTCPClient::ValidHost(const wxString& host)
 {
     wxIPV4address addr;

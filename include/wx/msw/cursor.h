@@ -16,7 +16,7 @@ class WXDLLIMPEXP_FWD_CORE wxImage;
 class WXDLLIMPEXP_CORE wxCursor : public wxCursorBase
 {
 public:
-    wxCursor();
+    wxCursor() = default;
 #if wxUSE_IMAGE
     wxCursor(const wxImage& image);
     wxCursor(const char* const* xpmData);

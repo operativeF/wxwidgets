@@ -207,8 +207,6 @@ HBRUSH wxBrushRefData::GetHBRUSH()
 // wxBrush ctors/dtor
 // ----------------------------------------------------------------------------
 
-wxBrush::wxBrush() = default;
-
 wxBrush::wxBrush(const wxColour& col, wxBrushStyle style)
 {
     m_refData = new wxBrushRefData(col, style);

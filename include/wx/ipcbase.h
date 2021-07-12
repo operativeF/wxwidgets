@@ -53,7 +53,7 @@ class WXDLLIMPEXP_BASE wxConnectionBase
 {
 public:
   wxConnectionBase(void *buffer, size_t size); // use external buffer
-  wxConnectionBase(); // use internal, adaptive buffer
+  wxConnectionBase() = default; // use internal, adaptive buffer
   wxConnectionBase(const wxConnectionBase& copy);
   virtual ~wxConnectionBase();
 

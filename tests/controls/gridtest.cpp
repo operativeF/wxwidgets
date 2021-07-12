@@ -1365,8 +1365,6 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::WindowAsEditorControl")
     class TestEditor : public wxGridCellEditor
     {
     public:
-        TestEditor() {}
-
         void Create(wxWindow* parent,
                     wxWindowID id,
                     wxEvtHandler* evtHandler) override

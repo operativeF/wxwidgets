@@ -63,8 +63,6 @@ wxGraphicsObjectRefData* wxGraphicsObjectRefData::Clone() const
     return new wxGraphicsObjectRefData(this);
 }
 
-wxGraphicsObject::wxGraphicsObject() = default;
-
 wxGraphicsObject::wxGraphicsObject( wxGraphicsRenderer* renderer )
 {
     SetRefData( new wxGraphicsObjectRefData(renderer));

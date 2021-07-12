@@ -77,8 +77,6 @@ private:
 // wxMemoryFSHandler
 //--------------------------------------------------------------------------------
 
-wxMemoryFSHandlerBase::wxMemoryFSHandlerBase() = default;
-
 wxMemoryFSHandlerBase::~wxMemoryFSHandlerBase()
 {
     // as only one copy of FS handler is supposed to exist, we may silently

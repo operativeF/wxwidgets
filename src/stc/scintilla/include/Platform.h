@@ -390,8 +390,8 @@ private:
 
 class ListBox : public Window {
 public:
-	ListBox();
-	~ListBox() override;
+	ListBox() = default;
+	~ListBox() override = default;
 	static ListBox *Allocate();
 
 	void SetFont(Font &font) override =0;

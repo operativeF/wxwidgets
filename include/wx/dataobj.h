@@ -149,8 +149,7 @@ public:
         Both = 0x03     // format is supported by both (unused currently)
     };
 
-    // this class is polymorphic, hence it needs a virtual dtor
-    virtual ~wxDataObjectBase();
+    virtual ~wxDataObjectBase() = default;
 
     // get the best suited format for rendering our data
     virtual wxDataFormat GetPreferredFormat(Direction dir = Get) const = 0;

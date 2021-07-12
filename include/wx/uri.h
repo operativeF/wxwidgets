@@ -50,7 +50,7 @@ enum wxURIFlags
 class WXDLLIMPEXP_BASE wxURI : public wxObject
 {
 public:
-    wxURI();
+    wxURI() = default;
     wxURI(const wxString& uri);
 
     // default copy ctor, assignment operator and dtor are ok

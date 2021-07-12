@@ -83,7 +83,7 @@ class WXDLLIMPEXP_BASE wxHashTableBase
 public:
     using Node = wxHashTableBase_Node;
 
-    wxHashTableBase();
+    wxHashTableBase() = default;
     virtual ~wxHashTableBase() = default;
 
     wxHashTableBase(const wxHashTableBase&) = delete;

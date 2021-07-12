@@ -64,8 +64,8 @@ wxGetDialogClassDescription(const wxClassInfo *ci, const std::type_info& ti)
 class wxModalExpectation
 {
 public:
-    wxModalExpectation() : m_isOptional(false) {}
-    virtual ~wxModalExpectation() {}
+    wxModalExpectation() = default;
+    virtual ~wxModalExpectation() = default;
 
     wxString GetDescription() const
     {
@@ -85,7 +85,7 @@ protected:
     wxString m_description;
 
     // Is this dialog optional, i.e. not required to be shown?
-    bool m_isOptional;
+    bool m_isOptional{false};
 };
 
 

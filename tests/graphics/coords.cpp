@@ -1047,7 +1047,7 @@ public:
         m_gcdc->SetGraphicsContext(ctx);
     }
 
-    virtual ~CoordinatesGCDCGDIPlusTestCase() {}
+    virtual ~CoordinatesGCDCGDIPlusTestCase() = default;
 };
 
 TEST_CASE_FIXTURE(CoordinatesGCDCGDIPlusTestCase, "CoordinatesGCDCGDIPlus::InitialState")
@@ -1177,7 +1177,7 @@ public:
         m_gcdc->SetGraphicsContext(ctx);
     }
 
-    virtual ~CoordinatesGCDCDirect2DTestCase() {}
+    virtual ~CoordinatesGCDCDirect2DTestCase() = default;
 };
 
 TEST_CASE_FIXTURE(CoordinatesGCDCDirect2DTestCase, "CoordinatesGCDCDirect2D::InitialState")
@@ -1308,7 +1308,7 @@ public:
         m_gcdc->SetGraphicsContext(ctx);
     }
 
-    virtual ~CoordinatesGCDCCairoTestCase() {}
+    virtual ~CoordinatesGCDCCairoTestCase() = default;
 };
 
 TEST_CASE_FIXTURE(CoordinatesGCDCCairoTestCase, "CoordinatesGCDCCairo::InitialState")

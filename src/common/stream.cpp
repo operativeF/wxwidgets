@@ -1155,8 +1155,6 @@ wxFileOffset wxCountingOutputStream::OnSysTell() const
 // wxFilterInputStream
 // ----------------------------------------------------------------------------
 
-wxFilterInputStream::wxFilterInputStream() = default;
-
 wxFilterInputStream::wxFilterInputStream(wxInputStream& stream)
  :  m_parent_i_stream(&stream),
     m_owns(false)
@@ -1178,8 +1176,6 @@ wxFilterInputStream::~wxFilterInputStream()
 // ----------------------------------------------------------------------------
 // wxFilterOutputStream
 // ----------------------------------------------------------------------------
-
-wxFilterOutputStream::wxFilterOutputStream() = default;
 
 wxFilterOutputStream::wxFilterOutputStream(wxOutputStream& stream)
  :  m_parent_o_stream(&stream)

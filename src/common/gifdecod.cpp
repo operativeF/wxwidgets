@@ -68,8 +68,6 @@ public:
 wxDECLARE_SCOPED_PTR(GIFImage, GIFImagePtr)
 wxDEFINE_SCOPED_PTR(GIFImage, GIFImagePtr)
 
-wxGIFDecoder::wxGIFDecoder() = default;
-
 wxGIFDecoder::~wxGIFDecoder()
 {
     Destroy();

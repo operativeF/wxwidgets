@@ -42,8 +42,7 @@ public:
         FALLBACK_NEAREST_LARGER = 2
     };
 
-    // default constructor
-    wxIconBundle();
+    wxIconBundle() = default;
 
     // initializes the bundle with the icon(s) found in the file
 #if wxUSE_STREAMS && wxUSE_IMAGE

@@ -50,8 +50,6 @@
 // valid neither, a "solid" mask (no transparent zones at all)
 static HBITMAP GetMaskForImage(const wxBitmap& bitmap, const wxBitmap& mask);
 
-wxImageList::wxImageList() = default;
-
 // Creates an image list
 bool wxImageList::Create(int width, int height, bool mask, int initial)
 {

@@ -3359,11 +3359,6 @@ void ListBoxImpl::SetListInfo(int* listType, int* posStart, int* startLen)
     m_visualData->SetSciListData(listType,posStart,startLen);
 }
 
-
-ListBox::ListBox() = default;
-
-ListBox::~ListBox() = default;
-
 ListBox *ListBox::Allocate() {
     return new ListBoxImpl();
 }

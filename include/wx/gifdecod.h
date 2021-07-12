@@ -48,7 +48,7 @@ enum wxGIFErrorCode
 class WXDLLIMPEXP_CORE wxGIFDecoder : public wxAnimationDecoder
 {
 public:
-    wxGIFDecoder();
+    wxGIFDecoder() = default;
     ~wxGIFDecoder() override;
 
     wxGIFDecoder(const wxGIFDecoder&) = delete;

@@ -122,8 +122,6 @@ bool wxDataViewModelNotifier::ItemsChanged( const wxDataViewItemArray &items )
 // wxDataViewModel
 // ---------------------------------------------------------
 
-wxDataViewModel::wxDataViewModel() = default;
-
 wxDataViewModel::~wxDataViewModel()
 {
     wxDataViewModelNotifiers::const_iterator iter;
@@ -2202,8 +2200,6 @@ wxSize wxDataViewCheckIconTextRenderer::GetCheckSize() const
 //-----------------------------------------------------------------------------
 // wxDataViewListStore
 //-----------------------------------------------------------------------------
-
-wxDataViewListStore::wxDataViewListStore() = default;
 
 wxDataViewListStore::~wxDataViewListStore()
 {

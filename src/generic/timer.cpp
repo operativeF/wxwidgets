@@ -231,7 +231,6 @@ class wxTimerModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxTimerModule);
 public:
-    wxTimerModule() {}
     bool OnInit() { return true; }
     void OnExit() { wxDELETE(gs_scheduler); }
 };

@@ -142,7 +142,7 @@ protected:
 class WXDLLIMPEXP_NET wxTCPClient : public wxClientBase
 {
 public:
-    wxTCPClient();
+    wxTCPClient() = default;
 
     bool ValidHost(const wxString& host) override;
 

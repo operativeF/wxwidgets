@@ -309,7 +309,7 @@ protected:
 class WXDLLIMPEXP_BASE wxFilterInputStream : public wxInputStream
 {
 public:
-    wxFilterInputStream();
+    wxFilterInputStream() = default;
     wxFilterInputStream(wxInputStream& stream);
     wxFilterInputStream(wxInputStream *stream);
     ~wxFilterInputStream() override;
@@ -333,7 +333,7 @@ protected:
 class WXDLLIMPEXP_BASE wxFilterOutputStream : public wxOutputStream
 {
 public:
-    wxFilterOutputStream();
+    wxFilterOutputStream() = default;
     wxFilterOutputStream(wxOutputStream& stream);
     wxFilterOutputStream(wxOutputStream *stream);
     ~wxFilterOutputStream() override;

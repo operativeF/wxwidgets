@@ -725,7 +725,7 @@ bool wxClassInfo::NeedsDirectConstruction() const
 
 struct wxDynamicObject::wxDynamicObjectInternal
 {
-    wxDynamicObjectInternal() {}
+    wxDynamicObjectInternal() = default;
 
     wxStringToAnyHashMap m_properties;
 };

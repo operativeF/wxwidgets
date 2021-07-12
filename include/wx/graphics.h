@@ -121,7 +121,7 @@ class WXDLLIMPEXP_FWD_CORE wxGraphicsPathData;
 class WXDLLIMPEXP_CORE wxGraphicsObject : public wxObject
 {
 public:
-    wxGraphicsObject();
+    wxGraphicsObject() = default;
     wxGraphicsObject( wxGraphicsRenderer* renderer );
     ~wxGraphicsObject() override;
 

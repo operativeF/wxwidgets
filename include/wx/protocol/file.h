@@ -20,11 +20,14 @@
 class WXDLLIMPEXP_NET wxFileProto: public wxProtocol
 {
 public:
-    wxFileProto();
-    ~wxFileProto() override;
+    wxFileProto() = default;
+    ~wxFileProto() override = default;
 
-	wxFileProto(const wxFileProto&) = delete;
-	wxFileProto& operator=(const wxFileProto&) = delete;
+    wxFileProto(const wxFileProto&) = delete;
+    wxFileProto& operator=(const wxFileProto&) = delete;
+    wxFileProto(wxFileProto&&) = default;
+    wxFileProto& operator=(wxFileProto&&) = default;
+
 
     bool Abort() override { return true; }
     wxString GetContentType() const override { return wxEmptyString; }

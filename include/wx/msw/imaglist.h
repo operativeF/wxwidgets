@@ -20,11 +20,7 @@
 class WXDLLIMPEXP_CORE wxImageList
 {
 public:
-  /*
-   * Public interface
-   */
-
-  wxImageList();
+  wxImageList() = default;
 
   // Creates an image list.
   // Specify the width and height of the images in the list,

@@ -358,7 +358,7 @@ public:
         m_gcdc->SetGraphicsContext(ctx);
     }
 
-    virtual ~ClippingBoxTestCaseGCDCGDIPlus() {}
+    virtual ~ClippingBoxTestCaseGCDCGDIPlus() = default;
 
 private:
     CPPUNIT_TEST_SUITE( ClippingBoxTestCaseGCDCGDIPlus );
@@ -414,7 +414,7 @@ public:
         m_gcdc->SetGraphicsContext(ctx);
     }
 
-    virtual ~ClippingBoxTestCaseGCDCDirect2D() {}
+    virtual ~ClippingBoxTestCaseGCDCDirect2D() = default;
 
     void FlushDC() override
     {
@@ -482,7 +482,7 @@ public:
         m_gcdc->SetGraphicsContext(ctx);
     }
 
-    virtual ~ClippingBoxTestCaseGCDCCairo() {}
+    virtual ~ClippingBoxTestCaseGCDCCairo() = default;
 
 private:
     CPPUNIT_TEST_SUITE( ClippingBoxTestCaseGCDCCairo );
@@ -1580,7 +1580,7 @@ public:
         m_rend = wxGraphicsRenderer::GetGDIPlusRenderer();
     }
 
-    virtual ~ClippingBoxTestCaseGCGDIPlus() {}
+    virtual ~ClippingBoxTestCaseGCGDIPlus() = default;
 
 private:
     CPPUNIT_TEST_SUITE( ClippingBoxTestCaseGCGDIPlus );
@@ -1620,7 +1620,7 @@ public:
         m_rend = wxGraphicsRenderer::GetDirect2DRenderer();
     }
 
-    virtual ~ClippingBoxTestCaseGCDirect2D() {}
+    virtual ~ClippingBoxTestCaseGCDirect2D() = default;
 
     void FlushGC() override
     {
@@ -1673,7 +1673,7 @@ public:
         m_rend = wxGraphicsRenderer::GetCairoRenderer();
     }
 
-    virtual ~ClippingBoxTestCaseGCCairo() {}
+    virtual ~ClippingBoxTestCaseGCCairo() = default;
 
 private:
     CPPUNIT_TEST_SUITE( ClippingBoxTestCaseGCCairo );
@@ -1713,7 +1713,7 @@ public:
         m_rend = wxGraphicsRenderer::GetDefaultRenderer();
     }
 
-    virtual ~ClippingBoxTestCaseGCCoreGraphics() {}
+    virtual ~ClippingBoxTestCaseGCCoreGraphics() = default;
 
 private:
     CPPUNIT_TEST_SUITE( ClippingBoxTestCaseGCCoreGraphics );

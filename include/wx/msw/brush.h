@@ -22,7 +22,7 @@ class WXDLLIMPEXP_FWD_CORE wxBitmap;
 class WXDLLIMPEXP_CORE wxBrush : public wxBrushBase
 {
 public:
-    wxBrush();
+    wxBrush() = default;
     wxBrush(const wxColour& col, wxBrushStyle style = wxBrushStyle::Solid);
     explicit wxBrush(const wxBitmap& stipple);
     ~wxBrush() override;

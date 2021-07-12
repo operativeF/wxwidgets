@@ -27,9 +27,6 @@
 #include "wx/msw/private.h"
 #endif
 
-wxRibbonArtProvider::wxRibbonArtProvider() = default;
-wxRibbonArtProvider::~wxRibbonArtProvider() = default;
-
 wxColour wxRibbonInterpolateColour(const wxColour& start_colour,
                                 const wxColour& end_colour,
                                 int position,

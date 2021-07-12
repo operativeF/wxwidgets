@@ -29,7 +29,7 @@
 class UniCharTestCase : public CppUnit::TestCase
 {
 public:
-    UniCharTestCase() {}
+    UniCharTestCase() = default;
 
 private:
     CPPUNIT_TEST_SUITE( UniCharTestCase );
