@@ -50,10 +50,10 @@ public:
     const wxString& localFilename = wxEmptyString, const wxString& globalFilename = wxEmptyString, long style = wxCONFIG_USE_LOCAL_FILE);
   ~wxIniConfig() override;
 
- wxIniConfig(const wxIniConfig&) = delete;
-   wxIniConfig& operator=(const wxIniConfig&) = delete;
-   wxIniConfig(wxIniConfig&&) = default;
-   wxIniConfig& operator=(wxIniConfig&&) = default;
+  wxIniConfig(const wxIniConfig&) = delete;
+  wxIniConfig& operator=(const wxIniConfig&) = delete;
+  wxIniConfig(wxIniConfig&&) = default;
+  wxIniConfig& operator=(wxIniConfig&&) = default;
 
   // implement inherited pure virtual functions
   void SetPath(const wxString& strPath) override;

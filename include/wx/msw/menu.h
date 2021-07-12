@@ -31,50 +31,52 @@ class WXDLLIMPEXP_CORE wxMenu : public wxMenuBase
 public:
     // ctors & dtor
     wxMenu(const wxString& title, long style = 0)
-        : wxMenuBase(title, style) { 
-    InitNoCreate();
+        : wxMenuBase(title, style)
+    { 
+        InitNoCreate();
 
-    // create the menu
-    m_hMenu = (WXHMENU)CreatePopupMenu();
-    if ( !m_hMenu )
-    {
-        wxLogLastError(wxT("CreatePopupMenu"));
+        // create the menu
+        m_hMenu = (WXHMENU)CreatePopupMenu();
+        if ( !m_hMenu )
+        {
+            wxLogLastError(wxT("CreatePopupMenu"));
+        }
+
+        // if we have a title, insert it in the beginning of the menu
+        if ( !m_title.empty() )
+        {
+            const wxString aTitle = m_title;
+            m_title.clear(); // so that SetTitle() knows there was no title before
+            SetTitle(aTitle);
+        }
     }
 
-    // if we have a title, insert it in the beginning of the menu
-    if ( !m_title.empty() )
-    {
-        const wxString aTitle = m_title;
-        m_title.clear(); // so that SetTitle() knows there was no title before
-        SetTitle(aTitle);
-    }
- }
+    wxMenu(long style = 0) : wxMenuBase(style)
+    { 
+        InitNoCreate();
 
-    wxMenu(long style = 0) : wxMenuBase(style) { 
-    InitNoCreate();
+        // create the menu
+        m_hMenu = (WXHMENU)CreatePopupMenu();
+        if ( !m_hMenu )
+        {
+            wxLogLastError(wxT("CreatePopupMenu"));
+        }
 
-    // create the menu
-    m_hMenu = (WXHMENU)CreatePopupMenu();
-    if ( !m_hMenu )
-    {
-        wxLogLastError(wxT("CreatePopupMenu"));
+        // if we have a title, insert it in the beginning of the menu
+        if ( !m_title.empty() )
+        {
+            const wxString title = m_title;
+            m_title.clear(); // so that SetTitle() knows there was no title before
+            SetTitle(title);
+        }
     }
-
-    // if we have a title, insert it in the beginning of the menu
-    if ( !m_title.empty() )
-    {
-        const wxString title = m_title;
-        m_title.clear(); // so that SetTitle() knows there was no title before
-        SetTitle(title);
-    }
- }
 
     ~wxMenu() override;
 
-wxMenu(const wxMenu&) = delete;
-   wxMenu& operator=(const wxMenu&) = delete;
-   wxMenu(wxMenu&&) = default;
-   wxMenu& operator=(wxMenu&&) = default;
+    wxMenu(const wxMenu&) = delete;
+    wxMenu& operator=(const wxMenu&) = delete;
+    wxMenu(wxMenu&&) = default;
+    wxMenu& operator=(wxMenu&&) = default;
 
     void Break() override;
 

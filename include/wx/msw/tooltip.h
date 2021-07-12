@@ -23,10 +23,10 @@ public:
     wxToolTip(const wxString &tip);
     ~wxToolTip();
 
-   wxToolTip(const wxToolTip&) = delete;
-   wxToolTip& operator=(const wxToolTip&) = delete;
-   wxToolTip(wxToolTip&&) = default;
-   wxToolTip& operator=(wxToolTip&&) = default;
+    wxToolTip(const wxToolTip&) = delete;
+    wxToolTip& operator=(const wxToolTip&) = delete;
+    wxToolTip(wxToolTip&&) = default;
+    wxToolTip& operator=(wxToolTip&&) = default;
 
     // ctor used by wxStatusBar to associate a tooltip to a portion of
     // the status bar window:

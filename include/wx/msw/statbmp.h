@@ -32,10 +32,10 @@ public:
         Create(parent, id, label, pos, size, style, name);
     }
 
-   wxStaticBitmap(const wxStaticBitmap&) = delete;
-   wxStaticBitmap& operator=(const wxStaticBitmap&) = delete;
-   wxStaticBitmap(wxStaticBitmap&&) = default;
-   wxStaticBitmap& operator=(wxStaticBitmap&&) = default;
+    wxStaticBitmap(const wxStaticBitmap&) = delete;
+    wxStaticBitmap& operator=(const wxStaticBitmap&) = delete;
+    wxStaticBitmap(wxStaticBitmap&&) = default;
+    wxStaticBitmap& operator=(wxStaticBitmap&&) = default;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,

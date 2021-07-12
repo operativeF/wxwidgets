@@ -38,10 +38,10 @@ public:
 
     ~wxStatusBar() override;
 
-wxStatusBar(const wxStatusBar&) = delete;
-   wxStatusBar& operator=(const wxStatusBar&) = delete;
-   wxStatusBar(wxStatusBar&&) = default;
-   wxStatusBar& operator=(wxStatusBar&&) = default;
+    wxStatusBar(const wxStatusBar&) = delete;
+    wxStatusBar& operator=(const wxStatusBar&) = delete;
+    wxStatusBar(wxStatusBar&&) = default;
+    wxStatusBar& operator=(wxStatusBar&&) = default;
 
     // implement base class methods
     void SetFieldsCount(int number = 1, const int *widths = nullptr) override;

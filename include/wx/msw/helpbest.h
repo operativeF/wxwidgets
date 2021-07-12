@@ -29,10 +29,10 @@ public:
 
     ~wxBestHelpController() override { delete m_helpController; }
 
-   wxBestHelpController(const wxBestHelpController&) = delete;
-   wxBestHelpController& operator=(const wxBestHelpController&) = delete;
-   wxBestHelpController(wxBestHelpController&&) = default;
-   wxBestHelpController& operator=(wxBestHelpController&&) = default;
+    wxBestHelpController(const wxBestHelpController&) = delete;
+    wxBestHelpController& operator=(const wxBestHelpController&) = delete;
+    wxBestHelpController(wxBestHelpController&&) = default;
+    wxBestHelpController& operator=(wxBestHelpController&&) = default;
 
     // Must call this to set the filename
     bool Initialize(const wxString& file) override;

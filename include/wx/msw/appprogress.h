@@ -21,10 +21,10 @@ public:
     wxAppProgressIndicator(wxWindow* parent = nullptr, int maxValue = 100);
     ~wxAppProgressIndicator() override;
 
-   wxAppProgressIndicator(const wxAppProgressIndicator&) = delete;
-   wxAppProgressIndicator& operator=(const wxAppProgressIndicator&) = delete;
-   wxAppProgressIndicator(wxAppProgressIndicator&&) = default;
-   wxAppProgressIndicator& operator=(wxAppProgressIndicator&&) = default;
+    wxAppProgressIndicator(const wxAppProgressIndicator&) = delete;
+    wxAppProgressIndicator& operator=(const wxAppProgressIndicator&) = delete;
+    wxAppProgressIndicator(wxAppProgressIndicator&&) = default;
+    wxAppProgressIndicator& operator=(wxAppProgressIndicator&&) = default;
     
     bool IsAvailable() const override;
 

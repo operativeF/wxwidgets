@@ -21,7 +21,7 @@ public:
     wxRegion(WXHRGN hRegion); // Hangs on to this region
     wxRegion(size_t n, const wxPoint *points, wxPolygonFillMode fillStyle = wxODDEVEN_RULE );
 #if wxUSE_IMAGE
-    wxRegion( const wxBitmap& bmp)
+    explicit wxRegion( const wxBitmap& bmp)
     {
         Union(bmp);
     }

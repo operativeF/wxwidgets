@@ -42,16 +42,16 @@ public:
     wxIcon() = default;
 
         // from raw data
-    wxIcon(const char bits[], int width, int height);
+    explicit wxIcon(const char bits[], int width, int height);
 
         // from XPM data
-    wxIcon(const char* const* data) { CreateIconFromXpm(data); }
+    explicit wxIcon(const char* const* data) { CreateIconFromXpm(data); }
         // from resource/file
     wxIcon(const wxString& name,
            wxBitmapType type = wxICON_DEFAULT_TYPE,
            int desiredWidth = -1, int desiredHeight = -1);
 
-    wxIcon(const wxIconLocation& loc);
+    explicit wxIcon(const wxIconLocation& loc);
 
     ~wxIcon() override;
 

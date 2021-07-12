@@ -18,7 +18,7 @@
 class WXDLLIMPEXP_CORE wxCHMHelpController : public wxHelpControllerBase
 {
 public:
-    wxCHMHelpController(wxWindow* parentWindow = nullptr): wxHelpControllerBase(parentWindow) { }
+    explicit wxCHMHelpController(wxWindow* parentWindow = nullptr): wxHelpControllerBase(parentWindow) { }
 
     // Must call this to set the filename
     bool Initialize(const wxString& file) override;

@@ -43,6 +43,8 @@ public:
 
     wxRadioBox(const wxRadioBox&) = delete;
 	wxRadioBox& operator=(const wxRadioBox&) = delete;
+    wxRadioBox(wxRadioBox&&) = default;
+    wxRadioBox& operator=(wxRadioBox&&) = default;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,

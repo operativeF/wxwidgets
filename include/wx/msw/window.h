@@ -48,6 +48,8 @@ public:
 
     wxWindowMSW(const wxWindowMSW&) = delete;
 	wxWindowMSW& operator=(const wxWindowMSW&) = delete;
+    wxWindowMSW(wxWindowMSW&&) = default;
+    wxWindowMSW& operator=(wxWindowMSW&&) = default;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,

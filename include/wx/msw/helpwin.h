@@ -22,7 +22,7 @@ class WXDLLIMPEXP_CORE wxWinHelpController: public wxHelpControllerBase
     wxDECLARE_DYNAMIC_CLASS(wxWinHelpController);
 
 public:
-    wxWinHelpController(wxWindow* parentWindow = nullptr): wxHelpControllerBase(parentWindow) {}
+    explicit wxWinHelpController(wxWindow* parentWindow = nullptr): wxHelpControllerBase(parentWindow) {}
     ~wxWinHelpController() override = default;
 
     // Must call this to set the filename

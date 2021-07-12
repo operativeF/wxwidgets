@@ -26,7 +26,7 @@ public:
     wxAcceleratorTable() = default;
 
     // load from .rc resource (Windows specific)
-    wxAcceleratorTable(const wxString& resource);
+    explicit wxAcceleratorTable(const wxString& resource);
 
     // initialize from array
     wxAcceleratorTable(gsl::span<wxAcceleratorEntry> entries);

@@ -28,6 +28,13 @@ public:
                  const wxSize& sz = wxDefaultSize,
                  const wxString& name = wxASCII_STR(wxFileDialogNameStr));
 
+    wxFileDialog(const wxFileDialog&) = delete;
+    wxFileDialog& operator=(const wxFileDialog&) = delete;
+    wxFileDialog(wxFileDialog&&) = default;
+    wxFileDialog& operator=(wxFileDialog&&) = default;
+
+    ~wxFileDialog() = default;
+
     std::vector<wxString> GetPaths() const override;
     std::vector<wxString> GetFilenames() const override;
     bool SupportsExtraControl() const override { return true; }
@@ -63,8 +70,6 @@ private:
     int m_centreDir{0};        // nothing to do if 0
 
     wxDECLARE_DYNAMIC_CLASS(wxFileDialog);
-    wxFileDialog(const wxFileDialog&) = delete;
-	wxFileDialog& operator=(const wxFileDialog&) = delete;
 };
 
 #endif // _WX_FILEDLG_H_

@@ -18,7 +18,7 @@
 class WXDLLIMPEXP_CORE wxPopupWindow : public wxPopupWindowBase
 {
 public:
-    wxPopupWindow() { m_owner = nullptr; }
+    wxPopupWindow() = default;
 
     wxPopupWindow(wxWindow *parent, int flags = wxBORDER_NONE)
         { Create(parent, flags); }
@@ -52,7 +52,7 @@ public:
     virtual void MSWDismissUnfocusedPopup() { }
 
 private:
-    wxWindow* m_owner;
+    wxWindow* m_owner{nullptr};
 
 public:
 	wxClassInfo *GetClassInfo() const override;

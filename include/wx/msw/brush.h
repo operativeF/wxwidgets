@@ -24,7 +24,7 @@ class WXDLLIMPEXP_CORE wxBrush : public wxBrushBase
 public:
     wxBrush();
     wxBrush(const wxColour& col, wxBrushStyle style = wxBrushStyle::Solid);
-    wxBrush(const wxBitmap& stipple);
+    explicit wxBrush(const wxBitmap& stipple);
     ~wxBrush() override;
 
     void SetColour(const wxColour& col) override;

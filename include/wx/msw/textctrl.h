@@ -28,12 +28,13 @@ public:
     {
         Create(parent, id, value, pos, size, style, validator, name);
     }
+
     ~wxTextCtrl() override;
 
-wxTextCtrl(const wxTextCtrl&) = delete;
-   wxTextCtrl& operator=(const wxTextCtrl&) = delete;
-   wxTextCtrl(wxTextCtrl&&) = default;
-   wxTextCtrl& operator=(wxTextCtrl&&) = default;
+    wxTextCtrl(const wxTextCtrl&) = delete;
+    wxTextCtrl& operator=(const wxTextCtrl&) = delete;
+    wxTextCtrl(wxTextCtrl&&) = default;
+    wxTextCtrl& operator=(wxTextCtrl&&) = default;
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const wxString& value = wxEmptyString,

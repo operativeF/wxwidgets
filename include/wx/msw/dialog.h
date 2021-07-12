@@ -32,10 +32,10 @@ public:
 
     ~wxDialog() override;
 
-   wxDialog(const wxDialog&) = delete;
-   wxDialog& operator=(const wxDialog&) = delete;
-   wxDialog(wxDialog&&) = default;
-   wxDialog& operator=(wxDialog&&) = default;
+    wxDialog(const wxDialog&) = delete;
+    wxDialog& operator=(const wxDialog&) = delete;
+    wxDialog(wxDialog&&) = default;
+    wxDialog& operator=(wxDialog&&) = default;
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const wxString& title,

@@ -39,7 +39,7 @@ public:
         
           
     {
-        (void)Create(parent, id, value, pos, size,
+        Create(parent, id, value, pos, size,
                      choices, style, validator, name);
     }
 

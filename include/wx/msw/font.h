@@ -22,13 +22,6 @@ class WXDLLIMPEXP_CORE wxFont : public wxFontBase
 public:
     wxFont() = default;
     wxFont(const wxFontInfo& info);
-    
-    wxFont(const wxFont&) = default;
-    wxFont& operator=(const wxFont&) = default;
-    wxFont(wxFont&&) = default;
-    wxFont& operator=(wxFont&&) = default;
-
-    ~wxFont() override;
 
     wxFont(int size,
            wxFontFamily family,

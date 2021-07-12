@@ -27,10 +27,10 @@ public:
      if ( n ) Create(n);
     }
 
-   wxSubwindows(const wxSubwindows&) = delete;
-   wxSubwindows& operator=(const wxSubwindows&) = delete;
-   wxSubwindows(wxSubwindows&&) = default;
-   wxSubwindows& operator=(wxSubwindows&&) = default;
+    wxSubwindows(const wxSubwindows&) = delete;
+    wxSubwindows& operator=(const wxSubwindows&) = delete;
+    wxSubwindows(wxSubwindows&&) = default;
+    wxSubwindows& operator=(wxSubwindows&&) = default;
     
     // allocate enough space for the given number of windows
     void Create(size_t n)
@@ -42,7 +42,6 @@ public:
         m_ids = new wxWindowIDRef[n];
     }
 
-    // non-virtual dtor, this class is not supposed to be used polymorphically
     ~wxSubwindows()
     {
         for ( size_t n = 0; n < m_count; n++ )

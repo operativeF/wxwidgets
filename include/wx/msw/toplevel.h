@@ -43,10 +43,10 @@ public:
 
     ~wxTopLevelWindowMSW() override;
 
-   wxTopLevelWindowMSW(const wxTopLevelWindowMSW&) = delete;
-   wxTopLevelWindowMSW& operator=(const wxTopLevelWindowMSW&) = delete;
-   wxTopLevelWindowMSW(wxTopLevelWindowMSW&&) = default;
-   wxTopLevelWindowMSW& operator=(wxTopLevelWindowMSW&&) = default;
+    wxTopLevelWindowMSW(const wxTopLevelWindowMSW&) = delete;
+    wxTopLevelWindowMSW& operator=(const wxTopLevelWindowMSW&) = delete;
+    wxTopLevelWindowMSW(wxTopLevelWindowMSW&&) = default;
+    wxTopLevelWindowMSW& operator=(wxTopLevelWindowMSW&&) = default;
     
     void SetTitle( const wxString& title) override;
     wxString GetTitle() const override;

@@ -28,10 +28,10 @@ public:
     wxPrinterDCImpl( wxPrinterDC *owner, const wxPrintData& data );
     wxPrinterDCImpl( wxPrinterDC *owner, WXHDC theDC );
 
-   wxPrinterDCImpl(const wxPrinterDCImpl&) = delete;
-   wxPrinterDCImpl& operator=(const wxPrinterDCImpl&) = delete;
-   wxPrinterDCImpl(wxPrinterDCImpl&&) = default;
-   wxPrinterDCImpl& operator=(wxPrinterDCImpl&&) = default;
+    wxPrinterDCImpl(const wxPrinterDCImpl&) = delete;
+    wxPrinterDCImpl& operator=(const wxPrinterDCImpl&) = delete;
+    wxPrinterDCImpl(wxPrinterDCImpl&&) = default;
+    wxPrinterDCImpl& operator=(wxPrinterDCImpl&&) = default;
 
     // override some base class virtuals
     bool StartDoc(const wxString& message) override;

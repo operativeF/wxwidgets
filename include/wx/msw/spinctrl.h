@@ -45,7 +45,9 @@ public:
     }
 
     wxSpinCtrl(const wxSpinCtrl&) = delete;
-	wxSpinCtrl& operator=(const wxSpinCtrl&) = delete;
+    wxSpinCtrl& operator=(const wxSpinCtrl&) = delete;
+    wxSpinCtrl(wxSpinCtrl&&) = default;
+    wxSpinCtrl& operator=(wxSpinCtrl&&) = default;
 
     ~wxSpinCtrl() override;
 

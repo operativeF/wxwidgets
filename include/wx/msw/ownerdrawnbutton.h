@@ -28,8 +28,6 @@ protected:
     wxMSWOwnerDrawnButtonBase(wxWindow* win) :
         m_win(win)
     {
-        m_isPressed =
-        m_isHot = false;
     }
 
     // Explicitly define the destructor even if it's trivial to make it
@@ -37,13 +35,12 @@ protected:
     // has virtual functions, but no virtual destructor without making the dtor
     // virtual which is not needed here as objects are never deleted via
     // pointers to this class (and protected dtor enforces this).
-    // FIXME: Verify this.
     ~wxMSWOwnerDrawnButtonBase() = default;
 
-   wxMSWOwnerDrawnButtonBase(const wxMSWOwnerDrawnButtonBase&) = delete;
-   wxMSWOwnerDrawnButtonBase& operator=(const wxMSWOwnerDrawnButtonBase&) = delete;
-   wxMSWOwnerDrawnButtonBase(wxMSWOwnerDrawnButtonBase&&) = default;
-   wxMSWOwnerDrawnButtonBase& operator=(wxMSWOwnerDrawnButtonBase&&) = default;
+    wxMSWOwnerDrawnButtonBase(const wxMSWOwnerDrawnButtonBase&) = delete;
+    wxMSWOwnerDrawnButtonBase& operator=(const wxMSWOwnerDrawnButtonBase&) = delete;
+    wxMSWOwnerDrawnButtonBase(wxMSWOwnerDrawnButtonBase&&) = default;
+    wxMSWOwnerDrawnButtonBase& operator=(wxMSWOwnerDrawnButtonBase&&) = default;
 
     // Make the control owner drawn if necessary to implement support for the
     // given foreground colour.
@@ -92,10 +89,10 @@ private:
     wxWindow* const m_win;
 
     // true if the checkbox is currently pressed
-    bool m_isPressed;
+    bool m_isPressed{false};
 
     // true if mouse is currently over the control
-    bool m_isHot;
+    bool m_isHot{false};
 };
 
 // This class uses a weak version of CRTP, i.e. it's a template class taking

@@ -24,10 +24,10 @@ class WXDLLIMPEXP_CORE wxWindowsPrinter : public wxPrinterBase
 public:
     wxWindowsPrinter(wxPrintDialogData *data = nullptr);
 
-   wxWindowsPrinter(const wxWindowsPrinter&) = delete;
-   wxWindowsPrinter& operator=(const wxWindowsPrinter&) = delete;
-   wxWindowsPrinter(wxWindowsPrinter&&) = default;
-   wxWindowsPrinter& operator=(wxWindowsPrinter&&) = default;
+    wxWindowsPrinter(const wxWindowsPrinter&) = delete;
+    wxWindowsPrinter& operator=(const wxWindowsPrinter&) = delete;
+    wxWindowsPrinter(wxWindowsPrinter&&) = default;
+    wxWindowsPrinter& operator=(wxWindowsPrinter&&) = default;
 
     bool Print(wxWindow *parent,
                        wxPrintout *printout,

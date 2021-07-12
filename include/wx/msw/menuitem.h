@@ -42,10 +42,10 @@ public:
                wxMenu *subMenu = nullptr);
     ~wxMenuItem() override;
 
-wxMenuItem(const wxMenuItem&) = delete;
-   wxMenuItem& operator=(const wxMenuItem&) = delete;
-   wxMenuItem(wxMenuItem&&) = default;
-   wxMenuItem& operator=(wxMenuItem&&) = default;
+    wxMenuItem(const wxMenuItem&) = delete;
+    wxMenuItem& operator=(const wxMenuItem&) = delete;
+    wxMenuItem(wxMenuItem&&) = default;
+    wxMenuItem& operator=(wxMenuItem&&) = default;
 
     // override base class virtuals
     void SetItemLabel(const wxString& strName) override;
