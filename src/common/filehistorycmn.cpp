@@ -151,7 +151,7 @@ void wxFileHistoryBase::DoRefreshLabels()
     {
         const wxFileName currFn(m_fileHistory[i]);
 
-        const wxString pathInMenu = [=]() {
+        const wxString pathInMenu = [this, currFn, firstPath]() {
             switch ( m_menuPathStyle )
             {
                 case wxFH_PATH_SHOW_IF_DIFFERENT:

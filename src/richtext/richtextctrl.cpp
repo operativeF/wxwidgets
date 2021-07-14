@@ -4474,7 +4474,7 @@ bool wxRichTextCtrl::ApplyTextEffectToSelection(int flags)
 /// Is all of the selection aligned according to the specified flag?
 bool wxRichTextCtrl::IsSelectionAligned(wxTextAttrAlignment alignment)
 {
-    const wxRichTextRange range = [=](){
+    const wxRichTextRange range = [this](){
         if(HasSelection())
             return GetSelectionRange();
         else

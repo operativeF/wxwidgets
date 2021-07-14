@@ -1433,7 +1433,7 @@ wxSocketBase::DoWait(long timeout, wxSocketEventFlags flags)
     // Get the active event loop which we'll use for the message dispatching
     // when running in the main thread unless this was explicitly disabled by
     // setting wxSOCKET_BLOCK flag
-    wxEventLoopBase* eventLoop = [=]()
+    wxEventLoopBase* eventLoop = [this]()
     {
         if ( !(m_flags & wxSOCKET_BLOCK) && wxIsMainThread() )
         {

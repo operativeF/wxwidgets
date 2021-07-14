@@ -439,11 +439,11 @@ void wxBookCtrlBase::DoSetSelectionAfterRemoval(size_t n)
     if ( m_selection >= (int)n )
     {
         // ensure that the selection is valid
-        const int sel = [=]() {
-        if ( GetPageCount() == 0 )
-            return wxNOT_FOUND;
-        else
-            return m_selection ? m_selection - 1 : 0;
+        const int sel = [this]() {
+            if ( GetPageCount() == 0 )
+                return wxNOT_FOUND;
+            else
+                return m_selection ? m_selection - 1 : 0;
         }();
 
         // if deleting current page we shouldn't try to hide it
