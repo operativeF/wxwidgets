@@ -407,7 +407,7 @@ void wxMDIParentFrame::DoMenuUpdates(wxMenu* menu)
         {
             if ( bar != nullptr )
             {
-                for (int n = 0; n < bar->GetMenuCount(); n++)
+                for (size_t n = 0; n < bar->GetMenuCount(); n++)
                     bar->GetMenu(n)->UpdateUI();
             }
         }

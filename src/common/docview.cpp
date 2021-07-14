@@ -1750,10 +1750,9 @@ wxDocTemplate *wxDocManager::SelectDocumentType(wxDocTemplate **templates,
 
     auto data = std::make_unique<wxDocTemplate*[]>(noTemplates);
 
-    int i;
     int n = 0;
 
-    for (i = 0; i < noTemplates; i++)
+    for (int i = 0; i < noTemplates; i++)
     {
         if (templates[i]->IsVisible())
         {
@@ -1782,7 +1781,7 @@ wxDocTemplate *wxDocManager::SelectDocumentType(wxDocTemplate **templates,
     {
         std::sort(strings.begin(), strings.end());
 
-        for (i = 0; i < strings.size(); i++)
+        for (size_t i = 0; i < strings.size(); i++)
         {
             for (int j = 0; j < noTemplates; j++)
             {

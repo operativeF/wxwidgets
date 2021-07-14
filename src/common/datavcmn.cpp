@@ -490,7 +490,7 @@ void wxDataViewIndexListModel::RowsDeleted( const std::vector<int> &rows )
     m_ordered = false;
 
     wxDataViewItemArray array;
-    for (int i = 0; i < rows.size(); i++)
+    for (size_t i = 0; i < rows.size(); i++)
     {
             const wxDataViewItem item( m_hash[rows[i]] );
             array.push_back( item );
@@ -500,7 +500,7 @@ void wxDataViewIndexListModel::RowsDeleted( const std::vector<int> &rows )
 
     std::sort(sorted.begin(), sorted.end());
 
-    for (int i = 0; i < sorted.size(); i++)
+    for (size_t i = 0; i < sorted.size(); i++)
            m_hash.erase( m_hash.begin() + sorted[i] );
 
     /* wxDataViewModel:: */ ItemsDeleted( wxDataViewItem(nullptr), array );

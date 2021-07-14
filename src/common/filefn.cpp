@@ -263,7 +263,7 @@ wxPathOnly (wxChar *path)
     {
         static wxChar buf[_MAXPATHLEN];
 
-        const int l = wxStrlen(path);
+        const auto l = wxStrlen(path);
         int i = l - 1;
         if ( i >= _MAXPATHLEN )
             return nullptr;

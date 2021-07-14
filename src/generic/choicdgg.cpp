@@ -222,7 +222,7 @@ bool wxSingleChoiceDialog::Create( wxWindow *parent,
 
     if (clientData)
     {
-        for (int i = 0; i < choices.size(); i++)
+        for (size_t i = 0; i < choices.size(); i++)
             m_listbox->SetClientData(i, clientData[i]);
     }
 

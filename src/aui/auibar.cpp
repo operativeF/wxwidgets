@@ -2224,7 +2224,7 @@ void wxAuiToolBar::OnSize(wxSizeEvent& WXUNUSED(evt))
         ((client_size.y > client_size.x) && m_absoluteMinSize.y > client_size.y))
     {
         // hide all flexible items
-        for (int i = 0; i < m_items.GetCount(); ++i)
+        for (size_t i = 0; i < m_items.GetCount(); ++i)
         {
             wxAuiToolBarItem& item = m_items.Item(i);
             if (item.m_sizerItem && item.m_proportion > 0 && item.m_sizerItem->IsShown())
@@ -2237,7 +2237,7 @@ void wxAuiToolBar::OnSize(wxSizeEvent& WXUNUSED(evt))
     else
     {
         // show all flexible items
-        for (int i = 0; i < m_items.GetCount(); ++i)
+        for (size_t i = 0; i < m_items.GetCount(); ++i)
         {
             wxAuiToolBarItem& item = m_items.Item(i);
             if (item.m_sizerItem && item.m_proportion > 0 && !item.m_sizerItem->IsShown())
