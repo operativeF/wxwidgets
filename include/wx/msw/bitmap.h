@@ -140,12 +140,12 @@ public:
     bool ConvertToDIB();
 #endif
 
-    virtual [[maybe_unused]] bool Create(int width, int height, int depth = wxBITMAP_SCREEN_DEPTH);
-    virtual [[maybe_unused]] bool Create(const wxSize& sz, int depth = wxBITMAP_SCREEN_DEPTH)
+    [[maybe_unused]] virtual bool Create(int width, int height, int depth = wxBITMAP_SCREEN_DEPTH);
+    [[maybe_unused]] virtual bool Create(const wxSize& sz, int depth = wxBITMAP_SCREEN_DEPTH)
         { return Create(sz.x, sz.y, depth); }
 
-    virtual [[maybe_unused]] bool Create(int width, int height, const wxDC& dc);
-    virtual [[maybe_unused]] bool Create(const void* data, wxBitmapType type, int width, int height, int depth = 1);
+    [[maybe_unused]] virtual bool Create(int width, int height, const wxDC& dc);
+    [[maybe_unused]] virtual bool Create(const void* data, wxBitmapType type, int width, int height, int depth = 1);
     virtual bool CreateScaled(int w, int h, int d, double logicalScale)
         { return Create(wxRound(w*logicalScale), wxRound(h*logicalScale), d); }
 
@@ -303,7 +303,7 @@ public:
     // make wxBitmapHandler compatible with the wxBitmapHandler interface
     // declared in bitmap.h, even if it's derived from wxGDIImageHandler:
 
-    virtual [[maybe_unused]] bool Create(wxBitmap *bitmap,
+    [[maybe_unused]] virtual bool Create(wxBitmap *bitmap,
                         const void* data,
                         wxBitmapType type,
                         int width, int height, int depth = 1);

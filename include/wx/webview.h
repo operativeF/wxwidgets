@@ -143,7 +143,7 @@ public:
 
     ~wxWebView() override = default;
 
-    virtual [[maybe_unused]] bool Create(wxWindow* parent,
+    [[maybe_unused]] virtual bool Create(wxWindow* parent,
            wxWindowID id,
            const wxString& url = wxASCII_STR(wxWebViewDefaultURLStr),
            const wxPoint& pos = wxDefaultPosition,

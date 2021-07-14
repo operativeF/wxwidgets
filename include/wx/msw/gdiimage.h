@@ -161,7 +161,7 @@ public:
     wxBitmapType GetType() const { return m_type; }
 
     // real handler operations: to implement in derived classes
-    virtual [[maybe_unused]] bool Create(wxGDIImage *image,
+    [[maybe_unused]] virtual bool Create(wxGDIImage *image,
                         const void* data,
                         wxBitmapType flags,
                         int width, int height, int depth = 1) = 0;
