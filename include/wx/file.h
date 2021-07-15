@@ -50,14 +50,16 @@ public:
     // (only read and write make sense here)
   static bool Access(const wxString& name, OpenMode mode);
 
-  wxFile() { m_fd = fd_invalid; m_lasterror = 0; }
+  wxFile() = default;
     // open specified file (may fail, use IsOpened())
   wxFile(const wxString& fileName, OpenMode mode = read);
     // attach to (already opened) file
-  wxFile(int lfd) { m_fd = lfd; m_lasterror = 0; }
+  wxFile(int lfd) : m_fd(lfd), m_lasterror(0) {}
 
-  wxFile(const wxFile&) = delete;;
+  wxFile(const wxFile&) = delete;
   wxFile& operator=(const wxFile&) = delete;
+  wxFile(wxFile&&) = default;
+  wxFile& operator=(wxFile&&) = default;
 
   // open/close
     // create a new file (with the default value of bOverwrite, it will fail if
@@ -142,6 +144,9 @@ public:
     // associates the temp file with the file to be replaced and opens it
   explicit wxTempFile(const wxString& strName);
 
+  wxTempFile(const wxTempFile&) = delete;
+  wxTempFile& operator=(const wxTempFile&) = delete;
+
   // open the temp file (strName is the name of file to be replaced)
   bool Open(const wxString& strName);
 
@@ -174,9 +179,6 @@ public:
  ~wxTempFile();
 
 private:
-  // no copy ctor/assignment operator
-  wxTempFile(const wxTempFile&);
-  wxTempFile& operator=(const wxTempFile&);
 
   wxString  m_strName,  // name of the file to replace in Commit()
             m_strTemp;  // temporary file name
