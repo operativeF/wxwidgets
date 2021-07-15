@@ -15,18 +15,7 @@
 #include "doctest.h"
 
 // For compilers that support precompilation, includes "wx/wx.h"
-// and "catch.hpp"
 #include "testprec.h"
-
-
-// Suppress some warnings in catch_impl.hpp.
-wxCLANG_WARNING_SUPPRESS(missing-braces)
-wxCLANG_WARNING_SUPPRESS(logical-op-parentheses)
-wxCLANG_WARNING_SUPPRESS(inconsistent-missing-override)
-
-wxCLANG_WARNING_RESTORE(missing-braces)
-wxCLANG_WARNING_RESTORE(logical-op-parentheses)
-wxCLANG_WARNING_RESTORE(inconsistent-missing-override)
 
 // Also define our own global variables.
 namespace wxPrivate
@@ -80,11 +69,6 @@ struct CrtAssertFailure
 
     CrtAssertFailure& operator=(const CrtAssertFailure&) = delete;
 };
-
-CATCH_TRANSLATE_EXCEPTION(CrtAssertFailure& e)
-{
-    return "CRT assert failure: " + e.m_msg.ToStdString(wxConvUTF8);
-}
 
 #endif // wxUSE_VC_CRTDBG
 

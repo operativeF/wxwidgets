@@ -36,8 +36,6 @@
 // We have to include this one first in order to check for HAVE_XXX below.
 #include "wx/setup.h"
 
-#include "catch.hpp"
-
 #if defined(__WXMSW__)
     #include <windows.h>
 

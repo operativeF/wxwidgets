@@ -4,7 +4,6 @@
 
     Excluded headers:
 
-    #include <wx/catch_cppunit.h>
     #include <wx/dvrenderers.h>
     #include <wx/fmappriv.h>
     #include <wx/setup_inc.h>

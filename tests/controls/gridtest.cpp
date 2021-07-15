@@ -212,7 +212,7 @@ template <> struct StringMaker<Multicell>
     }
 };
 
-} // namespace Catch
+} // namespace doctest
 
 class GridTestCase
 {
