@@ -7,11 +7,6 @@
 // Copyright:   (c) Julian Smart
 // Licence:     wxWindows licence
 /////////////////////////////////////////////////////////////////////////////
-
-// ===========================================================================
-// declarations
-// ===========================================================================
-
 // For compilers that support precompilation, includes "wx.h".
 #include "wx/wxprec.h"
 
