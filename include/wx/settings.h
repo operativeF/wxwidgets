@@ -251,7 +251,7 @@ public:
     static void SetScreenType( wxSystemScreenType screen );
 
     // Value
-    static wxSystemScreenType ms_screen;
+    inline static wxSystemScreenType ms_screen{wxSYS_SCREEN_NONE};
 
 };
 

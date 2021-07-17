@@ -394,12 +394,6 @@ std::vector<std::wstring_view> SVSplit(std::wstring_view str, wchar_t delim)
     return output;
 }
 
-// ============================================================================
-// wxFontMapperBase implementation
-// ============================================================================
-
-wxFontMapper *wxFontMapperBase::sm_instance = nullptr;
-
 // ----------------------------------------------------------------------------
 // ctor and dtor
 // ----------------------------------------------------------------------------

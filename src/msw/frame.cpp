@@ -73,14 +73,6 @@ wxEND_EVENT_TABLE()
 // static class members
 // ----------------------------------------------------------------------------
 
-#if wxUSE_STATUSBAR
-    #if wxUSE_NATIVE_STATUSBAR
-        bool wxFrame::m_useNativeStatusBar = true;
-    #else
-        bool wxFrame::m_useNativeStatusBar = false;
-    #endif
-#endif // wxUSE_NATIVE_STATUSBAR
-
 bool wxFrame::Create(wxWindow *parent,
                      wxWindowID id,
                      const wxString& title,

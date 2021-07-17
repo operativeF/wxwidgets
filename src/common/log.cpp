@@ -951,23 +951,6 @@ wxLogInterposerTemp::wxLogInterposerTemp()
 // ============================================================================
 
 // ----------------------------------------------------------------------------
-// static variables
-// ----------------------------------------------------------------------------
-
-bool            wxLog::ms_bRepetCounting = false;
-
-wxLog          *wxLog::ms_pLogger      = nullptr;
-bool            wxLog::ms_doLog        = true;
-bool            wxLog::ms_bAutoCreate  = true;
-bool            wxLog::ms_bVerbose     = false;
-
-wxLogLevel      wxLog::ms_logLevel     = wxLOG_Max;  // log everything by default
-
-size_t          wxLog::ms_suspendCount = 0;
-
-wxString        wxLog::ms_timestamp(wxS("%X"));  // time only, no date
-
-// ----------------------------------------------------------------------------
 // stdout error logging helper
 // ----------------------------------------------------------------------------
 

@@ -125,8 +125,6 @@ public:
 #if wxUSE_IMAGE
         SetBitmap(bitmap.ConvertToDisabled(), wxAnyButton::State_Disabled);
 #endif
-        m_dir = wxLEFT;
-
         // we use margins when we have both bitmap and text, but when we have
         // only the bitmap it should take up the entire button area
         if ( btn->ShowsLabel() )
@@ -174,7 +172,7 @@ private:
     // from the drawing code
     wxBitmap m_bitmaps[wxAnyButton::State_Max];
     wxSize m_margin;
-    wxDirection m_dir;
+    wxDirection m_dir{wxLEFT};
 };
 
 #if wxUSE_UXTHEME

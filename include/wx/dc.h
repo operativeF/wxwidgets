@@ -122,7 +122,7 @@ public:
     static wxDCFactory *Get();
 
 private:
-    static wxDCFactory *m_factory;
+    inline static wxDCFactory *m_factory{nullptr};
 };
 
 //-----------------------------------------------------------------------------

@@ -188,9 +188,8 @@ typedef enum APPDOCLISTTYPE
 
 } // anonymous namespace
 
-class wxITaskbarList : public IUnknown
+struct wxITaskbarList : public IUnknown
 {
-public:
     virtual HRESULT wxSTDCALL HrInit() = 0;
     virtual HRESULT wxSTDCALL AddTab(HWND) = 0;
     virtual HRESULT wxSTDCALL DeleteTab(HWND) = 0;
@@ -198,15 +197,13 @@ public:
     virtual HRESULT wxSTDCALL SetActiveAlt(HWND) = 0;
 };
 
-class wxITaskbarList2 : public wxITaskbarList
+struct wxITaskbarList2 : public wxITaskbarList
 {
-public:
     virtual HRESULT wxSTDCALL MarkFullscreenWindow(HWND, BOOL) = 0;
 };
 
-class wxIShellLinkA : public IUnknown
+struct wxIShellLinkA : public IUnknown
 {
-public:
     virtual HRESULT wxSTDCALL GetPath(LPSTR, int, WIN32_FIND_DATAA*, DWORD) = 0;
     virtual HRESULT wxSTDCALL GetIDList(LPITEMIDLIST *ppidl) = 0;
     virtual HRESULT wxSTDCALL SetIDList(LPCITEMIDLIST pidl) = 0;
@@ -227,9 +224,8 @@ public:
     virtual HRESULT wxSTDCALL SetPath(LPCSTR) = 0;
 };
 
-class wxIShellLinkW : public IUnknown
+struct wxIShellLinkW : public IUnknown
 {
-public:
     virtual HRESULT wxSTDCALL GetPath(LPWSTR, int, WIN32_FIND_DATAW*, DWORD) = 0;
     virtual HRESULT wxSTDCALL GetIDList(LPITEMIDLIST *ppidl) = 0;
     virtual HRESULT wxSTDCALL SetIDList(LPCITEMIDLIST pidl) = 0;
@@ -250,9 +246,8 @@ public:
     virtual HRESULT wxSTDCALL SetPath(LPCWSTR) = 0;
 };
 
-class IShellItem : public IUnknown
+struct IShellItem : public IUnknown
 {
-public:
     virtual HRESULT wxSTDCALL BindToHandler(IBindCtx*, REFGUID, REFIID, void **) = 0;
     virtual HRESULT wxSTDCALL GetParent(IShellItem **) = 0;
     virtual HRESULT wxSTDCALL GetDisplayName(SIGDN, LPWSTR*) = 0;
@@ -260,25 +255,22 @@ public:
     virtual HRESULT wxSTDCALL Compare(IShellItem *, SICHINTF, int *) = 0;
 };
 
-class IObjectArray : public IUnknown
+struct IObjectArray : public IUnknown
 {
-public:
     virtual HRESULT wxSTDCALL GetCount(UINT*) = 0;
     virtual HRESULT wxSTDCALL GetAt(UINT, REFIID, void **) = 0;
 };
 
-class IObjectCollection : public IObjectArray
+struct IObjectCollection : public IObjectArray
 {
-public:
     virtual HRESULT wxSTDCALL AddObject(IUnknown *) = 0;
     virtual HRESULT wxSTDCALL AddFromArray(IObjectArray *) = 0;
     virtual HRESULT wxSTDCALL RemoveObjectAt(UINT) = 0;
     virtual HRESULT wxSTDCALL Clear() = 0;
 };
 
-class IPropertyStore : public IUnknown
+struct IPropertyStore : public IUnknown
 {
-public:
     virtual HRESULT wxSTDCALL GetCount(DWORD *) = 0;
     virtual HRESULT wxSTDCALL GetAt(DWORD, PROPERTYKEY *) = 0;
     virtual HRESULT wxSTDCALL GetValue(REFPROPERTYKEY, PROPVARIANT *) = 0;
@@ -286,9 +278,8 @@ public:
     virtual HRESULT wxSTDCALL Commit() = 0;
 };
 
-class ICustomDestinationList : public IUnknown
+struct ICustomDestinationList : public IUnknown
 {
-public:
     virtual HRESULT wxSTDCALL SetAppID(LPCWSTR) = 0;
     virtual HRESULT wxSTDCALL BeginList(UINT*, REFIID, void**) = 0;
     virtual HRESULT wxSTDCALL AppendCategory(LPCWSTR, IObjectArray *) = 0;
@@ -300,9 +291,8 @@ public:
     virtual HRESULT wxSTDCALL AbortList() = 0;
 };
 
-class IApplicationDocumentLists : public IUnknown
+struct IApplicationDocumentLists : public IUnknown
 {
-public:
     virtual HRESULT wxSTDCALL SetAppID(LPCWSTR) = 0;
     virtual HRESULT wxSTDCALL GetList(APPDOCLISTTYPE, UINT, REFIID, void**) = 0;
 };

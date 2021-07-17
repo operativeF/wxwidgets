@@ -71,8 +71,6 @@ wxArchiveEntry& wxArchiveEntry::operator=(const wxArchiveEntry& WXUNUSED(e))
 /////////////////////////////////////////////////////////////////////////////
 // wxArchiveClassFactory
 
-wxArchiveClassFactory *wxArchiveClassFactory::sm_first = nullptr;
-
 void wxArchiveClassFactory::Remove()
 {
     if (m_next != this)

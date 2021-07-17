@@ -100,9 +100,6 @@ wxBEGIN_EVENT_TABLE(wxDialogBase, wxTopLevelWindow)
     EVT_CHAR_HOOK(wxDialogBase::OnCharHook)
 wxEND_EVENT_TABLE()
 
-wxDialogLayoutAdapter* wxDialogBase::sm_layoutAdapter = nullptr;
-bool wxDialogBase::sm_layoutAdaptation = false;
-
 wxDialogBase::wxDialogBase()
 {
     // the dialogs have this flag on by default to prevent the events from the

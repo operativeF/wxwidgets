@@ -196,7 +196,7 @@ protected:
     wxHelpEvent::Origin m_helptextOrigin{wxHelpEvent::Origin_Unknown};
 
 private:
-    static wxHelpProvider *ms_helpProvider;
+    inline static wxHelpProvider *ms_helpProvider{nullptr};
 };
 
 WX_DECLARE_EXPORTED_HASH_MAP( wxUIntPtr, wxString, wxIntegerHash,

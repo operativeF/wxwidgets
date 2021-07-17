@@ -390,7 +390,7 @@ protected:
 
     wxEvtHandler  *m_eventHandler;      // a pluggable in event handler
 
-    static bool      ms_locked;
+    inline static bool      ms_locked{true};
 
 
 protected:

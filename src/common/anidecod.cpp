@@ -21,9 +21,6 @@
 #include <cstdlib>
 #include <cstring>
 
-// static
-wxCURHandler wxANIDecoder::sm_handler;
-
 //---------------------------------------------------------------------------
 // wxANIFrameInfo
 //---------------------------------------------------------------------------

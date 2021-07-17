@@ -54,7 +54,15 @@ public:
 
     // constants and static functions
     // default type for current platform (determined at compile time)
-    static const wxTextFileType typeDefault;
+    inline static const wxTextFileType typeDefault = 
+#if defined(__WINDOWS__)
+  wxTextFileType_Dos;
+#elif defined(__UNIX__)
+  wxTextFileType_Unix;
+#else
+  wxTextFileType_None;
+  #error  "wxTextBuffer: unsupported platform."
+#endif
 
     // this function returns a string which is identical to "text" passed in
     // except that the line terminator characters are changed to correspond the
@@ -184,7 +192,7 @@ protected:
     virtual bool OnRead(const wxMBConv& conv) = 0;
     virtual bool OnWrite(wxTextFileType typeNew, const wxMBConv& conv) = 0;
 
-    static wxString ms_eof;     // dummy string returned at EOF
+    inline static wxString ms_eof;     // dummy string returned at EOF
     wxString m_strBufferName;   // name of the buffer
 
 private:

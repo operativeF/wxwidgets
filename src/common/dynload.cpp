@@ -36,8 +36,6 @@
 // ---------------------------------------------------------------------------
 
 
-wxDLImports*  wxPluginLibrary::ms_classes = nullptr;
-
 class wxPluginLibraryModule : public wxModule
 {
 public:
@@ -252,17 +250,6 @@ void wxPluginLibrary::UnregisterModules()
     // NB: content of the list was deleted by UnregisterModule calls above:
     m_wxmodules.clear();
 }
-
-
-// ---------------------------------------------------------------------------
-// wxPluginManager
-// ---------------------------------------------------------------------------
-
-wxDLManifest*   wxPluginManager::ms_manifest = nullptr;
-
-// ------------------------
-// Static accessors
-// ------------------------
 
 wxPluginLibrary *
 wxPluginManager::LoadLibrary(const wxString &libname, int flags)

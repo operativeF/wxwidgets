@@ -55,9 +55,9 @@ public:
     static void UnregisterModule(wxModule *module);
 
 protected:
-    static wxModuleList ms_modules;
+    inline static wxModuleList ms_modules;
 
-    static bool ms_areInitialized;
+    inline static bool ms_areInitialized{false};
 
     // the function to call from constructor of a deriving class add module
     // dependency which will be initialized before the module and unloaded

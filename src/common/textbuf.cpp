@@ -29,18 +29,6 @@
 // static methods (always compiled in)
 // ----------------------------------------------------------------------------
 
-// default type is the native one
-
-const wxTextFileType wxTextBuffer::typeDefault =
-#if defined(__WINDOWS__)
-  wxTextFileType_Dos;
-#elif defined(__UNIX__)
-  wxTextFileType_Unix;
-#else
-  wxTextFileType_None;
-  #error  "wxTextBuffer: unsupported platform."
-#endif
-
 const wxChar *wxTextBuffer::GetEOL(wxTextFileType type)
 {
     switch ( type ) {
@@ -119,8 +107,6 @@ wxString wxTextBuffer::Translate(const wxString& text, wxTextFileType type)
 }
 
 #if wxUSE_TEXTBUFFER
-
-wxString wxTextBuffer::ms_eof;
 
 // ----------------------------------------------------------------------------
 // ctors & dtor

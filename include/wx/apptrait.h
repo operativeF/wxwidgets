@@ -172,7 +172,7 @@ public:
 #endif // wxUSE_STACKWALKER
 
 private:
-    static wxSocketManager *ms_manager;
+    inline static wxSocketManager *ms_manager{nullptr};
 };
 
 // ----------------------------------------------------------------------------

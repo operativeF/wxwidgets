@@ -65,7 +65,7 @@ protected:
     wxAnimationImpl* GetImpl() const;
 
 private:
-    static wxAnimationDecoderList sm_handlers;
+    inline static wxAnimationDecoderList sm_handlers;
 
     // Ctor used by wxAnimationCtrl::CreateAnimation() only.
     explicit wxAnimation(wxAnimationImpl* impl);

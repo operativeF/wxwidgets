@@ -94,17 +94,12 @@ private:
     static HWND ms_hwnd;
 
     // the class used to create it
-    static const wxChar *ms_className;
+    inline static const wxChar *ms_className{nullptr};
 
     wxDECLARE_DYNAMIC_CLASS(wxTimerHiddenWindowModule);
 };
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxTimerHiddenWindowModule, wxModule);
-
-// ============================================================================
-// implementation
-// ============================================================================
-
 
 // ----------------------------------------------------------------------------
 // wxMSWTimerImpl class
@@ -184,8 +179,6 @@ wxTimerWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 
 HWND wxTimerHiddenWindowModule::ms_hwnd = nullptr;
-
-const wxChar *wxTimerHiddenWindowModule::ms_className = nullptr;
 
 bool wxTimerHiddenWindowModule::OnInit()
 {

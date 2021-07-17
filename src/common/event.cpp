@@ -448,14 +448,6 @@ wxNcPaintEvent::wxNcPaintEvent(wxWindowBase* window)
 // wxUpdateUIEvent
 // ----------------------------------------------------------------------------
 
-#if wxUSE_LONGLONG
-wxLongLong wxUpdateUIEvent::sm_lastUpdate = 0;
-#endif
-
-long wxUpdateUIEvent::sm_updateInterval = 0;
-
-wxUpdateUIMode wxUpdateUIEvent::sm_updateMode = wxUPDATE_UI_PROCESS_ALL;
-
 // Can we update?
 bool wxUpdateUIEvent::CanUpdate(wxWindowBase *win)
 {

@@ -548,7 +548,7 @@ protected:
     wxView*           m_currentView{nullptr};
     wxFileHistory*    m_fileHistory{nullptr};
     wxString          m_lastDirectory;
-    static wxDocManager* sm_docManager;
+    inline static wxDocManager* sm_docManager{nullptr};
 
 #if wxUSE_PRINTING_ARCHITECTURE
     wxPageSetupDialogData m_pageSetupDialogData;

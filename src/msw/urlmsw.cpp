@@ -31,7 +31,7 @@
 class wxHTTPDummyProto : public wxProtocol
 {
 public:
-    wxHTTPDummyProto() : wxProtocol() { }
+    wxHTTPDummyProto() = default;
 
 	wxHTTPDummyProto(const wxHTTPDummyProto&) = delete;
 	wxHTTPDummyProto& operator=(const wxHTTPDummyProto&) = delete;

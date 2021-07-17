@@ -193,7 +193,7 @@ private:
 class wxRendererXP : public wxRendererMSWBase
 {
 public:
-    wxRendererXP() : wxRendererMSWBase(wxRendererMSW::Get()) { }
+    wxRendererXP() : wxRendererMSWBase(wxRendererMSW::Get()) {}
 
     wxRendererXP(const wxRendererXP&) = delete;
 	wxRendererXP& operator=(const wxRendererXP&) = delete;

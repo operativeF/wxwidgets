@@ -27,9 +27,8 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxRegionIterator, wxObject);
 // wxRegionRefData implementation
 // ----------------------------------------------------------------------------
 
-class WXDLLEXPORT wxRegionRefData : public wxGDIRefData
+struct WXDLLEXPORT wxRegionRefData : public wxGDIRefData
 {
-public:
     wxRegionRefData() = default;
 
     wxRegionRefData(const wxRegionRefData& data)  

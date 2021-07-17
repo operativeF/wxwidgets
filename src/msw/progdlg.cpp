@@ -57,7 +57,6 @@ static constexpr int Id_SkipBtn = wxID_HIGHEST + 1;
 // Struct used to share data between the main thread and the task dialog runner.
 struct wxProgressDialogSharedData
 {
-public:
     wxCriticalSection m_cs;
 
     wxWindow *m_parent{nullptr};     // Parent window only used to center us over it.
@@ -370,10 +369,7 @@ wxProgressDialog::wxProgressDialog( const wxString& title,
                                     int maximum,
                                     wxWindow *parent,
                                     int style )
-    : 
-      m_taskDialogRunner(nullptr),
-      m_sharedData(nullptr),
-      m_message(message),
+    : m_message(message),
       m_title(title)
 {
 #ifdef wxHAS_MSW_TASKDIALOG

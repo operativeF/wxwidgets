@@ -25,7 +25,7 @@
 class WXDLLEXPORT wxPaletteRefData: public wxGDIRefData
 {
 public:
-    wxPaletteRefData() { }
+    wxPaletteRefData() = default;
 
     // FIXME: Negative n poses hazard.
     wxPaletteRefData(int n,
@@ -50,7 +50,6 @@ public:
     }
 
     wxPaletteRefData(const wxPaletteRefData& data)
-         
     {
         const UINT n = data.GetEntries();
         if ( !n )
@@ -93,8 +92,6 @@ private:
 
         return pPal;
     }
-
-    
 
     HPALETTE m_hPalette{nullptr};
 

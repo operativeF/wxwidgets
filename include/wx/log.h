@@ -611,20 +611,20 @@ private:
 
     // if true, don't log the same message multiple times, only log it once
     // with the number of times it was repeated
-    static bool        ms_bRepetCounting;
+    inline static bool        ms_bRepetCounting{false};
 
-    static wxLog      *ms_pLogger;      // currently active log sink
-    static bool        ms_doLog;        // false => all logging disabled
-    static bool        ms_bAutoCreate;  // create new log targets on demand?
-    static bool        ms_bVerbose;     // false => ignore LogInfo messages
+    inline static wxLog*      ms_pLogger{nullptr};      // currently active log sink
+    inline static bool        ms_doLog{true};        // false => all logging disabled
+    inline static bool        ms_bAutoCreate{true};  // create new log targets on demand?
+    inline static bool        ms_bVerbose{false};     // false => ignore LogInfo messages
 
-    static wxLogLevel  ms_logLevel;     // limit logging to levels <= ms_logLevel
+    inline static wxLogLevel  ms_logLevel{wxLOG_Max};     // limit logging to levels <= ms_logLevel
 
-    static size_t      ms_suspendCount; // if positive, logs are not flushed
+    inline static size_t      ms_suspendCount{0}; // if positive, logs are not flushed
 
     // format string for strftime(), if empty, time stamping log messages is
     // disabled
-    static wxString    ms_timestamp;
+    inline static wxString    ms_timestamp{wxS("%X")}; // time only, no date
 };
 
 // ----------------------------------------------------------------------------

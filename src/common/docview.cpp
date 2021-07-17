@@ -895,8 +895,6 @@ wxBEGIN_EVENT_TABLE(wxDocManager, wxEvtHandler)
 #endif // wxUSE_PRINTING_ARCHITECTURE
 wxEND_EVENT_TABLE()
 
-wxDocManager* wxDocManager::sm_docManager = nullptr;
-
 wxDocManager::wxDocManager(long WXUNUSED(flags), bool initialize)
 {
     sm_docManager = this;

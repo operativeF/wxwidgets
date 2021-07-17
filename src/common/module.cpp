@@ -24,9 +24,6 @@ static constexpr wxChar TRACE_MODULE[] = wxT("module");
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxModule, wxObject)
 
-wxModuleList wxModule::ms_modules;
-bool wxModule::ms_areInitialized = false;
-
 void wxModule::RegisterModule(wxModule* module)
 {
     module->m_state = State_Registered;

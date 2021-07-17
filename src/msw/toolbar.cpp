@@ -151,8 +151,6 @@ public:
         : wxToolBarToolBase(tbar, id, label, bmpNormal, bmpDisabled, kind,
                             clientData, shortHelp, longHelp)
     {
-        m_staticText = nullptr;
-        m_toBeDeleted  = false;
     }
 
     wxToolBarTool(wxToolBar *tbar, wxControl *control, const wxString& label)
@@ -256,8 +254,8 @@ public:
     bool IsToBeDeleted() const { return m_toBeDeleted; }
 
 private:
-    wxStaticText *m_staticText;
-    bool m_toBeDeleted;
+    wxStaticText *m_staticText{nullptr};
+    bool m_toBeDeleted{false};
 };
 
 // ----------------------------------------------------------------------------

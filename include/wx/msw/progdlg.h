@@ -78,9 +78,9 @@ private:
     wxRect GetTaskDialogRect() const;
 
 
-    wxProgressDialogTaskRunner *m_taskDialogRunner;
+    wxProgressDialogTaskRunner *m_taskDialogRunner{nullptr};
 
-    wxProgressDialogSharedData *m_sharedData;
+    wxProgressDialogSharedData *m_sharedData{nullptr};
 
     // Store the message and title we currently use to be able to return it
     // from Get{Message,Title}()

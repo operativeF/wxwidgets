@@ -72,7 +72,7 @@ private:
     wxANIFrameInfoArray m_info;
 
     // this is the wxCURHandler used to load the ICON chunk of the ANI files
-    static wxCURHandler sm_handler;
+    inline static wxCURHandler sm_handler;
 };
 
 

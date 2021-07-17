@@ -37,7 +37,7 @@ class WinPrinter
 public:
     WinPrinter() = default;
 
-    WinPrinter( const wxString& printerName )
+    explicit WinPrinter( const wxString& printerName )
     {
         Open( printerName );
     }

@@ -78,8 +78,6 @@ static constexpr int DEFAULT_MAX_PAGES = 32000;
 // wxPrintFactory
 //----------------------------------------------------------------------------
 
-wxPrintFactory *wxPrintFactory::m_factory = nullptr;
-
 void wxPrintFactory::SetPrintFactory( wxPrintFactory *factory )
 {
     delete wxPrintFactory::m_factory;
@@ -305,12 +303,6 @@ wxPrinterBase::wxPrinterBase(wxPrintDialogData *data)
     if (data)
         m_printDialogData = (*data);
 }
-
-wxWindow *wxPrinterBase::sm_abortWindow = nullptr;
-
-bool wxPrinterBase::sm_abortIt = false;
-
-wxPrinterError wxPrinterBase::sm_lastError = wxPrinterError::NoError;
 
 wxPrintAbortDialog *wxPrinterBase::CreateAbortWindow(wxWindow *parent, wxPrintout * printout)
 {

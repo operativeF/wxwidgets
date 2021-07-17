@@ -269,7 +269,7 @@ class WXDLLIMPEXP_BASE wxString
   //     performance critical functions are still inlined if you change order!
 public:
   // an 'invalid' value for string index, moved to this place due to a CW bug
-  static const size_t npos;
+  inline static const size_t npos{static_cast<size_t>(-1)};
 
 private:
   // if we hadn't made these operators private, it would be possible to

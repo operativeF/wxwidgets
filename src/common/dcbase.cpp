@@ -79,8 +79,6 @@
 // wxDCFactory
 //----------------------------------------------------------------------------
 
-wxDCFactory *wxDCFactory::m_factory = nullptr;
-
 void wxDCFactory::Set(wxDCFactory *factory)
 {
     delete m_factory;

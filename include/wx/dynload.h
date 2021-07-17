@@ -47,7 +47,7 @@ class WXDLLIMPEXP_BASE wxPluginLibrary : public wxDynamicLibrary
 {
 public:
 
-    static wxDLImports* ms_classes;  // Static hash of all imported classes.
+    inline static wxDLImports* ms_classes{nullptr};  // Static hash of all imported classes.
 
     wxPluginLibrary( const wxString &libname, int flags = wxDL_DEFAULT );
     ~wxPluginLibrary();
@@ -151,7 +151,7 @@ private:
         return i == ms_manifest->end() ? NULL : i->second;
     }
 
-    static wxDLManifest* ms_manifest;  // Static hash of loaded libs.
+    inline static wxDLManifest* ms_manifest{nullptr};  // Static hash of loaded libs.
     wxPluginLibrary*     m_entry{nullptr};      // Cache our entry in the manifest.
 };
 

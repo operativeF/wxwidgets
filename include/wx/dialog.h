@@ -246,10 +246,10 @@ protected:
     wxDialogLayoutAdaptationMode        m_layoutAdaptationMode{wxDialogLayoutAdaptationMode::Default};
 
     // Global layout adapter
-    static wxDialogLayoutAdapter*       sm_layoutAdapter;
+    inline static wxDialogLayoutAdapter*       sm_layoutAdapter{nullptr};
 
     // Global adaptation switch
-    static bool                         sm_layoutAdaptation;
+    inline static bool                         sm_layoutAdaptation{false};
 
 private:
     // helper of GetParentForModalDialog(): returns the passed in window if it

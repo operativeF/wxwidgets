@@ -247,7 +247,7 @@ public:
     }
 
 protected:
-    static wxList sm_handlers;
+    inline static wxList sm_handlers;
 
     wxDECLARE_ABSTRACT_CLASS(wxBitmapBase);
 };

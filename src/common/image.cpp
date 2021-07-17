@@ -53,7 +53,6 @@ IMPLEMENT_VARIANT_OBJECT_EXPORTED_SHALLOWCMP(wxImage,WXDLLEXPORT)
 // global data
 //-----------------------------------------------------------------------------
 
-wxList wxImage::sm_handlers;
 wxImage wxNullImage;
 
 //-----------------------------------------------------------------------------

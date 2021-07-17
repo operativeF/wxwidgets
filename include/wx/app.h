@@ -470,10 +470,10 @@ protected:
     virtual wxAppTraits *CreateTraits();
 
     // function used for dynamic wxApp creation
-    static wxAppInitializerFunction ms_appInitFn;
+    inline static wxAppInitializerFunction ms_appInitFn{nullptr};
 
     // the one and only global application object
-    static wxAppConsole *ms_appInstance;
+    inline static wxAppConsole *ms_appInstance{nullptr};
 
     // create main loop from AppTraits or return NULL if
     // there is no main loop implementation

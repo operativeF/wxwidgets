@@ -360,7 +360,7 @@ protected:
 
 private:
     wxMBConv *m_pConv{nullptr};
-    static wxArchiveClassFactory *sm_first;
+    inline static wxArchiveClassFactory *sm_first{nullptr};
     wxArchiveClassFactory *m_next;
 };
 

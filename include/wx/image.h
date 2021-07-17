@@ -588,7 +588,7 @@ public:
     static RGBValue HSVtoRGB(const HSVValue& hsv);
 
 protected:
-    static wxList   sm_handlers;
+    inline static wxList   sm_handlers;
 
     // return the index of the point with the given coordinates or -1 if the
     // image is invalid of the coordinates are out of range

@@ -3047,10 +3047,10 @@ protected:
     bool          m_isCheckable;
     wxString      m_text;
 #if wxUSE_LONGLONG
-    static wxLongLong       sm_lastUpdate;
+    inline static wxLongLong       sm_lastUpdate{0};
 #endif
-    static long             sm_updateInterval;
-    static wxUpdateUIMode   sm_updateMode;
+    inline static long             sm_updateInterval{0};
+    inline static wxUpdateUIMode   sm_updateMode{wxUPDATE_UI_PROCESS_ALL};
 
 public:
 	wxClassInfo *GetClassInfo() const override ;

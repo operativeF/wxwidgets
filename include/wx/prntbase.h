@@ -116,7 +116,7 @@ public:
     static void SetPrintFactory( wxPrintFactory *factory );
     static wxPrintFactory *GetFactory();
 private:
-    static wxPrintFactory *m_factory;
+    inline static wxPrintFactory *m_factory{nullptr};
 };
 
 class WXDLLIMPEXP_CORE wxNativePrintFactory: public wxPrintFactory
@@ -218,11 +218,11 @@ protected:
     wxPrintDialogData     m_printDialogData;
     wxPrintout*           m_currentPrintout{nullptr};
 
-    static wxPrinterError sm_lastError;
+    inline static wxPrinterError sm_lastError{wxPrinterError::NoError};
 
 public:
-    static wxWindow*      sm_abortWindow;
-    static bool           sm_abortIt;
+    inline static wxWindow*      sm_abortWindow{nullptr};
+    inline static bool           sm_abortIt{false};
 };
 
 //----------------------------------------------------------------------------

@@ -44,8 +44,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxAnimation, wxObject);
 #include "wx/listimpl.cpp"
 WX_DEFINE_LIST(wxAnimationDecoderList)
 
-wxAnimationDecoderList wxAnimation::sm_handlers;
-
 // ----------------------------------------------------------------------------
 // wxAnimation
 // ----------------------------------------------------------------------------

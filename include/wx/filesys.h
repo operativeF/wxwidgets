@@ -235,7 +235,7 @@ protected:
             // "test/", not "test/demo.htm")
     wxString m_LastName;
             // name of last opened file (full path)
-    static wxList m_Handlers;
+    inline static wxList m_Handlers;
             // list of FS handlers
     wxFileSystemHandler *m_FindFileHandler;
             // handler that succeed in FindFirst query
@@ -285,7 +285,7 @@ public:
     static void Chroot(const wxString& root) { ms_root = root; }
 
 protected:
-    static wxString ms_root;
+    inline static wxString ms_root;
 };
 
 // Stream reading data from wxFSFile: this allows to use virtual files with any

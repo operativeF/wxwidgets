@@ -51,7 +51,6 @@ bool wxOwnerDrawn::OnDrawItem(wxDC& dc, const wxRect& rc,
         wxMSWImpl::wxTextColoursChanger textCol(hdc, colText, colBack);
         wxMSWImpl::wxBkModeChanger bkMode(hdc, wxBrushStyle::Transparent);
 
-
         AutoHBRUSH hbr(wxColourToPalRGB(colBack));
         SelectInHDC selBrush(hdc, hbr);
 

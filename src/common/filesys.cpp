@@ -263,9 +263,6 @@ wxString wxFileSystemHandler::FindNext()
 // wxLocalFSHandler
 //--------------------------------------------------------------------------------
 
-
-wxString wxLocalFSHandler::ms_root;
-
 bool wxLocalFSHandler::CanOpen(const wxString& location)
 {
     return GetProtocol(location) == wxT("file");
@@ -332,10 +329,6 @@ wxString wxLocalFSHandler::FindNext()
 //-----------------------------------------------------------------------------
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxFileSystem, wxObject);
-
-
-wxList wxFileSystem::m_Handlers;
-
 
 wxFileSystem::~wxFileSystem()
 {

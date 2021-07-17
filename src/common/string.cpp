@@ -62,9 +62,6 @@ UntypedBufferData *GetUntypedNullData()
 // static class variables definition
 // ---------------------------------------------------------------------------
 
-//According to STL _must_ be a -1 size_t
-const size_t wxString::npos = (size_t) -1;
-
 #if wxUSE_STRING_POS_CACHE
 
 #ifdef wxHAS_COMPILER_TLS

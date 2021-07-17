@@ -174,8 +174,8 @@ protected:
     int NonInteractiveCharsetToEncoding(const wxString& charset);
 
 private:
-    // the global fontmapper object or NULL
-    static wxFontMapper *sm_instance;
+    // the global fontmapper object or nullptr
+    inline static wxFontMapper *sm_instance{nullptr};
 
     friend class wxFontMapperPathChanger;
 };

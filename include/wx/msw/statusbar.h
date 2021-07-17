@@ -89,9 +89,9 @@ protected:
 private:
     struct MSWBorders
     {
-        int horz,
-            vert,
-            between;
+        int horz;
+        int vert;
+        int between;
     };
 
     // retrieve all status bar borders using SB_GETBORDERS
@@ -102,8 +102,8 @@ private:
 
     struct MSWMetrics
     {
-        int gripWidth,
-            textMargin;
+        int gripWidth;
+        int textMargin;
     };
 
     // return the various status bar metrics

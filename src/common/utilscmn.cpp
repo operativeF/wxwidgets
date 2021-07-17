@@ -210,8 +210,6 @@ bool wxIsPlatformLittleEndian()
  * Class to make it easier to specify platform-dependent values
  */
 
-std::vector<int>*  wxPlatform::sm_customPlatforms = nullptr;
-
 void wxPlatform::Copy(const wxPlatform& platform)
 {
     m_longValue = platform.m_longValue;

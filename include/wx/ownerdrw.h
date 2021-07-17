@@ -126,7 +126,7 @@ private:
 
     int         m_margin;           // space occupied by bitmap to the left of the item
 
-    static int  ms_defaultMargin;
+    inline static int  ms_defaultMargin{3};
 };
 
 // ----------------------------------------------------------------------------

@@ -121,12 +121,6 @@
 // global vars
 // ----------------------------------------------------------------------------
 
-wxAppConsole *wxAppConsoleBase::ms_appInstance = nullptr;
-
-wxAppInitializerFunction wxAppConsoleBase::ms_appInitFn = nullptr;
-
-wxSocketManager *wxAppTraitsBase::ms_manager = nullptr;
-
 WXDLLIMPEXP_DATA_BASE(wxList) wxPendingDelete;
 
 // ----------------------------------------------------------------------------

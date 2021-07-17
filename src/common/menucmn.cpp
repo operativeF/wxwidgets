@@ -316,8 +316,6 @@ wxString wxMenuItemBase::GetLabelText(const wxString& text)
     return wxStripMenuCodes(text, wxStrip_Menu);
 }
 
-bool wxMenuBase::ms_locked = true;
-
 // ----------------------------------------------------------------------------
 // wxMenu ctor and dtor
 // ----------------------------------------------------------------------------

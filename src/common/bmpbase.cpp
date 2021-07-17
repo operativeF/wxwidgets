@@ -81,8 +81,6 @@ wxBitmap wxBitmapHelpers::NewFromPNGData(const void* data, size_t size)
 wxIMPLEMENT_ABSTRACT_CLASS(wxBitmapBase, wxGDIObject);
 wxIMPLEMENT_ABSTRACT_CLASS(wxBitmapHandler, wxObject);
 
-wxList wxBitmapBase::sm_handlers;
-
 void wxBitmapBase::AddHandler(wxBitmapHandler *handler)
 {
     sm_handlers.Append(handler);
