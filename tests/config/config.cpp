@@ -12,10 +12,6 @@
 // See also tests/config/fileconf.cpp for wxFileConfig specific tests and
 // tests/config/regconf.cpp for wxRegConfig specific tests.
 
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
-
 #include "doctest.h"
 
 #include "testprec.h"

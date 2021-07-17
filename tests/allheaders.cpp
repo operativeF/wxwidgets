@@ -6,10 +6,6 @@
 // Copyright:   (c) 2010,2020 Vadim Zeitlin, Wlodzimierz Skiba, Arrigo Marchiori
 ///////////////////////////////////////////////////////////////////////////////
 
-// ----------------------------------------------------------------------------
-// headers
-// ----------------------------------------------------------------------------
-
 // Note: can't use wxCHECK_GCC_VERSION() here as it's not defined yet.
 #if defined(__GNUC__)
     #define CHECK_GCC_VERSION(major, minor) \

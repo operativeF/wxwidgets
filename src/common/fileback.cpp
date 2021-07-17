@@ -49,32 +49,27 @@ public:
     wxFileOffset GetLength() const;
 
 private:
-    int m_refcount;
+    int m_refcount{1};
 
     wxInputStream *m_stream;
-    wxStreamError m_parenterror;
+    wxStreamError m_parenterror{wxSTREAM_NO_ERROR};
 
-    char *m_buf;
+    char *m_buf{nullptr};
     size_t m_bufsize;
-    size_t m_buflen;
+    size_t m_buflen{0};
 
     wxString m_prefix;
     wxString m_filename;
     wxBFFile m_file;
-    wxFileOffset m_filelen;
+    wxFileOffset m_filelen{0};
 };
 
 wxBackingFileImpl::wxBackingFileImpl(wxInputStream *stream,
                                      size_t bufsize,
-                                     const wxString& prefix)
-  : m_refcount(1),
+                                     const wxString& prefix) :
     m_stream(stream),
-    m_parenterror(wxSTREAM_NO_ERROR),
-    m_buf(nullptr),
     m_bufsize(bufsize),
-    m_buflen(0),
-    m_prefix(prefix),
-    m_filelen(0)
+    m_prefix(prefix)
 {
     const wxFileOffset len = m_stream->GetLength();
 
