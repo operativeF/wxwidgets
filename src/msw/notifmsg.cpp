@@ -55,10 +55,7 @@ public:
         m_flags(wxICON_INFORMATION),
         m_parent(nullptr)
     {
-
     }
-
-    ~wxBalloonNotifMsgImpl() override;
 
     bool Show(int timeout) override;
 
@@ -142,8 +139,9 @@ protected:
     // active -- and then shows them all at once when the user comes back). In
     // this case, ms_refCountIcon is used as a normal reference counter, i.e.
     // the icon is only destroyed when it reaches 0.
-    static wxTaskBarIcon *ms_icon;
-    static int ms_refCountIcon;
+    inline static wxTaskBarIcon *ms_icon{nullptr};
+    inline static int ms_refCountIcon{0};
+
 private:
     wxString m_title;
     wxString m_message;
@@ -167,9 +165,6 @@ private:
 // wxBalloonNotifMsgImpl
 // ----------------------------------------------------------------------------
 
-wxTaskBarIcon *wxBalloonNotifMsgImpl::ms_icon = nullptr;
-int wxBalloonNotifMsgImpl::ms_refCountIcon = 0;
-
 /* static */
 wxTaskBarIcon *wxBalloonNotifMsgImpl::UseTaskBarIcon(wxTaskBarIcon *icon)
 {
@@ -181,9 +176,6 @@ wxTaskBarIcon *wxBalloonNotifMsgImpl::UseTaskBarIcon(wxTaskBarIcon *icon)
 
     return iconOld;
 }
-
-wxBalloonNotifMsgImpl::~wxBalloonNotifMsgImpl()
-= default;
 
 void wxBalloonNotifMsgImpl::OnIconHidden()
 {

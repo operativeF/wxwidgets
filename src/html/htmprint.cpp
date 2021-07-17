@@ -823,7 +823,6 @@ class wxHtmlPrintingModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxHtmlPrintingModule);
 public:
-    wxHtmlPrintingModule()  = default;
     bool OnInit() override { return true; }
     void OnExit() override { wxHtmlPrintout::CleanUpStatics(); }
 };

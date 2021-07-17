@@ -270,8 +270,8 @@ class WXDLLIMPEXP_HTML wxHtmlEntitiesParser : public wxObject
     wxDECLARE_DYNAMIC_CLASS(wxHtmlEntitiesParser);
 
 public:
-    wxHtmlEntitiesParser();
-    ~wxHtmlEntitiesParser() override;
+    wxHtmlEntitiesParser() = default;
+    ~wxHtmlEntitiesParser() override = default;
 
     wxHtmlEntitiesParser(const wxHtmlEntitiesParser&) = delete;
 	wxHtmlEntitiesParser& operator=(const wxHtmlEntitiesParser&) = delete;

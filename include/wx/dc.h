@@ -154,7 +154,6 @@ class WXDLLIMPEXP_CORE wxDCImpl: public wxObject
 {
 public:
     wxDCImpl( wxDC *owner );
-    ~wxDCImpl() override;
 
     wxDC *GetOwner() const { return m_owner; }
 

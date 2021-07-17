@@ -72,10 +72,6 @@
 #define wxRICHTEXT_USE_TOOLBOOK 0
 #endif
 
-bool wxRichTextFormattingDialog::sm_showToolTips = false;
-bool wxRichTextFormattingDialog::sm_restoreLastPage = true;
-int wxRichTextFormattingDialog::sm_lastPage = -1;
-
 wxIMPLEMENT_CLASS(wxRichTextDialogPage, wxPanel);
 
 wxIMPLEMENT_CLASS(wxRichTextFormattingDialog, wxPropertySheetDialog);
@@ -87,18 +83,6 @@ wxBEGIN_EVENT_TABLE(wxRichTextFormattingDialog, wxPropertySheetDialog)
 wxEND_EVENT_TABLE()
 
 IMPLEMENT_HELP_PROVISION(wxRichTextFormattingDialog)
-
-wxRichTextFormattingDialogFactory* wxRichTextFormattingDialog::ms_FormattingDialogFactory = nullptr;
-wxColourData wxRichTextFormattingDialog::sm_colourData;
-
-void wxRichTextFormattingDialog::Init()
-{
-    m_styleDefinition = nullptr;
-    m_styleSheet = nullptr;
-    m_object = nullptr;
-    m_options = 0;
-    m_ignoreUpdates = false;
-}
 
 wxRichTextFormattingDialog::~wxRichTextFormattingDialog()
 {
@@ -472,7 +456,6 @@ class wxRichTextFormattingDialogModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextFormattingDialogModule);
 public:
-    wxRichTextFormattingDialogModule() = default;
     bool OnInit() override { wxRichTextFormattingDialog::SetFormattingDialogFactory(new wxRichTextFormattingDialogFactory); return true; }
     void OnExit() override { wxRichTextFormattingDialog::SetFormattingDialogFactory(nullptr); }
 };
@@ -740,9 +723,6 @@ wxRichTextColourSwatchCtrl::wxRichTextColourSwatchCtrl(wxWindow* parent, wxWindo
     SetColour(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW));
 }
 
-wxRichTextColourSwatchCtrl::~wxRichTextColourSwatchCtrl()
-= default;
-
 void wxRichTextColourSwatchCtrl::OnMouseEvent(wxMouseEvent& event)
 {
     if (event.LeftDown())
@@ -796,7 +776,6 @@ wxEND_EVENT_TABLE()
 wxRichTextFontListBox::wxRichTextFontListBox(wxWindow* parent, wxWindowID id, const wxPoint& pos,
     const wxSize& size, long style)
 {
-    Init();
     Create(parent, id, pos, size, style);
 }
 
@@ -808,9 +787,6 @@ bool wxRichTextFontListBox::Create(wxWindow* parent, wxWindowID id, const wxPoin
 
     return wxHtmlListBox::Create(parent, id, pos, size, style);
 }
-
-wxRichTextFontListBox::~wxRichTextFontListBox()
-= default;
 
 /// Returns the HTML for this item
 wxString wxRichTextFontListBox::OnGetItem(size_t n) const

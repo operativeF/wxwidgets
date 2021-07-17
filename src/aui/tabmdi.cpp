@@ -724,9 +724,6 @@ wxBEGIN_EVENT_TABLE(wxAuiMDIClientWindow, wxAuiNotebook)
     EVT_AUINOTEBOOK_PAGE_CLOSE(wxID_ANY, wxAuiMDIClientWindow::OnPageClose)
 wxEND_EVENT_TABLE()
 
-wxAuiMDIClientWindow::wxAuiMDIClientWindow()
-= default;
-
 wxAuiMDIClientWindow::wxAuiMDIClientWindow(wxAuiMDIParentFrame* parent, long style)
 {
     CreateClient(parent, style);

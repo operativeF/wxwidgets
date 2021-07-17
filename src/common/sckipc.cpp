@@ -116,6 +116,7 @@ class wxTCPEventHandler : public wxEvtHandler
 {
 public:
     wxTCPEventHandler()  = default;
+    ~wxTCPEventHandler()  = default;
 
     wxTCPEventHandler(const wxTCPEventHandler&) = delete;
 	wxTCPEventHandler& operator=(const wxTCPEventHandler&) = delete;
@@ -143,6 +144,9 @@ class wxTCPEventHandlerModule : public wxModule
 {
 public:
     wxTCPEventHandlerModule()  = default;
+    ~wxTCPEventHandlerModule()  = default;
+    wxTCPEventHandlerModule(const wxTCPEventHandlerModule&) = delete;
+	wxTCPEventHandlerModule& operator=(const wxTCPEventHandlerModule&) = delete;
 
     // get the global wxTCPEventHandler creating it if necessary
     static wxTCPEventHandler& GetHandler()
@@ -158,16 +162,12 @@ public:
     void OnExit() override { wxDELETE(ms_handler); }
 
 private:
-    static wxTCPEventHandler *ms_handler;
+    inline static wxTCPEventHandler *ms_handler{nullptr};
 
     wxDECLARE_DYNAMIC_CLASS(wxTCPEventHandlerModule);
-    wxTCPEventHandlerModule(const wxTCPEventHandlerModule&) = delete;
-	wxTCPEventHandlerModule& operator=(const wxTCPEventHandlerModule&) = delete;
 };
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxTCPEventHandlerModule, wxModule);
-
-wxTCPEventHandler *wxTCPEventHandlerModule::ms_handler = nullptr;
 
 // --------------------------------------------------------------------------
 // wxIPCSocketStreams

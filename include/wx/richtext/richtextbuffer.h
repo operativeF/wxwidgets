@@ -2527,9 +2527,9 @@ public:
     /**
         Constructor, taking an optional parent pointer.
     */
-    wxRichTextObject(wxRichTextObject* parent = nullptr);
-
-    ~wxRichTextObject() override;
+    wxRichTextObject(wxRichTextObject* parent = nullptr) :
+        m_parent(parent)
+    {}
 
 // Overridables
 
@@ -4953,32 +4953,17 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextImage: public wxRichTextObject
 public:
     enum { ImageState_Unloaded, ImageState_Loaded, ImageState_Bad };
 
-// Constructors
-
-    /**
-        Default constructor.
-    */
     wxRichTextImage(wxRichTextObject* parent = nullptr): wxRichTextObject(parent) { Init(); }
 
-    /**
-        Creates a wxRichTextImage from a wxImage.
-    */
+    // Creates a wxRichTextImage from a wxImage.
     wxRichTextImage(const wxImage& image, wxRichTextObject* parent = nullptr, wxRichTextAttr* charStyle = nullptr);
 
-    /**
-        Creates a wxRichTextImage from an image block.
-    */
+    // Creates a wxRichTextImage from an image block.
     wxRichTextImage(const wxRichTextImageBlock& imageBlock, wxRichTextObject* parent = nullptr, wxRichTextAttr* charStyle = nullptr);
 
-    /**
-        Copy constructor.
-    */
     wxRichTextImage(const wxRichTextImage& obj): wxRichTextObject(obj) { Copy(obj); }
 
-    /**
-        Destructor.
-    */
-    ~wxRichTextImage() override;
+    ~wxRichTextImage() override = default;
 
     /**
         Initialisation.

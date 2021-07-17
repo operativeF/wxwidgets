@@ -886,7 +886,7 @@ using wxDash = wxInt8;
 
 class WXDLLIMPEXP_CORE wxGDIObjListBase {
 public:
-    wxGDIObjListBase();
+    wxGDIObjListBase() = default;
     ~wxGDIObjListBase();
 
 protected:
@@ -983,9 +983,8 @@ public:
         ITEMCOUNT
     };
 
-    wxStockGDI();
-    virtual ~wxStockGDI();
-
+    wxStockGDI() = default;
+    virtual ~wxStockGDI() = default;
     wxStockGDI(const wxStockGDI&) = delete;
     wxStockGDI& operator=(const wxStockGDI&) = delete;
     wxStockGDI(wxStockGDI&&) = default;

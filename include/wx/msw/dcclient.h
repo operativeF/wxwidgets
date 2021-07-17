@@ -59,7 +59,7 @@ public:
     // Create a DC corresponding to the client area of the window
     wxClientDCImpl( wxDC *owner, wxWindow *win );
 
-    ~wxClientDCImpl() override;
+    ~wxClientDCImpl() override = default;
 
     wxClientDCImpl(const wxClientDCImpl&) = delete;
 	wxClientDCImpl& operator=(const wxClientDCImpl&) = delete;
@@ -105,20 +105,19 @@ protected:
 
 /*
  * wxPaintDCEx
- * This class is used when an application sends an HDC with the WM_PAINT
+ * This struct is used when an application sends an HDC with the WM_PAINT
  * message. It is used in HandlePaint and need not be used by an application.
  */
 
-class WXDLLIMPEXP_CORE wxPaintDCEx : public wxPaintDC
+struct WXDLLIMPEXP_CORE wxPaintDCEx : public wxPaintDC
 {
-public:
     wxPaintDCEx(wxWindow *canvas, WXHDC dc);
 
     wxDECLARE_CLASS(wxPaintDCEx);
-   wxPaintDCEx(const wxPaintDCEx&) = delete;
-   wxPaintDCEx& operator=(const wxPaintDCEx&) = delete;
-   wxPaintDCEx(wxPaintDCEx&&) = default;
-   wxPaintDCEx& operator=(wxPaintDCEx&&) = default;
+    wxPaintDCEx(const wxPaintDCEx&) = delete;
+    wxPaintDCEx& operator=(const wxPaintDCEx&) = delete;
+    wxPaintDCEx(wxPaintDCEx&&) = default;
+    wxPaintDCEx& operator=(wxPaintDCEx&&) = default;
 };
 
 #endif

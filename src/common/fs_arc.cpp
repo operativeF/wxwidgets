@@ -259,9 +259,6 @@ WX_DECLARE_STRING_HASH_MAP(wxArchiveFSCacheData, wxArchiveFSCacheDataHash);
 class wxArchiveFSCache
 {
 public:
-    wxArchiveFSCache() = default;
-    ~wxArchiveFSCache() = default;
-
     wxArchiveFSCacheData* Add(const wxString& name,
                               const wxArchiveClassFactory& factory,
                               wxInputStream *stream);

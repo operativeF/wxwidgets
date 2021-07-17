@@ -19,7 +19,6 @@ class WXDLLIMPEXP_XRC wxBitmapXmlHandler : public wxXmlResourceHandler
     wxDECLARE_DYNAMIC_CLASS(wxBitmapXmlHandler);
 
 public:
-    wxBitmapXmlHandler();
     wxObject *DoCreateResource() override;
     bool CanHandle(wxXmlNode *node) override;
 };
@@ -29,7 +28,6 @@ class WXDLLIMPEXP_XRC wxIconXmlHandler : public wxXmlResourceHandler
     wxDECLARE_DYNAMIC_CLASS(wxIconXmlHandler);
 
 public:
-    wxIconXmlHandler();
     wxObject *DoCreateResource() override;
     bool CanHandle(wxXmlNode *node) override;
 };

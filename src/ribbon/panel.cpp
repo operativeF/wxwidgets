@@ -45,9 +45,6 @@ wxBEGIN_EVENT_TABLE(wxRibbonPanel, wxRibbonControl)
     EVT_SIZE(wxRibbonPanel::OnSize)
 wxEND_EVENT_TABLE()
 
-wxRibbonPanel::wxRibbonPanel()  
-= default;
-
 wxRibbonPanel::wxRibbonPanel(wxWindow* parent,
                   wxWindowID id,
                   const wxString& label,

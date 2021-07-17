@@ -124,7 +124,6 @@ public:
     wxPrintDialogData();
     wxPrintDialogData(const wxPrintDialogData& dialogData);
     wxPrintDialogData(const wxPrintData& printData);
-    ~wxPrintDialogData();
 
     int GetFromPage() const { return m_printFromPage; }
     int GetToPage() const { return m_printToPage; }
@@ -193,7 +192,7 @@ public:
     wxPageSetupDialogData();
     wxPageSetupDialogData(const wxPageSetupDialogData& dialogData);
     wxPageSetupDialogData(const wxPrintData& printData);
-    ~wxPageSetupDialogData();
+    ~wxPageSetupDialogData() = default;
 
     wxSize GetPaperSize() const { return m_paperSize; }
     wxPaperSize GetPaperId() const { return m_printData.GetPaperId(); }

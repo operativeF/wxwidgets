@@ -2771,17 +2771,12 @@ bool wxPGProperty::SetMaxLength(int maxLen)
 wxPG_IMPLEMENT_PROPERTY_CLASS(wxPGRootProperty, wxPGProperty, TextCtrl)
 
 wxPGRootProperty::wxPGRootProperty( const wxString& name )
-     
 {
     m_name = name;
     m_label = m_name;
     SetParentalType(0);
     m_depth = 0;
 }
-
-
-wxPGRootProperty::~wxPGRootProperty() = default;
-
 
 // -----------------------------------------------------------------------
 // wxPropertyCategory
@@ -2802,11 +2797,6 @@ wxPropertyCategory::wxPropertyCategory( const wxString &label, const wxString& n
     // don't set colour - prepareadditem method should do this
     SetParentalType(wxPG_PROP_CATEGORY);
 }
-
-
-wxPropertyCategory::~wxPropertyCategory()
-= default;
-
 
 wxString wxPropertyCategory::ValueToString( wxVariant& WXUNUSED(value),
                                             int WXUNUSED(argFlags) ) const

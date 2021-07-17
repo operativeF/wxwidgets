@@ -733,8 +733,6 @@ wxMimeTypesManager *wxTheMimeTypesManager = &gs_mimeTypesManager;
 class wxMimeTypeCmnModule: public wxModule
 {
 public:
-    wxMimeTypeCmnModule()  = default;
-
     bool OnInit() override { return true; }
     void OnExit() override
     {

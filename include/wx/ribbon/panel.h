@@ -41,8 +41,6 @@ public:
                   const wxSize& size = wxDefaultSize,
                   long style = wxRIBBON_PANEL_DEFAULT_STYLE);
 
-    ~wxRibbonPanel() override;
-
     bool Create(wxWindow* parent,
                 wxWindowID id = wxID_ANY,
                 const wxString& label = wxEmptyString,
@@ -50,6 +48,8 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxRIBBON_PANEL_DEFAULT_STYLE);
+
+    ~wxRibbonPanel() override;
 
     wxBitmap& GetMinimisedIcon() {return m_minimised_icon;}
     const wxBitmap& GetMinimisedIcon() const {return m_minimised_icon;}

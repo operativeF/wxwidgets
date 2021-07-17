@@ -41,9 +41,6 @@ bool wxScrollBar::Create(wxWindow *parent, wxWindowID id,
     return true;
 }
 
-wxScrollBar::~wxScrollBar()
-= default;
-
 bool wxScrollBar::MSWOnScroll(int WXUNUSED(orientation), WXWORD wParam,
                               WXWORD WXUNUSED(pos), WXHWND WXUNUSED(control))
 {

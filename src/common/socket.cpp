@@ -145,9 +145,8 @@ void SetTimeValFromMS(wxTimeVal_t& tv, unsigned long ms)
 // private classes
 // --------------------------------------------------------------------------
 
-class wxSocketState : public wxObject
+struct wxSocketState : public wxObject
 {
-public:
     wxSocketFlags            m_flags;
     wxSocketEventFlags       m_eventmask;
     bool                     m_notify;

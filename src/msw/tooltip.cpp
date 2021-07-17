@@ -133,8 +133,6 @@ public:
 class wxToolTipModule : public wxModule
 {
 public:
-    wxToolTipModule() = default;
-
     bool OnInit() override
     {
         return true;

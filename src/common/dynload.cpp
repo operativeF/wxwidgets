@@ -45,8 +45,6 @@ wxDLImports*  wxPluginLibrary::ms_classes = nullptr;
 class wxPluginLibraryModule : public wxModule
 {
 public:
-    wxPluginLibraryModule() = default;
-
     // TODO: create ms_classes on demand, why always preallocate it?
     bool OnInit() override
     {

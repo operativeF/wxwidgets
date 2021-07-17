@@ -230,8 +230,6 @@ void wxClientDCImpl::InitDC()
 #endif // __WXUNIVERSAL__
 }
 
-wxClientDCImpl::~wxClientDCImpl() = default;
-
 wxSize wxClientDCImpl::DoGetSize() const
 {
     // FIXME: Not sure about this.
@@ -325,8 +323,7 @@ void wxPaintDCImpl::EndPaint(wxWindow *win)
     }
 }
 
-wxPaintDCInfo::~wxPaintDCInfo()
-= default;
+wxPaintDCInfo::~wxPaintDCInfo() = default;
 
 /*
  * wxPaintDCEx

@@ -36,14 +36,15 @@ const wxChar *wxTRACE_HTML_DEBUG = wxT("htmldebug");
 // wxHtmlParser helpers
 //-----------------------------------------------------------------------------
 
-class wxHtmlTextPiece
+struct wxHtmlTextPiece
 {
-public:
     wxHtmlTextPiece() = default;
     wxHtmlTextPiece(const wxString::const_iterator& start,
                     const wxString::const_iterator& end)
         : m_start(start), m_end(end) {}
-    wxString::const_iterator m_start, m_end;
+
+    wxString::const_iterator m_start;
+    wxString::const_iterator m_end;
 };
 
 // NB: this is an empty class and not typedef because of forward declaration
@@ -51,9 +52,8 @@ class wxHtmlTextPieces : public std::vector<wxHtmlTextPiece>
 {
 };
 
-class wxHtmlParserState
+struct wxHtmlParserState
 {
-public:
     wxHtmlTag         *m_curTag;
     wxHtmlTag         *m_tags;
     wxHtmlTextPieces  *m_textPieces;
@@ -421,12 +421,6 @@ void wxHtmlTagHandler::ParseInnerSource(const wxString& source)
 //-----------------------------------------------------------------------------
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxHtmlEntitiesParser, wxObject);
-
-wxHtmlEntitiesParser::wxHtmlEntitiesParser()
-= default;
-
-wxHtmlEntitiesParser::~wxHtmlEntitiesParser()
-= default;
 
 wxString wxHtmlEntitiesParser::Parse(const wxString& input) const
 {

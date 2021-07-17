@@ -28,12 +28,12 @@ public:
     virtual bool Start(const wxString& prefix) = 0;
     virtual wxString GetNext() = 0;
 
-    virtual ~wxTextCompleter();
+    virtual ~wxTextCompleter() = default;
 
-   wxTextCompleter(const wxTextCompleter&) = delete;
-   wxTextCompleter& operator=(const wxTextCompleter&) = delete;
-   wxTextCompleter(wxTextCompleter&&) = default;
-   wxTextCompleter& operator=(wxTextCompleter&&) = default;
+    wxTextCompleter(const wxTextCompleter&) = delete;
+    wxTextCompleter& operator=(const wxTextCompleter&) = delete;
+    wxTextCompleter(wxTextCompleter&&) = default;
+    wxTextCompleter& operator=(wxTextCompleter&&) = default;
 };
 
 // ----------------------------------------------------------------------------

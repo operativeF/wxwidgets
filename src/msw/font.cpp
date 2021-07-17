@@ -1103,8 +1103,6 @@ extern const std::vector<wxString>& wxGetPrivateFontFileNames()
 class wxPrivateFontsListModule : public wxModule
 {
 public:
-    wxPrivateFontsListModule() = default;
-
     bool OnInit() override { return true; }
     void OnExit() override { gs_privateFontFileNames.clear(); }
 

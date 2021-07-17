@@ -646,9 +646,6 @@ bool wxBitmap::ConvertToDIB()
 
 #endif // wxUSE_WXDIB
 
-wxBitmap::~wxBitmap()
-= default;
-
 wxBitmap::wxBitmap(const char bits[], int width, int height, int depth)
 {
     wxBitmapRefData *refData = new wxBitmapRefData;

@@ -57,14 +57,6 @@ wxDEFINE_EVENT( wxEVT_MEDIA_STOP, wxMediaEvent );
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //---------------------------------------------------------------------------
-// wxMediaBackend Destructor
-//
-// This is here because the DARWIN gcc compiler badly screwed up and
-// needs the destructor implementation in the source
-//---------------------------------------------------------------------------
-wxMediaBackend::~wxMediaBackend() = default;
-
-//---------------------------------------------------------------------------
 // wxMediaCtrl::Create (file version)
 // wxMediaCtrl::Create (URL version)
 //

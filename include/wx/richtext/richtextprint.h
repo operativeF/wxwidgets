@@ -108,7 +108,10 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextPrintout : public wxPrintout
 {
 public:
     wxRichTextPrintout(const wxString& title = wxGetTranslation("Printout"));
-    ~wxRichTextPrintout() override;
+    ~wxRichTextPrintout() override = default;
+
+    wxRichTextPrintout(const wxRichTextPrintout&) = delete;
+	wxRichTextPrintout& operator=(const wxRichTextPrintout&) = delete;
 
     /// The buffer to print
     void SetRichTextBuffer(wxRichTextBuffer* buffer) { m_richTextBuffer = buffer; }
@@ -149,9 +152,6 @@ private:
     int                         m_marginLeft, m_marginTop, m_marginRight, m_marginBottom;
 
     wxRichTextHeaderFooterData  m_headerFooterData;
-
-    wxRichTextPrintout(const wxRichTextPrintout&) = delete;
-	wxRichTextPrintout& operator=(const wxRichTextPrintout&) = delete;
 };
 
 /*

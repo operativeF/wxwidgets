@@ -65,11 +65,11 @@ class wxDummyConsoleApp : public wxAppConsole
 public:
     wxDummyConsoleApp() = default;
 
-    int OnRun() override { wxFAIL_MSG( wxT("unreachable code") ); return 0; }
-    virtual bool DoYield(bool, long) { return true; }
-
     wxDummyConsoleApp(const wxDummyConsoleApp&) = delete;
 	wxDummyConsoleApp& operator=(const wxDummyConsoleApp&) = delete;
+
+    int OnRun() override { wxFAIL_MSG( wxT("unreachable code") ); return 0; }
+    virtual bool DoYield(bool, long) { return true; }
 };
 
 // we need a special kind of auto pointer to wxApp which not only deletes the

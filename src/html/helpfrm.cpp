@@ -127,9 +127,6 @@ bool wxHtmlHelpFrame::Create(wxWindow* parent, wxWindowID id,
     return true;
 }
 
-wxHtmlHelpFrame::~wxHtmlHelpFrame()
-= default;
-
 void wxHtmlHelpFrame::SetTitleFormat(const wxString& format)
 {
     if (GetHelpWindow() && GetHelpWindow()->GetHtmlWindow())

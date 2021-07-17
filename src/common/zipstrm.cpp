@@ -1370,8 +1370,6 @@ wxUint16 wxZipEntry::GetInternalFlags(bool checkForUTF8) const
 class wxZipEndRec
 {
 public:
-    wxZipEndRec();
-
     int GetDiskNumber() const                   { return m_DiskNumber; }
     int GetStartDisk() const                    { return m_StartDisk; }
     int GetEntriesHere() const                  { return m_EntriesHere; }
@@ -1407,11 +1405,6 @@ private:
     wxUint64 m_Offset{0};
     wxString m_Comment;
 };
-
-wxZipEndRec::wxZipEndRec()
-  
-    
-= default;
 
 bool wxZipEndRec::Write(wxOutputStream& stream, wxMBConv& conv) const
 {

@@ -461,9 +461,6 @@ bool wxTextEntryBase::SendTextUpdatedEvent(wxWindow *win)
 // auto-completion stubs
 // ----------------------------------------------------------------------------
 
-wxTextCompleter::~wxTextCompleter()
-= default;
-
 bool wxTextCompleterSimple::Start(const wxString& prefix)
 {
     m_index = 0;

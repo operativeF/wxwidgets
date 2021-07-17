@@ -54,11 +54,6 @@ class wxCalendarComboPopup : public wxCalendarCtrl,
                              public wxComboPopup
 {
 public:
-
-    wxCalendarComboPopup() 
-                             
-    = default;
-
     void Init() override
     {
     }
@@ -375,12 +370,6 @@ bool wxDatePickerCtrlGeneric::Create(wxWindow *parent,
 
     return true;
 }
-
-
-
-
-wxDatePickerCtrlGeneric::~wxDatePickerCtrlGeneric()
-= default;
 
 bool wxDatePickerCtrlGeneric::Destroy()
 {

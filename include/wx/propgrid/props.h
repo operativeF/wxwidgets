@@ -106,7 +106,6 @@ public:
     wxStringProperty( const wxString& label = wxPG_LABEL,
                       const wxString& name = wxPG_LABEL,
                       const wxString& value = wxEmptyString );
-    ~wxStringProperty() override;
 
     wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
     bool StringToValue( wxVariant& variant,
@@ -164,8 +163,6 @@ class WXDLLIMPEXP_PROPGRID wxNumericProperty : public wxPGProperty
 {
     wxDECLARE_ABSTRACT_CLASS(wxNumericProperty);
 public:
-    ~wxNumericProperty() override;
-
     bool DoSetAttribute(const wxString& name, wxVariant& value) override;
 
     virtual wxVariant AddSpinStepValue(long stepScale) const = 0;
@@ -196,7 +193,6 @@ public:
     wxIntProperty( const wxString& label = wxPG_LABEL,
                    const wxString& name = wxPG_LABEL,
                    long value = 0 );
-    ~wxIntProperty() override;
 
 #if wxUSE_LONGLONG
     wxIntProperty( const wxString& label,
@@ -251,7 +247,7 @@ public:
     wxUIntProperty( const wxString& label = wxPG_LABEL,
                     const wxString& name = wxPG_LABEL,
                     unsigned long value = 0 );
-    ~wxUIntProperty() override;
+
 #if wxUSE_LONGLONG
     wxUIntProperty( const wxString& label,
                     const wxString& name,
@@ -306,7 +302,6 @@ public:
     wxFloatProperty( const wxString& label = wxPG_LABEL,
                      const wxString& name = wxPG_LABEL,
                      double value = 0.0 );
-    ~wxFloatProperty() override;
 
     wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
     bool StringToValue( wxVariant& variant,
@@ -342,7 +337,6 @@ public:
     wxBoolProperty( const wxString& label = wxPG_LABEL,
                     const wxString& name = wxPG_LABEL,
                     bool value = false );
-    ~wxBoolProperty() override;
 
     wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
     bool StringToValue( wxVariant& variant,
@@ -401,8 +395,6 @@ public:
                     const std::vector<int>& values = {},
                     int value = 0 );
 #endif
-
-    ~wxEnumProperty() override;
 
     size_t GetItemCount() const { return m_choices.GetCount(); }
 
@@ -483,8 +475,6 @@ public:
                         wxPGChoices* choicesCache,
                         const wxString& value );
 
-    ~wxEditEnumProperty() override;
-
     void OnSetValue() override;
     bool StringToValue(wxVariant& variant,
                        const wxString& text,
@@ -525,7 +515,6 @@ public:
                      const std::vector<wxString>& labels = {},
                      const std::vector<int>& values = {},
                      int value = 0 );
-    ~wxFlagsProperty () override;
 
     void OnSetValue() override;
     wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
@@ -568,8 +557,6 @@ class WXDLLIMPEXP_PROPGRID wxEditorDialogProperty : public wxPGProperty
     wxDECLARE_ABSTRACT_CLASS(wxEditorDialogProperty);
 
 public:
-    ~wxEditorDialogProperty() override;
-
     wxPGEditorDialogAdapter* GetEditorDialog() const override;
     bool DoSetAttribute(const wxString& name, wxVariant& value) override;
 
@@ -596,7 +583,6 @@ public:
     wxFileProperty( const wxString& label = wxPG_LABEL,
                     const wxString& name = wxPG_LABEL,
                     const wxString& value = wxEmptyString );
-    ~wxFileProperty () override;
 
     void OnSetValue() override;
     wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
@@ -636,7 +622,6 @@ public:
     wxLongStringProperty( const wxString& label = wxPG_LABEL,
                           const wxString& name = wxPG_LABEL,
                           const wxString& value = wxEmptyString );
-    ~wxLongStringProperty() override;
 
     wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
     bool StringToValue( wxVariant& variant,
@@ -658,7 +643,6 @@ public:
     wxDirProperty( const wxString& label = wxPG_LABEL,
                    const wxString& name = wxPG_LABEL,
                    const wxString& value = wxEmptyString );
-    ~wxDirProperty() override;
 
     wxString ValueToString(wxVariant& value, int argFlags = 0) const override;
     bool StringToValue(wxVariant& variant, const wxString& text,
@@ -687,7 +671,6 @@ public:
     wxArrayStringProperty( const wxString& label = wxPG_LABEL,
                            const wxString& name = wxPG_LABEL,
                            const std::vector<wxString>& value = {} );
-    ~wxArrayStringProperty() override;
 
     void OnSetValue() override;
     wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;

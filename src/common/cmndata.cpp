@@ -169,8 +169,6 @@ wxPrintDialogData::wxPrintDialogData(const wxPrintData& printData)
 {
 }
 
-wxPrintDialogData::~wxPrintDialogData() = default;
-
 // FIXME: Not needed?
 void wxPrintDialogData::operator=(const wxPrintDialogData& data)
 {
@@ -217,8 +215,6 @@ wxPageSetupDialogData::wxPageSetupDialogData(const wxPrintData& printData)
     // be found.
     CalculatePaperSizeFromId();
 }
-
-wxPageSetupDialogData::~wxPageSetupDialogData() = default;
 
 wxPageSetupDialogData& wxPageSetupDialogData::operator=(const wxPageSetupDialogData& data)
 {

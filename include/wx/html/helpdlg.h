@@ -43,7 +43,7 @@ public:
     wxHtmlHelpDialog(wxWindow* parent, wxWindowID wxWindowID,
                     const wxString& title = wxEmptyString,
                     int style = wxHF_DEFAULT_STYLE, wxHtmlHelpData* data = nullptr);
-    ~wxHtmlHelpDialog() override;
+    ~wxHtmlHelpDialog() override = default;
 
     wxHtmlHelpDialog(const wxHtmlHelpDialog&) = delete;
 	wxHtmlHelpDialog& operator=(const wxHtmlHelpDialog&) = delete;

@@ -137,7 +137,7 @@ public:
     wxFontProperty(const wxString& label = wxPG_LABEL,
                    const wxString& name = wxPG_LABEL,
                    const wxFont& value = wxFont());
-    ~wxFontProperty() override;
+
     void OnSetValue() override;
     wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
     wxVariant ChildChanged( wxVariant& thisValue,
@@ -167,7 +167,6 @@ public:
                             const wxString& name = wxPG_LABEL,
                             const wxColourPropertyValue&
                                 value = wxColourPropertyValue() );
-    ~wxSystemColourProperty() override;
 
     void OnSetValue() override;
     bool IntToValue(wxVariant& variant,
@@ -240,7 +239,6 @@ public:
     wxColourProperty( const wxString& label = wxPG_LABEL,
                       const wxString& name = wxPG_LABEL,
                       const wxColour& value = *wxWHITE );
-    ~wxColourProperty() override;
 
     wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
     wxColour GetColour( int index ) const override;
@@ -262,7 +260,6 @@ class WXDLLIMPEXP_PROPGRID wxCursorProperty : public wxEnumProperty
     wxCursorProperty( const wxString& label= wxPG_LABEL,
                       const wxString& name= wxPG_LABEL,
                       int value = 0 );
-    ~wxCursorProperty() override;
 
     wxSize OnMeasureImage( int item ) const override;
     void OnCustomPaint( wxDC& dc,
@@ -328,8 +325,6 @@ public:
                            const wxString& name = wxPG_LABEL,
                            const std::vector<wxString>& value = {} );
 
-    ~wxMultiChoiceProperty() override;
-
     void OnSetValue() override;
     wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;
     bool StringToValue(wxVariant& variant,
@@ -373,7 +368,6 @@ public:
     wxDateProperty( const wxString& label = wxPG_LABEL,
                     const wxString& name = wxPG_LABEL,
                     const wxDateTime& value = wxDateTime() );
-    ~wxDateProperty() override;
 
     void OnSetValue() override;
     wxString ValueToString( wxVariant& value, int argFlags = 0 ) const override;

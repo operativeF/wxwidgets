@@ -87,9 +87,6 @@ wxIcon::wxIcon(const wxIconLocation& loc)
     LoadFile(fullname, wxBITMAP_TYPE_ICO);
 }
 
-wxIcon::~wxIcon()
-= default;
-
 wxObjectRefData *wxIcon::CloneRefData(const wxObjectRefData *dataOrig) const
 {
     const wxIconRefData *

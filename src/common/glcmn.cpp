@@ -115,9 +115,6 @@ bool wxGLCanvasBase::SetColour(const wxString& colour)
     return true;
 }
 
-wxGLCanvasBase::~wxGLCanvasBase()
-= default;
-
 /* static */
 bool wxGLCanvasBase::IsExtensionInList(const char *list, const char *extension)
 {
@@ -402,9 +399,6 @@ wxGLAPI::wxGLAPI()
     s_mode = 0xFF;
 #endif
 }
-
-wxGLAPI::~wxGLAPI()
-= default;
 
 void wxGLAPI::glFrustum(GLfloat left, GLfloat right, GLfloat bottom,
                             GLfloat top, GLfloat zNear, GLfloat zFar)

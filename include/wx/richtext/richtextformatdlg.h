@@ -128,19 +128,16 @@ DECLARE_HELP_PROVISION()
 public:
     enum { Option_AllowPixelFontSize = 0x0001 };
 
-    wxRichTextFormattingDialog() { Init(); }
+    wxRichTextFormattingDialog() = default;
 
     wxRichTextFormattingDialog(long flags, wxWindow* parent, const wxString& title = wxGetTranslation(wxT("Formatting")), wxWindowID id = wxID_ANY,
         const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize,
         long style = wxDEFAULT_DIALOG_STYLE)
     {
-        Init();
         Create(flags, parent, title, id, pos, sz, style);
     }
 
     ~wxRichTextFormattingDialog() override;
-
-    void Init();
 
     bool Create(long flags, wxWindow* parent, const wxString& title = wxGetTranslation(wxT("Formatting")), wxWindowID id = wxID_ANY,
         const wxPoint& pos = wxDefaultPosition, const wxSize& sz = wxDefaultSize,
@@ -259,19 +256,19 @@ public:
 protected:
 
     wxRichTextAttr                              m_attributes;
-    wxRichTextStyleDefinition*                  m_styleDefinition;
-    wxRichTextStyleSheet*                       m_styleSheet;
-    wxRichTextObject*                           m_object;
-    std::vector<int>                                  m_pageIds; // mapping of book control indexes to page ids
-    int                                         m_options; // UI options
-    bool                                        m_ignoreUpdates;
-    static wxColourData                         sm_colourData;
+    wxRichTextStyleDefinition*                  m_styleDefinition{nullptr};
+    wxRichTextStyleSheet*                       m_styleSheet{nullptr};
+    wxRichTextObject*                           m_object{nullptr};
+    std::vector<int>                            m_pageIds; // mapping of book control indexes to page ids
+    int                                         m_options{0}; // UI options
+    bool                                        m_ignoreUpdates{false};
+    inline static wxColourData                  sm_colourData;
 
-    static wxRichTextFormattingDialogFactory*   ms_FormattingDialogFactory;
-    static bool                                 sm_showToolTips;
+    inline static wxRichTextFormattingDialogFactory*   ms_FormattingDialogFactory{nullptr};
+    inline static bool                          sm_showToolTips{false};
 
-    static bool                                 sm_restoreLastPage;
-    static int                                  sm_lastPage;
+    inline static bool                          sm_restoreLastPage{true};
+    inline static int                           sm_lastPage{-1};
 
     wxDECLARE_EVENT_TABLE();
 };
@@ -304,7 +301,6 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextColourSwatchCtrl: public wxControl
     wxDECLARE_CLASS(wxRichTextColourSwatchCtrl);
 public:
     wxRichTextColourSwatchCtrl(wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0);
-    ~wxRichTextColourSwatchCtrl() override;
 
     void OnMouseEvent(wxMouseEvent& event);
 
@@ -331,17 +327,10 @@ class WXDLLIMPEXP_RICHTEXT wxRichTextFontListBox: public wxHtmlListBox
     wxDECLARE_EVENT_TABLE();
 
 public:
-    wxRichTextFontListBox()
-    {
-        Init();
-    }
+    wxRichTextFontListBox() = default;
+
     wxRichTextFontListBox(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, long style = 0);
-    ~wxRichTextFontListBox() override;
-
-    void Init()
-    {
-    }
 
     bool Create(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, long style = 0);
@@ -373,7 +362,6 @@ protected:
     wxString OnGetItem(size_t n) const override;
 
 private:
-
     std::vector<wxString> m_faceNames;
 };
 

@@ -321,7 +321,6 @@ class wxGDIPlusBrushData : public wxGDIPlusPenBrushBaseData
 public:
     explicit wxGDIPlusBrushData( wxGraphicsRenderer* renderer );
     wxGDIPlusBrushData( wxGraphicsRenderer* renderer, const wxBrush &brush );
-    ~wxGDIPlusBrushData () override;
 
     virtual Brush* GetGDIPlusBrush() { return m_brush; }
 
@@ -1067,10 +1066,6 @@ wxGDIPlusBrushData::wxGDIPlusBrushData( wxGraphicsRenderer* renderer , const wxB
         }
     }
 }
-
-wxGDIPlusBrushData::~wxGDIPlusBrushData()
-= default;
-
 
 //-----------------------------------------------------------------------------
 // Support for adding private fonts

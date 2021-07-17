@@ -103,8 +103,8 @@ static std::vector<HANDLE> gs_asyncThreads;
 // structure describing the process we're being waiting for
 struct wxExecuteData
 {
-public:
     wxExecuteData() = default;
+
     ~wxExecuteData()
     {
         if ( !::CloseHandle(hProcess) )

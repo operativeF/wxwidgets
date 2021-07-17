@@ -24,7 +24,7 @@ WX_DEFINE_USER_EXPORTED_ARRAY_PTR(wxRibbonGalleryItem*, wxArrayRibbonGalleryItem
 class WXDLLIMPEXP_RIBBON wxRibbonGallery : public wxRibbonControl
 {
 public:
-    wxRibbonGallery();
+    wxRibbonGallery() = default;
 
     wxRibbonGallery(wxWindow* parent,
                   wxWindowID id = wxID_ANY,

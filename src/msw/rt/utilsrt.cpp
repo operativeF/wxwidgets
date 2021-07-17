@@ -229,9 +229,6 @@ HRESULT GetActivationFactory(const wxString& activatableClassId, REFIID iid, voi
 class RTModule : public wxModule
 {
 public:
-    RTModule()
-    = default;
-
     bool OnInit() override
     {
         return true;

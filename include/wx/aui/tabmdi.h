@@ -194,7 +194,7 @@ private:
 class WXDLLIMPEXP_AUI wxAuiMDIClientWindow : public wxAuiNotebook
 {
 public:
-    wxAuiMDIClientWindow();
+    wxAuiMDIClientWindow() = default;
     wxAuiMDIClientWindow(wxAuiMDIParentFrame *parent, long style = 0);
 
     virtual bool CreateClient(wxAuiMDIParentFrame *parent,

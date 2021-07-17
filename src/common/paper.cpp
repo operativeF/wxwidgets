@@ -337,7 +337,6 @@ class WXDLLEXPORT wxPrintPaperModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxPrintPaperModule);
 public:
-    wxPrintPaperModule() = default;
     bool OnInit() override;
     void OnExit() override;
 };

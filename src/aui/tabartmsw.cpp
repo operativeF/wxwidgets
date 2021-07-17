@@ -27,8 +27,6 @@ wxAuiMSWTabArt::wxAuiMSWTabArt()
     m_themed = wxUxThemeIsActive();
 }
 
-wxAuiMSWTabArt::~wxAuiMSWTabArt() = default;
-
 wxAuiTabArt* wxAuiMSWTabArt::Clone()
 {
     return new wxAuiMSWTabArt(*this);

@@ -711,7 +711,7 @@ public:
         : m_combo(combo)
     {
     }
-    ~wxComboBoxExtraInputHandler() override = default;
+
     void OnKey(wxKeyEvent& event);
     void OnFocus(wxFocusEvent& event);
 
@@ -927,9 +927,6 @@ void wxComboPopupEvtHandler::OnMouseEvent( wxMouseEvent& event )
 class wxComboCtrlTextCtrl : public wxTextCtrl
 {
 public:
-    wxComboCtrlTextCtrl()  = default;
-    ~wxComboCtrlTextCtrl() override = default;
-
     wxWindow *GetMainWindowOfCompositeControl() override
     {
         wxComboCtrl* combo = (wxComboCtrl*) GetParent();

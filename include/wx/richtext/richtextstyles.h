@@ -483,7 +483,6 @@ public:
     }
     wxRichTextStyleListBox(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, long style = 0);
-    ~wxRichTextStyleListBox() override;
 
     void Init()
     {
@@ -588,9 +587,6 @@ public:
 
     wxRichTextStyleListCtrl(wxWindow* parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, long style = 0);
-
-    /// Constructors
-    ~wxRichTextStyleListCtrl() override;
 
     /// Member initialisation
     void Init()

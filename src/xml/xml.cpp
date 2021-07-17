@@ -637,11 +637,6 @@ bool wxIsWhiteOnly(const wxString& buf)
 
 struct wxXmlParsingContext
 {
-    wxXmlParsingContext()
-        
-          
-    = default;
-
     XML_Parser parser;
     wxMBConv  *conv{nullptr};
     wxXmlNode *node{nullptr};                    // the node being parsed

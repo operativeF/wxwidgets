@@ -40,7 +40,7 @@ public:
                const wxString& help = wxEmptyString,
                wxItemKind kind = wxITEM_NORMAL,
                wxMenu *subMenu = nullptr);
-    ~wxMenuItem() override;
+    ~wxMenuItem() override = default;
 
     wxMenuItem(const wxMenuItem&) = delete;
     wxMenuItem& operator=(const wxMenuItem&) = delete;

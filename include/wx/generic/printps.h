@@ -23,8 +23,9 @@
 class WXDLLIMPEXP_CORE wxPostScriptPrinter : public wxPrinterBase
 {
 public:
-    wxPostScriptPrinter(wxPrintDialogData *data = nullptr);
-    ~wxPostScriptPrinter() override;
+    explicit wxPostScriptPrinter(wxPrintDialogData *data = nullptr) :
+        wxPrinterBase(data)
+    {}
 
     bool Print(wxWindow *parent, wxPrintout *printout, bool prompt = true) override;
     wxDC* PrintDialog(wxWindow *parent) override;
@@ -48,8 +49,6 @@ public:
     wxPostScriptPrintPreview(wxPrintout *printout,
                              wxPrintout *printoutForPrinting,
                              wxPrintData *data);
-
-    ~wxPostScriptPrintPreview() override;
 
     bool Print(bool interactive) override;
     void DetermineScaling() override;

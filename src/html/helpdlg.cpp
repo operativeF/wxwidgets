@@ -98,9 +98,6 @@ bool wxHtmlHelpDialog::Create(wxWindow* parent, wxWindowID id,
     return true;
 }
 
-wxHtmlHelpDialog::~wxHtmlHelpDialog()
-= default;
-
 void wxHtmlHelpDialog::SetTitleFormat(const wxString& format)
 {
     m_TitleFormat = format;

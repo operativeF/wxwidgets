@@ -129,7 +129,6 @@ class wxPGGlobalVarsClassManager : public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxPGGlobalVarsClassManager);
 public:
-    wxPGGlobalVarsClassManager() = default;
     bool OnInit() override { wxPGGlobalVars = new wxPGGlobalVarsClass(); return true; }
     void OnExit() override { wxDELETE(wxPGGlobalVars); }
 };
@@ -3848,9 +3847,6 @@ public:
     {
     }
 
-    ~wxPropertyGridEditorEventForwarder()
-    override = default;
-
 private:
     bool ProcessEvent( wxEvent& event ) override
     {
@@ -6091,9 +6087,6 @@ wxPGStringTokenizer::wxPGStringTokenizer( const wxString& str, wxChar delimiter 
 {
 }
 
-wxPGStringTokenizer::~wxPGStringTokenizer()
-= default;
-
 bool wxPGStringTokenizer::HasMoreTokens()
 {
     const wxString& str = *m_str;
@@ -6154,19 +6147,8 @@ wxString wxPGStringTokenizer::GetNextToken()
 }
 
 // -----------------------------------------------------------------------
-// wxPGChoiceEntry
-// -----------------------------------------------------------------------
-
-wxPGChoiceEntry::wxPGChoiceEntry()
-      
-= default;
-
-// -----------------------------------------------------------------------
 // wxPGChoicesData
 // -----------------------------------------------------------------------
-
-wxPGChoicesData::wxPGChoicesData()
-= default;
 
 wxPGChoicesData::~wxPGChoicesData()
 {

@@ -149,8 +149,6 @@ LRESULT WXDLLEXPORT APIENTRY wxWndProc(HWND, UINT, WPARAM, LPARAM);
 class wxOleInitModule : public wxModule
 {
 public:
-    wxOleInitModule() = default;
-
     bool OnInit() override
     {
         return wxOleInitialize();
@@ -757,17 +755,6 @@ void wxApp::CleanUp()
     // unregister the classes now
     UnregisterWindowClasses();
 }
-
-// ----------------------------------------------------------------------------
-// wxApp ctor/dtor
-// ----------------------------------------------------------------------------
-
-wxApp::wxApp()
-{
-}
-
-wxApp::~wxApp()
-= default;
 
 // ----------------------------------------------------------------------------
 // wxApp idle handling

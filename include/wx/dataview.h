@@ -1077,14 +1077,15 @@ public:
 class WXDLLIMPEXP_CORE wxDataViewListCtrl: public wxDataViewCtrl
 {
 public:
-    wxDataViewListCtrl();
+    wxDataViewListCtrl() = default;
     wxDataViewListCtrl( wxWindow *parent, wxWindowID id,
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize, long style = wxDV_ROW_LINES,
            const wxValidator& validator = wxDefaultValidator );
-    ~wxDataViewListCtrl() override;
 
 	wxDataViewListCtrl& operator=(const wxDataViewListCtrl&) = delete;
+
+    ~wxDataViewListCtrl() override = default;
 
     [[maybe_unused]] bool Create( wxWindow *parent, wxWindowID id,
            const wxPoint& pos = wxDefaultPosition,

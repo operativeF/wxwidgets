@@ -20,7 +20,7 @@ class WXDLLIMPEXP_NET wxSocketOutputStream : public wxOutputStream
 {
 public:
     wxSocketOutputStream(wxSocketBase& s);
-    ~wxSocketOutputStream() override;
+    ~wxSocketOutputStream() override = default;
 
    wxSocketOutputStream(const wxSocketOutputStream&) = delete;
    wxSocketOutputStream& operator=(const wxSocketOutputStream&) = delete;
@@ -42,13 +42,13 @@ protected:
 class WXDLLIMPEXP_NET wxSocketInputStream : public wxInputStream
 {
 public:
-    wxSocketInputStream(wxSocketBase& s);
-    ~wxSocketInputStream() override;
+    explicit wxSocketInputStream(wxSocketBase& s);
+    ~wxSocketInputStream() override = default;
 
-   wxSocketInputStream(const wxSocketInputStream&) = delete;
-   wxSocketInputStream& operator=(const wxSocketInputStream&) = delete;
-   wxSocketInputStream(wxSocketInputStream&&) = default;
-   wxSocketInputStream& operator=(wxSocketInputStream&&) = default;
+    wxSocketInputStream(const wxSocketInputStream&) = delete;
+    wxSocketInputStream& operator=(const wxSocketInputStream&) = delete;
+    wxSocketInputStream(wxSocketInputStream&&) = default;
+    wxSocketInputStream& operator=(wxSocketInputStream&&) = default;
 
 protected:
     wxSocketBase *m_i_socket;

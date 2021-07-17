@@ -31,8 +31,8 @@ WX_DECLARE_EXPORTED_OBJARRAY(wxImage, wxImageArray);
 class WXDLLIMPEXP_CORE wxANIDecoder : public wxAnimationDecoder
 {
 public:
-    wxANIDecoder();
-    ~wxANIDecoder() override;
+   wxANIDecoder() = default;
+   ~wxANIDecoder() override = default;
 
    wxANIDecoder(const wxANIDecoder&) = delete;
    wxANIDecoder& operator=(const wxANIDecoder&) = delete;

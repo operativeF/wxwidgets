@@ -155,9 +155,6 @@ wxPropertyGridPage::wxPropertyGridPage()
     m_pState = this; // wxPropertyGridInterface to point to State
 }
 
-wxPropertyGridPage::~wxPropertyGridPage()
-= default;
-
 void wxPropertyGridPage::Clear()
 {
     GetStatePtr()->DoClear();
@@ -2168,7 +2165,7 @@ public:
     {
         m_it.Init(manager->GetPage(0), flags);
     }
-    ~wxPGVIteratorBase_Manager() override = default;
+
     void Next() override
     {
         m_it.Next();

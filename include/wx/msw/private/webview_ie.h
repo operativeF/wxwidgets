@@ -163,7 +163,7 @@ class wxIEContainer : public wxActiveXContainer
 {
 public:
     wxIEContainer(wxWindow *parent, REFIID iid, IUnknown *pUnk, DocHostUIHandler* uiHandler = nullptr);
-    ~wxIEContainer() override;
+
     bool QueryClientSiteInterface(REFIID iid, void **_interface, const char *&desc) override;
 private:
     DocHostUIHandler* m_uiHandler;

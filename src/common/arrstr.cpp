@@ -260,8 +260,6 @@ struct wxStringFragment
         LetterOrSymbol // letters and symbols, i.e., anything not covered by the above types
     };
 
-    wxStringFragment()  = default;
-
     Type     type{Empty};
     wxString text;
     wxUint64 value{0}; // used only for Digit type

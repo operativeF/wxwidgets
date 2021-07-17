@@ -80,7 +80,7 @@ public:
                 , wxConfigBase *config=nullptr, const wxString& rootpath = wxEmptyString
 #endif // wxUSE_CONFIG
                 );
-    ~wxHtmlHelpFrame() override;
+    ~wxHtmlHelpFrame() override = default;
 
     wxHtmlHelpFrame(const wxHtmlHelpFrame&) = delete;
 	wxHtmlHelpFrame& operator=(const wxHtmlHelpFrame&) = delete;

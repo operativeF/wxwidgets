@@ -601,8 +601,6 @@ wxFontProperty::wxFontProperty( const wxString& label, const wxString& name,
                      font.GetFamily()) );
 }
 
-wxFontProperty::~wxFontProperty() = default;
-
 void wxFontProperty::OnSetValue()
 {
     wxFont font;
@@ -881,10 +879,6 @@ wxSystemColourProperty::wxSystemColourProperty( const wxString& label, const wxS
 {
         Init( wxPG_COLOUR_CUSTOM, value );
 }
-
-
-wxSystemColourProperty::~wxSystemColourProperty() = default;
-
 
 wxColourPropertyValue wxSystemColourProperty::GetVal( const wxVariant* pVariant ) const
 {
@@ -1597,9 +1591,6 @@ wxColourProperty::wxColourProperty( const wxString& label,
     m_flags |= wxPG_PROP_TRANSLATE_CUSTOM;
 }
 
-wxColourProperty::~wxColourProperty()
-= default;
-
 void wxColourProperty::Init( wxColour colour )
 {
     if ( !colour.IsOk() )
@@ -1721,9 +1712,6 @@ wxCursorProperty::wxCursorProperty( const wxString& label, const wxString& name,
 {
     m_flags |= wxPG_PROP_STATIC_CHOICES; // Cursor selection cannot be changed.
 }
-
-wxCursorProperty::~wxCursorProperty()
-= default;
 
 wxSize wxCursorProperty::OnMeasureImage( int item ) const
 {
@@ -1944,8 +1932,6 @@ wxMultiChoiceProperty::wxMultiChoiceProperty( const wxString& label,
     SetValue(value);
 }
 
-wxMultiChoiceProperty::~wxMultiChoiceProperty() = default;
-
 void wxMultiChoiceProperty::OnSetValue()
 {
     GenerateValueAsString(m_value, &m_display);
@@ -2132,9 +2118,6 @@ wxDateProperty::wxDateProperty( const wxString& label,
 
     SetValue( value );
 }
-
-wxDateProperty::~wxDateProperty()
-= default;
 
 void wxDateProperty::OnSetValue()
 {

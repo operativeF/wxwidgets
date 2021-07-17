@@ -62,12 +62,10 @@ static constexpr int Id_SkipBtn = wxID_HIGHEST + 1;
 // Helper classes
 // ============================================================================
 
-// Class used to share data between the main thread and the task dialog runner.
-class wxProgressDialogSharedData
+// Struct used to share data between the main thread and the task dialog runner.
+struct wxProgressDialogSharedData
 {
 public:
-    wxProgressDialogSharedData() = default;
-
     wxCriticalSection m_cs;
 
     wxWindow *m_parent{nullptr};     // Parent window only used to center us over it.
@@ -139,7 +137,7 @@ class wxProgressDialogTaskRunner : public wxThread
 public:
     wxProgressDialogTaskRunner()
         : wxThread(wxTHREAD_JOINABLE)
-        { }
+    {}
 
     wxProgressDialogSharedData* GetSharedDataObject()
         { return &m_sharedData; }

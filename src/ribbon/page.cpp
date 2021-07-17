@@ -43,8 +43,6 @@ public:
                  const wxSize& size = wxDefaultSize,
                  long style = 0);
 
-    ~wxRibbonPageScrollButton() override;
-
 protected:
     wxBorder GetDefaultBorder() const override { return wxBORDER_NONE; }
 
@@ -84,8 +82,6 @@ wxRibbonPageScrollButton::wxRibbonPageScrollButton(wxRibbonPage* sibling,
 {
     SetBackgroundStyle(wxBG_STYLE_PAINT);
 }
-
-wxRibbonPageScrollButton::~wxRibbonPageScrollButton() = default;
 
 void wxRibbonPageScrollButton::OnEraseBackground(wxEraseEvent& WXUNUSED(evt))
 {

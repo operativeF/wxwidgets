@@ -645,7 +645,6 @@ class WXDLLIMPEXP_PROPGRID wxPGStringTokenizer
 {
 public:
     wxPGStringTokenizer( const wxString& str, wxChar delimiter );
-    ~wxPGStringTokenizer();
 
     bool HasMoreTokens(); // not const so we can do some stuff in it
     wxString GetNextToken();

@@ -1008,9 +1008,6 @@ wxAuiTabCtrl::wxAuiTabCtrl(wxWindow* parent,
     m_pressedButton = nullptr;
 }
 
-wxAuiTabCtrl::~wxAuiTabCtrl()
-= default;
-
 void wxAuiTabCtrl::OnPaint(wxPaintEvent&)
 {
     wxPaintDC dc(this);

@@ -51,7 +51,7 @@ public:
     wxWindowsPrintPreview(wxPrintout *printout,
                           wxPrintout *printoutForPrinting,
                           wxPrintData *data);
-    ~wxWindowsPrintPreview() override;
+    ~wxWindowsPrintPreview() override = default;
 
     wxWindowsPrintPreview(const wxWindowsPrintPreview&) = delete;
     wxWindowsPrintPreview& operator=(const wxWindowsPrintPreview&) = delete;

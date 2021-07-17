@@ -67,8 +67,6 @@ bool wxGauge::Create(wxWindow *parent,
     return true;
 }
 
-wxGauge::~wxGauge() = default;
-
 WXDWORD wxGauge::MSWGetStyle(long style, WXDWORD *exstyle) const
 {
     WXDWORD msStyle = wxControl::MSWGetStyle(style, exstyle);

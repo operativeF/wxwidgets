@@ -72,8 +72,11 @@ namespace
 class wxIDropTarget : public IDropTarget
 {
 public:
-    explicit wxIDropTarget(wxDropTarget *p);
-    virtual ~wxIDropTarget();
+    explicit wxIDropTarget(wxDropTarget *p) :
+        m_pTarget(p)
+    {}
+
+    virtual ~wxIDropTarget() = default;
 
     wxIDropTarget(const wxIDropTarget&) = delete;
 	wxIDropTarget& operator=(const wxIDropTarget&) = delete;
@@ -165,14 +168,6 @@ DWORD wxIDropTarget::GetDropEffect(DWORD flags,
 
     return effectiveAction;
 }
-
-wxIDropTarget::wxIDropTarget(wxDropTarget *pTarget)
-{
-  m_pTarget      = pTarget;
-}
-
-wxIDropTarget::~wxIDropTarget()
-= default;
 
 BEGIN_IID_TABLE(wxIDropTarget)
   ADD_IID(Unknown)

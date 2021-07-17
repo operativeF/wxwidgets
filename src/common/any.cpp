@@ -44,6 +44,7 @@ class wxAnyValueTypeGlobals
 {
 public:
     wxAnyValueTypeGlobals() = default;
+
     ~wxAnyValueTypeGlobals()
     {
         m_anyToVariant.clear();
@@ -215,9 +216,6 @@ class wxAnyValueTypeGlobalsManager : public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxAnyValueTypeGlobalsManager);
 public:
-    wxAnyValueTypeGlobalsManager()  = default;
-    ~wxAnyValueTypeGlobalsManager() override = default;
-
     bool OnInit() override
     {
         return true;
@@ -226,7 +224,6 @@ public:
     {
         GetAnyValueTypeGlobals().reset();
     }
-private:
 };
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxAnyValueTypeGlobalsManager, wxModule);

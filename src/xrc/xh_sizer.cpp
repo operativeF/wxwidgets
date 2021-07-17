@@ -933,10 +933,6 @@ void wxSizerXmlHandler::AddSizerItem(wxSizerItem* sitem)
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxStdDialogButtonSizerXmlHandler, wxXmlResourceHandler);
 
-wxStdDialogButtonSizerXmlHandler::wxStdDialogButtonSizerXmlHandler()
-     
-= default;
-
 wxObject *wxStdDialogButtonSizerXmlHandler::DoCreateResource()
 {
     if (m_class == wxT("wxStdDialogButtonSizer"))

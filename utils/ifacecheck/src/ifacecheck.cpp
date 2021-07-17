@@ -66,11 +66,8 @@ static const wxCmdLineEntryDesc g_cmdLineDesc[] =
     wxCMD_LINE_DESC_END
 };
 
-class IfaceCheckLog : public wxLog
+struct IfaceCheckLog : public wxLog
 {
-public:
-    IfaceCheckLog() = default;
-
     virtual void DoLogText(const wxString& msg)
     {
         // send all messages to stdout (normal behaviour is to sent them to stderr)

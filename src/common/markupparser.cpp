@@ -428,8 +428,6 @@ wxString wxMarkupParser::Strip(const wxString& text)
     class StripOutput : public wxMarkupParserOutput
     {
     public:
-        StripOutput() = default;
-
         const wxString& GetText() const { return m_text; }
 
         void OnText(const wxString& string) override { m_text += string; }

@@ -118,10 +118,6 @@
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxPGEditor, wxObject);
 
-
-wxPGEditor::~wxPGEditor()
-= default;
-
 wxString wxPGEditor::GetName() const
 {
     return GetClassInfo()->GetClassName();
@@ -1483,9 +1479,6 @@ public:
         SetBackgroundStyle( wxBG_STYLE_PAINT );
     }
 
-    ~wxSimpleCheckBox() override;
-
-
     void SetBoxHeight(int height)
     {
         m_boxHeight = height;
@@ -1532,9 +1525,6 @@ wxBEGIN_EVENT_TABLE(wxSimpleCheckBox, wxControl)
     EVT_SIZE(wxSimpleCheckBox::OnResize)
     EVT_COMMAND(wxID_ANY, wxEVT_CB_LEFT_CLICK_ACTIVATE, wxSimpleCheckBox::OnLeftClickActivate)
 wxEND_EVENT_TABLE()
-
-wxSimpleCheckBox::~wxSimpleCheckBox()
-= default;
 
 void wxSimpleCheckBox::OnPaint( wxPaintEvent& WXUNUSED(event) )
 {

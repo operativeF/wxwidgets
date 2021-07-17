@@ -55,7 +55,7 @@ wxGraphicsObjectRefData::wxGraphicsObjectRefData( const wxGraphicsObjectRefData*
 
 wxGraphicsRenderer* wxGraphicsObjectRefData::GetRenderer() const
 {
-    return m_renderer ;
+    return m_renderer;
 }
 
 wxGraphicsObjectRefData* wxGraphicsObjectRefData::Clone() const
@@ -67,8 +67,6 @@ wxGraphicsObject::wxGraphicsObject( wxGraphicsRenderer* renderer )
 {
     SetRefData( new wxGraphicsObjectRefData(renderer));
 }
-
-wxGraphicsObject::~wxGraphicsObject() = default;
 
 bool wxGraphicsObject::IsNull() const
 {
@@ -572,9 +570,6 @@ wxGraphicsContext::wxGraphicsContext(wxGraphicsRenderer* renderer,
       m_contentScaleFactor(window ? window->GetContentScaleFactor() : 1.0)
 {
 }
-
-wxGraphicsContext::~wxGraphicsContext()
-= default;
 
 bool wxGraphicsContext::StartDoc(const wxString& WXUNUSED(message))
 {

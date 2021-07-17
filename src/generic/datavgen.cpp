@@ -672,11 +672,6 @@ private:
     // separate struct in order to conserve memory.
     struct BranchNodeData
     {
-        BranchNodeData()
-            
-              
-        = default;
-
         void InsertChild(wxDataViewTreeNode* node, unsigned index)
         {
             children.insert(children.begin() + index, node);

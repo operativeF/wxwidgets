@@ -31,8 +31,6 @@ wxSocketOutputStream::wxSocketOutputStream(wxSocketBase& s)
 {
 }
 
-wxSocketOutputStream::~wxSocketOutputStream() = default;
-
 size_t wxSocketOutputStream::OnSysWrite(const void *buffer, size_t size)
 {
     const size_t ret = m_o_socket->Write(buffer, size).LastWriteCount();
@@ -51,9 +49,6 @@ wxSocketInputStream::wxSocketInputStream(wxSocketBase& s)
  : m_i_socket(&s)
 {
 }
-
-wxSocketInputStream::~wxSocketInputStream()
-= default;
 
 size_t wxSocketInputStream::OnSysRead(void *buffer, size_t size)
 {

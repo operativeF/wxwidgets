@@ -356,8 +356,6 @@ static constexpr std::array<std::wstring_view, 83> gs_encodingNames =
 class wxFontMapperModule : public wxModule
 {
 public:
-    wxFontMapperModule()  = default;
-
     bool OnInit() override
     {
         // a dummy wxFontMapperBase object could have been created during the

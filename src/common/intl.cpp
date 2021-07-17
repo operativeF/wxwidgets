@@ -1985,9 +1985,7 @@ wxLocale *wxSetLocale(wxLocale *pLocale)
 class wxLocaleModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxLocaleModule);
-    public:
-        wxLocaleModule() = default;
-
+public:
         bool OnInit() override
         {
             return true;

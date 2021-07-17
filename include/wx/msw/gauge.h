@@ -31,7 +31,7 @@ public:
         Create(parent, id, range, pos, size, style, validator, name);
     }
 
-    ~wxGauge() override;
+    ~wxGauge() override = default;
 
     wxGauge(const wxGauge&) = delete;
     wxGauge& operator=(const wxGauge&) = delete;

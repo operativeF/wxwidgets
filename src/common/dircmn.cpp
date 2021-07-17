@@ -265,9 +265,12 @@ class wxDirTraverserFindFirst : public wxDirTraverser
 {
 public:
     wxDirTraverserFindFirst() = default;
+    ~wxDirTraverserFindFirst() = default;
 
     wxDirTraverserFindFirst(const wxDirTraverserFindFirst&) = delete;
 	wxDirTraverserFindFirst& operator=(const wxDirTraverserFindFirst&) = delete;
+    wxDirTraverserFindFirst(wxDirTraverserFindFirst&&) = default;
+    wxDirTraverserFindFirst& operator=(wxDirTraverserFindFirst&&) = default;
 
     wxDirTraverseResult OnFile(const wxString& filename) override
     {
@@ -316,8 +319,6 @@ wxString wxDir::FindFirst(const wxString& dirname,
 class wxDirTraverserSumSize : public wxDirTraverser
 {
 public:
-    wxDirTraverserSumSize() = default;
-
     wxDirTraverseResult OnFile(const wxString& filename) override
     {
         // wxFileName::GetSize won't use this class again as

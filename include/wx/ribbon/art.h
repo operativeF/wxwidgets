@@ -399,7 +399,6 @@ class WXDLLIMPEXP_RIBBON wxRibbonMSWArtProvider : public wxRibbonArtProvider
 {
 public:
     wxRibbonMSWArtProvider(bool set_colour_scheme = true);
-    ~wxRibbonMSWArtProvider() override;
 
     wxRibbonArtProvider* Clone() const override;
     void SetFlags(long flags) override;
@@ -772,7 +771,6 @@ class WXDLLIMPEXP_RIBBON wxRibbonAUIArtProvider : public wxRibbonMSWArtProvider
 {
 public:
     wxRibbonAUIArtProvider();
-    ~wxRibbonAUIArtProvider() override;
 
     wxRibbonArtProvider* Clone() const override;
 

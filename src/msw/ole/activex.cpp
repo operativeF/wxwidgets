@@ -682,8 +682,7 @@ public:
 
     explicit wxActiveXEvents(wxActiveXContainer *ax) : m_activeX(ax), m_haveCustomId(false) {}
     wxActiveXEvents(wxActiveXContainer *ax, REFIID iid) : m_activeX(ax), m_customId(iid), m_haveCustomId(true) {}
-    virtual ~wxActiveXEvents()
-    = default;
+    virtual ~wxActiveXEvents() = default;
 
     // IDispatch
     STDMETHODIMP GetIDsOfNames(REFIID, OLECHAR**, unsigned int, LCID, DISPID*) override

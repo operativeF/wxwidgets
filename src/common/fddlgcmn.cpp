@@ -43,9 +43,6 @@ wxDEFINE_EVENT( wxEVT_FIND_CLOSE, wxFindDialogEvent );
 // wxFindReplaceDialogBase
 // ----------------------------------------------------------------------------
 
-wxFindReplaceDialogBase::~wxFindReplaceDialogBase()
-= default;
-
 void wxFindReplaceDialogBase::Send(wxFindDialogEvent& event)
 {
     // we copy the data to dialog->GetData() as well

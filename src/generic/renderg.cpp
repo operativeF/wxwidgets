@@ -1020,7 +1020,6 @@ class wxGenericRendererModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxGenericRendererModule);
 public:
-    wxGenericRendererModule() = default;
     bool OnInit() override { return true; }
     void OnExit() override { wxRendererGeneric::Cleanup(); }
 };

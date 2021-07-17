@@ -72,9 +72,6 @@ wxBEGIN_EVENT_TABLE(wxRibbonToolBar, wxRibbonControl)
     EVT_SIZE(wxRibbonToolBar::OnSize)
 wxEND_EVENT_TABLE()
 
-wxRibbonToolBar::wxRibbonToolBar()
-= default;
-
 wxRibbonToolBar::wxRibbonToolBar(wxWindow* parent,
                   wxWindowID id,
                   const wxPoint& pos,

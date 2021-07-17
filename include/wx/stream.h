@@ -234,8 +234,8 @@ protected:
 class WXDLLIMPEXP_BASE wxOutputStream : public wxStreamBase
 {
 public:
-    wxOutputStream();
-    ~wxOutputStream() override;
+    wxOutputStream() = default;
+    ~wxOutputStream() override = default;
 
     wxOutputStream(const wxOutputStream&) = delete;
     wxOutputStream& operator=(const wxOutputStream&) = delete;

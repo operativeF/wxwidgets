@@ -111,7 +111,7 @@ public:
         return *this;
     }
 
-    ~wxBitmap() override;
+    ~wxBitmap() override = default;
 
 #if wxUSE_IMAGE
     wxImage ConvertToImage() const;

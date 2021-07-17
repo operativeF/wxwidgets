@@ -70,8 +70,10 @@ class wxRendererMSWBase : public wxDelegateRendererNative
 {
 public:
     wxRendererMSWBase() = default;
+
     explicit wxRendererMSWBase(wxRendererNative& rendererNative)
-        : wxDelegateRendererNative(rendererNative) { }
+        : wxDelegateRendererNative(rendererNative)
+    {}
 
     void DrawFocusRect(wxWindow * win,
                         wxDC& dc,

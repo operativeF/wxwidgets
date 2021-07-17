@@ -433,11 +433,7 @@ IMPLEMENT_IUNKNOWN_METHODS(wxDirect2DFontFileEnumerator)
 class wxDirect2DFontCollectionLoader : public IDWriteFontCollectionLoader
 {
 public:
-    wxDirect2DFontCollectionLoader()
-    {
-        ms_isInitialized = true;
-    }
-
+    wxDirect2DFontCollectionLoader() = default;
     virtual ~wxDirect2DFontCollectionLoader() = default;
 
     wxDirect2DFontCollectionLoader(const wxDirect2DFontCollectionLoader&) = delete;
@@ -502,7 +498,7 @@ public:
     DECLARE_IUNKNOWN_METHODS;
 
 private:
-    static bool ms_isInitialized;
+    inline static bool ms_isInitialized{true};
     inline static std::vector<wxString> ms_fontList;
     static wxDirect2DFontKey ms_key;
 };
@@ -514,7 +510,6 @@ END_IID_TABLE;
 
 IMPLEMENT_IUNKNOWN_METHODS(wxDirect2DFontCollectionLoader)
 
-bool wxDirect2DFontCollectionLoader::ms_isInitialized(false);
 wxDirect2DFontKey wxDirect2DFontCollectionLoader::ms_key(0);
 
 } // anonymous namespace
@@ -604,9 +599,8 @@ extern WXDLLIMPEXP_DATA_CORE(wxGraphicsBrush) wxNullGraphicsBrush;
 // is itself device-dependent and might change during the lifetime
 // of the resources which were created from it.
 template <typename C>
-class wxContextSupplier
+struct wxContextSupplier
 {
-public:
     using ContextType = C;
 
     virtual C GetContext() = 0;
@@ -616,9 +610,8 @@ using wxD2DContextSupplier = wxContextSupplier<ID2D1RenderTarget*>;
 
 // A resource holder manages a generic resource by acquiring
 // and releasing it on demand.
-class wxResourceHolder
+struct wxResourceHolder
 {
-public:
     // Acquires the managed resource if necessary (not already acquired)
     virtual void AcquireResource() = 0;
 
@@ -637,9 +630,8 @@ public:
 
 class wxD2DResourceManager;
 
-class wxD2DManagedObject
+struct wxD2DManagedObject
 {
-public:
     virtual void Bind(wxD2DResourceManager* manager) = 0;
     virtual void UnBind() = 0;
     virtual bool IsBound() = 0;
@@ -648,10 +640,8 @@ public:
     virtual ~wxD2DManagedObject() = default;
 };
 
-class wxManagedResourceHolder : public wxResourceHolder, public wxD2DManagedObject
+struct wxManagedResourceHolder : public wxResourceHolder, public wxD2DManagedObject
 {
-public:
-    ~wxManagedResourceHolder() override = default;
 };
 
 // A Direct2D resource manager handles the device-dependent
@@ -711,8 +701,7 @@ template<typename T>
 class wxD2DResourceHolder: public wxManagedResourceHolder
 {
 public:
-    wxD2DResourceHolder()  
-    = default;
+    wxD2DResourceHolder() = default;
 
     ~wxD2DResourceHolder() override
     {
@@ -799,9 +788,8 @@ protected:
 
 // Used as super class for graphics data objects
 // to forward the bindings to their internal resource holder.
-class wxD2DManagedGraphicsData : public wxD2DManagedObject
+struct wxD2DManagedGraphicsData : public wxD2DManagedObject
 {
-public:
     void Bind(wxD2DResourceManager* manager) override
     {
         GetManagedObject()->Bind(manager);
@@ -2717,7 +2705,7 @@ class wxD2DBrushResourceHolder : public wxD2DResourceHolder<B>
 {
 public:
     explicit wxD2DBrushResourceHolder(const wxBrush& brush) : m_sourceBrush(brush) {}
-    ~wxD2DBrushResourceHolder() override = default;
+
 protected:
     const wxBrush m_sourceBrush;
 };

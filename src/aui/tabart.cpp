@@ -184,9 +184,6 @@ wxAuiGenericTabArt::wxAuiGenericTabArt()
     UpdateColoursFromSystem();
 }
 
-wxAuiGenericTabArt::~wxAuiGenericTabArt()
-= default;
-
 void wxAuiGenericTabArt::UpdateColoursFromSystem()
 {
     wxColor baseColour = wxSystemSettings::GetColour(wxSYS_COLOUR_3DFACE);
@@ -931,9 +928,6 @@ wxAuiSimpleTabArt::wxAuiSimpleTabArt()
     m_selectedBkPen = wxPen(selectedtabColour);
 
 }
-
-wxAuiSimpleTabArt::~wxAuiSimpleTabArt()
-= default;
 
 wxAuiTabArt* wxAuiSimpleTabArt::Clone()
 {

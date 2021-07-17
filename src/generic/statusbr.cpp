@@ -98,9 +98,6 @@ void wxStatusBarGeneric::Init()
     m_borderY = wxTHICK_LINE_BORDER;
 }
 
-wxStatusBarGeneric::~wxStatusBarGeneric()
-= default;
-
 bool wxStatusBarGeneric::Create(wxWindow *parent,
                                 wxWindowID id,
                                 long style,

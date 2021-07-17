@@ -456,12 +456,6 @@ static wxStockGDI gs_wxStockGDI_instance;
 wxStockGDI* wxStockGDI::ms_instance = &gs_wxStockGDI_instance;
 wxObject* wxStockGDI::ms_stockObject[ITEMCOUNT];
 
-wxStockGDI::wxStockGDI()
-= default;
-
-wxStockGDI::~wxStockGDI()
-= default;
-
 void wxStockGDI::DeleteAll()
 {
     for (unsigned i = 0; i < ITEMCOUNT; i++)
@@ -694,9 +688,6 @@ void wxDeleteStockLists()
 // ============================================================================
 // wxTheXXXList stuff (semi-obsolete)
 // ============================================================================
-
-wxGDIObjListBase::wxGDIObjListBase()
-= default;
 
 wxGDIObjListBase::~wxGDIObjListBase()
 {

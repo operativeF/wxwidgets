@@ -2013,6 +2013,11 @@ public:
     ValidationTraverserBase(const ValidationTraverserBase&) = delete;
 	ValidationTraverserBase& operator=(const ValidationTraverserBase&) = delete;
 
+    // Give it a virtual dtor just to suppress gcc warnings about a class with
+    // virtual methods but non-virtual dtor -- even if this is completely safe
+    // here as we never use the objects of this class polymorphically.
+    virtual ~ValidationTraverserBase() = default;
+
     // Traverse all the direct children calling OnDo() on them and also all
     // grandchildren, calling OnRecurse() for them.
     bool DoForSelfAndChildren()
@@ -2041,11 +2046,6 @@ public:
 
         return true;
     }
-
-    // Give it a virtual dtor just to suppress gcc warnings about a class with
-    // virtual methods but non-virtual dtor -- even if this is completely safe
-    // here as we never use the objects of this class polymorphically.
-    virtual ~ValidationTraverserBase() = default;
 
 protected:
     // Called for each child, validator is guaranteed to be non-NULL.

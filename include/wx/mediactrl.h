@@ -187,10 +187,6 @@ protected:
 class WXDLLIMPEXP_MEDIA wxMediaBackend : public wxObject
 {
 public:
-    wxMediaBackend() = default;
-
-    ~wxMediaBackend() override;
-
     virtual bool CreateControl(wxControl* WXUNUSED(ctrl),
                                wxWindow* WXUNUSED(parent),
                                wxWindowID WXUNUSED(winid),

@@ -199,7 +199,6 @@ class WXDLLIMPEXP_GL wxGLCanvasBase : public wxWindow
 {
 public:
     wxGLCanvasBase();
-    ~wxGLCanvasBase() override;
 
     /*
        The derived class should provide a ctor with this signature:
@@ -343,7 +342,6 @@ class WXDLLIMPEXP_GL wxGLAPI : public wxObject
 {
 public:
     wxGLAPI();
-    ~wxGLAPI() override;
 
     static void glFrustum(GLfloat left, GLfloat right, GLfloat bottom,
                             GLfloat top, GLfloat zNear, GLfloat zFar);

@@ -229,7 +229,7 @@ using wxObjectEventFunction = wxEventFunction;
 class WXDLLIMPEXP_BASE wxEventFunctor
 {
 public:
-    virtual ~wxEventFunctor();
+    virtual ~wxEventFunctor() = default;
 
     // Invoke the actual event handler:
     virtual void operator()(wxEvtHandler *, wxEvent&) = 0;

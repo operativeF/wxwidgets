@@ -76,9 +76,6 @@ wxBEGIN_EVENT_TABLE(wxRibbonGallery, wxRibbonControl)
     EVT_SIZE(wxRibbonGallery::OnSize)
 wxEND_EVENT_TABLE()
 
-wxRibbonGallery::wxRibbonGallery()
-= default;
-
 wxRibbonGallery::wxRibbonGallery(wxWindow* parent,
                   wxWindowID id,
                   const wxPoint& pos,

@@ -35,13 +35,13 @@ class WXDLLIMPEXP_FWD_CORE wxWindowBase;
 class WXDLLIMPEXP_CORE wxValidator : public wxEvtHandler
 {
 public:
-    wxValidator();
+    wxValidator() = default;
     wxValidator(const wxValidator& other)
         : 
          m_validatorWindow(other.m_validatorWindow)
     {
     }
-    ~wxValidator() override;
+    ~wxValidator() override = default;
 
     wxValidator& operator=(const wxValidator&) = delete;
 
@@ -82,7 +82,7 @@ protected:
     wxWindow *m_validatorWindow{nullptr};
 
 private:
-    static bool ms_isSilent;
+    inline static bool ms_isSilent{true};
 
     wxDECLARE_DYNAMIC_CLASS(wxValidator);
 };

@@ -2339,19 +2339,12 @@ wxBEGIN_EVENT_TABLE(wxDataViewListCtrl,wxDataViewCtrl)
    EVT_SIZE( wxDataViewListCtrl::OnSize )
 wxEND_EVENT_TABLE()
 
-wxDataViewListCtrl::wxDataViewListCtrl()
-= default;
-
 wxDataViewListCtrl::wxDataViewListCtrl( wxWindow *parent, wxWindowID id,
            const wxPoint& pos, const wxSize& size, long style,
            const wxValidator& validator )
 {
     Create( parent, id, pos, size, style, validator );
 }
-
-wxDataViewListCtrl::~wxDataViewListCtrl()
-= default;
-
 
 bool wxDataViewListCtrl::Create( wxWindow *parent, wxWindowID id,
            const wxPoint& pos, const wxSize& size, long style,

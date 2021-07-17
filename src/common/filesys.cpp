@@ -670,11 +670,6 @@ class wxFileSystemModule : public wxModule
     wxDECLARE_DYNAMIC_CLASS(wxFileSystemModule);
 
     public:
-        wxFileSystemModule() 
-            
-            
-        = default;
-
         bool OnInit() override
         {
             m_handler = new wxLocalFSHandler;

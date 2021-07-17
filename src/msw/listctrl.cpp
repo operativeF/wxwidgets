@@ -204,26 +204,22 @@ private:
 // To conserve memory, a wxMSWListItemData is
 // only allocated for a LV_ITEM if text attributes or
 // user data(lparam) are being set.
-class wxMSWListItemData
+struct wxMSWListItemData
 {
-public:
    wxMSWListItemData()  = default;
    ~wxMSWListItemData() { delete attr; }
 
-    wxItemAttr *attr{nullptr};
-    LPARAM lParam{0}; // real user data
-
     wxMSWListItemData(const wxMSWListItemData&) = delete;
 	wxMSWListItemData& operator=(const wxMSWListItemData&) = delete;
+
+    wxItemAttr *attr{nullptr};
+    LPARAM lParam{0}; // real user data
 };
 
 // wxMSWListHeaderCustomDraw: custom draw helper for the header
 class wxMSWListHeaderCustomDraw : public wxMSWImpl::CustomDraw
 {
 public:
-    wxMSWListHeaderCustomDraw()
-    = default;
-
     // Make this field public to let wxListCtrl update it directly when its
     // header attributes change.
     wxItemAttr m_attr;

@@ -32,15 +32,8 @@
 
 #include <cstdlib>
 
-    wxIMPLEMENT_DYNAMIC_CLASS(wxPostScriptPrinter, wxPrinterBase);
-    wxIMPLEMENT_CLASS(wxPostScriptPrintPreview, wxPrintPreviewBase);
-
-wxPostScriptPrinter::wxPostScriptPrinter(wxPrintDialogData *data)
-                   : wxPrinterBase(data)
-{
-}
-
-wxPostScriptPrinter::~wxPostScriptPrinter() = default;
+wxIMPLEMENT_DYNAMIC_CLASS(wxPostScriptPrinter, wxPrinterBase);
+wxIMPLEMENT_CLASS(wxPostScriptPrintPreview, wxPrintPreviewBase);
 
 bool wxPostScriptPrinter::Print(wxWindow *parent, wxPrintout *printout, bool prompt)
 {
@@ -253,9 +246,6 @@ wxPostScriptPrintPreview::wxPostScriptPrintPreview(wxPrintout *printout,
 {
     Init(printout, printoutForPrinting);
 }
-
-wxPostScriptPrintPreview::~wxPostScriptPrintPreview()
-= default;
 
 bool wxPostScriptPrintPreview::Print(bool interactive)
 {

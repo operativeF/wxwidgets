@@ -59,9 +59,6 @@ wxRibbonAUIArtProvider::wxRibbonAUIArtProvider()
     m_gallery_bitmap_padding_bottom_size = 3;
 }
 
-wxRibbonAUIArtProvider::~wxRibbonAUIArtProvider()
-= default;
-
 wxRibbonArtProvider* wxRibbonAUIArtProvider::Clone() const
 {
     wxRibbonAUIArtProvider *copy = new wxRibbonAUIArtProvider();

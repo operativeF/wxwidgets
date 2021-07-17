@@ -36,8 +36,6 @@ wxRichTextPrintout::wxRichTextPrintout(const wxString& title) : wxPrintout(title
     SetMargins(); // to default values
 }
 
-wxRichTextPrintout::~wxRichTextPrintout() = default;
-
 void wxRichTextPrintout::OnPreparePrinting()
 {
     wxBusyCursor wait;

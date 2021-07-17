@@ -323,7 +323,6 @@ void wxWrapSizer::CalcMinFromMajor(int totMajor)
 // Helper struct for CalcMinFromMinor
 struct wxWrapLine
 {
-    wxWrapLine()  = default;
     wxSizerItem *m_first{nullptr};
     int m_width{0};        // Width of line
 };

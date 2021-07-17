@@ -296,8 +296,6 @@ wxRibbonMSWArtProvider::wxRibbonMSWArtProvider(bool set_colour_scheme)
     m_help_button_offset = 22;
 }
 
-wxRibbonMSWArtProvider::~wxRibbonMSWArtProvider() = default;
-
 void wxRibbonMSWArtProvider::GetColourScheme(
                          wxColour* primary,
                          wxColour* secondary,

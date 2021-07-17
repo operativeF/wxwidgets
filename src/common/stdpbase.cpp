@@ -40,8 +40,6 @@ namespace
 // of this class directly.
 class wxStandardPathsDefault : public wxStandardPaths
 {
-public:
-    wxStandardPathsDefault() = default;
 };
 
 static wxStandardPathsDefault gs_stdPaths;

@@ -64,8 +64,6 @@ void wxStringProperty::OnSetValue()
     }
 }
 
-wxStringProperty::~wxStringProperty() = default;
-
 wxString wxStringProperty::ValueToString( wxVariant& value,
                                           int argFlags ) const
 {
@@ -200,9 +198,6 @@ wxNumericProperty::wxNumericProperty(const wxString& label, const wxString& name
     , m_spinWrap(false)
 {
 }
-
-wxNumericProperty::~wxNumericProperty()
-= default;
 
 bool wxNumericProperty::DoSetAttribute(const wxString& name, wxVariant& value)
 {
@@ -370,8 +365,6 @@ wxIntProperty::wxIntProperty( const wxString& label, const wxString& name,
     SetValue(wxVariant(value));
 }
 #endif
-
-wxIntProperty::~wxIntProperty() = default;
 
 wxString wxIntProperty::ValueToString( wxVariant& value,
                                        int WXUNUSED(argFlags) ) const
@@ -588,8 +581,6 @@ wxUIntProperty::wxUIntProperty( const wxString& label, const wxString& name,
     SetValue(wxVariant(value));
 }
 #endif
-
-wxUIntProperty::~wxUIntProperty() = default;
 
 wxString wxUIntProperty::ValueToString(wxVariant& value, int argFlags) const
 {
@@ -860,8 +851,6 @@ wxFloatProperty::wxFloatProperty( const wxString& label,
     SetValue(value);
 }
 
-wxFloatProperty::~wxFloatProperty() = default;
-
 wxString wxFloatProperty::ValueToString( wxVariant& value,
                                          int argFlags ) const
 {
@@ -993,8 +982,6 @@ wxBoolProperty::wxBoolProperty( const wxString& label, const wxString& name, boo
 
     m_flags |= wxPG_PROP_USE_DCC;
 }
-
-wxBoolProperty::~wxBoolProperty() = default;
 
 wxString wxBoolProperty::ValueToString( wxVariant& value,
                                         int argFlags ) const
@@ -1168,9 +1155,6 @@ int wxEnumProperty::GetIndexForValue( int value ) const
 
     return -1;
 }
-
-wxEnumProperty::~wxEnumProperty ()
-= default;
 
 void wxEnumProperty::OnSetValue()
 {
@@ -1348,9 +1332,6 @@ wxEditEnumProperty::wxEditEnumProperty( const wxString& label, const wxString& n
 {
     SetValue( value );
 }
-
-wxEditEnumProperty::~wxEditEnumProperty()
-= default;
 
 void wxEditEnumProperty::OnSetValue()
 {
@@ -1546,9 +1527,6 @@ wxFlagsProperty::wxFlagsProperty( const wxString& label, const wxString& name,
         m_value = wxPGVariant_Zero;
     }
 }
-
-wxFlagsProperty::~wxFlagsProperty()
-= default;
 
 void wxFlagsProperty::OnSetValue()
 {
@@ -1757,8 +1735,6 @@ wxDirProperty::wxDirProperty( const wxString& label, const wxString& name, const
     SetValue(value);
 }
 
-wxDirProperty::~wxDirProperty() = default;
-
 wxString wxDirProperty::ValueToString(wxVariant& value, int WXUNUSED(argFlags)) const
 {
     return value;
@@ -1813,15 +1789,8 @@ bool wxDirProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& value)
 // wxPGDialogAdapter
 // -----------------------------------------------------------------------
 
-class WXDLLIMPEXP_PROPGRID wxPGDialogAdapter : public wxPGEditorDialogAdapter
+struct WXDLLIMPEXP_PROPGRID wxPGDialogAdapter : public wxPGEditorDialogAdapter
 {
-public:
-    wxPGDialogAdapter()  
-    = default;
-
-    ~wxPGDialogAdapter()
-    override = default;
-
     bool DoShowDialog(wxPropertyGrid* pg, wxPGProperty* prop) override
     {
         wxEditorDialogProperty* dlgProp = wxDynamicCast(prop, wxEditorDialogProperty);
@@ -1849,9 +1818,6 @@ wxEditorDialogProperty::wxEditorDialogProperty(const wxString& label, const wxSt
     , m_dlgStyle(0)
 {
 }
-
-wxEditorDialogProperty::~wxEditorDialogProperty()
-= default;
 
 wxPGEditorDialogAdapter* wxEditorDialogProperty::GetEditorDialog() const
 {
@@ -1883,8 +1849,6 @@ wxFileProperty::wxFileProperty( const wxString& label, const wxString& name,
 
     SetValue(value);
 }
-
-wxFileProperty::~wxFileProperty() = default;
 
 wxValidator* wxFileProperty::GetClassValidator()
 {
@@ -2103,8 +2067,6 @@ wxLongStringProperty::wxLongStringProperty( const wxString& label, const wxStrin
     m_dlgStyle = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxCLIP_CHILDREN;
     SetValue(value);
 }
-
-wxLongStringProperty::~wxLongStringProperty() = default;
 
 wxString wxLongStringProperty::ValueToString( wxVariant& value,
                                               int WXUNUSED(argFlags) ) const
@@ -2551,8 +2513,6 @@ wxArrayStringProperty::wxArrayStringProperty( const wxString& label,
     m_dlgStyle = wxAEDIALOG_STYLE;
     SetValue( array );
 }
-
-wxArrayStringProperty::~wxArrayStringProperty() = default;
 
 void wxArrayStringProperty::OnSetValue()
 {

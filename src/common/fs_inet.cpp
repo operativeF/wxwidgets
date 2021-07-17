@@ -141,11 +141,6 @@ class wxFileSystemInternetModule : public wxModule
     wxDECLARE_DYNAMIC_CLASS(wxFileSystemInternetModule);
 
     public:
-        wxFileSystemInternetModule() 
-           
-           
-        = default;
-
         bool OnInit() override
         {
             m_handler = new wxInternetFSHandler;

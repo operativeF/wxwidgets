@@ -21,10 +21,6 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapXmlHandler, wxXmlResourceHandler);
 
-wxBitmapXmlHandler::wxBitmapXmlHandler()
-                   
-= default;
-
 wxObject *wxBitmapXmlHandler::DoCreateResource()
 {
     return new wxBitmap(GetBitmap(m_node));
@@ -36,10 +32,6 @@ bool wxBitmapXmlHandler::CanHandle(wxXmlNode *node)
 }
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxIconXmlHandler, wxXmlResourceHandler);
-
-wxIconXmlHandler::wxIconXmlHandler()
- 
-= default;
 
 wxObject *wxIconXmlHandler::DoCreateResource()
 {

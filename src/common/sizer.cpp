@@ -2760,10 +2760,6 @@ void wxStdDialogButtonSizer::Realize()
     class TabOrderUpdater
     {
     public:
-        TabOrderUpdater()
-             
-        = default;
-
         void Add(wxButton* btn)
         {
             if ( m_lastAdded )

@@ -201,8 +201,6 @@ public:
                  const wxSize& size = wxDefaultSize,
                  long style = 0);
 
-    ~wxAuiTabCtrl() override;
-
     bool IsDragging() const { return m_isDragging; }
 
 protected:

@@ -654,7 +654,7 @@ class WXDLLIMPEXP_PROPGRID wxPGChoicesData : public wxObjectRefData
     friend class wxPGChoices;
 public:
     // Constructor sets m_refCount to 1.
-    wxPGChoicesData();
+    wxPGChoicesData() = default;
 
     void CopyDataFrom( wxPGChoicesData* data );
 
@@ -2066,10 +2066,7 @@ class WXDLLIMPEXP_PROPGRID wxPGRootProperty : public wxPGProperty
 public:
     WX_PG_DECLARE_PROPERTY_CLASS(wxPGRootProperty)
 public:
-
-    // Constructor.
-    wxPGRootProperty( const wxString& name = wxS("<Root>") );
-    ~wxPGRootProperty() override;
+    explicit wxPGRootProperty( const wxString& name = wxS("<Root>") );
 
     bool StringToValue( wxVariant&, const wxString&, int ) const override
     {
@@ -2094,7 +2091,6 @@ public:
 
     wxPropertyCategory( const wxString& label,
                         const wxString& name = wxPG_LABEL );
-    ~wxPropertyCategory() override;
 
     int GetTextExtent( const wxWindow* wnd, const wxFont& font ) const;
 
@@ -2110,10 +2106,7 @@ protected:
     void CalculateTextExtent(const wxWindow* wnd, const wxFont& font);
 
     int     m_textExtent{-1};  // pre-calculated length of text
-    wxByte  m_capFgColIndex{1};  // caption text colour index
-
-private:
-    
+    wxByte  m_capFgColIndex{1};  // caption text colour index    
 };
 
 // -----------------------------------------------------------------------

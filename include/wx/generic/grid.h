@@ -136,7 +136,7 @@ public:
 protected:
     // virtual dtor for any base class - private because only DecRef() can
     // delete us
-    ~wxGridCellWorker() override;
+    ~wxGridCellWorker() override = default;
 
 private:
     // suppress the stupid gcc warning about the class having private dtor and

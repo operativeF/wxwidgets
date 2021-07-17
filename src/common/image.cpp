@@ -60,9 +60,8 @@ wxImage wxNullImage;
 // wxImageRefData
 //-----------------------------------------------------------------------------
 
-class wxImageRefData: public wxObjectRefData
+struct wxImageRefData: public wxObjectRefData
 {
-public:
     wxImageRefData() = default;
     ~wxImageRefData() override;
 
@@ -3951,7 +3950,6 @@ class wxImageModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxImageModule);
 public:
-    wxImageModule() = default;
     bool OnInit() override { wxImage::InitStandardHandlers(); return true; }
     void OnExit() override { wxImage::CleanUpHandlers(); }
 };

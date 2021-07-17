@@ -63,17 +63,6 @@ class WXDLLIMPEXP_PROPGRID wxPGEditor : public wxObject
 {
     wxDECLARE_ABSTRACT_CLASS(wxPGEditor);
 public:
-
-    // Constructor.
-    wxPGEditor()
-         
-    {
-        m_clientData = nullptr;
-    }
-
-    // Destructor.
-    ~wxPGEditor() override;
-
     // Returns pointer to the name of the editor. For example,
     // wxPGEditor_TextCtrl has name "TextCtrl". If you don't need to access
     // your custom editor by string name, then you do not need to implement
@@ -182,7 +171,7 @@ public:
     //
     // This member is public so scripting language bindings
     // wrapper code can access it freely.
-    void*       m_clientData;
+    void*       m_clientData{nullptr};
 };
 
 

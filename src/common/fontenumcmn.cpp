@@ -36,8 +36,6 @@ std::vector<wxString> gs_allFacenames;
 class wxFontEnumCacheCleanupModule : public wxModule
 {
 public:
-    wxFontEnumCacheCleanupModule() = default;
-
     bool OnInit() override { return true; }
     void OnExit() override { gs_allFacenames.clear(); }
 
@@ -58,8 +56,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFontEnumCacheCleanupModule, wxModule);
 class wxSimpleFontEnumerator : public wxFontEnumerator
 {
 public:
-    wxSimpleFontEnumerator() = default;
-
     // called by EnumerateFacenames
     bool OnFacename(const wxString& facename) override
     {

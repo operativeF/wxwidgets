@@ -68,7 +68,6 @@ class WXDLLIMPEXP_XRC wxStdDialogButtonSizerXmlHandler
     wxDECLARE_DYNAMIC_CLASS(wxStdDialogButtonSizerXmlHandler);
 
 public:
-    wxStdDialogButtonSizerXmlHandler();
     wxObject *DoCreateResource() override;
     bool CanHandle(wxXmlNode *node) override;
 

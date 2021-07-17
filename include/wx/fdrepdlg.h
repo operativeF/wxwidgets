@@ -102,7 +102,7 @@ public:
         m_FindReplaceData = data;
     }
 
-    ~wxFindReplaceDialogBase() override;
+    ~wxFindReplaceDialogBase() override = default;
 
     wxFindReplaceDialogBase(const wxFindReplaceDialogBase&) = delete;
     wxFindReplaceDialogBase& operator=(const wxFindReplaceDialogBase&) = delete;

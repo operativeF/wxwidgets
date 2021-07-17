@@ -26,11 +26,8 @@ class WXDLLIMPEXP_CORE wxDatePickerCtrlGeneric
 {
 public:
     // creating the control
-    wxDatePickerCtrlGeneric() { 
-    m_combo = nullptr;
-    m_popup = nullptr;
- }
-    ~wxDatePickerCtrlGeneric() override;
+    wxDatePickerCtrlGeneric() = default;
+
     wxDatePickerCtrlGeneric(wxWindow *parent,
                             wxWindowID id,
                             const wxDateTime& date = wxDefaultDateTime,
@@ -40,13 +37,13 @@ public:
                             const wxValidator& validator = wxDefaultValidator,
                             const wxString& name = wxDatePickerCtrlNameStr)
     {
-        
-    m_combo = nullptr;
-    m_popup = nullptr;
-
-
         Create(parent, id, date, pos, size, style, validator, name);
     }
+
+    ~wxDatePickerCtrlGeneric() override = default;
+
+    wxDatePickerCtrlGeneric(const wxDatePickerCtrlGeneric&) = delete;
+	wxDatePickerCtrlGeneric& operator=(const wxDatePickerCtrlGeneric&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -89,12 +86,10 @@ private:
     void OnText(wxCommandEvent &event);
     void OnSize(wxSizeEvent& event);
 
-    wxComboCtrl* m_combo;
-    wxCalendarComboPopup* m_popup;
+    wxComboCtrl* m_combo{nullptr};
+    wxCalendarComboPopup* m_popup{nullptr};
 
     wxDECLARE_EVENT_TABLE();
-    wxDatePickerCtrlGeneric(const wxDatePickerCtrlGeneric&) = delete;
-	wxDatePickerCtrlGeneric& operator=(const wxDatePickerCtrlGeneric&) = delete;
 };
 
 #endif // _WX_GENERIC_DATECTRL_H_

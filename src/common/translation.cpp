@@ -628,8 +628,6 @@ wxPluralFormsNode::evaluate(wxPluralFormsToken::Number n) const
 class wxPluralFormsCalculator
 {
 public:
-    wxPluralFormsCalculator() :  m_plural(nullptr) {}
-
     // input: number, returns msgstr index
     int evaluate(int n) const;
 
@@ -638,13 +636,11 @@ public:
     // returns 0 if error
     static wxPluralFormsCalculator* make(const char* s = nullptr);
 
-    ~wxPluralFormsCalculator() = default;
-
     void  init(wxPluralFormsToken::Number nplurals, wxPluralFormsNode* plural);
 
 private:
     wxPluralFormsToken::Number m_nplurals{0};
-    wxPluralFormsNodePtr m_plural;
+    wxPluralFormsNodePtr m_plural{nullptr};
 };
 
 wxDEFINE_SCOPED_PTR(wxPluralFormsCalculator, wxPluralFormsCalculatorPtr)
@@ -2024,20 +2020,18 @@ class wxTranslationsModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxTranslationsModule);
 public:
-        wxTranslationsModule() = default;
+    bool OnInit() override
+    {
+        return true;
+    }
 
-        bool OnInit() override
-        {
-            return true;
-        }
-
-        void OnExit() override
-        {
-            if ( gs_translationsOwned )
-                delete gs_translations;
-            gs_translations = nullptr;
-            gs_translationsOwned = true;
-        }
+    void OnExit() override
+    {
+        if ( gs_translationsOwned )
+            delete gs_translations;
+        gs_translations = nullptr;
+        gs_translationsOwned = true;
+    }
 };
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxTranslationsModule, wxModule);

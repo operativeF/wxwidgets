@@ -21,10 +21,14 @@ class WXDLLIMPEXP_CORE wxGenericCredentialEntryDialog : public wxDialog
 {
 public:
     wxGenericCredentialEntryDialog();
+    ~wxGenericCredentialEntryDialog() = default;
 
     wxGenericCredentialEntryDialog(wxWindow* parent, const wxString& message,
         const wxString& title,
         const wxWebCredentials& cred = wxWebCredentials());
+
+    wxGenericCredentialEntryDialog(const wxGenericCredentialEntryDialog&) = delete;
+	wxGenericCredentialEntryDialog& operator=(const wxGenericCredentialEntryDialog&) = delete;
 
     bool Create(wxWindow* parent, const wxString& message,
         const wxString& title,
@@ -41,9 +45,6 @@ private:
     wxTextCtrl* m_passwordTextCtrl;
 
     void Init(const wxString& message, const wxWebCredentials& cred);
-
-    wxGenericCredentialEntryDialog(const wxGenericCredentialEntryDialog&) = delete;
-	wxGenericCredentialEntryDialog& operator=(const wxGenericCredentialEntryDialog&) = delete;
 };
 
 // Add this typedef as long as the generic version is the only one available

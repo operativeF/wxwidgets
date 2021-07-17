@@ -287,7 +287,6 @@ wxPrintNativeDataBase *wxNativePrintFactory::CreatePrintNativeData()
 class wxPrintFactoryModule: public wxModule
 {
 public:
-    wxPrintFactoryModule() = default;
     bool OnInit() override { return true; }
     void OnExit() override { wxPrintFactory::SetPrintFactory( nullptr ); }
 
@@ -312,8 +311,6 @@ wxWindow *wxPrinterBase::sm_abortWindow = nullptr;
 bool wxPrinterBase::sm_abortIt = false;
 
 wxPrinterError wxPrinterBase::sm_lastError = wxPrinterError::NoError;
-
-wxPrinterBase::~wxPrinterBase() = default;
 
 wxPrintAbortDialog *wxPrinterBase::CreateAbortWindow(wxWindow *parent, wxPrintout * printout)
 {
@@ -557,13 +554,6 @@ void wxPrintAbortDialog::OnCancel(wxCommandEvent& WXUNUSED(event))
 //----------------------------------------------------------------------------
 // wxPrintout
 //----------------------------------------------------------------------------
-
-wxPrintout::wxPrintout(const wxString& title)
-    : m_printoutTitle(title)
-{
-}
-
-wxPrintout::~wxPrintout() = default;
 
 bool wxPrintout::OnBeginDocument(int WXUNUSED(startPage), int WXUNUSED(endPage))
 {
@@ -920,9 +910,6 @@ wxPreviewCanvas::wxPreviewCanvas(wxPrintPreviewBase *preview, wxWindow *parent,
 
     SetScrollbars(10, 10, 100, 100);
 }
-
-wxPreviewCanvas::~wxPreviewCanvas()
-= default;
 
 void wxPreviewCanvas::OnPaint(wxPaintEvent& WXUNUSED(event))
 {
@@ -1283,8 +1270,6 @@ wxPreviewControlBar::wxPreviewControlBar(wxPrintPreviewBase *preview, long butto
       m_buttonFlags(buttons)
 {
 }
-
-wxPreviewControlBar::~wxPreviewControlBar() = default;
 
 void wxPreviewControlBar::OnPaint(wxPaintEvent& WXUNUSED(event))
 {

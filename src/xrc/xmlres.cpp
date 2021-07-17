@@ -1438,11 +1438,8 @@ wxXmlSubclassFactories *wxXmlResource::ms_subclassFactories = nullptr;
     ms_subclassFactories->push_back(factory);
 }
 
-class wxXmlSubclassFactoryCXX : public wxXmlSubclassFactory
+struct wxXmlSubclassFactoryCXX : public wxXmlSubclassFactory
 {
-public:
-    ~wxXmlSubclassFactoryCXX() override = default;
-
     wxObject *Create(const wxString& className) override
     {
         wxClassInfo* classInfo = wxClassInfo::FindClass(className);
@@ -3043,7 +3040,6 @@ class wxXmlResourceModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxXmlResourceModule);
 public:
-    wxXmlResourceModule() = default;
     bool OnInit() override
     {
         wxXmlResource::AddSubclassFactory(new wxXmlSubclassFactoryCXX);

@@ -62,10 +62,6 @@ public:
     wxTarEntry(const wxString& name = wxEmptyString,
                const wxDateTime& dt = wxDateTime::Now(),
                wxFileOffset size = wxInvalidOffset);
-    ~wxTarEntry() override;
-
-    wxTarEntry(const wxTarEntry& entry);
-    wxTarEntry& operator=(const wxTarEntry& entry);
 
     // Get accessors
     wxString     GetName(wxPathFormat format = wxPATH_NATIVE) const override;

@@ -283,9 +283,6 @@ wxWindowsPrintPreview::wxWindowsPrintPreview(wxPrintout *printout,
     DetermineScaling();
 }
 
-wxWindowsPrintPreview::~wxWindowsPrintPreview()
-= default;
-
 bool wxWindowsPrintPreview::Print(bool interactive)
 {
     if (!m_printPrintout)

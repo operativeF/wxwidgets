@@ -49,9 +49,7 @@ class WXDLLIMPEXP_PROPGRID wxPropertyGridPage : public wxEvtHandler,
     friend class wxPropertyGridManager;
     wxDECLARE_CLASS(wxPropertyGridPage);
 public:
-
     wxPropertyGridPage();
-    ~wxPropertyGridPage() override;
 
     // Deletes all properties on page.
     void Clear() override;

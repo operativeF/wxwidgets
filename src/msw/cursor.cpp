@@ -395,9 +395,6 @@ void wxCursor::InitFromStock(wxStockCursor idCursor)
     }
 }
 
-wxCursor::~wxCursor()
-= default;
-
 // ----------------------------------------------------------------------------
 // other wxCursor functions
 // ----------------------------------------------------------------------------

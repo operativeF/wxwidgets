@@ -456,11 +456,6 @@ wxMenuItem::wxMenuItem(wxMenu *pParentMenu,
 
 }
 
-
-
-wxMenuItem::~wxMenuItem()
-= default;
-
 // misc
 // ----
 

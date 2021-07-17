@@ -57,9 +57,8 @@ FORCE_LINK_ME(m_layout)
 // array wxHtmlPrintout::m_PageBreaks of pagebreaks already set, and
 // set a new one only if it's not in that array.
 
-class wxHtmlPageBreakCell : public wxHtmlCell
+struct wxHtmlPageBreakCell : public wxHtmlCell
 {
-public:
     wxHtmlPageBreakCell() = default;
 
     wxHtmlPageBreakCell(const wxHtmlPageBreakCell&) = delete;

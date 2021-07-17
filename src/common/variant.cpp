@@ -46,10 +46,6 @@ WX_DEFINE_LIST(wxVariantList)
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxVariant, wxObject);
 
-wxVariant::wxVariant()
-     
-= default;
-
 bool wxVariant::IsNull() const
 {
      return (m_refData == nullptr);
@@ -79,9 +75,6 @@ wxVariant::wxVariant(wxVariantData* data, const wxString& name) // User-defined 
 {
     m_refData = data;
 }
-
-wxVariant::~wxVariant()
-= default;
 
 wxObjectRefData *wxVariant::CreateRefData() const
 {
@@ -184,9 +177,6 @@ wxAnyToVariantRegistration::
 {
     wxPreRegisterAnyToVariant(this);
 }
-
-wxAnyToVariantRegistration::~wxAnyToVariantRegistration()
-= default;
 
 wxVariant::wxVariant(const wxAny& any)
      

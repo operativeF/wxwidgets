@@ -95,8 +95,6 @@ wxPostScriptPrintNativeData::wxPostScriptPrintNativeData()
     m_printerTranslateY = 0;
 }
 
-wxPostScriptPrintNativeData::~wxPostScriptPrintNativeData() = default;
-
 bool wxPostScriptPrintNativeData::TransferTo( wxPrintData &WXUNUSED(data) )
 {
     return true;
@@ -253,8 +251,6 @@ int wxGenericPrintDialog::ShowModal()
 {
     return wxDialog::ShowModal();
 }
-
-wxGenericPrintDialog::~wxGenericPrintDialog() = default;
 
 void wxGenericPrintDialog::OnOK(wxCommandEvent& WXUNUSED(event))
 {
@@ -659,9 +655,6 @@ void wxGenericPrintSetupDialog::Init(wxPrintData* data)
     InitDialog();
 }
 
-wxGenericPrintSetupDialog::~wxGenericPrintSetupDialog()
-= default;
-
 void wxGenericPrintSetupDialog::OnPrinter(wxListEvent& event)
 {
     // Delete check mark
@@ -915,9 +908,6 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
 
     InitDialog();
 }
-
-wxGenericPageSetupDialog::~wxGenericPageSetupDialog()
-= default;
 
 wxPageSetupDialogData& wxGenericPageSetupDialog::GetPageSetupDialogData()
 {

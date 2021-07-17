@@ -520,12 +520,6 @@ inline void wxCheckSetBrush(wxDC& dc, const wxBrush& brush)
 
 wxIMPLEMENT_CLASS(wxRichTextObject, wxObject);
 
-wxRichTextObject::wxRichTextObject(wxRichTextObject* parent) : m_parent(parent)
-{
-}
-
-wxRichTextObject::~wxRichTextObject() = default;
-
 void wxRichTextObject::Dereference()
 {
     m_refCount --;
@@ -11624,7 +11618,6 @@ class wxRichTextModule: public wxModule
 {
     wxDECLARE_DYNAMIC_CLASS(wxRichTextModule);
 public:
-    wxRichTextModule() = default;
     bool OnInit() override
     {
         wxRichTextBuffer::SetRenderer(new wxRichTextStdRenderer);
@@ -12485,8 +12478,6 @@ wxRichTextImage::wxRichTextImage(const wxRichTextImageBlock& imageBlock, wxRichT
     if (charStyle)
         SetAttributes(*charStyle);
 }
-
-wxRichTextImage::~wxRichTextImage() = default;
 
 void wxRichTextImage::Init()
 {
@@ -13509,11 +13500,8 @@ bool wxRichTextBufferDataObject::SetData(size_t WXUNUSED(len), const void *buf)
 
 WX_DECLARE_STRING_HASH_MAP_WITH_DECL(wxFont, wxRichTextFontTableHashMap, class WXDLLIMPEXP_RICHTEXT);
 
-class wxRichTextFontTableData: public wxObjectRefData
+struct wxRichTextFontTableData : public wxObjectRefData
 {
-public:
-    wxRichTextFontTableData() = default;
-
     wxFont FindFont(const wxRichTextAttr& fontSpec, double fontScale);
 
     wxRichTextFontTableHashMap  m_hashMap;

@@ -138,6 +138,11 @@ public:
     wxHtmlSearchStatus(wxHtmlHelpData* base, const wxString& keyword,
                        bool case_sensitive, bool whole_words_only,
                        const wxString& book = wxEmptyString);
+
+    ~wxHtmlSearchStatus() = default;
+    wxHtmlSearchStatus(const wxHtmlSearchStatus&) = delete;
+	wxHtmlSearchStatus& operator=(const wxHtmlSearchStatus&) = delete;
+
     bool Search();  // do the next iteration
     bool IsActive() const { return m_Active; }
     int GetCurIndex() const { return m_CurIndex; }
@@ -156,9 +161,6 @@ private:
     int m_CurIndex;  // where we are now
     int m_MaxIndex;  // number of files we search
     // For progress bar: 100*curindex/maxindex = % complete
-
-    wxHtmlSearchStatus(const wxHtmlSearchStatus&) = delete;
-	wxHtmlSearchStatus& operator=(const wxHtmlSearchStatus&) = delete;
 };
 
 class WXDLLIMPEXP_HTML wxHtmlHelpData : public wxObject
@@ -167,8 +169,11 @@ class WXDLLIMPEXP_HTML wxHtmlHelpData : public wxObject
     friend class wxHtmlSearchStatus;
 
 public:
-    wxHtmlHelpData();
-    ~wxHtmlHelpData() override;
+    wxHtmlHelpData() = default;
+    ~wxHtmlHelpData() override = default;
+
+    wxHtmlHelpData(const wxHtmlHelpData&) = delete;
+	wxHtmlHelpData& operator=(const wxHtmlHelpData&) = delete;
 
     // Sets directory where temporary files are stored.
     // These temp files are index & contents file in binary (much faster to read)
@@ -215,9 +220,6 @@ protected:
     bool LoadCachedBook(wxHtmlBookRecord *book, wxInputStream *f);
     // Writes binary book
     bool SaveCachedBook(wxHtmlBookRecord *book, wxOutputStream *f);
-
-    wxHtmlHelpData(const wxHtmlHelpData&) = delete;
-	wxHtmlHelpData& operator=(const wxHtmlHelpData&) = delete;
 };
 
 #endif

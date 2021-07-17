@@ -1861,9 +1861,6 @@ wxIEContainer::wxIEContainer(wxWindow *parent, REFIID iid, IUnknown *pUnk,
     m_uiHandler = uiHandler;
 }
 
-wxIEContainer::~wxIEContainer()
-= default;
-
 bool wxIEContainer::QueryClientSiteInterface(REFIID iid, void **_interface,
                                              const char *&desc)
 {

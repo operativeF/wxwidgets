@@ -53,7 +53,7 @@ public:
 
     explicit wxIcon(const wxIconLocation& loc);
 
-    ~wxIcon() override;
+    ~wxIcon() override = default;
 
     virtual bool LoadFile(const wxString& name,
                           wxBitmapType type = wxICON_DEFAULT_TYPE,

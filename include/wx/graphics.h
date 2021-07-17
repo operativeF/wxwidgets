@@ -123,7 +123,6 @@ class WXDLLIMPEXP_CORE wxGraphicsObject : public wxObject
 public:
     wxGraphicsObject() = default;
     wxGraphicsObject( wxGraphicsRenderer* renderer );
-    ~wxGraphicsObject() override;
 
     bool IsNull() const;
 
@@ -561,7 +560,7 @@ class WXDLLIMPEXP_CORE wxGraphicsContext : public wxGraphicsObject
 public:
     wxGraphicsContext(wxGraphicsRenderer* renderer, wxWindow* window = nullptr);
 
-    ~wxGraphicsContext() override;
+    ~wxGraphicsContext() override = default;
 
     wxGraphicsContext(const wxGraphicsContext&) = delete;
     wxGraphicsContext& operator=(const wxGraphicsContext&) = delete;

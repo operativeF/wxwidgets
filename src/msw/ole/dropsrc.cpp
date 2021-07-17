@@ -46,7 +46,7 @@ public:
   virtual ~wxIDropSource() = default;
 
   wxIDropSource(const wxIDropSource&) = delete;
-	wxIDropSource& operator=(const wxIDropSource&) = delete;
+  wxIDropSource& operator=(const wxIDropSource&) = delete;
 
   // IDropSource
   STDMETHODIMP QueryContinueDrag(BOOL fEscapePressed, DWORD grfKeyState) override;

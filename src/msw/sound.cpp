@@ -32,10 +32,10 @@
 // ----------------------------------------------------------------------------
 
 // ABC for different sound data representations
-class wxSoundData
+struct wxSoundData
 {
-public:
     wxSoundData() = default;
+    virtual ~wxSoundData() = default;
 
     // return true if we had been successfully initialized
     virtual bool IsOk() const = 0;
@@ -45,8 +45,6 @@ public:
 
     // get the data to be passed to PlaySound()
     virtual LPCTSTR GetSoundData() const = 0;
-
-    virtual ~wxSoundData() = default;
 };
 
 // class for in-memory sound data

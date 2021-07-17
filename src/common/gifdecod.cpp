@@ -44,9 +44,8 @@ enum
 //---------------------------------------------------------------------------
 
 // internal class for storing GIF image data
-class GIFImage
+struct GIFImage
 {
-public:
     GIFImage() = default;
 
     unsigned int w{0};                 // width

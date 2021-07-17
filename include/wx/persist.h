@@ -55,7 +55,7 @@ public:
     static wxPersistenceManager& Get();
 
     // trivial but virtual dtor
-    virtual ~wxPersistenceManager();
+    virtual ~wxPersistenceManager() = default;
 
     wxPersistenceManager(const wxPersistenceManager&) = delete;
     wxPersistenceManager& operator=(const wxPersistenceManager&) = delete;

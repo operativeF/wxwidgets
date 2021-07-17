@@ -466,53 +466,6 @@ wxTarEntry::wxTarEntry(const wxString& name /*=wxEmptyString*/,
         SetName(name);
 }
 
-wxTarEntry::~wxTarEntry()
-= default;
-
-wxTarEntry::wxTarEntry(const wxTarEntry& e)
-  : 
-    m_Name(e.m_Name),
-    m_Mode(e.m_Mode),
-    m_IsModeSet(e.m_IsModeSet),
-    m_UserId(e.m_UserId),
-    m_GroupId(e.m_GroupId),
-    m_Size(e.m_Size),
-    m_Offset(e.m_Offset),
-    m_ModifyTime(e.m_ModifyTime),
-    m_AccessTime(e.m_AccessTime),
-    m_CreateTime(e.m_CreateTime),
-    m_TypeFlag(e.m_TypeFlag),
-    m_LinkName(e.m_LinkName),
-    m_UserName(e.m_UserName),
-    m_GroupName(e.m_GroupName),
-    m_DevMajor(e.m_DevMajor),
-    m_DevMinor(e.m_DevMinor)
-{
-}
-
-wxTarEntry& wxTarEntry::operator=(const wxTarEntry& e)
-{
-    if (&e != this) {
-        m_Name = e.m_Name;
-        m_Mode = e.m_Mode;
-        m_IsModeSet = e.m_IsModeSet;
-        m_UserId = e.m_UserId;
-        m_GroupId = e.m_GroupId;
-        m_Size = e.m_Size;
-        m_Offset = e.m_Offset;
-        m_ModifyTime = e.m_ModifyTime;
-        m_AccessTime = e.m_AccessTime;
-        m_CreateTime = e.m_CreateTime;
-        m_TypeFlag = e.m_TypeFlag;
-        m_LinkName = e.m_LinkName;
-        m_UserName = e.m_UserName;
-        m_GroupName = e.m_GroupName;
-        m_DevMajor = e.m_DevMajor;
-        m_DevMinor = e.m_DevMinor;
-    }
-    return *this;
-}
-
 wxString wxTarEntry::GetName(wxPathFormat format /*=wxPATH_NATIVE*/) const
 {
     bool isDir = IsDir() && !m_Name.empty();

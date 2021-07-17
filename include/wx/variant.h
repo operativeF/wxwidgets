@@ -97,14 +97,14 @@ WX_DECLARE_LIST_WITH_DECL(wxVariant, wxVariantList, class WXDLLIMPEXP_BASE);
 class WXDLLIMPEXP_BASE wxVariant: public wxObject
 {
 public:
-    wxVariant();
+    wxVariant() = default;
 
     wxVariant(const wxVariant& variant);
     wxVariant(wxVariantData* data, const wxString& name = wxEmptyString);
 #if wxUSE_ANY
     wxVariant(const wxAny& any);
 #endif
-    ~wxVariant() override;
+    ~wxVariant() override = default;
 
     // generic assignment
     void operator= (const wxVariant& variant);
@@ -409,7 +409,7 @@ class WXDLLIMPEXP_BASE wxAnyToVariantRegistration
 {
 public:
     wxAnyToVariantRegistration(wxVariantDataFactory factory);
-    virtual ~wxAnyToVariantRegistration();
+    virtual ~wxAnyToVariantRegistration() = default;
 
     virtual wxAnyValueType* GetAssociatedType() = 0;
     wxVariantDataFactory GetFactory() const { return m_factory; }
