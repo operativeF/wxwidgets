@@ -69,7 +69,7 @@ wxIMPLEMENT_CLASS(wxAuiManager, wxEvtHandler);
 
 
 
-static constexpr int auiToolBarLayer = 10;
+constexpr int auiToolBarLayer = 10;
 
 #ifndef __WXGTK20__
 
@@ -2854,10 +2854,10 @@ bool wxAuiManager::ProcessDockResult(wxAuiPaneInfo& target,
 // If, however, wxAuiManager:m_docks and wxAuiManager::m_panes are specified
 // as parameters, the changes will be made to the main state arrays
 
-static constexpr int auiInsertRowPixels = 10;
-static constexpr int auiNewRowPixels = 40;
-static constexpr int auiLayerInsertPixels = 40;
-static constexpr int auiLayerInsertOffset = 5;
+constexpr int auiInsertRowPixels = 10;
+constexpr int auiNewRowPixels = 40;
+constexpr int auiLayerInsertPixels = 40;
+constexpr int auiLayerInsertOffset = 5;
 
 bool wxAuiManager::DoDrop(wxAuiDockInfoArray& docks,
                           wxAuiPaneInfoArray& panes,

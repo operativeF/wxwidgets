@@ -37,7 +37,7 @@
 // constants
 // ----------------------------------------------------------------------------
 
-static constexpr int wxID_NEXT_TIP = 32000;  // whatever
+constexpr int wxID_NEXT_TIP = 32000;  // whatever
 
 // ----------------------------------------------------------------------------
 // private classes

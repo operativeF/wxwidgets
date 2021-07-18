@@ -51,16 +51,16 @@ extern void wxRemoveHandleAssociation(wxWindow *win);
 // ---------------------------------------------------------------------------
 
 // First ID for the MDI child menu item in the "Window" menu.
-static constexpr int wxFIRST_MDI_CHILD = 4100;
+constexpr int wxFIRST_MDI_CHILD = 4100;
 
 // There can be no more than 9 children in the "Window" menu as beginning with
 // the tenth one they're not shown and "More windows..." menu item is used
 // instead.
-static constexpr int wxLAST_MDI_CHILD = wxFIRST_MDI_CHILD + 8;
+constexpr int wxLAST_MDI_CHILD = wxFIRST_MDI_CHILD + 8;
 
 // The ID of the "More windows..." menu item is the next one after the last
 // child.
-static constexpr int wxID_MDI_MORE_WINDOWS = wxLAST_MDI_CHILD + 1;
+constexpr int wxID_MDI_MORE_WINDOWS = wxLAST_MDI_CHILD + 1;
 
 
 namespace

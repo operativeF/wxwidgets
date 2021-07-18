@@ -39,7 +39,7 @@
 // ----------------------------------------------------------------------------
 
 // no idea for a default width, just choose something
-static constexpr int DEFAULT_FIELD_WIDTH = 25;
+constexpr int DEFAULT_FIELD_WIDTH = 25;
 
 // ----------------------------------------------------------------------------
 // macros

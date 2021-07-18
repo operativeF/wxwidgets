@@ -26,6 +26,9 @@
 // classes
 // ----------------------------------------------------------------------------
 
+namespace
+{
+
 // low level wxBusyCursor replacement: we use Win32 API directly here instead
 // of going through wxWidgets calls as this could be dangerous
 class BusyCursor
@@ -66,7 +69,6 @@ public:
     }
 
 private:
-
     // formatted output to m_hFile
     void Output(const wxChar *format, ...);
 
@@ -76,6 +78,8 @@ private:
     // the handle of the report file
     HANDLE m_hFile;
 };
+
+} // namespace anonymous
 
 // ----------------------------------------------------------------------------
 // globals

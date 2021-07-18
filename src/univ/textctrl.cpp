@@ -197,8 +197,8 @@ static inline void OrderPositions(wxTextPos& from, wxTextPos& to)
 // ----------------------------------------------------------------------------
 
 // names of text ctrl commands
-static constexpr wxChar wxTEXT_COMMAND_INSERT[] = wxT("insert");
-static constexpr wxChar wxTEXT_COMMAND_REMOVE[] = wxT("remove");
+constexpr wxChar wxTEXT_COMMAND_INSERT[] = wxT("insert");
+constexpr wxChar wxTEXT_COMMAND_REMOVE[] = wxT("remove");
 
 // the value which is never used for text position, even not -1 which is
 // sometimes used for some special meaning

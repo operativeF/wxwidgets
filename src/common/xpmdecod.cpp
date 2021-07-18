@@ -261,7 +261,7 @@ typedef struct
 
 #define myRGB(r,g,b)   ((wxUint32)r<<16|(wxUint32)g<<8|(wxUint32)b)
 
-static constexpr rgbRecord theRGBRecords[] =
+constexpr rgbRecord theRGBRecords[] =
 {
     {"aliceblue", myRGB(240, 248, 255)},
     {"antiquewhite", myRGB(250, 235, 215)},
@@ -500,7 +500,8 @@ static constexpr rgbRecord theRGBRecords[] =
     {"yellowgreen", myRGB(50, 216, 56)},
     {nullptr, myRGB(0, 0, 0)}
 };
-static constexpr int numTheRGBRecords = 235;
+
+constexpr int numTheRGBRecords = 235;
 
 static unsigned char ParseHexadecimal(char digit1, char digit2)
 {

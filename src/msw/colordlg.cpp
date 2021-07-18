@@ -35,13 +35,6 @@
 #include <cstring>
 
 // ----------------------------------------------------------------------------
-// globals
-// ----------------------------------------------------------------------------
-
-// The dialog currently being shown or null.
-static wxColourDialog* gs_activeDialog = nullptr;
-
-// ----------------------------------------------------------------------------
 // wxWin macros
 // ----------------------------------------------------------------------------
 
@@ -52,7 +45,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxColourDialog, wxDialog);
 // ============================================================================
 
 #ifndef COLORBOXES
-static constexpr int COLORBOXES = 64;
+constexpr int COLORBOXES = 64;
 #endif
 
 // Undocumented property storing the COLORINFO struct in the standard dialog.
@@ -62,6 +55,9 @@ static constexpr int COLORBOXES = 64;
 
 namespace
 {
+
+// The dialog currently being shown or null.
+wxColourDialog* gs_activeDialog = nullptr;
 
 // The private and undocumented Windows structure used by the standard dialog.
 // See https://social.msdn.microsoft.com/Forums/en-US/c5fcfd9f-6b27-4848-bb9d-94bec105eabd/get-the-current-clicked-color-from-choosecolor-dialog?forum=windowsgeneraldevelopmentissues

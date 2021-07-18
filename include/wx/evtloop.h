@@ -212,7 +212,7 @@ protected:
 
 
     // the pointer to currently active loop
-    static wxEventLoopBase *ms_activeLoop;
+    inline static wxEventLoopBase *ms_activeLoop{nullptr};
 
     // should we exit the loop?
     bool m_shouldExit{false};

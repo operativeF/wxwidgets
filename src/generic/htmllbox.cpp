@@ -32,7 +32,7 @@ FORCE_WXHTML_MODULES()
 // ----------------------------------------------------------------------------
 
 // small border always added to the cells:
-static constexpr wxCoord CELL_BORDER = 2;
+constexpr wxCoord CELL_BORDER = 2;
 
 const char wxHtmlListBoxNameStr[] = "htmlListBox";
 const char wxSimpleHtmlListBoxNameStr[] = "simpleHtmlListBox";

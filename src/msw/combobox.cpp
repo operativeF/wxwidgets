@@ -68,19 +68,15 @@ wxEND_EVENT_TABLE()
 LRESULT APIENTRY
 wxComboEditWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-// ---------------------------------------------------------------------------
-// global vars
-// ---------------------------------------------------------------------------
-
-// the pointer to standard radio button wnd proc
-static WNDPROC gs_wndprocEdit = (WNDPROC)nullptr;
-
 // ============================================================================
 // implementation
 // ============================================================================
 
 namespace
 {
+
+// the pointer to standard radio button wnd proc
+WNDPROC gs_wndprocEdit = (WNDPROC)nullptr;
 
 // Check if the given message should be forwarded from the edit control which
 // is part of the combobox to wxComboBox itself. All messages generating the

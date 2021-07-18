@@ -30,7 +30,7 @@
 // wxSplashScreen
 // ----------------------------------------------------------------------------
 
-static constexpr int wxSPLASH_TIMER_ID =       9999;
+constexpr int wxSPLASH_TIMER_ID =       9999;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxSplashScreen, wxFrame);
 wxBEGIN_EVENT_TABLE(wxSplashScreen, wxFrame)

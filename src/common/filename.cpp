@@ -208,9 +208,9 @@ private:
 // the number of 100-nanosecond intervals since January 1, 1601 UTC.
 //
 // This is the offset between FILETIME epoch and the Unix/wxDateTime Epoch.
-static constexpr wxInt64 EPOCH_OFFSET_IN_MSEC = wxLL(11644473600000);
+constexpr wxInt64 EPOCH_OFFSET_IN_MSEC = wxLL(11644473600000);
 
-static void ConvertFileTimeToWx(wxDateTime *dt, const FILETIME &ft)
+void ConvertFileTimeToWx(wxDateTime *dt, const FILETIME &ft)
 {
     wxLongLong t(ft.dwHighDateTime, ft.dwLowDateTime);
     t /= 10000; // Convert hundreds of nanoseconds to milliseconds.
@@ -219,7 +219,7 @@ static void ConvertFileTimeToWx(wxDateTime *dt, const FILETIME &ft)
     *dt = wxDateTime(t);
 }
 
-static void ConvertWxToFileTime(FILETIME *ft, const wxDateTime& dt)
+void ConvertWxToFileTime(FILETIME *ft, const wxDateTime& dt)
 {
     // Undo the conversions above.
     wxLongLong t(dt.GetValue());
@@ -350,17 +350,9 @@ bool StatAny(wxStructStat& st, const wxFileName& fn)
 
 // length of \\?\Volume{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}\ string
 // FIXME: calculate from actual string
-static constexpr size_t wxMSWUniqueVolumePrefixLength = 49;
+constexpr size_t wxMSWUniqueVolumePrefixLength = 49;
 
 } // anonymous namespace
-
-// ============================================================================
-// implementation
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// wxFileName construction
-// ----------------------------------------------------------------------------
 
 void wxFileName::Assign( const wxFileName &filepath )
 {

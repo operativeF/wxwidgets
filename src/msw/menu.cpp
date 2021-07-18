@@ -47,7 +47,7 @@
 // ----------------------------------------------------------------------------
 
 // the (popup) menu title has this special id
-static constexpr int idMenuTitle = wxID_NONE;
+constexpr int idMenuTitle = wxID_NONE;
 
 // ----------------------------------------------------------------------------
 // private helper classes and functions

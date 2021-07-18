@@ -745,7 +745,7 @@ static void wx_spline_draw_point_array(wxDC *dc);
 static wxPointList wx_spline_point_list;
 
 #define                half(z1, z2)        ((z1+z2)/2.0)
-static constexpr int THRESHOLD = 5;
+constexpr int THRESHOLD = 5;
 
 /* iterative version */
 
@@ -780,7 +780,7 @@ typedef struct wx_spline_stack_struct {
     double           x1, y1, x2, y2, x3, y3, x4, y4;
 } Stack;
 
-static constexpr int SPLINE_STACK_DEPTH = 20;
+constexpr int SPLINE_STACK_DEPTH = 20;
 static Stack    wx_spline_stack[SPLINE_STACK_DEPTH];
 static Stack   *wx_stack_top;
 static int      wx_stack_count;

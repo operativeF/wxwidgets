@@ -20,7 +20,7 @@
     #include "wx/log.h"
 #endif
 
-static constexpr wxChar TRACE_MODULE[] = wxT("module");
+constexpr wxChar TRACE_MODULE[] = wxT("module");
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxModule, wxObject)
 

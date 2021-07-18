@@ -112,9 +112,9 @@ WX_CHECK_BUILD_OPTIONS("wxNet")
 wxDEFINE_EVENT(wxEVT_SOCKET, wxSocketEvent);
 
 // discard buffer
-static constexpr int MAX_DISCARD_SIZE = (10 * 1024);
+constexpr int MAX_DISCARD_SIZE = (10 * 1024);
 
-static constexpr wxChar wxTRACE_Socket[] = wxT("wxSocket");
+constexpr wxChar wxTRACE_Socket[] = wxT("wxSocket");
 
 // --------------------------------------------------------------------------
 // wxWin macros

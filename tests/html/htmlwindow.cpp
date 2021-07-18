@@ -23,7 +23,7 @@
 
 #include <memory>
 
-static constexpr char TEST_MARKUP[] =
+constexpr char TEST_MARKUP[] =
     "<html><body>"
     "<title>Page</title>"
     "  Title<p>"
@@ -31,12 +31,12 @@ static constexpr char TEST_MARKUP[] =
     "  and the last line."
     "</body></html>";
 
-static constexpr char TEST_MARKUP_LINK[] =
+constexpr char TEST_MARKUP_LINK[] =
     "<html><body>"
     "<a href=\"link\">link<\\a> "
     "</body></html>";
 
-static constexpr char TEST_PLAIN_TEXT[] =
+constexpr char TEST_PLAIN_TEXT[] =
     "Title\nA longer line\nand the last line.";
 
 TEST_CASE("HTML Window")

@@ -23,8 +23,8 @@
 
 // Some constants for banner layout, currently they're hard coded but we could
 // easily make them configurable if needed later.
-static constexpr int MARGIN_X = 5;
-static constexpr int MARGIN_Y = 5;
+constexpr int MARGIN_X = 5;
+constexpr int MARGIN_Y = 5;
 
 wxBEGIN_EVENT_TABLE(wxBannerWindow, wxWindow)
     EVT_SIZE(wxBannerWindow::OnSize)

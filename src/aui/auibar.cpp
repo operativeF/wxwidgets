@@ -31,7 +31,6 @@
 #include "wx/arrimpl.cpp"
 WX_DEFINE_OBJARRAY(wxAuiToolBarItemArray)
 
-
 wxDEFINE_EVENT( wxEVT_AUITOOLBAR_TOOL_DROPDOWN, wxAuiToolBarEvent );
 wxDEFINE_EVENT( wxEVT_AUITOOLBAR_OVERFLOW_CLICK, wxAuiToolBarEvent );
 wxDEFINE_EVENT( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEvent );
@@ -42,6 +41,8 @@ wxDEFINE_EVENT( wxEVT_AUITOOLBAR_BEGIN_DRAG, wxAuiToolBarEvent );
 wxIMPLEMENT_CLASS(wxAuiToolBar, wxControl);
 wxIMPLEMENT_DYNAMIC_CLASS(wxAuiToolBarEvent, wxEvent);
 
+namespace
+{
 
 // missing wxITEM_* items
 enum
@@ -51,6 +52,21 @@ enum
     wxITEM_SPACER
 };
 
+wxOrientation GetOrientation(long style)
+{
+    switch (style & wxAUI_ORIENTATION_MASK)
+    {
+        case wxAUI_TB_HORIZONTAL:
+            return wxHORIZONTAL;
+        case wxAUI_TB_VERTICAL:
+            return wxVERTICAL;
+        default:
+            wxFAIL_MSG("toolbar cannot be locked in both horizontal and vertical orientations (maybe no lock was intended?)");
+            [[fallthrough]];
+        case 0:
+            return wxBOTH;
+    }
+}
 
 wxBitmap wxAuiBitmapFromBits(const unsigned char bits[], int w, int h,
                              const wxColour& color);
@@ -77,8 +93,6 @@ static bool IsThemeDark()
     return wxSystemSettings::GetAppearance().IsDark();
 }
 
-
-
 class ToolbarCommandCapture : public wxEvtHandler
 {
 public:
@@ -104,6 +118,7 @@ private:
     int m_lastId;
 };
 
+} // namespace anonymous
 
 wxAuiGenericToolBarArt::wxAuiGenericToolBarArt()
 {
@@ -125,6 +140,7 @@ wxAuiGenericToolBarArt::~wxAuiGenericToolBarArt()
 {
     m_font = *wxNORMAL_FONT;
 }
+
 wxAuiToolBarArt* wxAuiGenericToolBarArt::Clone()
 {
     return static_cast<wxAuiToolBarArt*>(new wxAuiGenericToolBarArt);
@@ -780,25 +796,6 @@ int wxAuiGenericToolBarArt::ShowDropDown(wxWindow* wnd,
     return command;
 }
 
-
-
-
-static wxOrientation GetOrientation(long style)
-{
-    switch (style & wxAUI_ORIENTATION_MASK)
-    {
-        case wxAUI_TB_HORIZONTAL:
-            return wxHORIZONTAL;
-        case wxAUI_TB_VERTICAL:
-            return wxVERTICAL;
-        default:
-            wxFAIL_MSG("toolbar cannot be locked in both horizontal and vertical orientations (maybe no lock was intended?)");
-            [[fallthrough]];
-        case 0:
-            return wxBOTH;
-    }
-}
-
 wxBEGIN_EVENT_TABLE(wxAuiToolBar, wxControl)
     EVT_SIZE(wxAuiToolBar::OnSize)
     EVT_IDLE(wxAuiToolBar::OnIdle)
@@ -904,9 +901,6 @@ wxAuiToolBarArt* wxAuiToolBar::GetArtProvider() const
 {
     return m_art;
 }
-
-
-
 
 wxAuiToolBarItem* wxAuiToolBar::AddTool(int tool_id,
                            const wxString& label,
@@ -1131,7 +1125,6 @@ bool wxAuiToolBar::DestroyToolByIndex(int idx)
     return DeleteByIndex(idx);
 }
 
-
 wxControl* wxAuiToolBar::FindControl(int id)
 {
     wxWindow* wnd = FindWindow(id);
@@ -1255,7 +1248,6 @@ int wxAuiToolBar::GetToolSeparation() const
         return FromDIP(5);
 }
 
-
 void wxAuiToolBar::SetToolDropDown(int tool_id, bool dropdown)
 {
     wxAuiToolBarItem* item = FindTool(tool_id);
@@ -1302,9 +1294,6 @@ bool wxAuiToolBar::GetToolSticky(int tool_id) const
     return item->m_sticky;
 }
 
-
-
-
 void wxAuiToolBar::SetToolBorderPadding(int padding)
 {
     m_toolBorderPadding = padding;
@@ -1339,7 +1328,6 @@ int wxAuiToolBar::GetToolPacking() const
 {
     return m_toolPacking;
 }
-
 
 void wxAuiToolBar::SetOrientation(int orientation)
 {
@@ -1381,7 +1369,6 @@ void wxAuiToolBar::SetGripperVisible(bool visible)
     Refresh(false);
 }
 
-
 bool wxAuiToolBar::GetOverflowVisible() const
 {
     return m_overflowVisible;
@@ -1408,7 +1395,6 @@ bool wxAuiToolBar::SetFont(const wxFont& font)
 
     return res;
 }
-
 
 void wxAuiToolBar::SetHoverItem(wxAuiToolBarItem* pitem)
 {
@@ -1771,7 +1757,6 @@ bool wxAuiToolBar::GetToolFitsByIndex(int tool_idx) const
     return false;
 }
 
-
 bool wxAuiToolBar::GetToolFits(int tool_id) const
 {
     return GetToolFitsByIndex(GetToolIndex(tool_id));
@@ -2129,7 +2114,6 @@ wxSize wxAuiToolBar::GetLabelSize(const wxString& label)
     return wxSize(textWidth, textHeight);
 }
 
-
 void wxAuiToolBar::DoIdleUpdate()
 {
     wxEvtHandler* handler = GetEventHandler();
@@ -2207,7 +2191,6 @@ void wxAuiToolBar::DoIdleUpdate()
     }
 }
 
-
 void wxAuiToolBar::OnSize(wxSizeEvent& WXUNUSED(evt))
 {
     wxSize client_size = GetClientSize();
@@ -2250,8 +2233,6 @@ void wxAuiToolBar::OnSize(wxSizeEvent& WXUNUSED(evt))
     // so force idle handler to run after size handling complete
     QueueEvent(new wxIdleEvent);
 }
-
-
 
 void wxAuiToolBar::OnIdle(wxIdleEvent& evt)
 {
@@ -2896,6 +2877,4 @@ void wxAuiToolBar::OnSetCursor(wxSetCursorEvent& evt)
     evt.SetCursor(cursor);
 }
 
-
 #endif // wxUSE_AUI
-

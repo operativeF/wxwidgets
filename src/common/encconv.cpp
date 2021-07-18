@@ -167,7 +167,7 @@ bool wxEncodingConverter::Init(wxFontEncoding input_enc, wxFontEncoding output_e
 }
 
 
-static constexpr wchar_t REPLACEMENT_CHAR = L'?';
+constexpr wchar_t REPLACEMENT_CHAR = L'?';
 
 inline wchar_t GetTableValue(const wchar_t *table, wchar_t value, bool& repl)
 {
@@ -331,10 +331,10 @@ wxString wxEncodingConverter::Convert(const wxString& input) const
 // Following tables describe classes of encoding equivalence.
 //
 
-static constexpr auto STOP = wxFONTENCODING_SYSTEM;
+constexpr auto STOP = wxFONTENCODING_SYSTEM;
 
-static constexpr int NUM_OF_PLATFORMS =  3; /*must conform to enum wxPLATFORM_XXXX !!!*/
-static constexpr int ENC_PER_PLATFORM =  3;
+constexpr int NUM_OF_PLATFORMS =  3; /*must conform to enum wxPLATFORM_XXXX !!!*/
+constexpr int ENC_PER_PLATFORM =  3;
            // max no. of encodings for one language used on one platform.
            // Using maximum of everything at the current moment to not make the
            // library larger than necessary. Make larger only if necessary - MR

@@ -24,7 +24,7 @@
 #endif
 
 // return the name of the test file we use
-static constexpr char* GetTestFileName() { return "textfiletest.txt"; }
+constexpr char* GetTestFileName() { return "textfiletest.txt"; }
 
 static void CreateTestFile(size_t len, const char *contents)
 {

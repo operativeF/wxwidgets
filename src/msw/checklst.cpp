@@ -47,10 +47,10 @@
 
 
 // space around check mark bitmap in pixels
-static constexpr int CHECKMARK_EXTRA_SPACE = 1;
+constexpr int CHECKMARK_EXTRA_SPACE = 1;
 
 // space between check bitmap and text label
-static constexpr int CHECKMARK_LABEL_SPACE = 2;
+constexpr int CHECKMARK_LABEL_SPACE = 2;
 
 // ============================================================================
 // implementation

@@ -29,6 +29,8 @@
 // ----------------------------------------------------------------------------
 // wxRendererPtr: auto pointer holding the global renderer
 // ----------------------------------------------------------------------------
+namespace
+{
 
 using wxRendererPtrBase = std::unique_ptr<wxRendererNative>;
 
@@ -113,6 +115,8 @@ private:
 };
 
 #endif // wxUSE_DYNLIB_CLASS
+
+} // namespace anonymous
 
 // ============================================================================
 // wxRendererNative implementation

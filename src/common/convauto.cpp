@@ -14,11 +14,11 @@
 #include "wx/convauto.h"
 #include "wx/private/unicode.h"
 
-static constexpr char BOM_UTF32BE[] = { '\x00', '\x00', '\xFE', '\xFF' };
-static constexpr char BOM_UTF32LE[] = { '\xFF', '\xFE', '\x00', '\x00' };
-static constexpr char BOM_UTF16BE[] = { '\xFE', '\xFF'                 };
-static constexpr char BOM_UTF16LE[] = { '\xFF', '\xFE'                 };
-static constexpr char BOM_UTF8[]    = { '\xEF', '\xBB', '\xBF'         };
+constexpr char BOM_UTF32BE[] = { '\x00', '\x00', '\xFE', '\xFF' };
+constexpr char BOM_UTF32LE[] = { '\xFF', '\xFE', '\x00', '\x00' };
+constexpr char BOM_UTF16BE[] = { '\xFE', '\xFF'                 };
+constexpr char BOM_UTF16LE[] = { '\xFF', '\xFE'                 };
+constexpr char BOM_UTF8[]    = { '\xEF', '\xBB', '\xBF'         };
 
 // ============================================================================
 // implementation

@@ -339,29 +339,32 @@ bool wxGLCanvasBase::ParseAttribList(const int *attribList,
 // compatibility layer for OpenGL 3 and OpenGL ES
 // ============================================================================
 
-static wxGLAPI s_glAPI;
+namespace
+{
+
+wxGLAPI s_glAPI;
 
 #if wxUSE_OPENGL_EMULATION
 
 #include <vector>
 
-static GLenum s_mode;
+GLenum s_mode;
 
-static GLfloat s_currentTexCoord[2];
-static GLfloat s_currentColor[4];
-static GLfloat s_currentNormal[3];
+GLfloat s_currentTexCoord[2];
+GLfloat s_currentColor[4];
+GLfloat s_currentNormal[3];
 
 // TODO move this into a different construct with locality for all attributes
 // of a vertex
 
-static std::vector<GLfloat> s_texCoords;
-static std::vector<GLfloat> s_vertices;
-static std::vector<GLfloat> s_normals;
-static std::vector<GLfloat> s_colors;
+std::vector<GLfloat> s_texCoords;
+std::vector<GLfloat> s_vertices;
+std::vector<GLfloat> s_normals;
+std::vector<GLfloat> s_colors;
 
-static bool s_texCoordsUsed;
-static bool s_colorsUsed;
-static bool s_normalsUsed;
+bool s_texCoordsUsed;
+bool s_colorsUsed;
+bool s_normalsUsed;
 
 bool SetState( int flag, bool desired )
 {
@@ -384,6 +387,8 @@ void RestoreState( int flag, bool desired )
         glDisableClientState(flag);
 }
 #endif
+
+} // namespace anonymous
 
 wxGLAPI::wxGLAPI()
 {

@@ -25,9 +25,9 @@
 #include "wx/filesys.h"
 #include "wx/fs_inet.h"
 
-// ----------------------------------------------------------------------------
-// Helper classes
-// ----------------------------------------------------------------------------
+
+namespace
+{
 
 // This stream deletes the file when destroyed
 class wxTemporaryFileInputStream : public wxFileInputStream
@@ -52,12 +52,7 @@ protected:
     wxString m_filename;
 };
 
-
-// ----------------------------------------------------------------------------
-// wxInternetFSHandler
-// ----------------------------------------------------------------------------
-
-static wxString StripProtocolAnchor(const wxString& location)
+wxString StripProtocolAnchor(const wxString& location)
 {
     wxString myloc(location.BeforeLast(wxT('#')));
     if (myloc.empty()) myloc = location.AfterFirst(wxT(':'));
@@ -74,6 +69,31 @@ static wxString StripProtocolAnchor(const wxString& location)
     return myloc;
 }
 
+class wxFileSystemInternetModule : public wxModule
+{
+    wxDECLARE_DYNAMIC_CLASS(wxFileSystemInternetModule);
+
+    public:
+        bool OnInit() override
+        {
+            m_handler = new wxInternetFSHandler;
+            wxFileSystem::AddHandler(m_handler);
+            return true;
+        }
+
+        void OnExit() override
+        {
+            delete wxFileSystem::RemoveHandler(m_handler);
+        }
+
+    private:
+        wxFileSystemHandler* m_handler{nullptr};
+};
+
+wxIMPLEMENT_DYNAMIC_CLASS(wxFileSystemInternetModule, wxModule);
+
+
+} // namespace anonymous
 
 bool wxInternetFSHandler::CanOpen(const wxString& location)
 {
@@ -134,29 +154,5 @@ wxFSFile* wxInternetFSHandler::OpenFile(wxFileSystem& WXUNUSED(fs),
     return nullptr; // incorrect URL
 #endif
 }
-
-
-class wxFileSystemInternetModule : public wxModule
-{
-    wxDECLARE_DYNAMIC_CLASS(wxFileSystemInternetModule);
-
-    public:
-        bool OnInit() override
-        {
-            m_handler = new wxInternetFSHandler;
-            wxFileSystem::AddHandler(m_handler);
-            return true;
-        }
-
-        void OnExit() override
-        {
-            delete wxFileSystem::RemoveHandler(m_handler);
-        }
-
-    private:
-        wxFileSystemHandler* m_handler{nullptr};
-};
-
-wxIMPLEMENT_DYNAMIC_CLASS(wxFileSystemInternetModule, wxModule);
 
 #endif // wxUSE_FILESYSTEM && wxUSE_FS_INET

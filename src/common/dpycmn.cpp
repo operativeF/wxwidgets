@@ -22,15 +22,15 @@
 
 #include "wx/private/display.h"
 
+namespace
+{
+
 #if wxUSE_DISPLAY
 
 const wxVideoMode wxDefaultVideoMode;
 
 #endif // wxUSE_DISPLAY
 
-// ----------------------------------------------------------------------------
-// globals
-// ----------------------------------------------------------------------------
 
 // the factory object used by wxDisplay
 //
@@ -52,6 +52,8 @@ public:
 
     wxDECLARE_DYNAMIC_CLASS(wxDisplayModule);
 };
+
+} // namespace anonymous
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxDisplayModule, wxModule);
 

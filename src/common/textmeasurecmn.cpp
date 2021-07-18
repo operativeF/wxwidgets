@@ -213,7 +213,7 @@ std::vector<int> wxTextMeasureBase::GetPartialTextExtents(const wxString& text, 
 // if available and if faster.  Note: pango_layout_index_to_pos is much slower
 // than calling GetTextExtent!!
 
-static constexpr int FWC_SIZE = 256;
+constexpr int FWC_SIZE = 256;
 
 class FontWidthCache
 {

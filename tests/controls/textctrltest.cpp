@@ -34,7 +34,7 @@
 #include "testableframe.h"
 #include "asserthelper.h"
 
-static constexpr int TEXT_HEIGHT = 200;
+constexpr int TEXT_HEIGHT = 200;
 
 // ----------------------------------------------------------------------------
 // test class

@@ -238,9 +238,9 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxAnyValueTypeGlobalsManager, wxModule);
 //
 // Define integer minimum and maximum as helpers
 #ifdef wxLongLong_t
-    static constexpr int64_t UseIntMin  = wxINT64_MIN;
-    static constexpr int64_t UseIntMax  = wxINT64_MAX;
-    static constexpr uint64_t UseUintMax = wxUINT64_MAX;
+    constexpr int64_t UseIntMin  = wxINT64_MIN;
+    constexpr int64_t UseIntMax  = wxINT64_MAX;
+    constexpr uint64_t UseUintMax = wxUINT64_MAX;
 #else
     #define UseIntMin  (LONG_MIN)
     #define UseIntMax  (LONG_MAX)
@@ -248,9 +248,9 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxAnyValueTypeGlobalsManager, wxModule);
 #endif
 
 
-static constexpr double UseIntMinF  = static_cast<double>(UseIntMin);
-static constexpr double UseIntMaxF  = static_cast<double>(UseIntMax);
-static constexpr double UseUintMaxF = static_cast<double>(UseUintMax);
+constexpr double UseIntMinF  = static_cast<double>(UseIntMin);
+constexpr double UseIntMaxF  = static_cast<double>(UseIntMax);
+constexpr double UseUintMaxF = static_cast<double>(UseUintMax);
 
 bool wxAnyValueTypeImplInt::ConvertValue(const wxAnyValueBuffer& src,
                                          wxAnyValueType* dstType,

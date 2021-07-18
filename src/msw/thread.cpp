@@ -65,7 +65,7 @@
     #define THREAD_CALLCONV WINAPI
 #endif
 
-static constexpr THREAD_RETVAL THREAD_ERROR_EXIT = (THREAD_RETVAL)-1;
+constexpr THREAD_RETVAL THREAD_ERROR_EXIT = (THREAD_RETVAL)-1;
 
 // ----------------------------------------------------------------------------
 // constants

@@ -663,7 +663,7 @@ XYPOSITION SurfaceImpl::WidthChar(Font &font, char ch) {
     return w;
 }
 
-static constexpr wxChar EXTENT_TEST[] = wxT(" `~!@#$%^&*()-_=+\\|[]{};:\"\'<,>.?/1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+constexpr wxChar EXTENT_TEST[] = wxT(" `~!@#$%^&*()-_=+\\|[]{};:\"\'<,>.?/1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
 XYPOSITION SurfaceImpl::Ascent(Font &font) {
     SetFont(font);

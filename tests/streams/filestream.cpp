@@ -20,10 +20,10 @@
 
 #include "bstream.h"
 
-static constexpr unsigned int DATABUFFER_SIZE =     1024;
+constexpr unsigned int DATABUFFER_SIZE =     1024;
 
-static constexpr wxChar FILENAME_FILEINSTREAM[] = wxT("fileinstream.test");
-static constexpr wxChar FILENAME_FILEOUTSTREAM[] = wxT("fileoutstream.test");
+constexpr wxChar FILENAME_FILEINSTREAM[] = wxT("fileinstream.test");
+constexpr wxChar FILENAME_FILEOUTSTREAM[] = wxT("fileoutstream.test");
 
 ///////////////////////////////////////////////////////////////////////////////
 // The test case

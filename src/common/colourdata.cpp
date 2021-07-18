@@ -43,7 +43,7 @@ wxColour wxColourData::GetCustomColour(int i) const
 // ----------------------------------------------------------------------------
 
 // separator used between different fields
-static constexpr char wxCOL_DATA_SEP = ',';
+constexpr char wxCOL_DATA_SEP = ',';
 
 wxString wxColourData::ToString() const
 {

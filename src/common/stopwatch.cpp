@@ -64,8 +64,8 @@ PerfCounter& GetPerfCounterState()
 
 } // anonymous namespace
 
-static constexpr int MILLISECONDS_PER_SECOND = 1000;
-static constexpr int MICROSECONDS_PER_SECOND = 1000 * 1000;
+constexpr int MILLISECONDS_PER_SECOND = 1000;
+constexpr int MICROSECONDS_PER_SECOND = 1000 * 1000;
 
 void wxStopWatch::DoStart()
 {

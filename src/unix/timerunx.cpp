@@ -34,7 +34,7 @@
 WX_DEFINE_LIST(wxTimerList)
 
 // trace mask for the debugging messages used here
-static constexpr wxChar wxTrace_Timer[] = wxT("timer");
+constexpr wxChar wxTrace_Timer[] = wxT("timer");
 
 // ============================================================================
 // wxTimerScheduler implementation

@@ -13,7 +13,7 @@
 #include "bench.h"
 #include "htmlparser/htmlpars.h"
 
-static constexpr char asciistr[] =
+constexpr char asciistr[] =
     "This is just the first line of a very long 7 bit ASCII string"
     "This is just the second line of a very long 7 bit ASCII string"
     "This is just the third line of a very long 7 bit ASCII string"
@@ -26,7 +26,7 @@ static constexpr char asciistr[] =
     "This is just the tenth line of a very long 7 bit ASCII string"
     ;
 
-static constexpr char utf8str[] =
+constexpr char utf8str[] =
     "\xD0\xA6\xD0\xB5\xD0\xBB\xD0\xBE\xD0\xB5 \xD1\x87\xD0\xB8\xD1\x81\xD0\xBB\xD0\xBE 0"
     "\xD0\xA6\xD0\xB5\xD0\xBB\xD0\xBE\xD0\xB5 \xD1\x87\xD0\xB8\xD1\x81\xD0\xBB\xD0\xBE 1"
     "\xD0\xA6\xD0\xB5\xD0\xBB\xD0\xBE\xD0\xB5 \xD1\x87\xD0\xB8\xD1\x81\xD0\xBB\xD0\xBE 2"

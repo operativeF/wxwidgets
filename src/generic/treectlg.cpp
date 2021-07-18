@@ -54,15 +54,15 @@ using wxArrayGenericTreeItems = std::vector<wxGenericTreeItem*>;
 // constants
 // ----------------------------------------------------------------------------
 
-static constexpr int NO_IMAGE = -1;
+constexpr int NO_IMAGE = -1;
 
-static constexpr int PIXELS_PER_UNIT = 10;
+constexpr int PIXELS_PER_UNIT = 10;
 
 // the margin between the item state image and the item normal image
-static constexpr int MARGIN_BETWEEN_STATE_AND_IMAGE = 2;
+constexpr int MARGIN_BETWEEN_STATE_AND_IMAGE = 2;
 
 // the margin between the item image and the item text
-static constexpr int MARGIN_BETWEEN_IMAGE_AND_TEXT = 4;
+constexpr int MARGIN_BETWEEN_IMAGE_AND_TEXT = 4;
 
 // -----------------------------------------------------------------------------
 // private classes

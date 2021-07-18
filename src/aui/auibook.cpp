@@ -912,12 +912,13 @@ bool wxAuiTabContainer::ButtonHitTest(int x, int y,
     return false;
 }
 
-
+namespace
+{
 
 // the utility function ShowWnd() is the same as show,
 // except it handles wxAuiMDIChildFrame windows as well,
 // as the Show() method on this class is "unplugged"
-static void ShowWnd(wxWindow* wnd, bool show)
+void ShowWnd(wxWindow* wnd, bool show)
 {
 #if wxUSE_MDI
     if (wxDynamicCast(wnd, wxAuiMDIChildFrame))
@@ -931,6 +932,8 @@ static void ShowWnd(wxWindow* wnd, bool show)
         wnd->Show(show);
     }
 }
+
+} // namespace anonymous
 
 
 // DoShowHide() this function shows the active window, then
@@ -960,15 +963,7 @@ void wxAuiTabContainer::DoShowHide()
     }
 }
 
-
-
-
-
-
 // -- wxAuiTabCtrl class implementation --
-
-
-
 wxBEGIN_EVENT_TABLE(wxAuiTabCtrl, wxControl)
     EVT_PAINT(wxAuiTabCtrl::OnPaint)
     EVT_ERASE_BACKGROUND(wxAuiTabCtrl::OnEraseBackground)
@@ -1494,6 +1489,9 @@ void wxAuiTabCtrl::OnChar(wxKeyEvent& event)
 // used to capture the dimensions/positioning of the internal tab control and
 // it's managed page windows
 
+namespace
+{
+
 class wxTabFrame : public wxWindow
 {
 public:
@@ -1615,9 +1613,9 @@ public:
     int m_tabCtrlHeight;
 };
 
+} // namespace anonymous
 
-static constexpr int wxAuiBaseTabCtrlId = 5380;
-
+constexpr int wxAuiBaseTabCtrlId = 5380;
 
 // -- wxAuiNotebook class implementation --
 

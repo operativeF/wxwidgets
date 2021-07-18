@@ -46,7 +46,7 @@
 // ----------------------------------------------------------------------------
 
 // encodings supported by GetEncodingDescription
-static constexpr std::array gs_encodings =
+constexpr std::array gs_encodings =
 {
     wxFONTENCODING_ISO8859_1,
     wxFONTENCODING_ISO8859_2,
@@ -135,7 +135,7 @@ static constexpr std::array gs_encodings =
 };
 
 // the descriptions for them
-static constexpr std::array gs_encodingDescs =
+constexpr std::array gs_encodingDescs =
 {
     wxTRANSLATE( "Western European (ISO-8859-1)" ),
     wxTRANSLATE( "Central European (ISO-8859-2)" ),
@@ -232,7 +232,7 @@ static constexpr std::array gs_encodingDescs =
 
 // and the internal names (these are not translated on purpose!)
 // TODO: make string_view / wstring_view detectable
-static constexpr std::array<std::wstring_view, 83> gs_encodingNames =
+constexpr std::array<std::wstring_view, 83> gs_encodingNames =
 {{
     // names from the columns correspond to these OS:
     //      Linux        Solaris and IRIX       HP-UX             AIX

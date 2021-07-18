@@ -6562,7 +6562,7 @@ int ChooseNormalOrExtended(int lParam, int keyNormal, int keyExtended)
 //
 // note that keys having a normal and numpad version (e.g. WXK_HOME and
 // WXK_NUMPAD_HOME) are not included in this table as the mapping is not 1-to-1
-static constexpr struct wxKeyMapping
+constexpr struct wxKeyMapping
 {
     int vk;
     wxKeyCode wxk;

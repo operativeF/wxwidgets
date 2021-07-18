@@ -195,7 +195,7 @@ wxFont wxSystemSettingsNative::GetFont(wxSystemFont index)
 //
 // if the constant is not defined, put -1 in the table to indicate that it is
 // unknown
-static constexpr int gs_metricsMap[] =
+constexpr int gs_metricsMap[] =
 {
     -1,  // wxSystemMetric enums start at 1, so give a dummy value for pos 0.
     SM_CMOUSEBUTTONS,

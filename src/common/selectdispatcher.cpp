@@ -24,7 +24,7 @@
 
 #include <errno.h>
 
-static constexpr wxChar wxSelectDispatcher_Trace[] = wxT("selectdispatcher");
+constexpr wxChar wxSelectDispatcher_Trace[] = wxT("selectdispatcher");
 
 // ============================================================================
 // implementation

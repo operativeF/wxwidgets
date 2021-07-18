@@ -62,17 +62,12 @@ private:
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxCursor, wxGDIObject);
 
-// ----------------------------------------------------------------------------
-// globals
-// ----------------------------------------------------------------------------
+namespace
+{
 
 // Current cursor, in order to hang on to cursor handle when setting the cursor
 // globally
-static wxCursor *gs_globalCursor = nullptr;
-
-// ----------------------------------------------------------------------------
-// private classes
-// ----------------------------------------------------------------------------
+wxCursor *gs_globalCursor = nullptr;
 
 class wxCursorModule : public wxModule
 {
@@ -90,14 +85,27 @@ public:
     }
 };
 
-// ============================================================================
-// implementation
-// ============================================================================
-
 // ----------------------------------------------------------------------------
-// wxCursorRefData
+// Global cursor setting
 // ----------------------------------------------------------------------------
 
+const wxCursor *wxGetGlobalCursor()
+{
+    return gs_globalCursor;
+}
+
+void wxSetCursor(const wxCursor& cursor)
+{
+    if ( cursor.IsOk() )
+    {
+        ::SetCursor(GetHcursorOf(cursor));
+
+        if ( gs_globalCursor )
+            *gs_globalCursor = cursor;
+    }
+}
+
+} // namespace anonymous
 
 wxCoord wxCursorRefData::GetStandardWidth()
 {
@@ -394,24 +402,4 @@ void wxCursor::InitFromStock(wxStockCursor idCursor)
 wxGDIImageRefData *wxCursor::CreateData() const
 {
     return new wxCursorRefData;
-}
-
-// ----------------------------------------------------------------------------
-// Global cursor setting
-// ----------------------------------------------------------------------------
-
-const wxCursor *wxGetGlobalCursor()
-{
-    return gs_globalCursor;
-}
-
-void wxSetCursor(const wxCursor& cursor)
-{
-    if ( cursor.IsOk() )
-    {
-        ::SetCursor(GetHcursorOf(cursor));
-
-        if ( gs_globalCursor )
-            *gs_globalCursor = cursor;
-    }
 }

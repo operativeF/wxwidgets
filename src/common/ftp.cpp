@@ -43,7 +43,7 @@
 // ----------------------------------------------------------------------------
 
 // the length of FTP status code (3 digits)
-static constexpr size_t LEN_CODE = 3;
+constexpr size_t LEN_CODE = 3;
 
 // ----------------------------------------------------------------------------
 // macros
@@ -51,14 +51,6 @@ static constexpr size_t LEN_CODE = 3;
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxFTP, wxProtocol);
 IMPLEMENT_PROTOCOL(wxFTP, wxT("ftp"), wxT("ftp"), true)
-
-// ============================================================================
-// implementation
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// wxFTP constructor and destructor
-// ----------------------------------------------------------------------------
 
 wxFTP::wxFTP()
 {

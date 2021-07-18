@@ -712,10 +712,6 @@ void wxMimeTypesManager::ClearData()
 #endif // Unix
 }
 
-// ----------------------------------------------------------------------------
-// global data and wxMimeTypeCmnModule
-// ----------------------------------------------------------------------------
-
 // private object
 static wxMimeTypesManager gs_mimeTypesManager;
 

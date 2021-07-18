@@ -22,7 +22,7 @@
 // test class
 // ----------------------------------------------------------------------------
 
-static constexpr wxSize s_dcSize(100, 120);
+constexpr wxSize s_dcSize(100, 120);
 static const wxColour s_bgColour(*wxWHITE); // colour to draw outside clipping box
 static const wxColour s_fgColour(*wxGREEN); // colour to draw inside clipping box
 static const wxColour s_tmpColour(*wxBLUE);

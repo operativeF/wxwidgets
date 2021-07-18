@@ -105,15 +105,15 @@ wxCONSTRUCTOR_5( wxComboBox, wxWindow*, Parent, wxWindowID, Id, \
 // constants
 // ----------------------------------------------------------------------------
 
-static constexpr int DEFAULT_DROPBUTTON_WIDTH = 19;
+constexpr int DEFAULT_DROPBUTTON_WIDTH = 19;
 
-static constexpr int BMP_BUTTON_MARGIN = 4;
+constexpr int BMP_BUTTON_MARGIN = 4;
 
-static constexpr int DEFAULT_POPUP_HEIGHT = 400;
+constexpr int DEFAULT_POPUP_HEIGHT = 400;
 
-static constexpr int DEFAULT_TEXT_INDENT = 3;
+constexpr int DEFAULT_TEXT_INDENT = 3;
 
-static constexpr int COMBO_MARGIN = 2; // spacing right of wxTextCtrl
+constexpr int COMBO_MARGIN = 2; // spacing right of wxTextCtrl
 
 
 #if defined(__WXMSW__)

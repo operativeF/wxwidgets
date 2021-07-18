@@ -49,11 +49,11 @@ wxDECL_FOR_STRICT_MINGW32(void, tzset, (void));
     #include <values.h>
 #endif
 
-static constexpr int MILLISECONDS_PER_SECOND = 1000;
+constexpr int MILLISECONDS_PER_SECOND = 1000;
 #if !defined(__WINDOWS__)
-static constexpr int MICROSECONDS_PER_MILLISECOND = 1000;
+constexpr int MICROSECONDS_PER_MILLISECOND = 1000;
 #ifdef HAVE_GETTIMEOFDAY
-static constexpr int MICROSECONDS_PER_SECOND = 1000*1000;
+constexpr int MICROSECONDS_PER_SECOND = 1000*1000;
 #endif
 #endif
 

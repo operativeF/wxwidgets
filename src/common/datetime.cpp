@@ -134,37 +134,37 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxDateTimeHolidaysModule, wxModule);
 // ----------------------------------------------------------------------------
 
 // some trivial ones
-static constexpr int MONTHS_IN_YEAR = 12;
+constexpr int MONTHS_IN_YEAR = 12;
 
-static constexpr int SEC_PER_MIN = 60;
+constexpr int SEC_PER_MIN = 60;
 
-static constexpr int MIN_PER_HOUR = 60;
+constexpr int MIN_PER_HOUR = 60;
 
-static constexpr long SECONDS_PER_DAY = 86400l;
+constexpr long SECONDS_PER_DAY = 86400l;
 
-static constexpr int DAYS_PER_WEEK = 7;
+constexpr int DAYS_PER_WEEK = 7;
 
-static constexpr long MILLISECONDS_PER_DAY = 86400000l;
+constexpr long MILLISECONDS_PER_DAY = 86400000l;
 
 // this is the integral part of JDN of the midnight of Jan 1, 1970
 // (i.e. JDN(Jan 1, 1970) = 2440587.5)
-static constexpr long EPOCH_JDN = 2440587l;
+constexpr long EPOCH_JDN = 2440587l;
 
 // these values are only used in asserts so don't define them if asserts are
 // disabled to avoid warnings about unused static variables
 #if wxDEBUG_LEVEL
 // the date of JDN -0.5 (as we don't work with fractional parts, this is the
 // reference date for us) is Nov 24, 4714BC
-static constexpr int JDN_0_YEAR = -4713;
-static constexpr int JDN_0_MONTH = wxDateTime::Nov;
-static constexpr int JDN_0_DAY = 24;
+constexpr int JDN_0_YEAR = -4713;
+constexpr int JDN_0_MONTH = wxDateTime::Nov;
+constexpr int JDN_0_DAY = 24;
 #endif // wxDEBUG_LEVEL
 
 // the constants used for JDN calculations
-static constexpr long JDN_OFFSET         = 32046l;
-static constexpr long DAYS_PER_5_MONTHS  = 153l;
-static constexpr long DAYS_PER_4_YEARS   = 1461l;
-static constexpr long DAYS_PER_400_YEARS = 146097l;
+constexpr long JDN_OFFSET         = 32046l;
+constexpr long DAYS_PER_5_MONTHS  = 153l;
+constexpr long DAYS_PER_4_YEARS   = 1461l;
+constexpr long DAYS_PER_400_YEARS = 146097l;
 
 // this array contains the cumulated number of days in all previous months for
 // normal and leap years
@@ -1269,7 +1269,7 @@ wxDateTime& wxDateTime::Set(wxDateTime_t day,
                       wxT("Invalid date in wxDateTime::Set()") );
 
     // the range of time_t type (inclusive)
-    static constexpr int yearMinInRange = 1970;
+    constexpr int yearMinInRange = 1970;
     static constexpr int yearMaxInRange = 2037;
 
     // test only the year instead of testing for the exact end of the Unix

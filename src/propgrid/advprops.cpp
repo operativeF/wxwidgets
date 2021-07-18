@@ -491,7 +491,7 @@ static const wxChar* const gs_fp_es_family_labels[] = {
     (const wxChar*) nullptr
 };
 
-static constexpr long gs_fp_es_family_values[] = {
+constexpr long gs_fp_es_family_values[] = {
     wxFONTFAMILY_DEFAULT, wxFONTFAMILY_DECORATIVE,
     wxFONTFAMILY_ROMAN, wxFONTFAMILY_SCRIPT,
     wxFONTFAMILY_SWISS, wxFONTFAMILY_MODERN,
@@ -505,7 +505,7 @@ static const wxChar* const gs_fp_es_style_labels[] = {
     (const wxChar*) nullptr
 };
 
-static constexpr long gs_fp_es_style_values[] = {
+constexpr long gs_fp_es_style_values[] = {
     wxFONTSTYLE_NORMAL,
     wxFONTSTYLE_SLANT,
     wxFONTSTYLE_ITALIC
@@ -525,7 +525,7 @@ static const wxChar* const gs_fp_es_weight_labels[] = {
     (const wxChar*) nullptr
 };
 
-static constexpr long gs_fp_es_weight_values[] = {
+constexpr long gs_fp_es_weight_values[] = {
     wxFONTWEIGHT_THIN,
     wxFONTWEIGHT_EXTRALIGHT,
     wxFONTWEIGHT_LIGHT,
@@ -791,7 +791,7 @@ static const char* const gs_cp_es_syscolour_labels[] = {
     nullptr
 };
 
-static constexpr long gs_cp_es_syscolour_values[] = {
+constexpr long gs_cp_es_syscolour_values[] = {
     wxSYS_COLOUR_APPWORKSPACE,
     wxSYS_COLOUR_ACTIVEBORDER,
     wxSYS_COLOUR_ACTIVECAPTION,
@@ -1508,7 +1508,7 @@ static const char* const gs_cp_es_normcolour_labels[] = {
     nullptr
 };
 
-static constexpr long gs_cp_es_normcolour_values[] = {
+constexpr long gs_cp_es_normcolour_values[] = {
     0,
     1,
     2,
@@ -1530,7 +1530,7 @@ static constexpr long gs_cp_es_normcolour_values[] = {
     wxPG_COLOUR_CUSTOM
 };
 
-static constexpr unsigned long gs_cp_es_normcolour_colours[] = {
+constexpr unsigned long gs_cp_es_normcolour_colours[] = {
     wxPG_COLOUR(0,0,0),
     wxPG_COLOUR(128,0,0),
     wxPG_COLOUR(0,0,128),
@@ -1666,7 +1666,7 @@ static const char* const gs_cp_es_syscursors_labels[NUM_CURSORS+1] = {
     nullptr
 };
 
-static constexpr long gs_cp_es_syscursors_values[NUM_CURSORS] = {
+constexpr long gs_cp_es_syscursors_values[NUM_CURSORS] = {
     wxCURSOR_NONE,
     wxCURSOR_ARROW,
     wxCURSOR_RIGHT_ARROW,

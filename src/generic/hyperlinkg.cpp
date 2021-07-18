@@ -40,7 +40,7 @@
 // ============================================================================
 
 // reserved for internal use only
-static constexpr int wxHYPERLINK_POPUP_COPY_ID = 16384;
+constexpr int wxHYPERLINK_POPUP_COPY_ID = 16384;
 
 // ----------------------------------------------------------------------------
 // wxGenericHyperlinkCtrl

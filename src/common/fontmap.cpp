@@ -106,10 +106,13 @@ wxEND_ENUM( wxFontEncoding )
 // the config paths we use
 #if wxUSE_CONFIG
 
-static constexpr wxChar FONTMAPPER_FONT_FROM_ENCODING_PATH[] = wxT("Encodings");
-static constexpr wxChar FONTMAPPER_FONT_DONT_ASK[] = wxT("none");
+constexpr wxChar FONTMAPPER_FONT_FROM_ENCODING_PATH[] = wxT("Encodings");
+constexpr wxChar FONTMAPPER_FONT_DONT_ASK[] = wxT("none");
 
 #endif // wxUSE_CONFIG
+
+namespace
+{
 
 // ----------------------------------------------------------------------------
 // private classes
@@ -135,6 +138,8 @@ private:
     bool m_flagOld;
     bool& m_flag;
 };
+
+} // namespace anonymous
 
 // ============================================================================
 // implementation

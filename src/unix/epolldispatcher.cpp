@@ -25,7 +25,7 @@
 #include <errno.h>
 #include <unistd.h>
 
-static constexpr wxChar wxEpollDispatcher_Trace[] = wxT("epolldispatcher");
+constexpr wxChar wxEpollDispatcher_Trace[] = wxT("epolldispatcher");
 
 // ============================================================================
 // implementation

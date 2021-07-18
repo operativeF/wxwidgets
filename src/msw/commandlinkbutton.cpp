@@ -25,11 +25,11 @@
 #include "wx/private/window.h"
 
 #ifndef BCM_SETNOTE
-static constexpr int BCM_SETNOTE = 0x1609;
+constexpr int BCM_SETNOTE = 0x1609;
 #endif
 
 #ifndef BS_COMMANDLINK
-static constexpr int BS_COMMANDLINK = 0xE;
+constexpr int BS_COMMANDLINK = 0xE;
 #endif
 
 // ----------------------------------------------------------------------------
@@ -39,7 +39,7 @@ static constexpr int BS_COMMANDLINK = 0xE;
 namespace
 {
 
-inline bool HasNativeCommandLinkButton()
+bool HasNativeCommandLinkButton()
 {
     return wxGetWinVersion() >= wxWinVersion_6;
 }
@@ -117,11 +117,11 @@ bool wxCommandLinkButton::HasNativeBitmap() const
 
 // Margin measures can be found at
 // http://expression.microsoft.com/en-us/ee662150.aspx
-static constexpr int MAINLABEL_TOP_MARGIN = 16; // Includes image top margin.
-static constexpr int MAINLABEL_NOTE_LEFT_MARGIN = 23;
-static constexpr int NOTE_TOP_MARGIN = 21;
-static constexpr int NOTE_BOTTOM_MARGIN = 1;
-static constexpr int MAINLABEL_NOTE_MARGIN = NOTE_TOP_MARGIN - MAINLABEL_TOP_MARGIN;
+constexpr int MAINLABEL_TOP_MARGIN = 16; // Includes image top margin.
+constexpr int MAINLABEL_NOTE_LEFT_MARGIN = 23;
+constexpr int NOTE_TOP_MARGIN = 21;
+constexpr int NOTE_BOTTOM_MARGIN = 1;
+constexpr int MAINLABEL_NOTE_MARGIN = NOTE_TOP_MARGIN - MAINLABEL_TOP_MARGIN;
 
 wxSize wxCommandLinkButton::DoGetBestSize() const
 {

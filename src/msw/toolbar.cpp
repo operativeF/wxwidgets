@@ -87,7 +87,7 @@
 #endif
 
 // Margin between the control and its label.
-static constexpr int MARGIN_CONTROL_LABEL = 3;
+constexpr int MARGIN_CONTROL_LABEL = 3;
 
 // ----------------------------------------------------------------------------
 // wxWin macros

@@ -31,10 +31,10 @@
 // later if really needed.
 
 // Total number of "running" dots.
-static constexpr int NUM_DOTS = 8;
+constexpr int NUM_DOTS = 8;
 
 // Delay between the consecutive updates in milliseconds.
-static constexpr int FRAME_DELAY = 150;
+constexpr int FRAME_DELAY = 150;
 
 // ----------------------------------------------------------------------------
 // wxActivityIndicatorImpl: class containing the real implementation.

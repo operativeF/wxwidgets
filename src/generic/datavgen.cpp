@@ -69,7 +69,7 @@ class wxDataViewCtrl;
 //-----------------------------------------------------------------------------
 
 // the cell padding on the left/right
-static constexpr int PADDING_RIGHTLEFT = 3;
+constexpr int PADDING_RIGHTLEFT = 3;
 
 namespace
 {

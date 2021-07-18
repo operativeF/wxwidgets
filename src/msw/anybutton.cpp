@@ -111,7 +111,7 @@ public:
 
 // the gap between button edge and the interior area used by Windows for the
 // standard buttons
-static constexpr int OD_BUTTON_MARGIN = 4;
+constexpr int OD_BUTTON_MARGIN = 4;
 
 namespace
 {

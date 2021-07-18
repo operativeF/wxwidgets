@@ -29,12 +29,12 @@
 #include "wx/msw/uxtheme.h"
 #include "wx/msw/dc.h"
 
-static constexpr int NATIVE_TEXT_INDENT_XP = 4;
-static constexpr int NATIVE_TEXT_INDENT_CLASSIC = 2;
+constexpr int NATIVE_TEXT_INDENT_XP = 4;
+constexpr int NATIVE_TEXT_INDENT_CLASSIC = 2;
 
-static constexpr int COMBOBOX_ANIMATION_RESOLUTION = 10;
+constexpr int COMBOBOX_ANIMATION_RESOLUTION = 10;
 
-static constexpr int COMBOBOX_ANIMATION_DURATION = 200;  // In milliseconds
+constexpr int COMBOBOX_ANIMATION_DURATION = 200;  // In milliseconds
 
 #define wxMSW_DESKTOP_USERPREFERENCESMASK_COMBOBOXANIM    (1<<2)
 
@@ -554,7 +554,10 @@ void wxComboCtrl::OnMouseEvent( wxMouseEvent& event )
 }
 
 #if wxUSE_COMBOCTRL_POPUP_ANIMATION
-static wxUint32 GetUserPreferencesMask()
+namespace 
+{
+
+wxUint32 GetUserPreferencesMask()
 {
     static wxUint32 userPreferencesMask = 0;
     static bool valueSet = false;
@@ -592,6 +595,7 @@ static wxUint32 GetUserPreferencesMask()
 
     return userPreferencesMask;
 }
+} // namespace anonymous
 #endif
 
 #if wxUSE_COMBOCTRL_POPUP_ANIMATION

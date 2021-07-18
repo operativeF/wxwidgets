@@ -23,7 +23,7 @@
 // ----------------------------------------------------------------------------
 
 // number of iterations in loops
-static constexpr int ITEMS = 1000;
+constexpr int ITEMS = 1000;
 
 // make a 64 bit number from 4 16 bit ones
 #define MAKE_LL(x1, x2, x3, x4) wxLongLong((x1 << 16) | x2, (x3 << 16) | x3)
@@ -31,7 +31,7 @@ static constexpr int ITEMS = 1000;
 // get a random 64 bit number
 #define RAND_LL()   MAKE_LL(rand(), rand(), rand(), rand())
 
-static constexpr long testLongs[] =
+constexpr long testLongs[] =
 {
     0,
     1,

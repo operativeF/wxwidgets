@@ -32,12 +32,12 @@
 // ----------------------------------------------------------------------------
 
 // the margin between the text control and the search/cancel buttons
-static constexpr wxCoord MARGIN = 2;
+constexpr wxCoord MARGIN = 2;
 
 // arguments to wxColour::ChangeLightness() for making the search/cancel
 // bitmaps foreground colour, respectively
-static constexpr int SEARCH_BITMAP_LIGHTNESS = 140; // slightly lighter
-static constexpr int CANCEL_BITMAP_LIGHTNESS = 160; // a bit more lighter
+constexpr int SEARCH_BITMAP_LIGHTNESS = 140; // slightly lighter
+constexpr int CANCEL_BITMAP_LIGHTNESS = 160; // a bit more lighter
 
 // ----------------------------------------------------------------------------
 // wxSearchTextCtrl: text control used by search control

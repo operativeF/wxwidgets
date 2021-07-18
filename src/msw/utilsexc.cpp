@@ -69,7 +69,7 @@
 // ----------------------------------------------------------------------------
 
 // this message is sent when the process we're waiting for terminates
-static constexpr int wxWM_PROC_TERMINATED = WM_USER + 10000;
+constexpr int wxWM_PROC_TERMINATED = WM_USER + 10000;
 
 // ----------------------------------------------------------------------------
 // this module globals

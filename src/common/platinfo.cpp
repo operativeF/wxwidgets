@@ -21,11 +21,14 @@
 
 #include "wx/apptrait.h"
 
+namespace
+{
+
 // global object
 // VERY IMPORTANT: do not use the default constructor since it would
 //                 try to init the wxPlatformInfo instance using
 //                 gs_platInfo itself!
-static wxPlatformInfo gs_platInfo(wxPORT_UNKNOWN);
+wxPlatformInfo gs_platInfo(wxPORT_UNKNOWN);
 
 // ----------------------------------------------------------------------------
 // constants
@@ -33,7 +36,7 @@ static wxPlatformInfo gs_platInfo(wxPORT_UNKNOWN);
 
 // Keep "Unknown" entries to avoid breaking the indexes
 
-static const wxChar* const wxOperatingSystemIdNames[] =
+const wxChar* const wxOperatingSystemIdNames[] =
 {
     wxT("Apple Mac OS"),
     wxT("Apple Mac OS X"),
@@ -60,7 +63,7 @@ static const wxChar* const wxOperatingSystemIdNames[] =
 
 };
 
-static const wxChar* const wxPortIdNames[] =
+const wxChar* const wxPortIdNames[] =
 {
     wxT("wxBase"),
     wxT("wxMSW"),
@@ -75,13 +78,13 @@ static const wxChar* const wxPortIdNames[] =
     wxT("wxQT")
 };
 
-static const wxChar* const wxBitnessNames[] =
+const wxChar* const wxBitnessNames[] =
 {
     wxT("32 bit"),
     wxT("64 bit")
 };
 
-static const wxChar* const wxEndiannessNames[] =
+const wxChar* const wxEndiannessNames[] =
 {
     wxT("Big endian"),
     wxT("Little endian"),
@@ -94,7 +97,7 @@ static const wxChar* const wxEndiannessNames[] =
 
 // returns the logarithm in base 2 of 'value'; this maps the enum values to the
 // corresponding indexes of the string arrays above
-static unsigned wxGetIndexFromEnumValue(int value)
+unsigned wxGetIndexFromEnumValue(int value)
 {
     wxCHECK_MSG( value, (unsigned)-1, wxT("invalid enum value") );
 
@@ -109,6 +112,8 @@ static unsigned wxGetIndexFromEnumValue(int value)
 
     return n;
 }
+
+} // namespace anonymous
 
 // ----------------------------------------------------------------------------
 // wxPlatformInfo

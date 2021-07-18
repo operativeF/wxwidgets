@@ -173,7 +173,7 @@ struct Date
 // test data
 // ----------------------------------------------------------------------------
 
-static constexpr Date testDates[] =
+constexpr Date testDates[] =
 {
     {  1, wxDateTime::Jan,  1970, 00, 00, 00, 2440587.5, wxDateTime::Thu,         0 },
     {  7, wxDateTime::Feb,  2036, 00, 00, 00, 2464730.5, wxDateTime::Thu,        -1 },

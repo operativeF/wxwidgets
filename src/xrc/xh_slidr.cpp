@@ -19,9 +19,9 @@
     #include "wx/slider.h"
 #endif
 
-static constexpr long DEFAULT_VALUE = 0;
-static constexpr long DEFAULT_MIN = 0;
-static constexpr long DEFAULT_MAX = 100;
+constexpr long DEFAULT_VALUE = 0;
+constexpr long DEFAULT_MIN = 0;
+constexpr long DEFAULT_MAX = 100;
 
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxSliderXmlHandler, wxXmlResourceHandler);

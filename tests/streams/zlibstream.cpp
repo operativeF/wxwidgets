@@ -26,9 +26,9 @@
 
 using std::string;
 
-static constexpr unsigned int DATABUFFER_SIZE = 1024;
+constexpr unsigned int DATABUFFER_SIZE = 1024;
 
-static constexpr wxChar FILENAME_GZ[] = wxT("zlibtest.gz");
+constexpr wxChar FILENAME_GZ[] = wxT("zlibtest.gz");
 
 ///////////////////////////////////////////////////////////////////////////////
 // The test case

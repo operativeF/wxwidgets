@@ -24,19 +24,17 @@ WX_DEFINE_LIST(wxFontBundleList)
 WX_DECLARE_HASH_MAP(wxString, wxFontBundle*,
                     wxStringHash, wxStringEqual,
                     wxFontBundleHashBase);
+
+namespace
+{
+
 // in STL build, hash class is typedef to a template, so it can't be forward
 // declared, as we do; solve it by having a dummy class:
 class wxFontBundleHash : public wxFontBundleHashBase
 {
 };
 
-// ============================================================================
-// implementation
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// wxFontFaceBase
-// ----------------------------------------------------------------------------
+} // namespace anonymous
 
 wxFontFaceBase::wxFontFaceBase()
     : m_refCnt(0)

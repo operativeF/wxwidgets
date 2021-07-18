@@ -67,12 +67,15 @@ wxBitmap wxRegionBase::ConvertToBitmap() const
 
 #if wxUSE_IMAGE
 
-static bool DoRegionUnion(wxRegionBase& region,
-                          const wxImage& image,
-                          unsigned char loR,
-                          unsigned char loG,
-                          unsigned char loB,
-                          int tolerance)
+namespace
+{
+
+bool DoRegionUnion(wxRegionBase& region,
+                   const wxImage& image,
+                   unsigned char loR,
+                   unsigned char loG,
+                   unsigned char loB,
+                   int tolerance)
 {
     unsigned char hiR = (unsigned char)wxMin(0xFF, loR + tolerance);
     unsigned char hiG = (unsigned char)wxMin(0xFF, loG + tolerance);
@@ -116,6 +119,7 @@ static bool DoRegionUnion(wxRegionBase& region,
     return true;
 }
 
+} // namespace anonymous
 
 bool wxRegionBase::Union(const wxBitmap& bmp)
 {

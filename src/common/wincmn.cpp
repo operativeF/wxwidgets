@@ -88,16 +88,7 @@ bool IsInCaptureStack(wxWindowBase* win);
 
 } // wxMouseCapture
 
-// ----------------------------------------------------------------------------
-// static data
-// ----------------------------------------------------------------------------
-
-
 wxIMPLEMENT_ABSTRACT_CLASS(wxWindowBase, wxEvtHandler);
-
-// ----------------------------------------------------------------------------
-// event table
-// ----------------------------------------------------------------------------
 
 wxBEGIN_EVENT_TABLE(wxWindowBase, wxEvtHandler)
     EVT_SYS_COLOUR_CHANGED(wxWindowBase::OnSysColourChanged)
@@ -110,14 +101,6 @@ wxBEGIN_EVENT_TABLE(wxWindowBase, wxEvtHandler)
 
     EVT_SIZE(wxWindowBase::InternalOnSize)
 wxEND_EVENT_TABLE()
-
-// ============================================================================
-// implementation of the common functionality of the wxWindow class
-// ============================================================================
-
-// ----------------------------------------------------------------------------
-// XTI
-// ----------------------------------------------------------------------------
 
 #if wxUSE_EXTENDED_RTTI
 
@@ -246,10 +229,6 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxWindow, wxWindowBase);
 #endif
 
 #endif
-
-// ----------------------------------------------------------------------------
-// initialization
-// ----------------------------------------------------------------------------
 
 // the default initialization
 wxWindowBase::wxWindowBase()

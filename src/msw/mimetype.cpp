@@ -92,7 +92,7 @@ static const wxStringCharType *CLASSES_ROOT_KEY = wxS("Software\\Classes\\");
 
 // although I don't know of any official documentation which mentions this
 // location, uses it, so it isn't likely to change
-static constexpr wxChar MIME_DATABASE_KEY[] = wxT("MIME\\Database\\Content Type\\");
+constexpr wxChar MIME_DATABASE_KEY[] = wxT("MIME\\Database\\Content Type\\");
 
 // this function replaces Microsoft %1 with Unix-like %s
 static bool CanonicalizeParams(wxString& command)

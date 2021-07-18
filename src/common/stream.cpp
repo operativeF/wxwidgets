@@ -31,7 +31,7 @@
 // ----------------------------------------------------------------------------
 
 // the temporary buffer size used when copying from stream to stream
-static constexpr int BUF_TEMP_SIZE = 4096;
+constexpr int BUF_TEMP_SIZE = 4096;
 
 // ============================================================================
 // implementation

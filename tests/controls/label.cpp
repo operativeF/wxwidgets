@@ -24,7 +24,7 @@
 
 #include <array>
 
-static constexpr char ORIGINAL_LABEL[] = "origin label";
+constexpr char ORIGINAL_LABEL[] = "origin label";
 
 // The actual testing function. It will change the label of the provided
 // control, which is assumed to be ORIGINAL_LABEL initially.

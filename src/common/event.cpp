@@ -896,7 +896,7 @@ wxHelpEvent::Origin wxHelpEvent::GuessOrigin(Origin origin)
 // wxEventHashTable
 // ----------------------------------------------------------------------------
 
-static constexpr int EVENT_TYPE_TABLE_INIT_SIZE = 31; // Not too big not too small...
+constexpr int EVENT_TYPE_TABLE_INIT_SIZE = 31; // Not too big not too small...
 
 wxEventHashTable::wxEventHashTable(const wxEventTable &table)
                 : m_table(table),

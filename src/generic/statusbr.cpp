@@ -39,10 +39,10 @@
 #endif // wxUSE_NATIVE_STATUSBAR
 
 // Default status border dimensions
-static constexpr int wxTHICK_LINE_BORDER = 2;
+constexpr int wxTHICK_LINE_BORDER = 2;
 
 // Margin between the field text and the field rect
-static constexpr int wxFIELD_TEXT_MARGIN = 2;
+constexpr int wxFIELD_TEXT_MARGIN = 2;
 
 // ----------------------------------------------------------------------------
 // GTK+ signal handler

@@ -244,7 +244,7 @@ wxAuiDockArt* wxAuiDefaultDockArt::Clone()
 }
 
 void
-wxAuiDefaultDockArt::InitBitmaps ()
+wxAuiDefaultDockArt::InitBitmaps()
 {
     // some built in bitmaps
     // TODO: Provide x1.5 and x2.0 versions or migrate to SVG.

@@ -22,7 +22,10 @@
 
 wxDEFINE_EVENT(wxEVT_FSWATCHER, wxFileSystemWatcherEvent);
 
-static wxString GetFSWEventChangeTypeName(int type)
+namespace
+{
+
+wxString GetFSWEventChangeTypeName(int type)
 {
     switch (type)
     {
@@ -53,10 +56,7 @@ static wxString GetFSWEventChangeTypeName(int type)
     return "INVALID_TYPE";
 }
 
-
-// ============================================================================
-// wxFileSystemWatcherEvent implementation
-// ============================================================================
+} // namespace anonymous
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxFileSystemWatcherEvent, wxEvent);
 
