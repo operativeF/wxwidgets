@@ -10,19 +10,15 @@
 
 #include "wx/colour.h"
 
+#include <array>
+
 class WXDLLIMPEXP_CORE wxColourData
 {
 public:
     // number of custom colours we store
-    enum
-    {
-        NUM_CUSTOM = 16
-    };
+    static constexpr int NUM_CUSTOM = 16;
 
     wxColourData();
-    wxColourData(const wxColourData& data);
-    wxColourData& operator=(const wxColourData& data);
-    ~wxColourData();
 
     void SetChooseFull(bool flag) { m_chooseFull = flag; }
     bool GetChooseFull() const { return m_chooseFull; }
@@ -43,8 +39,9 @@ public:
 
 
     // public for backwards compatibility only: don't use directly
+    std::array<wxColour, NUM_CUSTOM> m_custColours;
+
     wxColour        m_dataColour;
-    wxColour        m_custColours[NUM_CUSTOM];
     bool            m_chooseFull{false};
 
 protected:

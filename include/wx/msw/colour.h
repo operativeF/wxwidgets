@@ -13,6 +13,8 @@
 
 #include "wx/object.h"
 
+#include <cstdint>
+
 class WXDLLIMPEXP_CORE wxColour : public wxColourBase
 {
 public:
@@ -20,10 +22,10 @@ public:
 
     bool IsOk() const override { return m_isInit; }
 
-    unsigned char Red() const override { return m_red; }
-    unsigned char Green() const override { return m_green; }
-    unsigned char Blue() const override { return m_blue; }
-    unsigned char Alpha() const override { return m_alpha ; }
+    std::uint8_t Red() const override { return m_red; }
+    std::uint8_t Green() const override { return m_green; }
+    std::uint8_t Blue() const override { return m_blue; }
+    std::uint8_t Alpha() const override { return m_alpha ; }
 
     bool operator==(const wxColour& colour) const
     {
@@ -46,14 +48,14 @@ protected:
     void Init();
 
     void
-    InitRGBA(unsigned char r, unsigned char g, unsigned char b, unsigned char a) override;
+    InitRGBA(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t a) override;
 
 private:
     bool          m_isInit;
-    unsigned char m_red;
-    unsigned char m_blue;
-    unsigned char m_green;
-    unsigned char m_alpha;
+    std::uint8_t  m_red;
+    std::uint8_t  m_blue;
+    std::uint8_t  m_green;
+    std::uint8_t  m_alpha;
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxColour);
