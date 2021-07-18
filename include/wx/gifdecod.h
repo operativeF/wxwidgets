@@ -20,7 +20,7 @@
 #include "wx/dynarray.h"
 
 // internal utility used to store a frame in 8bit-per-pixel format
-class GIFImage;
+struct GIFImage;
 
 
 // --------------------------------------------------------------------------

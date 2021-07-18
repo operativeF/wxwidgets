@@ -11,7 +11,7 @@
 #define _WX_PROGDLG_H_
 
 class wxProgressDialogTaskRunner;
-class wxProgressDialogSharedData;
+struct wxProgressDialogSharedData;
 
 class WXDLLIMPEXP_CORE wxProgressDialog : public wxGenericProgressDialog
 {

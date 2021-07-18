@@ -22,15 +22,14 @@
 
 #include "wx/private/display.h"
 
-namespace
-{
-
 #if wxUSE_DISPLAY
 
 const wxVideoMode wxDefaultVideoMode;
 
 #endif // wxUSE_DISPLAY
 
+namespace
+{
 
 // the factory object used by wxDisplay
 //

@@ -41,6 +41,9 @@ wxDEFINE_EVENT( wxEVT_AUITOOLBAR_BEGIN_DRAG, wxAuiToolBarEvent );
 wxIMPLEMENT_CLASS(wxAuiToolBar, wxControl);
 wxIMPLEMENT_DYNAMIC_CLASS(wxAuiToolBarEvent, wxEvent);
 
+wxBitmap wxAuiBitmapFromBits(const unsigned char bits[], int w, int h,
+                             const wxColour& color);
+
 namespace
 {
 
@@ -68,10 +71,7 @@ wxOrientation GetOrientation(long style)
     }
 }
 
-wxBitmap wxAuiBitmapFromBits(const unsigned char bits[], int w, int h,
-                             const wxColour& color);
-
-static wxColor GetBaseColor()
+wxColor GetBaseColor()
 {
 
     wxColor baseColour = wxSystemSettings::GetColour(wxSYS_COLOUR_3DFACE);
@@ -88,7 +88,7 @@ static wxColor GetBaseColor()
     return baseColour;
 }
 
-static bool IsThemeDark()
+bool IsThemeDark()
 {
     return wxSystemSettings::GetAppearance().IsDark();
 }

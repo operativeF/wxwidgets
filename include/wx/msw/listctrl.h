@@ -15,7 +15,7 @@
 #include "wx/dynarray.h"
 #include <vector>
 
-class wxMSWListItemData;
+struct wxMSWListItemData;
 class wxMSWListHeaderCustomDraw;
 
 // define this symbol to indicate the availability of SetColumnsOrder() and

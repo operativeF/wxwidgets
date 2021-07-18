@@ -62,12 +62,16 @@ private:
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxCursor, wxGDIObject);
 
+// ----------------------------------------------------------------------------
+// Global cursor setting
+// ----------------------------------------------------------------------------
+
 namespace
 {
 
 // Current cursor, in order to hang on to cursor handle when setting the cursor
 // globally
-wxCursor *gs_globalCursor = nullptr;
+wxCursor* gs_globalCursor = nullptr;
 
 class wxCursorModule : public wxModule
 {
@@ -85,14 +89,7 @@ public:
     }
 };
 
-// ----------------------------------------------------------------------------
-// Global cursor setting
-// ----------------------------------------------------------------------------
-
-const wxCursor *wxGetGlobalCursor()
-{
-    return gs_globalCursor;
-}
+} // namespace anonymous
 
 void wxSetCursor(const wxCursor& cursor)
 {
@@ -105,7 +102,10 @@ void wxSetCursor(const wxCursor& cursor)
     }
 }
 
-} // namespace anonymous
+const wxCursor *wxGetGlobalCursor()
+{
+    return gs_globalCursor;
+}
 
 wxCoord wxCursorRefData::GetStandardWidth()
 {

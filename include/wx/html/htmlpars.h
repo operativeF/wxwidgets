@@ -25,7 +25,7 @@ class WXDLLIMPEXP_FWD_HTML wxHtmlTagHandler;
 class WXDLLIMPEXP_FWD_HTML wxHtmlEntitiesParser;
 
 class wxHtmlTextPieces;
-class wxHtmlParserState;
+struct wxHtmlParserState;
 
 WX_DECLARE_HASH_SET_WITH_DECL_PTR(wxHtmlTagHandler*,
                                   wxPointerHash, wxPointerEqual,

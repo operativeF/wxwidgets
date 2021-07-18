@@ -43,7 +43,7 @@ protected:
 
 private:
     // data of this object
-    class wxSoundData *m_data{nullptr};
+    struct wxSoundData *m_data{nullptr};
 };
 
 #endif // wxUSE_SOUND

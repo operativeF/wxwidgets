@@ -553,7 +553,7 @@ protected:
 // -----------------------------------------------------------------------
 class WXDLLIMPEXP_PROPGRID wxEditorDialogProperty : public wxPGProperty
 {
-    friend class wxPGDialogAdapter;
+    friend struct wxPGDialogAdapter;
     wxDECLARE_ABSTRACT_CLASS(wxEditorDialogProperty);
 
 public:
