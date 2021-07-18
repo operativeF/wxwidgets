@@ -204,7 +204,7 @@ public:
     bool m_dontUpdate;
     bool m_colourPresent;
     bool m_bgColourPresent;
-    static int sm_allowedTextEffects;
+    inline static int sm_allowedTextEffects{0xFFFF & ~(wxTEXT_ATTR_EFFECT_SUPPRESS_HYPHENATION|wxTEXT_ATTR_EFFECT_RTL)};
 };
 
 #endif

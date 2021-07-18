@@ -1857,7 +1857,7 @@ public:
                          wxString* pString,
                          wxPGCell* pCell );
 
-    static wxString*            sm_wxPG_LABEL;
+    inline static wxString*            sm_wxPG_LABEL{nullptr};
 
     // This member is public so scripting language bindings
     // wrapper code can access it freely.

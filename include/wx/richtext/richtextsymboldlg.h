@@ -181,7 +181,7 @@ public:
 ////@end wxSymbolPickerDialog member variables
 
     bool m_dontUpdate;
-    static bool             sm_showToolTips;
+    inline static bool             sm_showToolTips{false};
 };
 
 /*!

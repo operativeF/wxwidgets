@@ -327,8 +327,6 @@ wxDEFINE_EVENT( wxEVT_DETAILED_HELP, wxHelpEvent );
 
 #if wxUSE_BASE
 
-wxIdleMode wxIdleEvent::sm_idleMode = wxIDLE_PROCESS_ALL;
-
 // ============================================================================
 // implementation
 // ============================================================================
@@ -899,8 +897,6 @@ wxHelpEvent::Origin wxHelpEvent::GuessOrigin(Origin origin)
 // ----------------------------------------------------------------------------
 
 static constexpr int EVENT_TYPE_TABLE_INIT_SIZE = 31; // Not too big not too small...
-
-wxEventHashTable* wxEventHashTable::sm_first = nullptr;
 
 wxEventHashTable::wxEventHashTable(const wxEventTable &table)
                 : m_table(table),

@@ -249,7 +249,7 @@ private:
 
     bool                    m_dontUpdate;
     int                     m_flags;
-    static bool             sm_showToolTips;
+    inline static bool      sm_showToolTips{false};
     bool                    m_restartNumbering;
 };
 

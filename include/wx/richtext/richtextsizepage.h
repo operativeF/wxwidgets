@@ -288,16 +288,16 @@ public:
     };
 ////@end wxRichTextSizePage member variables
 
-    static bool sm_showFloatingControls;
-    static bool sm_showPositionControls;
-    static bool sm_showMinMaxSizeControls;
-    static bool sm_showPositionModeControls;
-    static bool sm_showRightBottomPositionControls;
-    static bool sm_showAlignmentControls;
-    static bool sm_showFloatingAndAlignmentControls;
-    static bool sm_enablePositionAndSizeUnits;
-    static bool sm_enablePositionAndSizeCheckboxes;
-    static bool sm_showMoveObjectControls;
+    inline static bool sm_showFloatingControls{true};
+    inline static bool sm_showPositionControls{true};
+    inline static bool sm_showMinMaxSizeControls{true};
+    inline static bool sm_showPositionModeControls{true};
+    inline static bool sm_showRightBottomPositionControls{true};
+    inline static bool sm_showAlignmentControls{true};
+    inline static bool sm_showFloatingAndAlignmentControls{true};
+    inline static bool sm_enablePositionAndSizeUnits{true};
+    inline static bool sm_enablePositionAndSizeCheckboxes{true};
+    inline static bool sm_showMoveObjectControls{true};
 };
 
 #endif

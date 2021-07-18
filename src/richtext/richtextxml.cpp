@@ -55,8 +55,6 @@
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextXMLHandler, wxRichTextFileHandler);
 
-wxStringToStringHashMap wxRichTextXMLHandler::sm_nodeNameToClassMap;
-
 void wxRichTextXMLHandler::Init()
 {
 }

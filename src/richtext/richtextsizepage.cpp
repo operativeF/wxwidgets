@@ -56,16 +56,6 @@ wxEND_EVENT_TABLE()
 
 IMPLEMENT_HELP_PROVISION(wxRichTextSizePage)
 
-bool wxRichTextSizePage::sm_showFloatingControls = true;
-bool wxRichTextSizePage::sm_showMinMaxSizeControls = true;
-bool wxRichTextSizePage::sm_showPositionControls = true;
-bool wxRichTextSizePage::sm_showPositionModeControls = true;
-bool wxRichTextSizePage::sm_showRightBottomPositionControls = true;
-bool wxRichTextSizePage::sm_showAlignmentControls = true;
-bool wxRichTextSizePage::sm_showFloatingAndAlignmentControls = true;
-bool wxRichTextSizePage::sm_enablePositionAndSizeUnits = true;
-bool wxRichTextSizePage::sm_enablePositionAndSizeCheckboxes = true;
-bool wxRichTextSizePage::sm_showMoveObjectControls = true;
 
 /*!
  * wxRichTextSizePage constructors

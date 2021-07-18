@@ -324,7 +324,7 @@ public:
 
 private:
     void DoDump();
-    static int sm_count;
+    static int sm_count{0};
 };
 
 // make leak dump after all globals have been destructed

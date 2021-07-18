@@ -2575,9 +2575,6 @@ wxSize wxMSWDCImpl::GetPPI() const
  * entry for the bitmap, and two for the DCs. -- JACS
  */
 
-wxObjectList wxMSWDCImpl::sm_bitmapCache;
-wxObjectList wxMSWDCImpl::sm_dcCache;
-
 wxDCCacheEntry::wxDCCacheEntry(WXHBITMAP hBitmap, int w, int h, int depth)
     : m_bitmap(hBitmap),
       m_width(w),

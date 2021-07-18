@@ -1324,7 +1324,7 @@ public:
 
 protected:
     bool m_requestMore{false};
-    static wxIdleMode sm_idleMode;
+    inline static wxIdleMode sm_idleMode{wxIDLE_PROCESS_ALL};
 
 public:
 	wxClassInfo *GetClassInfo() const override ;
@@ -3664,7 +3664,7 @@ protected:
     size_t                 m_size;
     EventTypeTablePointer *m_eventTypeTable;
 
-    static wxEventHashTable* sm_first;
+    inline static wxEventHashTable* sm_first{nullptr};
     wxEventHashTable* m_previous;
     wxEventHashTable* m_next;
 };

@@ -272,8 +272,6 @@ bool wxSubsetValidForFont(int subsetIndex, FONTSIGNATURE *fontSig)
 }
 #endif
 
-bool wxSymbolPickerDialog::sm_showToolTips = false;
-
 /*!
  * wxSymbolPickerDialog type definition
  */

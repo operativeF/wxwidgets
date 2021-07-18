@@ -232,7 +232,7 @@ protected:
 
     wxRichTextXMLHelper m_helper;
 
-    static wxStringToStringHashMap sm_nodeNameToClassMap;
+    inline static wxStringToStringHashMap sm_nodeNameToClassMap;
 };
 
 #endif

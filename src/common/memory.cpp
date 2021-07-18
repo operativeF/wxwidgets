@@ -1096,7 +1096,6 @@ void wxTraceLevel(int, const wxChar * ...)
 // Don't set it to 0 by dynamic initialization
 // Some compilers will really do the assignment later
 // All global variables are initialized to 0 at the very beginning, and this is just fine.
-int wxDebugContextDumpDelayCounter::sm_count;
 
 wxDebugContextDumpDelayCounter::wxDebugContextDumpDelayCounter()
 {

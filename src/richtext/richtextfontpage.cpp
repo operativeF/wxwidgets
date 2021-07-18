@@ -49,8 +49,6 @@ wxEND_EVENT_TABLE()
 
 IMPLEMENT_HELP_PROVISION(wxRichTextFontPage)
 
-int wxRichTextFontPage::sm_allowedTextEffects = 0xFFFF & ~(wxTEXT_ATTR_EFFECT_SUPPRESS_HYPHENATION|wxTEXT_ATTR_EFFECT_RTL);
-
 /*!
  * wxRichTextFontPage constructors
  */

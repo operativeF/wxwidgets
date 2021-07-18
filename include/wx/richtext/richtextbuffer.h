@@ -4659,7 +4659,7 @@ protected:
     int                 m_impactedByFloatingObjects;
 
     // Default tabstops
-    static std::vector<int>  sm_defaultTabs;
+    inline static std::vector<int>  sm_defaultTabs;
 
 friend class wxRichTextFloatCollector;
 };
@@ -5871,25 +5871,25 @@ protected:
     int                     m_handlerFlags;
 
     /// File handlers
-    static wxList           sm_handlers;
+    inline static wxList           sm_handlers;
 
     /// Drawing handlers
-    static wxList           sm_drawingHandlers;
+    inline static wxList           sm_drawingHandlers;
 
     /// Field types
-    static wxRichTextFieldTypeHashMap sm_fieldTypes;
+    inline static wxRichTextFieldTypeHashMap sm_fieldTypes;
 
     /// Renderer
-    static wxRichTextRenderer* sm_renderer;
+    inline static wxRichTextRenderer* sm_renderer{nullptr};
 
     /// Minimum margin between bullet and paragraph in 10ths of a mm
-    static int              sm_bulletRightMargin;
+    inline static int              sm_bulletRightMargin{20};
 
     /// Factor to multiply by character height to get a reasonable bullet size
-    static float            sm_bulletProportion;
+    inline static float            sm_bulletProportion{0.3F};
 
     /// Floating layout mode, @true by default
-    static bool             sm_floatingLayoutMode;
+    inline static bool             sm_floatingLayoutMode{true};
 
     /// Scaling factor in use: needed to calculate correct dimensions when printing
     double                  m_scale;

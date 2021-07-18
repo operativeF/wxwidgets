@@ -24,8 +24,6 @@
  * wxRichTextStyleOrganiserDialog type definition
  */
 
-bool wxRichTextStyleOrganiserDialog::sm_showToolTips = false;
-
 wxIMPLEMENT_DYNAMIC_CLASS(wxRichTextStyleOrganiserDialog, wxDialog);
 
 /*!

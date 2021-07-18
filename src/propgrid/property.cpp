@@ -432,11 +432,6 @@ void wxPGCell::SetEmptyData()
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxPGProperty, wxObject);
 
-wxString* wxPGProperty::sm_wxPG_LABEL = nullptr;
-
-
-
-
 void wxPGProperty::Init( const wxString& label, const wxString& name )
 {
     // wxPG_LABEL reference can be NULL if we are called before property

@@ -297,8 +297,8 @@ protected:
 #endif // wxUSE_PALETTE
 
 #if wxUSE_DC_CACHEING
-    static wxObjectList     sm_bitmapCache;
-    static wxObjectList     sm_dcCache;
+    inline static wxObjectList     sm_bitmapCache;
+    inline static wxObjectList     sm_dcCache;
 #endif
 
     bool m_isClipBoxValid{false};
