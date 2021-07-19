@@ -164,7 +164,7 @@
     <ClCompile Include="streams\datastreamtest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mbconv\mbconvtest.cpp">
+    <ClCompile Include="strings\utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
