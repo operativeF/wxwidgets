@@ -87,106 +87,119 @@ template<typename Pred>
     return CmpNoCase(std::string_view(chsA), std::string_view(chsB));
 }
 
-inline constexpr std::string_view BeforeFirst(std::string_view strView, std::string_view strFirst, size_t pos = 0) noexcept
+inline constexpr std::string BeforeFirst(std::string_view strView, std::string_view strFirst, size_t pos = 0) noexcept
 {
     auto n = strView.find(strFirst, pos);
 
     if(n != std::string_view::npos)
-        return strView.substr(0, n);
+        return std::string(strView.substr(0, n));
     
-    return strView;
+    return std::string(strView);
 }
 
-inline constexpr std::string_view BeforeFirst(std::string_view strView, const char ch, size_t pos = 0) noexcept
+inline constexpr std::string BeforeFirst(std::string_view strView, const char ch, size_t pos = 0) noexcept
 {
     auto n = strView.find(ch, pos);
 
     if(n != std::string_view::npos)
-        return strView.substr(0, n);
+        return std::string(strView.substr(0, n));
     
-    return strView;
+    return std::string(strView);
 }
 
-inline constexpr std::string_view BeforeFirst(std::string_view strView, const char* const chs, size_t pos = 0)
+inline constexpr std::string BeforeFirst(std::string_view strView, const char* const chs, size_t pos = 0)
 {
     return BeforeFirst(strView, std::string_view(chs), pos);
 }
 
-inline constexpr std::string_view AfterFirst(std::string_view strView, std::string_view strAfter, size_t pos = 0) noexcept
+inline constexpr std::string AfterFirst(std::string_view strView, std::string_view strAfter, size_t pos = 0) noexcept
 {
     auto n = strView.find(strAfter, pos);
 
     if(n != std::string_view::npos)
-        return strView.substr(n + 1, strView.size());
+        return std::string(strView.substr(n + 1, strView.size()));
     
     return {};
 }
 
-inline constexpr std::string_view AfterFirst(std::string_view strView, const char ch, size_t pos = 0) noexcept
+inline constexpr std::string AfterFirst(std::string_view strView, const char ch, size_t pos = 0) noexcept
 {
     auto n = strView.find(ch, pos);
 
     if(n != std::string_view::npos)
-        return strView.substr(n + 1, strView.size());
+        return std::string(strView.substr(n + 1, strView.size()));
     
     return {};
 }
 
-inline constexpr std::string_view AfterFirst(std::string_view strView, const char* const chs, size_t pos = 0)
+inline constexpr std::string AfterFirst(std::string_view strView, const char* const chs, size_t pos = 0)
 {
     return AfterFirst(strView, std::string_view(chs), pos);
 }
 
-inline constexpr std::string_view BeforeLast(std::string_view strView, std::string_view strBefore, size_t pos = 0) noexcept
+inline constexpr std::string BeforeLast(std::string_view strView, std::string_view strBefore, size_t pos = 0) noexcept
 {
     auto n = strView.rfind(strBefore, pos);
 
     if(n != std::string_view::npos)
-        return strView.substr(0, n);
+        return std::string(strView.substr(0, n));
 
     return {};
 }
 
-inline constexpr std::string_view BeforeLast(std::string_view strView, const char ch, size_t pos = 0) noexcept
+inline constexpr std::string BeforeLast(std::string_view strView, const char ch, size_t pos = 0) noexcept
 {
     auto n = strView.rfind(ch, pos);
 
     if(n != std::string_view::npos)
-        return strView.substr(0, n);
+        return std::string(strView.substr(0, n));
 
     return {};
 }
 
-inline constexpr std::string_view BeforeLast(std::string_view strView, const char* const chs, size_t pos = 0)
+inline constexpr std::string BeforeLast(std::string_view strView, const char* const chs, size_t pos = 0)
 {
     return BeforeLast(strView, std::string_view(chs), pos);
 }
 
 
 // TODO: Do we really want to return the whole input string if it fails to find anything?
-inline constexpr std::string_view AfterLast(std::string_view strView, std::string_view strLast, size_t pos = 0) noexcept
+inline constexpr std::string AfterLast(std::string_view strView, std::string_view strLast, size_t pos = 0) noexcept
 {
     auto n = strView.rfind(strLast, pos);
 
     if(n != std::string_view::npos)
-        return strView.substr(n + 1, strView.size());
+        return std::string(strView.substr(n + 1, strView.size()));
 
     return strView;
 }
 
-inline constexpr std::string_view AfterLast(std::string_view strView, const char ch, size_t pos = 0) noexcept
+inline constexpr std::string AfterLast(std::string_view strView, const char ch, size_t pos = 0) noexcept
 {
     auto n = strView.rfind(ch, pos);
 
     if(n != std::string_view::npos)
-        return strView.substr(n + 1, strView.size());
+        return std::string(strView.substr(n + 1, strView.size()));
 
-    return strView;
+    return std::string(strView);
 }
 
-inline constexpr std::string_view AfterLast(std::string_view strView, const char* const chs, size_t pos = 0)
+inline constexpr std::string AfterLast(std::string_view strView, const char* const chs, size_t pos = 0)
 {
     return AfterLast(strView, std::string_view(chs), pos);
+}
+
+inline std::size_t ReplaceAll(std::string& instr, std::string_view candidate, std::string_view replacement)
+{
+    std::size_t count{0};
+    for (std::string::size_type pos{};
+         instr.npos != (pos = instr.find(candidate.data(), pos, candidate.length()));
+         pos += replacement.length(), ++count)
+    {
+        instr.replace(pos, candidate.length(), replacement.data(), replacement.length());
+    }
+    
+    return count;
 }
 
 } // namespace wx::util
