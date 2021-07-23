@@ -8,7 +8,13 @@
 namespace wx::utils
 {
 
-[[nodiscard]] inline bool StartsWith(std::string_view strView, std::string_view prefix) noexcept
+#if __cplusplus >= 201907L
+#define CONSTEXPR_STR20 constexpr
+#else
+#define CONSTEXPR_STR20
+#endif
+
+[[nodiscard]] inline constexpr bool StartsWith(std::string_view strView, std::string_view prefix) noexcept
 {
     const auto prefixSize = prefix.size();
 
@@ -18,17 +24,17 @@ namespace wx::utils
     return strView.compare(0, prefix.size(), prefix) == 0;
 }
 
-[[nodiscard]] inline bool StartsWith(std::string_view strView, const char* const prefix)
+[[nodiscard]] inline constexpr bool StartsWith(std::string_view strView, const char* const prefix)
 {
     return StartsWith(strView, std::string_view(prefix));
 }
 
-[[nodiscard]] inline bool StartsWith(std::string_view strView, const char prefix) noexcept
+[[nodiscard]] inline constexpr bool StartsWith(std::string_view strView, const char prefix) noexcept
 {
     return !strView.empty() && strView.front() == prefix;
 }
 
-[[nodiscard]] inline bool EndsWith(std::string_view strView, std::string_view suffix) noexcept
+[[nodiscard]] inline constexpr bool EndsWith(std::string_view strView, std::string_view suffix) noexcept
 {
     const auto suffixSize = suffix.size();
 
@@ -38,58 +44,37 @@ namespace wx::utils
     return strView.compare(strView.size() - suffixSize, suffixSize, suffix) == 0;
 }
 
-[[nodiscard]] inline bool EndsWith(std::string_view strView, const char* const suffix)
+[[nodiscard]] inline constexpr bool EndsWith(std::string_view strView, const char* const suffix)
 {
     return EndsWith(strView, std::string_view(suffix));
 }
 
-[[nodiscard]] inline bool EndsWith(std::string_view strView, const char suffix) noexcept
+[[nodiscard]] inline constexpr bool EndsWith(std::string_view strView, const char suffix) noexcept
 {
     return !strView.empty() && strView.back() == suffix;
 }
 
-[[maybe_unused]] inline size_t Erase(std::string& str, char value)
-{
-    auto it = std::remove(str.begin(), str.end(), value);
-    auto elems_erased = std::distance(it, str.end());
-
-    str.erase(it, str.end());
-
-    return elems_erased;
-}
-
-template<typename Pred>
-[[maybe_unused]] inline size_t EraseIf(std::string& str, Pred&& pred)
-{
-    auto it = std::remove_if(str.begin(), str.end(), pred);
-    auto elems_erased = std::distance(it, str.end());
-
-    str.erase(it, str.end());
-
-    return elems_erased;
-}
-
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-[[nodiscard]] inline bool CmpNoCase(std::string_view strViewA, std::string_view strViewB)
+[[nodiscard]] inline CONSTEXPR_STR20 bool CmpNoCase(std::string_view strViewA, std::string_view strViewB)
 {
     std::string strA;
     std::string strB;
 
-    std::transform(strViewA.begin(), strViewA.end(), strA.begin(), [&strA](char c){ return ::tolower(c); });
-    std::transform(strViewB.begin(), strViewB.end(), strB.begin(), [&strB](char c){ return ::tolower(c); });
+    std::transform(strViewA.begin(), strViewA.end(), strA.begin(), [&strA](char c) noexcept { return ::tolower(c); });
+    std::transform(strViewB.begin(), strViewB.end(), strB.begin(), [&strB](char c) noexcept { return ::tolower(c); });
 
     return strA == strB;
 }
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-[[nodiscard]] inline bool CmpNoCase(const char* const chsA, const char* const chsB)
+[[nodiscard]] inline CONSTEXPR_STR20 bool CmpNoCase(const char* const chsA, const char* const chsB)
 {
     return CmpNoCase(std::string_view(chsA), std::string_view(chsB));
 }
 
-inline constexpr std::string BeforeFirst(std::string_view strView, std::string_view strFirst, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_STR20 std::string BeforeFirst(std::string_view strView, std::string_view strFirst, size_t pos = 0) noexcept
 {
-    auto n = strView.find(strFirst, pos);
+    const auto n = strView.find(strFirst, pos);
 
     if(n != std::string_view::npos)
         return std::string(strView.substr(0, n));
@@ -97,9 +82,9 @@ inline constexpr std::string BeforeFirst(std::string_view strView, std::string_v
     return std::string(strView);
 }
 
-inline constexpr std::string BeforeFirst(std::string_view strView, const char ch, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_STR20 std::string BeforeFirst(std::string_view strView, const char ch, size_t pos = 0) noexcept
 {
-    auto n = strView.find(ch, pos);
+    const auto n = strView.find(ch, pos);
 
     if(n != std::string_view::npos)
         return std::string(strView.substr(0, n));
@@ -107,14 +92,14 @@ inline constexpr std::string BeforeFirst(std::string_view strView, const char ch
     return std::string(strView);
 }
 
-inline constexpr std::string BeforeFirst(std::string_view strView, const char* const chs, size_t pos = 0)
+[[nodiscard]] inline CONSTEXPR_STR20 std::string BeforeFirst(std::string_view strView, const char* const chs, size_t pos = 0)
 {
     return BeforeFirst(strView, std::string_view(chs), pos);
 }
 
-inline constexpr std::string AfterFirst(std::string_view strView, std::string_view strAfter, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_STR20 std::string AfterFirst(std::string_view strView, std::string_view strAfter, size_t pos = 0) noexcept
 {
-    auto n = strView.find(strAfter, pos);
+    const auto n = strView.find(strAfter, pos);
 
     if(n != std::string_view::npos)
         return std::string(strView.substr(n + 1, strView.size()));
@@ -122,9 +107,9 @@ inline constexpr std::string AfterFirst(std::string_view strView, std::string_vi
     return {};
 }
 
-inline constexpr std::string AfterFirst(std::string_view strView, const char ch, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_STR20 std::string AfterFirst(std::string_view strView, const char ch, size_t pos = 0) noexcept
 {
-    auto n = strView.find(ch, pos);
+    const auto n = strView.find(ch, pos);
 
     if(n != std::string_view::npos)
         return std::string(strView.substr(n + 1, strView.size()));
@@ -132,14 +117,14 @@ inline constexpr std::string AfterFirst(std::string_view strView, const char ch,
     return {};
 }
 
-inline constexpr std::string AfterFirst(std::string_view strView, const char* const chs, size_t pos = 0)
+[[nodiscard]] inline CONSTEXPR_STR20 std::string AfterFirst(std::string_view strView, const char* const chs, size_t pos = 0)
 {
     return AfterFirst(strView, std::string_view(chs), pos);
 }
 
-inline constexpr std::string BeforeLast(std::string_view strView, std::string_view strBefore, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_STR20 std::string BeforeLast(std::string_view strView, std::string_view strBefore, size_t pos = std::string_view::npos) noexcept
 {
-    auto n = strView.rfind(strBefore, pos);
+    const auto n = strView.rfind(strBefore, pos);
 
     if(n != std::string_view::npos)
         return std::string(strView.substr(0, n));
@@ -147,9 +132,9 @@ inline constexpr std::string BeforeLast(std::string_view strView, std::string_vi
     return {};
 }
 
-inline constexpr std::string BeforeLast(std::string_view strView, const char ch, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_STR20 std::string BeforeLast(std::string_view strView, const char ch, size_t pos = std::string_view::npos) noexcept
 {
-    auto n = strView.rfind(ch, pos);
+    const auto n = strView.rfind(ch, pos);
 
     if(n != std::string_view::npos)
         return std::string(strView.substr(0, n));
@@ -157,26 +142,16 @@ inline constexpr std::string BeforeLast(std::string_view strView, const char ch,
     return {};
 }
 
-inline constexpr std::string BeforeLast(std::string_view strView, const char* const chs, size_t pos = 0)
+[[nodiscard]] inline CONSTEXPR_STR20 std::string BeforeLast(std::string_view strView, const char* const chs, size_t pos = std::string_view::npos)
 {
     return BeforeLast(strView, std::string_view(chs), pos);
 }
 
 
 // TODO: Do we really want to return the whole input string if it fails to find anything?
-inline constexpr std::string AfterLast(std::string_view strView, std::string_view strLast, size_t pos = 0) noexcept
+[[nodiscard]] inline CONSTEXPR_STR20 std::string AfterLast(std::string_view strView, std::string_view strLast, size_t pos = std::string_view::npos) noexcept
 {
-    auto n = strView.rfind(strLast, pos);
-
-    if(n != std::string_view::npos)
-        return std::string(strView.substr(n + 1, strView.size()));
-
-    return strView;
-}
-
-inline constexpr std::string AfterLast(std::string_view strView, const char ch, size_t pos = 0) noexcept
-{
-    auto n = strView.rfind(ch, pos);
+    const auto n = strView.rfind(strLast, pos);
 
     if(n != std::string_view::npos)
         return std::string(strView.substr(n + 1, strView.size()));
@@ -184,12 +159,25 @@ inline constexpr std::string AfterLast(std::string_view strView, const char ch, 
     return std::string(strView);
 }
 
-inline constexpr std::string AfterLast(std::string_view strView, const char* const chs, size_t pos = 0)
+[[nodiscard]] inline CONSTEXPR_STR20 std::string AfterLast(std::string_view strView, const char ch, size_t pos = std::string_view::npos) noexcept
+{
+    const auto n = strView.rfind(ch, pos);
+
+    if(n != std::string_view::npos)
+        return std::string(strView.substr(n + 1, strView.size()));
+
+    return std::string(strView);
+}
+
+[[nodiscard]] inline CONSTEXPR_STR20 std::string AfterLast(std::string_view strView, const char* const chs, size_t pos = std::string_view::npos)
 {
     return AfterLast(strView, std::string_view(chs), pos);
 }
 
-inline std::size_t ReplaceAll(std::string& instr, std::string_view candidate, std::string_view replacement)
+
+// Modifying string functions
+
+[[maybe_unused]] inline CONSTEXPR_STR20 std::size_t ReplaceAll(std::string& instr, std::string_view candidate, std::string_view replacement)
 {
     std::size_t count{0};
     for (std::string::size_type pos{};
@@ -200,6 +188,27 @@ inline std::size_t ReplaceAll(std::string& instr, std::string_view candidate, st
     }
     
     return count;
+}
+
+[[maybe_unused]] inline CONSTEXPR_STR20 size_t Erase(std::string& str, char value)
+{
+    auto it = std::remove(str.begin(), str.end(), value);
+    const auto elems_erased = std::distance(it, str.end());
+
+    str.erase(it, str.end());
+
+    return elems_erased;
+}
+
+template<typename Pred>
+[[maybe_unused]] inline CONSTEXPR_STR20 size_t EraseIf(std::string& str, Pred&& pred)
+{
+    auto it = std::remove_if(str.begin(), str.end(), pred);
+    auto elems_erased = std::distance(it, str.end());
+
+    str.erase(it, str.end());
+
+    return elems_erased;
 }
 
 } // namespace wx::util

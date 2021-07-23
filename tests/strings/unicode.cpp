@@ -275,7 +275,7 @@ TEST_CASE("ConversionUTF8")
         d.Test(n, wxConvUTF8);
     }
 
-    static constexpr char* const u25a6 = "\xe2\x96\xa6";
+    static constexpr char u25a6[] = "\xe2\x96\xa6";
     wxMBConvUTF8 c(wxMBConvUTF8::MAP_INVALID_UTF8_TO_OCTAL);
     CHECK_EQ( 2, c.ToWChar(nullptr, 0, u25a6, wxNO_LEN) );
     CHECK_EQ( 0, c.ToWChar(nullptr, 0, u25a6, 0) );
@@ -382,7 +382,7 @@ TEST_CASE("IsConvOk")
 TEST_CASE("Iteration")
 {
     // "czech" in Czech ("cestina"):
-    static constexpr char *textUTF8 = "\304\215e\305\241tina";
+    static constexpr char textUTF8[] = "\304\215e\305\241tina";
     static constexpr wchar_t textUTF16[] = {0x10D, 0x65, 0x161, 0x74, 0x69, 0x6E, 0x61, 0};
 
     wxString text(wxString::FromUTF8(textUTF8));
