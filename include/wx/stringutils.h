@@ -2,6 +2,7 @@
 #define _WX_WXSTRINGUTILS_H__
 
 #include <algorithm>
+#include <cctype>
 #include <string>
 #include <string_view>
 
@@ -13,6 +14,57 @@ namespace wx::utils
 #else
 #define CONSTEXPR_STR20
 #endif
+
+// Modifying string functions
+
+[[maybe_unused]] inline CONSTEXPR_STR20 std::size_t ReplaceAll(std::string& instr, std::string_view candidate, std::string_view replacement)
+{
+    std::size_t count{ 0 };
+    for (std::string::size_type pos{};
+        instr.npos != (pos = instr.find(candidate.data(), pos, candidate.length()));
+        pos += replacement.length(), ++count)
+    {
+        instr.replace(pos, candidate.length(), replacement.data(), replacement.length());
+    }
+
+    return count;
+}
+
+[[maybe_unused]] inline CONSTEXPR_STR20 size_t Erase(std::string& str, char value)
+{
+    auto it = std::remove(str.begin(), str.end(), value);
+    const auto elems_erased = std::distance(it, str.end());
+
+    str.erase(it, str.end());
+
+    return elems_erased;
+}
+
+template<typename Pred>
+[[maybe_unused]] inline CONSTEXPR_STR20 size_t EraseIf(std::string& str, Pred&& pred)
+{
+    auto it = std::remove_if(str.begin(), str.end(), pred);
+    auto elems_erased = std::distance(it, str.end());
+
+    str.erase(it, str.end());
+
+    return elems_erased;
+}
+
+// FIXME: Not valid for unicode strings.
+inline CONSTEXPR_STR20 void ToUpper(std::string& str)
+{
+    std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) noexcept { return std::toupper(c); });
+}
+
+// FIXME: Not valid for unicode strings.
+inline CONSTEXPR_STR20 void ToLower(std::string& str)
+{
+    std::transform(str.begin(), str.end(), str.begin(), [](char c) noexcept { return std::tolower(c); });
+}
+
+
+// Non-modifying string functions
 
 [[nodiscard]] inline constexpr bool StartsWith(std::string_view strView, std::string_view prefix) noexcept
 {
@@ -55,19 +107,24 @@ namespace wx::utils
 }
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-[[nodiscard]] inline CONSTEXPR_STR20 bool CmpNoCase(std::string_view strViewA, std::string_view strViewB)
+[[nodiscard]] inline bool CmpNoCase(std::string_view strViewA, std::string_view strViewB)
 {
-    std::string strA;
-    std::string strB;
+    const auto nA = strViewA.size();
 
-    std::transform(strViewA.begin(), strViewA.end(), strA.begin(), [&strA](char c) noexcept { return ::tolower(c); });
-    std::transform(strViewB.begin(), strViewB.end(), strB.begin(), [&strB](char c) noexcept { return ::tolower(c); });
+    if(nA != strViewB.size())
+        return false;
+
+    std::string strA(nA, ' ');
+    std::string strB(nA, ' ');
+
+    std::transform(strViewA.begin(), strViewA.end(), strA.begin(), [](unsigned char c) noexcept { return std::tolower(c); });
+    std::transform(strViewB.begin(), strViewB.end(), strB.begin(), [](unsigned char c) noexcept { return std::tolower(c); });
 
     return strA == strB;
 }
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-[[nodiscard]] inline CONSTEXPR_STR20 bool CmpNoCase(const char* const chsA, const char* const chsB)
+[[nodiscard]] inline bool CmpNoCase(const char* const chsA, const char* const chsB)
 {
     return CmpNoCase(std::string_view(chsA), std::string_view(chsB));
 }
@@ -174,41 +231,21 @@ namespace wx::utils
     return AfterLast(strView, std::string_view(chs), pos);
 }
 
-
-// Modifying string functions
-
-[[maybe_unused]] inline CONSTEXPR_STR20 std::size_t ReplaceAll(std::string& instr, std::string_view candidate, std::string_view replacement)
+[[nodiscard]] inline constexpr bool Contains(std::string_view strView, std::string_view strToFind) noexcept
 {
-    std::size_t count{0};
-    for (std::string::size_type pos{};
-         instr.npos != (pos = instr.find(candidate.data(), pos, candidate.length()));
-         pos += replacement.length(), ++count)
-    {
-        instr.replace(pos, candidate.length(), replacement.data(), replacement.length());
-    }
-    
-    return count;
+    return strView.find(strToFind, 0) != std::string_view::npos;
 }
 
-[[maybe_unused]] inline CONSTEXPR_STR20 size_t Erase(std::string& str, char value)
+// FIXME: Not valid for unicode strings
+[[nodiscard]] inline CONSTEXPR_STR20 bool ContainsNoCase(std::string_view strView, std::string_view strToFind) noexcept
 {
-    auto it = std::remove(str.begin(), str.end(), value);
-    const auto elems_erased = std::distance(it, str.end());
+    std::string str(strView);
+    std::string substrToFind(strToFind);
 
-    str.erase(it, str.end());
+    ToLower(str);
+    ToLower(substrToFind);
 
-    return elems_erased;
-}
-
-template<typename Pred>
-[[maybe_unused]] inline CONSTEXPR_STR20 size_t EraseIf(std::string& str, Pred&& pred)
-{
-    auto it = std::remove_if(str.begin(), str.end(), pred);
-    auto elems_erased = std::distance(it, str.end());
-
-    str.erase(it, str.end());
-
-    return elems_erased;
+    return str.find(substrToFind) != std::string::npos;
 }
 
 } // namespace wx::util

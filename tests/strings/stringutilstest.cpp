@@ -2,10 +2,6 @@
 
 #include "testprec.h"
 
-#ifndef WX_PRECOMP
-#include "wx/stringutils.h"
-#endif // WX_PRECOMP
-
 #include "wx/stringutils.h"
 
 #include <array>
@@ -77,5 +73,53 @@ TEST_SUITE("Test auxilliary functions that work with strings")
         EraseIf(excessivePunctuation, isPunctuation);
 
         CHECK_EQ(excessivePunctuation, "Not A Chance Not a Chance NOT A CHANCE");
+    }
+
+    TEST_CASE("ToUpper: Modify a string to uppercase (non-unicode).")
+    {
+        std::string convertToYelling{"The quick brown fox jumped over the lazy dog!"};
+
+        ToUpper(convertToYelling);
+
+        CHECK_EQ(convertToYelling, "THE QUICK BROWN FOX JUMPED OVER THE LAZY DOG!");
+    }
+
+    TEST_CASE("ToLower: Modify a string to lowercase (non-unicode).")
+    {
+        std::string stopYelling("YOU CAN'T TELL ME WHAT TO DO!");
+
+        ToLower(stopYelling);
+
+        CHECK_EQ(stopYelling, "you can't tell me what to do!");
+    }
+
+    TEST_CASE("CmpNoCase: Compare two strings, case insensitive.")
+    {
+        std::string originalStr{"The quick brown fox jumped over the lazy dog."};
+        std::string strCaps("THE QUICK BROWN FOX JUMPED OVER THE LAZY DOG.");
+        std::string strDiffSize("The quick brown fox.");
+
+        CHECK(CmpNoCase(originalStr, strCaps));
+        CHECK_FALSE(CmpNoCase(originalStr, strDiffSize));
+    }
+
+    TEST_CASE("Contains: Check if a substring is contained inside of another string.")
+    {
+        std::string containsFox{"fox"};
+        std::string doesNotContainBog{"bog"};
+
+        CHECK(Contains(str, containsFox));
+        CHECK_FALSE(Contains(str, doesNotContainBog));
+    }
+
+    TEST_CASE("ContainsNoCase: Check if a substring is contained inside of another string, ignoring case.")
+    {
+        std::string containsFox{"fox"};
+        std::string containsCapsFox{"FOX"};
+        std::string doesNotContainCapsBog{"BOG"};
+
+        CHECK(ContainsNoCase(str, containsFox));
+        CHECK(ContainsNoCase(str, containsCapsFox));
+        CHECK_FALSE(ContainsNoCase(str, doesNotContainCapsBog));
     }
 }
