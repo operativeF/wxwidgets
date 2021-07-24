@@ -8,6 +8,8 @@
 
 #include "wx/stringutils.h"
 
+#include <array>
+
 TEST_SUITE("Test auxilliary functions that work with strings")
 {
     using namespace wx::utils;
@@ -55,5 +57,25 @@ TEST_SUITE("Test auxilliary functions that work with strings")
         ReplaceAll(replaceFoxWithDog, "fox", "dog");
 
         CHECK_EQ(replaceFoxWithDog, "The quick; brown dog; jumped over the; lazy; dog.");
+    }
+
+    TEST_CASE("Erase: Remove all designated characters from a string.")
+    {
+        std::string commaDelimitedDogsAndCats{"Dog, dog, dog, cat, cat."};
+        Erase(commaDelimitedDogsAndCats, ',');
+
+        CHECK_EQ(commaDelimitedDogsAndCats, "Dog dog dog cat cat.");
+    }
+
+    TEST_CASE("EraseIf: Remove all designated characters if the input functor is satisifed.")
+    {
+        constexpr std::array<char, 3> punctuationMarks {'?', '.', '!'};
+        auto isPunctuation = [=](auto&& c){ return std::find(punctuationMarks.begin(), punctuationMarks.end(), c) != punctuationMarks.end(); };
+
+        std::string excessivePunctuation{"Not. A. Chance? Not a... Chance?! NOT. A. CHANCE!!!"};
+
+        EraseIf(excessivePunctuation, isPunctuation);
+
+        CHECK_EQ(excessivePunctuation, "Not A Chance Not a Chance NOT A CHANCE");
     }
 }
