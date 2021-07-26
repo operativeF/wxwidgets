@@ -3975,7 +3975,7 @@ bool wxWindowMSW::MSWCreate(const wxChar *wclass,
              (
               extendedStyle,
               wclass,
-              title ? title : m_windowName.t_str(),
+              title ? title : boost::nowide::widen(m_windowName).c_str(),
               style,
               x, y, w, h,
               MSWGetParent(),
@@ -4318,7 +4318,7 @@ void wxWindowMSW::SetLabel( const std::string& label)
     SetWindowTextW(GetHwnd(), boost::nowide::widen(label).c_str());
 }
 
-wxString wxWindowMSW::GetLabel() const
+std::string wxWindowMSW::GetLabel() const
 {
     return wxGetWindowText(GetHWND());
 }

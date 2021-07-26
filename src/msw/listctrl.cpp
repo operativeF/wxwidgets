@@ -249,7 +249,7 @@ bool wxListCtrl::Create(wxWindow *parent,
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;
 
-    if ( !MSWCreateControl(WC_LISTVIEW, wxEmptyString, pos, size) )
+    if ( !MSWCreateControl(WC_LISTVIEW, "", pos, size) )
         return false;
 
     EnableSystemThemeByDefault();

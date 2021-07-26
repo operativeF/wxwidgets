@@ -67,7 +67,7 @@ public:
         { return m_pPane==nullptr || !m_pPane->IsShown(); }
     wxWindow *GetPane() const override
         { return m_pPane; }
-    wxString GetLabel() const override;
+    std::string GetLabel() const override;
 
     bool Layout() override;
 

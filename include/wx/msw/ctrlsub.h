@@ -27,7 +27,7 @@ protected:
 
     // insert or append a string to the controls using the given message
     // (one of {CB,LB}_{ADD,INSERT}STRING, pos must be 0 when appending)
-    int MSWInsertOrAppendItem(unsigned pos, const wxString& item, unsigned wm);
+    int MSWInsertOrAppendItem(unsigned pos, const std::string& item, unsigned wm);
 
     // normally the control containing the items is this window itself but if
     // the derived control is composed of several windows, this method can be

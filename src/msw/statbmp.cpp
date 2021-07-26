@@ -102,7 +102,7 @@ bool wxStaticBitmap::Create(wxWindow *parent,
     m_isIcon = image->IsKindOf( wxCLASSINFO(wxIcon) );
 
     // create the native control
-    if ( !MSWCreateControl(wxT("STATIC"), wxEmptyString, pos, size) )
+    if ( !MSWCreateControl(L"STATIC", "", pos, size) )
     {
         // control creation failed
         return false;

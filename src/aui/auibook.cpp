@@ -992,7 +992,7 @@ wxAuiTabCtrl::wxAuiTabCtrl(wxWindow* parent,
                            const wxSize& size,
                            long style) : wxControl(parent, id, pos, size, style)
 {
-    SetName(wxT("wxAuiTabCtrl"));
+    SetName("wxAuiTabCtrl");
     m_clickPt = wxDefaultPosition;
     m_isDragging = false;
     m_hoverButton = nullptr;
@@ -1711,7 +1711,7 @@ bool wxAuiNotebook::Create(wxWindow* parent,
 // code called by all constructors
 void wxAuiNotebook::InitNotebook(long style)
 {
-    SetName(wxT("wxAuiNotebook"));
+    SetName("wxAuiNotebook");
     m_curPage = -1;
     m_tabIdCounter = wxAuiBaseTabCtrlId;
     m_dummyWnd = nullptr;

@@ -214,11 +214,11 @@ public:
         // makes more sense to speak about labels), title access
         // is available from wxTLW classes only (frames, dialogs)
     virtual void SetLabel(const std::string& label) = 0;
-    virtual wxString GetLabel() const = 0;
+    virtual std::string GetLabel() const = 0;
 
         // the window name is used for resource setting in X, it is not the
         // same as the window title/label
-    virtual void SetName( const wxString &name ) { m_windowName = name; }
+    virtual void SetName( const std::string& name ) { m_windowName = name; }
     virtual wxString GetName() const { return m_windowName; }
 
         // sets the window variant, calls internally DoSetVariant if variant
@@ -1578,14 +1578,14 @@ protected:
                     const wxSize& size = wxDefaultSize,
                     long style = 0,
                     const wxValidator& validator = wxDefaultValidator,
-                    const wxString& name = wxASCII_STR(wxPanelNameStr));
+                    const std::string& name = wxPanelNameStr);
 
     bool CreateBase(wxWindowBase *parent,
                     wxWindowID winid,
                     const wxPoint& pos,
                     const wxSize& size,
                     long style,
-                    const wxString& name);
+                    const std::string& name);
 
     // event handling specific to wxWindow
     bool TryBefore(wxEvent& event) override;
@@ -1714,7 +1714,7 @@ protected:
     // window attributes
     long                 m_windowStyle;
     long                 m_exStyle;
-    wxString             m_windowName;
+    std::string          m_windowName;
     bool                 m_themeEnabled;
     wxBackgroundStyle    m_backgroundStyle;
 #if wxUSE_PALETTE

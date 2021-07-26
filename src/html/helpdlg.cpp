@@ -60,10 +60,10 @@ bool wxHtmlHelpDialog::Create(wxWindow* parent, wxWindowID id,
 {
     m_HtmlHelpWin = new wxHtmlHelpWindow(m_Data);
 
-    wxDialog::Create(parent, id, _("Help"),
+    wxDialog::Create(parent, id, "Help",
                     wxPoint(m_HtmlHelpWin->GetCfgData().x, m_HtmlHelpWin->GetCfgData().y),
                     wxSize(m_HtmlHelpWin->GetCfgData().w, m_HtmlHelpWin->GetCfgData().h),
-                    wxDEFAULT_FRAME_STYLE|wxRESIZE_BORDER, wxT("wxHtmlHelp"));
+                    wxDEFAULT_FRAME_STYLE|wxRESIZE_BORDER, "wxHtmlHelp");
     m_HtmlHelpWin->Create(this, wxID_ANY, wxDefaultPosition, GetClientSize(),
         wxTAB_TRAVERSAL|wxNO_BORDER, style);
 

@@ -30,6 +30,8 @@
 #include "wx/msw/private.h"
 #include "wx/msw/missing.h" // IDC_HAND
 
+#include "boost/nowide/convert.hpp"
+
 // ----------------------------------------------------------------------------
 // private classes
 // ----------------------------------------------------------------------------
@@ -206,7 +208,7 @@ void wxCursor::InitFromImage(const wxImage& image)
 }
 #endif // wxUSE_IMAGE
 
-wxCursor::wxCursor(const wxString& filename,
+wxCursor::wxCursor(const std::string& filename,
                    wxBitmapType kind,
                    int hotSpotX,
                    int hotSpotY)
@@ -215,11 +217,11 @@ wxCursor::wxCursor(const wxString& filename,
         switch ( kind )
         {
             case wxBITMAP_TYPE_CUR_RESOURCE:
-                return ::LoadCursor(wxGetInstance(), filename.t_str());
+                return ::LoadCursorW(wxGetInstance(), boost::nowide::widen(filename).c_str());
 
             case wxBITMAP_TYPE_ANI:
             case wxBITMAP_TYPE_CUR:
-                return ::LoadCursorFromFile(filename.t_str());
+                return ::LoadCursorFromFileW(boost::nowide::widen(filename).c_str());
 
             case wxBITMAP_TYPE_ICO:
                 return wxBitmapToHCURSOR

@@ -153,11 +153,11 @@ public:
 
 // Helper function returning the label of the window at the given point or
 // "NONE" if there is no window there.
-wxString GetLabelOfWindowAtPoint(wxWindow* parent, int x, int y)
+std::string GetLabelOfWindowAtPoint(wxWindow* parent, int x, int y)
 {
     wxWindow* const
         win = wxFindWindowAtPoint(parent->ClientToScreen(wxPoint(x, y)));
-    return win ? win->GetLabel() : wxString("NONE");
+    return win ? win->GetLabel() : "NONE";
 }
 
 } // anonymous namespace

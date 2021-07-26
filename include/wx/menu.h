@@ -544,7 +544,7 @@ public:
     // need to override these ones to avoid virtual function hiding
     bool Enable(bool enable = true) override { return wxWindow::Enable(enable); }
     void SetLabel(const std::string& s) override { wxWindow::SetLabel(s); }
-    wxString GetLabel() const override { return wxWindow::GetLabel(); }
+    std::string GetLabel() const override { return wxWindow::GetLabel(); }
 
     // don't want menu bars to accept the focus by tabbing to them
     bool AcceptsFocusFromKeyboard() const override { return false; }

@@ -398,7 +398,7 @@ bool wxTopLevelWindowMSW::Create(wxWindow *parent,
                                  const wxPoint& pos,
                                  const wxSize& size,
                                  long style,
-                                 const wxString& name)
+                                 const std::string& name)
 {
     wxSize sizeReal = size;
     if ( !sizeReal.IsFullySpecified() )

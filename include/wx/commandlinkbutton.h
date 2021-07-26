@@ -15,6 +15,7 @@
 #if wxUSE_COMMANDLINKBUTTON
 
 #include "wx/button.h"
+#include "wx/stringutils.h"
 
 // ----------------------------------------------------------------------------
 // Command link button common base class
@@ -69,12 +70,12 @@ public:
 
     virtual wxString GetMainLabel() const
     {
-        return GetLabel().BeforeFirst('\n');
+        return wx::utils::BeforeFirst(GetLabel(), '\n');
     }
 
     virtual wxString GetNote() const
     {
-        return GetLabel().AfterFirst('\n');
+        return wx::utils::AfterFirst(GetLabel(), '\n');
     }
 
 protected:

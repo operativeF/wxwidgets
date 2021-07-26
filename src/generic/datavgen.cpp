@@ -5711,7 +5711,7 @@ bool wxDataViewCtrl::Show(bool show)
     return changed;
 }
 
-void wxDataViewCtrl::SetName(const wxString &name)
+void wxDataViewCtrl::SetName(const std::string& name)
 {
     wxControl::SetName(name);
     wxAccessible::NotifyEvent(wxACC_EVENT_OBJECT_NAMECHANGE, this, wxOBJID_CLIENT, wxACC_SELF);

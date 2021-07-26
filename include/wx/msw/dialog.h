@@ -25,7 +25,7 @@ public:
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
              long style = wxDEFAULT_DIALOG_STYLE,
-             const wxString& name = wxASCII_STR(wxDialogNameStr))
+             const std::string& name = wxDialogNameStr)
     {
         Create(parent, id, title, pos, size, style, name);
     }
@@ -42,7 +42,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_DIALOG_STYLE,
-                const wxString& name = wxASCII_STR(wxDialogNameStr));
+                const std::string& name = wxDialogNameStr);
 
     // return true if we're showing the dialog modally
     bool IsModal() const override { return m_modalData != nullptr; }

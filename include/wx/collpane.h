@@ -41,7 +41,7 @@ public:
 
     virtual wxWindow *GetPane() const = 0;
 
-    wxString GetLabel() const override = 0;
+    std::string GetLabel() const override = 0;
     void SetLabel(const std::string& label) override = 0;
 
     bool

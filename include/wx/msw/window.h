@@ -76,7 +76,7 @@ public:
 
     
     void SetLabel(const std::string& label) override;
-    wxString GetLabel() const override;
+    std::string GetLabel() const override;
 
     void Raise() override;
     void Lower() override;

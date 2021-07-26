@@ -331,7 +331,7 @@ bool wxWindowBase::CreateBase(wxWindowBase *parent,
                               const wxPoint& WXUNUSED(pos),
                               const wxSize& size,
                               long style,
-                              const wxString& name)
+                              const std::string& name)
 {
     // ids are limited to 16 bits under MSW so if you care about portability,
     // it's not a good idea to use ids out of this range (and negative ids are
@@ -376,7 +376,7 @@ bool wxWindowBase::CreateBase(wxWindowBase *parent,
                               const wxSize& size,
                               long style,
                               const wxValidator& wxVALIDATOR_PARAM(validator),
-                              const wxString& name)
+                              const std::string& name)
 {
     if ( !CreateBase(parent, id, pos, size, style, name) )
         return false;

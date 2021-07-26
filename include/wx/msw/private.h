@@ -1008,7 +1008,7 @@ WXDLLIMPEXP_CORE void wxScrollBarEvent(WXHWND hbar, WXWORD wParam, WXWORD pos);
 extern WXDLLIMPEXP_CORE void wxFindMaxSize(WXHWND hwnd, RECT *rect);
 
 // Safely get the window text (i.e. without using fixed size buffer)
-extern WXDLLIMPEXP_CORE wxString wxGetWindowText(WXHWND hWnd);
+extern WXDLLIMPEXP_CORE std::string wxGetWindowText(WXHWND hWnd);
 
 // get the window class name
 extern WXDLLIMPEXP_CORE wxString wxGetWindowClass(WXHWND hWnd);

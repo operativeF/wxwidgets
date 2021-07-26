@@ -34,6 +34,8 @@
 #include "wx/msw/ownerdrawnbutton.h"
 #include "wx/msw/private/winstyle.h"
 
+#include "boost/nowide/convert.hpp"
+
 // ----------------------------------------------------------------------------
 // wxWin macros
 // ----------------------------------------------------------------------------
@@ -54,7 +56,7 @@ bool wxControl::Create(wxWindow *parent,
                        const wxSize& size,
                        long style,
                        const wxValidator& wxVALIDATOR_PARAM(validator),
-                       const wxString& name)
+                       const std::string& name)
 {
     if ( !wxWindow::Create(parent, id, pos, size, style, name) )
         return false;
@@ -67,7 +69,7 @@ bool wxControl::Create(wxWindow *parent,
 }
 
 bool wxControl::MSWCreateControl(const wxChar *classname,
-                                 const wxString& label,
+                                 const std::string& label,
                                  const wxPoint& pos,
                                  const wxSize& size)
 {
@@ -81,7 +83,7 @@ bool wxControl::MSWCreateControl(const wxChar *classname,
                                  WXDWORD style,
                                  const wxPoint& pos,
                                  const wxSize& size,
-                                 const wxString& label,
+                                 const std::string& label,
                                  WXDWORD exstyle)
 {
     // if no extended style given, determine it ourselves
@@ -117,7 +119,7 @@ bool wxControl::MSWCreateControl(const wxChar *classname,
              (
               exstyle,            // extended style
               classname,          // the kind of control to create
-              label.t_str(),      // the window name
+              boost::nowide::widen(label).c_str(),      // the window name
               style,              // the window style
               x, y, w, h,         // the window position and size
               GetHwndOf(GetParent()),         // parent
@@ -557,7 +559,7 @@ bool wxMSWOwnerDrawnButtonBase::MSWDrawButton(WXDRAWITEMSTRUCT *item)
     MSWDrawButtonBitmap(dc, wxRectFromRECT(rectButton), flags);
 
     // draw the text
-    const wxString& label = m_win->GetLabel();
+    const std::string& label = m_win->GetLabel();
 
     // first we need to measure it
     UINT fmt = DT_NOCLIP;
@@ -576,7 +578,7 @@ bool wxMSWOwnerDrawnButtonBase::MSWDrawButton(WXDRAWITEMSTRUCT *item)
     {
         RECT oldLabelRect = rectLabel; // needed if right aligned
 
-        if ( !::DrawText(hdc, label.t_str(), label.length(), &rectLabel,
+        if ( !::DrawTextW(hdc, boost::nowide::widen(label).c_str(), label.length(), &rectLabel,
                          fmt | DT_CALCRECT) )
         {
             wxLogLastError(wxT("DrawText(DT_CALCRECT)"));
@@ -596,7 +598,7 @@ bool wxMSWOwnerDrawnButtonBase::MSWDrawButton(WXDRAWITEMSTRUCT *item)
         ::SetTextColor(hdc, ::GetSysColor(COLOR_GRAYTEXT));
     }
 
-    if ( !::DrawText(hdc, label.t_str(), label.length(), &rectLabel, fmt) )
+    if ( !::DrawTextW(hdc, boost::nowide::widen(label).c_str(), label.length(), &rectLabel, fmt) )
     {
         wxLogLastError(wxT("DrawText()"));
     }
@@ -637,11 +639,11 @@ void wxControlWithItems::MSWAllocStorage(const wxArrayStringsAdapter& items,
 }
 
 int wxControlWithItems::MSWInsertOrAppendItem(unsigned pos,
-                                              const wxString& item,
+                                              const std::string& item,
                                               unsigned wm)
 {
-    LRESULT n = SendMessage((HWND)MSWGetItemsHWND(), wm, pos,
-                            wxMSW_CONV_LPARAM(item));
+    LRESULT n = SendMessageW((HWND)MSWGetItemsHWND(), wm, pos,
+                            reinterpret_cast<LPARAM>(boost::nowide::widen(item).c_str()));
     if ( n == CB_ERR || n == CB_ERRSPACE )
     {
         wxLogLastError(wxT("SendMessage(XX_ADD/INSERTSTRING)"));

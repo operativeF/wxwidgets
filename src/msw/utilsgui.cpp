@@ -23,6 +23,9 @@
 #include "wx/msw/wrapwin.h"
 #include <shlwapi.h>
 
+#include "boost/nowide/convert.hpp"
+#include "boost/nowide/stackstring.hpp"
+
 // ============================================================================
 // implementation
 // ============================================================================
@@ -110,17 +113,25 @@ void wxGetMousePosition( int* x, int* y )
 // window information functions
 // ---------------------------------------------------------------------------
 
-wxString WXDLLEXPORT wxGetWindowText(WXHWND hWnd)
+std::string WXDLLEXPORT wxGetWindowText(WXHWND hWnd)
 {
-    wxString str;
-
     if ( hWnd )
     {
-        int len = GetWindowTextLength((HWND)hWnd) + 1;
-        ::GetWindowText((HWND)hWnd, wxStringBuffer(str, len), len);
+        std::wstring windowText;
+
+        const int len = GetWindowTextLengthW((HWND)hWnd) + 1;
+
+        windowText.resize(len);
+
+        ::GetWindowTextW((HWND)hWnd, &windowText[0], len);
+
+        // Avoid bogus double-NUL termination
+        windowText.resize(len - 1);
+
+        return boost::nowide::narrow(windowText);
     }
 
-    return str;
+    return "";
 }
 
 wxString WXDLLEXPORT wxGetWindowClass(WXHWND hWnd)

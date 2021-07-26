@@ -23,7 +23,7 @@ public:
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize, long style = 0,
               const wxValidator& validator = wxDefaultValidator,
-              const wxString& name = wxASCII_STR(wxControlNameStr))
+              const std::string& name = wxControlNameStr)
     {
         Create(parent, id, pos, size, style, validator, name);
     }
@@ -37,7 +37,7 @@ public:
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize, long style = 0,
             const wxValidator& validator = wxDefaultValidator,
-            const wxString& name = wxASCII_STR(wxControlNameStr));
+            const std::string& name = wxControlNameStr);
 
 
     // Simulates an event
@@ -89,7 +89,7 @@ protected:
     // supposed to had been already set and so is used instead when this
     // function is called)
     bool MSWCreateControl(const wxChar *classname,
-                          const wxString& label,
+                          const std::string& label,
                           const wxPoint& pos,
                           const wxSize& size);
 
@@ -110,7 +110,7 @@ protected:
                           WXDWORD style,
                           const wxPoint& pos = wxDefaultPosition,
                           const wxSize& size = wxDefaultSize,
-                          const wxString& label = wxEmptyString,
+                          const std::string& label = "",
                           WXDWORD exstyle = (WXDWORD)-1);
 
     // call this from the derived class MSWControlColor() if you want to show

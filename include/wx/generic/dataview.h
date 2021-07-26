@@ -267,7 +267,7 @@ public:
 
 #if wxUSE_ACCESSIBILITY
     bool Show(bool show = true) override;
-    void SetName(const wxString &name) override;
+    void SetName(const std::string& name) override;
     bool Reparent(wxWindowBase *newParent) override;
 #endif // wxUSE_ACCESSIBILITY
     bool Enable(bool enable = true) override;

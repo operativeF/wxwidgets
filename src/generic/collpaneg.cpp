@@ -168,7 +168,7 @@ void wxGenericCollapsiblePane::SetLabel(const std::string& label)
     Layout();
 }
 
-wxString wxGenericCollapsiblePane::GetLabel() const
+std::string wxGenericCollapsiblePane::GetLabel() const
 {
     return m_pButton->GetLabel();
 }

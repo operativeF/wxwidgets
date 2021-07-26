@@ -198,7 +198,7 @@ bool wxNotebook::Create(wxWindow *parent,
                         wxDefaultValidator, name) )
         return false;
 
-    if ( !MSWCreateControl(className, wxEmptyString, pos, size) )
+    if ( !MSWCreateControl(className, "", pos, size) )
         return false;
 
     // Inherit parent attributes and, unlike the default, also inherit the

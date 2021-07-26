@@ -94,7 +94,7 @@ wxCalendarCtrl::Create(wxWindow *parent,
         ? static_cast<const wxChar*>(s_clsMonthCal.GetName().t_str())
         : MONTHCAL_CLASS;
 
-    if ( !MSWCreateControl(clsname, wxEmptyString, pos, size) )
+    if ( !MSWCreateControl(clsname, "", pos, size) )
         return false;
 
     // initialize the control

@@ -64,7 +64,7 @@ public:
 
     // return the original string, as it was passed to SetLabel()
     // (i.e. with wx-style mnemonics)
-    wxString GetLabel() const override { return m_labelOrig; }
+    std::string GetLabel() const override { return m_labelOrig; }
 
     // set label text (mnemonics will be escaped)
     virtual void SetLabelText(const wxString& text)
