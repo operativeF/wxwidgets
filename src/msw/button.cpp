@@ -71,7 +71,7 @@ bool wxButton::Create(wxWindow *parent,
                       const wxValidator& validator,
                       const wxString& name)
 {
-    wxString label;
+    std::string label;
     if ( !(style & wxBU_NOTEXT) )
     {
         label = lbl;

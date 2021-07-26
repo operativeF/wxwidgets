@@ -360,7 +360,7 @@ static inline bool NeedsOwnerDrawnForImageLayout(wxDirection dir, int margH, int
 // helper functions from wx/msw/private/button.h
 // ----------------------------------------------------------------------------
 
-void wxMSWButton::UpdateMultilineStyle(HWND hwnd, const wxString& label)
+void wxMSWButton::UpdateMultilineStyle(HWND hwnd, std::string_view label)
 {
     // update BS_MULTILINE style depending on the new label (resetting it
     // doesn't seem to do anything very useful but it shouldn't hurt and we do
@@ -368,7 +368,7 @@ void wxMSWButton::UpdateMultilineStyle(HWND hwnd, const wxString& label)
     // wouldn't be shown correctly as we don't use BS_MULTILINE when creating
     // the control unless it already has new lines in its label)
     wxMSWWinStyleUpdater updateStyle(hwnd);
-    if ( label.find(wxT('\n')) != wxString::npos )
+    if ( label.find('\n') != std::string_view::npos )
         updateStyle.TurnOn(BS_MULTILINE);
     else
         updateStyle.TurnOff(BS_MULTILINE);
@@ -456,7 +456,7 @@ wxAnyButton::~wxAnyButton()
 #endif // wxUSE_MARKUP
 }
 
-void wxAnyButton::SetLabel(const wxString& label)
+void wxAnyButton::SetLabel(const std::string& label)
 {
     wxMSWButton::UpdateMultilineStyle(GetHwnd(), label);
 
@@ -568,7 +568,7 @@ wxSize wxAnyButton::DoGetBestSize() const
     if ( !IsOwnerDrawn() && ShowsLabel() )
     {
         SIZE idealSize = { 0, 0 };
-        ::SendMessage(GetHwnd(), BCM_GETIDEALSIZE, 0, (LPARAM)&idealSize);
+        ::SendMessageW(GetHwnd(), BCM_GETIDEALSIZE, 0, (LPARAM)&idealSize);
         size.Set(idealSize.cx, idealSize.cy);
 
         if ( m_imageData )

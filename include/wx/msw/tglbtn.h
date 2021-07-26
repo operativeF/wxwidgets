@@ -21,7 +21,7 @@ public:
     wxToggleButton() = default;
     wxToggleButton(wxWindow *parent,
                    wxWindowID id,
-                   const wxString& label,
+                   const std::string& label,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    long style = 0,
@@ -38,7 +38,7 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& label,
+                const std::string& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
@@ -105,7 +105,7 @@ public:
     wxDEPRECATED_INLINE( void SetLabel(const wxBitmap& bitmap),
        SetBitmapLabel(bitmap); )
     // prevent virtual function hiding
-    void SetLabel(const wxString& label) override { wxToggleButton::SetLabel(label); }
+    void SetLabel(const std::string& label) override { wxToggleButton::SetLabel(label); }
 
 private:
     wxDECLARE_DYNAMIC_CLASS(wxBitmapToggleButton);

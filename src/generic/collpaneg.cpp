@@ -160,7 +160,7 @@ void wxGenericCollapsiblePane::Collapse(bool collapse)
     OnStateChange(GetBestSize());
 }
 
-void wxGenericCollapsiblePane::SetLabel(const wxString &label)
+void wxGenericCollapsiblePane::SetLabel(const std::string& label)
 {
     m_pButton->SetLabel(label);
     m_pButton->SetInitialSize();

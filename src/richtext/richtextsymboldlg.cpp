@@ -573,7 +573,7 @@ void wxSymbolPickerDialog::UpdateSymbolDisplay(bool updateSymbolList, bool showA
     }
     else
     {
-        m_symbolStaticCtrl->SetLabel(wxEmptyString);
+        m_symbolStaticCtrl->SetLabel("");
         m_characterCodeCtrl->SetValue(wxEmptyString);
     }
 

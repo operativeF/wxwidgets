@@ -24,6 +24,8 @@
 #include "wx/msw/private/dc.h"
 #include "wx/private/window.h"
 
+#include "boost/nowide/convert.hpp"
+
 #ifndef BCM_SETNOTE
 constexpr int BCM_SETNOTE = 0x1609;
 #endif
@@ -78,18 +80,19 @@ bool wxCommandLinkButton::Create(wxWindow *parent,
 }
 
 void
-wxCommandLinkButton::SetMainLabelAndNote(const wxString& mainLabel,
-                                         const wxString& note)
+wxCommandLinkButton::SetMainLabelAndNote(const std::string& mainLabel,
+                                         const std::string& note)
 {
     if ( HasNativeCommandLinkButton() )
     {
         wxButton::SetLabel(mainLabel);
-        ::SendMessage(m_hWnd, BCM_SETNOTE, 0, wxMSW_CONV_LPARAM(note));
+        ::SendMessageW(m_hWnd, BCM_SETNOTE, 0, reinterpret_cast<LPARAM>(boost::nowide::widen(note).c_str()));
 
         // Preserve the user-specified label for GetLabel()
         m_labelOrig = mainLabel;
+        // FIXME: use fmt lib
         if ( !note.empty() )
-            m_labelOrig << '\n' << note;
+            m_labelOrig += '\n' + note;
     }
     else
     {

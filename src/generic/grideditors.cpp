@@ -1290,7 +1290,7 @@ void wxGridCellBoolEditor::Create(wxWindow* parent,
                                   wxWindowID id,
                                   wxEvtHandler* evtHandler)
 {
-    m_control = new wxCheckBox(parent, id, wxEmptyString,
+    m_control = new wxCheckBox(parent, id, "",
                                wxDefaultPosition, wxDefaultSize,
                                wxNO_BORDER);
 

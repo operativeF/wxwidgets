@@ -28,7 +28,7 @@
 
 bool wxCheckBox::Create(wxWindow *parent,
                         wxWindowID id,
-                        const wxString& label,
+                        const std::string& label,
                         const wxPoint& pos,
                         const wxSize& size, long style,
                         const wxValidator& validator,
@@ -124,7 +124,7 @@ wxSize wxCheckBox::DoGetBestClientSize() const
 // wxCheckBox operations
 // ----------------------------------------------------------------------------
 
-void wxCheckBox::SetLabel(const wxString& label)
+void wxCheckBox::SetLabel(const std::string& label)
 {
     wxMSWButton::UpdateMultilineStyle(GetHwnd(), label);
 

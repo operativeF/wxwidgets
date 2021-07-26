@@ -107,6 +107,8 @@
     #include "wx/msw/uxtheme.h"
 #endif
 
+#include "boost/nowide/convert.hpp"
+
 #if wxUSE_DYNLIB_CLASS
     #define HAVE_TRACKMOUSEEVENT
 #endif // everything needed for TrackMouseEvent()
@@ -4311,9 +4313,9 @@ bool wxWindowMSW::HandleKillFocus(WXHWND hwnd)
 // labels
 // ---------------------------------------------------------------------------
 
-void wxWindowMSW::SetLabel( const wxString& label)
+void wxWindowMSW::SetLabel( const std::string& label)
 {
-    SetWindowText(GetHwnd(), label.c_str());
+    SetWindowTextW(GetHwnd(), boost::nowide::widen(label).c_str());
 }
 
 wxString wxWindowMSW::GetLabel() const

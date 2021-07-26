@@ -23,6 +23,8 @@
     #include "wx/settings.h"
 #endif
 
+#include "wx/stringutils.h"
+
 #include "wx/msw/private.h"
 #include "wx/msw/private/winstyle.h"
 
@@ -145,7 +147,7 @@ void wxStaticText::DoSetSize(int x, int y, int w, int h, int sizeFlags)
     Refresh();
 }
 
-void wxStaticText::SetLabel(const wxString& label)
+void wxStaticText::SetLabel(const std::string& label)
 {
     // If the label doesn't really change, avoid flicker by not doing anything.
     if ( label == m_labelOrig )
@@ -159,7 +161,8 @@ void wxStaticText::SetLabel(const wxString& label)
         // newline handling in static texts: the newlines in the labels are
         // shown as square. Thus we don't use it even on newer OS when
         // the static label contains a newline.
-        updateStyle.TurnOnOrOff(!label.Contains(wxT('\n')), SS_ENDELLIPSIS);
+        // FIXME: Make overload for char
+        updateStyle.TurnOnOrOff(!wx::utils::Contains(label, "\n"), SS_ENDELLIPSIS);
     }
     else // style not supported natively
     {

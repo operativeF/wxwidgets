@@ -10,6 +10,8 @@
 #ifndef _WX_MSW_COMMANDLINKBUTTON_H_
 #define _WX_MSW_COMMANDLINKBUTTON_H_
 
+#include "wx/stringutils.h"
+
 // Derive from the generic version to be able to fall back to it during
 // run-time if the command link buttons are not supported by the system we're
 // running under.
@@ -49,13 +51,13 @@ wxCommandLinkButton(const wxCommandLinkButton&) = delete;
                 const wxString& name = wxASCII_STR(wxButtonNameStr));
 
     // do the same thing as in the generic case here
-    void SetLabel(const wxString& label) override
+    void SetLabel(const std::string& label) override
     {
-        SetMainLabelAndNote(label.BeforeFirst('\n'), label.AfterFirst('\n'));
+        SetMainLabelAndNote(wx::utils::BeforeFirst(label, '\n'), wx::utils::AfterFirst(label, '\n'));
     }
 
-    void SetMainLabelAndNote(const wxString& mainLabel,
-                                     const wxString& note) override;
+    void SetMainLabelAndNote(const std::string& mainLabel,
+                             const std::string& note) override;
 
     WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;
 

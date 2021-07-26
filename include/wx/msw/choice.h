@@ -54,7 +54,7 @@ public:
 
     bool Show(bool show = true) override;
 
-    void SetLabel(const wxString& label) override;
+    void SetLabel(const std::string& label) override;
 
     unsigned int GetCount() const override;
     int GetSelection() const override;

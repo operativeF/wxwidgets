@@ -131,7 +131,7 @@ void wxHyperlinkCtrl::SetURL(const wxString &url)
     wxWindow::SetLabel( GetLabelForSysLink(m_labelOrig, url) );
 }
 
-void wxHyperlinkCtrl::SetLabel(const wxString &label)
+void wxHyperlinkCtrl::SetLabel(const std::string& label)
 {
     if ( !HasNativeHyperlinkCtrl() )
     {

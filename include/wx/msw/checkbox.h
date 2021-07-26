@@ -20,7 +20,7 @@ public:
     wxCheckBox()  = default;
     wxCheckBox(wxWindow *parent,
                wxWindowID id,
-               const wxString& label,
+               const std::string& label,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                long style = 0,
@@ -37,7 +37,7 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& label,
+                const std::string& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
@@ -48,7 +48,7 @@ public:
     bool GetValue() const override;
 
     // override some base class virtuals
-    void SetLabel(const wxString& label) override;
+    void SetLabel(const std::string& label) override;
 
     void SetTransparentPartColour(const wxColour& col) override
     {

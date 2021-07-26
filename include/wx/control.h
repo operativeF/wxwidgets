@@ -53,7 +53,7 @@ public:
     int GetAlignment() const { return m_windowStyle & wxALIGN_MASK; }
 
     // set label with mnemonics
-    void SetLabel(const wxString& label) override
+    void SetLabel(const std::string& label) override
     {
         m_labelOrig = label;
 
@@ -197,7 +197,7 @@ protected:
 
     // this field contains the label in wx format, i.e. with '&' mnemonics,
     // as it was passed to the last SetLabel() call
-    wxString m_labelOrig;
+    std::string m_labelOrig;
 };
 
 // ----------------------------------------------------------------------------

@@ -31,14 +31,14 @@ namespace wxMSWButton
 {
 
 // returns BS_MULTILINE if the label contains new lines or 0 otherwise
-inline int GetMultilineStyle(const wxString& label)
+inline int GetMultilineStyle(std::string_view label)
 {
-    return label.find(wxT('\n')) == wxString::npos ? 0 : BS_MULTILINE;
+    return label.find('\n') == std::string_view::npos ? 0 : BS_MULTILINE;
 }
 
 // update the style of the specified HWND to include or exclude BS_MULTILINE
 // depending on whether the label contains the new lines
-void UpdateMultilineStyle(HWND hwnd, const wxString& label);
+void UpdateMultilineStyle(HWND hwnd, std::string_view label);
 
 // flags for ComputeBestSize() and GetFittingSize()
 enum

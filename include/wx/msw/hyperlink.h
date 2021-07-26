@@ -49,7 +49,7 @@ public:
 
     void SetURL(const wxString &url) override;
 
-    void SetLabel(const wxString &label) override;
+    void SetLabel(const std::string& label) override;
 
 protected:
     WXDWORD MSWGetStyle(long style, WXDWORD *exstyle) const override;

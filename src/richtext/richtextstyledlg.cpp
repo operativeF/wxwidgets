@@ -519,7 +519,7 @@ void wxRichTextStyleOrganiserDialog::ClearPreview()
     m_previewCtrl->Clear();
     wxStaticText* labelCtrl = (wxStaticText*) FindWindow(ID_RICHTEXTSTYLEORGANISERDIALOG_CURRENT_STYLE);
     if (labelCtrl)
-        labelCtrl->SetLabel(wxEmptyString);
+        labelCtrl->SetLabel("");
 }
 
 bool wxRichTextStyleOrganiserDialog::ApplyStyle(wxRichTextCtrl* ctrl)

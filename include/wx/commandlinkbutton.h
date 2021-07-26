@@ -54,8 +54,8 @@ public:
     wxCommandLinkButtonBase(const wxCommandLinkButtonBase&) = delete;
 	wxCommandLinkButtonBase& operator=(const wxCommandLinkButtonBase&) = delete;
 
-    virtual void SetMainLabelAndNote(const wxString& mainLabel,
-                                     const wxString& note) = 0;
+    virtual void SetMainLabelAndNote(const std::string& mainLabel,
+                                     const std::string& note) = 0;
 
     virtual void SetMainLabel(const wxString& mainLabel)
     {
@@ -122,8 +122,8 @@ public:
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxButtonNameStr));
 
-    void SetMainLabelAndNote(const wxString& mainLabel,
-                                     const wxString& note) override
+    void SetMainLabelAndNote(const std::string& mainLabel,
+                             const std::string& note) override
     {
         wxButton::SetLabel(mainLabel + '\n' + note);
     }

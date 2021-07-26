@@ -75,7 +75,7 @@ public:
                              const wxString& name = wxASCII_STR(wxPanelNameStr));
 
     
-    void SetLabel(const wxString& label) override;
+    void SetLabel(const std::string& label) override;
     wxString GetLabel() const override;
 
     void Raise() override;

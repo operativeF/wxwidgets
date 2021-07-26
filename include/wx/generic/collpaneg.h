@@ -61,7 +61,7 @@ public:
 
     // public wxCollapsiblePane API
     void Collapse(bool collapse = true) override;
-    void SetLabel(const wxString &label) override;
+    void SetLabel(const std::string& label) override;
 
     bool IsCollapsed() const override
         { return m_pPane==nullptr || !m_pPane->IsShown(); }

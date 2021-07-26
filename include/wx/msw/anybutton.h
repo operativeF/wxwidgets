@@ -25,7 +25,7 @@ public:
     wxAnyButton(wxAnyButton&&) = default;
     wxAnyButton& operator=(wxAnyButton&&) = default;
 
-    void SetLabel(const wxString& label) override;
+    void SetLabel(const std::string& label) override;
     bool SetBackgroundColour(const wxColour &colour) override;
     bool SetForegroundColour(const wxColour &colour) override;
 

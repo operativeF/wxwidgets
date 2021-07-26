@@ -41,7 +41,7 @@ public:
                 const wxString& name = wxASCII_STR(wxStaticTextNameStr));
 
     // override some methods to resize the window properly
-    void SetLabel(const wxString& label) override;
+    void SetLabel(const std::string& label) override;
     bool SetFont( const wxFont &font ) override;
 
     WXDWORD MSWGetStyle(long flags, WXDWORD *exstyle = nullptr) const override;

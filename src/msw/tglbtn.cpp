@@ -49,7 +49,7 @@ bool wxBitmapToggleButton::Create( wxWindow *parent, wxWindowID id,
                 const wxBitmap& label,const wxPoint& pos, const wxSize& size, long style,
                 const wxValidator& validator, const wxString& name )
 {
-    if (!wxToggleButton::Create( parent, id, wxEmptyString, pos, size, style, validator, name ))
+    if (!wxToggleButton::Create( parent, id, "", pos, size, style, validator, name ))
         return false;
 
     SetBitmap(label);
@@ -77,7 +77,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxToggleButton, wxControl);
 // Single check box item
 bool wxToggleButton::Create(wxWindow *parent,
                             wxWindowID id,
-                            const wxString& label,
+                            const std::string& label,
                             const wxPoint& pos,
                             const wxSize& size, long style,
                             const wxValidator& validator,

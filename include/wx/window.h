@@ -213,7 +213,7 @@ public:
         // label is just the same as the title (but for, e.g., buttons it
         // makes more sense to speak about labels), title access
         // is available from wxTLW classes only (frames, dialogs)
-    virtual void SetLabel(const wxString& label) = 0;
+    virtual void SetLabel(const std::string& label) = 0;
     virtual wxString GetLabel() const = 0;
 
         // the window name is used for resource setting in X, it is not the
