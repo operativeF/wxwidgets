@@ -212,7 +212,7 @@ wxEND_EVENT_TABLE()
  * wxRichTextCtrl
  */
 
-std::vector<wxString> wxRichTextCtrl::sm_availableFontNames;
+std::vector<std::string> wxRichTextCtrl::sm_availableFontNames;
 
 wxRichTextCtrl::wxRichTextCtrl()
               : wxScrollHelper(this)
@@ -3169,7 +3169,7 @@ bool wxRichTextCtrl::SelectWord(long position)
     return true;
 }
 
-wxString wxRichTextCtrl::GetStringSelection() const
+std::string wxRichTextCtrl::GetStringSelection() const
 {
     long from, to;
     GetSelection(&from, &to);
@@ -3243,18 +3243,18 @@ wxRichTextCtrl::FindContainerAtPoint(const wxPoint& pt, long& position, int& hit
 // set/get the controls text
 // ----------------------------------------------------------------------------
 
-wxString wxRichTextCtrl::DoGetValue() const
+std::string wxRichTextCtrl::DoGetValue() const
 {
     return GetBuffer().GetText();
 }
 
-wxString wxRichTextCtrl::GetRange(long from, long to) const
+std::string wxRichTextCtrl::GetRange(long from, long to) const
 {
     // Public API for range is different from internals
     return GetFocusObject()->GetTextForRange(wxRichTextRange(from, to-1));
 }
 
-void wxRichTextCtrl::DoSetValue(const wxString& value, int flags)
+void wxRichTextCtrl::DoSetValue(const std::string& value, int flags)
 {
     // Don't call Clear here, since it always sends a text updated event
     m_buffer.ResetAndClearCommands();
@@ -3273,7 +3273,7 @@ void wxRichTextCtrl::DoSetValue(const wxString& value, int flags)
         Refresh(false);
     }
 
-    if (!value.IsEmpty())
+    if (!value.empty())
     {
         // Remove empty paragraph
         GetBuffer().Clear();
@@ -3292,7 +3292,7 @@ void wxRichTextCtrl::DoSetValue(const wxString& value, int flags)
     DiscardEdits();
 }
 
-void wxRichTextCtrl::WriteText(const wxString& value)
+void wxRichTextCtrl::WriteText(const std::string& value)
 {
     DoWriteText(value);
 }
@@ -4783,7 +4783,7 @@ bool wxRichTextCtrl::Delete(const wxRichTextRange& range)
     return GetFocusObject()->DeleteRangeWithUndo(range.ToInternal(), this, & GetBuffer());
 }
 
-const std::vector<wxString>& wxRichTextCtrl::GetAvailableFontNames()
+const std::vector<std::string>& wxRichTextCtrl::GetAvailableFontNames()
 {
     if (sm_availableFontNames.size() == 0)
     {

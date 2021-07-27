@@ -90,7 +90,7 @@ public:
     void OnComboCharEvent( wxKeyEvent& event ) override;
     void OnComboDoubleClick() override;
     bool LazyCreate() override;
-    bool FindItem(const wxString& item, wxString* trueItem) override;
+    bool FindItem(std::string_view item, std::string* trueItem) override;
     virtual void OnDPIChanged(wxDPIChangedEvent& event);
 
     // Item management
@@ -104,11 +104,11 @@ public:
     void SetString( int item, const wxString& str );
     wxString GetString( int item ) const;
     unsigned int GetCount() const;
-    int FindString(const wxString& s, bool bCase = false) const;
+    int FindString(std::string_view s, bool bCase = false) const;
     int GetSelection() const;
 
     //void Populate( int n, const wxString choices[] );
-    void Populate( const std::vector<wxString>& choices );
+    void Populate( const std::vector<std::string>& choices );
     void ClearClientDatas();
 
     // helpers
@@ -176,8 +176,8 @@ protected:
     // Stop partial completion (when some other event occurs)
     void StopPartialCompletion();
 
-    std::vector<wxString>   m_strings;
-    std::vector<void*>      m_clientDatas;
+    std::vector<std::string>    m_strings;
+    std::vector<void*>          m_clientDatas;
 
     wxFont                  m_useFont;
 
@@ -250,7 +250,7 @@ public:
                          const wxString choices[],
                          long style = 0,
                          const wxValidator& validator = wxDefaultValidator,
-                         const wxString& name = wxASCII_STR(wxComboCtrlNameStr))
+                         const std::string& name = wxComboCtrlNameStr)
     {
         
 
@@ -266,17 +266,17 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxComboCtrlNameStr));
+                const std::string& name = wxComboCtrlNameStr);
 
     wxOwnerDrawnComboBox(wxWindow *parent,
                          wxWindowID id,
                          const wxString& value = wxEmptyString,
                          const wxPoint& pos = wxDefaultPosition,
                          const wxSize& size = wxDefaultSize,
-                         const std::vector<wxString>& choices = {},
+                         const std::vector<std::string>& choices = {},
                          long style = 0,
                          const wxValidator& validator = wxDefaultValidator,
-                         const wxString& name = wxASCII_STR(wxComboCtrlNameStr));
+                         const std::string& name = wxComboCtrlNameStr);
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -287,17 +287,17 @@ public:
                 const wxString choices[],
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxComboCtrlNameStr));
+                const std::string& name = wxComboCtrlNameStr);
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
                 const wxString& value,
                 const wxPoint& pos,
                 const wxSize& size,
-                const std::vector<wxString>& choices,
+                const std::vector<std::string>& choices,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxComboCtrlNameStr));
+                const std::string& name = wxComboCtrlNameStr);
 
     ~wxOwnerDrawnComboBox() override;
 
@@ -309,9 +309,9 @@ public:
 
     // wxControlWithItems methods
     unsigned int GetCount() const override;
-    wxString GetString(unsigned int n) const override;
-    void SetString(unsigned int n, const wxString& s) override;
-    int FindString(const wxString& s, bool bCase = false) const override;
+    std::string GetString(unsigned int n) const override;
+    void SetString(unsigned int n, const std::string& s) override;
+    int FindString(std::string_view s, bool bCase = false) const override;
     virtual void Select(int n);
     int GetSelection() const override;
 
@@ -377,8 +377,7 @@ protected:
         return (wxVListBoxComboPopup*) m_popupInterface;
     }
 
-    // TODO: Use std::span
-    int DoInsertItems(const wxArrayStringsAdapter& items,
+    int DoInsertItems(const std::vector<std::string>& items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
     void DoSetItemClientData(unsigned int n, void* clientData) override;
@@ -387,7 +386,7 @@ protected:
     // temporary storage for the initial choices
     //const wxString*         m_baseChoices;
     //int                     m_baseChoicesCount;
-    std::vector<wxString>           m_initChs;
+    std::vector<std::string>  m_initChs;
 
 private:
     

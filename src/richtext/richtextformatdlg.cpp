@@ -574,7 +574,7 @@ void wxRichTextFormattingDialog::SetDimensionValue(wxTextAttrDimension& dim, wxT
     {
         if (checkBox)
             checkBox->SetValue(false);
-        valueCtrl->SetValue(wxT("0"));
+        valueCtrl->SetValue("0");
         if (unitsCtrl)
             unitsCtrl->SetSelection(0);
     }
@@ -819,7 +819,7 @@ int wxRichTextFontListBox::SetFaceNameSelection(const wxString& name)
 /// Updates the font list
 void wxRichTextFontListBox::UpdateFonts()
 {
-    std::vector<wxString> facenames = wxRichTextCtrl::GetAvailableFontNames();
+    std::vector<std::string> facenames = wxRichTextCtrl::GetAvailableFontNames();
     m_faceNames = facenames;
     std::sort(m_faceNames.begin(), m_faceNames.end());
 

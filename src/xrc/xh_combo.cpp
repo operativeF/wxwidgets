@@ -68,7 +68,7 @@ wxObject *wxComboBoxXmlHandler::DoCreateResource()
         if ( !hint.empty() )
             control->SetHint(hint);
 
-        strList.Clear();    // dump the strings
+        strList.clear();    // dump the strings
 
         return control;
     }
@@ -78,7 +78,7 @@ wxObject *wxComboBoxXmlHandler::DoCreateResource()
         // handle <item>Label</item>
 
         // add to the list
-        strList.Add(GetNodeText(m_node, wxXRC_TEXT_NO_ESCAPE));
+        strList.push_back(GetNodeText(m_node, wxXRC_TEXT_NO_ESCAPE));
 
         return nullptr;
     }

@@ -535,13 +535,13 @@ public:
     //
     // The first two conversions can be disabled by using wxXRC_TEXT_NO_ESCAPE
     // in flags and the last one -- by using wxXRC_TEXT_NO_TRANSLATE.
-    wxString GetNodeText(const wxXmlNode *node, int flags = 0) override;
+    std::string GetNodeText(const wxXmlNode *node, int flags = 0) override;
 
     // Returns the XRCID.
     int GetID() override;
 
     // Returns the resource name.
-    wxString GetName() override;
+    std::string GetName() override;
 
     // Gets a bool flag (1, t, yes, on, true are true, everything else is false).
     bool GetBool(const wxString& param, bool defaultv = false) override;
@@ -610,7 +610,7 @@ public:
     wxFont GetFont(const wxString& param = wxT("font"), wxWindow* parent = nullptr) override;
 
     // Gets the value of a boolean attribute (only "0" and "1" are valid values)
-    bool GetBoolAttr(const wxString& attr, bool defaultv) override;
+    bool GetBoolAttr(std::string_view attr, bool defaultv) override;
 
     // Gets a file path from the given node, expanding environment variables in
     // it if wxXRC_USE_ENVVARS is in use.

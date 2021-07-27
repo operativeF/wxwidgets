@@ -27,6 +27,8 @@
 #include "wx/msw/subwin.h"
 #include "wx/renderer.h"
 
+#include "boost/nowide/convert.hpp"
+
 #if wxUSE_TOOLTIPS
     #include "wx/tooltip.h"
 #endif // wxUSE_TOOLTIPS
@@ -346,11 +348,11 @@ unsigned int wxRadioBox::GetCount() const
     return m_radioButtons ? m_radioButtons->GetCount() : 0u;
 }
 
-void wxRadioBox::SetString(unsigned int item, const wxString& label)
+void wxRadioBox::SetString(unsigned int item, const std::string& label)
 {
     wxCHECK_RET( IsValid(item), wxT("invalid radiobox index") );
 
-    ::SetWindowText((*m_radioButtons)[item], label.c_str());
+    ::SetWindowTextW((*m_radioButtons)[item], boost::nowide::widen(label).c_str());
 
     InvalidateBestSize();
 }
@@ -361,18 +363,18 @@ void wxRadioBox::SetSelection(int N)
 
     // unselect the old button
     if ( m_selectedButton != wxNOT_FOUND )
-        ::SendMessage((*m_radioButtons)[m_selectedButton], BM_SETCHECK, 0, 0L);
+        ::SendMessageW((*m_radioButtons)[m_selectedButton], BM_SETCHECK, 0, 0L);
 
     // and select the new one
-    ::SendMessage((*m_radioButtons)[N], BM_SETCHECK, 1, 0L);
+    ::SendMessageW((*m_radioButtons)[N], BM_SETCHECK, 1, 0L);
 
     m_selectedButton = N;
 }
 
 // Find string for position
-wxString wxRadioBox::GetString(unsigned int item) const
+std::string wxRadioBox::GetString(unsigned int item) const
 {
-    wxCHECK_MSG( IsValid(item), wxEmptyString,
+    wxCHECK_MSG( IsValid(item), "",
                  wxT("invalid radiobox index") );
 
     return wxGetWindowText((*m_radioButtons)[item]);

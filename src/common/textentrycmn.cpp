@@ -62,7 +62,7 @@ public:
 
     // Get the real text of the control such as it was before we replaced it
     // with the hint.
-    const wxString& GetText() const { return m_text; }
+    const std::string& GetText() const { return m_text; }
 
     // Set the hint to show, shouldn't be empty normally.
     //
@@ -188,15 +188,15 @@ wxTextEntryBase::~wxTextEntryBase()
 // text accessors
 // ----------------------------------------------------------------------------
 
-wxString wxTextEntryBase::GetValue() const
+std::string wxTextEntryBase::GetValue() const
 {
     return m_hintData ? m_hintData->GetText() : DoGetValue();
 }
 
-wxString wxTextEntryBase::GetRange(long from, long to) const
+std::string wxTextEntryBase::GetRange(long from, long to) const
 {
-    wxString sel;
-    wxString value = GetValue();
+    std::string sel;
+    std::string value = GetValue();
 
     if ( from < to && (long)value.length() >= to )
     {
@@ -210,7 +210,7 @@ wxString wxTextEntryBase::GetRange(long from, long to) const
 // text operations
 // ----------------------------------------------------------------------------
 
-void wxTextEntryBase::ChangeValue(const wxString& value)
+void wxTextEntryBase::ChangeValue(const std::string& value)
 {
     DoSetValue(value, SetValue_NoEvent);
 
@@ -226,7 +226,7 @@ void wxTextEntryBase::AppendText(const wxString& text)
     WriteText(text);
 }
 
-void wxTextEntryBase::DoSetValue(const wxString& value, int flags)
+void wxTextEntryBase::DoSetValue(const std::string& value, int flags)
 {
     if ( value != DoGetValue() )
     {
@@ -278,7 +278,7 @@ void wxTextEntryBase::RemoveSelection()
         Remove(from, to);
 }
 
-wxString wxTextEntryBase::GetStringSelection() const
+std::string wxTextEntryBase::GetStringSelection() const
 {
     long from, to;
     GetSelection(&from, &to);

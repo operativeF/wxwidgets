@@ -42,7 +42,7 @@ public:
     wxListBoxBase(wxListBoxBase&&) = default;
     wxListBoxBase& operator=(wxListBoxBase&&) = default;
 
-    void InsertItems(const std::vector<wxString>& items, unsigned int pos)
+    void InsertItems(const std::vector<std::string>& items, unsigned int pos)
         { Insert(items, pos); }
 
     // multiple selection logic
@@ -52,8 +52,8 @@ public:
     void Deselect(int n) { DoSetSelection(n, false); }
     void DeselectAll(int itemToLeaveSelected = -1);
 
-    virtual bool SetStringSelection(const wxString& s, bool select);
-    virtual bool SetStringSelection(const wxString& s)
+    virtual bool SetStringSelection(std::string_view s, bool select);
+    virtual bool SetStringSelection(std::string_view s)
     {
         return SetStringSelection(s, true);
     }
@@ -65,7 +65,7 @@ public:
     // set the specified item at the first visible item or scroll to max
     // range.
     void SetFirstItem(int n) { DoSetFirstItem(n); }
-    void SetFirstItem(const wxString& s);
+    void SetFirstItem(std::string_view s);
 
     // ensures that the given item is visible scrolling the listbox if
     // necessary

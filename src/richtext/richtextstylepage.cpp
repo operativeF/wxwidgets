@@ -115,8 +115,8 @@ void wxRichTextStylePage::CreateControls()
     wxStaticText* itemStaticText8 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Based on:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer5->Add(itemStaticText8, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    wxArrayString m_basedOnStrings;
-    m_basedOn = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTSTYLEPAGE_BASED_ON, wxEmptyString, wxDefaultPosition, wxSize(300, -1), m_basedOnStrings, wxCB_DROPDOWN );
+    std::vector<std::string> m_basedOnStrings;
+    m_basedOn = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTSTYLEPAGE_BASED_ON, "", wxDefaultPosition, wxSize(300, -1), m_basedOnStrings, wxCB_DROPDOWN );
     m_basedOn->SetHelpText(_("The style on which this style is based."));
     if (wxRichTextStylePage::ShowToolTips())
         m_basedOn->SetToolTip(_("The style on which this style is based."));
@@ -125,8 +125,8 @@ void wxRichTextStylePage::CreateControls()
     wxStaticText* itemStaticText10 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Next style:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer5->Add(itemStaticText10, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    wxArrayString m_nextStyleStrings;
-    m_nextStyle = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTSTYLEPAGE_NEXT_STYLE, wxEmptyString, wxDefaultPosition, wxSize(300, -1), m_nextStyleStrings, wxCB_DROPDOWN );
+    std::vector<std::string> m_nextStyleStrings;
+    m_nextStyle = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTSTYLEPAGE_NEXT_STYLE, "", wxDefaultPosition, wxSize(300, -1), m_nextStyleStrings, wxCB_DROPDOWN );
     m_nextStyle->SetHelpText(_("The default style for the next paragraph."));
     if (wxRichTextStylePage::ShowToolTips())
         m_nextStyle->SetToolTip(_("The default style for the next paragraph."));

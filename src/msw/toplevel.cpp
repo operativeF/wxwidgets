@@ -975,12 +975,12 @@ bool wxTopLevelWindowMSW::ShowFullScreen(bool show, long style)
 // wxTopLevelWindowMSW misc
 // ----------------------------------------------------------------------------
 
-void wxTopLevelWindowMSW::SetTitle( const wxString& title)
+void wxTopLevelWindowMSW::SetTitle( const std::string& title)
 {
     SetLabel(title);
 }
 
-wxString wxTopLevelWindowMSW::GetTitle() const
+std::string wxTopLevelWindowMSW::GetTitle() const
 {
     return GetLabel();
 }

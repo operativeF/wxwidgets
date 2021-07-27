@@ -56,9 +56,9 @@ public:
     wxListBox& operator=(wxListBox&&) = default;
 
     unsigned int GetCount() const override;
-    wxString GetString(unsigned int n) const override;
-    void SetString(unsigned int n, const wxString& s) override;
-    int FindString(const wxString& s, bool bCase = false) const override;
+    std::string GetString(unsigned int n) const override;
+    void SetString(unsigned int n, const std::string& s) override;
+    int FindString(std::string_view s, bool bCase = false) const override;
 
     bool IsSelected(int n) const override;
     int GetSelection() const override;
@@ -153,7 +153,7 @@ protected:
 
     void DoSetSelection(int n, bool select) override;
 
-    int DoInsertItems(const wxArrayStringsAdapter& items,
+    int DoInsertItems(const std::vector<std::string>& items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
 

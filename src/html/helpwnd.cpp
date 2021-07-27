@@ -317,7 +317,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
         ReadCustomization(m_Config, m_ConfigRoot);
 #endif // wxUSE_CONFIG
 
-    wxWindow::Create(parent, id, pos, size, style, wxT("wxHtmlHelp"));
+    wxWindow::Create(parent, id, pos, size, style, "wxHtmlHelp");
 
     SetHelpText(_("Displays help as you browse the books on the left."));
 
@@ -414,7 +414,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
 
 #endif
             m_Bookmarks = new wxComboBox(dummy, wxID_HTML_BOOKMARKSLIST,
-                                         wxEmptyString,
+                                         "",
                                          wxDefaultPosition, wxDefaultSize,
                                          {}, comboStyle);
             m_Bookmarks->Append(_("(bookmarks)"));
@@ -1208,11 +1208,11 @@ public:
         sizer->Add(new wxStaticText(this, wxID_ANY, _("Fixed font:")));
         sizer->Add(new wxStaticText(this, wxID_ANY, _("Font size:")));
 
-        sizer->Add(NormalFont = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition,
+        sizer->Add(NormalFont = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition,
                       wxSize(200, wxDefaultCoord),
                       {}, wxCB_DROPDOWN | wxCB_READONLY));
 
-        sizer->Add(FixedFont = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition,
+        sizer->Add(FixedFont = new wxComboBox(this, wxID_ANY, "", wxDefaultPosition,
                       wxSize(200, wxDefaultCoord),
                       {}, wxCB_DROPDOWN | wxCB_READONLY));
 
@@ -1301,12 +1301,12 @@ void wxHtmlHelpWindow::OptionsDialog()
 
     if (m_NormalFonts == nullptr)
     {
-        m_NormalFonts = new std::vector<wxString>(wxFontEnumerator::GetFacenames());
+        m_NormalFonts = new std::vector<std::string>(wxFontEnumerator::GetFacenames());
         std::sort(m_NormalFonts->begin(), m_NormalFonts->end()); // ascending sort
     }
     if (m_FixedFonts == nullptr)
     {
-        m_FixedFonts = new std::vector<wxString>(
+        m_FixedFonts = new std::vector<std::string>(
                     wxFontEnumerator::GetFacenames(wxFONTENCODING_SYSTEM,
                     true /*enum fixed width only*/));
         std::sort(m_FixedFonts->begin(), m_FixedFonts->end()); // ascending sort

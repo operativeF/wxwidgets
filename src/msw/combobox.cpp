@@ -176,7 +176,7 @@ WXLRESULT wxComboBox::MSWWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM lPara
                 // list, it tries to autocomplete it from the list when it is
                 // resized, but we don't want this to happen as it doesn't seem
                 // to make any sense, so we forcefully restore the old text
-                wxString textOld;
+                std::string textOld;
                 if ( !HasFlag(wxCB_READONLY) && GetCurrentSelection() == -1 )
                     textOld = GetValue();
 
@@ -446,10 +446,10 @@ wxWindow *wxComboBox::GetEditableWindow()
 // ----------------------------------------------------------------------------
 
 bool wxComboBox::Create(wxWindow *parent, wxWindowID id,
-                        const wxString& value,
+                        const std::string& value,
                         const wxPoint& pos,
                         const wxSize& size,
-                        const std::vector<wxString>& choices,
+                        const std::vector<std::string>& choices,
                         long style,
                         const wxValidator& validator,
                         const wxString& name)
@@ -518,13 +518,13 @@ WXDWORD wxComboBox::MSWGetStyle(long style, WXDWORD *exstyle) const
 // wxComboBox text control-like methods
 // ----------------------------------------------------------------------------
 
-wxString wxComboBox::GetValue() const
+std::string wxComboBox::GetValue() const
 {
     return HasFlag(wxCB_READONLY) ? GetStringSelection()
                                   : wxTextEntry::GetValue();
 }
 
-void wxComboBox::SetValue(const wxString& value)
+void wxComboBox::SetValue(const std::string& value)
 {
     if ( HasFlag(wxCB_READONLY) )
         SetStringSelection(value);

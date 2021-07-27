@@ -336,7 +336,7 @@ bool wxRichTextObject::ImportFromXML(wxRichTextBuffer* WXUNUSED(buffer), wxXmlNo
     handler->GetHelper().ImportProperties(GetProperties(), node);
     handler->GetHelper().ImportStyle(GetAttributes(), node, UsesParagraphAttributes());
 
-    wxString value = node->GetAttribute(wxT("show"), wxEmptyString);
+    wxString value = node->GetAttribute("show", "");
     if (!value.IsEmpty())
         Show(value == wxT("1"));
 
@@ -696,7 +696,7 @@ bool wxRichTextImage::ImportFromXML(wxRichTextBuffer* buffer, wxXmlNode* node, w
     wxRichTextObject::ImportFromXML(buffer, node, handler, recurse);
 
     wxBitmapType imageType = wxBITMAP_TYPE_PNG;
-    wxString value = node->GetAttribute(wxT("imagetype"), wxEmptyString);
+    wxString value = node->GetAttribute("imagetype", "");
     if (!value.empty())
     {
         int type = wxAtoi(value);
@@ -845,7 +845,7 @@ bool wxRichTextParagraphLayoutBox::ImportFromXML(wxRichTextBuffer* buffer, wxXml
 
     *recurse = true;
 
-    wxString partial = node->GetAttribute(wxT("partialparagraph"), wxEmptyString);
+    wxString partial = node->GetAttribute("partialparagraph", "");
     if (partial == wxT("true"))
         SetPartialParagraph(true);
 
@@ -853,8 +853,8 @@ bool wxRichTextParagraphLayoutBox::ImportFromXML(wxRichTextBuffer* buffer, wxXml
     if (child && (handler->GetFlags() & wxRICHTEXT_HANDLER_INCLUDE_STYLESHEET))
     {
         wxRichTextStyleSheet* sheet = new wxRichTextStyleSheet;
-        wxString sheetName = child->GetAttribute(wxT("name"), wxEmptyString);
-        wxString sheetDescription = child->GetAttribute(wxT("description"), wxEmptyString);
+        wxString sheetName = child->GetAttribute("name", "");
+        wxString sheetDescription = child->GetAttribute("description", "");
         sheet->SetName(sheetName);
         sheet->SetDescription(sheetDescription);
 
@@ -939,8 +939,8 @@ bool wxRichTextTable::ImportFromXML(wxRichTextBuffer* buffer, wxXmlNode* node, w
 
     *recurse = false;
 
-    m_rowCount = wxAtoi(node->GetAttribute(wxT("rows"), wxEmptyString));
-    m_colCount = wxAtoi(node->GetAttribute(wxT("cols"), wxEmptyString));
+    m_rowCount = wxAtoi(node->GetAttribute("rows", ""));
+    m_colCount = wxAtoi(node->GetAttribute("cols", ""));
 
     wxXmlNode* child = node->GetChildren();
     while (child)
@@ -1733,8 +1733,8 @@ bool wxRichTextXMLHelper::ImportStyle(wxRichTextAttr& attr, wxXmlNode* node, boo
 bool wxRichTextXMLHelper::ImportStyleDefinition(wxRichTextStyleSheet* sheet, wxXmlNode* node)
 {
     wxString styleType = node->GetName();
-    wxString styleName = node->GetAttribute(wxT("name"), wxEmptyString);
-    wxString baseStyleName = node->GetAttribute(wxT("basestyle"), wxEmptyString);
+    wxString styleName = node->GetAttribute("name", "");
+    wxString baseStyleName = node->GetAttribute("basestyle", "");
 
     if (styleName.empty())
         return false;
@@ -1764,7 +1764,7 @@ bool wxRichTextXMLHelper::ImportStyleDefinition(wxRichTextStyleSheet* sheet, wxX
     {
         wxRichTextParagraphStyleDefinition* def = new wxRichTextParagraphStyleDefinition(styleName);
 
-        wxString nextStyleName = node->GetAttribute(wxT("nextstyle"), wxEmptyString);
+        wxString nextStyleName = node->GetAttribute("nextstyle", "");
         def->SetNextStyle(nextStyleName);
         def->SetBaseStyle(baseStyleName);
 
@@ -1810,7 +1810,7 @@ bool wxRichTextXMLHelper::ImportStyleDefinition(wxRichTextStyleSheet* sheet, wxX
     {
         wxRichTextListStyleDefinition* def = new wxRichTextListStyleDefinition(styleName);
 
-        wxString nextStyleName = node->GetAttribute(wxT("nextstyle"), wxEmptyString);
+        wxString nextStyleName = node->GetAttribute("nextstyle", "");
         def->SetNextStyle(nextStyleName);
         def->SetBaseStyle(baseStyleName);
 
@@ -1822,7 +1822,7 @@ bool wxRichTextXMLHelper::ImportStyleDefinition(wxRichTextStyleSheet* sheet, wxX
                 wxRichTextAttr attr;
                 ImportStyle(attr, child, true);
 
-                wxString styleLevel = child->GetAttribute(wxT("level"), wxEmptyString);
+                wxString styleLevel = child->GetAttribute("level", "");
                 if (styleLevel.empty())
                 {
                     def->SetStyle(attr);
@@ -1859,9 +1859,9 @@ bool wxRichTextXMLHelper::ImportProperties(wxRichTextProperties& properties, wxX
             {
                 if (propertyChild->GetName() == wxT("property"))
                 {
-                    wxString name = propertyChild->GetAttribute(wxT("name"), wxEmptyString);
-                    wxString value = propertyChild->GetAttribute(wxT("value"), wxEmptyString);
-                    wxString type = propertyChild->GetAttribute(wxT("type"), wxEmptyString);
+                    wxString name = propertyChild->GetAttribute("name", "");
+                    wxString value = propertyChild->GetAttribute("value", "");
+                    wxString type = propertyChild->GetAttribute("type", "");
 
                     wxVariant var = MakePropertyFromString(name, value, type);
                     if (!var.IsNull())

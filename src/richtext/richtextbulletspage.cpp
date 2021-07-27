@@ -182,10 +182,10 @@ void wxRichTextBulletsPage::CreateControls()
     wxStaticText* itemStaticText13 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("Bullet &Alignment:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer5->Add(itemStaticText13, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    wxArrayString m_bulletAlignmentCtrlStrings;
-    m_bulletAlignmentCtrlStrings.Add(_("Left"));
-    m_bulletAlignmentCtrlStrings.Add(_("Centre"));
-    m_bulletAlignmentCtrlStrings.Add(_("Right"));
+    std::vector<std::string> m_bulletAlignmentCtrlStrings;
+    m_bulletAlignmentCtrlStrings.push_back("Left");
+    m_bulletAlignmentCtrlStrings.push_back("Centre");
+    m_bulletAlignmentCtrlStrings.push_back("Right");
     m_bulletAlignmentCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_BULLETALIGNMENTCTRL, _("Left"), wxDefaultPosition, wxSize(60, -1), m_bulletAlignmentCtrlStrings, wxCB_READONLY );
     m_bulletAlignmentCtrl->SetStringSelection(_("Left"));
     m_bulletAlignmentCtrl->SetHelpText(_("The bullet character."));
@@ -209,8 +209,8 @@ void wxRichTextBulletsPage::CreateControls()
     wxStaticText* itemStaticText20 = new wxStaticText( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_SYMBOLSTATIC, _("&Symbol:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer19->Add(itemStaticText20, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
-    wxArrayString m_symbolCtrlStrings;
-    m_symbolCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_SYMBOLCTRL, wxEmptyString, wxDefaultPosition, wxSize(60, -1), m_symbolCtrlStrings, wxCB_DROPDOWN );
+    std::vector<std::string> m_symbolCtrlStrings;
+    m_symbolCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_SYMBOLCTRL, "", wxDefaultPosition, wxSize(60, -1), m_symbolCtrlStrings, wxCB_DROPDOWN );
     m_symbolCtrl->SetHelpText(_("The bullet character."));
     if (wxRichTextBulletsPage::ShowToolTips())
         m_symbolCtrl->SetToolTip(_("The bullet character."));
@@ -227,8 +227,8 @@ void wxRichTextBulletsPage::CreateControls()
     wxStaticText* itemStaticText24 = new wxStaticText( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_SYMBOLSTATIC, _("Symbol &font:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer18->Add(itemStaticText24, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    wxArrayString m_symbolFontCtrlStrings;
-    m_symbolFontCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_SYMBOLFONTCTRL, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_symbolFontCtrlStrings, wxCB_DROPDOWN );
+    std::vector<std::string> m_symbolFontCtrlStrings;
+    m_symbolFontCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_SYMBOLFONTCTRL, "", wxDefaultPosition, wxDefaultSize, m_symbolFontCtrlStrings, wxCB_DROPDOWN );
     m_symbolFontCtrl->SetHelpText(_("Available fonts."));
     if (wxRichTextBulletsPage::ShowToolTips())
         m_symbolFontCtrl->SetToolTip(_("Available fonts."));
@@ -239,8 +239,8 @@ void wxRichTextBulletsPage::CreateControls()
     wxStaticText* itemStaticText27 = new wxStaticText( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_NAMESTATIC, _("S&tandard bullet name:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer18->Add(itemStaticText27, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    wxArrayString m_bulletNameCtrlStrings;
-    m_bulletNameCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_NAMECTRL, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_bulletNameCtrlStrings, wxCB_DROPDOWN );
+    std::vector<std::string> m_bulletNameCtrlStrings;
+    m_bulletNameCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_NAMECTRL, "", wxDefaultPosition, wxDefaultSize, m_bulletNameCtrlStrings, wxCB_DROPDOWN );
     m_bulletNameCtrl->SetHelpText(_("A standard bullet name."));
     if (wxRichTextBulletsPage::ShowToolTips())
         m_bulletNameCtrl->SetToolTip(_("A standard bullet name."));
@@ -287,15 +287,16 @@ void wxRichTextBulletsPage::CreateControls()
     m_symbolCtrl->Append(_("+"));
     m_symbolCtrl->Append(_("~"));
 
-    wxArrayString standardBulletNames;
+    std::vector<std::string> standardBulletNames;
     if (wxRichTextBuffer::GetRenderer())
         wxRichTextBuffer::GetRenderer()->EnumerateStandardBulletNames(standardBulletNames);
 
     size_t i;
-    for (i = 0; i < standardBulletNames.GetCount(); i++)
+    for (i = 0; i < standardBulletNames.size(); i++)
         m_bulletNameCtrl->Append(wxGetTranslation(standardBulletNames[i]));
 
-    std::vector<wxString> facenames = wxRichTextCtrl::GetAvailableFontNames();
+    // FIXME: unicode
+    std::vector<std::string> facenames = wxRichTextCtrl::GetAvailableFontNames();
     std::sort(facenames.begin(), facenames.end());
 
     m_symbolFontCtrl->Append(facenames);
@@ -352,7 +353,7 @@ bool wxRichTextBulletsPage::TransferDataFromWindow()
         else if (index == wxRICHTEXT_BULLETINDEX_BITMAP)
         {
             bulletStyle |= wxTEXT_ATTR_BULLET_STYLE_BITMAP;
-            if (m_bulletNameCtrl->GetValue().IsEmpty())
+            if (m_bulletNameCtrl->GetValue().empty())
                 attr->SetFlags(attr->GetFlags() & ~wxTEXT_ATTR_BULLET_NAME);
             else
                 attr->SetBulletName(m_bulletNameCtrl->GetValue());
@@ -361,7 +362,7 @@ bool wxRichTextBulletsPage::TransferDataFromWindow()
         else if (index == wxRICHTEXT_BULLETINDEX_STANDARD)
         {
             bulletStyle |= wxTEXT_ATTR_BULLET_STYLE_STANDARD;
-            wxArrayString standardBulletNames;
+            std::vector<std::string> standardBulletNames;
             if (wxRichTextBuffer::GetRenderer() && m_bulletNameCtrl->GetSelection() != wxNOT_FOUND)
             {
                 int sel = m_bulletNameCtrl->GetSelection();
@@ -370,7 +371,7 @@ bool wxRichTextBulletsPage::TransferDataFromWindow()
                 // Try to get the untranslated name using the current selection index of the combobox.
                 // into account.
                 wxRichTextBuffer::GetRenderer()->EnumerateStandardBulletNames(standardBulletNames);
-                if (sel < (int) standardBulletNames.GetCount() && m_bulletNameCtrl->GetValue() == selName)
+                if (sel < (int) standardBulletNames.size() && m_bulletNameCtrl->GetValue() == selName)
                     attr->SetBulletName(standardBulletNames[sel]);
                 else
                     attr->SetBulletName(m_bulletNameCtrl->GetValue());
@@ -486,7 +487,7 @@ bool wxRichTextBulletsPage::TransferDataToWindow()
         m_symbolFontCtrl->SetValue(attr->GetBulletFont());
     }
     else
-        m_symbolCtrl->SetValue(wxEmptyString);
+        m_symbolCtrl->SetValue("");
 
     if (attr->HasBulletNumber())
         m_numberCtrl->SetValue(attr->GetBulletNumber());
@@ -495,13 +496,13 @@ bool wxRichTextBulletsPage::TransferDataToWindow()
 
     if (attr->HasBulletName())
     {
-        wxArrayString standardBulletNames;
+        std::vector<std::string> standardBulletNames;
         if (wxRichTextBuffer::GetRenderer())
         {
             // Try to set the control by index in order to take translated combo control strings
             // into account.
             wxRichTextBuffer::GetRenderer()->EnumerateStandardBulletNames(standardBulletNames);
-            int idx = standardBulletNames.Index(attr->GetBulletName());
+            int idx = std::distance(standardBulletNames.begin(), std::find(standardBulletNames.begin(), standardBulletNames.end(), attr->GetBulletName()));
             if (idx != -1 && idx < (int) m_bulletNameCtrl->GetCount())
                 m_bulletNameCtrl->SetSelection(idx);
             else
@@ -511,7 +512,7 @@ bool wxRichTextBulletsPage::TransferDataToWindow()
             m_bulletNameCtrl->SetValue(attr->GetBulletName());
     }
     else
-        m_bulletNameCtrl->SetValue(wxEmptyString);
+        m_bulletNameCtrl->SetValue("");
 
     UpdatePreview();
 
@@ -523,13 +524,13 @@ bool wxRichTextBulletsPage::TransferDataToWindow()
 /// Updates the bullet preview
 void wxRichTextBulletsPage::UpdatePreview()
 {
-    static constexpr wxChar s_para1[] = wxT("Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\n");
+    static constexpr char s_para1[] = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.\n";
 
-    static constexpr wxChar s_para2[] = wxT("Duis pharetra consequat dui. Cum sociis natoque penatibus \
-et magnis dis parturient montes, nascetur ridiculus mus. Nullam vitae justo id mauris lobortis interdum.\n");
+    static constexpr char s_para2[] = "Duis pharetra consequat dui. Cum sociis natoque penatibus \
+et magnis dis parturient montes, nascetur ridiculus mus. Nullam vitae justo id mauris lobortis interdum.\n";
 
-    static constexpr wxChar s_para3[] = wxT("Integer convallis dolor at augue \
-iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n");
+    static constexpr char s_para3[] = "Integer convallis dolor at augue \
+iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
 
     TransferDataFromWindow();
     wxRichTextAttr attr(*GetAttributes());

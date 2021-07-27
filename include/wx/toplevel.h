@@ -180,8 +180,8 @@ public:
 
     // the title of the top level window: the text which the
     // window shows usually at the top of the frame/dialog in dedicated bar
-    virtual void SetTitle(const wxString& title) = 0;
-    virtual wxString GetTitle() const = 0;
+    virtual void SetTitle(const std::string& title) = 0;
+    virtual std::string GetTitle() const = 0;
 
     // enable/disable close button [x]
     virtual bool EnableCloseButton(bool WXUNUSED(enable) = true) { return false; }

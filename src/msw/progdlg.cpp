@@ -25,6 +25,8 @@
 #include "wx/msw/private/msgdlg.h"
 #include "wx/evtloop.h"
 
+#include "boost/nowide/convert.hpp"
+
 using namespace wxMSWMessageDialog;
 
 #ifdef wxHAS_MSW_TASKDIALOG
@@ -64,7 +66,7 @@ struct wxProgressDialogSharedData
     long m_style;           // wxProgressDialog style
     int m_value{0};
     int m_range;
-    wxString m_title;
+    std::string m_title;
     wxString m_message;
     wxString m_expandedInformation;
     wxString m_labelCancel; // Privately used by callback.
@@ -265,7 +267,7 @@ void PerformNotificationUpdates(HWND hwnd,
     }
 
     if ( sharedData->m_notifications & wxSPDD_TITLE_CHANGED )
-        ::SetWindowText( hwnd, sharedData->m_title.t_str() );
+        ::SetWindowTextW( hwnd, boost::nowide::widen(sharedData->m_title).c_str() );
 
     if ( sharedData->m_notifications & wxSPDD_ICON_CHANGED )
     {
@@ -731,7 +733,7 @@ bool wxProgressDialog::WasCancelled() const
     return wxGenericProgressDialog::WasCancelled();
 }
 
-void wxProgressDialog::SetTitle(const wxString& title)
+void wxProgressDialog::SetTitle(const std::string& title)
 {
 #ifdef wxHAS_MSW_TASKDIALOG
     if ( HasNativeTaskDialog() )
@@ -750,7 +752,7 @@ void wxProgressDialog::SetTitle(const wxString& title)
     wxGenericProgressDialog::SetTitle(title);
 }
 
-wxString wxProgressDialog::GetTitle() const
+std::string wxProgressDialog::GetTitle() const
 {
 #ifdef wxHAS_MSW_TASKDIALOG
     if ( HasNativeTaskDialog() )
@@ -1029,7 +1031,7 @@ void* wxProgressDialogTaskRunner::Entry()
         // icon, even if this comes at the price of attaching this thread input
         // to the thread that created the parent window, i.e. the main thread.
         wxTdc.parent = m_sharedData.m_parent;
-        wxTdc.caption = m_sharedData.m_title.wx_str();
+        wxTdc.caption = m_sharedData.m_title;
 
         // Split the message into the title and main body text in the same way
         // as it's done later in PerformNotificationUpdates() when the message

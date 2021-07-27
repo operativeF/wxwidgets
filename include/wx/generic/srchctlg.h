@@ -62,7 +62,7 @@ public:
     void SetDescriptiveText(const wxString& text) override;
     wxString GetDescriptiveText() const override;
 
-    wxString GetRange(long from, long to) const override;
+    std::string GetRange(long from, long to) const override;
 
     int GetLineLength(long lineNo) const override;
     wxString GetLineText(long lineNo) const override;
@@ -78,9 +78,9 @@ public:
     // If the return values from and to are the same, there is no selection.
     void GetSelection(long* from, long* to) const override;
 
-    wxString GetStringSelection() const override;
+    std::string GetStringSelection() const override;
 
-    void ChangeValue(const wxString& value) override;
+    void ChangeValue(const std::string& value) override;
 
     // editing
     void Clear() override;
@@ -101,7 +101,7 @@ public:
 
     // writing text inserts it at the current position, appending always
     // inserts it at the end
-    void WriteText(const wxString& text) override;
+    void WriteText(const std::string& text) override;
     void AppendText(const wxString& text) override;
 
     // insert the character which would have resulted from this key event,
@@ -178,8 +178,8 @@ public:
 #endif // wxUSE_MENUS
 
 protected:
-    void DoSetValue(const wxString& value, int flags) override;
-    wxString DoGetValue() const override;
+    void DoSetValue(const std::string& value, int flags) override;
+    std::string DoGetValue() const override;
 
     bool DoLoadFile(const wxString& file, int fileType) override;
     bool DoSaveFile(const wxString& file, int fileType) override;

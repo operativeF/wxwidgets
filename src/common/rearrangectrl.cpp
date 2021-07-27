@@ -175,11 +175,11 @@ void wxRearrangeList::OnCheck(wxCommandEvent& event)
         m_order[n] = ~m_order[n];
 }
 
-int wxRearrangeList::DoInsertItems(const wxArrayStringsAdapter& items, unsigned int pos,
+int wxRearrangeList::DoInsertItems(const std::vector<std::string>& items, unsigned int pos,
                                    void **clientData, wxClientDataType type)
 {
     int ret = wxCheckListBox::DoInsertItems(items, pos, clientData, type);
-    const size_t numItems = items.GetCount();
+    const size_t numItems = items.size();
     for ( size_t i = 0; i < numItems; i++ )
     {
         // Item is not checked initially.

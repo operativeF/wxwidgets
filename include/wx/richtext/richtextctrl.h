@@ -242,7 +242,7 @@ public:
         The end point of range is specified as the last character position of
         the span of text, plus one.
     */
-    wxString GetRange(long from, long to) const override;
+    std::string GetRange(long from, long to) const override;
 
     /**
         Returns the length of the specified line in characters.
@@ -295,7 +295,7 @@ public:
     /**
         Returns the text within the current selection range, if any.
     */
-    wxString GetStringSelection() const override;
+    std::string GetStringSelection() const override;
 
     /**
         Gets the current filename associated with the control.
@@ -611,7 +611,7 @@ public:
     /**
         Writes text at the current position.
     */
-    void WriteText(const wxString& text) override;
+    void WriteText(const std::string& text) override;
 
     /**
         Sets the insertion point to the end of the buffer and writes the text.
@@ -2220,7 +2220,7 @@ public:
     /**
         Font names take a long time to retrieve, so cache them (on demand).
     */
-    static const std::vector<wxString>& GetAvailableFontNames();
+    static const std::vector<std::string>& GetAvailableFontNames();
 
     /**
         Clears the cache of available font names.
@@ -2230,7 +2230,7 @@ public:
     WX_FORWARD_TO_SCROLL_HELPER()
 
     // implement wxTextEntry methods
-    wxString DoGetValue() const override;
+    std::string DoGetValue() const override;
 
     /**
         Do delayed image loading and garbage-collect other images
@@ -2279,7 +2279,7 @@ protected:
     */
     wxSize DoGetBestSize() const override ;
 
-    void DoSetValue(const wxString& value, int flags = 0) override;
+    void DoSetValue(const std::string& value, int flags = 0) override;
 
     void DoThaw() override;
 
@@ -2358,7 +2358,7 @@ protected:
     wxCursor                m_textCursor;
     wxCursor                m_urlCursor;
 
-    static std::vector<wxString>    sm_availableFontNames;
+    static std::vector<std::string>    sm_availableFontNames;
 
     wxRichTextContextMenuPropertiesInfo m_contextMenuPropertiesInfo;
 

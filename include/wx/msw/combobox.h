@@ -25,10 +25,10 @@ public:
     wxComboBox() = default;
 
     wxComboBox(wxWindow *parent, wxWindowID id,
-            const wxString& value = wxEmptyString,
+            const std::string& value = "",
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
-            const std::vector<wxString>& choices = {},
+            const std::vector<std::string>& choices = {},
             long style = 0,
             const wxValidator& validator = wxDefaultValidator,
             const wxString& name = wxASCII_STR(wxComboBoxNameStr))
@@ -43,10 +43,10 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& value,
+                const std::string& value,
                 const wxPoint& pos,
                 const wxSize& size,
-                const std::vector<wxString>& choices,
+                const std::vector<std::string>& choices,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxComboBoxNameStr));
@@ -58,9 +58,9 @@ public:
     // resolve ambiguities among virtual functions inherited from both base
     // classes
     void Clear() override;
-    wxString GetValue() const override;
-    void SetValue(const wxString& value) override;
-    wxString GetStringSelection() const override
+    std::string GetValue() const override;
+    void SetValue(const std::string& value) override;
+    std::string GetStringSelection() const override
         { return wxChoice::GetStringSelection(); }
     virtual void Popup() { MSWDoPopupOrDismiss(true); }
     virtual void Dismiss() { MSWDoPopupOrDismiss(false); }

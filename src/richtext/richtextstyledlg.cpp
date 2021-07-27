@@ -422,16 +422,16 @@ bool wxRichTextStyleOrganiserDialog::TransferDataToWindow()
 /// Show preview for given or selected preview
 void wxRichTextStyleOrganiserDialog::ShowPreview(int sel)
 {
-    static constexpr wxChar s_para1[] = wxT("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. \
-Nullam ante sapien, vestibulum nonummy, pulvinar sed, luctus ut, lacus.\n");
+    static constexpr char s_para1[] = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. \
+Nullam ante sapien, vestibulum nonummy, pulvinar sed, luctus ut, lacus.\n";
 
-    static constexpr wxChar s_para2List[] = wxT("Duis pharetra consequat dui. Nullam vitae justo id mauris lobortis interdum.\n");
+    static constexpr char s_para2List[] = "Duis pharetra consequat dui. Nullam vitae justo id mauris lobortis interdum.\n";
 
-    static constexpr wxChar s_para2[] = wxT("Duis pharetra consequat dui. Cum sociis natoque penatibus \
-et magnis dis parturient montes, nascetur ridiculus mus. Nullam vitae justo id mauris lobortis interdum.\n");
+    static constexpr char s_para2[] = "Duis pharetra consequat dui. Cum sociis natoque penatibus \
+et magnis dis parturient montes, nascetur ridiculus mus. Nullam vitae justo id mauris lobortis interdum.\n";
 
-    static constexpr wxChar s_para3[] = wxT("Integer convallis dolor at augue \
-iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n");
+    static constexpr char s_para3[] = "Integer convallis dolor at augue \
+iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
 
     if (sel == -1)
     {

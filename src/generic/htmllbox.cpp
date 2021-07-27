@@ -596,7 +596,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxSimpleHtmlListBox, wxHtmlListBox);
 bool wxSimpleHtmlListBox::Create(wxWindow *parent, wxWindowID id,
                                  const wxPoint& pos,
                                  const wxSize& size,
-                                 const std::vector<wxString>& choices,
+                                 const std::vector<std::string>& choices,
                                  long style,
                                  const wxValidator& wxVALIDATOR_PARAM(validator),
                                  const wxString& name)
@@ -654,14 +654,14 @@ void wxSimpleHtmlListBox::DoDeleteOneItem(unsigned int n)
     UpdateCount();
 }
 
-int wxSimpleHtmlListBox::DoInsertItems(const wxArrayStringsAdapter& items,
+int wxSimpleHtmlListBox::DoInsertItems(const std::vector<std::string>& items,
                                        unsigned int pos,
                                        void **clientData,
                                        wxClientDataType type)
 {
-    const unsigned int count = items.GetCount();
+    const unsigned int count = items.size();
 
-    m_items.insert(std::begin(m_items) + pos, count, wxEmptyString);
+    m_items.insert(std::begin(m_items) + pos, count, "");
     m_HTMLclientData.insert(std::begin(m_HTMLclientData) + pos, count, nullptr);
 
     for ( unsigned int i = 0; i < count; ++i, ++pos )
@@ -675,18 +675,18 @@ int wxSimpleHtmlListBox::DoInsertItems(const wxArrayStringsAdapter& items,
     return pos - 1;
 }
 
-void wxSimpleHtmlListBox::SetString(unsigned int n, const wxString& s)
+void wxSimpleHtmlListBox::SetString(unsigned int n, const std::string& s)
 {
     wxCHECK_RET( IsValid(n),
                  wxT("invalid index in wxSimpleHtmlListBox::SetString") );
 
-    m_items[n]=s;
+    m_items[n] = s;
     RefreshRow(n);
 }
 
-wxString wxSimpleHtmlListBox::GetString(unsigned int n) const
+std::string wxSimpleHtmlListBox::GetString(unsigned int n) const
 {
-    wxCHECK_MSG( IsValid(n), wxEmptyString,
+    wxCHECK_MSG( IsValid(n), "",
                  wxT("invalid index in wxSimpleHtmlListBox::GetString") );
 
     return m_items[n];

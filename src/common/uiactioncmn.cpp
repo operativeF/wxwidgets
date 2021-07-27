@@ -161,19 +161,18 @@ static bool MapUnshifted(char& ch)
     return true;
 }
 
-bool wxUIActionSimulator::Text(const char *s)
+bool wxUIActionSimulator::Text(const std::string& s)
 {
-    while ( *s != '\0' )
-    {
-        char ch = *s++;
+    std::string tmp{s};
 
-        // Map the keys that must be entered with Shift modifier to their
-        // unshifted counterparts.
-        int modifiers = 0;
-        if ( isupper(ch) || MapUnshifted(ch) )
+    for( auto& ch : tmp )
+    {
+        int modifiers{0};
+
+        if(std::isupper(ch) || MapUnshifted(ch))
             modifiers |= wxMOD_SHIFT;
 
-        if ( !Char(ch, modifiers) )
+        if( !Char(ch, modifiers))
             return false;
     }
 

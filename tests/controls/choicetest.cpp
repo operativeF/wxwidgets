@@ -27,11 +27,11 @@ TEST_CASE_FIXTURE(ChoiceControlTest, "Choice control test.")
 {
     m_container = std::make_unique<wxChoice>(wxTheApp->GetTopWindow(),
                                              wxID_ANY, wxDefaultPosition,
-                                             wxDefaultSize, std::vector<wxString>{}, wxCB_SORT);
+                                             wxDefaultSize, std::vector<std::string>{}, wxCB_SORT);
 #if !defined(__WXOSX__)
     SUBCASE("Sort")
     {
-        std::vector<wxString> testitems =
+        std::vector<std::string> testitems =
         {
             "aaa",
             "Aaa",
@@ -58,7 +58,7 @@ TEST_CASE_FIXTURE(ChoiceControlTest, "Choice control test.")
 
     SUBCASE("GetBestSize")
     {
-        std::vector<wxString> testitems = {
+        std::vector<std::string> testitems = {
             "1",
             "11"
         };
@@ -86,7 +86,7 @@ TEST_CASE_FIXTURE(ChoiceControlTest, "Choice control test.")
     // FIXME: ? Sorted containers aren't allowed to insert.
     m_container = std::make_unique<wxChoice>(wxTheApp->GetTopWindow(),
         wxID_ANY, wxDefaultPosition,
-        wxDefaultSize, std::vector<wxString>{});
+        wxDefaultSize, std::vector<std::string>{});
 
     wxITEM_CONTAINER_TESTS();
 }

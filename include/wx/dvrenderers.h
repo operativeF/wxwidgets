@@ -465,7 +465,7 @@ private:
 class WXDLLIMPEXP_CORE wxDataViewChoiceRenderer: public wxDataViewCustomRenderer
 {
 public:
-    wxDataViewChoiceRenderer( const std::vector<wxString> &choices,
+    wxDataViewChoiceRenderer( const std::vector<std::string>& choices,
                             wxDataViewCellMode mode = wxDATAVIEW_CELL_EDITABLE,
                             int alignment = wxDVR_DEFAULT_ALIGNMENT );
     bool HasEditorCtrl() const override { return true; }
@@ -480,10 +480,10 @@ public:
 #endif // wxUSE_ACCESSIBILITY
 
     wxString GetChoice(size_t index) const { return m_choices[index]; }
-    const std::vector<wxString>& GetChoices() const { return m_choices; }
+    const std::vector<std::string>& GetChoices() const { return m_choices; }
 
 private:
-    std::vector<wxString> m_choices;
+    std::vector<std::string> m_choices;
     wxString      m_data;
 };
 
@@ -494,7 +494,7 @@ private:
 class WXDLLIMPEXP_CORE wxDataViewChoiceByIndexRenderer: public wxDataViewChoiceRenderer
 {
 public:
-    wxDataViewChoiceByIndexRenderer( const std::vector<wxString> &choices,
+    wxDataViewChoiceByIndexRenderer( const std::vector<std::string> &choices,
                               wxDataViewCellMode mode = wxDATAVIEW_CELL_EDITABLE,
                               int alignment = wxDVR_DEFAULT_ALIGNMENT );
 

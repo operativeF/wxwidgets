@@ -221,10 +221,10 @@ void wxRichTextBackgroundPage::CreateControls()
         m_offsetX->SetToolTip(_("The horizontal offset."));
     itemBoxSizer24->Add(m_offsetX, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_unitsHorizontalOffsetStrings;
-    m_unitsHorizontalOffsetStrings.Add(_("px"));
-    m_unitsHorizontalOffsetStrings.Add(_("cm"));
-    m_unitsHorizontalOffsetStrings.Add(_("pt"));
+    std::vector<std::string> m_unitsHorizontalOffsetStrings;
+    m_unitsHorizontalOffsetStrings.push_back("px");
+    m_unitsHorizontalOffsetStrings.push_back("cm");
+    m_unitsHorizontalOffsetStrings.push_back("cm");
     m_unitsHorizontalOffset = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_SHADOW_HORIZONTAL_OFFSET_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsHorizontalOffsetStrings, wxCB_READONLY );
     m_unitsHorizontalOffset->SetStringSelection(_("px"));
     m_unitsHorizontalOffset->SetHelpText(_("Units for this value."));
@@ -244,10 +244,10 @@ void wxRichTextBackgroundPage::CreateControls()
         m_offsetY->SetToolTip(_("The vertical offset."));
     itemBoxSizer28->Add(m_offsetY, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_unitsVerticalOffsetStrings;
-    m_unitsVerticalOffsetStrings.Add(_("px"));
-    m_unitsVerticalOffsetStrings.Add(_("cm"));
-    m_unitsVerticalOffsetStrings.Add(_("pt"));
+    std::vector<std::string> m_unitsVerticalOffsetStrings;
+    m_unitsVerticalOffsetStrings.push_back("px");
+    m_unitsVerticalOffsetStrings.push_back("cm");
+    m_unitsVerticalOffsetStrings.push_back("cm");
     m_unitsVerticalOffset = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_SHADOW_VERTICAL_OFFSET_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsVerticalOffsetStrings, wxCB_READONLY );
     m_unitsVerticalOffset->SetStringSelection(_("px"));
     m_unitsVerticalOffset->SetHelpText(_("Units for this value."));
@@ -284,10 +284,10 @@ void wxRichTextBackgroundPage::CreateControls()
         m_spread->SetToolTip(_("The shadow spread."));
     itemBoxSizer34->Add(m_spread, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_unitsShadowSpreadStrings;
-    m_unitsShadowSpreadStrings.Add(_("px"));
-    m_unitsShadowSpreadStrings.Add(_("cm"));
-    m_unitsShadowSpreadStrings.Add(_("pt"));
+    std::vector<std::string> m_unitsShadowSpreadStrings;
+    m_unitsShadowSpreadStrings.push_back("px");
+    m_unitsShadowSpreadStrings.push_back("cm");
+    m_unitsShadowSpreadStrings.push_back("cm");
     m_unitsShadowSpread = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_SHADOW_SPREAD_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsShadowSpreadStrings, wxCB_READONLY );
     m_unitsShadowSpread->SetStringSelection(_("px"));
     m_unitsShadowSpread->SetHelpText(_("Units for this value."));
@@ -311,10 +311,10 @@ void wxRichTextBackgroundPage::CreateControls()
         m_blurDistance->SetToolTip(_("The shadow blur distance."));
     itemBoxSizer38->Add(m_blurDistance, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_unitsBlurDistanceStrings;
-    m_unitsBlurDistanceStrings.Add(_("px"));
-    m_unitsBlurDistanceStrings.Add(_("cm"));
-    m_unitsBlurDistanceStrings.Add(_("pt"));
+    std::vector<std::string> m_unitsBlurDistanceStrings;
+    m_unitsBlurDistanceStrings.push_back("px");
+    m_unitsBlurDistanceStrings.push_back("cm");
+    m_unitsBlurDistanceStrings.push_back("cm");
     m_unitsBlurDistance = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_SHADOW_BLUR_DISTANCE_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsBlurDistanceStrings, wxCB_READONLY );
     m_unitsBlurDistance->SetStringSelection(_("px"));
     m_unitsBlurDistance->SetHelpText(_("Units for this value."));

@@ -196,9 +196,9 @@ void wxRichTextMarginsPage::CreateControls()
         m_marginLeft->SetToolTip(_("The left margin size."));
     itemBoxSizer11->Add(m_marginLeft, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_unitsMarginLeftStrings;
-    m_unitsMarginLeftStrings.Add(_("px"));
-    m_unitsMarginLeftStrings.Add(_("cm"));
+    std::vector<std::string> m_unitsMarginLeftStrings;
+    m_unitsMarginLeftStrings.push_back("px");
+    m_unitsMarginLeftStrings.push_back("cm");
     m_unitsMarginLeft = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_LEFT_MARGIN_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsMarginLeftStrings, wxCB_READONLY );
     m_unitsMarginLeft->SetStringSelection(_("px"));
     m_unitsMarginLeft->SetHelpText(_("Units for the left margin."));
@@ -221,9 +221,9 @@ void wxRichTextMarginsPage::CreateControls()
         m_marginRight->SetToolTip(_("The right margin size."));
     itemBoxSizer16->Add(m_marginRight, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_unitsMarginRightStrings;
-    m_unitsMarginRightStrings.Add(_("px"));
-    m_unitsMarginRightStrings.Add(_("cm"));
+    std::vector<std::string> m_unitsMarginRightStrings;
+    m_unitsMarginRightStrings.push_back("px");
+    m_unitsMarginRightStrings.push_back("cm");
     m_unitsMarginRight = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_RIGHT_MARGIN_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsMarginRightStrings, wxCB_READONLY );
     m_unitsMarginRight->SetStringSelection(_("px"));
     m_unitsMarginRight->SetHelpText(_("Units for the right margin."));
@@ -244,9 +244,9 @@ void wxRichTextMarginsPage::CreateControls()
         m_marginTop->SetToolTip(_("The top margin size."));
     itemBoxSizer20->Add(m_marginTop, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_unitsMarginTopStrings;
-    m_unitsMarginTopStrings.Add(_("px"));
-    m_unitsMarginTopStrings.Add(_("cm"));
+    std::vector<std::string> m_unitsMarginTopStrings;
+    m_unitsMarginTopStrings.push_back("px");
+    m_unitsMarginTopStrings.push_back("cm");
     m_unitsMarginTop = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_TOP_MARGIN_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsMarginTopStrings, wxCB_READONLY );
     m_unitsMarginTop->SetStringSelection(_("px"));
     m_unitsMarginTop->SetHelpText(_("Units for the top margin."));
@@ -269,9 +269,9 @@ void wxRichTextMarginsPage::CreateControls()
         m_marginBottom->SetToolTip(_("The bottom margin size."));
     itemBoxSizer25->Add(m_marginBottom, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_unitsMarginBottomStrings;
-    m_unitsMarginBottomStrings.Add(_("px"));
-    m_unitsMarginBottomStrings.Add(_("cm"));
+    std::vector<std::string> m_unitsMarginBottomStrings;
+    m_unitsMarginBottomStrings.push_back("px");
+    m_unitsMarginBottomStrings.push_back("cm");
     m_unitsMarginBottom = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_BOTTOM_MARGIN_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsMarginBottomStrings, wxCB_READONLY );
     m_unitsMarginBottom->SetStringSelection(_("px"));
     m_unitsMarginBottom->SetHelpText(_("Units for the bottom margin."));
@@ -310,9 +310,9 @@ void wxRichTextMarginsPage::CreateControls()
         m_paddingLeft->SetToolTip(_("The left padding size."));
     itemBoxSizer35->Add(m_paddingLeft, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_unitsPaddingLeftStrings;
-    m_unitsPaddingLeftStrings.Add(_("px"));
-    m_unitsPaddingLeftStrings.Add(_("cm"));
+    std::vector<std::string> m_unitsPaddingLeftStrings;
+    m_unitsPaddingLeftStrings.push_back("px");
+    m_unitsPaddingLeftStrings.push_back("cm");
     m_unitsPaddingLeft = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_LEFT_PADDING_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsPaddingLeftStrings, wxCB_READONLY );
     m_unitsPaddingLeft->SetStringSelection(_("px"));
     m_unitsPaddingLeft->SetHelpText(_("Units for the left padding."));
@@ -335,9 +335,9 @@ void wxRichTextMarginsPage::CreateControls()
         m_paddingRight->SetToolTip(_("The right padding size."));
     itemBoxSizer40->Add(m_paddingRight, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_unitsPaddingRightStrings;
-    m_unitsPaddingRightStrings.Add(_("px"));
-    m_unitsPaddingRightStrings.Add(_("cm"));
+    std::vector<std::string> m_unitsPaddingRightStrings;
+    m_unitsPaddingRightStrings.push_back("px");
+    m_unitsPaddingRightStrings.push_back("cm");
     m_unitsPaddingRight = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_RIGHT_PADDING_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsPaddingRightStrings, wxCB_READONLY );
     m_unitsPaddingRight->SetStringSelection(_("px"));
     m_unitsPaddingRight->SetHelpText(_("Units for the right padding."));
@@ -358,9 +358,9 @@ void wxRichTextMarginsPage::CreateControls()
         m_paddingTop->SetToolTip(_("The top padding size."));
     itemBoxSizer44->Add(m_paddingTop, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_unitsPaddingTopStrings;
-    m_unitsPaddingTopStrings.Add(_("px"));
-    m_unitsPaddingTopStrings.Add(_("cm"));
+    std::vector<std::string> m_unitsPaddingTopStrings;
+    m_unitsPaddingTopStrings.push_back("px");
+    m_unitsPaddingTopStrings.push_back("cm");
     m_unitsPaddingTop = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_TOP_PADDING_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsPaddingTopStrings, wxCB_READONLY );
     m_unitsPaddingTop->SetStringSelection(_("px"));
     m_unitsPaddingTop->SetHelpText(_("Units for the top padding."));
@@ -383,9 +383,9 @@ void wxRichTextMarginsPage::CreateControls()
         m_paddingBottom->SetToolTip(_("The bottom padding size."));
     itemBoxSizer49->Add(m_paddingBottom, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_unitsPaddingBottomStrings;
-    m_unitsPaddingBottomStrings.Add(_("px"));
-    m_unitsPaddingBottomStrings.Add(_("cm"));
+    std::vector<std::string> m_unitsPaddingBottomStrings;
+    m_unitsPaddingBottomStrings.push_back("px");
+    m_unitsPaddingBottomStrings.push_back("cm");
     m_unitsPaddingBottom = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXT_BOTTOM_PADDING_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_unitsPaddingBottomStrings, wxCB_READONLY );
     m_unitsPaddingBottom->SetStringSelection(_("px"));
     m_unitsPaddingBottom->SetHelpText(_("Units for the bottom padding."));

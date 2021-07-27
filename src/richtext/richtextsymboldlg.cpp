@@ -116,149 +116,149 @@ static struct
 {
     int m_low, m_high;
     wxUnicodeSubsetCodes m_subset;
-    const wxChar* m_name;
+    std::string m_name;
 } g_UnicodeSubsetTable[] =
 {
   { 0x0000, 0x007E,
-    U_BASIC_LATIN, wxT("Basic Latin") },
+    U_BASIC_LATIN, "Basic Latin" },
   { 0x00A0, 0x00FF,
-    U_LATIN_1_SUPPLEMENT, wxT("Latin-1 Supplement") },
+    U_LATIN_1_SUPPLEMENT, "Latin-1 Supplement" },
   { 0x0100, 0x017F,
-    U_LATIN_EXTENDED_A, wxT("Latin Extended-A") },
+    U_LATIN_EXTENDED_A, "Latin Extended-A" },
   { 0x0180, 0x024F,
-    U_LATIN_EXTENDED_B, wxT("Latin Extended-B") },
+    U_LATIN_EXTENDED_B, "Latin Extended-B" },
   { 0x0250, 0x02AF,
-    U_IPA_EXTENSIONS, wxT("IPA Extensions") },
+    U_IPA_EXTENSIONS, "IPA Extensions" },
   { 0x02B0, 0x02FF,
-    U_SPACING_MODIFIER_LETTERS, wxT("Spacing Modifier Letters") },
+    U_SPACING_MODIFIER_LETTERS, "Spacing Modifier Letters" },
   { 0x0300, 0x036F,
-    U_COMBINING_DIACRITICAL_MARKS, wxT("Combining Diacritical Marks") },
+    U_COMBINING_DIACRITICAL_MARKS, "Combining Diacritical Marks" },
   { 0x0370, 0x03CF,
-    U_BASIC_GREEK, wxT("Basic Greek") },
+    U_BASIC_GREEK, "Basic Greek" },
   { 0x03D0, 0x03FF,
-    U_GREEK_SYMBOLS_AND_COPTIC, wxT("Greek Symbols and Coptic") },
+    U_GREEK_SYMBOLS_AND_COPTIC, "Greek Symbols and Coptic" },
   { 0x0400, 0x04FF,
-    U_CYRILLIC, wxT("Cyrillic") },
+    U_CYRILLIC, "Cyrillic" },
   { 0x0530, 0x058F,
-    U_ARMENIAN, wxT("Armenian") },
+    U_ARMENIAN, "Armenian" },
   { 0x0590, 0x05CF,
-    U_HEBREW_EXTENDED, wxT("Hebrew Extended") },
+    U_HEBREW_EXTENDED, "Hebrew Extended" },
   { 0x05D0, 0x05FF,
-    U_BASIC_HEBREW, wxT("Basic Hebrew") },
+    U_BASIC_HEBREW, "Basic Hebrew" },
   { 0x0600, 0x0652,
-    U_BASIC_ARABIC, wxT("Basic Arabic") },
+    U_BASIC_ARABIC, "Basic Arabic" },
   { 0x0653, 0x06FF,
-    U_ARABIC_EXTENDED, wxT("Arabic Extended") },
+    U_ARABIC_EXTENDED, "Arabic Extended" },
   { 0x0900, 0x097F,
-    U_DEVANAGARI, wxT("Devanagari") },
+    U_DEVANAGARI, "Devanagari" },
   { 0x0980, 0x09FF,
-    U_BENGALI, wxT("Bengali") },
+    U_BENGALI, "Bengali" },
   { 0x0A00, 0x0A7F,
-    U_GURMUKHI, wxT("Gurmukhi") },
+    U_GURMUKHI, "Gurmukhi" },
   { 0x0A80, 0x0AFF,
-    U_GUJARATI, wxT("Gujarati") },
+    U_GUJARATI, "Gujarati" },
   { 0x0B00, 0x0B7F,
-    U_ORIYA, wxT("Oriya") },
+    U_ORIYA, "Oriya" },
   { 0x0B80, 0x0BFF,
-    U_TAMIL, wxT("Tamil") },
+    U_TAMIL, "Tamil" },
   { 0x0C00, 0x0C7F,
-    U_TELUGU, wxT("Telugu") },
+    U_TELUGU, "Telugu" },
   { 0x0C80, 0x0CFF,
-    U_KANNADA, wxT("Kannada") },
+    U_KANNADA, "Kannada" },
   { 0x0D00, 0x0D7F,
-    U_MALAYALAM, wxT("Malayalam") },
+    U_MALAYALAM, "Malayalam" },
   { 0x0E00, 0x0E7F,
-    U_THAI, wxT("Thai") },
+    U_THAI, "Thai" },
   { 0x0E80, 0x0EFF,
-    U_LAO, wxT("Lao") },
+    U_LAO, "Lao" },
   { 0x10A0, 0x10CF,
-    U_GEORGIAN_EXTENDED, wxT("Georgian Extended") },
+    U_GEORGIAN_EXTENDED, "Georgian Extended" },
   { 0x10D0, 0x10FF,
-    U_BASIC_GEORGIAN, wxT("Basic Georgian") },
+    U_BASIC_GEORGIAN, "Basic Georgian" },
   { 0x1100, 0x11FF,
-    U_HANGUL_JAMO, wxT("Hangul Jamo") },
+    U_HANGUL_JAMO, "Hangul Jamo" },
   { 0x1E00, 0x1EFF,
-    U_LATIN_EXTENDED_ADDITIONAL, wxT("Latin Extended Additional") },
+    U_LATIN_EXTENDED_ADDITIONAL, "Latin Extended Additional" },
   { 0x1F00, 0x1FFF,
-    U_GREEK_EXTENDED, wxT("Greek Extended") },
+    U_GREEK_EXTENDED, "Greek Extended" },
   { 0x2000, 0x206F,
-    U_GENERAL_PUNCTUATION, wxT("General Punctuation") },
+    U_GENERAL_PUNCTUATION, "General Punctuation" },
   { 0x2070, 0x209F,
-    U_SUPERSCRIPTS_AND_SUBSCRIPTS, wxT("Superscripts and Subscripts") },
+    U_SUPERSCRIPTS_AND_SUBSCRIPTS, "Superscripts and Subscripts" },
   { 0x20A0, 0x20CF,
-    U_CURRENCY_SYMBOLS, wxT("Currency Symbols") },
+    U_CURRENCY_SYMBOLS, "Currency Symbols" },
   { 0x20D0, 0x20FF,
-    U_COMBINING_DIACRITICAL_MARKS_FOR_SYMBOLS, wxT("Combining Diacritical Marks for Symbols") },
+    U_COMBINING_DIACRITICAL_MARKS_FOR_SYMBOLS, "Combining Diacritical Marks for Symbols" },
   { 0x2100, 0x214F,
-    U_LETTERLIKE_SYMBOLS, wxT("Letterlike Symbols") },
+    U_LETTERLIKE_SYMBOLS, "Letterlike Symbols" },
   { 0x2150, 0x218F,
-    U_NUMBER_FORMS, wxT("Number Forms") },
+    U_NUMBER_FORMS, "Number Forms" },
   { 0x2190, 0x21FF,
-    U_ARROWS, wxT("Arrows") },
+    U_ARROWS, "Arrows" },
   { 0x2200, 0x22FF,
-    U_MATHEMATICAL_OPERATORS, wxT("Mathematical Operators") },
+    U_MATHEMATICAL_OPERATORS, "Mathematical Operators" },
   { 0x2300, 0x23FF,
-    U_MISCELLANEOUS_TECHNICAL, wxT("Miscellaneous Technical") },
+    U_MISCELLANEOUS_TECHNICAL, "Miscellaneous Technical" },
   { 0x2400, 0x243F,
-    U_CONTROL_PICTURES, wxT("Control Pictures") },
+    U_CONTROL_PICTURES, "Control Pictures" },
   { 0x2440, 0x245F,
-    U_OPTICAL_CHARACTER_RECOGNITION, wxT("Optical Character Recognition") },
+    U_OPTICAL_CHARACTER_RECOGNITION, "Optical Character Recognition" },
   { 0x2460, 0x24FF,
-    U_ENCLOSED_ALPHANUMERICS, wxT("Enclosed Alphanumerics") },
+    U_ENCLOSED_ALPHANUMERICS, "Enclosed Alphanumerics" },
   { 0x2500, 0x257F,
-    U_BOX_DRAWING, wxT("Box Drawing") },
+    U_BOX_DRAWING, "Box Drawing" },
   { 0x2580, 0x259F,
-    U_BLOCK_ELEMENTS, wxT("Block Elements") },
+    U_BLOCK_ELEMENTS, "Block Elements" },
   { 0x25A0, 0x25FF,
-    U_GEOMETRIC_SHAPES, wxT("Geometric Shapes") },
+    U_GEOMETRIC_SHAPES, "Geometric Shapes" },
   { 0x2600, 0x26FF,
-    U_MISCELLANEOUS_SYMBOLS, wxT("Miscellaneous Symbols") },
+    U_MISCELLANEOUS_SYMBOLS, "Miscellaneous Symbols" },
   { 0x2700, 0x27BF,
-    U_DINGBATS, wxT("Dingbats") },
+    U_DINGBATS, "Dingbats" },
   { 0x3000, 0x303F,
-    U_CJK_SYMBOLS_AND_PUNCTUATION, wxT("CJK Symbols and Punctuation") },
+    U_CJK_SYMBOLS_AND_PUNCTUATION, "CJK Symbols and Punctuation" },
   { 0x3040, 0x309F,
-    U_HIRAGANA, wxT("Hiragana") },
+    U_HIRAGANA, "Hiragana" },
   { 0x30A0, 0x30FF,
-    U_KATAKANA, wxT("Katakana") },
+    U_KATAKANA, "Katakana" },
   { 0x3100, 0x312F,
-    U_BOPOMOFO, wxT("Bopomofo") },
+    U_BOPOMOFO, "Bopomofo" },
   { 0x3130, 0x318F,
-    U_HANGUL_COMPATIBILITY_JAMO, wxT("Hangul Compatibility Jamo") },
+    U_HANGUL_COMPATIBILITY_JAMO, "Hangul Compatibility Jamo" },
   { 0x3190, 0x319F,
-    U_CJK_MISCELLANEOUS, wxT("CJK Miscellaneous") },
+    U_CJK_MISCELLANEOUS, "CJK Miscellaneous" },
   { 0x3200, 0x32FF,
-    U_ENCLOSED_CJK, wxT("Enclosed CJK") },
+    U_ENCLOSED_CJK, "Enclosed CJK" },
   { 0x3300, 0x33FF,
-    U_CJK_COMPATIBILITY, wxT("CJK Compatibility") },
+    U_CJK_COMPATIBILITY, "CJK Compatibility" },
   { 0x3400, 0x4DB5,
-    U_CJK_UNIFIED_IDEOGRAPHS, wxT("CJK Unified Ideographs Extension A") },
+    U_CJK_UNIFIED_IDEOGRAPHS, "CJK Unified Ideographs Extension A" },
   { 0x4E00, 0x9FFF,
-    U_CJK_UNIFIED_IDEOGRAPHS, wxT("CJK Unified Ideographs") },
+    U_CJK_UNIFIED_IDEOGRAPHS, "CJK Unified Ideographs" },
   { 0xAC00, 0xD7A3,
-    U_HANGUL, wxT("Hangul Syllables") },
+    U_HANGUL, "Hangul Syllables" },
   { 0xE000, 0xF8FF,
-    U_PRIVATE_USE_AREA, wxT("Private Use Area") },
+    U_PRIVATE_USE_AREA, "Private Use Area" },
   { 0xF900, 0xFAFF,
-    U_CJK_COMPATIBILITY_IDEOGRAPHS, wxT("CJK Compatibility Ideographs") },
+    U_CJK_COMPATIBILITY_IDEOGRAPHS, "CJK Compatibility Ideographs" },
   { 0xFB00, 0xFB4F,
-    U_ALPHABETIC_PRESENTATION_FORMS, wxT("Alphabetic Presentation Forms") },
+    U_ALPHABETIC_PRESENTATION_FORMS, "Alphabetic Presentation Forms" },
   { 0xFB50, 0xFDFF,
-    U_ARABIC_PRESENTATION_FORMS_A, wxT("Arabic Presentation Forms-A") },
+    U_ARABIC_PRESENTATION_FORMS_A, "Arabic Presentation Forms-A" },
   { 0xFE20, 0xFE2F,
-    U_COMBINING_HALF_MARKS, wxT("Combining Half Marks") },
+    U_COMBINING_HALF_MARKS, "Combining Half Marks" },
   { 0xFE30, 0xFE4F,
-    U_CJK_COMPATIBILITY_FORMS, wxT("CJK Compatibility Forms") },
+    U_CJK_COMPATIBILITY_FORMS, "CJK Compatibility Forms" },
   { 0xFE50, 0xFE6F,
-    U_SMALL_FORM_VARIANTS, wxT("Small Form Variants") },
+    U_SMALL_FORM_VARIANTS, "Small Form Variants" },
   { 0xFE70, 0xFEFE,
-    U_ARABIC_PRESENTATION_FORMS_B, wxT("Arabic Presentation Forms-B") },
+    U_ARABIC_PRESENTATION_FORMS_B, "Arabic Presentation Forms-B" },
   { 0xFEFF, 0xFEFF,
-    U_SPECIALS, wxT("Specials") },
+    U_SPECIALS, "Specials" },
   { 0xFF00, 0xFFEF,
-    U_HALFWIDTH_AND_FULLWIDTH_FORMS, wxT("Halfwidth and Fullwidth Forms") },
+    U_HALFWIDTH_AND_FULLWIDTH_FORMS, "Halfwidth and Fullwidth Forms" },
   { 0xFFF0, 0xFFFD,
-    U_SPECIALS, wxT("Specials") }
+    U_SPECIALS, "Specials" }
 };
 
 #endif // __UNICODE__
@@ -395,8 +395,8 @@ void wxSymbolPickerDialog::CreateControls()
     wxStaticText* itemStaticText6 = new wxStaticText( itemDialog1, wxID_STATIC, _("&Font:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
-    wxArrayString m_fontCtrlStrings;
-    m_fontCtrl = new wxComboBox( itemDialog1, ID_SYMBOLPICKERDIALOG_FONT, wxEmptyString, wxDefaultPosition, wxSize(240, -1), m_fontCtrlStrings, wxCB_READONLY );
+    std::vector<std::string> m_fontCtrlStrings;
+    m_fontCtrl = new wxComboBox( itemDialog1, ID_SYMBOLPICKERDIALOG_FONT, "", wxDefaultPosition, wxSize(240, -1), m_fontCtrlStrings, wxCB_READONLY );
     m_fontCtrl->SetHelpText(_("The font from which to take the symbol."));
     if (wxSymbolPickerDialog::ShowToolTips())
         m_fontCtrl->SetToolTip(_("The font from which to take the symbol."));
@@ -411,8 +411,8 @@ void wxSymbolPickerDialog::CreateControls()
 #endif
 
 #if defined(__UNICODE__)
-    wxArrayString m_subsetCtrlStrings;
-    m_subsetCtrl = new wxComboBox( itemDialog1, ID_SYMBOLPICKERDIALOG_SUBSET, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_subsetCtrlStrings, wxCB_READONLY );
+    std::vector<std::string> m_subsetCtrlStrings;
+    m_subsetCtrl = new wxComboBox( itemDialog1, ID_SYMBOLPICKERDIALOG_SUBSET, "", wxDefaultPosition, wxDefaultSize, m_subsetCtrlStrings, wxCB_READONLY );
     m_subsetCtrl->SetHelpText(_("Shows a Unicode subset."));
     if (wxSymbolPickerDialog::ShowToolTips())
         m_subsetCtrl->SetToolTip(_("Shows a Unicode subset."));
@@ -449,9 +449,9 @@ void wxSymbolPickerDialog::CreateControls()
 #endif
 
 #if defined(__UNICODE__)
-    wxArrayString m_fromUnicodeCtrlStrings;
-    m_fromUnicodeCtrlStrings.Add(_("ASCII"));
-    m_fromUnicodeCtrlStrings.Add(_("Unicode"));
+    std::vector<std::string> m_fromUnicodeCtrlStrings;
+    m_fromUnicodeCtrlStrings.push_back("ASCII");
+    m_fromUnicodeCtrlStrings.push_back("Unicode");
     m_fromUnicodeCtrl = new wxComboBox( itemDialog1, ID_SYMBOLPICKERDIALOG_FROM, _("Unicode"), wxDefaultPosition, wxDefaultSize, m_fromUnicodeCtrlStrings, wxCB_READONLY );
     m_fromUnicodeCtrl->SetStringSelection(_("Unicode"));
     m_fromUnicodeCtrl->SetHelpText(_("The range to show."));
@@ -495,10 +495,10 @@ bool wxSymbolPickerDialog::TransferDataToWindow()
 
     if (m_fontCtrl->GetCount() == 0)
     {
-        std::vector<wxString> faceNames = wxRichTextCtrl::GetAvailableFontNames();
+        std::vector<std::string> faceNames = wxRichTextCtrl::GetAvailableFontNames();
         std::sort(faceNames.begin(), faceNames.end());
 
-        faceNames.insert(std::begin(faceNames), _("(Normal text)"));
+        faceNames.insert(std::begin(faceNames), "(Normal text)");
         m_fontCtrl->Append(faceNames);
     }
 
@@ -574,7 +574,7 @@ void wxSymbolPickerDialog::UpdateSymbolDisplay(bool updateSymbolList, bool showA
     else
     {
         m_symbolStaticCtrl->SetLabel("");
-        m_characterCodeCtrl->SetValue(wxEmptyString);
+        m_characterCodeCtrl->SetValue("");
     }
 
 #if defined(__UNICODE__)

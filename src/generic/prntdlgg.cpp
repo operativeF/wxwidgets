@@ -814,7 +814,7 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
       new wxStaticBox(this,wxPRINTID_STATIC, _("Paper size")), wxHORIZONTAL );
 
     size_t      n = wxThePrintPaperDatabase->GetCount();
-    std::vector<wxString> choices(n);
+    std::vector<std::string> choices(n);
 
     for (size_t i = 0; i < n; i++)
     {
@@ -1006,7 +1006,7 @@ wxComboBox *wxGenericPageSetupDialog::CreatePaperTypeChoice(int *x, int *y)
 */
 
     size_t      n = wxThePrintPaperDatabase->GetCount();
-    std::vector<wxString> choices(n);
+    std::vector<std::string> choices(n);
 
     for (size_t i = 0; i < n; i++)
     {

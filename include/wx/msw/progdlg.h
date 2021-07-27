@@ -43,8 +43,8 @@ public:
     bool WasSkipped() const override;
     bool WasCancelled() const override;
 
-    void SetTitle(const wxString& title) override;
-    wxString GetTitle() const override;
+    void SetTitle(const std::string& title) override;
+    std::string GetTitle() const override;
 
     void SetIcons(const wxIconBundle& icons) override;
     void DoMoveWindow(int x, int y, int width, int height) override;

@@ -1159,8 +1159,9 @@ public:
 
     int GetPageNumber() const
     {
-        long value;
-        if ( !GetValue().ToLong(&value) || !IsValidPage(value) )
+        long value{0};
+
+        if ( value = std::stol(GetValue()); !value || !IsValidPage(value) )
             return 0;
 
         // Cast is safe because the value is less than (int) m_maxPage.
@@ -1560,11 +1561,11 @@ void wxPreviewControlBar::CreateButtons()
     {
         sizer.AddButton(wxID_PREVIEW_ZOOM_OUT, wxART_MINUS, _("Zoom Out"));
 
-        std::vector<wxString> choices =
+        std::vector<std::string> choices =
         {
-            wxT("10%"), wxT("15%"), wxT("20%"), wxT("25%"), wxT("30%"), wxT("35%"), wxT("40%"), wxT("45%"), wxT("50%"), wxT("55%"),
-                wxT("60%"), wxT("65%"), wxT("70%"), wxT("75%"), wxT("80%"), wxT("85%"), wxT("90%"), wxT("95%"), wxT("100%"), wxT("110%"),
-                wxT("120%"), wxT("150%"), wxT("200%")
+            "10%", "15%", "20%", "25%", "30%", "35%", "40%", "45%", "50%", "55%",
+                "60%", "65%", "70%", "75%", "80%", "85%", "90%", "95%", "100%", "110%",
+                "120%", "150%", "200%"
         };
 
         m_zoomControl = new wxChoice( this, wxID_PREVIEW_ZOOM, wxDefaultPosition, wxSize(70,wxDefaultCoord), choices, 0 );
@@ -1595,10 +1596,10 @@ void wxPreviewControlBar::SetZoomControl(int zoom)
     if (m_zoomControl)
     {
         int n, count = m_zoomControl->GetCount();
-        long val;
+
         for (n=0; n<count; n++)
         {
-            if (m_zoomControl->GetString(n).BeforeFirst(wxT('%')).ToLong(&val) &&
+            if (long val = std::stol(wx::utils::BeforeFirst(m_zoomControl->GetString(n), '%')) &&
                 (val >= long(zoom)))
             {
                 m_zoomControl->SetSelection(n);
@@ -1614,8 +1615,8 @@ int wxPreviewControlBar::GetZoomControl()
 {
     if (m_zoomControl && !m_zoomControl->GetStringSelection().empty())
     {
-        long val;
-        if (m_zoomControl->GetStringSelection().BeforeFirst(wxT('%')).ToLong(&val))
+        // FIXME: better than stol?
+        if (long val = std::stol(wx::utils::BeforeFirst(m_zoomControl->GetStringSelection(), '%')))
             return int(val);
     }
 

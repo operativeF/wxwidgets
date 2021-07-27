@@ -65,7 +65,7 @@ public:
 
     // provide access to the base class protected methods to wxSearchCtrl which
     // needs to forward to them
-    void DoSetValue(const wxString& value, int flags) override
+    void DoSetValue(const std::string& value, int flags) override
     {
         wxTextCtrl::DoSetValue(value, flags);
     }
@@ -551,11 +551,11 @@ wxWindowList wxSearchCtrl::GetCompositeWindowParts() const
 // accessors
 // ---------
 
-wxString wxSearchCtrl::DoGetValue() const
+std::string wxSearchCtrl::DoGetValue() const
 {
     return m_text->GetValue();
 }
-wxString wxSearchCtrl::GetRange(long from, long to) const
+std::string wxSearchCtrl::GetRange(long from, long to) const
 {
     return m_text->GetRange(from, to);
 }
@@ -598,7 +598,7 @@ void wxSearchCtrl::GetSelection(long* from, long* to) const
     m_text->GetSelection(from, to);
 }
 
-wxString wxSearchCtrl::GetStringSelection() const
+std::string wxSearchCtrl::GetStringSelection() const
 {
     return m_text->GetStringSelection();
 }
@@ -649,7 +649,7 @@ void wxSearchCtrl::SetMaxLength(unsigned long len)
 
 // writing text inserts it at the current position, appending always
 // inserts it at the end
-void wxSearchCtrl::WriteText(const wxString& text)
+void wxSearchCtrl::WriteText(const std::string& text)
 {
     m_text->WriteText(text);
 }
@@ -898,12 +898,12 @@ void wxSearchCtrl::SetCancelBitmap( const wxBitmap& bitmap )
 // Note that overriding DoSetValue() is currently insufficient because the base
 // class ChangeValue() only updates m_hintData of this object (which is null
 // anyhow), instead of updating m_text->m_hintData, see #16998.
-void wxSearchCtrl::ChangeValue(const wxString& value)
+void wxSearchCtrl::ChangeValue(const std::string& value)
 {
     m_text->ChangeValue(value);
 }
 
-void wxSearchCtrl::DoSetValue(const wxString& value, int flags)
+void wxSearchCtrl::DoSetValue(const std::string& value, int flags)
 {
     m_text->DoSetValue(value, flags);
 }

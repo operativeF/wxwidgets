@@ -42,7 +42,7 @@ namespace wxMSWMessageDialog
 
         std::unique_ptr<TASKDIALOG_BUTTON[]> buttons;
         wxWindow *parent{nullptr};
-        wxString caption;
+        std::string caption;
         wxString message;
         wxString extendedMessage;
         long iconId{0};

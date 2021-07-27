@@ -1192,8 +1192,8 @@ public:
         return IsEmptyCell(coord.GetRow(), coord.GetCol());
     }
 
-    virtual wxString GetValue( int row, int col ) = 0;
-    virtual void SetValue( int row, int col, const wxString& value ) = 0;
+    virtual std::string GetValue( int row, int col ) = 0;
+    virtual void SetValue( int row, int col, const std::string& value ) = 0;
 
     // Data type determination and value access
     virtual wxString GetTypeName( int row, int col );
@@ -1212,7 +1212,6 @@ public:
     virtual void* GetValueAsCustom( int row, int col, const wxString& typeName );
     virtual void  SetValueAsCustom( int row, int col, const wxString& typeName, void* value );
 
-
     // Overriding these is optional
     //
     virtual void SetView( wxGrid *grid ) { m_view = grid; }
@@ -1226,12 +1225,12 @@ public:
     virtual bool AppendCols( size_t numCols = 1 );
     virtual bool DeleteCols( size_t pos = 0, size_t numCols = 1 );
 
-    virtual wxString GetRowLabelValue( int row );
-    virtual wxString GetColLabelValue( int col );
-    virtual wxString GetCornerLabelValue() const;
-    virtual void SetRowLabelValue( int WXUNUSED(row), const wxString& ) {}
-    virtual void SetColLabelValue( int WXUNUSED(col), const wxString& ) {}
-    virtual void SetCornerLabelValue( const wxString& ) {}
+    virtual std::string GetRowLabelValue( int row );
+    virtual std::string GetColLabelValue( int col );
+    virtual std::string GetCornerLabelValue() const;
+    virtual void SetRowLabelValue( int WXUNUSED(row), const std::string& ) = 0;
+    virtual void SetColLabelValue( int WXUNUSED(col), const std::string& ) = 0;
+    virtual void SetCornerLabelValue( const std::string& ) = 0;
 
     // Attribute handling
     //
@@ -1356,8 +1355,8 @@ public:
     //
     int GetNumberRows() override { return static_cast<int>(m_data.size()); }
     int GetNumberCols() override { return m_numCols; }
-    wxString GetValue( int row, int col ) override;
-    void SetValue( int row, int col, const wxString& s ) override;
+    std::string GetValue( int row, int col ) override;
+    void SetValue( int row, int col, const std::string& s ) override;
 
     // overridden functions from wxGridTableBase
     //
@@ -1369,15 +1368,15 @@ public:
     bool AppendCols( size_t numCols = 1 ) override;
     bool DeleteCols( size_t pos = 0, size_t numCols = 1 ) override;
 
-    void SetRowLabelValue( int row, const wxString& ) override;
-    void SetColLabelValue( int col, const wxString& ) override;
-    void SetCornerLabelValue( const wxString& ) override;
-    wxString GetRowLabelValue( int row ) override;
-    wxString GetColLabelValue( int col ) override;
-    wxString GetCornerLabelValue() const override;
+    void SetRowLabelValue( int row, const std::string& ) override;
+    void SetColLabelValue( int col, const std::string& ) override;
+    void SetCornerLabelValue( const std::string& ) override;
+    std::string GetRowLabelValue( int row ) override;
+    std::string GetColLabelValue( int col ) override;
+    std::string GetCornerLabelValue() const override;
 
 private:
-    std::vector<std::vector<wxString>> m_data;
+    std::vector<std::vector<std::string>> m_data;
 
     // notice that while we don't need to store the number of our rows as it's
     // always equal to the size of m_data array, we do need to store the number
@@ -1388,8 +1387,8 @@ private:
     // These only get used if you set your own labels, otherwise the
     // GetRow/ColLabelValue functions return wxGridTableBase defaults
     //
-    std::vector<wxString>     m_rowLabels;
-    std::vector<wxString>     m_colLabels;
+    std::vector<std::string>     m_rowLabels;
+    std::vector<std::string>     m_colLabels;
 
     wxString m_cornerLabel;
 
@@ -1804,8 +1803,8 @@ public:
     void     GetCornerLabelAlignment( int *horiz, int *vert ) const;
     int      GetColLabelTextOrientation() const;
     int      GetCornerLabelTextOrientation() const;
-    wxString GetRowLabelValue( int row ) const;
-    wxString GetColLabelValue( int col ) const;
+    std::string GetRowLabelValue( int row ) const;
+    std::string GetColLabelValue( int col ) const;
     wxString GetCornerLabelValue() const;
 
     wxColour GetCellHighlightColour() const { return m_cellHighlightColour; }
@@ -2166,7 +2165,7 @@ public:
 
     // ------ cell value accessors
     //
-    wxString GetCellValue( int row, int col ) const
+    std::string GetCellValue( int row, int col ) const
     {
         if ( m_table )
         {
@@ -2174,15 +2173,15 @@ public:
         }
         else
         {
-            return wxEmptyString;
+            return "";
         }
     }
 
     wxString GetCellValue( const wxGridCellCoords& coords ) const
         { return GetCellValue( coords.GetRow(), coords.GetCol() ); }
 
-    void SetCellValue( int row, int col, const wxString& s );
-    void SetCellValue( const wxGridCellCoords& coords, const wxString& s )
+    void SetCellValue( int row, int col, const std::string& s );
+    void SetCellValue( const wxGridCellCoords& coords, const std::string& s )
         { SetCellValue( coords.GetRow(), coords.GetCol(), s ); }
 
     // returns true if the cell can't be edited
@@ -2638,12 +2637,12 @@ protected:
         { return SendEvent(evtType, coords.GetRow(), coords.GetCol(), e); }
     EventResult SendEvent(wxEventType evtType,
                   int row, int col,
-                  const wxString& s = wxString());
+                  const wxString& s = wxEmptyString);
     EventResult SendEvent(wxEventType evtType,
                   const wxGridCellCoords& coords,
-                  const wxString& s = wxString())
+                  const wxString& s = wxEmptyString)
         { return SendEvent(evtType, coords.GetRow(), coords.GetCol(), s); }
-    EventResult SendEvent(wxEventType evtType, const wxString& s = wxString())
+    EventResult SendEvent(wxEventType evtType, const wxString& s = wxEmptyString)
         { return SendEvent(evtType, m_currentCellCoords, s); }
 
     // send wxEVT_GRID_{ROW,COL}_SIZE or wxEVT_GRID_COL_AUTO_SIZE, return true

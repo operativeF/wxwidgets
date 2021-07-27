@@ -23,7 +23,7 @@ public:
     ~wxTextEntry() override;
 
     // implement wxTextEntryBase pure virtual methods
-    void WriteText(const wxString& text) override;
+    void WriteText(const std::string& text) override;
     void Remove(long from, long to) override;
 
     void Copy() override;
@@ -55,7 +55,7 @@ public:
 #endif // wxUSE_UXTHEME
 
 protected:
-    wxString DoGetValue() const override;
+    std::string DoGetValue() const override;
 
     // this is really a hook for multiline text controls as the single line
     // ones don't need to ever scroll to show the selection but having it here

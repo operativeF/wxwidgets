@@ -28,11 +28,13 @@
 
 #include "wx/msw/private.h"
 
+#include "boost/nowide/convert.hpp"
+
 bool wxChoice::Create(wxWindow *parent,
                       wxWindowID id,
                       const wxPoint& pos,
                       const wxSize& size,
-                      const std::vector<wxString>& choices,
+                      const std::vector<std::string>& choices,
                       long style,
                       const wxValidator& validator,
                       const wxString& name)
@@ -53,7 +55,7 @@ bool wxChoice::CreateAndInit(wxWindow *parent,
                              wxWindowID id,
                              const wxPoint& pos,
                              const wxSize& size,
-                             const std::vector<wxString>& choices,
+                             const std::vector<std::string>& choices,
                              long style,
                              const wxValidator& validator,
                              const wxString& name)
@@ -170,7 +172,7 @@ wxChoice::~wxChoice()
 // adding/deleting items to/from the list
 // ----------------------------------------------------------------------------
 
-int wxChoice::DoInsertItems(const wxArrayStringsAdapter& items,
+int wxChoice::DoInsertItems(const std::vector<std::string>& items,
                             unsigned int pos,
                             void **clientData, wxClientDataType type)
 {
@@ -186,7 +188,7 @@ int wxChoice::DoInsertItems(const wxArrayStringsAdapter& items,
         pos = 0;
 
     int n = wxNOT_FOUND;
-    const unsigned numItems = items.GetCount();
+    const unsigned numItems = items.size();
     for ( unsigned i = 0; i < numItems; ++i )
     {
         n = MSWInsertOrAppendItem(pos, items[i], msg);
@@ -265,7 +267,7 @@ unsigned int wxChoice::GetCount() const
     return (unsigned int)SendMessage(GetHwnd(), CB_GETCOUNT, 0, 0);
 }
 
-int wxChoice::FindString(const wxString& s, bool bCase) const
+int wxChoice::FindString(std::string_view s, bool bCase) const
 {
    //TODO:  Evidently some MSW versions (all?) don't like empty strings
    //passed to SendMessage, so we have to do it ourselves in that case
@@ -287,14 +289,14 @@ int wxChoice::FindString(const wxString& s, bool bCase) const
    }
    else
    {
-       int pos = (int)SendMessage(GetHwnd(), CB_FINDSTRINGEXACT,
-                                  (WPARAM)-1, wxMSW_CONV_LPARAM(s));
+       int pos = (int)::SendMessageW(GetHwnd(), CB_FINDSTRINGEXACT,
+                                  (WPARAM)-1, reinterpret_cast<LPARAM>(boost::nowide::widen(s).c_str()));
 
        return pos == LB_ERR ? wxNOT_FOUND : pos;
    }
 }
 
-void wxChoice::SetString(unsigned int n, const wxString& s)
+void wxChoice::SetString(unsigned int n, const std::string& s)
 {
     wxCHECK_RET( IsValid(n), wxT("invalid item index in wxChoice::SetString") );
 
@@ -313,8 +315,9 @@ void wxChoice::SetString(unsigned int n, const wxString& s)
     // selected
     const bool wasSelected = static_cast<int>(n) == GetSelection();
 
-    ::SendMessage(GetHwnd(), CB_DELETESTRING, n, 0);
-    ::SendMessage(GetHwnd(), CB_INSERTSTRING, n, wxMSW_CONV_LPARAM(s) );
+    // TODO: Correct?
+    ::SendMessageW(GetHwnd(), CB_DELETESTRING, n, 0);
+    ::SendMessageW(GetHwnd(), CB_INSERTSTRING, n, reinterpret_cast<LPARAM>(boost::nowide::widen(s).c_str()) );
 
     // restore the client data
     if ( oldData )
@@ -330,29 +333,32 @@ void wxChoice::SetString(unsigned int n, const wxString& s)
     InvalidateBestSize();
 }
 
-wxString wxChoice::GetString(unsigned int n) const
+std::string wxChoice::GetString(unsigned int n) const
 {
-    const int len = (int)::SendMessage(GetHwnd(), CB_GETLBTEXTLEN, n, 0);
+    const int len = (int)::SendMessageW(GetHwnd(), CB_GETLBTEXTLEN, n, 0);
 
-    wxString str;
+    std::wstring str;
 
-    wxCHECK_MSG( len != CB_ERR, str, wxS("Invalid index") );
+    wxCHECK_MSG( len != CB_ERR, boost::nowide::narrow(str), "Invalid index");
 
     if ( len > 0 )
     {
-        if ( ::SendMessage
+        str.resize(len);
+
+        // FIXME: Is this correct?
+        if ( ::SendMessageW
                (
                 GetHwnd(),
                 CB_GETLBTEXT,
                 n,
-                (LPARAM)(wxChar *)wxStringBuffer(str, len)
+                reinterpret_cast<LPARAM>(&str[0])
                ) == CB_ERR )
         {
             wxLogLastError(wxT("SendMessage(CB_GETLBTEXT)"));
         }
     }
 
-    return str;
+    return boost::nowide::narrow(str);
 }
 
 // ----------------------------------------------------------------------------

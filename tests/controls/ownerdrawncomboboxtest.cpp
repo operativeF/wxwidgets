@@ -99,7 +99,7 @@ TEST_CASE_FIXTURE(OwnerDrawnComboBoxTest, "Owner-drawn combo box test")
 
     SUBCASE("ReadOnly")
     {
-        std::vector<wxString> testitems = { "item 1", "item 2" };
+        std::vector<std::string> testitems = { "item 1", "item 2" };
 
         m_container = std::make_unique<wxOwnerDrawnComboBox>(wxTheApp->GetTopWindow(),
                                                              wxID_ANY, "",

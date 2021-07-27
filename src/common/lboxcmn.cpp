@@ -109,7 +109,7 @@ wxCONSTRUCTOR_4( wxListBox, wxWindow*, Parent, wxWindowID, Id, \
 // selection
 // ----------------------------------------------------------------------------
 
-bool wxListBoxBase::SetStringSelection(const wxString& s, bool select)
+bool wxListBoxBase::SetStringSelection(std::string_view s, bool select)
 {
     const int sel = FindString(s);
     if ( sel == wxNOT_FOUND )
@@ -309,7 +309,7 @@ void wxListBoxBase::Command(wxCommandEvent& event)
 // SetFirstItem() and such
 // ----------------------------------------------------------------------------
 
-void wxListBoxBase::SetFirstItem(const wxString& s)
+void wxListBoxBase::SetFirstItem(std::string_view s)
 {
     int n = FindString(s);
 

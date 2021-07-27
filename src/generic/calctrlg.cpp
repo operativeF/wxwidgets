@@ -236,7 +236,7 @@ void wxGenericCalendarCtrl::SetWindowStyleFlag(long style)
 void wxGenericCalendarCtrl::CreateMonthComboBox()
 {
     m_comboMonth = new wxComboBox(GetParent(), wxID_ANY,
-                                  wxEmptyString,
+                                  "",
                                   wxDefaultPosition,
                                   wxDefaultSize,
                                   {},

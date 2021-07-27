@@ -17,6 +17,7 @@
 
 #include "wx/arrstr.h"
 #include "wx/control.h"      // base class
+#include "wx/stringutils.h"
 
 #include <vector>
 
@@ -43,21 +44,33 @@ public:
     virtual unsigned int GetCount() const = 0;
     bool IsEmpty() const { return GetCount() == 0; }
 
-    virtual wxString GetString(unsigned int n) const = 0;
-    std::vector<wxString> GetStrings() const;
-    virtual void SetString(unsigned int n, const wxString& s) = 0;
+    virtual std::string GetString(unsigned int n) const = 0;
+    std::vector<std::string> GetStrings() const;
+    virtual void SetString(unsigned int n, const std::string& s) = 0;
 
     // finding string natively is either case sensitive or insensitive
     // but never both so fall back to this base version for not
     // supported search type
-    virtual int FindString(const wxString& s, bool bCase = false) const
+    // FIXME: Remove this and split into two functions.
+    virtual int FindString(std::string_view s, bool bCase = false) const
     {
         const unsigned int count = GetCount();
 
-        for ( unsigned int i = 0; i < count ; ++i )
+        if(!bCase)
         {
-            if (GetString(i).IsSameAs( s , bCase ))
-                return (int)i;
+            for (unsigned int i = 0; i < count; ++i)
+            {
+                if (wx::utils::IsSameAsNoCase(s, GetString(i)))
+                    return (int)i;
+            }
+        }
+        else
+        {
+            for (unsigned int i = 0; i < count; ++i)
+            {
+                if (wx::utils::IsSameAsCase(s, GetString(i)))
+                    return (int)i;
+            }
         }
 
         return wxNOT_FOUND;
@@ -71,10 +84,10 @@ public:
     virtual int GetSelection() const = 0;
 
     // set selection to the specified string, return false if not found
-    bool SetStringSelection(const wxString& s);
+    bool SetStringSelection(const std::string& s);
 
     // return the selected string or empty string if none
-    virtual wxString GetStringSelection() const;
+    virtual std::string GetStringSelection() const;
 
     // this is the same as SetSelection( for single-selection controls but
     // reads better for multi-selection ones
@@ -105,22 +118,22 @@ private:
     // after doing some checks
     //
     // NB: they're defined here so that they're inlined when used in public part
-    int AppendItems(const wxArrayStringsAdapter& items,
+    int AppendItems(const std::vector<std::string>& items,
                     void **clientData,
                     wxClientDataType type)
     {
-        if ( items.IsEmpty() )
+        if ( items.empty() )
             return wxNOT_FOUND;
 
         return DoAppendItems(items, clientData, type);
     }
 
-    int AppendItems(const wxArrayStringsAdapter& items)
+    int AppendItems(const std::vector<std::string>& items)
     {
         return AppendItems(items, nullptr, wxClientDataType::None);
     }
 
-    int AppendItems(const wxArrayStringsAdapter& items, void **clientData)
+    int AppendItems(const std::vector<std::string>& items, void **clientData)
     {
         wxASSERT_MSG( GetClientDataType() != wxClientDataType::Object,
                       wxT("can't mix different types of client data") );
@@ -128,7 +141,7 @@ private:
         return AppendItems(items, clientData, wxClientDataType::Void);
     }
 
-    int AppendItems(const wxArrayStringsAdapter& items,
+    int AppendItems(const std::vector<std::string>& items,
                     wxClientData **clientData)
     {
         wxASSERT_MSG( GetClientDataType() != wxClientDataType::Void,
@@ -138,12 +151,11 @@ private:
                            wxClientDataType::Object);
     }
 
-    int InsertItems(const wxArrayStringsAdapter& items,
+    int InsertItems(const std::vector<std::string>& items,
                     unsigned int pos,
                     void **clientData,
                     wxClientDataType type)
     {
-        // TODO: Why not?
         wxASSERT_MSG( !IsSorted(), wxT("can't insert items in sorted control") );
 
         wxCHECK_MSG( pos <= GetCount(), wxNOT_FOUND,
@@ -153,18 +165,18 @@ private:
         // DoInsertItems() and besides it really doesn't make much sense to do
         // this (for append it could correspond to creating an initially empty
         // control but why would anybody need to insert 0 items?)
-        wxCHECK_MSG( !items.IsEmpty(), wxNOT_FOUND,
+        wxCHECK_MSG( !items.empty(), wxNOT_FOUND,
                      wxT("need something to insert") );
 
         return DoInsertItems(items, pos, clientData, type);
     }
 
-    int InsertItems(const wxArrayStringsAdapter& items, unsigned int pos)
+    int InsertItems(const std::vector<std::string>& items, unsigned int pos)
     {
         return InsertItems(items, pos, nullptr, wxClientDataType::None);
     }
 
-    int InsertItems(const wxArrayStringsAdapter& items,
+    int InsertItems(const std::vector<std::string>& items,
                      unsigned int pos,
                      void **clientData)
     {
@@ -174,7 +186,7 @@ private:
         return InsertItems(items, pos, clientData, wxClientDataType::Void);
     }
 
-    int InsertItems(const wxArrayStringsAdapter& items,
+    int InsertItems(const std::vector<std::string>& items,
                      unsigned int pos,
                      wxClientData **clientData)
     {
@@ -195,24 +207,25 @@ public:
 
     // append single item, return its position in the control (which can be
     // different from the last one if the control is sorted)
-    int Append(const wxString& item)
-        { return AppendItems(item); }
-    int Append(const wxString& item, void *clientData)
-        { return AppendItems(item, &clientData); }
-    int Append(const wxString& item, wxClientData *clientData)
-        { return AppendItems(item, &clientData); }
+    // FIXME: Stupid.
+    int Append(const std::string& item)
+        { return AppendItems(std::vector<std::string>{item}); }
+    int Append(const std::string& item, void *clientData)
+        { return AppendItems(std::vector<std::string>{item}, &clientData); }
+    int Append(const std::string& item, wxClientData *clientData)
+        { return AppendItems(std::vector<std::string>{item}, &clientData); }
 
     // append several items at once to the control, return the position of the
     // last item appended
-    int Append(const std::vector<wxString>& items)
+    int Append(const std::vector<std::string>& items)
         { return AppendItems(items); }
-    int Append(const std::vector<wxString>& items, void **clientData)
+    int Append(const std::vector<std::string>& items, void **clientData)
         { return AppendItems(items, clientData); }
-    int Append(const std::vector<wxString>& items, wxClientData **clientData)
+    int Append(const std::vector<std::string>& items, wxClientData **clientData)
         { return AppendItems(items, clientData); }
 
     // only for RTTI needs (separate name)
-    // void AppendString(const wxString& item)
+    // void AppendString(const std::string& item)
     //     { Append(item); }
 
 
@@ -220,20 +233,20 @@ public:
     // -----------------------------------------
 
     // insert single item at the given position, return its effective position
-    int Insert(const wxString& item, unsigned int pos)
-        { return InsertItems(item, pos); }
-    int Insert(const wxString& item, unsigned int pos, void *clientData)
-        { return InsertItems(item, pos, &clientData); }
-    int Insert(const wxString& item, unsigned int pos, wxClientData *clientData)
-        { return InsertItems(item, pos, &clientData); }
+    int Insert(const std::string& item, unsigned int pos)
+        { return InsertItems(std::vector<std::string>{item}, pos); }
+    int Insert(const std::string& item, unsigned int pos, void *clientData)
+        { return InsertItems(std::vector<std::string>{item}, pos, &clientData); }
+    int Insert(const std::string& item, unsigned int pos, wxClientData *clientData)
+        { return InsertItems(std::vector<std::string>{item}, pos, &clientData); }
 
     // insert several items at once into the control, return the index of the
     // last item inserted
-    int Insert(const std::vector<wxString>& items, unsigned int pos)
+    int Insert(const std::vector<std::string>& items, unsigned int pos)
         { return InsertItems(items, pos); }
-    int Insert(const std::vector<wxString>& items, unsigned int pos, void **clientData)
+    int Insert(const std::vector<std::string>& items, unsigned int pos, void **clientData)
         { return InsertItems(items, pos, clientData); }
-    int Insert(const std::vector<wxString>& items,
+    int Insert(const std::vector<std::string>& items,
                unsigned int pos,
                wxClientData **clientData)
         { return InsertItems(items, pos, clientData); }
@@ -241,11 +254,11 @@ public:
     // replacing items
     // ---------------
 
-    void Set(const std::vector<wxString>& items)
+    void Set(const std::vector<std::string>& items)
         { Clear(); Append(items); }
-    void Set(const std::vector<wxString>& items, void **clientData)
+    void Set(const std::vector<std::string>& items, void **clientData)
         { Clear(); Append(items, clientData); }
-    void Set(const std::vector<wxString>& items, wxClientData **clientData)
+    void Set(const std::vector<std::string>& items, wxClientData **clientData)
         { Clear(); Append(items, clientData); }
 
     // deleting items
@@ -303,7 +316,7 @@ protected:
     // to implement items appending here (in which case DoInsertItems() should
     // call this method if pos == GetCount() as it can still be called in this
     // case if public Insert() is called with such position)
-    virtual int DoAppendItems(const wxArrayStringsAdapter& items,
+    virtual int DoAppendItems(const std::vector<std::string>& items,
                               void **clientData,
                               wxClientDataType type)
     {
@@ -319,7 +332,7 @@ protected:
     //
     // the method should return the index of the position the last item was
     // inserted into or wxNOT_FOUND if an error occurred
-    virtual int DoInsertItems(const wxArrayStringsAdapter & items,
+    virtual int DoInsertItems(const std::vector<std::string> & items,
                               unsigned int pos,
                               void **clientData,
                               wxClientDataType type) = 0;
@@ -340,7 +353,7 @@ protected:
     // of adding multiple items to the control than doing it one by one: such
     // classes should call DoInsertItemsInLoop() from their DoInsert() and
     // override DoInsertOneItem() to perform the real insertion
-    virtual int DoInsertOneItem(const wxString& item, unsigned int pos);
+    virtual int DoInsertOneItem(const std::string& item, unsigned int pos);
     int DoInsertItemsInLoop(const wxArrayStringsAdapter& items,
                             unsigned int pos,
                             void **clientData,

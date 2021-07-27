@@ -49,8 +49,8 @@ public:
     wxColourData& GetColourData() { return m_colourData; }
 
     // override some base class virtuals
-    void SetTitle(const wxString& title) override;
-    wxString GetTitle() const override;
+    void SetTitle(const std::string& title) override;
+    std::string GetTitle() const override;
 
     int ShowModal() override;
 
@@ -71,7 +71,7 @@ protected:
     void DoCentre(int dir) override;
 
     wxColourData        m_colourData;
-    wxString            m_title;
+    std::string         m_title;
 
     // Currently selected colour, used while the dialog is being shown.
     WXCOLORREF m_currentCol;

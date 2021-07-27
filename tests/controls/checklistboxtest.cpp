@@ -31,7 +31,7 @@ TEST_CASE_FIXTURE(wxChecklistBoxTest, "Checklist box test")
     {
         EventCounter toggled(m_container.get(), wxEVT_CHECKLISTBOX);
 
-        const std::vector<wxString> testitems = {
+        const std::vector<std::string> testitems = {
             "item 0",
             "item 1",
             "item 2",

@@ -92,7 +92,7 @@ public:
     bool HasSelection() const { return !m_symbol.IsEmpty(); }
 
     /// Specifying normal text?
-    bool UseNormalFont() const { return m_fontName.IsEmpty(); }
+    bool UseNormalFont() const { return m_fontName.empty(); }
 
     /// Should we show tooltips?
     static bool ShowToolTips() { return sm_showToolTips; }
@@ -165,7 +165,7 @@ public:
     wxComboBox* m_fromUnicodeCtrl;
 #endif
     wxStdDialogButtonSizer* m_stdButtonSizer;
-    wxString m_fontName;
+    std::string m_fontName;
     bool m_fromUnicode;
     wxString m_normalTextFontName;
     wxString m_symbol;

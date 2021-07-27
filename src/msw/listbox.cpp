@@ -33,6 +33,8 @@
 
 #include <windowsx.h>
 
+#include "boost/nowide/convert.hpp"
+
 #if wxUSE_OWNER_DRAWN
     #include  "wx/ownerdrw.h"
 
@@ -263,7 +265,7 @@ void wxListBox::DoDeleteOneItem(unsigned int n)
     }
 #endif // wxUSE_OWNER_DRAWN
 
-    SendMessage(GetHwnd(), LB_DELETESTRING, n, 0);
+    SendMessageW(GetHwnd(), LB_DELETESTRING, n, 0);
     m_noItems--;
 
     MSWOnItemsChanged();
@@ -271,13 +273,13 @@ void wxListBox::DoDeleteOneItem(unsigned int n)
     UpdateOldSelections();
 }
 
-int wxListBox::FindString(const wxString& s, bool bCase) const
+int wxListBox::FindString(std::string_view s, bool bCase) const
 {
     // back to base class search for not native search type
     if (bCase)
        return wxItemContainerImmutable::FindString( s, bCase );
 
-    int pos = ListBox_FindStringExact(GetHwnd(), -1, s.t_str());
+    int pos = ListBox_FindStringExact(GetHwnd(), -1, boost::nowide::widen(s).c_str());
     if (pos == LB_ERR)
         return wxNOT_FOUND;
     else
@@ -407,21 +409,24 @@ int wxListBox::GetSelection() const
 }
 
 // Find string for position
-wxString wxListBox::GetString(unsigned int n) const
+std::string wxListBox::GetString(unsigned int n) const
 {
-    wxCHECK_MSG( IsValid(n), wxEmptyString,
+    wxCHECK_MSG( IsValid(n), "",
                  wxT("invalid index in wxListBox::GetString") );
 
     int len = ListBox_GetTextLen(GetHwnd(), n);
 
     // +1 for terminating NUL
-    wxString result;
-    ListBox_GetText(GetHwnd(), n, (wxChar*)wxStringBuffer(result, len + 1));
+    std::wstring result;
 
-    return result;
+    result.resize(len);
+
+    ListBox_GetText(GetHwnd(), n, &result[0]);
+
+    return boost::nowide::narrow(result);
 }
 
-int wxListBox::DoInsertItems(const wxArrayStringsAdapter & items,
+int wxListBox::DoInsertItems(const std::vector<std::string>& items,
                              unsigned int pos,
                              void **clientData,
                              wxClientDataType type)
@@ -439,7 +444,7 @@ int wxListBox::DoInsertItems(const wxArrayStringsAdapter & items,
 
     int n = wxNOT_FOUND;
 
-    const unsigned int numItems = items.GetCount();
+    const unsigned int numItems = items.size();
     for ( unsigned int i = 0; i < numItems; i++ )
     {
         n = MSWInsertOrAppendItem(pos, items[i], msg);
@@ -479,7 +484,7 @@ int wxListBox::DoHitTestList(const wxPoint& point) const
     return HIWORD(lRes) ? wxNOT_FOUND : LOWORD(lRes);
 }
 
-void wxListBox::SetString(unsigned int n, const wxString& s)
+void wxListBox::SetString(unsigned int n, const std::string& s)
 {
     wxCHECK_RET( IsValid(n),
                  wxT("invalid index in wxListBox::SetString") );
@@ -501,7 +506,7 @@ void wxListBox::SetString(unsigned int n, const wxString& s)
     if ( n == (m_noItems - 1) )
         newN = -1;
 
-    ListBox_InsertString(GetHwnd(), newN, s.t_str());
+    ListBox_InsertString(GetHwnd(), newN, boost::nowide::widen(s).c_str());
 
     // restore the client data
     if ( oldData )

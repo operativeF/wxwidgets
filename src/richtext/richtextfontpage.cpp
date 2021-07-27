@@ -171,9 +171,9 @@ void wxRichTextFontPage::CreateControls()
     m_fontSizeSpinButtons->SetValue(0);
     itemBoxSizer10->Add(m_fontSizeSpinButtons, 0, wxALIGN_CENTER_VERTICAL|wxRIGHT|wxTOP, 5);
 
-    wxArrayString m_sizeUnitsCtrlStrings;
-    m_sizeUnitsCtrlStrings.Add(_("pt"));
-    m_sizeUnitsCtrlStrings.Add(_("px"));
+    std::vector<std::string> m_sizeUnitsCtrlStrings;
+    m_sizeUnitsCtrlStrings.push_back("pt");
+    m_sizeUnitsCtrlStrings.push_back("px");
     m_sizeUnitsCtrl = new wxChoice( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_SIZE_UNITS, wxDefaultPosition, wxDefaultSize, m_sizeUnitsCtrlStrings, 0 );
     m_sizeUnitsCtrl->SetStringSelection(_("pt"));
     m_sizeUnitsCtrl->SetHelpText(_("The font size units, points or pixels."));
@@ -206,8 +206,8 @@ void wxRichTextFontPage::CreateControls()
     wxStaticText* itemStaticText19 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("Font st&yle:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer18->Add(itemStaticText19, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    wxArrayString m_styleCtrlStrings;
-    m_styleCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_STYLECTRL, wxEmptyString, wxDefaultPosition, wxSize(110, -1), m_styleCtrlStrings, wxCB_READONLY );
+    std::vector<std::string> m_styleCtrlStrings;
+    m_styleCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_STYLECTRL, "", wxDefaultPosition, wxSize(110, -1), m_styleCtrlStrings, wxCB_READONLY );
     m_styleCtrl->SetHelpText(_("Select regular or italic style."));
     if (wxRichTextFontPage::ShowToolTips())
         m_styleCtrl->SetToolTip(_("Select regular or italic style."));
@@ -219,8 +219,8 @@ void wxRichTextFontPage::CreateControls()
     wxStaticText* itemStaticText22 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("Font &weight:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer21->Add(itemStaticText22, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    wxArrayString m_weightCtrlStrings;
-    m_weightCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_WEIGHTCTRL, wxEmptyString, wxDefaultPosition, wxSize(110, -1), m_weightCtrlStrings, wxCB_READONLY );
+    std::vector<std::string> m_weightCtrlStrings;
+    m_weightCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_WEIGHTCTRL, "", wxDefaultPosition, wxSize(110, -1), m_weightCtrlStrings, wxCB_READONLY );
     m_weightCtrl->SetHelpText(_("Select regular or bold."));
     if (wxRichTextFontPage::ShowToolTips())
         m_weightCtrl->SetToolTip(_("Select regular or bold."));
@@ -232,8 +232,8 @@ void wxRichTextFontPage::CreateControls()
     wxStaticText* itemStaticText25 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Underlining:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer24->Add(itemStaticText25, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    wxArrayString m_underliningCtrlStrings;
-    m_underliningCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_UNDERLINING_CTRL, wxEmptyString, wxDefaultPosition, wxSize(110, -1), m_underliningCtrlStrings, wxCB_READONLY );
+    std::vector<std::string> m_underliningCtrlStrings;
+    m_underliningCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_UNDERLINING_CTRL, "", wxDefaultPosition, wxSize(110, -1), m_underliningCtrlStrings, wxCB_READONLY );
     m_underliningCtrl->SetHelpText(_("Select underlining or no underlining."));
     if (wxRichTextFontPage::ShowToolTips())
         m_underliningCtrl->SetToolTip(_("Select underlining or no underlining."));
@@ -363,8 +363,8 @@ void wxRichTextFontPage::CreateControls()
         nStr.Printf(wxT("%d"), i);
         m_sizeListBox->Append(nStr);
     }
-    m_sizeListBox->Append(wxT("48"));
-    m_sizeListBox->Append(wxT("72"));
+    m_sizeListBox->Append("48");
+    m_sizeListBox->Append("72");
 }
 
 /// Transfer data from/to window
@@ -374,7 +374,7 @@ bool wxRichTextFontPage::TransferDataFromWindow()
 
     wxRichTextAttr* attr = GetAttributes();
 
-    if (!m_faceTextCtrl->GetValue().IsEmpty())
+    if (!m_faceTextCtrl->GetValue().empty())
     {
         wxString faceName = m_faceTextCtrl->GetValue();
         attr->SetFontFaceName(faceName);
@@ -568,13 +568,13 @@ bool wxRichTextFontPage::TransferDataToWindow()
     }
     else
     {
-        m_faceTextCtrl->SetValue(wxEmptyString);
+        m_faceTextCtrl->SetValue("");
         m_faceListBox->SetFaceNameSelection(wxEmptyString);
     }
 
     if (attr->HasFontPointSize())
     {
-        wxString strSize = wxString::Format(wxT("%d"), attr->GetFontSize());
+        std::string strSize = wxString::Format(wxT("%d"), attr->GetFontSize());
         m_sizeTextCtrl->SetValue(strSize);
         m_fontSizeSpinButtons->SetValue(attr->GetFontSize());
         m_sizeUnitsCtrl->SetSelection(0);
@@ -583,7 +583,7 @@ bool wxRichTextFontPage::TransferDataToWindow()
     }
     else if (attr->HasFontPixelSize())
     {
-        wxString strSize = wxString::Format(wxT("%d"), attr->GetFontSize());
+        std::string strSize = wxString::Format(wxT("%d"), attr->GetFontSize());
         m_sizeTextCtrl->SetValue(strSize);
         m_fontSizeSpinButtons->SetValue(attr->GetFontSize());
         m_sizeUnitsCtrl->SetSelection(1);
@@ -591,7 +591,7 @@ bool wxRichTextFontPage::TransferDataToWindow()
     }
     else
     {
-        m_sizeTextCtrl->SetValue(wxEmptyString);
+        m_sizeTextCtrl->SetValue("");
         m_sizeListBox->SetSelection(wxNOT_FOUND);
     }
 
@@ -911,8 +911,8 @@ void wxRichTextFontPage::OnFaceTextCtrlUpdated( wxCommandEvent& WXUNUSED(event) 
     if (m_dontUpdate)
         return;
 
-    wxString facename = m_faceTextCtrl->GetValue();
-    if (!facename.IsEmpty())
+    std::string facename = m_faceTextCtrl->GetValue();
+    if (!facename.empty())
     {
         if (m_faceListBox->HasFaceName(facename))
         {
@@ -922,11 +922,15 @@ void wxRichTextFontPage::OnFaceTextCtrlUpdated( wxCommandEvent& WXUNUSED(event) 
         else
         {
             // Try to find a partial match
-            const std::vector<wxString>& arr = m_faceListBox->GetFaceNames();
-            size_t i;
-            for (i = 0; i < arr.size(); i++)
+            const std::vector<std::string>& arr = m_faceListBox->GetFaceNames();
+            wx::utils::ToLower(facename);
+
+            for (size_t i = 0; i < arr.size(); i++)
             {
-                if (arr[i].Mid(0, facename.Length()).Lower() == facename.Lower())
+                auto subString = arr[i].substr(0, facename.length());
+                wx::utils::ToLower(subString);
+
+                if (subString == facename)
                 {
                     m_faceListBox->ScrollToRow(i);
                     break;
@@ -948,10 +952,10 @@ void wxRichTextFontPage::OnSizeTextCtrlUpdated( wxCommandEvent& WXUNUSED(event) 
 
     m_dontUpdate = true;
 
-    wxString strSize = m_sizeTextCtrl->GetValue();
-    if (!strSize.IsEmpty() && m_sizeListBox->FindString(strSize) != wxNOT_FOUND)
+    std::string strSize = m_sizeTextCtrl->GetValue();
+    if (!strSize.empty() && m_sizeListBox->FindString(strSize) != wxNOT_FOUND)
         m_sizeListBox->SetStringSelection(strSize);
-    if (!strSize.IsEmpty())
+    if (!strSize.empty())
         m_fontSizeSpinButtons->SetValue(wxAtoi(strSize));
 
     m_dontUpdate = false;
@@ -1151,10 +1155,10 @@ void wxRichTextFontPage::OnRichtextfontpageSpinbuttonsUp( wxSpinEvent& WXUNUSED(
     if (m_fontSizeSpinButtons->GetValue() != size)
         m_fontSizeSpinButtons->SetValue(size);
 
-    wxString newText(wxString::Format(wxT("%d"), size));
+    std::string newText(wxString::Format(wxT("%d"), size));
 
     m_sizeTextCtrl->SetValue(newText);
-    if (!newText.IsEmpty() && m_sizeListBox->FindString(newText) != wxNOT_FOUND)
+    if (!newText.empty() && m_sizeListBox->FindString(newText) != wxNOT_FOUND)
         m_sizeListBox->SetStringSelection(newText);
     UpdatePreview();
 
@@ -1187,10 +1191,10 @@ void wxRichTextFontPage::OnRichtextfontpageSpinbuttonsDown( wxSpinEvent& WXUNUSE
     if (m_fontSizeSpinButtons->GetValue() != size)
         m_fontSizeSpinButtons->SetValue(size);
 
-    wxString newText(wxString::Format(wxT("%d"), size));
+    std::string newText(wxString::Format(wxT("%d"), size));
 
     m_sizeTextCtrl->SetValue(newText);
-    if (!newText.IsEmpty() && m_sizeListBox->FindString(newText) != wxNOT_FOUND)
+    if (!newText.empty() && m_sizeListBox->FindString(newText) != wxNOT_FOUND)
         m_sizeListBox->SetStringSelection(newText);
     UpdatePreview();
 

@@ -60,7 +60,7 @@ wxGenericValidator::wxGenericValidator(int *val)
     Initialize();
 }
 
-wxGenericValidator::wxGenericValidator(wxString *val)
+wxGenericValidator::wxGenericValidator(std::string* val)
     : m_pString(val)
 {
     Initialize();
@@ -281,13 +281,13 @@ bool wxGenericValidator::TransferToWindow()
         }
         else if (m_pString)
         {
-            if (pControl->FindString(* m_pString) != wxNOT_FOUND)
+            if (pControl->FindString(*m_pString) != wxNOT_FOUND)
             {
-                pControl->SetStringSelection(* m_pString);
+                pControl->SetStringSelection(*m_pString);
             }
             if ((m_validatorWindow->GetWindowStyle() & wxCB_READONLY) == 0)
             {
-                pControl->SetValue(* m_pString);
+                pControl->SetValue(*m_pString);
             }
             return true;
         }

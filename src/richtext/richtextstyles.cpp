@@ -1050,12 +1050,12 @@ bool wxRichTextStyleListCtrl::Create(wxWindow* parent, wxWindowID id, const wxPo
 
     if (showSelector)
     {
-        wxArrayString choices;
-        choices.Add(_("All styles"));
-        choices.Add(_("Paragraph styles"));
-        choices.Add(_("Character styles"));
-        choices.Add(_("List styles"));
-        choices.Add(_("Box styles"));
+        std::vector<std::string> choices;
+        choices.push_back("All styles");
+        choices.push_back("Paragraph styles");
+        choices.push_back("Character styles");
+        choices.push_back("List styles");
+        choices.push_back("Box styles");
 
         m_styleChoice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, choices);
 
@@ -1348,7 +1348,7 @@ void wxRichTextStyleComboCtrl::OnIdle(wxIdleEvent& event)
             SetValue(styleName);
         }
         else if (!currentValue.IsEmpty())
-            SetValue(wxEmptyString);
+            SetValue("");
     }
 }
 

@@ -9299,13 +9299,13 @@ bool wxRichTextStdRenderer::MeasureBullet(wxRichTextParagraph* paragraph, wxDC& 
 }
 
 /// Enumerate the standard bullet names currently supported
-bool wxRichTextStdRenderer::EnumerateStandardBulletNames(wxArrayString& bulletNames)
+bool wxRichTextStdRenderer::EnumerateStandardBulletNames(std::vector<std::string>& bulletNames)
 {
-    bulletNames.Add(wxTRANSLATE("standard/circle"));
-    bulletNames.Add(wxTRANSLATE("standard/circle-outline"));
-    bulletNames.Add(wxTRANSLATE("standard/square"));
-    bulletNames.Add(wxTRANSLATE("standard/diamond"));
-    bulletNames.Add(wxTRANSLATE("standard/triangle"));
+    bulletNames.push_back(wxTRANSLATE("standard/circle"));
+    bulletNames.push_back(wxTRANSLATE("standard/circle-outline"));
+    bulletNames.push_back(wxTRANSLATE("standard/square"));
+    bulletNames.push_back(wxTRANSLATE("standard/diamond"));
+    bulletNames.push_back(wxTRANSLATE("standard/triangle"));
 
     return true;
 }

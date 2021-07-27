@@ -35,18 +35,18 @@ public:
     // -------------------
 
     // SetValue() generates a text change event, ChangeValue() doesn't
-    virtual void SetValue(const wxString& value)
+    virtual void SetValue(const std::string& value)
         { DoSetValue(value, SetValue_SendEvent); }
-    virtual void ChangeValue(const wxString& value);
+    virtual void ChangeValue(const std::string& value);
 
     // writing text inserts it at the current position replacing any current
     // selection, appending always inserts it at the end and doesn't remove any
     // existing text (but it will reset the selection if there is any)
-    virtual void WriteText(const wxString& text) = 0;
+    virtual void WriteText(const std::string& text) = 0;
     virtual void AppendText(const wxString& text);
 
-    virtual wxString GetValue() const;
-    virtual wxString GetRange(long from, long to) const;
+    virtual std::string GetValue() const;
+    virtual std::string GetRange(long from, long to) const;
     bool IsEmpty() const { return GetLastPosition() <= 0; }
 
 
@@ -99,7 +99,7 @@ public:
         { const long pos = GetInsertionPoint(); SetSelection(pos, pos); }
     virtual void GetSelection(long *from, long *to) const = 0;
     bool HasSelection() const;
-    virtual wxString GetStringSelection() const;
+    virtual std::string GetStringSelection() const;
 
 
     // auto-completion
@@ -226,8 +226,8 @@ protected:
         SetValue_SelectionOnly = 2
     };
 
-    virtual void DoSetValue(const wxString& value, int flags);
-    virtual wxString DoGetValue() const = 0;
+    virtual void DoSetValue(const std::string& value, int flags);
+    virtual std::string DoGetValue() const = 0;
 
     // override this to return the associated window, it will be used for event
     // generation and also by generic hints implementation

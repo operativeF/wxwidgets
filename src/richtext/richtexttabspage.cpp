@@ -177,7 +177,7 @@ bool wxRichTextTabsPage::TransferDataToWindow()
     wxRichTextAttr* attr = GetAttributes();
 
     m_tabListCtrl->Clear();
-    m_tabEditCtrl->SetValue(wxEmptyString);
+    m_tabEditCtrl->SetValue("");
 
     if (attr->HasTabs())
     {
@@ -284,7 +284,7 @@ void wxRichTextTabsPage::OnNewTabUpdate( wxUpdateUIEvent& event )
     wxString str = m_tabEditCtrl->GetValue();
     if (!str.empty() && str.IsNumber())
     {
-        wxString s(wxString::Format(wxT("%d"), wxAtoi(str)));
+        std::string s(wxString::Format(wxT("%d"), wxAtoi(str)));
         event.Enable(m_tabListCtrl->FindString(s) == wxNOT_FOUND);
     }
     else
@@ -323,7 +323,7 @@ void wxRichTextTabsPage::OnDeleteAllTabsClick( wxCommandEvent& WXUNUSED(event) )
     if (m_tabsPresent && m_tabListCtrl->GetCount() > 0)
     {
         m_tabListCtrl->Clear();
-        m_tabEditCtrl->SetValue(wxEmptyString);
+        m_tabEditCtrl->SetValue("");
     }
 }
 

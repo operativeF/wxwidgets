@@ -70,7 +70,7 @@ public:
 
     ~wxSpinCtrlGenericBase() override;
 
-    wxString GetTextValue() const override;
+    std::string GetTextValue() const override;
     // T GetValue() const
     // T GetMin() const
     // T GetMax() const

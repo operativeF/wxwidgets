@@ -248,8 +248,8 @@ protected:
     int m_SearchPage;
 
     // lists of available fonts (used in options dialog)
-    std::vector<wxString>* m_NormalFonts;
-    std::vector<wxString>* m_FixedFonts;
+    std::vector<std::string>* m_NormalFonts;
+    std::vector<std::string>* m_FixedFonts;
 
     int m_FontSize; // 0,1,2 = small,medium,big
     wxString m_NormalFace, m_FixedFace;

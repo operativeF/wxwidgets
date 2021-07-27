@@ -1790,7 +1790,7 @@ wxString wxDataViewSpinRenderer::GetAccessibleDescription() const
 
 #if defined(wxHAS_GENERIC_DATAVIEWCTRL)
 
-wxDataViewChoiceRenderer::wxDataViewChoiceRenderer( const std::vector<wxString>& choices, wxDataViewCellMode mode, int alignment ) :
+wxDataViewChoiceRenderer::wxDataViewChoiceRenderer( const std::vector<std::string>& choices, wxDataViewCellMode mode, int alignment ) :
    wxDataViewCustomRenderer(wxT("string"), mode, alignment ),
    m_choices(choices)
 {
@@ -1864,11 +1864,11 @@ wxString wxDataViewChoiceRenderer::GetAccessibleDescription() const
 // wxDataViewChoiceByIndexRenderer
 // ----------------------------------------------------------------------------
 
-wxDataViewChoiceByIndexRenderer::wxDataViewChoiceByIndexRenderer( const std::vector<wxString>& choices,
+wxDataViewChoiceByIndexRenderer::wxDataViewChoiceByIndexRenderer( const std::vector<std::string>& choices,
                                   wxDataViewCellMode mode, int alignment ) :
       wxDataViewChoiceRenderer( choices, mode, alignment )
 {
-    m_variantType = wxS("long");
+    m_variantType = "long";
 }
 
 wxWindow* wxDataViewChoiceByIndexRenderer::CreateEditorCtrl( wxWindow *parent, wxRect labelRect, const wxVariant &value )

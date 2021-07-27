@@ -7006,7 +7006,7 @@ public:
     /**
         Enumerate the standard bullet names currently supported. This function should be overridden.
     */
-    virtual bool EnumerateStandardBulletNames(wxArrayString& bulletNames) = 0;
+    virtual bool EnumerateStandardBulletNames(std::vector<std::string>& bulletNames) = 0;
 
     /**
         Measure the bullet.
@@ -7043,7 +7043,7 @@ public:
     bool DrawBitmapBullet(wxRichTextParagraph* paragraph, wxDC& dc, const wxRichTextAttr& attr, const wxRect& rect) override;
 
     // Enumerate the standard bullet names currently supported
-    bool EnumerateStandardBulletNames(wxArrayString& bulletNames) override;
+    bool EnumerateStandardBulletNames(std::vector<std::string>& bulletNames) override;
 
     // Measure the bullet.
     bool MeasureBullet(wxRichTextParagraph* paragraph, wxDC& dc, const wxRichTextAttr& attr, wxSize& sz) override;

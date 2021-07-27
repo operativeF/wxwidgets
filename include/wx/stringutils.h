@@ -129,6 +129,16 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
     return CmpNoCase(std::string_view(chsA), std::string_view(chsB));
 }
 
+[[nodiscard]] inline constexpr bool IsSameAsCase(std::string_view strViewA, std::string_view strViewB) noexcept
+{
+    return strViewA == strViewB;
+}
+
+[[nodiscard]] inline bool IsSameAsNoCase(std::string_view strViewA, std::string_view strViewB) 
+{
+    return CmpNoCase(strViewA, strViewB);
+}
+
 [[nodiscard]] inline CONSTEXPR_STR20 std::string BeforeFirst(std::string_view strView, std::string_view strFirst, size_t pos = 0) noexcept
 {
     const auto n = strView.find(strFirst, pos);

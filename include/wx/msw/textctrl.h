@@ -47,12 +47,12 @@ public:
     // overridden wxTextEntry methods
     // ------------------------------
 
-    wxString GetValue() const override;
-    wxString GetRange(long from, long to) const override;
+    std::string GetValue() const override;
+    std::string GetRange(long from, long to) const override;
 
     virtual bool IsEmpty() const;
 
-    void WriteText(const wxString& text) override;
+    void WriteText(const std::string& text) override;
     void AppendText(const wxString& text) override;
     void Clear() override;
 
@@ -207,7 +207,7 @@ protected:
                        const wxPoint& pos,
                        const wxSize& size);
 
-    void DoSetValue(const wxString &value, int flags = 0) override;
+    void DoSetValue(const std::string& value, int flags = 0) override;
 
     wxPoint DoPositionToCoords(long pos) const override;
 

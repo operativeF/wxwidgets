@@ -33,6 +33,8 @@
 #include "wx/textbuf.h"
 #include "wx/display.h"
 
+#include "boost/nowide/convert.hpp"
+
 // Interestingly, this symbol currently seems to be absent from Platform SDK
 // headers but it is documented at MSDN.
 #ifndef TDF_SIZE_TO_CONTENT
@@ -653,7 +655,7 @@ void wxMSWTaskDialogConfig::MSWCommonTaskDialogInit(TASKDIALOGCONFIG &tdc)
                   TDF_POSITION_RELATIVE_TO_WINDOW |
                   TDF_SIZE_TO_CONTENT;
     tdc.hInstance = wxGetInstance();
-    tdc.pszWindowTitle = caption.t_str();
+    tdc.pszWindowTitle = boost::nowide::widen(caption).c_str();
 
     // use the top level window as parent if none specified
     tdc.hwndParent = parent ? GetHwndOf(parent) : nullptr;

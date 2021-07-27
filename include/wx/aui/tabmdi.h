@@ -147,7 +147,7 @@ public:
     wxMenuBar *GetMenuBar() const override;
 #endif // wxUSE_MENUS
 
-    void SetTitle(const wxString& title) override;
+    void SetTitle(const std::string& title) override;
 
     void SetIcons(const wxIconBundle& icons) override;
 

@@ -173,7 +173,7 @@ void wxTextMeasureBase::GetMultiLineTextExtent(const wxString& text,
         *heightOneLine = heightLine;
 }
 
-wxSize wxTextMeasureBase::GetLargestStringExtent(const std::vector<wxString>& strings)
+wxSize wxTextMeasureBase::GetLargestStringExtent(const std::vector<std::string>& strings)
 {
     MeasuringGuard guard(*this);
 

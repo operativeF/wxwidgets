@@ -604,8 +604,8 @@ void wxGridCellTextEditor::StartingKey(wxKeyEvent& event)
             break;
 
         default:
-            if ( isPrintable )
-                tc->WriteText(static_cast<wxChar>(ch));
+            if ( isPrintable ) // TODO: Possible to just to_string from int char?
+                tc->WriteText(std::to_string(static_cast<char>(ch)));
             break;
     }
 }
@@ -1493,7 +1493,7 @@ void wxGridCellBoolEditor::SetGridFromValue(int row, int col, wxGrid* grid) cons
 // wxGridCellChoiceEditor
 // ----------------------------------------------------------------------------
 
-wxGridCellChoiceEditor::wxGridCellChoiceEditor(const std::vector<wxString>& choices,
+wxGridCellChoiceEditor::wxGridCellChoiceEditor(const std::vector<std::string>& choices,
                                                bool allowOthers)
     : m_choices(choices),
       m_allowOthers(allowOthers) { }
@@ -1517,7 +1517,7 @@ void wxGridCellChoiceEditor::Create(wxWindow* parent,
 
     if ( !m_allowOthers )
         style |= wxCB_READONLY;
-    m_control = new wxComboBox(parent, id, wxEmptyString,
+    m_control = new wxComboBox(parent, id, "",
                                wxDefaultPosition, wxDefaultSize,
                                m_choices,
                                style);

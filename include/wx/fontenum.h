@@ -49,7 +49,7 @@ public:
     // enumerate the different encodings either for given font facename or for
     // all facenames - will result in OnFontEncoding() being called for each
     // available (facename, encoding) couple
-    virtual bool EnumerateEncodings(const wxString& facename = wxEmptyString);
+    virtual bool EnumerateEncodings(const std::string& facename = "");
 
     // callbacks which are called after one of EnumerateXXX() functions from
     // above is invoked - all of them may return false to stop enumeration or
@@ -67,12 +67,12 @@ public:
 
 
     // convenience function that returns array of facenames.
-    static std::vector<wxString>
+    static std::vector<std::string>
     GetFacenames(wxFontEncoding encoding = wxFONTENCODING_SYSTEM, // all
                  bool fixedWidthOnly = false);
 
     // convenience function that returns array of all available encodings.
-    static std::vector<wxString> GetEncodings(const wxString& facename = wxEmptyString);
+    static std::vector<std::string> GetEncodings(const std::string& facename = "");
 
     // convenience function that returns true if the given face name exist
     // in the user's system

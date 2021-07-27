@@ -40,7 +40,7 @@ public:
     wxSpinCtrlBase& operator=(wxSpinCtrlBase&&) = default;
 
     // accessor functions that derived classes are expected to have
-    virtual wxString GetTextValue() const = 0;
+    virtual std::string GetTextValue() const = 0;
     // T GetValue() const
     // T GetMin() const
     // T GetMax() const

@@ -22,6 +22,8 @@
 
 #include "wx/fdrepdlg.h"
 
+#include "boost/nowide/convert.hpp"
+
 // ----------------------------------------------------------------------------
 // functions prototypes
 // ----------------------------------------------------------------------------
@@ -264,7 +266,7 @@ wxFindReplaceDialogHookProc(HWND hwnd,
         FINDREPLACE *pFR = (FINDREPLACE *)lParam;
         wxFindReplaceDialog *dialog = (wxFindReplaceDialog *)pFR->lCustData;
 
-        ::SetWindowText(hwnd, dialog->GetTitle().t_str());
+        ::SetWindowTextW(hwnd, boost::nowide::widen(dialog->GetTitle()).c_str());
 
         // don't return FALSE from here or the dialog won't be shown
         return TRUE;
@@ -406,12 +408,12 @@ bool wxFindReplaceDialog::Show(bool show)
 // we set the title of this dialog in our jook proc but for now don't crash in
 // the base class version because of m_hWnd == 0
 
-void wxFindReplaceDialog::SetTitle( const wxString& title)
+void wxFindReplaceDialog::SetTitle( const std::string& title)
 {
     m_title = title;
 }
 
-wxString wxFindReplaceDialog::GetTitle() const
+std::string wxFindReplaceDialog::GetTitle() const
 {
     return m_title;
 }

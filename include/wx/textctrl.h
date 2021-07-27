@@ -381,7 +381,7 @@ public:
     int GetBulletNumber() const { return m_bulletNumber; }
     const wxString& GetBulletText() const { return m_bulletText; }
     const wxString& GetBulletFont() const { return m_bulletFont; }
-    const wxString& GetBulletName() const { return m_bulletName; }
+    const std::string& GetBulletName() const { return m_bulletName; }
     const wxString& GetURL() const { return m_urlTarget; }
     int GetTextEffects() const { return m_textEffects; }
     int GetTextEffectFlags() const { return m_textEffectFlags; }
@@ -499,7 +499,7 @@ private:
     int                 m_outlineLevel{0};
     wxString            m_bulletText;
     wxString            m_bulletFont;
-    wxString            m_bulletName;
+    std::string         m_bulletName;
     wxString            m_urlTarget;
     wxFontEncoding      m_fontEncoding{wxFONTENCODING_DEFAULT};
 
@@ -607,8 +607,8 @@ public:
     virtual wxTextCtrlHitTestResult HitTest(const wxPoint& pt,
                                             wxTextCoord *col,
                                             wxTextCoord *row) const;
-    virtual wxString GetValue() const = 0;
-    virtual void SetValue(const wxString& value) = 0;
+    virtual std::string GetValue() const = 0;
+    virtual void SetValue(const std::string& value) = 0;
 
 protected:
     // implementation of loading/saving
@@ -648,11 +648,11 @@ public:
    wxTextCtrlIface& operator=(wxTextCtrlIface&&) = default;
 
     // wxTextAreaBase overrides
-    wxString GetValue() const override
+    std::string GetValue() const override
     {
        return wxTextEntryBase::GetValue();
     }
-    void SetValue(const wxString& value) override
+    void SetValue(const std::string& value) override
     {
        wxTextEntryBase::SetValue(value);
     }
@@ -729,11 +729,11 @@ public:
     bool SetDefaultStyle(const wxTextAttr& style) override;
 
     // wxTextAreaBase overrides
-    wxString GetValue() const override
+    std::string GetValue() const override
     {
        return wxTextEntry::GetValue();
     }
-    void SetValue(const wxString& value) override
+    void SetValue(const std::string& value) override
     {
        wxTextEntry::SetValue(value);
     }

@@ -47,6 +47,8 @@
 #include <climits>
 #include <clocale>
 
+#include "boost/nowide/convert.hpp"
+
 namespace
 {
 
@@ -611,14 +613,14 @@ bool wxXmlResource::AttachUnknownControl(const wxString& name,
 
 static void ProcessPlatformProperty(wxXmlNode *node)
 {
-    wxString s;
+    std::string s;
     bool isok;
 
     wxXmlNode *c = node->GetChildren();
     while (c)
     {
         isok = false;
-        if (!c->GetAttribute(wxT("platform"), &s))
+        if (!c->GetAttribute("platform", &s))
             isok = true;
         else
         {
@@ -664,8 +666,8 @@ static void PreprocessForIdRanges(wxXmlNode *rootnode)
     c = rootnode->GetChildren();
     while (c)
     {
-        wxString name = c->GetAttribute(wxT("name"));
-        if (name.find('[') != wxString::npos)
+        std::string name = c->GetAttribute("name");
+        if (name.find('[') != std::string::npos)
             wxIdRangeManager::Get()->NotifyRangeOfItem(rootnode, name);
 
         // Do any children by recursion, then proceed to the next sibling
@@ -790,7 +792,7 @@ bool wxXmlResource::DoLoadDocument(const wxXmlDocument& doc)
 
     long version;
     int v1, v2, v3, v4;
-    wxString verstr = root->GetAttribute(wxT("version"), wxT("0.0.0.0"));
+    wxString verstr = root->GetAttribute("version", "0.0.0.0");
     if (wxSscanf(verstr, wxT("%i.%i.%i.%i"), &v1, &v2, &v3, &v4) == 4)
         version = v1*256*256*256+v2*256*256+v3*256+v4;
     else
@@ -847,24 +849,24 @@ wxXmlNode *wxXmlResource::DoFindResource(wxXmlNode *parent,
     // where the resource is most commonly looked for):
     for (node = parent->GetChildren(); node; node = node->GetNext())
     {
-        if ( IsObjectNode(node) && node->GetAttribute(wxS("name")) == name )
+        if ( IsObjectNode(node) && node->GetAttribute("name") == name )
         {
             // empty class name matches everything
             if ( classname.empty() )
                 return node;
 
-            wxString cls(node->GetAttribute(wxS("class")));
+            wxString cls(node->GetAttribute("class"));
 
             // object_ref may not have 'class' attribute:
             if (cls.empty() && node->GetName() == wxS("object_ref"))
             {
-                wxString refName = node->GetAttribute(wxS("ref"));
+                wxString refName = node->GetAttribute("ref");
                 if (refName.empty())
                     continue;
 
                 const wxXmlNode * const refNode = GetResourceNode(refName);
                 if ( refNode )
-                    cls = refNode->GetAttribute(wxS("class"));
+                    cls = refNode->GetAttribute("class");
             }
 
             if ( cls == classname )
@@ -979,13 +981,13 @@ static void MergeNodesOver(wxXmlNode& dest, wxXmlNode& overwriteWith,
     // Merge child nodes:
     for (wxXmlNode* node = overwriteWith.GetChildren(); node; node = node->GetNext())
     {
-        wxString name = node->GetAttribute(wxT("name"), wxEmptyString);
+        wxString name = node->GetAttribute("name", "");
         wxXmlNode *dnode;
 
         for (dnode = dest.GetChildren(); dnode; dnode = dnode->GetNext() )
         {
             if ( dnode->GetName() == node->GetName() &&
-                 dnode->GetAttribute(wxT("name"), wxEmptyString) == name &&
+                 dnode->GetAttribute("name", "") == name &&
                  dnode->GetType() == node->GetType() )
             {
                 MergeNodesOver(*dnode, *node, overwriteFilename);
@@ -999,8 +1001,8 @@ static void MergeNodesOver(wxXmlNode& dest, wxXmlNode& overwriteWith,
             // remember referenced object's file, see GetFileNameFromNode()
             copyOfNode->AddAttribute(ATTR_INPUT_FILENAME, overwriteFilename);
 
-            static constexpr wxChar AT_END[] = wxT("end");
-            wxString insert_pos = node->GetAttribute(wxT("insert_at"), AT_END);
+            static constexpr char AT_END[] = "end";
+            std::string insert_pos = node->GetAttribute("insert_at", AT_END);
             if ( insert_pos == AT_END )
             {
                 dest.AddChild(copyOfNode);
@@ -1025,7 +1027,7 @@ wxXmlResource::DoCreateResFromNode(wxXmlNode& node,
     // handling of referenced resource
     if ( node.GetName() == wxT("object_ref") )
     {
-        wxString refName = node.GetAttribute(wxT("ref"), wxEmptyString);
+        wxString refName = node.GetAttribute("ref", "");
         wxXmlNode* refNode = FindResource(refName, wxEmptyString, true);
 
         if ( !refNode )
@@ -1097,7 +1099,7 @@ wxXmlResource::DoCreateResFromNode(wxXmlNode& node,
         (
             R"(no handler found for XML node "%s" (class "%s"))",
             node.GetName(),
-            node.GetAttribute("class", wxEmptyString)
+            node.GetAttribute("class", "")
         )
     );
     return nullptr;
@@ -1484,7 +1486,7 @@ wxObject *wxXmlResourceHandlerImpl::CreateResource(wxXmlNode *node, wxObject *pa
     if (!m_handler->m_instance && node->HasAttribute(wxT("subclass")) &&
         !(m_handler->m_resource->GetFlags() & wxXRC_NO_SUBCLASSING))
     {
-        wxString subclass = node->GetAttribute(wxT("subclass"), wxEmptyString);
+        std::string subclass = node->GetAttribute("subclass", "");
         if (!subclass.empty())
         {
             for (wxXmlSubclassFactories::iterator i = wxXmlResource::ms_subclassFactories->begin();
@@ -1497,7 +1499,7 @@ wxObject *wxXmlResourceHandlerImpl::CreateResource(wxXmlNode *node, wxObject *pa
 
             if (!m_handler->m_instance)
             {
-                wxString name = node->GetAttribute(wxT("name"), wxEmptyString);
+                std::string name = node->GetAttribute("name", "");
                 ReportError
                 (
                     node,
@@ -1512,7 +1514,7 @@ wxObject *wxXmlResourceHandlerImpl::CreateResource(wxXmlNode *node, wxObject *pa
     }
 
     m_handler->m_node = node;
-    m_handler->m_class = node->GetAttribute(wxT("class"), wxEmptyString);
+    m_handler->m_class = node->GetAttribute("class", "");
     m_handler->m_parent = parent;
     m_handler->m_parentAsWindow = wxDynamicCast(m_handler->m_parent, wxWindow);
 
@@ -1565,13 +1567,13 @@ int wxXmlResourceHandlerImpl::GetStyle(const wxString& param, int defaults)
 
 
 
-wxString wxXmlResourceHandlerImpl::GetNodeText(const wxXmlNode* node, int flags)
+std::string wxXmlResourceHandlerImpl::GetNodeText(const wxXmlNode* node, int flags)
 {
-    wxString str1(GetNodeContent(node));
+    std::string str1(GetNodeContent(node));
     if ( str1.empty() )
         return str1;
 
-    wxString str2;
+    std::string str2;
 
     if ( !(flags & wxXRC_TEXT_NO_ESCAPE) )
     {
@@ -1584,51 +1586,51 @@ wxString wxXmlResourceHandlerImpl::GetNodeText(const wxXmlNode* node, int flags)
         const wxChar amp_char = (m_handler->m_resource->CompareVersion(2,3,0,1) < 0)
                                 ? '$' : '_';
 
-        for ( wxString::const_iterator dt = str1.begin(); dt != str1.end(); ++dt )
+        for ( std::string::const_iterator dt = str1.begin(); dt != str1.end(); ++dt )
         {
             // Remap amp_char to &, map double amp_char to amp_char (for things
             // like "&File..." -- this is illegal in XML, so we use "_File..."):
             if ( *dt == amp_char )
             {
                 if ( dt+1 == str1.end() || *(++dt) == amp_char )
-                    str2 << amp_char;
+                    str2 += amp_char;
                 else
-                    str2 << wxT('&') << *dt;
+                    str2 += '&' + *dt;
             }
             // Remap \n to CR, \r to LF, \t to TAB, \\ to \:
             else if ( *dt == wxT('\\') )
             {
-                switch ( (*(++dt)).GetValue() )
+                switch ( (*(++dt)) )
                 {
-                    case wxT('n'):
-                        str2 << wxT('\n');
+                    case 'n':
+                        str2 += '\n';
                         break;
 
-                    case wxT('t'):
-                        str2 << wxT('\t');
+                    case 't':
+                        str2 += '\t';
                         break;
 
-                    case wxT('r'):
-                        str2 << wxT('\r');
+                    case 'r':
+                        str2 += '\r';
                         break;
 
-                    case wxT('\\') :
+                    case '\\':
                         // "\\" wasn't translated to "\" prior to 2.5.3.0:
                         if ( escapeBackslash )
                         {
-                            str2 << wxT('\\');
+                            str2 += '\\';
                             break;
                         }
                         [[fallthrough]];// else fall-through to default: branch below
 
                     default:
-                        str2 << wxT('\\') << *dt;
+                        str2 += '\\' + *dt;
                         break;
                 }
             }
             else
             {
-                str2 << *dt;
+                str2 += *dt;
             }
         }
     }
@@ -1641,7 +1643,7 @@ wxString wxXmlResourceHandlerImpl::GetNodeText(const wxXmlNode* node, int flags)
     if (m_handler->m_resource->GetFlags() & wxXRC_USE_LOCALE)
     {
         if (!(flags & wxXRC_TEXT_NO_TRANSLATE) && node &&
-            node->GetAttribute(wxT("translate"), wxEmptyString) != wxT("0"))
+            node->GetAttribute("translate", "") != "0")
         {
             return wxGetTranslation(str2, m_handler->m_resource->GetDomain());
         }
@@ -1710,16 +1712,16 @@ int wxXmlResourceHandlerImpl::GetID()
 
 
 
-wxString wxXmlResourceHandlerImpl::GetName()
+std::string wxXmlResourceHandlerImpl::GetName()
 {
-    return m_handler->m_node->GetAttribute(wxT("name"), wxT("-1"));
+    return m_handler->m_node->GetAttribute("name", "-1");
 }
 
 
 
-bool wxXmlResourceHandlerImpl::GetBoolAttr(const wxString& attr, bool defaultv)
+bool wxXmlResourceHandlerImpl::GetBoolAttr(std::string_view attr, bool defaultv)
 {
-    wxString v;
+    std::string v;
     return m_handler->m_node->GetAttribute(attr, &v) ? v == '1' : defaultv;
 }
 
@@ -2070,7 +2072,7 @@ wxXmlNode *wxXmlResourceHandlerImpl::GetParamNode(const wxString& param)
 
 bool wxXmlResourceHandlerImpl::IsOfClass(wxXmlNode *node, const wxString& classname) const
 {
-    return node->GetAttribute(wxT("class")) == classname;
+    return node->GetAttribute("class") == classname;
 }
 
 
@@ -2447,13 +2449,14 @@ wxFont wxXmlResourceHandlerImpl::GetFont(const wxString& param, wxWindow* parent
         wxString faces = GetParamValue(wxT("face"));
         wxStringTokenizer tk(faces, wxT(","));
 #if wxUSE_FONTENUM
-        std::vector<wxString> facenames(wxFontEnumerator::GetFacenames());
+        std::vector<std::string> facenames(wxFontEnumerator::GetFacenames());
         while (tk.HasMoreTokens())
         {
             const auto possible_face = std::find_if(facenames.cbegin(), facenames.cend(),
                 [&tk](const auto& name)
                 {
-                    return name.IsSameAs(tk.GetNextToken(), false);
+                    // TODO: Verify this.
+                    return wx::utils::IsSameAsNoCase(name, boost::nowide::narrow(tk.GetNextToken().ToStdWstring()));
                 });
             if (possible_face != std::cend(facenames))
             {

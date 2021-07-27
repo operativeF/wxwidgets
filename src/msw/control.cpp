@@ -621,10 +621,10 @@ bool wxMSWOwnerDrawnButtonBase::MSWDrawButton(WXDRAWITEMSTRUCT *item)
 // wxControlWithItems
 // ----------------------------------------------------------------------------
 
-void wxControlWithItems::MSWAllocStorage(const wxArrayStringsAdapter& items,
+void wxControlWithItems::MSWAllocStorage(const std::vector<std::string>& items,
                                          unsigned wm)
 {
-    const unsigned numItems = items.GetCount();
+    const unsigned numItems = items.size();
     unsigned long totalTextLength = numItems; // for trailing '\0' characters
     for ( unsigned i = 0; i < numItems; ++i )
     {

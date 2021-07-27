@@ -36,7 +36,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
                                 wxID_ANY, wxDefaultPosition, wxDefaultSize,
                                 std::vector<wxString>{}, wxLB_SORT);
 
-        const std::vector<wxString> testitems = {
+        const std::vector<std::string> testitems = {
             "aaa",
             "Aaa",
             "aba",
@@ -67,7 +67,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
                                 wxID_ANY, wxDefaultPosition, wxDefaultSize,
                                 std::vector<wxString>{}, wxLB_MULTIPLE);
 
-        const std::vector<wxString> testitems = {
+        const std::vector<std::string> testitems = {
             "item 0",
             "item 1",
             "item 2",
@@ -121,7 +121,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
 
         wxUIActionSimulator sim;
 
-        const std::vector<wxString> testitems = {
+        const std::vector<std::string> testitems = {
             "item 0",
             "item 1",
             "item 2"
@@ -156,7 +156,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
 
         wxUIActionSimulator sim;
 
-        const std::vector<wxString> testitems = {
+        const std::vector<std::string> testitems = {
             "item 0",
             "item 1",
             "item 2"
@@ -191,7 +191,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
 
     SUBCASE("HitTest")
     {
-        const std::vector<wxString> testitems = {
+        const std::vector<std::string> testitems = {
             "item 0",
             "item 1",
             "item 2"
@@ -225,7 +225,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
             wxDefaultPosition, wxDefaultSize, std::vector<wxString>{},
             wxLB_SORT | wxLB_OWNERDRAW);
 
-        const std::vector<wxString> testitems = {
+        const std::vector<std::string> testitems = {
             "aaa",
             "Aaa",
             "aba",
@@ -255,7 +255,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
             wxDefaultPosition, wxDefaultSize, std::vector<wxString>{},
             wxLB_MULTIPLE | wxLB_OWNERDRAW);
 
-        const std::vector<wxString> testitems = {
+        const std::vector<std::string> testitems = {
             "item 0",
             "item 1",
             "item 2",
@@ -308,7 +308,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
 
         wxUIActionSimulator sim;
 
-        std::vector<wxString> testitems = {
+        std::vector<std::string> testitems = {
             "item 0",
             "item 1",
             "item 2"
@@ -343,7 +343,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
 
         wxUIActionSimulator sim;
 
-        const std::vector<wxString> testitems = {
+        const std::vector<std::string> testitems = {
             "item 0",
             "item 1",
             "item 2"
@@ -377,7 +377,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
 
     SUBCASE("HitTest")
     {
-        const std::vector<wxString> testitems = {
+        const std::vector<std::string> testitems = {
             "item 0",
             "item 1",
             "item 2"

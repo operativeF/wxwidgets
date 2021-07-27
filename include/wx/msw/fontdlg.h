@@ -30,11 +30,11 @@ public:
     wxFontDialog& operator=(wxFontDialog&&) = default;
 
     int ShowModal() override;
-    void SetTitle(const wxString& title) override;
-    wxString GetTitle() const override;
+    void SetTitle(const std::string& title) override;
+    std::string GetTitle() const override;
 
 protected:
-    wxString m_title;
+    std::string m_title;
 
 public:
 	wxClassInfo *GetClassInfo() const override;

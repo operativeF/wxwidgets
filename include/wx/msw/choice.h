@@ -30,7 +30,7 @@ public:
         wxWindowID id,
         const wxPoint& pos,
         const wxSize& size,
-        const std::vector<wxString>& choices = {},
+        const std::vector<std::string>& choices = {},
         long style = 0,
         const wxValidator& validator = wxDefaultValidator,
         const wxString& name = wxASCII_STR(wxChoiceNameStr))
@@ -47,7 +47,7 @@ public:
                 wxWindowID id,
                 const wxPoint& pos,
                 const wxSize& size,
-                const std::vector<wxString>& choices,
+                const std::vector<std::string>& choices,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxChoiceNameStr));
@@ -61,9 +61,9 @@ public:
     int GetCurrentSelection() const override;
     void SetSelection(int n) override;
 
-    int FindString(const wxString& s, bool bCase = false) const override;
-    wxString GetString(unsigned int n) const override;
-    void SetString(unsigned int n, const wxString& s) override;
+    int FindString(std::string_view s, bool bCase = false) const override;
+    std::string GetString(unsigned int n) const override;
+    void SetString(unsigned int n, const std::string& s) override;
 
     wxVisualAttributes GetDefaultAttributes() const override
     {
@@ -90,7 +90,7 @@ protected:
     void DoDeleteOneItem(unsigned int n) override;
     void DoClear() override;
 
-    int DoInsertItems(const wxArrayStringsAdapter& items,
+    int DoInsertItems(const std::vector<std::string>& items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
 
@@ -120,7 +120,7 @@ protected:
     bool CreateAndInit(wxWindow *parent, wxWindowID id,
                        const wxPoint& pos,
                        const wxSize& size,
-                       const std::vector<wxString>& choices,
+                       const std::vector<std::string>& choices,
                        long style,
                        const wxValidator& validator,
                        const wxString& name);

@@ -21,7 +21,7 @@ namespace
 {
 
 // Cached result of GetFacenames().
-std::vector<wxString> gs_allFacenames;
+std::vector<std::string> gs_allFacenames;
 
 // Module used to ensure the cache is cleared on library shutdown and so is not
 // reused if it re-initialized again later.
@@ -63,13 +63,13 @@ public:
         return true;
     }
 
-    std::vector<wxString> m_arrFacenames;
-    std::vector<wxString> m_arrEncodings;
+    std::vector<std::string> m_arrFacenames;
+    std::vector<std::string> m_arrEncodings;
 };
 
 
 /* static */
-std::vector<wxString> wxFontEnumerator::GetFacenames(wxFontEncoding encoding, bool fixedWidthOnly)
+std::vector<std::string> wxFontEnumerator::GetFacenames(wxFontEncoding encoding, bool fixedWidthOnly)
 {
     wxSimpleFontEnumerator temp;
     temp.EnumerateFacenames(encoding, fixedWidthOnly);
@@ -77,7 +77,7 @@ std::vector<wxString> wxFontEnumerator::GetFacenames(wxFontEncoding encoding, bo
 }
 
 /* static */
-std::vector<wxString> wxFontEnumerator::GetEncodings(const wxString& facename)
+std::vector<std::string> wxFontEnumerator::GetEncodings(const std::string& facename)
 {
     wxSimpleFontEnumerator temp;
     temp.EnumerateEncodings(facename);

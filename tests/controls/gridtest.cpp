@@ -398,7 +398,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::CellEdit")
 
     wxYield();
 
-    sim.Text("abab");
+    sim.Text("cbab");
 
     wxYield();
 
@@ -406,7 +406,7 @@ TEST_CASE_FIXTURE(GridTestCase, "Grid::CellEdit")
 
     wxYield();
 
-    CHECK(m_grid->GetCellValue(1, 1) == "abab");
+    CHECK(m_grid->GetCellValue(1, 1) == "cbab");
 
     CHECK(created.GetCount() == 1);
     CHECK(changing.GetCount() == 1);

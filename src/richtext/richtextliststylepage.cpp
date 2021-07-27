@@ -245,10 +245,10 @@ void wxRichTextListStylePage::CreateControls()
     wxStaticText* itemStaticText21 = new wxStaticText( itemPanel10, wxID_STATIC, _("Bullet &Alignment:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer13->Add(itemStaticText21, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    wxArrayString m_bulletAlignmentCtrlStrings;
-    m_bulletAlignmentCtrlStrings.Add(_("Left"));
-    m_bulletAlignmentCtrlStrings.Add(_("Centre"));
-    m_bulletAlignmentCtrlStrings.Add(_("Right"));
+    std::vector<std::string> m_bulletAlignmentCtrlStrings;
+    m_bulletAlignmentCtrlStrings.push_back("Left");
+    m_bulletAlignmentCtrlStrings.push_back("Centre");
+    m_bulletAlignmentCtrlStrings.push_back("Right");
     m_bulletAlignmentCtrl = new wxComboBox( itemPanel10, ID_RICHTEXTLISTSTYLEPAGE_BULLETALIGNMENTCTRL, _("Left"), wxDefaultPosition, wxSize(60, -1), m_bulletAlignmentCtrlStrings, wxCB_READONLY );
     m_bulletAlignmentCtrl->SetStringSelection(_("Left"));
     m_bulletAlignmentCtrl->SetHelpText(_("The bullet character."));
@@ -270,8 +270,8 @@ void wxRichTextListStylePage::CreateControls()
 
     wxBoxSizer* itemBoxSizer28 = new wxBoxSizer(wxHORIZONTAL);
     itemBoxSizer26->Add(itemBoxSizer28, 0, wxGROW, 5);
-    wxArrayString m_symbolCtrlStrings;
-    m_symbolCtrl = new wxComboBox( itemPanel10, ID_RICHTEXTLISTSTYLEPAGE_SYMBOLCTRL, wxEmptyString, wxDefaultPosition, wxSize(60, -1), m_symbolCtrlStrings, wxCB_DROPDOWN );
+    std::vector<std::string> m_symbolCtrlStrings;
+    m_symbolCtrl = new wxComboBox( itemPanel10, ID_RICHTEXTLISTSTYLEPAGE_SYMBOLCTRL, "", wxDefaultPosition, wxSize(60, -1), m_symbolCtrlStrings, wxCB_DROPDOWN );
     m_symbolCtrl->SetHelpText(_("The bullet character."));
     if (wxRichTextListStylePage::ShowToolTips())
         m_symbolCtrl->SetToolTip(_("The bullet character."));
@@ -288,8 +288,8 @@ void wxRichTextListStylePage::CreateControls()
     wxStaticText* itemStaticText32 = new wxStaticText( itemPanel10, ID_RICHTEXTLISTSTYLEPAGE_SYMBOLSTATIC, _("Symbol &font:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer26->Add(itemStaticText32, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    wxArrayString m_symbolFontCtrlStrings;
-    m_symbolFontCtrl = new wxComboBox( itemPanel10, ID_RICHTEXTLISTSTYLEPAGE_SYMBOLFONTCTRL, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_symbolFontCtrlStrings, wxCB_DROPDOWN );
+    std::vector<std::string> m_symbolFontCtrlStrings;
+    m_symbolFontCtrl = new wxComboBox( itemPanel10, ID_RICHTEXTLISTSTYLEPAGE_SYMBOLFONTCTRL, "", wxDefaultPosition, wxDefaultSize, m_symbolFontCtrlStrings, wxCB_DROPDOWN );
     if (wxRichTextListStylePage::ShowToolTips())
         m_symbolFontCtrl->SetToolTip(_("Available fonts."));
     itemBoxSizer26->Add(m_symbolFontCtrl, 0, wxGROW|wxALL, 5);
@@ -299,8 +299,8 @@ void wxRichTextListStylePage::CreateControls()
     wxStaticText* itemStaticText35 = new wxStaticText( itemPanel10, ID_RICHTEXTLISTSTYLEPAGE_NAMESTATIC, _("S&tandard bullet name:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer26->Add(itemStaticText35, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    wxArrayString m_bulletNameCtrlStrings;
-    m_bulletNameCtrl = new wxComboBox( itemPanel10, ID_RICHTEXTLISTSTYLEPAGE_NAMECTRL, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_bulletNameCtrlStrings, wxCB_DROPDOWN );
+    std::vector<std::string> m_bulletNameCtrlStrings;
+    m_bulletNameCtrl = new wxComboBox( itemPanel10, ID_RICHTEXTLISTSTYLEPAGE_NAMECTRL, "", wxDefaultPosition, wxDefaultSize, m_bulletNameCtrlStrings, wxCB_DROPDOWN );
     m_bulletNameCtrl->SetHelpText(_("A standard bullet name."));
     if (wxRichTextListStylePage::ShowToolTips())
         m_bulletNameCtrl->SetToolTip(_("A standard bullet name."));
@@ -444,19 +444,20 @@ void wxRichTextListStylePage::CreateControls()
     wxStaticText* itemStaticText76 = new wxStaticText( itemPanel37, wxID_STATIC, _("Line spacing:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemFlexGridSizer71->Add(itemStaticText76, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
-    wxArrayString m_spacingLineStrings;
-    m_spacingLineStrings.Add(_("(none)"));
-    m_spacingLineStrings.Add(_("Single"));
-    m_spacingLineStrings.Add(_("1.1"));
-    m_spacingLineStrings.Add(_("1.2"));
-    m_spacingLineStrings.Add(_("1.3"));
-    m_spacingLineStrings.Add(_("1.4"));
-    m_spacingLineStrings.Add(_("1.5"));
-    m_spacingLineStrings.Add(_("1.6"));
-    m_spacingLineStrings.Add(_("1.7"));
-    m_spacingLineStrings.Add(_("1.8"));
-    m_spacingLineStrings.Add(_("1.9"));
-    m_spacingLineStrings.Add(_("2"));
+    std::vector<std::string> m_spacingLineStrings;
+    m_spacingLineStrings.push_back("(none)");
+    m_spacingLineStrings.push_back("Single");
+    m_spacingLineStrings.push_back("1.1");
+    m_spacingLineStrings.push_back("1.2");
+    m_spacingLineStrings.push_back("1.3");
+    m_spacingLineStrings.push_back("1.4");
+    m_spacingLineStrings.push_back("1.5");
+    m_spacingLineStrings.push_back("1.6");
+    m_spacingLineStrings.push_back("1.7");
+    m_spacingLineStrings.push_back("1.8");
+    m_spacingLineStrings.push_back("1.9");
+    m_spacingLineStrings.push_back("2");
+
     m_spacingLine = new wxComboBox( itemPanel37, ID_RICHTEXTLISTSTYLEPAGE_LINESPACING, _("(none)"), wxDefaultPosition, wxSize(85, -1), m_spacingLineStrings, wxCB_READONLY );
     m_spacingLine->SetStringSelection(_("(none)"));
     m_spacingLine->SetHelpText(_("The line spacing."));
@@ -495,12 +496,12 @@ void wxRichTextListStylePage::CreateControls()
     m_symbolCtrl->Append(_("+"));
     m_symbolCtrl->Append(_("~"));
 
-    wxArrayString standardBulletNames;
+    std::vector<std::string> standardBulletNames;
     if (wxRichTextBuffer::GetRenderer())
         wxRichTextBuffer::GetRenderer()->EnumerateStandardBulletNames(standardBulletNames);
 
     m_bulletNameCtrl->Append(standardBulletNames);
-    std::vector<wxString> facenames = wxRichTextCtrl::GetAvailableFontNames();
+    std::vector<std::string> facenames = wxRichTextCtrl::GetAvailableFontNames();
     std::sort(facenames.begin(), facenames.end());
 
     m_symbolFontCtrl->Append(facenames);
@@ -513,13 +514,13 @@ void wxRichTextListStylePage::CreateControls()
 /// Updates the font preview
 void wxRichTextListStylePage::UpdatePreview()
 {
-    static constexpr wxChar s_para1[] = wxT("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. \
-Nullam ante sapien, vestibulum nonummy, pulvinar sed, luctus ut, lacus.\n");
+    static constexpr char s_para1[] = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. \
+Nullam ante sapien, vestibulum nonummy, pulvinar sed, luctus ut, lacus.\n";
 
-    static constexpr wxChar s_para2[] = wxT("Duis pharetra consequat dui. Nullam vitae justo id mauris lobortis interdum.\n");
+    static constexpr char s_para2[] = "Duis pharetra consequat dui. Nullam vitae justo id mauris lobortis interdum.\n";
 
-    static constexpr wxChar s_para3[] = wxT("Integer convallis dolor at augue \
-iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n");
+    static constexpr char s_para3[] = "Integer convallis dolor at augue \
+iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
 
     wxRichTextListStyleDefinition* def = wxDynamicCast(wxRichTextFormattingDialog::GetDialogStyleDefinition(this),
         wxRichTextListStyleDefinition);
@@ -663,7 +664,7 @@ bool wxRichTextListStylePage::TransferDataFromWindow()
         else if (index == wxRICHTEXT_BULLETINDEX_BITMAP)
         {
             bulletStyle |= wxTEXT_ATTR_BULLET_STYLE_BITMAP;
-            if (m_bulletNameCtrl->GetValue().IsEmpty())
+            if (m_bulletNameCtrl->GetValue().empty())
                 attr->SetFlags(attr->GetFlags() & ~wxTEXT_ATTR_BULLET_NAME);
             else
                 attr->SetBulletName(m_bulletNameCtrl->GetValue());
@@ -693,7 +694,7 @@ bool wxRichTextListStylePage::TransferDataFromWindow()
 
     // if (m_hasBulletSymbol)
     {
-        if (!m_symbolCtrl->GetValue().IsEmpty())
+        if (!m_symbolCtrl->GetValue().empty())
             attr->SetBulletText(m_symbolCtrl->GetValue());
         else
             attr->SetFlags(attr->GetFlags() & ~wxTEXT_ATTR_BULLET_TEXT);
@@ -746,8 +747,8 @@ void wxRichTextListStylePage::DoTransferDataToWindow()
     }
     else
     {
-        m_indentLeft->SetValue(wxEmptyString);
-        m_indentLeftFirst->SetValue(wxEmptyString);
+        m_indentLeft->SetValue("");
+        m_indentLeftFirst->SetValue("");
     }
 
     if (attr->HasRightIndent())
@@ -757,7 +758,7 @@ void wxRichTextListStylePage::DoTransferDataToWindow()
         m_indentRight->SetValue(rightIndent);
     }
     else
-        m_indentRight->SetValue(wxEmptyString);
+        m_indentRight->SetValue("");
 
     if (attr->HasParagraphSpacingAfter())
     {
@@ -766,7 +767,7 @@ void wxRichTextListStylePage::DoTransferDataToWindow()
         m_spacingAfter->SetValue(spacingAfter);
     }
     else
-        m_spacingAfter->SetValue(wxEmptyString);
+        m_spacingAfter->SetValue("");
 
     if (attr->HasParagraphSpacingBefore())
     {
@@ -775,7 +776,7 @@ void wxRichTextListStylePage::DoTransferDataToWindow()
         m_spacingBefore->SetValue(spacingBefore);
     }
     else
-        m_spacingBefore->SetValue(wxEmptyString);
+        m_spacingBefore->SetValue("");
 
     if (attr->HasLineSpacing())
     {
@@ -859,12 +860,12 @@ void wxRichTextListStylePage::DoTransferDataToWindow()
         m_symbolFontCtrl->SetValue(attr->GetBulletFont());
     }
     else
-        m_symbolCtrl->SetValue(wxEmptyString);
+        m_symbolCtrl->SetValue("");
 
     if (attr->HasBulletName())
         m_bulletNameCtrl->SetValue(attr->GetBulletName());
     else
-        m_bulletNameCtrl->SetValue(wxEmptyString);
+        m_bulletNameCtrl->SetValue("");
 
     m_dontUpdate = false;
 }

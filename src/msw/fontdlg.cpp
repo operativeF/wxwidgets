@@ -31,6 +31,8 @@
 #include <cstdlib>
 #include <cstring>
 
+#include "boost/nowide/convert.hpp"
+
 // ----------------------------------------------------------------------------
 // wxWin macros
 // ----------------------------------------------------------------------------
@@ -58,7 +60,7 @@ wxFontDialogHookProc(HWND hwnd,
         wxFontDialog * const
             dialog = reinterpret_cast<wxFontDialog *>(pCH->lCustData);
 
-        ::SetWindowText(hwnd, dialog->GetTitle().t_str());
+        ::SetWindowTextW(hwnd, boost::nowide::widen(dialog->GetTitle()).c_str());
     }
 
     return 0;
@@ -68,14 +70,14 @@ wxFontDialogHookProc(HWND hwnd,
 // wxFontDialog
 // ----------------------------------------------------------------------------
 
-void wxFontDialog::SetTitle(const wxString& title)
+void wxFontDialog::SetTitle(const std::string& title)
 {
     // Just store the title here, we can't set it right now because the dialog
     // doesn't exist yet -- it will be created only when ShowModal() is called.
     m_title = title;
 }
 
-wxString wxFontDialog::GetTitle() const
+std::string wxFontDialog::GetTitle() const
 {
     return m_title;
 }

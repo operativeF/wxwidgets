@@ -355,14 +355,14 @@ public:
     }
 
     /// Returns the array of face names
-    const std::vector<wxString>& GetFaceNames() const { return m_faceNames; }
+    const std::vector<std::string>& GetFaceNames() const { return m_faceNames; }
 
 protected:
     /// Returns the HTML for this item
     wxString OnGetItem(size_t n) const override;
 
 private:
-    std::vector<wxString> m_faceNames;
+    std::vector<std::string> m_faceNames;
 };
 
 #endif

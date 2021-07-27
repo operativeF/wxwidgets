@@ -48,8 +48,8 @@ public:
     wxTopLevelWindowMSW(wxTopLevelWindowMSW&&) = default;
     wxTopLevelWindowMSW& operator=(wxTopLevelWindowMSW&&) = default;
     
-    void SetTitle( const wxString& title) override;
-    wxString GetTitle() const override;
+    void SetTitle( const std::string& title) override;
+    std::string GetTitle() const override;
     void Maximize(bool maximize = true) override;
     bool IsMaximized() const override;
     void Iconize(bool iconize = true) override;

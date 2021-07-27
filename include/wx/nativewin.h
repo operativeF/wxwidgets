@@ -165,12 +165,12 @@ public:
    wxNativeContainerWindow& operator=(wxNativeContainerWindow&&) = default;
 
     // provide (trivial) implementation of the base class pure virtuals
-    void SetTitle(const wxString& WXUNUSED(title)) override
+    void SetTitle(const std::string& WXUNUSED(title)) override
     {
         wxFAIL_MSG( "not implemented for native windows" );
     }
 
-    wxString GetTitle() const override
+    std::string GetTitle() const override
     {
         wxFAIL_MSG( "not implemented for native windows" );
 

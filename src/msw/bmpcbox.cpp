@@ -51,7 +51,7 @@ bool wxBitmapComboBox::Create(wxWindow *parent,
                               const wxString& value,
                               const wxPoint& pos,
                               const wxSize& size,
-                              const std::vector<wxString>& choices,
+                              const std::vector<std::string>& choices,
                               long style,
                               const wxValidator& validator,
                               const wxString& name)
@@ -82,7 +82,8 @@ void wxBitmapComboBox::RecreateControl()
     wxPoint pos = GetPosition();
     wxSize size = GetSize();
     size.y = GetBestSize().y;
-    const std::vector<wxString> strings = GetStrings();
+    const std::vector<std::string> strings = GetStrings();
+
     const unsigned numItems = strings.size();
     unsigned i;
 
@@ -260,11 +261,11 @@ int wxBitmapComboBox::Insert(const wxString& item, const wxBitmap& bitmap,
     return n;
 }
 
-int wxBitmapComboBox::DoInsertItems(const wxArrayStringsAdapter & items,
+int wxBitmapComboBox::DoInsertItems(const std::vector<std::string>& items,
                                     unsigned int pos,
                                     void **clientData, wxClientDataType type)
 {
-    const unsigned int numItems = items.GetCount();
+    const unsigned int numItems = items.size();
 
     int index;
     if ( HasFlag(wxCB_SORT) )
@@ -275,10 +276,11 @@ int wxBitmapComboBox::DoInsertItems(const wxArrayStringsAdapter & items,
         index = pos;
         for ( unsigned int i = 0; i < numItems; i++ )
         {
+            // FIXME: Really stupid. Fix these.
             if ( clientData )
-                index = wxComboBox::DoInsertItems(items[i], pos+i, clientData+i, type);
+                index = wxComboBox::DoInsertItems(std::vector<std::string>{items[i]}, pos+i, clientData+i, type);
             else
-                index = wxComboBox::DoInsertItems(items[i], pos+i, nullptr, wxClientDataType::None);
+                index = wxComboBox::DoInsertItems(std::vector<std::string>{items[i]}, pos+i, nullptr, wxClientDataType::None);
 
             wxASSERT_MSG( index != wxNOT_FOUND, wxS("Invalid wxBitmapComboBox state") );
             if ( index == wxNOT_FOUND )

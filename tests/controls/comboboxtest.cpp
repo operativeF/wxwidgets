@@ -86,7 +86,7 @@ TEST_CASE_FIXTURE(wxComboBoxTest, "Combo box test")
         m_container = std::make_unique<wxComboBox>(wxTheApp->GetTopWindow(),
                                                    wxID_ANY, "",
                                                    wxDefaultPosition, wxDefaultSize,
-                                                   std::vector<wxString>{},
+                                                   std::vector<std::string>{},
                                                    wxCB_SORT);
 
         m_container->Append("aaa");
@@ -111,7 +111,7 @@ TEST_CASE_FIXTURE(wxComboBoxTest, "Combo box test")
 
     SUBCASE("ReadOnly")
     {
-        const std::vector<wxString> testitems = {
+        const std::vector<std::string> testitems = {
             "item 1",
             "item 2"
         };
@@ -178,7 +178,7 @@ TEST_CASE("wxComboBox::ProcessEnter")
     public:
         wxControl* Create(wxWindow* parent, int style) const override
         {
-            const std::vector<wxString> choices = { "foo", "bar", "baz" };
+            const std::vector<std::string> choices = { "foo", "bar", "baz" };
 
             return new wxComboBox(parent, wxID_ANY, wxString(),
                                   wxDefaultPosition, wxDefaultSize,

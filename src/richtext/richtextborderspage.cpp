@@ -249,10 +249,10 @@ void wxRichTextBordersPage::CreateControls()
     m_leftBorderWidth = new wxTextCtrl( itemPanel5, ID_RICHTEXT_BORDER_LEFT, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0 );
     itemBoxSizer15->Add(m_leftBorderWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_leftBorderWidthUnitsStrings;
-    m_leftBorderWidthUnitsStrings.Add(_("px"));
-    m_leftBorderWidthUnitsStrings.Add(_("cm"));
-    m_leftBorderWidthUnitsStrings.Add(_("pt"));
+    std::vector<std::string> m_leftBorderWidthUnitsStrings;
+    m_leftBorderWidthUnitsStrings.push_back("px");
+    m_leftBorderWidthUnitsStrings.push_back("cm");
+    m_leftBorderWidthUnitsStrings.push_back("pt");
     m_leftBorderWidthUnits = new wxComboBox( itemPanel5, ID_RICHTEXT_BORDER_LEFT_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_leftBorderWidthUnitsStrings, wxCB_READONLY );
     m_leftBorderWidthUnits->SetStringSelection(_("px"));
     m_leftBorderWidthUnits->SetHelpText(_("Units for the left border width."));
@@ -262,8 +262,8 @@ void wxRichTextBordersPage::CreateControls()
 
     itemBoxSizer15->Add(2, 5, 0, wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
-    wxArrayString m_leftBorderStyleStrings;
-    m_leftBorderStyle = new wxComboBox( itemPanel5, ID_RICHTEXT_BORDER_LEFT_STYLE, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_leftBorderStyleStrings, wxCB_READONLY );
+    std::vector<std::string> m_leftBorderStyleStrings;
+    m_leftBorderStyle = new wxComboBox( itemPanel5, ID_RICHTEXT_BORDER_LEFT_STYLE, "", wxDefaultPosition, wxDefaultSize, m_leftBorderStyleStrings, wxCB_READONLY );
     m_leftBorderStyle->SetHelpText(_("The border line style."));
     if (wxRichTextBordersPage::ShowToolTips())
         m_leftBorderStyle->SetToolTip(_("The border line style."));
@@ -283,10 +283,10 @@ void wxRichTextBordersPage::CreateControls()
     m_rightBorderWidth = new wxTextCtrl( itemPanel5, ID_RICHTEXT_BORDER_RIGHT, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0 );
     itemBoxSizer23->Add(m_rightBorderWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_rightBorderWidthUnitsStrings;
-    m_rightBorderWidthUnitsStrings.Add(_("px"));
-    m_rightBorderWidthUnitsStrings.Add(_("cm"));
-    m_rightBorderWidthUnitsStrings.Add(_("pt"));
+    std::vector<std::string> m_rightBorderWidthUnitsStrings;
+    m_rightBorderWidthUnitsStrings.push_back("px");
+    m_rightBorderWidthUnitsStrings.push_back("cm");
+    m_rightBorderWidthUnitsStrings.push_back("pt");
     m_rightBorderWidthUnits = new wxComboBox( itemPanel5, ID_RICHTEXT_BORDER_RIGHT_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_rightBorderWidthUnitsStrings, wxCB_READONLY );
     m_rightBorderWidthUnits->SetStringSelection(_("px"));
     m_rightBorderWidthUnits->SetHelpText(_("Units for the right border width."));
@@ -296,8 +296,8 @@ void wxRichTextBordersPage::CreateControls()
 
     itemBoxSizer23->Add(2, 5, 0, wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
-    wxArrayString m_rightBorderStyleStrings;
-    m_rightBorderStyle = new wxComboBox( itemPanel5, ID_RICHTEXT_BORDER_RIGHT_STYLE, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_rightBorderStyleStrings, wxCB_READONLY );
+    std::vector<std::string> m_rightBorderStyleStrings;
+    m_rightBorderStyle = new wxComboBox( itemPanel5, ID_RICHTEXT_BORDER_RIGHT_STYLE, "", wxDefaultPosition, wxDefaultSize, m_rightBorderStyleStrings, wxCB_READONLY );
     m_rightBorderStyle->SetHelpText(_("The border line style."));
     if (wxRichTextBordersPage::ShowToolTips())
         m_rightBorderStyle->SetToolTip(_("The border line style."));
@@ -317,10 +317,10 @@ void wxRichTextBordersPage::CreateControls()
     m_topBorderWidth = new wxTextCtrl( itemPanel5, ID_RICHTEXT_BORDER_TOP, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0 );
     itemBoxSizer31->Add(m_topBorderWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_topBorderWidthUnitsStrings;
-    m_topBorderWidthUnitsStrings.Add(_("px"));
-    m_topBorderWidthUnitsStrings.Add(_("cm"));
-    m_topBorderWidthUnitsStrings.Add(_("pt"));
+    std::vector<std::string> m_topBorderWidthUnitsStrings;
+    m_topBorderWidthUnitsStrings.push_back("px");
+    m_topBorderWidthUnitsStrings.push_back("cm");
+    m_topBorderWidthUnitsStrings.push_back("pt");
     m_topBorderWidthUnits = new wxComboBox( itemPanel5, ID_RICHTEXT_BORDER_TOP_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_topBorderWidthUnitsStrings, wxCB_READONLY );
     m_topBorderWidthUnits->SetStringSelection(_("px"));
     m_topBorderWidthUnits->SetHelpText(_("Units for the top border width."));
@@ -330,8 +330,8 @@ void wxRichTextBordersPage::CreateControls()
 
     itemBoxSizer31->Add(2, 5, 0, wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
-    wxArrayString m_topBorderStyleStrings;
-    m_topBorderStyle = new wxComboBox( itemPanel5, ID_RICHTEXT_BORDER_TOP_STYLE, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_topBorderStyleStrings, wxCB_READONLY );
+    std::vector<std::string> m_topBorderStyleStrings;
+    m_topBorderStyle = new wxComboBox( itemPanel5, ID_RICHTEXT_BORDER_TOP_STYLE, "", wxDefaultPosition, wxDefaultSize, m_topBorderStyleStrings, wxCB_READONLY );
     m_topBorderStyle->SetHelpText(_("The border line style."));
     if (wxRichTextBordersPage::ShowToolTips())
         m_topBorderStyle->SetToolTip(_("The border line style."));
@@ -351,10 +351,10 @@ void wxRichTextBordersPage::CreateControls()
     m_bottomBorderWidth = new wxTextCtrl( itemPanel5, ID_RICHTEXT_BORDER_BOTTOM, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0 );
     itemBoxSizer39->Add(m_bottomBorderWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_bottomBorderWidthUnitsStrings;
-    m_bottomBorderWidthUnitsStrings.Add(_("px"));
-    m_bottomBorderWidthUnitsStrings.Add(_("cm"));
-    m_bottomBorderWidthUnitsStrings.Add(_("pt"));
+    std::vector<std::string> m_bottomBorderWidthUnitsStrings;
+    m_bottomBorderWidthUnitsStrings.push_back("px");
+    m_bottomBorderWidthUnitsStrings.push_back("cm");
+    m_bottomBorderWidthUnitsStrings.push_back("pt");
     m_bottomBorderWidthUnits = new wxComboBox( itemPanel5, ID_RICHTEXT_BORDER_BOTTOM_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_bottomBorderWidthUnitsStrings, wxCB_READONLY );
     m_bottomBorderWidthUnits->SetStringSelection(_("px"));
     m_bottomBorderWidthUnits->SetHelpText(_("Units for the bottom border width."));
@@ -364,8 +364,8 @@ void wxRichTextBordersPage::CreateControls()
 
     itemBoxSizer39->Add(2, 5, 0, wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
-    wxArrayString m_bottomBorderStyleStrings;
-    m_bottomBorderStyle = new wxComboBox( itemPanel5, ID_RICHTEXT_BORDER_BOTTOM_STYLE, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_bottomBorderStyleStrings, wxCB_READONLY );
+    std::vector<std::string> m_bottomBorderStyleStrings;
+    m_bottomBorderStyle = new wxComboBox( itemPanel5, ID_RICHTEXT_BORDER_BOTTOM_STYLE, "", wxDefaultPosition, wxDefaultSize, m_bottomBorderStyleStrings, wxCB_READONLY );
     m_bottomBorderStyle->SetHelpText(_("The border line style."));
     if (wxRichTextBordersPage::ShowToolTips())
         m_bottomBorderStyle->SetToolTip(_("The border line style."));
@@ -417,10 +417,10 @@ void wxRichTextBordersPage::CreateControls()
     m_leftOutlineWidth = new wxTextCtrl( itemPanel48, ID_RICHTEXT_OUTLINE_LEFT, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0 );
     itemBoxSizer58->Add(m_leftOutlineWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_leftOutlineWidthUnitsStrings;
-    m_leftOutlineWidthUnitsStrings.Add(_("px"));
-    m_leftOutlineWidthUnitsStrings.Add(_("cm"));
-    m_leftOutlineWidthUnitsStrings.Add(_("pt"));
+    std::vector<std::string> m_leftOutlineWidthUnitsStrings;
+    m_leftOutlineWidthUnitsStrings.push_back("px");
+    m_leftOutlineWidthUnitsStrings.push_back("cm");
+    m_leftOutlineWidthUnitsStrings.push_back("pt");
     m_leftOutlineWidthUnits = new wxComboBox( itemPanel48, ID_RICHTEXT_OUTLINE_LEFT_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_leftOutlineWidthUnitsStrings, wxCB_READONLY );
     m_leftOutlineWidthUnits->SetStringSelection(_("px"));
     m_leftOutlineWidthUnits->SetHelpText(_("Units for the left outline width."));
@@ -430,8 +430,8 @@ void wxRichTextBordersPage::CreateControls()
 
     itemBoxSizer58->Add(2, 5, 0, wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
-    wxArrayString m_leftOutlineStyleStrings;
-    m_leftOutlineStyle = new wxComboBox( itemPanel48, ID_RICHTEXT_OUTLINE_LEFT_STYLE, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_leftOutlineStyleStrings, wxCB_READONLY );
+    std::vector<std::string> m_leftOutlineStyleStrings;
+    m_leftOutlineStyle = new wxComboBox( itemPanel48, ID_RICHTEXT_OUTLINE_LEFT_STYLE, "", wxDefaultPosition, wxDefaultSize, m_leftOutlineStyleStrings, wxCB_READONLY );
     m_leftOutlineStyle->SetHelpText(_("The border line style."));
     if (wxRichTextBordersPage::ShowToolTips())
         m_leftOutlineStyle->SetToolTip(_("The border line style."));
@@ -451,10 +451,10 @@ void wxRichTextBordersPage::CreateControls()
     m_rightOutlineWidth = new wxTextCtrl( itemPanel48, ID_RICHTEXT_OUTLINE_RIGHT, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0 );
     itemBoxSizer66->Add(m_rightOutlineWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_rightOutlineWidthUnitsStrings;
-    m_rightOutlineWidthUnitsStrings.Add(_("px"));
-    m_rightOutlineWidthUnitsStrings.Add(_("cm"));
-    m_rightOutlineWidthUnitsStrings.Add(_("pt"));
+    std::vector<std::string> m_rightOutlineWidthUnitsStrings;
+    m_rightOutlineWidthUnitsStrings.push_back("px");
+    m_rightOutlineWidthUnitsStrings.push_back("cm");
+    m_rightOutlineWidthUnitsStrings.push_back("pt");
     m_rightOutlineWidthUnits = new wxComboBox( itemPanel48, ID_RICHTEXT_OUTLINE_RIGHT_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_rightOutlineWidthUnitsStrings, wxCB_READONLY );
     m_rightOutlineWidthUnits->SetStringSelection(_("px"));
     m_rightOutlineWidthUnits->SetHelpText(_("Units for the right outline width."));
@@ -464,8 +464,8 @@ void wxRichTextBordersPage::CreateControls()
 
     itemBoxSizer66->Add(2, 5, 0, wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
-    wxArrayString m_rightOutlineStyleStrings;
-    m_rightOutlineStyle = new wxComboBox( itemPanel48, ID_RICHTEXT_OUTLINE_RIGHT_STYLE, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_rightOutlineStyleStrings, wxCB_READONLY );
+    std::vector<std::string> m_rightOutlineStyleStrings;
+    m_rightOutlineStyle = new wxComboBox( itemPanel48, ID_RICHTEXT_OUTLINE_RIGHT_STYLE, "", wxDefaultPosition, wxDefaultSize, m_rightOutlineStyleStrings, wxCB_READONLY );
     m_rightOutlineStyle->SetHelpText(_("The border line style."));
     if (wxRichTextBordersPage::ShowToolTips())
         m_rightOutlineStyle->SetToolTip(_("The border line style."));
@@ -485,10 +485,10 @@ void wxRichTextBordersPage::CreateControls()
     m_topOutlineWidth = new wxTextCtrl( itemPanel48, ID_RICHTEXT_OUTLINE_TOP, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0 );
     itemBoxSizer74->Add(m_topOutlineWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_topOutlineWidthUnitsStrings;
-    m_topOutlineWidthUnitsStrings.Add(_("px"));
-    m_topOutlineWidthUnitsStrings.Add(_("cm"));
-    m_topOutlineWidthUnitsStrings.Add(_("pt"));
+    std::vector<std::string> m_topOutlineWidthUnitsStrings;
+    m_topOutlineWidthUnitsStrings.push_back("px");
+    m_topOutlineWidthUnitsStrings.push_back("cm");
+    m_topOutlineWidthUnitsStrings.push_back("pt");
     m_topOutlineWidthUnits = new wxComboBox( itemPanel48, ID_RICHTEXT_OUTLINE_TOP_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_topOutlineWidthUnitsStrings, wxCB_READONLY );
     m_topOutlineWidthUnits->SetStringSelection(_("px"));
     m_topOutlineWidthUnits->SetHelpText(_("Units for the top outline width."));
@@ -498,8 +498,8 @@ void wxRichTextBordersPage::CreateControls()
 
     itemBoxSizer74->Add(2, 5, 0, wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
-    wxArrayString m_topOutlineStyleStrings;
-    m_topOutlineStyle = new wxComboBox( itemPanel48, ID_RICHTEXT_OUTLINE_TOP_STYLE, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_topOutlineStyleStrings, wxCB_READONLY );
+    std::vector<std::string> m_topOutlineStyleStrings;
+    m_topOutlineStyle = new wxComboBox( itemPanel48, ID_RICHTEXT_OUTLINE_TOP_STYLE, "", wxDefaultPosition, wxDefaultSize, m_topOutlineStyleStrings, wxCB_READONLY );
     m_topOutlineStyle->SetHelpText(_("The border line style."));
     if (wxRichTextBordersPage::ShowToolTips())
         m_topOutlineStyle->SetToolTip(_("The border line style."));
@@ -519,10 +519,10 @@ void wxRichTextBordersPage::CreateControls()
     m_bottomOutlineWidth = new wxTextCtrl( itemPanel48, ID_RICHTEXT_OUTLINE_BOTTOM, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0 );
     itemBoxSizer82->Add(m_bottomOutlineWidth, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_bottomOutlineWidthUnitsStrings;
-    m_bottomOutlineWidthUnitsStrings.Add(_("px"));
-    m_bottomOutlineWidthUnitsStrings.Add(_("cm"));
-    m_bottomOutlineWidthUnitsStrings.Add(_("pt"));
+    std::vector<std::string> m_bottomOutlineWidthUnitsStrings;
+    m_bottomOutlineWidthUnitsStrings.push_back("px");
+    m_bottomOutlineWidthUnitsStrings.push_back("cm");
+    m_bottomOutlineWidthUnitsStrings.push_back("pt");
     m_bottomOutlineWidthUnits = new wxComboBox( itemPanel48, ID_RICHTEXT_OUTLINE_BOTTOM_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_bottomOutlineWidthUnitsStrings, wxCB_READONLY );
     m_bottomOutlineWidthUnits->SetStringSelection(_("px"));
     m_bottomOutlineWidthUnits->SetHelpText(_("Units for the bottom outline width."));
@@ -532,8 +532,8 @@ void wxRichTextBordersPage::CreateControls()
 
     itemBoxSizer82->Add(2, 5, 0, wxALIGN_CENTER_VERTICAL|wxALL, 2);
 
-    wxArrayString m_bottomOutlineStyleStrings;
-    m_bottomOutlineStyle = new wxComboBox( itemPanel48, ID_RICHTEXT_OUTLINE_BOTTOM_STYLE, wxEmptyString, wxDefaultPosition, wxDefaultSize, m_bottomOutlineStyleStrings, wxCB_READONLY );
+    std::vector<std::string> m_bottomOutlineStyleStrings;
+    m_bottomOutlineStyle = new wxComboBox( itemPanel48, ID_RICHTEXT_OUTLINE_BOTTOM_STYLE, "", wxDefaultPosition, wxDefaultSize, m_bottomOutlineStyleStrings, wxCB_READONLY );
     m_bottomOutlineStyle->SetHelpText(_("The border line style."));
     if (wxRichTextBordersPage::ShowToolTips())
         m_bottomOutlineStyle->SetToolTip(_("The border line style."));
@@ -587,10 +587,10 @@ void wxRichTextBordersPage::CreateControls()
         m_cornerRadiusText->SetToolTip(_("The value of the corner radius."));
     itemBoxSizer99->Add(m_cornerRadiusText, 0, wxALIGN_CENTER_VERTICAL|wxLEFT|wxTOP|wxBOTTOM, 5);
 
-    wxArrayString m_cornerRadiusUnitsStrings;
-    m_cornerRadiusUnitsStrings.Add(_("px"));
-    m_cornerRadiusUnitsStrings.Add(_("cm"));
-    m_cornerRadiusUnitsStrings.Add(_("pt"));
+    std::vector<std::string> m_cornerRadiusUnitsStrings;
+    m_cornerRadiusUnitsStrings.push_back("px");
+    m_cornerRadiusUnitsStrings.push_back("cm");
+    m_cornerRadiusUnitsStrings.push_back("pt");
     m_cornerRadiusUnits = new wxComboBox( itemPanel91, ID_RICHTEXTBORDERSPAGE_CORNER_UNITS, _("px"), wxDefaultPosition, wxSize(60, -1), m_cornerRadiusUnitsStrings, wxCB_READONLY );
     m_cornerRadiusUnits->SetStringSelection(_("px"));
     m_cornerRadiusUnits->SetHelpText(_("Units for the corner radius."));
@@ -607,15 +607,15 @@ void wxRichTextBordersPage::CreateControls()
 
 ////@end wxRichTextBordersPage content construction
     // FIXME: Use ref emplace_back
-    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_NONE); m_borderStyleNames.Add(_("None"));
-    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_SOLID); m_borderStyleNames.Add(_("Solid"));
-    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_DOTTED); m_borderStyleNames.Add(_("Dotted"));
-    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_DASHED); m_borderStyleNames.Add(_("Dashed"));
-    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_DOUBLE); m_borderStyleNames.Add(_("Double"));
-    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_GROOVE); m_borderStyleNames.Add(_("Groove"));
-    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_RIDGE); m_borderStyleNames.Add(_("Ridge"));
-    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_INSET); m_borderStyleNames.Add(_("Inset"));
-    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_OUTSET); m_borderStyleNames.Add(_("Outset"));
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_NONE);   m_borderStyleNames.push_back("None");
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_SOLID);  m_borderStyleNames.push_back("Solid");
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_DOTTED); m_borderStyleNames.push_back("Dotted");
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_DASHED); m_borderStyleNames.push_back("Dashed");
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_DOUBLE); m_borderStyleNames.push_back("Double");
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_GROOVE); m_borderStyleNames.push_back("Groove");
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_RIDGE);  m_borderStyleNames.push_back("Ridge");
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_INSET);  m_borderStyleNames.push_back("Inset");
+    m_borderStyles.push_back(wxTEXT_BOX_ATTR_BORDER_OUTSET); m_borderStyleNames.push_back("Outset");
 
     m_ignoreUpdates = true;
 
@@ -746,7 +746,7 @@ bool wxRichTextBordersPage::TransferDataToWindow()
     if (!GetAttributes()->GetTextBoxAttr().HasCornerRadius())
     {
         m_cornerRadiusCheckBox->Set3StateValue(wxCHK_UNDETERMINED);
-        m_cornerRadiusText->SetValue(wxT("0"));
+        m_cornerRadiusText->SetValue("0");
         m_cornerRadiusUnits->SetSelection(0);
     }
     else
@@ -825,7 +825,7 @@ void wxRichTextBordersPage::SetBorderValue(wxTextAttrBorder& border, wxTextCtrl*
     if (!border.IsValid())
     {
         checkBox->Set3StateValue(wxCHK_UNDETERMINED);
-        widthValueCtrl->SetValue(wxT("0"));
+        widthValueCtrl->SetValue("0");
         widthUnitsCtrl->SetSelection(0);
         colourCtrl->SetColour(*wxBLACK);
         styleCtrl->SetSelection(0);

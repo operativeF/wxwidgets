@@ -34,9 +34,9 @@ wxItemContainerImmutable::~wxItemContainerImmutable()
 // selection
 // ----------------------------------------------------------------------------
 
-wxString wxItemContainerImmutable::GetStringSelection() const
+std::string wxItemContainerImmutable::GetStringSelection() const
 {
-    wxString s;
+    std::string s;
 
     const int sel = GetSelection();
     if ( sel != wxNOT_FOUND )
@@ -45,7 +45,7 @@ wxString wxItemContainerImmutable::GetStringSelection() const
     return s;
 }
 
-bool wxItemContainerImmutable::SetStringSelection(const wxString& s)
+bool wxItemContainerImmutable::SetStringSelection(const std::string& s)
 {
     const int sel = FindString(s);
     if ( sel == wxNOT_FOUND )
@@ -56,12 +56,13 @@ bool wxItemContainerImmutable::SetStringSelection(const wxString& s)
     return true;
 }
 
-std::vector<wxString> wxItemContainerImmutable::GetStrings() const
+std::vector<std::string> wxItemContainerImmutable::GetStrings() const
 {
-    std::vector<wxString> result;
+    std::vector<std::string> result;
 
     const unsigned int count = GetCount();
     result.reserve(count);
+
     for ( unsigned int n = 0; n < count; n++ )
         result.push_back(GetString(n));
 
@@ -136,7 +137,7 @@ int wxItemContainer::DoInsertItemsInLoop(const wxArrayStringsAdapter& items,
 }
 
 int
-wxItemContainer::DoInsertOneItem(const wxString& WXUNUSED(item),
+wxItemContainer::DoInsertOneItem(const std::string& WXUNUSED(item),
                                  unsigned int WXUNUSED(pos))
 {
     wxFAIL_MSG( wxT("Must be overridden if DoInsertItemsInLoop() is used") );

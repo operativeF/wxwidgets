@@ -279,7 +279,7 @@ public:
 ////@end wxRichTextBordersPage member variables
 
     std::vector<int> m_borderStyles;
-    wxArrayString m_borderStyleNames;
+    std::vector<std::string> m_borderStyleNames;
     bool m_ignoreUpdates;
 };
 

@@ -229,7 +229,7 @@ bool wxFontEnumerator::EnumerateFacenames(wxFontEncoding encoding,
     return true;
 }
 
-bool wxFontEnumerator::EnumerateEncodings(const wxString& facename)
+bool wxFontEnumerator::EnumerateEncodings(const std::string& facename)
 {
     wxFontEnumeratorHelper fe(this);
     fe.SetFaceName(facename);

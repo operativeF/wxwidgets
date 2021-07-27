@@ -43,8 +43,8 @@ public:
 
     // override some base class virtuals
     bool Show(bool show = true) override;
-    void SetTitle( const wxString& title) override;
-    wxString GetTitle() const override;
+    void SetTitle( const std::string& title) override;
+    std::string GetTitle() const override;
 
 protected:
     wxSize DoGetSize() const override;

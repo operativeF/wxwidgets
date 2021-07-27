@@ -23,7 +23,7 @@ public:
 
 private:
     bool m_insideBox{false};
-    wxArrayString strList;
+    std::vector<std::string> strList;
 
     wxDECLARE_DYNAMIC_CLASS(wxSimpleHtmlListBoxXmlHandler);
 };

@@ -588,7 +588,7 @@ wxMenuBar *wxAuiMDIChildFrame::GetMenuBar() const
 }
 #endif // wxUSE_MENUS
 
-void wxAuiMDIChildFrame::SetTitle(const wxString& title)
+void wxAuiMDIChildFrame::SetTitle(const std::string& title)
 {
     m_title = title;
 

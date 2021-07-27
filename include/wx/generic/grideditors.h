@@ -312,7 +312,7 @@ class WXDLLIMPEXP_CORE wxGridCellChoiceEditor : public wxGridCellEditor
 {
 public:
     // if !allowOthers, user can't type a string not in choices array
-    wxGridCellChoiceEditor(const std::vector<wxString>& choices = {},
+    wxGridCellChoiceEditor(const std::vector<std::string>& choices = {},
                            bool allowOthers = false);
 
     wxGridCellChoiceEditor(const wxGridCellChoiceEditor&) = delete;
@@ -344,8 +344,8 @@ protected:
 
     void OnComboCloseUp(wxCommandEvent& evt);
 
-    wxString                m_value;
-    std::vector<wxString>   m_choices;
+    std::string             m_value;
+    std::vector<std::string>   m_choices;
     bool                    m_allowOthers;
 };
 

@@ -220,12 +220,12 @@ int wxColourDialog::ShowModal()
 // title
 // ----------------------------------------------------------------------------
 
-void wxColourDialog::SetTitle(const wxString& title)
+void wxColourDialog::SetTitle(const std::string& title)
 {
     m_title = title;
 }
 
-wxString wxColourDialog::GetTitle() const
+std::string wxColourDialog::GetTitle() const
 {
     return m_title;
 }

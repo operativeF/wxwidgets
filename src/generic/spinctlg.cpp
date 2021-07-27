@@ -484,9 +484,9 @@ bool wxSpinCtrlGenericBase::SyncSpinToText(SendEvent sendEvent)
 // changing value and range
 // ----------------------------------------------------------------------------
 
-wxString wxSpinCtrlGenericBase::GetTextValue() const
+std::string wxSpinCtrlGenericBase::GetTextValue() const
 {
-    return m_textCtrl ? m_textCtrl->GetValue() : wxString();
+    return m_textCtrl ? m_textCtrl->GetValue() : "";
 }
 
 void wxSpinCtrlGenericBase::SetValue(const wxString& text)

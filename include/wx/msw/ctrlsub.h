@@ -23,7 +23,7 @@ public:
 protected:
     // preallocate memory for inserting the given new items into the control
     // using the wm message (normally either LB_INITSTORAGE or CB_INITSTORAGE)
-    void MSWAllocStorage(const wxArrayStringsAdapter& items, unsigned wm);
+    void MSWAllocStorage(const std::vector<std::string>& items, unsigned wm);
 
     // insert or append a string to the controls using the given message
     // (one of {CB,LB}_{ADD,INSERT}STRING, pos must be 0 when appending)

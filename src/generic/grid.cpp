@@ -1625,29 +1625,29 @@ bool wxGridTableBase::DeleteCols( size_t WXUNUSED(pos),
     return false;
 }
 
-wxString wxGridTableBase::GetRowLabelValue( int row )
+std::string wxGridTableBase::GetRowLabelValue( int row )
 {
-    wxString s;
+    std::string s;
 
     // RD: Starting the rows at zero confuses users,
     // no matter how much it makes sense to us geeks.
-    s << row + 1;
+    s += std::to_string(row + 1);
 
     return s;
 }
 
-wxString wxGridTableBase::GetColLabelValue( int col )
+std::string wxGridTableBase::GetColLabelValue( int col )
 {
     // default col labels are:
     //   cols 0 to 25   : A-Z
     //   cols 26 to 675 : AA-ZZ
     //   etc.
 
-    wxString s;
+    std::string s;
     unsigned int n;
     for ( n = 1; ; n++ )
     {
-        s += (wxChar) (wxT('A') + (wxChar)(col % 26));
+        s += 'A' + (char)(col % 26);
         col = col / 26 - 1;
         if ( col < 0 )
             break;
@@ -1663,7 +1663,7 @@ wxString wxGridTableBase::GetColLabelValue( int col )
     return s2;
 }
 
-wxString wxGridTableBase::GetCornerLabelValue() const
+std::string wxGridTableBase::GetCornerLabelValue() const
 {
     return {};
 }
@@ -1772,22 +1772,22 @@ wxGridStringTable::wxGridStringTable( int numRows, int numCols )
 
     m_data.reserve( numRows );
 
-    std::vector<wxString> sa(numCols, wxEmptyString);
+    std::vector<std::string> sa(numCols, "");
 
     m_data.insert(std::begin(m_data), numRows, sa );
 }
 
-wxString wxGridStringTable::GetValue( int row, int col )
+std::string wxGridStringTable::GetValue( int row, int col )
 {
     wxCHECK_MSG( (row >= 0 && row < GetNumberRows()) &&
                  (col >= 0 && col < GetNumberCols()),
-                 wxEmptyString,
-                 wxT("invalid row or column index in wxGridStringTable") );
+                 "",
+                 "invalid row or column index in wxGridStringTable" );
 
     return m_data[row][col];
 }
 
-void wxGridStringTable::SetValue( int row, int col, const wxString& value )
+void wxGridStringTable::SetValue( int row, int col, const std::string& value )
 {
     wxCHECK_RET( (row >= 0 && row < GetNumberRows()) &&
                  (col >= 0 && col < GetNumberCols()),
@@ -1821,7 +1821,7 @@ bool wxGridStringTable::InsertRows( size_t pos, size_t numRows )
         return AppendRows( numRows );
     }
 
-    std::vector<wxString> sa(m_numCols, wxEmptyString);
+    std::vector<std::string> sa(m_numCols, "");
     // TODO: Default value.
     m_data.insert( m_data.begin() + pos, numRows, sa );
 
@@ -1840,7 +1840,7 @@ bool wxGridStringTable::InsertRows( size_t pos, size_t numRows )
 
 bool wxGridStringTable::AppendRows( size_t numRows )
 {
-    std::vector<wxString> sa(m_numCols, wxEmptyString);
+    std::vector<std::string> sa(m_numCols, "");
 
     // TODO: What good does checking for zero do?
     // if ( m_numCols > 0 )
@@ -1916,7 +1916,7 @@ bool wxGridStringTable::InsertCols( size_t pos, size_t numCols )
 
     if ( !m_colLabels.empty() )
     {
-        m_colLabels.insert( std::begin(m_colLabels) + pos, numCols, wxEmptyString );
+        m_colLabels.insert( std::begin(m_colLabels) + pos, numCols, "" );
 
         for ( size_t i = pos; i < pos + numCols; i++ )
             m_colLabels[i] = wxGridTableBase::GetColLabelValue( i );
@@ -1926,7 +1926,7 @@ bool wxGridStringTable::InsertCols( size_t pos, size_t numCols )
     {
         for ( size_t col = pos; col < pos + numCols; col++ )
         {
-            m_data[row].insert( std::begin(m_data[row]) + col, 1, wxEmptyString );
+            m_data[row].insert( std::begin(m_data[row]) + col, 1, "" );
         }
     }
 
@@ -1949,7 +1949,7 @@ bool wxGridStringTable::AppendCols( size_t numCols )
 {
     for ( size_t row = 0; row < m_data.size(); row++ )
     {
-        m_data[row].insert( std::end(m_data[row]), numCols, wxEmptyString );
+        m_data[row].insert( std::end(m_data[row]), numCols, "" );
     }
 
     m_numCols += numCols;
@@ -2036,7 +2036,7 @@ bool wxGridStringTable::DeleteCols( size_t pos, size_t numCols )
     return true;
 }
 
-wxString wxGridStringTable::GetRowLabelValue( int row )
+std::string wxGridStringTable::GetRowLabelValue( int row )
 {
     if ( row > (int)(m_rowLabels.size()) - 1 )
     {
@@ -2050,7 +2050,7 @@ wxString wxGridStringTable::GetRowLabelValue( int row )
     }
 }
 
-wxString wxGridStringTable::GetColLabelValue( int col )
+std::string wxGridStringTable::GetColLabelValue( int col )
 {
     if ( col > (int)(m_colLabels.size()) - 1 )
     {
@@ -2064,7 +2064,7 @@ wxString wxGridStringTable::GetColLabelValue( int col )
     }
 }
 
-void wxGridStringTable::SetRowLabelValue( int row, const wxString& value )
+void wxGridStringTable::SetRowLabelValue( int row, const std::string& value )
 {
     if ( row > (int)(m_rowLabels.size()) - 1 )
     {
@@ -2079,7 +2079,7 @@ void wxGridStringTable::SetRowLabelValue( int row, const wxString& value )
     m_rowLabels[row] = value;
 }
 
-void wxGridStringTable::SetColLabelValue( int col, const wxString& value )
+void wxGridStringTable::SetColLabelValue( int col, const std::string& value )
 {
     if ( col > (int)(m_colLabels.size()) - 1 )
     {
@@ -2095,12 +2095,12 @@ void wxGridStringTable::SetColLabelValue( int col, const wxString& value )
     m_colLabels[col] = value;
 }
 
-void wxGridStringTable::SetCornerLabelValue( const wxString& value )
+void wxGridStringTable::SetCornerLabelValue( const std::string& value )
 {
     m_cornerLabel = value;
 }
 
-wxString wxGridStringTable::GetCornerLabelValue() const
+std::string wxGridStringTable::GetCornerLabelValue() const
 {
     return m_cornerLabel;
 }
@@ -8611,7 +8611,7 @@ int wxGrid::GetCornerLabelTextOrientation() const
     return m_cornerLabelTextOrientation;
 }
 
-wxString wxGrid::GetRowLabelValue( int row ) const
+std::string wxGrid::GetRowLabelValue( int row ) const
 {
     if ( m_table )
     {
@@ -8619,13 +8619,13 @@ wxString wxGrid::GetRowLabelValue( int row ) const
     }
     else
     {
-        wxString s;
-        s << row;
+        std::string s;
+        s += row;
         return s;
     }
 }
 
-wxString wxGrid::GetColLabelValue( int col ) const
+std::string wxGrid::GetColLabelValue( int col ) const
 {
     if ( m_table )
     {
@@ -8633,8 +8633,8 @@ wxString wxGrid::GetColLabelValue( int col ) const
     }
     else
     {
-        wxString s;
-        s << col;
+        std::string s;
+        s += col;
         return s;
     }
 }
@@ -10573,7 +10573,7 @@ void wxGrid::SetFocus()
 // cell value accessor functions
 // ----------------------------------------------------------------------------
 
-void wxGrid::SetCellValue( int row, int col, const wxString& s )
+void wxGrid::SetCellValue( int row, int col, const std::string& s )
 {
     if ( s == GetCellValue(row, col) )
     {

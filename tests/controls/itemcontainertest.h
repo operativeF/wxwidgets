@@ -48,7 +48,7 @@ protected:
 
         CHECK_EQ("item 0", m_container->GetString(0));
 
-        std::vector<wxString> testitems;
+        std::vector<std::string> testitems;
         testitems.push_back("item 1");
         testitems.push_back("item 2");
 
@@ -57,7 +57,7 @@ protected:
         CHECK_EQ("item 1", m_container->GetString(1));
         CHECK_EQ("item 2", m_container->GetString(2));
 
-        //wxString arritems[] = { "item 3", "item 4" };
+        //std::string arritems[] = { "item 3", "item 4" };
 
         //m_container->Append(2, arritems);
 
@@ -71,7 +71,7 @@ protected:
         CHECK_EQ( 0, pos_0 );
         CHECK_EQ("item 0", m_container->GetString(0));
 
-        std::vector<wxString> testitems;
+        std::vector<std::string> testitems;
         testitems.push_back("item 1");
         testitems.push_back("item 2");
 
@@ -81,7 +81,7 @@ protected:
         CHECK_EQ("item 1", m_container->GetString(0));
         CHECK_EQ("item 2", m_container->GetString(1));
 
-        //wxString arritems[] = { "item 3", "item 4" };
+        //std::string arritems[] = { "item 3", "item 4" };
 
         //CHECK_EQ( 2, m_container->Insert(2, arritems, 1) );
         //CHECK_EQ("item 3", m_container->GetString(1));
@@ -93,7 +93,7 @@ protected:
         CHECK(m_container->wxItemContainerImmutable::IsEmpty());
         WX_ASSERT_FAILS_WITH_ASSERT( m_container->GetString(0) );
 
-        std::vector<wxString> testitems;
+        std::vector<std::string> testitems;
         testitems.push_back("item 0");
         testitems.push_back("item 1");
         testitems.push_back("item 2");
@@ -121,7 +121,7 @@ protected:
 
     void ItemSelectionTest()
     {
-        std::vector<wxString> testitems;
+        std::vector<std::string> testitems;
         testitems.push_back("item 0");
         testitems.push_back("item 1");
         testitems.push_back("item 2");
@@ -152,7 +152,7 @@ protected:
 
     void FindStringTest()
     {
-        std::vector<wxString> testitems;
+        std::vector<std::string> testitems;
         testitems.push_back("item 0");
         testitems.push_back("item 1");
         testitems.push_back("item 2");
@@ -231,14 +231,14 @@ protected:
 
     void SetTest()
     {
-        std::vector<wxString> testitems = {
+        std::vector<std::string> testitems = {
             "item 0",
             "item 1"
         };
 
         m_container->Append(testitems);
 
-        std::vector<wxString> newtestitems;
+        std::vector<std::string> newtestitems;
         newtestitems.push_back("new item 0");
         newtestitems.push_back("new item 1");
         newtestitems.push_back("new item 2");
@@ -249,7 +249,7 @@ protected:
         CHECK_EQ(4, m_container->GetCount());
         CHECK_EQ("new item 1", m_container->GetString(1));
 
-        //wxString arrnewitems[] = { "even newer 0", "event newer 1" };
+        //std::string arrnewitems[] = { "even newer 0", "event newer 1" };
 
         //m_container->Set(2, arrnewitems);
 
@@ -259,7 +259,7 @@ protected:
 
     void SetStringTest()
     {
-        std::vector<wxString> testitems;
+        std::vector<std::string> testitems;
         testitems.push_back("item 0");
         testitems.push_back("item 1");
         testitems.push_back("item 2");

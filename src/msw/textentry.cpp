@@ -35,6 +35,8 @@
 #include "wx/msw/wrapwin.h"
 #include <shlwapi.h>
 
+#include "boost/nowide/convert.hpp"
+
 #define GetEditHwnd() ((HWND)(GetEditHWND()))
 
 // ----------------------------------------------------------------------------
@@ -676,12 +678,12 @@ wxTextEntry::~wxTextEntry()
 // operations on text
 // ----------------------------------------------------------------------------
 
-void wxTextEntry::WriteText(const wxString& text)
+void wxTextEntry::WriteText(const std::string& text)
 {
-    ::SendMessage(GetEditHwnd(), EM_REPLACESEL, 0, wxMSW_CONV_LPARAM(text));
+    ::SendMessageW(GetEditHwnd(), EM_REPLACESEL, 0, reinterpret_cast<LPARAM>(boost::nowide::widen(text).c_str()));
 }
 
-wxString wxTextEntry::DoGetValue() const
+std::string wxTextEntry::DoGetValue() const
 {
     return wxGetWindowText(GetEditHWND());
 }

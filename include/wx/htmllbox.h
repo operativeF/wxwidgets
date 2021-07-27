@@ -213,7 +213,7 @@ public:
                         wxWindowID id,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        const std::vector<wxString>& choices = {},
+                        const std::vector<std::string>& choices = {},
                         long style = wxHLB_DEFAULT_STYLE,
                         const wxValidator& validator = wxDefaultValidator,
                         const wxString& name = wxASCII_STR(wxSimpleHtmlListBoxNameStr))
@@ -224,7 +224,7 @@ public:
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos,
                 const wxSize& size,
-                const std::vector<wxString>& choices,
+                const std::vector<std::string>& choices,
                 long style = wxHLB_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxSimpleHtmlListBoxNameStr));
@@ -251,19 +251,19 @@ public:
     unsigned int GetCount() const override
         { return m_items.size(); }
 
-    wxString GetString(unsigned int n) const override;
+    std::string GetString(unsigned int n) const override;
 
     // override default unoptimized wxItemContainer::GetStrings() function
-    std::vector<wxString> GetStrings() const
+    std::vector<std::string> GetStrings() const
         { return m_items; }
 
-    void SetString(unsigned int n, const wxString& s) override;
+    void SetString(unsigned int n, const std::string& s) override;
 
     // resolve ambiguity between wxItemContainer and wxVListBox versions
     void Clear() override;
 
 protected:
-    int DoInsertItems(const wxArrayStringsAdapter & items,
+    int DoInsertItems(const std::vector<std::string>& items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
 
@@ -298,7 +298,7 @@ protected:
             wxVListBox::InitEvent(event, n);
         }
 
-    std::vector<wxString>   m_items;
+    std::vector<std::string>   m_items;
     std::vector<void*>      m_HTMLclientData;
 
     // Note: For the benefit of old compilers (like gcc-2.8) this should

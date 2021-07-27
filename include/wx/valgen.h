@@ -35,7 +35,7 @@ public:
         // wxChoice, wxGauge, wxRadioBox, wxScrollBar, wxSlider, wxSpinButton
     wxGenericValidator(int* val);
         // wxComboBox, wxTextCtrl, wxButton, wxStaticText (read-only)
-    wxGenericValidator(wxString* val);
+    wxGenericValidator(std::string* val);
         // wxListBox, wxCheckListBox
     wxGenericValidator(std::vector<int>* val);
 #if wxUSE_DATETIME
@@ -77,7 +77,7 @@ protected:
 
     bool*       m_pBool;
     int*        m_pInt;
-    wxString*   m_pString;
+    std::string*   m_pString;
     std::vector<int>* m_pArrayInt;
 #if wxUSE_DATETIME
     wxDateTime* m_pDateTime;

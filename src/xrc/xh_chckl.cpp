@@ -69,10 +69,11 @@ wxObject *wxCheckListBoxXmlHandler::DoCreateResource()
                 n->GetName() != wxT("item"))
                { n = n->GetNext(); continue; }
 
+            // FIXME: bad.
             // checking boolean is a bit ugly here (see GetBool() )
-            wxString v = n->GetAttribute(wxT("checked"), wxEmptyString);
-            v.MakeLower();
-            if (v == wxT("1"))
+            std::string v = n->GetAttribute("checked", "");
+            wx::utils::ToLower(v);
+            if (v == "1")
                 control->Check( i, true );
 
             i++;

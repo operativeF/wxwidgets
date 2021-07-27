@@ -878,41 +878,44 @@ bool wxTextCtrl::IsEmpty() const
     return wxTextCtrlBase::IsEmpty();
 }
 
-wxString wxTextCtrl::GetValue() const
+std::string wxTextCtrl::GetValue() const
 {
     // range 0..-1 is special for GetRange() and means to retrieve all text
     return GetRange(0, -1);
 }
 
-wxString wxTextCtrl::GetRange(long from, long to) const
+std::string wxTextCtrl::GetRange(long from, long to) const
 {
-    wxString str;
-
     if ( from >= to && to != -1 )
     {
         // nothing to retrieve
-        return str;
+        return "";
     }
+
+    std::string str;
 
 #if wxUSE_RICHEDIT
     if ( IsRich() )
     {
-        int len = GetWindowTextLength(GetHwnd());
+        int len = GetWindowTextLengthW(GetHwnd());
+
         if ( len > from )
         {
             if ( to == -1 )
                 to = len;
             {
                 // alloc one extra WORD as needed by the control
-                wxStringBuffer tmp(str, ++len);
-                wxChar *p = tmp;
+                str.resize(++len);
+
+                std::wstring tmp;
+                wchar_t* p = &tmp[0];
 
                 TEXTRANGE textRange;
                 textRange.chrg.cpMin = from;
                 textRange.chrg.cpMax = to;
                 textRange.lpstrText = p;
 
-                (void)::SendMessage(GetHwnd(), EM_GETTEXTRANGE,
+                (void)::SendMessageW(GetHwnd(), EM_GETTEXTRANGE,
                                     0, (LPARAM)&textRange);
 
                 if ( m_verRichEdit > 1 )
@@ -922,8 +925,8 @@ wxString wxTextCtrl::GetRange(long from, long to) const
                     // style - convert it to something reasonable
                     for ( ; *p; p++ )
                     {
-                        if ( *p == wxT('\r') )
-                            *p = wxT('\n');
+                        if ( *p == L'\r' )
+                            *p = L'\n';
                     }
                 }
             }
@@ -946,7 +949,7 @@ wxString wxTextCtrl::GetRange(long from, long to) const
         // need only a range?
         if ( from < to )
         {
-            str = str.Mid(from, to - from);
+            str = str.substr(from, to - from);
         }
 
         // WM_GETTEXT uses standard DOS CR+LF (\r\n) convention - convert to the
@@ -958,7 +961,7 @@ wxString wxTextCtrl::GetRange(long from, long to) const
     return str;
 }
 
-void wxTextCtrl::DoSetValue(const wxString& value, int flags)
+void wxTextCtrl::DoSetValue(const std::string& value, int flags)
 {
     // if the text is long enough, it's faster to just set it instead of first
     // comparing it with the old one (chances are that it will be different
@@ -989,7 +992,7 @@ void wxTextCtrl::DoSetValue(const wxString& value, int flags)
     }
 }
 
-void wxTextCtrl::WriteText(const wxString& value)
+void wxTextCtrl::WriteText(const std::string& value)
 {
     DoWriteText(value);
 }
@@ -1917,7 +1920,7 @@ void wxTextCtrl::OnChar(wxKeyEvent& event)
             {
                 // Insert tab since calling the default Windows handler
                 // doesn't seem to do it
-                WriteText(wxT("\t"));
+                WriteText("\t");
                 return;
             }
             break;

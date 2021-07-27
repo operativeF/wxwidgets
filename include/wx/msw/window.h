@@ -56,7 +56,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
-                const wxString& name = wxASCII_STR(wxPanelNameStr))
+                const std::string& name = wxPanelNameStr)
     {
         return CreateUsingMSWClass(GetMSWClassName(style),
                                    parent, id, pos, size, style, name);

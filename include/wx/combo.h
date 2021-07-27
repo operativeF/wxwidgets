@@ -165,7 +165,7 @@ public:
                 const wxSize& size,
                 long style,
                 const wxValidator& validator,
-                const wxString& name);
+                const std::string& name);
 
     ~wxComboCtrlBase() override;
 
@@ -224,19 +224,19 @@ public:
     // NB: We basically need to override all of them because there is
     //     no guarantee how platform-specific wxTextEntry is implemented.
     //
-    void SetValue(const wxString& value) override
+    void SetValue(const std::string& value) override
         { wxTextEntryBase::SetValue(value); }
-    void ChangeValue(const wxString& value) override
+    void ChangeValue(const std::string& value) override
         { wxTextEntryBase::ChangeValue(value); }
 
-    void WriteText(const wxString& text) override;
+    void WriteText(const std::string& text) override;
     void AppendText(const wxString& text) override
         { wxTextEntryBase::AppendText(text); }
 
-    wxString GetValue() const override
+    std::string GetValue() const override
         { return wxTextEntryBase::GetValue(); }
 
-    wxString GetRange(long from, long to) const override
+    std::string GetRange(long from, long to) const override
         { return wxTextEntryBase::GetRange(from, to); }
 
     // Replace() and DoSetValue() need to be fully re-implemented since
@@ -504,7 +504,7 @@ protected:
 
     // Called when text was changed programmatically
     // (e.g. from WriteText())
-    void OnSetValue(const wxString& value);
+    void OnSetValue(const std::string& value);
 
     // Installs standard input handler to combo (and optionally to the textctrl)
     void InstallInputHandlers();
@@ -600,8 +600,8 @@ protected:
 #endif
 
     // protected wxTextEntry methods
-    void DoSetValue(const wxString& value, int flags) override;
-    wxString DoGetValue() const override;
+    void DoSetValue(const std::string& value, int flags) override;
+    std::string DoGetValue() const override;
     wxWindow *GetEditableWindow() override { return this; }
 
     // margins functions
@@ -609,7 +609,7 @@ protected:
     wxPoint DoGetMargins() const override;
 
     // This is used when m_text is hidden (readonly).
-    wxString                m_valueString;
+    std::string             m_valueString;
 
     // This is used when control is unfocused and m_valueString is empty
     wxString                m_hintText;
@@ -792,7 +792,7 @@ public:
     // implementation. If the found item matched the string, but is
     // different, it should be written back to pItem. Default implementation
     // always return true and does not alter trueItem.
-    virtual bool FindItem(const wxString& item, wxString* trueItem=nullptr);
+    virtual bool FindItem(std::string_view item, std::string* trueItem = nullptr);
 
     // This is called to custom paint in the combo control itself (ie. not the popup).
     // Default implementation draws value as string.

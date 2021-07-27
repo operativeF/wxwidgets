@@ -222,8 +222,8 @@ void wxRichTextIndentsSpacingPage::CreateControls()
     wxStaticText* itemStaticText29 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Outline level:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemFlexGridSizer22->Add(itemStaticText29, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
-    wxArrayString m_outlineLevelCtrlStrings;
-    m_outlineLevelCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTINDENTSSPACINGPAGE_OUTLINELEVEL, wxEmptyString, wxDefaultPosition, wxSize(85, -1), m_outlineLevelCtrlStrings, wxCB_READONLY );
+    std::vector<std::string> m_outlineLevelCtrlStrings;
+    m_outlineLevelCtrl = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTINDENTSSPACINGPAGE_OUTLINELEVEL, "", wxDefaultPosition, wxSize(85, -1), m_outlineLevelCtrlStrings, wxCB_READONLY );
     m_outlineLevelCtrl->SetHelpText(_("The outline level."));
     if (wxRichTextIndentsSpacingPage::ShowToolTips())
         m_outlineLevelCtrl->SetToolTip(_("The outline level."));
@@ -270,19 +270,19 @@ void wxRichTextIndentsSpacingPage::CreateControls()
     wxStaticText* itemStaticText43 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("L&ine spacing:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemFlexGridSizer38->Add(itemStaticText43, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
-    wxArrayString m_spacingLineStrings;
-    m_spacingLineStrings.Add(_("(none)"));
-    m_spacingLineStrings.Add(_("Single"));
-    m_spacingLineStrings.Add(_("1.1"));
-    m_spacingLineStrings.Add(_("1.2"));
-    m_spacingLineStrings.Add(_("1.3"));
-    m_spacingLineStrings.Add(_("1.4"));
-    m_spacingLineStrings.Add(_("1.5"));
-    m_spacingLineStrings.Add(_("1.6"));
-    m_spacingLineStrings.Add(_("1.7"));
-    m_spacingLineStrings.Add(_("1.8"));
-    m_spacingLineStrings.Add(_("1.9"));
-    m_spacingLineStrings.Add(_("2"));
+    std::vector<std::string> m_spacingLineStrings;
+    m_spacingLineStrings.push_back("(none)");
+    m_spacingLineStrings.push_back("Single");
+    m_spacingLineStrings.push_back("1.1");
+    m_spacingLineStrings.push_back("1.2");
+    m_spacingLineStrings.push_back("1.3");
+    m_spacingLineStrings.push_back("1.4");
+    m_spacingLineStrings.push_back("1.5");
+    m_spacingLineStrings.push_back("1.6");
+    m_spacingLineStrings.push_back("1.7");
+    m_spacingLineStrings.push_back("1.8");
+    m_spacingLineStrings.push_back("1.9");
+    m_spacingLineStrings.push_back("2");
     m_spacingLine = new wxComboBox( itemRichTextDialogPage1, ID_RICHTEXTINDENTSSPACINGPAGE_SPACING_LINE, _("(none)"), wxDefaultPosition, wxSize(85, -1), m_spacingLineStrings, wxCB_READONLY );
     m_spacingLine->SetStringSelection(_("(none)"));
     m_spacingLine->SetHelpText(_("The line spacing."));
@@ -307,23 +307,23 @@ void wxRichTextIndentsSpacingPage::CreateControls()
 
 ////@end wxRichTextIndentsSpacingPage content construction
 
-    wxArrayString outlineLevelCtrlStrings;
-    outlineLevelCtrlStrings.Add(_("(none)"));
-    outlineLevelCtrlStrings.Add("1");
-    outlineLevelCtrlStrings.Add("2");
-    outlineLevelCtrlStrings.Add("3");
-    outlineLevelCtrlStrings.Add("4");
-    outlineLevelCtrlStrings.Add("5");
-    outlineLevelCtrlStrings.Add("6");
-    outlineLevelCtrlStrings.Add("7");
-    outlineLevelCtrlStrings.Add("8");
-    outlineLevelCtrlStrings.Add("9");
-    outlineLevelCtrlStrings.Add("10");
+    std::vector<std::string> outlineLevelCtrlStrings;
+    outlineLevelCtrlStrings.push_back("(none)");
+    outlineLevelCtrlStrings.push_back("1");
+    outlineLevelCtrlStrings.push_back("2");
+    outlineLevelCtrlStrings.push_back("3");
+    outlineLevelCtrlStrings.push_back("4");
+    outlineLevelCtrlStrings.push_back("5");
+    outlineLevelCtrlStrings.push_back("6");
+    outlineLevelCtrlStrings.push_back("7");
+    outlineLevelCtrlStrings.push_back("8");
+    outlineLevelCtrlStrings.push_back("9");
+    outlineLevelCtrlStrings.push_back("10");
 
     m_outlineLevelCtrl->Freeze();
     m_outlineLevelCtrl->Append(outlineLevelCtrlStrings);
     m_outlineLevelCtrl->Thaw();
-    m_outlineLevelCtrl->SetStringSelection(_("(none)"));
+    m_outlineLevelCtrl->SetStringSelection("(none)");
 }
 
 wxRichTextAttr* wxRichTextIndentsSpacingPage::GetAttributes()
@@ -334,14 +334,14 @@ wxRichTextAttr* wxRichTextIndentsSpacingPage::GetAttributes()
 /// Updates the font preview
 void wxRichTextIndentsSpacingPage::UpdatePreview()
 {
-    static constexpr wxChar s_para1[] = wxT("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. \
-Nullam ante sapien, vestibulum nonummy, pulvinar sed, luctus ut, lacus.\n");
+    static constexpr char s_para1[] = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. \
+Nullam ante sapien, vestibulum nonummy, pulvinar sed, luctus ut, lacus.\n";
 
-    static constexpr wxChar s_para2[] = wxT("Duis pharetra consequat dui. Cum sociis natoque penatibus \
-et magnis dis parturient montes, nascetur ridiculus mus. Nullam vitae justo id mauris lobortis interdum.\n");
+    static constexpr char s_para2[] = "Duis pharetra consequat dui. Cum sociis natoque penatibus \
+et magnis dis parturient montes, nascetur ridiculus mus. Nullam vitae justo id mauris lobortis interdum.\n";
 
-    static constexpr wxChar s_para3[] = wxT("Integer convallis dolor at augue \
-iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n");
+    static constexpr char s_para3[] = "Integer convallis dolor at augue \
+iaculis malesuada. Donec bibendum ipsum ut ante porta fringilla.\n";
 
     TransferDataFromWindow();
     wxRichTextAttr attr(*GetAttributes());
@@ -490,8 +490,8 @@ bool wxRichTextIndentsSpacingPage::TransferDataToWindow()
     }
     else
     {
-        m_indentLeft->SetValue(wxEmptyString);
-        m_indentLeftFirst->SetValue(wxEmptyString);
+        m_indentLeft->SetValue("");
+        m_indentLeftFirst->SetValue("");
     }
 
     if (attr->HasRightIndent())
@@ -501,7 +501,7 @@ bool wxRichTextIndentsSpacingPage::TransferDataToWindow()
         m_indentRight->SetValue(rightIndent);
     }
     else
-        m_indentRight->SetValue(wxEmptyString);
+        m_indentRight->SetValue("");
 
     if (attr->HasParagraphSpacingAfter())
     {
@@ -510,7 +510,7 @@ bool wxRichTextIndentsSpacingPage::TransferDataToWindow()
         m_spacingAfter->SetValue(spacingAfter);
     }
     else
-        m_spacingAfter->SetValue(wxEmptyString);
+        m_spacingAfter->SetValue("");
 
     if (attr->HasParagraphSpacingBefore())
     {
@@ -519,7 +519,7 @@ bool wxRichTextIndentsSpacingPage::TransferDataToWindow()
         m_spacingBefore->SetValue(spacingBefore);
     }
     else
-        m_spacingBefore->SetValue(wxEmptyString);
+        m_spacingBefore->SetValue("");
 
     if (attr->HasLineSpacing())
     {

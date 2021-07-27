@@ -61,8 +61,8 @@ public:
     void SetSelection(int n) override;
     int GetSelection() const override { return m_selectedButton; }
     unsigned int GetCount() const override;
-    wxString GetString(unsigned int n) const override;
-    void SetString(unsigned int n, const wxString& label) override;
+    std::string GetString(unsigned int n) const override;
+    void SetString(unsigned int n, const std::string& label) override;
     bool Enable(unsigned int n, bool enable = true) override;
     bool Show(unsigned int n, bool show = true) override;
     bool IsItemEnabled(unsigned int n) const override;

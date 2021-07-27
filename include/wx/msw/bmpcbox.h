@@ -32,7 +32,7 @@ public:
                      const wxString& value = wxEmptyString,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
-                     const std::vector<wxString>& choices = {},
+                     const std::vector<std::string>& choices = {},
                      long style = 0,
                      const wxValidator& validator = wxDefaultValidator,
                      const wxString& name = wxASCII_STR(wxBitmapComboBoxNameStr))
@@ -48,7 +48,7 @@ public:
                 const wxString& value,
                 const wxPoint& pos,
                 const wxSize& size,
-                const std::vector<wxString>& choices,
+                const std::vector<std::string>& choices,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxASCII_STR(wxBitmapComboBoxNameStr));
@@ -87,7 +87,7 @@ protected:
     wxWindow* GetControl() override { return this; }
 
     // wxItemContainer implementation
-    int DoInsertItems(const wxArrayStringsAdapter & items,
+    int DoInsertItems(const std::vector<std::string>& items,
                               unsigned int pos,
                               void **clientData, wxClientDataType type) override;
     void DoClear() override;
