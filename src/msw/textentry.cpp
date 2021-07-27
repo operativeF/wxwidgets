@@ -454,7 +454,7 @@ public:
         return m_autoComplete && m_autoCompleteDropDown && m_enumStrings;
     }
 
-    void ChangeStrings(const std::vector<wxString>& strings)
+    void ChangeStrings(const std::vector<std::string>& strings)
     {
         if ( !m_fixedCompleter )
             m_fixedCompleter = new wxTextCompleterFixed;
@@ -871,7 +871,7 @@ bool wxTextEntry::MSWEnsureHasAutoCompleteData()
     return true;
 }
 
-bool wxTextEntry::DoAutoCompleteStrings(const std::vector<wxString>& choices)
+bool wxTextEntry::DoAutoCompleteStrings(const std::vector<std::string>& choices)
 {
     if ( !MSWEnsureHasAutoCompleteData() )
         return false;

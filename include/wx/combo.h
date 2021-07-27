@@ -230,7 +230,7 @@ public:
         { wxTextEntryBase::ChangeValue(value); }
 
     void WriteText(const std::string& text) override;
-    void AppendText(const wxString& text) override
+    void AppendText(const std::string& text) override
         { wxTextEntryBase::AppendText(text); }
 
     std::string GetValue() const override
@@ -242,7 +242,7 @@ public:
     // Replace() and DoSetValue() need to be fully re-implemented since
     // EventSuppressor utility class does not work with the way
     // wxComboCtrl is implemented.
-    void Replace(long from, long to, const wxString& value) override;
+    void Replace(long from, long to, const std::string& value) override;
 
     void Remove(long from, long to) override;
 

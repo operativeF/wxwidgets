@@ -1067,7 +1067,7 @@ void wxTextCtrl::DoWriteText(const wxString& value, int flags)
     }
 }
 
-void wxTextCtrl::AppendText(const wxString& text)
+void wxTextCtrl::AppendText(const std::string& text)
 {
     wxTextEntry::AppendText(text);
 
@@ -1075,14 +1075,14 @@ void wxTextCtrl::AppendText(const wxString& text)
     // don't do this if we're frozen, saves some time
     if ( !IsFrozen() && IsMultiLine() && GetRichVersion() > 1 )
     {
-        ::SendMessage(GetHwnd(), WM_VSCROLL, SB_BOTTOM, (LPARAM)NULL);
+        ::SendMessageW(GetHwnd(), WM_VSCROLL, SB_BOTTOM, (LPARAM)NULL);
     }
 #endif // wxUSE_RICHEDIT
 }
 
 void wxTextCtrl::Clear()
 {
-    ::SetWindowText(GetHwnd(), wxEmptyString);
+    ::SetWindowTextW(GetHwnd(), L"");
 
     if ( IsMultiLine() && !IsRich() )
     {

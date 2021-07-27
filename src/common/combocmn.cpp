@@ -2800,7 +2800,7 @@ void wxComboCtrlBase::DoSetValue(const std::string& value, int flags)
     OnSetValue(value);
 }
 
-void wxComboCtrlBase::Replace(long from, long to, const wxString& value)
+void wxComboCtrlBase::Replace(long from, long to, const std::string& value)
 {
     if ( m_text )
     {

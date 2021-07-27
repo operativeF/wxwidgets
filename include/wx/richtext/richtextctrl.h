@@ -518,7 +518,7 @@ public:
         Replaces the content in the specified range with the string specified by
         @a value.
     */
-    void Replace(long from, long to, const wxString& value) override;
+    void Replace(long from, long to, const std::string& value) override;
 
     /**
         Removes the content in the specified range.
@@ -616,7 +616,7 @@ public:
     /**
         Sets the insertion point to the end of the buffer and writes the text.
     */
-    void AppendText(const wxString& text) override;
+    void AppendText(const std::string& text) override;
 
     //@{
     /**

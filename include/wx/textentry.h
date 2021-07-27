@@ -43,7 +43,7 @@ public:
     // selection, appending always inserts it at the end and doesn't remove any
     // existing text (but it will reset the selection if there is any)
     virtual void WriteText(const std::string& text) = 0;
-    virtual void AppendText(const wxString& text);
+    virtual void AppendText(const std::string& text);
 
     virtual std::string GetValue() const;
     virtual std::string GetRange(long from, long to) const;
@@ -53,7 +53,7 @@ public:
     // editing operations
     // ------------------
 
-    virtual void Replace(long from, long to, const wxString& value);
+    virtual void Replace(long from, long to, const std::string& value);
     virtual void Remove(long from, long to) = 0;
     virtual void Clear() { Remove(0, -1); }
     void RemoveSelection();
@@ -113,7 +113,7 @@ public:
     // commonly meaning that this functionality is not available under the
     // current platform)
 
-    bool AutoComplete(const std::vector<wxString>& choices)
+    bool AutoComplete(const std::vector<std::string>& choices)
         { return DoAutoCompleteStrings(choices); }
 
     bool AutoCompleteFileNames()
@@ -241,7 +241,7 @@ protected:
     // auto-completion, they do the same thing as their public counterparts but
     // have different names to allow overriding just one of them without hiding
     // the other one(s)
-    virtual bool DoAutoCompleteStrings(const std::vector<wxString>& WXUNUSED(choices))
+    virtual bool DoAutoCompleteStrings(const std::vector<std::string>& WXUNUSED(choices))
         { return false; }
     virtual bool DoAutoCompleteFileNames(int WXUNUSED(flags)) // wxFILE | wxDIR
         { return false; }

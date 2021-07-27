@@ -84,7 +84,7 @@ public:
 
     // editing
     void Clear() override;
-    void Replace(long from, long to, const wxString& value) override;
+    void Replace(long from, long to, const std::string& value) override;
     void Remove(long from, long to) override;
 
     // load/save the controls contents from/to the file
@@ -102,7 +102,7 @@ public:
     // writing text inserts it at the current position, appending always
     // inserts it at the end
     void WriteText(const std::string& text) override;
-    void AppendText(const wxString& text) override;
+    void AppendText(const std::string& text) override;
 
     // insert the character which would have resulted from this key event,
     // return true if anything has been inserted
@@ -160,7 +160,7 @@ public:
     void SetEditable(bool editable) override;
 
     // Autocomplete
-    bool DoAutoCompleteStrings(const std::vector<wxString> &choices) override;
+    bool DoAutoCompleteStrings(const std::vector<std::string> &choices) override;
     bool DoAutoCompleteFileNames(int flags) override;
     bool DoAutoCompleteCustom(wxTextCompleter *completer) override;
 

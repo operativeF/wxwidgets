@@ -68,7 +68,7 @@ public:
     //
     // This should be called after creating a new wxTextEntryHintData object
     // and may be called more times in the future.
-    void SetHintString(const wxString& hint)
+    void SetHintString(const std::string& hint)
     {
         m_hint = hint;
 
@@ -84,7 +84,7 @@ public:
     // We call it ourselves when this change generates an event but it's also
     // necessary to call it explicitly from wxTextEntry::ChangeValue() as it,
     // by design, does not generate any events.
-    void HandleTextUpdate(const wxString& text)
+    void HandleTextUpdate(const std::string& text)
     {
         m_text = text;
 
@@ -132,7 +132,7 @@ private:
         {
             RestoreTextColourIfNecessary();
 
-            m_entry->DoSetValue(wxString(), wxTextEntryBase::SetValue_NoEvent);
+            m_entry->DoSetValue("", wxTextEntryBase::SetValue_NoEvent);
         }
 
         event.Skip();
@@ -171,7 +171,7 @@ private:
     std::string m_hint;
 
     // The real text of the window.
-    wxString m_text;
+    std::string m_text;
 
 };
 
@@ -220,7 +220,7 @@ void wxTextEntryBase::ChangeValue(const std::string& value)
         m_hintData->HandleTextUpdate(value);
 }
 
-void wxTextEntryBase::AppendText(const wxString& text)
+void wxTextEntryBase::AppendText(const std::string& text)
 {
     SetInsertionPointEnd();
     WriteText(text);
@@ -246,7 +246,7 @@ void wxTextEntryBase::DoSetValue(const std::string& value, int flags)
     }
 }
 
-void wxTextEntryBase::Replace(long from, long to, const wxString& value)
+void wxTextEntryBase::Replace(long from, long to, const std::string& value)
 {
     {
         EventsSuppressor noevents(this);
@@ -352,8 +352,10 @@ struct ForceUpperFunctor
 
 void wxTextEntryBase::ConvertToUpperCase()
 {
-    const wxString& valueOld = GetValue();
-    const wxString& valueNew = valueOld.Upper();
+    std::string valueOld = GetValue();
+    std::string valueNew{valueOld};
+
+    wx::utils::ToUpper(valueNew);
 
     if ( valueNew != valueOld )
     {
@@ -440,7 +442,7 @@ bool wxTextEntryBase::SendTextUpdatedEvent(wxWindow *win)
     wxCommandEvent event(wxEVT_TEXT, win->GetId());
 
     // do not do this as it could be very inefficient if the text control
-    // contains a lot of text and we're not using ref-counted wxString
+    // contains a lot of text and we're not using ref-counted std::string
     // implementation -- instead, event.GetString() will query the control for
     // its current text if needed
     //event.SetString(win->GetValue());
@@ -453,7 +455,7 @@ bool wxTextEntryBase::SendTextUpdatedEvent(wxWindow *win)
 // auto-completion stubs
 // ----------------------------------------------------------------------------
 
-bool wxTextCompleterSimple::Start(const wxString& prefix)
+bool wxTextCompleterSimple::Start(const std::string& prefix)
 {
     m_index = 0;
     m_completions.clear();
@@ -462,7 +464,7 @@ bool wxTextCompleterSimple::Start(const wxString& prefix)
     return !m_completions.empty();
 }
 
-wxString wxTextCompleterSimple::GetNext()
+std::string wxTextCompleterSimple::GetNext()
 {
     if ( m_index == m_completions.size() )
         return {};

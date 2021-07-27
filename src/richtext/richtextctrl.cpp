@@ -3313,7 +3313,7 @@ void wxRichTextCtrl::DoWriteText(const wxString& value, int flags)
         wxTextCtrl::SendTextUpdatedEvent(this);
 }
 
-void wxRichTextCtrl::AppendText(const wxString& text)
+void wxRichTextCtrl::AppendText(const std::string& text)
 {
     SetInsertionPointEnd();
 
@@ -3616,7 +3616,7 @@ void wxRichTextCtrl::SetSelection(long from, long to)
 }
 
 void wxRichTextCtrl::Replace(long from, long to,
-                             const wxString& value)
+                             const std::string& value)
 {
     BeginBatchUndo(_("Replace"));
 
@@ -3628,7 +3628,7 @@ void wxRichTextCtrl::Replace(long from, long to,
 
     SetDefaultStyle(attr);
 
-    if (!value.IsEmpty())
+    if (!value.empty())
         DoWriteText(value, SetValue_SelectionOnly);
 
     EndBatchUndo();

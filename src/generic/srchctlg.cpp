@@ -611,7 +611,7 @@ void wxSearchCtrl::Clear()
 {
     m_text->Clear();
 }
-void wxSearchCtrl::Replace(long from, long to, const wxString& value)
+void wxSearchCtrl::Replace(long from, long to, const std::string& value)
 {
     m_text->Replace(from, to, value);
 }
@@ -653,7 +653,7 @@ void wxSearchCtrl::WriteText(const std::string& text)
 {
     m_text->WriteText(text);
 }
-void wxSearchCtrl::AppendText(const wxString& text)
+void wxSearchCtrl::AppendText(const std::string& text)
 {
     m_text->AppendText(text);
 }
@@ -820,7 +820,7 @@ bool wxSearchCtrl::SetBackgroundColour(const wxColour& colour)
 
 
 // Autocomplete
-bool wxSearchCtrl::DoAutoCompleteStrings(const std::vector<wxString> &choices)
+bool wxSearchCtrl::DoAutoCompleteStrings(const std::vector<std::string> &choices)
 {
     return m_text->AutoComplete( choices );
 }

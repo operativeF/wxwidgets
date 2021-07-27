@@ -955,7 +955,7 @@ bool wxTextAreaBase::SaveFile(const wxString& filename, int fileType)
 // stream-like insertion operator
 // ----------------------------------------------------------------------------
 
-wxTextCtrl& wxTextCtrlBase::operator<<(const wxString& s)
+wxTextCtrl& wxTextCtrlBase::operator<<(const std::string& s)
 {
     AppendText(s);
     return *TEXTCTRL(this);
@@ -982,9 +982,11 @@ wxTextCtrl& wxTextCtrlBase::operator<<(long l)
 
 #if wxHAS_TEXT_WINDOW_STREAM
 
+// FIXME: be explicit about char.
 int wxTextCtrlBase::overflow(int c)
 {
-    AppendText((wxChar)c);
+    std::string s;
+    AppendText(s += char(c));
 
     // return something different from EOF
     return 0;

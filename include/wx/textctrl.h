@@ -690,7 +690,7 @@ public:
 
     // stream-like insertion operators: these are always available, whether we
     // were, or not, compiled with streambuf support
-    wxTextCtrl& operator<<(const wxString& s);
+    wxTextCtrl& operator<<(const std::string& s);
     wxTextCtrl& operator<<(int i);
     wxTextCtrl& operator<<(long i);
     wxTextCtrl& operator<<(float f) { return *this << double(f); }

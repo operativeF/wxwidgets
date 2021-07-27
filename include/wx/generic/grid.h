@@ -1390,7 +1390,7 @@ private:
     std::vector<std::string>     m_rowLabels;
     std::vector<std::string>     m_colLabels;
 
-    wxString m_cornerLabel;
+    std::string m_cornerLabel;
 
 public:
 	wxClassInfo *GetClassInfo() const override;

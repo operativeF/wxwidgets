@@ -25,8 +25,8 @@ public:
     // first one is called to start preparing for completions for the given
     // prefix and, if it returns true, GetNext() is called until it returns an
     // empty string indicating that there are no more completions.
-    virtual bool Start(const wxString& prefix) = 0;
-    virtual wxString GetNext() = 0;
+    virtual bool Start(const std::string& prefix) = 0;
+    virtual std::string GetNext() = 0;
 
     virtual ~wxTextCompleter() = default;
 
@@ -51,13 +51,13 @@ public:
    wxTextCompleterSimple& operator=(wxTextCompleterSimple&&) = default;
 
     // Must be implemented to return all the completions for the given prefix.
-    virtual const std::vector<wxString>& GetCompletions(const wxString& prefix) = 0;
+    virtual const std::vector<std::string>& GetCompletions(const std::string& prefix) = 0;
 
-    bool Start(const wxString& prefix) override;
-    wxString GetNext() override;
+    bool Start(const std::string& prefix) override;
+    std::string GetNext() override;
 
 private:
-    std::vector<wxString> m_completions;
+    std::vector<std::string> m_completions;
     unsigned m_index{0};
 };
 
@@ -73,18 +73,18 @@ private:
 class wxTextCompleterFixed : public wxTextCompleterSimple
 {
 public:
-    void SetCompletions(const std::vector<wxString>& strings)
+    void SetCompletions(const std::vector<std::string>& strings)
     {
         m_strings = strings;
     }
 
-    const std::vector<wxString>& GetCompletions(const wxString& WXUNUSED(prefix)) override
+    const std::vector<std::string>& GetCompletions(const std::string& WXUNUSED(prefix)) override
     {
         return m_strings;
     }
 
 private:
-    std::vector<wxString> m_strings;
+    std::vector<std::string> m_strings;
 };
 
 

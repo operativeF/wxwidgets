@@ -53,7 +53,7 @@ public:
     virtual bool IsEmpty() const;
 
     void WriteText(const std::string& text) override;
-    void AppendText(const wxString& text) override;
+    void AppendText(const std::string& text) override;
     void Clear() override;
 
     int GetLineLength(long lineNo) const override;
