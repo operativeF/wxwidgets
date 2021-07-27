@@ -420,9 +420,9 @@ wxString wxMarkupParser::Strip(const wxString& text)
     class StripOutput : public wxMarkupParserOutput
     {
     public:
-        const wxString& GetText() const { return m_text; }
+        const std::string& GetText() const { return m_text; }
 
-        void OnText(const wxString& string) override { m_text += string; }
+        void OnText(const std::string& string) override { m_text += string; }
 
         void OnBoldStart() override { }
         void OnBoldEnd() override { }
@@ -449,7 +449,7 @@ wxString wxMarkupParser::Strip(const wxString& text)
         void OnSpanEnd(const wxMarkupSpanAttributes& WXUNUSED(a)) override { }
 
     private:
-        wxString m_text;
+        std::string m_text;
     };
 
     StripOutput output;

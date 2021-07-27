@@ -1668,7 +1668,7 @@ public:
             int indent = 0;
             wxBitmap ib = m_win->CreateItemBitmap( m_row, indent );
             m_dist_x -= indent;
-            m_hint = new wxFrame( m_win->GetParent(), wxID_ANY, wxEmptyString,
+            m_hint = new wxFrame( m_win->GetParent(), wxID_ANY, "",
                                         wxPoint(pos.x - m_dist_x, pos.y + 5 ),
                                         ib.GetSize(),
                                         wxFRAME_TOOL_WINDOW |

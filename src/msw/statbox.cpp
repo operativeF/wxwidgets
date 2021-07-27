@@ -36,6 +36,8 @@
 #include "wx/msw/dc.h"
 #include "wx/msw/private/winstyle.h"
 
+#include "boost/nowide/convert.hpp"
+
 namespace
 {
 
@@ -69,11 +71,11 @@ const int CHILDREN_OFFSET = 5;
 
 bool wxStaticBox::Create(wxWindow *parent,
                          wxWindowID id,
-                         const wxString& label,
+                         const std::string& label,
                          const wxPoint& pos,
                          const wxSize& size,
                          long style,
-                         const wxString& name)
+                         const std::string& name)
 {
     if ( !CreateControl(parent, id, pos, size, style, wxDefaultValidator, name) )
         return false;
@@ -99,11 +101,11 @@ bool wxStaticBox::Create(wxWindow* parent,
                          const wxPoint& pos,
                          const wxSize& size,
                          long style,
-                         const wxString& name)
+                         const std::string& name)
 {
     wxCHECK_MSG( labelWin, false, wxS("Label window can't be null") );
 
-    if ( !Create(parent, id, wxString(), pos, size, style, name) )
+    if ( !Create(parent, id, "", pos, size, style, name) )
         return false;
 
     m_labelWin = labelWin;
@@ -498,7 +500,7 @@ void wxStaticBox::PaintForeground(wxDC& dc, const RECT&)
         ::SetTextColor(hdc, GetForegroundColour().GetPixel());
 
         // Get dimensions of the label
-        const wxString label = GetLabel();
+        const std::string label = GetLabel();
 
         // choose the correct font
         AutoHFONT font;
@@ -575,7 +577,7 @@ void wxStaticBox::PaintForeground(wxDC& dc, const RECT&)
 
         // now draw the text
         RECT rc2 = { x, 0, x + textExtent.x, textExtent.y };
-        ::DrawText(hdc, label.t_str(), label.length(), &rc2,
+        ::DrawTextW(hdc, boost::nowide::widen(label).c_str(), label.length(), &rc2,
                    drawTextFlags);
     }
 #endif // wxUSE_UXTHEME

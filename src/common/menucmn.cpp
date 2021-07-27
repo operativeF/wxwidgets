@@ -311,7 +311,7 @@ void wxMenuItemBase::SetHelp(const wxString& str)
     }
 }
 
-wxString wxMenuItemBase::GetLabelText(const wxString& text)
+std::string wxMenuItemBase::GetLabelText(const std::string& text)
 {
     return wxStripMenuCodes(text, wxStrip_Menu);
 }

@@ -844,7 +844,7 @@ void wxAuiManager::UpdateHintWindowConfig()
     {
         // Make a window to use for a transparent hint
         #if defined(__WXMSW__) || defined(__WXGTK__) || defined(__WXQT__)
-            m_hintWnd = new wxFrame(m_frame, wxID_ANY, wxEmptyString,
+            m_hintWnd = new wxFrame(m_frame, wxID_ANY, "",
                                      wxDefaultPosition, wxSize(1,1),
                                          wxFRAME_TOOL_WINDOW |
                                          wxFRAME_FLOAT_ON_PARENT |

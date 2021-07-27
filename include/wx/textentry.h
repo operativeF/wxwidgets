@@ -154,8 +154,8 @@ public:
     // it's empty and doesn't have focus, it is typically used in controls used
     // for searching to let the user know what is supposed to be entered there
 
-    virtual bool SetHint(const wxString& hint);
-    virtual wxString GetHint() const;
+    virtual bool SetHint(const std::string& hint);
+    virtual std::string GetHint() const;
 
 
     // margins

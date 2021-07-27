@@ -34,8 +34,8 @@ public:
               const wxString &tip, const wxRect& rc);
 
     // tip text
-    void SetTip(const wxString& tip);
-    const wxString& GetTip() const { return m_text; }
+    void SetTip(const std::string& tip);
+    const std::string& GetTip() const { return m_text; }
 
         // the window we're associated with
     void SetWindow(wxWindow *win);
@@ -110,7 +110,7 @@ private:
     // adjust tooltip max width based on current tooltip text
     bool AdjustMaxWidth();
 
-    wxString  m_text;           // tooltip text
+    std::string  m_text;           // tooltip text
     wxWindow* m_window{nullptr};         // main window we're associated with
     wxToolTipOtherWindows *m_others{nullptr}; // other windows associated with it or NULL
     wxRect    m_rect;           // the rect of the window for which this tooltip is shown

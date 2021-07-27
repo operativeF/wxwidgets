@@ -82,7 +82,7 @@ public:
     // Virtual functions called by wxMarkupParser while parsing the markup.
 
     // Called for a run of normal text.
-    virtual void OnText(const wxString& text) = 0;
+    virtual void OnText(const std::string& text) = 0;
 
     // These functions correspond to the simple tags without parameters.
     virtual void OnBoldStart() = 0;

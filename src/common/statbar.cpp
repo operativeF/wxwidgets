@@ -237,7 +237,7 @@ std::vector<int> wxStatusBarBase::CalculateAbsWidths(wxCoord widthTotal) const
 // setting/getting status text
 // ----------------------------------------------------------------------------
 
-void wxStatusBarBase::SetStatusText(const wxString& text, int number)
+void wxStatusBarBase::SetStatusText(const std::string& text, int number)
 {
     wxCHECK_RET( (unsigned)number < m_panes.size(),
                     "invalid status bar field index" );
@@ -246,7 +246,7 @@ void wxStatusBarBase::SetStatusText(const wxString& text, int number)
         DoUpdateStatusText(number);
 }
 
-wxString wxStatusBarBase::GetStatusText(int number) const
+std::string wxStatusBarBase::GetStatusText(int number) const
 {
     wxCHECK_MSG( (unsigned)number < m_panes.size(), wxString(),
                     "invalid status bar field index" );
@@ -266,7 +266,7 @@ void wxStatusBarBase::SetEllipsizedFlag(int number, bool isEllipsized)
 // pushing/popping status text
 // ----------------------------------------------------------------------------
 
-void wxStatusBarBase::PushStatusText(const wxString& text, int number)
+void wxStatusBarBase::PushStatusText(const std::string& text, int number)
 {
     wxCHECK_RET( (unsigned)number < m_panes.size(),
                     "invalid status bar field index" );

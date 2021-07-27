@@ -33,7 +33,7 @@ TEST_CASE("Markup tests")
             const wxString& GetText() const { return m_text; }
 
 
-            void OnText(const wxString& text) override { m_text += text; }
+            void OnText(const std::string& text) override { m_text += text; }
 
             void OnBoldStart() override { m_text += "<b>"; }
             void OnBoldEnd() override { m_text += "</b>"; }

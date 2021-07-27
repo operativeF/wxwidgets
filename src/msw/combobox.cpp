@@ -654,9 +654,9 @@ void wxComboBox::DoSetToolTip(wxToolTip *tip)
 
 #if wxUSE_UXTHEME
 
-bool wxComboBox::SetHint(const wxString& hintOrig)
+bool wxComboBox::SetHint(const std::string& hintOrig)
 {
-    wxString hint(hintOrig);
+    std::string hint(hintOrig);
     if ( wxUxThemeIsActive() )
     {
         // under XP (but not Vista) there is a bug in cue banners

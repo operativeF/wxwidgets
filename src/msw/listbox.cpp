@@ -60,7 +60,7 @@ public:
     int GetIndex() const
         { return m_parent->GetItemIndex(const_cast<wxListBoxItem*>(this)); }
 
-    wxString GetName() const override
+    std::string GetName() const override
         { return m_parent->GetString(GetIndex()); }
 
 private:
@@ -537,7 +537,7 @@ void wxListBox::SetHorizontalExtent(const wxString& s)
     SelectInHDC selFont(dc, GetHfontOf(GetFont()));
 
     TEXTMETRIC lpTextMetric;
-    ::GetTextMetrics(dc, &lpTextMetric);
+    ::GetTextMetricsW(dc, &lpTextMetric);
 
     int largestExtent = 0;
     SIZE extentXY;
@@ -548,7 +548,7 @@ void wxListBox::SetHorizontalExtent(const wxString& s)
         for ( unsigned int i = 0; i < m_noItems; i++ )
         {
             const wxString str = GetString(i);
-            ::GetTextExtentPoint32(dc, str.c_str(), str.length(), &extentXY);
+            ::GetTextExtentPoint32W(dc, str.c_str(), str.length(), &extentXY);
 
             int extentX = (int)(extentXY.cx + lpTextMetric.tmAveCharWidth);
             if ( extentX > largestExtent )

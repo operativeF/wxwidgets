@@ -74,11 +74,11 @@ public:
 
     // return just the text of the item label, without any mnemonics
     // This used to be called GetLabel.
-    virtual wxString GetItemLabelText() const { return GetLabelText(m_text); }
+    virtual std::string GetItemLabelText() const { return GetLabelText(m_text); }
 
     // return just the text part of the given label (implemented in platform-specific code)
     // This used to be called GetLabelFromText.
-    static wxString GetLabelText(const wxString& label);
+    static std::string GetLabelText(const std::string& label);
 
     // what kind of menu item we are
     wxItemKind GetKind() const { return m_kind; }

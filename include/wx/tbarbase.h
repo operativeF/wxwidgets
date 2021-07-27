@@ -58,13 +58,13 @@ public:
     // generic ctor for any kind of tool
     wxToolBarToolBase(wxToolBarBase *tbar = nullptr,
                       int toolid = wxID_SEPARATOR,
-                      const wxString& label = wxEmptyString,
+                      const std::string& label = "",
                       const wxBitmap& bmpNormal = wxNullBitmap,
                       const wxBitmap& bmpDisabled = wxNullBitmap,
                       wxItemKind kind = wxITEM_NORMAL,
                       wxObject *clientData = nullptr,
-                      const wxString& shortHelpString = wxEmptyString,
-                      const wxString& longHelpString = wxEmptyString)
+                      const std::string& shortHelpString = "",
+                      const std::string& longHelpString = "")
         : m_tbar(tbar),
           m_label(label),
           m_shortHelpString(shortHelpString),
@@ -81,7 +81,7 @@ public:
     // ctor for controls only
     wxToolBarToolBase(wxToolBarBase *tbar,
                       wxControl *control,
-                      const wxString& label)
+                      const std::string& label)
         : m_label(label),
           m_control(control),
           m_tbar(tbar),
@@ -144,10 +144,10 @@ public:
     const wxBitmap& GetBitmap() const
         { return IsEnabled() ? GetNormalBitmap() : GetDisabledBitmap(); }
 
-    const wxString& GetLabel() const { return m_label; }
+    const std::string& GetLabel() const { return m_label; }
 
-    const wxString& GetShortHelp() const { return m_shortHelpString; }
-    const wxString& GetLongHelp() const { return m_longHelpString; }
+    const std::string& GetShortHelp() const { return m_shortHelpString; }
+    const std::string& GetLongHelp() const { return m_longHelpString; }
 
     wxObject *GetClientData() const
     {
@@ -165,15 +165,15 @@ public:
     virtual bool Enable(bool enable);
     virtual bool Toggle(bool toggle);
     virtual bool SetToggle(bool toggle);
-    virtual bool SetShortHelp(const wxString& help);
-    virtual bool SetLongHelp(const wxString& help);
+    virtual bool SetShortHelp(const std::string& help);
+    virtual bool SetLongHelp(const std::string& help);
 
     void Toggle() { Toggle(!IsToggled()); }
 
     void SetNormalBitmap(const wxBitmap& bmp) { m_bmpNormal = bmp; }
     void SetDisabledBitmap(const wxBitmap& bmp) { m_bmpDisabled = bmp; }
 
-    virtual void SetLabel(const wxString& label) { m_label = label; }
+    virtual void SetLabel(const std::string& label) { m_label = label; }
 
     void SetClientData(wxObject *clientData)
     {
@@ -225,11 +225,11 @@ protected:
     wxBitmap m_bmpDisabled;
 
     // the button label
-    wxString m_label;
+    std::string m_label;
 
     // short and long help strings
-    wxString m_shortHelpString;
-    wxString m_longHelpString;
+    std::string m_shortHelpString;
+    std::string m_longHelpString;
 
 #if wxUSE_MENUS
     wxMenu *m_dropdownMenu{nullptr};
@@ -264,12 +264,12 @@ public:
     // If bmpDisabled is wxNullBitmap, a shadowed version of the normal bitmap
     // is created and used as the disabled image.
     wxToolBarToolBase *AddTool(int toolid,
-                               const wxString& label,
+                               const std::string& label,
                                const wxBitmap& bitmap,
                                const wxBitmap& bmpDisabled,
                                wxItemKind kind = wxITEM_NORMAL,
-                               const wxString& shortHelp = wxEmptyString,
-                               const wxString& longHelp = wxEmptyString,
+                               const std::string& shortHelp = "",
+                               const std::string& longHelp = "",
                                wxObject *clientData = nullptr)
     {
         return DoAddTool(toolid, label, bitmap, bmpDisabled, kind,
@@ -278,9 +278,9 @@ public:
 
     // the most common AddTool() version
     wxToolBarToolBase *AddTool(int toolid,
-                               const wxString& label,
+                               const std::string& label,
                                const wxBitmap& bitmap,
-                               const wxString& shortHelp = wxEmptyString,
+                               const std::string& shortHelp = "",
                                wxItemKind kind = wxITEM_NORMAL)
     {
         return AddTool(toolid, label, bitmap, wxNullBitmap, kind, shortHelp);
@@ -288,11 +288,11 @@ public:
 
     // add a check tool, i.e. a tool which can be toggled
     wxToolBarToolBase *AddCheckTool(int toolid,
-                                    const wxString& label,
+                                    const std::string& label,
                                     const wxBitmap& bitmap,
                                     const wxBitmap& bmpDisabled = wxNullBitmap,
-                                    const wxString& shortHelp = wxEmptyString,
-                                    const wxString& longHelp = wxEmptyString,
+                                    const std::string& shortHelp = "",
+                                    const std::string& longHelp = "",
                                     wxObject *clientData = nullptr)
     {
         return AddTool(toolid, label, bitmap, bmpDisabled, wxITEM_CHECK,
@@ -302,11 +302,11 @@ public:
     // add a radio tool, i.e. a tool which can be toggled and releases any
     // other toggled radio tools in the same group when it happens
     wxToolBarToolBase *AddRadioTool(int toolid,
-                                    const wxString& label,
+                                    const std::string& label,
                                     const wxBitmap& bitmap,
                                     const wxBitmap& bmpDisabled = wxNullBitmap,
-                                    const wxString& shortHelp = wxEmptyString,
-                                    const wxString& longHelp = wxEmptyString,
+                                    const std::string& shortHelp = "",
+                                    const std::string& longHelp = "",
                                     wxObject *clientData = nullptr)
     {
         return AddTool(toolid, label, bitmap, bmpDisabled, wxITEM_RADIO,
@@ -320,12 +320,12 @@ public:
                                (
                                     size_t pos,
                                     int toolid,
-                                    const wxString& label,
+                                    const std::string& label,
                                     const wxBitmap& bitmap,
                                     const wxBitmap& bmpDisabled = wxNullBitmap,
                                     wxItemKind kind = wxITEM_NORMAL,
-                                    const wxString& shortHelp = wxEmptyString,
-                                    const wxString& longHelp = wxEmptyString,
+                                    const std::string& shortHelp = "",
+                                    const std::string& longHelp = "",
                                     wxObject *clientData = nullptr
                                );
 
@@ -338,11 +338,11 @@ public:
     // the label is optional and, if specified, will be shown near the control
     // NB: the control should have toolbar as its parent
     virtual wxToolBarToolBase *
-    AddControl(wxControl *control, const wxString& label = wxEmptyString);
+    AddControl(wxControl *control, const std::string& label = "");
 
     virtual wxToolBarToolBase *
     InsertControl(size_t pos, wxControl *control,
-                  const wxString& label = wxEmptyString);
+                  const std::string& label = "");
 
     // get the control with the given id or return NULL
     virtual wxControl *FindControl( int toolid );
@@ -396,10 +396,10 @@ public:
 
     virtual bool GetToolEnabled(int toolid) const;
 
-    virtual void SetToolShortHelp(int toolid, const wxString& helpString);
-    virtual wxString GetToolShortHelp(int toolid) const;
-    virtual void SetToolLongHelp(int toolid, const wxString& helpString);
-    virtual wxString GetToolLongHelp(int toolid) const;
+    virtual void SetToolShortHelp(int toolid, const std::string& helpString);
+    virtual std::string GetToolShortHelp(int toolid) const;
+    virtual void SetToolLongHelp(int toolid, const std::string& helpString);
+    virtual std::string GetToolLongHelp(int toolid) const;
 
     virtual void SetToolNormalBitmap(int WXUNUSED(id),
                                      const wxBitmap& WXUNUSED(bitmap)) {}
@@ -491,26 +491,26 @@ public:
     // helper functions to create toolbar tools
     // -------------------------
     virtual wxToolBarToolBase *CreateTool(int toolid,
-                                          const wxString& label,
+                                          const std::string& label,
                                           const wxBitmap& bmpNormal,
                                           const wxBitmap& bmpDisabled = wxNullBitmap,
                                           wxItemKind kind = wxITEM_NORMAL,
                                           wxObject *clientData = nullptr,
-                                          const wxString& shortHelp = wxEmptyString,
-                                          const wxString& longHelp = wxEmptyString) = 0;
+                                          const std::string& shortHelp = "",
+                                          const std::string& longHelp = "") = 0;
 
     virtual wxToolBarToolBase *CreateTool(wxControl *control,
-                                          const wxString& label) = 0;
+                                          const std::string& label) = 0;
 
     // this one is not virtual but just a simple helper/wrapper around
     // CreateTool() for separators
     wxToolBarToolBase *CreateSeparator()
     {
         return CreateTool(wxID_SEPARATOR,
-                          wxEmptyString,
+                          "",
                           wxNullBitmap, wxNullBitmap,
                           wxITEM_SEPARATOR, nullptr,
-                          wxEmptyString, wxEmptyString);
+                          "", "");
     }
 
 
@@ -540,12 +540,12 @@ protected:
     virtual wxToolBarToolBase *DoAddTool
                                (
                                    int toolid,
-                                   const wxString& label,
+                                   const std::string& label,
                                    const wxBitmap& bitmap,
                                    const wxBitmap& bmpDisabled,
                                    wxItemKind kind,
-                                   const wxString& shortHelp = wxEmptyString,
-                                   const wxString& longHelp = wxEmptyString,
+                                   const std::string& shortHelp = "",
+                                   const std::string& longHelp = "",
                                    wxObject *clientData = nullptr,
                                    wxCoord xPos = wxDefaultCoord,
                                    wxCoord yPos = wxDefaultCoord

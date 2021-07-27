@@ -52,6 +52,8 @@
 #include "wx/msw/uxtheme.h"
 #endif
 
+#include "boost/nowide/convert.hpp"
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -141,19 +143,19 @@ class wxToolBarTool : public wxToolBarToolBase
 public:
     wxToolBarTool(wxToolBar *tbar,
                   int id,
-                  const wxString& label,
+                  const std::string& label,
                   const wxBitmap& bmpNormal,
                   const wxBitmap& bmpDisabled,
                   wxItemKind kind,
                   wxObject *clientData,
-                  const wxString& shortHelp,
-                  const wxString& longHelp)
+                  const std::string& shortHelp,
+                  const std::string& longHelp)
         : wxToolBarToolBase(tbar, id, label, bmpNormal, bmpDisabled, kind,
                             clientData, shortHelp, longHelp)
     {
     }
 
-    wxToolBarTool(wxToolBar *tbar, wxControl *control, const wxString& label)
+    wxToolBarTool(wxToolBar *tbar, wxControl *control, const std::string& label)
         : wxToolBarToolBase(tbar, control, label)
     {
         if ( IsControl() && !m_label.empty() )
@@ -177,7 +179,7 @@ public:
     wxToolBarTool(const wxToolBarTool&) = delete;
 	wxToolBarTool& operator=(const wxToolBarTool&) = delete;
 
-    void SetLabel(const wxString& label) override
+    void SetLabel(const std::string& label) override
     {
         wxASSERT_MSG( IsControl() || IsButton(),
            wxS("Label can be set for control or button tool only") );
@@ -334,20 +336,20 @@ static bool MSWShouldBeChecked(const wxToolBarToolBase *tool)
 // ----------------------------------------------------------------------------
 
 wxToolBarToolBase *wxToolBar::CreateTool(int id,
-                                         const wxString& label,
+                                         const std::string& label,
                                          const wxBitmap& bmpNormal,
                                          const wxBitmap& bmpDisabled,
                                          wxItemKind kind,
                                          wxObject *clientData,
-                                         const wxString& shortHelp,
-                                         const wxString& longHelp)
+                                         const std::string& shortHelp,
+                                         const std::string& longHelp)
 {
     return new wxToolBarTool(this, id, label, bmpNormal, bmpDisabled, kind,
                              clientData, shortHelp, longHelp);
 }
 
 wxToolBarToolBase *
-wxToolBar::CreateTool(wxControl *control, const wxString& label)
+wxToolBar::CreateTool(wxControl *control, const std::string& label)
 {
     return new wxToolBarTool(this, control, label);
 }
@@ -357,7 +359,7 @@ bool wxToolBar::Create(wxWindow *parent,
                        const wxPoint& pos,
                        const wxSize& size,
                        long style,
-                       const wxString& name)
+                       const std::string& name)
 {
     // common initialisation
     if ( !CreateControl(parent, id, pos, size, style, wxDefaultValidator, name) )
@@ -1119,9 +1121,9 @@ bool wxToolBar::Realize()
 
                 if ( HasFlag(wxTB_TEXT) )
                 {
-                    const wxString& label = tool->GetLabel();
+                    const std::string& label = tool->GetLabel();
                     if ( !label.empty() )
-                        button.iString = (INT_PTR) wxMSW_CONV_LPCTSTR(label);
+                        button.iString = (INT_PTR) boost::nowide::widen(label).c_str();
                 }
 
                 button.idCommand = tool->GetId();

@@ -78,7 +78,7 @@ public:
     int GetIndex() const
         { return m_parent->GetItemIndex(const_cast<wxCheckListBoxItem*>(this)); }
 
-    wxString GetName() const override
+    std::string GetName() const override
         { return m_parent->GetString(GetIndex()); }
 
 

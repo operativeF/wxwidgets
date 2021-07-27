@@ -27,7 +27,7 @@ public:
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    long style = 0,
-                   const wxString& name = wxASCII_STR(wxStaticBitmapNameStr))
+                   const std::string& name = wxStaticBitmapNameStr)
     {
         Create(parent, id, label, pos, size, style, name);
     }
@@ -43,7 +43,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
-                const wxString& name = wxASCII_STR(wxStaticBitmapNameStr));
+                const std::string& name = wxStaticBitmapNameStr);
 
     ~wxStaticBitmap() override { Free(); }
 

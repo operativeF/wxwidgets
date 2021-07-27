@@ -55,7 +55,7 @@ struct EDITBALLOONTIP
 class wxRichToolTipMSWImpl : public wxRichToolTipGenericImpl
 {
 public:
-    wxRichToolTipMSWImpl(const wxString& title, const wxString& message) :
+    wxRichToolTipMSWImpl(const std::string& title, const std::string& message) :
         wxRichToolTipGenericImpl(title, message)
     {
         // So far so good...
@@ -177,7 +177,7 @@ private:
 
 /* static */
 wxRichToolTipImpl*
-wxRichToolTipImpl::Create(const wxString& title, const wxString& message)
+wxRichToolTipImpl::Create(const std::string& title, const std::string& message)
 {
     // EM_SHOWBALLOONTIP is only implemented by comctl32.dll v6 so don't even
     // bother using the native implementation if we're not using themes.

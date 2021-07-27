@@ -83,12 +83,12 @@ protected:      // functions required for wxST_ELLIPSIZE_* support
 
     // Returns the label currently displayed inside the control, with mnemonics
     // if any.
-    virtual wxString WXGetVisibleLabel() const = 0;
+    virtual std::string WXGetVisibleLabel() const = 0;
 
     // Sets the real label currently displayed inside the control, _without_
     // invalidating the size. The text passed is always markup-free but may
     // contain the mnemonic characters.
-    virtual void WXSetVisibleLabel(const wxString& str) = 0;
+    virtual void WXSetVisibleLabel(const std::string& str) = 0;
 
     // Update the current size to match the best size unless wxST_NO_AUTORESIZE
     // style is explicitly used.

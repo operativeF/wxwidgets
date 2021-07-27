@@ -656,28 +656,28 @@ void wxHtmlHelpWindow::AddToolbarButtons(wxToolBar *toolBar, int style)
                   wxT("One or more HTML help frame toolbar bitmap could not be loaded.")) ;
 
 
-    toolBar->AddTool(wxID_HTML_PANEL, wxEmptyString, wpanelBitmap, _("Show/hide navigation panel"));
+    toolBar->AddTool(wxID_HTML_PANEL, "", wpanelBitmap, "Show/hide navigation panel");
     toolBar->AddSeparator();
-    toolBar->AddTool(wxID_HTML_BACK, wxEmptyString, wbackBitmap, _("Go back"));
-    toolBar->AddTool(wxID_HTML_FORWARD, wxEmptyString, wforwardBitmap, _("Go forward"));
+    toolBar->AddTool(wxID_HTML_BACK, "", wbackBitmap, "Go back");
+    toolBar->AddTool(wxID_HTML_FORWARD, "", wforwardBitmap, "Go forward");
     toolBar->AddSeparator();
-    toolBar->AddTool(wxID_HTML_UPNODE, wxEmptyString, wupnodeBitmap, _("Go one level up in document hierarchy"));
-    toolBar->AddTool(wxID_HTML_UP, wxEmptyString, wupBitmap, _("Previous page"));
-    toolBar->AddTool(wxID_HTML_DOWN, wxEmptyString, wdownBitmap, _("Next page"));
+    toolBar->AddTool(wxID_HTML_UPNODE, "", wupnodeBitmap, "Go one level up in document hierarchy");
+    toolBar->AddTool(wxID_HTML_UP, "", wupBitmap, "Previous page");
+    toolBar->AddTool(wxID_HTML_DOWN, "", wdownBitmap, "Next page");
 
     if ((style & wxHF_PRINT) || (style & wxHF_OPEN_FILES))
         toolBar->AddSeparator();
 
     if (style & wxHF_OPEN_FILES)
-        toolBar->AddTool(wxID_HTML_OPENFILE, wxEmptyString, wopenBitmap, _("Open HTML document"));
+        toolBar->AddTool(wxID_HTML_OPENFILE, "", wopenBitmap, "Open HTML document");
 
 #if wxUSE_PRINTING_ARCHITECTURE
     if (style & wxHF_PRINT)
-        toolBar->AddTool(wxID_HTML_PRINT, wxEmptyString, wprintBitmap, _("Print this page"));
+        toolBar->AddTool(wxID_HTML_PRINT, "", wprintBitmap, "Print this page");
 #endif
 
     toolBar->AddSeparator();
-    toolBar->AddTool(wxID_HTML_OPTIONS, wxEmptyString, woptionsBitmap, _("Display options dialog"));
+    toolBar->AddTool(wxID_HTML_OPTIONS, "", woptionsBitmap, "Display options dialog");
 
     // Allow application to add custom buttons
     wxHtmlHelpFrame* parentFrame = wxDynamicCast(GetParent(), wxHtmlHelpFrame);
@@ -1216,8 +1216,8 @@ public:
                       wxSize(200, wxDefaultCoord),
                       {}, wxCB_DROPDOWN | wxCB_READONLY));
 
-        sizer->Add(FontSize = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition,
-                      wxDefaultSize, wxSP_ARROW_KEYS, 2, 100, 2, wxT("wxSpinCtrl")));
+        sizer->Add(FontSize = new wxSpinCtrl(this, wxID_ANY, "", wxDefaultPosition,
+                      wxDefaultSize, wxSP_ARROW_KEYS, 2, 100, 2, "wxSpinCtrl"));
 
         topsizer->Add(sizer, 0, wxLEFT|wxRIGHT|wxTOP, 10);
 

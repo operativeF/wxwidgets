@@ -100,7 +100,7 @@ public:
 
 #if wxUSE_UXTHEME
     // override wxTextEntry method to work around Windows bug
-    bool SetHint(const wxString& hint) override;
+    bool SetHint(const std::string& hint) override;
 #endif // wxUSE_UXTHEME
 
     void SetLayoutDirection(wxLayoutDirection dir) override;

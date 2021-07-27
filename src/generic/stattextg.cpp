@@ -112,7 +112,7 @@ void wxGenericStaticText::SetLabel(const std::string& label)
     Refresh();
 }
 
-void wxGenericStaticText::WXSetVisibleLabel(const wxString& label)
+void wxGenericStaticText::WXSetVisibleLabel(const std::string& label)
 {
     m_mnemonic = FindAccelIndex(label, &m_label);
 }

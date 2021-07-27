@@ -71,7 +71,7 @@ public:
 
 
     // get item name (with mnemonics if exist)
-    virtual wxString GetName() const = 0;
+    virtual std::string GetName() const = 0;
 
 
   // this function might seem strange, but if it returns false it means that

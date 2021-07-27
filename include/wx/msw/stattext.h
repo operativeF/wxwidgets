@@ -52,8 +52,8 @@ protected:
                            int sizeFlags = wxSIZE_AUTO) override;
     wxSize DoGetBestClientSize() const override;
 
-    wxString WXGetVisibleLabel() const override;
-    void WXSetVisibleLabel(const wxString& str) override;
+    std::string WXGetVisibleLabel() const override;
+    void WXSetVisibleLabel(const std::string& str) override;
 
 public:
 	wxClassInfo *GetClassInfo() const override;

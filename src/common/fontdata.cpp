@@ -52,7 +52,7 @@ wxFontData& wxFontData::operator=(const wxFontData& data)
 
 #include "wx/fontdlg.h"
 
-wxFont wxGetFontFromUser(wxWindow *parent, const wxFont& fontInit, const wxString& caption)
+wxFont wxGetFontFromUser(wxWindow *parent, const wxFont& fontInit, const std::string& caption)
 {
     wxFontData data;
     if ( fontInit.IsOk() )

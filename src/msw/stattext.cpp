@@ -200,12 +200,12 @@ bool wxStaticText::SetFont(const wxFont& font)
 // wxStaticTextBase which requires us to implement them, but actually the base
 // wxWindow methods already do exactly what we need under this platform.
 
-wxString wxStaticText::WXGetVisibleLabel() const
+std::string wxStaticText::WXGetVisibleLabel() const
 {
     return wxWindow::GetLabel();
 }
 
-void wxStaticText::WXSetVisibleLabel(const wxString& str)
+void wxStaticText::WXSetVisibleLabel(const std::string& str)
 {
     wxWindow::SetLabel(str);
 }

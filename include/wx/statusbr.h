@@ -130,12 +130,12 @@ public:
     // ----------
 
     // just change or get the currently shown text
-    void SetStatusText(const wxString& text, int number = 0);
-    wxString GetStatusText(int number = 0) const;
+    void SetStatusText(const std::string& text, int number = 0);
+    std::string GetStatusText(int number = 0) const;
 
     // change the currently shown text to the new one and save the current
     // value to be restored by the next call to PopStatusText()
-    void PushStatusText(const wxString& text, int number = 0);
+    void PushStatusText(const std::string& text, int number = 0);
     void PopStatusText(int number = 0);
 
     // fields widths

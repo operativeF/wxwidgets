@@ -112,12 +112,12 @@ public:
     virtual wxStatusBar* CreateStatusBar(int number = 1,
                                          long style = wxSTB_DEFAULT_STYLE,
                                          wxWindowID winid = 0,
-                                         const wxString& name = wxASCII_STR(wxStatusLineNameStr));
+                                         const std::string& name = wxStatusLineNameStr);
     // return a new status bar
     virtual wxStatusBar *OnCreateStatusBar(int number,
                                            long style,
                                            wxWindowID winid,
-                                           const wxString& name);
+                                           const std::string& name);
     // get the main status bar
     virtual wxStatusBar *GetStatusBar() const { return m_frameStatusBar; }
 
@@ -142,11 +142,11 @@ public:
     // create main toolbar bycalling OnCreateToolBar()
     virtual wxToolBar* CreateToolBar(long style = -1,
                                      wxWindowID winid = wxID_ANY,
-                                     const wxString& name = wxASCII_STR("toolbar"));
+                                     const std::string& name = "toolbar");
     // return a new toolbar
     virtual wxToolBar *OnCreateToolBar(long style,
                                        wxWindowID winid,
-                                       const wxString& name );
+                                       const std::string& name );
 
     // get/set the main toolbar
     virtual wxToolBar *GetToolBar() const { return m_frameToolBar; }

@@ -754,7 +754,7 @@ int wxMenuItem::MeasureAccelWidth() const
     return dc.GetTextExtent(accel).x;
 }
 
-wxString wxMenuItem::GetName() const
+std::string wxMenuItem::GetName() const
 {
     return GetItemLabelText();
 }

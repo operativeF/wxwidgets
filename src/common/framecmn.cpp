@@ -345,7 +345,7 @@ void wxFrameBase::OnInternalIdle()
 wxStatusBar* wxFrameBase::CreateStatusBar(int number,
                                           long style,
                                           wxWindowID id,
-                                          const wxString& name)
+                                          const std::string& name)
 {
     // the main status bar can only be created once (or else it should be
     // deleted before calling CreateStatusBar() again)
@@ -360,7 +360,7 @@ wxStatusBar* wxFrameBase::CreateStatusBar(int number,
 wxStatusBar *wxFrameBase::OnCreateStatusBar(int number,
                                             long style,
                                             wxWindowID id,
-                                            const wxString& name)
+                                            const std::string& name)
 {
     wxStatusBar *statusBar = new wxStatusBar(this, id, style, name);
 
@@ -517,7 +517,7 @@ void wxFrameBase::DoGiveHelp(const wxString& help, bool show)
 
 wxToolBar* wxFrameBase::CreateToolBar(long style,
                                       wxWindowID id,
-                                      const wxString& name)
+                                      const std::string& name)
 {
     // the main toolbar can't be recreated (unless it was explicitly deleted
     // before)
@@ -543,7 +543,7 @@ wxToolBar* wxFrameBase::CreateToolBar(long style,
 
 wxToolBar* wxFrameBase::OnCreateToolBar(long style,
                                         wxWindowID id,
-                                        const wxString& name)
+                                        const std::string& name)
 {
     return new wxToolBar(this, id,
                          wxDefaultPosition, wxDefaultSize,

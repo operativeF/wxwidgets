@@ -265,8 +265,8 @@ public:
     bool IsEditable() const override;
     void SetEditable(bool editable) override;
 
-    bool SetHint(const wxString& hint) override;
-    wxString GetHint() const override;
+    bool SetHint(const std::string& hint) override;
+    std::string GetHint() const override;
 
     // This method sets the text without affecting list selection
     // (ie. wxComboPopup::SetStringValue doesn't get called).
@@ -612,7 +612,7 @@ protected:
     std::string             m_valueString;
 
     // This is used when control is unfocused and m_valueString is empty
-    wxString                m_hintText;
+    std::string                m_hintText;
 
     // the text control and button we show all the time
     wxTextCtrl*             m_text{nullptr};

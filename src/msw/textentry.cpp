@@ -979,7 +979,7 @@ void wxTextEntry::ForceUpper()
     #define EM_GETCUEBANNER 0x1502
 #endif
 
-bool wxTextEntry::SetHint(const wxString& hint)
+bool wxTextEntry::SetHint(const std::string& hint)
 {
     if ( wxGetWinVersion() >= wxWinVersion_Vista && wxUxThemeIsActive() )
     {
@@ -988,22 +988,25 @@ bool wxTextEntry::SetHint(const wxString& hint)
         // we always use TRUE for wParam to show the hint even when the window
         // has focus, otherwise there would be no way to show the hint for the
         // initially focused window
-        if ( ::SendMessage(GetEditHwnd(), EM_SETCUEBANNER,
-                             TRUE, (LPARAM)(const wchar_t *)hint.wc_str()) )
+        if ( ::SendMessageW(GetEditHwnd(), EM_SETCUEBANNER,
+                             TRUE, (LPARAM)boost::nowide::widen(hint).c_str()) )
             return true;
     }
 
     return wxTextEntryBase::SetHint(hint);
 }
 
-wxString wxTextEntry::GetHint() const
+std::string wxTextEntry::GetHint() const
 {
     if ( wxUxThemeIsActive() )
     {
-        wchar_t buf[256];
-        if ( ::SendMessage(GetEditHwnd(), EM_GETCUEBANNER,
-                            (WPARAM)buf, WXSIZEOF(buf)) )
-            return wxString(buf);
+        std::wstring buf;
+
+        buf.resize(256);
+
+        if ( ::SendMessageW(GetEditHwnd(), EM_GETCUEBANNER,
+                            (WPARAM)&buf[0], buf.size()) )
+            return boost::nowide::narrow(buf);
     }
 
     return wxTextEntryBase::GetHint();

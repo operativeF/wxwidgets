@@ -105,10 +105,10 @@ bool wxHtmlHelpFrame::Create(wxWindow* parent, wxWindowID id,
         m_HtmlHelpWin->UseConfig(config, rootpath);
 #endif // wxUSE_CONFIG
 
-    wxFrame::Create(parent, id, _("Help"),
+    wxFrame::Create(parent, id, "Help",
                     wxPoint(m_HtmlHelpWin->GetCfgData().x, m_HtmlHelpWin->GetCfgData().y),
                     wxSize(m_HtmlHelpWin->GetCfgData().w, m_HtmlHelpWin->GetCfgData().h),
-                    wxDEFAULT_FRAME_STYLE, wxT("wxHtmlHelp"));
+                    wxDEFAULT_FRAME_STYLE, "wxHtmlHelp");
 #if wxUSE_STATUSBAR
     CreateStatusBar();
 #endif

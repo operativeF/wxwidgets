@@ -36,7 +36,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxTB_DEFAULT_STYLE,
-                const wxString& name = wxASCII_STR(wxToolBarNameStr))
+                const std::string& name = wxToolBarNameStr)
     {
         m_defaultWidth = 16;
         m_defaultHeight = 15;
@@ -54,7 +54,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxTB_DEFAULT_STYLE,
-                const wxString& name = wxASCII_STR(wxToolBarNameStr));
+                const std::string& name = wxToolBarNameStr);
 
     ~wxToolBar() override;
 
@@ -103,16 +103,16 @@ public:
 #endif // wxHAS_MSW_BACKGROUND_ERASE_HOOK
 
     wxToolBarToolBase *CreateTool(int id,
-                                          const wxString& label,
+                                          const std::string& label,
                                           const wxBitmap& bmpNormal,
                                           const wxBitmap& bmpDisabled = wxNullBitmap,
                                           wxItemKind kind = wxITEM_NORMAL,
                                           wxObject *clientData = nullptr,
-                                          const wxString& shortHelp = wxEmptyString,
-                                          const wxString& longHelp = wxEmptyString) override;
+                                          const std::string& shortHelp = "",
+                                          const std::string& longHelp = "") override;
 
     wxToolBarToolBase *CreateTool(wxControl *control,
-                                          const wxString& label) override;
+                                          const std::string& label) override;
 protected:
     // create the native toolbar control
     bool MSWCreateToolbar(const wxPoint& pos, const wxSize& size);

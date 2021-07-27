@@ -2071,7 +2071,7 @@ void wxComboCtrlBase::CreatePopup()
                                                       wxPoint(-21,-21), wxSize(20, 20),
                                                       tlwFlags );
           #else
-            m_winPopup = new wxComboPopupWindowBase2( this, wxID_ANY, wxEmptyString,
+            m_winPopup = new wxComboPopupWindowBase2( this, wxID_ANY, "",
                                                       wxPoint(-21,-21), wxSize(20, 20),
                                                       tlwFlags );
           #endif
@@ -2878,7 +2878,7 @@ bool wxComboCtrlBase::CanRedo() const
     return false;
 }
 
-bool wxComboCtrlBase::SetHint(const wxString& hint)
+bool wxComboCtrlBase::SetHint(const std::string& hint)
 {
     m_hintText = hint;
     bool res = true;
@@ -2888,7 +2888,7 @@ bool wxComboCtrlBase::SetHint(const wxString& hint)
     return res;
 }
 
-wxString wxComboCtrlBase::GetHint() const
+std::string wxComboCtrlBase::GetHint() const
 {
     return m_hintText;
 }

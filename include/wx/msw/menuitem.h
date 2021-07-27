@@ -94,7 +94,7 @@ public:
     int MeasureAccelWidth() const;
 
     // override wxOwnerDrawn base class virtuals
-    wxString GetName() const override;
+    std::string GetName() const override;
     bool OnMeasureItem(size_t *pwidth, size_t *pheight) override;
     bool OnDrawItem(wxDC& dc, const wxRect& rc, wxODAction act, wxODStatus stat) override;
 

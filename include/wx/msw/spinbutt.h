@@ -26,7 +26,7 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  long style = wxSP_VERTICAL | wxSP_ARROW_KEYS,
-                 const wxString& name = wxSPIN_BUTTON_NAME)
+                 const std::string& name = wxSPIN_BUTTON_NAME)
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -43,7 +43,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxSP_VERTICAL | wxSP_ARROW_KEYS,
-                const wxString& name = wxSPIN_BUTTON_NAME);
+                const std::string& name = wxSPIN_BUTTON_NAME);
 
 
     int GetValue() const override;

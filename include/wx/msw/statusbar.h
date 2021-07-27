@@ -26,7 +26,7 @@ public:
     wxStatusBar(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 long style = wxSTB_DEFAULT_STYLE,
-                const wxString& name = wxASCII_STR(wxStatusBarNameStr))
+                const std::string& name = wxStatusBarNameStr)
     {
         Create(parent, id, style, name);
     }
@@ -34,7 +34,7 @@ public:
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
                 long style = wxSTB_DEFAULT_STYLE,
-                const wxString& name = wxASCII_STR(wxStatusBarNameStr));
+                const std::string& name = wxStatusBarNameStr);
 
     ~wxStatusBar() override;
 

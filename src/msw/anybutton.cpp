@@ -37,6 +37,8 @@
 #include "wx/msw/uxtheme.h"
 #include "wx/private/window.h"
 
+#include "boost/nowide/convert.hpp"
+
 #if wxUSE_MARKUP
     #include "wx/generic/private/markuptext.h"
 #endif // wxUSE_MARKUP
@@ -866,7 +868,7 @@ void DrawButtonText(HDC hdc,
                     wxAnyButton *btn,
                     int flags)
 {
-    const wxString text = btn->GetLabel();
+    const std::string text = btn->GetLabel();
 
     // To get a native look for owner-drawn button in disabled state (without
     // theming) we must use DrawState() to draw the text label.
@@ -887,7 +889,7 @@ void DrawButtonText(HDC hdc,
         // Compute bounding rect for the whole text.
         RECT rc;
         ::SetRectEmpty(&rc);
-        ::DrawText(hdc, text.t_str(), text.length(), &rc, DT_CALCRECT);
+        ::DrawTextW(hdc, boost::nowide::widen(text).c_str(), text.length(), &rc, DT_CALCRECT);
 
         const LONG h = rc.bottom - rc.top;
 
@@ -920,7 +922,7 @@ void DrawButtonText(HDC hdc,
         {
             // Each line must be aligned in horizontal direction individually.
             ::SetRectEmpty(&rc);
-            ::DrawText(hdc, lines[lineNum].t_str(), lines[lineNum].length(),
+            ::DrawTextW(hdc, lines[lineNum].t_str(), lines[lineNum].length(),
                        &rc, DT_CALCRECT);
             const LONG w = rc.right - rc.left;
 
@@ -947,7 +949,7 @@ void DrawButtonText(HDC hdc,
 
             ::OffsetRect(&rc, 0, y0 + lineNum * hLine);
 
-            ::DrawState(hdc, nullptr, nullptr, wxMSW_CONV_LPARAM(lines[lineNum]),
+            ::DrawStateW(hdc, nullptr, nullptr, wxMSW_CONV_LPARAM(lines[lineNum]),
                         lines[lineNum].length(),
                         rc.left, rc.top, rc.right, rc.bottom, dsFlags);
         }
@@ -961,7 +963,7 @@ void DrawButtonText(HDC hdc,
             // first we need to compute its bounding rect
             RECT rc;
             ::CopyRect(&rc, pRect);
-            ::DrawText(hdc, text.t_str(), text.length(), &rc,
+            ::DrawTextW(hdc, boost::nowide::widen(text).c_str(), text.length(), &rc,
                        flags | DT_CALCRECT);
 
             // now position this rect inside the entire button area: notice
@@ -1005,7 +1007,7 @@ void DrawButtonText(HDC hdc,
             rc.right = rc.left+w;
             rc.bottom = rc.top+h;
 
-            ::DrawText(hdc, text.t_str(), text.length(), &rc, flags);
+            ::DrawText(hdc, boost::nowide::widen(text).c_str(), text.length(), &rc, flags);
         }
         else // single line label
         {
@@ -1032,7 +1034,7 @@ void DrawButtonText(HDC hdc,
 
             // notice that we must have DT_SINGLELINE for vertical alignment
             // flags to work
-            ::DrawText(hdc, text.t_str(), text.length(), pRect,
+            ::DrawTextW(hdc, boost::nowide::widen(text).c_str(), text.length(), pRect,
                        flags | DT_SINGLELINE );
         }
     }

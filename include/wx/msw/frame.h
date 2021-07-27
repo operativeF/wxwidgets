@@ -21,11 +21,11 @@ public:
     wxFrame() = default;
     wxFrame(wxWindow *parent,
             wxWindowID id,
-            const wxString& title,
+            const std::string& title,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             long style = wxDEFAULT_FRAME_STYLE,
-            const wxString& name = wxASCII_STR(wxFrameNameStr))
+            const std::string& name = wxFrameNameStr)
     {
         Create(parent, id, title, pos, size, style, name);
     }
@@ -37,11 +37,11 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& title,
+                const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_FRAME_STYLE,
-                const wxString& name = wxASCII_STR(wxFrameNameStr));
+                const std::string& name = wxFrameNameStr);
     ~wxFrame() override;
 
     
@@ -54,7 +54,7 @@ public:
 #if wxUSE_TOOLBAR
     wxToolBar* CreateToolBar(long style = -1,
                                      wxWindowID id = wxID_ANY,
-                                     const wxString& name = wxASCII_STR("toolbar")) override;
+                                     const std::string& name = "toolbar") override;
 #endif // wxUSE_TOOLBAR
 
     // Status bar
@@ -62,7 +62,7 @@ public:
     wxStatusBar* OnCreateStatusBar(int number = 1,
                                            long style = wxSTB_DEFAULT_STYLE,
                                            wxWindowID id = 0,
-                                           const wxString& name = wxASCII_STR(wxStatusLineNameStr)) override;
+                                           const std::string& name = wxStatusLineNameStr) override;
 
     // Hint to tell framework which status bar to use: the default is to use
     // native one for the platforms which support it (Win32), the generic one

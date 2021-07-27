@@ -50,8 +50,8 @@ public:
     void ForceUpper() override;
 
 #if wxUSE_UXTHEME
-    bool SetHint(const wxString& hint) override;
-    wxString GetHint() const override;
+    bool SetHint(const std::string& hint) override;
+    std::string GetHint() const override;
 #endif // wxUSE_UXTHEME
 
 protected:

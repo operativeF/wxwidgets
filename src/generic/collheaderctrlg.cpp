@@ -74,7 +74,7 @@ wxSize wxGenericCollapsibleHeaderCtrl::DoGetBestClientSize() const
 
     wxSize size = wxRendererNative::Get().GetCollapseButtonSize(self, dc);
 
-    wxString text;
+    std::string text;
     wxControl::FindAccelIndex(GetLabel(), &text);
 
     const wxSize textSize = dc.GetTextExtent(text);
@@ -178,7 +178,7 @@ void wxGenericCollapsibleHeaderCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
 
     wxRendererNative::Get().DrawCollapseButton(this, dc, btnRect, flags);
 
-    wxString text;
+    std::string text;
     int indexAccel = wxControl::FindAccelIndex(GetLabel(), &text);
 
     wxSize textSize = dc.GetTextExtent(text);

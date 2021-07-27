@@ -58,7 +58,7 @@ class wxTaskBarIconWindow : public wxFrame
 {
 public:
     explicit wxTaskBarIconWindow(wxTaskBarIcon *icon)
-        : wxFrame(nullptr, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0),
+        : wxFrame(nullptr, wxID_ANY, "", wxDefaultPosition, wxDefaultSize, 0),
           m_icon(icon)
     {
     }

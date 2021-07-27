@@ -77,7 +77,7 @@ public:
         //else: The new hint will be shown later when we lose focus.
     }
 
-    const wxString& GetHintString() const { return m_hint; }
+    const std::string& GetHintString() const { return m_hint; }
 
     // This is called whenever the text control contents changes.
     //
@@ -168,7 +168,7 @@ private:
     wxColour m_colFg;
 
     // The hint passed to wxTextEntry::SetHint(), never empty.
-    wxString m_hint;
+    std::string m_hint;
 
     // The real text of the window.
     wxString m_text;
@@ -384,7 +384,7 @@ void wxTextEntryBase::ForceUpper()
 // hints support
 // ----------------------------------------------------------------------------
 
-bool wxTextEntryBase::SetHint(const wxString& hint)
+bool wxTextEntryBase::SetHint(const std::string& hint)
 {
     // Hint contents would be shown hidden in a password text entry anyhow, so
     // we just can't support hints in this case.
@@ -409,9 +409,9 @@ bool wxTextEntryBase::SetHint(const wxString& hint)
     return true;
 }
 
-wxString wxTextEntryBase::GetHint() const
+std::string wxTextEntryBase::GetHint() const
 {
-    return m_hintData ? m_hintData->GetHintString() : wxString();
+    return m_hintData ? m_hintData->GetHintString() : "";
 }
 
 // ----------------------------------------------------------------------------

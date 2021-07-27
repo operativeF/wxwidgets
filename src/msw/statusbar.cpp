@@ -34,6 +34,8 @@
     #include "wx/msw/uxtheme.h"
 #endif
 
+#include "boost/nowide/convert.hpp"
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -92,13 +94,13 @@ WXDWORD wxStatusBar::MSWGetStyle(long style, WXDWORD *exstyle) const
 bool wxStatusBar::Create(wxWindow *parent,
                          wxWindowID id,
                          long style,
-                         const wxString& name)
+                         const std::string& name)
 {
     if ( !CreateControl(parent, id, wxDefaultPosition, wxDefaultSize,
                         style, wxDefaultValidator, name) )
         return false;
 
-    if ( !MSWCreateControl(STATUSCLASSNAME, wxString(),
+    if ( !MSWCreateControl(STATUSCLASSNAME, "",
                            wxDefaultPosition, wxDefaultSize) )
         return false;
 
@@ -267,7 +269,7 @@ void wxStatusBar::DoUpdateStatusText(int nField)
 
     const int maxWidth = rc.GetWidth() - MSWGetMetrics().textMargin;
 
-    wxString text = GetStatusText(nField);
+    std::string text = GetStatusText(nField);
 
     // do we need to ellipsize this string?
     wxEllipsizeMode ellmode = wxELLIPSIZE_NONE;
@@ -298,7 +300,7 @@ void wxStatusBar::DoUpdateStatusText(int nField)
 
     // Set the status text in the native control passing both field number and style.
     // NOTE: MSDN library doesn't mention that nField and style have to be 'ORed'
-    if ( !StatusBar_SetText(GetHwnd(), nField | style, text.t_str()) )
+    if ( !StatusBar_SetText(GetHwnd(), nField | style, boost::nowide::widen(text).c_str()) )
     {
         wxLogLastError("StatusBar_SetText");
     }
@@ -543,8 +545,8 @@ void wxStatusBar::SetStatusStyles(int n, const int styles[])
         // The SB_SETTEXT message is both used to set the field's text as well as
         // the fields' styles.
         // NOTE: MSDN library doesn't mention that nField and style have to be 'ORed'
-        wxString text = GetStatusText(i);
-        if (!StatusBar_SetText(GetHwnd(), style | i, text.t_str()))
+        std::string text = GetStatusText(i);
+        if (!StatusBar_SetText(GetHwnd(), style | i, boost::nowide::widen(text).c_str()))
         {
             wxLogLastError("StatusBar_SetText");
         }
@@ -641,7 +643,7 @@ bool wxStatusBar::MSWOnNotify(int WXUNUSED(idCtrl), WXLPARAM lParam, WXLPARAM* W
 
         NMHDR* hdr = (NMHDR *)lParam;
 
-        wxString str;
+        std::string str;
         if (hdr->idFrom < m_tooltips.size() && m_tooltips[hdr->idFrom])
             str = m_tooltips[hdr->idFrom]->GetTip();
 

@@ -88,7 +88,7 @@ bool wxToolBarToolBase::SetToggle(bool toggle)
     return true;
 }
 
-bool wxToolBarToolBase::SetShortHelp(const wxString& help)
+bool wxToolBarToolBase::SetShortHelp(const std::string& help)
 {
     if ( m_shortHelpString == help )
         return false;
@@ -98,7 +98,7 @@ bool wxToolBarToolBase::SetShortHelp(const wxString& help)
     return true;
 }
 
-bool wxToolBarToolBase::SetLongHelp(const wxString& help)
+bool wxToolBarToolBase::SetLongHelp(const std::string& help)
 {
     if ( m_longHelpString == help )
         return false;
@@ -137,12 +137,12 @@ void wxToolBarBase::FixupStyle()
 }
 
 wxToolBarToolBase *wxToolBarBase::DoAddTool(int toolid,
-                                            const wxString& label,
+                                            const std::string& label,
                                             const wxBitmap& bitmap,
                                             const wxBitmap& bmpDisabled,
                                             wxItemKind kind,
-                                            const wxString& shortHelp,
-                                            const wxString& longHelp,
+                                            const std::string& shortHelp,
+                                            const std::string& longHelp,
                                             wxObject *clientData,
                                             wxCoord WXUNUSED(xPos),
                                             wxCoord WXUNUSED(yPos))
@@ -154,12 +154,12 @@ wxToolBarToolBase *wxToolBarBase::DoAddTool(int toolid,
 
 wxToolBarToolBase *wxToolBarBase::InsertTool(size_t pos,
                                              int toolid,
-                                             const wxString& label,
+                                             const std::string& label,
                                              const wxBitmap& bitmap,
                                              const wxBitmap& bmpDisabled,
                                              wxItemKind kind,
-                                             const wxString& shortHelp,
-                                             const wxString& longHelp,
+                                             const std::string& shortHelp,
+                                             const std::string& longHelp,
                                              wxObject *clientData)
 {
     wxCHECK_MSG( pos <= GetToolsCount(), nullptr,
@@ -192,7 +192,7 @@ wxToolBarBase::InsertTool(size_t pos, wxToolBarToolBase *tool)
 }
 
 wxToolBarToolBase *
-wxToolBarBase::AddControl(wxControl *control, const wxString& label)
+wxToolBarBase::AddControl(wxControl *control, const std::string& label)
 {
     return InsertControl(GetToolsCount(), control, label);
 }
@@ -200,7 +200,7 @@ wxToolBarBase::AddControl(wxControl *control, const wxString& label)
 wxToolBarToolBase *
 wxToolBarBase::InsertControl(size_t pos,
                              wxControl *control,
-                             const wxString& label)
+                             const std::string& label)
 {
     wxCHECK_MSG( control, nullptr,
                  wxT("toolbar: can't insert NULL control") );
@@ -505,7 +505,7 @@ void wxToolBarBase::SetToggle(int toolid, bool toggle)
     }
 }
 
-void wxToolBarBase::SetToolShortHelp(int toolid, const wxString& help)
+void wxToolBarBase::SetToolShortHelp(int toolid, const std::string& help)
 {
     wxToolBarToolBase *tool = FindById(toolid);
     if ( tool )
@@ -514,7 +514,7 @@ void wxToolBarBase::SetToolShortHelp(int toolid, const wxString& help)
     }
 }
 
-void wxToolBarBase::SetToolLongHelp(int toolid, const wxString& help)
+void wxToolBarBase::SetToolLongHelp(int toolid, const std::string& help)
 {
     wxToolBarToolBase *tool = FindById(toolid);
     if ( tool )
@@ -571,18 +571,18 @@ bool wxToolBarBase::GetToolEnabled(int toolid) const
     return tool->IsEnabled();
 }
 
-wxString wxToolBarBase::GetToolShortHelp(int toolid) const
+std::string wxToolBarBase::GetToolShortHelp(int toolid) const
 {
     wxToolBarToolBase *tool = FindById(toolid);
-    wxCHECK_MSG( tool, wxEmptyString, wxT("no such tool") );
+    wxCHECK_MSG( tool, "", wxT("no such tool") );
 
     return tool->GetShortHelp();
 }
 
-wxString wxToolBarBase::GetToolLongHelp(int toolid) const
+std::string wxToolBarBase::GetToolLongHelp(int toolid) const
 {
     wxToolBarToolBase *tool = FindById(toolid);
-    wxCHECK_MSG( tool, wxEmptyString, wxT("no such tool") );
+    wxCHECK_MSG( tool, "", wxT("no such tool") );
 
     return tool->GetLongHelp();
 }
@@ -674,7 +674,7 @@ void wxToolBarBase::OnMouseEnter(int toolid)
     wxFrame *frame = wxDynamicCast(wxGetTopLevelParent(this), wxFrame);
     if ( frame )
     {
-        wxString help;
+        std::string help;
         if ( toolid != wxID_ANY )
         {
            const wxToolBarToolBase * const tool = FindById(toolid);

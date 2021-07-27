@@ -697,7 +697,7 @@ void wxGridCellNumberEditor::Create(wxWindow* parent,
                                       wxTE_PROCESS_TAB;
 
         // create a spin ctrl
-        m_control = new wxSpinCtrl(parent, wxID_ANY, wxEmptyString,
+        m_control = new wxSpinCtrl(parent, wxID_ANY, "",
                                    wxDefaultPosition, wxDefaultSize,
                                    style,
                                    m_min, m_max);

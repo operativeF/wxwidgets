@@ -26,7 +26,7 @@ public:
             const wxSize& size = wxDefaultSize,
             long style = wxGA_HORIZONTAL,
             const wxValidator& validator = wxDefaultValidator,
-            const wxString& name = wxASCII_STR(wxGaugeNameStr))
+            const std::string& name = wxGaugeNameStr)
     {
         Create(parent, id, range, pos, size, style, validator, name);
     }
@@ -45,7 +45,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = wxGA_HORIZONTAL,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxGaugeNameStr));
+                const std::string& name = wxGaugeNameStr);
 
     // set gauge range/value
     void SetRange(int range) override;

@@ -27,6 +27,8 @@
 #include <vector>
 #include "wx/msw/private.h"
 
+#include "boost/nowide/convert.hpp"
+
 #ifndef TTTOOLINFO_V1_SIZE
     #define TTTOOLINFO_V1_SIZE 0x28
 #endif
@@ -433,7 +435,7 @@ void wxToolTip::DoAddHWND(WXHWND hWnd)
     // NMTTDISPINFO struct -- and setting the tooltip here we can have tooltips
     // of any length
     ti.hwnd = hwnd;
-    ti.lpszText = wxMSW_CONV_LPTSTR(m_text);
+    ti.lpszText = const_cast<wchar_t*>(boost::nowide::widen(m_text).c_str());
 
     if ( !SendTooltipMessage(GetToolTipCtrl(), TTM_ADDTOOL, &ti) )
     {
@@ -448,8 +450,8 @@ void wxToolTip::DoAddHWND(WXHWND hWnd)
     {
         // replace the '\n's with spaces because otherwise they appear as
         // unprintable characters in the tooltip string
-        m_text.Replace(wxT("\n"), wxT(" "));
-        ti.lpszText = wxMSW_CONV_LPTSTR(m_text);
+        wx::utils::ReplaceAll(m_text, "\n", " ");
+        ti.lpszText = const_cast<wchar_t*>(boost::nowide::widen(m_text).c_str());
 
         if ( !SendTooltipMessage(GetToolTipCtrl(), TTM_ADDTOOL, &ti) )
         {
@@ -505,7 +507,7 @@ void wxToolTip::SetRect(const wxRect& rc)
     }
 }
 
-void wxToolTip::SetTip(const wxString& tip)
+void wxToolTip::SetTip(const std::string& tip)
 {
     m_text = tip;
 
@@ -515,7 +517,7 @@ void wxToolTip::SetTip(const wxString& tip)
     {
         // replace the '\n's with spaces because otherwise they appear as
         // unprintable characters in the tooltip string
-        m_text.Replace(wxT("\n"), wxT(" "));
+        wx::utils::ReplaceAll(m_text, "\n", " ");
     }
 
     DoForAllWindows(&wxToolTip::DoSetTip);
@@ -533,7 +535,7 @@ void wxToolTip::DoSetTip(WXHWND hWnd)
     ti.lpszText = const_cast<wxChar *>(wxT(""));
     SendTooltipMessage(GetToolTipCtrl(), TTM_UPDATETIPTEXT, &ti);
 
-    ti.lpszText = wxMSW_CONV_LPTSTR(m_text);
+    ti.lpszText = const_cast<wchar_t*>(boost::nowide::widen(m_text).c_str());
     SendTooltipMessage(GetToolTipCtrl(), TTM_UPDATETIPTEXT, &ti);
 }
 

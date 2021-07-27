@@ -168,24 +168,24 @@ wxString wxControlBase::EscapeMnemonics(const wxString& text)
 }
 
 /* static */
-int wxControlBase::FindAccelIndex(const wxString& label, wxString *labelOnly)
+int wxControlBase::FindAccelIndex(const std::string& label, std::string* labelOnly)
 {
     // the character following MNEMONIC_PREFIX is the accelerator for this
     // control unless it is MNEMONIC_PREFIX too - this allows to insert
     // literal MNEMONIC_PREFIX chars into the label
-    static constexpr wxChar MNEMONIC_PREFIX = wxT('&');
+    static constexpr char MNEMONIC_PREFIX = '&';
 
     if ( labelOnly )
     {
-        labelOnly->Empty();
-        labelOnly->Alloc(label.length());
+        labelOnly->clear();
+        labelOnly->resize(label.length());
     }
 
     // When computing the offset below, we need to ignore the characters that
     // are not actually displayed, i.e. the ampersands themselves.
     int numSkipped = 0;
     int indexAccel = -1;
-    for ( wxString::const_iterator pc = label.begin(); pc != label.end(); ++pc )
+    for ( std::string::const_iterator pc = label.begin(); pc != label.end(); ++pc )
     {
         if ( *pc == MNEMONIC_PREFIX )
         {

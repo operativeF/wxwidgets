@@ -27,7 +27,7 @@ public:
              const wxSize& size = wxDefaultSize,
              long style = wxSL_HORIZONTAL,
              const wxValidator& validator = wxDefaultValidator,
-             const wxString& name = wxASCII_STR(wxSliderNameStr))
+             const std::string& name = wxSliderNameStr)
     {
         Create(parent, id, value, minValue, maxValue,
                      pos, size, style, validator, name);
@@ -46,7 +46,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = wxSL_HORIZONTAL,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxSliderNameStr));
+                const std::string& name = wxSliderNameStr);
 
     ~wxSlider() override;
 

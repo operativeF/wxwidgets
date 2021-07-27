@@ -75,11 +75,11 @@ wxEND_EVENT_TABLE()
 
 bool wxFrame::Create(wxWindow *parent,
                      wxWindowID id,
-                     const wxString& title,
+                     const std::string& title,
                      const wxPoint& pos,
                      const wxSize& size,
                      long style,
-                     const wxString& name)
+                     const std::string& name)
 {
     if ( !wxTopLevelWindow::Create(parent, id, title, pos, size, style, name) )
         return false;
@@ -240,7 +240,7 @@ void wxFrame::SendSizeEvent(int flags)
 wxStatusBar *wxFrame::OnCreateStatusBar(int number,
                                         long style,
                                         wxWindowID id,
-                                        const wxString& name)
+                                        const std::string& name)
 {
     wxStatusBar *statusBar wxDUMMY_INITIALIZE(nullptr);
 
@@ -527,7 +527,7 @@ bool wxFrame::ShowFullScreen(bool show, long style)
 
 #if wxUSE_TOOLBAR
 
-wxToolBar* wxFrame::CreateToolBar(long style, wxWindowID id, const wxString& name)
+wxToolBar* wxFrame::CreateToolBar(long style, wxWindowID id, const std::string& name)
 {
     if ( wxFrameBase::CreateToolBar(style, id, name) )
     {

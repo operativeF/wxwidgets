@@ -65,8 +65,8 @@ public:
 protected:
     wxSize DoGetBestClientSize() const override;
 
-    wxString WXGetVisibleLabel() const override { return m_label; }
-    void WXSetVisibleLabel(const wxString& label) override;
+    std::string WXGetVisibleLabel() const override { return m_label; }
+    void WXSetVisibleLabel(const std::string& label) override;
 
     void DoSetSize(int x, int y, int width, int height, int sizeFlags) override;
 
@@ -82,7 +82,7 @@ private:
     void DoDrawLabel(wxDC& dc, const wxRect& rect);
 
     // These fields are only used if m_markupText == NULL.
-    wxString m_label;
+    std::string m_label;
     int m_mnemonic;
 
 #if wxUSE_MARKUP

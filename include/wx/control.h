@@ -151,8 +151,8 @@ public:
 
     // return the accel index in the string or -1 if none and puts the modified
     // string into second parameter if non NULL
-    static int FindAccelIndex(const wxString& label,
-                              wxString *labelOnly = nullptr);
+    static int FindAccelIndex(const std::string& label,
+                              std::string* labelOnly = nullptr);
 
     // this is a helper for the derived class GetClassDefaultAttributes()
     // implementation: it returns the right colours for the classes which

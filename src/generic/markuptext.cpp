@@ -55,7 +55,7 @@ public:
     const wxSize& GetSize() const { return m_size; }
 
 
-    void OnText(const wxString& text) override
+    void OnText(const std::string& text) override
     {
         // TODO-MULTILINE-MARKUP: Must use GetMultiLineTextExtent().
         const wxSize size = m_dc.GetTextExtent(text);
@@ -195,9 +195,9 @@ public:
     {
     }
 
-    void OnText(const wxString& text_) override
+    void OnText(const std::string& text_) override
     {
-        wxString text;
+        std::string text;
         int indexAccel = wxControl::FindAccelIndex(text_, &text);
         if ( !(m_flags & wxMarkupText::Render_ShowAccels) )
             indexAccel = wxNOT_FOUND;
@@ -243,7 +243,7 @@ public:
         // TODO: Support all ellipsizing modes
     }
 
-    void OnText(const wxString& text) override
+    void OnText(const std::string& text) override
     {
         wxRect rect(m_rect);
         rect.x = m_pos;

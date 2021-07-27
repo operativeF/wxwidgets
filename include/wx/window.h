@@ -1355,7 +1355,7 @@ public:
     void UnsetToolTip() { SetToolTip(nullptr); }
         // get the associated tooltip or NULL if none
     wxToolTip* GetToolTip() const { return m_tooltip; }
-    wxString GetToolTipText() const;
+    std::string GetToolTipText() const;
 
     // Use the same tool tip as the given one (which can be NULL to indicate
     // that no tooltip should be used) for this window. This is currently only
