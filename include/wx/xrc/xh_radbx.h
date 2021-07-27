@@ -27,7 +27,7 @@ private:
     bool m_insideBox{false};
 
     // the items labels
-    wxArrayString m_labels;
+    std::vector<std::string> m_labels;
 
 #if wxUSE_TOOLTIPS
     // the items tooltips

@@ -1297,7 +1297,7 @@ wxEND_EVENT_TABLE()
 bool wxRichTextStyleComboCtrl::Create(wxWindow* parent, wxWindowID id, const wxPoint& pos,
         const wxSize& size, long style)
 {
-    if (!wxComboCtrl::Create(parent, id, wxEmptyString, pos, size, style))
+    if (!wxComboCtrl::Create(parent, id, "", pos, size, style))
         return false;
 
     SetPopupMaxHeight(400);

@@ -30,7 +30,7 @@ TEST_CASE_FIXTURE(RearrangeListTest, "Rearrange list control test")
                                                          wxDefaultPosition,
                                                          wxDefaultSize,
                                                          std::vector<int>{},
-                                                         std::vector<wxString>{});
+                                                         std::vector<std::string>{});
     SUBCASE("Move")
     {
         std::vector<int> order;
@@ -38,7 +38,7 @@ TEST_CASE_FIXTURE(RearrangeListTest, "Rearrange list control test")
         order.push_back(~2);
         order.push_back(0);
 
-        std::vector<wxString> items;
+        std::vector<std::string> items;
         items.push_back("first");
         items.push_back("second");
         items.push_back("third");
@@ -87,7 +87,7 @@ TEST_CASE_FIXTURE(RearrangeListTest, "Rearrange list control test")
         order.push_back(1);
         order.push_back(2);
 
-        std::vector<wxString> items;
+        std::vector<std::string> items;
         items.push_back("first");
         items.push_back("second");
         items.push_back("third");
@@ -125,7 +125,7 @@ TEST_CASE_FIXTURE(RearrangeListTest, "Rearrange list control test")
                                                     wxDefaultPosition,
                                                     wxDefaultSize,
                                                     std::vector<int>{},
-                                                    std::vector<wxString>{});
+                                                    std::vector<std::string>{});
 
     wxITEM_CONTAINER_TESTS();
 }

@@ -34,17 +34,17 @@ bool wxRearrangeList::Create(wxWindow *parent,
                              const wxPoint& pos,
                              const wxSize& size,
                              const std::vector<int>& order,
-                             const std::vector<wxString>& items,
+                             const std::vector<std::string>& items,
                              long style,
                              const wxValidator& validator,
-                             const wxString& name)
+                             const std::string& name)
 {
     // construct the array of items in the order in which they should appear in
     // the control
     const size_t count = items.size();
     wxCHECK_MSG( order.size() == count, false, "arrays not in sync" );
 
-    std::vector<wxString> itemsInOrder;
+    std::vector<std::string> itemsInOrder;
     itemsInOrder.reserve(count);
     // FIXME: Indexing in vector with a different array's size.
     for ( size_t n = 0; n < count; n++ )
@@ -240,10 +240,10 @@ wxRearrangeCtrl::Create(wxWindow *parent,
                         const wxPoint& pos,
                         const wxSize& size,
                         const std::vector<int>& order,
-                        const std::vector<wxString>& items,
+                        const std::vector<std::string>& items,
                         long style,
                         const wxValidator& validator,
-                        const wxString& name)
+                        const std::string& name)
 {
     // create all the windows
     if ( !wxPanel::Create(parent, id, pos, size, wxTAB_TRAVERSAL, name) )
@@ -303,12 +303,12 @@ enum wxRearrangeDialogSizerPositions
 } // anonymous namespace
 
 bool wxRearrangeDialog::Create(wxWindow *parent,
-                               const wxString& message,
-                               const wxString& title,
+                               const std::string& message,
+                               const std::string& title,
                                const std::vector<int>& order,
-                               const std::vector<wxString>& items,
+                               const std::vector<std::string>& items,
                                const wxPoint& pos,
-                               const wxString& name)
+                               const std::string& name)
 {
     if ( !wxDialog::Create(parent, wxID_ANY, title,
                            pos, wxDefaultSize,

@@ -329,7 +329,7 @@ bool wxDatePickerCtrlGeneric::Create(wxWindow *parent,
                                      const wxSize& size,
                                      long style,
                                      const wxValidator& validator,
-                                     const wxString& name)
+                                     const std::string& name)
 {
     wxASSERT_MSG( !(style & wxDP_SPIN),
                   wxT("wxDP_SPIN style not supported, use wxDP_DEFAULT") );
@@ -343,7 +343,7 @@ bool wxDatePickerCtrlGeneric::Create(wxWindow *parent,
 
     InheritAttributes();
 
-    m_combo = new wxComboCtrl(this, -1, wxEmptyString,
+    m_combo = new wxComboCtrl(this, -1, "",
                               wxDefaultPosition, wxDefaultSize);
 
     m_combo->SetCtrlMainWnd(this);

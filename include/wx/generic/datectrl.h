@@ -35,7 +35,7 @@ public:
                             const wxSize& size = wxDefaultSize,
                             long style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
                             const wxValidator& validator = wxDefaultValidator,
-                            const wxString& name = wxDatePickerCtrlNameStr)
+                            const std::string& name = wxDatePickerCtrlNameStr)
     {
         Create(parent, id, date, pos, size, style, validator, name);
     }
@@ -52,7 +52,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxDatePickerCtrlNameStr);
+                const std::string& name = wxDatePickerCtrlNameStr);
 
     // wxDatePickerCtrl methods
     void SetValue(const wxDateTime& date) override;

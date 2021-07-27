@@ -22,7 +22,7 @@
 
 TEST_CASE("Radiobox test")
 {
-    const std::vector<wxString> choices = { "item 0", "item 1", "item 2" };
+    const std::vector<std::string> choices = { "item 0", "item 1", "item 2" };
 
     auto m_radio = std::make_unique<wxRadioBox>(wxTheApp->GetTopWindow(), wxID_ANY,
                                                 "RadioBox", wxDefaultPosition,
@@ -39,7 +39,7 @@ TEST_CASE("Radiobox test")
 #ifndef __WXGTK__
     SUBCASE("RowColCount")
     {
-        const std::vector<wxString> choices = { "item 0", "item 1", "item 2" };
+        const std::vector<std::string> choices = { "item 0", "item 1", "item 2" };
 
         m_radio = std::make_unique<wxRadioBox>(wxTheApp->GetTopWindow(), wxID_ANY,
                                   "RadioBox", wxDefaultPosition,

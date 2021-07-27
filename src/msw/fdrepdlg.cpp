@@ -52,8 +52,8 @@ public:
     wxFindReplaceDialogImpl(const wxFindReplaceDialogImpl&) = delete;
 	wxFindReplaceDialogImpl& operator=(const wxFindReplaceDialogImpl&) = delete;
 
-    void InitFindWhat(const wxString& str);
-    void InitReplaceWith(const wxString& str);
+    void InitFindWhat(const std::string& str);
+    void InitReplaceWith(const std::string& str);
 
     // only for passing to ::FindText or ::ReplaceText
     FINDREPLACE *GetPtrFindReplace() { return &m_findReplace; }
@@ -70,7 +70,7 @@ private:
                                    LPARAM lParam);
 
     // copy string str contents to ppStr and fill pLen with its length
-    void InitString(const wxString& str, LPTSTR *ppStr, WORD *pLen);
+    void InitString(const std::string& str, LPTSTR *ppStr, WORD *pLen);
 
 
     // the find replace data used by the dialog
@@ -144,7 +144,7 @@ wxFindReplaceDialogImpl::wxFindReplaceDialogImpl(wxFindReplaceDialog *dialog,
     m_findReplace.lpfnHook = wxFindReplaceDialogHookProc;
 }
 
-void wxFindReplaceDialogImpl::InitString(const wxString& str,
+void wxFindReplaceDialogImpl::InitString(const std::string& str,
                                          LPTSTR *ppStr, WORD *pLen)
 {
     size_t len = str.length() + 1;
@@ -159,12 +159,12 @@ void wxFindReplaceDialogImpl::InitString(const wxString& str,
     *pLen = (WORD)len;
 }
 
-void wxFindReplaceDialogImpl::InitFindWhat(const wxString& str)
+void wxFindReplaceDialogImpl::InitFindWhat(const std::string& str)
 {
     InitString(str, &m_findReplace.lpstrFindWhat, &m_findReplace.wFindWhatLen);
 }
 
-void wxFindReplaceDialogImpl::InitReplaceWith(const wxString& str)
+void wxFindReplaceDialogImpl::InitReplaceWith(const std::string& str)
 {
     InitString(str,
                &m_findReplace.lpstrReplaceWith,
@@ -240,10 +240,10 @@ wxFindReplaceDialogImpl::FindMessageHandler(wxWindow * WXUNUSED(win),
     wxFindDialogEvent event(evtType, dialog->GetId());
     event.SetEventObject(dialog);
     event.SetFlags(flags);
-    event.SetFindString(pFR->lpstrFindWhat);
+    event.SetFindString(boost::nowide::narrow(pFR->lpstrFindWhat));
     if ( replace )
     {
-        event.SetReplaceString(pFR->lpstrReplaceWith);
+        event.SetReplaceString(boost::nowide::narrow(pFR->lpstrReplaceWith));
     }
 
     dialog->Send(event);
@@ -281,7 +281,7 @@ wxFindReplaceDialogHookProc(HWND hwnd,
 
 wxFindReplaceDialog::wxFindReplaceDialog(wxWindow *parent,
                                          wxFindReplaceData *data,
-                                         const wxString &title,
+                                         const std::string &title,
                                          int flags)
                    : wxFindReplaceDialogBase(parent, data, title, flags)
 {
@@ -317,7 +317,7 @@ wxFindReplaceDialog::~wxFindReplaceDialog()
 
 bool wxFindReplaceDialog::Create(wxWindow *parent,
                                  wxFindReplaceData *data,
-                                 const wxString &title,
+                                 const std::string &title,
                                  int flags)
 {
     m_windowStyle = flags;

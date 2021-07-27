@@ -116,8 +116,8 @@ void wxRichTextTabsPage::CreateControls()
         m_tabEditCtrl->SetToolTip(_("The tab position."));
     itemBoxSizer5->Add(m_tabEditCtrl, 0, wxGROW|wxALL, 5);
 
-    wxArrayString m_tabListCtrlStrings;
-    m_tabListCtrlStrings.Add(_("The tab positions."));
+    std::vector<std::string> m_tabListCtrlStrings;
+    m_tabListCtrlStrings.push_back("The tab positions.");
     m_tabListCtrl = new wxListBox( itemRichTextDialogPage1, ID_RICHTEXTTABSPAGE_TABLIST, wxDefaultPosition, wxSize(80, 200), m_tabListCtrlStrings, wxLB_SINGLE );
     itemBoxSizer5->Add(m_tabListCtrl, 1, wxGROW|wxLEFT|wxRIGHT|wxBOTTOM, 5);
 
@@ -126,7 +126,7 @@ void wxRichTextTabsPage::CreateControls()
     wxBoxSizer* itemBoxSizer10 = new wxBoxSizer(wxVERTICAL);
     itemBoxSizer4->Add(itemBoxSizer10, 0, wxGROW, 5);
 
-    wxStaticText* itemStaticText11 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+    wxStaticText* itemStaticText11 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, "", wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer10->Add(itemStaticText11, 0, wxALIGN_CENTER_HORIZONTAL|wxBOTTOM, 5);
 
     wxButton* itemButton12 = new wxButton( itemRichTextDialogPage1, ID_RICHTEXTTABSPAGE_NEW_TAB, _("&New"), wxDefaultPosition, wxDefaultSize, 0 );

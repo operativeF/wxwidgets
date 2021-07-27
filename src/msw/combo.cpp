@@ -59,7 +59,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxComboCtrl, wxComboCtrlBase);
 
 bool wxComboCtrl::Create(wxWindow *parent,
                             wxWindowID id,
-                            const wxString& value,
+                            const std::string& value,
                             const wxPoint& pos,
                             const wxSize& size,
                             long style,

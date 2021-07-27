@@ -29,13 +29,13 @@ public:
 
     wxBitmapComboBox(wxWindow *parent,
                      wxWindowID id = wxID_ANY,
-                     const wxString& value = wxEmptyString,
+                     const std::string& value = "",
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      const std::vector<std::string>& choices = {},
                      long style = 0,
                      const wxValidator& validator = wxDefaultValidator,
-                     const wxString& name = wxASCII_STR(wxBitmapComboBoxNameStr))
+                     const std::string& name = wxBitmapComboBoxNameStr)
         
           
     {
@@ -45,13 +45,13 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& value,
+                const std::string& value,
                 const wxPoint& pos,
                 const wxSize& size,
                 const std::vector<std::string>& choices,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxBitmapComboBoxNameStr));
+                const std::string& name = wxBitmapComboBoxNameStr);
 
     ~wxBitmapComboBox() override;
 

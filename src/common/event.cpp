@@ -406,7 +406,7 @@ wxEvent& wxEvent::operator=(const wxEvent& src)
 // wxCommandEvent
 // ----------------------------------------------------------------------------
 
-wxString wxCommandEvent::GetString() const
+std::string wxCommandEvent::GetString() const
 {
     // This is part of the hack retrieving the event string from the control
     // itself only when/if it's really needed to avoid copying potentially huge

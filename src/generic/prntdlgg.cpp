@@ -835,10 +835,10 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
 
     // 2) middle sizer with radio box
 
-    std::vector<wxString> choices2(2);
-    choices2[0] = _("Portrait");
-    choices2[1] = _("Landscape");
-    m_orientationRadioBox = new wxRadioBox(this, wxPRINTID_ORIENTATION, _("Orientation"),
+    std::vector<std::string> choices2(2);
+    choices2[0] = "Portrait";
+    choices2[1] = "Landscape";
+    m_orientationRadioBox = new wxRadioBox(this, wxPRINTID_ORIENTATION, "Orientation",
         wxDefaultPosition, wxDefaultSize, choices2, 2);
     m_orientationRadioBox->SetSelection(0);
 

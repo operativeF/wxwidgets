@@ -4348,7 +4348,7 @@ bool wxWindowMSW::HandleDropFiles(WXWPARAM wParam)
     HDROP hFilesInfo = (HDROP) wParam;
 
     // Get the total number of files dropped
-    UINT gwFilesDropped = ::DragQueryFile
+    UINT gwFilesDropped = ::DragQueryFileW
                             (
                                 (HDROP)hFilesInfo,
                                 (UINT)-1,
@@ -4356,15 +4356,21 @@ bool wxWindowMSW::HandleDropFiles(WXWPARAM wParam)
                                 (UINT)0
                             );
 
-    wxString *files = new wxString[gwFilesDropped];
+    std::vector<std::string> files(gwFilesDropped);
+
     for ( UINT wIndex = 0; wIndex < gwFilesDropped; wIndex++ )
     {
         // first get the needed buffer length (+1 for terminating NUL)
-        size_t len = ::DragQueryFile(hFilesInfo, wIndex, nullptr, 0) + 1;
+        size_t len = ::DragQueryFileW(hFilesInfo, wIndex, nullptr, 0) + 1;
+
+        std::wstring file;
+
+        file.resize(len);
 
         // and now get the file name
-        ::DragQueryFile(hFilesInfo, wIndex,
-                        wxStringBuffer(files[wIndex], len), len);
+        ::DragQueryFileW(hFilesInfo, wIndex, &file[0], len);
+
+        files[wIndex] = boost::nowide::narrow(file);
     }
 
     wxDropFilesEvent event(wxEVT_DROP_FILES, gwFilesDropped, files);

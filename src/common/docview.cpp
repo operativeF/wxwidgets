@@ -1736,7 +1736,7 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
 wxDocTemplate *wxDocManager::SelectDocumentType(wxDocTemplate **templates,
                                                 int noTemplates, bool sort)
 {
-    std::vector<wxString> strings;
+    std::vector<std::string> strings;
 
     auto data = std::make_unique<wxDocTemplate*[]>(noTemplates);
 
@@ -1799,8 +1799,8 @@ wxDocTemplate *wxDocManager::SelectDocumentType(wxDocTemplate **templates,
             // propose the user to choose one of several
             theTemplate = (wxDocTemplate *)wxGetSingleChoiceData
                           (
-                            _("Select a document template"),
-                            _("Templates"),
+                            "Select a document template",
+                            "Templates",
                             strings,
                             (void **)data.get()
                           );
@@ -1812,7 +1812,7 @@ wxDocTemplate *wxDocManager::SelectDocumentType(wxDocTemplate **templates,
 wxDocTemplate *wxDocManager::SelectViewType(wxDocTemplate **templates,
                                             int noTemplates, bool sort)
 {
-    std::vector<wxString> strings;
+    std::vector<std::string> strings;
 
     auto data = std::make_unique<wxDocTemplate*[]>(noTemplates);
 
@@ -1874,8 +1874,8 @@ wxDocTemplate *wxDocManager::SelectViewType(wxDocTemplate **templates,
         default:
             theTemplate = (wxDocTemplate *)wxGetSingleChoiceData
                           (
-                            _("Select a document view"),
-                            _("Views"),
+                            "Select a document view",
+                            "Views",
                             strings,
                             (void **)data.get()
                           );

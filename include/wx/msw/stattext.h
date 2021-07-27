@@ -18,11 +18,11 @@ public:
 
     wxStaticText(wxWindow *parent,
                  wxWindowID id,
-                 const wxString& label,
+                 const std::string& label,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  long style = 0,
-                 const wxString& name = wxASCII_STR(wxStaticTextNameStr))
+                 const std::string& name = wxStaticTextNameStr)
     {
         Create(parent, id, label, pos, size, style, name);
     }
@@ -34,11 +34,11 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& label,
+                const std::string& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
-                const wxString& name = wxASCII_STR(wxStaticTextNameStr));
+                const std::string& name = wxStaticTextNameStr);
 
     // override some methods to resize the window properly
     void SetLabel(const std::string& label) override;

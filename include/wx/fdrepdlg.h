@@ -65,8 +65,8 @@ public:
     wxFindReplaceData() = default;
     wxFindReplaceData(wxUint32 flags) { SetFlags(flags); }
 
-    const wxString& GetFindString() const { return m_FindWhat; }
-    const wxString& GetReplaceString() const { return m_ReplaceWith; }
+    const std::string& GetFindString() const { return m_FindWhat; }
+    const std::string& GetReplaceString() const { return m_ReplaceWith; }
 
     int GetFlags() const { return m_Flags; }
 
@@ -74,13 +74,13 @@ public:
     // FIXME: Then get rid of this and put it in the constructor.
     void SetFlags(wxUint32 flags) { m_Flags = flags; }
 
-    void SetFindString(const wxString& str) { m_FindWhat = str; }
-    void SetReplaceString(const wxString& str) { m_ReplaceWith = str; }
+    void SetFindString(const std::string& str) { m_FindWhat = str; }
+    void SetReplaceString(const std::string& str) { m_ReplaceWith = str; }
 
 private:
     wxUint32 m_Flags {0};
-    wxString m_FindWhat;
-    wxString m_ReplaceWith;
+    std::string m_FindWhat;
+    std::string m_ReplaceWith;
 
     friend class wxFindReplaceDialogBase;
 };
@@ -96,7 +96,7 @@ public:
     wxFindReplaceDialogBase() { m_FindReplaceData = nullptr; }
     wxFindReplaceDialogBase(wxWindow * WXUNUSED(parent),
                             wxFindReplaceData *data,
-                            const wxString& WXUNUSED(title),
+                            const std::string& WXUNUSED(title),
                             int WXUNUSED(style) = 0)
     {
         m_FindReplaceData = data;
@@ -120,7 +120,7 @@ protected:
     wxFindReplaceData *m_FindReplaceData {nullptr};
 
     // the last string we searched for
-    wxString m_lastSearch;
+    std::string m_lastSearch;
 };
 
 // include wxFindReplaceDialog declaration
@@ -146,21 +146,21 @@ public:
 	wxFindDialogEvent& operator=(const wxFindDialogEvent&) = delete;
 
     int GetFlags() const { return GetInt(); }
-    wxString GetFindString() const { return GetString(); }
-    const wxString& GetReplaceString() const { return m_strReplace; }
+    std::string GetFindString() const { return GetString(); }
+    const std::string& GetReplaceString() const { return m_strReplace; }
 
     wxFindReplaceDialog *GetDialog() const
         { return wxStaticCast(GetEventObject(), wxFindReplaceDialog); }
 
     // implementation only
     void SetFlags(int flags) { SetInt(flags); }
-    void SetFindString(const wxString& str) { SetString(str); }
-    void SetReplaceString(const wxString& str) { m_strReplace = str; }
+    void SetFindString(const std::string& str) { SetString(str); }
+    void SetReplaceString(const std::string& str) { m_strReplace = str; }
 
     wxEvent *Clone() const override { return new wxFindDialogEvent(*this); }
 
 private:
-    wxString m_strReplace;
+    std::string m_strReplace;
 
 public:
 	wxClassInfo *GetClassInfo() const override ;

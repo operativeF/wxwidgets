@@ -34,7 +34,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
     {
         m_container = std::make_unique<wxListBox>(wxTheApp->GetTopWindow(),
                                 wxID_ANY, wxDefaultPosition, wxDefaultSize,
-                                std::vector<wxString>{}, wxLB_SORT);
+                                std::vector<std::string>{}, wxLB_SORT);
 
         const std::vector<std::string> testitems = {
             "aaa",
@@ -65,7 +65,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "List box control test")
     {
         m_container = std::make_unique<wxListBox>(wxTheApp->GetTopWindow(),
                                 wxID_ANY, wxDefaultPosition, wxDefaultSize,
-                                std::vector<wxString>{}, wxLB_MULTIPLE);
+                                std::vector<std::string>{}, wxLB_MULTIPLE);
 
         const std::vector<std::string> testitems = {
             "item 0",
@@ -218,11 +218,11 @@ TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
 {
     m_container = std::make_unique<wxListBox>(wxTheApp->GetTopWindow(), wxID_ANY,
                                               wxDefaultPosition, wxSize(300, 200),
-                                              std::vector<wxString>{}, wxLB_OWNERDRAW);
+                                              std::vector<std::string>{}, wxLB_OWNERDRAW);
     SUBCASE("Sort")
     {
         m_container = std::make_unique<wxListBox>(wxTheApp->GetTopWindow(), wxID_ANY,
-            wxDefaultPosition, wxDefaultSize, std::vector<wxString>{},
+            wxDefaultPosition, wxDefaultSize, std::vector<std::string>{},
             wxLB_SORT | wxLB_OWNERDRAW);
 
         const std::vector<std::string> testitems = {
@@ -252,7 +252,7 @@ TEST_CASE_FIXTURE(ListBoxTest, "Owner-drawn list box test ")
     SUBCASE("MultipleSelect")
     {
         m_container = std::make_unique<wxListBox>(wxTheApp->GetTopWindow(), wxID_ANY,
-            wxDefaultPosition, wxDefaultSize, std::vector<wxString>{},
+            wxDefaultPosition, wxDefaultSize, std::vector<std::string>{},
             wxLB_MULTIPLE | wxLB_OWNERDRAW);
 
         const std::vector<std::string> testitems = {

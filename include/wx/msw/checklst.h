@@ -28,10 +28,10 @@ public:
     wxCheckListBox(wxWindow *parent, wxWindowID id,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
-                   const std::vector<wxString>& choices = {},
+                   const std::vector<std::string>& choices = {},
                    long style = 0,
                    const wxValidator& validator = wxDefaultValidator,
-                   const wxString& name = wxASCII_STR(wxListBoxNameStr));
+                   const std::string& name = wxListBoxNameStr);
 
     wxCheckListBox(const wxCheckListBox&) = delete;
     wxCheckListBox& operator=(const wxCheckListBox&) = delete;
@@ -41,10 +41,10 @@ public:
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                const std::vector<wxString>& choices = {},
+                const std::vector<std::string>& choices = {},
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxListBoxNameStr));
+                const std::string& name = wxListBoxNameStr);
 
     // items may be checked
     bool IsChecked(unsigned int uiIndex) const override;

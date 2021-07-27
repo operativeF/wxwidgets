@@ -190,7 +190,7 @@ void wxRichTextFontPage::CreateControls()
         m_faceListBox->SetToolTip(_("Lists the available fonts."));
     m_fontListBoxParent->Add(m_faceListBox, 1, wxGROW|wxALL|wxFIXED_MINSIZE, 5);
 
-    wxArrayString m_sizeListBoxStrings;
+    std::vector<std::string> m_sizeListBoxStrings;
     m_sizeListBox = new wxListBox( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_SIZELISTBOX, wxDefaultPosition, wxSize(50, -1), m_sizeListBoxStrings, wxLB_SINGLE );
     m_sizeListBox->SetHelpText(_("Lists font sizes in points."));
     if (wxRichTextFontPage::ShowToolTips())
@@ -974,7 +974,7 @@ void wxRichTextFontPage::OnSizeListBoxSelected( wxCommandEvent& event )
     m_dontUpdate = true;
 
     m_sizeTextCtrl->SetValue(event.GetString());
-    if (!event.GetString().IsEmpty())
+    if (!event.GetString().empty())
         m_fontSizeSpinButtons->SetValue(wxAtoi(event.GetString()));
 
     m_dontUpdate = oldDontUpdate;

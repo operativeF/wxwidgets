@@ -174,18 +174,18 @@ wxEND_EVENT_TABLE()
 // ctor which creates the associated control
 wxCheckListBox::wxCheckListBox(wxWindow *parent, wxWindowID id,
                                const wxPoint& pos, const wxSize& size,
-                               const std::vector<wxString>& choices,
+                               const std::vector<std::string>& choices,
                                long style, const wxValidator& val,
-                               const wxString& name)
+                               const std::string& name)
 {
     Create(parent, id, pos, size, choices, style, val, name);
 }
 
 bool wxCheckListBox::Create(wxWindow *parent, wxWindowID id,
                             const wxPoint& pos, const wxSize& size,
-                            const std::vector<wxString>& choices,
+                            const std::vector<std::string>& choices,
                             long style,
-                            const wxValidator& validator, const wxString& name)
+                            const wxValidator& validator, const std::string& name)
 {
     return wxListBox::Create(parent, id, pos, size, choices,
                              style | wxLB_OWNERDRAW, validator, name);

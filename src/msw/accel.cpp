@@ -23,6 +23,7 @@
 #include "wx/msw/private.h"
 #include "wx/msw/private/keyboard.h"
 
+#include "boost/nowide/convert.hpp"
 #include "gsl/gsl"
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxAcceleratorTable, wxObject);
@@ -70,11 +71,11 @@ wxAcceleratorRefData::~wxAcceleratorRefData()
 // ----------------------------------------------------------------------------
 
 // Load from .rc resource
-wxAcceleratorTable::wxAcceleratorTable(const wxString& resource)
+wxAcceleratorTable::wxAcceleratorTable(const std::string& resource)
 {
     m_refData = new wxAcceleratorRefData;
 
-    HACCEL hAccel = ::LoadAccelerators(wxGetInstance(), resource.t_str());
+    HACCEL hAccel = ::LoadAcceleratorsW(wxGetInstance(), boost::nowide::widen(resource).c_str());
     M_ACCELDATA->m_hAccel = hAccel;
     M_ACCELDATA->m_ok = hAccel != nullptr;
 }
@@ -105,7 +106,7 @@ wxAcceleratorTable::wxAcceleratorTable(gsl::span<wxAcceleratorEntry> entries)
         arr[i].cmd = (WORD)entries[i].GetCommand();
     }
 
-    M_ACCELDATA->m_hAccel = ::CreateAcceleratorTable(arr.get(), gsl::narrow_cast<int>(entries.size()));
+    M_ACCELDATA->m_hAccel = ::CreateAcceleratorTableW(arr.get(), gsl::narrow_cast<int>(entries.size()));
 
     M_ACCELDATA->m_ok = (M_ACCELDATA->m_hAccel != nullptr);
 }
@@ -133,7 +134,7 @@ WXHACCEL wxAcceleratorTable::GetHACCEL() const
 bool wxAcceleratorTable::Translate(wxWindow *window, WXMSG *wxmsg) const
 {
     MSG *msg = (MSG *)wxmsg;
-    return IsOk() && ::TranslateAccelerator(GetHwndOf(window), GetHaccel(), msg);
+    return IsOk() && ::TranslateAcceleratorW(GetHwndOf(window), GetHaccel(), msg);
 }
 
 #endif // wxUSE_ACCEL

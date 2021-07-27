@@ -54,13 +54,13 @@ bool HasNativeCommandLinkButton()
 
 bool wxCommandLinkButton::Create(wxWindow *parent,
                                  wxWindowID id,
-                                 const wxString& mainLabel,
-                                 const wxString& note,
+                                 const std::string& mainLabel,
+                                 const std::string& note,
                                  const wxPoint& pos,
                                  const wxSize& size,
                                  long style,
                                  const wxValidator& validator,
-                                 const wxString& name)
+                                 const std::string& name)
 {
     if ( ! wxGenericCommandLinkButton::Create(parent,
                                               id,

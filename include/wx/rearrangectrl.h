@@ -54,10 +54,10 @@ public:
                     const wxPoint& pos,
                     const wxSize& size,
                     const std::vector<int>& order,
-                    const std::vector<wxString>& items,
+                    const std::vector<std::string>& items,
                     long style = 0,
                     const wxValidator& validator = wxDefaultValidator,
-                    const wxString& name = wxASCII_STR(wxRearrangeListNameStr))
+                    const std::string& name = wxRearrangeListNameStr)
     {
         Create(parent, id, pos, size, order, items, style, validator, name);
     }
@@ -74,10 +74,10 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const std::vector<int>& order,
-                const std::vector<wxString>& items,
+                const std::vector<std::string>& items,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxRearrangeListNameStr));
+                const std::string& name = wxRearrangeListNameStr);
 
 
     // items order
@@ -134,10 +134,10 @@ public:
                     const wxPoint& pos,
                     const wxSize& size,
                     const std::vector<int>& order,
-                    const std::vector<wxString>& items,
+                    const std::vector<std::string>& items,
                     long style = 0,
                     const wxValidator& validator = wxDefaultValidator,
-                    const wxString& name = wxASCII_STR(wxRearrangeListNameStr))
+                    const std::string& name = wxRearrangeListNameStr)
     {
         Create(parent, id, pos, size, order, items, style, validator, name);
     }
@@ -152,10 +152,10 @@ public:
                 const wxPoint& pos,
                 const wxSize& size,
                 const std::vector<int>& order,
-                const std::vector<wxString>& items,
+                const std::vector<std::string>& items,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxRearrangeListNameStr));
+                const std::string& name = wxRearrangeListNameStr);
 
     // get the underlying listbox
     wxRearrangeList *GetList() const { return m_list; }
@@ -183,12 +183,12 @@ public:
     // ctor for the dialog: message is shown inside the dialog itself, order
     // and items are passed to wxRearrangeList used internally
     wxRearrangeDialog(wxWindow *parent,
-                      const wxString& message,
-                      const wxString& title,
+                      const std::string& message,
+                      const std::string& title,
                       const std::vector<int>& order,
-                      const std::vector<wxString>& items,
+                      const std::vector<std::string>& items,
                       const wxPoint& pos = wxDefaultPosition,
-                      const wxString& name = wxASCII_STR(wxRearrangeDialogNameStr))
+                      const std::string& name = wxRearrangeDialogNameStr)
     {
         Create(parent, message, title, order, items, pos, name);
     }
@@ -199,12 +199,12 @@ public:
     wxRearrangeDialog& operator=(wxRearrangeDialog&&) = default;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
-                const wxString& message,
-                const wxString& title,
+                const std::string& message,
+                const std::string& title,
                 const std::vector<int>& order,
-                const std::vector<wxString>& items,
+                const std::vector<std::string>& items,
                 const wxPoint& pos = wxDefaultPosition,
-                const wxString& name = wxASCII_STR(wxRearrangeDialogNameStr));
+                const std::string& name = wxRearrangeDialogNameStr);
 
 
     // methods for the dialog customization

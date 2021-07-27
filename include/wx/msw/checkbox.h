@@ -25,7 +25,7 @@ public:
                const wxSize& size = wxDefaultSize,
                long style = 0,
                const wxValidator& validator = wxDefaultValidator,
-               const wxString& name = wxASCII_STR(wxCheckBoxNameStr))
+               const std::string& name = wxCheckBoxNameStr)
     {
         Create(parent, id, label, pos, size, style, validator, name);
     }
@@ -42,7 +42,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxCheckBoxNameStr));
+                const std::string& name = wxCheckBoxNameStr);
 
     void SetValue(bool value) override;
     bool GetValue() const override;

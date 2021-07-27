@@ -64,12 +64,12 @@ wxEND_EVENT_TABLE()
 
 bool wxButton::Create(wxWindow *parent,
                       wxWindowID id,
-                      const wxString& lbl,
+                      const std::string& lbl,
                       const wxPoint& pos,
                       const wxSize& size,
                       long style,
                       const wxValidator& validator,
-                      const wxString& name)
+                      const std::string& name)
 {
     std::string label;
     if ( !(style & wxBU_NOTEXT) )
@@ -102,7 +102,7 @@ bool wxButton::Create(wxWindow *parent,
     //     value and the label is not set yet when MSWGetStyle() is called
     msStyle |= wxMSWButton::GetMultilineStyle(label);
 
-    return MSWCreateControl(wxT("BUTTON"), msStyle, pos, size, label, exstyle);
+    return MSWCreateControl(L"BUTTON", msStyle, pos, size, label, exstyle);
 }
 
 wxButton::~wxButton()
@@ -342,7 +342,7 @@ wxButton::SetDefaultStyle(wxButton *btn, bool on)
     }
 
     // then also change the style as needed
-    long style = ::GetWindowLong(GetHwndOf(btn), GWL_STYLE);
+    long style = ::GetWindowLongW(GetHwndOf(btn), GWL_STYLE);
     if ( !(style & BS_DEFPUSHBUTTON) == on )
     {
         // don't do it with the owner drawn buttons because it will
@@ -350,7 +350,7 @@ wxButton::SetDefaultStyle(wxButton *btn, bool on)
         // BS_DEFPUSHBUTTON != 0)!
         if ( (style & BS_OWNERDRAW) != BS_OWNERDRAW )
         {
-            ::SendMessage(GetHwndOf(btn), BM_SETSTYLE,
+            ::SendMessageW(GetHwndOf(btn), BM_SETSTYLE,
                           on ? style | BS_DEFPUSHBUTTON
                              : style & ~BS_DEFPUSHBUTTON,
                           1L /* redraw */);

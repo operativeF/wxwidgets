@@ -47,7 +47,7 @@ public:
                 const wxSize& size,
                 long style,
                 const wxValidator& validator,
-                const wxString& name)
+                const std::string& name)
     {
         // We use wxBU_NOTEXT to let the base class Create() know that we are
         // not going to show the label: this is a hack needed for wxGTK where
@@ -82,7 +82,7 @@ public:
     static wxBitmapButton*
     NewCloseButton(wxWindow* parent,
                    wxWindowID winid,
-                   const wxString& name = wxString());
+                   const std::string& name = "");
 
     // set/get the margins around the button
     virtual void SetMargins(int x, int y)

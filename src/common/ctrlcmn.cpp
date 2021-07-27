@@ -43,7 +43,7 @@ bool wxControlBase::Create(wxWindow *parent,
                            const wxSize &size,
                            long style,
                            const wxValidator& wxVALIDATOR_PARAM(validator),
-                           const wxString &name)
+                           const std::string& name)
 {
     const bool ret = wxWindow::Create(parent, id, pos, size, style, name);
 
@@ -61,7 +61,7 @@ bool wxControlBase::CreateControl(wxWindowBase *parent,
                                   const wxSize& size,
                                   long style,
                                   const wxValidator& validator,
-                                  const wxString& name)
+                                  const std::string& name)
 {
     // even if it's possible to create controls without parents in some port,
     // it should surely be discouraged because it doesn't work at all under

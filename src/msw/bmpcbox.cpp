@@ -48,13 +48,13 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxBitmapComboBox, wxComboBox);
 
 bool wxBitmapComboBox::Create(wxWindow *parent,
                               wxWindowID id,
-                              const wxString& value,
+                              const std::string& value,
                               const wxPoint& pos,
                               const wxSize& size,
                               const std::vector<std::string>& choices,
                               long style,
                               const wxValidator& validator,
-                              const wxString& name)
+                              const std::string& name)
 {
     if ( !wxComboBox::Create(parent, id, value, pos, size,
                              choices, style, validator, name) )

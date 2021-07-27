@@ -146,7 +146,7 @@ void wxRichTextBulletsPage::CreateControls()
     wxStaticText* itemStaticText6 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Bullet style:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    wxArrayString m_styleListBoxStrings;
+    std::vector<std::string> m_styleListBoxStrings;
     m_styleListBox = new wxListBox( itemRichTextDialogPage1, ID_RICHTEXTBULLETSPAGE_STYLELISTBOX, wxDefaultPosition, wxSize(-1, 90), m_styleListBoxStrings, wxLB_SINGLE );
     m_styleListBox->SetHelpText(_("The available bullet styles."));
     if (wxRichTextBulletsPage::ShowToolTips())

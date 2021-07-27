@@ -133,14 +133,14 @@ wxRadioBox* wxRadioBox::GetFromRadioButtonHWND(WXHWND hwnd)
 
 bool wxRadioBox::Create(wxWindow *parent,
                         wxWindowID id,
-                        const wxString& title,
+                        const std::string& title,
                         const wxPoint& pos,
                         const wxSize& size,
-                        const std::vector<wxString>& choices,
+                        const std::vector<std::string>& choices,
                         int majorDim,
                         long style,
                         const wxValidator& val,
-                        const wxString& name)
+                        const std::string& name)
 {
     // common initialization
     if ( !wxStaticBox::Create(parent, id, title, pos, size, style, name) )
@@ -174,8 +174,8 @@ bool wxRadioBox::Create(wxWindow *parent,
 
         wxWindowIDRef subid = NewControlId();
 
-        HWND hwndBtn = ::CreateWindow(wxT("BUTTON"),
-                                      choices[i].t_str(),
+        HWND hwndBtn = ::CreateWindow(L"BUTTON",
+                                      boost::nowide::widen(choices[i]).c_str(),
                                       styleBtn,
                                       0, 0, 0, 0,   // will be set in SetSize()
                                       GetHwndOf(parent),

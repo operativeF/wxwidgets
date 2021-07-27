@@ -32,7 +32,7 @@ bool wxCheckBox::Create(wxWindow *parent,
                         const wxPoint& pos,
                         const wxSize& size, long style,
                         const wxValidator& validator,
-                        const wxString& name)
+                        const std::string& name)
 {
     
     m_state = wxCHK_UNCHECKED;

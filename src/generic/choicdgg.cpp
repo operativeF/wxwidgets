@@ -49,9 +49,9 @@
 // wrapper functions
 // ----------------------------------------------------------------------------
 
-wxString wxGetSingleChoice( const wxString& message,
-                            const wxString& caption,
-                            const std::vector<wxString>& choices,
+std::string wxGetSingleChoice( const std::string& message,
+                            const std::string& caption,
+                            const std::vector<std::string>& choices,
                             wxWindow *parent,
                             int WXUNUSED(x), int WXUNUSED(y),
                             bool WXUNUSED(centre),
@@ -61,12 +61,12 @@ wxString wxGetSingleChoice( const wxString& message,
     wxSingleChoiceDialog dialog(parent, message, caption, choices);
 
     dialog.SetSelection(initialSelection);
-    return dialog.ShowModal() == wxID_OK ? dialog.GetStringSelection() : wxString();
+    return dialog.ShowModal() == wxID_OK ? dialog.GetStringSelection() : "";
 }
 
-int wxGetSingleChoiceIndex( const wxString& message,
-                            const wxString& caption,
-                            const std::vector<wxString>& choices,
+int wxGetSingleChoiceIndex( const std::string& message,
+                            const std::string& caption,
+                            const std::vector<std::string>& choices,
                             wxWindow *parent,
                             int WXUNUSED(x), int WXUNUSED(y),
                             bool WXUNUSED(centre),
@@ -79,9 +79,9 @@ int wxGetSingleChoiceIndex( const wxString& message,
     return dialog.ShowModal() == wxID_OK ? dialog.GetSelection() : -1;
 }
 
-void *wxGetSingleChoiceData( const wxString& message,
-                             const wxString& caption,
-                             const std::vector<wxString>& choices,
+void *wxGetSingleChoiceData( const std::string& message,
+                             const std::string& caption,
+                             const std::vector<std::string>& choices,
                              void **client_data,
                              wxWindow *parent,
                              int WXUNUSED(x), int WXUNUSED(y),
@@ -97,9 +97,9 @@ void *wxGetSingleChoiceData( const wxString& message,
 }
 
 int wxGetSelectedChoices(std::vector<int>& selections,
-                         const wxString& message,
-                         const wxString& caption,
-                         const std::vector<wxString>& choices,
+                         const std::string& message,
+                         const std::string& caption,
+                         const std::vector<std::string>& choices,
                          wxWindow *parent,
                          int WXUNUSED(x), int WXUNUSED(y),
                          bool WXUNUSED(centre),
@@ -128,9 +128,9 @@ int wxGetSelectedChoices(std::vector<int>& selections,
 // ----------------------------------------------------------------------------
 
 bool wxAnyChoiceDialog::Create(wxWindow *parent,
-                               const wxString& message,
-                               const wxString& caption,
-                               const std::vector<wxString>& choices,
+                               const std::string& message,
+                               const std::string& caption,
+                               const std::vector<std::string>& choices,
                                long styleDlg,
                                const wxPoint& pos,
                                long styleLbox)
@@ -178,7 +178,7 @@ bool wxAnyChoiceDialog::Create(wxWindow *parent,
     return true;
 }
 
-wxListBoxBase *wxAnyChoiceDialog::CreateList(const std::vector<wxString>& choices, long styleLbox)
+wxListBoxBase *wxAnyChoiceDialog::CreateList(const std::vector<std::string>& choices, long styleLbox)
 {
     return new wxListBox( this, wxID_LISTBOX,
                           wxDefaultPosition, wxDefaultSize,
@@ -198,9 +198,9 @@ wxEND_EVENT_TABLE()
 wxIMPLEMENT_DYNAMIC_CLASS(wxSingleChoiceDialog, wxDialog);
 
 bool wxSingleChoiceDialog::Create( wxWindow *parent,
-                                   const wxString& message,
-                                   const wxString& caption,
-                                   const std::vector<wxString>& choices,
+                                   const std::string& message,
+                                   const std::string& caption,
+                                   const std::vector<std::string>& choices,
                                    void **clientData,
                                    long style,
                                    const wxPoint& pos )
@@ -259,9 +259,9 @@ void wxSingleChoiceDialog::DoChoice()
 wxIMPLEMENT_DYNAMIC_CLASS(wxMultiChoiceDialog, wxDialog);
 
 bool wxMultiChoiceDialog::Create( wxWindow *parent,
-                                  const wxString& message,
-                                  const wxString& caption,
-                                  const std::vector<wxString>& choices,
+                                  const std::string& message,
+                                  const std::string& caption,
+                                  const std::vector<std::string>& choices,
                                   long style,
                                   const wxPoint& pos )
 {
@@ -350,7 +350,7 @@ bool wxMultiChoiceDialog::TransferDataFromWindow()
 
 #if wxUSE_CHECKLISTBOX
 
-wxListBoxBase *wxMultiChoiceDialog::CreateList(const std::vector<wxString>& choices, long styleLbox)
+wxListBoxBase *wxMultiChoiceDialog::CreateList(const std::vector<std::string>& choices, long styleLbox)
 {
     return new wxCheckListBox( this, wxID_LISTBOX,
                                wxDefaultPosition, wxDefaultSize,

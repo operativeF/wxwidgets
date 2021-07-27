@@ -26,14 +26,14 @@ public:
 
     wxRadioBox(wxWindow *parent,
                wxWindowID id,
-               const wxString& title,
+               const std::string& title,
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
-               const std::vector<wxString>& choices = {},
+               const std::vector<std::string>& choices = {},
                int majorDim = 0,
                long style = wxRA_SPECIFY_COLS,
                const wxValidator& val = wxDefaultValidator,
-               const wxString& name = wxASCII_STR(wxRadioBoxNameStr))
+               const std::string& name = wxRadioBoxNameStr)
     {
         Create(parent, id, title, pos, size, choices, majorDim,
                      style, val, name);
@@ -48,14 +48,14 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& title,
+                const std::string& title,
                 const wxPoint& pos,
                 const wxSize& size,
-                const std::vector<wxString>& choices,
+                const std::vector<std::string>& choices,
                 int majorDim = 0,
                 long style = wxRA_SPECIFY_COLS,
                 const wxValidator& val = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxRadioBoxNameStr));
+                const std::string& name = wxRadioBoxNameStr);
 
     // implement the radiobox interface
     void SetSelection(int n) override;

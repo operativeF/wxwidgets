@@ -36,9 +36,9 @@ public:
     wxAnyChoiceDialog()  = default;
 
     wxAnyChoiceDialog(wxWindow *parent,
-                      const wxString& message,
-                      const wxString& caption,
-                      const std::vector<wxString>& choices,
+                      const std::string& message,
+                      const std::string& caption,
+                      const std::vector<std::string>& choices,
                       long styleDlg = wxCHOICEDLG_STYLE,
                       const wxPoint& pos = wxDefaultPosition,
                       long styleLbox = wxLB_ALWAYS_SB)
@@ -48,9 +48,9 @@ public:
     }
 
     bool Create(wxWindow *parent,
-                const wxString& message,
-                const wxString& caption,
-                const std::vector<wxString>& choices,
+                const std::string& message,
+                const std::string& caption,
+                const std::vector<std::string>& choices,
                 long styleDlg = wxCHOICEDLG_STYLE,
                 const wxPoint& pos = wxDefaultPosition,
                 long styleLbox = wxLB_ALWAYS_SB);
@@ -58,7 +58,7 @@ public:
 protected:
     wxListBoxBase *m_listbox{nullptr};
 
-    virtual wxListBoxBase *CreateList(const std::vector<wxString>& choices, long styleLbox);
+    virtual wxListBoxBase *CreateList(const std::vector<std::string>& choices, long styleLbox);
 
     wxAnyChoiceDialog(const wxAnyChoiceDialog&) = delete;
 	wxAnyChoiceDialog& operator=(const wxAnyChoiceDialog&) = delete;
@@ -77,9 +77,9 @@ public:
     }
 
     wxSingleChoiceDialog(wxWindow *parent,
-                         const wxString& message,
-                         const wxString& caption,
-                         const std::vector<wxString>& choices,
+                         const std::string& message,
+                         const std::string& caption,
+                         const std::vector<std::string>& choices,
                          void **clientData = nullptr,
                          long style = wxCHOICEDLG_STYLE,
                          const wxPoint& pos = wxDefaultPosition)
@@ -91,16 +91,16 @@ public:
 	wxSingleChoiceDialog& operator=(const wxSingleChoiceDialog&) = delete;
 
     bool Create(wxWindow *parent,
-                const wxString& message,
-                const wxString& caption,
-                const std::vector<wxString>& choices,
+                const std::string& message,
+                const std::string& caption,
+                const std::vector<std::string>& choices,
                 void **clientData = nullptr,
                 long style = wxCHOICEDLG_STYLE,
                 const wxPoint& pos = wxDefaultPosition);
 
     void SetSelection(int sel);
     int GetSelection() const { return m_selection; }
-    wxString GetStringSelection() const { return m_stringSelection; }
+    std::string GetStringSelection() const { return m_stringSelection; }
     void* GetSelectionData() const { return m_clientData; }
 
     // implementation from now on
@@ -109,7 +109,7 @@ public:
 
 protected:
     int         m_selection;
-    wxString    m_stringSelection;
+    std::string    m_stringSelection;
 
     void DoChoice();
 
@@ -130,9 +130,9 @@ public:
     wxMultiChoiceDialog() = default;
 
     wxMultiChoiceDialog(wxWindow *parent,
-                        const wxString& message,
-                        const wxString& caption,
-                        const std::vector<wxString>& choices,
+                        const std::string& message,
+                        const std::string& caption,
+                        const std::vector<std::string>& choices,
                         long style = wxCHOICEDLG_STYLE,
                         const wxPoint& pos = wxDefaultPosition)
     {
@@ -140,9 +140,9 @@ public:
     }
 
     [[maybe_unused]] bool Create(wxWindow *parent,
-                const wxString& message,
-                const wxString& caption,
-                const std::vector<wxString>& choices,
+                const std::string& message,
+                const std::string& caption,
+                const std::vector<std::string>& choices,
                 long style = wxCHOICEDLG_STYLE,
                 const wxPoint& pos = wxDefaultPosition);
 
@@ -154,7 +154,7 @@ public:
 
 protected:
 #if wxUSE_CHECKLISTBOX
-    wxListBoxBase *CreateList(const std::vector<wxString>& choices, long styleLbox) override;
+    wxListBoxBase *CreateList(const std::vector<std::string>& choices, long styleLbox) override;
 #endif // wxUSE_CHECKLISTBOX
 
     std::vector<int> m_selections;
@@ -174,9 +174,9 @@ public:
 // ----------------------------------------------------------------------------
 
 // get the user selection as a string
-WXDLLIMPEXP_CORE wxString wxGetSingleChoice(const wxString& message,
-                                       const wxString& caption,
-                                       const wxArrayString& choices,
+WXDLLIMPEXP_CORE std::string wxGetSingleChoice(const std::string& message,
+                                       const std::string& caption,
+                                       const std::vector<std::string>& choices,
                                        wxWindow *parent = nullptr,
                                        int x = wxDefaultCoord,
                                        int y = wxDefaultCoord,
@@ -185,9 +185,9 @@ WXDLLIMPEXP_CORE wxString wxGetSingleChoice(const wxString& message,
                                        int height = wxCHOICE_HEIGHT,
                                        int initialSelection = 0);
 
-WXDLLIMPEXP_CORE wxString wxGetSingleChoice(const wxString& message,
-                                       const wxString& caption,
-                                       int n, const wxString *choices,
+WXDLLIMPEXP_CORE std::string wxGetSingleChoice(const std::string& message,
+                                       const std::string& caption,
+                                       int n, const std::string *choices,
                                        wxWindow *parent = nullptr,
                                        int x = wxDefaultCoord,
                                        int y = wxDefaultCoord,
@@ -196,23 +196,23 @@ WXDLLIMPEXP_CORE wxString wxGetSingleChoice(const wxString& message,
                                        int height = wxCHOICE_HEIGHT,
                                        int initialSelection = 0);
 
-WXDLLIMPEXP_CORE wxString wxGetSingleChoice(const wxString& message,
-                                            const wxString& caption,
+WXDLLIMPEXP_CORE std::string wxGetSingleChoice(const std::string& message,
+                                            const std::string& caption,
                                             const wxArrayString& choices,
                                             int initialSelection,
                                             wxWindow *parent = nullptr);
 
-WXDLLIMPEXP_CORE wxString wxGetSingleChoice(const wxString& message,
-                                            const wxString& caption,
-                                            int n, const wxString *choices,
+WXDLLIMPEXP_CORE std::string wxGetSingleChoice(const std::string& message,
+                                            const std::string& caption,
+                                            int n, const std::string *choices,
                                             int initialSelection,
                                             wxWindow *parent = nullptr);
 
 // Same as above but gets position in list of strings, instead of string,
 // or -1 if no selection
-WXDLLIMPEXP_CORE int wxGetSingleChoiceIndex(const wxString& message,
-                                       const wxString& caption,
-                                       const std::vector<wxString>& choices,
+WXDLLIMPEXP_CORE int wxGetSingleChoiceIndex(const std::string& message,
+                                       const std::string& caption,
+                                       const std::vector<std::string>& choices,
                                        wxWindow *parent = nullptr,
                                        int x = wxDefaultCoord,
                                        int y = wxDefaultCoord,
@@ -222,9 +222,9 @@ WXDLLIMPEXP_CORE int wxGetSingleChoiceIndex(const wxString& message,
                                        int initialSelection = 0);
 
 // Return client data instead or NULL if canceled
-WXDLLIMPEXP_CORE void* wxGetSingleChoiceData(const wxString& message,
-                                        const wxString& caption,
-                                        const std::vector<wxString>& choices,
+WXDLLIMPEXP_CORE void* wxGetSingleChoiceData(const std::string& message,
+                                        const std::string& caption,
+                                        const std::vector<std::string>& choices,
                                         void **client_data,
                                         wxWindow *parent = nullptr,
                                         int x = wxDefaultCoord,
@@ -238,9 +238,9 @@ WXDLLIMPEXP_CORE void* wxGetSingleChoiceData(const wxString& message,
 // if no items were selected or Cancel was pressed - return the number of
 // selections or -1 if cancelled
 WXDLLIMPEXP_CORE int wxGetSelectedChoices(std::vector<int>& selections,
-                                        const wxString& message,
-                                        const wxString& caption,
-                                        const std::vector<wxString>& choices,
+                                        const std::string& message,
+                                        const std::string& caption,
+                                        const std::vector<std::string>& choices,
                                         wxWindow *parent = nullptr,
                                         int x = wxDefaultCoord,
                                         int y = wxDefaultCoord,

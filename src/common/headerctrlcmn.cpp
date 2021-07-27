@@ -37,12 +37,12 @@ class wxHeaderColumnsRearrangeDialog : public wxRearrangeDialog
 public:
     wxHeaderColumnsRearrangeDialog(wxWindow *parent,
                                    const std::vector<int>& order,
-                                   const std::vector<wxString>& items)
+                                   const std::vector<std::string>& items)
         : wxRearrangeDialog
           (
             parent,
-            _("Please select the columns to show and define their order:"),
-            _("Customize Columns"),
+            "Please select the columns to show and define their order:",
+            "Customize Columns",
             order,
             items
           )
@@ -301,7 +301,7 @@ bool wxHeaderCtrlBase::ShowCustomizeDialog()
 
     // notice that titles are always in the index order, they will be shown
     // rearranged according to the display order in the dialog
-    std::vector<wxString> titles;
+    std::vector<std::string> titles;
     titles.reserve(count);
     
     for ( unsigned n = 0; n < count; n++ )

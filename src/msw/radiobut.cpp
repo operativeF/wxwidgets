@@ -38,12 +38,12 @@
 
 bool wxRadioButton::Create(wxWindow *parent,
                            wxWindowID id,
-                           const wxString& label,
+                           const std::string& label,
                            const wxPoint& pos,
                            const wxSize& size,
                            long style,
                            const wxValidator& validator,
-                           const wxString& name)
+                           const std::string& name)
 {
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;
@@ -253,7 +253,7 @@ wxSize wxRadioButton::DoGetBestSize() const
     }
 
     wxCoord& radioSize = s_radioSize.Get();
-    wxString str = GetLabel();
+    std::string str = GetLabel();
 
     wxSize radioTextExtents;
     if ( !str.empty() )

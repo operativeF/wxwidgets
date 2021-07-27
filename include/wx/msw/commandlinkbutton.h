@@ -23,13 +23,13 @@ public:
 
     wxCommandLinkButton(wxWindow *parent,
                         wxWindowID id,
-                        const wxString& mainLabel = wxEmptyString,
-                        const wxString& note = wxEmptyString,
+                        const std::string& mainLabel = "",
+                        const std::string& note = "",
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         long style = 0,
                         const wxValidator& validator = wxDefaultValidator,
-                        const wxString& name = wxASCII_STR(wxButtonNameStr))
+                        const std::string& name = wxButtonNameStr)
          
     {
         Create(parent, id, mainLabel, note, pos, size, style, validator, name);
@@ -42,13 +42,13 @@ wxCommandLinkButton(const wxCommandLinkButton&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& mainLabel = wxEmptyString,
-                const wxString& note = wxEmptyString,
+                const std::string& mainLabel = "",
+                const std::string& note = "",
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxButtonNameStr));
+                const std::string& name = wxButtonNameStr);
 
     // do the same thing as in the generic case here
     void SetLabel(const std::string& label) override

@@ -34,6 +34,8 @@
 #include <cstdlib>
 #include <cstring>
 
+#include "boost/nowide/convert.hpp"
+
 // ----------------------------------------------------------------------------
 // wxWin macros
 // ----------------------------------------------------------------------------
@@ -108,9 +110,9 @@ wxColourDialogHookProc(HWND hwnd,
     {
         case WM_INITDIALOG:
             {
-                const wxString title = gs_activeDialog->GetTitle();
+                const std::string title = gs_activeDialog->GetTitle();
                 if ( !title.empty() )
-                    ::SetWindowText(hwnd, title.t_str());
+                    ::SetWindowTextW(hwnd, boost::nowide::widen(title).c_str());
 
                 gs_activeDialog->MSWOnInitDone((WXHWND)hwnd);
             }
@@ -121,7 +123,7 @@ wxColourDialogHookProc(HWND hwnd,
             //
             // Doing it for all messages might be an overkill, we probably
             // could only do it for keyboard/mouse ones.
-            if ( const COLORINFO* pCI = (COLORINFO*)::GetProp(hwnd, COLORPROP) )
+            if ( const COLORINFO* pCI = (COLORINFO*)::GetPropW(hwnd, COLORPROP) )
             {
                 gs_activeDialog->MSWCheckIfCurrentChanged(pCI->currentRGB);
             }

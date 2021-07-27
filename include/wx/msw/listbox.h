@@ -32,10 +32,10 @@ public:
     wxListBox(wxWindow *parent, wxWindowID id,
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
-            const std::vector<wxString>& choices = {},
+            const std::vector<std::string>& choices = {},
             long style = 0,
             const wxValidator& validator = wxDefaultValidator,
-            const wxString& name = wxASCII_STR(wxListBoxNameStr))
+            const std::string& name = wxListBoxNameStr)
     {
         Create(parent, id, pos, size, choices, style, validator, name);
     }
@@ -43,10 +43,10 @@ public:
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                const std::vector<wxString>& choices = {},
+                const std::vector<std::string>& choices = {},
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxListBoxNameStr));
+                const std::string& name = wxListBoxNameStr);
 
     ~wxListBox() override;
 

@@ -19,7 +19,7 @@ public:
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    long style = wxCAL_SHOW_HOLIDAYS,
-                   const wxString& name = wxASCII_STR(wxCalendarNameStr))
+                   const std::string& name = wxCalendarNameStr)
     {
         Create(parent, id, date, pos, size, style, name);
     }
@@ -35,7 +35,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxCAL_SHOW_HOLIDAYS,
-                const wxString& name = wxASCII_STR(wxCalendarNameStr));
+                const std::string& name = wxCalendarNameStr);
 
     bool SetDate(const wxDateTime& date) override;
     wxDateTime GetDate() const override;

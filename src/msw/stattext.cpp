@@ -30,11 +30,11 @@
 
 bool wxStaticText::Create(wxWindow *parent,
                           wxWindowID id,
-                          const wxString& label,
+                          const std::string& label,
                           const wxPoint& pos,
                           const wxSize& size,
                           long style,
-                          const wxString& name)
+                          const std::string& name)
 {
     if ( !CreateControl(parent, id, pos, size, style, wxDefaultValidator, name) )
         return false;

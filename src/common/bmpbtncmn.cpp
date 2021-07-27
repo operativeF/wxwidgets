@@ -117,7 +117,7 @@ GetCloseButtonBitmap(wxWindow *win,
 bool
 wxBitmapButton::CreateCloseButton(wxWindow* parent,
                                   wxWindowID winid,
-                                  const wxString& name)
+                                  const std::string& name)
 {
     wxCHECK_MSG( parent, false, wxS("Must have a valid parent") );
 
@@ -153,7 +153,7 @@ wxBitmapButton::CreateCloseButton(wxWindow* parent,
 wxBitmapButton*
 wxBitmapButtonBase::NewCloseButton(wxWindow* parent,
                                    wxWindowID winid,
-                                   const wxString& name)
+                                   const std::string& name)
 {
     wxBitmapButton* const button = new wxBitmapButton();
 

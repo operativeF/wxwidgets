@@ -55,7 +55,7 @@ bool wxBitmapButton::Create(wxWindow *parent,
                             const wxPoint& pos,
                             const wxSize& size, long style,
                             const wxValidator& validator,
-                            const wxString& name)
+                            const std::string& name)
 {
     if ( !wxBitmapButtonBase::Create(parent, id, pos, size, style,
                                      validator, name) )

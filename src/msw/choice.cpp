@@ -37,7 +37,7 @@ bool wxChoice::Create(wxWindow *parent,
                       const std::vector<std::string>& choices,
                       long style,
                       const wxValidator& validator,
-                      const wxString& name)
+                      const std::string& name)
 {
     // Experience shows that wxChoice vs. wxComboBox distinction confuses
     // quite a few people - try to help them
@@ -58,7 +58,7 @@ bool wxChoice::CreateAndInit(wxWindow *parent,
                              const std::vector<std::string>& choices,
                              long style,
                              const wxValidator& validator,
-                             const wxString& name)
+                             const std::string& name)
 {
     // initialize wxControl
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )

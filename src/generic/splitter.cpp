@@ -85,7 +85,7 @@ bool wxSplitterWindow::Create(wxWindow *parent, wxWindowID id,
                                    const wxPoint& pos,
                                    const wxSize& size,
                                    long style,
-                                   const wxString& name)
+                                   const std::string& name)
 {
     // allow TABbing from one window to the other
     style |= wxTAB_TRAVERSAL;

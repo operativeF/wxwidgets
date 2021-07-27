@@ -1236,8 +1236,8 @@ public:
 
     wxEventBasicPayloadMixin& operator=(const wxEventBasicPayloadMixin&) = delete;
 
-    void SetString(const wxString& s) { m_cmdString = s; }
-    const wxString& GetString() const { return m_cmdString; }
+    void SetString(const std::string& s) { m_cmdString = s; }
+    const std::string& GetString() const { return m_cmdString; }
 
     void SetInt(int i) { m_commandInt = i; }
     int GetInt() const { return m_commandInt; }
@@ -1248,7 +1248,7 @@ public:
 protected:
     // Note: these variables have "cmd" or "command" in their name for backward compatibility:
     //       they used to be part of wxCommandEvent, not this mixin.
-    wxString          m_cmdString;     // String event argument
+    std::string          m_cmdString;     // String event argument
     int               m_commandInt{0};
     long              m_extraLong{0};     // Additional information (e.g. select/deselect)
 };
@@ -1347,9 +1347,7 @@ public:
         : wxEvent(event),
           wxEventAnyPayloadMixin(event)
     {
-        // make sure our string member (which uses COW, aka refcounting) is not
-        // shared by other wxString instances:
-        SetString(GetString().Clone());
+        SetString(GetString());
     }
 
 	wxThreadEvent& operator=(const wxThreadEvent&) = delete;
@@ -1387,9 +1385,7 @@ public:
         SetEventObject(object);
     }
 
-    wxAsyncMethodCallEvent(const wxAsyncMethodCallEvent& other)
-         
-    = default;
+    wxAsyncMethodCallEvent(const wxAsyncMethodCallEvent& other) = default;
 
     virtual void Execute() = 0;
 };
@@ -1617,7 +1613,7 @@ public:
 
     // Note: this shadows wxEventBasicPayloadMixin::GetString(), because it does some
     // GUI-specific hacks
-    wxString GetString() const;
+    std::string GetString() const;
 
     // Get listbox selection if single-choice
     int GetSelection() const { return m_commandInt; }
@@ -2911,41 +2907,21 @@ class WXDLLIMPEXP_CORE wxDropFilesEvent : public wxEvent
 public:
     int       m_noFiles;
     wxPoint   m_pos;
-    wxString* m_files;
+    std::vector<std::string> m_files;
 
     wxDropFilesEvent(wxEventType type = wxEVT_NULL,
                      int noFiles = 0,
-                     wxString *files = nullptr)
+                     std::vector<std::string> files = {})
         : wxEvent(0, type),
           m_noFiles(noFiles),
-          
           m_files(files)
         { }
-
-    // we need a copy ctor to avoid deleting m_files pointer twice
-    wxDropFilesEvent(const wxDropFilesEvent& other)
-        : wxEvent(other),
-          m_noFiles(other.m_noFiles),
-          m_pos(other.m_pos),
-          m_files(nullptr)
-    {
-        m_files = new wxString[m_noFiles];
-        for ( int n = 0; n < m_noFiles; n++ )
-        {
-            m_files[n] = other.m_files[n];
-        }
-    }
-
-    ~wxDropFilesEvent() override
-    {
-        delete [] m_files;
-    }
 
 	wxDropFilesEvent& operator=(const wxDropFilesEvent&) = delete;
 
     wxPoint GetPosition() const { return m_pos; }
     int GetNumberOfFiles() const { return m_noFiles; }
-    wxString *GetFiles() const { return m_files; }
+    const std::vector<std::string>& GetFiles() const { return m_files; }
 
     wxEvent *Clone() const override { return new wxDropFilesEvent(*this); }
 
@@ -2997,7 +2973,7 @@ public:
     bool GetChecked() const { return m_checked; }
     bool GetEnabled() const { return m_enabled; }
     bool GetShown() const { return m_shown; }
-    wxString GetText() const { return m_text; }
+    std::string GetText() const { return m_text; }
     bool GetSetText() const { return m_setText; }
     bool GetSetChecked() const { return m_setChecked; }
     bool GetSetEnabled() const { return m_setEnabled; }
@@ -3006,7 +2982,7 @@ public:
     void Check(bool check) { m_checked = check; m_setChecked = true; }
     void Enable(bool enable) { m_enabled = enable; m_setEnabled = true; }
     void Show(bool show) { m_shown = show; m_setShown = true; }
-    void SetText(const wxString& text) { m_text = text; m_setText = true; }
+    void SetText(const std::string& text) { m_text = text; m_setText = true; }
 
     // A flag saying if the item can be checked. True by default.
     bool IsCheckable() const { return m_isCheckable; }
@@ -3045,7 +3021,7 @@ protected:
     bool          m_setText;
     bool          m_setChecked;
     bool          m_isCheckable;
-    wxString      m_text;
+    std::string      m_text;
 #if wxUSE_LONGLONG
     inline static wxLongLong       sm_lastUpdate{0};
 #endif
@@ -3392,12 +3368,12 @@ public:
     void SetPosition(const wxPoint& pos) { m_pos = pos; }
 
     // Optional link to further help
-    const wxString& GetLink() const { return m_link; }
-    void SetLink(const wxString& link) { m_link = link; }
+    const std::string& GetLink() const { return m_link; }
+    void SetLink(const std::string& link) { m_link = link; }
 
     // Optional target to display help in. E.g. a window specification
-    const wxString& GetTarget() const { return m_target; }
-    void SetTarget(const wxString& target) { m_target = target; }
+    const std::string& GetTarget() const { return m_target; }
+    void SetTarget(const std::string& target) { m_target = target; }
 
     wxEvent *Clone() const override { return new wxHelpEvent(*this); }
 
@@ -3407,8 +3383,8 @@ public:
 
 protected:
     wxPoint   m_pos;
-    wxString  m_target;
-    wxString  m_link;
+    std::string  m_target;
+    std::string  m_link;
     Origin    m_origin;
 
     // we can try to guess the event origin ourselves, even if none is
@@ -3745,9 +3721,9 @@ public:
 
     // Schedule the given event to be processed later. It takes ownership of
     // the event pointer, i.e. it will be deleted later. This is safe to call
-    // from multiple threads although you still need to ensure that wxString
+    // from multiple threads although you still need to ensure that std::string
     // fields of the event object are deep copies and not use the same string
-    // buffer as other wxString objects in this thread.
+    // buffer as other std::string objects in this thread.
     virtual void QueueEvent(wxEvent *event);
 
     // Add an event to be processed later: notice that this function is not
@@ -3755,8 +3731,8 @@ public:
     virtual void AddPendingEvent(const wxEvent& event)
     {
         // notice that the thread-safety problem comes from the fact that
-        // Clone() doesn't make deep copies of wxString fields of wxEvent
-        // object and so the same wxString could be used from both threads when
+        // Clone() doesn't make deep copies of std::string fields of wxEvent
+        // object and so the same std::string could be used from both threads when
         // the event object is destroyed in this one -- QueueEvent() avoids
         // this problem as the event pointer is not used any more in this
         // thread at all after it is called.
@@ -4207,7 +4183,7 @@ inline void wxPostEvent(wxEvtHandler *dest, const wxEvent& event)
 
 // Wrapper around wxEvtHandler::QueueEvent(): adds an event for later
 // processing, unlike wxPostEvent it is safe to use from different thread even
-// for events with wxString members
+// for events with std::string members
 inline void wxQueueEvent(wxEvtHandler *dest, wxEvent *event)
 {
     wxCHECK_RET( dest, "need an object to queue event for" );

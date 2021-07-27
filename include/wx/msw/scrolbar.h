@@ -23,7 +23,7 @@ public:
             const wxSize& size = wxDefaultSize,
             long style = wxSB_HORIZONTAL,
             const wxValidator& validator = wxDefaultValidator,
-            const wxString& name = wxASCII_STR(wxScrollBarNameStr))
+            const std::string& name = wxScrollBarNameStr)
     {
         Create(parent, id, pos, size, style, validator, name);
     }
@@ -38,7 +38,7 @@ public:
             const wxSize& size = wxDefaultSize,
             long style = wxSB_HORIZONTAL,
             const wxValidator& validator = wxDefaultValidator,
-            const wxString& name = wxASCII_STR(wxScrollBarNameStr));
+            const std::string& name = wxScrollBarNameStr);
 
     int GetThumbPosition() const override;
     int GetThumbSize() const override { return m_pageSize; }

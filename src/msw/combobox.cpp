@@ -39,6 +39,8 @@
     #include "wx/tooltip.h"
 #endif // wxUSE_TOOLTIPS
 
+#include "boost/nowide/convert.hpp"
+
 // ----------------------------------------------------------------------------
 // wxWin macros
 // ----------------------------------------------------------------------------
@@ -292,7 +294,7 @@ bool wxComboBox::MSWProcessEditMsg(WXUINT msg, WXWPARAM wParam, WXLPARAM lParam)
 bool wxComboBox::MSWCommand(WXUINT param, WXWORD id)
 {
     int sel = -1;
-    wxString value;
+    std::string value;
 
     switch ( param )
     {
@@ -333,7 +335,7 @@ bool wxComboBox::MSWCommand(WXUINT param, WXWORD id)
             // this string is going to become the new combobox value soon but
             // we need it to be done right now, otherwise the event handler
             // could get a wrong value when it calls our GetValue()
-            ::SetWindowText(GetHwnd(), value.t_str());
+            ::SetWindowTextW(GetHwnd(), boost::nowide::widen(value).c_str());
 
             SendSelectionChangedEvent(wxEVT_COMBOBOX);
 
@@ -452,7 +454,7 @@ bool wxComboBox::Create(wxWindow *parent, wxWindowID id,
                         const std::vector<std::string>& choices,
                         long style,
                         const wxValidator& validator,
-                        const wxString& name)
+                        const std::string& name)
 {
     // pretend that wxComboBox is hidden while it is positioned and resized and
     // show it only right before leaving this method because otherwise there is

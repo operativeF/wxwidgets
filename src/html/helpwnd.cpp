@@ -492,7 +492,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
         m_IndexButtonAll = new wxButton(dummy, wxID_HTML_INDEXBUTTONALL,
                                         _("Show all"));
         m_IndexCountInfo = new wxStaticText(dummy, wxID_HTML_COUNTINFO,
-                                            wxEmptyString, wxDefaultPosition,
+                                            "", wxDefaultPosition,
                                             wxDefaultSize,
                                             wxALIGN_RIGHT | wxST_NO_AUTORESIZE);
         m_IndexList = new wxListBox(dummy, wxID_HTML_INDEXLIST,
@@ -778,11 +778,11 @@ void wxHtmlHelpWindow::DisplayIndexItem(const wxHtmlHelpMergedIndexItem *it)
 
         // more pages associated with this index item -- let the user choose
         // which one she/he wants from a list:
-        std::vector<wxString> arr;
+        std::vector<std::string> arr;
         size_t len = it->items.size();
         for (size_t i = 0; i < len; i++)
         {
-            wxString page = it->items[i]->page;
+            std::string page = it->items[i]->page;
             // try to find page's title in contents:
             const wxHtmlHelpDataItems& contents = m_Data->GetContentsArray();
             size_t clen = contents.size();
@@ -798,8 +798,8 @@ void wxHtmlHelpWindow::DisplayIndexItem(const wxHtmlHelpMergedIndexItem *it)
         }
 
         wxSingleChoiceDialog dlg(this,
-                                 _("Please choose the page to display:"),
-                                 _("Help Topics"),
+                                 "Please choose the page to display:",
+                                 "Help Topics",
                                  arr,
                                  (void**)nullptr, // No client data
                                  wxCHOICEDLG_STYLE & ~wxCENTRE);

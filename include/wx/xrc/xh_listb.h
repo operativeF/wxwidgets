@@ -25,7 +25,7 @@ public:
 
 private:
     bool m_insideBox{false};
-    wxArrayString strList;
+    std::vector<std::string> strList;
 };
 
 #endif // wxUSE_XRC && wxUSE_LISTBOX
