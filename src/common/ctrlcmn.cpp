@@ -239,12 +239,12 @@ wxControlBase::GetCompositeControlsDefaultAttributes(wxWindowVariant WXUNUSED(va
 #if wxUSE_MARKUP
 
 /* static */
-wxString wxControlBase::RemoveMarkup(const wxString& markup)
+std::string wxControlBase::RemoveMarkup(const std::string& markup)
 {
     return wxMarkupParser::Strip(markup);
 }
 
-bool wxControlBase::DoSetLabelMarkup(const wxString& markup)
+bool wxControlBase::DoSetLabelMarkup(const std::string& markup)
 {
     const wxString label = RemoveMarkup(markup);
     if ( label.empty() && !markup.empty() )

@@ -95,7 +95,7 @@ public:
             wxASSERT_MSG( HasDPFlag(wxDP_ALLOWNONE),
                             wxT("this control must have a valid date") );
 
-            m_combo->SetText(wxEmptyString);
+            m_combo->SetText("");
         }
     }
 
@@ -266,7 +266,7 @@ private:
         return true;
     }
 
-    void SetStringValue(const wxString& s) override
+    void SetStringValue(const std::string& s) override
     {
         wxDateTime dt;
         if ( ParseDateTime(s, &dt) )
@@ -274,7 +274,7 @@ private:
         //else: keep the old value
     }
 
-    wxString GetStringValue() const override
+    std::string GetStringValue() const override
     {
         return GetStringValueFor(GetDate());
     }

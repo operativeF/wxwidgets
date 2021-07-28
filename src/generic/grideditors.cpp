@@ -443,7 +443,7 @@ void wxGridCellTextEditor::DoCreate(wxWindow* parent,
 {
     style |= wxTE_PROCESS_ENTER | wxTE_PROCESS_TAB | wxNO_BORDER;
 
-    wxTextCtrl* const text = new wxTextCtrl(parent, id, wxEmptyString,
+    wxTextCtrl* const text = new wxTextCtrl(parent, id, "",
                                             wxDefaultPosition, wxDefaultSize,
                                             style);
     text->SetMargins(0, 0);

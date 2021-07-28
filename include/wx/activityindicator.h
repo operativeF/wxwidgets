@@ -16,7 +16,7 @@
 
 #include "wx/control.h"
 
-#define wxActivityIndicatorNameStr wxS("activityindicator")
+inline constexpr char wxActivityIndicatorNameStr[] = "activityindicator";
 
 // ----------------------------------------------------------------------------
 // wxActivityIndicator: small animated indicator of some application activity.

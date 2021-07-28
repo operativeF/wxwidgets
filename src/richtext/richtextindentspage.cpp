@@ -195,7 +195,7 @@ void wxRichTextIndentsSpacingPage::CreateControls()
     wxStaticText* itemStaticText23 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Left:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemFlexGridSizer22->Add(itemStaticText23, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
-    m_indentLeft = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTINDENTSSPACINGPAGE_INDENT_LEFT, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0 );
+    m_indentLeft = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTINDENTSSPACINGPAGE_INDENT_LEFT, "", wxDefaultPosition, wxSize(50, -1), 0 );
     m_indentLeft->SetHelpText(_("The left indent."));
     if (wxRichTextIndentsSpacingPage::ShowToolTips())
         m_indentLeft->SetToolTip(_("The left indent."));
@@ -204,7 +204,7 @@ void wxRichTextIndentsSpacingPage::CreateControls()
     wxStaticText* itemStaticText25 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("Left (&first line):"), wxDefaultPosition, wxDefaultSize, 0 );
     itemFlexGridSizer22->Add(itemStaticText25, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
-    m_indentLeftFirst = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTINDENTSSPACINGPAGE_INDENT_LEFT_FIRST, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0 );
+    m_indentLeftFirst = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTINDENTSSPACINGPAGE_INDENT_LEFT_FIRST, "", wxDefaultPosition, wxSize(50, -1), 0 );
     m_indentLeftFirst->SetHelpText(_("The first line indent."));
     if (wxRichTextIndentsSpacingPage::ShowToolTips())
         m_indentLeftFirst->SetToolTip(_("The first line indent."));
@@ -213,7 +213,7 @@ void wxRichTextIndentsSpacingPage::CreateControls()
     wxStaticText* itemStaticText27 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Right:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemFlexGridSizer22->Add(itemStaticText27, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
-    m_indentRight = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTINDENTSSPACINGPAGE_INDENT_RIGHT, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0 );
+    m_indentRight = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTINDENTSSPACINGPAGE_INDENT_RIGHT, "", wxDefaultPosition, wxSize(50, -1), 0 );
     m_indentRight->SetHelpText(_("The right indent."));
     if (wxRichTextIndentsSpacingPage::ShowToolTips())
         m_indentRight->SetToolTip(_("The right indent."));
@@ -253,7 +253,7 @@ void wxRichTextIndentsSpacingPage::CreateControls()
     wxStaticText* itemStaticText39 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Before a paragraph:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemFlexGridSizer38->Add(itemStaticText39, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
-    m_spacingBefore = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTINDENTSSPACINGPAGE_SPACING_BEFORE, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0 );
+    m_spacingBefore = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTINDENTSSPACINGPAGE_SPACING_BEFORE, "", wxDefaultPosition, wxSize(50, -1), 0 );
     m_spacingBefore->SetHelpText(_("The spacing before the paragraph."));
     if (wxRichTextIndentsSpacingPage::ShowToolTips())
         m_spacingBefore->SetToolTip(_("The spacing before the paragraph."));
@@ -262,7 +262,7 @@ void wxRichTextIndentsSpacingPage::CreateControls()
     wxStaticText* itemStaticText41 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&After a paragraph:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemFlexGridSizer38->Add(itemStaticText41, 0, wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
-    m_spacingAfter = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTINDENTSSPACINGPAGE_SPACING_AFTER, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0 );
+    m_spacingAfter = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTINDENTSSPACINGPAGE_SPACING_AFTER, "", wxDefaultPosition, wxSize(50, -1), 0 );
     if (wxRichTextIndentsSpacingPage::ShowToolTips())
         m_spacingAfter->SetToolTip(_("The spacing after the paragraph."));
     itemFlexGridSizer38->Add(m_spacingAfter, 0, wxGROW|wxALIGN_CENTER_VERTICAL|wxALL, 5);

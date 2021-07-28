@@ -85,7 +85,7 @@ wxSize wxCheckBox::DoGetBestClientSize() const
     }
 
     wxCoord& checkSize = s_checkSize.Get();
-    wxString str = wxGetWindowText(GetHWND());
+    std::string str = wxGetWindowText(GetHWND());
 
     int wCheckbox, hCheckbox;
     if ( !str.empty() )

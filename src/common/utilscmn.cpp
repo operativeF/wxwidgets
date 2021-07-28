@@ -1418,11 +1418,11 @@ wxVersionInfo wxGetLibraryVersionInfo()
 void wxInfoMessageBox(wxWindow* parent)
 {
     wxVersionInfo info = wxGetLibraryVersionInfo();
-    wxString msg = info.ToString();
+    std::string msg = info.ToString();
 
-    msg << wxS("\n") << info.GetCopyright();
+    msg += '\n' + info.GetCopyright();
 
-    wxMessageBox(msg, wxT("wxWidgets information"),
+    wxMessageBox(msg, "wxWidgets information",
                  wxICON_INFORMATION | wxOK,
                  parent);
 }

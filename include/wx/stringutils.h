@@ -107,12 +107,9 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
 }
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-[[nodiscard]] inline bool CmpNoCase(std::string_view strViewA, std::string_view strViewB)
+[[nodiscard]] inline int CmpNoCase(std::string_view strViewA, std::string_view strViewB)
 {
     const auto nA = strViewA.size();
-
-    if(nA != strViewB.size())
-        return false;
 
     std::string strA(nA, ' ');
     std::string strB(nA, ' ');
@@ -120,11 +117,11 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
     std::transform(strViewA.begin(), strViewA.end(), strA.begin(), [](unsigned char c) noexcept { return std::tolower(c); });
     std::transform(strViewB.begin(), strViewB.end(), strB.begin(), [](unsigned char c) noexcept { return std::tolower(c); });
 
-    return strA == strB;
+    return strA.compare(strB);
 }
 
 // FIXME: Wrong (for Unicode), and temporary implementation of a case insensitive string comparison
-[[nodiscard]] inline bool CmpNoCase(const char* const chsA, const char* const chsB)
+[[nodiscard]] inline int CmpNoCase(const char* const chsA, const char* const chsB)
 {
     return CmpNoCase(std::string_view(chsA), std::string_view(chsB));
 }
@@ -136,7 +133,7 @@ inline CONSTEXPR_STR20 void ToLower(std::string& str)
 
 [[nodiscard]] inline bool IsSameAsNoCase(std::string_view strViewA, std::string_view strViewB) 
 {
-    return CmpNoCase(strViewA, strViewB);
+    return CmpNoCase(strViewA, strViewB) == 0;
 }
 
 [[nodiscard]] inline CONSTEXPR_STR20 std::string BeforeFirst(std::string_view strView, std::string_view strFirst, size_t pos = 0) noexcept

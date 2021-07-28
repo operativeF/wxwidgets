@@ -46,7 +46,7 @@ protected:
     void DoSetBitmapPosition(wxDirection dir) override;
 
 #if wxUSE_MARKUP
-    bool DoSetLabelMarkup(const wxString& markup) override;
+    bool DoSetLabelMarkup(const std::string& markup) override;
 #endif // wxUSE_MARKUP
 
     // Increases the passed in size to account for the button image.

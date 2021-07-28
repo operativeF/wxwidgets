@@ -986,7 +986,7 @@ wxTextCtrl& wxTextCtrlBase::operator<<(long l)
 int wxTextCtrlBase::overflow(int c)
 {
     std::string s;
-    AppendText(s += char(c));
+    AppendText(s += static_cast<char>(c));
 
     // return something different from EOF
     return 0;

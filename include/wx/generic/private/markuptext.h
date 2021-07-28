@@ -27,7 +27,7 @@ public:
     virtual ~wxMarkupTextBase() = default;
 
     // Update the markup string.
-    void SetMarkup(const wxString& markup) { m_markup = markup; }
+    void SetMarkup(const std::string& markup) { m_markup = markup; }
 
     // Return the width and height required by the given string and optionally
     // the height of the visible part above the baseline (i.e. ascent minus
@@ -39,16 +39,16 @@ public:
     wxSize Measure(wxDC& dc, int *visibleHeight = nullptr) const;
 
 protected:
-    wxMarkupTextBase(const wxString& markup)
+    wxMarkupTextBase(const std::string& markup)
         : m_markup(markup)
     {
     }
 
     // Return m_markup suitable for measuring by Measure, i.e. stripped of
     // any mnenomics.
-    virtual wxString GetMarkupForMeasuring() const = 0;
+    virtual std::string GetMarkupForMeasuring() const = 0;
 
-    wxString m_markup;
+    std::string m_markup;
 };
 
 
@@ -74,7 +74,7 @@ public:
     // TODO-MULTILINE-MARKUP: Currently only single line labels are supported,
     // search for other occurrences of this comment to find the places which
     // need to be updated to support multiline labels with markup.
-    wxMarkupText(const wxString& markup) : wxMarkupTextBase(markup)
+    wxMarkupText(const std::string& markup) : wxMarkupTextBase(markup)
     {
     }
 
@@ -83,7 +83,7 @@ public:
     // Update the markup string.
     //
     // The same rules for mnemonics as in the ctor apply to this string.
-    void SetMarkup(const wxString& markup) { m_markup = markup; }
+    void SetMarkup(const std::string& markup) { m_markup = markup; }
 
     // Render the markup string into the given DC in the specified rectangle.
     //
@@ -93,7 +93,7 @@ public:
     void Render(wxDC& dc, const wxRect& rect, int flags);
 
 protected:
-    wxString GetMarkupForMeasuring() const override;
+    std::string GetMarkupForMeasuring() const override;
 };
 
 
@@ -110,7 +110,7 @@ public:
     // be valid, the caller must check for it before constructing this object).
     // Notice that mnemonics are not interpreted at all by this class, so
     // literal ampersands shouldn't be escaped/doubled.
-    wxItemMarkupText(const wxString& markup) : wxMarkupTextBase(markup)
+    wxItemMarkupText(const std::string& markup) : wxMarkupTextBase(markup)
     {
     }
 
@@ -132,7 +132,7 @@ public:
                 wxEllipsizeMode ellipsizeMode);
 
 protected:
-    wxString GetMarkupForMeasuring() const override { return m_markup; }
+    std::string GetMarkupForMeasuring() const override { return m_markup; }
 };
 
 #endif // _WX_GENERIC_PRIVATE_MARKUPTEXT_H_

@@ -53,12 +53,12 @@ public:
 
     bool Close() override;
 
-    void SetTitle(const wxString& title) override
+    void SetTitle(const std::string& title) override
     {
         m_title = title;
     }
 
-    void SetMessage(const wxString& message) override
+    void SetMessage(const std::string& message) override
     {
         m_message = message;
     }
@@ -78,7 +78,7 @@ public:
         m_icon = icon;
     }
 
-    bool AddAction(wxWindowID WXUNUSED(actionid), const wxString &WXUNUSED(label)) override
+    bool AddAction(wxWindowID WXUNUSED(actionid), const std::string &WXUNUSED(label)) override
     {
         // Actions are not supported in balloon notifications
         return false;
@@ -135,8 +135,8 @@ protected:
     inline static int ms_refCountIcon{0};
 
 private:
-    wxString m_title;
-    wxString m_message;
+    std::string m_title;
+    std::string m_message;
     int m_flags;
     wxIcon m_icon;
     wxWindow* m_parent;
@@ -323,8 +323,8 @@ wxNotificationMessage::wxNotificationMessage()
     }
 }
 
-wxNotificationMessage::wxNotificationMessage(const wxString& title,
-    const wxString& message,
+wxNotificationMessage::wxNotificationMessage(const std::string& title,
+    const std::string& message,
     wxWindow* parent,
     int flags)
 {
@@ -348,8 +348,8 @@ wxTaskBarIcon *wxNotificationMessage::UseTaskBarIcon(wxTaskBarIcon *icon)
 }
 
 bool wxNotificationMessage::MSWUseToasts(
-    const wxString& shortcutPath,
-    const wxString& appId)
+    const std::string& shortcutPath,
+    const std::string& appId)
 {
 #if wxUSE_WINRT
     return wxToastNotificationHelper::UseToasts(shortcutPath, appId);

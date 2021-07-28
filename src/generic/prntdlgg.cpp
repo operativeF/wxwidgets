@@ -216,16 +216,16 @@ void wxGenericPrintDialog::Init(wxWindow * WXUNUSED(parent))
     if (m_printDialogData.GetFromPage() != 0)
     {
         bottomsizer->Add( new wxStaticText(this, wxPRINTID_STATIC, _("From:") ), 0, wxCENTER|wxALL, 5 );
-        m_fromText = new wxTextCtrl(this, wxPRINTID_FROM, wxEmptyString, wxDefaultPosition, wxSize(40, wxDefaultCoord));
+        m_fromText = new wxTextCtrl(this, wxPRINTID_FROM, "", wxDefaultPosition, wxSize(40, wxDefaultCoord));
         bottomsizer->Add( m_fromText, 1, wxCENTER|wxRIGHT, 10 );
 
         bottomsizer->Add( new wxStaticText(this, wxPRINTID_STATIC, _("To:") ), 0, wxCENTER|wxALL, 5);
-        m_toText = new wxTextCtrl(this, wxPRINTID_TO, wxEmptyString, wxDefaultPosition, wxSize(40, wxDefaultCoord));
+        m_toText = new wxTextCtrl(this, wxPRINTID_TO, "", wxDefaultPosition, wxSize(40, wxDefaultCoord));
         bottomsizer->Add( m_toText, 1, wxCENTER|wxRIGHT, 10 );
     }
 
     bottomsizer->Add( new wxStaticText(this, wxPRINTID_STATIC, _("Copies:") ), 0, wxCENTER|wxALL, 5 );
-    m_noCopiesText = new wxTextCtrl(this, wxPRINTID_COPIES, wxEmptyString, wxPoint(252, 130), wxSize(40, wxDefaultCoord));
+    m_noCopiesText = new wxTextCtrl(this, wxPRINTID_COPIES, "", wxPoint(252, 130), wxSize(40, wxDefaultCoord));
     bottomsizer->Add( m_noCopiesText, 1, wxCENTER|wxRIGHT, 10 );
 
     mainsizer->Add( bottomsizer, 0, wxTOP|wxLEFT|wxRIGHT, 12 );
@@ -613,7 +613,7 @@ void wxGenericPrintSetupDialog::Init(wxPrintData* data)
 
     item13->Add( 20, 20, 0, wxALIGN_CENTER|wxALL, 5 );
 
-    m_printerCommandText = new wxTextCtrl( this, wxPRINTID_COMMAND, wxEmptyString, wxDefaultPosition, wxSize(160,wxDefaultCoord) );
+    m_printerCommandText = new wxTextCtrl( this, wxPRINTID_COMMAND, "", wxDefaultPosition, wxSize(160,wxDefaultCoord) );
     item13->Add( m_printerCommandText, 0, wxALIGN_CENTER|wxALL, 5 );
 
     item10->Add( item13, 0, wxALIGN_CENTER|wxALL, 0 );
@@ -625,7 +625,7 @@ void wxGenericPrintSetupDialog::Init(wxPrintData* data)
 
     item16->Add( 20, 20, 0, wxALIGN_CENTER|wxALL, 5 );
 
-    m_printerOptionsText = new wxTextCtrl( this, wxPRINTID_OPTIONS, wxEmptyString, wxDefaultPosition, wxSize(160,wxDefaultCoord) );
+    m_printerOptionsText = new wxTextCtrl( this, wxPRINTID_OPTIONS, "", wxDefaultPosition, wxSize(160,wxDefaultCoord) );
     item16->Add( m_printerOptionsText, 0, wxALIGN_CENTER|wxALL, 5 );
 
     item10->Add( item16, 0, wxALIGN_CENTER|wxALL, 0 );
@@ -854,8 +854,8 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
     table->Add( column1, 0, wxALL | wxEXPAND, 5 );
 
     wxBoxSizer *column2 = new wxBoxSizer( wxVERTICAL );
-    m_marginLeftText = new wxTextCtrl(this, wxPRINTID_LEFTMARGIN, wxEmptyString, wxDefaultPosition, wxSize(textWidth, wxDefaultCoord));
-    m_marginTopText = new wxTextCtrl(this, wxPRINTID_TOPMARGIN, wxEmptyString, wxDefaultPosition, wxSize(textWidth, wxDefaultCoord));
+    m_marginLeftText = new wxTextCtrl(this, wxPRINTID_LEFTMARGIN, "", wxDefaultPosition, wxSize(textWidth, wxDefaultCoord));
+    m_marginTopText = new wxTextCtrl(this, wxPRINTID_TOPMARGIN, "", wxDefaultPosition, wxSize(textWidth, wxDefaultCoord));
     column2->Add( m_marginLeftText, 1, wxALL, 5 );
     column2->Add( m_marginTopText, 1, wxALL, 5 );
     table->Add( column2, 0, wxRIGHT|wxTOP|wxBOTTOM | wxEXPAND, 5 );
@@ -866,8 +866,8 @@ wxGenericPageSetupDialog::wxGenericPageSetupDialog( wxWindow *parent,
     table->Add( column3, 0, wxALL | wxEXPAND, 5 );
 
     wxBoxSizer *column4 = new wxBoxSizer( wxVERTICAL );
-    m_marginRightText = new wxTextCtrl(this, wxPRINTID_RIGHTMARGIN, wxEmptyString, wxDefaultPosition, wxSize(textWidth, wxDefaultCoord));
-    m_marginBottomText = new wxTextCtrl(this, wxPRINTID_BOTTOMMARGIN, wxEmptyString, wxDefaultPosition, wxSize(textWidth, wxDefaultCoord));
+    m_marginRightText = new wxTextCtrl(this, wxPRINTID_RIGHTMARGIN, "", wxDefaultPosition, wxSize(textWidth, wxDefaultCoord));
+    m_marginBottomText = new wxTextCtrl(this, wxPRINTID_BOTTOMMARGIN, "", wxDefaultPosition, wxSize(textWidth, wxDefaultCoord));
     column4->Add( m_marginRightText, 1, wxALL, 5 );
     column4->Add( m_marginBottomText, 1, wxALL, 5 );
     table->Add( column4, 0, wxRIGHT|wxTOP|wxBOTTOM | wxEXPAND, 5 );

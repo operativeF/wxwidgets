@@ -110,7 +110,7 @@ void wxRichTextTabsPage::CreateControls()
     wxStaticText* itemStaticText6 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Position (tenths of a mm):"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    m_tabEditCtrl = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTTABSPAGE_TABEDIT, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+    m_tabEditCtrl = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTTABSPAGE_TABEDIT, "", wxDefaultPosition, wxDefaultSize, 0 );
     m_tabEditCtrl->SetHelpText(_("The tab position."));
     if (wxRichTextTabsPage::ShowToolTips())
         m_tabEditCtrl->SetToolTip(_("The tab position."));

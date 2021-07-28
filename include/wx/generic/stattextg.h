@@ -29,11 +29,11 @@ public:
 
     wxGenericStaticText(wxWindow *parent,
                  wxWindowID id,
-                 const wxString& label,
+                 const std::string& label,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  long style = 0,
-                 const wxString& name = wxASCII_STR(wxStaticTextNameStr))
+                 const std::string& name = wxStaticTextNameStr)
     {
         
 #if wxUSE_MARKUP
@@ -49,11 +49,11 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& label,
+                const std::string& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
-                const wxString& name = wxASCII_STR(wxStaticTextNameStr));
+                const std::string& name = wxStaticTextNameStr);
 
     ~wxGenericStaticText() override;
 
@@ -71,7 +71,7 @@ protected:
     void DoSetSize(int x, int y, int width, int height, int sizeFlags) override;
 
 #if wxUSE_MARKUP
-    bool DoSetLabelMarkup(const wxString& markup) override;
+    bool DoSetLabelMarkup(const std::string& markup) override;
 #endif // wxUSE_MARKUP
 
 private:

@@ -808,7 +808,7 @@ void wxAnyButton::DoSetBitmapPosition(wxDirection dir)
 
 #if wxUSE_MARKUP
 
-bool wxAnyButton::DoSetLabelMarkup(const wxString& markup)
+bool wxAnyButton::DoSetLabelMarkup(const std::string& markup)
 {
     if ( !wxAnyButtonBase::DoSetLabelMarkup(markup) )
         return false;

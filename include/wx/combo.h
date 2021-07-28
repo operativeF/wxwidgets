@@ -160,7 +160,7 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& value,
+                const std::string& value,
                 const wxPoint& pos,
                 const wxSize& size,
                 long style,
@@ -270,17 +270,17 @@ public:
 
     // This method sets the text without affecting list selection
     // (ie. wxComboPopup::SetStringValue doesn't get called).
-    void SetText(const wxString& value);
+    void SetText(const std::string& value);
 
     // This method sets value and also optionally sends EVT_TEXT
     // (needed by combo popups)
-    wxDEPRECATED( void SetValueWithEvent(const wxString& value,
+    wxDEPRECATED( void SetValueWithEvent(const std::string& value,
                                          bool withEvent = true) );
 
     // Changes value of the control as if user had done it by selecting an
     // item from a combo box drop-down list. Needs to be public so that
     // derived popup classes can call it.
-    void SetValueByUser(const wxString& value);
+    void SetValueByUser(const std::string& value);
 
     //
     // Popup customization methods
@@ -782,10 +782,10 @@ public:
 
     // Called just prior to displaying popup.
     // Default implementation does nothing.
-    virtual void SetStringValue( const wxString& value );
+    virtual void SetStringValue( const std::string& value );
 
     // Gets displayed string representation of the value.
-    virtual wxString GetStringValue() const = 0;
+    virtual std::string GetStringValue() const = 0;
 
     // Called to check if the popup - when an item container - actually
     // has matching item. Case-sensitivity checking etc. is up to the

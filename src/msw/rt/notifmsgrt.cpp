@@ -20,6 +20,7 @@
 #include "wx/msw/rt/private/notifmsg.h"
 
 #include "wx/notifmsg.h"
+#include "wx/stringutils.h"
 #include "wx/msw/rt/utils.h"
 #include "wx/msw/private/comptr.h"
 #include "wx/msw/wrapshl.h"
@@ -33,6 +34,8 @@
 #include <functiondiscoverykeys.h>
 #include <propvarutil.h>
 #include <wrl/implements.h>
+
+#include "boost/nowide/convert.hpp"
 
 using namespace ABI::Windows::UI::Notifications;
 using namespace ABI::Windows::Data::Xml::Dom;
@@ -125,12 +128,12 @@ public:
             return false;
     }
 
-    void SetTitle(const wxString& title) override
+    void SetTitle(const std::string& title) override
     {
         m_title = title;
     }
 
-    void SetMessage(const wxString& message) override
+    void SetMessage(const std::string& message) override
     {
         m_message = message;
     }
@@ -151,7 +154,7 @@ public:
         // to be used as a file:// url in the notifications XML
     }
 
-    bool AddAction(wxWindowID WXUNUSED(actionid), const wxString &WXUNUSED(label)) override
+    bool AddAction(wxWindowID WXUNUSED(actionid), const std::string &WXUNUSED(label)) override
     {
         return false;
     }
@@ -223,7 +226,7 @@ public:
         return hr;
     }
 
-    static HRESULT SetNodeListValueString(UINT32 index, const wxString& str, IXmlNodeList* nodeList, IXmlDocument *toastXml)
+    static HRESULT SetNodeListValueString(UINT32 index, const std::string& str, IXmlNodeList* nodeList, IXmlDocument *toastXml)
     {
         wxCOMPtr<IXmlNode> textNode;
         // Set title node
@@ -236,7 +239,7 @@ public:
         return hr;
     }
 
-    static HRESULT SetNodeValueString(const wxString& str, IXmlNode *node, IXmlDocument *xml)
+    static HRESULT SetNodeValueString(const std::string& str, IXmlNode *node, IXmlDocument *xml)
     {
         wxCOMPtr<IXmlText> inputText;
 
@@ -261,15 +264,16 @@ public:
         return ms_enabled;
     }
 
-    static wxString BuildAppId()
+    static std::string BuildAppId()
     {
         // Build a Application User Model IDs based on app info
-        wxString vendorId = wxTheApp->GetVendorName();
+        std::string vendorId = wxTheApp->GetVendorName();
         if ( vendorId.empty() )
             vendorId = "wxWidgetsApp";
-        wxString appId = vendorId + "." + wxTheApp->GetAppName();
+        std::string appId = vendorId + "." + wxTheApp->GetAppName();
         // Remove potential spaces
-        appId.Replace(" ", "", true);
+        // TODO: Erase instead?
+        wx::utils::ReplaceAll(appId, " ", "");
         return appId;
     }
 
@@ -297,9 +301,9 @@ public:
                 PROPVARIANT appIdPropVar;
                 if ( SUCCEEDED(propertyStore->GetValue(PKEY_AppUserModel_ID, &appIdPropVar)) )
                 {
-                    wxString appId;
+                    std::string appId;
                     if ( appIdPropVar.vt == VT_LPWSTR )
-                        appId = appIdPropVar.pwszVal;
+                        appId = boost::nowide::narrow(appIdPropVar.pwszVal);
                     if ( appId.empty() || (!ms_appId.empty() && ms_appId != appId) )
                     {
                         // Update shortcut if app id does not match or is empty
@@ -333,7 +337,7 @@ public:
 
             // Set application id in shortcut
             PROPVARIANT appIdPropVar;
-            if ( FAILED(InitPropVariantFromString(ms_appId.wc_str(), &appIdPropVar)) )
+            if ( FAILED(InitPropVariantFromString(boost::nowide::widen(ms_appId).c_str(), &appIdPropVar)) )
                 return false;
             if ( FAILED(propertyStore->SetValue(PKEY_AppUserModel_ID, appIdPropVar)) )
                 return false;
@@ -347,8 +351,8 @@ public:
     }
 
     static bool UseToasts(
-        const wxString& shortcutPath,
-        const wxString& appId)
+        const std::string& shortcutPath,
+        const std::string& appId)
     {
         ms_enabled = false;
 
@@ -398,14 +402,14 @@ public:
     }
 
 private:
-    wxString m_title;
-    wxString m_message;
+    std::string m_title;
+    std::string m_message;
     wxCOMPtr<IToastNotifier> m_notifier;
     wxCOMPtr<IToastNotification> m_toast;
     wxToastEventHandler* m_toastEventHandler;
 
     static bool ms_enabled;
-    static wxString ms_appId;
+    static std::string ms_appId;
     static int ms_toastStaticsInitialized;
     static wxCOMPtr<IToastNotificationManagerStatics> ms_toastMgr;
 
@@ -414,7 +418,7 @@ private:
 
 bool wxToastNotifMsgImpl::ms_enabled = false;
 int wxToastNotifMsgImpl::ms_toastStaticsInitialized = -1;
-wxString wxToastNotifMsgImpl::ms_appId;
+std::string wxToastNotifMsgImpl::ms_appId;
 wxCOMPtr<IToastNotificationManagerStatics> wxToastNotifMsgImpl::ms_toastMgr;
 
 HRESULT wxToastEventHandler::Invoke(
@@ -484,8 +488,8 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxToastNotifMsgModule, wxModule);
 // wxToastNotificationHelper
 //
 
-bool wxToastNotificationHelper::UseToasts(const wxString& shortcutPath,
-    const wxString& appId)
+bool wxToastNotificationHelper::UseToasts(const std::string& shortcutPath,
+    const std::string& appId)
 {
 #if wxUSE_NOTIFICATION_MESSAGE && wxUSE_WINRT
     return wxToastNotifMsgImpl::UseToasts(shortcutPath, appId);

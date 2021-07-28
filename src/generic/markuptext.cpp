@@ -317,7 +317,7 @@ wxSize wxMarkupTextBase::Measure(wxDC& dc, int *visibleHeight) const
     return out.GetSize();
 }
 
-wxString wxMarkupText::GetMarkupForMeasuring() const
+std::string wxMarkupText::GetMarkupForMeasuring() const
 {
     return wxControl::RemoveMnemonics(m_markup);
 }

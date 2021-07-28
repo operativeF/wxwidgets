@@ -106,7 +106,7 @@ void wxRichTextStylePage::CreateControls()
     wxStaticText* itemStaticText6 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Style:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    m_styleName = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTSTYLEPAGE_STYLE_NAME, wxEmptyString, wxDefaultPosition, wxSize(300, -1), wxTE_READONLY );
+    m_styleName = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTSTYLEPAGE_STYLE_NAME, "", wxDefaultPosition, wxSize(300, -1), wxTE_READONLY );
     m_styleName->SetHelpText(_("The style name."));
     if (wxRichTextStylePage::ShowToolTips())
         m_styleName->SetToolTip(_("The style name."));

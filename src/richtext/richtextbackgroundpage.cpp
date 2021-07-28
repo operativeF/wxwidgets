@@ -215,7 +215,7 @@ void wxRichTextBackgroundPage::CreateControls()
     wxBoxSizer* itemBoxSizer24 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer22->Add(itemBoxSizer24, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_offsetX = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_SHADOW_HORIZONTAL_OFFSET, wxEmptyString, wxDefaultPosition, wxSize(60, -1), 0 );
+    m_offsetX = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_SHADOW_HORIZONTAL_OFFSET, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_offsetX->SetHelpText(_("The horizontal offset."));
     if (wxRichTextBackgroundPage::ShowToolTips())
         m_offsetX->SetToolTip(_("The horizontal offset."));
@@ -238,7 +238,7 @@ void wxRichTextBackgroundPage::CreateControls()
     wxBoxSizer* itemBoxSizer28 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer22->Add(itemBoxSizer28, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_offsetY = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_SHADOW_VERTICAL_OFFSET, wxEmptyString, wxDefaultPosition, wxSize(60, -1), 0 );
+    m_offsetY = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_SHADOW_VERTICAL_OFFSET, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_offsetY->SetHelpText(_("The vertical offset."));
     if (wxRichTextBackgroundPage::ShowToolTips())
         m_offsetY->SetToolTip(_("The vertical offset."));
@@ -278,7 +278,7 @@ void wxRichTextBackgroundPage::CreateControls()
     wxBoxSizer* itemBoxSizer34 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer22->Add(itemBoxSizer34, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_spread = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_SHADOW_SPREAD, wxEmptyString, wxDefaultPosition, wxSize(60, -1), 0 );
+    m_spread = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_SHADOW_SPREAD, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_spread->SetHelpText(_("The shadow spread."));
     if (wxRichTextBackgroundPage::ShowToolTips())
         m_spread->SetToolTip(_("The shadow spread."));
@@ -305,7 +305,7 @@ void wxRichTextBackgroundPage::CreateControls()
     wxBoxSizer* itemBoxSizer38 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer22->Add(itemBoxSizer38, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_blurDistance = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_SHADOW_BLUR_DISTANCE, wxEmptyString, wxDefaultPosition, wxSize(60, -1), 0 );
+    m_blurDistance = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_SHADOW_BLUR_DISTANCE, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_blurDistance->SetHelpText(_("The shadow blur distance."));
     if (wxRichTextBackgroundPage::ShowToolTips())
         m_blurDistance->SetToolTip(_("The shadow blur distance."));
@@ -332,7 +332,7 @@ void wxRichTextBackgroundPage::CreateControls()
     wxBoxSizer* itemBoxSizer42 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer22->Add(itemBoxSizer42, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_opacity = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_SHADOW_OPACITY, wxEmptyString, wxDefaultPosition, wxSize(60, -1), 0 );
+    m_opacity = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_SHADOW_OPACITY, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_opacity->SetHelpText(_("The shadow opacity."));
     if (wxRichTextBackgroundPage::ShowToolTips())
         m_opacity->SetToolTip(_("The shadow opacity."));

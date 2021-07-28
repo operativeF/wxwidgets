@@ -179,7 +179,7 @@ wxActivityIndicatorGeneric::Create(wxWindow* parent,
                                    const wxPoint& pos,
                                    const wxSize& size,
                                    long style,
-                                   const wxString& name)
+                                   const std::string& name)
 {
     // Notice that we skip wxControl version, we don't need the validator
     // support that it adds.

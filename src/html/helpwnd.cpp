@@ -485,7 +485,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
 
         dummy->SetSizer(topsizer);
 
-        m_IndexText = new wxTextCtrl(dummy, wxID_HTML_INDEXTEXT, wxEmptyString,
+        m_IndexText = new wxTextCtrl(dummy, wxID_HTML_INDEXTEXT, "",
                                      wxDefaultPosition, wxDefaultSize,
                                      wxTE_PROCESS_ENTER);
         m_IndexButton = new wxButton(dummy, wxID_HTML_INDEXBUTTON, _("Find"));
@@ -526,7 +526,7 @@ bool wxHtmlHelpWindow::Create(wxWindow* parent, wxWindowID id,
         dummy->SetSizer(sizer);
 
         m_SearchText = new wxTextCtrl(dummy, wxID_HTML_SEARCHTEXT,
-                                      wxEmptyString,
+                                      "",
                                       wxDefaultPosition, wxDefaultSize,
                                       wxTE_PROCESS_ENTER);
         m_SearchChoice = new wxChoice(dummy, wxID_HTML_SEARCHCHOICE,

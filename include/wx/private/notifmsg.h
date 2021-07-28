@@ -26,9 +26,9 @@ public:
 
     virtual bool Close() = 0;
 
-    virtual void SetTitle(const wxString& title) = 0;
+    virtual void SetTitle(const std::string& title) = 0;
 
-    virtual void SetMessage(const wxString& message) = 0;
+    virtual void SetMessage(const std::string& message) = 0;
 
     virtual void SetParent(wxWindow *parent) = 0;
 
@@ -36,7 +36,7 @@ public:
 
     virtual void SetIcon(const wxIcon& icon) = 0;
 
-    virtual bool AddAction(wxWindowID actionid, const wxString &label) = 0;
+    virtual bool AddAction(wxWindowID actionid, const std::string &label) = 0;
 
     virtual void Detach()
     {

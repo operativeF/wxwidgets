@@ -24,7 +24,7 @@ public:
 
     wxTopLevelWindowMSW(wxWindow *parent,
                         wxWindowID id,
-                        const wxString& title,
+                        const std::string& title,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         long style = wxDEFAULT_FRAME_STYLE,
@@ -35,7 +35,7 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& title,
+                const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_FRAME_STYLE,
@@ -126,14 +126,14 @@ public:
 
 protected:
     // create a new frame, return false if it couldn't be created
-    bool CreateFrame(const wxString& title,
+    bool CreateFrame(const std::string& title,
                      const wxPoint& pos,
                      const wxSize& size);
 
     // create a new dialog using the given dialog template from resources,
     // return false if it couldn't be created
     bool CreateDialog(const void *dlgTemplate,
-                      const wxString& title,
+                      const std::string& title,
                       const wxPoint& pos,
                       const wxSize& size);
 

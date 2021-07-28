@@ -1234,12 +1234,12 @@ bool wxRichTextStyleComboPopup::Create( wxWindow* parent )
                                   borderStyle);
 }
 
-void wxRichTextStyleComboPopup::SetStringValue( const wxString& s )
+void wxRichTextStyleComboPopup::SetStringValue( const std::string& s )
 {
     m_value = SetStyleSelection(s);
 }
 
-wxString wxRichTextStyleComboPopup::GetStringValue() const
+std::string wxRichTextStyleComboPopup::GetStringValue() const
 {
     int sel = m_value;
     if (sel > -1)
@@ -1248,7 +1248,7 @@ wxString wxRichTextStyleComboPopup::GetStringValue() const
         if (def)
             return def->GetName();
     }
-    return wxEmptyString;
+    return "";
 }
 
 //

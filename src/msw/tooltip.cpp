@@ -358,7 +358,7 @@ void wxToolTip::RelayEvent(WXMSG *msg)
 // ctor & dtor
 // ----------------------------------------------------------------------------
 
-wxToolTip::wxToolTip(const wxString &tip)
+wxToolTip::wxToolTip(const std::string& tip)
          : m_text(tip)
 {
     // make sure m_rect.IsEmpty() == true
@@ -366,7 +366,7 @@ wxToolTip::wxToolTip(const wxString &tip)
     m_rect.SetHeight(0);
 }
 
-wxToolTip::wxToolTip(wxWindow* win, unsigned int id, const wxString &tip, const wxRect& rc)
+wxToolTip::wxToolTip(wxWindow* win, unsigned int id, const std::string& tip, const wxRect& rc)
          : m_text(tip), m_rect(rc), m_id(id)
 {
     SetWindow(win);

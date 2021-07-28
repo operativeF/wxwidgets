@@ -210,7 +210,7 @@ wxTipDialog::wxTipDialog(wxWindow *parent,
         text->SetFont(font);
     }
 
-    m_text = new wxTextCtrl(this, wxID_ANY, wxEmptyString,
+    m_text = new wxTextCtrl(this, wxID_ANY, "",
                             wxDefaultPosition, wxSize(200, 160),
                             wxTE_MULTILINE |
                             wxTE_READONLY |

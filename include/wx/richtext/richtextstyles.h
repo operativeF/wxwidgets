@@ -659,9 +659,9 @@ public:
 
     wxWindow *GetControl() override { return this; }
 
-    void SetStringValue( const wxString& s ) override;
+    void SetStringValue( const std::string& s ) override;
 
-    wxString GetStringValue() const override;
+    std::string GetStringValue() const override;
 
     /// Can we set the selection based on the editor caret position?
     // virtual bool CanAutoSetSelection() { return ((m_combo == NULL) || !m_combo->IsPopupShown()); }

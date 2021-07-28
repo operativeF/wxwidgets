@@ -23,9 +23,9 @@ public:
 
     bool Close() override;
 
-    void SetTitle(const wxString& title) override;
+    void SetTitle(const std::string& title) override;
 
-    void SetMessage(const wxString& message) override;
+    void SetMessage(const std::string& message) override;
 
     void SetParent(wxWindow *parent) override;
 
@@ -33,7 +33,7 @@ public:
 
     void SetIcon(const wxIcon& icon) override;
 
-    bool AddAction(wxWindowID actionid, const wxString &label) override;
+    bool AddAction(wxWindowID actionid, const std::string &label) override;
 
     // get/set the default timeout (used if Timeout_Auto is specified)
     static int GetDefaultTimeout() { return ms_timeout; }

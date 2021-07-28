@@ -42,7 +42,7 @@ public:
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                long style = 0,
-               const wxString& name = wxASCII_STR(wxVListBoxNameStr))
+               const std::string& name = wxVListBoxNameStr)
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -63,7 +63,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
-                const wxString& name = wxASCII_STR(wxVListBoxNameStr));
+                const std::string& name = wxVListBoxNameStr);
 
     ~wxVListBox() override;
 

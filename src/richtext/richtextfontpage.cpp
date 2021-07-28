@@ -145,7 +145,7 @@ void wxRichTextFontPage::CreateControls()
     wxStaticText* itemStaticText6 = new wxStaticText( itemRichTextDialogPage1, wxID_STATIC, _("&Font:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer5->Add(itemStaticText6, 0, wxALIGN_LEFT|wxLEFT|wxRIGHT|wxTOP, 5);
 
-    m_faceTextCtrl = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_FACETEXTCTRL, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+    m_faceTextCtrl = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_FACETEXTCTRL, "", wxDefaultPosition, wxDefaultSize, 0 );
     m_faceTextCtrl->SetHelpText(_("Type a font name."));
     if (wxRichTextFontPage::ShowToolTips())
         m_faceTextCtrl->SetToolTip(_("Type a font name."));
@@ -160,7 +160,7 @@ void wxRichTextFontPage::CreateControls()
     wxBoxSizer* itemBoxSizer10 = new wxBoxSizer(wxHORIZONTAL);
     itemBoxSizer8->Add(itemBoxSizer10, 0, wxGROW, 5);
 
-    m_sizeTextCtrl = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_SIZETEXTCTRL, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 0 );
+    m_sizeTextCtrl = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXTFONTPAGE_SIZETEXTCTRL, "", wxDefaultPosition, wxSize(50, -1), 0 );
     m_sizeTextCtrl->SetHelpText(_("Type a size in points."));
     if (wxRichTextFontPage::ShowToolTips())
         m_sizeTextCtrl->SetToolTip(_("Type a size in points."));

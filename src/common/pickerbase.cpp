@@ -61,7 +61,7 @@ bool wxPickerBase::CreateBase(wxWindow *parent,
         // NOTE: the style of this class (wxPickerBase) and the style of the
         //       attached text control are different: GetTextCtrlStyle() extracts
         //       the styles related to the textctrl from the styles passed here
-        m_text = new wxTextCtrl(this, wxID_ANY, wxEmptyString,
+        m_text = new wxTextCtrl(this, wxID_ANY, "",
                                 wxDefaultPosition, wxDefaultSize,
                                 GetTextCtrlStyle(style));
         if (!m_text)

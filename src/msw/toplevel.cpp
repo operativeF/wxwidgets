@@ -37,6 +37,8 @@
 
 #include "wx/display.h"
 
+#include "boost/nowide/convert.hpp"
+
 // NB: wxDlgProc must be defined here and not in dialog.cpp because the latter
 //     is not included by wxUniv build which does need wxDlgProc
 INT_PTR APIENTRY
@@ -306,7 +308,7 @@ WXLRESULT wxTopLevelWindowMSW::MSWWindowProc(WXUINT message, WXWPARAM wParam, WX
 }
 
 bool wxTopLevelWindowMSW::CreateDialog(const void *dlgTemplate,
-                                       const wxString& title,
+                                       const std::string& title,
                                        const wxPoint& pos,
                                        const wxSize& size)
 {
@@ -314,7 +316,7 @@ bool wxTopLevelWindowMSW::CreateDialog(const void *dlgTemplate,
     wxWindow * const
         parent = static_cast<wxDialog *>(this)->GetParentForModalDialog();
 
-    m_hWnd = (WXHWND)::CreateDialogIndirect
+    m_hWnd = (WXHWND)::CreateDialogIndirectW
                        (
                         wxGetInstance(),
                         static_cast<const DLGTEMPLATE*>(dlgTemplate),
@@ -341,7 +343,7 @@ bool wxTopLevelWindowMSW::CreateDialog(const void *dlgTemplate,
             wxIcon icon = winTop->GetIcon();
             if ( icon.IsOk() )
             {
-                ::SendMessage(GetHwnd(), WM_SETICON,
+                ::SendMessageW(GetHwnd(), WM_SETICON,
                               (WPARAM)TRUE,
                               (LPARAM)GetHiconOf(icon));
             }
@@ -350,7 +352,7 @@ bool wxTopLevelWindowMSW::CreateDialog(const void *dlgTemplate,
 
     if ( !title.empty() )
     {
-        ::SetWindowText(GetHwnd(), title.t_str());
+        ::SetWindowTextW(GetHwnd(), boost::nowide::widen(title).c_str());
     }
 
     SubclassWin(m_hWnd);
@@ -377,7 +379,7 @@ bool wxTopLevelWindowMSW::CreateDialog(const void *dlgTemplate,
     return true;
 }
 
-bool wxTopLevelWindowMSW::CreateFrame(const wxString& title,
+bool wxTopLevelWindowMSW::CreateFrame(const std::string& title,
                                       const wxPoint& pos,
                                       const wxSize& size)
 {
@@ -389,12 +391,12 @@ bool wxTopLevelWindowMSW::CreateFrame(const wxString& title,
     if ( wxApp::MSWGetDefaultLayout(m_parent) == wxLayoutDirection::RightToLeft )
         exflags |= WS_EX_LAYOUTRTL;
 
-    return MSWCreate(GetMSWClassName(GetWindowStyle()), title.t_str(), pos, sz, flags, exflags);
+    return MSWCreate(GetMSWClassName(GetWindowStyle()), boost::nowide::widen(title).c_str(), pos, sz, flags, exflags);
 }
 
 bool wxTopLevelWindowMSW::Create(wxWindow *parent,
                                  wxWindowID id,
-                                 const wxString& title,
+                                 const std::string& title,
                                  const wxPoint& pos,
                                  const wxSize& size,
                                  long style,
@@ -1321,7 +1323,7 @@ void wxTLWHiddenParentModule::OnExit()
 
     if ( ms_className )
     {
-        if ( !::UnregisterClass(ms_className, wxGetInstance()) )
+        if ( !::UnregisterClassW(ms_className, wxGetInstance()) )
         {
             wxLogLastError(wxT("UnregisterClass(\"wxTLWHiddenParent\")"));
         }
@@ -1337,7 +1339,7 @@ HWND wxTLWHiddenParentModule::GetHWND()
     {
         if ( !ms_className )
         {
-            static constexpr wxChar HIDDEN_PARENT_CLASS[] = wxT("wxTLWHiddenParent");
+            static constexpr wchar_t HIDDEN_PARENT_CLASS[] = L"wxTLWHiddenParent";
 
             WNDCLASS wndclass;
             wxZeroMemory(wndclass);
@@ -1346,7 +1348,7 @@ HWND wxTLWHiddenParentModule::GetHWND()
             wndclass.hInstance     = wxGetInstance();
             wndclass.lpszClassName = HIDDEN_PARENT_CLASS;
 
-            if ( !::RegisterClass(&wndclass) )
+            if ( !::RegisterClassW(&wndclass) )
             {
                 wxLogLastError(wxT("RegisterClass(\"wxTLWHiddenParent\")"));
             }
@@ -1356,7 +1358,7 @@ HWND wxTLWHiddenParentModule::GetHWND()
             }
         }
 
-        ms_hwnd = ::CreateWindow(ms_className, wxEmptyString, 0, 0, 0, 0, 0, nullptr,
+        ms_hwnd = ::CreateWindowW(ms_className, L"", 0, 0, 0, 0, 0, nullptr,
                                  (HMENU)nullptr, wxGetInstance(), nullptr);
         if ( !ms_hwnd )
         {

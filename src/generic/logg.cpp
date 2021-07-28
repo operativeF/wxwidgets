@@ -484,7 +484,7 @@ wxLogFrame::wxLogFrame(wxWindow *pParent, wxLogWindow *log, const wxString& szTi
           : wxFrame(pParent, wxID_ANY, szTitle),
             m_log(log)
 {
-    m_pTextCtrl = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition,
+    m_pTextCtrl = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition,
             wxDefaultSize,
             wxTE_MULTILINE  |
             wxHSCROLL       |
@@ -787,10 +787,10 @@ void wxLogDialog::CreateDetailsControls(wxWindow *parent)
 
     // no need to translate these strings as they're not shown to the
     // user anyhow (we use wxLC_NO_HEADER style)
-    m_listctrl->InsertColumn(0, wxT("Message"));
+    m_listctrl->InsertColumn(0, "Message");
 
     if (hasTimeStamp)
-        m_listctrl->InsertColumn(1, wxT("Time"));
+        m_listctrl->InsertColumn(1, "Time");
 
     // prepare the imagelist
     static constexpr int ICON_SIZE = 16;
@@ -898,7 +898,7 @@ void wxLogDialog::OnListItemActivated(wxListEvent& event)
 
     // wxMessageBox will nicely handle the '\n' in the string (if any)
     // and supports long strings
-    wxMessageBox(str, wxT("Log message"), wxOK, this);
+    wxMessageBox(str, "Log message", wxOK, this);
 }
 
 void wxLogDialog::OnOk(wxCommandEvent& WXUNUSED(event))

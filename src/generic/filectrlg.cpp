@@ -732,7 +732,7 @@ void wxFileListCtrl::OnListEndLabelEdit( wxListEvent &event )
     if ((event.GetLabel().empty()) ||
         (event.GetLabel() == wxT(".")) ||
         (event.GetLabel() == wxT("..")) ||
-        (event.GetLabel().First( wxFILE_SEP_PATH ) != wxNOT_FOUND))
+        (event.GetLabel().find( wxFILE_SEP_PATH ) != std::string::npos))
     {
         wxMessageDialog dialog(this, _("Illegal directory name."), _("Error"), wxOK | wxICON_ERROR );
         dialog.ShowModal();
@@ -935,7 +935,7 @@ bool wxGenericFileCtrl::Create( wxWindow *parent,
                                  wxDefaultPosition, wxSize( 400, 140 ),
                                  style2 );
 
-    m_text = new wxTextCtrl( this, ID_TEXT, wxEmptyString,
+    m_text = new wxTextCtrl( this, ID_TEXT, "",
                              wxDefaultPosition, wxDefaultSize,
                              wxTE_PROCESS_ENTER );
     m_choice = new wxChoice( this, ID_CHOICE, wxDefaultPosition, wxDefaultSize );

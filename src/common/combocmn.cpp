@@ -70,9 +70,9 @@ wxEVENT_PROPERTY( TextEnter, wxEVT_TEXT_ENTER, wxCommandEvent )
 // TODO DELEGATES
 wxPROPERTY( Font, wxFont, SetFont, GetFont, wxEMPTY_PARAMETER_VALUE, \
            0 /*flags*/, wxT("Helpstring"), wxT("group"))
-wxPROPERTY_COLLECTION( Choices, wxArrayString, wxString, AppendString, \
+wxPROPERTY_COLLECTION( Choices, wxArrayString, std::string, AppendString, \
                       GetStrings, 0 /*flags*/, wxT("Helpstring"), wxT("group"))
-wxPROPERTY( Value,wxString, SetValue, GetValue, wxEMPTY_PARAMETER_VALUE, \
+wxPROPERTY( Value,std::string, SetValue, GetValue, wxEMPTY_PARAMETER_VALUE, \
            0 /*flags*/, wxT("Helpstring"), wxT("group"))
 wxPROPERTY( Selection,int, SetSelection, GetSelection, wxEMPTY_PARAMETER_VALUE, \
            0 /*flags*/, wxT("Helpstring"), wxT("group"))
@@ -85,7 +85,7 @@ wxEND_PROPERTIES_TABLE()
 wxEMPTY_HANDLERS_TABLE(wxComboBox)
 
 wxCONSTRUCTOR_5( wxComboBox, wxWindow*, Parent, wxWindowID, Id, \
-                wxString, Value, wxPoint, Position, wxSize, Size )
+                std::string, Value, wxPoint, Position, wxSize, Size )
 
 #endif // wxUSE_COMBOBOX
 
@@ -640,7 +640,7 @@ void wxComboPopup::OnComboDoubleClick()
 {
 }
 
-void wxComboPopup::SetStringValue( const wxString& WXUNUSED(value) )
+void wxComboPopup::SetStringValue( const std::string& WXUNUSED(value) )
 {
 }
 
@@ -953,7 +953,7 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxComboCtrlBase, wxControl);
 
 bool wxComboCtrlBase::Create(wxWindow *parent,
                              wxWindowID id,
-                             const wxString& value,
+                             const std::string& value,
                              const wxPoint& pos,
                              const wxSize& size,
                              long style,
@@ -1310,9 +1310,9 @@ wxSize wxComboCtrlBase::DoGetSizeFromTextSize(int xlen, int ylen) const
 #elif defined(__WXGTK__) && !defined(__WXUNIVERSAL__)
     // Control creation is not entirely cheap, so cache the heights to
     // avoid repeatedly creating dummy controls:
-    static wxString s_last_font;
+    static std::string s_last_font;
     static int s_last_fhei = -1;
-    wxString fontdesc;
+    std::string fontdesc;
     if ( m_font.IsOk() )
         fontdesc = m_font.GetNativeFontInfoDesc();
     if ( s_last_fhei != -1 && fontdesc == s_last_font )
@@ -1463,7 +1463,7 @@ void wxComboCtrlBase::DoSetToolTip(wxToolTip *tooltip)
     // Set tool tip for button and text box
     if ( tooltip )
     {
-        const wxString &tip = tooltip->GetTip();
+        const std::string &tip = tooltip->GetTip();
         if ( m_text ) m_text->SetToolTip(tip);
         if ( m_btn ) m_btn->SetToolTip(tip);
     }
@@ -2660,7 +2660,7 @@ std::string wxComboCtrlBase::DoGetValue() const
     return m_valueString;
 }
 
-void wxComboCtrlBase::SetValueWithEvent(const wxString& value,
+void wxComboCtrlBase::SetValueWithEvent(const std::string& value,
                                         bool withEvent)
 {
     DoSetValue(value, withEvent ? SetValue_SendEvent : 0);
@@ -2700,7 +2700,7 @@ void wxComboCtrlBase::OnSetValue(const std::string& value)
     Refresh();
 }
 
-void wxComboCtrlBase::SetValueByUser(const wxString& value)
+void wxComboCtrlBase::SetValueByUser(const std::string& value)
 {
     // NB: Order of function calls is important here. Otherwise
     //     the SelectAll() may not work.
@@ -2717,7 +2717,7 @@ void wxComboCtrlBase::SetValueByUser(const wxString& value)
 }
 
 // In this SetValue variant wxComboPopup::SetStringValue is not called
-void wxComboCtrlBase::SetText(const wxString& value)
+void wxComboCtrlBase::SetText(const std::string& value)
 {
     // Unlike in SetValue(), this must be called here or
     // the behaviour will no be consistent in readonlys.

@@ -15,8 +15,8 @@
 class wxToastNotificationHelper
 {
 public:
-    static bool UseToasts(const wxString& shortcutPath,
-        const wxString& appId);
+    static bool UseToasts(const std::string& shortcutPath,
+        const std::string& appId);
 
     static bool IsEnabled();
 

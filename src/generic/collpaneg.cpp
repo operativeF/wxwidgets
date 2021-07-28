@@ -80,7 +80,7 @@ bool wxGenericCollapsiblePane::Create(wxWindow *parent,
 
     // do not set sz as our sizers since we handle the pane window without using sizers
     m_pPane = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize,
-                          wxTAB_TRAVERSAL|wxNO_BORDER, wxT("wxCollapsiblePanePane") );
+                          wxTAB_TRAVERSAL|wxNO_BORDER, "wxCollapsiblePanePane");
 
     // start as collapsed:
     m_pPane->Hide();

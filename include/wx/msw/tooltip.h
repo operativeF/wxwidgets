@@ -20,7 +20,7 @@ class wxToolTipOtherWindows;
 class WXDLLIMPEXP_CORE wxToolTip
 {
 public:
-    wxToolTip(const wxString &tip);
+    wxToolTip(const std::string& tip);
     ~wxToolTip();
 
     wxToolTip(const wxToolTip&) = delete;
@@ -31,7 +31,7 @@ public:
     // ctor used by wxStatusBar to associate a tooltip to a portion of
     // the status bar window:
     wxToolTip(wxWindow* win, unsigned int id,
-              const wxString &tip, const wxRect& rc);
+              const std::string& tip, const wxRect& rc);
 
     // tip text
     void SetTip(const std::string& tip);

@@ -77,6 +77,8 @@
 
 #include "wx/msw/missing.h"
 
+#include "boost/nowide/convert.hpp"
+
 #ifndef CFM_BACKCOLOR
     #define CFM_BACKCOLOR 0x04000000
 #endif
@@ -358,12 +360,12 @@ wxTextCtrl::~wxTextCtrl()
 
 bool wxTextCtrl::Create(wxWindow *parent,
                         wxWindowID id,
-                        const wxString& value,
+                        const std::string& value,
                         const wxPoint& pos,
                         const wxSize& size,
                         long style,
                         const wxValidator& validator,
-                        const wxString& name)
+                        const std::string& name)
 {
     // base initialization
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
@@ -396,7 +398,7 @@ bool wxTextCtrl::CanApplyThemeBorder() const
     return ((GetWindowStyle() & (wxTE_RICH|wxTE_RICH2)) != 0);
 }
 
-bool wxTextCtrl::MSWCreateText(const wxString& value,
+bool wxTextCtrl::MSWCreateText(const std::string& value,
                                const wxPoint& pos,
                                const wxSize& size)
 {
@@ -404,7 +406,7 @@ bool wxTextCtrl::MSWCreateText(const wxString& value,
     WXDWORD msStyle = MSWGetCreateWindowFlags();
 
     // do create the control - either an EDIT or RICHEDIT
-    wxString windowClass = wxT("EDIT");
+    std::wstring windowClass = L"EDIT";
 
 #if wxUSE_RICHEDIT
     if ( m_windowStyle & wxTE_AUTO_URL )
@@ -464,14 +466,13 @@ bool wxTextCtrl::MSWCreateText(const wxString& value,
                 if ( wxRichEditModule::Load(wxRichEditModule::Version_41) )
                 {
                     // yes, class name for version 4.1 really is 5.0
-                    windowClass = wxT("RICHEDIT50W");
+                    windowClass = L"RICHEDIT50W";
 
                     m_verRichEdit = 4;
                 }
                 else if ( wxRichEditModule::Load(wxRichEditModule::Version_2or3) )
                 {
-                    windowClass = wxT("RichEdit20")
-                                wxT("W");
+                    windowClass = L"RichEdit20W";
                 }
                 else // failed to load msftedit.dll and riched20.dll
                 {
@@ -483,7 +484,7 @@ bool wxTextCtrl::MSWCreateText(const wxString& value,
             {
                 if ( wxRichEditModule::Load(wxRichEditModule::Version_1) )
                 {
-                    windowClass = wxT("RICHEDIT");
+                    windowClass = L"RICHEDIT";
                 }
                 else // failed to load any richedit control DLL
                 {
@@ -523,7 +524,7 @@ bool wxTextCtrl::MSWCreateText(const wxString& value,
     // implementation detail
     m_updatesCount = -2;
 
-    if ( !MSWCreateControl(windowClass.t_str(), msStyle, pos, size, valueWin) )
+    if ( !MSWCreateControl(windowClass.c_str(), msStyle, pos, size, valueWin) )
         return false;
 
     m_updatesCount = -1;
@@ -568,17 +569,17 @@ bool wxTextCtrl::MSWCreateText(const wxString& value,
         {
             mask |= ENM_LINK;
 
-            ::SendMessage(GetHwnd(), EM_AUTOURLDETECT, TRUE, 0);
+            ::SendMessageW(GetHwnd(), EM_AUTOURLDETECT, TRUE, 0);
         }
 
-        ::SendMessage(GetHwnd(), EM_SETEVENTMASK, 0, mask);
+        ::SendMessageW(GetHwnd(), EM_SETEVENTMASK, 0, mask);
 
         bool contextMenuConnected = false;
 #if wxUSE_OLE
         if ( m_verRichEdit >= 4 )
         {
             wxTextCtrlOleCallback *cb = new wxTextCtrlOleCallback(this);
-            if ( ::SendMessage(GetHwnd(), EM_SETOLECALLBACK, 0, (LPARAM)cb) )
+            if ( ::SendMessageW(GetHwnd(), EM_SETOLECALLBACK, 0, (LPARAM)cb) )
             {
                 // If we succeeded in setting up the callback, we don't need to
                 // connect to wxEVT_CONTEXT_MENU to show the menu ourselves,
@@ -648,7 +649,7 @@ bool wxTextCtrl::MSWCreateText(const wxString& value,
             lParam = MAKELPARAM(EC_USEFONTINFO, EC_USEFONTINFO);
         }
 
-        ::SendMessage(GetHwnd(), EM_SETMARGINS, wParam, lParam);
+        ::SendMessageW(GetHwnd(), EM_SETMARGINS, wParam, lParam);
     }
 
 #if wxUSE_RICHEDIT && wxUSE_OLE && defined(wxHAS_TOM_H)
@@ -661,7 +662,7 @@ bool wxTextCtrl::MSWCreateText(const wxString& value,
     if ( GetRichVersion() >= 4 )
     {
         wxCOMPtr<IRichEditOle> pRichEditOle;
-        if ( SendMessage(GetHwnd(), EM_GETOLEINTERFACE,
+        if ( SendMessageW(GetHwnd(), EM_GETOLEINTERFACE,
                          0, (LPARAM)&pRichEditOle) && pRichEditOle )
         {
             wxCOMPtr<ITextDocument> pDoc;
@@ -997,10 +998,10 @@ void wxTextCtrl::WriteText(const std::string& value)
     DoWriteText(value);
 }
 
-void wxTextCtrl::DoWriteText(const wxString& value, int flags)
+void wxTextCtrl::DoWriteText(const std::string& value, int flags)
 {
     bool selectionOnly = (flags & SetValue_SelectionOnly) != 0;
-    wxString valueDos;
+    std::string valueDos;
     if ( m_windowStyle & wxTE_MULTILINE )
         valueDos = wxTextFile::Translate(value, wxTextFileType_Dos);
     else
@@ -1040,9 +1041,9 @@ void wxTextCtrl::DoWriteText(const wxString& value, int flags)
         // and also signal us whether it did it by resetting it to 0.
         gs_lenOfInsertedText.push(valueDos.length());
 
-        ::SendMessage(GetHwnd(), selectionOnly ? EM_REPLACESEL : WM_SETTEXT,
+        ::SendMessageW(GetHwnd(), selectionOnly ? EM_REPLACESEL : WM_SETTEXT,
                       // EM_REPLACESEL takes 1 to indicate the operation should be redoable
-                      selectionOnly ? 1 : 0, wxMSW_CONV_LPARAM(valueDos));
+                      selectionOnly ? 1 : 0, reinterpret_cast<LPARAM>(boost::nowide::widen(valueDos).c_str()));
 
         const int lenActuallyInserted = gs_lenOfInsertedText.top();
         gs_lenOfInsertedText.pop();
@@ -1056,8 +1057,8 @@ void wxTextCtrl::DoWriteText(const wxString& value, int flags)
             if ( selectionOnly )
                 Undo();
 
-            ::SendMessage(GetHwnd(), selectionOnly ? EM_REPLACESEL : WM_SETTEXT,
-                          selectionOnly ? 1 : 0, wxMSW_CONV_LPARAM(valueDos));
+            ::SendMessageW(GetHwnd(), selectionOnly ? EM_REPLACESEL : WM_SETTEXT,
+                          selectionOnly ? 1 : 0, reinterpret_cast<LPARAM>(boost::nowide::widen(valueDos).c_str()));
         }
 
         if ( !ucf.GotUpdate() && (flags & SetValue_SendEvent) )

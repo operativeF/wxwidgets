@@ -79,8 +79,8 @@ public:
     [[maybe_unused]] bool Create(wxWindow* parent) override;
     void SetFocus() override;
     wxWindow *GetControl() override { return this; }
-    void SetStringValue( const wxString& value ) override;
-    wxString GetStringValue() const override;
+    void SetStringValue( const std::string& value ) override;
+    std::string GetStringValue() const override;
 
     // more customization
     void OnPopup() override;
@@ -101,7 +101,7 @@ public:
     void Delete( unsigned int item );
     void SetItemClientData(unsigned int n, void* clientData, wxClientDataType clientDataItemsType);
     void *GetItemClientData(unsigned int n) const;
-    void SetString( int item, const wxString& str );
+    void SetString( int item, const std::string& str );
     wxString GetString( int item ) const;
     unsigned int GetCount() const;
     int FindString(std::string_view s, bool bCase = false) const;

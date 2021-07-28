@@ -434,7 +434,7 @@ void wxSymbolPickerDialog::CreateControls()
     wxStaticText* itemStaticText15 = new wxStaticText( itemDialog1, wxID_STATIC, _("&Character code:"), wxDefaultPosition, wxDefaultSize, 0 );
     itemBoxSizer12->Add(itemStaticText15, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5);
 
-    m_characterCodeCtrl = new wxTextCtrl( itemDialog1, ID_SYMBOLPICKERDIALOG_CHARACTERCODE, wxEmptyString, wxDefaultPosition, wxSize(140, -1), wxTE_READONLY|wxTE_CENTRE );
+    m_characterCodeCtrl = new wxTextCtrl( itemDialog1, ID_SYMBOLPICKERDIALOG_CHARACTERCODE, "", wxDefaultPosition, wxSize(140, -1), wxTE_READONLY|wxTE_CENTRE );
     m_characterCodeCtrl->SetHelpText(_("The character code."));
     if (wxSymbolPickerDialog::ShowToolTips())
         m_characterCodeCtrl->SetToolTip(_("The character code."));

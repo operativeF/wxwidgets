@@ -85,7 +85,7 @@ bool wxPanelBase::Create(wxWindow *parent, wxWindowID id,
                          const wxPoint& pos,
                          const wxSize& size,
                          long style,
-                         const wxString& name)
+                         const std::string& name)
 {
     if ( !wxWindow::Create(parent, id, pos, size, style, name) )
         return false;

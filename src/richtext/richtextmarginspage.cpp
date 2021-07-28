@@ -190,7 +190,7 @@ void wxRichTextMarginsPage::CreateControls()
     wxBoxSizer* itemBoxSizer11 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer9->Add(itemBoxSizer11, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_marginLeft = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_LEFT_MARGIN, wxEmptyString, wxDefaultPosition, wxSize(65, -1), 0 );
+    m_marginLeft = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_LEFT_MARGIN, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_marginLeft->SetHelpText(_("The left margin size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_marginLeft->SetToolTip(_("The left margin size."));
@@ -215,7 +215,7 @@ void wxRichTextMarginsPage::CreateControls()
     wxBoxSizer* itemBoxSizer16 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer9->Add(itemBoxSizer16, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_marginRight = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_RIGHT_MARGIN, wxEmptyString, wxDefaultPosition, wxSize(65, -1), 0 );
+    m_marginRight = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_RIGHT_MARGIN, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_marginRight->SetHelpText(_("The right margin size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_marginRight->SetToolTip(_("The right margin size."));
@@ -238,7 +238,7 @@ void wxRichTextMarginsPage::CreateControls()
     wxBoxSizer* itemBoxSizer20 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer9->Add(itemBoxSizer20, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_marginTop = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_TOP_MARGIN, wxEmptyString, wxDefaultPosition, wxSize(65, -1), 0 );
+    m_marginTop = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_TOP_MARGIN, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_marginTop->SetHelpText(_("The top margin size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_marginTop->SetToolTip(_("The top margin size."));
@@ -263,7 +263,7 @@ void wxRichTextMarginsPage::CreateControls()
     wxBoxSizer* itemBoxSizer25 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer9->Add(itemBoxSizer25, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_marginBottom = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_BOTTOM_MARGIN, wxEmptyString, wxDefaultPosition, wxSize(65, -1), 0 );
+    m_marginBottom = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_BOTTOM_MARGIN, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_marginBottom->SetHelpText(_("The bottom margin size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_marginBottom->SetToolTip(_("The bottom margin size."));
@@ -304,7 +304,7 @@ void wxRichTextMarginsPage::CreateControls()
     wxBoxSizer* itemBoxSizer35 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer33->Add(itemBoxSizer35, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_paddingLeft = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_LEFT_PADDING, wxEmptyString, wxDefaultPosition, wxSize(65, -1), 0 );
+    m_paddingLeft = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_LEFT_PADDING, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_paddingLeft->SetHelpText(_("The left padding size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_paddingLeft->SetToolTip(_("The left padding size."));
@@ -329,7 +329,7 @@ void wxRichTextMarginsPage::CreateControls()
     wxBoxSizer* itemBoxSizer40 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer33->Add(itemBoxSizer40, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_paddingRight = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_RIGHT_PADDING, wxEmptyString, wxDefaultPosition, wxSize(65, -1), 0 );
+    m_paddingRight = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_RIGHT_PADDING, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_paddingRight->SetHelpText(_("The right padding size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_paddingRight->SetToolTip(_("The right padding size."));
@@ -352,7 +352,7 @@ void wxRichTextMarginsPage::CreateControls()
     wxBoxSizer* itemBoxSizer44 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer33->Add(itemBoxSizer44, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_paddingTop = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_TOP_PADDING, wxEmptyString, wxDefaultPosition, wxSize(65, -1), 0 );
+    m_paddingTop = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_TOP_PADDING, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_paddingTop->SetHelpText(_("The top padding size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_paddingTop->SetToolTip(_("The top padding size."));
@@ -377,7 +377,7 @@ void wxRichTextMarginsPage::CreateControls()
     wxBoxSizer* itemBoxSizer49 = new wxBoxSizer(wxHORIZONTAL);
     itemFlexGridSizer33->Add(itemBoxSizer49, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_paddingBottom = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_BOTTOM_PADDING, wxEmptyString, wxDefaultPosition, wxSize(65, -1), 0 );
+    m_paddingBottom = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_BOTTOM_PADDING, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_paddingBottom->SetHelpText(_("The bottom padding size."));
     if (wxRichTextMarginsPage::ShowToolTips())
         m_paddingBottom->SetToolTip(_("The bottom padding size."));

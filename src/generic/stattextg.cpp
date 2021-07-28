@@ -29,11 +29,11 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxGenericStaticText, wxStaticTextBase);
 
 bool wxGenericStaticText::Create(wxWindow *parent,
                                  wxWindowID id,
-                                 const wxString &label,
+                                 const std::string &label,
                                  const wxPoint &pos,
                                  const wxSize &size,
                                  long style,
-                                 const wxString &name)
+                                 const std::string &name)
 {
     if ( !wxControl::Create(parent, id, pos, size, style,
                             wxDefaultValidator, name) )
@@ -119,7 +119,7 @@ void wxGenericStaticText::WXSetVisibleLabel(const std::string& label)
 
 #if wxUSE_MARKUP
 
-bool wxGenericStaticText::DoSetLabelMarkup(const wxString& markup)
+bool wxGenericStaticText::DoSetLabelMarkup(const std::string& markup)
 {
     if ( !wxStaticTextBase::DoSetLabelMarkup(markup) )
         return false;

@@ -19,12 +19,12 @@ public:
 
     wxTextCtrl() = default;
     wxTextCtrl(wxWindow *parent, wxWindowID id,
-               const wxString& value = wxEmptyString,
+               const std::string& value = "",
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                long style = 0,
                const wxValidator& validator = wxDefaultValidator,
-               const wxString& name = wxASCII_STR(wxTextCtrlNameStr))
+               const std::string& name = wxTextCtrlNameStr)
     {
         Create(parent, id, value, pos, size, style, validator, name);
     }
@@ -37,12 +37,12 @@ public:
     wxTextCtrl& operator=(wxTextCtrl&&) = default;
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
-                const wxString& value = wxEmptyString,
+                const std::string& value = "",
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxTextCtrlNameStr));
+                const std::string& name = wxTextCtrlNameStr);
 
     // overridden wxTextEntry methods
     // ------------------------------
@@ -203,7 +203,7 @@ protected:
     //
     // this is used by ctor/Create() and when we need to recreate the control
     // later
-    bool MSWCreateText(const wxString& value,
+    bool MSWCreateText(const std::string& value,
                        const wxPoint& pos,
                        const wxSize& size);
 
@@ -217,7 +217,7 @@ protected:
 
     // replace the contents of the selection or of the entire control with the
     // given text
-    void DoWriteText(const wxString& text,
+    void DoWriteText(const std::string& text,
                      int flags = SetValue_SendEvent | SetValue_SelectionOnly);
 
     // set the selection (possibly without scrolling the caret into view)

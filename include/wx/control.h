@@ -91,7 +91,7 @@ public:
     //
     // Returns true if the label was set, even if the markup in it was ignored.
     // False is only returned if we failed to parse the label.
-    bool SetLabelMarkup(const wxString& markup)
+    bool SetLabelMarkup(const std::string& markup)
     {
         return DoSetLabelMarkup(markup);
     }
@@ -179,7 +179,7 @@ protected:
     // This function may be overridden in the derived classes to implement
     // support for labels with markup. The base class version simply strips the
     // markup and calls SetLabel() with the remaining text.
-    virtual bool DoSetLabelMarkup(const wxString& markup);
+    virtual bool DoSetLabelMarkup(const std::string& markup);
 #endif // wxUSE_MARKUP
 
     // override this to return the total control's size from a string size
@@ -191,7 +191,7 @@ protected:
 #if wxUSE_MARKUP
     // Remove markup from the given string, returns empty string on error i.e.
     // if markup was syntactically invalid.
-    static wxString RemoveMarkup(const wxString& markup);
+    static std::string RemoveMarkup(const std::string& markup);
 #endif // wxUSE_MARKUP
 
 

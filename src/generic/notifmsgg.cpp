@@ -55,13 +55,13 @@ public:
 
     bool Hide();
 
-    void SetMessageTitle(const wxString& title);
+    void SetMessageTitle(const std::string& title);
 
-    void SetMessage(const wxString& message);
+    void SetMessage(const std::string& message);
 
     void SetMessageIcon(const wxIcon& icon);
 
-    bool AddAction(wxWindowID actionid, const wxString &label);
+    bool AddAction(wxWindowID actionid, const std::string &label);
 
 private:
     void OnClose(wxCloseEvent& event);
@@ -181,13 +181,13 @@ void wxNotificationMessageWindow::PrepareNotificationControl(wxWindow* ctrl, boo
         ctrl->Bind(wxEVT_LEFT_DOWN, &wxNotificationMessageWindow::OnNotificationClicked, this);
 }
 
-void wxNotificationMessageWindow::SetMessageTitle(const wxString& title)
+void wxNotificationMessageWindow::SetMessageTitle(const std::string& title)
 {
     m_messageTitle->SetLabelText(title);
     m_messageTitle->Show(!title.empty());
 }
 
-void wxNotificationMessageWindow::SetMessage(const wxString& message)
+void wxNotificationMessageWindow::SetMessage(const std::string& message)
 {
     m_messageText->SetLabelText(message);
     m_messageText->Show(!message.empty());
@@ -199,7 +199,7 @@ void wxNotificationMessageWindow::SetMessageIcon(const wxIcon& icon)
     m_messageBmp->Show(icon.IsOk());
 }
 
-bool wxNotificationMessageWindow::AddAction(wxWindowID actionid, const wxString &label)
+bool wxNotificationMessageWindow::AddAction(wxWindowID actionid, const std::string &label)
 {
     wxSizer* msgSizer = m_messagePanel->GetSizer();
     if ( m_buttonSizer == nullptr )
@@ -477,12 +477,12 @@ bool wxGenericNotificationMessageImpl::Close()
     return true;
 }
 
-void wxGenericNotificationMessageImpl::SetTitle(const wxString& title)
+void wxGenericNotificationMessageImpl::SetTitle(const std::string& title)
 {
     m_window->SetMessageTitle(title);
 }
 
-void wxGenericNotificationMessageImpl::SetMessage(const wxString& message)
+void wxGenericNotificationMessageImpl::SetMessage(const std::string& message)
 {
     m_window->SetMessage(message);
 }
@@ -502,7 +502,7 @@ void wxGenericNotificationMessageImpl::SetIcon(const wxIcon& icon)
     m_window->SetMessageIcon(icon);
 }
 
-bool wxGenericNotificationMessageImpl::AddAction(wxWindowID actionid, const wxString &label)
+bool wxGenericNotificationMessageImpl::AddAction(wxWindowID actionid, const std::string &label)
 {
     return m_window->AddAction(actionid, label);
 }

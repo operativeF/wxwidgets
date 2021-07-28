@@ -669,13 +669,13 @@ wxString wxVListBoxComboPopup::GetString( int item ) const
     return m_strings[item];
 }
 
-void wxVListBoxComboPopup::SetString( int item, const wxString& str )
+void wxVListBoxComboPopup::SetString( int item, const std::string& str )
 {
     m_strings[item] = str;
     ItemWidthChanged(item);
 }
 
-wxString wxVListBoxComboPopup::GetStringValue() const
+std::string wxVListBoxComboPopup::GetStringValue() const
 {
     return m_stringValue;
 }
@@ -701,7 +701,7 @@ int wxVListBoxComboPopup::GetSelection() const
     return m_value;
 }
 
-void wxVListBoxComboPopup::SetStringValue( const wxString& value )
+void wxVListBoxComboPopup::SetStringValue( const std::string& value )
 {
     const auto index = std::find(m_strings.cbegin(), m_strings.cend(), value);
 

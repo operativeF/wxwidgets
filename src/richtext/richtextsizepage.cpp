@@ -318,7 +318,7 @@ void wxRichTextSizePage::CreateControls()
     wxBoxSizer* itemBoxSizer33 = new wxBoxSizer(wxHORIZONTAL);
     m_sizeSizer->Add(itemBoxSizer33, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_width = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_WIDTH, wxEmptyString, wxDefaultPosition, wxSize(60, -1), 0 );
+    m_width = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_WIDTH, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_width->SetHelpText(_("The object width."));
     if (wxRichTextSizePage::ShowToolTips())
         m_width->SetToolTip(_("The object width."));
@@ -352,7 +352,7 @@ void wxRichTextSizePage::CreateControls()
     wxBoxSizer* itemBoxSizer39 = new wxBoxSizer(wxHORIZONTAL);
     m_sizeSizer->Add(itemBoxSizer39, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_height = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_HEIGHT, wxEmptyString, wxDefaultPosition, wxSize(60, -1), 0 );
+    m_height = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_HEIGHT, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_height->SetHelpText(_("The object height."));
     if (wxRichTextSizePage::ShowToolTips())
         m_height->SetToolTip(_("The object height."));
@@ -379,7 +379,7 @@ void wxRichTextSizePage::CreateControls()
     m_minWidthSizer = new wxBoxSizer(wxHORIZONTAL);
     m_sizeSizer->Add(m_minWidthSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_minWidth = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_MIN_WIDTH, wxEmptyString, wxDefaultPosition, wxSize(60, -1), 0 );
+    m_minWidth = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_MIN_WIDTH, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_minWidth->SetHelpText(_("The object minimum width."));
     if (wxRichTextSizePage::ShowToolTips())
         m_minWidth->SetToolTip(_("The object minimum width."));
@@ -406,7 +406,7 @@ void wxRichTextSizePage::CreateControls()
     m_minHeightSizer = new wxBoxSizer(wxHORIZONTAL);
     m_sizeSizer->Add(m_minHeightSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_minHeight = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_MIN_HEIGHT, wxEmptyString, wxDefaultPosition, wxSize(60, -1), 0 );
+    m_minHeight = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_MIN_HEIGHT, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_minHeight->SetHelpText(_("The object minimum height."));
     if (wxRichTextSizePage::ShowToolTips())
         m_minHeight->SetToolTip(_("The object minimum height."));
@@ -433,7 +433,7 @@ void wxRichTextSizePage::CreateControls()
     m_maxWidthSizer = new wxBoxSizer(wxHORIZONTAL);
     m_sizeSizer->Add(m_maxWidthSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_maxWidth = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_MAX_WIDTH, wxEmptyString, wxDefaultPosition, wxSize(60, -1), 0 );
+    m_maxWidth = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_MAX_WIDTH, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_maxWidth->SetHelpText(_("The object maximum width."));
     if (wxRichTextSizePage::ShowToolTips())
         m_maxWidth->SetToolTip(_("The object maximum width."));
@@ -460,7 +460,7 @@ void wxRichTextSizePage::CreateControls()
     m_maxHeightSizer = new wxBoxSizer(wxHORIZONTAL);
     m_sizeSizer->Add(m_maxHeightSizer, 0, wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_maxHeight = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_MAX_HEIGHT, wxEmptyString, wxDefaultPosition, wxSize(60, -1), 0 );
+    m_maxHeight = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_MAX_HEIGHT, "", wxDefaultPosition, wxSize(60, -1), 0 );
     m_maxHeight->SetHelpText(_("The object maximum height."));
     if (wxRichTextSizePage::ShowToolTips())
         m_maxHeight->SetToolTip(_("The object maximum height."));
@@ -533,7 +533,7 @@ void wxRichTextSizePage::CreateControls()
     wxBoxSizer* itemBoxSizer72 = new wxBoxSizer(wxHORIZONTAL);
     m_positionGridSizer->Add(itemBoxSizer72, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_left = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_LEFT, wxEmptyString, wxDefaultPosition, wxSize(65, -1), 0 );
+    m_left = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_LEFT, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_left->SetMaxLength(10);
     m_left->SetHelpText(_("The left position."));
     if (wxRichTextSizePage::ShowToolTips())
@@ -568,7 +568,7 @@ void wxRichTextSizePage::CreateControls()
     wxBoxSizer* itemBoxSizer78 = new wxBoxSizer(wxHORIZONTAL);
     m_positionGridSizer->Add(itemBoxSizer78, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_top = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_TOP, wxEmptyString, wxDefaultPosition, wxSize(65, -1), 0 );
+    m_top = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_TOP, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_top->SetMaxLength(10);
     m_top->SetHelpText(_("The top position."));
     if (wxRichTextSizePage::ShowToolTips())
@@ -603,7 +603,7 @@ void wxRichTextSizePage::CreateControls()
     m_rightPositionSizer = new wxBoxSizer(wxHORIZONTAL);
     m_positionGridSizer->Add(m_rightPositionSizer, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_right = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_RIGHT, wxEmptyString, wxDefaultPosition, wxSize(65, -1), 0 );
+    m_right = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_RIGHT, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_right->SetMaxLength(10);
     m_right->SetHelpText(_("The right position."));
     if (wxRichTextSizePage::ShowToolTips())
@@ -638,7 +638,7 @@ void wxRichTextSizePage::CreateControls()
     m_bottomPositionSizer = new wxBoxSizer(wxHORIZONTAL);
     m_positionGridSizer->Add(m_bottomPositionSizer, 0, wxGROW|wxALIGN_CENTER_VERTICAL, 5);
 
-    m_bottom = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_BOTTOM, wxEmptyString, wxDefaultPosition, wxSize(65, -1), 0 );
+    m_bottom = new wxTextCtrl( itemRichTextDialogPage1, ID_RICHTEXT_BOTTOM, "", wxDefaultPosition, wxSize(65, -1), 0 );
     m_bottom->SetMaxLength(10);
     m_bottom->SetHelpText(_("The bottom position."));
     if (wxRichTextSizePage::ShowToolTips())
