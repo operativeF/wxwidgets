@@ -158,7 +158,7 @@ public:
 
     // Sets items of existing control.
     // Default implementation does nothing.
-    virtual void SetItems(wxWindow* ctrl,  const std::vector<wxString>& labels) const;
+    virtual void SetItems(wxWindow* ctrl,  const std::vector<std::string>& labels) const;
 
     // Extra processing when control gains focus. For example, wxTextCtrl
     // based controls should select all text.
@@ -266,7 +266,7 @@ public:
                             const wxString& label,
                             int index ) const override;
     void DeleteItem( wxWindow* ctrl, int index ) const override;
-    void SetItems(wxWindow* ctrl, const std::vector<wxString>& labels) const override;
+    void SetItems(wxWindow* ctrl, const std::vector<std::string>& labels) const override;
 
     bool CanContainCustomImage() const override;
 

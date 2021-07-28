@@ -2029,7 +2029,19 @@ bool wxPGProperty::SetChoices( const wxPGChoices& choices )
     {
         wxWindow* ctrl = pg->GetEditorControl();
         if ( ctrl )
-            GetEditorClass()->SetItems(ctrl, m_choices.GetLabels());
+        {
+            // FIXME: Stupid.
+            auto labelsVec = m_choices.GetLabels();
+
+            std::vector<std::string> labels;
+
+            for(auto&& label : labelsVec)
+            {
+                labels.emplace_back(label);
+            }
+
+            GetEditorClass()->SetItems(ctrl, labels);
+        }
     }
 
     // This may be needed to trigger some initialization
@@ -2931,7 +2943,7 @@ void wxPGChoices::Add( const wxChar* const* labels, const ValArrItem* values )
 
 // -----------------------------------------------------------------------
 
-void wxPGChoices::Add( const std::vector<wxString>& arr, const std::vector<int>& arrint )
+void wxPGChoices::Add( const std::vector<std::string>& arr, const std::vector<int>& arrint )
 {
     AllocExclusive();
 

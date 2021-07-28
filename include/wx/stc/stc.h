@@ -3890,7 +3890,7 @@ public:
     bool GetUseVerticalScrollBar() const;
 
     // Append a string to the end of the document without changing the selection.
-    void AppendText(const wxString& text) override;
+    void AppendText(const std::string& text) override;
 
     // Is drawing done in two phases with backgrounds drawn before foregrounds?
     bool GetTwoPhaseDraw() const;
@@ -5188,7 +5188,7 @@ public:
     // implement wxTextEntryBase pure virtual methods
     // ----------------------------------------------
 
-    void WriteText(const wxString& text) override
+    void WriteText(const std::string& text) override
     {
         ReplaceSelection(text);
     }
@@ -5197,7 +5197,7 @@ public:
     {
         Replace(from, to, wxString());
     }
-    void Replace(long from, long to, const wxString& text) override
+    void Replace(long from, long to, const std::string& text) override
     {
         SetTargetStart((int)from);
         SetTargetEnd((int)to);
@@ -5379,8 +5379,8 @@ public:
     static wxVersionInfo GetLibraryVersionInfo();
 
 protected:
-    void DoSetValue(const wxString& value, int flags) override;
-    wxString DoGetValue() const override { return GetText(); }
+    void DoSetValue(const std::string& value, int flags) override;
+    std::string DoGetValue() const override { return GetText(); }
     wxWindow *GetEditableWindow() override { return this; }
 
 #ifndef SWIG

@@ -760,7 +760,7 @@ bool wxRibbonBar::Create(wxWindow* parent,
 
 void wxRibbonBar::CommonInit(long style)
 {
-    SetName(wxT("wxRibbonBar"));
+    SetName("wxRibbonBar");
 
     m_flags = style;
     m_tabs_total_width_ideal = 0;

@@ -553,7 +553,7 @@ wxFontProperty::wxFontProperty( const wxString& label, const wxString& name,
     // Initialize font family choices list
     if ( !wxPGGlobalVars->m_fontFamilyChoices )
     {
-        std::vector<wxString> faceNames = wxFontEnumerator::GetFacenames();
+        std::vector<std::string> faceNames = wxFontEnumerator::GetFacenames();
 
         std::sort(faceNames.begin(), faceNames.end());
 
@@ -1914,7 +1914,7 @@ wxMultiChoiceProperty::wxMultiChoiceProperty( const wxString& label,
 
 wxMultiChoiceProperty::wxMultiChoiceProperty( const wxString& label,
                                               const wxString& name,
-                                              const std::vector<wxString>& strings,
+                                              const std::vector<std::string>& strings,
                                               const std::vector<wxString>& value)
     : wxEditorDialogProperty(label,name)
 {
@@ -1927,7 +1927,7 @@ wxMultiChoiceProperty::wxMultiChoiceProperty( const wxString& label,
                                               const std::vector<wxString>& value)
 : wxEditorDialogProperty(label,name)
 {
-    std::vector<wxString> strings;
+    std::vector<std::string> strings;
     m_choices.Set(strings);
     SetValue(value);
 }
@@ -2009,7 +2009,15 @@ bool wxMultiChoiceProperty::DisplayEditorDialog(wxPropertyGrid* pg, wxVariant& v
         return false;
     }
 
-    std::vector<wxString> labels = m_choices.GetLabels();
+    std::vector<wxString> wlabels = m_choices.GetLabels();
+    // FIXME: Temporary fix.
+    std::vector<std::string> labels;
+
+    for(auto&& wlabel : wlabels)
+    {
+        labels.emplace_back(wlabel);
+    }
+
     unsigned int choiceCount = m_choices.GetCount();
 
     // launch editor dialog

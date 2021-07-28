@@ -314,7 +314,7 @@ public:
 
     wxMultiChoiceProperty( const wxString& label,
                            const wxString& name,
-                           const std::vector<wxString>& strings,
+                           const std::vector<std::string>& strings,
                            const std::vector<wxString>& value );
     wxMultiChoiceProperty( const wxString& label,
                            const wxString& name,

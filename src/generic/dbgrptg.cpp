@@ -72,7 +72,7 @@ wxDumpPreviewDlg::wxDumpPreviewDlg(wxWindow *parent,
 
     // use wxTE_RICH2 style to avoid 64kB limit under MSW and display big files
     // faster than with wxTE_RICH
-    m_text = new wxTextCtrl(this, wxID_ANY, wxEmptyString,
+    m_text = new wxTextCtrl(this, wxID_ANY, "",
                             wxPoint(0, 0), wxDefaultSize,
                             wxTE_MULTILINE |
                             wxTE_READONLY |
@@ -174,7 +174,7 @@ wxDumpOpenExternalDlg::wxDumpOpenExternalDlg(wxWindow *parent,
                               (
                                 this,
                                 wxID_ANY,
-                                wxEmptyString,
+                                "",
                                 wxDefaultPosition,
                                 wxSize(250, wxDefaultCoord),
                                 0
@@ -187,7 +187,7 @@ wxDumpOpenExternalDlg::wxDumpOpenExternalDlg(wxWindow *parent,
 
 #if wxUSE_FILEDLG
 
-    wxButton *browse = new wxButton(this, wxID_MORE, wxT(">>"),
+    wxButton *browse = new wxButton(this, wxID_MORE, ">>",
                                     wxDefaultPosition, wxDefaultSize,
                                     wxBU_EXACTFIT);
     sizerH->Add(browse,
@@ -358,7 +358,7 @@ wxDebugReportDialog::wxDebugReportDialog(wxDebugReport& dbgrpt)
 
     msg = _("If you have any additional information pertaining to this bug\nreport, please enter it here and it will be joined to it:");
 
-    m_notes = new wxTextCtrl(this, wxID_ANY, wxEmptyString,
+    m_notes = new wxTextCtrl(this, wxID_ANY, "",
                              wxDefaultPosition, wxDefaultSize,
                              wxTE_MULTILINE);
 

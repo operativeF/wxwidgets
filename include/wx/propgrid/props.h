@@ -385,7 +385,7 @@ public:
 
     wxEnumProperty( const wxString& label,
                     const wxString& name,
-                    const std::vector<wxString>& labels,
+                    const std::vector<std::string>& labels,
                     const std::vector<int>& values = {},
                     int value = 0 );
 #else
@@ -459,7 +459,7 @@ public:
                         const wxString& value );
     wxEditEnumProperty( const wxString& label = wxPG_LABEL,
                         const wxString& name = wxPG_LABEL,
-                        const std::vector<wxString>& labels = {},
+                        const std::vector<std::string>& labels = {},
                         const std::vector<int>& values = {},
                         const wxString& value = wxEmptyString );
     wxEditEnumProperty( const wxString& label,
@@ -512,7 +512,7 @@ public:
 #endif
     wxFlagsProperty( const wxString& label = wxPG_LABEL,
                      const wxString& name = wxPG_LABEL,
-                     const std::vector<wxString>& labels = {},
+                     const std::vector<std::string>& labels = {},
                      const std::vector<int>& values = {},
                      int value = 0 );
 

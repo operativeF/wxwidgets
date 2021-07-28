@@ -155,7 +155,7 @@ void wxPGEditor::DeleteItem( wxWindow*, int ) const
 {
 }
 
-void wxPGEditor::SetItems(wxWindow* WXUNUSED(ctrl), const std::vector<wxString>& WXUNUSED(labels)) const
+void wxPGEditor::SetItems(wxWindow* WXUNUSED(ctrl), const std::vector<std::string>& WXUNUSED(labels)) const
 {
 }
 
@@ -583,7 +583,7 @@ public:
                 const wxString& value,
                 const wxPoint& pos,
                 const wxSize& size,
-                const std::vector<wxString>& choices,
+                const std::vector<std::string>& choices,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
                 const wxString& name = wxS("wxOwnerDrawnComboBox"))
@@ -990,6 +990,14 @@ wxWindow* wxPGChoiceEditor::CreateControlsBase( wxPropertyGrid* propGrid,
             labels.push_back(propGrid->GetCommonValueLabel(i));
     }
 
+    // FIXME: Stupid.
+    std::vector<std::string> labelVec;
+
+    for(auto&& wstr : labels)
+    {
+        labelVec.push_back(wstr);
+    }
+
     wxPGComboBox* cb = new wxPGComboBox();
 #ifdef __WXMSW__
     cb->Hide();
@@ -999,7 +1007,7 @@ wxWindow* wxPGChoiceEditor::CreateControlsBase( wxPropertyGrid* propGrid,
                wxEmptyString,
                po,
                si,
-               labels,
+               labelVec,
                odcbFlags);
 
     // Under OSX default button seems to look fine
@@ -1079,7 +1087,7 @@ void wxPGChoiceEditor::DeleteItem( wxWindow* ctrl, int index ) const
     cb->Delete(index);
 }
 
-void wxPGChoiceEditor::SetItems(wxWindow* ctrl, const std::vector<wxString>& labels) const
+void wxPGChoiceEditor::SetItems(wxWindow* ctrl, const std::vector<std::string>& labels) const
 {
     wxASSERT( ctrl );
     wxOwnerDrawnComboBox* cb = wxDynamicCast(ctrl, wxOwnerDrawnComboBox);
@@ -1944,7 +1952,17 @@ wxWindow* wxPropertyGrid::GenerateEditorTextCtrl( const wxPoint& pos,
     if ( !attrVal.IsNull() )
     {
         wxASSERT(attrVal.IsType(wxPG_VARIANT_TYPE_ARRSTRING));
-        tc->AutoComplete(attrVal.GetArrayString());
+        // FIXME: Stupid.
+        auto wstrsVec = attrVal.GetArrayString();
+
+        std::vector<std::string> strsVec;
+
+        for(auto&& wstr : wstrsVec)
+        {
+            strsVec.emplace_back(wstr);
+        }
+
+        tc->AutoComplete(strsVec);
     }
 
     // Set hint text

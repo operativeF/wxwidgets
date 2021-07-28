@@ -376,7 +376,7 @@ public:
     //   If NULL, default page object is constructed.
     // Returns pointer to created page.
     virtual wxPropertyGridPage* InsertPage( int index,
-                                            const wxString& label,
+                                            const std::string& label,
                                             const wxBitmap& bmp = wxNullBitmap,
                                             wxPropertyGridPage* pageObj = nullptr );
 

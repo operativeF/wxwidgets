@@ -747,11 +747,11 @@ public:
     // Constructor.
     // labels - Labels for choices.
     // values - Values for choices. If empty, indexes are used.
-    wxPGChoices( const std::vector<wxString>& labels,
+    wxPGChoices( const std::vector<std::string>& labels,
                  const std::vector<int>& values = {} )
     {
         Init();
-        Add(labels,values);
+        Add(labels, values);
     }
 
     // Simple interface constructor.
@@ -779,7 +779,7 @@ public:
     void Add( const wxChar* const* labels, const ValArrItem* values = nullptr );
 
     // Version that works with std::vector<wxString> and std::vector<int>.
-    void Add( const std::vector<wxString>& arr, const std::vector<int>& arrint = {} );
+    void Add( const std::vector<std::string>& arr, const std::vector<int>& arrint = {} );
 
     // Adds a single choice.
     // label - Label for added choice.
@@ -913,11 +913,11 @@ public:
 
     // Sets contents from lists of strings and values.
     // Version that works with std::vector<wxString> and std::vector<int>.
-    void Set( const std::vector<wxString>& labels,
+    void Set( const std::vector<std::string>& labels,
               const std::vector<int>& values = {} )
     {
         Free();
-        Add(labels,values);
+        Add(labels, values);
     }
 
     // Creates exclusive copy of current choices

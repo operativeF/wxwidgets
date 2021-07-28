@@ -2462,7 +2462,7 @@ bool wxStyledTextCtrl::GetUseVerticalScrollBar() const
 }
 
 // Append a string to the end of the document without changing the selection.
-void wxStyledTextCtrl::AppendText(const wxString& text) {
+void wxStyledTextCtrl::AppendText(const std::string& text) {
                     const wxWX2MBbuf buf = wx2stc(text);
                     SendMsg(SCI_APPENDTEXT, wx2stclen(text, buf), (sptr_t)(const char*)buf);
 }
@@ -4872,7 +4872,7 @@ void wxStyledTextCtrl::ScrollToColumn(int column) {
 }
 
 
-void wxStyledTextCtrl::DoSetValue(const wxString& value, int flags)
+void wxStyledTextCtrl::DoSetValue(const std::string& value, int flags)
 {
     if ( flags & SetValue_SelectionOnly )
         ReplaceSelection(value);

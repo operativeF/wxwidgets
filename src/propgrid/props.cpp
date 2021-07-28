@@ -1118,7 +1118,7 @@ wxEnumProperty::wxEnumProperty( const wxString& label, const wxString& name,
 }
 
 wxEnumProperty::wxEnumProperty( const wxString& label, const wxString& name,
-    const std::vector<wxString>& labels, const std::vector<int>& values, int value )
+    const std::vector<std::string>& labels, const std::vector<int>& values, int value )
     : wxPGProperty(label,name)
 {
     SetIndex(0);
@@ -1320,7 +1320,7 @@ wxEditEnumProperty::wxEditEnumProperty( const wxString& label, const wxString& n
 }
 
 wxEditEnumProperty::wxEditEnumProperty( const wxString& label, const wxString& name,
-    const std::vector<wxString>& labels, const std::vector<int>& values, const wxString& value )
+    const std::vector<std::string>& labels, const std::vector<int>& values, const wxString& value )
     : wxEnumProperty(label,name,labels,values,0)
 {
     SetValue( value );
@@ -1489,14 +1489,14 @@ wxFlagsProperty::wxFlagsProperty( const wxString& label, const wxString& name,
 }
 
 wxFlagsProperty::wxFlagsProperty( const wxString& label, const wxString& name,
-        const std::vector<wxString>& labels, const std::vector<int>& values, int value )
+        const std::vector<std::string>& labels, const std::vector<int>& values, int value )
     : wxPGProperty(label,name)
 {
     m_flags |= wxPG_PROP_USE_DCC; // same default like wxBoolProperty
 
     if ( !labels.empty() )
     {
-        m_choices.Set(labels,values);
+        m_choices.Set(labels, values);
 
         wxASSERT( GetItemCount() );
 
@@ -2753,7 +2753,7 @@ bool wxPGInDialogValidator::DoValidate( wxPropertyGrid* propGrid,
     if ( !tc )
     {
         {
-            tc = new wxTextCtrl( propGrid, wxID_ANY, wxEmptyString,
+            tc = new wxTextCtrl( propGrid, wxID_ANY, "",
                                  wxPoint(30000,30000));
             tc->Hide();
         }

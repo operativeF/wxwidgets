@@ -3123,7 +3123,7 @@ void wxPropertyGrid::DoHidePropertyError( wxPGProperty* WXUNUSED(property) )
         wxStatusBar* pStatusBar = GetStatusBar();
         if ( pStatusBar )
         {
-            pStatusBar->SetStatusText(wxEmptyString);
+            pStatusBar->SetStatusText("");
             return;
         }
     }
@@ -3290,7 +3290,7 @@ void wxPropertyGrid::DoOnValidationFailureReset( wxPGProperty* property )
         {
             wxStatusBar* pStatusBar = GetStatusBar();
             if ( pStatusBar )
-                pStatusBar->SetStatusText(wxEmptyString);
+                pStatusBar->SetStatusText("");
         }
     }
 #endif
@@ -4290,7 +4290,7 @@ bool wxPropertyGrid::DoSelectProperty( wxPGProperty* p, unsigned int flags )
             {
                 // Clear help box - but only if it was written
                 // by us at previous time.
-                statusbar->SetStatusText(wxEmptyString);
+                statusbar->SetStatusText("");
                 m_iFlags &= ~(wxPG_FL_STRING_IN_STATUSBAR);
             }
         }
