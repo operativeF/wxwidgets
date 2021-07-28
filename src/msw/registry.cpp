@@ -42,6 +42,8 @@
 #define   HKEY_DEFINED    // already defined in windows.h
 #include  "wx/msw/registry.h"
 
+#include "fmt/core.h"
+
 // some registry functions don't like signed chars
 using RegString = unsigned char *;
 using RegBinary = BYTE *;
@@ -1315,7 +1317,7 @@ FormatAsHex(const void *data,
         if ( n )
             value << wxT(',');
 
-        value << wxString::Format(wxT("%02x"), (unsigned char)p[n]);
+        value << fmt::format("{:02x}", (unsigned char)p[n]);
     }
 
     return value;

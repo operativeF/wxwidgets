@@ -56,6 +56,8 @@
 #include "wx/private/markupparser.h"
 #endif // wxUSE_ACCESSIBILITY
 
+#include "fmt/core.h"
+
 //-----------------------------------------------------------------------------
 // classes
 //-----------------------------------------------------------------------------
@@ -1476,7 +1478,7 @@ bool wxDataViewProgressRenderer::GetValue( wxVariant &value ) const
 #if wxUSE_ACCESSIBILITY
 std::string wxDataViewProgressRenderer::GetAccessibleDescription() const
 {
-    return wxString::Format(wxS("%i %%"), m_value);
+    return fmt::format("{:i} %%", m_value);
 }
 #endif // wxUSE_ACCESSIBILITY
 
@@ -7060,7 +7062,7 @@ wxAccStatus wxDataViewCtrlAccessible::GetValue(int childId, wxString* strValue)
             wxDataViewTreeNode *node = dvWnd->GetTreeNodeByRow(childId-1);
             if ( node )
             {
-                val = wxString::Format(wxS("%i"), node->GetIndentLevel());
+                val = fmt::format("{:i}", node->GetIndentLevel());
             }
         }
     }

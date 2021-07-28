@@ -49,6 +49,8 @@
 #include <cstdlib>
 #include <cstring>
 
+#include "fmt/core.h"
+
 #ifndef __WXUNIVERSAL__
 
 #if wxUSE_GTKPRINT
@@ -326,9 +328,9 @@ bool wxGenericPrintDialog::TransferDataToWindow()
              m_fromText->Enable(true);
              m_toText->Enable(true);
              if (m_printDialogData.GetFromPage() > 0)
-                m_fromText->SetValue(wxString::Format(wxT("%d"), m_printDialogData.GetFromPage()));
+                m_fromText->SetValue(fmt::format("{:d}"), m_printDialogData.GetFromPage()));
              if (m_printDialogData.GetToPage() > 0)
-                m_toText->SetValue(wxString::Format(wxT("%d"), m_printDialogData.GetToPage()));
+                m_toText->SetValue(fmt::format("{:d}"), m_printDialogData.GetToPage()));
              if(m_rangeRadioBox)
              {
                 if (m_printDialogData.GetAllPages() || m_printDialogData.GetFromPage() == 0)
@@ -350,7 +352,7 @@ bool wxGenericPrintDialog::TransferDataToWindow()
        }
     }
     m_noCopiesText->SetValue(
-        wxString::Format(wxT("%d"), m_printDialogData.GetNoCopies()));
+        fmt::format("{:d}"), m_printDialogData.GetNoCopies()));
 
     m_printToFileCheckBox->SetValue(m_printDialogData.GetPrintToFile());
     m_printToFileCheckBox->Enable(m_printDialogData.GetEnablePrintToFile());
@@ -917,13 +919,13 @@ wxPageSetupDialogData& wxGenericPageSetupDialog::GetPageSetupDialogData()
 bool wxGenericPageSetupDialog::TransferDataToWindow()
 {
     if (m_marginLeftText)
-        m_marginLeftText->SetValue(wxString::Format(wxT("%d"), m_pageData.GetMarginTopLeft().x));
+        m_marginLeftText->SetValue(fmt::format("{:d}", m_pageData.GetMarginTopLeft().x));
     if (m_marginTopText)
-        m_marginTopText->SetValue(wxString::Format(wxT("%d"), m_pageData.GetMarginTopLeft().y));
+        m_marginTopText->SetValue(fmt::format("{:d}", m_pageData.GetMarginTopLeft().y));
     if (m_marginRightText)
-        m_marginRightText->SetValue(wxString::Format(wxT("%d"), m_pageData.GetMarginBottomRight().x));
+        m_marginRightText->SetValue(fmt::format("{:d}", m_pageData.GetMarginBottomRight().x));
     if (m_marginBottomText)
-        m_marginBottomText->SetValue(wxString::Format(wxT("%d"), m_pageData.GetMarginBottomRight().y));
+        m_marginBottomText->SetValue(fmt::format("{:d}", m_pageData.GetMarginBottomRight().y));
 
     if (m_orientationRadioBox)
     {

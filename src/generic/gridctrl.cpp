@@ -31,6 +31,8 @@
 #include "wx/generic/private/grid.h"
 #include "wx/private/window.h"
 
+#include "fmt/core.h"
+
 // ----------------------------------------------------------------------------
 // wxGridCellRenderer
 // ----------------------------------------------------------------------------
@@ -780,8 +782,8 @@ wxSize wxGridCellNumberRenderer::GetMaxBestSize(wxGrid& WXUNUSED(grid),
     // is longer than both min and max, e.g. we could conceivably have "88" be
     // wider than both "87" and "91" with some fonts, but it seems something
     // too exotic to worry about in practice.
-    wxSize size = DoGetBestSize(attr, dc, wxString::Format("%ld", m_minValue));
-    size.IncTo(DoGetBestSize(attr, dc, wxString::Format("%ld", m_maxValue)));
+    wxSize size = DoGetBestSize(attr, dc, fmt::format("{:ld}", m_minValue));
+    size.IncTo(DoGetBestSize(attr, dc, fmt::format("{:ld}", m_maxValue)));
 
     return size;
 }

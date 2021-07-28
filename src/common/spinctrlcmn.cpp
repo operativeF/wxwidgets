@@ -18,6 +18,8 @@
 
 #include "wx/private/spinctrl.h"
 
+#include "fmt/core.h"
+
 wxDEFINE_EVENT(wxEVT_SPINCTRL, wxSpinEvent);
 wxDEFINE_EVENT(wxEVT_SPINCTRLDOUBLE, wxSpinDoubleEvent);
 
@@ -111,11 +113,11 @@ wxString wxSpinCtrlImpl::FormatAsHex(long val, long maxVal)
 int wxSpinCtrlImpl::GetMaxValueLength(int minVal, int maxVal, int base)
 {
     const int lenMin = (base == 16 ?
-                       FormatAsHex(minVal, maxVal) :
-                       wxString::Format("%d", minVal)).length();
+                       FormatAsHex(minVal, maxVal).ToStdString() :
+                       fmt::format("{:d}", minVal)).length();
     const int lenMax = (base == 16 ?
-                       FormatAsHex(maxVal, maxVal) :
-                       wxString::Format("%d", maxVal)).length();
+                       FormatAsHex(maxVal, maxVal).ToStdString() :
+                       fmt::format("{:d}", maxVal)).length();
     return wxMax(lenMin, lenMax);
 }
 

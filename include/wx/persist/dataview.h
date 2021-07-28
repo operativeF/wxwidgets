@@ -16,6 +16,8 @@
 
 #include "wx/dataview.h"
 
+#include "fmt/core.h"
+
 // ----------------------------------------------------------------------------
 // String constants used by wxPersistentDataViewCtrl.
 // ----------------------------------------------------------------------------
@@ -146,9 +148,9 @@ public:
 
 private:
     // Return a (slash-terminated) prefix for the column-specific entries.
-    static wxString MakeColumnPrefix(const wxDataViewColumn* column)
+    static std::string MakeColumnPrefix(const wxDataViewColumn* column)
     {
-        return wxString::Format(wxASCII_STR("/Columns/%s/"), column->GetTitle());
+        return fmt::format("/Columns/{:s}/", column->GetTitle());
     }
 
     // Return the column with the given title or NULL.

@@ -74,6 +74,8 @@
 #include "wx/stack.h"
 #include "wx/sharedptr.h"
 
+#include "fmt/core.h"
+
 // This must be the last header included to only affect the DEFINE_GUID()
 // occurrences below but not any GUIDs declared in the standard files included
 // above.
@@ -81,7 +83,7 @@
 
 // Generic error message for a failed direct2d operation
 #define wxFAILED_HRESULT_MSG(result) \
-    wxString::Format("Direct2D failed with HRESULT %x", (result))
+    fmt::format("Direct2D failed with HRESULT {:x}", (result))
 
 // Checks a HRESULT value for success, otherwise displays an error message and
 // returns from the enclosing function.

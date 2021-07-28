@@ -43,6 +43,8 @@
     #include "wx/msw/private.h" // includes windows.h
 #endif
 
+#include "fmt/core.h"
+
 #undef wxLOG_COMPONENT
 const char *wxLOG_COMPONENT = "";
 
@@ -1028,7 +1030,7 @@ wxString wxMSWFormatMessage(DWORD nErrCode, HMODULE hModule)
 
         // if this happens, something is seriously wrong, so don't use _() here
         // for safety
-        return wxString::Format(wxS("unknown error 0x%lx"), nErrCode);
+        return fmt::format("unknown error 0x{:lx}", nErrCode);
     }
 
     wxString str;

@@ -25,6 +25,8 @@
     #include "wx/translation.h"
 #endif
 
+#include "fmt/core.h"
+
 // Helper class used to dynamically load the required symbols from winhttp.dll
 class wxWinHTTP
 {
@@ -366,8 +368,8 @@ void wxWebRequestWinHTTP::SetFailed(const wxString& operation, DWORD errorCode)
     wxString failMessage = wxMSWFormatMessage(errorCode,
                                               GetModuleHandle(TEXT("WINHTTP")));
     SetState(wxWebRequest::State_Failed,
-             wxString::Format("%s failed with error %08x (%s)",
-                              operation, errorCode, failMessage));
+             fmt::format("{:s} failed with error {:08x} ({:s})",
+                              operation.ToStdString(), errorCode, failMessage.ToStdString()));
 }
 
 void wxWebRequestWinHTTP::Start()
@@ -472,7 +474,7 @@ void wxWebRequestWinHTTP::SendRequest()
           header != m_headers.end();
           ++header )
     {
-        allHeaders.append(wxString::Format("%s: %s\n", header->first, header->second));
+        allHeaders.append(fmt::format("{:s}: {:s}\n", header->first.ToStdString(), header->second.ToStdString()));
     }
 
     if ( m_dataSize )

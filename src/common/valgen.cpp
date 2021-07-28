@@ -46,6 +46,8 @@
 
 #include "wx/valgen.h"
 
+#include "fmt/core.h"
+
 wxIMPLEMENT_CLASS(wxGenericValidator, wxValidator);
 
 wxGenericValidator::wxGenericValidator(bool *val)
@@ -346,12 +348,12 @@ bool wxGenericValidator::TransferToWindow()
         }
         else if (m_pFloat)
         {
-            pControl->SetValue(wxString::Format(wxS("%g"), double(*m_pFloat)));
+            pControl->SetValue(fmt::format("{:g}", double(*m_pFloat)));
             return true;
         }
         else if (m_pDouble)
         {
-            pControl->SetValue(wxString::Format(wxT("%g"), *m_pDouble));
+            pControl->SetValue(fmt::format("{:g}", *m_pDouble));
             return true;
         }
     } else

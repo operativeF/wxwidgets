@@ -47,7 +47,7 @@ wxString GetMRUEntryLabel(int n, const wxString& path)
     pathInMenu.insert(0, wchar_t(0x202a));
 #endif
 
-    return wxString::Format("&%d %s", n + 1, pathInMenu);
+    return fmt::format("&{:d} {:s}", n + 1, pathInMenu.ToStdString());
 }
 
 } // anonymous namespace

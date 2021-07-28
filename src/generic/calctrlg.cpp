@@ -29,6 +29,8 @@
 #include "wx/calctrl.h"
 #include "wx/generic/calctrlg.h"
 
+#include "fmt/core.h"
+
 #define DEBUG_PAINT 0
 
 // ----------------------------------------------------------------------------
@@ -735,7 +737,7 @@ void wxGenericCalendarCtrl::RecalcGeometry()
     for ( int day = 10; day <= 31; day++)
     {
         wxCoord width;
-        dc.GetTextExtent(wxString::Format(wxT("%d"), day), &width, &m_heightRow);
+        dc.GetTextExtent(fmt::format("{:d}", day), &width, &m_heightRow);
         if ( width > m_widthCol )
         {
             // 1.5 times the width gives nice margins even if the weekday
@@ -898,7 +900,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
         for ( size_t i = 0; i < 6; ++i )
         {
             const int weekNr = date.GetWeekOfYear();
-            wxString text = wxString::Format( wxT( "%d" ), weekNr );
+            std::string text = fmt::format("{:d}", weekNr );
             dc.DrawText( text, m_calendarWeekWidth - dc.GetTextExtent( text ).x - 2, y + m_heightRow * i );
             date += wxDateSpan::Week();
         }
@@ -933,7 +935,7 @@ void wxGenericCalendarCtrl::OnPaint(wxPaintEvent& WXUNUSED(event))
             {
                 // don't use wxDate::Format() which prepends 0s
                 unsigned int day = date.GetDay();
-                wxString dayStr = wxString::Format(wxT("%u"), day);
+                std::string dayStr = fmt::format("{:u}", day);
                 wxCoord width;
                 dc.GetTextExtent(dayStr, &width, nullptr);
 

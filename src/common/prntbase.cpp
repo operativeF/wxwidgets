@@ -69,6 +69,8 @@
     #endif
 #endif // __WXMSW__
 
+#include "fmt/core.h"
+
 // The value traditionally used as the default max page number and meaning
 // "infinitely many". It should probably be documented and exposed, but for now
 // at least use it here instead of hardcoding the number.
@@ -1087,9 +1089,9 @@ public:
     }
 
 private:
-    static wxString MaxAsString(int maxPage)
+    static std::string MaxAsString(int maxPage)
     {
-        return wxString::Format("/ %d", maxPage);
+        return fmt::format("/ {:d}", maxPage);
     }
 };
 
@@ -1169,9 +1171,9 @@ public:
     }
 
 private:
-    static wxString PageAsString(int page)
+    static std::string PageAsString(int page)
     {
-        return wxString::Format("%d", page);
+        return fmt::format("{:d}", page);
     }
 
     bool IsValidPage(int page) const

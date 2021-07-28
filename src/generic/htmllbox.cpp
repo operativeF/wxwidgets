@@ -300,7 +300,7 @@ wxHtmlCell* wxHtmlListBox::CreateCellForItem(size_t n) const
 
     // set the cell's ID to item's index so that CellCoordsToPhysical()
     // can quickly find the item:
-    cell->SetId(wxString::Format(wxT("%lu"), (unsigned long)n));
+    cell->SetId(fmt::format("{:lu}", n));
 
     cell->Layout(GetClientSize().x - 2*GetMargins().x);
 

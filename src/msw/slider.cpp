@@ -24,6 +24,8 @@
 
 #include "wx/msw/subwin.h"
 
+#include "boost/nowide/convert.hpp"
+
 // ----------------------------------------------------------------------------
 // constants
 // ----------------------------------------------------------------------------
@@ -636,7 +638,7 @@ void wxSlider::SetValue(int value)
 
     if ( m_labels )
     {
-        ::SetWindowText((*m_labels)[SliderLabel_Value], Format(value).t_str());
+        ::SetWindowTextW((*m_labels)[SliderLabel_Value], boost::nowide::widen(Format(value)).c_str());
     }
 }
 
@@ -663,10 +665,10 @@ void wxSlider::SetRange(int minValue, int maxValue)
         {
             SetValue(GetValue());
         }
-        ::SetWindowText((*m_labels)[SliderLabel_Min],
-                        Format(ValueInvertOrNot(m_rangeMin)).t_str());
-        ::SetWindowText((*m_labels)[SliderLabel_Max],
-                        Format(ValueInvertOrNot(m_rangeMax)).t_str());
+        ::SetWindowTextW((*m_labels)[SliderLabel_Min],
+                        boost::nowide::widen(Format(ValueInvertOrNot(m_rangeMin))).c_str());
+        ::SetWindowTextW((*m_labels)[SliderLabel_Max],
+                        boost::nowide::widen(Format(ValueInvertOrNot(m_rangeMax))).c_str());
     }
 
     // When emulating wxSL_INVERSE style in wxWidgets, we need to update the

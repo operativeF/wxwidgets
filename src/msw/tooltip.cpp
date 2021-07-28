@@ -30,6 +30,8 @@
 #include "boost/nowide/convert.hpp"
 #include "boost/nowide/stackstring.hpp"
 
+#include "fmt/core.h"
+
 #ifndef TTTOOLINFO_V1_SIZE
     #define TTTOOLINFO_V1_SIZE 0x28
 #endif
@@ -191,7 +193,7 @@ LRESULT APIENTRY wxToolTipWndProc(HWND hwndTT,
         HWND hwnd = ::WindowFromPoint(*ppt);
 
         OutputDebugString("TTM_WINDOWFROMPOINT: ");
-        OutputDebugString(wxString::Format("0x%08x => ", hwnd));
+        OutputDebugString(fmt::format("0x{:08x} => ", hwnd));
 
         // return a HWND corresponding to a wxWindow because only wxWidgets are
         // associated with tooltips using TTM_ADDTOOL
@@ -200,7 +202,7 @@ LRESULT APIENTRY wxToolTipWndProc(HWND hwndTT,
         if ( win )
         {
             hwnd = GetHwndOf(win);
-            OutputDebugString(wxString::Format("0x%08x\r\n", hwnd));
+            OutputDebugString(fmt::format("0x{:08x}\r\n", hwnd));
 
 #if 0
             // modify the point too!

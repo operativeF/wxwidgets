@@ -16,6 +16,8 @@
 
 #include <clocale> // for setlocale and LC_ALL
 
+#include "fmt/core.h"
+
 // ----------------------------------------------------------------------------
 // local helpers
 // ----------------------------------------------------------------------------
@@ -178,7 +180,7 @@ wxString wxNumberFormatter::PostProcessIntString(wxString s, int style)
 
 wxString wxNumberFormatter::ToString(long val, int style)
 {
-    return PostProcessIntString(wxString::Format("%ld", val), style);
+    return PostProcessIntString(fmt::format("{:ld}", val), style);
 }
 
 #ifdef wxHAS_LONG_LONG_T_DIFFERENT_FROM_LONG

@@ -27,6 +27,8 @@
 
 #include "wx/ffile.h"
 
+#include "fmt/core.h"
+
 // ----------------------------------------------------------------------------
 // macros
 // ----------------------------------------------------------------------------
@@ -963,17 +965,17 @@ wxTextCtrl& wxTextCtrlBase::operator<<(const std::string& s)
 
 wxTextCtrl& wxTextCtrlBase::operator<<(double d)
 {
-    return *this << wxString::Format("%.2f", d);
+    return *this << fmt::format("{:.2f}", d);
 }
 
 wxTextCtrl& wxTextCtrlBase::operator<<(int i)
 {
-    return *this << wxString::Format("%d", i);
+    return *this << fmt::format("{:d}", i);
 }
 
 wxTextCtrl& wxTextCtrlBase::operator<<(long l)
 {
-    return *this << wxString::Format("%ld", l);
+    return *this << fmt::format("{:ld}", l);
 }
 
 // ----------------------------------------------------------------------------

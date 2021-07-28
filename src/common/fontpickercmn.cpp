@@ -23,6 +23,8 @@
 #include "wx/fontenum.h"
 #include "wx/tokenzr.h"
 
+#include "fmt/core.h"
+
 // ============================================================================
 // implementation
 // ============================================================================
@@ -93,7 +95,7 @@ wxFont wxFontPickerCtrl::String2Font(const wxString &s)
             str = str.Left(str.length() - size.length()) + wxT("1");
         else if (n >= m_nMaxPointSize)
             str = str.Left(str.length() - size.length()) +
-                  wxString::Format(wxT("%d"), m_nMaxPointSize);
+                  fmt::format("{:d}", m_nMaxPointSize);
     }
 
     if (!ret.SetNativeFontInfoUserDesc(str))

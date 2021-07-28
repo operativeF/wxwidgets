@@ -22,6 +22,8 @@
     #include "wx/msw/missing.h"
 #endif
 
+#include "fmt/core.h"
+
 // ----------------------------------------------------------------------------
 // Definitions
 // ----------------------------------------------------------------------------
@@ -56,9 +58,9 @@ namespace
     {
         // Any "&"s in the text should appear on the screen and not be (mis)
         // interpreted as mnemonics.
-        return wxString::Format("<A HREF=\"%s\">%s</A>",
-                                url,
-                                wxControl::EscapeMnemonics(text));
+        return fmt::format("<A HREF=\"{:s}\">{:s}</A>",
+                                url.ToStdString(),
+                                wxControl::EscapeMnemonics(text).ToStdString());
     }
 }
 

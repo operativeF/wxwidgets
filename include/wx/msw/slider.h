@@ -11,6 +11,8 @@
 #ifndef _WX_SLIDER_H_
 #define _WX_SLIDER_H_
 
+#include "fmt/core.h"
+
 class WXDLLIMPEXP_FWD_CORE wxSubwindows;
 
 class WXDLLIMPEXP_CORE wxSlider : public wxSliderBase
@@ -100,7 +102,7 @@ public:
 
 protected:
     // format an integer value as string
-    static wxString Format(int n) { return wxString::Format(wxT("%d"), n); }
+    static std::string Format(int n) { return fmt::format("{:d}", n); }
 
     // get the boundig box for the slider and possible labels
     wxRect GetBoundingBox() const;

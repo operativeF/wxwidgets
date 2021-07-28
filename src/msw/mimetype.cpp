@@ -46,6 +46,8 @@
     #endif
 #endif // OS
 
+#include "fmt/core.h"
+
 // Unfortunately the corresponding SDK constants are absent from the headers
 // shipped with some old MinGW versions (e.g. 4.2.1 from Debian) and we can't
 // even test whether they're defined or not, as they're enum elements and not
@@ -726,7 +728,7 @@ bool wxFileTypeImpl::SetDefaultIcon(const wxString& cmd, int index)
 
     bool result = rkey.Create() &&
            rkey.SetValue(wxEmptyString,
-                         wxString::Format(wxT("%s,%d"), cmd.c_str(), index));
+                         fmt::format("{:s},{:d}", cmd.c_str(), index));
 
     if ( result )
         MSWNotifyShell();

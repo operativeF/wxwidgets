@@ -45,6 +45,8 @@
 
 #include <wx/vector.h>
 
+#include "fmt/core.h"
+
 // Report an OLE error when calling the specified method to the user via wxLog.
 static void
 ShowException(const wxString& member,
@@ -623,7 +625,7 @@ ShowException(const wxString& member,
             {
                 if ( pexcep->bstrDescription )
                     message << pexcep->bstrDescription << wxS(" ");
-                message += wxString::Format(wxS("error code %u"), pexcep->wCode);
+                message += fmt::format("error code {:u}", pexcep->wCode);
             }
             else
             {

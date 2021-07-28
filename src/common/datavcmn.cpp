@@ -32,6 +32,8 @@
     #include "wx/access.h"
 #endif // wxUSE_ACCESSIBILITY
 
+#include "fmt/core.h"
+
 namespace
 {
 
@@ -1752,7 +1754,7 @@ bool wxDataViewSpinRenderer::Render( wxRect rect, wxDC *dc, int state )
 
 wxSize wxDataViewSpinRenderer::GetSize() const
 {
-    wxSize sz = GetTextExtent(wxString::Format("%d", (int)m_data));
+    wxSize sz = GetTextExtent(fmt::format("{:d}", m_data));
 
     // Allow some space for the spin buttons, which is approximately the size
     // of a scrollbar (and getting pixel-exact value would be complicated).
@@ -1778,7 +1780,7 @@ bool wxDataViewSpinRenderer::GetValue( wxVariant &value ) const
 #if wxUSE_ACCESSIBILITY
 std::string wxDataViewSpinRenderer::GetAccessibleDescription() const
 {
-    return wxString::Format(wxS("%li"), m_data);
+    return fmt::format("{:li}", m_data);
 }
 #endif // wxUSE_ACCESSIBILITY
 
