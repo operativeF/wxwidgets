@@ -20,7 +20,7 @@
 // String constants used by wxPersistentDataViewCtrl.
 // ----------------------------------------------------------------------------
 
-#define wxPERSIST_DVC_KIND "DataView"
+inline constexpr char wxPERSIST_DVC_KIND[] = "DataView";
 
 #define wxPERSIST_DVC_HIDDEN "Hidden"
 #define wxPERSIST_DVC_POS "Position"
@@ -139,9 +139,9 @@ public:
         return true;
     }
 
-    wxString GetKind() const override
+    std::string GetKind() const override
     {
-        return wxASCII_STR(wxPERSIST_DVC_KIND);
+        return wxPERSIST_DVC_KIND;
     }
 
 private:

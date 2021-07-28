@@ -31,15 +31,15 @@ public:
     wxGenericFileDirButton() {  m_pickerStyle = -1;  }
     wxGenericFileDirButton(wxWindow *parent,
                            wxWindowID id,
-                           const wxString& label = wxASCII_STR(wxFilePickerWidgetLabel),
-                           const wxString& path = wxEmptyString,
-                           const wxString &message = wxASCII_STR(wxFileSelectorPromptStr),
-                           const wxString &wildcard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
+                           const std::string& label = wxFilePickerWidgetLabel,
+                           const std::string& path = {},
+                           const std::string& message = wxFileSelectorPromptStr,
+                           const std::string& wildcard = wxFileSelectorDefaultWildcardStr,
                            const wxPoint& pos = wxDefaultPosition,
                            const wxSize& size = wxDefaultSize,
                            long style = 0,
                            const wxValidator& validator = wxDefaultValidator,
-                           const wxString& name = wxASCII_STR(wxFilePickerWidgetNameStr))
+                           const std::string& name = wxFilePickerWidgetNameStr)
     {
          m_pickerStyle = -1; 
         Create(parent, id, label, path, message, wildcard,
@@ -62,15 +62,15 @@ public:     // overridable
 public:
 
     bool Create(wxWindow *parent, wxWindowID id,
-           const wxString& label = wxASCII_STR(wxFilePickerWidgetLabel),
-           const wxString& path = wxEmptyString,
-           const wxString &message = wxASCII_STR(wxFileSelectorPromptStr),
-           const wxString &wildcard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
+           const std::string& label = wxFilePickerWidgetLabel,
+           const std::string& path = {},
+           const std::string &message = wxFileSelectorPromptStr,
+           const std::string &wildcard = wxFileSelectorDefaultWildcardStr,
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize,
            long style = 0,
            const wxValidator& validator = wxDefaultValidator,
-           const wxString& name = wxASCII_STR(wxFilePickerWidgetNameStr));
+           const std::string& name = wxFilePickerWidgetNameStr);
 
     // event handler for the click
     void OnButtonClick(wxCommandEvent &);
@@ -104,15 +104,15 @@ public:
     wxGenericFileButton() = default;
     wxGenericFileButton(wxWindow *parent,
                         wxWindowID id,
-                        const wxString& label = wxASCII_STR(wxFilePickerWidgetLabel),
-                        const wxString& path = wxEmptyString,
-                        const wxString &message = wxASCII_STR(wxFileSelectorPromptStr),
-                        const wxString &wildcard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
+                        const std::string& label = wxFilePickerWidgetLabel,
+                        const std::string& path = {},
+                        const std::string &message = wxFileSelectorPromptStr,
+                        const std::string &wildcard = wxFileSelectorDefaultWildcardStr,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         long style = wxFILEBTN_DEFAULT_STYLE,
                         const wxValidator& validator = wxDefaultValidator,
-                        const wxString& name = wxASCII_STR(wxFilePickerWidgetNameStr))
+                        const std::string& name = wxFilePickerWidgetNameStr)
     {
         Create(parent, id, label, path, message, wildcard,
                pos, size, style, validator, name);
@@ -172,16 +172,16 @@ public:
     wxGenericDirButton() = default;
     wxGenericDirButton(wxWindow *parent,
                        wxWindowID id,
-                       const wxString& label = wxASCII_STR(wxDirPickerWidgetLabel),
-                       const wxString& path = wxEmptyString,
-                       const wxString &message = wxASCII_STR(wxDirSelectorPromptStr),
+                       const std::string& label = wxASCII_STR(wxDirPickerWidgetLabel),
+                       const std::string& path = {},
+                       const std::string &message = wxASCII_STR(wxDirSelectorPromptStr),
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
                        long style = wxDIRBTN_DEFAULT_STYLE,
                        const wxValidator& validator = wxDefaultValidator,
-                       const wxString& name = wxASCII_STR(wxDirPickerWidgetNameStr))
+                       const std::string& name = wxASCII_STR(wxDirPickerWidgetNameStr))
     {
-        Create(parent, id, label, path, message, wxEmptyString,
+        Create(parent, id, label, path, message, {},
                pos, size, style, validator, name);
     }
 

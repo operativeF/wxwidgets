@@ -44,7 +44,7 @@ public:
     {
     }
 
-    wxString GetTitle() const override { return m_grid->GetColLabelValue(m_col); }
+    std::string GetTitle() const override { return m_grid->GetColLabelValue(m_col); }
     wxBitmap GetBitmap() const override { return wxNullBitmap; }
     int GetWidth() const override { return m_grid->GetColSize(m_col); }
     int GetMinWidth() const override { return m_grid->GetColMinimalWidth(m_col); }

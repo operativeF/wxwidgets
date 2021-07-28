@@ -33,7 +33,7 @@ class WXDLLIMPEXP_FWD_CORE wxDataViewCtrlAccessible;
 class WXDLLIMPEXP_CORE wxDataViewColumn : public wxDataViewColumnBase
 {
 public:
-    wxDataViewColumn(const wxString& title,
+    wxDataViewColumn(const std::string& title,
                      wxDataViewRenderer *renderer,
                      unsigned int model_column,
                      int width = wxDVC_DEFAULT_WIDTH,
@@ -57,12 +57,13 @@ public:
     }
 
     // implement wxHeaderColumnBase methods
-    void SetTitle(const wxString& title) override
+    void SetTitle(const std::string& title) override
     {
         m_title = title;
         UpdateWidth();
     }
-    wxString GetTitle() const override
+    
+    std::string GetTitle() const override
     {
         return m_title;
     }
@@ -162,7 +163,7 @@ private:
     int DoGetEffectiveWidth(int width) const;
 
 
-    wxString m_title;
+    std::string m_title;
     int m_width,
         m_manuallySetWidth,
         m_minWidth;
@@ -202,7 +203,7 @@ public:
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize, long style = 0,
            const wxValidator& validator = wxDefaultValidator,
-           const wxString& name = wxASCII_STR(wxDataViewCtrlNameStr) )
+           const std::string& name = wxDataViewCtrlNameStr)
              : wxScrollHelper(this)
     {
         Create(parent, id, pos, size, style, validator, name);
@@ -216,7 +217,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize, long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxDataViewCtrlNameStr));
+                const std::string& name = wxDataViewCtrlNameStr);
 
     bool AssociateModel( wxDataViewModel *model ) override;
 

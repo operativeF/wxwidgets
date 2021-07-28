@@ -355,7 +355,7 @@ public:
     void CheckItem(Node* item, wxCheckBoxState checkedState);
 
     unsigned GetColumnCount() const override;
-    wxString GetColumnType(unsigned col) const override;
+    std::string GetColumnType(unsigned col) const override;
     void GetValue(wxVariant& variant,
                   const wxDataViewItem& item,
                   unsigned col) const override;
@@ -631,17 +631,17 @@ unsigned wxTreeListModel::GetColumnCount() const
     return m_numColumns;
 }
 
-wxString wxTreeListModel::GetColumnType(unsigned col) const
+std::string wxTreeListModel::GetColumnType(unsigned col) const
 {
     if ( col == 0 )
     {
         return m_treelist->HasFlag(wxTL_CHECKBOX)
-                    ? wxDataViewCheckIconTextRenderer::GetDefaultType()
-                    : wxDataViewIconTextRenderer::GetDefaultType();
+                    ? wxDataViewCheckIconTextRenderer::DefaultType
+                    : wxDataViewIconTextRenderer::DefaultType;
     }
     else // All the other columns contain just text.
     {
-        return wxS("string");
+        return "string";
     }
 }
 
@@ -786,7 +786,7 @@ int wxTreeListModel::DoCompareValues(const wxVariant& value1,
         iconText1 << value1;
         iconText2 << value2;
 
-        return iconText1.GetText().Cmp(iconText2.GetText());
+        return iconText1.GetText().compare(iconText2.GetText());
     }
 
     return wxDataViewModel::DoCompareValues(value1, value2);
@@ -818,7 +818,7 @@ bool wxTreeListCtrl::Create(wxWindow* parent,
                             const wxPoint& pos,
                             const wxSize& size,
                             long style,
-                            const wxString& name)
+                            const std::string& name)
 {
     if ( style & wxTL_USER_3STATE )
         style |= wxTL_3STATE;
@@ -876,7 +876,7 @@ wxWindowList wxTreeListCtrl::GetCompositeWindowParts() const
 // ----------------------------------------------------------------------------
 
 int
-wxTreeListCtrl::DoInsertColumn(const wxString& title,
+wxTreeListCtrl::DoInsertColumn(const std::string& title,
                                int pos,
                                int width,
                                wxAlignment align,

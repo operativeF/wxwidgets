@@ -80,7 +80,7 @@ public:
     wxString GetPath() const
     {
         wxString path;
-        if ( !SHGetPathFromIDList(m_pidl, wxStringBuffer(path, MAX_PATH)) )
+        if ( !::SHGetPathFromIDListW(m_pidl, wxStringBuffer(path, MAX_PATH)) )
         {
             wxLogLastError(wxT("SHGetPathFromIDList"));
         }

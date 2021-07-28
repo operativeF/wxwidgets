@@ -81,13 +81,13 @@ class WXDLLIMPEXP_CORE wxGenericDirCtrl: public wxControl
 public:
     wxGenericDirCtrl() = default;
     wxGenericDirCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
-              const wxString &dir = wxASCII_STR(wxDirDialogDefaultFolderStr),
+              const std::string& dir = wxDirDialogDefaultFolderStr,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
               long style = wxDIRCTRL_DEFAULT_STYLE,
-              const wxString& filter = wxEmptyString,
+              const std::string& filter = {},
               int defaultFilter = 0,
-              const wxString& name = wxASCII_STR(wxTreeCtrlNameStr) )
+              const std::string& name = wxTreeCtrlNameStr)
     {
         Create(parent, id, dir, pos, size, style, filter, defaultFilter, name);
     }
@@ -96,13 +96,13 @@ public:
 	wxGenericDirCtrl& operator=(const wxGenericDirCtrl&) = delete;
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
-              const wxString &dir = wxASCII_STR(wxDirDialogDefaultFolderStr),
+              const std::string& dir = wxDirDialogDefaultFolderStr,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
               long style = wxDIRCTRL_DEFAULT_STYLE,
-              const wxString& filter = wxEmptyString,
+              const std::string& filter = {},
               int defaultFilter = 0,
-              const wxString& name = wxASCII_STR(wxTreeCtrlNameStr) );
+              const std::string& name = wxTreeCtrlNameStr);
 
     ~wxGenericDirCtrl() override = default;
 

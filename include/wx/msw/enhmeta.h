@@ -29,7 +29,7 @@
 class WXDLLIMPEXP_CORE wxEnhMetaFile : public wxGDIObject
 {
 public:
-    wxEnhMetaFile(const wxString& file = wxEmptyString) : m_filename(file)
+    wxEnhMetaFile(const std::string& file = {}) : m_filename(file)
         { Init(); }
     wxEnhMetaFile(const wxEnhMetaFile& metafile) : wxGDIObject()
         { Init(); Assign(metafile); }

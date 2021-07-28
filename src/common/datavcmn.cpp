@@ -334,15 +334,15 @@ int wxDataViewModel::Compare( const wxDataViewItem &item1, const wxDataViewItem 
         value2 = temp;
     }
 
-    if (value1.GetType() == wxT("string"))
+    if (value1.GetType() == "string")
     {
-        wxString str1 = value1.GetString();
-        wxString str2 = value2.GetString();
-        const int res = str1.Cmp( str2 );
+        std::string str1 = value1.GetString();
+        std::string str2 = value2.GetString();
+        const int res = str1.compare( str2 );
         if (res)
             return res;
     }
-    else if (value1.GetType() == wxT("long"))
+    else if (value1.GetType() == "long")
     {
         const long l1 = value1.GetLong();
         const long l2 = value2.GetLong();
@@ -351,7 +351,7 @@ int wxDataViewModel::Compare( const wxDataViewItem &item1, const wxDataViewItem 
         else if (l1 > l2)
             return 1;
     }
-    else if (value1.GetType() == wxT("double"))
+    else if (value1.GetType() == "double")
     {
         const double d1 = value1.GetDouble();
         const double d2 = value2.GetDouble();
@@ -361,7 +361,7 @@ int wxDataViewModel::Compare( const wxDataViewItem &item1, const wxDataViewItem 
             return 1;
     }
 #if wxUSE_DATETIME
-    else if (value1.GetType() == wxT("datetime"))
+    else if (value1.GetType() == "datetime")
     {
         const wxDateTime dt1 = value1.GetDateTime();
         const wxDateTime dt2 = value2.GetDateTime();
@@ -371,7 +371,7 @@ int wxDataViewModel::Compare( const wxDataViewItem &item1, const wxDataViewItem 
             return 1;
     }
 #endif // wxUSE_DATETIME
-    else if (value1.GetType() == wxT("bool"))
+    else if (value1.GetType() == "bool")
     {
         const bool b1 = value1.GetBool();
         const bool b2 = value2.GetBool();
@@ -379,14 +379,14 @@ int wxDataViewModel::Compare( const wxDataViewItem &item1, const wxDataViewItem 
         if (b1 != b2)
             return b1 ? 1 : -1;
     }
-    else if (value1.GetType() == wxT("wxDataViewIconText"))
+    else if (value1.GetType() == "wxDataViewIconText")
     {
         wxDataViewIconText iconText1, iconText2;
 
         iconText1 << value1;
         iconText2 << value2;
 
-        int res = iconText1.GetText().Cmp(iconText2.GetText());
+        int res = iconText1.GetText().compare(iconText2.GetText());
         if (res != 0)
           return res;
     }
@@ -666,7 +666,7 @@ IMPLEMENT_VARIANT_OBJECT_EXPORTED(wxDataViewIconText, WXDLLIMPEXP_CORE)
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxDataViewRendererBase, wxObject);
 
-wxDataViewRendererBase::wxDataViewRendererBase( const wxString &varianttype,
+wxDataViewRendererBase::wxDataViewRendererBase( const std::string &varianttype,
                                                 wxDataViewCellMode WXUNUSED(mode),
                                                 int WXUNUSED(align) )
     : m_variantType(varianttype)
@@ -1022,7 +1022,7 @@ wxDataViewCustomRendererBase::WXCallRender(wxRect rectCell, wxDC *dc, int state)
     Render(rectItem, dc, state);
 }
 
-wxSize wxDataViewCustomRendererBase::GetTextExtent(const wxString& str) const
+wxSize wxDataViewCustomRendererBase::GetTextExtent(const std::string& str) const
 {
     const wxDataViewCtrl *view = GetView();
 
@@ -1038,7 +1038,7 @@ wxSize wxDataViewCustomRendererBase::GetTextExtent(const wxString& str) const
 }
 
 void
-wxDataViewCustomRendererBase::RenderText(const wxString& text,
+wxDataViewCustomRendererBase::RenderText(const std::string& text,
                                          int xoffset,
                                          wxRect rect,
                                          wxDC *dc,
@@ -1310,7 +1310,7 @@ struct RendererFactory
     static Renderer*
     New(wxDataViewCellMode mode, int align)
     {
-        return new Renderer(Renderer::GetDefaultType(), mode, align);
+        return new Renderer(Renderer::DefaultType, mode, align);
     }
 };
 
@@ -1321,8 +1321,8 @@ struct RendererFactory<wxDataViewProgressRenderer>
     New(wxDataViewCellMode mode, int align)
     {
         return new wxDataViewProgressRenderer(
-                        wxString(),
-                        wxDataViewProgressRenderer::GetDefaultType(),
+                        "",
+                        wxDataViewProgressRenderer::DefaultType,
                         mode,
                         align
                     );
@@ -1408,7 +1408,7 @@ PrependColumnWithRenderer(wxDataViewCtrlBase* dvc,
 } // anonymous namespace
 
 wxDataViewColumn *
-wxDataViewCtrlBase::AppendTextColumn( const wxString &label, unsigned int model_column,
+wxDataViewCtrlBase::AppendTextColumn( const std::string &label, unsigned int model_column,
                             wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
     return AppendColumnWithRenderer<wxDataViewTextRenderer>(
@@ -1417,7 +1417,7 @@ wxDataViewCtrlBase::AppendTextColumn( const wxString &label, unsigned int model_
 }
 
 wxDataViewColumn *
-wxDataViewCtrlBase::AppendIconTextColumn( const wxString &label, unsigned int model_column,
+wxDataViewCtrlBase::AppendIconTextColumn( const std::string &label, unsigned int model_column,
                             wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
     return AppendColumnWithRenderer<wxDataViewIconTextRenderer>(
@@ -1426,7 +1426,7 @@ wxDataViewCtrlBase::AppendIconTextColumn( const wxString &label, unsigned int mo
 }
 
 wxDataViewColumn *
-wxDataViewCtrlBase::AppendToggleColumn( const wxString &label, unsigned int model_column,
+wxDataViewCtrlBase::AppendToggleColumn( const std::string &label, unsigned int model_column,
                             wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
     return AppendColumnWithRenderer<wxDataViewToggleRenderer>(
@@ -1435,7 +1435,7 @@ wxDataViewCtrlBase::AppendToggleColumn( const wxString &label, unsigned int mode
 }
 
 wxDataViewColumn *
-wxDataViewCtrlBase::AppendProgressColumn( const wxString &label, unsigned int model_column,
+wxDataViewCtrlBase::AppendProgressColumn( const std::string &label, unsigned int model_column,
                             wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
     return AppendColumnWithRenderer<wxDataViewProgressRenderer>(
@@ -1444,7 +1444,7 @@ wxDataViewCtrlBase::AppendProgressColumn( const wxString &label, unsigned int mo
 }
 
 wxDataViewColumn *
-wxDataViewCtrlBase::AppendDateColumn( const wxString &label, unsigned int model_column,
+wxDataViewCtrlBase::AppendDateColumn( const std::string &label, unsigned int model_column,
                             wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
     return AppendColumnWithRenderer<wxDataViewDateRenderer>(
@@ -1453,7 +1453,7 @@ wxDataViewCtrlBase::AppendDateColumn( const wxString &label, unsigned int model_
 }
 
 wxDataViewColumn *
-wxDataViewCtrlBase::AppendBitmapColumn( const wxString &label, unsigned int model_column,
+wxDataViewCtrlBase::AppendBitmapColumn( const std::string &label, unsigned int model_column,
                             wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
     return AppendColumnWithRenderer<wxDataViewBitmapRenderer>(
@@ -1516,7 +1516,7 @@ wxDataViewCtrlBase::AppendBitmapColumn( const wxBitmap &label, unsigned int mode
 }
 
 wxDataViewColumn *
-wxDataViewCtrlBase::PrependTextColumn( const wxString &label, unsigned int model_column,
+wxDataViewCtrlBase::PrependTextColumn( const std::string &label, unsigned int model_column,
                             wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
     return PrependColumnWithRenderer<wxDataViewTextRenderer>(
@@ -1525,7 +1525,7 @@ wxDataViewCtrlBase::PrependTextColumn( const wxString &label, unsigned int model
 }
 
 wxDataViewColumn *
-wxDataViewCtrlBase::PrependIconTextColumn( const wxString &label, unsigned int model_column,
+wxDataViewCtrlBase::PrependIconTextColumn( const std::string &label, unsigned int model_column,
                             wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
     return PrependColumnWithRenderer<wxDataViewIconTextRenderer>(
@@ -1534,7 +1534,7 @@ wxDataViewCtrlBase::PrependIconTextColumn( const wxString &label, unsigned int m
 }
 
 wxDataViewColumn *
-wxDataViewCtrlBase::PrependToggleColumn( const wxString &label, unsigned int model_column,
+wxDataViewCtrlBase::PrependToggleColumn( const std::string &label, unsigned int model_column,
                             wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
     return PrependColumnWithRenderer<wxDataViewToggleRenderer>(
@@ -1543,7 +1543,7 @@ wxDataViewCtrlBase::PrependToggleColumn( const wxString &label, unsigned int mod
 }
 
 wxDataViewColumn *
-wxDataViewCtrlBase::PrependProgressColumn( const wxString &label, unsigned int model_column,
+wxDataViewCtrlBase::PrependProgressColumn( const std::string &label, unsigned int model_column,
                             wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
     return PrependColumnWithRenderer<wxDataViewProgressRenderer>(
@@ -1552,7 +1552,7 @@ wxDataViewCtrlBase::PrependProgressColumn( const wxString &label, unsigned int m
 }
 
 wxDataViewColumn *
-wxDataViewCtrlBase::PrependDateColumn( const wxString &label, unsigned int model_column,
+wxDataViewCtrlBase::PrependDateColumn( const std::string &label, unsigned int model_column,
                             wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
     return PrependColumnWithRenderer<wxDataViewDateRenderer>(
@@ -1561,7 +1561,7 @@ wxDataViewCtrlBase::PrependDateColumn( const wxString &label, unsigned int model
 }
 
 wxDataViewColumn *
-wxDataViewCtrlBase::PrependBitmapColumn( const wxString &label, unsigned int model_column,
+wxDataViewCtrlBase::PrependBitmapColumn( const std::string &label, unsigned int model_column,
                             wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
     return PrependColumnWithRenderer<wxDataViewBitmapRenderer>(
@@ -1712,7 +1712,7 @@ void wxDataViewEvent::Init(wxDataViewCtrlBase* dvc,
 // -------------------------------------
 
 wxDataViewSpinRenderer::wxDataViewSpinRenderer( int min, int max, wxDataViewCellMode mode, int alignment ) :
-   wxDataViewCustomRenderer(wxT("long"), mode, alignment ),
+   wxDataViewCustomRenderer("long", mode, alignment ),
    m_min(min),
    m_max(max)
 {
@@ -1776,7 +1776,7 @@ bool wxDataViewSpinRenderer::GetValue( wxVariant &value ) const
 }
 
 #if wxUSE_ACCESSIBILITY
-wxString wxDataViewSpinRenderer::GetAccessibleDescription() const
+std::string wxDataViewSpinRenderer::GetAccessibleDescription() const
 {
     return wxString::Format(wxS("%li"), m_data);
 }
@@ -1791,7 +1791,7 @@ wxString wxDataViewSpinRenderer::GetAccessibleDescription() const
 #if defined(wxHAS_GENERIC_DATAVIEWCTRL)
 
 wxDataViewChoiceRenderer::wxDataViewChoiceRenderer( const std::vector<std::string>& choices, wxDataViewCellMode mode, int alignment ) :
-   wxDataViewCustomRenderer(wxT("string"), mode, alignment ),
+   wxDataViewCustomRenderer("string", mode, alignment ),
    m_choices(choices)
 {
 }
@@ -1814,7 +1814,7 @@ wxWindow* wxDataViewChoiceRenderer::CreateEditorCtrl( wxWindow *parent, wxRect l
 bool wxDataViewChoiceRenderer::GetValueFromEditorCtrl( wxWindow* editor, wxVariant &value )
 {
     wxChoice *c = (wxChoice*) editor;
-    wxString s = c->GetStringSelection();
+    std::string s = c->GetStringSelection();
     value = s;
     return true;
 }
@@ -1854,7 +1854,7 @@ bool wxDataViewChoiceRenderer::GetValue( wxVariant &value ) const
 }
 
 #if wxUSE_ACCESSIBILITY
-wxString wxDataViewChoiceRenderer::GetAccessibleDescription() const
+std::string wxDataViewChoiceRenderer::GetAccessibleDescription() const
 {
     return m_data;
 }
@@ -1913,7 +1913,7 @@ bool wxDataViewChoiceByIndexRenderer::GetValue( wxVariant &value ) const
 }
 
 #if wxUSE_ACCESSIBILITY
-wxString wxDataViewChoiceByIndexRenderer::GetAccessibleDescription() const
+std::string wxDataViewChoiceByIndexRenderer::GetAccessibleDescription() const
 {
     wxVariant strVal;
     if ( wxDataViewChoiceRenderer::GetValue(strVal) )
@@ -1933,7 +1933,7 @@ wxString wxDataViewChoiceByIndexRenderer::GetAccessibleDescription() const
 
 #if (defined(wxHAS_GENERIC_DATAVIEWCTRL) || defined(__WXGTK__)) && wxUSE_DATEPICKCTRL
 
-wxDataViewDateRenderer::wxDataViewDateRenderer(const wxString& varianttype,
+wxDataViewDateRenderer::wxDataViewDateRenderer(const std::string& varianttype,
                                               wxDataViewCellMode mode, int align)
     : wxDataViewCustomRenderer(varianttype, mode, align)
 {
@@ -1972,7 +1972,7 @@ bool wxDataViewDateRenderer::GetValue(wxVariant& value) const
 }
 
 #if wxUSE_ACCESSIBILITY
-wxString wxDataViewDateRenderer::GetAccessibleDescription() const
+std::string wxDataViewDateRenderer::GetAccessibleDescription() const
 {
     return m_date.FormatDate();
 }
@@ -1980,7 +1980,7 @@ wxString wxDataViewDateRenderer::GetAccessibleDescription() const
 
 bool wxDataViewDateRenderer::Render(wxRect cell, wxDC* dc, int state)
 {
-    wxString tmp = m_date.FormatDate();
+    std::string tmp = m_date.FormatDate();
     RenderText( tmp, 0, cell, dc, state );
     return true;
 }
@@ -2031,12 +2031,12 @@ bool wxDataViewCheckIconTextRenderer::GetValue(wxVariant& value) const
 }
 
 #if wxUSE_ACCESSIBILITY
-wxString wxDataViewCheckIconTextRenderer::GetAccessibleDescription() const
+std::string wxDataViewCheckIconTextRenderer::GetAccessibleDescription() const
 {
-    wxString text = m_value.GetText();
+    std::string text = m_value.GetText();
     if ( !text.empty() )
     {
-        text += wxS(" ");
+        text += " ";
     }
 
     switch ( m_value.GetCheckedState() )
@@ -2077,7 +2077,7 @@ wxSize wxDataViewCheckIconTextRenderer::GetSize() const
         size.x += sizeIcon.x + MARGIN_ICON_TEXT;
     }
 
-    wxString text = m_value.GetText();
+    std::string text = m_value.GetText();
     if ( text.empty() )
         text = "Dummy";
 
@@ -2209,17 +2209,17 @@ wxDataViewListStore::~wxDataViewListStore()
     }
 }
 
-void wxDataViewListStore::PrependColumn( const wxString &varianttype )
+void wxDataViewListStore::PrependColumn( const std::string &varianttype )
 {
     m_cols.insert( std::cbegin(m_cols), varianttype);
 }
 
-void wxDataViewListStore::InsertColumn( unsigned int pos, const wxString &varianttype )
+void wxDataViewListStore::InsertColumn( unsigned int pos, const std::string &varianttype )
 {
     m_cols.insert( std::cbegin(m_cols) + pos, varianttype );
 }
 
-void wxDataViewListStore::AppendColumn( const wxString &varianttype )
+void wxDataViewListStore::AppendColumn( const std::string &varianttype )
 {
     m_cols.push_back( varianttype );
 }
@@ -2234,7 +2234,7 @@ unsigned int wxDataViewListStore::GetItemCount() const
     return m_data.size();
 }
 
-wxString wxDataViewListStore::GetColumnType( unsigned int pos ) const
+std::string wxDataViewListStore::GetColumnType( unsigned int pos ) const
 {
     // FIXME: Hazardous with [] operator. Should return iterator instead.
     return m_cols.at(pos);
@@ -2360,19 +2360,19 @@ bool wxDataViewListCtrl::Create( wxWindow *parent, wxWindowID id,
     return true;
 }
 
-bool wxDataViewListCtrl::AppendColumn( wxDataViewColumn *column, const wxString &varianttype )
+bool wxDataViewListCtrl::AppendColumn( wxDataViewColumn *column, const std::string &varianttype )
 {
     GetStore()->AppendColumn( varianttype );
     return wxDataViewCtrl::AppendColumn( column );
 }
 
-bool wxDataViewListCtrl::PrependColumn( wxDataViewColumn *column, const wxString &varianttype )
+bool wxDataViewListCtrl::PrependColumn( wxDataViewColumn *column, const std::string &varianttype )
 {
     GetStore()->PrependColumn( varianttype );
     return wxDataViewCtrl::PrependColumn( column );
 }
 
-bool wxDataViewListCtrl::InsertColumn( unsigned int pos, wxDataViewColumn *column, const wxString &varianttype )
+bool wxDataViewListCtrl::InsertColumn( unsigned int pos, wxDataViewColumn *column, const std::string &varianttype )
 {
     GetStore()->InsertColumn( pos, varianttype );
     return wxDataViewCtrl::InsertColumn( pos, column );
@@ -2399,13 +2399,13 @@ bool wxDataViewListCtrl::ClearColumns()
     return wxDataViewCtrl::ClearColumns();
 }
 
-wxDataViewColumn *wxDataViewListCtrl::AppendTextColumn( const wxString &label,
+wxDataViewColumn *wxDataViewListCtrl::AppendTextColumn( const std::string &label,
           wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
-    GetStore()->AppendColumn( wxT("string") );
+    GetStore()->AppendColumn( "string" );
 
     wxDataViewColumn *ret = new wxDataViewColumn( label,
-        new wxDataViewTextRenderer( wxT("string"), mode ),
+        new wxDataViewTextRenderer( "string", mode ),
         GetStore()->GetColumnCount()-1, width, align, flags );
 
     wxDataViewCtrl::AppendColumn( ret );
@@ -2413,37 +2413,37 @@ wxDataViewColumn *wxDataViewListCtrl::AppendTextColumn( const wxString &label,
     return ret;
 }
 
-wxDataViewColumn *wxDataViewListCtrl::AppendToggleColumn( const wxString &label,
+wxDataViewColumn *wxDataViewListCtrl::AppendToggleColumn( const std::string &label,
           wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
-    GetStore()->AppendColumn( wxT("bool") );
+    GetStore()->AppendColumn( "bool" );
 
     wxDataViewColumn *ret = new wxDataViewColumn( label,
-        new wxDataViewToggleRenderer( wxT("bool"), mode ),
+        new wxDataViewToggleRenderer( "bool", mode ),
         GetStore()->GetColumnCount()-1, width, align, flags );
 
     return wxDataViewCtrl::AppendColumn( ret ) ? ret : nullptr;
 }
 
-wxDataViewColumn *wxDataViewListCtrl::AppendProgressColumn( const wxString &label,
+wxDataViewColumn *wxDataViewListCtrl::AppendProgressColumn( const std::string &label,
           wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
-    GetStore()->AppendColumn( wxT("long") );
+    GetStore()->AppendColumn( "long" );
 
     wxDataViewColumn *ret = new wxDataViewColumn( label,
-        new wxDataViewProgressRenderer( wxEmptyString, wxT("long"), mode ),
+        new wxDataViewProgressRenderer( "", "long", mode ),
         GetStore()->GetColumnCount()-1, width, align, flags );
 
     return wxDataViewCtrl::AppendColumn( ret ) ? ret : nullptr;
 }
 
-wxDataViewColumn *wxDataViewListCtrl::AppendIconTextColumn( const wxString &label,
+wxDataViewColumn *wxDataViewListCtrl::AppendIconTextColumn( const std::string &label,
           wxDataViewCellMode mode, int width, wxAlignment align, int flags )
 {
-    GetStore()->AppendColumn( wxT("wxDataViewIconText") );
+    GetStore()->AppendColumn( "wxDataViewIconText" );
 
     wxDataViewColumn *ret = new wxDataViewColumn( label,
-        new wxDataViewIconTextRenderer( wxT("wxDataViewIconText"), mode ),
+        new wxDataViewIconTextRenderer( "wxDataViewIconText", mode ),
         GetStore()->GetColumnCount()-1, width, align, flags );
 
     return wxDataViewCtrl::AppendColumn( ret ) ? ret : nullptr;
@@ -2460,7 +2460,7 @@ void wxDataViewListCtrl::OnSize( wxSizeEvent &event )
 
 wxDataViewTreeStoreNode::wxDataViewTreeStoreNode(
         wxDataViewTreeStoreNode *parent,
-        const wxString &text, const wxIcon &icon, wxClientData *data )
+        const std::string &text, const wxIcon &icon, wxClientData *data )
     : m_text(text)
     , m_icon(icon)
     , m_parent(parent)
@@ -2474,7 +2474,7 @@ wxDataViewTreeStoreNode::~wxDataViewTreeStoreNode()
 }
 
 wxDataViewTreeStoreContainerNode::wxDataViewTreeStoreContainerNode(
-        wxDataViewTreeStoreNode *parent, const wxString &text,
+        wxDataViewTreeStoreNode *parent, const std::string &text,
         const wxIcon &icon, const wxIcon &expanded, wxClientData *data )
     : wxDataViewTreeStoreNode( parent, text, icon, data )
     , m_iconExpanded(expanded)
@@ -2514,7 +2514,7 @@ void wxDataViewTreeStoreContainerNode::DestroyChildren()
 
 wxDataViewTreeStore::wxDataViewTreeStore()
 {
-    m_root = new wxDataViewTreeStoreContainerNode( nullptr, wxEmptyString );
+    m_root = new wxDataViewTreeStoreContainerNode( nullptr, "" );
 }
 
 wxDataViewTreeStore::~wxDataViewTreeStore()
@@ -2523,7 +2523,7 @@ wxDataViewTreeStore::~wxDataViewTreeStore()
 }
 
 wxDataViewItem wxDataViewTreeStore::AppendItem( const wxDataViewItem& parent,
-        const wxString &text, const wxIcon &icon, wxClientData *data )
+        const std::string &text, const wxIcon &icon, wxClientData *data )
 {
     wxDataViewTreeStoreContainerNode *parent_node = FindContainerNode( parent );
     if (!parent_node) return wxDataViewItem(nullptr);
@@ -2536,7 +2536,7 @@ wxDataViewItem wxDataViewTreeStore::AppendItem( const wxDataViewItem& parent,
 }
 
 wxDataViewItem wxDataViewTreeStore::PrependItem( const wxDataViewItem& parent,
-        const wxString &text, const wxIcon &icon, wxClientData *data )
+        const std::string &text, const wxIcon &icon, wxClientData *data )
 {
     wxDataViewTreeStoreContainerNode *parent_node = FindContainerNode( parent );
     if (!parent_node) return wxDataViewItem(nullptr);
@@ -2552,7 +2552,7 @@ wxDataViewItem wxDataViewTreeStore::PrependItem( const wxDataViewItem& parent,
 wxDataViewItem
 wxDataViewTreeStore::InsertItem(const wxDataViewItem& parent,
                                 const wxDataViewItem& previous,
-                                const wxString& text,
+                                const std::string& text,
                                 const wxIcon& icon,
                                 wxClientData *data)
 {
@@ -2572,7 +2572,7 @@ wxDataViewTreeStore::InsertItem(const wxDataViewItem& parent,
 }
 
 wxDataViewItem wxDataViewTreeStore::PrependContainer( const wxDataViewItem& parent,
-        const wxString &text, const wxIcon &icon, const wxIcon &expanded,
+        const std::string &text, const wxIcon &icon, const wxIcon &expanded,
         wxClientData *data )
 {
     wxDataViewTreeStoreContainerNode *parent_node = FindContainerNode( parent );
@@ -2588,7 +2588,7 @@ wxDataViewItem wxDataViewTreeStore::PrependContainer( const wxDataViewItem& pare
 
 wxDataViewItem
 wxDataViewTreeStore::AppendContainer(const wxDataViewItem& parent,
-                                     const wxString &text,
+                                     const std::string &text,
                                      const wxIcon& icon,
                                      const wxIcon& expanded,
                                      wxClientData * data)
@@ -2606,7 +2606,7 @@ wxDataViewTreeStore::AppendContainer(const wxDataViewItem& parent,
 wxDataViewItem
 wxDataViewTreeStore::InsertContainer(const wxDataViewItem& parent,
                                      const wxDataViewItem& previous,
-                                     const wxString& text,
+                                     const std::string& text,
                                      const wxIcon& icon,
                                      const wxIcon& expanded,
                                      wxClientData * data)
@@ -2658,7 +2658,7 @@ int wxDataViewTreeStore::GetChildCount( const wxDataViewItem& parent ) const
     return (int) container_node->GetChildren().size();
 }
 
-void wxDataViewTreeStore::SetItemText( const wxDataViewItem& item, const wxString &text )
+void wxDataViewTreeStore::SetItemText( const wxDataViewItem& item, const std::string &text )
 {
     wxDataViewTreeStoreNode *node = FindNode( item );
     if (!node) return;
@@ -2666,10 +2666,10 @@ void wxDataViewTreeStore::SetItemText( const wxDataViewItem& item, const wxStrin
     node->SetText( text );
 }
 
-wxString wxDataViewTreeStore::GetItemText( const wxDataViewItem& item ) const
+std::string wxDataViewTreeStore::GetItemText( const wxDataViewItem& item ) const
 {
     wxDataViewTreeStoreNode *node = FindNode( item );
-    if (!node) return wxEmptyString;
+    if (!node) return "";
 
     return node->GetText();
 }
@@ -2903,7 +2903,7 @@ bool wxDataViewTreeCtrl::Create( wxWindow *parent, wxWindowID id,
 
     AppendIconTextColumn
     (
-        wxString(),                 // no label (header is not shown anyhow)
+        "",                 // no label (header is not shown anyhow)
         0,                          // the only model column
         wxDATAVIEW_CELL_EDITABLE,
         -1,                         // default width
@@ -2915,7 +2915,7 @@ bool wxDataViewTreeCtrl::Create( wxWindow *parent, wxWindowID id,
 }
 
 wxDataViewItem wxDataViewTreeCtrl::AppendItem( const wxDataViewItem& parent,
-        const wxString &text, int iconIndex, wxClientData *data )
+        const std::string &text, int iconIndex, wxClientData *data )
 {
     wxDataViewItem res = GetStore()->
         AppendItem( parent, text, GetImage(iconIndex), data );
@@ -2926,7 +2926,7 @@ wxDataViewItem wxDataViewTreeCtrl::AppendItem( const wxDataViewItem& parent,
 }
 
 wxDataViewItem wxDataViewTreeCtrl::PrependItem( const wxDataViewItem& parent,
-        const wxString &text, int iconIndex, wxClientData *data )
+        const std::string &text, int iconIndex, wxClientData *data )
 {
     wxDataViewItem res = GetStore()->
         PrependItem( parent, text, GetImage(iconIndex), data );
@@ -2937,7 +2937,7 @@ wxDataViewItem wxDataViewTreeCtrl::PrependItem( const wxDataViewItem& parent,
 }
 
 wxDataViewItem wxDataViewTreeCtrl::InsertItem( const wxDataViewItem& parent, const wxDataViewItem& previous,
-        const wxString &text, int iconIndex, wxClientData *data )
+        const std::string &text, int iconIndex, wxClientData *data )
 {
     wxDataViewItem res = GetStore()->
         InsertItem( parent, previous, text, GetImage(iconIndex), data );
@@ -2948,7 +2948,7 @@ wxDataViewItem wxDataViewTreeCtrl::InsertItem( const wxDataViewItem& parent, con
 }
 
 wxDataViewItem wxDataViewTreeCtrl::PrependContainer( const wxDataViewItem& parent,
-        const wxString &text, int iconIndex, int expandedIndex, wxClientData *data )
+        const std::string &text, int iconIndex, int expandedIndex, wxClientData *data )
 {
     wxDataViewItem res = GetStore()->
         PrependContainer( parent, text,
@@ -2960,7 +2960,7 @@ wxDataViewItem wxDataViewTreeCtrl::PrependContainer( const wxDataViewItem& paren
 }
 
 wxDataViewItem wxDataViewTreeCtrl::AppendContainer( const wxDataViewItem& parent,
-        const wxString &text, int iconIndex, int expandedIndex, wxClientData *data )
+        const std::string &text, int iconIndex, int expandedIndex, wxClientData *data )
 {
     wxDataViewItem res = GetStore()->
         AppendContainer( parent, text,
@@ -2972,7 +2972,7 @@ wxDataViewItem wxDataViewTreeCtrl::AppendContainer( const wxDataViewItem& parent
 }
 
 wxDataViewItem wxDataViewTreeCtrl::InsertContainer( const wxDataViewItem& parent, const wxDataViewItem& previous,
-        const wxString &text, int iconIndex, int expandedIndex, wxClientData *data )
+        const std::string &text, int iconIndex, int expandedIndex, wxClientData *data )
 {
     wxDataViewItem res = GetStore()->
         InsertContainer( parent, previous, text,
@@ -2983,7 +2983,7 @@ wxDataViewItem wxDataViewTreeCtrl::InsertContainer( const wxDataViewItem& parent
     return res;
 }
 
-void wxDataViewTreeCtrl::SetItemText( const wxDataViewItem& item, const wxString &text )
+void wxDataViewTreeCtrl::SetItemText( const wxDataViewItem& item, const std::string &text )
 {
     GetStore()->SetItemText(item,text);
 

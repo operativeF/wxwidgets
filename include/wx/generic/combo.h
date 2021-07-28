@@ -41,12 +41,12 @@ public:
 
     wxGenericComboCtrl(wxWindow *parent,
                        wxWindowID id = wxID_ANY,
-                       const wxString& value = wxEmptyString,
+                       const std::string& value = {},
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
                        long style = 0,
                        const wxValidator& validator = wxDefaultValidator,
-                       const wxString& name = wxASCII_STR(wxComboBoxNameStr))
+                       const std::string& name = wxComboBoxNameStr)
     {
         Init();
 
@@ -55,12 +55,12 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                const wxString& value = wxEmptyString,
+                const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxComboBoxNameStr));
+                const std::string& name = wxComboBoxNameStr);
 
     virtual ~wxGenericComboCtrl() = default;
 
@@ -124,12 +124,12 @@ public:
 
     wxComboCtrl(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                const wxString& value = wxEmptyString,
+                const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxComboBoxNameStr))
+                const std::string& name = wxComboBoxNameStr)
         : wxGenericComboCtrl()
     {
         (void)Create(parent, id, value, pos, size, style, validator, name);

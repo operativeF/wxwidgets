@@ -329,13 +329,13 @@ void wxGenericDirCtrl::ExpandRoot()
 
 bool wxGenericDirCtrl::Create(wxWindow *parent,
                               wxWindowID treeid,
-                              const wxString& dir,
+                              const std::string& dir,
                               const wxPoint& pos,
                               const wxSize& size,
                               long style,
-                              const wxString& filter,
+                              const std::string& filter,
                               int defaultFilter,
-                              const wxString& name)
+                              const std::string& name)
 {
     if (!wxControl::Create(parent, treeid, pos, size, style, wxDefaultValidator, name))
         return false;
@@ -395,12 +395,10 @@ bool wxGenericDirCtrl::Create(wxWindow *parent,
     m_showHidden = false;
     wxDirItemData* rootData = new wxDirItemData(wxEmptyString, wxEmptyString, true);
 
-    wxString rootName;
-
 #if defined(__WINDOWS__)
-    rootName = _("Computer");
+    std::string rootName = _("Computer");
 #else
-    rootName = _("Sections");
+    std::string rootName = _("Sections");
 #endif
 
     m_rootId = m_treeCtrl->AddRoot( rootName, 3, -1, rootData);

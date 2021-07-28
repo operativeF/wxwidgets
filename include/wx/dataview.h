@@ -189,7 +189,7 @@ public:
     virtual unsigned int GetColumnCount() const = 0;
 
     // return type as reported by wxVariant
-    virtual wxString GetColumnType( unsigned int col ) const = 0;
+    virtual std::string GetColumnType( unsigned int col ) const = 0;
 
     // get value into a wxVariant
     virtual void GetValue( wxVariant &variant,
@@ -559,27 +559,27 @@ public:
     // column management
     // -----------------
 
-    wxDataViewColumn *PrependTextColumn( const wxString &label, unsigned int model_column,
+    wxDataViewColumn *PrependTextColumn( const std::string &label, unsigned int model_column,
                     wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT, int width = -1,
                     wxAlignment align = wxALIGN_NOT,
                     int flags = wxDATAVIEW_COL_RESIZABLE );
-    wxDataViewColumn *PrependIconTextColumn( const wxString &label, unsigned int model_column,
+    wxDataViewColumn *PrependIconTextColumn( const std::string &label, unsigned int model_column,
                     wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT, int width = -1,
                     wxAlignment align = wxALIGN_NOT,
                     int flags = wxDATAVIEW_COL_RESIZABLE );
-    wxDataViewColumn *PrependToggleColumn( const wxString &label, unsigned int model_column,
+    wxDataViewColumn *PrependToggleColumn( const std::string &label, unsigned int model_column,
                     wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT, int width = wxDVC_TOGGLE_DEFAULT_WIDTH,
                     wxAlignment align = wxALIGN_CENTER,
                     int flags = wxDATAVIEW_COL_RESIZABLE );
-    wxDataViewColumn *PrependProgressColumn( const wxString &label, unsigned int model_column,
+    wxDataViewColumn *PrependProgressColumn( const std::string &label, unsigned int model_column,
                     wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT, int width = wxDVC_DEFAULT_WIDTH,
                     wxAlignment align = wxALIGN_CENTER,
                     int flags = wxDATAVIEW_COL_RESIZABLE );
-    wxDataViewColumn *PrependDateColumn( const wxString &label, unsigned int model_column,
+    wxDataViewColumn *PrependDateColumn( const std::string &label, unsigned int model_column,
                     wxDataViewCellMode mode = wxDATAVIEW_CELL_ACTIVATABLE, int width = -1,
                     wxAlignment align = wxALIGN_NOT,
                     int flags = wxDATAVIEW_COL_RESIZABLE );
-    wxDataViewColumn *PrependBitmapColumn( const wxString &label, unsigned int model_column,
+    wxDataViewColumn *PrependBitmapColumn( const std::string &label, unsigned int model_column,
                     wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT, int width = -1,
                     wxAlignment align = wxALIGN_CENTER,
                     int flags = wxDATAVIEW_COL_RESIZABLE );
@@ -608,27 +608,27 @@ public:
                     wxAlignment align = wxALIGN_CENTER,
                     int flags = wxDATAVIEW_COL_RESIZABLE );
 
-    wxDataViewColumn *AppendTextColumn( const wxString &label, unsigned int model_column,
+    wxDataViewColumn *AppendTextColumn( const std::string &label, unsigned int model_column,
                     wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT, int width = -1,
                     wxAlignment align = wxALIGN_NOT,
                     int flags = wxDATAVIEW_COL_RESIZABLE );
-    wxDataViewColumn *AppendIconTextColumn( const wxString &label, unsigned int model_column,
+    wxDataViewColumn *AppendIconTextColumn( const std::string &label, unsigned int model_column,
                     wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT, int width = -1,
                     wxAlignment align = wxALIGN_NOT,
                     int flags = wxDATAVIEW_COL_RESIZABLE );
-    wxDataViewColumn *AppendToggleColumn( const wxString &label, unsigned int model_column,
+    wxDataViewColumn *AppendToggleColumn( const std::string &label, unsigned int model_column,
                     wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT, int width = wxDVC_TOGGLE_DEFAULT_WIDTH,
                     wxAlignment align = wxALIGN_CENTER,
                     int flags = wxDATAVIEW_COL_RESIZABLE );
-    wxDataViewColumn *AppendProgressColumn( const wxString &label, unsigned int model_column,
+    wxDataViewColumn *AppendProgressColumn( const std::string &label, unsigned int model_column,
                     wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT, int width = wxDVC_DEFAULT_WIDTH,
                     wxAlignment align = wxALIGN_CENTER,
                     int flags = wxDATAVIEW_COL_RESIZABLE );
-    wxDataViewColumn *AppendDateColumn( const wxString &label, unsigned int model_column,
+    wxDataViewColumn *AppendDateColumn( const std::string &label, unsigned int model_column,
                     wxDataViewCellMode mode = wxDATAVIEW_CELL_ACTIVATABLE, int width = -1,
                     wxAlignment align = wxALIGN_NOT,
                     int flags = wxDATAVIEW_COL_RESIZABLE );
-    wxDataViewColumn *AppendBitmapColumn( const wxString &label, unsigned int model_column,
+    wxDataViewColumn *AppendBitmapColumn( const std::string &label, unsigned int model_column,
                     wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT, int width = -1,
                     wxAlignment align = wxALIGN_CENTER,
                     int flags = wxDATAVIEW_COL_RESIZABLE );
@@ -1038,9 +1038,9 @@ public:
     wxDataViewListStore() = default;
     ~wxDataViewListStore() override;
 
-    void PrependColumn( const wxString &varianttype );
-    void InsertColumn( unsigned int pos, const wxString &varianttype );
-    void AppendColumn( const wxString &varianttype );
+    void PrependColumn( const std::string &varianttype );
+    void InsertColumn( unsigned int pos, const std::string &varianttype );
+    void AppendColumn( const std::string &varianttype );
 
     void AppendItem( const std::vector<wxVariant> &values, wxUIntPtr data = 0 );
     void PrependItem( const std::vector<wxVariant> &values, wxUIntPtr data = 0 );
@@ -1058,7 +1058,7 @@ public:
 
     unsigned int GetColumnCount() const override;
 
-    wxString GetColumnType( unsigned int col ) const override;
+    std::string GetColumnType( unsigned int col ) const override;
 
     void GetValueByRow( wxVariant &value,
                            unsigned int row, unsigned int col ) const override;
@@ -1069,7 +1069,7 @@ public:
 
 public:
     std::vector<wxDataViewListStoreLine*> m_data;
-    std::vector<wxString>                 m_cols;
+    std::vector<std::string>                 m_cols;
 };
 
 //-----------------------------------------------------------------------------
@@ -1111,9 +1111,9 @@ public:
     bool IsRowSelected(unsigned row) const
         { return IsSelected(RowToItem(row)); }
 
-    bool AppendColumn( wxDataViewColumn *column, const wxString &varianttype );
-    bool PrependColumn( wxDataViewColumn *column, const wxString &varianttype );
-    bool InsertColumn( unsigned int pos, wxDataViewColumn *column, const wxString &varianttype );
+    bool AppendColumn( wxDataViewColumn *column, const std::string &varianttype );
+    bool PrependColumn( wxDataViewColumn *column, const std::string &varianttype );
+    bool InsertColumn( unsigned int pos, wxDataViewColumn *column, const std::string &varianttype );
 
     // overridden from base class
     bool PrependColumn( wxDataViewColumn *col ) override;
@@ -1121,16 +1121,16 @@ public:
     bool AppendColumn( wxDataViewColumn *col ) override;
     bool ClearColumns() override;
 
-    wxDataViewColumn *AppendTextColumn( const wxString &label,
+    wxDataViewColumn *AppendTextColumn( const std::string &label,
           wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
           int width = -1, wxAlignment align = wxALIGN_LEFT, int flags = wxDATAVIEW_COL_RESIZABLE );
-    wxDataViewColumn *AppendToggleColumn( const wxString &label,
+    wxDataViewColumn *AppendToggleColumn( const std::string &label,
           wxDataViewCellMode mode = wxDATAVIEW_CELL_ACTIVATABLE,
           int width = -1, wxAlignment align = wxALIGN_LEFT, int flags = wxDATAVIEW_COL_RESIZABLE );
-    wxDataViewColumn *AppendProgressColumn( const wxString &label,
+    wxDataViewColumn *AppendProgressColumn( const std::string &label,
           wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
           int width = -1, wxAlignment align = wxALIGN_LEFT, int flags = wxDATAVIEW_COL_RESIZABLE );
-    wxDataViewColumn *AppendIconTextColumn( const wxString &label,
+    wxDataViewColumn *AppendIconTextColumn( const std::string &label,
           wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
           int width = -1, wxAlignment align = wxALIGN_LEFT, int flags = wxDATAVIEW_COL_RESIZABLE );
 
@@ -1151,10 +1151,10 @@ public:
     void GetValue( wxVariant &value, unsigned int row, unsigned int col )
         { GetStore()->GetValueByRow( value, row, col ); }
 
-    void SetTextValue( const wxString &value, unsigned int row, unsigned int col )
+    void SetTextValue( const std::string &value, unsigned int row, unsigned int col )
         { GetStore()->SetValueByRow( value, row, col );
           GetStore()->RowValueChanged( row, col); }
-    wxString GetTextValue( unsigned int row, unsigned int col ) const
+    std::string GetTextValue( unsigned int row, unsigned int col ) const
         { wxVariant value; GetStore()->GetValueByRow( value, row, col ); return value.GetString(); }
 
     void SetToggleValue( bool value, unsigned int row, unsigned int col )
@@ -1190,12 +1190,12 @@ class WXDLLIMPEXP_CORE wxDataViewTreeStoreNode
 {
 public:
     wxDataViewTreeStoreNode( wxDataViewTreeStoreNode *parent,
-        const wxString &text, const wxIcon &icon = wxNullIcon, wxClientData *data = nullptr );
+        const std::string &text, const wxIcon &icon = wxNullIcon, wxClientData *data = nullptr );
     virtual ~wxDataViewTreeStoreNode();
 
-    void SetText( const wxString &text )
+    void SetText( const std::string &text )
         { m_text = text; }
-    wxString GetText() const
+    std::string GetText() const
         { return m_text; }
     void SetIcon( const wxIcon &icon )
         { m_icon = icon; }
@@ -1217,7 +1217,7 @@ public:
 
 private:
     wxDataViewTreeStoreNode  *m_parent;
-    wxString                  m_text;
+    std::string                  m_text;
     wxIcon                    m_icon;
     wxClientData             *m_data;
 };
@@ -1228,7 +1228,7 @@ class WXDLLIMPEXP_CORE wxDataViewTreeStoreContainerNode: public wxDataViewTreeSt
 {
 public:
     wxDataViewTreeStoreContainerNode( wxDataViewTreeStoreNode *parent,
-        const wxString &text, const wxIcon &icon = wxNullIcon, const wxIcon &expanded = wxNullIcon,
+        const std::string &text, const wxIcon &icon = wxNullIcon, const wxIcon &expanded = wxNullIcon,
         wxClientData *data = nullptr );
     ~wxDataViewTreeStoreContainerNode() override;
 
@@ -1269,27 +1269,27 @@ public:
     ~wxDataViewTreeStore() override;
 
     wxDataViewItem AppendItem( const wxDataViewItem& parent,
-        const wxString &text, const wxIcon &icon = wxNullIcon, wxClientData *data = nullptr );
+        const std::string &text, const wxIcon &icon = wxNullIcon, wxClientData *data = nullptr );
     wxDataViewItem PrependItem( const wxDataViewItem& parent,
-        const wxString &text, const wxIcon &icon = wxNullIcon, wxClientData *data = nullptr );
+        const std::string &text, const wxIcon &icon = wxNullIcon, wxClientData *data = nullptr );
     wxDataViewItem InsertItem( const wxDataViewItem& parent, const wxDataViewItem& previous,
-        const wxString &text, const wxIcon &icon = wxNullIcon, wxClientData *data = nullptr );
+        const std::string &text, const wxIcon &icon = wxNullIcon, wxClientData *data = nullptr );
 
     wxDataViewItem PrependContainer( const wxDataViewItem& parent,
-        const wxString &text, const wxIcon &icon = wxNullIcon, const wxIcon &expanded = wxNullIcon,
+        const std::string &text, const wxIcon &icon = wxNullIcon, const wxIcon &expanded = wxNullIcon,
         wxClientData *data = nullptr );
     wxDataViewItem AppendContainer( const wxDataViewItem& parent,
-        const wxString &text, const wxIcon &icon = wxNullIcon, const wxIcon &expanded = wxNullIcon,
+        const std::string &text, const wxIcon &icon = wxNullIcon, const wxIcon &expanded = wxNullIcon,
         wxClientData *data = nullptr );
     wxDataViewItem InsertContainer( const wxDataViewItem& parent, const wxDataViewItem& previous,
-        const wxString &text, const wxIcon &icon = wxNullIcon, const wxIcon &expanded = wxNullIcon,
+        const std::string &text, const wxIcon &icon = wxNullIcon, const wxIcon &expanded = wxNullIcon,
         wxClientData *data = nullptr );
 
     wxDataViewItem GetNthChild( const wxDataViewItem& parent, unsigned int pos ) const;
     int GetChildCount( const wxDataViewItem& parent ) const;
 
-    void SetItemText( const wxDataViewItem& item, const wxString &text );
-    wxString GetItemText( const wxDataViewItem& item ) const;
+    void SetItemText( const wxDataViewItem& item, const std::string &text );
+    std::string GetItemText( const wxDataViewItem& item ) const;
     void SetItemIcon( const wxDataViewItem& item, const wxIcon &icon );
     const wxIcon &GetItemIcon( const wxDataViewItem& item ) const;
     void SetItemExpandedIcon( const wxDataViewItem& item, const wxIcon &icon );
@@ -1318,8 +1318,8 @@ public:
         { return true; }
     unsigned int GetColumnCount() const override
         { return 1; }
-    wxString GetColumnType( unsigned int WXUNUSED(col) ) const override
-        { return wxT("wxDataViewIconText"); }
+    std::string GetColumnType( unsigned int WXUNUSED(col) ) const override
+        { return "wxDataViewIconText"; }
 
     wxDataViewTreeStoreNode *FindNode( const wxDataViewItem &item ) const;
     wxDataViewTreeStoreContainerNode *FindContainerNode( const wxDataViewItem &item ) const;
@@ -1364,20 +1364,20 @@ public:
         { return GetStore()->IsContainer(item); }
 
     wxDataViewItem AppendItem( const wxDataViewItem& parent,
-        const wxString &text, int icon = NO_IMAGE, wxClientData *data = nullptr );
+        const std::string &text, int icon = NO_IMAGE, wxClientData *data = nullptr );
     wxDataViewItem PrependItem( const wxDataViewItem& parent,
-        const wxString &text, int icon = NO_IMAGE, wxClientData *data = nullptr );
+        const std::string &text, int icon = NO_IMAGE, wxClientData *data = nullptr );
     wxDataViewItem InsertItem( const wxDataViewItem& parent, const wxDataViewItem& previous,
-        const wxString &text, int icon = NO_IMAGE, wxClientData *data = nullptr );
+        const std::string &text, int icon = NO_IMAGE, wxClientData *data = nullptr );
 
     wxDataViewItem PrependContainer( const wxDataViewItem& parent,
-        const wxString &text, int icon = NO_IMAGE, int expanded = NO_IMAGE,
+        const std::string &text, int icon = NO_IMAGE, int expanded = NO_IMAGE,
         wxClientData *data = nullptr );
     wxDataViewItem AppendContainer( const wxDataViewItem& parent,
-        const wxString &text, int icon = NO_IMAGE, int expanded = NO_IMAGE,
+        const std::string &text, int icon = NO_IMAGE, int expanded = NO_IMAGE,
         wxClientData *data = nullptr );
     wxDataViewItem InsertContainer( const wxDataViewItem& parent, const wxDataViewItem& previous,
-        const wxString &text, int icon = NO_IMAGE, int expanded = NO_IMAGE,
+        const std::string &text, int icon = NO_IMAGE, int expanded = NO_IMAGE,
         wxClientData *data = nullptr );
 
     wxDataViewItem GetNthChild( const wxDataViewItem& parent, unsigned int pos ) const
@@ -1385,8 +1385,8 @@ public:
     int GetChildCount( const wxDataViewItem& parent ) const
         { return GetStore()->GetChildCount(parent); }
 
-    void SetItemText( const wxDataViewItem& item, const wxString &text );
-    wxString GetItemText( const wxDataViewItem& item ) const
+    void SetItemText( const wxDataViewItem& item, const std::string &text );
+    std::string GetItemText( const wxDataViewItem& item ) const
         { return GetStore()->GetItemText(item); }
     void SetItemIcon( const wxDataViewItem& item, const wxIcon &icon );
     const wxIcon &GetItemIcon( const wxDataViewItem& item ) const

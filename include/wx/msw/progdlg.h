@@ -84,8 +84,8 @@ private:
 
     // Store the message and title we currently use to be able to return it
     // from Get{Message,Title}()
-    wxString m_message;
-    wxString m_title;
+    std::string m_message;
+    std::string m_title;
 
 public:
 	wxClassInfo *GetClassInfo() const override;

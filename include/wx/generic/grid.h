@@ -341,7 +341,7 @@ public:
 
 private:
     explicit
-    wxGridActivationResult(Action action, const wxString& newval = wxString())
+    wxGridActivationResult(Action action, const std::string& newval = "")
         : m_action(action),
           m_newval(newval)
     {

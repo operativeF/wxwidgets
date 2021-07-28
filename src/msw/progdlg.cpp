@@ -271,8 +271,8 @@ void PerformNotificationUpdates(HWND hwnd,
 
     if ( sharedData->m_notifications & wxSPDD_ICON_CHANGED )
     {
-        ::SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)GetHiconOf(sharedData->m_iconSmall));
-        ::SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)GetHiconOf(sharedData->m_iconBig));
+        ::SendMessageW(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)GetHiconOf(sharedData->m_iconSmall));
+        ::SendMessageW(hwnd, WM_SETICON, ICON_BIG, (LPARAM)GetHiconOf(sharedData->m_iconBig));
     }
 
     if ( sharedData->m_notifications & wxSPDD_WINDOW_MOVED )
@@ -289,7 +289,7 @@ void PerformNotificationUpdates(HWND hwnd,
         wxString title, body;
         sharedData->SplitMessageIntoTitleAndBody(title, body);
 
-        ::SendMessage( hwnd,
+        ::SendMessageW( hwnd,
                        sharedData->m_msgChangeElementText,
                        TDE_MAIN_INSTRUCTION,
                        wxMSW_CONV_LPARAM(title) );

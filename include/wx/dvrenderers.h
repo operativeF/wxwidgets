@@ -38,14 +38,14 @@ class WXDLLIMPEXP_FWD_CORE wxDataViewCustomRenderer;
 class WXDLLIMPEXP_CORE wxDataViewIconText : public wxObject
 {
 public:
-    wxDataViewIconText( const wxString &text = wxEmptyString,
+    wxDataViewIconText( const std::string &text = {},
                         const wxIcon& icon = wxNullIcon )
         : m_text(text),
           m_icon(icon)
     { }
 
-    void SetText( const wxString &text ) { m_text = text; }
-    wxString GetText() const             { return m_text; }
+    void SetText( const std::string &text ) { m_text = text; }
+    std::string GetText() const             { return m_text; }
     void SetIcon( const wxIcon &icon )   { m_icon = icon; }
     const wxIcon &GetIcon() const        { return m_icon; }
 
@@ -65,7 +65,7 @@ public:
     }
 
 private:
-    wxString    m_text;
+    std::string    m_text;
     wxIcon      m_icon;
 
     wxDECLARE_DYNAMIC_CLASS(wxDataViewIconText);
@@ -80,7 +80,7 @@ DECLARE_VARIANT_OBJECT_EXPORTED(wxDataViewIconText, WXDLLIMPEXP_CORE)
 class WXDLLIMPEXP_CORE wxDataViewCheckIconText : public wxDataViewIconText
 {
 public:
-    wxDataViewCheckIconText(const wxString& text = wxString(),
+    wxDataViewCheckIconText(const std::string& text = std::string(),
                             const wxIcon& icon = wxNullIcon,
                             wxCheckBoxState checkedState = wxCHK_UNDETERMINED)
         : wxDataViewIconText(text, icon),
@@ -131,7 +131,7 @@ public:
 class WXDLLIMPEXP_CORE wxDataViewRendererBase: public wxObject
 {
 public:
-    wxDataViewRendererBase( const wxString &varianttype,
+    wxDataViewRendererBase( const std::string &varianttype,
                             wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                             int alignment = wxDVR_DEFAULT_ALIGNMENT );
     ~wxDataViewRendererBase() override;
@@ -152,10 +152,10 @@ public:
     virtual bool SetValue(const wxVariant& value) = 0;
     virtual bool GetValue(wxVariant& value) const = 0;
 #if wxUSE_ACCESSIBILITY
-    virtual wxString GetAccessibleDescription() const = 0;
+    virtual std::string GetAccessibleDescription() const = 0;
 #endif // wxUSE_ACCESSIBILITY
 
-    wxString GetVariantType() const             { return m_variantType; }
+    std::string GetVariantType() const             { return m_variantType; }
 
     // Prepare for rendering the value of the corresponding item in the given
     // column taken from the provided non-null model.
@@ -254,7 +254,7 @@ protected:
     bool DoHandleEditingDone(wxVariant* value);
 
 
-    wxString                m_variantType;
+    std::string                m_variantType;
     wxDataViewColumn       *m_owner{nullptr};
     wxWeakRef<wxWindow>     m_editorCtrl;
     wxDataViewItem          m_item; // Item being currently edited, if valid.
@@ -310,7 +310,7 @@ class WXDLLIMPEXP_CORE wxDataViewCustomRendererBase
 public:
     // Constructor must specify the usual renderer parameters which we simply
     // pass to the base class
-    wxDataViewCustomRendererBase(const wxString& varianttype = wxASCII_STR("string"),
+    wxDataViewCustomRendererBase(const std::string& varianttype = wxASCII_STR("string"),
                                  wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                                  int align = wxDVR_DEFAULT_ALIGNMENT)
         : wxDataViewCustomRendererRealBase(varianttype, mode, align)
@@ -366,7 +366,7 @@ public:
     // Helper which can be used by Render() implementation in the derived
     // classes: it will draw the text in the same manner as the standard
     // renderers do.
-    virtual void RenderText(const wxString& text,
+    virtual void RenderText(const std::string& text,
                             int xoffset,
                             wxRect cell,
                             wxDC *dc,
@@ -400,7 +400,7 @@ public:
 
 protected:
     // helper for GetSize() implementations, respects attributes
-    wxSize GetTextExtent(const wxString& str) const;
+    wxSize GetTextExtent(const std::string& str) const;
 
 private:
     wxDataViewItemAttr m_attr;
@@ -446,7 +446,7 @@ public:
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
 #if wxUSE_ACCESSIBILITY
-    wxString GetAccessibleDescription() const override;
+    std::string GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
 private:
@@ -476,15 +476,15 @@ public:
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
 #if wxUSE_ACCESSIBILITY
-    wxString GetAccessibleDescription() const override;
+    std::string GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
-    wxString GetChoice(size_t index) const { return m_choices[index]; }
+    std::string GetChoice(size_t index) const { return m_choices[index]; }
     const std::vector<std::string>& GetChoices() const { return m_choices; }
 
 private:
     std::vector<std::string> m_choices;
-    wxString      m_data;
+    std::string      m_data;
 };
 
 // ----------------------------------------------------------------------------
@@ -504,7 +504,7 @@ public:
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
 #if wxUSE_ACCESSIBILITY
-    wxString GetAccessibleDescription() const override;
+    std::string GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 };
 
@@ -521,9 +521,9 @@ public:
 class WXDLLIMPEXP_CORE wxDataViewDateRenderer: public wxDataViewCustomRenderer
 {
 public:
-    static wxString GetDefaultType() { return wxS("datetime"); }
+    static std::string GetDefaultType() { return "datetime"; }
 
-    wxDataViewDateRenderer(const wxString &varianttype = GetDefaultType(),
+    wxDataViewDateRenderer(const std::string &varianttype = GetDefaultType(),
                            wxDataViewCellMode mode = wxDATAVIEW_CELL_EDITABLE,
                            int align = wxDVR_DEFAULT_ALIGNMENT);
 
@@ -533,7 +533,7 @@ public:
     bool SetValue(const wxVariant &value) override;
     bool GetValue(wxVariant& value) const override;
 #if wxUSE_ACCESSIBILITY
-    wxString GetAccessibleDescription() const override;
+    std::string GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
     bool Render( wxRect cell, wxDC *dc, int state ) override;
     wxSize GetSize() const override;
@@ -557,7 +557,7 @@ class WXDLLIMPEXP_CORE wxDataViewCheckIconTextRenderer
     : public wxDataViewCustomRenderer
 {
 public:
-    static wxString GetDefaultType() { return wxS("wxDataViewCheckIconText"); }
+    static std::string GetDefaultType() { return "wxDataViewCheckIconText"; }
 
     explicit wxDataViewCheckIconTextRenderer
              (
@@ -580,7 +580,7 @@ public:
     bool GetValue(wxVariant& value) const override;
 
 #if wxUSE_ACCESSIBILITY
-    wxString GetAccessibleDescription() const override;
+    std::string GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
     wxSize GetSize() const override;

@@ -29,6 +29,8 @@
 #include "wx/msw/private/customdraw.h"
 #include "wx/msw/private/winstyle.h"
 
+#include "boost/nowide/stackstring.hpp"
+
 #ifndef HDM_SETBITMAPMARGIN
     #define HDM_SETBITMAPMARGIN 0x1234
 #endif
@@ -416,9 +418,11 @@ void wxMSWHeaderCtrl::DoInsertItem(const wxHeaderColumn& col, unsigned int idx)
     // notice that we need to store the string we use the pointer to until we
     // pass it to the control
     hdi.mask |= HDI_TEXT;
-    wxWxCharBuffer buf = col.GetTitle().t_str();
-    hdi.pszText = buf.data();
-    hdi.cchTextMax = wxStrlen(buf);
+
+    boost::nowide::wstackstring buf(col.GetTitle().c_str());
+
+    hdi.pszText = buf.get();
+    hdi.cchTextMax = buf.buffer_size;
 
     const wxBitmap bmp = col.GetBitmap();
     if ( bmp.IsOk() )

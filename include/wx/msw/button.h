@@ -21,7 +21,7 @@ public:
     wxButton() = default;
     wxButton(wxWindow *parent,
              wxWindowID id,
-             const std::string& label = "",
+             const std::string& label = {},
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
              long style = 0,
@@ -40,7 +40,7 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const std::string& label = "",
+                const std::string& label = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,

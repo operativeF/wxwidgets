@@ -87,7 +87,7 @@ public:
     // the column class at all
 
     // title is the string shown for this column
-    virtual wxString GetTitle() const = 0;
+    virtual std::string GetTitle() const = 0;
 
     // bitmap shown (instead of text) in the column header
     virtual wxBitmap GetBitmap() const = 0;                                   \
@@ -160,7 +160,7 @@ protected:
 class WXDLLIMPEXP_CORE wxSettableHeaderColumn : public wxHeaderColumn
 {
 public:
-    virtual void SetTitle(const wxString& title) = 0;
+    virtual void SetTitle(const std::string& title) = 0;
     virtual void SetBitmap(const wxBitmap& bitmap) = 0;
     virtual void SetWidth(int width) = 0;
     virtual void SetMinWidth(int minWidth) = 0;
@@ -209,7 +209,7 @@ class wxHeaderColumnSimple : public wxSettableHeaderColumn
 {
 public:
     // ctors and dtor
-    wxHeaderColumnSimple(const wxString& title,
+    wxHeaderColumnSimple(const std::string& title,
                          int width = wxCOL_WIDTH_DEFAULT,
                          wxAlignment align = wxALIGN_NOT,
                          int flags = wxCOL_DEFAULT_FLAGS)
@@ -242,8 +242,8 @@ public:
     }
 
     
-    void SetTitle(const wxString& title) override { m_title = title; }
-    wxString GetTitle() const override { return m_title; }
+    void SetTitle(const std::string& title) override { m_title = title; }
+    std::string GetTitle() const override { return m_title; }
 
     void SetBitmap(const wxBitmap& bitmap) override { m_bitmap = bitmap; }
     wxBitmap GetBitmap() const override { return m_bitmap; }
@@ -272,7 +272,7 @@ public:
     bool IsSortOrderAscending() const override { return m_sortAscending; }
 
 private:
-    wxString m_title;
+    std::string m_title;
     wxBitmap m_bitmap;
     int m_width,
         m_minWidth;

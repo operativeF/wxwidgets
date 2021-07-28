@@ -226,7 +226,7 @@ TEST_CASE_FIXTURE(SpinCtrlDoubleTestCase,
 static inline unsigned int GetInitialDigits(double inc)
 {
     wxSpinCtrlDouble sc (wxTheApp->GetTopWindow(), wxID_ANY,
-                         wxEmptyString, wxDefaultPosition,
+                         "", wxDefaultPosition,
                          wxDefaultSize, wxSP_ARROW_KEYS,
                          0, 50, 0, inc);
 

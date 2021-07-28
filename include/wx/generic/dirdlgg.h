@@ -34,20 +34,20 @@ public:
     wxGenericDirDialog() : wxDirDialogBase() { }
 
     wxGenericDirDialog(wxWindow* parent,
-                       const wxString& title = wxASCII_STR(wxDirSelectorPromptStr),
-                       const wxString& defaultPath = wxEmptyString,
+                       const std::string& title = wxDirSelectorPromptStr,
+                       const std::string& defaultPath = {},
                        long style = wxDD_DEFAULT_STYLE,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& sz = wxDefaultSize,//Size(450, 550),
-                       const wxString& name = wxASCII_STR(wxDirDialogNameStr));
+                       const std::string& name = wxDirDialogNameStr);
 
     bool Create(wxWindow* parent,
-                const wxString& title = wxASCII_STR(wxDirSelectorPromptStr),
-                const wxString& defaultPath = wxEmptyString,
+                const std::string& title = wxDirSelectorPromptStr,
+                const std::string& defaultPath = {},
                 long style = wxDD_DEFAULT_STYLE,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& sz = wxDefaultSize,//Size(450, 550),
-                const wxString& name = wxASCII_STR(wxDirDialogNameStr));
+                const std::string& name = wxDirDialogNameStr);
 
     //// Accessors
     void SetPath(const wxString& path) override;

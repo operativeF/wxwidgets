@@ -18,9 +18,9 @@
 class WXDLLIMPEXP_CORE wxDataViewCustomRenderer: public wxDataViewRenderer
 {
 public:
-    static wxString GetDefaultType() { return wxS("string"); }
+    inline static constexpr char DefaultType[] = "string";
 
-    wxDataViewCustomRenderer( const wxString &varianttype = GetDefaultType(),
+    wxDataViewCustomRenderer( const std::string& varianttype = DefaultType,
                               wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                               int align = wxDVR_DEFAULT_ALIGNMENT );
 
@@ -40,7 +40,7 @@ public:
     }
 
 #if wxUSE_ACCESSIBILITY
-    wxString GetAccessibleDescription() const override;
+    std::string GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
 public:
@@ -57,9 +57,9 @@ public:
 class WXDLLIMPEXP_CORE wxDataViewTextRenderer: public wxDataViewRenderer
 {
 public:
-    static wxString GetDefaultType() { return wxS("string"); }
+    inline static constexpr char DefaultType[] = "string";
 
-    wxDataViewTextRenderer( const wxString &varianttype = GetDefaultType(),
+    wxDataViewTextRenderer( const std::string& varianttype = DefaultType,
                             wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                             int align = wxDVR_DEFAULT_ALIGNMENT );
     ~wxDataViewTextRenderer() override;
@@ -74,7 +74,7 @@ public:
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
 #if wxUSE_ACCESSIBILITY
-    wxString GetAccessibleDescription() const override;
+    std::string GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
     bool Render(wxRect cell, wxDC *dc, int state) override;
@@ -107,9 +107,9 @@ public:
 class WXDLLIMPEXP_CORE wxDataViewBitmapRenderer: public wxDataViewRenderer
 {
 public:
-    static wxString GetDefaultType() { return wxS("wxBitmap"); }
+    inline static constexpr char DefaultType[] = "wxBitmap";
 
-    wxDataViewBitmapRenderer( const wxString &varianttype = GetDefaultType(),
+    wxDataViewBitmapRenderer( const wxString &varianttype = DefaultType,
                               wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                               int align = wxDVR_DEFAULT_ALIGNMENT );
 
@@ -119,7 +119,7 @@ public:
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
 #if wxUSE_ACCESSIBILITY
-    wxString GetAccessibleDescription() const override;
+    std::string GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
     bool Render( wxRect cell, wxDC *dc, int state ) override;
@@ -142,9 +142,9 @@ public:
 class WXDLLIMPEXP_CORE wxDataViewToggleRenderer: public wxDataViewRenderer
 {
 public:
-    static wxString GetDefaultType() { return wxS("bool"); }
+    inline static constexpr char DefaultType[] = "bool";
 
-    wxDataViewToggleRenderer( const wxString &varianttype = GetDefaultType(),
+    wxDataViewToggleRenderer( const std::string& varianttype = DefaultType,
                               wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                               int align = wxDVR_DEFAULT_ALIGNMENT );
 
@@ -156,7 +156,7 @@ public:
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
 #if wxUSE_ACCESSIBILITY
-    wxString GetAccessibleDescription() const override;
+    std::string GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
     bool Render( wxRect cell, wxDC *dc, int state ) override;
@@ -185,10 +185,10 @@ public:
 class WXDLLIMPEXP_CORE wxDataViewProgressRenderer: public wxDataViewRenderer
 {
 public:
-    static wxString GetDefaultType() { return wxS("long"); }
+    inline static constexpr char DefaultType[] = "long";
 
-    wxDataViewProgressRenderer( const wxString &label = wxEmptyString,
-                                const wxString &varianttype = GetDefaultType(),
+    wxDataViewProgressRenderer( const std::string& label = {},
+                                const std::string& varianttype = DefaultType,
                                 wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                                 int align = wxDVR_DEFAULT_ALIGNMENT );
 
@@ -198,14 +198,14 @@ public:
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant& value ) const override;
 #if wxUSE_ACCESSIBILITY
-    wxString GetAccessibleDescription() const override;
+    std::string GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
     bool Render(wxRect cell, wxDC *dc, int state) override;
     wxSize GetSize() const override;
 
 private:
-    wxString    m_label;
+    std::string m_label;
     int         m_value;
 
 public:
@@ -221,9 +221,9 @@ public:
 class WXDLLIMPEXP_CORE wxDataViewIconTextRenderer: public wxDataViewRenderer
 {
 public:
-    static wxString GetDefaultType() { return wxS("wxDataViewIconText"); }
+    inline static constexpr char DefaultType[] = "wxDataViewIconText";
 
-    wxDataViewIconTextRenderer( const wxString &varianttype = GetDefaultType(),
+    wxDataViewIconTextRenderer( const std::string& varianttype = DefaultType,
                                 wxDataViewCellMode mode = wxDATAVIEW_CELL_INERT,
                                 int align = wxDVR_DEFAULT_ALIGNMENT );
 
@@ -233,7 +233,7 @@ public:
     bool SetValue( const wxVariant &value ) override;
     bool GetValue( wxVariant &value ) const override;
 #if wxUSE_ACCESSIBILITY
-    wxString GetAccessibleDescription() const override;
+    std::string GetAccessibleDescription() const override;
 #endif // wxUSE_ACCESSIBILITY
 
     bool Render(wxRect cell, wxDC *dc, int state) override;

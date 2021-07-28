@@ -60,13 +60,13 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                const wxString& value = wxEmptyString,
+                const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxSP_ARROW_KEYS,
                 double min = 0, double max = 100, double initial = 0,
                 double inc = 1,
-                const wxString& name = wxT("wxSpinCtrl"));
+                const std::string& name = "wxSpinCtrl");
 
     ~wxSpinCtrlGenericBase() override;
 
@@ -202,13 +202,13 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                const wxString& value = wxEmptyString,
+                const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxSP_ARROW_KEYS,
                 double min = 0, double max = 100, double initial = 0,
                 double inc = 1,
-                const wxString& name = wxT("wxSpinCtrl"))
+                const std::string& name = wxT("wxSpinCtrl"))
     {
         m_min = min;
         m_max = max;
@@ -297,12 +297,12 @@ public:
     wxSpinCtrl() { Init(); }
     wxSpinCtrl(wxWindow *parent,
                wxWindowID id = wxID_ANY,
-               const wxString& value = wxEmptyString,
+               const std::string& value = {},
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                long style = wxSP_ARROW_KEYS,
                int min = 0, int max = 100, int initial = 0,
-               const wxString& name = wxT("wxSpinCtrl"))
+               const std::string& name = wxT("wxSpinCtrl"))
     {
         Init();
 
@@ -311,12 +311,12 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                const wxString& value = wxEmptyString,
+                const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxSP_ARROW_KEYS,
                 int min = 0, int max = 100, int initial = 0,
-                const wxString& name = wxT("wxSpinCtrl"))
+                const std::string& name = wxT("wxSpinCtrl"))
     {
         return wxSpinCtrlGenericBase::Create(parent, id, value, pos, size,
                                              style, min, max, initial, 1, name);
@@ -370,13 +370,13 @@ public:
      }
     wxSpinCtrlDouble(wxWindow *parent,
                      wxWindowID id = wxID_ANY,
-                     const wxString& value = wxEmptyString,
+                     const std::string& value = {},
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      long style = wxSP_ARROW_KEYS,
                      double min = 0, double max = 100, double initial = 0,
                      double inc = 1,
-                     const wxString& name = wxT("wxSpinCtrlDouble"))
+                     const std::string& name = "wxSpinCtrlDouble")
     {
         
         m_digits = 0;
@@ -389,13 +389,13 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                const wxString& value = wxEmptyString,
+                const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxSP_ARROW_KEYS,
                 double min = 0, double max = 100, double initial = 0,
                 double inc = 1,
-                const wxString& name = wxT("wxSpinCtrlDouble"))
+                const std::string& name = "wxSpinCtrlDouble")
     {
         DetermineDigits(inc);
         return wxSpinCtrlGenericBase::Create(parent, id, value, pos, size,

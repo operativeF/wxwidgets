@@ -183,12 +183,12 @@ wxEND_EVENT_TABLE()
 
 bool wxSpinCtrlGenericBase::Create(wxWindow *parent,
                                    wxWindowID id,
-                                   const wxString& value,
+                                   const std::string& value,
                                    const wxPoint& pos, const wxSize& size,
                                    long style,
                                    double min, double max, double initial,
                                    double increment,
-                                   const wxString& name)
+                                   const std::string& name)
 {
     // don't use borders for this control itself, it wouldn't look good with
     // the text control borders (but we might want to use style border bits to

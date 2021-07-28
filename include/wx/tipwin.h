@@ -34,7 +34,7 @@ public:
     // windowPtr and rectBound are just passed to SetTipWindowPtr() and
     // SetBoundingRect() - see below
     wxTipWindow(wxWindow *parent,
-                const wxString& text,
+                const std::string& text,
                 wxCoord maxLength = 100,
                 wxTipWindow** windowPtr = nullptr,
                 wxRect *rectBound = nullptr);

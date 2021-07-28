@@ -46,7 +46,7 @@ public:
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                long style = 0,
-               const wxString& name = wxEmptyString)
+               const std::string& name = "")
     {
         (void)Create(parent, id, pos, size, style, name);
     }
@@ -62,7 +62,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
-                const wxString& name = wxEmptyString);
+                const std::string& name = "");
 
 
     // overridden base class methods

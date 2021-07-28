@@ -38,7 +38,7 @@ public:
 
     wxComboCtrl(wxWindow *parent,
                    wxWindowID id = wxID_ANY,
-                   const std::string& value = "",
+                   const std::string& value = {},
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    long style = 0,
@@ -51,7 +51,7 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id = wxID_ANY,
-                const std::string& value = "",
+                const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,

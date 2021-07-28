@@ -18,10 +18,10 @@
 // string constants used by wxPersistentSplitter
 // ----------------------------------------------------------------------------
 
-#define wxPERSIST_SPLITTER_KIND wxASCII_STR("Splitter")
+inline constexpr char wxPERSIST_SPLITTER_KIND[] = "Splitter";
 
 // Special position value of -1 means the splitter is not split at all.
-#define wxPERSIST_SPLITTER_POSITION wxASCII_STR("Position")
+inline constexpr char wxPERSIST_SPLITTER_POSITION[] = "Position";
 
 // ----------------------------------------------------------------------------
 // wxPersistentSplitter: supports saving/restoring splitter position
@@ -57,7 +57,7 @@ public:
         return true;
     }
 
-    wxString GetKind() const override { return wxPERSIST_SPLITTER_KIND; }
+    std::string GetKind() const override { return wxPERSIST_SPLITTER_KIND; }
 };
 
 inline wxPersistentObject *wxCreatePersistentObject(wxSplitterWindow* splitter)

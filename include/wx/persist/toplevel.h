@@ -21,7 +21,7 @@
 // we use just "Window" to keep configuration files and such short, there
 // should be no confusion with wxWindow itself as we don't have persistent
 // windows, just persistent controls which have their own specific kind strings
-#define wxPERSIST_TLW_KIND "Window"
+inline constexpr char wxPERSIST_TLW_KIND[] = "Window";
 
 // ----------------------------------------------------------------------------
 // wxPersistentTLW: supports saving/restoring window position and size as well
@@ -51,7 +51,7 @@ public:
         return tlw->RestoreToGeometry(*this);
     }
 
-    wxString GetKind() const override { return wxASCII_STR(wxPERSIST_TLW_KIND); }
+    std::string GetKind() const override { return wxPERSIST_TLW_KIND; }
 
 private:
     bool SaveField(const wxString& name, int value) const override

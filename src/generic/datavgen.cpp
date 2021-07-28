@@ -1135,14 +1135,14 @@ int wxDataViewRenderer::GetAlignment() const
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxDataViewCustomRenderer, wxDataViewRenderer);
 
-wxDataViewCustomRenderer::wxDataViewCustomRenderer( const wxString &varianttype,
+wxDataViewCustomRenderer::wxDataViewCustomRenderer( const std::string& varianttype,
                         wxDataViewCellMode mode, int align ) :
     wxDataViewRenderer( varianttype, mode, align )
 {
 }
 
 #if wxUSE_ACCESSIBILITY
-wxString wxDataViewCustomRenderer::GetAccessibleDescription() const
+std::string wxDataViewCustomRenderer::GetAccessibleDescription() const
 {
     wxVariant val;
     GetValue(val);
@@ -1170,7 +1170,7 @@ wxString wxDataViewCustomRenderer::GetAccessibleDescription() const
 
 wxIMPLEMENT_CLASS(wxDataViewTextRenderer, wxDataViewRenderer);
 
-wxDataViewTextRenderer::wxDataViewTextRenderer( const wxString &varianttype,
+wxDataViewTextRenderer::wxDataViewTextRenderer( const std::string& varianttype,
                                                 wxDataViewCellMode mode, int align ) :
     wxDataViewRenderer( varianttype, mode, align )
 {
@@ -1225,7 +1225,7 @@ bool wxDataViewTextRenderer::GetValue( wxVariant& WXUNUSED(value) ) const
 }
 
 #if wxUSE_ACCESSIBILITY
-wxString wxDataViewTextRenderer::GetAccessibleDescription() const
+std::string wxDataViewTextRenderer::GetAccessibleDescription() const
 {
 #if wxUSE_MARKUP
     if ( m_markupText )
@@ -1330,9 +1330,9 @@ bool wxDataViewBitmapRenderer::GetValue( wxVariant& WXUNUSED(value) ) const
 }
 
 #if wxUSE_ACCESSIBILITY
-wxString wxDataViewBitmapRenderer::GetAccessibleDescription() const
+std::string wxDataViewBitmapRenderer::GetAccessibleDescription() const
 {
-    return wxEmptyString;
+    return "";
 }
 #endif // wxUSE_ACCESSIBILITY
 
@@ -1363,7 +1363,7 @@ wxSize wxDataViewBitmapRenderer::GetSize() const
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxDataViewToggleRenderer, wxDataViewRenderer);
 
-wxDataViewToggleRenderer::wxDataViewToggleRenderer( const wxString &varianttype,
+wxDataViewToggleRenderer::wxDataViewToggleRenderer( const std::string& varianttype,
                         wxDataViewCellMode mode, int align ) :
     wxDataViewRenderer( varianttype, mode, align )
 {
@@ -1384,7 +1384,7 @@ bool wxDataViewToggleRenderer::GetValue( wxVariant &WXUNUSED(value) ) const
 }
 
 #if wxUSE_ACCESSIBILITY
-wxString wxDataViewToggleRenderer::GetAccessibleDescription() const
+std::string wxDataViewToggleRenderer::GetAccessibleDescription() const
 {
     /* TRANSLATORS: Checkbox state name */
     return m_toggle ? _("checked")
@@ -1449,8 +1449,8 @@ wxSize wxDataViewToggleRenderer::GetSize() const
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxDataViewProgressRenderer, wxDataViewRenderer);
 
-wxDataViewProgressRenderer::wxDataViewProgressRenderer( const wxString &label,
-    const wxString &varianttype, wxDataViewCellMode mode, int align ) :
+wxDataViewProgressRenderer::wxDataViewProgressRenderer( const std::string &label,
+    const std::string& varianttype, wxDataViewCellMode mode, int align ) :
     wxDataViewRenderer( varianttype, mode, align )
     , m_label(label)
 {
@@ -1474,7 +1474,7 @@ bool wxDataViewProgressRenderer::GetValue( wxVariant &value ) const
 }
 
 #if wxUSE_ACCESSIBILITY
-wxString wxDataViewProgressRenderer::GetAccessibleDescription() const
+std::string wxDataViewProgressRenderer::GetAccessibleDescription() const
 {
     return wxString::Format(wxS("%i %%"), m_value);
 }
@@ -1520,7 +1520,7 @@ wxSize wxDataViewProgressRenderer::GetSize() const
 wxIMPLEMENT_CLASS(wxDataViewIconTextRenderer, wxDataViewRenderer);
 
 wxDataViewIconTextRenderer::wxDataViewIconTextRenderer(
-const wxString &varianttype, wxDataViewCellMode mode, int align ) :
+    const std::string& varianttype, wxDataViewCellMode mode, int align ) :
     wxDataViewRenderer( varianttype, mode, align )
 {
     SetMode(mode);
@@ -1539,7 +1539,7 @@ bool wxDataViewIconTextRenderer::GetValue( wxVariant& WXUNUSED(value) ) const
 }
 
 #if wxUSE_ACCESSIBILITY
-wxString wxDataViewIconTextRenderer::GetAccessibleDescription() const
+std::string wxDataViewIconTextRenderer::GetAccessibleDescription() const
 {
     return m_value.GetText();
 }
@@ -5536,7 +5536,7 @@ bool wxDataViewCtrl::Create(wxWindow *parent,
                             const wxSize& size,
                             long style,
                             const wxValidator& validator,
-                            const wxString& name)
+                            const std::string& name)
 {
 //    if ( (style & wxBORDER_MASK) == 0)
 //        style |= wxBORDER_SUNKEN;

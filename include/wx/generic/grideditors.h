@@ -356,7 +356,7 @@ protected:
 class WXDLLIMPEXP_CORE wxGridCellEnumEditor : public wxGridCellChoiceEditor
 {
 public:
-    wxGridCellEnumEditor( const wxString& choices = wxEmptyString );
+    wxGridCellEnumEditor( const std::string& choices = {} );
     ~wxGridCellEnumEditor() override = default;
 
     wxGridCellEditor*  Clone() const override;

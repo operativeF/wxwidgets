@@ -15,17 +15,17 @@ class WXDLLIMPEXP_CORE wxDirDialog : public wxDirDialogBase
 {
 public:
     wxDirDialog(wxWindow *parent,
-                const wxString& message = wxASCII_STR(wxDirSelectorPromptStr),
-                const wxString& defaultPath = wxEmptyString,
+                const std::string& message = wxDirSelectorPromptStr,
+                const std::string& defaultPath = {},
                 long style = wxDD_DEFAULT_STYLE,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
-                const wxString& name = wxASCII_STR(wxDirDialogNameStr));
+                const std::string& name = wxDirDialogNameStr);
 
-wxDirDialog(const wxDirDialog&) = delete;
-   wxDirDialog& operator=(const wxDirDialog&) = delete;
-   wxDirDialog(wxDirDialog&&) = default;
-   wxDirDialog& operator=(wxDirDialog&&) = default;
+    wxDirDialog(const wxDirDialog&) = delete;
+    wxDirDialog& operator=(const wxDirDialog&) = delete;
+    wxDirDialog(wxDirDialog&&) = default;
+    wxDirDialog& operator=(wxDirDialog&&) = default;
 
     void SetPath(const wxString& path) override;
 

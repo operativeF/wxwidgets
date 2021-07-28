@@ -25,7 +25,7 @@ public:
     wxComboBox() = default;
 
     wxComboBox(wxWindow *parent, wxWindowID id,
-            const std::string& value = "",
+            const std::string& value = {},
             const wxPoint& pos = wxDefaultPosition,
             const wxSize& size = wxDefaultSize,
             const std::vector<std::string>& choices = {},

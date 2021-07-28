@@ -38,7 +38,7 @@ public:
 
     // get the current tip and update the internal state to return the next tip
     // when called for the next time
-    virtual wxString GetTip() = 0;
+    virtual std::string GetTip() = 0;
 
     // get the current tip "index" (or whatever allows the tip provider to know
     // from where to start the next time)
@@ -56,7 +56,7 @@ protected:
 //
 // NB: the caller is responsible for deleting the pointer!
 #if wxUSE_TEXTFILE
-WXDLLIMPEXP_CORE wxTipProvider *wxCreateFileTipProvider(const wxString& filename,
+WXDLLIMPEXP_CORE wxTipProvider *wxCreateFileTipProvider(const std::string& filename,
                                                        size_t currentTip);
 #endif // wxUSE_TEXTFILE
 

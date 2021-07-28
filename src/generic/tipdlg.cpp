@@ -49,12 +49,12 @@ constexpr int wxID_NEXT_TIP = 32000;  // whatever
 class WXDLLIMPEXP_CORE wxFileTipProvider : public wxTipProvider
 {
 public:
-    wxFileTipProvider(const wxString& filename, size_t currentTip);
+    wxFileTipProvider(const std::string& filename, size_t currentTip);
 
     wxFileTipProvider(const wxFileTipProvider&) = delete;
 	wxFileTipProvider& operator=(const wxFileTipProvider&) = delete;
 
-    wxString GetTip() override;
+    std::string GetTip() override;
 
 private:
     wxTextFile m_textfile;
@@ -68,13 +68,13 @@ class WXDLLIMPEXP_CORE wxRegTipProvider : public wxTipProvider
 public:
     explicit wxRegTipProvider(const wxString& keyname);
 
-    wxString GetTip() override;
+    std::string GetTip() override;
 };
 
 // Empty implementation for now to keep the linker happy
-wxString wxRegTipProvider::GetTip()
+std::string wxRegTipProvider::GetTip()
 {
-    return wxEmptyString;
+    return "";
 }
 
 #endif // __WIN32__
@@ -117,14 +117,14 @@ private:
 // wxFileTipProvider
 // ----------------------------------------------------------------------------
 #if wxUSE_TEXTFILE
-wxFileTipProvider::wxFileTipProvider(const wxString& filename,
+wxFileTipProvider::wxFileTipProvider(const std::string& filename,
                                      size_t currentTip)
                  : wxTipProvider(currentTip), m_textfile(filename)
 {
     m_textfile.Open();
 }
 
-wxString wxFileTipProvider::GetTip()
+std::string wxFileTipProvider::GetTip()
 {
     size_t count = m_textfile.GetLineCount();
     if ( !count )
@@ -277,7 +277,7 @@ wxTipDialog::wxTipDialog(wxWindow *parent,
 // ----------------------------------------------------------------------------
 
 #if wxUSE_TEXTFILE
-wxTipProvider *wxCreateFileTipProvider(const wxString& filename,
+wxTipProvider *wxCreateFileTipProvider(const std::string& filename,
                                        size_t currentTip)
 {
     return new wxFileTipProvider(filename, currentTip);

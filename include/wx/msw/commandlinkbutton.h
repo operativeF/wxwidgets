@@ -23,8 +23,8 @@ public:
 
     wxCommandLinkButton(wxWindow *parent,
                         wxWindowID id,
-                        const std::string& mainLabel = "",
-                        const std::string& note = "",
+                        const std::string& mainLabel = {},
+                        const std::string& note = {},
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         long style = 0,
@@ -42,8 +42,8 @@ wxCommandLinkButton(const wxCommandLinkButton&) = delete;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const std::string& mainLabel = "",
-                const std::string& note = "",
+                const std::string& mainLabel = {},
+                const std::string& note = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,

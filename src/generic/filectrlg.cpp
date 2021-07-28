@@ -867,13 +867,13 @@ wxEND_EVENT_TABLE()
 
 bool wxGenericFileCtrl::Create( wxWindow *parent,
                                 wxWindowID id,
-                                const wxString& defaultDirectory,
-                                const wxString& defaultFileName,
-                                const wxString& wildCard,
+                                const std::string& defaultDirectory,
+                                const std::string& defaultFileName,
+                                const std::string& wildCard,
                                 long style,
                                 const wxPoint& pos,
                                 const wxSize& size,
-                                const wxString& name )
+                                const std::string& name )
 {
     this->m_style = style;
     m_inSelected = false;

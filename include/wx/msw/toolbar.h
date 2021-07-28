@@ -108,7 +108,7 @@ public:
                                           const wxBitmap& bmpDisabled = wxNullBitmap,
                                           wxItemKind kind = wxITEM_NORMAL,
                                           wxObject *clientData = nullptr,
-                                          const std::string& shortHelp = "",
+                                          const std::string& shortHelp = {},
                                           const std::string& longHelp = "") override;
 
     wxToolBarToolBase *CreateTool(wxControl *control,

@@ -193,13 +193,13 @@ public:
 
     wxGenericFileCtrl ( wxWindow *parent,
                         wxWindowID id,
-                        const wxString& defaultDirectory = wxEmptyString,
-                        const wxString& defaultFilename = wxEmptyString,
-                        const wxString& wildCard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
+                        const std::string& defaultDirectory = {},
+                        const std::string& defaultFilename = {},
+                        const std::string& wildCard = wxFileSelectorDefaultWildcardStr,
                         long style = wxFC_DEFAULT_STYLE,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
-                        const wxString& name = wxASCII_STR(wxFileCtrlNameStr) )
+                        const std::string& name = wxFileCtrlNameStr)
     {
         m_ignoreChanges = false;
         Create(parent, id, defaultDirectory, defaultFilename, wildCard,
@@ -210,13 +210,13 @@ public:
 
     bool Create( wxWindow *parent,
                  wxWindowID id,
-                 const wxString& defaultDirectory = wxEmptyString,
-                 const wxString& defaultFileName = wxEmptyString,
-                 const wxString& wildCard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
+                 const std::string& defaultDirectory = {},
+                 const std::string& defaultFileName = {},
+                 const std::string& wildCard = wxFileSelectorDefaultWildcardStr,
                  long style = wxFC_DEFAULT_STYLE,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
-                 const wxString& name = wxASCII_STR(wxFileCtrlNameStr) );
+                 const std::string& name = wxFileCtrlNameStr);
 
     void SetWildcard( const wxString& wildCard ) override;
     void SetFilterIndex( int filterindex ) override;

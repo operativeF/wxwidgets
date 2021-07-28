@@ -168,8 +168,8 @@ public:
     virtual wxMenuBar *GetMenuBar() const;
 #endif // wxUSE_MENUS
 
-    virtual wxString GetTitle() const { return m_title; }
-    virtual void SetTitle(const wxString& title);
+    virtual std::string GetTitle() const { return m_title; }
+    virtual void SetTitle(const std::string& title);
 
     virtual bool TryAfter(wxEvent& event);
 
@@ -185,7 +185,7 @@ public:
     }
 
 protected:
-    wxString m_title;
+    std::string m_title;
 
 #if wxUSE_MENUS
     wxMenuBar        *m_pMenuBar;

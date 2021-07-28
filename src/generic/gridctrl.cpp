@@ -306,7 +306,7 @@ void wxGridCellChoiceRenderer::SetParameters(const wxString& params)
 // eg data in cell is 0,1,2 ... n the cell could be rendered as "John","Fred"..."Bob"
 
 
-wxGridCellEnumRenderer::wxGridCellEnumRenderer(const wxString& choices)
+wxGridCellEnumRenderer::wxGridCellEnumRenderer(const std::string& choices)
 {
     if (!choices.empty())
         SetParameters(choices);

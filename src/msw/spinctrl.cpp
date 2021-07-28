@@ -262,7 +262,7 @@ bool wxSpinCtrl::Create(wxWindow *parent,
                         const wxSize& size,
                         long style,
                         int min, int max, int initial,
-                        const wxString& name)
+                        const std::string& name)
 {
     // set style for the base class
     style |= wxSP_VERTICAL;

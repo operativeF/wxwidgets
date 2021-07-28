@@ -135,7 +135,7 @@ public:
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    long style = wxTL_DEFAULT_STYLE,
-                   const wxString& name = wxASCII_STR(wxTreeListCtrlNameStr))
+                   const std::string& name = wxTreeListCtrlNameStr)
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -150,7 +150,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxTL_DEFAULT_STYLE,
-                const wxString& name = wxASCII_STR(wxTreeListCtrlNameStr));
+                const std::string& name = wxTreeListCtrlNameStr);
 
 
     ~wxTreeListCtrl() override;
@@ -406,7 +406,7 @@ private:
     wxWindowList GetCompositeWindowParts() const override;
 
     // Implementation of AppendColumn().
-    int DoInsertColumn(const wxString& title,
+    int DoInsertColumn(const std::string& title,
                        int pos,     // May be -1 meaning "append".
                        int width,
                        wxAlignment align,

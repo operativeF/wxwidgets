@@ -110,7 +110,7 @@ protected:
                           WXDWORD style,
                           const wxPoint& pos = wxDefaultPosition,
                           const wxSize& size = wxDefaultSize,
-                          const std::string& label = "",
+                          const std::string& label = {},
                           WXDWORD exstyle = (WXDWORD)-1);
 
     // call this from the derived class MSWControlColor() if you want to show

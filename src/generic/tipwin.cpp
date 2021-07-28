@@ -92,7 +92,7 @@ wxEND_EVENT_TABLE()
 // ----------------------------------------------------------------------------
 
 wxTipWindow::wxTipWindow(wxWindow *parent,
-                         const wxString& text,
+                         const std::string& text,
                          wxCoord maxLength,
                          wxTipWindow** windowPtr,
                          wxRect *rectBounds)

@@ -19,7 +19,7 @@ public:
 
     wxTextCtrl() = default;
     wxTextCtrl(wxWindow *parent, wxWindowID id,
-               const std::string& value = "",
+               const std::string& value = {},
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                long style = 0,
@@ -37,7 +37,7 @@ public:
     wxTextCtrl& operator=(wxTextCtrl&&) = default;
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
-                const std::string& value = "",
+                const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,

@@ -62,7 +62,7 @@ TEST_CASE("Header control test")
     SUBCASE("Reorder")
     {
         for ( int n = 0; n < 4; n++ )
-            m_header->AppendColumn(wxHeaderColumnSimple(wxString::Format("%d", n)));
+            m_header->AppendColumn(wxHeaderColumnSimple(wxString::Format("%d", n).ToStdString()));
 
         auto ordering = m_header->GetColumnsOrder();
 

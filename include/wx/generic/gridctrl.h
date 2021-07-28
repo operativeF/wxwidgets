@@ -269,7 +269,7 @@ protected:
 class WXDLLIMPEXP_CORE wxGridCellEnumRenderer : public wxGridCellChoiceRenderer
 {
 public:
-    wxGridCellEnumRenderer( const wxString& choices = wxEmptyString );
+    wxGridCellEnumRenderer( const std::string& choices = {} );
 
     // draw the string right aligned
     void Draw(wxGrid& grid,

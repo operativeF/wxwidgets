@@ -30,9 +30,9 @@ public:
         win->Bind(wxEVT_DESTROY, &wxPersistentWindowBase::HandleDestroy, this);
     }
 
-    wxString GetName() const override
+    std::string GetName() const override
     {
-        const wxString name = GetWindow()->GetName();
+        std::string name = GetWindow()->GetName();
         wxASSERT_MSG( !name.empty(), "persistent windows should be named!" );
 
         return name;

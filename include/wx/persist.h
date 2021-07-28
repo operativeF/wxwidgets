@@ -201,10 +201,10 @@ public:
 
 
     // get the kind of the objects we correspond to, e.g. "Frame"
-    virtual wxString GetKind() const = 0;
+    virtual std::string GetKind() const = 0;
 
     // get the name of the object we correspond to, e.g. "Main"
-    virtual wxString GetName() const = 0;
+    virtual std::string GetName() const = 0;
 
 
     // return the associated object

@@ -1675,7 +1675,7 @@ void wxGridCellChoiceEditor::OnComboCloseUp(wxCommandEvent& WXUNUSED(evt))
 // data in cell is 0,1,2 ... n the cell could be displayed as
 // "John","Fred"..."Bob" in the combo choice box
 
-wxGridCellEnumEditor::wxGridCellEnumEditor(const wxString& choices)
+wxGridCellEnumEditor::wxGridCellEnumEditor(const std::string& choices)
 {
     if (!choices.empty())
         SetParameters(choices);

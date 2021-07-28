@@ -275,7 +275,7 @@ private:
     {
         while ( m_columns.size() < count )
         {
-            wxHeaderColumnSimple* colInfo = new wxHeaderColumnSimple(wxEmptyString);
+            wxHeaderColumnSimple* colInfo = new wxHeaderColumnSimple("");
             m_columns.push_back(colInfo);
         }
     }
