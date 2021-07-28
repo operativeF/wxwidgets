@@ -34,6 +34,7 @@
 #include "wx/display.h"
 
 #include "boost/nowide/convert.hpp"
+#include "boost/nowide/stackstring.hpp"
 
 // Interestingly, this symbol currently seems to be absent from Platform SDK
 // headers but it is documented at MSDN.
@@ -655,7 +656,8 @@ void wxMSWTaskDialogConfig::MSWCommonTaskDialogInit(TASKDIALOGCONFIG &tdc)
                   TDF_POSITION_RELATIVE_TO_WINDOW |
                   TDF_SIZE_TO_CONTENT;
     tdc.hInstance = wxGetInstance();
-    tdc.pszWindowTitle = boost::nowide::widen(caption).c_str();
+    boost::nowide::wstackstring stackCaption(caption.c_str());
+    tdc.pszWindowTitle = stackCaption.get();
 
     // use the top level window as parent if none specified
     tdc.hwndParent = parent ? GetHwndOf(parent) : nullptr;

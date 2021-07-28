@@ -28,6 +28,7 @@
 #include "wx/msw/private.h"
 
 #include "boost/nowide/convert.hpp"
+#include "boost/nowide/stackstring.hpp"
 
 #ifndef TTTOOLINFO_V1_SIZE
     #define TTTOOLINFO_V1_SIZE 0x28
@@ -435,7 +436,9 @@ void wxToolTip::DoAddHWND(WXHWND hWnd)
     // NMTTDISPINFO struct -- and setting the tooltip here we can have tooltips
     // of any length
     ti.hwnd = hwnd;
-    ti.lpszText = const_cast<wchar_t*>(boost::nowide::widen(m_text).c_str());
+
+    boost::nowide::wstackstring stackText(m_text.c_str());
+    ti.lpszText = stackText.get();
 
     if ( !SendTooltipMessage(GetToolTipCtrl(), TTM_ADDTOOL, &ti) )
     {
@@ -451,7 +454,8 @@ void wxToolTip::DoAddHWND(WXHWND hWnd)
         // replace the '\n's with spaces because otherwise they appear as
         // unprintable characters in the tooltip string
         wx::utils::ReplaceAll(m_text, "\n", " ");
-        ti.lpszText = const_cast<wchar_t*>(boost::nowide::widen(m_text).c_str());
+        boost::nowide::wstackstring noNewLineText(m_text.c_str());
+        ti.lpszText = noNewLineText.get();
 
         if ( !SendTooltipMessage(GetToolTipCtrl(), TTM_ADDTOOL, &ti) )
         {
@@ -534,8 +538,8 @@ void wxToolTip::DoSetTip(WXHWND hWnd)
     // FIXME: Not sure about the necessity of const_cast here.
     ti.lpszText = const_cast<wxChar *>(wxT(""));
     SendTooltipMessage(GetToolTipCtrl(), TTM_UPDATETIPTEXT, &ti);
-
-    ti.lpszText = const_cast<wchar_t*>(boost::nowide::widen(m_text).c_str());
+    boost::nowide::wstackstring stackText(m_text.c_str());
+    ti.lpszText = stackText.get();
     SendTooltipMessage(GetToolTipCtrl(), TTM_UPDATETIPTEXT, &ti);
 }
 
