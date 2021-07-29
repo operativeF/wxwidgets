@@ -36,11 +36,11 @@ public:
 
     wxBusyInfoFlags& Icon(const wxIcon& icon)
         { m_icon = icon; return *this; }
-    wxBusyInfoFlags& Title(const wxString& title)
+    wxBusyInfoFlags& Title(const std::string& title)
         { m_title = title; return *this; }
-    wxBusyInfoFlags& Text(const wxString& text)
+    wxBusyInfoFlags& Text(const std::string& text)
         { m_text = text; return *this; }
-    wxBusyInfoFlags& Label(const wxString& label)
+    wxBusyInfoFlags& Label(const std::string& label)
         { m_label = label; return *this; }
 
     wxBusyInfoFlags& Foreground(const wxColour& foreground)
@@ -55,9 +55,10 @@ private:
     wxWindow* m_parent{nullptr};
 
     wxIcon m_icon;
-    wxString m_title,
-             m_text,
-             m_label;
+    
+    std::string m_title;
+    std::string m_text;
+    std::string m_label;
 
     wxColour m_foreground,
              m_background;

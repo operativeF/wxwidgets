@@ -82,9 +82,12 @@ public:
 class WXDLLIMPEXP_CORE wxSVGFileDCImpl : public wxDCImpl
 {
 public:
-    wxSVGFileDCImpl(wxSVGFileDC* owner, const wxString& filename,
-                    int width = 320, int height = 240, double dpi = 72.0,
-                    const wxString& title = wxString());
+    wxSVGFileDCImpl(wxSVGFileDC* owner,
+                    const std::string& filename,
+                    int width = 320,
+                    int height = 240,
+                    double dpi = 72.0,
+                    const std::string& title = {});
 
     ~wxSVGFileDCImpl() override;
 
@@ -263,8 +266,8 @@ private:
 
     wxSize GetPPI() const override;
 
-    void Init(const wxString& filename, int width, int height,
-              double dpi, const wxString& title);
+    void Init(const std::string& filename, int width, int height,
+              double dpi, const std::string& title);
 
     void write(const wxString& s);
 
@@ -277,7 +280,7 @@ private:
     // their current values in wxDC.
     void DoStartNewGraphics();
 
-    wxString            m_filename;
+    std::string         m_filename;
     bool                m_OK;
     bool                m_graphics_changed;  // set by Set{Brush,Pen}()
     int                 m_width;
@@ -305,11 +308,11 @@ private:
 class WXDLLIMPEXP_CORE wxSVGFileDC : public wxDC
 {
 public:
-    wxSVGFileDC(const wxString& filename,
+    wxSVGFileDC(const std::string& filename,
                 int width = 320,
                 int height = 240,
                 double dpi = 72.0,
-                const wxString& title = wxString())
+                const std::string& title = {})
         : wxDC(new wxSVGFileDCImpl(this, filename, width, height, dpi, title))
     {
     }

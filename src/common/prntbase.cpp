@@ -386,11 +386,11 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxPrintDialogBase, wxDialog);
 
 wxPrintDialogBase::wxPrintDialogBase(wxWindow *parent,
                                      wxWindowID id,
-                                     const wxString &title,
+                                     const std::string& title,
                                      const wxPoint &pos,
                                      const wxSize &size,
                                      long style)
-    : wxDialog( parent, id, title.empty() ? wxString(_("Print")) : title,
+    : wxDialog( parent, id, title.empty() ? _("Print").ToStdString() : title,
                 pos, size, style )
 {
 }
@@ -442,11 +442,11 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxPageSetupDialogBase, wxDialog);
 
 wxPageSetupDialogBase::wxPageSetupDialogBase(wxWindow *parent,
                                      wxWindowID id,
-                                     const wxString &title,
+                                     const std::string& title,
                                      const wxPoint &pos,
                                      const wxSize &size,
                                      long style)
-    : wxDialog( parent, id, title.empty() ? wxString(_("Page setup")) : title,
+    : wxDialog( parent, id, title.empty() ? _("Page setup").ToStdString() : title,
                 pos, size, style )
 {
 }

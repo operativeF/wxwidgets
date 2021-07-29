@@ -24,9 +24,9 @@ enum { wxFONTENCODING_UNKNOWN = -2 };
 // the config paths we use
 #if wxUSE_CONFIG
 
-inline constexpr wxChar FONTMAPPER_ROOT_PATH[]            = wxT("/wxWindows/FontMapper");
-inline constexpr wxChar FONTMAPPER_CHARSET_PATH[]         = wxT("Charsets");
-inline constexpr wxChar FONTMAPPER_CHARSET_ALIAS_PATH[]   = wxT("Aliases");
+inline constexpr char FONTMAPPER_ROOT_PATH[]            = "/wxWindows/FontMapper";
+inline constexpr char FONTMAPPER_CHARSET_PATH[]         = "Charsets";
+inline constexpr char FONTMAPPER_CHARSET_ALIAS_PATH[]   = "Aliases";
 
 #endif // wxUSE_CONFIG
 
@@ -39,7 +39,7 @@ inline constexpr wxChar FONTMAPPER_CHARSET_ALIAS_PATH[]   = wxT("Aliases");
 class wxFontMapperPathChanger
 {
 public:
-    wxFontMapperPathChanger(wxFontMapperBase *fontMapper, const wxString& path)
+    wxFontMapperPathChanger(wxFontMapperBase *fontMapper, const std::string& path)
     {
         m_fontMapper = fontMapper;
         m_ok = m_fontMapper->ChangePath(path, &m_pathOld);
@@ -63,7 +63,7 @@ private:
     wxFontMapperBase *m_fontMapper;
 
     // the old path to be restored if m_ok
-    wxString m_pathOld;
+    std::string m_pathOld;
 
     // have we changed the path successfully?
     bool m_ok;

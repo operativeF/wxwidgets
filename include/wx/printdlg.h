@@ -31,7 +31,7 @@ public:
     wxPrintDialogBase() = default;
     wxPrintDialogBase(wxWindow *parent,
                       wxWindowID id = wxID_ANY,
-                      const wxString &title = wxEmptyString,
+                      const std::string &title = {},
                       const wxPoint &pos = wxDefaultPosition,
                       const wxSize &size = wxDefaultSize,
                       long style = wxDEFAULT_DIALOG_STYLE);
@@ -85,7 +85,7 @@ public:
     wxPageSetupDialogBase() = default;
     wxPageSetupDialogBase(wxWindow *parent,
                       wxWindowID id = wxID_ANY,
-                      const wxString &title = wxEmptyString,
+                      const std::string& title = {},
                       const wxPoint &pos = wxDefaultPosition,
                       const wxSize &size = wxDefaultSize,
                       long style = wxDEFAULT_DIALOG_STYLE);

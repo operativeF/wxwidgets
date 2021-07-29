@@ -70,14 +70,14 @@ public:
     wxDocument(wxDocument&&) = default;
     wxDocument& operator=(wxDocument&&) = default;
 
-    void SetFilename(const wxString& filename, bool notifyViews = false);
-    wxString GetFilename() const { return m_documentFile; }
+    void SetFilename(const std::string& filename, bool notifyViews = false);
+    std::string GetFilename() const { return m_documentFile; }
 
-    void SetTitle(const wxString& title) { m_documentTitle = title; }
-    wxString GetTitle() const { return m_documentTitle; }
+    void SetTitle(const std::string& title) { m_documentTitle = title; }
+    std::string GetTitle() const { return m_documentTitle; }
 
-    void SetDocumentName(const wxString& name) { m_documentTypeName = name; }
-    wxString GetDocumentName() const { return m_documentTypeName; }
+    void SetDocumentName(const std::string& name) { m_documentTypeName = name; }
+    std::string GetDocumentName() const { return m_documentTypeName; }
 
     // access the flag indicating whether this document had been already saved,
     // SetDocumentSaved() is only used internally, don't call it
@@ -101,8 +101,8 @@ public:
     virtual std::istream& LoadObject(std::istream& stream);
 
     // Called by wxWidgets
-    virtual bool OnSaveDocument(const wxString& filename);
-    virtual bool OnOpenDocument(const wxString& filename);
+    virtual bool OnSaveDocument(const std::string& filename);
+    virtual bool OnOpenDocument(const std::string& filename);
     virtual bool OnNewDocument();
     virtual bool OnCloseDocument();
 
@@ -118,7 +118,7 @@ public:
     // Called by framework if created automatically by the default document
     // manager: gives document a chance to initialise and (usually) create a
     // view
-    virtual bool OnCreate(const wxString& path, long flags);
+    virtual bool OnCreate(const std::string& path, long flags);
 
     // By default, creates a base wxCommandProcessor.
     virtual wxCommandProcessor *OnCreateCommandProcessor();
@@ -165,7 +165,7 @@ public:
     // Get the document name to be shown to the user: the title if there is
     // any, otherwise the filename if the document was saved and, finally,
     // "unnamed" otherwise
-    virtual wxString GetUserReadableName() const;
+    virtual std::string GetUserReadableName() const;
 
     // Returns a window that can be used as a parent for document-related
     // dialogs. Override if necessary.
@@ -177,9 +177,9 @@ public:
 
 protected:
     wxList                m_documentViews;
-    wxString              m_documentFile;
-    wxString              m_documentTitle;
-    wxString              m_documentTypeName;
+    std::string           m_documentFile;
+    std::string           m_documentTitle;
+    std::string           m_documentTypeName;
     wxDocTemplate*        m_documentTemplate{nullptr};
     bool                  m_documentModified{false};
 
@@ -194,11 +194,11 @@ protected:
     // Called by OnSaveDocument and OnOpenDocument to implement standard
     // Save/Load behaviour. Re-implement in derived class for custom
     // behaviour.
-    virtual bool DoSaveDocument(const wxString& file);
-    virtual bool DoOpenDocument(const wxString& file);
+    virtual bool DoSaveDocument(const std::string& file);
+    virtual bool DoOpenDocument(const std::string& file);
 
     // the default implementation of GetUserReadableName()
-    wxString DoGetUserReadableName() const;
+    std::string DoGetUserReadableName() const;
 
 private:
     // list of all documents whose m_documentParent is this one
@@ -222,8 +222,8 @@ public:
     wxDocument *GetDocument() const { return m_viewDocument; }
     virtual void SetDocument(wxDocument *doc);
 
-    wxString GetViewName() const { return m_viewTypeName; }
-    void SetViewName(const wxString& name) { m_viewTypeName = name; }
+    std::string GetViewName() const { return m_viewTypeName; }
+    void SetViewName(const std::string& name) { m_viewTypeName = name; }
 
     wxWindow *GetFrame() const { return m_viewFrame ; }
     void SetFrame(wxWindow *frame) { m_viewFrame = frame; }
@@ -276,7 +276,7 @@ protected:
     bool TryBefore(wxEvent& event) override;
 
     wxDocument*       m_viewDocument{nullptr};
-    wxString          m_viewTypeName;
+    std::string          m_viewTypeName;
     wxWindow*         m_viewFrame{nullptr};
 
     wxDocChildFrameAnyBase *m_docChildFrame{nullptr};
@@ -295,12 +295,12 @@ public:
     // Associate document and view types. They're for identifying what view is
     // associated with what template/document type
     wxDocTemplate(wxDocManager *manager,
-                  const wxString& descr,
-                  const wxString& filter,
-                  const wxString& dir,
-                  const wxString& ext,
-                  const wxString& docTypeName,
-                  const wxString& viewTypeName,
+                  const std::string& descr,
+                  const std::string& filter,
+                  const std::string& dir,
+                  const std::string& ext,
+                  const std::string& docTypeName,
+                  const std::string& viewTypeName,
                   wxClassInfo *docClassInfo = nullptr,
                   wxClassInfo *viewClassInfo = nullptr,
                   long flags = wxDEFAULT_TEMPLATE_FLAGS);
@@ -315,30 +315,30 @@ public:
     // By default, these two member functions dynamically creates document and
     // view using dynamic instance construction. Override these if you need a
     // different method of construction.
-    virtual wxDocument *CreateDocument(const wxString& path, long flags = 0);
+    virtual wxDocument *CreateDocument(const std::string& path, long flags = 0);
     virtual wxView *CreateView(wxDocument *doc, long flags = 0);
 
     // Helper method for CreateDocument; also allows you to do your own document
     // creation
     virtual bool InitDocument(wxDocument* doc,
-                              const wxString& path,
+                              const std::string& path,
                               long flags = 0);
 
-    wxString GetDefaultExtension() const { return m_defaultExt; }
-    wxString GetDescription() const { return m_description; }
-    wxString GetDirectory() const { return m_directory; }
+    std::string GetDefaultExtension() const { return m_defaultExt; }
+    std::string GetDescription() const { return m_description; }
+    std::string GetDirectory() const { return m_directory; }
     wxDocManager *GetDocumentManager() const { return m_documentManager; }
     void SetDocumentManager(wxDocManager *manager)
         { m_documentManager = manager; }
-    wxString GetFileFilter() const { return m_fileFilter; }
+    std::string GetFileFilter() const { return m_fileFilter; }
     long GetFlags() const { return m_flags; }
-    virtual wxString GetViewName() const { return m_viewTypeName; }
-    virtual wxString GetDocumentName() const { return m_docTypeName; }
+    virtual std::string GetViewName() const { return m_viewTypeName; }
+    virtual std::string GetDocumentName() const { return m_docTypeName; }
 
-    void SetFileFilter(const wxString& filter) { m_fileFilter = filter; }
-    void SetDirectory(const wxString& dir) { m_directory = dir; }
-    void SetDescription(const wxString& descr) { m_description = descr; }
-    void SetDefaultExtension(const wxString& ext) { m_defaultExt = ext; }
+    void SetFileFilter(const std::string& filter) { m_fileFilter = filter; }
+    void SetDirectory(const std::string& dir) { m_directory = dir; }
+    void SetDescription(const std::string& descr) { m_description = descr; }
+    void SetDefaultExtension(const std::string& ext) { m_defaultExt = ext; }
     void SetFlags(long flags) { m_flags = flags; }
 
     bool IsVisible() const { return (m_flags & wxTEMPLATE_VISIBLE) != 0; }
@@ -346,16 +346,16 @@ public:
     wxClassInfo* GetDocClassInfo() const { return m_docClassInfo; }
     wxClassInfo* GetViewClassInfo() const { return m_viewClassInfo; }
 
-    virtual bool FileMatchesTemplate(const wxString& path);
+    virtual bool FileMatchesTemplate(const std::string& path);
 
 protected:
     long              m_flags;
-    wxString          m_fileFilter;
-    wxString          m_directory;
-    wxString          m_description;
-    wxString          m_defaultExt;
-    wxString          m_docTypeName;
-    wxString          m_viewTypeName;
+    std::string          m_fileFilter;
+    std::string          m_directory;
+    std::string          m_description;
+    std::string          m_defaultExt;
+    std::string          m_docTypeName;
+    std::string          m_viewTypeName;
     wxDocManager*     m_documentManager;
 
     // For dynamic creation of appropriate instances.
@@ -421,23 +421,23 @@ public:
     // something in this case
     virtual void OnOpenFileFailure() { }
 
-    virtual wxDocument *CreateDocument(const wxString& path, long flags = 0);
+    virtual wxDocument *CreateDocument(const std::string& path, long flags = 0);
 
     // wrapper around CreateDocument() with a more clear name
     wxDocument *CreateNewDocument()
-        { return CreateDocument(wxString(), wxDOC_NEW); }
+        { return CreateDocument("", wxDOC_NEW); }
 
     virtual wxView *CreateView(wxDocument *doc, long flags = 0);
     virtual void DeleteTemplate(wxDocTemplate *temp, long flags = 0);
     virtual bool FlushDoc(wxDocument *doc);
-    virtual wxDocTemplate *MatchTemplate(const wxString& path);
+    virtual wxDocTemplate *MatchTemplate(const std::string& path);
     virtual wxDocTemplate *SelectDocumentPath(wxDocTemplate **templates,
-            int noTemplates, wxString& path, long flags, bool save = false);
+            int noTemplates, std::string& path, long flags, bool save = false);
     virtual wxDocTemplate *SelectDocumentType(wxDocTemplate **templates,
             int noTemplates, bool sort = false);
     virtual wxDocTemplate *SelectViewType(wxDocTemplate **templates,
             int noTemplates, bool sort = false);
-    virtual wxDocTemplate *FindTemplateForPath(const wxString& path);
+    virtual wxDocTemplate *FindTemplateForPath(const std::string& path);
 
     void AssociateTemplate(wxDocTemplate *temp);
     void DisassociateTemplate(wxDocTemplate *temp);
@@ -446,7 +446,7 @@ public:
     wxDocTemplate* FindTemplate(const wxClassInfo* documentClassInfo);
 
     // Find document from file name, may return NULL.
-    wxDocument* FindDocumentByPath(const wxString& path) const;
+    wxDocument* FindDocumentByPath(const std::string& path) const;
 
     wxDocument *GetCurrentDocument() const;
 
@@ -485,19 +485,19 @@ public:
 
     // Return the default name for a new document (by default returns strings
     // in the form "unnamed <counter>" but can be overridden)
-    virtual wxString MakeNewDocumentName();
+    virtual std::string MakeNewDocumentName();
 
     // Make a frame title (override this to do something different)
-    virtual wxString MakeFrameTitle(wxDocument* doc);
+    virtual std::string MakeFrameTitle(wxDocument* doc);
 
     virtual wxFileHistory *OnCreateFileHistory();
     virtual wxFileHistory *GetFileHistory() const { return m_fileHistory; }
 
     // File history management
-    virtual void AddFileToHistory(const wxString& file);
+    virtual void AddFileToHistory(const std::string& file);
     virtual void RemoveFileFromHistory(size_t i);
     virtual size_t GetHistoryFilesCount() const;
-    virtual wxString GetHistoryFile(size_t i) const;
+    virtual std::string GetHistoryFile(size_t i) const;
     virtual void FileHistoryUseMenu(wxMenu *menu);
     virtual void FileHistoryRemoveMenu(wxMenu *menu);
 #if wxUSE_CONFIG
@@ -508,8 +508,8 @@ public:
     virtual void FileHistoryAddFilesToMenu();
     virtual void FileHistoryAddFilesToMenu(wxMenu* menu);
 
-    wxString GetLastDirectory() const;
-    void SetLastDirectory(const wxString& dir) { m_lastDirectory = dir; }
+    std::string GetLastDirectory() const;
+    void SetLastDirectory(const std::string& dir) { m_lastDirectory = dir; }
 
     // Get the current document manager
     static wxDocManager* GetDocumentManager() { return sm_docManager; }
@@ -525,14 +525,14 @@ protected:
     // Called when a file selected from the MRU list doesn't exist any more.
     // The default behaviour is to remove the file from the MRU and notify the
     // user about it but this method can be overridden to customize it.
-    virtual void OnMRUFileNotExist(unsigned n, const wxString& filename);
+    virtual void OnMRUFileNotExist(unsigned n, const std::string& filename);
 
     // Open the MRU file with the given index in our associated file history.
     void DoOpenMRUFile(unsigned n);
 #if wxUSE_PRINTING_ARCHITECTURE
     virtual wxPreviewFrame* CreatePreviewFrame(wxPrintPreviewBase* preview,
                                                wxWindow *parent,
-                                               const wxString& title);
+                                               const std::string& title);
 #endif // wxUSE_PRINTING_ARCHITECTURE
 
     // hook the currently active view into event handlers chain here
@@ -547,7 +547,7 @@ protected:
     wxList            m_templates;
     wxView*           m_currentView{nullptr};
     wxFileHistory*    m_fileHistory{nullptr};
-    wxString          m_lastDirectory;
+    std::string          m_lastDirectory;
     inline static wxDocManager* sm_docManager{nullptr};
 
 #if wxUSE_PRINTING_ARCHITECTURE
@@ -985,14 +985,14 @@ private:
 // For compatibility with existing file formats:
 // converts from/to a stream to/from a temporary file.
 bool WXDLLIMPEXP_CORE
-wxTransferFileToStream(const wxString& filename, std::ostream& stream);
+wxTransferFileToStream(const std::string& filename, std::ostream& stream);
 bool WXDLLIMPEXP_CORE
-wxTransferStreamToFile(std::istream& stream, const wxString& filename);
+wxTransferStreamToFile(std::istream& stream, const std::string& filename);
 #else
 bool WXDLLIMPEXP_CORE
-wxTransferFileToStream(const wxString& filename, wxOutputStream& stream);
+wxTransferFileToStream(const std::string& filename, wxOutputStream& stream);
 bool WXDLLIMPEXP_CORE
-wxTransferStreamToFile(wxInputStream& stream, const wxString& filename);
+wxTransferStreamToFile(wxInputStream& stream, const std::string& filename);
 
 inline wxViewVector wxDocument::GetViewsVector() const
 {

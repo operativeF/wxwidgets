@@ -2916,10 +2916,11 @@ static wxEncodingNameCache gs_nameCache;
 wxMBConv *wxCSConv::DoCreate() const
 {
 #if wxUSE_FONTMAP
-    wxLogTrace(TRACE_STRCONV,
-               wxT("creating conversion for %s"),
-               (m_name ? m_name
-                       : (const char*)wxFontMapperBase::GetEncodingName(m_encoding).mb_str()));
+    // FIXME: Doesn't work with std::string
+    //wxLogTrace(TRACE_STRCONV,
+    //           wxT("creating conversion for %s"),
+    //           (m_name ? m_name
+    //                   : (const char*)wxFontMapperBase::GetEncodingName(m_encoding)));
 #endif // wxUSE_FONTMAP
 
     // check for the special case of ASCII or ISO8859-1 charset: as we have
@@ -3093,7 +3094,7 @@ wxMBConv *wxCSConv::DoCreate() const
 
     wxLogTrace(TRACE_STRCONV,
                wxT("encoding \"%s\" is not supported by this system"),
-               (m_name ? wxString(m_name)
+               (m_name ? m_name
                        : wxFontMapperBase::GetEncodingName(m_encoding)));
 #endif // wxUSE_FONTMAP
 

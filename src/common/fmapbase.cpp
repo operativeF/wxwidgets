@@ -29,6 +29,7 @@
 
 #include "wx/fontmap.h"
 #include "wx/fmappriv.h"
+#include "wx/stringutils.h"
 
 #include "wx/apptrait.h"
 
@@ -231,113 +232,112 @@ constexpr std::array gs_encodingDescs =
 };
 
 // and the internal names (these are not translated on purpose!)
-// TODO: make string_view / wstring_view detectable
-constexpr std::array<std::wstring_view, 83> gs_encodingNames =
+constexpr std::array<std::string_view, 83> gs_encodingNames =
 {{
     // names from the columns correspond to these OS:
     //      Linux        Solaris and IRIX       HP-UX             AIX
-    wxT("ISO-8859-1,ISO8859-1,iso88591,8859-1,iso_8859_1"),
-    wxT("ISO-8859-2,ISO8859-2,iso88592,8859-2"),
-    wxT("ISO-8859-3,ISO8859-3,iso88593,8859-3"),
-    wxT("ISO-8859-4,ISO8859-4,iso88594,8859-4"),
-    wxT("ISO-8859-5,ISO8859-5,iso88595,8859-5"),
-    wxT("ISO-8859-6,ISO8859-6,iso88596,8859-6"),
-    wxT("ISO-8859-7,ISO8859-7,iso88597,8859-7"),
-    wxT("ISO-8859-8,ISO8859-8,iso88598,8859-8"),
-    wxT("ISO-8859-9,ISO8859-9,iso88599,8859-9"),
-    wxT("ISO-8859-10,ISO8859-10,iso885910,8859-10"),
-    wxT("ISO-8859-11,ISO8859-11,iso885911,8859-11"),
-    wxT("ISO-8859-12,ISO8859-12,iso885912,8859-12"),
-    wxT("ISO-8859-13,ISO8859-13,iso885913,8859-13"),
-    wxT("ISO-8859-14,ISO8859-14,iso885914,8859-14"),
-    wxT("ISO-8859-15,ISO8859-15,iso885915,8859-15"),
+    "ISO-8859-1,ISO8859-1,iso88591,8859-1,iso_8859_1",
+    "ISO-8859-2,ISO8859-2,iso88592,8859-2",
+    "ISO-8859-3,ISO8859-3,iso88593,8859-3",
+    "ISO-8859-4,ISO8859-4,iso88594,8859-4",
+    "ISO-8859-5,ISO8859-5,iso88595,8859-5",
+    "ISO-8859-6,ISO8859-6,iso88596,8859-6",
+    "ISO-8859-7,ISO8859-7,iso88597,8859-7",
+    "ISO-8859-8,ISO8859-8,iso88598,8859-8",
+    "ISO-8859-9,ISO8859-9,iso88599,8859-9",
+    "ISO-8859-10,ISO8859-10,iso885910,8859-10",
+    "ISO-8859-11,ISO8859-11,iso885911,8859-11",
+    "ISO-8859-12,ISO8859-12,iso885912,8859-12",
+    "ISO-8859-13,ISO8859-13,iso885913,8859-13",
+    "ISO-8859-14,ISO8859-14,iso885914,8859-14",
+    "ISO-8859-15,ISO8859-15,iso885915,8859-15",
 
     // although koi8-ru is not strictly speaking the same as koi8-r,
     // they are similar enough to make mapping it to koi8 better than
     // not recognizing it at all
-    wxT( "KOI8-R,KOI8-RU" ),
-    wxT( "KOI8-U" ),
+     "KOI8-R,KOI8-RU",
+     "KOI8-U",
 
-    wxT( "WINDOWS-866,CP866" ),
+     "WINDOWS-866,CP866",
 
-    wxT( "WINDOWS-874,CP874,MS874,IBM-874" ),
-    wxT( "WINDOWS-932,CP932,MS932,IBM-932,SJIS,SHIFT-JIS,SHIFT_JIS" ),
-    wxT( "WINDOWS-936,CP936,MS936,IBM-936,GB2312,gbk,GBK" ),
-    wxT( "WINDOWS-949,CP949,MS949,IBM-949,EUC-KR,eucKR,euc_kr" ),
-    wxT( "WINDOWS-950,CP950,MS950,IBM-950,BIG5,BIG-5,BIG-FIVE" ),
-    wxT( "WINDOWS-1250,CP1250,MS1250,IBM-1250" ),
-    wxT( "WINDOWS-1251,CP1251,MS1251,IBM-1251" ),
-    wxT( "WINDOWS-1252,CP1252,MS1252,IBM-1252" ),
-    wxT( "WINDOWS-1253,CP1253,MS1253,IBM-1253" ),
-    wxT( "WINDOWS-1254,CP1254,MS1254,IBM-1254" ),
-    wxT( "WINDOWS-1255,CP1255,MS1255,IBM-1255" ),
-    wxT( "WINDOWS-1256,CP1256,MS1256,IBM-1256" ),
-    wxT( "WINDOWS-1257,CP1257,MS1257,IBM-1257" ),
-    wxT( "WINDOWS-1258,CP1258,MS1258,IBM-1258" ),
-    wxT( "WINDOWS-1361,CP1361,MS1361,IBM-1361,JOHAB" ),
-    wxT( "WINDOWS-437,CP437,MS437,IBM-437" ),
+     "WINDOWS-874,CP874,MS874,IBM-874",
+     "WINDOWS-932,CP932,MS932,IBM-932,SJIS,SHIFT-JIS,SHIFT_JIS",
+     "WINDOWS-936,CP936,MS936,IBM-936,GB2312,gbk,GBK",
+     "WINDOWS-949,CP949,MS949,IBM-949,EUC-KR,eucKR,euc_kr",
+     "WINDOWS-950,CP950,MS950,IBM-950,BIG5,BIG-5,BIG-FIVE",
+     "WINDOWS-1250,CP1250,MS1250,IBM-1250",
+     "WINDOWS-1251,CP1251,MS1251,IBM-1251",
+     "WINDOWS-1252,CP1252,MS1252,IBM-1252",
+     "WINDOWS-1253,CP1253,MS1253,IBM-1253",
+     "WINDOWS-1254,CP1254,MS1254,IBM-1254",
+     "WINDOWS-1255,CP1255,MS1255,IBM-1255",
+     "WINDOWS-1256,CP1256,MS1256,IBM-1256",
+     "WINDOWS-1257,CP1257,MS1257,IBM-1257",
+     "WINDOWS-1258,CP1258,MS1258,IBM-1258",
+     "WINDOWS-1361,CP1361,MS1361,IBM-1361,JOHAB",
+     "WINDOWS-437,CP437,MS437,IBM-437",
 
-    wxT( "UTF-7,UTF7" ),
-    wxT( "UTF-8,UTF8" ),
+     "UTF-7,UTF7",
+     "UTF-8,UTF8",
 #ifdef WORDS_BIGENDIAN
     wxT( "UTF-16BE,UTF16BE,UCS-2BE,UCS2BE,UTF-16,UTF16,UCS-2,UCS2"),
     wxT( "UTF-16LE,UTF16LE,UCS-2LE,UCS2LE"),
     wxT( "UTF-32BE,UTF32BE,UCS-4BE,UTF-32,UTF32,UCS-4,UCS4"),
     wxT( "UTF-32LE,UTF32LE,UCS-4LE,UCS4LE"),
 #else // WORDS_BIGENDIAN
-    wxT("UTF-16BE,UTF16BE,UCS-2BE,UCS2BE"),
-    wxT("UTF-16LE,UTF16LE,UCS-2LE,UTF-16,UTF16,UCS-2,UCS2"),
-    wxT("UTF-32BE,UTF32BE,UCS-4BE,UCS4BE"),
-    wxT("UTF-32LE,UTF32LE,UCS-4LE,UCS4LE,UTF-32,UTF32,UCS-4,UCS4"),
+    "UTF-16BE,UTF16BE,UCS-2BE,UCS2BE",
+    "UTF-16LE,UTF16LE,UCS-2LE,UTF-16,UTF16,UCS-2,UCS2",
+    "UTF-32BE,UTF32BE,UCS-4BE,UCS4BE",
+    "UTF-32LE,UTF32LE,UCS-4LE,UCS4LE,UTF-32,UTF32,UCS-4,UCS4",
 #endif // WORDS_BIGENDIAN
 
-    wxT( "EUC-JP,eucJP,euc_jp,IBM-eucJP" ),
+     "EUC-JP,eucJP,euc_jp,IBM-eucJP",
 
     // 646 is for Solaris, roman8 -- for HP-UX
-    wxT( "US-ASCII,ASCII,C,POSIX,ANSI_X3.4-1968,646,roman8" ),
+     "US-ASCII,ASCII,C,POSIX,ANSI_X3.4-1968,646,roman8",
 
-    wxT( "ISO-2022-JP" ),
+     "ISO-2022-JP",
 
-    wxT( "MacRoman" ),
-    wxT( "MacJapanese" ),
-    wxT( "MacChineseTrad" ),
-    wxT( "MacKorean" ),
-    wxT( "MacArabic" ),
-    wxT( "MacHebrew" ),
-    wxT( "MacGreek" ),
-    wxT( "MacCyrillic" ),
-    wxT( "MacDevanagari" ),
-    wxT( "MacGurmukhi" ),
-    wxT( "MacGujarati" ),
-    wxT( "MacOriya" ),
-    wxT( "MacBengali" ),
-    wxT( "MacTamil" ),
-    wxT( "MacTelugu" ),
-    wxT( "MacKannada" ),
-    wxT( "MacMalayalam" ),
-    wxT( "MacSinhalese" ),
-    wxT( "MacBurmese" ),
-    wxT( "MacKhmer" ),
-    wxT( "MacThai" ),
-    wxT( "MacLaotian" ),
-    wxT( "MacGeorgian" ),
-    wxT( "MacArmenian" ),
-    wxT( "MacChineseSimp" ),
-    wxT( "MacTibetan" ),
-    wxT( "MacMongolian" ),
-    wxT( "MacEthiopic" ),
-    wxT( "MacCentralEurRoman" ),
-    wxT( "MacVietnamese" ),
-    wxT( "MacExtArabic" ),
-    wxT( "MacSymbol" ),
-    wxT( "MacDingbats" ),
-    wxT( "MacTurkish" ),
-    wxT( "MacCroatian" ),
-    wxT( "MacIcelandic" ),
-    wxT( "MacRomanian" ),
-    wxT( "MacCeltic" ),
-    wxT( "MacGaelic" ),
-    wxT( "MacKeyboardGlyphs" )
+     "MacRoman",
+     "MacJapanese",
+     "MacChineseTrad",
+     "MacKorean",
+     "MacArabic",
+     "MacHebrew",
+     "MacGreek",
+     "MacCyrillic",
+     "MacDevanagari",
+     "MacGurmukhi",
+     "MacGujarati",
+     "MacOriya",
+     "MacBengali",
+     "MacTamil",
+     "MacTelugu",
+     "MacKannada",
+     "MacMalayalam",
+     "MacSinhalese",
+     "MacBurmese",
+     "MacKhmer",
+     "MacThai",
+     "MacLaotian",
+     "MacGeorgian",
+     "MacArmenian",
+     "MacChineseSimp",
+     "MacTibetan",
+     "MacMongolian",
+     "MacEthiopic",
+     "MacCentralEurRoman",
+     "MacVietnamese",
+     "MacExtArabic",
+     "MacSymbol",
+     "MacDingbats",
+     "MacTurkish",
+     "MacCroatian",
+     "MacIcelandic",
+     "MacRomanian",
+     "MacCeltic",
+     "MacGaelic",
+     "MacKeyboardGlyphs"
 }};
 
 // ----------------------------------------------------------------------------
@@ -372,9 +372,9 @@ public:
 
 wxIMPLEMENT_DYNAMIC_CLASS(wxFontMapperModule, wxModule);
 
-std::vector<std::wstring_view> SVSplit(std::wstring_view str, wchar_t delim)
+std::vector<std::string_view> SVSplit(std::string_view str, wchar_t delim)
 {
-    std::vector<std::wstring_view> output;
+    std::vector<std::string_view> output;
 
     size_t first = 0;
 
@@ -385,7 +385,7 @@ std::vector<std::wstring_view> SVSplit(std::wstring_view str, wchar_t delim)
         if (first != second)
             output.emplace_back(str.substr(first, second - first));
 
-        if (second == std::wstring_view::npos)
+        if (second == std::string_view::npos)
             break;
 
         first = second + 1;
@@ -458,17 +458,17 @@ void wxFontMapperBase::Reset()
 // ----------------------------------------------------------------------------
 
 
-static wxString gs_defaultConfigPath(FONTMAPPER_ROOT_PATH);
+static std::string gs_defaultConfigPath(FONTMAPPER_ROOT_PATH);
 
 /* static */
-const wxString& wxFontMapperBase::GetDefaultConfigPath()
+const std::string& wxFontMapperBase::GetDefaultConfigPath()
 {
     // NB: we return const wxString& and not wxString for compatibility
     //     with 2.8 that returned const wxChar*
     return gs_defaultConfigPath;
 }
 
-void wxFontMapperBase::SetConfigPath(const wxString& prefix)
+void wxFontMapperBase::SetConfigPath(const std::string& prefix)
 {
     wxCHECK_RET( !prefix.empty() && prefix[0] == wxCONFIG_PATH_SEPARATOR,
                  wxT("an absolute path should be given to wxFontMapper::SetConfigPath()") );
@@ -501,9 +501,9 @@ wxConfigBase *wxFontMapperBase::GetConfig()
     return config;
 }
 
-const wxString& wxFontMapperBase::GetConfigPath()
+const std::string& wxFontMapperBase::GetConfigPath()
 {
-    if ( !m_configRootPath )
+    if ( m_configRootPath.empty() )
     {
         // use the default
         m_configRootPath = GetDefaultConfigPath();
@@ -516,7 +516,7 @@ const wxString& wxFontMapperBase::GetConfigPath()
 // config helpers
 // ----------------------------------------------------------------------------
 
-bool wxFontMapperBase::ChangePath(const wxString& pathNew, wxString *pathOld)
+bool wxFontMapperBase::ChangePath(const std::string& pathNew, std::string* pathOld)
 {
     wxConfigBase *config = GetConfig();
     if ( !config )
@@ -530,7 +530,7 @@ bool wxFontMapperBase::ChangePath(const wxString& pathNew, wxString *pathOld)
         path += wxCONFIG_PATH_SEPARATOR;
     }
 
-    wxASSERT_MSG( !pathNew || (pathNew[0] != wxCONFIG_PATH_SEPARATOR),
+    wxASSERT_MSG( pathNew.empty() || (pathNew.front() != wxCONFIG_PATH_SEPARATOR),
                   wxT("should be a relative path") );
 
     path += pathNew;
@@ -540,7 +540,7 @@ bool wxFontMapperBase::ChangePath(const wxString& pathNew, wxString *pathOld)
     return true;
 }
 
-void wxFontMapperBase::RestorePath(const wxString& pathOld)
+void wxFontMapperBase::RestorePath(const std::string& pathOld)
 {
     GetConfig()->SetPath(pathOld);
 }
@@ -552,7 +552,7 @@ void wxFontMapperBase::RestorePath(const wxString& pathOld)
 // ----------------------------------------------------------------------------
 
 wxFontEncoding
-wxFontMapperBase::CharsetToEncoding(const wxString& charset,
+wxFontMapperBase::CharsetToEncoding(const std::string& charset,
                                     bool WXUNUSED(interactive))
 {
     int enc = NonInteractiveCharsetToEncoding(charset);
@@ -567,7 +567,7 @@ wxFontMapperBase::CharsetToEncoding(const wxString& charset,
 }
 
 int
-wxFontMapperBase::NonInteractiveCharsetToEncoding(const wxString& charset)
+wxFontMapperBase::NonInteractiveCharsetToEncoding(const std::string& charset)
 {
     // TODO: Implement heuristics for determining / inferring encoding
     // with string_view.
@@ -614,7 +614,7 @@ wxFontMapperBase::NonInteractiveCharsetToEncoding(const wxString& charset)
             // may be we have an alias?
             config->SetPath(FONTMAPPER_CHARSET_ALIAS_PATH);
 
-            wxString alias = config->Read(charset);
+            std::string alias = config->Read(charset);
             if ( !alias.empty() )
             {
                 // yes, we do - use it instead
@@ -642,10 +642,10 @@ wxFontMapperBase::NonInteractiveCharsetToEncoding(const wxString& charset)
 
         int enc_index = 0;
 
-        // TODO: Implement find for string_views that's case insensitive.
+        // FIXME: Add MakeUpper function
         for ( const auto encFamily : gs_encodingNames )
         {
-            if (encFamily.find(cs.MakeUpper().wc_str()) != std::wstring_view::npos)
+            if (encFamily.find(cs.MakeUpper().ToStdString()) != std::string_view::npos)
                 return gs_encodings[enc_index];
 
             ++enc_index;
@@ -791,7 +791,7 @@ wxFontEncoding wxFontMapperBase::GetEncoding(size_t n)
 }
 
 /* static */
-wxString wxFontMapperBase::GetEncodingDescription(wxFontEncoding encoding)
+std::string wxFontMapperBase::GetEncodingDescription(wxFontEncoding encoding)
 {
     if ( encoding == wxFONTENCODING_DEFAULT )
     {
@@ -813,7 +813,7 @@ wxString wxFontMapperBase::GetEncodingDescription(wxFontEncoding encoding)
 }
 
 /* static */
-wxString wxFontMapperBase::GetEncodingName(wxFontEncoding encoding)
+std::string wxFontMapperBase::GetEncodingName(wxFontEncoding encoding)
 {
     if ( encoding == wxFONTENCODING_DEFAULT )
     {
@@ -824,7 +824,7 @@ wxString wxFontMapperBase::GetEncodingName(wxFontEncoding encoding)
     {
         if ( gs_encodings[i] == encoding )
         {
-            return std::wstring(gs_encodingNames[i].substr(0, gs_encodingNames[i].find_first_of(',')));
+            return std::string(gs_encodingNames[i].substr(0, gs_encodingNames[i].find_first_of(',')));
         }
     }
 
@@ -835,7 +835,7 @@ wxString wxFontMapperBase::GetEncodingName(wxFontEncoding encoding)
 }
 
 /* static */
-std::vector<std::wstring_view> wxFontMapperBase::GetAllEncodingNames(wxFontEncoding encoding)
+std::vector<std::string_view> wxFontMapperBase::GetAllEncodingNames(wxFontEncoding encoding)
 {
     for ( size_t i = 0; i < gs_encodingNames.size(); i++ )
     {
@@ -849,7 +849,7 @@ std::vector<std::wstring_view> wxFontMapperBase::GetAllEncodingNames(wxFontEncod
 }
 
 /* static */
-wxFontEncoding wxFontMapperBase::GetEncodingFromName(const wxString& name)
+wxFontEncoding wxFontMapperBase::GetEncodingFromName(const std::string& name)
 {
     int i{0};
 

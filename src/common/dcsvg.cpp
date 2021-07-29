@@ -497,15 +497,22 @@ void wxSVGFileDC::SetShapeRenderingMode(wxSVGShapeRenderingMode renderingMode)
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxSVGFileDCImpl, wxDCImpl);
 
-wxSVGFileDCImpl::wxSVGFileDCImpl(wxSVGFileDC* owner, const wxString& filename,
-                                 int width, int height, double dpi, const wxString& title)
+wxSVGFileDCImpl::wxSVGFileDCImpl(wxSVGFileDC* owner,
+                                 const std::string& filename,
+                                 int width,
+                                 int height,
+                                 double dpi,
+                                 const std::string& title)
     : wxDCImpl(owner)
 {
     Init(filename, width, height, dpi, title);
 }
 
-void wxSVGFileDCImpl::Init(const wxString& filename, int width, int height,
-                           double dpi, const wxString& title)
+void wxSVGFileDCImpl::Init(const std::string& filename,
+                           int width,
+                           int height,
+                           double dpi,
+                           const std::string& title)
 {
     m_width = width;
     m_height = height;
@@ -1317,7 +1324,7 @@ void wxSVGFileDCImpl::DoDrawBitmap(const wxBitmap& bmp, wxCoord x, wxCoord y,
 
     // If we don't have any bitmap handler yet, use the default one.
     if ( !m_bmp_handler )
-        m_bmp_handler.reset(new wxSVGBitmapFileHandler(m_filename));
+        m_bmp_handler.reset(new wxSVGBitmapFileHandler(wxFileName(m_filename)));
 
     m_OK = m_outfile && m_outfile->IsOk();
     if (!m_OK)

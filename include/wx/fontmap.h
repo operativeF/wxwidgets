@@ -89,7 +89,7 @@ public:
     //
     // interactive parameter is ignored in the base class, we behave as if it
     // were always false
-    virtual wxFontEncoding CharsetToEncoding(const wxString& charset,
+    virtual wxFontEncoding CharsetToEncoding(const std::string& charset,
                                              bool interactive = true);
 
     // information about supported encodings
@@ -103,21 +103,21 @@ public:
 
     // return canonical name of this encoding (this is a short string,
     // GetEncodingDescription() returns a longer one)
-    static wxString GetEncodingName(wxFontEncoding encoding);
+    static std::string GetEncodingName(wxFontEncoding encoding);
 
     // return a list of all names of this encoding (see GetEncodingName)
-    static std::vector<std::wstring_view> GetAllEncodingNames(wxFontEncoding encoding);
+    static std::vector<std::string_view> GetAllEncodingNames(wxFontEncoding encoding);
 
     // return user-readable string describing the given encoding
     //
     // NB: hard-coded now, but might change later (read it from config?)
-    static wxString GetEncodingDescription(wxFontEncoding encoding);
+    static std::string GetEncodingDescription(wxFontEncoding encoding);
 
     // find the encoding corresponding to the given name, inverse of
     // GetEncodingName() and less general than CharsetToEncoding()
     //
     // returns wxFONTENCODING_MAX if the name is not a supported encoding
-    static wxFontEncoding GetEncodingFromName(const wxString& name);
+    static wxFontEncoding GetEncodingFromName(const std::string& name);
 
 
     // functions which allow to configure the config object used: by default,
@@ -128,10 +128,10 @@ public:
 
 #if wxUSE_CONFIG && wxUSE_FILECONFIG
     // set the root config path to use (should be an absolute path)
-    void SetConfigPath(const wxString& prefix);
+    void SetConfigPath(const std::string& prefix);
 
     // return default config path
-    static const wxString& GetDefaultConfigPath();
+    static const std::string& GetDefaultConfigPath();
 #endif // wxUSE_CONFIG
 
 
@@ -147,7 +147,7 @@ protected:
 
     // gets the root path for our settings -- if it wasn't set explicitly, use
     // GetDefaultConfigPath()
-    const wxString& GetConfigPath();
+    const std::string& GetConfigPath();
 
     // change to the given (relative) path in the config, return true if ok
     // (then GetConfig() will return something !NULL), false if no config
@@ -155,15 +155,15 @@ protected:
     //
     // caller should provide a pointer to the string variable which should be
     // later passed to RestorePath()
-    bool ChangePath(const wxString& pathNew, wxString *pathOld);
+    bool ChangePath(const std::string& pathNew, std::string *pathOld);
 
     // restore the config path after use
-    void RestorePath(const wxString& pathOld);
+    void RestorePath(const std::string& pathOld);
 
     // config object and path (in it) to use
     wxConfigBase *m_configDummy{nullptr};
 
-    wxString m_configRootPath;
+    std::string m_configRootPath;
 #endif // wxUSE_CONFIG
 
     // the real implementation of the base class version of CharsetToEncoding()
@@ -171,7 +171,7 @@ protected:
     // returns wxFONTENCODING_UNKNOWN if encoding is unknown and we shouldn't
     // ask the user about it, wxFONTENCODING_SYSTEM if it is unknown but we
     // should/could ask the user
-    int NonInteractiveCharsetToEncoding(const wxString& charset);
+    int NonInteractiveCharsetToEncoding(const std::string& charset);
 
 private:
     // the global fontmapper object or nullptr
@@ -214,7 +214,7 @@ public:
 
     // returns the encoding for the given charset (in the form of RFC 2046) or
     // wxFONTENCODING_SYSTEM if couldn't decode it
-    wxFontEncoding CharsetToEncoding(const wxString& charset,
+    wxFontEncoding CharsetToEncoding(const std::string& charset,
                                              bool interactive = true) override;
 
     // find an alternative for the given encoding (which is supposed to not be
@@ -223,14 +223,14 @@ public:
     // return false
     virtual bool GetAltForEncoding(wxFontEncoding encoding,
                                    wxNativeEncodingInfo *info,
-                                   const wxString& facename = wxEmptyString,
+                                   const std::string& facename = {},
                                    bool interactive = true);
 
     // version better suitable for 'public' use. Returns wxFontEcoding
     // that can be used it wxFont ctor
     bool GetAltForEncoding(wxFontEncoding encoding,
                            wxFontEncoding *alt_encoding,
-                           const wxString& facename = wxEmptyString,
+                           const std::string& facename = {},
                            bool interactive = true);
 
     // checks whether given encoding is available in given face or not.
@@ -238,7 +238,7 @@ public:
     // if no facename is given (default), return true if it's available in any
     // facename at alll.
     virtual bool IsEncodingAvailable(wxFontEncoding encoding,
-                                     const wxString& facename = wxEmptyString);
+                                     const std::string& facename = {});
 
 
     // configure the appearance of the dialogs we may popup
@@ -248,7 +248,7 @@ public:
     void SetDialogParent(wxWindow *parent) { m_windowParent = parent; }
 
     // the title for the dialogs (note that default is quite reasonable)
-    void SetDialogTitle(const wxString& title) { m_titleDialog = title; }
+    void SetDialogTitle(const std::string& title) { m_titleDialog = title; }
 
     // GUI code needs to know it's a wxFontMapper because there
     // are additional methods in the subclass.
@@ -265,12 +265,12 @@ protected:
     // but if he doesn't choose any and the default logic finds one, it will
     // be saved in the config so that the user won't be asked about it any
     // more
-    bool TestAltEncoding(const wxString& configEntry,
+    bool TestAltEncoding(const std::string& configEntry,
                          wxFontEncoding encReplacement,
                          wxNativeEncodingInfo *info);
 
     // the title for our dialogs
-    wxString m_titleDialog;
+    std::string m_titleDialog;
 
     // the parent window for our dialogs
     wxWindow *m_windowParent{nullptr};

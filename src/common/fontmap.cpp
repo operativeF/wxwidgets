@@ -106,8 +106,8 @@ wxEND_ENUM( wxFontEncoding )
 // the config paths we use
 #if wxUSE_CONFIG
 
-constexpr wxChar FONTMAPPER_FONT_FROM_ENCODING_PATH[] = wxT("Encodings");
-constexpr wxChar FONTMAPPER_FONT_DONT_ASK[] = wxT("none");
+constexpr char FONTMAPPER_FONT_FROM_ENCODING_PATH[] = "Encodings";
+constexpr char FONTMAPPER_FONT_DONT_ASK[] = "none";
 
 #endif // wxUSE_CONFIG
 
@@ -159,7 +159,7 @@ wxFontMapper *wxFontMapper::Get()
 }
 
 wxFontEncoding
-wxFontMapper::CharsetToEncoding(const wxString& charset, bool interactive)
+wxFontMapper::CharsetToEncoding(const std::string& charset, bool interactive)
 {
     // try the ways not needing the users intervention first
     int encoding = wxFontMapperBase::NonInteractiveCharsetToEncoding(charset);
@@ -240,7 +240,7 @@ wxFontMapper::CharsetToEncoding(const wxString& charset, bool interactive)
 // correspond to which is used by GetFontForEncoding() function
 // ----------------------------------------------------------------------------
 
-bool wxFontMapper::TestAltEncoding(const wxString& configEntry,
+bool wxFontMapper::TestAltEncoding(const std::string& configEntry,
                                    wxFontEncoding encReplacement,
                                    wxNativeEncodingInfo *info)
 {
@@ -266,7 +266,7 @@ bool wxFontMapper::TestAltEncoding(const wxString& configEntry,
 
 bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
                                      wxNativeEncodingInfo *info,
-                                     const wxString& facename,
+                                     const std::string& facename,
                                      bool interactive)
 {
 #if wxUSE_GUI
@@ -455,7 +455,7 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
                              (
                                 configEntry,
                                 foundEquivEncoding
-                                    ? (const wxChar*)info->ToString().c_str()
+                                    ? info->ToString().c_str()
                                     : FONTMAPPER_FONT_DONT_ASK
                              );
             }
@@ -472,7 +472,7 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
 
 bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
                                      wxFontEncoding *encodingAlt,
-                                     const wxString& facename,
+                                     const std::string& facename,
                                      bool interactive)
 {
     wxCHECK_MSG( encodingAlt, false,
@@ -488,7 +488,7 @@ bool wxFontMapper::GetAltForEncoding(wxFontEncoding encoding,
 }
 
 bool wxFontMapper::IsEncodingAvailable(wxFontEncoding encoding,
-                                       const wxString& facename)
+                                       const std::string& facename)
 {
     wxNativeEncodingInfo info;
 

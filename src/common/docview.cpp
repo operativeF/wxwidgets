@@ -79,14 +79,15 @@ wxIMPLEMENT_CLASS(wxDocParentFrame, wxFrame);
 namespace
 {
 
-wxString FindExtension(const wxString& path)
+std::string FindExtension(const std::string& path)
 {
     wxString ext;
     wxFileName::SplitPath(path, nullptr, nullptr, &ext);
 
     // VZ: extensions are considered not case sensitive - is this really a good
     //     idea?
-    return ext.MakeLower();
+    // FIXME: Use string
+    return ext.MakeLower().ToStdString();
 }
 
 } // anonymous namespace
@@ -268,7 +269,7 @@ bool wxDocument::OnNewDocument()
 
     SetDocumentSaved(false);
 
-    const wxString name = GetDocumentManager()->MakeNewDocumentName();
+    const std::string name = GetDocumentManager()->MakeNewDocumentName();
     SetTitle(name);
     SetFilename(name, true);
 
@@ -293,7 +294,7 @@ bool wxDocument::SaveAs()
         return false;
 
 #ifdef wxHAS_MULTIPLE_FILEDLG_FILTERS
-    wxString filter = docTemplate->GetDescription() + wxT(" (") +
+    std::string filter = docTemplate->GetDescription() + wxT(" (") +
         docTemplate->GetFileFilter() + wxT(")|") +
         docTemplate->GetFileFilter();
 
@@ -313,21 +314,24 @@ bool wxDocument::SaveAs()
             {
                 // add a '|' to separate this filter from the previous one
                 if ( !filter.empty() )
-                    filter << wxT('|');
+                    filter += '|';
 
-                filter << t->GetDescription()
-                       << wxT(" (") << t->GetFileFilter() << wxT(") |")
-                       << t->GetFileFilter();
+                // FIXME: use fmt lib
+                filter += t->GetDescription()
+                       + " ("
+                       + t->GetFileFilter()
+                       + ") |"
+                       + t->GetFileFilter();
             }
 
             node = node->GetNext();
         }
     }
 #else
-    wxString filter = docTemplate->GetFileFilter() ;
+    std::string filter = docTemplate->GetFileFilter() ;
 #endif
 
-    wxString defaultDir = docTemplate->GetDirectory();
+    std::string defaultDir = docTemplate->GetDirectory();
     if ( defaultDir.empty() )
     {
         defaultDir = wxPathOnly(GetFilename());
@@ -335,7 +339,7 @@ bool wxDocument::SaveAs()
             defaultDir = GetDocumentManager()->GetLastDirectory();
     }
 
-    wxString fileName = wxFileSelector(_("Save As"),
+    std::string fileName = wxFileSelector(_("Save As"),
             defaultDir,
             wxFileNameFromPath(GetFilename()),
             docTemplate->GetDefaultExtension(),
@@ -365,9 +369,9 @@ bool wxDocument::SaveAs()
     return true;
 }
 
-bool wxDocument::OnSaveDocument(const wxString& file)
+bool wxDocument::OnSaveDocument(const std::string& file)
 {
-    if ( !file )
+    if ( file.empty() )
         return false;
 
     if ( !DoSaveDocument(file) )
@@ -382,7 +386,7 @@ bool wxDocument::OnSaveDocument(const wxString& file)
     return true;
 }
 
-bool wxDocument::OnOpenDocument(const wxString& file)
+bool wxDocument::OnOpenDocument(const std::string& file)
 {
     // notice that there is no need to check the modified flag here for the
     // reasons explained in OnNewDocument()
@@ -434,12 +438,12 @@ bool wxDocument::Revert()
     return true;
 }
 
-wxString wxDocument::GetUserReadableName() const
+std::string wxDocument::GetUserReadableName() const
 {
     return DoGetUserReadableName();
 }
 
-wxString wxDocument::DoGetUserReadableName() const
+std::string wxDocument::DoGetUserReadableName() const
 {
     if ( !m_documentTitle.empty() )
         return m_documentTitle;
@@ -518,7 +522,7 @@ bool wxDocument::RemoveView(wxView *view)
     return true;
 }
 
-bool wxDocument::OnCreate(const wxString& WXUNUSED(path), long flags)
+bool wxDocument::OnCreate(const std::string& WXUNUSED(path), long flags)
 {
     return GetDocumentTemplate()->CreateView(this, flags) != nullptr;
 }
@@ -555,7 +559,7 @@ void wxDocument::NotifyClosing()
     }
 }
 
-void wxDocument::SetFilename(const wxString& filename, bool notifyViews)
+void wxDocument::SetFilename(const std::string& filename, bool notifyViews)
 {
     m_documentFile = filename;
     OnChangeFilename(notifyViews);
@@ -576,9 +580,10 @@ void wxDocument::OnChangeFilename(bool notifyViews)
     }
 }
 
-bool wxDocument::DoSaveDocument(const wxString& file)
+bool wxDocument::DoSaveDocument(const std::string& file)
 {
-    std::ofstream store(file.mb_str(), std::ios::binary);
+    // FIXME: Replace with fmt ofstream
+    std::ofstream store(file, std::ios::binary);
     if ( !store )
     {
         wxLogError(_("File \"%s\" could not be opened for writing."), file);
@@ -594,9 +599,10 @@ bool wxDocument::DoSaveDocument(const wxString& file)
     return true;
 }
 
-bool wxDocument::DoOpenDocument(const wxString& file)
+bool wxDocument::DoOpenDocument(const std::string& file)
 {
-    std::ifstream store(file.mb_str(), std::ios::binary);
+    // FIXME: Replace with fmt ifstream
+    std::ifstream store(file, std::ios::binary);
     if ( !store )
     {
         wxLogError(_("File \"%s\" could not be opened for reading."), file);
@@ -686,7 +692,7 @@ void wxView::OnChangeFilename()
     wxDocument *doc = GetDocument();
     if (!doc) return;
 
-    wxString label = doc->GetUserReadableName();
+    std::string label = doc->GetUserReadableName();
     if (doc->IsModified())
     {
        label += "*";
@@ -732,12 +738,12 @@ wxPrintout *wxView::OnCreatePrintout()
 // ----------------------------------------------------------------------------
 
 wxDocTemplate::wxDocTemplate(wxDocManager *manager,
-                             const wxString& descr,
-                             const wxString& filter,
-                             const wxString& dir,
-                             const wxString& ext,
-                             const wxString& docTypeName,
-                             const wxString& viewTypeName,
+                             const std::string& descr,
+                             const std::string& filter,
+                             const std::string& dir,
+                             const std::string& ext,
+                             const std::string& docTypeName,
+                             const std::string& viewTypeName,
                              wxClassInfo *docClassInfo,
                              wxClassInfo *viewClassInfo,
                              long flags)
@@ -761,7 +767,7 @@ wxDocTemplate::~wxDocTemplate()
 }
 
 // Tries to dynamically construct an object of the right class.
-wxDocument *wxDocTemplate::CreateDocument(const wxString& path, long flags)
+wxDocument *wxDocTemplate::CreateDocument(const std::string& path, long flags)
 {
     // InitDocument() is supposed to delete the document object if its
     // initialization fails so don't use wxScopedPtr<> here: this is fragile
@@ -776,7 +782,7 @@ wxDocument *wxDocTemplate::CreateDocument(const wxString& path, long flags)
 }
 
 bool
-wxDocTemplate::InitDocument(wxDocument* doc, const wxString& path, long flags)
+wxDocTemplate::InitDocument(wxDocument* doc, const std::string& path, long flags)
 {
     try
     {
@@ -821,7 +827,7 @@ wxView *wxDocTemplate::CreateView(wxDocument *doc, long flags)
 
 // The default (very primitive) format detection: check is the extension is
 // that of the template
-bool wxDocTemplate::FileMatchesTemplate(const wxString& path)
+bool wxDocTemplate::FileMatchesTemplate(const std::string& path)
 {
     wxStringTokenizer parser (GetFileFilter(), wxT(";"));
     wxString anything = wxT ("*");
@@ -834,7 +840,7 @@ bool wxDocTemplate::FileMatchesTemplate(const wxString& path)
              filterExt.IsSameAs (FindExtension (path)) )
             return true;
     }
-    return GetDefaultExtension().IsSameAs(FindExtension(path));
+    return wx::utils::IsSameAsNoCase(GetDefaultExtension(), FindExtension(path));
 }
 
 wxDocument *wxDocTemplate::DoCreateDocument()
@@ -974,7 +980,7 @@ bool wxDocManager::Initialize()
     return true;
 }
 
-wxString wxDocManager::GetLastDirectory() const
+std::string wxDocManager::GetLastDirectory() const
 {
     // if we haven't determined the last used directory yet, do it now
     if ( m_lastDirectory.empty() )
@@ -989,7 +995,7 @@ wxString wxDocManager::GetLastDirectory() const
         // the last file he used
         if ( m_fileHistory && m_fileHistory->GetCount() )
         {
-            const wxString lastOpened = m_fileHistory->GetHistoryFile(0);
+            const std::string lastOpened = m_fileHistory->GetHistoryFile(0);
             const wxFileName fn(lastOpened);
             if ( fn.DirExists() )
             {
@@ -1034,7 +1040,7 @@ void wxDocManager::OnFileNew(wxCommandEvent& WXUNUSED(event))
 
 void wxDocManager::OnFileOpen(wxCommandEvent& WXUNUSED(event))
 {
-    if ( !CreateDocument(wxString()) )
+    if ( !CreateDocument("") )
     {
         OnOpenFileFailure();
     }
@@ -1085,7 +1091,7 @@ void wxDocManager::OnMRUFile(wxCommandEvent& event)
 
 void wxDocManager::DoOpenMRUFile(unsigned n)
 {
-    wxString filename(GetHistoryFile(n));
+    std::string filename(GetHistoryFile(n));
     if ( filename.empty() )
         return;
 
@@ -1105,7 +1111,7 @@ void wxDocManager::DoOpenMRUFile(unsigned n)
     }
 }
 
-void wxDocManager::OnMRUFileNotExist(unsigned n, const wxString& filename)
+void wxDocManager::OnMRUFileNotExist(unsigned n, const std::string& filename)
 {
     // remove the file which we can't open from the MRU list
     RemoveFileFromHistory(n);
@@ -1146,7 +1152,7 @@ void wxDocManager::OnPageSetup(wxCommandEvent& WXUNUSED(event))
 
 wxPreviewFrame* wxDocManager::CreatePreviewFrame(wxPrintPreviewBase* preview,
                                                  wxWindow *parent,
-                                                 const wxString& title)
+                                                 const std::string& title)
 {
     return new wxPreviewFrame(preview, parent, title);
 }
@@ -1353,7 +1359,7 @@ void wxDocument::Activate()
         win->Raise();
 }
 
-wxDocument* wxDocManager::FindDocumentByPath(const wxString& path) const
+wxDocument* wxDocManager::FindDocumentByPath(const std::string& path) const
 {
     const wxFileName fileName(path);
     for ( wxList::const_iterator i = m_docs.begin(); i != m_docs.end(); ++i )
@@ -1366,7 +1372,7 @@ wxDocument* wxDocManager::FindDocumentByPath(const wxString& path) const
     return nullptr;
 }
 
-wxDocument *wxDocManager::CreateDocument(const wxString& pathOrig, long flags)
+wxDocument *wxDocManager::CreateDocument(const std::string& pathOrig, long flags)
 {
     // this ought to be const but SelectDocumentType/Path() are not
     // const-correct and can't be changed as, being virtual, this risks
@@ -1382,7 +1388,7 @@ wxDocument *wxDocManager::CreateDocument(const wxString& pathOrig, long flags)
 
     // normally user should select the template to use but wxDOC_SILENT flag we
     // choose one ourselves
-    wxString path = pathOrig;   // may be modified below
+    std::string path = pathOrig;   // may be modified below
     wxDocTemplate *temp;
     if ( flags & wxDOC_SILENT )
     {
@@ -1514,7 +1520,7 @@ wxCommandProcessor *wxDocManager::GetCurrentCommandProcessor() const
     return doc ? doc->GetCommandProcessor() : nullptr;
 }
 
-wxString wxDocManager::MakeNewDocumentName()
+std::string wxDocManager::MakeNewDocumentName()
 {
     wxString name;
 
@@ -1528,29 +1534,29 @@ wxString wxDocManager::MakeNewDocumentName()
 
 // Make a frame title (override this to do something different)
 // If docName is empty, a document is not currently active.
-wxString wxDocManager::MakeFrameTitle(wxDocument* doc)
+std::string wxDocManager::MakeFrameTitle(wxDocument* doc)
 {
-    wxString appName = wxTheApp->GetAppDisplayName();
-    wxString title;
+    std::string appName = wxTheApp->GetAppDisplayName();
+    std::string title;
     if (!doc)
         title = appName;
     else
     {
-        wxString docName = doc->GetUserReadableName();
-        title = docName + wxString(_(" - ")) + appName;
+        std::string docName = doc->GetUserReadableName();
+        title = docName + std::string(_(" - ")) + appName;
     }
     return title;
 }
 
 
 // Not yet implemented
-wxDocTemplate *wxDocManager::MatchTemplate(const wxString& WXUNUSED(path))
+wxDocTemplate *wxDocManager::MatchTemplate(const std::string& WXUNUSED(path))
 {
     return nullptr;
 }
 
 // File history management
-void wxDocManager::AddFileToHistory(const wxString& file)
+void wxDocManager::AddFileToHistory(const std::string& file)
 {
     if (m_fileHistory)
         m_fileHistory->AddFileToHistory(file);
@@ -1562,9 +1568,9 @@ void wxDocManager::RemoveFileFromHistory(size_t i)
         m_fileHistory->RemoveFileFromHistory(i);
 }
 
-wxString wxDocManager::GetHistoryFile(size_t i) const
+std::string wxDocManager::GetHistoryFile(size_t i) const
 {
-    wxString histFile;
+    std::string histFile;
 
     if (m_fileHistory)
         histFile = m_fileHistory->GetHistoryFile(i);
@@ -1618,7 +1624,7 @@ size_t wxDocManager::GetHistoryFilesCount() const
 
 // Find out the document template via matching in the document file format
 // against that of the template
-wxDocTemplate *wxDocManager::FindTemplateForPath(const wxString& path)
+wxDocTemplate *wxDocManager::FindTemplateForPath(const std::string& path)
 {
     wxDocTemplate *theTemplate = nullptr;
 
@@ -1641,7 +1647,7 @@ wxDocTemplate *wxDocManager::FindTemplateForPath(const wxString& path)
 
 wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
                                                 int noTemplates,
-                                                wxString& path,
+                                                std::string& path,
                                                 long WXUNUSED(flags),
                                                 bool WXUNUSED(save))
 {
@@ -1668,7 +1674,7 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
 
     int FilterIndex = -1;
 
-    wxString pathTmp = wxFileSelectorEx(_("Open File"),
+    std::string pathTmp = wxFileSelectorEx(_("Open File"),
                                         GetLastDirectory(),
                                         wxEmptyString,
                                         &FilterIndex,
@@ -1680,11 +1686,11 @@ wxDocTemplate *wxDocManager::SelectDocumentPath(wxDocTemplate **templates,
     {
         if (!wxFileExists(pathTmp))
         {
-            wxString msgTitle;
+            std::string msgTitle;
             if (!wxTheApp->GetAppDisplayName().empty())
                 msgTitle = wxTheApp->GetAppDisplayName();
             else
-                msgTitle = wxString(_("File error"));
+                msgTitle = std::string(_("File error"));
 
             wxMessageBox(_("Sorry, could not open this file."),
                          msgTitle,
@@ -2029,9 +2035,9 @@ bool wxDocParentFrameAnyBase::TryProcessEvent(wxEvent& event)
 namespace
 {
 
-wxString GetAppropriateTitle(const wxView *view, const wxString& titleGiven)
+std::string GetAppropriateTitle(const wxView *view, const std::string& titleGiven)
 {
-    wxString title(titleGiven);
+    std::string title(titleGiven);
     if ( title.empty() )
     {
         if ( view && view->GetDocument() )
@@ -2117,7 +2123,7 @@ void wxDocPrintout::GetPageInfo(int *minPage, int *maxPage,
 // manipulate files directly
 // ----------------------------------------------------------------------------
 
-bool wxTransferFileToStream(const wxString& filename, std::ostream& stream)
+bool wxTransferFileToStream(const std::string& filename, std::ostream& stream)
 {
 #if wxUSE_FFILE
     wxFFile file(filename, wxT("rb"));
@@ -2144,7 +2150,7 @@ bool wxTransferFileToStream(const wxString& filename, std::ostream& stream)
     return true;
 }
 
-bool wxTransferStreamToFile(std::istream& stream, const wxString& filename)
+bool wxTransferStreamToFile(std::istream& stream, const std::string& filename)
 {
 #if wxUSE_FFILE
     wxFFile file(filename, wxT("wb"));
