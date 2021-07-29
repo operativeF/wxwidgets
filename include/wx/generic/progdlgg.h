@@ -28,15 +28,15 @@ class WXDLLIMPEXP_CORE wxGenericProgressDialog : public wxDialog
 {
 public:
     wxGenericProgressDialog();
-    wxGenericProgressDialog(const wxString& title, const wxString& message,
+    wxGenericProgressDialog(const std::string& title, const std::string& message,
                             int maximum = 100,
                             wxWindow *parent = nullptr,
                             int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 
     ~wxGenericProgressDialog() override;
 
-    bool Create(const wxString& title,
-                const wxString& message,
+    bool Create(const std::string& title,
+                const std::string& message,
                 int maximum = 100,
                 wxWindow *parent = nullptr,
                 int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);

@@ -87,8 +87,8 @@ public:
 
     wxMessageDialogBase() = default;
     wxMessageDialogBase(wxWindow *parent,
-                        const wxString& message,
-                        const wxString& caption,
+                        const std::string& message,
+                        const std::string& caption,
                         long style)
         : m_message(message),
           m_caption(caption)

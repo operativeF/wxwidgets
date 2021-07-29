@@ -48,7 +48,7 @@ public:
     int GetWidth() const { return GetSize().x; }
     int GetHeight() const { return GetSize().y; }
 
-    const wxString& GetFileName() const { return m_filename; }
+    const std::string& GetFileName() const { return m_filename; }
 
     // copy the metafile to the clipboard: the width and height parameters are
     // for backwards compatibility (with wxMetaFile) only, they are ignored by
@@ -79,7 +79,7 @@ protected:
     wxGDIRefData *CloneGDIRefData(const wxGDIRefData *data) const override;
 
 private:
-    wxString m_filename;
+    std::string m_filename;
     WXHANDLE m_hMF;
 
     wxDECLARE_DYNAMIC_CLASS(wxEnhMetaFile);
@@ -94,17 +94,17 @@ class WXDLLIMPEXP_CORE wxEnhMetaFileDC : public wxDC
 public:
     // the ctor parameters specify the filename (empty for memory metafiles),
     // the metafile picture size and the optional description/comment
-    wxEnhMetaFileDC(const wxString& filename = wxEmptyString,
+    wxEnhMetaFileDC(const std::string& filename = {},
                     int width = 0, int height = 0,
-                    const wxString& description = wxEmptyString);
+                    const std::string& description = {});
 
     // as above, but takes reference DC as first argument to take resolution,
     // size, font metrics etc. from
     explicit
     wxEnhMetaFileDC(const wxDC& referenceDC,
-                    const wxString& filename = wxEmptyString,
+                    const std::string& filename = {},
                     int width = 0, int height = 0,
-                    const wxString& description = wxEmptyString);
+                    const std::string& description = {});
 
 wxEnhMetaFileDC(const wxEnhMetaFileDC&) = delete;
    wxEnhMetaFileDC& operator=(const wxEnhMetaFileDC&) = delete;

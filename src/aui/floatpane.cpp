@@ -34,7 +34,7 @@ wxAuiFloatingFrame::wxAuiFloatingFrame(wxWindow* parent,
                               wxFRAME_NO_TASKBAR | wxFRAME_FLOAT_ON_PARENT |
                               wxCLIP_CHILDREN
                            */)
-                : wxAuiFloatingFrameBaseClass(parent, id, wxEmptyString,
+                : wxAuiFloatingFrameBaseClass(parent, id, "",
                         pane.floating_pos, pane.floating_size,
                         style |
                         (pane.HasCloseButton()?wxCLOSE_BOX:0) |

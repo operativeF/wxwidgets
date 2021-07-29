@@ -25,10 +25,13 @@
     #include "wx/math.h"
 #endif
 
-bool wxGenericStaticBitmap::Create(wxWindow *parent, wxWindowID id,
+bool wxGenericStaticBitmap::Create(wxWindow *parent,
+                                   wxWindowID id,
                                    const wxBitmap& bitmap,
-                                   const wxPoint& pos, const wxSize& size,
-                                   long style, const wxString& name)
+                                   const wxPoint& pos,
+                                   const wxSize& size,
+                                   long style,
+                                   const std::string& name)
 {
     if (! wxControl::Create(parent, id, pos, size, style,
                             wxDefaultValidator, name))

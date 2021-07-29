@@ -58,7 +58,7 @@ public:
     // load a DIB from file (any depth is supoprted here unlike above)
     //
     // as above, use IsOk() to see if the bitmap was loaded successfully
-    wxDIB(const wxString& filename)
+    wxDIB(const std::string& filename)
     { 
         Load(filename);
     }

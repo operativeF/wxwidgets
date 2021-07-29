@@ -36,9 +36,9 @@ public:
     }
 
     wxNumberEntryDialog(wxWindow *parent,
-                        const wxString& message,
-                        const wxString& prompt,
-                        const wxString& caption,
+                        const std::string& message,
+                        const std::string& prompt,
+                        const std::string& caption,
                         long value, long min, long max,
                         const wxPoint& pos = wxDefaultPosition)
     {
@@ -46,9 +46,9 @@ public:
     }
 
     bool Create(wxWindow *parent,
-                const wxString& message,
-                const wxString& prompt,
-                const wxString& caption,
+                const std::string& message,
+                const std::string& prompt,
+                const std::string& caption,
                 long value, long min, long max,
                 const wxPoint& pos = wxDefaultPosition);
 
@@ -80,9 +80,9 @@ private:
 // ----------------------------------------------------------------------------
 
 WXDLLIMPEXP_CORE long
-    wxGetNumberFromUser(const wxString& message,
-                        const wxString& prompt,
-                        const wxString& caption,
+    wxGetNumberFromUser(const std::string& message,
+                        const std::string& prompt,
+                        const std::string& caption,
                         long value = 0,
                         long min = 0,
                         long max = 100,

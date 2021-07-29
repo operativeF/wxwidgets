@@ -44,11 +44,11 @@ public:
     wxGenericMDIParentFrame() { Init(); }
     wxGenericMDIParentFrame(wxWindow *parent,
                      wxWindowID winid,
-                     const wxString& title,
+                     const std::string& title,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
-                     const wxString& name = wxASCII_STR(wxFrameNameStr))
+                     const std::string& name = wxFrameNameStr)
     {
         Init();
 
@@ -57,11 +57,11 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID winid,
-                const wxString& title,
+                const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
-                const wxString& name = wxASCII_STR(wxFrameNameStr));
+                const std::string& name = wxFrameNameStr);
 
     virtual ~wxGenericMDIParentFrame();
 
@@ -138,11 +138,11 @@ public:
     wxGenericMDIChildFrame() { Init(); }
     wxGenericMDIChildFrame(wxGenericMDIParentFrame *parent,
                            wxWindowID winid,
-                           const wxString& title,
+                           const std::string& title,
                            const wxPoint& pos = wxDefaultPosition,
                            const wxSize& size = wxDefaultSize,
                            long style = wxDEFAULT_FRAME_STYLE,
-                           const wxString& name = wxASCII_STR(wxFrameNameStr))
+                           const std::string& name = wxFrameNameStr)
     {
         Init();
 
@@ -151,11 +151,11 @@ public:
 
     bool Create(wxGenericMDIParentFrame *parent,
                 wxWindowID winid,
-                const wxString& title,
+                const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_FRAME_STYLE,
-                const wxString& name = wxASCII_STR(wxFrameNameStr));
+                const std::string& name = wxFrameNameStr);
 
     virtual ~wxGenericMDIChildFrame();
 

@@ -33,10 +33,14 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxGenericColourButton, wxBitmapButton);
 // wxGenericColourButton
 // ----------------------------------------------------------------------------
 
-bool wxGenericColourButton::Create( wxWindow *parent, wxWindowID id,
-                        const wxColour &col, const wxPoint &pos,
-                        const wxSize &size, long style,
-                        const wxValidator& validator, const wxString &name)
+bool wxGenericColourButton::Create( wxWindow *parent,
+                                    wxWindowID id,
+                                    const wxColour &col,
+                                    const wxPoint &pos,
+                                    const wxSize &size,
+                                    long style,
+                                    const wxValidator& validator,
+                                    const std::string &name)
 {
     // create this button
     if (!wxBitmapButton::Create( parent, id, m_bitmap, pos,

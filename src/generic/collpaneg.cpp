@@ -52,12 +52,12 @@ wxEND_EVENT_TABLE()
 
 bool wxGenericCollapsiblePane::Create(wxWindow *parent,
                                       wxWindowID id,
-                                      const wxString& label,
+                                      const std::string& label,
                                       const wxPoint& pos,
                                       const wxSize& size,
                                       long style,
                                       const wxValidator& val,
-                                      const wxString& name)
+                                      const std::string& name)
 {
     if ( !wxControl::Create(parent, id, pos, size, style, val, name) )
         return false;

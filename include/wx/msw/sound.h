@@ -17,7 +17,7 @@ class WXDLLIMPEXP_CORE wxSound : public wxSoundBase
 {
 public:
     wxSound() = default;
-    wxSound(const wxString& fileName, bool isResource = false);
+    wxSound(const std::string& fileName, bool isResource = false);
     wxSound(size_t size, const void* data);
     ~wxSound() override;
     wxSound(const wxSound&) = delete;
@@ -26,7 +26,7 @@ public:
     wxSound& operator=(wxSound&&) = default;
 
     // Create from resource or file
-    [[maybe_unused]] bool Create(const wxString& fileName, bool isResource = false);
+    [[maybe_unused]] bool Create(const std::string& fileName, bool isResource = false);
 
     // Create from data
     [[maybe_unused]] bool Create(size_t size, const void* data);

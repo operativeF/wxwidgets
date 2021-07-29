@@ -272,11 +272,11 @@ class WXDLLIMPEXP_CORE wxTabbedDialog : public wxDialog
 public:
     wxTabbedDialog(wxWindow *parent,
                    wxWindowID id,
-                   const wxString& title,
+                   const std::string& title,
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    long windowStyle = wxDEFAULT_DIALOG_STYLE,
-                   const wxString& name = wxASCII_STR(wxDialogNameStr));
+                   const std::string& name = wxDialogNameStr);
     virtual ~wxTabbedDialog();
 
     wxTabView *GetTabView() const { return m_tabView; }
@@ -307,7 +307,7 @@ public:
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxDefaultSize,
                   long windowStyle = 0,
-                  const wxString& name = wxASCII_STR(wxPanelNameStr));
+                  const std::string& name = wxPanelNameStr);
     virtual ~wxTabbedPanel();
 
     wxTabView *GetTabView() const { return m_tabView; }

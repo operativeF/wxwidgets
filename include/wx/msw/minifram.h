@@ -27,11 +27,11 @@ public:
 
   [[maybe_unused]] bool Create(wxWindow *parent,
               wxWindowID id,
-              const wxString& title,
+              const std::string& title,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
               long style = wxCAPTION | wxCLIP_CHILDREN | wxRESIZE_BORDER,
-              const wxString& name = wxASCII_STR(wxFrameNameStr))
+              const std::string& name = wxFrameNameStr)
   {
       return wxFrame::Create(parent, id, title, pos, size,
                              style |
@@ -41,11 +41,11 @@ public:
 
   wxMiniFrame(wxWindow *parent,
               wxWindowID id,
-              const wxString& title,
+              const std::string& title,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
               long style = wxCAPTION | wxCLIP_CHILDREN | wxRESIZE_BORDER,
-              const wxString& name = wxASCII_STR(wxFrameNameStr))
+              const std::string& name = wxFrameNameStr)
   {
       Create(parent, id, title, pos, size, style, name);
   }

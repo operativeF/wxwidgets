@@ -72,7 +72,7 @@ void wxGenericFindReplaceDialog::Init()
 
 bool wxGenericFindReplaceDialog::Create(wxWindow *parent,
                                         wxFindReplaceData *data,
-                                        const wxString& title,
+                                        const std::string& title,
                                         int style)
 {
     parent = GetParentForModalDialog(parent, style);

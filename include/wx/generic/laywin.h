@@ -175,7 +175,7 @@ public:
     }
 
     wxSashLayoutWindow(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = wxSW_3D|wxCLIP_CHILDREN, const wxString& name = wxT("layoutWindow"))
+        const wxSize& size = wxDefaultSize, long style = wxSW_3D|wxCLIP_CHILDREN, const std::string& name = "layoutWindow")
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -185,7 +185,7 @@ public:
 
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = wxSW_3D|wxCLIP_CHILDREN, const wxString& name = wxT("layoutWindow"));
+        const wxSize& size = wxDefaultSize, long style = wxSW_3D|wxCLIP_CHILDREN, const std::string& name = "layoutWindow");
 
 // Accessors
     inline wxLayoutAlignment GetAlignment() const { return m_alignment; }

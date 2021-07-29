@@ -44,8 +44,8 @@ public:
     // creation
     static wxMenuItem *New(wxMenu *parentMenu = nullptr,
                            int itemid = wxID_SEPARATOR,
-                           const wxString& text = wxEmptyString,
-                           const wxString& help = wxEmptyString,
+                           const std::string& text = {},
+                           const std::string& help = {},
                            wxItemKind kind = wxITEM_NORMAL,
                            wxMenu *subMenu = nullptr);
 
@@ -125,8 +125,8 @@ public:
 
     static wxMenuItem *New(wxMenu *parentMenu,
                            int itemid,
-                           const wxString& text,
-                           const wxString& help,
+                           const std::string& text,
+                           const std::string& help,
                            bool isCheckable,
                            wxMenu *subMenu = nullptr)
     {
@@ -147,8 +147,8 @@ protected:
     // this ctor is for the derived classes only, we're never created directly
     wxMenuItemBase(wxMenu *parentMenu = nullptr,
                    int itemid = wxID_SEPARATOR,
-                   const wxString& text = wxEmptyString,
-                   const wxString& help = wxEmptyString,
+                   const std::string& text = {},
+                   const std::string& help = {},
                    wxItemKind kind = wxITEM_NORMAL,
                    wxMenu *subMenu = nullptr);
 

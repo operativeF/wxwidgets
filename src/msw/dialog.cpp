@@ -72,7 +72,7 @@ wxDEFINE_TIED_SCOPED_PTR_TYPE(wxDialogModalData)
 
 bool wxDialog::Create(wxWindow *parent,
                       wxWindowID id,
-                      const wxString& title,
+                      const std::string& title,
                       const wxPoint& pos,
                       const wxSize& size,
                       long style,

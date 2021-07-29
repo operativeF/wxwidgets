@@ -53,9 +53,9 @@ wxBEGIN_EVENT_TABLE(wxPropertySheetDialog, wxDialog)
     EVT_IDLE(wxPropertySheetDialog::OnIdle)
 wxEND_EVENT_TABLE()
 
-bool wxPropertySheetDialog::Create(wxWindow* parent, wxWindowID id, const wxString& title,
+bool wxPropertySheetDialog::Create(wxWindow* parent, wxWindowID id, const std::string& title,
                                        const wxPoint& pos, const wxSize& sz, long style,
-                                       const wxString& name)
+                                       const std::string& name)
 {
     parent = GetParentForModalDialog(parent, style);
 

@@ -206,14 +206,14 @@ wxFileDialogHookFunction(HWND      hDlg,
 // ----------------------------------------------------------------------------
 
 wxFileDialog::wxFileDialog(wxWindow *parent,
-                           const wxString& message,
-                           const wxString& defaultDir,
-                           const wxString& defaultFileName,
-                           const wxString& wildCard,
+                           const std::string& message,
+                           const std::string& defaultDir,
+                           const std::string& defaultFileName,
+                           const std::string& wildCard,
                            long style,
                            const wxPoint& pos,
                            const wxSize& sz,
-                           const wxString& name)
+                           const std::string& name)
             : wxFileDialogBase(parent, message, defaultDir, defaultFileName,
                                wildCard, style, pos, sz, name)
 

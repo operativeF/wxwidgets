@@ -25,11 +25,12 @@ public:
     // Constructor.
     wxHyperlinkCtrl(wxWindow *parent,
                     wxWindowID id,
-                    const wxString& label, const wxString& url,
+                    const std::string& label,
+                    const std::string& url,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     long style = wxHL_DEFAULT_STYLE,
-                    const wxString& name = wxASCII_STR(wxHyperlinkCtrlNameStr))
+                    const std::string& name = wxHyperlinkCtrlNameStr)
     {
         Create(parent, id, label, url, pos, size, style, name);
     }
@@ -37,11 +38,12 @@ public:
     // Creation function (for two-step construction).
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& label, const wxString& url,
+                const std::string& label,
+                const std::string& url,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxHL_DEFAULT_STYLE,
-                const wxString& name = wxASCII_STR(wxHyperlinkCtrlNameStr));
+                const std::string& name = wxHyperlinkCtrlNameStr);
 
 
     // overridden base class methods

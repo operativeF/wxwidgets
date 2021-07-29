@@ -77,8 +77,8 @@ wxEND_EVENT_TABLE()
 wxIMPLEMENT_CLASS(wxGenericMessageDialog, wxDialog);
 
 wxGenericMessageDialog::wxGenericMessageDialog( wxWindow *parent,
-                                                const wxString& message,
-                                                const wxString& caption,
+                                                const std::string& message,
+                                                const std::string& caption,
                                                 long style,
                                                 const wxPoint& pos)
                       : wxMessageDialogBase(GetParentForModalDialog(parent, style),

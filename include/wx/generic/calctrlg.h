@@ -51,7 +51,7 @@ public:
                           const wxPoint& pos = wxDefaultPosition,
                           const wxSize& size = wxDefaultSize,
                           long style = wxCAL_SHOW_HOLIDAYS,
-                          const wxString& name = wxASCII_STR(wxCalendarNameStr));
+                          const std::string& name = wxCalendarNameStr);
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
@@ -59,7 +59,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxCAL_SHOW_HOLIDAYS,
-                const wxString& name = wxASCII_STR(wxCalendarNameStr));
+                const std::string& name = wxCalendarNameStr);
 
     ~wxGenericCalendarCtrl() override;
 

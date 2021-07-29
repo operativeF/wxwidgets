@@ -22,12 +22,12 @@ public:
 
     wxGenericCollapsibleHeaderCtrl(wxWindow *parent,
         wxWindowID id,
-        const wxString& label,
+        const std::string& label,
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
         long style = wxBORDER_NONE,
         const wxValidator& validator = wxDefaultValidator,
-        const wxString& name = wxASCII_STR(wxCollapsibleHeaderCtrlNameStr))
+        const std::string& name = wxCollapsibleHeaderCtrlNameStr)
     {
         
     m_collapsed = true;
@@ -40,12 +40,12 @@ public:
 
     bool Create(wxWindow *parent,
         wxWindowID id,
-        const wxString& label,
+        const std::string& label,
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
         long style = wxBORDER_NONE,
         const wxValidator& validator = wxDefaultValidator,
-        const wxString& name = wxASCII_STR(wxCollapsibleHeaderCtrlNameStr));
+        const std::string& name = wxCollapsibleHeaderCtrlNameStr);
 
     void SetCollapsed(bool collapsed = true) override;
 

@@ -31,7 +31,7 @@ public:
                             const wxSize& size = wxDefaultSize,
                             long style = wxTP_DEFAULT,
                             const wxValidator& validator = wxDefaultValidator,
-                            const wxString& name = wxTimePickerCtrlNameStr)
+                            const std::string& name = wxTimePickerCtrlNameStr)
     {
         Init();
 
@@ -45,7 +45,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = wxTP_DEFAULT,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxTimePickerCtrlNameStr);
+                const std::string& name = wxTimePickerCtrlNameStr);
 
     // Implement pure virtual wxTimePickerCtrlBase methods.
     void SetValue(const wxDateTime& date) override;

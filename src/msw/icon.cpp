@@ -57,7 +57,7 @@ wxIcon::wxIcon(const char bits[], int width, int height)
     CopyFromBitmap(bmp);
 }
 
-wxIcon::wxIcon(const wxString& iconfile,
+wxIcon::wxIcon(const std::string& iconfile,
                wxBitmapType type,
                int desiredWidth,
                int desiredHeight)
@@ -113,7 +113,7 @@ void wxIcon::CreateIconFromXpm(const char* const* data)
     CopyFromBitmap(bmp);
 }
 
-bool wxIcon::LoadFile(const wxString& filename,
+bool wxIcon::LoadFile(const std::string& filename,
                       wxBitmapType type,
                       int desiredWidth, int desiredHeight)
 {

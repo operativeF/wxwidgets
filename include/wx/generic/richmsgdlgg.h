@@ -19,13 +19,13 @@ class WXDLLIMPEXP_CORE wxGenericRichMessageDialog
 {
 public:
     wxGenericRichMessageDialog(wxWindow *parent,
-                               const wxString& message,
-                               const wxString& caption = wxASCII_STR(wxMessageBoxCaptionStr),
+                               const std::string& message,
+                               const std::string& caption = wxMessageBoxCaptionStr,
                                long style = wxOK | wxCENTRE)
         : wxRichMessageDialogBase( parent, message, caption, style ),
           m_checkBox(nullptr),
           m_detailsPane(nullptr)
-    { }
+    {}
 
     bool IsCheckBoxChecked() const override;
 

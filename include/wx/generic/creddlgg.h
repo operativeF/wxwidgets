@@ -23,16 +23,18 @@ public:
     wxGenericCredentialEntryDialog();
     ~wxGenericCredentialEntryDialog() = default;
 
-    wxGenericCredentialEntryDialog(wxWindow* parent, const wxString& message,
-        const wxString& title,
-        const wxWebCredentials& cred = wxWebCredentials());
+    wxGenericCredentialEntryDialog(wxWindow* parent,
+                                   const std::string& message,
+                                   const std::string& title,
+                                   const wxWebCredentials& cred = wxWebCredentials());
 
     wxGenericCredentialEntryDialog(const wxGenericCredentialEntryDialog&) = delete;
 	wxGenericCredentialEntryDialog& operator=(const wxGenericCredentialEntryDialog&) = delete;
 
-    bool Create(wxWindow* parent, const wxString& message,
-        const wxString& title,
-        const wxWebCredentials& cred = wxWebCredentials());
+    bool Create(wxWindow* parent,
+                const std::string& message,
+                const std::string& title,
+                const wxWebCredentials& cred = wxWebCredentials());
 
     void SetUser(const wxString& user) { m_userTextCtrl->SetValue(user); }
     void SetPassword(const wxString& password)
@@ -44,7 +46,7 @@ private:
     wxTextCtrl* m_userTextCtrl;
     wxTextCtrl* m_passwordTextCtrl;
 
-    void Init(const wxString& message, const wxWebCredentials& cred);
+    void Init(const std::string& message, const wxWebCredentials& cred);
 };
 
 // Add this typedef as long as the generic version is the only one available

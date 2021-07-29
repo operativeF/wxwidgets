@@ -48,7 +48,7 @@ public:
     // Full copy constructor
     wxFileData( const wxFileData& fileData ) { Copy(fileData); }
     // Create a filedata from this information
-    wxFileData( const wxString &filePath, const wxString &fileName,
+    wxFileData( const std::string& filePath, const std::string& fileName,
                 fileType type, int image_id );
 
     // make a full copy of the other wxFileData

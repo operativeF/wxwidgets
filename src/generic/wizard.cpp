@@ -276,7 +276,7 @@ void wxWizard::Init()
 
 bool wxWizard::Create(wxWindow *parent,
                       int id,
-                      const wxString& title,
+                      const std::string& title,
                       const wxBitmap& bitmap,
                       const wxPoint& pos,
                       long style)

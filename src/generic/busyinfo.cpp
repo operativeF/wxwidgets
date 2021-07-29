@@ -35,7 +35,7 @@
 
 void wxBusyInfo::Init(const wxBusyInfoFlags& flags)
 {
-    m_InfoFrame = new wxFrame(flags.m_parent, wxID_ANY, wxString(),
+    m_InfoFrame = new wxFrame(flags.m_parent, wxID_ANY, "",
                               wxDefaultPosition, wxDefaultSize,
                               wxSIMPLE_BORDER |
                               wxFRAME_TOOL_WINDOW |
@@ -54,7 +54,7 @@ void wxBusyInfo::Init(const wxBusyInfoFlags& flags)
     wxControl* title;
     if ( !flags.m_title.empty() )
     {
-        title = new wxStaticTextWithMarkupSupport(panel, wxID_ANY, wxString(),
+        title = new wxStaticTextWithMarkupSupport(panel, wxID_ANY, "",
                                                   wxDefaultPosition,
                                                   wxDefaultSize,
                                                   wxALIGN_CENTRE);

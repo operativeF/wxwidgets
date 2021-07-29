@@ -57,7 +57,7 @@ enum
 class WXDLLIMPEXP_CORE wxDirItemData : public wxTreeItemData
 {
 public:
-    wxDirItemData(const wxString& path, const wxString& name, bool isDir);
+    wxDirItemData(const std::string& path, const std::string& name, bool isDir);
     ~wxDirItemData() override = default;
     void SetNewDirName(const wxString& path);
 

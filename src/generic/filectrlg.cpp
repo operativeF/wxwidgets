@@ -132,7 +132,7 @@ extern size_t wxGetAvailableDrives(wxArrayString &paths, wxArrayString &names, s
 //  wxFileData
 //-----------------------------------------------------------------------------
 
-wxFileData::wxFileData( const wxString &filePath, const wxString &fileName, fileType type, int image_id )
+wxFileData::wxFileData( const std::string& filePath, const std::string& fileName, fileType type, int image_id )
     : m_fileName(fileName),
       m_filePath(filePath),
       m_type(type),
@@ -518,7 +518,7 @@ void wxFileListCtrl::UpdateFiles()
 #if defined(__UNIX__)
             if (p.empty()) p = wxT("/");
 #endif // __UNIX__
-            wxFileData *fd = new wxFileData(p, wxT(".."), wxFileData::is_dir, wxFileIconsTable::folder);
+            wxFileData *fd = new wxFileData(p, "..", wxFileData::is_dir, wxFileIconsTable::folder);
             if (Add(fd, item) != -1)
                 item.m_itemId++;
             else

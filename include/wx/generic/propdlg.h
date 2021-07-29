@@ -85,11 +85,11 @@ public:
  }
 
     wxPropertySheetDialog(wxWindow* parent, wxWindowID id,
-                       const wxString& title,
+                       const std::string& title,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& sz = wxDefaultSize,
                        long style = wxDEFAULT_DIALOG_STYLE,
-                       const wxString& name = wxASCII_STR(wxDialogNameStr))
+                       const std::string& name = wxDialogNameStr)
     {
         
     m_sheetStyle = wxPROPSHEET_DEFAULT;
@@ -102,11 +102,11 @@ public:
     }
 
     bool Create(wxWindow* parent, wxWindowID id,
-                       const wxString& title,
+                       const std::string& title,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& sz = wxDefaultSize,
                        long style = wxDEFAULT_DIALOG_STYLE,
-                       const wxString& name = wxASCII_STR(wxDialogNameStr));
+                       const std::string& name = wxDialogNameStr);
 
 //// Accessors
 

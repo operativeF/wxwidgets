@@ -64,7 +64,7 @@ private:
 class wxSoundDataFile : public wxSoundData
 {
 public:
-    wxSoundDataFile(const wxString& filename, bool isResource);
+    wxSoundDataFile(const std::string& filename, bool isResource);
 
     wxSoundDataFile(const wxSoundDataFile&) = delete;
 	wxSoundDataFile& operator=(const wxSoundDataFile&) = delete;
@@ -97,7 +97,7 @@ wxSoundDataMemory::wxSoundDataMemory(size_t size, const void* buf)
         ::CopyMemory(m_waveDataPtr, buf, size);
 }
 
-wxSoundDataFile::wxSoundDataFile(const wxString& filename, bool isResource)
+wxSoundDataFile::wxSoundDataFile(const std::string& filename, bool isResource)
                : m_name(filename),
                  m_isResource(isResource)
 {
@@ -108,7 +108,7 @@ wxSoundDataFile::wxSoundDataFile(const wxString& filename, bool isResource)
 // wxSound
 // ----------------------------------------------------------------------------
 
-wxSound::wxSound(const wxString& filename, bool isResource)
+wxSound::wxSound(const std::string& filename, bool isResource)
 {
     Create(filename, isResource);
 }
@@ -136,7 +136,7 @@ bool wxSound::CheckCreatedOk()
     return m_data != nullptr;
 }
 
-bool wxSound::Create(const wxString& filename, bool isResource)
+bool wxSound::Create(const std::string& filename, bool isResource)
 {
     Free();
 

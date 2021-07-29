@@ -22,8 +22,8 @@ public:
         Init();
     }
 
-    wxGenericNotificationMessage(const wxString& title,
-                                 const wxString& message = wxString(),
+    wxGenericNotificationMessage(const std::string& title,
+                                 const std::string& message = {},
                                  wxWindow *parent = nullptr,
                                  int flags = wxICON_INFORMATION)
     {

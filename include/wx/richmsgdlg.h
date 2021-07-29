@@ -22,8 +22,8 @@ class WXDLLIMPEXP_CORE wxRichMessageDialogBase : public wxGenericMessageDialog
 {
 public:
     wxRichMessageDialogBase( wxWindow *parent,
-                             const wxString& message,
-                             const wxString& caption,
+                             const std::string& message,
+                             const std::string& caption,
                              long style )
         : wxGenericMessageDialog( parent, message, caption, style ),
           m_detailsExpanderCollapsedLabel( wxGetTranslation("&See details") ),

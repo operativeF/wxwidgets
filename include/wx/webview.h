@@ -121,11 +121,11 @@ public:
     virtual wxWebView* Create() = 0;
     virtual wxWebView* Create(wxWindow* parent,
                               wxWindowID id,
-                              const wxString& url = wxASCII_STR(wxWebViewDefaultURLStr),
+                              const std::string& url = wxWebViewDefaultURLStr,
                               const wxPoint& pos = wxDefaultPosition,
                               const wxSize& size = wxDefaultSize,
                               long style = 0,
-                              const wxString& name = wxASCII_STR(wxWebViewNameStr)) = 0;
+                              const std::string& name = wxWebViewNameStr) = 0;
     virtual bool IsAvailable() { return true; }
     virtual wxVersionInfo GetVersionInfo() { return wxVersionInfo(); }
 };
@@ -145,23 +145,23 @@ public:
 
     [[maybe_unused]] virtual bool Create(wxWindow* parent,
            wxWindowID id,
-           const wxString& url = wxASCII_STR(wxWebViewDefaultURLStr),
+           const std::string& url = wxWebViewDefaultURLStr,
            const wxPoint& pos = wxDefaultPosition,
            const wxSize& size = wxDefaultSize,
            long style = 0,
-           const wxString& name = wxASCII_STR(wxWebViewNameStr)) = 0;
+           const std::string& name = wxWebViewNameStr) = 0;
 
     // Factory methods allowing the use of custom factories registered with
     // RegisterFactory
-    static wxWebView* New(const wxString& backend = wxASCII_STR(wxWebViewBackendDefault));
+    static wxWebView* New(const std::string& backend = wxWebViewBackendDefault);
     static wxWebView* New(wxWindow* parent,
                           wxWindowID id,
-                          const wxString& url = wxASCII_STR(wxWebViewDefaultURLStr),
+                          const std::string& url = wxWebViewDefaultURLStr,
                           const wxPoint& pos = wxDefaultPosition,
                           const wxSize& size = wxDefaultSize,
-                          const wxString& backend = wxASCII_STR(wxWebViewBackendDefault),
+                          const std::string& backend = wxWebViewBackendDefault,
                           long style = 0,
-                          const wxString& name = wxASCII_STR(wxWebViewNameStr));
+                          const std::string& name = wxWebViewNameStr);
 
     static void RegisterFactory(const wxString& backend,
                                 std::shared_ptr<wxWebViewFactory> factory);

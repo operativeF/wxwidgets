@@ -360,7 +360,7 @@ public:
                  const wxPoint &pos = wxDefaultPosition,
                  const wxSize &size = wxDefaultSize,
                  long style = 0,
-                 const wxString &name = wxT("wxlistctrlcolumntitles") );
+                 const std::string& name = "wxlistctrlcolumntitles");
 
     virtual ~wxListHeaderWindow();
 

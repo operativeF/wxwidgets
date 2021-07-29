@@ -171,7 +171,7 @@ namespace wxGridPrivate { class DateParseParams; }
 class WXDLLIMPEXP_CORE wxGridCellDateRenderer : public wxGridCellStringRenderer
 {
 public:
-    explicit wxGridCellDateRenderer(const wxString& outformat = wxString());
+    explicit wxGridCellDateRenderer(const std::string& outformat = {});
 
     wxGridCellDateRenderer(const wxGridCellDateRenderer& other)
         : m_oformat(other.m_oformat),
@@ -217,13 +217,10 @@ protected:
 class WXDLLIMPEXP_CORE wxGridCellDateTimeRenderer : public wxGridCellDateRenderer
 {
 public:
-    wxGridCellDateTimeRenderer(const wxString& outformat = wxASCII_STR(wxDefaultDateTimeFormat),
-                               const wxString& informat = wxASCII_STR(wxDefaultDateTimeFormat));
+    wxGridCellDateTimeRenderer(const std::string& outformat = wxDefaultDateTimeFormat,
+                               const std::string& informat = wxDefaultDateTimeFormat);
 
-    wxGridCellDateTimeRenderer(const wxGridCellDateTimeRenderer& other)
-        
-          
-    = default;
+    wxGridCellDateTimeRenderer(const wxGridCellDateTimeRenderer& other) = default;
 
     wxGridCellRenderer *Clone() const override;
 

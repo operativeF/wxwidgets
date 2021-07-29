@@ -27,11 +27,11 @@ public:
 
     wxMDIParentFrame(wxWindow *parent,
                      wxWindowID id,
-                     const wxString& title,
+                     const std::string& title,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
-                     const wxString& name = wxASCII_STR(wxFrameNameStr))
+                     const std::string& name = wxFrameNameStr)
     {
         Create(parent, id, title, pos, size, style, name);
     }
@@ -40,11 +40,11 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& title,
+                const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
-                const wxString& name = wxASCII_STR(wxFrameNameStr));
+                const std::string& name = wxFrameNameStr);
 
     // override/implement base class [pure] virtual methods
     // ----------------------------------------------------
@@ -176,11 +176,11 @@ public:
     wxMDIChildFrame() = default;
     wxMDIChildFrame(wxMDIParentFrame *parent,
                     wxWindowID id,
-                    const wxString& title,
+                    const std::string& title,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     long style = wxDEFAULT_FRAME_STYLE,
-                    const wxString& name = wxASCII_STR(wxFrameNameStr))
+                    const std::string& name = wxFrameNameStr)
     {
         Create(parent, id, title, pos, size, style, name);
     }
@@ -192,11 +192,11 @@ wxMDIChildFrame(const wxMDIChildFrame&) = delete;
 
     [[maybe_unused]] bool Create(wxMDIParentFrame *parent,
                 wxWindowID id,
-                const wxString& title,
+                const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_FRAME_STYLE,
-                const wxString& name = wxASCII_STR(wxFrameNameStr));
+                const std::string& name = wxFrameNameStr);
 
     ~wxMDIChildFrame() override;
 

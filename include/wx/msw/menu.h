@@ -30,7 +30,7 @@ class WXDLLIMPEXP_CORE wxMenu : public wxMenuBase
 {
 public:
     // ctors & dtor
-    wxMenu(const wxString& title, long style = 0)
+    wxMenu(const std::string& title, long style = 0)
         : wxMenuBase(title, style)
     { 
         InitNoCreate();

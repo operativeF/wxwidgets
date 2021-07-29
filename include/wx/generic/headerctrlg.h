@@ -31,7 +31,7 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  long style = wxHD_DEFAULT_STYLE,
-                 const wxString& name = wxASCII_STR(wxHeaderCtrlNameStr))
+                 const std::string& name = wxHeaderCtrlNameStr)
     {
         Init();
 
@@ -43,7 +43,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxHD_DEFAULT_STYLE,
-                const wxString& name = wxASCII_STR(wxHeaderCtrlNameStr));
+                const std::string& name = wxHeaderCtrlNameStr);
 
     virtual ~wxHeaderCtrl();
 

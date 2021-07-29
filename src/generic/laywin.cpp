@@ -40,8 +40,12 @@ wxBEGIN_EVENT_TABLE(wxSashLayoutWindow, wxSashWindow)
     EVT_QUERY_LAYOUT_INFO(wxSashLayoutWindow::OnQueryLayoutInfo)
 wxEND_EVENT_TABLE()
 
-bool wxSashLayoutWindow::Create(wxWindow *parent, wxWindowID id, const wxPoint& pos,
-        const wxSize& size, long style, const wxString& name)
+bool wxSashLayoutWindow::Create(wxWindow *parent,
+                                wxWindowID id,
+                                const wxPoint& pos,
+                                const wxSize& size,
+                                long style,
+                                const std::string& name)
 {
     return wxSashWindow::Create(parent, id, pos, size, style, name);
 }

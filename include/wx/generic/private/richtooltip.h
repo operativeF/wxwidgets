@@ -20,7 +20,7 @@
 class wxRichToolTipGenericImpl : public wxRichToolTipImpl
 {
 public:
-    wxRichToolTipGenericImpl(const wxString& title, const wxString& message) :
+    wxRichToolTipGenericImpl(const std::string& title, const std::string& message) :
         m_title(title),
         m_message(message)
     {

@@ -245,7 +245,7 @@ static int wxCMPFUNC_CONV wxDirCtrlStringCompareFunction(const wxString& strFirs
 // wxDirItemData
 //-----------------------------------------------------------------------------
 
-wxDirItemData::wxDirItemData(const wxString& path, const wxString& name,
+wxDirItemData::wxDirItemData(const std::string& path, const std::string& name,
                              bool isDir)
     : m_path(path)
     , m_name(name)
@@ -393,7 +393,7 @@ bool wxGenericDirCtrl::Create(wxWindow *parent,
     m_treeCtrl->SetImageList(wxTheFileIconsTable->GetSmallImageList());
 
     m_showHidden = false;
-    wxDirItemData* rootData = new wxDirItemData(wxEmptyString, wxEmptyString, true);
+    wxDirItemData* rootData = new wxDirItemData("", "", true);
 
 #if defined(__WINDOWS__)
     std::string rootName = _("Computer");

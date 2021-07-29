@@ -32,12 +32,12 @@ public:
 
     wxGenericCollapsiblePane(wxWindow *parent,
                         wxWindowID winid,
-                        const wxString& label,
+                        const std::string& label,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         long style = wxCP_DEFAULT_STYLE,
                         const wxValidator& val = wxDefaultValidator,
-                        const wxString& name = wxASCII_STR(wxCollapsiblePaneNameStr))
+                        const std::string& name = wxCollapsiblePaneNameStr)
     {
         
     m_pButton = nullptr;
@@ -52,12 +52,12 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID winid,
-                const wxString& label,
+                const std::string& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxCP_DEFAULT_STYLE,
                 const wxValidator& val = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxCollapsiblePaneNameStr));
+                const std::string& name = wxCollapsiblePaneNameStr);
 
     // public wxCollapsiblePane API
     void Collapse(bool collapse = true) override;

@@ -47,7 +47,7 @@ public:
         // from XPM data
     explicit wxIcon(const char* const* data) { CreateIconFromXpm(data); }
         // from resource/file
-    wxIcon(const wxString& name,
+    wxIcon(const std::string& name,
            wxBitmapType type = wxICON_DEFAULT_TYPE,
            int desiredWidth = -1, int desiredHeight = -1);
 
@@ -55,7 +55,7 @@ public:
 
     ~wxIcon() override = default;
 
-    virtual bool LoadFile(const wxString& name,
+    virtual bool LoadFile(const std::string& name,
                           wxBitmapType type = wxICON_DEFAULT_TYPE,
                           int desiredWidth = -1, int desiredHeight = -1);
 

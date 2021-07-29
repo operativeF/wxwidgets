@@ -38,6 +38,8 @@
 #include <algorithm>
 #include <cstring>
 
+#include "boost/nowide/convert.hpp"
+
 // ---------------------------------------------------------------------------
 // global variables
 // ---------------------------------------------------------------------------
@@ -140,11 +142,11 @@ wxEND_EVENT_TABLE()
 
 bool wxMDIParentFrame::Create(wxWindow *parent,
                               wxWindowID id,
-                              const wxString& title,
+                              const std::string& title,
                               const wxPoint& pos,
                               const wxSize& size,
                               long style,
-                              const wxString& name)
+                              const std::string& name)
 {
   // this style can be used to prevent a window from having the standard MDI
   // "Window" menu
@@ -181,12 +183,13 @@ bool wxMDIParentFrame::Create(wxWindow *parent,
   msflags &= ~WS_VSCROLL;
   msflags &= ~WS_HSCROLL;
 
+  // FIXME: Change to convert at call site
   if ( !wxWindow::MSWCreate(wxApp::GetRegisteredClassName(
                                     wxT("wxMDIFrame"), -1, 0,
                                     (style & wxFULL_REPAINT_ON_RESIZE) ? wxApp::RegClass_Default
                                                                        : wxApp::RegClass_ReturnNR
                                    ),
-                            title.t_str(),
+                            boost::nowide::widen(title).c_str(),
                             pos, size,
                             msflags,
                             exflags) )
@@ -783,11 +786,11 @@ bool wxMDIParentFrame::MSWTranslateMessage(WXMSG* msg)
 
 bool wxMDIChildFrame::Create(wxMDIParentFrame *parent,
                              wxWindowID id,
-                             const wxString& title,
+                             const std::string& title,
                              const wxPoint& pos,
                              const wxSize& size,
                              long style,
-                             const wxString& name)
+                             const std::string& name)
 {
     m_mdiParent = parent;
 
@@ -817,7 +820,7 @@ bool wxMDIChildFrame::Create(wxMDIParentFrame *parent,
                               );
 
   mcs.szClass = className.t_str();
-  mcs.szTitle = title.t_str();
+  mcs.szTitle = boost::nowide::widen(title).c_str();
   mcs.hOwner = wxGetInstance();
   if (x != wxDefaultCoord)
       mcs.x = x;

@@ -30,14 +30,14 @@ public:
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
              long style = 0,
-             const wxString& name = wxASCII_STR(wxNotebookNameStr));
+             const std::string& name = wxNotebookNameStr);
     // Create() function
   [[maybe_unused]] bool Create(wxWindow *parent,
               wxWindowID id,
               const wxPoint& pos = wxDefaultPosition,
               const wxSize& size = wxDefaultSize,
               long style = 0,
-              const wxString& name = wxASCII_STR(wxNotebookNameStr));
+              const std::string& name = wxNotebookNameStr);
   ~wxNotebook() override;
 
   wxNotebook(const wxNotebook&) = delete;

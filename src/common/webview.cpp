@@ -225,7 +225,7 @@ wxString wxWebView::GetUserAgent() const
 }
 
 // static
-wxWebView* wxWebView::New(const wxString& backend)
+wxWebView* wxWebView::New(const std::string& backend)
 {
     wxStringWebViewFactoryMap::iterator iter = FindFactory(backend);
 
@@ -236,10 +236,14 @@ wxWebView* wxWebView::New(const wxString& backend)
 }
 
 // static
-wxWebView* wxWebView::New(wxWindow* parent, wxWindowID id, const wxString& url,
-                          const wxPoint& pos, const wxSize& size,
-                          const wxString& backend, long style,
-                          const wxString& name)
+wxWebView* wxWebView::New(wxWindow* parent,
+                          wxWindowID id,
+                          const std::string& url,
+                          const wxPoint& pos,
+                          const wxSize& size,
+                          const std::string& backend,
+                          long style,
+                          const std::string& name)
 {
     wxStringWebViewFactoryMap::iterator iter = FindFactory(backend);
 

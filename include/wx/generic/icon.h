@@ -26,7 +26,7 @@ public:
 
     // For compatibility with wxMSW where desired size is sometimes required to
     // distinguish between multiple icons in a resource.
-    wxIcon( const wxString& filename,
+    wxIcon( const std::string& filename,
             wxBitmapType type = wxICON_DEFAULT_TYPE,
             int WXUNUSED(desiredWidth)=-1, int WXUNUSED(desiredHeight)=-1 ) :
         wxBitmap(filename, type)

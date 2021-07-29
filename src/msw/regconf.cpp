@@ -83,8 +83,10 @@ wxIMPLEMENT_ABSTRACT_CLASS(wxRegConfig, wxConfigBase);
 
 // create the config object which stores its data under HKCU\vendor\app and, if
 // style & wxCONFIG_USE_GLOBAL_FILE, under HKLM\vendor\app
-wxRegConfig::wxRegConfig(const wxString& appName, const wxString& vendorName,
-                         const wxString& strLocal, const wxString& strGlobal,
+wxRegConfig::wxRegConfig(const std::string& appName,
+                         const std::string& vendorName,
+                         const std::string& strLocal,
+                         const std::string& strGlobal,
                          long style)
            : wxConfigBase(appName, vendorName, strLocal, strGlobal, style)
 {
@@ -124,8 +126,8 @@ wxRegConfig::wxRegConfig(const wxString& appName, const wxString& vendorName,
     }
   }
   //else: we don't need to do all the complicated stuff above
-
-  wxString str = strLocal.empty() ? strRoot : strLocal;
+  // FIXME: Convert to string
+  wxString str = strLocal.empty() ? strRoot.ToStdString() : strLocal;
 
   // as we're going to change the name of these keys fairly often and as
   // there are only few of wxRegConfig objects (usually 1), we can allow
@@ -141,7 +143,8 @@ wxRegConfig::wxRegConfig(const wxString& appName, const wxString& vendorName,
 
   if ( bDoUseGlobal )
   {
-    str = strGlobal.empty() ? strRoot : strGlobal;
+    // FIXME: use string
+    str = strGlobal.empty() ? strRoot.ToStdString() : strGlobal;
 
     m_keyGlobalRoot.ReserveMemoryForName(MEMORY_PREALLOC);
     m_keyGlobal.ReserveMemoryForName(MEMORY_PREALLOC);

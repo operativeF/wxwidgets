@@ -94,7 +94,7 @@ public:
 
     // Normal constructor
     wxSashWindow(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = wxSW_3D|wxCLIP_CHILDREN, const wxString& name = wxT("sashWindow"))
+        const wxSize& size = wxDefaultSize, long style = wxSW_3D|wxCLIP_CHILDREN, const std::string& name = "sashWindow")
     {
         
     m_draggingEdge = wxSASH_NONE;
@@ -123,7 +123,7 @@ public:
     ~wxSashWindow() override;
 
     bool Create(wxWindow *parent, wxWindowID id = wxID_ANY, const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize, long style = wxSW_3D|wxCLIP_CHILDREN, const wxString& name = wxT("sashWindow"));
+        const wxSize& size = wxDefaultSize, long style = wxSW_3D|wxCLIP_CHILDREN, const std::string& name = "sashWindow");
 
     // Set whether there's a sash in this position
     void SetSashVisible(wxSashEdgePosition edge, bool sash);

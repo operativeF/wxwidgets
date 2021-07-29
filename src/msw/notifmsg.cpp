@@ -231,7 +231,7 @@ void wxBalloonNotifMsgImpl::SetUpIcon(wxWindow *win)
         if ( !icon.IsOk() )
         {
             // we really must have some icon
-            icon = wxIcon(wxT("wxICON_AAA"));
+            icon = wxIcon("wxICON_AAA");
         }
 
         ms_icon->SetIcon(icon);

@@ -369,7 +369,7 @@ bool wxWindowsPrintPreview::RenderPageIntoBitmap(wxBitmap& bmp, int pageNum)
     // print the preview into a metafile:
     wxPrinterDC printerDC(m_printDialogData.GetPrintData());
     wxEnhMetaFileDC metaDC(printerDC,
-                           wxEmptyString,
+                           "",
                            printerDC.GetSize().x, printerDC.GetSize().y);
 
     if ( !RenderPageIntoDC(metaDC, pageNum) )

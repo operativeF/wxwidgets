@@ -54,7 +54,8 @@ WX_DEFINE_LIST(wxGDIImageHandlerList)
 class WXDLLEXPORT wxBMPFileHandler : public wxBitmapHandler
 {
 public:
-    wxBMPFileHandler() : wxBitmapHandler(wxT("Windows bitmap file"), wxT("bmp"),
+    wxBMPFileHandler() : wxBitmapHandler("Windows bitmap file",
+                                         "bmp",
                                          wxBITMAP_TYPE_BMP)
     {
     }
@@ -70,8 +71,8 @@ public:
 class WXDLLEXPORT wxBMPResourceHandler: public wxBitmapHandler
 {
 public:
-    wxBMPResourceHandler() : wxBitmapHandler(wxT("Windows bitmap resource"),
-                                             wxEmptyString,
+    wxBMPResourceHandler() : wxBitmapHandler("Windows bitmap resource",
+                                             "",
                                              wxBITMAP_TYPE_BMP_RESOURCE)
     {
     }
@@ -162,8 +163,8 @@ protected:
 class WXDLLEXPORT wxPNGResourceHandler : public wxBitmapHandler
 {
 public:
-    wxPNGResourceHandler() : wxBitmapHandler(wxS("Windows PNG resource"),
-                                             wxString(),
+    wxPNGResourceHandler() : wxBitmapHandler("Windows PNG resource",
+                                             "",
                                              wxBITMAP_TYPE_PNG_RESOURCE)
     {
     }
@@ -349,7 +350,8 @@ bool wxBMPFileHandler::LoadFile(wxBitmap *bitmap,
 
 #if wxUSE_WXDIB
     // Try loading using native Windows LoadImage() first.
-    wxDIB dib(name);
+    // FIXME: use string
+    wxDIB dib(name.ToStdString());
     if ( dib.IsOk() )
         return bitmap->CopyFromDIB(dib);
 #endif // wxUSE_WXDIB

@@ -30,7 +30,7 @@ public:
                         const wxSize& size = wxDefaultSize,
                         long style = wxFONTBTN_DEFAULT_STYLE,
                         const wxValidator& validator = wxDefaultValidator,
-                        const wxString& name = wxASCII_STR(wxFontPickerWidgetNameStr))
+                        const std::string& name = wxFontPickerWidgetNameStr)
     {
         Create(parent, id, initial, pos, size, style, validator, name);
     }
@@ -62,7 +62,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = wxFONTBTN_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxFontPickerWidgetNameStr));
+                const std::string& name = wxFontPickerWidgetNameStr);
 
     void OnButtonClick(wxCommandEvent &);
 

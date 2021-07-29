@@ -27,7 +27,7 @@ public:
                      const wxSize& size = wxDefaultSize,
                      long style = wxTP_DEFAULT,
                      const wxValidator& validator = wxDefaultValidator,
-                     const wxString& name = wxTimePickerCtrlNameStr)
+                     const std::string& name = wxTimePickerCtrlNameStr)
     {
         Create(parent, id, dt, pos, size, style, validator, name);
     }
@@ -44,7 +44,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = wxTP_DEFAULT,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxTimePickerCtrlNameStr)
+                const std::string& name = wxTimePickerCtrlNameStr)
     {
         return MSWCreateDateTimePicker(parent, id, dt,
                                        pos, size, style,

@@ -112,7 +112,7 @@ wxGenericCalendarCtrl::wxGenericCalendarCtrl(wxWindow *parent,
                                              const wxPoint& pos,
                                              const wxSize& size,
                                              long style,
-                                             const wxString& name)
+                                             const std::string& name)
 {
     // FIXME: Can be done at compile time.
     for ( wxDateTime::WeekDay wd = wxDateTime::Sun; wd < wxDateTime::Inv_WeekDay; wxNextWDay(wd) )
@@ -154,7 +154,7 @@ bool wxGenericCalendarCtrl::Create(wxWindow *parent,
                                    const wxPoint& pos,
                                    const wxSize& size,
                                    long style,
-                                   const wxString& name)
+                                   const std::string& name)
 {
     if ( !wxControl::Create(parent, id, pos, size,
                             style | wxCLIP_CHILDREN | wxWANTS_CHARS | wxFULL_REPAINT_ON_RESIZE,

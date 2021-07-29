@@ -580,7 +580,7 @@ wxLogFrame::~wxLogFrame()
 // -----------
 
 wxLogWindow::wxLogWindow(wxWindow *pParent,
-                         const wxString& szTitle,
+                         const std::string& szTitle,
                          bool bShow,
                          bool bDoPass)
     : m_pLogFrame(new wxLogFrame(pParent, this, szTitle))

@@ -28,7 +28,7 @@ public:
            wxFontStyle style,
            wxFontWeight weight,
            bool underlined = false,
-           const wxString& face = wxEmptyString,
+           const std::string& face = {},
            wxFontEncoding encoding = wxFONTENCODING_DEFAULT)
     {
         Create(size, family, style, weight, underlined, face, encoding);
@@ -39,7 +39,7 @@ public:
                 wxFontStyle style,
                 wxFontWeight weight,
                 bool underlined = false,
-                const wxString& face = wxEmptyString,
+                const std::string& face = {},
                 wxFontEncoding encoding = wxFONTENCODING_DEFAULT)
     {
         return DoCreate(InfoFromLegacyParams(size,
@@ -56,7 +56,7 @@ public:
            wxFontStyle style,
            wxFontWeight weight,
            bool underlined = false,
-           const wxString& face = wxEmptyString,
+           const std::string& face = {},
            wxFontEncoding encoding = wxFONTENCODING_DEFAULT)
     {
         Create(pixelSize, family, style, weight,
@@ -76,7 +76,7 @@ public:
                 wxFontStyle style,
                 wxFontWeight weight,
                 bool underlined = false,
-                const wxString& face = wxEmptyString,
+                const std::string& face = {},
                 wxFontEncoding encoding = wxFONTENCODING_DEFAULT)
     {
         return DoCreate(InfoFromLegacyParams(pixelSize,

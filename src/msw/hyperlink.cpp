@@ -70,11 +70,12 @@ namespace
 
 bool wxHyperlinkCtrl::Create(wxWindow *parent,
                              wxWindowID id,
-                             const wxString& label, const wxString& url,
+                             const std::string& label,
+                             const std::string& url,
                              const wxPoint& pos,
                              const wxSize& size,
                              long style,
-                             const wxString& name)
+                             const std::string& name)
 {
     if ( !HasNativeHyperlinkCtrl() )
     {

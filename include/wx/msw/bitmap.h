@@ -280,7 +280,7 @@ class WXDLLIMPEXP_CORE wxBitmapHandler : public wxGDIImageHandler
 {
 public:
     wxBitmapHandler() = default;
-    wxBitmapHandler(const wxString& name, const wxString& ext, wxBitmapType type)
+    wxBitmapHandler(const std::string& name, const std::string& ext, wxBitmapType type)
         : wxGDIImageHandler(name, ext, type) { }
 
     ~wxBitmapHandler() override = default;

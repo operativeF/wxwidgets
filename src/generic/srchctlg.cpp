@@ -267,12 +267,12 @@ wxSearchCtrl::wxSearchCtrl()
 }
 
 wxSearchCtrl::wxSearchCtrl(wxWindow *parent, wxWindowID id,
-           const wxString& value,
+           const std::string& value,
            const wxPoint& pos,
            const wxSize& size,
            long style,
            const wxValidator& validator,
-           const wxString& name)
+           const std::string& name)
 {
     Init();
 
@@ -296,12 +296,12 @@ void wxSearchCtrl::Init()
 }
 
 bool wxSearchCtrl::Create(wxWindow *parent, wxWindowID id,
-            const wxString& value,
+            const std::string& value,
             const wxPoint& pos,
             const wxSize& size,
             long style,
             const wxValidator& validator,
-            const wxString& name)
+            const std::string& name)
 {
     if ( !wxSearchCtrlBaseBaseClass::Create(parent, id, pos, size,
                                             style, validator, name) )

@@ -29,22 +29,22 @@ public:
 
     wxSearchCtrl();
     wxSearchCtrl(wxWindow *parent, wxWindowID id,
-               const wxString& value = wxEmptyString,
+               const std::string& value = {},
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                long style = 0,
                const wxValidator& validator = wxDefaultValidator,
-               const wxString& name = wxASCII_STR(wxSearchCtrlNameStr));
+               const std::string& name = wxSearchCtrlNameStr);
 
     ~wxSearchCtrl() override;
 
     bool Create(wxWindow *parent, wxWindowID id,
-                const wxString& value = wxEmptyString,
+                const std::string& value = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxSearchCtrlNameStr));
+                const std::string& name = wxSearchCtrlNameStr);
 
 #if wxUSE_MENUS
     // get/set search button menu

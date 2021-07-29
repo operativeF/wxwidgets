@@ -28,6 +28,8 @@
 
 #include "wx/msw/private.h"
 
+#include "boost/nowide/convert.hpp"
+
 // ----------------------------------------------------------------------------
 // wxWin macros
 // ----------------------------------------------------------------------------
@@ -46,8 +48,8 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxEnhMetaFile, wxObject);
 // ----------------------------------------------------------------------------
 
 // we must pass NULL if the string is empty to metafile functions
-static inline const wxChar *GetMetaFileName(const wxString& fn)
-    { return !fn ? nullptr : wxMSW_CONV_LPCTSTR(fn); }
+static inline const wchar_t* GetMetaFileName(const std::string& fn)
+    { return fn.empty() ? nullptr : boost::nowide::widen(fn).c_str(); }
 
 // ============================================================================
 // implementation
@@ -80,7 +82,7 @@ void wxEnhMetaFile::Init()
     }
     else // have valid file name, load metafile from it
     {
-        m_hMF = (WXHANDLE)::GetEnhMetaFile(m_filename.t_str());
+        m_hMF = (WXHANDLE)::GetEnhMetaFileW(boost::nowide::widen(m_filename).c_str());
         if ( !m_hMF )
         {
             wxLogSysError(_("Failed to load metafile from file \"%s\"."),
@@ -96,7 +98,7 @@ void wxEnhMetaFile::Assign(const wxEnhMetaFile& mf)
 
     if ( mf.m_hMF )
     {
-        m_hMF = (WXHANDLE)::CopyEnhMetaFile(GetEMFOf(mf),
+        m_hMF = (WXHANDLE)::CopyEnhMetaFileW(GetEMFOf(mf),
                                             GetMetaFileName(m_filename));
         if ( !m_hMF )
         {
@@ -207,12 +209,12 @@ class wxEnhMetaFileDCImpl : public wxMSWDCImpl
 {
 public:
     wxEnhMetaFileDCImpl( wxEnhMetaFileDC *owner,
-                         const wxString& filename, int width, int height,
-                         const wxString& description );
+                         const std::string& filename, int width, int height,
+                         const std::string& description );
     wxEnhMetaFileDCImpl( wxEnhMetaFileDC *owner,
                          const wxDC& referenceDC,
-                         const wxString& filename, int width, int height,
-                         const wxString& description );
+                         const std::string& filename, int width, int height,
+                         const std::string& description );
     ~wxEnhMetaFileDCImpl() override;
 
     // obtain a pointer to the new metafile (caller should delete it)
@@ -223,8 +225,8 @@ protected:
 
 private:
     void Create(HDC hdcRef,
-                const wxString& filename, int width, int height,
-                const wxString& description);
+                const std::string& filename, int width, int height,
+                const std::string& description);
 
     // size passed to ctor and returned by DoGetSize()
     int m_width,
@@ -233,9 +235,9 @@ private:
 
 
 wxEnhMetaFileDCImpl::wxEnhMetaFileDCImpl( wxEnhMetaFileDC* owner,
-                                 const wxString& filename,
+                                 const std::string& filename,
                                  int width, int height,
-                                 const wxString& description )
+                                 const std::string& description )
                    : wxMSWDCImpl( owner )
 {
     Create(ScreenHDC(), filename, width, height, description);
@@ -243,18 +245,18 @@ wxEnhMetaFileDCImpl::wxEnhMetaFileDCImpl( wxEnhMetaFileDC* owner,
 
 wxEnhMetaFileDCImpl::wxEnhMetaFileDCImpl( wxEnhMetaFileDC* owner,
                                  const wxDC& referenceDC,
-                                 const wxString& filename,
+                                 const std::string& filename,
                                  int width, int height,
-                                 const wxString& description )
+                                 const std::string& description )
                    : wxMSWDCImpl( owner )
 {
     Create(GetHdcOf(referenceDC), filename, width, height, description);
 }
 
 void wxEnhMetaFileDCImpl::Create(HDC hdcRef,
-                                 const wxString& filename,
+                                 const std::string& filename,
                                  int width, int height,
-                                 const wxString& description)
+                                 const std::string& description)
 {
     m_width = width;
     m_height = height;
@@ -279,8 +281,8 @@ void wxEnhMetaFileDCImpl::Create(HDC hdcRef,
         pRect = (LPRECT)nullptr;
     }
 
-    m_hDC = (WXHDC)::CreateEnhMetaFile(hdcRef, GetMetaFileName(filename),
-                                       pRect, description.t_str());
+    m_hDC = (WXHDC)::CreateEnhMetaFileW(hdcRef, GetMetaFileName(filename),
+                                       pRect, boost::nowide::widen(description).c_str());
     if ( !m_hDC )
     {
         wxLogLastError(wxT("CreateEnhMetaFile"));
@@ -321,9 +323,9 @@ wxEnhMetaFileDCImpl::~wxEnhMetaFileDCImpl()
 
 wxIMPLEMENT_ABSTRACT_CLASS(wxEnhMetaFileDC, wxDC);
 
-wxEnhMetaFileDC::wxEnhMetaFileDC(const wxString& filename,
+wxEnhMetaFileDC::wxEnhMetaFileDC(const std::string& filename,
                                  int width, int height,
-                                 const wxString& description)
+                                 const std::string& description)
                : wxDC(new wxEnhMetaFileDCImpl(this,
                                               filename,
                                               width, height,
@@ -332,9 +334,9 @@ wxEnhMetaFileDC::wxEnhMetaFileDC(const wxString& filename,
 }
 
 wxEnhMetaFileDC::wxEnhMetaFileDC(const wxDC& referenceDC,
-                                 const wxString& filename,
+                                 const std::string& filename,
                                  int width, int height,
-                                 const wxString& description)
+                                 const std::string& description)
                : wxDC(new wxEnhMetaFileDCImpl(this,
                                               referenceDC,
                                               filename,

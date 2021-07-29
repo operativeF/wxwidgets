@@ -42,7 +42,7 @@ public:
 class WXDLLIMPEXP_CORE wxMetafile: public wxGDIObject
 {
 public:
-    wxMetafile(const wxString& file = wxEmptyString);
+    wxMetafile(const std::string& file = {});
     virtual ~wxMetafile();
 
     // After this is called, the metafile cannot be used for anything
@@ -76,8 +76,8 @@ private:
 class WXDLLIMPEXP_CORE wxMetafileDCImpl: public wxMSWDCImpl
 {
 public:
-    wxMetafileDCImpl(wxDC *owner, const wxString& file = wxEmptyString);
-    wxMetafileDCImpl(wxDC *owner, const wxString& file,
+    wxMetafileDCImpl(wxDC *owner, const std::string& file = {});
+    wxMetafileDCImpl(wxDC *owner, const std::string& file,
                      int xext, int yext, int xorg, int yorg);
     virtual ~wxMetafileDCImpl();
 
@@ -115,13 +115,13 @@ class WXDLLIMPEXP_CORE wxMetafileDC: public wxDC
 public:
     // Don't supply origin and extent
     // Supply them to wxMakeMetaFilePlaceable instead.
-    wxMetafileDC(const wxString& file)
+    wxMetafileDC(const std::string& file)
         : wxDC(new wxMetafileDCImpl( this, file ))
         { }
 
     // Supply origin and extent (recommended).
     // Then don't need to supply them to wxMakeMetaFilePlaceable.
-    wxMetafileDC(const wxString& file, int xext, int yext, int xorg, int yorg)
+    wxMetafileDC(const std::string& file, int xext, int yext, int xorg, int yorg)
         : wxDC(new wxMetafileDCImpl( this, file, xext, yext, xorg, yorg ))
         { }
 

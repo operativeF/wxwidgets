@@ -19,14 +19,14 @@ class WXDLLIMPEXP_CORE wxFileDialog: public wxFileDialogBase
 {
 public:
     wxFileDialog(wxWindow *parent,
-                 const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
-                 const wxString& defaultDir = wxEmptyString,
-                 const wxString& defaultFile = wxEmptyString,
-                 const wxString& wildCard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
+                 const std::string& message = wxFileSelectorPromptStr,
+                 const std::string& defaultDir = {},
+                 const std::string& defaultFile = {},
+                 const std::string& wildCard = wxFileSelectorDefaultWildcardStr,
                  long style = wxFD_DEFAULT_STYLE,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& sz = wxDefaultSize,
-                 const wxString& name = wxASCII_STR(wxFileDialogNameStr));
+                 const std::string& name = wxFileDialogNameStr);
 
     wxFileDialog(const wxFileDialog&) = delete;
     wxFileDialog& operator=(const wxFileDialog&) = delete;

@@ -220,7 +220,7 @@ static void CALLBACK wxRequestStatusCallback(
 wxWebRequestWinHTTP::wxWebRequestWinHTTP(wxWebSession& session,
                                          wxWebSessionWinHTTP& sessionImpl,
                                          wxEvtHandler* handler,
-                                         const wxString& url,
+                                         const std::string& url,
                                          int id):
     wxWebRequestImpl(session, sessionImpl, handler, id),
     m_sessionImpl(sessionImpl),

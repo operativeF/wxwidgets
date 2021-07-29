@@ -26,7 +26,7 @@ public:
 
     wxGenericFindReplaceDialog(wxWindow *parent,
                                wxFindReplaceData *data,
-                               const wxString& title,
+                               const std::string& title,
                                int style = 0)
     {
         Init();
@@ -36,7 +36,7 @@ public:
 
     bool Create(wxWindow *parent,
                 wxFindReplaceData *data,
-                const wxString& title,
+                const std::string& title,
                 int style = 0);
 
 protected:

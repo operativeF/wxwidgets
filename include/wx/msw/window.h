@@ -39,7 +39,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
-                const wxString& name = wxASCII_STR(wxPanelNameStr))
+                const std::string& name = wxPanelNameStr)
     {
         Create(parent, id, pos, size, style, name);
     }
@@ -72,7 +72,7 @@ public:
                              const wxPoint& pos = wxDefaultPosition,
                              const wxSize& size = wxDefaultSize,
                              long style = 0,
-                             const wxString& name = wxASCII_STR(wxPanelNameStr));
+                             const std::string& name = wxPanelNameStr);
 
     
     void SetLabel(const std::string& label) override;

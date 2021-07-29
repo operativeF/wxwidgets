@@ -16,7 +16,8 @@ struct wxProgressDialogSharedData;
 class WXDLLIMPEXP_CORE wxProgressDialog : public wxGenericProgressDialog
 {
 public:
-    wxProgressDialog(const wxString& title, const wxString& message,
+    wxProgressDialog(const std::string& title,
+                     const std::string& message,
                      int maximum = 100,
                      wxWindow *parent = nullptr,
                      int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);

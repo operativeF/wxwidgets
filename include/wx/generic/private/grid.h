@@ -266,7 +266,7 @@ class WXDLLIMPEXP_CORE wxGridSubwindow : public wxWindow
 public:
     wxGridSubwindow(wxGrid *owner,
                     int additionalStyle = 0,
-                    const wxString& name = wxASCII_STR(wxPanelNameStr))
+                    const std::string& name = wxPanelNameStr)
         : wxWindow(owner, wxID_ANY,
                    wxDefaultPosition, wxDefaultSize,
                    wxBORDER_NONE | additionalStyle,

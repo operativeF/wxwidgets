@@ -26,7 +26,7 @@
 wxGenericCredentialEntryDialog::wxGenericCredentialEntryDialog() = default;
 
 wxGenericCredentialEntryDialog::wxGenericCredentialEntryDialog(
-    wxWindow* parent, const wxString& message, const wxString& title,
+    wxWindow* parent, const std::string& message, const std::string& title,
     const wxWebCredentials& cred) :
     wxDialog(parent, wxID_ANY, title)
 {
@@ -34,7 +34,7 @@ wxGenericCredentialEntryDialog::wxGenericCredentialEntryDialog(
 }
 
 bool wxGenericCredentialEntryDialog::Create(wxWindow* parent,
-    const wxString& message, const wxString& title,
+    const std::string& message, const std::string& title,
     const wxWebCredentials& cred)
 {
     if ( !wxDialog::Create(parent, wxID_ANY, title) )
@@ -44,7 +44,7 @@ bool wxGenericCredentialEntryDialog::Create(wxWindow* parent,
     return true;
 }
 
-void wxGenericCredentialEntryDialog::Init(const wxString& message,
+void wxGenericCredentialEntryDialog::Init(const std::string& message,
     const wxWebCredentials& cred)
 {
     wxSizer* topsizer = new wxBoxSizer(wxVERTICAL);

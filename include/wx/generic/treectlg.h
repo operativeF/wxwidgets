@@ -45,7 +45,7 @@ public:
                const wxSize& size = wxDefaultSize,
                long style = wxTR_DEFAULT_STYLE,
                const wxValidator &validator = wxDefaultValidator,
-               const wxString& name = wxASCII_STR(wxTreeCtrlNameStr))
+               const std::string& name = wxTreeCtrlNameStr)
         : 
           wxScrollHelper(this)
     {
@@ -63,7 +63,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = wxTR_DEFAULT_STYLE,
                 const wxValidator &validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxTreeCtrlNameStr));
+                const std::string& name = wxTreeCtrlNameStr);
 
     
     // ----------------------------------
@@ -397,7 +397,7 @@ public:
                const wxSize& size = wxDefaultSize,
                long style = wxTR_DEFAULT_STYLE,
                const wxValidator &validator = wxDefaultValidator,
-               const wxString& name = wxASCII_STR(wxTreeCtrlNameStr))
+               const std::string& name = wxTreeCtrlNameStr)
     : wxGenericTreeCtrl(parent, id, pos, size, style, validator, name)
     {
     }

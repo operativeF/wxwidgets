@@ -36,8 +36,8 @@ public:
     // ctor & dtor
     wxMenuItem(wxMenu *parentMenu = nullptr,
                int id = wxID_SEPARATOR,
-               const wxString& name = wxEmptyString,
-               const wxString& help = wxEmptyString,
+               const std::string& name = {},
+               const std::string& help = {},
                wxItemKind kind = wxITEM_NORMAL,
                wxMenu *subMenu = nullptr);
     ~wxMenuItem() override = default;

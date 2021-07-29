@@ -210,8 +210,8 @@ wxDIRECT_CONSTRUCTOR_6( wxMenuItem, wxMenu*, Parent, int, Id, wxString, \
 
 wxMenuItemBase::wxMenuItemBase(wxMenu *parentMenu,
                                int itemid,
-                               const wxString& text,
-                               const wxString& help,
+                               const std::string& text,
+                               const std::string& help,
                                wxItemKind kind,
                                wxMenu *subMenu)
 {

@@ -59,9 +59,9 @@ wxEND_EVENT_TABLE()
 wxIMPLEMENT_CLASS(wxNumberEntryDialog, wxDialog);
 
 bool wxNumberEntryDialog::Create(wxWindow *parent,
-                                         const wxString& message,
-                                         const wxString& prompt,
-                                         const wxString& caption,
+                                         const std::string& message,
+                                         const std::string& prompt,
+                                         const std::string& caption,
                                          long value,
                                          long min,
                                          long max,
@@ -161,9 +161,9 @@ void wxNumberEntryDialog::OnCancel(wxCommandEvent& WXUNUSED(event))
 
 // wxGetTextFromUser is in utilscmn.cpp
 
-long wxGetNumberFromUser(const wxString& msg,
-                         const wxString& prompt,
-                         const wxString& title,
+long wxGetNumberFromUser(const std::string& msg,
+                         const std::string& prompt,
+                         const std::string& title,
                          long value,
                          long min,
                          long max,

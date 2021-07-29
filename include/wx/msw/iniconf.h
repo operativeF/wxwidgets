@@ -46,8 +46,11 @@ public:
     // if strAppName doesn't contain the extension and is not an absolute path,
     // ".ini" is appended to it. if strVendor is empty, it's taken to be the
     // same as strAppName.
-  wxIniConfig(const wxString& strAppName = wxEmptyString, const wxString& strVendor = wxEmptyString,
-    const wxString& localFilename = wxEmptyString, const wxString& globalFilename = wxEmptyString, long style = wxCONFIG_USE_LOCAL_FILE);
+  wxIniConfig(const std::string& strAppName = {},
+              const std::string& strVendor = {},
+              const std::string& localFilename = {},
+              const std::string& globalFilename = {},
+              long style = wxCONFIG_USE_LOCAL_FILE);
   ~wxIniConfig() override = default;
 
   wxIniConfig(const wxIniConfig&) = delete;

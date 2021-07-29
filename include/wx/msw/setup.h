@@ -45,7 +45,7 @@
 // loss.
 //
 // Recommended setting: 0
-#define wxUSE_UNSAFE_WXSTRING_CONV 1
+#define wxUSE_UNSAFE_WXSTRING_CONV 0
 
 // If set to 1, enables "reproducible builds", i.e. build output should be
 // exactly the same if the same build is redone again. As using __DATE__ and

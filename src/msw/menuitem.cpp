@@ -421,8 +421,8 @@ void MenuDrawData::Init(wxWindow const* window)
 
 wxMenuItem::wxMenuItem(wxMenu *pParentMenu,
                        int id,
-                       const wxString& text,
-                       const wxString& strHelp,
+                       const std::string& text,
+                       const std::string& strHelp,
                        wxItemKind kind,
                        wxMenu *pSubMenu)
           : wxMenuItemBase(pParentMenu, id, text, strHelp, kind, pSubMenu)
@@ -1361,8 +1361,8 @@ int wxMenuItem::MSGetMenuItemPos() const
 
 wxMenuItem *wxMenuItemBase::New(wxMenu *parentMenu,
                                 int id,
-                                const wxString& name,
-                                const wxString& help,
+                                const std::string& name,
+                                const std::string& help,
                                 wxItemKind kind,
                                 wxMenu *subMenu)
 {

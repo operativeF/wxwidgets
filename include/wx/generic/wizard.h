@@ -27,7 +27,7 @@ public:
     wxWizard() { Init(); }
     wxWizard(wxWindow *parent,
              int id = wxID_ANY,
-             const wxString& title = wxEmptyString,
+             const std::string& title = {},
              const wxBitmap& bitmap = wxNullBitmap,
              const wxPoint& pos = wxDefaultPosition,
              long style = wxDEFAULT_DIALOG_STYLE)
@@ -41,7 +41,7 @@ public:
 
     bool Create(wxWindow *parent,
              int id = wxID_ANY,
-             const wxString& title = wxEmptyString,
+             const std::string& title = {},
              const wxBitmap& bitmap = wxNullBitmap,
              const wxPoint& pos = wxDefaultPosition,
              long style = wxDEFAULT_DIALOG_STYLE);

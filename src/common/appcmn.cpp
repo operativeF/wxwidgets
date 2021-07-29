@@ -483,7 +483,7 @@ bool wxGUIAppTraitsBase::ShowAssertDialog(const wxString& msg)
     {
         // Note that this and the other messages here are intentionally not
         // translated -- they are for developpers only.
-        static const wxStringCharType* caption = wxS("wxWidgets Debug Alert");
+        static const wxString caption = "wxWidgets Debug Alert";
 
         wxString msgDlg = wxS("A debugging check in this application ")
                           wxS("has failed.\n\n") + msg;
@@ -498,7 +498,7 @@ bool wxGUIAppTraitsBase::ShowAssertDialog(const wxString& msg)
 #endif // wxUSE_STACKWALKER
 
 #if wxUSE_RICHMSGDLG
-        wxRichMessageDialog dlg(nullptr, msgDlg, caption, flags);
+        wxRichMessageDialog dlg(nullptr, msgDlg.ToStdString(), caption.ToStdString(), flags);
 
         dlg.SetYesNoLabels("Stop", "Continue");
 

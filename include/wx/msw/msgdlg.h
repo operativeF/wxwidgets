@@ -15,8 +15,8 @@ class WXDLLIMPEXP_CORE wxMessageDialog : public wxMessageDialogBase
 {
 public:
     wxMessageDialog(wxWindow *parent,
-                    const wxString& message,
-                    const wxString& caption = wxASCII_STR(wxMessageBoxCaptionStr),
+                    const std::string& message,
+                    const std::string& caption = wxMessageBoxCaptionStr,
                     long style = wxOK|wxCENTRE,
                     const wxPoint& WXUNUSED(pos) = wxDefaultPosition)
         : wxMessageDialogBase(parent, message, caption, style)

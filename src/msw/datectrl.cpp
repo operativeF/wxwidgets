@@ -44,7 +44,7 @@ wxDatePickerCtrl::Create(wxWindow *parent,
                          const wxSize& size,
                          long style,
                          const wxValidator& validator,
-                         const wxString& name)
+                         const std::string& name)
 {
     // use wxDP_SPIN if wxDP_DEFAULT (0) was given as style
     if ( !(style & wxDP_DROPDOWN) )

@@ -366,8 +366,8 @@ void PerformNotificationUpdates(HWND hwnd,
 // wxProgressDialog implementation
 // ============================================================================
 
-wxProgressDialog::wxProgressDialog( const wxString& title,
-                                    const wxString& message,
+wxProgressDialog::wxProgressDialog( const std::string& title,
+                                    const std::string& message,
                                     int maximum,
                                     wxWindow *parent,
                                     int style )

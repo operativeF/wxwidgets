@@ -62,7 +62,7 @@ wxMetafileRefData::~wxMetafileRefData()
 // wxMetafile
 // ----------------------------------------------------------------------------
 
-wxMetafile::wxMetafile(const wxString& file)
+wxMetafile::wxMetafile(const std::string& file)
 {
     m_refData = new wxMetafileRefData;
 
@@ -148,7 +148,7 @@ void wxMetafile::SetWindowsMappingMode(int mm)
 
 // Original constructor that does not takes origin and extent. If you use this,
 // *DO* give origin/extent arguments to wxMakeMetafilePlaceable.
-wxMetafileDCImpl::wxMetafileDCImpl(wxDC *owner, const wxString& file)
+wxMetafileDCImpl::wxMetafileDCImpl(wxDC *owner, const std::string& file)
     : wxMSWDCImpl(owner)
 {
     m_metaFile = NULL;
@@ -176,7 +176,7 @@ wxMetafileDCImpl::wxMetafileDCImpl(wxDC *owner, const wxString& file)
 
 // New constructor that takes origin and extent. If you use this, don't
 // give origin/extent arguments to wxMakeMetafilePlaceable.
-wxMetafileDCImpl::wxMetafileDCImpl(wxDC *owner, const wxString& file,
+wxMetafileDCImpl::wxMetafileDCImpl(wxDC *owner, const std::string& file,
                                    int xext, int yext, int xorg, int yorg)
     : wxMSWDCImpl(owner)
 {

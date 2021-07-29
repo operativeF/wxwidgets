@@ -30,7 +30,7 @@ public:
     wxStatusBarGeneric(wxWindow *parent,
                        wxWindowID winid = wxID_ANY,
                        long style = wxSTB_DEFAULT_STYLE,
-                       const wxString& name = wxASCII_STR(wxStatusBarNameStr))
+                       const std::string& name = wxStatusBarNameStr)
     {
         Init();
 
@@ -44,7 +44,7 @@ public:
 
     bool Create(wxWindow *parent, wxWindowID winid = wxID_ANY,
                 long style = wxSTB_DEFAULT_STYLE,
-                const wxString& name = wxASCII_STR(wxStatusBarNameStr));
+                const std::string& name = wxStatusBarNameStr);
 
     // implement base class methods
     void SetStatusWidths(int n, const int widths_field[]) override;

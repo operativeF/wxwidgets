@@ -71,7 +71,7 @@ public:
     wxWebRequestWinHTTP(wxWebSession& session,
                         wxWebSessionWinHTTP& sessionImpl,
                         wxEvtHandler* handler,
-                        const wxString& url,
+                        const std::string& url,
                         int id);
 
     ~wxWebRequestWinHTTP() override;

@@ -209,7 +209,7 @@ void *wxGUIAppTraits::BeforeChildWaitLoop()
                     (
                         wxTheApp->GetTopWindow(),
                         wxID_ANY,
-                        wxEmptyString,
+                        "",
                         wxPoint(32600, 32600),
                         wxSize(1, 1)
                     );

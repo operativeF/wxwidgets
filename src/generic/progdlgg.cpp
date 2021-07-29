@@ -67,8 +67,8 @@ wxGenericProgressDialog::wxGenericProgressDialog()
 
 }
 
-wxGenericProgressDialog::wxGenericProgressDialog(const wxString& title,
-                                                 const wxString& message,
+wxGenericProgressDialog::wxGenericProgressDialog(const std::string& title,
+                                                 const std::string& message,
                                                  int maximum,
                                                  wxWindow *parent,
                                                  int style)
@@ -100,8 +100,8 @@ void wxGenericProgressDialog::SetTopParent(wxWindow* parent)
     m_parentTop = parent;
 }
 
-bool wxGenericProgressDialog::Create( const wxString& title,
-                                      const wxString& message,
+bool wxGenericProgressDialog::Create( const std::string& title,
+                                      const std::string& message,
                                       int maximum,
                                       wxWindow *parent,
                                       int style )

@@ -46,9 +46,14 @@ constexpr int wxHYPERLINK_POPUP_COPY_ID = 16384;
 // wxGenericHyperlinkCtrl
 // ----------------------------------------------------------------------------
 
-bool wxGenericHyperlinkCtrl::Create(wxWindow *parent, wxWindowID id,
-    const wxString& label, const wxString& url, const wxPoint& pos,
-    const wxSize& size, long style, const wxString& name)
+bool wxGenericHyperlinkCtrl::Create(wxWindow *parent,
+                                    wxWindowID id,
+                                    const std::string& label,
+                                    const std::string& url,
+                                    const wxPoint& pos,
+                                    const wxSize& size,
+                                    long style,
+                                    const std::string& name)
 {
     // do validation checks:
     CheckParams(label, url, style);
@@ -144,7 +149,7 @@ void wxGenericHyperlinkCtrl::SetVisitedColour(const wxColour &colour)
 
 void wxGenericHyperlinkCtrl::DoContextMenu(const wxPoint &pos)
 {
-    wxMenu *menuPopUp = new wxMenu(wxEmptyString, wxMENU_TEAROFF);
+    wxMenu *menuPopUp = new wxMenu("", wxMENU_TEAROFF);
     menuPopUp->Append(wxHYPERLINK_POPUP_COPY_ID, _("&Copy URL"));
     PopupMenu( menuPopUp, pos );
     delete menuPopUp;

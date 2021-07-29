@@ -87,11 +87,11 @@ wxEND_EVENT_TABLE()
 
 bool wxWebViewIE::Create(wxWindow* parent,
            wxWindowID id,
-           const wxString& url,
+           const std::string& url,
            const wxPoint& pos,
            const wxSize& size,
            long style,
-           const wxString& name)
+           const std::string& name)
 {
     if (!wxControl::Create(parent, id, pos, size, style,
                            wxDefaultValidator, name))

@@ -488,7 +488,7 @@ bool wxWindowMSW::CreateUsingMSWClass(const wxChar* classname,
                                       const wxPoint& pos,
                                       const wxSize& size,
                                       long style,
-                                      const wxString& name)
+                                      const std::string& name)
 {
     wxCHECK_MSG( parent, false, wxT("can't create wxWindow without parent") );
 

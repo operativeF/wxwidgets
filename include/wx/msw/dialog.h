@@ -21,7 +21,7 @@ public:
     wxDialog() = default;
 
     wxDialog(wxWindow *parent, wxWindowID id,
-             const wxString& title,
+             const std::string& title,
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
              long style = wxDEFAULT_DIALOG_STYLE,
@@ -38,7 +38,7 @@ public:
     wxDialog& operator=(wxDialog&&) = default;
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
-                const wxString& title,
+                const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_DIALOG_STYLE,

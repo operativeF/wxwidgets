@@ -33,11 +33,12 @@ public:
     // Constructor.
     wxGenericHyperlinkCtrl(wxWindow *parent,
                             wxWindowID id,
-                            const wxString& label, const wxString& url,
+                            const std::string& label,
+                            const std::string& url,
                             const wxPoint& pos = wxDefaultPosition,
                             const wxSize& size = wxDefaultSize,
                             long style = wxHL_DEFAULT_STYLE,
-                            const wxString& name = wxASCII_STR(wxHyperlinkCtrlNameStr))
+                            const std::string& name = wxHyperlinkCtrlNameStr)
     {
         
     m_rollover = false;
@@ -55,11 +56,12 @@ public:
     // Creation function (for two-step construction).
     bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& label, const wxString& url,
+                const std::string& label,
+                const std::string& url,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxHL_DEFAULT_STYLE,
-                const wxString& name = wxASCII_STR(wxHyperlinkCtrlNameStr));
+                const std::string& name = wxHyperlinkCtrlNameStr);
 
 
     // get/set
