@@ -34,14 +34,14 @@ public:
 
     wxCommandLinkButtonBase(wxWindow *parent,
                             wxWindowID id,
-                            const wxString& mainLabel = wxEmptyString,
-                            const wxString& note = wxEmptyString,
+                            const std::string& mainLabel = {},
+                            const std::string& note = {},
                             const wxPoint& pos = wxDefaultPosition,
                             const wxSize& size = wxDefaultSize,
                             long style = 0,
                             const wxValidator& validator =
                                 wxDefaultValidator,
-                            const wxString& name = wxASCII_STR(wxButtonNameStr))
+                            const std::string& name = wxButtonNameStr)
         : wxButton(parent,
                    id,
                    mainLabel + '\n' + note,
@@ -58,7 +58,7 @@ public:
     virtual void SetMainLabelAndNote(const std::string& mainLabel,
                                      const std::string& note) = 0;
 
-    virtual void SetMainLabel(const wxString& mainLabel)
+    virtual void SetMainLabel(const std::string& mainLabel)
     {
         SetMainLabelAndNote(mainLabel, GetNote());
     }
@@ -98,13 +98,13 @@ public:
 
     wxGenericCommandLinkButton(wxWindow *parent,
                                wxWindowID id,
-                               const wxString& mainLabel = wxEmptyString,
-                               const wxString& note = wxEmptyString,
+                               const std::string& mainLabel = {},
+                               const std::string& note = {},
                                const wxPoint& pos = wxDefaultPosition,
                                const wxSize& size = wxDefaultSize,
                                long style = 0,
                                const wxValidator& validator = wxDefaultValidator,
-                               const wxString& name = wxASCII_STR(wxButtonNameStr))
+                               const std::string& name = wxButtonNameStr)
          
     {
         Create(parent, id, mainLabel, note, pos, size, style, validator, name);
@@ -115,13 +115,13 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& mainLabel = wxEmptyString,
-                const wxString& note = wxEmptyString,
+                const std::string& mainLabel = {},
+                const std::string& note = {},
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxButtonNameStr));
+                const std::string& name = wxButtonNameStr);
 
     void SetMainLabelAndNote(const std::string& mainLabel,
                              const std::string& note) override
@@ -143,13 +143,13 @@ private:
 
         wxCommandLinkButton(wxWindow *parent,
                             wxWindowID id,
-                            const wxString& mainLabel = wxEmptyString,
-                            const wxString& note = wxEmptyString,
+                            const std::string& mainLabel = {},
+                            const std::string& note = {},
                             const wxPoint& pos = wxDefaultPosition,
                             const wxSize& size = wxDefaultSize,
                             long style = 0,
                             const wxValidator& validator = wxDefaultValidator,
-                            const wxString& name = wxASCII_STR(wxButtonNameStr))
+                            const std::string& name = wxButtonNameStr)
             : wxGenericCommandLinkButton(parent,
                                          id,
                                          mainLabel,

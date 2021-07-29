@@ -137,11 +137,11 @@ wxFrameBase::~wxFrameBase()
 
 wxFrame *wxFrameBase::New(wxWindow *parent,
                           wxWindowID id,
-                          const wxString& title,
+                          const std::string& title,
                           const wxPoint& pos,
                           const wxSize& size,
                           long style,
-                          const wxString& name)
+                          const std::string& name)
 {
     return new wxFrame(parent, id, title, pos, size, style, name);
 }

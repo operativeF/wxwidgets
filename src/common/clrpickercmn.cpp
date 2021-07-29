@@ -37,11 +37,14 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxColourPickerEvent, wxEvent);
 
 #define M_PICKER     ((wxColourPickerWidget*)m_picker)
 
-bool wxColourPickerCtrl::Create( wxWindow *parent, wxWindowID id,
+bool wxColourPickerCtrl::Create( wxWindow *parent,
+                        wxWindowID id,
                         const wxColour &col,
-                        const wxPoint &pos, const wxSize &size,
-                        long style, const wxValidator& validator,
-                        const wxString &name )
+                        const wxPoint &pos,
+                        const wxSize &size,
+                        long style,
+                        const wxValidator& validator,
+                        const std::string& name )
 {
     if (!wxPickerBase::CreateBase(parent, id, col.GetAsString(), pos, size,
                                   style, validator, name))

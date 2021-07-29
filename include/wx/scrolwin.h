@@ -397,7 +397,7 @@ template<class T>
 bool wxCreateScrolled(T* self,
                       wxWindow *parent, wxWindowID winid,
                       const wxPoint& pos, const wxSize& size,
-                      long style, const wxString& name)
+                      long style, const std::string& name)
 {
     return self->Create(parent, winid, pos, size, style, name);
 }
@@ -409,7 +409,7 @@ bool wxCreateScrolled(T* self,
 inline bool wxCreateScrolled(wxControl* self,
                      wxWindow *parent, wxWindowID winid,
                      const wxPoint& pos, const wxSize& size,
-                     long style, const wxString& name)
+                     long style, const std::string& name)
 {
      return self->Create(parent, winid, pos, size, style, wxDefaultValidator, name);
 }
@@ -427,7 +427,7 @@ public:
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                long style = wxScrolledWindowStyle,
-               const wxString& name = wxASCII_STR(wxPanelNameStr))
+               const std::string& name = wxPanelNameStr)
         : wxScrollHelper(this)
     {
         Create(parent, winid, pos, size, style, name);
@@ -443,7 +443,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxScrolledWindowStyle,
-                const wxString& name = wxASCII_STR(wxPanelNameStr))
+                const std::string& name = wxPanelNameStr)
     {
         m_targetWindow = this;
 
@@ -497,8 +497,9 @@ public:
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      long style = wxScrolledWindowStyle,
-                     const wxString& name = wxASCII_STR(wxPanelNameStr))
-        : wxScrolled<wxPanel>(parent, winid, pos, size, style, name) {}
+                     const std::string& name = wxPanelNameStr)
+        : wxScrolled<wxPanel>(parent, winid, pos, size, style, name)
+    {}
 
 wxScrolledWindow(const wxScrolledWindow&) = delete;
    wxScrolledWindow& operator=(const wxScrolledWindow&) = delete;

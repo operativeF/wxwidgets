@@ -161,14 +161,14 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFilePickerCtrl, wxPickerBase);
 
 bool wxFilePickerCtrl::Create(wxWindow *parent,
                               wxWindowID id,
-                              const wxString& path,
-                              const wxString& message,
-                              const wxString& wildcard,
+                              const std::string& path,
+                              const std::string& message,
+                              const std::string& wildcard,
                               const wxPoint& pos,
                               const wxSize& size,
                               long style,
                               const wxValidator& validator,
-                              const wxString& name)
+                              const std::string& name)
 {
     if ( !wxFileDirPickerCtrlBase::CreateBase
                                    (
@@ -202,17 +202,17 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxDirPickerCtrl, wxPickerBase);
 
 bool wxDirPickerCtrl::Create(wxWindow *parent,
                              wxWindowID id,
-                             const wxString& path,
-                             const wxString& message,
+                             const std::string& path,
+                             const std::string& message,
                              const wxPoint& pos,
                              const wxSize& size,
                              long style,
                              const wxValidator& validator,
-                             const wxString& name)
+                             const std::string& name)
 {
     if ( !wxFileDirPickerCtrlBase::CreateBase
                                    (
-                                        parent, id, path, message, wxString(),
+                                        parent, id, path, message, "",
                                         pos, size, style, validator, name
                                    ) )
         return false;

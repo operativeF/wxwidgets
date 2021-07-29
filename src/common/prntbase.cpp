@@ -1649,8 +1649,13 @@ void wxPreviewFrame::OnChar(wxKeyEvent &event)
     }
 }
 
-wxPreviewFrame::wxPreviewFrame(wxPrintPreviewBase *preview, wxWindow *parent, const wxString& title,
-                               const wxPoint& pos, const wxSize& size, long style, const wxString& name)
+wxPreviewFrame::wxPreviewFrame(wxPrintPreviewBase *preview,
+                               wxWindow *parent,
+                               const std::string& title,
+                               const wxPoint& pos,
+                               const wxSize& size,
+                               long style,
+                               const std::string& name)
     : wxFrame(parent, wxID_ANY, title, pos, size, style, name),
       m_printPreview(preview)
 {

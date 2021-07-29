@@ -37,21 +37,21 @@ public:
     wxEditableListBox() = default;
 
     wxEditableListBox(wxWindow *parent, wxWindowID id,
-                      const wxString& label,
+                      const std::string& label,
                       const wxPoint& pos = wxDefaultPosition,
                       const wxSize& size = wxDefaultSize,
                       long style = wxEL_DEFAULT_STYLE,
-                      const wxString& name = wxASCII_STR(wxEditableListBoxNameStr))
+                      const std::string& name = wxEditableListBoxNameStr)
     {
         Create(parent, id, label, pos, size, style, name);
     }
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
-                const wxString& label,
+                const std::string& label,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxEL_DEFAULT_STYLE,
-                const wxString& name = wxASCII_STR(wxEditableListBoxNameStr));
+                const std::string& name = wxEditableListBoxNameStr);
 
     void SetStrings(const std::vector<wxString>& strings);
     void GetStrings(std::vector<wxString>& strings) const;

@@ -108,7 +108,7 @@ public:
         const wxColour& col = *wxBLACK, const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize, long style = wxCLRP_DEFAULT_STYLE,
         const wxValidator& validator = wxDefaultValidator,
-        const wxString& name = wxASCII_STR(wxColourPickerCtrlNameStr))
+        const std::string& name = wxColourPickerCtrlNameStr)
         { Create(parent, id, col, pos, size, style, validator, name); }
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
@@ -117,7 +117,7 @@ public:
            const wxSize& size = wxDefaultSize,
            long style = wxCLRP_DEFAULT_STYLE,
            const wxValidator& validator = wxDefaultValidator,
-           const wxString& name = wxASCII_STR(wxColourPickerCtrlNameStr));
+           const std::string& name = wxColourPickerCtrlNameStr);
 
     // get the colour chosen
     wxColour GetColour() const

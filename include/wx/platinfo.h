@@ -145,14 +145,14 @@ public:
     // Returns the preferred current platform name, use MatchesCurrent() to
     // check if the name is one of the possibly several names corresponding to
     // the current platform.
-    static wxString GetCurrent()
+    static std::string GetCurrent()
     {
 #ifdef __WINDOWS__
-        return wxASCII_STR("msw");
+        return "msw";
 #elif defined(__APPLE__)
-        return wxASCII_STR("mac");
+        return "mac";
 #elif defined(__UNIX__)
-        return wxASCII_STR("unix");
+        return "unix";
 #else
         return {};
 #endif

@@ -236,14 +236,14 @@ public:
 
     wxFilePickerCtrl(wxWindow *parent,
                      wxWindowID id,
-                     const wxString& path = wxEmptyString,
-                     const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
-                     const wxString& wildcard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
+                     const std::string& path = {},
+                     const std::string& message = wxFileSelectorPromptStr,
+                     const std::string& wildcard = wxFileSelectorDefaultWildcardStr,
                      const wxPoint& pos = wxDefaultPosition,
                      const wxSize& size = wxDefaultSize,
                      long style = wxFLP_DEFAULT_STYLE,
                      const wxValidator& validator = wxDefaultValidator,
-                     const wxString& name = wxASCII_STR(wxFilePickerCtrlNameStr))
+                     const std::string& name = wxFilePickerCtrlNameStr)
     {
         Create(parent, id, path, message, wildcard, pos, size, style,
                validator, name);
@@ -251,14 +251,14 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID id,
-                const wxString& path = wxEmptyString,
-                const wxString& message = wxASCII_STR(wxFileSelectorPromptStr),
-                const wxString& wildcard = wxASCII_STR(wxFileSelectorDefaultWildcardStr),
+                const std::string& path = {},
+                const std::string& message = wxFileSelectorPromptStr,
+                const std::string& wildcard = wxFileSelectorDefaultWildcardStr,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxFLP_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxFilePickerCtrlNameStr));
+                const std::string& name = wxFilePickerCtrlNameStr);
 
     void SetFileName(const wxFileName &filename)
         { SetPath(filename.GetFullPath()); }
@@ -340,25 +340,25 @@ public:
     wxDirPickerCtrl() = default;
 
     wxDirPickerCtrl(wxWindow *parent, wxWindowID id,
-                    const wxString& path = wxEmptyString,
-                    const wxString& message = wxASCII_STR(wxDirSelectorPromptStr),
+                    const std::string& path = {},
+                    const std::string& message = wxDirSelectorPromptStr,
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     long style = wxDIRP_DEFAULT_STYLE,
                     const wxValidator& validator = wxDefaultValidator,
-                    const wxString& name = wxASCII_STR(wxDirPickerCtrlNameStr))
+                    const std::string& name = wxDirPickerCtrlNameStr)
     {
         Create(parent, id, path, message, pos, size, style, validator, name);
     }
 
     [[maybe_unused]] bool Create(wxWindow *parent, wxWindowID id,
-                const wxString& path = wxEmptyString,
-                const wxString& message = wxASCII_STR(wxDirSelectorPromptStr),
+                const std::string& path = {},
+                const std::string& message = wxDirSelectorPromptStr,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxDIRP_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxDirPickerCtrlNameStr));
+                const std::string& name = wxDirPickerCtrlNameStr);
 
     void SetDirName(const wxFileName &dirname)
         { SetPath(dirname.GetPath()); }

@@ -33,14 +33,14 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFileDialogBase, wxDialog);
 
 
 bool wxFileDialogBase::Create(wxWindow *parent,
-                              const wxString& message,
-                              const wxString& defaultDir,
-                              const wxString& defaultFile,
-                              const wxString& wildCard,
+                              const std::string& message,
+                              const std::string& defaultDir,
+                              const std::string& defaultFile,
+                              const std::string& wildCard,
                               long style,
                               const wxPoint& WXUNUSED(pos),
                               const wxSize& WXUNUSED(sz),
-                              const wxString& WXUNUSED(name))
+                              const std::string& WXUNUSED(name))
 {
     m_message = message;
     m_dir = defaultDir;

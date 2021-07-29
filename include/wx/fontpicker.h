@@ -113,7 +113,7 @@ public:
                      const wxSize& size = wxDefaultSize,
                      long style = wxFNTP_DEFAULT_STYLE,
                      const wxValidator& validator = wxDefaultValidator,
-                     const wxString& name = wxASCII_STR(wxFontPickerCtrlNameStr))
+                     const std::string& name = wxFontPickerCtrlNameStr)
         : m_nMinPointSize(wxFNTP_MINPOINT_SIZE), m_nMaxPointSize(wxFNTP_MAXPOINT_SIZE)
     {
         Create(parent, id, initial, pos, size, style, validator, name);
@@ -126,7 +126,7 @@ public:
                 const wxSize& size = wxDefaultSize,
                 long style = wxFNTP_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxFontPickerCtrlNameStr));
+                const std::string& name = wxFontPickerCtrlNameStr);
 
 
     // get the font chosen

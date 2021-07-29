@@ -62,14 +62,14 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  long style = wxHD_DEFAULT_STYLE,
-                 const wxString& name = wxASCII_STR(wxHeaderCtrlNameStr));
+                 const std::string& name = wxHeaderCtrlNameStr);
 
     bool Create(wxWindow *parent,
                 wxWindowID winid = wxID_ANY,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxHD_DEFAULT_STYLE,
-                const wxString& name = wxASCII_STR(wxHeaderCtrlNameStr));
+                const std::string& name = wxHeaderCtrlNameStr);
      */
 
     // column-related methods
@@ -284,7 +284,7 @@ public:
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
                        long style = wxHD_DEFAULT_STYLE,
-                       const wxString& name = wxASCII_STR(wxHeaderCtrlNameStr))
+                       const std::string& name = wxHeaderCtrlNameStr)
     {
         
         m_sortKey = wxNO_COLUMN;

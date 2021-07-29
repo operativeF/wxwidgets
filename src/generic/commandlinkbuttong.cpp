@@ -76,13 +76,13 @@ wxCONSTRUCTOR_7( wxCommandLinkButton, wxWindow*, Parent, wxWindowID, Id, wxStrin
 
 bool wxGenericCommandLinkButton::Create(wxWindow *parent,
                                         wxWindowID id,
-                                        const wxString& mainLabel,
-                                        const wxString& note,
+                                        const std::string& mainLabel,
+                                        const std::string& note,
                                         const wxPoint& pos,
                                         const wxSize& size,
                                         long style,
                                         const wxValidator& validator,
-                                        const wxString& name)
+                                        const std::string& name)
 {
     if ( !wxButton::Create(parent,
                            id,

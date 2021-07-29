@@ -1335,7 +1335,7 @@ wxWindow* wxGenericFindWindowAtPoint(const wxPoint& pt)
 
 #if wxUSE_MSGDLG
 
-int wxMessageBox(const wxString& message, const wxString& caption, long style,
+int wxMessageBox(const std::string& message, const std::string& caption, long style,
                  wxWindow *parent, int WXUNUSED(x), int WXUNUSED(y) )
 {
     // add the appropriate icon unless this was explicitly disabled by use of

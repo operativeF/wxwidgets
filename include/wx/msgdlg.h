@@ -317,8 +317,8 @@ private:
 // wxMessageBox: the simplest way to use wxMessageDialog
 // ----------------------------------------------------------------------------
 
-int WXDLLIMPEXP_CORE wxMessageBox(const wxString& message,
-                             const wxString& caption = wxASCII_STR(wxMessageBoxCaptionStr),
+int WXDLLIMPEXP_CORE wxMessageBox(const std::string& message,
+                             const std::string& caption = wxMessageBoxCaptionStr,
                              long style = wxOK | wxCENTRE,
                              wxWindow *parent = nullptr,
                              int x = wxDefaultCoord, int y = wxDefaultCoord);

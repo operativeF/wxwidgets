@@ -50,7 +50,7 @@ TEST_CASE_FIXTURE(DirPickerCtrlTest, "Directory picker control test")
 {
     m_pickctrl = std::make_unique<wxDirPickerCtrl>(
                                    wxTheApp->GetTopWindow(), wxID_ANY,
-                                   wxEmptyString, wxDirSelectorPromptStr,
+                                   "", wxDirSelectorPromptStr,
                                    wxDefaultPosition, wxDefaultSize,
                                    wxDIRP_USE_TEXTCTRL);
 
@@ -67,7 +67,7 @@ TEST_CASE_FIXTURE(FilePickerCtrlTest, "Directory picker control test")
 {
     m_pickctrl = std::make_unique<wxFilePickerCtrl>(
                                   wxTheApp->GetTopWindow(), wxID_ANY,
-                                  wxEmptyString, wxFileSelectorPromptStr,
+                                  "", wxFileSelectorPromptStr,
                                   wxFileSelectorDefaultWildcardStr,
                                   wxDefaultPosition, wxDefaultSize,
                                   wxFLP_USE_TEXTCTRL);

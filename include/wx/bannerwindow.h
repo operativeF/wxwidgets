@@ -64,7 +64,7 @@ public:
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    long style = 0,
-                   const wxString& name = wxASCII_STR(wxBannerWindowNameStr))
+                   const std::string& name = wxBannerWindowNameStr)
     {
         
     m_direction = wxLEFT;
@@ -88,7 +88,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
-                const wxString& name = wxASCII_STR(wxBannerWindowNameStr));
+                const std::string& name = wxBannerWindowNameStr);
 
 
     // Provide an existing bitmap to show. For wxLEFT orientation the bitmap is

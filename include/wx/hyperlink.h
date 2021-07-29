@@ -99,7 +99,7 @@ class WXDLLIMPEXP_CORE wxHyperlinkEvent : public wxCommandEvent
 {
 public:
     wxHyperlinkEvent() = default;
-    wxHyperlinkEvent(wxObject *generator, wxWindowID id, const wxString& url)
+    wxHyperlinkEvent(wxObject *generator, wxWindowID id, const std::string& url)
         : wxCommandEvent(wxEVT_HYPERLINK, id),
           m_url(url)
     {
@@ -156,12 +156,12 @@ typedef void (wxEvtHandler::*wxHyperlinkEventFunction)(wxHyperlinkEvent&);
 
         wxHyperlinkCtrl(wxWindow *parent,
                         wxWindowID id,
-                        const wxString& label,
-                        const wxString& url,
+                        const std::string& label,
+                        const std::string& url,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         long style = wxHL_DEFAULT_STYLE,
-                        const wxString& name = wxASCII_STR(wxHyperlinkCtrlNameStr))
+                        const std::string& name = wxHyperlinkCtrlNameStr)
             : wxGenericHyperlinkCtrl(parent, id, label, url, pos, size,
                                      style, name)
         {

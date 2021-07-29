@@ -50,7 +50,7 @@ public:
                   const wxPoint& pos = wxDefaultPosition,
                   const wxSize& size = wxDefaultSize,
                   long style = 0,
-                  const wxString& name = wxASCII_STR(wxHtmlListBoxNameStr));
+                  const std::string& name = wxHtmlListBoxNameStr);
 
     wxHtmlListBox(const wxHtmlListBox&) = delete;
     wxHtmlListBox& operator=(const wxHtmlListBox&) = delete;
@@ -68,7 +68,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
-                const wxString& name = wxASCII_STR(wxHtmlListBoxNameStr));
+                const std::string& name = wxHtmlListBoxNameStr);
 
     // destructor cleans up whatever resources we use
     ~wxHtmlListBox() override;
@@ -216,7 +216,7 @@ public:
                         const std::vector<std::string>& choices = {},
                         long style = wxHLB_DEFAULT_STYLE,
                         const wxValidator& validator = wxDefaultValidator,
-                        const wxString& name = wxASCII_STR(wxSimpleHtmlListBoxNameStr))
+                        const std::string& name = wxSimpleHtmlListBoxNameStr)
     {
         Create(parent, id, pos, size, choices, style, validator, name);
     }
@@ -227,7 +227,7 @@ public:
                 const std::vector<std::string>& choices,
                 long style = wxHLB_DEFAULT_STYLE,
                 const wxValidator& validator = wxDefaultValidator,
-                const wxString& name = wxASCII_STR(wxSimpleHtmlListBoxNameStr));
+                const std::string& name = wxSimpleHtmlListBoxNameStr);
 
     ~wxSimpleHtmlListBox() override;
 

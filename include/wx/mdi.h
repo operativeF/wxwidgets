@@ -46,11 +46,11 @@ public:
 
     bool Create(wxWindow *parent,
                 wxWindowID winid,
-                const wxString& title,
+                const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
-                const wxString& name = wxASCII_STR(wxFrameNameStr));
+                const std::string& name = wxFrameNameStr);
      */
 
 #if wxUSE_MENUS
@@ -150,11 +150,11 @@ public:
 
     bool Create(wxMDIParentFrame *parent,
                 wxWindowID id,
-                const wxString& title,
+                const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_FRAME_STYLE,
-                const wxString& name = wxASCII_STR(wxFrameNameStr));
+                const std::string& name = wxFrameNameStr);
 
         And setting m_mdiParent to parent parameter.
      */

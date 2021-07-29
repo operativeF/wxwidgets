@@ -30,12 +30,12 @@ public:
 
     wxCollapsibleHeaderCtrlBase(wxWindow *parent,
         wxWindowID id,
-        const wxString& label,
+        const std::string& label,
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
         long style = wxBORDER_NONE,
         const wxValidator& validator = wxDefaultValidator,
-        const wxString& name = wxASCII_STR(wxCollapsibleHeaderCtrlNameStr))
+        const std::string& name = wxCollapsibleHeaderCtrlNameStr)
     {
         Create(parent, id, label, pos, size, style, validator, name);
     }
@@ -47,12 +47,12 @@ public:
 
     [[maybe_unused]] bool Create(wxWindow *parent,
         wxWindowID id,
-        const wxString& label,
+        const std::string& label,
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
         long style = wxBORDER_NONE,
         const wxValidator& validator = wxDefaultValidator,
-        const wxString& name = wxASCII_STR(wxCollapsibleHeaderCtrlNameStr))
+        const std::string& name = wxCollapsibleHeaderCtrlNameStr)
     {
         if ( !wxControl::Create(parent, id, pos, size, style, validator, name) )
             return false;
@@ -87,12 +87,12 @@ public:
 
     wxCollapsibleHeaderCtrl(wxWindow *parent,
         wxWindowID id,
-        const wxString& label,
+        const std::string& label,
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
         long style = wxBORDER_NONE,
         const wxValidator& validator = wxDefaultValidator,
-        const wxString& name = wxASCII_STR(wxCollapsibleHeaderCtrlNameStr))
+        const std::string& name = wxCollapsibleHeaderCtrlNameStr)
     {
         Create(parent, id, label, pos, size, style, validator, name);
     }

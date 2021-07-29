@@ -101,10 +101,10 @@ wxBEGIN_EVENT_TABLE(wxEditableListBox, wxPanel)
 wxEND_EVENT_TABLE()
 
 bool wxEditableListBox::Create(wxWindow *parent, wxWindowID id,
-                          const wxString& label,
+                          const std::string& label,
                           const wxPoint& pos, const wxSize& size,
                           long style,
-                          const wxString& name)
+                          const std::string& name)
 {
     if (!wxPanel::Create(parent, id, pos, size, wxTAB_TRAVERSAL, name))
         return false;

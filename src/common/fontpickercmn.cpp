@@ -43,11 +43,14 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxFontPickerEvent, wxCommandEvent);
 // wxFontPickerCtrl
 // ----------------------------------------------------------------------------
 
-bool wxFontPickerCtrl::Create( wxWindow *parent, wxWindowID id,
-                        const wxFont &initial,
-                        const wxPoint &pos, const wxSize &size,
-                        long style, const wxValidator& validator,
-                        const wxString &name )
+bool wxFontPickerCtrl::Create( wxWindow *parent,
+                               wxWindowID id,
+                               const wxFont &initial,
+                               const wxPoint &pos,
+                               const wxSize &size,
+                               long style,
+                               const wxValidator& validator,
+                               const std::string& name )
 {
     if (!wxPickerBase::CreateBase(parent, id,
                                   Font2String(initial.IsOk() ? initial

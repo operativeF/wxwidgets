@@ -65,7 +65,7 @@ public:
                     const wxPoint& pos = wxDefaultPosition,
                     const wxSize& size = wxDefaultSize,
                     long style = 0,
-                    const wxString& name = wxASCII_STR(wxAddRemoveCtrlNameStr))
+                    const std::string& name = wxAddRemoveCtrlNameStr)
     {
         Create(parent, winid, pos, size, style, name);
     }
@@ -80,7 +80,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
-                const wxString& name = wxASCII_STR(wxAddRemoveCtrlNameStr));
+                const std::string& name = wxAddRemoveCtrlNameStr);
 
     ~wxAddRemoveCtrl() override;
 

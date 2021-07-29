@@ -169,7 +169,7 @@ protected:
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         long style = wxAC_DEFAULT_STYLE,
-                        const wxString& name = wxASCII_STR(wxAnimationCtrlNameStr))
+                        const std::string& name = wxAnimationCtrlNameStr)
             : wxGenericAnimationCtrl(parent, id, anim, pos, size, style, name)
             {}
 

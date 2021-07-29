@@ -2045,7 +2045,7 @@ wxString GetAppropriateTitle(const wxView *view, const wxString& titleGiven)
 
 } // anonymous namespace
 
-wxDocPrintout::wxDocPrintout(wxView *view, const wxString& title)
+wxDocPrintout::wxDocPrintout(wxView *view, const std::string& title)
              : wxPrintout(GetAppropriateTitle(view, title)),
                m_printoutView(view)
 {
