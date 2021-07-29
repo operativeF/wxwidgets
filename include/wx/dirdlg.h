@@ -87,8 +87,9 @@ public:
     virtual const std::string& GetMessage() const { return m_message; }
     virtual const std::string& GetPath() const
     {
-        wxCHECK_MSG( !HasFlag(wxDD_MULTIPLE), "",
-                     "When using wxDD_MULTIPLE, must call GetPaths() instead" );
+        // FIXME: returns local variable.
+        //wxCHECK_MSG( !HasFlag(wxDD_MULTIPLE), "",
+        //             "When using wxDD_MULTIPLE, must call GetPaths() instead" );
         return m_path;
     }
 

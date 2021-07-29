@@ -133,7 +133,7 @@ public:
     //
     // this is called from the default right click handler for the controls
     // with wxHD_ALLOW_HIDE style
-    bool ShowColumnsMenu(const wxPoint& pt, const wxString& title = wxString());
+    bool ShowColumnsMenu(const wxPoint& pt, const std::string& title = {});
 
     // append the entries for all our columns to the given menu, with the
     // currently visible columns being checked

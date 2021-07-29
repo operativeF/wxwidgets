@@ -36,7 +36,7 @@ public:
                                wxHelpSearchMode mode = wxHELP_SEARCH_ALL) override;
     bool Quit() override;
 
-    wxString GetHelpFile() const { return m_helpFile; }
+    const std::string& GetHelpFile() const { return m_helpFile; }
 
     // helper of DisplayTextPopup(), also used in wxSimpleHelpProvider::ShowHelp
     static bool ShowContextHelpPopup(const wxString& text,
@@ -79,7 +79,7 @@ protected:
                                    wxWindow *window);
 
 
-    wxString m_helpFile;
+    std::string m_helpFile;
 
     wxDECLARE_DYNAMIC_CLASS(wxCHMHelpController);
 };

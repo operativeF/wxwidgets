@@ -45,11 +45,11 @@ public:
     // note that the setters must be called before Show()
 
     // set the title: short string, markup not allowed
-    void SetTitle(const wxString& title);
+    void SetTitle(const std::string& title);
 
     // set the text of the message: this is a longer string than the title and
     // some platforms allow simple HTML-like markup in it
-    void SetMessage(const wxString& message);
+    void SetMessage(const std::string& message);
 
     // set the parent for this notification: we'll be associated with the top
     // level parent of this window or, if this method is not called, with the
@@ -66,7 +66,7 @@ public:
 
     // Add a button to the notification, returns false if the platform does not support
     // actions in notifications
-    virtual bool AddAction(wxWindowID actionid, const wxString &label = wxString());
+    virtual bool AddAction(wxWindowID actionid, const std::string &label = {});
 
     // showing and hiding
     // ------------------

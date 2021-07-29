@@ -59,7 +59,7 @@ template<> void wxCollectionToVariantArray( wxMenuItemList const &theList,
 wxBEGIN_PROPERTIES_TABLE(wxMenu)
 wxEVENT_PROPERTY( Select, wxEVT_MENU, wxCommandEvent)
 
-wxPROPERTY( Title, wxString, SetTitle, GetTitle, wxString(), \
+wxPROPERTY( Title, std::string, SetTitle, GetTitle, "", \
            0 /*flags*/, wxT("Helpstring"), wxT("group") )
 
 wxREADONLY_PROPERTY_FLAGS( MenuStyle, wxMenuStyle, long, GetStyle, \
@@ -72,7 +72,7 @@ wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxMenu)
 
-wxDIRECT_CONSTRUCTOR_2( wxMenu, wxString, Title, long, MenuStyle  )
+wxDIRECT_CONSTRUCTOR_2( wxMenu, std::string, Title, long, MenuStyle  )
 
 wxDEFINE_FLAGS( wxMenuBarStyle )
 
@@ -104,13 +104,13 @@ wxBEGIN_PROPERTIES_TABLE(wxMenuInfoHelper)
 wxREADONLY_PROPERTY( Menu, wxMenu*, GetMenu, wxEMPTY_PARAMETER_VALUE, \
                     0 /*flags*/, wxT("Helpstring"), wxT("group"))
 
-wxREADONLY_PROPERTY( Title, wxString, GetTitle, wxString(), \
+wxREADONLY_PROPERTY( Title, std::string, GetTitle, "", \
                     0 /*flags*/, wxT("Helpstring"), wxT("group"))
 wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxMenuInfoHelper)
 
-wxCONSTRUCTOR_2( wxMenuInfoHelper, wxMenu*, Menu, wxString, Title )
+wxCONSTRUCTOR_2( wxMenuInfoHelper, wxMenu*, Menu, std::string, Title )
 
 wxCOLLECTION_TYPE_INFO( wxMenuInfoHelper *, wxMenuInfoHelperList ) ;
 
@@ -183,9 +183,9 @@ wxPROPERTY( Parent, wxMenu*, SetMenu, GetMenu, wxEMPTY_PARAMETER_VALUE, \
            0 /*flags*/, wxT("Helpstring"), wxT("group") )
 wxPROPERTY( Id, int, SetId, GetId, wxEMPTY_PARAMETER_VALUE, \
            0 /*flags*/, wxT("Helpstring"), wxT("group") )
-wxPROPERTY( ItemLabel, wxString, SetItemLabel, GetItemLabel, wxString(), \
+wxPROPERTY( ItemLabel, std::string, SetItemLabel, GetItemLabel, "", \
            0 /*flags*/, wxT("Helpstring"), wxT("group") )
-wxPROPERTY( Help, wxString, SetHelp, GetHelp, wxString(), \
+wxPROPERTY( Help, std::string, SetHelp, GetHelp, "", \
            0 /*flags*/, wxT("Helpstring"), wxT("group") )
 wxREADONLY_PROPERTY( Kind, wxItemKind, GetKind, wxEMPTY_PARAMETER_VALUE, \
                     0 /*flags*/, wxT("Helpstring"), wxT("group") )
@@ -201,8 +201,8 @@ wxEND_PROPERTIES_TABLE()
 
 wxEMPTY_HANDLERS_TABLE(wxMenuItem)
 
-wxDIRECT_CONSTRUCTOR_6( wxMenuItem, wxMenu*, Parent, int, Id, wxString, \
-                       Text, wxString, Help, wxItemKind, Kind, wxMenu*, SubMenu )
+wxDIRECT_CONSTRUCTOR_6( wxMenuItem, wxMenu*, Parent, int, Id, std::string, \
+                       Text, std::string, Help, wxItemKind, Kind, wxMenu*, SubMenu )
 
 // ----------------------------------------------------------------------------
 // wxMenuItemBase
@@ -275,7 +275,7 @@ std::optional<wxAcceleratorEntry> wxMenuItemBase::GetAccel() const
 
 void wxMenuItemBase::SetAccel(wxAcceleratorEntry *accel)
 {
-    wxString text = m_text.BeforeFirst(wxT('\t'));
+    std::string text = wx::utils::BeforeFirst(m_text, '\t');
     if ( accel )
     {
         text += wxT('\t');
@@ -287,7 +287,7 @@ void wxMenuItemBase::SetAccel(wxAcceleratorEntry *accel)
 
 #endif // wxUSE_ACCEL
 
-void wxMenuItemBase::SetItemLabel(const wxString& str)
+void wxMenuItemBase::SetItemLabel(const std::string& str)
 {
     m_text = str;
 
@@ -300,7 +300,7 @@ void wxMenuItemBase::SetItemLabel(const wxString& str)
     }
 }
 
-void wxMenuItemBase::SetHelp(const wxString& str)
+void wxMenuItemBase::SetHelp(const std::string& str)
 {
     m_help = str;
 
@@ -474,9 +474,9 @@ bool wxMenuBase::DoDestroy(wxMenuItem *item)
 // ----------------------------------------------------------------------------
 
 // Finds the item id matching the given string, wxNOT_FOUND if not found.
-int wxMenuBase::FindItem(const wxString& text) const
+int wxMenuBase::FindItem(const std::string& text) const
 {
-    wxString label = wxMenuItem::GetLabelText(text);
+    std::string label = wxMenuItem::GetLabelText(text);
     for ( wxMenuItemList::compatibility_iterator node = m_items.GetFirst();
           node;
           node = node->GetNext() )
@@ -800,7 +800,7 @@ bool wxMenuBase::IsChecked( int itemid ) const
     return item->IsChecked();
 }
 
-void wxMenuBase::SetLabel( int itemid, const wxString &label )
+void wxMenuBase::SetLabel( int itemid, const std::string &label )
 {
     wxMenuItem *item = FindItem(itemid);
 
@@ -809,16 +809,16 @@ void wxMenuBase::SetLabel( int itemid, const wxString &label )
     item->SetItemLabel(label);
 }
 
-wxString wxMenuBase::GetLabel( int itemid ) const
+std::string wxMenuBase::GetLabel( int itemid ) const
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_MSG( item, wxEmptyString, wxT("wxMenu::GetLabel: no such item") );
+    wxCHECK_MSG( item, "", wxT("wxMenu::GetLabel: no such item") );
 
     return item->GetItemLabel();
 }
 
-void wxMenuBase::SetHelpString( int itemid, const wxString& helpString )
+void wxMenuBase::SetHelpString( int itemid, const std::string& helpString )
 {
     wxMenuItem *item = FindItem(itemid);
 
@@ -827,11 +827,11 @@ void wxMenuBase::SetHelpString( int itemid, const wxString& helpString )
     item->SetHelp( helpString );
 }
 
-wxString wxMenuBase::GetHelpString( int itemid ) const
+std::string wxMenuBase::GetHelpString( int itemid ) const
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_MSG( item, wxEmptyString, wxT("wxMenu::GetHelpString: no such item") );
+    wxCHECK_MSG( item, "", wxT("wxMenu::GetHelpString: no such item") );
 
     return item->GetHelp();
 }
@@ -860,7 +860,7 @@ wxMenu *wxMenuBarBase::GetMenu(size_t pos) const
     return node->GetData();
 }
 
-bool wxMenuBarBase::Append(wxMenu *menu, const wxString& title)
+bool wxMenuBarBase::Append(wxMenu *menu, const std::string& title)
 {
     wxCHECK_MSG( menu, false, wxT("can't append NULL menu") );
     wxCHECK_MSG( !title.empty(), false, wxT("can't append menu with empty title") );
@@ -872,7 +872,7 @@ bool wxMenuBarBase::Append(wxMenu *menu, const wxString& title)
 }
 
 bool wxMenuBarBase::Insert(size_t pos, wxMenu *menu,
-                           const wxString& title)
+                           const std::string& title)
 {
     if ( pos == m_menus.GetCount() )
     {
@@ -893,7 +893,7 @@ bool wxMenuBarBase::Insert(size_t pos, wxMenu *menu,
 }
 
 wxMenu *wxMenuBarBase::Replace(size_t pos, wxMenu *menu,
-                               const wxString& WXUNUSED(title))
+                               const std::string& WXUNUSED(title))
 {
     wxCHECK_MSG( menu, nullptr, wxT("can't insert NULL menu") );
 
@@ -921,14 +921,14 @@ wxMenu *wxMenuBarBase::Remove(size_t pos)
     return menu;
 }
 
-int wxMenuBarBase::FindMenu(const wxString& title) const
+int wxMenuBarBase::FindMenu(const std::string& title) const
 {
-    wxString label = wxMenuItem::GetLabelText(title);
+    std::string label = wxMenuItem::GetLabelText(title);
 
     size_t count = GetMenuCount();
     for ( size_t i = 0; i < count; i++ )
     {
-        wxString title2 = GetMenuLabel(i);
+        std::string title2 = GetMenuLabel(i);
         if ( (title2 == title) ||
              (wxMenuItem::GetLabelText(title2) == label) )
         {
@@ -982,9 +982,9 @@ wxMenuItem *wxMenuBarBase::FindItem(int itemid, wxMenu **menu) const
     return item;
 }
 
-int wxMenuBarBase::FindMenuItem(const wxString& menu, const wxString& item) const
+int wxMenuBarBase::FindMenuItem(const std::string& menu, const std::string& item) const
 {
-    wxString label = wxMenuItem::GetLabelText(menu);
+    std::string label = wxMenuItem::GetLabelText(menu);
 
     int i = 0;
     wxMenuList::compatibility_iterator node;
@@ -1038,7 +1038,7 @@ bool wxMenuBarBase::IsEnabled(int itemid) const
     return item->IsEnabled();
 }
 
-void wxMenuBarBase::SetLabel(int itemid, const wxString& label)
+void wxMenuBarBase::SetLabel(int itemid, const std::string& label)
 {
     wxMenuItem *item = FindItem(itemid);
 
@@ -1047,17 +1047,17 @@ void wxMenuBarBase::SetLabel(int itemid, const wxString& label)
     item->SetItemLabel(label);
 }
 
-wxString wxMenuBarBase::GetLabel(int itemid) const
+std::string wxMenuBarBase::GetLabel(int itemid) const
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_MSG( item, wxEmptyString,
+    wxCHECK_MSG( item, "",
                  wxT("wxMenuBar::GetLabel(): no such item") );
 
     return item->GetItemLabel();
 }
 
-void wxMenuBarBase::SetHelpString(int itemid, const wxString& helpString)
+void wxMenuBarBase::SetHelpString(int itemid, const std::string& helpString)
 {
     wxMenuItem *item = FindItem(itemid);
 
@@ -1066,11 +1066,11 @@ void wxMenuBarBase::SetHelpString(int itemid, const wxString& helpString)
     item->SetHelp(helpString);
 }
 
-wxString wxMenuBarBase::GetHelpString(int itemid) const
+std::string wxMenuBarBase::GetHelpString(int itemid) const
 {
     wxMenuItem *item = FindItem(itemid);
 
-    wxCHECK_MSG( item, wxEmptyString,
+    wxCHECK_MSG( item, "",
                  wxT("wxMenuBar::GetHelpString(): no such item") );
 
     return item->GetHelp();

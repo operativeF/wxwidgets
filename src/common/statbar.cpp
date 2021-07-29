@@ -24,7 +24,7 @@
 // wxStatusBarPane implementation
 // ============================================================================
 
-bool wxStatusBarPane::SetText(const wxString& text)
+bool wxStatusBarPane::SetText(const std::string& text)
 {
     if ( text == m_text )
         return false;
@@ -59,7 +59,7 @@ bool wxStatusBarPane::SetText(const wxString& text)
     return true;
 }
 
-bool wxStatusBarPane::PushText(const wxString& text)
+bool wxStatusBarPane::PushText(const std::string& text)
 {
     // save the currently shown text
     m_arrStack.push_back(m_text);
@@ -77,7 +77,7 @@ bool wxStatusBarPane::PopText()
 {
     wxCHECK_MSG( !m_arrStack.empty(), false, "no status message to pop" );
 
-    const wxString text = m_arrStack.back();
+    const std::string text = m_arrStack.back();
 
     m_arrStack.pop_back();
 
@@ -248,7 +248,7 @@ void wxStatusBarBase::SetStatusText(const std::string& text, int number)
 
 std::string wxStatusBarBase::GetStatusText(int number) const
 {
-    wxCHECK_MSG( (unsigned)number < m_panes.size(), wxString(),
+    wxCHECK_MSG( (unsigned)number < m_panes.size(), "",
                     "invalid status bar field index" );
 
     return m_panes[number].GetText();

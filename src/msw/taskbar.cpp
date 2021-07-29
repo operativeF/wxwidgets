@@ -28,7 +28,10 @@
 #include "wx/msw/private.h"
 #include "wx/platinfo.h"
 #include "wx/taskbar.h"
+
 #include <cstring>
+
+#include "boost/nowide/convert.hpp"
 
 #ifndef NIN_BALLOONTIMEOUT
     #define NIN_BALLOONTIMEOUT      0x0404
@@ -133,7 +136,7 @@ wxTaskBarIcon::~wxTaskBarIcon()
 }
 
 // Operations
-bool wxTaskBarIcon::SetIcon(const wxIcon& icon, const wxString& tooltip)
+bool wxTaskBarIcon::SetIcon(const wxIcon& icon, const std::string& tooltip)
 {
     if ( !DoSetIcon(icon, tooltip,
                     m_iconAdded ? Operation_Modify : Operation_Add) )
@@ -150,7 +153,7 @@ bool wxTaskBarIcon::SetIcon(const wxIcon& icon, const wxString& tooltip)
 
 bool
 wxTaskBarIcon::DoSetIcon(const wxIcon& icon,
-                         const wxString& tooltip,
+                         const std::string& tooltip,
                          Operation operation)
 {
     // NB: we have to create the window lazily because of backward compatibility,
@@ -177,13 +180,13 @@ wxTaskBarIcon::DoSetIcon(const wxIcon& icon,
     notifyData.uFlags |= NIF_TIP;
     if ( !tooltip.empty() )
     {
-        wxStrlcpy(notifyData.szTip, tooltip.t_str(), WXSIZEOF(notifyData.szTip));
+        wxStrlcpy(notifyData.szTip, boost::nowide::widen(tooltip).c_str(), WXSIZEOF(notifyData.szTip));
     }
 
     switch ( operation )
     {
         case Operation_Add:
-            if ( !Shell_NotifyIcon(NIM_ADD, &notifyData) )
+            if ( !Shell_NotifyIconW(NIM_ADD, &notifyData) )
             {
                 wxLogLastError("Shell_NotifyIcon(NIM_ADD)");
                 return false;
@@ -191,7 +194,7 @@ wxTaskBarIcon::DoSetIcon(const wxIcon& icon,
             break;
 
         case Operation_Modify:
-            if ( !Shell_NotifyIcon(NIM_MODIFY, &notifyData) )
+            if ( !Shell_NotifyIconW(NIM_MODIFY, &notifyData) )
             {
                 wxLogLastError("Shell_NotifyIcon(NIM_MODIFY)");
                 return false;
@@ -199,8 +202,8 @@ wxTaskBarIcon::DoSetIcon(const wxIcon& icon,
             break;
 
         case Operation_TryBoth:
-            if ( !Shell_NotifyIcon(NIM_ADD, &notifyData) &&
-                    !Shell_NotifyIcon(NIM_MODIFY, &notifyData) )
+            if ( !Shell_NotifyIconW(NIM_ADD, &notifyData) &&
+                    !Shell_NotifyIconW(NIM_MODIFY, &notifyData) )
             {
                 wxLogLastError("Shell_NotifyIcon(NIM_ADD/NIM_MODIFY)");
                 return false;
@@ -214,8 +217,8 @@ wxTaskBarIcon::DoSetIcon(const wxIcon& icon,
 #if wxUSE_TASKBARICON_BALLOONS
 
 bool
-wxTaskBarIcon::ShowBalloon(const wxString& title,
-                           const wxString& text,
+wxTaskBarIcon::ShowBalloon(const std::string& title,
+                           const std::string& text,
                            unsigned msec,
                            int flags,
                            const wxIcon& icon)
@@ -231,7 +234,7 @@ wxTaskBarIcon::ShowBalloon(const wxString& title,
     notifyData.uFlags = 0;
     notifyData.uVersion = 3 /* NOTIFYICON_VERSION for Windows 2000/XP */;
 
-    if ( !Shell_NotifyIcon(NIM_SETVERSION, &notifyData) )
+    if ( !Shell_NotifyIconW(NIM_SETVERSION, &notifyData) )
     {
         wxLogLastError(wxT("Shell_NotifyIcon(NIM_SETVERSION)"));
     }
@@ -240,8 +243,8 @@ wxTaskBarIcon::ShowBalloon(const wxString& title,
     notifyData = NotifyIconData(hwnd);
     notifyData.uFlags |= NIF_INFO;
     notifyData.uTimeout = msec;
-    wxStrlcpy(notifyData.szInfo, text.t_str(), WXSIZEOF(notifyData.szInfo));
-    wxStrlcpy(notifyData.szInfoTitle, title.t_str(),
+    wxStrlcpy(notifyData.szInfo, boost::nowide::widen(text).c_str(), WXSIZEOF(notifyData.szInfo));
+    wxStrlcpy(notifyData.szInfoTitle, boost::nowide::widen(title).c_str(),
                 WXSIZEOF(notifyData.szInfoTitle));
 
     wxUnusedVar(icon); // It's only unused if not supported actually.
@@ -262,7 +265,7 @@ wxTaskBarIcon::ShowBalloon(const wxString& title,
     else if ( flags & wxICON_ERROR )
         notifyData.dwInfoFlags |= NIIF_ERROR;
 
-    bool ok = Shell_NotifyIcon(NIM_MODIFY, &notifyData) != 0;
+    bool ok = Shell_NotifyIconW(NIM_MODIFY, &notifyData) != 0;
     if ( !ok )
     {
         wxLogLastError(wxT("Shell_NotifyIcon(NIM_MODIFY)"));
@@ -282,7 +285,7 @@ bool wxTaskBarIcon::RemoveIcon()
 
     NotifyIconData notifyData(GetHwndOf(m_win));
 
-    bool ok = Shell_NotifyIcon(NIM_DELETE, &notifyData) != 0;
+    bool ok = Shell_NotifyIconW(NIM_DELETE, &notifyData) != 0;
     if ( !ok )
     {
         wxLogLastError(wxT("Shell_NotifyIcon(NIM_DELETE)"));
@@ -319,7 +322,7 @@ bool wxTaskBarIcon::PopupMenu(wxMenu *menu)
 
     bool rval = m_win->PopupMenu(menu, 0, 0);
 
-    ::PostMessage(GetHwndOf(m_win), WM_NULL, 0, 0L);
+    ::PostMessageW(GetHwndOf(m_win), WM_NULL, 0, 0L);
 
     m_win->PopEventHandler(false);
 
@@ -336,10 +339,10 @@ void wxTaskBarIcon::RegisterWindowMessages()
     if ( !s_registered )
     {
         // Taskbar restart msg will be sent to us if the icon needs to be redrawn
-        gs_msgRestartTaskbar = RegisterWindowMessage(wxT("TaskbarCreated"));
+        gs_msgRestartTaskbar = RegisterWindowMessageW(L"TaskbarCreated");
 
         // Also register the taskbar message here
-        gs_msgTaskbar = ::RegisterWindowMessage(wxT("wxTaskBarIconMessage"));
+        gs_msgTaskbar = ::RegisterWindowMessageW(L"wxTaskBarIconMessage");
 
         s_registered = true;
     }

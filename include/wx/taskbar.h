@@ -56,7 +56,7 @@ public:
 
     // Operations:
     virtual bool SetIcon(const wxIcon& icon,
-                         const wxString& tooltip = wxEmptyString) = 0;
+                         const std::string& tooltip = {}) = 0;
     virtual bool RemoveIcon() = 0;
     virtual bool PopupMenu(wxMenu *menu) = 0;
 

@@ -48,7 +48,7 @@ public:
     wxMenuItem& operator=(wxMenuItem&&) = default;
 
     // override base class virtuals
-    void SetItemLabel(const wxString& strName) override;
+    void SetItemLabel(const std::string& strName) override;
 
     void Enable(bool bDoEnable = true) override;
     void Check(bool bDoCheck = true) override;

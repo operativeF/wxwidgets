@@ -46,7 +46,7 @@ public:
 
     wxThumbBarButton(int id,
                      const wxIcon& icon,
-                     const wxString& tooltip = wxString(),
+                     const std::string& tooltip = {},
                      bool enable = true,
                      bool dismissOnClick = false,
                      bool hasBackground = true,
@@ -55,7 +55,7 @@ public:
 
     [[maybe_unused]] bool Create(int id,
                 const wxIcon& icon,
-                const wxString& tooltip = wxString(),
+                const std::string& tooltip = {},
                 bool enable = true,
                 bool dismissOnClick = false,
                 bool hasBackground = true,
@@ -63,7 +63,7 @@ public:
                 bool interactive = true);
     int GetID() const { return m_id; }
     const wxIcon& GetIcon() const { return m_icon; }
-    const wxString& GetTooltip() const { return m_tooltip; }
+    const std::string& GetTooltip() const { return m_tooltip; }
 
     bool IsEnable() const { return m_enable; }
     void Enable(bool enable = true);
@@ -91,7 +91,7 @@ private:
 
     int m_id{0};
     wxIcon m_icon;
-    wxString m_tooltip;
+    std::string m_tooltip;
     bool m_enable{true};
     bool m_dismissOnClick{false};
     bool m_hasBackground{true};
@@ -123,10 +123,10 @@ public:
     virtual void PulseProgress() = 0;
     virtual void Show(bool show = true) = 0;
     virtual void Hide() = 0;
-    virtual void SetThumbnailTooltip(const wxString& tooltip) = 0;
+    virtual void SetThumbnailTooltip(const std::string& tooltip) = 0;
     virtual void SetProgressState(wxTaskBarButtonState state) = 0;
     virtual void SetOverlayIcon(const wxIcon& icon,
-                                const wxString& description = wxString()) = 0;
+                                const std::string& description = {}) = 0;
     virtual void SetThumbnailClip(const wxRect& rect) = 0;
     virtual void SetThumbnailContents(const wxWindow *child) = 0;
     virtual bool InsertThumbBarButton(size_t pos, wxThumbBarButton *button) = 0;
@@ -152,11 +152,11 @@ class WXDLLIMPEXP_CORE wxTaskBarJumpListItem
 public:
     wxTaskBarJumpListItem(wxTaskBarJumpListCategory *parentCategory = nullptr,
         wxTaskBarJumpListItemType type = wxTaskBarJumpListItemType::Separator,
-        const wxString& title = wxEmptyString,
-        const wxString& filePath = wxEmptyString,
-        const wxString& arguments = wxEmptyString,
-        const wxString& tooltip = wxEmptyString,
-        const wxString& iconPath = wxEmptyString,
+        const std::string& title = {},
+        const std::string& filePath = {},
+        const std::string& arguments = {},
+        const std::string& tooltip = {},
+        const std::string& iconPath = {},
         int iconIndex = 0);
 
    wxTaskBarJumpListItem(const wxTaskBarJumpListItem&) = delete;
@@ -166,16 +166,16 @@ public:
 
     wxTaskBarJumpListItemType GetType() const;
     void SetType(wxTaskBarJumpListItemType type);
-    const wxString& GetTitle() const;
-    void SetTitle(const wxString& title);
-    const wxString& GetFilePath() const;
-    void SetFilePath(const wxString& filePath);
-    const wxString& GetArguments() const;
-    void SetArguments(const wxString& arguments);
-    const wxString& GetTooltip() const;
-    void SetTooltip(const wxString& tooltip);
-    const wxString& GetIconPath() const;
-    void SetIconPath(const wxString& iconPath);
+    const std::string& GetTitle() const;
+    void SetTitle(const std::string& title);
+    const std::string& GetFilePath() const;
+    void SetFilePath(const std::string& filePath);
+    const std::string& GetArguments() const;
+    void SetArguments(const std::string& arguments);
+    const std::string& GetTooltip() const;
+    void SetTooltip(const std::string& tooltip);
+    const std::string& GetIconPath() const;
+    void SetIconPath(const std::string& iconPath);
     int GetIconIndex() const;
     void SetIconIndex(int iconIndex);
     wxTaskBarJumpListCategory* GetCategory() const;
@@ -184,11 +184,11 @@ public:
 private:
     wxTaskBarJumpListCategory *m_parentCategory;
     wxTaskBarJumpListItemType m_type;
-    wxString m_title;
-    wxString m_filePath;
-    wxString m_arguments;
-    wxString m_tooltip;
-    wxString m_iconPath;
+    std::string m_title;
+    std::string m_filePath;
+    std::string m_arguments;
+    std::string m_tooltip;
+    std::string m_iconPath;
     int      m_iconIndex{0};
 };
 
@@ -198,7 +198,7 @@ class WXDLLIMPEXP_CORE wxTaskBarJumpListCategory
 {
 public:
     wxTaskBarJumpListCategory(wxTaskBarJumpList *parent = nullptr,
-                              const wxString& title = wxEmptyString);
+                              const std::string& title = {});
     virtual ~wxTaskBarJumpListCategory();
 
    wxTaskBarJumpListCategory(const wxTaskBarJumpListCategory&) = delete;
@@ -212,8 +212,8 @@ public:
     wxTaskBarJumpListItem* FindItemByPosition(size_t pos) const;
     wxTaskBarJumpListItem* Insert(size_t pos, wxTaskBarJumpListItem *item);
     wxTaskBarJumpListItem* Prepend(wxTaskBarJumpListItem *item);
-    void SetTitle(const wxString& title);
-    const wxString& GetTitle() const;
+    void SetTitle(const std::string& title);
+    const std::string& GetTitle() const;
     const wxTaskBarJumpListItems& GetItems() const;
 
 private:
@@ -223,7 +223,7 @@ private:
 
     wxTaskBarJumpList *m_parent;
     wxTaskBarJumpListItems m_items;
-    wxString m_title;
+    std::string m_title;
 };
 
 using wxTaskBarJumpListCategories = std::vector<wxTaskBarJumpListCategory *>;
@@ -231,7 +231,7 @@ using wxTaskBarJumpListCategories = std::vector<wxTaskBarJumpListCategory *>;
 class WXDLLIMPEXP_CORE wxTaskBarJumpList
 {
 public:
-    wxTaskBarJumpList(const wxString& appID = wxEmptyString);
+    wxTaskBarJumpList(const std::string& appID = {});
     virtual ~wxTaskBarJumpList();
 
    wxTaskBarJumpList(const wxTaskBarJumpList&) = delete;
@@ -250,8 +250,8 @@ public:
     const wxTaskBarJumpListCategories& GetCustomCategories() const;
 
     void AddCustomCategory(wxTaskBarJumpListCategory* category);
-    wxTaskBarJumpListCategory* RemoveCustomCategory(const wxString& title);
-    void DeleteCustomCategory(const wxString& title);
+    wxTaskBarJumpListCategory* RemoveCustomCategory(const std::string& title);
+    void DeleteCustomCategory(const std::string& title);
 
 private:
     friend class wxTaskBarJumpListCategory;

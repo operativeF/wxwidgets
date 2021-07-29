@@ -1219,7 +1219,7 @@ wxString wxStripMenuCodes(const wxString& in, int flags)
  */
 
 wxWindow *
-wxFindWindowByLabel (const wxString& title, wxWindow * parent)
+wxFindWindowByLabel (const std::string& title, wxWindow * parent)
 {
     return wxWindow::FindWindowByLabel( title, parent );
 }

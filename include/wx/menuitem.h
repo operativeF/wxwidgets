@@ -66,11 +66,11 @@ public:
     //     any), i.e. it may contain '&' or '_' or "\t..." and thus is
     //     different from the item's text which only contains the text shown
     //     in the menu. This used to be called SetText.
-    virtual void SetItemLabel(const wxString& str);
+    virtual void SetItemLabel(const std::string& str);
 
     // return the item label including any mnemonics and accelerators.
     // This used to be called GetText.
-    virtual wxString GetItemLabel() const { return m_text; }
+    virtual std::string GetItemLabel() const { return m_text; }
 
     // return just the text of the item label, without any mnemonics
     // This used to be called GetLabel.
@@ -108,13 +108,13 @@ public:
     void Toggle() { Check(!m_isChecked); }
 
     // help string (displayed in the status bar by default)
-    void SetHelp(const wxString& str);
-    const wxString& GetHelp() const { return m_help; }
+    void SetHelp(const std::string& str);
+    const std::string& GetHelp() const { return m_help; }
 
 #if wxUSE_ACCEL
     // extract the accelerator from the given menu string, return NULL if none
     // found
-    static std::unique_ptr<wxAcceleratorEntry> GetAccelFromString(const wxString& label);
+    static std::unique_ptr<wxAcceleratorEntry> GetAccelFromString(const std::string& label);
 
     virtual std::optional<wxAcceleratorEntry> GetAccel() const;
 
@@ -138,7 +138,7 @@ protected:
     wxWindowIDRef m_id;             // numeric id of the item >= 0 or wxID_ANY or wxID_SEPARATOR
     wxMenu       *m_parentMenu,     // the menu we belong to
                  *m_subMenu;        // our sub menu or NULL
-    wxString      m_text,           // label of the item
+    std::string      m_text,           // label of the item
                   m_help;           // the help string for the item
     wxItemKind    m_kind;           // separator/normal/check/radio item?
     bool          m_isChecked;      // is checked?

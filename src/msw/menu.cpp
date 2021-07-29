@@ -36,7 +36,12 @@
 // other standard headers
 #include <cstring>
 
+#include "wx/stringutils.h"
+
 #include "wx/dynlib.h"
+
+#include "boost/nowide/convert.hpp"
+#include "boost/nowide/stackstring.hpp"
 
 // ----------------------------------------------------------------------------
 // global variables
@@ -63,7 +68,7 @@ void SetDefaultMenuItem(HMENU hmenu, UINT id)
     mii.fMask = MIIM_STATE;
     mii.fState = MFS_DEFAULT;
 
-    if ( !::SetMenuItemInfo(hmenu, id, FALSE, &mii) )
+    if ( !::SetMenuItemInfoW(hmenu, id, FALSE, &mii) )
     {
         wxLogLastError(wxT("SetMenuItemInfo"));
     }
@@ -83,7 +88,7 @@ void SetOwnerDrawnMenuItem(HMENU hmenu,
     if ( reinterpret_cast<wxMenuItem*>(data)->IsSeparator() )
         mii.fType |= MFT_SEPARATOR;
 
-    if ( !::SetMenuItemInfo(hmenu, id, byPositon, &mii) )
+    if ( !::SetMenuItemInfoW(hmenu, id, byPositon, &mii) )
     {
         wxLogLastError(wxT("SetMenuItemInfo"));
     }
@@ -300,7 +305,7 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
 
 
     // prepare to insert the item in the menu
-    wxString itemText = pItem->GetItemLabel();
+    std::string itemText = pItem->GetItemLabel();
     LPCTSTR pData = nullptr;
     if ( pos == (size_t)-1 )
     {
@@ -383,7 +388,8 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
                 }
 
                 mii.cch = itemText.length();
-                mii.dwTypeData = wxMSW_CONV_LPTSTR(itemText);
+                boost::nowide::wstackstring stackItem(itemText.c_str());
+                mii.dwTypeData = stackItem.get();
 
                 if ( flags & MF_POPUP )
                 {
@@ -416,7 +422,7 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
 
                 mii.dwItemData = reinterpret_cast<ULONG_PTR>(pItem);
 
-                ok = ::InsertMenuItem(GetHmenu(), pos, TRUE /* by pos */, &mii);
+                ok = ::InsertMenuItemW(GetHmenu(), pos, TRUE /* by pos */, &mii);
                 if ( !ok )
                 {
                     wxLogLastError(wxT("InsertMenuItem()"));
@@ -516,7 +522,7 @@ bool wxMenu::DoInsertOrAppend(wxMenuItem *pItem, size_t pos)
     // item might have already been inserted by InsertMenuItem() above
     if ( !ok )
     {
-        if ( !::InsertMenu(GetHmenu(), pos, flags | MF_BYPOSITION, id, pData) )
+        if ( !::InsertMenuW(GetHmenu(), pos, flags | MF_BYPOSITION, id, pData) )
         {
             wxLogLastError(wxT("InsertMenu[Item]()"));
 
@@ -664,7 +670,7 @@ void wxMenu::CalculateMaxAccelWidth()
 // set wxMenu title
 // ---------------------------------------------------------------------------
 
-void wxMenu::SetTitle(const wxString& label)
+void wxMenu::SetTitle(const std::string& label)
 {
     bool hasNoTitle = m_title.empty();
     m_title = label;
@@ -675,9 +681,9 @@ void wxMenu::SetTitle(const wxString& label)
     {
         if ( !label.empty() )
         {
-            if ( !::InsertMenu(hMenu, 0u, MF_BYPOSITION | MF_STRING,
-                               (UINT_PTR)idMenuTitle, m_title.t_str()) ||
-                 !::InsertMenu(hMenu, 1u, MF_BYPOSITION, (unsigned)-1, nullptr) )
+            if ( !::InsertMenuW(hMenu, 0u, MF_BYPOSITION | MF_STRING,
+                               (UINT_PTR)idMenuTitle, boost::nowide::widen(m_title).c_str()) ||
+                 !::InsertMenuW(hMenu, 1u, MF_BYPOSITION, (unsigned)-1, nullptr) )
             {
                 wxLogLastError(wxT("InsertMenu"));
             }
@@ -697,9 +703,9 @@ void wxMenu::SetTitle(const wxString& label)
         else
         {
             // modify the title
-            if ( !ModifyMenu(hMenu, 0u,
+            if ( !ModifyMenuW(hMenu, 0u,
                              MF_BYPOSITION | MF_STRING,
-                             (UINT_PTR)idMenuTitle, m_title.t_str()) )
+                             (UINT_PTR)idMenuTitle, boost::nowide::widen(m_title).c_str()) )
             {
                 wxLogLastError(wxT("ModifyMenu"));
             }
@@ -796,7 +802,7 @@ wxMenuBar::wxMenuBar( long WXUNUSED(style) )
     m_eventHandler = this;
 }
 
-wxMenuBar::wxMenuBar(size_t count, wxMenu *menus[], const wxString titles[], long WXUNUSED(style))
+wxMenuBar::wxMenuBar(size_t count, wxMenu *menus[], const std::string titles[], long WXUNUSED(style))
 {
     m_eventHandler = this;
 
@@ -854,9 +860,9 @@ WXHMENU wxMenuBar::Create()
               it != m_menus.end();
               ++it )
         {
-            if ( !::AppendMenu((HMENU)m_hMenu, MF_POPUP | MF_STRING,
+            if ( !::AppendMenuW((HMENU)m_hMenu, MF_POPUP | MF_STRING,
                                (UINT_PTR)(*it)->GetHMenu(),
-                               (*it)->GetTitle().t_str()) )
+                               boost::nowide::widen((*it)->GetTitle()).c_str()) )
             {
                 wxLogLastError(wxT("AppendMenu"));
             }
@@ -913,7 +919,7 @@ bool wxMenuBar::IsEnabledTop(size_t pos) const
     wxCHECK_MSG( pos < GetMenuCount(), false, wxS("invalid menu index") );
     WinStruct<MENUITEMINFO> mii;
     mii.fMask = MIIM_STATE;
-    if ( !::GetMenuItemInfo(GetHmenu(), pos, TRUE, &mii) )
+    if ( !::GetMenuItemInfoW(GetHmenu(), pos, TRUE, &mii) )
     {
         wxLogLastError(wxS("GetMenuItemInfo(menubar)"));
     }
@@ -921,7 +927,7 @@ bool wxMenuBar::IsEnabledTop(size_t pos) const
     return !(mii.fState & MFS_GRAYED);
 }
 
-void wxMenuBar::SetMenuLabel(size_t pos, const wxString& label)
+void wxMenuBar::SetMenuLabel(size_t pos, const std::string& label)
 {
     wxCHECK_RET( pos < GetMenuCount(), wxT("invalid menu index") );
 
@@ -955,8 +961,8 @@ void wxMenuBar::SetMenuLabel(size_t pos, const wxString& label)
         id = pos;
     }
 
-    if ( ::ModifyMenu(GetHmenu(), mswpos, MF_BYPOSITION | MF_STRING | flagsOld,
-                      id, label.t_str()) == (int)0xFFFFFFFF )
+    if ( ::ModifyMenuW(GetHmenu(), mswpos, MF_BYPOSITION | MF_STRING | flagsOld,
+                      id, boost::nowide::widen(label).c_str()) == (int)0xFFFFFFFF )
     {
         wxLogLastError(wxT("ModifyMenu"));
     }
@@ -964,9 +970,9 @@ void wxMenuBar::SetMenuLabel(size_t pos, const wxString& label)
     Refresh();
 }
 
-wxString wxMenuBar::GetMenuLabel(size_t pos) const
+std::string wxMenuBar::GetMenuLabel(size_t pos) const
 {
-    wxCHECK_MSG( pos < GetMenuCount(), wxEmptyString,
+    wxCHECK_MSG( pos < GetMenuCount(), "",
                  wxT("invalid menu index in wxMenuBar::GetMenuLabel") );
 
     return m_menus[pos]->GetTitle();
@@ -976,7 +982,7 @@ wxString wxMenuBar::GetMenuLabel(size_t pos) const
 // wxMenuBar construction
 // ---------------------------------------------------------------------------
 
-wxMenu *wxMenuBar::Replace(size_t pos, wxMenu *menu, const wxString& title)
+wxMenu *wxMenuBar::Replace(size_t pos, wxMenu *menu, const std::string& title)
 {
     wxMenu *menuOld = wxMenuBarBase::Replace(pos, menu, title);
     if ( !menuOld )
@@ -994,9 +1000,10 @@ wxMenu *wxMenuBar::Replace(size_t pos, wxMenu *menu, const wxString& title)
             wxLogLastError(wxT("RemoveMenu"));
         }
 
-        if ( !::InsertMenu(GetHmenu(), (UINT)mswpos,
+        if ( !::InsertMenuW(GetHmenu(), (UINT)mswpos,
                            MF_BYPOSITION | MF_POPUP | MF_STRING,
-                           (UINT_PTR)GetHmenuOf(menu), title.t_str()) )
+                           (UINT_PTR)GetHmenuOf(menu),
+                           boost::nowide::widen(title).c_str()) )
         {
             wxLogLastError(wxT("InsertMenu"));
         }
@@ -1016,7 +1023,7 @@ wxMenu *wxMenuBar::Replace(size_t pos, wxMenu *menu, const wxString& title)
     return menuOld;
 }
 
-bool wxMenuBar::Insert(size_t pos, wxMenu *menu, const wxString& title)
+bool wxMenuBar::Insert(size_t pos, wxMenu *menu, const std::string& title)
 {
     // Find out which MSW item before which we'll be inserting before
     // wxMenuBarBase::Insert is called and GetMenu(pos) is the new menu.
@@ -1056,9 +1063,10 @@ bool wxMenuBar::Insert(size_t pos, wxMenu *menu, const wxString& title)
             }
         }
 
-        if ( !::InsertMenu(GetHmenu(), pos + mswExtra,
+        if ( !::InsertMenuW(GetHmenu(), pos + mswExtra,
                            MF_BYPOSITION | MF_POPUP | MF_STRING,
-                           (UINT_PTR)GetHmenuOf(menu), title.t_str()) )
+                           (UINT_PTR)GetHmenuOf(menu),
+                           boost::nowide::widen(title).c_str()) )
         {
             wxLogLastError(wxT("InsertMenu"));
         }
@@ -1077,7 +1085,7 @@ bool wxMenuBar::Insert(size_t pos, wxMenu *menu, const wxString& title)
     return true;
 }
 
-bool wxMenuBar::Append(wxMenu *menu, const wxString& title)
+bool wxMenuBar::Append(wxMenu *menu, const std::string& title)
 {
     WXHMENU submenu = menu ? menu->GetHMenu() : nullptr;
     wxCHECK_MSG( submenu, false, wxT("can't append invalid menu to menubar") );
@@ -1089,8 +1097,10 @@ bool wxMenuBar::Append(wxMenu *menu, const wxString& title)
 
     if (GetHmenu())
     {
-        if ( !::AppendMenu(GetHmenu(), MF_POPUP | MF_STRING,
-                           (UINT_PTR)submenu, title.t_str()) )
+        if ( !::AppendMenuW(GetHmenu(),
+                            MF_POPUP | MF_STRING,
+                           (UINT_PTR)submenu,
+                           boost::nowide::widen(title).c_str()) )
         {
             wxLogLastError(wxT("AppendMenu"));
         }

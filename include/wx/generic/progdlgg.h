@@ -41,14 +41,14 @@ public:
                 wxWindow *parent = nullptr,
                 int style = wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 
-    virtual bool Update(int value, const wxString& newmsg = wxEmptyString, bool *skip = nullptr);
-    virtual bool Pulse(const wxString& newmsg = wxEmptyString, bool *skip = nullptr);
+    virtual bool Update(int value, const std::string& newmsg = {}, bool *skip = nullptr);
+    virtual bool Pulse(const std::string& newmsg = {}, bool *skip = nullptr);
 
     virtual void Resume();
 
     virtual int GetValue() const;
     virtual int GetRange() const;
-    virtual wxString GetMessage() const;
+    virtual std::string GetMessage() const;
 
     virtual void SetRange(int maximum);
 
@@ -158,10 +158,10 @@ private:
 
     // create the label with given text and another one to show the time nearby
     // as the next windows in the sizer, returns the created control
-    wxStaticText *CreateLabel(const wxString& text, wxSizer *sizer);
+    wxStaticText *CreateLabel(const std::string& text, wxSizer *sizer);
 
     // updates the label message
-    void UpdateMessage(const wxString &newmsg);
+    void UpdateMessage(const std::string& newmsg);
 
     // common part of Update() and Pulse(), returns true if not cancelled
     bool DoBeforeUpdate(bool *skip);

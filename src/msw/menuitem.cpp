@@ -35,7 +35,11 @@
 
 #include "wx/msw/private.h"
 #include "wx/msw/dc.h"
+#include "wx/stringutils.h"
 #include "wx/msw/uxtheme.h"
+
+#include "boost/nowide/convert.hpp"
+#include "boost/nowide/stackstring.hpp"
 
 // ---------------------------------------------------------------------------
 // macro
@@ -399,7 +403,7 @@ void MenuDrawData::Init(wxWindow const* window)
     }
 
     int value;
-    if ( ::SystemParametersInfo(SPI_GETKEYBOARDCUES, 0, &value, 0) == 0 )
+    if ( ::SystemParametersInfoW(SPI_GETKEYBOARDCUES, 0, &value, 0) == 0 )
     {
         // if it's not supported, we must be on an old Windows version
         // which always shows them
@@ -586,9 +590,9 @@ void wxMenuItem::Check(bool check)
     wxMenuItemBase::Check(check);
 }
 
-void wxMenuItem::SetItemLabel(const wxString& txt)
+void wxMenuItem::SetItemLabel(const std::string& txt)
 {
-    wxString text = txt;
+    std::string text = txt;
 
     // don't do anything if label didn't change
     if ( m_text == txt )
@@ -625,7 +629,7 @@ void wxMenuItem::SetItemLabel(const wxString& txt)
                  MIIM_DATA |
                  MIIM_BITMAP |
                  MIIM_FTYPE;
-    if ( !::GetMenuItemInfo(hMenu, itemPos, TRUE, &info) )
+    if ( !::GetMenuItemInfoW(hMenu, itemPos, TRUE, &info) )
     {
         wxLogLastError(wxT("GetMenuItemInfo"));
         return;
@@ -649,11 +653,12 @@ void wxMenuItem::SetItemLabel(const wxString& txt)
 #endif // wxUSE_OWNER_DRAWN
     {
         info.fMask |= MIIM_STRING;
-        info.dwTypeData = wxMSW_CONV_LPTSTR(m_text);
+        boost::nowide::wstackstring stackText(m_text.c_str());
+        info.dwTypeData = stackText.get();
         info.cch = m_text.length();
     }
 
-    if ( !::SetMenuItemInfo(hMenu, itemPos, TRUE, &info) )
+    if ( !::SetMenuItemInfoW(hMenu, itemPos, TRUE, &info) )
     {
         wxLogLastError(wxT("SetMenuItemInfo"));
     }
@@ -734,7 +739,7 @@ void wxMenuItem::DoSetBitmap(const wxBitmap& bmpNew, bool bChecked)
         mii.hbmpItem = GetHBitmapForMenu(Normal);
     }
 
-    if ( !::SetMenuItemInfo(GetHMenuOf(m_parentMenu), itemPos, TRUE, &mii) )
+    if ( !::SetMenuItemInfoW(GetHMenuOf(m_parentMenu), itemPos, TRUE, &mii) )
     {
         wxLogLastError(wxT("SetMenuItemInfo"));
     }
@@ -744,7 +749,7 @@ void wxMenuItem::DoSetBitmap(const wxBitmap& bmpNew, bool bChecked)
 
 int wxMenuItem::MeasureAccelWidth() const
 {
-    wxString accel = GetItemLabel().AfterFirst(wxT('\t'));
+    std::string accel = wx::utils::AfterFirst(GetItemLabel(), '\t');
 
     wxMemoryDC dc;
     wxFont font;
@@ -969,10 +974,10 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
         wxString text = GetName();
 
         SIZE textSize;
-        ::GetTextExtentPoint32(hdc, text.c_str(), text.length(), &textSize);
+        ::GetTextExtentPoint32W(hdc, text.c_str(), text.length(), &textSize);
 
         // item text name with mnemonic
-        text = GetItemLabel().BeforeFirst('\t');
+        text = wx::utils::BeforeFirst(GetItemLabel(), '\t');
 
         int flags = DST_PREFIXTEXT;
         // themes menu is using specified color for disabled labels
@@ -992,11 +997,12 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
         // ::SetTextAlign(hdc, TA_RIGHT) doesn't work with DSS_DISABLED or DSS_MONO
         // as the last parameter in DrawState() (at least with Windows98). So we have
         // to take care of right alignment ourselves.
-        wxString accel = GetItemLabel().AfterFirst(wxT('\t'));
+        std::string accel = wx::utils::AfterFirst(GetItemLabel(), '\t');
+
         if ( !accel.empty() )
         {
             SIZE accelSize;
-            ::GetTextExtentPoint32(hdc, accel.c_str(), accel.length(), &accelSize);
+            ::GetTextExtentPoint32W(hdc, boost::nowide::widen(accel).c_str(), accel.length(), &accelSize);
 
             flags = DST_TEXT;
             // themes menu is using specified color for disabled labels
@@ -1016,7 +1022,9 @@ bool wxMenuItem::OnDrawItem(wxDC& dc, const wxRect& rc,
 
             y = rcText.top + (rcText.bottom - rcText.top - accelSize.cy) / 2;
 
-            ::DrawState(hdc, nullptr, nullptr, wxMSW_CONV_LPARAM(accel),
+            boost::nowide::wstackstring stackAccel(accel.c_str());
+
+            ::DrawStateW(hdc, nullptr, nullptr, reinterpret_cast<LPARAM>(stackAccel.get()),
                         accel.length(), x, y, 0, 0, flags);
         }
     }

@@ -324,7 +324,7 @@ void wxGenericProgressDialog::EnsureActiveEventLoopExists()
 }
 
 wxStaticText *
-wxGenericProgressDialog::CreateLabel(const wxString& text, wxSizer *sizer)
+wxGenericProgressDialog::CreateLabel(const std::string& text, wxSizer *sizer)
 {
     wxStaticText *label = new wxStaticText(this, wxID_ANY, text);
     wxStaticText *value = new wxStaticText(this, wxID_ANY, _("unknown"));
@@ -344,7 +344,7 @@ wxGenericProgressDialog::CreateLabel(const wxString& text, wxSizer *sizer)
 }
 
 bool
-wxGenericProgressDialog::Update(int value, const wxString& newmsg, bool *skip)
+wxGenericProgressDialog::Update(int value, const std::string& newmsg, bool *skip)
 {
     if ( !DoBeforeUpdate(skip) )
         return false;
@@ -401,7 +401,7 @@ wxGenericProgressDialog::Update(int value, const wxString& newmsg, bool *skip)
             if ( newmsg.empty() )
             {
                 // also provide the finishing message if the application didn't
-                m_msg->SetLabel(_("Done."));
+                m_msg->SetLabel(_("Done.").ToStdString());
             }
 
             // allow the window to repaint:
@@ -435,7 +435,7 @@ wxGenericProgressDialog::Update(int value, const wxString& newmsg, bool *skip)
     return m_state != Canceled;
 }
 
-bool wxGenericProgressDialog::Pulse(const wxString& newmsg, bool *skip)
+bool wxGenericProgressDialog::Pulse(const std::string& newmsg, bool *skip)
 {
     if ( !DoBeforeUpdate(skip) )
         return false;
@@ -523,7 +523,7 @@ int wxGenericProgressDialog::GetRange() const
     return m_maximum;
 }
 
-wxString wxGenericProgressDialog::GetMessage() const
+std::string wxGenericProgressDialog::GetMessage() const
 {
     return m_msg->GetLabel();
 }
@@ -733,7 +733,7 @@ void wxGenericProgressDialog::EnableClose()
     }
 }
 
-void wxGenericProgressDialog::UpdateMessage(const wxString &newmsg)
+void wxGenericProgressDialog::UpdateMessage(const std::string& newmsg)
 {
     if ( !newmsg.empty() && newmsg != m_msg->GetLabel() )
     {

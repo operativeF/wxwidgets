@@ -21,21 +21,19 @@ class WXDLLIMPEXP_BASE wxIconLocationBase
 {
 public:
     // ctor takes the name of the file where the icon is
-    explicit wxIconLocationBase(const wxString& filename = wxEmptyString)
+    explicit wxIconLocationBase(const std::string& filename = {})
         : m_filename(filename) { }
-
-    // default copy ctor, assignment operator and dtor are ok
 
 
     // returns true if this object is valid/initialized
     bool IsOk() const { return !m_filename.empty(); }
 
     // set/get the icon file name
-    void SetFileName(const wxString& filename) { m_filename = filename; }
-    const wxString& GetFileName() const { return m_filename; }
+    void SetFileName(const std::string& filename) { m_filename = filename; }
+    const std::string& GetFileName() const { return m_filename; }
 
 private:
-    wxString m_filename;
+    std::string m_filename;
 };
 
 // under Windows the same file may contain several icons so we also store the
@@ -47,7 +45,7 @@ class WXDLLIMPEXP_BASE wxIconLocation : public wxIconLocationBase
 public:
     // ctor takes the name of the file where the icon is and the icons index in
     // the file
-    explicit wxIconLocation(const wxString& file = wxEmptyString, int num = 0);
+    explicit wxIconLocation(const std::string& file = {}, int num = 0);
 
     // set/get the icon index
     void SetIndex(int num) { m_index = num; }
@@ -58,7 +56,7 @@ private:
 };
 
 inline
-wxIconLocation::wxIconLocation(const wxString& file, int num)
+wxIconLocation::wxIconLocation(const std::string& file, int num)
               : wxIconLocationBase(file)
 {
     SetIndex(num);
@@ -70,7 +68,7 @@ wxIconLocation::wxIconLocation(const wxString& file, int num)
 class WXDLLIMPEXP_BASE wxIconLocation : public wxIconLocationBase
 {
 public:
-    explicit wxIconLocation(const wxString& filename = wxEmptyString)
+    explicit wxIconLocation(const std::string& filename = {})
         : wxIconLocationBase(filename) { }
 };
 

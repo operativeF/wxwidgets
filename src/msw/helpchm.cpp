@@ -105,7 +105,7 @@ wxCHMHelpController::CallHtmlHelp(wxWindow *win,
 
 bool wxCHMHelpController::DisplayContents()
 {
-    if (m_helpFile.IsEmpty())
+    if (m_helpFile.empty())
         return false;
 
     return CallHtmlHelp(HH_DISPLAY_TOC);
@@ -114,7 +114,7 @@ bool wxCHMHelpController::DisplayContents()
 // Use topic or HTML filename
 bool wxCHMHelpController::DisplaySection(const wxString& section)
 {
-    if (m_helpFile.IsEmpty())
+    if (m_helpFile.empty())
         return false;
 
     // Is this an HTML file or a keyword?
@@ -130,7 +130,7 @@ bool wxCHMHelpController::DisplaySection(const wxString& section)
 // Use context number
 bool wxCHMHelpController::DisplaySection(int section)
 {
-    if (m_helpFile.IsEmpty())
+    if (m_helpFile.empty())
         return false;
 
     // Treat -1 as a special context number that displays the index
@@ -195,7 +195,7 @@ bool wxCHMHelpController::DisplayBlock(long block)
 bool wxCHMHelpController::KeywordSearch(const wxString& k,
                                         wxHelpSearchMode WXUNUSED(mode))
 {
-    if (m_helpFile.IsEmpty())
+    if (m_helpFile.empty())
         return false;
 
     if (k.IsEmpty())

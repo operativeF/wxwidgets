@@ -638,7 +638,7 @@ WXDLLIMPEXP_CORE wxWindow* wxFindWindowAtPoint(const wxPoint& pt);
 // Find the window/widget with the given title or label.
 // Pass a parent to begin the search from, or NULL to look through
 // all windows.
-WXDLLIMPEXP_CORE wxWindow* wxFindWindowByLabel(const wxString& title, wxWindow *parent = nullptr);
+WXDLLIMPEXP_CORE wxWindow* wxFindWindowByLabel(const std::string& title, wxWindow *parent = nullptr);
 
 // NB: this function is obsolete, use wxWindow::FindWindowByName() instead
 //

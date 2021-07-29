@@ -45,7 +45,7 @@ public:
         // if we have a title, insert it in the beginning of the menu
         if ( !m_title.empty() )
         {
-            const wxString aTitle = m_title;
+            const std::string aTitle = m_title;
             m_title.clear(); // so that SetTitle() knows there was no title before
             SetTitle(aTitle);
         }
@@ -65,7 +65,7 @@ public:
         // if we have a title, insert it in the beginning of the menu
         if ( !m_title.empty() )
         {
-            const wxString title = m_title;
+            const std::string title = m_title;
             m_title.clear(); // so that SetTitle() knows there was no title before
             SetTitle(title);
         }
@@ -80,7 +80,7 @@ public:
 
     void Break() override;
 
-    void SetTitle(const wxString& title) override;
+    void SetTitle(const std::string& title) override;
 
     // MSW-only methods
     // ----------------
@@ -214,7 +214,7 @@ public:
         // FIXME: Unused under MSW
     wxMenuBar(long style);
         // menubar takes ownership of the menus arrays but copies the titles
-    wxMenuBar(size_t n, wxMenu *menus[], const wxString titles[], long style = 0);
+    wxMenuBar(size_t n, wxMenu *menus[], const std::string titles[], long style = 0);
     ~wxMenuBar() override;
 
     wxMenuBar(const wxMenuBar&) = delete;
@@ -223,15 +223,15 @@ public:
     wxMenuBar& operator=(wxMenuBar&&) = default;
 
     // menubar construction
-    bool Append( wxMenu *menu, const wxString &title ) override;
-    bool Insert(size_t pos, wxMenu *menu, const wxString& title) override;
-    wxMenu *Replace(size_t pos, wxMenu *menu, const wxString& title) override;
+    bool Append( wxMenu *menu, const std::string &title ) override;
+    bool Insert(size_t pos, wxMenu *menu, const std::string& title) override;
+    wxMenu *Replace(size_t pos, wxMenu *menu, const std::string& title) override;
     wxMenu *Remove(size_t pos) override;
 
     void EnableTop( size_t pos, bool flag ) override;
     bool IsEnabledTop(size_t pos) const override;
-    void SetMenuLabel( size_t pos, const wxString& label ) override;
-    wxString GetMenuLabel( size_t pos ) const override;
+    void SetMenuLabel( size_t pos, const std::string& label ) override;
+    std::string GetMenuLabel( size_t pos ) const override;
 
     // implementation from now on
     WXHMENU Create();

@@ -253,7 +253,7 @@ void wxHeaderCtrlBase::AddColumnsItems(wxMenu& menu, int idColumnsBase)
     }
 }
 
-bool wxHeaderCtrlBase::ShowColumnsMenu(const wxPoint& pt, const wxString& title)
+bool wxHeaderCtrlBase::ShowColumnsMenu(const wxPoint& pt, const std::string& title)
 {
     // construct the menu with the entries for all columns
     wxMenu menu;

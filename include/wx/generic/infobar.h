@@ -62,7 +62,7 @@ public:
 
     void Dismiss() override;
 
-    void AddButton(wxWindowID btnid, const wxString& label = wxString()) override;
+    void AddButton(wxWindowID btnid, const std::string& label = {}) override;
 
     void RemoveButton(wxWindowID btnid) override;
 

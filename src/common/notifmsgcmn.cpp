@@ -44,12 +44,12 @@ bool wxNotificationMessageBase::Close()
     return m_impl->Close();
 }
 
-void wxNotificationMessageBase::SetTitle(const wxString& title)
+void wxNotificationMessageBase::SetTitle(const std::string& title)
 {
     m_impl->SetTitle(title);
 }
 
-void wxNotificationMessageBase::SetMessage(const wxString& message)
+void wxNotificationMessageBase::SetMessage(const std::string& message)
 {
     m_impl->SetMessage(message);
 }
@@ -74,7 +74,7 @@ void wxNotificationMessageBase::SetIcon(const wxIcon& icon)
     m_impl->SetIcon(icon);
 }
 
-bool wxNotificationMessageBase::AddAction(wxWindowID actionid, const wxString &label)
+bool wxNotificationMessageBase::AddAction(wxWindowID actionid, const std::string &label)
 {
     return m_impl->AddAction(actionid, label);
 }

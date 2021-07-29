@@ -33,7 +33,7 @@ public:
     bool IsIconInstalled() const { return m_iconAdded; }
 
     // Operations
-    bool SetIcon(const wxIcon& icon, const wxString& tooltip = wxEmptyString) override;
+    bool SetIcon(const wxIcon& icon, const std::string& tooltip = {}) override;
     bool RemoveIcon() override;
     bool PopupMenu(wxMenu *menu) override;
 
@@ -51,8 +51,8 @@ public:
     //
     // return true if balloon was shown, false on error (incorrect parameters
     // or function unsupported by OS)
-    bool ShowBalloon(const wxString& title,
-                     const wxString& text,
+    bool ShowBalloon(const std::string& title,
+                     const std::string& text,
                      unsigned msec = 0,
                      int flags = 0,
                      const wxIcon& icon = wxNullIcon);
@@ -68,7 +68,7 @@ protected:
     wxTaskBarIconWindow *m_win{nullptr};
     bool                 m_iconAdded{false};
     wxIcon               m_icon;
-    wxString             m_strTooltip;
+    std::string             m_strTooltip;
 
 private:
     enum Operation
@@ -81,7 +81,7 @@ private:
     // Implementation of the public SetIcon() which may also be used when we
     // don't know if we should add a new icon or modify the existing one.
     bool DoSetIcon(const wxIcon& icon,
-                   const wxString& tooltip,
+                   const std::string& tooltip,
                    Operation operation);
 
 public:

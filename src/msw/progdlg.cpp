@@ -67,9 +67,9 @@ struct wxProgressDialogSharedData
     int m_value{0};
     int m_range;
     std::string m_title;
-    wxString m_message;
-    wxString m_expandedInformation;
-    wxString m_labelCancel; // Privately used by callback.
+    std::string m_message;
+    std::string m_expandedInformation;
+    std::string m_labelCancel; // Privately used by callback.
     unsigned long m_timeStop;
     wxIcon m_iconSmall;
     wxIcon m_iconBig;
@@ -186,9 +186,9 @@ BOOL CALLBACK DisplayCloseButton(HWND hwnd, LPARAM lParam)
 
     if ( wxGetWindowText( hwnd ) == sharedData->m_labelCancel )
     {
-        sharedData->m_labelCancel = _("Close");
-        SendMessage( hwnd, WM_SETTEXT, 0,
-                     wxMSW_CONV_LPARAM(sharedData->m_labelCancel) );
+        sharedData->m_labelCancel = _("Close").ToStdString();
+        ::SendMessageW( hwnd, WM_SETTEXT, 0,
+                     reinterpret_cast<LPARAM>(boost::nowide::widen(sharedData->m_labelCancel).c_str()));
 
         return FALSE;
     }
@@ -201,7 +201,7 @@ BOOL CALLBACK DisplayCloseButton(HWND hwnd, LPARAM lParam)
 // so should be kept in the same state.
 void EnableCloseButtons(HWND hwnd, bool enable)
 {
-    ::SendMessage(hwnd, TDM_ENABLE_BUTTON, IDCANCEL, enable ? TRUE : FALSE);
+    ::SendMessageW(hwnd, TDM_ENABLE_BUTTON, IDCANCEL, enable ? TRUE : FALSE);
 
     wxTopLevelWindow::MSWEnableCloseButton(hwnd, enable);
 }
@@ -212,7 +212,7 @@ void PerformNotificationUpdates(HWND hwnd,
     // Update the appropriate dialog fields.
     if ( sharedData->m_notifications & wxSPDD_RANGE_CHANGED )
     {
-        ::SendMessage( hwnd,
+        ::SendMessageW( hwnd,
                        TDM_SET_PROGRESS_BAR_RANGE,
                        0,
                        MAKELPARAM(0, sharedData->m_range) );
@@ -243,11 +243,11 @@ void PerformNotificationUpdates(HWND hwnd,
         // thread enters a modal event loop which does dispatch events and so
         // it's not a problem to have an animated transition in this particular
         // case.
-        ::SendMessage( hwnd,
+        ::SendMessageW( hwnd,
                        TDM_SET_PROGRESS_BAR_POS,
                        sharedData->m_value + 1,
                        0 );
-        ::SendMessage( hwnd,
+        ::SendMessageW( hwnd,
                        TDM_SET_PROGRESS_BAR_POS,
                        sharedData->m_value,
                        0 );
@@ -256,7 +256,7 @@ void PerformNotificationUpdates(HWND hwnd,
     if ( sharedData->m_notifications & wxSPDD_PBMARQUEE_CHANGED )
     {
         BOOL val = sharedData->m_progressBarMarquee ? TRUE : FALSE;
-        ::SendMessage( hwnd,
+        ::SendMessageW( hwnd,
                        TDM_SET_MARQUEE_PROGRESS_BAR,
                        val,
                        0 );
@@ -294,7 +294,7 @@ void PerformNotificationUpdates(HWND hwnd,
                        TDE_MAIN_INSTRUCTION,
                        wxMSW_CONV_LPARAM(title) );
 
-        ::SendMessage( hwnd,
+        ::SendMessageW( hwnd,
                        sharedData->m_msgChangeElementText,
                        TDE_CONTENT,
                        wxMSW_CONV_LPARAM(body) );
@@ -350,7 +350,7 @@ void PerformNotificationUpdates(HWND hwnd,
         if ( !(sharedData->m_style & wxPD_AUTO_HIDE) )
         {
             // Change Cancel into Close and activate the button.
-            ::SendMessage( hwnd, TDM_ENABLE_BUTTON, Id_SkipBtn, FALSE );
+            ::SendMessageW( hwnd, TDM_ENABLE_BUTTON, Id_SkipBtn, FALSE );
             EnableCloseButtons(hwnd, true);
             ::EnumChildWindows( hwnd, DisplayCloseButton,
                                 (LPARAM) sharedData );
@@ -450,7 +450,7 @@ wxProgressDialog::~wxProgressDialog()
 #endif // wxHAS_MSW_TASKDIALOG
 }
 
-bool wxProgressDialog::Update(int value, const wxString& newmsg, bool *skip)
+bool wxProgressDialog::Update(int value, const std::string& newmsg, bool *skip)
 {
 #ifdef wxHAS_MSW_TASKDIALOG
     if ( HasNativeTaskDialog() )
@@ -507,7 +507,7 @@ bool wxProgressDialog::Update(int value, const wxString& newmsg, bool *skip)
             if ( newmsg.empty() )
             {
                 // Provide the finishing message if the application didn't.
-                m_message = _("Done.");
+                m_message = _("Done.").ToStdString();
                 m_sharedData->m_message = m_message;
                 m_sharedData->m_notifications |= wxSPDD_MESSAGE_CHANGED;
             }
@@ -525,7 +525,7 @@ bool wxProgressDialog::Update(int value, const wxString& newmsg, bool *skip)
     return wxGenericProgressDialog::Update( value, newmsg, skip );
 }
 
-bool wxProgressDialog::Pulse(const wxString& newmsg, bool *skip)
+bool wxProgressDialog::Pulse(const std::string& newmsg, bool *skip)
 {
 #ifdef wxHAS_MSW_TASKDIALOG
     if ( HasNativeTaskDialog() )
@@ -672,7 +672,7 @@ int wxProgressDialog::GetValue() const
     return wxGenericProgressDialog::GetValue();
 }
 
-wxString wxProgressDialog::GetMessage() const
+std::string wxProgressDialog::GetMessage() const
 {
 #ifdef wxHAS_MSW_TASKDIALOG
     if ( HasNativeTaskDialog() )
@@ -904,13 +904,13 @@ bool wxProgressDialog::Show(bool show)
         if ( HasPDFlag(wxPD_CAN_ABORT) )
         {
             m_sharedData->m_state = Continue;
-            m_sharedData->m_labelCancel = _("Cancel");
+            m_sharedData->m_labelCancel = _("Cancel").ToStdString();
         }
         else // Dialog can't be cancelled.
         {
             // We still must have at least a single button in the dialog so
             // just don't call it "Cancel" in this case.
-            m_sharedData->m_labelCancel = _("Close");
+            m_sharedData->m_labelCancel = _("Close").ToStdString();
         }
 
         if ( HasPDFlag(wxPD_ELAPSED_TIME |
@@ -1059,7 +1059,7 @@ void* wxProgressDialogTaskRunner::Entry()
         if ( !m_sharedData.m_expandedInformation.empty() )
         {
             tdc.pszExpandedInformation =
-                m_sharedData.m_expandedInformation.t_str();
+                boost::nowide::widen(m_sharedData.m_expandedInformation).c_str();
 
             // If we have elapsed/estimated/... times to show, show them from
             // the beginning for consistency with the generic version and also

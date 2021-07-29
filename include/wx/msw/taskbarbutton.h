@@ -34,10 +34,10 @@ public:
     void PulseProgress() override;
     void Show(bool show = true) override;
     void Hide() override;
-    void SetThumbnailTooltip(const wxString& tooltip) override;
+    void SetThumbnailTooltip(const std::string& tooltip) override;
     void SetProgressState(wxTaskBarButtonState state) override;
     void SetOverlayIcon(const wxIcon& icon,
-        const wxString& description = wxString()) override;
+        const std::string& description = {}) override;
     void SetThumbnailClip(const wxRect& rect) override;
     void SetThumbnailContents(const wxWindow *child) override;
     bool InsertThumbBarButton(size_t pos,
@@ -64,9 +64,9 @@ private:
     int m_progressRange;
     int m_progressValue;
     wxTaskBarButtonState m_progressState;
-    wxString m_thumbnailTooltip;
+    std::string m_thumbnailTooltip;
     wxIcon m_overlayIcon;
-    wxString m_overlayIconDescription;
+    std::string m_overlayIconDescription;
     wxRect m_thumbnailClipRect;
     bool m_hasInitThumbnailToolbar;
 

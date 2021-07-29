@@ -42,21 +42,21 @@ public:
     wxAuiMDIParentFrame();
     wxAuiMDIParentFrame(wxWindow *parent,
                         wxWindowID winid,
-                        const wxString& title,
+                        const std::string& title,
                         const wxPoint& pos = wxDefaultPosition,
                         const wxSize& size = wxDefaultSize,
                         long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
-                        const wxString& name = wxASCII_STR(wxFrameNameStr));
+                        const std::string& name = wxFrameNameStr);
 
     ~wxAuiMDIParentFrame() override;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID winid,
-                const wxString& title,
+                const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_FRAME_STYLE | wxVSCROLL | wxHSCROLL,
-                const wxString& name = wxASCII_STR(wxFrameNameStr) );
+                const std::string& name = wxFrameNameStr);
 
     void SetArtProvider(wxAuiTabArt* provider);
     wxAuiTabArt* GetArtProvider();
@@ -127,20 +127,20 @@ public:
     wxAuiMDIChildFrame();
     wxAuiMDIChildFrame(wxAuiMDIParentFrame *parent,
                        wxWindowID winid,
-                       const wxString& title,
+                       const std::string& title,
                        const wxPoint& pos = wxDefaultPosition,
                        const wxSize& size = wxDefaultSize,
                        long style = wxDEFAULT_FRAME_STYLE,
-                       const wxString& name = wxASCII_STR(wxFrameNameStr));
+                       const std::string& name = wxFrameNameStr);
 
     ~wxAuiMDIChildFrame() override;
     [[maybe_unused]] bool Create(wxAuiMDIParentFrame *parent,
                 wxWindowID winid,
-                const wxString& title,
+                const std::string& title,
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxDEFAULT_FRAME_STYLE,
-                const wxString& name = wxASCII_STR(wxFrameNameStr));
+                const std::string& name = wxFrameNameStr);
 
 #if wxUSE_MENUS
     void SetMenuBar(wxMenuBar *menuBar) override;

@@ -37,7 +37,7 @@ public:
 
     // show the info bar with the given message and optionally an icon
     virtual void ShowMessage(const wxString& msg,
-                             int flags = wxICON_INFORMATION) = 0;
+                             int flags) = 0;
 
     // hide the info bar
     virtual void Dismiss() = 0;
@@ -45,7 +45,7 @@ public:
     // add an extra button to the bar, near the message (replacing the default
     // close button which is only shown if no extra buttons are used)
     virtual void AddButton(wxWindowID btnid,
-                           const wxString& label = wxString()) = 0;
+                           const std::string& label) = 0;
 
     // remove a button previously added by AddButton()
     virtual void RemoveButton(wxWindowID btnid) = 0;

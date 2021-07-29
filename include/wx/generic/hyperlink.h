@@ -141,7 +141,7 @@ private:
 
     // URL associated with the link. This is transmitted inside
     // the HyperlinkEvent fired when the user clicks on the label.
-    wxString m_url;
+    std::string m_url;
 
     // Foreground colours for various link types.
     // NOTE: wxWindow::m_backgroundColour is used for background,

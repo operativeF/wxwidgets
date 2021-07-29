@@ -59,7 +59,7 @@ public:
 
     int GetWidth() const { return m_nWidth; }
     int GetStyle() const { return m_nStyle; }
-    wxString GetText() const { return m_text; }
+    std::string GetText() const { return m_text; }
 
 
     // implementation-only from now on
@@ -74,11 +74,11 @@ public:
 
     // set text, return true if it changed or false if it was already set to
     // this value
-    bool SetText(const wxString& text);
+    bool SetText(const std::string& text);
 
     // save the existing text on top of our stack and make the new text
     // current; return true if the text really changed
-    bool PushText(const wxString& text);
+    bool PushText(const std::string& text);
 
     // restore the message saved by the last call to Push() (unless it was
     // changed by an intervening call to SetText()) and return true if we
@@ -88,13 +88,13 @@ public:
 private:
     int m_nStyle;
     int m_nWidth;     // may be negative, indicating a variable-width field
-    wxString m_text;
+    std::string m_text;
 
     // the array used to keep the previous values of this pane after a
     // PushStatusText() call, its top element is the value to restore after the
     // next PopStatusText() call while the currently shown value is always in
     // m_text
-    std::vector<wxString> m_arrStack;
+    std::vector<std::string> m_arrStack;
 
     // is the currently shown value shown with ellipsis in the status bar?
     bool m_bEllipsized;

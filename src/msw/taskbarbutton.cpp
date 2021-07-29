@@ -35,6 +35,9 @@
     #include "wx/dynlib.h"
 #endif // wxUSE_DYNLIB_CLASS
 
+#include "boost/nowide/convert.hpp"
+#include "boost/nowide/stackstring.hpp"
+
 // ----------------------------------------------------------------------------
 // Redefine the interfaces: ITaskbarList3, IObjectCollection,
 // ICustomDestinationList, IShellLink, IShellItem, IApplicationDocumentLists
@@ -379,17 +382,17 @@ bool AddShellLink(IObjectCollection *collection,
     if ( item.GetType() == wxTaskBarJumpListItemType::Task ||
          item.GetType() == wxTaskBarJumpListItemType::Destination )
     {
-        if ( !item.GetFilePath().IsEmpty() )
-            shellLink->SetPath(item.GetFilePath().wc_str());
-        if ( !item.GetArguments().IsEmpty() )
-            shellLink->SetArguments(item.GetArguments().wc_str());
-        if ( !item.GetIconPath().IsEmpty() )
+        if ( !item.GetFilePath().empty() )
+            shellLink->SetPath(boost::nowide::widen(item.GetFilePath()).c_str());
+        if ( !item.GetArguments().empty() )
+            shellLink->SetArguments(boost::nowide::widen(item.GetArguments()).c_str());
+        if ( !item.GetIconPath().empty() )
         {
-            shellLink->SetIconLocation(item.GetIconPath().wc_str(),
+            shellLink->SetIconLocation(boost::nowide::widen(item.GetIconPath()).c_str(),
                                         item.GetIconIndex());
         }
-        if ( !item.GetTooltip().IsEmpty() )
-            shellLink->SetDescription(item.GetTooltip().wc_str());
+        if ( !item.GetTooltip().empty() )
+            shellLink->SetDescription(boost::nowide::widen(item.GetTooltip()).c_str());
     }
 
     hr = shellLink->QueryInterface(wxIID_IPropertyStore,
@@ -404,7 +407,7 @@ bool AddShellLink(IObjectCollection *collection,
     if ( item.GetType() == wxTaskBarJumpListItemType::Task ||
          item.GetType() == wxTaskBarJumpListItemType::Destination )
     {
-        hr = InitPropVariantFromString(item.GetTitle().wc_str(), &pv);
+        hr = InitPropVariantFromString(boost::nowide::widen(item.GetTitle()).c_str(), &pv);
         if ( SUCCEEDED(hr) )
         {
             hr = propertyStore->SetValue(PKEY_Title, pv);
@@ -452,21 +455,23 @@ wxTaskBarJumpListItem* GetItemFromIShellLink(IShellLink* link)
 
     PROPVARIANT var;
     linkProps->GetValue(PKEY_Link_Arguments, &var);
-    item->SetArguments(wxString(var.pwszVal));
+
+    std::wstring wArgs{var.pwszVal};
+    item->SetArguments(boost::nowide::narrow(wArgs));
     PropVariantClear(&var);
 
     static constexpr int bufferSize = 2048;
     wchar_t buffer[bufferSize];
 
     link->GetDescription(buffer, INFOTIPSIZE);
-    item->SetTooltip(wxString(buffer));
+    item->SetTooltip(boost::nowide::narrow(buffer));
 
     int dummyIndex;
     link->GetIconLocation(buffer, bufferSize - 1, &dummyIndex);
-    item->SetIconPath(wxString(buffer));
+    item->SetIconPath(boost::nowide::narrow(buffer));
 
     link->GetPath(buffer, bufferSize - 1, nullptr, 0x1);
-    item->SetFilePath(wxString(buffer));
+    item->SetFilePath(boost::nowide::narrow(buffer));
 
     return item;
 }
@@ -481,7 +486,8 @@ wxTaskBarJumpListItem* GetItemFromIShellItem(IShellItem *shellItem)
 
     wxCoTaskMemPtr<wchar_t> name;
     shellItem->GetDisplayName(SIGDN_FILESYSPATH, &name);
-    item->SetFilePath(wxString(name));
+    std::wstring tmpName{*name};
+    item->SetFilePath(boost::nowide::narrow(tmpName));
     return item;
 }
 
@@ -536,7 +542,7 @@ class wxTaskBarJumpListImpl
 {
 public:
     explicit wxTaskBarJumpListImpl(wxTaskBarJumpList *jumpList = nullptr,
-                          const wxString& appID = wxEmptyString);
+                          const std::string& appID = "");
     virtual ~wxTaskBarJumpListImpl();
     void ShowRecentCategory(bool shown = true);
     void HideRecentCategory();
@@ -549,8 +555,8 @@ public:
     const wxTaskBarJumpListCategories& GetCustomCategories() const;
 
     void AddCustomCategory(wxTaskBarJumpListCategory* category);
-    wxTaskBarJumpListCategory* RemoveCustomCategory(const wxString& title);
-    void DeleteCustomCategory(const wxString& title);
+    wxTaskBarJumpListCategory* RemoveCustomCategory(const std::string& title);
+    void DeleteCustomCategory(const std::string& title);
     void Update();
 
 private:
@@ -558,7 +564,7 @@ private:
     bool CommitUpdate();
     void AddTasksToDestinationList();
     void AddCustomCategoriesToDestinationList();
-    void LoadKnownCategory(const wxString& title);
+    void LoadKnownCategory(const std::string& title);
 
     wxTaskBarJumpList *m_jumpList;
 
@@ -568,12 +574,13 @@ private:
     std::unique_ptr<wxTaskBarJumpListCategory> m_tasks;
     std::unique_ptr<wxTaskBarJumpListCategory> m_frequent;
     std::unique_ptr<wxTaskBarJumpListCategory> m_recent;
+
     wxTaskBarJumpListCategories m_customCategories;
     bool m_recent_visible;
     bool m_frequent_visible;
 
     // Application User Model ID.
-    wxString m_appID;
+    std::string m_appID;
 };
 
 // ----------------------------------------------------------------------------
@@ -583,7 +590,7 @@ wxIMPLEMENT_DYNAMIC_CLASS(wxThumbBarButton, wxObject);
 
 wxThumbBarButton::wxThumbBarButton(int id,
                                    const wxIcon& icon,
-                                   const wxString& tooltip,
+                                   const std::string& tooltip,
                                    bool enable,
                                    bool dismissOnClick,
                                    bool hasBackground,
@@ -602,7 +609,7 @@ wxThumbBarButton::wxThumbBarButton(int id,
 
 bool wxThumbBarButton::Create(int id,
                               const wxIcon& icon,
-                              const wxString& tooltip,
+                              const std::string& tooltip,
                               bool enable,
                               bool dismissOnClick,
                               bool hasBackground,
@@ -783,10 +790,10 @@ void wxTaskBarButtonImpl::Hide()
     Show(false);
 }
 
-void wxTaskBarButtonImpl::SetThumbnailTooltip(const wxString& tooltip)
+void wxTaskBarButtonImpl::SetThumbnailTooltip(const std::string& tooltip)
 {
     m_thumbnailTooltip = tooltip;
-    m_taskbarList->SetThumbnailTooltip(m_parent->GetHWND(), tooltip.wc_str());
+    m_taskbarList->SetThumbnailTooltip(m_parent->GetHWND(), boost::nowide::widen(tooltip).c_str());
 }
 
 void wxTaskBarButtonImpl::SetProgressState(wxTaskBarButtonState state)
@@ -796,13 +803,13 @@ void wxTaskBarButtonImpl::SetProgressState(wxTaskBarButtonState state)
 }
 
 void wxTaskBarButtonImpl::SetOverlayIcon(const wxIcon& icon,
-                                         const wxString& description)
+                                         const std::string& description)
 {
     m_overlayIcon = icon;
     m_overlayIconDescription = description;
     m_taskbarList->SetOverlayIcon(m_parent->GetHWND(),
                                   GetHiconOf(icon),
-                                  description.wc_str());
+                                  boost::nowide::widen(description).c_str());
 }
 
 void wxTaskBarButtonImpl::SetThumbnailClip(const wxRect& rect)
@@ -837,7 +844,7 @@ bool wxTaskBarButtonImpl::AppendSeparatorInThumbBar()
     // behavior of appending a separator.
     wxThumbBarButton *separator = new wxThumbBarButton(wxID_ANY,
                                                        wxNullIcon,
-                                                       wxEmptyString,
+                                                       "",
                                                        false,
                                                        false,
                                                        false);
@@ -901,14 +908,14 @@ bool wxTaskBarButtonImpl::InitOrUpdateThumbBarButtons()
         buttons[i].hIcon = GetHiconOf(m_thumbBarButtons[i]->GetIcon());
         buttons[i].dwFlags = GetNativeThumbButtonFlags(*m_thumbBarButtons[i]);
         buttons[i].dwMask = static_cast<THUMBBUTTONMASK>(THB_ICON | THB_FLAGS);
-        wxString tooltip = m_thumbBarButtons[i]->GetTooltip();
+        std::string tooltip = m_thumbBarButtons[i]->GetTooltip();
         if ( tooltip.empty() )
             continue;
 
         // Truncate the tooltip if its length longer than szTip(THUMBBUTTON)
         // allowed length (260).
-        tooltip.Truncate(260);
-        wxStrlcpy(buttons[i].szTip, tooltip.wc_str(), tooltip.length());
+        tooltip.resize(260);
+        wxStrlcpy(buttons[i].szTip, boost::nowide::widen(tooltip).c_str(), tooltip.length());
         buttons[i].dwMask =
             static_cast<THUMBBUTTONMASK>(buttons[i].dwMask | THB_TOOLTIP);
     }
@@ -951,11 +958,11 @@ wxThumbBarButton* wxTaskBarButtonImpl::GetThumbBarButtonByIndex(size_t index)
 // ----------------------------------------------------------------------------
 wxTaskBarJumpListItem::wxTaskBarJumpListItem(wxTaskBarJumpListCategory *parent,
                                              wxTaskBarJumpListItemType type,
-                                             const wxString& title,
-                                             const wxString& filePath,
-                                             const wxString& arguments,
-                                             const wxString& tooltip,
-                                             const wxString& iconPath,
+                                             const std::string& title,
+                                             const std::string& filePath,
+                                             const std::string& arguments,
+                                             const std::string& tooltip,
+                                             const std::string& iconPath,
                                              int iconIndex)
     : m_parentCategory(parent),
       m_type(type),
@@ -980,60 +987,60 @@ void wxTaskBarJumpListItem::SetType(wxTaskBarJumpListItemType type)
         m_parentCategory->Update();
 }
 
-const wxString& wxTaskBarJumpListItem::GetTitle() const
+const std::string& wxTaskBarJumpListItem::GetTitle() const
 {
     return m_title;
 }
 
-void wxTaskBarJumpListItem::SetTitle(const wxString& title)
+void wxTaskBarJumpListItem::SetTitle(const std::string& title)
 {
     m_title = title;
     if ( m_parentCategory )
         m_parentCategory->Update();
 }
 
-const wxString& wxTaskBarJumpListItem::GetFilePath() const
+const std::string& wxTaskBarJumpListItem::GetFilePath() const
 {
     return m_filePath;
 }
 
-void wxTaskBarJumpListItem::SetFilePath(const wxString& filePath)
+void wxTaskBarJumpListItem::SetFilePath(const std::string& filePath)
 {
     m_filePath = filePath;
     if ( m_parentCategory )
         m_parentCategory->Update();
 }
 
-const wxString& wxTaskBarJumpListItem::GetArguments() const
+const std::string& wxTaskBarJumpListItem::GetArguments() const
 {
     return m_arguments;
 }
 
-void wxTaskBarJumpListItem::SetArguments(const wxString& arguments)
+void wxTaskBarJumpListItem::SetArguments(const std::string& arguments)
 {
     m_arguments = arguments;
     if ( m_parentCategory )
         m_parentCategory->Update();
 }
 
-const wxString& wxTaskBarJumpListItem::GetTooltip() const
+const std::string& wxTaskBarJumpListItem::GetTooltip() const
 {
     return m_tooltip;
 }
 
-void wxTaskBarJumpListItem::SetTooltip(const wxString& tooltip)
+void wxTaskBarJumpListItem::SetTooltip(const std::string& tooltip)
 {
     m_tooltip = tooltip;
     if ( m_parentCategory )
         m_parentCategory->Update();
 }
 
-const wxString& wxTaskBarJumpListItem::GetIconPath() const
+const std::string& wxTaskBarJumpListItem::GetIconPath() const
 {
     return m_iconPath;
 }
 
-void wxTaskBarJumpListItem::SetIconPath(const wxString& iconPath)
+void wxTaskBarJumpListItem::SetIconPath(const std::string& iconPath)
 {
     m_iconPath = iconPath;
     if ( m_parentCategory )
@@ -1066,7 +1073,7 @@ void wxTaskBarJumpListItem::SetCategory(wxTaskBarJumpListCategory *category)
 // wxTaskBarJumpListCategory Implementation.
 // ----------------------------------------------------------------------------
 wxTaskBarJumpListCategory::wxTaskBarJumpListCategory(wxTaskBarJumpList *parent,
-                                                     const wxString& title)
+                                                     const std::string& title)
     : m_parent(parent),
       m_title(title)
 {
@@ -1145,13 +1152,13 @@ wxTaskBarJumpListCategory::Prepend(wxTaskBarJumpListItem *item)
     return Insert(0, item);
 }
 
-void wxTaskBarJumpListCategory::SetTitle(const wxString& title)
+void wxTaskBarJumpListCategory::SetTitle(const std::string& title)
 {
     m_title = title;
     Update();
 }
 
-const wxString& wxTaskBarJumpListCategory::GetTitle() const
+const std::string& wxTaskBarJumpListCategory::GetTitle() const
 {
     return m_title;
 }
@@ -1170,7 +1177,7 @@ void wxTaskBarJumpListCategory::Update()
 // ----------------------------------------------------------------------------
 // wxTaskBarJumpList Implementation.
 // ----------------------------------------------------------------------------
-wxTaskBarJumpList::wxTaskBarJumpList(const wxString& appID)
+wxTaskBarJumpList::wxTaskBarJumpList(const std::string& appID)
     : m_jumpListImpl(new wxTaskBarJumpListImpl(this, appID))
 {
 }
@@ -1227,12 +1234,12 @@ void wxTaskBarJumpList::AddCustomCategory(wxTaskBarJumpListCategory* category)
 }
 
 wxTaskBarJumpListCategory* wxTaskBarJumpList::RemoveCustomCategory(
-    const wxString& title)
+    const std::string& title)
 {
     return m_jumpListImpl->RemoveCustomCategory(title);
 }
 
-void wxTaskBarJumpList::DeleteCustomCategory(const wxString& title)
+void wxTaskBarJumpList::DeleteCustomCategory(const std::string& title)
 {
     m_jumpListImpl->DeleteCustomCategory(title);
 }
@@ -1246,7 +1253,7 @@ void wxTaskBarJumpList::Update()
 // wxTaskBarJumpListImpl Implementation.
 // ----------------------------------------------------------------------------
 wxTaskBarJumpListImpl::wxTaskBarJumpListImpl(wxTaskBarJumpList *jumpList,
-                                             const wxString& appID)
+                                             const std::string& appID)
     : m_jumpList(jumpList),
       m_destinationList(nullptr),
       m_appID(appID)
@@ -1293,7 +1300,7 @@ void wxTaskBarJumpListImpl::Update()
 wxTaskBarJumpListCategory& wxTaskBarJumpListImpl::GetTasks()
 {
     if ( m_tasks.get() == nullptr )
-        m_tasks.reset(new wxTaskBarJumpListCategory(m_jumpList, wxT("Tasks")));
+        m_tasks.reset(new wxTaskBarJumpListCategory(m_jumpList, "Tasks"));
 
     return *(m_tasks.get());
 }
@@ -1320,7 +1327,7 @@ void wxTaskBarJumpListImpl::HideFrequentCategory()
 
 const wxTaskBarJumpListCategory& wxTaskBarJumpListImpl::GetFrequentCategory()
 {
-    wxString title = wxT("Frequent");
+    std::string title = "Frequent";
     if ( m_frequent.get() == nullptr )
         m_frequent.reset(new wxTaskBarJumpListCategory(m_jumpList, title));
     LoadKnownCategory(title);
@@ -1330,7 +1337,7 @@ const wxTaskBarJumpListCategory& wxTaskBarJumpListImpl::GetFrequentCategory()
 
 const wxTaskBarJumpListCategory& wxTaskBarJumpListImpl::GetRecentCategory()
 {
-    wxString title = wxT("Recent");
+    std::string title = "Recent";
     if ( m_recent.get() == nullptr )
         m_recent.reset(new wxTaskBarJumpListCategory(m_jumpList, title));
     LoadKnownCategory(title);
@@ -1352,7 +1359,7 @@ wxTaskBarJumpListImpl::AddCustomCategory(wxTaskBarJumpListCategory *category)
 }
 
 wxTaskBarJumpListCategory*
-wxTaskBarJumpListImpl::RemoveCustomCategory(const wxString& title)
+wxTaskBarJumpListImpl::RemoveCustomCategory(const std::string& title)
 {
     for ( wxTaskBarJumpListCategories::iterator it = m_customCategories.begin();
           it != m_customCategories.end();
@@ -1369,7 +1376,7 @@ wxTaskBarJumpListImpl::RemoveCustomCategory(const wxString& title)
     return nullptr;
 }
 
-void wxTaskBarJumpListImpl::DeleteCustomCategory(const wxString& title)
+void wxTaskBarJumpListImpl::DeleteCustomCategory(const std::string& title)
 {
     wxTaskBarJumpListCategory* category = RemoveCustomCategory(title);
     if ( category )
@@ -1386,7 +1393,7 @@ bool wxTaskBarJumpListImpl::BeginUpdate()
     HRESULT hr = m_destinationList->BeginList(&max_count,
         wxIID_IObjectArray, reinterpret_cast<void**>(&m_objectArray));
     if ( !m_appID.empty() )
-        m_destinationList->SetAppID(m_appID.wc_str());
+        m_destinationList->SetAppID(boost::nowide::widen(m_appID).c_str());
 
     return SUCCEEDED(hr);
 }
@@ -1438,12 +1445,12 @@ void wxTaskBarJumpListImpl::AddCustomCategoriesToDestinationList()
                 "Invalid category item." );
             AddShellLink(collection, *(*iter));
         }
-        m_destinationList->AppendCategory((*it)->GetTitle().wc_str(),
+        m_destinationList->AppendCategory(boost::nowide::widen((*it)->GetTitle()).c_str(),
                                           collection);
     }
 }
 
-void wxTaskBarJumpListImpl::LoadKnownCategory(const wxString& title)
+void wxTaskBarJumpListImpl::LoadKnownCategory(const std::string& title)
 {
     wxCOMPtr<IApplicationDocumentLists> docList;
     HRESULT hr = CoCreateInstance
@@ -1460,7 +1467,7 @@ void wxTaskBarJumpListImpl::LoadKnownCategory(const wxString& title)
         return;
     }
     if ( !m_appID.empty() )
-        docList->SetAppID(m_appID.wc_str());
+        docList->SetAppID(boost::nowide::widen(m_appID).c_str());
 
     wxCOMPtr<IObjectArray> array;
     wxASSERT_MSG( title == "Recent" || title == "Frequent", "Invalid title." );
@@ -1511,7 +1518,7 @@ void wxTaskBarJumpListImpl::LoadKnownCategory(const wxString& title)
 
         if ( item )
         {
-            if ( title == wxT("Frequent") )
+            if ( title == "Frequent" )
                 m_frequent->Append(item);
             else
                 m_recent->Append(item);

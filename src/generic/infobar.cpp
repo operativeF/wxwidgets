@@ -233,7 +233,7 @@ void wxInfoBarGeneric::Dismiss()
     DoHide();
 }
 
-void wxInfoBarGeneric::AddButton(wxWindowID btnid, const wxString& label)
+void wxInfoBarGeneric::AddButton(wxWindowID btnid, const std::string& label)
 {
     wxSizer * const sizer = GetSizer();
     wxCHECK_RET( sizer, "must be created first" );

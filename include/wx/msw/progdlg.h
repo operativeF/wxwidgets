@@ -29,13 +29,13 @@ public:
     wxProgressDialog(wxProgressDialog&&) = default;
     wxProgressDialog& operator=(wxProgressDialog&&) = default;
 
-    bool Update(int value, const wxString& newmsg = wxEmptyString, bool *skip = nullptr) override;
-    bool Pulse(const wxString& newmsg = wxEmptyString, bool *skip = nullptr) override;
+    bool Update(int value, const std::string& newmsg = {}, bool *skip = nullptr) override;
+    bool Pulse(const std::string& newmsg = {}, bool *skip = nullptr) override;
 
     void Resume() override;
 
     int GetValue() const override;
-    wxString GetMessage() const override;
+    std::string GetMessage() const override;
 
     void SetRange(int maximum) override;
 

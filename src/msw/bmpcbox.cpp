@@ -441,7 +441,7 @@ bool wxBitmapComboBox::MSWOnDraw(WXDRAWITEMSTRUCT *item)
     wxRect rect = wxRectFromRECT(lpDrawItem->rcItem);
     wxBitmapComboBoxBase::DrawBackground(dc, rect, pos, flags);
 
-    wxString text;
+    std::string text;
 
     if ( flags & wxODCB_PAINTING_CONTROL )
     {

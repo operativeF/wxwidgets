@@ -179,8 +179,8 @@ public:
 private:
     FIND_DATA m_finddata;
 
-    wxString m_dirname;
-    wxString m_filespec;
+    std::string m_dirname;
+    std::string m_filespec;
 
     int      m_flags{0};
 };
@@ -234,7 +234,7 @@ bool wxDirData::Read(wxString *filename)
         {
             filespec += wxT('\\');
         }
-        if ( !m_filespec )
+        if ( m_filespec.empty() )
             filespec += wxT("*.*");
         else
             filespec += m_filespec;
