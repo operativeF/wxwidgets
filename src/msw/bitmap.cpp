@@ -1701,7 +1701,7 @@ bool wxBitmapHandler::Create(wxGDIImage *image,
 }
 
 bool wxBitmapHandler::Load(wxGDIImage *image,
-                           const wxString& name,
+                           const std::string& name,
                            wxBitmapType type,
                            int width, int height)
 {
@@ -1711,7 +1711,7 @@ bool wxBitmapHandler::Load(wxGDIImage *image,
 }
 
 bool wxBitmapHandler::Save(const wxGDIImage *image,
-                           const wxString& name,
+                           const std::string& name,
                            wxBitmapType type) const
 {
     wxBitmap *bitmap = wxDynamicCast(image, wxBitmap);
@@ -1730,7 +1730,7 @@ bool wxBitmapHandler::Create(wxBitmap *WXUNUSED(bitmap),
 }
 
 bool wxBitmapHandler::LoadFile(wxBitmap *WXUNUSED(bitmap),
-                               const wxString& WXUNUSED(name),
+                               const std::string& WXUNUSED(name),
                                wxBitmapType WXUNUSED(type),
                                int WXUNUSED(desiredWidth),
                                int WXUNUSED(desiredHeight))
@@ -1739,7 +1739,7 @@ bool wxBitmapHandler::LoadFile(wxBitmap *WXUNUSED(bitmap),
 }
 
 bool wxBitmapHandler::SaveFile(const wxBitmap *WXUNUSED(bitmap),
-                               const wxString& WXUNUSED(name),
+                               const std::string& WXUNUSED(name),
                                wxBitmapType WXUNUSED(type),
                                const wxPalette *WXUNUSED(palette)) const
 {

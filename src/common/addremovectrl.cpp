@@ -62,8 +62,8 @@ void wxAddRemoveCtrl::SetAdaptor(wxAddRemoveAdaptor* adaptor)
 }
 
 void
-wxAddRemoveCtrl::SetButtonsToolTips(const wxString& addtip,
-                                    const wxString& removetip)
+wxAddRemoveCtrl::SetButtonsToolTips(const std::string& addtip,
+                                    const std::string& removetip)
 {
     wxCHECK_RET( m_impl, wxS("can only be called after SetAdaptor()") );
 

@@ -49,7 +49,7 @@ public:
     // overridden base class methods
     // -----------------------------
 
-    void SetURL(const wxString &url) override;
+    void SetURL(const std::string& url) override;
 
     void SetLabel(const std::string& label) override;
 

@@ -433,10 +433,10 @@ public:
         Create(parent, winid, pos, size, style, name);
     }
 
-   wxScrolled(const wxScrolled&) = delete;
-   wxScrolled& operator=(const wxScrolled&) = delete;
-   wxScrolled(wxScrolled&&) = default;
-   wxScrolled& operator=(wxScrolled&&) = default;
+    wxScrolled(const wxScrolled&) = delete;
+    wxScrolled& operator=(const wxScrolled&) = delete;
+    wxScrolled(wxScrolled&&) = default;
+    wxScrolled& operator=(wxScrolled&&) = default;
 
     [[maybe_unused]] bool Create(wxWindow *parent,
                 wxWindowID winid,
@@ -501,10 +501,10 @@ public:
         : wxScrolled<wxPanel>(parent, winid, pos, size, style, name)
     {}
 
-wxScrolledWindow(const wxScrolledWindow&) = delete;
-   wxScrolledWindow& operator=(const wxScrolledWindow&) = delete;
-   wxScrolledWindow(wxScrolledWindow&&) = default;
-   wxScrolledWindow& operator=(wxScrolledWindow&&) = default;
+    wxScrolledWindow(const wxScrolledWindow&) = delete;
+    wxScrolledWindow& operator=(const wxScrolledWindow&) = delete;
+    wxScrolledWindow(wxScrolledWindow&&) = default;
+    wxScrolledWindow& operator=(wxScrolledWindow&&) = default;
 
 	wxClassInfo *GetClassInfo() const override;
 	static wxClassInfo ms_classInfo;

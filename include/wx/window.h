@@ -219,7 +219,7 @@ public:
         // the window name is used for resource setting in X, it is not the
         // same as the window title/label
     virtual void SetName( const std::string& name ) { m_windowName = name; }
-    virtual wxString GetName() const { return m_windowName; }
+    virtual std::string GetName() const { return m_windowName; }
 
         // sets the window variant, calls internally DoSetVariant if variant
         // has changed
@@ -1347,7 +1347,7 @@ public:
 
 #if wxUSE_TOOLTIPS
         // the easiest way to set a tooltip for a window is to use this method
-    void SetToolTip( const wxString &tip ) { DoSetToolTipText(tip); }
+    void SetToolTip( const std::string& tip ) { DoSetToolTipText(tip); }
         // attach a tooltip to the window, pointer can be NULL to remove
         // existing tooltip
     void SetToolTip( wxToolTip *tip ) { DoSetToolTip(tip); }
@@ -1843,7 +1843,7 @@ protected:
     virtual void DoCentre(int dir);
 
 #if wxUSE_TOOLTIPS
-    virtual void DoSetToolTipText( const wxString &tip );
+    virtual void DoSetToolTipText( const std::string& tip );
     virtual void DoSetToolTip( wxToolTip *tip );
 #endif // wxUSE_TOOLTIPS
 

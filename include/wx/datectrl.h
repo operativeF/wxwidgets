@@ -61,7 +61,7 @@ public:
                     const wxSize& size = wxDefaultSize,
                     long style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
                     const wxValidator& validator = wxDefaultValidator,
-                    const wxString& name = wxDatePickerCtrlNameStr);
+                    const std::string& name = wxDatePickerCtrlNameStr);
      */
 
     /*
@@ -104,7 +104,7 @@ using wxDatePickerCtrlBase = wxDatePickerCtrlCommonBase<wxDateTimePickerCtrl>;
                          const wxSize& size = wxDefaultSize,
                          long style = wxDP_DEFAULT | wxDP_SHOWCENTURY,
                          const wxValidator& validator = wxDefaultValidator,
-                         const wxString& name = wxDatePickerCtrlNameStr)
+                         const std::string& name = wxDatePickerCtrlNameStr)
             : wxDatePickerCtrlGeneric(parent, id, date, pos, size, style, validator, name)
         {
         }

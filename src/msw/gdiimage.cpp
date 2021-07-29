@@ -44,6 +44,8 @@
 #include "wx/listimpl.cpp"
 WX_DEFINE_LIST(wxGDIImageHandlerList)
 
+#include "boost/nowide/convert.hpp"
+
 // ----------------------------------------------------------------------------
 // private classes
 // ----------------------------------------------------------------------------
@@ -61,10 +63,10 @@ public:
     }
 
     bool LoadFile(wxBitmap *bitmap,
-                          const wxString& name, wxBitmapType flags,
+                          const std::string& name, wxBitmapType flags,
                           int desiredWidth, int desiredHeight) override;
     bool SaveFile(const wxBitmap *bitmap,
-                          const wxString& name, wxBitmapType type,
+                          const std::string& name, wxBitmapType type,
                           const wxPalette *palette = nullptr) const override;
 };
 
@@ -78,7 +80,7 @@ public:
     }
 
     bool LoadFile(wxBitmap *bitmap,
-                          const wxString& name, wxBitmapType flags,
+                          const std::string& name, wxBitmapType flags,
                           int desiredWidth, int desiredHeight) override;
 
 private:
@@ -88,7 +90,7 @@ private:
 class WXDLLEXPORT wxIconHandler : public wxGDIImageHandler
 {
 public:
-    wxIconHandler(const wxString& name, const wxString& ext, wxBitmapType type)
+    wxIconHandler(const std::string& name, const std::string& ext, wxBitmapType type)
         : wxGDIImageHandler(name, ext, type)
     {
     }
@@ -105,14 +107,14 @@ public:
     }
 
     bool Save(const wxGDIImage *WXUNUSED(image),
-                      const wxString& WXUNUSED(name),
+                      const std::string& WXUNUSED(name),
                       wxBitmapType WXUNUSED(type)) const override
     {
         return false;
     }
 
     bool Load(wxGDIImage *image,
-                      const wxString& name,
+                      const std::string& name,
                       wxBitmapType flags,
                       int desiredWidth, int desiredHeight) override
     {
@@ -124,37 +126,37 @@ public:
 
 protected:
     virtual bool LoadIcon(wxIcon *icon,
-                          const wxString& name, wxBitmapType flags,
+                          const std::string& name, wxBitmapType flags,
                           int desiredWidth = -1, int desiredHeight = -1) = 0;
 };
 
 class WXDLLEXPORT wxICOFileHandler : public wxIconHandler
 {
 public:
-    wxICOFileHandler() : wxIconHandler(wxT("ICO icon file"),
-                                       wxT("ico"),
+    wxICOFileHandler() : wxIconHandler("ICO icon file",
+                                       "ico",
                                        wxBITMAP_TYPE_ICO)
     {
     }
 
 protected:
     bool LoadIcon(wxIcon *icon,
-                          const wxString& name, wxBitmapType flags,
+                          const std::string& name, wxBitmapType flags,
                           int desiredWidth = -1, int desiredHeight = -1) override;
 };
 
 class WXDLLEXPORT wxICOResourceHandler: public wxIconHandler
 {
 public:
-    wxICOResourceHandler() : wxIconHandler(wxT("ICO resource"),
-                                           wxT("ico"),
+    wxICOResourceHandler() : wxIconHandler("ICO resource",
+                                           "ico",
                                            wxBITMAP_TYPE_ICO_RESOURCE)
     {
     }
 
 protected:
     bool LoadIcon(wxIcon *icon,
-                          const wxString& name, wxBitmapType flags,
+                          const std::string& name, wxBitmapType flags,
                           int desiredWidth = -1, int desiredHeight = -1) override;
 };
 
@@ -170,7 +172,7 @@ public:
     }
 
     bool LoadFile(wxBitmap *bitmap,
-                          const wxString& name, wxBitmapType flags,
+                          const std::string& name, wxBitmapType flags,
                           int desiredWidth, int desiredHeight) override;
 };
 
@@ -216,7 +218,7 @@ void wxGDIImage::InsertHandler(wxGDIImageHandler *handler)
     ms_handlers.Insert(handler);
 }
 
-bool wxGDIImage::RemoveHandler(const wxString& name)
+bool wxGDIImage::RemoveHandler(const std::string& name)
 {
     wxGDIImageHandler *handler = FindHandler(name);
     if ( handler )
@@ -228,7 +230,7 @@ bool wxGDIImage::RemoveHandler(const wxString& name)
         return false;
 }
 
-wxGDIImageHandler *wxGDIImage::FindHandler(const wxString& name)
+wxGDIImageHandler *wxGDIImage::FindHandler(const std::string& name)
 {
     wxGDIImageHandlerList::compatibility_iterator node = ms_handlers.GetFirst();
     while ( node )
@@ -242,7 +244,7 @@ wxGDIImageHandler *wxGDIImage::FindHandler(const wxString& name)
     return nullptr;
 }
 
-wxGDIImageHandler *wxGDIImage::FindHandler(const wxString& extension,
+wxGDIImageHandler *wxGDIImage::FindHandler(const std::string& extension,
                                            long type)
 {
     wxGDIImageHandlerList::compatibility_iterator node = ms_handlers.GetFirst();
@@ -304,12 +306,12 @@ void wxGDIImage::InitStandardHandlers()
 // ----------------------------------------------------------------------------
 
 bool wxBMPResourceHandler::LoadFile(wxBitmap *bitmap,
-                                    const wxString& name, wxBitmapType WXUNUSED(flags),
+                                    const std::string& name, wxBitmapType WXUNUSED(flags),
                                     int WXUNUSED(desiredWidth),
                                     int WXUNUSED(desiredHeight))
 {
     // TODO: load colourmap.
-    HBITMAP hbmp = ::LoadBitmap(wxGetInstance(), name.t_str());
+    HBITMAP hbmp = ::LoadBitmapW(wxGetInstance(), boost::nowide::widen(name).c_str());
     if ( hbmp == nullptr )
     {
         // it's probably not found
@@ -342,7 +344,8 @@ bool wxBMPResourceHandler::LoadFile(wxBitmap *bitmap,
 }
 
 bool wxBMPFileHandler::LoadFile(wxBitmap *bitmap,
-                                const wxString& name, wxBitmapType WXUNUSED(flags),
+                                const std::string& name,
+                                wxBitmapType WXUNUSED(flags),
                                 int WXUNUSED(desiredWidth),
                                 int WXUNUSED(desiredHeight))
 {
@@ -350,8 +353,7 @@ bool wxBMPFileHandler::LoadFile(wxBitmap *bitmap,
 
 #if wxUSE_WXDIB
     // Try loading using native Windows LoadImage() first.
-    // FIXME: use string
-    wxDIB dib(name.ToStdString());
+    wxDIB dib(name);
     if ( dib.IsOk() )
         return bitmap->CopyFromDIB(dib);
 #endif // wxUSE_WXDIB
@@ -372,7 +374,7 @@ bool wxBMPFileHandler::LoadFile(wxBitmap *bitmap,
 }
 
 bool wxBMPFileHandler::SaveFile(const wxBitmap *bitmap,
-                                const wxString& name,
+                                const std::string& name,
                                 wxBitmapType WXUNUSED(type),
                                 const wxPalette * WXUNUSED(pal)) const
 {
@@ -392,7 +394,7 @@ bool wxBMPFileHandler::SaveFile(const wxBitmap *bitmap,
 // ----------------------------------------------------------------------------
 
 bool wxICOFileHandler::LoadIcon(wxIcon *icon,
-                                const wxString& name,
+                                const std::string& name,
                                 wxBitmapType WXUNUSED(flags),
                                 int desiredWidth, int desiredHeight)
 {
@@ -406,12 +408,12 @@ bool wxICOFileHandler::LoadIcon(wxIcon *icon,
     // For the moment, ignore the issue of possible semicolons in the
     // filename.
     int iconIndex = 0;
-    wxString nameReal(name);
-    wxString strIconIndex = name.AfterLast(wxT(';'));
+    std::string nameReal(name);
+    std::string strIconIndex = wx::utils::AfterLast(name, ';');
     if (strIconIndex != name)
     {
         iconIndex = wxAtoi(strIconIndex);
-        nameReal = name.BeforeLast(wxT(';'));
+        nameReal = wx::utils::BeforeLast(name, ';');
     }
 
 #if 0
@@ -441,7 +443,7 @@ bool wxICOFileHandler::LoadIcon(wxIcon *icon,
          desiredHeight == wxGetSystemMetrics(SM_CYICON, win) )
     {
         // get the specified large icon from file
-        if ( !::ExtractIconEx(nameReal.t_str(), iconIndex, &hicon, nullptr, 1) )
+        if ( !::ExtractIconExW(boost::nowide::widen(nameReal).c_str(), iconIndex, &hicon, nullptr, 1) )
         {
             // it is not an error, but it might still be useful to be informed
             // about it optionally
@@ -454,7 +456,7 @@ bool wxICOFileHandler::LoadIcon(wxIcon *icon,
               desiredHeight == wxGetSystemMetrics(SM_CYSMICON, win) )
     {
         // get the specified small icon from file
-        if ( !::ExtractIconEx(nameReal.t_str(), iconIndex, nullptr, &hicon, 1) )
+        if ( !::ExtractIconExW(boost::nowide::widen(nameReal).c_str(), iconIndex, nullptr, &hicon, 1) )
         {
             wxLogTrace(wxT("iconload"),
                        wxT("No small icons found in the file '%s'."),
@@ -466,7 +468,7 @@ bool wxICOFileHandler::LoadIcon(wxIcon *icon,
     if ( !hicon )
     {
         // take any size icon from the file by index
-        hicon = ::ExtractIcon(wxGetInstance(), nameReal.t_str(), iconIndex);
+        hicon = ::ExtractIconW(wxGetInstance(), boost::nowide::widen(nameReal).c_str(), iconIndex);
     }
 
     if ( !hicon )
@@ -497,7 +499,7 @@ bool wxICOFileHandler::LoadIcon(wxIcon *icon,
 }
 
 bool wxICOResourceHandler::LoadIcon(wxIcon *icon,
-                                    const wxString& name,
+                                    const std::string& name,
                                     wxBitmapType WXUNUSED(flags),
                                     int desiredWidth, int desiredHeight)
 {
@@ -516,13 +518,14 @@ bool wxICOResourceHandler::LoadIcon(wxIcon *icon,
     HICON hicon = [=]() {
         if ( hasSize )
         {
-            return (HICON)::LoadImage(wxGetInstance(), name.t_str(), IMAGE_ICON,
-                                        desiredWidth, desiredHeight,
-                                        LR_DEFAULTCOLOR);
+            return (HICON)::LoadImageW(wxGetInstance(), boost::nowide::widen(name).c_str(),
+                                       IMAGE_ICON,
+                                       desiredWidth, desiredHeight,
+                                       LR_DEFAULTCOLOR);
         }
         else
         {
-            return ::LoadIcon(wxGetInstance(), name.t_str());
+            return ::LoadIconW(wxGetInstance(), boost::nowide::widen(name).c_str());
         }
     }();
 
@@ -531,21 +534,21 @@ bool wxICOResourceHandler::LoadIcon(wxIcon *icon,
     {
         static const struct
         {
-            const wxChar *name;
-            LPTSTR id;
+            std::string name;
+            LPWSTR id;
         } stdIcons[] =
         {
-            { wxT("wxICON_QUESTION"),   IDI_QUESTION    },
-            { wxT("wxICON_WARNING"),    IDI_EXCLAMATION },
-            { wxT("wxICON_ERROR"),      IDI_HAND        },
-            { wxT("wxICON_INFORMATION"),       IDI_ASTERISK    },
+            { "wxICON_QUESTION",          IDI_QUESTION    },
+            { "wxICON_WARNING",           IDI_EXCLAMATION },
+            { "wxICON_ERROR",             IDI_HAND        },
+            { "wxICON_INFORMATION",       IDI_ASTERISK    },
         };
 
         for ( size_t nIcon = 0; !hicon && nIcon < WXSIZEOF(stdIcons); nIcon++ )
         {
             if ( name == stdIcons[nIcon].name )
             {
-                hicon = ::LoadIcon((HINSTANCE)nullptr, stdIcons[nIcon].id);
+                hicon = ::LoadIconW((HINSTANCE)nullptr, stdIcons[nIcon].id);
                 break;
             }
         }
@@ -561,7 +564,7 @@ bool wxICOResourceHandler::LoadIcon(wxIcon *icon,
 // ----------------------------------------------------------------------------
 
 bool wxPNGResourceHandler::LoadFile(wxBitmap *bitmap,
-                                    const wxString& name,
+                                    const std::string& name,
                                     wxBitmapType WXUNUSED(flags),
                                     int WXUNUSED(desiredWidth),
                                     int WXUNUSED(desiredHeight))

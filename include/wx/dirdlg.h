@@ -81,26 +81,26 @@ public:
         return true;
     }
 
-    virtual void SetMessage(const wxString& message) { m_message = message; }
-    virtual void SetPath(const wxString& path) { m_path = path; }
+    virtual void SetMessage(const std::string& message) { m_message = message; }
+    virtual void SetPath(const std::string& path) { m_path = path; }
 
-    virtual wxString GetMessage() const { return m_message; }
-    virtual wxString GetPath() const
+    virtual const std::string& GetMessage() const { return m_message; }
+    virtual const std::string& GetPath() const
     {
-        wxCHECK_MSG( !HasFlag(wxDD_MULTIPLE), wxString(),
+        wxCHECK_MSG( !HasFlag(wxDD_MULTIPLE), "",
                      "When using wxDD_MULTIPLE, must call GetPaths() instead" );
         return m_path;
     }
 
-    virtual std::vector<wxString> GetPaths() const
+    virtual std::vector<std::string> GetPaths() const
     {
         return m_paths;
     }
 
 protected:
-    wxString m_message;
-    wxString m_path;
-    std::vector<wxString> m_paths;
+    std::string m_message;
+    std::string m_path;
+    std::vector<std::string> m_paths;
 };
 
 

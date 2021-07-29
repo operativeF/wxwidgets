@@ -47,7 +47,7 @@ public:
     // initializes the bundle with the icon(s) found in the file
 #if wxUSE_STREAMS && wxUSE_IMAGE
 #if wxUSE_FFILE || wxUSE_FILE
-    wxIconBundle(const wxString& file, wxBitmapType type = wxBITMAP_TYPE_ANY);
+    wxIconBundle(const std::string& file, wxBitmapType type = wxBITMAP_TYPE_ANY);
 #endif // wxUSE_FFILE || wxUSE_FILE
     wxIconBundle(wxInputStream& stream, wxBitmapType type = wxBITMAP_TYPE_ANY);
 #endif // wxUSE_STREAMS && wxUSE_IMAGE
@@ -57,7 +57,7 @@ public:
 
 #if defined(__WINDOWS__) && wxUSE_ICO_CUR
     // initializes the bundle with the icons from a group icon stored as an MS Windows resource
-    wxIconBundle(const wxString& resourceName, WXHINSTANCE module);
+    wxIconBundle(const std::string& resourceName, WXHINSTANCE module);
 #endif
 
     // default copy ctor and assignment operator are OK
@@ -67,14 +67,14 @@ public:
     // width and height, they are replaced
 #if wxUSE_STREAMS && wxUSE_IMAGE
 #if wxUSE_FFILE || wxUSE_FILE
-    void AddIcon(const wxString& file, wxBitmapType type = wxBITMAP_TYPE_ANY);
+    void AddIcon(const std::string& file, wxBitmapType type = wxBITMAP_TYPE_ANY);
 #endif // wxUSE_FFILE || wxUSE_FILE
     void AddIcon(wxInputStream& stream, wxBitmapType type = wxBITMAP_TYPE_ANY);
 #endif // wxUSE_STREAMS && wxUSE_IMAGE
 
 #if defined(__WINDOWS__) && wxUSE_ICO_CUR
     // loads all the icons from a group icon stored in an MS Windows resource
-    void AddIcon(const wxString& resourceName, WXHINSTANCE module);
+    void AddIcon(const std::string& resourceName, WXHINSTANCE module);
 #endif
 
     // adds the icon to the collection, if the collection already

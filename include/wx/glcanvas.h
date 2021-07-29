@@ -209,7 +209,7 @@ public:
                const wxPoint& pos = wxDefaultPosition,
                const wxSize& size = wxDefaultSize,
                long style = 0,
-               const wxString& name = wxGLCanvasName,
+               const std::string& name = wxGLCanvasName,
                const wxPalette& palette = wxNullPalette);
      */
 

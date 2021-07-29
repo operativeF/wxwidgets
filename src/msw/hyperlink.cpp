@@ -120,7 +120,7 @@ WXDWORD wxHyperlinkCtrl::MSWGetStyle(long style, WXDWORD *exstyle) const
     return msStyle;
 }
 
-void wxHyperlinkCtrl::SetURL(const wxString &url)
+void wxHyperlinkCtrl::SetURL(const std::string& url)
 {
     if ( !HasNativeHyperlinkCtrl() )
     {

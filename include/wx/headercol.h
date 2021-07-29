@@ -61,7 +61,7 @@ public:
        Derived classes must provide ctors with the following signatures
        (notice that they shouldn't be explicit to allow passing strings/bitmaps
        directly to methods such wxHeaderCtrl::AppendColumn()):
-    wxHeaderColumn(const wxString& title,
+    wxHeaderColumn(const std::string& title,
                    int width = wxCOL_WIDTH_DEFAULT,
                    wxAlignment align = wxALIGN_NOT,
                    int flags = wxCOL_DEFAULT_FLAGS);

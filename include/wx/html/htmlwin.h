@@ -244,7 +244,7 @@ public:
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
                  long style = wxHW_DEFAULT_STYLE,
-                 const wxString& name = wxT("htmlWindow"))
+                 const std::string& name = "htmlWindow")
         : wxHtmlWindowMouseHelper(this)
     {
         Init();
@@ -259,7 +259,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = wxHW_SCROLLBAR_AUTO,
-                const wxString& name = wxT("htmlWindow"));
+                const std::string& name = "htmlWindow");
 
     // Set HTML page and display it. !! source is HTML document itself,
     // it is NOT address/filename of HTML document. If you want to

@@ -67,7 +67,7 @@ public:
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    long style = 0,
-                   const wxString& name = wxEmptyString)
+                   const std::string& name = {})
     {
         Create(parent, winid, pos, size, style, name);
     }
@@ -83,7 +83,7 @@ public:
                 const wxPoint& pos = wxDefaultPosition,
                 const wxSize& size = wxDefaultSize,
                 long style = 0,
-                const wxString& name = wxEmptyString);
+                const std::string& name = {});
 
 
     // get number of pages in the dialog

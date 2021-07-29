@@ -58,7 +58,7 @@ bool wxToolbook::Create(wxWindow *parent,
                    const wxPoint& pos,
                    const wxSize& size,
                    long style,
-                   const wxString& name)
+                   const std::string& name)
 {
     if ( (style & wxBK_ALIGN_MASK) == wxBK_DEFAULT )
         style |= wxBK_TOP;

@@ -292,11 +292,11 @@ public:
                         wxBitmapType type,
                         int width, int height, int depth = 1) override;
     bool Load(wxGDIImage *image,
-                      const wxString& name,
+                      const std::string& name,
                       wxBitmapType type,
                       int desiredWidth, int desiredHeight) override;
     bool Save(const wxGDIImage *image,
-                      const wxString& name,
+                      const std::string& name,
                       wxBitmapType type) const override;
 
 
@@ -308,11 +308,11 @@ public:
                         wxBitmapType type,
                         int width, int height, int depth = 1);
     virtual bool LoadFile(wxBitmap *bitmap,
-                          const wxString& name,
+                          const std::string& name,
                           wxBitmapType type,
                           int desiredWidth, int desiredHeight);
     virtual bool SaveFile(const wxBitmap *bitmap,
-                          const wxString& name,
+                          const std::string& name,
                           wxBitmapType type,
                           const wxPalette *palette = nullptr) const;
 };

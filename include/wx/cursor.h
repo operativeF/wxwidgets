@@ -30,7 +30,7 @@ public:
 
     wxCursor();
     wxCursor(const wxImage& image);
-    wxCursor(const wxString& name,
+    wxCursor(const std::string& name,
              wxBitmapType type = wxCURSOR_DEFAULT_TYPE,
              int hotSpotX = 0, int hotSpotY = 0);
     wxCursor(wxStockCursor id) { InitFromStock(id); }

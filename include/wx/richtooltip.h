@@ -56,7 +56,7 @@ class WXDLLIMPEXP_CORE wxRichToolTip
 public:
     // Ctor must specify the tooltip title and main message, additional
     // attributes can be set later.
-    wxRichToolTip(const wxString& title, const wxString& message);
+    wxRichToolTip(const std::string& title, const std::string& message);
 
     // Non-virtual dtor as this class is not supposed to be derived from.
     ~wxRichToolTip();

@@ -74,8 +74,8 @@ public:
     wxColour GetVisitedColour() const override { return m_visitedColour; }
     void SetVisitedColour(const wxColour &colour) override;
 
-    wxString GetURL() const override { return m_url; }
-    void SetURL (const wxString &url) override { m_url=url; }
+    const std::string& GetURL() const override { return m_url; }
+    void SetURL (const std::string& url) override { m_url = url; }
 
     void SetVisited(bool visited = true) override { m_visited=visited; }
     bool GetVisited() const override { return m_visited; }

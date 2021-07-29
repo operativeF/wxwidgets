@@ -23,8 +23,8 @@
 // implementation
 // ============================================================================
 
-wxRichToolTip::wxRichToolTip(const wxString& title,
-                             const wxString& message) :
+wxRichToolTip::wxRichToolTip(const std::string& title,
+                             const std::string& message) :
     m_impl(wxRichToolTipImpl::Create(title, message))
 {
 }

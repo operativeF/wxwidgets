@@ -117,7 +117,7 @@ bool wxSlider::Create(wxWindow *parent,
         {
             wxWindowIDRef lblid = NewControlId();
 
-            HWND wnd = ::CreateWindow
+            HWND wnd = ::CreateWindowW
                          (
                             wxT("STATIC"),
                             nullptr,

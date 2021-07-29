@@ -57,8 +57,8 @@ public:
     virtual wxColour GetVisitedColour() const = 0;
     virtual void SetVisitedColour(const wxColour &colour) = 0;
 
-    virtual wxString GetURL() const = 0;
-    virtual void SetURL (const wxString &url) = 0;
+    virtual const std::string& GetURL() const = 0;
+    virtual void SetURL (const std::string &url) = 0;
 
     virtual void SetVisited(bool visited = true) = 0;
     virtual bool GetVisited() const = 0;
@@ -110,8 +110,8 @@ public:
 
     // Returns the URL associated with the hyperlink control
     // that the user clicked on.
-    wxString GetURL() const { return m_url; }
-    void SetURL(const wxString &url) { m_url=url; }
+    const std::string& GetURL() const { return m_url; }
+    void SetURL(const std::string &url) { m_url = url; }
 
     // default copy ctor, assignment operator and dtor are ok
     wxEvent *Clone() const override { return new wxHyperlinkEvent(*this); }
@@ -119,7 +119,7 @@ public:
 private:
 
     // URL associated with the hyperlink control that the used clicked on.
-    wxString m_url;
+    std::string m_url;
 
 public:
 	wxClassInfo *GetClassInfo() const override ;

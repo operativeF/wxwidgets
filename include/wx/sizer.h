@@ -1077,7 +1077,7 @@ class WXDLLIMPEXP_CORE wxStaticBoxSizer: public wxBoxSizer
 {
 public:
     wxStaticBoxSizer(wxStaticBox *box, int orient);
-    wxStaticBoxSizer(int orient, wxWindow *win, const wxString& label = wxEmptyString);
+    wxStaticBoxSizer(int orient, wxWindow *win, const std::string& label = {});
     ~wxStaticBoxSizer() override;
 
     wxStaticBoxSizer(const wxStaticBoxSizer&) = delete;

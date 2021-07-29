@@ -27,7 +27,7 @@ public:
     wxDirDialog(wxDirDialog&&) = default;
     wxDirDialog& operator=(wxDirDialog&&) = default;
 
-    void SetPath(const wxString& path) override;
+    void SetPath(const std::string& path) override;
 
     int ShowModal() override;
 

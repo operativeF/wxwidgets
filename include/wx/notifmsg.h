@@ -27,8 +27,8 @@ public:
 
     // create a notification object with the given title and message (the
     // latter may be empty in which case only the title will be shown)
-    wxNotificationMessageBase(const wxString& title,
-                              const wxString& message = wxEmptyString,
+    wxNotificationMessageBase(const std::string& title,
+                              const std::string& message = {},
                               wxWindow *parent = nullptr,
                               int flags = wxICON_INFORMATION)
     {
@@ -91,10 +91,10 @@ public:
 
 protected:
     // Common part of all ctors.
-    void Create(const wxString& title = wxEmptyString,
-        const wxString& message = wxEmptyString,
-        wxWindow *parent = nullptr,
-        int flags = wxICON_INFORMATION)
+    void Create(const std::string& title = {},
+                const std::string& message = {},
+                wxWindow *parent = nullptr,
+                int flags = wxICON_INFORMATION)
     {
         SetTitle(title);
         SetMessage(message);
@@ -140,9 +140,9 @@ public:
     wxNotificationMessage();
     
     wxNotificationMessage(const std::string& title,
-        const std::string& message = {},
-        wxWindow* parent = nullptr,
-        int flags = wxICON_INFORMATION);
+                          const std::string& message = {},
+                          wxWindow* parent = nullptr,
+                          int flags = wxICON_INFORMATION);
 
     wxNotificationMessage(const wxNotificationMessage&) = delete;
     wxNotificationMessage& operator=(const wxNotificationMessage&) = delete;

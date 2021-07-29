@@ -36,8 +36,8 @@ public:
     // for the others it is not necessary.
     virtual wxSize GetBestClientSize() const { return wxDefaultSize; }
 
-    virtual void SetButtonsToolTips(const wxString& addtip,
-                                    const wxString& removetip) = 0;
+    virtual void SetButtonsToolTips(const std::string& addtip,
+                                    const std::string& removetip) = 0;
 
     virtual ~wxAddRemoveImplBase()
     {
@@ -115,8 +115,8 @@ public:
         m_btnRemove = nullptr;
     }
 
-    void SetButtonsToolTips(const wxString& addtip,
-                                    const wxString& removetip) override
+    void SetButtonsToolTips(const std::string& addtip,
+                            const std::string& removetip) override
     {
         m_btnAdd->SetToolTip(addtip);
         m_btnRemove->SetToolTip(removetip);

@@ -71,7 +71,7 @@ public:
 #if wxUSE_STREAMS && wxUSE_IMAGE
 
 #if wxUSE_FFILE || wxUSE_FILE
-wxIconBundle::wxIconBundle(const wxString& file, wxBitmapType type)
+wxIconBundle::wxIconBundle(const std::string& file, wxBitmapType type)
             : wxGDIObject()
 {
     AddIcon(file, type);
@@ -93,7 +93,7 @@ wxIconBundle::wxIconBundle(const wxIcon& icon)
 
 #if defined(__WINDOWS__) && wxUSE_ICO_CUR
 
-wxIconBundle::wxIconBundle(const wxString& resourceName, WXHINSTANCE module)
+wxIconBundle::wxIconBundle(const std::string& resourceName, WXHINSTANCE module)
             : wxGDIObject()
 {
     AddIcon(resourceName, module);
@@ -167,7 +167,7 @@ void DoAddIcon(wxIconBundle& bundle,
 
 #if wxUSE_FFILE || wxUSE_FILE
 
-void wxIconBundle::AddIcon(const wxString& file, wxBitmapType type)
+void wxIconBundle::AddIcon(const std::string& file, wxBitmapType type)
 {
 #ifdef __WXMAC__
     // Deal with standard icons
@@ -208,7 +208,7 @@ void wxIconBundle::AddIcon(wxInputStream& stream, wxBitmapType type)
 
 // Loads all the icons for an icon group (i.e., different sizes of one icon)
 // stored as an MS Windows resource.
-void wxIconBundle::AddIcon(const wxString& resourceName, WXHINSTANCE module)
+void wxIconBundle::AddIcon(const std::string& resourceName, WXHINSTANCE module)
 {
 #ifdef __WXMSW__
     const void* data = nullptr;

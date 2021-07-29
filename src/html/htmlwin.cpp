@@ -328,9 +328,12 @@ void wxHtmlWindow::Init()
     m_tmpSelFromCell = nullptr;
 }
 
-bool wxHtmlWindow::Create(wxWindow *parent, wxWindowID id,
-                          const wxPoint& pos, const wxSize& size,
-                          long style, const wxString& name)
+bool wxHtmlWindow::Create(wxWindow *parent,
+                          wxWindowID id,
+                          const wxPoint& pos,
+                          const wxSize& size,
+                          long style,
+                          const std::string& name)
 {
     if (!wxScrolledWindow::Create(parent, id, pos, size,
                                   style | wxVSCROLL | wxHSCROLL,

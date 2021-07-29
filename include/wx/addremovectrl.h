@@ -89,7 +89,7 @@ public:
     void SetAdaptor(wxAddRemoveAdaptor* adaptor);
 
     // Set tooltips to use for the add and remove buttons.
-    void SetButtonsToolTips(const wxString& addtip, const wxString& removetip);
+    void SetButtonsToolTips(const std::string& addtip, const std::string& removetip);
 
 protected:
     wxSize DoGetBestClientSize() const override;

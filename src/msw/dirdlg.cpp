@@ -34,6 +34,9 @@
 
 #include <initguid.h>
 
+#include "boost/nowide/convert.hpp"
+#include "boost/nowide/stackstring.hpp"
+
 // IFileOpenDialog implementation needs wxDynamicLibrary for
 // run-time linking SHCreateItemFromParsingName(), available
 // only under Windows Vista and newer.
@@ -84,7 +87,7 @@ wxIMPLEMENT_CLASS(wxDirDialog, wxDialog);
 bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
                          bool multipleSelection, bool showHidden, wxCOMPtr<IFileOpenDialog>& fileDialog);
 bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bool multipleSelection,
-                                 std::vector<wxString>& paths);
+                                 std::vector<std::string>& paths);
 bool ConvertIShellItemToPath(const wxCOMPtr<IShellItem>& item, wxString& path);
 
 #endif // #if wxUSE_IFILEOPENDIALOG
@@ -120,23 +123,23 @@ wxDirDialog::wxDirDialog(wxWindow *parent,
     SetPath(defaultPath);
 }
 
-void wxDirDialog::SetPath(const wxString& path)
+void wxDirDialog::SetPath(const std::string& path)
 {
     m_path = path;
 
     // SHBrowseForFolder doesn't like '/'s nor the trailing backslashes
-    m_path.Replace(wxT("/"), wxT("\\"));
+    wx::utils::ReplaceAll(m_path, "/", "\\");
 
-    while ( !m_path.empty() && (*(m_path.end() - 1) == wxT('\\')) )
+    while ( !m_path.empty() && (*(m_path.end() - 1) == '\\') )
     {
         m_path.erase(m_path.length() - 1);
     }
 
     // but the root drive should have a trailing slash (again, this is just
     // the way the native dialog works)
-    if ( !m_path.empty() && (*(m_path.end() - 1) == wxT(':')) )
+    if ( !m_path.empty() && (*(m_path.end() - 1) == ':') )
     {
-        m_path += wxT('\\');
+        m_path += '\\';
     }
 }
 
@@ -185,10 +188,10 @@ int wxDirDialog::ShowSHBrowseForFolder(WXHWND owner)
     bi.hwndOwner      = owner;
     bi.pidlRoot       = nullptr;
     bi.pszDisplayName = nullptr;
-    bi.lpszTitle      = m_message.c_str();
+    bi.lpszTitle      = boost::nowide::widen(m_message).c_str();
     bi.ulFlags        = BIF_RETURNONLYFSDIRS | BIF_STATUSTEXT;
     bi.lpfn           = BrowseCallbackProc;
-    bi.lParam         = wxMSW_CONV_LPARAM(m_path); // param for the callback
+    bi.lParam         = reinterpret_cast<LPARAM>(boost::nowide::widen(m_path).c_str()); // param for the callback
 
     static const int verComCtl32 = wxApp::GetComCtl32Version();
 
@@ -369,11 +372,11 @@ bool InitIFileOpenDialog(const wxString& message, const wxString& defaultPath,
 
 // helper function for wxDirDialog::ShowIFileOpenDialog()
 bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bool multipleSelection,
-                                 std::vector<wxString>& paths)
+                                 std::vector<std::string>& paths)
 {
     HRESULT hr = S_OK;
     wxString path;
-    std::vector<wxString> tempPaths;
+    std::vector<std::string> tempPaths;
 
     if ( multipleSelection )
     {
@@ -416,7 +419,8 @@ bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bo
                 break;
             }
 
-            tempPaths.push_back(path);
+            // FIXME: provide better method of converting.
+            tempPaths.push_back(boost::nowide::narrow(path.ToStdWstring()));
         }
 
     }
@@ -436,7 +440,7 @@ bool GetPathsFromIFileOpenDialog(const wxCOMPtr<IFileOpenDialog>& fileDialog, bo
             return false;
         }
 
-        tempPaths.push_back(path);
+        tempPaths.push_back(boost::nowide::narrow(path.ToStdWstring()));
     }
 
     if ( tempPaths.empty() )

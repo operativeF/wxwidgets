@@ -86,10 +86,10 @@ public:
 
     static void AddHandler(wxGDIImageHandler *handler);
     static void InsertHandler(wxGDIImageHandler *handler);
-    static bool RemoveHandler(const wxString& name);
+    static bool RemoveHandler(const std::string& name);
 
-    static wxGDIImageHandler *FindHandler(const wxString& name);
-    static wxGDIImageHandler *FindHandler(const wxString& extension, long type);
+    static wxGDIImageHandler *FindHandler(const std::string& name);
+    static wxGDIImageHandler *FindHandler(const std::string& extension, long type);
     static wxGDIImageHandler *FindHandler(long type);
 
     static void InitStandardHandlers();
@@ -145,19 +145,19 @@ class WXDLLIMPEXP_CORE wxGDIImageHandler
 {
 public:
     wxGDIImageHandler() { m_type = wxBITMAP_TYPE_INVALID; }
-    wxGDIImageHandler(const wxString& name,
-                      const wxString& ext,
+    wxGDIImageHandler(const std::string& name,
+                      const std::string& ext,
                       wxBitmapType type)
         : m_name(name), m_extension(ext), m_type(type) { }
 
     virtual ~wxGDIImageHandler() = default;
     
-    void SetName(const wxString& name) { m_name = name; }
-    void SetExtension(const wxString& ext) { m_extension = ext; }
+    void SetName(const std::string& name) { m_name = name; }
+    void SetExtension(const std::string& ext) { m_extension = ext; }
     void SetType(wxBitmapType type) { m_type = type; }
 
-    const wxString& GetName() const { return m_name; }
-    const wxString& GetExtension() const { return m_extension; }
+    const std::string& GetName() const { return m_name; }
+    const std::string& GetExtension() const { return m_extension; }
     wxBitmapType GetType() const { return m_type; }
 
     // real handler operations: to implement in derived classes
@@ -166,16 +166,16 @@ public:
                         wxBitmapType flags,
                         int width, int height, int depth = 1) = 0;
     virtual bool Load(wxGDIImage *image,
-                      const wxString& name,
+                      const std::string& name,
                       wxBitmapType flags,
                       int desiredWidth, int desiredHeight) = 0;
     virtual bool Save(const wxGDIImage *image,
-                      const wxString& name,
+                      const std::string& name,
                       wxBitmapType type) const = 0;
 
 protected:
-    wxString  m_name;
-    wxString  m_extension;
+    std::string  m_name;
+    std::string  m_extension;
     wxBitmapType m_type;
 };
 

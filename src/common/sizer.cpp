@@ -2564,7 +2564,7 @@ wxStaticBoxSizer::wxStaticBoxSizer( wxStaticBox *box, int orient )
     m_staticBox->SetContainingSizer(this);
 }
 
-wxStaticBoxSizer::wxStaticBoxSizer(int orient, wxWindow *win, const wxString& s)
+wxStaticBoxSizer::wxStaticBoxSizer(int orient, wxWindow *win, const std::string& s)
                 : wxBoxSizer(orient),
                   m_staticBox(new wxStaticBox(win, wxID_ANY, s))
 {

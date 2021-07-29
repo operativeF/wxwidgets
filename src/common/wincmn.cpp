@@ -2218,7 +2218,7 @@ std::string wxWindowBase::GetToolTipText() const
     return m_tooltip ? m_tooltip->GetTip() : "";
 }
 
-void wxWindowBase::DoSetToolTipText( const wxString &tip )
+void wxWindowBase::DoSetToolTipText( const std::string& tip )
 {
     // don't create the new tooltip if we already have one
     if ( m_tooltip )

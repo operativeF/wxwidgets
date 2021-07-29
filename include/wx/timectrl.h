@@ -46,7 +46,7 @@ public:
                     const wxSize& size = wxDefaultSize,
                     long style = wxTP_DEFAULT,
                     const wxValidator& validator = wxDefaultValidator,
-                    const wxString& name = wxTimePickerCtrlNameStr);
+                    const std::string& name = wxTimePickerCtrlNameStr);
      */
 
     /*
@@ -116,7 +116,7 @@ using wxTimePickerCtrlBase = wxTimePickerCtrlCommonBase<wxDateTimePickerCtrl>;
                          const wxSize& size = wxDefaultSize,
                          long style = wxTP_DEFAULT,
                          const wxValidator& validator = wxDefaultValidator,
-                         const wxString& name = wxTimePickerCtrlNameStr)
+                         const std::string& name = wxTimePickerCtrlNameStr)
             : wxTimePickerCtrlGeneric(parent, id, date, pos, size, style, validator, name)
         {
         }
