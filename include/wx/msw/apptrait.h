@@ -29,7 +29,7 @@ public:
     WXDWORD WaitForThread(WXHANDLE hThread, int flags) override;
 #endif // wxUSE_THREADS
     bool CanUseStderr() override { return true; }
-    bool WriteToStderr(const wxString& text) override;
+    bool WriteToStderr(const std::string& text) override;
     WXHWND GetMainHWND() const override { return nullptr; }
 };
 
@@ -55,7 +55,7 @@ public:
                                int *microVer = nullptr) const override;
 
     bool CanUseStderr() override;
-    bool WriteToStderr(const wxString& text) override;
+    bool WriteToStderr(const std::string& text) override;
     WXHWND GetMainHWND() const override;
 };
 

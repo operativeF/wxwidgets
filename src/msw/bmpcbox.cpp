@@ -116,7 +116,7 @@ void wxBitmapComboBox::RecreateControl()
     DissociateHandle();
     ::DestroyWindow(hwnd);
 
-    if ( !MSWCreateControl(L"COMBOBOX", "", pos, size) )
+    if ( !MSWCreateControl("COMBOBOX", "", pos, size) )
         return;
 
     // initialize the controls contents

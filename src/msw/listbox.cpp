@@ -88,7 +88,7 @@ bool wxListBox::Create(wxWindow *parent,
         return false;
 
     // create the native control
-    if ( !MSWCreateControl(L"LISTBOX", "", pos, size) )
+    if ( !MSWCreateControl("LISTBOX", "", pos, size) )
     {
         // control creation failed
         return false;

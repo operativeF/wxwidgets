@@ -68,7 +68,7 @@ bool wxControl::Create(wxWindow *parent,
     return true;
 }
 
-bool wxControl::MSWCreateControl(const wxChar *classname,
+bool wxControl::MSWCreateControl(const std::string& classname,
                                  const std::string& label,
                                  const wxPoint& pos,
                                  const wxSize& size)
@@ -79,7 +79,7 @@ bool wxControl::MSWCreateControl(const wxChar *classname,
     return MSWCreateControl(classname, msStyle, pos, size, label, exstyle);
 }
 
-bool wxControl::MSWCreateControl(const wxChar *classname,
+bool wxControl::MSWCreateControl(const std::string& classname,
                                  WXDWORD style,
                                  const wxPoint& pos,
                                  const wxSize& size,
@@ -119,7 +119,7 @@ bool wxControl::MSWCreateControl(const wxChar *classname,
              (
               exstyle,            // extended style
               classname,          // the kind of control to create
-              boost::nowide::widen(label).c_str(),      // the window name
+              label,      // the window name
               style,              // the window style
               x, y, w, h,         // the window position and size
               GetHwndOf(GetParent()),         // parent

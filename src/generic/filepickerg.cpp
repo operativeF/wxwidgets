@@ -108,7 +108,7 @@ wxDialog *wxGenericFileButton::CreateDialog()
     // default path, if it has it, or from the separately specified initial
     // directory that can be set even if the path is e.g. empty.
     wxFileName fn(m_path);
-    wxString initialDir = fn.GetPath();
+    std::string initialDir = fn.GetPath();
     if ( initialDir.empty() )
         initialDir = m_initialDir;
 
@@ -133,7 +133,7 @@ wxDialog *wxGenericDirButton::CreateDialog()
                                     (
                                         GetDialogParent(),
                                         m_message,
-                                        m_path.empty() ? m_initialDir.ToStdString() : m_path,
+                                        m_path.empty() ? m_initialDir : m_path,
                                         GetDialogStyle()
                                     );
     return dialog;

@@ -27,6 +27,8 @@
 #include "wx/crt.h"
 #include "wx/msw/private.h"
 
+#include "fmt/printf.h"
+
 // ============================================================================
 // wxAppTraits implementation
 // ============================================================================
@@ -115,7 +117,7 @@ wxEventLoopBase *wxConsoleAppTraits::CreateEventLoop()
 }
 
 
-bool wxConsoleAppTraits::WriteToStderr(const wxString& text)
+bool wxConsoleAppTraits::WriteToStderr(const std::string& text)
 {
-    return wxFprintf(stderr, "%s", text) != -1;
+    return fmt::fprintf(stderr, "%s", text) != -1;
 }

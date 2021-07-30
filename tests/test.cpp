@@ -181,7 +181,7 @@ public:
 
             // Overriding CanUseStderr() is not enough, we also need to
             // override this one to avoid returning false from it.
-            bool WriteToStderr(const wxString& text) override
+            bool WriteToStderr(const std::string& text) override
             {
                 wxFputs(text, stderr);
                 fflush(stderr);

@@ -396,7 +396,7 @@ void wxToolBar::MSWSetPadding(WXWORD padding)
 
 bool wxToolBar::MSWCreateToolbar(const wxPoint& pos, const wxSize& size)
 {
-    if ( !MSWCreateControl(TOOLBARCLASSNAME, "", pos, size) )
+    if ( !MSWCreateControl(TOOLBARCLASSNAMEA, "", pos, size) )
         return false;
 
     // toolbar-specific post initialisation

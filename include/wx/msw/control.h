@@ -88,7 +88,7 @@ protected:
     // size parameter (style parameter is not needed because m_windowStyle is
     // supposed to had been already set and so is used instead when this
     // function is called)
-    bool MSWCreateControl(const wxChar *classname,
+    bool MSWCreateControl(const std::string& classname,
                           const std::string& label,
                           const wxPoint& pos,
                           const wxSize& size);
@@ -106,7 +106,7 @@ protected:
     // and, label (the title of the window), of course, is left empty. The
     // extended style is determined from the style and the app 3D settings
     // automatically if it's not specified explicitly.
-    bool MSWCreateControl(const wxChar *classname,
+    bool MSWCreateControl(const std::string& classname,
                           WXDWORD style,
                           const wxPoint& pos = wxDefaultPosition,
                           const wxSize& size = wxDefaultSize,

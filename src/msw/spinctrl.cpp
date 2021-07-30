@@ -300,8 +300,8 @@ bool wxSpinCtrl::Create(wxWindow *parent,
     m_hwndBuddy = MSWCreateWindowAtAnyPosition
                   (
                    exStyle,                // sunken border
-                   L"EDIT",            // window class
-                   nullptr,                   // no window title
+                   "EDIT",                 // window class
+                   "",                // no window title
                    msStyle,                // style (will be shown later)
                    pos.x, pos.y,           // position
                    0, 0,                   // size (will be set later)

@@ -54,7 +54,7 @@ bool wxGauge::Create(wxWindow *parent,
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;
 
-    if ( !MSWCreateControl(PROGRESS_CLASS, "", pos, size) )
+    if ( !MSWCreateControl(PROGRESS_CLASSA, "", pos, size) )
         return false;
 
     // in case we need to emulate indeterminate mode...

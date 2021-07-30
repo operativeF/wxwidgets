@@ -39,7 +39,7 @@ bool wxStaticText::Create(wxWindow *parent,
     if ( !CreateControl(parent, id, pos, size, style, wxDefaultValidator, name) )
         return false;
 
-    if ( !MSWCreateControl(L"STATIC", "", pos, size) )
+    if ( !MSWCreateControl("STATIC", "", pos, size) )
         return false;
 
     // we set the label here and not through MSWCreateControl() because we

@@ -219,7 +219,7 @@ bool wxMSWHeaderCtrl::Create(wxWindow *parent,
     if ( !CreateControl(parent, id, pos, size, style, wxDefaultValidator, name) )
         return false;
 
-    if ( !MSWCreateControl(WC_HEADER, "", pos, size) )
+    if ( !MSWCreateControl(WC_HEADERA, "", pos, size) )
         return false;
 
     // special hack for margins when using comctl32.dll v6 or later: the

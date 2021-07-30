@@ -84,11 +84,7 @@ protected:
     long m_pickerStyle;
 
     // Initial directory set by SetInitialDirectory() call or empty.
-    wxString m_initialDir;
-
-private:
-    // common part of all ctors
-    
+    std::string m_initialDir;
 };
 
 

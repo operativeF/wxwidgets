@@ -95,7 +95,8 @@ bool wxHyperlinkCtrl::Create(wxWindow *parent,
     WXDWORD exstyle;
     WXDWORD msStyle = MSWGetStyle(style, &exstyle);
 
-    if ( !MSWCreateControl(WC_LINK, msStyle, pos, size,
+    // "SysLink" would be WC_LINK but it's a wide-string
+    if ( !MSWCreateControl("SysLink", msStyle, pos, size,
                            GetLabelForSysLink( label, url ), exstyle) )
     {
         return false;

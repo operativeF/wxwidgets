@@ -66,7 +66,7 @@ public:
     // window with a custom Windows class name. This can be useful to assign a
     // custom Windows class, that can be recognized from the outside of the
     // application, for windows of specific type.
-    bool CreateUsingMSWClass(const wxChar* classname,
+    bool CreateUsingMSWClass(const std::string& classname,
                              wxWindow *parent,
                              wxWindowID id,
                              const wxPoint& pos = wxDefaultPosition,
@@ -265,14 +265,14 @@ public:
     // object, taking into account wxFULL_REPAINT_ON_RESIZE style (if it's not
     // specified, the wxApp::GetNoRedrawClassSuffix()-suffixed version of the
     // class is used).
-    static const wxChar *GetMSWClassName(long style);
+    static const std::string& GetMSWClassName(long style);
 
     // creates the window of specified Windows class with given style, extended
     // style, title and geometry (default values
     //
     // returns true if the window has been created, false if creation failed
-    bool MSWCreate(const wxChar *wclass,
-                   const wxChar *title = nullptr,
+    bool MSWCreate(const std::string& wclass,
+                   const std::string& title = {},
                    const wxPoint& pos = wxDefaultPosition,
                    const wxSize& size = wxDefaultSize,
                    WXDWORD style = 0,
@@ -775,8 +775,8 @@ private:
     }
 
 protected:
-    WXHWND MSWCreateWindowAtAnyPosition(WXDWORD exStyle, const wxChar* clName,
-                                        const wxChar* title, WXDWORD style,
+    WXHWND MSWCreateWindowAtAnyPosition(WXDWORD exStyle, const std::string& clName,
+                                        const std::string& title, WXDWORD style,
                                         int x, int y, int width, int height,
                                         WXHWND parent, wxWindowID id);
 

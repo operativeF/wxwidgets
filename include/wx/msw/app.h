@@ -54,7 +54,7 @@ public:
 
     // this suffix should be appended to all our Win32 class names to obtain a
     // variant registered without CS_[HV]REDRAW styles
-    static const wxChar *GetNoRedrawClassSuffix() { return wxT("NR"); }
+    static constexpr char GetNoRedrawClassSuffix[] = "NR";
 
     // Flags for GetRegisteredClassName()
     enum
@@ -62,7 +62,7 @@ public:
         // Just a symbolic name indicating absence of any special flags.
         RegClass_Default = 0,
 
-        // Return the name with the GetNoRedrawClassSuffix() appended to it.
+        // Return the name with the GetNoRedrawClassSuffix appended to it.
         RegClass_ReturnNR = 1,
 
         // Don't register the class with CS_[HV]REDRAW styles. This is useful
@@ -82,18 +82,18 @@ public:
     // styles as well as any additional styles specified as arguments here; and
     // there will be also a companion registered class identical to this one
     // but without CS_[HV]REDRAW whose name will be the same one but with
-    // GetNoRedrawClassSuffix()
+    // GetNoRedrawClassSuffix
     //
     // the background brush argument must be either a COLOR_XXX standard value
     // or (default) -1 meaning that the class paints its background itself
-    static const wxChar *GetRegisteredClassName(const wxChar *name,
+    static const std::string& GetRegisteredClassName(const std::string& name,
                                                 int bgBrushCol = -1,
                                                 int extraStyles = 0,
                                                 int flags = RegClass_Default);
 
     // return true if this name corresponds to one of the classes we registered
     // in the previous GetRegisteredClassName() calls
-    static bool IsRegisteredClassName(const wxString& name);
+    static bool IsRegisteredClassName(std::string_view name);
 
     // Return the layout direction to use for a window by default.
     //

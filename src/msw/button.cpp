@@ -102,7 +102,7 @@ bool wxButton::Create(wxWindow *parent,
     //     value and the label is not set yet when MSWGetStyle() is called
     msStyle |= wxMSWButton::GetMultilineStyle(label);
 
-    return MSWCreateControl(L"BUTTON", msStyle, pos, size, label, exstyle);
+    return MSWCreateControl("BUTTON", msStyle, pos, size, label, exstyle);
 }
 
 wxButton::~wxButton()

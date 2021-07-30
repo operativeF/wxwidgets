@@ -56,7 +56,7 @@ public:
     virtual bool CanUseStderr() = 0;
 
     // write text to the console, return true if ok or false on error
-    virtual bool WriteToStderr(const wxString& text) = 0;
+    virtual bool WriteToStderr(const std::string& text) = 0;
 
     // return the main application window or 0 if none
     virtual WXHWND GetMainHWND() const = 0;

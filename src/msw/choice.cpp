@@ -65,7 +65,7 @@ bool wxChoice::CreateAndInit(wxWindow *parent,
         return false;
 
     // now create the real HWND
-    if ( !MSWCreateControl(L"COMBOBOX", "", pos, size) )
+    if ( !MSWCreateControl("COMBOBOX", "", pos, size) )
         return false;
 
 

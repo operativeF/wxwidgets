@@ -60,6 +60,8 @@
 
 #include "wx/msw/missing.h"
 
+#include "boost/nowide/convert.hpp"
+
 // instead of including <shlwapi.h> which is not part of the core SDK and not
 // shipped at all with other compilers, we always define the parts of it we
 // need here ourselves
@@ -91,7 +93,7 @@ extern void wxSetKeyboardHook(bool doIt);
 // see http://article.gmane.org/gmane.comp.lib.wxwidgets.devel/110282
 struct ClassRegInfo
 {
-    ClassRegInfo(const wxChar *name, int flags)
+    ClassRegInfo(const std::string& name, int flags)
     {
         if ( (flags & wxApp::RegClass_OnlyNR) == wxApp::RegClass_OnlyNR )
         {
@@ -105,20 +107,20 @@ struct ClassRegInfo
         {
             // Here we use a special suffix to make the class names unique.
             regname = name;
-            regnameNR = regname + wxApp::GetNoRedrawClassSuffix();
+            regnameNR = regname + wxApp::GetNoRedrawClassSuffix;
         }
     }
 
     // Return the appropriate string depending on the presence of
     // RegClass_ReturnNR bit in the flags.
-    const wxChar* GetRequestedName(int flags) const
+    const std::string& GetRequestedName(int flags) const
     {
-        return (flags & wxApp::RegClass_ReturnNR ? regnameNR : regname).t_str();
+        return flags & wxApp::RegClass_ReturnNR ? regnameNR : regname;
     }
 
     // the name of the registered class with and without CS_[HV]REDRAW styles
-    wxString regname;
-    wxString regnameNR;
+    std::string regname;
+    std::string regnameNR;
 };
 
 namespace
@@ -360,7 +362,7 @@ public:
 
 
     // output the provided text on the console, return true if ok
-    bool Write(const wxString& text);
+    bool Write(const std::string& text);
 
 private:
     // called by Init() once only to do the real initialization
@@ -383,7 +385,7 @@ private:
     wxWxCharBuffer m_history;      // command history on startup
     int m_historyLen{0};           // length command history buffer
 
-    wxCharBuffer m_data;        // data between empty line and cursor position
+    std::wstring m_data;        // data between empty line and cursor position
     int m_dataLen{0};              // length data buffer
     int m_dataLine{0};             // line offset
 
@@ -443,11 +445,11 @@ bool wxConsoleStderr::DoInit()
 
     // we decide that a line is empty if first 4 characters are spaces
     DWORD ret;
-    char buf[4];
+    wchar_t buf[4];
     do
     {
         pos.Y--;
-        if ( !::ReadConsoleOutputCharacterA(m_hStderr, buf, WXSIZEOF(buf),
+        if ( !::ReadConsoleOutputCharacterW(m_hStderr, buf, WXSIZEOF(buf),
                                             pos, &ret) )
         {
             wxLogLastError(wxT("ReadConsoleOutputCharacterA"));
@@ -461,8 +463,8 @@ bool wxConsoleStderr::DoInit()
 
     if ( m_dataLen > 0 )
     {
-        m_data.extend(m_dataLen);
-        if ( !::ReadConsoleOutputCharacterA(m_hStderr, m_data.data(), m_dataLen,
+        m_data.resize(m_dataLen);
+        if ( !::ReadConsoleOutputCharacterW(m_hStderr, m_data.data(), m_dataLen,
                                             pos, &ret) )
         {
             wxLogLastError(wxT("ReadConsoleOutputCharacterA"));
@@ -507,7 +509,7 @@ bool wxConsoleStderr::IsHistoryUnchanged() const
                 memcmp(m_history, history, historyLen) == 0;
 }
 
-bool wxConsoleStderr::Write(const wxString& text)
+bool wxConsoleStderr::Write(const std::string& text)
 {
     wxASSERT_MSG( m_hStderr != INVALID_HANDLE_VALUE,
                     wxT("should only be called if Init() returned true") );
@@ -531,20 +533,20 @@ bool wxConsoleStderr::Write(const wxString& text)
     }
 
     DWORD ret;
-    if ( !::FillConsoleOutputCharacter(m_hStderr, wxT(' '), m_dataLen,
+    if ( !::FillConsoleOutputCharacterW(m_hStderr, ' ', m_dataLen,
                                        csbi.dwCursorPosition, &ret) )
     {
         wxLogLastError(wxT("FillConsoleOutputCharacter"));
         return false;
     }
 
-    if ( !::WriteConsole(m_hStderr, text.t_str(), text.length(), &ret, nullptr) )
+    if ( !::WriteConsoleW(m_hStderr, boost::nowide::widen(text).c_str(), text.length(), &ret, nullptr) )
     {
         wxLogLastError(wxT("WriteConsole"));
         return false;
     }
 
-    WriteConsoleA(m_hStderr, m_data, m_dataLen, &ret, nullptr);
+    ::WriteConsoleW(m_hStderr, m_data.data(), m_dataLen, &ret, nullptr);
 
     return true;
 }
@@ -558,7 +560,7 @@ bool wxGUIAppTraits::CanUseStderr()
     return s_consoleStderr.IsOkToUse();
 }
 
-bool wxGUIAppTraits::WriteToStderr(const wxString& text)
+bool wxGUIAppTraits::WriteToStderr(const std::string& text)
 {
     return s_consoleStderr.IsOkToUse() && s_consoleStderr.Write(text);
 }
@@ -570,7 +572,7 @@ bool wxGUIAppTraits::CanUseStderr()
     return false;
 }
 
-bool wxGUIAppTraits::WriteToStderr(const wxString& WXUNUSED(text))
+bool wxGUIAppTraits::WriteToStderr(const std::string& WXUNUSED(text))
 {
     return false;
 }
@@ -632,7 +634,7 @@ bool wxApp::Initialize(int& argc_, wxChar **argv_)
 // ---------------------------------------------------------------------------
 
 /* static */
-const wxChar *wxApp::GetRegisteredClassName(const wxChar *name,
+const std::string& wxApp::GetRegisteredClassName(const std::string& name,
                                             int bgBrushCol,
                                             int extraStyles,
                                             int flags)
@@ -651,7 +653,7 @@ const wxChar *wxApp::GetRegisteredClassName(const wxChar *name,
 
     wndclass.lpfnWndProc   = (WNDPROC)wxWndProc;
     wndclass.hInstance     = wxGetInstance();
-    wndclass.hCursor       = ::LoadCursor(nullptr, IDC_ARROW);
+    wndclass.hCursor       = ::LoadCursorW(nullptr, IDC_ARROW);
     wndclass.hbrBackground = (HBRUSH)wxUIntToPtr(bgBrushCol + 1);
     wndclass.style         = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS | extraStyles;
 
@@ -659,8 +661,8 @@ const wxChar *wxApp::GetRegisteredClassName(const wxChar *name,
     ClassRegInfo regClass(name, flags);
     if ( !regClass.regname.empty() )
     {
-        wndclass.lpszClassName = regClass.regname.t_str();
-        if ( !::RegisterClass(&wndclass) )
+        wndclass.lpszClassName = boost::nowide::widen(regClass.regname).c_str();
+        if ( !::RegisterClassW(&wndclass) )
         {
             wxLogLastError(wxString::Format(wxT("RegisterClass(%s)"),
                            regClass.regname));
@@ -669,12 +671,13 @@ const wxChar *wxApp::GetRegisteredClassName(const wxChar *name,
     }
 
     wndclass.style &= ~(CS_HREDRAW | CS_VREDRAW);
-    wndclass.lpszClassName = regClass.regnameNR.t_str();
-    if ( !::RegisterClass(&wndclass) )
+    wndclass.lpszClassName = boost::nowide::widen(regClass.regnameNR).c_str();
+
+    if ( !::RegisterClassW(&wndclass) )
     {
         wxLogLastError(wxString::Format(wxT("RegisterClass(%s)"),
                        regClass.regname));
-        ::UnregisterClass(regClass.regname.c_str(), wxGetInstance());
+        ::UnregisterClassW(boost::nowide::widen(regClass.regname).c_str(), wxGetInstance());
         return nullptr;
     }
 
@@ -687,7 +690,7 @@ const wxChar *wxApp::GetRegisteredClassName(const wxChar *name,
     return gs_regClassesInfo.back().GetRequestedName(flags);
 }
 
-bool wxApp::IsRegisteredClassName(const wxString& name)
+bool wxApp::IsRegisteredClassName(std::string_view name)
 {
     const size_t count = gs_regClassesInfo.size();
     for ( size_t n = 0; n < count; n++ )
@@ -708,14 +711,14 @@ void wxApp::UnregisterWindowClasses()
         const ClassRegInfo& regClass = gs_regClassesInfo[n];
         if ( !regClass.regname.empty() )
         {
-            if ( !::UnregisterClass(regClass.regname.c_str(), wxGetInstance()) )
+            if ( !::UnregisterClassW(boost::nowide::widen(regClass.regname).c_str(), wxGetInstance()) )
             {
                 wxLogLastError(wxString::Format(wxT("UnregisterClass(%s)"),
                                regClass.regname));
             }
         }
 
-        if ( !::UnregisterClass(regClass.regnameNR.c_str(), wxGetInstance()) )
+        if ( !::UnregisterClassW(boost::nowide::widen(regClass.regnameNR).c_str(), wxGetInstance()) )
         {
             wxLogLastError(wxString::Format(wxT("UnregisterClass(%s)"),
                            regClass.regnameNR));
@@ -941,12 +944,12 @@ bool wxApp::OnExceptionInMainLoop()
     // ask the user about what to do: use the Win32 API function here as it
     // could be dangerous to use any wxWidgets code in this state
     switch (
-            ::MessageBox
+            ::MessageBoxW
               (
                 nullptr,
-                wxT("An unhandled exception occurred. Press \"Abort\" to \
+                L"An unhandled exception occurred. Press \"Abort\" to \
 terminate the program,\r\n\
-\"Retry\" to exit the program normally and \"Ignore\" to try to continue."),
+\"Retry\" to exit the program normally and \"Ignore\" to try to continue.",
                 wxT("Unhandled exception"),
                 MB_ABORTRETRYIGNORE |
                 MB_ICONERROR|

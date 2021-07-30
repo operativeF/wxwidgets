@@ -21,6 +21,8 @@
     #include "wx/window.h"
 #endif // wxUSE_GUI
 
+#include "boost/nowide/convert.hpp"
+
 class WXDLLIMPEXP_FWD_CORE wxFont;
 class WXDLLIMPEXP_FWD_CORE wxWindow;
 class WXDLLIMPEXP_FWD_CORE wxWindowBase;
@@ -815,14 +817,14 @@ public:
         wxASSERT_MSG( m_registered == -1,
                         wxT("calling ClassRegistrar::Register() twice?") );
 
-        m_registered = ::RegisterClass(&wc) ? 1 : 0;
+        m_registered = ::RegisterClassW(&wc) ? 1 : 0;
         if ( !IsRegistered() )
         {
             wxLogLastError(wxT("RegisterClassEx()"));
         }
         else
         {
-            m_clsname = wc.lpszClassName;
+            m_clsname = boost::nowide::narrow(wc.lpszClassName).c_str();
         }
 
         return m_registered == 1;
@@ -830,14 +832,14 @@ public:
 
     // get the name of the registered class (returns empty string if not
     // registered)
-    const wxString& GetName() const { return m_clsname; }
+    const std::string& GetName() const { return m_clsname; }
 
     // unregister the class if it had been registered
     ~ClassRegistrar()
     {
         if ( IsRegistered() )
         {
-            if ( !::UnregisterClass(m_clsname.t_str(), wxGetInstance()) )
+            if ( !::UnregisterClassW(boost::nowide::widen(m_clsname).c_str(), wxGetInstance()) )
             {
                 wxLogLastError(wxT("UnregisterClass"));
             }
@@ -850,7 +852,7 @@ private:
     int m_registered;
 
     // the name of the class, only non empty if it had been registered
-    wxString m_clsname;
+    std::string m_clsname;
 };
 
 // ---------------------------------------------------------------------------

@@ -151,9 +151,9 @@ bool wxNotebook::Create(wxWindow *parent,
 #endif //wxUSE_UXTHEME
 
 #if defined(__WINE__)
-    LPCTSTR className = L"SysTabControl32";
+    std::string className = "SysTabControl32";
 #else
-    LPCTSTR className = WC_TABCONTROL;
+    std::string className = WC_TABCONTROLA;
 #endif
 
 #if USE_NOTEBOOK_ANTIFLICKER
@@ -171,7 +171,7 @@ bool wxNotebook::Create(wxWindow *parent,
             if ( ::GetClassInfo(nullptr, WC_TABCONTROL, &wc) )
             {
                 gs_wndprocNotebook = wc.lpfnWndProc;
-                wc.lpszClassName = wxT("_wx_SysTabCtl32");
+                wc.lpszClassName = L"_wx_SysTabCtl32";
                 wc.style &= ~(CS_HREDRAW | CS_VREDRAW);
                 wc.hInstance = wxGetInstance();
                 wc.lpfnWndProc = wxNotebookWndProc;
@@ -189,7 +189,7 @@ bool wxNotebook::Create(wxWindow *parent,
         {
             // it's ok to use c_str() here as the static s_clsNotebook object
             // has sufficiently long lifetime
-            className = s_clsNotebook.GetName().c_str();
+            className = s_clsNotebook.GetName();
         }
     }
 #endif // USE_NOTEBOOK_ANTIFLICKER

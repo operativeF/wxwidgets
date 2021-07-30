@@ -51,7 +51,7 @@ bool wxRadioButton::Create(wxWindow *parent,
     WXDWORD exstyle = 0;
     WXDWORD msStyle = MSWGetStyle(style, &exstyle);
 
-    if ( !MSWCreateControl(wxT("BUTTON"), msStyle, pos, size, label, exstyle) )
+    if ( !MSWCreateControl("BUTTON", msStyle, pos, size, label, exstyle) )
         return false;
 
     // for compatibility with wxGTK, the first radio button in a group is

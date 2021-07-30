@@ -47,7 +47,7 @@ bool wxCheckBox::Create(wxWindow *parent,
 
     msStyle |= wxMSWButton::GetMultilineStyle(label);
 
-    return MSWCreateControl(wxT("BUTTON"), msStyle, pos, size, label, exstyle);
+    return MSWCreateControl("BUTTON", msStyle, pos, size, label, exstyle);
 }
 
 WXDWORD wxCheckBox::MSWGetStyle(long style, WXDWORD *exstyle) const

@@ -33,7 +33,7 @@ bool wxScrollBar::Create(wxWindow *parent, wxWindowID id,
     if ( !CreateControl(parent, id, pos, size, style, validator, name) )
         return false;
 
-    if (!MSWCreateControl(L"ScrollBar", "", pos, size))
+    if (!MSWCreateControl("ScrollBar", "", pos, size))
         return false;
 
     SetScrollbar(0, 1, 2, 1, false);

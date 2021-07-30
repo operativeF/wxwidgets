@@ -469,11 +469,11 @@ wxWindowMSW::~wxWindowMSW()
 
 }
 
-const wxChar *wxWindowMSW::GetMSWClassName(long style)
+const std::string& wxWindowMSW::GetMSWClassName(long style)
 {
     return wxApp::GetRegisteredClassName
                   (
-                    wxT("wxWindow"),
+                    "wxWindow",
                     COLOR_BTNFACE,
                     0, // no special extra style
                     (style & wxFULL_REPAINT_ON_RESIZE) ? wxApp::RegClass_Default
@@ -482,7 +482,7 @@ const wxChar *wxWindowMSW::GetMSWClassName(long style)
 }
 
 // real construction (Init() must have been called before!)
-bool wxWindowMSW::CreateUsingMSWClass(const wxChar* classname,
+bool wxWindowMSW::CreateUsingMSWClass(const std::string& classname,
                                       wxWindow *parent,
                                       wxWindowID id,
                                       const wxPoint& pos,
@@ -514,7 +514,7 @@ bool wxWindowMSW::CreateUsingMSWClass(const wxChar* classname,
         msflags |= WS_VISIBLE;
     }
 
-    if ( !MSWCreate(classname, nullptr, pos, size, msflags, exstyle) )
+    if ( !MSWCreate(classname, "", pos, size, msflags, exstyle) )
         return false;
 
     InheritAttributes();
@@ -576,9 +576,9 @@ void wxWindowMSW::SetFocusFromKbd()
     // keyboard its contents should be entirely selected: this is what
     // ::IsDialogMessage() does and so we should do it as well to provide the
     // same LNF as the native programs
-    if ( ::SendMessage(hWnd, WM_GETDLGCODE, 0, 0) & DLGC_HASSETSEL )
+    if ( ::SendMessageW(hWnd, WM_GETDLGCODE, 0, 0) & DLGC_HASSETSEL )
     {
-        ::SendMessage(hWnd, EM_SETSEL, 0, -1);
+        ::SendMessageW(hWnd, EM_SETSEL, 0, -1);
     }
 
     // do this after (maybe) setting the selection as like this when
@@ -852,7 +852,7 @@ bool wxWindowMSW::SetCursor(const wxCursor& cursor)
         if ( !win )
             win = this;
 
-        ::SendMessage(GetHwndOf(win), WM_SETCURSOR,
+        ::SendMessageW(GetHwndOf(win), WM_SETCURSOR,
                       (WPARAM)GetHwndOf(win),
                       MAKELPARAM(HTCLIENT, WM_MOUSEMOVE));
     }
@@ -991,7 +991,7 @@ void wxWindowMSW::MSWUpdateUIState(int action, int state)
 {
     // we send WM_CHANGEUISTATE so if nothing needs changing then the system
     // won't send WM_UPDATEUISTATE
-    ::SendMessage(GetHwnd(), WM_CHANGEUISTATE, MAKEWPARAM(action, state), 0);
+    ::SendMessageW(GetHwnd(), WM_CHANGEUISTATE, MAKEWPARAM(action, state), 0);
 }
 
 // ---------------------------------------------------------------------------
@@ -1334,12 +1334,12 @@ void wxWindowMSW::DissociateHandle()
 
 bool wxCheckWindowWndProc(WXHWND hWnd, WXWNDPROC WXUNUSED(wndProc))
 {
-    const wxString str(wxGetWindowClass(hWnd));
+    const std::string str(wxGetWindowClass(hWnd));
 
     // TODO: get rid of wxTLWHiddenParent special case (currently it's not
     //       registered by wxApp but using ad hoc code in msw/toplevel.cpp);
     //       there is also a hidden window class used by sockets &c
-    return wxApp::IsRegisteredClassName(str) || str == wxT("wxTLWHiddenParent");
+    return wxApp::IsRegisteredClassName(str) || str == "wxTLWHiddenParent";
 }
 
 // ----------------------------------------------------------------------------
@@ -1633,7 +1633,7 @@ bool wxWindowMSW::Reparent(wxWindowBase *parent)
 
 static inline void SendSetRedraw(HWND hwnd, bool on)
 {
-    ::SendMessage(hwnd, WM_SETREDRAW, (WPARAM)on, 0);
+    ::SendMessageW(hwnd, WM_SETREDRAW, (WPARAM)on, 0);
 }
 
 void wxWindowMSW::DoFreeze()
@@ -1836,7 +1836,7 @@ wxSize wxWindowMSW::DoGetClientSize() const
         rect.right = rect.left + m_pendingSize.x;
         rect.bottom = rect.top + m_pendingSize.y;
 
-        ::SendMessage(GetHwnd(), WM_NCCALCSIZE, FALSE, (LPARAM)&rect);
+        ::SendMessageW(GetHwnd(), WM_NCCALCSIZE, FALSE, (LPARAM)&rect);
 
         client_size = {rect.right - rect.left, rect.bottom - rect.top};
     }
@@ -1955,7 +1955,7 @@ wxWindowMSW::DoMoveSibling(WXHWND hwnd, int x, int y, int width, int height)
     {
         // note that this may be different from GetParent() for wxDialogs
         HWND tlwParent = ::GetParent((HWND)hwnd);
-        if ( tlwParent && (::GetWindowLong(tlwParent, GWL_EXSTYLE) & WS_EX_LAYOUTRTL) != 0 )
+        if ( tlwParent && (::GetWindowLongW(tlwParent, GWL_EXSTYLE) & WS_EX_LAYOUTRTL) != 0 )
         {
             RECT old;
             ::GetWindowRect((HWND) hwnd, &old);
@@ -2290,7 +2290,7 @@ static void wxYieldForCommandsOnly()
     // peek all WM_COMMANDs (it will always return WM_QUIT too but we don't
     // want to process it here)
     MSG msg;
-    while ( ::PeekMessage(&msg, (HWND)nullptr, WM_COMMAND, WM_COMMAND, PM_REMOVE) )
+    while ( ::PeekMessageW(&msg, (HWND)nullptr, WM_COMMAND, WM_COMMAND, PM_REMOVE) )
     {
         if ( msg.message == WM_QUIT )
         {
@@ -2303,7 +2303,7 @@ static void wxYieldForCommandsOnly()
         // anyhow...) we don't need to pre process WM_COMMANDs so dispatch it
         // immediately
         ::TranslateMessage(&msg);
-        ::DispatchMessage(&msg);
+        ::DispatchMessageW(&msg);
     }
 }
 
@@ -2417,9 +2417,9 @@ WXLRESULT wxWindowMSW::MSWDefWindowProc(WXUINT nMsg, WXWPARAM wParam, WXLPARAM l
 {
     WXLRESULT rc;
     if ( m_oldWndProc )
-        rc = ::CallWindowProc(m_oldWndProc, GetHwnd(), nMsg, wParam, lParam);
+        rc = ::CallWindowProcW(m_oldWndProc, GetHwnd(), nMsg, wParam, lParam);
     else
-        rc = ::DefWindowProc(GetHwnd(), nMsg, wParam, lParam);
+        rc = ::DefWindowProcW(GetHwnd(), nMsg, wParam, lParam);
 
     // Special hack used by wxTextEntry auto-completion only: this event is
     // sent after the normal keyboard processing so that its handler could use
@@ -2533,7 +2533,7 @@ bool wxWindowMSW::MSWProcessMessage(WXMSG* pMsg)
                             // let IsDialogMessage() handle this for all
                             // buttons except the owner-drawn ones which it
                             // just seems to ignore
-                            long style = ::GetWindowLong(msg->hwnd, GWL_STYLE);
+                            long style = ::GetWindowLongW(msg->hwnd, GWL_STYLE);
                             if ( (style & BS_OWNERDRAW) == BS_OWNERDRAW )
                             {
                                 btn = wxDynamicCast
@@ -2694,7 +2694,7 @@ bool wxWindowMSW::MSWSafeIsDialogMessage(WXMSG* msg)
         // style has the focus, it can happen. One such possibility is if
         // all windows are either toplevel, wxDialog, wxPanel or static
         // controls and no window can actually accept keyboard input.
-        if ( ::GetWindowLong(hwndFocus, GWL_EXSTYLE) & WS_EX_CONTROLPARENT )
+        if ( ::GetWindowLongW(hwndFocus, GWL_EXSTYLE) & WS_EX_CONTROLPARENT )
         {
             // pessimistic by default
             bool canSafelyCallIsDlgMsg = false;
@@ -2730,7 +2730,7 @@ bool wxWindowMSW::MSWSafeIsDialogMessage(WXMSG* msg)
                 return false;
             }
 
-            if ( !(::GetWindowLong(hwndFocus, GWL_STYLE) & WS_CHILD) )
+            if ( !(::GetWindowLongW(hwndFocus, GWL_STYLE) & WS_CHILD) )
             {
                 // it's a top level window, don't go further -- e.g. even
                 // if the parent of a dialog is disabled, this doesn't
@@ -2742,7 +2742,7 @@ bool wxWindowMSW::MSWSafeIsDialogMessage(WXMSG* msg)
         }
     }
 
-    return ::IsDialogMessage(GetHwnd(), msg) != 0;
+    return ::IsDialogMessageW(GetHwnd(), msg) != 0;
 }
 
 #endif // __WXUNIVERSAL__
@@ -2879,7 +2879,7 @@ wxWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         if ( wnd && wxGUIEventLoop::AllowProcessing(wnd) )
             rc = wnd->MSWWindowProc(message, wParam, lParam);
         else
-            rc = ::DefWindowProc(hWnd, message, wParam, lParam);
+            rc = ::DefWindowProcW(hWnd, message, wParam, lParam);
     }
     wxSEH_HANDLE(0)
 
@@ -3942,8 +3942,8 @@ WXHWND wxWindowMSW::MSWGetParent() const
     return m_parent ? m_parent->GetHWND() : WXHWND(nullptr);
 }
 
-bool wxWindowMSW::MSWCreate(const wxChar *wclass,
-                            const wxChar *title,
+bool wxWindowMSW::MSWCreate(const std::string& wclass,
+                            const std::string& title,
                             const wxPoint& pos,
                             const wxSize& size,
                             WXDWORD style,
@@ -3957,7 +3957,7 @@ bool wxWindowMSW::MSWCreate(const wxChar *wclass,
 
     // this can happen if this function is called using the return value of
     // wxApp::GetRegisteredClassName() which failed
-    wxCHECK_MSG( wclass, false, "failed to register window class?" );
+    wxCHECK_MSG( !wclass.empty(), false, "failed to register window class?" );
 
 
     // choose the position/size for the new window
@@ -3975,7 +3975,7 @@ bool wxWindowMSW::MSWCreate(const wxChar *wclass,
              (
               extendedStyle,
               wclass,
-              title ? title : boost::nowide::widen(m_windowName).c_str(),
+              !title.empty() ? title : m_windowName,
               style,
               x, y, w, h,
               MSWGetParent(),
@@ -3992,14 +3992,18 @@ bool wxWindowMSW::MSWCreate(const wxChar *wclass,
     return true;
 }
 
-WXHWND wxWindowMSW::MSWCreateWindowAtAnyPosition(WXDWORD exStyle, const wxChar* clName,
-                                                 const wxChar* title, WXDWORD style,
+WXHWND wxWindowMSW::MSWCreateWindowAtAnyPosition(WXDWORD exStyle, const std::string& clName,
+                                                 const std::string& title, WXDWORD style,
                                                  int x, int y, int width, int height,
                                                  WXHWND parent, wxWindowID id)
 {
-    WXHWND hWnd = ::CreateWindowEx(exStyle, clName, title, style, x, y, width, height,
-                                   parent, (HMENU)wxUIntToPtr(id), wxGetInstance(),
-                                   nullptr); // no extra data
+
+    WXHWND hWnd = ::CreateWindowExW(exStyle,
+                                    boost::nowide::widen(clName).c_str(),
+                                    boost::nowide::widen(title).c_str(),
+                                    style, x, y, width, height,
+                                    parent, (HMENU)wxUIntToPtr(id), wxGetInstance(),
+                                    nullptr); // no extra data
 
     if ( !hWnd )
     {

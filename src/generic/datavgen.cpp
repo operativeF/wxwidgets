@@ -2033,7 +2033,7 @@ wxDataViewMainWindow::wxDataViewMainWindow( wxDataViewCtrl *parent, wxWindowID i
     (
       wxApp::GetRegisteredClassName
              (
-                  wxT("wxDataView"),
+                  "wxDataView",
                   -1, // no specific background brush
                   0, // no special styles neither
                   wxApp::RegClass_OnlyNR

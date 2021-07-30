@@ -406,7 +406,7 @@ bool wxTextCtrl::MSWCreateText(const std::string& value,
     WXDWORD msStyle = MSWGetCreateWindowFlags();
 
     // do create the control - either an EDIT or RICHEDIT
-    std::wstring windowClass = L"EDIT";
+    std::string windowClass = "EDIT";
 
 #if wxUSE_RICHEDIT
     if ( m_windowStyle & wxTE_AUTO_URL )
@@ -466,13 +466,13 @@ bool wxTextCtrl::MSWCreateText(const std::string& value,
                 if ( wxRichEditModule::Load(wxRichEditModule::Version_41) )
                 {
                     // yes, class name for version 4.1 really is 5.0
-                    windowClass = L"RICHEDIT50W";
+                    windowClass = "RICHEDIT50W";
 
                     m_verRichEdit = 4;
                 }
                 else if ( wxRichEditModule::Load(wxRichEditModule::Version_2or3) )
                 {
-                    windowClass = L"RichEdit20W";
+                    windowClass = "RichEdit20W";
                 }
                 else // failed to load msftedit.dll and riched20.dll
                 {
@@ -484,7 +484,7 @@ bool wxTextCtrl::MSWCreateText(const std::string& value,
             {
                 if ( wxRichEditModule::Load(wxRichEditModule::Version_1) )
                 {
-                    windowClass = L"RICHEDIT";
+                    windowClass = "RICHEDIT";
                 }
                 else // failed to load any richedit control DLL
                 {
@@ -524,7 +524,7 @@ bool wxTextCtrl::MSWCreateText(const std::string& value,
     // implementation detail
     m_updatesCount = -2;
 
-    if ( !MSWCreateControl(windowClass.c_str(), msStyle, pos, size, valueWin) )
+    if ( !MSWCreateControl(windowClass, msStyle, pos, size, valueWin) )
         return false;
 
     m_updatesCount = -1;
